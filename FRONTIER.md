@@ -111,7 +111,7 @@ minimal known undecidable antichain is
 M₃(5), M₅(4), M₆(3), M₁₂(2).
 ```
 
-The immediate unknown cells immediately below this staircase are:
+The unknown cells immediately below this staircase are:
 
 | Cell | What would suffice | Automatic reward |
 | --- | --- | --- |
@@ -121,8 +121,8 @@ The immediate unknown cells immediately below this staircase are:
 | `M₁₁(2)` | shave one state from the specialized `M₃(5) → M₁₂(2)` packing | improves the two-generator threshold by one |
 | `M₂(k≥3)` | a qualitatively different decidability or undecidability argument | settles the dimension-two wall |
 
-No further mortality cell follows formally from `GPCP(4)` beyond those already recorded in
-`AUDIT.md`. In particular, the improved `Z₇(2)` gives `M₇(3)`, which is weaker than `M₆(3)`.
+No further mortality cell follows formally from `GPCP(4)` beyond those recorded above. In
+particular, the improved `Z₇(2)` gives `M₇(3)`, which is weaker than `M₆(3)`.
 
 ## Ranked attacks
 
@@ -133,17 +133,18 @@ generators. Our five matrices are exceptional: four are nonsingular PCP matrices
 and one is rank one. The target is a five-dimensional reachable/observable realization of this
 special packed semigroup.
 
-The obvious quotient does **not** work. CHHN's structured five-dimensional row space relies on
-every input matrix having first column `e₁`; the separator `a=ce₁ᵀ` has first column `c`, and
-`c` is not collinear with `e₁` because its third coordinate is nonzero. Any successful reduction
-must therefore use the rank-one normal form more deeply, alter the packing, or fuse its control
-action with the separator.
+The literal packing has no codimension-one letterwise reduction. For every placement of the
+rank-one separator and four ordinary generators, the three packed `6×6` matrices have neither a
+common invariant line nor a common invariant hyperplane. Thus no simultaneous similarity followed
+by a five-dimensional restriction or quotient can work. This does not exclude a different
+representation preserving only the scalar zero language.
 
-First experiment: generate the symbolic `6×6` packed pair for generic upper-triangular PCP
-matrices and a generic `ce₁ᵀ`; compute common invariant subspaces and minimal
-reachable/observable realizations. A generic dimension six is a clean falsification of simple
-quotient attacks, after which the search should move to a different word code rather than massage
-the same construction.
+The next finite test is a Hankel-rank certificate for the scalar series realized by the packed
+system: six prefixes and six suffixes whose `6×6` pairing minor is nonzero. Such a certificate
+would rule out every exact five-state weighted-automaton realization of that series, though not a
+different series with the same zero set. A successful mortality reduction must alter the word
+code, treat the separator as punctuation, or prove malformed-word nonvanishing by a separate
+normal form.
 
 ### 2. Two-generator realization: `M₁₁(2)`
 
@@ -228,10 +229,10 @@ matrix groups, and linear recurrences.
 
 ## Execution order
 
-1. Publish-harden the `GPCP(4)` observation alongside `M₃(5)`: author queries, a dedicated
-   novelty search, and a manuscript rewrite that treats GPCP as the conceptual source.
-2. Build one symbolic packing laboratory and use it to adjudicate both `M₅(3)` and `M₁₁(2)`.
-   Preserve negative invariant-space certificates as results.
+1. Formalize the all-placement packing obstruction and extract a symbolic Hankel-rank
+   certificate for the standard `M₃(5) → M₆(3)` representation.
+2. Search for a zero-set-preserving punctuation representation for `M₅(3)` and `M₁₁(2)` rather
+   than another invariant restriction of the standard packing.
 3. Run a bounded ansatz search for `M₄(4)` only after its admissible word grammar and converse
    invariant are written down.
 4. Attack `GPCP(3)` at the source level, beginning with a complete role/dependency graph of the
@@ -239,6 +240,4 @@ matrix groups, and linear recurrences.
 5. Maintain `M₂(3)` as an independent decidability campaign with its own bibliography and
    formal statements.
 
-The first item is already a second publishable theorem if the source dependency and novelty
-survive author review. The next cells are research programs, not consequences, and are labeled
-accordingly.
+These are research programs, not consequences of the present theorem.

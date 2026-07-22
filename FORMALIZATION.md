@@ -1,156 +1,121 @@
-# Formalization Envelope
+# Formal Verification
 
-The Lean development now verifies the entire novel reduction from Neary's restricted binary
-tag family to four-generator GPCP, a corrected binary five-pair PCP family, and the exact five
-integer matrices. It does not assume Rote's terminal-tile statement.
+The Lean development verifies the new instance-level reduction
 
-For the logical foundation, kernel trust model, and remaining external theorem, see
-[FOUNDATIONS.md](FOUNDATIONS.md).
+```text
+four-tile terminal equation
+  ↔ restricted tag halting
+  ↔ corrected binary five-pair PCP
+  ↔ four-generator GPCP
+  ↔ mortality of the emitted five 3 × 3 integer matrices.
+```
 
-## Files
+It does not assume Neary's defective terminal-pair converse or Rote's long-block repair.
 
-| File | Checked content |
-| --- | --- |
-| `TagQueue.lean` | fixed-width tag steps; global history equation iff a lawful finite execution up to the first short queue |
-| `NearyEncoding.lean` | Neary's four ordinary tiles; pulse parser; terminal equation iff tag halting; corrected PCP, GPCP, and mortality compositions |
-| `MarkedTerminal.lean` | fresh-marker synchronization; primitive terminality; fixed-length binary recoding |
-| `TernaryEncoding.lean` | nonzero ternary digits, concatenation, and injectivity |
-| `PCPEncoding.lean` | the `3 × 3` word-pair morphism, equality entry, determinant, and triangularity |
-| `TerminalTile.lean` | arbitrary rank-one chains, boundary nonvanishing, and raw-word fracture at every separator |
-| `TerminalReduction.lean` | exact terminal scalar, rational and integer generators, multiplicative casting, and zero reflection |
-| `TerminalSource.lean` | generic primitive extraction and fixed-right-boundary GPCP bridge |
-| `LintAudit.lean` | every default mathlib environment linter over the complete project namespace |
-| `AxiomAudit.lean` | reproducible `#print axioms` queries for every headline theorem |
-
-## Source theorem
+## Checked Scope
 
 For deletion width `β`, body `q`, rules `b ↦ b` and `c ↦ q ++ [b]`, and initial queue
-`q.drop (β−1) ++ [b]`, the central declaration is:
+`q.drop (β−1) ++ [b]`, Lean proves under
 
 ```text
-terminal_match_iff_tagHaltsFrom
+2 < β,    β−1 ≤ q.length,    β−1 ∣ q.length
 ```
 
-Under `2 < β`, `β−1 ≤ q.length`, and `β−1 ∣ q.length`, it proves:
+that a word over Neary's four ordinary labels satisfies
 
 ```text
-∃w over the four ordinary labels, upper(w) ++ 10^β = lower(w)
-  ↔ the restricted tag system halts from its prescribed initial queue.
+upper(w) ++ 10^β = lower(w)
 ```
 
-The forward proof does not assume intended simulation. `tileHistory_of_terminal_match` runs a
-zero-gap automaton over an arbitrary lower product and forces its labels into blocks containing
-one rule tile and exactly `β−1` erase tiles. The decoded equality becomes a queue-history
-certificate. `tagHaltsFrom_of_history` proves by prefix cancellation that every such certificate
-describes lawful tag steps, stopping immediately if an earlier short queue occurs.
+if and only if the restricted tag system halts. The forward theorem accepts an arbitrary label
+word. A zero-run automaton forces exact deletion-width blocks; prefix cancellation turns the
+decoded history equation into lawful tag steps and stops at the first short queue.
 
-The converse records actual deleted blocks. An invariant states that every reachable queue ends
-in `b` and has length congruent to `1 mod (β−1)`. Hence a short queue is exactly `[b]`, which
-closes the terminal equation.
+The development also checks the fresh-marker fifth pair, fixed-length binary recoding,
+primitive terminality, the ternary word-pair representation, the exact integer generators, and
+the mortality converse for every nonempty word over all five labels. The four ordinary matrices
+are nonsingular and upper triangular. The fifth is nonzero and has rank one over `ℚ`.
 
-`NearyArithmeticEnvelope` records the arithmetic envelope containing Neary's padded compiler
-outputs:
+## Modules
+
+| File | Responsibility |
+| --- | --- |
+| `TagQueue.lean` | tag steps and generic history soundness |
+| `NearyEncoding.lean` | four ordinary tiles, synchronization, source equivalence, and composed reductions |
+| `MarkedTerminal.lean` | fresh marker, primitive terminality, and binary recoding |
+| `TernaryEncoding.lean` | injective nonzero ternary representation |
+| `PCPEncoding.lean` | `3 × 3` word-pair morphism and equality entry |
+| `TerminalTile.lean` | arbitrary rank-one chains and fracture at every separator |
+| `TerminalReduction.lean` | rational and integer fixed-boundary mortality compiler |
+| `TerminalSource.lean` | generic primitive extraction and GPCP bridge |
+| `LintAudit.lean` | package-wide default mathlib environment lint |
+| `AxiomAudit.lean` | transitive axioms of publication-facing declarations |
+
+## Principal Declarations
+
+| Claim | Lean declaration |
+| --- | --- |
+| History equation implies halting | `tagHaltsFrom_of_history` |
+| Terminal equality forces deletion blocks | `tileHistory_of_terminal_match` |
+| Four-tile equality iff tag halting | `terminal_match_iff_tagHaltsFrom` |
+| Corrected five-pair PCP iff tag halting | `nearyPCP_solvable_iff_tagHaltsFrom` |
+| Primitive solutions end in tile five | `nearyPCP_primitive_terminal` |
+| Four-generator GPCP iff tag halting | `nearyGPCP_solvable_iff_tagHaltsFrom` |
+| Nonempty-witness GPCP iff tag halting | `nearyGPCPPlus_solvable_iff_tagHaltsFrom` |
+| Five integer matrices mortal iff tag halting | `nearyMortalityFamilyInt_mortal_iff_tagHaltsFrom` |
+| Arithmetic-envelope specialization | `NearyArithmeticEnvelope.mortality_iff_halts` |
+| Four ordinary matrices are nonsingular and triangular | `nearyMortality_ordinary_det_ne_zero`, `nearyMortality_ordinary_upperTriangular` |
+| Exceptional matrix is nonzero and rank one | `nearyMortality_terminal_ne_zero`, `nearyMortality_terminal_rank_eq_one` |
+
+## Logical Foundation
+
+Lean checks proof terms in dependent type theory with inductive and quotient types and an
+impredicative, proof-irrelevant `Prop`. Mathlib supplies proved definitions and lemmas; it is not
+a second proof engine. Tactics such as `simp` and `omega` produce terms that Lean's kernel checks.
+
+For every publication-facing theorem, `#print axioms` reports only:
 
 ```text
-2 < β
-q.length = (paddingRounds * β + 1) * (β−1).
+propext
+Classical.choice
+Quot.sound
 ```
 
-This is intentionally not an exact characterization of Table 2 output: it omits `β=10p`, the
-cyclic-tag instance, and the track constraints. The manuscript proves separately that a
-computable congruent padding choice places Neary's undecidable compiler-output family inside
-the envelope. Its `gpcp_solvable_iff_halts`, `gpcpPlus_solvable_iff_halts`,
-`pcp_solvable_iff_halts`, and `mortality_iff_halts` theorems are the publication-facing
-instance-level specializations.
+These provide propositional extensionality, ordinary classical choice, and quotient soundness.
+The project declares no axiom and uses no `sorry`, `admit`, `unsafe`, `partial`, `native_decide`,
+external declaration, or unverified proof certificate.
 
-## Corrected five-pair PCP
+The operational trusted computing base comprises the Lean kernel implementation, executable,
+runtime, operating system, hardware, and the correctness of the formal specification. Parsers,
+elaborators, tactics, and mathlib lie outside the logical trusted core because the kernel checks
+their resulting terms.
 
-`MarkedTerminal.lean` appends a fresh delimiter to the fixed upper boundary and uses the pair
+## External Boundary
+
+Neary's Lemma 9 and Table 2 compiler, which establish undecidability of the restricted tag
+family, are not formalized. The paper verifies the interface: Neary has `β = 10p`, a whole
+`c`-appendant `q ++ [b]` of length `βs`, and the required initial queue. A computable congruent
+padding choice gives
 
 ```text
-(10^β #, #).
+q.length = (xβ + 1)(β−1),
 ```
 
-It then encodes `0`, `1`, and `#` by the two-bit words `00`, `01`, and `11`. The ordinary
-upper words end in `1`; the ordinary lower words end in `0`; therefore every PCP solution uses
-the distinguished tile. At its first occurrence, the fresh marker makes prefix comparability
-equivalent to exact terminal matching. A primitive solution must stop there.
+so every compiler output used by the reduction inhabits `NearyArithmeticEnvelope`. The envelope
+is deliberately broader than the exact Table 2 output family.
 
-The resulting exact theorems are:
+Thus the source-to-matrix equivalence is machine-checked; the final no-decider theorem combines
+it with Neary's peer-reviewed universality theorem. CHHN's generator-dimension trades and the
+bibliographic priority claim are also external to Lean.
 
-```text
-nearyPCP_solvable_iff_tagHaltsFrom
-nearyPCP_primitive_terminal
+## Mechanical Verification
+
+```sh
+./scripts/check.sh
 ```
 
-No quantitative long-block argument or classification of post-halt junk residuals remains.
-
-## Exact five matrices
-
-`nearyMortalityFamilyInt β q` has label type `Option NearyTile`. `NearyTile` has four
-elements, so the full label type has exactly five. The four `some` labels emit the ordinary
-ternary PCP matrices. The `none` label emits
-
-```text
-Ψ(10^β, ε) e₃ e₁ᵀ.
-```
-
-The raw mortality witness is an arbitrary nonempty word over all five labels. `fracture` splits
-it at every exceptional occurrence. The proof covers zero, one, or arbitrarily many separators;
-empty prefix, suffix, or internal blocks; adjacent separators; and arbitrary ordinary order.
-
-The central equivalence is:
-
-```text
-nearyMortalityFamilyInt_mortal_iff_tagHaltsFrom
-```
-
-The exact structure promises are checked separately:
-
-```text
-nearyMortality_ordinary_det_ne_zero
-nearyMortality_ordinary_upperTriangular
-nearyMortality_terminal_ne_zero
-nearyMortality_terminal_rank_eq_one
-neary_generator_count
-neary_source_generator_count
-neary_morphisms_nonerasing
-```
-
-The nonsingularity argument occurs over `ℚ`. Entrywise `ℤ → ℚ` casting is proved
-multiplicative on the products in question and reflects zero, so no rational relaxation is
-introduced.
-
-## Mechanical checks
-
-On 2026-07-21:
-
-```text
-$ ./scripts/check.sh
-[integrity, Lean, axiom, proof-escape, Python, falsifier, HTML, and PDF checks pass]
-```
-
-The independent falsifier reports `20,272,272` arbitrary tile words, `56` terminal matches,
-and `69` reconstructed halting witnesses. Frozen transcripts and exact revisions are in
-[`verification/`](verification/README.md) and [REPRODUCIBILITY.md](REPRODUCIBILITY.md).
-
-Warnings are errors, automatic implicit variables are disabled, mathlib's strict syntax profile
-is enabled, and every default environment linter passes over the whole package. There are no
-custom axioms, admitted statements, unsafe theorem declarations, linter suppressions, or
-`native_decide` proofs. The complete transitive axiom output is compared byte-for-byte with its
-reviewed snapshot.
-
-The finite scour is deliberately independent of Lean and exhausts small arbitrary label words,
-including malformed orderings. It is only a falsifier, not part of the proof.
-
-## Not yet machine-checked
-
-- Neary's Lemma 9 / Table 2 compiler establishing undecidability of the admissible restricted
-  tag family;
-- computability and many-one-reduction bookkeeping from a mathlib machine-halting predicate;
-- CHHN's dimension and generator trades;
-- bibliographic novelty.
-
-The first two items delimit “fully machine-checked undecidability.” They no longer delimit the
-new mathematical argument: the malformed-path exclusion and every map from the restricted tag
-source through the exact five matrices are formalized.
+The build treats warnings as errors, disables automatic implicit variables, enables mathlib's
+strict syntax profile, runs every default environment linter, compares
+`verification/axioms.txt` byte-for-byte, rejects proof escapes and strictness relaxations, runs
+the typed finite falsifier, validates the HTML, checks reference-PDF identities, and reproduces
+the manuscript PDF. The finite search is a transcription-error detector, not part of the proof.

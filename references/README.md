@@ -1,8 +1,7 @@
 # Local bibliography
 
-This directory is the durable evidentiary corpus for the project. Each PDF has a same-stem
-synopsis containing provenance, a cryptographic digest, the exact facts used, and audit notes.
-The bibliography records status rather than merely collecting links.
+Each PDF has a same-stem synopsis recording its citation, provenance, content digest, facts used,
+and version hazards.
 
 | Key | Status | Role in the matrix-mortality investigation |
 | --- | --- | --- |

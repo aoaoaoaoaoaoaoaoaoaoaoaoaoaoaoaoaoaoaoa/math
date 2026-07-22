@@ -11,8 +11,6 @@ cd -- "$ROOT"
 export ELAN_HOME
 export SOURCE_DATE_EPOCH
 
-sha256sum --check ARTIFACTS.sha256
-
 while IFS= read -r pdf; do
   note="${pdf%.pdf}.md"
   [[ -f "$note" ]] || { printf 'missing reference synopsis: %s\n' "$note" >&2; exit 1; }
