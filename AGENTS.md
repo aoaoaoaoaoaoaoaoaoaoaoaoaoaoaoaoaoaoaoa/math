@@ -46,6 +46,14 @@ on it, and any corrections, defects, version hazards, or unresolved audit obliga
 `references/README.md` as the local bibliography and distinguish peer-reviewed publications
 from preprints, superseded versions, and withdrawn or erroneous claims.
 
+## Public issue tracker
+
+Use the repository's public GitHub issues as its durable work ledger. Open an issue when work is
+material, coherent, and genuinely deferred; record the exact completed boundary, outstanding
+proof obligations, dependencies, and acceptance test. Update or close issues as the mathematics
+moves. Do not create ceremonial tickets for work that can be completed in the current pass, and
+do not hide project work in a private auxiliary tracker.
+
 ## Publication seam
 
 `index.html` is presentation-free semantic source for `../eternalist.moe`. It must contain no

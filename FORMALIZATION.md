@@ -50,6 +50,15 @@ are nonsingular and upper triangular. The fifth is nonzero and has rank one over
 | `TerminalSource.lean` | generic primitive extraction and GPCP bridge |
 | `LintAudit.lean` | package-wide default mathlib environment lint |
 | `AxiomAudit.lean` | transitive axioms of publication-facing declarations |
+| `Undecidability/UniversalMachine.lean` | fixed verified two-tape interpreter for mathlib code halting |
+| `Undecidability/CyclicTag.lean` | two-tag semantics and the one-hot cyclic-tag simulation |
+| `Undecidability/Tracks.lean` | typed fixed-stride track serialization and recovery |
+| `Undecidability/TagExecution.lean` | exact finite executions and sliced-track recovery |
+| `Undecidability/NearyCompiler.lean` | exact Table 2 words, tracks, padding, and arithmetic envelope |
+| `Undecidability/NearySimulation.lean` | traversal semantics of raw, bit, epsilon, and halting objects |
+| `Undecidability/NearyData.lean` | garbage calculus, token invariant, and ordinary cyclic pulses |
+| `Undecidability/NearyProblems.lean` | canonical `Fin 4` and `Fin 5` target instances |
+| `Undecidability/Problems.lean` | encoded source and target decision predicates |
 
 ## Principal Declarations
 
@@ -66,6 +75,10 @@ are nonsingular and upper triangular. The fifth is nonzero and has rank one over
 | Arithmetic-envelope specialization | `NearyArithmeticEnvelope.mortality_iff_halts` |
 | Four ordinary matrices are nonsingular and triangular | `nearyMortality_ordinary_det_ne_zero`, `nearyMortality_ordinary_upperTriangular` |
 | Exceptional matrix is nonzero and rank one | `nearyMortality_terminal_ne_zero`, `nearyMortality_terminal_rank_eq_one` |
+| Mathlib code halting has a verified `TM2` interpreter | `exists_universalTM2` |
+| Two-tag executions reach their cyclic firing phase | `CyclicTag.reaches_firing_phase` |
+| A woven compiler word emits its prescribed track | `read_wholeAppendant_track` |
+| One arbitrary ordinary cyclic pulse is simulated | `read_next_dataBit` |
 
 ## Logical Foundation
 
@@ -92,10 +105,19 @@ their resulting terms.
 
 ## External Boundary
 
-Neary's Lemma 9 and Table 2 compiler, which establish undecidability of the restricted tag
-family, are not formalized. The paper verifies the interface: Neary has `β = 10p`, a whole
-`c`-appendant `q ++ [b]` of length `βs`, and the required initial queue. A computable congruent
-padding choice gives
+The complete universality chain is not yet formalized. On its upstream side, Lean now starts
+from mathlib's theorem that code halting is noncomputable, constructs a verified universal `TM2`
+interpreter, and proves the complete one-hot simulation from two-tag systems to cyclic-tag
+systems. A computable reification of the fixed interpreter as a finite machine and the
+finite-machine-to-two-tag compiler remain open.
+
+On Neary's side, Lean defines the exact Table 2 tracks and their computable padding. It proves
+that the whole `c`-appendant has length `βs`, ends in `b`, induces the required initial queue, and
+inhabits the arithmetic envelope. Fixed-stride execution then verifies every raw, epsilon, zero,
+ordinary-one, and distinguished-one object. The semantic data layer permits arbitrary garbage
+prefixes and proves that every nonhalting cyclic-tag pulse produces the correct data update while
+preserving the garbage reserve. The initial-track execution, distinguished halting cascade, and
+global no-spurious-halting converse remain open. The chosen congruent padding gives
 
 ```text
 q.length = (xβ + 1)(β−1),
@@ -104,9 +126,35 @@ q.length = (xβ + 1)(β−1),
 so every compiler output used by the reduction inhabits `NearyArithmeticEnvelope`. The envelope
 is deliberately broader than the exact Table 2 output family.
 
-Thus the source-to-matrix equivalence is machine-checked; the final no-decider theorem combines
-it with Neary's peer-reviewed universality theorem. CHHN's generator-dimension trades and the
-bibliographic priority claim are also external to Lean.
+Thus the source-to-matrix equivalence and a substantial proper prefix of the universality
+compiler are machine-checked. The published undecidability theorem still uses Neary's
+peer-reviewed Lemma 9 at the remaining external boundary. CHHN's generator-dimension trades and
+the bibliographic priority claim are also external to Lean.
+
+## Prior Formalizations
+
+The public Lean corpus was audited on 2026-07-22 for an executable reduction chain that could
+replace that external boundary. A usable component had to provide a computable translation,
+the required halting equivalence, a compatible license, and no admitted simulation theorem.
+Name-level overlap was not enough.
+
+| Development | Audited revision | Result | Reuse decision |
+| --- | --- | --- | --- |
+| [mathlib](https://github.com/leanprover-community/mathlib4/tree/809c3fb3b5c8f5d7dace56e200b426187516535a/Mathlib/Computability) | `809c3fb3` (`v4.12.0`) | Proves noncomputability of code halting and interprets partial-recursive code by Turing machines | Adopt the code-halting theorem. Its finite-support TM translations contain proof-level choices and do not themselves emit a computably encoded finite machine. |
+| [Wolfram TuringMachine](https://github.com/WolframInstitute/TuringMachine/tree/ff67008a07d37dee380567d5eeb556ed127759e7/Proofs/TagSystem) | `ff67008a` | Proves the one-hot two-tag to cyclic-tag step simulation | Use as an independent specification only. The repository has no stated license; its Turing-machine to two-tag simulation is an explicit hypothesis. |
+| [UniversalityDB](https://github.com/WolframInstitute/UniversalityDB/tree/d4383c47b5db3a3673a7d88472409eb1bd912ff0) | `d4383c47` | Catalogues the Wolfram universality chain | Not adopted: the catalogue records the same missing Turing-machine to two-tag theorem. |
+| [DiagonaLean](https://github.com/DiagonaLean/DiagonaLean/tree/28ed8223dcfb389c8c1b655521099500b7bc53af) | `28ed8223` | Formalizes substantial HALT, MPCP, PCP, and matrix-mortality semantics | Not adopted. Its `ManyOneReduces` permits an arbitrary function, `SDecidable` permits an arbitrary Boolean characteristic function, and the HALT-to-MPCP tile compiler is declared `noncomputable`; these statements do not supply the executable many-one reduction required here. The general compiler also retains machine-normalization side conditions. |
+| [cslib](https://github.com/leanprover/cslib/tree/0268c49a549b093bf865fc6c66c96ae5412494fe/Cslib/Computability) | `0268c49a` | Supplies finite-state Turing-machine and unlimited-register-machine semantics | Potential semantic library only. No universality or halting-noncomputability bridge was present at the audited revision. |
+| [Jacob Weightman's tag-system branch](https://github.com/jacobdweightman/mathlib4/tree/ec3a5db58c8d2f7222116101980787788a5bfc36/Mathlib/Computability) | `ec3a5db5` | Develops tag-system semantics and elementary dynamics | Not adopted: it has no universality compiler and contains admitted declarations. |
+| [Coq Library of Undecidability Proofs](https://github.com/uds-psl/coq-library-undecidability/tree/c7257b736763d7b2bc3bd25ac47d5fb7ce749c9c) | `c7257b73` | Gives certified generic reductions through binary PCP | Proof blueprint only. It is Coq rather than Lean and its generic PCP instances do not preserve the four-generator bound. |
+| [rule110-lean](https://github.com/novaspivack/rule110-lean/tree/cbbc170e48f254fcd822d10e759eecb4e359a943) | `cbbc170e` | Formalizes portions of Cook's Rule 110 simulation | Not adopted: its published status leaves the central simulation bridges as hypotheses and uses native evaluation certificates. |
+| [dna-tiles](https://github.com/CharlesCNorton/dna-tiles/tree/0410cdf30e11da33678d9e1ae94c94cffbcc22ef) | `0410cdf3` | Defines Turing machines and cyclic tag systems in Rocq | Not adopted. Its claimed cyclic-tag completeness selects a trivially halting or looping system by classical excluded middle after asking whether the source machine halts. This proves an extensional existence statement, not a computable compiler. |
+
+No audited public artifact closes either missing specialized edge: an executable universal
+source-to-two-tag compiler, or Neary's cyclic-tag-to-restricted-binary-tag Table 2 compiler.
+Accordingly, this project keeps mathlib's code-halting theorem, proves the two-tag-to-cyclic-tag
+compiler independently, and formalizes the remaining translations locally. This is a search
+result, not a claim that no unpublished or unindexed development exists.
 
 ## Mechanical Verification
 

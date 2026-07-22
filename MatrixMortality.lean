@@ -1,1 +1,4 @@
 import MatrixMortality.NearyEncoding
+import MatrixMortality.Undecidability.NearyData
+import MatrixMortality.Undecidability.NearyProblems
+import MatrixMortality.Undecidability.UniversalMachine

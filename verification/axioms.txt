@@ -26,3 +26,16 @@
 'MatrixMortality.nearyMortality_ordinary_upperTriangular' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.nearyMortality_terminal_ne_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.nearyMortality_terminal_rank_eq_one' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.Undecidability.codeHalts_not_computable' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.Undecidability.exists_universalTM2' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.Undecidability.CyclicTag.simulate_reaches' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.Undecidability.CyclicTag.reaches_firing_phase' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.Undecidability.NearyCompiler.read_wholeAppendant_track' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.Undecidability.NearyCompiler.read_next_dataBit' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.Undecidability.NearyCompiler.initialTokens_stable' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]

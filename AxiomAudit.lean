@@ -20,3 +20,10 @@ open MatrixMortality
 #print axioms nearyMortality_ordinary_upperTriangular
 #print axioms nearyMortality_terminal_ne_zero
 #print axioms nearyMortality_terminal_rank_eq_one
+#print axioms Undecidability.codeHalts_not_computable
+#print axioms Undecidability.exists_universalTM2
+#print axioms Undecidability.CyclicTag.simulate_reaches
+#print axioms Undecidability.CyclicTag.reaches_firing_phase
+#print axioms Undecidability.NearyCompiler.read_wholeAppendant_track
+#print axioms Undecidability.NearyCompiler.read_next_dataBit
+#print axioms Undecidability.NearyCompiler.initialTokens_stable

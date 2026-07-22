@@ -20,6 +20,7 @@ and version hazards.
 | [HH11](halava-holub-2011-binary-gpcp-reduction-tree.md) | peer-reviewed IJFCS 2011 | Reduction-tree and end-block structure at the decidable `GPCP(2)` endpoint; source-compression machinery |
 | [Rote24](rote-2024-fixed-pfa-emptiness-full-version.md) | arXiv full version | Longer version of Rote's terminal-pair repair and uniqueness discussion |
 | [Rote25](rote-2025-fixed-pfa-emptiness.md) | peer-reviewed MFCS 2025 | Published diagnosis of Neary's terminal flaw and long-block proposal; motivation, no longer a proof dependency |
+| [FHS18](forster-heiter-smolka-2018-pcp-reductions-coq.md) | peer-reviewed ITP 2018; Coq artifact | Certified generic TM-to-PCP reduction chain and proof-engineering precedent; does not preserve a four-generator source bound |
 
 Retrieval dates and hashes describe the exact local files, not an abstract work that may have
 other versions.
