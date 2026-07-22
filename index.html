@@ -158,9 +158,7 @@
           <summary><h2 id="new-stuff">New Stuff</h2></summary>
 
           <h3 id="source-distinction">GPCP(4), not PCP(4)</h3>
-          <p>Neary’s 2013 preprint claimed ordinary PCP with four pairs, asking for <var>U</var>(<var>w</var>) = <var>V</var>(<var>w</var>), and made one erasing pair participate in both simulation and termination <a href="#ref-neary-2013">[Neary 2013]</a>. That theorem was not retained in the refereed successor, which proved five-pair PCP and left the four-pair case open <a href="#ref-neary-2015">[Neary 2015]</a>.</p>
-
-          <p>This work retains the four nonterminal pairs from the published construction and moves termination into a fixed right boundary:</p>
+          <p>The four simulation pairs from Neary’s refereed construction naturally finish with a controlled residual rather than equality <a href="#ref-neary-2015">[Neary 2015]</a>:</p>
           <div class="formula plain">
             <math display="block">
               <mrow>
@@ -172,7 +170,9 @@
               </mrow>
             </math>
           </div>
-          <p>This is GPCP(4). The boundary is punctuation, not a selectable pair, and all eight morphism images are nonempty. Ordinary PCP(4) is not assumed and remains unresolved in the literature audited here.</p>
+          <p>Ordinary PCP accepts only <var>U</var>(<var>w</var>) = <var>V</var>(<var>w</var>), so a selectable pair must consume the final <var>M</var>. Neary’s published construction adds a fifth terminal pair. His 2013 preprint instead made an erasing pair participate in both simulation and termination <a href="#ref-neary-2013">[Neary 2013]</a>. Because that pair remained selectable at every position, the converse had to exclude premature and repeated uses. The required arbitrary-word exclusion was not established, and PCP(4) was not retained in the refereed successor, which left the four-pair case open <a href="#ref-neary-2015">[Neary 2015]</a>.</p>
+
+          <p>GPCP makes <var>M</var> fixed punctuation rather than a selectable pair. It occurs once at the prescribed boundary while the four pairs perform only simulation. All eight morphism images remain nonempty. This proves GPCP(4), not PCP(4); ordinary PCP(4) remains unresolved in the literature audited here.</p>
 
           <p>The new converse applies to arbitrary tile words. Zero-run synchronization forces one rule tile followed by exactly <var>β</var>−1 deletion tiles; each block decodes as a <var>β</var>-symbol tag stroke; global equality becomes a queue-history certificate; prefix cancellation reconstructs lawful tag steps until the first short queue. Malformed words are excluded by this global invariant, not by assuming that every wrong local choice eventually mismatches.</p>
 
