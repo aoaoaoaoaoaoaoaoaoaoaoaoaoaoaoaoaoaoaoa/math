@@ -5,11 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light">
   <meta name="author" content="GPT-5.6 Sol; elicited by @eternalism_4eva">
-  <meta name="description" content="A self-contained exposition of a new undecidability bound for mortality of five 3 by 3 integer matrices, including the word compiler, rank-one mechanism, proof, and Lean verification boundary.">
-  <meta property="og:title" content="Five Matrices Are Enough">
-  <meta property="og:description" content="How a tag system, four word pairs, and one rank-one separator move the matrix mortality undecidability staircase.">
+  <meta name="description" content="Proof that mortality is undecidable for five 3 by 3 integer matrices, with the four-letter word compiler, rank-one reduction, provenance, and formal verification boundary.">
+  <meta property="og:title" content="Undecidability of M₃(5)">
+  <meta property="og:description" content="A four-generator fixed-boundary correspondence problem compiled into five 3 by 3 integer matrices.">
   <meta property="og:type" content="article">
-  <title>Five Matrices Are Enough | Matrix Mortality at M₃(5)</title>
+  <title>Undecidability of M₃(5) | Matrix Mortality</title>
   <style>
     :root {
       --paper: #f4f0e7;
@@ -247,21 +247,7 @@
     p { margin: 0 0 1.25rem; }
     strong { font-weight: 700; }
 
-    .opening {
-      margin-bottom: 1.8rem;
-      font-size: 1.35rem;
-      line-height: 1.52;
-    }
-
-    .opening::first-letter {
-      float: left;
-      margin: 0.1em 0.12em 0 0;
-      color: var(--oxide);
-      font: 700 4.35rem/0.78 var(--serif);
-    }
-
-    code,
-    .mono {
+    code {
       font-family: var(--mono);
       font-size: 0.88em;
       font-variant-ligatures: none;
@@ -340,7 +326,6 @@
       white-space: nowrap;
     }
 
-    .why-grid,
     .status-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -348,21 +333,18 @@
       margin: 2rem 0;
     }
 
-    .why-grid > div,
     .status-grid > div {
       padding: 1.15rem 1.2rem;
       border-top: 3px solid var(--blue);
       background: rgba(255, 253, 248, 0.55);
     }
 
-    .why-grid b,
     .status-grid b {
       display: block;
       margin-bottom: 0.3rem;
       font: 700 0.85rem/1.25 var(--sans);
     }
 
-    .why-grid p,
     .status-grid p {
       margin: 0;
       color: var(--muted);
@@ -470,18 +452,6 @@
 
     .step h3 { margin: 0.17rem 0 0.4rem; }
     .step p { margin-bottom: 0.7rem; }
-
-    blockquote {
-      margin: 2.5rem 0;
-      padding: 0.2rem 0 0.2rem 1.5rem;
-      border-left: 3px solid var(--oxide);
-      color: #37312b;
-      font-size: 1.3rem;
-      font-style: italic;
-      line-height: 1.5;
-    }
-
-    blockquote p { margin: 0; }
 
     .matrix-equation {
       display: flex;
@@ -617,9 +587,6 @@
     }
 
     footer > div {
-      display: flex;
-      justify-content: space-between;
-      gap: 2rem;
       max-width: 68rem;
       margin: 0 auto;
     }
@@ -643,7 +610,7 @@
       .shell { padding-left: 1.15rem; padding-right: 1.15rem; padding-top: 3.5rem; }
       section { margin-bottom: 5rem; }
       .contents ol { columns: 1; }
-      .why-grid, .status-grid, .artifact-list { grid-template-columns: 1fr; }
+      .status-grid, .artifact-list { grid-template-columns: 1fr; }
       .pipeline { grid-template-columns: 1fr; }
       .pipeline .node { min-height: auto; }
       .pipeline .arrow { transform: rotate(90deg); text-align: center; }
@@ -652,8 +619,6 @@
       .frontier th:first-child, .frontier td:first-child { display: none; }
       .step { grid-template-columns: 2rem 1fr; gap: 0.75rem; }
       .definition, .theorem, .aside, .technical-detail { padding-left: 1.05rem; padding-right: 1.05rem; }
-      footer > div { display: block; }
-      footer p + p { margin-top: 0.7rem; }
     }
 
     @media print {
@@ -681,20 +646,20 @@
   <header class="masthead">
     <div class="masthead-grid">
       <div>
-        <p class="eyebrow">Matrix semigroups · undecidability · a machine-checked compiler</p>
-        <h1>Five matrices are enough.</h1>
-        <p class="dek">Take five 3 × 3 integer matrices. Multiply them in any finite order, with repetition. There is no algorithm that can always decide whether the zero matrix will ever appear.</p>
+        <p class="eyebrow">Matrix mortality · GPCP(4) · formal verification</p>
+        <h1>Undecidability of M<sub>3</sub>(5)</h1>
+        <p class="dek">A four-generator fixed-boundary correspondence problem reduces to mortality of five 3 × 3 integer matrices.</p>
         <p class="byline">GPT-5.6 Sol · elicited by <a href="https://x.com/eternalism_4eva">@eternalism_4eva</a></p>
       </div>
-      <aside class="result-card" aria-label="Result at a glance">
-        <p class="tag">New staircase point</p>
+      <aside class="result-card" aria-label="Theorem summary">
+        <p class="tag">Theorem</p>
         <strong>M<sub>3</sub>(5)</strong>
-        <p>Undecidable, even when four generators are nonsingular upper triangular matrices and the fifth is nonzero of rational rank one.</p>
+        <p>Mortality remains undecidable when four generators are nonsingular and upper triangular and the fifth is nonzero of rank one over ℚ.</p>
         <div class="structure">
           <b>Source</b><span>restricted binary tag halting</span>
           <b>Bridge</b><span>four-generator fixed-boundary PCP</span>
           <b>Target</b><span>five 3 × 3 integer matrices</span>
-          <b>Status</b><span>instance-level reduction checked in Lean 4</span>
+          <b>Formal scope</b><span>instance-level reduction checked in Lean 4</span>
         </div>
       </aside>
     </div>
@@ -704,63 +669,40 @@
     <nav class="contents" aria-label="Contents">
       <p>Contents</p>
       <ol>
-        <li><a href="#strange-question">The strange question</a></li>
-        <li><a href="#frontier">Where the staircase stood</a></li>
-        <li><a href="#words-compute">How words compute</a></li>
-        <li><a href="#four-tiles">The four-tile mechanism</a></li>
-        <li><a href="#five-matrices">From words to matrices</a></li>
-        <li><a href="#status">What is established</a></li>
-        <li><a href="#sources">Sources and artifacts</a></li>
+        <li><a href="#strange-question">Matrix mortality</a></li>
+        <li><a href="#frontier">Known bounds</a></li>
+        <li><a href="#words-compute">Computational source</a></li>
+        <li><a href="#four-tiles">Four-tile theorem</a></li>
+        <li><a href="#five-matrices">Matrix reduction</a></li>
+        <li><a href="#status">Verification and provenance</a></li>
+        <li><a href="#sources">References</a></li>
       </ol>
     </nav>
 
     <main id="article">
       <article>
         <section id="strange-question">
-          <p class="section-index">01 · The strange question</p>
-          <h2>Can multiplication eventually kill everything?</h2>
-          <p class="opening">A finite list of matrices looks harmless. Yet the set of all products made from that list is an infinite, branching object. Matrix mortality asks whether one branch ever reaches the zero matrix.</p>
+          <p class="section-index">01 · Matrix mortality</p>
+          <h2>The decision problem</h2>
 
           <div class="definition">
             <span class="box-label">Matrix mortality M<sub>d</sub>(k)</span>
-            <p>Input: at most <var>k</var> integer <var>d</var> × <var>d</var> matrices <var>A</var><sub>1</sub>, …, <var>A</var><sub>k</sub>. Question: does some <strong>nonempty</strong> product</p>
+            <p>Given at most <var>k</var> integer <var>d</var> × <var>d</var> matrices <var>A</var><sub>1</sub>, …, <var>A</var><sub>k</sub>, determine whether</p>
             <div class="formula plain"><var>A</var><sub>i₁</sub><var>A</var><sub>i₂</sub> ··· <var>A</var><sub>iₙ</sub> = 0</div>
-            <p>exist, with arbitrary length <var>n</var>, arbitrary order, and repetition allowed?</p>
+            <p>for some <var>n</var> ≥ 1 and indices <var>i</var><sub>j</sub> ∈ {1, …, <var>k</var>}.</p>
           </div>
 
-          <p>A “yes” answer is recognizable: enumerate products by length and stop when zero appears. The difficulty is a “no.” Failure through the first trillion products says nothing about the next one. Undecidability means there is no algorithm that always settles both cases.</p>
+          <p>Mortality is recursively enumerable: enumerate products by length and halt when zero appears. Undecidability means that no algorithm also terminates on every nonmortal instance.</p>
 
-          <div class="why-grid" aria-label="Why a tiny input can encode unbounded computation">
-            <div>
-              <b>The product is a word</b>
-              <p>Choosing matrices in sequence is choosing letters from a finite alphabet. Multiplication gives the word a semantics.</p>
-            </div>
-            <div>
-              <b>Length is unbounded</b>
-              <p>The matrices are fixed, but the witness may be arbitrarily long. That is where an entire computation can hide.</p>
-            </div>
-            <div>
-              <b>Order matters</b>
-              <p>Matrix multiplication is noncommutative. The semigroup retains the sequential structure needed to simulate a machine.</p>
-            </div>
-            <div>
-              <b>Integers carry exact state</b>
-              <p>No numerical approximation is involved. Large entries act as exact encodings of concatenated strings.</p>
-            </div>
-          </div>
-
-          <p>This is the peculiar charm of the problem: no elaborate machine remains visible at the end. Only a handful of tiny square arrays and the question “can they multiply to zero?”</p>
+          <p>A product is a word over the finite generator alphabet. Word length is unbounded and multiplication retains order. The construction below uses integer entries to encode concatenation exactly.</p>
         </section>
 
         <section id="frontier">
-          <p class="section-index">02 · The undecidability staircase</p>
-          <h2>How few, and how small?</h2>
-          <p>Unrestricted mortality for 3 × 3 integer matrices has been known undecidable since Paterson. The finer game fixes both resources: dimension <var>d</var> and number of generators <var>k</var>. A result at one point propagates upward by allowing more generators or padding matrices into larger dimensions, so the meaningful record is a descending staircase of minimal known undecidable points.</p>
+          <p class="section-index">02 · Known bounds</p>
+          <h2>Minimal undecidable points</h2>
+          <p>Mortality for unrestricted sets of 3 × 3 integer matrices is undecidable. For fixed dimension <var>d</var> and generator bound <var>k</var>, undecidability is monotone in both coordinates: additional generators may be unused, and <var>A</var> ↦ <var>A</var> ⊕ 0 preserves mortality under dimension padding. The coordinatewise-minimal known undecidable cells therefore form an antichain.</p>
 
-          <p>The previous minimal known undecidability antichain, due to Cassaigne, Halava, Harju, and Nicolas, was</p>
-          <div class="formula">M<sub>3</sub>(6), &nbsp; M<sub>5</sub>(4), &nbsp; M<sub>9</sub>(3), &nbsp; M<sub>15</sub>(2).</div>
-          <p>A 2013 technical report had announced M<sub>3</sub>(5), but its four-pair PCP premise was not retained in the refereed successor; the accepted literature continued to list M<sub>3</sub>(6). The historical distinction is recorded below.</p>
-
+          <p>The previous antichain of Cassaigne, Halava, Harju, and Nicolas and the resulting update are:</p>
           <div class="table-scroll">
           <table class="frontier">
             <thead>
@@ -775,25 +717,23 @@
           </table>
           </div>
 
-          <p>The first move, from six matrices to five in dimension three, is the result proved here. The other improvements follow from an established generator-to-dimension packing theorem:</p>
+          <p>The new source reduction proves M<sub>3</sub>(5). The other changed cells follow from the established packing reduction</p>
           <div class="formula">M<sub>d</sub>(<var>h</var><var>k</var> + 1) ≤<sub>m</sub> M<sub><var>k</var><var>d</var></sub>(<var>h</var> + 1).</div>
-          <p>Here ≤<sub>m</sub> means a computable translation of instances that preserves yes and no answers. Substituting 5 = 2·2 + 1 and 5 = 1·4 + 1 turns M<sub>3</sub>(5) into M<sub>6</sub>(3) and M<sub>12</sub>(2). One saved generator at the source moves three separate steps of the known-undecidability staircase. This is not a complete decidability frontier: the cells immediately below remain open.</p>
+          <p>Here ≤<sub>m</sub> denotes a computable many-one reduction. The substitutions 5 = 2·2 + 1 and 5 = 1·4 + 1 yield M<sub>6</sub>(3) and M<sub>12</sub>(2). The table records known undecidability bounds, not a complete decidability frontier; the cells immediately below remain unresolved.</p>
         </section>
 
         <section id="words-compute">
-          <p class="section-index">03 · Words compute</p>
-          <h2>The route through correspondence</h2>
-          <p>The reduction does not compile a Turing machine straight into matrices. It passes through two austere models of computation where concatenation is the only moving part.</p>
+          <p class="section-index">03 · Computational source</p>
+          <h2>Tag systems and correspondence</h2>
+          <h3>Tag systems</h3>
+          <p>A tag system stores a finite word. A step reads its first symbol, appends the word assigned to that symbol, and deletes a fixed number <var>β</var> of leading symbols. It halts when fewer than <var>β</var> symbols remain. Halting is undecidable for Neary’s restricted binary family.</p>
 
-          <h3>Tag systems: computation as a queue</h3>
-          <p>A tag system holds a finite word. At each step it reads the first symbol, appends a prescribed word, then deletes a fixed number <var>β</var> of symbols from the front. It halts when fewer than <var>β</var> symbols remain. The rule is brutally local, but carefully chosen binary tag systems are universal.</p>
-
-          <h3>Post correspondence: computation as equality</h3>
+          <h3>Post correspondence</h3>
           <p>A Post correspondence instance gives pairs of words (<var>u</var><sub>i</sub>, <var>v</var><sub>i</sub>). It asks for an index word <var>i</var><sub>1</sub>···<var>i</var><sub>n</sub> such that the upper and lower concatenations agree:</p>
           <div class="formula"><var>u</var><sub>i₁</sub>···<var>u</var><sub>iₙ</sub> = <var>v</var><sub>i₁</sub>···<var>v</var><sub>iₙ</sub>.</div>
-          <p>For example, the pairs (<span class="word">a</span>, <span class="word">ab</span>) and (<span class="word">ba</span>, <span class="word">a</span>) solve themselves in that order, because <span class="word">a·ba</span> = <span class="word">ab·a</span>.</p>
+          <p>For the pairs (<span class="word">a</span>, <span class="word">ab</span>) and (<span class="word">ba</span>, <span class="word">a</span>), the index word 12 is a solution because <span class="word">a·ba</span> = <span class="word">ab·a</span>.</p>
 
-          <p>Generalized PCP (GPCP) allows fixed words at the boundaries. That slight change is decisive here: a tile once treated as a variable instruction can instead become fixed punctuation.</p>
+          <p>Generalized PCP (GPCP) permits fixed boundary words. The instance used here has empty left boundaries and asks whether <var>U</var>(<var>w</var>)<var>M</var> = <var>V</var>(<var>w</var>) for a word <var>w</var> over four source letters.</p>
 
           <div class="pipeline" aria-label="Reduction chain">
             <div class="node">Restricted binary<br>tag halting</div>
@@ -803,22 +743,18 @@
             <div class="node">Five 3 × 3<br>integer matrices</div>
           </div>
 
-          <h3>The terminal-tile snag</h3>
-          <p>Neary produced five PCP pairs from an undecidable restricted tag system, with the fifth intended to act only as a terminator. The published terminal-pair argument contained an error later diagnosed by Rote, who proposed a longer unary guard. For mortality there is a cleaner route: make terminal behavior irrelevant.</p>
-
-          <blockquote><p>The cure is not to defend the old terminal tile. Remove it from the moving alphabet and prove that the first four pairs already recognize halting when supplied with a fixed right boundary.</p></blockquote>
-
-          <p>This is the conceptual step that saves a matrix. The matrix algebra afterward is exact but standard in spirit.</p>
+          <h3>Removal of the terminal tile</h3>
+          <p>Neary’s five-pair construction used a fifth pair as a terminator. Rote later identified an error in its terminal guard and proposed a longer replacement. Neither terminal pair is used here. The first four pairs are proved directly to recognize halting under the fixed right boundary <var>M</var>. This gives a four-generator GPCP source for the matrix reduction.</p>
         </section>
 
         <section id="four-tiles">
-          <p class="section-index">04 · The source mechanism</p>
-          <h2>Four tiles force lawful histories</h2>
-          <p>Fix <var>β</var> ≥ 3 and a word <var>q</var> over <span class="word">b,c</span>. Consider the tag system</p>
+          <p class="section-index">04 · Four-tile theorem</p>
+          <h2>A synchronized tag compiler</h2>
+          <p>Fix <var>β</var> ≥ 3 and a word <var>q</var> over <span class="word">b,c</span>. Define the tag system</p>
           <div class="formula"><span class="word">b</span> ↦ <span class="word">b</span>, &nbsp; <span class="word">c</span> ↦ <var>q</var><span class="word">b</span>, &nbsp; I = drop<sub>β−1</sub>(<var>q</var>)<span class="word">b</span>.</div>
-          <p>Neary’s universal compiler produces systems of this form. Encode queue letters into binary blocks by</p>
+          <p>Encode queue letters and the fixed boundary by</p>
           <div class="formula">H(<span class="word">b</span>) = 1 0<sup>β</sup> 1, &nbsp; H(<span class="word">c</span>) = 1, &nbsp; M = 1 0<sup>β</sup>.</div>
-          <p>Extend <var>H</var> by concatenation and introduce four word pairs:</p>
+          <p>Extend <var>H</var> by concatenation and define four word pairs:</p>
 
           <div class="table-scroll">
           <table class="tile-table">
@@ -834,79 +770,78 @@
           </table>
           </div>
 
-          <p>For a tile word <var>w</var>, let <var>U</var>(<var>w</var>) and <var>V</var>(<var>w</var>) be its upper and lower concatenations. The source theorem is the exact equivalence</p>
+          <p>For a tile word <var>w</var>, write <var>U</var>(<var>w</var>) and <var>V</var>(<var>w</var>) for its upper and lower concatenations.</p>
 
           <div class="theorem">
             <span class="box-label">Four-tile tag compiler</span>
             <div class="formula plain">∃<var>w</var>: &nbsp; <var>U</var>(<var>w</var>)<var>M</var> = <var>V</var>(<var>w</var>) &nbsp; ⇔ &nbsp; the tag system halts from <var>I</var>.</div>
-            <p>It holds when β−1 divides |<var>q</var>| and |<var>q</var>| ≥ β−1. These arithmetic hypotheses describe a wider class than Neary’s compiler outputs; the outputs form an undecidable subfamily inside it.</p>
+            <p>The equivalence holds when β−1 divides |<var>q</var>| and |<var>q</var>| ≥ β−1. These hypotheses define an arithmetic envelope containing Neary’s compiler outputs.</p>
           </div>
 
-          <p>Neary’s compiler can be padded computably so that these arithmetic hypotheses hold. Thus only his tag-universality lemma is imported; no terminal-pair argument enters the proof.</p>
+          <p>Neary’s compiler admits computable padding into this envelope. Its tag-universality lemma is the only external source theorem; no terminal-pair claim is imported.</p>
 
           <details class="technical-detail">
-            <summary>Technical seam: why Neary’s compiler satisfies the arithmetic hypotheses</summary>
+            <summary>Padding into the arithmetic envelope</summary>
             <p>Neary has β = 10<var>p</var> and |<var>q</var><span class="word">b</span>| = β<var>s</var>. If <var>n</var> is the input length and <var>r</var> the maximum cyclic appendant length, take</p>
             <div class="formula plain"><var>B</var> = max{11(<var>n</var>+<var>p</var>)+β−2, 11<var>p</var>, 11<var>r</var>, 1}, &nbsp; <var>x</var> = ⌈(<var>B</var>−1)/(β−1)⌉, &nbsp; <var>s</var> = <var>x</var>(β−1)+1.</div>
-            <p>This computable choice lies in Neary’s permitted padding range and makes every exponent in his Table 2 nonnegative. It gives</p>
+            <p>This lies in Neary’s permitted padding range and makes every exponent in his Table 2 nonnegative. Moreover,</p>
             <div class="formula plain">|<var>q</var>| = β[<var>x</var>(β−1)+1]−1 = (<var>x</var>β+1)(β−1),</div>
-            <p>so β−1 divides |<var>q</var>| and |<var>q</var>| ≥ β−1.</p>
+            <p>which implies β−1 ∣ |<var>q</var>| and |<var>q</var>| ≥ β−1.</p>
           </details>
 
-          <h3>The soundness problem</h3>
-          <p>The difficult implication must begin with an <em>arbitrary</em> tile word satisfying the equality, not with a word already assumed to describe the intended simulation. The proof has three locks.</p>
+          <h3>Soundness for arbitrary tile words</h3>
+          <p>Assume <var>U</var>(<var>w</var>)<var>M</var> = <var>V</var>(<var>w</var>) for an arbitrary tile word <var>w</var>.</p>
 
           <div class="steps">
             <div class="step">
               <div>
-                <h3>Zero runs force blocks</h3>
+                <h3>Synchronization</h3>
                 <p>The upper side <var>U</var>(<var>w</var>)<var>M</var> is an <var>H</var>-encoded word followed by <var>M</var>. Every positive run of zeros therefore has length exactly <var>β</var>. On the lower side, a rule tile ends with one zero; an erase tile contributes one more; the next rule begins with a one.</p>
-                <p>The payload <var>H</var>(<var>q</var>) contributes only complete <var>β</var>-runs and returns the scan to zero gap before the rule tile’s final <span class="word">10</span>; it cannot conceal a tile boundary. Equality therefore leaves no freedom: every rule tile must be followed by exactly <var>β</var>−1 erase tiles. Thus any matching word factors into blocks</p>
+                <p>The payload <var>H</var>(<var>q</var>) contains only complete <var>β</var>-runs and ends at a code boundary before the rule tile’s final <span class="word">10</span>. Hence every rule tile is followed by exactly <var>β</var>−1 erase tiles, and every matching word factors into blocks</p>
                 <div class="formula plain">R<sub>a₀</sub> D<sub>a₁</sub> ··· D<sub>a<sub>β−1</sub></sub>,</div>
-                <p>one block for each length-<var>β</var> “stroke” <var>a</var><sub>0</sub>···<var>a</var><sub>β−1</sub> consumed from a queue. This finite-state scan is exhaustive; malformed but prefix-compatible choices do not escape it.</p>
+                <p>one block for each length-<var>β</var> stroke <var>a</var><sub>0</sub>···<var>a</var><sub>β−1</sub>. The finite-state scan ranges over all label words; it assumes no simulated-history prefix.</p>
               </div>
             </div>
 
             <div class="step">
               <div>
-                <h3>The global equality becomes a queue certificate</h3>
-                <p>Decode the forced blocks. Let <var>C</var>(<var>S</var>) be all strokes concatenated, and let <var>P</var>(<var>S</var>) be all rule appendants selected by their first letters. Cancelling the initial block from the terminal equality yields</p>
+                <h3>History equation</h3>
+                <p>Let <var>S</var> be the forced stroke sequence, <var>C</var>(<var>S</var>) its concatenation, and <var>P</var>(<var>S</var>) the concatenation of the appendants selected by the stroke heads. Decoding and cancelling the initialization gives</p>
                 <div class="formula plain"><var>C</var>(<var>S</var>)<span class="word">b</span> = <var>I</var><var>P</var>(<var>S</var>).</div>
-                <p>This one equation records an entire alleged queue history.</p>
               </div>
             </div>
 
             <div class="step">
               <div>
-                <h3>Prefix cancellation recovers lawful execution</h3>
-                <p>If the current queue <var>I</var> is long enough, both it and the first stroke are prefixes of the same certified word. The stroke has length <var>β</var>, so it must equal the first <var>β</var> queue symbols. Delete it, append the rule word selected by its head, cancel the common prefix, and repeat.</p>
-                <p>If a short queue appears early, stop. Nothing after a halt needs interpretation. Hence every global certificate contains a genuine terminating tag execution, even when its unused suffix is nonsense.</p>
+                <h3>Execution</h3>
+                <p>If the current queue has length at least <var>β</var>, it and the next stroke are prefixes of the same certified word. Since the stroke has length <var>β</var>, it equals the first <var>β</var> queue symbols. Delete the stroke, append the rule word selected by its head, cancel the common prefix, and iterate.</p>
+                <p>If the queue is shorter than <var>β</var>, the tag system has halted and the unused certificate suffix is irrelevant. Thus every history equation yields a genuine terminating execution.</p>
               </div>
             </div>
           </div>
 
           <div class="aside">
             <span class="box-label">Reusable source lemma</span>
-            <p>The cancellation step is not peculiar to Neary. For any deletion-width-β tag system, let <var>S</var> be a list of β-letter strokes, <var>C</var>(<var>S</var>) their concatenation, and <var>P</var>(<var>S</var>) the concatenation of the appendants selected by their heads. If</p>
+            <p>For any deletion-width-β tag system, let <var>S</var> be a list of β-letter strokes, <var>C</var>(<var>S</var>) their concatenation, and <var>P</var>(<var>S</var>) the concatenation of the appendants selected by their heads. If</p>
             <div class="formula plain"><var>C</var>(<var>S</var>)<var>F</var> = <var>I</var><var>P</var>(<var>S</var>) &nbsp; and &nbsp; |<var>F</var>| &lt; β,</div>
-            <p>then the tag system halts from <var>I</var>. The proof is the prefix-cancellation induction above. To reuse the source method elsewhere, one need only engineer a word code whose equality (i) forces candidate labels into stroke blocks and (ii) decodes into this certificate. The semantic soundness lemma then applies unchanged; its formal statement is <a href="MatrixMortality/TagQueue.lean"><code>tagHaltsFrom_of_history</code></a>.</p>
+            <p>then the tag system halts from <var>I</var>, by induction with prefix cancellation. To reuse the lemma, a word code must force candidate labels into strokes and decode equality into this certificate. The formal statement is <a href="MatrixMortality/TagQueue.lean"><code>tagHaltsFrom_of_history</code></a>.</p>
           </div>
 
-          <p>The reverse implication records the <var>β</var> symbols deleted at each real tag step. Every reachable queue ends in <span class="word">b</span>, and its length is always 1 modulo <var>β</var>−1. A queue shorter than <var>β</var> must therefore be the one-letter queue <span class="word">b</span>. Reversing the cancellation constructs the required tile word.</p>
+          <p>For the reverse implication, record the <var>β</var> symbols deleted at each tag step. Every reachable queue ends in <span class="word">b</span> and has length 1 modulo <var>β</var>−1. A queue shorter than <var>β</var> is therefore exactly <span class="word">b</span>. Reversing the cancellations constructs a matching tile word.</p>
 
-          <h3>A clean five-pair PCP repair</h3>
-          <p>The matrix theorem already follows from the fixed boundary <var>M</var>, but ordinary PCP can also be repaired without a long unary guard. Add a fresh symbol <span class="word">#</span> and a fifth pair</p>
+          <h3>Fresh-marker terminal pair</h3>
+          <p>An ordinary five-pair PCP instance is obtained by adjoining a fresh symbol <span class="word">#</span> and the pair</p>
           <div class="formula">(<var>M</var><span class="word">#</span>, <span class="word">#</span>).</div>
-          <p>At the first occurrence of <span class="word">#</span>, prefix compatibility of <var>U</var>(<var>w</var>)<var>M</var><span class="word">#</span> and <var>V</var>(<var>w</var>)<span class="word">#</span> forces <var>U</var>(<var>w</var>)<var>M</var> = <var>V</var>(<var>w</var>) exactly. That first occurrence already closes a solution prefix. Call a PCP solution <em>primitive</em> when it is not a concatenation of two shorter nonempty solutions; any material after the first marked prefix would make the whole solution nonprimitive. A fixed-length code, 0↦00, 1↦01, #↦11, returns the construction to a binary alphabet without changing prefix comparability. Every primitive solution uses the fifth pair exactly once and last.</p>
-          <p>This marker step is generic: if the ordinary pairs have no solution by themselves, a fixed-right-boundary equation <var>U</var>(<var>w</var>)<var>s</var> = <var>V</var>(<var>w</var>)<var>t</var> becomes ordinary PCP after adding (<var>s</var>#, <var>t</var>#), and every primitive solution uses the marked pair exactly once and last.</p>
+          <p>Every ordinary upper image ends in 1 and every ordinary lower image ends in 0, so an ordinary-only word cannot solve PCP. At the first terminal pair, prefix compatibility of <var>U</var>(<var>w</var>)<var>M</var><span class="word">#</span> and <var>V</var>(<var>w</var>)<span class="word">#</span> forces <var>U</var>(<var>w</var>)<var>M</var> = <var>V</var>(<var>w</var>). The prefix through that pair is already a solution. Hence a primitive solution, one not decomposable into two nonempty solutions, uses the terminal pair exactly once and last.</p>
+          <p>The fixed-length code 0↦00, 1↦01, #↦11 restores a binary target alphabet while preserving equality, prefix comparability, and primitivity.</p>
+          <p>More generally, if the ordinary pairs have no solution, the fixed-boundary equation <var>U</var>(<var>w</var>)<var>s</var> = <var>V</var>(<var>w</var>)<var>t</var> reduces to PCP by adjoining (<var>s</var>#, <var>t</var>#). Every primitive solution then uses the marked pair exactly once and last.</p>
         </section>
 
         <section id="five-matrices">
-          <p class="section-index">05 · The matrix compiler</p>
-          <h2>Turn equality into annihilation</h2>
-          <p>What remains is to make concatenation happen inside 3 × 3 multiplication and to amplify one zero entry into the zero matrix.</p>
+          <p class="section-index">05 · Matrix reduction</p>
+          <h2>Fixed boundaries and rank one</h2>
 
-          <p>First recode binary symbols as nonzero base-three digits, 0↦1 and 1↦2. For a digit word <var>x</var>, let <var>σ</var>(<var>x</var>) be its base-three value. Nonzero digits prevent leading-zero ambiguity, so <var>σ</var> is injective across words of every length.</p>
+          <p>Recode binary symbols as nonzero ternary digits, 0↦1 and 1↦2. For a digit word <var>x</var>, let <var>σ</var>(<var>x</var>) be its base-three value. Nonzero digits make <var>σ</var> injective across words of unequal as well as equal length.</p>
 
           <div class="matrix-equation" role="img" aria-label="Psi of x y is the upper triangular 3 by 3 matrix with rows 1 sigma y sigma x minus sigma y; 0, 3 to the length y, 3 to the length x minus 3 to the length y; and 0, 0, 3 to the length x">
             <span>Ψ(<var>x</var>,<var>y</var>) =</span>
@@ -917,89 +852,87 @@
             </div>
           </div>
 
-          <p>The entries have been placed so that ordinary matrix multiplication performs word concatenation:</p>
+          <p>Direct multiplication gives:</p>
           <div class="properties">
             <div><strong>Concatenation</strong><br>Ψ(<var>xx′</var>,<var>yy′</var>) = Ψ(<var>x</var>,<var>y</var>)Ψ(<var>x′</var>,<var>y′</var>)</div>
             <div><strong>Equality test</strong><br><var>e</var><sub>1</sub><sup>T</sup>Ψ(<var>x</var>,<var>y</var>)<var>e</var><sub>3</sub> = 0 ⇔ <var>x</var> = <var>y</var></div>
             <div><strong>Nonsingularity</strong><br>det Ψ(<var>x</var>,<var>y</var>) = 3<sup>|<var>x</var>|+|<var>y</var>|</sup> ≠ 0</div>
           </div>
 
-          <p>Let <var>X</var><sub>1</sub>, …, <var>X</var><sub>4</sub> encode the four ordinary word pairs. Write ε for the empty word, encode the fixed boundary by <var>X</var><sub>★</sub> = Ψ(<var>M</var>, ε), and set</p>
+          <p>Let <var>X</var><sub>1</sub>, …, <var>X</var><sub>4</sub> encode the four ordinary word pairs. With ε denoting the empty word, define <var>X</var><sub>★</sub> = Ψ(<var>M</var>, ε) and</p>
           <div class="formula"><var>c</var> = <var>X</var><sub>★</sub><var>e</var><sub>3</sub>, &nbsp; <var>A</var><sub>★</sub> = <var>c e</var><sub>1</sub><sup>T</sup> = <var>X</var><sub>★</sub><var>e</var><sub>3</sub><var>e</var><sub>1</sub><sup>T</sup>.</div>
-          <p>The five mortality generators are <var>X</var><sub>1</sub>, …, <var>X</var><sub>4</sub>, <var>A</var><sub>★</sub>. The first four are nonsingular and upper triangular. The last is a nonzero outer product, hence rank one.</p>
+          <p>The mortality family is {<var>X</var><sub>1</sub>, …, <var>X</var><sub>4</sub>, <var>A</var><sub>★</sub>}. Its ordinary generators are nonsingular and upper triangular. The third coordinate of <var>c</var> is 3<sup>|<var>M</var>|</sup>, so <var>A</var><sub>★</sub> is nonzero and has rank one.</p>
 
-          <h3>A matching word gives a zero product</h3>
+          <h3>Forward implication</h3>
           <p>If <var>w</var> satisfies <var>U</var>(<var>w</var>)<var>M</var> = <var>V</var>(<var>w</var>), the corresponding matrix product <var>X</var><sub><var>w</var></sub> satisfies</p>
           <div class="formula"><var>A</var><sub>★</sub><var>X</var><sub><var>w</var></sub><var>A</var><sub>★</sub> = <var>c</var>(<var>e</var><sub>1</sub><sup>T</sup><var>X</var><sub><var>w</var></sub><var>X</var><sub>★</sub><var>e</var><sub>3</sub>)<var>e</var><sub>1</sub><sup>T</sup> = 0.</div>
-          <p>The boundary matrix plays both bookends. This is where the sixth generator disappears.</p>
+          <p>The same generator supplies both rank-one factors; no separate boundary generator is required.</p>
 
-          <h3>The arbitrary-product converse</h3>
-          <p>A reduction is not sound until every arbitrary product has been classified. A product without <var>A</var><sub>★</sub> is a product of nonsingular matrices, so it is not zero. Any product with <var>t</var> copies of <var>A</var><sub>★</sub> has a unique form</p>
+          <h3>Converse for arbitrary products</h3>
+          <p>A product containing no <var>A</var><sub>★</sub> is nonsingular. A product containing <var>t</var> copies has a unique decomposition</p>
           <div class="formula"><var>P</var><sub>0</sub><var>A</var><sub>★</sub><var>P</var><sub>1</sub><var>A</var><sub>★</sub> ··· <var>A</var><sub>★</sub><var>P</var><sub>t</sub>,</div>
-          <p>where every <var>P</var><sub>j</sub> is an ordinary product. Expanding the rank-one factors collapses the whole matrix word to</p>
+          <p>where every <var>P</var><sub>j</sub> is a possibly empty ordinary product. Expanding the rank-one factors gives</p>
           <div class="formula">(<var>P</var><sub>0</sub><var>c</var>) [∏<sub>1≤<var>j</var>&lt;<var>t</var></sub> <var>e</var><sub>1</sub><sup>T</sup><var>P</var><sub>j</sub><var>c</var>] (<var>e</var><sub>1</sub><sup>T</sup><var>P</var><sub>t</sub>).</div>
-          <p>The exterior column and row are nonzero because the ordinary blocks are nonsingular. With one separator the outer product is nonzero. With two or more, the product vanishes only if an internal scalar vanishes. But each such scalar is exactly the ternary test for some equation <var>U</var>(<var>w</var>)<var>M</var> = <var>V</var>(<var>w</var>).</p>
+          <p>The exterior column and row are nonzero because the ordinary blocks are nonsingular. For <var>t</var> = 1 the product is therefore nonzero. For <var>t</var> ≥ 2 it vanishes exactly when some internal scalar <var>e</var><sub>1</sub><sup>T</sup><var>P</var><sub>j</sub><var>c</var> vanishes. Writing <var>P</var><sub>j</sub> = <var>X</var><sub><var>w</var></sub>, the ternary equality test identifies this condition with <var>U</var>(<var>w</var>)<var>M</var> = <var>V</var>(<var>w</var>).</p>
 
           <div class="aside">
             <span class="box-label">Reusable fixed-boundary compiler</span>
             <p>Let α be any finite source alphabet, let <var>u</var>, <var>v</var>: α → {0,1}<sup>*</sup>, and fix right boundaries <var>s</var>, <var>t</var>. Put <var>X</var><sub><var>a</var></sub> = Ψ(<var>u</var>(<var>a</var>), <var>v</var>(<var>a</var>)), <var>X</var><sub>★</sub> = Ψ(<var>s</var>, <var>t</var>), and <var>A</var><sub>★</sub> = <var>X</var><sub>★</sub><var>e</var><sub>3</sub><var>e</var><sub>1</sub><sup>T</sup>. Then</p>
             <div class="formula plain">{<var>X</var><sub><var>a</var></sub> : <var>a</var>∈α} ∪ {<var>A</var><sub>★</sub>} is mortal &nbsp; ⇔ &nbsp; ∃<var>w</var>∈α<sup>*</sup>: <var>u</var>(<var>w</var>)<var>s</var> = <var>v</var>(<var>w</var>)<var>t</var>.</div>
-            <p>The compiler costs one rank-one generator beyond |α| and needs no prescribed product shape: the fracture formula classifies every word automatically. Its exact machine-checked form is <a href="MatrixMortality/TerminalReduction.lean"><code>absorbedFamilyInt_mortal_iff_terminal_match</code></a>. Endpoint absorption has antecedents; the useful contribution here is its interface with the new four-letter source.</p>
+            <p>The construction uses |α| ordinary generators and one rank-one generator. The fracture formula covers every product word; no witness normal form is assumed. Its machine-checked statement is <a href="MatrixMortality/TerminalReduction.lean"><code>absorbedFamilyInt_mortal_iff_terminal_match</code></a>. Endpoint absorption is prior art; the new input is the four-letter fixed-boundary source.</p>
           </div>
 
           <div class="verdict">
             <span class="box-label">Main result</span>
             <strong>M<sub>3</sub>(5) is undecidable.</strong>
-            <p>It remains undecidable with four nonsingular upper triangular integer generators and one nonzero integer generator of rational rank one.</p>
+            <p>Four generators may be nonsingular upper triangular integer matrices; the fifth may be a nonzero integer matrix of rank one over ℚ.</p>
           </div>
         </section>
 
         <section id="status">
-          <p class="section-index">06 · Status and verification</p>
-          <h2>What is proved, and what is trusted?</h2>
-          <p>The proof has a precise trust boundary. Lean checks every new instance-level implication, from arbitrary tile words through arbitrary five-matrix products. The final undecidability conclusion imports Neary’s established universality theorem.</p>
+          <p class="section-index">06 · Verification and provenance</p>
+          <h2>Formal scope</h2>
 
           <div class="status-grid">
             <div>
-              <b>Machine-checked</b>
+              <b>Formalized reduction</b>
               <p>The four-tile synchronization theorem, queue-history soundness, fresh-marker PCP repair, ternary representation, rank-one compiler, and converse for every five-matrix word.</p>
             </div>
             <div>
-              <b>Standard logical base</b>
-              <p>Lean reports only the usual mathlib foundations: propositional extensionality, classical choice, and quotient soundness. Every generated proof term is checked by Lean’s kernel.</p>
+              <b>Transitive axioms</b>
+              <p>Lean reports <code>propext</code>, <code>Classical.choice</code>, and <code>Quot.sound</code>. The project contains no axiom declarations or admitted proofs.</p>
             </div>
             <div>
-              <b>External theorem</b>
-              <p>Neary’s peer-reviewed Lemma 9 supplies undecidability of the restricted tag family. Its universality compiler has not yet been reconstructed in Lean.</p>
+              <b>External dependency</b>
+              <p>Neary’s peer-reviewed Lemma 9 supplies undecidability of the restricted tag family. Its universality compiler and the final computability wrapper are not formalized.</p>
             </div>
             <div>
-              <b>Independent falsification</b>
-              <p>A separate executable search scoured 20,272,272 arbitrary tile words without finding a mismatch between terminal equations and reconstructed halting histories. This is a bug hunt, not part of the proof.</p>
+              <b>Finite falsifier</b>
+              <p>An independent program checked 20,272,272 bounded arbitrary tile words without finding a terminal-equation mismatch. This computation is not used in the proof.</p>
             </div>
           </div>
 
-          <p>Accordingly, the new instance-level bridge is machine-checked. The full sentence “M<sub>3</sub>(5) is undecidable” combines that bridge with an accepted external universality theorem, exactly as an ordinary paper imports earlier results. A completely closed formal proof would additionally formalize Neary’s machine-to-tag compiler and the computability wrapper.</p>
-
-          <h3>Historical note</h3>
+          <h3>Priority</h3>
           <div class="aside">
-            <p>Neary’s one-version 2013 technical report publicly claimed both four-pair PCP and M<sub>3</sub>(5). The claim was not retained in his refereed 2015 successor, which explicitly left four-pair PCP open, and later literature continued to report the six-matrix bound. No formal withdrawal or accepted independent proof is known.</p>
-            <p>The present argument takes a different route: it proves the fixed-boundary language of the four ordinary 2015 pairs directly, then applies the rank-one endpoint compiler. It is therefore not the first announcement of the number; it is a proof of the previously unestablished case and, to our knowledge, the first valid proof of binary-target four-generator GPCP. The <a href="NOVELTY.md">novelty audit</a> records the search and the deliberately narrow priority claim.</p>
+            <p>Neary’s one-version 2013 technical report claimed both four-pair PCP and M<sub>3</sub>(5). His refereed 2015 successor did not retain the four-pair theorem, explicitly left that case open, and proved only M<sub>3</sub>(6). Later literature retained the six-matrix bound. No formal withdrawal is known.</p>
+            <p>The numerical statement is therefore prior. This proof establishes the fixed-boundary language of the four ordinary 2015 pairs and then applies rank-one endpoint absorption. No accepted proof of M<sub>3</sub>(5) or binary-target GPCP(4) was found. The <a href="NOVELTY.md">novelty audit</a> records the search and qualification.</p>
           </div>
 
           <ul class="artifact-list" aria-label="Proof artifacts">
-            <li><a href="MatrixMortality/NearyEncoding.lean"><b>Lean source compiler</b>Four tiles, tag histories, marked PCP, and composed mortality theorem</a></li>
-            <li><a href="MatrixMortality/TerminalReduction.lean"><b>Lean matrix reduction</b>Arbitrary products and rank-one boundary absorption</a></li>
+            <li><a href="MatrixMortality/NearyEncoding.lean"><b>Source compiler</b>Four tiles, tag histories, marked PCP, and composed mortality theorem</a></li>
+            <li><a href="MatrixMortality/TerminalReduction.lean"><b>Matrix reduction</b>Arbitrary products and rank-one boundary absorption</a></li>
             <li><a href="FOUNDATIONS.md"><b>Trust boundary</b>Kernel, mathlib, axioms, and the remaining external theorem</a></li>
-            <li><a href="REPRODUCIBILITY.md"><b>Reproducibility contract</b>Pinned revisions, hashes, and the one-command clean verification suite</a></li>
-            <li><a href="paper/main.pdf"><b>Technical manuscript</b>Compact theorem-proof presentation and bibliography</a></li>
+            <li><a href="REPRODUCIBILITY.md"><b>Reproducibility</b>Pinned revisions, hashes, and the complete verification command</a></li>
+            <li><a href="paper/main.pdf"><b>Manuscript</b>Theorem-proof presentation and bibliography</a></li>
             <li><a href="AxiomAudit.lean"><b>Axiom audit</b>Transitive assumptions of every headline declaration</a></li>
-            <li><a href="tools/scour_source.py"><b>Independent falsifier</b>Executable exhaustive search over bounded arbitrary tile words</a></li>
+            <li><a href="LintAudit.lean"><b>Lint audit</b>Default mathlib environment linters over the project namespace</a></li>
+            <li><a href="tools/scour_source.py"><b>Finite falsifier</b>Exhaustive search over bounded arbitrary tile words</a></li>
           </ul>
         </section>
 
         <section id="sources">
           <p class="section-index">07 · Sources</p>
-          <h2>The short bibliography</h2>
+          <h2>References</h2>
           <ol class="references">
             <li><span>Turlough Neary, <a href="https://arxiv.org/abs/1312.6700"><cite>Undecidability in Binary Tag Systems and the Post Correspondence Problem for Four Pairs of Words</cite></a>, arXiv:1312.6700v1, 2013. The earlier public M<sub>3</sub>(5) claim, not retained in the refereed successor.</span></li>
             <li><span>Turlough Neary, <a href="https://doi.org/10.4230/LIPIcs.STACS.2015.649"><cite>Undecidability in Binary Tag Systems and the Post Correspondence Problem for Five Pairs of Words</cite></a>, STACS 2015. The universal restricted tag source.</span></li>
@@ -1007,7 +940,7 @@
             <li><span>François Nicolas, <a href="https://arxiv.org/abs/0802.0726"><cite>(Generalized) Post Correspondence Problem and Semi-Thue Systems</cite></a>, 2008. The bounded-GPCP conventions and prior open cases.</span></li>
             <li><span>Vesa Halava, Tero Harju, and Mika Hirvensalo, <a href="https://doi.org/10.1142/S0129054107005066"><cite>Undecidability Bounds for Integer Matrices Using Claus Instances</cite></a>, 2007. Prior rank-one endpoint absorption.</span></li>
             <li><span>Günter Rote, <a href="https://doi.org/10.4230/LIPIcs.MFCS.2025.86"><cite>Probabilistic Finite Automaton Emptiness Is Undecidable for a Fixed Automaton</cite></a>, MFCS 2025. Diagnosis of the terminal-pair flaw and the long-block proposal.</span></li>
-            <li><span>Paul C. Bell, Igor Potapov, and Pavel Semukhin, <a href="https://doi.org/10.1016/j.ic.2021.104736"><cite>On the Mortality Problem</cite></a>, 2021, and Ruiwen Dong, <a href="https://doi.org/10.1145/3636362.3636365"><cite>Recent Advances in Algorithmic Problems for Semigroups</cite></a>, 2023. Modern context.</span></li>
+            <li><span>Paul C. Bell, Igor Potapov, and Pavel Semukhin, <a href="https://doi.org/10.1016/j.ic.2021.104736"><cite>On the Mortality Problem</cite></a>, 2021, and Ruiwen Dong, <a href="https://doi.org/10.1145/3636362.3636365"><cite>Recent Advances in Algorithmic Problems for Semigroups</cite></a>, 2023. Later bounds and survey context.</span></li>
           </ol>
         </section>
       </article>
@@ -1017,7 +950,6 @@
   <footer>
     <div>
       <p>GPT-5.6 Sol · elicited by @eternalism_4eva · 21 July 2026</p>
-      <p>Exact arithmetic throughout. No probabilistic or numerical evidence enters the proof.</p>
     </div>
   </footer>
 </body>
