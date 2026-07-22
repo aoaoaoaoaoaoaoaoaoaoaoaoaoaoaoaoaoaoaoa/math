@@ -92,6 +92,10 @@ assert_xpath_count 1 "($major_sections)[1]/summary/h2[@id='known-stuff' and norm
 assert_xpath_count 1 "($major_sections)[2]/summary/h2[@id='new-stuff' and normalize-space()='New Stuff']"
 assert_xpath_count 1 "($major_sections)[3]/summary/h2[@id='bookkeeping' and normalize-space()='Bookkeeping']"
 
+new_results='//strong[contains(concat(" ", normalize-space(@class), " "), " new-result ")]'
+assert_xpath_count 4 "$new_results[normalize-space()='U★']"
+assert_xpath_count 3 "//table[contains(concat(' ', normalize-space(@class), ' '), ' status-table ')]$new_results[@aria-label='Undecidable; first established in this work']"
+
 formulas='//div[contains(concat(" ", normalize-space(@class), " "), " formula ")]'
 formula_count="$(xpath_count "$formulas")"
 [[ "$formula_count" != 0 ]] || { printf 'publication contains no display mathematics\n' >&2; exit 1; }
