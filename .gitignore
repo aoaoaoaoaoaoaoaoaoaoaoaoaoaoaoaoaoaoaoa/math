@@ -1,0 +1,5 @@
+/.lake/
+/.ruff_cache/
+/paper/*.aux
+/paper/*.log
+/paper/*.synctex.gz

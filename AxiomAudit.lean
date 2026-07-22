@@ -1,0 +1,21 @@
+import MatrixMortality
+
+open MatrixMortality
+
+#print axioms terminal_match_iff_tagHaltsFrom
+#print axioms nearyPCP_solvable_iff_tagHaltsFrom
+#print axioms nearyPCP_primitive_terminal
+#print axioms nearyGPCP_solvable_iff_tagHaltsFrom
+#print axioms nearyGPCPPlus_solvable_iff_tagHaltsFrom
+#print axioms nearyMortalityFamilyInt_mortal_iff_tagHaltsFrom
+#print axioms neary_source_generator_count
+#print axioms neary_morphisms_nonerasing
+#print axioms NearyArithmeticEnvelope.pcp_solvable_iff_halts
+#print axioms NearyArithmeticEnvelope.pcp_primitive_terminal
+#print axioms NearyArithmeticEnvelope.gpcp_solvable_iff_halts
+#print axioms NearyArithmeticEnvelope.gpcpPlus_solvable_iff_halts
+#print axioms NearyArithmeticEnvelope.mortality_iff_halts
+#print axioms nearyMortality_ordinary_det_ne_zero
+#print axioms nearyMortality_ordinary_upperTriangular
+#print axioms nearyMortality_terminal_ne_zero
+#print axioms nearyMortality_terminal_rank_eq_one

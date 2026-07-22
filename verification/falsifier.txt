@@ -1,0 +1,2 @@
+$ uv run --script tools/scour_source.py
+scoured 20,272,272 arbitrary tile words; checked 56 terminal matches and 69 reconstructed halting witnesses
