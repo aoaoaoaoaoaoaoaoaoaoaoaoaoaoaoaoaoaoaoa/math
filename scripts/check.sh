@@ -94,7 +94,7 @@ assert_xpath_count 1 "($major_sections)[3]/summary/h2[@id='bookkeeping' and norm
 
 new_results='//strong[contains(concat(" ", normalize-space(@class), " "), " new-result ")]'
 assert_xpath_count 4 "$new_results[normalize-space()='U★']"
-assert_xpath_count 3 "//table[contains(concat(' ', normalize-space(@class), ' '), ' status-table ')]$new_results[@aria-label='Undecidable; first established in this work']"
+assert_xpath_count 3 "//table[contains(concat(' ', normalize-space(@class), ' '), ' status-table ')]$new_results[@aria-label='Undecidable; newly proved by this argument, to our knowledge']"
 
 formulas='//div[contains(concat(" ", normalize-space(@class), " "), " formula ")]'
 formula_count="$(xpath_count "$formulas")"

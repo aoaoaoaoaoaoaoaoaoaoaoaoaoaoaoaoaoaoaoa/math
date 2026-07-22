@@ -43,7 +43,7 @@
               <ol>
                 <li><a href="#soundness">Soundness</a></li>
                 <li><a href="#source-lemma">Source lemma</a></li>
-                <li><a href="#terminal-pair">Terminal pair</a></li>
+                <li><a href="#terminal-pair">Corrected five-pair PCP</a></li>
               </ol>
             </li>
             <li>
@@ -143,8 +143,8 @@
           <p>Generalized PCP (GPCP) permits fixed boundary words <a href="#ref-nicolas-2008">[Nicolas 2008]</a>. The instance used here has empty left boundaries and asks whether <var>U</var>(<var>w</var>)<var>M</var> = <var>V</var>(<var>w</var>) for a word <var>w</var> over four source letters.</p>
 
           <h3 id="terminal-pair-issue">The terminal-pair issue</h3>
-          <p>Neary’s five-pair construction used a fifth pair as a terminator <a href="#ref-neary-2015">[Neary 2015]</a>. Rote identified an error in its terminal guard and proposed a longer replacement <a href="#ref-rote-2025">[Rote 2025]</a>. Neither terminal pair is used here.</p>
-          <p>The only source theorem imported below is Neary’s restricted tag-system undecidability. No PCP(4) theorem is assumed.</p>
+          <p>Neary’s five-pair construction used a fifth pair as a terminator <a href="#ref-neary-2015">[Neary 2015]</a>. Rote identified an error in its terminal guard and proposed a longer replacement <a href="#ref-rote-2025">[Rote 2025]</a>. Neither Neary’s terminal pair nor Rote’s replacement is used in the GPCP or mortality proof. A fresh-marker pair is introduced later only to obtain an ordinary five-pair PCP corollary.</p>
+          <p>The only external undecidability theorem imported below is Neary’s restricted tag-system undecidability. No PCP(4) theorem is assumed.</p>
         </details>
 
         <details class="major-section">
@@ -203,16 +203,16 @@
             <tbody>
               <tr><th scope="row">1</th><td>D</td><td>D</td><td>D</td><td>D</td><td>D</td><td>D</td></tr>
               <tr><th scope="row">2</th><td>D</td><td>D</td><td>?</td><td>?</td><td>?</td><td>?</td></tr>
-              <tr><th scope="row">3–4</th><td>D</td><td>?</td><td>?</td><td>?</td><td><strong class="new-result" aria-label="Undecidable; first established in this work">U★</strong></td><td>U</td></tr>
+              <tr><th scope="row">3–4</th><td>D</td><td>?</td><td>?</td><td>?</td><td><strong class="new-result" aria-label="Undecidable; newly proved by this argument, to our knowledge">U★</strong></td><td>U</td></tr>
               <tr><th scope="row">5</th><td>D</td><td>?</td><td>?</td><td>U</td><td>U</td><td>U</td></tr>
-              <tr><th scope="row">6–8</th><td>D</td><td>?</td><td><strong class="new-result" aria-label="Undecidable; first established in this work">U★</strong></td><td>U</td><td>U</td><td>U</td></tr>
+              <tr><th scope="row">6–8</th><td>D</td><td>?</td><td><strong class="new-result" aria-label="Undecidable; newly proved by this argument, to our knowledge">U★</strong></td><td>U</td><td>U</td><td>U</td></tr>
               <tr><th scope="row">9–11</th><td>D</td><td>?</td><td>U</td><td>U</td><td>U</td><td>U</td></tr>
-              <tr><th scope="row">12–14</th><td>D</td><td><strong class="new-result" aria-label="Undecidable; first established in this work">U★</strong></td><td>U</td><td>U</td><td>U</td><td>U</td></tr>
+              <tr><th scope="row">12–14</th><td>D</td><td><strong class="new-result" aria-label="Undecidable; newly proved by this argument, to our knowledge">U★</strong></td><td>U</td><td>U</td><td>U</td><td>U</td></tr>
               <tr><th scope="row">≥15</th><td>D</td><td>U</td><td>U</td><td>U</td><td>U</td><td>U</td></tr>
             </tbody>
           </table>
           </div>
-          <p>D means decidable, ? unresolved, and U undecidable. <strong class="new-result">U★</strong> marks cells first established here: (3,5), (4,5), (6,3), (7,3), (8,3), (12,2), (13,2), and (14,2). The first is proved directly; the other seven follow by dimension padding or the established packing reduction.</p>
+          <p>D means decidable, ? unresolved, and U undecidable. <strong class="new-result">U★</strong> marks cells newly proved by this argument, to our knowledge: (3,5), (4,5), (6,3), (7,3), (8,3), (12,2), (13,2), and (14,2). The first is proved directly; the other seven follow by dimension padding or the established packing reduction.</p>
 
           <div>
           <h3 id="four-tiles">A synchronized tag compiler</h3>
@@ -272,7 +272,7 @@
             <p>The equivalence holds when β−1 divides |<var>q</var>| and |<var>q</var>| ≥ β−1. These hypotheses define an arithmetic envelope containing Neary’s compiler outputs.</p>
           </div>
 
-          <p>Neary’s compiler admits computable padding into this envelope <a href="#ref-neary-2015">[Neary 2015]</a>. Its tag-universality lemma is the only external source theorem; no terminal-pair claim is imported.</p>
+          <p>Neary’s Lemma 9 supplies undecidability of the restricted tag family <a href="#ref-neary-2015">[Neary 2015]</a>. The calculation below places a computably padded Table 2 output inside the arithmetic envelope; no terminal-pair claim is imported.</p>
 
           <details class="technical-detail">
             <summary>Padding into the arithmetic envelope</summary>
@@ -290,7 +290,7 @@
                 </mrow>
               </math>
             </div>
-            <p>This lies in Neary’s permitted padding range and makes every exponent in his Table 2 nonnegative. Moreover,</p>
+            <p>This choice makes every variable exponent in Neary’s Table 2 nonnegative, so every specified track still has length <var>s</var>. Increasing <var>s</var> changes only the displayed padding and full copies of the program word. Because that word has length <var>βs</var>, adding full copies does not change the object-length or entry-shift residues modulo <var>β</var> used in Neary’s track-by-track simulation. Thus Table 2 remains valid for this choice. Moreover,</p>
             <div class="formula plain">
               <math display="block">
                 <mrow>
@@ -331,7 +331,7 @@
             <div class="step">
               <div>
                 <h5>History equation</h5>
-                <p>Let <var>S</var> be the forced stroke sequence, <var>C</var>(<var>S</var>) its concatenation, and <var>P</var>(<var>S</var>) the concatenation of the appendants selected by the stroke heads. Decoding and cancelling the initialization gives</p>
+                <p>Appending one final 1 turns the boundary <var>M</var> into the codeword <var>H</var>(<span class="word">b</span>), so injectivity of <var>H</var> decodes the equality. The decoded equality forces the initial stroke to begin with <span class="word">c</span>. If <var>z</var> denotes its remaining <var>β</var>−1 symbols, then <var>z</var> and <var>q</var> are prefixes of the same word. Because <var>q</var> has at least <var>β</var>−1 symbols, <var>z</var> is its length-(<var>β</var>−1) prefix. Cancel this initialization stroke. For the remaining stroke sequence <var>S</var>, let <var>C</var>(<var>S</var>) be its concatenation and <var>P</var>(<var>S</var>) the concatenation of the appendants selected by its stroke heads. The decoded equality becomes</p>
                 <div class="formula plain">
                   <math display="block">
                     <mrow>
@@ -341,6 +341,7 @@
                     </mrow>
                   </math>
                 </div>
+                <p>Here <var>I</var> is the initial queue defined above.</p>
               </div>
             </div>
 
@@ -372,7 +373,8 @@
 
           <p>For the reverse implication, record the <var>β</var> symbols deleted at each tag step. Every reachable queue ends in <span class="word">b</span> and has length 1 modulo <var>β</var>−1. A queue shorter than <var>β</var> is therefore exactly <span class="word">b</span>. Reversing the cancellations constructs a matching tile word.</p>
 
-          <h4 id="terminal-pair">Fresh-marker terminal pair</h4>
+          <details class="technical-detail">
+          <summary><h4 id="terminal-pair">Additional corollary: corrected five-pair PCP</h4></summary>
           <p>An ordinary five-pair PCP instance is obtained by adjoining a fresh symbol <span class="word">#</span> and the pair</p>
           <div class="formula">
             <math display="block">
@@ -384,6 +386,7 @@
           <p>Every ordinary upper image ends in 1 and every ordinary lower image ends in 0, so an ordinary-only word cannot solve PCP. At the first terminal pair, prefix compatibility of <var>U</var>(<var>w</var>)<var>M</var><span class="word">#</span> and <var>V</var>(<var>w</var>)<span class="word">#</span> forces <var>U</var>(<var>w</var>)<var>M</var> = <var>V</var>(<var>w</var>). The prefix through that pair is already a solution. Hence a primitive solution, one not decomposable into two nonempty solutions, uses the terminal pair exactly once and last.</p>
           <p>The fixed-length code 0↦00, 1↦01, #↦11 restores a binary target alphabet while preserving equality, prefix comparability, and primitivity.</p>
           <p>More generally, if the ordinary pairs have no solution, the fixed-boundary equation <var>U</var>(<var>w</var>)<var>s</var> = <var>V</var>(<var>w</var>)<var>t</var> reduces to PCP by adjoining (<var>s</var>#, <var>t</var>#). Every primitive solution then uses the marked pair exactly once and last.</p>
+          </details>
           </div>
 
           <div>
@@ -558,8 +561,8 @@
               <p>Lean reports <code>propext</code>, <code>Classical.choice</code>, and <code>Quot.sound</code>. The project contains no axiom declarations or admitted proofs.</p>
             </div>
             <div>
-              <b><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/main/FORMALIZATION.md#external-boundary">External dependency</a></b>
-              <p>Neary’s peer-reviewed Lemma 9 supplies undecidability of the restricted tag family <a href="#ref-neary-2015">[Neary 2015]</a>. Its universality compiler and the final computability wrapper are not formalized.</p>
+              <b><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/main/FORMALIZATION.md#external-boundary">External source seam</a></b>
+              <p>Neary’s Lemma 9 supplies the undecidable restricted tag family <a href="#ref-neary-2015">[Neary 2015]</a>. This work separately checks that Table 2 admits the required congruent padding. The Table 2 compiler, its padding interface, and the final many-one undecidability argument are not formalized.</p>
             </div>
             <div>
               <b><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/main/tools/scour_source.py">Finite falsifier</a></b>
