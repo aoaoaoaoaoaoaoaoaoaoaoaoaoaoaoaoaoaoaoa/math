@@ -38,6 +38,18 @@ finite falsifier; validates the HTML; and reproduces the committed PDF byte-for-
 The audited theorem dependencies are exactly `propext`, `Classical.choice`, and `Quot.sound`.
 There are no project axioms or admitted proofs.
 
+## Publication
+
+After committing changes to the exposition or its supporting artifacts, run:
+
+```sh
+./scripts/publish.sh
+```
+
+This repository then verifies and pushes itself, builds through Eternalist's
+site contract, deploys, waits for CloudFront, and compares the live article
+with the release build. A normal Git push does not update `eternalist.moe`.
+
 ## Priority
 
 Neary's 2013 preprint claimed the same numerical `M₃(5)` bound through a four-pair PCP theorem

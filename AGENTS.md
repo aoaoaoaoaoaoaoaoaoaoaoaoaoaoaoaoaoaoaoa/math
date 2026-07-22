@@ -62,3 +62,12 @@ Long-form result expositions use the exact top-level partition **Known Stuff** /
 The informality of “Stuff” is intentional. Definitions, inherited results, and prior art belong
 under Known Stuff; New Stuff begins at the first claim proved by the present work. Verification
 of those claims remains under New Stuff. References may follow as publication apparatus.
+
+The contents list must mirror the document hierarchy through `h4`: `h2`, `h3`, and `h4` links
+occupy successive nested list levels, and every linked heading owns its fragment `id`. `h5` is a
+local heading inside a bounded proof component and does not enter the page-level contents.
+
+After changing `index.html` or any artifact it describes, publication is incomplete until
+`scripts/publish.sh` succeeds. This repository owns that release transaction autonomously;
+Eternalist supplies the import, presentation, and deployment contracts. A normal GitHub push
+does not update the live site.

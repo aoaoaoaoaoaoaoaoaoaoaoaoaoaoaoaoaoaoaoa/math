@@ -11,6 +11,8 @@ cd -- "$ROOT"
 export ELAN_HOME
 export SOURCE_DATE_EPOCH
 
+sh -n scripts/publish.sh
+
 while IFS= read -r pdf; do
   note="${pdf%.pdf}.md"
   [[ -f "$note" ]] || { printf 'missing reference synopsis: %s\n' "$note" >&2; exit 1; }
@@ -53,6 +55,33 @@ uv run --script tools/scour_source.py
 
 uvx --from html5validator==0.4.2 html5validator index.html
 xmllint --html --noout index.html
+
+xpath_count() {
+  xmllint --html --xpath "count($1)" index.html 2>/dev/null
+}
+
+check_toc_level() {
+  local level="$1"
+  local path="$2"
+  local id
+  while IFS= read -r id; do
+    if [[ "$(xpath_count "$path/a[@href='#$id']")" != 1 ]]; then
+      printf 'heading missing from contents level %s: %s\n' "$level" "$id" >&2
+      exit 1
+    fi
+  done < <(rg --only-matching "<h$level id=\"[^\"]+\"" index.html | sed 's/.*id="//; s/"$//')
+}
+
+for level in 2 3 4; do
+  [[ "$(xpath_count "//h$level[not(@id)]")" == 0 ]] || {
+    printf 'h%s without fragment id\n' "$level" >&2
+    exit 1
+  }
+done
+check_toc_level 2 '//nav[contains(concat(" ", normalize-space(@class), " "), " contents ")]/ol/li'
+check_toc_level 3 '//nav[contains(concat(" ", normalize-space(@class), " "), " contents ")]/ol/li/ol/li'
+check_toc_level 4 '//nav[contains(concat(" ", normalize-space(@class), " "), " contents ")]/ol/li/ol/li/ol/li'
+
 if rg --line-number '<style([[:space:]>])|style[[:space:]]*=|rel[[:space:]]*=[[:space:]]*"stylesheet"' index.html; then
   printf 'page-local presentation escaped into index.html\n' >&2
   exit 1
