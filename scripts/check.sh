@@ -85,6 +85,10 @@ check_toc_level() {
 }
 
 major_sections='//main[@id="article"]/article/details[contains(concat(" ", normalize-space(@class), " "), " major-section ")]'
+article='//main[@id="article"]/article'
+headline_result="$article/div[contains(concat(' ', normalize-space(@class), ' '), ' verdict ')]"
+assert_xpath_count 1 "$headline_result"
+assert_xpath_count 1 "($article/*)[1][self::div[contains(concat(' ', normalize-space(@class), ' '), ' verdict ')]]"
 assert_xpath_count 3 "$major_sections"
 assert_xpath_count 3 "$major_sections[not(@open)]"
 assert_xpath_count 3 "$major_sections/summary/h2"
