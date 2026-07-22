@@ -4,9 +4,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="author" content="GPT-5.6 Sol; elicited by @eternalism_4eva">
-  <meta name="description" content="Proof that mortality is undecidable for five 3 by 3 integer matrices, with the four-letter word compiler, rank-one reduction, provenance, and formal verification boundary.">
+  <meta name="description" content="Zero-run synchronization proves four-generator fixed-boundary correspondence; a repeated rank-one separator yields five 3 by 3 integer matrices.">
   <meta property="og:title" content="Undecidability of M₃(5)">
-  <meta property="og:description" content="A four-generator fixed-boundary correspondence problem compiled into five 3 by 3 integer matrices.">
+  <meta property="og:description" content="Zero-run synchronization proves GPCP(4); a repeated rank-one boundary separator yields five 3 by 3 integer matrices.">
   <meta property="og:type" content="article">
   <title>Undecidability of M₃(5) | Matrix Mortality</title>
 </head>
@@ -17,7 +17,7 @@
     <div class="masthead-grid">
       <div>
         <h1>Undecidability of M<sub>3</sub>(5)</h1>
-        <p class="dek">A four-generator fixed-boundary correspondence problem reduces to mortality of five 3 × 3 integer matrices.</p>
+        <p class="dek">Zero-run synchronization proves a four-generator fixed-boundary correspondence theorem; a repeated rank-one separator compiles it into five 3 × 3 matrices.</p>
         <p class="byline">GPT-5.6 Sol · elicited by <a href="https://x.com/eternalism_4eva">@eternalism_4eva</a></p>
       </div>
       <aside class="result-card" aria-label="Theorem summary">
@@ -43,6 +43,7 @@
         <li>
           <a href="#new-stuff">New Stuff</a>
           <ol>
+            <li><a href="#source-distinction">GPCP(4), not PCP(4)</a></li>
             <li><a href="#result">Result and consequences</a></li>
             <li>
               <a href="#four-tiles">Synchronized tag compiler</a>
@@ -60,15 +61,16 @@
                 <li><a href="#boundary-compiler">Boundary compiler</a></li>
               </ol>
             </li>
-            <li>
-              <a href="#status">Verification and provenance</a>
-              <ol>
-                <li><a href="#priority">Priority</a></li>
-              </ol>
-            </li>
           </ol>
         </li>
-        <li><a href="#sources">References</a></li>
+        <li>
+          <a href="#bookkeeping">Bookkeeping</a>
+          <ol>
+            <li><a href="#status">Verification and provenance</a></li>
+            <li><a href="#priority">Priority</a></li>
+            <li><a href="#sources">References</a></li>
+          </ol>
+        </li>
       </ol>
     </nav>
 
@@ -111,11 +113,22 @@
 
           <h3 id="terminal-pair-issue">The terminal-pair issue</h3>
           <p>Neary’s five-pair construction used a fifth pair as a terminator <a href="#ref-neary-2015">[Neary 2015]</a>. Rote identified an error in its terminal guard and proposed a longer replacement <a href="#ref-rote-2025">[Rote 2025]</a>. Neither terminal pair is used here.</p>
-          <p>The prior results used by this article end at Neary’s restricted tag-system undecidability. The next section proves directly that his first four word pairs recognize halting under a fixed right boundary <var>M</var>, producing the four-generator GPCP source required by the matrix reduction.</p>
+          <p>The only source theorem imported below is Neary’s restricted tag-system undecidability. No PCP(4) theorem is assumed.</p>
         </section>
 
         <section>
           <h2 id="new-stuff">New Stuff</h2>
+
+          <h3 id="source-distinction">GPCP(4), not PCP(4)</h3>
+          <p>Neary’s 2013 preprint claimed ordinary PCP with four pairs, asking for <var>U</var>(<var>w</var>) = <var>V</var>(<var>w</var>), and made one erasing pair participate in both simulation and termination <a href="#ref-neary-2013">[Neary 2013]</a>. That theorem was not retained in the refereed successor, which proved five-pair PCP and left the four-pair case open <a href="#ref-neary-2015">[Neary 2015]</a>.</p>
+
+          <p>This work retains the four nonterminal pairs from the published construction and moves termination into a fixed right boundary:</p>
+          <div class="formula plain"><var>U</var>(<var>w</var>)<var>M</var> = <var>V</var>(<var>w</var>), &nbsp; <var>M</var> = <span class="word">1 0<sup>β</sup></span>.</div>
+          <p>This is GPCP(4). The boundary is punctuation, not a selectable pair, and all eight morphism images are nonempty. Ordinary PCP(4) is not assumed and remains unresolved in the literature audited here.</p>
+
+          <p>The new converse applies to arbitrary tile words. Zero-run synchronization forces one rule tile followed by exactly <var>β</var>−1 deletion tiles; each block decodes as a <var>β</var>-symbol tag stroke; global equality becomes a queue-history certificate; prefix cancellation reconstructs lawful tag steps until the first short queue. Malformed words are excluded by this global invariant, not by assuming that every wrong local choice eventually mismatches.</p>
+
+          <p>GPCP(4) is sufficient for mortality. Four payload matrices and one repeated rank-one boundary separator give M<sub>3</sub>(5). Rank-one endpoint absorption is prior art <a href="#ref-hhh-2007">[Halava–Harju–Hirvensalo 2007]</a>; the new ingredient is the proved four-letter fixed-boundary source.</p>
 
           <h3 id="result">Result and consequences</h3>
           <p>The source and matrix reductions below prove M<sub>3</sub>(5). Substituting 5 = 2·2 + 1 and 5 = 1·4 + 1 into the established packing theorem then gives M<sub>6</sub>(3) and M<sub>12</sub>(2). The independent M<sub>5</sub>(4) bound is unchanged. The resulting known undecidability antichain is therefore</p>
@@ -288,30 +301,33 @@
             <p>Four generators may be nonsingular upper triangular integer matrices; the fifth may be a nonzero integer matrix of rank one over ℚ.</p>
           </div>
           </div>
+        </section>
 
-          <div>
+        <section>
+          <h2 id="bookkeeping">Bookkeeping</h2>
+
           <h3 id="status">Verification and provenance</h3>
 
           <div class="status-grid">
             <div>
-              <b>Formalized reduction</b>
+              <b><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/main/FORMALIZATION.md#checked-scope">Formalized reduction</a></b>
               <p>The four-tile synchronization theorem, queue-history soundness, fresh-marker PCP repair, ternary representation, rank-one compiler, and converse for every five-matrix word.</p>
             </div>
             <div>
-              <b>Transitive axioms</b>
+              <b><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/main/verification/axioms.txt">Transitive axioms</a></b>
               <p>Lean reports <code>propext</code>, <code>Classical.choice</code>, and <code>Quot.sound</code>. The project contains no axiom declarations or admitted proofs.</p>
             </div>
             <div>
-              <b>External dependency</b>
+              <b><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/main/FORMALIZATION.md#external-boundary">External dependency</a></b>
               <p>Neary’s peer-reviewed Lemma 9 supplies undecidability of the restricted tag family <a href="#ref-neary-2015">[Neary 2015]</a>. Its universality compiler and the final computability wrapper are not formalized.</p>
             </div>
             <div>
-              <b>Finite falsifier</b>
+              <b><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/main/tools/scour_source.py">Finite falsifier</a></b>
               <p>An independent program checked 20,272,272 bounded arbitrary tile words without finding a terminal-equation mismatch. This computation is not used in the proof.</p>
             </div>
           </div>
 
-          <h4 id="priority">Priority</h4>
+          <h3 id="priority">Priority</h3>
           <div class="aside">
             <p>Neary’s one-version 2013 technical report claimed both four-pair PCP and M<sub>3</sub>(5) <a href="#ref-neary-2013">[Neary 2013]</a>. His refereed successor did not retain the four-pair theorem, explicitly left that case open, and proved only M<sub>3</sub>(6) <a href="#ref-neary-2015">[Neary 2015]</a>. Later literature retained the six-matrix bound <a href="#ref-bell-2021">[Bell–Potapov–Semukhin 2021]</a> <a href="#ref-dong-2023">[Dong 2023]</a>. No formal withdrawal is known.</p>
             <p>The numerical statement is therefore prior. This proof establishes the fixed-boundary language of the four ordinary 2015 pairs and then applies rank-one endpoint absorption. No accepted proof of M<sub>3</sub>(5) or binary-target GPCP(4) was found. The repository’s <a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/main/NOVELTY.md">novelty audit</a> records the search and qualification.</p>
@@ -320,11 +336,8 @@
           <ul class="artifact-list" aria-label="Proof artifacts">
             <li><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math"><b>Complete source repository</b>Manuscript, Lean development, verification suite, falsifier, references, and version history</a></li>
           </ul>
-          </div>
-        </section>
 
-        <section>
-          <h2 id="sources">References</h2>
+          <h3 id="sources">References</h3>
           <ol class="references">
             <li id="ref-neary-2013"><span>Turlough Neary, <a href="https://arxiv.org/abs/1312.6700"><cite>Undecidability in Binary Tag Systems and the Post Correspondence Problem for Four Pairs of Words</cite></a>, arXiv:1312.6700v1, 2013. The earlier public M<sub>3</sub>(5) claim, not retained in the refereed successor.</span></li>
             <li id="ref-neary-2015"><span>Turlough Neary, <a href="https://doi.org/10.4230/LIPIcs.STACS.2015.649"><cite>Undecidability in Binary Tag Systems and the Post Correspondence Problem for Five Pairs of Words</cite></a>, STACS 2015. The universal restricted tag source.</span></li>
