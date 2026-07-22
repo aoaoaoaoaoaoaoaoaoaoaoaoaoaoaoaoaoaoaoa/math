@@ -214,6 +214,7 @@ with a complete arbitrary-word converse.
 | `Undecidability/NearyCompiler.lean` | exact Table 2 words, tracks, padding, and arithmetic envelope |
 | `Undecidability/NearySimulation.lean` | traversal semantics of raw, bit, epsilon, and halting objects |
 | `Undecidability/NearyData.lean` | garbage calculus, token invariant, and ordinary cyclic pulses |
+| `Undecidability/NearyExecution.lean` | literal initialization, nonfiring execution, first-firing extraction, and halting-seed entry |
 | `Undecidability/NearyProblems.lean` | canonical `Fin 4` and `Fin 5` target instances |
 | `Undecidability/PairedProblems.lean` | canonical four-matrix target instance and structural promises |
 | `Undecidability/BinaryProblems.lean` | canonical structured `Z₆(2)` instance |
@@ -265,6 +266,11 @@ with a complete arbitrary-word converse.
 | Two-tag executions reach their cyclic firing phase | `CyclicTag.reaches_firing_phase` |
 | A woven compiler word emits its prescribed track | `read_wholeAppendant_track` |
 | One arbitrary ordinary cyclic pulse is simulated | `read_next_dataBit` |
+| Literal Neary initialization reaches the token invariant | `read_initialQueue` |
+| Every nonfiring cyclic execution is simulated | `read_avoidingReaches` |
+| A run reaching the distinguished pulse reaches its first such pulse | `read_until_firing` |
+| The distinguished pulse appends the halting seed | `read_to_haltingSeed` |
+| Exact-empty firing leaves only junk before the seed | `read_exact_firing_to_haltingSeed` |
 
 ## Logical Foundation
 
@@ -301,9 +307,13 @@ On Neary's side, Lean defines the exact Table 2 tracks and their computable padd
 that the whole `c`-appendant has length `βs`, ends in `b`, induces the required initial queue, and
 inhabits the arithmetic envelope. Fixed-stride execution then verifies every raw, epsilon, zero,
 ordinary-one, and distinguished-one object. The semantic data layer permits arbitrary garbage
-prefixes and proves that every nonhalting cyclic-tag pulse produces the correct data update while
-preserving the garbage reserve. The initial-track execution, distinguished halting cascade, and
-global no-spurious-halting converse remain open. The chosen congruent padding gives
+prefixes and proves that every nonfiring cyclic-tag execution produces the correct data update
+while preserving the garbage reserve. Literal initialization reaches that invariant. Any cyclic
+run ending at a distinguished true pulse is cut at its first such pulse; the corresponding
+restricted-tag execution consumes the true object and appends the seed `b u^(s−1)`. In the
+exact-empty case, only junk remains before the seed, and a separate theorem transports that junk
+behind the protected seed. The post-seed traversal to all-`b` data, descent below `β`, and global
+no-spurious-halting converse remain open. The chosen congruent padding gives
 
 ```text
 q.length = (xβ + 1)(β−1),

@@ -7,6 +7,7 @@ import MatrixMortality.ScheduledBinary
 import MatrixMortality.ScheduledBinaryRank
 import MatrixMortality.Undecidability.BinaryProblems
 import MatrixMortality.Undecidability.NearyData
+import MatrixMortality.Undecidability.NearyExecution
 import MatrixMortality.Undecidability.NearyProblems
 import MatrixMortality.Undecidability.PairedProblems
 import MatrixMortality.Undecidability.PrefixProblems

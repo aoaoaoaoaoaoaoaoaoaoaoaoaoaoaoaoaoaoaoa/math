@@ -635,9 +635,9 @@ theorem ordinaryBitEmission_has_junk {period : Nat} (system : CyclicTag period)
 /-- Uniform traversal of an ordinary, nonhalting cyclic data bit. -/
 theorem read_bitToken {period : Nat} (system : CyclicTag period) (input : List Bool)
     (haltPhase instruction : Fin period) (period_pos : 0 < period)
-    (not_halting : instruction ≠ haltPhase)
     (appendant_nonempty_at_zero : instruction.val = 0 → system.appendant instruction ≠ [])
-    (value : Bool) (rest : List TagLetter) (rest_long : deletionWidth period ≤ rest.length) :
+    (value : Bool) (not_halting : value = true → instruction ≠ haltPhase)
+    (rest : List TagLetter) (rest_long : deletionWidth period ≤ rest.length) :
     TagReaches (deletionWidth period) (compiledOutput system input haltPhase period_pos)
       ((dataTokenWord system input haltPhase period_pos (.bit value) ++ rest).drop
         (objectEntryPhase instruction).val)
@@ -650,7 +650,7 @@ theorem read_bitToken {period : Nat} (system : CyclicTag period) (input : List B
         read_zeroToken system input haltPhase instruction period_pos rest rest_long
   | true =>
       simpa [ordinaryBitEmission] using
-        read_oneToken system input haltPhase instruction period_pos not_halting
+        read_oneToken system input haltPhase instruction period_pos (not_halting rfl)
           appendant_nonempty_at_zero rest rest_long
 
 theorem dataTokenWord_bit_long {period : Nat} (system : CyclicTag period)
@@ -676,9 +676,9 @@ theorem dataTokenWord_bit_long {period : Nat} (system : CyclicTag period)
 /-- Consume all garbage before the next data bit, then simulate that cyclic-tag transition. -/
 theorem read_dataPulse {period : Nat} (system : CyclicTag period) (input : List Bool)
     (haltPhase instruction : Fin period) (period_pos : 0 < period)
-    (not_halting : instruction ≠ haltPhase)
     (appendant_nonempty_at_zero : instruction.val = 0 → system.appendant instruction ≠ [])
-    (leading : List JunkAtom) (value : Bool) (tail : List DataToken)
+    (leading : List JunkAtom) (value : Bool)
+    (not_halting : value = true → instruction ≠ haltPhase) (tail : List DataToken)
     (tailAtom : JunkAtom) (tail_has_junk : .junk tailAtom ∈ tail) :
     ∃ emittedLeading : List JunkAtom,
       TagReaches (deletionWidth period) (compiledOutput system input haltPhase period_pos)
@@ -721,8 +721,8 @@ theorem read_dataPulse {period : Nat} (system : CyclicTag period) (input : List 
       leadingEmission, List.append_assoc] using leadingRead
   have extended_long : deletionWidth period ≤ (tailWord ++ leadingEmission).length :=
     tail_long.trans (by simp)
-  have bitRead := read_bitToken system input haltPhase instruction period_pos not_halting
-    appendant_nonempty_at_zero value (tailWord ++ leadingEmission) extended_long
+  have bitRead := read_bitToken system input haltPhase instruction period_pos
+    appendant_nonempty_at_zero value not_halting (tailWord ++ leadingEmission) extended_long
   let nextInstruction := CyclicTag.shift instruction 1
   let bitEmission :=
     encodeData system input haltPhase period_pos
@@ -789,7 +789,27 @@ theorem exists_mem {tokens : List DataToken} (ends : EndsInJunk tokens) :
       obtain ⟨atom, member⟩ := ih
       exact ⟨atom, by simp [member]⟩
 
+/-- Appending a nonempty junk code preserves the terminal-junk invariant. -/
+theorem append_junk (tokens : List DataToken) (code : List JunkAtom)
+    (tokens_end : EndsInJunk tokens) : EndsInJunk (tokens ++ code.map .junk) := by
+  by_cases code_empty : code = []
+  · simpa [code_empty] using tokens_end
+  · exact prepend tokens (junk_map code_empty)
+
 end EndsInJunk
+
+/-- A token stream with no data bits is uniquely a stream of junk atoms. -/
+theorem exists_junkCode_of_dataBits_nil (tokens : List DataToken)
+    (bits_empty : dataBits tokens = []) :
+    ∃ code : List JunkAtom, tokens = code.map .junk := by
+  induction tokens with
+  | nil => exact ⟨[], rfl⟩
+  | cons token tokens ih =>
+      cases token with
+      | bit value => simp [dataBits] at bits_empty
+      | junk atom =>
+          obtain ⟨code, rfl⟩ := ih bits_empty
+          exact ⟨atom :: code, rfl⟩
 
 /-- Token streams used at macro boundaries retain a final garbage reserve. -/
 structure StableData (tokens : List DataToken) : Prop where
@@ -841,10 +861,10 @@ theorem split_first_dataBit {tokens : List DataToken} (ends : EndsInJunk tokens)
 /-- One ordinary pulse preserves the token invariant and realizes the cyclic-tag data update. -/
 theorem read_next_dataBit {period : Nat} (system : CyclicTag period) (input : List Bool)
     (haltPhase instruction : Fin period) (period_pos : 0 < period)
-    (not_halting : instruction ≠ haltPhase)
     (appendant_nonempty_at_zero : instruction.val = 0 → system.appendant instruction ≠ [])
     (tokens : List DataToken) (stable : StableData tokens) (value : Bool) (bits : List Bool)
-    (bits_eq : dataBits tokens = value :: bits) :
+    (bits_eq : dataBits tokens = value :: bits)
+    (not_halting : value = true → instruction ≠ haltPhase) :
     ∃ nextTokens : List DataToken,
       StableData nextTokens ∧
         dataBits nextTokens = bits ++ (if value then system.appendant instruction else []) ∧
@@ -858,8 +878,8 @@ theorem read_next_dataBit {period : Nat} (system : CyclicTag period) (input : Li
     split_first_dataBit stable.endsInJunk value bits bits_eq
   obtain ⟨tailAtom, tail_has_junk⟩ := EndsInJunk.exists_mem tail_ends
   obtain ⟨emittedLeading, read⟩ :=
-    read_dataPulse system input haltPhase instruction period_pos not_halting
-      appendant_nonempty_at_zero leading value tail tailAtom tail_has_junk
+    read_dataPulse system input haltPhase instruction period_pos appendant_nonempty_at_zero
+      leading value not_halting tail tailAtom tail_has_junk
   let emission := ordinaryBitEmission system input instruction value
   let nextTokens := tail ++ emittedLeading.map .junk ++ emission
   have next_ends : EndsInJunk nextTokens := by

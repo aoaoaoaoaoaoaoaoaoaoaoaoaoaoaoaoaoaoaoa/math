@@ -101,10 +101,63 @@ def next {period : Nat} (system : CyclicTag period) : Config period → Option (
         { data := tail ++ if bit then system.appendant phase else []
           phase := shift phase 1 }
 
+/-- A configuration whose leading true bit selects the distinguished program phase. -/
+def FiresAt {period : Nat} (haltPhase : Fin period) (config : Config period) : Prop :=
+  ∃ tail, config.data = true :: tail ∧ config.phase = haltPhase
+
+/-- One cyclic-tag step taken strictly before a distinguished true pulse. -/
+inductive AvoidingStep {period : Nat} (system : CyclicTag period) (haltPhase : Fin period) :
+    Config period → Config period → Prop
+  | advance (phase : Fin period) (value : Bool) (tail : List Bool)
+      (not_firing : value = true → phase ≠ haltPhase) :
+      AvoidingStep system haltPhase
+        { data := value :: tail, phase }
+        { data := tail ++ if value then system.appendant phase else []
+          phase := shift phase 1 }
+
+/-- Reflexive-transitive cyclic-tag execution containing no distinguished true pulse. -/
+def AvoidingReaches {period : Nat} (system : CyclicTag period) (haltPhase : Fin period) :
+    Config period → Config period → Prop :=
+  Relation.ReflTransGen (AvoidingStep system haltPhase)
+
 /-- Execute exactly `steps` transitions, failing if the dataword becomes empty too soon. -/
 def run {period : Nat} (system : CyclicTag period) : Nat → Config period → Option (Config period)
   | 0, config => some config
   | steps + 1, config => system.next config >>= system.run steps
+
+/-- Any run ending at a distinguished true pulse has a first such pulse. -/
+theorem exists_avoidingReaches_firing_of_run {period : Nat} (system : CyclicTag period)
+    (haltPhase : Fin period) (steps : Nat) (initial final : Config period)
+    (execution : system.run steps initial = some final) (final_fires : FiresAt haltPhase final) :
+    ∃ firing,
+      system.AvoidingReaches haltPhase initial firing ∧ FiresAt haltPhase firing := by
+  induction steps generalizing initial with
+  | zero =>
+      have initial_eq : initial = final := by
+        simpa [run] using Option.some.inj execution
+      exact ⟨initial, Relation.ReflTransGen.refl, initial_eq ▸ final_fires⟩
+  | succ steps ih =>
+      by_cases initial_fires : FiresAt haltPhase initial
+      · exact ⟨initial, Relation.ReflTransGen.refl, initial_fires⟩
+      · obtain ⟨data, phase⟩ := initial
+        cases data with
+        | nil => simp [run, next] at execution
+        | cons value tail =>
+            let successor : Config period :=
+              { data := tail ++ if value then system.appendant phase else []
+                phase := shift phase 1 }
+            have remaining : system.run steps successor = some final := by
+              simpa [run, next, successor] using execution
+            obtain ⟨firing, later, fires⟩ := ih successor remaining
+            have not_firing : value = true → phase ≠ haltPhase := by
+              intro value_true phase_eq
+              apply initial_fires
+              exact ⟨tail, by simp [value_true], phase_eq⟩
+            have first : AvoidingStep system haltPhase
+                { data := value :: tail, phase }
+                successor := by
+              exact .advance phase value tail not_firing
+            exact ⟨firing, Relation.ReflTransGen.head first later, fires⟩
 
 theorem run_add {period : Nat} (system : CyclicTag period) (m n : Nat)
     (config : Config period) :

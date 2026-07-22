@@ -296,4 +296,70 @@ theorem sampleHeads_weave_slice {α : Type*} {period columns : Nat} (period_pos 
   simpa [trackIndex, column, Nat.add_comm, Nat.add_left_comm, Nat.add_assoc,
     Nat.mul_add, Nat.mul_comm] using prescribed
 
+/-- Rotate a track's repeated head padding through one deterministic terminal-letter step. -/
+theorem tagReaches_rotate_terminal {α : Type*} (width : Nat) (width_pos : 0 < width)
+    (output : α → List α) (letter : α) (track : List α)
+    (track_long : width ≤ track.length)
+    (prefix_eq : track.take (width - 1) = List.replicate (width - 1) letter)
+    (terminal :
+      track.getLast (List.ne_nil_of_length_pos (width_pos.trans_le track_long)) = letter)
+    (letter_output : output letter = [letter]) :
+    TagReaches width output
+      ([letter] ++ spell output track.dropLast)
+      (spell output (track.drop (width - 1))) := by
+  let front := track.dropLast
+  let middle := front.drop (width - 1)
+  have front_length : front.length = track.length - 1 := List.length_dropLast track
+  have prefix_fits : width - 1 ≤ front.length := by
+    rw [front_length]
+    omega
+  have front_prefix : front.take (width - 1) = List.replicate (width - 1) letter := by
+    change track.dropLast.take (width - 1) = _
+    rw [List.dropLast_eq_take, List.take_take, Nat.min_eq_left]
+    · exact prefix_eq
+    · omega
+  have front_decomposition :
+      front = List.replicate (width - 1) letter ++ middle := by
+    rw [← front_prefix]
+    exact (List.take_append_drop (width - 1) front).symm
+  have track_decomposition : front ++ [letter] = track := by
+    simpa [front, terminal] using
+      List.dropLast_append_getLast
+        (List.ne_nil_of_length_pos (width_pos.trans_le track_long))
+  have source_shape :
+      [letter] ++ spell output front =
+        List.replicate width letter ++ spell output middle := by
+    rw [front_decomposition, spell_append]
+    have spell_replicate :
+        spell output (List.replicate (width - 1) letter) =
+          List.replicate (width - 1) letter := by
+      induction width - 1 with
+      | zero => rfl
+      | succ count ih => simp [List.replicate_succ, spell, letter_output, ih]
+    rw [spell_replicate]
+    have replicate_width :
+        List.replicate width letter = letter :: List.replicate (width - 1) letter := by
+      conv_lhs =>
+        rw [show width = (width - 1) + 1 by omega]
+        rw [List.replicate_succ]
+    rw [replicate_width]
+    simp [List.append_assoc]
+  have source_long : width ≤ ([letter] ++ spell output front).length := by
+    rw [source_shape]
+    simp
+  have step := tagReaches_one width width_pos output
+    ([letter] ++ spell output front) source_long
+  have source_head :
+      ([letter] ++ spell output front).get ⟨0, width_pos.trans_le source_long⟩ = letter := by
+    simp
+  rw [source_head, letter_output, source_shape] at step
+  have target_shape :
+      spell output (track.drop (width - 1)) = spell output middle ++ [letter] := by
+    rw [← track_decomposition]
+    rw [List.drop_append_of_le_length prefix_fits]
+    rw [spell_append]
+    simp [middle, spell, letter_output]
+  rw [target_shape, source_shape]
+  simpa using step
+
 end MatrixMortality.Undecidability
