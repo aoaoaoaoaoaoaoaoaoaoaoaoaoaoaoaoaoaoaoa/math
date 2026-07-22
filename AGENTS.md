@@ -53,3 +53,12 @@ from preprints, superseded versions, and withdrawn or erroneous claims.
 color, layout, responsive behavior, and print presentation through its central house styles.
 Use only the semantic class hooks defined by Eternalist's dense-publication profile; change that
 shared contract at its owner rather than creating page-local presentation.
+
+Eyebrows are forbidden unless explicitly requested. Do not add kickers, supertitles, numbered
+pre-headings, category copy above titles, or other small text whose function is to occupy visual
+space. Every surviving label must change the interpretation of the object it labels.
+
+Long-form result expositions use the exact top-level partition **Known Stuff** / **New Stuff**.
+The informality of “Stuff” is intentional. Definitions, inherited results, and prior art belong
+under Known Stuff; New Stuff begins at the first claim proved by the present work. Verification
+of those claims remains under New Stuff. References may follow as publication apparatus.

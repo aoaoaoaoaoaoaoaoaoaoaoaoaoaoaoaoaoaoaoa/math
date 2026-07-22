@@ -57,6 +57,10 @@ if rg --line-number '<style([[:space:]>])|style[[:space:]]*=|rel[[:space:]]*=[[:
   printf 'page-local presentation escaped into index.html\n' >&2
   exit 1
 fi
+if rg --line-number -i 'eyebrow|section-index|class="tag([[:space:]]|")' index.html; then
+  printf 'forbidden eyebrow escaped into index.html\n' >&2
+  exit 1
+fi
 while IFS= read -r href; do
   case "$href" in
     http://*|https://*|mailto:*) continue ;;
