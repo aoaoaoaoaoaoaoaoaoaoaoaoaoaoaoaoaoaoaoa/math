@@ -64,6 +64,11 @@ prior art belong under Known Stuff; New Stuff begins at the first claim proved b
 work and contains its proof and consequences. Bookkeeping owns validation, provenance, artifact
 links, priority qualifications, and references.
 
+Each canonical top-level section is a native `<details>` disclosure, closed by default, with its
+real `h2` inside the `summary`. Do not replace this with JavaScript, synthetic buttons, or
+presentational concealment. Subsection fragment links must remain capable of revealing their
+closed ancestor, and print must expose all section contents.
+
 The contents list must mirror the document hierarchy through `h4`: `h2`, `h3`, and `h4` links
 occupy successive nested list levels, and every linked heading owns its fragment `id`. `h5` is a
 local heading inside a bounded proof component and does not enter the page-level contents.

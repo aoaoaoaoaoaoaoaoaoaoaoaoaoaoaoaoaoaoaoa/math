@@ -60,6 +60,18 @@ xpath_count() {
   xmllint --html --xpath "count($1)" index.html 2>/dev/null
 }
 
+assert_xpath_count() {
+  local expected="$1"
+  local path="$2"
+  local actual
+  actual="$(xpath_count "$path")"
+  [[ "$actual" == "$expected" ]] || {
+    printf 'unexpected HTML structure: count(%s) = %s, expected %s\n' \
+      "$path" "$actual" "$expected" >&2
+    exit 1
+  }
+}
+
 check_toc_level() {
   local level="$1"
   local path="$2"
@@ -71,6 +83,14 @@ check_toc_level() {
     fi
   done < <(rg --only-matching "<h$level id=\"[^\"]+\"" index.html | sed 's/.*id="//; s/"$//')
 }
+
+major_sections='//main[@id="article"]/article/details[contains(concat(" ", normalize-space(@class), " "), " major-section ")]'
+assert_xpath_count 3 "$major_sections"
+assert_xpath_count 3 "$major_sections[not(@open)]"
+assert_xpath_count 3 "$major_sections/summary/h2"
+assert_xpath_count 1 "($major_sections)[1]/summary/h2[@id='known-stuff' and normalize-space()='Known Stuff']"
+assert_xpath_count 1 "($major_sections)[2]/summary/h2[@id='new-stuff' and normalize-space()='New Stuff']"
+assert_xpath_count 1 "($major_sections)[3]/summary/h2[@id='bookkeeping' and normalize-space()='Bookkeeping']"
 
 for level in 2 3 4; do
   [[ "$(xpath_count "//h$level[not(@id)]")" == 0 ]] || {
