@@ -45,3 +45,11 @@ canonical source and DOI, retrieval date, SHA-256 digest, the precise results fo
 on it, and any corrections, defects, version hazards, or unresolved audit obligations. Maintain
 `references/README.md` as the local bibliography and distinguish peer-reviewed publications
 from preprints, superseded versions, and withdrawn or erroneous claims.
+
+## Publication seam
+
+`index.html` is presentation-free semantic source for `../eternalist.moe`. It must contain no
+`<style>` element, inline `style` attribute, or stylesheet link. Eternalist owns typography,
+color, layout, responsive behavior, and print presentation through its central house styles.
+Use only the semantic class hooks defined by Eternalist's dense-publication profile; change that
+shared contract at its owner rather than creating page-local presentation.

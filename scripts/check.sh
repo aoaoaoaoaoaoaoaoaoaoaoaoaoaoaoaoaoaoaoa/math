@@ -53,6 +53,10 @@ uv run --script tools/scour_source.py
 
 uvx --from html5validator==0.4.2 html5validator index.html
 xmllint --html --noout index.html
+if rg --line-number '<style([[:space:]>])|style[[:space:]]*=|rel[[:space:]]*=[[:space:]]*"stylesheet"' index.html; then
+  printf 'page-local presentation escaped into index.html\n' >&2
+  exit 1
+fi
 while IFS= read -r href; do
   case "$href" in
     http://*|https://*|mailto:*) continue ;;
