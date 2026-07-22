@@ -12,8 +12,10 @@ namespace MatrixMortality
 
 open scoped Matrix
 
+/-- The first standard basis vector `e₁`. -/
 def headBasis (R : Type*) [Semiring R] : Fin 3 → R := Pi.single 0 1
 
+/-- The third standard basis vector `e₃`. -/
 def tailBasis (R : Type*) [Semiring R] : Fin 3 → R := Pi.single 2 1
 
 theorem headBasis_ne_zero (R : Type*) [Semiring R] [Nontrivial R] : headBasis R ≠ 0 := by
@@ -94,9 +96,11 @@ theorem bridgeScalar_tileProduct {α : Type*} (u v : α → List Bool)
     Matrix.mulVec_single, mul_one]
   exact pcpMatrix_top_right_eq_zero_iff_rat _ _
 
+/-- A labelled family is mortal when a nonempty generator word multiplies to zero. -/
 def IsMortal {α M : Type*} [MonoidWithZero M] (generators : α → M) : Prop :=
   ∃ word : List α, word ≠ [] ∧ (word.map generators).prod = 0
 
+/-- The rational family of ordinary PCP matrices and one absorbed terminal separator. -/
 def absorbedFamily {α : Type*} (u v : α → List Bool) (uₜ vₜ : List Bool) :
     Option α → Matrix (Fin 3) (Fin 3) ℚ :=
   separatedGenerator (terminalGenerator uₜ vₜ) (fun i => pcpMatrix ℚ (u i) (v i))
@@ -163,6 +167,7 @@ theorem absorbedFamily_mortal_iff_terminal_match {α : Type*} (u v : α → List
 def castMatrix (M : Matrix (Fin 3) (Fin 3) ℤ) : Matrix (Fin 3) (Fin 3) ℚ :=
   M.map (Int.castRingHom ℚ)
 
+/-- Entrywise inclusion of an integer vector into the rationals. -/
 def castVector (v : Fin 3 → ℤ) : Fin 3 → ℚ := fun i => v i
 
 theorem castMatrix_pcpMatrix (x y : List Bool) :
@@ -190,12 +195,15 @@ theorem castMatrix_vecMulVec (c r : Fin 3 → ℤ) :
   ext i j
   simp [castMatrix, castVector, Matrix.vecMulVec]
 
+/-- The integral absorbed-terminal column `Ψ(uₜ,vₜ)e₃`. -/
 def terminalColumnInt (uₜ vₜ : List Bool) : Fin 3 → ℤ :=
   pcpMatrix ℤ uₜ vₜ *ᵥ tailBasis ℤ
 
+/-- The integral rank-one separator `Ψ(uₜ,vₜ)e₃e₁ᵀ`. -/
 def terminalGeneratorInt (uₜ vₜ : List Bool) : Matrix (Fin 3) (Fin 3) ℤ :=
   Matrix.vecMulVec (terminalColumnInt uₜ vₜ) (headBasis ℤ)
 
+/-- The exact integral family emitted by the fixed-boundary mortality compiler. -/
 def absorbedFamilyInt {α : Type*} (u v : α → List Bool) (uₜ vₜ : List Bool) :
     Option α → Matrix (Fin 3) (Fin 3) ℤ :=
   separatedGenerator (terminalGeneratorInt uₜ vₜ) (fun i => pcpMatrix ℤ (u i) (v i))

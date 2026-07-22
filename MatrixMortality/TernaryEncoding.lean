@@ -9,6 +9,7 @@ encoded as the nonzero ternary digits `1` and `2`, so no leading-zero ambiguity 
 
 namespace MatrixMortality
 
+/-- Encode binary digits as the nonzero ternary digits `1` and `2`. -/
 def ternaryDigit : Bool → ℕ
   | false => 1
   | true => 2

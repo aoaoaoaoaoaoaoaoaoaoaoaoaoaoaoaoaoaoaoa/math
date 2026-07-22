@@ -18,7 +18,7 @@ the independent falsifier, the standalone HTML, and the manuscript PDF:
 - Tectonic `0.16.9` for the committed manuscript PDF, built with
   `SOURCE_DATE_EPOCH=1784606400` (`2026-07-21T04:00:00Z`).
 
-The script expects `lake`, `uv`/`uvx`, `tectonic`, `xmllint`, `rg`, and GNU `sha256sum` on
+The script expects `lake`, `uv`/`uvx`, `tectonic`, `xmllint`, `rg`, `diff`, and GNU `sha256sum` on
 `PATH`. It defaults `ELAN_HOME` to `$HOME/.local/share/elan`; another installation may set the
 variable explicitly. A first run may download the pinned Lake and uv dependencies.
 
@@ -38,6 +38,9 @@ are audit records, not substitutes for rerunning the commands.
 Lean checks the new instance-level equivalences from restricted tag-system semantics through
 the exact five integer matrices. The axiom report contains only `propext`,
 `Classical.choice`, and `Quot.sound`; there are no project axioms or admitted proofs.
+The build treats all warnings as errors, disables automatic implicit variables, enables
+mathlib's strict syntax profile, runs every default environment linter over the package, and
+compares the transitive axiom report byte-for-byte with the reviewed snapshot.
 
 The repository does not formalize Neary's Lemma 9/Table 2 universality compiler, its
 computability, or the final many-one undecidability wrapper. The unconditional mathematical

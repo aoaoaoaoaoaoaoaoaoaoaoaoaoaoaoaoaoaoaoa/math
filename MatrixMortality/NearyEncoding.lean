@@ -10,11 +10,13 @@ code needed for soundness: every positive run of zeroes has exactly the deletion
 
 namespace MatrixMortality
 
+/-- The two symbols of Neary's restricted binary tag system. -/
 inductive TagLetter where
   | b
   | c
   deriving DecidableEq, Fintype, Repr
 
+/-- The four ordinary PCP labels: one rule and one eraser for each tag symbol. -/
 inductive NearyTile where
   | rule : TagLetter → NearyTile
   | erase : TagLetter → NearyTile
@@ -23,28 +25,36 @@ inductive NearyTile where
 /-- The fixed-boundary GPCP source alphabet has four letters. -/
 theorem neary_source_generator_count : Fintype.card NearyTile = 4 := by decide
 
+/-- Neary's self-synchronizing binary code `H` at deletion width `β`. -/
 def tagCode (β : Nat) : TagLetter → List Bool
   | .b => [true] ++ List.replicate β false ++ [true]
   | .c => [true]
 
+/-- Extend `tagCode` morphically to tag words. -/
 def tagEncode (β : Nat) (word : List TagLetter) : List Bool := spell (tagCode β) word
 
+/-- The fixed right boundary `10^β` of the four-tile equation. -/
 def nearyMarker (β : Nat) : List Bool := true :: List.replicate β false
 
+/-- The variable part of the appendant selected by a tag symbol. -/
 def nearyBody (body : List TagLetter) : TagLetter → List TagLetter
   | .b => []
   | .c => body
 
+/-- The complete tag appendant: `b` after `b`, and `body ++ [b]` after `c`. -/
 def tagOutput (body : List TagLetter) (letter : TagLetter) : List TagLetter :=
   nearyBody body letter ++ [.b]
 
+/-- The upper morphism of Neary's four ordinary PCP pairs. -/
 def nearyUpper (β : Nat) (tile : NearyTile) : List Bool :=
   match tile with
   | .rule letter | .erase letter => tagCode β letter
 
+/-- The tag symbol carried by either form of ordinary tile. -/
 def NearyTile.letter : NearyTile → TagLetter
   | .rule letter | .erase letter => letter
 
+/-- The lower morphism of Neary's four ordinary PCP pairs. -/
 def nearyLower (β : Nat) (body : List TagLetter) : NearyTile → List Bool
   | .rule .b => [true, true, false]
   | .rule .c => [true] ++ tagEncode β body ++ [true, false]
@@ -125,17 +135,20 @@ theorem tagEncode_injective (β : Nat) (hβ : 0 < β) : Function.Injective (tagE
 
 /-! ## Pulse automaton -/
 
+/-- The zero-run scanner state before input or after a leading one. -/
 inductive Pulse where
   | virgin
   | gap : Nat → Pulse
   deriving DecidableEq, Repr
 
+/-- Consume one bit, rejecting any positive zero run whose length cannot be exactly `β`. -/
 def pulseBit (β : Nat) : Pulse → Bool → Option Pulse
   | .virgin, true => some (.gap 0)
   | .virgin, false => none
   | .gap n, true => if n = 0 ∨ n = β then some (.gap 0) else none
   | .gap n, false => if n < β then some (.gap (n + 1)) else none
 
+/-- Fold `pulseBit` over a binary word. -/
 def pulseScan (β : Nat) : Pulse → List Bool → Option Pulse
   | state, [] => some state
   | state, bit :: bits => (pulseBit β state bit).bind fun next => pulseScan β next bits
@@ -268,9 +281,11 @@ theorem pulseScan_nearyLower_erase (β n : Nat) (body : List TagLetter)
       if n < β then some (.gap (n + 1)) else none := by
   simp [nearyLower, pulseScan, pulseBit]
 
+/-- Encode one deletion stroke as a rule tile followed by its eraser tiles. -/
 def strokeTiles {β : Nat} (stroke : Stroke TagLetter β) : List NearyTile :=
   .rule stroke.head :: stroke.wake.map .erase
 
+/-- Concatenate the ordinary-tile blocks encoding a stroke history. -/
 def tileHistory {β : Nat} (history : List (Stroke TagLetter β)) : List NearyTile :=
   (history.map strokeTiles).join
 
@@ -504,8 +519,10 @@ theorem tagHaltsFrom_of_terminal_match (β : Nat) (body : List TagLetter)
   exact tagHaltsFrom_of_history (tagOutput body) history (suffix ++ [.b]) [.b]
     (by simp; omega) hqueue
 
+/-- A tag word has `b` as its final symbol. -/
 def EndsInB (word : List TagLetter) : Prop := ∃ front, word = front ++ [.b]
 
+/-- The suffix and length-congruence invariant forcing every short reachable queue to `[b]`. -/
 def NearyInvariant (β : Nat) (word : List TagLetter) : Prop :=
   EndsInB word ∧ word.length ≡ 1 [MOD β - 1]
 
@@ -645,9 +662,11 @@ theorem nearyTile_final_mismatch (β : Nat) (body : List TagLetter) :
             by simp [nearyUpper, tagCode, List.append_assoc], rfl⟩
       | c => exact ⟨[], [], rfl, rfl⟩
 
+/-- The upper morphism of the corrected binary five-pair PCP instance. -/
 def nearyPCPUpper (β : Nat) : Option NearyTile → List Bool :=
   binaryMarkedSide (nearyUpper β) (nearyMarker β)
 
+/-- The lower morphism of the corrected binary five-pair PCP instance. -/
 def nearyPCPLower (β : Nat) (body : List TagLetter) : Option NearyTile → List Bool :=
   binaryMarkedSide (nearyLower β body) []
 
@@ -669,6 +688,7 @@ theorem nearyPCP_primitive_terminal (β : Nat) (body : List TagLetter) :
     (nearyUpper β) (nearyLower β body) (nearyMarker β) true false
     (by decide) (nearyTile_final_mismatch β body)
 
+/-- The five integral matrices emitted from one restricted tag instance. -/
 def nearyMortalityFamilyInt (β : Nat) (body : List TagLetter) :
     Option NearyTile → Matrix (Fin 3) (Fin 3) Int :=
   absorbedFamilyInt (nearyUpper β) (nearyLower β body) (nearyMarker β) []
@@ -740,14 +760,20 @@ theorem neary_generator_count : Fintype.card (Option NearyTile) = 5 := by decide
 inhabit this strictly larger class: its whole appendant is `body ++ [b]`, and choosing
 `s = x(β-1)+1` gives the displayed body length. -/
 structure NearyArithmeticEnvelope where
+  /-- Tag deletion width. -/
   β : Nat
+  /-- Variable part of the `c`-appendant. -/
   body : List TagLetter
+  /-- Padding multiplier witnessing the required body-length congruence. -/
   paddingRounds : Nat
+  /-- Neary's deletion width is at least three. -/
   beta_large : 2 < β
+  /-- Exact padded length consumed by the four-tile source theorem. -/
   body_length : body.length = (paddingRounds * β + 1) * (β - 1)
 
 namespace NearyArithmeticEnvelope
 
+/-- The restricted tag queue prescribed by one arithmetic-envelope source. -/
 def initial (source : NearyArithmeticEnvelope) : List TagLetter :=
   source.body.drop (source.β - 1) ++ [.b]
 

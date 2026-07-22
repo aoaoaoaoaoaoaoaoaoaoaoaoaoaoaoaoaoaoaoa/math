@@ -53,8 +53,10 @@ The project pins Lean and mathlib to `v4.12.0`.
 ./scripts/check.sh
 ```
 
-The axiom audit reports only Lean's standard `propext`, `Classical.choice`, and `Quot.sound`.
-There are no project axioms or admitted proofs. Frozen outputs are preserved under
+The build rejects every warning, automatic implicit variable, default mathlib environment-lint
+failure, linter suppression, and known proof escape. The exact transitive axiom snapshot for
+the publication-facing declarations contains only Lean's standard `propext`,
+`Classical.choice`, and `Quot.sound`. Frozen outputs are preserved under
 [verification](verification/README.md).
 
 ## Principal Declarations

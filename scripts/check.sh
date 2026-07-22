@@ -27,11 +27,24 @@ while IFS= read -r pdf; do
 done < <(rg --files references -g '*.pdf' | sort)
 
 lake build
-lake env lean AxiomAudit.lean
+lake env lean LintAudit.lean
+lake env lean AxiomAudit.lean > "$SCRATCH/axioms.txt"
+if ! cmp --silent verification/axioms.txt "$SCRATCH/axioms.txt"; then
+  printf 'transitive axiom set changed:\n' >&2
+  diff --unified verification/axioms.txt "$SCRATCH/axioms.txt" >&2 || true
+  exit 1
+fi
+cat "$SCRATCH/axioms.txt"
 
-if rg -n '\b(sorry|admit|axiom|native_decide|unsafe|implemented_by|run_tac)\b' \
+if rg -n '\b(sorry|admit|axiom|native_decide|unsafe|partial|implemented_by|run_tac|sorryAx|ofReduceBool|extern)\b|@\[nolint' \
     --glob '*.lean' .; then
   printf 'forbidden proof escape found\n' >&2
+  exit 1
+fi
+
+if rg -n 'set_option[[:space:]]+(autoImplicit[[:space:]]+true|warningAsError[[:space:]]+false|linter\.[^[:space:]]+[[:space:]]+false)' \
+    --glob '*.lean' .; then
+  printf 'forbidden Lean strictness relaxation found\n' >&2
   exit 1
 fi
 

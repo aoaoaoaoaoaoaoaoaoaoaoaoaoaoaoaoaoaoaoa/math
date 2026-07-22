@@ -6,6 +6,27 @@ the academic standard in mathematics.
 
 Formal verification would be ideal.
 
+## Lean severity
+
+Lean code is held to a warning-free, suppression-free standard comparable to Rust with
+`-D warnings` and strict Clippy. The executable contract is:
+
+- every compiler and enabled syntax-linter warning is an error;
+- automatic implicit variables are disabled;
+- every default mathlib environment linter passes over the whole project;
+- every publication-facing theorem has its complete transitive axiom set compared byte-for-byte
+  with a reviewed snapshot;
+- `sorry`, `admit`, project `axiom`s, `unsafe`, `partial`, `native_decide`, `implemented_by`,
+  `run_tac`, external declarations, and equivalent proof apertures are forbidden;
+- linter suppressions and local relaxations are forbidden unless a nearby comment states an
+  irreducible mathematical reason and the audit explicitly permits that exception.
+
+When strictness exposes debt, repair the declaration, proof, interface, or documentation. Do
+not weaken the check. Default linters with real semantic or API signal are mandatory; opt-in
+restriction linters that merely compel ceremonial prose are not. Kernel acceptance is only the
+floor: audit definitions for vacuity, quantifier drift, wrong multiplication order, empty-witness
+loopholes, coercion loss, and mismatch with the publication claim.
+
 ## Authorship
 
 Unless explicitly countermanded for a particular work, credit agentic mathematical work in

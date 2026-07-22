@@ -8,6 +8,7 @@ open MatrixMortality
 #print axioms nearyGPCP_solvable_iff_tagHaltsFrom
 #print axioms nearyGPCPPlus_solvable_iff_tagHaltsFrom
 #print axioms nearyMortalityFamilyInt_mortal_iff_tagHaltsFrom
+#print axioms neary_generator_count
 #print axioms neary_source_generator_count
 #print axioms neary_morphisms_nonerasing
 #print axioms NearyArithmeticEnvelope.pcp_solvable_iff_halts

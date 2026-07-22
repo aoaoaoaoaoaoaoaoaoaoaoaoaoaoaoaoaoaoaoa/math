@@ -1,16 +1,26 @@
-$ ELAN_HOME=/home/main/.local/share/elan lake env lean AxiomAudit.lean
 'MatrixMortality.terminal_match_iff_tagHaltsFrom' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.nearyPCP_solvable_iff_tagHaltsFrom' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.nearyPCP_primitive_terminal' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.nearyGPCP_solvable_iff_tagHaltsFrom' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.nearyGPCPPlus_solvable_iff_tagHaltsFrom' depends on axioms: [propext, Classical.choice, Quot.sound]
-'MatrixMortality.nearyMortalityFamilyInt_mortal_iff_tagHaltsFrom' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.nearyMortalityFamilyInt_mortal_iff_tagHaltsFrom' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.neary_generator_count' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.neary_source_generator_count' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.neary_morphisms_nonerasing' depends on axioms: [propext]
-'MatrixMortality.NearyArithmeticEnvelope.pcp_solvable_iff_halts' depends on axioms: [propext, Classical.choice, Quot.sound]
-'MatrixMortality.NearyArithmeticEnvelope.pcp_primitive_terminal' depends on axioms: [propext, Classical.choice, Quot.sound]
-'MatrixMortality.NearyArithmeticEnvelope.gpcp_solvable_iff_halts' depends on axioms: [propext, Classical.choice, Quot.sound]
-'MatrixMortality.NearyArithmeticEnvelope.gpcpPlus_solvable_iff_halts' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.NearyArithmeticEnvelope.pcp_solvable_iff_halts' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.NearyArithmeticEnvelope.pcp_primitive_terminal' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.NearyArithmeticEnvelope.gpcp_solvable_iff_halts' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.NearyArithmeticEnvelope.gpcpPlus_solvable_iff_halts' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.NearyArithmeticEnvelope.mortality_iff_halts' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.nearyMortality_ordinary_det_ne_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.nearyMortality_ordinary_upperTriangular' depends on axioms: [propext, Classical.choice, Quot.sound]

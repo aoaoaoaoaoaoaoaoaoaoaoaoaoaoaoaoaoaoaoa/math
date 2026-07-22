@@ -130,11 +130,12 @@ From the project root:
 ./scripts/check.sh
 ```
 
-This checks the artifact and bibliography hashes; rebuilds Lean; prints the transitive axioms;
-rejects proof escapes; runs the independently typed finite falsifier; validates the HTML; and
-rebuilds the manuscript byte-for-byte. See [REPRODUCIBILITY.md](REPRODUCIBILITY.md). The finite
-search is useful for detecting transcription errors but is not evidence from which the
-universal theorem is inferred.
+This checks the artifact and bibliography hashes; rebuilds Lean with warnings fatal and
+automatic implicits disabled; runs every default mathlib environment linter; compares the exact
+transitive axiom snapshot; rejects suppressions and proof escapes; runs the independently typed
+finite falsifier; validates the HTML; and rebuilds the manuscript byte-for-byte. See
+[REPRODUCIBILITY.md](REPRODUCIBILITY.md). The finite search is useful for detecting
+transcription errors but is not evidence from which the universal theorem is inferred.
 
 ## Theorem map
 

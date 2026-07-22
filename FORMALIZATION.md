@@ -19,6 +19,7 @@ For the logical foundation, kernel trust model, and remaining external theorem, 
 | `TerminalTile.lean` | arbitrary rank-one chains, boundary nonvanishing, and raw-word fracture at every separator |
 | `TerminalReduction.lean` | exact terminal scalar, rational and integer generators, multiplicative casting, and zero reflection |
 | `TerminalSource.lean` | generic primitive extraction and fixed-right-boundary GPCP bridge |
+| `LintAudit.lean` | every default mathlib environment linter over the complete project namespace |
 | `AxiomAudit.lean` | reproducible `#print axioms` queries for every headline theorem |
 
 ## Source theorem
@@ -133,8 +134,11 @@ The independent falsifier reports `20,272,272` arbitrary tile words, `56` termin
 and `69` reconstructed halting witnesses. Frozen transcripts and exact revisions are in
 [`verification/`](verification/README.md) and [REPRODUCIBILITY.md](REPRODUCIBILITY.md).
 
-There are no custom axioms, admitted statements, unsafe theorem declarations, or
-`native_decide` proofs.
+Warnings are errors, automatic implicit variables are disabled, mathlib's strict syntax profile
+is enabled, and every default environment linter passes over the whole package. There are no
+custom axioms, admitted statements, unsafe theorem declarations, linter suppressions, or
+`native_decide` proofs. The complete transitive axiom output is compared byte-for-byte with its
+reviewed snapshot.
 
 The finite scour is deliberately independent of Lean and exhausts small arbitrary label words,
 including malformed orderings. It is only a falsifier, not part of the proof.

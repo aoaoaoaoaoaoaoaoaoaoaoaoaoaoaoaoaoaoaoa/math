@@ -16,6 +16,7 @@ section OuterProduct
 
 variable {ι 𝕜 : Type*} [Fintype ι] [Field 𝕜]
 
+/-- Square matrices indexed by `ι` over the scalar field `𝕜`. -/
 abbrev Square (ι 𝕜 : Type*) := Matrix ι ι 𝕜
 
 theorem mul_outer (M : Square ι 𝕜) (c r : ι → 𝕜) :
@@ -187,14 +188,17 @@ theorem fracture_map_some_append_none {α : Type*} (word : List α) :
   | nil => rfl
   | cons i word ih => simp [fracture, ih]
 
+/-- Multiply the ordinary generators named by one separator-free block. -/
 def blockProduct {α : Type*} (X : α → Square ι 𝕜) (block : List α) : Square ι 𝕜 :=
   (block.map X).prod
 
+/-- Interpret `none` as the separator and `some i` as ordinary generator `X i`. -/
 def separatedGenerator {α : Type*} (A : Square ι 𝕜) (X : α → Square ι 𝕜) :
     Option α → Square ι 𝕜
   | none => A
   | some i => X i
 
+/-- Multiply an arbitrary word over the ordinary generators and separator. -/
 def generatorProduct {α : Type*} (A : Square ι 𝕜) (X : α → Square ι 𝕜)
     (word : List (Option α)) : Square ι 𝕜 :=
   (word.map (separatedGenerator A X)).prod

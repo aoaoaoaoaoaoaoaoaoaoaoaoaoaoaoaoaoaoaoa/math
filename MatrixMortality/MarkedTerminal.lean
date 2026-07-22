@@ -217,12 +217,15 @@ theorem marked_solvable_iff_terminal_match_of_final_mismatch {ι α : Type*}
 
 /-! ## Fixed-length recoding into the binary alphabet -/
 
+/-- The two-bit prefix code `0 ↦ 00`, `1 ↦ 01`, and marker `none ↦ 11`. -/
 def markedBitCode : Option Bool → List Bool
   | some bit => [false, bit]
   | none => [true, true]
 
+/-- Encode a word over the marked binary alphabet with `markedBitCode`. -/
 def encodeMarkedBits (word : List (Option Bool)) : List Bool := spell markedBitCode word
 
+/-- Decode complete two-bit codewords, discarding an impossible trailing singleton. -/
 def decodeMarkedBits : List Bool → List (Option Bool)
   | false :: bit :: tail => some bit :: decodeMarkedBits tail
   | true :: _ :: tail => none :: decodeMarkedBits tail
@@ -250,12 +253,15 @@ theorem encodeMarkedBits_append (x y : List (Option Bool)) :
     encodeMarkedBits (x ++ y) = encodeMarkedBits x ++ encodeMarkedBits y := by
   exact spell_append markedBitCode x y
 
+/-- Apply the fixed-length binary code to one side of the marked PCP instance. -/
 def binaryMarkedSide {ι : Type*} (side : ι → List Bool) (terminal : List Bool) :
     Option ι → List Bool := fun i => encodeMarkedBits (markedSide side terminal i)
 
+/-- The binary recoding of one ordinary tile image. -/
 def binaryMarkedOrdinary {ι : Type*} (side : ι → List Bool) (i : ι) : List Bool :=
   encodeMarkedBits ((side i).map some)
 
+/-- The binary recoding of the fresh-marker terminal word. -/
 def binaryMarkedTerminal (terminal : List Bool) : List Bool :=
   encodeMarkedBits (suture terminal)
 

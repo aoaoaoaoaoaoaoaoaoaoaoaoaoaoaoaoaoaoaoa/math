@@ -16,12 +16,16 @@ namespace MatrixMortality
 
 /-- One deletion block of width `β`, with its rule-selecting head exposed. -/
 structure Stroke (α : Type*) (β : Nat) where
+  /-- The first deleted symbol, which selects the tag rule. -/
   head : α
+  /-- The remaining deleted symbols after the rule-selecting head. -/
   wake : List α
+  /-- The head and wake together have deletion width `β`. -/
   width : wake.length + 1 = β
 
 namespace Stroke
 
+/-- Reassemble the complete deleted block represented by a stroke. -/
 def letters {α : Type*} {β : Nat} (stroke : Stroke α β) : List α :=
   stroke.head :: stroke.wake
 
