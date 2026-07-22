@@ -14,7 +14,7 @@ the peer-reviewed MFCS 2025 article.
 
 Section 2.8 and footnote 3 give the same terminal-pair statement and repair as the
 MFCS version: in every primitive solution tile 5 occurs only at the end, after replacing
-Neary's invalid four-one suffix by `1^{|u|+99}`. Section 5.2 further states that the
+Neary's defective four-one suffix by `1^{|u|+99}`. Section 5.2 further states that the
 deterministic tag-system computation gives at most one primitive solution, apart from
 repetition.
 

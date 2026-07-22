@@ -8,7 +8,7 @@ The bibliography records status rather than merely collecting links.
 | --- | --- | --- |
 | [CHHN14](cassaigne-halava-harju-nicolas-2014-matrix-mortality.md) | arXiv v3; established paper | Previous minimal known mortality-undecidability antichain, ternary encoding morphism, zero-to-mortality and generator–dimension reductions |
 | [HHH07](halava-harju-hirvensalo-2007-claus-instances.md) | peer-reviewed IJFCS 2007 | Closest prior art: forced-endpoint absorption into a rank-one idempotent |
-| [Neary13](neary-2013-four-pair-pcp-superseded-claim.md) | superseded erroneous preprint | Historical five-matrix claim based on the abandoned four-pair PCP construction |
+| [Neary13](neary-2013-four-pair-pcp-superseded-claim.md) | one-version technical report; claim not retained | Historical five-matrix claim based on a claimed four-pair PCP construction |
 | [Neary15](neary-2015-five-pair-pcp.md) | peer-reviewed STACS 2015 | Lemma 9 restricted-tag universality and exact four ordinary pairs; terminal converse audited as defective |
 | [BPS19](bell-potapov-semukhin-2019-mortality-problem.md) | MFCS 2019; journal 2021 | Independent post-correction statement of the six-generator `3 × 3` bound |
 | [BB02](bournez-branicky-2002-low-dimensional-mortality.md) | peer-reviewed Theory Comput. Syst. 2002 | Decidability of two rational `2 × 2` generators and the rank-one-endpoint normal form |

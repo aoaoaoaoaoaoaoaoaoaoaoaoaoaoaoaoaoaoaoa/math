@@ -17,28 +17,40 @@ the search surface and the strongest safe language.
 - DBLP and Crossref title searches;
 - OpenAlex and Semantic Scholar forward-citation graphs for CHHN14, HHH07, Neary13,
   Neary15, Nicolas08, and Rote24/25;
+- Neary's own publication list, which places the 2015 five-pair paper under “Publications”
+  and the 2013 four-pair item under “Technical reports”;
 - exact web phrases `M_3(5)`, `M₃(5)`, `five 3 × 3 matrices`, `GPCP(4)`,
   `four-generator generalized Post correspondence`, `fixed terminal tile`, `fresh marker`,
   and `rank-one absorption`;
 - backward references and terminology in the locally preserved papers.
 
-No later indexed source was found claiming a valid five-generator `3 × 3` mortality bound or
-four-generator GPCP undecidability. Nicolas08 and CHHN14 record `GPCP(4)` as open. Later
+No later indexed source was found supplying an accepted or independent five-generator
+`3 × 3` mortality proof or four-generator GPCP undecidability proof. Nicolas08 and CHHN14
+record `GPCP(4)` as open. Later
 matrix-semigroup surveys retain the six-generator `3 × 3` bound. Rote24/25 recognizes and
 uses Neary's forced terminal role for probabilistic automata, but does not state the bounded
 GPCP or mortality consequences.
 
 ## Adjudicated Prior Art
 
-### Same numerical statement, invalid proof
+### Same numerical statement, unretained proof claim
 
 Neary's arXiv:1312.6700v1 (2013) explicitly announces undecidability for five `3 × 3` integer
-matrices. It relies on the paper's abandoned four-pair PCP claim. The accepted STACS 2015
-replacement proves five-pair PCP and derives only six `3 × 3` matrices. Therefore:
+matrices. Corollary 2 depends on its Theorem 3, which claims four-pair PCP undecidability. The
+proof's converse ends by asserting, without an exhaustive analysis, that every non-simulating
+tile choice must mismatch. We have not located a published erratum, isolated a concrete
+counterexample to that construction, or otherwise independently proved Theorem 3 false.
+
+What is bibliographically certain is stronger than mere silence: the refereed STACS 2015
+successor proves only five-pair PCP, explicitly leaves the four-pair case open, and derives only
+six `3 × 3` matrices. CHHN14, submitted after the preprint, likewise marks `M₃(5)` unknown,
+and later literature retains the six-matrix bound. Neary's publication page lists the 2015
+paper as a publication and the 2013 item as a technical report. Therefore:
 
 ```text
 “first public statement of M₃(5)” is false;
-“first valid proof found” remains plausible.
+“first accepted proof” is not yet ours to claim before review;
+“first valid proof, to our knowledge” is the strongest defensible formulation.
 ```
 
 ### Rank-one absorption is established technique
@@ -86,14 +98,18 @@ forward citation of Neary15 or Rote25 found in the search made the `GPCP(4)` ded
 
 Use:
 
-> We give, to our knowledge, the first valid proof that binary-target `GPCP(4)` is undecidable
-> and consequently the first valid derivation of `M₃(5)` undecidability. The latter numerical
-> statement appeared earlier in a superseded preprint whose four-pair PCP premise was
-> abandoned.
+> Neary's 2013 arXiv preprint claimed undecidability for five `3 × 3` integer matrices. That
+> claim depended on a claimed four-pair PCP construction and was not retained in Neary's
+> refereed 2015 paper, which proved only the six-matrix bound and left four-pair PCP open.
+> Subsequent literature continued to state the six-matrix bound. We give a proof of the
+> previously unestablished five-matrix case and, to our knowledge, the first valid proof of
+> binary-target `GPCP(4)` undecidability.
 
 Do not use:
 
 - “first statement of `M₃(5)`”;
+- “first to claim an unconditional proof”;
+- “retracted,” “withdrawn,” or “formally disproved” for Neary13;
 - “new rank-one absorption method”;
 - “Rote proved the source property exhaustively”;
 - an unqualified priority claim before author review.

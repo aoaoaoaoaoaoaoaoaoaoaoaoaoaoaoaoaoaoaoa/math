@@ -33,7 +33,7 @@ formal Turing-machine halting theorem” is not yet accurate.
 | Four nonsingular triangular plus one nonzero rank-one matrix | Pass; formally verified |
 | Neary restricted-tag source undecidability | Published external theorem; exact parameter seam audited |
 | Undecidability-antichain arithmetic | Pass against CHHN definitions and theorem parameters |
-| No valid prior publication | No counterexample found; intrinsically not formally certifiable |
+| Accepted or independent prior proof | None found; priority remains intrinsically noncertifiable |
 
 ## What Was Wrong With the Previous Route
 
@@ -274,14 +274,17 @@ new Lean axiom.
 
 The detailed search log remains in [NOVELTY.md](NOVELTY.md). The safe claims are:
 
-- Neary13 prevents “first public statement of `M₃(5)`.”
+- Neary13 prevents “first public statement” or “first unconditional claim” of `M₃(5)`.
+- Its four-pair PCP premise was not retained in the refereed successor, but no formal
+  withdrawal, published diagnosis, or independently verified counterexample was found.
 - HHH07 and CHHN prevent “new rank-one absorption technique.”
 - No valid earlier proof of `GPCP(4)` or `M₃(5)` was found.
 - The new block-forcing source proof and fresh-marker repair are not present in the audited
   literature.
 
-Use “apparently the first valid proof, to our knowledge,” until Neary, Rote, Nicolas, and a
-CHHN/HHH author have reviewed the manuscript and the counting convention.
+Use “a proof of the previously unestablished case” or, when priority matters, “to our
+knowledge, the first valid proof,” until Neary, Rote, Nicolas, and a CHHN/HHH author have
+reviewed the manuscript and the counting convention.
 
 ## Remaining Submission Obligations
 

@@ -70,7 +70,11 @@ There are no project axioms or admitted proofs. Frozen outputs are preserved und
 
 ## Novelty Caution
 
-The same numerical `M₃(5)` claim appeared in Neary's invalid 2013 four-pair preprint, and
-rank-one boundary absorption is prior art. The defensible claim is “apparently the first valid
-proof of `GPCP(4)` and hence `M₃(5)`, to our knowledge.” Author confirmation remains mandatory
-before publication priority language is hardened.
+Neary's one-version 2013 preprint publicly claimed the same numerical `M₃(5)` result through
+a claimed four-pair PCP theorem. That theorem was not retained in his refereed 2015 successor,
+which explicitly left four-pair PCP open and derived only the six-matrix bound; subsequent
+literature followed the latter. No formal withdrawal or published diagnosis of the precise
+2013 defect was found, so this project calls the claim *superseded and unestablished*, not
+retracted. Rank-one boundary absorption is also prior art. The defensible priority language is
+“to our knowledge, the first valid proof of `GPCP(4)` and hence of the previously unestablished
+`M₃(5)` case.”
