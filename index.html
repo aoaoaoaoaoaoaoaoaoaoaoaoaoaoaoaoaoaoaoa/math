@@ -83,7 +83,18 @@
 
           <div class="definition">
             <p>Given at most <var>k</var> integer <var>d</var> × <var>d</var> matrices <var>A</var><sub>1</sub>, …, <var>A</var><sub>k</sub>, determine whether</p>
-            <div class="formula plain"><var>A</var><sub>i₁</sub><var>A</var><sub>i₂</sub> ··· <var>A</var><sub>iₙ</sub> = 0</div>
+            <div class="formula plain">
+              <math display="block">
+                <mrow>
+                  <msub><mi>A</mi><msub><mi>i</mi><mn>1</mn></msub></msub>
+                  <msub><mi>A</mi><msub><mi>i</mi><mn>2</mn></msub></msub>
+                  <mo>⋯</mo>
+                  <msub><mi>A</mi><msub><mi>i</mi><mi>n</mi></msub></msub>
+                  <mo>=</mo>
+                  <mn>0</mn>
+                </mrow>
+              </math>
+            </div>
             <p>for some <var>n</var> ≥ 1 and indices <var>i</var><sub>j</sub> ∈ {1, …, <var>k</var>}.</p>
           </div>
 
@@ -95,10 +106,29 @@
           <p>For fixed dimension <var>d</var> and generator bound <var>k</var>, undecidability of M<sub><var>d</var></sub>(<var>k</var>) is monotone in both coordinates: additional generators may be unused, and <var>A</var> ↦ <var>A</var> ⊕ 0 preserves mortality under dimension padding. The coordinatewise-minimal known undecidable cells therefore form an antichain.</p>
 
           <p>Before this work, the best published antichain was <a href="#ref-chhn-2014">[Cassaigne et al. 2014]</a></p>
-          <div class="formula plain">M<sub>3</sub>(6), &nbsp; M<sub>5</sub>(4), &nbsp; M<sub>9</sub>(3), &nbsp; M<sub>15</sub>(2).</div>
+          <div class="formula plain">
+            <math display="block">
+              <mrow>
+                <msub><mi>M</mi><mn>3</mn></msub><mo>(</mo><mn>6</mn><mo>)</mo><mo>,</mo><mspace width="0.5em"></mspace>
+                <msub><mi>M</mi><mn>5</mn></msub><mo>(</mo><mn>4</mn><mo>)</mo><mo>,</mo><mspace width="0.5em"></mspace>
+                <msub><mi>M</mi><mn>9</mn></msub><mo>(</mo><mn>3</mn><mo>)</mo><mo>,</mo><mspace width="0.5em"></mspace>
+                <msub><mi>M</mi><mn>15</mn></msub><mo>(</mo><mn>2</mn><mo>)</mo><mo>.</mo>
+              </mrow>
+            </math>
+          </div>
 
           <p>Cassaigne et al. also established the packing reduction</p>
-          <div class="formula">M<sub>d</sub>(<var>h</var><var>k</var> + 1) ≤<sub>m</sub> M<sub><var>k</var><var>d</var></sub>(<var>h</var> + 1).</div>
+          <div class="formula">
+            <math display="block">
+              <mrow>
+                <msub><mi>M</mi><mi>d</mi></msub>
+                <mo>(</mo><mi>h</mi><mi>k</mi><mo>+</mo><mn>1</mn><mo>)</mo>
+                <msub><mo>≤</mo><mi>m</mi></msub>
+                <msub><mi>M</mi><mrow><mi>k</mi><mi>d</mi></mrow></msub>
+                <mo>(</mo><mi>h</mi><mo>+</mo><mn>1</mn><mo>)</mo><mo>.</mo>
+              </mrow>
+            </math>
+          </div>
           <p>Here ≤<sub>m</sub> denotes a computable many-one reduction <a href="#ref-chhn-2014">[Cassaigne et al. 2014]</a>. This prior theorem propagates any new base case to other dimensions and generator counts.</p>
 
           <h3 id="tag-systems">Tag systems</h3>
@@ -106,7 +136,15 @@
 
           <h3 id="post-correspondence">Post correspondence</h3>
           <p>A Post correspondence instance gives pairs of words (<var>u</var><sub>i</sub>, <var>v</var><sub>i</sub>). It asks for an index word <var>i</var><sub>1</sub>···<var>i</var><sub>n</sub> such that the upper and lower concatenations agree:</p>
-          <div class="formula"><var>u</var><sub>i₁</sub>···<var>u</var><sub>iₙ</sub> = <var>v</var><sub>i₁</sub>···<var>v</var><sub>iₙ</sub>.</div>
+          <div class="formula">
+            <math display="block">
+              <mrow>
+                <msub><mi>u</mi><msub><mi>i</mi><mn>1</mn></msub></msub><mo>⋯</mo><msub><mi>u</mi><msub><mi>i</mi><mi>n</mi></msub></msub>
+                <mo>=</mo>
+                <msub><mi>v</mi><msub><mi>i</mi><mn>1</mn></msub></msub><mo>⋯</mo><msub><mi>v</mi><msub><mi>i</mi><mi>n</mi></msub></msub><mo>.</mo>
+              </mrow>
+            </math>
+          </div>
           <p>For the pairs (<span class="word">a</span>, <span class="word">ab</span>) and (<span class="word">ba</span>, <span class="word">a</span>), the index word 12 is a solution because <span class="word">a·ba</span> = <span class="word">ab·a</span>.</p>
 
           <p>Generalized PCP (GPCP) permits fixed boundary words <a href="#ref-nicolas-2008">[Nicolas 2008]</a>. The instance used here has empty left boundaries and asks whether <var>U</var>(<var>w</var>)<var>M</var> = <var>V</var>(<var>w</var>) for a word <var>w</var> over four source letters.</p>
@@ -123,7 +161,17 @@
           <p>Neary’s 2013 preprint claimed ordinary PCP with four pairs, asking for <var>U</var>(<var>w</var>) = <var>V</var>(<var>w</var>), and made one erasing pair participate in both simulation and termination <a href="#ref-neary-2013">[Neary 2013]</a>. That theorem was not retained in the refereed successor, which proved five-pair PCP and left the four-pair case open <a href="#ref-neary-2015">[Neary 2015]</a>.</p>
 
           <p>This work retains the four nonterminal pairs from the published construction and moves termination into a fixed right boundary:</p>
-          <div class="formula plain"><var>U</var>(<var>w</var>)<var>M</var> = <var>V</var>(<var>w</var>), &nbsp; <var>M</var> = <span class="word">1 0<sup>β</sup></span>.</div>
+          <div class="formula plain">
+            <math display="block">
+              <mrow>
+                <mi>U</mi><mo>(</mo><mi>w</mi><mo>)</mo><mi>M</mi>
+                <mo>=</mo>
+                <mi>V</mi><mo>(</mo><mi>w</mi><mo>)</mo><mo>,</mo>
+                <mspace width="1em"></mspace>
+                <mi>M</mi><mo>=</mo><mn>1</mn><msup><mn>0</mn><mi>β</mi></msup><mo>.</mo>
+              </mrow>
+            </math>
+          </div>
           <p>This is GPCP(4). The boundary is punctuation, not a selectable pair, and all eight morphism images are nonempty. Ordinary PCP(4) is not assumed and remains unresolved in the literature audited here.</p>
 
           <p>The new converse applies to arbitrary tile words. Zero-run synchronization forces one rule tile followed by exactly <var>β</var>−1 deletion tiles; each block decodes as a <var>β</var>-symbol tag stroke; global equality becomes a queue-history certificate; prefix cancellation reconstructs lawful tag steps until the first short queue. Malformed words are excluded by this global invariant, not by assuming that every wrong local choice eventually mismatches.</p>
@@ -132,7 +180,16 @@
 
           <h3 id="result">Result and consequences</h3>
           <p>The source and matrix reductions below prove M<sub>3</sub>(5). Substituting 5 = 2·2 + 1 and 5 = 1·4 + 1 into the established packing theorem then gives M<sub>6</sub>(3) and M<sub>12</sub>(2). The independent M<sub>5</sub>(4) bound is unchanged. The resulting known undecidability antichain is therefore</p>
-          <div class="formula plain">M<sub>3</sub>(5), &nbsp; M<sub>5</sub>(4), &nbsp; M<sub>6</sub>(3), &nbsp; M<sub>12</sub>(2).</div>
+          <div class="formula plain">
+            <math display="block">
+              <mrow>
+                <msub><mi>M</mi><mn>3</mn></msub><mo>(</mo><mn>5</mn><mo>)</mo><mo>,</mo><mspace width="0.5em"></mspace>
+                <msub><mi>M</mi><mn>5</mn></msub><mo>(</mo><mn>4</mn><mo>)</mo><mo>,</mo><mspace width="0.5em"></mspace>
+                <msub><mi>M</mi><mn>6</mn></msub><mo>(</mo><mn>3</mn><mo>)</mo><mo>,</mo><mspace width="0.5em"></mspace>
+                <msub><mi>M</mi><mn>12</mn></msub><mo>(</mo><mn>2</mn><mo>)</mo><mo>.</mo>
+              </mrow>
+            </math>
+          </div>
           <p>This work supplies the first entry directly; the third and fourth are consequences of the prior packing theorem. These are undecidability bounds, not a complete decidability frontier; the cells immediately below remain unresolved.</p>
 
           <p>Updating Table 5 of <a href="#ref-chhn-2014">[Cassaigne et al. 2014]</a> and adjoining the elementary <var>d</var> = 1 and <var>k</var> = 1 margins gives the following status window. Identical consecutive rows and columns are merged.</p>
@@ -167,9 +224,27 @@
           <div>
           <h3 id="four-tiles">A synchronized tag compiler</h3>
           <p>Fix <var>β</var> ≥ 3 and a word <var>q</var> over <span class="word">b,c</span>. Define the tag system</p>
-          <div class="formula"><span class="word">b</span> ↦ <span class="word">b</span>, &nbsp; <span class="word">c</span> ↦ <var>q</var><span class="word">b</span>, &nbsp; I = drop<sub>β−1</sub>(<var>q</var>)<span class="word">b</span>.</div>
+          <div class="formula">
+            <math display="block">
+              <mrow>
+                <mi>b</mi><mo>↦</mo><mi>b</mi><mo>,</mo>
+                <mi>c</mi><mo>↦</mo><mi>q</mi><mi>b</mi><mo>,</mo>
+                <mi>I</mi><mo>=</mo>
+                <msub><mi mathvariant="normal">drop</mi><mrow><mi>β</mi><mo>−</mo><mn>1</mn></mrow></msub>
+                <mo>(</mo><mi>q</mi><mo>)</mo><mi>b</mi><mo>.</mo>
+              </mrow>
+            </math>
+          </div>
           <p>Encode queue letters and the fixed boundary by</p>
-          <div class="formula">H(<span class="word">b</span>) = 1 0<sup>β</sup> 1, &nbsp; H(<span class="word">c</span>) = 1, &nbsp; M = 1 0<sup>β</sup>.</div>
+          <div class="formula">
+            <math display="block">
+              <mrow>
+                <mi>H</mi><mo>(</mo><mi>b</mi><mo>)</mo><mo>=</mo><mn>1</mn><msup><mn>0</mn><mi>β</mi></msup><mn>1</mn><mo>,</mo>
+                <mi>H</mi><mo>(</mo><mi>c</mi><mo>)</mo><mo>=</mo><mn>1</mn><mo>,</mo>
+                <mi>M</mi><mo>=</mo><mn>1</mn><msup><mn>0</mn><mi>β</mi></msup><mo>.</mo>
+              </mrow>
+            </math>
+          </div>
           <p>Extend <var>H</var> by concatenation and define four word pairs:</p>
 
           <div class="table-scroll">
@@ -189,7 +264,18 @@
           <p>For a tile word <var>w</var>, write <var>U</var>(<var>w</var>) and <var>V</var>(<var>w</var>) for its upper and lower concatenations.</p>
 
           <div class="theorem">
-            <div class="formula plain">∃<var>w</var>: &nbsp; <var>U</var>(<var>w</var>)<var>M</var> = <var>V</var>(<var>w</var>) &nbsp; ⇔ &nbsp; the tag system halts from <var>I</var>.</div>
+            <div class="formula plain">
+              <math display="block">
+                <mrow>
+                  <mo>∃</mo><mi>w</mi><mo>:</mo>
+                  <mi>U</mi><mo>(</mo><mi>w</mi><mo>)</mo><mi>M</mi>
+                  <mo>=</mo>
+                  <mi>V</mi><mo>(</mo><mi>w</mi><mo>)</mo>
+                  <mo>⇔</mo>
+                  <mtext>the tag system halts from </mtext><mi>I</mi><mo>.</mo>
+                </mrow>
+              </math>
+            </div>
             <p>The equivalence holds when β−1 divides |<var>q</var>| and |<var>q</var>| ≥ β−1. These hypotheses define an arithmetic envelope containing Neary’s compiler outputs.</p>
           </div>
 
@@ -198,9 +284,31 @@
           <details class="technical-detail">
             <summary>Padding into the arithmetic envelope</summary>
             <p>Neary has β = 10<var>p</var> and |<var>q</var><span class="word">b</span>| = β<var>s</var>. If <var>n</var> is the input length and <var>r</var> the maximum cyclic appendant length, take</p>
-            <div class="formula plain"><var>B</var> = max{11(<var>n</var>+<var>p</var>)+β−2, 11<var>p</var>, 11<var>r</var>, 1}, &nbsp; <var>x</var> = ⌈(<var>B</var>−1)/(β−1)⌉, &nbsp; <var>s</var> = <var>x</var>(β−1)+1.</div>
+            <div class="formula plain">
+              <math display="block">
+                <mrow>
+                  <mi>B</mi><mo>=</mo><mi mathvariant="normal">max</mi><mo stretchy="false">{</mo>
+                  <mn>11</mn><mo stretchy="false">(</mo><mi>n</mi><mo>+</mo><mi>p</mi><mo stretchy="false">)</mo><mo>+</mo><mi>β</mi><mo>−</mo><mn>2</mn><mo>,</mo>
+                  <mn>11</mn><mi>p</mi><mo>,</mo><mn>11</mn><mi>r</mi><mo>,</mo><mn>1</mn><mo stretchy="false">}</mo><mo>,</mo>
+                  <mspace width="1em"></mspace>
+                  <mi>x</mi><mo>=</mo><mo>⌈</mo><mfrac><mrow><mi>B</mi><mo>−</mo><mn>1</mn></mrow><mrow><mi>β</mi><mo>−</mo><mn>1</mn></mrow></mfrac><mo>⌉</mo><mo>,</mo>
+                  <mspace width="1em"></mspace>
+                  <mi>s</mi><mo>=</mo><mi>x</mi><mo stretchy="false">(</mo><mi>β</mi><mo>−</mo><mn>1</mn><mo stretchy="false">)</mo><mo>+</mo><mn>1</mn><mo>.</mo>
+                </mrow>
+              </math>
+            </div>
             <p>This lies in Neary’s permitted padding range and makes every exponent in his Table 2 nonnegative. Moreover,</p>
-            <div class="formula plain">|<var>q</var>| = β[<var>x</var>(β−1)+1]−1 = (<var>x</var>β+1)(β−1),</div>
+            <div class="formula plain">
+              <math display="block">
+                <mrow>
+                  <mo>|</mo><mi>q</mi><mo>|</mo>
+                  <mo>=</mo>
+                  <mi>β</mi><mo>[</mo><mi>x</mi><mo>(</mo><mi>β</mi><mo>−</mo><mn>1</mn><mo>)</mo><mo>+</mo><mn>1</mn><mo>]</mo><mo>−</mo><mn>1</mn>
+                  <mo>=</mo>
+                  <mo>(</mo><mi>x</mi><mi>β</mi><mo>+</mo><mn>1</mn><mo>)</mo><mo>(</mo><mi>β</mi><mo>−</mo><mn>1</mn><mo>)</mo><mo>,</mo>
+                </mrow>
+              </math>
+            </div>
             <p>which implies β−1 ∣ |<var>q</var>| and |<var>q</var>| ≥ β−1.</p>
           </details>
 
@@ -213,7 +321,16 @@
                 <h5>Synchronization</h5>
                 <p>The upper side <var>U</var>(<var>w</var>)<var>M</var> is an <var>H</var>-encoded word followed by <var>M</var>. Every positive run of zeros therefore has length exactly <var>β</var>. On the lower side, a rule tile ends with one zero; an erase tile contributes one more; the next rule begins with a one.</p>
                 <p>The payload <var>H</var>(<var>q</var>) contains only complete <var>β</var>-runs and ends at a code boundary before the rule tile’s final <span class="word">10</span>. Hence every rule tile is followed by exactly <var>β</var>−1 erase tiles, and every matching word factors into blocks</p>
-                <div class="formula plain">R<sub>a₀</sub> D<sub>a₁</sub> ··· D<sub>a<sub>β−1</sub></sub>,</div>
+                <div class="formula plain">
+                  <math display="block">
+                    <mrow>
+                      <msub><mi>R</mi><msub><mi>a</mi><mn>0</mn></msub></msub>
+                      <msub><mi>D</mi><msub><mi>a</mi><mn>1</mn></msub></msub>
+                      <mo>⋯</mo>
+                      <msub><mi>D</mi><msub><mi>a</mi><mrow><mi>β</mi><mo>−</mo><mn>1</mn></mrow></msub></msub><mo>,</mo>
+                    </mrow>
+                  </math>
+                </div>
                 <p>one block for each length-<var>β</var> stroke <var>a</var><sub>0</sub>···<var>a</var><sub>β−1</sub>. The finite-state scan ranges over all label words; it assumes no simulated-history prefix.</p>
               </div>
             </div>
@@ -222,7 +339,15 @@
               <div>
                 <h5>History equation</h5>
                 <p>Let <var>S</var> be the forced stroke sequence, <var>C</var>(<var>S</var>) its concatenation, and <var>P</var>(<var>S</var>) the concatenation of the appendants selected by the stroke heads. Decoding and cancelling the initialization gives</p>
-                <div class="formula plain"><var>C</var>(<var>S</var>)<span class="word">b</span> = <var>I</var><var>P</var>(<var>S</var>).</div>
+                <div class="formula plain">
+                  <math display="block">
+                    <mrow>
+                      <mi>C</mi><mo>(</mo><mi>S</mi><mo>)</mo><mi>b</mi>
+                      <mo>=</mo>
+                      <mi>I</mi><mi>P</mi><mo>(</mo><mi>S</mi><mo>)</mo><mo>.</mo>
+                    </mrow>
+                  </math>
+                </div>
               </div>
             </div>
 
@@ -238,7 +363,17 @@
           <div class="aside">
             <h4 id="source-lemma">Reusable source lemma</h4>
             <p>For any deletion-width-β tag system, let <var>S</var> be a list of β-letter strokes, <var>C</var>(<var>S</var>) their concatenation, and <var>P</var>(<var>S</var>) the concatenation of the appendants selected by their heads. If</p>
-            <div class="formula plain"><var>C</var>(<var>S</var>)<var>F</var> = <var>I</var><var>P</var>(<var>S</var>) &nbsp; and &nbsp; |<var>F</var>| &lt; β,</div>
+            <div class="formula plain">
+              <math display="block">
+                <mrow>
+                  <mi>C</mi><mo>(</mo><mi>S</mi><mo>)</mo><mi>F</mi>
+                  <mo>=</mo>
+                  <mi>I</mi><mi>P</mi><mo>(</mo><mi>S</mi><mo>)</mo>
+                  <mspace width="1em"></mspace><mtext>and</mtext><mspace width="1em"></mspace>
+                  <mo>|</mo><mi>F</mi><mo>|</mo><mo>&lt;</mo><mi>β</mi><mo>,</mo>
+                </mrow>
+              </math>
+            </div>
             <p>then the tag system halts from <var>I</var>, by induction with prefix cancellation. To reuse the lemma, a word code must force candidate labels into strokes and decode equality into this certificate. The formal statement is <a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/main/MatrixMortality/TagQueue.lean"><code>tagHaltsFrom_of_history</code></a>.</p>
           </div>
 
@@ -246,7 +381,13 @@
 
           <h4 id="terminal-pair">Fresh-marker terminal pair</h4>
           <p>An ordinary five-pair PCP instance is obtained by adjoining a fresh symbol <span class="word">#</span> and the pair</p>
-          <div class="formula">(<var>M</var><span class="word">#</span>, <span class="word">#</span>).</div>
+          <div class="formula">
+            <math display="block">
+              <mrow>
+                <mo>(</mo><mi>M</mi><mi mathvariant="normal">#</mi><mo>,</mo><mi mathvariant="normal">#</mi><mo>)</mo><mo>.</mo>
+              </mrow>
+            </math>
+          </div>
           <p>Every ordinary upper image ends in 1 and every ordinary lower image ends in 0, so an ordinary-only word cannot solve PCP. At the first terminal pair, prefix compatibility of <var>U</var>(<var>w</var>)<var>M</var><span class="word">#</span> and <var>V</var>(<var>w</var>)<span class="word">#</span> forces <var>U</var>(<var>w</var>)<var>M</var> = <var>V</var>(<var>w</var>). The prefix through that pair is already a solution. Hence a primitive solution, one not decomposable into two nonempty solutions, uses the terminal pair exactly once and last.</p>
           <p>The fixed-length code 0↦00, 1↦01, #↦11 restores a binary target alphabet while preserving equality, prefix comparability, and primitivity.</p>
           <p>More generally, if the ordinary pairs have no solution, the fixed-boundary equation <var>U</var>(<var>w</var>)<var>s</var> = <var>V</var>(<var>w</var>)<var>t</var> reduces to PCP by adjoining (<var>s</var>#, <var>t</var>#). Every primitive solution then uses the marked pair exactly once and last.</p>
@@ -257,42 +398,148 @@
 
           <p>Recode binary symbols as nonzero ternary digits, 0↦1 and 1↦2. For a digit word <var>x</var>, let <var>σ</var>(<var>x</var>) be its base-three value. Nonzero digits make <var>σ</var> injective across words of unequal as well as equal length.</p>
 
-          <div class="matrix-equation" role="img" aria-label="Psi of x y is the upper triangular 3 by 3 matrix with rows 1 sigma y sigma x minus sigma y; 0, 3 to the length y, 3 to the length x minus 3 to the length y; and 0, 0, 3 to the length x">
-            <span>Ψ(<var>x</var>,<var>y</var>) =</span>
-            <div class="matrix" aria-hidden="true">
-              <span>1</span><span>σ(<var>y</var>)</span><span>σ(<var>x</var>)−σ(<var>y</var>)</span>
-              <span>0</span><span>3<sup>|<var>y</var>|</sup></span><span>3<sup>|<var>x</var>|</sup>−3<sup>|<var>y</var>|</sup></span>
-              <span>0</span><span>0</span><span>3<sup>|<var>x</var>|</sup></span>
-            </div>
+          <div class="formula">
+            <math display="block">
+              <mrow>
+                <mi>Ψ</mi><mo stretchy="false">(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo stretchy="false">)</mo><mo>=</mo>
+                <mo>[</mo>
+                <mtable>
+                  <mtr>
+                    <mtd><mn>1</mn></mtd>
+                    <mtd><mrow><mi>σ</mi><mo>(</mo><mi>y</mi><mo>)</mo></mrow></mtd>
+                    <mtd><mrow><mi>σ</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>−</mo><mi>σ</mi><mo>(</mo><mi>y</mi><mo>)</mo></mrow></mtd>
+                  </mtr>
+                  <mtr>
+                    <mtd><mn>0</mn></mtd>
+                    <mtd><msup><mn>3</mn><mrow><mo>|</mo><mi>y</mi><mo>|</mo></mrow></msup></mtd>
+                    <mtd><mrow><msup><mn>3</mn><mrow><mo>|</mo><mi>x</mi><mo>|</mo></mrow></msup><mo>−</mo><msup><mn>3</mn><mrow><mo>|</mo><mi>y</mi><mo>|</mo></mrow></msup></mrow></mtd>
+                  </mtr>
+                  <mtr>
+                    <mtd><mn>0</mn></mtd>
+                    <mtd><mn>0</mn></mtd>
+                    <mtd><msup><mn>3</mn><mrow><mo>|</mo><mi>x</mi><mo>|</mo></mrow></msup></mtd>
+                  </mtr>
+                </mtable>
+                <mo>]</mo>
+              </mrow>
+            </math>
           </div>
 
           <p>Direct multiplication gives:</p>
           <div class="properties">
-            <div><strong>Concatenation</strong><br>Ψ(<var>xx′</var>,<var>yy′</var>) = Ψ(<var>x</var>,<var>y</var>)Ψ(<var>x′</var>,<var>y′</var>)</div>
-            <div><strong>Equality test</strong><br><var>e</var><sub>1</sub><sup>T</sup>Ψ(<var>x</var>,<var>y</var>)<var>e</var><sub>3</sub> = 0 ⇔ <var>x</var> = <var>y</var></div>
-            <div><strong>Nonsingularity</strong><br>det Ψ(<var>x</var>,<var>y</var>) = 3<sup>|<var>x</var>|+|<var>y</var>|</sup> ≠ 0</div>
+            <div>
+              <strong>Concatenation</strong>
+              <math display="block">
+                <mrow>
+                  <mi>Ψ</mi><mo>(</mo><mi>x</mi><msup><mi>x</mi><mo>′</mo></msup><mo>,</mo><mi>y</mi><msup><mi>y</mi><mo>′</mo></msup><mo>)</mo>
+                  <mo>=</mo>
+                  <mi>Ψ</mi><mo>(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo>)</mo>
+                  <mi>Ψ</mi><mo>(</mo><msup><mi>x</mi><mo>′</mo></msup><mo>,</mo><msup><mi>y</mi><mo>′</mo></msup><mo>)</mo>
+                </mrow>
+              </math>
+            </div>
+            <div>
+              <strong>Equality test</strong>
+              <math display="block">
+                <mrow>
+                  <msubsup><mi>e</mi><mn>1</mn><mi mathvariant="normal">T</mi></msubsup>
+                  <mi>Ψ</mi><mo>(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo>)</mo>
+                  <msub><mi>e</mi><mn>3</mn></msub>
+                  <mo>=</mo><mn>0</mn><mo>⇔</mo><mi>x</mi><mo>=</mo><mi>y</mi>
+                </mrow>
+              </math>
+            </div>
+            <div>
+              <strong>Nonsingularity</strong>
+              <math display="block">
+                <mrow>
+                  <mi mathvariant="normal">det</mi><mi>Ψ</mi><mo>(</mo><mi>x</mi><mo>,</mo><mi>y</mi><mo>)</mo>
+                  <mo>=</mo>
+                  <msup><mn>3</mn><mrow><mo>|</mo><mi>x</mi><mo>|</mo><mo>+</mo><mo>|</mo><mi>y</mi><mo>|</mo></mrow></msup>
+                  <mo>≠</mo><mn>0</mn>
+                </mrow>
+              </math>
+            </div>
           </div>
 
           <p>Let <var>X</var><sub>1</sub>, …, <var>X</var><sub>4</sub> encode the four ordinary word pairs. With ε denoting the empty word, define <var>X</var><sub>★</sub> = Ψ(<var>M</var>, ε) and</p>
-          <div class="formula"><var>c</var> = <var>X</var><sub>★</sub><var>e</var><sub>3</sub>, &nbsp; <var>A</var><sub>★</sub> = <var>c e</var><sub>1</sub><sup>T</sup> = <var>X</var><sub>★</sub><var>e</var><sub>3</sub><var>e</var><sub>1</sub><sup>T</sup>.</div>
+          <div class="formula">
+            <math display="block">
+              <mrow>
+                <mi>c</mi><mo>=</mo><msub><mi>X</mi><mo>★</mo></msub><msub><mi>e</mi><mn>3</mn></msub><mo>,</mo>
+                <mspace width="1em"></mspace>
+                <msub><mi>A</mi><mo>★</mo></msub>
+                <mo>=</mo>
+                <mi>c</mi><msubsup><mi>e</mi><mn>1</mn><mi mathvariant="normal">T</mi></msubsup>
+                <mo>=</mo>
+                <msub><mi>X</mi><mo>★</mo></msub><msub><mi>e</mi><mn>3</mn></msub><msubsup><mi>e</mi><mn>1</mn><mi mathvariant="normal">T</mi></msubsup><mo>.</mo>
+              </mrow>
+            </math>
+          </div>
           <p>The mortality family is {<var>X</var><sub>1</sub>, …, <var>X</var><sub>4</sub>, <var>A</var><sub>★</sub>}. Its ordinary generators are nonsingular and upper triangular. The third coordinate of <var>c</var> is 3<sup>|<var>M</var>|</sup>, so <var>A</var><sub>★</sub> is nonzero and has rank one.</p>
 
           <h4 id="forward">Forward implication</h4>
           <p>If <var>w</var> satisfies <var>U</var>(<var>w</var>)<var>M</var> = <var>V</var>(<var>w</var>), the corresponding matrix product <var>X</var><sub><var>w</var></sub> satisfies</p>
-          <div class="formula"><var>A</var><sub>★</sub><var>X</var><sub><var>w</var></sub><var>A</var><sub>★</sub> = <var>c</var>(<var>e</var><sub>1</sub><sup>T</sup><var>X</var><sub><var>w</var></sub><var>X</var><sub>★</sub><var>e</var><sub>3</sub>)<var>e</var><sub>1</sub><sup>T</sup> = 0.</div>
+          <div class="formula">
+            <math display="block">
+              <mrow>
+                <msub><mi>A</mi><mo>★</mo></msub><msub><mi>X</mi><mi>w</mi></msub><msub><mi>A</mi><mo>★</mo></msub>
+                <mo>=</mo>
+                <mi>c</mi><mo>(</mo>
+                <msubsup><mi>e</mi><mn>1</mn><mi mathvariant="normal">T</mi></msubsup>
+                <msub><mi>X</mi><mi>w</mi></msub><msub><mi>X</mi><mo>★</mo></msub><msub><mi>e</mi><mn>3</mn></msub>
+                <mo>)</mo><msubsup><mi>e</mi><mn>1</mn><mi mathvariant="normal">T</mi></msubsup>
+                <mo>=</mo><mn>0</mn><mo>.</mo>
+              </mrow>
+            </math>
+          </div>
           <p>The same generator supplies both rank-one factors; no separate boundary generator is required.</p>
 
           <h4 id="converse">Converse for arbitrary products</h4>
           <p>A product containing no <var>A</var><sub>★</sub> is nonsingular. A product containing <var>t</var> copies has a unique decomposition</p>
-          <div class="formula"><var>P</var><sub>0</sub><var>A</var><sub>★</sub><var>P</var><sub>1</sub><var>A</var><sub>★</sub> ··· <var>A</var><sub>★</sub><var>P</var><sub>t</sub>,</div>
+          <div class="formula">
+            <math display="block">
+              <mrow>
+                <msub><mi>P</mi><mn>0</mn></msub><msub><mi>A</mi><mo>★</mo></msub>
+                <msub><mi>P</mi><mn>1</mn></msub><msub><mi>A</mi><mo>★</mo></msub>
+                <mo>⋯</mo>
+                <msub><mi>A</mi><mo>★</mo></msub><msub><mi>P</mi><mi>t</mi></msub><mo>,</mo>
+              </mrow>
+            </math>
+          </div>
           <p>where every <var>P</var><sub>j</sub> is a possibly empty ordinary product. Expanding the rank-one factors gives</p>
-          <div class="formula">(<var>P</var><sub>0</sub><var>c</var>) [∏<sub>1≤<var>j</var>&lt;<var>t</var></sub> <var>e</var><sub>1</sub><sup>T</sup><var>P</var><sub>j</sub><var>c</var>] (<var>e</var><sub>1</sub><sup>T</sup><var>P</var><sub>t</sub>).</div>
+          <div class="formula">
+            <math display="block">
+              <mrow>
+                <mo stretchy="false">(</mo><msub><mi>P</mi><mn>0</mn></msub><mi>c</mi><mo stretchy="false">)</mo>
+                <mo>[</mo>
+                <munder><mo>∏</mo><mrow><mn>1</mn><mo>≤</mo><mi>j</mi><mo>&lt;</mo><mi>t</mi></mrow></munder>
+                <msubsup><mi>e</mi><mn>1</mn><mi mathvariant="normal">T</mi></msubsup><msub><mi>P</mi><mi>j</mi></msub><mi>c</mi>
+                <mo>]</mo>
+                <mo stretchy="false">(</mo><msubsup><mi>e</mi><mn>1</mn><mi mathvariant="normal">T</mi></msubsup><msub><mi>P</mi><mi>t</mi></msub><mo stretchy="false">)</mo><mo>.</mo>
+              </mrow>
+            </math>
+          </div>
           <p>The exterior column and row are nonzero because the ordinary blocks are nonsingular. For <var>t</var> = 1 the product is therefore nonzero. For <var>t</var> ≥ 2 it vanishes exactly when some internal scalar <var>e</var><sub>1</sub><sup>T</sup><var>P</var><sub>j</sub><var>c</var> vanishes. Writing <var>P</var><sub>j</sub> = <var>X</var><sub><var>w</var></sub>, the ternary equality test identifies this condition with <var>U</var>(<var>w</var>)<var>M</var> = <var>V</var>(<var>w</var>).</p>
 
           <div class="aside">
             <h4 id="boundary-compiler">Reusable fixed-boundary compiler</h4>
             <p>Let α be any finite source alphabet, let <var>u</var>, <var>v</var>: α → {0,1}<sup>*</sup>, and fix right boundaries <var>s</var>, <var>t</var>. Put <var>X</var><sub><var>a</var></sub> = Ψ(<var>u</var>(<var>a</var>), <var>v</var>(<var>a</var>)), <var>X</var><sub>★</sub> = Ψ(<var>s</var>, <var>t</var>), and <var>A</var><sub>★</sub> = <var>X</var><sub>★</sub><var>e</var><sub>3</sub><var>e</var><sub>1</sub><sup>T</sup>. Then</p>
-            <div class="formula plain">{<var>X</var><sub><var>a</var></sub> : <var>a</var>∈α} ∪ {<var>A</var><sub>★</sub>} is mortal &nbsp; ⇔ &nbsp; ∃<var>w</var>∈α<sup>*</sup>: <var>u</var>(<var>w</var>)<var>s</var> = <var>v</var>(<var>w</var>)<var>t</var>.</div>
+            <div class="formula plain">
+              <math display="block">
+                <mrow>
+                  <mo>{</mo><msub><mi>X</mi><mi>a</mi></msub><mo>:</mo><mi>a</mi><mo>∈</mo><mi>α</mi><mo>}</mo>
+                  <mo>∪</mo>
+                  <mo>{</mo><msub><mi>A</mi><mo>★</mo></msub><mo>}</mo>
+                  <mspace width="0.5em"></mspace><mtext>is mortal</mtext><mspace width="0.5em"></mspace>
+                  <mo>⇔</mo>
+                  <mo>∃</mo><mi>w</mi><mo>∈</mo><msup><mi>α</mi><mo>*</mo></msup><mo>:</mo>
+                  <mi>u</mi><mo>(</mo><mi>w</mi><mo>)</mo><mi>s</mi>
+                  <mo>=</mo>
+                  <mi>v</mi><mo>(</mo><mi>w</mi><mo>)</mo><mi>t</mi><mo>.</mo>
+                </mrow>
+              </math>
+            </div>
             <p>The construction uses |α| ordinary generators and one rank-one generator. The fracture formula covers every product word; no witness normal form is assumed. Its machine-checked statement is <a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/main/MatrixMortality/TerminalReduction.lean"><code>absorbedFamilyInt_mortal_iff_terminal_match</code></a>. Endpoint absorption is prior art <a href="#ref-hhh-2007">[Halava–Harju–Hirvensalo 2007]</a>; the new input is the four-letter fixed-boundary source.</p>
           </div>
 

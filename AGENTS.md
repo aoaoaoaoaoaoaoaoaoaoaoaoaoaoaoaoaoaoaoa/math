@@ -69,6 +69,13 @@ real `h2` inside the `summary`. Do not replace this with JavaScript, synthetic b
 presentational concealment. Subsection fragment links must remain capable of revealing their
 closed ancestor, and print must expose all section contents.
 
+The standalone HTML owns its mathematics directly. Author every structurally mathematical
+expression as native MathML; matrices use `mtable`. Do not introduce MathJax, KaTeX, TeX
+preprocessing, generated equation images, CSS-drawn notation, or a second mathematical source.
+Unicode remains lawful for isolated symbols in prose, titles, metadata, and literal words. A
+`.formula` is presentation around one direct `<math display="block">` child, never a substitute
+for mathematical markup.
+
 The contents list must mirror the document hierarchy through `h4`: `h2`, `h3`, and `h4` links
 occupy successive nested list levels, and every linked heading owns its fragment `id`. `h5` is a
 local heading inside a bounded proof component and does not enter the page-level contents.

@@ -92,6 +92,23 @@ assert_xpath_count 1 "($major_sections)[1]/summary/h2[@id='known-stuff' and norm
 assert_xpath_count 1 "($major_sections)[2]/summary/h2[@id='new-stuff' and normalize-space()='New Stuff']"
 assert_xpath_count 1 "($major_sections)[3]/summary/h2[@id='bookkeeping' and normalize-space()='Bookkeeping']"
 
+formulas='//div[contains(concat(" ", normalize-space(@class), " "), " formula ")]'
+formula_count="$(xpath_count "$formulas")"
+[[ "$formula_count" != 0 ]] || { printf 'publication contains no display mathematics\n' >&2; exit 1; }
+assert_xpath_count "$formula_count" "$formulas/math[@display='block']"
+assert_xpath_count 0 "$formulas[count(math) != 1 or *[not(self::math)]]"
+
+properties='//div[contains(concat(" ", normalize-space(@class), " "), " properties ")]'
+assert_xpath_count 3 "$properties/div/math[@display='block']"
+assert_xpath_count 0 "$properties/div[count(math) != 1 or *[not(self::strong or self::math)]]"
+assert_xpath_count 0 '//math[not(ancestor::div[contains(concat(" ", normalize-space(@class), " "), " formula ") or contains(concat(" ", normalize-space(@class), " "), " properties ")])]'
+assert_xpath_count 0 '//div[contains(concat(" ", normalize-space(@class), " "), " matrix-equation ") or contains(concat(" ", normalize-space(@class), " "), " matrix ")]'
+
+if rg --line-number -i 'MathJax|KaTeX|<script([[:space:]>])' index.html; then
+  printf 'mathematical rendering runtime escaped into standalone HTML\n' >&2
+  exit 1
+fi
+
 for level in 2 3 4; do
   [[ "$(xpath_count "//h$level[not(@id)]")" == 0 ]] || {
     printf 'h%s without fragment id\n' "$level" >&2
