@@ -122,6 +122,35 @@
           <div class="formula plain">M<sub>3</sub>(5), &nbsp; M<sub>5</sub>(4), &nbsp; M<sub>6</sub>(3), &nbsp; M<sub>12</sub>(2).</div>
           <p>This work supplies the first entry directly; the third and fourth are consequences of the prior packing theorem. These are undecidability bounds, not a complete decidability frontier; the cells immediately below remain unresolved.</p>
 
+          <p>Updating Table 5 of <a href="#ref-chhn-2014">[Cassaigne et al. 2014]</a> and adjoining the elementary <var>d</var> = 1 and <var>k</var> = 1 margins gives the following status window. Identical consecutive rows and columns are merged.</p>
+          <div class="table-scroll">
+          <table class="status-table">
+            <caption>Decidability of M<sub>d</sub>(<var>k</var>) after this work</caption>
+            <thead>
+              <tr>
+                <th scope="col"><var>d</var> \ <var>k</var></th>
+                <th scope="col">1</th>
+                <th scope="col">2</th>
+                <th scope="col">3</th>
+                <th scope="col">4</th>
+                <th scope="col">5</th>
+                <th scope="col">≥6</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">1</th><td>D</td><td>D</td><td>D</td><td>D</td><td>D</td><td>D</td></tr>
+              <tr><th scope="row">2</th><td>D</td><td>D</td><td>?</td><td>?</td><td>?</td><td>?</td></tr>
+              <tr><th scope="row">3–4</th><td>D</td><td>?</td><td>?</td><td>?</td><td><strong class="new-result" aria-label="U, new in this work">U</strong></td><td>U</td></tr>
+              <tr><th scope="row">5</th><td>D</td><td>?</td><td>?</td><td>U</td><td>U</td><td>U</td></tr>
+              <tr><th scope="row">6–8</th><td>D</td><td>?</td><td><strong class="new-result" aria-label="U, new in this work">U</strong></td><td>U</td><td>U</td><td>U</td></tr>
+              <tr><th scope="row">9–11</th><td>D</td><td>?</td><td>U</td><td>U</td><td>U</td><td>U</td></tr>
+              <tr><th scope="row">12–14</th><td>D</td><td><strong class="new-result" aria-label="U, new in this work">U</strong></td><td>U</td><td>U</td><td>U</td><td>U</td></tr>
+              <tr><th scope="row">≥15</th><td>D</td><td>U</td><td>U</td><td>U</td><td>U</td><td>U</td></tr>
+            </tbody>
+          </table>
+          </div>
+          <p>D means decidable, ? unresolved, and U undecidable. <strong class="new-result">U</strong> marks cells first established here: (3,5), (4,5), (6,3), (7,3), (8,3), (12,2), (13,2), and (14,2). The first is proved directly; the other seven follow by dimension padding or the established packing reduction.</p>
+
           <div>
           <h3 id="four-tiles">A synchronized tag compiler</h3>
           <p>Fix <var>β</var> ≥ 3 and a word <var>q</var> over <span class="word">b,c</span>. Define the tag system</p>
@@ -313,7 +342,7 @@
 
   <footer>
     <div>
-      <p>GPT-5.6 Sol · elicited by @eternalism_4eva · 21 July 2026</p>
+      <p>GPT-5.6 Sol · elicited by @eternalism_4eva · 22 July 2026</p>
     </div>
   </footer>
 </body>
