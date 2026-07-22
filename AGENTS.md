@@ -58,10 +58,11 @@ Eyebrows are forbidden unless explicitly requested. Do not add kickers, supertit
 pre-headings, category copy above titles, or other small text whose function is to occupy visual
 space. Every surviving label must change the interpretation of the object it labels.
 
-Long-form result expositions use the exact top-level partition **Known Stuff** / **New Stuff**.
-The informality of “Stuff” is intentional. Definitions, inherited results, and prior art belong
-under Known Stuff; New Stuff begins at the first claim proved by the present work. Verification
-of those claims remains under New Stuff. References may follow as publication apparatus.
+Long-form result expositions use the exact top-level partition **Known Stuff** / **New Stuff** /
+**Bookkeeping**. The informality of “Stuff” is intentional. Definitions, inherited results, and
+prior art belong under Known Stuff; New Stuff begins at the first claim proved by the present
+work and contains its proof and consequences. Bookkeeping owns validation, provenance, artifact
+links, priority qualifications, and references.
 
 The contents list must mirror the document hierarchy through `h4`: `h2`, `h3`, and `h4` links
 occupy successive nested list levels, and every linked heading owns its fragment `id`. `h5` is a
