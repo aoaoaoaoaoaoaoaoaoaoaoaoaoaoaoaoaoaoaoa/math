@@ -24,6 +24,13 @@ open MatrixMortality
 #print axioms Undecidability.exists_universalTM2
 #print axioms Undecidability.CyclicTag.simulate_reaches
 #print axioms Undecidability.CyclicTag.reaches_firing_phase
+#print axioms Undecidability.CyclicTag.exists_avoidingReaches_firing_of_run
 #print axioms Undecidability.NearyCompiler.read_wholeAppendant_track
 #print axioms Undecidability.NearyCompiler.read_next_dataBit
 #print axioms Undecidability.NearyCompiler.initialTokens_stable
+#print axioms Undecidability.NearyCompiler.read_initialQueue
+#print axioms Undecidability.NearyCompiler.read_avoidingReaches
+#print axioms Undecidability.NearyCompiler.read_until_firing
+#print axioms Undecidability.NearyCompiler.read_to_haltingSeed
+#print axioms Undecidability.NearyCompiler.read_exact_firing_to_haltingSeed
+#print axioms Undecidability.NearyCompiler.drain_junk_before_haltingSeed

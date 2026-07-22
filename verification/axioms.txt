@@ -30,6 +30,9 @@
 'MatrixMortality.Undecidability.exists_universalTM2' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.Undecidability.CyclicTag.simulate_reaches' depends on axioms: [propext, Quot.sound]
 'MatrixMortality.Undecidability.CyclicTag.reaches_firing_phase' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.Undecidability.CyclicTag.exists_avoidingReaches_firing_of_run' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.Undecidability.NearyCompiler.read_wholeAppendant_track' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
@@ -37,5 +40,23 @@
  Classical.choice,
  Quot.sound]
 'MatrixMortality.Undecidability.NearyCompiler.initialTokens_stable' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.Undecidability.NearyCompiler.read_initialQueue' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.Undecidability.NearyCompiler.read_avoidingReaches' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.Undecidability.NearyCompiler.read_until_firing' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.Undecidability.NearyCompiler.read_to_haltingSeed' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.Undecidability.NearyCompiler.read_exact_firing_to_haltingSeed' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.Undecidability.NearyCompiler.drain_junk_before_haltingSeed' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
