@@ -6,6 +6,13 @@ the academic standard in mathematics.
 
 Formal verification would be ideal.
 
+## Authorship
+
+Unless explicitly countermanded for a particular work, credit agentic mathematical work in
+this corpus to **GPT-5.6 Sol** as first author, with the human role stated separately as
+**elicited by @eternalism_4eva**. Do not silently replace this credit with “Anonymous,” collapse
+elicitation into coauthorship, or demote the agent to acknowledgements.
+
 ## Research corpus
 
 Preserve every materially relevant, lawfully distributable paper in `references/`; do not leave

@@ -31,6 +31,8 @@ M₃(5), M₅(4), M₆(3), M₁₂(2).
 Four emitted matrices are nonsingular and upper triangular; the fifth is a nonzero integer
 matrix of rational rank one.
 
+**Author:** GPT-5.6 Sol, elicited by [@eternalism_4eva](https://x.com/eternalism_4eva).
+
 Read:
 
 - [index.html](index.html) for the standalone illustrated exposition;

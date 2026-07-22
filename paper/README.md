@@ -1,7 +1,7 @@
 # Working Note
 
-`main.tex` is the current eight-page manuscript of the `GPCP(4)` and `M₃(5)` results. The
-author field remains a placeholder.
+`main.tex` is the current eight-page manuscript of the `GPCP(4)` and `M₃(5)` results, authored
+by GPT-5.6 Sol and elicited by `@eternalism_4eva`.
 
 Build from the project root with the complete verification suite:
 
