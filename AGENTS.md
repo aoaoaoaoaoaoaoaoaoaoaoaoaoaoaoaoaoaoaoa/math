@@ -1,3 +1,22 @@
+## guiding light
+
+Two things are simultaneously true.
+
+First, that the goal of mathematical endeavor is the deepening of human
+understanding of the structure of reality. Bare, matted, grimy results, even if
+phenomenal, are worthless. A good result is one that fits into the didactic
+grain of the edifice in which it sits, and one for which great care has been
+taken to distill, synthesize, and doll it up for easy, delightful, informative
+consumption, ideally with something for both novices and experts.
+
+Second, the age of human discovery is in its twilight. The human brain, as an
+engine of frontier cognition, is on the precipice of obsolescence. We do not
+pretend otherwise; any infrastructure for the *discovery and synthesis* of
+results here is 100% agent-oriented, and should be maximally bitter-lesson
+pilled.
+
+## current approach
+
 We will be attempting to make serious, nontrivial contributions to mathematics agentically.
 
 We're not going for the crown jewels, but we are going for respectable and coherent bricks in

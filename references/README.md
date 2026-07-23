@@ -16,6 +16,8 @@ and version hazards.
 | [NR08](nuccio-rodaro-2008-2x2-mortality-slides.md) | SOFSEM 2008 author slides; paper peer-reviewed | Original decidability result for singular plus unimodular `2 × 2` integer generators |
 | [PS17](potapov-semukhin-2017-gl2z-singular-membership.md) | peer-reviewed MFCS 2017; CC-BY | Membership, hence mortality, decidable for singular plus unimodular `2 × 2` integer generators |
 | [PS17b](potapov-semukhin-2017-nonsingular-2x2-membership.md) | peer-reviewed SODA 2017; author copy | Membership decidable for arbitrary nonsingular `2 × 2` integer generators; determinant-growth machinery |
+| [PS19](potapov-semukhin-2019-vector-scalar-reachability-sl2z.md) | peer-reviewed JCSS 2019; author manuscript | Vector, scalar, and projective point reachability are decidable for finitely generated `SL₂(ℤ)` semigroups |
+| [Bacik25](bacik-2025-order-four-skolem.md) | peer-reviewed TheoretiCS 2025; CC-BY | Skolem decidability for algebraic linear recurrences through order four; arithmetic input to the low-dimensional pair campaign |
 | [Nicolas08](nicolas-2008-gpcp-semi-thue.md) | arXiv v5 lecture notes | Definition and old open/undecidable bounds for bounded GPCP; fixes the four-generator counting convention |
 | [HH11](halava-holub-2011-binary-gpcp-reduction-tree.md) | peer-reviewed IJFCS 2011 | Reduction-tree and end-block structure at the decidable `GPCP(2)` endpoint; source-compression machinery |
 | [Rote24](rote-2024-fixed-pfa-emptiness-full-version.md) | arXiv full version | Longer version of Rote's terminal-pair repair and uniqueness discussion |
