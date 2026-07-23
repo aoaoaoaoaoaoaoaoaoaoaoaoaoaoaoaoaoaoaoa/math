@@ -7,8 +7,9 @@ import MatrixMortality.NearyEncoding
 
 This file fixes the computability-theoretic boundary of the development.  The source is
 mathlib's universal partially recursive evaluator at input zero.  The targets are concrete binary
-four-generator GPCP instances and five labelled `3 × 3` integer matrices.  Simulation compilers
-belong in later files; no external undecidability premise is introduced here.
+four-generator GPCP instances, five labelled `3 × 3` integer matrices, and four labelled `4 × 4`
+integer matrices. Simulation compilers belong in later files; no external undecidability premise
+is introduced here.
 -/
 
 namespace MatrixMortality
@@ -66,6 +67,9 @@ def BinaryGPCP4.Solvable (problem : BinaryGPCP4) : Prop :=
 /-- Five labelled `3 × 3` integer matrices, represented transparently for `Primcodable`. -/
 abbrev Mortality35 := Fin 5 → Fin 3 → Fin 3 → ℤ
 
+/-- Four labelled `4 × 4` integer matrices, represented transparently for `Primcodable`. -/
+abbrev Mortality44 := Fin 4 → Fin 4 → Fin 4 → ℤ
+
 /-- Interpret the transparent encoding as a family with matrix multiplication. -/
 def Mortality35.matrix (problem : Mortality35) (label : Fin 5) :
     Matrix (Fin 3) (Fin 3) ℤ :=
@@ -73,6 +77,15 @@ def Mortality35.matrix (problem : Mortality35) (label : Fin 5) :
 
 /-- Mortality requires a nonempty generator word. -/
 def Mortality35.Mortal (problem : Mortality35) : Prop :=
+  IsMortal problem.matrix
+
+/-- Interpret the transparent `M₄(4)` encoding as a matrix family. -/
+def Mortality44.matrix (problem : Mortality44) (label : Fin 4) :
+    Matrix (Fin 4) (Fin 4) ℤ :=
+  problem label
+
+/-- Mortality for four labelled `4 × 4` matrices requires a nonempty generator word. -/
+def Mortality44.Mortal (problem : Mortality44) : Prop :=
   IsMortal problem.matrix
 
 theorem gpcp4_not_computable_of_reduction
@@ -85,6 +98,13 @@ theorem gpcp4_not_computable_of_reduction
 theorem mortality35_not_computable_of_reduction
     (reduction : CodeHalts ≤₀ Mortality35.Mortal) :
     ¬ComputablePred Mortality35.Mortal := by
+  intro decidableTarget
+  exact codeHalts_not_computable
+    (ComputablePred.computable_of_manyOneReducible reduction decidableTarget)
+
+theorem mortality44_not_computable_of_reduction
+    (reduction : CodeHalts ≤₀ Mortality44.Mortal) :
+    ¬ComputablePred Mortality44.Mortal := by
   intro decidableTarget
   exact codeHalts_not_computable
     (ComputablePred.computable_of_manyOneReducible reduction decidableTarget)

@@ -1,4 +1,7 @@
 import MatrixMortality.NearyEncoding
+import MatrixMortality.PairedCompression
+import MatrixMortality.PairedMortality
 import MatrixMortality.Undecidability.NearyData
 import MatrixMortality.Undecidability.NearyProblems
+import MatrixMortality.Undecidability.PairedProblems
 import MatrixMortality.Undecidability.UniversalMachine

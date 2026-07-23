@@ -1,13 +1,17 @@
 # Formal Verification
 
-The Lean development verifies the new instance-level reduction
+The Lean development verifies the source theorem and both matrix compilers
 
 ```text
 four-tile terminal equation
   ↔ restricted tag halting
   ↔ corrected binary five-pair PCP
   ↔ four-generator GPCP
-  ↔ mortality of the emitted five 3 × 3 integer matrices.
+  ↔ mortality of the emitted five 3 × 3 integer matrices;
+
+four-tile terminal equation
+  ↔ scalar zero reachability for three 4 × 4 integer matrices
+  ↔ mortality of the emitted four 4 × 4 integer matrices.
 ```
 
 It does not assume Neary's defective terminal-pair converse or Rote's long-block repair.
@@ -36,6 +40,14 @@ primitive terminality, the ternary word-pair representation, the exact integer g
 the mortality converse for every nonempty word over all five labels. The four ordinary matrices
 are nonsingular and upper triangular. The fifth is nonzero and has rank one over `ℚ`.
 
+For the `4 × 4` compiler, Lean checks the side-separating change of basis, agreement of each
+rule/erasure pair on the complete upper-word plane, and the explicit four-dimensional paired-role
+representation. A right-to-left transducer decodes every arbitrary control word, and a constructive
+surjectivity theorem encodes every four-role word. The three control matrices have common first
+column `e₁`, and the toggle is an explicit permutation matrix. Adding the nonzero rank-one matrix
+`CL` gives four integer matrices; the mortality converse covers every number and placement of
+separators without assuming that the singular control matrices are invertible.
+
 ## Modules
 
 | File | Responsibility |
@@ -48,6 +60,8 @@ are nonsingular and upper triangular. The fifth is nonzero and has rank one over
 | `TerminalTile.lean` | arbitrary rank-one chains and fracture at every separator |
 | `TerminalReduction.lean` | rational and integer fixed-boundary mortality compiler |
 | `TerminalSource.lean` | generic primitive extraction and GPCP bridge |
+| `PairedCompression.lean` | side-normal representation, paired-role compression, and arbitrary-word decoding |
+| `PairedMortality.lean` | common-column mortality converse and exact integer `4 × 4` family |
 | `LintAudit.lean` | package-wide default mathlib environment lint |
 | `AxiomAudit.lean` | transitive axioms of publication-facing declarations |
 | `Undecidability/UniversalMachine.lean` | fixed verified two-tape interpreter for mathlib code halting |
@@ -58,6 +72,7 @@ are nonsingular and upper triangular. The fifth is nonzero and has rank one over
 | `Undecidability/NearySimulation.lean` | traversal semantics of raw, bit, epsilon, and halting objects |
 | `Undecidability/NearyData.lean` | garbage calculus, token invariant, and ordinary cyclic pulses |
 | `Undecidability/NearyProblems.lean` | canonical `Fin 4` and `Fin 5` target instances |
+| `Undecidability/PairedProblems.lean` | canonical four-matrix target instance and structural promises |
 | `Undecidability/Problems.lean` | encoded source and target decision predicates |
 
 ## Principal Declarations
@@ -75,6 +90,15 @@ are nonsingular and upper triangular. The fifth is nonzero and has rank one over
 | Arithmetic-envelope specialization | `NearyArithmeticEnvelope.mortality_iff_halts` |
 | Four ordinary matrices are nonsingular and triangular | `nearyMortality_ordinary_det_ne_zero`, `nearyMortality_ordinary_upperTriangular` |
 | Exceptional matrix is nonzero and rank one | `nearyMortality_terminal_ne_zero`, `nearyMortality_terminal_rank_eq_one` |
+| Rule and erasure matrices agree on the upper-side plane | `rule_erase_agree_on_upperSide` |
+| Every compressed word realizes its decoded four-role word | `pairedProduct_mulVec_column`, `pairedCoefficient_eq_sideCoefficient` |
+| Every four-role word has a compressed encoding | `decodePairedWord_surjective` |
+| Three-matrix scalar zero iff the terminal equation | `paired_zero_iff_terminal_match` |
+| Four integer matrices mortal iff the terminal equation | `pairedMortalityFamily_int_mortal_iff_terminal_match` |
+| Canonical `M₄(4)` instance mortal iff tag halting | `nearyMortality44_mortal_iff_tagHaltsFrom` |
+| Three control matrices have common first column | `nearyMortality44_control_fixes_anchor` |
+| Toggle control is a permutation matrix | `nearyMortality44_toggle_eq_permMatrix` |
+| Fourth matrix is nonzero and rank one | `nearyMortality44_separator_ne_zero`, `nearyMortality44_separator_rank_eq_one` |
 | Mathlib code halting has a verified `TM2` interpreter | `exists_universalTM2` |
 | Two-tag executions reach their cyclic firing phase | `CyclicTag.reaches_firing_phase` |
 | A woven compiler word emits its prescribed track | `read_wholeAppendant_track` |
@@ -126,10 +150,13 @@ q.length = (xβ + 1)(β−1),
 so every compiler output used by the reduction inhabits `NearyArithmeticEnvelope`. The envelope
 is deliberately broader than the exact Table 2 output family.
 
-Thus the source-to-matrix equivalence and a substantial proper prefix of the universality
-compiler are machine-checked. The published undecidability theorem still uses Neary's
-peer-reviewed Lemma 9 at the remaining external boundary. CHHN's generator-dimension trades and
-the bibliographic priority claim are also external to Lean.
+Thus both source-to-matrix equivalences and a substantial proper prefix of the universality
+compiler are machine-checked. The exact encoded `M₄(4)` result currently ends at
+`nearyMortality44_mortal_iff_tagHaltsFrom`; the final no-decider theorem is conditional on a
+computable source reduction through `mortality44_not_computable_of_reduction`. The published
+undecidability conclusion still uses Neary's peer-reviewed Lemma 9 at that remaining external
+boundary. CHHN's generator-dimension trades and bibliographic priority claims are also external
+to Lean and are not dependencies of the direct `M₄(4)` compiler.
 
 ## Prior Formalizations
 
@@ -166,4 +193,6 @@ The build treats warnings as errors, disables automatic implicit variables, enab
 strict syntax profile, runs every default environment linter, compares
 `verification/axioms.txt` byte-for-byte, rejects proof escapes and strictness relaxations, runs
 the typed finite falsifier, validates the HTML, checks reference-PDF identities, and reproduces
-the manuscript PDF. The finite search is a transcription-error detector, not part of the proof.
+the manuscript PDF. The finite search independently checks bounded source words, compressed
+coefficients, decoder coverage, and arbitrary four-matrix products. It is a transcription-error
+detector, not part of the proof.
