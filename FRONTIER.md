@@ -48,13 +48,13 @@ propagation.
 | `Z₃(4) → M₃(5)` | `M₃(5)` | the main result |
 | `Z₇(2) → M₇(3)` | `M₇(3)` | dominated by `M₆(3)` |
 
-Thus the minimal known `Z` undecidability antichain becomes
+As of 2026-07-22, the established Pareto-minimal undecidable `Z` points become
 
 ```text
 Z₃(4), Z₄(3), Z₇(2),
 ```
 
-and the minimal known `R` undecidability antichain becomes
+and the established Pareto-minimal undecidable `R` points become
 
 ```text
 R₃(5), R₄(4), R₅(3), R₈(2).
@@ -120,8 +120,8 @@ are prior art; see `audits/m44-prior-art-2026-07-22.md`.
 ## Current mortality staircase
 
 After terminal absorption, paired-role compression, dimension padding, and CHHN's
-generator–dimension trade, the
-minimal known undecidable antichain is
+generator–dimension trade, the established Pareto-minimal undecidable points as of
+2026-07-22 are
 
 ```text
 M₃(5), M₄(4), M₆(3), M₁₂(2).

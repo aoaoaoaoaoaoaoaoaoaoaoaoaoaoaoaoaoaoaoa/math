@@ -92,7 +92,8 @@ theorem nearyMortality44_control_fixes_anchor (β : Nat) (body : List TagLetter)
       pairedMortalityFamily, separatedGenerator] using
       pairedGenerator_mulVec_anchor ℤ β body .toggle
 
-/-- The third control generator is the permutation matrix swapping coordinates one and three. -/
+/-- The third control generator swaps one-based coordinates two and four,
+equivalently `Fin 4` indices `1` and `3`. -/
 theorem nearyMortality44_toggle_eq_permMatrix (β : Nat) (body : List TagLetter) :
     (nearyMortality44 β body).matrix 2 =
       (Equiv.swap (1 : Fin 4) 3).permMatrix ℤ := by

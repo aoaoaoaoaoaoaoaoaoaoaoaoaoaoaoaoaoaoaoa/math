@@ -157,7 +157,8 @@ def pairedToggleMatrix (R : Type*) [CommRing R] : Matrix (Fin 4) (Fin 4) R :=
      0, 0, 1, 0;
      0, 1, 0, 0]
 
-/-- The phase toggle is the permutation matrix swapping the two lower-word coordinates. -/
+/-- The phase toggle swaps one-based coordinates two and four,
+equivalently `Fin 4` indices `1` and `3`. -/
 theorem pairedToggleMatrix_eq_permMatrix (R : Type*) [CommRing R] :
     pairedToggleMatrix R = (Equiv.swap (1 : Fin 4) 3).permMatrix R := by
   ext i j

@@ -126,6 +126,30 @@
             </math>
           </div>
           <p>The soundness proof analyzes every role word. Zero-run synchronization forces exact deletion-width blocks, and a global history equation reconstructs lawful tag steps. Neary’s restricted binary-tag undecidability theorem supplies the external source family <a href="#ref-neary-2015">[Neary 2015]</a>.</p>
+          <div class="theorem">
+            <p><strong>Neary padding corollary.</strong> Neary’s compiler has <var>β</var> = 10<var>p</var> and permits a computably chosen sufficiently large padding parameter <var>s</var>. Taking <var>s</var> = <var>x</var>(<var>β</var>−1)+1 makes the body length</p>
+            <div class="formula plain">
+              <math display="block">
+                <mrow>
+                  <mo>|</mo><mi>q</mi><mo>|</mo>
+                  <mo>=</mo><mi>β</mi><mi>s</mi><mo>−</mo><mn>1</mn>
+                  <mo>=</mo><mo>(</mo><mi>x</mi><mi>β</mi><mo>+</mo><mn>1</mn><mo>)</mo><mo>(</mo><mi>β</mi><mo>−</mo><mn>1</mn><mo>)</mo><mo>.</mo>
+                </mrow>
+              </math>
+            </div>
+            <div class="formula plain">
+              <math display="block">
+                <mrow>
+                  <mi>β</mi><mo>&gt;</mo><mn>2</mn><mo>,</mo>
+                  <mspace width="0.7em"></mspace>
+                  <mi>β</mi><mo>−</mo><mn>1</mn><mo>≤</mo><mo>|</mo><mi>q</mi><mo>|</mo><mo>,</mo>
+                  <mspace width="0.7em"></mspace>
+                  <mi>β</mi><mo>−</mo><mn>1</mn><mo>∣</mo><mo>|</mo><mi>q</mi><mo>|</mo><mo>.</mo>
+                </mrow>
+              </math>
+            </div>
+            <p>The padded subfamily remains undecidable. These conditions follow from the construction’s padding freedom, not from the bare statement of Lemma 9.</p>
+          </div>
 
           <h3 id="word-pair-matrices">Word-pair matrices</h3>
           <p>Recode binary symbols as nonzero base-three digits. For a digit word <var>x</var>, let <var>σ</var>(<var>x</var>) be its base-three value. The standard word-pair representation is</p>
@@ -158,7 +182,7 @@
           <p>It is a monoid morphism, and its upper-right entry vanishes exactly when <var>u</var> = <var>v</var> <a href="#ref-chhn-2014">[Cassaigne et al. 2014]</a>. Part I assigns one such matrix to each role and one rank-one boundary matrix, giving five 3 × 3 generators.</p>
 
           <h3 id="previous-bound">Previous bounds</h3>
-          <p>After Part I, the coordinatewise-minimal known mortality-undecidability cells were</p>
+          <p>After Part I, the established Pareto-minimal mortality-undecidability points were</p>
           <div class="formula plain">
             <math display="block">
               <mrow>
@@ -179,7 +203,7 @@
           <p>The rule and deletion roles for a fixed tag symbol have the same upper word. After separating the upper and lower matrix channels, each pair therefore agrees on a two-dimensional subspace. Two three-dimensional phase spaces can be identified along that subspace, leaving four dimensions. A toggle selects which member of each pair acts. Every toggle pattern decodes to a role word, and every role word has an encoding.</p>
 
           <div class="theorem">
-            <p><strong>Paired-role compression.</strong> Let <var>R</var><sub>0</sub>, <var>R</var><sub>1</sub>, <var>D</var><sub>0</sub>, <var>D</var><sub>1</sub> act on a <var>d</var>-dimensional vector space. If <var>R</var><sub>i</sub> and <var>D</var><sub>i</sub> agree on an <var>r</var>-dimensional subspace <var>E</var> for <var>i</var> = 0,1, then scalar zero reachability for the four actions reduces to scalar zero reachability for three actions in dimension 2<var>d</var>−<var>r</var>.</p>
+            <p><strong>Paired-role compression.</strong> Let <var>V</var> be a finite-dimensional vector space over a field, with dim <var>V</var> = <var>d</var>, and let <var>R</var><sub>0</sub>, <var>R</var><sub>1</sub>, <var>D</var><sub>0</sub>, <var>D</var><sub>1</sub> be linear endomorphisms of <var>V</var>. If <var>R</var><sub>i</sub> and <var>D</var><sub>i</sub> agree on an <var>r</var>-dimensional subspace <var>E</var> for <var>i</var> = 0,1, then scalar zero reachability for the four actions reduces to scalar zero reachability for three actions in dimension 2<var>d</var>−<var>r</var>.</p>
           </div>
 
           <p>The Neary role matrices have <var>d</var> = 3 and <var>r</var> = 2. The compressed scalar system has three 4 × 4 matrices. A fourth rank-one matrix converts its zero coefficient into a zero matrix product.</p>
@@ -310,10 +334,10 @@
               </mrow>
             </math>
           </div>
-          <p>The row (<var>ℓ</var><sup>T</sup>, <var>ℓ</var><sup>T</sup>) annihilates <var>K</var>; the column (<var>d</var>,0)<sup>T</sup> descends without restriction. Thus the quotient preserves the required scalar coefficients.</p>
+          <p>The row (<var>ℓ</var><sup>T</sup>, <var>ℓ</var><sup>T</sup>) annihilates <var>K</var>; the boundary column (<var>c</var>,0)<sup>T</sup> descends without restriction. Thus the quotient preserves the required scalar coefficients.</p>
 
           <h4 id="control-words">Arbitrary control words</h4>
-          <p>The quotient matrices are indexed by two data letters and one toggle. Their semantics is defined for every control word, not for a restricted syntax. Scan from right to left with a two-valued phase:</p>
+          <p>The quotient matrices are indexed by two data letters and one toggle. Products are written in source-word order, but the rightmost matrix acts first on the boundary column. The decoder is therefore suffix-controlled: scan from right to left with a two-valued phase.</p>
           <ol>
             <li>The initial phase is rule.</li>
             <li>A toggle flips the phase.</li>
@@ -326,7 +350,7 @@
                 <mi>L</mi>
                 <msub><mi>G</mi><mi>z</mi></msub><mi>C</mi>
                 <mo>=</mo>
-                <msubsup><mi>e</mi><mn>1</mn><mi mathvariant="normal">T</mi></msubsup><msub><mi>X</mi><mrow><mi>τ</mi><mo>(</mo><mi>z</mi><mo>)</mo></mrow></msub><mi>d</mi><mo>.</mo>
+                <msubsup><mi>e</mi><mn>1</mn><mi mathvariant="normal">T</mi></msubsup><msub><mi>X</mi><mrow><mi>τ</mi><mo>(</mo><mi>z</mi><mo>)</mo></mrow></msub><mi>c</mi><mo>.</mo>
               </mrow>
             </math>
           </div>
@@ -411,7 +435,7 @@
             </math>
           </div>
           <p>The vector <var>C</var> and row <var>L</var> are nonzero, so <var>S</var> is nonzero and has rank one over ℚ.</p>
-          <p>The outer-product reduction from scalar zero reachability to mortality is prior art <a href="#ref-chhn-2014">[Cassaigne et al. 2014]</a>. The new steps are the four-dimensional scalar system and the converse for singular controls using their common fixed column.</p>
+          <p>The outer-product reduction from scalar zero reachability to mortality is prior art <a href="#ref-chhn-2014">[Cassaigne et al. 2014]</a>. The new steps are the four-dimensional scalar system and the converse for a control family containing singular data matrices, using its common fixed column.</p>
 
           <h4 id="mortality-forward">Forward implication</h4>
           <p>If a control product <var>Q</var> satisfies <var>LQC</var> = 0, then</p>
@@ -452,8 +476,20 @@
           <p>This covers one separator, adjacent separators, arbitrary exterior blocks, and every separator count. The argument uses the shared fixed column in place of control-matrix invertibility.</p>
 
           <h3 id="consequences">Consequences</h3>
-          <p>The direct scalar construction proves the common-first-column restriction Z̊<sub>4</sub>(3) undecidable. Forgetting the restriction gives Z<sub>4</sub>(3); the established reduction Z<sub><var>d</var></sub>(<var>k</var>) ≤<sub>m</sub> R<sub><var>d</var>+1</sub>(<var>k</var>) gives R<sub>5</sub>(3) <a href="#ref-chhn-2014">[Cassaigne et al. 2014]</a>.</p>
-          <p>The mortality result replaces M<sub>5</sub>(4) by M<sub>4</sub>(4) in the current minimal known undecidability antichain:</p>
+          <p>Here Z<sub><var>d</var></sub>(<var>k</var>) asks, for supplied <var>L</var> and <var>C</var>, whether</p>
+          <div class="formula plain">
+            <math display="block">
+              <mrow><mi>L</mi><mi>Y</mi><mi>C</mi><mo>=</mo><mn>0</mn></mrow>
+            </math>
+          </div>
+          <p>for some nonempty product <var>Y</var> of at most <var>k</var> integer <var>d</var> × <var>d</var> matrices. The decorated form Z̊ requires every generator to have first column <var>e</var><sub>1</sub>. The empty product cannot witness this instance:</p>
+          <div class="formula plain">
+            <math display="block">
+              <mrow><mi>L</mi><mi>C</mi><mo>=</mo><mi>μ</mi><mo>≠</mo><mn>0</mn><mo>.</mo></mrow>
+            </math>
+          </div>
+          <p>The direct scalar construction proves Z̊<sub>4</sub>(3) undecidable. Forgetting the restriction gives Z<sub>4</sub>(3); the established reduction Z<sub><var>d</var></sub>(<var>k</var>) ≤<sub>m</sub> R<sub><var>d</var>+1</sub>(<var>k</var>) gives R<sub>5</sub>(3) <a href="#ref-chhn-2014">[Cassaigne et al. 2014]</a>.</p>
+          <p>After applying the standard CHHN reductions, the currently established Pareto-minimal mortality-undecidability points are:</p>
           <div class="formula plain">
             <math display="block">
               <mrow>
@@ -464,7 +500,7 @@
               </mrow>
             </math>
           </div>
-          <p>The corresponding scalar and corner-reachability antichains become</p>
+          <p>The corresponding Pareto-minimal scalar and corner-reachability points are</p>
           <div class="formula plain">
             <math display="block">
               <mtable columnalign="right left">
@@ -523,7 +559,7 @@
             </div>
             <div>
               <b><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/b99e6590225fca81b50a6837adbab97073321505/MatrixMortality/PairedMortality.lean">Mortality equivalence</a></b>
-              <p>Lean checks every separator count and placement, the singular-control converse, integer reflection, nonzeroness, and rational rank one.</p>
+              <p>Lean checks every separator count and placement, the common-column converse with singular data controls, integer reflection, nonzeroness, and rational rank one.</p>
             </div>
             <div>
               <b><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/b99e6590225fca81b50a6837adbab97073321505/verification/axioms.txt">Transitive axioms</a></b>
@@ -537,14 +573,16 @@
 
           <h3 id="formal-scope">Formal scope</h3>
           <p>The instance-level equivalence from the restricted tag semantics through the four exact integer matrices is machine-checked. The theorem <a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/b99e6590225fca81b50a6837adbab97073321505/MatrixMortality/Undecidability/PairedProblems.lean"><code>nearyMortality44_mortal_iff_tagHaltsFrom</code></a> is the encoded boundary.</p>
-          <p>The unconditional mathematical undecidability conclusion imports Neary’s Lemma 9 <a href="#ref-neary-2015">[Neary 2015]</a>. A complete kernel-checked many-one reduction from a standard machine-halting problem into Neary’s restricted family remains background formalization work. The frontier reductions and bibliographic priority claims are also external to Lean.</p>
+          <p>Lean checks the explicit four-dimensional realization and its arbitrary-word identity. The abstract 2<var>d</var>−<var>r</var> quotient theorem above is paper mathematics, not a separate Lean declaration.</p>
+          <p>The unconditional mathematical undecidability conclusion imports Neary’s Lemma 9 and the padding corollary derived from his construction <a href="#ref-neary-2015">[Neary 2015]</a>. A complete kernel-checked many-one reduction from a standard machine-halting problem into Neary’s restricted family remains background formalization work. The frontier reductions and bibliographic priority claims are also external to Lean.</p>
 
           <h3 id="priority">Priority</h3>
-          <p>A search of the public literature through 22 July 2026 found no prior proof of M<sub>4</sub>(4), nor of scalar zero reachability for three 4 × 4 integer matrices sharing first column <var>e</var><sub>1</sub>. The closest CHHN bounds are M<sub>5</sub>(4) and structured Z<sub>5</sub>(3) <a href="#ref-chhn-2014">[Cassaigne et al. 2014]</a>. The anti-diagonal quotient is standard linear algebra, and the rank-one scalar-to-mortality separator is prior art; no source was found for the paired-role suffix decoder, the resulting four-dimensional scalar theorem, or the common-column mortality converse. “No prior art found” is limited to publicly discoverable work.</p>
+          <p>To our knowledge, after searches through 22 July 2026, no prior proof establishes M<sub>4</sub>(4), nor scalar zero reachability for three 4 × 4 integer matrices sharing first column <var>e</var><sub>1</sub>. The closest CHHN bounds are M<sub>5</sub>(4) and structured Z<sub>5</sub>(3) <a href="#ref-chhn-2014">[Cassaigne et al. 2014]</a>. The anti-diagonal quotient is standard linear algebra, and the rank-one scalar-to-mortality separator is prior art; no source was found for the paired-role suffix decoder, the resulting four-dimensional scalar theorem, or the common-column mortality converse. “No prior art found” is limited to publicly discoverable work.</p>
 
           <ul class="artifact-list" aria-label="Proof artifacts">
             <li><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/tree/m44"><b>Complete source branch</b>Lean development, verification gate, finite falsifier, references, and version history</a></li>
             <li><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/m44/audits/m44-prior-art-2026-07-22.md"><b>Prior-art investigation</b>Convention audit, claim ledger, search coverage, version histories, and qualified priority language</a></li>
+            <li><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/m44/audits/m44-adversarial-audit-2026-07-22.md"><b>Adversarial audit</b>Claim-by-claim review, repairs applied, formal scope, and remaining external seam</a></li>
           </ul>
 
           <h3 id="sources">References</h3>

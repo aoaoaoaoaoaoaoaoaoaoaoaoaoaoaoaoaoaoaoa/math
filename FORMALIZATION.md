@@ -46,7 +46,8 @@ representation. A right-to-left transducer decodes every arbitrary control word,
 surjectivity theorem encodes every four-role word. The three control matrices have common first
 column `e₁`, and the toggle is an explicit permutation matrix. Adding the nonzero rank-one matrix
 `CL` gives four integer matrices; the mortality converse covers every number and placement of
-separators without assuming that the singular control matrices are invertible.
+separators without assuming that control products are invertible. The two data controls are
+singular; the toggle is an invertible permutation matrix.
 
 ## Modules
 
@@ -148,7 +149,9 @@ q.length = (xβ + 1)(β−1),
 ```
 
 so every compiler output used by the reduction inhabits `NearyArithmeticEnvelope`. The envelope
-is deliberately broader than the exact Table 2 output family.
+is deliberately broader than the exact Table 2 output family. This is the Neary padding
+corollary used by the publication: it follows from the selectable padding in Neary's
+construction, not from the bare statement of Lemma 9.
 
 Thus both source-to-matrix equivalences and a substantial proper prefix of the universality
 compiler are machine-checked. The exact encoded `M₄(4)` result currently ends at

@@ -29,6 +29,8 @@ statements.
 - [Part I novelty record](NOVELTY.md): prior art and qualified priority claim
 - [Part II prior-art investigation](audits/m44-prior-art-2026-07-22.md): convention audit,
   claim ledger, version histories, and search coverage
+- [Part II adversarial audit](audits/m44-adversarial-audit-2026-07-22.md): correctness verdict,
+  applied repairs, formal scope, and external dependency seam
 - [Frontier campaign](FRONTIER.md): subsequent research targets
 - [Local bibliography](references/README.md): preserved papers and source-specific audit notes
 
@@ -66,8 +68,8 @@ with the release build. A normal Git push does not update `eternalist.moe`.
 Neary's 2013 preprint claimed the same numerical `M₃(5)` bound through a four-pair PCP theorem
 not retained in its refereed successor. No accepted prior proof was found.
 
-A public-literature search through 22 July 2026 found no prior proof of `M₄(4)` or of scalar
-zero reachability for three common-first-column `4 × 4` integer matrices. The anti-diagonal
-quotient is standard linear algebra, and the rank-one scalar-to-mortality separator is prior
-art. See [NOVELTY.md](NOVELTY.md) and the
+To our knowledge, after a public-literature search through 22 July 2026, no prior proof
+establishes `M₄(4)` or scalar zero reachability for three common-first-column `4 × 4` integer
+matrices. The anti-diagonal quotient is standard linear algebra, and the rank-one
+scalar-to-mortality separator is prior art. See [NOVELTY.md](NOVELTY.md) and the
 [Part II investigation](audits/m44-prior-art-2026-07-22.md) for the qualified claims.
