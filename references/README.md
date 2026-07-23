@@ -5,7 +5,7 @@ and version hazards.
 
 | Key | Status | Role in the matrix-mortality investigation |
 | --- | --- | --- |
-| [CHHN14](cassaigne-halava-harju-nicolas-2014-matrix-mortality.md) | arXiv v3; established paper | Previous minimal known mortality-undecidability antichain, ternary encoding morphism, zero-to-mortality and generator–dimension reductions |
+| [CHHN14](cassaigne-halava-harju-nicolas-2014-matrix-mortality.md) | arXiv v3; established paper | Previous antichains, ternary encoding, rank-one scalar-to-mortality reduction, and the neighboring `Z₅(3)` and `M₅(4)` bounds |
 | [HHH07](halava-harju-hirvensalo-2007-claus-instances.md) | peer-reviewed IJFCS 2007 | Closest prior art: forced-endpoint absorption into a rank-one idempotent |
 | [Neary13](neary-2013-four-pair-pcp-superseded-claim.md) | one-version technical report; claim not retained | Historical five-matrix claim based on a claimed four-pair PCP construction |
 | [Neary15](neary-2015-five-pair-pcp.md) | peer-reviewed STACS 2015 | Lemma 9 restricted-tag universality and exact four ordinary pairs; terminal converse audited as defective |

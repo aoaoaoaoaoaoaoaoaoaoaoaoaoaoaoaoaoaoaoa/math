@@ -1,6 +1,6 @@
 # Matrix Mortality Frontier Campaign
 
-Status date: 2026-07-21. A question mark below means “not resolved by any valid result found
+Status date: 2026-07-22. A question mark below means “not resolved by any valid result found
 in the present literature audit,” not an assertion that no unpublished argument exists.
 
 ## The source theorem
@@ -48,20 +48,20 @@ propagation.
 | `Z₃(4) → M₃(5)` | `M₃(5)` | the main result |
 | `Z₇(2) → M₇(3)` | `M₇(3)` | dominated by `M₆(3)` |
 
-Thus the minimal known `Z` undecidability antichain becomes
+As of 2026-07-22, the established Pareto-minimal undecidable `Z` points become
 
 ```text
-Z₃(4), Z₅(3), Z₇(2),
+Z₃(4), Z₄(3), Z₇(2),
 ```
 
-and the minimal known `R` undecidability antichain becomes
+and the established Pareto-minimal undecidable `R` points become
 
 ```text
-R₃(5), R₄(4), R₆(3), R₈(2).
+R₃(5), R₄(4), R₅(3), R₈(2).
 ```
 
-These should be stated as corollaries of the corrected source theorem, not rediscovered through
-separate matrix calculations.
+The new `Z₄(3)` and `R₅(3)` entries come from paired-role compression, not directly from the
+CHHN consequences listed in the table above.
 
 ## The reusable compiler
 
@@ -102,22 +102,37 @@ absorbing the initial occurrence does not reduce the active alphabet. Consequent
 is exhausted at `M₃(5)`. Reaching `M₃(4)` by the same route requires a source with at most three
 interior roles, equivalently an undecidable `GPCP(3)` family.
 
+## The paired-role compiler
+
+In the side-normal word-pair representation, Neary's rule and erasure matrix for a fixed tag
+letter agree on the two-dimensional upper-word plane. On two three-dimensional phase spaces,
+the anti-diagonal copy of this plane can therefore be quotiented out. Two data generators and
+one suffix-phase toggle act on the resulting four-dimensional space. Every control word decodes
+to a four-role word, and every four-role word has an encoding.
+
+This gives structured `Z̊₄(3)`. Adding the established outer-product separator gives `M₄(4)`;
+the arbitrary-product converse uses the controls' common fixed column instead of nonsingularity.
+The machine-checked implementation is in `PairedCompression.lean` and `PairedMortality.lean`.
+A public-literature search through 2026-07-22 found no earlier `Z₄(3)`, `M₄(4)`, paired-role
+decoder, or common-column mortality converse. The quotient itself and the rank-one separator
+are prior art; see `audits/m44-prior-art-2026-07-22.md`.
+
 ## Current mortality staircase
 
-After terminal absorption, dimension padding, and CHHN's generator–dimension trade, the
-minimal known undecidable antichain is
+After terminal absorption, paired-role compression, dimension padding, and CHHN's
+generator–dimension trade, the established Pareto-minimal undecidable points as of
+2026-07-22 are
 
 ```text
-M₃(5), M₅(4), M₆(3), M₁₂(2).
+M₃(5), M₄(4), M₆(3), M₁₂(2).
 ```
 
 The unknown cells immediately below this staircase are:
 
 | Cell | What would suffice | Automatic reward |
 | --- | --- | --- |
-| `M₃(4)` | three-active-role fixed-boundary PCP / `GPCP(3)`, or a new same-dimension generator compiler | also `M₄(4)` and, by CHHN, `M₉(2)` |
-| `M₄(4)` | merge one boundary/control role using one extra state | local cell only; its generic trade reaches the already-known `M₁₂(2)` |
-| `M₅(3)` | shave one state from the specialized `M₃(5) → M₆(3)` packing | also `M₁₀(2)` and supersedes `M₅(4)` |
+| `M₃(4)` | three-active-role fixed-boundary PCP / `GPCP(3)`, or a new same-dimension generator compiler | by CHHN, also `M₉(2)` |
+| `M₅(3)` | shave one state from the specialized `M₃(5) → M₆(3)` packing | also `M₁₀(2)` and supersedes `M₄(4)` |
 | `M₁₁(2)` | shave one state from the specialized `M₃(5) → M₁₂(2)` packing | improves the two-generator threshold by one |
 | `M₂(k≥3)` | a qualitatively different decidability or undecidability argument | settles the dimension-two wall |
 
@@ -159,20 +174,7 @@ recorded as a symbolic rank certificate, not rediscovered repeatedly. A differen
 or a code that treats the separator as punctuation rather than as an ordinary fifth letter, is the
 plausible escape.
 
-### 3. Boundary/control fusion: `M₄(4)`
-
-The source already provides four active matrices and fixed left/right behavior. A `4×4`,
-four-generator construction would have to make one generator serve two semantic modes: an
-ordinary occurrence of Neary's recurring start tile and a boundary collapse. One extra linear
-state is just enough to make this worth a bounded block-matrix search, but no such construction
-is presently proved.
-
-The proof obligation is global. It is insufficient to manufacture the intended zero word; every
-arbitrary product must admit a normal form excluding spurious zeroes. Rank of the putative fused
-generator is an immediate filter: a rank-one map cannot also carry a three-dimensional interior
-state, so boundary collapse must be a multi-letter macro or a state-dependent restriction.
-
-### 4. Source-role compression: `M₃(4)`
+### 3. Source-role compression: `M₃(4)`
 
 This is the highest-value and least incremental target. Neary's four active roles are:
 
@@ -198,7 +200,7 @@ The fixed-first property alone does not help: tile 1 recurs internally. Apparent
 relations between tiles 2–4 must be checked against arbitrary concatenations; local equality of
 one side is not enough and is a prolific source of spurious solutions.
 
-### 5. The dimension-two wall
+### 4. The dimension-two wall
 
 This is a separate, predominantly decidability-oriented program. `M₂(2)` is decidable. A
 minimal mortal word has rank-one endpoints and nonsingular interior factors; Heckman's preprint
@@ -233,11 +235,9 @@ matrix groups, and linear recurrences.
    certificate for the standard `M₃(5) → M₆(3)` representation.
 2. Search for a zero-set-preserving punctuation representation for `M₅(3)` and `M₁₁(2)` rather
    than another invariant restriction of the standard packing.
-3. Run a bounded ansatz search for `M₄(4)` only after its admissible word grammar and converse
-   invariant are written down.
-4. Attack `GPCP(3)` at the source level, beginning with a complete role/dependency graph of the
+3. Attack `GPCP(3)` at the source level, beginning with a complete role/dependency graph of the
    corrected Neary simulation rather than ad hoc tile algebra.
-5. Maintain `M₂(3)` as an independent decidability campaign with its own bibliography and
+4. Maintain `M₂(3)` as an independent decidability campaign with its own bibliography and
    formal statements.
 
 These are research programs, not consequences of the present theorem.

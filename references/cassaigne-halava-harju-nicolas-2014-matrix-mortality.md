@@ -24,6 +24,8 @@ arXiv:1404.0644v3 [cs.DM], 5 September 2014.
 - Theorem 4 gives `M_d(hk+1) ≤ M_{kd}(h+1)`.
 - Theorem 7 gives the structured trade
   `Z̊_d(hk+1) ≤ Z_{1+k(d-1)}(h+1)`.
+- Its closest three-generator and four-generator bounds are `Z₅(3)` and `M₅(4)`;
+  these are the cells improved to `Z₄(3)` and `M₄(4)` by paired-role compression.
 
 ## Audit notes
 
@@ -31,6 +33,10 @@ For the directly proved terminal equation `U(w)10^β=V(w)`, Proposition 4's oute
 exactly `Ψ(10^β,ε)e₃e₁ᵀ`. Thus the algebraic construction is an instance of CHHN's established
 GPCP-to-zero-to-mortality route. The new source theorem has four active GPCP generators and
 feeds Theorems 3, 6, and 7 to improve the `Z` and `R` tables.
+
+For the second result, CHHN supplies the definitions, neighboring bounds, and Proposition 4.
+The paired-role anti-diagonal quotient and the common-fixed-column converse are not present in
+CHHN; the prior-art investigation found no earlier `Z₄(3)` or `M₄(4)` theorem.
 
 Notation hazard: `Z_d(k)` is scalar reachability with input row `L` and column `C`, asking
 whether `LYC=0`. It is equivalent to a specified diagonal-entry problem but is not defined as

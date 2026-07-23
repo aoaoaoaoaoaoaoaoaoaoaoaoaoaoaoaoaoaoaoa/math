@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "publications": [
+    {
+      "kind": "index",
+      "source": "math.html",
+      "route": ""
+    },
+    {
+      "kind": "result",
+      "source": "index.html",
+      "route": "matrix_mortality",
+      "social_card": "matrix_mortality-title.png"
+    },
+    {
+      "kind": "result",
+      "source": "m4_4.html",
+      "route": "matrix_mortality/m4_4",
+      "social_card": "matrix_mortality-m44-title.png"
+    }
+  ]
+}
