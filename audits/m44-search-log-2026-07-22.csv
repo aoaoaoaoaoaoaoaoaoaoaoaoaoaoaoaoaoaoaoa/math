@@ -1,0 +1,10 @@
+track,query_families,source_classes,result
+Numerical frontier,matrix mortality; M_4(4); four 4x4 integer matrices; three 4x4 scalar reachability; Z_4(3),"arXiv, DBLP, Crossref, publisher pages, surveys",CHHN nearest; no exact M_4(4)/Z_4(3) result
+PCP/GPCP encodings,PCP matrix encoding; GPCP bounded generators; Claus instances; terminal tile; endpoint absorption,"arXiv, Dagstuhl, TUCS, Springer, World Scientific","Paterson, Claus, HHH, Nicolas, Neary, Rote"
+Control/alphabet compression,phase toggle; cyclic block packing; binary generator encoding; suffix parity; arbitrary word decoder,full text and citation chains,CHHN and Rote related; no exact paired-role decoder
+Quotient/invariant compression,invariant subspace compression; quotient representation; anti-diagonal quotient; amalgamated representation; pushout,matrix-semigroup and general algebra sources,generic quotient old; no application match
+Common-column restrictions,common first column; common fixed vector; e1 column; structured zero reachability,CHHN/Rote and follow-on citations,structure old; exact 4x4/three-generator result absent
+Rank-one separator,rank-one separator; outer-product mortality; E11 Claus; scalar-to-mortality,"HHH, CHHN, related matrix papers",general device exact prior art; common-column converse absent
+Hankel obstruction,CHHN 6x6 packing; Hankel rank six; weighted automaton five states; all placements,"formal power series, weighted automata, realization theory",general lower bound classical; CHHN certificate absent
+Phase-fusion obstruction,phase fusion; one-sided word plane; rank-one punctuation; positional value zero language,matrix encodings and automatic arithmetic,forcing theorem absent; regularity endpoint classical
+Post-2024 sweep,matrix mortality 2025 2026; scalar reachability 2026; zero corner 2025 2026,"arXiv, proceedings, publisher indexes",only adjacent false positives; no frontier improvement

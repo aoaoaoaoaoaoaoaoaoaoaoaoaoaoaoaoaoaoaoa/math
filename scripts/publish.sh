@@ -3,6 +3,7 @@ set -eu
 
 root=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
 site=${ETERNALIST_SITE_SOURCE:-"$root/../eternalist.moe"}
+manifest="$root/publications.json"
 
 fail() {
     printf '%s\n' "$1" >&2
@@ -44,12 +45,24 @@ require_upstream_head "$root" math
 revision=$(git -C "$root" rev-parse HEAD)
 invalidation=$(ETERNALIST_MATH_SOURCE="$root" "$site/scripts/deploy" --wait)
 out=$(ETERNALIST_MATH_SOURCE="$root" "$site/scripts/build")
-live=$(mktemp)
-trap 'rm -f "$live"' EXIT HUP INT TERM
-curl --fail --location --silent --show-error \
-    "https://eternalist.moe/math/matrix_mortality/?revision=$revision" \
-    --output "$live"
-cmp --silent "$out/math/matrix_mortality/index.html" "$live" || \
-    fail 'live matrix publication differs from the release build'
+live=$(mktemp -d)
+trap 'rm -rf "$live"' EXIT HUP INT TERM
+jq -c '.publications[]' "$manifest" |
+    while IFS= read -r entry; do
+        source=$(printf '%s\n' "$entry" | jq -r '.source')
+        route=$(printf '%s\n' "$entry" | jq -r '.route')
+        if test -n "$route"; then
+            path="math/$route/index.html"
+            url="https://eternalist.moe/math/$route/"
+        else
+            path='math/index.html'
+            url='https://eternalist.moe/math/'
+        fi
+        curl --fail --location --silent --show-error \
+            "$url?revision=$revision" \
+            --output "$live/$source"
+        cmp --silent "$out/$path" "$live/$source" || \
+            fail "live publication differs from the release build: /$path"
+    done
 
 printf 'published math %s via CloudFront invalidation %s\n' "$revision" "$invalidation"

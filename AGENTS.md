@@ -56,11 +56,16 @@ do not hide project work in a private auxiliary tracker.
 
 ## Publication seam
 
-`index.html` is presentation-free semantic source for `../eternalist.moe`. It must contain no
-`<style>` element, inline `style` attribute, or stylesheet link. Eternalist owns typography,
-color, layout, responsive behavior, and print presentation through its central house styles.
-Use only the semantic class hooks defined by Eternalist's dense-publication profile; change that
-shared contract at its owner rather than creating page-local presentation.
+`publications.json` is the canonical map from presentation-free semantic sources to routes below
+`/math/` on `../eternalist.moe`. Its single `index` entry owns `/math/`; every long-form work is
+a `result` entry. Adding a publication requires its source, its manifest entry, and its listing in
+the mathematics index, but no Eternalist content patch.
+
+Every listed source must contain no `<style>` element, inline `style` attribute, or stylesheet
+link. Eternalist owns typography, color, layout, responsive behavior, and print presentation
+through its central house styles. Use only the semantic class hooks defined by Eternalist's
+dense-publication profile; change that shared contract at its owner rather than creating
+page-local presentation.
 
 Eyebrows are forbidden unless explicitly requested. Do not add kickers, supertitles, numbered
 pre-headings, category copy above titles, or other small text whose function is to occupy visual
@@ -88,7 +93,7 @@ The contents list must mirror the document hierarchy through `h4`: `h2`, `h3`, a
 occupy successive nested list levels, and every linked heading owns its fragment `id`. `h5` is a
 local heading inside a bounded proof component and does not enter the page-level contents.
 
-After changing `index.html` or any artifact it describes, publication is incomplete until
-`scripts/publish.sh` succeeds. This repository owns that release transaction autonomously;
-Eternalist supplies the import, presentation, and deployment contracts. A normal GitHub push
-does not update the live site.
+After changing a listed source, the manifest, or any artifact a source describes, publication is
+incomplete until `scripts/publish.sh` succeeds. This repository owns that release transaction
+autonomously; Eternalist supplies the import, presentation, and deployment contracts. A normal
+GitHub push does not update the live site.
