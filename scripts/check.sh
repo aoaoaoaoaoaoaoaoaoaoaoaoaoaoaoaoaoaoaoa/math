@@ -33,7 +33,7 @@ jq -e '
   all(.publications[];
     type == "object" and
     ((keys - ["kind", "route", "social_card", "source"]) | length == 0) and
-    (.kind == "index" or .kind == "result") and
+    (.kind == "index" or .kind == "collection" or .kind == "result") and
     (.source | safe_source) and
     (.route | safe_route) and
     ((has("social_card") | not) or (.social_card | safe_card)) and
@@ -45,6 +45,18 @@ jq -e '
     ([.publications[].route] | unique | length)) and
   ([.publications[] | select(.kind == "index")] | length) == 1
 ' "$MANIFEST" >/dev/null
+
+while IFS= read -r route; do
+  jq -e --arg route "$route" '
+    any(.publications[];
+      .kind == "collection" and
+      (.route as $parent | $route | startswith($parent + "/"))
+    )
+  ' "$MANIFEST" >/dev/null || {
+    printf 'result route has no parent collection: %s\n' "$route" >&2
+    exit 1
+  }
+done < <(jq -r '.publications[] | select(.kind == "result") | .route' "$MANIFEST")
 
 while IFS= read -r pdf; do
   note="${pdf%.pdf}.md"
@@ -234,23 +246,75 @@ check_publication() {
 
 }
 
-check_publication index.html 4 3 3 \
+check_collection() {
+  PUBLICATION="$1"
+  local route="$2"
+  local article='//main[@id="article"]/article'
+  local collection_results
+  collection_results="$(jq --arg prefix "$route/" \
+    '[.publications[] | select(.kind == "result" and (.route | startswith($prefix)))] | length' \
+    "$MANIFEST")"
+
+  assert_xpath_count 1 '//h1[normalize-space()="Matrix Mortality"]'
+  assert_xpath_count 0 \
+    "$article/div[contains(concat(' ', normalize-space(@class), ' '), ' verdict ')]"
+  assert_xpath_count 0 \
+    "$article/details[contains(concat(' ', normalize-space(@class), ' '), ' major-section ')]"
+  assert_xpath_count 1 \
+    "($article/*)[1][self::section/h2[@id='results' and normalize-space()='Results']]"
+  assert_xpath_count "$collection_results" \
+    "($article/section[h2[@id='results']])[1]/ul[contains(concat(' ', normalize-space(@class), ' '), ' artifact-list ')]/li/a"
+  assert_xpath_count 1 \
+    "$article/section[h2[@id='definition']]//div[contains(concat(' ', normalize-space(@class), ' '), ' definition ')]"
+  assert_xpath_count 1 \
+    "$article/section[h2[@id='frontier']]//table[contains(concat(' ', normalize-space(@class), ' '), ' status-table ')]"
+  assert_xpath_count 2 \
+    "$article//table[contains(concat(' ', normalize-space(@class), ' '), ' status-table ')]//strong[contains(concat(' ', normalize-space(@class), ' '), ' new-result ') and normalize-space()='U★']"
+
+  local formulas='//div[contains(concat(" ", normalize-space(@class), " "), " formula ")]'
+  local formula_count
+  formula_count="$(xpath_count "$formulas")"
+  [[ "$formula_count" != 0 ]]
+  assert_xpath_count "$formula_count" "$formulas/math[@display='block']"
+  assert_xpath_count 0 "$formulas[count(math) != 1 or *[not(self::math)]]"
+  assert_xpath_count 0 \
+    '//math[not(ancestor::div[contains(concat(" ", normalize-space(@class), " "), " formula ")])]'
+
+  local level
+  for level in 2 3 4; do
+    [[ "$(xpath_count "//h$level[not(@id)]")" == 0 ]] || {
+      printf '%s: h%s without fragment id\n' "$PUBLICATION" "$level" >&2
+      exit 1
+    }
+  done
+  check_toc_level 2 \
+    '//nav[contains(concat(" ", normalize-space(@class), " "), " contents ")]/ol/li'
+
+  while IFS= read -r child_route; do
+    rg --quiet --fixed-strings "href=\"/math/$child_route/\"" "$PUBLICATION"
+  done < <(jq -r --arg prefix "$route/" \
+    '.publications[] | select(.kind == "result" and (.route | startswith($prefix))) | .route' \
+    "$MANIFEST")
+}
+
+check_collection matrix_mortality.html matrix_mortality
+check_publication m3_5.html 4 3 3 \
   'Undecidable; newly proved by this argument, to our knowledge'
 check_publication m4_4.html 2 1 0 \
   'Undecidable; newly proved by this article, to our knowledge'
 
 PUBLICATION=math.html
 assert_xpath_count 1 '//h1[normalize-space()="Mathematics"]'
-result_count="$(jq '[.publications[] | select(.kind == "result")] | length' "$MANIFEST")"
-assert_xpath_count "$result_count" \
+collection_count="$(jq '[.publications[] | select(.kind == "collection")] | length' "$MANIFEST")"
+assert_xpath_count "$collection_count" \
   '//ul[contains(concat(" ", normalize-space(@class), " "), " artifact-list ")]/li/a'
 while IFS= read -r route; do
   rg --quiet --fixed-strings "href=\"/math/$route/\"" math.html
-done < <(jq -r '.publications[] | select(.kind == "result") | .route' "$MANIFEST")
+done < <(jq -r '.publications[] | select(.kind == "collection") | .route' "$MANIFEST")
 
 diff --unified \
-  <(jq -r '.publications[] | select(.kind == "result") | .source' "$MANIFEST" | sort) \
-  <(printf '%s\n' index.html m4_4.html | sort)
+  <(jq -r '.publications[] | select(.kind != "index") | .source' "$MANIFEST" | sort) \
+  <(printf '%s\n' matrix_mortality.html m3_5.html m4_4.html | sort)
 
 tectonic --outdir "$SCRATCH" paper/main.tex
 cmp --silent "$SCRATCH/main.pdf" paper/main.pdf || {

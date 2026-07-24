@@ -19,17 +19,18 @@ statements.
 ## Publications
 
 - [Mathematics index](math.html)
-- [Part I: undecidability of `M₃(5)`](index.html)
-- [Part II: undecidability of `M₄(4)`](m4_4.html)
-- [Part I technical manuscript](paper/main.pdf)
+- [Matrix mortality landing page](matrix_mortality.html)
+- [Undecidability of `M₃(5)`](m3_5.html)
+- [Undecidability of `M₄(4)`](m4_4.html)
+- [`M₃(5)` technical manuscript](paper/main.pdf)
 
 ## Supporting Material
 
 - [Formal verification](FORMALIZATION.md): theorem map, axioms, trust base, and external seam
-- [Part I novelty record](NOVELTY.md): prior art and qualified priority claim
-- [Part II prior-art investigation](audits/m44-prior-art-2026-07-22.md): convention audit,
+- [`M₃(5)` novelty record](NOVELTY.md): prior art and qualified priority claim
+- [`M₄(4)` prior-art investigation](audits/m44-prior-art-2026-07-22.md): convention audit,
   claim ledger, version histories, and search coverage
-- [Part II adversarial audit](audits/m44-adversarial-audit-2026-07-22.md): correctness verdict,
+- [`M₄(4)` adversarial audit](audits/m44-adversarial-audit-2026-07-22.md): correctness verdict,
   applied repairs, formal scope, and external dependency seam
 - [Frontier campaign](FRONTIER.md): subsequent research targets
 - [Local bibliography](references/README.md): preserved papers and source-specific audit notes
@@ -72,4 +73,4 @@ To our knowledge, after a public-literature search through 22 July 2026, no prio
 establishes `M₄(4)` or scalar zero reachability for three common-first-column `4 × 4` integer
 matrices. The anti-diagonal quotient is standard linear algebra, and the rank-one
 scalar-to-mortality separator is prior art. See [NOVELTY.md](NOVELTY.md) and the
-[Part II investigation](audits/m44-prior-art-2026-07-22.md) for the qualified claims.
+[`M₄(4)` investigation](audits/m44-prior-art-2026-07-22.md) for the qualified claims.

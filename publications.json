@@ -7,9 +7,14 @@
       "route": ""
     },
     {
+      "kind": "collection",
+      "source": "matrix_mortality.html",
+      "route": "matrix_mortality"
+    },
+    {
       "kind": "result",
-      "source": "index.html",
-      "route": "matrix_mortality",
+      "source": "m3_5.html",
+      "route": "matrix_mortality/m3_5",
       "social_card": "matrix_mortality-title.png"
     },
     {
