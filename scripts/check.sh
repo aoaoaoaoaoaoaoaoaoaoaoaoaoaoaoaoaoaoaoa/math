@@ -194,10 +194,7 @@ check_toc_level() {
 
 check_publication() {
   PUBLICATION="$1"
-  local expected_new_results="$2"
-  local expected_table_results="$3"
-  local expected_properties="$4"
-  local result_label="$5"
+  local expected_properties="$2"
 
   local major_sections='//main[@id="article"]/article/details[contains(concat(" ", normalize-space(@class), " "), " major-section ")]'
   local article='//main[@id="article"]/article'
@@ -212,10 +209,10 @@ check_publication() {
   assert_xpath_count 1 "($major_sections)[2]/summary/h2[@id='new-stuff' and normalize-space()='New Stuff']"
   assert_xpath_count 1 "($major_sections)[3]/summary/h2[@id='bookkeeping' and normalize-space()='Bookkeeping']"
 
-  local new_results='//strong[contains(concat(" ", normalize-space(@class), " "), " new-result ")]'
-  assert_xpath_count "$expected_new_results" "$new_results[normalize-space()='U★']"
-  assert_xpath_count "$expected_table_results" \
-    "//table[contains(concat(' ', normalize-space(@class), ' '), ' status-table ')]$new_results[@aria-label='$result_label']"
+  assert_xpath_count 0 \
+    "$article//table[contains(concat(' ', normalize-space(@class), ' '), ' status-table ')]"
+  assert_xpath_count 0 \
+    "$article//strong[contains(concat(' ', normalize-space(@class), ' '), ' new-result ')]"
 
   local formulas='//div[contains(concat(" ", normalize-space(@class), " "), " formula ")]'
   local formula_count
@@ -261,20 +258,22 @@ check_collection() {
   assert_xpath_count 0 \
     "$article/details[contains(concat(' ', normalize-space(@class), ' '), ' major-section ')]"
   assert_xpath_count 1 \
-    "($article/*)[1][self::section/h2[@id='results' and normalize-space()='Results']]"
+    "($article/*)[1][self::section/h2[@id='techniques' and normalize-space()='Techniques']]"
   assert_xpath_count "$collection_results" \
-    "($article/section[h2[@id='results']])[1]/ul[contains(concat(' ', normalize-space(@class), ' '), ' artifact-list ')]/li/a"
+    "($article/section[h2[@id='techniques']])[1]/ul[contains(concat(' ', normalize-space(@class), ' '), ' artifact-list ')]/li/a"
   assert_xpath_count 1 \
     "$article/section[h2[@id='definition']]//div[contains(concat(' ', normalize-space(@class), ' '), ' definition ')]"
   assert_xpath_count 1 \
     "$article/section[h2[@id='frontier']]//table[contains(concat(' ', normalize-space(@class), ' '), ' status-table ')]"
   local table_stars="$article//table[contains(concat(' ', normalize-space(@class), ' '), ' status-table ')]//strong[contains(concat(' ', normalize-space(@class), ' '), ' new-result ') and normalize-space()='U★']"
-  assert_xpath_count 5 "$table_stars"
-  assert_xpath_count 5 "$table_stars/parent::a"
+  assert_xpath_count 6 "$table_stars"
+  assert_xpath_count 6 "$table_stars/parent::a"
   assert_xpath_count 4 \
     "$table_stars/parent::a[@href='/math/matrix_mortality/m3_5/#result']"
   assert_xpath_count 1 \
     "$table_stars/parent::a[@href='/math/matrix_mortality/m4_4/#result']"
+  assert_xpath_count 1 \
+    "$table_stars/parent::a[@href='/math/matrix_mortality/binary_compilers/#mortality-ten']"
 
   local formulas='//div[contains(concat(" ", normalize-space(@class), " "), " formula ")]'
   local formula_count
@@ -303,10 +302,9 @@ check_collection() {
 }
 
 check_collection matrix_mortality.html matrix_mortality
-check_publication m3_5.html 4 3 3 \
-  'Undecidable; newly proved by this argument, to our knowledge'
-check_publication m4_4.html 2 1 0 \
-  'Undecidable; newly proved by this article, to our knowledge'
+check_publication m3_5.html 3
+check_publication m4_4.html 0
+check_publication binary_compilers.html 0
 
 PUBLICATION=math.html
 assert_xpath_count 1 '//h1[normalize-space()="Mathematics"]'
@@ -319,7 +317,7 @@ done < <(jq -r '.publications[] | select(.kind == "collection") | .route' "$MANI
 
 diff --unified \
   <(jq -r '.publications[] | select(.kind != "index") | .source' "$MANIFEST" | sort) \
-  <(printf '%s\n' matrix_mortality.html m3_5.html m4_4.html | sort)
+  <(printf '%s\n' binary_compilers.html matrix_mortality.html m3_5.html m4_4.html | sort)
 
 tectonic --outdir "$SCRATCH" paper/main.tex
 cmp --silent "$SCRATCH/main.pdf" paper/main.pdf || {

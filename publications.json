@@ -22,6 +22,11 @@
       "source": "m4_4.html",
       "route": "matrix_mortality/m4_4",
       "social_card": "matrix_mortality-m44-title.png"
+    },
+    {
+      "kind": "result",
+      "source": "binary_compilers.html",
+      "route": "matrix_mortality/binary_compilers"
     }
   ]
 }

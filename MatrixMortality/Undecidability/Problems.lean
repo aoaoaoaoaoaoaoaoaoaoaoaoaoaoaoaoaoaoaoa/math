@@ -5,15 +5,17 @@ import MatrixMortality.NearyEncoding
 /-!
 # Encoded decision problems
 
-This file fixes the computability-theoretic boundary of the development.  The source is
-mathlib's universal partially recursive evaluator at input zero.  The targets are concrete binary
-four-generator GPCP instances, five labelled `3 × 3` integer matrices, and four labelled `4 × 4`
-integer matrices. Simulation compilers belong in later files; no external undecidability premise
-is introduced here.
+This file fixes the computability-theoretic boundary of the development. The source is mathlib's
+universal partially recursive evaluator at input zero. The targets are concrete binary
+four-generator GPCP instances, finite integer-matrix mortality families, and finite integer
+scalar-zero systems. Simulation compilers belong in later files; no external undecidability
+premise is introduced here.
 -/
 
 namespace MatrixMortality
 namespace Undecidability
+
+open scoped Matrix
 
 /-- The noncomputable source predicate supplied by mathlib's halting theorem. -/
 def CodeHalts (code : Nat.Partrec.Code) : Prop := (code.eval 0).Dom
@@ -64,29 +66,83 @@ def BinaryGPCP4.Solvable (problem : BinaryGPCP4) : Prop :=
     problem.upperLeft ++ spell problem.upper word ++ problem.upperRight =
       problem.lowerLeft ++ spell problem.lower word ++ problem.lowerRight
 
-/-- Five labelled `3 × 3` integer matrices, represented transparently for `Primcodable`. -/
-abbrev Mortality35 := Fin 5 → Fin 3 → Fin 3 → ℤ
+/-- A finite integer linear representation with distinguished row and column. -/
+structure ScalarZeroProblem (d k : Nat) where
+  /-- The labelled square matrices. -/
+  matrix : Fin k → Fin d → Fin d → ℤ
+  /-- The left boundary row. -/
+  row : Fin d → ℤ
+  /-- The right boundary column. -/
+  column : Fin d → ℤ
 
-/-- Four labelled `4 × 4` integer matrices, represented transparently for `Primcodable`. -/
-abbrev Mortality44 := Fin 4 → Fin 4 → Fin 4 → ℤ
+private abbrev ScalarZeroProblemCode (d k : Nat) :=
+  (Fin k → Fin d → Fin d → ℤ) × (Fin d → ℤ) × (Fin d → ℤ)
+
+private def scalarZeroProblemEquiv (d k : Nat) :
+    ScalarZeroProblem d k ≃ ScalarZeroProblemCode d k where
+  toFun problem := (problem.matrix, problem.row, problem.column)
+  invFun code := ⟨code.1, code.2.1, code.2.2⟩
+  left_inv _ := rfl
+  right_inv _ := rfl
+
+instance (d k : Nat) : Primcodable (ScalarZeroProblem d k) :=
+  Primcodable.ofEquiv (ScalarZeroProblemCode d k) (scalarZeroProblemEquiv d k)
+
+namespace ScalarZeroProblem
+
+/-- The scalar coefficient assigned to a generator word. -/
+def coefficient {d k : Nat} (problem : ScalarZeroProblem d k) (word : List (Fin k)) : ℤ :=
+  problem.row ⬝ᵥ wordProduct problem.matrix word *ᵥ problem.column
+
+/-- Nonempty-word scalar zero reachability. -/
+def HasZero {d k : Nat} (problem : ScalarZeroProblem d k) : Prop :=
+  ∃ word : List (Fin k), word ≠ [] ∧ problem.coefficient word = 0
+
+/-- Scalar zero reachability under the free-monoid convention. -/
+def HasZeroStar {d k : Nat} (problem : ScalarZeroProblem d k) : Prop :=
+  ∃ word : List (Fin k), problem.coefficient word = 0
+
+theorem hasZero_iff_hasZeroStar_of_empty_ne {d k : Nat} (problem : ScalarZeroProblem d k)
+    (empty_ne : problem.coefficient [] ≠ 0) :
+    problem.HasZero ↔ problem.HasZeroStar := by
+  constructor
+  · rintro ⟨word, _, coefficient_zero⟩
+    exact ⟨word, coefficient_zero⟩
+  · rintro ⟨word, coefficient_zero⟩
+    refine ⟨word, ?_, coefficient_zero⟩
+    intro word_empty
+    exact empty_ne (by simpa [word_empty] using coefficient_zero)
+
+end ScalarZeroProblem
+
+/-- Two labelled `6 × 6` integer matrices with scalar boundaries. -/
+abbrev ScalarZero62 := ScalarZeroProblem 6 2
+
+/-- `k` labelled integer matrices of dimension `d`, represented transparently for
+`Primcodable`. -/
+abbrev MortalityProblem (d k : Nat) := Fin k → Fin d → Fin d → ℤ
+
+namespace MortalityProblem
 
 /-- Interpret the transparent encoding as a family with matrix multiplication. -/
-def Mortality35.matrix (problem : Mortality35) (label : Fin 5) :
-    Matrix (Fin 3) (Fin 3) ℤ :=
+def matrix {d k : Nat} (problem : MortalityProblem d k) (label : Fin k) :
+    Matrix (Fin d) (Fin d) ℤ :=
   problem label
 
 /-- Mortality requires a nonempty generator word. -/
-def Mortality35.Mortal (problem : Mortality35) : Prop :=
+def Mortal {d k : Nat} (problem : MortalityProblem d k) : Prop :=
   IsMortal problem.matrix
 
-/-- Interpret the transparent `M₄(4)` encoding as a matrix family. -/
-def Mortality44.matrix (problem : Mortality44) (label : Fin 4) :
-    Matrix (Fin 4) (Fin 4) ℤ :=
-  problem label
+end MortalityProblem
 
-/-- Mortality for four labelled `4 × 4` matrices requires a nonempty generator word. -/
-def Mortality44.Mortal (problem : Mortality44) : Prop :=
-  IsMortal problem.matrix
+/-- Five labelled `3 × 3` integer matrices. -/
+abbrev Mortality35 := MortalityProblem 3 5
+
+/-- Four labelled `4 × 4` integer matrices. -/
+abbrev Mortality44 := MortalityProblem 4 4
+
+/-- Two labelled `10 × 10` integer matrices. -/
+abbrev Mortality102 := MortalityProblem 10 2
 
 theorem gpcp4_not_computable_of_reduction
     (reduction : CodeHalts ≤₀ BinaryGPCP4.Solvable) :
@@ -95,19 +151,29 @@ theorem gpcp4_not_computable_of_reduction
   exact codeHalts_not_computable
     (ComputablePred.computable_of_manyOneReducible reduction decidableTarget)
 
-theorem mortality35_not_computable_of_reduction
-    (reduction : CodeHalts ≤₀ Mortality35.Mortal) :
-    ¬ComputablePred Mortality35.Mortal := by
+theorem mortality_not_computable_of_reduction {d k : Nat}
+    (reduction : CodeHalts ≤₀ MortalityProblem.Mortal (d := d) (k := k)) :
+    ¬ComputablePred (MortalityProblem.Mortal (d := d) (k := k)) := by
   intro decidableTarget
   exact codeHalts_not_computable
     (ComputablePred.computable_of_manyOneReducible reduction decidableTarget)
 
-theorem mortality44_not_computable_of_reduction
-    (reduction : CodeHalts ≤₀ Mortality44.Mortal) :
-    ¬ComputablePred Mortality44.Mortal := by
+theorem scalarZero_not_computable_of_reduction {d k : Nat}
+    (reduction : CodeHalts ≤₀ ScalarZeroProblem.HasZero (d := d) (k := k)) :
+    ¬ComputablePred (ScalarZeroProblem.HasZero (d := d) (k := k)) := by
   intro decidableTarget
   exact codeHalts_not_computable
     (ComputablePred.computable_of_manyOneReducible reduction decidableTarget)
+
+theorem mortality35_not_computable_of_reduction
+    (reduction : CodeHalts ≤₀ MortalityProblem.Mortal (d := 3) (k := 5)) :
+    ¬ComputablePred (MortalityProblem.Mortal (d := 3) (k := 5)) :=
+  mortality_not_computable_of_reduction reduction
+
+theorem mortality44_not_computable_of_reduction
+    (reduction : CodeHalts ≤₀ MortalityProblem.Mortal (d := 4) (k := 4)) :
+    ¬ComputablePred (MortalityProblem.Mortal (d := 4) (k := 4)) :=
+  mortality_not_computable_of_reduction reduction
 
 end Undecidability
 end MatrixMortality

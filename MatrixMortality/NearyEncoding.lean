@@ -36,6 +36,13 @@ def tagEncode (β : Nat) (word : List TagLetter) : List Bool := spell (tagCode �
 /-- The fixed right boundary `10^β` of the four-tile equation. -/
 def nearyMarker (β : Nat) : List Bool := true :: List.replicate β false
 
+theorem ternaryCode_nearyMarker_ne_zero (β : Nat) : ternaryCode (nearyMarker β) ≠ 0 := by
+  intro code_zero
+  have marker_empty : nearyMarker β = [] := by
+    apply ternaryCode_injective
+    simpa using code_zero
+  simp [nearyMarker] at marker_empty
+
 /-- The variable part of the appendant selected by a tag symbol. -/
 def nearyBody (body : List TagLetter) : TagLetter → List TagLetter
   | .b => []

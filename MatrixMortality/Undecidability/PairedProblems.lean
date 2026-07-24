@@ -48,19 +48,6 @@ def pairedMortalityLabelEquivFin : Option PairedControl ≃ Fin 4 where
   left_inv := pairedMortalityLabelOfFin_finOfPairedMortalityLabel
   right_inv := finOfPairedMortalityLabel_pairedMortalityLabelOfFin
 
-private theorem isMortal_comp_equiv {a b M : Type*} [MonoidWithZero M]
-    (generators : b → M) (equivalence : a ≃ b) :
-    IsMortal (generators ∘ equivalence) ↔ IsMortal generators := by
-  constructor
-  · rintro ⟨word, word_nonempty, product_zero⟩
-    refine ⟨word.map equivalence, ?_, ?_⟩
-    · simpa using word_nonempty
-    · simpa [List.map_map, Function.comp_def] using product_zero
-  · rintro ⟨word, word_nonempty, product_zero⟩
-    refine ⟨word.map equivalence.symm, ?_, ?_⟩
-    · simpa using word_nonempty
-    · simpa [List.map_map, Function.comp_def] using product_zero
-
 /-- The four exact `4 × 4` integer matrices emitted by one restricted tag source. -/
 def nearyMortality44 (β : Nat) (body : List TagLetter) : Mortality44 :=
   fun label row column =>
@@ -82,13 +69,13 @@ theorem nearyMortality44_control_fixes_anchor (β : Nat) (body : List TagLetter)
     ((nearyMortality44 β body).matrix (Fin.castSucc label)) *ᵥ pairedAnchor ℤ =
       pairedAnchor ℤ := by
   fin_cases label
-  · simpa [Mortality44.matrix, nearyMortality44, pairedMortalityLabelOfFin,
+  · simpa [MortalityProblem.matrix, nearyMortality44, pairedMortalityLabelOfFin,
       pairedMortalityFamily, separatedGenerator] using
       pairedGenerator_mulVec_anchor ℤ β body (.data .b)
-  · simpa [Mortality44.matrix, nearyMortality44, pairedMortalityLabelOfFin,
+  · simpa [MortalityProblem.matrix, nearyMortality44, pairedMortalityLabelOfFin,
       pairedMortalityFamily, separatedGenerator] using
       pairedGenerator_mulVec_anchor ℤ β body (.data .c)
-  · simpa [Mortality44.matrix, nearyMortality44, pairedMortalityLabelOfFin,
+  · simpa [MortalityProblem.matrix, nearyMortality44, pairedMortalityLabelOfFin,
       pairedMortalityFamily, separatedGenerator] using
       pairedGenerator_mulVec_anchor ℤ β body .toggle
 
@@ -104,8 +91,8 @@ theorem nearyMortality44_separator_ne_zero (β : Nat) (body : List TagLetter) :
   exact pairedSeparator_int_ne_zero β
 
 theorem nearyMortality44_separator_rank_eq_one (β : Nat) (body : List TagLetter) :
-    (castMatrix4 ((nearyMortality44 β body).matrix 3)).toLin'.rank = 1 := by
-  exact castMatrix4_pairedSeparator_rank_eq_one β
+    (castMatrix ((nearyMortality44 β body).matrix 3)).toLin'.rank = 1 := by
+  exact castMatrix_pairedSeparator_rank_eq_one β
 
 end Undecidability
 

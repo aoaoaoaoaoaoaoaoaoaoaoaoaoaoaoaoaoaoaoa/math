@@ -1,4 +1,4 @@
-# Four-Generator GPCP and Small Matrix Mortality
+# Fixed-Boundary Correspondence and Matrix Compression
 
 This repository proves that binary-target `GPCP(4)` is undecidable and derives undecidability
 of mortality for at most five `3 × 3` integer matrices. Four matrix generators may be
@@ -8,6 +8,11 @@ Paired-role compression then proves structured scalar zero reachability undecida
 `4 × 4` integer matrices and mortality undecidable for four `4 × 4` integer matrices. The
 three scalar generators share first column `e₁`; one is a permutation matrix. The fourth
 mortality generator is nonzero of rank one over `ℚ`.
+
+Two binary compilers sharpen the two-generator frontier. Paired-channel packing gives scalar
+zero reachability for two `6 × 6` integer matrices sharing first column `e₁`. A complete prefix
+decoder followed by a common-image restriction gives mortality for two `10 × 10` integer
+matrices. Zero-block padding preserves mortality in every dimension at least ten.
 
 The instance-level reductions are machine-checked in Lean 4. Neary's peer-reviewed
 restricted-tag universality theorem remains an external dependency of the final undecidability
@@ -20,8 +25,9 @@ statements.
 
 - [Mathematics index](math.html)
 - [Matrix mortality landing page](matrix_mortality.html)
-- [Undecidability of `M₃(5)`](m3_5.html)
-- [Undecidability of `M₄(4)`](m4_4.html)
+- [Fixed-Boundary Correspondence](m3_5.html): `GPCP(4)` and `M₃(5)`
+- [Paired-Role Compression](m4_4.html): `Z₄(3)` and `M₄(4)`
+- [Binary Compilers](binary_compilers.html): `Z₆(2)` and `M₁₀(2)`
 - [`M₃(5)` technical manuscript](paper/main.pdf)
 
 ## Supporting Material
@@ -46,7 +52,7 @@ The repository pins Lean and mathlib to `v4.12.0`. Run:
 Required host commands are `lake`, `uv`/`uvx`, `tectonic`, `xmllint`, `rg`, `diff`, and GNU
 `sha256sum`. The script checks the reference corpus; builds and lints Lean; compares the exact
 transitive-axiom snapshot; rejects proof escapes and linter suppressions; runs the independent
-finite falsifier; validates both HTML expositions; and reproduces the committed PDF
+finite falsifier; validates the HTML expositions; and reproduces the committed PDF
 byte-for-byte.
 
 The audited theorem dependencies are exactly `propext`, `Classical.choice`, and `Quot.sound`.
@@ -74,3 +80,7 @@ establishes `M₄(4)` or scalar zero reachability for three common-first-column 
 matrices. The anti-diagonal quotient is standard linear algebra, and the rank-one
 scalar-to-mortality separator is prior art. See [NOVELTY.md](NOVELTY.md) and the
 [`M₄(4)` investigation](audits/m44-prior-art-2026-07-22.md) for the qualified claims.
+
+To our knowledge, after searches through 24 July 2026, no prior proof establishes `Z₆(2)`,
+`R₇(2)`, or `M₁₀(2)`. Generic binary coding, alphabet reduction, and scalar-to-corner transport
+are prior art; the qualified technique claims are stated in [Binary Compilers](binary_compilers.html).

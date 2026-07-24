@@ -28,6 +28,13 @@ theorem tailBasis_ne_zero (R : Type*) [Semiring R] [Nontrivial R] : tailBasis R 
   have := congr_fun h 2
   simp [tailBasis] at this
 
+theorem pcpMatrix_mulVec_headBasis (R : Type*) [CommRing R] (upper lower : List Bool) :
+    pcpMatrix R upper lower *ᵥ headBasis R = headBasis R := by
+  funext i
+  fin_cases i <;>
+    simp [pcpMatrix, headBasis, Matrix.vecHead, Matrix.vecTail, Matrix.mulVec,
+      Matrix.dotProduct, Fin.sum_univ_succ]
+
 /-- Concatenate the words selected by a tile-index word. -/
 def spell {α β : Type*} (side : α → List β) (word : List α) : List β :=
   (word.map side).join
@@ -35,7 +42,7 @@ def spell {α β : Type*} (side : α → List β) (word : List α) : List β :=
 /-- Product of the PCP matrices selected by a tile-index word. -/
 def tileProduct {α R : Type*} [CommRing R] (u v : α → List Bool) (word : List α) :
     Matrix (Fin 3) (Fin 3) R :=
-  (word.map fun i => pcpMatrix R (u i) (v i)).prod
+  wordProduct (fun i => pcpMatrix R (u i) (v i)) word
 
 theorem tileProduct_eq_pcpMatrix {α R : Type*} [CommRing R]
     (u v : α → List Bool) (word : List α) :
@@ -43,9 +50,8 @@ theorem tileProduct_eq_pcpMatrix {α R : Type*} [CommRing R]
   induction word with
   | nil => simp [tileProduct, spell]
   | cons i word ih =>
-      simp only [tileProduct, spell, List.map_cons, List.prod_cons, List.join_cons]
-      rw [show (word.map fun j => pcpMatrix R (u j) (v j)).prod =
-          tileProduct u v word from rfl]
+      simp only [tileProduct, wordProduct_cons, spell, List.map_cons, List.join_cons]
+      change pcpMatrix R (u i) (v i) * tileProduct u v word = _
       rw [ih, ← pcpMatrix_append]
       simp [spell]
 
@@ -96,10 +102,6 @@ theorem bridgeScalar_tileProduct {α : Type*} (u v : α → List Bool)
     Matrix.mulVec_single, mul_one]
   exact pcpMatrix_top_right_eq_zero_iff_rat _ _
 
-/-- A labelled family is mortal when a nonempty generator word multiplies to zero. -/
-def IsMortal {α M : Type*} [MonoidWithZero M] (generators : α → M) : Prop :=
-  ∃ word : List α, word ≠ [] ∧ (word.map generators).prod = 0
-
 /-- The rational family of ordinary PCP matrices and one absorbed terminal separator. -/
 def absorbedFamily {α : Type*} (u v : α → List Bool) (uₜ vₜ : List Bool) :
     Option α → Matrix (Fin 3) (Fin 3) ℚ :=
@@ -109,66 +111,25 @@ theorem absorbedFamily_mortal_iff_terminal_match {α : Type*} (u v : α → List
     (uₜ vₜ : List Bool) :
     IsMortal (absorbedFamily u v uₜ vₜ) ↔
       ∃ word : List α, spell u word ++ uₜ = spell v word ++ vₜ := by
-  let c := terminalColumn uₜ vₜ
-  let r := headBasis ℚ
-  let A := terminalGenerator uₜ vₜ
   let X : α → Matrix (Fin 3) (Fin 3) ℚ := fun i => pcpMatrix ℚ (u i) (v i)
-  have hc : c ≠ 0 := terminalColumn_ne_zero uₜ vₜ
-  have hr : r ≠ 0 := headBasis_ne_zero ℚ
-  have hX : ∀ i, IsUnit (X i) := fun i => pcpMatrix_isUnit_rat (u i) (v i)
+  have fixed : ∀ label, X label *ᵥ headBasis ℚ = headBasis ℚ :=
+    fun label => pcpMatrix_mulVec_headBasis ℚ (u label) (v label)
+  have anchor_pair : headBasis ℚ ⬝ᵥ headBasis ℚ ≠ 0 := by
+    simp [headBasis]
+  rw [show absorbedFamily u v uₜ vₜ =
+      separatedGenerator
+        (Matrix.vecMulVec (terminalColumn uₜ vₜ) (headBasis ℚ)) X by
+        rfl]
+  rw [fixedAnchor_mortal_adjoin_outer_iff X (headBasis ℚ)
+    (terminalColumn uₜ vₜ) (headBasis ℚ) fixed anchor_pair]
   constructor
-  · rintro ⟨raw, _, hzero⟩
-    have hproduct : generatorProduct A X raw = 0 := by
-      simpa [IsMortal, absorbedFamily, generatorProduct, A, X] using hzero
-    have hnone : none ∈ raw := by
-      by_contra hnone
-      exact (generatorProduct_isUnit_of_none_not_mem A hX hnone).ne_zero hproduct
-    rw [generatorProduct_eq_rankOneChain] at hproduct
-    have hlength := fracture_length_two_le_of_none_mem hnone
-    have hfracture := fracture_ne_nil raw
-    rcases List.exists_cons_of_ne_nil hfracture with ⟨first, rest, hfirst⟩
-    have hrest : rest ≠ [] := by
-      intro hnil
-      rw [hfirst, hnil] at hlength
-      simp at hlength
-    let last := rest.getLast hrest
-    let middle := rest.dropLast
-    have hdecomp : fracture raw = first :: middle ++ [last] := by
-      rw [hfirst]
-      congr 1
-      exact (List.dropLast_append_getLast hrest).symm
-    have hmapped : (fracture raw).map (blockProduct X) =
-        blockProduct X first :: (middle.map (blockProduct X)) ++ [blockProduct X last] := by
-      simp [hdecomp]
-    rw [hmapped] at hproduct
-    have hbridge := (rankOneChain_eq_zero_iff c r (blockProduct X first)
-      (blockProduct X last) (middle.map (blockProduct X)) hc hr
-      (blockProduct_isUnit hX first) (blockProduct_isUnit hX last)).mp hproduct
-    rcases hbridge with ⟨P, hP, hPzero⟩
-    rcases List.mem_map.mp hP with ⟨word, _, rfl⟩
-    refine ⟨word, (bridgeScalar_tileProduct u v uₜ vₜ word).mp ?_⟩
-    simpa [c, r, X, blockProduct, tileProduct] using hPzero
-  · rintro ⟨word, hmatch⟩
-    have hbridge : bridgeScalar c r (tileProduct u v word) = 0 :=
-      (bridgeScalar_tileProduct u v uₜ vₜ word).mpr hmatch
-    have hchain : rankOneChain A
-        (1 :: [tileProduct u v word] ++ [1]) = 0 := by
-      apply (rankOneChain_eq_zero_iff c r 1 1 [tileProduct u v word] hc hr
-        (isUnit_one) (isUnit_one)).mpr
-      exact ⟨tileProduct u v word, by simp, hbridge⟩
-    refine ⟨none :: word.map some ++ [none], by simp, ?_⟩
-    have hfracture : fracture (none :: word.map some ++ [none]) = [[], word, []] := by
-      simp [fracture, fracture_map_some_append_none]
-    change generatorProduct A X (none :: word.map some ++ [none]) = 0
-    rw [generatorProduct_eq_rankOneChain, hfracture]
-    simpa [blockProduct, tileProduct, A, X] using hchain
-
-/-- Entrywise inclusion of an integer matrix into the rationals. -/
-def castMatrix (M : Matrix (Fin 3) (Fin 3) ℤ) : Matrix (Fin 3) (Fin 3) ℚ :=
-  M.map (Int.castRingHom ℚ)
-
-/-- Entrywise inclusion of an integer vector into the rationals. -/
-def castVector (v : Fin 3 → ℤ) : Fin 3 → ℚ := fun i => v i
+  · rintro ⟨word, bridge_zero⟩
+    exact ⟨word, (bridgeScalar_tileProduct u v uₜ vₜ word).mp
+      (by simpa [X, wordProduct, tileProduct] using bridge_zero)⟩
+  · rintro ⟨word, terminal_match⟩
+    refine ⟨word, ?_⟩
+    simpa [X, wordProduct, tileProduct] using
+      (bridgeScalar_tileProduct u v uₜ vₜ word).mpr terminal_match
 
 theorem castMatrix_pcpMatrix (x y : List Bool) :
     castMatrix (pcpMatrix ℤ x y) = pcpMatrix ℚ x y := by
@@ -183,17 +144,6 @@ theorem castVector_headBasis : castVector (headBasis ℤ) = headBasis ℚ := by
 theorem castVector_tailBasis : castVector (tailBasis ℤ) = tailBasis ℚ := by
   funext i
   fin_cases i <;> simp [castVector, tailBasis]
-
-theorem castMatrix_mulVec (M : Matrix (Fin 3) (Fin 3) ℤ) (v : Fin 3 → ℤ) :
-    castVector (M *ᵥ v) = castMatrix M *ᵥ castVector v := by
-  funext i
-  simp [castVector, castMatrix, Matrix.mulVec, Matrix.dotProduct]
-
-theorem castMatrix_vecMulVec (c r : Fin 3 → ℤ) :
-    castMatrix (Matrix.vecMulVec c r) =
-      Matrix.vecMulVec (castVector c) (castVector r) := by
-  ext i j
-  simp [castMatrix, castVector, Matrix.vecMulVec]
 
 /-- The integral absorbed-terminal column `Ψ(uₜ,vₜ)e₃`. -/
 def terminalColumnInt (uₜ vₜ : List Bool) : Fin 3 → ℤ :=
@@ -233,48 +183,17 @@ theorem terminalGeneratorInt_ne_zero (uₜ vₜ : List Bool) :
   rw [← castMatrix_terminalGeneratorInt, hzero]
   simp [castMatrix]
 
-theorem castMatrix_eq_zero_iff (M : Matrix (Fin 3) (Fin 3) ℤ) :
-    castMatrix M = 0 ↔ M = 0 := by
-  constructor
-  · intro h
-    ext i j
-    have hij := congr_fun (congr_fun h i) j
-    simpa [castMatrix] using hij
-  · rintro rfl
-    simp [castMatrix]
-
-theorem castMatrix_absorbedProduct {α : Type*} (u v : α → List Bool)
-    (uₜ vₜ : List Bool) (word : List (Option α)) :
-    castMatrix ((word.map (absorbedFamilyInt u v uₜ vₜ)).prod) =
-      (word.map (absorbedFamily u v uₜ vₜ)).prod := by
-  induction word with
-  | nil => simp [castMatrix]
-  | cons letter word ih =>
-      simp only [List.map_cons, List.prod_cons]
-      rw [show castMatrix
-          (absorbedFamilyInt u v uₜ vₜ letter *
-            (word.map (absorbedFamilyInt u v uₜ vₜ)).prod) =
-          castMatrix (absorbedFamilyInt u v uₜ vₜ letter) *
-            castMatrix ((word.map (absorbedFamilyInt u v uₜ vₜ)).prod) by
-        ext i j
-        simp [castMatrix, Matrix.mul_apply]]
-      rw [castMatrix_absorbedFamilyInt, ih]
-
 theorem absorbedFamilyInt_mortal_iff_terminal_match {α : Type*} (u v : α → List Bool)
     (uₜ vₜ : List Bool) :
     IsMortal (absorbedFamilyInt u v uₜ vₜ) ↔
       ∃ word : List α, spell u word ++ uₜ = spell v word ++ vₜ := by
   rw [← absorbedFamily_mortal_iff_terminal_match]
-  constructor
-  · rintro ⟨word, hword, hzero⟩
-    refine ⟨word, hword, ?_⟩
-    rw [← castMatrix_absorbedProduct]
-    exact (castMatrix_eq_zero_iff _).mpr hzero
-  · rintro ⟨word, hword, hzero⟩
-    refine ⟨word, hword, ?_⟩
-    apply (castMatrix_eq_zero_iff _).mp
-    rw [castMatrix_absorbedProduct]
-    exact hzero
+  have family_cast :
+      castMatrix ∘ absorbedFamilyInt u v uₜ vₜ = absorbedFamily u v uₜ vₜ := by
+    funext label
+    exact castMatrix_absorbedFamilyInt u v uₜ vₜ label
+  rw [← family_cast]
+  exact (isMortal_cast_iff (absorbedFamilyInt u v uₜ vₜ)).symm
 
 /-- The exact five-generator specialization used for `M₃(5)`: four ordinary tiles and one
 absorbed terminal tile, indexed by `Option (Fin 4)`. -/

@@ -78,19 +78,6 @@ private theorem spell_comp_map {a b c : Type*} (side : b → List c) (f : a → 
     spell (side ∘ f) word = spell side (word.map f) := by
   simp [spell, Function.comp_def]
 
-private theorem isMortal_comp_equiv {a b M : Type*} [MonoidWithZero M]
-    (generators : b → M) (equivalence : a ≃ b) :
-    IsMortal (generators ∘ equivalence) ↔ IsMortal generators := by
-  constructor
-  · rintro ⟨word, word_ne, product_zero⟩
-    refine ⟨word.map equivalence, ?_, ?_⟩
-    · simpa using word_ne
-    · simpa [List.map_map, Function.comp_def] using product_zero
-  · rintro ⟨word, word_ne, product_zero⟩
-    refine ⟨word.map equivalence.symm, ?_, ?_⟩
-    · simpa using word_ne
-    · simpa [List.map_map, Function.comp_def] using product_zero
-
 /-- The four-generator binary GPCP problem emitted by one restricted tag source. -/
 def nearyGPCP4 (beta : Nat) (body : List TagLetter) : BinaryGPCP4 where
   upper := nearyUpper beta ∘ nearyTileOfFin

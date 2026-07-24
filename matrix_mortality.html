@@ -4,9 +4,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="author" content="GPT-5.6 Sol; elicited by @eternalism_4eva">
-  <meta name="description" content="Definition, bounded frontier, and results on integer matrix mortality.">
+  <meta name="description" content="Definitions, proof architecture, and current bounded frontiers for integer matrix mortality and zero reachability.">
   <meta property="og:title" content="Matrix Mortality">
-  <meta property="og:description" content="Definition, bounded frontier, and results on integer matrix mortality.">
+  <meta property="og:description" content="Three reusable techniques for fixed-boundary correspondence, paired-role compression, and binary matrix compilers.">
   <meta property="og:type" content="website">
   <title>Matrix Mortality | Mathematics</title>
 </head>
@@ -23,8 +23,9 @@
   <div class="shell">
     <nav class="contents" aria-label="Contents">
       <ol>
-        <li><a href="#results">Results</a></li>
+        <li><a href="#techniques">Techniques</a></li>
         <li><a href="#definition">What is matrix mortality?</a></li>
+        <li><a href="#dependencies">Proof dependencies</a></li>
         <li><a href="#frontier">Bounded frontier</a></li>
       </ol>
     </nav>
@@ -32,18 +33,24 @@
     <main id="article">
       <article>
         <section>
-          <h2 id="results">Results</h2>
-          <ul class="artifact-list" aria-label="Matrix mortality results">
+          <h2 id="techniques">Techniques</h2>
+          <ul class="artifact-list" aria-label="Matrix mortality techniques">
             <li>
               <a href="/math/matrix_mortality/m3_5/">
-                <b>Undecidability of M₃(5)</b>
-                Four-letter fixed-boundary correspondence and a repeated rank-one separator.
+                <b>Fixed-Boundary Correspondence</b>
+                Zero-run synchronization proves GPCP(4); a repeated rank-one separator gives M₃(5).
               </a>
             </li>
             <li>
               <a href="/math/matrix_mortality/m4_4/">
-                <b>Undecidability of M₄(4)</b>
-                Paired-role quotient compression and a common-fixed-column mortality converse.
+                <b>Paired-Role Compression</b>
+                A shared word channel gives Z₄(3); a common-fixed-column converse gives M₄(4).
+              </a>
+            </li>
+            <li>
+              <a href="/math/matrix_mortality/binary_compilers/">
+                <b>Binary Compilers</b>
+                Shared partial state gives Z₆(2); prefix decoding and common-image restriction give M₁₀(2).
               </a>
             </li>
           </ul>
@@ -72,6 +79,19 @@
           <p>The matrix entries and witness length are unbounded. Multiplication retains the order of the selected generators, so a product is a word over a finite noncommutative alphabet.</p>
 
           <p>Mortality is recursively enumerable: enumerate products by length and stop when zero appears. Undecidability means that no algorithm terminates correctly on every mortal and nonmortal input.</p>
+
+          <p>Two related problems retain only one scalar coefficient. Z<sub><var>d</var></sub>(<var>k</var>) supplies a row <var>L</var> and column <var>C</var> and asks whether <var>LYC</var> = 0 for some product <var>Y</var> of at most <var>k</var> integer <var>d</var> × <var>d</var> matrices. R<sub><var>d</var></sub>(<var>k</var>) fixes the coefficient to one matrix corner. The structured form Z̊ additionally requires every generator to have first column <var>e</var><sub>1</sub>.</p>
+        </section>
+
+        <section>
+          <h2 id="dependencies">Proof dependencies</h2>
+          <p>The fixed-boundary theorem supplies four structured word-pair matrices. The remaining results use that interface:</p>
+          <ul>
+            <li>Rank-one boundary absorption gives M<sub>3</sub>(5).</li>
+            <li>An anti-diagonal quotient of the paired role channels gives Z<sub>4</sub>(3), followed by M<sub>4</sub>(4).</li>
+            <li>A shared-partial-channel binary compiler gives Z<sub>6</sub>(2), followed by R<sub>7</sub>(2).</li>
+            <li>A complete binary prefix decoder and ten-dimensional common-image restriction give M<sub>10</sub>(2).</li>
+          </ul>
         </section>
 
         <section>
@@ -85,15 +105,23 @@
             </math>
           </div>
 
-          <p>After the two results above and the established generator–dimension reductions of <a href="https://arxiv.org/abs/1404.0644">Cassaigne, Halava, Harju, and Nicolas</a>, the currently established Pareto-minimal undecidable points are</p>
+          <p>After the three techniques above and the established reductions of <a href="https://arxiv.org/abs/1404.0644">Cassaigne, Halava, Harju, and Nicolas</a>, the currently established Pareto-minimal undecidable points are</p>
           <div class="formula plain">
             <math display="block">
-              <mrow>
-                <msub><mi>M</mi><mn>3</mn></msub><mo>(</mo><mn>5</mn><mo>)</mo><mo>,</mo><mspace width="0.5em"></mspace>
-                <msub><mi>M</mi><mn>4</mn></msub><mo>(</mo><mn>4</mn><mo>)</mo><mo>,</mo><mspace width="0.5em"></mspace>
-                <msub><mi>M</mi><mn>6</mn></msub><mo>(</mo><mn>3</mn><mo>)</mo><mo>,</mo><mspace width="0.5em"></mspace>
-                <msub><mi>M</mi><mn>12</mn></msub><mo>(</mo><mn>2</mn><mo>)</mo><mo>.</mo>
-              </mrow>
+              <mtable columnalign="right left">
+                <mtr>
+                  <mtd><mi>Z</mi><mo>:</mo></mtd>
+                  <mtd><msub><mi>Z</mi><mn>3</mn></msub><mo>(</mo><mn>4</mn><mo>)</mo><mo>,</mo><mspace width="0.4em"></mspace><msub><mi>Z</mi><mn>4</mn></msub><mo>(</mo><mn>3</mn><mo>)</mo><mo>,</mo><mspace width="0.4em"></mspace><msub><mi>Z</mi><mn>6</mn></msub><mo>(</mo><mn>2</mn><mo>)</mo><mo>;</mo></mtd>
+                </mtr>
+                <mtr>
+                  <mtd><mi>R</mi><mo>:</mo></mtd>
+                  <mtd><msub><mi>R</mi><mn>3</mn></msub><mo>(</mo><mn>5</mn><mo>)</mo><mo>,</mo><mspace width="0.4em"></mspace><msub><mi>R</mi><mn>4</mn></msub><mo>(</mo><mn>4</mn><mo>)</mo><mo>,</mo><mspace width="0.4em"></mspace><msub><mi>R</mi><mn>5</mn></msub><mo>(</mo><mn>3</mn><mo>)</mo><mo>,</mo><mspace width="0.4em"></mspace><msub><mi>R</mi><mn>7</mn></msub><mo>(</mo><mn>2</mn><mo>)</mo><mo>;</mo></mtd>
+                </mtr>
+                <mtr>
+                  <mtd><mi>M</mi><mo>:</mo></mtd>
+                  <mtd><msub><mi>M</mi><mn>3</mn></msub><mo>(</mo><mn>5</mn><mo>)</mo><mo>,</mo><mspace width="0.4em"></mspace><msub><mi>M</mi><mn>4</mn></msub><mo>(</mo><mn>4</mn><mo>)</mo><mo>,</mo><mspace width="0.4em"></mspace><msub><mi>M</mi><mn>6</mn></msub><mo>(</mo><mn>3</mn><mo>)</mo><mo>,</mo><mspace width="0.4em"></mspace><msub><mi>M</mi><mn>10</mn></msub><mo>(</mo><mn>2</mn><mo>)</mo><mo>.</mo></mtd>
+                </mtr>
+              </mtable>
             </math>
           </div>
 
@@ -118,7 +146,8 @@
               <tr><th scope="row">4</th><td>D</td><td>?</td><td>?</td><td><a href="/math/matrix_mortality/m4_4/#result"><strong class="new-result" aria-label="Undecidable; proved directly in the M4(4) article, to our knowledge">U★</strong></a></td><td><a href="/math/matrix_mortality/m3_5/#result"><strong class="new-result" aria-label="Undecidable; first established as a corollary of the M3(5) article, to our knowledge">U★</strong></a></td><td>U</td></tr>
               <tr><th scope="row">5</th><td>D</td><td>?</td><td>?</td><td>U</td><td>U</td><td>U</td></tr>
               <tr><th scope="row">6–8</th><td>D</td><td>?</td><td><a href="/math/matrix_mortality/m3_5/#result"><strong class="new-result" aria-label="Undecidable; first established as a corollary of the M3(5) article, to our knowledge">U★</strong></a></td><td>U</td><td>U</td><td>U</td></tr>
-              <tr><th scope="row">9–11</th><td>D</td><td>?</td><td>U</td><td>U</td><td>U</td><td>U</td></tr>
+              <tr><th scope="row">9</th><td>D</td><td>?</td><td>U</td><td>U</td><td>U</td><td>U</td></tr>
+              <tr><th scope="row">10–11</th><td>D</td><td><a href="/math/matrix_mortality/binary_compilers/#mortality-ten"><strong class="new-result" aria-label="Undecidable; first established by the binary compilers article, to our knowledge">U★</strong></a></td><td>U</td><td>U</td><td>U</td><td>U</td></tr>
               <tr><th scope="row">12–14</th><td>D</td><td><a href="/math/matrix_mortality/m3_5/#result"><strong class="new-result" aria-label="Undecidable; first established as a corollary of the M3(5) article, to our knowledge">U★</strong></a></td><td>U</td><td>U</td><td>U</td><td>U</td></tr>
               <tr><th scope="row">≥15</th><td>D</td><td>U</td><td>U</td><td>U</td><td>U</td><td>U</td></tr>
             </tbody>

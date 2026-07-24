@@ -4,18 +4,18 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="author" content="GPT-5.6 Sol; elicited by @eternalism_4eva">
-  <meta name="description" content="Paired-role compression proves mortality undecidable for four 4 by 4 integer matrices.">
-  <meta property="og:title" content="Undecidability of M₄(4)">
+  <meta name="description" content="A shared two-dimensional word channel compresses four source roles to three 4 by 4 scalar generators and four mortality generators.">
+  <meta property="og:title" content="Paired-Role Compression">
   <meta property="og:description" content="Two paired word channels compress scalar zero reachability to three 4 by 4 matrices; one rank-one separator yields M₄(4).">
   <meta property="og:type" content="article">
-  <title>Undecidability of M₄(4) | Matrix Mortality</title>
+  <title>Paired-Role Compression | Matrix Mortality</title>
 </head>
 <body>
   <a class="skip-link" href="#article">Skip to the exposition</a>
 
   <header class="masthead">
     <div class="masthead-inner">
-      <h1>Undecidability of M<sub>4</sub>(4)</h1>
+      <h1>Paired-Role Compression</h1>
       <p class="byline">GPT-5.6 Sol · elicited by <a href="https://x.com/eternalism_4eva">@eternalism_4eva</a></p>
     </div>
   </header>
@@ -84,7 +84,7 @@
           <summary><h2 id="known-stuff">Known Stuff</h2></summary>
 
           <h3 id="part-one">The four-role source</h3>
-          <p>The <a href="/math/matrix_mortality/m3_5/">M<sub>3</sub>(5) result</a> proves undecidability of a fixed-boundary correspondence problem with four source roles.</p>
+          <p>The <a href="/math/matrix_mortality/m3_5/">fixed-boundary correspondence theorem</a> proves undecidability of a four-role source problem.</p>
 
           <p>Fix a deletion width <var>β</var> and write <var>H</var> for Neary’s binary word code, with <var>H</var>(<span class="word">b</span>) = 10<sup><var>β</var></sup>1 and <var>H</var>(<span class="word">c</span>) = 1. For the variable part <var>q</var> of the <span class="word">c</span>-appendant, the four ordinary roles are</p>
           <div class="formula">
@@ -489,63 +489,7 @@
             </math>
           </div>
           <p>The direct scalar construction proves Z̊<sub>4</sub>(3) undecidable. Forgetting the restriction gives Z<sub>4</sub>(3); the established reduction Z<sub><var>d</var></sub>(<var>k</var>) ≤<sub>m</sub> R<sub><var>d</var>+1</sub>(<var>k</var>) gives R<sub>5</sub>(3) <a href="#ref-chhn-2014">[Cassaigne et al. 2014]</a>.</p>
-          <p>After applying the standard CHHN reductions, the currently established Pareto-minimal mortality-undecidability points are:</p>
-          <div class="formula plain">
-            <math display="block">
-              <mrow>
-                <msub><mi>M</mi><mn>3</mn></msub><mo>(</mo><mn>5</mn><mo>)</mo><mo>,</mo><mspace width="0.5em"></mspace>
-                <msub><mi>M</mi><mn>4</mn></msub><mo>(</mo><mn>4</mn><mo>)</mo><mo>,</mo><mspace width="0.5em"></mspace>
-                <msub><mi>M</mi><mn>6</mn></msub><mo>(</mo><mn>3</mn><mo>)</mo><mo>,</mo><mspace width="0.5em"></mspace>
-                <msub><mi>M</mi><mn>12</mn></msub><mo>(</mo><mn>2</mn><mo>)</mo><mo>.</mo>
-              </mrow>
-            </math>
-          </div>
-          <p>The corresponding Pareto-minimal scalar and corner-reachability points are</p>
-          <div class="formula plain">
-            <math display="block">
-              <mtable columnalign="right left">
-                <mtr>
-                  <mtd><mi>Z</mi><mo>:</mo></mtd>
-                  <mtd><msub><mi>Z</mi><mn>3</mn></msub><mo>(</mo><mn>4</mn><mo>)</mo><mo>,</mo><mspace width="0.4em"></mspace><msub><mi>Z</mi><mn>4</mn></msub><mo>(</mo><mn>3</mn><mo>)</mo><mo>,</mo><mspace width="0.4em"></mspace><msub><mi>Z</mi><mn>7</mn></msub><mo>(</mo><mn>2</mn><mo>)</mo><mo>;</mo></mtd>
-                </mtr>
-                <mtr>
-                  <mtd><mi>R</mi><mo>:</mo></mtd>
-                  <mtd><msub><mi>R</mi><mn>3</mn></msub><mo>(</mo><mn>5</mn><mo>)</mo><mo>,</mo><mspace width="0.4em"></mspace><msub><mi>R</mi><mn>4</mn></msub><mo>(</mo><mn>4</mn><mo>)</mo><mo>,</mo><mspace width="0.4em"></mspace><msub><mi>R</mi><mn>5</mn></msub><mo>(</mo><mn>3</mn><mo>)</mo><mo>,</mo><mspace width="0.4em"></mspace><msub><mi>R</mi><mn>8</mn></msub><mo>(</mo><mn>2</mn><mo>)</mo><mo>.</mo></mtd>
-                </mtr>
-              </mtable>
-            </math>
-          </div>
-          <p>These are known undecidability bounds, not complete decidability frontiers.</p>
-
-          <p>In the mortality status window, this article changes the single minimal cell (4,4); all cells above it follow by monotonicity.</p>
-          <div class="table-scroll">
-          <table class="status-table">
-            <caption>Decidability of M<sub>d</sub>(<var>k</var>) after this result</caption>
-            <thead>
-              <tr>
-                <th scope="col"><var>d</var> \ <var>k</var></th>
-                <th scope="col">1</th>
-                <th scope="col">2</th>
-                <th scope="col">3</th>
-                <th scope="col">4</th>
-                <th scope="col">5</th>
-                <th scope="col">≥6</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr><th scope="row">1</th><td>D</td><td>D</td><td>D</td><td>D</td><td>D</td><td>D</td></tr>
-              <tr><th scope="row">2</th><td>D</td><td>D</td><td>?</td><td>?</td><td>?</td><td>?</td></tr>
-              <tr><th scope="row">3</th><td>D</td><td>?</td><td>?</td><td>?</td><td>U</td><td>U</td></tr>
-              <tr><th scope="row">4</th><td>D</td><td>?</td><td>?</td><td><strong class="new-result" aria-label="Undecidable; newly proved by this article, to our knowledge">U★</strong></td><td>U</td><td>U</td></tr>
-              <tr><th scope="row">5</th><td>D</td><td>?</td><td>?</td><td>U</td><td>U</td><td>U</td></tr>
-              <tr><th scope="row">6–8</th><td>D</td><td>?</td><td>U</td><td>U</td><td>U</td><td>U</td></tr>
-              <tr><th scope="row">9–11</th><td>D</td><td>?</td><td>U</td><td>U</td><td>U</td><td>U</td></tr>
-              <tr><th scope="row">12–14</th><td>D</td><td>U</td><td>U</td><td>U</td><td>U</td><td>U</td></tr>
-              <tr><th scope="row">≥15</th><td>D</td><td>U</td><td>U</td><td>U</td><td>U</td><td>U</td></tr>
-            </tbody>
-          </table>
-          </div>
-          <p>D means decidable, ? unresolved, and U undecidable. <strong class="new-result">U★</strong> marks M<sub>4</sub>(4), proved directly here. The unstarred entries include the M<sub>3</sub>(5) result and prior literature.</p>
+          <p>The four-dimensional separator construction proves M<sub>4</sub>(4). The <a href="/math/matrix_mortality/#frontier">series landing page</a> records the current scalar, corner, and mortality frontiers.</p>
         </details>
 
         <details class="major-section">
@@ -587,7 +531,7 @@
 
           <h3 id="sources">References</h3>
           <ol class="references">
-            <li id="ref-part-one"><span>GPT-5.6 Sol, elicited by @eternalism_4eva, <a href="/math/matrix_mortality/m3_5/"><cite>Undecidability of M₃(5)</cite></a>, 2026. The synchronized four-role source theorem and five-matrix compiler.</span></li>
+            <li id="ref-part-one"><span>GPT-5.6 Sol, elicited by @eternalism_4eva, <a href="/math/matrix_mortality/m3_5/"><cite>Fixed-Boundary Correspondence</cite></a>, 2026. The synchronized four-role source theorem and five-matrix compiler.</span></li>
             <li id="ref-neary-2015"><span>Turlough Neary, <a href="https://doi.org/10.4230/LIPIcs.STACS.2015.649"><cite>Undecidability in Binary Tag Systems and the Post Correspondence Problem for Five Pairs of Words</cite></a>, STACS 2015. The restricted binary-tag undecidability source.</span></li>
             <li id="ref-chhn-2014"><span>Julien Cassaigne, Vesa Halava, Tero Harju, and François Nicolas, <a href="https://arxiv.org/abs/1404.0644"><cite>Tighter Undecidability Bounds for Matrix Mortality, Zero-in-the-Corner Problems, and More</cite></a>, 2014. Definitions, prior bounds, and the scalar-to-corner reductions.</span></li>
           </ol>

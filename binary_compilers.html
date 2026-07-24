@@ -1,0 +1,448 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="GPT-5.6 Sol; elicited by @eternalism_4eva">
+  <meta name="description" content="Two binary compilers use the shared channel of a four-role correspondence system to prove Z6(2) and M10(2) undecidable.">
+  <meta property="og:title" content="Binary Compilers">
+  <meta property="og:description" content="Shared partial state gives Z₆(2); prefix decoding and common-image restriction give M₁₀(2).">
+  <meta property="og:type" content="article">
+  <title>Binary Compilers | Matrix Mortality</title>
+</head>
+<body>
+  <a class="skip-link" href="#article">Skip to the exposition</a>
+
+  <header class="masthead">
+    <div class="masthead-inner">
+      <h1>Binary Compilers</h1>
+      <p class="byline">GPT-5.6 Sol · elicited by <a href="https://x.com/eternalism_4eva">@eternalism_4eva</a></p>
+    </div>
+  </header>
+
+  <div class="shell">
+    <nav class="contents" aria-label="Contents">
+      <ol>
+        <li>
+          <a href="#known-stuff">Known Stuff</a>
+          <ol>
+            <li><a href="#source-interface">Four-role source</a></li>
+            <li><a href="#shared-channel">Shared channel</a></li>
+            <li><a href="#previous-binary-bounds">Previous binary bounds</a></li>
+          </ol>
+        </li>
+        <li>
+          <a href="#new-stuff">New Stuff</a>
+          <ol>
+            <li><a href="#result">Results</a></li>
+            <li>
+              <a href="#scalar-six">Six-state scalar compiler</a>
+              <ol>
+                <li><a href="#two-bit-code">Two-bit code</a></li>
+                <li><a href="#six-generators">Generators</a></li>
+                <li><a href="#six-decoder">Arbitrary binary words</a></li>
+                <li><a href="#structured-scalar">Structured form</a></li>
+              </ol>
+            </li>
+            <li>
+              <a href="#mortality-ten">Ten-state mortality compiler</a>
+              <ol>
+                <li><a href="#prefix-code">Complete prefix code</a></li>
+                <li><a href="#prefix-machine">Twelve-state realization</a></li>
+                <li><a href="#synchronizer">Synchronizer</a></li>
+                <li><a href="#common-image">Common-image restriction</a></li>
+                <li><a href="#restriction-converse">Mortality converse</a></li>
+              </ol>
+            </li>
+            <li><a href="#consequences">Consequences</a></li>
+          </ol>
+        </li>
+        <li>
+          <a href="#bookkeeping">Bookkeeping</a>
+          <ol>
+            <li><a href="#verification">Verification and provenance</a></li>
+            <li><a href="#formal-scope">Formal scope</a></li>
+            <li><a href="#priority">Priority</a></li>
+            <li><a href="#sources">References</a></li>
+          </ol>
+        </li>
+      </ol>
+    </nav>
+
+    <main id="article">
+      <article>
+        <div class="verdict">
+          <strong>Theorem. Z<sub>6</sub>(2) and M<sub>10</sub>(2) are undecidable.</strong>
+          <p>The scalar result holds for two 6 × 6 integer matrices sharing first column <var>e</var><sub>1</sub>, under both the free-monoid and nonempty free-semigroup conventions. Consequently R<sub>7</sub>(2) is undecidable.</p>
+          <p>The mortality result uses two 10 × 10 integer matrices. Zero-block padding gives M<sub><var>d</var></sub>(2) for every <var>d</var> ≥ 10.</p>
+        </div>
+
+        <details class="major-section">
+          <summary><h2 id="known-stuff">Known Stuff</h2></summary>
+
+          <h3 id="source-interface">Four-role source</h3>
+          <p>The <a href="/math/matrix_mortality/m3_5/">fixed-boundary correspondence theorem</a> supplies four roles R<sub><var>x</var></sub>, D<sub><var>x</var></sub>, with <var>x</var> ∈ {<span class="word">b</span>, <span class="word">c</span>}, and a terminal column <var>c</var>. A role word <var>w</var> satisfies the fixed-boundary equation exactly when</p>
+          <div class="formula plain">
+            <math display="block">
+              <mrow>
+                <msubsup><mi>e</mi><mn>1</mn><mi mathvariant="normal">T</mi></msubsup>
+                <msub><mi>X</mi><mi>w</mi></msub>
+                <mi>c</mi><mo>=</mo><mn>0</mn><mo>.</mo>
+              </mrow>
+            </math>
+          </div>
+          <p>The source problem is undecidable. The four matrices are nonsingular; adjoining the rank-one boundary matrix gives the five-matrix family used for M<sub>3</sub>(5).</p>
+
+          <h3 id="shared-channel">Shared channel</h3>
+          <p>The <a href="/math/matrix_mortality/m4_4/#side-normal-form">side-normal basis</a> writes every word-pair matrix as</p>
+          <div class="formula">
+            <math display="block">
+              <mrow>
+                <mi>Φ</mi><mo>(</mo><mi>u</mi><mo>,</mo><mi>v</mi><mo>)</mo><mo>=</mo>
+                <mfenced>
+                  <mtable>
+                    <mtr><mtd><mn>1</mn></mtd><mtd><mi>σ</mi><mo>(</mo><mi>v</mi><mo>)</mo></mtd><mtd><mi>σ</mi><mo>(</mo><mi>u</mi><mo>)</mo></mtd></mtr>
+                    <mtr><mtd><mn>0</mn></mtd><mtd><msup><mn>3</mn><mrow><mo>|</mo><mi>v</mi><mo>|</mo></mrow></msup></mtd><mtd><mn>0</mn></mtd></mtr>
+                    <mtr><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd><mtd><msup><mn>3</mn><mrow><mo>|</mo><mi>u</mi><mo>|</mo></mrow></msup></mtd></mtr>
+                  </mtable>
+                </mfenced><mo>.</mo>
+              </mrow>
+            </math>
+          </div>
+          <p>For each fixed source letter <var>x</var>, the rule and deletion roles have the same upper word <var>u</var><sub><var>x</var></sub>. They therefore agree on the upper plane</p>
+          <div class="formula plain">
+            <math display="block">
+              <mrow>
+                <mi>E</mi><mo>=</mo><mi mathvariant="normal">span</mi><mo>{</mo><msub><mi>e</mi><mn>1</mn></msub><mo>,</mo><msub><mi>e</mi><mn>3</mn></msub><mo>}</mo><mo>,</mo>
+                <mspace width="1em"></mspace>
+                <msub><mi>R</mi><mi>x</mi></msub><mo>|</mo><mi>E</mi>
+                <mo>=</mo>
+                <msub><mi>D</mi><mi>x</mi></msub><mo>|</mo><mi>E</mi><mo>.</mo>
+              </mrow>
+            </math>
+          </div>
+          <p>Paired-role compression identifies this plane between two phases. The compilers below instead share it between partial binary decoder states.</p>
+
+          <h3 id="previous-binary-bounds">Previous binary bounds</h3>
+          <p>Cassaigne, Halava, Harju, and Nicolas established Z<sub>9</sub>(2), R<sub>10</sub>(2), and M<sub>15</sub>(2), together with general alphabet-packing and scalar-to-corner reductions <a href="#ref-chhn-2014">[Cassaigne et al. 2014]</a>. The fixed-boundary result and their mortality packing give M<sub>12</sub>(2). Binary codes and incomplete-codeword decoders are prior techniques; the constructions below use the paired source identity to remove states from the corresponding generic realizations.</p>
+        </details>
+
+        <details class="major-section">
+          <summary><h2 id="new-stuff">New Stuff</h2></summary>
+
+          <h3 id="result">Results</h3>
+          <p>The source alphabet factors as a phase bit R/D and a letter bit <span class="word">b</span>/<span class="word">c</span>. The scalar compiler stores one shared unfinished upper channel and preserves every coefficient in six states. The mortality compiler represents all five source matrices by a complete prefix decoder, then restricts its common image from twelve states to ten.</p>
+
+          <h3 id="scalar-six">Six-state scalar compiler</h3>
+
+          <h4 id="two-bit-code">Two-bit code</h4>
+          <p>Every binary pair denotes one role:</p>
+          <div class="formula plain">
+            <math display="block">
+              <mtable columnalign="right center left">
+                <mtr><mtd><mn>00</mn></mtd><mtd><mo>↦</mo></mtd><mtd><msub><mi>R</mi><mi>b</mi></msub><mo>,</mo></mtd></mtr>
+                <mtr><mtd><mn>01</mn></mtd><mtd><mo>↦</mo></mtd><mtd><msub><mi>R</mi><mi>c</mi></msub><mo>,</mo></mtd></mtr>
+                <mtr><mtd><mn>10</mn></mtd><mtd><mo>↦</mo></mtd><mtd><msub><mi>D</mi><mi>b</mi></msub><mo>,</mo></mtd></mtr>
+                <mtr><mtd><mn>11</mn></mtd><mtd><mo>↦</mo></mtd><mtd><msub><mi>D</mi><mi>c</mi></msub><mo>.</mo></mtd></mtr>
+              </mtable>
+            </math>
+          </div>
+          <p>Write U<sub><var>x</var></sub> = σ(<var>u</var><sub><var>x</var></sub>), A<sub><var>x</var></sub> = 3<sup>|<var>u</var><sub><var>x</var></sub>|</sup>, V<sub><var>x</var></sub><sup><var>p</var></sup> = σ(<var>v</var><sub><var>x</var></sub><sup><var>p</var></sup>), and B<sub><var>x</var></sub><sup><var>p</var></sup> = 3<sup>|<var>v</var><sub><var>x</var></sub><sup><var>p</var></sup>|</sup>.</p>
+
+          <h4 id="six-generators">Generators</h4>
+          <p>Use row coordinates (<var>a</var>, <var>λ</var>, <var>υ</var>, <var>λ</var><sub>R</sub>, <var>υ</var><sub>*</sub>, <var>λ</var><sub>D</sub>). The two integer matrices are</p>
+          <div class="formula">
+            <math display="block">
+              <mrow>
+                <msub><mi>N</mi><mn>0</mn></msub><mo>=</mo>
+                <mfenced>
+                  <mtable>
+                    <mtr><mtd><mn>1</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd></mtr>
+                    <mtr><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>1</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd></mtr>
+                    <mtr><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>1</mn></mtd><mtd><mn>0</mn></mtd></mtr>
+                    <mtr><mtd><msubsup><mi>V</mi><mi>b</mi><mi>R</mi></msubsup></mtd><mtd><msubsup><mi>B</mi><mi>b</mi><mi>R</mi></msubsup></mtd><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd></mtr>
+                    <mtr><mtd><msub><mi>U</mi><mi>b</mi></msub></mtd><mtd><mn>0</mn></mtd><mtd><msub><mi>A</mi><mi>b</mi></msub></mtd><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd></mtr>
+                    <mtr><mtd><msubsup><mi>V</mi><mi>b</mi><mi>D</mi></msubsup></mtd><mtd><msubsup><mi>B</mi><mi>b</mi><mi>D</mi></msubsup></mtd><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd></mtr>
+                  </mtable>
+                </mfenced><mo>,</mo>
+              </mrow>
+            </math>
+          </div>
+          <div class="formula">
+            <math display="block">
+              <mrow>
+                <msub><mi>N</mi><mn>1</mn></msub><mo>=</mo>
+                <mfenced>
+                  <mtable>
+                    <mtr><mtd><mn>1</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd></mtr>
+                    <mtr><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>1</mn></mtd></mtr>
+                    <mtr><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>1</mn></mtd><mtd><mn>0</mn></mtd></mtr>
+                    <mtr><mtd><msubsup><mi>V</mi><mi>c</mi><mi>R</mi></msubsup></mtd><mtd><msubsup><mi>B</mi><mi>c</mi><mi>R</mi></msubsup></mtd><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd></mtr>
+                    <mtr><mtd><msub><mi>U</mi><mi>c</mi></msub></mtd><mtd><mn>0</mn></mtd><mtd><msub><mi>A</mi><mi>c</mi></msub></mtd><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd></mtr>
+                    <mtr><mtd><msubsup><mi>V</mi><mi>c</mi><mi>D</mi></msubsup></mtd><mtd><msubsup><mi>B</mi><mi>c</mi><mi>D</mi></msubsup></mtd><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd></mtr>
+                  </mtable>
+                </mfenced><mo>.</mo>
+              </mrow>
+            </math>
+          </div>
+          <p>The first three coordinates form the root state. The remaining coordinates store the unfinished lower rule channel, one upper channel shared by both phases, and the unfinished lower deletion channel.</p>
+
+          <h4 id="six-decoder">Arbitrary binary words</h4>
+          <p>For a row triple <var>q</var> = (<var>a</var>, <var>λ</var>, <var>υ</var>), put</p>
+          <div class="formula plain">
+            <math display="block">
+              <mtable columnalign="right center left">
+                <mtr><mtd><mi>E</mi><mo>(</mo><mi>q</mi><mo>)</mo></mtd><mtd><mo>=</mo></mtd><mtd><mo>(</mo><mi>a</mi><mo>,</mo><mi>λ</mi><mo>,</mo><mi>υ</mi><mo>,</mo><mn>0</mn><mo>,</mo><mn>0</mn><mo>,</mo><mn>0</mn><mo>)</mo><mo>,</mo></mtd></mtr>
+                <mtr><mtd><msub><mi>O</mi><mi>R</mi></msub><mo>(</mo><mi>q</mi><mo>)</mo></mtd><mtd><mo>=</mo></mtd><mtd><mo>(</mo><mi>a</mi><mo>,</mo><mn>0</mn><mo>,</mo><mn>0</mn><mo>,</mo><mi>λ</mi><mo>,</mo><mi>υ</mi><mo>,</mo><mn>0</mn><mo>)</mo><mo>,</mo></mtd></mtr>
+                <mtr><mtd><msub><mi>O</mi><mi>D</mi></msub><mo>(</mo><mi>q</mi><mo>)</mo></mtd><mtd><mo>=</mo></mtd><mtd><mo>(</mo><mi>a</mi><mo>,</mo><mn>0</mn><mo>,</mo><mn>0</mn><mo>,</mo><mn>0</mn><mo>,</mo><mi>υ</mi><mo>,</mo><mi>λ</mi><mo>)</mo><mo>.</mo></mtd></mtr>
+              </mtable>
+            </math>
+          </div>
+          <p>Direct multiplication gives</p>
+          <div class="formula plain">
+            <math display="block">
+              <mtable columnalign="left left">
+                <mtr><mtd><mi>E</mi><mo>(</mo><mi>q</mi><mo>)</mo><msub><mi>N</mi><mn>0</mn></msub><mo>=</mo><msub><mi>O</mi><mi>R</mi></msub><mo>(</mo><mi>q</mi><mo>)</mo><mo>,</mo></mtd><mtd><mi>E</mi><mo>(</mo><mi>q</mi><mo>)</mo><msub><mi>N</mi><mn>1</mn></msub><mo>=</mo><msub><mi>O</mi><mi>D</mi></msub><mo>(</mo><mi>q</mi><mo>)</mo><mo>;</mo></mtd></mtr>
+                <mtr><mtd><msub><mi>O</mi><mi>R</mi></msub><mo>(</mo><mi>q</mi><mo>)</mo><msub><mi>N</mi><mi>x</mi></msub><mo>=</mo><mi>E</mi><mo>(</mo><mi>q</mi><msubsup><mi>X</mi><mrow><mi>R</mi><mo>,</mo><mi>x</mi></mrow><mi mathvariant="normal">T</mi></msubsup><mo>)</mo><mo>,</mo></mtd><mtd><msub><mi>O</mi><mi>D</mi></msub><mo>(</mo><mi>q</mi><mo>)</mo><msub><mi>N</mi><mi>x</mi></msub><mo>=</mo><mi>E</mi><mo>(</mo><mi>q</mi><msubsup><mi>X</mi><mrow><mi>D</mi><mo>,</mo><mi>x</mi></mrow><mi mathvariant="normal">T</mi></msubsup><mo>)</mo><mo>.</mo></mtd></mtr>
+              </mtable>
+            </math>
+          </div>
+          <p>Parse a binary word from the left into complete pairs and discard one final bit when the length is odd. If the pairs decode as <var>a</var><sub>1</sub>, …, <var>a</var><sub><var>n</var></sub>, define τ(<var>z</var>) = <var>a</var><sub><var>n</var></sub>⋯<var>a</var><sub>1</sub>. The reversal accounts for the transposed row action. With</p>
+          <div class="formula plain">
+            <math display="block">
+              <mrow>
+                <msub><mi>L</mi><mn>6</mn></msub><mo>=</mo><mo>(</mo><mi>μ</mi><mo>,</mo><mo>−</mo><mn>1</mn><mo>,</mo><mi>t</mi><mo>,</mo><mn>0</mn><mo>,</mo><mn>0</mn><mo>,</mo><mn>0</mn><mo>)</mo><mo>,</mo>
+                <mspace width="1em"></mspace>
+                <msub><mi>C</mi><mn>6</mn></msub><mo>=</mo><msub><mi>e</mi><mn>1</mn></msub><mo>,</mo>
+              </mrow>
+            </math>
+          </div>
+          <p>the transition identities give, for every binary word,</p>
+          <div class="formula plain">
+            <math display="block">
+              <mrow>
+                <msub><mi>L</mi><mn>6</mn></msub>
+                <msub><mi>N</mi><mi>z</mi></msub>
+                <msub><mi>C</mi><mn>6</mn></msub>
+                <mo>=</mo>
+                <msubsup><mi>e</mi><mn>1</mn><mi mathvariant="normal">T</mi></msubsup>
+                <msub><mi>X</mi><mrow><mi>τ</mi><mo>(</mo><mi>z</mi><mo>)</mo></mrow></msub>
+                <mi>c</mi><mo>.</mo>
+              </mrow>
+            </math>
+          </div>
+          <p>An unpaired final bit changes only the unfinished phase and preserves the extracted first coordinate. Conversely, encoding the reversed sequence of any role word gives a binary preimage. The decoder is total and surjective.</p>
+
+          <h4 id="structured-scalar">Structured form</h4>
+          <p>Transposing both generators makes their first column <var>e</var><sub>1</sub>. Product reversal is a bijection on binary words, so scalar zero reachability is unchanged. The empty and one-bit coefficients equal <var>μ</var> ≠ 0; the free-monoid and nonempty free-semigroup conventions therefore agree. This proves structured Z̊<sub>6</sub>(2), hence Z<sub>6</sub>(2). The standard integral scalar-to-corner lift gives R<sub>7</sub>(2) <a href="#ref-chhn-2014">[Cassaigne et al. 2014]</a>.</p>
+
+          <h3 id="mortality-ten">Ten-state mortality compiler</h3>
+
+          <h4 id="prefix-code">Complete prefix code</h4>
+          <p>Transpose the normalized five-matrix family and write its rank-one separator as Π = <var>e</var><sub>1</sub><var>c</var><sup>T</sup>. Denote the four payloads by R<sub><var>c</var></sub>, R<sub><var>b</var></sub>, D<sub><var>c</var></sub>, D<sub><var>b</var></sub>. For every <var>p</var> in the upper plane <var>E</var>,</p>
+          <div class="formula plain">
+            <math display="block">
+              <mrow>
+                <msup><mi>p</mi><mi mathvariant="normal">T</mi></msup><msub><mi>R</mi><mi>x</mi></msub>
+                <mo>=</mo>
+                <msup><mi>p</mi><mi mathvariant="normal">T</mi></msup><msub><mi>D</mi><mi>x</mi></msub><mo>.</mo>
+              </mrow>
+            </math>
+          </div>
+          <p>Use the complete prefix code</p>
+          <div class="formula plain">
+            <math display="block">
+              <mtable columnalign="right center left">
+                <mtr><mtd><mn>0</mn></mtd><mtd><mo>↦</mo></mtd><mtd><mi>Π</mi><mo>,</mo></mtd></mtr>
+                <mtr><mtd><mn>100</mn></mtd><mtd><mo>↦</mo></mtd><mtd><msub><mi>R</mi><mi>c</mi></msub><mo>,</mo></mtd></mtr>
+                <mtr><mtd><mn>101</mn></mtd><mtd><mo>↦</mo></mtd><mtd><msub><mi>R</mi><mi>b</mi></msub><mo>,</mo></mtd></mtr>
+                <mtr><mtd><mn>110</mn></mtd><mtd><mo>↦</mo></mtd><mtd><msub><mi>D</mi><mi>c</mi></msub><mo>,</mo></mtd></mtr>
+                <mtr><mtd><mn>111</mn></mtd><mtd><mo>↦</mo></mtd><mtd><msub><mi>D</mi><mi>b</mi></msub><mo>.</mo></mtd></mtr>
+              </mtable>
+            </math>
+          </div>
+          <p>Its proper-prefix states are ε, 1, 10, and 11.</p>
+
+          <h4 id="prefix-machine">Twelve-state realization</h4>
+          <p>Order four three-dimensional blocks by those prefix states. The binary generators are</p>
+          <div class="formula">
+            <math display="block">
+              <mrow>
+                <msub><mi>𝒜</mi><mn>0</mn></msub><mo>=</mo>
+                <mfenced>
+                  <mtable>
+                    <mtr><mtd><mi>Π</mi></mtd><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd></mtr>
+                    <mtr><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd><mtd><mi>I</mi></mtd><mtd><mn>0</mn></mtd></mtr>
+                    <mtr><mtd><msub><mi>R</mi><mi>c</mi></msub></mtd><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd></mtr>
+                    <mtr><mtd><msub><mi>D</mi><mi>c</mi></msub></mtd><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd></mtr>
+                  </mtable>
+                </mfenced><mo>,</mo>
+                <mspace width="1em"></mspace>
+                <msub><mi>𝒜</mi><mn>1</mn></msub><mo>=</mo>
+                <mfenced>
+                  <mtable>
+                    <mtr><mtd><mn>0</mn></mtd><mtd><mi>I</mi></mtd><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd></mtr>
+                    <mtr><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd><mtd><mi>I</mi></mtd></mtr>
+                    <mtr><mtd><msub><mi>R</mi><mi>b</mi></msub></mtd><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd></mtr>
+                    <mtr><mtd><msub><mi>D</mi><mi>b</mi></msub></mtd><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd></mtr>
+                  </mtable>
+                </mfenced><mo>.</mo>
+              </mrow>
+            </math>
+          </div>
+          <p>Each block row contains one nonzero block. For every start state and binary word, its product therefore has one possibly nonzero block in that row: the deterministic final prefix state selects the column, and the emitted source product is the block value. This covers complete codewords, unfinished suffixes, and every starting prefix state.</p>
+
+          <h4 id="synchronizer">Synchronizer</h4>
+          <p>The word 00 sends every prefix state to ε. Its four emitted products are</p>
+          <div class="formula plain">
+            <math display="block">
+              <mtable columnalign="right left">
+                <mtr><mtd><mi>ε</mi><mo>:</mo></mtd><mtd><msup><mi>Π</mi><mn>2</mn></msup><mo>,</mo></mtd></mtr>
+                <mtr><mtd><mn>1</mn><mo>:</mo></mtd><mtd><msub><mi>R</mi><mi>c</mi></msub><mo>,</mo></mtd></mtr>
+                <mtr><mtd><mn>10</mn><mo>:</mo></mtd><mtd><msub><mi>R</mi><mi>c</mi></msub><mi>Π</mi><mo>,</mo></mtd></mtr>
+                <mtr><mtd><mn>11</mn><mo>:</mo></mtd><mtd><msub><mi>D</mi><mi>c</mi></msub><mi>Π</mi><mo>.</mo></mtd></mtr>
+              </mtable>
+            </math>
+          </div>
+          <p>If a source word <var>w</var> has zero matrix product, then 00 followed by its prefix encoding makes every block row zero. Conversely, a zero binary product has a zero root block, whose emitted source product cannot be empty because the empty product is the identity. Thus the twelve-state pair is mortal exactly when the five-matrix source family is mortal.</p>
+
+          <h4 id="common-image">Common-image restriction</h4>
+          <p>For <var>p</var> ∈ <var>E</var>, define the row ℓ<sub><var>p</var></sub> = (0, 0, <var>p</var><sup>T</sup>, −<var>p</var><sup>T</sup>) in the four prefix blocks. Paired-role agreement gives</p>
+          <div class="formula plain">
+            <math display="block">
+              <mrow>
+                <msub><mi>ℓ</mi><mi>p</mi></msub><msub><mi>𝒜</mi><mn>0</mn></msub>
+                <mo>=</mo>
+                <msub><mi>ℓ</mi><mi>p</mi></msub><msub><mi>𝒜</mi><mn>1</mn></msub>
+                <mo>=</mo><mn>0</mn><mo>.</mo>
+              </mrow>
+            </math>
+          </div>
+          <p>The independent choices <var>p</var> = <var>e</var><sub>1</sub>, <var>e</var><sub>3</sub> place both images in the ten-dimensional subspace</p>
+          <div class="formula plain">
+            <math display="block">
+              <mrow>
+                <mi>K</mi><mo>=</mo><mi mathvariant="normal">ker</mi><msub><mi>ℓ</mi><msub><mi>e</mi><mn>1</mn></msub></msub>
+                <mo>∩</mo>
+                <mi mathvariant="normal">ker</mi><msub><mi>ℓ</mi><msub><mi>e</mi><mn>3</mn></msub></msub><mo>.</mo>
+              </mrow>
+            </math>
+          </div>
+          <p>A vector in <var>K</var> has block coordinates</p>
+          <div class="formula plain">
+            <math display="block">
+              <mrow>
+                <mo>(</mo><msub><mi>x</mi><mn>1</mn></msub><mo>,</mo><msub><mi>x</mi><mn>2</mn></msub><mo>,</mo><msub><mi>x</mi><mn>3</mn></msub>
+                <mo>|</mo><msub><mi>y</mi><mn>1</mn></msub><mo>,</mo><msub><mi>y</mi><mn>2</mn></msub><mo>,</mo><msub><mi>y</mi><mn>3</mn></msub>
+                <mo>|</mo><mi>a</mi><mo>,</mo><mi>b</mi><mo>,</mo><mi>c</mi>
+                <mo>|</mo><mi>a</mi><mo>,</mo><mi>d</mi><mo>,</mo><mi>c</mi><mo>)</mo><mo>.</mo>
+              </mrow>
+            </math>
+          </div>
+          <p>Let <var>J</var> embed the ten displayed coordinates into this vector, and let <var>Q</var> extract them, so <var>QJ</var> = <var>I</var><sub>10</sub>. Define</p>
+          <div class="formula plain">
+            <math display="block">
+              <mrow>
+                <msub><mi>B</mi><mi>i</mi></msub>
+                <mo>=</mo>
+                <mi>Q</mi><msub><mi>𝒜</mi><mi>i</mi></msub><mi>J</mi>
+                <mspace width="1em"></mspace>
+                <mo>(</mo><mi>i</mi><mo>∈</mo><mo>{</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo>}</mo><mo>)</mo><mo>.</mo>
+              </mrow>
+            </math>
+          </div>
+          <p>The coordinates are integral. Since each image lies in <var>K</var>,</p>
+          <div class="formula plain">
+            <math display="block">
+              <mrow>
+                <msub><mi>𝒜</mi><mi>i</mi></msub><mi>J</mi>
+                <mo>=</mo>
+                <mi>J</mi><msub><mi>B</mi><mi>i</mi></msub><mo>.</mo>
+              </mrow>
+            </math>
+          </div>
+
+          <h4 id="restriction-converse">Mortality converse</h4>
+          <p>If a twelve-state product 𝒜<sub><var>z</var></sub> is zero, then B<sub><var>z</var></sub> = Q𝒜<sub><var>z</var></sub>J = 0. Conversely, if B<sub><var>z</var></sub> = 0, then 𝒜<sub><var>z</var></sub> kills <var>K</var>. Because the image of 𝒜<sub>0</sub> lies in <var>K</var>,</p>
+          <div class="formula plain">
+            <math display="block">
+              <mrow>
+                <msub><mi>𝒜</mi><mi>z</mi></msub><msub><mi>𝒜</mi><mn>0</mn></msub>
+                <mo>=</mo>
+                <msub><mi>𝒜</mi><mrow><mi>z</mi><mn>0</mn></mrow></msub>
+                <mo>=</mo><mn>0</mn><mo>.</mo>
+              </mrow>
+            </math>
+          </div>
+          <p>The appended letter converts every zero introduced by restriction into a zero of the twelve-state decoder, which in turn yields a nonempty zero source product. Hence the two 10 × 10 integer matrices are mortal exactly when the fixed-boundary source halts.</p>
+
+          <h3 id="consequences">Consequences</h3>
+          <p>The six-state construction changes the two-generator scalar and corner bounds to Z<sub>6</sub>(2) and R<sub>7</sub>(2). The ten-state construction changes the two-generator mortality bound to M<sub>10</sub>(2). For every <var>n</var> ≥ 0,</p>
+          <div class="formula plain">
+            <math display="block">
+              <mrow>
+                <msub><mi>B</mi><mi>i</mi></msub>
+                <mo>↦</mo>
+                <msub><mi>B</mi><mi>i</mi></msub><mo>⊕</mo><msub><mn>0</mn><mi>n</mi></msub>
+              </mrow>
+            </math>
+          </div>
+          <p>preserves zero products, proving M<sub>10+<var>n</var></sub>(2). The <a href="/math/matrix_mortality/#frontier">series landing page</a> records the resulting current frontiers.</p>
+        </details>
+
+        <details class="major-section">
+          <summary><h2 id="bookkeeping">Bookkeeping</h2></summary>
+
+          <h3 id="verification">Verification and provenance</h3>
+          <div class="status-grid">
+            <div>
+              <b><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/main/MatrixMortality/PairedBinary.lean">Six-state compiler</a></b>
+              <p>Lean checks the explicit generators, every binary word, odd residues, coefficient preservation, decoder surjectivity, and common-first-column transport.</p>
+            </div>
+            <div>
+              <b><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/main/MatrixMortality/WeightedTransducer.lean">Prefix transducer</a></b>
+              <p>Lean proves the arbitrary-word block-row theorem used by the complete prefix decoder.</p>
+            </div>
+            <div>
+              <b><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/main/MatrixMortality/PrefixMortality.lean">Ten-state compiler</a></b>
+              <p>Lean checks synchronization, twelve-state mortality, the common image, integral restriction, the appended-letter converse, and zero padding.</p>
+            </div>
+            <div>
+              <b><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/main/verification/axioms.txt">Transitive axioms</a></b>
+              <p>Publication-facing declarations use only <code>propext</code>, <code>Classical.choice</code>, and <code>Quot.sound</code>. The project contains no admitted proof or project axiom.</p>
+            </div>
+          </div>
+
+          <h3 id="formal-scope">Formal scope</h3>
+          <p>Lean proves the complete instance-level equivalences. The canonical declarations are <a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/main/MatrixMortality/Undecidability/BinaryProblems.lean"><code>nearyScalarZero62_hasZero_iff_tagHaltsFrom</code></a>, <code>nearyScalarZero62_hasZeroStar_iff_tagHaltsFrom</code>, <a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/main/MatrixMortality/Undecidability/PrefixProblems.lean"><code>nearyMortality102_mortal_iff_tagHaltsFrom</code></a>, and <code>nearyMortality10Plus_mortal_iff_tagHaltsFrom</code>.</p>
+          <p>The unconditional mathematical undecidability statements import Neary’s restricted binary-tag theorem and its computable padding construction <a href="#ref-neary-2015">[Neary 2015]</a>. The final computable reduction from a standard machine-halting problem into that restricted family remains background formalization work. Frontier transports and priority claims are external to Lean.</p>
+
+          <h3 id="priority">Priority</h3>
+          <p>To our knowledge, after public-literature searches through 24 July 2026, no prior proof establishes Z<sub>6</sub>(2), R<sub>7</sub>(2), or M<sub>10</sub>(2). CHHN’s corresponding established bounds are Z<sub>9</sub>(2), R<sub>10</sub>(2), and M<sub>15</sub>(2) <a href="#ref-chhn-2014">[Cassaigne et al. 2014]</a>. Prefix coding, alphabet reduction, and scalar-to-corner transport are prior art. No source was found for the shared six-state partial channel or the ten-dimensional common-image restriction and its appended-letter mortality converse. “No prior proof found” is limited to publicly discoverable work.</p>
+
+          <ul class="artifact-list" aria-label="Proof artifacts">
+            <li><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math"><b>Complete source repository</b>Lean development, strict verification gate, reference corpus, and publication sources</a></li>
+            <li><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/main/FORMALIZATION.md"><b>Formalization map</b>Principal declarations, exact axiom sets, trusted base, and remaining external seam</a></li>
+          </ul>
+
+          <h3 id="sources">References</h3>
+          <ol class="references">
+            <li id="ref-fixed-boundary"><span>GPT-5.6 Sol, elicited by @eternalism_4eva, <a href="/math/matrix_mortality/m3_5/"><cite>Fixed-Boundary Correspondence</cite></a>, 2026. The four-role source and five-matrix compiler.</span></li>
+            <li id="ref-paired-role"><span>GPT-5.6 Sol, elicited by @eternalism_4eva, <a href="/math/matrix_mortality/m4_4/"><cite>Paired-Role Compression</cite></a>, 2026. The shared side-normal channel and four-dimensional quotient.</span></li>
+            <li id="ref-neary-2015"><span>Turlough Neary, <a href="https://doi.org/10.4230/LIPIcs.STACS.2015.649"><cite>Undecidability in Binary Tag Systems and the Post Correspondence Problem for Five Pairs of Words</cite></a>, STACS 2015. The restricted binary-tag undecidability source.</span></li>
+            <li id="ref-chhn-2014"><span>Julien Cassaigne, Vesa Halava, Tero Harju, and François Nicolas, <a href="https://arxiv.org/abs/1404.0644"><cite>Tighter Undecidability Bounds for Matrix Mortality, Zero-in-the-Corner Problems, and More</cite></a>, 2014. Prior bounds and standard transports.</span></li>
+            <li id="ref-rote-2025"><span>Günter Rote, <a href="https://doi.org/10.4230/LIPIcs.MFCS.2025.86"><cite>Probabilistic Finite Automaton Emptiness Is Undecidable for a Fixed Automaton</cite></a>, MFCS 2025. Related binary prefix decoding with explicit treatment of unfinished codewords.</span></li>
+          </ol>
+        </details>
+      </article>
+    </main>
+  </div>
+
+  <footer>
+    <div>
+      <p>GPT-5.6 Sol · elicited by @eternalism_4eva · 24 July 2026</p>
+      <p><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math">Source repository</a></p>
+    </div>
+  </footer>
+</body>
+</html>
