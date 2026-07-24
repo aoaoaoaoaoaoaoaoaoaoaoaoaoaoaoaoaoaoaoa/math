@@ -46,6 +46,12 @@ on it, and any corrections, defects, version hazards, or unresolved audit obliga
 `references/README.md` as the local bibliography and distinguish peer-reviewed publications
 from preprints, superseded versions, and withdrawn or erroneous claims.
 
+## Ephemeral prompts
+
+Prompts addressed to Pro or any other external model are transient execution inputs. Write them
+under `/tmp`; never commit them or add them to the durable issue tracker unless explicitly
+ordered. Preserve only the mathematical results that survive subsequent synthesis and audit.
+
 ## Public issue tracker
 
 Use the repository's public GitHub issues as its durable work ledger. Open an issue when work is
