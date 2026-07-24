@@ -60,6 +60,18 @@ proof obligations, dependencies, and acceptance test. Update or close issues as 
 moves. Do not create ceremonial tickets for work that can be completed in the current pass, and
 do not hide project work in a private auxiliary tracker.
 
+## Salvage theorem registry
+
+`SALVAGE.md` is the canonical index of reusable mathematics recovered from attacks that did not
+settle their target. Distill every such result into a stable record or reject it; do not preserve
+raw external-model reports as a substitute.
+
+Each record states its kind, evidence, disposition, exact scope, operational use, and next
+promotion step. `FRONTIER.md` cites record identifiers and owns strategy. `FORMALIZATION.md`
+owns Lean-checked claims. `audits/` own bounded review evidence. Public GitHub issues own
+scheduled hardening work. Never promote `reported` or `computational` evidence into a theorem
+claim.
+
 ## Publication seam
 
 `publications.json` is the canonical map from presentation-free semantic sources to routes below

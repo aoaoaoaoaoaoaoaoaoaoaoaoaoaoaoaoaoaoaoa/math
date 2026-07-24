@@ -4,6 +4,10 @@ Established-result ledger and dimension-two research audit: 2026-07-24. A questi
 “not resolved by any valid result found in the present literature audit,” not an assertion that
 no unpublished argument exists.
 
+Reusable lemmas, obstructions, certificates, and partial mechanisms from unsuccessful attacks
+are indexed in [`SALVAGE.md`](SALVAGE.md). Its evidence labels are authoritative; this file
+records only their strategic consequences.
+
 ## The source theorem
 
 The source result is no longer conditional on the Neary–Rote terminal tile:
@@ -149,7 +153,7 @@ The unknown cells immediately below this staircase are:
 | Cell | What would suffice | Automatic reward |
 | --- | --- | --- |
 | `M₃(4)` | three-active-role fixed-boundary PCP / `GPCP(3)`, or a new same-dimension generator compiler | by CHHN, also `M₉(2)` |
-| `M₅(3)` | shave one state from the specialized `M₃(5) → M₆(3)` packing | supersedes `M₆(3)` |
+| `M₅(3)` | a five-state binary same-zero root, or a five-dimensional toggle/separator fusion | supersedes `M₆(3)`; `M₁₀(2)` is already known |
 | `M₉(2)` | a zero-set-preserving compiler not obtained by restricting the exact ten-state binary decoder | improves the two-generator threshold by one |
 | `M₂(k≥3)` | a qualitatively different decidability or undecidability argument | settles the dimension-two wall |
 
@@ -158,25 +162,37 @@ already obtained from `M₃(5)` by CHHN packing.
 
 ## Ranked attacks
 
-### 1. Rank-one-aware packing: `M₅(3)`
+### 1. Zero-set compression and fused punctuation: `M₅(3)`
 
-CHHN's generic `h=2,k=2` construction maps five `3×3` generators to three `6×6`
-generators. Our five matrices are exceptional: four are nonsingular PCP matrices fixing `e₁`,
-and one is rank one. The target is a five-dimensional reachable/observable realization of this
-special packed semigroup.
+The literal CHHN packing has no common invariant line or hyperplane. The all-placement
+certificate [`MM-O01`](SALVAGE.md#mm-o01-all-placement-packing-rank) further reports that its
+selected coefficient series has exact Hankel rank six. Once audited, this closes exact
+minimization of that packing in five states.
 
-The literal packing has no codimension-one letterwise reduction. For every placement of the
-rank-one separator and four ordinary generators, the three packed `6×6` matrices have neither a
-common invariant line nor a common invariant hyperplane. Thus no simultaneous similarity followed
-by a five-dimensional restriction or quotient can work. This does not exclude a different
-representation preserving only the scalar zero language.
+The paired four-state scalar system closes a second exact route. Its coefficient series has
+uniform Hankel rank four
+([`MM-O04`](SALVAGE.md#mm-o04-uniform-rank-four-paired-series)), while the two-channel boundary
+tax [`MM-O03`](SALVAGE.md#mm-o03-two-channel-boundary-tax) charges two additional states to an
+exact diagonal rank-two bridge. Such a bridge therefore also requires dimension at least six.
+Both conclusions concern exact series; neither constrains another series with the same zero set.
 
-The next finite test is a Hankel-rank certificate for the scalar series realized by the packed
-system: six prefixes and six suffixes whose `6×6` pairing minor is nonzero. Such a certificate
-would rule out every exact five-state weighted-automaton realization of that series, though not a
-different series with the same zero set. A successful mortality reduction must alter the word
-code, treat the separator as punctuation, or prove malformed-word nonvanishing by a separate
-normal form.
+Two live architectures remain.
+
+1. Construct a five-state binary series with nonsingular letter matrices, the source zero set
+   on complete two-bit blocks, and nonzero values on odd words; then adjoin the ordinary
+   rank-one separator. The unused identity `(V_b^D,B_b^D)=(V_c^D,B_c^D)` suggests processing
+   the common deletion channel before the symbol bit is known. A four-state root would prove
+   the stronger `M₄(3)` result.
+2. Fuse the paired toggle and separator inside one five-dimensional generator. The
+   off-diagonal companion interface
+   [`MM-M01`](SALVAGE.md#mm-m01-off-diagonal-companion-interface) supplies a complete bridge
+   grammar once a physical control word realizes it. The bordered-toggle mechanism
+   [`MM-M02`](SALVAGE.md#mm-m02-bordered-toggle) supplies a rank-two stable third power, but
+   mixed `S²` runs and malformed selector placements remain unresolved.
+
+The next useful calculation is a symbolic classification of fifth-coordinate couplings and
+their maximal-run grammar. Further bounded searches on a benchmark instance cannot settle
+either architecture.
 
 ### 2. Two-generator realization: `M₉(2)`
 
@@ -222,7 +238,8 @@ one side is not enough and is a prolific source of spurious solutions.
 
 The public-literature audit through 2026-07-24 found neither a decision algorithm nor an
 undecidability proof for `M₂(3)`. The case is equivalent to point-to-point reachability on
-`P¹(ℚ)` under two rational Möbius transformations.
+`P¹(ℚ)` under two rational Möbius transformations; the reusable reduction is
+[`D2-S01`](SALVAGE.md#d2-s01-projective-hard-core).
 
 Let `X₁⋯Xₙ=0` be a mortal word of minimal positive length over `2×2` matrices. Its first and
 last factors are singular: an invertible endpoint could be cancelled. Every interior factor is
@@ -265,26 +282,21 @@ families with several singular generators, not in the hard three-generator case.
 
 ### Established and provisional decidable strata
 
-The status labels below are deliberate:
+The established baseline consists of two-generator `2×2` mortality, the at-most-one-nonsingular
+preprint result, the `GL₂(ℤ)` reachability algorithms, and one-dimensional integral-affine
+reachability. The project-derived extensions are indexed with their exact evidence and scope:
 
-- **established**: peer-reviewed result represented in the local bibliography;
-- **preprint**: public unrefereed theorem;
-- **checked derivation**: elementary reduction independently checked in this project;
-- **provisional**: a new argument supplied by the 2026-07-24 audit, requiring separate proof
-  and source review before publication use.
+- projectively unimodular pairs:
+  [`D2-D01`](SALVAGE.md#d2-d01-projectively-unimodular-stratum);
+- groups preserving an unordered projective pair:
+  [`D2-D02`](SALVAGE.md#d2-d02-invariant-pair-stratum);
+- affine maps with a common rational multiplier:
+  [`D2-D03`](SALVAGE.md#d2-d03-common-multiplier-stratum);
+- rational subsets of one single-base affine group:
+  [`D2-D04`](SALVAGE.md#d2-d04-single-base-affine-stratum).
 
-| Stratum | Status | Mechanism |
-| --- | --- | --- |
-| Two total `2×2` generators | established | Bournez–Branicky low-dimensional mortality algorithm |
-| Any finite family with at most one nonsingular generator | preprint | rank-one endpoints and order-two recurrence zero tests |
-| Nonsingular integer generators in `GL₂(ℤ)`, with arbitrary singular generators | established | effective regular subsets of `GL₂(ℤ)` |
-| Two projectively unimodular nonsingular generators | checked derivation from established work | primitive representatives lie in `GL₂(ℤ)` |
-| Fixed nonsingular matrix membership | established, but insufficient | determinant growth plus `GL₂(ℤ)` automata |
-| A generated projective group preserving a two-point set | provisional | rational subsets of an effectively finitely generated abelian-by-`C₂` group |
-| Common rational invariant line with integral affine multipliers | established reduction to published affine reachability | one-dimensional integer-affine reachability |
-| Common rational multiplier, including regular control | provisional | exact finite discounted-sum reachability |
-| Multipliers that are positive powers of one rational base | provisional | fixed-block reduction to the common-multiplier case |
-| A single-base affine group `G_q^±` with arbitrary rational control | provisional | rational-subset intersection in `BS(1,q)` and its index-two extension |
+Only `D2-D01` has passed an independent project audit. The remaining three are research stock,
+not publication theorems.
 
 Simultaneous triangularization alone is not a solved stratum. It yields rational affine
 reachability
@@ -484,16 +496,17 @@ universal computation.
 
 ## Execution order
 
-1. Formalize the all-placement packing obstruction and extract a symbolic Hankel-rank
-   certificate for the standard `M₃(5) → M₆(3)` representation.
-2. Search for zero-set-preserving representations for `M₅(3)` and `M₉(2)` rather than another
-   invariant restriction of the exact six- or ten-state compilers.
-3. Attack `GPCP(3)` at the source level, beginning with a complete role/dependency graph of the
+1. Audit and formalize `MM-O01`, `MM-O03`, and `MM-O04`; keep their exact-series scope explicit.
+2. Attack the two surviving `M₅(3)` architectures: a five-state same-zero binary root and a
+   five-dimensional toggle/separator fusion with a complete maximal-run grammar.
+3. Search for a zero-set-preserving `M₉(2)` compiler rather than another invariant restriction
+   of the exact ten-state decoder.
+4. Attack `GPCP(3)` at the source level, beginning with a complete role/dependency graph of the
    corrected Neary simulation rather than ad hoc tile algebra.
-4. Fan the `M₂(3)` chapter into independent attacks on adelic cone types, redundant
+5. Fan the `M₂(3)` chapter into independent attacks on adelic cone types, redundant
    numeration, characteristic-zero affine modules, parabolic rational subsets, trace/height
    descent, finite-obstruction saturation, and valuation universality.
-5. Synthesize the returned attacks by the discriminating signals above; do not average
+6. Synthesize the returned attacks by the discriminating signals above; do not average
    incompatible hypotheses into one generic mortality prompt.
 
 These are research programs, not consequences of the present theorem.

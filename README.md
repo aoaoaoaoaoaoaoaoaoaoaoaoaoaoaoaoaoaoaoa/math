@@ -33,6 +33,8 @@ statements.
 ## Supporting Material
 
 - [Formal verification](FORMALIZATION.md): theorem map, axioms, trust base, and external seam
+- [Salvage theorem registry](SALVAGE.md): reusable statements, evidence status, scope guards,
+  operational uses, and promotion work
 - [`M₃(5)` novelty record](NOVELTY.md): prior art and qualified priority claim
 - [`M₄(4)` prior-art investigation](audits/m44-prior-art-2026-07-22.md): convention audit,
   claim ledger, version histories, and search coverage
