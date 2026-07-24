@@ -19,9 +19,10 @@ Every active record also states the next promotion step. A graduated record inst
 formal artifact.
 
 The first namespace component identifies the campaign: `MM` for general matrix-mortality
-compilers and `D2` for the dimension-two wall. The second component identifies the result
-class: `C` compiler, `O` obstruction, `M` partial mechanism, `S` structure theorem, or `D`
-decidable stratum. Numbers never change after assignment.
+compilers, `G3` for the three-letter GPCP and `M₃(4)` frontier, and `D2` for the
+dimension-two wall. The second component identifies the result class: `C` compiler, `O`
+obstruction, `M` partial mechanism, `S` structure theorem, or `D` decidable stratum.
+Numbers never change after assignment.
 
 `reported` means that the result survives only as a contracted statement from an external
 review. It cannot support a publication claim. `audited` means that its proof has been checked
@@ -49,6 +50,9 @@ file owns the mathematical stock.
 | [`MM-O04`](#mm-o04-uniform-rank-four-paired-series) | certificate | the paired scalar series has exact Hankel rank four | audited | active |
 | [`MM-M01`](#mm-m01-off-diagonal-companion-interface) | partial mechanism | off-diagonal rank-two bridge has a complete fracture grammar | audited | stock |
 | [`MM-M02`](#mm-m02-bordered-toggle) | partial mechanism | one lifted toggle has a stable rank-two third power | audited | parked |
+| [`G3-O01`](#g3-o01-four-role-macro-irreducibility) | obstruction | exact nonerasing macros cannot reduce the four source roles to three letters | audited | active |
+| [`G3-S01`](#g3-s01-shift-equivariant-zero-incidence) | structure theorem | same-zero state dimension is equivariant projective incidence dimension | audited | active |
+| [`G3-M01`](#g3-m01-free-group-discrepancy-engine) | partial mechanism | free cancellation implements queue deletion with an all-path converse | reported | active |
 | [`D2-S01`](#d2-s01-projective-hard-core) | structure theorem | `M₂(3)` is equivalent to two-generator projective incidence | audited | active |
 | [`D2-D01`](#d2-d01-projectively-unimodular-stratum) | decidable stratum | projectively unimodular hard-core instances are decidable | audited | stock |
 | [`D2-D02`](#d2-d02-invariant-pair-stratum) | decidable stratum | invariant projective pairs reduce to abelian-by-`C₂` reachability | reported | active |
@@ -150,8 +154,10 @@ impossibility theorem for five-state zero-set representations.
 
 ### MM-O03: Two-channel boundary tax
 
-**Kind:** obstruction  
-**Evidence:** audited  
+**Kind:** obstruction
+
+**Evidence:** audited
+
 **Disposition:** active
 
 Let `A : Σ* → Mₙ(K)`, let `U=[u₀ u₁]` and `V=[v₀;v₁]` both have rank two, and suppose
@@ -186,32 +192,52 @@ Hankel library.
 **Evidence:** audited  
 **Disposition:** active
 
-For every admissible deletion width and body, the scalar series
+For every `β≥3` and every tag body, the scalar series
 
 ```text
-h(w) = L G_w C,       w ∈ {b,c,t}*
+f(w) = ℓ A_w γ,       w ∈ {b,c,t}*
 ```
 
-of the explicit paired `4 × 4` controls has Hankel rank exactly four. The reachable
-columns `C,G_bC,G_cC,TC` have determinant
+of the explicit paired `4 × 4` controls has Hankel rank exactly four. A
+body-independent certificate already lies in the subalphabet `{b,t}`. Put
 
 ```text
-s(s−9)(5q−162e+6s−159)/6,
+s = 3^β,      p = 3s,      m = (5s−1)/2,
+u = 3m+2,     a = 3p.
 ```
 
-Here `s=3^(β+1)`, `q=3^(|tagEncode_β(body)|+3)`,
-`e=σ(tagEncode_β(body))`, `B=(5s+1)/2`, and `A=2q/3+9e+7`.
-The final factor is `3 mod 27`. The observable rows `L,LG_b,LG_bT,LG_c` have determinant
+For the `b` control `B`, toggle `T`, row `ℓ`, and column `γ`, the four prefix rows
 
 ```text
-24(B(A+1)−52) > 0.
+ℓ, ℓB, ℓB², ℓBT
 ```
 
-**Scope:** exact coefficient series over characteristic zero. The result supplies no lower bound
+have determinant `48u(13a−15)`. The four suffix columns
+
+```text
+γ, Tγ, Bγ, BTγ
+```
+
+have determinant `12p(s−3)`. Both are nonzero for `β≥3`, so their product is a
+nonzero `4 × 4` Hankel minor. The displayed representation supplies the matching upper
+bound.
+
+The same certificate survives
+
+```text
+g(w) = λ χ(w) f(w)
+```
+
+for `λ≠0` and every nonzero monoid character `χ`, because the Hankel minor changes only
+by invertible diagonal row and column scalings.
+
+**Scope:** exact coefficient series over characteristic zero, including similarity, exact
+restriction or quotient, and nonzero per-letter rescaling. The result supplies no lower bound
 for another series with the same zero set.
 
 **Use:** proves exact minimality of paired-role compression and supplies `d=4` to
-[`MM-O03`](#mm-o03-two-channel-boundary-tax).
+[`MM-O03`](#mm-o03-two-channel-boundary-tax). It also closes exact three-state
+minimization of the paired route to `M₃(4)`.
 
 **Next:** check the determinant identities in Lean and add their transitive axioms to the
 publication snapshot.
@@ -292,6 +318,130 @@ generator of an `M₅(3)` family.
 
 **Next:** parameterize the permitted fifth-coordinate couplings, solve the selector identities
 symbolically, and prove a global maximal-run grammar or a symbolic no-go theorem.
+
+## Three-Letter Source Frontier
+
+### G3-O01: Four-role macro irreducibility
+
+**Kind:** obstruction
+
+**Evidence:** audited
+
+**Disposition:** active
+
+Let the four fixed-boundary source roles be
+
+```text
+R_c = (1,    1H(q)10),      R_b = (H(b), 110),
+D_b = (H(b), 0),            D_c = (1,    0).
+```
+
+Suppose a role morphism `h : {R_c,R_b,D_b,D_c}* → C*` and two nonerasing
+morphisms `X,Y : C* → {0,1}*` preserve each displayed pair exactly. Then `|C|≥4`,
+even when the four macro words `h(r)` have arbitrary unequal lengths and need not form a
+code.
+
+Indeed, the one-letter upper words of `R_c,D_c` force distinct one-letter macros `x,y`
+with `X(x)=X(y)=1`. The one-letter lower word of `D_b` forces a third one-letter
+macro `z` with `Y(z)=0` and `X(z)=H(b)`. If `C={x,y,z}`, any macro for `R_b`
+must contain `z` to produce a zero under `X`. Since `X(z)` already has the complete
+required length and `X` is nonerasing, that macro is exactly `z`; its lower image is then
+`0`, contradicting the required `110`.
+
+**Scope:** exact rolewise factorization through fixed macros with both new morphisms
+nonerasing. It does not cover erasure, target recoding, boundary residuals, overlapping or
+context-dependent codes, preservation of solvability alone, or a different computational
+source.
+
+**Use:** reject every proposal to merge or macro-expand the present four roles unless it
+explicitly invokes one of the escape mechanisms outside the scope.
+
+**Next:** formalize the length-one argument over free monoids and connect its role constants
+to the existing Neary source definitions.
+
+**Issue:** [#4, Formalize the four-role macro irreducibility
+obstruction](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/4).
+
+### G3-S01: Shift-equivariant zero incidence
+
+**Kind:** structure theorem
+
+**Evidence:** audited
+
+**Disposition:** active
+
+For a language `L⊆Σ*`, define its zero-language dimension over a field `K` by
+
+```text
+zdim_K(L) =
+  min {d : ∃ λ,γ,(M_a)_{a∈Σ},
+             w∈L ↔ λM_wγ=0}.
+```
+
+A `d`-state same-zero representation of a series `f` is equivalent to a
+shift-equivariant incidence realization of its infinite Hankel zero pattern. Put
+
+```text
+r_x = λM_x,       c_y = M_yγ.
+```
+
+Then, for every prefix `x`, suffix `y`, and letter `a`,
+
+```text
+f(xy)=0 ↔ r_x c_y=0,
+r_{xa}=r_xM_a,
+c_{ay}=M_ac_y.
+```
+
+Conversely, rows, columns, and common letter maps satisfying these equations recover the
+same-zero representation from `λ=r_ε` and `γ=c_ε`. For `d=3`, nonzero columns are
+points and nonzero rows are lines in `P²(K)`; zeros are incidences.
+
+**Scope:** a finite zero-pattern matrix of rank three is only a necessary finite shadow.
+The common shift maps and rational realizability are indispensable. Zero rows or columns
+must also be interpreted globally, not discarded projectively.
+
+**Use:** formulate the surviving paired-route attack as equivariant point-line synthesis,
+not exact weighted-automaton minimization. Finite nonlinear solves should enforce both
+incidence and shift equations.
+
+**Next:** construct increasing prefix/suffix instances, quotient projective gauge, and retain
+finite unsatisfiable cores as candidate zero-language dimension obstructions.
+
+### G3-M01: Free-group discrepancy engine
+
+**Kind:** partial mechanism
+
+**Evidence:** reported
+
+**Disposition:** active
+
+Carvalho's inverse-transducer reduction carries a cyclic-tag queue in the freely reduced
+discrepancy
+
+```text
+Δ(w) = w⁻¹T(w).
+```
+
+On a legal transition, cancellation deletes the queue head while the transducer output
+appends the production. An `H` marker counts simulated steps, a `p` marker prevents
+trivial discrepancy on false paths, and every fixed point is forced to a closed transducer
+path. This supplies both implicit deletion and an arbitrary-path soundness invariant.
+
+**Scope:** the source is a free group, not a positive free monoid. The subgroup of closed
+input paths has a computed free basis whose rank depends on the transducer. No bound of
+three, positive encoding, or classical fixed-boundary GPCP compiler follows from the
+preprint.
+
+**Use:** audit whether the closed-path subgroup can be generated uniformly by three
+positive macros or whether its control can be moved into boundaries without admitting
+spurious reduced words.
+
+**Source:** [`carvalho-2026-free-group-pcp.md`](references/carvalho-2026-free-group-pcp.md).
+
+**Next:** extract the transducer for the smallest universal cyclic-tag source, compute its
+closed-path subgroup rank, and identify exactly which formal inverses occur in the fixed-loop
+converse.
 
 ## Dimension Two
 
