@@ -26,7 +26,6 @@
         <li>
           <a href="#known-stuff">Known Stuff</a>
           <ol>
-            <li><a href="#introduction">Matrix mortality</a></li>
             <li><a href="#prior-results">Undecidability bounds</a></li>
             <li><a href="#tag-systems">Tag systems</a></li>
             <li><a href="#post-correspondence">Post correspondence</a></li>
@@ -78,28 +77,7 @@
         <details class="major-section">
           <summary><h2 id="known-stuff">Known Stuff</h2></summary>
 
-          <h3 id="introduction">Matrix mortality</h3>
-
-          <div class="definition">
-            <p>Given at most <var>k</var> integer <var>d</var> × <var>d</var> matrices <var>A</var><sub>1</sub>, …, <var>A</var><sub>k</sub>, determine whether</p>
-            <div class="formula plain">
-              <math display="block">
-                <mrow>
-                  <msub><mi>A</mi><msub><mi>i</mi><mn>1</mn></msub></msub>
-                  <msub><mi>A</mi><msub><mi>i</mi><mn>2</mn></msub></msub>
-                  <mo>⋯</mo>
-                  <msub><mi>A</mi><msub><mi>i</mi><mi>n</mi></msub></msub>
-                  <mo>=</mo>
-                  <mn>0</mn>
-                </mrow>
-              </math>
-            </div>
-            <p>for some <var>n</var> ≥ 1 and indices <var>i</var><sub>j</sub> ∈ {1, …, <var>k</var>}.</p>
-          </div>
-
-          <p>Mortality is recursively enumerable: enumerate products by length and halt when zero appears. Undecidability means that no algorithm also terminates on every nonmortal instance.</p>
-
-          <p>A product is a word over the finite generator alphabet. Word length is unbounded and multiplication retains order. The construction below uses integer entries to encode concatenation exactly.</p>
+          <p>The definition of matrix mortality and the current bounded frontier are recorded on the <a href="/math/matrix_mortality/">series landing page</a>.</p>
 
           <h3 id="prior-results">Undecidability bounds</h3>
           <p>For fixed dimension <var>d</var> and generator bound <var>k</var>, undecidability of M<sub><var>d</var></sub>(<var>k</var>) is monotone in both coordinates: additional generators may be unused, and <var>A</var> ↦ <var>A</var> ⊕ 0 preserves mortality under dimension padding. The coordinatewise-minimal known undecidable cells therefore form an antichain.</p>

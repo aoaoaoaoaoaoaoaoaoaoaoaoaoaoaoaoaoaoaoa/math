@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="GPT-5.6 Sol; elicited by @eternalism_4eva">
+  <meta name="description" content="Definition, bounded frontier, and results on integer matrix mortality.">
+  <meta property="og:title" content="Matrix Mortality">
+  <meta property="og:description" content="Definition, bounded frontier, and results on integer matrix mortality.">
+  <meta property="og:type" content="website">
+  <title>Matrix Mortality | Mathematics</title>
+</head>
+<body>
+  <a class="skip-link" href="#article">Skip to matrix mortality</a>
+
+  <header class="masthead">
+    <div class="masthead-inner">
+      <h1>Matrix Mortality</h1>
+      <p class="byline">GPT-5.6 Sol · elicited by <a href="https://x.com/eternalism_4eva">@eternalism_4eva</a></p>
+    </div>
+  </header>
+
+  <div class="shell">
+    <nav class="contents" aria-label="Contents">
+      <ol>
+        <li><a href="#results">Results</a></li>
+        <li><a href="#definition">What is matrix mortality?</a></li>
+        <li><a href="#frontier">Bounded frontier</a></li>
+      </ol>
+    </nav>
+
+    <main id="article">
+      <article>
+        <section>
+          <h2 id="results">Results</h2>
+          <ul class="artifact-list" aria-label="Matrix mortality results">
+            <li>
+              <a href="/math/matrix_mortality/m3_5/">
+                <b>Undecidability of M₃(5)</b>
+                Four-letter fixed-boundary correspondence and a repeated rank-one separator.
+              </a>
+            </li>
+            <li>
+              <a href="/math/matrix_mortality/m4_4/">
+                <b>Undecidability of M₄(4)</b>
+                Paired-role quotient compression and a common-fixed-column mortality converse.
+              </a>
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h2 id="definition">What is matrix mortality?</h2>
+          <div class="definition">
+            <p>For fixed positive integers <var>d</var> and <var>k</var>, M<sub><var>d</var></sub>(<var>k</var>) asks: given at most <var>k</var> integer <var>d</var> × <var>d</var> matrices, does some nonempty product equal the zero matrix?</p>
+            <div class="formula plain">
+              <math display="block">
+                <mrow>
+                  <msub><mi>A</mi><msub><mi>i</mi><mn>1</mn></msub></msub>
+                  <msub><mi>A</mi><msub><mi>i</mi><mn>2</mn></msub></msub>
+                  <mo>⋯</mo>
+                  <msub><mi>A</mi><msub><mi>i</mi><mi>n</mi></msub></msub>
+                  <mo>=</mo>
+                  <mn>0</mn><mo>,</mo>
+                  <mspace width="0.8em"></mspace>
+                  <mi>n</mi><mo>≥</mo><mn>1</mn><mo>.</mo>
+                </mrow>
+              </math>
+            </div>
+          </div>
+
+          <p>The matrix entries and witness length are unbounded. Multiplication retains the order of the selected generators, so a product is a word over a finite noncommutative alphabet.</p>
+
+          <p>Mortality is recursively enumerable: enumerate products by length and stop when zero appears. Undecidability means that no algorithm terminates correctly on every mortal and nonmortal input.</p>
+        </section>
+
+        <section>
+          <h2 id="frontier">Bounded frontier</h2>
+          <p>Undecidability is monotone in both parameters. Extra generators may be ignored, and dimension padding preserves mortality:</p>
+          <div class="formula plain">
+            <math display="block">
+              <mrow>
+                <mi>A</mi><mo>↦</mo><mi>A</mi><mo>⊕</mo><mn>0</mn><mo>.</mo>
+              </mrow>
+            </math>
+          </div>
+
+          <p>After the two results above and the established generator–dimension reductions of <a href="https://arxiv.org/abs/1404.0644">Cassaigne, Halava, Harju, and Nicolas</a>, the currently established Pareto-minimal undecidable points are</p>
+          <div class="formula plain">
+            <math display="block">
+              <mrow>
+                <msub><mi>M</mi><mn>3</mn></msub><mo>(</mo><mn>5</mn><mo>)</mo><mo>,</mo><mspace width="0.5em"></mspace>
+                <msub><mi>M</mi><mn>4</mn></msub><mo>(</mo><mn>4</mn><mo>)</mo><mo>,</mo><mspace width="0.5em"></mspace>
+                <msub><mi>M</mi><mn>6</mn></msub><mo>(</mo><mn>3</mn><mo>)</mo><mo>,</mo><mspace width="0.5em"></mspace>
+                <msub><mi>M</mi><mn>12</mn></msub><mo>(</mo><mn>2</mn><mo>)</mo><mo>.</mo>
+              </mrow>
+            </math>
+          </div>
+
+          <div class="table-scroll">
+          <table class="status-table">
+            <caption>Decidability of M<sub>d</sub>(<var>k</var>) as of 24 July 2026</caption>
+            <thead>
+              <tr>
+                <th scope="col"><var>d</var> \ <var>k</var></th>
+                <th scope="col">1</th>
+                <th scope="col">2</th>
+                <th scope="col">3</th>
+                <th scope="col">4</th>
+                <th scope="col">5</th>
+                <th scope="col">≥6</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">1</th><td>D</td><td>D</td><td>D</td><td>D</td><td>D</td><td>D</td></tr>
+              <tr><th scope="row">2</th><td>D</td><td>D</td><td>?</td><td>?</td><td>?</td><td>?</td></tr>
+              <tr><th scope="row">3</th><td>D</td><td>?</td><td>?</td><td>?</td><td><strong class="new-result" aria-label="Undecidable; proved directly in this series, to our knowledge">U★</strong></td><td>U</td></tr>
+              <tr><th scope="row">4</th><td>D</td><td>?</td><td>?</td><td><strong class="new-result" aria-label="Undecidable; proved directly in this series, to our knowledge">U★</strong></td><td>U</td><td>U</td></tr>
+              <tr><th scope="row">5</th><td>D</td><td>?</td><td>?</td><td>U</td><td>U</td><td>U</td></tr>
+              <tr><th scope="row">6–8</th><td>D</td><td>?</td><td>U</td><td>U</td><td>U</td><td>U</td></tr>
+              <tr><th scope="row">9–11</th><td>D</td><td>?</td><td>U</td><td>U</td><td>U</td><td>U</td></tr>
+              <tr><th scope="row">12–14</th><td>D</td><td>U</td><td>U</td><td>U</td><td>U</td><td>U</td></tr>
+              <tr><th scope="row">≥15</th><td>D</td><td>U</td><td>U</td><td>U</td><td>U</td><td>U</td></tr>
+            </tbody>
+          </table>
+          </div>
+          <p>D means decidable, ? unresolved, and U undecidable. <strong class="new-result">U★</strong> marks the two cells proved directly in this series. The remaining U entries follow from these results, earlier work, or monotonicity. The table records known bounds, not exact thresholds.</p>
+        </section>
+      </article>
+    </main>
+  </div>
+
+  <footer>
+    <div>
+      <p>GPT-5.6 Sol · elicited by @eternalism_4eva · 24 July 2026</p>
+      <p><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math">Source repository</a></p>
+    </div>
+  </footer>
+</body>
+</html>
