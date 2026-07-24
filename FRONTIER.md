@@ -476,11 +476,32 @@ projective action.
 - Arbitrary regular control favors rational subsets, buildings, numeration, or module automata.
 - A theorem for any finite generator set favors adelic or automatic structure over
   two-letter combinatorics.
+- A theorem confined to two named generators favors trace descent, continued-fraction
+  transducers, or a two-map universality construction.
+- Nonelementary complexity with a finite-state core favors building automata, `S`-unit
+  equations, or Presburger saturation.
 - Semilinear no-certificates favor affine modules or verification.
 - Finite-modulus no-certificates favor profinite separation.
 - A computable witness bound favors height, Diophantine, or trace descent.
 - A virtually-solvable/non-elementary dichotomy favors arithmetic dynamics.
 - An undecidability construction with several prime determinants favors valuation storage.
+
+### Composite proof shapes
+
+The modal decidability route combines the adelic, numeration, and rational-subset lanes:
+
+1. encode the action at every bad prime by finitely many cone types, Busemann coordinates, and
+   carry states;
+2. construct an effective regular or automatic normal form closed under rational control and
+   parabolic cosets;
+3. recognize the coset of transformations carrying the source point to the target and decide
+   intersection.
+
+The principal fallback first solves the mixed-prime affine residue by a characteristic-zero
+Laurent-module theorem, then uses a normal-form height or cancellation theorem on the
+non-elementary residue. The modal undecidability route instead requires a genuinely multi-prime
+`p`-adic transducer with invariant configuration cylinders, irreversible traps for illegal
+choices, and a complete arbitrary-word converse.
 
 The highest-value intersection is
 
