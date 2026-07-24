@@ -1,4 +1,5 @@
 import MatrixMortality.NearyEncoding
+import MatrixMortality.MatrixSemigroup
 import MatrixMortality.PCPEncoding
 
 /-!
@@ -79,7 +80,14 @@ def sideTerminalColumn (R : Type*) [CommRing R] (marker : List Bool) : Fin 3 →
 /-- Product of the side-normal matrices named by a Neary role word. -/
 def sideTileProduct (R : Type*) [CommRing R] (β : Nat) (body : List TagLetter)
     (word : List NearyTile) : Matrix (Fin 3) (Fin 3) R :=
-  (word.map fun tile => sidePcpMatrix R (nearyUpper β tile) (nearyLower β body tile)).prod
+  wordProduct
+    (fun tile => sidePcpMatrix R (nearyUpper β tile) (nearyLower β body tile)) word
+
+theorem sideTileProduct_append (R : Type*) [CommRing R] (β : Nat)
+    (body : List TagLetter) (left right : List NearyTile) :
+    sideTileProduct R β body (left ++ right) =
+      sideTileProduct R β body left * sideTileProduct R β body right :=
+  wordProduct_append _ left right
 
 theorem sideTileProduct_eq_sidePcpMatrix (R : Type*) [CommRing R] (β : Nat)
     (body : List TagLetter) (word : List NearyTile) :
@@ -88,10 +96,9 @@ theorem sideTileProduct_eq_sidePcpMatrix (R : Type*) [CommRing R] (β : Nat)
   induction word with
   | nil => simp [sideTileProduct, spell]
   | cons tile word ih =>
-      simp only [sideTileProduct, spell, List.map_cons, List.prod_cons]
-      rw [show (word.map fun next =>
-          sidePcpMatrix R (nearyUpper β next) (nearyLower β body next)).prod =
-        sideTileProduct R β body word from rfl]
+      simp only [sideTileProduct, wordProduct_cons, spell]
+      change sidePcpMatrix R (nearyUpper β tile) (nearyLower β body tile) *
+          sideTileProduct R β body word = _
       rw [ih, ← sidePcpMatrix_append]
       rfl
 
@@ -178,7 +185,7 @@ def pairedGenerator (R : Type*) [CommRing R] (β : Nat) (body : List TagLetter) 
 /-- Multiply a word over the compressed control alphabet. -/
 def pairedProduct (R : Type*) [CommRing R] (β : Nat) (body : List TagLetter)
     (word : List PairedControl) : Matrix (Fin 4) (Fin 4) R :=
-  (word.map (pairedGenerator R β body)).prod
+  wordProduct (pairedGenerator R β body) word
 
 theorem pairedToggleMatrix_mulVec_phaseVector (R : Type*) [CommRing R]
     (phase : PairPhase) (vector : Fin 3 → R) :
@@ -235,20 +242,19 @@ theorem pairedProduct_mulVec_column (R : Type*) [CommRing R] (β : Nat)
   | cons control word ih =>
       cases control with
       | toggle =>
-          simp only [pairedProduct, List.map_cons, List.prod_cons, pairedGenerator]
+          simp only [pairedProduct, wordProduct_cons, pairedGenerator]
           rw [← Matrix.mulVec_mulVec]
           change pairedToggleMatrix R *ᵥ
             (pairedProduct R β body word *ᵥ pairedColumn R β) = _
           rw [ih, pairedToggleMatrix_mulVec_phaseVector]
           rfl
       | data letter =>
-          simp only [pairedProduct, List.map_cons, List.prod_cons, pairedGenerator]
+          simp only [pairedProduct, wordProduct_cons, pairedGenerator]
           rw [← Matrix.mulVec_mulVec]
           change pairedDataMatrix R β body letter *ᵥ
             (pairedProduct R β body word *ᵥ pairedColumn R β) = _
           rw [ih, pairedDataMatrix_mulVec_phaseVector]
-          simp only [suffixDecode, decodePairedWord, sideTileProduct, List.map_cons,
-            List.prod_cons]
+          simp only [suffixDecode, decodePairedWord, sideTileProduct, wordProduct_cons]
           rw [Matrix.mulVec_mulVec]
 
 theorem pairedRow_dot_phaseVector (R : Type*) [CommRing R] (phase : PairPhase)

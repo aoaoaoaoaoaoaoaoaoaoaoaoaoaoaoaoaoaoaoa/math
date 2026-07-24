@@ -9,6 +9,11 @@ Paired-role compression then proves structured scalar zero reachability undecida
 three scalar generators share first column `e₁`; one is a permutation matrix. The fourth
 mortality generator is nonzero of rank one over `ℚ`.
 
+Two binary compilers sharpen the two-generator frontier. Paired-channel packing gives scalar
+zero reachability for two `6 × 6` integer matrices sharing first column `e₁`. A complete prefix
+decoder followed by a common-image restriction gives mortality for two `10 × 10` integer
+matrices. Zero-block padding preserves mortality in every dimension at least ten.
+
 The instance-level reductions are machine-checked in Lean 4. Neary's peer-reviewed
 restricted-tag universality theorem remains an external dependency of the final undecidability
 statements.

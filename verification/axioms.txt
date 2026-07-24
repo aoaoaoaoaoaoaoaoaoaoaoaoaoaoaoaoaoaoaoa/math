@@ -44,8 +44,9 @@
 'MatrixMortality.pairedMortalityFamily_int_mortal_iff_tagHaltsFrom' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.fixedAnchor_mortal_adjoin_outer_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.pairedSeparator_int_ne_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
-'MatrixMortality.castMatrix4_pairedSeparator_rank_eq_one' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.castMatrix_pairedSeparator_rank_eq_one' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.paired_mortality_generator_count' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.Undecidability.nearyMortality44_mortal_iff_tagHaltsFrom' depends on axioms: [propext,
  Classical.choice,
@@ -63,6 +64,51 @@
  Classical.choice,
  Quot.sound]
 'MatrixMortality.NearyArithmeticEnvelope.mortality44_iff_halts' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.pairedBinaryRow_wordProduct' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.pairedBinaryCoefficient_eq_sideCoefficient' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.decodePairedBinary_surjective' depends on axioms: [propext]
+'MatrixMortality.pairedBinaryGenerator_transpose_fixes_boundaryColumn' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.pairedBinary_zero_iff_tagHaltsFrom' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.Undecidability.nearyScalarZero62_hasZero_iff_hasZeroStar' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.Undecidability.nearyScalarZero62_hasZero_iff_tagHaltsFrom' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.Undecidability.nearyScalarZero62_hasZeroStar_iff_tagHaltsFrom' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.Undecidability.nearyScalarZero62_fixes_anchor' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.NearyArithmeticEnvelope.scalarZero62_iff_halts' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.WeightedTransducer.wordProduct_apply' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.prefixMachine_run' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.prefixDecode_encode' does not depend on any axioms
+'MatrixMortality.prefixMachine_mortal_iff_normalized' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.prefixProjection_generator' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.isMortal_commonImage_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.restrictedPrefixGenerator_mortal_iff_prefixMachine' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.restrictedPrefixGenerator_mortal_iff_tagHaltsFrom' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.Undecidability.nearyMortality102_mortal_iff_tagHaltsFrom' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.isMortal_reindex_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.isMortal_zeroPad_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.Undecidability.nearyMortality10Plus_mortal_iff_tagHaltsFrom' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.NearyArithmeticEnvelope.mortality10Plus_iff_halts' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
 'MatrixMortality.Undecidability.codeHalts_not_computable' depends on axioms: [propext, Classical.choice, Quot.sound]
