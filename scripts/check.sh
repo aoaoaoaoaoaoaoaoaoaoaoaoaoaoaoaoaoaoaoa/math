@@ -268,8 +268,13 @@ check_collection() {
     "$article/section[h2[@id='definition']]//div[contains(concat(' ', normalize-space(@class), ' '), ' definition ')]"
   assert_xpath_count 1 \
     "$article/section[h2[@id='frontier']]//table[contains(concat(' ', normalize-space(@class), ' '), ' status-table ')]"
-  assert_xpath_count 2 \
-    "$article//table[contains(concat(' ', normalize-space(@class), ' '), ' status-table ')]//strong[contains(concat(' ', normalize-space(@class), ' '), ' new-result ') and normalize-space()='U★']"
+  local table_stars="$article//table[contains(concat(' ', normalize-space(@class), ' '), ' status-table ')]//strong[contains(concat(' ', normalize-space(@class), ' '), ' new-result ') and normalize-space()='U★']"
+  assert_xpath_count 5 "$table_stars"
+  assert_xpath_count 5 "$table_stars/parent::a"
+  assert_xpath_count 4 \
+    "$table_stars/parent::a[@href='/math/matrix_mortality/m3_5/#result']"
+  assert_xpath_count 1 \
+    "$table_stars/parent::a[@href='/math/matrix_mortality/m4_4/#result']"
 
   local formulas='//div[contains(concat(" ", normalize-space(@class), " "), " formula ")]'
   local formula_count
