@@ -88,6 +88,22 @@ mortality in every dimension `10+n`.
 
 ## Audited But Unformalized
 
+The latest `M₅(3)` delimiter attack yielded four audited records:
+
+| Record | Formalization obligation |
+| --- | --- |
+| [`MM-O06`](SALVAGE.md#mm-o06-pure-power-punctuation-obstruction) | common image and kernel of the lifted paired data, fixed-vector extraction, and contradiction with a contextual pure-power separator |
+| [`MM-O07`](SALVAGE.md#mm-o07-setter-parameter-rigidity) | boundary alignment forces `r=t/μ`; verify the rejected benchmark coefficient |
+| [`MM-M03`](SALVAGE.md#mm-m03-five-state-setter-punctuation) | explicit setter matrices, delimiter powers and ranks, regular decoder, and `S²A_cS³=λC̃L̃` |
+| [`MM-S01`](SALVAGE.md#mm-s01-square-run-projective-normal-form) | invariant square-run plane, invertible `2 × 2` transfer, Möbius normalization, rank-one fracture grammar, and equivalence with pole avoidance |
+
+The candidate proves only the halting-to-mortality direction. Its converse requires a theorem
+that every nonterminal projective orbit avoids every pole. No such theorem is formalized or
+assumed. The exact reconstruction and promotion boundary are recorded in
+[`audits/m53-setter-projective-2026-07-24.md`](audits/m53-setter-projective-2026-07-24.md).
+Formal promotion and the avoidance decision are tracked in
+[#6](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
 The `M₄(3)` attack produced one independently checked compiler and four independently checked
 obstructions that are not yet Lean declarations:
 

@@ -50,8 +50,12 @@ file owns the mathematical stock.
 | [`MM-O03`](#mm-o03-two-channel-boundary-tax) | obstruction | exact diagonal rank-two punctuation costs two states beyond Hankel rank | audited | active |
 | [`MM-O04`](#mm-o04-uniform-rank-four-paired-series) | certificate | the paired scalar series has exact Hankel rank four | audited | active |
 | [`MM-O05`](#mm-o05-width-three-scheduled-rank) | obstruction | the width-three scheduled series has exact rank five | formalized | graduated |
+| [`MM-O06`](#mm-o06-pure-power-punctuation-obstruction) | obstruction | an exact isolated toggle cannot also punctuate through a pure power | audited | stock |
+| [`MM-O07`](#mm-o07-setter-parameter-rigidity) | obstruction | source-boundary alignment fixes the setter parameter | audited | stock |
 | [`MM-M01`](#mm-m01-off-diagonal-companion-interface) | partial mechanism | off-diagonal rank-two bridge has a complete fracture grammar | audited | stock |
 | [`MM-M02`](#mm-m02-bordered-toggle) | partial mechanism | one lifted toggle has a stable rank-two third power | audited | parked |
+| [`MM-M03`](#mm-m03-five-state-setter-punctuation) | partial mechanism | a mixed delimiter word is an exact internal rank-one separator | audited | active |
+| [`MM-S01`](#mm-s01-square-run-projective-normal-form) | structure theorem | malformed square runs reduce to rational projective pole avoidance | audited | active |
 | [`M4-C01`](#m4-c01-two-state-pushout-compiler) | compiler | binary deterministic two-state scalar control compiles to three `4 × 4` matrices | audited | active |
 | [`M4-O01`](#m4-o01-exact-toggle-fusion-leaves-an-immortal-core) | obstruction | exact local toggle fusion preserves an invertible two-plane | audited | stock |
 | [`M4-O02`](#m4-o02-two-private-state-phase-signature) | obstruction | exact shared-channel phase ratios are constant or two-periodic | audited | active |
@@ -323,6 +327,93 @@ representations remain outside every Hankel-rank lower bound.
 The live fixed-table routes must change the zero series, change the source, or
 fuse the clock with a delimiter or mortality interface.
 
+### MM-O06: Pure-power punctuation obstruction
+
+**Kind:** obstruction
+**Evidence:** audited
+**Disposition:** stock
+
+Lift the paired data matrices and toggle to five dimensions by
+
+```text
+Ĝ_x = diag(G_x,0),      T̂ = diag(T,0).
+```
+
+For a nonempty tag body, `Ĝ_b` and `Ĝ_c` have a common three-dimensional image
+`H` and common kernel `ℚe₅`. Suppose a candidate delimiter `S` realizes an
+isolated toggle in every data context:
+
+```text
+Ĝ_i S Ĝ_j = Ĝ_i T̂ Ĝ_j,      i,j∈{b,c}.
+```
+
+Then `S−T̂` maps `H` into `ℚe₅`. Since `T` fixes the affine and upper-word
+directions, `S` has a nonzero fixed vector in their span. Evaluating any proposed
+contextual identity
+
+```text
+Ĝ_i S^m Ĝ_j = λ Ĝ_i P̂ Ĝ_j,      m≥1, λ≠0,
+```
+
+on that vector contradicts the payload action of the paired separator `P=CL`.
+No pure delimiter run can therefore serve as the separator while isolated
+delimiters retain their exact toggle semantics.
+
+**Scope:** the theorem assumes a nonempty body, exact toggle behavior between
+both data contexts, the lifted paired matrices, and punctuation by a pure power
+of `S`. It does not exclude a mixed word containing data matrices, approximate
+or same-zero toggle semantics, or another representation.
+
+**Use:** reject pure-power variants of the bordered-toggle route. Any surviving
+fusion must punctuate with a mixed word.
+
+**Artifact:** [`audits/m53-setter-projective-2026-07-24.md`](audits/m53-setter-projective-2026-07-24.md).
+
+### MM-O07: Setter parameter rigidity
+
+**Kind:** obstruction
+**Evidence:** audited
+**Disposition:** stock
+
+In the five-state setter construction, write
+
+```text
+f=(1,0,r)ᵀ,      p=(0,−1,0)ᵀ,      B=[f p q],
+C=(μ,−1,t)ᵀ,     C̃=(μ,1,0,1,0)ᵀ.
+```
+
+The payload part of the marked boundary is
+
+```text
+B(μ,1,0)ᵀ=(μ,−1,μr)ᵀ.
+```
+
+Exact alignment with `C` therefore forces
+
+```text
+r=t/μ.
+```
+
+The parameter is not generic in the displayed source-preserving family. A
+reported malformed zero at `r=8735/8978` also fails direct symbolic
+multiplication: for `β=3`, body `bbcc`, the claimed word has coefficient
+
+```text
+(2r+1)(17956r²−9246r−8709)/(134(r−1)),
+```
+
+which is nonzero both at the reported value and at the lawful value `81/67`.
+
+**Scope:** this fixes the parameter only for the displayed basis and marked
+boundary. Another construction may introduce genuine free parameters. The
+coefficient check rejects the reported counterexample, not all malformed
+counterexamples.
+
+**Use:** remove generic-parameter selection from the live proof program. The
+projective avoidance problem must be settled at `r=t/μ`.
+
+**Artifact:** [`audits/m53-setter-projective-2026-07-24.md`](audits/m53-setter-projective-2026-07-24.md#parameter-correction).
+
 ### MM-M01: Off-diagonal companion interface
 
 **Kind:** partial mechanism  
@@ -396,6 +487,140 @@ generator of an `M₅(3)` family.
 
 **Next:** parameterize the permitted fifth-coordinate couplings, solve the selector identities
 symbolically, and prove a global maximal-run grammar or a symbolic no-go theorem.
+
+### MM-M03: Five-state setter punctuation
+
+**Kind:** partial mechanism
+**Evidence:** audited
+**Disposition:** active
+
+Let `r=t/μ`, put
+
+```text
+f=(1,0,r)ᵀ,      p=(0,−1,0)ᵀ,
+q=(0,0,2r(1−r))ᵀ,      B=[f p q],
+α=1+2r,          λ=α/μ,
+```
+
+and conjugate the three-dimensional rule matrices by `B`. Two marker
+coordinates produce explicit rational `5 × 5` data matrices `A_b,A_c` and a
+delimiter `S`. The latter satisfies
+
+```text
+rank S=3,      rank S²=2,      rank S³=1,
+Sⁿ=S³ for n≥3.
+```
+
+Every data matrix clears the markers. On words without `S²`, an isolated
+delimiter immediately to the right of a data letter selects its erasure role;
+absence of a delimiter selects its rule role. The marked terminal column makes
+the rightmost data letter an erasure. This is an exact total decoder on the
+regular physical language and represents every lawful source history.
+
+For the distinguished letter `c`, the mixed word
+
+```text
+E=S²A_cS³
+```
+
+obeys the exact rank-one identity
+
+```text
+E=λC̃L̃.
+```
+
+Hence `EWE=0` exactly when `L̃WC̃=0`. A source halting witness therefore gives a
+zero word over the three five-state generators `{A_b,A_c,S}`.
+
+**Scope:** this proves the regular-word semantics, internal separator, and
+halting-to-mortality implication. It does not prove the converse: arbitrary
+words may contain maximal delimiter runs of length two.
+
+**Use:** this is the concrete mixed-word successor to the parked bordered
+toggle. Combine it with [`MM-S01`](#mm-s01-square-run-projective-normal-form);
+do not claim `M₅(3)` until projective avoidance is proved.
+
+**Artifact:** [`audits/m53-setter-projective-2026-07-24.md`](audits/m53-setter-projective-2026-07-24.md#side-normal-data).
+
+**Next:** formalize the displayed matrices, regular decoder, power identities,
+and separator identity.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S01: Square-run projective normal form
+
+**Kind:** structure theorem
+**Evidence:** audited
+**Disposition:** active
+
+For the candidate in [`MM-M03`](#mm-m03-five-state-setter-punctuation), the
+image of `S²` is the two-plane
+
+```text
+J={(a,x,0,x,0)ᵀ : a,x∈ℚ}.
+```
+
+If a regular intervening block has side product
+
+```text
+M_z=[[1,V,U],[0,B,0],[0,0,A]],
+```
+
+its action between square runs is represented on `J` by
+
+```text
+F_z =
+[[1+rU,       −V],
+ [κ(A−1−rU),  κV]],
+
+κ=(1+2r)/(2μ(1−r)).
+```
+
+The determinant `κVA` is nonzero. Thus a segment containing square runs but no
+`S³` cannot collapse by rank loss. On the affine projective chart, it acts by
+
+```text
+Φ_z(x)=κ(A−1−rU+Vx)/(1+rU−Vx)
+```
+
+and vanishes exactly when the current state reaches the pole
+
+```text
+π_z=(1+rU)/V.
+```
+
+Runs of length at least three equal the rank-one map `S³` and fracture every
+arbitrary product into such projective bridges. The possible reset values are
+`0` and `1/μ`. At `1/μ`, the pole equation is
+
+```text
+(μ+tU−V)/μ=0,
+```
+
+which is precisely the original terminal-match equation.
+
+Consequently, the full mortality converse for `{A_b,A_c,S}` is equivalent to
+the following avoidance property: every finite orbit generated by the
+admissible maps `Φ_z`, starting at `0` or `1/μ`, avoids every pole except a
+genuine terminal-match pole reached from `1/μ`.
+
+**Scope:** the projective normal form and equivalence are proved for the
+displayed candidate at the forced value `r=t/μ`. The avoidance property itself
+is open. No bounded search certifies it.
+
+**Use:** replaces an unstructured malformed-word grammar by a one-dimensional
+rational dynamical problem. A proof of avoidance completes `M₅(3)`; one
+nonterminal pole orbit refutes this candidate.
+
+**Artifact:** [`audits/m53-setter-projective-2026-07-24.md`](audits/m53-setter-projective-2026-07-24.md#square-run-transfer).
+
+**Next:** seek a finite invariant based on congruences, `3`-adic valuation and
+pulse phase, signed intervals, or self-synchronizing code suffixes. Search
+states are projective values, not five-dimensional vectors.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
 
 ## Three-Generator Four-State Frontier
 

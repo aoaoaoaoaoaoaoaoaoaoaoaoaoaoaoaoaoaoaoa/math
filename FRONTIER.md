@@ -285,9 +285,17 @@ Three live routes remain.
 2. Fuse the paired toggle and separator inside one five-dimensional generator. The
    off-diagonal companion interface
    [`MM-M01`](SALVAGE.md#mm-m01-off-diagonal-companion-interface) supplies a complete bridge
-   grammar once a physical control word realizes it. The bordered-toggle mechanism
-   [`MM-M02`](SALVAGE.md#mm-m02-bordered-toggle) supplies a rank-two stable third power, but
-   mixed `S²` runs and malformed selector placements remain unresolved.
+   grammar once a physical control word realizes it. Pure delimiter powers cannot supply
+   punctuation while preserving the exact isolated toggle
+   ([`MM-O06`](SALVAGE.md#mm-o06-pure-power-punctuation-obstruction)). The new setter candidate
+   [`MM-M03`](SALVAGE.md#mm-m03-five-state-setter-punctuation) instead uses the mixed word
+   `S²A_cS³=λC̃L̃`. It proves the regular decoder and halting-to-mortality implication.
+   Its entire malformed-word converse is the projective avoidance problem
+   [`MM-S01`](SALVAGE.md#mm-s01-square-run-projective-normal-form): rational Möbius maps
+   `Φ_z` must avoid their poles from the reset values `0` and `1/μ`, except for a genuine
+   terminal match. The source boundary fixes `r=t/μ`
+   ([`MM-O07`](SALVAGE.md#mm-o07-setter-parameter-rigidity)); generic parameter selection is
+   not a live escape.
 3. Use the scheduled compiler [`MM-C03`](SALVAGE.md#mm-c03-scheduled-binary-compiler).
    A fixed binary deletion-width-three universality theorem would finish the reduction
    immediately. None was located. The constructive alternative is to replace the variable
@@ -297,9 +305,13 @@ Three live routes remain.
    exact states are necessary at that width; it does not obstruct a same-zero clock
    compression or delimiter fusion.
 
-The next bounded expert audit targets scheduled delimiter fusion and its all-word converse.
-The next internal calculation remains a symbolic classification of fifth-coordinate couplings
-and their maximal-run grammar. Further benchmark enumeration cannot settle these routes.
+The setter candidate is now the sharpest route. Its next experiment is not another
+five-dimensional word search: enumerate the side products by `(U,V,A,B)`, propagate the
+one-dimensional projective state exactly, and seek a finite invariant separating every
+nonterminal orbit from every pole. Congruence quotients, `3`-adic valuation with pulse phase,
+signed interval partitions, and self-synchronizing suffix states are the first candidates.
+A single explicit nonterminal pole orbit kills this family; a closed invariant proves
+`M₅(3)`. The same-zero binary root and fixed-width-three source remain independent fallbacks.
 
 ### 3. Two-generator realization: `M₉(2)`
 
@@ -728,8 +740,8 @@ universal computation.
    incidence equations. Reject every finite closed-token source before appendant search.
 2. Audit and formalize `MM-O01`, `MM-O03`, `MM-O04`, and `G3-O01`; keep exact-series and
    exact-macro scope explicit.
-3. Attack the three surviving `M₅(3)` routes: a five-state same-zero binary root, a
-   five-dimensional toggle/separator fusion with a complete maximal-run grammar, and
+3. Attack the three surviving `M₅(3)` routes: prove or refute the setter candidate's exact
+   projective avoidance property; construct a five-state same-zero binary root; or find a
    constant-state scheduled delimiter fusion. Treat fixed-width-three universality as a
    separate source theorem, not as an assumed compiler property.
 4. Search for a zero-set-preserving `M₉(2)` compiler rather than another invariant restriction
