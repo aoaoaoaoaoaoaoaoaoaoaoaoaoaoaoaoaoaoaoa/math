@@ -235,6 +235,13 @@ class OrbitSearch:
 
 
 @dataclass(frozen=True, slots=True)
+class BidirectionalOrbitSearch:
+    collision: OrbitCollision | None
+    forward_depths: tuple[int, ...]
+    backward_depths: tuple[int, ...]
+
+
+@dataclass(frozen=True, slots=True)
 class ReverseDiscrepancy:
     """Exact right-to-left cancellation state for one Neary role word."""
 
@@ -410,6 +417,26 @@ def exact_transfer(
     )
 
 
+def exact_preimage(
+    product: SideProduct,
+    target: Fraction,
+    beta: int,
+    *,
+    swapped: bool = False,
+) -> Fraction | None:
+    """Invert one projective transfer on the finite affine chart."""
+
+    constants = setter_constants(beta, swapped=swapped)
+    center = Fraction(constants.head, constants.tail)
+    if target == center:
+        return None
+    punctuated_upper = constants.marker + constants.scale * product.upper_value
+    return (
+        punctuated_upper
+        - Fraction(constants.marker * product.upper_scale) * center / (center - target)
+    ) / product.lower_value
+
+
 def exact_pole(product: SideProduct, beta: int, *, swapped: bool = False) -> Fraction:
     constants = setter_constants(beta, swapped=swapped)
     return Fraction(
@@ -573,6 +600,10 @@ def audit_swapped_digit_setter() -> None:
         assert exact_pole(product, beta, swapped=True) > 0
         expected_shell = beta if length == 1 and code in (1, 3) else 1
         assert three_adic_valuation(centered_pole) == expected_shell
+        for start in (Fraction(-3, 5), Fraction(0), Fraction(1), Fraction(7, 4)):
+            image = exact_transfer(product, start, beta, swapped=True)
+            if image is not None:
+                assert exact_preimage(product, image, beta, swapped=True) == start
 
     for width in range(3, 9):
         values = setter_constants(width, swapped=True)
@@ -598,6 +629,17 @@ def audit_swapped_digit_setter() -> None:
     assert find_exact_collision(beta, "bbcc", 5, swapped=True) is None
     assert search_exact_orbits(beta, "bbcc", 3, 2, swapped=True) == OrbitSearch(
         None, (95, 7979)
+    )
+    assert meet_exact_orbits(
+        beta,
+        "bbcc",
+        3,
+        6,
+        swapped=True,
+    ) == BidirectionalOrbitSearch(
+        None,
+        (2, 95, 7979, 670235),
+        (84, 7056, 592704),
     )
     assert (
         find_false_integral_unit_pole(
@@ -712,6 +754,161 @@ def search_exact_orbits(
     return OrbitSearch(None, tuple(depths))
 
 
+def _decode_block_path(
+    code: int,
+    length: int,
+    blocks: tuple[tuple[SideProduct, tuple[int, int]], ...],
+) -> tuple[tuple[int, int], ...]:
+    radix = len(blocks)
+    indices = [0] * length
+    for index in range(length - 1, -1, -1):
+        code, indices[index] = divmod(code, radix)
+    assert code == 0
+    return tuple(blocks[index][1] for index in indices)
+
+
+def meet_exact_orbits(
+    beta: int,
+    body: str,
+    max_role_length: int,
+    max_square_runs: int,
+    *,
+    swapped: bool = False,
+) -> BidirectionalOrbitSearch:
+    """Find every collision through ``max_square_runs`` by exact bisection.
+
+    A collision of length ``n`` consists of ``n - 1`` finite transfers followed
+    by one pole block.  Forward and inverse layers therefore need total depth
+    only ``max_square_runs - 1``.
+    """
+
+    if max_square_runs < 1:
+        raise ValueError("max_square_runs must be positive")
+    if max_role_length < 1:
+        raise ValueError("max_role_length must be positive")
+
+    blocks = exact_blocks(beta, body, max_role_length, swapped=swapped)
+    radix = len(blocks)
+    constants = setter_constants(beta, swapped=swapped)
+    # The backward tree has one pole seed per block, while the forward tree has
+    # only two resets.  Put the unmatched level on the forward side.
+    forward_limit = max_square_runs // 2
+    backward_limit = max_square_runs - 1 - forward_limit
+
+    # Values encode ``2 * path_code + start`` to avoid one tuple allocation per
+    # projective state.  The low bit records reset zero or distinguished
+    # boundary one.
+    forward_layers: list[dict[Fraction, int]] = [{Fraction(0): 0, Fraction(1): 1}]
+    for depth in range(1, forward_limit + 1):
+        successors: dict[Fraction, int] = {}
+        for state, witness in forward_layers[-1].items():
+            start = witness & 1
+            path_code = witness >> 1
+            for block_index, (product, _word) in enumerate(blocks):
+                image = exact_transfer(
+                    product,
+                    state,
+                    beta,
+                    swapped=swapped,
+                )
+                next_code = path_code * radix + block_index
+                if image is None:
+                    punctuated_upper = (
+                        constants.marker + constants.scale * product.upper_value
+                    )
+                    if (
+                        depth == 1
+                        and start == 1
+                        and punctuated_upper == product.lower_value
+                    ):
+                        continue
+                    return BidirectionalOrbitSearch(
+                        OrbitCollision(
+                            start,
+                            _decode_block_path(next_code, depth, blocks),
+                        ),
+                        tuple(len(layer) for layer in forward_layers),
+                        (),
+                    )
+                successors.setdefault(image, 2 * next_code + start)
+        forward_layers.append(successors)
+
+    # A backward depth-zero path is one pole block.  If several blocks have the
+    # same pole, prefer a nonterminal block so direct-boundary exemption cannot
+    # hide a false collision.
+    backward_seed: dict[Fraction, int] = {}
+    for block_index, (product, _word) in enumerate(blocks):
+        pole = exact_pole(product, beta, swapped=swapped)
+        punctuated_upper = constants.marker + constants.scale * product.upper_value
+        terminal = punctuated_upper == product.lower_value
+        previous = backward_seed.get(pole)
+        if previous is None:
+            backward_seed[pole] = block_index
+        elif (
+            constants.marker + constants.scale * blocks[previous][0].upper_value
+            == blocks[previous][0].lower_value
+            and not terminal
+        ):
+            backward_seed[pole] = block_index
+
+    backward_layers: list[dict[Fraction, int]] = [backward_seed]
+    radix_power = radix
+    for _inverse_depth in range(1, backward_limit + 1):
+        predecessors: dict[Fraction, int] = {}
+        for target, suffix_code in backward_layers[-1].items():
+            for block_index, (product, _word) in enumerate(blocks):
+                predecessor = exact_preimage(
+                    product,
+                    target,
+                    beta,
+                    swapped=swapped,
+                )
+                if predecessor is not None:
+                    predecessors.setdefault(
+                        predecessor,
+                        block_index * radix_power + suffix_code,
+                    )
+        backward_layers.append(predecessors)
+        radix_power *= radix
+
+    for total_length in range(1, max_square_runs + 1):
+        for forward_depth in range(forward_limit + 1):
+            backward_depth = total_length - forward_depth - 1
+            if not 0 <= backward_depth <= backward_limit:
+                continue
+            forward = forward_layers[forward_depth]
+            backward = backward_layers[backward_depth]
+            common = forward.keys() & backward.keys()
+            for state in common:
+                witness = forward[state]
+                start = witness & 1
+                forward_code = witness >> 1
+                suffix_code = backward[state]
+                if total_length == 1 and start == 1:
+                    product = blocks[suffix_code][0]
+                    punctuated_upper = (
+                        constants.marker + constants.scale * product.upper_value
+                    )
+                    if punctuated_upper == product.lower_value:
+                        continue
+                suffix_length = backward_depth + 1
+                combined_code = forward_code * radix**suffix_length + suffix_code
+                return BidirectionalOrbitSearch(
+                    OrbitCollision(
+                        start,
+                        _decode_block_path(combined_code, total_length, blocks),
+                    ),
+                    tuple(len(layer) for layer in forward_layers),
+                    tuple(len(layer) for layer in backward_layers),
+                )
+
+    return BidirectionalOrbitSearch(
+        None,
+        tuple(len(layer) for layer in forward_layers),
+        tuple(len(layer) for layer in backward_layers),
+    )
+
+
 def shadow(
     beta: int,
     body: str,
@@ -784,6 +981,7 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument("--max-role-length", type=int, default=0)
     parser.add_argument("--max-square-runs", type=int, default=0)
+    parser.add_argument("--meet-square-runs", type=int, default=0)
     parser.add_argument("--search-unit-poles", type=int, default=0)
     parser.add_argument("--search-beta-shell", type=int, default=0)
     parser.add_argument("--swapped-digits", action="store_true")
@@ -818,6 +1016,17 @@ def main() -> None:
                 args.body,
                 args.max_role_length,
                 args.max_square_runs,
+                swapped=args.swapped_digits,
+            ),
+        )
+    if args.meet_square_runs:
+        print(
+            "bidirectional exact orbit search:",
+            meet_exact_orbits(
+                args.beta,
+                args.body,
+                args.max_role_length,
+                args.meet_square_runs,
                 swapped=args.swapped_digits,
             ),
         )

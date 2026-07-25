@@ -372,7 +372,9 @@ excludes the residual value `2μ`, so the complete distinguished-boundary
 also excludes the unavoidable all-`D_c` valuation-one residue at every
 compiler-emitted width. The immediate question is whether any noncanonical
 positive valuation-one near-match can occur without already certifying source
-halting.
+halting. Exact bidirectional diagnostics at `β=3`, body `bbcc`, exclude every
+false-pole word of at most six projective blocks when each regular block has
+role length at most three; this is computational evidence only.
 A single explicit nonterminal pole orbit kills this family; a closed invariant proves
 `M₅(3)`. The same-zero binary root and fixed-width-three source remain independent fallbacks.
 

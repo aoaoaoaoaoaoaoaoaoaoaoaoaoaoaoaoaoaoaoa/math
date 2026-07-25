@@ -429,12 +429,21 @@ it found:
 role-block length ≤3, three transfers:
     670235 distinct projective states, no collision
 
+role-block length ≤3, false-pole words of length ≤6:
+    forward layers 2, 95, 7979, 670235
+    backward layers 84, 7056, 592704
+    no collision
+
 target-block length ≤12:
     no nonterminal integral valuation-one pole
 
 role-word length ≤10:
     no distinguished-boundary β-shell hit
 ```
+
+The six-block result uses exact rational Möbius inversion and intersects the
+three-step forward orbit with the two-step preimage tree rooted at every pole.
+It covers all `84⁶` block sequences without enumerating them individually.
 
 The same target search through length `12` found no false integral pole for
 bodies `bb`, `bc`, `cb`, or `cc`.  These are finite computations, not theorem
