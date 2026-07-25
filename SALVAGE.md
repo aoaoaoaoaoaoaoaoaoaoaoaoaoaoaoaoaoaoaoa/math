@@ -64,6 +64,7 @@ file owns the mathematical stock.
 | [`MM-S02`](#mm-s02-reset-zero-projective-peeling) | structure theorem | the ordinary reset cannot reach a false pole after one transfer | audited | active |
 | [`MM-S03`](#mm-s03-centered-setter-carry) | structure theorem | setter orbits obey an integer valuation-and-suffix carry recurrence | audited | active |
 | [`MM-S04`](#mm-s04-reverse-suffix-discrepancy) | structure theorem | setter resonance is a word-valued discrepancy queue with a bounded front fringe | audited | active |
+| [`MM-S05`](#mm-s05-distinguished-boundary-beta-shell) | obstruction | the distinguished-boundary `β`-shell cannot reach a false pole | audited | active |
 | [`M4-C01`](#m4-c01-two-state-pushout-compiler) | compiler | binary deterministic two-state scalar control compiles to three `4 × 4` matrices | audited | active |
 | [`M4-O01`](#m4-o01-exact-toggle-fusion-leaves-an-immortal-core) | obstruction | exact local toggle fusion preserves an invertible two-plane | audited | stock |
 | [`M4-O02`](#m4-o02-two-private-state-phase-signature) | obstruction | exact shared-channel phase ratios are constant or two-periodic | audited | active |
@@ -1040,9 +1041,70 @@ retain the exact recurrence; the tested residue-only quotients saturate.
 **Artifact:** [`audits/setter-projective-peeling-2026-07-25.md`](audits/setter-projective-peeling-2026-07-25.md#reverse-suffix-discrepancy-queue);
 [`tools/explore_setter_projective.py`](tools/explore_setter_projective.py).
 
-**Next:** identify the residual with the existing Neary queue/history semantics,
-or construct an explicit malformed role sequence whose discrepancy reaches one
-of the two bounded resonant targets.
+**Next:** combine the discrepancy queue with
+[`MM-S05`](#mm-s05-distinguished-boundary-beta-shell), then identify a semantic
+quotient for the surviving valuation-one target.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S05: Distinguished-boundary β-shell
+
+**Kind:** obstruction
+**Evidence:** audited
+**Disposition:** active
+
+Start the setter carry at projective boundary `1`. For a nonterminal block
+`v`, put
+
+```text
+m=|U(v)|,       k=lcs(U(v)M,V(v)),       d=m−k,
+Δ=(P_v−V_v)/3^k.
+```
+
+Then `Δ` is an integer not divisible by `3`, and the resulting centered state
+is projectively `(3^d,RΔ)`. If a following block `z` is a pole, it must satisfy
+
+```text
+C_zΔ+HμV_z3^d=0.
+```
+
+When `d=β`, the pole-shell theorem forces `z` to be a single erasure. The
+`b` erasure requires
+
+```text
+Δ=−2Hμ/(45ρ²+53ρ−10),
+```
+
+which lies strictly between `−1` and `0`. The `c` erasure requires `Δ=−μ`.
+The latter equality would make the addition
+
+```text
+P_v+μ3^{m−β}=V_v
+```
+
+force the binary factor `0·1·0^β` inside
+`tagEncode β (v.map letter)·M`. That factor is impossible: every occurrence of
+`1·0^β` begins a `b` codeword or the final marker and is never preceded by
+`0`.
+
+Therefore no finite nonterminal block in the distinguished-boundary
+`β`-resonance can be followed by a pole.
+
+**Scope:** this closes only the `d=β` branch immediately after boundary `1`.
+It does not handle the surviving `d=1` discrepancy, nor β-shell states reached
+after other malformed transfers.
+
+**Use:** remove the single-erasure pole family from the boundary-one analysis.
+The remaining semantic quotient needs to preserve only valuation-one target
+blocks.
+
+**Artifact:** [`audits/setter-projective-peeling-2026-07-25.md`](audits/setter-projective-peeling-2026-07-25.md#elimination-of-the-beta-shell);
+[`tools/explore_setter_projective.py`](tools/explore_setter_projective.py).
+
+**Next:** classify integer normalized poles in the valuation-one shell. The
+distinguished value `Δ=H` is exactly `P_z=V_z`, a genuine terminal match;
+determine whether any other integer value is realizable.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).

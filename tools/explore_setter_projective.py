@@ -261,6 +261,22 @@ def reverse_discrepancy(
     return ReverseDiscrepancy(matched, len(word), upper, lower, False)
 
 
+def normalized_boundary_discrepancy(
+    beta: int, body: str, word: tuple[int, ...]
+) -> tuple[int, int]:
+    """Return the boundary-one resonance gap and its 3-adic unit."""
+
+    roles = role_words(beta, body)
+    discrepancy = reverse_discrepancy(beta, body, word)
+    upper = "".join(roles[role][0] for role in word)
+    lower = "".join(roles[role][1] for role in word)
+    difference = ternary_code(upper + "1" + "0" * beta) - ternary_code(lower)
+    divisor = 3**discrepancy.common_suffix
+    quotient, remainder = divmod(difference, divisor)
+    assert remainder == 0
+    return len(upper) - discrepancy.common_suffix, quotient
+
+
 def exact_transfer(product: SideProduct, start: Fraction, beta: int) -> Fraction | None:
     rho = 3**beta
     marker_value = (5 * rho - 1) // 2
@@ -401,7 +417,32 @@ def audit_centered_carry() -> None:
                 assert not discrepancy.lower_residual
                 assert len(discrepancy.upper_residual) == gap + beta + 1
 
+            checked_gap, unit = normalized_boundary_discrepancy(beta, "bbcc", word)
+            assert checked_gap == gap
+            if gap == beta:
+                assert unit != -marker_value
+
+            upper_bits = "".join(roles[role][0] for role in word)
+            assert "0" + "1" + "0" * beta not in upper_bits + "1" + "0" * beta
+
         layer = [(*word, role) for word in layer for role in range(len(roles))]
+
+    for width in range(3, 9):
+        power = 3**width
+        marker = (5 * power - 1) // 2
+        head = (17 * power - 1) // 2
+        tail = power + 1
+        upper_b = ternary_code(tag_code(width, "b"))
+        punctuated_b = marker + 3 * power * upper_b
+        centered_b = tail * punctuated_b - head
+        assert centered_b == power * (45 * power**2 + 53 * power - 10) // 2
+        required_b = Fraction(-head * marker * power, centered_b)
+        assert -1 < required_b < 0
+
+        punctuated_c = marker + 3 * power * ternary_code(tag_code(width, "c"))
+        assert punctuated_c == head
+        centered_c = tail * punctuated_c - head
+        assert Fraction(-head * marker * power, centered_c) == -marker
 
 
 def next_exact_layer(

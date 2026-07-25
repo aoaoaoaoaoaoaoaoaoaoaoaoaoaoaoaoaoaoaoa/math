@@ -359,6 +359,105 @@ a fixed congruence modulus does not preserve the exact terminal-match
 recurrence. The bounded diagnostics below additionally show saturation of the
 tested residue-only quotients.
 
+## Elimination of the Beta Shell
+
+One of the two distinguished-boundary resonances can be closed outright.
+Suppose a block `v` does not itself give a terminal match. Retain
+
+```text
+m=|U(v)|,       k=lcs(U(v)M,V(v)),       d=m−k
+```
+
+and put
+
+```text
+Δ=(P_v−V_v)/3^k.
+```
+
+The exactness of `k` makes `Δ` a `3`-adic unit. Equation (9), divided by
+`3^k`, represents the resulting projective state by
+
+```text
+(X,Y)=(3^d,RΔ).                              (13)
+```
+
+If the next block `z` is a pole, equation (6) gives
+
+```text
+C_zΔ+HμV_z3^d=0.                             (14)
+```
+
+For `d=β`, valuation equality forces `v₃(C_z)=β`. By the pole-shell theorem,
+`z` must be one of the two single erasures.
+
+For the `b` erasure, direct substitution gives
+
+```text
+P_{D_b}=(45ρ²+8ρ−1)/2,
+C_{D_b}=ρ(45ρ²+53ρ−10)/2.
+```
+
+The required discrepancy is therefore
+
+```text
+Δ_b=−2Hμ/(45ρ²+53ρ−10).
+```
+
+It lies strictly between `−1` and `0`, because
+
+```text
+(45ρ²+53ρ−10)−2Hμ=(5ρ²+128ρ−21)/2>0.
+```
+
+It cannot equal the integer `Δ`.
+
+For the `c` erasure,
+
+```text
+P_{D_c}=H,       C_{D_c}=Hρ,
+```
+
+so (14) would require
+
+```text
+Δ=−μ.                                          (15)
+```
+
+Equation (15) is forbidden by the self-synchronizing upper code. Since
+`k=m−β`, it says
+
+```text
+V_v=P_v+μ3^{m−β}.                              (16)
+```
+
+Write the base-three digits from least significant upward. The digits of `μ`
+are `1^β2`, while every digit of `P_v` and `V_v` is `1` or `2`. At the lowest
+added position in (16), no carry arrives. To keep the output digit nonzero,
+the next `β` digits of `P_v` must all be `1`. At the top digit of the shifted
+`μ`, adding `2` forces the digit of `P_v` to be `2` and emits one carry. The
+following digit of `P_v` must then be `1` to absorb that carry without
+producing a zero.
+
+Reading those positions in word order forces the binary factor
+
+```text
+0·1·0^β
+```
+
+inside `tagEncode β (v.map letter)·M`. This factor does not occur. Every
+`1·0^β` begins either a `b` codeword or the final marker; in both cases its
+preceding bit, when present, is the terminal `1` of another codeword. Hence
+it is never preceded by `0`.
+
+Thus (15) is impossible.
+
+> **Distinguished-boundary β-shell theorem.** From projective boundary `1`, no
+> finite nonterminal block in the `d=β` resonance can be followed by a pole.
+
+Only the valuation-one discrepancy remains at this boundary. This theorem
+does not constrain β-shell states reached later from the ordinary reset or
+after several malformed transfers.
+
 ## Bounded Diagnostics
 
 [`tools/explore_setter_projective.py`](../tools/explore_setter_projective.py) performs exact
@@ -382,12 +481,14 @@ must retain pulse or suffix history, not merely the current projective residue.
 The executable audit also checks equation (6), both reset representatives, and the
 nonresonant valuation update (7) on every benchmark role block of length at most three. On
 every arbitrary role word of length at most five, it independently compares the reverse
-discrepancy scan with direct suffix cancellation and checks the bounds (11)–(12).
+discrepancy scan with direct suffix cancellation and checks the bounds (11)–(12). It checks
+the forbidden-factor consequence of (16) on the same words and verifies the two single-erasure
+formulas symbolically for `3≤β≤8`.
 
 ## Promotion Boundary
 
 The scaled transfer, pole-shell theorem, reset-zero peeling argument, integer carry recurrence,
 two-transfer gate, distinguished-boundary suffix gate, reverse-discrepancy recurrence, and
-bounded-fringe theorem are audited mathematics. The bounded searches are computational
+bounded-fringe and β-shell theorems are audited mathematics. The bounded searches are computational
 diagnostics. No finite semantic quotient of the discrepancy queue is known, and arbitrary-depth
 avoidance remains open.

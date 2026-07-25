@@ -348,7 +348,13 @@ right-to-left machine. It is a word-valued PCP discrepancy queue, not a finite
 pulse state. At either dangerous gap, however, the unprocessed left fringe has
 upper length at most `β+2` or `2β+1`. The next proof must therefore quotient
 the internal discrepancy queue semantically while preserving these bounded
-targets; a larger residue modulus or phase-only automaton cannot suffice.
+targets; a larger residue modulus or phase-only automaton cannot suffice. The
+first target is now gone:
+[`MM-S05`](SALVAGE.md#mm-s05-distinguished-boundary-beta-shell) proves that
+the `d=β` branch at boundary `1` cannot reach either single-erasure pole. Only
+the valuation-one target survives there. Its distinguished normalized value
+`Δ=H` is exactly a genuine terminal match; the immediate question is whether
+any other integer normalized pole is realizable.
 A single explicit nonterminal pole orbit kills this family; a closed invariant proves
 `M₅(3)`. The same-zero binary root and fixed-width-three source remain independent fallbacks.
 
