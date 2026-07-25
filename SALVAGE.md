@@ -69,6 +69,7 @@ file owns the mathematical stock.
 | [`MM-S06`](#mm-s06-valuation-one-divisor-normal-form) | structure theorem | every integral valuation-one pole lies on a finite family of divisor rays | audited | active |
 | [`MM-S07`](#mm-s07-swapped-digit-finite-slope-reduction) | structure theorem | the swapped setter reduces integral valuation-one poles to finitely many primitive slopes | audited | active |
 | [`MM-S08`](#mm-s08-swapped-distinguished-boundary-beta-shell) | obstruction | the swapped distinguished boundary cannot reach either single-erasure pole | audited | active |
+| [`MM-S09`](#mm-s09-canonical-swapped-residue-cannot-hit-a-pole) | obstruction | the unavoidable all-erasure residue cannot meet a valuation-one pole at emitted widths | audited | active |
 | [`M4-C01`](#m4-c01-two-state-pushout-compiler) | compiler | binary deterministic two-state scalar control compiles to three `4 × 4` matrices | audited | active |
 | [`M4-O01`](#m4-o01-exact-toggle-fusion-leaves-an-immortal-core) | obstruction | exact local toggle fusion preserves an invertible two-plane | audited | stock |
 | [`M4-O02`](#m4-o02-two-private-state-phase-signature) | obstruction | exact shared-channel phase ratios are constant or two-periodic | audited | active |
@@ -1410,6 +1411,60 @@ valuation-one finite-slope languages of
 
 **Next:** intersect each surviving primitive slope with the reverse
 discrepancy language; a hit need only imply a genuine terminal suffix.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S09: Canonical swapped residue cannot hit a pole
+
+**Kind:** obstruction
+**Evidence:** audited
+**Disposition:** active
+
+The distinguished-boundary word `D_c^(β+1)` has
+
+```text
+d=1,       Δ₀=(9ρ−5)/2.
+```
+
+If this state met a valuation-one pole with side codes `P,V`, the pole
+equation would reduce to
+
+```text
+D(9ρ−5)P=H(3ρ−1)V.
+```
+
+Modulo `ρ`, the left coefficient is `10`, `P≡−1`, and the right coefficient
+is `1`.  Hence
+
+```text
+V≡ρ−10 (mod ρ).
+```
+
+The corresponding binary suffix under the swapped digit embedding is
+
+```text
+0^(β−3)100.
+```
+
+An admissible target block ends in an erasure.  Its lower word either contains
+no rule and hence no `1`, or its last rule followed by one erasure ends in
+`1100`; any other number of trailing erasures gives the wrong terminal zero
+run.  Therefore the required suffix is impossible for `β≥4`.
+
+**Scope:** this excludes one recurrent positive boundary residue, not every
+positive `d=1` discrepancy.  It uses the target block's final-erasure
+grammar.
+
+**Use:** the Neary compiler has `β=10·period`, so the canonical all-erasure
+branch is harmless for every emitted instance.  Any remaining
+distinguished-boundary pole must come from a noncanonical positive near-match,
+which is now a semantic source-halting question.
+
+**Artifact:** [`audits/m53-swapped-setter-2026-07-25.md`](audits/m53-swapped-setter-2026-07-25.md#canonical-valuation-one-residue).
+
+**Next:** prove that every other positive `d=1` near-match already implies
+source halting.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).

@@ -368,6 +368,57 @@ allows only `β−s−2<β` zeros before the next `1`.  This is also impossible.
 Thus no distinguished-boundary discrepancy in the `β` shell can reach either
 single-erasure pole.
 
+## Canonical Valuation-One Residue
+
+The word `D_c^(β+1)` always gives
+
+```text
+d=1,       Δ₀=(9ρ−5)/2.                    (18)
+```
+
+This residue cannot meet a valuation-one pole when `β≥4`.  Substituting
+`Δ₀` into (8) gives the target-ratio equation
+
+```text
+D(9ρ−5)P=H(3ρ−1)V.                         (19)
+```
+
+Reduce (19) modulo `ρ`.  Since
+
+```text
+D≡−2,       H≡−1,       P≡μ≡−1 (mod ρ),
+```
+
+equation (19) forces
+
+```text
+V≡−10≡ρ−10 (mod ρ).                        (20)
+```
+
+The `β` base-three digits of `ρ−10` are
+
+```text
+2^(β−3)·1·2·2.
+```
+
+Under the swapped digit embedding, (20) says that the target lower word ends
+in
+
+```text
+0^(β−3)100.                                 (21)
+```
+
+Every admissible target block ends in an erasure role.  If its entire lower
+word consists of erasures, it has no `1`.  Otherwise, let the last rule be
+followed by `n` erasures.  Its lower spelling ends in `1·0^(n+1)`.  Pattern
+(21) forces `n=1`; but the digit immediately preceding the final `10` of
+either rule word is `1`, so the actual four-bit suffix is `1100`, not `0100`.
+For `β≥4`, this contradicts (21).
+
+The Neary compiler emits `β=10·period`, hence always lies in this range.
+Thus the canonical positive valuation-one residue cannot create a false pole
+in any emitted source.
+
 ## Bounded Diagnostics
 
 [`tools/explore_setter_projective.py`](../tools/explore_setter_projective.py)
@@ -392,9 +443,9 @@ evidence.
 ## Promotion Boundary
 
 The swapped five-state matrices, internal separator, projective transfer,
-strict sign (7), finite-slope reduction (10)–(12), rigidity (13), and
-β-shell exclusion (15)–(17) are audited mathematics.  The bounded searches
-are computational diagnostics.
+strict sign (7), finite-slope reduction (10)–(12), rigidity (13),
+β-shell exclusion (15)–(17), and canonical-residue exclusion (18)–(21) are
+audited mathematics.  The bounded searches are computational diagnostics.
 
 No finite-slope exclusion theorem is known.  A fixed nonterminal slope still
 defines an asynchronous correspondence equation, and the terminal slope

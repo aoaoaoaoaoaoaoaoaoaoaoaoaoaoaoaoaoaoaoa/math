@@ -117,6 +117,7 @@ The setter-projective audit now also exposes a kernel-friendly carry theorem:
 | [`MM-M04`](SALVAGE.md#mm-m04-swapped-digit-setter) | parametric nonzero-digit embedding, swapped basis, regular decoder, delimiter powers, mixed separator, and orientation-preserving projective transfer |
 | [`MM-S07`](SALVAGE.md#mm-s07-swapped-digit-finite-slope-reduction) | strict sign of the centered coefficient, primitive-slope gcd reduction, effective bounds, rigidity `Δ=H ↔ P=V`, and the two swapped `β`-shell formulas |
 | [`MM-S08`](SALVAGE.md#mm-s08-swapped-distinguished-boundary-beta-shell) | swapped carry classification, bounded upper-prefix normal form, and complete exclusion of both distinguished-boundary single-erasure poles |
+| [`MM-S09`](SALVAGE.md#mm-s09-canonical-swapped-residue-cannot-hit-a-pole) | canonical discrepancy formula, pole-ratio equation, modulo-`ρ` suffix extraction, and final-erasure contradiction |
 
 These records narrow the missing arbitrary-depth theorem but do not prove
 projective avoidance. Their reconstruction is

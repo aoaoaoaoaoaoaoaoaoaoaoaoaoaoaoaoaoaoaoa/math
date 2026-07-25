@@ -367,8 +367,12 @@ valuation-one pole into a finite set of primitive slopes. The common scale of
 the two code integers remains unbounded, so this is not yet a finite word
 search. [`MM-S08`](SALVAGE.md#mm-s08-swapped-distinguished-boundary-beta-shell)
 excludes the residual value `2μ`, so the complete distinguished-boundary
-`β` shell is safe. The immediate question is whether any nonterminal
-valuation-one fixed-slope language survives the Neary pulse invariant.
+`β` shell is safe.
+[`MM-S09`](SALVAGE.md#mm-s09-canonical-swapped-residue-cannot-hit-a-pole)
+also excludes the unavoidable all-`D_c` valuation-one residue at every
+compiler-emitted width. The immediate question is whether any noncanonical
+positive valuation-one near-match can occur without already certifying source
+halting.
 A single explicit nonterminal pole orbit kills this family; a closed invariant proves
 `M₅(3)`. The same-zero binary root and fixed-width-three source remain independent fallbacks.
 
