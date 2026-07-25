@@ -56,6 +56,7 @@ file owns the mathematical stock.
 | [`MM-O08`](#mm-o08-full-algebra-prefix-pair) | obstruction | the exact ten-state prefix pair spans the full matrix algebra | audited | active |
 | [`MM-O09`](#mm-o09-two-state-ternary-prefix-image) | obstruction | a literal two-state ternary decoder has no five-state common-image restriction | audited | stock |
 | [`MM-O10`](#mm-o10-additive-toggle-fusion-cycle) | obstruction | the normalized toggle-minus-separator ansatz has rank three at every power | audited | stock |
+| [`MM-O11`](#mm-o11-full-algebra-paired-binary-family) | obstruction | the paired-binary mortality family spans the full six-state algebra | audited | active |
 | [`MM-M01`](#mm-m01-off-diagonal-companion-interface) | partial mechanism | off-diagonal rank-two bridge has a complete fracture grammar | audited | stock |
 | [`MM-M02`](#mm-m02-bordered-toggle) | partial mechanism | one lifted toggle has a stable rank-two third power | audited | parked |
 | [`MM-M03`](#mm-m03-five-state-setter-punctuation) | partial mechanism | a mixed delimiter word is an exact internal rank-one separator | audited | active |
@@ -598,6 +599,58 @@ different perturbations, and mixed words containing data generators remain open.
 **Use:** reject the additive fusion before any power search.
 
 **Artifact:** [`audits/internal-sandwich-prefix-algebra-2026-07-25.md`](audits/internal-sandwich-prefix-algebra-2026-07-25.md#secondary-obstructions).
+
+### MM-O11: Full-algebra paired-binary family
+
+**Kind:** obstruction
+**Evidence:** audited
+**Disposition:** active
+
+Adjoin the canonical rank-one separator `P=CL` to the two transposed six-state paired-binary
+controls. The columns
+
+```text
+C, A₀C, A₁C, A₀²C, A₁A₀C, A₀³C
+```
+
+and rows
+
+```text
+L, LA₀, LA₁, LA₀², LA₀A₁, LA₀³
+```
+
+are bases throughout the source envelope `β≥3`. Their determinant factors have final terms
+congruent to `3 mod 9`, using only that the rule-`c` lower word ends in `10`. Consequently the
+thirty-six physical contexts
+
+```text
+A_uPA_v=(A_uC)(LA_v)
+```
+
+span `M₆(ℚ)`.
+
+Every nonzero internal word therefore has reachable space `ℚ⁶`, zero unobservable subspace,
+and exact sandwich dimension six. [`MM-C04`](#mm-c04-internal-word-sandwich-minimization)
+cannot reduce this family to five states.
+
+**Scope:** the paired-binary mortality family only. A modular sweep found full algebra for all
+120 literal CHHN packings at `β=3`, body `bb`, but that bounded computation is not an unbounded
+theorem.
+
+**Use:** close exact invariant restrictions, quotients, and internal-word sandwiches of the
+canonical `Z₆(2)→M₆(3)` construction. A five-state proof must change the physical family or its
+nonzero behavior.
+
+**Artifact:** the symbolic determinant proof and bounded CHHN sweep are in
+[`audits/six-state-sandwich-saturation-2026-07-25.md`](audits/six-state-sandwich-saturation-2026-07-25.md);
+the executable certificate is
+[`tools/audit_six_state_sandwich.py`](tools/audit_six_state_sandwich.py).
+
+**Next:** formalize the two six-by-six determinant certificates and their outer-product
+full-algebra consequence.
+
+**Issue:** [#8, Formalize internal-sandwich minimization and the exact full-algebra
+obstructions](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/8).
 
 ### MM-M01: Off-diagonal companion interface
 

@@ -96,11 +96,14 @@ The internal-sandwich audit produced one general compiler and three exact obstru
 | [`MM-O08`](SALVAGE.md#mm-o08-full-algebra-prefix-pair) | the identity `B₀³=uvᵀ`, uniform reachability and observability determinants, positivity over the source envelope, and the outer-product basis of `M₁₀(ℚ)` |
 | [`MM-O09`](SALVAGE.md#mm-o09-two-state-ternary-prefix-image) | classification of full ternary trees with five leaves and the joint-image argument for exact two-state weighted decoders |
 | [`MM-O10`](SALVAGE.md#mm-o10-additive-toggle-fusion-cycle) | idempotent normalization and the identities `F²=I−TP`, `F³=F`, and `rank F=rank F²=3` |
+| [`MM-O11`](SALVAGE.md#mm-o11-full-algebra-paired-binary-family) | the two six-state reachability and observability determinant identities, modulo-nine nonvanishing, and the outer-product basis of `M₆(ℚ)` |
 
-The full-algebra theorem concerns the exact physical pair only. It does not exclude a same-zero
-nine-state series or another decoder. The reconstruction and promotion boundary are recorded in
-[`audits/internal-sandwich-prefix-algebra-2026-07-25.md`](audits/internal-sandwich-prefix-algebra-2026-07-25.md);
-formalization and the six-state sandwich search are tracked in
+The full-algebra theorems concern their exact physical families only. They do not exclude
+same-zero series or another decoder. The reconstruction and promotion boundaries are recorded in
+[`audits/internal-sandwich-prefix-algebra-2026-07-25.md`](audits/internal-sandwich-prefix-algebra-2026-07-25.md)
+and
+[`audits/six-state-sandwich-saturation-2026-07-25.md`](audits/six-state-sandwich-saturation-2026-07-25.md).
+Formalization is tracked in
 [#8](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/8).
 
 The dimension-two affine audit produced five independently checked records:

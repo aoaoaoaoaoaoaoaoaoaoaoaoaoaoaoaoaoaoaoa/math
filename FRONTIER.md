@@ -282,21 +282,23 @@ tax [`MM-O03`](SALVAGE.md#mm-o03-two-channel-boundary-tax) charges two additiona
 exact diagonal rank-two bridge. Such a bridge therefore also requires dimension at least six.
 Both conclusions concern exact series; neither constrains another series with the same zero set.
 
-Four live routes remain.
+The internal-word sandwich compiler
+[`MM-C04`](SALVAGE.md#mm-c04-internal-word-sandwich-minimization) initially offered a way
+around every parser obligation. It is now closed on the canonical paired-binary mortality
+family: [`MM-O11`](SALVAGE.md#mm-o11-full-algebra-paired-binary-family) proves that its word
+span is `M₆(ℚ)`, so every nonzero sandwich has exact dimension six. All 120 literal CHHN
+packings are likewise full-algebra at the benchmark, although that finite modular sweep is not
+a uniform theorem. The sandwich compiler becomes live again only with a different physical
+six-state family.
 
-1. Apply the internal-word sandwich compiler
-   [`MM-C04`](SALVAGE.md#mm-c04-internal-word-sandwich-minimization) to an established
-   six-state, three-generator family. Enumerate its nonzero low-rank physical words and compute
-   the reachable/observable dimension of each matrix-valued series `WA_wU`. A rank at most five
-   proves `M₅(3)` immediately, with the arbitrary-word converse repaired by `ωzω`. The
-   all-placement scalar obstruction `MM-O01` does not by itself determine these rank-two block
-   series.
-2. Construct a five-state binary series with nonsingular letter matrices, the source zero set
+Three live routes remain.
+
+1. Construct a five-state binary series with nonsingular letter matrices, the source zero set
    on complete two-bit blocks, and nonzero values on odd words; then adjoin the ordinary
    rank-one separator. The unused identity `(V_b^D,B_b^D)=(V_c^D,B_c^D)` suggests processing
    the common deletion channel before the symbol bit is known. A four-state root would prove
    the stronger `M₄(3)` result.
-3. Fuse the paired toggle and separator inside one five-dimensional generator. The
+2. Fuse the paired toggle and separator inside one five-dimensional generator. The
    off-diagonal companion interface
    [`MM-M01`](SALVAGE.md#mm-m01-off-diagonal-companion-interface) supplies a complete bridge
    grammar once a physical control word realizes it. Pure delimiter powers cannot supply
@@ -310,7 +312,7 @@ Four live routes remain.
    terminal match. The source boundary fixes `r=t/μ`
    ([`MM-O07`](SALVAGE.md#mm-o07-setter-parameter-rigidity)); generic parameter selection is
    not a live escape.
-4. Use the scheduled compiler [`MM-C03`](SALVAGE.md#mm-c03-scheduled-binary-compiler).
+3. Use the scheduled compiler [`MM-C03`](SALVAGE.md#mm-c03-scheduled-binary-compiler).
    A fixed binary deletion-width-three universality theorem would finish the reduction
    immediately. None was located. The constructive alternative is to replace the variable
    phase clock by a constant-state delimiter or punctuation mechanism and prove that every
@@ -319,9 +321,8 @@ Four live routes remain.
    exact states are necessary at that width; it does not obstruct a same-zero clock
    compression or delimiter fusion.
 
-The first calculation is now the finite internal-sandwich scan. If every candidate has exact
-dimension six, the setter remains the sharpest constructive route. Its next experiment is not
-another five-dimensional word search: enumerate side products by `(U,V,A,B)`, propagate the
+The setter is again the sharpest constructive route. Its next experiment is not another
+five-dimensional word search: enumerate side products by `(U,V,A,B)`, propagate the
 one-dimensional projective state exactly, and seek a finite invariant separating every
 nonterminal orbit from every pole. Congruence quotients, `3`-adic valuation with pulse phase,
 signed interval partitions, and self-synchronizing suffix states are the first candidates.
@@ -808,11 +809,10 @@ universal computation.
    incidence equations. Reject every finite closed-token source before appendant search.
 2. Audit and formalize `MM-O01`, `MM-O03`, `MM-O04`, and `G3-O01`; keep exact-series and
    exact-macro scope explicit.
-3. Compute the internal-word block-Hankel quotients of the safe six-state, three-generator
-   families using `MM-C04`. In parallel, prove or refute the setter candidate's projective
-   avoidance property, construct a five-state same-zero binary root, or find a constant-state
-   scheduled delimiter fusion. Treat fixed-width-three universality as a separate source
-   theorem.
+3. Prove or refute the setter candidate's projective avoidance property, construct a
+   five-state same-zero binary root, or find a constant-state scheduled delimiter fusion.
+   Treat fixed-width-three universality as a separate source theorem. Reopen `MM-C04` only for
+   a physically different six-state family.
 4. Formalize `MM-C04` and `MM-O08`. Search for `M₉(2)` only through a changed physical pair,
    changed nonzero behavior, or a nonlinear compiler.
 5. Run the `M₃(4)` program on three separate tracks: shift-equivariant point-line synthesis,
