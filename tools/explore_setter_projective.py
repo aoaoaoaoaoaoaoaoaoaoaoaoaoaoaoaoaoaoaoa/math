@@ -232,6 +232,93 @@ def exact_pole(product: SideProduct, beta: int) -> Fraction:
     )
 
 
+def power_of_three_exponent(value: int) -> int:
+    exponent = 0
+    while value > 1:
+        quotient, remainder = divmod(value, 3)
+        if remainder:
+            raise ValueError(f"{value} is not a power of three")
+        value = quotient
+        exponent += 1
+    return exponent
+
+
+def three_adic_valuation(value: int) -> int:
+    if value == 0:
+        raise ValueError("the 3-adic valuation of zero is infinite")
+    valuation = 0
+    while value % 3 == 0:
+        value //= 3
+        valuation += 1
+    return valuation
+
+
+def centered_point(x: int, y: int, beta: int) -> Fraction:
+    rho = 3**beta
+    marker_value = (5 * rho - 1) // 2
+    setter_head = (17 * rho - 1) // 2
+    setter_tail = rho + 1
+    return Fraction(setter_head, setter_tail) - Fraction(
+        setter_head * marker_value * x, y
+    )
+
+
+def centered_step(x: int, y: int, product: SideProduct, beta: int) -> tuple[int, int]:
+    rho = 3**beta
+    marker_value = (5 * rho - 1) // 2
+    marker_scale = 3 * rho
+    setter_head = (17 * rho - 1) // 2
+    setter_tail = rho + 1
+    punctuated_upper = marker_value + marker_scale * product.upper_value
+    centered_pole = setter_tail * punctuated_upper - setter_head * product.lower_value
+    coupling = setter_tail * setter_head * marker_value
+    return (
+        product.upper_scale * y,
+        centered_pole * y + coupling * product.lower_value * x,
+    )
+
+
+def audit_centered_carry() -> None:
+    beta = 3
+    rho = 3**beta
+    marker_value = (5 * rho - 1) // 2
+    setter_head = (17 * rho - 1) // 2
+    setter_tail = rho + 1
+    starts = (
+        (0, (1, setter_tail * marker_value)),
+        (1, (3, setter_tail * setter_head)),
+    )
+    blocks = exact_blocks(beta, "bbcc", 3)
+
+    for start, (x, y) in starts:
+        assert centered_point(x, y, beta) == start
+        for product, _word in blocks:
+            stepped_x, stepped_y = centered_step(x, y, product, beta)
+            image = exact_transfer(product, Fraction(start), beta)
+            assert (
+                image is None
+                if stepped_y == 0
+                else (centered_point(stepped_x, stepped_y, beta) == image)
+            )
+
+    for product, _word in blocks:
+        punctuated_upper = marker_value + 3 * rho * product.upper_value
+        centered_pole = (
+            setter_tail * punctuated_upper - setter_head * product.lower_value
+        )
+        shell = three_adic_valuation(centered_pole)
+        upper_length = power_of_three_exponent(product.upper_scale)
+        for d in range(-2, upper_length + beta + 3):
+            if d == shell:
+                continue
+            expected = upper_length - min(d, shell)
+            x = 3 ** max(d, 0)
+            y = 3 ** max(-d, 0)
+            stepped_x, stepped_y = centered_step(x, y, product, beta)
+            actual = three_adic_valuation(stepped_x) - three_adic_valuation(stepped_y)
+            assert actual == expected
+
+
 def next_exact_layer(
     layer: list[tuple[SideProduct, int]],
     generators: tuple[SideProduct, ...],
@@ -380,6 +467,7 @@ def parse_args() -> argparse.Namespace:
 def main() -> None:
     args = parse_args()
     if args.audit:
+        audit_centered_carry()
         assert find_exact_collision(3, "bbcc", 5) is None
         audit_orbits = search_exact_orbits(3, "bbcc", 3, 2)
         assert audit_orbits == OrbitSearch(None, (96, 8064))

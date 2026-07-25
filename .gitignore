@@ -1,6 +1,7 @@
 /.lake
 /.worktrees/
 /.ruff_cache/
+__pycache__/
 /paper/*.aux
 /paper/*.log
 /paper/*.synctex.gz

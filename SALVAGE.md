@@ -62,6 +62,7 @@ file owns the mathematical stock.
 | [`MM-M03`](#mm-m03-five-state-setter-punctuation) | partial mechanism | a mixed delimiter word is an exact internal rank-one separator | audited | active |
 | [`MM-S01`](#mm-s01-square-run-projective-normal-form) | structure theorem | malformed square runs reduce to rational projective pole avoidance | audited | active |
 | [`MM-S02`](#mm-s02-reset-zero-projective-peeling) | structure theorem | the ordinary reset cannot reach a false pole after one transfer | audited | active |
+| [`MM-S03`](#mm-s03-centered-setter-carry) | structure theorem | setter orbits obey an integer valuation-and-suffix carry recurrence | audited | active |
 | [`M4-C01`](#m4-c01-two-state-pushout-compiler) | compiler | binary deterministic two-state scalar control compiles to three `4 × 4` matrices | audited | active |
 | [`M4-O01`](#m4-o01-exact-toggle-fusion-leaves-an-immortal-core) | obstruction | exact local toggle fusion preserves an invertible two-plane | audited | stock |
 | [`M4-O02`](#m4-o02-two-private-state-phase-signature) | obstruction | exact shared-channel phase ratios are constant or two-periodic | audited | active |
@@ -916,6 +917,81 @@ depth together with the pulse or suffix state.
 
 **Next:** lift the shell calculation from valuation alone to a finite suffix-carry state.
 Residue-only projective abstractions saturate on the benchmark and cannot prove avoidance.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S03: Centered setter carry
+
+**Kind:** structure theorem
+**Evidence:** audited
+**Disposition:** active
+
+Retain the scaled coordinate and constants of
+[`MM-S02`](#mm-s02-reset-zero-projective-peeling), and put
+
+```text
+H=(17ρ−1)/2,      R=ρ+1,      K=RHμ,
+C_z=RP_z−HV_z,    m_z=|spell(nearyUpper,z)|.
+```
+
+Represent a finite projective state by integers `X,Y` through
+
+```text
+y−H/R=−HμX/Y.
+```
+
+One admissible square-run block acts exactly by
+
+```text
+X'=3^m_zY,
+Y'=C_zY+KV_zX.
+```
+
+The two reset states are `(1,Rμ)` and `(3,RH)`. A pole is exactly a zero
+second coordinate. If `d=v₃(X)−v₃(Y)` and
+`s_z=v₃(C_z)∈{1,β}`, then away from the equal-valuation branch
+
+```text
+d'=m_z−min(d,s_z).
+```
+
+At equal valuation, the extra valuation is the carry created by the two
+normalized units; infinite carry is precisely a pole. For blocks ending in an
+erasure, the first unit test is fixed: a multi-role pole requires normalized
+unit `1 mod 3`, while a single-erasure pole requires `2 mod 3`.
+
+This recurrence yields two exact gates.
+
+1. After two transfers from reset zero, outside the intermediate state `1`, a
+   prospective third pole is possible only when the second block is two
+   `c` roles, when it is `β+1` `c` roles, or when the first block is two
+   `c` roles and the second block is the single `b` erasure.
+2. From the distinguished boundary `1`, one completed block reduces
+   projectively to `(3^m,R(P−V))`. If it is not already a terminal match, a
+   following pole requires
+
+   ```text
+   v₃(P−V)=m−1     or     v₃(P−V)=m−β.
+   ```
+
+   This valuation is exactly the common binary-suffix length of the encoded
+   upper boundary and lower spelling.
+
+**Scope:** these are necessary gates, not a proof of arbitrary-depth
+avoidance. The first and prospective pole blocks remain unbounded, and the
+equal-valuation carry can retain an arbitrarily long synchronized suffix.
+
+**Use:** replaces raw Möbius iteration by an integer carry automaton and
+identifies the only place where the Neary pulse state must be attached. Search
+the three two-transfer block shapes first; any general proof must control the
+two suffix equations at the distinguished boundary.
+
+**Artifact:** [`audits/setter-projective-peeling-2026-07-25.md`](audits/setter-projective-peeling-2026-07-25.md#centered-integer-carry).
+
+**Next:** construct a right-to-left pulse transducer for the common suffix in
+the distinguished-boundary gate, then determine whether its resonant carry
+either peels to a terminal match or admits an explicit malformed pole.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).

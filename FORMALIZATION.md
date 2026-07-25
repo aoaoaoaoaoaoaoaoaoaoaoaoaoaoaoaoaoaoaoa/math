@@ -106,6 +106,18 @@ and
 Formalization is tracked in
 [#8](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/8).
 
+The setter-projective audit now also exposes a kernel-friendly carry theorem:
+
+| Record | Formalization obligation |
+| --- | --- |
+| [`MM-S03`](SALVAGE.md#mm-s03-centered-setter-carry) | centered integer recurrence, reset representatives, nonresonant valuation-gap update, unit compatibility, two-transfer shape gate, and distinguished-boundary suffix gate |
+
+This record narrows the missing arbitrary-depth theorem but does not prove
+projective avoidance. Its reconstruction is
+[`audits/setter-projective-peeling-2026-07-25.md`](audits/setter-projective-peeling-2026-07-25.md#centered-integer-carry);
+promotion remains in
+[#6](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
 The dimension-two affine audit produced five independently checked records:
 
 | Record | Formalization obligation |

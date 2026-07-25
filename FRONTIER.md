@@ -331,7 +331,19 @@ A first peeling theorem
 after one transfer from the ordinary reset. It also shows why valuation alone is insufficient:
 all poles occupy two `3`-adic shells, while bounded malformed orbits rapidly saturate their
 finite residue classes. The next abstraction must retain mismatch depth together with pulse or
-suffix history.
+suffix history. The centered carry theorem
+[`MM-S03`](SALVAGE.md#mm-s03-centered-setter-carry) supplies that interface:
+
+```text
+X'=3^mY,      Y'=(RP−HV)Y+RHμVX.
+```
+
+Away from equal valuations, the valuation gap updates by
+`d'=m−min(d,s)` with `s∈{1,β}`. It reduces the first possible two-transfer
+collision to three rigid all-`c`/single-`D_b` block families. From the
+distinguished boundary, the resonant carry is exactly the longest common
+suffix of the upper terminal spelling and the lower spelling. The next proof
+must therefore be a right-to-left pulse theorem, not a larger residue modulus.
 A single explicit nonterminal pole orbit kills this family; a closed invariant proves
 `M₅(3)`. The same-zero binary root and fixed-width-three source remain independent fallbacks.
 
