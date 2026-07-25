@@ -19,10 +19,10 @@ Every active record also states the next promotion step. A graduated record inst
 formal artifact.
 
 The first namespace component identifies the campaign: `MM` for general matrix-mortality
-compilers, `G3` for the three-letter GPCP and `M₃(4)` frontier, and `D2` for the
-dimension-two wall. The second component identifies the result class: `C` compiler, `O`
-obstruction, `M` partial mechanism, `S` structure theorem, or `D` decidable stratum.
-Numbers never change after assignment.
+compilers, `M4` for the `M₄(3)` frontier, `G3` for the three-letter GPCP and `M₃(4)`
+frontier, and `D2` for the dimension-two wall. The second component identifies the result
+class: `C` compiler, `O` obstruction, `M` partial mechanism, `S` structure theorem, or `D`
+decidable stratum. Numbers never change after assignment.
 
 `reported` means that the result survives only as a contracted statement from an external
 review. It cannot support a publication claim. `audited` means that its proof has been checked
@@ -52,6 +52,14 @@ file owns the mathematical stock.
 | [`MM-O05`](#mm-o05-width-three-scheduled-rank) | obstruction | the width-three scheduled series has exact rank five | formalized | graduated |
 | [`MM-M01`](#mm-m01-off-diagonal-companion-interface) | partial mechanism | off-diagonal rank-two bridge has a complete fracture grammar | audited | stock |
 | [`MM-M02`](#mm-m02-bordered-toggle) | partial mechanism | one lifted toggle has a stable rank-two third power | audited | parked |
+| [`M4-C01`](#m4-c01-two-state-pushout-compiler) | compiler | binary deterministic two-state scalar control compiles to three `4 × 4` matrices | audited | active |
+| [`M4-O01`](#m4-o01-exact-toggle-fusion-leaves-an-immortal-core) | obstruction | exact local toggle fusion preserves an invertible two-plane | audited | stock |
+| [`M4-O02`](#m4-o02-two-private-state-phase-signature) | obstruction | exact shared-channel phase ratios are constant or two-periodic | audited | active |
+| [`M4-S01`](#m4-s01-odd-phase-macro-cut) | structure theorem | paired Neary roles inherit a rigid macro-stroke language | reported | active |
+| [`M4-O03`](#m4-o03-closed-serialization-collapse) | obstruction | finite closed-token queue serialization is decidable | audited | active |
+| [`M4-O04`](#m4-o04-exact-internal-final-code-defect) | obstruction | distinct exact binary codes for one macro force commuting upper images | audited | stock |
+| [`M4-O05`](#m4-o05-direct-two-state-first-return-recoding) | obstruction | the present four Neary roles have no direct two-state first-return code | reported | active |
+| [`M4-M01`](#m4-m01-mixed-cube-root-punctuation) | partial mechanism | rational cube-root toggles reduce mixed punctuation to incidence equations | audited | parked |
 | [`G3-O01`](#g3-o01-four-role-macro-irreducibility) | obstruction | exact nonerasing macros cannot reduce the four source roles to three letters | audited | active |
 | [`G3-S01`](#g3-s01-shift-equivariant-zero-incidence) | structure theorem | same-zero state dimension is equivariant projective incidence dimension | audited | active |
 | [`G3-M01`](#g3-m01-free-group-discrepancy-engine) | partial mechanism | free cancellation implements queue deletion with an all-path converse | reported | active |
@@ -388,6 +396,322 @@ generator of an `M₅(3)` family.
 
 **Next:** parameterize the permitted fifth-coordinate couplings, solve the selector identities
 symbolically, and prove a global maximal-run grammar or a symbolic no-go theorem.
+
+## Three-Generator Four-State Frontier
+
+Formal promotion of this section is tracked in
+[#5](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/5).
+
+### M4-C01: Two-state pushout compiler
+
+**Kind:** compiler
+**Evidence:** audited
+**Disposition:** active
+
+For each data letter `x∈{b,c}`, let the role matrices
+
+```text
+R_x = [[1,V_x^R,U_x],[0,B_x^R,0],[0,0,A_x]],
+D_x = [[1,V_x^D,U_x],[0,B_x^D,0],[0,0,A_x]]
+```
+
+agree on `E={(a,0,c)ᵀ}`. Embed the rule and deletion copies by
+
+```text
+ι_R(a,b,c) = (a,b,c,0)ᵀ,
+ι_D(a,b,c) = (a,0,c,b)ᵀ.
+```
+
+For an arbitrary deterministic transition function
+`δ : {R,D}×{b,c} → {R,D}`, let `ε_{q,x}` be one when `δ(q,x)=R` and zero
+otherwise, and define
+
+```text
+X_x =
+[[1, V_x^R,                  U_x, V_x^D                 ],
+ [0, ε_{R,x}B_x^R,          0,   ε_{D,x}B_x^D         ],
+ [0, 0,                      A_x, 0                     ],
+ [0, (1−ε_{R,x})B_x^R,      0,   (1−ε_{D,x})B_x^D     ]].
+```
+
+Then
+
+```text
+X_x ι_R(v) = ι_{δ(R,x)}(R_xv),
+X_x ι_D(v) = ι_{δ(D,x)}(D_xv).
+```
+
+Reading phases from the terminal column therefore gives a total suffix decoder for every
+binary word. The rank is four when the two source states have different destinations and
+three when they reset to the same destination.
+
+Every `X_x` fixes `e₁`. For a terminal phase `q*`, put `C=ι_{q*}(μ,−1,t)ᵀ`,
+`L=e₁ᵀ`, and `P=CL`. The fixed-anchor fracture then proves
+
+```text
+{X_b,X_c,P} mortal
+  ↔ ∃w∈{b,c}⁺ : LX_wC=0.
+```
+
+This remains valid when either data generator has rank three: if an exterior column
+`X_uC` vanishes, applying `L` already produces a nonempty scalar witness.
+
+**Scope:** the theorem compiles a supplied undecidable controlled scalar source; it does not
+prove that such a binary two-state source exists. The controller is deterministic and the
+role pairs must agree on the complete two-dimensional upper channel.
+
+**Use:** this is the finished matrix half of the `M₄(3)` route. Source searches should target
+binary two-state controlled correspondence, not another four-dimensional separator proof.
+
+**Artifact:** the independent algebraic reconstruction is
+[`audits/m43-two-state-pushout-2026-07-24.md`](audits/m43-two-state-pushout-2026-07-24.md).
+
+**Next:** formalize the pushout, total decoder, rank classification, and mortality equivalence
+over the existing side-normal role matrices.
+
+### M4-O01: Exact toggle fusion leaves an immortal core
+
+**Kind:** obstruction
+**Evidence:** audited
+**Disposition:** stock
+
+For the paired controls, let
+
+```text
+H = im G_b = im G_c = span{e₁,e₃,e₄},
+E = span{e₁,e₃}.
+```
+
+If a proposed fused generator satisfies
+
+```text
+SG_b = TG_b,       SG_c = TG_c,
+```
+
+then surjectivity onto `H` forces `S|_H=T|_H`. The toggle is the identity on `E`;
+both data matrices preserve `E` and restrict there to invertible upper-triangular maps.
+Every word over `{G_b,G_c,S}` therefore restricts invertibly to `E` and cannot be zero.
+
+Separately, `S^r=T` with `r>0` makes `S` invertible, so no other pure power of `S` can be
+rank one or zero.
+
+**Scope:** exact contextual toggle identities and pure power codes only. A mixed macro may
+break the shared plane internally and reconstruct it at its boundary.
+
+**Use:** reject `T+P`, `TP`, `PT`, and power-coded toggle/punctuation proposals whenever they
+claim exact local toggle semantics.
+
+### M4-O02: Two-private-state phase signature
+
+**Kind:** obstruction
+**Evidence:** audited
+**Disposition:** active
+
+Suppose an exact phase compiler shares a two-dimensional upper plane and stores every private
+lower channel in a quotient `Q` of dimension at most two. If `q_j∈Q` is the phase-`j`
+private direction and
+
+```text
+X̄_x q_j = B_{j,x} q_{j+1},
+```
+
+then the ratio sequence
+
+```text
+ρ_j = B_{j,b}/B_{j,c}
+```
+
+is constant or two-periodic. If the `q_j` span one line, it is constant. Otherwise
+`F=X̄_c⁻¹X̄_b` has every `q_j` as an eigenline; a two-dimensional operator has at most two
+eigenlines unless scalar, and `X̄_c` can only fix or swap them.
+
+The supplied Neary source has signature
+
+```text
+(ρ₀,1,…,1),       ρ₀≠1,
+```
+
+because all deletion lower words coincide while the two rule lower lengths differ. For
+`β≥3` this is neither constant nor two-periodic.
+
+**Scope:** exact phasewise `4=2+2` shared-channel realizations, including phase rescaling,
+projective normalization, upper-plane shears, and basis changes. Nonletterwise macros and
+same-zero representations remain outside the theorem.
+
+**Use:** closes the direct extension of paired-role compression from two phases to the full
+Neary deletion clock.
+
+**Next:** formalize the quotient-eigenline argument and instantiate the Neary scale signature.
+
+### M4-S01: Odd-phase macro cut
+
+**Kind:** structure theorem
+**Evidence:** reported
+**Disposition:** active
+
+For Neary's compiled width `β=10p`, the report observes that every semantic entry phase is odd
+and every even track of the woven Table 2 word is the constant letter `b`. Pair the old roles as
+
+```text
+K_x = R_xD_b,       E_x = D_xD_b.
+```
+
+Writing `m=β/2`, every claimed macro solution expands to an old solution and is forced into
+
+```text
+((K_b+K_c)(E_b+E_c)^(m−1))⁺.
+```
+
+The upper words of `K_x` and `E_x` coincide for each `x`, while both deletion-macro lower
+words are `00`. The macro family therefore retains the two-plane agreement required by
+[`M4-C01`](#m4-c01-two-state-pushout-compiler).
+
+**Scope:** the existing Lean corpus proves the deletion-stroke normal form and packages the
+relevant Table 2 tracks, but it does not yet state the parity invariant or the macro
+solvability equivalence. This record cannot support a theorem claim until those links are
+checked.
+
+**Use:** converts the source search from four isolated roles to a rule macro followed by
+`m−1` deletion macros. It does not license the closed serialization refuted by
+[`M4-O03`](#m4-o03-closed-serialization-collapse).
+
+**Next:** prove the even-track invariant for every reachable compiled queue, define the macro
+morphisms in Lean, and derive the all-solution macro normal form from
+`tileHistory_of_terminal_match`.
+
+### M4-O03: Closed serialization collapse
+
+**Kind:** obstruction
+**Evidence:** audited
+**Disposition:** active
+
+Let `Γ` be finite and let each semantic token `γ` have a complete binary block `Φ(γ)`.
+Assume every macro-boundary queue is a concatenation of complete blocks, processing one
+complete front block returns to the boundary state, and its output is a concatenation of
+complete blocks determined only by `γ`:
+
+```text
+Φ(γ₁)…Φ(γₙ)  ↦  Φ(γ₂)…Φ(γₙ) Φ(τ(γ₁)).
+```
+
+At macro boundaries this is deletion-one substitution
+
+```text
+γ₁…γₙ ↦ γ₂…γₙ τ(γ₁).
+```
+
+It empties exactly when no symbol reachable from the initial word reaches a directed cycle in
+the finite dependency graph `γ→η` for `η` occurring in `τ(γ)`. A reachable cycle supplies an
+infinite descendant lineage; an acyclic reachable graph gives finite substitution forests.
+Halting is therefore decidable.
+
+**Scope:** finite closed tokens with locally determined complete-token output. Finitely many
+instruction, junk, initialization, and terminal types merely enlarge `Γ`. Open front or tail
+residues, state-dependent gauges, cancellation, and reconstruction only at larger pulse
+boundaries are not covered.
+
+**Use:** permanently reject the proposed single-active-track serialization
+`x c^(m−2)b` and every elaboration that retains closed token boundaries.
+
+**Artifact:** the proof audit is
+[`audits/m43-two-state-pushout-2026-07-24.md`](audits/m43-two-state-pushout-2026-07-24.md).
+
+**Next:** formalize the finite-graph criterion and use it as a guardrail for any future source
+serializer.
+
+### M4-O04: Exact internal/final code defect
+
+**Kind:** obstruction
+**Evidence:** audited
+**Disposition:** stock
+
+Suppose a binary source morphism `h` gives one semantic macro two distinct codewords `p≠q`
+but preserves its upper word exactly:
+
+```text
+h(p)=h(q).
+```
+
+Then `h` is noninjective. By the two-word defect theorem, the images of the two binary letters
+commute and are powers of one primitive word; every pair of words in `im h` therefore
+commutes. The macro upper words
+
+```text
+û_b = u_bu_b,       û_c = 1u_b,       u_b=10^β1
+```
+
+do not commute: `û_bû_c` begins `10`, while `û_cû_b` begins `11`.
+
+**Scope:** exact binary word-pair compilers with a state-independent upper morphism. A
+state-dependent matrix gauge, an open residue, or solvability-only preservation is outside the
+argument.
+
+**Use:** distinct exact codewords cannot make one deletion macro mean “internal” in one place
+and “final” in another.
+
+### M4-O05: Direct two-state first-return recoding
+
+**Kind:** obstruction
+**Evidence:** reported
+**Disposition:** active
+
+Every first-return word to one state of a deterministic binary two-state controller is either a
+one-letter loop or belongs to a family `emⁿr`. Four length-two returns form a rectangle, forcing
+an exact factorization identity among their role maps. A loop family forces paired roles with
+equal upper words to use equal exponents and hence equal lower words.
+
+The report applies this classification to the four Neary roles and concludes that no direct
+first-return recoding exists: the two deletion lower words coincide, while the rule lower words
+do not.
+
+**Scope:** direct exact recoding of the present four roles by first returns of a deterministic
+binary two-state controller. A new controlled source, open residues, and nonexact matrix gauges
+remain possible.
+
+**Use:** [`M4-C01`](#m4-c01-two-state-pushout-compiler) needs a new source theorem; the present
+four tiles cannot simply be relabeled by controller returns.
+
+**Next:** reconstruct the rectangle and loop-family cases uniformly and formalize the
+free-monoid cancellation argument before upgrading this record.
+
+### M4-M01: Mixed cube-root punctuation
+
+**Kind:** partial mechanism
+**Evidence:** audited
+**Disposition:** parked
+
+The paired toggle has rational cube roots. On its three-dimensional `+1` eigenspace choose a
+rational order-three map, and act by `−1` on the `−1` eigenspace; then `S³=T`.
+
+Let `H=im G_b=im G_c` and let `k_x` span `ker G_x`. For a mixed word
+
+```text
+W = G_z S^s G_y S^r G_x,
+```
+
+the first rank drop is exactly
+
+```text
+rank(G_yS^rG_x)=2  ↔  k_y∈S^rH.
+```
+
+Writing `Π=G_y(S^rH)`, the second is
+
+```text
+rank W=1  ↔  S^(−s)k_z∈Π.
+```
+
+The search for a rank-one punctuation word is therefore a finite family of projective
+incidence equations in the cube-root conjugacy parameters, followed by row- and column-boundary
+alignment.
+
+**Scope:** no parameter satisfying all incidences and boundary alignments is known. Even such
+a solution would still require an arbitrary-product converse for every other mixed fragment.
+
+**Use:** independent matrix-level fallback if the two-state source route stalls.
+
+**Next:** solve the incidence varieties symbolically before enumerating words; reject any
+candidate without a rank-stratified all-word grammar.
 
 ## Three-Letter Source Frontier
 

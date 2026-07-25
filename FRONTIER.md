@@ -169,6 +169,7 @@ The unknown cells immediately below this staircase are:
 | Cell | What would suffice | Automatic reward |
 | --- | --- | --- |
 | `M₃(4)` | three-active-role fixed-boundary PCP / `GPCP(3)`, or a new same-dimension generator compiler | by CHHN, also `M₉(2)` |
+| `M₄(3)` | an undecidable binary two-state controlled scalar source, or an open-residue matrix macro | by CHHN, also `M₈(2)` |
 | `M₅(3)` | a five-state binary same-zero root, a toggle/separator fusion, or fixed-width-three scheduled universality | supersedes `M₆(3)`; `M₁₀(2)` is already known |
 | `M₉(2)` | a zero-set-preserving compiler not obtained by restricting the exact ten-state binary decoder | improves the two-generator threshold by one |
 | `M₂(k≥3)` | a qualitatively different decidability or undecidability argument | settles the dimension-two wall |
@@ -176,9 +177,91 @@ The unknown cells immediately below this staircase are:
 The scalar result `Z₆(2)` gives `M₆(3)` after adjoining a separator; that mortality point was
 already obtained from `M₃(5)` by CHHN packing.
 
+## The hard stratum
+
+The completed improvements all preserve enough exact structure to admit a finite decoder:
+boundary absorption, common-channel quotients, fixed-width clocks, prefix transducers, and
+common-image restriction. Their arbitrary-word converses assign every free-monoid word a
+controlled interpretation. The remaining cells begin where that program pays an unavoidable
+state or generator tax.
+
+Three obstructions recur.
+
+1. **Exact behavior costs dimension.** Hankel certificates block further exact minimization;
+   shared-channel phase compilers admit only low-period scale signatures; literal prefix
+   parsers retain too many live source coordinates.
+2. **Closed syntax loses universality.** A finite self-contained token whose output is a word
+   of complete tokens induces decidable deletion-one substitution. Constraining witnesses to a
+   regular code language is unavailable because mortality quantifies over every word.
+3. **The target predicate is weaker than the available representation.** Mortality needs only
+   one zero product, scalar reachability only one zero coefficient, and projective incidence
+   only one orbit hit. Exact coefficient preservation carries information the target never
+   asks for, but discarding it makes malformed-word soundness the central theorem.
+
+The common problem is therefore **unbounded synchronization under adversarial word choice with
+no explicit control-state budget**. A successful construction must store semantic phase outside
+an ordinary finite closed parser: in an open suffix or tail residue, free cancellation, a
+numerical carry, projective incidence, a semigroup ideal, or an arithmetic normal form. The
+decidability side of `M₂(3)` asks for the dual result: prove that this hidden state nevertheless
+admits an effective finite or semilinear description.
+
+This changes the value of the frontier. The remaining cells are no longer principally missed
+packings. They ask whether zero-set semantics, nonlocal residues, or arithmetic structure can
+replace exact finite-state simulation.
+
 ## Ranked attacks
 
-### 1. Zero-set compression and fused punctuation: `M₅(3)`
+### 1. Two-state control and open residues: `M₄(3)`
+
+The matrix half is complete. The pushout compiler
+[`M4-C01`](SALVAGE.md#m4-c01-two-state-pushout-compiler) represents any deterministic
+two-state role controller over `{b,c}` by two `4 × 4` integer data matrices. A rank-one third
+matrix gives mortality exactly when the controlled binary scalar series has a nonempty zero.
+The decoder is total on all binary words, and reset transitions may make a data matrix singular
+without weakening the mortality converse.
+
+The source theorem is missing. Fazekas and Seki define the required one-tag-with-states model
+and cite unrestricted circular-automata universality, but neither their paper nor the audited
+literature supplies the exact two-state binary bound
+([local synopsis](references/fazekas-seki-2023-freezing-one-tag-states.md)).
+
+The present Neary source cannot be inserted letterwise:
+
+- exact local toggle fusion preserves an immortal two-plane
+  ([`M4-O01`](SALVAGE.md#m4-o01-exact-toggle-fusion-leaves-an-immortal-core));
+- every exact four-state shared-channel phase clock has constant or two-periodic lower-scale
+  ratios, unlike the Neary deletion clock
+  ([`M4-O02`](SALVAGE.md#m4-o02-two-private-state-phase-signature));
+- the direct binary two-state first-return recoding is reported impossible
+  ([`M4-O05`](SALVAGE.md#m4-o05-direct-two-state-first-return-recoding)).
+
+The odd-phase macro cut [`M4-S01`](SALVAGE.md#m4-s01-odd-phase-macro-cut) remains useful but
+does not restore the discarded route. Pairing every semantic role with the following `D_b`
+produces rule macros `K_x` and deletion macros `E_x`, reportedly with every solution forced
+into `(KE^(m−1))⁺`. Serializing those macros as complete blocks is impossible:
+[`M4-O03`](SALVAGE.md#m4-o03-closed-serialization-collapse) proves that every finite
+closed-token implementation collapses to decidable deletion-one substitution. Distinct exact
+internal and final block codes also fail by
+[`M4-O04`](SALVAGE.md#m4-o04-exact-internal-final-code-defect).
+
+Two architectures survive.
+
+1. **Open-tail source.** Build four appendants whose invariant retains a phase-bearing proper
+   suffix at the front and an incomplete tail at the rear. Emission must merge with that tail;
+   it cannot be a concatenation of complete semantic objects. The next state and residue must
+   be reconstructed only at a larger pulse boundary.
+2. **State-gauged matrix macro.** Let incomplete matrix fragments break the shared upper plane
+   and reconstruct it only at macro boundaries, preserving the zero set rather than every
+   coefficient. The cube-root incidence mechanism
+   [`M4-M01`](SALVAGE.md#m4-m01-mixed-cube-root-punctuation) is the concrete fallback, but it
+   still lacks a boundary-aligned rank-one word and an all-fragment converse.
+
+The next source experiment should specify an open-residue invariant before choosing appendants.
+The next matrix experiment should solve the cube-root incidence varieties symbolically before
+enumerating words. Any proposal whose semantic queue is a finite word of complete tokens is
+already closed.
+
+### 2. Zero-set compression and fused punctuation: `M₅(3)`
 
 The literal CHHN packing has no common invariant line or hyperplane. The all-placement
 certificate [`MM-O01`](SALVAGE.md#mm-o01-all-placement-packing-rank) further reports that its
@@ -218,7 +301,7 @@ The next bounded expert audit targets scheduled delimiter fusion and its all-wor
 The next internal calculation remains a symbolic classification of fifth-coordinate couplings
 and their maximal-run grammar. Further benchmark enumeration cannot settle these routes.
 
-### 2. Two-generator realization: `M₉(2)`
+### 3. Two-generator realization: `M₉(2)`
 
 The complete prefix decoder has a common image of dimension exactly ten for the present source:
 its common left annihilator has dimension two, and the restricted pair has no common right
@@ -230,7 +313,7 @@ agreement. A literal binary prefix tree for five source symbols has four interna
 nine-state construction cannot retain a complete three-dimensional source state at every
 prefix.
 
-### 3. Three-letter correspondence and direct mortality: `M₃(4)`
+### 4. Three-letter correspondence and direct mortality: `M₃(4)`
 
 The public-literature audit through 2026-07-24 found no resolution of `GPCP(3)` or
 `M₃(4)`. The two targets should not be conflated.
@@ -640,21 +723,24 @@ universal computation.
 
 ## Execution order
 
-1. Audit and formalize `MM-O01`, `MM-O03`, `MM-O04`, and `G3-O01`; keep exact-series and
+1. Formalize `M4-C01`, `M4-O01`, `M4-O02`, and `M4-O03`. In parallel, either construct an
+   open-tail binary two-state source invariant or solve the mixed cube-root punctuation
+   incidence equations. Reject every finite closed-token source before appendant search.
+2. Audit and formalize `MM-O01`, `MM-O03`, `MM-O04`, and `G3-O01`; keep exact-series and
    exact-macro scope explicit.
-2. Attack the three surviving `M₅(3)` routes: a five-state same-zero binary root, a
+3. Attack the three surviving `M₅(3)` routes: a five-state same-zero binary root, a
    five-dimensional toggle/separator fusion with a complete maximal-run grammar, and
    constant-state scheduled delimiter fusion. Treat fixed-width-three universality as a
    separate source theorem, not as an assumed compiler property.
-3. Search for a zero-set-preserving `M₉(2)` compiler rather than another invariant restriction
+4. Search for a zero-set-preserving `M₉(2)` compiler rather than another invariant restriction
    of the exact ten-state decoder.
-4. Run the `M₃(4)` program on three separate tracks: shift-equivariant point-line synthesis,
+5. Run the `M₃(4)` program on three separate tracks: shift-equivariant point-line synthesis,
    the closed-path subgroup of Carvalho's smallest transducer, and total ternary
    synchronization codes. Do not collapse their distinct proof obligations into one prompt.
-5. Fan the `M₂(3)` chapter into independent attacks on adelic cone types, redundant
+6. Fan the `M₂(3)` chapter into independent attacks on adelic cone types, redundant
    numeration, characteristic-zero affine modules, parabolic rational subsets, trace/height
    descent, finite-obstruction saturation, and valuation universality.
-6. Synthesize the returned attacks by the discriminating signals above; do not average
+7. Synthesize the returned attacks by the discriminating signals above; do not average
    incompatible hypotheses into one generic mortality prompt.
 
 These are research programs, not consequences of the present theorem.

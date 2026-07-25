@@ -86,6 +86,29 @@ embedding and retraction matrices prove the exact restriction and its converse, 
 new zero created by restriction. A generic zero-block theorem then preserves nonempty-word
 mortality in every dimension `10+n`.
 
+## Audited But Unformalized
+
+The `M₄(3)` attack produced one independently checked compiler and four independently checked
+obstructions that are not yet Lean declarations:
+
+| Record | Formalization obligation |
+| --- | --- |
+| [`M4-C01`](SALVAGE.md#m4-c01-two-state-pushout-compiler) | generic two-state pushout, total suffix decoder, reset-letter rank classification, and fixed-anchor mortality equivalence |
+| [`M4-O01`](SALVAGE.md#m4-o01-exact-toggle-fusion-leaves-an-immortal-core) | exact contextual toggle identities imply an invertible common-plane restriction |
+| [`M4-O02`](SALVAGE.md#m4-o02-two-private-state-phase-signature) | two-dimensional quotient phase ratios are constant or two-periodic; instantiate the Neary signature |
+| [`M4-O03`](SALVAGE.md#m4-o03-closed-serialization-collapse) | finite closed-token substitution empties exactly when its reachable dependency graph is acyclic |
+| [`M4-O04`](SALVAGE.md#m4-o04-exact-internal-final-code-defect) | binary morphism defect forces commuting upper images, contradicting the macro source |
+
+The odd-phase macro cut [`M4-S01`](SALVAGE.md#m4-s01-odd-phase-macro-cut) remains reported.
+Lean already defines the relevant phase residues and Table 2 tracks, but no theorem yet proves
+the even-track invariant through every reachable queue or the induced macro solvability
+equivalence. The direct first-return obstruction [`M4-O05`](SALVAGE.md#m4-o05-direct-two-state-first-return-recoding)
+also remains reported. Neither claim enters the checked theorem ledger.
+
+No `M₄(3)` undecidability theorem follows from the present corpus. The missing source is an
+undecidable binary two-state controlled scalar system, or a matrix-level open-residue compiler
+with a complete arbitrary-word converse.
+
 ## Modules
 
 | File | Responsibility |

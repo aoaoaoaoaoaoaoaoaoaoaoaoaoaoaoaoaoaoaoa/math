@@ -14,6 +14,7 @@ redistributable full text was located.
 | [DeMol10](de-mol-2010-binary-two-tag-decidability.md) | peer-reviewed Fundamenta Informaticae 2010; author manuscript | Decidability of binary deletion-width-two tag systems and the adjacent width-three frontier |
 | [DeMol11](de-mol-2011-simple-tag-systems.md) | peer-reviewed TCS 2011; author manuscript | Experimental and structural status of binary deletion-width-three tag systems |
 | [Kurilenko22](kurilenko-2022-post-tag-growth.md) | peer-reviewed Complex Systems 2022; arXiv copy | Unbounded growth in Post's width-three system; no universality or reachability decision theorem |
+| [FS23](fazekas-seki-2023-freezing-one-tag-states.md) | peer-reviewed AFL 2023 / EPTCS; CC-BY | Definition of one-tag systems with states and the exact source-model seam; no binary two-state universality bound |
 | [BPS19](bell-potapov-semukhin-2019-mortality-problem.md) | MFCS 2019; journal 2021 | Independent post-correction statement of the six-generator `3 × 3` bound |
 | [BB02](bournez-branicky-2002-low-dimensional-mortality.md) | peer-reviewed Theory Comput. Syst. 2002 | Decidability of two rational `2 × 2` generators and the rank-one-endpoint normal form |
 | [Dong23](dong-2023-semigroup-algorithms-survey.md) | peer-reviewed survey | Later matrix-semigroup context; no sharper bounded-generator result |
