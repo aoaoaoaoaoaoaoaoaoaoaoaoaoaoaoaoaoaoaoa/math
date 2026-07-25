@@ -3,7 +3,7 @@
 # requires-python = ">=3.13"
 # ///
 
-"""Explore finite-field shadows of the five-state setter's projective transfer."""
+"""Explore exact and finite-field shadows of both five-state setter digit orders."""
 
 from __future__ import annotations
 
@@ -16,11 +16,30 @@ from types import EllipsisType
 type Point = int | None
 
 
-def ternary_code(bits: str) -> int:
+@dataclass(frozen=True, slots=True)
+class SetterConstants:
+    rho: int
+    marker: int
+    scale: int
+    head: int
+    tail: int
+
+
+def ternary_code(bits: str, *, swapped: bool = False) -> int:
     value = 0
     for bit in bits:
-        value = 3 * value + (2 if bit == "1" else 1)
+        value = 3 * value + (
+            (1 if bit == "1" else 2) if swapped else (2 if bit == "1" else 1)
+        )
     return value
+
+
+def setter_constants(beta: int, *, swapped: bool = False) -> SetterConstants:
+    rho = 3**beta
+    marker = ternary_code("1" + "0" * beta, swapped=swapped)
+    scale = 3 * rho
+    head = marker + scale * ternary_code("1", swapped=swapped)
+    return SetterConstants(rho, marker, scale, head, head - 3 * marker)
 
 
 def tag_code(beta: int, letter: str) -> str:
@@ -91,16 +110,18 @@ class Transfer:
         return None
 
 
-def role_generators(beta: int, body: str, modulus: int) -> tuple[SideProduct, ...]:
+def role_generators(
+    beta: int, body: str, modulus: int, *, swapped: bool = False
+) -> tuple[SideProduct, ...]:
     upper_b = tag_code(beta, "b")
     upper_c = tag_code(beta, "c")
     lower_rule_c = "1" + "".join(tag_code(beta, letter) for letter in body) + "10"
 
     def role(upper: str, lower: str) -> SideProduct:
         return SideProduct(
-            ternary_code(upper) % modulus,
+            ternary_code(upper, swapped=swapped) % modulus,
             pow(3, len(upper), modulus),
-            ternary_code(lower) % modulus,
+            ternary_code(lower, swapped=swapped) % modulus,
             pow(3, len(lower), modulus),
         )
 
@@ -112,16 +133,18 @@ def role_generators(beta: int, body: str, modulus: int) -> tuple[SideProduct, ..
     )
 
 
-def exact_role_generators(beta: int, body: str) -> tuple[SideProduct, ...]:
+def exact_role_generators(
+    beta: int, body: str, *, swapped: bool = False
+) -> tuple[SideProduct, ...]:
     upper_b = tag_code(beta, "b")
     upper_c = tag_code(beta, "c")
     lower_rule_c = "1" + "".join(tag_code(beta, letter) for letter in body) + "10"
 
     def role(upper: str, lower: str) -> SideProduct:
         return SideProduct(
-            ternary_code(upper),
+            ternary_code(upper, swapped=swapped),
             3 ** len(upper),
-            ternary_code(lower),
+            ternary_code(lower, swapped=swapped),
             3 ** len(lower),
         )
 
@@ -133,8 +156,10 @@ def exact_role_generators(beta: int, body: str) -> tuple[SideProduct, ...]:
     )
 
 
-def side_semigroup(beta: int, body: str, modulus: int) -> frozenset[SideProduct]:
-    generators = role_generators(beta, body, modulus)
+def side_semigroup(
+    beta: int, body: str, modulus: int, *, swapped: bool = False
+) -> frozenset[SideProduct]:
+    generators = role_generators(beta, body, modulus, swapped=swapped)
     seen: set[SideProduct] = set(generators)
     queue = deque(generators)
     while queue:
@@ -148,15 +173,20 @@ def side_semigroup(beta: int, body: str, modulus: int) -> frozenset[SideProduct]
 
 
 def transfers(
-    products: frozenset[SideProduct], beta: int, modulus: int
+    products: frozenset[SideProduct],
+    beta: int,
+    modulus: int,
+    *,
+    swapped: bool = False,
 ) -> frozenset[Transfer] | None:
-    rho = pow(3, beta, modulus)
-    marker_value = (5 * rho - 1) * pow(2, -1, modulus) % modulus
-    marker_scale = 3 * rho % modulus
-    denominator = 2 * (rho + 1) % modulus
-    if denominator == 0:
+    constants = setter_constants(beta, swapped=swapped)
+    marker_value = constants.marker % modulus
+    marker_scale = constants.scale % modulus
+    setter_head = constants.head % modulus
+    setter_tail = constants.tail % modulus
+    if setter_tail == 0:
         return None
-    coefficient = -(17 * rho - 1) * pow(denominator, -1, modulus) % modulus
+    coefficient = -setter_head * pow(setter_tail, -1, modulus) % modulus
     return frozenset(
         Transfer(
             coefficient * product.lower_value % modulus,
@@ -284,24 +314,27 @@ def normalized_boundary_discrepancy(
 
 
 def find_false_integral_unit_pole(
-    beta: int, body: str, max_role_length: int
+    beta: int,
+    body: str,
+    max_role_length: int,
+    *,
+    swapped: bool = False,
 ) -> IntegralUnitPole | None:
     """Find a nonterminal valuation-one pole with integral normalized value."""
 
-    rho = 3**beta
-    marker = (5 * rho - 1) // 2
-    head = (17 * rho - 1) // 2
-    tail = rho + 1
-    generators = exact_role_generators(beta, body)
+    constants = setter_constants(beta, swapped=swapped)
+    generators = exact_role_generators(beta, body, swapped=swapped)
 
     def visit(
         product: SideProduct, word: tuple[int, ...], remaining: int
     ) -> IntegralUnitPole | None:
         if len(word) >= 2 and word[-1] in (1, 3):
-            punctuated_upper = marker + 3 * rho * product.upper_value
-            centered_pole = tail * punctuated_upper - head * product.lower_value
+            punctuated_upper = constants.marker + constants.scale * product.upper_value
+            centered_pole = (
+                constants.tail * punctuated_upper - constants.head * product.lower_value
+            )
             if three_adic_valuation(centered_pole) == 1:
-                numerator = -3 * head * marker * product.lower_value
+                numerator = -3 * constants.head * constants.marker * product.lower_value
                 normalized, remainder = divmod(numerator, centered_pole)
                 if (
                     remainder == 0
@@ -320,30 +353,30 @@ def find_false_integral_unit_pole(
     return visit(SideProduct(0, 1, 0, 1), (), max_role_length)
 
 
-def exact_transfer(product: SideProduct, start: Fraction, beta: int) -> Fraction | None:
-    rho = 3**beta
-    marker_value = (5 * rho - 1) // 2
-    marker_scale = 3 * rho
-    coefficient = Fraction(-(17 * rho - 1), 2 * (rho + 1))
+def exact_transfer(
+    product: SideProduct,
+    start: Fraction,
+    beta: int,
+    *,
+    swapped: bool = False,
+) -> Fraction | None:
+    constants = setter_constants(beta, swapped=swapped)
     denominator = (
-        marker_value + marker_scale * product.upper_value - product.lower_value * start
+        constants.marker
+        + constants.scale * product.upper_value
+        - product.lower_value * start
     )
     if denominator == 0:
         return None
-    numerator = (
-        product.lower_value * start
-        + marker_value * (product.upper_scale - 1)
-        - marker_scale * product.upper_value
+    return Fraction(constants.head, constants.tail) * (
+        1 - Fraction(constants.marker * product.upper_scale, denominator)
     )
-    return coefficient * Fraction(numerator, denominator)
 
 
-def exact_pole(product: SideProduct, beta: int) -> Fraction:
-    rho = 3**beta
-    marker_value = (5 * rho - 1) // 2
-    marker_scale = 3 * rho
+def exact_pole(product: SideProduct, beta: int, *, swapped: bool = False) -> Fraction:
+    constants = setter_constants(beta, swapped=swapped)
     return Fraction(
-        marker_value + marker_scale * product.upper_value,
+        constants.marker + constants.scale * product.upper_value,
         product.lower_value,
     )
 
@@ -488,6 +521,58 @@ def audit_centered_carry() -> None:
         assert Fraction(-head * marker * power, centered_c) == -marker
 
 
+def audit_swapped_digit_setter() -> None:
+    beta = 3
+    constants = setter_constants(beta, swapped=True)
+    assert constants == SetterConstants(27, 53, 81, 134, -25)
+
+    blocks = exact_blocks(beta, "bbcc", 3, swapped=True)
+    for product, (length, code) in blocks:
+        punctuated_upper = constants.marker + constants.scale * product.upper_value
+        centered_pole = (
+            constants.tail * punctuated_upper - constants.head * product.lower_value
+        )
+        assert centered_pole < 0
+        assert exact_pole(product, beta, swapped=True) > 0
+        expected_shell = beta if length == 1 and code in (1, 3) else 1
+        assert three_adic_valuation(centered_pole) == expected_shell
+
+    for width in range(3, 9):
+        values = setter_constants(width, swapped=True)
+        power = values.rho
+        upper_b = ternary_code(tag_code(width, "b"), swapped=True)
+        punctuated_b = values.marker + values.scale * upper_b
+        centered_b = values.tail * punctuated_b - 2 * values.head
+        assert centered_b == -power * (18 * power**2 - 40 * power + 17)
+        required_b = Fraction(
+            -power * values.head * values.marker * 2,
+            centered_b,
+        )
+        assert 1 < required_b < 2
+
+        punctuated_c = values.marker + values.scale
+        centered_c = values.tail * punctuated_c - 2 * values.head
+        assert centered_c == -power * values.head
+        assert (
+            Fraction(-power * values.head * values.marker * 2, centered_c)
+            == 2 * values.marker
+        )
+
+    assert find_exact_collision(beta, "bbcc", 5, swapped=True) is None
+    assert search_exact_orbits(beta, "bbcc", 3, 2, swapped=True) == OrbitSearch(
+        None, (95, 7979)
+    )
+    assert (
+        find_false_integral_unit_pole(
+            beta,
+            "bbcc",
+            8,
+            swapped=True,
+        )
+        is None
+    )
+
+
 def next_exact_layer(
     layer: list[tuple[SideProduct, int]],
     generators: tuple[SideProduct, ...],
@@ -500,31 +585,47 @@ def next_exact_layer(
 
 
 def find_exact_collision(
-    beta: int, body: str, max_role_length: int
+    beta: int,
+    body: str,
+    max_role_length: int,
+    *,
+    swapped: bool = False,
 ) -> Collision | None:
-    generators = exact_role_generators(beta, body)
+    generators = exact_role_generators(beta, body, swapped=swapped)
     poles: dict[Fraction, tuple[int, int]] = {}
     layer = [(SideProduct(0, 1, 0, 1), 0)]
     for length in range(1, max_role_length + 1):
         layer = next_exact_layer(layer, generators)
         for product, code in layer:
-            poles.setdefault(exact_pole(product, beta), (length, code))
+            poles.setdefault(
+                exact_pole(product, beta, swapped=swapped),
+                (length, code),
+            )
 
     layer = [(SideProduct(0, 1, 0, 1), 0)]
     for length in range(1, max_role_length + 1):
         layer = next_exact_layer(layer, generators)
         for product, code in layer:
             for start in (0, 1):
-                image = exact_transfer(product, Fraction(start), beta)
+                image = exact_transfer(
+                    product,
+                    Fraction(start),
+                    beta,
+                    swapped=swapped,
+                )
                 if image is not None and image in poles:
                     return Collision(start, (length, code), poles[image], image)
     return None
 
 
 def exact_blocks(
-    beta: int, body: str, max_role_length: int
+    beta: int,
+    body: str,
+    max_role_length: int,
+    *,
+    swapped: bool = False,
 ) -> tuple[tuple[SideProduct, tuple[int, int]], ...]:
-    generators = exact_role_generators(beta, body)
+    generators = exact_role_generators(beta, body, swapped=swapped)
     blocks: list[tuple[SideProduct, tuple[int, int]]] = []
     layer = [(SideProduct(0, 1, 0, 1), 0)]
     for length in range(1, max_role_length + 1):
@@ -538,8 +639,11 @@ def search_exact_orbits(
     body: str,
     max_role_length: int,
     max_square_runs: int,
+    *,
+    swapped: bool = False,
 ) -> OrbitSearch:
-    blocks = exact_blocks(beta, body, max_role_length)
+    blocks = exact_blocks(beta, body, max_role_length, swapped=swapped)
+    constants = setter_constants(beta, swapped=swapped)
     states: dict[Fraction, tuple[int, tuple[tuple[int, int], ...]]] = {
         Fraction(0): (0, ()),
         Fraction(1): (1, ()),
@@ -549,9 +653,16 @@ def search_exact_orbits(
         successors: dict[Fraction, tuple[int, tuple[tuple[int, int], ...]]] = {}
         for state, (start, path) in states.items():
             for product, word in blocks:
-                image = exact_transfer(product, state, beta)
+                image = exact_transfer(product, state, beta, swapped=swapped)
                 if image is None:
-                    if depth == 1 and start == 1:
+                    punctuated_upper = (
+                        constants.marker + constants.scale * product.upper_value
+                    )
+                    if (
+                        depth == 1
+                        and start == 1
+                        and punctuated_upper == product.lower_value
+                    ):
                         continue
                     return OrbitSearch(
                         OrbitCollision(start, (*path, word)),
@@ -563,9 +674,15 @@ def search_exact_orbits(
     return OrbitSearch(None, tuple(depths))
 
 
-def shadow(beta: int, body: str, modulus: int) -> Shadow | None:
-    products = side_semigroup(beta, body, modulus)
-    transfer_set = transfers(products, beta, modulus)
+def shadow(
+    beta: int,
+    body: str,
+    modulus: int,
+    *,
+    swapped: bool = False,
+) -> Shadow | None:
+    products = side_semigroup(beta, body, modulus, swapped=swapped)
+    transfer_set = transfers(products, beta, modulus, swapped=swapped)
     if transfer_set is None:
         return None
 
@@ -630,6 +747,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--max-role-length", type=int, default=0)
     parser.add_argument("--max-square-runs", type=int, default=0)
     parser.add_argument("--search-unit-poles", type=int, default=0)
+    parser.add_argument("--swapped-digits", action="store_true")
     parser.add_argument("--audit", action="store_true")
     return parser.parse_args()
 
@@ -638,6 +756,7 @@ def main() -> None:
     args = parse_args()
     if args.audit:
         audit_centered_carry()
+        audit_swapped_digit_setter()
         assert find_exact_collision(3, "bbcc", 5) is None
         audit_orbits = search_exact_orbits(3, "bbcc", 3, 2)
         assert audit_orbits == OrbitSearch(None, (96, 8064))
@@ -645,7 +764,12 @@ def main() -> None:
     if args.max_role_length:
         print(
             "exact collision:",
-            find_exact_collision(args.beta, args.body, args.max_role_length),
+            find_exact_collision(
+                args.beta,
+                args.body,
+                args.max_role_length,
+                swapped=args.swapped_digits,
+            ),
         )
     if args.max_square_runs:
         print(
@@ -655,6 +779,7 @@ def main() -> None:
                 args.body,
                 args.max_role_length,
                 args.max_square_runs,
+                swapped=args.swapped_digits,
             ),
         )
     if args.search_unit_poles:
@@ -664,10 +789,16 @@ def main() -> None:
                 args.beta,
                 args.body,
                 args.search_unit_poles,
+                swapped=args.swapped_digits,
             ),
         )
     for prime in args.primes:
-        result = shadow(args.beta, args.body, prime)
+        result = shadow(
+            args.beta,
+            args.body,
+            prime,
+            swapped=args.swapped_digits,
+        )
         print(prime, "singular constants" if result is None else result)
 
 

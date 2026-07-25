@@ -311,7 +311,10 @@ Three live routes remain.
    `Φ_z` must avoid their poles from the reset values `0` and `1/μ`, except for a genuine
    terminal match. The source boundary fixes `r=t/μ`
    ([`MM-O07`](SALVAGE.md#mm-o07-setter-parameter-rigidity)); generic parameter selection is
-   not a live escape.
+   not a live escape. Reversing the two nonzero ternary digits is lawful and strictly sharper:
+   [`MM-M04`](SALVAGE.md#mm-m04-swapped-digit-setter) preserves the regular decoder and mixed
+   separator while moving the common projective center below zero and making every transfer
+   orientation preserving.
 3. Use the scheduled compiler [`MM-C03`](SALVAGE.md#mm-c03-scheduled-binary-compiler).
    A fixed binary deletion-width-three universality theorem would finish the reduction
    immediately. None was located. The constructive alternative is to replace the variable
@@ -321,7 +324,7 @@ Three live routes remain.
    exact states are necessary at that width; it does not obstruct a same-zero clock
    compression or delimiter fusion.
 
-The setter is again the sharpest constructive route. Its next experiment is not another
+The swapped setter is now the sharpest constructive route. Its next experiment is not another
 five-dimensional word search: enumerate side products by `(U,V,A,B)`, propagate the
 one-dimensional projective state exactly, and seek a finite invariant separating every
 nonterminal orbit from every pole. Congruence quotients, `3`-adic valuation with pulse phase,
@@ -357,8 +360,14 @@ the valuation-one target survives there. Its distinguished normalized value
 [`MM-S06`](SALVAGE.md#mm-s06-valuation-one-divisor-normal-form) writes every
 other integral target on one of finitely many rays indexed by
 `q∣(ρ+1)` and `a₀∣Hμ`; only one positive parameter remains unbounded. The
-immediate question is whether the reverse Neary role transducer meets any
-nonterminal ray.
+digit swap removes that unbounded parameter:
+[`MM-S07`](SALVAGE.md#mm-s07-swapped-digit-finite-slope-reduction) makes the
+centered coefficient strictly negative and forces every integral
+valuation-one pole into a finite set of primitive slopes. The common scale of
+the two code integers remains unbounded, so this is not yet a finite word
+search. The immediate question is whether any nonterminal fixed-slope
+language survives the Neary pulse invariant; the only remaining
+distinguished-boundary `β`-shell value is `2μ`.
 A single explicit nonterminal pole orbit kills this family; a closed invariant proves
 `M₅(3)`. The same-zero binary root and fixed-width-three source remain independent fallbacks.
 

@@ -60,12 +60,14 @@ file owns the mathematical stock.
 | [`MM-M01`](#mm-m01-off-diagonal-companion-interface) | partial mechanism | off-diagonal rank-two bridge has a complete fracture grammar | audited | stock |
 | [`MM-M02`](#mm-m02-bordered-toggle) | partial mechanism | one lifted toggle has a stable rank-two third power | audited | parked |
 | [`MM-M03`](#mm-m03-five-state-setter-punctuation) | partial mechanism | a mixed delimiter word is an exact internal rank-one separator | audited | active |
+| [`MM-M04`](#mm-m04-swapped-digit-setter) | partial mechanism | reversing the nonzero ternary digits preserves the setter and makes every transfer orientation preserving | audited | active |
 | [`MM-S01`](#mm-s01-square-run-projective-normal-form) | structure theorem | malformed square runs reduce to rational projective pole avoidance | audited | active |
 | [`MM-S02`](#mm-s02-reset-zero-projective-peeling) | structure theorem | the ordinary reset cannot reach a false pole after one transfer | audited | active |
 | [`MM-S03`](#mm-s03-centered-setter-carry) | structure theorem | setter orbits obey an integer valuation-and-suffix carry recurrence | audited | active |
 | [`MM-S04`](#mm-s04-reverse-suffix-discrepancy) | structure theorem | setter resonance is a word-valued discrepancy queue with a bounded front fringe | audited | active |
 | [`MM-S05`](#mm-s05-distinguished-boundary-beta-shell) | obstruction | the distinguished-boundary `β`-shell cannot reach a false pole | audited | active |
 | [`MM-S06`](#mm-s06-valuation-one-divisor-normal-form) | structure theorem | every integral valuation-one pole lies on a finite family of divisor rays | audited | active |
+| [`MM-S07`](#mm-s07-swapped-digit-finite-slope-reduction) | structure theorem | the swapped setter reduces integral valuation-one poles to finitely many primitive slopes | audited | active |
 | [`M4-C01`](#m4-c01-two-state-pushout-compiler) | compiler | binary deterministic two-state scalar control compiles to three `4 × 4` matrices | audited | active |
 | [`M4-O01`](#m4-o01-exact-toggle-fusion-leaves-an-immortal-core) | obstruction | exact local toggle fusion preserves an invertible two-plane | audited | stock |
 | [`M4-O02`](#m4-o02-two-private-state-phase-signature) | obstruction | exact shared-channel phase ratios are constant or two-periodic | audited | active |
@@ -791,6 +793,71 @@ and separator identity.
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
 
+### MM-M04: Swapped-digit setter
+
+**Kind:** partial mechanism
+**Evidence:** audited
+**Disposition:** active
+
+Reverse the ordinary nonzero ternary digit embedding:
+
+```text
+0↦2,       1↦1.
+```
+
+Word equality, concatenation, length, and the entire Neary source theorem are
+unchanged. Put
+
+```text
+ρ=3^β,       μ=2ρ−1,       t=3ρ,       r=t/μ,
+H=5ρ−1,      R=2−ρ,
+f=(1,0,r)ᵀ, p=(0,−1,0)ᵀ, q=(0,0,r(2−r))ᵀ.
+```
+
+The same five-state setter construction, with `α=1+r`, satisfies
+
+```text
+rank S=3,      rank S²=2,      rank S³=1,
+Sⁿ=S³  for n≥3,
+S²A_cS³=λC̃L̃.
+```
+
+The regular rule/erasure decoder and the source-halting-to-mortality
+implication therefore survive exactly.
+
+For every square-run block, the induced projective matrix has determinant
+
+```text
+κVA>0,       κ=(1+r)/(μ(2−r)).
+```
+
+Thus every transfer is orientation preserving. In the scaled coordinate its
+common center is
+
+```text
+h=H/R<0,
+```
+
+whereas every pole `P/V` is positive.
+
+**Scope:** the sign separation does not itself prove avoidance. Arbitrary
+iterations can cross the center, and the remaining fixed-slope correspondence
+equations are asynchronous.
+
+**Use:** this is the preferred setter variant. Unlike
+[`MM-M03`](#mm-m03-five-state-setter-punctuation), it has a one-sided centered
+coefficient and the finite-slope theorem
+[`MM-S07`](#mm-s07-swapped-digit-finite-slope-reduction).
+
+**Artifact:** [`audits/m53-swapped-setter-2026-07-25.md`](audits/m53-swapped-setter-2026-07-25.md);
+[`tools/explore_setter_projective.py`](tools/explore_setter_projective.py).
+
+**Next:** formalize the parametric digit-order construction and decide the
+finite nonterminal slopes exposed by `MM-S07`.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
 ### MM-S01: Square-run projective normal form
 
 **Kind:** structure theorem
@@ -1193,6 +1260,89 @@ remain the unbounded branch.
 **Next:** intersect the divisor rays with the reverse Neary role transducer.
 Either prove that only `(a₀,v₀)=(-μ,1)` is realizable, or return the first
 explicit false integral pole.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S07: Swapped-digit finite-slope reduction
+
+**Kind:** structure theorem
+**Evidence:** audited
+**Disposition:** active
+
+For the swapped setter [`MM-M04`](#mm-m04-swapped-digit-setter), put
+
+```text
+D=ρ−2=−R>0.
+```
+
+Every nonempty block has
+
+```text
+C=RP−HV=−(DP+HV)<0.
+```
+
+At the distinguished boundary, a valuation-one pole reached from a normalized
+integer discrepancy `Δ` must satisfy
+
+```text
+(DP+HV)Δ=3HμV.                              (1)
+```
+
+Consequently
+
+```text
+0<Δ<3μ.
+```
+
+Reduce `P=gp`, `V=gv`, with `gcd(p,v)=1`, and put
+
+```text
+q=gcd(D,v),       D=qd,       v=qv₀.
+```
+
+Equation (1) becomes
+
+```text
+Δ(dp+Hv₀)=3Hμv₀.
+```
+
+Because `gcd(dp+Hv₀,v₀)=1`,
+
+```text
+dp+Hv₀ ∣ 3Hμ.
+```
+
+Thus every integral valuation-one pole belongs to an effectively finite set:
+
+```text
+q∣D,       v₀<3μ,       p≤3Hμ/d.
+```
+
+There is no unbounded divisor ray. The distinguished value remains exact:
+
+```text
+Δ=H       ↔       P=V.
+```
+
+In the `β`-shell, the single `b` erasure requires a rational discrepancy
+strictly between `1` and `2`, while the single `c` erasure requires `Δ=2μ`.
+
+**Scope:** finiteness of the primitive slopes is not finiteness of the target
+role words: the common multiplier `g` remains unbounded. One of the slopes is
+the original undecidable terminal equality. The theorem therefore narrows but
+does not decide projective avoidance.
+
+**Use:** replace the ordinary setter's unbounded negative rays by finitely many
+fixed-ratio correspondence languages. The next proof should show that every
+nonterminal accepted slope either contains a genuine terminal-match suffix or
+violates the Neary pulse invariant.
+
+**Artifact:** [`audits/m53-swapped-setter-2026-07-25.md`](audits/m53-swapped-setter-2026-07-25.md#one-sided-centered-carry);
+[`tools/explore_setter_projective.py`](tools/explore_setter_projective.py).
+
+**Next:** prove or refute the finite-slope endpoint theorem; separately exclude
+the residual `β`-shell value `2μ`.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
