@@ -22,6 +22,8 @@ redistributable full text was located.
 | [NR08](nuccio-rodaro-2008-2x2-mortality-slides.md) | SOFSEM 2008 author slides; paper peer-reviewed | Original decidability result for singular plus unimodular `2 × 2` integer generators |
 | [PS17](potapov-semukhin-2017-gl2z-singular-membership.md) | peer-reviewed MFCS 2017; CC-BY | Membership, hence mortality, decidable for singular plus unimodular `2 × 2` integer generators |
 | [PS17b](potapov-semukhin-2017-nonsingular-2x2-membership.md) | peer-reviewed SODA 2017; author copy | Membership decidable for arbitrary nonsingular `2 × 2` integer generators; determinant-growth machinery |
+| [BKP18](bournez-kurganskyy-potapov-2018-piecewise-affine-reachability.md) | peer-reviewed IJFCS 2018; author accepted manuscript | `p`-adic denominator-weight method for cooriented slopes on bounded intervals |
+| [DS25](dong-shafrir-2025-s-unit-equations.md) | arXiv v2 preprint; CC BY | Arbitrary-prime module `S`-unit equations lead to open linear-exponential systems; scope warning, not benchmark hardness |
 | [Nicolas08](nicolas-2008-gpcp-semi-thue.md) | arXiv v5 lecture notes | Definition and old open/undecidable bounds for bounded GPCP; fixes the four-generator counting convention |
 | [HH11](halava-holub-2011-binary-gpcp-reduction-tree.md) | peer-reviewed IJFCS 2011 | Reduction-tree and end-block structure at the decidable `GPCP(2)` endpoint; source-compression machinery |
 | [HHH99](halava-harju-hirvensalo-1999-marked-gpcp.md) | FCT 1999 author technical report; journal 2000 | Decidability of GPCP for marked morphisms; excludes marked three-letter source proposals |

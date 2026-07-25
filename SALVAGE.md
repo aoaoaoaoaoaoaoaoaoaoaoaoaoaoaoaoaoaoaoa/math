@@ -68,10 +68,15 @@ file owns the mathematical stock.
 | [`G3-S01`](#g3-s01-shift-equivariant-zero-incidence) | structure theorem | same-zero state dimension is equivariant projective incidence dimension | audited | active |
 | [`G3-M01`](#g3-m01-free-group-discrepancy-engine) | partial mechanism | free cancellation implements queue deletion with an all-path converse | reported | active |
 | [`D2-S01`](#d2-s01-projective-hard-core) | structure theorem | `M₂(3)` is equivalent to two-generator projective incidence | audited | active |
+| [`D2-S02`](#d2-s02-monotone-affine-path-form) | structure theorem | normalized affine words form monotone exponent paths | audited | stock |
 | [`D2-D01`](#d2-d01-projectively-unimodular-stratum) | decidable stratum | projectively unimodular hard-core instances are decidable | audited | stock |
 | [`D2-D02`](#d2-d02-invariant-pair-stratum) | decidable stratum | invariant projective pairs reduce to abelian-by-`C₂` reachability | reported | active |
 | [`D2-D03`](#d2-d03-common-multiplier-stratum) | decidable stratum | rational affine maps with one multiplier are decidable under regular control | reported | active |
 | [`D2-D04`](#d2-d04-single-base-affine-stratum) | decidable stratum | rational-subset incidence in `G_q^±` is decidable | reported | active |
+| [`D2-D05`](#d2-d05-prescribed-translation-count) | decidable stratum | prescribed translated-letter count is decidable by rational-base carries | audited | stock |
+| [`D2-D06`](#d2-d06-private-prime-peeling) | decidable stratum | a private multiplier prime decides every noncritical endpoint shell | audited | stock |
+| [`D2-D07`](#d2-d07-bounded-valuation-orthants) | decidable stratum | bounded cooriented affine families have finite successful state spaces | audited | stock |
+| [`D2-M01`](#d2-m01-benchmark-critical-shell) | partial mechanism | the mixed-prime benchmark reduces generically to one guarded `5`-adic shell | audited | active |
 
 ## Matrix Mortality
 
@@ -1090,6 +1095,47 @@ or encodes.
 **Next:** formalize the minimal-word case split and rational-to-integer transport when the
 dimension-two campaign enters its verification phase.
 
+### D2-S02: Monotone affine path form
+
+**Kind:** structure theorem
+**Evidence:** audited
+**Disposition:** stock
+
+Suppose the two projective generators share a rational fixed point. After
+sending it to infinity and removing the elementary cases, an affine conjugacy
+puts them in the form
+
+```text
+F(z)=az,      G(z)=bz+1,      a,b∈ℚ×.
+```
+
+Every operational word is uniquely
+
+```text
+F^m₀ G F^m₁ G ⋯ G F^mₙ,      mᵢ≥0.
+```
+
+With `M=Σmᵢ` and `sⱼ=Σᵢ₌ⱼⁿmᵢ`, its action is
+
+```text
+w(x)=a^M b^n x + Σⱼ₌₁ⁿ a^sⱼ b^(n−j),
+M≥s₁≥⋯≥sₙ≥0.
+```
+
+Conversely the monotone chain recovers every block length. The translation
+terms therefore occupy one ordered exponent path with one contribution in
+each `b`-layer; they are not independent `S`-units.
+
+**Scope:** this is a normal form, not a decision procedure. Projective
+source or target points at infinity are trivial because every affine map fixes
+infinity. If the second translation vanishes, the pair preserves `{0,∞}`. If
+both multipliers are one, reachability is a semilinear translation problem.
+
+**Use:** preserve the path order in every affine attack. General `S`-unit
+encodings that forget it may replace the problem by a strictly harder one.
+
+**Artifact:** [`audits/dimension-two-affine-peeling-2026-07-25.md`](audits/dimension-two-affine-peeling-2026-07-25.md#affine-normalization-and-path-form).
+
 ### D2-D01: Projectively unimodular stratum
 
 **Kind:** decidable stratum  
@@ -1168,3 +1214,192 @@ ambient single-base condition and the coset construction require independent che
 
 **Next:** audit the stabilizer calculation, effective word construction, and transfer through
 the index-two extension.
+
+### D2-D05: Prescribed translation count
+
+**Kind:** decidable stratum
+**Evidence:** audited
+**Disposition:** stock
+
+For normalized maps
+
+```text
+F(z)=az,      G(z)=bz+1,
+```
+
+rational endpoints, a prescribed number `n` of occurrences of `G`, and an
+optional regular control language, reachability is decidable.
+
+For `a=p/q` with `|p|≠q`, zero evaluation of any integer digit polynomial at
+`p/q` is recognized by a finite carry automaton. If
+
+```text
+P(X)=(qX−p)E(X),
+```
+
+its digits and carries obey
+
+```text
+dₖ=qeₖ₋₁−peₖ.
+```
+
+Scanning in the contracting coefficient direction bounds `|eₖ|` by the
+maximum digit size divided by `||p|−|q||`. For prescribed `n`, the endpoint
+equation has only `n+2` ordered coefficient markers; coincident markers add
+and arbitrary gaps encode the unbounded `F`-runs. A finite marker automaton,
+the carry automaton, and a DFA for reversed regular control can therefore be
+intersected. The cases `a=1` and `a=−1` reduce to equality and parity.
+
+**Scope:** `n` is supplied to the algorithm. This does not decide the
+unconstrained union over every translated-letter count.
+
+**Use:** any valuation, height, or congruence argument that restricts `n` to a
+finite computable set now yields a terminating affine reachability algorithm.
+
+**Artifact:** [`audits/dimension-two-affine-peeling-2026-07-25.md`](audits/dimension-two-affine-peeling-2026-07-25.md#fixed-translated-letter-count).
+
+### D2-D06: Private-prime peeling
+
+**Kind:** decidable stratum
+**Evidence:** audited
+**Disposition:** stock
+
+For
+
+```text
+F(z)=az,      G(z)=bz+1,
+```
+
+suppose some prime `p` satisfies `v_p(a)=0` and
+`β=v_p(b)<0`. In a word containing `n≥1` occurrences of `G`, the first
+translation term is the unique least-valued translation term. Its valuation
+differs from that of the endpoint term by the constant `v_p(x)+β`.
+
+Outside the critical source shell `v_p(x)+β=0`, the valuation of the target
+therefore determines the only possible `n`:
+
+```text
+n=(v_p(y)−v_p(x))/β        if v_p(x)+β<0,
+n=1+v_p(y)/β               if v_p(x)+β>0.
+```
+
+Impossible integers are rejected; `y=0`, `x=0`, and `n=0` are handled
+separately. [`D2-D05`](#d2-d05-prescribed-translation-count) decides the
+remaining fixed-count instance, including regular control.
+
+If `v_p(b)>0`, reverse the word and conjugate by `u=−bz`. The translated
+multiplier becomes `b⁻¹`, and the corresponding noncritical condition is
+`v_p(y)≠0`.
+
+**Scope:** the theorem needs a prime absent from the pure multiplier `a` but
+present in `b`. It leaves one exact source shell for negative valuation, or
+one target shell for positive valuation.
+
+**Use:** peel mixed-prime affine pairs before invoking module or building
+machinery. It decides every prescribed endpoint outside the critical shell
+without bounding the pure-letter runs.
+
+**Artifact:** [`audits/dimension-two-affine-peeling-2026-07-25.md`](audits/dimension-two-affine-peeling-2026-07-25.md#private-prime-peeling).
+
+### D2-D07: Bounded valuation orthants
+
+**Kind:** decidable stratum
+**Evidence:** audited
+**Disposition:** stock
+
+Let finitely many rational affine maps `fᵢ(z)=aᵢz+bᵢ` preserve a common
+bounded rational interval. Suppose that at every prime the weights
+
+```text
+−v_p(a₁), …, −v_p(a_k)
+```
+
+have one weak sign. Then rational point-to-point reachability is decidable,
+including under regular control.
+
+For nonpositive slope weights, denominator weight never exceeds the maximum
+of its current value and the translation weights. For nonnegative slope
+weights, once the current weight exceeds every translation weight, it cannot
+decrease. A successful path therefore has an effective denominator bound at
+every input prime. Rational affine operations introduce no new denominator
+primes, and a bounded interval contains only finitely many rationals with a
+fixed denominator bound. The problem reduces to finite graph reachability.
+
+The hypotheses are effective: rowwise valuation signs are computable, and a
+common invariant rational interval is a rational linear-feasibility problem.
+For example,
+
+```text
+z↦(2/3)z,      z↦(4/5)z+1/5
+```
+
+is covered on `[0,1]` despite multiplicatively independent slopes.
+
+**Scope:** boundedness is essential to finiteness. Incompatible valuation
+signs at even one prime remain outside the theorem.
+
+**Use:** this is the first audited mixed-prime affine stratum beyond the
+common-multiplier and single-base records.
+
+**Source:** the deterministic denominator-weight precursor is
+[`bournez-kurganskyy-potapov-2018-piecewise-affine-reachability.md`](references/bournez-kurganskyy-potapov-2018-piecewise-affine-reachability.md).
+The nondeterministic regular-control theorem is proved in
+[`audits/dimension-two-affine-peeling-2026-07-25.md`](audits/dimension-two-affine-peeling-2026-07-25.md#bounded-valuation-orthants).
+
+### D2-M01: Benchmark critical shell
+
+**Kind:** partial mechanism
+**Evidence:** audited
+**Disposition:** active
+
+The benchmark
+
+```text
+z↦(2/3)z+1,      z↦(3/5)z+1
+```
+
+is conjugate by `h(z)=15−5z` to
+
+```text
+F(z)=(2/3)z,      G(z)=(3/5)z+1.
+```
+
+Private-prime peeling at `p=5` decides every original source satisfying
+`v₅(3−x)≠0`. A second chart and reversed peeling at `p=2` decide every target
+satisfying `v₂(6y−15)≠0`. Only the endpoint shell
+
+```text
+v₅(3−x)=0,      v₂(6y−15)=0
+```
+
+survives both tests.
+
+In normalized coordinates, write a critical state as `5u` with `v₅(u)=0`.
+A block `F^mG` remains critical exactly when
+
+```text
+T_m(u)=(1+3u(2/3)^m)/5
+```
+
+is a `5`-adic unit. Its first guard digit forces odd `m` when `u≡2 mod 5`,
+even `m` when `u≡3 mod 5`, and forbids continuation for residues `1,4`.
+Once a path leaves the shell, it cannot return, and every fixed exit has a
+decidable suffix by [`D2-D06`](#d2-d06-private-prime-peeling).
+
+**Scope:** the guarded maps describe every maximal shell-preserving prefix.
+They do not yet decide the infinite union of possible exits. This corrects the
+stronger claim that the benchmark had been reduced to a self-contained shell
+reachability problem.
+
+**Use:** concentrate the benchmark attack on an effective representation of
+reachable critical states together with accepting exits. The main alternatives
+are a finite redundant base-`5` carry nucleus or an unbounded-counter
+simulation through growing exponent congruences.
+
+**Artifact:** [`audits/dimension-two-affine-peeling-2026-07-25.md`](audits/dimension-two-affine-peeling-2026-07-25.md#critical-shell-dynamics).
+
+**Next:** decide whether the exponent residues required modulo `5^k` admit a
+finite synchronized representation across all carry depths.
+
+**Issue:** [#7, Formalize affine peeling and decide the `M₂(3)` benchmark
+shell](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/7).

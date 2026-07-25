@@ -88,6 +88,23 @@ mortality in every dimension `10+n`.
 
 ## Audited But Unformalized
 
+The dimension-two affine audit produced five independently checked records:
+
+| Record | Formalization obligation |
+| --- | --- |
+| [`D2-S02`](SALVAGE.md#d2-s02-monotone-affine-path-form) | affine conjugacy, elementary case split, operational word normal form, and recovery of block lengths |
+| [`D2-D05`](SALVAGE.md#d2-d05-prescribed-translation-count) | primitive linear-polynomial divisibility, bounded carries in both scan directions, ordered-marker automaton, regular control, and `a=±1` cases |
+| [`D2-D06`](SALVAGE.md#d2-d06-private-prime-peeling) | unique-minimum valuation calculation, zero endpoints, fixed-count reduction, reversed language, and positive private valuation |
+| [`D2-D07`](SALVAGE.md#d2-d07-bounded-valuation-orthants) | localization support, denominator bounds in both orthants, invariant-interval recognition, finite graph, and regular-control product |
+| [`D2-M01`](SALVAGE.md#d2-m01-benchmark-critical-shell) | benchmark conjugacies, endpoint-shell translation, guarded `5`-adic transition, parity guard, and no-return-after-exit theorem |
+
+The shell record does not decide the benchmark. Every fixed exit has a decidable suffix, but an
+arbitrary critical prefix can produce infinitely many exits. A formal benchmark theorem must
+represent that union effectively rather than hide it behind pointwise decidability. The audit is
+[`audits/dimension-two-affine-peeling-2026-07-25.md`](audits/dimension-two-affine-peeling-2026-07-25.md);
+formalization and the shell attack are tracked in
+[#7](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/7).
+
 The latest `M₅(3)` delimiter attack yielded four audited records:
 
 | Record | Formalization obligation |

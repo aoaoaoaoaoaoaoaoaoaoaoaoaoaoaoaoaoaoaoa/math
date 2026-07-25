@@ -1,6 +1,6 @@
 # Matrix Mortality Frontier Campaign
 
-Established-result ledger and dimension-two research audit: 2026-07-24. A question mark means
+Established-result ledger and dimension-two research audit: 2026-07-25. A question mark means
 “not resolved by any valid result found in the present literature audit,” not an assertion that
 no unpublished argument exists.
 
@@ -511,10 +511,17 @@ reachability. The project-derived extensions are indexed with their exact eviden
 - affine maps with a common rational multiplier:
   [`D2-D03`](SALVAGE.md#d2-d03-common-multiplier-stratum);
 - rational subsets of one single-base affine group:
-  [`D2-D04`](SALVAGE.md#d2-d04-single-base-affine-stratum).
+  [`D2-D04`](SALVAGE.md#d2-d04-single-base-affine-stratum);
+- prescribed translated-letter count:
+  [`D2-D05`](SALVAGE.md#d2-d05-prescribed-translation-count);
+- affine pairs with a private multiplier prime outside one endpoint shell:
+  [`D2-D06`](SALVAGE.md#d2-d06-private-prime-peeling);
+- bounded affine families with cooriented valuation vectors:
+  [`D2-D07`](SALVAGE.md#d2-d07-bounded-valuation-orthants).
 
-Only `D2-D01` has passed an independent project audit. The remaining three are research stock,
-not publication theorems.
+`D2-D01` and `D2-D05`–`D2-D07` have passed independent project audits. The invariant-pair,
+common-multiplier, and single-base records remain reported research stock, not publication
+theorems.
 
 Simultaneous triangularization alone is not a solved stratum. It yields rational affine
 reachability
@@ -524,8 +531,8 @@ z ↦ a_i z+b_i,
 ```
 
 whose general two-map case remains part of the wall. The provisional common-multiplier and
-single-base theorems cover substantial subfamilies but do not settle mixed multiplicative
-directions.
+single-base theorems and the audited valuation strata cover substantial subfamilies but do not
+settle every mixed multiplicative direction.
 
 ### Exact unresolved residue
 
@@ -533,15 +540,48 @@ Two qualitatively different classes remain after the preceding tests.
 
 #### Mixed-prime affine systems
 
-These have a common rational fixed point but genuinely independent multiplier valuations, for
-example
+These have a common rational fixed point but genuinely independent multiplier valuations.
+After affine normalization, every non-elementary pair has the form
 
 ```text
-z ↦ (2/3)z+1,       z ↦ (3/5)z+1.
+F(z)=az,      G(z)=bz+1.
 ```
 
-The slopes are neither integral, equal, powers of one rational base, nor elements of one
-`{±qⁿ}` group. This is already a two-map, one-dimensional, virtually solvable residue.
+Its words obey the monotone exponent-path theorem
+[`D2-S02`](SALVAGE.md#d2-s02-monotone-affine-path-form). A prescribed number of `G` letters is
+decidable by rational-base carries, and a private prime often determines that number directly.
+Bounded cooriented valuation families are finite-state even when their slopes are
+multiplicatively independent.
+
+The benchmark
+
+```text
+z ↦ (2/3)z+1,       z ↦ (3/5)z+1
+```
+
+is therefore no longer wholly opaque. It is conjugate to
+
+```text
+F(z)=(2/3)z,      G(z)=(3/5)z+1.
+```
+
+Private-prime tests decide every endpoint pair outside
+
+```text
+v₅(3−x)=0,      v₂(6y−15)=0.
+```
+
+Inside that shell, every maximal shell-preserving prefix is governed by
+
+```text
+T_m(u)=(1+3u(2/3)^m)/5,
+v₅(u)=v₅(T_m(u))=0.
+```
+
+The exact scope and the remaining infinite-exit seam are
+[`D2-M01`](SALVAGE.md#d2-m01-benchmark-critical-shell). The general affine residue still
+includes pairs with no private prime, no bounded invariant interval, and incompatible valuation
+signs.
 
 #### Non-elementary projective systems
 
@@ -570,6 +610,7 @@ touch the non-elementary case.
 | Import the standard PCP encoding | two independent free-word tapes do not embed in `2×2` complex matrices |
 | Track only determinant or Smith form | equal arithmetic invariants can have different projective orbits |
 | Assume projective height descends | determinant-growing words may act projectively as the identity |
+| Invoke a general module `S`-unit algorithm | the arbitrary three-prime case leads to open linear-exponential systems, and forgetting the monotone path destroys useful structure |
 
 These are exclusion tests for future proposals. Any attack relying on one of them must identify
 the additional hypothesis that repairs the failure.
@@ -629,7 +670,14 @@ common finite carry nucleus. Canonical expansions are not privileged; the single
 expansion for `BS(1,q)` is evidence that annotation can turn nonregular arithmetic into a
 regular language.
 
-The decisive experiment is to compare reachable carry-state growth for ordinary continued
+For the affine benchmark, the first target is narrower: decide whether the guarded maps
+
+```text
+T_m(u)=(1+3u(2/3)^m)/5
+```
+
+have a finite redundant base-`5` carry nucleus that also recognizes accepting shell exits. For
+the non-elementary residue, compare reachable carry-state growth for ordinary continued
 fractions, slow continued fractions, Stern–Brocot paths, and redundant multi-prime expansions.
 
 #### 3. Characteristic-zero affine modules
@@ -640,8 +688,9 @@ a rank-one characteristic-zero module-by-abelian group generated by two affine m
 `S`-unit relations, Laurent-module normal forms, or effective semilinearity are the likely
 invariants.
 
-The mixed-prime pair `(2/3,3/5)` is the benchmark. A method that cannot decide it has not crossed
-the affine residue.
+The unresolved critical shell of the `(2/3,3/5)` pair is the benchmark. Generic endpoints are
+already peeled by `D2-D06`; a method that cannot decide the shell has not crossed the affine
+residue.
 
 #### 4. Rational subsets and relative normal forms
 
@@ -749,9 +798,10 @@ universal computation.
 5. Run the `M₃(4)` program on three separate tracks: shift-equivariant point-line synthesis,
    the closed-path subgroup of Carvalho's smallest transducer, and total ternary
    synchronization codes. Do not collapse their distinct proof obligations into one prompt.
-6. Fan the `M₂(3)` chapter into independent attacks on adelic cone types, redundant
-   numeration, characteristic-zero affine modules, parabolic rational subsets, trace/height
-   descent, finite-obstruction saturation, and valuation universality.
+6. Formalize `D2-S02` and `D2-D05`–`D2-D07`, then attack the guarded `5`-adic critical shell
+   with a finite carry nucleus and a counter-simulation falsifier in parallel. Keep the
+   non-elementary lanes independent: adelic cone types, parabolic rational subsets,
+   trace/height descent, finite-obstruction saturation, and valuation universality.
 7. Synthesize the returned attacks by the discriminating signals above; do not average
    incompatible hypotheses into one generic mortality prompt.
 
