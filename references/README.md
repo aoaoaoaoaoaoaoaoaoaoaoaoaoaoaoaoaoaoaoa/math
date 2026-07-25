@@ -10,6 +10,10 @@ redistributable full text was located.
 | [HHH07](halava-harju-hirvensalo-2007-claus-instances.md) | peer-reviewed IJFCS 2007 | Closest prior art: forced-endpoint absorption into a rank-one idempotent |
 | [Neary13](neary-2013-four-pair-pcp-superseded-claim.md) | one-version technical report; claim not retained | Historical five-matrix claim based on a claimed four-pair PCP construction |
 | [Neary15](neary-2015-five-pair-pcp.md) | peer-reviewed STACS 2015 | Lemma 9 restricted-tag universality and exact four ordinary pairs; terminal converse audited as defective |
+| [CM63](cocke-minsky-1963-tag-universality-memo.md) | MIT AI memo; published in JACM 1964 | Universality at deletion width two with a state-dependent, nonbinary alphabet |
+| [DeMol10](de-mol-2010-binary-two-tag-decidability.md) | peer-reviewed Fundamenta Informaticae 2010; author manuscript | Decidability of binary deletion-width-two tag systems and the adjacent width-three frontier |
+| [DeMol11](de-mol-2011-simple-tag-systems.md) | peer-reviewed TCS 2011; author manuscript | Experimental and structural status of binary deletion-width-three tag systems |
+| [Kurilenko22](kurilenko-2022-post-tag-growth.md) | peer-reviewed Complex Systems 2022; arXiv copy | Unbounded growth in Post's width-three system; no universality or reachability decision theorem |
 | [BPS19](bell-potapov-semukhin-2019-mortality-problem.md) | MFCS 2019; journal 2021 | Independent post-correction statement of the six-generator `3 × 3` bound |
 | [BB02](bournez-branicky-2002-low-dimensional-mortality.md) | peer-reviewed Theory Comput. Syst. 2002 | Decidability of two rational `2 × 2` generators and the rank-one-endpoint normal form |
 | [Dong23](dong-2023-semigroup-algorithms-survey.md) | peer-reviewed survey | Later matrix-semigroup context; no sharper bounded-generator result |

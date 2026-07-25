@@ -16,6 +16,10 @@ four-tile terminal equation
 four-tile terminal equation
   ↔ scalar zero reachability for two 6 × 6 integer matrices;
 
+for each fixed deletion width β:
+four-tile terminal equation
+  ↔ scalar zero reachability for two (β+2) × (β+2) integer matrices;
+
 mortality of the emitted five 3 × 3 integer matrices
   ↔ mortality of two 10 × 10 integer matrices
   ↔ mortality of two (10+n) × (10+n) integer matrices.
@@ -63,6 +67,16 @@ is nonzero, and transposition plus word reversal gives two generators with commo
 `e₁`. The terminal equation is therefore equivalent to scalar zero reachability under both the
 free-monoid and nonempty free-semigroup conventions.
 
+For the scheduled binary compiler at deletion width `β`, Lean checks two explicit
+`(β+2) × (β+2)` matrices. The input bit selects the tag letter; its position modulo `β`
+selects deletion or rule semantics. A total decoder assigns a role to every bit, and the
+coefficient identity holds for every binary word over every commutative ring. Reversed stroke
+encoding is surjective onto every tile history. If a coefficient vanishes, the terminal-match
+normal form forces a complete tile history, so `β` divides the binary-word length. At width
+three and nonempty body, a symbolic `5 × 5` Hankel minor is nonsingular. Every exact rational
+representation of the same series therefore has at least five states, matching the native
+five-state representation.
+
 For the `10 × 10` mortality compiler, Lean first checks a complete prefix transducer for the
 code `0, 100, 101, 110, 111`. Its block-row theorem covers every binary word and every starting
 prefix state. The word `00` synchronizes all four states, so mortality of the twelve-state
@@ -88,6 +102,8 @@ mortality in every dimension `10+n`.
 | `PairedCompression.lean` | side-normal representation, paired-role compression, and arbitrary-word decoding |
 | `PairedMortality.lean` | common-column mortality converse and exact integer `4 × 4` family |
 | `PairedBinary.lean` | total two-bit decoder and exact six-state scalar representation |
+| `ScheduledBinary.lean` | fixed-width clock compiler, total decoder, and malformed-word converse |
+| `ScheduledBinaryRank.lean` | exact width-three rank-five certificate and universal exact-state lower bound |
 | `WeightedTransducer.lean` | deterministic matrix transducers and the arbitrary-word block-row theorem |
 | `PrefixMortality.lean` | complete prefix decoder, twelve-state realization, and ten-state common-image restriction |
 | `LintAudit.lean` | package-wide default mathlib environment lint |
@@ -134,6 +150,12 @@ mortality in every dimension `10+n`.
 | Canonical structured `Z₆(2)` instance iff tag halting | `nearyScalarZero62_hasZero_iff_tagHaltsFrom` |
 | Free-monoid `Z₆(2)` instance iff tag halting | `nearyScalarZero62_hasZeroStar_iff_tagHaltsFrom` |
 | Both `Z₆(2)` generators fix `e₁` | `nearyScalarZero62_fixes_anchor` |
+| Every scheduled binary word has the decoded source coefficient | `scheduledRow_wordProduct`, `scheduledCoefficient_eq_sideCoefficient` |
+| Every tile history has a scheduled binary encoding | `decodeScheduled_historyCode` |
+| A scheduled zero has no incomplete clock cycle | `decodeScheduled_is_tileHistory_of_coefficient_zero`, `scheduledCoefficient_zero_length_dvd` |
+| Scheduled scalar zero iff the terminal equation and tag halting | `scheduledBinary_zero_iff_terminal_match`, `scheduledBinary_zero_iff_tagHaltsFrom` |
+| Width-three scheduled series has a nonsingular `5 × 5` Hankel minor | `scheduledWidthThreeHankel_det_ne_zero` |
+| Every exact width-three rational realization needs five states | `scheduledWidthThree_exact_state_lower_bound`, `scheduledWidthThree_native_state_card`, `scheduledWidthThree_native_represents` |
 | Every binary prefix-machine word has one decoded block per row | `prefixMachine_run`, `WeightedTransducer.wordProduct_apply` |
 | Prefix-machine mortality iff five-matrix mortality | `prefixMachine_mortal_iff_normalized` |
 | Both prefix generators share the ten-dimensional image | `prefixProjection_generator` |
@@ -202,6 +224,14 @@ conditional on a computable source reduction. The mathematical undecidability co
 Neary's peer-reviewed Lemma 9 at that external boundary. CHHN's frontier transports and
 bibliographic priority claims are external to Lean and are not dependencies of the direct
 compilers.
+
+The scheduled compiler introduces a separate source-width seam. Neary's published construction
+sets `β = 10p`, where `p` is the simulated cyclic-tag program period. The fixed-width audit found
+no universality theorem for the required binary deletion-width-three family. Cocke and Minsky
+fix deletion width two only by allowing the alphabet to grow; the adjacent binary width-three
+class remains unresolved in the located literature. The width-three Lean theorem is therefore
+a conditional five-state reduction and an exact-rank result, not an established undecidable
+cell.
 
 ## Prior Formalizations
 

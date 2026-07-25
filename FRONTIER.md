@@ -119,6 +119,22 @@ resulting two `6×6` integer matrices preserve the source coefficient on every b
 odd final bit preserves the coefficient, and reversed block encoding is surjective. Transpose
 and word reversal give structured `Z̊₆(2)`.
 
+A second binary compiler exploits the stroke schedule rather than role factorization. At fixed
+deletion width `β`, position modulo `β` determines whether the selected tag letter acts as a
+deletion or a rule. Two `(β+2)×(β+2)` integer matrices then preserve the source coefficient on
+every binary word. Reversed stroke encoding is surjective, and a zero coefficient forces a
+complete tile history; incomplete clock cycles cannot create witnesses. At `β=3`, the native
+series has exact rational rank five for every nonempty body. These claims are formalized in
+`ScheduledBinary.lean` and `ScheduledBinaryRank.lean`; see
+[`MM-C03`](SALVAGE.md#mm-c03-scheduled-binary-compiler) and
+[`MM-O05`](SALVAGE.md#mm-o05-width-three-scheduled-rank).
+
+This does not add a frontier point. Neary's universality compiler sets `β=10p`, with `p` the
+cyclic-tag program period. The fixed-width audit found no universality theorem for the required
+binary deletion-width-three family. At width three the construction would imply `Z₅(2)`,
+`M₅(3)`, and `R₆(2)`; at the presently established variable width it gives no fixed matrix
+dimension. See `audits/scheduled-binary-fixed-width-2026-07-24.md`.
+
 Full mortality requires coding the four payloads and the rank-one separator. The complete
 prefix code
 
@@ -153,7 +169,7 @@ The unknown cells immediately below this staircase are:
 | Cell | What would suffice | Automatic reward |
 | --- | --- | --- |
 | `M₃(4)` | three-active-role fixed-boundary PCP / `GPCP(3)`, or a new same-dimension generator compiler | by CHHN, also `M₉(2)` |
-| `M₅(3)` | a five-state binary same-zero root, or a five-dimensional toggle/separator fusion | supersedes `M₆(3)`; `M₁₀(2)` is already known |
+| `M₅(3)` | a five-state binary same-zero root, a toggle/separator fusion, or fixed-width-three scheduled universality | supersedes `M₆(3)`; `M₁₀(2)` is already known |
 | `M₉(2)` | a zero-set-preserving compiler not obtained by restricting the exact ten-state binary decoder | improves the two-generator threshold by one |
 | `M₂(k≥3)` | a qualitatively different decidability or undecidability argument | settles the dimension-two wall |
 
@@ -176,7 +192,7 @@ tax [`MM-O03`](SALVAGE.md#mm-o03-two-channel-boundary-tax) charges two additiona
 exact diagonal rank-two bridge. Such a bridge therefore also requires dimension at least six.
 Both conclusions concern exact series; neither constrains another series with the same zero set.
 
-Two live architectures remain.
+Three live routes remain.
 
 1. Construct a five-state binary series with nonsingular letter matrices, the source zero set
    on complete two-bit blocks, and nonzero values on odd words; then adjoin the ordinary
@@ -189,10 +205,18 @@ Two live architectures remain.
    grammar once a physical control word realizes it. The bordered-toggle mechanism
    [`MM-M02`](SALVAGE.md#mm-m02-bordered-toggle) supplies a rank-two stable third power, but
    mixed `S²` runs and malformed selector placements remain unresolved.
+3. Use the scheduled compiler [`MM-C03`](SALVAGE.md#mm-c03-scheduled-binary-compiler).
+   A fixed binary deletion-width-three universality theorem would finish the reduction
+   immediately. None was located. The constructive alternative is to replace the variable
+   phase clock by a constant-state delimiter or punctuation mechanism and prove that every
+   malformed placement is excluded by the terminal-match normal form. The width-three
+   rank-five theorem [`MM-O05`](SALVAGE.md#mm-o05-width-three-scheduled-rank) shows that five
+   exact states are necessary at that width; it does not obstruct a same-zero clock
+   compression or delimiter fusion.
 
-The next useful calculation is a symbolic classification of fifth-coordinate couplings and
-their maximal-run grammar. Further bounded searches on a benchmark instance cannot settle
-either architecture.
+The next bounded expert audit targets scheduled delimiter fusion and its all-word converse.
+The next internal calculation remains a symbolic classification of fifth-coordinate couplings
+and their maximal-run grammar. Further benchmark enumeration cannot settle these routes.
 
 ### 2. Two-generator realization: `M₉(2)`
 
@@ -618,8 +642,10 @@ universal computation.
 
 1. Audit and formalize `MM-O01`, `MM-O03`, `MM-O04`, and `G3-O01`; keep exact-series and
    exact-macro scope explicit.
-2. Attack the two surviving `M₅(3)` architectures: a five-state same-zero binary root and a
-   five-dimensional toggle/separator fusion with a complete maximal-run grammar.
+2. Attack the three surviving `M₅(3)` routes: a five-state same-zero binary root, a
+   five-dimensional toggle/separator fusion with a complete maximal-run grammar, and
+   constant-state scheduled delimiter fusion. Treat fixed-width-three universality as a
+   separate source theorem, not as an assumed compiler property.
 3. Search for a zero-set-preserving `M₉(2)` compiler rather than another invariant restriction
    of the exact ten-state decoder.
 4. Run the `M₃(4)` program on three separate tracks: shift-equivariant point-line synthesis,

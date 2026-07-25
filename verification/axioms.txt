@@ -73,6 +73,22 @@
  Classical.choice,
  Quot.sound]
 'MatrixMortality.pairedBinary_zero_iff_tagHaltsFrom' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.scheduledRow_wordProduct' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.scheduledCoefficient_eq_sideCoefficient' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.decodeScheduled_historyCode' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.scheduledGenerator_transpose_fixes_boundaryColumn' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.decodeScheduled_is_tileHistory_of_coefficient_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.scheduledCoefficient_zero_length_dvd' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.scheduledBinary_zero_iff_terminal_match' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.scheduledBinary_zero_iff_tagHaltsFrom' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.scheduledWidthThreeHankel_det_ne_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.scheduledWidthThree_exact_state_lower_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.scheduledWidthThree_native_state_card' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.scheduledWidthThree_native_represents' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.Undecidability.nearyScalarZero62_hasZero_iff_hasZeroStar' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]

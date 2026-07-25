@@ -35,6 +35,29 @@ theorem ternaryCode_append (x y : List Bool) :
     ternaryCode (x ++ y) = 3 ^ y.length * ternaryCode x + ternaryCode y := by
   simp [ternaryCode, List.reverse_append, Nat.ofDigits_append, add_comm, mul_comm]
 
+@[simp] theorem ternaryCode_singleton (bit : Bool) :
+    ternaryCode [bit] = ternaryDigit bit := by
+  cases bit <;> decide
+
+theorem ternaryCode_cons (bit : Bool) (word : List Bool) :
+    ternaryCode (bit :: word) =
+      3 ^ word.length * ternaryDigit bit + ternaryCode word := by
+  simpa using ternaryCode_append [bit] word
+
+theorem ternaryCode_lower_bound (word : List Bool) (word_nonempty : word ≠ []) :
+    3 ^ (word.length - 1) ≤ ternaryCode word := by
+  cases word with
+  | nil => exact False.elim (word_nonempty rfl)
+  | cons bit tail =>
+      rw [ternaryCode_cons]
+      cases bit with
+      | false =>
+          simp only [List.length_cons, Nat.add_sub_cancel, ternaryDigit]
+          omega
+      | true =>
+          simp only [List.length_cons, Nat.add_sub_cancel, ternaryDigit]
+          omega
+
 theorem digits_ternaryCode (word : List Bool) :
     Nat.digits 3 (ternaryCode word) = word.reverse.map ternaryDigit := by
   apply Nat.digits_ofDigits 3 (by decide)

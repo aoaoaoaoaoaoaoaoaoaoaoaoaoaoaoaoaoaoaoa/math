@@ -286,19 +286,30 @@ theorem pairedCoefficient_eq_sideCoefficient (R : Type*) [CommRing R] (β : Nat)
     sideTerminalColumn, sidePcpMatrix, sideTailBasis, Matrix.vecHead, Matrix.vecTail,
     Matrix.mulVec, Matrix.dotProduct, Fin.sum_univ_succ]
 
-theorem sidePcpMatrix_mulVec_sideTailBasis_head (x y : List Bool) :
-    (sidePcpMatrix ℤ x y *ᵥ sideTailBasis ℤ) 0 =
-      (ternaryCode x : ℤ) - ternaryCode y := by
+theorem sidePcpMatrix_mulVec_sideTailBasis_head (R : Type*) [CommRing R]
+    (x y : List Bool) :
+    (sidePcpMatrix R x y *ᵥ sideTailBasis R) 0 =
+      (ternaryCode x : R) - ternaryCode y := by
   simp [sidePcpMatrix, sideTailBasis, Matrix.vecHead, Matrix.vecTail, Matrix.mulVec,
     Matrix.dotProduct, Fin.sum_univ_succ]
   ring
 
 theorem sidePcpMatrix_mulVec_sideTailBasis_head_rat (x y : List Bool) :
     (sidePcpMatrix ℚ x y *ᵥ sideTailBasis ℚ) 0 =
-      (ternaryCode x : ℚ) - ternaryCode y := by
-  simp [sidePcpMatrix, sideTailBasis, Matrix.vecHead, Matrix.vecTail, Matrix.mulVec,
-    Matrix.dotProduct, Fin.sum_univ_succ]
-  ring
+      (ternaryCode x : ℚ) - ternaryCode y :=
+  sidePcpMatrix_mulVec_sideTailBasis_head ℚ x y
+
+/-- Closed arithmetic form of the side-normal coefficient. -/
+theorem sideCoefficient_eq_ternaryCode_sub (R : Type*) [CommRing R]
+    (β : Nat) (body : List TagLetter)
+    (word : List NearyTile) :
+    sideCoefficient R β body word =
+      (ternaryCode (spell (nearyUpper β) word ++ nearyMarker β) : R) -
+        ternaryCode (spell (nearyLower β body) word) := by
+  rw [sideCoefficient, sideTerminalColumn, Matrix.mulVec_mulVec,
+    sideTileProduct_eq_sidePcpMatrix, ← sidePcpMatrix_append,
+    sidePcpMatrix_mulVec_sideTailBasis_head R]
+  simp
 
 theorem sideCoefficient_eq_zero_iff_terminal_match (β : Nat) (body : List TagLetter)
     (word : List NearyTile) :
@@ -306,7 +317,7 @@ theorem sideCoefficient_eq_zero_iff_terminal_match (β : Nat) (body : List TagLe
       spell (nearyUpper β) word ++ nearyMarker β = spell (nearyLower β body) word := by
   rw [sideCoefficient, sideTerminalColumn, Matrix.mulVec_mulVec,
     sideTileProduct_eq_sidePcpMatrix, ← sidePcpMatrix_append]
-  rw [sidePcpMatrix_mulVec_sideTailBasis_head, sub_eq_zero, Int.ofNat_inj]
+  rw [sidePcpMatrix_mulVec_sideTailBasis_head ℤ, sub_eq_zero, Int.ofNat_inj]
   simpa using ternaryCode_injective.eq_iff
 
 theorem sideCoefficient_eq_zero_iff_terminal_match_rat (β : Nat) (body : List TagLetter)

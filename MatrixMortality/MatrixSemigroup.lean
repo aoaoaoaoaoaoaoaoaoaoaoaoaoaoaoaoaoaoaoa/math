@@ -102,6 +102,11 @@ theorem castMatrix_mul {m n o : Type*} [Fintype n]
     castMatrix (left * right) = castMatrix left * castMatrix right :=
   Matrix.map_mul
 
+theorem castMatrix_det {n : Type*} [Fintype n] [DecidableEq n]
+    (matrix : Matrix n n ℤ) :
+    (castMatrix matrix).det = (matrix.det : ℚ) :=
+  ((Int.castRingHom ℚ).map_det matrix).symm
+
 theorem castMatrix_eq_zero_iff {m n : Type*} (matrix : Matrix m n ℤ) :
     castMatrix matrix = 0 ↔ matrix = 0 := by
   constructor

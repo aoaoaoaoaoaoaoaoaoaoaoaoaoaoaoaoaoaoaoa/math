@@ -3,6 +3,8 @@ import MatrixMortality.PairedBinary
 import MatrixMortality.PairedCompression
 import MatrixMortality.PairedMortality
 import MatrixMortality.PrefixMortality
+import MatrixMortality.ScheduledBinary
+import MatrixMortality.ScheduledBinaryRank
 import MatrixMortality.Undecidability.BinaryProblems
 import MatrixMortality.Undecidability.NearyData
 import MatrixMortality.Undecidability.NearyProblems

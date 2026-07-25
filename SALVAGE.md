@@ -44,10 +44,12 @@ file owns the mathematical stock.
 | --- | --- | --- | --- | --- |
 | [`MM-C01`](#mm-c01-fixed-anchor-rank-one-compiler) | compiler | common-fixed-column scalar zero to mortality | formalized | graduated |
 | [`MM-C02`](#mm-c02-common-image-restriction) | compiler | mortality-preserving restriction to a common image | formalized | graduated |
+| [`MM-C03`](#mm-c03-scheduled-binary-compiler) | compiler | fixed-width tag strokes to a total two-letter scalar series | formalized | graduated |
 | [`MM-O01`](#mm-o01-all-placement-packing-rank) | obstruction | literal CHHN packing has exact rank six for every separator placement | reported | active |
 | [`MM-O02`](#mm-o02-one-sided-phase-overlap) | obstruction | standard common-line phase fusion becomes one-sided | reported | parked |
 | [`MM-O03`](#mm-o03-two-channel-boundary-tax) | obstruction | exact diagonal rank-two punctuation costs two states beyond Hankel rank | audited | active |
 | [`MM-O04`](#mm-o04-uniform-rank-four-paired-series) | certificate | the paired scalar series has exact Hankel rank four | audited | active |
+| [`MM-O05`](#mm-o05-width-three-scheduled-rank) | obstruction | the width-three scheduled series has exact rank five | formalized | graduated |
 | [`MM-M01`](#mm-m01-off-diagonal-companion-interface) | partial mechanism | off-diagonal rank-two bridge has a complete fracture grammar | audited | stock |
 | [`MM-M02`](#mm-m02-bordered-toggle) | partial mechanism | one lifted toggle has a stable rank-two third power | audited | parked |
 | [`G3-O01`](#g3-o01-four-role-macro-irreducibility) | obstruction | exact nonerasing macros cannot reduce the four source roles to three letters | audited | active |
@@ -101,6 +103,42 @@ products absent from the ambient family.
 [`PrefixMortality.lean`](MatrixMortality/PrefixMortality.lean).
 
 **Use:** this is the reusable core of the `12 → 10` binary mortality compiler.
+
+### MM-C03: Scheduled binary compiler
+
+**Kind:** compiler
+**Evidence:** formalized
+**Disposition:** graduated
+
+A deletion-width-`β` tag stroke consists of one rule role followed by `β−1`
+erasures. After reversal its phase schedule is fixed. Two generators can therefore
+select only the tag letter while a cyclic `β`-phase lower channel selects rule or
+erasure semantics. The representation has coordinates
+
+```text
+(affine, upper, lower₀, …, lower_{β−1})
+```
+
+and dimension `β+2`.
+
+The decoder is total on the binary free monoid and preserves the source
+coefficient exactly. Every lawful tile history has an explicit reverse-stroke
+encoding. Conversely, a zero coefficient invokes the terminal-match normal form,
+so the decoded roles form complete strokes; in particular, every zero word has
+length divisible by `β`. Unfinished clock cycles cannot create zeros.
+
+**Scope:** this is a fixed-width compiler, not a fixed-dimensional reduction from
+the present undecidable source. Neary's universality compiler sets `β=10·period`.
+
+**Artifact:** `MatrixMortality.scheduledCoefficient_eq_sideCoefficient`,
+`MatrixMortality.decodeScheduled_historyCode`,
+`MatrixMortality.scheduledCoefficient_zero_length_dvd`, and
+`MatrixMortality.scheduledBinary_zero_iff_tagHaltsFrom` in
+[`ScheduledBinary.lean`](MatrixMortality/ScheduledBinary.lean).
+
+**Use:** any future undecidable source at constant deletion width `β` immediately
+gives a two-generator scalar representation in dimension `β+2`. At `β=3`, the
+conditional rewards are `Z₅(2)`, `M₅(3)`, and `R₆(2)`.
 
 ### MM-O01: All-placement packing rank
 
@@ -244,6 +282,38 @@ publication snapshot.
 
 **Issue:** [#3, Formalize the exact-realization obstructions for
 `M₅(3)`](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/3).
+
+### MM-O05: Width-three scheduled rank
+
+**Kind:** obstruction
+**Evidence:** formalized
+**Disposition:** graduated
+
+For deletion width three and every nonempty tag body, the scheduled binary
+coefficient series has exact rational Hankel rank five. A symbolic `5×5` minor
+using
+
+```text
+prefixes = {ε, 0, 1, 00, 10},
+suffixes = {ε, 0, 1, 00, 01}
+```
+
+factors into explicit reachable and observable matrices with nonzero
+determinants. Every exact rational representation therefore has at least five
+states; the native scheduled representation has exactly five.
+
+**Scope:** exact coefficients, deletion width three, and nonempty body. The
+generic experimental claim `rank=β+2` is not part of the theorem. Same-zero
+representations remain outside every Hankel-rank lower bound.
+
+**Artifact:** `MatrixMortality.scheduledWidthThree_exact_state_lower_bound`,
+`MatrixMortality.scheduledWidthThreeHankel_det_ne_zero`, and
+`MatrixMortality.scheduledWidthThree_native_state_card` in
+[`ScheduledBinaryRank.lean`](MatrixMortality/ScheduledBinaryRank.lean).
+
+**Use:** reject exact state compression of the width-three clock below five.
+The live fixed-table routes must change the zero series, change the source, or
+fuse the clock with a delimiter or mortality interface.
 
 ### MM-M01: Off-diagonal companion interface
 
