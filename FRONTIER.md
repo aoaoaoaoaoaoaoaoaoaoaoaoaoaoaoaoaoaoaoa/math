@@ -326,6 +326,12 @@ five-dimensional word search: enumerate side products by `(U,V,A,B)`, propagate 
 one-dimensional projective state exactly, and seek a finite invariant separating every
 nonterminal orbit from every pole. Congruence quotients, `3`-adic valuation with pulse phase,
 signed interval partitions, and self-synchronizing suffix states are the first candidates.
+A first peeling theorem
+[`MM-S02`](SALVAGE.md#mm-s02-reset-zero-projective-peeling) now excludes every false pole
+after one transfer from the ordinary reset. It also shows why valuation alone is insufficient:
+all poles occupy two `3`-adic shells, while bounded malformed orbits rapidly saturate their
+finite residue classes. The next abstraction must retain mismatch depth together with pulse or
+suffix history.
 A single explicit nonterminal pole orbit kills this family; a closed invariant proves
 `M₅(3)`. The same-zero binary root and fixed-width-three source remain independent fallbacks.
 

@@ -96,6 +96,7 @@ fi
 readonly PYTHON_CHECKERS=(
   tools/audit_prefix_algebra.py
   tools/audit_six_state_sandwich.py
+  tools/explore_setter_projective.py
   tools/scour_source.py
 )
 uvx --from ruff==0.15.22 ruff check "${PYTHON_CHECKERS[@]}"
@@ -103,6 +104,7 @@ uvx --from ruff==0.15.22 ruff format --check "${PYTHON_CHECKERS[@]}"
 uvx --from ty==0.0.58 ty check "${PYTHON_CHECKERS[@]}"
 uv run --script tools/audit_prefix_algebra.py
 uv run --script tools/audit_six_state_sandwich.py
+uv run --script tools/explore_setter_projective.py --audit --primes 3
 uv run --script tools/scour_source.py
 
 assert_manifest_route() {

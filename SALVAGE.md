@@ -61,6 +61,7 @@ file owns the mathematical stock.
 | [`MM-M02`](#mm-m02-bordered-toggle) | partial mechanism | one lifted toggle has a stable rank-two third power | audited | parked |
 | [`MM-M03`](#mm-m03-five-state-setter-punctuation) | partial mechanism | a mixed delimiter word is an exact internal rank-one separator | audited | active |
 | [`MM-S01`](#mm-s01-square-run-projective-normal-form) | structure theorem | malformed square runs reduce to rational projective pole avoidance | audited | active |
+| [`MM-S02`](#mm-s02-reset-zero-projective-peeling) | structure theorem | the ordinary reset cannot reach a false pole after one transfer | audited | active |
 | [`M4-C01`](#m4-c01-two-state-pushout-compiler) | compiler | binary deterministic two-state scalar control compiles to three `4 × 4` matrices | audited | active |
 | [`M4-O01`](#m4-o01-exact-toggle-fusion-leaves-an-immortal-core) | obstruction | exact local toggle fusion preserves an invertible two-plane | audited | stock |
 | [`M4-O02`](#m4-o02-two-private-state-phase-signature) | obstruction | exact shared-channel phase ratios are constant or two-periodic | audited | active |
@@ -856,6 +857,65 @@ nonterminal pole orbit refutes this candidate.
 **Next:** seek a finite invariant based on congruences, `3`-adic valuation and
 pulse phase, signed intervals, or self-synchronizing code suffixes. Search
 states are projective values, not five-dimensional vectors.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S02: Reset-zero projective peeling
+
+**Kind:** structure theorem
+**Evidence:** audited
+**Disposition:** active
+
+Scale the projective coordinate in [`MM-S01`](#mm-s01-square-run-projective-normal-form) by
+`y=μx` and put
+
+```text
+h=(17ρ−1)/(2(ρ+1)),      ρ=3^β.
+```
+
+For a nonempty role block `z`, let
+
+```text
+P_z=[spell(nearyUpper,z)·10^β]₃,
+V_z=[spell(nearyLower,z)]₃,
+A_z=3^|spell(nearyUpper,z)|.
+```
+
+Then
+
+```text
+Ψ_z(y)=h(1−μA_z/(P_z−V_zy)),      π_z=P_z/V_z.
+```
+
+Every pole lies in one of two exact `3`-adic shells:
+
+```text
+v₃(π_z−h)=β  if z is one erasure role,
+v₃(π_z−h)=1  otherwise.
+```
+
+For an orbit leaving the ordinary reset,
+
+```text
+v₃(Ψ_u(0)−h)=|spell(nearyUpper,u)|.
+```
+
+Equality with a pole therefore forces that upper length to be `1` or `β`. Length one gives
+`Ψ_u(0)=1`, and a pole at `1` is precisely a genuine terminal match. Length `β` forces `u`
+to consist only of `c` roles, but its image is smaller than both single-erasure poles.
+
+**Scope:** excludes a false pole after one preceding transfer from reset `0`. It does not
+control longer orbits or one-transfer images from the distinguished boundary `1`.
+
+**Use:** any counterexample to the setter candidate must contain at least two nontrivial
+projective transfers after an ordinary reset. Future invariants should track `3`-adic mismatch
+depth together with the pulse or suffix state.
+
+**Artifact:** [`audits/setter-projective-peeling-2026-07-25.md`](audits/setter-projective-peeling-2026-07-25.md).
+
+**Next:** lift the shell calculation from valuation alone to a finite suffix-carry state.
+Residue-only projective abstractions saturate on the benchmark and cannot prove avoidance.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
