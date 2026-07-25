@@ -88,6 +88,21 @@ mortality in every dimension `10+n`.
 
 ## Audited But Unformalized
 
+The internal-sandwich audit produced one general compiler and three exact obstructions:
+
+| Record | Formalization obligation |
+| --- | --- |
+| [`MM-C04`](SALVAGE.md#mm-c04-internal-word-sandwich-minimization) | invariant reachable space, largest invariant unobservable subspace, quotient mortality equivalence, block-Hankel minimality, effective rational construction, and the zero-dimensional branch |
+| [`MM-O08`](SALVAGE.md#mm-o08-full-algebra-prefix-pair) | the identity `B₀³=uvᵀ`, uniform reachability and observability determinants, positivity over the source envelope, and the outer-product basis of `M₁₀(ℚ)` |
+| [`MM-O09`](SALVAGE.md#mm-o09-two-state-ternary-prefix-image) | classification of full ternary trees with five leaves and the joint-image argument for exact two-state weighted decoders |
+| [`MM-O10`](SALVAGE.md#mm-o10-additive-toggle-fusion-cycle) | idempotent normalization and the identities `F²=I−TP`, `F³=F`, and `rank F=rank F²=3` |
+
+The full-algebra theorem concerns the exact physical pair only. It does not exclude a same-zero
+nine-state series or another decoder. The reconstruction and promotion boundary are recorded in
+[`audits/internal-sandwich-prefix-algebra-2026-07-25.md`](audits/internal-sandwich-prefix-algebra-2026-07-25.md);
+formalization and the six-state sandwich search are tracked in
+[#8](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/8).
+
 The dimension-two affine audit produced five independently checked records:
 
 | Record | Formalization obligation |

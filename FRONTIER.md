@@ -171,7 +171,7 @@ The unknown cells immediately below this staircase are:
 | `M₃(4)` | three-active-role fixed-boundary PCP / `GPCP(3)`, or a new same-dimension generator compiler | by CHHN, also `M₉(2)` |
 | `M₄(3)` | an undecidable binary two-state controlled scalar source, or an open-residue matrix macro | by CHHN, also `M₈(2)` |
 | `M₅(3)` | a five-state binary same-zero root, a toggle/separator fusion, or fixed-width-three scheduled universality | supersedes `M₆(3)`; `M₁₀(2)` is already known |
-| `M₉(2)` | a zero-set-preserving compiler not obtained by restricting the exact ten-state binary decoder | improves the two-generator threshold by one |
+| `M₉(2)` | a changed physical pair, changed-zero-series compiler, or nonlinear reduction; the present pair spans `M₁₀(ℚ)` | improves the two-generator threshold by one |
 | `M₂(k≥3)` | a qualitatively different decidability or undecidability argument | settles the dimension-two wall |
 
 The scalar result `Z₆(2)` gives `M₆(3)` after adjoining a separator; that mortality point was
@@ -198,12 +198,19 @@ Three obstructions recur.
    only one orbit hit. Exact coefficient preservation carries information the target never
    asks for, but discarding it makes malformed-word soundness the central theorem.
 
-The common problem is therefore **unbounded synchronization under adversarial word choice with
-no explicit control-state budget**. A successful construction must store semantic phase outside
-an ordinary finite closed parser: in an open suffix or tail residue, free cancellation, a
-numerical carry, projective incidence, a semigroup ideal, or an arithmetic normal form. The
-decidability side of `M₂(3)` asks for the dual result: prove that this hidden state nevertheless
-admits an effective finite or semilinear description.
+The internal-word sandwich compiler [`MM-C04`](SALVAGE.md#mm-c04-internal-word-sandwich-minimization)
+qualifies this diagnosis. Exact invariant subquotients do not need a fresh malformed-word
+proof when a physical low-rank repair word already exists: wrapping any quotient zero by that
+word lifts it upstairs. Their obstruction is instead algebraic saturation. For the present
+ten-state pair, [`MM-O08`](SALVAGE.md#mm-o08-full-algebra-prefix-pair) proves that the word
+span is already the full matrix algebra.
+
+Outside that exact-repair lane, the common problem remains **unbounded synchronization under
+adversarial word choice with no explicit control-state budget**. A successful construction must
+store semantic phase outside an ordinary finite closed parser: in an open suffix or tail
+residue, free cancellation, a numerical carry, projective incidence, a semigroup ideal, or an
+arithmetic normal form. The decidability side of `M₂(3)` asks for the dual result: prove that
+this hidden state nevertheless admits an effective finite or semilinear description.
 
 This changes the value of the frontier. The remaining cells are no longer principally missed
 packings. They ask whether zero-set semantics, nonlocal residues, or arithmetic structure can
@@ -275,14 +282,21 @@ tax [`MM-O03`](SALVAGE.md#mm-o03-two-channel-boundary-tax) charges two additiona
 exact diagonal rank-two bridge. Such a bridge therefore also requires dimension at least six.
 Both conclusions concern exact series; neither constrains another series with the same zero set.
 
-Three live routes remain.
+Four live routes remain.
 
-1. Construct a five-state binary series with nonsingular letter matrices, the source zero set
+1. Apply the internal-word sandwich compiler
+   [`MM-C04`](SALVAGE.md#mm-c04-internal-word-sandwich-minimization) to an established
+   six-state, three-generator family. Enumerate its nonzero low-rank physical words and compute
+   the reachable/observable dimension of each matrix-valued series `WA_wU`. A rank at most five
+   proves `M₅(3)` immediately, with the arbitrary-word converse repaired by `ωzω`. The
+   all-placement scalar obstruction `MM-O01` does not by itself determine these rank-two block
+   series.
+2. Construct a five-state binary series with nonsingular letter matrices, the source zero set
    on complete two-bit blocks, and nonzero values on odd words; then adjoin the ordinary
    rank-one separator. The unused identity `(V_b^D,B_b^D)=(V_c^D,B_c^D)` suggests processing
    the common deletion channel before the symbol bit is known. A four-state root would prove
    the stronger `M₄(3)` result.
-2. Fuse the paired toggle and separator inside one five-dimensional generator. The
+3. Fuse the paired toggle and separator inside one five-dimensional generator. The
    off-diagonal companion interface
    [`MM-M01`](SALVAGE.md#mm-m01-off-diagonal-companion-interface) supplies a complete bridge
    grammar once a physical control word realizes it. Pure delimiter powers cannot supply
@@ -296,7 +310,7 @@ Three live routes remain.
    terminal match. The source boundary fixes `r=t/μ`
    ([`MM-O07`](SALVAGE.md#mm-o07-setter-parameter-rigidity)); generic parameter selection is
    not a live escape.
-3. Use the scheduled compiler [`MM-C03`](SALVAGE.md#mm-c03-scheduled-binary-compiler).
+4. Use the scheduled compiler [`MM-C03`](SALVAGE.md#mm-c03-scheduled-binary-compiler).
    A fixed binary deletion-width-three universality theorem would finish the reduction
    immediately. None was located. The constructive alternative is to replace the variable
    phase clock by a constant-state delimiter or punctuation mechanism and prove that every
@@ -305,8 +319,9 @@ Three live routes remain.
    exact states are necessary at that width; it does not obstruct a same-zero clock
    compression or delimiter fusion.
 
-The setter candidate is now the sharpest route. Its next experiment is not another
-five-dimensional word search: enumerate the side products by `(U,V,A,B)`, propagate the
+The first calculation is now the finite internal-sandwich scan. If every candidate has exact
+dimension six, the setter remains the sharpest constructive route. Its next experiment is not
+another five-dimensional word search: enumerate side products by `(U,V,A,B)`, propagate the
 one-dimensional projective state exactly, and seek a finite invariant separating every
 nonterminal orbit from every pole. Congruence quotients, `3`-adic valuation with pulse phase,
 signed interval partitions, and self-synchronizing suffix states are the first candidates.
@@ -315,15 +330,19 @@ A single explicit nonterminal pole orbit kills this family; a closed invariant p
 
 ### 3. Two-generator realization: `M₉(2)`
 
-The complete prefix decoder has a common image of dimension exactly ten for the present source:
-its common left annihilator has dimension two, and the restricted pair has no common right
-kernel. No further image restriction or kernel quotient of this decoder reaches nine states.
+The exact obstruction is now complete. The physical word `000` in the restricted ten-state
+pair is rank one, but its scalar sandwich has exact Hankel rank ten. More strongly, the word
+products of the pair span `M₁₀(ℚ)`
+([`MM-O08`](SALVAGE.md#mm-o08-full-algebra-prefix-pair)). The pair therefore has no nonzero
+proper invariant subspace or quotient, and every nonzero internal-word sandwich has exact
+realization dimension ten. Common-image restriction, kernel quotient, reachable/observable
+minimization, and internal punctuation cannot reach nine states from this pair.
 
-The surviving route may preserve only the zero set. It must use a different transducer
-skeleton, change nonzero values, or exploit a source identity beyond paired upper-channel
-agreement. A literal binary prefix tree for five source symbols has four internal states, so a
-nine-state construction cannot retain a complete three-dimensional source state at every
-prefix.
+The surviving route must change the physical pair, change its nonzero values while preserving
+zeros, or use a nonlinear compiler. A literal binary prefix tree for five source symbols has
+four internal states, while a literal two-state ternary tree cannot obtain a five-state
+common-image restriction ([`MM-O09`](SALVAGE.md#mm-o09-two-state-ternary-prefix-image)).
+Neither statement excludes a state-dependent gauge or same-zero transducer.
 
 ### 4. Three-letter correspondence and direct mortality: `M₃(4)`
 
@@ -789,12 +808,13 @@ universal computation.
    incidence equations. Reject every finite closed-token source before appendant search.
 2. Audit and formalize `MM-O01`, `MM-O03`, `MM-O04`, and `G3-O01`; keep exact-series and
    exact-macro scope explicit.
-3. Attack the three surviving `M₅(3)` routes: prove or refute the setter candidate's exact
-   projective avoidance property; construct a five-state same-zero binary root; or find a
-   constant-state scheduled delimiter fusion. Treat fixed-width-three universality as a
-   separate source theorem, not as an assumed compiler property.
-4. Search for a zero-set-preserving `M₉(2)` compiler rather than another invariant restriction
-   of the exact ten-state decoder.
+3. Compute the internal-word block-Hankel quotients of the safe six-state, three-generator
+   families using `MM-C04`. In parallel, prove or refute the setter candidate's projective
+   avoidance property, construct a five-state same-zero binary root, or find a constant-state
+   scheduled delimiter fusion. Treat fixed-width-three universality as a separate source
+   theorem.
+4. Formalize `MM-C04` and `MM-O08`. Search for `M₉(2)` only through a changed physical pair,
+   changed nonzero behavior, or a nonlinear compiler.
 5. Run the `M₃(4)` program on three separate tracks: shift-equivariant point-line synthesis,
    the closed-path subgroup of Carvalho's smallest transducer, and total ternary
    synchronization codes. Do not collapse their distinct proof obligations into one prompt.

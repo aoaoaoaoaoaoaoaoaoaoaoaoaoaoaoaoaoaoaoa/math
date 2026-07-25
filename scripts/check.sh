@@ -93,9 +93,14 @@ if rg -n 'set_option[[:space:]]+(autoImplicit[[:space:]]+true|warningAsError[[:s
   exit 1
 fi
 
-uvx --from ruff==0.15.22 ruff check tools/scour_source.py
-uvx --from ruff==0.15.22 ruff format --check tools/scour_source.py
-uvx --from ty==0.0.58 ty check tools/scour_source.py
+readonly PYTHON_CHECKERS=(
+  tools/audit_prefix_algebra.py
+  tools/scour_source.py
+)
+uvx --from ruff==0.15.22 ruff check "${PYTHON_CHECKERS[@]}"
+uvx --from ruff==0.15.22 ruff format --check "${PYTHON_CHECKERS[@]}"
+uvx --from ty==0.0.58 ty check "${PYTHON_CHECKERS[@]}"
+uv run --script tools/audit_prefix_algebra.py
 uv run --script tools/scour_source.py
 
 assert_manifest_route() {

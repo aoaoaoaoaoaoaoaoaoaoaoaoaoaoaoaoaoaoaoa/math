@@ -45,6 +45,7 @@ file owns the mathematical stock.
 | [`MM-C01`](#mm-c01-fixed-anchor-rank-one-compiler) | compiler | common-fixed-column scalar zero to mortality | formalized | graduated |
 | [`MM-C02`](#mm-c02-common-image-restriction) | compiler | mortality-preserving restriction to a common image | formalized | graduated |
 | [`MM-C03`](#mm-c03-scheduled-binary-compiler) | compiler | fixed-width tag strokes to a total two-letter scalar series | formalized | graduated |
+| [`MM-C04`](#mm-c04-internal-word-sandwich-minimization) | compiler | internal low-rank words repair reachable/observable minimization | audited | active |
 | [`MM-O01`](#mm-o01-all-placement-packing-rank) | obstruction | literal CHHN packing has exact rank six for every separator placement | reported | active |
 | [`MM-O02`](#mm-o02-one-sided-phase-overlap) | obstruction | standard common-line phase fusion becomes one-sided | reported | parked |
 | [`MM-O03`](#mm-o03-two-channel-boundary-tax) | obstruction | exact diagonal rank-two punctuation costs two states beyond Hankel rank | audited | active |
@@ -52,6 +53,9 @@ file owns the mathematical stock.
 | [`MM-O05`](#mm-o05-width-three-scheduled-rank) | obstruction | the width-three scheduled series has exact rank five | formalized | graduated |
 | [`MM-O06`](#mm-o06-pure-power-punctuation-obstruction) | obstruction | an exact isolated toggle cannot also punctuate through a pure power | audited | stock |
 | [`MM-O07`](#mm-o07-setter-parameter-rigidity) | obstruction | source-boundary alignment fixes the setter parameter | audited | stock |
+| [`MM-O08`](#mm-o08-full-algebra-prefix-pair) | obstruction | the exact ten-state prefix pair spans the full matrix algebra | audited | active |
+| [`MM-O09`](#mm-o09-two-state-ternary-prefix-image) | obstruction | a literal two-state ternary decoder has no five-state common-image restriction | audited | stock |
+| [`MM-O10`](#mm-o10-additive-toggle-fusion-cycle) | obstruction | the normalized toggle-minus-separator ansatz has rank three at every power | audited | stock |
 | [`MM-M01`](#mm-m01-off-diagonal-companion-interface) | partial mechanism | off-diagonal rank-two bridge has a complete fracture grammar | audited | stock |
 | [`MM-M02`](#mm-m02-bordered-toggle) | partial mechanism | one lifted toggle has a stable rank-two third power | audited | parked |
 | [`MM-M03`](#mm-m03-five-state-setter-punctuation) | partial mechanism | a mixed delimiter word is an exact internal rank-one separator | audited | active |
@@ -156,6 +160,68 @@ the present undecidable source. Neary's universality compiler sets `β=10·perio
 **Use:** any future undecidable source at constant deletion width `β` immediately
 gives a two-generator scalar representation in dimension `β+2`. At `β=3`, the
 conditional rewards are `Z₅(2)`, `M₅(3)`, and `R₆(2)`.
+
+### MM-C04: Internal-word sandwich minimization
+
+**Kind:** compiler
+**Evidence:** audited
+**Disposition:** active
+
+Let `A : Σ → M_d(K)` and suppose a nonempty physical word `ω` has nonzero product
+
+```text
+E=A_ω=UW,
+```
+
+where `U : K^r → K^d` and `W : K^d → K^r` both have rank `r`. Define
+
+```text
+R=span{A_w im U : w∈Σ*},
+N={x∈R : WA_wx=0 for every w∈Σ*},
+H=R/N.
+```
+
+Both `R` and `N` are invariant. Let `B_a` be the action induced on `H`. Then
+
+```text
+{A_a} is mortal  ⇔  {B_a} is mortal.
+```
+
+The forward implication passes a zero product to every invariant subquotient. Conversely, if
+`B_z=0`, then `A_zR⊆N`, so `WA_zU=0` and the entirely physical repair word satisfies
+
+```text
+A_{ωzω}=EA_zE=U(WA_zU)W=0.
+```
+
+No syntax or exterior nonvanishing hypothesis is required. Moreover,
+
+```text
+dim H = rank [WA_{uv}U]_{u,v∈Σ*},
+```
+
+the flattened block-Hankel rank of the matrix-valued series `F(w)=WA_wU`. The quotient is its
+minimal exact linear realization.
+
+**Scope:** the result is exact-linear. It does not preserve only the zero set, and it does not
+lower dimension unless the sandwich series has smaller block-Hankel rank. If `H=0`, an
+effective positive-dimensional reduction emits a fixed mortal yes-instance. Over `ℚ`, reachable
+closure and the largest invariant subspace of `R∩ker W` are effective; independent nonzero
+denominator clearing preserves mortality.
+
+**Use:** search a known-safe mortality family for an internal low-rank word, minimize its
+matrix-valued sandwich, and inherit a complete arbitrary-word converse without adding a
+generator. For `M₅(3)`, compute rank-two sandwich realizations inside the established
+six-state, three-generator families before designing another five-state parser.
+
+**Artifact:** the proof and edge-case audit are in
+[`audits/internal-sandwich-prefix-algebra-2026-07-25.md`](audits/internal-sandwich-prefix-algebra-2026-07-25.md).
+
+**Next:** formalize the invariant subquotient, block-Hankel characterization, and effective
+rational construction; enumerate low-rank internal words in the safe `M₆(3)` families.
+
+**Issue:** [#8, Formalize internal-sandwich minimization and the ten-state full-algebra
+obstruction](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/8).
 
 ### MM-O01: All-placement packing rank
 
@@ -418,6 +484,120 @@ counterexamples.
 projective avoidance problem must be settled at `r=t/μ`.
 
 **Artifact:** [`audits/m53-setter-projective-2026-07-24.md`](audits/m53-setter-projective-2026-07-24.md#parameter-correction).
+
+### MM-O08: Full-algebra prefix pair
+
+**Kind:** obstruction
+**Evidence:** audited
+**Disposition:** active
+
+Let `B₀,B₁` be the restricted ten-state prefix generators emitted by the current arithmetic
+source envelope. The physical word `000` is nonzero rank one:
+
+```text
+B₀³=uvᵀ.
+```
+
+The ten columns
+
+```text
+u, B₁u, …, B₁⁹u
+```
+
+and the ten rows `vᵀB_p` for
+
+```text
+p∈{ε,1,10,11,101,110,1011,1101,10110,11010}
+```
+
+are bases. Their determinant certificates are nonzero uniformly for `β≥3` and
+`body.length≥β−1`. Hence the one hundred physical products
+
+```text
+B₁ʲB₀³B_p=(B₁ʲu)(vᵀB_p)
+```
+
+span every outer product and therefore
+
+```text
+span_ℚ{B_w : w∈{0,1}*}=M₁₀(ℚ).
+```
+
+The pair has no nonzero proper common invariant subspace or quotient. More strongly, for every
+nonzero internal word `E=UW`, the reachable space of `WA_wU` is all of `ℚ¹⁰`, its
+unobservable subspace is zero, and its exact block-Hankel rank is ten.
+
+**Scope:** this closes exact linear restriction, quotient, reachable/observable minimization,
+and internal-sandwich compression of this physical pair. It does not exclude a different pair,
+a different transducer, a same-zero nine-state series, or any nonlinear compiler.
+
+**Use:** stop exact minimization of the present ten-state decoder. Any `M₉(2)` attack must
+change the physical pair or change its nonzero behavior.
+
+**Artifact:** the coordinate reconstruction, determinant factors, positivity proof, and
+independent symbolic check are in
+[`audits/internal-sandwich-prefix-algebra-2026-07-25.md`](audits/internal-sandwich-prefix-algebra-2026-07-25.md#the-ten-state-prefix-pair).
+
+**Next:** formalize `B₀³=uvᵀ` and finite reachability/observability determinant certificates.
+
+**Issue:** [#8, Formalize internal-sandwich minimization and the ten-state full-algebra
+obstruction](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/8).
+
+### MM-O09: Two-state ternary prefix image
+
+**Kind:** obstruction
+**Evidence:** audited
+**Disposition:** stock
+
+A complete ternary prefix tree with five leaves has exactly two internal states: the root has
+two leaf children and one internal child, whose three children are leaves. Consider a literal
+exact weighted decoder with one three-dimensional payload space at each state, four nonsingular
+leaf payloads, and one singular separator.
+
+At least one child leaf has a nonsingular decoded payload. Its factorization through the
+root-to-child edge forces that edge matrix to be nonsingular. The physical generator carrying
+that edge therefore supplies the complete root payload block to the joint image. A nonsingular
+child completion either occurs on the same physical generator, making it full rank, or its
+graph can be combined with the root block to isolate the complete child block. Thus the span
+of the three generator images is the full six-state carrier.
+
+**Scope:** literal exact two-state ternary prefix decoders with three-dimensional edge
+matrices and exactly the stated four-nonsingular/one-singular source profile. Repairable
+quotients, state-dependent gauges, same-zero decoders, and non-prefix codes remain open.
+
+**Use:** a direct ternary recoding of the five-matrix source cannot reach five dimensions by
+the common-image compiler [`MM-C02`](#mm-c02-common-image-restriction).
+
+**Artifact:** [`audits/internal-sandwich-prefix-algebra-2026-07-25.md`](audits/internal-sandwich-prefix-algebra-2026-07-25.md#secondary-obstructions).
+
+### MM-O10: Additive toggle fusion cycle
+
+**Kind:** obstruction
+**Evidence:** audited
+**Disposition:** stock
+
+Normalize the paired separator to an idempotent `P`, and let `T` be the involutive paired
+toggle. Since the boundary row obeys `LT=L`, one has `PT=P`. Put
+
+```text
+Q=TP,      F=T−P.
+```
+
+Then `Q` is rank-one idempotent and
+
+```text
+F²=I−Q,      F³=F.
+```
+
+Both `F` and `F²` have rank three, so every positive power of `F` is rank three. No pure power
+of the most direct additive toggle/separator fusion can punctuate or vanish.
+
+**Scope:** the single ansatz `F=T−P` after idempotent normalization. Bordered couplings,
+different perturbations, and mixed words containing data generators remain open.
+
+**Use:** reject the additive fusion before any power search.
+
+**Artifact:** [`audits/internal-sandwich-prefix-algebra-2026-07-25.md`](audits/internal-sandwich-prefix-algebra-2026-07-25.md#secondary-obstructions).
 
 ### MM-M01: Off-diagonal companion interface
 
