@@ -370,9 +370,12 @@ excludes the residual value `2μ`, so the complete distinguished-boundary
 `β` shell is safe.
 [`MM-S09`](SALVAGE.md#mm-s09-canonical-swapped-residue-cannot-hit-a-pole)
 also excludes the unavoidable all-`D_c` valuation-one residue at every
-compiler-emitted width. The immediate question is whether any noncanonical
-positive valuation-one near-match can occur without already certifying source
-halting. Exact bidirectional diagnostics at `β=3`, body `bbcc`, exclude every
+compiler-emitted width.
+[`MM-S10`](SALVAGE.md#mm-s10-swapped-target-suffix-sieve) fixes the last
+`β+2` digits of every pole-compatible lower word and excludes the recurrent
+nonhalting residue `Δ=ρ−1`. The immediate question is which other positive
+valuation-one discrepancies survive this suffix sieve without already
+certifying source halting. Exact bidirectional diagnostics at `β=3`, body `bbcc`, exclude every
 false-pole word of at most six projective blocks when each regular block has
 role length at most three; this is computational evidence only.
 A single explicit nonterminal pole orbit kills this family; a closed invariant proves

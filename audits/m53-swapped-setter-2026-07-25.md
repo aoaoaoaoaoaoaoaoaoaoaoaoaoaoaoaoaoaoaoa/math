@@ -419,6 +419,81 @@ The Neary compiler emits `β=10·period`, hence always lies in this range.
 Thus the canonical positive valuation-one residue cannot create a false pole
 in any emitted source.
 
+## Target Suffix Sieve
+
+The target side admits a stronger congruence than (20).  Suppose a positive
+`3`-adic unit `Δ` meets a valuation-one target pole.  Equation (8) is
+equivalent to
+
+```text
+ΔDP=H(3μ−Δ)V.                               (22)
+```
+
+Every nonempty upper role word ends in binary `1`.  Therefore `P`, modulo
+
+```text
+9ρ=3^(β+2),
+```
+
+is the swapped code of `11·0^β`, namely `H`.  Both cancellands are units
+modulo `3`, so (22) gives
+
+```text
+V ≡ σ_Δ := ΔD(3μ−Δ)⁻¹ (mod 9ρ).           (23)
+```
+
+This fixes the target residue on its final `β+2` positions.  If the lower
+word has at least `β+2` letters, every fixed-width digit of `σ_Δ` must be
+nonzero and its swapped binary decoding must be a suffix of a concatenation
+of the four lower role words.  If the lower word is shorter, then
+`V=σ_Δ`; the leading zero padding is not a word digit, and only the canonical
+base-three expansion is constrained to use `1,2`.  In particular, an
+internal zero digit is impossible, whereas a shorter all-nonzero residue
+survives only as the single exact candidate `V=σ_Δ`.
+
+The recurrent value
+
+```text
+Δ=ρ−1
+```
+
+is excluded uniformly.  Direct multiplication gives
+
+```text
+(5ρ−2)(8ρ−1) ≡ (ρ−1)(ρ−2) (mod 9ρ),
+```
+
+so (23) becomes
+
+```text
+V≡8ρ−1 (mod 9ρ).
+```
+
+The `β+2` ternary digits of `8ρ−1` are `21·2^β`; under the swapped embedding
+the target lower word must end in
+
+```text
+01·0^β.                                     (24)
+```
+
+This factor cannot occur.  Inside `R_b=110`, the only `1` followed by a zero
+is preceded by `1`.  Inside `R_c=1·H(body)·10`, every `b` code and the final
+`10` are likewise preceded by `1`.  Across a role boundary, an erasure
+followed by a rule gives `011`, not `010`.  Hence every occurrence of
+`1·0^β` in a lower spelling is preceded by `1`, contradicting (24).
+
+The distinction between positivity and pole compatibility is essential.  At
+`β=4`, body `ccccbb`, the source queue has the exact nonhalting cycle
+
+```text
+bbbccccbbb ↔ cccbbbb.
+```
+
+Nevertheless `R_cD_b^3` has `d=1` and `Δ=364`.  Its suffix residue from (23)
+is base-three `1012`, containing a forbidden zero digit.  Thus positive
+near-matches alone do not imply source halting; the target-suffix sieve is the
+correct intermediate invariant.
+
 ## Bounded Diagnostics
 
 [`tools/explore_setter_projective.py`](../tools/explore_setter_projective.py)
@@ -453,8 +528,9 @@ evidence.
 
 The swapped five-state matrices, internal separator, projective transfer,
 strict sign (7), finite-slope reduction (10)–(12), rigidity (13),
-β-shell exclusion (15)–(17), and canonical-residue exclusion (18)–(21) are
-audited mathematics.  The bounded searches are computational diagnostics.
+β-shell exclusion (15)–(17), canonical-residue exclusion (18)–(21), and the
+target-suffix sieve (22)–(24) are audited mathematics.  The bounded searches
+are computational diagnostics.
 
 No finite-slope exclusion theorem is known.  A fixed nonterminal slope still
 defines an asynchronous correspondence equation, and the terminal slope

@@ -276,6 +276,30 @@ def role_words(beta: int, body: str) -> tuple[tuple[str, str], ...]:
     )
 
 
+def free_monoid_excludes_factor(generators: tuple[str, ...], factor: str) -> bool:
+    """Decide whether every generator concatenation avoids ``factor``."""
+
+    reachable = {0}
+    queue = deque(reachable)
+    while queue:
+        matched = queue.popleft()
+        for generator in generators:
+            successor = matched
+            for symbol in generator:
+                candidate = factor[:successor] + symbol
+                successor = max(
+                    length
+                    for length in range(min(len(factor), len(candidate)) + 1)
+                    if candidate.endswith(factor[:length])
+                )
+                if successor == len(factor):
+                    return False
+            if successor not in reachable:
+                reachable.add(successor)
+                queue.append(successor)
+    return True
+
+
 def reverse_discrepancy(
     beta: int, body: str, word: tuple[int, ...]
 ) -> ReverseDiscrepancy:
@@ -625,6 +649,21 @@ def audit_swapped_digit_setter() -> None:
             Fraction(-power * values.head * values.marker * 2, centered_c)
             == 2 * values.marker
         )
+
+        modulus = 9 * power
+        discrepancy = power - 1
+        target_factor = "01" + "0" * width
+        target_residue = (
+            discrepancy
+            * (power - 2)
+            * pow(3 * values.marker - discrepancy, -1, modulus)
+            % modulus
+        )
+        assert target_residue == 8 * power - 1
+        assert target_residue == ternary_code(target_factor, swapped=True)
+        for body in ("b" * (width - 1), "c" * (width - 1), "bc" * width):
+            lower_roles = tuple(lower for _upper, lower in role_words(width, body))
+            assert free_monoid_excludes_factor(lower_roles, target_factor)
 
     assert find_exact_collision(beta, "bbcc", 5, swapped=True) is None
     assert search_exact_orbits(beta, "bbcc", 3, 2, swapped=True) == OrbitSearch(

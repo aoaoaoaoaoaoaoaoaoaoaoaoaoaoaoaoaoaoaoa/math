@@ -70,6 +70,7 @@ file owns the mathematical stock.
 | [`MM-S07`](#mm-s07-swapped-digit-finite-slope-reduction) | structure theorem | the swapped setter reduces integral valuation-one poles to finitely many primitive slopes | audited | active |
 | [`MM-S08`](#mm-s08-swapped-distinguished-boundary-beta-shell) | obstruction | the swapped distinguished boundary cannot reach either single-erasure pole | audited | active |
 | [`MM-S09`](#mm-s09-canonical-swapped-residue-cannot-hit-a-pole) | obstruction | the unavoidable all-erasure residue cannot meet a valuation-one pole at emitted widths | audited | active |
+| [`MM-S10`](#mm-s10-swapped-target-suffix-sieve) | structure theorem | pole compatibility fixes `β+2` lower digits and excludes the residue `Δ=ρ−1` | audited | active |
 | [`M4-C01`](#m4-c01-two-state-pushout-compiler) | compiler | binary deterministic two-state scalar control compiles to three `4 × 4` matrices | audited | active |
 | [`M4-O01`](#m4-o01-exact-toggle-fusion-leaves-an-immortal-core) | obstruction | exact local toggle fusion preserves an invertible two-plane | audited | stock |
 | [`M4-O02`](#m4-o02-two-private-state-phase-signature) | obstruction | exact shared-channel phase ratios are constant or two-periodic | audited | active |
@@ -1465,6 +1466,81 @@ which is now a semantic source-halting question.
 
 **Next:** prove that every other positive `d=1` near-match already implies
 source halting.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S10: Swapped target-suffix sieve
+
+**Kind:** structure theorem
+**Evidence:** audited
+**Disposition:** active
+
+Let a positive `3`-adic unit `Δ` meet a valuation-one target pole with side
+codes
+
+```text
+P=μ+tU,       V>0.
+```
+
+The pole equation is
+
+```text
+ΔDP=H(3μ−Δ)V.
+```
+
+Every nonempty upper role word ends in binary `1`.  Hence `P`, modulo
+`9ρ=3^(β+2)`, is the swapped code of `11·0^β`, namely `H`.  Both `H` and
+`3μ−Δ` are units modulo `3`, so cancellation gives the fixed target suffix
+
+```text
+V ≡ σ_Δ := ΔD(3μ−Δ)⁻¹ (mod 9ρ).
+```
+
+This is an effective necessary suffix test.  If the lower word has at least
+`β+2` letters, all `β+2` digits of the fixed-width residue must be nonzero and
+its swapped binary decoding must obey the lower-role suffix grammar.  If the
+lower word is shorter, then necessarily `V=σ_Δ`; only the canonical
+base-three digits are word digits, while the leading zero padding is
+harmless.  Thus a residue with an internal zero digit is impossible, and a
+shorter all-nonzero residue leaves only the single exact candidate
+`V=σ_Δ`.
+
+In particular, for
+
+```text
+Δ=ρ−1
+```
+
+one has
+
+```text
+σ_Δ=8ρ−1,
+```
+
+whose `β+2` ternary digits are `21·2^β` and whose swapped binary suffix is
+
+```text
+01·0^β.
+```
+
+No lower spelling can contain this factor.  Every occurrence of `1·0^β`
+inside a rule word is preceded by `1`; after an erasure, the next rule begins
+with `11`.  Thus `Δ=ρ−1` cannot meet any target pole.
+
+**Scope:** this is a necessary suffix sieve, not a classification of all
+positive boundary discrepancies.  Residues passing the sieve still require
+semantic or higher-carry analysis.
+
+**Use:** apply before any target-word search.  It eliminates the principal
+nonhalting positive residue found in the `β=4` small-envelope census and turns
+many other candidate values into immediate digit contradictions.
+
+**Artifact:** [`audits/m53-swapped-setter-2026-07-25.md`](audits/m53-swapped-setter-2026-07-25.md#target-suffix-sieve).
+
+**Next:** classify the boundary values whose `σ_Δ` is a legal lower suffix;
+the surviving nonterminal values must then be intersected with the reverse
+Neary discrepancy.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
