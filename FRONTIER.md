@@ -365,9 +365,10 @@ digit swap removes that unbounded parameter:
 centered coefficient strictly negative and forces every integral
 valuation-one pole into a finite set of primitive slopes. The common scale of
 the two code integers remains unbounded, so this is not yet a finite word
-search. The immediate question is whether any nonterminal fixed-slope
-language survives the Neary pulse invariant; the only remaining
-distinguished-boundary `β`-shell value is `2μ`.
+search. [`MM-S08`](SALVAGE.md#mm-s08-swapped-distinguished-boundary-beta-shell)
+excludes the residual value `2μ`, so the complete distinguished-boundary
+`β` shell is safe. The immediate question is whether any nonterminal
+valuation-one fixed-slope language survives the Neary pulse invariant.
 A single explicit nonterminal pole orbit kills this family; a closed invariant proves
 `M₅(3)`. The same-zero binary root and fixed-width-three source remain independent fallbacks.
 

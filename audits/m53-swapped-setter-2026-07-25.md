@@ -276,7 +276,7 @@ The distinguished value is rigid:
 Indeed, substituting `Δ=H` into (8) and using `H+D=3μ` gives
 `DP_z=DV_z`; the converse is immediate.
 
-## Remaining β-Shell
+## Elimination of the β-Shell
 
 The single `b` erasure would require
 
@@ -299,8 +299,74 @@ The single `c` erasure requires
 Δ_c=2μ.                                     (14)
 ```
 
-Equation (14) has not yet been excluded for every source block.  It is the
-only surviving distinguished-boundary β-shell obligation.
+Equation (14) is impossible.  Let
+
+```text
+m=|U(v)|,       k=lcs(U(v)10^β,V(v)).
+```
+
+In the `d=β` shell, `k=m−β`, so deleting the common suffix leaves an upper
+prefix `A` of length `2β+1`.  Equation (14) is
+
+```text
+[A]₃−[B]₃=2μ=4ρ−2,                         (15)
+```
+
+where `B` is the corresponding lower prefix.  Since `β≥3`, subtracting
+`2μ` cannot change the `2β+1`-digit length, so `A` and `B` have equal length.
+
+The base-three expansion of `2μ` is
+
+```text
+1·0·2^(β−1)·1.
+```
+
+Adding it to `B` from right to left, while requiring every digit of both
+summands to remain `1` or `2`, determines the complete carry pattern.  In
+binary notation it gives
+
+```text
+A=T·00·z·10,
+B=T·11·z·01,                                (16)
+|T|=β−1,       |z|=β−2.
+```
+
+Now classify the upper prefix.  The two zeros at positions `β−1,β` of `A`
+belong to the first `b` codeword.  If `s` initial `c` letters precede it,
+then the final `10` of `A` must begin the next `b` codeword or the terminal
+marker.  Hence
+
+```text
+0≤s≤β−3
+```
+
+and the upper data spelling starts
+
+```text
+c^s·b·c^(β−s−3)
+```
+
+before that next `b` or the end marker.  Consequently (16) fixes the lower
+prefix as
+
+```text
+B=
+1^(s+1)·0^(β−s−2)·11·0^s·1^(β−s−2)·01.    (17)
+```
+
+If `s=0`, the first tile carries `b`.  Its lower word is either `0` or `110`,
+neither of which begins the right side of (17), which starts `10`.
+
+If `s>0`, the first tile carries `c`.  It must be the rule tile, since the
+erasure lower word starts with `0`.  After the rule's initial `1`, equation
+(17) requires the continuation `1^s0`.  The body therefore begins
+`c^(s−1)b`, unless the zero comes from the final `10` after the body.  The
+latter would force `|body|=s−1<β−1`, contrary to the source envelope.  In the
+former case the selected `b` contributes `β` consecutive zeros, but (17)
+allows only `β−s−2<β` zeros before the next `1`.  This is also impossible.
+
+Thus no distinguished-boundary discrepancy in the `β` shell can reach either
+single-erasure pole.
 
 ## Bounded Diagnostics
 
@@ -314,6 +380,9 @@ role-block length ≤3, three transfers:
 
 target-block length ≤12:
     no nonterminal integral valuation-one pole
+
+role-word length ≤10:
+    no distinguished-boundary β-shell hit
 ```
 
 The same target search through length `12` found no false integral pole for
@@ -323,8 +392,9 @@ evidence.
 ## Promotion Boundary
 
 The swapped five-state matrices, internal separator, projective transfer,
-strict sign (7), finite-slope reduction (10)–(12), and rigidity (13) are
-audited mathematics.  The bounded searches are computational diagnostics.
+strict sign (7), finite-slope reduction (10)–(12), rigidity (13), and
+β-shell exclusion (15)–(17) are audited mathematics.  The bounded searches
+are computational diagnostics.
 
 No finite-slope exclusion theorem is known.  A fixed nonterminal slope still
 defines an asynchronous correspondence equation, and the terminal slope

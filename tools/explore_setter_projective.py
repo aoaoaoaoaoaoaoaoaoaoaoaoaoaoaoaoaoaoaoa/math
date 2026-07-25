@@ -251,6 +251,12 @@ class IntegralUnitPole:
     normalized_pole: int
 
 
+@dataclass(frozen=True, slots=True)
+class BoundaryShellHit:
+    word: tuple[int, ...]
+    normalized_discrepancy: int
+
+
 def role_words(beta: int, body: str) -> tuple[tuple[str, str], ...]:
     upper_b = tag_code(beta, "b")
     upper_c = tag_code(beta, "c")
@@ -298,7 +304,11 @@ def reverse_discrepancy(
 
 
 def normalized_boundary_discrepancy(
-    beta: int, body: str, word: tuple[int, ...]
+    beta: int,
+    body: str,
+    word: tuple[int, ...],
+    *,
+    swapped: bool = False,
 ) -> tuple[int, int]:
     """Return the boundary-one resonance gap and its 3-adic unit."""
 
@@ -306,11 +316,38 @@ def normalized_boundary_discrepancy(
     discrepancy = reverse_discrepancy(beta, body, word)
     upper = "".join(roles[role][0] for role in word)
     lower = "".join(roles[role][1] for role in word)
-    difference = ternary_code(upper + "1" + "0" * beta) - ternary_code(lower)
+    difference = ternary_code(
+        upper + "1" + "0" * beta,
+        swapped=swapped,
+    ) - ternary_code(lower, swapped=swapped)
     divisor = 3**discrepancy.common_suffix
     quotient, remainder = divmod(difference, divisor)
     assert remainder == 0
     return len(upper) - discrepancy.common_suffix, quotient
+
+
+def find_swapped_beta_shell_hit(
+    beta: int,
+    body: str,
+    max_role_length: int,
+) -> BoundaryShellHit | None:
+    """Find a distinguished-boundary discrepancy able to hit swapped ``D_c``."""
+
+    target = 2 * setter_constants(beta, swapped=True).marker
+    roles = range(len(role_words(beta, body)))
+    layer = [(role,) for role in roles]
+    for _length in range(1, max_role_length + 1):
+        for word in layer:
+            gap, discrepancy = normalized_boundary_discrepancy(
+                beta,
+                body,
+                word,
+                swapped=True,
+            )
+            if gap == beta and discrepancy == target:
+                return BoundaryShellHit(word, discrepancy)
+        layer = [(*word, role) for word in layer for role in roles]
+    return None
 
 
 def find_false_integral_unit_pole(
@@ -571,6 +608,7 @@ def audit_swapped_digit_setter() -> None:
         )
         is None
     )
+    assert find_swapped_beta_shell_hit(beta, "bbcc", 8) is None
 
 
 def next_exact_layer(
@@ -747,6 +785,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--max-role-length", type=int, default=0)
     parser.add_argument("--max-square-runs", type=int, default=0)
     parser.add_argument("--search-unit-poles", type=int, default=0)
+    parser.add_argument("--search-beta-shell", type=int, default=0)
     parser.add_argument("--swapped-digits", action="store_true")
     parser.add_argument("--audit", action="store_true")
     return parser.parse_args()
@@ -790,6 +829,15 @@ def main() -> None:
                 args.body,
                 args.search_unit_poles,
                 swapped=args.swapped_digits,
+            ),
+        )
+    if args.search_beta_shell:
+        print(
+            "swapped beta-shell hit:",
+            find_swapped_beta_shell_hit(
+                args.beta,
+                args.body,
+                args.search_beta_shell,
             ),
         )
     for prime in args.primes:

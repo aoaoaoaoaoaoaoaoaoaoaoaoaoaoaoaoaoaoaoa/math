@@ -68,6 +68,7 @@ file owns the mathematical stock.
 | [`MM-S05`](#mm-s05-distinguished-boundary-beta-shell) | obstruction | the distinguished-boundary `β`-shell cannot reach a false pole | audited | active |
 | [`MM-S06`](#mm-s06-valuation-one-divisor-normal-form) | structure theorem | every integral valuation-one pole lies on a finite family of divisor rays | audited | active |
 | [`MM-S07`](#mm-s07-swapped-digit-finite-slope-reduction) | structure theorem | the swapped setter reduces integral valuation-one poles to finitely many primitive slopes | audited | active |
+| [`MM-S08`](#mm-s08-swapped-distinguished-boundary-beta-shell) | obstruction | the swapped distinguished boundary cannot reach either single-erasure pole | audited | active |
 | [`M4-C01`](#m4-c01-two-state-pushout-compiler) | compiler | binary deterministic two-state scalar control compiles to three `4 × 4` matrices | audited | active |
 | [`M4-O01`](#m4-o01-exact-toggle-fusion-leaves-an-immortal-core) | obstruction | exact local toggle fusion preserves an invertible two-plane | audited | stock |
 | [`M4-O02`](#m4-o02-two-private-state-phase-signature) | obstruction | exact shared-channel phase ratios are constant or two-periodic | audited | active |
@@ -1327,6 +1328,8 @@ There is no unbounded divisor ray. The distinguished value remains exact:
 
 In the `β`-shell, the single `b` erasure requires a rational discrepancy
 strictly between `1` and `2`, while the single `c` erasure requires `Δ=2μ`.
+The latter is excluded by
+[`MM-S08`](#mm-s08-swapped-distinguished-boundary-beta-shell).
 
 **Scope:** finiteness of the primitive slopes is not finiteness of the target
 role words: the common multiplier `g` remains unbounded. One of the slopes is
@@ -1341,8 +1344,72 @@ violates the Neary pulse invariant.
 **Artifact:** [`audits/m53-swapped-setter-2026-07-25.md`](audits/m53-swapped-setter-2026-07-25.md#one-sided-centered-carry);
 [`tools/explore_setter_projective.py`](tools/explore_setter_projective.py).
 
-**Next:** prove or refute the finite-slope endpoint theorem; separately exclude
-the residual `β`-shell value `2μ`.
+**Next:** prove or refute the finite-slope endpoint theorem in the sole
+remaining valuation-one shell.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S08: Swapped distinguished-boundary beta shell
+
+**Kind:** obstruction
+**Evidence:** audited
+**Disposition:** active
+
+For the swapped setter, suppose a distinguished-boundary block has resonance
+gap `d=β`.  If it could hit the single `c`-erasure pole, its normalized
+discrepancy would be `Δ=2μ`.  After deleting the common suffix, the upper and
+lower binary prefixes would necessarily have the form
+
+```text
+A=T·00·z·10,       B=T·11·z·01,
+|T|=β−1,           |z|=β−2.
+```
+
+This is the unique carry pattern for
+
+```text
+[A]₃−[B]₃=2μ
+```
+
+under the swapped nonzero-digit embedding.
+
+The upper pattern forces its source-letter prefix to be
+
+```text
+c^s·b·c^(β−s−3),       0≤s≤β−3,
+```
+
+followed by another `b` or by the marker.  It therefore forces the lower
+prefix
+
+```text
+1^(s+1)·0^(β−s−2)·11·0^s·1^(β−s−2)·01.
+```
+
+For `s=0`, neither lower image of a `b` role has the required prefix.  For
+`s>0`, the first role must be the `c` rule.  Its body must begin
+`c^(s−1)b`, after which the `b` code supplies `β` zeros where the target
+prefix permits only `β−s−2`; the only alternative contradicts
+`|body|≥β−1`.  Hence `Δ=2μ` is impossible.
+
+The single `b`-erasure pole was already excluded because its required
+discrepancy lies strictly between `1` and `2`.  Thus the complete
+distinguished-boundary `β` shell is pole-free.
+
+**Scope:** later malformed transfers can re-enter a `β`-adic valuation shell
+from projective states other than the distinguished boundary.  This theorem
+does not classify those states.
+
+**Use:** all distinguished-boundary danger is now concentrated in the
+valuation-one finite-slope languages of
+[`MM-S07`](#mm-s07-swapped-digit-finite-slope-reduction).
+
+**Artifact:** [`audits/m53-swapped-setter-2026-07-25.md`](audits/m53-swapped-setter-2026-07-25.md#elimination-of-the-beta-shell);
+[`tools/explore_setter_projective.py`](tools/explore_setter_projective.py).
+
+**Next:** intersect each surviving primitive slope with the reverse
+discrepancy language; a hit need only imply a genuine terminal suffix.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
