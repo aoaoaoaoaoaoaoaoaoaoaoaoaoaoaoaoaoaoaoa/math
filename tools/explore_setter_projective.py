@@ -215,6 +215,12 @@ class ReverseDiscrepancy:
     mismatch: bool
 
 
+@dataclass(frozen=True, slots=True)
+class IntegralUnitPole:
+    word: tuple[int, ...]
+    normalized_pole: int
+
+
 def role_words(beta: int, body: str) -> tuple[tuple[str, str], ...]:
     upper_b = tag_code(beta, "b")
     upper_c = tag_code(beta, "c")
@@ -275,6 +281,43 @@ def normalized_boundary_discrepancy(
     quotient, remainder = divmod(difference, divisor)
     assert remainder == 0
     return len(upper) - discrepancy.common_suffix, quotient
+
+
+def find_false_integral_unit_pole(
+    beta: int, body: str, max_role_length: int
+) -> IntegralUnitPole | None:
+    """Find a nonterminal valuation-one pole with integral normalized value."""
+
+    rho = 3**beta
+    marker = (5 * rho - 1) // 2
+    head = (17 * rho - 1) // 2
+    tail = rho + 1
+    generators = exact_role_generators(beta, body)
+
+    def visit(
+        product: SideProduct, word: tuple[int, ...], remaining: int
+    ) -> IntegralUnitPole | None:
+        if len(word) >= 2 and word[-1] in (1, 3):
+            punctuated_upper = marker + 3 * rho * product.upper_value
+            centered_pole = tail * punctuated_upper - head * product.lower_value
+            if three_adic_valuation(centered_pole) == 1:
+                numerator = -3 * head * marker * product.lower_value
+                normalized, remainder = divmod(numerator, centered_pole)
+                if (
+                    remainder == 0
+                    and normalized % 3
+                    and punctuated_upper != product.lower_value
+                ):
+                    return IntegralUnitPole(word, normalized)
+        if remaining == 0:
+            return None
+        for role, generator in enumerate(generators):
+            found = visit(product.then_exact(generator), (*word, role), remaining - 1)
+            if found is not None:
+                return found
+        return None
+
+    return visit(SideProduct(0, 1, 0, 1), (), max_role_length)
 
 
 def exact_transfer(product: SideProduct, start: Fraction, beta: int) -> Fraction | None:
@@ -586,6 +629,7 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument("--max-role-length", type=int, default=0)
     parser.add_argument("--max-square-runs", type=int, default=0)
+    parser.add_argument("--search-unit-poles", type=int, default=0)
     parser.add_argument("--audit", action="store_true")
     return parser.parse_args()
 
@@ -611,6 +655,15 @@ def main() -> None:
                 args.body,
                 args.max_role_length,
                 args.max_square_runs,
+            ),
+        )
+    if args.search_unit_poles:
+        print(
+            "false integral unit pole:",
+            find_false_integral_unit_pole(
+                args.beta,
+                args.body,
+                args.search_unit_poles,
             ),
         )
     for prime in args.primes:

@@ -113,6 +113,7 @@ The setter-projective audit now also exposes a kernel-friendly carry theorem:
 | [`MM-S03`](SALVAGE.md#mm-s03-centered-setter-carry) | centered integer recurrence, reset representatives, nonresonant valuation-gap update, unit compatibility, two-transfer shape gate, and distinguished-boundary suffix gate |
 | [`MM-S04`](SALVAGE.md#mm-s04-reverse-suffix-discrepancy) | reverse cancellation recurrence, exact common-suffix invariant, first-mismatch stopping theorem, and bounded-front-fringe inequalities |
 | [`MM-S05`](SALVAGE.md#mm-s05-distinguished-boundary-beta-shell) | normalized boundary discrepancy, single-erasure pole classification, `D_b` strict-fraction bound, forbidden base-three carry pattern, and `D_c` exclusion |
+| [`MM-S06`](SALVAGE.md#mm-s06-valuation-one-divisor-normal-form) | gcd reduction, divisor-ray parameterization, coprimality side conditions, and equivalence `Δ=H ↔ P=V` |
 
 These records narrow the missing arbitrary-depth theorem but do not prove
 projective avoidance. Their reconstruction is

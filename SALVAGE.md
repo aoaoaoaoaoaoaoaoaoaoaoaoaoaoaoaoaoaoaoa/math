@@ -65,6 +65,7 @@ file owns the mathematical stock.
 | [`MM-S03`](#mm-s03-centered-setter-carry) | structure theorem | setter orbits obey an integer valuation-and-suffix carry recurrence | audited | active |
 | [`MM-S04`](#mm-s04-reverse-suffix-discrepancy) | structure theorem | setter resonance is a word-valued discrepancy queue with a bounded front fringe | audited | active |
 | [`MM-S05`](#mm-s05-distinguished-boundary-beta-shell) | obstruction | the distinguished-boundary `β`-shell cannot reach a false pole | audited | active |
+| [`MM-S06`](#mm-s06-valuation-one-divisor-normal-form) | structure theorem | every integral valuation-one pole lies on a finite family of divisor rays | audited | active |
 | [`M4-C01`](#m4-c01-two-state-pushout-compiler) | compiler | binary deterministic two-state scalar control compiles to three `4 × 4` matrices | audited | active |
 | [`M4-O01`](#m4-o01-exact-toggle-fusion-leaves-an-immortal-core) | obstruction | exact local toggle fusion preserves an invertible two-plane | audited | stock |
 | [`M4-O02`](#m4-o02-two-private-state-phase-signature) | obstruction | exact shared-channel phase ratios are constant or two-periodic | audited | active |
@@ -1102,9 +1103,96 @@ blocks.
 **Artifact:** [`audits/setter-projective-peeling-2026-07-25.md`](audits/setter-projective-peeling-2026-07-25.md#elimination-of-the-beta-shell);
 [`tools/explore_setter_projective.py`](tools/explore_setter_projective.py).
 
-**Next:** classify integer normalized poles in the valuation-one shell. The
-distinguished value `Δ=H` is exactly `P_z=V_z`, a genuine terminal match;
-determine whether any other integer value is realizable.
+**Next:** apply
+[`MM-S06`](#mm-s06-valuation-one-divisor-normal-form) to the surviving
+valuation-one shell.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S06: Valuation-one divisor normal form
+
+**Kind:** structure theorem
+**Evidence:** audited
+**Disposition:** active
+
+Let a multi-role pole block have positive codes `P,V` and
+
+```text
+C=RP−HV,       v₃(C)=1.
+```
+
+Suppose an integer `3`-adic unit `Δ` reaches that pole:
+
+```text
+CΔ+3HμV=0.
+```
+
+Reduce `P,V` by their gcd:
+
+```text
+P=gp,       V=gv,       gcd(p,v)=1,
+a=(Rp−Hv)/3.
+```
+
+Put `q=gcd(a,v)`. Then
+
+```text
+q=gcd(R,v),       q∣R.
+```
+
+Writing `a=qa₀`, `v=qv₀`, and `r=R/q` gives
+
+```text
+gcd(a₀,v₀)=gcd(r,v₀)=1,
+a₀Δ=−Hμv₀,
+rp=Hv₀+3a₀.
+```
+
+In particular,
+
+```text
+a₀∣Hμ,       v₀∣Δ.
+```
+
+Every integral pole therefore lies on one of finitely many arithmetic rays
+indexed by divisors `q∣R` and `a₀∣Hμ`; only `v₀` remains unbounded.
+
+Moreover,
+
+```text
+Δ=H       ↔       P=V.
+```
+
+Thus the distinguished integral value is exactly the genuine terminal-match
+pole, not a malformed one.
+
+For a boundary discrepancy with `d=1`, positivity also gives
+
+```text
+0<Δ<9ρ.
+```
+
+Values `Δ≤3μ` map to a nonpositive projective point and cannot be poles.
+Hence the positive branch is confined to the finite interval
+`3μ<Δ<9ρ`; only negative divisor rays remain unbounded.
+
+**Scope:** the divisor normal form does not prove that the other rays are
+empty. Their realizability by a common Neary role word remains open. The exact
+benchmark search through target-block length `14` finds no false integral
+unit pole, but that is computational evidence only.
+
+**Use:** replace an unconstrained rational-pole search in the valuation-one
+shell by finitely many divisor rays. Positive boundary discrepancies are
+already bounded by their `β+2`-digit unmatched upper prefix; negative rays
+remain the unbounded branch.
+
+**Artifact:** [`audits/setter-projective-peeling-2026-07-25.md`](audits/setter-projective-peeling-2026-07-25.md#valuation-one-divisor-normal-form);
+[`tools/explore_setter_projective.py`](tools/explore_setter_projective.py).
+
+**Next:** intersect the divisor rays with the reverse Neary role transducer.
+Either prove that only `(a₀,v₀)=(-μ,1)` is realizable, or return the first
+explicit false integral pole.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).

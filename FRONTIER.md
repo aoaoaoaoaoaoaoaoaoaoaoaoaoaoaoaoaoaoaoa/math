@@ -353,8 +353,12 @@ first target is now gone:
 [`MM-S05`](SALVAGE.md#mm-s05-distinguished-boundary-beta-shell) proves that
 the `d=β` branch at boundary `1` cannot reach either single-erasure pole. Only
 the valuation-one target survives there. Its distinguished normalized value
-`Δ=H` is exactly a genuine terminal match; the immediate question is whether
-any other integer normalized pole is realizable.
+`Δ=H` is exactly a genuine terminal match. The divisor normal form
+[`MM-S06`](SALVAGE.md#mm-s06-valuation-one-divisor-normal-form) writes every
+other integral target on one of finitely many rays indexed by
+`q∣(ρ+1)` and `a₀∣Hμ`; only one positive parameter remains unbounded. The
+immediate question is whether the reverse Neary role transducer meets any
+nonterminal ray.
 A single explicit nonterminal pole orbit kills this family; a closed invariant proves
 `M₅(3)`. The same-zero binary root and fixed-width-three source remain independent fallbacks.
 

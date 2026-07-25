@@ -458,6 +458,115 @@ Only the valuation-one discrepancy remains at this boundary. This theorem
 does not constrain β-shell states reached later from the ordinary reset or
 after several malformed transfers.
 
+## Valuation-One Divisor Normal Form
+
+The surviving target poles admit a finite-divisor parameterization. Let `z`
+be a multi-role target block, abbreviate its positive ternary codes by `P,V`,
+and suppose
+
+```text
+C=RP−HV,       v₃(C)=1.
+```
+
+An integral projective discrepancy `Δ`, with `3∤Δ`, reaches this pole exactly
+when
+
+```text
+CΔ+3HμV=0.                                   (17)
+```
+
+Put
+
+```text
+g=gcd(P,V),       P=gp,       V=gv,       gcd(p,v)=1,
+a=(Rp−Hv)/3.
+```
+
+The common factor `g` is a `3`-adic unit, so `a` is an integer not divisible
+by `3`, and (17) reduces to
+
+```text
+aΔ=−Hμv.                                     (18)
+```
+
+Now set
+
+```text
+q=gcd(a,v).
+```
+
+Because `3` and `v` are coprime,
+
+```text
+q=gcd(3a,v)
+ =gcd(Rp−Hv,v)
+ =gcd(Rp,v)
+ =gcd(R,v).
+```
+
+In particular, `q∣R`. Write
+
+```text
+a=qa₀,       v=qv₀,       r=R/q.
+```
+
+Then
+
+```text
+gcd(a₀,v₀)=gcd(r,v₀)=1,
+a₀Δ=−Hμv₀,                                  (19)
+rp=Hv₀+3a₀.                                  (20)
+```
+
+Consequently
+
+```text
+a₀∣Hμ,       v₀∣Δ.                          (21)
+```
+
+Thus every integral pole lies on one of finitely many divisor rays selected
+by `q∣R` and `a₀∣Hμ`; only the positive parameter `v₀` remains unbounded.
+This is an arithmetic normal form, not yet an exclusion theorem.
+
+The distinguished value is completely rigid:
+
+```text
+Δ=H       ↔       P=V.                       (22)
+```
+
+For the forward implication, (19) and coprimality force
+`v₀=1,a₀=−μ`. Equation (20), together with `H−3μ=R`, gives `rp=R=qr`;
+hence `p=q`. Since `p` is coprime to `v=qv₀`, one gets `p=q=1`, and therefore
+`P=V`. The converse follows by direct substitution in (17).
+
+Equation (22) identifies one integral pole family exactly: `Δ=H` is not a
+malformed target but the original terminal-match equation. The remaining
+question is whether a Neary block can realize any of the other divisor rays.
+
+The positive boundary branch is finite before any target analysis. When
+`d=1`, deleting the common suffix leaves exactly `β+2` ternary digits on the
+upper side. Thus
+
+```text
+Δ>0       ⇒       0<Δ<3^(β+2)=9ρ.           (23)
+```
+
+The corresponding projective value is
+
+```text
+y=h(1−3μ/Δ).
+```
+
+Every pole is positive, so `0<Δ≤3μ` is automatically safe. Only the finite
+integer interval
+
+```text
+3μ<Δ<9ρ                                  (24)
+```
+
+can contribute a positive false pole. Negative `Δ` remains unbounded and is
+the harder divisor-ray branch.
+
 ## Bounded Diagnostics
 
 [`tools/explore_setter_projective.py`](../tools/explore_setter_projective.py) performs exact
@@ -467,6 +576,7 @@ bounded orbit search and finite-field shadowing. At `β=3`, body `bbcc`, it foun
 role-block length ≤10, one transfer before a pole: no collision
 role-block length ≤3, three transfers:          677376 distinct states, no collision
 role-block length ≤2, five transfers:           4160000 distinct states, no collision
+target-block length ≤14, false integral unit pole: none
 ```
 
 These are finite searches, not theorem evidence.
@@ -483,12 +593,14 @@ nonresonant valuation update (7) on every benchmark role block of length at most
 every arbitrary role word of length at most five, it independently compares the reverse
 discrepancy scan with direct suffix cancellation and checks the bounds (11)–(12). It checks
 the forbidden-factor consequence of (16) on the same words and verifies the two single-erasure
-formulas symbolically for `3≤β≤8`.
+formulas symbolically for `3≤β≤8`. A streaming exact search checks the last diagnostic without
+retaining all `4^12` target words.
 
 ## Promotion Boundary
 
 The scaled transfer, pole-shell theorem, reset-zero peeling argument, integer carry recurrence,
 two-transfer gate, distinguished-boundary suffix gate, reverse-discrepancy recurrence, and
-bounded-fringe and β-shell theorems are audited mathematics. The bounded searches are computational
-diagnostics. No finite semantic quotient of the discrepancy queue is known, and arbitrary-depth
+bounded-fringe theorem, β-shell theorem, and divisor normal form are audited mathematics. The
+bounded searches are computational diagnostics. No finite semantic quotient of the discrepancy
+queue is known, no nonterminal divisor ray has been excluded uniformly, and arbitrary-depth
 avoidance remains open.
