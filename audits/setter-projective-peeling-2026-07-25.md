@@ -2,7 +2,8 @@
 
 **Date:** 2026-07-25
 **Target:** the first malformed square-run transition in the five-state setter candidate
-**Verdict:** reset-zero orbits survive one transfer; residue-only invariants saturate quickly
+**Verdict:** reset-zero orbits survive one transfer; the resonant carry is an exact
+word-valued suffix discrepancy, not an ordinary finite pulse state
 
 This audit sharpens the projective obligation in `MM-S01`. It proves that a false pole cannot
 occur immediately after one transfer from the ordinary rank-one reset. It does not settle
@@ -282,6 +283,82 @@ This is the precise seam between the projective carry and the Neary pulse
 theorem. Ordinary valuation sees only the number in (10); a successful
 avoidance proof must retain the suffix alignment that produced `k`.
 
+## Reverse Suffix-Discrepancy Queue
+
+The suffix alignment in (10) has an exact operational form. Let `M=10^β`.
+For a processed role suffix `s`, reverse both terminal words and cancel their
+common prefix:
+
+```text
+rev(U(s)M)=q·u_s,       rev(V(s))=q·v_s,
+```
+
+where `q` is longest possible. Until the first mismatch, at least one of
+`u_s,v_s` is empty. If a role `r` is prepended, then
+
+```text
+rev(U(rs)M)=rev(U(s)M)·rev(U(r)),
+rev(V(rs)) =rev(V(s)) ·rev(V(r)).
+```
+
+The next state is therefore obtained by appending the two reversed role
+images to `u_s,v_s` and cancelling their common prefix. Induction on the
+processed suffix proves that the cancelled length is exactly
+
+```text
+k=lcs(U(z)M,V(z)).
+```
+
+Once both residuals are nonempty, their first bits differ. No role still to
+the left can alter this first mismatch, so the scan stops. This is the usual
+PCP discrepancy mechanism, read from the terminal boundary.
+
+The dangerous valuation gaps nevertheless leave a bounded front fringe.
+Suppose the first mismatch appears while processing a suffix `q`, and write
+`z=pq`. Put
+
+```text
+m=|U(z)|,       d=m−k.
+```
+
+Since the matched suffix lies inside `U(q)M`,
+
+```text
+k≤|U(q)|+|M|.
+```
+
+Consequently
+
+```text
+|U(p)|=m−|U(q)|=d+k−|U(q)|≤d+|M|.          (11)
+```
+
+For the two resonant gaps in (10), the unprocessed left prefix therefore has
+upper length at most
+
+```text
+d=1:  β+2,          d=β:  2β+1.            (12)
+```
+
+If the scan reaches the left boundary without a mismatch and `d>0`, the lower
+word is a suffix of the upper boundary word. The remaining upper residual has
+exact length
+
+```text
+d+|M|,
+```
+
+giving the same two bounds.
+
+This is not a finite-state avoidance theorem. The exact pre-mismatch state is
+the residual word `u_s` or `v_s`; nothing above bounds that queue before the
+terminal fringe is exposed. Any finite invariant must therefore quotient the
+discrepancy semantically while preserving the two bounded target families.
+Discarding the residual and retaining only pulse phase, length, valuation, or
+a fixed congruence modulus does not preserve the exact terminal-match
+recurrence. The bounded diagnostics below additionally show saturation of the
+tested residue-only quotients.
+
 ## Bounded Diagnostics
 
 [`tools/explore_setter_projective.py`](../tools/explore_setter_projective.py) performs exact
@@ -303,10 +380,14 @@ zero modulo each prime, so the projective shadow becomes indeterminate. A succes
 must retain pulse or suffix history, not merely the current projective residue.
 
 The executable audit also checks equation (6), both reset representatives, and the
-nonresonant valuation update (7) on every benchmark role block of length at most three.
+nonresonant valuation update (7) on every benchmark role block of length at most three. On
+every arbitrary role word of length at most five, it independently compares the reverse
+discrepancy scan with direct suffix cancellation and checks the bounds (11)–(12).
 
 ## Promotion Boundary
 
 The scaled transfer, pole-shell theorem, reset-zero peeling argument, integer carry recurrence,
-two-transfer gate, and distinguished-boundary suffix gate are audited mathematics. The bounded
-searches are computational diagnostics. Arbitrary-depth avoidance remains open.
+two-transfer gate, distinguished-boundary suffix gate, reverse-discrepancy recurrence, and
+bounded-fringe theorem are audited mathematics. The bounded searches are computational
+diagnostics. No finite semantic quotient of the discrepancy queue is known, and arbitrary-depth
+avoidance remains open.

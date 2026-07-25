@@ -204,6 +204,63 @@ class OrbitSearch:
     depths: tuple[int, ...]
 
 
+@dataclass(frozen=True, slots=True)
+class ReverseDiscrepancy:
+    """Exact right-to-left cancellation state for one Neary role word."""
+
+    common_suffix: int
+    processed_roles: int
+    upper_residual: str
+    lower_residual: str
+    mismatch: bool
+
+
+def role_words(beta: int, body: str) -> tuple[tuple[str, str], ...]:
+    upper_b = tag_code(beta, "b")
+    upper_c = tag_code(beta, "c")
+    lower_rule_c = "1" + "".join(tag_code(beta, letter) for letter in body) + "10"
+    return (
+        (upper_b, "110"),
+        (upper_b, "0"),
+        (upper_c, lower_rule_c),
+        (upper_c, "0"),
+    )
+
+
+def reverse_discrepancy(
+    beta: int, body: str, word: tuple[int, ...]
+) -> ReverseDiscrepancy:
+    """Expose the first mismatch in ``upper(word)·marker`` versus ``lower(word)``.
+
+    Reversal turns common-suffix cancellation into common-prefix cancellation.
+    Before the first mismatch, at least one residual is empty. Once both
+    residuals are nonempty, their first bits differ and no unprocessed role can
+    enlarge the common suffix.
+    """
+
+    roles = role_words(beta, body)
+    upper = ("1" + "0" * beta)[::-1]
+    lower = ""
+    matched = 0
+
+    for processed, role in enumerate(reversed(word), start=1):
+        role_upper, role_lower = roles[role]
+        upper += role_upper[::-1]
+        lower += role_lower[::-1]
+        common = 0
+        for upper_bit, lower_bit in zip(upper, lower, strict=False):
+            if upper_bit != lower_bit:
+                break
+            common += 1
+        matched += common
+        upper = upper[common:]
+        lower = lower[common:]
+        if upper and lower:
+            return ReverseDiscrepancy(matched, processed, upper, lower, True)
+
+    return ReverseDiscrepancy(matched, len(word), upper, lower, False)
+
+
 def exact_transfer(product: SideProduct, start: Fraction, beta: int) -> Fraction | None:
     rho = 3**beta
     marker_value = (5 * rho - 1) // 2
@@ -317,6 +374,34 @@ def audit_centered_carry() -> None:
             stepped_x, stepped_y = centered_step(x, y, product, beta)
             actual = three_adic_valuation(stepped_x) - three_adic_valuation(stepped_y)
             assert actual == expected
+
+    roles = role_words(beta, "bbcc")
+    layer = [(index,) for index in range(len(roles))]
+    for _length in range(1, 6):
+        for word in layer:
+            discrepancy = reverse_discrepancy(beta, "bbcc", word)
+            upper = "".join(roles[role][0] for role in word) + "1" + "0" * beta
+            lower = "".join(roles[role][1] for role in word)
+            expected_suffix = 0
+            for upper_bit, lower_bit in zip(
+                reversed(upper), reversed(lower), strict=False
+            ):
+                if upper_bit != lower_bit:
+                    break
+                expected_suffix += 1
+            assert discrepancy.common_suffix == expected_suffix
+
+            upper_length = len(upper) - beta - 1
+            gap = upper_length - expected_suffix
+            prefix = word[: len(word) - discrepancy.processed_roles]
+            prefix_upper_length = sum(len(roles[role][0]) for role in prefix)
+            if discrepancy.mismatch:
+                assert prefix_upper_length <= gap + beta + 1
+            elif gap in (1, beta):
+                assert not discrepancy.lower_residual
+                assert len(discrepancy.upper_residual) == gap + beta + 1
+
+        layer = [(*word, role) for word in layer for role in range(len(roles))]
 
 
 def next_exact_layer(

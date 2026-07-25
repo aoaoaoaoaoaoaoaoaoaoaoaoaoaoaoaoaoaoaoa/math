@@ -63,6 +63,7 @@ file owns the mathematical stock.
 | [`MM-S01`](#mm-s01-square-run-projective-normal-form) | structure theorem | malformed square runs reduce to rational projective pole avoidance | audited | active |
 | [`MM-S02`](#mm-s02-reset-zero-projective-peeling) | structure theorem | the ordinary reset cannot reach a false pole after one transfer | audited | active |
 | [`MM-S03`](#mm-s03-centered-setter-carry) | structure theorem | setter orbits obey an integer valuation-and-suffix carry recurrence | audited | active |
+| [`MM-S04`](#mm-s04-reverse-suffix-discrepancy) | structure theorem | setter resonance is a word-valued discrepancy queue with a bounded front fringe | audited | active |
 | [`M4-C01`](#m4-c01-two-state-pushout-compiler) | compiler | binary deterministic two-state scalar control compiles to three `4 × 4` matrices | audited | active |
 | [`M4-O01`](#m4-o01-exact-toggle-fusion-leaves-an-immortal-core) | obstruction | exact local toggle fusion preserves an invertible two-plane | audited | stock |
 | [`M4-O02`](#m4-o02-two-private-state-phase-signature) | obstruction | exact shared-channel phase ratios are constant or two-periodic | audited | active |
@@ -989,9 +990,59 @@ two suffix equations at the distinguished boundary.
 
 **Artifact:** [`audits/setter-projective-peeling-2026-07-25.md`](audits/setter-projective-peeling-2026-07-25.md#centered-integer-carry).
 
-**Next:** construct a right-to-left pulse transducer for the common suffix in
-the distinguished-boundary gate, then determine whether its resonant carry
-either peels to a terminal match or admits an explicit malformed pole.
+**Next:** apply [`MM-S04`](#mm-s04-reverse-suffix-discrepancy) to quotient the
+word-valued suffix carry without forgetting the two resonant target families.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S04: Reverse suffix discrepancy
+
+**Kind:** structure theorem
+**Evidence:** audited
+**Disposition:** active
+
+Let `M=10^β`, and compare the terminal words `U(z)M` and `V(z)` of an arbitrary
+Neary role word `z`. Reading roles from right to left, maintain the pair
+obtained by reversing both words and deleting their common prefix. Prepending
+one role appends its reversed upper and lower images to the two residuals,
+after which their new common prefix is deleted. Until the first mismatch, at
+least one residual is empty; once both are nonempty, their first bits differ
+and no unprocessed role can change the common suffix.
+
+This recurrence computes exactly
+
+```text
+k=lcs(U(z)M,V(z)).
+```
+
+Put `m=|U(z)|` and `d=m−k`. If the first mismatch occurs in a processed suffix
+`q`, with `z=pq`, then
+
+```text
+|U(p)|≤d+|M|.
+```
+
+If no mismatch occurs and `d>0`, the surviving upper residual has exactly
+`d+|M|` bits. The only setter resonances are `d=1` and `d=β`, so their
+unprocessed left fringes have upper length at most `β+2` and `2β+1`.
+
+**Scope:** the natural exact state is a residual word. This theorem neither
+bounds that queue before the first mismatch nor proves that no finite semantic
+quotient exists. It proves no projective avoidance statement by itself.
+
+**Use:** replaces the proposed finite pulse transducer by the correct
+PCP-discrepancy object. A successful proof must recognize reachability of two
+bounded residual target families through a quotient compatible with role
+prepending. Phase, length, valuation, and fixed-modulus residue alone do not
+retain the exact recurrence; the tested residue-only quotients saturate.
+
+**Artifact:** [`audits/setter-projective-peeling-2026-07-25.md`](audits/setter-projective-peeling-2026-07-25.md#reverse-suffix-discrepancy-queue);
+[`tools/explore_setter_projective.py`](tools/explore_setter_projective.py).
+
+**Next:** identify the residual with the existing Neary queue/history semantics,
+or construct an explicit malformed role sequence whose discrepancy reaches one
+of the two bounded resonant targets.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).

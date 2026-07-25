@@ -342,8 +342,13 @@ Away from equal valuations, the valuation gap updates by
 `d'=m−min(d,s)` with `s∈{1,β}`. It reduces the first possible two-transfer
 collision to three rigid all-`c`/single-`D_b` block families. From the
 distinguished boundary, the resonant carry is exactly the longest common
-suffix of the upper terminal spelling and the lower spelling. The next proof
-must therefore be a right-to-left pulse theorem, not a larger residue modulus.
+suffix of the upper terminal spelling and the lower spelling.
+[`MM-S04`](SALVAGE.md#mm-s04-reverse-suffix-discrepancy) gives its exact
+right-to-left machine. It is a word-valued PCP discrepancy queue, not a finite
+pulse state. At either dangerous gap, however, the unprocessed left fringe has
+upper length at most `β+2` or `2β+1`. The next proof must therefore quotient
+the internal discrepancy queue semantically while preserving these bounded
+targets; a larger residue modulus or phase-only automaton cannot suffice.
 A single explicit nonterminal pole orbit kills this family; a closed invariant proves
 `M₅(3)`. The same-zero binary root and fixed-width-three source remain independent fallbacks.
 
