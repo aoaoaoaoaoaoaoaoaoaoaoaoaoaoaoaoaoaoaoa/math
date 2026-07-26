@@ -274,9 +274,9 @@ already closed.
 ### 2. Zero-set compression and fused punctuation: `M₅(3)`
 
 The literal CHHN packing has no common invariant line or hyperplane. The all-placement
-certificate [`MM-O01`](SALVAGE.md#mm-o01-all-placement-packing-rank) further reports that its
-selected coefficient series has exact Hankel rank six. Once audited, this closes exact
-minimization of that packing in five states.
+certificate [`MM-O01`](SALVAGE.md#mm-o01-all-placement-packing-rank) now formally proves that
+its selected coefficient series has exact representation dimension six for every placement.
+This closes exact minimization of that packing in five states.
 
 The paired four-state scalar system closes a second exact route. Lean certifies a uniform
 nonsingular four-by-four Hankel section
@@ -863,9 +863,8 @@ universal computation.
 1. Formalize `M4-C01`, `M4-O01`, `M4-O02`, and `M4-O03`. In parallel, either construct an
    open-tail binary two-state source invariant or solve the mixed cube-root punctuation
    incidence equations. Reject every finite closed-token source before appendant search.
-2. Reconstruct and formalize the all-placement certificate `MM-O01`; use formalized `G3-O01`,
-   `MM-O03`, and `MM-O04` to reject exact macros and bridges without conflating their scope with
-   solvability preservation.
+2. Use formalized `MM-O01`, `G3-O01`, `MM-O03`, and `MM-O04` to reject exact packings, macros,
+   and bridges without conflating their scope with solvability preservation.
 3. Prove or refute the setter candidate's projective avoidance property, construct a
    five-state same-zero binary root, or find a constant-state scheduled delimiter fusion.
    Treat fixed-width-three universality as a separate source theorem. Reopen `MM-C04` only for

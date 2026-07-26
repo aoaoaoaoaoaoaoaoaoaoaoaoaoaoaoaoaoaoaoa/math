@@ -45,6 +45,7 @@ open MatrixMortality
 #print axioms paired_native_state_card
 #print axioms paired_native_represents
 #print axioms paired_exact_diagonal_twoChannel_state_lower_bound
+#print axioms chhnNeary_exactRepresentation_six_le_card
 #print axioms Undecidability.nearyMortality44_mortal_iff_tagHaltsFrom
 #print axioms Undecidability.nearyMortality44_control_fixes_anchor
 #print axioms Undecidability.nearyMortality44_toggle_eq_permMatrix

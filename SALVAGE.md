@@ -46,7 +46,7 @@ file owns the mathematical stock.
 | [`MM-C02`](#mm-c02-common-image-restriction) | compiler | mortality-preserving restriction to a common image | formalized | graduated |
 | [`MM-C03`](#mm-c03-scheduled-binary-compiler) | compiler | fixed-width tag strokes to a total two-letter scalar series | formalized | graduated |
 | [`MM-C04`](#mm-c04-internal-word-sandwich-minimization) | compiler | internal low-rank words repair reachable/observable minimization | audited | active |
-| [`MM-O01`](#mm-o01-all-placement-packing-rank) | obstruction | literal CHHN packing has exact rank six for every separator placement | reported | active |
+| [`MM-O01`](#mm-o01-all-placement-packing-rank) | obstruction | literal CHHN packing has exact rank six for every separator placement | formalized | graduated |
 | [`MM-O02`](#mm-o02-one-sided-phase-overlap) | obstruction | standard common-line phase fusion becomes one-sided | reported | parked |
 | [`MM-O03`](#mm-o03-two-channel-boundary-tax) | obstruction | exact diagonal rank-two punctuation costs two states beyond Hankel rank | formalized | graduated |
 | [`MM-O04`](#mm-o04-uniform-rank-four-paired-series) | certificate | the paired scalar series has exact Hankel rank four | formalized | graduated |
@@ -118,7 +118,7 @@ available.
 ### MM-C02: Common-image restriction
 
 **Kind:** compiler  
-**Evidence:** formalized  
+**Evidence:** formalized
 **Disposition:** graduated
 
 Suppose every generator maps the ambient space into a common subspace `K`, and explicit integral
@@ -236,14 +236,14 @@ obstruction](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/iss
 
 ### MM-O01: All-placement packing rank
 
-**Kind:** obstruction  
-**Evidence:** reported  
-**Disposition:** active
+**Kind:** obstruction
+**Evidence:** formalized
+**Disposition:** graduated
 
 For every placement of the four ordinary `3 × 3` payloads and the rank-one separator in the
-literal three-generator `6 × 6` CHHN packing, the selected scalar coefficient series reportedly
-has Hankel rank exactly six. The report supplies six-prefix and six-suffix determinant
-certificates for the three separator-location cases.
+literal three-generator `6 × 6` CHHN packing, the selected scalar coefficient series has exact
+linear-representation dimension six. A placement-dependent six-prefix family and a
+semantically selected six-suffix family expose a nonsingular finite Hankel section.
 
 **Scope:** this excludes exact five-state realizations of that coefficient series. It does not
 exclude a different five-state series with the same zero set.
@@ -251,12 +251,11 @@ exclude a different five-state series with the same zero set.
 **Use:** reject further exact minimization of the literal CHHN packing and require a changed
 coefficient series or punctuation architecture.
 
-**Artifact:** the claim and its prior-art scope are preserved in
-[`audits/m44-prior-art-2026-07-22.md`](audits/m44-prior-art-2026-07-22.md#7-the-chhn-packing-and-the-hankel-rank-six-obstruction).
-The symbolic proof has not been independently reconstructed in Lean.
-
-**Next:** audit the determinant families, then formalize one placement-independent finite
-certificate.
+**Artifact:** `chhnNeary_exactRepresentation_six_le_card` in
+[`MatrixMortality/CHHNPackingRank.lean`](MatrixMortality/CHHNPackingRank.lean), built on the
+generic kernels in [`MatrixMortality/CHHNPacking.lean`](MatrixMortality/CHHNPacking.lean).
+The reconstruction and independent 120-placement executable check are documented in
+[`audits/chhn-all-placement-rank-2026-07-26.md`](audits/chhn-all-placement-rank-2026-07-26.md).
 
 **Issue:** [#3, Formalize the exact-realization obstructions for
 `M₅(3)`](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/3).

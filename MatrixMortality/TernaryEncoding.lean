@@ -87,6 +87,17 @@ theorem ternaryCode_lower_bound (word : List Bool) (word_nonempty : word ≠ [])
           simp only [List.length_cons, Nat.add_sub_cancel, ternaryDigit]
           omega
 
+/-- A coded word remains strictly below the base-three scale set by its length. -/
+theorem ternaryCode_lt_pow_length (word : List Bool) :
+    ternaryCode word < 3 ^ word.length := by
+  rw [ternaryCode]
+  have digit_bound :
+      ∀ digit ∈ word.reverse.map ternaryDigit, digit < 3 := by
+    intro digit member
+    obtain ⟨bit, _, rfl⟩ := List.mem_map.mp member
+    exact ternaryDigit_lt_three bit
+  simpa using Nat.ofDigits_lt_base_pow_length (by norm_num : 1 < 3) digit_bound
+
 theorem digits_ternaryCode (word : List Bool) :
     Nat.digits 3 (ternaryCode word) = word.reverse.map ternaryDigit := by
   apply Nat.digits_ofDigits 3 (by decide)

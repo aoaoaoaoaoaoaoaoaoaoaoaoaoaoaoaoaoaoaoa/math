@@ -59,6 +59,7 @@
 'MatrixMortality.paired_exact_diagonal_twoChannel_state_lower_bound' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.chhnNeary_exactRepresentation_six_le_card' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.Undecidability.nearyMortality44_mortal_iff_tagHaltsFrom' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]

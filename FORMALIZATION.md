@@ -239,6 +239,8 @@ with a complete arbitrary-word converse.
 | `MatrixSemigroup.lean` | shared word semantics, mortality transports, common-image restriction, transposition, and zero padding |
 | `LinearRepresentation.lean` | finite Hankel sections and exact-realization state lower bounds |
 | `BoundaryTax.lean` | generic finite-witness two-channel boundary tax |
+| `CHHNPacking.lean` | generic two-slot CHHN packing and six-state finite-Hankel kernels |
+| `CHHNPackingRank.lean` | all-placement exact six-state lower bound for the Neary packing |
 | `TagQueue.lean` | tag steps and generic history soundness |
 | `NearyEncoding.lean` | four ordinary tiles, synchronization, source equivalence, and composed reductions |
 | `MarkedTerminal.lean` | fresh marker, primitive terminality, and binary recoding |
@@ -312,6 +314,7 @@ with a complete arbitrary-word converse.
 | Paired scalar series has a nonsingular `4 × 4` Hankel section | `pairedRankHankel_det_ne_zero` |
 | Every exact paired-series realization needs four states | `paired_exact_state_lower_bound`, `paired_native_state_card`, `paired_native_represents` |
 | Every exact diagonal paired-series bridge needs six states | `paired_exact_diagonal_twoChannel_state_lower_bound` |
+| Every literal Neary CHHN placement needs six exact states | `chhnNeary_exactRepresentation_six_le_card` |
 | Every binary word has the exact six-state coefficient | `pairedBinaryRow_wordProduct`, `pairedBinaryCoefficient_eq_sideCoefficient` |
 | Every four-role word has a two-bit encoding | `decodePairedBinary_surjective` |
 | Canonical structured `Z₆(2)` instance iff tag halting | `nearyScalarZero62_hasZero_iff_tagHaltsFrom` |

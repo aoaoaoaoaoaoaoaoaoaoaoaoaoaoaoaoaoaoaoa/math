@@ -1,4 +1,6 @@
 import MatrixMortality.BoundaryTax
+import MatrixMortality.CHHNPacking
+import MatrixMortality.CHHNPackingRank
 import MatrixMortality.LinearRepresentation
 import MatrixMortality.NearyEncoding
 import MatrixMortality.MacroIrreducibility
