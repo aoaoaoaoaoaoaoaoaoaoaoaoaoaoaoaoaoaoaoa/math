@@ -224,12 +224,15 @@ def pendingSecond {state : Type*} (swap : Bool) (q : state) (count : Nat) :
     List (Symbol state) :=
   cell (.second swap q) (.pad q) ++ cells (.secondDigit swap q) (.pad q) count
 
+/-- Reconstructed leading unary block after normalization. -/
 def anchorBlock {state : Type*} (q : state) (count : Nat) : List (Symbol state) :=
   cell (.anchor q) (.pad q) ++ cells (.digit q) (.pad q) count
 
+/-- Reconstructed trailing unary block after normalization. -/
 def boundaryBlock {state : Type*} (q : state) (count : Nat) : List (Symbol state) :=
   cell (.boundary q) (.pad q) ++ cells (.boundaryDigit q) (.pad q) count
 
+/-- Leading unary block held aside during a counter-order swap. -/
 def delayedBlock {state : Type*} (q : state) (count : Nat) : List (Symbol state) :=
   cell (.delayedFirst q) (.pad q) ++ cells (.delayedFirstDigit q) (.pad q) count
 
@@ -511,7 +514,7 @@ theorem sweep_to_parity {state : Type*} (machine : Machine state) (q : state)
 
 /-- An odd front counter preserves the `true` branch copy of the written block. -/
 theorem sweep_odd_front {state : Type*} (machine : Machine state) (q : state)
-    (action : Action state) (writtenCount half : Nat) (at_q : machine q = some action) :
+    (writtenCount half : Nat) :
     TagReaches machine
       (halvingBlock q (2 * half + 1) ++ parityBlock q writtenCount)
       (parityBlock q writtenCount ++ branchBlock q half) := by
@@ -520,11 +523,11 @@ theorem sweep_odd_front {state : Type*} (machine : Machine state) (q : state)
       List.replicate half (.halvingDigit q, .halvingDigit q))
   have run := sweep (production machine) pairs (parityBlock q writtenCount)
   simpa [pairs, TagReaches, Step, halvingBlock, branchBlock, pairWord_oddRun,
-    pairOutput_oddRun, production, at_q, List.append_assoc] using run
+    pairOutput_oddRun, production, List.append_assoc] using run
 
 /-- An even front counter consumes the `true` branch copy of the written block. -/
 theorem sweep_even_front {state : Type*} (machine : Machine state) (q : state)
-    (action : Action state) (writtenCount half : Nat) (at_q : machine q = some action) :
+    (writtenCount half : Nat) :
     TagReaches machine
       (halvingBlock q (2 * half) ++ parityBlock q writtenCount)
       (.parityAnchor false q ::
@@ -537,7 +540,7 @@ theorem sweep_even_front {state : Type*} (machine : Machine state) (q : state)
         (.parityAnchor false q ::
           cells (.parityDigit true q) (.parityDigit false q) writtenCount)
       simpa [TagReaches, Step, halvingBlock, branchBlock, pairWord, pairOutput, production,
-        at_q, List.append_assoc] using run
+        List.append_assoc] using run
   | succ half =>
       let pairs : List (Symbol state × Symbol state) :=
         ((.halvingAnchor q, .halvingDigit q) ::
@@ -548,7 +551,7 @@ theorem sweep_even_front {state : Type*} (machine : Machine state) (q : state)
           cells (.parityDigit true q) (.parityDigit false q) writtenCount)
       dsimp only [pairs] at run
       rw [pairWord_evenRun, pairOutput_evenRun] at run
-      simpa [TagReaches, Step, halvingBlock, branchBlock, production, at_q,
+      simpa [TagReaches, Step, halvingBlock, branchBlock, production,
         List.append_assoc] using run
 
 /-- The surviving odd branch writes the first pending unary block. -/
@@ -719,7 +722,7 @@ theorem frame_to_pending {state : Type*} (machine : Machine state) (q : state)
         cells (Symbol.parityDigit true q) (Symbol.parityDigit false q)
             (written action.write behind) ++
           branchBlock q half)
-      (sweep_even_front machine q action (written action.write behind) half at_q)
+      (sweep_even_front machine q (written action.write behind) half)
     apply Relation.ReflTransGen.trans
       (b := Symbol.branchAnchor false q ::
         cells (Symbol.branchDigit true q) (Symbol.branchDigit false q) half ++
@@ -741,7 +744,7 @@ theorem frame_to_pending {state : Type*} (machine : Machine state) (q : state)
       (sweep_to_parity machine q (written action.write behind) (2 * half + 1))
     apply Relation.ReflTransGen.trans
       (b := parityBlock q (written action.write behind) ++ branchBlock q half)
-      (sweep_odd_front machine q action (written action.write behind) half at_q)
+      (sweep_odd_front machine q (written action.write behind) half)
     apply Relation.ReflTransGen.trans
       (b := branchBlock q half ++
         pendingFirst (reverses machine action true) (action.next true)
@@ -772,7 +775,7 @@ theorem frame_to_pending_strict {state : Type*} (machine : Machine state) (q : s
         cells (Symbol.parityDigit true q) (Symbol.parityDigit false q)
             (written action.write behind) ++
           branchBlock q half)
-      (sweep_even_front machine q action (written action.write behind) half at_q)
+      (sweep_even_front machine q (written action.write behind) half)
     apply Relation.ReflTransGen.trans
       (b := Symbol.branchAnchor false q ::
         cells (Symbol.branchDigit true q) (Symbol.branchDigit false q) half ++
@@ -794,7 +797,7 @@ theorem frame_to_pending_strict {state : Type*} (machine : Machine state) (q : s
       (sweep_to_parity machine q (written action.write behind) (2 * half + 1))
     apply Relation.ReflTransGen.trans
       (b := parityBlock q (written action.write behind) ++ branchBlock q half)
-      (sweep_odd_front machine q action (written action.write behind) half at_q)
+      (sweep_odd_front machine q (written action.write behind) half)
     apply Relation.ReflTransGen.trans
       (b := branchBlock q half ++
         pendingFirst (reverses machine action true) (action.next true)

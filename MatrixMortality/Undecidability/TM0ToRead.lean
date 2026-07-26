@@ -73,11 +73,6 @@ theorem bitsNat_div_two (bits : ListBlank Bool) :
   rw [← Nat.div2_val, div2_bitsNat]
 
 @[simp]
-theorem bit_head_div_bitsNat (bits : ListBlank Bool) :
-    Nat.bit bits.head (bitsNat bits / 2) = bitsNat bits := by
-  rw [bitsNat_div_two, ← bitsNat_cons, ListBlank.cons_head_tail]
-
-@[simp]
 theorem bit_div_two (bit : Bool) (bits : Nat) :
     Nat.bit bit bits / 2 = bits := by
   rw [← Nat.div2_val, Nat.div2_bit]

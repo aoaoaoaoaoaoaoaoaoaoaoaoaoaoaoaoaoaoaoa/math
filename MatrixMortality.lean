@@ -10,4 +10,4 @@ import MatrixMortality.Undecidability.NearyConverse
 import MatrixMortality.Undecidability.NearyProblems
 import MatrixMortality.Undecidability.PairedProblems
 import MatrixMortality.Undecidability.PrefixProblems
-import MatrixMortality.Undecidability.UniversalTM0
+import MatrixMortality.Undecidability.UniversalTwoTag
