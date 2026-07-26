@@ -210,15 +210,19 @@ The first projective peeling theorem and the bounded residue diagnostics are in
 Formal promotion and the avoidance decision are tracked in
 [#6](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
 
-The `M₄(3)` attack produced one independently checked compiler and four independently checked
-obstructions that are not yet Lean declarations:
+The generic two-state compiler [`M4-C01`](SALVAGE.md#m4-c01-two-state-pushout-compiler), the
+exact toggle-fusion obstruction [`M4-O01`](SALVAGE.md#m4-o01-exact-toggle-fusion-leaves-an-immortal-core),
+and the closed-serialization obstruction
+[`M4-O03`](SALVAGE.md#m4-o03-closed-serialization-collapse) are now Lean declarations. For the
+last obstruction, Lean proves the exact initial-queue criterion: a finite closed-token
+substitution halts precisely when none of the tokens reachable from that queue lies on a
+dependency cycle.
+
+Two independently checked obstructions remain unformalized:
 
 | Record | Formalization obligation |
 | --- | --- |
-| [`M4-C01`](SALVAGE.md#m4-c01-two-state-pushout-compiler) | generic two-state pushout, total suffix decoder, reset-letter rank classification, and fixed-anchor mortality equivalence |
-| [`M4-O01`](SALVAGE.md#m4-o01-exact-toggle-fusion-leaves-an-immortal-core) | exact contextual toggle identities imply an invertible common-plane restriction |
 | [`M4-O02`](SALVAGE.md#m4-o02-two-private-state-phase-signature) | two-dimensional quotient phase ratios are constant or two-periodic; instantiate the Neary signature |
-| [`M4-O03`](SALVAGE.md#m4-o03-closed-serialization-collapse) | finite closed-token substitution empties exactly when its reachable dependency graph is acyclic |
 | [`M4-O04`](SALVAGE.md#m4-o04-exact-internal-final-code-defect) | binary morphism defect forces commuting upper images, contradicting the macro source |
 
 The odd-phase macro cut [`M4-S01`](SALVAGE.md#m4-s01-odd-phase-macro-cut) remains reported.
@@ -241,6 +245,7 @@ with a complete arbitrary-word converse.
 | `BoundaryTax.lean` | generic finite-witness two-channel boundary tax |
 | `CHHNPacking.lean` | generic two-slot CHHN packing and six-state finite-Hankel kernels |
 | `CHHNPackingRank.lean` | all-placement exact six-state lower bound for the Neary packing |
+| `ClosedSubstitution.lean` | exact reachable-cycle criterion for finite closed-token queues |
 | `TwoStatePushout.lean` | generic two-state pushout, suffix decoder, rank classification, and integer mortality compiler |
 | `TwoStateObstructions.lean` | exact local toggle-fusion obstruction |
 | `TagQueue.lean` | tag steps and generic history soundness |
@@ -321,6 +326,7 @@ with a complete arbitrary-word converse.
 | A two-state reset has rank three; separated destinations have rank four | `twoStateDataMatrix_rank_eq_three_of_eq`, `twoStateDataMatrix_rank_eq_four_of_ne` |
 | The integer two-state family is mortal exactly at a nonempty controlled scalar zero | `twoStateMortalityFamily_int_mortal_iff_nonempty_zero` |
 | Exact left-context toggle fusion is immortal | `exactLeftToggleFusion_immortal` |
+| A finite closed-token queue halts iff no reachable token lies on a dependency cycle | `closedSubstitutionHalts_iff_noReachableCycle` |
 | Every binary word has the exact six-state coefficient | `pairedBinaryRow_wordProduct`, `pairedBinaryCoefficient_eq_sideCoefficient` |
 | Every four-role word has a two-bit encoding | `decodePairedBinary_surjective` |
 | Canonical structured `Z₆(2)` instance iff tag halting | `nearyScalarZero62_hasZero_iff_tagHaltsFrom` |

@@ -860,9 +860,10 @@ universal computation.
 
 ## Execution order
 
-1. Formalize `M4-O02`, `M4-O03`, and `M4-O04`. In parallel, either construct an
+1. Formalize `M4-O02` and `M4-O04`. In parallel, either construct an
    open-tail binary two-state source invariant or solve the mixed cube-root punctuation
-   incidence equations. Reject every finite closed-token source before appendant search.
+   incidence equations. Use formalized `M4-O03` to reject every finite closed-token source
+   before appendant search.
 2. Use formalized `MM-O01`, `G3-O01`, `MM-O03`, and `MM-O04` to reject exact packings, macros,
    and bridges without conflating their scope with solvability preservation.
 3. Prove or refute the setter candidate's projective avoidance property, construct a

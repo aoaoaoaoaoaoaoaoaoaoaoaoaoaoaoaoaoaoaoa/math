@@ -51,6 +51,7 @@ open MatrixMortality
 #print axioms twoStateDataMatrix_rank_eq_four_of_ne
 #print axioms twoStateDataMatrix_rank_eq_three_of_eq
 #print axioms exactLeftToggleFusion_immortal
+#print axioms closedSubstitutionHalts_iff_noReachableCycle
 #print axioms Undecidability.nearyMortality44_mortal_iff_tagHaltsFrom
 #print axioms Undecidability.nearyMortality44_control_fixes_anchor
 #print axioms Undecidability.nearyMortality44_toggle_eq_permMatrix

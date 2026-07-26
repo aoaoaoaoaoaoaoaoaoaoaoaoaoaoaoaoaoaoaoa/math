@@ -132,6 +132,10 @@ cannot provide the second. The surviving source state must remain open across no
 boundaries, or the matrix construction must preserve only the zero set through cancellation,
 incidence, or a state-dependent gauge.
 
+The exact finite closed-token criterion is now kernel-checked as
+`closedSubstitutionHalts_iff_noReachableCycle` in
+[`MatrixMortality/ClosedSubstitution.lean`](../MatrixMortality/ClosedSubstitution.lean).
+
 ## Mechanical Sanity Check
 
 An ephemeral SymPy checker enumerated all four destination patterns and verified the two

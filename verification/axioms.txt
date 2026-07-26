@@ -67,6 +67,9 @@
 'MatrixMortality.twoStateDataMatrix_rank_eq_four_of_ne' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.twoStateDataMatrix_rank_eq_three_of_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.exactLeftToggleFusion_immortal' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.closedSubstitutionHalts_iff_noReachableCycle' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.Undecidability.nearyMortality44_mortal_iff_tagHaltsFrom' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]

@@ -75,7 +75,7 @@ file owns the mathematical stock.
 | [`M4-O01`](#m4-o01-exact-toggle-fusion-leaves-an-immortal-core) | obstruction | exact local toggle fusion preserves a nonzero common anchor | formalized | graduated |
 | [`M4-O02`](#m4-o02-two-private-state-phase-signature) | obstruction | exact shared-channel phase ratios are constant or two-periodic | audited | active |
 | [`M4-S01`](#m4-s01-odd-phase-macro-cut) | structure theorem | paired Neary roles inherit a rigid macro-stroke language | reported | active |
-| [`M4-O03`](#m4-o03-closed-serialization-collapse) | obstruction | finite closed-token queue serialization is decidable | audited | active |
+| [`M4-O03`](#m4-o03-closed-serialization-collapse) | obstruction | finite closed-token queue serialization is decidable | formalized | graduated |
 | [`M4-O04`](#m4-o04-exact-internal-final-code-defect) | obstruction | distinct exact binary codes for one macro force commuting upper images | audited | stock |
 | [`M4-O05`](#m4-o05-direct-two-state-first-return-recoding) | obstruction | the present four Neary roles have no direct two-state first-return code | reported | active |
 | [`M4-M01`](#m4-m01-mixed-cube-root-punctuation) | partial mechanism | rational cube-root toggles reduce mixed punctuation to incidence equations | audited | parked |
@@ -237,8 +237,8 @@ obstruction](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/iss
 ### MM-O01: All-placement packing rank
 
 **Kind:** obstruction
-**Evidence:** formalized
-**Disposition:** graduated
+**Evidence:** audited
+**Disposition:** active
 
 For every placement of the four ordinary `3 × 3` payloads and the rank-one separator in the
 literal three-generator `6 × 6` CHHN packing, the selected scalar coefficient series has exact
@@ -1740,8 +1740,8 @@ morphisms in Lean, and derive the all-solution macro normal form from
 ### M4-O03: Closed serialization collapse
 
 **Kind:** obstruction
-**Evidence:** audited
-**Disposition:** active
+**Evidence:** formalized
+**Disposition:** graduated
 
 Let `Γ` be finite and let each semantic token `γ` have a complete binary block `Φ(γ)`.
 Assume every macro-boundary queue is a concatenation of complete blocks, processing one
@@ -1773,9 +1773,11 @@ boundaries are not covered.
 
 **Artifact:** the proof audit is
 [`audits/m43-two-state-pushout-2026-07-24.md`](audits/m43-two-state-pushout-2026-07-24.md).
+The exact initial-queue criterion is
+`closedSubstitutionHalts_iff_noReachableCycle` in
+[`MatrixMortality/ClosedSubstitution.lean`](MatrixMortality/ClosedSubstitution.lean).
 
-**Next:** formalize the finite-graph criterion and use it as a guardrail for any future source
-serializer.
+**Next:** use the checked criterion as a guardrail for every future source serializer.
 
 ### M4-O04: Exact internal/final code defect
 
