@@ -17,17 +17,17 @@ namespace Undecidability
 namespace FiniteTM0
 
 /-- A canonical initial state plus the labels in a finite support. -/
-abbrev State {label : Type*} [DecidableEq label] (support : Finset label) :=
+abbrev State {label : Type*} (support : Finset label) :=
   Unit ⊕ { q // q ∈ support }
 
 /-- Erase the finite wrapper back to the source label type. -/
-def State.value {label : Type*} [Inhabited label] [DecidableEq label]
+def State.value {label : Type*} [Inhabited label]
     {support : Finset label} : State support → label
   | .inl _ => default
   | .inr q => q
 
 /-- Every wrapped state denotes a member of the support. -/
-theorem State.value_mem {label : Type*} [Inhabited label] [DecidableEq label]
+theorem State.value_mem {label : Type*} [Inhabited label]
     {source : TM0.Machine Bool label} {support : Finset label}
     (supported : TM0.Supports source ↑support) (q : State support) :
     q.value ∈ support := by
@@ -67,7 +67,7 @@ theorem machine_eq_some {label : Type*} [Inhabited label] [DecidableEq label]
   simp [machine, transition, q'_supported]
 
 /-- Erase a finite-state configuration back to the source machine. -/
-def config {label : Type*} [Inhabited label] [DecidableEq label]
+def config {label : Type*} [Inhabited label]
     {support : Finset label} (source : TM0.Cfg Bool (State support)) :
     TM0.Cfg Bool label where
   q := source.q.value
@@ -102,7 +102,7 @@ theorem respects {label : Type*} [Inhabited label] [DecidableEq label]
         rfl
 
 /-- The wrapped initial configuration erases to the original initial configuration. -/
-theorem config_init {label : Type*} [Inhabited label] [DecidableEq label]
+theorem config_init {label : Type*} [Inhabited label]
     (support : Finset label) (input : List Bool) :
     config (TM0.init input : TM0.Cfg Bool (State support)) =
       (TM0.init input : TM0.Cfg Bool label) := rfl
