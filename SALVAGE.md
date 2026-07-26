@@ -48,8 +48,8 @@ file owns the mathematical stock.
 | [`MM-C04`](#mm-c04-internal-word-sandwich-minimization) | compiler | internal low-rank words repair reachable/observable minimization | audited | active |
 | [`MM-O01`](#mm-o01-all-placement-packing-rank) | obstruction | literal CHHN packing has exact rank six for every separator placement | reported | active |
 | [`MM-O02`](#mm-o02-one-sided-phase-overlap) | obstruction | standard common-line phase fusion becomes one-sided | reported | parked |
-| [`MM-O03`](#mm-o03-two-channel-boundary-tax) | obstruction | exact diagonal rank-two punctuation costs two states beyond Hankel rank | audited | active |
-| [`MM-O04`](#mm-o04-uniform-rank-four-paired-series) | certificate | the paired scalar series has exact Hankel rank four | audited | active |
+| [`MM-O03`](#mm-o03-two-channel-boundary-tax) | obstruction | exact diagonal rank-two punctuation costs two states beyond Hankel rank | formalized | graduated |
+| [`MM-O04`](#mm-o04-uniform-rank-four-paired-series) | certificate | the paired scalar series has exact Hankel rank four | formalized | graduated |
 | [`MM-O05`](#mm-o05-width-three-scheduled-rank) | obstruction | the width-three scheduled series has exact rank five | formalized | graduated |
 | [`MM-O06`](#mm-o06-pure-power-punctuation-obstruction) | obstruction | an exact isolated toggle cannot also punctuate through a pure power | audited | stock |
 | [`MM-O07`](#mm-o07-setter-parameter-rigidity) | obstruction | source-boundary alignment fixes the setter parameter | audited | stock |
@@ -98,7 +98,7 @@ file owns the mathematical stock.
 ### MM-C01: Fixed-anchor rank-one compiler
 
 **Kind:** compiler  
-**Evidence:** formalized  
+**Evidence:** formalized
 **Disposition:** graduated
 
 Let every active matrix `X_a` fix a nonzero column `e`, let `Le ≠ 0`, and put `P = CL`. Then the
@@ -312,17 +312,20 @@ outside the theorem.
 **Use:** with [`MM-O04`](#mm-o04-uniform-rank-four-paired-series), this closes every exact
 five-state diagonal rank-two bridge for the paired scalar series.
 
-**Next:** formalize the finite-dimensional statement without importing a general infinite
-Hankel library.
+**Formalization:** `twoChannelBoundaryTax` proves the finite-dimensional core, and
+`exactDiagonalTwoChannel_card_lower_bound` derives the all-word bridge theorem from an arbitrary
+nonsingular finite Hankel section. The proof uses no infinite Hankel library. It is slightly
+stronger than the reported statement: nonzero inactive row and column suffice; full boundary
+rank two is unnecessary.
 
 **Issue:** [#3, Formalize the exact-realization obstructions for
 `M₅(3)`](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/3).
 
 ### MM-O04: Uniform rank-four paired series
 
-**Kind:** certificate  
-**Evidence:** audited  
-**Disposition:** active
+**Kind:** certificate
+**Evidence:** formalized
+**Disposition:** graduated
 
 For every `β≥3` and every tag body, the scalar series
 
@@ -371,8 +374,11 @@ for another series with the same zero set.
 [`MM-O03`](#mm-o03-two-channel-boundary-tax). It also closes exact three-state
 minimization of the paired route to `M₃(4)`.
 
-**Next:** check the determinant identities in Lean and add their transitive axioms to the
-publication snapshot.
+**Formalization:** `pairedRankReachable_det` and `pairedRankObservable_det` prove the two
+determinant identities. `pairedRankHankel_det_ne_zero` certifies the integer Hankel section,
+`paired_exact_state_lower_bound` gives the universal rational four-state lower bound, and
+`paired_exact_diagonal_twoChannel_state_lower_bound` composes this record with `MM-O03` to rule
+out every exact five-state diagonal two-channel bridge.
 
 **Issue:** [#3, Formalize the exact-realization obstructions for
 `M₅(3)`](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/3).

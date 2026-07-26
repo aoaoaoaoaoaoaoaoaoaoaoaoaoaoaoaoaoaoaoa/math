@@ -12,6 +12,9 @@ open MatrixMortality
 #print axioms neary_source_generator_count
 #print axioms neary_morphisms_nonerasing
 #print axioms ExactNearyMacroFactorization.four_le_card
+#print axioms finiteHankel_card_le
+#print axioms twoChannelBoundaryTax
+#print axioms exactDiagonalTwoChannel_card_lower_bound
 #print axioms NearyArithmeticEnvelope.pcp_solvable_iff_halts
 #print axioms NearyArithmeticEnvelope.pcp_primitive_terminal
 #print axioms NearyArithmeticEnvelope.gpcp_solvable_iff_halts
@@ -37,6 +40,11 @@ open MatrixMortality
 #print axioms pairedSeparator_int_ne_zero
 #print axioms castMatrix_pairedSeparator_rank_eq_one
 #print axioms paired_mortality_generator_count
+#print axioms pairedRankHankel_det_ne_zero
+#print axioms paired_exact_state_lower_bound
+#print axioms paired_native_state_card
+#print axioms paired_native_represents
+#print axioms paired_exact_diagonal_twoChannel_state_lower_bound
 #print axioms Undecidability.nearyMortality44_mortal_iff_tagHaltsFrom
 #print axioms Undecidability.nearyMortality44_control_fixes_anchor
 #print axioms Undecidability.nearyMortality44_toggle_eq_permMatrix

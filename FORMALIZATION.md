@@ -92,6 +92,20 @@ column `e₁`, and the toggle is an explicit permutation matrix. Adding the nonz
 separators without assuming that control products are invertible. The two data controls are
 singular; the toggle is an invertible permutation matrix.
 
+Lean also certifies exact minimality of the paired scalar series. Four prefixes and four suffixes
+over `{b,t}` give reachable and observable determinants
+
+```text
+48u(13a−15),      12p(s−3),
+```
+
+which are nonzero for every deletion width `β≥3` and every body. A generic finite-Hankel
+factorization therefore forces every exact rational realization to have at least four states.
+The generic two-channel boundary-tax theorem proves that any exact diagonal bridge adds two more
+states; its inactive row and column need only be nonzero. Consequently every exact diagonal
+two-channel realization of the paired series has at least six states. These declarations say
+nothing about another series with the same zero set or an off-diagonal bridge.
+
 For the `6 × 6` scalar compiler, Lean checks both explicit integer generators and a total
 two-bit decoder on the complete binary free monoid. Complete pairs emit the four source roles;
 an odd final bit preserves the coefficient. The decoder is surjective, the empty coefficient
@@ -223,6 +237,8 @@ with a complete arbitrary-word converse.
 | --- | --- |
 | `Computability.lean` | primitive-recursive closure lemmas used by the explicit compilers |
 | `MatrixSemigroup.lean` | shared word semantics, mortality transports, common-image restriction, transposition, and zero padding |
+| `LinearRepresentation.lean` | finite Hankel sections and exact-realization state lower bounds |
+| `BoundaryTax.lean` | generic finite-witness two-channel boundary tax |
 | `TagQueue.lean` | tag steps and generic history soundness |
 | `NearyEncoding.lean` | four ordinary tiles, synchronization, source equivalence, and composed reductions |
 | `MarkedTerminal.lean` | fresh marker, primitive terminality, and binary recoding |
@@ -233,6 +249,8 @@ with a complete arbitrary-word converse.
 | `TerminalSource.lean` | generic primitive extraction and GPCP bridge |
 | `PairedCompression.lean` | side-normal representation, paired-role compression, and arbitrary-word decoding |
 | `PairedMortality.lean` | common-column mortality converse and exact integer `4 × 4` family |
+| `PairedRank.lean` | uniform exact rank-four certificate for the paired scalar series |
+| `PairedBoundaryTax.lean` | exact six-state lower bound for diagonal paired-series bridges |
 | `PairedBinary.lean` | total two-bit decoder and exact six-state scalar representation |
 | `ScheduledBinary.lean` | fixed-width clock compiler, total decoder, and malformed-word converse |
 | `ScheduledBinaryRank.lean` | exact width-three rank-five certificate and universal exact-state lower bound |
@@ -280,6 +298,8 @@ with a complete arbitrary-word converse.
 | Four ordinary matrices are nonsingular and triangular | `nearyMortality_ordinary_det_ne_zero`, `nearyMortality_ordinary_upperTriangular` |
 | Exceptional matrix is nonzero and rank one | `nearyMortality_terminal_ne_zero`, `nearyMortality_terminal_rank_eq_one` |
 | Exact nonerasing Neary role macros require four letters | `ExactNearyMacroFactorization.four_le_card` |
+| A nonsingular finite Hankel section lower-bounds every exact realization | `finiteHankel_card_le` |
+| Exact diagonal two-channel bridges pay two additional states | `exactDiagonalTwoChannel_card_lower_bound` |
 | Rule and erasure matrices agree on the upper-side plane | `rule_erase_agree_on_upperSide` |
 | Every compressed word realizes its decoded four-role word | `pairedProduct_mulVec_column`, `pairedCoefficient_eq_sideCoefficient` |
 | Every four-role word has a compressed encoding | `decodePairedWord_surjective` |
@@ -289,6 +309,9 @@ with a complete arbitrary-word converse.
 | Three control matrices have common first column | `nearyMortality44_control_fixes_anchor` |
 | Toggle control is a permutation matrix | `nearyMortality44_toggle_eq_permMatrix` |
 | Fourth matrix is nonzero and rank one | `nearyMortality44_separator_ne_zero`, `nearyMortality44_separator_rank_eq_one` |
+| Paired scalar series has a nonsingular `4 × 4` Hankel section | `pairedRankHankel_det_ne_zero` |
+| Every exact paired-series realization needs four states | `paired_exact_state_lower_bound`, `paired_native_state_card`, `paired_native_represents` |
+| Every exact diagonal paired-series bridge needs six states | `paired_exact_diagonal_twoChannel_state_lower_bound` |
 | Every binary word has the exact six-state coefficient | `pairedBinaryRow_wordProduct`, `pairedBinaryCoefficient_eq_sideCoefficient` |
 | Every four-role word has a two-bit encoding | `decodePairedBinary_surjective` |
 | Canonical structured `Z₆(2)` instance iff tag halting | `nearyScalarZero62_hasZero_iff_tagHaltsFrom` |

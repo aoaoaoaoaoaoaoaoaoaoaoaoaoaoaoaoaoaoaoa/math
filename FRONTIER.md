@@ -278,11 +278,11 @@ certificate [`MM-O01`](SALVAGE.md#mm-o01-all-placement-packing-rank) further rep
 selected coefficient series has exact Hankel rank six. Once audited, this closes exact
 minimization of that packing in five states.
 
-The paired four-state scalar system closes a second exact route. Its coefficient series has
-uniform Hankel rank four
+The paired four-state scalar system closes a second exact route. Lean certifies a uniform
+nonsingular four-by-four Hankel section
 ([`MM-O04`](SALVAGE.md#mm-o04-uniform-rank-four-paired-series)), while the two-channel boundary
-tax [`MM-O03`](SALVAGE.md#mm-o03-two-channel-boundary-tax) charges two additional states to an
-exact diagonal rank-two bridge. Such a bridge therefore also requires dimension at least six.
+exact diagonal bridge. Their composed theorem
+`paired_exact_diagonal_twoChannel_state_lower_bound` therefore requires at least six states.
 Both conclusions concern exact series; neither constrains another series with the same zero set.
 
 The internal-word sandwich compiler
@@ -863,8 +863,9 @@ universal computation.
 1. Formalize `M4-C01`, `M4-O01`, `M4-O02`, and `M4-O03`. In parallel, either construct an
    open-tail binary two-state source invariant or solve the mixed cube-root punctuation
    incidence equations. Reject every finite closed-token source before appendant search.
-2. Audit and formalize `MM-O01`, `MM-O03`, and `MM-O04`; use formalized `G3-O01` to reject
-   exact nonerasing role macros without conflating its scope with solvability preservation.
+2. Reconstruct and formalize the all-placement certificate `MM-O01`; use formalized `G3-O01`,
+   `MM-O03`, and `MM-O04` to reject exact macros and bridges without conflating their scope with
+   solvability preservation.
 3. Prove or refute the setter candidate's projective avoidance property, construct a
    five-state same-zero binary root, or find a constant-state scheduled delimiter fusion.
    Treat fixed-width-three universality as a separate source theorem. Reopen `MM-C04` only for

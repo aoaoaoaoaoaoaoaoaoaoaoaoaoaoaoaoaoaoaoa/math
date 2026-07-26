@@ -10,6 +10,9 @@
 'MatrixMortality.neary_source_generator_count' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.neary_morphisms_nonerasing' depends on axioms: [propext]
 'MatrixMortality.ExactNearyMacroFactorization.four_le_card' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.finiteHankel_card_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.twoChannelBoundaryTax' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.exactDiagonalTwoChannel_card_lower_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.NearyArithmeticEnvelope.pcp_solvable_iff_halts' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
@@ -49,6 +52,13 @@
 'MatrixMortality.pairedSeparator_int_ne_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.castMatrix_pairedSeparator_rank_eq_one' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.paired_mortality_generator_count' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.pairedRankHankel_det_ne_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.paired_exact_state_lower_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.paired_native_state_card' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.paired_native_represents' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.paired_exact_diagonal_twoChannel_state_lower_bound' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.Undecidability.nearyMortality44_mortal_iff_tagHaltsFrom' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]

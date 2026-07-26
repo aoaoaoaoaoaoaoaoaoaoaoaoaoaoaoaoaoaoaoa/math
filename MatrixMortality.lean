@@ -1,8 +1,12 @@
+import MatrixMortality.BoundaryTax
+import MatrixMortality.LinearRepresentation
 import MatrixMortality.NearyEncoding
 import MatrixMortality.MacroIrreducibility
 import MatrixMortality.PairedBinary
+import MatrixMortality.PairedBoundaryTax
 import MatrixMortality.PairedCompression
 import MatrixMortality.PairedMortality
+import MatrixMortality.PairedRank
 import MatrixMortality.PrefixMortality
 import MatrixMortality.ScheduledBinary
 import MatrixMortality.ScheduledBinaryRank
