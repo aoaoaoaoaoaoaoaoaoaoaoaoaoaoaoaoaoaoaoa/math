@@ -11,6 +11,7 @@ open MatrixMortality
 #print axioms neary_generator_count
 #print axioms neary_source_generator_count
 #print axioms neary_morphisms_nonerasing
+#print axioms ExactNearyMacroFactorization.four_le_card
 #print axioms NearyArithmeticEnvelope.pcp_solvable_iff_halts
 #print axioms NearyArithmeticEnvelope.pcp_primitive_terminal
 #print axioms NearyArithmeticEnvelope.gpcp_solvable_iff_halts

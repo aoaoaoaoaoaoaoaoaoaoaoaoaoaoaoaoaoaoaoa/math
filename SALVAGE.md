@@ -79,7 +79,7 @@ file owns the mathematical stock.
 | [`M4-O04`](#m4-o04-exact-internal-final-code-defect) | obstruction | distinct exact binary codes for one macro force commuting upper images | audited | stock |
 | [`M4-O05`](#m4-o05-direct-two-state-first-return-recoding) | obstruction | the present four Neary roles have no direct two-state first-return code | reported | active |
 | [`M4-M01`](#m4-m01-mixed-cube-root-punctuation) | partial mechanism | rational cube-root toggles reduce mixed punctuation to incidence equations | audited | parked |
-| [`G3-O01`](#g3-o01-four-role-macro-irreducibility) | obstruction | exact nonerasing macros cannot reduce the four source roles to three letters | audited | active |
+| [`G3-O01`](#g3-o01-four-role-macro-irreducibility) | obstruction | exact nonerasing macros cannot reduce the four source roles to three letters | formalized | graduated |
 | [`G3-S01`](#g3-s01-shift-equivariant-zero-incidence) | structure theorem | same-zero state dimension is equivariant projective incidence dimension | audited | active |
 | [`G3-M01`](#g3-m01-free-group-discrepancy-engine) | partial mechanism | free cancellation implements queue deletion with an all-path converse | reported | active |
 | [`D2-S01`](#d2-s01-projective-hard-core) | structure theorem | `M₂(3)` is equivalent to two-generator projective incidence | audited | active |
@@ -288,9 +288,9 @@ impossibility theorem for five-state zero-set representations.
 
 **Kind:** obstruction
 
-**Evidence:** audited
+**Evidence:** formalized
 
-**Disposition:** active
+**Disposition:** graduated
 
 Let `A : Σ* → Mₙ(K)`, let `U=[u₀ u₁]` and `V=[v₀;v₁]` both have rank two, and suppose
 
@@ -1898,11 +1898,10 @@ source.
 **Use:** reject every proposal to merge or macro-expand the present four roles unless it
 explicitly invokes one of the escape mechanisms outside the scope.
 
-**Next:** formalize the length-one argument over free monoids and connect its role constants
-to the existing Neary source definitions.
-
-**Issue:** [#4, Formalize the four-role macro irreducibility
-obstruction](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/4).
+**Artifact:** `MatrixMortality.ExactNearyMacroFactorization.four_le_card` in
+[`MacroIrreducibility.lean`](MatrixMortality/MacroIrreducibility.lean). The structure
+`ExactNearyMacroFactorization` quantifies over arbitrary macro words and does not assume an
+injective role code, prefix code, or equal macro lengths.
 
 ### G3-S01: Shift-equivariant zero incidence
 

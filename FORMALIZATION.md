@@ -78,6 +78,11 @@ primitive terminality, the ternary word-pair representation, the exact integer g
 the mortality converse for every nonempty word over all five labels. The four ordinary matrices
 are nonsingular and upper triangular. The fifth is nonzero and has rank one over `ℚ`.
 
+The exact Neary role pairs admit no nonerasing rolewise macro factorization through an alphabet
+of cardinality below four. The formal statement permits arbitrary unequal macro lengths and
+noninjective role codes. Erasing morphisms, target recoding, context-dependent codes, boundary
+residuals, and solvability-only transformations remain outside its scope.
+
 For the `4 × 4` compiler, Lean checks the side-separating change of basis, agreement of each
 rule/erasure pair on the complete upper-word plane, and the explicit four-dimensional paired-role
 representation. A right-to-left transducer decodes every arbitrary control word, and a constructive
@@ -253,6 +258,7 @@ with a complete arbitrary-word converse.
 | `Undecidability/UniversalTwoTag.lean` | fixed universal finite two-tag system and primitive-recursive source queue |
 | `Undecidability/UniversalNeary.lean` | complete computable reductions to binary `GPCP(4)` and `M₃(5)` |
 | `Undecidability/NearyProblems.lean` | canonical `Fin 4` and `Fin 5` target instances |
+| `MacroIrreducibility.lean` | exact nonerasing Neary role-macro lower bound |
 | `Undecidability/PairedProblems.lean` | canonical four-matrix target instance and structural promises |
 | `Undecidability/BinaryProblems.lean` | canonical structured `Z₆(2)` instance |
 | `Undecidability/PrefixProblems.lean` | canonical `M₁₀(2)` instance and all zero-padded dimensions |
@@ -273,6 +279,7 @@ with a complete arbitrary-word converse.
 | Arithmetic-envelope specialization | `NearyArithmeticEnvelope.mortality_iff_halts` |
 | Four ordinary matrices are nonsingular and triangular | `nearyMortality_ordinary_det_ne_zero`, `nearyMortality_ordinary_upperTriangular` |
 | Exceptional matrix is nonzero and rank one | `nearyMortality_terminal_ne_zero`, `nearyMortality_terminal_rank_eq_one` |
+| Exact nonerasing Neary role macros require four letters | `ExactNearyMacroFactorization.four_le_card` |
 | Rule and erasure matrices agree on the upper-side plane | `rule_erase_agree_on_upperSide` |
 | Every compressed word realizes its decoded four-role word | `pairedProduct_mulVec_column`, `pairedCoefficient_eq_sideCoefficient` |
 | Every four-role word has a compressed encoding | `decodePairedWord_surjective` |

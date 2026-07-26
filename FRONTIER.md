@@ -444,7 +444,8 @@ The exact nonerasing macro obstruction
 fixed rolewise macros over three source letters reproduce these four word pairs exactly.
 Unequal macro lengths, noninjective role codes, and failure of prefix-freeness do not help.
 A surviving compiler must use erasure, target recoding, boundary or context residuals,
-overlap, solvability-only preservation, or a different source.
+overlap, solvability-only preservation, or a different source. Lean checks the obstruction as
+`ExactNearyMacroFactorization.four_le_card`.
 
 The body-independent Hankel certificate
 [`MM-O04`](SALVAGE.md#mm-o04-uniform-rank-four-paired-series) proves that the
@@ -862,8 +863,8 @@ universal computation.
 1. Formalize `M4-C01`, `M4-O01`, `M4-O02`, and `M4-O03`. In parallel, either construct an
    open-tail binary two-state source invariant or solve the mixed cube-root punctuation
    incidence equations. Reject every finite closed-token source before appendant search.
-2. Audit and formalize `MM-O01`, `MM-O03`, `MM-O04`, and `G3-O01`; keep exact-series and
-   exact-macro scope explicit.
+2. Audit and formalize `MM-O01`, `MM-O03`, and `MM-O04`; use formalized `G3-O01` to reject
+   exact nonerasing role macros without conflating its scope with solvability preservation.
 3. Prove or refute the setter candidate's projective avoidance property, construct a
    five-state same-zero binary root, or find a constant-state scheduled delimiter fusion.
    Treat fixed-width-three universality as a separate source theorem. Reopen `MM-C04` only for

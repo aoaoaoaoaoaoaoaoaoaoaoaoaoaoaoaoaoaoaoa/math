@@ -1,4 +1,5 @@
 import MatrixMortality.NearyEncoding
+import MatrixMortality.MacroIrreducibility
 import MatrixMortality.PairedBinary
 import MatrixMortality.PairedCompression
 import MatrixMortality.PairedMortality
