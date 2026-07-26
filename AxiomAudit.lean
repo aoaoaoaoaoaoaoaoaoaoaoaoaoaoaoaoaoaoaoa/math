@@ -93,3 +93,6 @@ open MatrixMortality
 #print axioms Undecidability.NearyCompiler.read_exact_firing_to_haltingSeed
 #print axioms Undecidability.NearyCompiler.drain_junk_before_haltingSeed
 #print axioms Undecidability.NearyCompiler.read_exact_firing_halts
+#print axioms Undecidability.NearyCompiler.read_next_dataBit_transGen
+#print axioms Undecidability.NearyCompiler.GarbageBoundary.not_tagHaltsFrom
+#print axioms Undecidability.NearyCompiler.compiled_halts_implies_firing

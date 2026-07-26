@@ -222,14 +222,97 @@ theorem read_epsilonRun {period : Nat} (system : CyclicTag period) (input : List
       rw [encodeJunk_append, ← emission_eq]
       simpa [TagReaches, epsilon, remainder, nextInstruction, emission,
         List.append_assoc] using composed
-
-/-- Reading one garbage atom preserves the current cyclic instruction and emits garbage. -/
-theorem read_junkAtom {period : Nat} (system : CyclicTag period) (input : List Bool)
+/-- A positive epsilon run executes nontrivially and emits nonempty garbage. -/
+theorem read_epsilonRun_transGen {period : Nat} (system : CyclicTag period) (input : List Bool)
+    (haltPhase : Fin period) (period_pos : 0 < period) (count : Nat)
+    (count_pos : 0 < count) (instruction : Fin period)
+    (rest : List TagLetter) (rest_long : deletionWidth period ≤ rest.length) :
+    ∃ code : List JunkAtom, code ≠ [] ∧
+        Relation.TransGen (TagStep (deletionWidth period)
+          (compiledOutput system input haltPhase period_pos))
+          ((repeatWord count (epsilonObject system input haltPhase period_pos) ++ rest).drop
+            (objectEntryPhase instruction).val)
+          (rest.drop (objectEntryPhase (CyclicTag.shift instruction count)).val ++
+            encodeJunk system input haltPhase period_pos code) := by
+  obtain ⟨count, rfl⟩ := Nat.exists_eq_succ_of_ne_zero (Nat.ne_of_gt count_pos)
+  let epsilon := epsilonObject system input haltPhase period_pos
+  let remainder := repeatWord count epsilon
+  let nextInstruction := CyclicTag.shift instruction 1
+  let emission := silentEmission system input haltPhase instruction period_pos
+  let emissionCode : List JunkAtom := .packet :: List.replicate
+    (trackWidth system input - 11 * period + if instruction.val = 0 then 1 else 0) .raw
+  have epsilon_long : deletionWidth period ≤ epsilon.length := by
+    change deletionWidth period ≤ (epsilonObject system input haltPhase period_pos).length
+    rw [epsilonObject_length]
+    exact (Nat.le_mul_of_pos_right _ (trackWidth_pos system input)).trans
+      (Nat.le_add_right _ _)
+  have entry_le_epsilon : (objectEntryPhase instruction).val ≤ epsilon.length :=
+    (Nat.le_of_lt (objectEntryPhase instruction).isLt).trans epsilon_long
+  have start_split : ((repeatWord (count + 1) epsilon ++ rest).drop
+      (objectEntryPhase instruction).val) =
+        epsilon.drop (objectEntryPhase instruction).val ++ remainder ++ rest := by
+    rw [repeatWord_succ_left]
+    rw [show epsilon ++ remainder ++ rest = epsilon ++ (remainder ++ rest) by simp]
+    rw [List.drop_append_of_le_length entry_le_epsilon]
+    simp [List.append_assoc]
+  have track_fits : (epsilonPhase instruction).val ≤
+      (List.replicate 6 TagLetter.b ++ (remainder ++ rest)).length := by
+    have phase_lt := (epsilonPhase instruction).isLt
+    have rest_le :
+        rest.length ≤ (List.replicate 6 TagLetter.b ++ (remainder ++ rest)).length := by
+      simp only [List.length_append, List.length_replicate]
+      omega
+    exact (Nat.le_of_lt phase_lt).trans (rest_long.trans rest_le)
+  have first := read_epsilonObject_transGen system input haltPhase instruction period_pos
+    (remainder ++ rest) track_fits
+  have emission_eq :
+      emission = encodeJunk system input haltPhase period_pos emissionCode := by
+    exact silentEmission_eq_encodeJunk system input haltPhase instruction period_pos
+  have next_phase_le :
+      (objectEntryPhase nextInstruction).val ≤ (remainder ++ rest).length := by
+    have phase_lt := (objectEntryPhase nextInstruction).isLt
+    exact (Nat.le_of_lt phase_lt).trans (rest_long.trans (by simp))
+  have intermediate : (remainder ++ rest).drop
+      (objectEntryPhase nextInstruction).val ++ emission =
+        (remainder ++ (rest ++ emission)).drop
+          (objectEntryPhase nextInstruction).val := by
+    rw [show remainder ++ (rest ++ emission) = (remainder ++ rest) ++ emission by simp]
+    rw [List.drop_append_of_le_length next_phase_le]
+  have first' : Relation.TransGen (TagStep (deletionWidth period)
+      (compiledOutput system input haltPhase period_pos))
+      ((repeatWord (count + 1) epsilon ++ rest).drop
+        (objectEntryPhase instruction).val)
+      ((remainder ++ (rest ++ emission)).drop
+        (objectEntryPhase nextInstruction).val) := by
+    rw [start_split]
+    rw [← intermediate]
+    simpa [List.append_assoc] using first
+  have extended_long : deletionWidth period ≤ (rest ++ emission).length := rest_long.trans (by simp)
+  obtain ⟨laterCode, _, later⟩ := read_epsilonRun system input haltPhase period_pos count
+    nextInstruction (rest ++ emission) extended_long
+  have shifted : CyclicTag.shift nextInstruction count =
+      CyclicTag.shift instruction (count + 1) := by
+    change CyclicTag.shift (CyclicTag.shift instruction 1) count = _
+    rw [CyclicTag.shift_add]
+    congr 1
+    omega
+  rw [shifted] at later
+  have final_phase_le : (objectEntryPhase
+      (CyclicTag.shift instruction (count + 1))).val ≤ rest.length :=
+    (Nat.le_of_lt (objectEntryPhase (CyclicTag.shift instruction (count + 1))).isLt).trans rest_long
+  rw [List.drop_append_of_le_length final_phase_le] at later
+  have composed := Relation.TransGen.trans_left first' later
+  refine ⟨emissionCode ++ laterCode, ?_, ?_⟩
+  · simp [emissionCode]
+  rw [encodeJunk_append, ← emission_eq]
+  simpa [epsilon, remainder, nextInstruction, emission, List.append_assoc] using composed
+/-- Reading one garbage atom executes nontrivially, preserves phase, and emits garbage. -/
+theorem read_junkAtom_transGen {period : Nat} (system : CyclicTag period) (input : List Bool)
     (haltPhase instruction : Fin period) (period_pos : 0 < period) (atom : JunkAtom)
     (rest : List TagLetter) (rest_long : deletionWidth period ≤ rest.length) :
-    ∃ code : List JunkAtom,
-      code ≠ [] ∧
-        TagReaches (deletionWidth period) (compiledOutput system input haltPhase period_pos)
+    ∃ code : List JunkAtom, code ≠ [] ∧ Relation.TransGen
+          (TagStep (deletionWidth period)
+            (compiledOutput system input haltPhase period_pos))
           ((junkAtomWord system input haltPhase period_pos atom ++ rest).drop
             (objectEntryPhase instruction).val)
           (rest.drop (objectEntryPhase instruction).val ++
@@ -241,7 +324,7 @@ theorem read_junkAtom {period : Nat} (system : CyclicTag period) (input : List B
       have phase_le : (objectEntryPhase instruction).val ≤
           (wholeAppendant system input haltPhase period_pos).length :=
         (Nat.le_of_lt (objectEntryPhase instruction).isLt).trans raw_long
-      have read := read_rawObject system input haltPhase instruction period_pos rest
+      have read := read_rawObject_transGen system input haltPhase instruction period_pos rest
         ((Nat.le_of_lt (objectEntryPhase instruction).isLt).trans rest_long)
       refine ⟨rawCode, ?_, ?_⟩
       · simp [rawCode, Nat.ne_of_gt (trackWidth_pos system input)]
@@ -252,10 +335,25 @@ theorem read_junkAtom {period : Nat} (system : CyclicTag period) (input : List B
       exact read
   | packet =>
       obtain ⟨code, code_nonempty, read⟩ :=
-        read_epsilonRun system input haltPhase period_pos period instruction rest rest_long
-      refine ⟨code, code_nonempty.resolve_left (Nat.ne_of_gt period_pos), ?_⟩
+        read_epsilonRun_transGen system input haltPhase period_pos period period_pos
+          instruction rest rest_long
+      refine ⟨code, code_nonempty, ?_⟩
       rw [CyclicTag.shift_period] at read
       exact read
+/-- Reading one garbage atom preserves the current cyclic instruction and emits garbage. -/
+theorem read_junkAtom {period : Nat} (system : CyclicTag period) (input : List Bool)
+    (haltPhase instruction : Fin period) (period_pos : 0 < period) (atom : JunkAtom)
+    (rest : List TagLetter) (rest_long : deletionWidth period ≤ rest.length) :
+    ∃ code : List JunkAtom,
+      code ≠ [] ∧
+        TagReaches (deletionWidth period) (compiledOutput system input haltPhase period_pos)
+          ((junkAtomWord system input haltPhase period_pos atom ++ rest).drop
+            (objectEntryPhase instruction).val)
+          (rest.drop (objectEntryPhase instruction).val ++
+            encodeJunk system input haltPhase period_pos code) := by
+  obtain ⟨code, code_nonempty, read⟩ :=
+    read_junkAtom_transGen system input haltPhase instruction period_pos atom rest rest_long
+  exact ⟨code, code_nonempty, read.to_reflTransGen⟩
 
 /-- Reading a garbage code preserves the current cyclic instruction and emits another code. -/
 theorem read_junk {period : Nat} (system : CyclicTag period) (input : List Bool)

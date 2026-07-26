@@ -17,6 +17,127 @@ namespace MatrixMortality.Undecidability
 def TagReaches {α : Type*} (β : Nat) (output : α → List α) : List α → List α → Prop :=
   Relation.ReflTransGen (TagStep β output)
 
+/-- A fixed-width tag system has at most one successor from each queue. -/
+theorem tagStep_deterministic {α : Type*} {β : Nat} {output : α → List α}
+    {before after₁ after₂ : List α} (first : TagStep β output before after₁)
+    (second : TagStep β output before after₂) :
+    after₁ = after₂ := by
+  obtain ⟨stroke₁, rest₁, before₁, after₁_eq⟩ := first
+  obtain ⟨stroke₂, rest₂, before₂, after₂_eq⟩ := second
+  have prefix₁ : stroke₁.letters <+: before := ⟨rest₁, before₁.symm⟩
+  have prefix₂ : stroke₂.letters <+: before := ⟨rest₂, before₂.symm⟩
+  have letters_length : stroke₁.letters.length = stroke₂.letters.length := by
+    simp
+  have letters_eq : stroke₁.letters = stroke₂.letters :=
+    (common_prefix_of_length_le prefix₁ prefix₂ letters_length.le).eq_of_length letters_length
+  have heads_eq : stroke₁.head = stroke₂.head := by
+    have := congrArg List.head? letters_eq
+    simpa [Stroke.letters] using this
+  have rests_eq : rest₁ = rest₂ := by
+    have append_eq :
+        stroke₁.letters ++ rest₁ = stroke₂.letters ++ rest₂ :=
+      before₁.symm.trans before₂
+    rw [letters_eq] at append_eq
+    exact List.append_cancel_left append_eq
+  rw [after₁_eq, after₂_eq, rests_eq, heads_eq]
+
+/-- Every lawful tag step has a complete deletion block at its source. -/
+theorem tagStep_width_le {α : Type*} {β : Nat} {output : α → List α}
+    {before after : List α} (step : TagStep β output before after) :
+    β ≤ before.length := by
+  obtain ⟨stroke, rest, before_eq, _⟩ := step
+  rw [before_eq, List.length_append, Stroke.length_letters]
+  exact Nat.le_add_right β rest.length
+
+/-- In a deterministic tag system, halting at a step source implies halting at its successor. -/
+theorem tagHaltsFrom_after_step {α : Type*} {β : Nat} {output : α → List α}
+    {before after : List α} (step : TagStep β output before after)
+    (halts : TagHaltsFrom β output before) :
+    TagHaltsFrom β output after := by
+  cases halts with
+  | stop short => exact False.elim (Nat.not_lt_of_ge (tagStep_width_le step) short)
+  | step actual next_halts =>
+      rw [tagStep_deterministic actual step] at next_halts
+      exact next_halts
+
+/-- A tag queue halts after exactly the indexed number of transitions. -/
+def TagHaltsIn {α : Type*} (β : Nat) (output : α → List α) :
+    Nat → List α → Prop
+  | 0, queue => queue.length < β
+  | steps + 1, queue =>
+      ∃ next, TagStep β output queue next ∧ TagHaltsIn β output steps next
+
+/-- Following one deterministic transition removes the first step of an indexed derivation. -/
+theorem tagHaltsIn_after_step {α : Type*} {β : Nat} {output : α → List α}
+    {steps : Nat} {before after : List α} (step : TagStep β output before after)
+    (halts : TagHaltsIn β output (steps + 1) before) :
+    TagHaltsIn β output steps after := by
+  obtain ⟨next, actual, next_halts⟩ := halts
+  rw [tagStep_deterministic actual step] at next_halts
+  exact next_halts
+
+/-- A nonempty deterministic execution strictly lowers an indexed halting time. -/
+theorem tagHaltsIn_after_transGen {α : Type*} {β : Nat} {output : α → List α}
+    {steps : Nat} {before after : List α}
+    (reach : Relation.TransGen (TagStep β output) before after)
+    (halts : TagHaltsIn β output steps before) :
+    ∃ laterSteps, laterSteps < steps ∧ TagHaltsIn β output laterSteps after := by
+  induction reach generalizing steps with
+  | single step =>
+      cases steps with
+      | zero => exact False.elim (Nat.not_lt_of_ge (tagStep_width_le step) halts)
+      | succ steps => exact ⟨steps, Nat.lt_succ_self _, tagHaltsIn_after_step step halts⟩
+  | @tail middle after _reach step ih =>
+      obtain ⟨middleSteps, middle_lt, middle_halts⟩ := ih halts
+      cases middleSteps with
+      | zero => exact False.elim (Nat.not_lt_of_ge (tagStep_width_le step) middle_halts)
+      | succ middleSteps =>
+          exact ⟨middleSteps, (Nat.lt_succ_self _).trans middle_lt,
+            tagHaltsIn_after_step step middle_halts⟩
+
+/-- The indexed and inductive definitions of finite tag halting coincide. -/
+theorem tagHaltsFrom_iff_exists_tagHaltsIn {α : Type*} {β : Nat}
+    {output : α → List α} {queue : List α} :
+    TagHaltsFrom β output queue ↔ ∃ steps, TagHaltsIn β output steps queue := by
+  constructor
+  · intro halts
+    induction halts with
+    | stop short => exact ⟨0, short⟩
+    | step transition _ ih =>
+        obtain ⟨steps, later⟩ := ih
+        exact ⟨steps + 1, ⟨_, transition, later⟩⟩
+  · rintro ⟨steps, halts⟩
+    induction steps generalizing queue with
+    | zero => exact .stop halts
+    | succ steps ih =>
+        obtain ⟨next, transition, later⟩ := halts
+        exact .step transition (ih later)
+
+/-- A perpetually progressing predicate excludes finite tag halting. -/
+theorem not_tagHaltsFrom_of_transGen_progress {α : Type*} {β : Nat}
+    {output : α → List α} (invariant : List α → Prop)
+    (progress : ∀ {queue}, invariant queue →
+      ∃ next, invariant next ∧ Relation.TransGen (TagStep β output) queue next)
+    {queue : List α} (holds : invariant queue) :
+    ¬TagHaltsFrom β output queue := by
+  rw [tagHaltsFrom_iff_exists_tagHaltsIn]
+  rintro ⟨steps, halts⟩
+  induction steps using Nat.strong_induction_on generalizing queue with
+  | h steps ih =>
+      obtain ⟨next, next_holds, reach⟩ := progress holds
+      obtain ⟨laterSteps, later_lt, later_halts⟩ :=
+        tagHaltsIn_after_transGen reach halts
+      exact ih laterSteps later_lt next_holds later_halts
+
+/-- A finite deterministic tag execution preserves and reflects eventual halting. -/
+theorem tagHaltsFrom_after_reaches {α : Type*} {β : Nat} {output : α → List α}
+    {before after : List α} (reach : TagReaches β output before after)
+    (halts : TagHaltsFrom β output before) :
+    TagHaltsFrom β output after := by
+  induction reach with
+  | refl => exact halts
+  | tail _ step ih => exact tagHaltsFrom_after_step step ih
+
 /-- A stroke history consumes its letters before touching the protected tail. -/
 theorem tagReaches_history {α : Type*} {β : Nat} (output : α → List α)
     (history : List (Stroke α β)) (tail : List α) :
@@ -31,6 +152,18 @@ theorem tagReaches_history {α : Type*} {β : Nat} (output : α → List α)
         simp [List.append_assoc]
       · simpa only [produced_cons, List.append_assoc] using
           ih (tail ++ output stroke.head)
+
+/-- A nonempty stroke history gives a nonempty tag execution. -/
+theorem tagTransGen_history {α : Type*} {β : Nat} (output : α → List α)
+    (stroke : Stroke α β) (history : List (Stroke α β)) (tail : List α) :
+    Relation.TransGen (TagStep β output)
+      (consumed (stroke :: history) ++ tail)
+      (tail ++ produced output (stroke :: history)) := by
+  apply Relation.TransGen.head'
+  · refine ⟨stroke, consumed history ++ tail, ?_, rfl⟩
+    simp [List.append_assoc]
+  · simpa only [produced_cons, List.append_assoc] using
+      tagReaches_history output history (tail ++ output stroke.head)
 
 /-- The first `width` symbols of a sufficiently long word, with their exact length retained. -/
 def frontVector {α : Type*} (width : Nat) (word : List α) (fits : width ≤ word.length) :
@@ -128,16 +261,22 @@ theorem vectorStroke_frontVector_head {α : Type*} (width : Nat) (width_pos : 0 
   | nil => simp at fits
   | cons head tail => simp [vectorStroke, frontVector]
 
-/-- Execute one deterministic step from any queue containing a complete deletion block. -/
-theorem tagReaches_one {α : Type*} (width : Nat) (width_pos : 0 < width)
+/-- The deterministic step from any queue containing a complete deletion block. -/
+theorem tagStep_one {α : Type*} (width : Nat) (width_pos : 0 < width)
     (output : α → List α) (word : List α) (enough : width ≤ word.length) :
-    TagReaches width output word
+    TagStep width output word
       (word.drop width ++ output (word.get ⟨0, width_pos.trans_le enough⟩)) := by
-  apply Relation.ReflTransGen.single
   refine ⟨vectorStroke width_pos (frontVector width word enough), word.drop width, ?_, ?_⟩
   · rw [vectorStroke_letters]
     exact (List.take_append_drop width word).symm
   · rw [vectorStroke_frontVector_head]
+
+/-- Execute one deterministic step from any queue containing a complete deletion block. -/
+theorem tagReaches_one {α : Type*} (width : Nat) (width_pos : 0 < width)
+    (output : α → List α) (word : List α) (enough : width ≤ word.length) :
+    TagReaches width output word
+      (word.drop width ++ output (word.get ⟨0, width_pos.trans_le enough⟩)) :=
+  Relation.ReflTransGen.single (tagStep_one width width_pos output word enough)
 
 /-- A finite execution followed by a terminating execution already terminates at its source. -/
 theorem tagHaltsFrom_of_reaches {α : Type*} {width : Nat} {output : α → List α}
@@ -147,6 +286,11 @@ theorem tagHaltsFrom_of_reaches {α : Type*} {width : Nat} {output : α → List
   induction reach with
   | refl => exact halts
   | tail _ step ih => exact ih (.step step halts)
+
+theorem tagHaltsFrom_iff_of_reaches {α : Type*} {β : Nat} {output : α → List α}
+    {before after : List α} (reach : TagReaches β output before after) :
+    TagHaltsFrom β output before ↔ TagHaltsFrom β output after :=
+  ⟨tagHaltsFrom_after_reaches reach, tagHaltsFrom_of_reaches reach⟩
 
 /-- Every letter at an index divisible by `stride` equals `letter`. -/
 def ConstantAtMultiples {α : Type*} (stride : Nat) (letter : α) (word : List α) : Prop :=
@@ -273,6 +417,39 @@ theorem tagReaches_chunks {α : Type*} (width : Nat) (width_pos : 0 < width)
     rw [show (chunkHistory width width_pos count word enough).map
           (fun stroke => output stroke.head) =
         ((chunkHistory width width_pos count word enough).map Stroke.head).map output by
+          simp [List.map_map]]
+    rw [chunkHistory_heads]
+  rw [emitted] at execution
+  exact execution
+
+/-- Consuming a positive number of complete chunks gives a nonempty execution. -/
+theorem tagTransGen_chunks {α : Type*} (width : Nat) (width_pos : 0 < width)
+    (output : α → List α) (count : Nat) (count_pos : 0 < count)
+    (word tail : List α) (enough : count * width ≤ word.length) :
+    Relation.TransGen (TagStep width output)
+      (word.take (count * width) ++ tail)
+      (tail ++ spell output (sampleHeads width width_pos count word enough)) := by
+  obtain ⟨count, rfl⟩ := Nat.exists_eq_succ_of_ne_zero (Nat.ne_of_gt count_pos)
+  let history := chunkHistory width width_pos (count + 1) word enough
+  have history_shape :
+      ∃ stroke strokes, history = stroke :: strokes := by
+    have history_length : history.length = count + 1 :=
+      chunkHistory_length width width_pos (count + 1) word enough
+    obtain ⟨stroke, strokes, history_eq⟩ := List.exists_cons_of_ne_nil (l := history) (by
+      intro history_empty
+      rw [history_empty] at history_length
+      simp at history_length)
+    exact ⟨stroke, strokes, history_eq⟩
+  obtain ⟨stroke, strokes, history_eq⟩ := history_shape
+  have execution := tagTransGen_history output stroke strokes tail
+  rw [← history_eq, consumed_chunkHistory] at execution
+  have emitted :
+      produced output (chunkHistory width width_pos (count + 1) word enough) =
+      spell output (sampleHeads width width_pos (count + 1) word enough) := by
+    unfold produced spell
+    rw [show (chunkHistory width width_pos (count + 1) word enough).map
+          (fun block => output block.head) =
+        ((chunkHistory width width_pos (count + 1) word enough).map Stroke.head).map output by
           simp [List.map_map]]
     rw [chunkHistory_heads]
   rw [emitted] at execution

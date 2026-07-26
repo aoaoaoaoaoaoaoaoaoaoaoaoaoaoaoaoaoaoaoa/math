@@ -369,13 +369,15 @@ theorem trackFront_length {period : Nat} (system : CyclicTag period) (input : Li
   rw [Nat.sub_add_cancel phase_le]
   exact Nat.mul_comm _ _
 
-/-- Reading the compiler word at a selected shift emits exactly the prescribed Table 2 track. -/
-theorem read_wholeAppendant_track {period : Nat} (system : CyclicTag period)
+/-- Reading the compiler word at a selected shift is a nonempty execution that emits exactly the
+prescribed Table 2 track. -/
+theorem read_wholeAppendant_track_transGen {period : Nat} (system : CyclicTag period)
     (input : List Bool) (haltPhase : Fin period) (period_pos : 0 < period)
     (phase : Fin (deletionWidth period)) (tail : List TagLetter)
     (phase_fits : phase.val ≤ tail.length) :
-    TagReaches (deletionWidth period)
-        (compiledOutput system input haltPhase period_pos)
+    Relation.TransGen
+        (TagStep (deletionWidth period)
+          (compiledOutput system input haltPhase period_pos))
         ((wholeAppendant system input haltPhase period_pos).drop phase.val ++ tail)
         (tail.drop phase.val ++
           spell (compiledOutput system input haltPhase period_pos)
@@ -386,9 +388,9 @@ theorem read_wholeAppendant_track {period : Nat} (system : CyclicTag period)
     exact trackFront_length system input haltPhase period_pos phase tail phase_fits
   have enough : trackWidth system input * deletionWidth period ≤ front.length := by
     rw [front_length]
-  have execution := tagReaches_chunks (deletionWidth period) (deletionWidth_pos period_pos)
-    (compiledOutput system input haltPhase period_pos) (trackWidth system input) front
-    (tail.drop phase.val) enough
+  have execution := tagTransGen_chunks (deletionWidth period) (deletionWidth_pos period_pos)
+    (compiledOutput system input haltPhase period_pos) (trackWidth system input)
+    (trackWidth_pos system input) front (tail.drop phase.val) enough
   have samples := sampleHeads_weave (deletionWidth_pos period_pos)
     (trackWidth_pos system input)
     (fun row column => (tableTrack system input haltPhase period_pos row).get column)
@@ -401,6 +403,20 @@ theorem read_wholeAppendant_track {period : Nat} (system : CyclicTag period)
   rw [samples, gridTrack_tableTrack] at execution
   rw [← front_length, List.take_length] at execution
   simpa [front, List.append_assoc] using execution
+
+/-- Reading the compiler word at a selected shift emits exactly the prescribed Table 2 track. -/
+theorem read_wholeAppendant_track {period : Nat} (system : CyclicTag period)
+    (input : List Bool) (haltPhase : Fin period) (period_pos : 0 < period)
+    (phase : Fin (deletionWidth period)) (tail : List TagLetter)
+    (phase_fits : phase.val ≤ tail.length) :
+    TagReaches (deletionWidth period)
+        (compiledOutput system input haltPhase period_pos)
+        ((wholeAppendant system input haltPhase period_pos).drop phase.val ++ tail)
+        (tail.drop phase.val ++
+          spell (compiledOutput system input haltPhase period_pos)
+            (tableTrack system input haltPhase period_pos phase).val) :=
+  (read_wholeAppendant_track_transGen system input haltPhase period_pos phase tail
+    phase_fits).to_reflTransGen
 
 theorem trackIndex_last {period : Nat} (system : CyclicTag period) (input : List Bool)
     (period_pos : 0 < period) :

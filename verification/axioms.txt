@@ -167,3 +167,12 @@
 'MatrixMortality.Undecidability.NearyCompiler.read_exact_firing_halts' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.Undecidability.NearyCompiler.read_next_dataBit_transGen' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.Undecidability.NearyCompiler.GarbageBoundary.not_tagHaltsFrom' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.Undecidability.NearyCompiler.compiled_halts_implies_firing' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]

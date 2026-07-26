@@ -272,6 +272,9 @@ with a complete arbitrary-word converse.
 | The distinguished pulse appends the halting seed | `read_to_haltingSeed` |
 | Exact-empty firing leaves only junk before the seed | `read_exact_firing_to_haltingSeed` |
 | Exact-empty cyclic firing forces restricted-tag halting | `read_exact_firing_halts` |
+| Every ordinary semantic pulse makes nonempty physical progress | `read_next_dataBit_transGen` |
+| A two-atom garbage reserve cannot halt | `GarbageBoundary.not_tagHaltsFrom` |
+| Restricted-tag halting reflects a reachable distinguished cyclic firing | `compiled_halts_implies_firing` |
 
 ## Logical Foundation
 
@@ -315,8 +318,18 @@ restricted-tag execution consumes the true object and appends the seed `b u^(s�
 exact-empty case, only junk remains before the seed, and a separate theorem transports that junk
 behind the protected seed. Every physical position divisible by ten in the resulting queue is
 `b`; since `β = 10p` and `b` emits only itself, the queue then descends strictly below `β`.
-Thus exact-empty cyclic firing now implies restricted-tag halting. The global
-no-spurious-halting converse remains open. The chosen congruent padding gives
+Thus exact-empty cyclic firing implies restricted-tag halting.
+
+The reverse execution theorem is also complete. Ordinary semantic pulses traverse a nonempty
+physical path, so indexed deterministic halting time strictly decreases at each pulse. Once the
+semantic data bits are exhausted, the stable reserve contains at least two complete garbage
+atoms; reading either kind of atom emits nonempty garbage and reconstructs the same invariant.
+That perpetual positive progress contradicts finite halting. Consequently every halting
+restricted-tag execution reflects an avoiding cyclic execution ending at a distinguished true
+pulse. This is the global no-spurious-halting result; it does not assert that the pulse's tail is
+empty.
+
+The chosen congruent padding gives
 
 ```text
 q.length = (xβ + 1)(β−1),

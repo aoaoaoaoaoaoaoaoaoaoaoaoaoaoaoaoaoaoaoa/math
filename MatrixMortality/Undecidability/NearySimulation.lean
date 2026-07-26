@@ -157,21 +157,23 @@ theorem paddedObject_eq_bitObject_true {period : Nat} (system : CyclicTag period
   rw [bitObject_eq_true]
   rfl
 
-/-- Read a padded object at a nonzero cyclic instruction. -/
-theorem read_paddedObject_nonzero {period : Nat} (system : CyclicTag period)
+/-- Read a padded object at a nonzero cyclic instruction by a nonempty execution. -/
+theorem read_paddedObject_nonzero_transGen {period : Nat} (system : CyclicTag period)
     (input : List Bool) (haltPhase instruction : Fin period) (period_pos : 0 < period)
     (offset : Fin 10) (offset_pos : 0 < offset.val)
     (instruction_nonzero : instruction.val ≠ 0) (rest : List TagLetter)
     (track_fits : (objectTrackPhase instruction offset offset_pos).val ≤
       (List.replicate (9 - offset.val) TagLetter.b ++ rest).length) :
-    TagReaches (deletionWidth period) (compiledOutput system input haltPhase period_pos)
+    Relation.TransGen
+        (TagStep (deletionWidth period)
+          (compiledOutput system input haltPhase period_pos))
         ((paddedObject system input haltPhase period_pos offset).drop
             (objectEntryPhase instruction).val ++ rest)
         (rest.drop (objectEntryPhase (CyclicTag.shift instruction 1)).val ++
           spell (compiledOutput system input haltPhase period_pos)
             (tableTrack system input haltPhase period_pos
               (objectTrackPhase instruction offset offset_pos)).val) := by
-  have traversal := read_wholeAppendant_track system input haltPhase period_pos
+  have traversal := read_wholeAppendant_track_transGen system input haltPhase period_pos
     (objectTrackPhase instruction offset offset_pos)
     (List.replicate (9 - offset.val) .b ++ rest) track_fits
   have suffix_le : 9 - offset.val ≤
@@ -193,6 +195,23 @@ theorem read_paddedObject_nonzero {period : Nat} (system : CyclicTag period)
     instruction_nonzero]
   simpa [List.append_assoc] using traversal
 
+/-- Read a padded object at a nonzero cyclic instruction. -/
+theorem read_paddedObject_nonzero {period : Nat} (system : CyclicTag period)
+    (input : List Bool) (haltPhase instruction : Fin period) (period_pos : 0 < period)
+    (offset : Fin 10) (offset_pos : 0 < offset.val)
+    (instruction_nonzero : instruction.val ≠ 0) (rest : List TagLetter)
+    (track_fits : (objectTrackPhase instruction offset offset_pos).val ≤
+      (List.replicate (9 - offset.val) TagLetter.b ++ rest).length) :
+    TagReaches (deletionWidth period) (compiledOutput system input haltPhase period_pos)
+        ((paddedObject system input haltPhase period_pos offset).drop
+            (objectEntryPhase instruction).val ++ rest)
+        (rest.drop (objectEntryPhase (CyclicTag.shift instruction 1)).val ++
+          spell (compiledOutput system input haltPhase period_pos)
+            (tableTrack system input haltPhase period_pos
+              (objectTrackPhase instruction offset offset_pos)).val) :=
+  (read_paddedObject_nonzero_transGen system input haltPhase instruction period_pos offset
+    offset_pos instruction_nonzero rest track_fits).to_reflTransGen
+
 theorem paddedObject_drop_one {period : Nat} (system : CyclicTag period)
     (input : List Bool) (haltPhase : Fin period) (period_pos : 0 < period)
     (offset : Fin 10) :
@@ -204,14 +223,17 @@ theorem paddedObject_drop_one {period : Nat} (system : CyclicTag period)
   rw [List.replicate_succ]
   rfl
 
-/-- Read a padded object at cyclic instruction zero, including its leading external `b` step. -/
-theorem read_paddedObject_zero {period : Nat} (system : CyclicTag period)
+/-- Read a padded object at cyclic instruction zero by a nonempty execution, including its leading
+external `b` step. -/
+theorem read_paddedObject_zero_transGen {period : Nat} (system : CyclicTag period)
     (input : List Bool) (haltPhase instruction : Fin period) (period_pos : 0 < period)
     (instruction_zero : instruction.val = 0) (offset : Fin 10)
     (offset_pos : 0 < offset.val) (rest : List TagLetter)
     (track_fits : (objectTrackPhase instruction offset offset_pos).val ≤
       (List.replicate (9 - offset.val) TagLetter.b ++ rest).length) :
-    TagReaches (deletionWidth period) (compiledOutput system input haltPhase period_pos)
+    Relation.TransGen
+        (TagStep (deletionWidth period)
+          (compiledOutput system input haltPhase period_pos))
         ((paddedObject system input haltPhase period_pos offset).drop
             (objectEntryPhase instruction).val ++ rest)
         (rest.drop (objectEntryPhase (CyclicTag.shift instruction 1)).val ++ [.b] ++
@@ -235,14 +257,14 @@ theorem read_paddedObject_zero {period : Nat} (system : CyclicTag period)
     have core : deletionWidth period ≤ deletionWidth period * trackWidth system input :=
       Nat.le_mul_of_pos_right _ width_pos
     omega
-  have first := tagReaches_one (deletionWidth period) (deletionWidth_pos period_pos)
+  have first := tagStep_one (deletionWidth period) (deletionWidth_pos period_pos)
     (compiledOutput system input haltPhase period_pos) queue queue_long
   have queue_head : queue.get ⟨0, (deletionWidth_pos period_pos).trans_le queue_long⟩ = .b := by
     obtain ⟨offset, offset_eq⟩ := Nat.exists_eq_succ_of_ne_zero (Nat.ne_of_gt offset_pos)
     rw [List.get_eq_getElem]
     simp [queue_shape, offset_eq, List.replicate_succ]
   rw [queue_head] at first
-  change TagReaches (deletionWidth period) (compiledOutput system input haltPhase period_pos)
+  change TagStep (deletionWidth period) (compiledOutput system input haltPhase period_pos)
       queue (queue.drop (deletionWidth period) ++ [.b]) at first
   have prefix_lt : offset.val < deletionWidth period := by
     simp only [deletionWidth]
@@ -272,7 +294,7 @@ theorem read_paddedObject_zero {period : Nat} (system : CyclicTag period)
     rw [List.drop_append_of_le_length phase_le_word]
     simp [List.append_assoc]
   rw [drop_queue] at first
-  have first' : TagReaches (deletionWidth period)
+  have first' : TagStep (deletionWidth period)
       (compiledOutput system input haltPhase period_pos) queue
       ((wholeAppendant system input haltPhase period_pos).drop
           (objectTrackPhase instruction offset offset_pos).val ++
@@ -294,8 +316,50 @@ theorem read_paddedObject_zero {period : Nat} (system : CyclicTag period)
   rw [List.drop_append_eq_append_drop,
     List.drop_eq_nil_iff_le.mpr suffix_le, List.nil_append, List.length_replicate,
     objectTrackPhase_sub_suffix] at traversal
-  have composed := Relation.ReflTransGen.trans first' traversal
-  simpa [TagReaches, queue, List.append_assoc] using composed
+  have composed := Relation.TransGen.head' first' traversal
+  simpa [queue, List.append_assoc] using composed
+
+/-- Read a padded object at cyclic instruction zero, including its leading external `b` step. -/
+theorem read_paddedObject_zero {period : Nat} (system : CyclicTag period)
+    (input : List Bool) (haltPhase instruction : Fin period) (period_pos : 0 < period)
+    (instruction_zero : instruction.val = 0) (offset : Fin 10)
+    (offset_pos : 0 < offset.val) (rest : List TagLetter)
+    (track_fits : (objectTrackPhase instruction offset offset_pos).val ≤
+      (List.replicate (9 - offset.val) TagLetter.b ++ rest).length) :
+    TagReaches (deletionWidth period) (compiledOutput system input haltPhase period_pos)
+        ((paddedObject system input haltPhase period_pos offset).drop
+            (objectEntryPhase instruction).val ++ rest)
+        (rest.drop (objectEntryPhase (CyclicTag.shift instruction 1)).val ++ [.b] ++
+          spell (compiledOutput system input haltPhase period_pos)
+            (tableTrack system input haltPhase period_pos
+              (objectTrackPhase instruction offset offset_pos)).val) :=
+  (read_paddedObject_zero_transGen system input haltPhase instruction period_pos instruction_zero
+    offset offset_pos rest track_fits).to_reflTransGen
+
+/-- Uniform nonempty padded-object traversal; instruction zero contributes the external leading
+`b`. -/
+theorem read_paddedObject_transGen {period : Nat} (system : CyclicTag period)
+    (input : List Bool) (haltPhase instruction : Fin period) (period_pos : 0 < period)
+    (offset : Fin 10) (offset_pos : 0 < offset.val) (rest : List TagLetter)
+    (track_fits : (objectTrackPhase instruction offset offset_pos).val ≤
+      (List.replicate (9 - offset.val) TagLetter.b ++ rest).length) :
+    Relation.TransGen
+        (TagStep (deletionWidth period)
+          (compiledOutput system input haltPhase period_pos))
+        ((paddedObject system input haltPhase period_pos offset).drop
+            (objectEntryPhase instruction).val ++ rest)
+        (rest.drop (objectEntryPhase (CyclicTag.shift instruction 1)).val ++
+          (if instruction.val = 0 then [.b] else []) ++
+            spell (compiledOutput system input haltPhase period_pos)
+              (tableTrack system input haltPhase period_pos
+                (objectTrackPhase instruction offset offset_pos)).val) := by
+  by_cases instruction_zero : instruction.val = 0
+  · simpa [instruction_zero, List.append_assoc] using
+      read_paddedObject_zero_transGen system input haltPhase instruction period_pos
+        instruction_zero offset offset_pos rest track_fits
+  · simpa [instruction_zero] using
+      read_paddedObject_nonzero_transGen system input haltPhase instruction period_pos offset
+        offset_pos instruction_zero rest track_fits
 
 /-- Uniform padded-object traversal; instruction zero contributes the external leading `b`. -/
 theorem read_paddedObject {period : Nat} (system : CyclicTag period)
@@ -464,6 +528,30 @@ theorem tableTrack_onePhase {period : Nat} (system : CyclicTag period)
         appendantTrack system input period_pos instruction (instruction.val = 0) := by
   simp [tableTrack, onePhase_ne_last period_pos, onePhase_mod, instructionAt_onePhase]
 
+/-- A raw compiler word is read by a nonempty shift-neutral execution and emits only raw compiler
+words. -/
+theorem read_rawObject_transGen {period : Nat} (system : CyclicTag period) (input : List Bool)
+    (haltPhase instruction : Fin period) (period_pos : 0 < period) (rest : List TagLetter)
+    (phase_fits : (objectEntryPhase instruction).val ≤ rest.length) :
+    Relation.TransGen
+        (TagStep (deletionWidth period)
+          (compiledOutput system input haltPhase period_pos))
+        ((wholeAppendant system input haltPhase period_pos).drop
+            (objectEntryPhase instruction).val ++ rest)
+        (rest.drop (objectEntryPhase instruction).val ++
+          repeatWord (trackWidth system input)
+            (wholeAppendant system input haltPhase period_pos)) := by
+  have traversal := read_wholeAppendant_track_transGen system input haltPhase period_pos
+    (objectEntryPhase instruction) rest phase_fits
+  rw [tableTrack_objectEntryPhase] at traversal
+  change Relation.TransGen
+      (TagStep (deletionWidth period) (compiledOutput system input haltPhase period_pos))
+      _ (rest.drop (objectEntryPhase instruction).val ++
+        expandPrime system input haltPhase period_pos
+          (List.replicate (trackWidth system input) .c)) at traversal
+  rw [expandPrime_replicate_c] at traversal
+  exact traversal
+
 /-- A raw compiler word is shift-neutral and emits only raw compiler words. -/
 theorem read_rawObject {period : Nat} (system : CyclicTag period) (input : List Bool)
     (haltPhase instruction : Fin period) (period_pos : 0 < period) (rest : List TagLetter)
@@ -473,16 +561,9 @@ theorem read_rawObject {period : Nat} (system : CyclicTag period) (input : List 
             (objectEntryPhase instruction).val ++ rest)
         (rest.drop (objectEntryPhase instruction).val ++
           repeatWord (trackWidth system input)
-            (wholeAppendant system input haltPhase period_pos)) := by
-  have traversal := read_wholeAppendant_track system input haltPhase period_pos
-    (objectEntryPhase instruction) rest phase_fits
-  rw [tableTrack_objectEntryPhase] at traversal
-  change TagReaches (deletionWidth period) (compiledOutput system input haltPhase period_pos)
-      _ (rest.drop (objectEntryPhase instruction).val ++
-        expandPrime system input haltPhase period_pos
-          (List.replicate (trackWidth system input) .c)) at traversal
-  rw [expandPrime_replicate_c] at traversal
-  exact traversal
+            (wholeAppendant system input haltPhase period_pos)) :=
+  (read_rawObject_transGen system input haltPhase instruction period_pos rest
+    phase_fits).to_reflTransGen
 
 theorem spell_padRight {period : Nat} (system : CyclicTag period) (input : List Bool)
     (haltPhase : Fin period) (period_pos : 0 < period) (width : Nat)
@@ -677,17 +758,20 @@ theorem appendantEmission_eq {period : Nat} (system : CyclicTag period) (input :
     simpa [appendantEmission, instruction_zero] using
       spell_appendantTrack_nonwrap system input haltPhase instruction period_pos
 
-/-- Reading an epsilon object emits only shift-neutral garbage. -/
-theorem read_epsilonObject {period : Nat} (system : CyclicTag period) (input : List Bool)
+/-- Reading an epsilon object is nonempty and emits only shift-neutral garbage. -/
+theorem read_epsilonObject_transGen {period : Nat} (system : CyclicTag period)
+    (input : List Bool)
     (haltPhase instruction : Fin period) (period_pos : 0 < period) (rest : List TagLetter)
     (track_fits : (epsilonPhase instruction).val ≤
       (List.replicate 6 TagLetter.b ++ rest).length) :
-    TagReaches (deletionWidth period) (compiledOutput system input haltPhase period_pos)
+    Relation.TransGen
+        (TagStep (deletionWidth period)
+          (compiledOutput system input haltPhase period_pos))
         ((epsilonObject system input haltPhase period_pos).drop
             (objectEntryPhase instruction).val ++ rest)
         (rest.drop (objectEntryPhase (CyclicTag.shift instruction 1)).val ++
           silentEmission system input haltPhase instruction period_pos) := by
-  have read := read_paddedObject system input haltPhase instruction period_pos
+  have read := read_paddedObject_transGen system input haltPhase instruction period_pos
     ⟨3, by decide⟩ (by decide) rest track_fits
   rw [paddedObject_eq_epsilonObject] at read
   have phase_eq : objectTrackPhase instruction ⟨3, by decide⟩ (by decide) =
@@ -698,17 +782,32 @@ theorem read_epsilonObject {period : Nat} (system : CyclicTag period) (input : L
   rw [silentEmission_eq] at read
   exact read
 
-/-- Reading a zero object has the same garbage-only emission as an epsilon object. -/
-theorem read_zeroObject {period : Nat} (system : CyclicTag period) (input : List Bool)
+/-- Reading an epsilon object emits only shift-neutral garbage. -/
+theorem read_epsilonObject {period : Nat} (system : CyclicTag period) (input : List Bool)
+    (haltPhase instruction : Fin period) (period_pos : 0 < period) (rest : List TagLetter)
+    (track_fits : (epsilonPhase instruction).val ≤
+      (List.replicate 6 TagLetter.b ++ rest).length) :
+    TagReaches (deletionWidth period) (compiledOutput system input haltPhase period_pos)
+        ((epsilonObject system input haltPhase period_pos).drop
+            (objectEntryPhase instruction).val ++ rest)
+        (rest.drop (objectEntryPhase (CyclicTag.shift instruction 1)).val ++
+          silentEmission system input haltPhase instruction period_pos) :=
+  (read_epsilonObject_transGen system input haltPhase instruction period_pos rest
+    track_fits).to_reflTransGen
+
+/-- Reading a zero object is nonempty and has the epsilon object's garbage-only emission. -/
+theorem read_zeroObject_transGen {period : Nat} (system : CyclicTag period) (input : List Bool)
     (haltPhase instruction : Fin period) (period_pos : 0 < period) (rest : List TagLetter)
     (track_fits : (zeroPhase instruction).val ≤
       (List.replicate 4 TagLetter.b ++ rest).length) :
-    TagReaches (deletionWidth period) (compiledOutput system input haltPhase period_pos)
+    Relation.TransGen
+        (TagStep (deletionWidth period)
+          (compiledOutput system input haltPhase period_pos))
         ((bitObject system input haltPhase period_pos false).drop
             (objectEntryPhase instruction).val ++ rest)
         (rest.drop (objectEntryPhase (CyclicTag.shift instruction 1)).val ++
           silentEmission system input haltPhase instruction period_pos) := by
-  have read := read_paddedObject system input haltPhase instruction period_pos
+  have read := read_paddedObject_transGen system input haltPhase instruction period_pos
     ⟨5, by decide⟩ (by decide) rest track_fits
   rw [paddedObject_eq_bitObject_false] at read
   have phase_eq : objectTrackPhase instruction ⟨5, by decide⟩ (by decide) =
@@ -717,6 +816,46 @@ theorem read_zeroObject {period : Nat} (system : CyclicTag period) (input : List
   rw [tableTrack_zeroPhase] at read
   rw [List.append_assoc] at read
   rw [silentEmission_eq] at read
+  exact read
+
+/-- Reading a zero object has the epsilon object's garbage-only emission. -/
+theorem read_zeroObject {period : Nat} (system : CyclicTag period) (input : List Bool)
+    (haltPhase instruction : Fin period) (period_pos : 0 < period) (rest : List TagLetter)
+    (track_fits : (zeroPhase instruction).val ≤
+      (List.replicate 4 TagLetter.b ++ rest).length) :
+    TagReaches (deletionWidth period) (compiledOutput system input haltPhase period_pos)
+        ((bitObject system input haltPhase period_pos false).drop
+            (objectEntryPhase instruction).val ++ rest)
+        (rest.drop (objectEntryPhase (CyclicTag.shift instruction 1)).val ++
+          silentEmission system input haltPhase instruction period_pos) :=
+  (read_zeroObject_transGen system input haltPhase instruction period_pos rest
+    track_fits).to_reflTransGen
+
+/-- Reading an ordinary one object is nonempty and emits its appendant and trailing garbage. -/
+theorem read_oneObject_transGen {period : Nat} (system : CyclicTag period) (input : List Bool)
+    (haltPhase instruction : Fin period) (period_pos : 0 < period)
+    (not_halting : instruction ≠ haltPhase)
+    (appendant_nonempty_at_zero : instruction.val = 0 → system.appendant instruction ≠ [])
+    (rest : List TagLetter)
+    (track_fits : (onePhase instruction).val ≤
+      (List.replicate 2 TagLetter.b ++ rest).length) :
+    Relation.TransGen
+        (TagStep (deletionWidth period)
+          (compiledOutput system input haltPhase period_pos))
+        ((bitObject system input haltPhase period_pos true).drop
+            (objectEntryPhase instruction).val ++ rest)
+        (rest.drop (objectEntryPhase (CyclicTag.shift instruction 1)).val ++
+          appendantEmission system input haltPhase instruction period_pos) := by
+  have read := read_paddedObject_transGen system input haltPhase instruction period_pos
+    ⟨7, by decide⟩ (by decide) rest track_fits
+  rw [paddedObject_eq_bitObject_true] at read
+  have phase_eq : objectTrackPhase instruction ⟨7, by decide⟩ (by decide) =
+      onePhase instruction := rfl
+  rw [phase_eq] at read
+  rw [tableTrack_onePhase, if_neg not_halting] at read
+  rw [List.append_assoc] at read
+  rw [appendantEmission_eq system input haltPhase instruction period_pos
+    appendant_nonempty_at_zero] at read
   exact read
 
 /-- Reading an ordinary one object emits the selected cyclic appendant and trailing garbage. -/
@@ -731,18 +870,9 @@ theorem read_oneObject {period : Nat} (system : CyclicTag period) (input : List 
         ((bitObject system input haltPhase period_pos true).drop
             (objectEntryPhase instruction).val ++ rest)
         (rest.drop (objectEntryPhase (CyclicTag.shift instruction 1)).val ++
-          appendantEmission system input haltPhase instruction period_pos) := by
-  have read := read_paddedObject system input haltPhase instruction period_pos
-    ⟨7, by decide⟩ (by decide) rest track_fits
-  rw [paddedObject_eq_bitObject_true] at read
-  have phase_eq : objectTrackPhase instruction ⟨7, by decide⟩ (by decide) =
-      onePhase instruction := rfl
-  rw [phase_eq] at read
-  rw [tableTrack_onePhase, if_neg not_halting] at read
-  rw [List.append_assoc] at read
-  rw [appendantEmission_eq system input haltPhase instruction period_pos
-    appendant_nonempty_at_zero] at read
-  exact read
+          appendantEmission system input haltPhase instruction period_pos) :=
+  (read_oneObject_transGen system input haltPhase instruction period_pos not_halting
+    appendant_nonempty_at_zero rest track_fits).to_reflTransGen
 
 /-- Reading a one at the distinguished phase initiates the all-`b` halting cascade. -/
 theorem read_haltingObject {period : Nat} (system : CyclicTag period) (input : List Bool)
