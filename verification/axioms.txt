@@ -164,3 +164,6 @@
 'MatrixMortality.Undecidability.NearyCompiler.drain_junk_before_haltingSeed' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.Undecidability.NearyCompiler.read_exact_firing_halts' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]

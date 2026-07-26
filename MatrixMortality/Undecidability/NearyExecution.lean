@@ -167,11 +167,188 @@ theorem read_repeatWhole_track_succ {period : Nat} (system : CyclicTag period)
       simpa [repeatWord_succ_left, repeated, word, output, emission,
         List.append_assoc] using composed
 
+theorem constantAtMultiples_repeatWord {α : Type*} {stride : Nat} {letter : α}
+    {word : List α} (clean : ConstantAtMultiples stride letter word)
+    (aligned : stride ∣ word.length) (count : Nat) :
+    ConstantAtMultiples stride letter (repeatWord count word) := by
+  induction count with
+  | zero => simp [ConstantAtMultiples, repeatWord]
+  | succ count ih =>
+      rw [repeatWord_succ_left]
+      exact clean.append ih aligned
+
 /-- The one-symbol phase disturbance followed by `s − 1` complete compiler words. -/
 def haltingSeed {period : Nat} (system : CyclicTag period) (input : List Bool)
     (haltPhase : Fin period) (period_pos : 0 < period) : List TagLetter :=
   [.b] ++ repeatWord (trackWidth system input - 1)
     (wholeAppendant system input haltPhase period_pos)
+
+/-- The all-`b` track exposed after deleting the halting seed's initial phase disturbance. -/
+def haltingSweepPhase {period : Nat} (instruction : Fin period) :
+    Fin (deletionWidth period) :=
+  ⟨(objectEntryPhase instruction).val - 1,
+    (Nat.sub_le _ _).trans_lt (objectEntryPhase instruction).isLt⟩
+
+@[simp]
+theorem haltingSweepPhase_mod {period : Nat} (instruction : Fin period) :
+    (haltingSweepPhase instruction).val % 10 = 0 := by
+  by_cases instruction_zero : instruction.val = 0
+  · simp [haltingSweepPhase, objectEntryPhase, instruction_zero]
+  · simp [haltingSweepPhase, objectEntryPhase, instruction_zero]
+
+theorem haltingSweepPhase_ne_last {period : Nat} (period_pos : 0 < period)
+    (instruction : Fin period) :
+    (haltingSweepPhase instruction).val ≠ deletionWidth period - 1 := by
+  intro equality
+  have sweep_mod := haltingSweepPhase_mod instruction
+  have last_mod : (deletionWidth period - 1) % 10 = 9 := by
+    simp [deletionWidth]
+    omega
+  omega
+
+theorem tableTrack_haltingSweepPhase {period : Nat} (system : CyclicTag period)
+    (input : List Bool) (haltPhase instruction : Fin period) (period_pos : 0 < period) :
+    tableTrack system input haltPhase period_pos (haltingSweepPhase instruction) =
+      ⟨List.replicate (trackWidth system input) .b, by simp⟩ := by
+  rw [tableTrack, if_neg (haltingSweepPhase_ne_last period_pos instruction)]
+  rw [haltingSweepPhase_mod]
+
+/-- Every even physical position of the compiler word lies on an all-`b` track. -/
+theorem wholeAppendant_get_of_even_index {period : Nat} (system : CyclicTag period)
+    (input : List Bool) (haltPhase : Fin period) (period_pos : 0 < period)
+    (index : Nat)
+    (index_lt : index < (wholeAppendant system input haltPhase period_pos).length)
+    (index_even : index % 2 = 0) :
+    (wholeAppendant system input haltPhase period_pos)[index] = .b := by
+  simp only [wholeAppendant, weave] at index_lt ⊢
+  rw [List.getElem_ofFn]
+  let phase : Fin (deletionWidth period) :=
+    ⟨index % deletionWidth period, Nat.mod_lt _ (deletionWidth_pos period_pos)⟩
+  have phase_even : phase.val % 2 = 0 := by
+    simp only [phase]
+    rw [Nat.mod_mod_of_dvd]
+    · exact index_even
+    · exact dvd_mul_of_dvd_left (by norm_num : 2 ∣ 10) period
+  have phase_ne_last : phase.val ≠ deletionWidth period - 1 := by
+    intro equality
+    have last_odd : (deletionWidth period - 1) % 2 = 1 := by
+      simp [deletionWidth]
+      omega
+    omega
+  have track :
+      tableTrack system input haltPhase period_pos phase =
+        ⟨List.replicate (trackWidth system input) .b, by simp⟩ := by
+    rw [tableTrack, if_neg phase_ne_last]
+    have residue_even : (phase.val % 10) % 2 = 0 := by
+      rw [Nat.mod_mod_of_dvd phase.val (by norm_num : 2 ∣ 10)]
+      exact phase_even
+    have residue_cases :
+        phase.val % 10 = 0 ∨ phase.val % 10 = 2 ∨ phase.val % 10 = 4 ∨
+          phase.val % 10 = 6 ∨ phase.val % 10 = 8 := by
+      omega
+    rcases residue_cases with residue | residue | residue | residue | residue
+    all_goals rw [residue]
+  change (tableTrack system input haltPhase period_pos phase).get _ = .b
+  rw [track]
+  change (List.replicate (trackWidth system input) TagLetter.b).get _ = .b
+  exact List.getElem_replicate _ _
+
+theorem wholeAppendant_clean {period : Nat} (system : CyclicTag period)
+    (input : List Bool) (haltPhase : Fin period) (period_pos : 0 < period) :
+    ConstantAtMultiples 10 .b
+      (wholeAppendant system input haltPhase period_pos) := by
+  intro index index_lt index_aligned
+  apply wholeAppendant_get_of_even_index system input haltPhase period_pos index index_lt
+  obtain ⟨multiple, rfl⟩ := index_aligned
+  omega
+
+theorem wholeAppendant_aligned {period : Nat} (system : CyclicTag period)
+    (input : List Bool) (haltPhase : Fin period) (period_pos : 0 < period) :
+    10 ∣ (wholeAppendant system input haltPhase period_pos).length := by
+  rw [wholeAppendant_length, deletionWidth]
+  exact ⟨period * trackWidth system input, by ring⟩
+
+theorem epsilonObject_clean {period : Nat} (system : CyclicTag period)
+    (input : List Bool) (haltPhase : Fin period) (period_pos : 0 < period) :
+    ConstantAtMultiples 10 .b
+      (epsilonObject system input haltPhase period_pos) := by
+  rw [epsilonObject_eq]
+  rw [List.append_assoc]
+  intro index index_lt index_aligned
+  let word := wholeAppendant system input haltPhase period_pos
+  change (List.replicate 4 .b ++ (word ++ List.replicate 6 .b))[index] = .b
+  change index <
+    (List.replicate 4 TagLetter.b ++ (word ++ List.replicate 6 TagLetter.b)).length at index_lt
+  by_cases in_prefix : index < 4
+  · rw [List.getElem_append_left _ _ (by simpa using in_prefix)]
+    exact List.getElem_replicate _ _
+  · by_cases in_word : index - 4 < word.length
+    · have suffix_lt : index - 4 < (word ++ List.replicate 6 TagLetter.b).length :=
+        in_word.trans_le (by simp)
+      have split := List.getElem_append_right (i := index)
+        (as := List.replicate 4 TagLetter.b) (bs := word ++ List.replicate 6 TagLetter.b)
+        (by simpa using in_prefix) (h' := index_lt) (h'' := by simpa using suffix_lt)
+      rw [split]
+      simp only [List.length_replicate, Nat.reduceSubDiff]
+      rw [List.getElem_append_left word (List.replicate 6 .b) in_word]
+      apply wholeAppendant_get_of_even_index system input haltPhase period_pos
+        (index - 4) in_word
+      obtain ⟨multiple, multiple_eq⟩ := index_aligned
+      omega
+    · have suffix_lt : index - 4 < (word ++ List.replicate 6 TagLetter.b).length := by
+        simp only [List.length_append, List.length_replicate] at index_lt ⊢
+        omega
+      have split := List.getElem_append_right (i := index)
+        (as := List.replicate 4 TagLetter.b) (bs := word ++ List.replicate 6 TagLetter.b)
+        (by simpa using in_prefix) (h' := index_lt) (h'' := by simpa using suffix_lt)
+      rw [split]
+      simp only [List.length_replicate, Nat.reduceSubDiff]
+      have tail_lt : index - 4 - word.length < (List.replicate 6 TagLetter.b).length := by
+        simp only [List.length_append, List.length_replicate] at suffix_lt
+        simp only [List.length_replicate]
+        omega
+      have tail_split := List.getElem_append_right (i := index - 4)
+        (as := word) (bs := List.replicate 6 TagLetter.b) in_word
+        (h' := suffix_lt) (h'' := tail_lt)
+      rw [tail_split]
+      exact List.getElem_replicate _ _
+
+theorem epsilonObject_aligned {period : Nat} (system : CyclicTag period)
+    (input : List Bool) (haltPhase : Fin period) (period_pos : 0 < period) :
+    10 ∣ (epsilonObject system input haltPhase period_pos).length := by
+  rw [epsilonObject_length, deletionWidth]
+  exact ⟨period * trackWidth system input + 1, by ring⟩
+
+theorem junkAtomWord_clean {period : Nat} (system : CyclicTag period)
+    (input : List Bool) (haltPhase : Fin period) (period_pos : 0 < period)
+    (atom : JunkAtom) :
+    ConstantAtMultiples 10 .b
+      (junkAtomWord system input haltPhase period_pos atom) := by
+  cases atom with
+  | raw => exact wholeAppendant_clean system input haltPhase period_pos
+  | packet =>
+      exact constantAtMultiples_repeatWord
+        (epsilonObject_clean system input haltPhase period_pos)
+        (epsilonObject_aligned system input haltPhase period_pos) period
+
+theorem junkAtomWord_aligned {period : Nat} (system : CyclicTag period)
+    (input : List Bool) (haltPhase : Fin period) (period_pos : 0 < period)
+    (atom : JunkAtom) :
+    10 ∣ (junkAtomWord system input haltPhase period_pos atom).length := by
+  rw [junkAtomWord_length, deletionWidth]
+  exact ⟨period * junkAtomWeight system input atom, by ring⟩
+
+theorem encodeJunk_clean {period : Nat} (system : CyclicTag period)
+    (input : List Bool) (haltPhase : Fin period) (period_pos : 0 < period)
+    (code : List JunkAtom) :
+    ConstantAtMultiples 10 .b
+      (encodeJunk system input haltPhase period_pos code) := by
+  induction code with
+  | nil => simp [ConstantAtMultiples]
+  | cons atom code ih =>
+      rw [encodeJunk_cons]
+      exact (junkAtomWord_clean system input haltPhase period_pos atom).append ih
+        (junkAtomWord_aligned system input haltPhase period_pos atom)
 
 theorem haltingSeed_long {period : Nat} (system : CyclicTag period) (input : List Bool)
     (haltPhase : Fin period) (period_pos : 0 < period) :
@@ -477,5 +654,97 @@ theorem read_exact_firing_to_haltingSeed {period : Nat} (system : CyclicTag peri
       firingStable [] firingBits
   exact ⟨remainingTokens, remainingEnds, remainingBits,
     Relation.ReflTransGen.trans enteredPulse pulse⟩
+
+/-- Removing the disturbed entry position exposes the preceding even Table 2 phase. -/
+theorem haltingSeed_drop_entry {period : Nat} (system : CyclicTag period)
+    (input : List Bool) (haltPhase instruction : Fin period) (period_pos : 0 < period) :
+    (haltingSeed system input haltPhase period_pos).drop
+        (objectEntryPhase instruction).val =
+      (repeatWord (trackWidth system input - 1)
+        (wholeAppendant system input haltPhase period_pos)).drop
+          (haltingSweepPhase instruction).val := by
+  have entry_pos : 0 < (objectEntryPhase instruction).val := by
+    have entry_mod := objectEntryPhase_mod instruction
+    omega
+  have entry_eq :
+      (objectEntryPhase instruction).val =
+        (haltingSweepPhase instruction).val + 1 := by
+    simp only [haltingSweepPhase]
+    omega
+  rw [haltingSeed, entry_eq]
+  exact List.drop_succ_cons
+
+/-- After the distinguished pulse, every possible queue head lies on an all-`b` track. -/
+theorem postHaltingSeed_clean {period : Nat} (system : CyclicTag period)
+    (input : List Bool) (haltPhase instruction : Fin period) (period_pos : 0 < period)
+    (code : List JunkAtom) :
+    ConstantAtMultiples 10 .b
+      ((haltingSeed system input haltPhase period_pos).drop
+          (objectEntryPhase instruction).val ++
+        encodeJunk system input haltPhase period_pos code) := by
+  rw [haltingSeed_drop_entry]
+  let word := wholeAppendant system input haltPhase period_pos
+  let count := trackWidth system input - 1
+  let repeated := repeatWord count word
+  let sweep := (haltingSweepPhase instruction).val
+  have word_clean : ConstantAtMultiples 10 .b word := by
+    exact wholeAppendant_clean system input haltPhase period_pos
+  have word_aligned : 10 ∣ word.length := by
+    exact wholeAppendant_aligned system input haltPhase period_pos
+  have repeated_clean : ConstantAtMultiples 10 .b repeated := by
+    exact constantAtMultiples_repeatWord word_clean word_aligned count
+  have repeated_aligned : 10 ∣ repeated.length := by
+    rw [repeatWord_length]
+    exact dvd_mul_of_dvd_right word_aligned count
+  have sweep_aligned : 10 ∣ sweep := by
+    rw [Nat.dvd_iff_mod_eq_zero]
+    exact haltingSweepPhase_mod instruction
+  have dropped_clean : ConstantAtMultiples 10 .b (repeated.drop sweep) :=
+    repeated_clean.drop sweep sweep_aligned
+  have dropped_aligned : 10 ∣ (repeated.drop sweep).length := by
+    rw [List.length_drop]
+    exact Nat.dvd_sub' repeated_aligned sweep_aligned
+  change ConstantAtMultiples 10 .b
+    (repeated.drop sweep ++ encodeJunk system input haltPhase period_pos code)
+  exact dropped_clean.append (encodeJunk_clean system input haltPhase period_pos code)
+    dropped_aligned
+
+/-- Every post-pulse queue drains under the compiled restricted-tag program. -/
+theorem postHaltingSeed_halts {period : Nat} (system : CyclicTag period)
+    (input : List Bool) (haltPhase instruction : Fin period) (period_pos : 0 < period)
+    (code : List JunkAtom) :
+    TagHaltsFrom (deletionWidth period)
+      (compiledOutput system input haltPhase period_pos)
+      ((haltingSeed system input haltPhase period_pos).drop
+          (objectEntryPhase instruction).val ++
+        encodeJunk system input haltPhase period_pos code) := by
+  apply tagHaltsFrom_of_constantAtMultiples (deletionWidth period)
+    (Nat.le_of_lt (deletionWidth_large period_pos))
+    (compiledOutput system input haltPhase period_pos) .b rfl
+  apply (postHaltingSeed_clean system input haltPhase instruction period_pos code).of_dvd
+  simp [deletionWidth]
+
+/-- Exact-empty cyclic firing forces the emitted restricted binary tag system to halt. -/
+theorem read_exact_firing_halts {period : Nat} (system : CyclicTag period)
+    (input : List Bool) (haltPhase : Fin period) (period_pos : 0 < period)
+    (input_nonempty : input ≠ []) (haltPhase_nonzero : haltPhase.val ≠ 0)
+    (appendant_nonempty_at_zero :
+      ∀ instruction : Fin period,
+        instruction.val = 0 → system.appendant instruction ≠ [])
+    (beforeFiring : system.AvoidingReaches haltPhase
+      { data := input, phase := ⟨0, period_pos⟩ }
+      { data := [true], phase := haltPhase }) :
+    TagHaltsFrom (deletionWidth period)
+      (compiledOutput system input haltPhase period_pos)
+      ((body system input haltPhase period_pos).drop (deletionWidth period - 1) ++ [.b]) := by
+  obtain ⟨remainingTokens, remainingEnds, remainingBits, reachesSeed⟩ :=
+    read_exact_firing_to_haltingSeed system input haltPhase period_pos input_nonempty
+      haltPhase_nonzero appendant_nonempty_at_zero beforeFiring
+  obtain ⟨emitted, _, drainsJunk⟩ :=
+    drain_junk_before_haltingSeed system input haltPhase (CyclicTag.shift haltPhase 1)
+      period_pos remainingTokens remainingEnds remainingBits
+  apply tagHaltsFrom_of_reaches (Relation.ReflTransGen.trans reachesSeed drainsJunk)
+  exact postHaltingSeed_halts system input haltPhase (CyclicTag.shift haltPhase 1)
+    period_pos emitted
 
 end MatrixMortality.Undecidability.NearyCompiler

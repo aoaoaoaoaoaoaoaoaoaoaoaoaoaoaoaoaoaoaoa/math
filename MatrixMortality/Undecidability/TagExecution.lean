@@ -139,6 +139,107 @@ theorem tagReaches_one {α : Type*} (width : Nat) (width_pos : 0 < width)
     exact (List.take_append_drop width word).symm
   · rw [vectorStroke_frontVector_head]
 
+/-- A finite execution followed by a terminating execution already terminates at its source. -/
+theorem tagHaltsFrom_of_reaches {α : Type*} {width : Nat} {output : α → List α}
+    {before after : List α} (reach : TagReaches width output before after)
+    (halts : TagHaltsFrom width output after) :
+    TagHaltsFrom width output before := by
+  induction reach with
+  | refl => exact halts
+  | tail _ step ih => exact ih (.step step halts)
+
+/-- Every letter at an index divisible by `stride` equals `letter`. -/
+def ConstantAtMultiples {α : Type*} (stride : Nat) (letter : α) (word : List α) : Prop :=
+  ∀ (index : Nat) (index_lt : index < word.length), stride ∣ index →
+    word[index] = letter
+
+theorem ConstantAtMultiples.replicate {α : Type*} (stride count : Nat) (letter : α) :
+    ConstantAtMultiples stride letter (List.replicate count letter) := by
+  intro index index_lt _
+  exact List.getElem_replicate letter index_lt
+
+theorem ConstantAtMultiples.append {α : Type*} {stride : Nat} {letter : α}
+    {left right : List α} (left_clean : ConstantAtMultiples stride letter left)
+    (right_clean : ConstantAtMultiples stride letter right)
+    (left_aligned : stride ∣ left.length) :
+    ConstantAtMultiples stride letter (left ++ right) := by
+  intro index index_lt index_aligned
+  by_cases in_left : index < left.length
+  · rw [List.getElem_append_left left right in_left]
+    exact left_clean index in_left index_aligned
+  · have left_le : left.length ≤ index := Nat.le_of_not_gt in_left
+    have right_lt : index - left.length < right.length := by
+      simp only [List.length_append] at index_lt
+      omega
+    rw [List.getElem_append_right left right in_left]
+    exact right_clean (index - left.length) right_lt
+      (Nat.dvd_sub left_le index_aligned left_aligned)
+
+theorem ConstantAtMultiples.drop {α : Type*} {stride : Nat} {letter : α}
+    {word : List α} (clean : ConstantAtMultiples stride letter word)
+    (offset : Nat) (offset_aligned : stride ∣ offset) :
+    ConstantAtMultiples stride letter (word.drop offset) := by
+  intro index index_lt index_aligned
+  rw [List.getElem_drop]
+  have source_lt : offset + index < word.length := by
+    simp only [List.length_drop] at index_lt
+    omega
+  exact clean (offset + index) source_lt (Nat.dvd_add offset_aligned index_aligned)
+
+theorem ConstantAtMultiples.of_dvd {α : Type*} {small large : Nat} {letter : α}
+    {word : List α} (clean : ConstantAtMultiples small letter word)
+    (divides : small ∣ large) :
+    ConstantAtMultiples large letter word := by
+  intro index index_lt index_aligned
+  exact clean index index_lt (dvd_trans divides index_aligned)
+
+/-- A queue drains if every possible head is one letter that emits only itself. -/
+theorem tagHaltsFrom_of_constantAtMultiples {α : Type*} (width : Nat)
+    (width_large : 2 ≤ width) (output : α → List α) (letter : α)
+    (letter_output : output letter = [letter]) (word : List α)
+    (clean : ConstantAtMultiples width letter word) :
+    TagHaltsFrom width output word := by
+  let rec drain (queue : List α) (queue_clean : ConstantAtMultiples width letter queue) :
+      TagHaltsFrom width output queue := by
+      by_cases short : queue.length < width
+      · exact .stop short
+      · have width_pos : 0 < width := by omega
+        have enough : width ≤ queue.length := Nat.le_of_not_gt short
+        have head : queue.get ⟨0, width_pos.trans_le enough⟩ = letter :=
+          queue_clean 0 (width_pos.trans_le enough) (dvd_zero width)
+        let next := queue.drop width ++ [letter]
+        have next_clean : ConstantAtMultiples width letter next := by
+          intro index index_lt index_aligned
+          by_cases in_drop : index < (queue.drop width).length
+          · rw [List.getElem_append_left (queue.drop width) [letter] in_drop]
+            rw [List.getElem_drop]
+            have source_lt : width + index < queue.length := by
+              simp only [List.length_drop] at in_drop
+              omega
+            exact queue_clean (width + index) source_lt
+              (Nat.dvd_add (dvd_refl width) index_aligned)
+          · have at_last : index = (queue.drop width).length := by
+              simp only [next, List.length_append, List.length_cons, List.length_nil] at index_lt
+              omega
+            subst index
+            simp [next]
+        have reach := tagReaches_one width width_pos output queue enough
+        rw [head, letter_output] at reach
+        exact tagHaltsFrom_of_reaches reach (drain next next_clean)
+    termination_by queue.length
+    decreasing_by
+      simp only [next, List.length_append, List.length_drop, List.length_cons, List.length_nil]
+      omega
+  exact drain word clean
+
+/-- A unary queue drains whenever one step deletes at least two letters and emits one. -/
+theorem tagHaltsFrom_replicate_fixed {α : Type*} (width : Nat) (width_large : 2 ≤ width)
+    (output : α → List α) (letter : α) (letter_output : output letter = [letter])
+    (count : Nat) :
+    TagHaltsFrom width output (List.replicate count letter) := by
+  exact tagHaltsFrom_of_constantAtMultiples width width_large output letter letter_output _
+    (ConstantAtMultiples.replicate width count letter)
+
 /-- The heads of the canonical strokes are precisely the fixed-stride samples. -/
 theorem chunkHistory_heads {α : Type*} (width : Nat) (width_pos : 0 < width)
     (count : Nat) (word : List α) (enough : count * width ≤ word.length) :

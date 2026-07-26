@@ -210,11 +210,11 @@ with a complete arbitrary-word converse.
 | `Undecidability/UniversalMachine.lean` | fixed verified two-tape interpreter for mathlib code halting |
 | `Undecidability/CyclicTag.lean` | two-tag semantics and the one-hot cyclic-tag simulation |
 | `Undecidability/Tracks.lean` | typed fixed-stride track serialization and recovery |
-| `Undecidability/TagExecution.lean` | exact finite executions and sliced-track recovery |
+| `Undecidability/TagExecution.lean` | exact finite executions, sliced-track recovery, and congruence-head drainage |
 | `Undecidability/NearyCompiler.lean` | exact Table 2 words, tracks, padding, and arithmetic envelope |
 | `Undecidability/NearySimulation.lean` | traversal semantics of raw, bit, epsilon, and halting objects |
 | `Undecidability/NearyData.lean` | garbage calculus, token invariant, and ordinary cyclic pulses |
-| `Undecidability/NearyExecution.lean` | literal initialization, nonfiring execution, first-firing extraction, and halting-seed entry |
+| `Undecidability/NearyExecution.lean` | literal initialization, first-firing extraction, and the complete post-seed halting cascade |
 | `Undecidability/NearyProblems.lean` | canonical `Fin 4` and `Fin 5` target instances |
 | `Undecidability/PairedProblems.lean` | canonical four-matrix target instance and structural promises |
 | `Undecidability/BinaryProblems.lean` | canonical structured `Z₆(2)` instance |
@@ -271,6 +271,7 @@ with a complete arbitrary-word converse.
 | A run reaching the distinguished pulse reaches its first such pulse | `read_until_firing` |
 | The distinguished pulse appends the halting seed | `read_to_haltingSeed` |
 | Exact-empty firing leaves only junk before the seed | `read_exact_firing_to_haltingSeed` |
+| Exact-empty cyclic firing forces restricted-tag halting | `read_exact_firing_halts` |
 
 ## Logical Foundation
 
@@ -312,8 +313,10 @@ while preserving the garbage reserve. Literal initialization reaches that invari
 run ending at a distinguished true pulse is cut at its first such pulse; the corresponding
 restricted-tag execution consumes the true object and appends the seed `b u^(s−1)`. In the
 exact-empty case, only junk remains before the seed, and a separate theorem transports that junk
-behind the protected seed. The post-seed traversal to all-`b` data, descent below `β`, and global
-no-spurious-halting converse remain open. The chosen congruent padding gives
+behind the protected seed. Every physical position divisible by ten in the resulting queue is
+`b`; since `β = 10p` and `b` emits only itself, the queue then descends strictly below `β`.
+Thus exact-empty cyclic firing now implies restricted-tag halting. The global
+no-spurious-halting converse remains open. The chosen congruent padding gives
 
 ```text
 q.length = (xβ + 1)(β−1),
