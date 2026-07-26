@@ -1,8 +1,16 @@
 # Formal Verification
 
-The Lean development verifies the source theorem and both matrix compilers
+The Lean development verifies the complete computable source reduction and the matrix compilers:
 
 ```text
+mathlib code halting at input zero
+  ↔ halting of one fixed binary TM0 machine
+  ↔ halting of one fixed finite-alphabet two-tag system
+  ↔ a distinguished firing in one fixed cyclic-tag system
+  ↔ halting of the emitted restricted binary-tag system
+  ↔ solvability of the emitted binary four-letter GPCP instance
+  ↔ mortality of the emitted five 3 × 3 integer matrices;
+
 four-tile terminal equation
   ↔ restricted tag halting
   ↔ corrected binary five-pair PCP
@@ -25,9 +33,28 @@ mortality of the emitted five 3 × 3 integer matrices
   ↔ mortality of two (10+n) × (10+n) integer matrices.
 ```
 
-It does not assume Neary's defective terminal-pair converse or Rote's long-block repair.
+The final GPCP and five-matrix constructors are primitive recursive. Lean proves the corresponding
+many-one reductions and no-decider theorems from mathlib's halting theorem. No external
+universality theorem, Neary's defective terminal-pair converse, or Rote's long-block repair is
+assumed.
 
 ## Checked Scope
+
+The universal source chain is executable. Lean reifies mathlib's partial-recursive evaluator as
+one fixed finitely supported binary `TM0` machine, normalizes it to the read-state form consumed by
+the Cocke–Minsky compiler, and emits a fixed finite two-tag system whose variable initial queue is
+primitive recursive in the source code. Forward simulation reaches one last-labelled halt symbol
+without reading it early; every terminating tag execution and every queue headed by that label
+reflects source-code halting.
+
+The one-hot cyclic compiler preserves that avoidance invariant and reflects every distinguished
+firing. The Table 2 compiler then proves both directions for every emitted source: protected
+execution gives halting, while its arbitrary-execution converse excludes spurious halting after
+the semantic data are exhausted. Its body, padding, ternary arithmetic, four-letter GPCP instance,
+and five-matrix integer family are all primitive recursive. The declarations
+`codeHalts_reduces_gpcp4` and `codeHalts_reduces_mortality35` are therefore complete computable
+many-one reductions; `gpcp4_not_computable` and `mortality35_not_computable` are unconditional
+kernel-checked no-decider theorems.
 
 For deletion width `β`, body `q`, rules `b ↦ b` and `c ↦ q ++ [b]`, and initial queue
 `q.drop (β−1) ++ [b]`, Lean proves under
@@ -189,6 +216,7 @@ with a complete arbitrary-word converse.
 
 | File | Responsibility |
 | --- | --- |
+| `Computability.lean` | primitive-recursive closure lemmas used by the explicit compilers |
 | `MatrixSemigroup.lean` | shared word semantics, mortality transports, common-image restriction, transposition, and zero padding |
 | `TagQueue.lean` | tag steps and generic history soundness |
 | `NearyEncoding.lean` | four ordinary tiles, synchronization, source equivalence, and composed reductions |
@@ -207,14 +235,23 @@ with a complete arbitrary-word converse.
 | `PrefixMortality.lean` | complete prefix decoder, twelve-state realization, and ten-state common-image restriction |
 | `LintAudit.lean` | package-wide default mathlib environment lint |
 | `AxiomAudit.lean` | transitive axioms of publication-facing declarations |
-| `Undecidability/UniversalMachine.lean` | fixed verified two-tape interpreter for mathlib code halting |
+| `Undecidability/UniversalMachine.lean` | verified two-tape interpreter for mathlib code halting |
+| `Undecidability/FiniteTM0.lean` | finite-state restriction of supported `TM0` machines |
+| `Undecidability/SeededTM2.lean` | exact rooting of `TM2` machines at an arbitrary source label |
+| `Undecidability/UniversalTM0.lean` | fixed universal binary `TM0` machine and primitive-recursive input |
+| `Undecidability/TM0ToRead.lean` | exact binary `TM0` normalization to read-state machines |
+| `Undecidability/CockeMinsky.lean` | deletion-width-two tag compiler with all direction cases |
+| `Undecidability/CockeMinskyAvoidance.lean` | halt-avoiding source simulation and termination reflection |
 | `Undecidability/CyclicTag.lean` | two-tag semantics and the one-hot cyclic-tag simulation |
+| `Undecidability/CyclicTagAvoidance.lean` | distinguished-phase avoidance and firing reflection |
 | `Undecidability/Tracks.lean` | typed fixed-stride track serialization and recovery |
 | `Undecidability/TagExecution.lean` | exact finite executions, sliced-track recovery, and congruence-head drainage |
 | `Undecidability/NearyCompiler.lean` | exact Table 2 words, tracks, padding, and arithmetic envelope |
 | `Undecidability/NearySimulation.lean` | traversal semantics of raw, bit, epsilon, and halting objects |
 | `Undecidability/NearyData.lean` | garbage calculus, token invariant, and ordinary cyclic pulses |
 | `Undecidability/NearyExecution.lean` | literal initialization, first-firing extraction, and the complete post-seed halting cascade |
+| `Undecidability/UniversalTwoTag.lean` | fixed universal finite two-tag system and primitive-recursive source queue |
+| `Undecidability/UniversalNeary.lean` | complete computable reductions to binary `GPCP(4)` and `M₃(5)` |
 | `Undecidability/NearyProblems.lean` | canonical `Fin 4` and `Fin 5` target instances |
 | `Undecidability/PairedProblems.lean` | canonical four-matrix target instance and structural promises |
 | `Undecidability/BinaryProblems.lean` | canonical structured `Z₆(2)` instance |
@@ -263,6 +300,12 @@ with a complete arbitrary-word converse.
 | Canonical `M₁₀(2)` instance mortal iff tag halting | `nearyMortality102_mortal_iff_tagHaltsFrom` |
 | Every zero-padded `M₁₀₊ₙ(2)` instance iff tag halting | `nearyMortality10Plus_mortal_iff_tagHaltsFrom` |
 | Mathlib code halting has a verified `TM2` interpreter | `exists_universalTM2` |
+| Fixed two-tag halt-label reachability iff code halting | `UniversalTwoTag.reaches_halt_iff` |
+| Emitted restricted-tag halting iff code halting | `UniversalNeary.tagHaltsFrom_iff_codeHalts` |
+| Code halting many-one reduces to binary `GPCP(4)` | `UniversalNeary.codeHalts_reduces_gpcp4` |
+| Binary `GPCP(4)` solvability is not computable | `UniversalNeary.gpcp4_not_computable` |
+| Code halting many-one reduces to `M₃(5)` | `UniversalNeary.codeHalts_reduces_mortality35` |
+| `M₃(5)` mortality is not computable | `UniversalNeary.mortality35_not_computable` |
 | Two-tag executions reach their cyclic firing phase | `CyclicTag.reaches_firing_phase` |
 | A woven compiler word emits its prescribed track | `read_wholeAppendant_track` |
 | One arbitrary ordinary cyclic pulse is simulated | `read_next_dataBit` |
@@ -301,54 +344,19 @@ their resulting terms.
 
 ## External Boundary
 
-The complete universality chain is not yet formalized. On its upstream side, Lean now starts
-from mathlib's theorem that code halting is noncomputable, constructs a verified universal `TM2`
-interpreter, and proves the complete one-hot simulation from two-tag systems to cyclic-tag
-systems. A computable reification of the fixed interpreter as a finite machine and the
-finite-machine-to-two-tag compiler remain open.
+There is no unformalized theorem boundary in the binary `GPCP(4)` or `M₃(5)` undecidability
+proofs. Neary's Table 2 and Cocke–Minsky's tag construction are historical sources for locally
+defined compilers, not imported premises. Mathlib's kernel-checked noncomputability theorem for
+`Nat.Partrec.Code` supplies the source predicate.
 
-On Neary's side, Lean defines the exact Table 2 tracks and their computable padding. It proves
-that the whole `c`-appendant has length `βs`, ends in `b`, induces the required initial queue, and
-inhabits the arithmetic envelope. Fixed-stride execution then verifies every raw, epsilon, zero,
-ordinary-one, and distinguished-one object. The semantic data layer permits arbitrary garbage
-prefixes and proves that every nonfiring cyclic-tag execution produces the correct data update
-while preserving the garbage reserve. Literal initialization reaches that invariant. Any cyclic
-run ending at a distinguished true pulse is cut at its first such pulse; the corresponding
-restricted-tag execution consumes the true object and appends the seed `b u^(s−1)`. In the
-exact-empty case, only junk remains before the seed, and a separate theorem transports that junk
-behind the protected seed. Every physical position divisible by ten in the resulting queue is
-`b`; since `β = 10p` and `b` emits only itself, the queue then descends strictly below `β`.
-Thus exact-empty cyclic firing implies restricted-tag halting.
+The encoded results for `M₄(4)`, `Z₆(2)`, and `M₁₀(2)` still end at their instance-level
+equivalences with restricted-tag halting. Their constructors are explicit, but this corpus has
+not yet added primitive-recursive declarations and final many-one wrappers for those three
+targets. This is formalization debt, not a mathematical conditional on Neary's theorem.
 
-The reverse execution theorem is also complete. Ordinary semantic pulses traverse a nonempty
-physical path, so indexed deterministic halting time strictly decreases at each pulse. Once the
-semantic data bits are exhausted, the stable reserve contains at least two complete garbage
-atoms; reading either kind of atom emits nonempty garbage and reconstructs the same invariant.
-That perpetual positive progress contradicts finite halting. Consequently every halting
-restricted-tag execution reflects an avoiding cyclic execution ending at a distinguished true
-pulse. This is the global no-spurious-halting result; it does not assert that the pulse's tail is
-empty.
-
-The chosen congruent padding gives
-
-```text
-q.length = (xβ + 1)(β−1),
-```
-
-so every compiler output used by the reduction inhabits `NearyArithmeticEnvelope`. The envelope
-is deliberately broader than the exact Table 2 output family. This is the Neary padding
-corollary used by the publication: it follows from the selectable padding in Neary's
-construction, not from the bare statement of Lemma 9.
-
-Thus all source-to-matrix equivalences and a substantial proper prefix of the universality
-compiler are machine-checked. The exact encoded results currently end at
-`nearyMortality44_mortal_iff_tagHaltsFrom`,
-`nearyScalarZero62_hasZero_iff_tagHaltsFrom`, and
-`nearyMortality10Plus_mortal_iff_tagHaltsFrom`. Their final no-decider theorems remain
-conditional on a computable source reduction. The mathematical undecidability conclusions use
-Neary's peer-reviewed Lemma 9 at that external boundary. CHHN's frontier transports and
-bibliographic priority claims are external to Lean and are not dependencies of the direct
-compilers.
+CHHN's generator–dimension and scalar-to-corner frontier transports remain external paper
+theorems. Bibliographic priority claims likewise depend on the recorded literature audits rather
+than Lean.
 
 The scheduled compiler introduces a separate source-width seam. Neary's published construction
 sets `β = 10p`, where `p` is the simulated cyclic-tag program period. The fixed-width audit found
@@ -360,14 +368,14 @@ cell.
 
 ## Prior Formalizations
 
-The public Lean corpus was audited on 2026-07-22 for an executable reduction chain that could
-replace that external boundary. A usable component had to provide a computable translation,
+The public Lean corpus was audited on 2026-07-22 for an executable reduction chain. A usable
+component had to provide a computable translation,
 the required halting equivalence, a compatible license, and no admitted simulation theorem.
 Name-level overlap was not enough.
 
 | Development | Audited revision | Result | Reuse decision |
 | --- | --- | --- | --- |
-| [mathlib](https://github.com/leanprover-community/mathlib4/tree/809c3fb3b5c8f5d7dace56e200b426187516535a/Mathlib/Computability) | `809c3fb3` (`v4.12.0`) | Proves noncomputability of code halting and interprets partial-recursive code by Turing machines | Adopt the code-halting theorem. Its finite-support TM translations contain proof-level choices and do not themselves emit a computably encoded finite machine. |
+| [mathlib](https://github.com/leanprover-community/mathlib4/tree/809c3fb3b5c8f5d7dace56e200b426187516535a/Mathlib/Computability) | `809c3fb3` (`v4.12.0`) | Proves noncomputability of code halting and interprets partial-recursive code by Turing machines | Adopt the code-halting theorem and verified TM compilers; reify the finitely supported result as one fixed finite machine locally. |
 | [Wolfram TuringMachine](https://github.com/WolframInstitute/TuringMachine/tree/ff67008a07d37dee380567d5eeb556ed127759e7/Proofs/TagSystem) | `ff67008a` | Proves the one-hot two-tag to cyclic-tag step simulation | Use as an independent specification only. The repository has no stated license; its Turing-machine to two-tag simulation is an explicit hypothesis. |
 | [UniversalityDB](https://github.com/WolframInstitute/UniversalityDB/tree/d4383c47b5db3a3673a7d88472409eb1bd912ff0) | `d4383c47` | Catalogues the Wolfram universality chain | Not adopted: the catalogue records the same missing Turing-machine to two-tag theorem. |
 | [DiagonaLean](https://github.com/DiagonaLean/DiagonaLean/tree/28ed8223dcfb389c8c1b655521099500b7bc53af) | `28ed8223` | Formalizes substantial HALT, MPCP, PCP, and matrix-mortality semantics | Not adopted. Its `ManyOneReduces` permits an arbitrary function, `SDecidable` permits an arbitrary Boolean characteristic function, and the HALT-to-MPCP tile compiler is declared `noncomputable`; these statements do not supply the executable many-one reduction required here. The general compiler also retains machine-normalization side conditions. |
@@ -377,11 +385,10 @@ Name-level overlap was not enough.
 | [rule110-lean](https://github.com/novaspivack/rule110-lean/tree/cbbc170e48f254fcd822d10e759eecb4e359a943) | `cbbc170e` | Formalizes portions of Cook's Rule 110 simulation | Not adopted: its published status leaves the central simulation bridges as hypotheses and uses native evaluation certificates. |
 | [dna-tiles](https://github.com/CharlesCNorton/dna-tiles/tree/0410cdf30e11da33678d9e1ae94c94cffbcc22ef) | `0410cdf3` | Defines Turing machines and cyclic tag systems in Rocq | Not adopted. Its claimed cyclic-tag completeness selects a trivially halting or looping system by classical excluded middle after asking whether the source machine halts. This proves an extensional existence statement, not a computable compiler. |
 
-No audited public artifact closes either missing specialized edge: an executable universal
-source-to-two-tag compiler, or Neary's cyclic-tag-to-restricted-binary-tag Table 2 compiler.
-Accordingly, this project keeps mathlib's code-halting theorem, proves the two-tag-to-cyclic-tag
-compiler independently, and formalizes the remaining translations locally. This is a search
-result, not a claim that no unpublished or unindexed development exists.
+No audited public artifact supplied both specialized edges: an executable universal
+source-to-two-tag compiler and Neary's cyclic-tag-to-restricted-binary-tag Table 2 compiler.
+This project therefore retains mathlib's code-halting theorem and formalizes those translations
+locally. This is a search result, not a claim that no unpublished or unindexed development exists.
 
 ## Mechanical Verification
 

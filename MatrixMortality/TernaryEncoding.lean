@@ -35,6 +35,35 @@ theorem ternaryCode_append (x y : List Bool) :
     ternaryCode (x ++ y) = 3 ^ y.length * ternaryCode x + ternaryCode y := by
   simp [ternaryCode, List.reverse_append, Nat.ofDigits_append, add_comm, mul_comm]
 
+private theorem ternaryCode_eq_foldl (word : List Bool) :
+    ternaryCode word =
+      word.foldl (fun value bit => 3 * value + ternaryDigit bit) 0 := by
+  induction word using List.reverseRecOn with
+  | nil => rfl
+  | append_singleton word bit ih =>
+      rw [ternaryCode_append]
+      have singleton : ternaryCode [bit] = ternaryDigit bit := by
+        cases bit <;> decide
+      simp only [List.length_singleton, pow_one, List.foldl_append,
+        List.foldl_cons, List.foldl_nil]
+      rw [ih, singleton]
+
+/-- The nonzero ternary word code is primitive recursive. -/
+theorem ternaryCode_primrec : Primrec ternaryCode := by
+  have digitRec : Primrec ternaryDigit :=
+    Primrec.dom_fintype _
+  have step :
+      Primrec₂ fun (_ : List Bool) (state : Nat × Bool) =>
+        3 * state.1 + ternaryDigit state.2 :=
+    Primrec₂.mk <|
+      Primrec.nat_add.comp
+        (Primrec.nat_mul.comp (Primrec.const 3)
+          (Primrec.fst.comp Primrec.snd))
+        (digitRec.comp (Primrec.snd.comp Primrec.snd))
+  exact
+    (Primrec.list_foldl Primrec.id (Primrec.const 0) step).of_eq fun word =>
+      (ternaryCode_eq_foldl word).symm
+
 @[simp] theorem ternaryCode_singleton (bit : Bool) :
     ternaryCode [bit] = ternaryDigit bit := by
   cases bit <;> decide

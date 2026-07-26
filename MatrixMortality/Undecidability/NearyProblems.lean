@@ -87,6 +87,41 @@ def nearyGPCP4 (beta : Nat) (body : List TagLetter) : BinaryGPCP4 where
   lowerLeft := []
   lowerRight := []
 
+/-- Each labelled lower word is primitive recursive in the variable Neary body. -/
+theorem nearyLower_fin_primrec (beta : Nat) (label : Fin 4) :
+    Primrec fun body => nearyLower beta body (nearyTileOfFin label) := by
+  fin_cases label
+  · exact Primrec.const _
+  · exact
+      (Primrec.list_append.comp (Primrec.const [true])
+        (Primrec.list_append.comp (tagEncode_primrec beta)
+          (Primrec.const [true, false]))).of_eq fun body => by
+            rfl
+  · exact Primrec.const _
+  · exact Primrec.const _
+
+/-- The four-generator GPCP compiler is primitive recursive in its variable body. -/
+theorem nearyGPCP4_primrec (beta : Nat) :
+    Primrec (nearyGPCP4 beta) := by
+  have upperRec :
+      Primrec fun _ : List TagLetter =>
+        nearyUpper beta ∘ nearyTileOfFin :=
+    Primrec.const _
+  have lowerRec :
+      Primrec fun body : List TagLetter =>
+        nearyLower beta body ∘ nearyTileOfFin := by
+    apply MatrixMortality.Primrec.fin_function
+    exact nearyLower_fin_primrec beta
+  exact
+    BinaryGPCP4.primrec_mk
+      (fun _ => nearyUpper beta ∘ nearyTileOfFin)
+      (fun body => nearyLower beta body ∘ nearyTileOfFin)
+      (fun _ => []) (fun _ => nearyMarker beta)
+      (fun _ => []) (fun _ => [])
+      upperRec lowerRec
+      (Primrec.const []) (Primrec.const (nearyMarker beta))
+      (Primrec.const []) (Primrec.const [])
+
 theorem nearyGPCP4_solvable_iff_tagHaltsFrom (beta : Nat) (body : List TagLetter)
     (beta_large : 2 < beta) (body_long : beta - 1 ≤ body.length)
     (body_divisible : beta - 1 ∣ body.length) :
@@ -108,6 +143,38 @@ theorem nearyGPCP4_solvable_iff_tagHaltsFrom (beta : Nat) (body : List TagLetter
 def nearyMortality35 (beta : Nat) (body : List TagLetter) : Mortality35 :=
   fun label row column =>
     nearyMortalityFamilyInt beta body (nearyGeneratorOfFin label) row column
+
+/-- The five-matrix mortality compiler is primitive recursive in its variable body. -/
+theorem nearyMortality35_primrec (beta : Nat) :
+    Primrec (nearyMortality35 beta) := by
+  apply MatrixMortality.Primrec.fin_function
+  intro label
+  apply MatrixMortality.Primrec.fin_function
+  intro row
+  apply MatrixMortality.Primrec.fin_function
+  intro column
+  fin_cases label
+  · simpa [nearyMortality35, nearyMortalityFamilyInt, absorbedFamilyInt,
+      separatedGenerator] using
+      pcpMatrixInt_entry_primrec
+        (Primrec.const (nearyUpper beta (.rule .b)))
+        (nearyLower_fin_primrec beta 0) row column
+  · simpa [nearyMortality35, nearyMortalityFamilyInt, absorbedFamilyInt,
+      separatedGenerator] using
+      pcpMatrixInt_entry_primrec
+        (Primrec.const (nearyUpper beta (.rule .c)))
+        (nearyLower_fin_primrec beta 1) row column
+  · simpa [nearyMortality35, nearyMortalityFamilyInt, absorbedFamilyInt,
+      separatedGenerator] using
+      pcpMatrixInt_entry_primrec
+        (Primrec.const (nearyUpper beta (.erase .b)))
+        (nearyLower_fin_primrec beta 2) row column
+  · simpa [nearyMortality35, nearyMortalityFamilyInt, absorbedFamilyInt,
+      separatedGenerator] using
+      pcpMatrixInt_entry_primrec
+        (Primrec.const (nearyUpper beta (.erase .c)))
+        (nearyLower_fin_primrec beta 3) row column
+  · exact Primrec.const _
 
 theorem nearyMortality35_mortal_iff_tagHaltsFrom (beta : Nat) (body : List TagLetter)
     (beta_large : 2 < beta) (body_long : beta - 1 ≤ body.length)

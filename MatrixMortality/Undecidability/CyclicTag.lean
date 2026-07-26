@@ -1,3 +1,4 @@
+import MatrixMortality.Computability
 import MatrixMortality.TagQueue
 
 /-!
@@ -29,6 +30,17 @@ def Reaches {alphabet : Nat} (system : TwoTag alphabet) :
     List (Fin alphabet) → List (Fin alphabet) → Prop :=
   Relation.ReflTransGen system.Step
 
+/-- Two-tag reachability whose rule-selecting heads avoid one distinguished label. -/
+def AvoidingReaches {alphabet : Nat} (system : TwoTag alphabet) (target : Fin alphabet) :
+    List (Fin alphabet) → List (Fin alphabet) → Prop :=
+  HeadAvoidingTagReaches 2 system.production target
+
+theorem AvoidingReaches.toReaches {alphabet : Nat} {system : TwoTag alphabet}
+    {target : Fin alphabet} {before after : List (Fin alphabet)}
+    (reach : system.AvoidingReaches target before after) :
+    system.Reaches before after :=
+  MatrixMortality.HeadAvoidingTagReaches.toReaches reach
+
 theorem step_cons_cons {alphabet : Nat} (system : TwoTag alphabet)
     (head wake : Fin alphabet) (tail : List (Fin alphabet)) :
     system.Step (head :: wake :: tail) (tail ++ system.production head) := by
@@ -45,6 +57,14 @@ theorem step_iff {alphabet : Nat} (system : TwoTag alphabet) (before after : Lis
     exact ⟨head, wakeHead, tail, before_eq, after_eq⟩
   · rintro ⟨head, wake, tail, rfl, rfl⟩
     exact system.step_cons_cons head wake tail
+
+theorem avoidingStep_iff {alphabet : Nat} (system : TwoTag alphabet)
+    (target : Fin alphabet) (before after : List (Fin alphabet)) :
+    HeadAvoidingTagStep 2 system.production target before after ↔
+      ∃ head wake tail,
+        head ≠ target ∧
+          before = head :: wake :: tail ∧ after = tail ++ system.production head :=
+  headAvoidingTagStep_two_iff system.production target before after
 
 /-- Reachability of a word with a selected first symbol. -/
 def ReachesHead {alphabet : Nat} (system : TwoTag alphabet)
@@ -236,6 +256,16 @@ theorem oneHot_length {alphabet : Nat} (symbol : Fin alphabet) :
 def encodeWord {alphabet : Nat} (word : List (Fin alphabet)) : List Bool :=
   (word.map oneHot).join
 
+/-- One-hot word encoding is primitive recursive for every fixed alphabet size. -/
+theorem encodeWord_primrec {alphabet : Nat} :
+    Primrec (@encodeWord alphabet) := by
+  have oneHotRec : Primrec (@oneHot alphabet) :=
+    Primrec.dom_fintype _
+  exact
+    (Primrec.list_join.comp
+      (Primrec.list_map Primrec.id (oneHotRec.comp₂ Primrec₂.right))).of_eq fun word => by
+        rfl
+
 @[simp]
 theorem encodeWord_nil {alphabet : Nat} : encodeWord ([] : List (Fin alphabet)) = [] := rfl
 
@@ -247,6 +277,22 @@ theorem encodeWord_cons {alphabet : Nat} (symbol : Fin alphabet)
 theorem encodeWord_append {alphabet : Nat} (left right : List (Fin alphabet)) :
     encodeWord (left ++ right) = encodeWord left ++ encodeWord right := by
   simp [encodeWord, List.map_append]
+
+@[simp]
+theorem encodeWord_length {alphabet : Nat} (word : List (Fin alphabet)) :
+    (encodeWord word).length = alphabet * word.length := by
+  induction word with
+  | nil => rfl
+  | cons symbol word ih =>
+      rw [encodeWord_cons, List.length_append, oneHot_length, ih, List.length_cons]
+      rw [Nat.mul_succ, Nat.add_comm]
+
+theorem encodeWord_ne_nil {alphabet : Nat} (alphabet_nonempty : 0 < alphabet)
+    {word : List (Fin alphabet)} (word_nonempty : word ≠ []) :
+    encodeWord word ≠ [] :=
+  List.ne_nil_of_length_pos <| by
+    rw [encodeWord_length]
+    exact Nat.mul_pos alphabet_nonempty (List.length_pos.mpr word_nonempty)
 
 /-- Cook's compiler: production appendants followed by one empty phase per alphabet symbol. -/
 def ofTwoTag {alphabet : Nat} (system : TwoTag alphabet) : CyclicTag (alphabet + alphabet) where

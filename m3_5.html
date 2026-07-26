@@ -217,7 +217,7 @@
             <p>The equivalence holds when β−1 divides |<var>q</var>| and |<var>q</var>| ≥ β−1. These hypotheses define an arithmetic envelope containing Neary’s compiler outputs.</p>
           </div>
 
-          <p>Neary’s Lemma 9 supplies undecidability of the restricted tag family <a href="#ref-neary-2015">[Neary 2015]</a>. The calculation below places a computably padded Table 2 output inside the arithmetic envelope; no terminal-pair claim is imported.</p>
+          <p>Neary’s Table 2 supplies the historical design <a href="#ref-neary-2015">[Neary 2015]</a>. The repository defines that compiler, proves its forward and arbitrary-execution converses, and constructs the padded output primitive recursively from mathlib’s code-halting source. No theorem from Neary’s terminal-pair argument is imported.</p>
 
           <details class="technical-detail">
             <summary>Padding into the arithmetic envelope</summary>
@@ -495,15 +495,15 @@
           <div class="status-grid">
             <div>
               <b><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/main/FORMALIZATION.md#checked-scope">Formalized reduction</a></b>
-              <p>The four-tile synchronization theorem, queue-history soundness, fresh-marker PCP repair, ternary representation, rank-one compiler, and converse for every five-matrix word.</p>
+              <p>The fixed universal source compiler, four-tile synchronization theorem, queue-history soundness, fresh-marker PCP repair, ternary representation, rank-one compiler, converse for every five-matrix word, and final no-decider theorem.</p>
             </div>
             <div>
               <b><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/main/verification/axioms.txt">Transitive axioms</a></b>
               <p>Lean reports <code>propext</code>, <code>Classical.choice</code>, and <code>Quot.sound</code>. The project contains no axiom declarations or admitted proofs.</p>
             </div>
             <div>
-              <b><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/main/FORMALIZATION.md#external-boundary">External source seam</a></b>
-              <p>Neary’s Lemma 9 supplies the undecidable restricted tag family <a href="#ref-neary-2015">[Neary 2015]</a>. This work separately checks that Table 2 admits the required congruent padding. The Table 2 compiler, its padding interface, and the final many-one undecidability argument are not formalized.</p>
+              <b><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/main/FORMALIZATION.md#checked-scope">Computable source reduction</a></b>
+              <p>Lean proves a primitive-recursive many-one reduction from mathlib’s code-halting predicate to the emitted five-matrix family and derives its no-decider theorem. Neary’s Lemma 9 is provenance, not a proof premise.</p>
             </div>
             <div>
               <b><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/main/tools/scour_source.py">Finite falsifier</a></b>

@@ -1,3 +1,4 @@
+import MatrixMortality.Computability
 import MatrixMortality.TagQueue
 
 /-!
@@ -14,7 +15,10 @@ namespace MatrixMortality
 inductive TagLetter where
   | b
   | c
-  deriving DecidableEq, Fintype, Repr
+  deriving DecidableEq, Fintype, Inhabited, Repr
+
+noncomputable instance : Primcodable TagLetter :=
+  finitePrimcodable TagLetter
 
 /-- The four ordinary PCP labels: one rule and one eraser for each tag symbol. -/
 inductive NearyTile where
@@ -32,6 +36,16 @@ def tagCode (β : Nat) : TagLetter → List Bool
 
 /-- Extend `tagCode` morphically to tag words. -/
 def tagEncode (β : Nat) (word : List TagLetter) : List Bool := spell (tagCode β) word
+
+/-- Neary's variable word encoding is primitive recursive. -/
+theorem tagEncode_primrec (β : Nat) :
+    Primrec (tagEncode β) := by
+  have tagCodeRec : Primrec (tagCode β) :=
+    Primrec.dom_fintype _
+  exact
+    (Primrec.list_bind Primrec.id
+      (tagCodeRec.comp₂ Primrec₂.right)).of_eq fun word => by
+        rfl
 
 /-- The fixed right boundary `10^β` of the four-tile equation. -/
 def nearyMarker (β : Nat) : List Bool := true :: List.replicate β false

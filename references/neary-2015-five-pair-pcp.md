@@ -35,9 +35,10 @@ body.length = β[x(β−1)+1]−1 = (xβ+1)(β−1).
 ```
 
 These facts place the compiler outputs inside `NearyArithmeticEnvelope`; that structure is a
-strictly broader arithmetic class, not an exact model of Table 2. The project uses Lemma 9's
-restricted-tag undecidability and the displayed ordinary pairs, but proves their fixed-boundary
-soundness independently. Corollary 12 records the conventional six-generator `3 × 3`
+strictly broader arithmetic class, not an exact model of Table 2. The project uses Table 2 and
+the displayed ordinary pairs as construction sources, but defines the compiler locally and
+proves its universality and fixed-boundary soundness in Lean. Lemma 9 is therefore provenance,
+not an imported proof premise. Corollary 12 records the conventional six-generator `3 × 3`
 mortality bound.
 
 ## Audit notes
@@ -48,5 +49,7 @@ Neary's Theorem 11 converse is not used. The present proof instead shows directl
 words over the first four labels, that `U(w)10^β=V(w)` is equivalent to tag halting; it then adds
 a fresh synchronizing marker to obtain a corrected fifth pair.
 
-Lemma 9 is a substantial remaining external theorem in the Lean envelope. Its Table 2
-cyclic-tag simulation has been audited for interface compatibility but not formalized.
+The local formalization reconstructs Table 2 with an explicit padding function, proves protected
+forward execution and the arbitrary-execution converse, and composes it with fixed universal
+machine, two-tag, and cyclic-tag compilers. Lean derives the final computable many-one reductions
+to binary `GPCP(4)` and `M₃(5)` without assuming Lemma 9.

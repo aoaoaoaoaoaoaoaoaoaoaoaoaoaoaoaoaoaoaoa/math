@@ -17,30 +17,6 @@ namespace MatrixMortality.Undecidability
 def TagReaches {α : Type*} (β : Nat) (output : α → List α) : List α → List α → Prop :=
   Relation.ReflTransGen (TagStep β output)
 
-/-- A fixed-width tag system has at most one successor from each queue. -/
-theorem tagStep_deterministic {α : Type*} {β : Nat} {output : α → List α}
-    {before after₁ after₂ : List α} (first : TagStep β output before after₁)
-    (second : TagStep β output before after₂) :
-    after₁ = after₂ := by
-  obtain ⟨stroke₁, rest₁, before₁, after₁_eq⟩ := first
-  obtain ⟨stroke₂, rest₂, before₂, after₂_eq⟩ := second
-  have prefix₁ : stroke₁.letters <+: before := ⟨rest₁, before₁.symm⟩
-  have prefix₂ : stroke₂.letters <+: before := ⟨rest₂, before₂.symm⟩
-  have letters_length : stroke₁.letters.length = stroke₂.letters.length := by
-    simp
-  have letters_eq : stroke₁.letters = stroke₂.letters :=
-    (common_prefix_of_length_le prefix₁ prefix₂ letters_length.le).eq_of_length letters_length
-  have heads_eq : stroke₁.head = stroke₂.head := by
-    have := congrArg List.head? letters_eq
-    simpa [Stroke.letters] using this
-  have rests_eq : rest₁ = rest₂ := by
-    have append_eq :
-        stroke₁.letters ++ rest₁ = stroke₂.letters ++ rest₂ :=
-      before₁.symm.trans before₂
-    rw [letters_eq] at append_eq
-    exact List.append_cancel_left append_eq
-  rw [after₁_eq, after₂_eq, rests_eq, heads_eq]
-
 /-- Every lawful tag step has a complete deletion block at its source. -/
 theorem tagStep_width_le {α : Type*} {β : Nat} {output : α → List α}
     {before after : List α} (step : TagStep β output before after) :

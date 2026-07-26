@@ -1,3 +1,4 @@
+import MatrixMortality.Computability
 import MatrixMortality.Undecidability.CockeMinsky
 
 /-!
@@ -22,6 +23,19 @@ namespace TM0ToRead
 def bitsNatList : List Bool → Nat
   | [] => 0
   | bit :: bits => Nat.bit bit (bitsNatList bits)
+
+/-- The low-bit-first numeral interpretation is primitive recursive. -/
+theorem bitsNatList_primrec : Primrec bitsNatList := by
+  exact
+    (Primrec.list_foldr Primrec.id (Primrec.const 0)
+      ((MatrixMortality.Primrec.nat_bit).comp
+        (Primrec.fst.comp Primrec.snd)
+        (Primrec.snd.comp Primrec.snd)).to₂).of_eq fun bits => by
+          induction bits with
+          | nil => rfl
+          | cons bit bits ih =>
+              simpa only [List.foldr_cons, id_eq, bitsNatList] using
+                congrArg (Nat.bit bit) ih
 
 theorem bitsNatList_append_false (bits : List Bool) (count : Nat) :
     bitsNatList (bits ++ List.replicate count false) = bitsNatList bits := by

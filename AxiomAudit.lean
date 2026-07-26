@@ -96,3 +96,9 @@ open MatrixMortality
 #print axioms Undecidability.NearyCompiler.read_next_dataBit_transGen
 #print axioms Undecidability.NearyCompiler.GarbageBoundary.not_tagHaltsFrom
 #print axioms Undecidability.NearyCompiler.compiled_halts_implies_firing
+#print axioms Undecidability.UniversalTwoTag.reaches_halt_iff
+#print axioms Undecidability.UniversalNeary.tagHaltsFrom_iff_codeHalts
+#print axioms Undecidability.UniversalNeary.codeHalts_reduces_gpcp4
+#print axioms Undecidability.UniversalNeary.gpcp4_not_computable
+#print axioms Undecidability.UniversalNeary.codeHalts_reduces_mortality35
+#print axioms Undecidability.UniversalNeary.mortality35_not_computable

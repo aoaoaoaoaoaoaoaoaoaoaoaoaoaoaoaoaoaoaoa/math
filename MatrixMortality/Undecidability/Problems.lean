@@ -1,5 +1,6 @@
 import Mathlib.Computability.Halting
 import Mathlib.Computability.Reduce
+import MatrixMortality.Computability
 import MatrixMortality.NearyEncoding
 
 /-!
@@ -65,6 +66,32 @@ def BinaryGPCP4.Solvable (problem : BinaryGPCP4) : Prop :=
   ∃ word : List (Fin 4),
     problem.upperLeft ++ spell problem.upper word ++ problem.upperRight =
       problem.lowerLeft ++ spell problem.lower word ++ problem.lowerRight
+
+namespace BinaryGPCP4
+
+/-- Assemble a primitive-recursive family of encoded four-letter GPCP instances. -/
+theorem primrec_mk {α : Type*} [Primcodable α]
+    (upper lower : α → Fin 4 → List Bool)
+    (upperLeft upperRight lowerLeft lowerRight : α → List Bool)
+    (upperRec : Primrec upper) (lowerRec : Primrec lower)
+    (upperLeftRec : Primrec upperLeft) (upperRightRec : Primrec upperRight)
+    (lowerLeftRec : Primrec lowerLeft) (lowerRightRec : Primrec lowerRight) :
+    Primrec fun input =>
+      ({ upper := upper input
+         lower := lower input
+         upperLeft := upperLeft input
+         upperRight := upperRight input
+         lowerLeft := lowerLeft input
+         lowerRight := lowerRight input } : BinaryGPCP4) := by
+  apply (Primrec.of_equiv_iff binaryGPCP4Equiv).mp
+  exact
+    Primrec.pair upperRec <|
+      Primrec.pair lowerRec <|
+        Primrec.pair upperLeftRec <|
+          Primrec.pair upperRightRec <|
+            Primrec.pair lowerLeftRec lowerRightRec
+
+end BinaryGPCP4
 
 /-- A finite integer linear representation with distinguished row and column. -/
 structure ScalarZeroProblem (d k : Nat) where

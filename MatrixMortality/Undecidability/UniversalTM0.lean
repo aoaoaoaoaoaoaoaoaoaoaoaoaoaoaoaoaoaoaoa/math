@@ -1,3 +1,4 @@
+import MatrixMortality.Computability
 import MatrixMortality.Undecidability.FiniteTM0
 import MatrixMortality.Undecidability.SeededTM2
 import MatrixMortality.Undecidability.UniversalMachine
@@ -65,6 +66,101 @@ def stackInput (input : List ℕ) : List StackAlphabet :=
 /-- Fixed-width binary spelling of `stackInput`. -/
 noncomputable def binaryInput (input : List ℕ) : List Bool :=
   (stackInput input).bind fun symbol => (binaryEncode symbol).toList
+
+private def bitSymbol : Bool → PartrecToTM2.Γ'
+  | false => .bit0
+  | true => .bit1
+
+private theorem trNum_bit1 (number : Num) :
+    PartrecToTM2.trNum number.bit1 =
+      PartrecToTM2.Γ'.bit1 :: PartrecToTM2.trNum number := by
+  cases number <;> rfl
+
+private theorem trNum_bit0 {number : Num} (nonzero : number ≠ 0) :
+    PartrecToTM2.trNum number.bit0 =
+      PartrecToTM2.Γ'.bit0 :: PartrecToTM2.trNum number := by
+  cases number
+  · exact False.elim (nonzero rfl)
+  · rfl
+
+private theorem trNat_eq_bits (number : Nat) :
+    PartrecToTM2.trNat number = number.bits.map bitSymbol := by
+  refine Nat.binaryRec' (C := fun n =>
+    PartrecToTM2.trNat n = n.bits.map bitSymbol) (by rfl) (fun bit n canonical ih => ?_)
+    number
+  unfold PartrecToTM2.trNat
+  change PartrecToTM2.trNum (Num.ofNat' (Nat.bit bit n)) =
+    List.map bitSymbol (Nat.bits (Nat.bit bit n))
+  have ih' :
+      PartrecToTM2.trNum (Num.ofNat' n) = List.map bitSymbol (Nat.bits n) := by
+    simpa [PartrecToTM2.trNat] using ih
+  rw [Num.ofNat'_bit, Nat.bits,
+    Nat.binaryRec_eq' (z := []) (f := fun digit _ digits => digit :: digits) bit n
+      (Or.inr canonical),
+    List.map_cons]
+  cases bit
+  · simp only [cond_false]
+    rw [trNum_bit0]
+    · simpa [bitSymbol] using congrArg (PartrecToTM2.Γ'.bit0 :: ·) ih'
+    · intro zero
+      have cast_zero : (n : Num) = 0 := by
+        simpa [Num.ofNat'_eq] using zero
+      have n_zero : n = 0 := by exact_mod_cast cast_zero
+      exact Bool.false_ne_true (canonical n_zero)
+  · simp only [cond_true]
+    rw [trNum_bit1]
+    simpa [bitSymbol] using congrArg (PartrecToTM2.Γ'.bit1 :: ·) ih'
+
+private def stackSymbol (symbol : PartrecToTM2.Γ') : StackAlphabet :=
+  (false, Function.update (fun _ => none) PartrecToTM2.K'.main (some symbol))
+
+private def markStackHead (symbol : StackAlphabet) : StackAlphabet :=
+  (true, symbol.2)
+
+/-- The variable input of the fixed universal binary machine is primitive recursive. -/
+theorem binaryInput_primrec : Primrec binaryInput := by
+  letI : Primcodable PartrecToTM2.Γ' := finitePrimcodable PartrecToTM2.Γ'
+  letI : Primcodable StackAlphabet := finitePrimcodable StackAlphabet
+  have bitSymbol_primrec : Primrec bitSymbol := Primrec.dom_bool bitSymbol
+  have trNat_primrec : Primrec PartrecToTM2.trNat :=
+    (Primrec.list_map MatrixMortality.Primrec.nat_bits
+      (bitSymbol_primrec.comp₂ Primrec₂.right)).of_eq fun number =>
+        (trNat_eq_bits number).symm
+  have trListLetter :
+      Primrec₂ (fun (_ : List Nat) number =>
+        PartrecToTM2.trNat number ++ [PartrecToTM2.Γ'.cons]) :=
+    Primrec₂.mk <|
+      Primrec.list_append.comp (trNat_primrec.comp Primrec.snd)
+        (Primrec.const [PartrecToTM2.Γ'.cons])
+  have trList_primrec : Primrec PartrecToTM2.trList :=
+    (Primrec.list_bind Primrec.id trListLetter).of_eq fun numbers => by
+      induction numbers with
+      | nil => rfl
+      | cons number numbers ih =>
+          simp only [List.bind_cons, PartrecToTM2.trList, List.append_cancel_left_eq]
+          simpa using ih
+  have stackSymbol_primrec : Primrec stackSymbol :=
+    Primrec.dom_fintype stackSymbol
+  have reversed_primrec :
+      Primrec fun input => (PartrecToTM2.trList input).reverse :=
+    Primrec.list_reverse.comp trList_primrec
+  have stackSymbols_primrec :
+      Primrec fun input =>
+        (PartrecToTM2.trList input).reverse.map stackSymbol :=
+    Primrec.list_map reversed_primrec (stackSymbol_primrec.comp₂ Primrec₂.right)
+  have markStackHead_primrec : Primrec markStackHead :=
+    Primrec.dom_fintype markStackHead
+  have stackInput_primrec : Primrec stackInput :=
+    (Primrec.list_cons.comp
+      (markStackHead_primrec.comp (Primrec.list_headI.comp stackSymbols_primrec))
+      (Primrec.list_tail.comp stackSymbols_primrec)).of_eq fun input => by
+        rfl
+  have binarySpell_primrec :
+      Primrec fun symbol : StackAlphabet => (binaryEncode symbol).toList :=
+    Primrec.dom_fintype _
+  exact
+    Primrec.list_bind stackInput_primrec
+      (binarySpell_primrec.comp₂ Primrec₂.right)
 
 /-- The root label that specializes the fixed interpreter while leaving its input variable. -/
 def rootLabel (interpreter : ToPartrec.Code) : PartrecToTM2.Λ' :=

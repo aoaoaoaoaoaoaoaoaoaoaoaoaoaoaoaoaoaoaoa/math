@@ -176,3 +176,21 @@
 'MatrixMortality.Undecidability.NearyCompiler.compiled_halts_implies_firing' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.Undecidability.UniversalTwoTag.reaches_halt_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.Undecidability.UniversalNeary.tagHaltsFrom_iff_codeHalts' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.Undecidability.UniversalNeary.codeHalts_reduces_gpcp4' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.Undecidability.UniversalNeary.gpcp4_not_computable' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.Undecidability.UniversalNeary.codeHalts_reduces_mortality35' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.Undecidability.UniversalNeary.mortality35_not_computable' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]

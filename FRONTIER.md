@@ -24,8 +24,11 @@ For Neary's four ordinary pairs, the fixed-boundary equation is
 A zero-run automaton forces every matching word into exact deletion-width blocks, and a
 queue-history theorem proves that those blocks constitute a lawful restricted tag computation.
 Conversely, every halting computation emits such a match. This equivalence is formalized in
-`MatrixMortality/NearyEncoding.lean`; only Neary's Lemma 9 universality compiler remains an
-external published theorem.
+`MatrixMortality/NearyEncoding.lean`. The fixed universal machine, Cocke–Minsky compiler,
+one-hot cyclic compiler, Table 2 implementation, arbitrary-execution converse, primitive-recursive
+target constructors, many-one reductions, and no-decider theorems are formalized through
+`MatrixMortality/Undecidability/UniversalNeary.lean`. Neary's Lemma 9 is historical provenance,
+not a proof premise.
 
 Adding a fresh delimiter pair `(10^β#, #)` and fixed-length binary recoding also gives a
 corrected five-pair PCP family with primitive terminality. Rote's long unary guard is no longer
