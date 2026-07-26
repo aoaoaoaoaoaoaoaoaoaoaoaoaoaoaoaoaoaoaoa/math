@@ -2,10 +2,15 @@
 
 **Date:** 2026-07-24
 **Target:** three `4 × 4` integer matrices
-**Verdict:** compiler accepted; source theorem absent
+**Verdict:** compiler formalized; source theorem absent
 
 This audit contracts the reusable algebra from the failed `M₄(3)` attacks. It does not preserve
 the external reports. Stable statements live in `SALVAGE.md`.
+
+The compiler is formalized in
+[`MatrixMortality/TwoStatePushout.lean`](../MatrixMortality/TwoStatePushout.lean). The exact
+toggle-fusion obstruction is formalized, in strengthened common-anchor form, in
+[`MatrixMortality/TwoStateObstructions.lean`](../MatrixMortality/TwoStateObstructions.lean).
 
 ## Accepted Compiler
 

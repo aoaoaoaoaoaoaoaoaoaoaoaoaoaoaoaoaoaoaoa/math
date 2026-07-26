@@ -12,6 +12,8 @@ import MatrixMortality.PairedRank
 import MatrixMortality.PrefixMortality
 import MatrixMortality.ScheduledBinary
 import MatrixMortality.ScheduledBinaryRank
+import MatrixMortality.TwoStateObstructions
+import MatrixMortality.TwoStatePushout
 import MatrixMortality.Undecidability.BinaryProblems
 import MatrixMortality.Undecidability.NearyConverse
 import MatrixMortality.Undecidability.NearyProblems

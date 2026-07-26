@@ -71,8 +71,8 @@ file owns the mathematical stock.
 | [`MM-S08`](#mm-s08-swapped-distinguished-boundary-beta-shell) | obstruction | the swapped distinguished boundary cannot reach either single-erasure pole | audited | active |
 | [`MM-S09`](#mm-s09-canonical-swapped-residue-cannot-hit-a-pole) | obstruction | the unavoidable all-erasure residue cannot meet a valuation-one pole at emitted widths | audited | active |
 | [`MM-S10`](#mm-s10-swapped-target-suffix-sieve) | structure theorem | pole compatibility fixes `β+2` lower digits and excludes the residue `Δ=ρ−1` | audited | active |
-| [`M4-C01`](#m4-c01-two-state-pushout-compiler) | compiler | binary deterministic two-state scalar control compiles to three `4 × 4` matrices | audited | active |
-| [`M4-O01`](#m4-o01-exact-toggle-fusion-leaves-an-immortal-core) | obstruction | exact local toggle fusion preserves an invertible two-plane | audited | stock |
+| [`M4-C01`](#m4-c01-two-state-pushout-compiler) | compiler | binary deterministic two-state scalar control compiles to three `4 × 4` matrices | formalized | graduated |
+| [`M4-O01`](#m4-o01-exact-toggle-fusion-leaves-an-immortal-core) | obstruction | exact local toggle fusion preserves a nonzero common anchor | formalized | graduated |
 | [`M4-O02`](#m4-o02-two-private-state-phase-signature) | obstruction | exact shared-channel phase ratios are constant or two-periodic | audited | active |
 | [`M4-S01`](#m4-s01-odd-phase-macro-cut) | structure theorem | paired Neary roles inherit a rigid macro-stroke language | reported | active |
 | [`M4-O03`](#m4-o03-closed-serialization-collapse) | obstruction | finite closed-token queue serialization is decidable | audited | active |
@@ -175,8 +175,8 @@ conditional rewards are `Z₅(2)`, `M₅(3)`, and `R₆(2)`.
 ### MM-C04: Internal-word sandwich minimization
 
 **Kind:** compiler
-**Evidence:** audited
-**Disposition:** active
+**Evidence:** formalized
+**Disposition:** graduated
 
 Let `A : Σ → M_d(K)` and suppose a nonempty physical word `ω` has nonzero product
 
@@ -1616,17 +1616,18 @@ role pairs must agree on the complete two-dimensional upper channel.
 **Use:** this is the finished matrix half of the `M₄(3)` route. Source searches should target
 binary two-state controlled correspondence, not another four-dimensional separator proof.
 
-**Artifact:** the independent algebraic reconstruction is
+**Artifact:** `twoStateProduct_mulVec_phaseVector`,
+`twoStateDataMatrix_rank_eq_four_of_ne`, `twoStateDataMatrix_rank_eq_three_of_eq`, and
+`twoStateMortalityFamily_int_mortal_iff_nonempty_zero` in
+[`MatrixMortality/TwoStatePushout.lean`](MatrixMortality/TwoStatePushout.lean). The independent
+algebraic reconstruction is
 [`audits/m43-two-state-pushout-2026-07-24.md`](audits/m43-two-state-pushout-2026-07-24.md).
-
-**Next:** formalize the pushout, total decoder, rank classification, and mortality equivalence
-over the existing side-normal role matrices.
 
 ### M4-O01: Exact toggle fusion leaves an immortal core
 
 **Kind:** obstruction
-**Evidence:** audited
-**Disposition:** stock
+**Evidence:** formalized
+**Disposition:** graduated
 
 For the paired controls, let
 
@@ -1641,9 +1642,10 @@ If a proposed fused generator satisfies
 SG_b = TG_b,       SG_c = TG_c,
 ```
 
-then surjectivity onto `H` forces `S|_H=T|_H`. The toggle is the identity on `E`;
-both data matrices preserve `E` and restrict there to invertible upper-triangular maps.
-Every word over `{G_b,G_c,S}` therefore restricts invertibly to `E` and cannot be zero.
+then applying this identity to the common first column already gives `Se₁=e₁`. Both data
+matrices also fix `e₁`, so every word over `{G_b,G_c,S}` fixes a nonzero column and cannot be
+zero. One exact contextual identity is sufficient; the original invertible-two-plane argument
+is stronger than necessary.
 
 Separately, `S^r=T` with `r>0` makes `S` invertible, so no other pure power of `S` can be
 rank one or zero.
@@ -1653,6 +1655,9 @@ break the shared plane internally and reconstruct it at its boundary.
 
 **Use:** reject `T+P`, `TP`, `PT`, and power-coded toggle/punctuation proposals whenever they
 claim exact local toggle semantics.
+
+**Artifact:** `exactLeftToggleFusion_fixes_anchor` and `exactLeftToggleFusion_immortal` in
+[`MatrixMortality/TwoStateObstructions.lean`](MatrixMortality/TwoStateObstructions.lean).
 
 ### M4-O02: Two-private-state phase signature
 

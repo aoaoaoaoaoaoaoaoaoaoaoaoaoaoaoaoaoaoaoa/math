@@ -46,6 +46,11 @@ open MatrixMortality
 #print axioms paired_native_represents
 #print axioms paired_exact_diagonal_twoChannel_state_lower_bound
 #print axioms chhnNeary_exactRepresentation_six_le_card
+#print axioms twoStateProduct_mulVec_phaseVector
+#print axioms twoStateMortalityFamily_int_mortal_iff_nonempty_zero
+#print axioms twoStateDataMatrix_rank_eq_four_of_ne
+#print axioms twoStateDataMatrix_rank_eq_three_of_eq
+#print axioms exactLeftToggleFusion_immortal
 #print axioms Undecidability.nearyMortality44_mortal_iff_tagHaltsFrom
 #print axioms Undecidability.nearyMortality44_control_fixes_anchor
 #print axioms Undecidability.nearyMortality44_toggle_eq_permMatrix
