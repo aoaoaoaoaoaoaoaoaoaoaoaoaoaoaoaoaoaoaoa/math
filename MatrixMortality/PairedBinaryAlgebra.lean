@@ -261,19 +261,4 @@ def pairedBinaryAlgebraObservableClosed (β : Nat) (body : List TagLetter) :
      1, 1, u, V, 2, 1;
      1, 25, u, 700, (135 * ρ ^ 2 + 24 * ρ + 1) / 2, 76]
 
-/-- The terminal `10` of the rule-`c` lower word fixes its two least significant ternary
-digits. -/
-theorem chhnNearyLowerC_eq_nine_mul_add_seven (β : Nat) (body : List TagLetter) :
-    chhnNearyLowerC β body =
-      9 * ternaryCode (true :: tagEncode β body) + 7 := by
-  simp [chhnNearyLowerC, nearyLower, ternaryCode_append, ternaryCode_cons,
-    ternaryDigit]
-  ring
-
-/-- The rule-`c` lower scale contains the same terminal two-digit factor. -/
-theorem chhnNearyLowerCScale_eq_nine_mul (β : Nat) (body : List TagLetter) :
-    chhnNearyLowerCScale β body =
-      9 * (3 : ℚ) ^ (tagEncode β body).length.succ := by
-  simp [chhnNearyLowerCScale, nearyLower, pow_add]
-  ring
 end MatrixMortality

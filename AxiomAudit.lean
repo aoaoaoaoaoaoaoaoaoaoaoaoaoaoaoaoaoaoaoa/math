@@ -102,6 +102,10 @@ open MatrixMortality
 #print axioms isMortal_commonImage_iff
 #print axioms restrictedPrefixGenerator_mortal_iff_prefixMachine
 #print axioms restrictedPrefixGenerator_mortal_iff_tagHaltsFrom
+#print axioms prefixAlgebra_zero_cube
+#print axioms prefixAlgebraReachable_isUnit
+#print axioms prefixAlgebraObservable_isUnit
+#print axioms prefixAlgebra_wordProductSpan_eq_top
 #print axioms Undecidability.nearyMortality102_mortal_iff_tagHaltsFrom
 #print axioms isMortal_reindex_iff
 #print axioms isMortal_zeroPad_iff

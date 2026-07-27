@@ -164,6 +164,10 @@
 'MatrixMortality.restrictedPrefixGenerator_mortal_iff_tagHaltsFrom' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.prefixAlgebra_zero_cube' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.prefixAlgebraReachable_isUnit' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.prefixAlgebraObservable_isUnit' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.prefixAlgebra_wordProductSpan_eq_top' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.Undecidability.nearyMortality102_mortal_iff_tagHaltsFrom' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]

@@ -48,6 +48,22 @@ def chhnNearyUpperBScale (β : Nat) : ℚ :=
 def chhnNearyLowerCScale (β : Nat) (body : List TagLetter) : ℚ :=
   (3 : ℚ) ^ (nearyLower β body (.rule .c)).length
 
+/-- The terminal `10` of the rule-`c` lower word fixes its two least significant ternary
+digits. -/
+theorem chhnNearyLowerC_eq_nine_mul_add_seven (β : Nat) (body : List TagLetter) :
+    chhnNearyLowerC β body =
+      9 * ternaryCode (true :: tagEncode β body) + 7 := by
+  simp [chhnNearyLowerC, nearyLower, ternaryCode_append, ternaryCode_cons,
+    ternaryDigit]
+  ring
+
+/-- The rule-`c` lower scale contains the same terminal two-digit factor. -/
+theorem chhnNearyLowerCScale_eq_nine_mul (β : Nat) (body : List TagLetter) :
+    chhnNearyLowerCScale β body =
+      9 * (3 : ℚ) ^ (tagEncode β body).length.succ := by
+  simp [chhnNearyLowerCScale, nearyLower, pow_add]
+  ring
+
 /-- The fixed right column after evaluating its marker. -/
 def chhnNearyNativeColumn (β : Nat) : Fin 3 → ℚ :=
   ![chhnNearyMarkerValue β, -1, chhnNearyMarkerScale β]

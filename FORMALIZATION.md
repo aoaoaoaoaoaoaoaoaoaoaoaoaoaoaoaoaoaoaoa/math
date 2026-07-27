@@ -156,13 +156,20 @@ canonical separator therefore span `M₆(ℚ)`. This excludes every exact invari
 quotient, and internal-word sandwich compression of that physical family to five states; it
 does not exclude another family or a same-zero realization.
 
+The restricted ten-state prefix pair is now closed by the same generic theorem. Lean proves
+`B₀³=uvᵀ`, constructs ten reachable columns and ten observable rows, and proves both context
+matrices invertible throughout `β≥3`, `body.length≥β−1`. Its large reachability factors are
+nonzero by the sharper congruences `P(3^β)≡8 mod 9` and
+`Q(3^β,V_c^R−25)≡3 mod 9`. The resulting one hundred physical sandwiches span
+`M₁₀(ℚ)`. This is [`MM-O08`](SALVAGE.md#mm-o08-full-algebra-prefix-pair), formalized by
+`prefixAlgebra_wordProductSpan_eq_top`.
+
 ## Audited But Unformalized
 
-The internal-sandwich audit retains three unformalized exact obstructions:
+The internal-sandwich audit retains two unformalized exact obstructions:
 
 | Record | Formalization obligation |
 | --- | --- |
-| [`MM-O08`](SALVAGE.md#mm-o08-full-algebra-prefix-pair) | the identity `B₀³=uvᵀ`, uniform reachability and observability determinants, positivity over the source envelope, and the outer-product basis of `M₁₀(ℚ)` |
 | [`MM-O09`](SALVAGE.md#mm-o09-two-state-ternary-prefix-image) | classification of full ternary trees with five leaves and the joint-image argument for exact two-state weighted decoders |
 | [`MM-O10`](SALVAGE.md#mm-o10-additive-toggle-fusion-cycle) | idempotent normalization and the identities `F²=I−TP`, `F³=F`, and `rank F=rank F²=3` |
 
@@ -171,8 +178,8 @@ same-zero series or another decoder. The reconstruction and promotion boundaries
 [`audits/internal-sandwich-prefix-algebra-2026-07-25.md`](audits/internal-sandwich-prefix-algebra-2026-07-25.md)
 and
 [`audits/six-state-sandwich-saturation-2026-07-25.md`](audits/six-state-sandwich-saturation-2026-07-25.md).
-Formalization is tracked in
-[#8](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/8).
+`MM-O09` and `MM-O10` remain audited stock rather than publication dependencies; no live
+formalization issue is assigned to them.
 
 The setter-projective audit now also exposes a kernel-friendly carry theorem:
 

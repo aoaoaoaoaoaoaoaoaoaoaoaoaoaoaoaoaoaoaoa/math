@@ -53,7 +53,7 @@ file owns the mathematical stock.
 | [`MM-O05`](#mm-o05-width-three-scheduled-rank) | obstruction | the width-three scheduled series has exact rank five | formalized | graduated |
 | [`MM-O06`](#mm-o06-pure-power-punctuation-obstruction) | obstruction | an exact isolated toggle cannot also punctuate through a pure power | audited | stock |
 | [`MM-O07`](#mm-o07-setter-parameter-rigidity) | obstruction | source-boundary alignment fixes the setter parameter | audited | stock |
-| [`MM-O08`](#mm-o08-full-algebra-prefix-pair) | obstruction | the exact ten-state prefix pair spans the full matrix algebra | audited | active |
+| [`MM-O08`](#mm-o08-full-algebra-prefix-pair) | obstruction | the exact ten-state prefix pair spans the full matrix algebra | formalized | graduated |
 | [`MM-O09`](#mm-o09-two-state-ternary-prefix-image) | obstruction | a literal two-state ternary decoder has no five-state common-image restriction | audited | stock |
 | [`MM-O10`](#mm-o10-additive-toggle-fusion-cycle) | obstruction | the normalized toggle-minus-separator ansatz has rank three at every power | audited | stock |
 | [`MM-O11`](#mm-o11-full-algebra-paired-binary-family) | obstruction | the paired-binary mortality family spans the full six-state algebra | formalized | graduated |
@@ -506,8 +506,8 @@ projective avoidance problem must be settled at `r=t/μ`.
 ### MM-O08: Full-algebra prefix pair
 
 **Kind:** obstruction
-**Evidence:** audited
-**Disposition:** active
+**Evidence:** formalized
+**Disposition:** graduated
 
 Let `B₀,B₁` be the restricted ten-state prefix generators emitted by the current arithmetic
 source envelope. The physical word `000` is nonzero rank one:
@@ -529,7 +529,9 @@ p∈{ε,1,10,11,101,110,1011,1101,10110,11010}
 ```
 
 are bases. Their determinant certificates are nonzero uniformly for `β≥3` and
-`body.length≥β−1`. Hence the one hundred physical products
+`body.length≥β−1`. The two large polynomial factors reduce respectively to residues `8`
+and `3` modulo `9`; only the final reachable pivot uses that the body is nonempty. Hence the
+one hundred physical products
 
 ```text
 B₁ʲB₀³B_p=(B₁ʲu)(vᵀB_p)
@@ -556,10 +558,12 @@ change the physical pair or change its nonzero behavior.
 independent symbolic check are in
 [`audits/internal-sandwich-prefix-algebra-2026-07-25.md`](audits/internal-sandwich-prefix-algebra-2026-07-25.md#the-ten-state-prefix-pair).
 
-**Next:** formalize `B₀³=uvᵀ` and finite reachability/observability determinant certificates.
-
-**Issue:** [#8, Formalize internal-sandwich minimization and the ten-state full-algebra
-obstruction](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/8).
+**Formalization:** [`MatrixMortality/PrefixAlgebra.lean`](MatrixMortality/PrefixAlgebra.lean),
+[`MatrixMortality/PrefixAlgebraContexts.lean`](MatrixMortality/PrefixAlgebraContexts.lean),
+[`MatrixMortality/PrefixAlgebraRank.lean`](MatrixMortality/PrefixAlgebraRank.lean), and
+[`MatrixMortality/PrefixFullAlgebra.lean`](MatrixMortality/PrefixFullAlgebra.lean);
+`prefixAlgebra_zero_cube`, `prefixAlgebraReachable_isUnit`,
+`prefixAlgebraObservable_isUnit`, and `prefixAlgebra_wordProductSpan_eq_top`.
 
 ### MM-O09: Two-state ternary prefix image
 

@@ -19,6 +19,10 @@ import MatrixMortality.PairedMortality
 import MatrixMortality.PairedRank
 import MatrixMortality.PhaseSignature
 import MatrixMortality.PrefixMortality
+import MatrixMortality.PrefixAlgebra
+import MatrixMortality.PrefixAlgebraContexts
+import MatrixMortality.PrefixAlgebraRank
+import MatrixMortality.PrefixFullAlgebra
 import MatrixMortality.ScheduledBinary
 import MatrixMortality.ScheduledBinaryRank
 import MatrixMortality.TwoStateObstructions
