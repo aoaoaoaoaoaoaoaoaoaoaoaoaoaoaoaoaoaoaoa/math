@@ -56,6 +56,12 @@ open MatrixMortality
 #print axioms neary_twoPrivateState_phaseCompiler_impossible
 #print axioms binarySpell_not_injective_commute
 #print axioms neary_exact_internal_final_code_impossible
+#print axioms isMortal_smulMatrix_iff
+#print axioms InternalSandwich.mortal_quotient_iff
+#print axioms InternalSandwich.ambient_mortal_of_quotient_subsingleton
+#print axioms InternalSandwich.range_reachableBehavior_eq_span
+#print axioms InternalSandwich.quotient_finrank_eq_blockHankel
+#print axioms InternalSandwich.quotient_finrank_le_of_represents
 #print axioms Undecidability.nearyMortality44_mortal_iff_tagHaltsFrom
 #print axioms Undecidability.nearyMortality44_control_fixes_anchor
 #print axioms Undecidability.nearyMortality44_toggle_eq_permMatrix

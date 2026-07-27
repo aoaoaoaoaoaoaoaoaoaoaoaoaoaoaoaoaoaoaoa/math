@@ -870,7 +870,7 @@ universal computation.
    five-state same-zero binary root, or find a constant-state scheduled delimiter fusion.
    Treat fixed-width-three universality as a separate source theorem. Reopen `MM-C04` only for
    a physically different six-state family.
-4. Formalize `MM-C04` and `MM-O08`. Search for `M₉(2)` only through a changed physical pair,
+4. Formalize `MM-O08` and `MM-O11`. Search for `M₉(2)` only through a changed physical pair,
    changed nonzero behavior, or a nonlinear compiler.
 5. Run the `M₃(4)` program on three separate tracks: shift-equivariant point-line synthesis,
    the closed-path subgroup of Carvalho's smallest transducer, and total ternary

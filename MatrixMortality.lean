@@ -3,6 +3,7 @@ import MatrixMortality.BinaryDefect
 import MatrixMortality.CHHNPacking
 import MatrixMortality.CHHNPackingRank
 import MatrixMortality.ClosedSubstitution
+import MatrixMortality.InternalSandwich
 import MatrixMortality.LinearRepresentation
 import MatrixMortality.NearyEncoding
 import MatrixMortality.MacroIrreducibility

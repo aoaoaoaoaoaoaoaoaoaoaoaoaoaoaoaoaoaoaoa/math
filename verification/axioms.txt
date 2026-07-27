@@ -76,6 +76,20 @@
  Quot.sound]
 'MatrixMortality.binarySpell_not_injective_commute' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.neary_exact_internal_final_code_impossible' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.isMortal_smulMatrix_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.InternalSandwich.mortal_quotient_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.InternalSandwich.ambient_mortal_of_quotient_subsingleton' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.InternalSandwich.range_reachableBehavior_eq_span' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.InternalSandwich.quotient_finrank_eq_blockHankel' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.InternalSandwich.quotient_finrank_le_of_represents' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.Undecidability.nearyMortality44_mortal_iff_tagHaltsFrom' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]

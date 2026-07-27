@@ -132,13 +132,26 @@ embedding and retraction matrices prove the exact restriction and its converse, 
 new zero created by restriction. A generic zero-block theorem then preserves nonempty-word
 mortality in every dimension `10+n`.
 
+Lean also constructs the canonical reachable-observable quotient around any internal physical
+word whose product factors as `UW`. Its generators act on
+
+```text
+span{A_w im U} / {x : WA_wx=0 for every w}.
+```
+
+Mortality passes down to the quotient. Every zero quotient word `z` lifts through the entirely
+physical repair word `ωzω`, so no parser or malformed-word hypothesis is present. The
+zero-dimensional branch is mortal upstairs. The quotient is linearly equivalent to the span of
+the flattened block-Hankel columns `q ↦ (WA_uA_vUq)_u`; its dimension is their rank and is no
+larger than the state dimension of any exact realization. Independent nonzero rescaling of
+matrix generators preserves mortality, which supplies the algebraic denominator-clearing step.
+
 ## Audited But Unformalized
 
-The internal-sandwich audit produced one general compiler and three exact obstructions:
+The internal-sandwich audit retains four unformalized exact obstructions:
 
 | Record | Formalization obligation |
 | --- | --- |
-| [`MM-C04`](SALVAGE.md#mm-c04-internal-word-sandwich-minimization) | invariant reachable space, largest invariant unobservable subspace, quotient mortality equivalence, block-Hankel minimality, effective rational construction, and the zero-dimensional branch |
 | [`MM-O08`](SALVAGE.md#mm-o08-full-algebra-prefix-pair) | the identity `B₀³=uvᵀ`, uniform reachability and observability determinants, positivity over the source envelope, and the outer-product basis of `M₁₀(ℚ)` |
 | [`MM-O09`](SALVAGE.md#mm-o09-two-state-ternary-prefix-image) | classification of full ternary trees with five leaves and the joint-image argument for exact two-state weighted decoders |
 | [`MM-O10`](SALVAGE.md#mm-o10-additive-toggle-fusion-cycle) | idempotent normalization and the identities `F²=I−TP`, `F³=F`, and `rank F=rank F²=3` |

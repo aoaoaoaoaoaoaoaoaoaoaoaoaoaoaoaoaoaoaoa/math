@@ -45,7 +45,7 @@ file owns the mathematical stock.
 | [`MM-C01`](#mm-c01-fixed-anchor-rank-one-compiler) | compiler | common-fixed-column scalar zero to mortality | formalized | graduated |
 | [`MM-C02`](#mm-c02-common-image-restriction) | compiler | mortality-preserving restriction to a common image | formalized | graduated |
 | [`MM-C03`](#mm-c03-scheduled-binary-compiler) | compiler | fixed-width tag strokes to a total two-letter scalar series | formalized | graduated |
-| [`MM-C04`](#mm-c04-internal-word-sandwich-minimization) | compiler | internal low-rank words repair reachable/observable minimization | audited | active |
+| [`MM-C04`](#mm-c04-internal-word-sandwich-minimization) | compiler | internal low-rank words repair reachable/observable minimization | formalized | graduated |
 | [`MM-O01`](#mm-o01-all-placement-packing-rank) | obstruction | literal CHHN packing has exact rank six for every separator placement | formalized | graduated |
 | [`MM-O02`](#mm-o02-one-sided-phase-overlap) | obstruction | standard common-line phase fusion becomes one-sided | reported | parked |
 | [`MM-O03`](#mm-o03-two-channel-boundary-tax) | obstruction | exact diagonal rank-two punctuation costs two states beyond Hankel rank | formalized | graduated |
@@ -216,23 +216,25 @@ minimal exact linear realization.
 
 **Scope:** the result is exact-linear. It does not preserve only the zero set, and it does not
 lower dimension unless the sandwich series has smaller block-Hankel rank. If `H=0`, an
-effective positive-dimensional reduction emits a fixed mortal yes-instance. Over `ℚ`, reachable
-closure and the largest invariant subspace of `R∩ker W` are effective; independent nonzero
-denominator clearing preserves mortality.
+ambient mortal word already exists. Independent nonzero generator scaling preserves mortality,
+which supplies the algebraic denominator-clearing step. Extracting a chosen rational basis and
+concrete quotient matrices is not part of the generic theorem.
 
 **Use:** search a known-safe mortality family for an internal low-rank word, minimize its
 matrix-valued sandwich, and inherit a complete arbitrary-word converse without adding a
 generator. For `M₅(3)`, compute rank-two sandwich realizations inside the established
 six-state, three-generator families before designing another five-state parser.
 
-**Artifact:** the proof and edge-case audit are in
+**Artifact:** `MatrixMortality.InternalSandwich.mortal_quotient_iff`,
+`MatrixMortality.InternalSandwich.ambient_mortal_of_quotient_subsingleton`,
+`MatrixMortality.InternalSandwich.range_reachableBehavior_eq_span`,
+`MatrixMortality.InternalSandwich.quotient_finrank_eq_blockHankel`, and
+`MatrixMortality.InternalSandwich.quotient_finrank_le_of_represents` in
+[`InternalSandwich.lean`](MatrixMortality/InternalSandwich.lean). Independent nonzero
+generator scaling is `MatrixMortality.isMortal_smulMatrix_iff` in
+[`MatrixSemigroup.lean`](MatrixMortality/MatrixSemigroup.lean). The independent reconstruction
+and edge-case audit are in
 [`audits/internal-sandwich-prefix-algebra-2026-07-25.md`](audits/internal-sandwich-prefix-algebra-2026-07-25.md).
-
-**Next:** formalize the invariant subquotient, block-Hankel characterization, and effective
-rational construction; enumerate low-rank internal words in the safe `M₆(3)` families.
-
-**Issue:** [#8, Formalize internal-sandwich minimization and the ten-state full-algebra
-obstruction](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/8).
 
 ### MM-O01: All-placement packing rank
 

@@ -87,6 +87,39 @@ theorem isMortal_reindex_iff {α ι κ R : Type*} [CommSemiring R]
   exact isMortal_map_iff reindexMap
     (Matrix.reindexAlgEquiv R R equivalence).injective generators
 
+/-! ## Independent nonzero generator scaling -/
+
+theorem wordProduct_smulMatrix {α ι K : Type*} [CommSemiring K] [Fintype ι]
+    [DecidableEq ι] (scales : α → K) (generators : α → Square ι K)
+    (word : List α) :
+    wordProduct (fun label => scales label • generators label) word =
+      (word.map scales).prod • wordProduct generators word := by
+  induction word with
+  | nil => simp
+  | cons label tail induction =>
+      simp only [wordProduct_cons, List.map_cons, List.prod_cons, induction]
+      rw [Matrix.smul_mul, Matrix.mul_smul, smul_smul]
+
+/-- Multiplying each matrix generator by an independently chosen nonzero field scalar preserves
+every nonempty zero product. -/
+theorem isMortal_smulMatrix_iff {α ι K : Type*} [Field K] [Fintype ι]
+    [DecidableEq ι] (scales : α → K) (scale_nonzero : ∀ label, scales label ≠ 0)
+    (generators : α → Square ι K) :
+    IsMortal (fun label => scales label • generators label) ↔ IsMortal generators := by
+  constructor
+  · rintro ⟨word, word_nonempty, scaled_zero⟩
+    refine ⟨word, word_nonempty, ?_⟩
+    rw [wordProduct_smulMatrix] at scaled_zero
+    have factors_nonzero : 0 ∉ word.map scales := by
+      intro zero_mem
+      obtain ⟨label, _, scale_zero⟩ := List.mem_map.mp zero_mem
+      exact scale_nonzero label scale_zero
+    exact (smul_eq_zero.mp scaled_zero).resolve_left
+      (List.prod_ne_zero factors_nonzero)
+  · rintro ⟨word, word_nonempty, product_zero⟩
+    refine ⟨word, word_nonempty, ?_⟩
+    rw [wordProduct_smulMatrix, product_zero, smul_zero]
+
 /-! ## Integral matrices inside rational matrices -/
 
 /-- Entrywise inclusion of an integer matrix into the rationals. -/
