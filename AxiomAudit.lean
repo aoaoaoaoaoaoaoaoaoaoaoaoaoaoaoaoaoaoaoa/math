@@ -27,6 +27,11 @@ open MatrixMortality
 #print axioms nearyMortality_terminal_rank_eq_one
 #print axioms sidePcpMatrix_eq_conjugate
 #print axioms rule_erase_agree_on_upperSide
+#print axioms controllerMatrix_mulVec_controllerVector
+#print axioms controllerProduct_mulVec_controllerVector
+#print axioms controllerVector_vecMul_transposeProduct
+#print axioms pairedDataMatrix_eq_explicit
+#print axioms pairedToggleMatrix_eq_explicit
 #print axioms pairedToggleMatrix_eq_permMatrix
 #print axioms pairedProduct_mulVec_column
 #print axioms pairedCoefficient_eq_sideCoefficient

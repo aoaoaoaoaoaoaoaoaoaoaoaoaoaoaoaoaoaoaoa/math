@@ -290,7 +290,9 @@ with a complete arbitrary-word converse.
 | `ClosedSubstitution.lean` | exact reachable-cycle criterion for finite closed-token queues |
 | `FullMatrixAlgebra.lean` | generic full-algebra certificate from invertible physical contexts around a rank-one word |
 | `PhaseSignature.lean` | two-private-state cyclic phase obstruction and Neary instantiation |
-| `TwoStatePushout.lean` | generic two-state pushout, suffix decoder, rank classification, and integer mortality compiler |
+| `SideNormal.lean` | side-normal word-pair calculus, common upper plane, boundary coefficient, and terminal-match semantics |
+| `ControllerPushout.lean` | arbitrary finite-controller pushout, total suffix decoder, and transposed prefix decoder |
+| `TwoStatePushout.lean` | rule/erasure specialization, exact rank classification, and integer mortality compiler |
 | `TwoStateObstructions.lean` | exact local toggle-fusion obstruction |
 | `TagQueue.lean` | tag steps and generic history soundness |
 | `NearyEncoding.lean` | four ordinary tiles, synchronization, source equivalence, and composed reductions |
@@ -300,7 +302,7 @@ with a complete arbitrary-word converse.
 | `TerminalTile.lean` | arbitrary rank-one chains and fracture at every separator |
 | `TerminalReduction.lean` | rational and integer fixed-boundary mortality compiler |
 | `TerminalSource.lean` | generic primitive extraction and GPCP bridge |
-| `PairedCompression.lean` | side-normal representation, paired-role compression, and arbitrary-word decoding |
+| `PairedCompression.lean` | reset/toggle specialization, explicit coordinate certificates, and arbitrary-word decoding |
 | `PairedMortality.lean` | common-column mortality converse and exact integer `4 × 4` family |
 | `PairedRank.lean` | uniform exact rank-four certificate for the paired scalar series |
 | `PairedBoundaryTax.lean` | exact six-state lower bound for diagonal paired-series bridges |
@@ -309,7 +311,7 @@ with a complete arbitrary-word converse.
 | `PairedBinaryAlgebraContexts.lean` | explicit six-column and six-row physical context matrices |
 | `PairedBinaryAlgebraRank.lean` | modulo-nine pivot certificates and invertibility of both context matrices |
 | `PairedBinaryFullAlgebra.lean` | canonical mortality alphabet and the full `M₆(ℚ)` physical-product span theorem |
-| `ScheduledBinary.lean` | fixed-width clock compiler, total decoder, and malformed-word converse |
+| `ScheduledBinary.lean` | cyclic-controller specialization, source semantics, and malformed-word converse |
 | `ScheduledBinaryRank.lean` | exact width-three rank-five certificate and universal exact-state lower bound |
 | `WeightedTransducer.lean` | deterministic matrix transducers and the arbitrary-word block-row theorem |
 | `PrefixMortality.lean` | complete prefix decoder, twelve-state realization, and ten-state common-image restriction |
@@ -358,6 +360,10 @@ with a complete arbitrary-word converse.
 | A nonsingular finite Hankel section lower-bounds every exact realization | `finiteHankel_card_le` |
 | Exact diagonal two-channel bridges pay two additional states | `exactDiagonalTwoChannel_card_lower_bound` |
 | Rule and erasure matrices agree on the upper-side plane | `rule_erase_agree_on_upperSide` |
+| Every finite-controller letter routes its selected private channel exactly | `controllerMatrix_mulVec_controllerVector` |
+| Every suffix-controlled word obeys the generic total decoder | `controllerProduct_mulVec_controllerVector` |
+| Transposition gives the generic prefix-controlled decoder | `controllerVector_vecMul_transposeProduct` |
+| The paired generators have their displayed coordinate normal forms | `pairedDataMatrix_eq_explicit`, `pairedToggleMatrix_eq_explicit` |
 | Every compressed word realizes its decoded four-role word | `pairedProduct_mulVec_column`, `pairedCoefficient_eq_sideCoefficient` |
 | Every four-role word has a compressed encoding | `decodePairedWord_surjective` |
 | Three-matrix scalar zero iff the terminal equation | `paired_zero_iff_terminal_match` |

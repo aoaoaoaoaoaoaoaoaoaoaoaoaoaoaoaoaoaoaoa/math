@@ -109,7 +109,8 @@ theorem pairedRankReachableNative_eq (β : Nat) (body : List TagLetter) :
   ext i j
   fin_cases i <;> fin_cases j <;>
     simp [pairedRankReachableNative, finitePrefixStates, pairedRankPrefixes,
-      pairedRankReachable, pairedGenerator, pairedDataMatrix, pairedToggleMatrix,
+      pairedRankReachable, pairedGenerator, pairedDataMatrix_eq_explicit,
+      pairedToggleMatrix_eq_explicit,
       pairedRow, wordProduct, nearyUpper, nearyLower, ternaryCode_tagCode_b,
       ternaryCode_cons, ternaryCode_singleton, ternaryDigit, pairedWidthScale, pow_succ,
       Matrix.vecHead, Matrix.vecTail, Matrix.vecMul_one, Matrix.vecMul, Matrix.dotProduct,
@@ -124,8 +125,10 @@ theorem pairedRankObservableNative_eq (β : Nat) (body : List TagLetter) :
   ext i j
   fin_cases i <;> fin_cases j <;>
     simp [pairedRankObservableNative, finiteSuffixStates, pairedRankSuffixes,
-      pairedRankObservable, pairedGenerator, pairedDataMatrix, pairedToggleMatrix,
-      pairedColumn, phaseVector, sideTerminalColumn, sidePcpMatrix, sideTailBasis,
+      pairedRankObservable, pairedGenerator, pairedDataMatrix_eq_explicit,
+      pairedToggleMatrix_eq_explicit,
+      pairedColumn, phaseVector, controllerVector, pairControllerEquiv,
+      sideTerminalColumn, sidePcpMatrix, sideTailBasis,
       wordProduct, nearyUpper, nearyLower, ternaryCode_tagCode_b,
       ternaryCode_cons, ternaryCode_singleton, ternaryDigit,
       pairedMarkerValue, pairedWidthScale, pow_succ,

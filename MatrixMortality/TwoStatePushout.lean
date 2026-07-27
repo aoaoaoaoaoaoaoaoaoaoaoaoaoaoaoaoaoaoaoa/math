@@ -1,4 +1,4 @@
-import MatrixMortality.PairedCompression
+import MatrixMortality.ControllerPushout
 import MatrixMortality.TerminalTile
 
 /-!
@@ -14,17 +14,73 @@ namespace MatrixMortality
 
 open scoped Matrix
 
-/-- A deterministic transition on the rule and erasure copies of the lower-word channel. -/
-abbrev TwoStateTransition (α : Type*) := PairPhase → α → PairPhase
+/-- The two roles carried by the paired and two-state compilers. -/
+inductive PairPhase where
+  | rule
+  | erase
+  deriving DecidableEq, Fintype, Repr
 
-/-- One controlled role selected by the suffix state at a physical data letter. -/
-abbrev ControlledRole (α : Type*) := PairPhase × α
+/-- Toggle the selected member of a rule/erasure pair. -/
+def PairPhase.flip : PairPhase → PairPhase
+  | .rule => .erase
+  | .erase => .rule
 
-/-- The side-normal matrix selected by a controlled role. -/
-def controlledRoleMatrix (R : Type*) [CommRing R] {α : Type*}
-    (upper : α → List Bool) (lower : PairPhase → α → List Bool)
-    (role : ControlledRole α) : Matrix (Fin 3) (Fin 3) R :=
-  sidePcpMatrix R (upper role.2) (lower role.1 role.2)
+/-- Recover the Neary role selected by one phase. -/
+def PairPhase.tile : PairPhase → TagLetter → NearyTile
+  | .rule, letter => .rule letter
+  | .erase, letter => .erase letter
+
+/-- Coordinate order used by the explicit four-state compilers. -/
+def pairControllerEquiv : ControllerIndex PairPhase ≃ Fin 4 where
+  toFun
+    | .inl index => ![(0 : Fin 4), 2] index
+    | .inr .rule => 1
+    | .inr .erase => 3
+  invFun := fun index =>
+    ![(Sum.inl 0 : ControllerIndex PairPhase), Sum.inr .rule,
+      Sum.inl 1, Sum.inr .erase] index
+  left_inv := by
+    intro index
+    rcases index with index | phase
+    · fin_cases index <;> rfl
+    · cases phase <;> rfl
+  right_inv := by
+    intro index
+    fin_cases index <;> rfl
+
+@[simp] theorem pairControllerEquiv_symm_zero :
+    pairControllerEquiv.symm 0 = Sum.inl 0 := rfl
+
+@[simp] theorem pairControllerEquiv_symm_one :
+    pairControllerEquiv.symm 1 = Sum.inr .rule := rfl
+
+@[simp] theorem pairControllerEquiv_symm_two :
+    pairControllerEquiv.symm 2 = Sum.inl 1 := rfl
+
+@[simp] theorem pairControllerEquiv_symm_three :
+    pairControllerEquiv.symm 3 = Sum.inr .erase := rfl
+
+/-- Embed one side-normal phase vector in the explicit four-coordinate order. -/
+def phaseVector (R : Type*) [CommRing R] :
+    PairPhase → (Fin 3 → R) → Fin 4 → R :=
+  fun phase vector => controllerVector R phase vector ∘ pairControllerEquiv.symm
+
+theorem phaseVector_comp_pairControllerEquiv (R : Type*) [CommRing R]
+    (phase : PairPhase) (vector : Fin 3 → R) :
+    phaseVector R phase vector ∘ pairControllerEquiv = controllerVector R phase vector := by
+  funext index
+  simp [phaseVector]
+
+/-- The shared affine coordinate extracts the side-normal head in either phase. -/
+theorem phaseHead (R : Type*) [CommRing R] (phase : PairPhase)
+    (vector : Fin 3 → R) : phaseVector R phase vector 0 = vector 0 := by
+  cases phase <;> simp [phaseVector, controllerVector, pairControllerEquiv]
+
+theorem phaseVector_basis_zero (R : Type*) [CommRing R] (phase : PairPhase) :
+    phaseVector R phase ![1, 0, 0] = ![1, 0, 0, 0] := by
+  funext index
+  cases phase <;> fin_cases index <;>
+    simp [phaseVector, controllerVector, pairControllerEquiv]
 
 /-- Matrix form of the phase embedding used by the pushout. -/
 def phaseInjection (R : Type*) [CommRing R] : PairPhase → Matrix (Fin 4) (Fin 3) R
@@ -55,29 +111,16 @@ theorem phaseInjection_mulVec (R : Type*) [CommRing R] (phase : PairPhase)
     phaseInjection R phase *ᵥ vector = phaseVector R phase vector := by
   funext i
   cases phase <;> fin_cases i <;>
-    simp [phaseInjection, phaseVector, Matrix.vecHead, Matrix.vecTail, Matrix.mulVec,
-      Matrix.dotProduct, Fin.sum_univ_succ]
-
-theorem phaseProjection_mul_phaseInjection (R : Type*) [CommRing R]
-    (phase : PairPhase) :
-    phaseProjection R phase * phaseInjection R phase = 1 := by
-  ext i j
-  cases phase <;> fin_cases i <;> fin_cases j <;>
-    simp [phaseProjection, phaseInjection, Matrix.vecHead, Matrix.vecTail, Matrix.mul_apply,
-      Fin.sum_univ_succ]
+    simp [phaseInjection, phaseVector, controllerVector, pairControllerEquiv,
+      Matrix.vecHead, Matrix.vecTail, Matrix.mulVec, Matrix.dotProduct, Fin.sum_univ_succ]
 
 theorem phaseProjection_mulVec_phaseVector (R : Type*) [CommRing R]
     (phase : PairPhase) (vector : Fin 3 → R) :
     phaseProjection R phase *ᵥ phaseVector R phase vector = vector := by
   funext i
   cases phase <;> fin_cases i <;>
-    simp [phaseProjection, phaseVector, Matrix.vecHead, Matrix.vecTail, Matrix.mulVec,
-      Matrix.dotProduct, Fin.sum_univ_succ]
-
-/-- Route one private lower-channel scale to its deterministic destination state. -/
-def routedScale (R : Type*) [CommRing R] (destination target : PairPhase)
-    (scale : R) : R :=
-  if destination = target then scale else 0
+    simp [phaseProjection, phaseVector, controllerVector, pairControllerEquiv,
+      Matrix.vecHead, Matrix.vecTail, Matrix.mulVec, Matrix.dotProduct, Fin.sum_univ_succ]
 
 /-- Four-dimensional pushout of two side-normal role representations.
 
@@ -85,50 +128,40 @@ The first and third coordinates are the shared upper-word plane. Coordinates two
 are the private rule and erasure lower channels. -/
 def twoStateDataMatrix (R : Type*) [CommRing R] {α : Type*}
     (upper : α → List Bool) (lower : PairPhase → α → List Bool)
-    (δ : TwoStateTransition α) (letter : α) : Matrix (Fin 4) (Fin 4) R :=
-  !![(1 : R), ternaryCode (lower .rule letter), ternaryCode (upper letter),
-      ternaryCode (lower .erase letter);
-     0, routedScale R (δ .rule letter) .rule
-          ((3 : R) ^ (lower .rule letter).length),
-        0, routedScale R (δ .erase letter) .rule
-          ((3 : R) ^ (lower .erase letter).length);
-     0, 0, (3 : R) ^ (upper letter).length, 0;
-     0, routedScale R (δ .rule letter) .erase
-          ((3 : R) ^ (lower .rule letter).length),
-        0, routedScale R (δ .erase letter) .erase
-          ((3 : R) ^ (lower .erase letter).length)]
+    (δ : ControllerTransition PairPhase α) (letter : α) : Matrix (Fin 4) (Fin 4) R :=
+  Matrix.reindex pairControllerEquiv pairControllerEquiv
+    (controllerMatrix R upper lower δ letter)
 
 /-- The pushout performs the selected role and routes its private coordinate to the next
 suffix state. -/
 theorem twoStateDataMatrix_mulVec_phaseVector (R : Type*) [CommRing R] {α : Type*}
     (upper : α → List Bool) (lower : PairPhase → α → List Bool)
-    (δ : TwoStateTransition α) (letter : α) (phase : PairPhase) (vector : Fin 3 → R) :
+    (δ : ControllerTransition PairPhase α) (letter : α) (phase : PairPhase)
+    (vector : Fin 3 → R) :
     twoStateDataMatrix R upper lower δ letter *ᵥ phaseVector R phase vector =
       phaseVector R (δ phase letter)
-        (controlledRoleMatrix R upper lower (phase, letter) *ᵥ vector) := by
-  cases phase <;>
-    cases destination : δ _ letter <;>
-      funext i <;>
-        fin_cases i <;>
-          simp [twoStateDataMatrix, controlledRoleMatrix, routedScale, phaseVector,
-            sidePcpMatrix, destination, Matrix.vecHead, Matrix.vecTail, Matrix.mulVec,
-            Matrix.dotProduct, Fin.sum_univ_succ]
-  all_goals ring
+        (controllerRoleMatrix R upper lower (phase, letter) *ᵥ vector) := by
+  rw [twoStateDataMatrix, Matrix.reindex_apply, Matrix.submatrix_mulVec_equiv]
+  simp only [Equiv.symm_symm]
+  rw [
+    phaseVector_comp_pairControllerEquiv,
+    controllerMatrix_mulVec_controllerVector]
+  rfl
 
 theorem phaseProjection_mul_twoStateDataMatrix_mul_phaseInjection
     (R : Type*) [CommRing R] {α : Type*}
     (upper : α → List Bool) (lower : PairPhase → α → List Bool)
-    (δ : TwoStateTransition α) (letter : α) (source destination : PairPhase)
+    (δ : ControllerTransition PairPhase α) (letter : α) (source destination : PairPhase)
     (transition : δ source letter = destination) :
     phaseProjection R destination * twoStateDataMatrix R upper lower δ letter *
         phaseInjection R source =
-      controlledRoleMatrix R upper lower (source, letter) := by
+      controllerRoleMatrix R upper lower (source, letter) := by
   apply Matrix.toLin'.injective
   apply LinearMap.ext
   intro vector
   change (phaseProjection R destination * twoStateDataMatrix R upper lower δ letter *
       phaseInjection R source) *ᵥ vector =
-    controlledRoleMatrix R upper lower (source, letter) *ᵥ vector
+    controllerRoleMatrix R upper lower (source, letter) *ᵥ vector
   rw [← Matrix.mulVec_mulVec, ← Matrix.mulVec_mulVec]
   rw [phaseInjection_mulVec, twoStateDataMatrix_mulVec_phaseVector, transition,
     phaseProjection_mulVec_phaseVector]
@@ -136,7 +169,7 @@ theorem phaseProjection_mul_twoStateDataMatrix_mul_phaseInjection
 theorem phaseInjection_mul_phaseProjection_mul_twoStateDataMatrix
     (R : Type*) [CommRing R] {α : Type*}
     (upper : α → List Bool) (lower : PairPhase → α → List Bool)
-    (δ : TwoStateTransition α) (letter : α) (destination : PairPhase)
+    (δ : ControllerTransition PairPhase α) (letter : α) (destination : PairPhase)
     (rule_transition : δ .rule letter = destination)
     (erase_transition : δ .erase letter = destination) :
     phaseInjection R destination * phaseProjection R destination *
@@ -151,33 +184,14 @@ theorem phaseInjection_mul_phaseProjection_mul_twoStateDataMatrix
   rw [← Matrix.mulVec_mulVec, ← Matrix.mulVec_mulVec]
   funext i
   cases destination <;> fin_cases i <;>
-    simp [phaseProjection, phaseInjection, twoStateDataMatrix, routedScale,
-      rule_transition, erase_transition, Matrix.vecHead, Matrix.vecTail, Matrix.mulVec,
-      Matrix.dotProduct, Fin.sum_univ_succ]
-
-/-- Every side-normal controlled role is nonsingular over the rationals. -/
-theorem controlledRoleMatrix_det_rat {α : Type*}
-    (upper : α → List Bool) (lower : PairPhase → α → List Bool)
-    (role : ControlledRole α) :
-    (controlledRoleMatrix ℚ upper lower role).det =
-      (3 : ℚ) ^ (upper role.2).length * (3 : ℚ) ^ (lower role.1 role.2).length := by
-  rw [controlledRoleMatrix, Matrix.det_fin_three]
-  norm_num [sidePcpMatrix, Matrix.vecHead, Matrix.vecTail]
-  ring
-
-theorem controlledRoleMatrix_rank_rat {α : Type*}
-    (upper : α → List Bool) (lower : PairPhase → α → List Bool)
-    (role : ControlledRole α) :
-    (controlledRoleMatrix ℚ upper lower role).rank = 3 := by
-  apply Matrix.rank_of_isUnit
-  rw [Matrix.isUnit_iff_isUnit_det, controlledRoleMatrix_det_rat]
-  exact isUnit_iff_ne_zero.mpr (mul_ne_zero (pow_ne_zero _ (by norm_num))
-    (pow_ne_zero _ (by norm_num)))
+    simp [phaseProjection, phaseInjection, twoStateDataMatrix, controllerMatrix,
+      pairControllerEquiv, rule_transition, erase_transition, Matrix.vecHead, Matrix.vecTail,
+      Matrix.mulVec, Matrix.dotProduct, Fin.sum_univ_succ]
 
 /-- Distinct destinations preserve all four pushout coordinates. -/
 theorem twoStateDataMatrix_det_rule_erase (R : Type*) [CommRing R] {α : Type*}
     (upper : α → List Bool) (lower : PairPhase → α → List Bool)
-    (δ : TwoStateTransition α) (letter : α)
+    (δ : ControllerTransition PairPhase α) (letter : α)
     (rule_destination : δ .rule letter = .rule)
     (erase_destination : δ .erase letter = .erase) :
     (twoStateDataMatrix R upper lower δ letter).det =
@@ -187,17 +201,17 @@ theorem twoStateDataMatrix_det_rule_erase (R : Type*) [CommRing R] {α : Type*}
   have phase_ne : (PairPhase.rule : PairPhase) ≠ .erase := by decide
   have erase_ne : (PairPhase.erase : PairPhase) ≠ .rule := by decide
   rw [Matrix.det_succ_column_zero]
-  norm_num [Fin.sum_univ_succ, twoStateDataMatrix, routedScale, rule_destination,
-    erase_destination, Matrix.submatrix]
+  norm_num [Fin.sum_univ_succ, twoStateDataMatrix, controllerMatrix, pairControllerEquiv,
+    rule_destination, erase_destination, Matrix.submatrix]
   rw [Matrix.det_fin_three]
-  norm_num [twoStateDataMatrix, routedScale, rule_destination, erase_destination,
-    Matrix.submatrix, phase_ne, erase_ne, Matrix.vecHead, Matrix.vecTail]
+  norm_num [twoStateDataMatrix, controllerMatrix, pairControllerEquiv, rule_destination,
+    erase_destination, Matrix.submatrix, phase_ne, erase_ne, Matrix.vecHead, Matrix.vecTail]
   ring
 
 /-- Swapping the two private destinations reverses the determinant sign. -/
 theorem twoStateDataMatrix_det_erase_rule (R : Type*) [CommRing R] {α : Type*}
     (upper : α → List Bool) (lower : PairPhase → α → List Bool)
-    (δ : TwoStateTransition α) (letter : α)
+    (δ : ControllerTransition PairPhase α) (letter : α)
     (rule_destination : δ .rule letter = .erase)
     (erase_destination : δ .erase letter = .rule) :
     (twoStateDataMatrix R upper lower δ letter).det =
@@ -207,47 +221,47 @@ theorem twoStateDataMatrix_det_erase_rule (R : Type*) [CommRing R] {α : Type*}
   have phase_ne : (PairPhase.rule : PairPhase) ≠ .erase := by decide
   have erase_ne : (PairPhase.erase : PairPhase) ≠ .rule := by decide
   rw [Matrix.det_succ_column_zero]
-  norm_num [Fin.sum_univ_succ, twoStateDataMatrix, routedScale, rule_destination,
-    erase_destination, Matrix.submatrix]
+  norm_num [Fin.sum_univ_succ, twoStateDataMatrix, controllerMatrix, pairControllerEquiv,
+    rule_destination, erase_destination, Matrix.submatrix]
   rw [Matrix.det_fin_three]
-  norm_num [twoStateDataMatrix, routedScale, rule_destination, erase_destination,
-    Matrix.submatrix, phase_ne, erase_ne, Matrix.vecHead, Matrix.vecTail]
+  norm_num [twoStateDataMatrix, controllerMatrix, pairControllerEquiv, rule_destination,
+    erase_destination, Matrix.submatrix, phase_ne, erase_ne, Matrix.vecHead, Matrix.vecTail]
   ring
 
 /-- A reset of both private channels to the rule state has determinant zero. -/
 theorem twoStateDataMatrix_det_rule_rule (R : Type*) [CommRing R] {α : Type*}
     (upper : α → List Bool) (lower : PairPhase → α → List Bool)
-    (δ : TwoStateTransition α) (letter : α)
+    (δ : ControllerTransition PairPhase α) (letter : α)
     (rule_destination : δ .rule letter = .rule)
     (erase_destination : δ .erase letter = .rule) :
     (twoStateDataMatrix R upper lower δ letter).det = 0 := by
   have phase_ne : (PairPhase.rule : PairPhase) ≠ .erase := by decide
   rw [Matrix.det_succ_column_zero]
-  norm_num [Fin.sum_univ_succ, twoStateDataMatrix, routedScale, rule_destination,
-    erase_destination, Matrix.submatrix]
+  norm_num [Fin.sum_univ_succ, twoStateDataMatrix, controllerMatrix, pairControllerEquiv,
+    rule_destination, erase_destination, Matrix.submatrix]
   rw [Matrix.det_fin_three]
-  norm_num [twoStateDataMatrix, routedScale, rule_destination, erase_destination,
-    Matrix.submatrix, phase_ne, Matrix.vecHead, Matrix.vecTail]
+  norm_num [twoStateDataMatrix, controllerMatrix, pairControllerEquiv, rule_destination,
+    erase_destination, Matrix.submatrix, phase_ne, Matrix.vecHead, Matrix.vecTail]
 
 /-- A reset of both private channels to the erasure state has determinant zero. -/
 theorem twoStateDataMatrix_det_erase_erase (R : Type*) [CommRing R] {α : Type*}
     (upper : α → List Bool) (lower : PairPhase → α → List Bool)
-    (δ : TwoStateTransition α) (letter : α)
+    (δ : ControllerTransition PairPhase α) (letter : α)
     (rule_destination : δ .rule letter = .erase)
     (erase_destination : δ .erase letter = .erase) :
     (twoStateDataMatrix R upper lower δ letter).det = 0 := by
   have erase_ne : (PairPhase.erase : PairPhase) ≠ .rule := by decide
   rw [Matrix.det_succ_column_zero]
-  norm_num [Fin.sum_univ_succ, twoStateDataMatrix, routedScale, rule_destination,
-    erase_destination, Matrix.submatrix]
+  norm_num [Fin.sum_univ_succ, twoStateDataMatrix, controllerMatrix, pairControllerEquiv,
+    rule_destination, erase_destination, Matrix.submatrix]
   rw [Matrix.det_fin_three]
-  norm_num [twoStateDataMatrix, routedScale, rule_destination, erase_destination,
-    Matrix.submatrix, erase_ne, Matrix.vecHead, Matrix.vecTail]
+  norm_num [twoStateDataMatrix, controllerMatrix, pairControllerEquiv, rule_destination,
+    erase_destination, Matrix.submatrix, erase_ne, Matrix.vecHead, Matrix.vecTail]
 
 /-- A transition that distinguishes the two source states has full rank. -/
 theorem twoStateDataMatrix_rank_eq_four_of_ne {α : Type*}
     (upper : α → List Bool) (lower : PairPhase → α → List Bool)
-    (δ : TwoStateTransition α) (letter : α)
+    (δ : ControllerTransition PairPhase α) (letter : α)
     (destinations_ne : δ .rule letter ≠ δ .erase letter) :
     (twoStateDataMatrix ℚ upper lower δ letter).rank = 4 := by
   apply Matrix.rank_of_isUnit
@@ -271,7 +285,7 @@ theorem twoStateDataMatrix_rank_eq_four_of_ne {α : Type*}
 /-- A deterministic reset of both source states has rank exactly three. -/
 theorem twoStateDataMatrix_rank_eq_three_of_eq {α : Type*}
     (upper : α → List Bool) (lower : PairPhase → α → List Bool)
-    (δ : TwoStateTransition α) (letter : α)
+    (δ : ControllerTransition PairPhase α) (letter : α)
     (destinations_eq : δ .rule letter = δ .erase letter) :
     (twoStateDataMatrix ℚ upper lower δ letter).rank = 3 := by
   let destination := δ .rule letter
@@ -292,60 +306,47 @@ theorem twoStateDataMatrix_rank_eq_three_of_eq {α : Type*}
         (Matrix.rank_le_height (phaseProjection ℚ destination * data))
   have role_factor :
       phaseProjection ℚ destination * data * phaseInjection ℚ .rule =
-        controlledRoleMatrix ℚ upper lower (.rule, letter) :=
+        controllerRoleMatrix ℚ upper lower (.rule, letter) :=
     phaseProjection_mul_twoStateDataMatrix_mul_phaseInjection ℚ upper lower δ letter
       .rule destination rule_transition
   have three_le_rank : 3 ≤ data.rank := by
-    rw [← controlledRoleMatrix_rank_rat upper lower (.rule, letter), ← role_factor]
+    rw [← controllerRoleMatrix_rank_rat upper lower (.rule, letter), ← role_factor]
     exact (Matrix.rank_mul_le_left
       (phaseProjection ℚ destination * data) (phaseInjection ℚ .rule)).trans
         (Matrix.rank_mul_le_right (phaseProjection ℚ destination) data)
   exact le_antisymm rank_le_three three_le_rank
 
-/-- Right-to-left decoding, retaining the state seen by any further letter on the left. -/
-def twoStateSuffixDecode {α : Type*} (δ : TwoStateTransition α) :
-    PairPhase → List α → PairPhase × List (ControlledRole α)
-  | terminal, [] => (terminal, [])
-  | terminal, letter :: word =>
-      let decoded := twoStateSuffixDecode δ terminal word
-      (δ decoded.1 letter, (decoded.1, letter) :: decoded.2)
-
-/-- The controlled role word assigned to every physical data word. -/
-def decodeTwoStateWord {α : Type*} (δ : TwoStateTransition α)
-    (terminal : PairPhase) (word : List α) : List (ControlledRole α) :=
-  (twoStateSuffixDecode δ terminal word).2
-
 /-- Product of physical two-state pushout matrices. -/
 def twoStateProduct (R : Type*) [CommRing R] {α : Type*}
     (upper : α → List Bool) (lower : PairPhase → α → List Bool)
-    (δ : TwoStateTransition α) (word : List α) : Matrix (Fin 4) (Fin 4) R :=
-  wordProduct (twoStateDataMatrix R upper lower δ) word
+    (δ : ControllerTransition PairPhase α) (word : List α) : Matrix (Fin 4) (Fin 4) R :=
+  Matrix.reindex pairControllerEquiv pairControllerEquiv
+    (controllerProduct R upper lower δ word)
 
-/-- Product of the decoded side-normal roles. -/
-def controlledRoleProduct (R : Type*) [CommRing R] {α : Type*}
+theorem twoStateProduct_eq_wordProduct (R : Type*) [CommRing R] {α : Type*}
     (upper : α → List Bool) (lower : PairPhase → α → List Bool)
-    (word : List (ControlledRole α)) : Matrix (Fin 3) (Fin 3) R :=
-  wordProduct (controlledRoleMatrix R upper lower) word
+    (δ : ControllerTransition PairPhase α) (word : List α) :
+    twoStateProduct R upper lower δ word =
+      wordProduct (twoStateDataMatrix R upper lower δ) word := by
+  simpa [twoStateProduct, controllerProduct, twoStateDataMatrix] using
+    (wordProduct_map
+      (Matrix.reindexAlgEquiv R R pairControllerEquiv).toAlgHom.toRingHom.toMonoidHom
+      (controllerMatrix R upper lower δ) word).symm
 
 /-- Every physical word obeys the total suffix decoder. -/
 theorem twoStateProduct_mulVec_phaseVector (R : Type*) [CommRing R] {α : Type*}
     (upper : α → List Bool) (lower : PairPhase → α → List Bool)
-    (δ : TwoStateTransition α) (terminal : PairPhase) (word : List α)
+    (δ : ControllerTransition PairPhase α) (terminal : PairPhase) (word : List α)
     (vector : Fin 3 → R) :
     twoStateProduct R upper lower δ word *ᵥ phaseVector R terminal vector =
-      phaseVector R (twoStateSuffixDecode δ terminal word).1
-        (controlledRoleProduct R upper lower (decodeTwoStateWord δ terminal word) *ᵥ vector) := by
-  induction word with
-  | nil =>
-      simp [twoStateProduct, twoStateSuffixDecode, decodeTwoStateWord, controlledRoleProduct]
-  | cons letter word induction =>
-      simp only [twoStateProduct, wordProduct_cons]
-      rw [← Matrix.mulVec_mulVec]
-      change twoStateDataMatrix R upper lower δ letter *ᵥ
-        (twoStateProduct R upper lower δ word *ᵥ phaseVector R terminal vector) = _
-      rw [induction, twoStateDataMatrix_mulVec_phaseVector]
-      simp only [twoStateSuffixDecode, decodeTwoStateWord, controlledRoleProduct,
-        wordProduct_cons, Matrix.mulVec_mulVec]
+      phaseVector R (controllerSuffixDecode δ terminal word).1
+        (controllerRoleProduct R upper lower (controllerSuffixRoles δ terminal word) *ᵥ
+          vector) := by
+  rw [twoStateProduct, Matrix.reindex_apply, Matrix.submatrix_mulVec_equiv]
+  simp only [Equiv.symm_symm]
+  rw [phaseVector_comp_pairControllerEquiv,
+    controllerProduct_mulVec_controllerVector]
+  rfl
 
 /-- The common first-coordinate row of the two-state pushout. -/
 def twoStateRow (R : Type*) [CommRing R] : Fin 4 → R := ![1, 0, 0, 0]
@@ -358,7 +359,7 @@ def twoStateColumn (R : Type*) [CommRing R] (terminal : PairPhase)
 /-- Scalar coefficient recognized by the physical two-state pushout. -/
 def twoStateCoefficient (R : Type*) [CommRing R] {α : Type*}
     (upper : α → List Bool) (lower : PairPhase → α → List Bool)
-    (δ : TwoStateTransition α) (terminal : PairPhase) (column : Fin 3 → R)
+    (δ : ControllerTransition PairPhase α) (terminal : PairPhase) (column : Fin 3 → R)
     (word : List α) : R :=
   twoStateRow R ⬝ᵥ
     twoStateProduct R upper lower δ word *ᵥ twoStateColumn R terminal column
@@ -366,25 +367,28 @@ def twoStateCoefficient (R : Type*) [CommRing R] {α : Type*}
 /-- The physical coefficient equals the decoded side-normal coefficient for every word. -/
 theorem twoStateCoefficient_eq_controlled (R : Type*) [CommRing R] {α : Type*}
     (upper : α → List Bool) (lower : PairPhase → α → List Bool)
-    (δ : TwoStateTransition α) (terminal : PairPhase) (column : Fin 3 → R)
+    (δ : ControllerTransition PairPhase α) (terminal : PairPhase) (column : Fin 3 → R)
     (word : List α) :
     twoStateCoefficient R upper lower δ terminal column word =
-      (controlledRoleProduct R upper lower (decodeTwoStateWord δ terminal word) *ᵥ column) 0 := by
+      (controllerRoleProduct R upper lower (controllerSuffixRoles δ terminal word) *ᵥ
+        column) 0 := by
   rw [twoStateCoefficient, twoStateColumn, twoStateProduct_mulVec_phaseVector]
-  exact pairedRow_dot_phaseVector R _ _
+  simpa [twoStateRow, Matrix.dotProduct, Fin.sum_univ_succ] using
+    phaseHead R (controllerSuffixDecode δ terminal word).1
+      (controllerRoleProduct R upper lower (controllerSuffixRoles δ terminal word) *ᵥ column)
 
 /-- The nonzero common first column fixed by every physical data generator. -/
 def twoStateAnchor (R : Type*) [CommRing R] : Fin 4 → R := ![1, 0, 0, 0]
 
 theorem twoStateDataMatrix_mulVec_anchor (R : Type*) [CommRing R] {α : Type*}
     (upper : α → List Bool) (lower : PairPhase → α → List Bool)
-    (δ : TwoStateTransition α) (letter : α) :
+    (δ : ControllerTransition PairPhase α) (letter : α) :
     twoStateDataMatrix R upper lower δ letter *ᵥ twoStateAnchor R =
       twoStateAnchor R := by
   funext i
   fin_cases i <;>
-    simp [twoStateDataMatrix, twoStateAnchor, Matrix.vecHead, Matrix.vecTail,
-      Matrix.mulVec, Matrix.dotProduct, Fin.sum_univ_succ]
+    simp [twoStateDataMatrix, controllerMatrix, pairControllerEquiv, twoStateAnchor,
+      Matrix.vecHead, Matrix.vecTail, Matrix.mulVec, Matrix.dotProduct, Fin.sum_univ_succ]
 
 @[simp] theorem twoStateRow_dot_anchor (R : Type*) [CommRing R] :
     twoStateRow R ⬝ᵥ twoStateAnchor R = 1 := by
@@ -392,16 +396,15 @@ theorem twoStateDataMatrix_mulVec_anchor (R : Type*) [CommRing R] {α : Type*}
 
 @[simp] theorem twoStateCoefficient_nil (R : Type*) [CommRing R] {α : Type*}
     (upper : α → List Bool) (lower : PairPhase → α → List Bool)
-    (δ : TwoStateTransition α) (terminal : PairPhase) (column : Fin 3 → R) :
+    (δ : ControllerTransition PairPhase α) (terminal : PairPhase) (column : Fin 3 → R) :
     twoStateCoefficient R upper lower δ terminal column [] = column 0 := by
-  cases terminal <;>
-    simp [twoStateCoefficient, twoStateProduct, twoStateColumn, twoStateRow, phaseVector,
-      Matrix.dotProduct, Fin.sum_univ_succ]
+  rw [twoStateCoefficient_eq_controlled]
+  simp [controllerSuffixRoles, controllerSuffixDecode, controllerRoleProduct]
 
 /-- Three physical generators: the data pushout family and its rank-one boundary separator. -/
 def twoStateMortalityFamily (R : Type*) [CommRing R] {α : Type*}
     (upper : α → List Bool) (lower : PairPhase → α → List Bool)
-    (δ : TwoStateTransition α) (terminal : PairPhase) (column : Fin 3 → R) :
+    (δ : ControllerTransition PairPhase α) (terminal : PairPhase) (column : Fin 3 → R) :
     Option α → Matrix (Fin 4) (Fin 4) R :=
   separatedGenerator
     (Matrix.vecMulVec (twoStateColumn R terminal column) (twoStateRow R))
@@ -410,7 +413,7 @@ def twoStateMortalityFamily (R : Type*) [CommRing R] {α : Type*}
 /-- The fixed-anchor separator compiler is exact even when a data letter is singular. -/
 theorem twoStateMortalityFamily_mortal_iff_nonempty_zero {α : Type*}
     (upper : α → List Bool) (lower : PairPhase → α → List Bool)
-    (δ : TwoStateTransition α) (terminal : PairPhase) (column : Fin 3 → ℚ)
+    (δ : ControllerTransition PairPhase α) (terminal : PairPhase) (column : Fin 3 → ℚ)
     (column_head_nonzero : column 0 ≠ 0) :
     IsMortal (twoStateMortalityFamily ℚ upper lower δ terminal column) ↔
       ∃ word : List α,
@@ -436,17 +439,20 @@ theorem twoStateMortalityFamily_mortal_iff_nonempty_zero {α : Type*}
       cases terminal <;>
         simpa [bridgeScalar, twoStateCoefficient, twoStateRow, twoStateColumn, phaseVector,
           Matrix.dotProduct, Fin.sum_univ_succ] using bridge_zero
-    · simpa [bridgeScalar, twoStateCoefficient]
+    · simpa [bridgeScalar, twoStateCoefficient, twoStateProduct_eq_wordProduct]
         using bridge_zero
   · rintro ⟨word, _, coefficient_zero⟩
-    exact ⟨word, by simpa [bridgeScalar, twoStateCoefficient] using coefficient_zero⟩
+    exact ⟨word, by
+      simpa [bridgeScalar, twoStateCoefficient, twoStateProduct_eq_wordProduct] using
+        coefficient_zero⟩
 
 /-! ## Exact integer family -/
 
 theorem castVector_phaseVector (phase : PairPhase) (vector : Fin 3 → ℤ) :
     castVector (phaseVector ℤ phase vector) = phaseVector ℚ phase (castVector vector) := by
   funext i
-  cases phase <;> fin_cases i <;> simp [castVector, phaseVector]
+  cases phase <;> fin_cases i <;>
+    simp [castVector, phaseVector, controllerVector, pairControllerEquiv]
 
 theorem castVector_twoStateRow :
     castVector (twoStateRow ℤ) = twoStateRow ℚ := by
@@ -460,16 +466,17 @@ theorem castVector_twoStateColumn (terminal : PairPhase) (column : Fin 3 → ℤ
 
 theorem castMatrix_twoStateDataMatrix {α : Type*}
     (upper : α → List Bool) (lower : PairPhase → α → List Bool)
-    (δ : TwoStateTransition α) (letter : α) :
+    (δ : ControllerTransition PairPhase α) (letter : α) :
     castMatrix (twoStateDataMatrix ℤ upper lower δ letter) =
       twoStateDataMatrix ℚ upper lower δ letter := by
   ext i j
   fin_cases i <;> fin_cases j <;>
-    simp [castMatrix, twoStateDataMatrix, routedScale, Matrix.vecHead, Matrix.vecTail]
+    simp [castMatrix, twoStateDataMatrix, controllerMatrix, pairControllerEquiv,
+      Matrix.vecHead, Matrix.vecTail]
 
 theorem castMatrix_twoStateMortalityFamily {α : Type*}
     (upper : α → List Bool) (lower : PairPhase → α → List Bool)
-    (δ : TwoStateTransition α) (terminal : PairPhase) (column : Fin 3 → ℤ)
+    (δ : ControllerTransition PairPhase α) (terminal : PairPhase) (column : Fin 3 → ℤ)
     (label : Option α) :
     castMatrix (twoStateMortalityFamily ℤ upper lower δ terminal column label) =
       twoStateMortalityFamily ℚ upper lower δ terminal (castVector column) label := by
@@ -484,7 +491,7 @@ theorem castMatrix_twoStateMortalityFamily {α : Type*}
 /-- The rational compiler theorem transfers back to the displayed integer generators. -/
 theorem twoStateMortalityFamily_int_mortal_iff_nonempty_zero {α : Type*}
     (upper : α → List Bool) (lower : PairPhase → α → List Bool)
-    (δ : TwoStateTransition α) (terminal : PairPhase) (column : Fin 3 → ℤ)
+    (δ : ControllerTransition PairPhase α) (terminal : PairPhase) (column : Fin 3 → ℤ)
     (column_head_nonzero : column 0 ≠ 0) :
     IsMortal (twoStateMortalityFamily ℤ upper lower δ terminal column) ↔
       ∃ word : List α,

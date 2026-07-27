@@ -44,7 +44,8 @@ theorem scheduledWidthThreeHankel_eq_closed (body : List TagLetter) :
     norm_num [scheduledWidthThreeHankel, scheduledWidthThreeHankelClosed,
       scheduledWidthThreePrefixes, scheduledWidthThreeSuffixes,
       scheduledCoefficient_eq_sideCoefficient, sideCoefficient_eq_ternaryCode_sub,
-      decodeScheduled, decodeScheduledFrom, scheduledInitialPhase, scheduledNextPhase,
+      decodeScheduled, decodeScheduledFrom_nil, decodeScheduledFrom_cons,
+      scheduledInitialPhase, scheduledNextPhase,
       scheduledTile, scheduledPhase, scheduledLetter, PairPhase.tile, spell, nearyMarker,
       nearyUpper, nearyLower, tagCode, ternaryCode_append, ternaryCode_cons, ternaryDigit,
       List.replicate_succ, pow_add] <;>

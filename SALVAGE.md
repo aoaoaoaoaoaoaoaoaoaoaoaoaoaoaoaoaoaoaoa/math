@@ -1580,8 +1580,8 @@ Formal promotion of this section is tracked in
 ### M4-C01: Two-state pushout compiler
 
 **Kind:** compiler
-**Evidence:** audited
-**Disposition:** active
+**Evidence:** formalized
+**Disposition:** graduated
 
 For each data letter `x∈{b,c}`, let the role matrices
 
@@ -1638,7 +1638,11 @@ role pairs must agree on the complete two-dimensional upper channel.
 **Use:** this is the finished matrix half of the `M₄(3)` route. Source searches should target
 binary two-state controlled correspondence, not another four-dimensional separator proof.
 
-**Artifact:** `twoStateProduct_mulVec_phaseVector`,
+**Artifact:** the arbitrary finite-state routing and all-word laws
+`controllerMatrix_mulVec_controllerVector` and
+`controllerProduct_mulVec_controllerVector` in
+[`MatrixMortality/ControllerPushout.lean`](MatrixMortality/ControllerPushout.lean), specialized
+by `twoStateProduct_mulVec_phaseVector`,
 `twoStateDataMatrix_rank_eq_four_of_ne`, `twoStateDataMatrix_rank_eq_three_of_eq`, and
 `twoStateMortalityFamily_int_mortal_iff_nonempty_zero` in
 [`MatrixMortality/TwoStatePushout.lean`](MatrixMortality/TwoStatePushout.lean). The independent

@@ -30,10 +30,11 @@ theorem pairedRow_ne_zero (R : Type*) [CommRing R] [Nontrivial R] : pairedRow R 
 
 theorem pairedColumn_ne_zero (β : Nat) : pairedColumn ℚ β ≠ 0 := by
   intro column_zero
-  have entry := congr_fun column_zero 2
-  simp [pairedColumn, phaseVector, sideTerminalColumn, sidePcpMatrix, sideTailBasis,
-    nearyMarker, Matrix.vecHead, Matrix.vecTail, Matrix.mulVec, Matrix.dotProduct,
-    Fin.sum_univ_succ] at entry
+  have entry := congr_fun column_zero 0
+  change phaseVector ℚ .rule (sideTerminalColumn ℚ (nearyMarker β)) 0 = 0 at entry
+  rw [phaseHead] at entry
+  have marker_zero : (ternaryCode (nearyMarker β) : ℚ) = 0 := by simpa using entry
+  exact (ternaryCode_nearyMarker_ne_zero β) (by exact_mod_cast marker_zero)
 
 /-- Every compressed control generator fixes the first standard column. -/
 theorem pairedGenerator_mulVec_anchor (R : Type*) [CommRing R] (β : Nat)
@@ -41,15 +42,17 @@ theorem pairedGenerator_mulVec_anchor (R : Type*) [CommRing R] (β : Nat)
     pairedGenerator R β body control *ᵥ pairedAnchor R = pairedAnchor R := by
   cases control with
   | toggle =>
-      funext i
-      fin_cases i <;>
-        simp [pairedGenerator, pairedToggleMatrix, pairedAnchor, Matrix.vecHead, Matrix.vecTail,
-          Matrix.mulVec, Matrix.dotProduct, Fin.sum_univ_succ]
+      have routed :=
+        pairedToggleMatrix_mulVec_phaseVector R .rule (![1, 0, 0] : Fin 3 → R)
+      rw [phaseVector_basis_zero, phaseVector_basis_zero] at routed
+      simpa [pairedGenerator, pairedAnchor] using routed
   | data letter =>
-      funext i
-      fin_cases i <;>
-        simp [pairedGenerator, pairedDataMatrix, pairedAnchor, Matrix.vecHead, Matrix.vecTail,
-          Matrix.mulVec, Matrix.dotProduct, Fin.sum_univ_succ]
+      simpa [pairedGenerator, pairedDataMatrix, pairedAnchor, twoStateAnchor] using
+        twoStateDataMatrix_mulVec_anchor R
+          (fun symbol => nearyUpper β (.rule symbol))
+          (fun phase symbol => nearyLower β body (phase.tile symbol))
+          (fun _ _ => PairPhase.erase)
+          letter
 
 theorem pairedCoefficient_eq_bridgeScalar (R : Type*) [Field R] (β : Nat)
     (body : List TagLetter) (word : List PairedControl) :
@@ -139,22 +142,25 @@ theorem castVector_pairedColumn (β : Nat) :
     castVector (pairedColumn ℤ β) = pairedColumn ℚ β := by
   funext i
   fin_cases i <;>
-    simp [castVector, pairedColumn, phaseVector, sideTerminalColumn, sidePcpMatrix,
-      sideTailBasis, nearyMarker, Matrix.vecHead, Matrix.vecTail, Matrix.mulVec,
-      Matrix.dotProduct, Fin.sum_univ_succ]
+    simp [castVector, pairedColumn, phaseVector, controllerVector, pairControllerEquiv,
+      sideTerminalColumn, sidePcpMatrix, sideTailBasis, nearyMarker, Matrix.vecHead,
+      Matrix.vecTail, Matrix.mulVec, Matrix.dotProduct, Fin.sum_univ_succ]
 
 theorem castMatrix_pairedGenerator (β : Nat) (body : List TagLetter)
     (control : PairedControl) :
     castMatrix (pairedGenerator ℤ β body control) = pairedGenerator ℚ β body control := by
   cases control with
   | toggle =>
-      ext i j
-      fin_cases i <;> fin_cases j <;>
-        simp [castMatrix, pairedGenerator, pairedToggleMatrix, Matrix.vecHead, Matrix.vecTail]
+      simpa [pairedGenerator, pairedToggleMatrix] using
+        congrArg (Matrix.reindex pairControllerEquiv pairControllerEquiv)
+          (castMatrix_controllerStateMatrix PairPhase.flip)
   | data letter =>
-      ext i j
-      fin_cases i <;> fin_cases j <;>
-        simp [castMatrix, pairedGenerator, pairedDataMatrix, Matrix.vecHead, Matrix.vecTail]
+      simpa [pairedGenerator, pairedDataMatrix] using
+        castMatrix_twoStateDataMatrix
+          (fun symbol => nearyUpper β (.rule symbol))
+          (fun phase symbol => nearyLower β body (phase.tile symbol))
+          (fun _ _ => PairPhase.erase)
+          letter
 
 theorem castMatrix_pairedSeparator (β : Nat) :
     castMatrix (pairedSeparator ℤ β) = pairedSeparator ℚ β := by

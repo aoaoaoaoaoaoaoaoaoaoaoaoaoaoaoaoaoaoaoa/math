@@ -1,6 +1,4 @@
-import MatrixMortality.NearyEncoding
-import MatrixMortality.MatrixSemigroup
-import MatrixMortality.PCPEncoding
+import MatrixMortality.TwoStatePushout
 
 /-!
 # Paired-role compression
@@ -15,154 +13,56 @@ namespace MatrixMortality
 
 open scoped Matrix
 
-/-- The PCP representation after separating its lower- and upper-word channels. -/
-def sidePcpMatrix (R : Type*) [CommRing R] (x y : List Bool) : Matrix (Fin 3) (Fin 3) R :=
-  !![(1 : R), ternaryCode y, ternaryCode x;
-     0, (3 : R) ^ y.length, 0;
-     0, 0, (3 : R) ^ x.length]
-
-/-- The unimodular change of basis separating the two word channels. -/
-def sideChange (R : Type*) [CommRing R] : Matrix (Fin 3) (Fin 3) R :=
-  !![(1 : R), 0, 0;
-     0, 1, 1;
-     0, 0, 1]
-
-/-- The inverse of `sideChange`. -/
-def sideChangeInv (R : Type*) [CommRing R] : Matrix (Fin 3) (Fin 3) R :=
-  !![(1 : R), 0, 0;
-     0, 1, -1;
-     0, 0, 1]
-
-theorem sideChangeInv_mul_sideChange (R : Type*) [CommRing R] :
-    sideChangeInv R * sideChange R = 1 := by
-  ext i j
-  fin_cases i <;> fin_cases j <;>
-    simp [sideChangeInv, sideChange, Matrix.vecHead, Matrix.vecTail, Matrix.mul_apply,
-      Fin.sum_univ_succ]
-
-theorem sideChange_mul_sideChangeInv (R : Type*) [CommRing R] :
-    sideChange R * sideChangeInv R = 1 := by
-  ext i j
-  fin_cases i <;> fin_cases j <;>
-    simp [sideChangeInv, sideChange, Matrix.vecHead, Matrix.vecTail, Matrix.mul_apply,
-      Fin.sum_univ_succ]
-
-theorem sidePcpMatrix_eq_conjugate (R : Type*) [CommRing R] (x y : List Bool) :
-    sidePcpMatrix R x y = sideChangeInv R * pcpMatrix R x y * sideChange R := by
-  ext i j
-  fin_cases i <;> fin_cases j <;>
-    simp [sidePcpMatrix, sideChangeInv, sideChange, pcpMatrix, Matrix.vecHead,
-      Matrix.vecTail, Matrix.mul_apply, Fin.sum_univ_succ]
-  all_goals ring
-
-@[simp] theorem sidePcpMatrix_nil (R : Type*) [CommRing R] :
-    sidePcpMatrix R [] [] = 1 := by
-  ext i j
-  fin_cases i <;> fin_cases j <;>
-    simp [sidePcpMatrix, Matrix.vecHead, Matrix.vecTail]
-
-theorem sidePcpMatrix_append (R : Type*) [CommRing R] (x y x' y' : List Bool) :
-    sidePcpMatrix R (x ++ x') (y ++ y') =
-      sidePcpMatrix R x y * sidePcpMatrix R x' y' := by
-  ext i j
-  fin_cases i <;> fin_cases j <;>
-    simp [sidePcpMatrix, Matrix.vecHead, Matrix.vecTail, Matrix.mul_apply,
-      Fin.sum_univ_succ, ternaryCode_append]
-  all_goals ring
-
-/-- The transformed right selector `P⁻¹e₃`. -/
-def sideTailBasis (R : Type*) [CommRing R] : Fin 3 → R := ![0, -1, 1]
-
-/-- The transformed fixed-boundary column. -/
-def sideTerminalColumn (R : Type*) [CommRing R] (marker : List Bool) : Fin 3 → R :=
-  sidePcpMatrix R marker [] *ᵥ sideTailBasis R
-
-/-- Product of the side-normal matrices named by a Neary role word. -/
-def sideTileProduct (R : Type*) [CommRing R] (β : Nat) (body : List TagLetter)
-    (word : List NearyTile) : Matrix (Fin 3) (Fin 3) R :=
-  wordProduct
-    (fun tile => sidePcpMatrix R (nearyUpper β tile) (nearyLower β body tile)) word
-
-theorem sideTileProduct_append (R : Type*) [CommRing R] (β : Nat)
-    (body : List TagLetter) (left right : List NearyTile) :
-    sideTileProduct R β body (left ++ right) =
-      sideTileProduct R β body left * sideTileProduct R β body right :=
-  wordProduct_append _ left right
-
-theorem sideTileProduct_eq_sidePcpMatrix (R : Type*) [CommRing R] (β : Nat)
-    (body : List TagLetter) (word : List NearyTile) :
-    sideTileProduct R β body word =
-      sidePcpMatrix R (spell (nearyUpper β) word) (spell (nearyLower β body) word) := by
-  induction word with
-  | nil => simp [sideTileProduct, spell]
-  | cons tile word ih =>
-      simp only [sideTileProduct, wordProduct_cons, spell]
-      change sidePcpMatrix R (nearyUpper β tile) (nearyLower β body tile) *
-          sideTileProduct R β body word = _
-      rw [ih, ← sidePcpMatrix_append]
-      rfl
-
-/-- The upper-word plane in side-normal coordinates. -/
-def UpperSide {R : Type*} [CommRing R] (vector : Fin 3 → R) : Prop := vector 1 = 0
-
-/-- A rule and its erasure role agree on the complete two-dimensional upper-word plane. -/
-theorem rule_erase_agree_on_upperSide (R : Type*) [CommRing R] (β : Nat)
-    (body : List TagLetter) (letter : TagLetter) (vector : Fin 3 → R)
-    (upperSide : UpperSide vector) :
-    sidePcpMatrix R (nearyUpper β (.rule letter)) (nearyLower β body (.rule letter)) *ᵥ
-        vector =
-      sidePcpMatrix R (nearyUpper β (.erase letter)) (nearyLower β body (.erase letter)) *ᵥ
-        vector := by
-  change vector 1 = 0 at upperSide
-  funext i
-  fin_cases i <;>
-    simp [sidePcpMatrix, nearyUpper, Matrix.vecHead, Matrix.vecTail,
-      Matrix.mulVec, Matrix.dotProduct, Fin.sum_univ_succ, upperSide]
-
-/-- Which member of a rule/erasure pair a data generator selects. -/
-inductive PairPhase where
-  | rule
-  | erase
-  deriving DecidableEq, Repr
-
-/-- Toggle the suffix-controlled member of a role pair. -/
-def PairPhase.flip : PairPhase → PairPhase
-  | .rule => .erase
-  | .erase => .rule
-
-/-- Recover the selected Neary role. -/
-def PairPhase.tile : PairPhase → TagLetter → NearyTile
-  | .rule, letter => .rule letter
-  | .erase, letter => .erase letter
-
 /-- Two paired data generators and one phase toggle. -/
 inductive PairedControl where
   | data : TagLetter → PairedControl
   | toggle
   deriving DecidableEq, Fintype, Repr
 
-/-- Embed one three-dimensional phase vector in the explicit four-dimensional quotient. -/
-def phaseVector (R : Type*) [CommRing R] : PairPhase → (Fin 3 → R) → Fin 4 → R
-  | .rule, vector => ![vector 0, vector 1, vector 2, 0]
-  | .erase, vector => ![vector 0, 0, vector 2, vector 1]
-
 /-- The data generator selecting the rule or erasure role according to the current phase. -/
 def pairedDataMatrix (R : Type*) [CommRing R] (β : Nat) (body : List TagLetter)
     (letter : TagLetter) : Matrix (Fin 4) (Fin 4) R :=
-  !![(1 : R), ternaryCode (nearyLower β body (.rule letter)),
-      ternaryCode (nearyUpper β (.rule letter)),
-      ternaryCode (nearyLower β body (.erase letter));
-     0, 0, 0, 0;
-     0, 0, (3 : R) ^ (nearyUpper β (.rule letter)).length, 0;
-     0, (3 : R) ^ (nearyLower β body (.rule letter)).length, 0,
-      (3 : R) ^ (nearyLower β body (.erase letter)).length]
+  twoStateDataMatrix R
+    (fun symbol => nearyUpper β (.rule symbol))
+    (fun phase symbol => nearyLower β body (phase.tile symbol))
+    (fun _ _ => .erase)
+    letter
+
+/-- Coordinate normal form of the paired data generator.
+
+The implementation is the generic finite-controller pushout; this theorem is the stable
+certificate consumed by coordinate calculations. -/
+theorem pairedDataMatrix_eq_explicit (R : Type*) [CommRing R] (β : Nat)
+    (body : List TagLetter) (letter : TagLetter) :
+    pairedDataMatrix R β body letter =
+      !![(1 : R), ternaryCode (nearyLower β body (.rule letter)),
+          ternaryCode (nearyUpper β (.rule letter)),
+          ternaryCode (nearyLower β body (.erase letter));
+         0, 0, 0, 0;
+         0, 0, (3 : R) ^ (nearyUpper β (.rule letter)).length, 0;
+         0, (3 : R) ^ (nearyLower β body (.rule letter)).length, 0,
+          (3 : R) ^ (nearyLower β body (.erase letter)).length] := by
+  ext i j
+  fin_cases i <;> fin_cases j <;>
+    simp [pairedDataMatrix, twoStateDataMatrix, controllerMatrix, pairControllerEquiv,
+      PairPhase.tile, Matrix.reindex_apply, Matrix.vecHead, Matrix.vecTail]
 
 /-- The integral phase-swap matrix. -/
 def pairedToggleMatrix (R : Type*) [CommRing R] : Matrix (Fin 4) (Fin 4) R :=
-  !![(1 : R), 0, 0, 0;
-     0, 0, 0, 1;
-     0, 0, 1, 0;
-     0, 1, 0, 0]
+  Matrix.reindex pairControllerEquiv pairControllerEquiv
+    (controllerStateMatrix R PairPhase.flip)
+
+/-- Coordinate normal form of the paired phase toggle. -/
+theorem pairedToggleMatrix_eq_explicit (R : Type*) [CommRing R] :
+    pairedToggleMatrix R =
+      !![(1 : R), 0, 0, 0;
+         0, 0, 0, 1;
+         0, 0, 1, 0;
+         0, 1, 0, 0] := by
+  ext i j
+  fin_cases i <;> fin_cases j <;>
+    simp [pairedToggleMatrix, controllerStateMatrix, controllerMatrix, pairControllerEquiv,
+      PairPhase.flip, Matrix.reindex_apply, Matrix.vecHead, Matrix.vecTail]
 
 /-- The phase toggle swaps one-based coordinates two and four,
 equivalently `Fin 4` indices `1` and `3`. -/
@@ -173,8 +73,8 @@ theorem pairedToggleMatrix_eq_permMatrix (R : Type*) [CommRing R] :
     (Equiv.swap (1 : Fin 4) 3).toPEquiv.toMatrix i j
   rw [PEquiv.equiv_toPEquiv_toMatrix]
   fin_cases i <;> fin_cases j <;>
-    simp [pairedToggleMatrix, Equiv.swap_apply_def, Matrix.one_apply, Matrix.vecHead,
-      Matrix.vecTail]
+    simp [pairedToggleMatrix, controllerStateMatrix, controllerMatrix, pairControllerEquiv,
+      PairPhase.flip, Equiv.swap_apply_def, Matrix.one_apply, Matrix.vecHead, Matrix.vecTail]
 
 /-- The three compressed control generators. -/
 def pairedGenerator (R : Type*) [CommRing R] (β : Nat) (body : List TagLetter) :
@@ -190,10 +90,11 @@ def pairedProduct (R : Type*) [CommRing R] (β : Nat) (body : List TagLetter)
 theorem pairedToggleMatrix_mulVec_phaseVector (R : Type*) [CommRing R]
     (phase : PairPhase) (vector : Fin 3 → R) :
     pairedToggleMatrix R *ᵥ phaseVector R phase vector = phaseVector R phase.flip vector := by
-  funext i
-  cases phase <;> fin_cases i <;>
-    simp [pairedToggleMatrix, phaseVector, PairPhase.flip, Matrix.vecHead, Matrix.vecTail,
-      Matrix.mulVec, Matrix.dotProduct, Fin.sum_univ_succ]
+  rw [pairedToggleMatrix, Matrix.reindex_apply, Matrix.submatrix_mulVec_equiv]
+  simp only [Equiv.symm_symm]
+  rw [phaseVector_comp_pairControllerEquiv,
+    controllerStateMatrix_mulVec_controllerVector]
+  rfl
 
 theorem pairedDataMatrix_mulVec_phaseVector (R : Type*) [CommRing R] (β : Nat)
     (body : List TagLetter) (letter : TagLetter) (phase : PairPhase)
@@ -202,11 +103,8 @@ theorem pairedDataMatrix_mulVec_phaseVector (R : Type*) [CommRing R] (β : Nat)
       phaseVector R .erase
         (sidePcpMatrix R (nearyUpper β (phase.tile letter))
           (nearyLower β body (phase.tile letter)) *ᵥ vector) := by
-  funext i
-  cases phase <;> fin_cases i <;>
-    simp [pairedDataMatrix, phaseVector, PairPhase.tile, nearyUpper, Matrix.vecHead,
-      Matrix.vecTail, sidePcpMatrix, Matrix.mulVec, Matrix.dotProduct, Fin.sum_univ_succ]
-  all_goals ring
+  rw [pairedDataMatrix, twoStateDataMatrix_mulVec_phaseVector]
+  cases phase <;> rfl
 
 /-- Right-to-left control decoding, retaining the phase seen by a further letter on the left. -/
 def suffixDecode : List PairedControl → PairPhase × List NearyTile
@@ -259,18 +157,12 @@ theorem pairedProduct_mulVec_column (R : Type*) [CommRing R] (β : Nat)
 
 theorem pairedRow_dot_phaseVector (R : Type*) [CommRing R] (phase : PairPhase)
     (vector : Fin 3 → R) : pairedRow R ⬝ᵥ phaseVector R phase vector = vector 0 := by
-  cases phase <;>
-    simp [pairedRow, phaseVector, Matrix.single_dotProduct]
+  simpa [pairedRow, Matrix.dotProduct, Fin.sum_univ_succ] using phaseHead R phase vector
 
 /-- The scalar coefficient recognized by the compressed control representation. -/
 def pairedCoefficient (R : Type*) [CommRing R] (β : Nat) (body : List TagLetter)
     (word : List PairedControl) : R :=
   pairedRow R ⬝ᵥ pairedProduct R β body word *ᵥ pairedColumn R β
-
-/-- The corresponding coefficient of one side-normal role word. -/
-def sideCoefficient (R : Type*) [CommRing R] (β : Nat) (body : List TagLetter)
-    (word : List NearyTile) : R :=
-  (sideTileProduct R β body word *ᵥ sideTerminalColumn R (nearyMarker β)) 0
 
 theorem pairedCoefficient_eq_sideCoefficient (R : Type*) [CommRing R] (β : Nat)
     (body : List TagLetter) (word : List PairedControl) :
@@ -282,52 +174,8 @@ theorem pairedCoefficient_eq_sideCoefficient (R : Type*) [CommRing R] (β : Nat)
 @[simp] theorem pairedCoefficient_nil (R : Type*) [CommRing R] (β : Nat)
     (body : List TagLetter) :
     pairedCoefficient R β body [] = (ternaryCode (nearyMarker β) : R) := by
-  simp [pairedCoefficient, pairedProduct, pairedColumn, pairedRow, phaseVector,
-    sideTerminalColumn, sidePcpMatrix, sideTailBasis, Matrix.vecHead, Matrix.vecTail,
-    Matrix.mulVec, Matrix.dotProduct, Fin.sum_univ_succ]
-
-theorem sidePcpMatrix_mulVec_sideTailBasis_head (R : Type*) [CommRing R]
-    (x y : List Bool) :
-    (sidePcpMatrix R x y *ᵥ sideTailBasis R) 0 =
-      (ternaryCode x : R) - ternaryCode y := by
-  simp [sidePcpMatrix, sideTailBasis, Matrix.vecHead, Matrix.vecTail, Matrix.mulVec,
-    Matrix.dotProduct, Fin.sum_univ_succ]
-  ring
-
-theorem sidePcpMatrix_mulVec_sideTailBasis_head_rat (x y : List Bool) :
-    (sidePcpMatrix ℚ x y *ᵥ sideTailBasis ℚ) 0 =
-      (ternaryCode x : ℚ) - ternaryCode y :=
-  sidePcpMatrix_mulVec_sideTailBasis_head ℚ x y
-
-/-- Closed arithmetic form of the side-normal coefficient. -/
-theorem sideCoefficient_eq_ternaryCode_sub (R : Type*) [CommRing R]
-    (β : Nat) (body : List TagLetter)
-    (word : List NearyTile) :
-    sideCoefficient R β body word =
-      (ternaryCode (spell (nearyUpper β) word ++ nearyMarker β) : R) -
-        ternaryCode (spell (nearyLower β body) word) := by
-  rw [sideCoefficient, sideTerminalColumn, Matrix.mulVec_mulVec,
-    sideTileProduct_eq_sidePcpMatrix, ← sidePcpMatrix_append,
-    sidePcpMatrix_mulVec_sideTailBasis_head R]
-  simp
-
-theorem sideCoefficient_eq_zero_iff_terminal_match (β : Nat) (body : List TagLetter)
-    (word : List NearyTile) :
-    sideCoefficient ℤ β body word = 0 ↔
-      spell (nearyUpper β) word ++ nearyMarker β = spell (nearyLower β body) word := by
-  rw [sideCoefficient, sideTerminalColumn, Matrix.mulVec_mulVec,
-    sideTileProduct_eq_sidePcpMatrix, ← sidePcpMatrix_append]
-  rw [sidePcpMatrix_mulVec_sideTailBasis_head ℤ, sub_eq_zero, Int.ofNat_inj]
-  simpa using ternaryCode_injective.eq_iff
-
-theorem sideCoefficient_eq_zero_iff_terminal_match_rat (β : Nat) (body : List TagLetter)
-    (word : List NearyTile) :
-    sideCoefficient ℚ β body word = 0 ↔
-      spell (nearyUpper β) word ++ nearyMarker β = spell (nearyLower β body) word := by
-  rw [sideCoefficient, sideTerminalColumn, Matrix.mulVec_mulVec,
-    sideTileProduct_eq_sidePcpMatrix, ← sidePcpMatrix_append]
-  rw [sidePcpMatrix_mulVec_sideTailBasis_head_rat, sub_eq_zero, Nat.cast_inj]
-  simpa using ternaryCode_injective.eq_iff
+  rw [pairedCoefficient_eq_sideCoefficient]
+  simp [decodePairedWord, suffixDecode]
 
 theorem decodePairedWord_surjective : Function.Surjective decodePairedWord := by
   intro word

@@ -3,6 +3,7 @@ import MatrixMortality.BinaryDefect
 import MatrixMortality.CHHNPacking
 import MatrixMortality.CHHNPackingRank
 import MatrixMortality.ClosedSubstitution
+import MatrixMortality.ControllerPushout
 import MatrixMortality.ExactBehavior
 import MatrixMortality.FullMatrixAlgebra
 import MatrixMortality.FullMatrixBehavior
@@ -30,6 +31,7 @@ import MatrixMortality.PrefixFullAlgebra
 import MatrixMortality.RankOne
 import MatrixMortality.ScheduledBinary
 import MatrixMortality.ScheduledBinaryRank
+import MatrixMortality.SideNormal
 import MatrixMortality.TerminalCompiler
 import MatrixMortality.TwoStateObstructions
 import MatrixMortality.TwoStatePushout

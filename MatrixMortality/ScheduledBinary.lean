@@ -1,4 +1,4 @@
-import MatrixMortality.MatrixSemigroup
+import MatrixMortality.ControllerPushout
 import MatrixMortality.PairedCompression
 
 /-!
@@ -19,7 +19,7 @@ namespace MatrixMortality
 open scoped Matrix
 
 /-- Two common affine/upper coordinates, followed by one lower coordinate per clock phase. -/
-abbrev ScheduledIndex (β : Nat) := Fin 2 ⊕ Fin β
+abbrev ScheduledIndex (β : Nat) := ControllerIndex (Fin β)
 
 /-- The first clock phase. -/
 def scheduledInitialPhase {β : Nat} (β_pos : 0 < β) : Fin β := ⟨0, β_pos⟩
@@ -30,6 +30,11 @@ def scheduledNextPhase {β : Nat} (β_pos : 0 < β) (phase : Fin β) : Fin β :=
     ⟨phase.val + 1, next_lt⟩
   else
     scheduledInitialPhase β_pos
+
+/-- The clock transition ignores the physical bit. -/
+def scheduledTransition {β : Nat} (β_pos : 0 < β) :
+    ControllerTransition (Fin β) Bool :=
+  fun phase _ => scheduledNextPhase β_pos phase
 
 /-- All nonfinal phases emit erasures; the final phase emits a rule. -/
 def scheduledPhase {β : Nat} (phase : Fin β) : PairPhase :=
@@ -61,25 +66,17 @@ def scheduledTile {β : Nat} (phase : Fin β) (bit : Bool) : NearyTile :=
 /-- One of the two scheduled generators. -/
 def scheduledGenerator (R : Type*) [CommRing R] (β : Nat) (body : List TagLetter)
     (β_pos : 0 < β) (bit : Bool) :
-    Matrix (ScheduledIndex β) (ScheduledIndex β) R
-  | .inl source, .inl target =>
-      !![(1 : R), 0;
-         ternaryCode (tagCode β (scheduledLetter bit)),
-           (3 : R) ^ (tagCode β (scheduledLetter bit)).length] source target
-  | .inl _, .inr _ => 0
-  | .inr phase, .inl target =>
-      ![ternaryCode (nearyLower β body (scheduledTile phase bit)), 0] target
-  | .inr phase, .inr target =>
-      if target = scheduledNextPhase β_pos phase then
-        (3 : R) ^ (nearyLower β body (scheduledTile phase bit)).length
-      else
-        0
+    Matrix (ScheduledIndex β) (ScheduledIndex β) R :=
+  (controllerMatrix R
+    (fun symbol => tagCode β (scheduledLetter symbol))
+    (fun phase symbol => nearyLower β body (scheduledTile phase symbol))
+    (scheduledTransition β_pos)
+    bit)ᵀ
 
 /-- Embed a side-normal payload row at one active lower-channel phase. -/
 def scheduledRow (R : Type*) [CommRing R] {β : Nat} (phase : Fin β)
-    (vector : Fin 3 → R) : ScheduledIndex β → R
-  | .inl index => ![vector 0, vector 2] index
-  | .inr index => if index = phase then vector 1 else 0
+    (vector : Fin 3 → R) : ScheduledIndex β → R :=
+  controllerVector R phase vector
 
 theorem scheduledNextPhase_eq_zero_iff {β : Nat} (β_pos : 0 < β) (phase : Fin β) :
     scheduledNextPhase β_pos phase = scheduledInitialPhase β_pos ↔ phase.val + 1 = β := by
@@ -96,53 +93,34 @@ theorem scheduledNextPhase_eq_zero_iff {β : Nat} (β_pos : 0 < β) (phase : Fin
     · intro
       rfl
 
-theorem scheduledRow_mul_generator (R : Type*) [CommRing R] (β : Nat)
-    (body : List TagLetter) (β_pos : 0 < β) (phase : Fin β)
-    (vector : Fin 3 → R) (bit : Bool) :
-    scheduledRow R phase vector ᵥ* scheduledGenerator R β body β_pos bit =
-      scheduledRow R (scheduledNextPhase β_pos phase)
-        (sidePcpMatrix R (nearyUpper β (scheduledTile phase bit))
-          (nearyLower β body (scheduledTile phase bit)) *ᵥ vector) := by
-  funext target
-  cases target with
-  | inl target =>
-      fin_cases target <;>
-        simp only [nearyUpper_scheduledTile] <;>
-        simp [scheduledRow, scheduledGenerator, sidePcpMatrix, Matrix.vecMul,
-          Matrix.dotProduct, Matrix.mulVec, Fin.sum_univ_succ, Fintype.sum_sum_type]
-      all_goals ring
-  | inr target =>
-      simp only [scheduledRow, scheduledGenerator, Matrix.vecMul, Matrix.dotProduct,
-        Fintype.sum_sum_type]
-      rw [Finset.sum_eq_single phase]
-      · by_cases target_next : target = scheduledNextPhase β_pos phase
-        · subst target
-          simp [sidePcpMatrix, Matrix.mulVec, Matrix.dotProduct, Fin.sum_univ_succ]
-          ring
-        · simp [target_next]
-      · intro other _ other_ne
-        simp [other_ne]
-      · simp
-
-/-- Decode a suffix while carrying its starting clock phase. Roles are returned in the matrix
-product order, hence in reverse input order. -/
+/-- Decode from a starting clock phase. Roles are returned in matrix-product order, hence in
+reverse input order. -/
 def decodeScheduledFrom {β : Nat} (β_pos : 0 < β) :
-    Fin β → List Bool → List NearyTile
-  | _, [] => []
-  | phase, bit :: rest =>
-      decodeScheduledFrom β_pos (scheduledNextPhase β_pos phase) rest ++
-        [scheduledTile phase bit]
+    Fin β → List Bool → List NearyTile :=
+  fun phase word =>
+    (controllerDecodeFrom (scheduledTransition β_pos) phase word).map
+      fun role => scheduledTile role.1 role.2
+
+@[simp] theorem decodeScheduledFrom_nil {β : Nat} (β_pos : 0 < β) (phase : Fin β) :
+    decodeScheduledFrom β_pos phase [] = [] := rfl
+
+@[simp] theorem decodeScheduledFrom_cons {β : Nat} (β_pos : 0 < β)
+    (phase : Fin β) (bit : Bool) (word : List Bool) :
+    decodeScheduledFrom β_pos phase (bit :: word) =
+      decodeScheduledFrom β_pos (scheduledNextPhase β_pos phase) word ++
+        [scheduledTile phase bit] := by
+  simp [decodeScheduledFrom, controllerDecodeFrom, scheduledTransition, List.map_append]
 
 /-- The phase retained after consuming a binary word. -/
-def scheduledResidualFrom {β : Nat} (β_pos : 0 < β) : Fin β → List Bool → Fin β
-  | phase, [] => phase
-  | phase, _ :: rest => scheduledResidualFrom β_pos (scheduledNextPhase β_pos phase) rest
+def scheduledResidualFrom {β : Nat} (β_pos : 0 < β) : Fin β → List Bool → Fin β :=
+  controllerResidualFrom (scheduledTransition β_pos)
 
 /-- The chronological role stream emitted by a scheduled word. -/
-def scheduledRolesFrom {β : Nat} (β_pos : 0 < β) : Fin β → List Bool → List NearyTile
-  | _, [] => []
-  | phase, bit :: rest =>
-      scheduledTile phase bit :: scheduledRolesFrom β_pos (scheduledNextPhase β_pos phase) rest
+def scheduledRolesFrom {β : Nat} (β_pos : 0 < β) :
+    Fin β → List Bool → List NearyTile :=
+  fun phase word =>
+    (controllerRolesFrom (scheduledTransition β_pos) phase word).map
+      fun role => scheduledTile role.1 role.2
 
 /-- Total scheduled decoder from the initial phase. -/
 def decodeScheduled {β : Nat} (β_pos : 0 < β) (word : List Bool) : List NearyTile :=
@@ -151,34 +129,22 @@ def decodeScheduled {β : Nat} (β_pos : 0 < β) (word : List Bool) : List Neary
 theorem decodeScheduledFrom_eq_reverse_roles {β : Nat} (β_pos : 0 < β)
     (phase : Fin β) (word : List Bool) :
     decodeScheduledFrom β_pos phase word = (scheduledRolesFrom β_pos phase word).reverse := by
-  induction word generalizing phase with
-  | nil => rfl
-  | cons bit rest induction =>
-      simp only [decodeScheduledFrom, scheduledRolesFrom, List.reverse_cons]
-      rw [induction]
+  rw [decodeScheduledFrom, controllerDecodeFrom_eq_reverse_roles, scheduledRolesFrom,
+    List.map_reverse]
 
 theorem scheduledResidualFrom_append {β : Nat} (β_pos : 0 < β) (phase : Fin β)
     (left right : List Bool) :
     scheduledResidualFrom β_pos phase (left ++ right) =
       scheduledResidualFrom β_pos (scheduledResidualFrom β_pos phase left) right := by
-  induction left generalizing phase with
-  | nil => rfl
-  | cons bit left induction =>
-      simp only [List.cons_append, scheduledResidualFrom]
-      exact induction (scheduledNextPhase β_pos phase)
+  exact controllerResidualFrom_append (scheduledTransition β_pos) phase left right
 
 theorem scheduledRolesFrom_append {β : Nat} (β_pos : 0 < β) (phase : Fin β)
     (left right : List Bool) :
     scheduledRolesFrom β_pos phase (left ++ right) =
       scheduledRolesFrom β_pos phase left ++
         scheduledRolesFrom β_pos (scheduledResidualFrom β_pos phase left) right := by
-  induction left generalizing phase with
-  | nil => rfl
-  | cons bit left induction =>
-      simp only [List.cons_append, scheduledRolesFrom, List.cons_append,
-        scheduledResidualFrom]
-      exact congrArg (scheduledTile phase bit :: ·)
-        (induction (scheduledNextPhase β_pos phase))
+  rw [scheduledRolesFrom, controllerRolesFrom_append, List.map_append,
+    scheduledRolesFrom, scheduledRolesFrom, scheduledResidualFrom]
 
 theorem scheduledEraseRun {β : Nat} (β_pos : 0 < β) (phase : Fin β)
     (letters : List TagLetter) (within_clock : phase.val + letters.length < β) :
@@ -191,7 +157,7 @@ theorem scheduledEraseRun {β : Nat} (β_pos : 0 < β) (phase : Fin β)
       constructor
       · rfl
       · apply Fin.ext
-        simp [scheduledResidualFrom]
+        simp [scheduledResidualFrom, controllerResidualFrom]
   | cons letter letters induction =>
       have within_clock' : phase.val + (letters.length + 1) < β := by
         simpa using within_clock
@@ -206,11 +172,16 @@ theorem scheduledEraseRun {β : Nat} (β_pos : 0 < β) (phase : Fin β)
       obtain ⟨roles, residual⟩ :=
         induction (phase := ⟨phase.val + 1, next_lt⟩) tail_within
       constructor
-      · simp only [List.map_cons, scheduledRolesFrom, scheduledTile, scheduledPhase,
-          scheduledLetter_scheduledBit, next_eq]
+      · simp only [List.map_cons, scheduledRolesFrom, controllerRolesFrom,
+          scheduledTransition, scheduledTile, scheduledPhase, scheduledLetter_scheduledBit,
+          next_eq]
         rw [if_neg (by omega)]
         exact congrArg (NearyTile.erase letter :: ·) roles
-      · simp only [List.map_cons, scheduledResidualFrom, next_eq]
+      · simp only [List.map_cons, scheduledResidualFrom, controllerResidualFrom,
+          scheduledTransition, next_eq]
+        change scheduledResidualFrom β_pos ⟨phase.val + 1, next_lt⟩
+            (letters.map scheduledBit) =
+          _
         rw [residual]
         apply Fin.ext
         simp
@@ -249,8 +220,8 @@ theorem scheduledStrokeCode_roles {β : Nat} (β_pos : 0 < β)
       (scheduledInitialPhase β_pos).val + stroke.wake.length + 1 = β := by
     simp [scheduledInitialPhase, wake_length]
     omega
-  simp [scheduledRolesFrom, scheduledTile, scheduledPhase, final_phase, strokeTiles,
-    final_phase', PairPhase.tile, List.map_reverse]
+  simp [scheduledRolesFrom, controllerRolesFrom, scheduledTransition, scheduledTile,
+    scheduledPhase, final_phase, strokeTiles, final_phase', PairPhase.tile, List.map_reverse]
 
 theorem scheduledStrokeCode_residual {β : Nat} (β_pos : 0 < β)
     (stroke : Stroke TagLetter β) :
@@ -303,6 +274,32 @@ theorem decodeScheduled_historyCode {β : Nat} (β_pos : 0 < β)
   rw [decodeScheduled, decodeScheduledFrom_eq_reverse_roles, scheduledHistoryCode_roles,
     List.reverse_reverse]
 
+theorem controllerRoleProduct_eq_scheduledTileProduct
+    (R : Type*) [CommRing R] (β : Nat) (body : List TagLetter)
+    (roles : List (ControllerRole (Fin β) Bool)) :
+    controllerRoleProduct R
+        (fun symbol => tagCode β (scheduledLetter symbol))
+        (fun state symbol => nearyLower β body (scheduledTile state symbol))
+        roles =
+      sideTileProduct R β body (roles.map fun role => scheduledTile role.1 role.2) := by
+  induction roles with
+  | nil => simp [controllerRoleProduct, sideTileProduct]
+  | cons role roles induction =>
+      simp only [controllerRoleProduct, sideTileProduct, wordProduct_cons, List.map_cons]
+      change
+        wordProduct
+            (controllerRoleMatrix R
+              (fun symbol => tagCode β (scheduledLetter symbol))
+              (fun state symbol => nearyLower β body (scheduledTile state symbol)))
+            roles =
+          wordProduct
+            (fun tile =>
+              sidePcpMatrix R (nearyUpper β tile) (nearyLower β body tile))
+            (roles.map fun item => scheduledTile item.1 item.2) at induction
+      rw [induction]
+      congr 1
+      simp [controllerRoleMatrix, nearyUpper_scheduledTile]
+
 theorem scheduledRow_wordProduct (R : Type*) [CommRing R] (β : Nat)
     (body : List TagLetter) (β_pos : 0 < β) (phase : Fin β)
     (vector : Fin 3 → R) (word : List Bool) :
@@ -310,16 +307,14 @@ theorem scheduledRow_wordProduct (R : Type*) [CommRing R] (β : Nat)
         wordProduct (scheduledGenerator R β body β_pos) word =
       scheduledRow R (scheduledResidualFrom β_pos phase word)
         (sideTileProduct R β body (decodeScheduledFrom β_pos phase word) *ᵥ vector) := by
-  induction word generalizing phase vector with
-  | nil =>
-      simp [scheduledResidualFrom, decodeScheduledFrom, sideTileProduct]
-  | cons bit rest induction =>
-      simp only [wordProduct_cons]
-      rw [← Matrix.vecMul_vecMul, scheduledRow_mul_generator, induction]
-      simp only [scheduledResidualFrom, decodeScheduledFrom]
-      rw [sideTileProduct_append]
-      simp only [sideTileProduct, wordProduct_cons, wordProduct_nil, mul_one,
-        Matrix.mulVec_mulVec]
+  change controllerVector R phase vector ᵥ*
+      controllerTransposeProduct R
+        (fun symbol => tagCode β (scheduledLetter symbol))
+        (fun state symbol => nearyLower β body (scheduledTile state symbol))
+        (scheduledTransition β_pos) word = _
+  rw [controllerVector_vecMul_transposeProduct]
+  rw [controllerRoleProduct_eq_scheduledTileProduct]
+  rfl
 
 /-- The fixed left boundary in scheduled coordinates. -/
 def scheduledBoundaryRow (R : Type*) [CommRing R] (β : Nat) (β_pos : 0 < β) :
@@ -335,8 +330,8 @@ def scheduledBoundaryColumn (R : Type*) [CommRing R] (β : Nat) : ScheduledIndex
 theorem scheduledRow_dot_boundaryColumn (R : Type*) [CommRing R] {β : Nat}
     (phase : Fin β) (vector : Fin 3 → R) :
     scheduledRow R phase vector ⬝ᵥ scheduledBoundaryColumn R β = vector 0 := by
-  simp [scheduledRow, scheduledBoundaryColumn, Matrix.dotProduct, Fintype.sum_sum_type,
-    Fin.sum_univ_succ]
+  simp [scheduledRow, controllerVector, scheduledBoundaryColumn, Matrix.dotProduct,
+    Fintype.sum_sum_type, Fin.sum_univ_succ]
 
 /-- Scalar series represented by the scheduled binary compiler. -/
 def scheduledCoefficient (R : Type*) [CommRing R] (β : Nat) (body : List TagLetter)
@@ -357,9 +352,7 @@ theorem scheduledCoefficient_eq_sideCoefficient (R : Type*) [CommRing R] (β : N
     (body : List TagLetter) (β_pos : 0 < β) :
     scheduledCoefficient R β body β_pos [] = (ternaryCode (nearyMarker β) : R) := by
   rw [scheduledCoefficient_eq_sideCoefficient]
-  simp [decodeScheduled, decodeScheduledFrom, sideCoefficient, sideTileProduct,
-    sideTerminalColumn, sidePcpMatrix, sideTailBasis, Matrix.vecHead, Matrix.vecTail,
-    Matrix.mulVec, Matrix.dotProduct, Fin.sum_univ_succ]
+  simp [decodeScheduled, decodeScheduledFrom, controllerDecodeFrom]
 
 theorem scheduledCoefficient_nil_ne_zero (β : Nat) (body : List TagLetter)
     (β_pos : 0 < β) : scheduledCoefficient ℤ β body β_pos [] ≠ 0 := by
@@ -375,11 +368,11 @@ theorem scheduledGenerator_transpose_fixes_boundaryColumn
   cases index with
   | inl index =>
       fin_cases index <;>
-        simp [scheduledGenerator, scheduledBoundaryColumn, Matrix.mulVec, Matrix.dotProduct,
-          Fintype.sum_sum_type, Fin.sum_univ_succ]
+        simp [scheduledGenerator, controllerMatrix, scheduledBoundaryColumn, Matrix.mulVec,
+          Matrix.dotProduct, Fintype.sum_sum_type, Fin.sum_univ_succ]
   | inr phase =>
-      simp [scheduledGenerator, scheduledBoundaryColumn, Matrix.mulVec, Matrix.dotProduct,
-        Fintype.sum_sum_type]
+      simp [scheduledGenerator, controllerMatrix, scheduledBoundaryColumn, Matrix.mulVec,
+        Matrix.dotProduct, Fintype.sum_sum_type]
 
 theorem decodeScheduledFrom_length {β : Nat} (β_pos : 0 < β)
     (phase : Fin β) (word : List Bool) :
@@ -387,7 +380,14 @@ theorem decodeScheduledFrom_length {β : Nat} (β_pos : 0 < β)
   induction word generalizing phase with
   | nil => rfl
   | cons bit word induction =>
-      simp [decodeScheduledFrom, induction]
+      simp only [decodeScheduledFrom, controllerDecodeFrom, scheduledTransition,
+        List.map_append, List.length_map, List.length_append, List.length_singleton,
+        List.length_cons]
+      rw [show
+        (controllerDecodeFrom (scheduledTransition β_pos)
+            (scheduledNextPhase β_pos phase) word).length = word.length by
+          simpa [decodeScheduledFrom] using induction (scheduledNextPhase β_pos phase)]
+      simp
 
 theorem decodeScheduled_length {β : Nat} (β_pos : 0 < β) (word : List Bool) :
     (decodeScheduled β_pos word).length = word.length :=
