@@ -1,4 +1,4 @@
-import MatrixMortality.MatrixSemigroup
+import MatrixMortality.ExactBehavior
 
 /-!
 # Finite witnesses for exact linear representations
@@ -22,6 +22,42 @@ def RepresentsSeries {α ι R : Type*} [Semiring R] [Fintype ι] [DecidableEq ι
     (series : List α → R) (generators : α → Matrix ι ι R)
     (row column : ι → R) : Prop :=
   ∀ word, linearCoefficient generators row column word = series word
+
+/-- Scalar exact realization is the one-dimensional instance of exact linear behavior. -/
+theorem representsSeries_iff_representsBehavior
+    {α ι K : Type*} [CommSemiring K] [Fintype ι] [DecidableEq ι]
+    (series : List α → K) (generators : α → Matrix ι ι K)
+    (row column : ι → K) :
+    RepresentsSeries series generators row column ↔
+      RepresentsBehavior (scalarBehavior series)
+        (fun label => Matrix.toLin' (generators label))
+        (LinearMap.toSpanSingleton K (ι → K) column)
+        (rowOutput row) := by
+  constructor
+  · intro exact word
+    apply LinearMap.ext
+    intro scalar
+    calc
+      linearBehavior
+          (fun label => Matrix.toLin' (generators label))
+          (LinearMap.toSpanSingleton K (ι → K) column)
+          (rowOutput row) word scalar =
+          scalar • linearBehavior
+            (fun label => Matrix.toLin' (generators label))
+            (LinearMap.toSpanSingleton K (ι → K) column)
+            (rowOutput row) word 1 := by
+              rw [← map_smul]
+              simp
+      _ = scalar • linearCoefficient generators row column word := by
+        rw [linearBehavior_matrix_one]
+        rfl
+      _ = scalar • series word := by rw [exact word]
+      _ = scalarBehavior series word scalar := by
+        simp [scalarBehavior]
+  · intro exact word
+    have at_one := LinearMap.congr_fun (exact word) 1
+    rw [linearBehavior_matrix_one] at at_one
+    simpa [linearCoefficient, scalarBehavior] using at_one
 
 /-- Finite Hankel section selected by prefix and suffix families. -/
 def finiteHankel {α P S R : Type*}

@@ -3,7 +3,9 @@ import MatrixMortality.BinaryDefect
 import MatrixMortality.CHHNPacking
 import MatrixMortality.CHHNPackingRank
 import MatrixMortality.ClosedSubstitution
+import MatrixMortality.ExactBehavior
 import MatrixMortality.FullMatrixAlgebra
+import MatrixMortality.FullMatrixBehavior
 import MatrixMortality.InternalSandwich
 import MatrixMortality.LinearRepresentation
 import MatrixMortality.MacroIrreducibility

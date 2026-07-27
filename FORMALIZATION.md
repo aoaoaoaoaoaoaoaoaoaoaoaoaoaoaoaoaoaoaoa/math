@@ -156,6 +156,21 @@ canonical separator therefore span `M₆(ℚ)`. This excludes every exact invari
 quotient, and internal-word sandwich compression of that physical family to five states; it
 does not exclude another family or a same-zero realization.
 
+The exact-series interfaces now share one primitive:
+
+```text
+word ↦ output ∘ A_word ∘ input.
+```
+
+Scalar rational series are its one-dimensional specialization, and the internal-sandwich
+predicate represents the same matrix-valued behavior. Lean connects full physical word span to
+this interface: a nonzero input makes the reachable carrier top, a nonzero output makes the
+unobservable carrier bottom, and every exact realization then has at least the ambient number
+of states. These statements are
+`quotient_finrank_eq_card_of_wordProductSpan_eq_top`,
+`pairedBinaryMortality_exactSandwich_six_le_finrank`, and
+`prefixAlgebra_exactSandwich_ten_le_finrank`.
+
 The restricted ten-state prefix pair is now closed by the same generic theorem. Lean proves
 `B₀³=uvᵀ`, constructs ten reachable columns and ten observable rows, and proves both context
 matrices invertible throughout `β≥3`, `body.length≥β−1`. Its large reachability factors are

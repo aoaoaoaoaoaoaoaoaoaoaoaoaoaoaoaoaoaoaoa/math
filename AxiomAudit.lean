@@ -12,6 +12,7 @@ open MatrixMortality
 #print axioms neary_source_generator_count
 #print axioms neary_morphisms_nonerasing
 #print axioms ExactNearyMacroFactorization.four_le_card
+#print axioms representsSeries_iff_representsBehavior
 #print axioms finiteHankel_card_le
 #print axioms twoChannelBoundaryTax
 #print axioms exactDiagonalTwoChannel_card_lower_bound
@@ -63,9 +64,12 @@ open MatrixMortality
 #print axioms InternalSandwich.quotient_finrank_eq_blockHankel
 #print axioms InternalSandwich.quotient_finrank_le_of_represents
 #print axioms wordProductSpan_eq_top_of_rankOne_contexts
+#print axioms quotient_finrank_eq_card_of_wordProductSpan_eq_top
+#print axioms card_le_of_wordProductSpan_eq_top_of_represents
 #print axioms pairedBinaryAlgebraReachable_isUnit
 #print axioms pairedBinaryAlgebraObservable_isUnit
 #print axioms pairedBinaryMortality_wordProductSpan_eq_top
+#print axioms pairedBinaryMortality_exactSandwich_six_le_finrank
 #print axioms Undecidability.nearyMortality44_mortal_iff_tagHaltsFrom
 #print axioms Undecidability.nearyMortality44_control_fixes_anchor
 #print axioms Undecidability.nearyMortality44_toggle_eq_permMatrix
@@ -106,6 +110,7 @@ open MatrixMortality
 #print axioms prefixAlgebraReachable_isUnit
 #print axioms prefixAlgebraObservable_isUnit
 #print axioms prefixAlgebra_wordProductSpan_eq_top
+#print axioms prefixAlgebra_exactSandwich_ten_le_finrank
 #print axioms Undecidability.nearyMortality102_mortal_iff_tagHaltsFrom
 #print axioms isMortal_reindex_iff
 #print axioms isMortal_zeroPad_iff

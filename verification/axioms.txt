@@ -10,6 +10,7 @@
 'MatrixMortality.neary_source_generator_count' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.neary_morphisms_nonerasing' depends on axioms: [propext]
 'MatrixMortality.ExactNearyMacroFactorization.four_le_card' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.representsSeries_iff_representsBehavior' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.finiteHankel_card_le' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.twoChannelBoundaryTax' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.exactDiagonalTwoChannel_card_lower_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
@@ -91,9 +92,18 @@
  Classical.choice,
  Quot.sound]
 'MatrixMortality.wordProductSpan_eq_top_of_rankOne_contexts' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.quotient_finrank_eq_card_of_wordProductSpan_eq_top' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.card_le_of_wordProductSpan_eq_top_of_represents' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.pairedBinaryAlgebraReachable_isUnit' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.pairedBinaryAlgebraObservable_isUnit' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.pairedBinaryMortality_wordProductSpan_eq_top' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.pairedBinaryMortality_exactSandwich_six_le_finrank' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
 'MatrixMortality.Undecidability.nearyMortality44_mortal_iff_tagHaltsFrom' depends on axioms: [propext,
@@ -168,6 +178,7 @@
 'MatrixMortality.prefixAlgebraReachable_isUnit' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.prefixAlgebraObservable_isUnit' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.prefixAlgebra_wordProductSpan_eq_top' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.prefixAlgebra_exactSandwich_ten_le_finrank' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.Undecidability.nearyMortality102_mortal_iff_tagHaltsFrom' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]

@@ -1,4 +1,4 @@
-import MatrixMortality.MatrixSemigroup
+import MatrixMortality.ExactBehavior
 
 /-!
 # Internal-word sandwich minimization
@@ -195,8 +195,8 @@ theorem mortal_quotient_iff (generators : Glyph → Module.End K V)
   ⟨ambient_mortal_of_quotient_mortal generators input output repairWord repair_nonempty repair,
     quotient_mortal_of_ambient_mortal generators input output⟩
 
-/-- If minimization annihilates the entire state space, the physical repair word already
-certifies a mortal source family. -/
+/-- If minimization annihilates the entire state space, wrapping any nonempty quotient word
+between two copies of the physical repair word certifies a mortal source family. -/
 theorem ambient_mortal_of_quotient_subsingleton
     (generators : Glyph → Module.End K V) (input : Q →ₗ[K] V) (output : V →ₗ[K] Q)
     (repairWord : List Glyph) (repair_nonempty : repairWord ≠ [])
@@ -257,14 +257,15 @@ theorem ker_reachableBehavior (generators : Glyph → Module.End K V)
 vector, indexed by every future word. -/
 def blockHankelColumn (generators : Glyph → Module.End K V) (input : Q →ₗ[K] V)
     (output : V →ₗ[K] Q) (past : List Glyph) (q : Q) : List Glyph → Q :=
-  fun future => output (wordProduct generators (future ++ past) (input q))
+  behaviorColumn (linearBehavior generators input output) past q
 
 theorem behavior_word (generators : Glyph → Module.End K V)
     (input : Q →ₗ[K] V) (output : V →ₗ[K] Q) (past : List Glyph) (q : Q) :
     behavior generators output (wordProduct generators past (input q)) =
       blockHankelColumn generators input output past q := by
   funext future
-  simp [behavior, blockHankelColumn, wordProduct_append, LinearMap.mul_apply]
+  simp [behavior, blockHankelColumn, behaviorColumn, linearBehavior,
+    wordProduct_append, LinearMap.mul_apply]
 
 theorem reachableBehavior_word (generators : Glyph → Module.End K V)
     (input : Q →ₗ[K] V) (output : V →ₗ[K] Q) (past : List Glyph) (q : Q) :
@@ -334,9 +335,8 @@ def RepresentsSandwich {State : Type*} [AddCommGroup State] [Module K State]
     (generators : Glyph → Module.End K V) (input : Q →ₗ[K] V) (output : V →ₗ[K] Q)
     (realization : Glyph → Module.End K State) (realizationInput : Q →ₗ[K] State)
     (realizationOutput : State →ₗ[K] Q) : Prop :=
-  ∀ word : List Glyph,
-    realizationOutput.comp ((wordProduct realization word).comp realizationInput) =
-      output.comp ((wordProduct generators word).comp input)
+  RepresentsBehavior (linearBehavior generators input output)
+    realization realizationInput realizationOutput
 
 theorem blockHankelColumn_mem_realizationBehavior
     {State : Type*} [AddCommGroup State] [Module K State]
@@ -351,8 +351,9 @@ theorem blockHankelColumn_mem_realizationBehavior
   refine ⟨wordProduct realization past (realizationInput q), ?_⟩
   funext future
   have coefficient := LinearMap.congr_fun (exact (future ++ past)) q
-  simpa [behavior, blockHankelColumn, wordProduct_append, LinearMap.mul_apply,
-    LinearMap.comp_apply] using coefficient
+  simpa [behavior, blockHankelColumn, behaviorColumn, linearBehavior,
+    RepresentsSandwich, RepresentsBehavior, wordProduct_append,
+    LinearMap.mul_apply, LinearMap.comp_apply] using coefficient
 
 /-- Every exact realization has at least the canonical quotient's state dimension. -/
 theorem quotient_finrank_le_of_represents

@@ -230,7 +230,11 @@ six-state, three-generator families before designing another five-state parser.
 `MatrixMortality.InternalSandwich.range_reachableBehavior_eq_span`,
 `MatrixMortality.InternalSandwich.quotient_finrank_eq_blockHankel`, and
 `MatrixMortality.InternalSandwich.quotient_finrank_le_of_represents` in
-[`InternalSandwich.lean`](MatrixMortality/InternalSandwich.lean). Independent nonzero
+[`InternalSandwich.lean`](MatrixMortality/InternalSandwich.lean). The common exact-behavior
+primitive is in [`ExactBehavior.lean`](MatrixMortality/ExactBehavior.lean); full generated
+matrix algebras force ambient sandwich dimension through
+`quotient_finrank_eq_card_of_wordProductSpan_eq_top` in
+[`FullMatrixBehavior.lean`](MatrixMortality/FullMatrixBehavior.lean). Independent nonzero
 generator scaling is `MatrixMortality.isMortal_smulMatrix_iff` in
 [`MatrixSemigroup.lean`](MatrixMortality/MatrixSemigroup.lean). The independent reconstruction
 and edge-case audit are in
@@ -561,9 +565,12 @@ independent symbolic check are in
 **Formalization:** [`MatrixMortality/PrefixAlgebra.lean`](MatrixMortality/PrefixAlgebra.lean),
 [`MatrixMortality/PrefixAlgebraContexts.lean`](MatrixMortality/PrefixAlgebraContexts.lean),
 [`MatrixMortality/PrefixAlgebraRank.lean`](MatrixMortality/PrefixAlgebraRank.lean), and
-[`MatrixMortality/PrefixFullAlgebra.lean`](MatrixMortality/PrefixFullAlgebra.lean);
+[`MatrixMortality/PrefixFullAlgebra.lean`](MatrixMortality/PrefixFullAlgebra.lean), through the
+generic exact-behavior bridge in
+[`MatrixMortality/FullMatrixBehavior.lean`](MatrixMortality/FullMatrixBehavior.lean);
 `prefixAlgebra_zero_cube`, `prefixAlgebraReachable_isUnit`,
-`prefixAlgebraObservable_isUnit`, and `prefixAlgebra_wordProductSpan_eq_top`.
+`prefixAlgebraObservable_isUnit`, `prefixAlgebra_wordProductSpan_eq_top`, and
+`prefixAlgebra_exactSandwich_ten_le_finrank`.
 
 ### MM-O09: Two-state ternary prefix image
 
@@ -676,8 +683,11 @@ physical contexts into a spanning family.
 [`MatrixMortality/PairedBinaryAlgebra.lean`](MatrixMortality/PairedBinaryAlgebra.lean),
 [`MatrixMortality/PairedBinaryAlgebraContexts.lean`](MatrixMortality/PairedBinaryAlgebraContexts.lean),
 [`MatrixMortality/PairedBinaryAlgebraRank.lean`](MatrixMortality/PairedBinaryAlgebraRank.lean), and
-[`MatrixMortality/PairedBinaryFullAlgebra.lean`](MatrixMortality/PairedBinaryFullAlgebra.lean);
-`pairedBinaryMortality_wordProductSpan_eq_top`.
+[`MatrixMortality/PairedBinaryFullAlgebra.lean`](MatrixMortality/PairedBinaryFullAlgebra.lean),
+through the generic exact-behavior bridge in
+[`MatrixMortality/FullMatrixBehavior.lean`](MatrixMortality/FullMatrixBehavior.lean);
+`pairedBinaryMortality_wordProductSpan_eq_top` and
+`pairedBinaryMortality_exactSandwich_six_le_finrank`.
 
 ### MM-M01: Off-diagonal companion interface
 
