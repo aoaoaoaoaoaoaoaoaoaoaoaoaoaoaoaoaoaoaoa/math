@@ -45,6 +45,8 @@ def pairedBinaryAlgebraColumn (β : Nat) : Fin 6 → ℚ :=
 def pairedBinaryAlgebraRow : Fin 6 → ℚ :=
   pairedBinaryBoundaryColumn ℚ
 
+namespace PairedBinaryAlgebra.Certificate
+
 /-- Closed form of the transposed controls. -/
 def pairedBinaryAlgebraGeneratorClosed (β : Nat) (body : List TagLetter) :
     Bool → Square (Fin 6) ℚ
@@ -137,7 +139,7 @@ def pairedBinaryAlgebraColumnClosed (β : Nat) : Fin 6 → ℚ :=
   let ρ := (3 : ℚ) ^ β
   ![(5 * ρ - 1) / 2, -1, 3 * ρ, 0, 0, 0]
 
-theorem pairedBinaryAlgebraGenerator_eq_closed (β : Nat) (body : List TagLetter)
+private theorem pairedBinaryAlgebraGenerator_eq_closed (β : Nat) (body : List TagLetter)
     (bit : Bool) :
     pairedBinaryAlgebraGenerator β body bit =
       pairedBinaryAlgebraGeneratorClosed β body bit := by
@@ -260,5 +262,7 @@ def pairedBinaryAlgebraObservableClosed (β : Nat) (body : List TagLetter) :
      1, 25, u, 25, u, 1;
      1, 1, u, V, 2, 1;
      1, 25, u, 700, (135 * ρ ^ 2 + 24 * ρ + 1) / 2, 76]
+
+end PairedBinaryAlgebra.Certificate
 
 end MatrixMortality

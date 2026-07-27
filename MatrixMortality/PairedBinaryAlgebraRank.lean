@@ -10,16 +10,17 @@ reduces to an integer factor congruent to three modulo nine.
 namespace MatrixMortality
 
 open scoped Matrix
+open PairedBinaryAlgebra.Certificate
 
 /-- The last factor controlling reachability of the paired-binary separator contexts. -/
-def pairedBinaryAlgebraReachabilityGap (β : Nat) (body : List TagLetter) : ℚ :=
+private def pairedBinaryAlgebraReachabilityGap (β : Nat) (body : List TagLetter) : ℚ :=
   let ρ := (3 : ℚ) ^ β
   let V := nearySideLowerC β body
   let B := nearySideLowerCScale β body
   17 * B - 18 * V + 18 * ρ - 33
 
 /-- The last factor controlling observability of the paired-binary separator contexts. -/
-def pairedBinaryAlgebraObservabilityGap (β : Nat) (body : List TagLetter) : ℚ :=
+private def pairedBinaryAlgebraObservabilityGap (β : Nat) (body : List TagLetter) : ℚ :=
   let ρ := (3 : ℚ) ^ β
   let V := nearySideLowerC β body
   45 * V * ρ ^ 2 - 372 * V * ρ - 25 * V -
@@ -32,7 +33,7 @@ private theorem nine_mul_integer_add_three_ne_zero (integer : ℤ) :
     exact_mod_cast equal_zero
   omega
 
-theorem pairedBinaryAlgebraReachabilityGap_ne_zero
+private theorem pairedBinaryAlgebraReachabilityGap_ne_zero
     (β : Nat) (body : List TagLetter) (two_le : 2 ≤ β) :
     pairedBinaryAlgebraReachabilityGap β body ≠ 0 := by
   obtain ⟨offset, β_eq⟩ := Nat.exists_eq_add_of_le two_le
@@ -53,7 +54,7 @@ theorem pairedBinaryAlgebraReachabilityGap_ne_zero
   rw [gap_eq]
   exact nine_mul_integer_add_three_ne_zero _
 
-theorem pairedBinaryAlgebraObservabilityGap_ne_zero
+private theorem pairedBinaryAlgebraObservabilityGap_ne_zero
     (β : Nat) (body : List TagLetter) (two_le : 2 ≤ β) :
     pairedBinaryAlgebraObservabilityGap β body ≠ 0 := by
   obtain ⟨offset, β_eq⟩ := Nat.exists_eq_add_of_le two_le

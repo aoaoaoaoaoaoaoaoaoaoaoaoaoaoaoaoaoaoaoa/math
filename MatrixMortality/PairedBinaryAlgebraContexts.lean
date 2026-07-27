@@ -10,6 +10,7 @@ and observable matrices used by the full-algebra certificate.
 namespace MatrixMortality
 
 open scoped Matrix
+open PairedBinaryAlgebra.Certificate
 
 theorem pairedBinaryAlgebraReachable_eq_closed (β : Nat) (body : List TagLetter) :
     pairedBinaryAlgebraReachable β body =

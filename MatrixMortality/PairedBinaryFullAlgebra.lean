@@ -10,6 +10,8 @@ six-dimensional matrix algebra.
 
 namespace MatrixMortality
 
+open PairedBinaryAlgebra.Certificate
+
 /-- The canonical mortality family: `none` is the rank-one separator and the two Boolean
 labels are the transposed paired-binary controls. -/
 def pairedBinaryMortalityGenerator (β : Nat) (body : List TagLetter) :
