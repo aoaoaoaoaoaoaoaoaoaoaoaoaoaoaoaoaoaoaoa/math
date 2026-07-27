@@ -239,8 +239,8 @@ The present Neary source cannot be inserted letterwise:
 
 - exact local toggle fusion preserves an immortal two-plane
   ([`M4-O01`](SALVAGE.md#m4-o01-exact-toggle-fusion-leaves-an-immortal-core));
-- every exact four-state shared-channel phase clock has constant or two-periodic lower-scale
-  ratios, unlike the Neary deletion clock
+- agreement at two consecutive deletion phases in a two-private-state quotient propagates
+  around the cycle to the rule phase, contradicting the unequal Neary rule scales
   ([`M4-O02`](SALVAGE.md#m4-o02-two-private-state-phase-signature));
 - the direct binary two-state first-return recoding is reported impossible
   ([`M4-O05`](SALVAGE.md#m4-o05-direct-two-state-first-return-recoding)).
@@ -860,10 +860,10 @@ universal computation.
 
 ## Execution order
 
-1. Formalize `M4-O02` and `M4-O04`. In parallel, either construct an
+1. Formalize `M4-O04`. In parallel, either construct an
    open-tail binary two-state source invariant or solve the mixed cube-root punctuation
-   incidence equations. Use formalized `M4-O03` to reject every finite closed-token source
-   before appendant search.
+   incidence equations. Use formalized `M4-O02` and `M4-O03` to reject every exact
+   two-private-state clock and finite closed-token source before appendant search.
 2. Use formalized `MM-O01`, `G3-O01`, `MM-O03`, and `MM-O04` to reject exact packings, macros,
    and bridges without conflating their scope with solvability preservation.
 3. Prove or refute the setter candidate's projective avoidance property, construct a

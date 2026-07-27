@@ -81,10 +81,13 @@ invertible. Every product retains an invertible restriction to `E`.
 
 ### Phase signature
 
-In an exact `4=2+2` shared-channel realization, the private phase lines are eigenlines of
-`X̄_c⁻¹X̄_b`. One line gives a constant ratio sequence; two lines give a fixed or swapped
-orbit and hence a constant or two-periodic sequence. The Neary signature
-`(ρ₀,1,…,1)` with `ρ₀≠1` violates this for `β≥3`.
+In an exact `4=2+2` shared-channel realization, let `q₀` be the rule phase and `q₁,q₂`
+consecutive deletion phases. If `q₁,q₂` are independent, they span the private quotient, so
+two data controls agreeing there agree everywhere. If they are dependent, the cyclic
+transition preserves their line and carries it back to `q₀`; agreement still propagates to
+the rule phase. The Neary controls agree at deletion phases but have unequal rule scales.
+This contradiction is kernel-checked in
+[`MatrixMortality/PhaseSignature.lean`](../MatrixMortality/PhaseSignature.lean).
 
 ### Closed serialization
 

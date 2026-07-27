@@ -73,7 +73,7 @@ file owns the mathematical stock.
 | [`MM-S10`](#mm-s10-swapped-target-suffix-sieve) | structure theorem | pole compatibility fixes `β+2` lower digits and excludes the residue `Δ=ρ−1` | audited | active |
 | [`M4-C01`](#m4-c01-two-state-pushout-compiler) | compiler | binary deterministic two-state scalar control compiles to three `4 × 4` matrices | formalized | graduated |
 | [`M4-O01`](#m4-o01-exact-toggle-fusion-leaves-an-immortal-core) | obstruction | exact local toggle fusion preserves a nonzero common anchor | formalized | graduated |
-| [`M4-O02`](#m4-o02-two-private-state-phase-signature) | obstruction | exact shared-channel phase ratios are constant or two-periodic | audited | active |
+| [`M4-O02`](#m4-o02-two-private-state-phase-signature) | obstruction | two private quotient states cannot isolate one exceptional cyclic phase | formalized | graduated |
 | [`M4-S01`](#m4-s01-odd-phase-macro-cut) | structure theorem | paired Neary roles inherit a rigid macro-stroke language | reported | active |
 | [`M4-O03`](#m4-o03-closed-serialization-collapse) | obstruction | finite closed-token queue serialization is decidable | formalized | graduated |
 | [`M4-O04`](#m4-o04-exact-internal-final-code-defect) | obstruction | distinct exact binary codes for one macro force commuting upper images | audited | stock |
@@ -1662,35 +1662,22 @@ claim exact local toggle semantics.
 ### M4-O02: Two-private-state phase signature
 
 **Kind:** obstruction
-**Evidence:** audited
-**Disposition:** active
+**Evidence:** formalized
+**Disposition:** graduated
 
 Suppose an exact phase compiler shares a two-dimensional upper plane and stores every private
-lower channel in a quotient `Q` of dimension at most two. If `q_j∈Q` is the phase-`j`
-private direction and
+lower channel in a quotient `Q` of dimension at most two. Let `q₀` be the distinguished rule
+phase and `q₁,q₂` two consecutive deletion phases. If two data controls agree on `q₁,q₂`, a
+cyclic control carries `q₁` to `q₂` and eventually carries `q₂` back to `q₀`, all up to nonzero
+scales, then the controls also agree on `q₀`.
 
-```text
-X̄_x q_j = B_{j,x} q_{j+1},
-```
+The proof is a sharp dimension dichotomy. If `q₁,q₂` are independent, they span `Q`, so
+agreement on them is global. If they are dependent, the cyclic control preserves their line
+and carries that line back to `q₀`; agreement again reaches `q₀`.
 
-then the ratio sequence
-
-```text
-ρ_j = B_{j,b}/B_{j,c}
-```
-
-is constant or two-periodic. If the `q_j` span one line, it is constant. Otherwise
-`F=X̄_c⁻¹X̄_b` has every `q_j` as an eigenline; a two-dimensional operator has at most two
-eigenlines unless scalar, and `X̄_c` can only fix or swap them.
-
-The supplied Neary source has signature
-
-```text
-(ρ₀,1,…,1),       ρ₀≠1,
-```
-
-because all deletion lower words coincide while the two rule lower lengths differ. For
-`β≥3` this is neither constant nor two-periodic.
+In the supplied Neary source all deletion lower words coincide, whereas the two rule lower
+scales differ whenever the body is nonempty. The checked generic theorem therefore makes the
+putative rule scales equal, while `nearyLowerScale_rule_ne` makes them unequal.
 
 **Scope:** exact phasewise `4=2+2` shared-channel realizations, including phase rescaling,
 projective normalization, upper-plane shears, and basis changes. Nonletterwise macros and
@@ -1699,7 +1686,9 @@ same-zero representations remain outside the theorem.
 **Use:** closes the direct extension of paired-role compression from two phases to the full
 Neary deletion clock.
 
-**Next:** formalize the quotient-eigenline argument and instantiate the Neary scale signature.
+**Artifact:** `twoPrivateState_ruleScale_eq` proves the generic phase theorem and
+`neary_twoPrivateState_phaseCompiler_impossible` instantiates the Neary scale signature in
+[`MatrixMortality/PhaseSignature.lean`](MatrixMortality/PhaseSignature.lean).
 
 ### M4-S01: Odd-phase macro cut
 

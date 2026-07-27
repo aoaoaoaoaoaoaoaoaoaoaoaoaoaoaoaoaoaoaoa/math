@@ -70,6 +70,10 @@
 'MatrixMortality.closedSubstitutionHalts_iff_noReachableCycle' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.twoPrivateState_ruleScale_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.neary_twoPrivateState_phaseCompiler_impossible' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.Undecidability.nearyMortality44_mortal_iff_tagHaltsFrom' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]

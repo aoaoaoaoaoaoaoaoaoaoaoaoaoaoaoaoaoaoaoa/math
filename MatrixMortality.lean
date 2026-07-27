@@ -10,6 +10,7 @@ import MatrixMortality.PairedBoundaryTax
 import MatrixMortality.PairedCompression
 import MatrixMortality.PairedMortality
 import MatrixMortality.PairedRank
+import MatrixMortality.PhaseSignature
 import MatrixMortality.PrefixMortality
 import MatrixMortality.ScheduledBinary
 import MatrixMortality.ScheduledBinaryRank
