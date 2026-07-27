@@ -1,5 +1,5 @@
-import MatrixMortality.CHHNPackingRank
 import MatrixMortality.FullMatrixAlgebra
+import MatrixMortality.NearySideNormal
 import MatrixMortality.PrefixMortality
 
 /-!
@@ -142,7 +142,7 @@ private def prefixAlgebraOutputClosed (β : Nat) (body : List TagLetter)
   | .root, true | .one, false | .one, true => 1
   | .ten, false =>
       !![1, 0, 0;
-         chhnNearyLowerC β body, chhnNearyLowerCScale β body, 0;
+         nearySideLowerC β body, nearySideLowerCScale β body, 0;
          2, 0, 3]
   | .ten, true =>
       !![1, 0, 0;
@@ -166,10 +166,10 @@ private theorem cast_normalizedNearyFamily_none (β : Nat) (body : List TagLette
          0, 0, 0] := by
   have marker_value :
       (ternaryCode (nearyMarker β) : ℚ) = (5 * (3 : ℚ) ^ β - 1) / 2 := by
-    simpa [chhnNearyMarkerValue] using chhnNearyMarkerValue_eq β
+    simpa [nearySideMarkerValue] using nearySideMarkerValue_eq β
   have marker_scale :
       ((3 : ℚ) ^ (nearyMarker β).length) = 3 * (3 : ℚ) ^ β := by
-    simpa [chhnNearyMarkerScale] using chhnNearyMarkerScale_eq β
+    simpa [nearySideMarkerScale] using nearySideMarkerScale_eq β
   ext row column
   fin_cases row <;> fin_cases column <;>
     simp [normalizedNearyFamily, nearyMortalityFamilyInt, absorbedFamilyInt,
@@ -196,7 +196,7 @@ private theorem cast_prefixOutput_eq_closed (β : Nat) (body : List TagLetter)
       prefixAlgebraOutputClosed β body state bit := by
   have upper_b :
       (ternaryCode (tagCode β .b) : ℚ) = (15 * (3 : ℚ) ^ β + 1) / 2 := by
-    simpa [chhnNearyUpperB] using chhnNearyUpperB_eq β
+    simpa [nearySideUpperB] using nearySideUpperB_eq β
   have rule_b_value : (ternaryCode [true, true, false] : ℚ) = 25 := by
     norm_num [ternaryCode, ternaryDigit, Nat.ofDigits]
   have erase_value : ternaryDigit false = 1 := rfl
@@ -221,7 +221,7 @@ private theorem cast_prefixOutput_eq_closed (β : Nat) (body : List TagLetter)
     fin_cases row <;> fin_cases column <;>
       simp [prefixAlgebraOutputClosed, sidePcpMatrix, nearyUpper, nearyLower,
         Matrix.transpose_apply, Matrix.vecHead, Matrix.vecTail,
-        chhnNearyLowerC, chhnNearyLowerCScale, ternaryCode, ternaryDigit,
+        nearySideLowerC, nearySideLowerCScale, ternaryCode, ternaryDigit,
         tagCode, pow_add]
   · rw [prefixOutput, prefixEmission, cast_normalizedNearyFamily_some]
     ext row column
@@ -283,8 +283,8 @@ def prefixAlgebraGeneratorClosed (β : Nat) (body : List TagLetter) :
   | false =>
       let ρ := (3 : ℚ) ^ β
       let m := (5 * ρ - 1) / 2
-      let V := chhnNearyLowerC β body
-      let B := chhnNearyLowerCScale β body
+      let V := nearySideLowerC β body
+      let B := nearySideLowerCScale β body
       !![m, -1, 3 * ρ, 0, 0, 0, 0, 0, 0, 0;
          0, 0, 0, 0, 0, 0, 0, 0, 0, 0;
          0, 0, 0, 0, 0, 0, 0, 0, 0, 0;
@@ -322,8 +322,8 @@ theorem prefixAlgebraGeneratorClosed_false_mulVec
         vector 7,
         vector 8,
         vector 0,
-        chhnNearyLowerC β body * vector 0 +
-          chhnNearyLowerCScale β body * vector 1,
+        nearySideLowerC β body * vector 0 +
+          nearySideLowerCScale β body * vector 1,
         2 * vector 0 + 3 * vector 2,
         vector 0 + 3 * vector 1] := by
   ext coordinate
@@ -359,9 +359,9 @@ theorem prefixAlgebraGeneratorClosed_vecMul_false
     vector ᵥ* prefixAlgebraGeneratorClosed β body false =
       let ρ := (3 : ℚ) ^ β
       let m := (5 * ρ - 1) / 2
-      ![m * vector 0 + vector 6 + chhnNearyLowerC β body * vector 7 +
+      ![m * vector 0 + vector 6 + nearySideLowerC β body * vector 7 +
           2 * vector 8 + vector 9,
-        -vector 0 + chhnNearyLowerCScale β body * vector 7 + 3 * vector 9,
+        -vector 0 + nearySideLowerCScale β body * vector 7 + 3 * vector 9,
         3 * ρ * vector 0 + 3 * vector 8,
         0,
         0,
@@ -438,7 +438,7 @@ end PrefixAlgebra.Certificate
 def prefixAlgebraColumn (β : Nat) (body : List TagLetter) : Fin 10 → ℚ :=
   let ρ := (3 : ℚ) ^ β
   let m := (5 * ρ - 1) / 2
-  let V := chhnNearyLowerC β body
+  let V := nearySideLowerC β body
   ![m ^ 2, 0, 0, 1, V, 2, m, m * V, 2 * m, m]
 
 /-- Row of the internal rank-one word `000`. -/

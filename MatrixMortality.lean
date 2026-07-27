@@ -14,6 +14,7 @@ import MatrixMortality.MacroIrreducibility
 import MatrixMortality.NearyBinaryDefect
 import MatrixMortality.NearyEncoding
 import MatrixMortality.NearyPhaseSignature
+import MatrixMortality.NearySideNormal
 import MatrixMortality.PairedBinary
 import MatrixMortality.PairedBinaryAlgebra
 import MatrixMortality.PairedBinaryAlgebraContexts

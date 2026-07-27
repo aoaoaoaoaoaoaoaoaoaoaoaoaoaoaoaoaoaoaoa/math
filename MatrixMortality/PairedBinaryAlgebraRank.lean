@@ -14,14 +14,14 @@ open scoped Matrix
 /-- The last factor controlling reachability of the paired-binary separator contexts. -/
 def pairedBinaryAlgebraReachabilityGap (β : Nat) (body : List TagLetter) : ℚ :=
   let ρ := (3 : ℚ) ^ β
-  let V := chhnNearyLowerC β body
-  let B := chhnNearyLowerCScale β body
+  let V := nearySideLowerC β body
+  let B := nearySideLowerCScale β body
   17 * B - 18 * V + 18 * ρ - 33
 
 /-- The last factor controlling observability of the paired-binary separator contexts. -/
 def pairedBinaryAlgebraObservabilityGap (β : Nat) (body : List TagLetter) : ℚ :=
   let ρ := (3 : ℚ) ^ β
-  let V := chhnNearyLowerC β body
+  let V := nearySideLowerC β body
   45 * V * ρ ^ 2 - 372 * V * ρ - 25 * V -
     1125 * ρ ^ 2 + 3300 * ρ + 1825
 
@@ -45,8 +45,8 @@ theorem pairedBinaryAlgebraReachabilityGap_ne_zero
         9 * ((17 * lowerScale - 18 * encodedPrefix + 18 * widthScale - 18 : ℤ) : ℚ) +
           3 := by
     rw [pairedBinaryAlgebraReachabilityGap,
-      chhnNearyLowerC_eq_nine_mul_add_seven,
-      chhnNearyLowerCScale_eq_nine_mul]
+      nearySideLowerC_eq_nine_mul_add_seven,
+      nearySideLowerCScale_eq_nine_mul]
     push_cast
     simp [pow_add, pow_succ, encodedPrefix, lowerScale, widthScale]
     ring
@@ -67,7 +67,7 @@ theorem pairedBinaryAlgebraObservabilityGap_ne_zero
           25 * encodedPrefix + 183 : ℤ) : ℚ) +
           3 := by
     rw [pairedBinaryAlgebraObservabilityGap,
-      chhnNearyLowerC_eq_nine_mul_add_seven]
+      nearySideLowerC_eq_nine_mul_add_seven]
     push_cast
     simp [pow_add, pow_mul, encodedPrefix, widthScale]
     ring
@@ -82,8 +82,8 @@ private theorem pairedBinaryAlgebraReachableClosed_mulVec_eq_zero
   let ρ := (3 : ℚ) ^ β
   let m := (5 * ρ - 1) / 2
   let u := (15 * ρ + 1) / 2
-  let V := chhnNearyLowerC β body
-  let B := chhnNearyLowerCScale β body
+  let V := nearySideLowerC β body
+  let B := nearySideLowerCScale β body
   let H := 3 * ρ * u + m - 25
   let J := -V + (17 * ρ - 1) / 2
   have row₀ := congrFun product_zero (0 : Fin 6)
@@ -105,7 +105,7 @@ private theorem pairedBinaryAlgebraReachableClosed_mulVec_eq_zero
     positivity
   have B_large : (9 : ℚ) ≤ B := by
     dsimp [B]
-    rw [chhnNearyLowerCScale_eq_nine_mul]
+    rw [nearySideLowerCScale_eq_nine_mul]
     nlinarith [one_le_pow_of_one_le (by norm_num : (1 : ℚ) ≤ 3)
       (tagEncode β body).length.succ]
   have gap_ne :
@@ -178,7 +178,7 @@ private theorem pairedBinaryAlgebraObservableClosed_mulVec_eq_zero
     vector = 0 := by
   let ρ := (3 : ℚ) ^ β
   let u := (15 * ρ + 1) / 2
-  let V := chhnNearyLowerC β body
+  let V := nearySideLowerC β body
   let K := (135 * ρ ^ 2 + 24 * ρ + 1) / 2
   have row₀ := congrFun product_zero (0 : Fin 6)
   have row₁ := congrFun product_zero (1 : Fin 6)

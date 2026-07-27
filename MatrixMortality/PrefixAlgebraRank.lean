@@ -70,7 +70,7 @@ private theorem nine_mul_integer_add_eight_ne_zero (integer : ℤ) :
 theorem prefixAlgebraLowerGap_eq_nine_mul (β : Nat) (body : List TagLetter) :
     prefixAlgebraLowerGap β body =
       9 * ((ternaryCode (true :: tagEncode β body) : ℚ) - 2) := by
-  rw [prefixAlgebraLowerGap, chhnNearyLowerC_eq_nine_mul_add_seven]
+  rw [prefixAlgebraLowerGap, nearySideLowerC_eq_nine_mul_add_seven]
   ring
 
 theorem prefixAlgebraReachabilityPolynomial_ne_zero
@@ -351,8 +351,8 @@ private theorem prefixAlgebraAdaptedClosed_mulVec_eq_zero
   have coordinate₇ : vector 7 = 0 := congrFun last_zero 1
   have coordinate₈ : vector 8 = 0 := congrFun last_zero 2
   have lower_code_large :
-      (25 : ℚ) < chhnNearyLowerC β body := by
-    simpa [chhnNearyLowerC] using
+      (25 : ℚ) < nearySideLowerC β body := by
+    simpa [nearySideLowerC] using
       (show (25 : ℚ) < ternaryCode (nearyLower β body (.rule .c)) by
         exact_mod_cast
           ternaryCode_neary_rule_c_gt_twenty_five β body body_nonempty)

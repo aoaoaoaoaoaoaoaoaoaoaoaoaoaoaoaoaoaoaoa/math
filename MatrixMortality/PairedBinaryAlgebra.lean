@@ -1,5 +1,5 @@
-import MatrixMortality.CHHNPackingRank
 import MatrixMortality.FullMatrixAlgebra
+import MatrixMortality.NearySideNormal
 import MatrixMortality.PairedBinary
 
 /-!
@@ -58,8 +58,8 @@ def pairedBinaryAlgebraGeneratorClosed (β : Nat) (body : List TagLetter) :
          0, 0, 1, 0, 0, 0;
          0, 0, 0, 0, 0, 0]
   | true =>
-      let V := chhnNearyLowerC β body
-      let B := chhnNearyLowerCScale β body
+      let V := nearySideLowerC β body
+      let B := nearySideLowerCScale β body
       !![1, 0, 0, V, 2, 1;
          0, 0, 0, B, 0, 3;
          0, 0, 0, 0, 3, 0;
@@ -87,8 +87,8 @@ theorem pairedBinaryAlgebraGeneratorClosed_false_mulVec
 theorem pairedBinaryAlgebraGeneratorClosed_true_mulVec
     (β : Nat) (body : List TagLetter) (vector : Fin 6 → ℚ) :
     pairedBinaryAlgebraGeneratorClosed β body true *ᵥ vector =
-      ![vector 0 + chhnNearyLowerC β body * vector 3 + 2 * vector 4 + vector 5,
-        chhnNearyLowerCScale β body * vector 3 + 3 * vector 5,
+      ![vector 0 + nearySideLowerC β body * vector 3 + 2 * vector 4 + vector 5,
+        nearySideLowerCScale β body * vector 3 + 3 * vector 5,
         3 * vector 4,
         0,
         vector 2,
@@ -122,8 +122,8 @@ theorem pairedBinaryAlgebraGeneratorClosed_vecMul_true
       ![vector 0,
         vector 5,
         vector 4,
-        chhnNearyLowerC β body * vector 0 +
-          chhnNearyLowerCScale β body * vector 1,
+        nearySideLowerC β body * vector 0 +
+          nearySideLowerCScale β body * vector 1,
         2 * vector 0 + 3 * vector 2,
         vector 0 + 3 * vector 1] := by
   ext coordinate
@@ -143,10 +143,10 @@ theorem pairedBinaryAlgebraGenerator_eq_closed (β : Nat) (body : List TagLetter
       pairedBinaryAlgebraGeneratorClosed β body bit := by
   have upper_b :
       (ternaryCode (tagCode β .b) : ℚ) = (15 * (3 : ℚ) ^ β + 1) / 2 := by
-    simpa [chhnNearyUpperB] using chhnNearyUpperB_eq β
+    simpa [nearySideUpperB] using nearySideUpperB_eq β
   have upper_b_scale :
       ((3 : ℚ) ^ (tagCode β .b).length) = 9 * (3 : ℚ) ^ β := by
-    simpa [chhnNearyUpperBScale] using chhnNearyUpperBScale_eq β
+    simpa [nearySideUpperBScale] using nearySideUpperBScale_eq β
   have upper_c : (ternaryCode (tagCode β .c) : ℚ) = 2 := by
     exact_mod_cast ternaryCode_tagCode_c β
   have upper_c_scale : ((3 : ℚ) ^ (tagCode β .c).length) = 3 := by
@@ -170,10 +170,10 @@ theorem pairedBinaryAlgebraGenerator_eq_closed (β : Nat) (body : List TagLetter
     norm_num [nearyLower]
   have rule_c :
       (ternaryCode (nearyLower β body (.rule .c)) : ℚ) =
-        chhnNearyLowerC β body := rfl
+        nearySideLowerC β body := rfl
   have rule_c_scale :
       ((3 : ℚ) ^ (nearyLower β body (.rule .c)).length) =
-        chhnNearyLowerCScale β body := rfl
+        nearySideLowerCScale β body := rfl
   have erase_scale (letter : TagLetter) :
       ((3 : ℚ) ^ (nearyLower β body (.erase letter)).length) = 3 := by
     cases letter <;> norm_num [nearyLower]
@@ -198,12 +198,12 @@ theorem pairedBinaryAlgebraColumn_eq_closed (β : Nat) :
     pairedBinaryAlgebraColumn β = pairedBinaryAlgebraColumnClosed β := by
   have marker :
       (ternaryCode (nearyMarker β) : ℚ) = (5 * (3 : ℚ) ^ β - 1) / 2 := by
-    simpa [chhnNearyMarkerValue] using chhnNearyMarkerValue_eq β
+    simpa [nearySideMarkerValue] using nearySideMarkerValue_eq β
   ext coordinate
   fin_cases coordinate <;>
     simp [pairedBinaryAlgebraColumn, pairedBinaryAlgebraColumnClosed,
       pairedBinaryBoundaryRow, pairedBinaryRow, sideTerminalColumn, sidePcpMatrix,
-      sideTailBasis, marker, chhnNearyMarkerScale_eq,
+      sideTailBasis, marker, nearySideMarkerScale_eq,
       Matrix.mulVec, Matrix.dotProduct, Matrix.vecHead, Matrix.vecTail,
       Fin.sum_univ_succ]
   all_goals ring
@@ -238,8 +238,8 @@ def pairedBinaryAlgebraReachableClosed (β : Nat) (body : List TagLetter) :
   let ρ := (3 : ℚ) ^ β
   let m := (5 * ρ - 1) / 2
   let u := (15 * ρ + 1) / 2
-  let V := chhnNearyLowerC β body
-  let B := chhnNearyLowerCScale β body
+  let V := nearySideLowerC β body
+  let B := nearySideLowerCScale β body
   !![m, m, m, 3 * ρ * u + m - 25, -V + (17 * ρ - 1) / 2,
        3 * ρ * u + m - 25;
      -1, 0, 0, -27, -B, 0;
@@ -253,7 +253,7 @@ def pairedBinaryAlgebraObservableClosed (β : Nat) (body : List TagLetter) :
     Square (Fin 6) ℚ :=
   let ρ := (3 : ℚ) ^ β
   let u := (15 * ρ + 1) / 2
-  let V := chhnNearyLowerC β body
+  let V := nearySideLowerC β body
   !![1, 0, 0, 0, 0, 0;
      1, 0, 0, 25, u, 1;
      1, 0, 0, V, 2, 1;

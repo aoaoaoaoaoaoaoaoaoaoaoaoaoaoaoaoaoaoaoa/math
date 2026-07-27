@@ -87,7 +87,7 @@ def prefixAlgebraObservable (β : Nat) (body : List TagLetter) :
 
 /-- The body-dependent lower-code displacement from the fixed rule-`b` value. -/
 def prefixAlgebraLowerGap (β : Nat) (body : List TagLetter) : ℚ :=
-  chhnNearyLowerC β body - 25
+  nearySideLowerC β body - 25
 
 /-- Monic polynomial change from the ordinary Krylov columns to the adapted filtration. -/
 def prefixAlgebraReachabilityChange (β : Nat) : Square (Fin 10) ℚ :=
@@ -141,7 +141,7 @@ def prefixAlgebraAdaptedClosed (β : Nat) (body : List TagLetter) :
   let ρ := (3 : ℚ) ^ β
   let m := (5 * ρ - 1) / 2
   let u := (15 * ρ + 1) / 2
-  let V := chhnNearyLowerC β body
+  let V := nearySideLowerC β body
   let x := prefixAlgebraLowerGap β body
   !![m ^ 2, 1, m, 0, 0, 0, 0, 0, 0, 0;
      0, V, m, m ^ 2, 2 * V + 1, 3 * m,

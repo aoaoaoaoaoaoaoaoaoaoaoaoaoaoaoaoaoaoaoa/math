@@ -1,4 +1,5 @@
 import MatrixMortality.LinearRepresentation
+import MatrixMortality.NearySideNormal
 import MatrixMortality.PairedCompression
 
 /-!
@@ -20,61 +21,10 @@ def pairedRankPrefixes : Fin 4 → List PairedControl :=
 def pairedRankSuffixes : Fin 4 → List PairedControl :=
   ![[], [.toggle], [.data .b], [.data .b, .toggle]]
 
-/-- Positional value of the Neary marker, viewed as an integer. -/
-def pairedMarkerValue (β : Nat) : ℤ := ternaryCode (nearyMarker β)
-
-/-- Base-three scale at deletion width `β`. -/
-def pairedWidthScale (β : Nat) : ℤ := (3 : ℤ) ^ β
-
-/-- Appending one zero triples the marker value and adds one. -/
-theorem pairedMarkerValue_succ (β : Nat) :
-    pairedMarkerValue (β + 1) = 3 * pairedMarkerValue β + 1 := by
-  have marker_succ :
-      nearyMarker (β + 1) = nearyMarker β ++ [false] := by
-    simp [nearyMarker, List.replicate_succ']
-  rw [pairedMarkerValue, marker_succ, ternaryCode_append]
-  norm_num [pairedMarkerValue, ternaryCode_singleton, ternaryDigit]
-
-/-- The marker value satisfies `2m+1=5·3^β`. -/
-theorem pairedMarkerValue_relation (β : Nat) :
-    2 * pairedMarkerValue β + 1 = 5 * pairedWidthScale β := by
-  induction β with
-  | zero =>
-      norm_num [pairedMarkerValue, pairedWidthScale, nearyMarker, ternaryCode, ternaryDigit]
-  | succ β induction =>
-      rw [pairedMarkerValue_succ]
-      change 2 * (3 * pairedMarkerValue β + 1) + 1 =
-        5 * pairedWidthScale (β + 1)
-      rw [pairedWidthScale, pow_succ, ← pairedWidthScale]
-      nlinarith
-
-/-- Positional value of the encoded tag letter `b`. -/
-theorem ternaryCode_tagCode_b (β : Nat) :
-    (ternaryCode (tagCode β .b) : ℤ) = 3 * pairedMarkerValue β + 2 := by
-  have code_eq : tagCode β .b = nearyMarker β ++ [true] := by
-    simp [tagCode, nearyMarker]
-  rw [code_eq, ternaryCode_append]
-  norm_num [pairedMarkerValue, ternaryCode, ternaryDigit]
-
-@[simp] theorem nearyMarker_length (β : Nat) : (nearyMarker β).length = β + 1 := by
-  simp [nearyMarker]
-
-@[simp] theorem tagCode_b_length (β : Nat) : (tagCode β .b).length = β + 2 := by
-  simp [tagCode]
-
-@[simp] theorem ternaryCode_neary_rule_b (β : Nat) (body : List TagLetter) :
-    ternaryCode (nearyLower β body (.rule .b)) = 25 := by
-  norm_num [nearyLower, ternaryCode_cons, ternaryDigit]
-
-@[simp] theorem ternaryCode_neary_erase (β : Nat) (body : List TagLetter)
-    (letter : TagLetter) :
-    ternaryCode (nearyLower β body (.erase letter)) = 1 := by
-  norm_num [nearyLower, ternaryCode_singleton, ternaryDigit]
-
 /-- Closed reachable-row factor of the paired Hankel certificate. -/
 def pairedRankReachable (β : Nat) : Matrix (Fin 4) (Fin 4) ℤ :=
-  let m := pairedMarkerValue β
-  let s := pairedWidthScale β
+  let m := nearyMarkerValueInt β
+  let s := nearyWidthScaleInt β
   let u := 3 * m + 2
   let a := 9 * s
   !![1, 0, 0, 0;
@@ -84,8 +34,8 @@ def pairedRankReachable (β : Nat) : Matrix (Fin 4) (Fin 4) ℤ :=
 
 /-- Closed observable-column factor of the paired Hankel certificate. -/
 def pairedRankObservable (β : Nat) : Matrix (Fin 4) (Fin 4) ℤ :=
-  let m := pairedMarkerValue β
-  let s := pairedWidthScale β
+  let m := nearyMarkerValueInt β
+  let s := nearyWidthScaleInt β
   let p := 3 * s
   let u := 3 * m + 2
   let a := 9 * s
@@ -112,7 +62,7 @@ theorem pairedRankReachableNative_eq (β : Nat) (body : List TagLetter) :
       pairedRankReachable, pairedGenerator, pairedDataMatrix_eq_explicit,
       pairedToggleMatrix_eq_explicit,
       pairedRow, wordProduct, nearyUpper, nearyLower, ternaryCode_tagCode_b,
-      ternaryCode_cons, ternaryCode_singleton, ternaryDigit, pairedWidthScale, pow_succ,
+      ternaryCode_cons, ternaryCode_singleton, ternaryDigit, nearyWidthScaleInt, pow_succ,
       Matrix.vecHead, Matrix.vecTail, Matrix.vecMul_one, Matrix.vecMul, Matrix.dotProduct,
       Matrix.one_apply, Fin.ext_iff, Matrix.mul_apply, Fin.sum_univ_succ]
   all_goals
@@ -131,7 +81,7 @@ theorem pairedRankObservableNative_eq (β : Nat) (body : List TagLetter) :
       sideTerminalColumn, sidePcpMatrix, sideTailBasis,
       wordProduct, nearyUpper, nearyLower, ternaryCode_tagCode_b,
       ternaryCode_cons, ternaryCode_singleton, ternaryDigit,
-      pairedMarkerValue, pairedWidthScale, pow_succ,
+      nearyMarkerValueInt, nearyWidthScaleInt, pow_succ,
       Matrix.vecHead, Matrix.vecTail, Matrix.one_mulVec, Matrix.mulVec, Matrix.dotProduct,
       Matrix.one_apply, Fin.ext_iff, Matrix.mul_apply, Fin.sum_univ_succ]
   all_goals
@@ -141,8 +91,8 @@ theorem pairedRankObservableNative_eq (β : Nat) (body : List TagLetter) :
 
 /-- Three-dimensional minor left by the sparse first reachable row. -/
 def pairedRankReachableMinor (β : Nat) : Matrix (Fin 3) (Fin 3) ℤ :=
-  let m := pairedMarkerValue β
-  let s := pairedWidthScale β
+  let m := nearyMarkerValueInt β
+  let s := nearyWidthScaleInt β
   let u := 3 * m + 2
   let a := 9 * s
   !![25, u, 1;
@@ -160,16 +110,16 @@ theorem pairedRankReachable_det_eq_minor (β : Nat) :
 
 theorem pairedRankReachable_det (β : Nat) :
     (pairedRankReachable β).det =
-      48 * (3 * pairedMarkerValue β + 2) *
-        (13 * (9 * pairedWidthScale β) - 15) := by
+      48 * (3 * nearyMarkerValueInt β + 2) *
+        (13 * (9 * nearyWidthScaleInt β) - 15) := by
   rw [pairedRankReachable_det_eq_minor, Matrix.det_fin_three]
   norm_num [pairedRankReachableMinor]
   ring
 
 /-- Three-dimensional minor left by the sparse second observable row. -/
 def pairedRankObservableMinor (β : Nat) : Matrix (Fin 3) (Fin 3) ℤ :=
-  let m := pairedMarkerValue β
-  let s := pairedWidthScale β
+  let m := nearyMarkerValueInt β
+  let s := nearyWidthScaleInt β
   let p := 3 * s
   let u := 3 * m + 2
   let a := 9 * s
@@ -188,30 +138,30 @@ theorem pairedRankObservable_det_eq_minor (β : Nat) :
 
 theorem pairedRankObservableMinor_det (β : Nat) :
     (pairedRankObservableMinor β).det =
-      -24 * (3 * pairedWidthScale β) *
-        (pairedMarkerValue β - 3 * pairedWidthScale β + 2) := by
+      -24 * (3 * nearyWidthScaleInt β) *
+        (nearyMarkerValueInt β - 3 * nearyWidthScaleInt β + 2) := by
   rw [Matrix.det_fin_three]
   norm_num [pairedRankObservableMinor]
   ring
 
 theorem pairedRankObservable_det (β : Nat) :
     (pairedRankObservable β).det =
-      12 * (3 * pairedWidthScale β) * (pairedWidthScale β - 3) := by
+      12 * (3 * nearyWidthScaleInt β) * (nearyWidthScaleInt β - 3) := by
   rw [pairedRankObservable_det_eq_minor, pairedRankObservableMinor_det]
   linear_combination
-    (-36 * pairedWidthScale β) * pairedMarkerValue_relation β
+    (-36 * nearyWidthScaleInt β) * nearyMarkerValueInt_relation β
 
 theorem pairedRankReachable_det_ne_zero (β : Nat) :
     (pairedRankReachable β).det ≠ 0 := by
   rw [pairedRankReachable_det]
-  have marker_nonnegative : 0 ≤ pairedMarkerValue β := by
-    unfold pairedMarkerValue
+  have marker_nonnegative : 0 ≤ nearyMarkerValueInt β := by
+    unfold nearyMarkerValueInt
     positivity
-  have scale_positive : 0 < pairedWidthScale β := by
-    unfold pairedWidthScale
+  have scale_positive : 0 < nearyWidthScaleInt β := by
+    unfold nearyWidthScaleInt
     positivity
-  have upper_value_positive : 0 < 3 * pairedMarkerValue β + 2 := by omega
-  have scale_factor_positive : 0 < 13 * (9 * pairedWidthScale β) - 15 := by
+  have upper_value_positive : 0 < 3 * nearyMarkerValueInt β + 2 := by omega
+  have scale_factor_positive : 0 < 13 * (9 * nearyWidthScaleInt β) - 15 := by
     nlinarith
   exact mul_ne_zero
     (mul_ne_zero (by norm_num) (ne_of_gt upper_value_positive))
@@ -222,10 +172,10 @@ theorem pairedRankObservable_det_ne_zero (β : Nat) (three_le : 3 ≤ β) :
   rw [pairedRankObservable_det]
   have power_bound_nat : 3 ^ 3 ≤ 3 ^ β :=
     Nat.pow_le_pow_right (by norm_num) three_le
-  have scale_gt_three : (3 : ℤ) < pairedWidthScale β := by
-    rw [pairedWidthScale]
+  have scale_gt_three : (3 : ℤ) < nearyWidthScaleInt β := by
+    rw [nearyWidthScaleInt]
     exact_mod_cast (show 3 < 3 ^ β by omega)
-  have scale_positive : 0 < pairedWidthScale β := by omega
+  have scale_positive : 0 < nearyWidthScaleInt β := by omega
   exact mul_ne_zero
     (mul_ne_zero (by norm_num) (mul_ne_zero (by norm_num) (ne_of_gt scale_positive)))
     (sub_ne_zero.mpr (ne_of_gt scale_gt_three))
