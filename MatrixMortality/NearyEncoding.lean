@@ -714,7 +714,7 @@ theorem nearyPCP_primitive_terminal (β : Nat) (body : List TagLetter) :
 /-- The five integral matrices emitted from one restricted tag instance. -/
 def nearyMortalityFamilyInt (β : Nat) (body : List TagLetter) :
     Option NearyTile → Matrix (Fin 3) (Fin 3) Int :=
-  absorbedFamilyInt (nearyUpper β) (nearyLower β body) (nearyMarker β) []
+  absorbedFamily ℤ (nearyUpper β) (nearyLower β body) (nearyMarker β) []
 
 /-- The complete exact source-to-mortality equivalence.  Its label type has five elements. -/
 theorem nearyMortalityFamilyInt_mortal_iff_tagHaltsFrom (β : Nat)
@@ -722,7 +722,7 @@ theorem nearyMortalityFamilyInt_mortal_iff_tagHaltsFrom (β : Nat)
     (hbodyDiv : β - 1 ∣ body.length) :
     IsMortal (nearyMortalityFamilyInt β body) ↔
       TagHaltsFrom β (tagOutput body) (body.drop (β - 1) ++ [.b]) := by
-  rw [nearyMortalityFamilyInt, absorbedFamilyInt_mortal_iff_terminal_match]
+  rw [nearyMortalityFamilyInt, absorbedFamily_int_mortal_iff_terminal_match]
   simpa using terminal_match_iff_tagHaltsFrom β body hβ hbody hbodyDiv
 
 theorem nearyGPCP_solvable_iff_tagHaltsFrom (β : Nat) (body : List TagLetter)
@@ -758,24 +758,24 @@ theorem nearyGPCPPlus_solvable_iff_tagHaltsFrom (β : Nat) (body : List TagLette
 
 theorem nearyMortality_ordinary_det_ne_zero (β : Nat) (body : List TagLetter)
     (tile : NearyTile) : (nearyMortalityFamilyInt β body (some tile)).det ≠ 0 := by
-  simpa [nearyMortalityFamilyInt, absorbedFamilyInt, separatedGenerator] using
+  simpa [nearyMortalityFamilyInt, absorbedFamily, separatedGenerator] using
     pcpMatrix_det_ne_zero_int (nearyUpper β tile) (nearyLower β body tile)
 
 theorem nearyMortality_ordinary_upperTriangular (β : Nat) (body : List TagLetter)
     (tile : NearyTile) :
     (nearyMortalityFamilyInt β body (some tile)).BlockTriangular id := by
-  simpa [nearyMortalityFamilyInt, absorbedFamilyInt, separatedGenerator] using
+  simpa [nearyMortalityFamilyInt, absorbedFamily, separatedGenerator] using
     pcpMatrix_upperTriangular ℤ (nearyUpper β tile) (nearyLower β body tile)
 
 theorem nearyMortality_terminal_ne_zero (β : Nat) (body : List TagLetter) :
     nearyMortalityFamilyInt β body none ≠ 0 := by
-  simpa [nearyMortalityFamilyInt, absorbedFamilyInt, separatedGenerator] using
-    terminalGeneratorInt_ne_zero (nearyMarker β) []
+  simpa [nearyMortalityFamilyInt, absorbedFamily, separatedGenerator] using
+    terminalGenerator_int_ne_zero (nearyMarker β) []
 
 theorem nearyMortality_terminal_rank_eq_one (β : Nat) (body : List TagLetter) :
     (castMatrix (nearyMortalityFamilyInt β body none)).toLin'.rank = 1 := by
-  simpa [nearyMortalityFamilyInt, absorbedFamilyInt, separatedGenerator] using
-    castMatrix_terminalGeneratorInt_rank_eq_one (nearyMarker β) []
+  simpa [nearyMortalityFamilyInt, absorbedFamily, separatedGenerator] using
+    terminalGenerator_int_cast_rank_eq_one (nearyMarker β) []
 
 theorem neary_generator_count : Fintype.card (Option NearyTile) = 5 := by decide
 

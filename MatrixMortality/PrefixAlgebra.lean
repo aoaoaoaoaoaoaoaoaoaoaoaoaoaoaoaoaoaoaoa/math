@@ -172,8 +172,8 @@ private theorem cast_normalizedNearyFamily_none (β : Nat) (body : List TagLette
     simpa [nearySideMarkerScale] using nearySideMarkerScale_eq β
   ext row column
   fin_cases row <;> fin_cases column <;>
-    simp [normalizedNearyFamily, nearyMortalityFamilyInt, absorbedFamilyInt,
-      separatedGenerator, terminalGeneratorInt, terminalColumnInt, sideChange,
+    simp [normalizedNearyFamily, nearyMortalityFamilyInt, absorbedFamily,
+      separatedGenerator, terminalGenerator, terminalColumn, sideChange,
       sideChangeInv, pcpMatrix, castMatrix, Matrix.transpose_apply,
       Matrix.vecMulVec, Matrix.mul_apply, Matrix.mulVec, Matrix.dotProduct,
       Matrix.vecHead, Matrix.vecTail, headBasis, tailBasis, Fin.sum_univ_succ,

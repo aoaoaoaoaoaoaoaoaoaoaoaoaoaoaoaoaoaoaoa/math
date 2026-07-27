@@ -23,6 +23,20 @@ def RepresentsSeries {α ι R : Type*} [Semiring R] [Fintype ι] [DecidableEq ι
     (row column : ι → R) : Prop :=
   ∀ word, linearCoefficient generators row column word = series word
 
+/-- Scalar extension commutes with exact matrix coefficients. -/
+theorem linearCoefficient_map {α ι R S : Type*} [Semiring R] [Semiring S]
+    [Fintype ι] [DecidableEq ι] (map : R →+* S)
+    (generators : α → Matrix ι ι R) (row column : ι → R) (word : List α) :
+    map (linearCoefficient generators row column word) =
+      linearCoefficient
+        (fun label => (generators label).map map)
+        (map ∘ row) (map ∘ column) word := by
+  rw [linearCoefficient, linearCoefficient, RingHom.map_dotProduct]
+  congr 1
+  funext state
+  change map ((wordProduct generators word *ᵥ column) state) = _
+  rw [RingHom.map_mulVec, wordProduct_mapMatrix]
+
 /-- Scalar exact realization is the one-dimensional instance of exact linear behavior. -/
 theorem representsSeries_iff_representsBehavior
     {α ι K : Type*} [CommSemiring K] [Fintype ι] [DecidableEq ι]

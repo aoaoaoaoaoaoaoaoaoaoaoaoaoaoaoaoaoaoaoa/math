@@ -1,3 +1,4 @@
+import MatrixMortality.Computability
 import Mathlib.Data.List.OfFn
 
 /-!
@@ -7,6 +8,64 @@ Neary's compiler defines one long tag word by prescribing every fixed-stride tra
 The representation below makes that prescription literal: a `period × columns` grid is serialized
 column by column, so phase `r` is recovered at indices `r + period * j`.
 -/
+
+namespace MatrixMortality.Undecidability
+
+/-- Pad a prefix on the right to an exact target length. -/
+def padRight {α : Type*} (width : Nat) (filler : α) (stem : List α) : List α :=
+  stem ++ List.replicate (width - stem.length) filler
+
+theorem padRight_length {α : Type*} {width : Nat} (filler : α) (stem : List α)
+    (stem_fits : stem.length ≤ width) :
+    (padRight width filler stem).length = width := by
+  simp [padRight]
+  omega
+
+/-- Place padding between a fixed prefix and suffix. -/
+def padBetween {α : Type*} (width : Nat) (filler : α) (stem ending : List α) : List α :=
+  stem ++ List.replicate (width - stem.length - ending.length) filler ++ ending
+
+theorem padBetween_length {α : Type*} {width : Nat} (filler : α)
+    (stem ending : List α) (fixed_fits : stem.length + ending.length ≤ width) :
+    (padBetween width filler stem ending).length = width := by
+  simp [padBetween]
+  omega
+
+end MatrixMortality.Undecidability
+
+namespace MatrixMortality.Primrec
+
+theorem padRight {Input α : Type*} [Primcodable Input] [Primcodable α]
+    {width : Input → Nat} {filler : Input → α} {stem : Input → List α}
+    (width_rec : Primrec width) (filler_rec : Primrec filler) (stem_rec : Primrec stem) :
+    Primrec fun input =>
+      Undecidability.padRight (width input) (filler input) (stem input) := by
+  have padding_length :
+      Primrec fun input => width input - (stem input).length :=
+    Primrec.nat_sub.comp width_rec (Primrec.list_length.comp stem_rec)
+  exact
+    Primrec.list_append.comp stem_rec <|
+      list_replicate.comp padding_length filler_rec
+
+theorem padBetween {Input α : Type*} [Primcodable Input] [Primcodable α]
+    {width : Input → Nat} {filler : Input → α} {stem ending : Input → List α}
+    (width_rec : Primrec width) (filler_rec : Primrec filler) (stem_rec : Primrec stem)
+    (ending_rec : Primrec ending) :
+    Primrec fun input =>
+      Undecidability.padBetween (width input) (filler input) (stem input) (ending input) := by
+  have padding_length :
+      Primrec fun input => width input - (stem input).length - (ending input).length :=
+    Primrec.nat_sub.comp
+      (Primrec.nat_sub.comp width_rec (Primrec.list_length.comp stem_rec))
+      (Primrec.list_length.comp ending_rec)
+  have padding :
+      Primrec fun input =>
+        List.replicate (width input - (stem input).length - (ending input).length)
+          (filler input) :=
+    list_replicate.comp padding_length filler_rec
+  exact Primrec.list_append.comp (Primrec.list_append.comp stem_rec padding) ending_rec
+
+end MatrixMortality.Primrec
 
 namespace MatrixMortality.Undecidability
 
@@ -59,4 +118,72 @@ theorem gridTrack_length {α : Type*} {period columns : Nat}
     (gridTrack grid phase).length = columns := by
   simp [gridTrack]
 
+/-- Column-major serialization of a finite family of materialized tracks. -/
+def weaveTracks {α : Type*} [Inhabited α] (period columns : Nat)
+    (tracks : Fin period → List α) : List α :=
+  (List.range (period * columns)).map fun index =>
+    (List.ofFn fun phase : Fin period => (tracks phase).getI (index / period)).getI
+      (index % period)
+
+theorem weaveTracks_eq_weave {α : Type*} [Inhabited α] {period columns : Nat}
+    (period_pos : 0 < period) (tracks : Fin period → Mathlib.Vector α columns) :
+    weaveTracks period columns (fun phase => (tracks phase).val) =
+      weave period columns period_pos fun phase column => (tracks phase).get column := by
+  apply List.ext_getElem
+  · simp [weaveTracks, weave]
+  · intro index tracks_bound weave_bound
+    have index_bound : index < period * columns := by
+      simpa [weaveTracks] using tracks_bound
+    have phase_bound : index % period < period := Nat.mod_lt _ period_pos
+    have column_bound : index / period < columns := by
+      rw [Nat.div_lt_iff_lt_mul period_pos]
+      simpa [Nat.mul_comm] using index_bound
+    simp only [weaveTracks, weave, List.getElem_map, List.getElem_range]
+    have phase_list_bound :
+        index % period <
+          (List.ofFn fun phase : Fin period =>
+            (tracks phase).val.getI (index / period)).length := by
+      simpa using phase_bound
+    rw [List.getI_eq_getElem _ phase_list_bound, List.getElem_ofFn]
+    have track_bound :
+        index / period <
+          (tracks ⟨index % period, phase_bound⟩).val.length := by
+      simpa using column_bound
+    rw [List.getI_eq_getElem _ track_bound, List.getElem_ofFn]
+    rfl
+
 end MatrixMortality.Undecidability
+
+namespace MatrixMortality.Primrec
+
+theorem weaveTracks {Input α : Type*} [Primcodable Input] [Primcodable α]
+    [Inhabited α] {period : Nat} {columns : Input → Nat}
+    {tracks : Input → Fin period → List α}
+    (columns_rec : Primrec columns) (tracks_rec : Primrec₂ tracks) :
+    Primrec fun input =>
+      Undecidability.weaveTracks period (columns input) (tracks input) := by
+  have total_rec : Primrec fun input => period * columns input :=
+    Primrec.nat_mul.comp (Primrec.const period) columns_rec
+  have range_rec : Primrec fun input => List.range (period * columns input) :=
+    Primrec.list_range.comp total_rec
+  have track_rec (phase : Fin period) : Primrec fun input => tracks input phase :=
+    tracks_rec.comp Primrec.id (Primrec.const phase)
+  have column_rec : Primrec fun pair : Input × Nat => pair.2 / period :=
+    Primrec.nat_div.comp Primrec.snd (Primrec.const period)
+  have phase_value_rec (phase : Fin period) :
+      Primrec fun pair : Input × Nat => (tracks pair.1 phase).getI (pair.2 / period) :=
+    Primrec.list_getI.comp ((track_rec phase).comp Primrec.fst) column_rec
+  have column_values_rec :
+      Primrec fun pair : Input × Nat =>
+        List.ofFn fun phase : Fin period => (tracks pair.1 phase).getI (pair.2 / period) :=
+    Primrec.list_ofFn phase_value_rec
+  have phase_rec : Primrec fun pair : Input × Nat => pair.2 % period :=
+    Primrec.nat_mod.comp Primrec.snd (Primrec.const period)
+  have grid_value_rec :
+      Primrec₂ fun input index =>
+        (List.ofFn fun phase : Fin period => (tracks input phase).getI (index / period)).getI
+          (index % period) :=
+    (Primrec.list_getI.comp column_values_rec phase_rec).to₂
+  exact Primrec.list_map range_rec grid_value_rec
+
+end MatrixMortality.Primrec

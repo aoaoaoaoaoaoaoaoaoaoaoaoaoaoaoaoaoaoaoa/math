@@ -23,7 +23,7 @@ theorem normalizedNearyFamily_some (β : Nat) (body : List TagLetter)
     (tile : NearyTile) :
     normalizedNearyFamily β body (some tile) =
       (sidePcpMatrix ℤ (nearyUpper β tile) (nearyLower β body tile))ᵀ := by
-  rw [normalizedNearyFamily, nearyMortalityFamilyInt, absorbedFamilyInt,
+  rw [normalizedNearyFamily, nearyMortalityFamilyInt, absorbedFamily,
     separatedGenerator, sidePcpMatrix_eq_conjugate]
 
 theorem normalizedNearyFamily_mortal_iff (β : Nat) (body : List TagLetter) :

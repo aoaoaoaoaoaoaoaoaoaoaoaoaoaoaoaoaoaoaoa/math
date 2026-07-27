@@ -83,18 +83,21 @@ def nearyGPCP4 (beta : Nat) (body : List TagLetter) : BinaryGPCP4 where
   lowerLeft := []
   lowerRight := []
 
-/-- Each labelled lower word is primitive recursive in the variable Neary body. -/
-theorem nearyLower_fin_primrec (beta : Nat) (label : Fin 4) :
-    Primrec fun body => nearyLower beta body (nearyTileOfFin label) := by
-  fin_cases label
-  · exact Primrec.const _
-  · exact
-      (Primrec.list_append.comp (Primrec.const [true])
-        (Primrec.list_append.comp (tagEncode_primrec beta)
-          (Primrec.const [true, false]))).of_eq fun body => by
-            rfl
-  · exact Primrec.const _
-  · exact Primrec.const _
+/-- Each semantic lower word is primitive recursive in the variable Neary body. -/
+theorem nearyLower_primrec (beta : Nat) (tile : NearyTile) :
+    Primrec fun body => nearyLower beta body tile := by
+  cases tile with
+  | rule letter =>
+      cases letter with
+      | b => exact Primrec.const _
+      | c =>
+          exact
+            (Primrec.list_append.comp (Primrec.const [true])
+              (Primrec.list_append.comp (tagEncode_primrec beta)
+                (Primrec.const [true, false]))).of_eq fun body => by
+                  rfl
+  | erase letter =>
+      cases letter <;> exact Primrec.const _
 
 /-- The four-generator GPCP compiler is primitive recursive in its variable body. -/
 theorem nearyGPCP4_primrec (beta : Nat) :
@@ -107,7 +110,8 @@ theorem nearyGPCP4_primrec (beta : Nat) :
       Primrec fun body : List TagLetter =>
         nearyLower beta body ∘ nearyTileOfFin := by
     apply MatrixMortality.Primrec.fin_function
-    exact nearyLower_fin_primrec beta
+    intro label
+    exact nearyLower_primrec beta (nearyTileOfFin label)
   exact
     BinaryGPCP4.primrec_mk
       (fun _ => nearyUpper beta ∘ nearyTileOfFin)
@@ -124,16 +128,9 @@ theorem nearyGPCP4_solvable_iff_tagHaltsFrom (beta : Nat) (body : List TagLetter
     (nearyGPCP4 beta body).Solvable ↔
       TagHaltsFrom beta (tagOutput body) (body.drop (beta - 1) ++ [.b]) := by
   rw [← nearyGPCP_solvable_iff_tagHaltsFrom beta body beta_large body_long body_divisible]
-  constructor
-  · rintro ⟨word, solution⟩
-    refine ⟨word.map nearyTileOfFin, ?_⟩
-    simpa [BinaryGPCP4.Solvable, IsGPCPSolution, nearyGPCP4, spell_comp_map] using solution
-  · rintro ⟨word, solution⟩
-    refine ⟨word.map finOfNearyTile, ?_⟩
-    simp only [nearyGPCP4, List.nil_append, List.append_nil]
-    rw [spell_comp_map, spell_comp_map]
-    simpa [IsGPCPSolution, List.map_map, Function.comp_def,
-      nearyTileOfFin_finOfNearyTile] using solution
+  simpa [BinaryGPCP4.Solvable, nearyGPCP4, IsGPCPSolution] using
+    gpcpSolvable_relabel_equiv (nearyUpper beta) (nearyLower beta body)
+      [] (nearyMarker beta) [] [] nearyTileEquivFin.symm
 
 /-- The five `3 × 3` integer matrices emitted by one restricted tag source. -/
 def nearyMortality35 (beta : Nat) (body : List TagLetter) : Mortality35 :=
@@ -149,28 +146,14 @@ theorem nearyMortality35_primrec (beta : Nat) :
   intro row
   apply MatrixMortality.Primrec.fin_function
   intro column
-  fin_cases label
-  · simpa [nearyMortality35, nearyMortalityFamilyInt, absorbedFamilyInt,
-      separatedGenerator] using
-      pcpMatrixInt_entry_primrec
-        (Primrec.const (nearyUpper beta (.rule .b)))
-        (nearyLower_fin_primrec beta 0) row column
-  · simpa [nearyMortality35, nearyMortalityFamilyInt, absorbedFamilyInt,
-      separatedGenerator] using
-      pcpMatrixInt_entry_primrec
-        (Primrec.const (nearyUpper beta (.rule .c)))
-        (nearyLower_fin_primrec beta 1) row column
-  · simpa [nearyMortality35, nearyMortalityFamilyInt, absorbedFamilyInt,
-      separatedGenerator] using
-      pcpMatrixInt_entry_primrec
-        (Primrec.const (nearyUpper beta (.erase .b)))
-        (nearyLower_fin_primrec beta 2) row column
-  · simpa [nearyMortality35, nearyMortalityFamilyInt, absorbedFamilyInt,
-      separatedGenerator] using
-      pcpMatrixInt_entry_primrec
-        (Primrec.const (nearyUpper beta (.erase .c)))
-        (nearyLower_fin_primrec beta 3) row column
-  · exact Primrec.const _
+  exact absorbedFamily_int_entry_primrec
+    (fun _ tile => nearyUpper beta tile)
+    (fun body tile => nearyLower beta body tile)
+    (fun _ => nearyMarker beta) (fun _ => [])
+    (fun tile => Primrec.const (nearyUpper beta tile))
+    (nearyLower_primrec beta)
+    (Primrec.const (nearyMarker beta)) (Primrec.const [])
+    (nearyGeneratorOfFin label) row column
 
 theorem nearyMortality35_mortal_iff_tagHaltsFrom (beta : Nat) (body : List TagLetter)
     (beta_large : 2 < beta) (body_long : beta - 1 ≤ body.length)

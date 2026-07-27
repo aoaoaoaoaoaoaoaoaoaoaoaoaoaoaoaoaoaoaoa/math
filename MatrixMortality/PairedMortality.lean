@@ -67,12 +67,8 @@ theorem pairedCoefficient_nil_ne_zero (β : Nat) (body : List TagLetter) :
   rw [pairedCoefficient_nil]
   exact_mod_cast ternaryCode_nearyMarker_ne_zero β
 
-/-- Rational nonempty scalar zero reachability for the compressed controls. -/
-def HasPairedZeroRat (β : Nat) (body : List TagLetter) : Prop :=
-  ∃ word : List PairedControl, word ≠ [] ∧ pairedCoefficient ℚ β body word = 0
-
 theorem paired_zero_rat_iff_terminal_match (β : Nat) (body : List TagLetter) :
-    HasPairedZeroRat β body ↔
+    WordSeries.HasNonemptyZero (pairedCoefficient ℚ β body) ↔
       ∃ word : List NearyTile,
         spell (nearyUpper β) word ++ nearyMarker β = spell (nearyLower β body) word := by
   constructor
@@ -100,7 +96,8 @@ theorem paired_zero_rat_iff_terminal_match (β : Nat) (body : List TagLetter) :
 
 theorem pairedMortalityFamily_rat_mortal_iff_paired_zero (β : Nat)
     (body : List TagLetter) :
-    IsMortal (pairedMortalityFamily ℚ β body) ↔ HasPairedZeroRat β body := by
+    IsMortal (pairedMortalityFamily ℚ β body) ↔
+      WordSeries.HasNonemptyZero (pairedCoefficient ℚ β body) := by
   let X := pairedGenerator ℚ β body
   have fixed : ∀ control, X control *ᵥ pairedAnchor ℚ = pairedAnchor ℚ :=
     pairedGenerator_mulVec_anchor ℚ β body
@@ -134,47 +131,19 @@ theorem pairedMortalityFamily_rat_mortal_iff_terminal_match (β : Nat)
 
 /-! ## Exact integer family -/
 
-theorem castVector_pairedRow : castVector (pairedRow ℤ) = pairedRow ℚ := by
-  funext i
-  fin_cases i <;> simp [castVector, pairedRow]
-
-theorem castVector_pairedColumn (β : Nat) :
-    castVector (pairedColumn ℤ β) = pairedColumn ℚ β := by
-  funext i
-  fin_cases i <;>
-    simp [castVector, pairedColumn, phaseVector, controllerVector, pairControllerEquiv,
-      sideTerminalColumn, sidePcpMatrix, sideTailBasis, nearyMarker, Matrix.vecHead,
-      Matrix.vecTail, Matrix.mulVec, Matrix.dotProduct, Fin.sum_univ_succ]
-
-theorem castMatrix_pairedGenerator (β : Nat) (body : List TagLetter)
-    (control : PairedControl) :
-    castMatrix (pairedGenerator ℤ β body control) = pairedGenerator ℚ β body control := by
-  cases control with
-  | toggle =>
-      simpa [pairedGenerator, pairedToggleMatrix] using
-        congrArg (Matrix.reindex pairControllerEquiv pairControllerEquiv)
-          (castMatrix_controllerStateMatrix PairPhase.flip)
-  | data letter =>
-      simpa [pairedGenerator, pairedDataMatrix] using
-        castMatrix_twoStateDataMatrix
-          (fun symbol => nearyUpper β (.rule symbol))
-          (fun phase symbol => nearyLower β body (phase.tile symbol))
-          (fun _ _ => PairPhase.erase)
-          letter
-
-theorem castMatrix_pairedSeparator (β : Nat) :
-    castMatrix (pairedSeparator ℤ β) = pairedSeparator ℚ β := by
-  rw [pairedSeparator, castMatrix_vecMulVec, castVector_pairedColumn,
-    castVector_pairedRow]
+theorem pairedSeparator_map {R S : Type*} [CommRing R] [CommRing S]
+    (hom : R →+* S) (β : Nat) :
+    (pairedSeparator R β).map hom = pairedSeparator S β := by
+  rw [pairedSeparator, vecMulVec_map, pairedColumn_map, pairedRow_map]
   rfl
 
-theorem castMatrix_pairedMortalityFamily (β : Nat) (body : List TagLetter)
-    (label : Option PairedControl) :
-    castMatrix (pairedMortalityFamily ℤ β body label) =
-      pairedMortalityFamily ℚ β body label := by
+theorem pairedMortalityFamily_map {R S : Type*} [CommRing R] [CommRing S]
+    (hom : R →+* S) (β : Nat) (body : List TagLetter) (label : Option PairedControl) :
+    (pairedMortalityFamily R β body label).map hom =
+      pairedMortalityFamily S β body label := by
   cases label with
-  | none => exact castMatrix_pairedSeparator β
-  | some control => exact castMatrix_pairedGenerator β body control
+  | none => exact pairedSeparator_map hom β
+  | some control => exact pairedGenerator_map hom β body control
 
 theorem pairedMortalityFamily_int_mortal_iff_rat (β : Nat) (body : List TagLetter) :
     IsMortal (pairedMortalityFamily ℤ β body) ↔
@@ -182,7 +151,7 @@ theorem pairedMortalityFamily_int_mortal_iff_rat (β : Nat) (body : List TagLett
   have family_cast :
       castMatrix ∘ pairedMortalityFamily ℤ β body = pairedMortalityFamily ℚ β body := by
     funext label
-    exact castMatrix_pairedMortalityFamily β body label
+    exact pairedMortalityFamily_map (Int.castRingHom ℚ) β body label
   rw [← family_cast]
   exact (isMortal_cast_iff (pairedMortalityFamily ℤ β body)).symm
 
@@ -205,7 +174,7 @@ theorem pairedMortalityFamily_int_mortal_iff_tagHaltsFrom (β : Nat)
 theorem pairedColumn_int_ne_zero (β : Nat) : pairedColumn ℤ β ≠ 0 := by
   intro column_zero
   apply pairedColumn_ne_zero β
-  rw [← castVector_pairedColumn, column_zero]
+  rw [← pairedColumn_map (Int.castRingHom ℚ), column_zero]
   rfl
 
 theorem pairedSeparator_int_ne_zero (β : Nat) : pairedSeparator ℤ β ≠ 0 := by
@@ -214,12 +183,13 @@ theorem pairedSeparator_int_ne_zero (β : Nat) : pairedSeparator ℤ β ≠ 0 :=
     exact outer_ne_zero (pairedColumn_ne_zero β) (pairedRow_ne_zero ℚ)
   intro separator_zero
   apply rational_nonzero
-  rw [← castMatrix_pairedSeparator, separator_zero]
+  rw [← pairedSeparator_map (Int.castRingHom ℚ), separator_zero]
   simp [castMatrix]
 
 theorem castMatrix_pairedSeparator_rank_eq_one (β : Nat) :
     (castMatrix (pairedSeparator ℤ β)).toLin'.rank = 1 := by
-  rw [castMatrix_pairedSeparator]
+  change (Matrix.toLin' ((pairedSeparator ℤ β).map (Int.castRingHom ℚ))).rank = 1
+  rw [pairedSeparator_map (Int.castRingHom ℚ)]
   apply le_antisymm (Matrix.rank_vecMulVec _ _)
   rw [Cardinal.one_le_iff_ne_zero]
   intro rank_zero

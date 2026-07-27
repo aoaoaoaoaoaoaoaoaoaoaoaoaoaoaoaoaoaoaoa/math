@@ -164,12 +164,52 @@ def pairedCoefficient (R : Type*) [CommRing R] (β : Nat) (body : List TagLetter
     (word : List PairedControl) : R :=
   pairedRow R ⬝ᵥ pairedProduct R β body word *ᵥ pairedColumn R β
 
+theorem pairedRow_map {R S : Type*} [CommRing R] [CommRing S]
+    (hom : R →+* S) :
+    hom ∘ pairedRow R = pairedRow S := by
+  funext index
+  fin_cases index <;> simp [pairedRow]
+
+theorem pairedColumn_map {R S : Type*} [CommRing R] [CommRing S]
+    (hom : R →+* S) (β : Nat) :
+    hom ∘ pairedColumn R β = pairedColumn S β := by
+  funext index
+  fin_cases index <;>
+    simp [pairedColumn, phaseVector, controllerVector, pairControllerEquiv,
+      sideTerminalColumn, sidePcpMatrix, sideTailBasis, nearyMarker, Matrix.vecHead,
+      Matrix.vecTail, Matrix.mulVec, Matrix.dotProduct, Fin.sum_univ_succ]
+  all_goals
+    congr 1
+    exact map_ofNat hom 3
+
+theorem pairedGenerator_map {R S : Type*} [CommRing R] [CommRing S]
+    (hom : R →+* S) (β : Nat) (body : List TagLetter) (control : PairedControl) :
+    (pairedGenerator R β body control).map hom = pairedGenerator S β body control := by
+  cases control with
+  | toggle =>
+      simpa [pairedGenerator, pairedToggleMatrix] using
+        congrArg (Matrix.reindex pairControllerEquiv pairControllerEquiv)
+          (controllerStateMatrix_map hom PairPhase.flip)
+  | data letter =>
+      simpa [pairedGenerator, pairedDataMatrix] using
+        twoStateDataMatrix_map hom
+          (fun symbol => nearyUpper β (.rule symbol))
+          (fun phase symbol => nearyLower β body (phase.tile symbol))
+          (fun _ _ => PairPhase.erase)
+          letter
+
 theorem pairedCoefficient_eq_sideCoefficient (R : Type*) [CommRing R] (β : Nat)
     (body : List TagLetter) (word : List PairedControl) :
     pairedCoefficient R β body word = sideCoefficient R β body (decodePairedWord word) := by
   rw [pairedCoefficient, pairedProduct_mulVec_column,
     pairedRow_dot_phaseVector]
   rfl
+
+theorem pairedCoefficient_map {R S : Type*} [CommRing R] [CommRing S]
+    (hom : R →+* S) (β : Nat) (body : List TagLetter) (word : List PairedControl) :
+    hom (pairedCoefficient R β body word) = pairedCoefficient S β body word := by
+  rw [pairedCoefficient_eq_sideCoefficient, pairedCoefficient_eq_sideCoefficient]
+  exact sideCoefficient_map hom β body (decodePairedWord word)
 
 @[simp] theorem pairedCoefficient_nil (R : Type*) [CommRing R] (β : Nat)
     (body : List TagLetter) :
@@ -207,12 +247,8 @@ theorem decodePairedWord_surjective : Function.Surjective decodePairedWord := by
                   refine ⟨.data letter :: control, ?_⟩
                   simp [decodePairedWord, suffixDecode, hstate, PairPhase.tile, decoded_eq]
 
-/-- Nonempty scalar zero reachability for the three compressed matrices. -/
-def HasPairedZero (β : Nat) (body : List TagLetter) : Prop :=
-  ∃ word : List PairedControl, word ≠ [] ∧ pairedCoefficient ℤ β body word = 0
-
 theorem paired_zero_iff_terminal_match (β : Nat) (body : List TagLetter) :
-    HasPairedZero β body ↔
+    WordSeries.HasNonemptyZero (pairedCoefficient ℤ β body) ↔
       ∃ word : List NearyTile,
         spell (nearyUpper β) word ++ nearyMarker β = spell (nearyLower β body) word := by
   constructor
@@ -241,7 +277,7 @@ theorem paired_zero_iff_terminal_match (β : Nat) (body : List TagLetter) :
 theorem paired_zero_iff_tagHaltsFrom (β : Nat) (body : List TagLetter)
     (β_large : 2 < β) (body_long : β - 1 ≤ body.length)
     (body_divisible : β - 1 ∣ body.length) :
-    HasPairedZero β body ↔
+    WordSeries.HasNonemptyZero (pairedCoefficient ℤ β body) ↔
       TagHaltsFrom β (tagOutput body) (body.drop (β - 1) ++ [.b]) := by
   rw [paired_zero_iff_terminal_match]
   exact terminal_match_iff_tagHaltsFrom β body β_large body_long body_divisible

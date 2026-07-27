@@ -12,20 +12,20 @@ namespace MatrixMortality
 
 /-- A primitive-terminal property makes mortality of the absorbed integer family equivalent to
 solvability of the corresponding PCP instance. -/
-theorem absorbedFamilyInt_mortal_iff_pcp_solvable_of_primitive_terminal
+theorem absorbedFamily_int_mortal_iff_pcp_solvable_of_primitive_terminal
     {α : Type*} (u v : α → List Bool) (uₜ vₜ : List Bool)
     (hterminal : ∀ word : List (Option α),
       IsPrimitivePCPSolution (fullSide u uₜ) (fullSide v vₜ) word →
         ∃ interior : List α, word = interior.map some ++ [none]) :
-    IsMortal (absorbedFamilyInt u v uₜ vₜ) ↔
+    IsMortal (absorbedFamily ℤ u v uₜ vₜ) ↔
       ∃ word, IsPCPSolution (fullSide u uₜ) (fullSide v vₜ) word :=
-  (absorbedFamilyInt_mortal_iff_terminal_match u v uₜ vₜ).trans
+  (absorbedFamily_int_mortal_iff_terminal_match u v uₜ vₜ).trans
     (pcp_solvable_iff_terminal_match_of_primitive_terminal u v uₜ vₜ hterminal).symm
 
 /-- The exact integer family obtained after binary marker recoding. -/
 def synchronizedFamilyInt {ι : Type*} (u v : ι → List Bool) (terminal : List Bool) :
     Option ι → Matrix (Fin 3) (Fin 3) Int :=
-  absorbedFamilyInt (binaryMarkedOrdinary u) (binaryMarkedOrdinary v)
+  absorbedFamily ℤ (binaryMarkedOrdinary u) (binaryMarkedOrdinary v)
     (binaryMarkedTerminal terminal) (binaryMarkedTerminal [])
 
 /-- Fresh-marker synchronization and fixed-length binary recoding preserve the terminal word
@@ -34,7 +34,7 @@ theorem synchronizedFamilyInt_mortal_iff_terminal_match {ι : Type*}
     (u v : ι → List Bool) (terminal : List Bool) :
     IsMortal (synchronizedFamilyInt u v terminal) ↔
       ∃ word, spell u word ++ terminal = spell v word := by
-  rw [synchronizedFamilyInt, absorbedFamilyInt_mortal_iff_terminal_match]
+  rw [synchronizedFamilyInt, absorbedFamily_int_mortal_iff_terminal_match]
   apply exists_congr
   intro word
   rw [spell_binaryMarkedOrdinary, spell_binaryMarkedOrdinary]

@@ -39,6 +39,61 @@ theorem wordProduct_append {α M : Type*} [Monoid M] (generators : α → M)
       wordProduct generators left * wordProduct generators right := by
   simp [wordProduct, List.map_append, List.prod_append]
 
+theorem wordProduct_comp {α β M : Type*} [Monoid M] (generators : β → M)
+    (relabel : α → β) (word : List α) :
+    wordProduct (generators ∘ relabel) word =
+      wordProduct generators (word.map relabel) := by
+  simp [wordProduct, List.map_map, Function.comp_def]
+
+/-! ## Word-series zero languages -/
+
+namespace WordSeries
+
+/-- Pull a word series back along a letter map. -/
+def relabel {α β R : Type*} (series : List β → R) (map : α → β) : List α → R :=
+  fun word => series (word.map map)
+
+/-- A word series vanishes on some nonempty word. -/
+def HasNonemptyZero {α R : Type*} [Zero R] (series : List α → R) : Prop :=
+  ∃ word : List α, word ≠ [] ∧ series word = 0
+
+/-- A word series vanishes on some word, possibly the empty word. -/
+def HasZero {α R : Type*} [Zero R] (series : List α → R) : Prop :=
+  ∃ word : List α, series word = 0
+
+theorem hasNonemptyZero_relabel_equiv {α β R : Type*} [Zero R]
+    (series : List β → R) (equivalence : α ≃ β) :
+    HasNonemptyZero (relabel series equivalence) ↔ HasNonemptyZero series := by
+  constructor
+  · rintro ⟨word, word_nonempty, series_zero⟩
+    exact ⟨word.map equivalence, by simpa using word_nonempty, series_zero⟩
+  · rintro ⟨word, word_nonempty, series_zero⟩
+    refine ⟨word.map equivalence.symm, by simpa using word_nonempty, ?_⟩
+    simpa [relabel, List.map_map, Function.comp_def] using series_zero
+
+theorem hasZero_relabel_equiv {α β R : Type*} [Zero R]
+    (series : List β → R) (equivalence : α ≃ β) :
+    HasZero (relabel series equivalence) ↔ HasZero series := by
+  constructor
+  · rintro ⟨word, series_zero⟩
+    exact ⟨word.map equivalence, series_zero⟩
+  · rintro ⟨word, series_zero⟩
+    refine ⟨word.map equivalence.symm, ?_⟩
+    simpa [relabel, List.map_map, Function.comp_def] using series_zero
+
+theorem hasNonemptyZero_iff_hasZero_of_nil_ne {α R : Type*} [Zero R]
+    (series : List α → R) (nil_ne : series [] ≠ 0) :
+    HasNonemptyZero series ↔ HasZero series := by
+  constructor
+  · rintro ⟨word, _, series_zero⟩
+    exact ⟨word, series_zero⟩
+  · rintro ⟨word, series_zero⟩
+    refine ⟨word, ?_, series_zero⟩
+    rintro rfl
+    exact nil_ne series_zero
+
+end WordSeries
+
 /-- Interpret `none` as one distinguished generator and `some label` as an ordinary generator. -/
 def separatedGenerator {α M : Type*} (separator : M) (generators : α → M) : Option α → M
   | none => separator
@@ -56,19 +111,17 @@ theorem wordProduct_separatedGenerator_map_some {α M : Type*} [Monoid M]
 
 /-- A labelled family is mortal when a nonempty generator word multiplies to zero. -/
 def IsMortal {α M : Type*} [MonoidWithZero M] (generators : α → M) : Prop :=
-  ∃ word : List α, word ≠ [] ∧ wordProduct generators word = 0
+  WordSeries.HasNonemptyZero (wordProduct generators)
 
 /-- Relabelling a family along an equivalence preserves mortality. -/
 theorem isMortal_comp_equiv {α β M : Type*} [MonoidWithZero M]
     (generators : β → M) (equivalence : α ≃ β) :
     IsMortal (generators ∘ equivalence) ↔ IsMortal generators := by
-  constructor
-  · rintro ⟨word, word_nonempty, product_zero⟩
-    refine ⟨word.map equivalence, by simpa using word_nonempty, ?_⟩
-    simpa [wordProduct, List.map_map, Function.comp_def] using product_zero
-  · rintro ⟨word, word_nonempty, product_zero⟩
-    refine ⟨word.map equivalence.symm, by simpa using word_nonempty, ?_⟩
-    simpa [wordProduct, List.map_map, Function.comp_def] using product_zero
+  rw [IsMortal, show wordProduct (generators ∘ equivalence) =
+      WordSeries.relabel (wordProduct generators) equivalence by
+        funext word
+        exact wordProduct_comp generators equivalence word]
+  exact WordSeries.hasNonemptyZero_relabel_equiv _ equivalence
 
 /-- An injective zero-preserving monoid map reflects and preserves mortality. -/
 theorem isMortal_map_iff {α M N : Type*} [MonoidWithZero M] [MonoidWithZero N]
@@ -137,6 +190,23 @@ theorem isMortal_smulMatrix_iff {α ι K : Type*} [Field K] [Fintype ι]
 
 /-! ## Integral matrices inside rational matrices -/
 
+/-- Entrywise scalar extension commutes with every matrix word product. -/
+theorem wordProduct_mapMatrix {α ι R S : Type*} [Semiring R] [Semiring S]
+    [Fintype ι] [DecidableEq ι] (map : R →+* S)
+    (generators : α → Square ι R) (word : List α) :
+    (wordProduct generators word).map map =
+      wordProduct (fun label => (generators label).map map) word := by
+  simpa using
+    (wordProduct_map map.mapMatrix.toMonoidHom generators word).symm
+
+/-- Entrywise scalar extension commutes with outer products. -/
+theorem vecMulVec_map {m n R S : Type*} [Semiring R] [Semiring S]
+    (map : R →+* S) (column : m → R) (row : n → R) :
+    (Matrix.vecMulVec column row).map map =
+      Matrix.vecMulVec (map ∘ column) (map ∘ row) := by
+  ext i j
+  simp [Matrix.vecMulVec]
+
 /-- Entrywise inclusion of an integer matrix into the rationals. -/
 def castMatrix {m n : Type*} (matrix : Matrix m n ℤ) : Matrix m n ℚ :=
   matrix.map (Int.castRingHom ℚ)
@@ -144,11 +214,6 @@ def castMatrix {m n : Type*} (matrix : Matrix m n ℤ) : Matrix m n ℚ :=
 /-- Entrywise inclusion of an integer vector into the rationals. -/
 def castVector {ι : Type*} (vector : ι → ℤ) : ι → ℚ :=
   (Int.castRingHom ℚ) ∘ vector
-
-theorem castMatrix_mul {m n o : Type*} [Fintype n]
-    (left : Matrix m n ℤ) (right : Matrix n o ℤ) :
-    castMatrix (left * right) = castMatrix left * castMatrix right :=
-  Matrix.map_mul
 
 theorem castMatrix_det {n : Type*} [Fintype n] [DecidableEq n]
     (matrix : Matrix n n ℤ) :
@@ -165,27 +230,11 @@ theorem castMatrix_eq_zero_iff {m n : Type*} (matrix : Matrix m n ℤ) :
   · rintro rfl
     simp [castMatrix]
 
-theorem castMatrix_mulVec {m n : Type*} [Fintype n]
-    (matrix : Matrix m n ℤ) (vector : n → ℤ) :
-    castVector (matrix *ᵥ vector) = castMatrix matrix *ᵥ castVector vector := by
-  funext i
-  exact RingHom.map_mulVec (Int.castRingHom ℚ) matrix vector i
-
-theorem castMatrix_vecMulVec {m n : Type*} (column : m → ℤ) (row : n → ℤ) :
-    castMatrix (Matrix.vecMulVec column row) =
-      Matrix.vecMulVec (castVector column) (castVector row) := by
-  ext i j
-  simp [castMatrix, castVector, Matrix.vecMulVec]
-
 theorem castMatrix_wordProduct {α ι : Type*} [Fintype ι] [DecidableEq ι]
     (generators : α → Square ι ℤ) (word : List α) :
     castMatrix (wordProduct generators word) =
       wordProduct (castMatrix ∘ generators) word := by
-  induction word with
-  | nil => simp [castMatrix]
-  | cons head tail induction =>
-      rw [wordProduct_cons, wordProduct_cons, castMatrix_mul, induction]
-      rfl
+  exact wordProduct_mapMatrix (Int.castRingHom ℚ) generators word
 
 theorem isMortal_cast_iff {α ι : Type*} [Fintype ι] [DecidableEq ι]
     (generators : α → Square ι ℤ) :

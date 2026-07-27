@@ -125,34 +125,42 @@ theorem controllerStateMatrix_mulVec_controllerVector
     controllerMatrix_mulVec_controllerVector R
       (fun _ : Unit => []) (fun _ _ => []) (fun source _ => next source) () state vector
 
-theorem castVector_controllerVector {State : Type*} [DecidableEq State]
-    (state : State) (vector : Fin 3 → ℤ) :
-    castVector (controllerVector ℤ state vector) =
-      controllerVector ℚ state (castVector vector) := by
+theorem controllerVector_map {R S State : Type*} [CommRing R] [CommRing S]
+    [DecidableEq State] (hom : R →+* S) (state : State) (vector : Fin 3 → R) :
+    hom ∘ controllerVector R state vector =
+      controllerVector S state (hom ∘ vector) := by
   funext index
   rcases index with index | candidate
-  · fin_cases index <;> simp [castVector, controllerVector]
-  · simp [castVector, controllerVector]
+  · fin_cases index <;> simp [controllerVector]
+  · by_cases active : candidate = state <;> simp [controllerVector, active]
 
-theorem castMatrix_controllerMatrix {State Symbol : Type*} [DecidableEq State]
+theorem controllerMatrix_map {R S State Symbol : Type*} [CommRing R] [CommRing S]
+    [DecidableEq State] (hom : R →+* S)
     (upper : Symbol → List Bool) (lower : State → Symbol → List Bool)
     (δ : ControllerTransition State Symbol) (symbol : Symbol) :
-    castMatrix (controllerMatrix ℤ upper lower δ symbol) =
-      controllerMatrix ℚ upper lower δ symbol := by
+    (controllerMatrix R upper lower δ symbol).map hom =
+      controllerMatrix S upper lower δ symbol := by
   ext target source
   rcases target with target | target <;> rcases source with source | source
   · fin_cases target <;> fin_cases source <;>
-      simp [castMatrix, controllerMatrix, Matrix.vecHead, Matrix.vecTail]
+      simp [controllerMatrix, Matrix.vecHead, Matrix.vecTail]
+    all_goals
+      congr 1
+      exact map_ofNat hom 3
   · fin_cases target <;>
-      simp [castMatrix, controllerMatrix, Matrix.vecHead, Matrix.vecTail]
-  · simp [castMatrix, controllerMatrix]
-  · simp [castMatrix, controllerMatrix]
+      simp [controllerMatrix, Matrix.vecHead, Matrix.vecTail]
+  · simp [controllerMatrix]
+  · by_cases routed : δ source symbol = target
+    · simp [controllerMatrix, routed]
+      congr 1
+      exact map_ofNat hom 3
+    · simp [controllerMatrix, routed]
 
-theorem castMatrix_controllerStateMatrix {State : Type*} [DecidableEq State]
-    (next : State → State) :
-    castMatrix (controllerStateMatrix ℤ next) = controllerStateMatrix ℚ next := by
+theorem controllerStateMatrix_map {R S State : Type*} [CommRing R] [CommRing S]
+    [DecidableEq State] (hom : R →+* S) (next : State → State) :
+    (controllerStateMatrix R next).map hom = controllerStateMatrix S next := by
   simpa [controllerStateMatrix] using
-    castMatrix_controllerMatrix
+    controllerMatrix_map hom
       (fun _ : Unit => []) (fun _ _ => []) (fun state _ => next state) ()
 
 /-- Decode from the right boundary, retaining the state seen by a further symbol on the left. -/

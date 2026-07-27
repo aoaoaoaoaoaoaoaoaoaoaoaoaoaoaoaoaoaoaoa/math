@@ -448,45 +448,49 @@ theorem twoStateMortalityFamily_mortal_iff_nonempty_zero {α : Type*}
 
 /-! ## Exact integer family -/
 
-theorem castVector_phaseVector (phase : PairPhase) (vector : Fin 3 → ℤ) :
-    castVector (phaseVector ℤ phase vector) = phaseVector ℚ phase (castVector vector) := by
+theorem phaseVector_map {R S : Type*} [CommRing R] [CommRing S]
+    (hom : R →+* S) (phase : PairPhase) (vector : Fin 3 → R) :
+    hom ∘ phaseVector R phase vector = phaseVector S phase (hom ∘ vector) := by
   funext i
   cases phase <;> fin_cases i <;>
-    simp [castVector, phaseVector, controllerVector, pairControllerEquiv]
+    simp [phaseVector, controllerVector, pairControllerEquiv]
 
-theorem castVector_twoStateRow :
-    castVector (twoStateRow ℤ) = twoStateRow ℚ := by
+theorem twoStateRow_map {R S : Type*} [CommRing R] [CommRing S]
+    (hom : R →+* S) :
+    hom ∘ twoStateRow R = twoStateRow S := by
   funext i
-  fin_cases i <;> simp [castVector, twoStateRow]
+  fin_cases i <;> simp [twoStateRow]
 
-theorem castVector_twoStateColumn (terminal : PairPhase) (column : Fin 3 → ℤ) :
-    castVector (twoStateColumn ℤ terminal column) =
-      twoStateColumn ℚ terminal (castVector column) := by
-  exact castVector_phaseVector terminal column
+theorem twoStateColumn_map {R S : Type*} [CommRing R] [CommRing S]
+    (hom : R →+* S) (terminal : PairPhase) (column : Fin 3 → R) :
+    hom ∘ twoStateColumn R terminal column =
+      twoStateColumn S terminal (hom ∘ column) :=
+  phaseVector_map hom terminal column
 
-theorem castMatrix_twoStateDataMatrix {α : Type*}
+theorem twoStateDataMatrix_map {R S α : Type*} [CommRing R] [CommRing S]
+    (hom : R →+* S)
     (upper : α → List Bool) (lower : PairPhase → α → List Bool)
     (δ : ControllerTransition PairPhase α) (letter : α) :
-    castMatrix (twoStateDataMatrix ℤ upper lower δ letter) =
-      twoStateDataMatrix ℚ upper lower δ letter := by
-  ext i j
-  fin_cases i <;> fin_cases j <;>
-    simp [castMatrix, twoStateDataMatrix, controllerMatrix, pairControllerEquiv,
-      Matrix.vecHead, Matrix.vecTail]
+    (twoStateDataMatrix R upper lower δ letter).map hom =
+      twoStateDataMatrix S upper lower δ letter := by
+  simpa [twoStateDataMatrix] using congrArg
+    (Matrix.reindex pairControllerEquiv pairControllerEquiv)
+    (controllerMatrix_map hom upper lower δ letter)
 
-theorem castMatrix_twoStateMortalityFamily {α : Type*}
+theorem twoStateMortalityFamily_map {R S α : Type*} [CommRing R] [CommRing S]
+    (hom : R →+* S)
     (upper : α → List Bool) (lower : PairPhase → α → List Bool)
-    (δ : ControllerTransition PairPhase α) (terminal : PairPhase) (column : Fin 3 → ℤ)
+    (δ : ControllerTransition PairPhase α) (terminal : PairPhase) (column : Fin 3 → R)
     (label : Option α) :
-    castMatrix (twoStateMortalityFamily ℤ upper lower δ terminal column label) =
-      twoStateMortalityFamily ℚ upper lower δ terminal (castVector column) label := by
+    (twoStateMortalityFamily R upper lower δ terminal column label).map hom =
+      twoStateMortalityFamily S upper lower δ terminal (hom ∘ column) label := by
   cases label with
   | none =>
-      rw [twoStateMortalityFamily, separatedGenerator, castMatrix_vecMulVec,
-        castVector_twoStateColumn, castVector_twoStateRow]
+      rw [twoStateMortalityFamily, separatedGenerator, vecMulVec_map,
+        twoStateColumn_map, twoStateRow_map]
       rfl
   | some letter =>
-      exact castMatrix_twoStateDataMatrix upper lower δ letter
+      exact twoStateDataMatrix_map hom upper lower δ letter
 
 /-- The rational compiler theorem transfers back to the displayed integer generators. -/
 theorem twoStateMortalityFamily_int_mortal_iff_nonempty_zero {α : Type*}
@@ -501,7 +505,8 @@ theorem twoStateMortalityFamily_int_mortal_iff_nonempty_zero {α : Type*}
       castMatrix ∘ twoStateMortalityFamily ℤ upper lower δ terminal column =
         twoStateMortalityFamily ℚ upper lower δ terminal (castVector column) := by
     funext label
-    exact castMatrix_twoStateMortalityFamily upper lower δ terminal column label
+    exact twoStateMortalityFamily_map (Int.castRingHom ℚ)
+      upper lower δ terminal column label
   rw [← isMortal_cast_iff (twoStateMortalityFamily ℤ upper lower δ terminal column),
     family_cast]
   exact twoStateMortalityFamily_mortal_iff_nonempty_zero upper lower δ terminal

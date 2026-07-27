@@ -348,6 +348,14 @@ theorem scheduledCoefficient_eq_sideCoefficient (R : Type*) [CommRing R] (β : N
     scheduledRow_wordProduct, scheduledRow_dot_boundaryColumn]
   rfl
 
+theorem scheduledCoefficient_map {R S : Type*} [CommRing R] [CommRing S]
+    (hom : R →+* S) (β : Nat) (body : List TagLetter)
+    (β_pos : 0 < β) (word : List Bool) :
+    hom (scheduledCoefficient R β body β_pos word) =
+      scheduledCoefficient S β body β_pos word := by
+  rw [scheduledCoefficient_eq_sideCoefficient, scheduledCoefficient_eq_sideCoefficient]
+  exact sideCoefficient_map hom β body (decodeScheduled β_pos word)
+
 @[simp] theorem scheduledCoefficient_nil (R : Type*) [CommRing R] (β : Nat)
     (body : List TagLetter) (β_pos : 0 < β) :
     scheduledCoefficient R β body β_pos [] = (ternaryCode (nearyMarker β) : R) := by
@@ -427,13 +435,9 @@ theorem scheduledCoefficient_zero_length_dvd (β : Nat) (body : List TagLetter)
   refine ⟨history.length, ?_⟩
   rw [← decodeScheduled_length β_pos word, decoded, tileHistory_length, Nat.mul_comm]
 
-/-- Nonempty scalar zero reachability for the scheduled binary compiler. -/
-def HasScheduledBinaryZero (β : Nat) (body : List TagLetter) (β_pos : 0 < β) : Prop :=
-  ∃ word : List Bool, word ≠ [] ∧ scheduledCoefficient ℤ β body β_pos word = 0
-
 theorem scheduledBinary_zero_iff_terminal_match (β : Nat) (body : List TagLetter)
     (β_pos : 0 < β) :
-    HasScheduledBinaryZero β body β_pos ↔
+    WordSeries.HasNonemptyZero (scheduledCoefficient ℤ β body β_pos) ↔
       ∃ word : List NearyTile,
         spell (nearyUpper β) word ++ nearyMarker β =
           spell (nearyLower β body) word := by
@@ -468,7 +472,7 @@ theorem scheduledBinary_zero_iff_terminal_match (β : Nat) (body : List TagLette
 theorem scheduledBinary_zero_iff_tagHaltsFrom (β : Nat) (body : List TagLetter)
     (β_large : 2 < β) (body_long : β - 1 ≤ body.length)
     (body_divisible : β - 1 ∣ body.length) :
-    HasScheduledBinaryZero β body (by omega) ↔
+    WordSeries.HasNonemptyZero (scheduledCoefficient ℤ β body (by omega)) ↔
       TagHaltsFrom β (tagOutput body) (body.drop (β - 1) ++ [.b]) := by
   rw [scheduledBinary_zero_iff_terminal_match]
   exact terminal_match_iff_tagHaltsFrom β body β_large body_long body_divisible

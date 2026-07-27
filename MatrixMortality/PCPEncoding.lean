@@ -19,6 +19,14 @@ def pcpMatrix (R : Type*) [CommRing R] (x y : List Bool) : Matrix (Fin 3) (Fin 3
      0, (3 : R) ^ y.length, (3 : R) ^ x.length - (3 : R) ^ y.length;
      0, 0, (3 : R) ^ x.length]
 
+theorem pcpMatrix_map {R S : Type*} [CommRing R] [CommRing S]
+    (hom : R →+* S) (x y : List Bool) :
+    (pcpMatrix R x y).map hom = pcpMatrix S x y := by
+  have map_three : hom (3 : R) = (3 : S) := map_ofNat hom 3
+  ext i j
+  fin_cases i <;> fin_cases j <;>
+    simp [pcpMatrix, Matrix.vecHead, Matrix.vecTail, map_three]
+
 /-- Every entry of the integral PCP matrix is primitive recursive in two primitive-recursive word
 families. -/
 theorem pcpMatrixInt_entry_primrec {α : Type*} [Primcodable α] {x y : α → List Bool}

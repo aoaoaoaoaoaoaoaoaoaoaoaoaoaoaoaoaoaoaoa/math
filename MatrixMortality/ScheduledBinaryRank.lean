@@ -202,11 +202,7 @@ theorem scheduledWidthThreeHankelRat_eq_castMatrix (body : List TagLetter) :
   ext i j
   simp only [scheduledWidthThreeHankelRat, finiteHankel, castMatrix, Matrix.map_apply,
     scheduledWidthThreeHankel]
-  rw [scheduledCoefficient_eq_sideCoefficient ℚ,
-    sideCoefficient_eq_ternaryCode_sub ℚ]
-  rw [scheduledCoefficient_eq_sideCoefficient ℤ,
-    sideCoefficient_eq_ternaryCode_sub ℤ]
-  norm_num
+  exact (scheduledCoefficient_map (Int.castRingHom ℚ) 3 body (by decide) _).symm
 
 theorem scheduledWidthThreeHankelRat_det_ne_zero (body : List TagLetter)
     (body_nonempty : body ≠ []) :

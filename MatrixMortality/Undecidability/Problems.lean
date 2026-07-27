@@ -124,22 +124,16 @@ def coefficient {d k : Nat} (problem : ScalarZeroProblem d k) (word : List (Fin 
 
 /-- Nonempty-word scalar zero reachability. -/
 def HasZero {d k : Nat} (problem : ScalarZeroProblem d k) : Prop :=
-  ∃ word : List (Fin k), word ≠ [] ∧ problem.coefficient word = 0
+  WordSeries.HasNonemptyZero problem.coefficient
 
 /-- Scalar zero reachability under the free-monoid convention. -/
 def HasZeroStar {d k : Nat} (problem : ScalarZeroProblem d k) : Prop :=
-  ∃ word : List (Fin k), problem.coefficient word = 0
+  WordSeries.HasZero problem.coefficient
 
 theorem hasZero_iff_hasZeroStar_of_empty_ne {d k : Nat} (problem : ScalarZeroProblem d k)
     (empty_ne : problem.coefficient [] ≠ 0) :
-    problem.HasZero ↔ problem.HasZeroStar := by
-  constructor
-  · rintro ⟨word, _, coefficient_zero⟩
-    exact ⟨word, coefficient_zero⟩
-  · rintro ⟨word, coefficient_zero⟩
-    refine ⟨word, ?_, coefficient_zero⟩
-    intro word_empty
-    exact empty_ne (by simpa [word_empty] using coefficient_zero)
+    problem.HasZero ↔ problem.HasZeroStar :=
+  WordSeries.hasNonemptyZero_iff_hasZero_of_nil_ne problem.coefficient empty_ne
 
 end ScalarZeroProblem
 

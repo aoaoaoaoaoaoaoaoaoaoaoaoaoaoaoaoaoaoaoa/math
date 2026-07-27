@@ -46,7 +46,8 @@ theorem nearyScalarZero62_coefficient (β : Nat) (body : List TagLetter)
 
 theorem nearyScalarZero62_hasZero_iff_pairedBinaryZero (β : Nat)
     (body : List TagLetter) :
-    (nearyScalarZero62 β body).HasZero ↔ HasPairedBinaryZero β body := by
+    (nearyScalarZero62 β body).HasZero ↔
+      WordSeries.HasNonemptyZero (pairedBinaryCoefficient ℤ β body) := by
   constructor
   · rintro ⟨word, word_nonempty, coefficient_zero⟩
     refine ⟨(word.map finTwoEquiv).reverse, by simpa using word_nonempty, ?_⟩

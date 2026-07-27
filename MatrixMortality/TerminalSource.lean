@@ -1,4 +1,5 @@
 import MatrixMortality.WordMorphism
+import Mathlib.Logic.Equiv.Defs
 
 /-!
 # The primitive-to-terminal PCP bridge
@@ -30,6 +31,38 @@ def IsGPCPSolution {α β : Type*} (u v : α → List β)
 def IsGPCPPlusSolution {α β : Type*} (u v : α → List β)
     (leftU rightU leftV rightV : List β) (word : List α) : Prop :=
   word ≠ [] ∧ IsGPCPSolution u v leftU rightU leftV rightV word
+
+theorem gpcpSolvable_relabel_equiv {α β γ : Type*}
+    (u v : β → List γ) (leftU rightU leftV rightV : List γ)
+    (equivalence : Equiv α β) :
+    (∃ word : List α,
+      IsGPCPSolution (u ∘ equivalence) (v ∘ equivalence)
+        leftU rightU leftV rightV word) ↔
+      ∃ word : List β, IsGPCPSolution u v leftU rightU leftV rightV word := by
+  constructor
+  · rintro ⟨word, solution⟩
+    refine ⟨word.map equivalence, ?_⟩
+    simpa [IsGPCPSolution, spell_comp_map] using solution
+  · rintro ⟨word, solution⟩
+    refine ⟨word.map equivalence.symm, ?_⟩
+    rw [IsGPCPSolution, spell_comp_map, spell_comp_map]
+    simpa [IsGPCPSolution, List.map_map, Function.comp_def] using solution
+
+theorem gpcpPlusSolvable_relabel_equiv {α β γ : Type*}
+    (u v : β → List γ) (leftU rightU leftV rightV : List γ)
+    (equivalence : Equiv α β) :
+    (∃ word : List α,
+      IsGPCPPlusSolution (u ∘ equivalence) (v ∘ equivalence)
+        leftU rightU leftV rightV word) ↔
+      ∃ word : List β, IsGPCPPlusSolution u v leftU rightU leftV rightV word := by
+  constructor
+  · rintro ⟨word, word_nonempty, solution⟩
+    exact ⟨word.map equivalence, by simpa using word_nonempty,
+      by simpa [IsGPCPSolution, spell_comp_map] using solution⟩
+  · rintro ⟨word, word_nonempty, solution⟩
+    refine ⟨word.map equivalence.symm, by simpa using word_nonempty, ?_⟩
+    rw [IsGPCPSolution, spell_comp_map, spell_comp_map]
+    simpa [IsGPCPSolution, List.map_map, Function.comp_def] using solution
 
 /-- Every solvable PCP instance has a primitive solution. -/
 theorem exists_primitive_of_solution {α β : Type*} (u v : α → List β)

@@ -82,26 +82,6 @@ theorem repeatWord_succ_left {α : Type*} (count : Nat) (word : List α) :
   rw [List.replicate_succ]
   rfl
 
-/-- Pad a prefix on the right to an exact target length. -/
-def padRight {α : Type*} (width : Nat) (filler : α) (stem : List α) : List α :=
-  stem ++ List.replicate (width - stem.length) filler
-
-theorem padRight_length {α : Type*} {width : Nat} (filler : α) (stem : List α)
-    (stem_fits : stem.length ≤ width) :
-    (padRight width filler stem).length = width := by
-  simp [padRight]
-  omega
-
-/-- Place padding between a fixed prefix and suffix. -/
-def padBetween {α : Type*} (width : Nat) (filler : α) (stem ending : List α) : List α :=
-  stem ++ List.replicate (width - stem.length - ending.length) filler ++ ending
-
-theorem padBetween_length {α : Type*} {width : Nat} (filler : α)
-    (stem ending : List α) (fixed_fits : stem.length + ending.length ≤ width) :
-    (padBetween width filler stem ending).length = width := by
-  simp [padBetween]
-  omega
-
 /-- Table 2 deletion width. -/
 def deletionWidth (period : Nat) : Nat := 10 * period
 
@@ -399,30 +379,10 @@ theorem tableTrack_val_primrec₂ {period : Nat} (system : CyclicTag period)
   have inputEnding :
       Primrec fun _ : List Bool => repeatWord period epsilonPrime :=
     Primrec.const _
-  have inputPaddingCount :
-      Primrec fun input : List Bool =>
-        trackWidth system input -
-          (List.replicate (deletionWidth period - 2) TagLetter.b ++
-            encodePrimes input).length -
-          (repeatWord period epsilonPrime).length :=
-    Primrec.nat_sub.comp
-      (Primrec.nat_sub.comp widthRec (Primrec.list_length.comp inputStem))
-      (Primrec.const (repeatWord period epsilonPrime).length)
-  have inputPadding :
-      Primrec fun input : List Bool =>
-        List.replicate
-          (trackWidth system input -
-            (List.replicate (deletionWidth period - 2) TagLetter.b ++
-              encodePrimes input).length -
-            (repeatWord period epsilonPrime).length)
-          TagLetter.c :=
-    (MatrixMortality.Primrec.list_replicate).comp inputPaddingCount
-      (Primrec.const TagLetter.c)
   have inputTrackRec :
       Primrec fun input : List Bool => (inputTrack system input period_pos).val :=
-    (Primrec.list_append.comp inputStem
-      (Primrec.list_append.comp inputPadding inputEnding)).of_eq fun input => by
-        simp only [inputTrack, padBetween, List.append_assoc]
+    (MatrixMortality.Primrec.padBetween
+      widthRec (Primrec.const TagLetter.c) inputStem inputEnding).of_eq fun _ => rfl
   have widthPair :
       Primrec fun pair : List Bool × Fin (deletionWidth period) =>
         trackWidth system pair.1 :=
@@ -435,33 +395,18 @@ theorem tableTrack_val_primrec₂ {period : Nat} (system : CyclicTag period)
       Primrec fun pair : List Bool × Fin (deletionWidth period) =>
         epsilonStemAt pair.2 :=
     (Primrec.dom_fintype epsilonStemAt).comp Primrec.snd
-  have padRightRec
-      (stem : (List Bool × Fin (deletionWidth period)) → List TagLetter)
-      (stemRec : Primrec stem) :
-      Primrec fun pair =>
-        padRight (trackWidth system pair.1) TagLetter.c (stem pair) := by
-    have paddingCount :
-        Primrec fun pair =>
-          trackWidth system pair.1 - (stem pair).length :=
-      Primrec.nat_sub.comp widthPair (Primrec.list_length.comp stemRec)
-    have padding :
-        Primrec fun pair =>
-          List.replicate (trackWidth system pair.1 - (stem pair).length) TagLetter.c :=
-      (MatrixMortality.Primrec.list_replicate).comp paddingCount
-        (Primrec.const TagLetter.c)
-    exact
-      (Primrec.list_append.comp stemRec padding).of_eq fun pair => by
-        rfl
   have appendantTrackRec :
       Primrec fun pair : List Bool × Fin (deletionWidth period) =>
         padRight (trackWidth system pair.1) TagLetter.c
           (appendantStemAt system pair.2) :=
-    padRightRec _ appendantStemRec
+    MatrixMortality.Primrec.padRight
+      widthPair (Primrec.const TagLetter.c) appendantStemRec
   have epsilonTrackRec :
       Primrec fun pair : List Bool × Fin (deletionWidth period) =>
         padRight (trackWidth system pair.1) TagLetter.c
           (epsilonStemAt pair.2) :=
-    padRightRec _ epsilonStemRec
+    MatrixMortality.Primrec.padRight
+      widthPair (Primrec.const TagLetter.c) epsilonStemRec
   have constantTrackRec (letter : TagLetter) :
       Primrec fun pair : List Bool × Fin (deletionWidth period) =>
         List.replicate (trackWidth system pair.1) letter :=
@@ -540,101 +485,18 @@ def wholeAppendant {period : Nat} (system : CyclicTag period) (input : List Bool
   weave (deletionWidth period) (trackWidth system input) (deletionWidth_pos period_pos)
     fun phase column => (tableTrack system input haltPhase period_pos phase).get column
 
-private def rangeAppendant {period : Nat} (system : CyclicTag period) (input : List Bool)
-    (haltPhase : Fin period) (period_pos : 0 < period) : List TagLetter :=
-  (List.range (deletionWidth period * trackWidth system input)).map fun index =>
-    (List.ofFn fun phase : Fin (deletionWidth period) =>
-      (tableTrack system input haltPhase period_pos phase).val.getI
-        (index / deletionWidth period)).getI
-      (index % deletionWidth period)
-
-private theorem rangeAppendant_eq_wholeAppendant {period : Nat} (system : CyclicTag period)
-    (input : List Bool) (haltPhase : Fin period) (period_pos : 0 < period) :
-    rangeAppendant system input haltPhase period_pos =
-      wholeAppendant system input haltPhase period_pos := by
-  apply List.ext_getElem
-  · simp [rangeAppendant, wholeAppendant]
-  · intro index range_bound weave_bound
-    have range_bound' :
-        index < deletionWidth period * trackWidth system input := by
-      simpa [rangeAppendant] using range_bound
-    have period_large : 0 < deletionWidth period :=
-      deletionWidth_pos period_pos
-    have phase_bound : index % deletionWidth period < deletionWidth period :=
-      Nat.mod_lt _ period_large
-    have column_bound :
-        index / deletionWidth period < trackWidth system input := by
-      rw [Nat.div_lt_iff_lt_mul period_large]
-      simpa [Nat.mul_comm] using range_bound'
-    simp only [rangeAppendant, wholeAppendant, weave, List.getElem_map,
-      List.getElem_range]
-    have phaseListBound :
-        index % deletionWidth period <
-          (List.ofFn fun phase : Fin (deletionWidth period) =>
-            (tableTrack system input haltPhase period_pos phase).val.getI
-              (index / deletionWidth period)).length := by
-      simpa using phase_bound
-    rw [List.getI_eq_getElem _ phaseListBound, List.getElem_ofFn]
-    have trackListBound :
-        index / deletionWidth period <
-          (tableTrack system input haltPhase period_pos
-            ⟨index % deletionWidth period, phase_bound⟩).val.length := by
-      simpa using column_bound
-    rw [List.getI_eq_getElem _ trackListBound, List.getElem_ofFn]
-    rfl
-
 /-- The woven Table 2 appendant is primitive recursive in the variable input. -/
 theorem wholeAppendant_primrec {period : Nat} (system : CyclicTag period)
     (haltPhase : Fin period) (period_pos : 0 < period) :
     Primrec fun input => wholeAppendant system input haltPhase period_pos := by
   have widthRec : Primrec fun input : List Bool => trackWidth system input :=
     trackWidth_primrec system
-  have totalRec :
-      Primrec fun input : List Bool =>
-        deletionWidth period * trackWidth system input :=
-    Primrec.nat_mul.comp (Primrec.const (deletionWidth period)) widthRec
-  have rangeRec :
-      Primrec fun input : List Bool =>
-        List.range (deletionWidth period * trackWidth system input) :=
-    Primrec.list_range.comp totalRec
-  have trackRec (phase : Fin (deletionWidth period)) :
-      Primrec fun input : List Bool =>
-        (tableTrack system input haltPhase period_pos phase).val :=
-    (tableTrack_val_primrec₂ system haltPhase period_pos).comp
-      Primrec.id (Primrec.const phase)
-  have columnRec :
-      Primrec fun pair : List Bool × Nat =>
-        pair.2 / deletionWidth period :=
-    Primrec.nat_div.comp Primrec.snd
-      (Primrec.const (deletionWidth period))
-  have phaseValueRec (phase : Fin (deletionWidth period)) :
-      Primrec fun pair : List Bool × Nat =>
-        (tableTrack system pair.1 haltPhase period_pos phase).val.getI
-          (pair.2 / deletionWidth period) :=
-    Primrec.list_getI.comp
-      ((trackRec phase).comp Primrec.fst) columnRec
-  have columnValuesRec :
-      Primrec fun pair : List Bool × Nat =>
-        List.ofFn fun phase : Fin (deletionWidth period) =>
-          (tableTrack system pair.1 haltPhase period_pos phase).val.getI
-            (pair.2 / deletionWidth period) :=
-    Primrec.list_ofFn phaseValueRec
-  have phaseRec :
-      Primrec fun pair : List Bool × Nat =>
-        pair.2 % deletionWidth period :=
-    Primrec.nat_mod.comp Primrec.snd
-      (Primrec.const (deletionWidth period))
-  have gridValueRec :
-      Primrec₂ fun input index =>
-        (List.ofFn fun phase : Fin (deletionWidth period) =>
-          (tableTrack system input haltPhase period_pos phase).val.getI
-            (index / deletionWidth period)).getI
-          (index % deletionWidth period) :=
-    (Primrec.list_getI.comp columnValuesRec phaseRec).to₂
   exact
-    (Primrec.list_map rangeRec gridValueRec).of_eq fun input =>
-      by simpa [rangeAppendant] using
-        rangeAppendant_eq_wholeAppendant system input haltPhase period_pos
+    (MatrixMortality.Primrec.weaveTracks widthRec
+      (tableTrack_val_primrec₂ system haltPhase period_pos)).of_eq fun input => by
+        rw [weaveTracks_eq_weave (deletionWidth_pos period_pos)
+          (fun phase => tableTrack system input haltPhase period_pos phase)]
+        rfl
 
 /-- Restricted binary-tag output function emitted by the compiler. -/
 def compiledOutput {period : Nat} (system : CyclicTag period) (input : List Bool)

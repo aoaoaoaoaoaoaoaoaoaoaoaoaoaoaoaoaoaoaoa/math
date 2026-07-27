@@ -215,12 +215,8 @@ theorem decodePairedBinary_surjective : Function.Surjective decodePairedBinary :
           simp [pairedBinaryCode, decodePairedBinary, pairedBinaryTile, pairedBinaryPhase,
             pairedBinaryLetter, PairPhase.tile, decoded]
 
-/-- Nonempty scalar zero reachability for the binary six-state compiler. -/
-def HasPairedBinaryZero (β : Nat) (body : List TagLetter) : Prop :=
-  ∃ word : List Bool, word ≠ [] ∧ pairedBinaryCoefficient ℤ β body word = 0
-
 theorem pairedBinary_zero_iff_terminal_match (β : Nat) (body : List TagLetter) :
-    HasPairedBinaryZero β body ↔
+    WordSeries.HasNonemptyZero (pairedBinaryCoefficient ℤ β body) ↔
       ∃ word : List NearyTile,
         spell (nearyUpper β) word ++ nearyMarker β = spell (nearyLower β body) word := by
   constructor
@@ -249,7 +245,7 @@ theorem pairedBinary_zero_iff_terminal_match (β : Nat) (body : List TagLetter) 
 theorem pairedBinary_zero_iff_tagHaltsFrom (β : Nat) (body : List TagLetter)
     (β_large : 2 < β) (body_long : β - 1 ≤ body.length)
     (body_divisible : β - 1 ∣ body.length) :
-    HasPairedBinaryZero β body ↔
+    WordSeries.HasNonemptyZero (pairedBinaryCoefficient ℤ β body) ↔
       TagHaltsFrom β (tagOutput body) (body.drop (β - 1) ++ [.b]) := by
   rw [pairedBinary_zero_iff_terminal_match]
   exact terminal_match_iff_tagHaltsFrom β body β_large body_long body_divisible

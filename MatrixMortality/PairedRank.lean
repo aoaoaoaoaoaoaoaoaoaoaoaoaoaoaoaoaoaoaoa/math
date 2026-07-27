@@ -213,11 +213,7 @@ theorem pairedRankHankelRat_eq_castMatrix (β : Nat) (body : List TagLetter) :
   ext i j
   simp only [pairedRankHankelRat, finiteHankel, castMatrix, Matrix.map_apply,
     pairedRankHankel]
-  rw [pairedCoefficient_eq_sideCoefficient ℚ,
-    sideCoefficient_eq_ternaryCode_sub ℚ]
-  rw [pairedCoefficient_eq_sideCoefficient ℤ,
-    sideCoefficient_eq_ternaryCode_sub ℤ]
-  norm_num
+  exact (pairedCoefficient_map (Int.castRingHom ℚ) β body _).symm
 
 theorem pairedRankHankelRat_det_ne_zero (β : Nat) (body : List TagLetter)
     (three_le : 3 ≤ β) :

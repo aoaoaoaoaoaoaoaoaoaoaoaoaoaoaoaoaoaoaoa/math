@@ -20,6 +20,16 @@ def sidePcpMatrix (R : Type*) [CommRing R] (x y : List Bool) : Matrix (Fin 3) (F
      0, (3 : R) ^ y.length, 0;
      0, 0, (3 : R) ^ x.length]
 
+theorem sidePcpMatrix_map {R S : Type*} [CommRing R] [CommRing S]
+    (hom : R →+* S) (x y : List Bool) :
+    (sidePcpMatrix R x y).map hom = sidePcpMatrix S x y := by
+  ext i j
+  fin_cases i <;> fin_cases j <;>
+    simp [sidePcpMatrix, Matrix.vecHead, Matrix.vecTail]
+  all_goals
+    congr 1
+    exact map_ofNat hom 3
+
 /-- The unimodular change of basis separating the two word channels. -/
 def sideChange (R : Type*) [CommRing R] : Matrix (Fin 3) (Fin 3) R :=
   !![(1 : R), 0, 0;
@@ -72,9 +82,23 @@ theorem sidePcpMatrix_append (R : Type*) [CommRing R] (x y x' y' : List Bool) :
 /-- The transformed right selector `P⁻¹e₃`. -/
 def sideTailBasis (R : Type*) [CommRing R] : Fin 3 → R := ![0, -1, 1]
 
+theorem sideTailBasis_map {R S : Type*} [CommRing R] [CommRing S]
+    (hom : R →+* S) :
+    hom ∘ sideTailBasis R = sideTailBasis S := by
+  funext i
+  fin_cases i <;> simp [sideTailBasis]
+
 /-- The transformed fixed-boundary column. -/
 def sideTerminalColumn (R : Type*) [CommRing R] (marker : List Bool) : Fin 3 → R :=
   sidePcpMatrix R marker [] *ᵥ sideTailBasis R
+
+theorem sideTerminalColumn_map {R S : Type*} [CommRing R] [CommRing S]
+    (hom : R →+* S) (marker : List Bool) :
+    hom ∘ sideTerminalColumn R marker = sideTerminalColumn S marker := by
+  funext i
+  change hom ((sidePcpMatrix R marker [] *ᵥ sideTailBasis R) i) = _
+  rw [RingHom.map_mulVec, sidePcpMatrix_map, sideTailBasis_map]
+  rfl
 
 @[simp] theorem sideTerminalColumn_zero (R : Type*) [CommRing R] (marker : List Bool) :
     sideTerminalColumn R marker 0 = (ternaryCode marker : R) := by
@@ -86,6 +110,14 @@ def sideTileProduct (R : Type*) [CommRing R] (β : Nat) (body : List TagLetter)
     (word : List NearyTile) : Matrix (Fin 3) (Fin 3) R :=
   wordProduct
     (fun tile => sidePcpMatrix R (nearyUpper β tile) (nearyLower β body tile)) word
+
+theorem sideTileProduct_map {R S : Type*} [CommRing R] [CommRing S]
+    (hom : R →+* S) (β : Nat) (body : List TagLetter) (word : List NearyTile) :
+    (sideTileProduct R β body word).map hom = sideTileProduct S β body word := by
+  rw [sideTileProduct, wordProduct_mapMatrix]
+  congr 1
+  funext tile
+  exact sidePcpMatrix_map hom (nearyUpper β tile) (nearyLower β body tile)
 
 theorem sideTileProduct_append (R : Type*) [CommRing R] (β : Nat)
     (body : List TagLetter) (left right : List NearyTile) :
@@ -127,6 +159,14 @@ theorem rule_erase_agree_on_upperSide (R : Type*) [CommRing R] (β : Nat)
 def sideCoefficient (R : Type*) [CommRing R] (β : Nat) (body : List TagLetter)
     (word : List NearyTile) : R :=
   (sideTileProduct R β body word *ᵥ sideTerminalColumn R (nearyMarker β)) 0
+
+theorem sideCoefficient_map {R S : Type*} [CommRing R] [CommRing S]
+    (hom : R →+* S) (β : Nat) (body : List TagLetter) (word : List NearyTile) :
+    hom (sideCoefficient R β body word) = sideCoefficient S β body word := by
+  change hom ((sideTileProduct R β body word *ᵥ
+    sideTerminalColumn R (nearyMarker β)) 0) = _
+  rw [RingHom.map_mulVec, sideTileProduct_map, sideTerminalColumn_map]
+  rfl
 
 @[simp] theorem sideCoefficient_nil (R : Type*) [CommRing R] (β : Nat)
     (body : List TagLetter) :
