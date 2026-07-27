@@ -1,3 +1,4 @@
+import MatrixMortality.LinearRepresentation
 import MatrixMortality.ScheduledBinary
 
 /-!
@@ -23,9 +24,8 @@ def scheduledWidthThreeSuffixes : Fin 5 → List Bool :=
 
 /-- The certified integer Hankel minor. -/
 def scheduledWidthThreeHankel (body : List TagLetter) : Matrix (Fin 5) (Fin 5) ℤ :=
-  fun i j =>
-    scheduledCoefficient ℤ 3 body (by decide)
-      (scheduledWidthThreePrefixes i ++ scheduledWidthThreeSuffixes j)
+  finiteHankel (scheduledCoefficient ℤ 3 body (by decide))
+    scheduledWidthThreePrefixes scheduledWidthThreeSuffixes
 
 /-- Closed form of the certified Hankel minor. -/
 def scheduledWidthThreeHankelClosed
@@ -42,7 +42,7 @@ theorem scheduledWidthThreeHankel_eq_closed (body : List TagLetter) :
   ext i j
   fin_cases i <;> fin_cases j <;>
     norm_num [scheduledWidthThreeHankel, scheduledWidthThreeHankelClosed,
-      scheduledWidthThreePrefixes, scheduledWidthThreeSuffixes,
+      finiteHankel, scheduledWidthThreePrefixes, scheduledWidthThreeSuffixes,
       scheduledCoefficient_eq_sideCoefficient, sideCoefficient_eq_ternaryCode_sub,
       decodeScheduled, decodeScheduledFrom_nil, decodeScheduledFrom_cons,
       scheduledInitialPhase, scheduledNextPhase,
@@ -193,15 +193,14 @@ theorem scheduledWidthThreeHankel_det_ne_zero (body : List TagLetter)
 /-- Rational form of the certified Hankel minor. -/
 def scheduledWidthThreeHankelRat
     (body : List TagLetter) : Matrix (Fin 5) (Fin 5) ℚ :=
-  fun i j =>
-    scheduledCoefficient ℚ 3 body (by decide)
-      (scheduledWidthThreePrefixes i ++ scheduledWidthThreeSuffixes j)
+  finiteHankel (scheduledCoefficient ℚ 3 body (by decide))
+    scheduledWidthThreePrefixes scheduledWidthThreeSuffixes
 
 theorem scheduledWidthThreeHankelRat_eq_castMatrix (body : List TagLetter) :
     scheduledWidthThreeHankelRat body =
       castMatrix (scheduledWidthThreeHankel body) := by
   ext i j
-  simp only [scheduledWidthThreeHankelRat, castMatrix, Matrix.map_apply,
+  simp only [scheduledWidthThreeHankelRat, finiteHankel, castMatrix, Matrix.map_apply,
     scheduledWidthThreeHankel]
   rw [scheduledCoefficient_eq_sideCoefficient ℚ,
     sideCoefficient_eq_ternaryCode_sub ℚ]
@@ -216,76 +215,18 @@ theorem scheduledWidthThreeHankelRat_det_ne_zero (body : List TagLetter)
   exact Int.cast_ne_zero.mpr
     (scheduledWidthThreeHankel_det_ne_zero body body_nonempty)
 
-/-- Prefix states of an arbitrary competing exact representation. -/
-def scheduledWidthThreePrefixStates
-    {ι : Type*} [Fintype ι] [DecidableEq ι]
-    (generators : Bool → Matrix ι ι ℚ) (row : ι → ℚ) :
-    Matrix (Fin 5) ι ℚ :=
-  fun i state =>
-    (row ᵥ* wordProduct generators (scheduledWidthThreePrefixes i)) state
-
-/-- Suffix states of an arbitrary competing exact representation. -/
-def scheduledWidthThreeSuffixStates
-    {ι : Type*} [Fintype ι] [DecidableEq ι]
-    (generators : Bool → Matrix ι ι ℚ) (column : ι → ℚ) :
-    Matrix ι (Fin 5) ℚ :=
-  fun state j =>
-    (wordProduct generators (scheduledWidthThreeSuffixes j) *ᵥ column) state
-
-/-- Exact equality of a competing representation with the scheduled width-three series. -/
-def RepresentsScheduledWidthThree
-    {ι : Type*} [Fintype ι] [DecidableEq ι]
-    (body : List TagLetter) (generators : Bool → Matrix ι ι ℚ)
-    (row column : ι → ℚ) : Prop :=
-  ∀ word,
-    row ⬝ᵥ wordProduct generators word *ᵥ column =
-      scheduledCoefficient ℚ 3 body (by decide) word
-
-theorem scheduledWidthThreeHankelRat_factor
-    {ι : Type*} [Fintype ι] [DecidableEq ι]
-    (body : List TagLetter) (generators : Bool → Matrix ι ι ℚ)
-    (row column : ι → ℚ)
-    (exact : RepresentsScheduledWidthThree body generators row column) :
-    scheduledWidthThreeHankelRat body =
-      scheduledWidthThreePrefixStates generators row *
-        scheduledWidthThreeSuffixStates generators column := by
-  ext i j
-  rw [scheduledWidthThreeHankelRat]
-  rw [← exact (scheduledWidthThreePrefixes i ++ scheduledWidthThreeSuffixes j)]
-  rw [wordProduct_append, ← Matrix.mulVec_mulVec, Matrix.dotProduct_mulVec]
-  simp [scheduledWidthThreePrefixStates, scheduledWidthThreeSuffixStates,
-    Matrix.mul_apply, Matrix.dotProduct]
-
-theorem five_le_card_of_det_rectangular_product_ne_zero
-    {ι : Type*} [Fintype ι]
-    (left : Matrix (Fin 5) ι ℚ) (right : Matrix ι (Fin 5) ℚ)
-    (det_ne_zero : (left * right).det ≠ 0) :
-    5 ≤ Fintype.card ι := by
-  have product_injective : Function.Injective (left * right).mulVec :=
-    Matrix.mulVec_injective_iff_isUnit.mpr
-      ((left * right).isUnit_iff_isUnit_det.mpr
-        (isUnit_iff_ne_zero.mpr det_ne_zero))
-  have right_injective : Function.Injective right.mulVec := by
-    intro x y vectors_equal
-    apply product_injective
-    rw [← Matrix.mulVec_mulVec, ← Matrix.mulVec_mulVec, vectors_equal]
-  have dimension_bound :=
-    LinearMap.finrank_le_finrank_of_injective
-      (f := right.mulVecLin) right_injective
-  simpa [FiniteDimensional.finrank_pi] using dimension_bound
-
 /-- Every exact rational representation has at least five states. -/
 theorem scheduledWidthThree_exact_state_lower_bound
     {ι : Type*} [Fintype ι] [DecidableEq ι]
     (body : List TagLetter) (body_nonempty : body ≠ [])
     (generators : Bool → Matrix ι ι ℚ) (row column : ι → ℚ)
-    (exact : RepresentsScheduledWidthThree body generators row column) :
+    (exact : RepresentsSeries
+      (scheduledCoefficient ℚ 3 body (by decide)) generators row column) :
     5 ≤ Fintype.card ι := by
-  apply five_le_card_of_det_rectangular_product_ne_zero
-    (scheduledWidthThreePrefixStates generators row)
-    (scheduledWidthThreeSuffixStates generators column)
-  rw [← scheduledWidthThreeHankelRat_factor body generators row column exact]
-  exact scheduledWidthThreeHankelRat_det_ne_zero body body_nonempty
+  exact
+    finiteHankel_card_le (scheduledCoefficient ℚ 3 body (by decide))
+      scheduledWidthThreePrefixes scheduledWidthThreeSuffixes generators row column exact
+      (scheduledWidthThreeHankelRat_det_ne_zero body body_nonempty)
 
 /-- The native scheduled representation has exactly five coordinates. -/
 theorem scheduledWidthThree_native_state_card :
@@ -294,7 +235,7 @@ theorem scheduledWidthThree_native_state_card :
 
 /-- The native matrices realize the series exactly. -/
 theorem scheduledWidthThree_native_represents (body : List TagLetter) :
-    RepresentsScheduledWidthThree body
+    RepresentsSeries (scheduledCoefficient ℚ 3 body (by decide))
       (scheduledGenerator ℚ 3 body (by decide))
       (scheduledBoundaryRow ℚ 3 (by decide))
       (scheduledBoundaryColumn ℚ 3) := by
