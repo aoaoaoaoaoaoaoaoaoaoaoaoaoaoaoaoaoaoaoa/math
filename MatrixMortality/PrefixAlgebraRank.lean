@@ -12,6 +12,7 @@ block and ends with one pivot.
 namespace MatrixMortality
 
 open scoped Matrix
+open PrefixAlgebra.Certificate
 
 attribute [local simp]
   vecCons_val_three vecCons_val_four vecCons_val_five vecCons_val_six

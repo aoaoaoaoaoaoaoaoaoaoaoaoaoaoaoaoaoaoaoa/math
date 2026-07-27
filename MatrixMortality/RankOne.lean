@@ -41,6 +41,20 @@ theorem outer_mul_outer (column row nextColumn nextRow : ι → 𝕜) :
   intro x _
   ring
 
+theorem vecMul_outer (active column row : ι → 𝕜) :
+    active ᵥ* Matrix.vecMulVec column row = (active ⬝ᵥ column) • row := by
+  ext j
+  simp only [Matrix.vecMul, Matrix.vecMulVec_apply, Matrix.dotProduct,
+    Pi.smul_apply, smul_eq_mul]
+  rw [Finset.sum_mul]
+  simp only [mul_assoc]
+
+theorem vecMul_mul_outer
+    (active : ι → 𝕜) (matrix : Square ι 𝕜) (column row : ι → 𝕜) :
+    active ᵥ* (matrix * Matrix.vecMulVec column row) =
+      (active ᵥ* matrix ⬝ᵥ column) • row := by
+  rw [← Matrix.vecMul_vecMul, vecMul_outer]
+
 omit [Fintype ι] in
 theorem outer_ne_zero {column row : ι → 𝕜} (column_ne : column ≠ 0) (row_ne : row ≠ 0) :
     Matrix.vecMulVec column row ≠ 0 := by

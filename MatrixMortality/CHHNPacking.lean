@@ -1,4 +1,5 @@
 import MatrixMortality.LinearRepresentation
+import MatrixMortality.RankOne
 
 /-!
 # The two-slot CHHN packing
@@ -21,6 +22,14 @@ inductive CHHNSlot where
   | rightTrailing
   deriving DecidableEq, Fintype, Repr
 
+/-- Exchange the two payload pairs while fixing the root slot. -/
+def CHHNSlot.mirror : CHHNSlot → CHHNSlot
+  | .root => .root
+  | .leftLeading => .rightLeading
+  | .leftTrailing => .rightTrailing
+  | .rightLeading => .leftLeading
+  | .rightTrailing => .leftTrailing
+
 /-- The four payload slots, excluding the distinguished root. -/
 inductive CHHNPayloadSlot where
   | leftLeading
@@ -42,6 +51,12 @@ inductive CHHNControl where
   | left
   | right
   deriving DecidableEq, Fintype, Repr
+
+/-- Exchange the two payload controls while fixing the cyclic shift. -/
+def CHHNControl.mirror : CHHNControl → CHHNControl
+  | .shift => .shift
+  | .left => .right
+  | .right => .left
 
 /-- The six-state carrier, retained as its two native three-state blocks. -/
 abbrev CHHNPackedState := Sum (Fin 3) (Fin 3)
@@ -70,6 +85,28 @@ def chhnPackedGenerator {R : Type*} [CommRing R]
   | .left => chhnPayload (source .leftLeading) (source .leftTrailing)
   | .right => chhnPayload (source .rightLeading) (source .rightTrailing)
 
+/-- Mirror a source by exchanging its two ordered payload pairs. -/
+def chhnMirrorSource {R : Type*}
+    (source : CHHNSlot → Matrix (Fin 3) (Fin 3) R) :
+    CHHNSlot → Matrix (Fin 3) (Fin 3) R :=
+  source ∘ CHHNSlot.mirror
+
+@[simp]
+theorem chhnPackedGenerator_mirror {R : Type*} [CommRing R]
+    (source : CHHNSlot → Matrix (Fin 3) (Fin 3) R) (control : CHHNControl) :
+    chhnPackedGenerator (chhnMirrorSource source) control =
+      chhnPackedGenerator source control.mirror := by
+  cases control <;> rfl
+
+theorem wordProduct_chhnPackedGenerator_mirror {R : Type*} [CommRing R]
+    (source : CHHNSlot → Matrix (Fin 3) (Fin 3) R) (word : List CHHNControl) :
+    wordProduct (chhnPackedGenerator (chhnMirrorSource source)) word =
+      wordProduct (chhnPackedGenerator source) (word.map CHHNControl.mirror) := by
+  induction word with
+  | nil => rfl
+  | cons control tail induction =>
+      simp only [wordProduct_cons, List.map_cons, chhnPackedGenerator_mirror, induction]
+
 /-- Packed boundary row supported on the root block. -/
 def chhnPackedRow {R : Type*} [Zero R] (row : Fin 3 → R) : CHHNPackedState → R :=
   chhnPairVector row 0
@@ -79,7 +116,9 @@ def chhnPackedColumn {R : Type*} [Zero R] (column : Fin 3 → R) :
     CHHNPackedState → R :=
   chhnPairVector column 0
 
-theorem chhnPairVector_vecMul_shift {R : Type*} [CommRing R]
+namespace CHHNPacking.Certificate
+
+private theorem chhnPairVector_vecMul_shift {R : Type*} [CommRing R]
     (root : Matrix (Fin 3) (Fin 3) R) (left right : Fin 3 → R) :
     chhnPairVector left right ᵥ* chhnShift root =
       chhnPairVector right (left ᵥ* root) := by
@@ -87,7 +126,7 @@ theorem chhnPairVector_vecMul_shift {R : Type*} [CommRing R]
   cases index <;>
     simp [chhnPairVector, chhnShift, Matrix.vecMul, Matrix.dotProduct, Matrix.one_apply]
 
-theorem chhnPairVector_vecMul_payload {R : Type*} [CommRing R]
+private theorem chhnPairVector_vecMul_payload {R : Type*} [CommRing R]
     (leading trailing : Matrix (Fin 3) (Fin 3) R) (left right : Fin 3 → R) :
     chhnPairVector left right ᵥ* chhnPayload leading trailing =
       chhnPairVector (left ᵥ* leading) (left ᵥ* trailing) := by
@@ -95,21 +134,21 @@ theorem chhnPairVector_vecMul_payload {R : Type*} [CommRing R]
   cases index <;>
     simp [chhnPairVector, chhnPayload, Matrix.vecMul, Matrix.dotProduct]
 
-theorem chhnPairVector_vecMul_payload_shift {R : Type*} [CommRing R]
+private theorem chhnPairVector_vecMul_payload_shift {R : Type*} [CommRing R]
     (root leading trailing : Matrix (Fin 3) (Fin 3) R) (left right : Fin 3 → R) :
     chhnPairVector left right ᵥ* (chhnPayload leading trailing * chhnShift root) =
       chhnPairVector (left ᵥ* trailing) ((left ᵥ* leading) ᵥ* root) := by
   rw [← Matrix.vecMul_vecMul, chhnPairVector_vecMul_payload,
     chhnPairVector_vecMul_shift]
 
-theorem chhnPairVector_vecMul_shift_sq {R : Type*} [CommRing R]
+private theorem chhnPairVector_vecMul_shift_sq {R : Type*} [CommRing R]
     (root : Matrix (Fin 3) (Fin 3) R) (left right : Fin 3 → R) :
     chhnPairVector left right ᵥ* (chhnShift root * chhnShift root) =
       chhnPairVector (left ᵥ* root) (right ᵥ* root) := by
   rw [← Matrix.vecMul_vecMul, chhnPairVector_vecMul_shift,
     chhnPairVector_vecMul_shift]
 
-theorem chhnPairVector_vecMul_payload_shift_sq {R : Type*} [CommRing R]
+private theorem chhnPairVector_vecMul_payload_shift_sq {R : Type*} [CommRing R]
     (root leading trailing : Matrix (Fin 3) (Fin 3) R) (left right : Fin 3 → R) :
     chhnPairVector left right ᵥ*
         (chhnPayload leading trailing * (chhnShift root * chhnShift root)) =
@@ -118,7 +157,7 @@ theorem chhnPairVector_vecMul_payload_shift_sq {R : Type*} [CommRing R]
   rw [← Matrix.vecMul_vecMul, chhnPairVector_vecMul_payload,
     chhnPairVector_vecMul_shift_sq]
 
-theorem smul_vecMul {K : Type*} [Field K]
+private theorem smul_vecMul {K : Type*} [Field K]
     (scalar : K) (vector : Fin 3 → K) (matrix : Matrix (Fin 3) (Fin 3) K) :
     (scalar • vector) ᵥ* matrix = scalar • (vector ᵥ* matrix) := by
   ext index
@@ -128,7 +167,7 @@ theorem smul_vecMul {K : Type*} [Field K]
   intro coordinate _
   ring
 
-theorem chhnShift_mulVec_pairVector {R : Type*} [CommRing R]
+private theorem chhnShift_mulVec_pairVector {R : Type*} [CommRing R]
     (root : Matrix (Fin 3) (Fin 3) R) (left right : Fin 3 → R) :
     chhnShift root *ᵥ chhnPairVector left right =
       chhnPairVector (root *ᵥ right) left := by
@@ -136,7 +175,7 @@ theorem chhnShift_mulVec_pairVector {R : Type*} [CommRing R]
   cases index <;>
     simp [chhnPairVector, chhnShift, Matrix.mulVec, Matrix.dotProduct, Matrix.one_apply]
 
-theorem chhnPayload_mulVec_pairVector {R : Type*} [CommRing R]
+private theorem chhnPayload_mulVec_pairVector {R : Type*} [CommRing R]
     (leading trailing : Matrix (Fin 3) (Fin 3) R) (left right : Fin 3 → R) :
     chhnPayload leading trailing *ᵥ chhnPairVector left right =
       chhnPairVector (leading *ᵥ left + trailing *ᵥ right) 0 := by
@@ -146,7 +185,7 @@ theorem chhnPayload_mulVec_pairVector {R : Type*} [CommRing R]
 
 /-! ## Six-vector independence kernels -/
 
-theorem chhn_root_rows_linearIndependent
+private theorem chhn_root_rows_linearIndependent
     {K V : Type*} [Field K] [AddCommGroup V] [Module K V]
     (e a₁ a₂ a₃ a₄ : V) (μ κ₁ κ₃ : K) (μ_ne_zero : μ ≠ 0)
     (basis : LinearIndependent K ![e, a₂, a₄]) :
@@ -197,7 +236,7 @@ theorem chhn_root_rows_linearIndependent
     exact scalar_zero
   fin_cases index <;> assumption
 
-theorem chhn_leading_rows_linearIndependent
+private theorem chhn_leading_rows_linearIndependent
     {K V : Type*} [Field K] [AddCommGroup V] [Module K V]
     (e a₀ a₂ a₃ a₄ : V) (μ : K)
     (left_basis : LinearIndependent K ![e, a₀, a₂])
@@ -246,7 +285,7 @@ theorem chhn_leading_rows_linearIndependent
     simpa [coefficient_five] using second_coefficients 0
   fin_cases index <;> assumption
 
-theorem chhn_trailing_rows_linearIndependent
+private theorem chhn_trailing_rows_linearIndependent
     {K V : Type*} [Field K] [AddCommGroup V] [Module K V]
     (e a₀ a₁ a₁₀ : V) (μ : K) (μ_ne_zero : μ ≠ 0)
     (basis : LinearIndependent K ![e, a₀, a₁₀]) :
@@ -296,7 +335,7 @@ theorem chhn_trailing_rows_linearIndependent
     simpa [coefficient_five] using second_coefficients 1
   fin_cases index <;> assumption
 
-theorem chhn_split_columns_linearIndependent
+private theorem chhn_split_columns_linearIndependent
     {K V : Type*} [Field K] [AddCommGroup V] [Module K V]
     (c h k : V) (basis : LinearIndependent K ![c, h, k]) :
     LinearIndependent K
@@ -325,7 +364,7 @@ theorem chhn_split_columns_linearIndependent
 /-! ## Reindexed finite certificates -/
 
 /-- Split a packed vector into its two native blocks. -/
-def chhnSplitLinear (K : Type*) [Semiring K] :
+private def chhnSplitLinear (K : Type*) [Semiring K] :
     (CHHNPackedState → K) →ₗ[K] (Fin 3 → K) × (Fin 3 → K) where
   toFun vector := (vector ∘ Sum.inl, vector ∘ Sum.inr)
   map_add' _ _ := rfl
@@ -337,7 +376,7 @@ def chhnSplitLinear (K : Type*) [Semiring K] :
   rfl
 
 /-- Join two native blocks into one packed vector. -/
-def chhnJoinLinear (K : Type*) [Semiring K] :
+private def chhnJoinLinear (K : Type*) [Semiring K] :
     ((Fin 3 → K) × (Fin 3 → K)) →ₗ[K] (CHHNPackedState → K) where
   toFun pair := chhnPairVector pair.1 pair.2
   map_add' left right := by
@@ -347,7 +386,7 @@ def chhnJoinLinear (K : Type*) [Semiring K] :
     ext index
     cases index <;> rfl
 
-theorem chhnJoinLinear_injective
+private theorem chhnJoinLinear_injective
     (K : Type*) [Semiring K] : Function.Injective (chhnJoinLinear K) := by
   intro left right equal
   apply Prod.ext
@@ -357,17 +396,17 @@ theorem chhnJoinLinear_injective
     exact congrFun equal (Sum.inr index)
 
 /-- Six values indexed by the native two-block carrier. -/
-def chhnSextet {α : Type*} (x₀ x₁ x₂ x₃ x₄ x₅ : α) : CHHNPackedState → α
+private def chhnSextet {α : Type*} (x₀ x₁ x₂ x₃ x₄ x₅ : α) : CHHNPackedState → α
   | .inl index => ![x₀, x₁, x₂] index
   | .inr index => ![x₃, x₄, x₅] index
 
 /-- Join six native block pairs into six packed vectors. -/
-def chhnJoinedSextet {K : Type*} [Semiring K]
+private def chhnJoinedSextet {K : Type*} [Semiring K]
     (x₀ x₁ x₂ x₃ x₄ x₅ : (Fin 3 → K) × (Fin 3 → K)) :
     CHHNPackedState → (CHHNPackedState → K) :=
   chhnJoinLinear K ∘ chhnSextet x₀ x₁ x₂ x₃ x₄ x₅
 
-theorem chhn_pairVector_family_linearIndependent
+private theorem chhn_pairVector_family_linearIndependent
     {K : Type*} [Field K]
     (x₀ x₁ x₂ x₃ x₄ x₅ : (Fin 3 → K) × (Fin 3 → K))
     (independent : LinearIndependent K ![x₀, x₁, x₂, x₃, x₄, x₅]) :
@@ -397,14 +436,31 @@ def chhnLeftTrailingPrefixes : CHHNPackedState → List CHHNControl :=
   chhnSextet [] [.shift] [.shift, .shift] [.left]
     [.left, .shift] [.left, .shift, .shift]
 
+/-- Mirror every control in a finite packed context family. -/
+def chhnMirrorContexts
+    (contexts : CHHNPackedState → List CHHNControl) :
+    CHHNPackedState → List CHHNControl :=
+  fun index => (contexts index).map CHHNControl.mirror
+
 /-- Prefix family when the leading matrix of the right payload is the separator. -/
 def chhnRightLeadingPrefixes : CHHNPackedState → List CHHNControl :=
-  chhnSextet [] [.shift] [.right] [.left] [.shift, .shift] [.right, .shift]
+  chhnMirrorContexts chhnLeftLeadingPrefixes
 
 /-- Prefix family when the trailing matrix of the right payload is the separator. -/
 def chhnRightTrailingPrefixes : CHHNPackedState → List CHHNControl :=
-  chhnSextet [] [.shift] [.shift, .shift] [.right]
-    [.right, .shift] [.right, .shift, .shift]
+  chhnMirrorContexts chhnLeftTrailingPrefixes
+
+private theorem finitePrefixStates_chhnMirrorSource
+    {K : Type*} [Field K]
+    (source : CHHNSlot → Matrix (Fin 3) (Fin 3) K)
+    (row : Fin 3 → K) (contexts : CHHNPackedState → List CHHNControl) :
+    finitePrefixStates (chhnPackedGenerator (chhnMirrorSource source))
+        (chhnPackedRow row) contexts =
+      finitePrefixStates (chhnPackedGenerator source) (chhnPackedRow row)
+        (chhnMirrorContexts contexts) := by
+  ext index state
+  simp only [finitePrefixStates, chhnMirrorContexts,
+    wordProduct_chhnPackedGenerator_mirror]
 
 /-- Physical word selecting one payload slot into the leading output block. -/
 def chhnPayloadWord : CHHNPayloadSlot → List CHHNControl
@@ -431,7 +487,7 @@ def chhnSlotColumn {K : Type*} [Field K]
     (column : Fin 3 → K) (slot : CHHNSlot) : Fin 3 → K :=
   source slot *ᵥ column
 
-theorem chhnPayloadWord_mulVec_packedColumn
+private theorem chhnPayloadWord_mulVec_packedColumn
     {K : Type*} [Field K]
     (source : CHHNSlot → Matrix (Fin 3) (Fin 3) K)
     (column : Fin 3 → K) (slot : CHHNPayloadSlot) :
@@ -445,7 +501,7 @@ theorem chhnPayloadWord_mulVec_packedColumn
       chhnSlotColumn, CHHNPayloadSlot.toSlot, wordProduct, ← Matrix.mulVec_mulVec,
       chhnShift_mulVec_pairVector, chhnPayload_mulVec_pairVector]
 
-theorem chhnShiftPayloadWord_mulVec_packedColumn
+private theorem chhnShiftPayloadWord_mulVec_packedColumn
     {K : Type*} [Field K]
     (source : CHHNSlot → Matrix (Fin 3) (Fin 3) K)
     (column : Fin 3 → K) (slot : CHHNPayloadSlot) :
@@ -457,7 +513,7 @@ theorem chhnShiftPayloadWord_mulVec_packedColumn
   simpa using chhnShift_mulVec_pairVector (source .root)
     (chhnSlotColumn source column slot.toSlot) 0
 
-theorem chhnShift_mul_payloadWord_mulVec_packedColumn
+private theorem chhnShift_mul_payloadWord_mulVec_packedColumn
     {K : Type*} [Field K]
     (source : CHHNSlot → Matrix (Fin 3) (Fin 3) K)
     (column : Fin 3 → K) (slot : CHHNPayloadSlot) :
@@ -469,35 +525,9 @@ theorem chhnShift_mul_payloadWord_mulVec_packedColumn
   simpa using chhnShift_mulVec_pairVector (source .root)
     (chhnSlotColumn source column slot.toSlot) 0
 
-/-- A rank-one source slot sends the boundary row to its boundary pairing times that row. -/
-theorem vecMul_vecMulVec_same {K : Type*} [Field K]
-    (row column : Fin 3 → K) :
-    row ᵥ* Matrix.vecMulVec column row = (row ⬝ᵥ column) • row := by
-  ext index
-  change (∑ coordinate : Fin 3, row coordinate * (column coordinate * row index)) =
-    (∑ coordinate : Fin 3, row coordinate * column coordinate) * row index
-  rw [Finset.sum_mul]
-  apply Finset.sum_congr rfl
-  intro coordinate _
-  ring
+end CHHNPacking.Certificate
 
-/-- Any row entering a rank-one source slot exits along its boundary row. -/
-theorem vecMul_vecMulVec {K : Type*} [Field K]
-    (active row column : Fin 3 → K) :
-    active ᵥ* Matrix.vecMulVec column row = (active ⬝ᵥ column) • row := by
-  ext index
-  change (∑ coordinate : Fin 3, active coordinate * (column coordinate * row index)) =
-    (∑ coordinate : Fin 3, active coordinate * column coordinate) * row index
-  rw [Finset.sum_mul]
-  apply Finset.sum_congr rfl
-  intro coordinate _
-  ring
-
-theorem vecMul_mul_vecMulVec {K : Type*} [Field K]
-    (active row column : Fin 3 → K) (matrix : Matrix (Fin 3) (Fin 3) K) :
-    active ᵥ* (matrix * Matrix.vecMulVec column row) =
-      (active ᵥ* matrix ⬝ᵥ column) • row := by
-  rw [← Matrix.vecMul_vecMul, vecMul_vecMulVec]
+open CHHNPacking.Certificate
 
 theorem chhnRootPrefixStates_linearIndependent
     {K : Type*} [Field K]
@@ -543,8 +573,7 @@ theorem chhnRootPrefixStates_linearIndependent
             finitePrefixStates, chhnPackedRow,
             chhnPackedGenerator, wordProduct, chhnPairVector_vecMul_shift,
             chhnPairVector_vecMul_payload, chhnPairVector_vecMul_payload_shift, root_separator,
-            vecMul_vecMulVec_same,
-            vecMul_vecMulVec, vecMul_mul_vecMulVec, μ, a₁, a₂, a₃, a₄, κ₁, κ₃, chhnSlotRow,
+            vecMul_outer, vecMul_mul_outer, μ, a₁, a₂, a₃, a₄, κ₁, κ₃, chhnSlotRow,
             Matrix.vecMul_zero]
     | inr blockIndex =>
         fin_cases blockIndex <;> ext state <;> cases state <;>
@@ -552,8 +581,7 @@ theorem chhnRootPrefixStates_linearIndependent
             finitePrefixStates, chhnPackedRow,
             chhnPackedGenerator, wordProduct, chhnPairVector_vecMul_shift,
             chhnPairVector_vecMul_payload, chhnPairVector_vecMul_payload_shift, root_separator,
-            vecMul_vecMulVec_same,
-            vecMul_vecMulVec, vecMul_mul_vecMulVec, μ, a₁, a₂, a₃, a₄, κ₁, κ₃, chhnSlotRow,
+            vecMul_outer, vecMul_mul_outer, μ, a₁, a₂, a₃, a₄, κ₁, κ₃, chhnSlotRow,
             Matrix.vecMul_zero]
   rw [rows_eq]
   exact expected_independent
@@ -604,7 +632,7 @@ theorem chhnLeftLeadingPrefixStates_linearIndependent
             chhnPackedGenerator, wordProduct, chhnPairVector_vecMul_shift,
             chhnPairVector_vecMul_payload, chhnPairVector_vecMul_payload_shift,
             chhnPairVector_vecMul_shift_sq, smul_vecMul,
-            separator, vecMul_vecMulVec_same, vecMul_vecMulVec, μ, a₀, a₂, a₃, a₄,
+            separator, vecMul_outer, μ, a₀, a₂, a₃, a₄,
             chhnSlotRow, Matrix.vecMul_zero]
     | inr blockIndex =>
         fin_cases blockIndex <;> ext state <;> cases state <;>
@@ -613,7 +641,7 @@ theorem chhnLeftLeadingPrefixStates_linearIndependent
             chhnPackedGenerator, wordProduct, chhnPairVector_vecMul_shift,
             chhnPairVector_vecMul_payload, chhnPairVector_vecMul_payload_shift,
             chhnPairVector_vecMul_shift_sq, smul_vecMul,
-            separator, vecMul_vecMulVec_same, vecMul_vecMulVec, μ, a₀, a₂, a₃, a₄,
+            separator, vecMul_outer, μ, a₀, a₂, a₃, a₄,
             chhnSlotRow, Matrix.vecMul_zero]
   rw [rows_eq]
   exact expected_independent
@@ -633,50 +661,14 @@ theorem chhnRightLeadingPrefixStates_linearIndependent
     LinearIndependent K fun index =>
       finitePrefixStates (chhnPackedGenerator source) (chhnPackedRow row)
         chhnRightLeadingPrefixes index := by
-  let μ := row ⬝ᵥ column
-  let a₀ := chhnSlotRow source row .root
-  let a₂ := chhnSlotRow source row .rightTrailing
-  let a₃ := chhnSlotRow source row .leftLeading
-  let a₄ := chhnSlotRow source row .leftTrailing
-  have pair_independent :
-      LinearIndependent K
-        ![(row, 0), (0, a₀), (μ • row, a₂), (a₃, a₄),
-          (a₀, 0), (a₂, μ • a₀)] :=
-    chhn_leading_rows_linearIndependent row a₀ a₂ a₃ a₄ μ
-      left_basis right_basis
-  let expected : CHHNPackedState → (CHHNPackedState → K) :=
-    chhnJoinedSextet (row, 0) (0, a₀) (μ • row, a₂) (a₃, a₄)
-      (a₀, 0) (a₂, μ • a₀)
-  have expected_independent : LinearIndependent K expected :=
-    chhn_pairVector_family_linearIndependent
-      (row, 0) (0, a₀) (μ • row, a₂) (a₃, a₄)
-      (a₀, 0) (a₂, μ • a₀) pair_independent
-  have rows_eq :
-      (fun index =>
-        finitePrefixStates (chhnPackedGenerator source) (chhnPackedRow row)
-          chhnRightLeadingPrefixes index) = expected := by
-    funext index
-    cases index with
-    | inl blockIndex =>
-        fin_cases blockIndex <;> ext state <;> cases state <;>
-          simp [expected, chhnJoinedSextet, chhnJoinLinear, chhnSextet,
-            chhnRightLeadingPrefixes, finitePrefixStates, chhnPackedRow,
-            chhnPackedGenerator, wordProduct, chhnPairVector_vecMul_shift,
-            chhnPairVector_vecMul_payload, chhnPairVector_vecMul_payload_shift,
-            chhnPairVector_vecMul_shift_sq, smul_vecMul,
-            separator, vecMul_vecMulVec_same, vecMul_vecMulVec, μ, a₀, a₂, a₃, a₄,
-            chhnSlotRow, Matrix.vecMul_zero]
-    | inr blockIndex =>
-        fin_cases blockIndex <;> ext state <;> cases state <;>
-          simp [expected, chhnJoinedSextet, chhnJoinLinear, chhnSextet,
-            chhnRightLeadingPrefixes, finitePrefixStates, chhnPackedRow,
-            chhnPackedGenerator, wordProduct, chhnPairVector_vecMul_shift,
-            chhnPairVector_vecMul_payload, chhnPairVector_vecMul_payload_shift,
-            chhnPairVector_vecMul_shift_sq, smul_vecMul,
-            separator, vecMul_vecMulVec_same, vecMul_vecMulVec, μ, a₀, a₂, a₃, a₄,
-            chhnSlotRow, Matrix.vecMul_zero]
-  rw [rows_eq]
-  exact expected_independent
+  have mirrored :=
+    chhnLeftLeadingPrefixStates_linearIndependent
+      (chhnMirrorSource source) row column
+      (by simpa [chhnMirrorSource, CHHNSlot.mirror] using separator)
+      (by simpa [chhnMirrorSource, CHHNSlot.mirror, chhnSlotRow] using left_basis)
+      (by simpa [chhnMirrorSource, CHHNSlot.mirror, chhnSlotRow] using right_basis)
+  rw [finitePrefixStates_chhnMirrorSource] at mirrored
+  simpa [chhnRightLeadingPrefixes] using mirrored
 
 theorem chhnLeftTrailingPrefixStates_linearIndependent
     {K : Type*} [Field K]
@@ -721,8 +713,8 @@ theorem chhnLeftTrailingPrefixStates_linearIndependent
             chhnPairVector_vecMul_payload, chhnPairVector_vecMul_payload_shift,
             chhnPairVector_vecMul_shift_sq, chhnPairVector_vecMul_payload_shift_sq,
             smul_vecMul,
-            separator, vecMul_vecMulVec_same, vecMul_vecMulVec,
-            vecMul_mul_vecMulVec, μ, a₀, a₁, a₁₀, chhnSlotRow, Matrix.vecMul_zero]
+            separator, vecMul_outer, vecMul_mul_outer, μ, a₀, a₁, a₁₀,
+            chhnSlotRow, Matrix.vecMul_zero]
     | inr blockIndex =>
         fin_cases blockIndex <;> ext state <;> cases state <;>
           simp [expected, chhnJoinedSextet, chhnJoinLinear, chhnSextet,
@@ -731,8 +723,8 @@ theorem chhnLeftTrailingPrefixStates_linearIndependent
             chhnPairVector_vecMul_payload, chhnPairVector_vecMul_payload_shift,
             chhnPairVector_vecMul_shift_sq, chhnPairVector_vecMul_payload_shift_sq,
             smul_vecMul,
-            separator, vecMul_vecMulVec_same, vecMul_vecMulVec,
-            vecMul_mul_vecMulVec, μ, a₀, a₁, a₁₀, chhnSlotRow, Matrix.vecMul_zero]
+            separator, vecMul_outer, vecMul_mul_outer, μ, a₀, a₁, a₁₀,
+            chhnSlotRow, Matrix.vecMul_zero]
   rw [rows_eq]
   exact expected_independent
 
@@ -748,51 +740,14 @@ theorem chhnRightTrailingPrefixStates_linearIndependent
     LinearIndependent K fun index =>
       finitePrefixStates (chhnPackedGenerator source) (chhnPackedRow row)
         chhnRightTrailingPrefixes index := by
-  let μ := row ⬝ᵥ column
-  let a₀ := chhnSlotRow source row .root
-  let a₁ := chhnSlotRow source row .rightLeading
-  let a₁₀ := row ᵥ* (source .rightLeading * source .root)
-  have pair_independent :
-      LinearIndependent K
-        ![(row, 0), (0, a₀), (a₀, 0), (a₁, μ • row),
-          (μ • row, a₁₀), (a₁₀, μ • a₀)] :=
-    chhn_trailing_rows_linearIndependent row a₀ a₁ a₁₀ μ
-      pairing_ne_zero basis
-  let expected : CHHNPackedState → (CHHNPackedState → K) :=
-    chhnJoinedSextet (row, 0) (0, a₀) (a₀, 0) (a₁, μ • row)
-      (μ • row, a₁₀) (a₁₀, μ • a₀)
-  have expected_independent : LinearIndependent K expected :=
-    chhn_pairVector_family_linearIndependent
-      (row, 0) (0, a₀) (a₀, 0) (a₁, μ • row)
-      (μ • row, a₁₀) (a₁₀, μ • a₀) pair_independent
-  have rows_eq :
-      (fun index =>
-        finitePrefixStates (chhnPackedGenerator source) (chhnPackedRow row)
-          chhnRightTrailingPrefixes index) = expected := by
-    funext index
-    cases index with
-    | inl blockIndex =>
-        fin_cases blockIndex <;> ext state <;> cases state <;>
-          simp [expected, chhnJoinedSextet, chhnJoinLinear, chhnSextet,
-            chhnRightTrailingPrefixes, finitePrefixStates, chhnPackedRow,
-            chhnPackedGenerator, wordProduct, chhnPairVector_vecMul_shift,
-            chhnPairVector_vecMul_payload, chhnPairVector_vecMul_payload_shift,
-            chhnPairVector_vecMul_shift_sq, chhnPairVector_vecMul_payload_shift_sq,
-            smul_vecMul,
-            separator, vecMul_vecMulVec_same, vecMul_vecMulVec,
-            vecMul_mul_vecMulVec, μ, a₀, a₁, a₁₀, chhnSlotRow, Matrix.vecMul_zero]
-    | inr blockIndex =>
-        fin_cases blockIndex <;> ext state <;> cases state <;>
-          simp [expected, chhnJoinedSextet, chhnJoinLinear, chhnSextet,
-            chhnRightTrailingPrefixes, finitePrefixStates, chhnPackedRow,
-            chhnPackedGenerator, wordProduct, chhnPairVector_vecMul_shift,
-            chhnPairVector_vecMul_payload, chhnPairVector_vecMul_payload_shift,
-            chhnPairVector_vecMul_shift_sq, chhnPairVector_vecMul_payload_shift_sq,
-            smul_vecMul,
-            separator, vecMul_vecMulVec_same, vecMul_vecMulVec,
-            vecMul_mul_vecMulVec, μ, a₀, a₁, a₁₀, chhnSlotRow, Matrix.vecMul_zero]
-  rw [rows_eq]
-  exact expected_independent
+  have mirrored :=
+    chhnLeftTrailingPrefixStates_linearIndependent
+      (chhnMirrorSource source) row column
+      (by simpa [chhnMirrorSource, CHHNSlot.mirror] using separator)
+      pairing_ne_zero
+      (by simpa [chhnMirrorSource, CHHNSlot.mirror, chhnSlotRow] using basis)
+  rw [finitePrefixStates_chhnMirrorSource] at mirrored
+  simpa [chhnRightTrailingPrefixes] using mirrored
 
 theorem chhnReachableSuffixStates_linearIndependent
     {K : Type*} [Field K]

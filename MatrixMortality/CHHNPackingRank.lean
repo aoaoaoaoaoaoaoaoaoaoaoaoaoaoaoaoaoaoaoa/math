@@ -11,6 +11,7 @@ six-row and six-column certificate exposes every packed state for every such pla
 namespace MatrixMortality
 
 open scoped Matrix
+open CHHNPacking.Certificate
 
 /-- The boundary row used by the side-normal Neary representation. -/
 def chhnNearyRow : Fin 3 → ℚ := ![1, 0, 0]

@@ -14,6 +14,8 @@ namespace MatrixMortality
 
 open scoped Matrix
 
+namespace PrefixAlgebra.Certificate
+
 theorem vecCons_val_three {α : Type*} {n : Nat}
     (head : α) (tail : Fin (n + 3) → α) :
     Matrix.vecCons head tail (3 : Fin (n + 4)) = tail 2 := rfl
@@ -77,6 +79,10 @@ theorem fin_succ_eight_eq_nine {n : Nat} :
   apply Fin.ext
   rfl
 
+end PrefixAlgebra.Certificate
+
+open PrefixAlgebra.Certificate
+
 attribute [local simp]
   vecCons_val_three vecCons_val_four vecCons_val_five vecCons_val_six
   vecCons_val_seven vecCons_val_eight vecCons_val_nine
@@ -89,9 +95,11 @@ def prefixAlgebraGenerator (β : Nat) (body : List TagLetter) (bit : Bool) :
     Square (Fin 10) ℚ :=
   castMatrix (restrictedPrefixGenerator β body bit)
 
+namespace PrefixAlgebra.Certificate
+
 /-- Entry formula after the one-hot restriction and deterministic prefix transition have been
 eliminated. -/
-theorem restrictedPrefixGenerator_apply (β : Nat) (body : List TagLetter)
+private theorem restrictedPrefixGenerator_apply (β : Nat) (body : List TagLetter)
     (bit : Bool) (row column : Fin 10) :
     restrictedPrefixGenerator β body bit row column =
       ∑ payloadColumn : Fin 3,
@@ -121,7 +129,7 @@ theorem restrictedPrefixGenerator_apply (β : Nat) (body : List TagLetter)
     exact (representative_absent (Finset.mem_univ _)).elim
 
 /-- Closed three-state payload emitted on one prefix transition. -/
-def prefixAlgebraOutputClosed (β : Nat) (body : List TagLetter)
+private def prefixAlgebraOutputClosed (β : Nat) (body : List TagLetter)
     (state : PrefixState) (bit : Bool) : Square (Fin 3) ℚ :=
   let ρ := (3 : ℚ) ^ β
   let m := (5 * ρ - 1) / 2
@@ -182,7 +190,7 @@ private theorem cast_normalizedNearyFamily_some
     simp [castMatrix, sidePcpMatrix, Matrix.transpose_apply, Matrix.vecHead,
       Matrix.vecTail]
 
-theorem cast_prefixOutput_eq_closed (β : Nat) (body : List TagLetter)
+private theorem cast_prefixOutput_eq_closed (β : Nat) (body : List TagLetter)
     (state : PrefixState) (bit : Bool) :
     castMatrix (prefixOutput β body state bit) =
       prefixAlgebraOutputClosed β body state bit := by
@@ -238,7 +246,7 @@ theorem cast_prefixOutput_eq_closed (β : Nat) (body : List TagLetter)
     all_goals ring
 
 /-- Rational entry formula for the restricted generator. -/
-theorem prefixAlgebraGenerator_apply (β : Nat) (body : List TagLetter)
+private theorem prefixAlgebraGenerator_apply (β : Nat) (body : List TagLetter)
     (bit : Bool) (row column : Fin 10) :
     prefixAlgebraGenerator β body bit row column =
       ∑ payloadColumn : Fin 3,
@@ -418,11 +426,13 @@ theorem prefixAlgebraGenerator_eq_closed (β : Nat) (body : List TagLetter)
   intro vector
   exact prefixAlgebraGenerator_mulVec_eq_closed β body bit vector
 
-theorem prefixAlgebraGenerator_eq_closed_fun (β : Nat) (body : List TagLetter) :
+private theorem prefixAlgebraGenerator_eq_closed_fun (β : Nat) (body : List TagLetter) :
     prefixAlgebraGenerator β body =
       prefixAlgebraGeneratorClosed β body := by
   funext bit
   exact prefixAlgebraGenerator_eq_closed β body bit
+
+end PrefixAlgebra.Certificate
 
 /-- Column of the internal rank-one word `000`. -/
 def prefixAlgebraColumn (β : Nat) (body : List TagLetter) : Fin 10 → ℚ :=
