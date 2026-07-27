@@ -1,6 +1,7 @@
 import MatrixMortality.Undecidability.CockeMinskyAvoidance
 import MatrixMortality.Undecidability.TM0ToRead
 import MatrixMortality.Undecidability.Problems
+import MatrixMortality.Undecidability.TwoTagSource
 import MatrixMortality.Undecidability.UniversalTM0
 
 /-!
@@ -19,6 +20,8 @@ namespace Undecidability
 namespace UniversalTwoTag
 
 open scoped Classical
+
+namespace Construction
 
 /-- A fixed mathlib interpreter for every encoded source program. -/
 noncomputable def interpreter : ToPartrec.Code :=
@@ -296,27 +299,6 @@ theorem system_production_zero_nonempty :
   rw [← symbolEquiv_live, system_production_encode]
   simp [CockeMinsky.production, liveSymbol, encodeWord]
 
-/-- Finite relabelling preserves and reflects every tag execution. -/
-theorem reaches_encode_iff (before after : List (CockeMinsky.Symbol ReadState)) :
-    system.Reaches (encodeWord before) (encodeWord after) ↔
-      CockeMinsky.TagReaches readMachine before after := by
-  simpa [system, encodeWord, TwoTag.Reaches, TwoTag.Step,
-    CockeMinsky.TagReaches, CockeMinsky.Step] using
-    tagReaches_relabel_iff symbolEquiv (CockeMinsky.production readMachine) before after
-
-/-- Exact reachability of the last alphabet label recognizes code halting. -/
-theorem reaches_halt_iff (source : Nat.Partrec.Code) :
-    system.Reaches
-        (encodeWord (CockeMinsky.encode readMachine (initialConfig source)))
-        [haltLabel] ↔
-      CodeHalts source := by
-  rw [show [haltLabel] =
-      encodeWord ([.halt] : List (CockeMinsky.Symbol ReadState)) by
-    simp [encodeWord]]
-  rw [reaches_encode_iff]
-  rw [CockeMinsky.tag_reaches_halt_iff]
-  exact readMachine_halts_iff source
-
 /-- Source-code halting reaches the singleton halt label without reading that label earlier. -/
 theorem halts_implies_halt_avoiding (source : Nat.Partrec.Code) (halts : CodeHalts source) :
     system.AvoidingReaches haltLabel
@@ -365,6 +347,31 @@ theorem reachesHead_halt_implies_halts (source : Nat.Partrec.Code)
   apply CockeMinsky.tag_reaches_head_halt_implies_halts readMachine (initialConfig source)
     (tail.map symbolEquiv.symm)
   simpa [relabelTagOutput, encodeWord] using decoded
+
+end Construction
+
+/-- Fixed finite two-tag source recognizing mathlib code halting. -/
+noncomputable def source : TwoTagSource Nat.Partrec.Code CodeHalts where
+  alphabet := Construction.alphabet
+  alphabet_one_lt := Construction.alphabet_one_lt
+  system := Construction.system
+  haltLabel := Construction.haltLabel
+  liveLabel := Construction.zeroLabel
+  liveLabel_zero := rfl
+  haltLabel_last := Construction.haltLabel_last
+  liveProduction_nonempty := Construction.system_production_zero_nonempty
+  input := Construction.initialWord
+  input_primrec := Construction.initialWord_primrec
+  input_nonempty := Construction.initialWord_nonempty
+  accepts_implies_avoidingHalt := Construction.halts_implies_halt_avoiding
+  accepts_of_tagTermination := Construction.tagHaltsFrom_implies_halts
+  accepts_of_haltHead := Construction.reachesHead_halt_implies_halts
+
+/-- Exact reachability of the last alphabet label recognizes code halting. -/
+theorem reaches_halt_iff (index : Nat.Partrec.Code) :
+    source.system.Reaches (source.input index) [source.haltLabel] ↔
+      CodeHalts index :=
+  source.reachesHalt_iff index
 
 end UniversalTwoTag
 end Undecidability

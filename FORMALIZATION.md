@@ -327,12 +327,14 @@ with a complete arbitrary-word converse.
 | `Undecidability/CockeMinskyAvoidance.lean` | canonical exact halt-avoiding simulation, ordinary views, and reflection |
 | `Undecidability/CyclicTag.lean` | two-tag semantics and the one-hot cyclic-tag simulation |
 | `Undecidability/CyclicTagAvoidance.lean` | distinguished-phase avoidance and firing reflection |
+| `Undecidability/TwoTagSource.lean` | verified finite two-tag sources and their Cook cyclic consequences |
 | `Undecidability/Tracks.lean` | typed fixed-stride track serialization and recovery |
 | `Undecidability/TagExecution.lean` | exact finite executions, sliced-track recovery, and congruence-head drainage |
 | `Undecidability/NearyCompiler.lean` | exact Table 2 words, tracks, padding, and arithmetic envelope |
 | `Undecidability/NearySimulation.lean` | traversal semantics of raw, bit, epsilon, and halting objects |
 | `Undecidability/NearyData.lean` | garbage calculus, token invariant, and ordinary cyclic pulses |
 | `Undecidability/NearyExecution.lean` | literal initialization, first-firing extraction, and the complete post-seed halting cascade |
+| `Undecidability/NearySource.lean` | compositional Cook–Neary compiler into verified restricted-tag sources |
 | `Undecidability/UniversalTwoTag.lean` | fixed universal finite two-tag system and primitive-recursive source queue |
 | `Undecidability/UniversalNeary.lean` | complete computable reductions to binary `GPCP(4)` and `M₃(5)` |
 | `Undecidability/NearyProblems.lean` | canonical `Fin 4` and `Fin 5` target instances |
