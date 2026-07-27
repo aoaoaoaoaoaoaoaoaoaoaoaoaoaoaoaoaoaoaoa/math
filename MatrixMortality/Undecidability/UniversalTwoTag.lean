@@ -176,11 +176,6 @@ noncomputable def encodeWord (word : List (CockeMinsky.Symbol ReadState)) :
     List (Fin alphabet) :=
   word.map symbolEquiv
 
-/-- Relabel a finite-alphabet queue back to Cocke–Minsky symbols. -/
-noncomputable def decodeWord (word : List (Fin alphabet)) :
-    List (CockeMinsky.Symbol ReadState) :=
-  word.map symbolEquiv.symm
-
 /-- Canonical two-tag queue encoding one source program. -/
 noncomputable def initialWord (source : Nat.Partrec.Code) :
     List (Fin alphabet) :=
@@ -286,20 +281,9 @@ theorem initialWord_primrec : Primrec initialWord := by
     (Primrec.list_map frameRec (symbolRec.comp₂ Primrec₂.right)).of_eq fun source =>
       (initialWord_eq_frame source).symm
 
-@[simp]
-theorem decodeWord_encodeWord (word : List (CockeMinsky.Symbol ReadState)) :
-    decodeWord (encodeWord word) = word := by
-  simp [decodeWord, encodeWord]
-
-@[simp]
-theorem encodeWord_decodeWord (word : List (Fin alphabet)) :
-    encodeWord (decodeWord word) = word := by
-  simp [decodeWord, encodeWord]
-
 /-- The fixed universal two-tag system on its canonical finite alphabet. -/
 noncomputable def system : TwoTag alphabet where
-  production label :=
-    (CockeMinsky.production readMachine (symbolEquiv.symm label)).map symbolEquiv
+  production := relabelTagOutput symbolEquiv (CockeMinsky.production readMachine)
 
 @[simp]
 theorem system_production_encode (symbol : CockeMinsky.Symbol ReadState) :
@@ -312,109 +296,13 @@ theorem system_production_zero_nonempty :
   rw [← symbolEquiv_live, system_production_encode]
   simp [CockeMinsky.production, liveSymbol, encodeWord]
 
-theorem tagStep_two_iff {α : Type*} (output : α → List α) (before after : List α) :
-    TagStep 2 output before after ↔
-      ∃ head wake tail,
-        before = head :: wake :: tail ∧ after = tail ++ output head := by
-  constructor
-  · rintro ⟨⟨head, wake, width⟩, tail, before_eq, after_eq⟩
-    have wake_length : wake.length = 1 := by omega
-    obtain ⟨wakeHead, rfl⟩ := List.length_eq_one.mp wake_length
-    exact ⟨head, wakeHead, tail, before_eq, after_eq⟩
-  · rintro ⟨head, wake, tail, rfl, rfl⟩
-    exact ⟨⟨head, [wake], rfl⟩, tail, rfl, rfl⟩
-
-theorem step_encode_iff (before after : List (CockeMinsky.Symbol ReadState)) :
-    system.Step (encodeWord before) (encodeWord after) ↔
-      CockeMinsky.Step readMachine before after := by
-  rw [TwoTag.Step, CockeMinsky.Step, tagStep_two_iff, tagStep_two_iff]
-  constructor
-  · rintro ⟨head, wake, tail, before_eq, after_eq⟩
-    refine ⟨symbolEquiv.symm head, symbolEquiv.symm wake, decodeWord tail, ?_, ?_⟩
-    · apply_fun decodeWord at before_eq
-      simpa [decodeWord, encodeWord] using before_eq
-    · apply_fun decodeWord at after_eq
-      simpa [decodeWord, encodeWord, system] using after_eq
-  · rintro ⟨head, wake, tail, rfl, rfl⟩
-    refine ⟨symbolEquiv head, symbolEquiv wake, encodeWord tail, ?_, ?_⟩
-    · simp [encodeWord]
-    · simp [encodeWord, system, List.map_append]
-
-theorem decode_reaches {before after : List (Fin alphabet)}
-    (reach : system.Reaches before after) :
-    CockeMinsky.TagReaches readMachine (decodeWord before) (decodeWord after) := by
-  induction reach with
-  | refl => exact Relation.ReflTransGen.refl
-  | tail _ step ih =>
-      apply Relation.ReflTransGen.tail ih
-      apply (step_encode_iff (decodeWord _) (decodeWord _)).mp
-      simpa using step
-
-/-- Finite relabelling reflects every terminating two-tag execution. -/
-theorem decode_tagHaltsFrom {before : List (Fin alphabet)}
-    (halts : TagHaltsFrom 2 system.production before) :
-    TagHaltsFrom 2 (CockeMinsky.production readMachine) (decodeWord before) := by
-  induction halts with
-  | @stop queue short =>
-      exact .stop <| by simpa [decodeWord] using short
-  | @step queue after step _ ih =>
-      apply TagHaltsFrom.step
-      · apply (step_encode_iff (decodeWord queue) (decodeWord after)).mp
-        simpa using step
-      · exact ih
-
-theorem encode_reaches {before after : List (CockeMinsky.Symbol ReadState)}
-    (reach : CockeMinsky.TagReaches readMachine before after) :
-    system.Reaches (encodeWord before) (encodeWord after) := by
-  induction reach with
-  | refl => exact Relation.ReflTransGen.refl
-  | tail _ step ih =>
-      exact Relation.ReflTransGen.tail ih ((step_encode_iff _ _).mpr step)
-
-/-- Finite relabelling preserves a tag step whose read head is not the halt symbol. -/
-theorem avoidingStep_encode_iff
-    (before after : List (CockeMinsky.Symbol ReadState)) :
-    HeadAvoidingTagStep 2 system.production haltLabel
-        (encodeWord before) (encodeWord after) ↔
-      HeadAvoidingTagStep 2 (CockeMinsky.production readMachine)
-        (.halt : CockeMinsky.Symbol ReadState) before after := by
-  rw [TwoTag.avoidingStep_iff]
-  rw [headAvoidingTagStep_two_iff]
-  constructor
-  · rintro ⟨head, wake, tail, head_ne, before_eq, after_eq⟩
-    refine ⟨symbolEquiv.symm head, symbolEquiv.symm wake, decodeWord tail, ?_, ?_, ?_⟩
-    · intro equality
-      apply head_ne
-      simpa using congrArg symbolEquiv equality
-    · apply_fun decodeWord at before_eq
-      simpa [decodeWord, encodeWord] using before_eq
-    · apply_fun decodeWord at after_eq
-      simpa [decodeWord, encodeWord, system] using after_eq
-  · rintro ⟨head, wake, tail, head_ne, rfl, rfl⟩
-    refine ⟨symbolEquiv head, symbolEquiv wake, encodeWord tail, ?_, ?_, ?_⟩
-    · intro equality
-      apply head_ne
-      apply symbolEquiv.injective
-      simpa using equality
-    · simp [encodeWord]
-    · simp [encodeWord, system, List.map_append]
-
-theorem encode_avoiding_reaches {before after : List (CockeMinsky.Symbol ReadState)}
-    (reach : CockeMinsky.HaltAvoidingReaches readMachine before after) :
-    system.AvoidingReaches haltLabel (encodeWord before) (encodeWord after) := by
-  induction reach with
-  | refl => exact Relation.ReflTransGen.refl
-  | tail _ step ih =>
-      exact Relation.ReflTransGen.tail ih ((avoidingStep_encode_iff _ _).mpr step)
-
 /-- Finite relabelling preserves and reflects every tag execution. -/
 theorem reaches_encode_iff (before after : List (CockeMinsky.Symbol ReadState)) :
     system.Reaches (encodeWord before) (encodeWord after) ↔
       CockeMinsky.TagReaches readMachine before after := by
-  constructor
-  · intro reach
-    simpa using decode_reaches reach
-  · exact encode_reaches
+  simpa [system, encodeWord, TwoTag.Reaches, TwoTag.Step,
+    CockeMinsky.TagReaches, CockeMinsky.Step] using
+    tagReaches_relabel_iff symbolEquiv (CockeMinsky.production readMachine) before after
 
 /-- Exact reachability of the last alphabet label recognizes code halting. -/
 theorem reaches_halt_iff (source : Nat.Partrec.Code) :
@@ -436,9 +324,11 @@ theorem halts_implies_halt_avoiding (source : Nat.Partrec.Code) (halts : CodeHal
   rw [show [haltLabel] =
       encodeWord ([.halt] : List (CockeMinsky.Symbol ReadState)) by
     simp [encodeWord]]
-  apply encode_avoiding_reaches
   rw [← readMachine_halts_iff] at halts
-  exact CockeMinsky.halts_implies_halt_avoiding readMachine (initialConfig source) halts
+  have sourceReach :=
+    CockeMinsky.halts_implies_halt_avoiding readMachine (initialConfig source) halts
+  simpa [TwoTag.AvoidingReaches, system, encodeWord, CockeMinsky.HaltAvoidingReaches] using
+    sourceReach.relabel symbolEquiv
 
 /-- Any terminating execution from the universal two-tag encoding reflects source-code
 halting. -/
@@ -447,8 +337,12 @@ theorem tagHaltsFrom_implies_halts (source : Nat.Partrec.Code)
       TagHaltsFrom 2 system.production
         (encodeWord (CockeMinsky.encode readMachine (initialConfig source)))) :
     CodeHalts source := by
-  have decoded := decode_tagHaltsFrom halts
-  rw [decodeWord_encodeWord] at decoded
+  have decoded :
+      TagHaltsFrom 2 (CockeMinsky.production readMachine)
+        (CockeMinsky.encode readMachine (initialConfig source)) :=
+    (tagHaltsFrom_relabel_iff symbolEquiv (CockeMinsky.production readMachine)
+      (CockeMinsky.encode readMachine (initialConfig source))).mp <| by
+        simpa [system, encodeWord] using halts
   obtain ⟨steps, indexed⟩ := tagHaltsFrom_iff_exists_tagHaltsIn.mp decoded
   apply (readMachine_halts_iff source).mp
   exact
@@ -461,12 +355,16 @@ theorem reachesHead_halt_implies_halts (source : Nat.Partrec.Code)
         (encodeWord (CockeMinsky.encode readMachine (initialConfig source))) haltLabel) :
     CodeHalts source := by
   obtain ⟨tail, execution⟩ := reach
-  have decoded := decode_reaches execution
-  rw [decodeWord_encodeWord] at decoded
+  have raw :
+      TagReaches 2 (relabelTagOutput symbolEquiv (CockeMinsky.production readMachine))
+        (encodeWord (CockeMinsky.encode readMachine (initialConfig source)))
+        (haltLabel :: tail) := by
+    simpa [TwoTag.Reaches, TwoTag.Step, system] using execution
+  have decoded := raw.relabel symbolEquiv.symm
   apply (readMachine_halts_iff source).mp
   apply CockeMinsky.tag_reaches_head_halt_implies_halts readMachine (initialConfig source)
-    (decodeWord tail)
-  simpa [decodeWord] using decoded
+    (tail.map symbolEquiv.symm)
+  simpa [relabelTagOutput, encodeWord] using decoded
 
 end UniversalTwoTag
 end Undecidability

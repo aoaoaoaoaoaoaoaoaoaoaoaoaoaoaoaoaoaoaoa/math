@@ -128,7 +128,6 @@ open MatrixMortality
 #print axioms Undecidability.CyclicTag.reaches_firing_phase
 #print axioms Undecidability.CyclicTag.exists_avoidingReaches_firing_of_run
 #print axioms Undecidability.NearyCompiler.read_wholeAppendant_track
-#print axioms Undecidability.NearyCompiler.read_next_dataBit
 #print axioms Undecidability.NearyCompiler.initialTokens_stable
 #print axioms Undecidability.NearyCompiler.read_initialQueue
 #print axioms Undecidability.NearyCompiler.read_avoidingReaches

@@ -294,7 +294,8 @@ with a complete arbitrary-word converse.
 | `ControllerPushout.lean` | arbitrary finite-controller pushout, total suffix decoder, and transposed prefix decoder |
 | `TwoStatePushout.lean` | rule/erasure specialization, exact rank classification, and integer mortality compiler |
 | `TwoStateObstructions.lean` | exact local toggle-fusion obstruction |
-| `TagQueue.lean` | tag steps and generic history soundness |
+| `IndexedExecution.lean` | exact finite relational execution and closure views |
+| `TagQueue.lean` | tag steps, indexed execution specializations, and generic history soundness |
 | `NearyEncoding.lean` | four ordinary tiles, synchronization, source equivalence, and composed reductions |
 | `MarkedTerminal.lean` | fresh marker, primitive terminality, and binary recoding |
 | `TernaryEncoding.lean` | injective nonzero ternary representation |
@@ -322,8 +323,8 @@ with a complete arbitrary-word converse.
 | `Undecidability/SeededTM2.lean` | exact rooting of `TM2` machines at an arbitrary source label |
 | `Undecidability/UniversalTM0.lean` | fixed universal binary `TM0` machine and primitive-recursive input |
 | `Undecidability/TM0ToRead.lean` | exact binary `TM0` normalization to read-state machines |
-| `Undecidability/CockeMinsky.lean` | deletion-width-two tag compiler with all direction cases |
-| `Undecidability/CockeMinskyAvoidance.lean` | halt-avoiding source simulation and termination reflection |
+| `Undecidability/CockeMinsky.lean` | explicit deletion-width-two phase algebra and machine semantics |
+| `Undecidability/CockeMinskyAvoidance.lean` | canonical exact halt-avoiding simulation, ordinary views, and reflection |
 | `Undecidability/CyclicTag.lean` | two-tag semantics and the one-hot cyclic-tag simulation |
 | `Undecidability/CyclicTagAvoidance.lean` | distinguished-phase avoidance and firing reflection |
 | `Undecidability/Tracks.lean` | typed fixed-stride track serialization and recovery |
@@ -410,14 +411,13 @@ with a complete arbitrary-word converse.
 | `M₃(5)` mortality is not computable | `UniversalNeary.mortality35_not_computable` |
 | Two-tag executions reach their cyclic firing phase | `CyclicTag.reaches_firing_phase` |
 | A woven compiler word emits its prescribed track | `read_wholeAppendant_track` |
-| One arbitrary ordinary cyclic pulse is simulated | `read_next_dataBit` |
+| One arbitrary ordinary cyclic pulse has a nonempty physical simulation | `read_next_dataBit_transGen` |
 | Literal Neary initialization reaches the token invariant | `read_initialQueue` |
 | Every nonfiring cyclic execution is simulated | `read_avoidingReaches` |
 | A run reaching the distinguished pulse reaches its first such pulse | `read_until_firing` |
 | The distinguished pulse appends the halting seed | `read_to_haltingSeed` |
 | Exact-empty firing leaves only junk before the seed | `read_exact_firing_to_haltingSeed` |
 | Exact-empty cyclic firing forces restricted-tag halting | `read_exact_firing_halts` |
-| Every ordinary semantic pulse makes nonempty physical progress | `read_next_dataBit_transGen` |
 | A two-atom garbage reserve cannot halt | `GarbageBoundary.not_tagHaltsFrom` |
 | Restricted-tag halting reflects a reachable distinguished cyclic firing | `compiled_halts_implies_firing` |
 

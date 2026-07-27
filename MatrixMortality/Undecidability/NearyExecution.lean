@@ -550,11 +550,11 @@ theorem read_avoidingReaches {period : Nat} (system : CyclicTag period) (input :
       cases step with
       | advance instruction value bits not_firing =>
           obtain ⟨afterTokens, afterStable, afterRepresented, suffix⟩ :=
-            read_next_dataBit system input haltPhase instruction period_pos
+            read_next_dataBit_transGen system input haltPhase instruction period_pos
               (appendant_nonempty_at_zero instruction) middleTokens middleStable value bits
               middleRepresented not_firing
           exact ⟨afterTokens, afterStable, afterRepresented,
-            Relation.ReflTransGen.trans frontReach suffix⟩
+            Relation.ReflTransGen.trans frontReach suffix.to_reflTransGen⟩
 
 /-- A cyclic run reaching the distinguished pulse drives the restricted tag system to its first
 corresponding semantic true object. -/

@@ -16,10 +16,6 @@ open Mathlib (Vector)
 
 namespace MatrixMortality.Undecidability
 
-/-- Reflexive-transitive reachability under one fixed-width tag step. -/
-def TagReaches {α : Type*} (β : Nat) (output : α → List α) : List α → List α → Prop :=
-  Relation.ReflTransGen (TagStep β output)
-
 /-- Every lawful tag step has a complete deletion block at its source. -/
 theorem tagStep_width_le {α : Type*} {β : Nat} {output : α → List α}
     {before after : List α} (step : TagStep β output before after) :
@@ -117,32 +113,34 @@ theorem tagHaltsFrom_after_reaches {α : Type*} {β : Nat} {output : α → List
   | refl => exact halts
   | tail _ step ih => exact tagHaltsFrom_after_step step ih
 
-/-- A stroke history consumes its letters before touching the protected tail. -/
-theorem tagReaches_history {α : Type*} {β : Nat} (output : α → List α)
+/-- A stroke history takes exactly one transition per stroke. -/
+theorem tagReachesIn_history {α : Type*} {β : Nat} (output : α → List α)
     (history : List (Stroke α β)) (tail : List α) :
-    TagReaches β output (consumed history ++ tail) (tail ++ produced output history) := by
+    TagReachesIn β output history.length
+      (consumed history ++ tail) (tail ++ produced output history) := by
   induction history generalizing tail with
-  | nil =>
-      simpa [TagReaches] using
-        (Relation.ReflTransGen.refl : Relation.ReflTransGen (TagStep β output) tail tail)
+  | nil => simpa using (Relation.ReachesIn.refl tail :
+      TagReachesIn β output 0 tail tail)
   | cons stroke history ih =>
-      apply Relation.ReflTransGen.head
+      apply Relation.ReachesIn.head
       · refine ⟨stroke, consumed history ++ tail, ?_, rfl⟩
         simp [List.append_assoc]
       · simpa only [produced_cons, List.append_assoc] using
           ih (tail ++ output stroke.head)
+
+/-- A stroke history consumes its letters before touching the protected tail. -/
+theorem tagReaches_history {α : Type*} {β : Nat} (output : α → List α)
+    (history : List (Stroke α β)) (tail : List α) :
+    TagReaches β output (consumed history ++ tail) (tail ++ produced output history) :=
+  (tagReachesIn_history output history tail).toReaches
 
 /-- A nonempty stroke history gives a nonempty tag execution. -/
 theorem tagTransGen_history {α : Type*} {β : Nat} (output : α → List α)
     (stroke : Stroke α β) (history : List (Stroke α β)) (tail : List α) :
     Relation.TransGen (TagStep β output)
       (consumed (stroke :: history) ++ tail)
-      (tail ++ produced output (stroke :: history)) := by
-  apply Relation.TransGen.head'
-  · refine ⟨stroke, consumed history ++ tail, ?_, rfl⟩
-    simp [List.append_assoc]
-  · simpa only [produced_cons, List.append_assoc] using
-      tagReaches_history output history (tail ++ output stroke.head)
+      (tail ++ produced output (stroke :: history)) :=
+  (tagReachesIn_history output (stroke :: history) tail).toTransGen (by simp)
 
 /-- The first `width` symbols of a sufficiently long word, with their exact length retained. -/
 def frontVector {α : Type*} (width : Nat) (word : List α) (fits : width ≤ word.length) :
@@ -382,14 +380,15 @@ theorem chunkHistory_heads {α : Type*} (width : Nat) (width_pos : 0 < width)
         rw [List.get_eq_getElem, List.get_eq_getElem]
         simp [Nat.succ_mul, Nat.add_comm]
 
-/-- A complete protected prefix is consumed according to its fixed-stride heads. -/
-theorem tagReaches_chunks {α : Type*} (width : Nat) (width_pos : 0 < width)
+/-- Canonical chunk traversal takes exactly one transition per complete chunk. -/
+theorem tagReachesIn_chunks {α : Type*} (width : Nat) (width_pos : 0 < width)
     (output : α → List α) (count : Nat) (word tail : List α)
     (enough : count * width ≤ word.length) :
-    TagReaches width output (word.take (count * width) ++ tail)
+    TagReachesIn width output count (word.take (count * width) ++ tail)
       (tail ++ spell output (sampleHeads width width_pos count word enough)) := by
-  have execution := tagReaches_history output
+  have execution := tagReachesIn_history output
     (chunkHistory width width_pos count word enough) tail
+  rw [chunkHistory_length] at execution
   rw [consumed_chunkHistory] at execution
   have emitted : produced output (chunkHistory width width_pos count word enough) =
       spell output (sampleHeads width width_pos count word enough) := by
@@ -402,38 +401,22 @@ theorem tagReaches_chunks {α : Type*} (width : Nat) (width_pos : 0 < width)
   rw [emitted] at execution
   exact execution
 
+/-- A complete protected prefix is consumed according to its fixed-stride heads. -/
+theorem tagReaches_chunks {α : Type*} (width : Nat) (width_pos : 0 < width)
+    (output : α → List α) (count : Nat) (word tail : List α)
+    (enough : count * width ≤ word.length) :
+    TagReaches width output (word.take (count * width) ++ tail)
+      (tail ++ spell output (sampleHeads width width_pos count word enough)) :=
+  (tagReachesIn_chunks width width_pos output count word tail enough).toReaches
+
 /-- Consuming a positive number of complete chunks gives a nonempty execution. -/
 theorem tagTransGen_chunks {α : Type*} (width : Nat) (width_pos : 0 < width)
     (output : α → List α) (count : Nat) (count_pos : 0 < count)
     (word tail : List α) (enough : count * width ≤ word.length) :
     Relation.TransGen (TagStep width output)
       (word.take (count * width) ++ tail)
-      (tail ++ spell output (sampleHeads width width_pos count word enough)) := by
-  obtain ⟨count, rfl⟩ := Nat.exists_eq_succ_of_ne_zero (Nat.ne_of_gt count_pos)
-  let history := chunkHistory width width_pos (count + 1) word enough
-  have history_shape :
-      ∃ stroke strokes, history = stroke :: strokes := by
-    have history_length : history.length = count + 1 :=
-      chunkHistory_length width width_pos (count + 1) word enough
-    obtain ⟨stroke, strokes, history_eq⟩ := List.exists_cons_of_ne_nil (l := history) (by
-      intro history_empty
-      rw [history_empty] at history_length
-      simp at history_length)
-    exact ⟨stroke, strokes, history_eq⟩
-  obtain ⟨stroke, strokes, history_eq⟩ := history_shape
-  have execution := tagTransGen_history output stroke strokes tail
-  rw [← history_eq, consumed_chunkHistory] at execution
-  have emitted :
-      produced output (chunkHistory width width_pos (count + 1) word enough) =
-      spell output (sampleHeads width width_pos (count + 1) word enough) := by
-    unfold produced spell
-    rw [show (chunkHistory width width_pos (count + 1) word enough).map
-          (fun block => output block.head) =
-        ((chunkHistory width width_pos (count + 1) word enough).map Stroke.head).map output by
-          simp [List.map_map]]
-    rw [chunkHistory_heads]
-  rw [emitted] at execution
-  exact execution
+      (tail ++ spell output (sampleHeads width width_pos count word enough)) :=
+  (tagReachesIn_chunks width width_pos output count word tail enough).toTransGen count_pos
 
 /-- Sampling a woven word after a phase offset recovers the corresponding prescribed track. -/
 theorem sampleHeads_weave {α : Type*} {period columns : Nat} (period_pos : 0 < period)

@@ -13,30 +13,38 @@ namespace MatrixMortality
 namespace Undecidability
 namespace CockeMinsky
 
+/-- Exact pair-aligned sweep avoiding a target at every rule-selecting head. -/
+theorem sweep_avoiding_indexed {α : Type*} (output : α → List α) (target : α)
+    (pairs : List (α × α)) (tail : List α)
+    (heads_avoid : ∀ pair ∈ pairs, pair.1 ≠ target) :
+    HeadAvoidingTagReachesIn 2 output target pairs.length
+      (pairWord pairs ++ tail) (tail ++ pairOutput output pairs) := by
+  induction pairs generalizing tail with
+  | nil =>
+      simpa [pairWord, pairOutput] using
+        (Relation.ReachesIn.refl tail :
+          HeadAvoidingTagReachesIn 2 output target 0 tail tail)
+  | cons pair pairs ih =>
+      apply Relation.ReachesIn.head
+      · refine ⟨⟨pair.1, [pair.2], rfl⟩, pairWord pairs ++ tail,
+          heads_avoid pair (by simp), ?_, rfl⟩
+        simp [pairWord, Stroke.letters]
+      · simpa [pairWord, pairOutput, List.append_assoc, Nat.add_comm] using
+          ih (tail ++ output pair.1) fun later member =>
+            heads_avoid later (by simp [member])
+
 /-- A pair-aligned sweep avoids a target whenever none of its read members is that target. -/
 theorem sweep_avoiding {α : Type*} (output : α → List α) (target : α)
     (pairs : List (α × α)) (tail : List α)
     (heads_avoid : ∀ pair ∈ pairs, pair.1 ≠ target) :
     HeadAvoidingTagReaches 2 output target
-      (pairWord pairs ++ tail) (tail ++ pairOutput output pairs) := by
-  induction pairs generalizing tail with
-  | nil =>
-      simpa [pairWord, pairOutput] using
-        (Relation.ReflTransGen.refl :
-          HeadAvoidingTagReaches 2 output target tail tail)
-  | cons pair pairs ih =>
-      apply Relation.ReflTransGen.head
-      · refine ⟨⟨pair.1, [pair.2], rfl⟩, pairWord pairs ++ tail,
-          heads_avoid pair (by simp), ?_, rfl⟩
-        simp [pairWord, Stroke.letters]
-      · simpa [pairWord, pairOutput, List.append_assoc] using
-          ih (tail ++ output pair.1) fun later member =>
-            heads_avoid later (by simp [member])
+      (pairWord pairs ++ tail) (tail ++ pairOutput output pairs) :=
+  (sweep_avoiding_indexed output target pairs tail heads_avoid).toReflTransGen
 
-/-- A unary sweep avoids a target distinct from both of its read symbols. -/
-theorem sweep_run_avoiding {α : Type*} (output : α → List α) (target head digit wake : α)
-    (count : Nat) (tail : List α) (head_ne : head ≠ target) (digit_ne : digit ≠ target) :
-    HeadAvoidingTagReaches 2 output target
+private theorem sweep_run_avoiding_indexed {α : Type*} (output : α → List α)
+    (target head digit wake : α) (count : Nat) (tail : List α)
+    (head_ne : head ≠ target) (digit_ne : digit ≠ target) :
+    HeadAvoidingTagReachesIn 2 output target (count + 1)
       (cell head wake ++ cells digit wake count ++ tail)
       (tail ++ output head ++ (List.replicate count (output digit)).join) := by
   have heads :
@@ -47,9 +55,20 @@ theorem sweep_run_avoiding {α : Type*} (output : α → List α) (target head d
     rcases member with rfl | ⟨_, rfl⟩
     · exact head_ne
     · exact digit_ne
-  simpa [pairWord, pairOutput, cell, cells, List.map_replicate, List.append_assoc] using
-    sweep_avoiding output target
-      ((head, wake) :: List.replicate count (digit, wake)) tail heads
+  simpa [pairWord, pairOutput, cell, cells, List.map_replicate, List.append_assoc,
+    Nat.add_comm] using
+      sweep_avoiding_indexed output target
+        ((head, wake) :: List.replicate count (digit, wake)) tail heads
+
+/-- A unary sweep avoids a target distinct from both of its read symbols. -/
+theorem sweep_run_avoiding {α : Type*} (output : α → List α) (target head digit wake : α)
+    (count : Nat) (tail : List α) (head_ne : head ≠ target) (digit_ne : digit ≠ target) :
+    HeadAvoidingTagReaches 2 output target
+      (cell head wake ++ cells digit wake count ++ tail)
+      (tail ++ output head ++ (List.replicate count (output digit)).join) := by
+  exact
+    (sweep_run_avoiding_indexed output target head digit wake count tail
+      head_ne digit_ne).toReflTransGen
 
 /-- A target-avoiding unary sweep contains at least its distinguished first transition. -/
 theorem sweep_run_avoiding_strict {α : Type*} (output : α → List α)
@@ -58,16 +77,9 @@ theorem sweep_run_avoiding_strict {α : Type*} (output : α → List α)
     Relation.TransGen (HeadAvoidingTagStep 2 output target)
       (cell head wake ++ cells digit wake count ++ tail)
       (tail ++ output head ++ (List.replicate count (output digit)).join) := by
-  apply Relation.TransGen.head'
-    (b := cells digit wake count ++ tail ++ output head)
-  · refine ⟨⟨head, [wake], rfl⟩, cells digit wake count ++ tail, head_ne, ?_, rfl⟩
-    simp [cell, Stroke.letters, List.append_assoc]
-  · have remaining := sweep_avoiding output target
-      (List.replicate count (digit, wake)) (tail ++ output head) (by
-        intro pair member
-        simp only [List.mem_replicate] at member
-        exact member.2 ▸ digit_ne)
-    simpa [pairWord, pairOutput, cells, List.map_replicate, List.append_assoc] using remaining
+  exact
+    (sweep_run_avoiding_indexed output target head digit wake count tail
+      head_ne digit_ne).toTransGen (by omega)
 
 /-- Cocke–Minsky tag execution before the unique halt symbol is read. -/
 def HaltAvoidingReaches {state : Type*} (machine : Machine state) :
@@ -615,6 +627,68 @@ theorem tag_reaches_head_halt_implies_halts {state : Type*} (machine : Machine s
             exact
               ⟨final, Relation.ReflTransGen.head first laterExecution, at_final⟩
           · exact False.elim (target_avoided tail rfl)
+
+/-- Forget halt avoidance from one simulated nonhalting machine transition. -/
+theorem simulate_action {state : Type*} (machine : Machine state) (config : Config state)
+    (action : Action state) (at_state : machine config.state = some action) :
+    TagReaches machine (encode machine config) (encode machine (applyAction action config)) :=
+  (simulate_action_avoiding machine config action at_state).toReaches
+
+/-- One simulated nonhalting machine transition contains a concrete tag step. -/
+theorem simulate_action_strict {state : Type*} (machine : Machine state)
+    (config : Config state) (action : Action state)
+    (at_state : machine config.state = some action) :
+    Relation.TransGen (Step machine) (encode machine config)
+      (encode machine (applyAction action config)) := by
+  obtain ⟨steps, positive, execution⟩ :=
+    exists_headAvoidingTagReachesIn_of_transGen
+      (simulate_action_avoiding_strict machine config action at_state)
+  simpa [Step] using execution.toTagReachesIn.toTransGen positive
+
+/-- Forget halt avoidance from a finite machine execution. -/
+theorem simulate_reaches {state : Type*} (machine : Machine state)
+    {initial final : Config state} (execution : Reaches machine initial final) :
+    TagReaches machine (encode machine initial) (encode machine final) :=
+  (simulate_reaches_avoiding machine execution).toReaches
+
+/-- Machine halting produces the exact one-symbol tag halt queue. -/
+theorem halts_implies_tag_reaches_halt {state : Type*} (machine : Machine state)
+    (initial : Config state) (halts : Halts machine initial) :
+    TagReaches machine (encode machine initial) [.halt] :=
+  (halts_implies_halt_avoiding machine initial halts).toReaches
+
+/-- A terminating tag derivation from a configuration frame reflects machine halting. -/
+theorem tagHaltsIn_encode_implies_halts {state : Type*} (machine : Machine state)
+    (steps : Nat) (initial : Config state)
+    (halts : TagHaltsIn 2 (production machine) steps (encode machine initial)) :
+    Halts machine initial := by
+  induction steps using Nat.strong_induction_on generalizing initial with
+  | h steps ih =>
+      cases at_state : machine initial.state with
+      | none =>
+          exact ⟨initial, Relation.ReflTransGen.refl, at_state⟩
+      | some action =>
+          have strict := simulate_action_strict machine initial action at_state
+          obtain ⟨laterSteps, later_lt, later_halts⟩ :=
+            tagHaltsIn_after_transGen strict halts
+          obtain ⟨final, later_execution, at_final⟩ :=
+            ih laterSteps later_lt (applyAction action initial) later_halts
+          have first : applyAction action initial ∈ next machine initial := by
+            simp [next_eq_some_applyAction machine initial action at_state]
+          exact ⟨final, Relation.ReflTransGen.head first later_execution, at_final⟩
+
+/-- Exact tag reachability of the halt symbol is equivalent to machine halting. -/
+theorem tag_reaches_halt_iff {state : Type*} (machine : Machine state)
+    (initial : Config state) :
+    TagReaches machine (encode machine initial) [.halt] ↔ Halts machine initial := by
+  constructor
+  · intro execution
+    have final_halts : TagHaltsFrom 2 (production machine) [.halt] :=
+      .stop (by simp)
+    have initial_halts := final_halts.before execution
+    obtain ⟨steps, indexed⟩ := tagHaltsFrom_iff_exists_tagHaltsIn.mp initial_halts
+    exact tagHaltsIn_encode_implies_halts machine steps initial indexed
+  · exact halts_implies_tag_reaches_halt machine initial
 
 end CockeMinsky
 end Undecidability

@@ -208,9 +208,6 @@
 'MatrixMortality.Undecidability.NearyCompiler.read_wholeAppendant_track' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-'MatrixMortality.Undecidability.NearyCompiler.read_next_dataBit' depends on axioms: [propext,
- Classical.choice,
- Quot.sound]
 'MatrixMortality.Undecidability.NearyCompiler.initialTokens_stable' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]

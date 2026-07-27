@@ -29,7 +29,7 @@ def Step {alphabet : Nat} (system : TwoTag alphabet) :
 /-- Reflexive-transitive two-tag reachability. -/
 def Reaches {alphabet : Nat} (system : TwoTag alphabet) :
     List (Fin alphabet) → List (Fin alphabet) → Prop :=
-  Relation.ReflTransGen system.Step
+  TagReaches 2 system.production
 
 /-- Two-tag reachability whose rule-selecting heads avoid one distinguished label. -/
 def AvoidingReaches {alphabet : Nat} (system : TwoTag alphabet) (target : Fin alphabet) :
@@ -50,14 +50,8 @@ theorem step_cons_cons {alphabet : Nat} (system : TwoTag alphabet)
 theorem step_iff {alphabet : Nat} (system : TwoTag alphabet) (before after : List (Fin alphabet)) :
     system.Step before after ↔
       ∃ head wake tail,
-        before = head :: wake :: tail ∧ after = tail ++ system.production head := by
-  constructor
-  · rintro ⟨⟨head, wake, width⟩, tail, before_eq, after_eq⟩
-    have wake_length : wake.length = 1 := by omega
-    obtain ⟨wakeHead, rfl⟩ := List.length_eq_one.mp wake_length
-    exact ⟨head, wakeHead, tail, before_eq, after_eq⟩
-  · rintro ⟨head, wake, tail, rfl, rfl⟩
-    exact system.step_cons_cons head wake tail
+        before = head :: wake :: tail ∧ after = tail ++ system.production head :=
+  tagStep_two_iff system.production before after
 
 theorem avoidingStep_iff {alphabet : Nat} (system : TwoTag alphabet)
     (target : Fin alphabet) (before after : List (Fin alphabet)) :

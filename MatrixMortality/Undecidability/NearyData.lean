@@ -124,24 +124,27 @@ theorem appendantEmission_eq_objects_junk {period : Nat} (system : CyclicTag per
             .raw) := by
   rw [appendantEmission, encodeJunk_replicate_raw]
 
-/-- A run of epsilon objects preserves the abstract phase and emits a garbage code. -/
-theorem read_epsilonRun {period : Nat} (system : CyclicTag period) (input : List Bool)
+/-- Exact execution evidence for an epsilon run. The transition count vanishes exactly when the
+run is empty. -/
+theorem read_epsilonRun_indexed {period : Nat} (system : CyclicTag period) (input : List Bool)
     (haltPhase : Fin period) (period_pos : 0 < period) (count : Nat)
     (instruction : Fin period) (rest : List TagLetter)
     (rest_long : deletionWidth period ≤ rest.length) :
-    ∃ code : List JunkAtom,
-      (count = 0 ∨ code ≠ []) ∧
-        TagReaches (deletionWidth period) (compiledOutput system input haltPhase period_pos)
+    ∃ code : List JunkAtom, ∃ steps,
+      (count = 0 ↔ steps = 0) ∧
+        (count = 0 ∨ code ≠ []) ∧
+          TagReachesIn (deletionWidth period)
+            (compiledOutput system input haltPhase period_pos) steps
           ((repeatWord count (epsilonObject system input haltPhase period_pos) ++ rest).drop
             (objectEntryPhase instruction).val)
           (rest.drop (objectEntryPhase (CyclicTag.shift instruction count)).val ++
             encodeJunk system input haltPhase period_pos code) := by
   induction count generalizing instruction rest with
   | zero =>
-      refine ⟨[], Or.inl rfl, ?_⟩
+      refine ⟨[], 0, Iff.rfl, Or.inl rfl, ?_⟩
       simp only [repeatWord, List.replicate_zero, List.join_nil, List.nil_append,
         CyclicTag.shift_zero, encodeJunk_nil, List.append_nil]
-      exact Relation.ReflTransGen.refl
+      exact .refl _
   | succ count ih =>
       let epsilon := epsilonObject system input haltPhase period_pos
       let remainder := repeatWord count epsilon
@@ -176,7 +179,7 @@ theorem read_epsilonRun {period : Nat} (system : CyclicTag period) (input : List
           simp only [List.length_append, List.length_replicate]
           omega
         exact (Nat.le_of_lt phase_lt).trans (rest_long.trans rest_le)
-      have first := read_epsilonObject system input haltPhase instruction period_pos
+      have first := read_epsilonObject_transGen system input haltPhase instruction period_pos
         (remainder ++ rest) track_fits
       have emission_eq : emission =
           encodeJunk system input haltPhase period_pos emissionCode := by
@@ -192,8 +195,9 @@ theorem read_epsilonRun {period : Nat} (system : CyclicTag period) (input : List
         rw [show remainder ++ (rest ++ emission) = (remainder ++ rest) ++ emission by
           simp [List.append_assoc]]
         rw [List.drop_append_of_le_length next_phase_le]
-      have first' : TagReaches (deletionWidth period)
-          (compiledOutput system input haltPhase period_pos)
+      have first' : Relation.TransGen
+          (TagStep (deletionWidth period)
+            (compiledOutput system input haltPhase period_pos))
           ((repeatWord (count + 1) epsilon ++ rest).drop
             (objectEntryPhase instruction).val)
           ((remainder ++ (rest ++ emission)).drop
@@ -203,7 +207,8 @@ theorem read_epsilonRun {period : Nat} (system : CyclicTag period) (input : List
         simpa [List.append_assoc] using first
       have extended_long : deletionWidth period ≤ (rest ++ emission).length :=
         rest_long.trans (by simp)
-      obtain ⟨laterCode, _, later⟩ := ih nextInstruction (rest ++ emission) extended_long
+      obtain ⟨laterCode, laterSteps, _, _, later⟩ :=
+        ih nextInstruction (rest ++ emission) extended_long
       have shifted : CyclicTag.shift nextInstruction count =
           CyclicTag.shift instruction (count + 1) := by
         change CyclicTag.shift (CyclicTag.shift instruction 1) count = _
@@ -216,12 +221,31 @@ theorem read_epsilonRun {period : Nat} (system : CyclicTag period) (input : List
         (Nat.le_of_lt (objectEntryPhase
           (CyclicTag.shift instruction (count + 1))).isLt).trans rest_long
       rw [List.drop_append_of_le_length final_phase_le] at later
-      have composed := Relation.ReflTransGen.trans first' later
-      refine ⟨emissionCode ++ laterCode, Or.inr ?_, ?_⟩
+      obtain ⟨firstSteps, firstSteps_pos, firstIndexed⟩ :=
+        Relation.transGen_iff_exists_pos_reachesIn.mp first'
+      have composed := firstIndexed.trans later
+      refine ⟨emissionCode ++ laterCode, firstSteps + laterSteps, ?_, Or.inr ?_, ?_⟩
+      · omega
       · simp [emissionCode]
       rw [encodeJunk_append, ← emission_eq]
-      simpa [TagReaches, epsilon, remainder, nextInstruction, emission,
-        List.append_assoc] using composed
+      simpa [epsilon, remainder, nextInstruction, emission, List.append_assoc] using composed
+
+/-- A run of epsilon objects preserves the abstract phase and emits a garbage code. -/
+theorem read_epsilonRun {period : Nat} (system : CyclicTag period) (input : List Bool)
+    (haltPhase : Fin period) (period_pos : 0 < period) (count : Nat)
+    (instruction : Fin period) (rest : List TagLetter)
+    (rest_long : deletionWidth period ≤ rest.length) :
+    ∃ code : List JunkAtom,
+      (count = 0 ∨ code ≠ []) ∧
+        TagReaches (deletionWidth period) (compiledOutput system input haltPhase period_pos)
+          ((repeatWord count (epsilonObject system input haltPhase period_pos) ++ rest).drop
+            (objectEntryPhase instruction).val)
+          (rest.drop (objectEntryPhase (CyclicTag.shift instruction count)).val ++
+            encodeJunk system input haltPhase period_pos code) := by
+  obtain ⟨code, _, _, code_nonempty, execution⟩ :=
+    read_epsilonRun_indexed system input haltPhase period_pos count instruction rest rest_long
+  exact ⟨code, code_nonempty, execution.toReaches⟩
+
 /-- A positive epsilon run executes nontrivially and emits nonempty garbage. -/
 theorem read_epsilonRun_transGen {period : Nat} (system : CyclicTag period) (input : List Bool)
     (haltPhase : Fin period) (period_pos : 0 < period) (count : Nat)
@@ -234,78 +258,13 @@ theorem read_epsilonRun_transGen {period : Nat} (system : CyclicTag period) (inp
             (objectEntryPhase instruction).val)
           (rest.drop (objectEntryPhase (CyclicTag.shift instruction count)).val ++
             encodeJunk system input haltPhase period_pos code) := by
-  obtain ⟨count, rfl⟩ := Nat.exists_eq_succ_of_ne_zero (Nat.ne_of_gt count_pos)
-  let epsilon := epsilonObject system input haltPhase period_pos
-  let remainder := repeatWord count epsilon
-  let nextInstruction := CyclicTag.shift instruction 1
-  let emission := silentEmission system input haltPhase instruction period_pos
-  let emissionCode : List JunkAtom := .packet :: List.replicate
-    (trackWidth system input - 11 * period + if instruction.val = 0 then 1 else 0) .raw
-  have epsilon_long : deletionWidth period ≤ epsilon.length := by
-    change deletionWidth period ≤ (epsilonObject system input haltPhase period_pos).length
-    rw [epsilonObject_length]
-    exact (Nat.le_mul_of_pos_right _ (trackWidth_pos system input)).trans
-      (Nat.le_add_right _ _)
-  have entry_le_epsilon : (objectEntryPhase instruction).val ≤ epsilon.length :=
-    (Nat.le_of_lt (objectEntryPhase instruction).isLt).trans epsilon_long
-  have start_split : ((repeatWord (count + 1) epsilon ++ rest).drop
-      (objectEntryPhase instruction).val) =
-        epsilon.drop (objectEntryPhase instruction).val ++ remainder ++ rest := by
-    rw [repeatWord_succ_left]
-    rw [show epsilon ++ remainder ++ rest = epsilon ++ (remainder ++ rest) by simp]
-    rw [List.drop_append_of_le_length entry_le_epsilon]
-    simp [List.append_assoc]
-  have track_fits : (epsilonPhase instruction).val ≤
-      (List.replicate 6 TagLetter.b ++ (remainder ++ rest)).length := by
-    have phase_lt := (epsilonPhase instruction).isLt
-    have rest_le :
-        rest.length ≤ (List.replicate 6 TagLetter.b ++ (remainder ++ rest)).length := by
-      simp only [List.length_append, List.length_replicate]
-      omega
-    exact (Nat.le_of_lt phase_lt).trans (rest_long.trans rest_le)
-  have first := read_epsilonObject_transGen system input haltPhase instruction period_pos
-    (remainder ++ rest) track_fits
-  have emission_eq :
-      emission = encodeJunk system input haltPhase period_pos emissionCode := by
-    exact silentEmission_eq_encodeJunk system input haltPhase instruction period_pos
-  have next_phase_le :
-      (objectEntryPhase nextInstruction).val ≤ (remainder ++ rest).length := by
-    have phase_lt := (objectEntryPhase nextInstruction).isLt
-    exact (Nat.le_of_lt phase_lt).trans (rest_long.trans (by simp))
-  have intermediate : (remainder ++ rest).drop
-      (objectEntryPhase nextInstruction).val ++ emission =
-        (remainder ++ (rest ++ emission)).drop
-          (objectEntryPhase nextInstruction).val := by
-    rw [show remainder ++ (rest ++ emission) = (remainder ++ rest) ++ emission by simp]
-    rw [List.drop_append_of_le_length next_phase_le]
-  have first' : Relation.TransGen (TagStep (deletionWidth period)
-      (compiledOutput system input haltPhase period_pos))
-      ((repeatWord (count + 1) epsilon ++ rest).drop
-        (objectEntryPhase instruction).val)
-      ((remainder ++ (rest ++ emission)).drop
-        (objectEntryPhase nextInstruction).val) := by
-    rw [start_split]
-    rw [← intermediate]
-    simpa [List.append_assoc] using first
-  have extended_long : deletionWidth period ≤ (rest ++ emission).length := rest_long.trans (by simp)
-  obtain ⟨laterCode, _, later⟩ := read_epsilonRun system input haltPhase period_pos count
-    nextInstruction (rest ++ emission) extended_long
-  have shifted : CyclicTag.shift nextInstruction count =
-      CyclicTag.shift instruction (count + 1) := by
-    change CyclicTag.shift (CyclicTag.shift instruction 1) count = _
-    rw [CyclicTag.shift_add]
-    congr 1
-    omega
-  rw [shifted] at later
-  have final_phase_le : (objectEntryPhase
-      (CyclicTag.shift instruction (count + 1))).val ≤ rest.length :=
-    (Nat.le_of_lt (objectEntryPhase (CyclicTag.shift instruction (count + 1))).isLt).trans rest_long
-  rw [List.drop_append_of_le_length final_phase_le] at later
-  have composed := Relation.TransGen.trans_left first' later
-  refine ⟨emissionCode ++ laterCode, ?_, ?_⟩
-  · simp [emissionCode]
-  rw [encodeJunk_append, ← emission_eq]
-  simpa [epsilon, remainder, nextInstruction, emission, List.append_assoc] using composed
+  obtain ⟨code, steps, count_zero, code_nonempty, execution⟩ :=
+    read_epsilonRun_indexed system input haltPhase period_pos count instruction rest rest_long
+  have steps_pos : 0 < steps := Nat.pos_of_ne_zero fun steps_zero =>
+    Nat.ne_of_gt count_pos (count_zero.mpr steps_zero)
+  exact ⟨code, code_nonempty.resolve_left (Nat.ne_of_gt count_pos),
+    execution.toTransGen steps_pos⟩
+
 /-- Reading one garbage atom executes nontrivially, preserves phase, and emits garbage. -/
 theorem read_junkAtom_transGen {period : Nat} (system : CyclicTag period) (input : List Bool)
     (haltPhase instruction : Fin period) (period_pos : 0 < period) (atom : JunkAtom)
@@ -340,21 +299,6 @@ theorem read_junkAtom_transGen {period : Nat} (system : CyclicTag period) (input
       refine ⟨code, code_nonempty, ?_⟩
       rw [CyclicTag.shift_period] at read
       exact read
-/-- Reading one garbage atom preserves the current cyclic instruction and emits garbage. -/
-theorem read_junkAtom {period : Nat} (system : CyclicTag period) (input : List Bool)
-    (haltPhase instruction : Fin period) (period_pos : 0 < period) (atom : JunkAtom)
-    (rest : List TagLetter) (rest_long : deletionWidth period ≤ rest.length) :
-    ∃ code : List JunkAtom,
-      code ≠ [] ∧
-        TagReaches (deletionWidth period) (compiledOutput system input haltPhase period_pos)
-          ((junkAtomWord system input haltPhase period_pos atom ++ rest).drop
-            (objectEntryPhase instruction).val)
-          (rest.drop (objectEntryPhase instruction).val ++
-            encodeJunk system input haltPhase period_pos code) := by
-  obtain ⟨code, code_nonempty, read⟩ :=
-    read_junkAtom_transGen system input haltPhase instruction period_pos atom rest rest_long
-  exact ⟨code, code_nonempty, read.to_reflTransGen⟩
-
 /-- Reading a garbage code preserves the current cyclic instruction and emits another code. -/
 theorem read_junk {period : Nat} (system : CyclicTag period) (input : List Bool)
     (haltPhase instruction : Fin period) (period_pos : 0 < period) (code : List JunkAtom)
@@ -374,7 +318,7 @@ theorem read_junk {period : Nat} (system : CyclicTag period) (input : List Bool)
   | cons atom code ih =>
       let suffix := encodeJunk system input haltPhase period_pos code
       obtain ⟨firstCode, firstCode_nonempty, first⟩ :=
-        read_junkAtom system input haltPhase instruction period_pos atom (suffix ++ rest)
+        read_junkAtom_transGen system input haltPhase instruction period_pos atom (suffix ++ rest)
           (rest_long.trans (by simp))
       have firstPhaseFits : (objectEntryPhase instruction).val ≤ (suffix ++ rest).length :=
         (Nat.le_of_lt (objectEntryPhase instruction).isLt).trans (rest_long.trans (by simp))
@@ -398,7 +342,7 @@ theorem read_junk {period : Nat} (system : CyclicTag period) (input : List Bool)
               (objectEntryPhase instruction).val) := by
         rw [encodeJunk_cons]
         rw [← intermediate]
-        simpa [suffix, List.append_assoc] using first
+        simpa [suffix, List.append_assoc] using first.to_reflTransGen
       have extended_long : deletionWidth period ≤
           (rest ++ encodeJunk system input haltPhase period_pos firstCode).length :=
         rest_long.trans (by simp)
@@ -641,11 +585,12 @@ theorem appendantEmission_eq_encodeData {period : Nat} (system : CyclicTag perio
     appendantEmission_eq_objects_junk]
   rfl
 
-/-- Read one zero data token and advance the cyclic instruction. -/
-theorem read_zeroToken {period : Nat} (system : CyclicTag period) (input : List Bool)
+/-- Reading one zero data token makes nonempty progress and advances the cyclic instruction. -/
+theorem read_zeroToken_transGen {period : Nat} (system : CyclicTag period) (input : List Bool)
     (haltPhase instruction : Fin period) (period_pos : 0 < period) (rest : List TagLetter)
     (rest_long : deletionWidth period ≤ rest.length) :
-    TagReaches (deletionWidth period) (compiledOutput system input haltPhase period_pos)
+    Relation.TransGen
+      (TagStep (deletionWidth period) (compiledOutput system input haltPhase period_pos))
       ((dataTokenWord system input haltPhase period_pos (.bit false) ++ rest).drop
         (objectEntryPhase instruction).val)
       (rest.drop (objectEntryPhase (CyclicTag.shift instruction 1)).val ++
@@ -665,18 +610,20 @@ theorem read_zeroToken {period : Nat} (system : CyclicTag period) (input : List 
   have phase_le_token : (objectEntryPhase instruction).val ≤
       (bitObject system input haltPhase period_pos false).length :=
     (Nat.le_of_lt (objectEntryPhase instruction).isLt).trans token_long
-  have read := read_zeroObject system input haltPhase instruction period_pos rest track_fits
+  have read := read_zeroObject_transGen system input haltPhase instruction period_pos rest
+    track_fits
   rw [silentEmission_eq_encodeData] at read
   rw [dataTokenWord, List.drop_append_of_le_length phase_le_token]
   exact read
 
-/-- Read one ordinary true data token and advance the cyclic instruction. -/
-theorem read_oneToken {period : Nat} (system : CyclicTag period) (input : List Bool)
+/-- Reading one ordinary true data token makes nonempty progress. -/
+theorem read_oneToken_transGen {period : Nat} (system : CyclicTag period) (input : List Bool)
     (haltPhase instruction : Fin period) (period_pos : 0 < period)
     (not_halting : instruction ≠ haltPhase)
     (appendant_nonempty_at_zero : instruction.val = 0 → system.appendant instruction ≠ [])
     (rest : List TagLetter) (rest_long : deletionWidth period ≤ rest.length) :
-    TagReaches (deletionWidth period) (compiledOutput system input haltPhase period_pos)
+    Relation.TransGen
+      (TagStep (deletionWidth period) (compiledOutput system input haltPhase period_pos))
       ((dataTokenWord system input haltPhase period_pos (.bit true) ++ rest).drop
         (objectEntryPhase instruction).val)
       (rest.drop (objectEntryPhase (CyclicTag.shift instruction 1)).val ++
@@ -697,7 +644,7 @@ theorem read_oneToken {period : Nat} (system : CyclicTag period) (input : List B
   have phase_le_token : (objectEntryPhase instruction).val ≤
       (bitObject system input haltPhase period_pos true).length :=
     (Nat.le_of_lt (objectEntryPhase instruction).isLt).trans token_long
-  have read := read_oneObject system input haltPhase instruction period_pos not_halting
+  have read := read_oneObject_transGen system input haltPhase instruction period_pos not_halting
     appendant_nonempty_at_zero rest track_fits
   rw [appendantEmission_eq_encodeData] at read
   rw [dataTokenWord, List.drop_append_of_le_length phase_le_token]
@@ -730,13 +677,14 @@ theorem ordinaryBitEmission_has_junk {period : Nat} (system : CyclicTag period)
       refine ⟨atom, ?_⟩
       simp [ordinaryBitEmission, code_eq]
 
-/-- Uniform traversal of an ordinary, nonhalting cyclic data bit. -/
-theorem read_bitToken {period : Nat} (system : CyclicTag period) (input : List Bool)
+/-- Every ordinary, nonhalting cyclic data bit makes nonempty progress. -/
+theorem read_bitToken_transGen {period : Nat} (system : CyclicTag period) (input : List Bool)
     (haltPhase instruction : Fin period) (period_pos : 0 < period)
     (appendant_nonempty_at_zero : instruction.val = 0 → system.appendant instruction ≠ [])
     (value : Bool) (not_halting : value = true → instruction ≠ haltPhase)
     (rest : List TagLetter) (rest_long : deletionWidth period ≤ rest.length) :
-    TagReaches (deletionWidth period) (compiledOutput system input haltPhase period_pos)
+    Relation.TransGen
+      (TagStep (deletionWidth period) (compiledOutput system input haltPhase period_pos))
       ((dataTokenWord system input haltPhase period_pos (.bit value) ++ rest).drop
         (objectEntryPhase instruction).val)
       (rest.drop (objectEntryPhase (CyclicTag.shift instruction 1)).val ++
@@ -745,10 +693,10 @@ theorem read_bitToken {period : Nat} (system : CyclicTag period) (input : List B
   cases value with
   | false =>
       simpa [ordinaryBitEmission] using
-        read_zeroToken system input haltPhase instruction period_pos rest rest_long
+        read_zeroToken_transGen system input haltPhase instruction period_pos rest rest_long
   | true =>
       simpa [ordinaryBitEmission] using
-        read_oneToken system input haltPhase instruction period_pos (not_halting rfl)
+        read_oneToken_transGen system input haltPhase instruction period_pos (not_halting rfl)
           appendant_nonempty_at_zero rest rest_long
 
 theorem dataTokenWord_bit_long {period : Nat} (system : CyclicTag period)
@@ -771,15 +719,17 @@ theorem dataTokenWord_bit_long {period : Nat} (system : CyclicTag period)
       have core := Nat.le_mul_of_pos_right (deletionWidth period) (trackWidth_pos system input)
       omega
 
-/-- Consume all garbage before the next data bit, then simulate that cyclic-tag transition. -/
-theorem read_dataPulse {period : Nat} (system : CyclicTag period) (input : List Bool)
+/-- Consuming all leading garbage and the next data bit makes nonempty progress. -/
+theorem read_dataPulse_transGen {period : Nat} (system : CyclicTag period)
+    (input : List Bool)
     (haltPhase instruction : Fin period) (period_pos : 0 < period)
     (appendant_nonempty_at_zero : instruction.val = 0 → system.appendant instruction ≠ [])
     (leading : List JunkAtom) (value : Bool)
     (not_halting : value = true → instruction ≠ haltPhase) (tail : List DataToken)
     (tailAtom : JunkAtom) (tail_has_junk : .junk tailAtom ∈ tail) :
     ∃ emittedLeading : List JunkAtom,
-      TagReaches (deletionWidth period) (compiledOutput system input haltPhase period_pos)
+      Relation.TransGen
+        (TagStep (deletionWidth period) (compiledOutput system input haltPhase period_pos))
         ((encodeData system input haltPhase period_pos
           (leading.map .junk ++ .bit value :: tail)).drop
             (objectEntryPhase instruction).val)
@@ -819,7 +769,7 @@ theorem read_dataPulse {period : Nat} (system : CyclicTag period) (input : List 
       leadingEmission, List.append_assoc] using leadingRead
   have extended_long : deletionWidth period ≤ (tailWord ++ leadingEmission).length :=
     tail_long.trans (by simp)
-  have bitRead := read_bitToken system input haltPhase instruction period_pos
+  have bitRead := read_bitToken_transGen system input haltPhase instruction period_pos
     appendant_nonempty_at_zero value not_halting (tailWord ++ leadingEmission) extended_long
   let nextInstruction := CyclicTag.shift instruction 1
   let bitEmission :=
@@ -848,7 +798,7 @@ theorem read_dataPulse {period : Nat} (system : CyclicTag period) (input : List 
         simp [encodeData_append, encodeData_junk, bitEmission, leadingEmission,
           List.append_assoc]
   rw [finalShape] at bitRead
-  exact ⟨emittedLeading, Relation.ReflTransGen.trans leadingRead' bitRead⟩
+  exact ⟨emittedLeading, Relation.TransGen.trans_right leadingRead' bitRead⟩
 
 /-- A token stream ends in a garbage token. -/
 inductive EndsInJunk : List DataToken → Prop
@@ -956,8 +906,9 @@ theorem split_first_dataBit {tokens : List DataToken} (ends : EndsInJunk tokens)
           refine ⟨atom :: leading, tail, ?_, tail_eq, tail_ends⟩
           simp [token_eq]
 
-/-- One ordinary pulse preserves the token invariant and realizes the cyclic-tag data update. -/
-theorem read_next_dataBit {period : Nat} (system : CyclicTag period) (input : List Bool)
+/-- An ordinary pulse preserves the token invariant by a nonempty execution. -/
+theorem read_next_dataBit_transGen {period : Nat} (system : CyclicTag period)
+    (input : List Bool)
     (haltPhase instruction : Fin period) (period_pos : 0 < period)
     (appendant_nonempty_at_zero : instruction.val = 0 → system.appendant instruction ≠ [])
     (tokens : List DataToken) (stable : StableData tokens) (value : Bool) (bits : List Bool)
@@ -966,8 +917,9 @@ theorem read_next_dataBit {period : Nat} (system : CyclicTag period) (input : Li
     ∃ nextTokens : List DataToken,
       StableData nextTokens ∧
         dataBits nextTokens = bits ++ (if value then system.appendant instruction else []) ∧
-          TagReaches (deletionWidth period)
-            (compiledOutput system input haltPhase period_pos)
+          Relation.TransGen
+            (TagStep (deletionWidth period)
+              (compiledOutput system input haltPhase period_pos))
             ((encodeData system input haltPhase period_pos tokens).drop
               (objectEntryPhase instruction).val)
             ((encodeData system input haltPhase period_pos nextTokens).drop
@@ -976,8 +928,8 @@ theorem read_next_dataBit {period : Nat} (system : CyclicTag period) (input : Li
     split_first_dataBit stable.endsInJunk value bits bits_eq
   obtain ⟨tailAtom, tail_has_junk⟩ := EndsInJunk.exists_mem tail_ends
   obtain ⟨emittedLeading, read⟩ :=
-    read_dataPulse system input haltPhase instruction period_pos appendant_nonempty_at_zero
-      leading value not_halting tail tailAtom tail_has_junk
+    read_dataPulse_transGen system input haltPhase instruction period_pos
+      appendant_nonempty_at_zero leading value not_halting tail tailAtom tail_has_junk
   let emission := ordinaryBitEmission system input instruction value
   let nextTokens := tail ++ emittedLeading.map .junk ++ emission
   have next_ends : EndsInJunk nextTokens := by
