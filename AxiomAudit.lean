@@ -54,6 +54,8 @@ open MatrixMortality
 #print axioms closedSubstitutionHalts_iff_noReachableCycle
 #print axioms twoPrivateState_ruleScale_eq
 #print axioms neary_twoPrivateState_phaseCompiler_impossible
+#print axioms binarySpell_not_injective_commute
+#print axioms neary_exact_internal_final_code_impossible
 #print axioms Undecidability.nearyMortality44_mortal_iff_tagHaltsFrom
 #print axioms Undecidability.nearyMortality44_control_fixes_anchor
 #print axioms Undecidability.nearyMortality44_toggle_eq_permMatrix

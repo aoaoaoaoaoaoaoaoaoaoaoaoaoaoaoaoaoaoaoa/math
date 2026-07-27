@@ -1,4 +1,5 @@
 import MatrixMortality.BoundaryTax
+import MatrixMortality.BinaryDefect
 import MatrixMortality.CHHNPacking
 import MatrixMortality.CHHNPackingRank
 import MatrixMortality.ClosedSubstitution

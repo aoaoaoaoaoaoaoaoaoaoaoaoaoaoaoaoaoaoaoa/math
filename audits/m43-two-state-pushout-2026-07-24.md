@@ -105,8 +105,10 @@ decidable by graph reachability.
 ### Exact internal/final codes
 
 Distinct binary words with equal image make the binary morphism noninjective. The two-word
-defect theorem then makes both letter images powers of one primitive word. All upper images
-commute, contrary to the explicit macro upper words `u_bu_b` and `1u_b`.
+defect theorem then makes both letter images commute, so every pair of upper images commutes,
+contrary to the explicit macro upper words `u_bu_b` and `1u_b`.
+The needed implication and the concrete contradiction are kernel-checked in
+[`MatrixMortality/BinaryDefect.lean`](../MatrixMortality/BinaryDefect.lean).
 
 ## Reported, Not Accepted As Theorems
 

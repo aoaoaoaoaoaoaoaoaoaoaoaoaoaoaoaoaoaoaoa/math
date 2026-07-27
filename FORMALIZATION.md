@@ -217,13 +217,10 @@ the two-private-state phase obstruction
 obstruction [`M4-O03`](SALVAGE.md#m4-o03-closed-serialization-collapse) are now Lean
 declarations. The phase theorem uses the exact Neary lower scales. The serialization theorem
 is an exact initial-queue criterion: a finite closed-token substitution halts precisely when
-none of the tokens reachable from that queue lies on a dependency cycle.
-
-One independently checked obstruction remains unformalized:
-
-| Record | Formalization obligation |
-| --- | --- |
-| [`M4-O04`](SALVAGE.md#m4-o04-exact-internal-final-code-defect) | binary morphism defect forces commuting upper images, contradicting the macro source |
+none of the tokens reachable from that queue lies on a dependency cycle. The exact-code
+obstruction [`M4-O04`](SALVAGE.md#m4-o04-exact-internal-final-code-defect) is formalized from
+first principles: noninjectivity of a binary free-monoid morphism forces its two letter images
+to commute, contradicting the two explicit Neary macro upper words.
 
 The odd-phase macro cut [`M4-S01`](SALVAGE.md#m4-s01-odd-phase-macro-cut) remains reported.
 Lean already defines the relevant phase residues and Table 2 tracks, but no theorem yet proves
@@ -243,6 +240,7 @@ with a complete arbitrary-word converse.
 | `MatrixSemigroup.lean` | shared word semantics, mortality transports, common-image restriction, transposition, and zero padding |
 | `LinearRepresentation.lean` | finite Hankel sections and exact-realization state lower bounds |
 | `BoundaryTax.lean` | generic finite-witness two-channel boundary tax |
+| `BinaryDefect.lean` | binary two-word defect theorem and exact Neary macro obstruction |
 | `CHHNPacking.lean` | generic two-slot CHHN packing and six-state finite-Hankel kernels |
 | `CHHNPackingRank.lean` | all-placement exact six-state lower bound for the Neary packing |
 | `ClosedSubstitution.lean` | exact reachable-cycle criterion for finite closed-token queues |
@@ -329,6 +327,7 @@ with a complete arbitrary-word converse.
 | Exact left-context toggle fusion is immortal | `exactLeftToggleFusion_immortal` |
 | A finite closed-token queue halts iff no reachable token lies on a dependency cycle | `closedSubstitutionHalts_iff_noReachableCycle` |
 | Two private quotient states cannot isolate the Neary rule phase | `twoPrivateState_ruleScale_eq`, `neary_twoPrivateState_phaseCompiler_impossible` |
+| A noninjective binary morphism cannot realize both Neary macro upper words | `binarySpell_not_injective_commute`, `neary_exact_internal_final_code_impossible` |
 | Every binary word has the exact six-state coefficient | `pairedBinaryRow_wordProduct`, `pairedBinaryCoefficient_eq_sideCoefficient` |
 | Every four-role word has a two-bit encoding | `decodePairedBinary_surjective` |
 | Canonical structured `Z₆(2)` instance iff tag halting | `nearyScalarZero62_hasZero_iff_tagHaltsFrom` |

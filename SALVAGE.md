@@ -76,7 +76,7 @@ file owns the mathematical stock.
 | [`M4-O02`](#m4-o02-two-private-state-phase-signature) | obstruction | two private quotient states cannot isolate one exceptional cyclic phase | formalized | graduated |
 | [`M4-S01`](#m4-s01-odd-phase-macro-cut) | structure theorem | paired Neary roles inherit a rigid macro-stroke language | reported | active |
 | [`M4-O03`](#m4-o03-closed-serialization-collapse) | obstruction | finite closed-token queue serialization is decidable | formalized | graduated |
-| [`M4-O04`](#m4-o04-exact-internal-final-code-defect) | obstruction | distinct exact binary codes for one macro force commuting upper images | audited | stock |
+| [`M4-O04`](#m4-o04-exact-internal-final-code-defect) | obstruction | distinct exact binary codes for one macro force commuting upper images | formalized | graduated |
 | [`M4-O05`](#m4-o05-direct-two-state-first-return-recoding) | obstruction | the present four Neary roles have no direct two-state first-return code | reported | active |
 | [`M4-M01`](#m4-m01-mixed-cube-root-punctuation) | partial mechanism | rational cube-root toggles reduce mixed punctuation to incidence equations | audited | parked |
 | [`G3-O01`](#g3-o01-four-role-macro-irreducibility) | obstruction | exact nonerasing macros cannot reduce the four source roles to three letters | formalized | graduated |
@@ -1771,8 +1771,8 @@ The exact initial-queue criterion is
 ### M4-O04: Exact internal/final code defect
 
 **Kind:** obstruction
-**Evidence:** audited
-**Disposition:** stock
+**Evidence:** formalized
+**Disposition:** graduated
 
 Suppose a binary source morphism `h` gives one semantic macro two distinct codewords `p≠q`
 but preserves its upper word exactly:
@@ -1782,8 +1782,7 @@ h(p)=h(q).
 ```
 
 Then `h` is noninjective. By the two-word defect theorem, the images of the two binary letters
-commute and are powers of one primitive word; every pair of words in `im h` therefore
-commutes. The macro upper words
+commute; the submonoid they generate is therefore commutative. The macro upper words
 
 ```text
 û_b = u_bu_b,       û_c = 1u_b,       u_b=10^β1
@@ -1797,6 +1796,11 @@ argument.
 
 **Use:** distinct exact codewords cannot make one deletion macro mean “internal” in one place
 and “final” in another.
+
+**Artifact:** `binarySpell_not_injective_commute` proves the two-word defect theorem by
+prefix cancellation and Euclidean descent. `neary_exact_internal_final_code_impossible`
+derives the concrete macro contradiction in
+[`MatrixMortality/BinaryDefect.lean`](MatrixMortality/BinaryDefect.lean).
 
 ### M4-O05: Direct two-state first-return recoding
 

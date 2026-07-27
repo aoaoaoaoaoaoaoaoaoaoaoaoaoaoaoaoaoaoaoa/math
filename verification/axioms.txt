@@ -74,6 +74,8 @@
 'MatrixMortality.neary_twoPrivateState_phaseCompiler_impossible' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.binarySpell_not_injective_commute' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.neary_exact_internal_final_code_impossible' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.Undecidability.nearyMortality44_mortal_iff_tagHaltsFrom' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
