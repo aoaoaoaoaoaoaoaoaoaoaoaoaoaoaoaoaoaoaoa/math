@@ -253,7 +253,8 @@ theorem run_cycles_reflects {alphabet : Nat} (system : TwoTag alphabet)
       exact Or.inr ⟨before, Relation.ReflTransGen.refl, by simpa [run] using execution.symm⟩
   | succ cycles ih =>
       rw [show (cycles + 1) * (alphabet + alphabet) =
-          (alphabet + alphabet) + cycles * (alphabet + alphabet) by ring,
+          (alphabet + alphabet) + cycles * (alphabet + alphabet) by
+        simp [Nat.add_mul, Nat.add_comm],
         run_add] at execution
       cases before with
       | nil => exact Or.inl (.stop (by simp))

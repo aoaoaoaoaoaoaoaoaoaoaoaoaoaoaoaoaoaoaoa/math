@@ -1,3 +1,4 @@
+import Lean.Elab.Tactic.Omega
 import MatrixMortality.Computability
 import MatrixMortality.TagQueue
 
@@ -439,7 +440,8 @@ theorem simulate_reaches {alphabet : Nat} (system : TwoTag alphabet)
       obtain ⟨head, wake, tail, rfl, rfl⟩ := (TwoTag.step_iff system middle after).mp step
       refine ⟨steps + 1, ?_⟩
       rw [show (steps + 1) * (alphabet + alphabet) =
-          steps * (alphabet + alphabet) + (alphabet + alphabet) by ring]
+          steps * (alphabet + alphabet) + (alphabet + alphabet) by
+        simp [Nat.add_mul]]
       rw [run_add, hsteps]
       exact simulate_step system alphabet_nonempty head wake tail
 

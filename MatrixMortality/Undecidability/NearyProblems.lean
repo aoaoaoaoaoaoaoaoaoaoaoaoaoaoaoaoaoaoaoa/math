@@ -1,3 +1,4 @@
+import MatrixMortality.NearyEncoding
 import MatrixMortality.Undecidability.Problems
 
 /-!
@@ -72,11 +73,6 @@ def nearyGeneratorEquivFin : Option NearyTile ≃ Fin 5 where
   invFun := nearyGeneratorOfFin
   left_inv := nearyGeneratorOfFin_finOfNearyGenerator
   right_inv := finOfNearyGenerator_nearyGeneratorOfFin
-
-private theorem spell_comp_map {a b c : Type*} (side : b → List c) (f : a → b)
-    (word : List a) :
-    spell (side ∘ f) word = spell side (word.map f) := by
-  simp [spell, Function.comp_def]
 
 /-- The four-generator binary GPCP problem emitted by one restricted tag source. -/
 def nearyGPCP4 (beta : Nat) (body : List TagLetter) : BinaryGPCP4 where

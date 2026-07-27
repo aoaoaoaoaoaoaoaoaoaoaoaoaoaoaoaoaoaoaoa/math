@@ -6,8 +6,10 @@ import MatrixMortality.ClosedSubstitution
 import MatrixMortality.FullMatrixAlgebra
 import MatrixMortality.InternalSandwich
 import MatrixMortality.LinearRepresentation
-import MatrixMortality.NearyEncoding
 import MatrixMortality.MacroIrreducibility
+import MatrixMortality.NearyBinaryDefect
+import MatrixMortality.NearyEncoding
+import MatrixMortality.NearyPhaseSignature
 import MatrixMortality.PairedBinary
 import MatrixMortality.PairedBinaryAlgebra
 import MatrixMortality.PairedBinaryAlgebraContexts
@@ -23,10 +25,13 @@ import MatrixMortality.PrefixAlgebra
 import MatrixMortality.PrefixAlgebraContexts
 import MatrixMortality.PrefixAlgebraRank
 import MatrixMortality.PrefixFullAlgebra
+import MatrixMortality.RankOne
 import MatrixMortality.ScheduledBinary
 import MatrixMortality.ScheduledBinaryRank
+import MatrixMortality.TerminalCompiler
 import MatrixMortality.TwoStateObstructions
 import MatrixMortality.TwoStatePushout
+import MatrixMortality.WordMorphism
 import MatrixMortality.Undecidability.BinaryProblems
 import MatrixMortality.Undecidability.NearyConverse
 import MatrixMortality.Undecidability.NearyProblems

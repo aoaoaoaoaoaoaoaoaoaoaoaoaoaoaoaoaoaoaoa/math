@@ -1,5 +1,8 @@
+import Lean.Elab.Tactic.Omega
+import Mathlib.Data.Vector.Basic
 import MatrixMortality.TagQueue
 import MatrixMortality.Undecidability.Tracks
+import MatrixMortality.WordMorphism
 
 /-!
 # Exact finite tag executions
@@ -206,7 +209,8 @@ theorem consumed_chunkHistory {α : Type*} (width : Nat) (width_pos : 0 < width)
   | succ count ih =>
       simp only [chunkHistory, consumed_cons, vectorStroke_letters, frontVector]
       rw [ih]
-      rw [show (count + 1) * width = width + count * width by ring]
+      rw [show (count + 1) * width = width + count * width by
+        simp [Nat.add_mul, Nat.add_comm]]
       rw [← List.take_append_drop width (word.take (width + count * width))]
       simp only [List.take_take, List.drop_take]
       congr 1
@@ -311,7 +315,7 @@ theorem ConstantAtMultiples.of_dvd {α : Type*} {small large : Nat} {letter : α
     (divides : small ∣ large) :
     ConstantAtMultiples large letter word := by
   intro index index_lt index_aligned
-  exact clean index index_lt (dvd_trans divides index_aligned)
+  exact clean index index_lt (Nat.dvd_trans divides index_aligned)
 
 /-- A queue drains if every possible head is one letter that emits only itself. -/
 theorem tagHaltsFrom_of_constantAtMultiples {α : Type*} (width : Nat)
@@ -326,7 +330,7 @@ theorem tagHaltsFrom_of_constantAtMultiples {α : Type*} (width : Nat)
       · have width_pos : 0 < width := by omega
         have enough : width ≤ queue.length := Nat.le_of_not_gt short
         have head : queue.get ⟨0, width_pos.trans_le enough⟩ = letter :=
-          queue_clean 0 (width_pos.trans_le enough) (dvd_zero width)
+          queue_clean 0 (width_pos.trans_le enough) (Nat.dvd_zero width)
         let next := queue.drop width ++ [letter]
         have next_clean : ConstantAtMultiples width letter next := by
           intro index index_lt index_aligned
@@ -337,7 +341,7 @@ theorem tagHaltsFrom_of_constantAtMultiples {α : Type*} (width : Nat)
               simp only [List.length_drop] at in_drop
               omega
             exact queue_clean (width + index) source_lt
-              (Nat.dvd_add (dvd_refl width) index_aligned)
+              (Nat.dvd_add (Nat.dvd_refl width) index_aligned)
           · have at_last : index = (queue.drop width).length := by
               simp only [next, List.length_append, List.length_cons, List.length_nil] at index_lt
               omega
@@ -537,13 +541,13 @@ theorem sampleHeads_weave_slice {α : Type*} {period columns : Nat} (period_pos 
     rw [List.length_drop, weave_length]
     rw [Nat.lt_sub_iff_add_lt]
     convert source_index_lt using 1
-    all_goals ring
+    all_goals simp only [Nat.mul_add]; ac_rfl
   rw [List.get_eq_getElem, List.getElem_append_left _ _ sample_in_drop]
   have source_index : phase.val + period * start + index.val * period <
       (weave period columns period_pos grid).length := by
     rw [weave_length]
     convert source_index_lt using 1
-    all_goals ring
+    all_goals simp only [Nat.mul_add]; ac_rfl
   rw [← List.getElem_drop' (weave period columns period_pos grid) source_index]
   have prescribed := weave_get_track period_pos grid phase column
   rw [List.get_eq_getElem] at prescribed

@@ -1,4 +1,5 @@
-import MatrixMortality.NearyEncoding
+import Lean.Elab.Tactic.Omega
+import MatrixMortality.WordMorphism
 
 /-!
 # Binary morphism defect
@@ -35,18 +36,6 @@ theorem binarySpell_append {α : Type*} (left right : List α)
     binarySpell left right (first ++ second) =
       binarySpell left right first ++ binarySpell left right second := by
   exact spell_append _ _ _
-
-theorem spell_comp_spell {α β γ : Type*}
-    (outer : β → List γ) (inner : α → List β) (word : List α) :
-    spell outer (spell inner word) =
-      spell (fun letter => spell outer (inner letter)) word := by
-  induction word with
-  | nil => rfl
-  | cons letter word induction =>
-      change spell outer (inner letter ++ spell inner word) =
-        spell outer (inner letter) ++
-          spell (fun current => spell outer (inner current)) word
-      rw [spell_append, induction]
 
 theorem binarySpell_eq_nil_iff {α : Type*} {left right : List α}
     (left_ne : left ≠ []) (right_ne : right ≠ []) (word : List Bool) :
@@ -320,42 +309,5 @@ theorem binarySpell_commute_of_letter_commute {α : Type*} {left right : List α
           ((if head then right else left) ++ binarySpell left right tail)
       rw [List.append_assoc, induction, ← List.append_assoc,
         binarySpell_letter_commutes letters_commute head second, List.append_assoc]
-
-/-- Upper word of either Neary macro role after pairing a role with the following `D_b`. -/
-def nearyMacroUpper (β : Nat) : TagLetter → List Bool
-  | .b => tagCode β .b ++ tagCode β .b
-  | .c => tagCode β .c ++ tagCode β .b
-
-theorem nearyMacroUpper_not_commute (β : Nat) (β_pos : 0 < β) :
-    nearyMacroUpper β .b ++ nearyMacroUpper β .c ≠
-      nearyMacroUpper β .c ++ nearyMacroUpper β .b := by
-  cases β with
-  | zero => omega
-  | succ β =>
-      simp [nearyMacroUpper, tagCode, List.replicate_succ]
-
-/-- Distinct exact internal and final binary codes for one macro are incompatible with exact
-realizations of both noncommuting Neary macro upper words. -/
-theorem neary_exact_internal_final_code_impossible
-    (β : Nat) (β_pos : 0 < β)
-    (upper : Bool → List Bool)
-    (internal final codeB codeC : List Bool)
-    (codes_ne : internal ≠ final)
-    (same_macro : spell upper internal = spell upper final)
-    (realize_b : spell upper codeB = nearyMacroUpper β .b)
-    (realize_c : spell upper codeC = nearyMacroUpper β .c) :
-    False := by
-  have not_injective :
-      ¬Function.Injective (binarySpell (upper false) (upper true)) := by
-    apply Function.not_injective_iff.mpr
-    refine ⟨internal, final, ?_, codes_ne⟩
-    simpa only [← spell_eq_binarySpell] using same_macro
-  have letters_commute :=
-    binarySpell_not_injective_commute (upper false) (upper true) not_injective
-  have images_commute :=
-    binarySpell_commute_of_letter_commute letters_commute codeB codeC
-  rw [← spell_eq_binarySpell upper codeB, ← spell_eq_binarySpell upper codeC,
-    realize_b, realize_c] at images_commute
-  exact nearyMacroUpper_not_commute β β_pos images_commute
 
 end MatrixMortality

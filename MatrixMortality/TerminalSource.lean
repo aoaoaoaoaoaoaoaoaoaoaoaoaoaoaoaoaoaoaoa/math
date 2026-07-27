@@ -1,4 +1,4 @@
-import MatrixMortality.TerminalReduction
+import MatrixMortality.WordMorphism
 
 /-!
 # The primitive-to-terminal PCP bridge
@@ -125,17 +125,5 @@ theorem pcp_solvable_iff_right_bounded_gpcpPlus_of_primitive_terminal
     exact hterminalWords (by simpa [IsGPCPSolution] using hmatch)
   · rintro ⟨interior, _, hmatch⟩
     exact ⟨interior, hmatch⟩
-
-/-- The complete generic interface: a primitive-terminal property makes mortality of the
-absorbed integer family equivalent to solvability of the corresponding five-tile PCP instance. -/
-theorem absorbedFamilyInt_mortal_iff_pcp_solvable_of_primitive_terminal
-    {α : Type*} (u v : α → List Bool) (uₜ vₜ : List Bool)
-    (hterminal : ∀ word : List (Option α),
-      IsPrimitivePCPSolution (fullSide u uₜ) (fullSide v vₜ) word →
-        ∃ interior : List α, word = interior.map some ++ [none]) :
-    IsMortal (absorbedFamilyInt u v uₜ vₜ) ↔
-      ∃ word, IsPCPSolution (fullSide u uₜ) (fullSide v vₜ) word :=
-  (absorbedFamilyInt_mortal_iff_terminal_match u v uₜ vₜ).trans
-    (pcp_solvable_iff_terminal_match_of_primitive_terminal u v uₜ vₜ hterminal).symm
 
 end MatrixMortality

@@ -39,6 +39,21 @@ theorem wordProduct_append {α M : Type*} [Monoid M] (generators : α → M)
       wordProduct generators left * wordProduct generators right := by
   simp [wordProduct, List.map_append, List.prod_append]
 
+/-- Interpret `none` as one distinguished generator and `some label` as an ordinary generator. -/
+def separatedGenerator {α M : Type*} (separator : M) (generators : α → M) : Option α → M
+  | none => separator
+  | some label => generators label
+
+@[simp]
+theorem wordProduct_separatedGenerator_map_some {α M : Type*} [Monoid M]
+    (separator : M) (generators : α → M) (word : List α) :
+    wordProduct (separatedGenerator separator generators) (word.map some) =
+      wordProduct generators word := by
+  induction word with
+  | nil => rfl
+  | cons head tail induction =>
+      simp only [List.map_cons, wordProduct_cons, separatedGenerator, induction]
+
 /-- A labelled family is mortal when a nonempty generator word multiplies to zero. -/
 def IsMortal {α M : Type*} [MonoidWithZero M] (generators : α → M) : Prop :=
   ∃ word : List α, word ≠ [] ∧ wordProduct generators word = 0

@@ -1,4 +1,4 @@
-import MatrixMortality.TerminalTile
+import MatrixMortality.RankOne
 
 /-!
 # Full matrix algebras from rank-one contexts
@@ -95,16 +95,6 @@ def contextRows (generators : Glyph → Square ι K) (row : ι → K)
 /-- The linear span of every physical word product, including the empty product. -/
 def wordProductSpan (generators : Glyph → Square ι K) : Submodule K (Square ι K) :=
   Submodule.span K (Set.range (wordProduct generators))
-
-@[simp]
-theorem wordProduct_separatedGenerator_map_some
-    (separator : Square ι K) (generators : Glyph → Square ι K) (word : List Glyph) :
-    wordProduct (separatedGenerator separator generators) (word.map some) =
-      wordProduct generators word := by
-  induction word with
-  | nil => rfl
-  | cons head tail induction =>
-      simp only [List.map_cons, wordProduct_cons, separatedGenerator, induction]
 
 theorem context_outer_eq_wordProduct
     (generators : Glyph → Square ι K) (column row : ι → K)

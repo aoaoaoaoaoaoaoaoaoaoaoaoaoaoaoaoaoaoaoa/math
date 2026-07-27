@@ -1,5 +1,6 @@
 import MatrixMortality.PCPEncoding
 import MatrixMortality.TerminalTile
+import MatrixMortality.WordMorphism
 
 /-!
 # Absorbing a forced terminal PCP tile
@@ -34,10 +35,6 @@ theorem pcpMatrix_mulVec_headBasis (R : Type*) [CommRing R] (upper lower : List 
   fin_cases i <;>
     simp [pcpMatrix, headBasis, Matrix.vecHead, Matrix.vecTail, Matrix.mulVec,
       Matrix.dotProduct, Fin.sum_univ_succ]
-
-/-- Concatenate the words selected by a tile-index word. -/
-def spell {α β : Type*} (side : α → List β) (word : List α) : List β :=
-  (word.map side).join
 
 /-- Product of the PCP matrices selected by a tile-index word. -/
 def tileProduct {α R : Type*} [CommRing R] (u v : α → List Bool) (word : List α) :

@@ -1,7 +1,8 @@
 import Mathlib.Computability.Halting
 import Mathlib.Computability.Reduce
 import MatrixMortality.Computability
-import MatrixMortality.NearyEncoding
+import MatrixMortality.MatrixSemigroup
+import MatrixMortality.WordMorphism
 
 /-!
 # Encoded decision problems

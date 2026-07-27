@@ -1,4 +1,4 @@
-import MatrixMortality.MatrixSemigroup
+import MatrixMortality.RankOne
 
 /-!
 # Terminal-tile absorption for matrix mortality
@@ -11,55 +11,6 @@ generators and one exceptional outer product.
 namespace MatrixMortality
 
 open scoped Matrix
-
-section OuterProduct
-
-variable {ι 𝕜 : Type*} [Fintype ι] [Field 𝕜]
-
-theorem mul_outer (M : Square ι 𝕜) (c r : ι → 𝕜) :
-    M * Matrix.vecMulVec c r = Matrix.vecMulVec (M *ᵥ c) r := by
-  ext i j
-  simp only [Matrix.mul_apply, Matrix.mulVec, Matrix.vecMulVec_apply, Matrix.dotProduct]
-  rw [Finset.sum_mul]
-  apply Finset.sum_congr rfl
-  intro x _
-  ring
-
-theorem outer_mul (c r : ι → 𝕜) (M : Square ι 𝕜) :
-    Matrix.vecMulVec c r * M = Matrix.vecMulVec c (r ᵥ* M) := by
-  ext i j
-  simp only [Matrix.mul_apply, Matrix.vecMul, Matrix.vecMulVec_apply, Matrix.dotProduct]
-  rw [Finset.mul_sum]
-  apply Finset.sum_congr rfl
-  intro x _
-  ring
-
-theorem outer_mul_outer (c r d s : ι → 𝕜) :
-    Matrix.vecMulVec c r * Matrix.vecMulVec d s =
-      (r ⬝ᵥ d) • Matrix.vecMulVec c s := by
-  ext i j
-  simp only [Matrix.mul_apply, Matrix.vecMulVec_apply, Matrix.dotProduct,
-    Matrix.smul_apply, smul_eq_mul]
-  rw [Finset.sum_mul]
-  apply Finset.sum_congr rfl
-  intro x _
-  ring
-
-omit [Fintype ι] in
-theorem outer_ne_zero {c r : ι → 𝕜} (hc : c ≠ 0) (hr : r ≠ 0) :
-    Matrix.vecMulVec c r ≠ 0 := by
-  intro h
-  apply hc
-  funext i
-  by_contra hci
-  apply hr
-  funext j
-  by_contra hrj
-  have hij := congr_fun (congr_fun h i) j
-  simp only [Matrix.vecMulVec_apply, Pi.zero_apply] at hij
-  exact (mul_ne_zero hci hrj) hij
-
-end OuterProduct
 
 section RankOneChain
 
@@ -83,17 +34,6 @@ theorem bridgeScalar_fold_boundaries (l c : ι → 𝕜) (left middle right : Sq
   unfold bridgeScalar
   rw [← Matrix.dotProduct_mulVec]
   simp only [Matrix.mulVec_mulVec, Matrix.mul_assoc]
-
-theorem unit_mulVec_ne_zero {P : Square ι 𝕜} {c : ι → 𝕜}
-    (hP : IsUnit P) (hc : c ≠ 0) : P *ᵥ c ≠ 0 := by
-  intro hPc
-  rcases hP.exists_left_inv with ⟨Q, hQP⟩
-  apply hc
-  calc
-    c = 1 *ᵥ c := by simp
-    _ = (Q * P) *ᵥ c := by rw [hQP]
-    _ = Q *ᵥ P *ᵥ c := by rw [Matrix.mulVec_mulVec]
-    _ = 0 := by rw [hPc]; simp
 
 theorem rankOneChain_formula (c r : ι → 𝕜) (P₀ Pₜ : Square ι 𝕜) :
     ∀ middle : List (Square ι 𝕜),
@@ -155,12 +95,6 @@ theorem fracture_map_some_append_none {α : Type*} (word : List α) :
   induction word with
   | nil => rfl
   | cons i word ih => simp [fracture, ih]
-
-/-- Interpret `none` as the separator and `some i` as ordinary generator `X i`. -/
-def separatedGenerator {α : Type*} (A : Square ι 𝕜) (X : α → Square ι 𝕜) :
-    Option α → Square ι 𝕜
-  | none => A
-  | some i => X i
 
 theorem rankOneChain_one_cons (A : Square ι 𝕜) {blocks : List (Square ι 𝕜)}
     (hblocks : blocks ≠ []) :

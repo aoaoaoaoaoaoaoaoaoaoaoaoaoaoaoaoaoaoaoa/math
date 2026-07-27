@@ -1,4 +1,5 @@
-import MatrixMortality.MarkedTerminal
+import Mathlib.Data.List.Basic
+import Mathlib.Logic.Relation
 
 /-!
 # Fixed-width tag queues

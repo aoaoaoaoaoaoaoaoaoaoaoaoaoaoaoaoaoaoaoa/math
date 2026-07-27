@@ -1,6 +1,7 @@
 import MatrixMortality.Undecidability.CyclicTag
 import MatrixMortality.Undecidability.TagExecution
 import Mathlib.Computability.TuringMachine
+import Mathlib.Tactic.DeriveFintype
 
 /-!
 # The Cocke–Minsky compiler

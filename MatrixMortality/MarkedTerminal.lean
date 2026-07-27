@@ -35,16 +35,6 @@ theorem suture_prefixComparable_iff {α : Type*} (x y : List α) :
     PrefixComparable (suture x) (suture y) ↔ x = y := by
   simp [PrefixComparable, suture_prefix_iff, eq_comm]
 
-theorem spell_append {ι α : Type*} (side : ι → List α) (x y : List ι) :
-    spell side (x ++ y) = spell side x ++ spell side y := by
-  simp [spell, List.map_append]
-
-theorem spell_map {ι α β : Type*} (f : α → β) (side : ι → List α) (word : List ι) :
-    spell (fun i => (side i).map f) word = (spell side word).map f := by
-  induction word with
-  | nil => simp [spell]
-  | cons i word ih => simp [spell, Function.comp_def, ih]
-
 /-- Lift ordinary PCP words into the marked alphabet and use `suture terminal` for the
 distinguished tile. -/
 def markedSide {ι α : Type*} (side : ι → List α) (terminal : List α) :
@@ -330,34 +320,5 @@ theorem spell_binaryMarkedOrdinary {ι : Type*} (side : ι → List Bool) (word 
       change encodeMarkedBits ((side i).map some) ++ spell (binaryMarkedOrdinary side) word =
         encodeMarkedBits ((side i).map some ++ (spell side word).map some)
       rw [ih, ← encodeMarkedBits_append]
-
-/-- The exact integer family obtained after binary marker recoding. -/
-def synchronizedFamilyInt {ι : Type*} (u v : ι → List Bool) (terminal : List Bool) :
-    Option ι → Matrix (Fin 3) (Fin 3) Int :=
-  absorbedFamilyInt (binaryMarkedOrdinary u) (binaryMarkedOrdinary v)
-    (binaryMarkedTerminal terminal) (binaryMarkedTerminal [])
-
-/-- Fresh-marker synchronization and fixed-length binary recoding preserve the terminal word
-equation all the way through the exact five-matrix compiler. -/
-theorem synchronizedFamilyInt_mortal_iff_terminal_match {ι : Type*}
-    (u v : ι → List Bool) (terminal : List Bool) :
-    IsMortal (synchronizedFamilyInt u v terminal) ↔
-      ∃ word, spell u word ++ terminal = spell v word := by
-  rw [synchronizedFamilyInt, absorbedFamilyInt_mortal_iff_terminal_match]
-  apply exists_congr
-  intro word
-  rw [spell_binaryMarkedOrdinary, spell_binaryMarkedOrdinary]
-  constructor
-  · intro hmatch
-    have hencoded : encodeMarkedBits (suture (spell u word ++ terminal)) =
-        encodeMarkedBits (suture (spell v word)) := by
-      simpa [binaryMarkedTerminal, suture, encodeMarkedBits_append, List.map_append,
-        List.append_assoc] using hmatch
-    exact (suture_prefix_iff _ _).mp <| by
-      simp [encodeMarkedBits_injective hencoded]
-  · intro hmatch
-    have hencoded := congrArg encodeMarkedBits (congrArg suture hmatch)
-    simpa [binaryMarkedTerminal, suture, encodeMarkedBits_append, List.map_append,
-      List.append_assoc] using hencoded
 
 end MatrixMortality

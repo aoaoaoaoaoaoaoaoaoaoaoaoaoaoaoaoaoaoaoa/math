@@ -1,5 +1,7 @@
 import MatrixMortality.Computability
+import MatrixMortality.MarkedTerminal
 import MatrixMortality.TagQueue
+import MatrixMortality.TerminalReduction
 
 /-!
 # The four ordinary Neary tiles
