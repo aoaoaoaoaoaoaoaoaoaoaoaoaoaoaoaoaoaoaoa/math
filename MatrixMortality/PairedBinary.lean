@@ -67,7 +67,7 @@ def pairedBinaryRow (R : Type*) [CommRing R] :
   | some .rule, vector => ![vector 0, 0, 0, vector 1, vector 2, 0]
   | some .erase, vector => ![vector 0, 0, 0, 0, vector 2, vector 1]
 
-@[simp] private theorem vecSix_last {α : Type*} (a b c d e f : α) :
+private theorem vecSix_last {α : Type*} (a b c d e f : α) :
     (![a, b, c, d, e, f] : Fin 6 → α) 5 = f := rfl
 
 theorem pairedBinaryRow_start (R : Type*) [CommRing R] (β : Nat)
@@ -78,7 +78,7 @@ theorem pairedBinaryRow_start (R : Type*) [CommRing R] (β : Nat)
     funext i <;>
     fin_cases i <;>
     simp [pairedBinaryRow, pairedBinaryGenerator, pairedBinaryPhase, Matrix.vecHead,
-      Matrix.vecTail, Matrix.vecMul, Matrix.dotProduct, Fin.sum_univ_succ]
+      Matrix.vecTail, Matrix.vecMul, Matrix.dotProduct, Fin.sum_univ_succ, vecSix_last]
 
 theorem pairedBinaryRow_finish (R : Type*) [CommRing R] (β : Nat)
     (body : List TagLetter) (vector : Fin 3 → R) (phase : PairPhase) (bit : Bool) :
@@ -92,7 +92,7 @@ theorem pairedBinaryRow_finish (R : Type*) [CommRing R] (β : Nat)
     fin_cases i <;>
     simp [pairedBinaryRow, pairedBinaryGenerator, pairedBinaryLetter, PairPhase.tile,
       sidePcpMatrix, nearyUpper, Matrix.vecHead, Matrix.vecTail, Matrix.vecMul,
-      Matrix.mulVec, Matrix.dotProduct, Fin.sum_univ_succ]
+      Matrix.mulVec, Matrix.dotProduct, Fin.sum_univ_succ, vecSix_last]
   all_goals ring
 
 theorem pairedBinaryRow_pair (R : Type*) [CommRing R] (β : Nat)

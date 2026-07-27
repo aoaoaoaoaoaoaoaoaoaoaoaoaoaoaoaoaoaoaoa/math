@@ -146,16 +146,25 @@ the flattened block-Hankel columns `q ↦ (WA_uA_vUq)_u`; its dimension is their
 larger than the state dimension of any exact realization. Independent nonzero rescaling of
 matrix generators preserves mortality, which supplies the algebraic denominator-clearing step.
 
+Lean further proves a generic full-algebra certificate for a physical rank-one word. If finitely
+many left contexts send its column to a basis and finitely many right contexts send its row to a
+dual basis, their physical sandwiches span every matrix unit. For the canonical paired-binary
+six-state mortality family, sparse six-column and six-row context matrices are invertible for
+every `β≥3` and every body. Their final pivots are integer expressions congruent to `3 mod 9`
+because the rule-`c` lower word ends in `10`. The thirty-six physical products around the
+canonical separator therefore span `M₆(ℚ)`. This excludes every exact invariant restriction,
+quotient, and internal-word sandwich compression of that physical family to five states; it
+does not exclude another family or a same-zero realization.
+
 ## Audited But Unformalized
 
-The internal-sandwich audit retains four unformalized exact obstructions:
+The internal-sandwich audit retains three unformalized exact obstructions:
 
 | Record | Formalization obligation |
 | --- | --- |
 | [`MM-O08`](SALVAGE.md#mm-o08-full-algebra-prefix-pair) | the identity `B₀³=uvᵀ`, uniform reachability and observability determinants, positivity over the source envelope, and the outer-product basis of `M₁₀(ℚ)` |
 | [`MM-O09`](SALVAGE.md#mm-o09-two-state-ternary-prefix-image) | classification of full ternary trees with five leaves and the joint-image argument for exact two-state weighted decoders |
 | [`MM-O10`](SALVAGE.md#mm-o10-additive-toggle-fusion-cycle) | idempotent normalization and the identities `F²=I−TP`, `F³=F`, and `rank F=rank F²=3` |
-| [`MM-O11`](SALVAGE.md#mm-o11-full-algebra-paired-binary-family) | the two six-state reachability and observability determinant identities, modulo-nine nonvanishing, and the outer-product basis of `M₆(ℚ)` |
 
 The full-algebra theorems concern their exact physical families only. They do not exclude
 same-zero series or another decoder. The reconstruction and promotion boundaries are recorded in
@@ -257,6 +266,7 @@ with a complete arbitrary-word converse.
 | `CHHNPacking.lean` | generic two-slot CHHN packing and six-state finite-Hankel kernels |
 | `CHHNPackingRank.lean` | all-placement exact six-state lower bound for the Neary packing |
 | `ClosedSubstitution.lean` | exact reachable-cycle criterion for finite closed-token queues |
+| `FullMatrixAlgebra.lean` | generic full-algebra certificate from invertible physical contexts around a rank-one word |
 | `PhaseSignature.lean` | two-private-state cyclic phase obstruction and Neary instantiation |
 | `TwoStatePushout.lean` | generic two-state pushout, suffix decoder, rank classification, and integer mortality compiler |
 | `TwoStateObstructions.lean` | exact local toggle-fusion obstruction |
@@ -273,6 +283,10 @@ with a complete arbitrary-word converse.
 | `PairedRank.lean` | uniform exact rank-four certificate for the paired scalar series |
 | `PairedBoundaryTax.lean` | exact six-state lower bound for diagonal paired-series bridges |
 | `PairedBinary.lean` | total two-bit decoder and exact six-state scalar representation |
+| `PairedBinaryAlgebra.lean` | closed paired-binary generator actions, physical context words, and source arithmetic |
+| `PairedBinaryAlgebraContexts.lean` | explicit six-column and six-row physical context matrices |
+| `PairedBinaryAlgebraRank.lean` | modulo-nine pivot certificates and invertibility of both context matrices |
+| `PairedBinaryFullAlgebra.lean` | canonical mortality alphabet and the full `M₆(ℚ)` physical-product span theorem |
 | `ScheduledBinary.lean` | fixed-width clock compiler, total decoder, and malformed-word converse |
 | `ScheduledBinaryRank.lean` | exact width-three rank-five certificate and universal exact-state lower bound |
 | `WeightedTransducer.lean` | deterministic matrix transducers and the arbitrary-word block-row theorem |
@@ -343,6 +357,7 @@ with a complete arbitrary-word converse.
 | A noninjective binary morphism cannot realize both Neary macro upper words | `binarySpell_not_injective_commute`, `neary_exact_internal_final_code_impossible` |
 | Every binary word has the exact six-state coefficient | `pairedBinaryRow_wordProduct`, `pairedBinaryCoefficient_eq_sideCoefficient` |
 | Every four-role word has a two-bit encoding | `decodePairedBinary_surjective` |
+| Canonical paired-binary mortality products span `M₆(ℚ)` | `pairedBinaryMortality_wordProductSpan_eq_top` |
 | Canonical structured `Z₆(2)` instance iff tag halting | `nearyScalarZero62_hasZero_iff_tagHaltsFrom` |
 | Free-monoid `Z₆(2)` instance iff tag halting | `nearyScalarZero62_hasZeroStar_iff_tagHaltsFrom` |
 | Both `Z₆(2)` generators fix `e₁` | `nearyScalarZero62_fixes_anchor` |

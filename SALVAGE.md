@@ -56,7 +56,7 @@ file owns the mathematical stock.
 | [`MM-O08`](#mm-o08-full-algebra-prefix-pair) | obstruction | the exact ten-state prefix pair spans the full matrix algebra | audited | active |
 | [`MM-O09`](#mm-o09-two-state-ternary-prefix-image) | obstruction | a literal two-state ternary decoder has no five-state common-image restriction | audited | stock |
 | [`MM-O10`](#mm-o10-additive-toggle-fusion-cycle) | obstruction | the normalized toggle-minus-separator ansatz has rank three at every power | audited | stock |
-| [`MM-O11`](#mm-o11-full-algebra-paired-binary-family) | obstruction | the paired-binary mortality family spans the full six-state algebra | audited | active |
+| [`MM-O11`](#mm-o11-full-algebra-paired-binary-family) | obstruction | the paired-binary mortality family spans the full six-state algebra | formalized | graduated |
 | [`MM-M01`](#mm-m01-off-diagonal-companion-interface) | partial mechanism | off-diagonal rank-two bridge has a complete fracture grammar | audited | stock |
 | [`MM-M02`](#mm-m02-bordered-toggle) | partial mechanism | one lifted toggle has a stable rank-two third power | audited | parked |
 | [`MM-M03`](#mm-m03-five-state-setter-punctuation) | partial mechanism | a mixed delimiter word is an exact internal rank-one separator | audited | active |
@@ -239,8 +239,8 @@ and edge-case audit are in
 ### MM-O01: All-placement packing rank
 
 **Kind:** obstruction
-**Evidence:** audited
-**Disposition:** active
+**Evidence:** formalized
+**Disposition:** graduated
 
 For every placement of the four ordinary `3 × 3` payloads and the rank-one separator in the
 literal three-generator `6 × 6` CHHN packing, the selected scalar coefficient series has exact
@@ -620,8 +620,8 @@ different perturbations, and mixed words containing data generators remain open.
 ### MM-O11: Full-algebra paired-binary family
 
 **Kind:** obstruction
-**Evidence:** audited
-**Disposition:** active
+**Evidence:** formalized
+**Disposition:** graduated
 
 Adjoin the canonical rank-one separator `P=CL` to the two transposed six-state paired-binary
 controls. The columns
@@ -663,11 +663,17 @@ nonzero behavior.
 the executable certificate is
 [`tools/audit_six_state_sandwich.py`](tools/audit_six_state_sandwich.py).
 
-**Next:** formalize the two six-by-six determinant certificates and their outer-product
-full-algebra consequence.
+Lean proves the sparse context matrices invertible by eliminating their kernels. The final
+reachability and observability pivots reduce to integer expressions of the form `9z+3`, using
+the terminal lower suffix `10`. A generic rank-one-context theorem then turns the thirty-six
+physical contexts into a spanning family.
 
-**Issue:** [#8, Formalize internal-sandwich minimization and the exact full-algebra
-obstructions](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/8).
+**Formalization:** [`MatrixMortality/FullMatrixAlgebra.lean`](MatrixMortality/FullMatrixAlgebra.lean),
+[`MatrixMortality/PairedBinaryAlgebra.lean`](MatrixMortality/PairedBinaryAlgebra.lean),
+[`MatrixMortality/PairedBinaryAlgebraContexts.lean`](MatrixMortality/PairedBinaryAlgebraContexts.lean),
+[`MatrixMortality/PairedBinaryAlgebraRank.lean`](MatrixMortality/PairedBinaryAlgebraRank.lean), and
+[`MatrixMortality/PairedBinaryFullAlgebra.lean`](MatrixMortality/PairedBinaryFullAlgebra.lean);
+`pairedBinaryMortality_wordProductSpan_eq_top`.
 
 ### MM-M01: Off-diagonal companion interface
 

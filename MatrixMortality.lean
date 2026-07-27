@@ -3,11 +3,16 @@ import MatrixMortality.BinaryDefect
 import MatrixMortality.CHHNPacking
 import MatrixMortality.CHHNPackingRank
 import MatrixMortality.ClosedSubstitution
+import MatrixMortality.FullMatrixAlgebra
 import MatrixMortality.InternalSandwich
 import MatrixMortality.LinearRepresentation
 import MatrixMortality.NearyEncoding
 import MatrixMortality.MacroIrreducibility
 import MatrixMortality.PairedBinary
+import MatrixMortality.PairedBinaryAlgebra
+import MatrixMortality.PairedBinaryAlgebraContexts
+import MatrixMortality.PairedBinaryAlgebraRank
+import MatrixMortality.PairedBinaryFullAlgebra
 import MatrixMortality.PairedBoundaryTax
 import MatrixMortality.PairedCompression
 import MatrixMortality.PairedMortality

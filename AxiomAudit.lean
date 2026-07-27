@@ -62,6 +62,10 @@ open MatrixMortality
 #print axioms InternalSandwich.range_reachableBehavior_eq_span
 #print axioms InternalSandwich.quotient_finrank_eq_blockHankel
 #print axioms InternalSandwich.quotient_finrank_le_of_represents
+#print axioms wordProductSpan_eq_top_of_rankOne_contexts
+#print axioms pairedBinaryAlgebraReachable_isUnit
+#print axioms pairedBinaryAlgebraObservable_isUnit
+#print axioms pairedBinaryMortality_wordProductSpan_eq_top
 #print axioms Undecidability.nearyMortality44_mortal_iff_tagHaltsFrom
 #print axioms Undecidability.nearyMortality44_control_fixes_anchor
 #print axioms Undecidability.nearyMortality44_toggle_eq_permMatrix
