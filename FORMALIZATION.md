@@ -308,14 +308,18 @@ with a complete arbitrary-word converse.
 | `PairedRank.lean` | uniform exact rank-four certificate for the paired scalar series |
 | `PairedBoundaryTax.lean` | exact six-state lower bound for diagonal paired-series bridges |
 | `PairedBinary.lean` | total two-bit decoder and exact six-state scalar representation |
-| `PairedBinaryAlgebra.lean` | closed paired-binary generator actions, physical context words, and source arithmetic |
-| `PairedBinaryAlgebraContexts.lean` | explicit six-column and six-row physical context matrices |
-| `PairedBinaryAlgebraRank.lean` | modulo-nine pivot certificates and invertibility of both context matrices |
+| `PairedBinaryContexts.lean` | closed paired-binary generator actions, physical context words, and source arithmetic |
+| `PairedBinaryContextsClosed.lean` | explicit six-column and six-row physical context matrices |
+| `PairedBinaryContextsNonsingular.lean` | modulo-nine pivot certificates and invertibility of both context matrices |
 | `PairedBinaryFullAlgebra.lean` | canonical mortality alphabet and the full `M₆(ℚ)` physical-product span theorem |
 | `ScheduledBinary.lean` | cyclic-controller specialization, source semantics, and malformed-word converse |
 | `ScheduledBinaryRank.lean` | exact width-three rank-five certificate and universal exact-state lower bound |
 | `WeightedTransducer.lean` | deterministic matrix transducers and the arbitrary-word block-row theorem |
 | `PrefixMortality.lean` | complete prefix decoder, twelve-state realization, and ten-state common-image restriction |
+| `PrefixContexts.lean` | closed ten-state generators, internal rank-one word, and physical contexts |
+| `PrefixContextsClosed.lean` | Krylov-adapted reachable and observable context matrices |
+| `PrefixContextsNonsingular.lean` | polynomial and congruence certificates for both context matrices |
+| `PrefixFullAlgebra.lean` | full `M₁₀(ℚ)` product span and exact internal-sandwich lower bound |
 | `LintAudit.lean` | package-wide default mathlib environment lint |
 | `AxiomAudit.lean` | transitive axioms of publication-facing declarations |
 | `Undecidability/UniversalMachine.lean` | verified two-tape interpreter for mathlib code halting |

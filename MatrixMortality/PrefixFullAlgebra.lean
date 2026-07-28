@@ -1,4 +1,4 @@
-import MatrixMortality.PrefixAlgebraRank
+import MatrixMortality.PrefixContextsNonsingular
 import MatrixMortality.FullMatrixBehavior
 
 /-!

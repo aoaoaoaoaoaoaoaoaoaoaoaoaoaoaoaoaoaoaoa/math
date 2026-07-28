@@ -26,20 +26,21 @@ def Step {alphabet : Nat} (system : TwoTag alphabet) :
     List (Fin alphabet) → List (Fin alphabet) → Prop :=
   TagStep 2 system.production
 
-/-- Reflexive-transitive two-tag reachability. -/
-def Reaches {alphabet : Nat} (system : TwoTag alphabet) :
+/-- Reflexive-transitive reachability of two-tag queues. -/
+def QueueReaches {alphabet : Nat} (system : TwoTag alphabet) :
     List (Fin alphabet) → List (Fin alphabet) → Prop :=
   TagReaches 2 system.production
 
 /-- Two-tag reachability whose rule-selecting heads avoid one distinguished label. -/
-def AvoidingReaches {alphabet : Nat} (system : TwoTag alphabet) (target : Fin alphabet) :
+def HeadAvoidingReaches {alphabet : Nat} (system : TwoTag alphabet)
+    (target : Fin alphabet) :
     List (Fin alphabet) → List (Fin alphabet) → Prop :=
   HeadAvoidingTagReaches 2 system.production target
 
-theorem AvoidingReaches.toReaches {alphabet : Nat} {system : TwoTag alphabet}
+theorem HeadAvoidingReaches.toReaches {alphabet : Nat} {system : TwoTag alphabet}
     {target : Fin alphabet} {before after : List (Fin alphabet)}
-    (reach : system.AvoidingReaches target before after) :
-    system.Reaches before after :=
+    (reach : system.HeadAvoidingReaches target before after) :
+    system.QueueReaches before after :=
   MatrixMortality.HeadAvoidingTagReaches.toReaches reach
 
 theorem step_cons_cons {alphabet : Nat} (system : TwoTag alphabet)
@@ -61,10 +62,10 @@ theorem avoidingStep_iff {alphabet : Nat} (system : TwoTag alphabet)
           before = head :: wake :: tail ∧ after = tail ++ system.production head :=
   headAvoidingTagStep_two_iff system.production target before after
 
-/-- Reachability of a word with a selected first symbol. -/
-def ReachesHead {alphabet : Nat} (system : TwoTag alphabet)
+/-- Existence of a reachable queue with a selected first symbol. -/
+def CanReachHead {alphabet : Nat} (system : TwoTag alphabet)
     (initial : List (Fin alphabet)) (symbol : Fin alphabet) : Prop :=
-  ∃ tail, system.Reaches initial (symbol :: tail)
+  ∃ tail, system.QueueReaches initial (symbol :: tail)
 
 end TwoTag
 
@@ -121,19 +122,21 @@ def FiresAt {period : Nat} (haltPhase : Fin period) (config : Config period) : P
   ∃ tail, config.data = true :: tail ∧ config.phase = haltPhase
 
 /-- One cyclic-tag step taken strictly before a distinguished true pulse. -/
-inductive AvoidingStep {period : Nat} (system : CyclicTag period) (haltPhase : Fin period) :
+inductive FiringAvoidingStep {period : Nat} (system : CyclicTag period)
+    (haltPhase : Fin period) :
     Config period → Config period → Prop
   | advance (phase : Fin period) (value : Bool) (tail : List Bool)
       (not_firing : value = true → phase ≠ haltPhase) :
-      AvoidingStep system haltPhase
+      FiringAvoidingStep system haltPhase
         { data := value :: tail, phase }
         { data := tail ++ if value then system.appendant phase else []
           phase := shift phase 1 }
 
 /-- Reflexive-transitive cyclic-tag execution containing no distinguished true pulse. -/
-def AvoidingReaches {period : Nat} (system : CyclicTag period) (haltPhase : Fin period) :
+def FiringAvoidingReaches {period : Nat} (system : CyclicTag period)
+    (haltPhase : Fin period) :
     Config period → Config period → Prop :=
-  Relation.ReflTransGen (AvoidingStep system haltPhase)
+  Relation.ReflTransGen (FiringAvoidingStep system haltPhase)
 
 /-- Execute exactly `steps` transitions, failing if the dataword becomes empty too soon. -/
 def run {period : Nat} (system : CyclicTag period) : Nat → Config period → Option (Config period)
@@ -145,7 +148,7 @@ theorem exists_avoidingReaches_firing_of_run {period : Nat} (system : CyclicTag 
     (haltPhase : Fin period) (steps : Nat) (initial final : Config period)
     (execution : system.run steps initial = some final) (final_fires : FiresAt haltPhase final) :
     ∃ firing,
-      system.AvoidingReaches haltPhase initial firing ∧ FiresAt haltPhase firing := by
+      system.FiringAvoidingReaches haltPhase initial firing ∧ FiresAt haltPhase firing := by
   induction steps generalizing initial with
   | zero =>
       have initial_eq : initial = final := by
@@ -168,7 +171,7 @@ theorem exists_avoidingReaches_firing_of_run {period : Nat} (system : CyclicTag 
               intro value_true phase_eq
               apply initial_fires
               exact ⟨tail, by simp [value_true], phase_eq⟩
-            have first : AvoidingStep system haltPhase
+            have first : FiringAvoidingStep system haltPhase
                 { data := value :: tail, phase }
                 successor := by
               exact .advance phase value tail not_firing
@@ -419,7 +422,7 @@ theorem simulate_step {alphabet : Nat} (system : TwoTag alphabet)
 /-- Any finite two-tag execution is simulated by the corresponding number of complete cycles. -/
 theorem simulate_reaches {alphabet : Nat} (system : TwoTag alphabet)
     (alphabet_nonempty : 0 < alphabet) {before after : List (Fin alphabet)}
-    (reach : system.Reaches before after) :
+    (reach : system.QueueReaches before after) :
     ∃ steps,
       (ofTwoTag system).run (steps * (alphabet + alphabet))
           { data := encodeWord before
@@ -458,7 +461,7 @@ theorem run_oneHot_to_pulse {alphabet : Nat} (system : TwoTag alphabet)
 /-- Reaching a selected two-tag head reaches its firing phase in the compiled cyclic system. -/
 theorem reaches_firing_phase {alphabet : Nat} (system : TwoTag alphabet)
     (alphabet_nonempty : 0 < alphabet) (initial : List (Fin alphabet))
-    (symbol : Fin alphabet) (reach : system.ReachesHead initial symbol) :
+    (symbol : Fin alphabet) (reach : system.CanReachHead initial symbol) :
     ∃ steps tail,
       (ofTwoTag system).run steps
           { data := encodeWord initial

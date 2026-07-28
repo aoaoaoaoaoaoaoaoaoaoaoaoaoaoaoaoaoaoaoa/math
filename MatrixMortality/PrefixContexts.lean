@@ -3,7 +3,7 @@ import MatrixMortality.NearySideNormal
 import MatrixMortality.PrefixMortality
 
 /-!
-# Algebra of the restricted prefix pair
+# Closed coordinates of the restricted prefix pair
 
 The ten-state binary prefix decoder has an internal rank-one word.  This file exposes the
 restricted generators in closed rational coordinates and records that word as an outer
@@ -14,7 +14,7 @@ namespace MatrixMortality
 
 open scoped Matrix
 
-namespace PrefixAlgebra.Certificate
+namespace PrefixContexts.Certificate
 
 theorem vecCons_val_three {α : Type*} {n : Nat}
     (head : α) (tail : Fin (n + 3) → α) :
@@ -79,9 +79,9 @@ theorem fin_succ_eight_eq_nine {n : Nat} :
   apply Fin.ext
   rfl
 
-end PrefixAlgebra.Certificate
+end PrefixContexts.Certificate
 
-open PrefixAlgebra.Certificate
+open PrefixContexts.Certificate
 
 attribute [local simp]
   vecCons_val_three vecCons_val_four vecCons_val_five vecCons_val_six
@@ -95,7 +95,7 @@ def prefixAlgebraGenerator (β : Nat) (body : List TagLetter) (bit : Bool) :
     Square (Fin 10) ℚ :=
   castMatrix (restrictedPrefixGenerator β body bit)
 
-namespace PrefixAlgebra.Certificate
+namespace PrefixContexts.Certificate
 
 /-- Closed three-state payload emitted on one prefix transition. -/
 private def prefixAlgebraOutputClosed (β : Nat) (body : List TagLetter)
@@ -401,7 +401,7 @@ private theorem prefixAlgebraGenerator_eq_closed_fun (β : Nat) (body : List Tag
   funext bit
   exact prefixAlgebraGenerator_eq_closed β body bit
 
-end PrefixAlgebra.Certificate
+end PrefixContexts.Certificate
 
 /-- Column of the internal rank-one word `000`. -/
 def prefixAlgebraColumn (β : Nat) (body : List TagLetter) : Fin 10 → ℚ :=

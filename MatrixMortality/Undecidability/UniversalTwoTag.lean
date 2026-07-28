@@ -301,7 +301,7 @@ theorem system_production_zero_nonempty :
 
 /-- Source-code halting reaches the singleton halt label without reading that label earlier. -/
 theorem halts_implies_halt_avoiding (source : Nat.Partrec.Code) (halts : CodeHalts source) :
-    system.AvoidingReaches haltLabel
+    system.HeadAvoidingReaches haltLabel
       (encodeWord (CockeMinsky.encode readMachine (initialConfig source))) [haltLabel] := by
   rw [show [haltLabel] =
       encodeWord ([.halt] : List (CockeMinsky.Symbol ReadState)) by
@@ -309,7 +309,8 @@ theorem halts_implies_halt_avoiding (source : Nat.Partrec.Code) (halts : CodeHal
   rw [← readMachine_halts_iff] at halts
   have sourceReach :=
     CockeMinsky.halts_implies_halt_avoiding readMachine (initialConfig source) halts
-  simpa [TwoTag.AvoidingReaches, system, encodeWord, CockeMinsky.HaltAvoidingReaches] using
+  simpa [TwoTag.HeadAvoidingReaches, system, encodeWord,
+    CockeMinsky.HaltHeadAvoidingReaches] using
     sourceReach.relabel symbolEquiv
 
 /-- Any terminating execution from the universal two-tag encoding reflects source-code
@@ -333,7 +334,7 @@ theorem tagHaltsFrom_implies_halts (source : Nat.Partrec.Code)
 /-- Reaching any queue headed by the universal halt label reflects source-code halting. -/
 theorem reachesHead_halt_implies_halts (source : Nat.Partrec.Code)
     (reach :
-      system.ReachesHead
+      system.CanReachHead
         (encodeWord (CockeMinsky.encode readMachine (initialConfig source))) haltLabel) :
     CodeHalts source := by
   obtain ⟨tail, execution⟩ := reach
@@ -341,7 +342,7 @@ theorem reachesHead_halt_implies_halts (source : Nat.Partrec.Code)
       TagReaches 2 (relabelTagOutput symbolEquiv (CockeMinsky.production readMachine))
         (encodeWord (CockeMinsky.encode readMachine (initialConfig source)))
         (haltLabel :: tail) := by
-    simpa [TwoTag.Reaches, TwoTag.Step, system] using execution
+    simpa [TwoTag.QueueReaches, TwoTag.Step, system] using execution
   have decoded := raw.relabel symbolEquiv.symm
   apply (readMachine_halts_iff source).mp
   apply CockeMinsky.tag_reaches_head_halt_implies_halts readMachine (initialConfig source)
@@ -369,7 +370,7 @@ noncomputable def source : TwoTagSource Nat.Partrec.Code CodeHalts where
 
 /-- Exact reachability of the last alphabet label recognizes code halting. -/
 theorem reaches_halt_iff (index : Nat.Partrec.Code) :
-    source.system.Reaches (source.input index) [source.haltLabel] ↔
+    source.system.QueueReaches (source.input index) [source.haltLabel] ↔
       CodeHalts index :=
   source.reachesHalt_iff index
 

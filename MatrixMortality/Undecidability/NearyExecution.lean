@@ -530,7 +530,7 @@ theorem read_avoidingReaches {period : Nat} (system : CyclicTag period) (input :
       ∀ instruction : Fin period,
         instruction.val = 0 → system.appendant instruction ≠ [])
     {before after : CyclicTag.Config period}
-    (reach : system.AvoidingReaches haltPhase before after)
+    (reach : system.FiringAvoidingReaches haltPhase before after)
     (tokens : List DataToken) (stable : StableData tokens)
     (represented : dataBits tokens = before.data) :
     ∃ nextTokens : List DataToken,
@@ -627,7 +627,7 @@ theorem read_exact_firing_to_haltingSeed {period : Nat} (system : CyclicTag peri
     (appendant_nonempty_at_zero :
       ∀ instruction : Fin period,
         instruction.val = 0 → system.appendant instruction ≠ [])
-    (beforeFiring : system.AvoidingReaches haltPhase
+    (beforeFiring : system.FiringAvoidingReaches haltPhase
       { data := input, phase := ⟨0, period_pos⟩ }
       { data := [true], phase := haltPhase }) :
     ∃ remainingTokens : List DataToken,
@@ -731,7 +731,7 @@ theorem read_exact_firing_halts {period : Nat} (system : CyclicTag period)
     (appendant_nonempty_at_zero :
       ∀ instruction : Fin period,
         instruction.val = 0 → system.appendant instruction ≠ [])
-    (beforeFiring : system.AvoidingReaches haltPhase
+    (beforeFiring : system.FiringAvoidingReaches haltPhase
       { data := input, phase := ⟨0, period_pos⟩ }
       { data := [true], phase := haltPhase }) :
     TagHaltsFrom (deletionWidth period)

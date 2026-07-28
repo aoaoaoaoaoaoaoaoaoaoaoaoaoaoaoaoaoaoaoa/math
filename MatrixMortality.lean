@@ -1,42 +1,39 @@
-import MatrixMortality.BoundaryTax
-import MatrixMortality.BinaryDefect
-import MatrixMortality.CHHNPacking
-import MatrixMortality.CHHNPackingRank
-import MatrixMortality.ClosedSubstitution
-import MatrixMortality.ControllerPushout
+/- Free-monoid action. -/
+import MatrixMortality.WordMorphism
+
+/- Exact linear behavior. -/
 import MatrixMortality.ExactBehavior
-import MatrixMortality.FullMatrixAlgebra
-import MatrixMortality.FullMatrixBehavior
-import MatrixMortality.IndexedExecution
-import MatrixMortality.InternalSandwich
 import MatrixMortality.LinearRepresentation
+import MatrixMortality.BoundaryTax
+
+/- Finite-rank repair. -/
+import MatrixMortality.InternalSandwich
+
+/- Finite-controller amalgamation. -/
+import MatrixMortality.ControllerPushout
+import MatrixMortality.TwoStatePushout
+
+/- Physical context certificates. -/
+import MatrixMortality.FullMatrixBehavior
+
+/- Deterministic execution evidence. -/
+import MatrixMortality.IndexedExecution
+import MatrixMortality.ClosedSubstitution
+
+/- Protected global synchronization. -/
+import MatrixMortality.TerminalCompiler
+import MatrixMortality.NearyEncoding
+
+/- Computable endpoint reductions. -/
+import MatrixMortality.Undecidability.UniversalNeary
+
+/- Source-specific obstructions and finite certificates. -/
 import MatrixMortality.MacroIrreducibility
 import MatrixMortality.NearyBinaryDefect
-import MatrixMortality.NearyEncoding
 import MatrixMortality.NearyPhaseSignature
-import MatrixMortality.NearySideNormal
-import MatrixMortality.PairedBinary
-import MatrixMortality.PairedBinaryAlgebra
-import MatrixMortality.PairedBinaryAlgebraContexts
-import MatrixMortality.PairedBinaryAlgebraRank
-import MatrixMortality.PairedBinaryFullAlgebra
+import MatrixMortality.CHHNPackingRank
 import MatrixMortality.PairedBoundaryTax
-import MatrixMortality.PairedCompression
-import MatrixMortality.PairedMortality
-import MatrixMortality.PairedRank
-import MatrixMortality.PhaseSignature
-import MatrixMortality.PrefixMortality
-import MatrixMortality.PrefixAlgebra
-import MatrixMortality.PrefixAlgebraContexts
-import MatrixMortality.PrefixAlgebraRank
+import MatrixMortality.PairedBinaryFullAlgebra
 import MatrixMortality.PrefixFullAlgebra
-import MatrixMortality.RankOne
-import MatrixMortality.ScheduledBinary
 import MatrixMortality.ScheduledBinaryRank
-import MatrixMortality.SideNormal
-import MatrixMortality.TerminalCompiler
 import MatrixMortality.TwoStateObstructions
-import MatrixMortality.TwoStatePushout
-import MatrixMortality.WordMorphism
-import MatrixMortality.Undecidability.NearyConverse
-import MatrixMortality.Undecidability.UniversalNeary

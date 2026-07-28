@@ -12,8 +12,8 @@ substitution tree; the converse follows a cycle lineage through every queue step
 
 namespace MatrixMortality
 
-/-- One token directly depends on another when it occurs in the latter's emitted word. -/
-def substitutionDependency {Γ : Type*} (τ : Γ → List Γ) (child parent : Γ) : Prop :=
+/-- The child-to-parent relation of the substitution forest. -/
+def SubstitutionChild {Γ : Type*} (τ : Γ → List Γ) (child parent : Γ) : Prop :=
   child ∈ τ parent
 
 /-- Consume the queue head and append its complete-token emission. -/
@@ -27,12 +27,12 @@ def ClosedSubstitutionHalts {Γ : Type*} (τ : Γ → List Γ) (word : List Γ) 
 
 /-- Size of the finite substitution tree rooted at one token. -/
 noncomputable def substitutionTreeSize {Γ : Type*} (τ : Γ → List Γ)
-    (wf : WellFounded (substitutionDependency τ)) (token : Γ) : Nat :=
+    (wf : WellFounded (SubstitutionChild τ)) (token : Γ) : Nat :=
   wf.fix (fun parent descendants =>
     1 + ((τ parent).attach.map fun child => descendants child.1 child.2).sum) token
 
 theorem substitutionTreeSize_eq {Γ : Type*} (τ : Γ → List Γ)
-    (wf : WellFounded (substitutionDependency τ)) (token : Γ) :
+    (wf : WellFounded (SubstitutionChild τ)) (token : Γ) :
     substitutionTreeSize τ wf token =
       1 + ((τ token).map (substitutionTreeSize τ wf)).sum := by
   rw [substitutionTreeSize, WellFounded.fix_eq]
@@ -42,11 +42,11 @@ theorem substitutionTreeSize_eq {Γ : Type*} (τ : Γ → List Γ)
 
 /-- Total number of nodes in the substitution forest represented by a queue. -/
 noncomputable def substitutionForestSize {Γ : Type*} (τ : Γ → List Γ)
-    (wf : WellFounded (substitutionDependency τ)) (word : List Γ) : Nat :=
+    (wf : WellFounded (SubstitutionChild τ)) (word : List Γ) : Nat :=
   (word.map (substitutionTreeSize τ wf)).sum
 
 theorem substitutionForestSize_cons {Γ : Type*} (τ : Γ → List Γ)
-    (wf : WellFounded (substitutionDependency τ)) (head : Γ) (tail : List Γ) :
+    (wf : WellFounded (SubstitutionChild τ)) (head : Γ) (tail : List Γ) :
     substitutionForestSize τ wf (head :: tail) =
       substitutionForestSize τ wf (closedSubstitutionStep τ (head :: tail)) + 1 := by
   simp [substitutionForestSize, substitutionTreeSize_eq, closedSubstitutionStep,
@@ -55,7 +55,7 @@ theorem substitutionForestSize_cons {Γ : Type*} (τ : Γ → List Γ)
 
 /-- A well-founded token dependency relation makes every closed-token queue halt. -/
 theorem closedSubstitutionHalts_of_wellFounded {Γ : Type*} (τ : Γ → List Γ)
-    (wf : WellFounded (substitutionDependency τ)) (word : List Γ) :
+    (wf : WellFounded (SubstitutionChild τ)) (word : List Γ) :
     ClosedSubstitutionHalts τ word := by
   induction word using (measure (substitutionForestSize τ wf)).wf.induction with
   | h word induction =>
@@ -75,12 +75,12 @@ theorem closedSubstitutionHalts_of_wellFounded {Γ : Type*} (τ : Γ → List Γ
 
 /-- The finite dependency graph contains no directed cycle. -/
 def NoSubstitutionCycle {Γ : Type*} (τ : Γ → List Γ) : Prop :=
-  ∀ token, ¬Relation.TransGen (substitutionDependency τ) token token
+  ∀ token, ¬Relation.TransGen (SubstitutionChild τ) token token
 
-theorem substitutionDependency_wellFounded_of_noCycle {Γ : Type*} [Finite Γ]
+theorem substitutionChild_wellFounded_of_noCycle {Γ : Type*} [Finite Γ]
     (τ : Γ → List Γ) (no_cycle : NoSubstitutionCycle τ) :
-    WellFounded (substitutionDependency τ) := by
-  let closure := Relation.TransGen (substitutionDependency τ)
+    WellFounded (SubstitutionChild τ) := by
+  let closure := Relation.TransGen (SubstitutionChild τ)
   letI : IsIrrefl Γ closure := ⟨no_cycle⟩
   have closure_wf : WellFounded closure :=
     Finite.wellFounded_of_trans_of_irrefl closure
@@ -90,10 +90,10 @@ theorem substitutionDependency_wellFounded_of_noCycle {Γ : Type*} [Finite Γ]
 def QueueCarries {Γ : Type*} (τ : Γ → List Γ) (token : Γ)
     (word : List Γ) : Prop :=
   ∃ current ∈ word,
-    Relation.ReflTransGen (substitutionDependency τ) token current
+    Relation.ReflTransGen (SubstitutionChild τ) token current
 
 theorem queueCarries_step_of_cycle {Γ : Type*} (τ : Γ → List Γ) (token : Γ)
-    (cycle : Relation.TransGen (substitutionDependency τ) token token)
+    (cycle : Relation.TransGen (SubstitutionChild τ) token token)
     {word : List Γ} (carries : QueueCarries τ token word) :
     QueueCarries τ token (closedSubstitutionStep τ word) := by
   obtain ⟨current, current_mem, path⟩ := carries
@@ -105,7 +105,7 @@ theorem queueCarries_step_of_cycle {Γ : Type*} (τ : Γ → List Γ) (token : �
       rcases current_mem with current_is_head | current_tail
       · subst current
         have nonempty_path :
-            Relation.TransGen (substitutionDependency τ) token head := by
+            Relation.TransGen (SubstitutionChild τ) token head := by
           by_cases head_is_token : head = token
           · simpa [head_is_token] using cycle
           · obtain ⟨before, before_path, edge⟩ :=
@@ -117,7 +117,7 @@ theorem queueCarries_step_of_cycle {Γ : Type*} (τ : Γ → List Γ) (token : �
       · exact ⟨current, List.mem_append_left _ current_tail, path⟩
 
 theorem queueCarries_iterate_of_cycle {Γ : Type*} (τ : Γ → List Γ) (token : Γ)
-    (cycle : Relation.TransGen (substitutionDependency τ) token token)
+    (cycle : Relation.TransGen (SubstitutionChild τ) token token)
     (steps : Nat) :
     QueueCarries τ token ((closedSubstitutionStep τ)^[steps] [token]) := by
   induction steps with
@@ -130,7 +130,7 @@ theorem queueCarries_iterate_of_cycle {Γ : Type*} (τ : Γ → List Γ) (token 
 /-- Carrying a path to a cycle persists from any initial queue. -/
 theorem queueCarries_iterate_of_cycle_from {Γ : Type*} (τ : Γ → List Γ)
     (token : Γ)
-    (cycle : Relation.TransGen (substitutionDependency τ) token token)
+    (cycle : Relation.TransGen (SubstitutionChild τ) token token)
     {word : List Γ} (carries : QueueCarries τ token word) (steps : Nat) :
     QueueCarries τ token ((closedSubstitutionStep τ)^[steps] word) := by
   induction steps with
@@ -142,7 +142,7 @@ theorem queueCarries_iterate_of_cycle_from {Γ : Type*} (τ : Γ → List Γ)
 /-- A token on a dependency cycle yields a nonhalting singleton queue. -/
 theorem singleton_not_closedSubstitutionHalts_of_cycle {Γ : Type*}
     (τ : Γ → List Γ) (token : Γ)
-    (cycle : Relation.TransGen (substitutionDependency τ) token token) :
+    (cycle : Relation.TransGen (SubstitutionChild τ) token token) :
     ¬ClosedSubstitutionHalts τ [token] := by
   rintro ⟨steps, empty⟩
   have carries := queueCarries_iterate_of_cycle τ token cycle steps
@@ -159,117 +159,117 @@ theorem all_closedSubstitutionHalts_iff_noCycle {Γ : Type*} [Finite Γ]
     exact singleton_not_closedSubstitutionHalts_of_cycle τ token cycle (all_halt [token])
   · intro no_cycle
     exact closedSubstitutionHalts_of_wellFounded τ
-      (substitutionDependency_wellFounded_of_noCycle τ no_cycle)
+      (substitutionChild_wellFounded_of_noCycle τ no_cycle)
 
 /-- Descendant reachability from at least one token in the supplied initial queue. -/
-def TokenReachableFromWord {Γ : Type*} (τ : Γ → List Γ)
+def TokenDescendsFromWord {Γ : Type*} (τ : Γ → List Γ)
     (word : List Γ) (token : Γ) : Prop :=
   ∃ root ∈ word,
-    Relation.ReflTransGen (substitutionDependency τ) token root
+    Relation.ReflTransGen (SubstitutionChild τ) token root
 
 /-- The finite alphabet restricted to descendants of an initial queue. -/
-abbrev ReachableToken {Γ : Type*} (τ : Γ → List Γ) (word : List Γ) :=
-  { token // TokenReachableFromWord τ word token }
+abbrev DescendantToken {Γ : Type*} (τ : Γ → List Γ) (word : List Γ) :=
+  { token // TokenDescendsFromWord τ word token }
 
-/-- Regard every initial token as a member of its own reachable restriction. -/
-def liftReachableWord {Γ : Type*} (τ : Γ → List Γ)
-    (word : List Γ) : List (ReachableToken τ word) :=
+/-- Regard every initial token as its own reflexive descendant. -/
+def liftDescendantWord {Γ : Type*} (τ : Γ → List Γ)
+    (word : List Γ) : List (DescendantToken τ word) :=
   word.attach.map fun root =>
     ⟨root.1, root.1, root.2, Relation.ReflTransGen.refl⟩
 
-/-- Restrict a substitution to tokens reachable from one initial queue. -/
-def reachableSubstitution {Γ : Type*} (τ : Γ → List Γ) (word : List Γ)
-    (parent : ReachableToken τ word) : List (ReachableToken τ word) :=
+/-- Restrict a substitution to descendants of one initial queue. -/
+def descendantSubstitution {Γ : Type*} (τ : Γ → List Γ) (word : List Γ)
+    (parent : DescendantToken τ word) : List (DescendantToken τ word) :=
   (τ parent.1).attach.map fun child =>
     ⟨child.1, by
       obtain ⟨root, root_mem, path⟩ := parent.2
       exact ⟨root, root_mem, Relation.ReflTransGen.head child.2 path⟩⟩
 
-theorem liftReachableWord_map_val {Γ : Type*} (τ : Γ → List Γ)
+theorem liftDescendantWord_map_val {Γ : Type*} (τ : Γ → List Γ)
     (word : List Γ) :
-    (liftReachableWord τ word).map Subtype.val = word := by
-  unfold liftReachableWord
+    (liftDescendantWord τ word).map Subtype.val = word := by
+  unfold liftDescendantWord
   rw [List.map_map]
   simpa only [Function.comp_apply, id_eq, List.map_id] using
     List.attach_map_val word id
 
-theorem reachableSubstitution_map_val {Γ : Type*} (τ : Γ → List Γ)
-    (word : List Γ) (parent : ReachableToken τ word) :
-    (reachableSubstitution τ word parent).map Subtype.val = τ parent.1 := by
-  unfold reachableSubstitution
+theorem descendantSubstitution_map_val {Γ : Type*} (τ : Γ → List Γ)
+    (word : List Γ) (parent : DescendantToken τ word) :
+    (descendantSubstitution τ word parent).map Subtype.val = τ parent.1 := by
+  unfold descendantSubstitution
   rw [List.map_map]
   simpa only [Function.comp_apply, id_eq, List.map_id] using
     List.attach_map_val (τ parent.1) id
 
-theorem closedSubstitutionStep_reachable_map_val {Γ : Type*}
+theorem closedSubstitutionStep_descendant_map_val {Γ : Type*}
     (τ : Γ → List Γ) (initial : List Γ)
-    (word : List (ReachableToken τ initial)) :
-    (closedSubstitutionStep (reachableSubstitution τ initial) word).map Subtype.val =
+    (word : List (DescendantToken τ initial)) :
+    (closedSubstitutionStep (descendantSubstitution τ initial) word).map Subtype.val =
       closedSubstitutionStep τ (word.map Subtype.val) := by
   cases word with
   | nil => rfl
   | cons head tail =>
-      simp [closedSubstitutionStep, List.map_append, reachableSubstitution_map_val]
+      simp [closedSubstitutionStep, List.map_append, descendantSubstitution_map_val]
 
-theorem iterate_closedSubstitutionStep_reachable_map_val {Γ : Type*}
+theorem iterate_closedSubstitutionStep_descendant_map_val {Γ : Type*}
     (τ : Γ → List Γ) (initial : List Γ) (steps : Nat)
-    (word : List (ReachableToken τ initial)) :
-    (((closedSubstitutionStep (reachableSubstitution τ initial))^[steps] word).map
+    (word : List (DescendantToken τ initial)) :
+    (((closedSubstitutionStep (descendantSubstitution τ initial))^[steps] word).map
         Subtype.val) =
       (closedSubstitutionStep τ)^[steps] (word.map Subtype.val) := by
   induction steps with
   | zero => rfl
   | succ steps induction =>
       rw [Function.iterate_succ_apply', Function.iterate_succ_apply',
-        closedSubstitutionStep_reachable_map_val, induction]
+        closedSubstitutionStep_descendant_map_val, induction]
 
-theorem closedSubstitutionHalts_reachable_iff {Γ : Type*}
+theorem closedSubstitutionHalts_descendant_iff {Γ : Type*}
     (τ : Γ → List Γ) (initial : List Γ) :
-    ClosedSubstitutionHalts (reachableSubstitution τ initial)
-        (liftReachableWord τ initial) ↔
+    ClosedSubstitutionHalts (descendantSubstitution τ initial)
+        (liftDescendantWord τ initial) ↔
       ClosedSubstitutionHalts τ initial := by
   constructor
   · rintro ⟨steps, empty⟩
     refine ⟨steps, ?_⟩
     have mapped := congrArg (List.map Subtype.val) empty
-    simpa [iterate_closedSubstitutionStep_reachable_map_val,
-      liftReachableWord_map_val] using mapped
+    simpa [iterate_closedSubstitutionStep_descendant_map_val,
+      liftDescendantWord_map_val] using mapped
   · rintro ⟨steps, empty⟩
     refine ⟨steps, ?_⟩
     apply List.map_eq_nil.mp
-    rw [iterate_closedSubstitutionStep_reachable_map_val,
-      liftReachableWord_map_val, empty]
+    rw [iterate_closedSubstitutionStep_descendant_map_val,
+      liftDescendantWord_map_val, empty]
 
 /-- No descendant of the initial queue lies on a dependency cycle. -/
-def NoReachableSubstitutionCycle {Γ : Type*} (τ : Γ → List Γ)
+def NoDescendantSubstitutionCycle {Γ : Type*} (τ : Γ → List Γ)
     (word : List Γ) : Prop :=
-  ∀ token, TokenReachableFromWord τ word token →
-    ¬Relation.TransGen (substitutionDependency τ) token token
+  ∀ token, TokenDescendsFromWord τ word token →
+    ¬Relation.TransGen (SubstitutionChild τ) token token
 
-theorem reachable_cycle_projects {Γ : Type*} (τ : Γ → List Γ)
-    (initial : List Γ) (token : ReachableToken τ initial)
+theorem descendant_cycle_projects {Γ : Type*} (τ : Γ → List Γ)
+    (initial : List Γ) (token : DescendantToken τ initial)
     (cycle :
-      Relation.TransGen (substitutionDependency (reachableSubstitution τ initial))
+      Relation.TransGen (SubstitutionChild (descendantSubstitution τ initial))
         token token) :
-    Relation.TransGen (substitutionDependency τ) token.1 token.1 := by
+    Relation.TransGen (SubstitutionChild τ) token.1 token.1 := by
   refine cycle.lift Subtype.val ?_
   intro child parent edge
   have mapped :
-      child.1 ∈ (reachableSubstitution τ initial parent).map Subtype.val :=
+      child.1 ∈ (descendantSubstitution τ initial parent).map Subtype.val :=
     List.mem_map_of_mem Subtype.val edge
-  simpa [reachableSubstitution_map_val] using mapped
+  simpa [descendantSubstitution_map_val] using mapped
 
-theorem reachableSubstitution_noCycle {Γ : Type*} (τ : Γ → List Γ)
-    (initial : List Γ) (no_cycle : NoReachableSubstitutionCycle τ initial) :
-    NoSubstitutionCycle (reachableSubstitution τ initial) := by
+theorem descendantSubstitution_noCycle {Γ : Type*} (τ : Γ → List Γ)
+    (initial : List Γ) (no_cycle : NoDescendantSubstitutionCycle τ initial) :
+    NoSubstitutionCycle (descendantSubstitution τ initial) := by
   intro token cycle
-  exact no_cycle token.1 token.2 (reachable_cycle_projects τ initial token cycle)
+  exact no_cycle token.1 token.2 (descendant_cycle_projects τ initial token cycle)
 
 /-- Exact finite-graph criterion for one initial closed-token queue. -/
 theorem closedSubstitutionHalts_iff_noReachableCycle {Γ : Type*} [Finite Γ]
     (τ : Γ → List Γ) (initial : List Γ) :
     ClosedSubstitutionHalts τ initial ↔
-      NoReachableSubstitutionCycle τ initial := by
+      NoDescendantSubstitutionCycle τ initial := by
   constructor
   · intro halts token reachable cycle
     obtain ⟨steps, empty⟩ := halts
@@ -278,9 +278,9 @@ theorem closedSubstitutionHalts_iff_noReachableCycle {Γ : Type*} [Finite Γ]
     rw [empty] at survives
     simp [QueueCarries] at survives
   · intro no_cycle
-    rw [← closedSubstitutionHalts_reachable_iff]
+    rw [← closedSubstitutionHalts_descendant_iff]
     exact (all_closedSubstitutionHalts_iff_noCycle
-      (reachableSubstitution τ initial)).mpr
-        (reachableSubstitution_noCycle τ initial no_cycle) (liftReachableWord τ initial)
+      (descendantSubstitution τ initial)).mpr
+        (descendantSubstitution_noCycle τ initial no_cycle) (liftDescendantWord τ initial)
 
 end MatrixMortality

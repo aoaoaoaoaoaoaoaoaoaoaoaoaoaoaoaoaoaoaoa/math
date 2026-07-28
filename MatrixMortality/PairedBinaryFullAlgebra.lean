@@ -1,4 +1,4 @@
-import MatrixMortality.PairedBinaryAlgebraRank
+import MatrixMortality.PairedBinaryContextsNonsingular
 import MatrixMortality.FullMatrixBehavior
 
 /-!
@@ -10,7 +10,7 @@ six-dimensional matrix algebra.
 
 namespace MatrixMortality
 
-open PairedBinaryAlgebra.Certificate
+open PairedBinaryContexts.Certificate
 
 /-- The canonical mortality family: `none` is the rank-one separator and the two Boolean
 labels are the transposed paired-binary controls. -/

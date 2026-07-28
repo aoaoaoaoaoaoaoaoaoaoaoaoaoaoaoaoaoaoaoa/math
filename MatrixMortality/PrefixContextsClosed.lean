@@ -1,7 +1,7 @@
-import MatrixMortality.PrefixAlgebra
+import MatrixMortality.PrefixContexts
 
 /-!
-# Ten-state prefix-algebra contexts
+# Closed ten-state prefix contexts
 
 The internal word `000` supplies a rank-one boundary.  Ten powers of the one-generator give
 reachable columns; ten short physical words give observable rows.  A monic Krylov basis change
@@ -11,7 +11,7 @@ exposes the reachable matrix as a `3+3+3+1` block filtration.
 namespace MatrixMortality
 
 open scoped Matrix
-open PrefixAlgebra.Certificate
+open PrefixContexts.Certificate
 
 attribute [local simp]
   vecCons_val_three vecCons_val_four vecCons_val_five vecCons_val_six

@@ -40,13 +40,13 @@ structure TwoTagSource (ι : Type*) [Primcodable ι] (accepts : ι → Prop) whe
   /-- Acceptance has a halt-avoiding path to the exact singleton terminal queue. -/
   accepts_implies_avoidingHalt :
     ∀ index, accepts index →
-      system.AvoidingReaches haltLabel (input index) [haltLabel]
+      system.HeadAvoidingReaches haltLabel (input index) [haltLabel]
   /-- Every arbitrary terminating tag execution reflects source acceptance. -/
   accepts_of_tagTermination :
     ∀ index, TagHaltsFrom 2 system.production (input index) → accepts index
   /-- Every arbitrary path to a halt-headed queue reflects source acceptance. -/
   accepts_of_haltHead :
-    ∀ index, system.ReachesHead (input index) haltLabel → accepts index
+    ∀ index, system.CanReachHead (input index) haltLabel → accepts index
 
 namespace TwoTagSource
 
@@ -65,7 +65,7 @@ theorem haltLabel_nonzero {ι : Type*} [Primcodable ι] {accepts : ι → Prop}
 /-- Exact singleton-halt reachability is equivalent to source acceptance. -/
 theorem reachesHalt_iff {ι : Type*} [Primcodable ι] {accepts : ι → Prop}
     (source : TwoTagSource ι accepts) (index : ι) :
-    source.system.Reaches (source.input index) [source.haltLabel] ↔ accepts index := by
+    source.system.QueueReaches (source.input index) [source.haltLabel] ↔ accepts index := by
   constructor
   · intro reach
     exact source.accepts_of_haltHead index ⟨[], by simpa using reach⟩
@@ -141,7 +141,7 @@ theorem appendant_nonempty_at_zero {ι : Type*} [Primcodable ι]
 theorem accepts_implies_exactFiring {ι : Type*} [Primcodable ι]
     {accepts : ι → Prop} (source : TwoTagSource ι accepts)
     (index : ι) (accepted : accepts index) :
-    source.cyclicSystem.AvoidingReaches source.haltPhase
+    source.cyclicSystem.FiringAvoidingReaches source.haltPhase
       { data := source.cyclicInput index, phase := ⟨0, source.period_pos⟩ }
       { data := [true], phase := source.haltPhase } := by
   exact
@@ -154,7 +154,7 @@ theorem accepts_of_avoidingFiring {ι : Type*} [Primcodable ι]
     {accepts : ι → Prop} (source : TwoTagSource ι accepts)
     (index : ι) (firing : CyclicTag.Config source.period)
     (reach :
-      source.cyclicSystem.AvoidingReaches source.haltPhase
+      source.cyclicSystem.FiringAvoidingReaches source.haltPhase
         { data := source.cyclicInput index, phase := ⟨0, source.period_pos⟩ } firing)
     (fires : CyclicTag.FiresAt source.haltPhase firing) :
     accepts index := by

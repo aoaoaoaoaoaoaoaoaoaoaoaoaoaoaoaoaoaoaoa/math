@@ -1,4 +1,4 @@
-import MatrixMortality.PairedBinaryAlgebraContexts
+import MatrixMortality.PairedBinaryContextsClosed
 
 /-!
 # Nonsingularity of the paired-binary contexts
@@ -10,7 +10,7 @@ reduces to an integer factor congruent to three modulo nine.
 namespace MatrixMortality
 
 open scoped Matrix
-open PairedBinaryAlgebra.Certificate
+open PairedBinaryContexts.Certificate
 
 /-- The last factor controlling reachability of the paired-binary separator contexts. -/
 private def pairedBinaryAlgebraReachabilityGap (β : Nat) (body : List TagLetter) : ℚ :=

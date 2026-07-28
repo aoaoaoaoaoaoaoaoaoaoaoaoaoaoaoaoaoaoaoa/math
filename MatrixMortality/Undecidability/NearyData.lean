@@ -28,11 +28,49 @@ def junkAtomWeight {period : Nat} (system : CyclicTag period) (input : List Bool
   | .raw => trackWidth system input
   | .packet => period * trackWidth system input + 1
 
-/-- Concatenate a finite garbage code. -/
+/-- Token stream used by the semantic invariant: cyclic data bits interspersed with garbage. -/
+inductive DataToken where
+  | bit (value : Bool)
+  | junk (atom : JunkAtom)
+  deriving DecidableEq, Repr
+
+/-- Concrete restricted-tag word represented by one semantic token. -/
+def dataTokenWord {period : Nat} (system : CyclicTag period) (input : List Bool)
+    (haltPhase : Fin period) (period_pos : 0 < period) : DataToken → List TagLetter
+  | .bit value => bitObject system input haltPhase period_pos value
+  | .junk atom => junkAtomWord system input haltPhase period_pos atom
+
+/-- Concrete restricted-tag word represented by a semantic token stream. -/
+def encodeData {period : Nat} (system : CyclicTag period) (input : List Bool)
+    (haltPhase : Fin period) (period_pos : 0 < period) (tokens : List DataToken) :
+    List TagLetter :=
+  spell (dataTokenWord system input haltPhase period_pos) tokens
+
+@[simp]
+theorem encodeData_nil {period : Nat} (system : CyclicTag period) (input : List Bool)
+    (haltPhase : Fin period) (period_pos : 0 < period) :
+    encodeData system input haltPhase period_pos [] = [] := rfl
+
+@[simp]
+theorem encodeData_cons {period : Nat} (system : CyclicTag period) (input : List Bool)
+    (haltPhase : Fin period) (period_pos : 0 < period) (token : DataToken)
+    (tokens : List DataToken) :
+    encodeData system input haltPhase period_pos (token :: tokens) =
+      dataTokenWord system input haltPhase period_pos token ++
+        encodeData system input haltPhase period_pos tokens := rfl
+
+theorem encodeData_append {period : Nat} (system : CyclicTag period) (input : List Bool)
+    (haltPhase : Fin period) (period_pos : 0 < period) (left right : List DataToken) :
+    encodeData system input haltPhase period_pos (left ++ right) =
+      encodeData system input haltPhase period_pos left ++
+        encodeData system input haltPhase period_pos right := by
+  exact spell_append _ _ _
+
+/-- Encode a garbage-only token stream. -/
 def encodeJunk {period : Nat} (system : CyclicTag period) (input : List Bool)
     (haltPhase : Fin period) (period_pos : 0 < period) (code : List JunkAtom) :
     List TagLetter :=
-  spell (junkAtomWord system input haltPhase period_pos) code
+  encodeData system input haltPhase period_pos (code.map .junk)
 
 @[simp]
 theorem encodeJunk_nil {period : Nat} (system : CyclicTag period) (input : List Bool)
@@ -45,14 +83,15 @@ theorem encodeJunk_cons {period : Nat} (system : CyclicTag period) (input : List
     (code : List JunkAtom) :
     encodeJunk system input haltPhase period_pos (atom :: code) =
       junkAtomWord system input haltPhase period_pos atom ++
-        encodeJunk system input haltPhase period_pos code := rfl
+        encodeJunk system input haltPhase period_pos code := by
+  simp [encodeJunk, dataTokenWord]
 
 theorem encodeJunk_append {period : Nat} (system : CyclicTag period) (input : List Bool)
     (haltPhase : Fin period) (period_pos : 0 < period) (left right : List JunkAtom) :
     encodeJunk system input haltPhase period_pos (left ++ right) =
       encodeJunk system input haltPhase period_pos left ++
         encodeJunk system input haltPhase period_pos right := by
-  exact spell_append _ _ _
+  simp [encodeJunk, encodeData_append]
 
 theorem epsilonObject_length {period : Nat} (system : CyclicTag period)
     (input : List Bool) (haltPhase : Fin period) (period_pos : 0 < period) :
@@ -357,51 +396,10 @@ theorem read_junk {period : Nat} (system : CyclicTag period) (input : List Bool)
       rw [encodeJunk_append]
       simpa [suffix, List.append_assoc] using composed
 
-/-- Token stream used by the semantic invariant: cyclic data bits interspersed with garbage. -/
-inductive DataToken where
-  | bit (value : Bool)
-  | junk (atom : JunkAtom)
-  deriving DecidableEq, Repr
-
-/-- Concrete restricted-tag word represented by one semantic token. -/
-def dataTokenWord {period : Nat} (system : CyclicTag period) (input : List Bool)
-    (haltPhase : Fin period) (period_pos : 0 < period) : DataToken → List TagLetter
-  | .bit value => bitObject system input haltPhase period_pos value
-  | .junk atom => junkAtomWord system input haltPhase period_pos atom
-
-/-- Concrete restricted-tag word represented by a semantic token stream. -/
-def encodeData {period : Nat} (system : CyclicTag period) (input : List Bool)
-    (haltPhase : Fin period) (period_pos : 0 < period) (tokens : List DataToken) :
-    List TagLetter :=
-  spell (dataTokenWord system input haltPhase period_pos) tokens
-
-@[simp]
-theorem encodeData_nil {period : Nat} (system : CyclicTag period) (input : List Bool)
-    (haltPhase : Fin period) (period_pos : 0 < period) :
-    encodeData system input haltPhase period_pos [] = [] := rfl
-
-@[simp]
-theorem encodeData_cons {period : Nat} (system : CyclicTag period) (input : List Bool)
-    (haltPhase : Fin period) (period_pos : 0 < period) (token : DataToken)
-    (tokens : List DataToken) :
-    encodeData system input haltPhase period_pos (token :: tokens) =
-      dataTokenWord system input haltPhase period_pos token ++
-        encodeData system input haltPhase period_pos tokens := rfl
-
-theorem encodeData_append {period : Nat} (system : CyclicTag period) (input : List Bool)
-    (haltPhase : Fin period) (period_pos : 0 < period) (left right : List DataToken) :
-    encodeData system input haltPhase period_pos (left ++ right) =
-      encodeData system input haltPhase period_pos left ++
-        encodeData system input haltPhase period_pos right := by
-  exact spell_append _ _ _
-
 theorem encodeData_junk {period : Nat} (system : CyclicTag period) (input : List Bool)
     (haltPhase : Fin period) (period_pos : 0 < period) (code : List JunkAtom) :
     encodeData system input haltPhase period_pos (code.map .junk) =
-      encodeJunk system input haltPhase period_pos code := by
-  induction code with
-  | nil => rfl
-  | cons atom code ih => simp [ih, dataTokenWord]
+      encodeJunk system input haltPhase period_pos code := rfl
 
 theorem encodeData_bits {period : Nat} (system : CyclicTag period) (input : List Bool)
     (haltPhase : Fin period) (period_pos : 0 < period) (bits : List Bool) :

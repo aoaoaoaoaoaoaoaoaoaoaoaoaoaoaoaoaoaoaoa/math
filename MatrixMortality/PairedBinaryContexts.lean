@@ -3,11 +3,10 @@ import MatrixMortality.NearySideNormal
 import MatrixMortality.PairedBinary
 
 /-!
-# Full algebra of the paired-binary mortality family
+# Paired-binary physical contexts
 
-The two transposed six-state controls and their canonical rank-one separator generate the full
-six-dimensional matrix algebra.  Sparse reachable and observable context matrices reduce
-nonsingularity to two integer factors, each congruent to three modulo nine.
+This file exposes the transposed controls, canonical rank-one separator, and sparse physical
+contexts used by the later full-algebra certificate.
 -/
 
 namespace MatrixMortality
@@ -45,7 +44,7 @@ def pairedBinaryAlgebraColumn (β : Nat) : Fin 6 → ℚ :=
 def pairedBinaryAlgebraRow : Fin 6 → ℚ :=
   pairedBinaryBoundaryColumn ℚ
 
-namespace PairedBinaryAlgebra.Certificate
+namespace PairedBinaryContexts.Certificate
 
 /-- Closed form of the transposed controls. -/
 def pairedBinaryAlgebraGeneratorClosed (β : Nat) (body : List TagLetter) :
@@ -263,6 +262,6 @@ def pairedBinaryAlgebraObservableClosed (β : Nat) (body : List TagLetter) :
      1, 1, u, V, 2, 1;
      1, 25, u, 700, (135 * ρ ^ 2 + 24 * ρ + 1) / 2, 76]
 
-end PairedBinaryAlgebra.Certificate
+end PairedBinaryContexts.Certificate
 
 end MatrixMortality

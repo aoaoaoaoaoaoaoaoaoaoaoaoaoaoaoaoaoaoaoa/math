@@ -101,13 +101,9 @@ def safetyBound {period : Nat} (system : CyclicTag period) (input : List Bool) :
   11 * (input.length + period + deletionWidth period + appendantMass system + 1) +
     deletionWidth period + 2
 
-/-- Number of padding rounds. -/
-def paddingRounds {period : Nat} (system : CyclicTag period) (input : List Bool) : Nat :=
-  safetyBound system input
-
 /-- Track length, chosen congruent to one modulo `β - 1`. -/
 def trackWidth {period : Nat} (system : CyclicTag period) (input : List Bool) : Nat :=
-  paddingRounds system input * (deletionWidth period - 1) + 1
+  safetyBound system input * (deletionWidth period - 1) + 1
 
 /-- The padding width is primitive recursive in the variable input word. -/
 theorem trackWidth_primrec {period : Nat} (system : CyclicTag period) :
@@ -152,7 +148,7 @@ theorem safetyBound_pos {period : Nat} (system : CyclicTag period) (input : List
 theorem safetyBound_le_trackWidth {period : Nat} (system : CyclicTag period)
     (input : List Bool) (period_pos : 0 < period) :
     safetyBound system input ≤ trackWidth system input := by
-  unfold trackWidth paddingRounds
+  unfold trackWidth
   have multiplier : 1 ≤ deletionWidth period - 1 := by
     have := deletionWidth_large period_pos
     omega
@@ -811,7 +807,7 @@ theorem expandPrime_encodePrimes {period : Nat} (system : CyclicTag period)
 theorem body_length {period : Nat} (system : CyclicTag period) (input : List Bool)
     (haltPhase : Fin period) (period_pos : 0 < period) :
     (body system input haltPhase period_pos).length =
-      (paddingRounds system input * deletionWidth period + 1) *
+      (safetyBound system input * deletionWidth period + 1) *
         (deletionWidth period - 1) := by
   rw [body, List.length_dropLast, wholeAppendant_length]
   unfold trackWidth
@@ -820,17 +816,17 @@ theorem body_length {period : Nat} (system : CyclicTag period) (input : List Boo
     omega
   have product_eq :
       deletionWidth period *
-          (paddingRounds system input * (deletionWidth period - 1) + 1) =
-        (paddingRounds system input * deletionWidth period + 1) *
+          (safetyBound system input * (deletionWidth period - 1) + 1) =
+        (safetyBound system input * deletionWidth period + 1) *
             (deletionWidth period - 1) + 1 := by
     calc
       deletionWidth period *
-          (paddingRounds system input * (deletionWidth period - 1) + 1) =
-        paddingRounds system input * deletionWidth period * (deletionWidth period - 1) +
+          (safetyBound system input * (deletionWidth period - 1) + 1) =
+        safetyBound system input * deletionWidth period * (deletionWidth period - 1) +
           deletionWidth period := by ring
-      _ = paddingRounds system input * deletionWidth period * (deletionWidth period - 1) +
+      _ = safetyBound system input * deletionWidth period * (deletionWidth period - 1) +
           (deletionWidth period - 1) + 1 := by omega
-      _ = (paddingRounds system input * deletionWidth period + 1) *
+      _ = (safetyBound system input * deletionWidth period + 1) *
           (deletionWidth period - 1) + 1 := by ring
   rw [product_eq]
   omega
@@ -840,7 +836,7 @@ def arithmeticEnvelope {period : Nat} (system : CyclicTag period) (input : List 
     (haltPhase : Fin period) (period_pos : 0 < period) : NearyArithmeticEnvelope where
   β := deletionWidth period
   body := body system input haltPhase period_pos
-  paddingRounds := paddingRounds system input
+  paddingRounds := safetyBound system input
   beta_large := deletionWidth_large period_pos
   body_length := body_length system input haltPhase period_pos
 

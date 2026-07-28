@@ -195,8 +195,8 @@ theorem mortal_quotient_iff (generators : Glyph → Module.End K V)
   ⟨ambient_mortal_of_quotient_mortal generators input output repairWord repair_nonempty repair,
     quotient_mortal_of_ambient_mortal generators input output⟩
 
-/-- If minimization annihilates the entire state space, wrapping any nonempty quotient word
-between two copies of the physical repair word certifies a mortal source family. -/
+/-- If minimization annihilates the entire state space, the physical repair word wrapped around
+itself certifies a mortal source family. -/
 theorem ambient_mortal_of_quotient_subsingleton
     (generators : Glyph → Module.End K V) (input : Q →ₗ[K] V) (output : V →ₗ[K] Q)
     (repairWord : List Glyph) (repair_nonempty : repairWord ≠ [])

@@ -101,7 +101,7 @@ theorem semantic_haltsIn_implies_firing {period : Nat} (system : CyclicTag perio
       ((encodeData system input haltPhase period_pos tokens).drop
         (objectEntryPhase instruction).val)) :
     ∃ firing,
-      system.AvoidingReaches haltPhase
+      system.FiringAvoidingReaches haltPhase
           { data := dataBits tokens, phase := instruction } firing ∧
         CyclicTag.FiresAt haltPhase firing := by
   induction steps using Nat.strong_induction_on generalizing instruction tokens with
@@ -132,7 +132,7 @@ theorem semantic_haltsIn_implies_firing {period : Nat} (system : CyclicTag perio
               ih laterSteps later_lt (CyclicTag.shift instruction 1) nextTokens nextStable
                 laterHalts
             rw [nextBits] at laterReach
-            have first : CyclicTag.AvoidingStep system haltPhase
+            have first : CyclicTag.FiringAvoidingStep system haltPhase
                 { data := value :: bits, phase := instruction }
                 { data := bits ++ if value then system.appendant instruction else [],
                   phase := CyclicTag.shift instruction 1 } :=
@@ -152,7 +152,7 @@ theorem semantic_halts_implies_firing {period : Nat} (system : CyclicTag period)
       ((encodeData system input haltPhase period_pos tokens).drop
         (objectEntryPhase instruction).val)) :
     ∃ firing,
-      system.AvoidingReaches haltPhase
+      system.FiringAvoidingReaches haltPhase
           { data := dataBits tokens, phase := instruction } firing ∧
         CyclicTag.FiresAt haltPhase firing := by
   obtain ⟨steps, indexed⟩ := tagHaltsFrom_iff_exists_tagHaltsIn.mp halts
@@ -171,7 +171,7 @@ theorem compiled_halts_implies_firing {period : Nat} (system : CyclicTag period)
       (compiledOutput system input haltPhase period_pos)
       ((body system input haltPhase period_pos).drop (deletionWidth period - 1) ++ [.b])) :
     ∃ firing,
-      system.AvoidingReaches haltPhase
+      system.FiringAvoidingReaches haltPhase
           { data := input, phase := ⟨0, period_pos⟩ } firing ∧
         CyclicTag.FiresAt haltPhase firing := by
   have initialRead := read_initialQueue system input haltPhase period_pos input_nonempty

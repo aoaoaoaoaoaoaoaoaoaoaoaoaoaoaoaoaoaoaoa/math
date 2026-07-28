@@ -1,4 +1,4 @@
-import MatrixMortality.PairedBinaryAlgebra
+import MatrixMortality.PairedBinaryContexts
 
 /-!
 # Closed paired-binary context matrices
@@ -10,7 +10,7 @@ and observable matrices used by the full-algebra certificate.
 namespace MatrixMortality
 
 open scoped Matrix
-open PairedBinaryAlgebra.Certificate
+open PairedBinaryContexts.Certificate
 
 theorem pairedBinaryAlgebraReachable_eq_closed (β : Nat) (body : List TagLetter) :
     pairedBinaryAlgebraReachable β body =

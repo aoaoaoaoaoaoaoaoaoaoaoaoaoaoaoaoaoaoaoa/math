@@ -86,8 +86,9 @@ theorem next_eq_some_applyAction {state : Type*} (machine : Machine state)
     next machine config = some (applyAction action config) := by
   simp [next, applyAction, at_state]
 
-/-- Reflexive-transitive machine execution. -/
-def Reaches {state : Type*} (machine : Machine state) : Config state → Config state → Prop :=
+/-- Reflexive-transitive execution of machine configurations. -/
+def ConfigReaches {state : Type*} (machine : Machine state) :
+    Config state → Config state → Prop :=
   Turing.Reaches (next machine)
 
 /-- The two counters in motion-relative order: behind the head, then in front of it. -/
@@ -332,8 +333,8 @@ def Step {state : Type*} (machine : Machine state) :
     List (Symbol state) → List (Symbol state) → Prop :=
   TagStep 2 (production machine)
 
-/-- Typed reflexive-transitive tag execution. -/
-def TagReaches {state : Type*} (machine : Machine state) :
+/-- Tag-queue execution of encoded machine configurations. -/
+def EncodedReaches {state : Type*} (machine : Machine state) :
     List (Symbol state) → List (Symbol state) → Prop :=
   MatrixMortality.TagReaches 2 (production machine)
 
@@ -430,7 +431,7 @@ theorem pairOutput_staggeredRun {α : Type*} (output : α → List α)
 
 /-- Eventual arrival at a machine state with no outgoing action. -/
 def Halts {state : Type*} (machine : Machine state) (initial : Config state) : Prop :=
-  ∃ final, Reaches machine initial final ∧ machine final.state = none
+  ∃ final, ConfigReaches machine initial final ∧ machine final.state = none
 
 /-- The relational halting predicate agrees with mathlib's evaluator. -/
 theorem halts_iff_eval_dom {state : Type*} (machine : Machine state) (initial : Config state) :

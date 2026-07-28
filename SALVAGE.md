@@ -562,9 +562,9 @@ change the physical pair or change its nonzero behavior.
 independent symbolic check are in
 [`audits/internal-sandwich-prefix-algebra-2026-07-25.md`](audits/internal-sandwich-prefix-algebra-2026-07-25.md#the-ten-state-prefix-pair).
 
-**Formalization:** [`MatrixMortality/PrefixAlgebra.lean`](MatrixMortality/PrefixAlgebra.lean),
-[`MatrixMortality/PrefixAlgebraContexts.lean`](MatrixMortality/PrefixAlgebraContexts.lean),
-[`MatrixMortality/PrefixAlgebraRank.lean`](MatrixMortality/PrefixAlgebraRank.lean), and
+**Formalization:** [`MatrixMortality/PrefixContexts.lean`](MatrixMortality/PrefixContexts.lean),
+[`MatrixMortality/PrefixContextsClosed.lean`](MatrixMortality/PrefixContextsClosed.lean),
+[`MatrixMortality/PrefixContextsNonsingular.lean`](MatrixMortality/PrefixContextsNonsingular.lean), and
 [`MatrixMortality/PrefixFullAlgebra.lean`](MatrixMortality/PrefixFullAlgebra.lean), through the
 generic exact-behavior bridge in
 [`MatrixMortality/FullMatrixBehavior.lean`](MatrixMortality/FullMatrixBehavior.lean);
@@ -680,9 +680,9 @@ the terminal lower suffix `10`. A generic rank-one-context theorem then turns th
 physical contexts into a spanning family.
 
 **Formalization:** [`MatrixMortality/FullMatrixAlgebra.lean`](MatrixMortality/FullMatrixAlgebra.lean),
-[`MatrixMortality/PairedBinaryAlgebra.lean`](MatrixMortality/PairedBinaryAlgebra.lean),
-[`MatrixMortality/PairedBinaryAlgebraContexts.lean`](MatrixMortality/PairedBinaryAlgebraContexts.lean),
-[`MatrixMortality/PairedBinaryAlgebraRank.lean`](MatrixMortality/PairedBinaryAlgebraRank.lean), and
+[`MatrixMortality/PairedBinaryContexts.lean`](MatrixMortality/PairedBinaryContexts.lean),
+[`MatrixMortality/PairedBinaryContextsClosed.lean`](MatrixMortality/PairedBinaryContextsClosed.lean),
+[`MatrixMortality/PairedBinaryContextsNonsingular.lean`](MatrixMortality/PairedBinaryContextsNonsingular.lean), and
 [`MatrixMortality/PairedBinaryFullAlgebra.lean`](MatrixMortality/PairedBinaryFullAlgebra.lean),
 through the generic exact-behavior bridge in
 [`MatrixMortality/FullMatrixBehavior.lean`](MatrixMortality/FullMatrixBehavior.lean);

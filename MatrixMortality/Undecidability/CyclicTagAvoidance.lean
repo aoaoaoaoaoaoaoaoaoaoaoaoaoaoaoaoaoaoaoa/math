@@ -16,7 +16,7 @@ namespace CyclicTag
 /-- One pulse-avoiding semantic step agrees with one executable cyclic-tag step. -/
 theorem run_one_of_avoidingStep {period : Nat} {system : CyclicTag period}
     {haltPhase : Fin period} {before after : Config period}
-    (step : AvoidingStep system haltPhase before after) :
+    (step : FiringAvoidingStep system haltPhase before after) :
     system.run 1 before = some after := by
   cases step
   simp [run, next]
@@ -24,7 +24,7 @@ theorem run_one_of_avoidingStep {period : Nat} {system : CyclicTag period}
 /-- Every pulse-avoiding semantic execution has an exact executable length. -/
 theorem run_of_avoidingReaches {period : Nat} {system : CyclicTag period}
     {haltPhase : Fin period} {before after : Config period}
-    (reach : system.AvoidingReaches haltPhase before after) :
+    (reach : system.FiringAvoidingReaches haltPhase before after) :
     ∃ steps, system.run steps before = some after := by
   induction reach with
   | refl => exact ⟨0, by simp [run]⟩
@@ -60,19 +60,19 @@ theorem phase_of_run {period : Nat} (system : CyclicTag period) (steps : Nat)
 /-- A false prefix advances the program without emitting data or firing any phase. -/
 theorem avoiding_false_run {period : Nat} (system : CyclicTag period)
     (haltPhase phase : Fin period) (count : Nat) (tail : List Bool) :
-    system.AvoidingReaches haltPhase
+    system.FiringAvoidingReaches haltPhase
       { data := List.replicate count false ++ tail, phase }
       { data := tail, phase := shift phase count } := by
   induction count generalizing phase with
   | zero =>
       simpa using
         (Relation.ReflTransGen.refl :
-          system.AvoidingReaches haltPhase
+          system.FiringAvoidingReaches haltPhase
             { data := tail, phase } { data := tail, phase })
   | succ count ih =>
       apply Relation.ReflTransGen.head
       · simpa [List.replicate_succ] using
-          (AvoidingStep.advance phase false
+          (FiringAvoidingStep.advance phase false
             (List.replicate count false ++ tail) (by simp))
       · simpa [List.replicate_succ, shift_add, Nat.add_comm] using
           ih (shift phase 1)
@@ -120,7 +120,7 @@ theorem oneHot_drop_last {alphabet : Nat} (target : Fin alphabet)
 theorem avoiding_oneHot {period alphabet : Nat} (system : CyclicTag period)
     (haltPhase phase : Fin period) (symbol : Fin alphabet) (tail : List Bool)
     (true_phase_ne : shift phase symbol ≠ haltPhase) :
-    system.AvoidingReaches haltPhase
+    system.FiringAvoidingReaches haltPhase
       { data := oneHot symbol ++ tail, phase := phase }
       { data := tail ++ system.discharge phase (oneHot symbol),
         phase := shift phase alphabet } := by
@@ -128,7 +128,7 @@ theorem avoiding_oneHot {period alphabet : Nat} (system : CyclicTag period)
   have frontReach :=
     avoiding_false_run system haltPhase phase symbol.val
       (true :: List.replicate suffixLength false ++ tail)
-  have pulseStep : AvoidingStep system haltPhase
+  have pulseStep : FiringAvoidingStep system haltPhase
       { data := true :: List.replicate suffixLength false ++ tail,
         phase := shift phase symbol }
       { data :=
@@ -191,7 +191,7 @@ private theorem second_half_phase_ne {alphabet : Nat} (alphabet_nonempty : 0 < a
 theorem simulate_avoiding_step {alphabet : Nat} (system : TwoTag alphabet)
     (alphabet_nonempty : 0 < alphabet) (target head wake : Fin alphabet)
     (tail : List (Fin alphabet)) (head_ne : head ≠ target) :
-    (ofTwoTag system).AvoidingReaches
+    (ofTwoTag system).FiringAvoidingReaches
       (shift (initialPhase alphabet_nonempty) target)
       { data := encodeWord (head :: wake :: tail),
         phase := initialPhase alphabet_nonempty }
@@ -221,8 +221,8 @@ theorem simulate_avoiding_step {alphabet : Nat} (system : TwoTag alphabet)
 theorem simulate_avoiding_reaches {alphabet : Nat} (system : TwoTag alphabet)
     (alphabet_nonempty : 0 < alphabet) (target : Fin alphabet)
     {before after : List (Fin alphabet)}
-    (reach : system.AvoidingReaches target before after) :
-    (ofTwoTag system).AvoidingReaches
+    (reach : system.HeadAvoidingReaches target before after) :
+    (ofTwoTag system).FiringAvoidingReaches
       (shift (initialPhase alphabet_nonempty) target)
       { data := encodeWord before, phase := initialPhase alphabet_nonempty }
       { data := encodeWord after, phase := initialPhase alphabet_nonempty } := by
@@ -244,7 +244,7 @@ theorem run_cycles_reflects {alphabet : Nat} (system : TwoTag alphabet)
         some final) :
     TagHaltsFrom 2 system.production before ∨
       ∃ after,
-        system.Reaches before after ∧
+        system.QueueReaches before after ∧
           final =
             { data := encodeWord after
               phase := initialPhase alphabet_nonempty } := by
@@ -278,12 +278,12 @@ theorem avoiding_firing_reflects {alphabet : Nat} (system : TwoTag alphabet)
     (target_last : target.val + 1 = alphabet)
     (initial : List (Fin alphabet)) (firing : Config (alphabet + alphabet))
     (reach :
-      (ofTwoTag system).AvoidingReaches
+      (ofTwoTag system).FiringAvoidingReaches
         (shift (initialPhase alphabet_nonempty) target)
         { data := encodeWord initial, phase := initialPhase alphabet_nonempty }
         firing)
     (fires : FiresAt (shift (initialPhase alphabet_nonempty) target) firing) :
-    TagHaltsFrom 2 system.production initial ∨ system.ReachesHead initial target := by
+    TagHaltsFrom 2 system.production initial ∨ system.CanReachHead initial target := by
   obtain ⟨steps, execution⟩ := run_of_avoidingReaches reach
   obtain ⟨firingTail, firingData, firingPhase⟩ := fires
   have runPhase := phase_of_run (ofTwoTag system) steps _ _ execution
@@ -371,8 +371,8 @@ theorem avoiding_firing_reflects {alphabet : Nat} (system : TwoTag alphabet)
 theorem avoiding_reaches_last_firing {alphabet : Nat} (system : TwoTag alphabet)
     (alphabet_nonempty : 0 < alphabet) (target : Fin alphabet)
     (target_last : target.val + 1 = alphabet) (initial : List (Fin alphabet))
-    (reach : system.AvoidingReaches target initial [target]) :
-    (ofTwoTag system).AvoidingReaches
+    (reach : system.HeadAvoidingReaches target initial [target]) :
+    (ofTwoTag system).FiringAvoidingReaches
       (shift (initialPhase alphabet_nonempty) target)
       { data := encodeWord initial, phase := initialPhase alphabet_nonempty }
       { data := [true], phase := shift (initialPhase alphabet_nonempty) target } := by
