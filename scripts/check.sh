@@ -5,12 +5,19 @@ readonly ROOT="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
 readonly ELAN_HOME="${ELAN_HOME:-$HOME/.local/share/elan}"
 readonly MANIFEST="$ROOT/publications.json"
 readonly SOURCE_DATE_EPOCH=1784606400
+readonly TECTONIC_BUNDLE='https://relay.fullyjustified.net/default_bundle_v33.tar'
+readonly TECTONIC_VERSION='Tectonic 0.17.0'
 readonly SCRATCH="$(mktemp -d)"
 trap 'rm -rf -- "$SCRATCH"' EXIT
 
 cd -- "$ROOT"
 export ELAN_HOME
 export SOURCE_DATE_EPOCH
+
+[[ "$(tectonic --version)" == "$TECTONIC_VERSION" ]] || {
+  printf 'paper reproduction requires %s\n' "$TECTONIC_VERSION" >&2
+  exit 1
+}
 
 sh -n scripts/publish.sh
 jq -e '
@@ -330,7 +337,7 @@ diff --unified \
   <(jq -r '.publications[] | select(.kind != "index") | .source' "$MANIFEST" | sort) \
   <(printf '%s\n' binary_compilers.html matrix_mortality.html m3_5.html m4_4.html | sort)
 
-tectonic --outdir "$SCRATCH" paper/main.tex
+tectonic --bundle "$TECTONIC_BUNDLE" --outdir "$SCRATCH" paper/main.tex
 cmp --silent "$SCRATCH/main.pdf" paper/main.pdf || {
   printf 'paper/main.pdf is not the reproducible output of paper/main.tex\n' >&2
   exit 1

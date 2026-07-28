@@ -55,7 +55,9 @@ Required host commands are `lake`, `uv`/`uvx`, `tectonic`, `xmllint`, `rg`, `dif
 `sha256sum`. The script checks the reference corpus; builds and lints Lean; compares the exact
 transitive-axiom snapshot; rejects proof escapes and linter suppressions; runs the independent
 finite falsifier; validates the HTML expositions; and reproduces the committed PDF
-byte-for-byte.
+byte-for-byte. PDF reproduction requires Tectonic 0.17.0, bundle v33, and
+`SOURCE_DATE_EPOCH=1784606400`; the script fixes the latter two and rejects another Tectonic
+version.
 
 The audited theorem dependencies are exactly `propext`, `Classical.choice`, and `Quot.sound`.
 There are no project axioms or admitted proofs.
