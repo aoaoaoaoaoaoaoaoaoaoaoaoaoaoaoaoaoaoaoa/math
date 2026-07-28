@@ -550,10 +550,11 @@ rank (3,2): mortality of {VAⁿU : n≥0},  A∈GL₃(ℚ).
 
 The first already contains the dimension-two hard core. The generic reverse construction
 [`R32-M01`](SALVAGE.md#r32-m01-generic-reverse-edge-compiler) places one rank-one test loop and
-three invertible edges in a compatible two-plane square. Its geometric realization is
-formalized; its basis adaptation, all-path theorem, and degenerate-source reduction remain an
-open hardening obligation. Conversely, no theorem currently removes every graph constraint
-from an arbitrary rank-`(2,2)` pair. “Equivalent to `M₂(3)`” would therefore be too strong.
+three invertible edges in a compatible two-plane square. Its basis adaptation and complete
+all-path converse are formalized for `αβ≠0`. Only the two exceptional projective positions
+remain: no checked three-dimensional OR gadget combines their finite disjunction into one
+many-one instance. Conversely, no theorem removes every graph constraint from an arbitrary
+rank-`(2,2)` pair. “Equivalent to `M₂(3)`” would therefore still be too strong.
 
 The rank-`(3,2)` profile is the genuinely new artery. If `B=UV`, every binary word containing
 `B` is governed exactly by
@@ -598,27 +599,41 @@ The family is now sharply fenced:
 - adding a third singular `1,t,t²` mode still cannot implement reversible squaring, while two
   exact squaring checks collapse to blind scaling, by
   [`R32-O04`](SALVAGE.md#r32-o04-quadratic-pencil-verification-collapse).
+- if `q` is a prime power, mortality occurs exactly at the one-return resonances, by
+  [`R32-D02`](SALVAGE.md#r32-d02-prime-power-returnsquare-classification).
 
-Every unclassified nonresonant ReturnSquare zero must therefore use at least three positive
-returns in the bounded middle negative strip. ReturnSquare is not dead, but its surviving region
-is too thin to justify blind parameter search.
+Thus every unclassified ReturnSquare instance has a base divisible by at least two distinct
+primes; every nonresonant zero must use at least three positive returns in the bounded middle
+negative strip. The one-base prime-power architecture is closed.
+
+The obvious nonsemisimple escape is closed as well. A `1⊕J₋₁` ambient mode can realize the
+exact parity-Collatz rails, but the rank-compatible branch is unique up to scalar and preserves
+a nonzero line modulo seven. This is
+[`R32-O05`](SALVAGE.md#r32-o05-jordan-parity-verifier-collapse).
+
+The live constructive object is now the two-scale ReturnConvert pencil
+[`R32-M03`](SALVAGE.md#r32-m03-two-scale-return-conversion). Its modes `(1,p,q)` retain an
+internal rank-one return, convert the projective rail `pⁿ↦qⁿ`, genuinely require three states,
+and already produce a nonresonant two-return zero at `(p,q,c)=(3,6,−1/9)`. What is missing is a
+self-verifying configuration set, not arithmetic activity.
 
 ### Live attacks
 
 | Lane | Required move | Present obstruction |
 | --- | --- | --- |
-| Irreducible cubic return pencil | Replace the split spectrum `1,q,q²` by a cubic companion action whose `2 × 2` return sequence has no fixed rail or target strip | The complete split quadratic pencil is now blocked by `R32-O04`; a candidate needs an internal low-rank return and an exact arbitrary-word normal form |
-| Two-scale arithmetic | Put two multiplicatively independent spectral modes in `VAⁿU` and use products of different waits as arithmetic storage | A single wait supplies one exponent; the interaction must survive projectivization without collapsing to a one-base affine group |
+| Two-scale ReturnConvert | Turn the verified rail `pⁿ↦qⁿ` into a guarded configuration dynamics whose illegal waits enter a permanent valuation trap | Nonresonant zeros exist, but independently chosen waits are not yet constrained to legal computation |
+| Irreducible cubic return pencil | Replace the split spectrum by a cubic companion action whose `2 × 2` return sequence has no fixed rail or target strip | A candidate still needs an internal low-rank return and an exact arbitrary-word normal form |
+| Multi-prime ReturnSquare | Extend the rational-root support and finite walls from prime powers to bases with several prime factors | Mixed prime support permits roots not confined to one valuation ray |
 | Local-global sieve | Find a finite quotient that separates every no-instance, or a finite invariant nucleus that lifts to characteristic zero | [`R32-M02`](SALVAGE.md#r32-m02-finite-quotient-sieve) is one-sided; survival modulo all tested primes proves nothing |
 | Valuation and cone dynamics | Extend the signed-cone pullback or a `p`-adic invariant across the remaining middle strip or a new pencil | Cancellation at poles and between spectral modes destroys naive monotonicity |
 | Same-zero return surgery | Change nonzero return values while preserving the zero semigroup, thereby evading exact Hankel taxes | No general same-zero minimization theorem exists; every surgery needs its own arbitrary-product converse |
-| Rank-`(2,2)` reverse compiler | Complete the generic incidence embedding and classify graph shapes with singular edges | Degenerate source points and constrained edge languages prevent a current many-one equivalence claim |
+| Exceptional reverse compiler | Absorb the finite `αβ=0` disjunction into one three-dimensional many-one instance | The generic all-path compiler is complete; dimension three has no evident OR operation |
 
-The highest-value lunge is an irreducible cubic or two-scale pencil with a physical rank-one
-return. [`MM-C04`](SALVAGE.md#mm-c04-internal-word-sandwich-minimization) can then minimize its
-exact matrix-valued sandwich without another malformed-word proof. Candidate pencils should
-first face finite-quotient sieves, block-Hankel rank, short-word symbolic factorization, and
-signed/valuation cone tests.
+The highest-value lunge is ReturnConvert itself. It has already crossed the algebraic fences
+that killed ReturnSquare and the Jordan branch. [`MM-C04`](SALVAGE.md#mm-c04-internal-word-sandwich-minimization)
+can minimize any exact matrix-valued sandwich without another malformed-word proof. Candidate
+extensions should first face finite-quotient sieves, block-Hankel rank, short-word symbolic
+factorization, and signed or valuation cone tests.
 
 The strategic boundary is now clear. The easy layer consisted of finding and repairing missing
 finite compilers. `M₃(2)` asks whether one low-dimensional recurrence family can store

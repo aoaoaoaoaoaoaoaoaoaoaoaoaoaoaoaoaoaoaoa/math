@@ -185,7 +185,10 @@ block-Hankel section lower-bounds every exact realization of that matrix-valued 
 two rank-two generators, Lean compresses every nonempty word to the adjacent-edge product
 `VᵢUⱼ`. It also proves the converse geometric construction: four `2 × 2` edges agreeing on one
 shared source line assemble into two `3 × 3` generators, and split incoming edges force both
-generators to have rank exactly two. The graph constraint remains explicit.
+generators to have rank exactly two. For the generic projective-incidence reverse construction
+`αβ≠0`, Lean now checks the independent basis changes, the rank-one loop fracture, the complete
+constrained-path grammar, and both mortality implications. The exceptional projective points
+remain outside the many-one compiler.
 
 ReturnSquare instantiates the rank-`(3,2)` reduction. Lean proves the closed return matrix,
 split interfaces, exact cut rank, internal rank-one zero-wait return, unit positive returns,
@@ -213,10 +216,25 @@ Pulling a zero bridge through all returns would place `[1,1]` in that cone altho
 `β_d(q)<1`. Lean therefore proves immortality throughout this outer negative half-line, as well
 as throughout `c≥0`.
 
+The arithmetic classification is now complete whenever `q` is a prime power. The normalized
+bridge polynomial has constant coefficient `T` and leading coefficient `±T²`. Rational-root
+support confines every positive root to one prime. The corpus proves the required
+Bang–Zsigmondy theorem for every base greater than one above exponent two, handles its
+`(2,6)` exception explicitly, and uses fixed- or two-ray finite quotient certificates to
+exclude every nonresonant reciprocal. Thus prime-power ReturnSquare is mortal exactly at
+`c=−q⁻ᵐ`.
+
+Two further return architectures are checked. The exact parity-Collatz pencil
+`C₀+(−1)ⁿC₁+n(−1)ⁿC₂` has one rank-compatible normal form under the stated singularity,
+tangency, and positive-return hypotheses; its physical pair preserves a nonzero line modulo
+seven and is immortal. In contrast, the two-scale modes `(1,p,q)` produce a minimal
+three-state pencil with rail `pⁿ↦qⁿ`, an internal rank-one return, and a genuine nonresonant
+two-return zero at `(p,q,c)=(3,6,−1/9)`.
+
 These are structural and decidable-stratum theorems, not an `M₃(2)` resolution. The imported
 order-four Skolem theorem used to classify rank-one profiles is not reimplemented in Lean. The
-generic reverse edge compiler's basis adaptation and constrained all-path converse also remain
-outside the checked corpus. Their boundary is recorded in
+generic reverse edge compiler still assumes `αβ≠0`, and ReturnConvert has no legal-wait
+invariant or computation theorem. Their boundary is recorded in
 [`audits/m32-rank-return-2026-07-28.md`](audits/m32-rank-return-2026-07-28.md) and scheduled in
 [#11](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/11) and
 [#12](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/12).
@@ -329,10 +347,17 @@ with a complete arbitrary-word converse.
 | `ReturnFamily.lean` | split finite-rank return normal form and matrix-valued block-Hankel witnesses |
 | `EdgeCompression.lean` | exact adjacent-edge compression for split finite-rank families |
 | `TwoPlaneEdges.lean` | compatible two-plane realization of a `2 × 2` edge square and exact rank-two certificates |
+| `ReverseEdge.lean` | generic projective-incidence reverse compiler, basis adaptation, and all-path converse |
+| `PolynomialPencil.lean` | coefficient support and exact evaluation of words over affine matrix pencils |
+| `PrimitiveDivisor.lean` | cyclotomic prime support and Bang–Zsigmondy above exponent two |
 | `ReturnSquare.lean` | exact rank-`(3,2)` laboratory, bridge normal form, and two-return square cage |
 | `ReturnSquareDynamics.lean` | homogeneous projective trap and outer negative immortality wall |
+| `ReturnSquarePrimePower.lean` | bridge-polynomial root support and finite quotient walls |
+| `ReturnSquareClassification.lean` | complete prime-power ReturnSquare parameter classification |
 | `ReturnSquareTax.lean` | exact four-state lower bound for literal reversible-stack returns |
 | `ReturnSquareNoGo.lean` | quadratic-pencil reversible-squaring obstruction and blind-scaling collapse |
+| `ReturnJordan.lean` | parity-Jordan rail rigidity and modular immortality certificate |
+| `ReturnConvert.lean` | minimal two-scale return pencil and nonresonant multi-return zero |
 | `BinaryDefect.lean` | binary two-word defect theorem and exact Neary macro obstruction |
 | `CHHNPacking.lean` | generic two-slot CHHN packing and six-state finite-Hankel kernels |
 | `CHHNPackingRank.lean` | all-placement exact six-state lower bound for the Neary packing |
@@ -419,12 +444,17 @@ with a complete arbitrary-word converse.
 | Finite return block-Hankel sections factor through every exact ambient realization | `ReturnFamily.finiteReturnHankel_factor`, `ReturnFamily.returnHankel_card_le` |
 | A split finite-rank family is mortal exactly when one constrained edge path vanishes | `EdgeCompression.isMortal_iff_exists_edgeProduct_eq_zero` |
 | Every compatible two-plane edge square is realized by two rank-two generators | `TwoPlaneEdges.output_mul_input`, `TwoPlaneEdges.generator_rank` |
+| Generic projective incidence compiles to two rank-two `3 × 3` generators | `ReverseEdge.isMortal_adaptedGenerator_iff`, `ReverseEdge.adaptedGenerator_rank` |
 | ReturnSquare physical mortality is exactly positive-return scalar bridge zero | `ReturnSquare.physical_isMortal_iff_positiveBridge` |
 | Every nonresonant ReturnSquare zero uses at least three positive returns | `ReturnSquare.positiveBridge_zero_shape` |
 | Nonnegative and outer-negative ReturnSquare parameters are immortal | `ReturnSquare.not_physical_isMortal_of_nonneg`, `ReturnSquare.not_physical_isMortal_of_beyond_negative_wall` |
+| Bang–Zsigmondy holds above exponent two, except for `2⁶−1` | `exists_primitivePrimeDivisor` |
+| Prime-power ReturnSquare is mortal exactly at one-return resonances | `ReturnSquare.physical_isMortal_primePower_iff` |
 | Literal reversible-stack returns require at least four exact states | `ReturnSquareTax.reversibleStack_card_lower_bound` |
 | Three singular quadratic modes cannot exchange `t` with `κt²` | `ReturnSquareNoGo.threeMode_swap_eq_zero` |
 | Two exact squaring checks collapse to blind scaling | `ReturnSquareNoGo.verifiedPush_eq_blindScale` |
+| The rank-compatible parity-Jordan branch is unique and immortal modulo seven | `ReturnJordan.normalForm_unique`, `ReturnJordan.not_isMortal_generator` |
+| The two-scale return pencil is minimal and has a nonresonant two-return zero | `ReturnConvert.three_le_card_of_exact_realization`, `ReturnConvert.example_zero`, `ReturnConvert.example_nonresonant` |
 | Rule and erasure matrices agree on the upper-side plane | `rule_erase_agree_on_upperSide` |
 | Every finite-controller letter routes its selected private channel exactly | `controllerMatrix_mulVec_controllerVector` |
 | Every suffix-controlled word obeys the generic total decoder | `controllerProduct_mulVec_controllerVector` |

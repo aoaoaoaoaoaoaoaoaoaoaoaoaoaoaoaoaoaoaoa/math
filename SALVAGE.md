@@ -79,9 +79,12 @@ file owns the mathematical stock.
 | [`R32-O02`](#r32-o02-two-return-square-cage) | obstruction | no two positive ReturnSquare returns can vanish | formalized | graduated |
 | [`R32-O03`](#r32-o03-reversible-stack-state-tax) | obstruction | literal reversible binary-stack returns require at least four exact states | formalized | graduated |
 | [`R32-O04`](#r32-o04-quadratic-pencil-verification-collapse) | obstruction | three simple modes cannot reversibly verify squaring | formalized | graduated |
+| [`R32-O05`](#r32-o05-jordan-parity-verifier-collapse) | obstruction | the rank-compatible parity-Jordan verifier is unique and immortal modulo seven | formalized | graduated |
 | [`R32-D01`](#r32-d01-returnsquare-immortality-walls) | decidable stratum | nonnegative parameters and a uniform outer negative half-line are immortal | formalized | stock |
-| [`R32-M01`](#r32-m01-generic-reverse-edge-compiler) | partial mechanism | projective incidence generically embeds into a compatible two-plane edge square | audited | active |
+| [`R32-D02`](#r32-d02-prime-power-returnsquare-classification) | decidable stratum | prime-power ReturnSquare is mortal exactly at one-return resonances | formalized | graduated |
+| [`R32-M01`](#r32-m01-generic-reverse-edge-compiler) | partial mechanism | projective incidence generically embeds into a compatible two-plane edge square | formalized | active |
 | [`R32-M02`](#r32-m02-finite-quotient-sieve) | partial mechanism | finite monoid quotients give complete modular no-certificates for fixed candidates | formalized | active |
+| [`R32-M03`](#r32-m03-two-scale-return-conversion) | partial mechanism | a minimal two-scale return pencil has nonresonant multi-return zeros | formalized | active |
 | [`M4-C01`](#m4-c01-two-state-pushout-compiler) | compiler | binary deterministic two-state scalar control compiles to three `4 × 4` matrices | formalized | graduated |
 | [`M4-O01`](#m4-o01-exact-toggle-fusion-leaves-an-immortal-core) | obstruction | exact local toggle fusion preserves a nonzero common anchor | formalized | graduated |
 | [`M4-O02`](#m4-o02-two-private-state-phase-signature) | obstruction | two private quotient states cannot isolate one exceptional cyclic phase | formalized | graduated |
@@ -1726,7 +1729,8 @@ the middle square. Hence the quadratic has no rational root. Every nonresonant R
 contains at least three positive returns.
 
 **Scope:** this excludes two-return bridges only. One-return resonances
-`c=−q^−n` are genuine zeros, and words of length at least three remain the live residue.
+`c=−q^−n` are genuine zeros. Prime-power bases are completely classified by `R32-D02`; a
+length-at-least-three residue remains only for bases with several prime factors.
 
 **Artifact:** `ReturnSquare.twoReturnDiscriminant_not_isSquare`,
 `twoReturnCore_ne_zero`, `positiveBridge_pair_ne_zero`, and
@@ -1800,6 +1804,39 @@ restricted to a sparse set rather than a polynomial identity.
 return pencil must use an irreducible ambient action, arithmetic carries, or changed nonzero
 behavior.
 
+### R32-O05: Jordan parity verifier collapse
+
+**Kind:** obstruction
+**Evidence:** formalized
+**Disposition:** graduated
+
+A nonsemisimple ambient mode can carry the term `n(−1)ⁿ`, so the split quadratic-pencil
+obstructions do not apply. Imposing the exact natural-number rails
+
+```text
+n even: n ↦ n/2,       n odd: n ↦ 3n+1
+```
+
+on `Kₙ=C₀+(−1)ⁿC₁+n(−1)ⁿC₂` first forces a five-parameter coefficient normal form. Requiring
+the constant and drift modes to be singular, the zero return to be a separator, the alternating
+mode to be tangent to the rank-one locus, and the first positive return in each parity to be
+invertible leaves one nondegenerate branch up to scalar.
+
+That branch is not a mortality compiler. Its integral physical pair preserves the line through
+`(0,1,0)ᵀ` modulo seven: the Jordan generator acts by `−1` and the cut by `1`. Every product is
+therefore nonzero in the finite quotient, hence nonzero over `ℤ`.
+
+**Scope:** the uniqueness theorem is conditional on the displayed exact rails and explicit
+rank-compatibility hypotheses. It does not classify every Jordan pencil, sparse rail, or
+same-zero realization.
+
+**Artifact:** `ReturnJordan.rail_normal_form`, `normalForm_unique`, and
+`not_isMortal_generator` in
+[`ReturnJordan.lean`](MatrixMortality/ReturnJordan.lean).
+
+**Use:** do not reopen the literal parity-Collatz Jordan branch. A nonsemisimple candidate must
+alter the rail, relax exact values, or defeat the finite-ray certificate.
+
 ### R32-D01: ReturnSquare immortality walls
 
 **Kind:** decidable stratum
@@ -1825,9 +1862,10 @@ vector in that cone; repeated backward invariance would place `[1,1]` there, con
 `β_d(q)<1`. The homogeneous proof is sign-invariant and never divides by a projective
 denominator.
 
-**Scope:** the middle negative strip remains open apart from the classified one-return
-resonances and the two-return obstruction. The inequality is a sufficient uniform wall, not a
-claimed optimal boundary.
+**Scope:** the inequality is a sufficient uniform wall, not a claimed optimal boundary.
+[`R32-D02`](#r32-d02-prime-power-returnsquare-classification) closes the entire middle strip at
+prime-power bases. The unresolved strip now concerns bases with at least two distinct prime
+factors.
 
 **Artifact:** `ReturnSquare.not_physical_isMortal_of_nonneg`,
 `negativeStep_preimage_trap`, `transfer_neg_preimage_signedTrap`, and
@@ -1838,10 +1876,49 @@ claimed optimal boundary.
 **Use:** remove broad sign regions from searches and reuse the signed-cone pullback pattern for
 other rank-two return pencils.
 
+### R32-D02: Prime-power ReturnSquare classification
+
+**Kind:** decidable stratum
+**Evidence:** formalized
+**Disposition:** graduated
+
+Let `q=pʳ`, where `p` is prime and `r>0`. Then the complete rational parameter classification
+is
+
+```text
+ReturnSquare(q,c) is mortal  ↔  c=−q⁻ᵐ for some m≥0.
+```
+
+The proof normalizes `c=−d`. A return word with scale product `T` produces an integral bridge
+polynomial whose constant coefficient is `T` and whose leading coefficient is `±T²`. The
+rational-root theorem therefore forces a positive root `d` to be a power of `p` or its
+reciprocal. Positive powers lie beyond `R32-D01`. A reciprocal `p⁻ᵏ` is a one-return resonance
+when `r∣k`; otherwise a finite quotient preserves one or two nonzero projective rays and
+certifies immortality.
+
+The quotient supply is complete. The corpus proves Bang–Zsigmondy for every base `a>1` and
+exponent `n>2`, with sole exception `(a,n)=(2,6)`. The exceptional pair is separated by
+primitive factors of orders two and three. Exponent two uses a signed two-ray quotient.
+
+**Scope:** the matrix classification requires a prime-power base. A ReturnSquare base with at
+least two distinct prime factors can have rational roots supported on several primes and is not
+classified here. The general Bang–Zsigmondy theorem is arithmetic infrastructure, not a
+decision theorem for arbitrary return pencils.
+
+**Artifact:** `exists_primitivePrimeDivisor`,
+`ReturnSquare.physical_isMortal_primePower_iff`, and the bridge-polynomial and finite-wall
+theorems in [`PrimitiveDivisor.lean`](MatrixMortality/PrimitiveDivisor.lean),
+[`PolynomialPencil.lean`](MatrixMortality/PolynomialPencil.lean),
+[`ReturnSquarePrimePower.lean`](MatrixMortality/ReturnSquarePrimePower.lean), and
+[`ReturnSquareClassification.lean`](MatrixMortality/ReturnSquareClassification.lean).
+
+**Use:** prime-power ReturnSquare is closed. Search multi-prime or genuinely multi-scale
+families instead of longer words in this family.
+
 ### R32-M01: Generic reverse edge compiler
 
 **Kind:** partial mechanism
-**Evidence:** audited
+**Evidence:** formalized
 **Disposition:** active
 
 For a projective-incidence instance `G,H∈GL₂(ℚ)`, row `ℓ`, and column `c`, put
@@ -1855,17 +1932,26 @@ successive visits to `P` test exactly `ℓWc=0` for `W∈{G,H}*`. The four edges
 one-line compatibility needed by [`R32-S02`](#r32-s02-two-plane-edge-square), hence assemble
 into two rank-two `3 × 3` matrices.
 
-**Scope:** the generic bridge calculation has been independently audited, and the compatible
-two-plane realization is formalized. The basis adaptation, all-path language theorem, and the
-claimed finite Turing reduction through the two degenerate projective points are not yet Lean
-theorems. This record does not assert a many-one equivalence between the full rank-`(2,2)`
-profile and `M₂(3)`.
+The basis adaptation and arbitrary-path converse are now checked. Every path fractures at the
+rank-one loop. Empty bridges evaluate to a nonzero multiple of that loop; every completed
+nonempty bridge erases its invisible plane changes to `WH`, where `W∈{G,H}*`; unfinished
+exterior blocks remain nonzero products of units. Thus a constrained path vanishes exactly when
+one original incidence coefficient vanishes.
 
-**Use:** the rank-`(2,2)` stratum already contains the dimension-two projective hard core. Finish
-the generic compiler before searching that stratum for additional storage.
+**Scope:** the theorem assumes `αβ≠0`. The two exceptional projective positions remain a
+many-one preprocessing problem: a finite Turing disjunction appears straightforward, but no
+single three-dimensional emitted OR gadget is checked. This record does not assert a full
+many-one equivalence between `M₂(3)` and the rank-`(2,2)` profile.
 
-**Next:** formalize the adapted bases and singular-loop path normal form; then either replace the
-finite Turing reduction by one computable emitted instance or state its exact oracle strength.
+**Artifact:** `ReverseEdge.isMortal_adaptedGenerator_iff` and
+`adaptedGenerator_rank` in [`ReverseEdge.lean`](MatrixMortality/ReverseEdge.lean).
+
+**Use:** treat the generic rank-`(2,2)` stratum as inheriting the dimension-two projective hard
+core. Work now belongs on exceptional-point genericization or on the flat constrained edge
+languages not fractured by a rank-one loop.
+
+**Next:** replace the exceptional finite disjunction by one computable emitted instance, or
+state and use its exact oracle strength.
 Tracked in
 [#11](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/11).
 
@@ -1892,6 +1978,58 @@ record any persistent residue automata as conjectural invariants rather than pro
 
 **Next:** build a typed finite-quotient census for irreducible cubic and two-prime return
 families; promote only invariants that admit an unbounded lifting theorem.
+
+### R32-M03: Two-scale return conversion
+
+**Kind:** partial mechanism
+**Evidence:** formalized
+**Disposition:** active
+
+Replacing ReturnSquare's modes `(1,q,q²)` by `(1,p,q)` gives
+
+```text
+Rₙ =
+  [(c+1)qⁿ−1   pⁿ]
+  [c              pⁿ].
+```
+
+The zero return remains the internal rank-one separator and every positive return is invertible
+for integral `p,q≥2` and `c≠−1`. The complete physical mortality problem is therefore still one
+scalar bridge. Projectively, the exact defect identity
+
+```text
+Nₙ(z)−qⁿDₙ(z)=(qⁿ−1)(z−pⁿ)
+```
+
+verifies the rail `pⁿ↦qⁿ`; the terminal pullback tests `cqⁿz+pⁿ=0`. A nonsingular coefficient
+Hankel section proves that this return series genuinely needs three states when
+`p,q,1` are distinct and `c≠−1`.
+
+Unlike ReturnSquare, this pencil has nonresonant multi-return zeros. At
+`p=3`, `q=6`, `c=−1/9`, the integral physical pair satisfies
+
+```text
+B² A B A² B² = 0,
+```
+
+while both central positive returns are invertible and `−1/9` is not a one-return resonance.
+
+**Scope:** one explicit nonresonant zero is not a computation. No self-verifying configuration
+set, illegal-wait trap, or undecidability reduction is claimed.
+
+**Artifact:** `ReturnConvert.physical_isMortal_iff_positiveBridge`,
+`three_le_card_of_exact_realization`, `projective_rail`, `projective_target_defect`,
+`example_zero`, and `example_nonresonant` in
+[`ReturnConvert.lean`](MatrixMortality/ReturnConvert.lean).
+
+**Use:** this is the preferred constructive `M₃(2)` laboratory. Seek a valuation-coded legal
+rail whose wrong waits enter a permanent trap; test finite quotients before expanding the
+architecture.
+
+**Next:** classify the semigroup generated by the projective returns at multiplicatively
+independent scales, or exhibit a guarded arithmetic simulation with an all-waits converse.
+Tracked in
+[#12](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/12).
 
 ## Three-Generator Four-State Frontier
 

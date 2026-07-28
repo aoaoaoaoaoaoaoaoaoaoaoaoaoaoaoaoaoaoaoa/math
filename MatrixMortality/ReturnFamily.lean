@@ -54,6 +54,57 @@ def blockedWord : List Nat → List (Option Unit)
 
 /-! ## Finite block-Hankel witnesses -/
 
+/-- A coefficient Hankel section may choose return times and interface coordinates
+independently in each row and column. -/
+def finiteCoefficientHankel {P : Type*} (series : Nat → Square Small R)
+    (left right : P → Nat × Small) : Square P R :=
+  fun i j => series ((left i).1 + (right j).1) (left i).2 (right j).2
+
+/-- Observable coefficient rows selected independently by time and interface coordinate. -/
+def coefficientPrefixRows {P : Type*} (ambient : Square Large R)
+    (output : Matrix Small Large R) (index : P → Nat × Small) :
+    Matrix P Large R :=
+  fun row state => (output * ambient ^ (index row).1) (index row).2 state
+
+/-- Reachable coefficient columns selected independently by time and interface coordinate. -/
+def coefficientSuffixColumns {P : Type*} (ambient : Square Large R)
+    (input : Matrix Large Small R) (index : P → Nat × Small) :
+    Matrix Large P R :=
+  fun state column => (ambient ^ (index column).1 * input) state (index column).2
+
+omit [Fintype Small] [DecidableEq Small] in
+/-- Every finite coefficient Hankel section factors through the ambient state space. -/
+theorem finiteCoefficientHankel_factor {P : Type*}
+    (ambient : Square Large R) (input : Matrix Large Small R)
+    (output : Matrix Small Large R) (left right : P → Nat × Small) :
+    finiteCoefficientHankel (returnMatrix ambient input output) left right =
+      coefficientPrefixRows ambient output left *
+        coefficientSuffixColumns ambient input right := by
+  ext i j
+  change
+    (output * ambient ^ ((left i).1 + (right j).1) * input)
+        (left i).2 (right j).2 =
+      ((output * ambient ^ (left i).1) *
+        (ambient ^ (right j).1 * input)) (left i).2 (right j).2
+  rw [pow_add]
+  simp only [Matrix.mul_assoc]
+
+/-- A nonsingular coefficient Hankel section lower-bounds every exact ambient realization. -/
+theorem coefficientHankel_card_le
+    {K P Big Interface : Type*} [Field K]
+    [Fintype P] [DecidableEq P]
+    [Fintype Big] [DecidableEq Big]
+    (ambient : Square Big K) (input : Matrix Big Interface K)
+    (output : Matrix Interface Big K) (left right : P → Nat × Interface)
+    (det_ne_zero :
+      (finiteCoefficientHankel (returnMatrix ambient input output) left right).det ≠ 0) :
+    Fintype.card P ≤ Fintype.card Big := by
+  apply card_le_of_det_rectangular_product_ne_zero
+    (coefficientPrefixRows ambient output left)
+    (coefficientSuffixColumns ambient input right)
+  rw [← finiteCoefficientHankel_factor]
+  exact det_ne_zero
+
 /-- Finite block-Hankel section of a square matrix sequence. -/
 def finiteReturnHankel {P : Type*} (series : Nat → Square Small R)
     (leftTimes rightTimes : P → Nat) : Square (P × Small) R :=

@@ -17,6 +17,7 @@ redistributable full text was located.
 | [FS23](fazekas-seki-2023-freezing-one-tag-states.md) | peer-reviewed AFL 2023 / EPTCS; CC-BY | Definition of one-tag systems with states and the exact source-model seam; no binary two-state universality bound |
 | [BPS19](bell-potapov-semukhin-2019-mortality-problem.md) | MFCS 2019; journal 2021 | Independent post-correction statement of the six-generator `3 × 3` bound |
 | [Bacik25](bacik-2025-order-four-skolem.md) | peer-reviewed TheoretiCS 2025; CC-BY | Decidability of the algebraic Skolem problem through order four; definitive low-order boundary used by the `M₃(2)` rank census |
+| [Michels14](michels-2014-zsigmondy-theorem.md) | revised author exposition; not peer reviewed | Elementary proof of Zsigmondy’s primitive-prime-divisor theorem, including the `2⁶−1` and power-of-two exceptions |
 | [HKPY24](hirvensalo-kawamura-potapov-yuyama-2024-linear-recurrence-automata.md) | peer-reviewed RP 2024; author accepted manuscript | Recurrence-controlled reachability vocabulary adjacent to the variable-index `Mₙ = VAⁿU` return problem |
 | [BB02](bournez-branicky-2002-low-dimensional-mortality.md) | peer-reviewed Theory Comput. Syst. 2002 | Decidability of two rational `2 × 2` generators and the rank-one-endpoint normal form |
 | [Dong23](dong-2023-semigroup-algorithms-survey.md) | peer-reviewed survey | Later matrix-semigroup context; no sharper bounded-generator result |

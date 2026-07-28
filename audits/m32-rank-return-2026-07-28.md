@@ -5,7 +5,8 @@
 **Target:** mortality of two `3 × 3` rational or integer matrices
 
 **Inputs:** the public Pro exchange recovered on 2026-07-28, Fable's ReturnSquare report and
-checker, the existing mortality corpus, and the stored Skolem references
+checker, Pro's third-thrust report, the existing mortality corpus, and the stored Skolem and
+Zsigmondy references
 
 **Disposition:** contracted into `R32-*` records in `SALVAGE.md`; raw reports remain ephemeral
 
@@ -20,9 +21,10 @@ rank (2,2): constrained products in a two-vertex square of 2 × 2 edges;
 rank (3,2): products of the return recurrence M_n=VAⁿU.
 ```
 
-The rank-`(3,2)` reduction is the new central object. ReturnSquare is a fully checked laboratory
-inside it, but large parameter regions are now proved immortal and the surviving zeros require
-at least three positive returns.
+The rank-`(3,2)` reduction is the new central object. Prime-power ReturnSquare is now completely
+classified and therefore closed as a universality candidate. The literal parity-Jordan escape
+is also closed. The two-scale ReturnConvert pencil is the first checked candidate to retain an
+internal separator while exhibiting genuinely nonresonant multi-return zeros.
 
 ## Claim Audit
 
@@ -33,7 +35,7 @@ at least three positive returns.
 | Four compatible edges can be pushed out to two rank-two `3 × 3` generators | Correct after stating the shared-line compatibility and split-edge hypotheses | Lean: `TwoPlaneEdges.*` |
 | Every rank-one profile is decidable | Correct; endpoint collapses and scalar returns are order-at-most-three LRS | Audited; Skolem decision theorem imported from Bacik |
 | The rank-`(2,2)` profile is equivalent to the full `M₂(3)` hard core | Too strong | Rejected; only exact constrained-edge reduction and a generic reverse embedding are retained |
-| The generic reverse embedding works when `αβ≠0` | Algebraically correct | Audited as `R32-M01`; basis adaptation and all-path theorem remain unformalized |
+| The generic reverse embedding works when `αβ≠0` | Correct, including basis adaptation and every constrained path | Lean: `ReverseEdge.isMortal_adaptedGenerator_iff` |
 | The two degenerate source points give a finite Turing reduction | Plausible but underspecified as a many-one compiler | Not promoted |
 | ReturnSquare has ranks `(3,2)` for every swept parameter | False at `c=−1` | Corrected: `B²=0` and `rank B=1` at `c=−1` |
 | The finite ReturnSquare sweep found only immortal instances | False because the sweep failed to exclude `c=−1` | Rejected; five reported cases were immediate mortal instances |
@@ -46,6 +48,10 @@ at least three positive returns.
 | `c>0` is immortal | Correct but not sharp | Strengthened to `c≥0` in Lean |
 | A negative interval trap exists | Correct | Strengthened to a homogeneous, sign-invariant, pole-free double-cone theorem and full mortality wall |
 | The outer negative wall is `d>1+(q−1)/q²` for `c=−d` | Correct as a sufficient uniform condition | Lean: `not_physical_isMortal_of_beyond_negative_wall` |
+| Prime-power ReturnSquare has no nonresonant mortal parameters | Correct | Lean: `ReturnSquare.physical_isMortal_primePower_iff` |
+| Bang–Zsigmondy is needed as an external axiom | False | Reconstructed in Lean above exponent two; only standard kernel axioms remain |
+| The parity-Jordan rail evades the split quadratic no-go | Algebraically yes, computationally no | Its rank-compatible branch is unique and immortal modulo seven |
+| The two-scale pencil has a genuine nonresonant two-return zero | Correct and intrinsically three-state | Lean: `ReturnConvert.example_zero`, `example_nonresonant`, and the coefficient-Hankel lower bound |
 | A `q`-adic attractor or Zariski-density argument settles the remaining strip | Unsupported | Rejected |
 | Finite quotient survival supplies positive evidence | Only computationally | The one-sided no-certificate theorem is formalized; no local-global converse is claimed |
 
@@ -128,23 +134,59 @@ homogeneous lift
 so no denominator or orientation case is hidden. A pulled-back target ray lies in this double
 cone; induction through the return word would trap `[1,1]`, contradicting `β<1`.
 
+### Prime-power classification
+
+For `q=pʳ`, the normalized bridge word is an affine matrix pencil in `d=−c`. If the return
+scales have product `T`, its distinguished polynomial has constant coefficient `T` and leading
+coefficient `±T²`. The rational-root theorem confines every positive root to `pᵏ` or `p⁻ᵏ`.
+The first shape lies beyond the real wall. In the second, `r∣k` is exactly a one-return
+resonance; otherwise a finite quotient preserves one or two nonzero rays.
+
+The quotient existence proof is internal. Lean proves Bang–Zsigmondy for every base `a>1` and
+exponent `n>2`, except `(a,n)=(2,6)`. The exceptional pair and exponent two have explicit
+finite-ray certificates. Hence
+
+```text
+ReturnSquare(pʳ,c) mortal  ↔  c=−(pʳ)⁻ᵐ for some m≥0.
+```
+
+### Parity-Jordan branch
+
+The mode `n(−1)ⁿ` realizes exact even-halving and odd-`3n+1` rails. Seven natural rail samples
+force a five-parameter coefficient normal form. The stated rank and tangency constraints then
+leave one nondegenerate branch up to scalar. Its physical pair preserves `(0,1,0)ᵀ` modulo
+seven, so the pair is immortal.
+
+### Two-scale conversion
+
+For modes `(1,p,q)`, the return is
+
+```text
+Rₙ=[[(c+1)qⁿ−1,pⁿ],[c,pⁿ]].
+```
+
+The zero return is rank one, positive returns are units, and the complete physical word problem
+again reduces to one scalar bridge. The projective identity verifies `pⁿ↦qⁿ`. A nonsingular
+coefficient Hankel section proves exact state dimension three. At `(p,q,c)=(3,6,−1/9)`, the
+integral pair satisfies `B²ABA²B²=0`, although the two positive returns are units and the
+parameter is not a one-return resonance.
+
 ## Unformalized Boundary
 
-1. The generic reverse compiler needs explicit adapted bases, a normal form for every edge path
-   between rank-one loops, and a precise treatment of `αβ=0`.
+1. The generic reverse compiler needs a many-one treatment of `αβ=0`. Its adapted bases and
+   all-path theorem are complete.
 2. Rank-one-profile decidability imports Bacik's Skolem theorem; no executable Lean algorithm is
    present.
-3. The remaining ReturnSquare strip
+3. The remaining ReturnSquare strip exists only for bases with at least two distinct prime
+   factors:
 
    ```text
    −(1+(q−1)/q²) ≤ c < 0
    ```
 
-   contains the one-return resonances and an unclassified length-at-least-three residue.
-4. The reported cyclotomic and `q`-adic observations have algebraic kernels but no complete
-   word-level theorem.
-5. The proposed irreducible-cubic and two-scale return pencils remain research directions, not
-   claims.
+   and every nonresonant zero still requires at least three positive returns.
+4. ReturnConvert has no self-verifying configuration set or permanent trap for illegal waits.
+5. Irreducible-cubic and same-zero return pencils remain research directions, not claims.
 
 ## Operational Consequence
 
@@ -157,5 +199,6 @@ Third-order matrix-valued return recurrence n ↦ VAⁿU.
 
 The first should be compared directly with the `M₂(3)` projective-incidence ledger. The second
 should be attacked by internal low-rank returns, block-Hankel rank, finite quotients, and
-homogeneous real or `p`-adic invariant cones. Raw binary-word encodings are downstream
-projections of these objects and should not be searched independently.
+homogeneous real or `p`-adic invariant cones. ReturnConvert is now the preferred typed
+laboratory. Raw binary-word encodings are downstream projections of these objects and should
+not be searched independently.

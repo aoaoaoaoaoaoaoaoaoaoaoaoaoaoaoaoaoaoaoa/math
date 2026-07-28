@@ -11,10 +11,14 @@ import MatrixMortality.InternalSandwich
 import MatrixMortality.ReturnFamily
 import MatrixMortality.EdgeCompression
 import MatrixMortality.TwoPlaneEdges
+import MatrixMortality.ReverseEdge
 import MatrixMortality.ReturnSquare
 import MatrixMortality.ReturnSquareDynamics
 import MatrixMortality.ReturnSquareNoGo
+import MatrixMortality.ReturnSquareClassification
 import MatrixMortality.ReturnSquareTax
+import MatrixMortality.ReturnJordan
+import MatrixMortality.ReturnConvert
 
 /- Finite-controller amalgamation. -/
 import MatrixMortality.ControllerPushout

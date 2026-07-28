@@ -22,12 +22,25 @@ def terminal : Label → List Label → Label
   | start, [] => start
   | _, next :: tail => terminal next tail
 
+/-- Product of a prescribed square edge family along a nonempty labelled path. -/
+def pathProduct (edge : Label → Label → Square Small R) : Label → List Label → Square Small R
+  | _, [] => 1
+  | start, next :: tail => edge start next * pathProduct edge next tail
+
+/-- Concatenating two path tails composes their edge products at the intermediate vertex. -/
+theorem pathProduct_append (edge : Label → Label → Square Small R)
+    (start : Label) (left right : List Label) :
+    pathProduct edge start (left ++ right) =
+      pathProduct edge start left * pathProduct edge (terminal start left) right := by
+  induction left generalizing start with
+  | nil => simp [pathProduct, terminal]
+  | cons next tail induction =>
+      rw [List.cons_append, pathProduct, induction, pathProduct, terminal, Matrix.mul_assoc]
+
 /-- Product of the interface edges traversed by a nonempty labelled path. -/
 def edgeProduct (input : Label → Matrix Large Small R)
     (output : Label → Matrix Small Large R) : Label → List Label → Square Small R
-  | _, [] => 1
-  | start, next :: tail =>
-      (output start * input next) * edgeProduct input output next tail
+  := pathProduct fun target source => output target * input source
 
 /-- Ambient generator split through the small interface. -/
 def generator (input : Label → Matrix Large Small R)
@@ -43,10 +56,10 @@ theorem wordProduct_cons_eq_sandwich
       input start * edgeProduct input output start tail * output (terminal start tail) := by
   induction tail generalizing start with
   | nil =>
-      simp [generator, edgeProduct, terminal]
+      simp [generator, edgeProduct, pathProduct, terminal]
   | cons next tail induction =>
       rw [wordProduct_cons, induction]
-      simp only [generator, edgeProduct, terminal, Matrix.mul_assoc]
+      simp only [generator, edgeProduct, pathProduct, terminal, Matrix.mul_assoc]
 
 /-- Split interfaces reduce every nonempty ambient zero exactly to its adjacent-edge zero. -/
 theorem wordProduct_cons_eq_zero_iff

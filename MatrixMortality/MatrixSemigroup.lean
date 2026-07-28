@@ -253,6 +253,31 @@ theorem unit_sandwich_eq_zero_iff {M : Type*} [MonoidWithZero M]
   · rintro rfl
     simp
 
+/-- The nonsingular inverse of a unit square matrix is again a unit. -/
+theorem nonsingInv_isUnit {ι K : Type*} [Fintype ι] [DecidableEq ι] [Field K]
+    (matrix : Square ι K) (matrix_unit : IsUnit matrix) :
+    IsUnit matrix⁻¹ := by
+  rw [Matrix.isUnit_iff_isUnit_det, Matrix.det_nonsing_inv]
+  obtain ⟨unit, unit_eq⟩ := (Matrix.isUnit_iff_isUnit_det matrix).mp matrix_unit
+  rw [← unit_eq, Ring.inverse_unit]
+  exact Units.isUnit unit⁻¹
+
+/-- A unit square matrix is a left inverse of its nonsingular inverse. -/
+theorem mul_nonsingInv_of_isUnit {ι K : Type*}
+    [Fintype ι] [DecidableEq ι] [Field K]
+    (matrix : Square ι K) (matrix_unit : IsUnit matrix) :
+    matrix * matrix⁻¹ = 1 :=
+  Matrix.mul_nonsing_inv matrix
+    ((Matrix.isUnit_iff_isUnit_det matrix).mp matrix_unit)
+
+/-- The nonsingular inverse of a unit square matrix is its left inverse. -/
+theorem nonsingInv_mul_of_isUnit {ι K : Type*}
+    [Fintype ι] [DecidableEq ι] [Field K]
+    (matrix : Square ι K) (matrix_unit : IsUnit matrix) :
+    matrix⁻¹ * matrix = 1 :=
+  Matrix.nonsing_inv_mul matrix
+    ((Matrix.isUnit_iff_isUnit_det matrix).mp matrix_unit)
+
 /-- A word over unit generators is a unit. -/
 theorem wordProduct_isUnit_of_mem {α M : Type*} [Monoid M]
     (generators : α → M) (word : List α)
@@ -277,6 +302,112 @@ theorem not_isMortal_of_forall_isUnit {α M : Type*} [MonoidWithZero M] [Nontriv
     ¬IsMortal generators := by
   rintro ⟨word, _, product_zero⟩
   exact (wordProduct_isUnit generators generator_unit word).ne_zero product_zero
+
+/-! ## Common eigenvector certificates -/
+
+/-- A common eigenvector propagates through every matrix word with the product eigenvalue. -/
+theorem wordProduct_mulVec_common_eigenvector
+    {α ι R : Type*} [CommSemiring R] [Fintype ι] [DecidableEq ι]
+    (generators : α → Square ι R) (column : ι → R) (eigenvalue : α → R)
+    (eigenvector : ∀ label, Matrix.mulVec (generators label) column =
+      eigenvalue label • column) (word : List α) :
+    Matrix.mulVec (wordProduct generators word) column =
+      (word.map eigenvalue).prod • column := by
+  induction word with
+  | nil => simp
+  | cons label tail induction =>
+      rw [wordProduct_cons, ← Matrix.mulVec_mulVec, induction, Matrix.mulVec_smul,
+        eigenvector, List.map_cons, List.prod_cons, smul_smul]
+      rw [mul_comm]
+
+/-- A nonzero common eigenvector with nonzero eigenvalues certifies immortality over a field. -/
+theorem not_isMortal_of_common_eigenvector
+    {α ι K : Type*} [Field K] [Fintype ι] [DecidableEq ι]
+    (generators : α → Square ι K) (column : ι → K) (eigenvalue : α → K)
+    (column_nonzero : column ≠ 0)
+    (eigenvalue_nonzero : ∀ label, eigenvalue label ≠ 0)
+    (eigenvector : ∀ label, Matrix.mulVec (generators label) column =
+      eigenvalue label • column) :
+    ¬IsMortal generators := by
+  rintro ⟨word, _, product_zero⟩
+  have product_eigenvalue_nonzero : (word.map eigenvalue).prod ≠ 0 := by
+    apply List.prod_ne_zero
+    intro zero_mem
+    obtain ⟨label, _, label_zero⟩ := List.mem_map.mp zero_mem
+    exact eigenvalue_nonzero label label_zero
+  have image_nonzero : (word.map eigenvalue).prod • column ≠ 0 :=
+    smul_ne_zero product_eigenvalue_nonzero column_nonzero
+  apply image_nonzero
+  rw [← wordProduct_mulVec_common_eigenvector generators column eigenvalue eigenvector,
+    product_zero, Matrix.zero_mulVec]
+
+/-! ## Finite ray-action certificates -/
+
+/-- State reached by a word acting from right to left on a projective-ray automaton. -/
+def rayState {α σ : Type*} (transition : α → σ → σ) : List α → σ → σ
+  | [], state => state
+  | label :: tail, state => transition label (rayState transition tail state)
+
+/-- Scalar accumulated by a word acting from right to left on a projective-ray automaton. -/
+def rayWeight {α σ K : Type*} [CommMonoid K]
+    (transition : α → σ → σ) (weight : α → σ → K) : List α → σ → K
+  | [], _ => 1
+  | label :: tail, state =>
+      rayWeight transition weight tail state *
+        weight label (rayState transition tail state)
+
+/-- A matrix word follows the induced ray automaton and accumulates its transition weights. -/
+theorem wordProduct_mulVec_ray_action
+    {α σ ι R : Type*} [CommSemiring R] [Fintype ι] [DecidableEq ι]
+    (generators : α → Square ι R) (ray : σ → ι → R)
+    (transition : α → σ → σ) (weight : α → σ → R)
+    (action : ∀ label state,
+      Matrix.mulVec (generators label) (ray state) =
+        weight label state • ray (transition label state))
+    (word : List α) (state : σ) :
+    Matrix.mulVec (wordProduct generators word) (ray state) =
+      rayWeight transition weight word state •
+        ray (rayState transition word state) := by
+  induction word with
+  | nil => simp [rayState, rayWeight]
+  | cons label tail induction =>
+      rw [wordProduct_cons, ← Matrix.mulVec_mulVec, induction, Matrix.mulVec_smul,
+        action, rayState, rayWeight, smul_smul]
+
+/-- A nonvanishing projective-ray automaton certifies immortality. Unlike a common-eigenvector
+certificate, generators may permute or reset a family of rays. -/
+theorem not_isMortal_of_ray_action
+    {α σ ι K : Type*} [Field K] [Fintype ι] [DecidableEq ι]
+    (generators : α → Square ι K) (ray : σ → ι → K)
+    (transition : α → σ → σ) (weight : α → σ → K) (initial : σ)
+    (ray_nonzero : ∀ state, ray state ≠ 0)
+    (weight_nonzero : ∀ label state, weight label state ≠ 0)
+    (action : ∀ label state,
+      Matrix.mulVec (generators label) (ray state) =
+        weight label state • ray (transition label state)) :
+    ¬IsMortal generators := by
+  rintro ⟨word, _, product_zero⟩
+  have every_weight_nonzero :
+      ∀ tail state, rayWeight transition weight tail state ≠ 0 := by
+    intro tail state
+    induction tail generalizing state with
+    | nil => simp [rayWeight]
+    | cons label tail induction =>
+        rw [rayWeight]
+        exact mul_ne_zero (induction state)
+          (weight_nonzero label (rayState transition tail state))
+  have accumulated_nonzero :
+      rayWeight transition weight word initial ≠ 0 :=
+    every_weight_nonzero word initial
+  have image_nonzero :
+      rayWeight transition weight word initial •
+          ray (rayState transition word initial) ≠ 0 :=
+    smul_ne_zero accumulated_nonzero
+      (ray_nonzero (rayState transition word initial))
+  apply image_nonzero
+  rw [← wordProduct_mulVec_ray_action
+    generators ray transition weight action word initial,
+    product_zero, Matrix.zero_mulVec]
 
 /-- Canonical relabelling that separates zero from the positive natural numbers. -/
 def natEquivOption : Nat ≃ Option Nat where
