@@ -1,4 +1,5 @@
 import Mathlib
+import MatrixMortality.Computability
 
 /-!
 # The nonzero ternary word encoding
@@ -63,6 +64,19 @@ theorem ternaryCode_primrec : Primrec ternaryCode := by
   exact
     (Primrec.list_foldl Primrec.id (Primrec.const 0) step).of_eq fun word =>
       (ternaryCode_eq_foldl word).symm
+
+/-- The integral ternary code is primitive recursive. -/
+theorem ternaryCode_int_primrec :
+    Primrec fun word : List Bool => (ternaryCode word : ℤ) :=
+  MatrixMortality.Primrec.int_ofNat.comp ternaryCode_primrec
+
+/-- The integral base-three scale of a word is primitive recursive. -/
+theorem ternaryScale_int_primrec :
+    Primrec fun word : List Bool => (3 : ℤ) ^ word.length :=
+  (MatrixMortality.Primrec.int_ofNat.comp <|
+    MatrixMortality.Primrec.nat_pow.comp
+      (Primrec.const 3) Primrec.list_length).of_eq fun word => by
+        simp
 
 @[simp] theorem ternaryCode_singleton (bit : Bool) :
     ternaryCode [bit] = ternaryDigit bit := by

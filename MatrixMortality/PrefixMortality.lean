@@ -263,6 +263,11 @@ theorem prefixCoordinate_representative (coordinate : Fin 10) :
       (prefixRepresentative coordinate).2 = coordinate := by
   fin_cases coordinate <;> rfl
 
+theorem prefixCoordinate_injective (state : PrefixState) :
+    Function.Injective (prefixCoordinate state) := by
+  intro left right equal
+  cases state <;> fin_cases left <;> fin_cases right <;> simp_all [prefixCoordinate]
+
 /-- Integral embedding of the shared ten-coordinate carrier into the four prefix blocks. -/
 def prefixEmbed : Matrix (PrefixState × Fin 3) (Fin 10) ℤ :=
   fun large small =>
@@ -339,6 +344,76 @@ theorem prefixProjection_generator (β : Nat) (body : List TagLetter) (bit : Boo
 def restrictedPrefixGenerator (β : Nat) (body : List TagLetter) (bit : Bool) :
     Square (Fin 10) ℤ :=
   prefixRetract * (prefixMachine β body).generator bit * prefixEmbed
+
+/-- Entry formula after eliminating the one-hot restriction and deterministic prefix
+transition. -/
+theorem restrictedPrefixGenerator_apply (β : Nat) (body : List TagLetter)
+    (bit : Bool) (row column : Fin 10) :
+    restrictedPrefixGenerator β body bit row column =
+      ∑ payloadColumn : Fin 3,
+        if prefixCoordinate
+            (prefixNext (prefixRepresentative row).1 bit) payloadColumn = column
+        then prefixOutput β body (prefixRepresentative row).1 bit
+          (prefixRepresentative row).2 payloadColumn
+        else 0 := by
+  rw [restrictedPrefixGenerator, Matrix.mul_assoc, Matrix.mul_apply]
+  rw [Finset.sum_eq_single (prefixRepresentative row)]
+  · simp only [prefixRetract, if_pos, one_mul]
+    rw [Matrix.mul_apply, Fintype.sum_prod_type]
+    rw [Finset.sum_eq_single
+      (prefixNext (prefixRepresentative row).1 bit)]
+    · apply Finset.sum_congr rfl
+      intro payloadColumn _
+      simp [prefixMachine, WeightedTransducer.generator, prefixEmbed]
+    · intro state _ state_ne
+      apply Finset.sum_eq_zero
+      intro payloadColumn _
+      simp [prefixMachine, WeightedTransducer.generator, Ne.symm state_ne]
+    · intro state_absent
+      exact (state_absent (Finset.mem_univ _)).elim
+  · intro large _ large_ne
+    simp [prefixRetract, Ne.symm large_ne]
+  · intro representative_absent
+    exact (representative_absent (Finset.mem_univ _)).elim
+
+/-- Sparse coordinate form: one prefix transition routes each payload column to a distinct
+restricted coordinate. -/
+theorem restrictedPrefixGenerator_apply_sparse (β : Nat) (body : List TagLetter)
+    (bit : Bool) (row column : Fin 10) :
+    restrictedPrefixGenerator β body bit row column =
+      let state := prefixNext (prefixRepresentative row).1 bit
+      let output := prefixOutput β body (prefixRepresentative row).1 bit
+      if prefixCoordinate state 0 = column then output (prefixRepresentative row).2 0
+      else if prefixCoordinate state 1 = column then output (prefixRepresentative row).2 1
+      else if prefixCoordinate state 2 = column then output (prefixRepresentative row).2 2
+      else 0 := by
+  rw [restrictedPrefixGenerator_apply]
+  simp only [Fin.sum_univ_succ]
+  by_cases zero : prefixCoordinate
+      (prefixNext (prefixRepresentative row).1 bit) 0 = column
+  · have one_ne : prefixCoordinate
+        (prefixNext (prefixRepresentative row).1 bit) 1 ≠ column := by
+      intro one
+      exact Fin.zero_ne_one <|
+        prefixCoordinate_injective _ (zero.trans one.symm)
+    have two_ne : prefixCoordinate
+        (prefixNext (prefixRepresentative row).1 bit) 2 ≠ column := by
+      intro two
+      exact (by decide : (0 : Fin 3) ≠ 2) <|
+        prefixCoordinate_injective _ (zero.trans two.symm)
+    simp [zero, one_ne, two_ne]
+  · by_cases one : prefixCoordinate
+        (prefixNext (prefixRepresentative row).1 bit) 1 = column
+    · have two_ne : prefixCoordinate
+          (prefixNext (prefixRepresentative row).1 bit) 2 ≠ column := by
+        intro two
+        exact (by decide : (1 : Fin 3) ≠ 2) <|
+          prefixCoordinate_injective _ (one.trans two.symm)
+      simp [zero, one, two_ne]
+    · by_cases two : prefixCoordinate
+          (prefixNext (prefixRepresentative row).1 bit) 2 = column
+      · simp [zero, one, two]
+      · simp [zero, one, two]
 
 theorem prefixGenerator_intertwine (β : Nat) (body : List TagLetter) (bit : Bool) :
     (prefixMachine β body).generator bit * prefixEmbed =

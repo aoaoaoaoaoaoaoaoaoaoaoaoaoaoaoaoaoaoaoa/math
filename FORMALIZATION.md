@@ -33,10 +33,10 @@ mortality of the emitted five 3 × 3 integer matrices
   ↔ mortality of two (10+n) × (10+n) integer matrices.
 ```
 
-The final GPCP and five-matrix constructors are primitive recursive. Lean proves the corresponding
-many-one reductions and no-decider theorems from mathlib's halting theorem. No external
-universality theorem, Neary's defective terminal-pair converse, or Rote's long-block repair is
-assumed.
+The final `GPCP(4)`, `M₃(5)`, `M₄(4)`, `Z₆(2)`, and `M₁₀(2)` constructors are primitive
+recursive. Lean proves the corresponding many-one reductions and no-decider theorems from
+mathlib's halting theorem. No external universality theorem, Neary's defective terminal-pair
+converse, or Rote's long-block repair is assumed.
 
 ## Checked Scope
 
@@ -52,8 +52,8 @@ firing. The Table 2 compiler then proves both directions for every emitted sourc
 execution gives halting, while its arbitrary-execution converse excludes spurious halting after
 the semantic data are exhausted. Its body, padding, ternary arithmetic, four-letter GPCP instance,
 and five-matrix integer family are all primitive recursive. The declarations
-`codeHalts_reduces_gpcp4` and `codeHalts_reduces_mortality35` are therefore complete computable
-many-one reductions; `gpcp4_not_computable` and `mortality35_not_computable` are unconditional
+The five `codeHalts_reduces_*` declarations are therefore complete computable many-one
+reductions; their corresponding `*_not_computable` declarations are unconditional
 kernel-checked no-decider theorems.
 
 For deletion width `β`, body `q`, rules `b ↦ b` and `c ↦ q ++ [b]`, and initial queue
@@ -336,7 +336,7 @@ with a complete arbitrary-word converse.
 | `Undecidability/NearyExecution.lean` | literal initialization, first-firing extraction, and the complete post-seed halting cascade |
 | `Undecidability/NearySource.lean` | compositional Cook–Neary compiler into verified restricted-tag sources |
 | `Undecidability/UniversalTwoTag.lean` | fixed universal finite two-tag system and primitive-recursive source queue |
-| `Undecidability/UniversalNeary.lean` | complete computable reductions to binary `GPCP(4)` and `M₃(5)` |
+| `Undecidability/UniversalNeary.lean` | complete computable reductions to binary `GPCP(4)`, `M₃(5)`, `M₄(4)`, `Z₆(2)`, and `M₁₀(2)` |
 | `Undecidability/NearyProblems.lean` | canonical `Fin 4` and `Fin 5` target instances |
 | `MacroIrreducibility.lean` | exact nonerasing Neary role-macro lower bound |
 | `Undecidability/PairedProblems.lean` | canonical four-matrix target instance and structural promises |
@@ -411,6 +411,12 @@ with a complete arbitrary-word converse.
 | Binary `GPCP(4)` solvability is not computable | `UniversalNeary.gpcp4_not_computable` |
 | Code halting many-one reduces to `M₃(5)` | `UniversalNeary.codeHalts_reduces_mortality35` |
 | `M₃(5)` mortality is not computable | `UniversalNeary.mortality35_not_computable` |
+| Code halting many-one reduces to `M₄(4)` | `UniversalNeary.codeHalts_reduces_mortality44` |
+| `M₄(4)` mortality is not computable | `UniversalNeary.mortality44_not_computable` |
+| Code halting many-one reduces to `Z₆(2)` | `UniversalNeary.codeHalts_reduces_scalarZero62` |
+| `Z₆(2)` scalar zero is not computable | `UniversalNeary.scalarZero62_not_computable` |
+| Code halting many-one reduces to `M₁₀(2)` | `UniversalNeary.codeHalts_reduces_mortality102` |
+| `M₁₀(2)` mortality is not computable | `UniversalNeary.mortality102_not_computable` |
 | Two-tag executions reach their cyclic firing phase | `CyclicTag.reaches_firing_phase` |
 | A woven compiler word emits its prescribed track | `read_wholeAppendant_track` |
 | One arbitrary ordinary cyclic pulse has a nonempty physical simulation | `read_next_dataBit_transGen` |
@@ -448,15 +454,10 @@ their resulting terms.
 
 ## External Boundary
 
-There is no unformalized theorem boundary in the binary `GPCP(4)` or `M₃(5)` undecidability
-proofs. Neary's Table 2 and Cocke–Minsky's tag construction are historical sources for locally
-defined compilers, not imported premises. Mathlib's kernel-checked noncomputability theorem for
-`Nat.Partrec.Code` supplies the source predicate.
-
-The encoded results for `M₄(4)`, `Z₆(2)`, and `M₁₀(2)` still end at their instance-level
-equivalences with restricted-tag halting. Their constructors are explicit, but this corpus has
-not yet added primitive-recursive declarations and final many-one wrappers for those three
-targets. This is formalization debt, not a mathematical conditional on Neary's theorem.
+There is no unformalized theorem boundary in the binary `GPCP(4)`, `M₃(5)`, `M₄(4)`, `Z₆(2)`,
+or `M₁₀(2)` undecidability proofs. Neary's Table 2 and Cocke–Minsky's tag construction are
+historical sources for locally defined compilers, not imported premises. Mathlib's
+kernel-checked noncomputability theorem for `Nat.Partrec.Code` supplies the source predicate.
 
 CHHN's generator–dimension and scalar-to-corner frontier transports remain external paper
 theorems. Bibliographic priority claims likewise depend on the recorded literature audits rather

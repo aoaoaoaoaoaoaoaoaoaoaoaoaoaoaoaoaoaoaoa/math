@@ -145,3 +145,9 @@ open MatrixMortality
 #print axioms Undecidability.UniversalNeary.gpcp4_not_computable
 #print axioms Undecidability.UniversalNeary.codeHalts_reduces_mortality35
 #print axioms Undecidability.UniversalNeary.mortality35_not_computable
+#print axioms Undecidability.UniversalNeary.codeHalts_reduces_mortality44
+#print axioms Undecidability.UniversalNeary.mortality44_not_computable
+#print axioms Undecidability.UniversalNeary.codeHalts_reduces_scalarZero62
+#print axioms Undecidability.UniversalNeary.scalarZero62_not_computable
+#print axioms Undecidability.UniversalNeary.codeHalts_reduces_mortality102
+#print axioms Undecidability.UniversalNeary.mortality102_not_computable

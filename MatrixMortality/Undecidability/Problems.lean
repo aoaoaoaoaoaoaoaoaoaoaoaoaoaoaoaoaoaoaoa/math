@@ -118,6 +118,29 @@ instance (d k : Nat) : Primcodable (ScalarZeroProblem d k) :=
 
 namespace ScalarZeroProblem
 
+/-- Assemble a primitive-recursive family of encoded scalar-zero instances from its entries. -/
+theorem primrec_mk {α : Type*} [Primcodable α] {d k : Nat}
+    (matrix : α → Fin k → Fin d → Fin d → ℤ)
+    (row column : α → Fin d → ℤ)
+    (matrixRec : ∀ label row column,
+      Primrec fun input => matrix input label row column)
+    (rowRec : ∀ coordinate, Primrec fun input => row input coordinate)
+    (columnRec : ∀ coordinate, Primrec fun input => column input coordinate) :
+    Primrec fun input =>
+      ({ matrix := matrix input
+         row := row input
+         column := column input } : ScalarZeroProblem d k) := by
+  apply (Primrec.of_equiv_iff (scalarZeroProblemEquiv d k)).mp
+  exact
+    Primrec.pair
+      (MatrixMortality.Primrec.fin_function fun label =>
+        MatrixMortality.Primrec.fin_function fun row =>
+          MatrixMortality.Primrec.fin_function fun column =>
+            matrixRec label row column)
+      (Primrec.pair
+        (MatrixMortality.Primrec.fin_function rowRec)
+        (MatrixMortality.Primrec.fin_function columnRec))
+
 /-- The scalar coefficient assigned to a generator word. -/
 def coefficient {d k : Nat} (problem : ScalarZeroProblem d k) (word : List (Fin k)) : ℤ :=
   problem.row ⬝ᵥ wordProduct problem.matrix word *ᵥ problem.column
@@ -146,6 +169,17 @@ abbrev MortalityProblem (d k : Nat) := Fin k → Fin d → Fin d → ℤ
 
 namespace MortalityProblem
 
+/-- Assemble a primitive-recursive finite matrix family from its entries. -/
+theorem primrec {α : Type*} [Primcodable α] {d k : Nat}
+    (problem : α → MortalityProblem d k)
+    (entries : ∀ label row column,
+      Primrec fun input => problem input label row column) :
+    Primrec problem :=
+  MatrixMortality.Primrec.fin_function fun label =>
+    MatrixMortality.Primrec.fin_function fun row =>
+      MatrixMortality.Primrec.fin_function fun column =>
+        entries label row column
+
 /-- Interpret the transparent encoding as a family with matrix multiplication. -/
 def matrix {d k : Nat} (problem : MortalityProblem d k) (label : Fin k) :
     Matrix (Fin d) (Fin d) ℤ :=
@@ -166,26 +200,57 @@ abbrev Mortality44 := MortalityProblem 4 4
 /-- Two labelled `10 × 10` integer matrices. -/
 abbrev Mortality102 := MortalityProblem 10 2
 
+/-- A primitive-recursive emitter together with its exact predicate equivalence. -/
+structure PrimrecReduction {Source Target : Type*} [Primcodable Source] [Primcodable Target]
+    (source : Source → Prop) (target : Target → Prop) where
+  /-- The emitted target instance. -/
+  emit : Source → Target
+  /-- The emitter is primitive recursive. -/
+  emit_primrec : Primrec emit
+  /-- Emission preserves and reflects the decision predicate. -/
+  target_iff_source : ∀ input, target (emit input) ↔ source input
+
+namespace PrimrecReduction
+
+variable {Source Target : Type*} [Primcodable Source] [Primcodable Target]
+  {source : Source → Prop} {target : Target → Prop}
+
+/-- Forget the certificate structure to obtain mathlib's many-one reduction. -/
+theorem toManyOne (reduction : PrimrecReduction source target) : source ≤₀ target :=
+  ⟨reduction.emit, reduction.emit_primrec.to_comp,
+    fun input => (reduction.target_iff_source input).symm⟩
+
+/-- Undecidability crosses a certified primitive-recursive reduction. -/
+theorem target_not_computable (reduction : PrimrecReduction source target)
+    (source_not_computable : ¬ComputablePred source) :
+    ¬ComputablePred target := by
+  intro target_computable
+  exact source_not_computable
+    (ComputablePred.computable_of_manyOneReducible reduction.toManyOne target_computable)
+
+end PrimrecReduction
+
+theorem not_computable_of_codeHalts_reduction {Target : Type*} [Primcodable Target]
+    {target : Target → Prop} (reduction : CodeHalts ≤₀ target) :
+    ¬ComputablePred target := by
+  intro target_computable
+  exact codeHalts_not_computable
+    (ComputablePred.computable_of_manyOneReducible reduction target_computable)
+
 theorem gpcp4_not_computable_of_reduction
     (reduction : CodeHalts ≤₀ BinaryGPCP4.Solvable) :
-    ¬ComputablePred BinaryGPCP4.Solvable := by
-  intro decidableTarget
-  exact codeHalts_not_computable
-    (ComputablePred.computable_of_manyOneReducible reduction decidableTarget)
+    ¬ComputablePred BinaryGPCP4.Solvable :=
+  not_computable_of_codeHalts_reduction reduction
 
 theorem mortality_not_computable_of_reduction {d k : Nat}
     (reduction : CodeHalts ≤₀ MortalityProblem.Mortal (d := d) (k := k)) :
-    ¬ComputablePred (MortalityProblem.Mortal (d := d) (k := k)) := by
-  intro decidableTarget
-  exact codeHalts_not_computable
-    (ComputablePred.computable_of_manyOneReducible reduction decidableTarget)
+    ¬ComputablePred (MortalityProblem.Mortal (d := d) (k := k)) :=
+  not_computable_of_codeHalts_reduction reduction
 
 theorem scalarZero_not_computable_of_reduction {d k : Nat}
     (reduction : CodeHalts ≤₀ ScalarZeroProblem.HasZero (d := d) (k := k)) :
-    ¬ComputablePred (ScalarZeroProblem.HasZero (d := d) (k := k)) := by
-  intro decidableTarget
-  exact codeHalts_not_computable
-    (ComputablePred.computable_of_manyOneReducible reduction decidableTarget)
+    ¬ComputablePred (ScalarZeroProblem.HasZero (d := d) (k := k)) :=
+  not_computable_of_codeHalts_reduction reduction
 
 theorem mortality35_not_computable_of_reduction
     (reduction : CodeHalts ≤₀ MortalityProblem.Mortal (d := 3) (k := 5)) :

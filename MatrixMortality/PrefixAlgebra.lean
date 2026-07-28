@@ -97,37 +97,6 @@ def prefixAlgebraGenerator (β : Nat) (body : List TagLetter) (bit : Bool) :
 
 namespace PrefixAlgebra.Certificate
 
-/-- Entry formula after the one-hot restriction and deterministic prefix transition have been
-eliminated. -/
-private theorem restrictedPrefixGenerator_apply (β : Nat) (body : List TagLetter)
-    (bit : Bool) (row column : Fin 10) :
-    restrictedPrefixGenerator β body bit row column =
-      ∑ payloadColumn : Fin 3,
-        if prefixCoordinate
-            (prefixNext (prefixRepresentative row).1 bit) payloadColumn = column
-        then prefixOutput β body (prefixRepresentative row).1 bit
-          (prefixRepresentative row).2 payloadColumn
-        else 0 := by
-  rw [restrictedPrefixGenerator, Matrix.mul_assoc, Matrix.mul_apply]
-  rw [Finset.sum_eq_single (prefixRepresentative row)]
-  · simp only [prefixRetract, if_pos, one_mul]
-    rw [Matrix.mul_apply, Fintype.sum_prod_type]
-    rw [Finset.sum_eq_single
-      (prefixNext (prefixRepresentative row).1 bit)]
-    · apply Finset.sum_congr rfl
-      intro payloadColumn _
-      simp [prefixMachine, WeightedTransducer.generator, prefixEmbed]
-    · intro state _ state_ne
-      apply Finset.sum_eq_zero
-      intro payloadColumn _
-      simp [prefixMachine, WeightedTransducer.generator, Ne.symm state_ne]
-    · intro state_absent
-      exact (state_absent (Finset.mem_univ _)).elim
-  · intro large _ large_ne
-    simp [prefixRetract, Ne.symm large_ne]
-  · intro representative_absent
-    exact (representative_absent (Finset.mem_univ _)).elim
-
 /-- Closed three-state payload emitted on one prefix transition. -/
 private def prefixAlgebraOutputClosed (β : Nat) (body : List TagLetter)
     (state : PrefixState) (bit : Bool) : Square (Fin 3) ℚ :=

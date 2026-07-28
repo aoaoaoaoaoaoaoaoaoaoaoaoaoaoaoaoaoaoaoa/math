@@ -1,5 +1,5 @@
 import MatrixMortality.PrefixMortality
-import MatrixMortality.Undecidability.Problems
+import MatrixMortality.Undecidability.NearyProblems
 
 /-!
 # Canonical two-matrix mortality instances
@@ -15,6 +15,80 @@ namespace Undecidability
 /-- The two exact `10 × 10` integer matrices emitted by one restricted tag source. -/
 def nearyMortality102 (β : Nat) (body : List TagLetter) : Mortality102 :=
   fun label => restrictedPrefixGenerator β body (finTwoEquiv label)
+
+private theorem prefixOutput_int_entry_primrec (β : Nat) (state : PrefixState)
+    (bit : Bool) (row column : Fin 3) :
+    Primrec fun body : List TagLetter => prefixOutput β body state bit row column := by
+  cases state <;> cases bit
+  case root.false =>
+    exact
+      (Primrec.const (prefixOutput β [] .root false row column)).of_eq fun _body => by
+        simp [prefixOutput, prefixEmission, normalizedNearyFamily,
+          nearyMortalityFamilyInt, absorbedFamily, separatedGenerator]
+  case root.true | one.false | one.true =>
+    exact Primrec.const _
+  case ten.false =>
+    have lowerWord := nearyLower_primrec β (.rule .c)
+    have lowerCode := ternaryCode_int_primrec.comp lowerWord
+    have lowerScale := ternaryScale_int_primrec.comp lowerWord
+    fin_cases row <;> fin_cases column <;>
+      simp [prefixOutput, prefixEmission, normalizedNearyFamily_some,
+        sidePcpMatrix, Matrix.vecHead, Matrix.vecTail]
+    all_goals first | exact Primrec.const _ | exact lowerCode | exact lowerScale
+  case ten.true =>
+    exact
+      (Primrec.const (prefixOutput β [] .ten true row column)).of_eq fun body => by
+        simp [prefixOutput, prefixEmission, normalizedNearyFamily_some,
+          sidePcpMatrix, nearyLower]
+  case eleven.false =>
+    exact
+      (Primrec.const (prefixOutput β [] .eleven false row column)).of_eq fun body => by
+        simp [prefixOutput, prefixEmission, normalizedNearyFamily_some,
+          sidePcpMatrix, nearyLower]
+  case eleven.true =>
+    exact
+      (Primrec.const (prefixOutput β [] .eleven true row column)).of_eq fun body => by
+        simp [prefixOutput, prefixEmission, normalizedNearyFamily_some,
+          sidePcpMatrix, nearyLower]
+
+private theorem restrictedPrefixGenerator_primrec (β : Nat) (bit : Bool)
+    (row column : Fin 10) :
+    Primrec fun body : List TagLetter =>
+      restrictedPrefixGenerator β body bit row column := by
+  let state := prefixNext (prefixRepresentative row).1 bit
+  let sourceRow := (prefixRepresentative row).2
+  have outputZero := prefixOutput_int_entry_primrec β
+    (prefixRepresentative row).1 bit sourceRow 0
+  have outputOne := prefixOutput_int_entry_primrec β
+    (prefixRepresentative row).1 bit sourceRow 1
+  have outputTwo := prefixOutput_int_entry_primrec β
+    (prefixRepresentative row).1 bit sourceRow 2
+  by_cases zero : prefixCoordinate state 0 = column
+  · exact outputZero.of_eq fun body => by
+      rw [restrictedPrefixGenerator_apply_sparse]
+      simp [state, sourceRow, zero]
+  · by_cases one : prefixCoordinate state 1 = column
+    · exact outputOne.of_eq fun body => by
+        rw [restrictedPrefixGenerator_apply_sparse]
+        simp [state, sourceRow, zero, one]
+    · by_cases two : prefixCoordinate state 2 = column
+      · exact outputTwo.of_eq fun body => by
+          rw [restrictedPrefixGenerator_apply_sparse]
+          simp [state, sourceRow, zero, one, two]
+      · exact (Primrec.const 0).of_eq fun body => by
+          rw [restrictedPrefixGenerator_apply_sparse]
+          simp [state, zero, one, two]
+
+/-- The two-matrix prefix compiler is primitive recursive in its variable body. -/
+theorem nearyMortality102_primrec (β : Nat) :
+    Primrec (nearyMortality102 β) := by
+  apply MortalityProblem.primrec
+  intro label row column
+  fin_cases label
+  · simpa [nearyMortality102, finTwoEquiv] using
+      restrictedPrefixGenerator_primrec β false row column
+  · simpa [nearyMortality102, finTwoEquiv] using
+      restrictedPrefixGenerator_primrec β true row column
 
 theorem nearyMortality102_mortal_iff_tagHaltsFrom (β : Nat)
     (body : List TagLetter) (β_large : 2 < β) (body_long : β - 1 ≤ body.length)

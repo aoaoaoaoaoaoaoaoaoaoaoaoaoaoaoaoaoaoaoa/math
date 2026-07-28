@@ -38,11 +38,5 @@ import MatrixMortality.TerminalCompiler
 import MatrixMortality.TwoStateObstructions
 import MatrixMortality.TwoStatePushout
 import MatrixMortality.WordMorphism
-import MatrixMortality.Undecidability.BinaryProblems
-import MatrixMortality.Undecidability.NearySource
 import MatrixMortality.Undecidability.NearyConverse
-import MatrixMortality.Undecidability.NearyProblems
-import MatrixMortality.Undecidability.PairedProblems
-import MatrixMortality.Undecidability.PrefixProblems
-import MatrixMortality.Undecidability.TwoTagSource
 import MatrixMortality.Undecidability.UniversalNeary

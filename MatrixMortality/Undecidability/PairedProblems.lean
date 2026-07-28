@@ -1,5 +1,5 @@
 import MatrixMortality.PairedMortality
-import MatrixMortality.Undecidability.Problems
+import MatrixMortality.Undecidability.NearyProblems
 
 /-!
 # Canonical four-matrix paired-role instances
@@ -52,6 +52,30 @@ def pairedMortalityLabelEquivFin : Option PairedControl ≃ Fin 4 where
 def nearyMortality44 (β : Nat) (body : List TagLetter) : Mortality44 :=
   fun label row column =>
     pairedMortalityFamily ℤ β body (pairedMortalityLabelOfFin label) row column
+
+private theorem pairedDataMatrix_int_entry_primrec (β : Nat) (letter : TagLetter)
+    (row column : Fin 4) :
+    Primrec fun body : List TagLetter => pairedDataMatrix ℤ β body letter row column := by
+  have ruleWord := nearyLower_primrec β (.rule letter)
+  have eraseWord := nearyLower_primrec β (.erase letter)
+  have ruleCode := ternaryCode_int_primrec.comp ruleWord
+  have eraseCode := ternaryCode_int_primrec.comp eraseWord
+  have ruleScale := ternaryScale_int_primrec.comp ruleWord
+  fin_cases row <;> fin_cases column <;>
+    simp [pairedDataMatrix_eq_explicit, Matrix.vecHead, Matrix.vecTail]
+  all_goals first | exact Primrec.const _ | exact ruleCode | exact eraseCode |
+    exact ruleScale
+
+/-- The four-matrix paired compiler is primitive recursive in its variable body. -/
+theorem nearyMortality44_primrec (β : Nat) :
+    Primrec (nearyMortality44 β) := by
+  apply MortalityProblem.primrec
+  intro label row column
+  fin_cases label
+  · exact pairedDataMatrix_int_entry_primrec β .b row column
+  · exact pairedDataMatrix_int_entry_primrec β .c row column
+  · exact Primrec.const _
+  · exact Primrec.const _
 
 theorem nearyMortality44_mortal_iff_tagHaltsFrom (β : Nat) (body : List TagLetter)
     (β_large : 2 < β) (body_long : β - 1 ≤ body.length)

@@ -1,5 +1,5 @@
 import MatrixMortality.PairedBinary
-import MatrixMortality.Undecidability.Problems
+import MatrixMortality.Undecidability.NearyProblems
 
 /-!
 # Canonical two-matrix scalar-zero instances
@@ -20,6 +20,54 @@ def nearyScalarZero62 (β : Nat) (body : List TagLetter) : ScalarZero62 where
   matrix label := (pairedBinaryGenerator ℤ β body (finTwoEquiv label))ᵀ
   row := pairedBinaryBoundaryColumn ℤ
   column := pairedBinaryBoundaryRow ℤ β
+
+private theorem vecCons_val_three {α : Type*} {n : Nat}
+    (head : α) (tail : Fin (n + 3) → α) :
+    Matrix.vecCons head tail (3 : Fin (n + 4)) = tail 2 := rfl
+
+private theorem vecCons_val_four {α : Type*} {n : Nat}
+    (head : α) (tail : Fin (n + 4) → α) :
+    Matrix.vecCons head tail (4 : Fin (n + 5)) = tail 3 := rfl
+
+private theorem vecCons_val_five {α : Type*} {n : Nat}
+    (head : α) (tail : Fin (n + 5) → α) :
+    Matrix.vecCons head tail (5 : Fin (n + 6)) = tail 4 := rfl
+
+attribute [local simp] vecCons_val_three vecCons_val_four vecCons_val_five
+
+private theorem pairedBinaryGenerator_int_entry_primrec (β : Nat) (bit : Bool)
+    (row column : Fin 6) :
+    Primrec fun body : List TagLetter =>
+      pairedBinaryGenerator ℤ β body bit row column := by
+  cases bit with
+  | false =>
+      exact Primrec.const
+        (pairedBinaryGenerator ℤ β ([] : List TagLetter) false row column)
+  | true =>
+      have ruleWord := nearyLower_primrec β (.rule .c)
+      have eraseWord := nearyLower_primrec β (.erase .c)
+      have ruleCode := ternaryCode_int_primrec.comp ruleWord
+      have eraseCode := ternaryCode_int_primrec.comp eraseWord
+      have ruleScale := ternaryScale_int_primrec.comp ruleWord
+      fin_cases row <;> fin_cases column <;>
+        simp [pairedBinaryGenerator, Matrix.vecHead, Matrix.vecTail]
+      all_goals first | exact Primrec.const _ | exact ruleCode | exact eraseCode |
+        exact ruleScale
+
+/-- The two-matrix scalar-zero compiler is primitive recursive in its variable body. -/
+theorem nearyScalarZero62_primrec (β : Nat) :
+    Primrec (nearyScalarZero62 β) := by
+  apply ScalarZeroProblem.primrec_mk
+  · intro label row column
+    fin_cases label
+    · simpa [nearyScalarZero62] using
+        pairedBinaryGenerator_int_entry_primrec β false column row
+    · simpa [nearyScalarZero62] using
+        pairedBinaryGenerator_int_entry_primrec β true column row
+  · intro coordinate
+    exact Primrec.const _
+  · intro coordinate
+    exact Primrec.const _
 
 theorem nearyScalarZero62_coefficient (β : Nat) (body : List TagLetter)
     (word : List (Fin 2)) :
