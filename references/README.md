@@ -16,6 +16,8 @@ redistributable full text was located.
 | [Kurilenko22](kurilenko-2022-post-tag-growth.md) | peer-reviewed Complex Systems 2022; arXiv copy | Unbounded growth in Post's width-three system; no universality or reachability decision theorem |
 | [FS23](fazekas-seki-2023-freezing-one-tag-states.md) | peer-reviewed AFL 2023 / EPTCS; CC-BY | Definition of one-tag systems with states and the exact source-model seam; no binary two-state universality bound |
 | [BPS19](bell-potapov-semukhin-2019-mortality-problem.md) | MFCS 2019; journal 2021 | Independent post-correction statement of the six-generator `3 × 3` bound |
+| [Bacik25](bacik-2025-order-four-skolem.md) | peer-reviewed TheoretiCS 2025; CC-BY | Decidability of the algebraic Skolem problem through order four; definitive low-order boundary used by the `M₃(2)` rank census |
+| [HKPY24](hirvensalo-kawamura-potapov-yuyama-2024-linear-recurrence-automata.md) | peer-reviewed RP 2024; author accepted manuscript | Recurrence-controlled reachability vocabulary adjacent to the variable-index `Mₙ = VAⁿU` return problem |
 | [BB02](bournez-branicky-2002-low-dimensional-mortality.md) | peer-reviewed Theory Comput. Syst. 2002 | Decidability of two rational `2 × 2` generators and the rank-one-endpoint normal form |
 | [Dong23](dong-2023-semigroup-algorithms-survey.md) | peer-reviewed survey | Later matrix-semigroup context; no sharper bounded-generator result |
 | [Heckman19](heckman-2019-2x2-mortality-invertible.md) | arXiv v1 preprint | Decidability with at most one nonsingular `2 × 2` generator; singular-generator count reduction |
