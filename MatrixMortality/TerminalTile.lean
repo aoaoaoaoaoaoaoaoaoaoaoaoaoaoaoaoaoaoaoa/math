@@ -16,12 +16,6 @@ section RankOneChain
 
 variable {ι 𝕜 : Type*} [Fintype ι] [DecidableEq ι] [Field 𝕜]
 
-/-- `rankOneChain A [P₀, ..., Pₜ]` is `P₀ A P₁ A ⋯ A Pₜ`. -/
-def rankOneChain (A : Square ι 𝕜) : List (Square ι 𝕜) → Square ι 𝕜
-  | [] => 1
-  | [P] => P
-  | P :: Q :: blocks => P * A * rankOneChain A (Q :: blocks)
-
 /-- The scalar contributed by an invertible block between two rank-one separators. -/
 def bridgeScalar (c r : ι → 𝕜) (P : Square ι 𝕜) : 𝕜 := r ⬝ᵥ P *ᵥ c
 
@@ -35,107 +29,104 @@ theorem bridgeScalar_fold_boundaries (l c : ι → 𝕜) (left middle right : Sq
   rw [← Matrix.dotProduct_mulVec]
   simp only [Matrix.mulVec_mulVec, Matrix.mul_assoc]
 
-theorem rankOneChain_formula (c r : ι → 𝕜) (P₀ Pₜ : Square ι 𝕜) :
+theorem rankOneIntercalatedProduct_formula (c r : ι → 𝕜) (P₀ Pₜ : Square ι 𝕜) :
     ∀ middle : List (Square ι 𝕜),
-      rankOneChain (Matrix.vecMulVec c r) (P₀ :: middle ++ [Pₜ]) =
+      intercalatedProduct (Matrix.vecMulVec c r) (P₀ :: middle ++ [Pₜ]) =
         (middle.map (bridgeScalar c r)).prod •
           Matrix.vecMulVec (P₀ *ᵥ c) (r ᵥ* Pₜ)
   | [] => by
-      simp [rankOneChain, mul_outer, outer_mul]
+      simp [intercalatedProduct, mul_outer, outer_mul]
   | P :: middle => by
       rw [show P₀ :: (P :: middle) ++ [Pₜ] = P₀ :: P :: (middle ++ [Pₜ]) by rfl]
-      rw [rankOneChain]
-      rw [show rankOneChain (Matrix.vecMulVec c r) (P :: (middle ++ [Pₜ])) =
+      rw [intercalatedProduct]
+      rw [show intercalatedProduct (Matrix.vecMulVec c r) (P :: (middle ++ [Pₜ])) =
           (middle.map (bridgeScalar c r)).prod •
             Matrix.vecMulVec (P *ᵥ c) (r ᵥ* Pₜ) by
-        simpa using rankOneChain_formula c r P Pₜ middle]
+        simpa using rankOneIntercalatedProduct_formula c r P Pₜ middle]
       rw [mul_smul_comm]
       rw [show P₀ * Matrix.vecMulVec c r = Matrix.vecMulVec (P₀ *ᵥ c) r from
         mul_outer P₀ c r]
       rw [outer_mul_outer]
       simp [bridgeScalar, smul_smul, mul_comm]
 
-/-- Split a generator word at `none`, erasing the separators from the resulting blocks. -/
-def fracture {α : Type*} : List (Option α) → List (List α)
-  | [] => [[]]
-  | none :: word => [] :: fracture word
-  | some i :: word => (fracture word).modifyHead (i :: ·)
-
-theorem fracture_ne_nil {α : Type*} (word : List (Option α)) : fracture word ≠ [] := by
-  induction word with
-  | nil => simp [fracture]
-  | cons head word ih =>
-      cases head with
-      | none => simp [fracture]
-      | some i =>
-          cases h : fracture word with
-          | nil => exact (ih h).elim
-          | cons block blocks => simp [fracture, h]
-
-theorem fracture_length_two_le_of_none_mem {α : Type*} {word : List (Option α)}
-    (hnone : none ∈ word) : 2 ≤ (fracture word).length := by
-  induction word with
-  | nil => simp at hnone
-  | cons head word ih =>
-      cases head with
-      | none =>
-          simp only [fracture, List.length_cons]
-          have := List.length_pos.mpr (fracture_ne_nil word)
-          omega
-      | some i =>
-          have htail : none ∈ word := by simpa using hnone
-          have hlength := ih htail
-          have hfracture := fracture_ne_nil word
-          rcases List.exists_cons_of_ne_nil hfracture with ⟨block, blocks, hblocks⟩
-          simp [fracture, hblocks]
-          simpa [hblocks] using hlength
-
-theorem fracture_map_some_append_none {α : Type*} (word : List α) :
-    fracture (word.map some ++ [none]) = [word, []] := by
-  induction word with
-  | nil => rfl
-  | cons i word ih => simp [fracture, ih]
-
-theorem rankOneChain_one_cons (A : Square ι 𝕜) {blocks : List (Square ι 𝕜)}
-    (hblocks : blocks ≠ []) :
-    rankOneChain A (1 :: blocks) = A * rankOneChain A blocks := by
-  rcases List.exists_cons_of_ne_nil hblocks with ⟨P, blocks, rfl⟩
-  cases blocks <;> simp [rankOneChain]
-
-theorem rankOneChain_modifyHead (A X : Square ι 𝕜) {blocks : List (Square ι 𝕜)}
-    (hblocks : blocks ≠ []) :
-    rankOneChain A (blocks.modifyHead (X * ·)) = X * rankOneChain A blocks := by
-  rcases List.exists_cons_of_ne_nil hblocks with ⟨P, blocks, rfl⟩
-  cases blocks <;> simp [rankOneChain, mul_assoc]
-
-theorem separated_wordProduct_eq_rankOneChain {α : Type*} (A : Square ι 𝕜)
-    (X : α → Square ι 𝕜) (word : List (Option α)) :
-    wordProduct (separatedGenerator A X) word =
-      rankOneChain A ((fracture word).map (wordProduct X)) := by
-  induction word with
-  | nil => simp [fracture, wordProduct, rankOneChain]
-  | cons head word ih =>
-      cases head with
-      | none =>
-          simp only [wordProduct, separatedGenerator, List.map_cons, List.prod_cons,
-            fracture, List.map_cons, List.map_nil, List.prod_nil]
-          have hmap : (fracture word).map (wordProduct X) ≠ [] := by
-            simpa using fracture_ne_nil word
-          rw [show (word.map (separatedGenerator A X)).prod =
-              wordProduct (separatedGenerator A X) word from rfl,
-            ih, rankOneChain_one_cons _ hmap]
-      | some i =>
-          simp only [wordProduct, separatedGenerator, List.map_cons, List.prod_cons]
-          rw [show (word.map (separatedGenerator A X)).prod =
-              wordProduct (separatedGenerator A X) word from rfl,
-            ih]
-          have hfracture := fracture_ne_nil word
-          rcases List.exists_cons_of_ne_nil hfracture with ⟨block, blocks, hblocks⟩
-          rw [show fracture (some i :: word) = (fracture word).modifyHead (i :: ·) by rfl,
-            hblocks]
-          simp only [List.modifyHead, List.map_cons, wordProduct, List.map_cons, List.prod_cons]
-          simpa using (rankOneChain_modifyHead A (X i)
-            (List.cons_ne_nil (wordProduct X block) (blocks.map (wordProduct X)))).symm
+/-- A family of units plus one nonzero rank-one separator is mortal exactly when one scalar
+bridge between separators vanishes. -/
+theorem unitFamily_mortal_adjoin_outer_iff {α : Type*}
+    (generators : α → Square ι 𝕜) (column row : ι → 𝕜)
+    [Nonempty ι]
+    (generator_unit : ∀ label, IsUnit (generators label))
+    (column_ne : column ≠ 0) (row_ne : row ≠ 0) :
+    IsMortal (separatedGenerator (Matrix.vecMulVec column row) generators) ↔
+      ∃ word : List α, bridgeScalar column row (wordProduct generators word) = 0 := by
+  let separator := Matrix.vecMulVec column row
+  constructor
+  · rintro ⟨raw, _, product_zero⟩
+    have separator_mem : none ∈ raw := by
+      by_contra no_separator
+      obtain ⟨word, rfl⟩ := exists_eq_map_some_of_none_not_mem raw no_separator
+      rw [wordProduct_separatedGenerator_map_some] at product_zero
+      exact (wordProduct_isUnit generators generator_unit word).ne_zero product_zero
+    rw [wordProduct_separatedGenerator_eq_intercalatedProduct] at product_zero
+    have fracture_length := fracture_length_two_le_of_none_mem separator_mem
+    have fracture_nonempty := fracture_ne_nil raw
+    obtain ⟨first, rest, fracture_eq⟩ :=
+      List.exists_cons_of_ne_nil fracture_nonempty
+    have rest_nonempty : rest ≠ [] := by
+      intro rest_empty
+      rw [fracture_eq, rest_empty] at fracture_length
+      simp at fracture_length
+    let last := rest.getLast rest_nonempty
+    let middle := rest.dropLast
+    have fracture_decomposition : fracture raw = first :: middle ++ [last] := by
+      rw [fracture_eq]
+      congr 1
+      exact (List.dropLast_append_getLast rest_nonempty).symm
+    have mapped_decomposition : (fracture raw).map (wordProduct generators) =
+        wordProduct generators first ::
+          middle.map (wordProduct generators) ++ [wordProduct generators last] := by
+      simp [fracture_decomposition]
+    rw [mapped_decomposition] at product_zero
+    change intercalatedProduct separator
+      (wordProduct generators first ::
+        middle.map (wordProduct generators) ++ [wordProduct generators last]) = 0
+      at product_zero
+    rw [rankOneIntercalatedProduct_formula] at product_zero
+    have first_column_nonzero :
+        wordProduct generators first *ᵥ column ≠ 0 :=
+      unit_mulVec_ne_zero (wordProduct_isUnit generators generator_unit first) column_ne
+    have last_row_nonzero :
+        row ᵥ* wordProduct generators last ≠ 0 :=
+      vecMul_unit_ne_zero row_ne (wordProduct_isUnit generators generator_unit last)
+    have boundary_nonzero :
+        Matrix.vecMulVec (wordProduct generators first *ᵥ column)
+          (row ᵥ* wordProduct generators last) ≠ 0 :=
+      outer_ne_zero first_column_nonzero last_row_nonzero
+    have scalar_product_zero :
+        ((middle.map (wordProduct generators)).map
+          (bridgeScalar column row)).prod = 0 :=
+      (smul_eq_zero.mp product_zero).resolve_right boundary_nonzero
+    have zero_mem :
+        0 ∈ (middle.map (wordProduct generators)).map
+          (bridgeScalar column row) :=
+      List.prod_eq_zero_iff.mp scalar_product_zero
+    obtain ⟨matrix, matrix_mem, bridge_zero⟩ := List.mem_map.mp zero_mem
+    obtain ⟨word, _, rfl⟩ := List.mem_map.mp matrix_mem
+    exact ⟨word, bridge_zero⟩
+  · rintro ⟨word, bridge_zero⟩
+    refine ⟨none :: word.map some ++ [none], by simp, ?_⟩
+    have fracture_shape : fracture (none :: word.map some ++ [none]) = [[], word, []] := by
+      simp [fracture, fracture_map_some_append_none]
+    change wordProduct (separatedGenerator separator generators)
+      (none :: word.map some ++ [none]) = 0
+    rw [wordProduct_separatedGenerator_eq_intercalatedProduct, fracture_shape]
+    rw [show ([[], word, []] : List (List α)).map (wordProduct generators) =
+      [1, wordProduct generators word, 1] by simp [wordProduct]]
+    rw [show intercalatedProduct separator [1, wordProduct generators word, 1] =
+      bridgeScalar column row (wordProduct generators word) •
+        Matrix.vecMulVec column row by
+          simpa [separator] using
+            rankOneIntercalatedProduct_formula column row 1 1 [wordProduct generators word]]
+    simp [bridge_zero]
 
 /-- A common fixed column replaces invertibility in the rank-one scalar-to-mortality compiler. -/
 theorem fixedAnchor_mortal_adjoin_outer_iff {α : Type*} (X : α → Square ι 𝕜)
@@ -175,7 +166,7 @@ theorem fixedAnchor_mortal_adjoin_outer_iff {α : Type*} (X : α → Square ι �
       have product_fixed := separator_free_fixed raw no_separator
       rw [chain_zero] at product_fixed
       exact anchor_nonzero (by simpa using product_fixed.symm)
-    rw [separated_wordProduct_eq_rankOneChain] at chain_zero
+    rw [wordProduct_separatedGenerator_eq_intercalatedProduct] at chain_zero
     have fracture_length := fracture_length_two_le_of_none_mem separator_mem
     have fracture_nonempty := fracture_ne_nil raw
     obtain ⟨first, rest, fracture_eq⟩ := List.exists_cons_of_ne_nil fracture_nonempty
@@ -193,10 +184,10 @@ theorem fixedAnchor_mortal_adjoin_outer_iff {α : Type*} (X : α → Square ι �
         wordProduct X first :: middle.map (wordProduct X) ++ [wordProduct X last] := by
       simp [fracture_decomposition]
     rw [mapped_decomposition] at chain_zero
-    change rankOneChain (Matrix.vecMulVec column row)
+    change intercalatedProduct (Matrix.vecMulVec column row)
       (wordProduct X first :: middle.map (wordProduct X) ++ [wordProduct X last]) = 0
       at chain_zero
-    rw [rankOneChain_formula] at chain_zero
+    rw [rankOneIntercalatedProduct_formula] at chain_zero
     by_cases first_column_zero : wordProduct X first *ᵥ column = 0
     · refine ⟨first, ?_⟩
       simp [bridgeScalar, first_column_zero]
@@ -221,12 +212,13 @@ theorem fixedAnchor_mortal_adjoin_outer_iff {α : Type*} (X : α → Square ι �
     have fracture_shape : fracture (none :: word.map some ++ [none]) = [[], word, []] := by
       simp [fracture, fracture_map_some_append_none]
     change wordProduct (separatedGenerator separator X) (none :: word.map some ++ [none]) = 0
-    rw [separated_wordProduct_eq_rankOneChain, fracture_shape]
+    rw [wordProduct_separatedGenerator_eq_intercalatedProduct, fracture_shape]
     rw [show ([[], word, []] : List (List α)).map (wordProduct X) =
       [1, wordProduct X word, 1] by simp [wordProduct]]
-    rw [show rankOneChain separator [1, wordProduct X word, 1] =
+    rw [show intercalatedProduct separator [1, wordProduct X word, 1] =
       bridgeScalar column row (wordProduct X word) • Matrix.vecMulVec column row by
-        simpa [separator] using rankOneChain_formula column row 1 1 [wordProduct X word]]
+        simpa [separator] using
+          rankOneIntercalatedProduct_formula column row 1 1 [wordProduct X word]]
     simp [bridge_zero]
 
 end RankOneChain

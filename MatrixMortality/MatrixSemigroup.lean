@@ -45,6 +45,14 @@ theorem wordProduct_comp {α β M : Type*} [Monoid M] (generators : β → M)
       wordProduct generators (word.map relabel) := by
   simp [wordProduct, List.map_map, Function.comp_def]
 
+@[simp]
+theorem wordProduct_const {α M : Type*} [Monoid M] (element : M) (word : List α) :
+    wordProduct (fun _ : α => element) word = element ^ word.length := by
+  induction word with
+  | nil => simp
+  | cons head tail induction =>
+      rw [wordProduct_cons, induction, List.length_cons, pow_succ']
+
 /-! ## Word-series zero languages -/
 
 namespace WordSeries
@@ -109,9 +117,183 @@ theorem wordProduct_separatedGenerator_map_some {α M : Type*} [Monoid M]
   | cons head tail induction =>
       simp only [List.map_cons, wordProduct_cons, separatedGenerator, induction]
 
+theorem exists_eq_map_some_of_none_not_mem {α : Type*}
+    (word : List (Option α)) (none_not_mem : none ∉ word) :
+    ∃ ordinary : List α, word = ordinary.map some := by
+  induction word with
+  | nil => exact ⟨[], rfl⟩
+  | cons head tail induction =>
+      cases head with
+      | none => exact (none_not_mem (by simp)).elim
+      | some label =>
+          have tail_none_not_mem : none ∉ tail := by
+            intro none_mem
+            exact none_not_mem (by simp [none_mem])
+          obtain ⟨ordinary, rfl⟩ := induction tail_none_not_mem
+          exact ⟨label :: ordinary, rfl⟩
+
+/-- Insert `separator` between a nonempty list of monoid blocks. The empty list denotes `1`. -/
+def intercalatedProduct {M : Type*} [Monoid M] (separator : M) : List M → M
+  | [] => 1
+  | [block] => block
+  | block :: next :: blocks =>
+      block * separator * intercalatedProduct separator (next :: blocks)
+
+/-- Split a word at every `none`, erasing separators and retaining all possibly empty blocks. -/
+def fracture {α : Type*} : List (Option α) → List (List α)
+  | [] => [[]]
+  | none :: word => [] :: fracture word
+  | some label :: word => (fracture word).modifyHead (label :: ·)
+
+theorem fracture_ne_nil {α : Type*} (word : List (Option α)) : fracture word ≠ [] := by
+  induction word with
+  | nil => simp [fracture]
+  | cons head word induction =>
+      cases head with
+      | none => simp [fracture]
+      | some label =>
+          cases fracture_eq : fracture word with
+          | nil => exact (induction fracture_eq).elim
+          | cons block blocks => simp [fracture, fracture_eq]
+
+theorem fracture_length_two_le_of_none_mem {α : Type*} {word : List (Option α)}
+    (none_mem : none ∈ word) : 2 ≤ (fracture word).length := by
+  induction word with
+  | nil => simp at none_mem
+  | cons head word induction =>
+      cases head with
+      | none =>
+          simp only [fracture, List.length_cons]
+          have positive := List.length_pos.mpr (fracture_ne_nil word)
+          omega
+      | some label =>
+          have tail_none_mem : none ∈ word := by simpa using none_mem
+          have length_bound := induction tail_none_mem
+          have fracture_nonempty := fracture_ne_nil word
+          obtain ⟨block, blocks, fracture_eq⟩ :=
+            List.exists_cons_of_ne_nil fracture_nonempty
+          simp [fracture, fracture_eq]
+          simpa [fracture_eq] using length_bound
+
+theorem fracture_map_some_append_none {α : Type*} (word : List α) :
+    fracture (word.map some ++ [none]) = [word, []] := by
+  induction word with
+  | nil => rfl
+  | cons label word induction => simp [fracture, induction]
+
+theorem intercalatedProduct_one_cons {M : Type*} [Monoid M]
+    (separator : M) {blocks : List M} (blocks_nonempty : blocks ≠ []) :
+    intercalatedProduct separator (1 :: blocks) =
+      separator * intercalatedProduct separator blocks := by
+  obtain ⟨block, blocks, rfl⟩ := List.exists_cons_of_ne_nil blocks_nonempty
+  cases blocks <;> simp [intercalatedProduct]
+
+theorem intercalatedProduct_modifyHead {M : Type*} [Monoid M]
+    (separator left : M) {blocks : List M} (blocks_nonempty : blocks ≠ []) :
+    intercalatedProduct separator (blocks.modifyHead (left * ·)) =
+      left * intercalatedProduct separator blocks := by
+  obtain ⟨block, blocks, rfl⟩ := List.exists_cons_of_ne_nil blocks_nonempty
+  cases blocks <;> simp [intercalatedProduct, mul_assoc]
+
+/-- Every word over ordinary generators and one separator is the intercalation of its fractured
+ordinary blocks. -/
+theorem wordProduct_separatedGenerator_eq_intercalatedProduct {α M : Type*} [Monoid M]
+    (separator : M) (generators : α → M) (word : List (Option α)) :
+    wordProduct (separatedGenerator separator generators) word =
+      intercalatedProduct separator ((fracture word).map (wordProduct generators)) := by
+  induction word with
+  | nil => simp [fracture, wordProduct, intercalatedProduct]
+  | cons head word induction =>
+      cases head with
+      | none =>
+          simp only [wordProduct, separatedGenerator, List.map_cons, List.prod_cons,
+            fracture, List.map_cons, List.map_nil, List.prod_nil]
+          have fractured_nonempty : (fracture word).map (wordProduct generators) ≠ [] := by
+            simpa using fracture_ne_nil word
+          rw [show (word.map (separatedGenerator separator generators)).prod =
+              wordProduct (separatedGenerator separator generators) word from rfl,
+            induction, intercalatedProduct_one_cons _ fractured_nonempty]
+      | some label =>
+          simp only [wordProduct, separatedGenerator, List.map_cons, List.prod_cons]
+          rw [show (word.map (separatedGenerator separator generators)).prod =
+              wordProduct (separatedGenerator separator generators) word from rfl,
+            induction]
+          have fractured_nonempty := fracture_ne_nil word
+          obtain ⟨block, blocks, fracture_eq⟩ :=
+            List.exists_cons_of_ne_nil fractured_nonempty
+          rw [show fracture (some label :: word) =
+              (fracture word).modifyHead (label :: ·) by rfl, fracture_eq]
+          simp only [List.modifyHead, List.map_cons, wordProduct, List.prod_cons]
+          simpa using (intercalatedProduct_modifyHead separator (generators label)
+            (List.cons_ne_nil (wordProduct generators block)
+              (blocks.map (wordProduct generators)))).symm
+
 /-- A labelled family is mortal when a nonempty generator word multiplies to zero. -/
 def IsMortal {α M : Type*} [MonoidWithZero M] (generators : α → M) : Prop :=
   WordSeries.HasNonemptyZero (wordProduct generators)
+
+/-- In a nontrivial monoid, the empty product is not zero, so an explicit nonemptiness condition
+on a zero word is redundant. -/
+theorem isMortal_iff_exists_wordProduct_eq_zero {α M : Type*}
+    [MonoidWithZero M] [Nontrivial M] (generators : α → M) :
+    IsMortal generators ↔ ∃ word, wordProduct generators word = 0 := by
+  exact WordSeries.hasNonemptyZero_iff_hasZero_of_nil_ne
+    (wordProduct generators) (by simp)
+
+theorem unit_sandwich_eq_zero_iff {M : Type*} [MonoidWithZero M]
+    {left middle right : M} (left_unit : IsUnit left) (right_unit : IsUnit right) :
+    left * middle * right = 0 ↔ middle = 0 := by
+  constructor
+  · intro sandwich_zero
+    have left_cancelled : middle * right = 0 := by
+      apply left_unit.mul_left_cancel
+      simpa [mul_assoc] using sandwich_zero
+    apply right_unit.mul_right_cancel
+    simpa using left_cancelled
+  · rintro rfl
+    simp
+
+/-- A word over unit generators is a unit. -/
+theorem wordProduct_isUnit_of_mem {α M : Type*} [Monoid M]
+    (generators : α → M) (word : List α)
+    (generator_unit : ∀ label ∈ word, IsUnit (generators label)) :
+    IsUnit (wordProduct generators word) := by
+  induction word with
+  | nil => simp
+  | cons head tail induction =>
+      rw [wordProduct_cons]
+      exact (generator_unit head (by simp)).mul
+        (induction fun label label_mem => generator_unit label (by simp [label_mem]))
+
+/-- A word over a family of unit generators is a unit. -/
+theorem wordProduct_isUnit {α M : Type*} [Monoid M]
+    (generators : α → M) (generator_unit : ∀ label, IsUnit (generators label))
+    (word : List α) : IsUnit (wordProduct generators word) :=
+  wordProduct_isUnit_of_mem generators word fun label _ => generator_unit label
+
+/-- A nontrivial monoid family consisting entirely of units is immortal. -/
+theorem not_isMortal_of_forall_isUnit {α M : Type*} [MonoidWithZero M] [Nontrivial M]
+    (generators : α → M) (generator_unit : ∀ label, IsUnit (generators label)) :
+    ¬IsMortal generators := by
+  rintro ⟨word, _, product_zero⟩
+  exact (wordProduct_isUnit generators generator_unit word).ne_zero product_zero
+
+/-- Canonical relabelling that separates zero from the positive natural numbers. -/
+def natEquivOption : Nat ≃ Option Nat where
+  toFun
+    | 0 => none
+    | n + 1 => some n
+  invFun
+    | none => 0
+    | some n => n + 1
+  left_inv n := by cases n <;> rfl
+  right_inv n := by cases n <;> rfl
+
+@[simp]
+theorem natEquivOption_zero : natEquivOption 0 = none := rfl
+
+@[simp]
+theorem natEquivOption_succ (n : Nat) : natEquivOption (n + 1) = some n := rfl
 
 /-- Relabelling a family along an equivalence preserves mortality. -/
 theorem isMortal_comp_equiv {α β M : Type*} [MonoidWithZero M]
@@ -122,6 +304,26 @@ theorem isMortal_comp_equiv {α β M : Type*} [MonoidWithZero M]
         funext word
         exact wordProduct_comp generators equivalence word]
   exact WordSeries.hasNonemptyZero_relabel_equiv _ equivalence
+
+/-- Every zero-preserving monoid homomorphism sends mortal families to mortal families. -/
+theorem isMortal_map {α M N : Type*} [MonoidWithZero M] [MonoidWithZero N]
+    (map : M →*₀ N) (generators : α → M) :
+    IsMortal generators → IsMortal (map ∘ generators) := by
+  rintro ⟨word, word_nonempty, product_zero⟩
+  refine ⟨word, word_nonempty, ?_⟩
+  calc
+    wordProduct (map ∘ generators) word =
+        map (wordProduct generators word) := by
+          simpa using wordProduct_map map.toMonoidHom generators word
+    _ = 0 := by simp [product_zero]
+
+/-- Immortality in one zero-preserving quotient certifies immortality of the original family. -/
+theorem not_isMortal_of_map_not_isMortal
+    {α M N : Type*} [MonoidWithZero M] [MonoidWithZero N]
+    (map : M →*₀ N) (generators : α → M)
+    (image_immortal : ¬IsMortal (map ∘ generators)) :
+    ¬IsMortal generators :=
+  fun mortality => image_immortal (isMortal_map map generators mortality)
 
 /-- An injective zero-preserving monoid map reflects and preserves mortality. -/
 theorem isMortal_map_iff {α M N : Type*} [MonoidWithZero M] [MonoidWithZero N]
@@ -137,13 +339,7 @@ theorem isMortal_map_iff {α M N : Type*} [MonoidWithZero M] [MonoidWithZero N]
             simpa using (wordProduct_map map.toMonoidHom generators word).symm
       _ = 0 := product_zero
       _ = map 0 := map.map_zero.symm
-  · rintro ⟨word, word_nonempty, product_zero⟩
-    refine ⟨word, word_nonempty, ?_⟩
-    calc
-      wordProduct (map ∘ generators) word =
-          map (wordProduct generators word) := by
-            simpa using wordProduct_map map.toMonoidHom generators word
-      _ = 0 := by simp [product_zero]
+  · exact isMortal_map map generators
 
 /-- Simultaneously reindexing both matrix axes preserves mortality. -/
 theorem isMortal_reindex_iff {α ι κ R : Type*} [CommSemiring R]

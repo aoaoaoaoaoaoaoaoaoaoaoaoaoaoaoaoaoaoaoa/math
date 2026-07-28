@@ -51,8 +51,8 @@ The one-hot cyclic compiler preserves that avoidance invariant and reflects ever
 firing. The Table 2 compiler then proves both directions for every emitted source: protected
 execution gives halting, while its arbitrary-execution converse excludes spurious halting after
 the semantic data are exhausted. Its body, padding, ternary arithmetic, four-letter GPCP instance,
-and five-matrix integer family are all primitive recursive. The declarations
-The five `codeHalts_reduces_*` declarations are therefore complete computable many-one
+and five-matrix integer family are all primitive recursive. The five `codeHalts_reduces_*`
+declarations are therefore complete computable many-one
 reductions; their corresponding `*_not_computable` declarations are unconditional
 kernel-checked no-decider theorems.
 
@@ -179,6 +179,48 @@ nonzero by the sharper congruences `P(3^β)≡8 mod 9` and
 `M₁₀(ℚ)`. This is [`MM-O08`](SALVAGE.md#mm-o08-full-algebra-prefix-pair), formalized by
 `prefixAlgebra_wordProductSpan_eq_top`.
 
+The rank-three binary campaign now has a checked structural core. A split finite-rank cut beside
+a unit fractures every arbitrary binary word into its `VAⁿU` return product; a finite
+block-Hankel section lower-bounds every exact realization of that matrix-valued sequence. For
+two rank-two generators, Lean compresses every nonempty word to the adjacent-edge product
+`VᵢUⱼ`. It also proves the converse geometric construction: four `2 × 2` edges agreeing on one
+shared source line assemble into two `3 × 3` generators, and split incoming edges force both
+generators to have rank exactly two. The graph constraint remains explicit.
+
+ReturnSquare instantiates the rank-`(3,2)` reduction. Lean proves the closed return matrix,
+split interfaces, exact cut rank, internal rank-one zero-wait return, unit positive returns,
+complete physical mortality equivalence, reachable and observable determinants, and the
+one-return/long-word dichotomy. A discriminant trapped between parity-compatible neighboring
+squares excludes every bridge of two positive returns. The reversible stack variant has a
+nonsingular `4 × 4` block-Hankel section, so no exact three-state return realization can perform
+that literal push/pop operation.
+
+The stronger quadratic-pencil no-go is also checked over every linear ordered field. Three
+singular coefficient modes `C₀+tC₁+t²C₂` cannot projectively exchange `t` with `κt²`; all three
+coefficients are forced to zero. Requiring exact squaring at both scales `t` and `qt` instead
+forces the pencil to be a scalar linear polynomial times `diag(t,1)`, hence blind scaling rather
+than verification.
+
+The projective wall is checked without affine-chart pole assumptions. For `c=−d`, define
+
+```text
+s_d(t)=(d−1)t²+1,       β_d(q)=q/s_d(q).
+```
+
+If `q≥2`, `t≥q`, and `d>1+(q−1)/q²`, the homogeneous double cone representing slopes
+`(0,β_d(q)]` is backward invariant under the return at scale `t`, for either vector sign.
+Pulling a zero bridge through all returns would place `[1,1]` in that cone although
+`β_d(q)<1`. Lean therefore proves immortality throughout this outer negative half-line, as well
+as throughout `c≥0`.
+
+These are structural and decidable-stratum theorems, not an `M₃(2)` resolution. The imported
+order-four Skolem theorem used to classify rank-one profiles is not reimplemented in Lean. The
+generic reverse edge compiler's basis adaptation and constrained all-path converse also remain
+outside the checked corpus. Their boundary is recorded in
+[`audits/m32-rank-return-2026-07-28.md`](audits/m32-rank-return-2026-07-28.md) and scheduled in
+[#11](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/11) and
+[#12](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/12).
+
 ## Audited But Unformalized
 
 The internal-sandwich audit retains two unformalized exact obstructions:
@@ -284,6 +326,13 @@ with a complete arbitrary-word converse.
 | `MatrixSemigroup.lean` | shared word semantics, mortality transports, common-image restriction, transposition, and zero padding |
 | `LinearRepresentation.lean` | finite Hankel sections and exact-realization state lower bounds |
 | `BoundaryTax.lean` | generic finite-witness two-channel boundary tax |
+| `ReturnFamily.lean` | split finite-rank return normal form and matrix-valued block-Hankel witnesses |
+| `EdgeCompression.lean` | exact adjacent-edge compression for split finite-rank families |
+| `TwoPlaneEdges.lean` | compatible two-plane realization of a `2 × 2` edge square and exact rank-two certificates |
+| `ReturnSquare.lean` | exact rank-`(3,2)` laboratory, bridge normal form, and two-return square cage |
+| `ReturnSquareDynamics.lean` | homogeneous projective trap and outer negative immortality wall |
+| `ReturnSquareTax.lean` | exact four-state lower bound for literal reversible-stack returns |
+| `ReturnSquareNoGo.lean` | quadratic-pencil reversible-squaring obstruction and blind-scaling collapse |
 | `BinaryDefect.lean` | binary two-word defect theorem and exact Neary macro obstruction |
 | `CHHNPacking.lean` | generic two-slot CHHN packing and six-state finite-Hankel kernels |
 | `CHHNPackingRank.lean` | all-placement exact six-state lower bound for the Neary packing |
@@ -366,6 +415,16 @@ with a complete arbitrary-word converse.
 | Exact nonerasing Neary role macros require four letters | `ExactNearyMacroFactorization.four_le_card` |
 | A nonsingular finite Hankel section lower-bounds every exact realization | `finiteHankel_card_le` |
 | Exact diagonal two-channel bridges pay two additional states | `exactDiagonalTwoChannel_card_lower_bound` |
+| A split finite-rank binary pair is mortal exactly when one return product vanishes | `ReturnFamily.pairGenerator_isMortal_iff` |
+| Finite return block-Hankel sections factor through every exact ambient realization | `ReturnFamily.finiteReturnHankel_factor`, `ReturnFamily.returnHankel_card_le` |
+| A split finite-rank family is mortal exactly when one constrained edge path vanishes | `EdgeCompression.isMortal_iff_exists_edgeProduct_eq_zero` |
+| Every compatible two-plane edge square is realized by two rank-two generators | `TwoPlaneEdges.output_mul_input`, `TwoPlaneEdges.generator_rank` |
+| ReturnSquare physical mortality is exactly positive-return scalar bridge zero | `ReturnSquare.physical_isMortal_iff_positiveBridge` |
+| Every nonresonant ReturnSquare zero uses at least three positive returns | `ReturnSquare.positiveBridge_zero_shape` |
+| Nonnegative and outer-negative ReturnSquare parameters are immortal | `ReturnSquare.not_physical_isMortal_of_nonneg`, `ReturnSquare.not_physical_isMortal_of_beyond_negative_wall` |
+| Literal reversible-stack returns require at least four exact states | `ReturnSquareTax.reversibleStack_card_lower_bound` |
+| Three singular quadratic modes cannot exchange `t` with `κt²` | `ReturnSquareNoGo.threeMode_swap_eq_zero` |
+| Two exact squaring checks collapse to blind scaling | `ReturnSquareNoGo.verifiedPush_eq_blindScale` |
 | Rule and erasure matrices agree on the upper-side plane | `rule_erase_agree_on_upperSide` |
 | Every finite-controller letter routes its selected private channel exactly | `controllerMatrix_mulVec_controllerVector` |
 | Every suffix-controlled word obeys the generic total decoder | `controllerProduct_mulVec_controllerVector` |

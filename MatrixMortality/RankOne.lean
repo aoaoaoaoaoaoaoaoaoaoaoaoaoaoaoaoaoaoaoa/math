@@ -81,4 +81,16 @@ theorem unit_mulVec_ne_zero [DecidableEq ι] {matrix : Square ι 𝕜} {column :
     _ = inverse *ᵥ matrix *ᵥ column := by rw [Matrix.mulVec_mulVec]
     _ = 0 := by rw [product_zero]; simp
 
+theorem vecMul_unit_ne_zero [DecidableEq ι] {row : ι → 𝕜} {matrix : Square ι 𝕜}
+    (row_ne : row ≠ 0) (matrix_unit : IsUnit matrix) :
+    row ᵥ* matrix ≠ 0 := by
+  intro product_zero
+  obtain ⟨inverse, matrix_inverse⟩ := matrix_unit.exists_right_inv
+  apply row_ne
+  calc
+    row = row ᵥ* 1 := by simp
+    _ = row ᵥ* (matrix * inverse) := by rw [matrix_inverse]
+    _ = (row ᵥ* matrix) ᵥ* inverse := by rw [Matrix.vecMul_vecMul]
+    _ = 0 := by rw [product_zero]; simp
+
 end MatrixMortality

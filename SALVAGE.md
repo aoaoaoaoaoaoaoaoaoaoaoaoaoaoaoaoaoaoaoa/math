@@ -19,10 +19,11 @@ Every active record also states the next promotion step. A graduated record inst
 formal artifact.
 
 The first namespace component identifies the campaign: `MM` for general matrix-mortality
-compilers, `M4` for the `M₄(3)` frontier, `G3` for the three-letter GPCP and `M₃(4)`
-frontier, and `D2` for the dimension-two wall. The second component identifies the result
-class: `C` compiler, `O` obstruction, `M` partial mechanism, `S` structure theorem, or `D`
-decidable stratum. Numbers never change after assignment.
+compilers, `R32` for the rank-three binary frontier `M₃(2)`, `M4` for the `M₄(3)` frontier,
+`G3` for the three-letter GPCP and `M₃(4)` frontier, and `D2` for the dimension-two wall.
+The second component identifies the result class: `C` compiler, `O` obstruction, `M` partial
+mechanism, `S` structure theorem, or `D` decidable stratum. Numbers never change after
+assignment.
 
 `reported` means that the result survives only as a contracted statement from an external
 review. It cannot support a publication claim. `audited` means that its proof has been checked
@@ -71,6 +72,16 @@ file owns the mathematical stock.
 | [`MM-S08`](#mm-s08-swapped-distinguished-boundary-beta-shell) | obstruction | the swapped distinguished boundary cannot reach either single-erasure pole | audited | active |
 | [`MM-S09`](#mm-s09-canonical-swapped-residue-cannot-hit-a-pole) | obstruction | the unavoidable all-erasure residue cannot meet a valuation-one pole at emitted widths | audited | active |
 | [`MM-S10`](#mm-s10-swapped-target-suffix-sieve) | structure theorem | pole compatibility fixes `β+2` lower digits and excludes the residue `Δ=ρ−1` | audited | active |
+| [`R32-S01`](#r32-s01-split-return-normal-form) | structure theorem | rank-two cuts reduce one-unit binary mortality to a `2 × 2` return recurrence | formalized | graduated |
+| [`R32-S02`](#r32-s02-two-plane-edge-square) | structure theorem | two rank-two generators are a two-vertex square of `2 × 2` edges | formalized | graduated |
+| [`R32-O01`](#r32-o01-rank-one-profile-collapse) | obstruction | a rank-one generator reduces mortality to order-at-most-three scalar recurrence zeros | audited | stock |
+| [`R32-S03`](#r32-s03-returnsquare-normal-form) | structure theorem | ReturnSquare mortality is an exact scalar bridge over positive returns | formalized | active |
+| [`R32-O02`](#r32-o02-two-return-square-cage) | obstruction | no two positive ReturnSquare returns can vanish | formalized | graduated |
+| [`R32-O03`](#r32-o03-reversible-stack-state-tax) | obstruction | literal reversible binary-stack returns require at least four exact states | formalized | graduated |
+| [`R32-O04`](#r32-o04-quadratic-pencil-verification-collapse) | obstruction | three simple modes cannot reversibly verify squaring | formalized | graduated |
+| [`R32-D01`](#r32-d01-returnsquare-immortality-walls) | decidable stratum | nonnegative parameters and a uniform outer negative half-line are immortal | formalized | stock |
+| [`R32-M01`](#r32-m01-generic-reverse-edge-compiler) | partial mechanism | projective incidence generically embeds into a compatible two-plane edge square | audited | active |
+| [`R32-M02`](#r32-m02-finite-quotient-sieve) | partial mechanism | finite monoid quotients give complete modular no-certificates for fixed candidates | formalized | active |
 | [`M4-C01`](#m4-c01-two-state-pushout-compiler) | compiler | binary deterministic two-state scalar control compiles to three `4 × 4` matrices | formalized | graduated |
 | [`M4-O01`](#m4-o01-exact-toggle-fusion-leaves-an-immortal-core) | obstruction | exact local toggle fusion preserves a nonzero common anchor | formalized | graduated |
 | [`M4-O02`](#m4-o02-two-private-state-phase-signature) | obstruction | two private quotient states cannot isolate one exceptional cyclic phase | formalized | graduated |
@@ -1571,6 +1582,316 @@ Neary discrepancy.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+## Rank-Three Binary Frontier
+
+### R32-S01: Split return normal form
+
+**Kind:** structure theorem
+**Evidence:** formalized
+**Disposition:** graduated
+
+Let `A` be a unit and let `B=UV`, where `U` and `V` have explicit left and right inverses.
+Every binary word containing `B` fractures into powers of `A` between copies of `B`, and
+
+```text
+B A^n₁ B ⋯ A^nₖ B = U (VA^n₁U) ⋯ (VA^nₖU) V.
+```
+
+Therefore `{A,B}` is mortal exactly when a finite product of return matrices `VAⁿU` is zero.
+The converse covers every physical word, including empty runs and exterior powers of `A`.
+The statement is dimension-free and valid over every nontrivial commutative semiring with the
+displayed splittings.
+
+**Scope:** a rank-two `3 × 3` cut over a field satisfies the splitting hypotheses after choosing
+bases for its image and coimage. The theorem does not decide the resulting infinite return
+family.
+
+**Artifact:** `ReturnFamily.pairGenerator_isMortal_iff`,
+`blockedProduct_eq_zero_iff`, and `returnHankel_card_le` in
+[`ReturnFamily.lean`](MatrixMortality/ReturnFamily.lean).
+
+**Use:** this is the canonical rank-`(3,2)` normal form. New attacks should modify or classify
+the third-order return recurrence `VAⁿU`, not parse binary words again.
+
+### R32-S02: Two-plane edge square
+
+**Kind:** structure theorem
+**Evidence:** formalized
+**Disposition:** graduated
+
+For split finite-rank generators `Aᵢ=UᵢVᵢ`, every nonempty word is zero exactly when the
+corresponding adjacent-edge product is zero:
+
+```text
+Cᵢⱼ = VᵢUⱼ,       Aᵢ₁⋯Aᵢₙ=0  ↔  Cᵢ₁ᵢ₂⋯Cᵢₙ₋₁ᵢₙ=0.
+```
+
+Conversely, four `2 × 2` edges indexed by two vertices assemble into two `3 × 3` generators
+whenever the two edges entering each target agree on one shared source line. If one incoming
+edge per target is split, both ambient generators have rank exactly two and their mortality is
+the constrained edge-path problem.
+
+**Scope:** this is an exact graph reduction and realization theorem. It does not erase the
+two-vertex path constraint or prove that every resulting constrained projective problem is
+equivalent to unconstrained `M₂(3)`.
+
+**Artifact:** `EdgeCompression.isMortal_iff_exists_edgeProduct_eq_zero`,
+`TwoPlaneEdges.output_mul_input`, `TwoPlaneEdges.generator_rank`, and
+`TwoPlaneEdges.isMortal_iff_exists_edgeProduct_eq_zero` in
+[`EdgeCompression.lean`](MatrixMortality/EdgeCompression.lean) and
+[`TwoPlaneEdges.lean`](MatrixMortality/TwoPlaneEdges.lean).
+
+**Use:** analyze rank-`(2,2)` pairs as a two-node graph of invertible and rank-one Möbius edges.
+Do not attribute an independent controller bit to the two planes.
+
+### R32-O01: Rank-one profile collapse
+
+**Kind:** obstruction
+**Evidence:** audited
+**Disposition:** stock
+
+If one binary generator is invertible and the other has rank one, the split-return theorem
+reduces mortality to one scalar return
+
+```text
+vAⁿu = 0.
+```
+
+Cayley–Hamilton makes this an algebraic linear recurrence of order at most three. Skolem
+decidability through order four therefore decides the profile. If both generators have rank
+one, one-dimensional edge compression reduces mortality to finitely many adjacent scalar
+tests.
+
+**Scope:** the unit/rank-one return algebra is Lean-checked. The case of a second singular
+generator and the decision theorem are independently audited; the latter is imported from
+[Bacik](references/bacik-2025-order-four-skolem.md). This record does not supply a Lean
+implementation of the Skolem algorithm.
+
+**Artifact:** `ReturnFamily.rankOnePair_isMortal_iff` and
+`ReturnFamily.wordProduct_unitSquare_eq_zero_iff` in
+[`ReturnFamily.lean`](MatrixMortality/ReturnFamily.lean).
+
+**Use:** remove every rank-one binary profile from the undecidability search. The only
+structurally new profile is one unit and one rank-two matrix.
+
+### R32-S03: ReturnSquare normal form
+
+**Kind:** structure theorem
+**Evidence:** formalized
+**Disposition:** active
+
+ReturnSquare takes
+
+```text
+A=diag(1,q,q²),       B=UV,
+VAⁿU = T_c(qⁿ) =
+  [(c+1)q²ⁿ−1   qⁿ]
+  [c              qⁿ].
+```
+
+For integer `q≥2` and `c≠−1`, `A` is a unit and `B` has rank two. The zero-wait return
+`T_c(1)=[1,1]ᵀ[c,1]` is an internal rank-one separator; every positive-wait return is a unit.
+Physical mortality is therefore equivalent to one scalar bridge
+
+```text
+[c,1] T_c(q^n₁)⋯T_c(q^nₖ) [1,1]ᵀ = 0,       nᵢ≥1.
+```
+
+The projective action, squaring rail, target strip, reachable determinant, observable
+determinant, exceptional parameter `c=−1`, and arbitrary-word converse are exact Lean
+theorems.
+
+**Scope:** ReturnSquare is a candidate family, not an undecidability reduction. Its parameter is
+a fixed rational input, not writable storage.
+
+**Artifact:** `ReturnSquare.physical_isMortal_iff_positiveBridge`,
+`physical_isMortal_iff_oneReturn_or_longBridge`, `cut_rank`, and the projective identities in
+[`ReturnSquare.lean`](MatrixMortality/ReturnSquare.lean).
+
+**Use:** test arithmetic walls and same-zero modifications on a fully normalized rank-`(3,2)`
+laboratory without reopening the physical-word grammar.
+
+**Continuation:** [#12](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/12).
+
+### R32-O02: Two-return square cage
+
+**Kind:** obstruction
+**Evidence:** formalized
+**Disposition:** graduated
+
+The scalar coefficient of two positive returns factors through a quadratic in `c`. For integral
+return scales `x,y≥2`, its discriminant lies strictly between `N²` and `(N+2)²`; parity excludes
+the middle square. Hence the quadratic has no rational root. Every nonresonant ReturnSquare zero
+contains at least three positive returns.
+
+**Scope:** this excludes two-return bridges only. One-return resonances
+`c=−q^−n` are genuine zeros, and words of length at least three remain the live residue.
+
+**Artifact:** `ReturnSquare.twoReturnDiscriminant_not_isSquare`,
+`twoReturnCore_ne_zero`, `positiveBridge_pair_ne_zero`, and
+`positiveBridge_zero_shape` in [`ReturnSquare.lean`](MatrixMortality/ReturnSquare.lean).
+
+**Use:** any proposed kill must first exhibit a genuinely three-return mechanism or change the
+return pencil.
+
+### R32-O03: Reversible stack state tax
+
+**Kind:** obstruction
+**Evidence:** formalized
+**Disposition:** graduated
+
+The literal reversible projective operation exchanging `t` with `κt²` has return matrix
+
+```text
+[1−κt   −t]
+[−κ    κt−1].
+```
+
+Its two-time block Hankel determinant is `κ²(q−1)⁴`. For `κ≠0` and `q≠1`, every exact return
+realization therefore needs at least four ambient states.
+
+**Scope:** this is an exact-series lower bound for the displayed reversible push/pop operation.
+It does not exclude a different three-state series with the same zero behavior.
+
+**Artifact:** `ReturnSquareTax.finiteReturnHankel_det` and
+`reversibleStack_card_lower_bound` in
+[`ReturnSquareTax.lean`](MatrixMortality/ReturnSquareTax.lean).
+
+**Use:** do not add a literal reversible stack to ReturnSquare. A viable storage mechanism must
+change nonzero values, use arithmetic residue, or abandon this two-mode return operation.
+
+### R32-O04: Quadratic-pencil verification collapse
+
+**Kind:** obstruction
+**Evidence:** formalized
+**Disposition:** graduated
+
+Let
+
+```text
+K(t)=C₀+tC₁+t²C₂.
+```
+
+Two complementary rigidity theorems hold over every linear ordered field.
+
+1. If every `Cᵢ` is singular and `K(t)` projectively exchanges `t` with `κt²` for every `t`,
+   where `κ≠0`, then all three coefficient matrices vanish.
+2. If `K(t)` sends `t` to `t²` while `K(qt)` sends `t` to `qt²` for every `t`, where
+   `q∉{0,1}`, then
+
+   ```text
+   K(t)=h(t) diag(t,1)
+   ```
+
+   for one scalar linear polynomial `h`. Projectively this is blind scaling `z↦tz` on every
+   input, not an equality test.
+
+**Scope:** these are exact projective identities for quadratic pencils. The first theorem
+models a diagonal three-state realization whose three spectral coefficients each have rank at
+most one. Neither theorem excludes a same-zero pencil, a nonsplit cubic action, or verification
+restricted to a sparse set rather than a polynomial identity.
+
+**Artifact:** `ReturnSquareNoGo.threeMode_swap_eq_zero` and
+`verifiedPush_eq_blindScale` in
+[`ReturnSquareNoGo.lean`](MatrixMortality/ReturnSquareNoGo.lean).
+
+**Use:** abandon reversible stack completion inside the split `1,t,t²` architecture. A surviving
+return pencil must use an irreducible ambient action, arithmetic carries, or changed nonzero
+behavior.
+
+### R32-D01: ReturnSquare immortality walls
+
+**Kind:** decidable stratum
+**Evidence:** formalized
+**Disposition:** stock
+
+ReturnSquare is immortal in two large parameter regions:
+
+```text
+c ≥ 0,
+c = −d  with  d > 1 + (q−1)/q².
+```
+
+The second wall is projective. Put
+
+```text
+s_d(t)=(d−1)t²+1,       β_d(q)=q/s_d(q).
+```
+
+The double cone representing slopes `(0,β_d(q)]` is backward invariant under every positive
+return with scale `t≥q`. Pulling a zero bridge through its first return places the residual
+vector in that cone; repeated backward invariance would place `[1,1]` there, contradicting
+`β_d(q)<1`. The homogeneous proof is sign-invariant and never divides by a projective
+denominator.
+
+**Scope:** the middle negative strip remains open apart from the classified one-return
+resonances and the two-return obstruction. The inequality is a sufficient uniform wall, not a
+claimed optimal boundary.
+
+**Artifact:** `ReturnSquare.not_physical_isMortal_of_nonneg`,
+`negativeStep_preimage_trap`, `transfer_neg_preimage_signedTrap`, and
+`not_physical_isMortal_of_beyond_negative_wall` in
+[`ReturnSquare.lean`](MatrixMortality/ReturnSquare.lean) and
+[`ReturnSquareDynamics.lean`](MatrixMortality/ReturnSquareDynamics.lean).
+
+**Use:** remove broad sign regions from searches and reuse the signed-cone pullback pattern for
+other rank-two return pencils.
+
+### R32-M01: Generic reverse edge compiler
+
+**Kind:** partial mechanism
+**Evidence:** audited
+**Disposition:** active
+
+For a projective-incidence instance `G,H∈GL₂(ℚ)`, row `ℓ`, and column `c`, put
+
+```text
+α=ℓH⁻¹c,       β=ℓH⁻¹GH⁻¹c.
+```
+
+When `αβ≠0`, a rank-one loop `P`, two cross-edges, and one invertible loop can be chosen so that
+successive visits to `P` test exactly `ℓWc=0` for `W∈{G,H}*`. The four edges satisfy the
+one-line compatibility needed by [`R32-S02`](#r32-s02-two-plane-edge-square), hence assemble
+into two rank-two `3 × 3` matrices.
+
+**Scope:** the generic bridge calculation has been independently audited, and the compatible
+two-plane realization is formalized. The basis adaptation, all-path language theorem, and the
+claimed finite Turing reduction through the two degenerate projective points are not yet Lean
+theorems. This record does not assert a many-one equivalence between the full rank-`(2,2)`
+profile and `M₂(3)`.
+
+**Use:** the rank-`(2,2)` stratum already contains the dimension-two projective hard core. Finish
+the generic compiler before searching that stratum for additional storage.
+
+**Next:** formalize the adapted bases and singular-loop path normal form; then either replace the
+finite Turing reduction by one computable emitted instance or state its exact oracle strength.
+Tracked in
+[#11](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/11).
+
+### R32-M02: Finite-quotient sieve
+
+**Kind:** partial mechanism
+**Evidence:** formalized
+**Disposition:** active
+
+Every zero-preserving monoid homomorphism sends mortal families to mortal families. Therefore
+one finite quotient in which the image family is immortal is a complete no-certificate for the
+original family. This includes reduction of integral candidates modulo primes and finite
+projective-state quotients.
+
+**Scope:** the theorem is one-sided. Survival modulo every tested modulus is evidence only and
+does not imply rational mortality. No local-global completeness theorem is claimed.
+
+**Artifact:** `MatrixMortality.isMortal_map` and
+`not_isMortal_of_map_not_isMortal` in
+[`MatrixSemigroup.lean`](MatrixMortality/MatrixSemigroup.lean).
+
+**Use:** use exact finite quotients to kill candidate return pencils before symbolic work, and
+record any persistent residue automata as conjectural invariants rather than proofs.
+
+**Next:** build a typed finite-quotient census for irreducible cubic and two-prime return
+families; promote only invariants that admit an unbounded lifting theorem.
 
 ## Three-Generator Four-State Frontier
 

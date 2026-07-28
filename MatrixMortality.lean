@@ -8,6 +8,13 @@ import MatrixMortality.BoundaryTax
 
 /- Finite-rank repair. -/
 import MatrixMortality.InternalSandwich
+import MatrixMortality.ReturnFamily
+import MatrixMortality.EdgeCompression
+import MatrixMortality.TwoPlaneEdges
+import MatrixMortality.ReturnSquare
+import MatrixMortality.ReturnSquareDynamics
+import MatrixMortality.ReturnSquareNoGo
+import MatrixMortality.ReturnSquareTax
 
 /- Finite-controller amalgamation. -/
 import MatrixMortality.ControllerPushout

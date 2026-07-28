@@ -277,3 +277,35 @@
 'MatrixMortality.Undecidability.UniversalNeary.mortality102_not_computable' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.not_isMortal_of_map_not_isMortal' depends on axioms: [propext]
+'MatrixMortality.ReturnFamily.finiteReturnHankel_factor' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ReturnFamily.returnHankel_card_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ReturnFamily.pairGenerator_isMortal_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.EdgeCompression.isMortal_iff_exists_edgeProduct_eq_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TwoPlaneEdges.output_mul_input' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.TwoPlaneEdges.generator_rank' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.TwoPlaneEdges.isMortal_iff_exists_edgeProduct_eq_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnSquare.twoReturnDiscriminant_not_isSquare' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnSquare.positiveBridge_pair_ne_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ReturnSquare.positiveBridge_zero_shape' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ReturnSquare.physical_isMortal_iff_positiveBridge' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnSquare.not_physical_isMortal_of_nonneg' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnSquare.not_physical_isMortal_of_beyond_negative_wall' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnSquareTax.finiteReturnHankel_det' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ReturnSquareTax.reversibleStack_card_lower_bound' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnSquareNoGo.threeMode_swap_eq_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ReturnSquareNoGo.verifiedPush_eq_blindScale' depends on axioms: [propext, Classical.choice, Quot.sound]
