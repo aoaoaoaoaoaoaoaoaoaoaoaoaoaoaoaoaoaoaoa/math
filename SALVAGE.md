@@ -85,6 +85,11 @@ file owns the mathematical stock.
 | [`R32-M01`](#r32-m01-generic-reverse-edge-compiler) | partial mechanism | projective incidence generically embeds into a compatible two-plane edge square | formalized | active |
 | [`R32-M02`](#r32-m02-finite-quotient-sieve) | partial mechanism | finite monoid quotients give complete modular no-certificates for fixed candidates | formalized | active |
 | [`R32-M03`](#r32-m03-two-scale-return-conversion) | partial mechanism | a minimal two-scale return pencil has nonresonant multi-return zeros | formalized | active |
+| [`R32-M04`](#r32-m04-amalgamated-valuation-guard) | partial mechanism | one three-mode return family combines punctuation, wait verification, and a permanent trap | formalized | active |
+| [`R32-S04`](#r32-s04-guarded-return-normal-form) | structure theorem | physical mortality is deterministic reachability for the ready-tail recurrence | formalized | active |
+| [`R32-S05`](#r32-s05-prefix-shift-and-affine-residual) | structure theorem | each legal step decodes one p-adic prefix and updates the reciprocal residual affinely | formalized | active |
+| [`R32-S06`](#r32-s06-resonance-localization) | structure theorem | every nonresonant continuation descends and every infinite ready chain resonates arbitrarily late | formalized | active |
+| [`R32-O06`](#r32-o06-rational-affine-wait-rail-rigidity) | obstruction | no reduced rational chart supports a nontrivial affine wait rail at infinitely many prime powers | formalized | graduated |
 | [`M4-C01`](#m4-c01-two-state-pushout-compiler) | compiler | binary deterministic two-state scalar control compiles to three `4 × 4` matrices | formalized | graduated |
 | [`M4-O01`](#m4-o01-exact-toggle-fusion-leaves-an-immortal-core) | obstruction | exact local toggle fusion preserves a nonzero common anchor | formalized | graduated |
 | [`M4-O02`](#m4-o02-two-private-state-phase-signature) | obstruction | two private quotient states cannot isolate one exceptional cyclic phase | formalized | graduated |
@@ -2141,6 +2146,156 @@ three-state minimality no longer belong to the open obligation.
 
 **Next:** either reduce a universal deterministic computation to `GuardedReachable`, or find a
 finite-height, p-adic contraction, or continued-fraction invariant deciding it.
+
+### R32-S05: Prefix shift and affine residual
+
+**Kind:** structural normal form
+**Evidence:** formalized
+**Disposition:** active
+
+In the shifted projective coordinate
+
+```text
+x=z/(z−1),
+```
+
+one legal guard step factors into a variable-length affine prefix decoder and one fixed
+fractional-linear map:
+
+```text
+Dₐ(x) = (pᵃ+(1−pᵃ)x)/pˢᵃ,
+K(w)  = (αw+δ)/((α−1)w+δ),
+x'    = K(Dₐ(x)).
+```
+
+Readiness is exactly the assertion that `Dₐ(x)` is a p-adic unit. Parameterizing one branch by
+
+```text
+Φₐ(v)=(pˢᵃv−δ)/(α−pᵃ)
+```
+
+turns the reciprocal residual update into
+
+```text
+1/Rₐ(Φₐ(v))
+  = [δ(1−pᵃ)/(α−pᵃ)] · 1/v
+    + [(α−1)pˢᵃ/(α−pᵃ)].
+```
+
+The Lean statements retain every required denominator hypothesis. The shift identity itself
+uses total rational division at a terminal output; it is interpreted projectively only away
+from the input target and pole.
+
+**Scope:** affine residual transport can propagate unbounded carries, but it does not provide a
+finite-token compiler or a decision procedure.
+
+**Artifact:** `ReturnGuard.shift_step`, `ready_iff_prefixDecode_isUnit`,
+`residualStep_branchCylinder`, and `reciprocalResidual_affine` in
+[`ReturnGuardShift.lean`](MatrixMortality/ReturnGuardShift.lean).
+
+**Use:** work on the arithmetic residue as a prefix/carry transducer. Any proposed finite-token
+simulation must still evade the closed-substitution collapse.
+
+**Next:** classify the iterated affine residuals on the resonant cylinders isolated by
+[`R32-S06`](#r32-s06-resonance-localization).
+
+### R32-S06: Resonance localization
+
+**Kind:** structural normal form
+**Evidence:** formalized
+**Disposition:** active
+
+Let `u=α/δ`, and write a unit tail at exact depth `n` as
+
+```text
+X=u+pⁿY,                  vₚ(Y)=0.
+```
+
+For a current wait `a`, the three summands of the legal output have valuations `a`, `sa`, and
+`n`. Lean proves the complete trichotomy:
+
+```text
+n<a  ⇒ every ready continuation has next wait n<a;
+n>a  ⇒ the output is not ready, and every further positive step lies in the trap;
+n=a  ⇒ the sole branch on which the wait can be preserved or increased.
+```
+
+The exact center `X=u` also admits no ready continuation. Consequently every infinite ready
+chain meets the equal-depth resonance shell arbitrarily far along the chain; otherwise its
+positive waits would descend forever in `ℕ`.
+
+At resonance the output factors as `pᵃ C`. If `C=pʰU` with `U` a unit, readiness at the next
+wait `a+h` is equivalent to
+
+```text
+vₚ(U−1)=(s−1)(a+h).
+```
+
+This corrects the reported depth `(s−1)a+sh`, which was too large by `h`.
+
+**Scope:** resonance localization does not classify the resonant itinerary. It proves that all
+nondecreasing or infinite behavior is confined to the nested equal-depth shell.
+
+**Artifact:** `ReturnGuard.nonresonant_nextWait_lt`,
+`infinite_ready_chain_resonates`, `primePower_mul_ready_iff`, and
+`resonance_ready_iff` in
+[`ReturnGuardResonance.lean`](MatrixMortality/ReturnGuardResonance.lean).
+
+**Use:** discard generic unit tails. Universality or decidability must be proved inside the
+iterated resonance carry.
+
+**Next:** seek an effective nucleus or nonperiodic rational itinerary for the nested normalized
+residual.
+
+### R32-O06: Rational affine-wait rail rigidity
+
+**Kind:** obstruction
+**Evidence:** formalized
+**Disposition:** graduated
+
+Let a reduced rational chart be `f=P/Q`, with `P,Q∈ℚ[X]`, `P(0)≠0`, and let the proposed wait
+update be
+
+```text
+a ↦ da+h,                 t=pᵃ ↦ λtᵈ,   λ=pʰ.
+```
+
+If the guarded rail equation holds at infinitely many defined prime-power samples, clearing
+denominators gives one polynomial identity. The formal proof extracts the stronger divisibility
+
+```text
+P(λXᵈ) ∣ Q(X).
+```
+
+Degree comparison first forces `d=1` and `deg P=deg Q`. Constant and leading coefficients then
+force
+
+```text
+α=λ^(s+deg P).
+```
+
+Since `α` is a p-adic unit, this contradicts `vₚ(λ)≠0`. Thus no rational ready-tail chart can
+implement a nontrivial affine change of wait on infinitely many configurations. The intermediate
+degree theorem already excludes every `d>1` for any nonzero `λ`.
+
+This proof is shorter and stronger than the reported algebraic-closure root count: reducedness
+and polynomial divisibility suffice.
+
+**Scope:** the theorem concerns one reduced rational chart. A finite-control cycle is excluded
+only after its charts are shown to compose to this rail equation; that compiler-level corollary
+is not represented as a Lean type. Identity-wait charts and genuinely nonrational nested
+resonance remain possible.
+
+**Artifact:** `ReturnGuard.Rail.scalePower_numerator_dvd_denominator`,
+`identity_forces_linear_center`, `no_rational_affineWait_rail`, and
+`no_infinite_primePower_affineWait_rail` in
+[`ReturnGuardRail.lean`](MatrixMortality/ReturnGuardRail.lean).
+
+**Use:** abandon rational monomial counter rails, rational increment/decrement gauges, and
+rational affine counter cycles. The live construction must use the nested resonance itself.
+
+**Next:** decide whether rational resonant itineraries have an effective eventual-periodicity
+theorem, or construct a rational nonperiodic resonance stack.
 
 ## Three-Generator Four-State Frontier
 

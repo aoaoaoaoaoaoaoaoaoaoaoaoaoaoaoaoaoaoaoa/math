@@ -13,7 +13,7 @@ formalization. The checked theorem is stronger and cleaner than the reported ver
 - mortality is equivalent to one deterministic transitive-closure reachability problem.
 
 No `M₃(2)` undecidability or decidability theorem follows. The remaining obligation is entirely
-the arithmetic reachability of the guarded tail recurrence.
+the arithmetic reachability of its nested equal-depth resonance.
 
 ## Checked Algebra
 
@@ -94,6 +94,83 @@ that reaches one.
 This establishes local symbolic completeness, not universality: one rational tail must satisfy
 the whole itinerary.
 
+## Checked Shift Factorization
+
+In the coordinate `x=z/(z−1)`, Lean verifies
+
+```text
+Dₐ(x) = (pᵃ+(1−pᵃ)x)/pˢᵃ,
+K(w)  = (αw+δ)/((α−1)w+δ),
+x'    = K(Dₐ(x)).
+```
+
+The theorem retains the input target and pole exclusions. Rational division is total, so the
+algebraic equality also survives a terminal output; no affine-chart assertion is made there.
+Readiness is equivalent to `Dₐ(x)` being a p-adic unit.
+
+On the branch cylinder
+
+```text
+Φₐ(v)=(pˢᵃv−δ)/(α−pᵃ),
+```
+
+the reciprocal residual obeys the exact affine law
+
+```text
+1/Rₐ(Φₐ(v))
+  = [δ(1−pᵃ)/(α−pᵃ)]/v
+    + [(α−1)pˢᵃ/(α−pᵃ)].
+```
+
+Every denominator used in the affine interpretation is explicit in the theorem hypotheses.
+
+## Checked Resonance Localization
+
+Let `u=α/δ` and write a unit tail as `X=u+pⁿY`, with `Y` a unit. The three terms of the legal
+output have valuations `a`, `sa`, and `n`. Lean proves:
+
+```text
+n<a  ⇒ any next ready wait equals n;
+n>a  ⇒ the output is not ready and every subsequent positive step is trapped;
+n=a  ⇒ the only possible nondecreasing branch.
+```
+
+The exact center `X=u` cannot produce a ready state. Hence every infinite ready chain resonates
+at depth `a` arbitrarily far along the chain.
+
+Formalization found one error in the report. If the resonant output is
+`p^(a+h)U`, with `U` a unit, readiness at wait `a+h` requires
+
+```text
+vₚ(U−1)=(s−1)(a+h),
+```
+
+not `(s−1)a+sh`. The reported value exceeds the correct depth by `h`.
+
+## Checked Rational-Rail Obstruction
+
+For a reduced rational chart `f=P/Q`, an affine wait update
+`a↦da+h` becomes `t↦λtᵈ`, with `λ=pʰ`. Infinitely many defined rail samples imply a polynomial
+identity. Rather than formalizing the report's algebraic-closure divisor count, the Lean proof
+extracts
+
+```text
+P(λXᵈ) ∣ Q(X).
+```
+
+Degree comparison forces `d=1` and `deg P=deg Q`. Constant and leading coefficients then force
+
+```text
+α=λ^(s+deg P).
+```
+
+This contradicts `vₚ(α)=0` when `vₚ(λ)≠0`. The formal theorem is stated both for an arbitrary
+infinite set of defined rational samples and for infinitely many prime-power samples.
+
+The result excludes one reduced rational chart. The suggested finite-control corollary still
+requires a typed theorem that a control cycle composes to the same rail equation; that
+compiler-level statement was not promoted.
+
 ## Arbitrary-Word Converse
 
 Positive-return labels are indexed from zero but act with waits `n=index+1`. Matrix products act
@@ -139,8 +216,9 @@ At `p=5`, `s=2`, `ρ=5/6`, and `α=2`, the ready reset is a checked nonterminal 
 The sole live constructive question is reachability for the deterministic legal-tail map. A
 future proof must either:
 
-1. compile a universal deterministic computation into its rational tail itinerary; or
-2. derive a global p-adic, height, continued-fraction, or finite-nucleus invariant deciding it.
+1. construct a rational nonperiodic computation inside the nested equal-depth resonance; or
+2. prove rational resonance itineraries effectively eventually periodic or otherwise decidable.
 
 The matrix dimension, generator count, punctuation, rank profile, malformed words, illegal
-waits, and arbitrary-product converse are no longer open in this architecture.
+waits, arbitrary-product converse, generic nonresonant dynamics, and rational affine counter
+rails are no longer open in this architecture.

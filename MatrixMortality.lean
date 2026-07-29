@@ -23,6 +23,9 @@ import MatrixMortality.ProjectiveLine
 import MatrixMortality.PadicValuation
 import MatrixMortality.ReturnGuard
 import MatrixMortality.ReturnGuardDynamics
+import MatrixMortality.ReturnGuardShift
+import MatrixMortality.ReturnGuardResonance
+import MatrixMortality.ReturnGuardRail
 import MatrixMortality.ReturnGuardExamples
 
 /- Finite-controller amalgamation. -/

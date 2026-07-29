@@ -243,10 +243,33 @@ physical mortality ↔ positive-return orbit reaches 1 ↔ TransGen LegalStep ρ
 The exact return series still needs three states. Concrete checked examples include the
 denominator-cleared identity `B²AB²=0` and a ready nonterminal fixed point.
 
+Lean now factors the deterministic orbit further. In the coordinate `x=z/(z−1)`, a nonterminal
+non-pole step is a variable-length p-adic prefix decoder followed by one fixed
+fractional-linear formula. Readiness is exactly unit membership of the decoded prefix, and the
+reciprocal residual on each branch updates affinely.
+
+The resonance analysis is exact. If the unit tail differs from `α/(ρ−α)` at depth `n`, then
+`n<a` forces the next ready wait to be `n`, while `n>a` destroys readiness and poisons every
+subsequent positive step. The exact center has no ready continuation. Every infinite ready
+chain therefore resonates at depth `a` arbitrarily far along the chain. After a resonant output
+factors as `p^(a+h)U`, the correct nested readiness depth is
+
+```text
+vₚ(U−1)=(s−1)(a+h).
+```
+
+The reported expression `(s−1)a+sh` was too large by `h`.
+
+Finally, reduced rational ready-tail rails with affine wait update are excluded. An infinite
+set of defined samples forces a polynomial identity; reducedness then gives
+`P(λXᵈ)∣Q(X)`. Degree, constant-coefficient, and leading-coefficient comparisons force
+`d=1` and `α=λ^(s+deg P)`, contradicting the unit valuation of `α` whenever
+`vₚ(λ)≠0`. The intermediate degree theorem excludes `d>1` for every nonzero `λ`.
+
 These are structural and decidable-stratum theorems, not an `M₃(2)` resolution. The imported
 order-four Skolem theorem used to classify rank-one profiles is not reimplemented in Lean. The
 generic reverse edge compiler still assumes `αβ≠0`, and no universality or decision theorem is
-known for the deterministic guarded orbit. Their boundary is recorded in
+known for the nested rational resonance itinerary. Their boundary is recorded in
 [`audits/m32-rank-return-2026-07-28.md`](audits/m32-rank-return-2026-07-28.md) and scheduled in
 [#11](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/11) and
 [#12](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/12).
@@ -374,6 +397,9 @@ with a complete arbitrary-word converse.
 | `PadicValuation.lean` | nonzero rational p-adic shells and exact unequal-valuation calculus |
 | `ReturnGuard.lean` | three-mode amalgamated return algebra, split mortality compiler, and exact state lower bound |
 | `ReturnGuardDynamics.lean` | permanent trap, ready-tail grammar, and deterministic physical mortality equivalence |
+| `ReturnGuardShift.lean` | shifted prefix decoder and affine reciprocal-residual transport |
+| `ReturnGuardResonance.lean` | nonresonant descent, resonance localization, and corrected nested readiness |
+| `ReturnGuardRail.lean` | polynomial divisibility and rational affine-wait rail obstruction |
 | `ReturnGuardExamples.lean` | concrete mortal integer pair and ready nonterminal fixed point |
 | `BinaryDefect.lean` | binary two-word defect theorem and exact Neary macro obstruction |
 | `CHHNPacking.lean` | generic two-slot CHHN packing and six-state finite-Hankel kernels |
@@ -475,6 +501,10 @@ with a complete arbitrary-word converse.
 | The amalgamated guard rejects every illegal wait permanently | `ReturnGuard.trap_forward`, `ReturnGuard.live_step_forces_ready` |
 | Three-state physical mortality is exactly deterministic guarded reachability | `ReturnGuard.physical_isMortal_iff_guardedReachable` |
 | Ready cylinders have unit tails and a complete inverse transition grammar | `ReturnGuard.readyState_ready`, `ReturnGuard.ready_transition` |
+| Guard steps factor through a p-adic prefix decoder and affine reciprocal residual | `ReturnGuard.shift_step`, `ReturnGuard.ready_iff_prefixDecode_isUnit`, `ReturnGuard.reciprocalResidual_affine` |
+| Every nonresonant continuation descends and every infinite ready chain resonates arbitrarily late | `ReturnGuard.nonresonant_nextWait_lt`, `ReturnGuard.infinite_ready_chain_resonates` |
+| Resonant nesting has normalized depth `(s−1)(a+h)` | `ReturnGuard.resonance_ready_iff` |
+| No reduced rational chart realizes a nontrivial affine wait rail at infinitely many prime powers | `ReturnGuard.Rail.no_infinite_primePower_affineWait_rail` |
 | The guarded return series intrinsically needs three states | `ReturnGuard.parameters_three_le_card_of_exact_realization` |
 | Rule and erasure matrices agree on the upper-side plane | `rule_erase_agree_on_upperSide` |
 | Every finite-controller letter routes its selected private channel exactly | `controllerMatrix_mulVec_controllerVector` |

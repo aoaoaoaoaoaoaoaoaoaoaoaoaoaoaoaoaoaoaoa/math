@@ -620,17 +620,33 @@ The checked guarded normal form
 [`R32-S04`](SALVAGE.md#r32-s04-guarded-return-normal-form) proves that arbitrary physical
 mortality is exactly deterministic target reachability for one rational p-adic orbit.
 
+That orbit is now localized further. In the shifted coordinate, each step is a variable-length
+p-adic prefix decoder followed by one fixed fractional-linear map; on a branch, the reciprocal
+residual updates affinely. This is
+[`R32-S05`](SALVAGE.md#r32-s05-prefix-shift-and-affine-residual).
+More decisively, [`R32-S06`](SALVAGE.md#r32-s06-resonance-localization) proves that every
+nonresonant ready continuation strictly decreases the positive wait, while an overdeep tail is
+poisoned. Every infinite ready chain therefore enters the equal-depth resonance shell
+arbitrarily late.
+
+The obvious rational-counter route is closed. By
+[`R32-O06`](SALVAGE.md#r32-o06-rational-affine-wait-rail-rigidity), a reduced rational chart
+cannot realize `a↦da+h` at infinitely many prime-power configurations unless the wait update is
+the identity. The proof forces `P(λXᵈ)∣Q(X)`, then `d=1`, equal degrees, and finally a p-adic
+contradiction for every nonzero shift `h`.
+
 The surviving obligation is therefore a source theorem, or its negation: prove that this
-guarded orbit can simulate universal deterministic computation, or decide its reachability by a
-global arithmetic invariant. No further punctuation, malformed-word, or independently selected
-wait problem remains in this architecture.
+guarded orbit can simulate universal deterministic computation inside its infinitely nested
+equal-depth resonance, or decide those rational resonance itineraries by a global arithmetic
+invariant. No further punctuation, malformed-word, independently selected wait, or rational
+affine-counter problem remains in this architecture.
 
 ### Live attacks
 
 | Lane | Required move | Present obstruction |
 | --- | --- | --- |
-| Amalgamated valuation guard | Compile a universal deterministic source into its ready-tail recurrence, or decide that recurrence | Matrix mortality is already equivalent to one deterministic orbit; universality versus hidden arithmetic tameness is unresolved |
-| Guarded tail arithmetic | Control the affine unit-tail update across unbounded ready cylinders | Every local cylinder transition has an inverse branch, but one rational tail must satisfy the entire itinerary |
+| Resonance arithmetic | Prove effective eventual periodicity of rational resonance itineraries, or construct a rational nonperiodic resonance stack | Every nonresonant continuation descends; rational affine-wait rails are impossible; the normalized carry nests at unbounded depth |
+| Amalgamated valuation guard | Compile a universal deterministic source into the resonant tail recurrence, or decide that recurrence | Matrix mortality is already equivalent to one deterministic orbit, but its remaining arithmetic is not covered by known p-adic dynamics |
 | Irreducible cubic return pencil | Replace the split spectrum by a cubic companion action whose `2 × 2` return sequence has no fixed rail or target strip | A candidate still needs an internal low-rank return and an exact arbitrary-word normal form |
 | Multi-prime ReturnSquare | Extend the rational-root support and finite walls from prime powers to bases with several prime factors | Mixed prime support permits roots not confined to one valuation ray |
 | Local-global sieve | Find a finite quotient that separates every no-instance, or a finite invariant nucleus that lifts to characteristic zero | [`R32-M02`](SALVAGE.md#r32-m02-finite-quotient-sieve) is one-sided; survival modulo all tested primes proves nothing |
@@ -638,11 +654,11 @@ wait problem remains in this architecture.
 | Same-zero return surgery | Change nonzero return values while preserving the zero semigroup, thereby evading exact Hankel taxes | No general same-zero minimization theorem exists; every surgery needs its own arbitrary-product converse |
 | Exceptional reverse compiler | Absorb the finite `αβ=0` disjunction into one three-dimensional many-one instance | The generic all-path compiler is complete; dimension three has no evident OR operation |
 
-The highest-value lunge is now the guarded deterministic map itself. The matrix compiler has
-crossed the algebraic fences that killed ReturnSquare and the Jordan branch, and formalization
-has discharged its all-word converse. The next useful mathematics is a universality reduction
-on the ready unit tail, a p-adic/continued-fraction decision invariant, or a proof that one of
-those two outcomes transfers to a broader class of three-mode return recurrences.
+The highest-value lunge is the nested resonance, not the generic ready cylinder. The matrix
+compiler and all-word converse are complete; nonresonant dynamics and rational affine counter
+rails are closed. The next useful mathematics is an eventual-periodicity theorem for rational
+resonance itineraries, a genuinely nonperiodic stack construction, or a transfer from that
+dichotomy to a broader class of three-mode return recurrences.
 
 The strategic boundary is now clear. The easy layer consisted of finding and repairing missing
 finite compilers. `M₃(2)` asks whether one low-dimensional recurrence family can store

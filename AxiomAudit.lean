@@ -190,5 +190,13 @@ open MatrixMortality
 #print axioms ReturnGuard.legalStep_functional
 #print axioms ReturnGuard.physical_isMortal_iff_guardedReachable
 #print axioms ReturnGuard.parameters_three_le_card_of_exact_realization
+#print axioms ReturnGuard.shift_step
+#print axioms ReturnGuard.ready_iff_prefixDecode_isUnit
+#print axioms ReturnGuard.reciprocalResidual_affine
+#print axioms ReturnGuard.nonresonant_nextWait_lt
+#print axioms ReturnGuard.infinite_ready_chain_resonates
+#print axioms ReturnGuard.resonance_ready_iff
+#print axioms ReturnGuard.Rail.identity_forces_linear_center
+#print axioms ReturnGuard.Rail.no_infinite_primePower_affineWait_rail
 #print axioms ReturnGuard.Examples.integer_zero_word
 #print axioms ReturnGuard.Examples.fixed_guarded_step

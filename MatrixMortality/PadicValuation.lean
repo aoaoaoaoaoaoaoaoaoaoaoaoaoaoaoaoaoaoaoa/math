@@ -62,6 +62,31 @@ theorem div_hasValue
     rw [padicValRat.div numerator_value.1 denominator_value.1,
       numerator_value.2, denominator_value.2]⟩
 
+/-- Every positive-valuation rational is a positive prime power times a unit. -/
+theorem positive_eq_primePower_mul_unit
+    {prime : Nat} [Fact prime.Prime] {value : ℚ}
+    (value_positive : IsPositive prime value) :
+    ∃ exponent : Nat, 0 < exponent ∧
+      ∃ unit : ℚ, IsUnit prime unit ∧
+        value = prime ^ exponent * unit := by
+  obtain ⟨exponent, exponent_eq⟩ :=
+    Int.eq_ofNat_of_zero_le (le_of_lt value_positive.2)
+  have exponent_positive : 0 < exponent := by
+    exact Int.natCast_pos.mp (exponent_eq ▸ value_positive.2)
+  let unit := value / (prime : ℚ) ^ exponent
+  have value_hasValue :
+      HasValue prime value exponent := by
+    exact ⟨value_positive.1, exponent_eq⟩
+  have unit_shell : IsUnit prime unit := by
+    simpa [unit] using
+      div_hasValue value_hasValue (primePower_hasValue exponent)
+  refine ⟨exponent, exponent_positive, unit, unit_shell, ?_⟩
+  have power_ne := primePower_ne_zero (Fact.out : prime.Prime) exponent
+  calc
+    value = unit * prime ^ exponent := by
+      exact (div_mul_cancel₀ value power_ne).symm
+    _ = prime ^ exponent * unit := mul_comm _ _
+
 theorem neg_hasValue
     {prime : Nat} {value : ℚ} {valuation : ℤ}
     (has_value : HasValue prime value valuation) :
