@@ -19,6 +19,11 @@ import MatrixMortality.ReturnSquareClassification
 import MatrixMortality.ReturnSquareTax
 import MatrixMortality.ReturnJordan
 import MatrixMortality.ReturnConvert
+import MatrixMortality.ProjectiveLine
+import MatrixMortality.PadicValuation
+import MatrixMortality.ReturnGuard
+import MatrixMortality.ReturnGuardDynamics
+import MatrixMortality.ReturnGuardExamples
 
 /- Finite-controller amalgamation. -/
 import MatrixMortality.ControllerPushout

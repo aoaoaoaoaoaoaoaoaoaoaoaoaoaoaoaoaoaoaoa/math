@@ -231,10 +231,22 @@ seven and is immortal. In contrast, the two-scale modes `(1,p,q)` produce a mini
 three-state pencil with rail `pⁿ↦qⁿ`, an internal rank-one return, and a genuine nonresonant
 two-return zero at `(p,q,c)=(3,6,−1/9)`.
 
+The subsequent amalgamated guard closes the missing legal-wait invariant. Its three modes
+`(1,p⁻¹,p^(s−1))` retain a rank-two physical cut and rank-one zero return. Lean checks the
+total `ℙ¹(ℚ)` action, forward-invariant p-adic trap, exact wait and carry-depth forcing,
+ready-tail coordinates, complete inverse cylinder grammar, and the full equivalence
+
+```text
+physical mortality ↔ positive-return orbit reaches 1 ↔ TransGen LegalStep ρ 1.
+```
+
+The exact return series still needs three states. Concrete checked examples include the
+denominator-cleared identity `B²AB²=0` and a ready nonterminal fixed point.
+
 These are structural and decidable-stratum theorems, not an `M₃(2)` resolution. The imported
 order-four Skolem theorem used to classify rank-one profiles is not reimplemented in Lean. The
-generic reverse edge compiler still assumes `αβ≠0`, and ReturnConvert has no legal-wait
-invariant or computation theorem. Their boundary is recorded in
+generic reverse edge compiler still assumes `αβ≠0`, and no universality or decision theorem is
+known for the deterministic guarded orbit. Their boundary is recorded in
 [`audits/m32-rank-return-2026-07-28.md`](audits/m32-rank-return-2026-07-28.md) and scheduled in
 [#11](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/11) and
 [#12](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/12).
@@ -358,6 +370,11 @@ with a complete arbitrary-word converse.
 | `ReturnSquareNoGo.lean` | quadratic-pencil reversible-squaring obstruction and blind-scaling collapse |
 | `ReturnJordan.lean` | parity-Jordan rail rigidity and modular immortality certificate |
 | `ReturnConvert.lean` | minimal two-scale return pencil and nonresonant multi-return zero |
+| `ProjectiveLine.lean` | total affine-chart presentation of `ℙ¹` and exact unit-word ray action |
+| `PadicValuation.lean` | nonzero rational p-adic shells and exact unequal-valuation calculus |
+| `ReturnGuard.lean` | three-mode amalgamated return algebra, split mortality compiler, and exact state lower bound |
+| `ReturnGuardDynamics.lean` | permanent trap, ready-tail grammar, and deterministic physical mortality equivalence |
+| `ReturnGuardExamples.lean` | concrete mortal integer pair and ready nonterminal fixed point |
 | `BinaryDefect.lean` | binary two-word defect theorem and exact Neary macro obstruction |
 | `CHHNPacking.lean` | generic two-slot CHHN packing and six-state finite-Hankel kernels |
 | `CHHNPackingRank.lean` | all-placement exact six-state lower bound for the Neary packing |
@@ -455,6 +472,10 @@ with a complete arbitrary-word converse.
 | Two exact squaring checks collapse to blind scaling | `ReturnSquareNoGo.verifiedPush_eq_blindScale` |
 | The rank-compatible parity-Jordan branch is unique and immortal modulo seven | `ReturnJordan.normalForm_unique`, `ReturnJordan.not_isMortal_generator` |
 | The two-scale return pencil is minimal and has a nonresonant two-return zero | `ReturnConvert.three_le_card_of_exact_realization`, `ReturnConvert.example_zero`, `ReturnConvert.example_nonresonant` |
+| The amalgamated guard rejects every illegal wait permanently | `ReturnGuard.trap_forward`, `ReturnGuard.live_step_forces_ready` |
+| Three-state physical mortality is exactly deterministic guarded reachability | `ReturnGuard.physical_isMortal_iff_guardedReachable` |
+| Ready cylinders have unit tails and a complete inverse transition grammar | `ReturnGuard.readyState_ready`, `ReturnGuard.ready_transition` |
+| The guarded return series intrinsically needs three states | `ReturnGuard.parameters_three_le_card_of_exact_realization` |
 | Rule and erasure matrices agree on the upper-side plane | `rule_erase_agree_on_upperSide` |
 | Every finite-controller letter routes its selected private channel exactly | `controllerMatrix_mulVec_controllerVector` |
 | Every suffix-controlled word obeys the generic total decoder | `controllerProduct_mulVec_controllerVector` |

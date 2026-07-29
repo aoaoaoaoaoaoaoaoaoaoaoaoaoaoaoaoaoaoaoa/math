@@ -1,0 +1,222 @@
+import Mathlib.NumberTheory.Padics.PadicVal.Basic
+
+/-!
+# Exact rational p-adic shells
+
+`padicValRat` deliberately assigns zero valuation to zero. The predicates below retain the
+nonzero side condition and expose the three shells used by valuation guards: negative, unit,
+and positive valuation.
+-/
+
+namespace MatrixMortality.PadicValuation
+
+/-- A nonzero rational with prescribed finite `prime`-adic valuation. -/
+def HasValue (prime : Nat) (value : ℚ) (valuation : ℤ) : Prop :=
+  value ≠ 0 ∧ padicValRat prime value = valuation
+
+/-- A nonzero rational in the unit shell at `prime`. -/
+abbrev IsUnit (prime : Nat) (value : ℚ) : Prop :=
+  HasValue prime value 0
+
+/-- A nonzero rational in the positive-valuation shell at `prime`. -/
+def IsPositive (prime : Nat) (value : ℚ) : Prop :=
+  value ≠ 0 ∧ 0 < padicValRat prime value
+
+/-- A nonzero rational in the negative-valuation shell at `prime`. -/
+def IsNegative (prime : Nat) (value : ℚ) : Prop :=
+  value ≠ 0 ∧ padicValRat prime value < 0
+
+theorem primePower_ne_zero
+    {prime : Nat} (prime_prime : prime.Prime) (exponent : Nat) :
+    (prime : ℚ) ^ exponent ≠ 0 :=
+  pow_ne_zero exponent (Nat.cast_ne_zero.mpr prime_prime.ne_zero)
+
+theorem primePower_valuation
+    {prime : Nat} [prime_fact : Fact prime.Prime] (exponent : Nat) :
+    padicValRat prime ((prime : ℚ) ^ exponent) = exponent := by
+  rw [padicValRat.pow (p := prime) (q := (prime : ℚ))
+      (Nat.cast_ne_zero.mpr prime_fact.out.ne_zero) (k := exponent),
+    padicValRat.self prime_fact.out.one_lt]
+  simp
+
+theorem primePower_hasValue
+    {prime : Nat} [prime_fact : Fact prime.Prime] (exponent : Nat) :
+    HasValue prime ((prime : ℚ) ^ exponent) exponent :=
+  ⟨primePower_ne_zero prime_fact.out exponent, primePower_valuation exponent⟩
+
+theorem mul_hasValue
+    {prime : Nat} [Fact prime.Prime] {left right : ℚ} {leftValue rightValue : ℤ}
+    (left_value : HasValue prime left leftValue)
+    (right_value : HasValue prime right rightValue) :
+    HasValue prime (left * right) (leftValue + rightValue) :=
+  ⟨mul_ne_zero left_value.1 right_value.1, by
+    rw [padicValRat.mul left_value.1 right_value.1, left_value.2, right_value.2]⟩
+
+theorem div_hasValue
+    {prime : Nat} [Fact prime.Prime] {numerator denominator : ℚ}
+    {numeratorValue denominatorValue : ℤ}
+    (numerator_value : HasValue prime numerator numeratorValue)
+    (denominator_value : HasValue prime denominator denominatorValue) :
+    HasValue prime (numerator / denominator) (numeratorValue - denominatorValue) :=
+  ⟨div_ne_zero numerator_value.1 denominator_value.1, by
+    rw [padicValRat.div numerator_value.1 denominator_value.1,
+      numerator_value.2, denominator_value.2]⟩
+
+theorem neg_hasValue
+    {prime : Nat} {value : ℚ} {valuation : ℤ}
+    (has_value : HasValue prime value valuation) :
+    HasValue prime (-value) valuation :=
+  ⟨neg_ne_zero.mpr has_value.1, by rw [padicValRat.neg, has_value.2]⟩
+
+/-- In a sum with unequal prescribed valuations, the smaller left valuation survives. -/
+theorem add_hasValue_left
+    {prime : Nat} [Fact prime.Prime] {left right : ℚ} {leftValue rightValue : ℤ}
+    (left_value : HasValue prime left leftValue)
+    (right_value : HasValue prime right rightValue)
+    (valuation_lt : leftValue < rightValue) :
+    HasValue prime (left + right) leftValue := by
+  have sum_ne : left + right ≠ 0 := by
+    intro sum_zero
+    have left_eq : left = -right := eq_neg_of_add_eq_zero_left sum_zero
+    have equal_value := congrArg (padicValRat prime) left_eq
+    rw [padicValRat.neg, left_value.2, right_value.2] at equal_value
+    exact (ne_of_lt valuation_lt) equal_value
+  exact ⟨sum_ne, by
+    rw [padicValRat.add_eq_of_lt sum_ne left_value.1 right_value.1]
+    · exact left_value.2
+    · simpa [left_value.2, right_value.2] using valuation_lt⟩
+
+/-- In a sum with unequal prescribed valuations, the smaller right valuation survives. -/
+theorem add_hasValue_right
+    {prime : Nat} [Fact prime.Prime] {left right : ℚ} {leftValue rightValue : ℤ}
+    (left_value : HasValue prime left leftValue)
+    (right_value : HasValue prime right rightValue)
+    (valuation_gt : rightValue < leftValue) :
+    HasValue prime (left + right) rightValue := by
+  rw [add_comm]
+  exact add_hasValue_left right_value left_value valuation_gt
+
+/-- Unequal finite valuations cannot belong to equal rationals. -/
+theorem ne_of_valuation_ne
+    {prime : Nat} {left right : ℚ}
+    (valuation_ne : padicValRat prime left ≠ padicValRat prime right) :
+    left ≠ right := by
+  intro equal
+  exact valuation_ne (congrArg (padicValRat prime) equal)
+
+/-- The smaller valuation wins a subtraction with unequal valuations. -/
+theorem sub_eq_left_of_lt
+    {prime : Nat} [Fact prime.Prime] {left right : ℚ}
+    (left_ne : left ≠ 0) (right_ne : right ≠ 0)
+    (valuation_lt : padicValRat prime left < padicValRat prime right) :
+    padicValRat prime (left - right) = padicValRat prime left := by
+  have difference_ne : left + -right ≠ 0 := by
+    simpa only [sub_eq_add_neg] using
+      sub_ne_zero.mpr (ne_of_valuation_ne (ne_of_lt valuation_lt))
+  simpa only [sub_eq_add_neg, padicValRat.neg] using
+    padicValRat.add_eq_of_lt (p := prime) difference_ne left_ne (neg_ne_zero.mpr right_ne)
+      (by simpa using valuation_lt)
+
+/-- The smaller valuation wins a subtraction with unequal valuations, right-oriented. -/
+theorem sub_eq_right_of_gt
+    {prime : Nat} [Fact prime.Prime] {left right : ℚ}
+    (left_ne : left ≠ 0) (right_ne : right ≠ 0)
+    (valuation_gt : padicValRat prime right < padicValRat prime left) :
+    padicValRat prime (left - right) = padicValRat prime right := by
+  rw [show left - right = -(right - left) by ring, padicValRat.neg]
+  exact sub_eq_left_of_lt right_ne left_ne valuation_gt
+
+/-- A subtraction with unequal valuations has their minimum valuation. -/
+theorem sub_hasValue_min
+    {prime : Nat} [Fact prime.Prime] {left right : ℚ}
+    (left_ne : left ≠ 0) (right_ne : right ≠ 0)
+    (valuation_ne : padicValRat prime left ≠ padicValRat prime right) :
+    HasValue prime (left - right)
+      (min (padicValRat prime left) (padicValRat prime right)) := by
+  have difference_ne :=
+    sub_ne_zero.mpr (ne_of_valuation_ne valuation_ne)
+  have difference_ne' : left + -right ≠ 0 := by
+    simpa only [sub_eq_add_neg] using difference_ne
+  have valuation_ne' :
+      padicValRat prime left ≠ padicValRat prime (-right) := by
+    simpa only [padicValRat.neg] using valuation_ne
+  refine ⟨difference_ne, ?_⟩
+  simpa only [sub_eq_add_neg, padicValRat.neg] using
+    padicValRat.add_eq_min (p := prime) difference_ne' left_ne
+      (neg_ne_zero.mpr right_ne) valuation_ne'
+
+/-- The valuation of a nonzero sum is at least the minimum of its summands. -/
+theorem min_le_sub
+    {prime : Nat} [Fact prime.Prime] {left right : ℚ}
+    (difference_ne : left - right ≠ 0) :
+    min (padicValRat prime left) (padicValRat prime right) ≤
+      padicValRat prime (left - right) := by
+  have difference_ne' : left + -right ≠ 0 := by
+    simpa only [sub_eq_add_neg] using difference_ne
+  simpa only [sub_eq_add_neg, padicValRat.neg] using
+    padicValRat.min_le_padicValRat_add (p := prime) difference_ne'
+
+/-- A unit minus a positive-shell point remains a unit. -/
+theorem unit_sub_positive
+    {prime : Nat} [Fact prime.Prime] {unit live : ℚ}
+    (unit_shell : IsUnit prime unit) (positive_shell : IsPositive prime live) :
+    IsUnit prime (unit - live) := by
+  refine ⟨?_, ?_⟩
+  · exact sub_ne_zero.mpr (ne_of_valuation_ne (by
+      rw [unit_shell.2]
+      exact ne_of_lt positive_shell.2))
+  · simpa [unit_shell.2] using
+      sub_eq_left_of_lt (prime := prime) unit_shell.1 positive_shell.1
+        (by rw [unit_shell.2]; exact positive_shell.2)
+
+/-- Subtracting a positive-shell point from one has valuation zero. -/
+theorem one_sub_positive
+    {prime : Nat} [Fact prime.Prime] {live : ℚ}
+    (positive_shell : IsPositive prime live) :
+    IsUnit prime (1 - live) :=
+  unit_sub_positive ⟨one_ne_zero, padicValRat.one⟩ positive_shell
+
+/-- A positive-shell point minus one has valuation zero. -/
+theorem positive_sub_one
+    {prime : Nat} [Fact prime.Prime] {live : ℚ}
+    (positive_shell : IsPositive prime live) :
+    IsUnit prime (live - 1) := by
+  have opposite := one_sub_positive positive_shell
+  rw [show live - 1 = -(1 - live) by ring]
+  exact ⟨neg_ne_zero.mpr opposite.1, by
+    rw [padicValRat.neg]
+    exact opposite.2⟩
+
+/-- A unit plus a positive-shell perturbation remains a unit. -/
+theorem unit_add_positive
+    {prime : Nat} [Fact prime.Prime] {unit error : ℚ}
+    (unit_shell : IsUnit prime unit) (positive_shell : IsPositive prime error) :
+    IsUnit prime (unit + error) := by
+  have sum_ne : unit + error ≠ 0 := by
+    intro sum_zero
+    have unit_eq : unit = -error := eq_neg_of_add_eq_zero_left sum_zero
+    have valuation_eq := congrArg (padicValRat prime) unit_eq
+    rw [padicValRat.neg, unit_shell.2] at valuation_eq
+    exact (ne_of_lt positive_shell.2) valuation_eq
+  refine ⟨sum_ne, ?_⟩
+  simpa [unit_shell.2] using
+    padicValRat.add_eq_of_lt (p := prime) sum_ne unit_shell.1 positive_shell.1
+      (by rw [unit_shell.2]; exact positive_shell.2)
+
+/-- A negative-shell leading term dominates a unit perturbation. -/
+theorem negative_add_unit
+    {prime : Nat} [Fact prime.Prime] {negative unit : ℚ}
+    (negative_shell : IsNegative prime negative) (unit_shell : IsUnit prime unit) :
+    IsNegative prime (negative + unit) := by
+  have sum_ne : negative + unit ≠ 0 := by
+    intro sum_zero
+    have negative_eq : negative = -unit := eq_neg_of_add_eq_zero_left sum_zero
+    have valuation_eq := congrArg (padicValRat prime) negative_eq
+    rw [padicValRat.neg, unit_shell.2] at valuation_eq
+    exact (ne_of_lt negative_shell.2) valuation_eq
+  refine ⟨sum_ne, ?_⟩
+  rw [padicValRat.add_eq_of_lt sum_ne negative_shell.1 unit_shell.1]
+  · exact negative_shell.2
+  · simpa [unit_shell.2] using negative_shell.2
+
+end MatrixMortality.PadicValuation

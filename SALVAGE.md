@@ -2031,6 +2031,117 @@ independent scales, or exhibit a guarded arithmetic simulation with an all-waits
 Tracked in
 [#12](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/12).
 
+### R32-M04: Amalgamated valuation guard
+
+**Kind:** partial mechanism
+**Evidence:** formalized
+**Disposition:** active
+
+For a prime `p`, depth `s≥2`, center `α`, and reset `ρ`, put `δ=ρ−α`. The split
+three-mode return family has ambient action
+
+```text
+A = diag(1,p⁻¹,p^(s−1))
+```
+
+and exact rescaled returns
+
+```text
+Gₙ =
+  [α+δpˢⁿ    −αpⁿ−δpˢⁿ]
+  [1                    −pⁿ].
+```
+
+The zero return is the nonnilpotent rank-one outer product
+`(ρ,1)ᵀ(1,−1)`; every positive return is invertible. The physical cut has rank exactly two,
+the coefficient Hankel certificate has rank three, and the existing split-return compiler
+reduces every arbitrary physical zero word to one scalar bridge.
+
+Assume `α`, `α−1`, and `δ` are p-adic units and `ρ` has positive valuation. On `ℙ¹(ℚ)`, the
+positive return obeys the cross-multiplied verifier
+
+```text
+Φₙ(z)−α = δpˢⁿ(z−1)/(z−pⁿ).
+```
+
+Every nonterminal point outside the positive-valuation region forms a forward-invariant trap.
+For a live point `z`, surviving a selected wait `n` forces both
+
+```text
+n = vₚ(z),                  vₚ(z−pⁿ)=sn.
+```
+
+Thus independently selected wrong waits are permanently poisoned without another state or
+generator.
+
+**Scope:** this is not an undecidability theorem. It converts physical mortality exactly into
+target reachability for one deterministic rational p-adic map. No source computation has yet
+been compiled into that map, and no decision algorithm for its orbit is known.
+
+**Artifact:** `ReturnGuard.physical_isMortal_iff_positiveBridge`,
+`ReturnGuard.trap_forward`, `live_step_forces_ready`,
+`parameters_three_le_card_of_exact_realization`, and the exact integer example
+`ReturnGuard.Examples.integer_zero_word` in
+[`ReturnGuard.lean`](MatrixMortality/ReturnGuard.lean),
+[`ReturnGuardDynamics.lean`](MatrixMortality/ReturnGuardDynamics.lean), and
+[`ReturnGuardExamples.lean`](MatrixMortality/ReturnGuardExamples.lean).
+
+**Use:** the separator-verifier-trap amalgamation problem is closed. Future attacks should work
+on the deterministic tail recurrence, not add parser states or repair malformed wait words.
+
+**Next:** classify or universalize the guarded arithmetic orbit in
+[`R32-S04`](#r32-s04-guarded-return-normal-form).
+Tracked in
+[#12](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/12).
+
+### R32-S04: Guarded return normal form
+
+**Kind:** structural normal form
+**Evidence:** formalized
+**Disposition:** active
+
+Write a ready point uniquely as
+
+```text
+E(a,X)=pᵃ+pˢᵃ/X,            vₚ(X)=0.
+```
+
+The sole legal wait is `a`, and its payload update is
+
+```text
+E(a,X) ↦ α+(ρ−α)(pˢᵃ+(pᵃ−1)X).
+```
+
+Every positive ready cylinder can reach every other: the inverse unit tail is an explicit
+fractional-linear expression. The terminal tail is likewise explicit and unique. Nevertheless,
+all arbitrary physical paths are already covered. Lean proves
+
+```text
+physical mortality
+  ↔ some positive-return projective word reaches 1
+  ↔ TransGen LegalStep ρ 1.
+```
+
+The last relation is functional. Its proof reads physical matrix products in their actual
+right-to-left action order, propagates trap invariance through every suffix, and forces every
+surviving step to be ready. The construction therefore has neither an intended-word loophole
+nor a hidden regular-language restriction.
+
+**Scope:** the complete inverse grammar shows local symbolic freedom, not computational
+universality. The rational tail couples successive cylinder choices globally.
+
+**Artifact:** `readyTail_isUnit`, `readyState_readyTail`, `readyState_ready`,
+`ready_transition`, `legalValue_eq_one_iff`, `legalStep_functional`, and
+`physical_isMortal_iff_guardedReachable` in
+[`ReturnGuardDynamics.lean`](MatrixMortality/ReturnGuardDynamics.lean).
+
+**Use:** formulate the surviving `M₃(2)` attack entirely as reachability for this deterministic
+arithmetic system. Matrix rank, punctuation, malformed words, illegal waits, and exact
+three-state minimality no longer belong to the open obligation.
+
+**Next:** either reduce a universal deterministic computation to `GuardedReachable`, or find a
+finite-height, p-adic contraction, or continued-fraction invariant deciding it.
+
 ## Three-Generator Four-State Frontier
 
 Formal promotion of this section is tracked in

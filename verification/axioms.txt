@@ -281,6 +281,9 @@
 'MatrixMortality.ReturnFamily.finiteReturnHankel_factor' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.ReturnFamily.returnHankel_card_le' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.ReturnFamily.pairGenerator_isMortal_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ReturnFamily.pairGenerator_isMortal_iff_positiveBridge' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.EdgeCompression.isMortal_iff_exists_edgeProduct_eq_zero' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
@@ -326,3 +329,20 @@
  Quot.sound]
 'MatrixMortality.ReturnConvert.example_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.ReturnConvert.example_nonresonant' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ProjectiveLine.targetOne_word_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ReturnGuard.cut_rank' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ReturnGuard.physical_isMortal_iff_positiveBridge' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.trap_forward' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ReturnGuard.live_step_forces_ready' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ReturnGuard.ready_transition' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ReturnGuard.legalStep_functional' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ReturnGuard.physical_isMortal_iff_guardedReachable' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.parameters_three_le_card_of_exact_realization' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.Examples.integer_zero_word' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ReturnGuard.Examples.fixed_guarded_step' depends on axioms: [propext, Classical.choice, Quot.sound]

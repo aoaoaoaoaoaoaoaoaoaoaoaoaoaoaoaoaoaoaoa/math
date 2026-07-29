@@ -611,17 +611,26 @@ exact parity-Collatz rails, but the rank-compatible branch is unique up to scala
 a nonzero line modulo seven. This is
 [`R32-O05`](SALVAGE.md#r32-o05-jordan-parity-verifier-collapse).
 
-The live constructive object is now the two-scale ReturnConvert pencil
-[`R32-M03`](SALVAGE.md#r32-m03-two-scale-return-conversion). Its modes `(1,p,q)` retain an
-internal rank-one return, convert the projective rail `pⁿ↦qⁿ`, genuinely require three states,
-and already produce a nonresonant two-return zero at `(p,q,c)=(3,6,−1/9)`. What is missing is a
-self-verifying configuration set, not arithmetic activity.
+ReturnConvert [`R32-M03`](SALVAGE.md#r32-m03-two-scale-return-conversion) exposed the missing
+valuation direction. The amalgamated guard
+[`R32-M04`](SALVAGE.md#r32-m04-amalgamated-valuation-guard) now closes the matrix-engineering
+problem outright. In three exact modes it combines a rank-one internal separator, invertible
+positive returns, legal-wait verification, and a permanent p-adic trap for every illegal wait.
+The checked guarded normal form
+[`R32-S04`](SALVAGE.md#r32-s04-guarded-return-normal-form) proves that arbitrary physical
+mortality is exactly deterministic target reachability for one rational p-adic orbit.
+
+The surviving obligation is therefore a source theorem, or its negation: prove that this
+guarded orbit can simulate universal deterministic computation, or decide its reachability by a
+global arithmetic invariant. No further punctuation, malformed-word, or independently selected
+wait problem remains in this architecture.
 
 ### Live attacks
 
 | Lane | Required move | Present obstruction |
 | --- | --- | --- |
-| Two-scale ReturnConvert | Turn the verified rail `pⁿ↦qⁿ` into a guarded configuration dynamics whose illegal waits enter a permanent valuation trap | Nonresonant zeros exist, but independently chosen waits are not yet constrained to legal computation |
+| Amalgamated valuation guard | Compile a universal deterministic source into its ready-tail recurrence, or decide that recurrence | Matrix mortality is already equivalent to one deterministic orbit; universality versus hidden arithmetic tameness is unresolved |
+| Guarded tail arithmetic | Control the affine unit-tail update across unbounded ready cylinders | Every local cylinder transition has an inverse branch, but one rational tail must satisfy the entire itinerary |
 | Irreducible cubic return pencil | Replace the split spectrum by a cubic companion action whose `2 × 2` return sequence has no fixed rail or target strip | A candidate still needs an internal low-rank return and an exact arbitrary-word normal form |
 | Multi-prime ReturnSquare | Extend the rational-root support and finite walls from prime powers to bases with several prime factors | Mixed prime support permits roots not confined to one valuation ray |
 | Local-global sieve | Find a finite quotient that separates every no-instance, or a finite invariant nucleus that lifts to characteristic zero | [`R32-M02`](SALVAGE.md#r32-m02-finite-quotient-sieve) is one-sided; survival modulo all tested primes proves nothing |
@@ -629,11 +638,11 @@ self-verifying configuration set, not arithmetic activity.
 | Same-zero return surgery | Change nonzero return values while preserving the zero semigroup, thereby evading exact Hankel taxes | No general same-zero minimization theorem exists; every surgery needs its own arbitrary-product converse |
 | Exceptional reverse compiler | Absorb the finite `αβ=0` disjunction into one three-dimensional many-one instance | The generic all-path compiler is complete; dimension three has no evident OR operation |
 
-The highest-value lunge is ReturnConvert itself. It has already crossed the algebraic fences
-that killed ReturnSquare and the Jordan branch. [`MM-C04`](SALVAGE.md#mm-c04-internal-word-sandwich-minimization)
-can minimize any exact matrix-valued sandwich without another malformed-word proof. Candidate
-extensions should first face finite-quotient sieves, block-Hankel rank, short-word symbolic
-factorization, and signed or valuation cone tests.
+The highest-value lunge is now the guarded deterministic map itself. The matrix compiler has
+crossed the algebraic fences that killed ReturnSquare and the Jordan branch, and formalization
+has discharged its all-word converse. The next useful mathematics is a universality reduction
+on the ready unit tail, a p-adic/continued-fraction decision invariant, or a proof that one of
+those two outcomes transfers to a broader class of three-mode return recurrences.
 
 The strategic boundary is now clear. The easy layer consisted of finding and repairing missing
 finite compilers. `M₃(2)` asks whether one low-dimensional recurrence family can store

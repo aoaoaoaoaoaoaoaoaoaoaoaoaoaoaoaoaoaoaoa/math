@@ -850,18 +850,21 @@ theorem physical_isMortal_iff_positiveBridge (q : ℤ) (c : ℚ)
     (hq : 2 ≤ q) (hc : c + 1 ≠ 0) :
     IsMortal (ReturnFamily.pairGenerator (ambient (q : ℚ)) (cut c)) ↔
       ∃ waits, positiveBridge (q : ℚ) c waits = 0 := by
-  rw [physical_isMortal_iff_returnProduct (q : ℚ) c (by positivity) hc]
-  have hreturns : ∀ waits,
-      ReturnFamily.returnProduct (ambient (q : ℚ)) input (output c) waits =
-        wordProduct (fun n => transfer c ((q : ℚ) ^ n)) waits := by
-    intro waits
-    simp only [ReturnFamily.returnProduct]
-    apply congrArg (fun family => wordProduct family waits)
-    funext n
-    exact returnMatrix_eq_transfer (q : ℚ) c n
-  simp_rw [hreturns]
-  rw [← isMortal_iff_exists_wordProduct_eq_zero]
-  exact transferFamily_isMortal_iff_positiveBridge q c hq hc
+  simpa [cut, positiveBridge, positiveTransfer, returnMatrix_eq_transfer] using
+    ReturnFamily.pairGenerator_isMortal_iff_positiveBridge
+      (ambient (q : ℚ)) input (output c) inputLeftInverse (outputRightInverse c)
+      ![1, 1] ![c, 1]
+      (ambient_isUnit (q : ℚ) (by positivity))
+      inputLeftInverse_mul_input
+      (output_mul_outputRightInverse c hc)
+      (by
+        rw [returnMatrix_eq_transfer]
+        simpa using transfer_one ℚ c)
+      (fun wait => by
+        rw [returnMatrix_eq_transfer]
+        exact positiveTransfer_isUnit q c hq hc wait)
+      (by simp)
+      (by simp)
 
 /-- The exact first research frontier for ReturnSquare: mortality is either a classified
 one-return resonance or a bridge with at least three positive returns. Two returns are impossible.

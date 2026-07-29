@@ -172,27 +172,22 @@ theorem physical_isMortal_iff_positiveBridge
     (p q : ℤ) (c : ℚ) (hp : 2 ≤ p) (hq : 2 ≤ q) (hc : c + 1 ≠ 0) :
     IsMortal (ReturnFamily.pairGenerator (ambient (p : ℚ) (q : ℚ)) (cut c)) ↔
       ∃ waits, positiveBridge (p : ℚ) (q : ℚ) c waits = 0 := by
-  change IsMortal
-      (ReturnFamily.pairGenerator (ambient (p : ℚ) (q : ℚ)) (input * output c)) ↔ _
-  rw [ReturnFamily.pairGenerator_isMortal_iff
-    (ambient (p : ℚ) (q : ℚ)) input (output c)
-    ReturnSquare.inputLeftInverse (ReturnSquare.outputRightInverse c)
-    (ambient_isUnit (p : ℚ) (q : ℚ) (by positivity) (by positivity))
-    ReturnSquare.inputLeftInverse_mul_input
-    (ReturnSquare.output_mul_outputRightInverse c hc)]
-  have returns :
-      ∀ waits,
-        ReturnFamily.returnProduct (ambient (p : ℚ) (q : ℚ)) input (output c) waits =
-          wordProduct
-            (fun n => transfer c ((p : ℚ) ^ n) ((q : ℚ) ^ n)) waits := by
-    intro waits
-    simp only [ReturnFamily.returnProduct]
-    apply congrArg (fun family => wordProduct family waits)
-    funext n
-    exact returnMatrix_eq_transfer (p : ℚ) (q : ℚ) c n
-  simp_rw [returns]
-  rw [← isMortal_iff_exists_wordProduct_eq_zero]
-  exact transferFamily_isMortal_iff_positiveBridge p q c hp hq hc
+  simpa [cut, positiveBridge, positiveTransfer, returnMatrix_eq_transfer] using
+    ReturnFamily.pairGenerator_isMortal_iff_positiveBridge
+      (ambient (p : ℚ) (q : ℚ)) input (output c)
+      ReturnSquare.inputLeftInverse (ReturnSquare.outputRightInverse c)
+      ![1, 1] ![c, 1]
+      (ambient_isUnit (p : ℚ) (q : ℚ) (by positivity) (by positivity))
+      ReturnSquare.inputLeftInverse_mul_input
+      (ReturnSquare.output_mul_outputRightInverse c hc)
+      (by
+        rw [returnMatrix_eq_transfer]
+        simpa using transfer_one ℚ c)
+      (fun wait => by
+        rw [returnMatrix_eq_transfer]
+        exact positiveTransfer_isUnit p q c hp hq hc wait)
+      (by simp)
+      (by simp)
 
 /-- Exact defect from the conversion rail `p ↦ q`. -/
 theorem projective_rail_defect {R : Type*} [CommRing R] (c p q z : R) :

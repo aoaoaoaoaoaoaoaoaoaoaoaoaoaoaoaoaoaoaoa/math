@@ -1,5 +1,5 @@
-import MatrixMortality.MatrixSemigroup
 import MatrixMortality.LinearRepresentation
+import MatrixMortality.TerminalTile
 
 /-!
 # Split return families
@@ -314,6 +314,47 @@ theorem pairGenerator_isMortal_iff
     · cases waits <;> simp [blockedWord]
     · rw [wordProduct_blockedWord]
       exact blocked_zero
+
+/-- A split physical return pair whose zero-wait return is a nonzero outer product and whose
+positive returns are units is mortal exactly when one positive-return bridge vanishes. -/
+theorem pairGenerator_isMortal_iff_positiveBridge
+    {K Big Interface : Type*} [Field K]
+    [Fintype Big] [DecidableEq Big] [Nonempty Big]
+    [Fintype Interface] [DecidableEq Interface] [Nonempty Interface]
+    (ambient : Square Big K) (input : Matrix Big Interface K)
+    (output : Matrix Interface Big K)
+    (inputLeftInverse : Matrix Interface Big K)
+    (outputRightInverse : Matrix Big Interface K)
+    (column row : Interface → K)
+    (ambient_unit : IsUnit ambient)
+    (left_inverse : inputLeftInverse * input = 1)
+    (right_inverse : output * outputRightInverse = 1)
+    (zero_return :
+      returnMatrix ambient input output 0 = Matrix.vecMulVec column row)
+    (positive_unit : ∀ wait, IsUnit (returnMatrix ambient input output (wait + 1)))
+    (column_ne : column ≠ 0) (row_ne : row ≠ 0) :
+    IsMortal (pairGenerator ambient (input * output)) ↔
+      ∃ waits : List Nat,
+        bridgeScalar column row
+          (wordProduct (fun wait => returnMatrix ambient input output (wait + 1)) waits) = 0 := by
+  rw [pairGenerator_isMortal_iff ambient input output
+    inputLeftInverse outputRightInverse ambient_unit left_inverse right_inverse]
+  change
+    (∃ waits, wordProduct (returnMatrix ambient input output) waits = 0) ↔ _
+  rw [← isMortal_iff_exists_wordProduct_eq_zero]
+  have separated_returns :
+      separatedGenerator (Matrix.vecMulVec column row)
+          (fun wait => returnMatrix ambient input output (wait + 1)) ∘
+        natEquivOption =
+          returnMatrix ambient input output := by
+    funext wait
+    cases wait with
+    | zero => simpa [separatedGenerator] using zero_return.symm
+    | succ wait => simp [separatedGenerator]
+  rw [← separated_returns, isMortal_comp_equiv]
+  exact unitFamily_mortal_adjoin_outer_iff
+    (fun wait => returnMatrix ambient input output (wait + 1))
+    column row positive_unit column_ne row_ne
 
 section RankOne
 

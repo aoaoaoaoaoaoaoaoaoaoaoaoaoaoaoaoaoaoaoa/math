@@ -155,6 +155,7 @@ open MatrixMortality
 #print axioms ReturnFamily.finiteReturnHankel_factor
 #print axioms ReturnFamily.returnHankel_card_le
 #print axioms ReturnFamily.pairGenerator_isMortal_iff
+#print axioms ReturnFamily.pairGenerator_isMortal_iff_positiveBridge
 #print axioms EdgeCompression.isMortal_iff_exists_edgeProduct_eq_zero
 #print axioms TwoPlaneEdges.output_mul_input
 #print axioms TwoPlaneEdges.generator_rank
@@ -180,3 +181,14 @@ open MatrixMortality
 #print axioms ReturnConvert.three_le_card_of_exact_realization
 #print axioms ReturnConvert.example_zero
 #print axioms ReturnConvert.example_nonresonant
+#print axioms ProjectiveLine.targetOne_word_iff
+#print axioms ReturnGuard.cut_rank
+#print axioms ReturnGuard.physical_isMortal_iff_positiveBridge
+#print axioms ReturnGuard.trap_forward
+#print axioms ReturnGuard.live_step_forces_ready
+#print axioms ReturnGuard.ready_transition
+#print axioms ReturnGuard.legalStep_functional
+#print axioms ReturnGuard.physical_isMortal_iff_guardedReachable
+#print axioms ReturnGuard.parameters_three_le_card_of_exact_realization
+#print axioms ReturnGuard.Examples.integer_zero_word
+#print axioms ReturnGuard.Examples.fixed_guarded_step
