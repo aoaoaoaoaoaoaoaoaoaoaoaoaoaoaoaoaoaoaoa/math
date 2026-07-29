@@ -1,0 +1,608 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="GPT-5.6 Sol; elicited by @eternalism_4eva">
+  <meta name="description" content="A three-mode valuation guard reduces mortality of a concrete pair of 3 by 3 matrices to one deterministic p-adic orbit.">
+  <meta property="og:title" content="The Valuation Guard">
+  <meta property="og:description" content="Rank-one punctuation, exact wait verification, and a permanent p-adic trap coexist in three states; the remaining M₃(2) problem is one deterministic arithmetic recurrence.">
+  <meta property="og:type" content="article">
+  <title>The Valuation Guard | Matrix Mortality</title>
+</head>
+<body>
+  <a class="skip-link" href="#article">Skip to the exposition</a>
+
+  <header class="masthead">
+    <div class="masthead-inner">
+      <h1>The Valuation Guard</h1>
+      <p class="byline">GPT-5.6 Sol · elicited by <a href="https://x.com/eternalism_4eva">@eternalism_4eva</a></p>
+    </div>
+  </header>
+
+  <div class="shell">
+    <nav class="contents" aria-label="Contents">
+      <ol>
+        <li>
+          <a href="#known-stuff">Known Stuff</a>
+          <ol>
+            <li><a href="#frontier-cell">The frontier cell</a></li>
+            <li>
+              <a href="#return-compression">Return compression</a>
+              <ol>
+                <li><a href="#split-cut">A split rank-two cut</a></li>
+                <li><a href="#return-products">Return products</a></li>
+              </ol>
+            </li>
+            <li>
+              <a href="#arithmetic-languages">Two arithmetic languages</a>
+              <ol>
+                <li><a href="#projective-line">The projective line</a></li>
+                <li><a href="#padic-valuation">The p-adic valuation</a></li>
+              </ol>
+            </li>
+          </ol>
+        </li>
+        <li>
+          <a href="#new-stuff">New Stuff</a>
+          <ol>
+            <li><a href="#result">Result</a></li>
+            <li>
+              <a href="#three-mode-family">The three-mode family</a>
+              <ol>
+                <li><a href="#ambient-and-cut">Ambient action and cut</a></li>
+                <li><a href="#return-matrices">Return matrices</a></li>
+              </ol>
+            </li>
+            <li>
+              <a href="#projective-guard">The projective guard</a>
+              <ol>
+                <li><a href="#defect-identity">The defect identity</a></li>
+                <li><a href="#permanent-trap">The permanent trap</a></li>
+              </ol>
+            </li>
+            <li>
+              <a href="#forced-computation">Forced computation</a>
+              <ol>
+                <li><a href="#wrong-waits">Wrong waits</a></li>
+                <li><a href="#carry-depth">Carry depth</a></li>
+              </ol>
+            </li>
+            <li>
+              <a href="#tail-recurrence">The tail recurrence</a>
+              <ol>
+                <li><a href="#ready-coordinates">Ready coordinates</a></li>
+                <li><a href="#inverse-grammar">Inverse grammar</a></li>
+              </ol>
+            </li>
+            <li><a href="#arbitrary-words">Arbitrary physical words</a></li>
+            <li><a href="#examples">Concrete pairs</a></li>
+            <li><a href="#open-core">The open arithmetic core</a></li>
+          </ol>
+        </li>
+        <li>
+          <a href="#bookkeeping">Bookkeeping</a>
+          <ol>
+            <li><a href="#verification">Verification and provenance</a></li>
+            <li><a href="#formal-scope">Formal scope</a></li>
+            <li><a href="#priority">Priority</a></li>
+            <li><a href="#sources">References</a></li>
+          </ol>
+        </li>
+      </ol>
+    </nav>
+
+    <main id="article">
+      <article>
+        <div class="verdict">
+          <strong>Checked reduction. Mortality for the three-mode family below is equivalent to one deterministic p-adic orbit reaching one.</strong>
+          <p>The construction fits a rank-one separator, exact legal-wait verifier, permanent illegal-wait trap, and unbounded rational payload into two 3 × 3 matrices. Its return series has exact linear dimension three.</p>
+          <p>M<sub>3</sub>(2) remains unresolved. The surviving question is whether the resulting deterministic arithmetic recurrence is computationally universal or admits a decision invariant.</p>
+        </div>
+
+        <details class="major-section">
+          <summary><h2 id="known-stuff">Known Stuff</h2></summary>
+
+          <h3 id="frontier-cell">The frontier cell</h3>
+          <p>M<sub>3</sub>(2) asks whether some nonempty word in two supplied 3 × 3 integer matrices equals zero. It is the first unresolved cell in the three-dimensional, two-generator corner of the <a href="/math/matrix_mortality/#frontier">bounded mortality table</a>.</p>
+          <p>If both matrices are invertible, every product is invertible. The first difficult rank profile therefore has one invertible generator and one generator of rank two. Write them as <var>A</var> and <var>B</var>.</p>
+
+          <h3 id="return-compression">Return compression</h3>
+
+          <h4 id="split-cut">A split rank-two cut</h4>
+          <p>Over ℚ, factor the rank-two matrix through a two-dimensional interface:</p>
+          <div class="formula plain">
+            <math display="block">
+              <mrow>
+                <mi>B</mi><mo>=</mo><mi>U</mi><mi>V</mi><mo>,</mo>
+                <mspace width="0.8em"></mspace>
+                <mi>U</mi><mo>:</mo><msup><mi>ℚ</mi><mn>2</mn></msup><mo>→</mo><msup><mi>ℚ</mi><mn>3</mn></msup><mo>,</mo>
+                <mspace width="0.8em"></mspace>
+                <mi>V</mi><mo>:</mo><msup><mi>ℚ</mi><mn>3</mn></msup><mo>→</mo><msup><mi>ℚ</mi><mn>2</mn></msup><mo>.</mo>
+              </mrow>
+            </math>
+          </div>
+          <p>A block beginning and ending with <var>B</var> then collapses to the interface. Define the return after <var>n</var> ambient steps by</p>
+          <div class="formula plain">
+            <math display="block">
+              <mrow>
+                <msub><mi>G</mi><mi>n</mi></msub><mo>=</mo><mi>V</mi><msup><mi>A</mi><mi>n</mi></msup><mi>U</mi><mo>∈</mo><msub><mi>M</mi><mn>2</mn></msub><mo>(</mo><mi>ℚ</mi><mo>)</mo><mo>.</mo>
+              </mrow>
+            </math>
+          </div>
+
+          <h4 id="return-products">Return products</h4>
+          <p>For any waits <var>n</var><sub>1</sub>, …, <var>n</var><sub><var>k</var></sub>,</p>
+          <div class="formula">
+            <math display="block">
+              <mrow>
+                <mi>B</mi><msup><mi>A</mi><msub><mi>n</mi><mn>1</mn></msub></msup><mi>B</mi>
+                <msup><mi>A</mi><msub><mi>n</mi><mn>2</mn></msub></msup><mi>B</mi>
+                <mo>⋯</mo>
+                <msup><mi>A</mi><msub><mi>n</mi><mi>k</mi></msub></msup><mi>B</mi>
+                <mo>=</mo>
+                <mi>U</mi>
+                <msub><mi>G</mi><msub><mi>n</mi><mn>1</mn></msub></msub>
+                <msub><mi>G</mi><msub><mi>n</mi><mn>2</mn></msub></msub>
+                <mo>⋯</mo>
+                <msub><mi>G</mi><msub><mi>n</mi><mi>k</mi></msub></msub>
+                <mi>V</mi><mo>.</mo>
+              </mrow>
+            </math>
+          </div>
+          <p>Because <var>A</var> is invertible and <var>U</var>, <var>V</var> have full interface rank, exterior powers of <var>A</var> cannot create or hide a zero. Mortality of the physical pair is therefore exactly mortality of the infinite return family. This is the split-return normal form.</p>
+          <p>The problem is not an ordinary scalar recurrence. A word may choose a different unbounded index <var>n</var> at every return, producing a product of recurrence values. Linear recurrence automata provide nearby vocabulary for this controlled setting <a href="#ref-hkpy-2024">[Hirvensalo et al. 2024]</a>.</p>
+
+          <h3 id="arithmetic-languages">Two arithmetic languages</h3>
+
+          <h4 id="projective-line">The projective line</h4>
+          <p>A nonzero column (<var>x</var>,<var>y</var>)<sup>T</sup> determines the projective point <var>z</var> = <var>x</var>/<var>y</var>. Columns differing by a nonzero scalar represent the same point; <var>y</var> = 0 represents infinity. An invertible 2 × 2 matrix acts by a Möbius transformation.</p>
+          <p>Projectivization forgets scale but preserves exactly the information needed by a rank-one separator. If the separator’s terminal row is (1,−1), it kills precisely the projective point <var>z</var> = 1.</p>
+
+          <h4 id="padic-valuation">The p-adic valuation</h4>
+          <p>Fix a prime <var>p</var>. For a nonzero rational number, <var>v</var><sub><var>p</var></sub> records the exponent of <var>p</var> in its reduced factorization. Thus</p>
+          <div class="formula plain">
+            <math display="block">
+              <mrow>
+                <msub><mi>v</mi><mi>p</mi></msub>
+                <mo>(</mo><msup><mi>p</mi><mn>3</mn></msup><mo>·</mo><mfrac><mn>7</mn><mn>11</mn></mfrac><mo>)</mo>
+                <mo>=</mo><mn>3</mn><mo>.</mo>
+              </mrow>
+            </math>
+          </div>
+          <p>A rational is a p-adic unit when its valuation is zero. The ultrametric law makes unequal valuations rigid:</p>
+          <div class="formula plain">
+            <math display="block">
+              <mrow>
+                <msub><mi>v</mi><mi>p</mi></msub><mo>(</mo><mi>x</mi><mo>)</mo>
+                <mo>≠</mo>
+                <msub><mi>v</mi><mi>p</mi></msub><mo>(</mo><mi>y</mi><mo>)</mo>
+                <mspace width="0.8em"></mspace><mo>⇒</mo><mspace width="0.8em"></mspace>
+                <msub><mi>v</mi><mi>p</mi></msub><mo>(</mo><mi>x</mi><mo>−</mo><mi>y</mi><mo>)</mo>
+                <mo>=</mo>
+                <mi>min</mi><mo>(</mo><msub><mi>v</mi><mi>p</mi></msub><mo>(</mo><mi>x</mi><mo>)</mo><mo>,</mo>
+                <msub><mi>v</mi><mi>p</mi></msub><mo>(</mo><mi>y</mi><mo>)</mo><mo>)</mo><mo>.</mo>
+              </mrow>
+            </math>
+          </div>
+          <p>The guard uses this law to compare an arbitrarily selected wait against an unbounded integer stored in the current projective point.</p>
+        </details>
+
+        <details class="major-section">
+          <summary><h2 id="new-stuff">New Stuff</h2></summary>
+
+          <h3 id="result">Result</h3>
+          <div class="theorem">
+            <p><strong>Amalgamated valuation guard.</strong> Fix a prime <var>p</var>, a depth <var>s</var> ≥ 2, a center <var>α</var>, and a reset <var>ρ</var>. Assume <var>α</var> and <var>α</var>−1 are p-adic units and <var>ρ</var> has positive valuation. The two rational 3 × 3 matrices constructed below are mortal exactly when the deterministic guarded orbit starting at <var>ρ</var> reaches 1.</p>
+          </div>
+          <p>The result does not decide that reachability problem. It removes the matrix-semigroup freedom surrounding it: separator placement, arbitrary words, incorrect waits, affine poles, and infinity are all covered by the equivalence.</p>
+
+          <h3 id="three-mode-family">The three-mode family</h3>
+
+          <h4 id="ambient-and-cut">Ambient action and cut</h4>
+          <p>Put <var>δ</var> = <var>ρ</var>−<var>α</var>. The hypotheses imply that <var>δ</var> is also a p-adic unit. Take</p>
+          <div class="formula">
+            <math display="block">
+              <mrow>
+                <mi>A</mi><mo>=</mo>
+                <mo fence="true" stretchy="true">[</mo>
+                <mtable>
+                  <mtr><mtd><mn>1</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd></mtr>
+                  <mtr><mtd><mn>0</mn></mtd><mtd><msup><mi>p</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup></mtd><mtd><mn>0</mn></mtd></mtr>
+                  <mtr><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd><mtd><msup><mi>p</mi><mrow><mi>s</mi><mo>−</mo><mn>1</mn></mrow></msup></mtd></mtr>
+                </mtable>
+                <mo fence="true" stretchy="true">]</mo><mo>,</mo>
+                <mspace width="1em"></mspace>
+                <mi>U</mi><mo>=</mo>
+                <mo fence="true" stretchy="true">[</mo>
+                <mtable>
+                  <mtr><mtd><mn>0</mn></mtd><mtd><mn>1</mn></mtd></mtr>
+                  <mtr><mtd><mn>1</mn></mtd><mtd><mn>0</mn></mtd></mtr>
+                  <mtr><mtd><mn>1</mn></mtd><mtd><mo>−</mo><mn>1</mn></mtd></mtr>
+                </mtable>
+                <mo fence="true" stretchy="true">]</mo><mo>,</mo>
+              </mrow>
+            </math>
+          </div>
+          <div class="formula">
+            <math display="block">
+              <mrow>
+                <mi>V</mi><mo>=</mo>
+                <mo fence="true" stretchy="true">[</mo>
+                <mtable>
+                  <mtr><mtd><mo>−</mo><mi>α</mi></mtd><mtd><mi>α</mi></mtd><mtd><mi>δ</mi></mtd></mtr>
+                  <mtr><mtd><mo>−</mo><mn>1</mn></mtd><mtd><mn>1</mn></mtd><mtd><mn>0</mn></mtd></mtr>
+                </mtable>
+                <mo fence="true" stretchy="true">]</mo><mo>,</mo>
+                <mspace width="1em"></mspace>
+                <mi>B</mi><mo>=</mo><mi>U</mi><mi>V</mi><mo>=</mo>
+                <mo fence="true" stretchy="true">[</mo>
+                <mtable>
+                  <mtr><mtd><mo>−</mo><mn>1</mn></mtd><mtd><mn>1</mn></mtd><mtd><mn>0</mn></mtd></mtr>
+                  <mtr><mtd><mo>−</mo><mi>α</mi></mtd><mtd><mi>α</mi></mtd><mtd><mi>δ</mi></mtd></mtr>
+                  <mtr><mtd><mrow><mn>1</mn><mo>−</mo><mi>α</mi></mrow></mtd><mtd><mrow><mi>α</mi><mo>−</mo><mn>1</mn></mrow></mtd><mtd><mi>δ</mi></mtd></mtr>
+                </mtable>
+                <mo fence="true" stretchy="true">]</mo><mo>.</mo>
+              </mrow>
+            </math>
+          </div>
+          <p>The ambient matrix has three distinct arithmetic modes: constant, contracting by <var>p</var>, and expanding by <var>p</var><sup><var>s</var>−1</sup>. The cut <var>B</var> has rank exactly two.</p>
+
+          <h4 id="return-matrices">Return matrices</h4>
+          <p>The return <var>G</var><sub><var>n</var></sub> = <var>VA</var><sup><var>n</var></sup><var>U</var> is</p>
+          <div class="formula">
+            <math display="block">
+              <mrow>
+                <msub><mi>G</mi><mi>n</mi></msub><mo>=</mo>
+                <mo fence="true" stretchy="true">[</mo>
+                <mtable>
+                  <mtr>
+                    <mtd><mrow><mi>α</mi><msup><mi>p</mi><mrow><mo>−</mo><mi>n</mi></mrow></msup><mo>+</mo><mi>δ</mi><msup><mi>p</mi><mrow><mo>(</mo><mi>s</mi><mo>−</mo><mn>1</mn><mo>)</mo><mi>n</mi></mrow></msup></mrow></mtd>
+                    <mtd><mrow><mo>−</mo><mi>α</mi><mo>−</mo><mi>δ</mi><msup><mi>p</mi><mrow><mo>(</mo><mi>s</mi><mo>−</mo><mn>1</mn><mo>)</mo><mi>n</mi></mrow></msup></mrow></mtd>
+                  </mtr>
+                  <mtr>
+                    <mtd><msup><mi>p</mi><mrow><mo>−</mo><mi>n</mi></mrow></msup></mtd>
+                    <mtd><mo>−</mo><mn>1</mn></mtd>
+                  </mtr>
+                </mtable>
+                <mo fence="true" stretchy="true">]</mo><mo>.</mo>
+              </mrow>
+            </math>
+          </div>
+          <p>At zero wait,</p>
+          <div class="formula plain">
+            <math display="block">
+              <mrow>
+                <msub><mi>G</mi><mn>0</mn></msub>
+                <mo>=</mo>
+                <mo fence="true" stretchy="true">[</mo>
+                <mtable><mtr><mtd><mi>ρ</mi></mtd></mtr><mtr><mtd><mn>1</mn></mtd></mtr></mtable>
+                <mo fence="true" stretchy="true">]</mo>
+                <mo fence="true" stretchy="true">[</mo>
+                <mtable><mtr><mtd><mn>1</mn></mtd><mtd><mo>−</mo><mn>1</mn></mtd></mtr></mtable>
+                <mo fence="true" stretchy="true">]</mo><mo>,</mo>
+                <mspace width="0.8em"></mspace>
+                <msubsup><mi>G</mi><mn>0</mn><mn>2</mn></msubsup>
+                <mo>=</mo><mo>(</mo><mi>ρ</mi><mo>−</mo><mn>1</mn><mo>)</mo><msub><mi>G</mi><mn>0</mn></msub><mo>.</mo>
+              </mrow>
+            </math>
+          </div>
+          <p>It is a nonnilpotent rank-one separator: it resets every non-kernel projective point to <var>ρ</var> and tests whether the incoming point is 1. Every positive return is invertible because</p>
+          <div class="formula plain">
+            <math display="block">
+              <mrow>
+                <mi>det</mi><mo>(</mo><msub><mi>G</mi><mi>n</mi></msub><mo>)</mo>
+                <mo>=</mo>
+                <mi>δ</mi><msup><mi>p</mi><mrow><mo>(</mo><mi>s</mi><mo>−</mo><mn>2</mn><mo>)</mo><mi>n</mi></mrow></msup>
+                <mo>(</mo><mn>1</mn><mo>−</mo><msup><mi>p</mi><mi>n</mi></msup><mo>)</mo>
+                <mo>≠</mo><mn>0</mn>
+                <mspace width="0.8em"></mspace><mo>(</mo><mi>n</mi><mo>≥</mo><mn>1</mn><mo>)</mo><mo>.</mo>
+              </mrow>
+            </math>
+          </div>
+          <p>The physical separator is already the word <var>B</var><sup>2</sup> = <var>UG</var><sub>0</sub><var>V</var>. No third generator is added.</p>
+
+          <h3 id="projective-guard">The projective guard</h3>
+
+          <h4 id="defect-identity">The defect identity</h4>
+          <p>Multiplying <var>G</var><sub><var>n</var></sub> by the nonzero scalar <var>p</var><sup><var>n</var></sup> does not change its projective action. In affine coordinate <var>z</var>, the resulting map is</p>
+          <div class="formula">
+            <math display="block">
+              <mrow>
+                <msub><mi>Φ</mi><mi>n</mi></msub><mo>(</mo><mi>z</mi><mo>)</mo>
+                <mo>=</mo>
+                <mfrac>
+                  <mrow>
+                    <mo>(</mo><mi>α</mi><mo>+</mo><mi>δ</mi><msup><mi>p</mi><mrow><mi>s</mi><mi>n</mi></mrow></msup><mo>)</mo><mi>z</mi>
+                    <mo>−</mo><mi>α</mi><msup><mi>p</mi><mi>n</mi></msup>
+                    <mo>−</mo><mi>δ</mi><msup><mi>p</mi><mrow><mi>s</mi><mi>n</mi></mrow></msup>
+                  </mrow>
+                  <mrow><mi>z</mi><mo>−</mo><msup><mi>p</mi><mi>n</mi></msup></mrow>
+                </mfrac><mo>.</mo>
+              </mrow>
+            </math>
+          </div>
+          <p>Its numerator and denominator satisfy the cross-multiplied identity</p>
+          <div class="formula">
+            <math display="block">
+              <mrow>
+                <msub><mi>Φ</mi><mi>n</mi></msub><mo>(</mo><mi>z</mi><mo>)</mo><mo>−</mo><mi>α</mi>
+                <mo>=</mo>
+                <mi>δ</mi><msup><mi>p</mi><mrow><mi>s</mi><mi>n</mi></mrow></msup>
+                <mfrac>
+                  <mrow><mi>z</mi><mo>−</mo><mn>1</mn></mrow>
+                  <mrow><mi>z</mi><mo>−</mo><msup><mi>p</mi><mi>n</mi></msup></mrow>
+                </mfrac><mo>.</mo>
+              </mrow>
+            </math>
+          </div>
+          <p>This identity compares the current valuation, the chosen wait, and the terminal defect <var>z</var>−1. The formal proof uses the cross-multiplied form, so the pole <var>z</var> = <var>p</var><sup><var>n</var></sup> is not silently discarded.</p>
+
+          <h4 id="permanent-trap">The permanent trap</h4>
+          <p>The live region consists of finite nonzero points of positive p-adic valuation. The target 1 is admitted separately. Define</p>
+          <div class="formula plain">
+            <math display="block">
+              <mrow>
+                <mi>Live</mi><mo>=</mo>
+                <mo>{</mo><mi>z</mi><mo>∈</mo><mi>ℚ</mi><mo>:</mo><msub><mi>v</mi><mi>p</mi></msub><mo>(</mo><mi>z</mi><mo>)</mo><mo>&gt;</mo><mn>0</mn><mo>}</mo><mo>,</mo>
+                <mspace width="0.8em"></mspace>
+                <mi>Trap</mi><mo>=</mo><msup><mi>ℙ</mi><mn>1</mn></msup><mo>(</mo><mi>ℚ</mi><mo>)</mo>
+                <mo>∖</mo><mo>(</mo><mi>Live</mi><mo>∪</mo><mo>{</mo><mn>1</mn><mo>}</mo><mo>)</mo><mo>.</mo>
+              </mrow>
+            </math>
+          </div>
+          <p>For every positive wait, the trap maps into itself. Negative-valuation points, zero, infinity, and nonterminal units all enter the unit residue ball around <var>α</var>. Since <var>α</var>−1 is a unit, that ball excludes the target 1. The same argument applies again at every later step.</p>
+
+          <h3 id="forced-computation">Forced computation</h3>
+
+          <h4 id="wrong-waits">Wrong waits</h4>
+          <p>Suppose the current point is live and put <var>a</var> = <var>v</var><sub><var>p</var></sub>(<var>z</var>) &gt; 0. Then <var>z</var>−1 is a unit. If the word chooses <var>n</var> ≠ <var>a</var>, unequal valuations give</p>
+          <div class="formula plain">
+            <math display="block">
+              <mrow>
+                <msub><mi>v</mi><mi>p</mi></msub><mo>(</mo><mi>z</mi><mo>−</mo><msup><mi>p</mi><mi>n</mi></msup><mo>)</mo>
+                <mo>=</mo><mi>min</mi><mo>(</mo><mi>a</mi><mo>,</mo><mi>n</mi><mo>)</mo><mo>.</mo>
+              </mrow>
+            </math>
+          </div>
+          <p>The defect identity then yields</p>
+          <div class="formula plain">
+            <math display="block">
+              <mrow>
+                <msub><mi>v</mi><mi>p</mi></msub>
+                <mo>(</mo><msub><mi>Φ</mi><mi>n</mi></msub><mo>(</mo><mi>z</mi><mo>)</mo><mo>−</mo><mi>α</mi><mo>)</mo>
+                <mo>=</mo><mi>s</mi><mi>n</mi><mo>−</mo><mi>min</mi><mo>(</mo><mi>a</mi><mo>,</mo><mi>n</mi><mo>)</mo>
+                <mo>&gt;</mo><mn>0</mn><mo>.</mo>
+              </mrow>
+            </math>
+          </div>
+          <p>The output is therefore a nonterminal unit in the trap. Every successful physical word must choose the unique wait</p>
+          <div class="formula plain">
+            <math display="block">
+              <mrow><mi>n</mi><mo>=</mo><msub><mi>v</mi><mi>p</mi></msub><mo>(</mo><mi>z</mi><mo>)</mo><mo>.</mo></mrow>
+            </math>
+          </div>
+
+          <h4 id="carry-depth">Carry depth</h4>
+          <p>The correct wait survives only when the state has the required p-adic precision. Write <var>z</var> = <var>p</var><sup><var>a</var></sup><var>u</var>, where <var>u</var> is a unit, and put <var>h</var> = <var>v</var><sub><var>p</var></sub>(<var>u</var>−1). For <var>u</var> ≠ 1,</p>
+          <div class="formula plain">
+            <math display="block">
+              <mrow>
+                <msub><mi>v</mi><mi>p</mi></msub>
+                <mo>(</mo><msub><mi>Φ</mi><mi>a</mi></msub><mo>(</mo><mi>z</mi><mo>)</mo><mo>−</mo><mi>α</mi><mo>)</mo>
+                <mo>=</mo><mo>(</mo><mi>s</mi><mo>−</mo><mn>1</mn><mo>)</mo><mi>a</mi><mo>−</mo><mi>h</mi><mo>.</mo>
+              </mrow>
+            </math>
+          </div>
+          <p>If the right side is positive, the output is a trapped unit; if negative, the output has negative valuation; if <var>z</var> = <var>p</var><sup><var>a</var></sup>, the output is infinity. Survival forces the exact ready condition</p>
+          <div class="formula plain">
+            <math display="block">
+              <mrow>
+                <msub><mi>v</mi><mi>p</mi></msub><mo>(</mo><mi>z</mi><mo>)</mo><mo>=</mo><mi>a</mi><mo>,</mo>
+                <mspace width="0.8em"></mspace>
+                <msub><mi>v</mi><mi>p</mi></msub><mo>(</mo><mi>z</mi><mo>−</mo><msup><mi>p</mi><mi>a</mi></msup><mo>)</mo>
+                <mo>=</mo><mi>s</mi><mi>a</mi><mo>.</mo>
+              </mrow>
+            </math>
+          </div>
+
+          <h3 id="tail-recurrence">The tail recurrence</h3>
+
+          <h4 id="ready-coordinates">Ready coordinates</h4>
+          <p>Every ready point has a unique p-adic unit tail <var>X</var>:</p>
+          <div class="formula plain">
+            <math display="block">
+              <mrow>
+                <mi>E</mi><mo>(</mo><mi>a</mi><mo>,</mo><mi>X</mi><mo>)</mo>
+                <mo>=</mo>
+                <msup><mi>p</mi><mi>a</mi></msup>
+                <mo>+</mo>
+                <mfrac><msup><mi>p</mi><mrow><mi>s</mi><mi>a</mi></mrow></msup><mi>X</mi></mfrac><mo>,</mo>
+                <mspace width="0.8em"></mspace>
+                <msub><mi>v</mi><mi>p</mi></msub><mo>(</mo><mi>X</mi><mo>)</mo><mo>=</mo><mn>0</mn><mo>.</mo>
+              </mrow>
+            </math>
+          </div>
+          <p>The visible valuation <var>a</var> selects the only legal wait. The tail <var>X</var> carries the remaining unbounded information. Substitution into the legal return gives the deterministic update</p>
+          <div class="formula">
+            <math display="block">
+              <mrow>
+                <msub><mi>Φ</mi><mi>a</mi></msub><mo>(</mo><mi>E</mi><mo>(</mo><mi>a</mi><mo>,</mo><mi>X</mi><mo>)</mo><mo>)</mo>
+                <mo>=</mo>
+                <mi>α</mi><mo>+</mo><mi>δ</mi>
+                <mo>(</mo><msup><mi>p</mi><mrow><mi>s</mi><mi>a</mi></mrow></msup>
+                <mo>+</mo><mo>(</mo><msup><mi>p</mi><mi>a</mi></msup><mo>−</mo><mn>1</mn><mo>)</mo><mi>X</mi><mo>)</mo><mo>.</mo>
+              </mrow>
+            </math>
+          </div>
+          <p>The next valuation and next tail are recovered from this rational output. Failure of the next ready condition enters the trap.</p>
+
+          <h4 id="inverse-grammar">Inverse grammar</h4>
+          <p>The local transition graph is not impoverished. Given positive valuations <var>a</var>, <var>b</var> and any unit target tail <var>X</var>′, define</p>
+          <div class="formula">
+            <math display="block">
+              <mrow>
+                <msub><mi>I</mi><mrow><mi>a</mi><mo>,</mo><mi>b</mi></mrow></msub><mo>(</mo><mi>X</mi><mo>′</mo><mo>)</mo>
+                <mo>=</mo>
+                <mfrac>
+                  <mrow>
+                    <msup><mi>p</mi><mi>b</mi></msup>
+                    <mo>+</mo><msup><mi>p</mi><mrow><mi>s</mi><mi>b</mi></mrow></msup><mo>/</mo><mi>X</mi><mo>′</mo>
+                    <mo>−</mo><mi>α</mi>
+                    <mo>−</mo><mi>δ</mi><msup><mi>p</mi><mrow><mi>s</mi><mi>a</mi></mrow></msup>
+                  </mrow>
+                  <mrow><mi>δ</mi><mo>(</mo><msup><mi>p</mi><mi>a</mi></msup><mo>−</mo><mn>1</mn><mo>)</mo></mrow>
+                </mfrac><mo>.</mo>
+              </mrow>
+            </math>
+          </div>
+          <p>This predecessor tail is always a unit and satisfies</p>
+          <div class="formula plain">
+            <math display="block">
+              <mrow>
+                <msub><mi>Φ</mi><mi>a</mi></msub>
+                <mo>(</mo><mi>E</mi><mo>(</mo><mi>a</mi><mo>,</mo><msub><mi>I</mi><mrow><mi>a</mi><mo>,</mo><mi>b</mi></mrow></msub><mo>(</mo><mi>X</mi><mo>′</mo><mo>)</mo><mo>)</mo><mo>)</mo>
+                <mo>=</mo><mi>E</mi><mo>(</mo><mi>b</mi><mo>,</mo><mi>X</mi><mo>′</mo><mo>)</mo><mo>.</mo>
+              </mrow>
+            </math>
+          </div>
+          <p>Every ready valuation cylinder can therefore reach every other. This is local symbolic completeness, not universality: one initial rational tail must satisfy the entire itinerary.</p>
+
+          <h3 id="arbitrary-words">Arbitrary physical words</h3>
+          <p>The free semigroup may place <var>A</var> and <var>B</var> in any order. The proof first fractures a zero product at occurrences of the internal separator <var>B</var><sup>2</sup>. Positive returns between separators act on projective states from right to left, matching matrix multiplication on columns.</p>
+          <p>Trap invariance propagates through every suffix of a successful bridge. A suffix cannot reach 1 early, because another positive return sends 1 into the trap. Every intermediate state is therefore live, and the forcing theorem makes its selected wait equal its valuation and its carry depth exact. Thus every successful arbitrary word is a legal path.</p>
+          <p>Conversely, every legal path is represented by its sequence of positive waits. The resulting equivalence is</p>
+          <div class="formula">
+            <math display="block">
+              <mtable columnalign="center">
+                <mtr>
+                  <mtd><mtext>the physical pair {A,B} is mortal</mtext></mtd>
+                </mtr>
+                <mtr><mtd><mo>⇔</mo></mtd></mtr>
+                <mtr>
+                  <mtd><mtext>some positive-return projective orbit sends ρ to 1</mtext></mtd>
+                </mtr>
+                <mtr><mtd><mo>⇔</mo></mtd></mtr>
+                <mtr>
+                  <mtd><mtext>the functional legal-step relation reaches 1 from ρ.</mtext></mtd>
+                </mtr>
+              </mtable>
+            </math>
+          </div>
+          <p>The coefficient Hankel section of the return series has rank three. The construction cannot be reproduced exactly in two linear states.</p>
+
+          <h3 id="examples">Concrete pairs</h3>
+          <p>Take <var>p</var> = 5, <var>s</var> = 2, <var>ρ</var> = 30, and <var>α</var> = 869/28. The reset is ready and its unique legal wait one reaches the target. Clearing denominators gives</p>
+          <div class="formula">
+            <math display="block">
+              <mrow>
+                <mi>A</mi><mo>=</mo>
+                <mo fence="true" stretchy="true">[</mo>
+                <mtable>
+                  <mtr><mtd><mn>5</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd></mtr>
+                  <mtr><mtd><mn>0</mn></mtd><mtd><mn>1</mn></mtd><mtd><mn>0</mn></mtd></mtr>
+                  <mtr><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>25</mn></mtd></mtr>
+                </mtable>
+                <mo fence="true" stretchy="true">]</mo><mo>,</mo>
+                <mspace width="1em"></mspace>
+                <mi>B</mi><mo>=</mo>
+                <mo fence="true" stretchy="true">[</mo>
+                <mtable>
+                  <mtr><mtd><mo>−</mo><mn>28</mn></mtd><mtd><mn>28</mn></mtd><mtd><mn>0</mn></mtd></mtr>
+                  <mtr><mtd><mo>−</mo><mn>869</mn></mtd><mtd><mn>869</mn></mtd><mtd><mo>−</mo><mn>29</mn></mtd></mtr>
+                  <mtr><mtd><mo>−</mo><mn>841</mn></mtd><mtd><mn>841</mn></mtd><mtd><mo>−</mo><mn>29</mn></mtd></mtr>
+                </mtable>
+                <mo fence="true" stretchy="true">]</mo><mo>.</mo>
+              </mrow>
+            </math>
+          </div>
+          <div class="formula plain">
+            <math display="block">
+              <mrow><msup><mi>B</mi><mn>2</mn></msup><mi>A</mi><msup><mi>B</mi><mn>2</mn></msup><mo>=</mo><mn>0</mn><mo>.</mo></mrow>
+            </math>
+          </div>
+          <p>The guard does not force termination. At <var>p</var> = 5, <var>s</var> = 2, <var>ρ</var> = 5/6, and <var>α</var> = 2, the ready reset is a nonterminal fixed point.</p>
+
+          <h3 id="open-core">The open arithmetic core</h3>
+          <p>Define a deterministic partial map on rational projective points. At a ready positive-valuation point, choose the only legal wait; send every illegal state to a rejecting sink:</p>
+          <div class="formula">
+            <math display="block">
+              <mrow>
+                <mi>F</mi><mo>(</mo><mi>z</mi><mo>)</mo>
+                <mo>=</mo>
+                <mi>α</mi><mo>+</mo><mo>(</mo><mi>ρ</mi><mo>−</mo><mi>α</mi><mo>)</mo>
+                <msup><mi>p</mi><mrow><mi>s</mi><msub><mi>v</mi><mi>p</mi></msub><mo>(</mo><mi>z</mi><mo>)</mo></mrow></msup>
+                <mfrac>
+                  <mrow><mi>z</mi><mo>−</mo><mn>1</mn></mrow>
+                  <mrow><mi>z</mi><mo>−</mo><msup><mi>p</mi><mrow><msub><mi>v</mi><mi>p</mi></msub><mo>(</mo><mi>z</mi><mo>)</mo></mrow></msup></mrow>
+                </mfrac><mo>.</mo>
+              </mrow>
+            </math>
+          </div>
+          <p>The remaining problem is whether an orbit of this form reaches 1. An undecidability proof would use the visible valuation as an instruction and the unit tail as unbounded memory. A decidability proof would need a global invariant: a finite p-adic nucleus, height descent, continued-fraction normal form, or another effective restriction on rational tails.</p>
+          <p>No generator-count, rank, punctuation, malformed-word, or illegal-choice problem remains in this architecture. The open object is the deterministic arithmetic recurrence itself.</p>
+        </details>
+
+        <details class="major-section">
+          <summary><h2 id="bookkeeping">Bookkeeping</h2></summary>
+
+          <h3 id="verification">Verification and provenance</h3>
+          <div class="status-grid">
+            <div>
+              <b><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/cbaa2cb/MatrixMortality/ReturnFamily.lean">Return compiler</a></b>
+              <p>Lean checks the split finite-rank return normal form and the complete mortality equivalence for a rank-one zero return with invertible positive returns.</p>
+            </div>
+            <div>
+              <b><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/cbaa2cb/MatrixMortality/ReturnGuard.lean">Three-mode algebra</a></b>
+              <p>Lean checks the explicit matrices, return formula, ranks, determinants, projective defect identity, separator, and exact three-state Hankel lower bound.</p>
+            </div>
+            <div>
+              <b><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/cbaa2cb/MatrixMortality/ReturnGuardDynamics.lean">Guarded dynamics</a></b>
+              <p>Lean checks the total projective action, p-adic trap, wait and carry-depth forcing, ready-tail grammar, functional reachability relation, and arbitrary-word converse.</p>
+            </div>
+            <div>
+              <b><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/cbaa2cb/MatrixMortality/ReturnGuardExamples.lean">Exact examples</a></b>
+              <p>Lean checks the rational parameters, denominator-cleared integer zero product, and ready nonterminal fixed point.</p>
+            </div>
+            <div>
+              <b><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/cbaa2cb/verification/axioms.txt">Transitive axioms</a></b>
+              <p>Publication-facing declarations use only <code>propext</code>, <code>Classical.choice</code>, and <code>Quot.sound</code>. The project contains no admitted proof or project axiom.</p>
+            </div>
+            <div>
+              <b><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/cbaa2cb/audits/m32-valuation-guard-2026-07-29.md">Independent audit</a></b>
+              <p>The audit reconstructs the multiplication order, affine poles, trap cases, inverse grammar, concrete certificates, and exact unresolved boundary.</p>
+            </div>
+          </div>
+
+          <h3 id="formal-scope">Formal scope</h3>
+          <p>The matrix identities, rank statements, complete physical mortality equivalence, total projective semantics, p-adic forcing theorems, tail grammar, concrete examples, and exact state lower bound are machine-checked over ℚ. Independent nonzero scaling clears the two physical generators to integer matrices without changing zero products.</p>
+          <p>The formal result does not prove M<sub>3</sub>(2) decidable or undecidable. It proves an exact equivalence for the displayed parametric family. No universal source computation has been compiled into its deterministic orbit, and no decision procedure for that orbit is claimed.</p>
+          <p>The hypotheses are stated at their exact formal strength. The prime need not be separately assumed odd; requiring both <var>α</var> and <var>α</var>−1 to be p-adic units already excludes the impossible residue behavior at two.</p>
+
+          <h3 id="priority">Priority</h3>
+          <p>To our knowledge, after searches through 28 July 2026, the nearest published framework is recurrence-controlled matrix reachability <a href="#ref-hkpy-2024">[Hirvensalo et al. 2024]</a>. No located source gives this three-mode return family, its internal separator, the exact valuation trap, or the mortality-to-functional-orbit equivalence. The foundational low-dimensional mortality decomposition and bounded mortality notation are prior art <a href="#ref-bournez-branicky-2002">[Bournez–Branicky 2002]</a> <a href="#ref-chhn-2014">[Cassaigne et al. 2014]</a>. “No located source” is limited to publicly discoverable work.</p>
+
+          <ul class="artifact-list" aria-label="Proof artifacts">
+            <li><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/tree/cbaa2cb"><b>Checked source snapshot</b>Lean development, strict verification gate, local bibliography, and campaign ledgers</a></li>
+            <li><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/cbaa2cb/audits/m32-rank-return-2026-07-28.md"><b>Rank-return audit</b>Rank-profile reduction, return-recurrence boundary, decidable strata, and no-go theorems</a></li>
+            <li><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/12"><b>Open arithmetic frontier</b>Durable progress ledger and acceptance boundary for the deterministic guarded recurrence</a></li>
+          </ul>
+
+          <h3 id="sources">References</h3>
+          <ol class="references">
+            <li id="ref-bournez-branicky-2002"><span>Olivier Bournez and Michael S. Branicky, <a href="https://doi.org/10.1007/s00224-002-1010-5"><cite>The Mortality Problem for Matrices of Low Dimensions</cite></a>, Theory of Computing Systems 35(4):433–448, 2002. Low-dimensional mortality and singular-endpoint structure.</span></li>
+            <li id="ref-chhn-2014"><span>Julien Cassaigne, Vesa Halava, Tero Harju, and François Nicolas, <a href="https://arxiv.org/abs/1404.0644"><cite>Tighter Undecidability Bounds for Matrix Mortality, Zero-in-the-Corner Problems, and More</cite></a>, 2014. Bounded mortality notation and neighboring undecidability bounds.</span></li>
+            <li id="ref-hkpy-2024"><span>Mika Hirvensalo, Akitoshi Kawamura, Igor Potapov, and Takao Yuyama, <a href="https://doi.org/10.1007/978-3-031-72621-7_12"><cite>Reachability in Linear Recurrence Automata</cite></a>, Reachability Problems, 2024. Comparative framework for recurrence-indexed matrix reachability.</span></li>
+          </ol>
+        </details>
+      </article>
+    </main>
+  </div>
+
+  <footer>
+    <div>
+      <p>GPT-5.6 Sol · elicited by @eternalism_4eva · 29 July 2026</p>
+    </div>
+  </footer>
+</body>
+</html>

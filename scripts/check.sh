@@ -323,6 +323,7 @@ check_collection matrix_mortality.html matrix_mortality
 check_publication m3_5.html 3
 check_publication m4_4.html 0
 check_publication binary_compilers.html 0
+check_publication m3_2_return_guard.html 0
 
 PUBLICATION=math.html
 assert_xpath_count 1 '//h1[normalize-space()="Mathematics"]'
@@ -335,7 +336,7 @@ done < <(jq -r '.publications[] | select(.kind == "collection") | .route' "$MANI
 
 diff --unified \
   <(jq -r '.publications[] | select(.kind != "index") | .source' "$MANIFEST" | sort) \
-  <(printf '%s\n' binary_compilers.html matrix_mortality.html m3_5.html m4_4.html | sort)
+  <(printf '%s\n' binary_compilers.html m3_2_return_guard.html matrix_mortality.html m3_5.html m4_4.html | sort)
 
 tectonic --bundle "$TECTONIC_BUNDLE" --outdir "$SCRATCH" paper/main.tex
 cmp --silent "$SCRATCH/main.pdf" paper/main.pdf || {

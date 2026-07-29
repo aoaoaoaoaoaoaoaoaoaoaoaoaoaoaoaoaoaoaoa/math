@@ -27,6 +27,11 @@
       "kind": "result",
       "source": "binary_compilers.html",
       "route": "matrix_mortality/binary_compilers"
+    },
+    {
+      "kind": "result",
+      "source": "m3_2_return_guard.html",
+      "route": "matrix_mortality/m3_2_return_guard"
     }
   ]
 }
