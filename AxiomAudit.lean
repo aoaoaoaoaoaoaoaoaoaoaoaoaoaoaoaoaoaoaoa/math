@@ -262,6 +262,13 @@ open MatrixMortality
 #print axioms ReturnGuard.tangentTransfer_localized_isUnit_iff
 #print axioms ReturnGuard.awayFive_three_pow_not_associated_of_lt
 #print axioms ReturnGuard.exists_localized_nonunit_three_cancellationDepth
+#print axioms ReturnGuard.ScaledTrajectory.chronologicalProduct_mulVec
+#print axioms ReturnGuard.ScaledTrajectory.image_gcd
+#print axioms ReturnGuard.prescribedReset_primitiveIntegralStep
+#print axioms ReturnGuard.prescribedReset_factor_isCoprime_fixedSupport
+#print axioms ReturnGuard.Examples.cyclotomicLadder_decodedSteps
+#print axioms ReturnGuard.Examples.cyclotomicLadder_primitiveSteps
+#print axioms ReturnGuard.Examples.cyclotomicLadder_novelFactors
 #print axioms ReturnGuard.commonDivisor_dvd_det
 #print axioms ReturnGuard.integralStep_commonDivisor_dvd_cyclotomicSupport
 #print axioms ReturnGuard.integralStep_cyclotomic_reset_or_cancel

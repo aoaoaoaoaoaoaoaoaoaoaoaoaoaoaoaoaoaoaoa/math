@@ -18,6 +18,17 @@ def HasValue (prime : Nat) (value : ℚ) (valuation : ℤ) : Prop :=
 abbrev IsUnit (prime : Nat) (value : ℚ) : Prop :=
   HasValue prime value 0
 
+/-- An integer not divisible by the valuation prime is a rational unit. -/
+theorem intCast_isUnit_of_not_dvd
+    {prime : Nat} {value : ℤ}
+    (not_dvd : ¬(prime : ℤ) ∣ value) :
+    IsUnit prime (value : ℚ) := by
+  refine ⟨?_, ?_⟩
+  · exact_mod_cast fun value_zero : value = 0 =>
+      not_dvd (value_zero ▸ dvd_zero (prime : ℤ))
+  · rw [padicValRat.of_int]
+    exact_mod_cast padicValInt.eq_zero_of_not_dvd not_dvd
+
 /-- A nonzero rational in the positive-valuation shell at `prime`. -/
 def IsPositive (prime : Nat) (value : ℚ) : Prop :=
   value ≠ 0 ∧ 0 < padicValRat prime value
@@ -61,6 +72,20 @@ theorem div_hasValue
   ⟨div_ne_zero numerator_value.1 denominator_value.1, by
     rw [padicValRat.div numerator_value.1 denominator_value.1,
       numerator_value.2, denominator_value.2]⟩
+
+/-- A prime power times a quotient of two prime-free integers has the displayed valuation. -/
+theorem primePower_mul_int_div_int_hasValue
+    {prime : Nat} [Fact prime.Prime] (exponent : Nat)
+    {numerator denominator : ℤ}
+    (numerator_not_dvd : ¬(prime : ℤ) ∣ numerator)
+    (denominator_not_dvd : ¬(prime : ℤ) ∣ denominator) :
+    HasValue prime
+      ((prime : ℚ) ^ exponent * numerator / denominator) exponent := by
+  simpa using
+    div_hasValue
+      (mul_hasValue (primePower_hasValue exponent)
+        (intCast_isUnit_of_not_dvd numerator_not_dvd))
+      (intCast_isUnit_of_not_dvd denominator_not_dvd)
 
 /-- Every positive-valuation rational is a positive prime power times a unit. -/
 theorem positive_eq_primePower_mul_unit

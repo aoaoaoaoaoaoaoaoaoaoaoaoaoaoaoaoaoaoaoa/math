@@ -516,6 +516,23 @@
 'MatrixMortality.ReturnGuard.exists_localized_nonunit_three_cancellationDepth' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.ReturnGuard.ScaledTrajectory.chronologicalProduct_mulVec' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.ScaledTrajectory.image_gcd' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ReturnGuard.prescribedReset_primitiveIntegralStep' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.ReturnGuard.prescribedReset_factor_isCoprime_fixedSupport' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.Examples.cyclotomicLadder_decodedSteps' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.Examples.cyclotomicLadder_primitiveSteps' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.Examples.cyclotomicLadder_novelFactors' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.ReturnGuard.commonDivisor_dvd_det' depends on axioms: [propext, Quot.sound]
 'MatrixMortality.ReturnGuard.integralStep_commonDivisor_dvd_cyclotomicSupport' depends on axioms: [propext,
  Classical.choice,

@@ -103,6 +103,7 @@ file owns the mathematical stock.
 | [`R32-S16`](#r32-s16-cancellation-blow-up-and-unbounded-depth) | obstruction | primitive cancellation is a surjective projective blow-up with no uniform finite-jet bound | formalized | active |
 | [`R32-S17`](#r32-s17-normalized-tangent-cocycle) | structure theorem | consecutive primitive reductions form a recursive two-dimensional tangent cocycle with exact cyclotomic support | formalized | active |
 | [`R32-S18`](#r32-s18-fixed-support-localization-obstruction) | obstruction | fixed-support localization isolates the cyclotomic determinant but retains an infinite strict tower of novel cancellation depths | formalized | active |
+| [`R32-S19`](#r32-s19-canonical-cyclotomic-collision-ladders) | structure theorem and obstruction | tangent content is exactly multiplicative, yet one canonical reset orbit can swallow four successive novel cyclotomic factors | formalized | active |
 | [`M4-C01`](#m4-c01-two-state-pushout-compiler) | compiler | binary deterministic two-state scalar control compiles to three `4 × 4` matrices | formalized | graduated |
 | [`M4-O01`](#m4-o01-exact-toggle-fusion-leaves-an-immortal-core) | obstruction | exact local toggle fusion preserves a nonzero common anchor | formalized | graduated |
 | [`M4-O02`](#m4-o02-two-private-state-phase-signature) | obstruction | two private quotient states cannot isolate one exceptional cyclic phase | formalized | graduated |
@@ -3203,6 +3204,84 @@ make that same orbit traverse an unbounded chain of novel localized divisors.
 **Next:** derive an orbitwise product formula or height inequality comparing newly swallowed
 cyclotomic factors with the primitive tangent height, and test it on terminal-reaching reset
 executions.
+
+### R32-S19: Canonical cyclotomic collision ladders
+
+**Kind:** structure theorem and obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+For any finite projective transfer chain
+
+```text
+Mᵢvᵢ=cᵢvᵢ₊₁,
+```
+
+the chronological product satisfies
+
+```text
+Mₖ₋₁⋯M₀v₀=(∏ᵢcᵢ)vₖ.
+```
+
+If `vₖ` is primitive, `|∏ᵢcᵢ|` is exactly the coordinate gcd of the composed
+image. This is a content identity, not a descent: transfer height can grow by the amount needed
+to carry every removed scalar.
+
+The canonical residual source `(1,1)` also admits prescribed novel cancellation. If
+
+```text
+pᵃ−1=q r
+```
+
+and
+
+```text
+D=pᵃ+q p^(sa)−A,
+```
+
+then its first primitive integral step is
+
+```text
+(1,1)  ⟶  q·(1,p^(sa)+r).
+```
+
+At `A=2`, `q` is coprime to the fixed support `D·p`. Thus any chosen divisor of one
+cyclotomic factor can be swallowed by a canonical reset without becoming fixed support.
+
+The fixed guard
+
+```text
+(p,s,α,ρ)=(3,2,−64,52569)
+```
+
+has a canonical legal wait prefix `4,2,2,1`. Its primitive reductions remove
+
+```text
+8,2,292,2.
+```
+
+After deleting fixed support, the successive novel factors are `8,2,4,2`.
+
+**Scope:** the construction prescribes one collision uniformly across the parameter family and
+checks four consecutive collisions on one fixed reset orbit. It does not construct arbitrarily
+long prefixes or one orbit with unbounded novel depth.
+
+**Artifact:** `ReturnGuard.ScaledTrajectory.chronologicalProduct_mulVec`,
+`ReturnGuard.ScaledTrajectory.image_gcd`,
+`ReturnGuard.prescribedReset_primitiveIntegralStep`, and
+`ReturnGuard.prescribedReset_factor_isCoprime_fixedSupport` in
+[`ReturnGuardTangentBudget.lean`](MatrixMortality/ReturnGuardTangentBudget.lean);
+`ReturnGuard.Examples.cyclotomicLadder_decodedSteps`,
+`cyclotomicLadder_primitiveSteps`, and `cyclotomicLadder_novelFactors` in
+[`ReturnGuardTangentExamples.lean`](MatrixMortality/ReturnGuardTangentExamples.lean).
+
+**Use:** abandon parameter-uniform endpoint-content budgets and any claim that canonical novel
+collisions are isolated. The remaining fork is per-instance boundedness versus arithmetic
+synthesis of arbitrarily long collision prefixes.
+
+**Next:** express prefix preservation as a finite `p`-adic congruence and the next moving-kernel
+collision as a coprime cyclotomic congruence. Prove a CRT/Hensel extension lemma or expose the
+first compatibility invariant that prevents it.
 
 ## Three-Generator Four-State Frontier
 
