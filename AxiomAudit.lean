@@ -311,6 +311,17 @@ open MatrixMortality
 #print axioms ReturnGuard.prescribedTransverseDepthTail_isUnit
 #print axioms ReturnGuard.prescribedTransverseDepth_hasValue
 #print axioms ReturnGuard.prescribedTransverseDepth_orbit_hasValue
+#print axioms RationalPadicDigits.denominatorDigit_add_totient
+#print axioms RationalPadicDigits.denominatorDigit_nonneg
+#print axioms RationalPadicDigits.denominatorDigit_lt
+#print axioms RationalPadicDigits.negativeRemainder_recurrence
+#print axioms RationalPadicDigits.exists_intCast_sub_initialRemainder
+#print axioms RationalPadicDigits.rationalPairDigit_add_commonPeriod
+#print axioms ReturnGuard.planeSolveDigit_parameterGradientStep
+#print axioms ReturnGuard.prescribedTransverseDepth_weightedCenterDigit_hasValue
+#print axioms ReturnGuard.parameterRefinement_movingBasis
+#print axioms ReturnGuard.Examples.weightedDigit_value
+#print axioms ReturnGuard.Examples.minusHalf_ternaryDigit
 #print axioms ReturnGuard.commonDivisor_dvd_det
 #print axioms ReturnGuard.integralStep_commonDivisor_dvd_cyclotomicSupport
 #print axioms ReturnGuard.integralStep_cyclotomic_reset_or_cancel

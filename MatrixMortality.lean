@@ -21,6 +21,7 @@ import MatrixMortality.ReturnJordan
 import MatrixMortality.ReturnConvert
 import MatrixMortality.ProjectiveLine
 import MatrixMortality.PadicValuation
+import MatrixMortality.RationalPadicDigits
 import MatrixMortality.ReturnGuard
 import MatrixMortality.ReturnGuardDynamics
 import MatrixMortality.ReturnGuardShift
@@ -47,6 +48,8 @@ import MatrixMortality.ReturnGuardParameterPlaneExamples
 import MatrixMortality.ReturnGuardParameterLattice
 import MatrixMortality.ReturnGuardParameterLatticeExamples
 import MatrixMortality.ReturnGuardParameterJet
+import MatrixMortality.ReturnGuardParameterDigits
+import MatrixMortality.ReturnGuardParameterDigitsExamples
 import MatrixMortality.ReturnGuardResonance
 import MatrixMortality.ReturnGuardRail
 import MatrixMortality.ReturnGuardExamples

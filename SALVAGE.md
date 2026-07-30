@@ -109,6 +109,7 @@ file owns the mathematical stock.
 | [`R32-S22`](#r32-s22-two-parameter-annular-escape) | partial mechanism | center/reset sensitivities form a two-dimensional affine cocycle whose transverse digits discharge the anti-Hensel conflict | formalized | active |
 | [`R32-S23`](#r32-s23-anisotropic-parameter-ray) | structure theorem and obstruction | parameter magnitude explodes while its projective direction freezes at an explicit p-adic rate; one full anisotropic cylinder retains waits `1,3,1` | formalized | active |
 | [`R32-S24`](#r32-s24-renormalized-parameter-jet) | structure theorem and obstruction | an exact integrating factor turns gradient growth into a convergent additive jet, but its conserved transverse defect has arbitrarily large prescribed depth | formalized | active |
+| [`R32-S25`](#r32-s25-weighted-cramer-digit) | structure theorem and obstruction | the raw sensitivity scale cancels from the escape digit, but its transverse denominator has unbounded depth and lives in a moving jet basis | formalized | active |
 | [`M4-C01`](#m4-c01-two-state-pushout-compiler) | compiler | binary deterministic two-state scalar control compiles to three `4 × 4` matrices | formalized | graduated |
 | [`M4-O01`](#m4-o01-exact-toggle-fusion-leaves-an-immortal-core) | obstruction | exact local toggle fusion preserves a nonzero common anchor | formalized | graduated |
 | [`M4-O02`](#m4-o02-two-private-state-phase-signature) | obstruction | two private quotient states cannot isolate one exceptional cyclic phase | formalized | graduated |
@@ -3638,6 +3639,96 @@ recurrence.
 **Next:** derive the variable-payload multi-step sum for `κ` and the induced weighted Cramer
 digit. Decide whether rational guard parameters force the sequence of defect depths to be
 eventually periodic, or construct a canonical orbit with unbounded defect depth.
+
+### R32-S25: Weighted Cramer digit
+
+**Kind:** structure theorem and obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+The integrating-factor chart removes the raw sensitivity scale from the center/reset escape
+digit exactly. Write
+
+```text
+g  = q  · (j₀−j₁,j₁),
+g' = q' · (j₀'−j₁',j₁'),
+λ  = q'/q,
+κ  = (g∧g')/q = q'(j∧j').
+```
+
+Cramer's rule becomes
+
+```text
+d_center =
+  ((oldTarget−oldValue) λ j₁' + j₁ newValue) / κ,
+
+d_reset =
+  (−(j₀−j₁)newValue
+   −(oldTarget−oldValue) λ(j₀'−j₁')) / κ.
+```
+
+For one guard step, `λ=−C` and `κ` is precisely the normalized transverse defect of
+`R32-S24`. The incoming scale `q` is absent. This proves that raw sensitivity explosion was a
+coordinate artifact and identifies the actual arithmetic tax: division by `κ`.
+
+That tax is unbounded. For the explicit unit tails
+
+```text
+X_N = (1+p^N−p^(sa))/(p^a−1),
+```
+
+take old value and target zero, new value one, scale one, and the reset gradient `(0,1)`.
+The weighted center digit is exactly `1/p^N`, hence has valuation `−N`. No fixed denominator,
+integral weighted lattice, or bounded digit alphabet contains all transverse escape stages.
+
+Rationality still gives a genuine periodic object, but not this one. For every rational
+coordinate with denominator coprime to `p`, Lean constructs its ordinary denominator digits
+
+```text
+dₙ = (p rₙ₊₁−rₙ)/b,
+```
+
+proves `0≤dₙ<p`, the exact recurrence
+
+```text
+−rₙ/b = dₙ + p(−rₙ₊₁/b),
+```
+
+and period dividing `φ(b)`. A rational parameter pair has the common period
+`φ(b₀)φ(b₁)`. Guard refinements, however, are read in a moving jet basis. If a basis changes
+from `B` to `BT`, its tail obeys
+
+```text
+ξ = d + T ξ',
+```
+
+not the fixed-base recurrence. Ordinary rational digit periodicity constrains the weighted
+Cramer sequence only after the nonconstant transport cocycle `T` is controlled.
+
+**Scope:** the weighted solver is an exact field identity and its guard specialization is over
+`ℚ`. The unbounded-denominator family is exact for every prime and positive wait. The rational
+digit theorem concerns canonical denominator tails with prime-free denominators; it does not
+assert periodicity of a guard's moving-basis digits. The result neither excludes a finite
+automaton for the full cocycle nor constructs an infinite rational lift.
+
+**Artifact:** `RationalPadicDigits.denominatorDigit_add_totient`,
+`negativeRemainder_recurrence`, and `rationalPairDigit_add_commonPeriod` in
+[`RationalPadicDigits.lean`](MatrixMortality/RationalPadicDigits.lean);
+`ReturnGuard.planeSolveDigit_parameterGradientStep`,
+`prescribedTransverseDepth_weightedCenterDigit_hasValue`, and
+`parameterRefinement_movingBasis` in
+[`ReturnGuardParameterDigits.lean`](MatrixMortality/ReturnGuardParameterDigits.lean);
+the exact stage certificates in
+[`ReturnGuardParameterDigitsExamples.lean`](MatrixMortality/ReturnGuardParameterDigitsExamples.lean).
+
+**Use:** formulate every future parameter lift in `(q,j,κ)` coordinates. Ignore the magnitude
+of `q`; charge denominator depth to `κ`. A decidability proof must show that the moving-basis
+cocycle has an effective finite nucleus or becomes periodic modulo the denominator period. An
+undecidability proof may instead use unbounded `κ`-depth as the writable carry reservoir.
+
+**Next:** derive the exact basis-transition matrix between consecutive Cramer frames and reduce
+it modulo the ordinary rational digit period. Either obtain a finite skew-product automaton or
+construct a rational orbit whose transverse denominator depths are unbounded and nonperiodic.
 
 ## Three-Generator Four-State Frontier
 

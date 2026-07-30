@@ -877,6 +877,35 @@ fixed unit annulus. For every `N>0`, an explicit unit tail makes `κ` have exact
 constant-stage iteration preserves that depth forever. Renormalization removes the false
 explosion but exposes an unbounded transverse-depth coordinate.
 
+[`R32-S25`](SALVAGE.md#r32-s25-weighted-cramer-digit) extracts the escape digit in these
+coordinates. If
+
+```text
+g  = q  · (j₀−j₁,j₁),
+g' = q' · (j₀'−j₁',j₁'),
+λ  = q'/q,
+κ  = q'(j∧j'),
+```
+
+then Cramer's rule depends on `(j,j',λ,κ)` and not on the incoming magnitude `q`. The apparent
+sensitivity explosion is therefore absent from the actual digit. The surviving denominator is
+exactly `κ`, and the arbitrary-depth family from `R32-S24` makes one digit equal to `1/p^N`
+for every positive `N`.
+
+Ordinary rational base-`p` denominator digits are periodic. Lean proves an exact recurrence,
+digit bounds, Euler period, and one common period for a rational pair. This does not settle the
+escape sequence: its digits are read in consecutive Cramer frames. Under a frame change `T`,
+the tail law is
+
+```text
+ξ = d + T ξ'.
+```
+
+The naive periodic-rational-digit attack is therefore closed. The live object is the skew
+product of an ordinary finite digit period with the moving rational frame cocycle. A decision
+proof must exhibit a finite nucleus for this skew product; a universality proof may instead use
+the unbounded `κ`-depth as writable carry.
+
 The surviving obligation is therefore a source theorem, or its negation: prove that this
 countably branched rational address system can simulate universal deterministic computation
 inside infinitely nested equal-depth resonance, or decide finite terminal-address membership by
@@ -891,19 +920,19 @@ selected wait, or rational affine-counter problem remains in this architecture.
 | Amalgamated valuation guard | Compile a universal deterministic source into the resonant tail recurrence, or decide that recurrence | Matrix mortality is already equivalent to one deterministic orbit, but its remaining arithmetic is not covered by known p-adic dynamics |
 | Irreducible cubic return pencil | Replace the split spectrum by a cubic companion action whose `2 × 2` return sequence has no fixed rail or target strip | A candidate still needs an internal low-rank return and an exact arbitrary-word normal form |
 | Multi-prime ReturnSquare | Extend the rational-root support and finite walls from prime powers to bases with several prime factors | Mixed prime support permits roots not confined to one valuation ray |
-| Cancellation-aware local-global sieve | Control the variable-payload defect recurrence and decide whether rational guards have bounded or eventually periodic transverse depth | [`R32-S24`](SALVAGE.md#r32-s24-renormalized-parameter-jet) gives a fixed-dimensional additive jet but proves that its transverse defect can begin at any prescribed depth |
+| Cramer-frame skew product | Derive the exact consecutive-frame transport and decide whether its product with periodic rational denominator digits has a finite nucleus | [`R32-S25`](SALVAGE.md#r32-s25-weighted-cramer-digit) removes raw scale but leaves an unbounded transverse denominator and a nonconstant moving basis |
 | Valuation and cone dynamics | Extend the signed-cone pullback or a `p`-adic invariant across the remaining middle strip or a new pencil | Cancellation at poles and between spectral modes destroys naive monotonicity |
 | Same-zero return surgery | Change nonzero return values while preserving the zero semigroup, thereby evading exact Hankel taxes | No general same-zero minimization theorem exists; every surgery needs its own arbitrary-product converse |
 | Exceptional reverse compiler | Absorb the finite `αβ=0` disjunction into one three-dimensional many-one instance | The generic all-path compiler is complete; dimension three has no evident OR operation |
 
-The highest-value lunge is now the variable-payload defect orbit. The matrix compiler, all-word
-converse, wait decoder, rational address grammar, local blow-up, and integrating-factor
-renormalization are complete; nonresonant dynamics, rational affine counter rails, ordinary
-quotient products, uniform unweighted lifting, and a uniform transverse unit annulus are closed.
-The next useful mathematics is the weighted Cramer digit driven by
-`κ' = κ+(H'−H)j₀'`: either prove rational parameters force bounded or eventually periodic defect
-depth, or construct one canonical rational orbit whose unbounded depth realizes an infinite
-compatible collision ladder.
+The highest-value lunge is now the consecutive Cramer-frame cocycle. The matrix compiler,
+all-word converse, wait decoder, rational address grammar, local blow-up, integrating-factor
+renormalization, and scale-free digit formula are complete; nonresonant dynamics, rational
+affine counter rails, ordinary quotient products, uniform unweighted lifting, a uniform
+transverse unit annulus, and fixed-coordinate rational periodicity are closed. The next useful
+mathematics is an exact transition matrix between successive normalized frames. Its reduction
+must either yield a finite skew-product automaton or expose an unbounded carry register with an
+arbitrary-prefix synthesis theorem.
 
 The strategic boundary is now clear. The easy layer consisted of finding and repairing missing
 finite compilers. `M₃(2)` asks whether one low-dimensional recurrence family can store

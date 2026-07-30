@@ -461,6 +461,9 @@ with a complete arbitrary-word converse.
 | `ReturnGuardParameterLattice.lean` | exact anisotropic sensitivity valuations and p-adic freezing of the projective parameter ray |
 | `ReturnGuardParameterLatticeExamples.lean` | full center/reset congruence cylinder with the common legal wait prefix `1,3,1` |
 | `ReturnGuardParameterJet.lean` | integrating-factor normal form, conserved normalized transverse defect, and arbitrary-depth defect witnesses |
+| `RationalPadicDigits.lean` | periodic rational denominator digits, exact digit bounds, and coordinatewise common periods |
+| `ReturnGuardParameterDigits.lean` | scale-free weighted Cramer solver, exact transverse denominator, and moving-basis tail transport |
+| `ReturnGuardParameterDigitsExamples.lean` | exact weighted Cramer stage and constant ternary expansion of `−1/2` |
 | `ReturnGuardResonance.lean` | nonresonant descent, resonance localization, and corrected nested readiness |
 | `ReturnGuardRail.lean` | polynomial divisibility and rational affine-wait rail obstruction |
 | `ReturnGuardExamples.lean` | concrete mortal pair, nonterminal fixed point, and nested rational period-three orbit |

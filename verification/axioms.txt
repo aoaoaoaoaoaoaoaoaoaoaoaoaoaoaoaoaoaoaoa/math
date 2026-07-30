@@ -637,6 +637,29 @@
 'MatrixMortality.ReturnGuard.prescribedTransverseDepth_orbit_hasValue' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.RationalPadicDigits.denominatorDigit_add_totient' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.RationalPadicDigits.denominatorDigit_nonneg' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.RationalPadicDigits.denominatorDigit_lt' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.RationalPadicDigits.negativeRemainder_recurrence' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.RationalPadicDigits.exists_intCast_sub_initialRemainder' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.RationalPadicDigits.rationalPairDigit_add_commonPeriod' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.planeSolveDigit_parameterGradientStep' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.prescribedTransverseDepth_weightedCenterDigit_hasValue' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.parameterRefinement_movingBasis' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ReturnGuard.Examples.weightedDigit_value' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ReturnGuard.Examples.minusHalf_ternaryDigit' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.ReturnGuard.commonDivisor_dvd_det' depends on axioms: [propext, Quot.sound]
 'MatrixMortality.ReturnGuard.integralStep_commonDivisor_dvd_cyclotomicSupport' depends on axioms: [propext,
  Classical.choice,
