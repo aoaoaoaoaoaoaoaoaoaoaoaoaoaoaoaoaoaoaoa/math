@@ -269,6 +269,13 @@ open MatrixMortality
 #print axioms ReturnGuard.Examples.cyclotomicLadder_decodedSteps
 #print axioms ReturnGuard.Examples.cyclotomicLadder_primitiveSteps
 #print axioms ReturnGuard.Examples.cyclotomicLadder_novelFactors
+#print axioms ReturnGuard.integralResidualTransfer_centerDrift_add_mulVec
+#print axioms ReturnGuard.integralResidualTransfer_centerDrift_factor
+#print axioms ReturnGuard.existsUnique_incidenceDigit
+#print axioms ReturnGuard.existsUnique_centerDriftDigit
+#print axioms ReturnGuard.Examples.fiveCollision_decodedSteps
+#print axioms ReturnGuard.Examples.fiveCollision_primitiveSteps
+#print axioms ReturnGuard.Examples.fiveCollision_novelFactors
 #print axioms ReturnGuard.commonDivisor_dvd_det
 #print axioms ReturnGuard.integralStep_commonDivisor_dvd_cyclotomicSupport
 #print axioms ReturnGuard.integralStep_cyclotomic_reset_or_cancel

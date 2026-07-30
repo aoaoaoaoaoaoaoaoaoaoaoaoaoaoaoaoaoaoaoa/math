@@ -38,10 +38,12 @@ import MatrixMortality.ReturnGuardCocycle
 import MatrixMortality.ReturnGuardTangent
 import MatrixMortality.ReturnGuardLocalization
 import MatrixMortality.ReturnGuardTangentBudget
+import MatrixMortality.ReturnGuardParameterLift
 import MatrixMortality.ReturnGuardResonance
 import MatrixMortality.ReturnGuardRail
 import MatrixMortality.ReturnGuardExamples
 import MatrixMortality.ReturnGuardTangentExamples
+import MatrixMortality.ReturnGuardParameterLiftExamples
 import MatrixMortality.ReturnGuardQuotientExamples
 
 /- Finite-controller amalgamation. -/

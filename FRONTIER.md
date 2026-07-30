@@ -810,6 +810,17 @@ and parameter-uniform bounds are therefore closed. What remains is genuinely seq
 either fixed parameters impose an effective bound, or compatible `p`-adic and cyclotomic
 congruences synthesize arbitrarily long prefixes.
 
+[`R32-S20`](SALVAGE.md#r32-s20-center-drift-parameter-lifting) identifies the local synthesis
+law. With reset fixed, a center perturbation `ε` changes every homogeneous exit by the rank-one
+vector `ε(m−n)(1,p^(sa))`. Perturbing by a multiple `q t` of an existing reduction factor
+preserves `q` and moves the reduced exit affinely in the digit `t`; every visible moving-kernel
+observer selects one unique digit. A fixed guard now carries five consecutive novel reductions,
+with the fifth factor thirteen. Exact arithmetic continues the same compatible construction
+through seventeen steps, but that longer evidence is not formalized. The live obstruction has
+moved from local solvability to global coherence: prefix stability and visibility must persist,
+and the compatible `(3,13)`-adic residue tower must contain a rational parameter rather than
+only a profinite limit.
+
 The surviving obligation is therefore a source theorem, or its negation: prove that this
 countably branched rational address system can simulate universal deterministic computation
 inside infinitely nested equal-depth resonance, or decide finite terminal-address membership by
@@ -824,7 +835,7 @@ selected wait, or rational affine-counter problem remains in this architecture.
 | Amalgamated valuation guard | Compile a universal deterministic source into the resonant tail recurrence, or decide that recurrence | Matrix mortality is already equivalent to one deterministic orbit, but its remaining arithmetic is not covered by known p-adic dynamics |
 | Irreducible cubic return pencil | Replace the split spectrum by a cubic companion action whose `2 × 2` return sequence has no fixed rail or target strip | A candidate still needs an internal low-rank return and an exact arbitrary-word normal form |
 | Multi-prime ReturnSquare | Extend the rational-root support and finite walls from prime powers to bases with several prime factors | Mixed prime support permits roots not confined to one valuation ray |
-| Cancellation-aware local-global sieve | Bound novel localized collisions for each fixed guard, or synthesize canonical prefixes of arbitrary length | [`R32-S19`](SALVAGE.md#r32-s19-canonical-cyclotomic-collision-ladders) kills endpoint-content, first-collision, and parameter-uniform bounds; four consecutive novel collisions already occur |
+| Cancellation-aware local-global sieve | Bound novel localized collisions for each fixed guard, or synthesize canonical prefixes of arbitrary length | [`R32-S20`](SALVAGE.md#r32-s20-center-drift-parameter-lifting) reduces each visible next collision to one affine parameter digit and checks five consecutive novel collisions; induction, persistent visibility, and rational realization remain |
 | Valuation and cone dynamics | Extend the signed-cone pullback or a `p`-adic invariant across the remaining middle strip or a new pencil | Cancellation at poles and between spectral modes destroys naive monotonicity |
 | Same-zero return surgery | Change nonzero return values while preserving the zero semigroup, thereby evading exact Hankel taxes | No general same-zero minimization theorem exists; every surgery needs its own arbitrary-product converse |
 | Exceptional reverse compiler | Absorb the finite `αβ=0` disjunction into one three-dimensional many-one instance | The generic all-path compiler is complete; dimension three has no evident OR operation |
@@ -833,9 +844,9 @@ The highest-value lunge is now orbit-specific cancellation arithmetic. The matri
 all-word converse, wait decoder, rational address grammar, and local blow-up are complete;
 nonresonant dynamics, rational affine counter rails, ordinary quotient products, and uniform
 fixed-jet and fixed-support-localized uniform nuclei are closed. The next useful mathematics is
-an effective per-instance bound on novel depth, a CRT/Hensel synthesis of arbitrary canonical
-collision prefixes, or a transfer from that dichotomy to a broader class of three-mode return
-recurrences.
+an induction for the visible affine parameter digits, a proof that its compatible residue tower
+has or lacks rational points, an effective per-instance novel-depth bound, or a transfer from
+that dichotomy to a broader class of three-mode return recurrences.
 
 The strategic boundary is now clear. The easy layer consisted of finding and repairing missing
 finite compilers. `M₃(2)` asks whether one low-dimensional recurrence family can store

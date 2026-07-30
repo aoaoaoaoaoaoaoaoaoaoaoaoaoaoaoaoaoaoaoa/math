@@ -104,6 +104,7 @@ file owns the mathematical stock.
 | [`R32-S17`](#r32-s17-normalized-tangent-cocycle) | structure theorem | consecutive primitive reductions form a recursive two-dimensional tangent cocycle with exact cyclotomic support | formalized | active |
 | [`R32-S18`](#r32-s18-fixed-support-localization-obstruction) | obstruction | fixed-support localization isolates the cyclotomic determinant but retains an infinite strict tower of novel cancellation depths | formalized | active |
 | [`R32-S19`](#r32-s19-canonical-cyclotomic-collision-ladders) | structure theorem and obstruction | tangent content is exactly multiplicative, yet one canonical reset orbit can swallow four successive novel cyclotomic factors | formalized | active |
+| [`R32-S20`](#r32-s20-center-drift-parameter-lifting) | partial mechanism | fixed-reset center perturbations move every reduced exit on one affine line, with a unique visible incidence digit | formalized | active |
 | [`M4-C01`](#m4-c01-two-state-pushout-compiler) | compiler | binary deterministic two-state scalar control compiles to three `4 × 4` matrices | formalized | graduated |
 | [`M4-O01`](#m4-o01-exact-toggle-fusion-leaves-an-immortal-core) | obstruction | exact local toggle fusion preserves a nonzero common anchor | formalized | graduated |
 | [`M4-O02`](#m4-o02-two-private-state-phase-signature) | obstruction | two private quotient states cannot isolate one exceptional cyclic phase | formalized | graduated |
@@ -3282,6 +3283,72 @@ synthesis of arbitrarily long collision prefixes.
 **Next:** express prefix preservation as a finite `p`-adic congruence and the next moving-kernel
 collision as a coprime cyclotomic congruence. Prove a CRT/Hensel extension lemma or expose the
 first compatibility invariant that prevents it.
+
+### R32-S20: Center-drift parameter lifting
+
+**Kind:** partial mechanism
+**Evidence:** formalized
+**Disposition:** active
+
+Keep the reset fixed while changing the integral center numerator by `ε`. The drift numerator
+then changes by `−ε`. For a homogeneous residual source `(m,n)` at wait `a`, the transfer image
+changes by exactly
+
+```text
+ε(m−n)·(1,p^(sa)).
+```
+
+Thus the parameter dependence has rank one. If the old image is `q·v` and `ε=q t`, the factor
+`q` survives and the reduced exit becomes
+
+```text
+v+t(m−n)·(1,p^(sa)).
+```
+
+Over a field, any observer not annihilating this tangent direction has exactly one digit `t`
+whose reduced exit lies in the observer kernel. This is the exact local moving-kernel equation
+needed by a CRT/Hensel prefix-extension argument; it replaces a search over whole rational
+parameters by one affine residue digit.
+
+The fixed guard
+
+```text
+(p,s,α,ρ)=(3,2,23278364,52569)
+```
+
+has a canonical legal wait prefix `4,2,2,1,3`. Its primitive reductions remove
+
+```text
+8,2,20,2,13.
+```
+
+After deleting fixed support, the consecutive novel factors are `8,2,4,2,13`. The fifth step is
+the first checked extension beyond the four-collision ladder of `R32-S19`.
+
+**Scope:** the affine perturbation and unique incidence digit are exact general theorems, and
+the five-step ladder is kernel-checked. They do not yet prove that the old legal prefix survives
+the chosen digit, that the tangent remains visible at every stage, or that one rational
+parameter realizes an infinite ladder. Exact arithmetic finds compatible finite prefixes
+through seventeen steps; that evidence is computational only. Their parameter moduli acquire
+both `3`-adic precision and repeated factors of thirteen, so the inverse-limit parameter may be
+profinite rather than rational.
+
+**Artifact:** `ReturnGuard.integralResidualTransfer_centerDrift_add_mulVec`,
+`integralResidualTransfer_centerDrift_factor`, `existsUnique_incidenceDigit`, and
+`existsUnique_centerDriftDigit` in
+[`ReturnGuardParameterLift.lean`](MatrixMortality/ReturnGuardParameterLift.lean);
+`ReturnGuard.Examples.fiveCollision_decodedSteps`, `fiveCollision_primitiveSteps`, and
+`fiveCollision_novelFactors` in
+[`ReturnGuardParameterLiftExamples.lean`](MatrixMortality/ReturnGuardParameterLiftExamples.lean).
+
+**Use:** treat the next collision as one parameter digit, not a global nonlinear solve. Separate
+three obligations cleanly: `p`-adic stability of the old prefix, visibility of the new
+moving-kernel observer, and arithmetic realization of the compatible digit system.
+
+**Next:** prove an inductive stability theorem for the alternating waits `1,3` and factors
+`2,13`, yielding canonical prefixes of every finite length. Then decide whether the resulting
+compatible residue tower contains a rational integer or only a nonrational element of
+`ℤ₃ × ℤ₁₃`.
 
 ## Three-Generator Four-State Frontier
 
