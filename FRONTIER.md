@@ -839,10 +839,24 @@ later positive-depth refinements preserve the discharged unit. This is not merel
 freedom: the center `998` dies after waits `1,3` at reset `−168`, while moving only the reset by
 `3⁸` yields the legal prefix `1,3,1`.
 
-The live question is now anisotropic. One must transport the two parameter sensitivities with
-their exact `p`-adic scales and prove that the transverse affine solution lies in the next
-center/reset refinement lattice, or expose a higher-jet obstruction. First-order compatibility
-does not grow with prefix length once old shells are discharged; arithmetic precision may.
+[`R32-S23`](SALVAGE.md#r32-s23-anisotropic-parameter-ray) computes that precision tax exactly.
+In mass/reset coordinates both sensitivity components lose `sa` valuation units at wait `a`,
+while their projective ray moves only at valuation at least `sa−v`, where `v≤0` is their
+incoming common value. The magnitude explodes while the direction freezes. Consequently no
+fixed equal-precision parameter basis can remain uniformly transverse, even though the
+rational exterior product stays nonzero.
+
+This is not an isolated defect: every point in the full cylinder
+
+```text
+center = 998 + 3^8 c,
+reset  = 6393 + 3^11 r,       c,r∈ℤ
+```
+
+has legal waits `1,3,1`. The two-parameter escape is therefore genuinely anisotropic. The live
+question is whether a renormalized weighted coordinate or finite higher jet makes the affine
+escape digit integral at every stage, or whether the accumulating ray precision forces every
+infinite compatible lift outside `ℚ²`.
 
 The surviving obligation is therefore a source theorem, or its negation: prove that this
 countably branched rational address system can simulate universal deterministic computation
@@ -858,18 +872,18 @@ selected wait, or rational affine-counter problem remains in this architecture.
 | Amalgamated valuation guard | Compile a universal deterministic source into the resonant tail recurrence, or decide that recurrence | Matrix mortality is already equivalent to one deterministic orbit, but its remaining arithmetic is not covered by known p-adic dynamics |
 | Irreducible cubic return pencil | Replace the split spectrum by a cubic companion action whose `2 × 2` return sequence has no fixed rail or target strip | A candidate still needs an internal low-rank return and an exact arbitrary-word normal form |
 | Multi-prime ReturnSquare | Extend the rational-root support and finite walls from prime powers to bases with several prime factors | Mixed prime support permits roots not confined to one valuation ray |
-| Cancellation-aware local-global sieve | Prove an anisotropic two-parameter lift for arbitrary finite collision prefixes, or derive its first unavoidable higher-jet obstruction | [`R32-S22`](SALVAGE.md#r32-s22-two-parameter-annular-escape) discharges the one-parameter anti-Hensel conflict whenever successive sensitivity vectors are transverse, but integrality at the required center/reset precisions is open |
+| Cancellation-aware local-global sieve | Derive the multi-step weight recurrence for affine escape digits and decide whether a renormalized higher jet stays integral | [`R32-S23`](SALVAGE.md#r32-s23-anisotropic-parameter-ray) proves that sensitivity rays freeze at increasing p-adic precision; one full weighted cylinder survives three waits, but arbitrary-prefix iteration is open |
 | Valuation and cone dynamics | Extend the signed-cone pullback or a `p`-adic invariant across the remaining middle strip or a new pencil | Cancellation at poles and between spectral modes destroys naive monotonicity |
 | Same-zero return surgery | Change nonzero return values while preserving the zero semigroup, thereby evading exact Hankel taxes | No general same-zero minimization theorem exists; every surgery needs its own arbitrary-product converse |
 | Exceptional reverse compiler | Absorb the finite `αβ=0` disjunction into one three-dimensional many-one instance | The generic all-path compiler is complete; dimension three has no evident OR operation |
 
-The highest-value lunge is now orbit-specific cancellation arithmetic. The matrix compiler,
+The highest-value lunge is now the weighted parameter inverse limit. The matrix compiler,
 all-word converse, wait decoder, rational address grammar, and local blow-up are complete;
 nonresonant dynamics, rational affine counter rails, ordinary quotient products, and uniform
-fixed-jet and fixed-support-localized uniform nuclei are closed. The next useful mathematics is
-the transport law for annular compatibility determinants: either synthesize an adaptive path
-avoiding their zero loci, or extract a finite obstruction automaton and an effective
-per-instance novel-depth bound.
+unweighted first-order lifting are closed. The next useful mathematics is the transport law for
+the anisotropic affine digit itself: either renormalize the frozen sensitivity ray into an
+iteration-ready integral cocycle, or prove that every infinite compatible parameter pair is
+strictly profinite and hence cannot define the rational guard required by mortality.
 
 The strategic boundary is now clear. The easy layer consisted of finding and repairing missing
 finite compilers. `M₃(2)` asks whether one low-dimensional recurrence family can store

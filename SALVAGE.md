@@ -107,6 +107,7 @@ file owns the mathematical stock.
 | [`R32-S20`](#r32-s20-center-drift-parameter-lifting) | partial mechanism | fixed-reset center perturbations move every reduced exit on one affine line, with a unique visible incidence digit | formalized | active |
 | [`R32-S21`](#r32-s21-sensitivity-cocycle-and-anti-hensel-compatibility) | structure theorem and obstruction | negative center sensitivity transports exactly, but incidence extends an annular prefix iff one cross-determinant survives | formalized | active |
 | [`R32-S22`](#r32-s22-two-parameter-annular-escape) | partial mechanism | center/reset sensitivities form a two-dimensional affine cocycle whose transverse digits discharge the anti-Hensel conflict | formalized | active |
+| [`R32-S23`](#r32-s23-anisotropic-parameter-ray) | structure theorem and obstruction | parameter magnitude explodes while its projective direction freezes at an explicit p-adic rate; one full anisotropic cylinder retains waits `1,3,1` | formalized | active |
 | [`M4-C01`](#m4-c01-two-state-pushout-compiler) | compiler | binary deterministic two-state scalar control compiles to three `4 × 4` matrices | formalized | graduated |
 | [`M4-O01`](#m4-o01-exact-toggle-fusion-leaves-an-immortal-core) | obstruction | exact local toggle fusion preserves a nonzero common anchor | formalized | graduated |
 | [`M4-O02`](#m4-o02-two-private-state-phase-signature) | obstruction | two private quotient states cannot isolate one exceptional cyclic phase | formalized | graduated |
@@ -3482,6 +3483,79 @@ solver as a distinct arithmetic obstruction.
 exterior product. Determine whether every transverse rational escape digit can be represented
 at the precision which preserves all discharged shells, or exhibit the first unavoidable
 higher-jet obstruction.
+
+### R32-S23: Anisotropic parameter ray
+
+**Kind:** structure theorem and obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+Write the center/reset sensitivity as `g=(g₀,g₁)`, its mass as `u=g₀+g₁`, and its projective
+ray as `θ=g₁/u`. At a positive legal wait `a`, the cocycle of `R32-S22` becomes
+
+```text
+u'  = 1 − C u,
+g₁' = H − C g₁,
+```
+
+where `H` is a `p`-adic unit and `v_p(C)=−sa`. If `u` and `g₁` have the same nonpositive
+valuation `v`, then both new coordinates have exact valuation `v−sa`. The parameter freedom
+therefore grows in magnitude without losing its two rational coordinates.
+
+Its direction behaves oppositely. Exact exterior algebra gives
+
+```text
+θ'−θ = (g∧g')/(u'u),
+g∧g' = u(H−θ).
+```
+
+Whenever the consecutive sensitivities are transverse,
+
+```text
+v_p(θ'−θ)=v_p(H−θ)−v+sa ≥ sa−v > 0.
+```
+
+Successive sensitivity rays hence freeze `p`-adically at an explicitly increasing precision.
+Rational transversality survives, but it cannot remain uniformly unimodular in a fixed
+equal-precision parameter lattice. This is the exact arithmetic condition number hidden by
+the Cramer solver of `R32-S22`: every further lift must use anisotropic center/reset scales, or
+carry higher-order data when the ray defect vanishes.
+
+The phenomenon is constructive rather than merely obstructive. Every integral pair
+
+```text
+center = 998 + 3^8 c,
+reset  = 6393 + 3^11 r
+```
+
+defines a valid guard and has the same legal wait prefix `1,3,1`. Thus the reset-only escape
+from the dead center cylinder is one point of a full two-dimensional anisotropic congruence
+cylinder. The unequal exponents `8` and `11` are forced evidence that the next parameter
+neighborhood is weighted.
+
+**Scope:** the valuation laws hold for every prime, positive depth and wait, unit drift and
+tail, and every transverse sensitivity with equal nonpositive mass/reset valuations. The
+explicit cylinder is an all-integer theorem. Neither result constructs arbitrary finite
+prefixes, proves persistence of transversality, or identifies a rational point in an infinite
+compatible inverse limit.
+
+**Artifact:** `ReturnGuard.legalPayload_isUnit`,
+`sensitivityMultiplier_hasValue`, `parameterGradientMass_step_hasValue`,
+`parameterGradientStep_one_hasValue`, `parameterGradientRay_step_sub_hasValue`,
+`parameterGradientRay_step_valuation_lower_bound`, and
+`parameterGradientRay_step_isPositive` in
+[`ReturnGuardParameterLattice.lean`](MatrixMortality/ReturnGuardParameterLattice.lean);
+`ReturnGuard.Examples.weightedEscape_threeStepPrefix` in
+[`ReturnGuardParameterLatticeExamples.lean`](MatrixMortality/ReturnGuardParameterLatticeExamples.lean).
+
+**Use:** track parameter directions projectively and allocate separate center/reset precision
+budgets. A proposed induction must account for the accumulating ray precision; a fixed
+unweighted two-digit Hensel step is now excluded.
+
+**Next:** derive the multi-step weight recurrence for the affine escape digit. Determine
+whether the frozen ray forces compatible digits into a strictly profinite, nonrational inverse
+limit, or whether a renormalized higher jet restores a uniformly integral transverse
+coordinate.
 
 ## Three-Generator Four-State Frontier
 

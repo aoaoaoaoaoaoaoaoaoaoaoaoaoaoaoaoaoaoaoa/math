@@ -587,6 +587,30 @@
 'MatrixMortality.ReturnGuard.Examples.resetEscape_strictly_extends_deadCenter' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.ReturnGuard.legalPayload_isUnit' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ReturnGuard.sensitivityMultiplier_hasValue' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ReturnGuard.parameterGradientMass_step_hasValue' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.parameterGradientStep_one_hasValue' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.parameterGradientRay_step_sub' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ReturnGuard.parameterGradientRay_step_sub_hasValue' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.parameterGradientRay_step_valuation_lower_bound' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.parameterGradientRay_step_isPositive' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.Examples.weightedEscape_threeStepPrefix' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.Examples.weightedEscape_zero_eq_resetEscape' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.ReturnGuard.commonDivisor_dvd_det' depends on axioms: [propext, Quot.sound]
 'MatrixMortality.ReturnGuard.integralStep_commonDivisor_dvd_cyclotomicSupport' depends on axioms: [propext,
  Classical.choice,

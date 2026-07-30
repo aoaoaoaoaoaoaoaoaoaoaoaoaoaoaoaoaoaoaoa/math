@@ -458,6 +458,8 @@ with a complete arbitrary-word converse.
 | `ReturnGuardAntiHenselExamples.lean` | a full center congruence cylinder with a common two-step prefix and no third step |
 | `ReturnGuardParameterPlane.lean` | exact center/reset perturbation plane, affine escape solver, shell discharge, and exterior sensitivity cocycle |
 | `ReturnGuardParameterPlaneExamples.lean` | reset-only resurrection of a center cylinder killed by the one-parameter obstruction |
+| `ReturnGuardParameterLattice.lean` | exact anisotropic sensitivity valuations and p-adic freezing of the projective parameter ray |
+| `ReturnGuardParameterLatticeExamples.lean` | full center/reset congruence cylinder with the common legal wait prefix `1,3,1` |
 | `ReturnGuardResonance.lean` | nonresonant descent, resonance localization, and corrected nested readiness |
 | `ReturnGuardRail.lean` | polynomial divisibility and rational affine-wait rail obstruction |
 | `ReturnGuardExamples.lean` | concrete mortal pair, nonterminal fixed point, and nested rational period-three orbit |

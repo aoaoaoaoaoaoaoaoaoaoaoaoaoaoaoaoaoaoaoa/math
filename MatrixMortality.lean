@@ -44,6 +44,8 @@ import MatrixMortality.ReturnGuardAntiHensel
 import MatrixMortality.ReturnGuardAntiHenselExamples
 import MatrixMortality.ReturnGuardParameterPlane
 import MatrixMortality.ReturnGuardParameterPlaneExamples
+import MatrixMortality.ReturnGuardParameterLattice
+import MatrixMortality.ReturnGuardParameterLatticeExamples
 import MatrixMortality.ReturnGuardResonance
 import MatrixMortality.ReturnGuardRail
 import MatrixMortality.ReturnGuardExamples
