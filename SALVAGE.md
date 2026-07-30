@@ -97,6 +97,7 @@ file owns the mathematical stock.
 | [`R32-S10`](#r32-s10-logarithmic-wait-and-height-envelope) | structure theorem | legal waits are logarithmic in primitive height and every reduced step is uniformly height-Lipschitz | formalized | active |
 | [`R32-S11`](#r32-s11-primitive-factor-terminal-gate) | structure theorem | a large primitive cyclotomic radical forces terminality or a surviving finite-quotient reset | formalized | active |
 | [`R32-S12`](#r32-s12-exact-order-projective-automata) | structure theorem | primitive divisors induce finite projective automata with exact swallowed-factor semantics | formalized | active |
+| [`R32-S13`](#r32-s13-canonical-decoded-integral-lift) | structure theorem | every decoded rational path lifts canonically to primitive integral execution | formalized | active |
 | [`M4-C01`](#m4-c01-two-state-pushout-compiler) | compiler | binary deterministic two-state scalar control compiles to three `4 × 4` matrices | formalized | graduated |
 | [`M4-O01`](#m4-o01-exact-toggle-fusion-leaves-an-immortal-core) | obstruction | exact local toggle fusion preserves a nonzero common anchor | formalized | graduated |
 | [`M4-O02`](#m4-o02-two-private-state-phase-signature) | obstruction | two private quotient states cannot isolate one exceptional cyclic phase | formalized | graduated |
@@ -2768,9 +2769,10 @@ prove that the corresponding physical matrix pair is immortal.
 **Scope:** this proves a finite certificate language, not its completeness. Many primitive
 quotients are saturated and admit both terminal and cancellation paths. The concrete
 modulo-eleven collapse is unusually strong because `11∣D`, making every residue transfer rank
-one with zero second column. A general bridge from every decoded rational execution to the
-primitive integral relation is also still required before quotient invariants alone can be
-advertised as physical immortality certificates for arbitrary parameters.
+one with zero second column. [`R32-S13`](#r32-s13-canonical-decoded-integral-lift) now supplies
+the formerly missing bridge from every decoded rational execution to primitive integral
+execution. Quotient invariants are therefore physical immortality certificates, but no theorem
+asserts that every immortal parameter set admits one.
 
 **Artifact:** `ReturnGuard.quotientTransfer_mod_of_primitive`,
 `quotientTransition_integralStep_eq_cancelled_iff`,
@@ -2784,9 +2786,76 @@ advertised as physical immortality certificates for arbitrary parameters.
 is a proof object with a finite transition table; failure identifies whether the escape is
 terminal reachability or actual cyclotomic swallowing.
 
-**Next:** formalize canonical primitive integral lifting of decoded rational paths. Then
-separate the special rank-one quotients arising from parameter divisors from genuinely
+**Next:** separate the special rank-one quotients arising from parameter divisors from genuinely
 projective exact-order certificates, and test whether either family is complete.
+
+### R32-S13: Canonical decoded-integral lift
+
+**Kind:** structure theorem
+**Evidence:** formalized
+**Disposition:** active
+
+For a rational residual `w`, let
+
+```text
+pair(w)=(num(w),den(w))
+```
+
+be its canonical reduced integer pair. Suppose the guarded coefficients have a common integral
+presentation
+
+```text
+α=A/L,        ρ−α=D/L,        L≠0.
+```
+
+On a legal decoded branch of wait `a`, direct denominator clearing gives
+
+```text
+S_a(w)=N / (p^(sa)T),
+N=(A−Lpᵃ)num(w)+D den(w),
+T=(A−L)num(w)+D den(w).
+```
+
+The target is a p-adic unit. Its canonical denominator is therefore prime to `p`. When raw
+fraction reduction writes
+
+```text
+N=c·num(S_a(w)),
+p^(sa)T=c·den(S_a(w)),
+```
+
+Euclid's lemma forces `p^(sa)∣c`. Removing that forced power yields exactly the integer
+recurrence `PrimitiveIntegralStep`; both source and target pairs are primitive by rational
+normalization. This construction is canonical and transports every exact decoded execution
+step for step without changing its length.
+
+Consequently, a closed exact-order quotient invariant containing the canonical reset pair and
+excluding both cancellation and the canonical terminal pair proves decoded unreachability and
+hence physical immortality. The drift-divisor subfamily needs no coprimality assumption on the
+chosen coefficients: the raw terminal pair and its canonical reduction represent the same
+finite projective point whenever `A−L` survives the quotient.
+
+**Scope:** the lift is one-way because that is the soundness direction needed by finite
+no-certificates. It does not say that every abstract `PrimitiveIntegralStep` is a legal decoded
+step, nor that the finite quotient family is complete.
+
+**Artifact:** `ReturnGuard.rationalPair`,
+`rat_denominator_not_dvd_of_isUnit`,
+`decodedStep_primitiveIntegralStep`,
+`decodedExecution_primitiveIntegral`,
+`not_physical_isMortal_of_quotientInvariant`, and
+`not_physical_isMortal_of_drift_divisor` in
+[`ReturnGuardIntegralLift.lean`](MatrixMortality/ReturnGuardIntegralLift.lean);
+`ReturnGuard.Examples.cycle_not_physical_isMortal_by_quotient` in
+[`ReturnGuardQuotientExamples.lean`](MatrixMortality/ReturnGuardQuotientExamples.lean).
+
+**Use:** every quotient invariant may now be read literally as a finite certificate about the
+physical matrix pair. Search and classification can operate on finite projective automata
+without reopening rational-normalization soundness.
+
+**Next:** characterize which guarded parameters possess a drift-divisor certificate; then seek
+generic primitive quotients for the complement and determine whether repeated cancellation
+forces an effectively recognizable arithmetic history.
 
 ## Three-Generator Four-State Frontier
 

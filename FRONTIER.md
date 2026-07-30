@@ -712,22 +712,35 @@ automaton follows the reduced rational state. A closed invariant containing the 
 neither cancellation nor the terminal ray is therefore a complete certificate against
 primitive terminal executions.
 
+[`R32-S13`](SALVAGE.md#r32-s13-canonical-decoded-integral-lift) closes the normalization
+direction needed to apply those certificates to the physical pair. Canonical rational
+numerator-denominator coordinates are primitive, and a decoded target is a p-adic unit, so its
+canonical denominator is prime to `p`. In the raw branch fraction
+
+```text
+N / (p^(sa)T),
+```
+
+the entire `p^(sa)` scale must therefore divide the common reduction factor. Removing it yields
+exactly one `PrimitiveIntegralStep`; decoded executions lift step for step. A safe quotient
+invariant now proves decoded unreachability and physical immortality without an independent
+rational-cycle argument.
+
 This mechanism is nonvacuous. For the checked rational period-three survivor, `ℓ=11` has exact
 order five for base three, and all residue transitions collapse onto `{1,4,6,10}`. The terminal
 ray is zero and cancellation is unreachable. Lean consequently excludes every primitive
-integral terminal execution for those parameters. Reconnaissance also found many saturated
-quotients, so the remaining question is not whether finite certificates exist, but whether some
-effective family is complete. The modulo-eleven example owes its rank-one collapse to `11∣D`;
-parameter-divisor certificates and genuinely projective primitive quotients should be analyzed
-separately. The concrete matrix pair is independently proved immortal from its deterministic
-three-cycle, so the quotient certificate is a new global explanation rather than its only
-soundness argument.
+integral terminal execution and, through the canonical lift, proves the physical pair immortal.
+Reconnaissance also found many saturated quotients, so the remaining question is not whether
+finite certificates exist or are sound, but whether some effective family is complete. The
+modulo-eleven example owes its rank-one collapse to `11∣D`; parameter-divisor certificates and
+genuinely projective primitive quotients should be analyzed separately.
 
 The parameter-divisor branch is now uniform. If a primitive divisor also divides `D`, while
 `A−L` and every `A−Lpʳ` over one period remain nonzero, all quotient transfers are rank-one
 resets of the nonzero affine shell and the terminal residual is zero. This is an immediate
 finite no-certificate. The condition is the clean group-theoretic exclusion
-`A/L∉⟨p⟩⊆𝔽ℓ×`.
+`A/L∉⟨p⟩⊆𝔽ℓ×`. The physical theorem uses the canonical terminal pair, so an unreduced raw
+terminal presentation cannot make the certificate vacuous.
 
 The surviving obligation is therefore a source theorem, or its negation: prove that this
 countably branched rational address system can simulate universal deterministic computation
@@ -743,7 +756,7 @@ selected wait, or rational affine-counter problem remains in this architecture.
 | Amalgamated valuation guard | Compile a universal deterministic source into the resonant tail recurrence, or decide that recurrence | Matrix mortality is already equivalent to one deterministic orbit, but its remaining arithmetic is not covered by known p-adic dynamics |
 | Irreducible cubic return pencil | Replace the split spectrum by a cubic companion action whose `2 × 2` return sequence has no fixed rail or target strip | A candidate still needs an internal low-rank return and an exact arbitrary-word normal form |
 | Multi-prime ReturnSquare | Extend the rational-root support and finite walls from prime powers to bases with several prime factors | Mixed prime support permits roots not confined to one valuation ray |
-| Local-global sieve | Prove completeness of parameter-divisor or primitive exact-order quotient certificates, or exhibit an orbit evading all of them | [`R32-S12`](SALVAGE.md#r32-s12-exact-order-projective-automata) gives a finite certificate language and a nontrivial four-state no-certificate; saturated quotients and rational-to-integral lifting remain |
+| Local-global sieve | Prove completeness of parameter-divisor or primitive exact-order quotient certificates, or exhibit an orbit evading all of them | [`R32-S12`](SALVAGE.md#r32-s12-exact-order-projective-automata) and [`R32-S13`](SALVAGE.md#r32-s13-canonical-decoded-integral-lift) give sound physical no-certificates; saturated quotients and repeated cancellation remain |
 | Valuation and cone dynamics | Extend the signed-cone pullback or a `p`-adic invariant across the remaining middle strip or a new pencil | Cancellation at poles and between spectral modes destroys naive monotonicity |
 | Same-zero return surgery | Change nonzero return values while preserving the zero semigroup, thereby evading exact Hankel taxes | No general same-zero minimization theorem exists; every surgery needs its own arbitrary-product converse |
 | Exceptional reverse compiler | Absorb the finite `αβ=0` disjunction into one three-dimensional many-one instance | The generic all-path compiler is complete; dimension three has no evident OR operation |

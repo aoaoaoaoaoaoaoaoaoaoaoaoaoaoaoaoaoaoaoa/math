@@ -404,6 +404,18 @@
 'MatrixMortality.ReturnGuard.no_primitiveExecution_of_drift_divisor' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.ReturnGuard.decodedStep_primitiveIntegralStep' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.decodedExecution_primitiveIntegral' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.not_physical_isMortal_of_quotientInvariant' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.not_physical_isMortal_of_drift_divisor' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.ReturnGuard.integralStep_cyclotomic_dvd_numerator_iff_terminalDefect' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
@@ -451,5 +463,8 @@
 'MatrixMortality.ReturnGuard.Examples.cycle_integral_reductions' depends on axioms: [propext, Quot.sound]
 'MatrixMortality.ReturnGuard.Examples.cycle_commonFactors_dvd_fixedSupport' depends on axioms: [propext]
 'MatrixMortality.ReturnGuard.Examples.cycle_no_primitive_integral_terminal_execution' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.Examples.cycle_not_physical_isMortal_by_quotient' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]

@@ -1,5 +1,5 @@
 import MatrixMortality.ReturnGuardExamples
-import MatrixMortality.ReturnGuardQuotient
+import MatrixMortality.ReturnGuardIntegralLift
 
 /-!
 # Exact finite quotient certificates for guard examples
@@ -107,6 +107,60 @@ theorem cycleElevenInvariant_terminal_absent :
   rw [quotientPairState, quotientPoint, numerator_zero, denominator_eq]
   simp [ProjectiveLine.ofPair, cycleElevenInvariant]
   decide
+
+/-- The canonical reduced coordinates of the terminal residual are also excluded. -/
+theorem cycleElevenInvariant_canonicalTerminal_absent :
+    quotientPairState 11
+        (rationalPair (terminalResidual cycleParameters)) ∉
+      cycleElevenInvariant := by
+  have terminal_point :
+      quotientPoint 11
+          (rationalPair (terminalResidual cycleParameters)).1
+          (rationalPair (terminalResidual cycleParameters)).2 =
+        some 0 := by
+    rw [quotientPoint_rationalPair_eq_integral
+      (value := terminalResidual cycleParameters)
+      (numerator := -473) (denominator := -3193)
+      (by norm_num)
+      (by rw [cycle_terminalResidual]; norm_num)
+      (by decide)]
+    have numerator_zero : ((-473 : ℤ) : ZMod 11) = 0 := by decide
+    have denominator_eq : ((-3193 : ℤ) : ZMod 11) = 8 := by decide
+    have eight_ne : (8 : ZMod 11) ≠ 0 := by decide
+    rw [numerator_zero, denominator_eq]
+    simp [ProjectiveLine.ofPair, eight_ne]
+  rw [quotientPairState, terminal_point]
+  simp [cycleElevenInvariant]
+  decide
+
+/-- The exact-order quotient certificate alone blocks the entire decoded rational orbit. -/
+theorem cycle_not_decodedReachable_by_quotient :
+    ¬DecodedReachable cycleParameters := by
+  apply not_decodedReachable_of_quotientInvariant cycleParameters
+    (centerNumerator := -953) (driftNumerator := 473) (scale := 2240)
+    (by norm_num [cycleParameters])
+    (by norm_num [cycleParameters, drift])
+    (by norm_num)
+    eleven_primitive_three_five cycleElevenInvariant_closed
+    cycleElevenInvariant_cancelled_absent
+  · simpa [rationalPair] using cycleElevenInvariant_reset_mem
+  · exact cycleElevenInvariant_canonicalTerminal_absent
+
+/-- The finite four-ray quotient is by itself a kernel-checked physical immortality
+certificate. -/
+theorem cycle_not_physical_isMortal_by_quotient :
+    ¬IsMortal
+      (ReturnFamily.pairGenerator
+        (ambient (cycleParameters.prime : ℚ) cycleParameters.depth)
+        (cut cycleParameters.center cycleParameters.reset)) := by
+  apply not_physical_isMortal_of_drift_divisor cycleParameters
+    (centerNumerator := -953) (driftNumerator := 473) (scale := 2240)
+    (by norm_num [cycleParameters])
+    (by norm_num [cycleParameters, drift])
+    (by norm_num)
+    eleven_primitive_three_five (by decide) (by decide)
+  intro residue
+  fin_cases residue <;> decide
 
 /-- No primitively reduced integral guard execution connects the period-three reset residual
 to its terminal residual.  The certificate quantifies over every wait sequence, not only the

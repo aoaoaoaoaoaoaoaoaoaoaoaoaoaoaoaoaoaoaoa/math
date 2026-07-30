@@ -78,8 +78,10 @@ of only the displayed three-cycle.
 
 The same bundle independently proves physical immortality: decoded steps are functional, the
 three rational cycle states form a closed invariant, and the terminal residual lies outside it.
-Thus the finite quotient is not being used to smuggle an unproved integral-to-rational converse
-into the concrete no-instance.
+The subsequent canonical decoded-integral lift now supplies the general converse direction
+needed here: every decoded rational execution maps step for step to primitive integral
+execution. The finite quotient is therefore itself a physical immortality certificate, not
+merely an independent explanation of this example.
 
 ## Reconnaissance and inference
 
@@ -98,11 +100,11 @@ The experiment does not prove that the parameter-divisor or generic projective f
 complete. A fixed nonzero `D` has only finitely many prime divisors, and generic quotients may
 be saturated.
 
-The remaining semantic seam is also precise. The certificate theorem ranges over
-`PrimitiveIntegralStep`. The project already proves one integral step realizes the rational
-residual map, but has not yet packaged the converse normalization theorem saying every decoded
-rational step admits a primitive integral representative. Until that lift is formalized, the
-generic finite invariant should not by itself be described as a physical immortality theorem.
+The normalization seam identified in this experiment is closed by
+[`m32-decoded-integral-lift-2026-07-30.md`](m32-decoded-integral-lift-2026-07-30.md). The live
+unknown is completeness: whether every immortal guarded parameter set admits a separating
+finite quotient, or whether an orbit can evade every quotient through repeated cyclotomic
+cancellation.
 
 ## Lean artifacts
 
@@ -112,10 +114,15 @@ generic finite invariant should not by itself be described as a physical immorta
 - `ReturnGuard.quotientTransition_integralStep_eq_cancelled_iff`
 - `ReturnGuard.no_primitiveExecution_of_quotientInvariant`
 - `ReturnGuard.no_primitiveExecution_of_drift_divisor`
+- `ReturnGuard.decodedExecution_primitiveIntegral`
+- `ReturnGuard.not_physical_isMortal_of_quotientInvariant`
+- `ReturnGuard.not_physical_isMortal_of_drift_divisor`
 - `ReturnGuard.Examples.cycle_no_primitive_integral_terminal_execution`
-- `ReturnGuard.Examples.cycle_not_physical_isMortal`
+- `ReturnGuard.Examples.cycle_not_physical_isMortal_by_quotient`
 
 The generic development is in
 [`ReturnGuardQuotient.lean`](../MatrixMortality/ReturnGuardQuotient.lean). The finite certificate
 is in
-[`ReturnGuardQuotientExamples.lean`](../MatrixMortality/ReturnGuardQuotientExamples.lean).
+[`ReturnGuardQuotientExamples.lean`](../MatrixMortality/ReturnGuardQuotientExamples.lean), and
+the canonical lift is in
+[`ReturnGuardIntegralLift.lean`](../MatrixMortality/ReturnGuardIntegralLift.lean).

@@ -30,6 +30,7 @@ import MatrixMortality.ReturnGuardArithmetic
 import MatrixMortality.ReturnGuardValuation
 import MatrixMortality.ReturnGuardTerminalGate
 import MatrixMortality.ReturnGuardQuotient
+import MatrixMortality.ReturnGuardIntegralLift
 import MatrixMortality.ReturnGuardCocycle
 import MatrixMortality.ReturnGuardResonance
 import MatrixMortality.ReturnGuardRail

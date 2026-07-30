@@ -298,6 +298,14 @@ For every prime `ℓ∣pᵃ−1`, the reduced pair either satisfies `m′≡n′
 common cancellation factor. This is an exact reset-or-cancellation dichotomy, not yet a finite
 decision sieve.
 
+The converse normalization seam is now closed. Lean proves that canonical rational
+numerator-denominator pairs are primitive, that the target unit condition forces the entire
+`p^(sa)` scale into the raw common factor, and hence that every decoded rational step lifts to
+one `PrimitiveIntegralStep`. Exact decoded paths lift without changing their length. A safe
+exact-order quotient invariant therefore proves physical immortality directly; the
+drift-divisor subgroup-avoidance family is nonvacuous even when the chosen terminal
+coefficients are not themselves primitive.
+
 These are structural and decidable-stratum theorems, not an `M₃(2)` resolution. The imported
 order-four Skolem theorem used to classify rank-one profiles is not reimplemented in Lean. The
 generic reverse edge compiler still assumes `αβ≠0`, and no universality or decision theorem is
@@ -436,6 +444,7 @@ with a complete arbitrary-word converse.
 | `ReturnGuardArithmetic.lean` | primitive-pair recurrence and cyclotomic reset-or-cancellation sieve |
 | `ReturnGuardTerminalGate.lean` | primitive cyclotomic radical and terminal-or-finite-reset gate |
 | `ReturnGuardQuotient.lean` | exact-order finite projective automata, swallowed-factor semantics, and safe invariant certificates |
+| `ReturnGuardIntegralLift.lean` | canonical rational pairs, decoded-to-integral execution lifting, and quotient certificates of physical immortality |
 | `ReturnGuardCocycle.lean` | terminal-defect transport and the reduced second-order denominator recurrence |
 | `ReturnGuardResonance.lean` | nonresonant descent, resonance localization, and corrected nested readiness |
 | `ReturnGuardRail.lean` | polynomial divisibility and rational affine-wait rail obstruction |
@@ -555,6 +564,9 @@ with a complete arbitrary-word converse.
 | Exact-order quotient dynamics is periodic in the wait, and its annihilation state is exactly swallowed primitive reduction | `ReturnGuard.quotientTransfer_mod_of_primitive`, `ReturnGuard.quotientTransition_integralStep_eq_cancelled_iff` |
 | A finite quotient invariant excluding annihilation and the target excludes every primitive integral execution | `ReturnGuard.no_primitiveExecution_of_quotientInvariant` |
 | A primitive divisor of the drift gives a reset-automaton no-certificate whenever the center ratio avoids the base subgroup | `ReturnGuard.no_primitiveExecution_of_drift_divisor` |
+| Every decoded rational execution canonically lifts step for step to primitive integral execution | `ReturnGuard.decodedStep_primitiveIntegralStep`, `ReturnGuard.decodedExecution_primitiveIntegral` |
+| A safe exact-order quotient invariant certifies physical immortality | `ReturnGuard.not_physical_isMortal_of_quotientInvariant` |
+| A drift-divisor subgroup-avoidance certificate is physically sound without coefficient-coprimality assumptions | `ReturnGuard.not_physical_isMortal_of_drift_divisor` |
 | Every nonresonant continuation descends and every infinite ready chain resonates arbitrarily late | `ReturnGuard.nonresonant_nextWait_lt`, `ReturnGuard.infinite_ready_chain_resonates` |
 | Resonant nesting has normalized depth `(s−1)(a+h)` | `ReturnGuard.resonance_ready_iff` |
 | No reduced rational chart realizes a nontrivial affine wait rail at infinitely many prime powers | `ReturnGuard.Rail.no_infinite_primePower_affineWait_rail` |
@@ -563,6 +575,7 @@ with a complete arbitrary-word converse.
 | The checked period-three survivor is a genuine immortal physical matrix pair | `ReturnGuard.Examples.cycle_not_physical_isMortal` |
 | Every normalization factor in the checked period-three survivor lies in the fixed parameter support | `ReturnGuard.Examples.cycle_commonFactors_dvd_fixedSupport` |
 | A four-ray invariant modulo eleven excludes every primitive integral terminal execution of the period-three guard | `ReturnGuard.Examples.cycle_no_primitive_integral_terminal_execution` |
+| The same modulo-eleven certificate proves physical immortality through canonical integral lifting | `ReturnGuard.Examples.cycle_not_physical_isMortal_by_quotient` |
 | Rule and erasure matrices agree on the upper-side plane | `rule_erase_agree_on_upperSide` |
 | Every finite-controller letter routes its selected private channel exactly | `controllerMatrix_mulVec_controllerVector` |
 | Every suffix-controlled word obeys the generic total decoder | `controllerProduct_mulVec_controllerVector` |
