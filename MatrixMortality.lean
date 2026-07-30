@@ -21,7 +21,6 @@ import MatrixMortality.ReturnJordan
 import MatrixMortality.ReturnConvert
 import MatrixMortality.ProjectiveLine
 import MatrixMortality.PadicValuation
-import MatrixMortality.RationalPadicDigits
 import MatrixMortality.ReturnGuard
 import MatrixMortality.ReturnGuardDynamics
 import MatrixMortality.ReturnGuardShift
@@ -39,22 +38,12 @@ import MatrixMortality.ReturnGuardCocycle
 import MatrixMortality.ReturnGuardTangent
 import MatrixMortality.ReturnGuardLocalization
 import MatrixMortality.ReturnGuardTangentBudget
-import MatrixMortality.ReturnGuardParameterLift
-import MatrixMortality.ReturnGuardSensitivity
-import MatrixMortality.ReturnGuardAntiHensel
-import MatrixMortality.ReturnGuardAntiHenselExamples
-import MatrixMortality.ReturnGuardParameterPlane
-import MatrixMortality.ReturnGuardParameterPlaneExamples
-import MatrixMortality.ReturnGuardParameterLattice
-import MatrixMortality.ReturnGuardParameterLatticeExamples
-import MatrixMortality.ReturnGuardParameterJet
-import MatrixMortality.ReturnGuardParameterDigits
-import MatrixMortality.ReturnGuardParameterDigitsExamples
+import MatrixMortality.ReturnGuardFrame
+import MatrixMortality.ReturnGuardGap
 import MatrixMortality.ReturnGuardResonance
 import MatrixMortality.ReturnGuardRail
 import MatrixMortality.ReturnGuardExamples
 import MatrixMortality.ReturnGuardTangentExamples
-import MatrixMortality.ReturnGuardParameterLiftExamples
 import MatrixMortality.ReturnGuardQuotientExamples
 
 /- Finite-controller amalgamation. -/

@@ -104,12 +104,8 @@ file owns the mathematical stock.
 | [`R32-S17`](#r32-s17-normalized-tangent-cocycle) | structure theorem | consecutive primitive reductions form a recursive two-dimensional tangent cocycle with exact cyclotomic support | formalized | active |
 | [`R32-S18`](#r32-s18-fixed-support-localization-obstruction) | obstruction | fixed-support localization isolates the cyclotomic determinant but retains an infinite strict tower of novel cancellation depths | formalized | active |
 | [`R32-S19`](#r32-s19-canonical-cyclotomic-collision-ladders) | structure theorem and obstruction | tangent content is exactly multiplicative, yet one canonical reset orbit can swallow four successive novel cyclotomic factors | formalized | active |
-| [`R32-S20`](#r32-s20-center-drift-parameter-lifting) | partial mechanism | fixed-reset center perturbations move every reduced exit on one affine line, with a unique visible incidence digit | formalized | active |
-| [`R32-S21`](#r32-s21-sensitivity-cocycle-and-anti-hensel-compatibility) | structure theorem and obstruction | negative center sensitivity transports exactly, but incidence extends an annular prefix iff one cross-determinant survives | formalized | active |
-| [`R32-S22`](#r32-s22-two-parameter-annular-escape) | partial mechanism | center/reset sensitivities form a two-dimensional affine cocycle whose transverse digits discharge the anti-Hensel conflict | formalized | active |
-| [`R32-S23`](#r32-s23-anisotropic-parameter-ray) | structure theorem and obstruction | parameter magnitude explodes while its projective direction freezes at an explicit p-adic rate; one full anisotropic cylinder retains waits `1,3,1` | formalized | active |
-| [`R32-S24`](#r32-s24-renormalized-parameter-jet) | structure theorem and obstruction | an exact integrating factor turns gradient growth into a convergent additive jet, but its conserved transverse defect has arbitrarily large prescribed depth | formalized | active |
-| [`R32-S25`](#r32-s25-weighted-cramer-digit) | structure theorem and obstruction | the raw sensitivity scale cancels from the escape digit, but its transverse denominator has unbounded depth and lives in a moving jet basis | formalized | active |
+| [`R32-S26`](#r32-s26-evaluation-frame-gauge-closure) | structure theorem and closure | the parameter-jet transition is an exact frame coboundary, and deep frame defect localizes to the reset shell | formalized | graduated |
+| [`R32-S27`](#r32-s27-rational-gap-macro-pumping) | structure theorem and obstruction | exact branch similarity and rational height separation bound every noncyclic repetition of one fixed macro | formalized | active |
 | [`M4-C01`](#m4-c01-two-state-pushout-compiler) | compiler | binary deterministic two-state scalar control compiles to three `4 × 4` matrices | formalized | graduated |
 | [`M4-O01`](#m4-o01-exact-toggle-fusion-leaves-an-immortal-core) | obstruction | exact local toggle fusion preserves a nonzero common anchor | formalized | graduated |
 | [`M4-O02`](#m4-o02-two-private-state-phase-signature) | obstruction | two private quotient states cannot isolate one exceptional cyclic phase | formalized | graduated |
@@ -3289,446 +3285,121 @@ synthesis of arbitrarily long collision prefixes.
 collision as a coprime cyclotomic congruence. Prove a CRT/Hensel extension lemma or expose the
 first compatibility invariant that prevents it.
 
-### R32-S20: Center-drift parameter lifting
+### R32-S26: Evaluation-frame gauge closure
 
-**Kind:** partial mechanism
+**Kind:** structure theorem and closure
 **Evidence:** formalized
-**Disposition:** active
+**Disposition:** graduated
 
-Keep the reset fixed while changing the integral center numerator by `ε`. The drift numerator
-then changes by `−ε`. For a homogeneous residual source `(m,n)` at wait `a`, the transfer image
-changes by exactly
+For a normalized mass/reset jet `j` and payload `H`, put
 
 ```text
-ε(m−n)·(1,p^(sa)).
+F(j,H) = [j₀  1]
+         [j₁  H],
+
+κ(j,H) = det F(j,H) = Hj₀−j₁.
 ```
 
-Thus the parameter dependence has rank one. If the old image is `q·v` and `ε=q t`, the factor
-`q` survives and the reduced exit becomes
+If the integrating factor changes to `q′` and
 
 ```text
-v+t(m−n)·(1,p^(sa)).
+j′ = j + (1,H)/q′,
 ```
 
-Over a field, any observer not annihilating this tangent direction has exactly one digit `t`
-whose reduced exit lies in the observer kernel. This is the exact local moving-kernel equation
-needed by a CRT/Hensel prefix-extension argument; it replaces a search over whole rational
-parameters by one affine residue digit.
-
-The fixed guard
+then the formerly independent Cramer-frame transition is exactly
 
 ```text
-(p,s,α,ρ)=(3,2,23278364,52569)
+T(q′,H,H′,j) = F(j,H)⁻¹ F(j′,H′).
 ```
 
-has a canonical legal wait prefix `4,2,2,1,3`. Its primitive reductions remove
+Its products telescope. The moving matrix cocycle is therefore a coordinate coboundary, not
+an additional dynamical state. The determinant `κ` is only the denominator for recovering two
+fixed parameter coordinates from their evaluation values.
+
+Fix an anchor `α` and write `A(j)=j₁+αj₀`. The same determinant has the intrinsic form
 
 ```text
-8,2,20,2,13.
+κ(j,H) = j₀(H+α)−A(j).
 ```
 
-After deleting fixed support, the consecutive novel factors are `8,2,4,2,13`. The fifth step is
-the first checked extension beyond the four-collision ladder of `R32-S19`.
+If `j₀` is a p-adic unit and `A(j)` has anchor depth `d`, then
 
-**Scope:** the affine perturbation and unique incidence digit are exact general theorems, and
-the five-step ladder is kernel-checked. They do not prove that the old legal prefix survives
-the chosen digit, that the tangent remains visible at every stage, or that one rational
-parameter realizes an infinite ladder. A later exact search uniquely extended the prescribed
-alternating `1/2, 3/13` scheme through collision twenty-five but found no compatible digit at
-collision twenty-six. That computation is audit evidence, not a formal theorem; `R32-S21`
-formalizes the general obstruction it exposed.
+```text
+vₚ(κ)>d  ⟹  vₚ(H+α)=d.
+```
 
-**Artifact:** `ReturnGuard.integralResidualTransfer_centerDrift_add_mulVec`,
-`integralResidualTransfer_centerDrift_factor`, `existsUnique_incidenceDigit`, and
-`existsUnique_centerDriftDigit` in
-[`ReturnGuardParameterLift.lean`](MatrixMortality/ReturnGuardParameterLift.lean);
-`ReturnGuard.Examples.fiveCollision_decodedSteps`, `fiveCollision_primitiveSteps`, and
-`fiveCollision_novelFactors` in
-[`ReturnGuardParameterLiftExamples.lean`](MatrixMortality/ReturnGuardParameterLiftExamples.lean).
+At a unit terminal payload and a positive-depth anchor, `κ` is a unit. Thus arbitrarily deep
+Cramer denominators occur only on the reset-return shell; they are not an independent carry
+reservoir.
 
-**Use:** treat the next collision as one parameter digit, not a global nonlinear solve. Separate
-three obligations cleanly: `p`-adic stability of the old prefix, visibility of the new
-moving-kernel observer, and arithmetic realization of the compatible digit system.
+**Scope:** the frame identities are exact over `ℚ`; the shell theorems require the displayed
+nonzero and p-adic unit hypotheses. They do not bound the number or geometry of reset returns.
 
-**Next:** replace bare visibility by the annular compatibility cocycle of `R32-S21`. Determine
-whether an adaptive wait/factor schedule can avoid its zero locus indefinitely, or whether the
-cocycle gives an effective per-instance bound.
+**Artifact:** `ReturnGuard.evaluationFrameTransition_eq_coboundary`,
+`evaluationFrameTransition_det`, `deep_frameDefect_forces_stateDepth_eq_anchorDepth`, and
+`terminal_frameDefect_isUnit` in
+[`ReturnGuardFrame.lean`](MatrixMortality/ReturnGuardFrame.lean).
 
-### R32-S21: Sensitivity cocycle and anti-Hensel compatibility
+**Use:** reason in fixed residual coordinates. Do not retain Cramer-frame digits, parameter
+jets, or denominator expansions as independent state.
+
+### R32-S27: Rational-gap macro pumping
 
 **Kind:** structure theorem and obstruction
 **Evidence:** formalized
 **Disposition:** active
 
-Along a ready fixed-reset orbit, differentiate the state with respect to the center. If the
-current sensitivity has negative `p`-adic value `v`, then one legal step of wait `a` changes it
-to
+Two rational residuals following the same legal wait `a` satisfy the exact similarity law
 
 ```text
-v − s a.
+vₚ(Sₐ(x)−Sₐ(y)) = vₚ(x−y)−sa.
 ```
 
-The singular transported derivative dominates every integral term, so no cancellation caveat
-is hidden in this valuation law. This proves persistent first-order visibility after the
-sensitivity becomes negative.
+For a wait word `w`, the loss is `s·sum(w)`. A perturbation deeper than that weight follows the
+same branch word. Hence a return of depth `N` to one rational checkpoint pumps every bounded
+number of repetitions of the same macro, losing exactly `s·sum(w)` depth per repetition.
 
-Visibility is not prefix stability. A ready condition records a normalized coefficient which
-must remain nonzero, not merely a divisibility equation. Abstract one old annular coefficient
-and one new incidence equation as
+Archimedean height prevents this from continuing indefinitely without equality. For distinct
+p-adic unit rationals `x,y`,
 
 ```text
-oldValue + t oldSlope ≠ 0,
-newValue + t newSlope = 0.
+p^vₚ(x−y) ≤ 2 H(x)H(y),
 ```
 
-When `newSlope ≠ 0`, the new equation selects one digit
-`t=−newValue/newSlope`. That digit preserves the old annulus exactly when
+where `H` is primitive projective height. One decoded step multiplies height by at most
 
 ```text
-oldValue·newSlope − oldSlope·newValue ≠ 0.
+C = |A|+|D|+|L|.
 ```
 
-The cross-determinant is therefore the complete one-digit extension criterion. Its vanishing
-is an **anti-Hensel obstruction**: the unique digit solving the new incidence necessarily
-destroys an earlier exact valuation shell.
-
-This obstruction occurs inside the guard family, not only in an abstract affine model. For
+Consequently, if a fixed wait macro `w` can be repeated `r>0` times from checkpoint `1`, then
+either its first return is already exact or
 
 ```text
-p=3, s=2, ρ=−168, α=−460+729d       (d∈ℤ),
+p^((r−1)s·sum(w)) ≤ 2 C^length(w).
 ```
 
-every center in the full congruence cylinder shares the legal waits `1,3`; after those steps
-the state is a `3`-adic unit. No positive third wait exists anywhere in the cylinder.
-
-**Scope:** the sensitivity recurrence and cross-determinant criterion are exact over their
-stated fields, and the dead cylinder is an all-integer Lean theorem. They refute induction from
-first-order visibility alone. They do not bound arbitrary schedules, prove eventual death of
-every parameter cylinder, or exclude an adaptive infinite collision ladder.
-
-**Artifact:** `ReturnGuard.readyLegalValue_hasDerivAt` and
-`parameterSensitivityStep_hasValue` in
-[`ReturnGuardSensitivity.lean`](MatrixMortality/ReturnGuardSensitivity.lean);
-`ReturnGuard.exists_incidenceDigit_and_preserves_iff` and
-`no_incidenceDigit_preserves_of_liftCompatibility_eq_zero` in
-[`ReturnGuardAntiHensel.lean`](MatrixMortality/ReturnGuardAntiHensel.lean);
-`ReturnGuard.Examples.deadLift_twoStepPrefix` and `deadLift_noThirdStep` in
-[`ReturnGuardAntiHenselExamples.lean`](MatrixMortality/ReturnGuardAntiHenselExamples.lean).
-
-**Use:** model parameter synthesis as an annular compatibility cocycle. Every proposed next
-collision must satisfy both the incidence equation and the nonvanishing determinants of all
-active valuation shells.
-
-**Next:** derive the determinant transport under one guard step. Test whether its finite residue
-state admits an adaptive infinite path or yields a well-founded obstruction.
-
-### R32-S22: Two-parameter annular escape
-
-**Kind:** partial mechanism
-**Evidence:** formalized
-**Disposition:** active
-
-The guard has two arithmetic parameters. Perturbing center by `ε` and reset by `η` changes the
-drift by `η−ε`. On a homogeneous residual source `(m,n)`, the exact transfer displacement is
-
-```text
-(ε(m−n)+ηn)·(1,p^(sa)).
-```
-
-Thus the one-parameter tangent of `R32-S20` is the restriction of a parameter-plane map. At
-first order, write the center/reset sensitivity as `g=(g₀,g₁)`. One legal step has the affine
-rank-one recurrence
-
-```text
-g' = (1−H,H) − Cg,
-```
-
-where `H` is the legal payload and `C` is the singular tail multiplier. Its exterior product
-with the incoming sensitivity is
-
-```text
-g∧g' = H(g₀+g₁)−g₁.
-```
-
-The singular transported term disappears. When this scalar is nonzero, the old and new affine
-conditions span the parameter plane. There is then one exact digit pair which makes the new
-incidence zero while normalizing the old annular coefficient to one. Later refinements whose
-old-gradient increment has positive `p`-adic value preserve that unit automatically. Discharged
-historical shells therefore do not force an ever-growing first-order state; the active
-obstruction is transversality together with the anisotropic valuation of the next digit pair.
-
-The escape occurs in the guard family. At center `998`, reset `−168` admits waits `1,3` and no
-third step by `R32-S21`. Keeping the center and changing reset by `3⁸` gives reset `6393` and
-the legal wait prefix `1,3,1`. This is an exact Lean witness that the dead center cylinder was
-codimension one rather than a terminal obstruction to two-parameter synthesis.
-
-**Scope:** the transfer identity, affine-plane solver, sensitivity recurrence, exterior
-transport, shell-discharge law, and three-step witness are exact. They do not prove that the
-required digit pair is integral in the next anisotropic parameter lattice, that transversality
-persists indefinitely, or that one rational parameter pair realizes an infinite ladder.
-
-**Artifact:** `ReturnGuard.integralResidualTransfer_centerReset_add_mulVec`,
-`planeSolveDigit_spec`, `affinePlaneValue_isUnit_add_of_positive`,
-`readyLegalValue_reset_hasDerivAt`, `planeCross_parameterGradientStep`, and
-`exists_planeDigit_hits_parameterGradientStep_and_preserves` in
-[`ReturnGuardParameterPlane.lean`](MatrixMortality/ReturnGuardParameterPlane.lean);
-`ReturnGuard.Examples.resetEscape_threeStepPrefix` and
-`resetEscape_strictly_extends_deadCenter` in
-[`ReturnGuardParameterPlaneExamples.lean`](MatrixMortality/ReturnGuardParameterPlaneExamples.lean).
-
-**Use:** search in the full center/reset lattice. Carry only the active two-vector sensitivity
-and its normalized annulus; discharge older shells by positive-depth stability. Treat
-vanishing of `H(g₀+g₁)−g₁` as the first-order obstruction and nonintegrality of the affine
-solver as a distinct arithmetic obstruction.
-
-**Next:** derive the anisotropic valuation transport of both sensitivity coordinates and their
-exterior product. Determine whether every transverse rational escape digit can be represented
-at the precision which preserves all discharged shells, or exhibit the first unavoidable
-higher-jet obstruction.
-
-### R32-S23: Anisotropic parameter ray
-
-**Kind:** structure theorem and obstruction
-**Evidence:** formalized
-**Disposition:** active
-
-Write the center/reset sensitivity as `g=(g₀,g₁)`, its mass as `u=g₀+g₁`, and its projective
-ray as `θ=g₁/u`. At a positive legal wait `a`, the cocycle of `R32-S22` becomes
-
-```text
-u'  = 1 − C u,
-g₁' = H − C g₁,
-```
-
-where `H` is a `p`-adic unit and `v_p(C)=−sa`. If `u` and `g₁` have the same nonpositive
-valuation `v`, then both new coordinates have exact valuation `v−sa`. The parameter freedom
-therefore grows in magnitude without losing its two rational coordinates.
-
-Its direction behaves oppositely. Exact exterior algebra gives
-
-```text
-θ'−θ = (g∧g')/(u'u),
-g∧g' = u(H−θ).
-```
-
-Whenever the consecutive sensitivities are transverse,
-
-```text
-v_p(θ'−θ)=v_p(H−θ)−v+sa ≥ sa−v > 0.
-```
-
-Successive sensitivity rays hence freeze `p`-adically at an explicitly increasing precision.
-Rational transversality survives, but it cannot remain uniformly unimodular in a fixed
-equal-precision parameter lattice. This is the exact arithmetic condition number hidden by
-the Cramer solver of `R32-S22`: every further lift must use anisotropic center/reset scales, or
-carry higher-order data when the ray defect vanishes.
-
-The phenomenon is constructive rather than merely obstructive. Every integral pair
-
-```text
-center = 998 + 3^8 c,
-reset  = 6393 + 3^11 r
-```
-
-defines a valid guard and has the same legal wait prefix `1,3,1`. Thus the reset-only escape
-from the dead center cylinder is one point of a full two-dimensional anisotropic congruence
-cylinder. The unequal exponents `8` and `11` are forced evidence that the next parameter
-neighborhood is weighted.
-
-**Scope:** the valuation laws hold for every prime, positive depth and wait, unit drift and
-tail, and every transverse sensitivity with equal nonpositive mass/reset valuations. The
-explicit cylinder is an all-integer theorem. Neither result constructs arbitrary finite
-prefixes, proves persistence of transversality, or identifies a rational point in an infinite
-compatible inverse limit.
-
-**Artifact:** `ReturnGuard.legalPayload_isUnit`,
-`sensitivityMultiplier_hasValue`, `parameterGradientMass_step_hasValue`,
-`parameterGradientStep_one_hasValue`, `parameterGradientRay_step_sub_hasValue`,
-`parameterGradientRay_step_valuation_lower_bound`, and
-`parameterGradientRay_step_isPositive` in
-[`ReturnGuardParameterLattice.lean`](MatrixMortality/ReturnGuardParameterLattice.lean);
-`ReturnGuard.Examples.weightedEscape_threeStepPrefix` in
-[`ReturnGuardParameterLatticeExamples.lean`](MatrixMortality/ReturnGuardParameterLatticeExamples.lean).
-
-**Use:** track parameter directions projectively and allocate separate center/reset precision
-budgets. A proposed induction must account for the accumulating ray precision; a fixed
-unweighted two-digit Hensel step is now excluded.
-
-**Next:** derive the multi-step weight recurrence for the affine escape digit. Determine
-whether the frozen ray forces compatible digits into a strictly profinite, nonrational inverse
-limit, or whether a renormalized higher jet restores a uniformly integral transverse
-coordinate.
-
-### R32-S24: Renormalized parameter jet
-
-**Kind:** structure theorem and obstruction
-**Evidence:** formalized
-**Disposition:** active
-
-The singular sensitivity cocycle admits an exact integrating factor. Write
-
-```text
-g' = (1−H,H) − Cg,
-q' = −Cq.
-```
-
-In mass/reset coordinates, the renormalized jet
-
-```text
-j(q,g) = ((g₀+g₁)/q, g₁/q)
-```
-
-obeys the additive law
-
-```text
-j(q',g') = j(q,g) + (1,H)/q'.
-```
-
-If `q` has value `v`, then `q'` has value `v−sa`, and both jet increments have exact value
-`sa−v`. Thus the raw exploding gradient is a scalar artifact: after renormalization, the
-two-coordinate jet is p-adically Cauchy along any constant legal stage.
-
-The correct transverse coordinate is
-
-```text
-κ(H,q,g) = (H(g₀+g₁)−g₁)/q.
-```
-
-It is the raw consecutive exterior product divided by `q`, and is exactly conserved through
-the stage carrying payload `H`. For a subsequent payload `H'`,
-
-```text
-κ(H',q',g') = κ(H,q,g) + (H'−H) · j(q',g')₀.
-```
-
-This is a fixed-dimensional recurrence. It isolates the only source of new transverse
-information: change of legal payload, not singular sensitivity transport.
-
-Uniform unit transversality nevertheless fails maximally. For every prime, positive `s,a`,
-and every positive depth `N`, the unit tail
-
-```text
-X_N = (1+p^N−p^(sa))/(p^a−1)
-```
-
-makes `H=1+p^N`. At the reset gradient `(0,1)` and scale one, `κ=p^N`; the normalized
-transverse defect therefore has exact value `N`. This value persists through arbitrarily many
-iterations of that constant stage. No fixed annulus, bounded precision tax, or finite
-equal-precision parameter basis can contain every transverse lift.
-
-**Scope:** the integrating-factor identities and valuation laws are exact over `ℚ`; the
-arbitrary-depth family works for every prime and every positive depth and wait. Constant-stage
-iteration is an algebraic sensitivity statement, not a claim that one guarded orbit repeats
-the same tail. The result does not decide whether variable payloads force a rational
-eventually periodic defect orbit or synthesize a nonrational inverse limit.
-
-**Artifact:** `ReturnGuard.renormalizedParameterGradient_step`,
-`renormalizedParameterGradient_step_displacement_hasValue`,
-`renormalizedTransverseDefect_step`, `renormalizedTransverseDefect_nextPayload`,
-`renormalizedTransverseDefect_orbit`, `sensitivityScaleOrbit_hasValue`,
-`prescribedTransverseDepthTail_isUnit`, and
-`prescribedTransverseDepth_orbit_hasValue` in
-[`ReturnGuardParameterJet.lean`](MatrixMortality/ReturnGuardParameterJet.lean).
-
-**Use:** replace raw parameter gradients by the integrating factor `q` and normalized jet
-`j`. Track `κ` as the first genuine higher-order datum. Any uniform lifting theorem must
-control the payload-difference forcing term; any decision theorem may instead exploit that
-arbitrary depth is possible only through exact rational cancellations in this one scalar
-recurrence.
-
-**Next:** derive the variable-payload multi-step sum for `κ` and the induced weighted Cramer
-digit. Decide whether rational guard parameters force the sequence of defect depths to be
-eventually periodic, or construct a canonical orbit with unbounded defect depth.
-
-### R32-S25: Weighted Cramer digit
-
-**Kind:** structure theorem and obstruction
-**Evidence:** formalized
-**Disposition:** active
-
-The integrating-factor chart removes the raw sensitivity scale from the center/reset escape
-digit exactly. Write
-
-```text
-g  = q  · (j₀−j₁,j₁),
-g' = q' · (j₀'−j₁',j₁'),
-λ  = q'/q,
-κ  = (g∧g')/q = q'(j∧j').
-```
-
-Cramer's rule becomes
-
-```text
-d_center =
-  ((oldTarget−oldValue) λ j₁' + j₁ newValue) / κ,
-
-d_reset =
-  (−(j₀−j₁)newValue
-   −(oldTarget−oldValue) λ(j₀'−j₁')) / κ.
-```
-
-For one guard step, `λ=−C` and `κ` is precisely the normalized transverse defect of
-`R32-S24`. The incoming scale `q` is absent. This proves that raw sensitivity explosion was a
-coordinate artifact and identifies the actual arithmetic tax: division by `κ`.
-
-That tax is unbounded. For the explicit unit tails
-
-```text
-X_N = (1+p^N−p^(sa))/(p^a−1),
-```
-
-take old value and target zero, new value one, scale one, and the reset gradient `(0,1)`.
-The weighted center digit is exactly `1/p^N`, hence has valuation `−N`. No fixed denominator,
-integral weighted lattice, or bounded digit alphabet contains all transverse escape stages.
-
-Rationality still gives a genuine periodic object, but not this one. For every rational
-coordinate with denominator coprime to `p`, Lean constructs its ordinary denominator digits
-
-```text
-dₙ = (p rₙ₊₁−rₙ)/b,
-```
-
-proves `0≤dₙ<p`, the exact recurrence
-
-```text
-−rₙ/b = dₙ + p(−rₙ₊₁/b),
-```
-
-and period dividing `φ(b)`. A rational parameter pair has the common period
-`φ(b₀)φ(b₁)`. Guard refinements, however, are read in a moving jet basis. If a basis changes
-from `B` to `BT`, its tail obeys
-
-```text
-ξ = d + T ξ',
-```
-
-not the fixed-base recurrence. Ordinary rational digit periodicity constrains the weighted
-Cramer sequence only after the nonconstant transport cocycle `T` is controlled.
-
-**Scope:** the weighted solver is an exact field identity and its guard specialization is over
-`ℚ`. The unbounded-denominator family is exact for every prime and positive wait. The rational
-digit theorem concerns canonical denominator tails with prime-free denominators; it does not
-assert periodicity of a guard's moving-basis digits. The result neither excludes a finite
-automaton for the full cocycle nor constructs an infinite rational lift.
-
-**Artifact:** `RationalPadicDigits.denominatorDigit_add_totient`,
-`negativeRemainder_recurrence`, and `rationalPairDigit_add_commonPeriod` in
-[`RationalPadicDigits.lean`](MatrixMortality/RationalPadicDigits.lean);
-`ReturnGuard.planeSolveDigit_parameterGradientStep`,
-`prescribedTransverseDepth_weightedCenterDigit_hasValue`, and
-`parameterRefinement_movingBasis` in
-[`ReturnGuardParameterDigits.lean`](MatrixMortality/ReturnGuardParameterDigits.lean);
-the exact stage certificates in
-[`ReturnGuardParameterDigitsExamples.lean`](MatrixMortality/ReturnGuardParameterDigitsExamples.lean).
-
-**Use:** formulate every future parameter lift in `(q,j,κ)` coordinates. Ignore the magnitude
-of `q`; charge denominator depth to `κ`. A decidability proof must show that the moving-basis
-cocycle has an effective finite nucleus or becomes periodic modulo the denominator period. An
-undecidability proof may instead use unbounded `κ`-depth as the writable carry reservoir.
-
-**Next:** derive the exact basis-transition matrix between consecutive Cramer frames and reduce
-it modulo the ordinary rational digit period. Either obtain a finite skew-product automaton or
-construct a rational orbit whose transverse denominator depths are unbounded and nonperiodic.
+A numerical violation forces an exact cycle after the first macro.
+
+**Scope:** the pumping law works at any rational checkpoint. The final gap bound is stated at
+checkpoint `1`, under one integral presentation of the guard parameters and legality of all
+repetitions. It excludes storage by increasingly deep returns of one fixed macro; it does not
+bound a nonperiodic schedule or a moving checkpoint.
+
+**Artifact:** `ReturnGuard.residualRun_sub_hasValue`,
+`followsResidualSchedule_of_deep_sub`, `primePower_le_rationalPairHeight`,
+`residualMacroOrbit_follows_and_separates`, `repeatedMacro_exact_or_power_le`, and
+`repeatedMacro_exact_of_power_gt` in
+[`ReturnGuardGap.lean`](MatrixMortality/ReturnGuardGap.lean); independent synthesis in
+[`m32-reset-gap-pumping-2026-07-30.md`](audits/m32-reset-gap-pumping-2026-07-30.md).
+
+**Use:** any proposed universal orbit must move its checkpoint, change its macro, or use a
+genuinely nonperiodic wait schedule. Any decision proof may instead show that sufficiently
+deep returns contain a repeated macro and invoke the gap theorem.
+
+**Next:** derive a combinatorial recurrence theorem for the canonical wait word strong enough
+to force a powered factor at return depths exceeding the explicit height bound, or construct a
+rational canonical orbit whose deep returns remain power-free.
 
 ## Three-Generator Four-State Frontier
 

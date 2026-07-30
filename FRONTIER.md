@@ -810,135 +810,71 @@ and parameter-uniform bounds are therefore closed. What remains is genuinely seq
 either fixed parameters impose an effective bound, or compatible `p`-adic and cyclotomic
 congruences synthesize arbitrarily long prefixes.
 
-[`R32-S20`](SALVAGE.md#r32-s20-center-drift-parameter-lifting) identifies the local synthesis
-law. With reset fixed, a center perturbation `ε` changes every homogeneous exit by the rank-one
-vector `ε(m−n)(1,p^(sa))`. Perturbing by a multiple `q t` of an existing reduction factor
-preserves `q` and moves the reduced exit affinely in the digit `t`; every visible moving-kernel
-observer selects one unique digit. A fixed guard now carries five consecutive novel reductions,
-with the fifth factor thirteen.
-
-[`R32-S21`](SALVAGE.md#r32-s21-sensitivity-cocycle-and-anti-hensel-compatibility) separates two
-conditions previously conflated as “Hensel lifting.” Negative center sensitivity is transported
-exactly, losing `s a` valuation units at a legal wait `a`; first-order visibility therefore
-persists. Exact readiness is annular, however. The unique digit imposing a new incidence
-preserves an old shell exactly when one `2 × 2` cross-determinant is nonzero. A Lean-checked
-guard cylinder shares waits `1,3` for every center digit and then dies uniformly, proving that
-visible sensitivity alone does not induct a prefix.
-
-The prescribed alternating `1/2, 3/13` computation reinforces the distinction. Exact arithmetic
-finds one compatible digit at every stage through collision twenty-five and none at collision
-twenty-six. This bounded result is computational, but its failure mode is the formal
-anti-Hensel obstruction rather than a search limit. The fixed alternating induction is dead.
-
-[`R32-S22`](SALVAGE.md#r32-s22-two-parameter-annular-escape) reopens the synthesis problem in
-its full parameter space. Center and reset sensitivities form a two-vector whose legal update
-is an affine rank-one recurrence. The exterior product with its successor cancels the singular
-transport term and equals one explicit scalar. Whenever that scalar is nonzero, a unique
-center/reset digit pair imposes the new incidence and normalizes the active old annulus to one;
-later positive-depth refinements preserve the discharged unit. This is not merely formal
-freedom: the center `998` dies after waits `1,3` at reset `−168`, while moving only the reset by
-`3⁸` yields the legal prefix `1,3,1`.
-
-[`R32-S23`](SALVAGE.md#r32-s23-anisotropic-parameter-ray) computes that precision tax exactly.
-In mass/reset coordinates both sensitivity components lose `sa` valuation units at wait `a`,
-while their projective ray moves only at valuation at least `sa−v`, where `v≤0` is their
-incoming common value. The magnitude explodes while the direction freezes. Consequently no
-fixed equal-precision parameter basis can remain uniformly transverse, even though the
-rational exterior product stays nonzero.
-
-This is not an isolated defect: every point in the full cylinder
+[`R32-S26`](SALVAGE.md#r32-s26-evaluation-frame-gauge-closure) closes the parameter-lifting
+detour. If `F(j,H)` is the evaluation frame with columns `j` and `(1,H)`, the consecutive
+Cramer transition is exactly
 
 ```text
-center = 998 + 3^8 c,
-reset  = 6393 + 3^11 r,       c,r∈ℤ
+F(j,H)⁻¹F(j′,H′).
 ```
 
-has legal waits `1,3,1`. The two-parameter escape is therefore genuinely anisotropic. The live
-question is whether a renormalized weighted coordinate or finite higher jet makes the affine
-escape digit integral at every stage, or whether the accumulating ray precision forces every
-infinite compatible lift outside `ℚ²`.
-
-[`R32-S24`](SALVAGE.md#r32-s24-renormalized-parameter-jet) supplies that renormalization. An
-integrating factor `q' = −Cq` turns the exploding gradient into an additive mass/reset jet:
+The matrix cocycle telescopes. Its determinant `κ=Hj₀−j₁` is the coordinate denominator for
+recovering two fixed parameter values, not a new state variable. Relative to the reset anchor,
 
 ```text
-j' = j + (1,H)/q'.
+κ = j₀(H+α)−A(j).
 ```
 
-The increments have exact and increasing positive valuation. The normalized exterior defect
+If the anchor evaluation has depth `d`, any defect deeper than `d` forces the residual back
+onto the depth-`d` reset shell. The former unbounded Cramer denominator is therefore return
+precision in disguise. The parameter-digit, moving-frame, and higher-jet tower has been removed
+from the live theorem bank.
+
+[`R32-S27`](SALVAGE.md#r32-s27-rational-gap-macro-pumping) attacks that return precision
+directly. On one common legal wait branch,
 
 ```text
-κ = (H(g₀+g₁)−g₁)/q
+vₚ(Sₐ(x)−Sₐ(y)) = vₚ(x−y)−sa.
 ```
 
-is conserved through the stage carrying `H`; changing the next payload adds only
-`(H'−H)j₀'`. Thus the higher jet closes in fixed rational dimension. It does not close in a
-fixed unit annulus. For every `N>0`, an explicit unit tail makes `κ` have exact value `N`, and
-constant-stage iteration preserves that depth forever. Renormalization removes the false
-explosion but exposes an unbounded transverse-depth coordinate.
+A wait word subtracts the sum of these weights, and a perturbation deeper than the total weight
+follows the same schedule. Thus a deep near-return to a rational checkpoint pumps bounded
+repetitions of the same macro with exactly linear depth loss.
 
-[`R32-S25`](SALVAGE.md#r32-s25-weighted-cramer-digit) extracts the escape digit in these
-coordinates. If
+Primitive projective height supplies the opposing Archimedean bound:
 
 ```text
-g  = q  · (j₀−j₁,j₁),
-g' = q' · (j₀'−j₁',j₁'),
-λ  = q'/q,
-κ  = q'(j∧j'),
+p^vₚ(x−y) ≤ 2H(x)H(y),       H(next) ≤ C H(current).
 ```
 
-then Cramer's rule depends on `(j,j',λ,κ)` and not on the incoming magnitude `q`. The apparent
-sensitivity explosion is therefore absent from the actual digit. The surviving denominator is
-exactly `κ`, and the arbitrary-depth family from `R32-S24` makes one digit equal to `1/p^N`
-for every positive `N`.
-
-Ordinary rational base-`p` denominator digits are periodic. Lean proves an exact recurrence,
-digit bounds, Euler period, and one common period for a rational pair. This does not settle the
-escape sequence: its digits are read in consecutive Cramer frames. Under a frame change `T`,
-the tail law is
+For a fixed macro `w` repeated `r` times from checkpoint `1`, either the first return is already
+exact or
 
 ```text
-ξ = d + T ξ'.
+p^((r−1)s·sum(w)) ≤ 2C^length(w).
 ```
 
-The naive periodic-rational-digit attack is therefore closed. The live object is the skew
-product of an ordinary finite digit period with the moving rational frame cocycle. A decision
-proof must exhibit a finite nucleus for this skew product; a universality proof may instead use
-the unbounded `κ`-depth as writable carry.
-
-The surviving obligation is therefore a source theorem, or its negation: prove that this
-countably branched rational address system can simulate universal deterministic computation
-inside infinitely nested equal-depth resonance, or decide finite terminal-address membership by
-controlling cyclotomic cancellation. No further punctuation, malformed-word, independently
-selected wait, or rational affine-counter problem remains in this architecture.
+Hence one fixed macro cannot store an unbounded counter through progressively deeper noncyclic
+returns. Every surviving construction must move its checkpoint, change its macro, or use a
+genuinely nonperiodic wait word. Conversely, a decision proof may finish by showing that every
+sufficiently deep canonical return contains a powered macro violating the displayed gap.
 
 ### Live attacks
 
 | Lane | Required move | Present obstruction |
 | --- | --- | --- |
-| Resonance arithmetic | Prove effective eventual periodicity of rational inverse addresses, or construct a rational nonperiodic resonance stack | A rational period-three nested orbit exists; every nonresonant continuation descends, but local p-adic symbolic freedom is complete |
-| Amalgamated valuation guard | Compile a universal deterministic source into the resonant tail recurrence, or decide that recurrence | Matrix mortality is already equivalent to one deterministic orbit, but its remaining arithmetic is not covered by known p-adic dynamics |
-| Irreducible cubic return pencil | Replace the split spectrum by a cubic companion action whose `2 × 2` return sequence has no fixed rail or target strip | A candidate still needs an internal low-rank return and an exact arbitrary-word normal form |
-| Multi-prime ReturnSquare | Extend the rational-root support and finite walls from prime powers to bases with several prime factors | Mixed prime support permits roots not confined to one valuation ray |
-| Cramer-frame skew product | Derive the exact consecutive-frame transport and decide whether its product with periodic rational denominator digits has a finite nucleus | [`R32-S25`](SALVAGE.md#r32-s25-weighted-cramer-digit) removes raw scale but leaves an unbounded transverse denominator and a nonconstant moving basis |
-| Valuation and cone dynamics | Extend the signed-cone pullback or a `p`-adic invariant across the remaining middle strip or a new pencil | Cancellation at poles and between spectral modes destroys naive monotonicity |
-| Same-zero return surgery | Change nonzero return values while preserving the zero semigroup, thereby evading exact Hankel taxes | No general same-zero minimization theorem exists; every surgery needs its own arbitrary-product converse |
-| Exceptional reverse compiler | Absorb the finite `αβ=0` disjunction into one three-dimensional many-one instance | The generic all-path compiler is complete; dimension three has no evident OR operation |
+| Canonical return recurrence | Force a powered factor in every sufficiently deep reset-return word and apply `R32-S27` | Exact similarity controls a repeated macro, but no theorem yet extracts repetition from a moving wait schedule |
+| Power-free synthesis | Construct a rational canonical orbit with unbounded deep returns whose wait word evades every fixed macro bound | Local p-adic symbolic freedom is complete, but rational height couples all inverse branches globally |
+| Cyclotomic tangent dynamics | Convert `R32-S16`–`R32-S19` into an orbit-specific bound or an arbitrary-prefix synthesis theorem | Primitive normalization moves the checkpoint and can swallow successive novel cyclotomic factors |
+| Irreducible cubic fallback | Replace the split spectrum by a cubic return pencil with internal punctuation and a complete word normal form | No candidate yet matches the guard's exact illegal-branch soundness |
+| Exceptional reverse compiler | Absorb the finite `αβ=0` disjunction into one three-dimensional many-one instance | The generic rank-`(2,2)` compiler is complete; dimension three has no evident OR operation |
 
-The highest-value lunge is now the consecutive Cramer-frame cocycle. The matrix compiler,
-all-word converse, wait decoder, rational address grammar, local blow-up, integrating-factor
-renormalization, and scale-free digit formula are complete; nonresonant dynamics, rational
-affine counter rails, ordinary quotient products, uniform unweighted lifting, a uniform
-transverse unit annulus, and fixed-coordinate rational periodicity are closed. The next useful
-mathematics is an exact transition matrix between successive normalized frames. Its reduction
-must either yield a finite skew-product automaton or expose an unbounded carry register with an
-arbitrary-prefix synthesis theorem.
-
-The strategic boundary is now clear. The easy layer consisted of finding and repairing missing
-finite compilers. `M₃(2)` asks whether one low-dimensional recurrence family can store
-unbounded, independently selectable history without paying another state or generator. That is
-the same synchronization tax seen at the neighboring hard cells, stripped of parser
-accidents.
+The prospective hot path is now a word-combinatorial theorem about the canonical return
+schedule, not another parameter coordinate. The matrix compiler, arbitrary-word converse,
+deterministic wait decoder, rational inverse-address grammar, primitive integral lift, exact
+branch similarity, rational gap, and height envelope are complete. `M₃(2)` now asks whether a
+three-state rational recurrence can maintain an unbounded sequence of moving approximate
+returns without ever presenting a pumpable macro.
 
 ## The dimension-two wall: `M₂(3)`
 
