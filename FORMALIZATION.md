@@ -446,18 +446,16 @@ with a complete arbitrary-word converse.
 | `ReturnGuardQuotient.lean` | exact-order finite projective automata, swallowed-factor semantics, and safe invariant certificates |
 | `ReturnGuardIntegralLift.lean` | canonical rational pairs, decoded-to-integral execution lifting, and quotient certificates of physical immortality |
 | `ReturnGuardQuotientCompleteness.lean` | zero-wait terminal kernel, cancellation-reachability completeness, and synchronized-product no-amplification |
-| `ReturnGuardCancellationJet.lean` | primitive-cancellation blow-up, three projective exits, fixed-jet obstruction, and unbounded-depth integral witnesses |
 | `ReturnGuardDriftCertificate.lean` | exact drift-divisor certificate classification, cyclic subgroup criterion, and executable finite test |
 | `ReturnGuardCocycle.lean` | terminal-defect transport and the reduced second-order denominator recurrence |
-| `ReturnGuardTangent.lean` | exact primitive-cancellation tangent cocycle, determinant support, recursive cyclotomic gate, and finite-field kernel line |
-| `ReturnGuardLocalization.lean` | canonical fixed-support localization, localized cyclotomic invertibility, and the strict surviving novel-depth tower |
-| `ReturnGuardTangentBudget.lean` | exact tangent product-content law and prescribed canonical cyclotomic cancellation |
 | `ReturnGuardFrame.lean` | evaluation-frame coboundary and reset-shell localization of transverse depth |
 | `ReturnGuardGap.lean` | exact residual similarity, rational projective gaps, height envelopes, and fixed-macro pumping |
+| `ReturnGuardPumping.lean` | arbitrary repeated-factor pumping between decoded orbit checkpoints |
+| `ReturnGuardEndpoint.lean` | terminal-centered divisor recurrence, whole-word determinant factorization, complementary forward/reverse contents, and coefficient-prime obstructions |
+| `ReturnGuardAdelic.lean` | content-weighted height bounds, complete cyclotomic complement, and exact exterior-product conservation |
 | `ReturnGuardResonance.lean` | nonresonant descent, resonance localization, and corrected nested readiness |
 | `ReturnGuardRail.lean` | polynomial divisibility and rational affine-wait rail obstruction |
-| `ReturnGuardExamples.lean` | concrete mortal pair, nonterminal fixed point, and nested rational period-three orbit |
-| `ReturnGuardTangentExamples.lean` | projective tangent three-cycle carried by the canonical rational survivor |
+| `ReturnGuardExamples.lean` | one- and two-step mortal pairs, nonterminal fixed point, nested rational period-three orbit, and endpoint boundary certificates |
 | `ReturnGuardQuotientExamples.lean` | four-state modulo-eleven certificate excluding every primitive terminal execution of the period-three guard |
 | `BinaryDefect.lean` | binary two-word defect theorem and exact Neary macro obstruction |
 | `CHHNPacking.lean` | generic two-slot CHHN packing and six-state finite-Hankel kernels |
@@ -580,17 +578,16 @@ with a complete arbitrary-word converse.
 | Safe quotient certificate existence is exactly cancellation unreachability from reset, which directly certifies physical immortality | `ReturnGuard.hasQuotientCertificate_iff_cancelled_unreachable`, `ReturnGuard.not_physical_isMortal_of_cancelled_unreachable` |
 | Terminal exclusion is redundant in physical finite-quotient certificates | `ReturnGuard.not_physical_isMortal_of_cancellationFreeQuotient` |
 | Every cancellation-free synchronized two-prime invariant projects to both single-factor certificates | `ReturnGuard.hasSynchronizedCancellationFreeInvariant_imp_components`, `ReturnGuard.hasSynchronizedCancellationFreeInvariant_imp_quotientCertificates` |
-| Removing a swallowed prime power has exactly two rigid exits and one equal-depth tangent exit | `ReturnGuard.cancellationJet_terminalDepth_lt_ofPair`, `ReturnGuard.cancellationJet_displacementDepth_lt_ofPair`, `ReturnGuard.cancellationJet_depth_eq_mod`, `ReturnGuard.integralStep_cancellationExit` |
-| The equal-depth exceptional divisor covers the full projective line and no fixed congruence jet determines all exits | `ReturnGuard.localCancellationExit_surjective`, `ReturnGuard.cancellationExit_escapes_fixed_truncation` |
-| Every exact cyclotomic prime-power factor is realizable as primitive integral cancellation, and one fixed recurrence realizes every positive 3-adic depth | `ReturnGuard.primitive_integralStep_of_exact_cyclotomicDepth`, `ReturnGuard.exists_primitive_integralStep_with_three_cancellationDepth` |
-| A tangent trajectory removes exactly the product of its leg scalars, which equals the final image content at a primitive endpoint | `ReturnGuard.ScaledTrajectory.chronologicalProduct_mulVec`, `ReturnGuard.ScaledTrajectory.image_gcd` |
-| A canonical reset can swallow a prescribed divisor of one cyclotomic factor as its complete primitive reduction | `ReturnGuard.prescribedReset_primitiveIntegralStep`, `ReturnGuard.prescribedReset_factor_isCoprime_fixedSupport` |
-| One fixed canonical reset orbit has four consecutive legal cyclotomic cancellations | `ReturnGuard.Examples.cyclotomicLadder_decodedSteps`, `ReturnGuard.Examples.cyclotomicLadder_primitiveSteps`, `ReturnGuard.Examples.cyclotomicLadder_novelFactors` |
-| Fixed-reset center perturbation moves each residual exit on one rank-one affine line, with one unique digit meeting any visible kernel | `ReturnGuard.integralResidualTransfer_centerDrift_factor`, `ReturnGuard.existsUnique_centerDriftDigit` |
-| One fixed canonical reset orbit has five consecutive legal novel cyclotomic cancellations | `ReturnGuard.Examples.fiveCollision_decodedSteps`, `ReturnGuard.Examples.fiveCollision_primitiveSteps`, `ReturnGuard.Examples.fiveCollision_novelFactors` |
-| Negative center sensitivity transports through one legal step by subtracting the depth-scaled wait | `ReturnGuard.readyLegalValue_hasDerivAt`, `ReturnGuard.parameterSensitivityStep_hasValue` |
-| A visible affine incidence digit preserves an old annular coefficient exactly when their cross-determinant is nonzero | `ReturnGuard.exists_incidenceDigit_and_preserves_iff`, `ReturnGuard.no_incidenceDigit_preserves_of_liftCompatibility_eq_zero` |
-| One full integral center cylinder shares legal waits `1,3` and admits no third decoded step | `ReturnGuard.Examples.deadLift_twoStepPrefix`, `ReturnGuard.Examples.deadLift_noThirdStep` |
+| Terminal coordinates are a fixed gauge of the primitive residual transfer, not an independent state | `ReturnGuard.endpointTransfer_mul_endpointGauge`, `ReturnGuard.terminalCoordinate_residualStep` |
+| A complete endpoint word factors its determinant into base powers and full cyclotomic factors | `ReturnGuard.endpointProduct_det` |
+| Forward and reverse primitive contents are complementary, and the whole terminal coefficient is their signed reverse-content product | `ReturnGuard.endpointAdjugate_mulVec_of_complementaryContent`, `ReturnGuard.endpointProduct_first_eq_complementProduct` |
+| A prime dividing `A−L` but neither drift nor base excludes every endpoint terminal word | `ReturnGuard.not_endpointTerminalWord_of_prime_dvd_centerDifference` |
+| Primitive content and wait depth share one exact Archimedean height budget | `ReturnGuard.integralStep_content_mul_height_le`, `ReturnGuard.integralStep_wait_content_le` |
+| The entire part of `pᵃ−1` coprime to forward content survives in the target's reset difference | `ReturnGuard.cyclotomicComplement_dvd_targetDifference` |
+| Two reduced trajectories through one branch obey an exact exterior-product conservation law | `ReturnGuard.primitiveSteps_projectivePairCross` |
+| Any repeated legal factor at two checkpoints is either an exact cycle or bounded by their rational height envelopes | `ReturnGuard.sharedSchedule_exact_or_power_le_heightEnvelope` |
+| Terminal-reaching guards can require two steps and their waits can either decrease or increase | `ReturnGuard.Examples.decreasingMortal_reachable`, `ReturnGuard.Examples.increasingMortal_reachable` |
+| The former collision ladder and period-three survivor are excluded from terminality by one-prime endpoint coefficients | `ReturnGuard.Examples.collisionLadder_no_endpointTerminalWord`, `ReturnGuard.Examples.cycle_no_endpointTerminalWord` |
 | At a primitive drift divisor, a safe quotient certificate exists exactly when the center avoids the scaled base-power orbit | `ReturnGuard.hasQuotientCertificate_iff_centerPowerOrbit_avoids` |
 | For nonzero center and scale, the excluded orbit is exactly the cyclic subgroup generated by the base | `ReturnGuard.mem_centerPowerOrbit_iff_centerRatio_mem_zpowers` |
 | The forbidden orbit has `period` elements and exactly `factor-period` center residues certify immortality | `ReturnGuard.card_centerPowerOrbit`, `ReturnGuard.card_certifyingCenters` |

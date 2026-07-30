@@ -28,22 +28,20 @@ import MatrixMortality.ReturnGuardGauss
 import MatrixMortality.ReturnGuardAddress
 import MatrixMortality.ReturnGuardArithmetic
 import MatrixMortality.ReturnGuardValuation
-import MatrixMortality.ReturnGuardCancellationJet
 import MatrixMortality.ReturnGuardTerminalGate
 import MatrixMortality.ReturnGuardQuotient
 import MatrixMortality.ReturnGuardIntegralLift
 import MatrixMortality.ReturnGuardQuotientCompleteness
 import MatrixMortality.ReturnGuardDriftCertificate
 import MatrixMortality.ReturnGuardCocycle
-import MatrixMortality.ReturnGuardTangent
-import MatrixMortality.ReturnGuardLocalization
-import MatrixMortality.ReturnGuardTangentBudget
 import MatrixMortality.ReturnGuardFrame
 import MatrixMortality.ReturnGuardGap
+import MatrixMortality.ReturnGuardEndpoint
+import MatrixMortality.ReturnGuardAdelic
+import MatrixMortality.ReturnGuardPumping
 import MatrixMortality.ReturnGuardResonance
 import MatrixMortality.ReturnGuardRail
 import MatrixMortality.ReturnGuardExamples
-import MatrixMortality.ReturnGuardTangentExamples
 import MatrixMortality.ReturnGuardQuotientExamples
 
 /- Finite-controller amalgamation. -/

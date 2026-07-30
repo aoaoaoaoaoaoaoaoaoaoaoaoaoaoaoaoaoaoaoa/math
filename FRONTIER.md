@@ -761,54 +761,11 @@ factor. Further local-global progress must model what happens *through* primitiv
 renormalization, retaining swallowed-factor valuations instead of treating cancellation as an
 absorbing reject state.
 
-[`R32-S16`](SALVAGE.md#r32-s16-cancellation-blow-up-and-unbounded-depth) now computes that
-renormalization exactly. Comparing the terminal-defect depth `t` with the cyclotomic
-displacement depth `e` gives three exits: `t<e` forces one, `e<t` forces infinity, and `t=e`
-retains the tangent ratio `[T₀+C₀:T₀]`. The exceptional divisor is surjective onto the entire
-projective line. More strongly, no fixed congruence depth determines this exit, and one fixed
-valid integral recurrence realizes every positive `3`-adic cancellation depth on primitive
-inputs. Uniform finite-jet enrichment is therefore dead. The only possible finite nucleus is
-orbit-specific: it must prove that the canonical reset orbit cannot visit arbitrarily deep
-equal-depth collisions. The opposing universality program must make that one orbit do exactly
-so.
-
-[`R32-S17`](SALVAGE.md#r32-s17-normalized-tangent-cocycle) shows that collision is not an
-exceptional terminal case. In coordinates
-
-```text
-v=(n,p^(sa)m−n),
-```
-
-consecutive primitive reductions obey an exact `2 × 2` matrix cocycle. Its determinant is
-`DLp^(sa)(1−pᵇ)`, so after removing fixed parameter support every new common factor is again
-cyclotomic for the next wait. Modulo such a factor the next collision is passage through one
-explicit moving kernel line. The arithmetic obstruction is therefore recursive on the
-exceptional divisor.
-
-This also sharpens the height warning. The canonical rational period-three survivor lifts to a
-nonzero projective tangent three-cycle, so no scalar tangent height can decrease on every
-decoded step. All of its normalization is fixed-support, however. A finite-nucleus proof may
-still exist after quotienting those finitely many `S`-unit directions; the remaining enemy is
-novel cyclotomic normalization in the tangent cocycle.
-
-[`R32-S18`](SALVAGE.md#r32-s18-fixed-support-localization-obstruction) performs that quotient
-canonically. In the localization away from `D·L·p`, a tangent transfer is invertible exactly
-when `1−pᵇ` is a unit. This clean separation does **not** leave a uniform finite nucleus: the
-fixed guard `(5,2,29,1,1)` retains pairwise nonassociated cancellation factors
-`1,3,3²,…` after localization away from five. Uniformity over all primitive inputs is therefore
-dead. The remaining decidability claim must be orbit-specific to the canonical reset; the
-opposing construction must force that one orbit, rather than freely chosen inputs, through
-unbounded novel depth.
-
-[`R32-S19`](SALVAGE.md#r32-s19-canonical-cyclotomic-collision-ladders) reaches that canonical
-orbit. The product of primitive reductions is exactly the content of the composed tangent
-image, but this identity supplies no descent: the transfer product can grow with the swallowed
-content. More sharply, any chosen divisor of `pᵃ−1` can be installed as the complete first
-novel reduction of a canonical reset, and one fixed reset orbit has four consecutive novel
-reductions after fixed-support normalization. Endpoint-only budgets, first-collision bounds,
-and parameter-uniform bounds are therefore closed. What remains is genuinely sequential:
-either fixed parameters impose an effective bound, or compatible `p`-adic and cyclotomic
-congruences synthesize arbitrarily long prefixes.
+The cancellation-jet and tangent-cocycle detour has now been removed from the live theorem
+bank. Its projective coordinate was the original residual in a known moving scale, so it did
+not supply a second register. The only additional datum was the primitive normalization
+scalar. That scalar is now retained directly by the endpoint/content calculus below; carrying
+an auxiliary tangent machine obscured rather than strengthened the argument.
 
 [`R32-S26`](SALVAGE.md#r32-s26-evaluation-frame-gauge-closure) closes the parameter-lifting
 detour. If `F(j,H)` is the evaluation frame with columns `j` and `(1,H)`, the consecutive
@@ -859,22 +816,59 @@ returns. Every surviving construction must move its checkpoint, change its macro
 genuinely nonperiodic wait word. Conversely, a decision proof may finish by showing that every
 sufficiently deep canonical return contains a powered macro violating the displayed gap.
 
+[`R32-S28`](SALVAGE.md#r32-s28-terminal-endpoint-and-complementary-content) replaces the
+discarded tangent branch with a fixed terminal gauge
+
+```text
+x=L(z−1)=A−L+D/w.
+```
+
+One wait acts by an explicit `2 × 2` divisor-Collatz transfer whose determinant is
+`−DLp^(sa)(pᵃ−1)`. Primitive reduction splits the cyclotomic factor into forward content `h`
+and complementary reverse content `k`; the adjugate reconstructs the source with scalar
+`−k`. Across a complete terminal word, the first-row coefficient is exactly
+`(−1)^N∏kᵢ`. The coefficient boundary yields immediate finite obstructions. In particular, a
+prime dividing `A−L` but neither `D` nor `p` excludes every terminal word. This one-line test
+subsumes both the former collision-ladder analysis and the more elaborate terminal proof for
+the period-three survivor.
+
+[`R32-S29`](SALVAGE.md#r32-s29-adelic-content-and-repeated-factor-budget) retains the forward
+content without inventing another projective state:
+
+```text
+|hᵢ|Hᵢ₊₁ ≤ C Hᵢ,
+p^((s−1)aᵢ)|hᵢ| ≤ C Hᵢ.
+```
+
+The entire factor of `pᵃ−1` coprime to `hᵢ`, including multiplicity, survives as a reset
+congruence in the reduced target. Two trajectories through the same branch obey an exact
+exterior-product law, and any repeated legal factor at arbitrary checkpoints is either an
+exact cycle or its p-adic expansion is bounded by the two rational height envelopes.
+
+The remaining unbounded channel is now sharply Archimedean. The audited
+[`R32-D03`](SALVAGE.md#r32-d03-bounded-denominator-periodicity) theorem says that every
+infinite legal rational orbit with bounded reduced denominators is eventually periodic.
+Its exact second-order recurrence is already formalized; the effective finiteness argument
+remains the one promoted result in this tranche not yet kernel-checked. Thus any genuinely
+nonperiodic survivor must have unbounded reduced denominators.
+
 ### Live attacks
 
 | Lane | Required move | Present obstruction |
 | --- | --- | --- |
-| Canonical return recurrence | Force a powered factor in every sufficiently deep reset-return word and apply `R32-S27` | Exact similarity controls a repeated macro, but no theorem yet extracts repetition from a moving wait schedule |
-| Power-free synthesis | Construct a rational canonical orbit with unbounded deep returns whose wait word evades every fixed macro bound | Local p-adic symbolic freedom is complete, but rational height couples all inverse branches globally |
-| Cyclotomic tangent dynamics | Convert `R32-S16`–`R32-S19` into an orbit-specific bound or an arbitrary-prefix synthesis theorem | Primitive normalization moves the checkpoint and can swallow successive novel cyclotomic factors |
+| Denominator-return theorem | Prove that unbounded reduced denominators force a coefficient-boundary obstruction, a pumpable repeated factor, or terminality | Endpoint contents control cancellation but leave a spare `p^((s−1)a)` denominator scale |
+| Denominator counter | Construct one coefficient-aligned orbit with unbounded denominators and a power-free wait word | Local p-adic symbolic freedom is complete, but endpoint content and rational height couple all branches globally |
+| Repeated-factor extraction | Force a sufficiently heavy repeated factor in every bounded-complexity wait prefix and apply `R32-S29` | Arbitrary repeated factors are controlled once found; no theorem yet extracts one from a moving denominator schedule |
 | Irreducible cubic fallback | Replace the split spectrum by a cubic return pencil with internal punctuation and a complete word normal form | No candidate yet matches the guard's exact illegal-branch soundness |
 | Exceptional reverse compiler | Absorb the finite `αβ=0` disjunction into one three-dimensional many-one instance | The generic rank-`(2,2)` compiler is complete; dimension three has no evident OR operation |
 
-The prospective hot path is now a word-combinatorial theorem about the canonical return
-schedule, not another parameter coordinate. The matrix compiler, arbitrary-word converse,
-deterministic wait decoder, rational inverse-address grammar, primitive integral lift, exact
-branch similarity, rational gap, and height envelope are complete. `M₃(2)` now asks whether a
-three-state rational recurrence can maintain an unbounded sequence of moving approximate
-returns without ever presenting a pumpable macro.
+The prospective hot path is the unbounded-denominator divisor recurrence, not another
+parameter or tangent coordinate. The matrix compiler, arbitrary-word converse, deterministic
+wait decoder, rational inverse-address grammar, primitive integral lift, endpoint
+factorization, exact branch similarity, arbitrary repeated-factor pumping, and content-height
+budgets are complete. `M₃(2)` now asks whether a three-state rational recurrence can sustain
+unbounded reduced denominators while evading every coefficient quotient and every
+height-forced repetition.
 
 ## The dimension-two wall: `M₂(3)`
 

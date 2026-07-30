@@ -380,20 +380,6 @@
 'MatrixMortality.ReturnGuard.integralStep_commonFactor_natAbs_le_support' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-'MatrixMortality.ReturnGuard.cancellationJet_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
-'MatrixMortality.ReturnGuard.localCancellationExit_surjective' depends on axioms: [propext,
- Classical.choice,
- Quot.sound]
-'MatrixMortality.ReturnGuard.cancellationExit_escapes_fixed_truncation' depends on axioms: [propext,
- Classical.choice,
- Quot.sound]
-'MatrixMortality.ReturnGuard.primitive_integralStep_of_exact_cyclotomicDepth' depends on axioms: [propext,
- Classical.choice,
- Quot.sound]
-'MatrixMortality.ReturnGuard.exists_primitive_integralStep_with_three_cancellationDepth' depends on axioms: [propext,
- Classical.choice,
- Quot.sound]
-'MatrixMortality.ReturnGuard.integralStep_cancellationExit' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.ReturnGuard.padicValNat_pow_mul_sub_one_le' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.ReturnGuard.padicValNat_two_pow_mul_sub_one_le' depends on axioms: [propext,
  Classical.choice,
@@ -493,44 +479,47 @@
 'MatrixMortality.ReturnGuard.integralStepNumerator_eq_terminalDefect_add' depends on axioms: [propext, Quot.sound]
 'MatrixMortality.ReturnGuard.integralStep_terminalDefect' depends on axioms: [propext, Quot.sound]
 'MatrixMortality.ReturnGuard.reducedDenominator_recurrence' depends on axioms: [propext, Quot.sound]
-'MatrixMortality.ReturnGuard.tangentTransfer_of_consecutive_reduction' depends on axioms: [propext,
+'MatrixMortality.ReturnGuard.terminalCoordinate_residualStep' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ReturnGuard.endpointTransfer_mul_endpointGauge' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-'MatrixMortality.ReturnGuard.tangentTransfer_det' depends on axioms: [propext, Classical.choice, Quot.sound]
-'MatrixMortality.ReturnGuard.cancellationTangent_isCoprime_of_base' depends on axioms: [propext,
+'MatrixMortality.ReturnGuard.endpointProduct_det' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ReturnGuard.endpointProduct_first_eq_complementProduct' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-'MatrixMortality.ReturnGuard.tangent_reductionFactor_dvd_support' depends on axioms: [propext, Quot.sound]
-'MatrixMortality.ReturnGuard.tangent_novelDivisor_dvd_cyclotomic' depends on axioms: [propext,
+'MatrixMortality.ReturnGuard.endpointTerminalWord_of_residualRun_eq_terminal' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-'MatrixMortality.ReturnGuard.tangentTransfer_mod_eq_zero_iff_terminal' depends on axioms: [propext,
+'MatrixMortality.ReturnGuard.not_endpointTerminalWord_of_prime_dvd_centerDifference' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-'MatrixMortality.ReturnGuard.tangentTransfer_localized_isUnit_iff' depends on axioms: [propext,
+'MatrixMortality.ReturnGuard.endpointAdjugate_mulVec_of_complementaryContent' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-'MatrixMortality.ReturnGuard.awayFive_three_pow_not_associated_of_lt' depends on axioms: [propext,
+'MatrixMortality.ReturnGuard.integralStep_content_mul_height_le' depends on axioms: [propext]
+'MatrixMortality.ReturnGuard.integralStep_wait_content_le' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.ReturnGuard.primitiveSteps_projectivePairCross' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-'MatrixMortality.ReturnGuard.exists_localized_nonunit_three_cancellationDepth' depends on axioms: [propext,
+'MatrixMortality.ReturnGuard.cyclotomicComplement_dvd_targetDifference' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-'MatrixMortality.ReturnGuard.ScaledTrajectory.chronologicalProduct_mulVec' depends on axioms: [propext,
+'MatrixMortality.ReturnGuard.sharedSchedule_exact_or_power_le_pairHeights' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-'MatrixMortality.ReturnGuard.ScaledTrajectory.image_gcd' depends on axioms: [propext, Classical.choice, Quot.sound]
-'MatrixMortality.ReturnGuard.prescribedReset_primitiveIntegralStep' depends on axioms: [propext, Quot.sound]
-'MatrixMortality.ReturnGuard.prescribedReset_factor_isCoprime_fixedSupport' depends on axioms: [propext,
+'MatrixMortality.ReturnGuard.sharedSchedule_exact_or_power_le_heightEnvelope' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-'MatrixMortality.ReturnGuard.Examples.cyclotomicLadder_decodedSteps' depends on axioms: [propext,
+'MatrixMortality.ReturnGuard.Examples.cycle_no_endpointTerminalWord' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-'MatrixMortality.ReturnGuard.Examples.cyclotomicLadder_primitiveSteps' depends on axioms: [propext,
+'MatrixMortality.ReturnGuard.Examples.collisionLadder_no_endpointTerminalWord' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-'MatrixMortality.ReturnGuard.Examples.cyclotomicLadder_novelFactors' depends on axioms: [propext,
+'MatrixMortality.ReturnGuard.Examples.decreasingMortal_reachable' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.Examples.increasingMortal_reachable' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
 'MatrixMortality.ReturnGuard.evaluationFrameTransition_eq_coboundary' depends on axioms: [propext,
@@ -591,11 +580,6 @@
 'MatrixMortality.ReturnGuard.Examples.cycle_integral_step_two' depends on axioms: [propext, Quot.sound]
 'MatrixMortality.ReturnGuard.Examples.cycle_integral_reductions' depends on axioms: [propext, Quot.sound]
 'MatrixMortality.ReturnGuard.Examples.cycle_commonFactors_dvd_fixedSupport' depends on axioms: [propext]
-'MatrixMortality.ReturnGuard.Examples.cycle_tangent_step_zero' depends on axioms: [propext,
- Classical.choice,
- Quot.sound]
-'MatrixMortality.ReturnGuard.Examples.cycle_tangent_step_one' depends on axioms: [propext, Classical.choice, Quot.sound]
-'MatrixMortality.ReturnGuard.Examples.cycle_tangent_step_two' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.ReturnGuard.Examples.cycle_no_primitive_integral_terminal_execution' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]

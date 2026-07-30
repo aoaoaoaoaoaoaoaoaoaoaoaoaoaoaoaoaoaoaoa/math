@@ -100,12 +100,11 @@ file owns the mathematical stock.
 | [`R32-S13`](#r32-s13-canonical-decoded-integral-lift) | structure theorem | every decoded rational path lifts canonically to primitive integral execution | formalized | active |
 | [`R32-S14`](#r32-s14-drift-divisor-certificate-classification) | decidable stratum | drift-divisor certificates are exactly finite cyclic-orbit avoidance | formalized | active |
 | [`R32-S15`](#r32-s15-finite-quotient-completeness) | obstruction | terminal exclusion is cancellation exclusion; synchronized prime products cannot amplify certificates | formalized | active |
-| [`R32-S16`](#r32-s16-cancellation-blow-up-and-unbounded-depth) | obstruction | primitive cancellation is a surjective projective blow-up with no uniform finite-jet bound | formalized | active |
-| [`R32-S17`](#r32-s17-normalized-tangent-cocycle) | structure theorem | consecutive primitive reductions form a recursive two-dimensional tangent cocycle with exact cyclotomic support | formalized | active |
-| [`R32-S18`](#r32-s18-fixed-support-localization-obstruction) | obstruction | fixed-support localization isolates the cyclotomic determinant but retains an infinite strict tower of novel cancellation depths | formalized | active |
-| [`R32-S19`](#r32-s19-canonical-cyclotomic-collision-ladders) | structure theorem and obstruction | tangent content is exactly multiplicative, yet one canonical reset orbit can swallow four successive novel cyclotomic factors | formalized | active |
 | [`R32-S26`](#r32-s26-evaluation-frame-gauge-closure) | structure theorem and closure | the parameter-jet transition is an exact frame coboundary, and deep frame defect localizes to the reset shell | formalized | graduated |
 | [`R32-S27`](#r32-s27-rational-gap-macro-pumping) | structure theorem and obstruction | exact branch similarity and rational height separation bound every noncyclic repetition of one fixed macro | formalized | active |
+| [`R32-S28`](#r32-s28-terminal-endpoint-and-complementary-content) | structure theorem and obstruction | a terminal gauge exposes complementary forward/reverse contents and coefficient-prime immortality certificates | formalized | active |
+| [`R32-S29`](#r32-s29-adelic-content-and-repeated-factor-budget) | structure theorem and obstruction | content-weighted height, full cyclotomic complement, exterior conservation, and arbitrary repeated-factor pumping share one calculus | formalized | active |
+| [`R32-D03`](#r32-d03-bounded-denominator-periodicity) | decidable stratum | every infinite legal rational guard orbit with bounded reduced denominators is eventually periodic | audited | active |
 | [`M4-C01`](#m4-c01-two-state-pushout-compiler) | compiler | binary deterministic two-state scalar control compiles to three `4 × 4` matrices | formalized | graduated |
 | [`M4-O01`](#m4-o01-exact-toggle-fusion-leaves-an-immortal-core) | obstruction | exact local toggle fusion preserves a nonzero common anchor | formalized | graduated |
 | [`M4-O02`](#m4-o02-two-private-state-phase-signature) | obstruction | two private quotient states cannot isolate one exceptional cyclic phase | formalized | graduated |
@@ -2980,311 +2979,6 @@ word annihilate the reset ray? Do not build products of cancellation-rejecting a
 by primitive reduction and test whether bounded cancellation memory yields a finite nucleus or
 whether unbounded cancellation carries the missing computational stack.
 
-### R32-S16: Cancellation blow-up and unbounded depth
-
-**Kind:** obstruction
-**Evidence:** formalized
-**Disposition:** active
-
-Let the two raw output coordinates be encoded by a terminal term
-
-```text
-T = ℓᵗT₀
-```
-
-and a cyclotomic displacement
-
-```text
-P N − T = ℓᵉC₀,
-```
-
-where `T₀,C₀` are `ℓ`-adic units. Dividing both coordinates by
-`ℓ^min(t,e)` gives an exact strict transform with three exits:
-
-```text
-t<e:  [N:T] ≡ [1:1],
-e<t:  [N:T] ≡ [1:0],
-t=e:  [N:T] ≡ [T₀+C₀:T₀]       (mod ℓ).
-```
-
-Thus only equal-depth cancellation retains information. Its tangent parameter is unrestricted:
-over every field the exceptional divisor maps surjectively onto `ℙ¹`. The two unequal-depth
-charts give one and infinity, while `C₀/T₀` ranges over every remaining affine point. A
-swallowed prime can therefore reconstruct *any* quotient state after normalization.
-
-This loss cannot be repaired by choosing a larger fixed modulus. For every truncation depth
-`N`, the raw pairs
-
-```text
-(ℓᴺ, −ℓᴺ),       (ℓᴺ, ℓᴺ⁺¹)
-```
-
-are indistinguishable modulo `ℓᴺ`, but their normalized exits are zero and one. No a priori
-fixed congruence jet determines continuation through every collision.
-
-The obstruction occurs inside the actual integral guard recurrence, not merely in an abstract
-local model. Any exact factorization
-
-```text
-pᵃ−1 = ℓᵈu,       ℓ∤u
-```
-
-has a uniform primitive source whose integral step cancels exactly `ℓᵈ`, remains primitive
-after division, and exits at zero modulo `ℓ`. Specializing to
-
-```text
-(p,s,A,D,L)=(5,2,29,1,1),       a=2·3^(d−1),
-```
-
-lifting the exponent gives `v₃(5ᵃ−1)=d`. Hence one fixed recurrence realizes every positive
-`3`-adic cancellation depth on primitive inputs.
-
-**Scope:** unboundedness is over the full primitive transition relation. It does not yet prove
-that one orbit from the fixed reset realizes unbounded depths. An orbit-specific height theorem
-could still yield a finite decision procedure. Nor does the result forbid an algorithm which
-carries exact valuations symbolically rather than factoring through a fixed finite congruence
-quotient.
-
-**Artifact:** `ReturnGuard.cancellationJet_eq`,
-`cancellationJet_terminalDepth_lt_ofPair`,
-`cancellationJet_displacementDepth_lt_ofPair`,
-`cancellationJet_depth_eq_mod`,
-`localCancellationExit_surjective`,
-`cancellationExit_escapes_fixed_truncation`,
-`primitive_integralStep_of_exact_cyclotomicDepth`,
-`exists_primitive_integralStep_with_three_cancellationDepth`, and
-`integralStep_cancellationExit` in
-[`ReturnGuardCancellationJet.lean`](MatrixMortality/ReturnGuardCancellationJet.lean).
-
-**Use:** abandon uniform fixed-jet quotient nuclei. On the decidability side, prove an
-orbit-specific bound on equal-depth tangent collisions or discover a symbolic normalization
-whose well-founded measure survives arbitrary depth. On the undecidability side, the equal-depth
-tangent is now a concrete unbounded storage channel: force one reset orbit to select its leading
-digits recursively.
-
-**Next:** decide whether the canonical reset orbit can realize unbounded cancellation depth.
-
-### R32-S17: Normalized tangent cocycle
-
-**Kind:** structure theorem
-**Evidence:** formalized
-**Disposition:** active
-
-Primitive cancellation resumes as an exact two-dimensional recurrence. For a reduced pair
-`(m,n)` in the chart belonging to a preceding wait `a`, put
-
-```text
-P = p^(sa),              v = (n, Pm−n).
-```
-
-If the next wait is `b`, define
-
-```text
-M(P,b) =
-  [ A−L+DP      A−L       ]
-  [ L(1−pᵇ)     L(1−pᵇ)   ].
-```
-
-For consecutive primitive reductions with next common factor `g`,
-
-```text
-M(P,b) v = Pg v′,
-```
-
-where `v′` is the tangent pair in the chart `p^(sb)`. This equality retains the complete
-normalization scalar. If `(m,n)` is primitive and `n` is coprime to `P`, then `v` is primitive
-as well.
-
-The determinant is
-
-```text
-det M(P,b) = DLP(1−pᵇ).
-```
-
-Hence the blow-up is recursive. Away from fixed parameter primes and the preceding `p`-power,
-every new tangent cancellation factor again divides `pᵇ−1`. Modulo such a cyclotomic prime the
-matrix has one explicit kernel line:
-
-```text
-(A−L+DP)T + (A−L)C = 0.
-```
-
-An ensuing swallowed factor is exactly passage of the normalized tangent `(T,C)` through this
-line. Primitive normalization has not converted the problem into a finite correction; it has
-recreated the same fixed-versus-cyclotomic cancellation dichotomy on the exceptional divisor.
-
-There is no unconditional scalar descent on this cocycle. The checked canonical period-three
-guard carries the exact nonzero projective tangent cycle
-
-```text
-(17,28) → (283,3200) → (1,728) → (17,28),
-```
-
-with normalization scalars `−252`, `−278640`, and `−116640`. Every ordinary normalization
-factor in this example lies in fixed parameter support, so the cycle does not refute an
-orbit-specific bound on *novel* tangent depth. It does prove that fixed-support normalization
-must precede any well-founded height argument.
-
-**Scope:** the theorem gives the exact local transport and support of every consecutive
-collision. It neither bounds equal-depth collisions on the canonical reset orbit nor constructs
-one reset orbit with unbounded novel depth.
-
-**Artifact:** `ReturnGuard.cancellationTangent`,
-`tangentTransfer_of_consecutive_reduction`, `tangentTransfer_det`,
-`cancellationTangent_isCoprime_of_base`, `tangent_reductionFactor_dvd_support`,
-`tangent_novelDivisor_dvd_cyclotomic`, and
-`tangentTransfer_mod_eq_zero_iff_terminal` in
-[`ReturnGuardTangent.lean`](MatrixMortality/ReturnGuardTangent.lean);
-`ReturnGuard.Examples.cycle_tangent_step_zero`, `cycle_tangent_step_one`, and
-`cycle_tangent_step_two` in
-[`ReturnGuardTangentExamples.lean`](MatrixMortality/ReturnGuardTangentExamples.lean).
-
-**Use:** treat repeated primitive collisions as a normalized matrix cocycle rather than an
-exceptional branch. Any decidability proof must first quotient fixed `S`-unit normalization and
-then control the novel cyclotomic factors of this cocycle. Any universality proof must steer
-successive tangent vectors through its moving kernel lines.
-
-**Next:** construct the fixed-support-normalized tangent recurrence and decide whether its novel
-normalization factors are orbitwise bounded or can encode an unbounded stack.
-That is the exact fork between an orbit-specific finite nucleus and a cyclotomic stack.
-
-### R32-S18: Fixed-support localization obstruction
-
-**Kind:** obstruction
-**Evidence:** formalized
-**Disposition:** active
-
-The canonical multiplicative way to erase fixed parameter factors is localization. Let `S` be
-the localization of a commutative ring away from `D·L·p`. Then `D`, `L`, and every chart power
-`P=p^(sa)` are units in `S`. The tangent determinant identity becomes
-
-```text
-det M(P,b)  ~  1−pᵇ,
-```
-
-where `~` denotes association. Consequently
-
-```text
-M(P,b) is invertible in S  ↔  1−pᵇ is a unit in S.
-```
-
-This is the exact fixed-versus-novel separation sought after
-[`R32-S17`](#r32-s17-normalized-tangent-cocycle). It also disproves the hoped-for *uniform*
-finite core. For the single guarded recurrence
-
-```text
-(p,s,A,D,L)=(5,2,29,1,1),
-```
-
-[`R32-S16`](#r32-s16-cancellation-blow-up-and-unbounded-depth) supplies primitive inputs with
-every positive `3`-adic cancellation depth. Localizing away from the fixed support `5` does not
-erase that axis:
-
-```text
-3^i  and  3^j
-```
-
-remain nonassociated whenever `i≠j`. The proof specializes the localization to
-`ℤ/(3^(min(i,j)+1))`; five stays invertible, while exactly one of the two powers vanishes.
-Thus the localized recurrence retains an infinite strict divisor tower, not merely one
-exceptional nonunit.
-
-**Scope:** this excludes a finite-state theorem uniform over all primitive inputs, even after
-the mathematically correct fixed-support normalization. It does not show that the one canonical
-reset orbit of a guarded mortality instance visits unbounded novel depth. An orbit-specific
-height bound remains viable.
-
-**Artifact:** `ReturnGuard.tangentTransfer_localized_isUnit_iff`,
-`awayFive_three_pow_not_associated_of_lt`, and
-`exists_localized_nonunit_three_cancellationDepth` in
-[`ReturnGuardLocalization.lean`](MatrixMortality/ReturnGuardLocalization.lean).
-
-**Use:** do not search for a uniform finite nucleus in the localized state space. A decision
-argument must exploit arithmetic restrictions of the reset orbit; a universality argument must
-make that same orbit traverse an unbounded chain of novel localized divisors.
-
-**Next:** derive an orbitwise product formula or height inequality comparing newly swallowed
-cyclotomic factors with the primitive tangent height, and test it on terminal-reaching reset
-executions.
-
-### R32-S19: Canonical cyclotomic collision ladders
-
-**Kind:** structure theorem and obstruction
-**Evidence:** formalized
-**Disposition:** active
-
-For any finite projective transfer chain
-
-```text
-Mᵢvᵢ=cᵢvᵢ₊₁,
-```
-
-the chronological product satisfies
-
-```text
-Mₖ₋₁⋯M₀v₀=(∏ᵢcᵢ)vₖ.
-```
-
-If `vₖ` is primitive, `|∏ᵢcᵢ|` is exactly the coordinate gcd of the composed
-image. This is a content identity, not a descent: transfer height can grow by the amount needed
-to carry every removed scalar.
-
-The canonical residual source `(1,1)` also admits prescribed novel cancellation. If
-
-```text
-pᵃ−1=q r
-```
-
-and
-
-```text
-D=pᵃ+q p^(sa)−A,
-```
-
-then its first primitive integral step is
-
-```text
-(1,1)  ⟶  q·(1,p^(sa)+r).
-```
-
-At `A=2`, `q` is coprime to the fixed support `D·p`. Thus any chosen divisor of one
-cyclotomic factor can be swallowed by a canonical reset without becoming fixed support.
-
-The fixed guard
-
-```text
-(p,s,α,ρ)=(3,2,−64,52569)
-```
-
-has a canonical legal wait prefix `4,2,2,1`. Its primitive reductions remove
-
-```text
-8,2,292,2.
-```
-
-After deleting fixed support, the successive novel factors are `8,2,4,2`.
-
-**Scope:** the construction prescribes one collision uniformly across the parameter family and
-checks four consecutive collisions on one fixed reset orbit. It does not construct arbitrarily
-long prefixes or one orbit with unbounded novel depth.
-
-**Artifact:** `ReturnGuard.ScaledTrajectory.chronologicalProduct_mulVec`,
-`ReturnGuard.ScaledTrajectory.image_gcd`,
-`ReturnGuard.prescribedReset_primitiveIntegralStep`, and
-`ReturnGuard.prescribedReset_factor_isCoprime_fixedSupport` in
-[`ReturnGuardTangentBudget.lean`](MatrixMortality/ReturnGuardTangentBudget.lean);
-`ReturnGuard.Examples.cyclotomicLadder_decodedSteps`,
-`cyclotomicLadder_primitiveSteps`, and `cyclotomicLadder_novelFactors` in
-[`ReturnGuardTangentExamples.lean`](MatrixMortality/ReturnGuardTangentExamples.lean).
-
-**Use:** abandon parameter-uniform endpoint-content budgets and any claim that canonical novel
-collisions are isolated. The remaining fork is per-instance boundedness versus arithmetic
-synthesis of arbitrarily long collision prefixes.
-
-**Next:** express prefix preservation as a finite `p`-adic congruence and the next moving-kernel
-collision as a coprime cyclotomic congruence. Prove a CRT/Hensel extension lemma or expose the
-first compatibility invariant that prevents it.
-
 ### R32-S26: Evaluation-frame gauge closure
 
 **Kind:** structure theorem and closure
@@ -3400,6 +3094,157 @@ deep returns contain a repeated macro and invoke the gap theorem.
 **Next:** derive a combinatorial recurrence theorem for the canonical wait word strong enough
 to force a powered factor at return depths exceeding the explicit height bound, or construct a
 rational canonical orbit whose deep returns remain power-free.
+
+### R32-S28: Terminal endpoint and complementary content
+
+**Kind:** structure theorem and obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+For an integral parameter presentation `α=A/L`, `ρ−α=D/L`, the fixed coordinate
+
+```text
+x = L(z−1) = A−L+D/w
+```
+
+sends reset to `A+D−L` and terminality to zero. A wait `a` acts by the homogeneous transfer
+
+```text
+Mₐ =
+  [ A−L + Dp^(sa)   −(A−L)L(pᵃ−1) ]
+  [ 1                −L(pᵃ−1)       ],
+```
+
+whose determinant is `−DLp^(sa)(pᵃ−1)`. This transfer is conjugate to the existing integral
+residual transfer; the coordinate is a gauge, not another state.
+
+If primitive normalization removes signed content `h` and
+
+```text
+h k = DL(pᵃ−1),
+```
+
+then the explicit adjugate reconstructs the source ray with scalar `−k`. For a complete
+terminal word, if the forward and reverse contents partition every branch determinant, the
+first-row coefficient of the product is exactly
+
+```text
+(−1)^N ∏ kᵢ.
+```
+
+Coefficient specializations yield finite necessary conditions. Most sharply, a prime dividing
+`A−L` but neither `D` nor `p` makes the first coordinate nonzero after every word and therefore
+certifies immortality. This excludes the former collision-ladder candidate modulo five and
+the period-three survivor modulo 31 without orbit enumeration. Exact two-step terminal
+examples with waits `[3,1]` and `[2,3]` prove that the aligned residue is nonempty and that
+terminal waits need not be monotone.
+
+**Scope:** the endpoint theorems retain exact word products and complementary contents. The
+coefficient-prime theorem is sufficient, not complete; passing every coefficient boundary
+does not imply mortality.
+
+**Artifact:** `ReturnGuard.terminalCoordinate_residualStep`,
+`endpointTransfer_mul_endpointGauge`, `endpointProduct_det`,
+`endpointProduct_first_eq_complementProduct`,
+`endpointAdjugate_mulVec_of_complementaryContent`, and
+`not_endpointTerminalWord_of_prime_dvd_centerDifference` in
+[`ReturnGuardEndpoint.lean`](MatrixMortality/ReturnGuardEndpoint.lean); the exact examples and
+compact exclusions are in
+[`ReturnGuardExamples.lean`](MatrixMortality/ReturnGuardExamples.lean). Independent synthesis
+is recorded in
+[`m32-endpoint-content-2026-07-30.md`](audits/m32-endpoint-content-2026-07-30.md).
+
+**Use:** run coefficient-boundary tests before any orbit-specific analysis. Carry primitive
+normalization as the pair `(h,k)` rather than as an auxiliary tangent state.
+
+**Next:** turn the scale and drift boundary product identities into complete executable
+subgroup tests, then combine all three coefficient boundaries with denominator growth.
+
+### R32-S29: Adelic content and repeated-factor budget
+
+**Kind:** structure theorem and obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+If one integral step reduces as `(M,N)=h(m′,n′)`, primitive height satisfies
+
+```text
+|h|H(m′,n′) ≤ C H(m,n),
+p^((s−1)a)|h| ≤ C H(m,n),
+C=|A|+|D|+|L|.
+```
+
+Thus cancellation and wait depth consume one Archimedean resource. The complete portion of
+`pᵃ−1` coprime to `h`, including prime-power multiplicity, divides `m′−n′`; the old primewise
+reset-or-cancel theorem was only its radical shadow.
+
+For two primitive trajectories using the same wait, with removed contents `g,h`, the exact
+exterior law is
+
+```text
+p^(sa) g h (v′∧u′) = DL(1−pᵃ)(v∧u).
+```
+
+Every local factor therefore goes to left cancellation, right cancellation, or increased
+projective coincidence. There is no fourth destination. Separately, exact branch similarity
+and rational separation apply at arbitrary checkpoints: a legal block shared by two orbit
+states either begins at the same rational point or its p-adic expansion weight fits inside the
+product of their projective heights.
+
+**Scope:** these are one-step and repeated-factor budgets. They do not force a repeated factor
+to occur in an arbitrary wait word and do not bound a schedule whose reduced denominators grow
+without bound.
+
+**Artifact:** `ReturnGuard.integralStep_content_mul_height_le`,
+`integralStep_wait_content_le`, `cyclotomicComplement_dvd_targetDifference`, and
+`primitiveSteps_projectivePairCross` in
+[`ReturnGuardAdelic.lean`](MatrixMortality/ReturnGuardAdelic.lean);
+`sharedSchedule_exact_or_power_le_pairHeights` and
+`sharedSchedule_exact_or_power_le_heightEnvelope` in
+[`ReturnGuardPumping.lean`](MatrixMortality/ReturnGuardPumping.lean). Independent synthesis is
+recorded in
+[`m32-endpoint-content-2026-07-30.md`](audits/m32-endpoint-content-2026-07-30.md).
+
+**Use:** charge every swallowed factor immediately and apply pumping to repeated factors
+wherever they occur, not only to powers from reset.
+
+**Next:** extract a sufficiently heavy repeated factor from bounded-denominator schedules, or
+construct a coefficient-aligned orbit whose denominator growth evades every such extraction.
+
+### R32-D03: Bounded-denominator periodicity
+
+**Kind:** decidable stratum
+**Evidence:** audited
+**Disposition:** active
+
+For a reduced endpoint state `xᵢ=rᵢ/tᵢ`, readiness and complementary content give the exact
+second-order recurrence
+
+```text
+p^(saᵢ₊₁) hᵢ₊₁ tᵢ₊₂
+  = (A + Dp^(saᵢ) − Lp^aᵢ₊₁)tᵢ₊₁ + kᵢtᵢ,
+
+hᵢkᵢ = DL(p^aᵢ−1).
+```
+
+If all positive reduced denominators `tᵢ` are bounded, every nondecreasing wait transition is
+effectively bounded. A positive integer wait sequence cannot decrease forever, so all waits
+are bounded. The recurrence then admits only finitely many reduced rational states, and the
+functional legal orbit is eventually periodic. Consequently every nonperiodic infinite guard
+orbit has unbounded reduced denominators.
+
+**Scope:** the proof is effective for a supplied denominator bound. The exact denominator
+recurrence is kernel-checked in the residual gauge; the finiteness argument has been
+independently reconstructed but is not yet formalized and must not be cited as a Lean theorem.
+
+**Artifact:**
+[`m32-endpoint-content-2026-07-30.md`](audits/m32-endpoint-content-2026-07-30.md).
+
+**Use:** abandon integer-valued or bounded-denominator universality. The sole surviving
+register in this split-spectrum guard is unbounded Archimedean denominator growth.
+
+**Next:** formalize the nondecreasing-wait bound and finite-orbit construction, or find a
+counterexample before promotion.
 
 ## Three-Generator Four-State Frontier
 

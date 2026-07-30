@@ -1,6 +1,7 @@
 import MatrixMortality.IndexedExecution
 import MatrixMortality.ReturnGuardAddress
 import MatrixMortality.ReturnGuardCocycle
+import MatrixMortality.ReturnGuardEndpoint
 import MatrixMortality.ReturnGuardResonance
 
 /-!
@@ -33,6 +34,25 @@ private theorem val5_int_unit (z : Int) (not_dvd : ¬(5 : Int) ∣ z) :
     padicValRat 5 (z : ℚ) = 0 := by
   rw [padicValRat.of_int]
   exact_mod_cast padicValInt.eq_zero_of_not_dvd not_dvd
+
+private theorem val5_scaled_fraction
+    (power : Nat) (numerator denominator : Int)
+    (numerator_ne : numerator ≠ 0) (denominator_ne : denominator ≠ 0)
+    (numerator_unit : ¬(5 : Int) ∣ numerator)
+    (denominator_unit : ¬(5 : Int) ∣ denominator) :
+    padicValRat 5
+        ((5 : ℚ) ^ power * (numerator : ℚ) / (denominator : ℚ)) =
+      power := by
+  have numerator_has_value :
+      IsUnit 5 (numerator : ℚ) :=
+    ⟨by exact_mod_cast numerator_ne, val5_int_unit numerator numerator_unit⟩
+  have denominator_has_value :
+      IsUnit 5 (denominator : ℚ) :=
+    ⟨by exact_mod_cast denominator_ne, val5_int_unit denominator denominator_unit⟩
+  exact
+    (div_hasValue
+      (mul_hasValue (primePower_hasValue power) numerator_has_value)
+      denominator_has_value).2
 
 private theorem val5_self : padicValRat 5 (5 : ℚ) = 1 :=
   padicValRat.self (p := 5) (by norm_num)
@@ -396,6 +416,23 @@ theorem cycle_not_physical_isMortal :
   rw [physical_isMortal_iff_decodedReachable]
   exact cycle_not_decodedReachable
 
+/-- The endpoint coefficient at prime `31` excludes every terminal word for the period-three
+parameters.  This strictly subsumes the older orbit-specific terminal exclusion. -/
+theorem cycle_no_endpointTerminalWord (waits : List Nat) :
+    ¬EndpointTerminalWord 3 2 (-953) 473 2240 waits := by
+  letI : Fact (Nat.Prime 31) := ⟨by norm_num⟩
+  exact
+    not_endpointTerminalWord_of_prime_dvd_centerDifference
+      (factor := 31) (by norm_num) (by norm_num) (by norm_num) waits
+
+/-- The former four-step collision-ladder candidate is excluded at the coefficient boundary
+before any tangent analysis: `5 ∣ -64 - 1`, while drift and base survive modulo five. -/
+theorem collisionLadder_no_endpointTerminalWord (waits : List Nat) :
+    ¬EndpointTerminalWord 3 2 (-64) 52633 1 waits := by
+  exact
+    not_endpointTerminalWord_of_prime_dvd_centerDifference
+      (factor := 5) (by norm_num) (by norm_num) (by norm_num) waits
+
 theorem cycle_ready_tails :
     readyTail cycleParameters 1 (-3 / 14) = -14 / 5 ∧
       readyTail cycleParameters 2 (117 / 400) = -400 / 43 ∧
@@ -469,6 +506,169 @@ theorem cycle_commonFactors_dvd_fixedSupport :
       (28 : ℤ) ∣ 473 * 2240 ∧
         (3440 : ℤ) ∣ 473 * 2240 := by
   norm_num
+
+/-- Guard with the exact decreasing wait itinerary `3, 1` from reset to terminal. -/
+def decreasingMortalParameters : Parameters where
+  prime := 3
+  prime_prime := three_prime
+  depth := 2
+  depth_two := by norm_num
+  center := 467 / 124
+  reset := 108 / 31
+  center_unit := ⟨by norm_num, by
+    rw [show (467 / 124 : ℚ) =
+      (3 : ℚ) ^ 0 * (467 : ℚ) / 124 by norm_num]
+    exact val3_scaled_fraction 0 467 124
+      (by norm_num) (by norm_num) (by norm_num) (by norm_num)⟩
+  center_sub_one_unit := ⟨by norm_num, by
+    rw [show (467 / 124 - 1 : ℚ) =
+      (3 : ℚ) ^ 0 * (343 : ℚ) / 124 by norm_num]
+    exact val3_scaled_fraction 0 343 124
+      (by norm_num) (by norm_num) (by norm_num) (by norm_num)⟩
+  reset_positive := ⟨by norm_num, by
+    have value :=
+      val3_scaled_fraction 3 4 31
+        (by norm_num) (by norm_num) (by norm_num) (by norm_num)
+    norm_num at value ⊢
+    exact value ▸ by norm_num⟩
+
+theorem decreasingMortal_reset_ready :
+    Ready decreasingMortalParameters 3 (108 / 31) := by
+  refine ⟨by norm_num, ?_, ?_⟩
+  · rw [show (108 / 31 : ℚ) =
+      (3 : ℚ) ^ 3 * (4 : ℚ) / 31 by norm_num]
+    exact val3_scaled_fraction 3 4 31
+      (by norm_num) (by norm_num) (by norm_num) (by norm_num)
+  · norm_num only [decreasingMortalParameters, Nat.cast_ofNat, pow_succ,
+      pow_two]
+    have value :=
+      val3_scaled_fraction 6 (-1) 31
+        (by norm_num) (by norm_num) (by norm_num) (by norm_num)
+    norm_num at value ⊢
+    exact value
+
+theorem decreasingMortal_middle_ready :
+    Ready decreasingMortalParameters 1 (1581 / 62) := by
+  refine ⟨by norm_num, ?_, ?_⟩
+  · rw [show (1581 / 62 : ℚ) =
+      (3 : ℚ) ^ 1 * (527 : ℚ) / 62 by norm_num]
+    exact val3_scaled_fraction 1 527 62
+      (by norm_num) (by norm_num) (by norm_num) (by norm_num)
+  · norm_num only [decreasingMortalParameters, Nat.cast_ofNat, pow_one]
+    have value :=
+      val3_scaled_fraction 2 155 62
+        (by norm_num) (by norm_num) (by norm_num) (by norm_num)
+    norm_num at value ⊢
+    exact value
+
+theorem decreasingMortal_first_step :
+    guardedStep decreasingMortalParameters 3 (some (108 / 31)) =
+      some (1581 / 62) := by
+  rw [guardedStep_some decreasingMortalParameters 3 (108 / 31)
+    (by norm_num [decreasingMortalParameters])]
+  norm_num [decreasingMortalParameters, guardDefect, drift]
+
+theorem decreasingMortal_second_step :
+    guardedStep decreasingMortalParameters 1 (some (1581 / 62)) =
+      some 1 := by
+  rw [guardedStep_some decreasingMortalParameters 1 (1581 / 62)
+    (by norm_num [decreasingMortalParameters])]
+  norm_num [decreasingMortalParameters, guardDefect, drift]
+
+/-- A terminal-reaching legal orbit need not be one-step or monotone increasing in its waits. -/
+theorem decreasingMortal_reachable :
+    GuardedReachable decreasingMortalParameters :=
+  (Relation.TransGen.single
+    ⟨2, decreasingMortal_reset_ready, decreasingMortal_first_step⟩).tail
+      ⟨0, decreasingMortal_middle_ready, decreasingMortal_second_step⟩
+
+theorem decreasingMortal_terminalCoordinates :
+    terminalCoordinate 467 (-35) 124 1 = 308 ∧
+      terminalCoordinate 467 (-35) 124 (-1 / 77) = 3038 ∧
+        terminalCoordinate 467 (-35) 124 (5 / 49) = 0 := by
+  norm_num [terminalCoordinate]
+
+/-- Guard with the exact increasing wait itinerary `2, 3` from reset to terminal. -/
+def increasingMortalParameters : Parameters where
+  prime := 5
+  prime_prime := five_prime
+  depth := 2
+  depth_two := by norm_num
+  center := -57803 / 10304
+  reset := -7175 / 1288
+  center_unit := ⟨by norm_num, by
+    rw [show (-57803 / 10304 : ℚ) =
+      (5 : ℚ) ^ 0 * (-57803 : ℚ) / 10304 by norm_num]
+    exact val5_scaled_fraction 0 (-57803) 10304
+      (by norm_num) (by norm_num) (by norm_num) (by norm_num)⟩
+  center_sub_one_unit := ⟨by norm_num, by
+    rw [show (-57803 / 10304 - 1 : ℚ) =
+      (5 : ℚ) ^ 0 * (-68107 : ℚ) / 10304 by norm_num]
+    exact val5_scaled_fraction 0 (-68107) 10304
+      (by norm_num) (by norm_num) (by norm_num) (by norm_num)⟩
+  reset_positive := ⟨by norm_num, by
+    have value :=
+      val5_scaled_fraction 2 (-287) 1288
+        (by norm_num) (by norm_num) (by norm_num) (by norm_num)
+    norm_num at value ⊢
+    exact value ▸ by norm_num⟩
+
+theorem increasingMortal_reset_ready :
+    Ready increasingMortalParameters 2 (-7175 / 1288) := by
+  refine ⟨by norm_num, ?_, ?_⟩
+  · rw [show (-7175 / 1288 : ℚ) =
+      (5 : ℚ) ^ 2 * (-287 : ℚ) / 1288 by norm_num]
+    exact val5_scaled_fraction 2 (-287) 1288
+      (by norm_num) (by norm_num) (by norm_num) (by norm_num)
+  · norm_num only [increasingMortalParameters, Nat.cast_ofNat, pow_two]
+    have value :=
+      val5_scaled_fraction 4 (-63) 1288
+        (by norm_num) (by norm_num) (by norm_num) (by norm_num)
+    norm_num at value ⊢
+    exact value
+
+theorem increasingMortal_middle_ready :
+    Ready increasingMortalParameters 3 (-1375 / 3864) := by
+  refine ⟨by norm_num, ?_, ?_⟩
+  · rw [show (-1375 / 3864 : ℚ) =
+      (5 : ℚ) ^ 3 * (-11 : ℚ) / 3864 by norm_num]
+    exact val5_scaled_fraction 3 (-11) 3864
+      (by norm_num) (by norm_num) (by norm_num) (by norm_num)
+  · norm_num only [increasingMortalParameters, Nat.cast_ofNat, pow_succ,
+      pow_two]
+    have value :=
+      val5_scaled_fraction 6 (-31) 3864
+        (by norm_num) (by norm_num) (by norm_num) (by norm_num)
+    norm_num at value ⊢
+    exact value
+
+theorem increasingMortal_first_step :
+    guardedStep increasingMortalParameters 2 (some (-7175 / 1288)) =
+      some (-1375 / 3864) := by
+  rw [guardedStep_some increasingMortalParameters 2 (-7175 / 1288)
+    (by norm_num [increasingMortalParameters])]
+  norm_num [increasingMortalParameters, guardDefect, drift]
+
+theorem increasingMortal_second_step :
+    guardedStep increasingMortalParameters 3 (some (-1375 / 3864)) =
+      some 1 := by
+  rw [guardedStep_some increasingMortalParameters 3 (-1375 / 3864)
+    (by norm_num [increasingMortalParameters])]
+  norm_num [increasingMortalParameters, guardDefect, drift]
+
+/-- Terminal-reaching waits can increase strictly. -/
+theorem increasingMortal_reachable :
+    GuardedReachable increasingMortalParameters :=
+  (Relation.TransGen.single
+    ⟨1, increasingMortal_reset_ready, increasingMortal_first_step⟩).tail
+      ⟨2, increasingMortal_middle_ready, increasingMortal_second_step⟩
+
+theorem increasingMortal_terminalCoordinates :
+    terminalCoordinate (-57803) 403 10304 1 = -67704 ∧
+      terminalCoordinate (-57803) 403 10304 (3 / 403) =
+        -41912 / 3 ∧
+        terminalCoordinate (-57803) 403 10304 (403 / 68107) = 0 := by
+  norm_num [terminalCoordinate]
 
 end
 end MatrixMortality.ReturnGuard.Examples
