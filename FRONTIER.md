@@ -635,30 +635,47 @@ cannot realize `a↦da+h` at infinitely many prime-power configurations unless t
 the identity. The proof forces `P(λXᵈ)∣Q(X)`, then `d=1`, equal degrees, and finally a p-adic
 contradiction for every nonzero shift `h`.
 
+The global state has now been contracted again. By
+[`R32-S07`](SALVAGE.md#r32-s07-decoded-residual-address-normal-form), the reciprocal center
+displacement lies in one of pairwise disjoint rational p-adic spheres, and each sphere is the
+image of the rational unit shell under one explicit Möbius inverse branch. Physical mortality
+is exactly finite inverse-address membership of the terminal residual. Distinct branches share
+no finite fixed point, so no single Möbius chart makes their interaction affine.
+
+This address system has genuine rational nested dynamics: the checked period-three itinerary
+uses waits `1,2,3`, with two consecutive resonant increases followed by nonresonant descent. The
+first naïve periodicity conjecture is therefore false.
+
+The first global arithmetic sieve is also exact.
+[`R32-M05`](SALVAGE.md#r32-m05-cyclotomic-reset-or-cancellation-sieve) projectivizes the
+primitive integer-pair recurrence and proves that every prime divisor of `pᵃ−1` either resets
+the reduced point to one or is swallowed by the common reduction factor. The latter event is
+now the only local-global escape, not an untyped failure of a finite quotient.
+
 The surviving obligation is therefore a source theorem, or its negation: prove that this
-guarded orbit can simulate universal deterministic computation inside its infinitely nested
-equal-depth resonance, or decide those rational resonance itineraries by a global arithmetic
-invariant. No further punctuation, malformed-word, independently selected wait, or rational
-affine-counter problem remains in this architecture.
+countably branched rational address system can simulate universal deterministic computation
+inside infinitely nested equal-depth resonance, or decide finite terminal-address membership by
+controlling cyclotomic cancellation. No further punctuation, malformed-word, independently
+selected wait, or rational affine-counter problem remains in this architecture.
 
 ### Live attacks
 
 | Lane | Required move | Present obstruction |
 | --- | --- | --- |
-| Resonance arithmetic | Prove effective eventual periodicity of rational resonance itineraries, or construct a rational nonperiodic resonance stack | Every nonresonant continuation descends; rational affine-wait rails are impossible; the normalized carry nests at unbounded depth |
+| Resonance arithmetic | Prove effective eventual periodicity of rational inverse addresses, or construct a rational nonperiodic resonance stack | A rational period-three nested orbit exists; every nonresonant continuation descends, but local p-adic symbolic freedom is complete |
 | Amalgamated valuation guard | Compile a universal deterministic source into the resonant tail recurrence, or decide that recurrence | Matrix mortality is already equivalent to one deterministic orbit, but its remaining arithmetic is not covered by known p-adic dynamics |
 | Irreducible cubic return pencil | Replace the split spectrum by a cubic companion action whose `2 × 2` return sequence has no fixed rail or target strip | A candidate still needs an internal low-rank return and an exact arbitrary-word normal form |
 | Multi-prime ReturnSquare | Extend the rational-root support and finite walls from prime powers to bases with several prime factors | Mixed prime support permits roots not confined to one valuation ray |
-| Local-global sieve | Find a finite quotient that separates every no-instance, or a finite invariant nucleus that lifts to characteristic zero | [`R32-M02`](SALVAGE.md#r32-m02-finite-quotient-sieve) is one-sided; survival modulo all tested primes proves nothing |
+| Local-global sieve | Bound cyclotomic common cancellation or prove it has an effective finite nucleus | [`R32-M05`](SALVAGE.md#r32-m05-cyclotomic-reset-or-cancellation-sieve) shows that reset versus common cancellation is the exact dichotomy |
 | Valuation and cone dynamics | Extend the signed-cone pullback or a `p`-adic invariant across the remaining middle strip or a new pencil | Cancellation at poles and between spectral modes destroys naive monotonicity |
 | Same-zero return surgery | Change nonzero return values while preserving the zero semigroup, thereby evading exact Hankel taxes | No general same-zero minimization theorem exists; every surgery needs its own arbitrary-product converse |
 | Exceptional reverse compiler | Absorb the finite `αβ=0` disjunction into one three-dimensional many-one instance | The generic all-path compiler is complete; dimension three has no evident OR operation |
 
-The highest-value lunge is the nested resonance, not the generic ready cylinder. The matrix
-compiler and all-word converse are complete; nonresonant dynamics and rational affine counter
-rails are closed. The next useful mathematics is an eventual-periodicity theorem for rational
-resonance itineraries, a genuinely nonperiodic stack construction, or a transfer from that
-dichotomy to a broader class of three-mode return recurrences.
+The highest-value lunge is now the arithmetic of finite inverse addresses. The matrix compiler,
+all-word converse, wait decoder, and rational address grammar are complete; nonresonant dynamics
+and rational affine counter rails are closed. The next useful mathematics is a finite nucleus
+for cyclotomic cancellation, a genuinely nonperiodic rational stack construction, or a transfer
+from that dichotomy to a broader class of three-mode return recurrences.
 
 The strategic boundary is now clear. The easy layer consisted of finding and repairing missing
 finite compilers. `M₃(2)` asks whether one low-dimensional recurrence family can store

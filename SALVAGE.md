@@ -90,6 +90,8 @@ file owns the mathematical stock.
 | [`R32-S05`](#r32-s05-prefix-shift-and-affine-residual) | structure theorem | each legal step decodes one p-adic prefix and updates the reciprocal residual affinely | formalized | active |
 | [`R32-S06`](#r32-s06-resonance-localization) | structure theorem | every nonresonant continuation descends and every infinite ready chain resonates arbitrarily late | formalized | active |
 | [`R32-O06`](#r32-o06-rational-affine-wait-rail-rigidity) | obstruction | no reduced rational chart supports a nontrivial affine wait rail at infinitely many prime powers | formalized | graduated |
+| [`R32-S07`](#r32-s07-decoded-residual-address-normal-form) | structure theorem | mortality is finite inverse-address membership in disjoint rational p-adic branch spheres | formalized | active |
+| [`R32-M05`](#r32-m05-cyclotomic-reset-or-cancellation-sieve) | partial mechanism | every primitive reduction either resets modulo a cyclotomic prime or swallows it in the common cancellation | formalized | active |
 | [`M4-C01`](#m4-c01-two-state-pushout-compiler) | compiler | binary deterministic two-state scalar control compiles to three `4 × 4` matrices | formalized | graduated |
 | [`M4-O01`](#m4-o01-exact-toggle-fusion-leaves-an-immortal-core) | obstruction | exact local toggle fusion preserves a nonzero common anchor | formalized | graduated |
 | [`M4-O02`](#m4-o02-two-private-state-phase-signature) | obstruction | two private quotient states cannot isolate one exceptional cyclic phase | formalized | graduated |
@@ -2296,6 +2298,121 @@ rational affine counter cycles. The live construction must use the nested resona
 
 **Next:** decide whether rational resonant itineraries have an effective eventual-periodicity
 theorem, or construct a rational nonperiodic resonance stack.
+
+### R32-S07: Decoded residual address normal form
+
+**Kind:** structural normal form
+**Evidence:** formalized
+**Disposition:** active
+
+The reciprocal center displacement
+
+```text
+w = (ρ−α)/(z−α),             z = α+(ρ−α)/w
+```
+
+is the canonical global state. Reset is `w=1`; the terminal point is
+`τ=−(ρ−α)/(α−1)`. For every positive wait `a`, the exact legal domain is one rational p-adic
+sphere
+
+```text
+Bₐ = βₐ+pˢᵃ ℤₚ×,            βₐ=−(ρ−α)/(α−pᵃ).
+```
+
+On rational points the inverse branch
+
+```text
+gₐ(v) =
+  (ρ−α)(pˢᵃv−1) /
+  (α−pᵃ−(α−1)pˢᵃv)
+```
+
+maps the rational unit shell bijectively onto `Bₐ`. The spheres are pairwise disjoint, so the
+state itself determines the wait. Lean transports every original legal step through this
+coordinate and proves
+
+```text
+physical mortality
+  ↔ ∃ nonempty positive address (a₀,…,aₙ), 1=gₐ₀∘⋯∘gₐₙ(τ).
+```
+
+Distinct positive branches have no common finite fixed point. Hence their nonlinear interaction
+cannot be removed by choosing one finite affine chart. The exact rational period-three orbit
+
+```text
+1 ─1→ 5/17 ─2→ 43/283 ─3→ 1
+```
+
+is also checked. Its first two legs are equal-depth resonances and its third is a strict
+nonresonant descent. Rational survival is therefore not confined to fixed points or two-cycles.
+
+**Scope:** the Lean theorem is rational and exact. It does not claim a topological conjugacy on
+all of `ℚₚ`, nor eventual periodicity of rational addresses.
+
+**Artifact:** `ReturnGuard.residualEquiv`,
+`residualBranch_iff_exists_inverseResidual`,
+`residualBranch_wait_unique`, `guardedReachable_iff_decodedReachable`,
+`physical_isMortal_iff_inverseAddress`, `residualFixed_exclusive`,
+`ReturnGuard.Examples.cycle_decoded_orbit`, and `cycle_first_two_resonant` in
+[`ReturnGuardGauss.lean`](MatrixMortality/ReturnGuardGauss.lean),
+[`ReturnGuardAddress.lean`](MatrixMortality/ReturnGuardAddress.lean), and
+[`ReturnGuardExamples.lean`](MatrixMortality/ReturnGuardExamples.lean).
+
+**Use:** replace the wait-tail bookkeeping by one countably branched Möbius system. The remaining
+decision question is finite inverse-address membership of one rational point, not legality of
+arbitrary physical words.
+
+**Next:** attack rational address arithmetic with the local-global sieve in
+[`R32-M05`](#r32-m05-cyclotomic-reset-or-cancellation-sieve), or exhibit a rational
+non-eventually-periodic address carrying universal computation.
+
+### R32-M05: Cyclotomic reset-or-cancellation sieve
+
+**Kind:** partial mechanism
+**Evidence:** formalized
+**Disposition:** active
+
+Write `α=A/L`, `ρ−α=D/L`, and a primitive decoded residual as `m/n`. One surviving wait `a`
+has the exact integral recurrence
+
+```text
+pˢᵃ m̃ = (A−Lpᵃ)m+Dn,
+ñ      = (A−L)m+Dn.
+```
+
+Lean proves that projectivizing `(m̃,ñ)` recovers the decoded residual map exactly. More
+generally, a common divisor of the image of any primitive pair under a `2 × 2` integer matrix
+divides its determinant. Applied here, every common reduction factor `g` coprime to `p` satisfies
+
+```text
+g ∣ DL(pᵃ−1).
+```
+
+If a prime `ℓ` divides `pᵃ−1`, then one exact dichotomy holds after primitive reduction:
+
+```text
+ℓ ∣ g
+  or
+m′ ≡ n′ (mod ℓ).
+```
+
+Thus every cyclotomic prime either disappears into a visible common cancellation or resets the
+reduced projective point to one. There is no third escape.
+
+**Scope:** this is a one-step sieve, not a decision algorithm. The cancellation branch can recur
+at unbounded orders and currently has no finite nucleus.
+
+**Artifact:** `ReturnGuard.integralStep_realizes_residualStep`,
+`commonDivisor_dvd_det`, `integralStep_commonDivisor_dvd_cyclotomicSupport`, and
+`integralStep_cyclotomic_reset_or_cancel` in
+[`ReturnGuardArithmetic.lean`](MatrixMortality/ReturnGuardArithmetic.lean).
+
+**Use:** finite quotients should track a projective residue plus an explicit cancellation state.
+An unreachable terminal residue certifies immortality; reaching the cancellation state identifies
+the sole arithmetic obstruction rather than producing an uninterpreted false positive.
+
+**Next:** combine primitive divisors of `pᵃ−1` with bounds on common cancellation, or prove that
+the cancellation histories form an effective finite nucleus.
 
 ## Three-Generator Four-State Frontier
 

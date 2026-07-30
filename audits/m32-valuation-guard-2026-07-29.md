@@ -124,6 +124,47 @@ the reciprocal residual obeys the exact affine law
 
 Every denominator used in the affine interpretation is explicit in the theorem hypotheses.
 
+## Checked Decoded Address Grammar
+
+Formalization exposed a more canonical coordinate than the shifted affine chart:
+
+```text
+w=(ρ−α)/(z−α),              z=α+(ρ−α)/w.
+```
+
+It sends reset to `1` and the terminal point to
+
+```text
+τ=−(ρ−α)/(α−1).
+```
+
+For every positive wait `a`, Lean proves that the exact legal domain is the rational part of one
+p-adic sphere around
+
+```text
+βₐ=−(ρ−α)/(α−pᵃ),
+```
+
+at valuation depth `sa`. The inverse branch maps every rational p-adic unit into this sphere,
+the residual step maps it back, and the two maps are mutual inverses on their stated domains.
+The spheres are pairwise disjoint.
+
+Transporting `LegalStep` through this coordinate and inducting over transitive closures gives
+
+```text
+physical mortality
+  ↔ ∃ nonempty positive list (a₀,…,aₙ),
+      1=gₐ₀(⋯gₐₙ(τ)⋯).
+```
+
+This theorem inherits the complete arbitrary-physical-word converse; it is not merely a
+re-encoding of intended legal runs. Distinct positive branches have no common finite
+cross-multiplied fixed point.
+
+The report described a full shift over `ℚₚ`. The checked theorem deliberately stops at exact
+rational spheres and inverse addresses. No topological conjugacy or completion theorem has been
+claimed.
+
 ## Checked Resonance Localization
 
 Let `u=α/δ` and write a unit tail as `X=u+pⁿY`, with `Y` a unit. The three terms of the legal
@@ -146,6 +187,47 @@ vₚ(U−1)=(s−1)(a+h),
 ```
 
 not `(s−1)a+sh`. The reported value exceeds the correct depth by `h`.
+
+An exact rational period-three orbit is now checked at
+
+```text
+p=3, s=2, α=−953/2240, ρ=−3/14:
+1 ─1→ 5/17 ─2→ 43/283 ─3→ 1.
+```
+
+The first two legs are equal-depth resonances; the third is nonresonant descent from wait three
+to wait one. This refutes any classification of rational survivors by fixed points and
+two-cycles alone. It does not refute eventual periodicity.
+
+## Checked Integral and Cyclotomic Sieve
+
+Writing `α=A/L`, `ρ−α=D/L`, and a decoded rational residual as a primitive pair `m/n`, Lean
+checks the exact integral recurrence
+
+```text
+pˢᵃm̃=(A−Lpᵃ)m+Dn,
+ñ=(A−L)m+Dn
+```
+
+and proves that `m̃/ñ` is exactly the decoded residual step.
+
+A generalized determinant theorem shows that any common divisor of the image of a primitive
+integer pair under a `2 × 2` integer matrix divides its determinant. For the guard recurrence,
+every common reduction factor `g` coprime to `p` therefore satisfies
+
+```text
+g∣DL(pᵃ−1).
+```
+
+If a prime `ℓ` divides `pᵃ−1`, the reduced output obeys the exact dichotomy
+
+```text
+ℓ∣g  or  m′≡n′ (mod ℓ).
+```
+
+The second branch is the finite-quotient reset to projective one. The first is the sole local
+escape: the cyclotomic prime is swallowed by common cancellation. This is a one-step sieve, not
+an effective bound on cancellation histories.
 
 ## Checked Rational-Rail Obstruction
 
@@ -211,13 +293,21 @@ with the checked identity `B²AB²=0`.
 
 At `p=5`, `s=2`, `ρ=5/6`, and `α=2`, the ready reset is a checked nonterminal fixed point.
 
+At `p=3`, `s=2`, `ρ=−3/14`, and `α=−953/2240`, the checked decoded period-three cycle above
+corresponds to original guarded states
+
+```text
+−3/14 ─1→ 117/400 ─2→ 27/28 ─3→ −3/14.
+```
+
 ## Open Boundary
 
 The sole live constructive question is reachability for the deterministic legal-tail map. A
 future proof must either:
 
 1. construct a rational nonperiodic computation inside the nested equal-depth resonance; or
-2. prove rational resonance itineraries effectively eventually periodic or otherwise decidable.
+2. prove rational inverse addresses effectively eventually periodic or otherwise decidable,
+   most plausibly by bounding cyclotomic common cancellation.
 
 The matrix dimension, generator count, punctuation, rank profile, malformed words, illegal
 waits, arbitrary-product converse, generic nonresonant dynamics, and rational affine counter

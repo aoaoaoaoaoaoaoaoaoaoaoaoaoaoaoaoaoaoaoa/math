@@ -1,0 +1,301 @@
+import MatrixMortality.ReturnGuardGauss
+import Mathlib.RingTheory.Coprime.Lemmas
+
+/-!
+# Integral cancellation in decoded guard dynamics
+
+Clearing the rational parameters turns one surviving decoded step into an accelerated
+Collatz-type recurrence on primitive integer pairs.  A determinant argument confines every
+common cancellation to fixed parameter primes or factors of `p^wait - 1`.  Primitive divisors
+therefore force a projective reset unless the corresponding cyclotomic prime is swallowed by
+that common cancellation.
+-/
+
+namespace MatrixMortality.ReturnGuard
+
+noncomputable section
+
+/-- Unscaled numerator of one decoded integer-pair step. -/
+def integralStepNumerator
+    (prime : Nat) (centerNumerator driftNumerator scale : ℤ)
+    (wait : Nat) (numerator denominator : ℤ) : ℤ :=
+  (centerNumerator - scale * prime ^ wait) * numerator +
+    driftNumerator * denominator
+
+/-- Denominator of one decoded integer-pair step. -/
+def integralStepDenominator
+    (centerNumerator driftNumerator scale : ℤ)
+    (numerator denominator : ℤ) : ℤ :=
+  (centerNumerator - scale) * numerator +
+    driftNumerator * denominator
+
+/-- Exact integral step after removing the forced `p^(depth * wait)` numerator factor. -/
+def IntegralStep
+    (prime depth : Nat) (centerNumerator driftNumerator scale : ℤ)
+    (wait : Nat) (numerator denominator nextNumerator nextDenominator : ℤ) : Prop :=
+  prime ^ (depth * wait) * nextNumerator =
+      integralStepNumerator prime centerNumerator driftNumerator scale
+        wait numerator denominator ∧
+    nextDenominator =
+      integralStepDenominator centerNumerator driftNumerator scale
+        numerator denominator
+
+/-- The integral recurrence is exactly the decoded residual map after projectivization. -/
+theorem integralStep_realizes_residualStep
+    (parameters : Parameters)
+    {centerNumerator driftNumerator scale numerator denominator
+      nextNumerator nextDenominator : ℤ} {wait : Nat}
+    (center_eq :
+      parameters.center = (centerNumerator : ℚ) / scale)
+    (drift_eq :
+      drift parameters.center parameters.reset =
+        (driftNumerator : ℚ) / scale)
+    (scale_ne : scale ≠ 0) (denominator_ne : denominator ≠ 0)
+    (nextDenominator_ne : nextDenominator ≠ 0)
+    (step :
+      IntegralStep parameters.prime parameters.depth centerNumerator
+        driftNumerator scale wait numerator denominator
+        nextNumerator nextDenominator) :
+    residualStep parameters wait ((numerator : ℚ) / denominator) =
+      (nextNumerator : ℚ) / nextDenominator := by
+  have transform_eq :
+      (parameters.center - 1) * ((numerator : ℚ) / denominator) +
+          drift parameters.center parameters.reset =
+        (nextDenominator : ℚ) / (scale * denominator) := by
+    rw [drift_eq, center_eq, step.2]
+    dsimp [integralStepDenominator]
+    field_simp [scale_ne, denominator_ne]
+    ring
+  have transform_ne :
+      (parameters.center - 1) * ((numerator : ℚ) / denominator) +
+          drift parameters.center parameters.reset ≠ 0 := by
+    rw [transform_eq]
+    exact div_ne_zero (by exact_mod_cast nextDenominator_ne)
+      (mul_ne_zero (by exact_mod_cast scale_ne)
+        (by exact_mod_cast denominator_ne))
+  rw [residualStep_eq parameters wait _ transform_ne]
+  have numerator_eq :
+      (parameters.center - parameters.prime ^ wait) *
+            ((numerator : ℚ) / denominator) +
+          drift parameters.center parameters.reset =
+        ((parameters.prime : ℚ) ^ (parameters.depth * wait) *
+            nextNumerator) /
+          (scale * denominator) := by
+    rw [drift_eq, center_eq]
+    have cast_step :
+        (parameters.prime : ℚ) ^ (parameters.depth * wait) *
+            (nextNumerator : ℚ) =
+          ((centerNumerator : ℚ) -
+              (scale : ℚ) * parameters.prime ^ wait) *
+              numerator +
+            (driftNumerator : ℚ) * denominator := by
+      have integer_step := step.1
+      dsimp [integralStepNumerator] at integer_step
+      exact_mod_cast integer_step
+    field_simp [scale_ne, denominator_ne]
+    linear_combination
+      -((scale : ℚ) ^ 2 * (denominator : ℚ)) * cast_step
+  rw [numerator_eq, transform_eq]
+  field_simp [parameters.prime_ne_zero, scale_ne, denominator_ne,
+    nextDenominator_ne]
+  ring
+
+/-- Exact difference identity for the integral pair recurrence. -/
+theorem integralStep_difference
+    {prime depth : Nat} {centerNumerator driftNumerator scale : ℤ}
+    {wait : Nat} {numerator denominator nextNumerator nextDenominator : ℤ}
+    (step :
+      IntegralStep prime depth centerNumerator driftNumerator scale
+        wait numerator denominator nextNumerator nextDenominator) :
+    prime ^ (depth * wait) * nextNumerator - nextDenominator =
+      scale * (1 - prime ^ wait) * numerator := by
+  rcases step with ⟨numerator_eq, denominator_eq⟩
+  rw [numerator_eq, denominator_eq]
+  simp [integralStepNumerator, integralStepDenominator]
+  ring
+
+/-- A common divisor of the image of a primitive integer pair divides the determinant. -/
+theorem commonDivisor_dvd_det
+    {a b c d m n divisor : ℤ} (primitive : IsCoprime m n)
+    (divides_first : divisor ∣ a * m + b * n)
+    (divides_second : divisor ∣ c * m + d * n) :
+    divisor ∣ a * d - b * c := by
+  obtain ⟨firstQuotient, first_eq⟩ := divides_first
+  obtain ⟨secondQuotient, second_eq⟩ := divides_second
+  have divides_det_mul_m :
+      divisor ∣ (a * d - b * c) * m := by
+    refine ⟨d * firstQuotient - b * secondQuotient, ?_⟩
+    calc
+      (a * d - b * c) * m =
+          d * (a * m + b * n) - b * (c * m + d * n) := by ring
+      _ = divisor * (d * firstQuotient - b * secondQuotient) := by
+        rw [first_eq, second_eq]
+        ring
+  have divides_det_mul_n :
+      divisor ∣ (a * d - b * c) * n := by
+    refine ⟨a * secondQuotient - c * firstQuotient, ?_⟩
+    calc
+      (a * d - b * c) * n =
+          a * (c * m + d * n) - c * (a * m + b * n) := by ring
+      _ = divisor * (a * secondQuotient - c * firstQuotient) := by
+        rw [first_eq, second_eq]
+        ring
+  obtain ⟨left, right, bezout⟩ := primitive
+  obtain ⟨leftQuotient, left_eq⟩ := divides_det_mul_m
+  obtain ⟨rightQuotient, right_eq⟩ := divides_det_mul_n
+  refine ⟨left * leftQuotient + right * rightQuotient, ?_⟩
+  calc
+    a * d - b * c =
+        (a * d - b * c) * 1 := by ring
+    _ = (a * d - b * c) * (left * m + right * n) := by rw [bezout]
+    _ = left * ((a * d - b * c) * m) +
+        right * ((a * d - b * c) * n) := by ring
+    _ = divisor * (left * leftQuotient + right * rightQuotient) := by
+      rw [left_eq, right_eq]
+      ring
+
+/-- Every common divisor after one step divides the full determinant support. -/
+theorem integralStep_commonDivisor_dvd_fullSupport
+    {prime depth : Nat} {centerNumerator driftNumerator scale : ℤ}
+    {wait : Nat} {numerator denominator nextNumerator nextDenominator divisor : ℤ}
+    (primitive : IsCoprime numerator denominator)
+    (step :
+      IntegralStep prime depth centerNumerator driftNumerator scale
+        wait numerator denominator nextNumerator nextDenominator)
+    (divides_numerator : divisor ∣ nextNumerator)
+    (divides_denominator : divisor ∣ nextDenominator) :
+    divisor ∣
+      prime ^ (depth * wait) * driftNumerator * scale *
+        (1 - prime ^ wait) := by
+  let power : ℤ := prime ^ (depth * wait)
+  let waitPower : ℤ := prime ^ wait
+  have first_divides :
+      divisor ∣
+        (centerNumerator - scale * waitPower) * numerator +
+          driftNumerator * denominator := by
+    have scaled := divides_numerator.mul_left power
+    rw [step.1] at scaled
+    simpa [integralStepNumerator, power, waitPower] using scaled
+  have second_divides :
+      divisor ∣
+        (power * (centerNumerator - scale)) * numerator +
+          (power * driftNumerator) * denominator := by
+    have scaled := divides_denominator.mul_left power
+    rw [step.2] at scaled
+    convert scaled using 1
+    dsimp [integralStepDenominator, power]
+    ring
+  have determinant_divides :=
+    commonDivisor_dvd_det primitive first_divides second_divides
+  convert determinant_divides using 1
+  dsimp [power, waitPower]
+  ring
+
+/-- If the common divisor is coprime to the base, only fixed and cyclotomic factors remain. -/
+theorem integralStep_commonDivisor_dvd_cyclotomicSupport
+    {prime depth : Nat} {centerNumerator driftNumerator scale : ℤ}
+    {wait : Nat} {numerator denominator nextNumerator nextDenominator divisor : ℤ}
+    (primitive : IsCoprime numerator denominator)
+    (step :
+      IntegralStep prime depth centerNumerator driftNumerator scale
+        wait numerator denominator nextNumerator nextDenominator)
+    (divides_numerator : divisor ∣ nextNumerator)
+    (divides_denominator : divisor ∣ nextDenominator)
+    (base_coprime : IsCoprime divisor (prime : ℤ)) :
+    divisor ∣ driftNumerator * scale * (prime ^ wait - 1) := by
+  have full_support :=
+    integralStep_commonDivisor_dvd_fullSupport primitive step
+      divides_numerator divides_denominator
+  have power_coprime :
+      IsCoprime divisor ((prime : ℤ) ^ (depth * wait)) :=
+    base_coprime.pow_right
+  have reduced :
+      divisor ∣ driftNumerator * scale * (1 - (prime : ℤ) ^ wait) := by
+    apply power_coprime.dvd_of_dvd_mul_left
+    simpa [mul_assoc] using full_support
+  rw [show
+    driftNumerator * scale * ((prime : ℤ) ^ wait - 1) =
+      -(driftNumerator * scale * (1 - (prime : ℤ) ^ wait)) by ring]
+  exact dvd_neg.mpr reduced
+
+/-- A cyclotomic prime either divides the primitive-reduction factor or resets the reduced
+projective pair to one. -/
+theorem cyclotomic_reset_or_cancel
+    {prime depth : Nat} {scale : ℤ} {wait : Nat}
+    {numerator nextNumerator nextDenominator common reducedNumerator
+      reducedDenominator cyclotomicPrime : ℤ}
+    (difference :
+      (prime : ℤ) ^ (depth * wait) * nextNumerator - nextDenominator =
+        scale * (1 - (prime : ℤ) ^ wait) * numerator)
+    (numerator_reduced : nextNumerator = common * reducedNumerator)
+    (denominator_reduced : nextDenominator = common * reducedDenominator)
+    (cyclotomic_prime : Prime cyclotomicPrime)
+    (cyclotomic_divides :
+      cyclotomicPrime ∣ (prime : ℤ) ^ wait - 1) :
+    cyclotomicPrime ∣ common ∨
+      cyclotomicPrime ∣ reducedNumerator - reducedDenominator := by
+  have divides_power_sub_one :
+      cyclotomicPrime ∣
+        (prime : ℤ) ^ (depth * wait) - 1 := by
+    have power_divides :
+        (prime : ℤ) ^ wait - 1 ∣
+          ((prime : ℤ) ^ wait) ^ depth - 1 :=
+      sub_one_dvd_pow_sub_one ((prime : ℤ) ^ wait) depth
+    apply cyclotomic_divides.trans
+    rw [Nat.mul_comm depth wait, pow_mul]
+    exact power_divides
+  have divides_scaled_difference :
+      cyclotomicPrime ∣
+        (prime : ℤ) ^ (depth * wait) * nextNumerator -
+          nextDenominator := by
+    rw [difference]
+    have negative :
+        cyclotomicPrime ∣ 1 - (prime : ℤ) ^ wait := by
+      simpa only [neg_sub] using dvd_neg.mpr cyclotomic_divides
+    exact (negative.mul_left scale).mul_right numerator
+  have divides_common_product :
+      cyclotomicPrime ∣
+        common *
+          ((prime : ℤ) ^ (depth * wait) * reducedNumerator -
+            reducedDenominator) := by
+    simpa [numerator_reduced, denominator_reduced, mul_sub, mul_assoc,
+      mul_left_comm, mul_comm] using divides_scaled_difference
+  rcases cyclotomic_prime.dvd_mul.mp divides_common_product with
+    cancel | residue
+  · exact Or.inl cancel
+  · right
+    have correction :
+        cyclotomicPrime ∣
+          ((prime : ℤ) ^ (depth * wait) - 1) * reducedNumerator :=
+      dvd_mul_of_dvd_left divides_power_sub_one reducedNumerator
+    have decomposition :
+        reducedNumerator - reducedDenominator =
+          ((prime : ℤ) ^ (depth * wait) * reducedNumerator -
+            reducedDenominator) -
+          ((prime : ℤ) ^ (depth * wait) - 1) * reducedNumerator := by
+      ring
+    rw [decomposition]
+    exact dvd_sub residue correction
+
+/-- One actual integral guard step either swallows a cyclotomic prime in its reduction factor
+or resets the reduced projective state to one modulo that prime. -/
+theorem integralStep_cyclotomic_reset_or_cancel
+    {prime depth : Nat} {centerNumerator driftNumerator scale : ℤ}
+    {wait : Nat} {numerator denominator nextNumerator nextDenominator
+      common reducedNumerator reducedDenominator cyclotomicPrime : ℤ}
+    (step :
+      IntegralStep prime depth centerNumerator driftNumerator scale
+        wait numerator denominator nextNumerator nextDenominator)
+    (numerator_reduced : nextNumerator = common * reducedNumerator)
+    (denominator_reduced : nextDenominator = common * reducedDenominator)
+    (cyclotomic_prime : Prime cyclotomicPrime)
+    (cyclotomic_divides :
+      cyclotomicPrime ∣ (prime : ℤ) ^ wait - 1) :
+    cyclotomicPrime ∣ common ∨
+      cyclotomicPrime ∣ reducedNumerator - reducedDenominator :=
+  cyclotomic_reset_or_cancel
+    (integralStep_difference step)
+    numerator_reduced denominator_reduced cyclotomic_prime cyclotomic_divides
+
+end
+end MatrixMortality.ReturnGuard

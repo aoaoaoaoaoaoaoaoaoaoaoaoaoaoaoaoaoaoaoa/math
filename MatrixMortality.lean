@@ -24,6 +24,9 @@ import MatrixMortality.PadicValuation
 import MatrixMortality.ReturnGuard
 import MatrixMortality.ReturnGuardDynamics
 import MatrixMortality.ReturnGuardShift
+import MatrixMortality.ReturnGuardGauss
+import MatrixMortality.ReturnGuardAddress
+import MatrixMortality.ReturnGuardArithmetic
 import MatrixMortality.ReturnGuardResonance
 import MatrixMortality.ReturnGuardRail
 import MatrixMortality.ReturnGuardExamples

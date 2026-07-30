@@ -67,6 +67,29 @@ theorem tailAtDepth_sub_center_hasValue
       parameters.prime ^ tailDepth * residual by simp [tailAtDepth]]
   simpa using mul_hasValue (primePower_hasValue tailDepth) residual_unit
 
+/-- Equal-depth resonance is exactly one valuation sphere around the distinguished tail. -/
+theorem resonantTail_iff_hasValue
+    (parameters : Parameters) (wait : Nat) (tail : ℚ) :
+    ResonantTail parameters wait tail ↔
+      HasValue parameters.prime
+        (tail - resonanceCenter parameters) wait := by
+  constructor
+  · rintro ⟨residual, residual_unit, rfl⟩
+    exact tailAtDepth_sub_center_hasValue parameters wait residual residual_unit
+  · intro sphere
+    let residual :=
+      (tail - resonanceCenter parameters) /
+        parameters.prime ^ wait
+    have residual_unit :
+        IsUnit parameters.prime residual := by
+      dsimp [residual]
+      simpa using
+        div_hasValue sphere
+          (primePower_hasValue (prime := parameters.prime) wait)
+    refine ⟨residual, residual_unit, ?_⟩
+    dsimp [tailAtDepth, residual]
+    field_simp [primePower_ne_zero parameters.prime_prime wait]
+
 /-- Expansion separating the wait scale from the tail-center scale. -/
 theorem legalValue_tailAtDepth
     (parameters : Parameters) (wait tailDepth : Nat) (residual : ℚ) :

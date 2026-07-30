@@ -347,8 +347,32 @@
 'MatrixMortality.ReturnGuard.shift_step' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.ReturnGuard.ready_iff_prefixDecode_isUnit' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.ReturnGuard.reciprocalResidual_affine' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ReturnGuard.residualOfState_stateOfResidual' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ReturnGuard.stateOfResidual_residualOfState' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ReturnGuard.residualBranch_iff_exists_inverseResidual' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.residualBranch_wait_unique' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ReturnGuard.guardedReachable_iff_decodedReachable' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.physical_isMortal_iff_inverseAddress' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.residualFixed_exclusive' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ReturnGuard.integralStep_realizes_residualStep' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.commonDivisor_dvd_det' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.ReturnGuard.integralStep_commonDivisor_dvd_cyclotomicSupport' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.integralStep_cyclotomic_reset_or_cancel' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.ReturnGuard.nonresonant_nextWait_lt' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.ReturnGuard.infinite_ready_chain_resonates' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ReturnGuard.resonantTail_iff_hasValue' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.ReturnGuard.resonance_ready_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.ReturnGuard.Rail.identity_forces_linear_center' depends on axioms: [propext,
  Classical.choice,
@@ -358,3 +382,10 @@
  Quot.sound]
 'MatrixMortality.ReturnGuard.Examples.integer_zero_word' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.ReturnGuard.Examples.fixed_guarded_step' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ReturnGuard.Examples.cycle_decoded_orbit' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ReturnGuard.Examples.cycle_first_two_resonant' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.Examples.cycle_third_nonresonant' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]

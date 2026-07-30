@@ -1,11 +1,13 @@
-import MatrixMortality.ReturnGuardDynamics
+import MatrixMortality.ReturnGuardAddress
+import MatrixMortality.ReturnGuardResonance
 
 /-!
 # Exact examples for the amalgamated valuation guard
 
 The first pair is the concrete one-step mortal integer pair from the construction. The second
-parameter set has a ready nonterminal fixed point, proving that the guard itself does not force
-termination.
+parameter set has a ready nonterminal fixed point. The third has an exact rational period-three
+decoded orbit with waits `1, 2, 3`, proving that nested resonance is not confined to fixed points
+or two-cycles.
 -/
 
 namespace MatrixMortality.ReturnGuard.Examples
@@ -17,8 +19,13 @@ noncomputable section
 
 private theorem five_prime : Nat.Prime 5 := by norm_num
 
-private instance : Fact (Nat.Prime 5) :=
+private instance factPrimeFive : Fact (Nat.Prime 5) :=
   ⟨five_prime⟩
+
+private theorem three_prime : Nat.Prime 3 := by norm_num
+
+private instance factPrimeThree : Fact (Nat.Prime 3) :=
+  ⟨three_prime⟩
 
 private theorem val5_int_unit (z : Int) (not_dvd : ¬(5 : Int) ∣ z) :
     padicValRat 5 (z : ℚ) = 0 := by
@@ -169,6 +176,219 @@ theorem fixed_guarded_step :
   rw [guardedStep_some fixedParameters 1 (5 / 6)
     (by norm_num [fixedParameters])]
   norm_num [fixedParameters, guardDefect, drift]
+
+private theorem val3_int_unit (z : Int) (not_dvd : ¬(3 : Int) ∣ z) :
+    padicValRat 3 (z : ℚ) = 0 := by
+  rw [padicValRat.of_int]
+  exact_mod_cast padicValInt.eq_zero_of_not_dvd not_dvd
+
+private theorem val3_scaled_fraction
+    (power : Nat) (numerator denominator : Int)
+    (numerator_ne : numerator ≠ 0) (denominator_ne : denominator ≠ 0)
+    (numerator_unit : ¬(3 : Int) ∣ numerator)
+    (denominator_unit : ¬(3 : Int) ∣ denominator) :
+    padicValRat 3
+        ((3 : ℚ) ^ power * (numerator : ℚ) / (denominator : ℚ)) =
+      power := by
+  have numerator_has_value :
+      IsUnit 3 (numerator : ℚ) :=
+    ⟨by exact_mod_cast numerator_ne, val3_int_unit numerator numerator_unit⟩
+  have denominator_has_value :
+      IsUnit 3 (denominator : ℚ) :=
+    ⟨by exact_mod_cast denominator_ne, val3_int_unit denominator denominator_unit⟩
+  exact
+    (div_hasValue
+      (mul_hasValue (primePower_hasValue power) numerator_has_value)
+      denominator_has_value).2
+
+private theorem val3_neg_three_div_fourteen :
+    padicValRat 3 (-3 / 14 : ℚ) = 1 := by
+  rw [show (-3 / 14 : ℚ) = (3 : ℚ) ^ 1 * (-1 : ℚ) / 14 by norm_num]
+  exact val3_scaled_fraction 1 (-1) 14 (by norm_num) (by norm_num)
+    (by norm_num) (by norm_num)
+
+private theorem val3_neg_forty_five_div_fourteen :
+    padicValRat 3 (-45 / 14 : ℚ) = 2 := by
+  rw [show (-45 / 14 : ℚ) = (3 : ℚ) ^ 2 * (-5 : ℚ) / 14 by norm_num]
+  exact val3_scaled_fraction 2 (-5) 14 (by norm_num) (by norm_num)
+    (by norm_num) (by norm_num)
+
+private theorem val3_117_div_400 :
+    padicValRat 3 (117 / 400 : ℚ) = 2 := by
+  rw [show (117 / 400 : ℚ) = (3 : ℚ) ^ 2 * (13 : ℚ) / 400 by norm_num]
+  exact val3_scaled_fraction 2 13 400 (by norm_num) (by norm_num)
+    (by norm_num) (by norm_num)
+
+private theorem val3_neg_3483_div_400 :
+    padicValRat 3 (-3483 / 400 : ℚ) = 4 := by
+  rw [show (-3483 / 400 : ℚ) = (3 : ℚ) ^ 4 * (-43 : ℚ) / 400 by norm_num]
+  exact val3_scaled_fraction 4 (-43) 400 (by norm_num) (by norm_num)
+    (by norm_num) (by norm_num)
+
+private theorem val3_27_div_28 :
+    padicValRat 3 (27 / 28 : ℚ) = 3 := by
+  rw [show (27 / 28 : ℚ) = (3 : ℚ) ^ 3 * (1 : ℚ) / 28 by norm_num]
+  exact val3_scaled_fraction 3 1 28 (by norm_num) (by norm_num)
+    (by norm_num) (by norm_num)
+
+private theorem val3_neg_729_div_28 :
+    padicValRat 3 (-729 / 28 : ℚ) = 6 := by
+  rw [show (-729 / 28 : ℚ) = (3 : ℚ) ^ 6 * (-1 : ℚ) / 28 by norm_num]
+  exact val3_scaled_fraction 6 (-1) 28 (by norm_num) (by norm_num)
+    (by norm_num) (by norm_num)
+
+private theorem val3_neg_953_div_2240 :
+    padicValRat 3 (-953 / 2240 : ℚ) = 0 := by
+  rw [show (-953 / 2240 : ℚ) = (3 : ℚ) ^ 0 * (-953 : ℚ) / 2240 by norm_num]
+  exact val3_scaled_fraction 0 (-953) 2240 (by norm_num) (by norm_num)
+    (by norm_num) (by norm_num)
+
+private theorem val3_neg_3193_div_2240 :
+    padicValRat 3 (-3193 / 2240 : ℚ) = 0 := by
+  rw [show (-3193 / 2240 : ℚ) = (3 : ℚ) ^ 0 * (-3193 : ℚ) / 2240 by norm_num]
+  exact val3_scaled_fraction 0 (-3193) 2240 (by norm_num) (by norm_num)
+    (by norm_num) (by norm_num)
+
+private theorem val3_neg_1857_div_2365 :
+    padicValRat 3 (-1857 / 2365 : ℚ) = 1 := by
+  rw [show (-1857 / 2365 : ℚ) =
+    (3 : ℚ) ^ 1 * (-619 : ℚ) / 2365 by norm_num]
+  exact val3_scaled_fraction 1 (-619) 2365 (by norm_num) (by norm_num)
+    (by norm_num) (by norm_num)
+
+private theorem val3_neg_3447_div_473 :
+    padicValRat 3 (-3447 / 473 : ℚ) = 2 := by
+  rw [show (-3447 / 473 : ℚ) =
+    (3 : ℚ) ^ 2 * (-383 : ℚ) / 473 by norm_num]
+  exact val3_scaled_fraction 2 (-383) 473 (by norm_num) (by norm_num)
+    (by norm_num) (by norm_num)
+
+private theorem val3_neg_12291_div_473 :
+    padicValRat 3 (-12291 / 473 : ℚ) = 1 := by
+  rw [show (-12291 / 473 : ℚ) =
+    (3 : ℚ) ^ 1 * (-4097 : ℚ) / 473 by norm_num]
+  exact val3_scaled_fraction 1 (-4097) 473 (by norm_num) (by norm_num)
+    (by norm_num) (by norm_num)
+
+/-- Parameters whose decoded orbit has exact period three with waits `1, 2, 3`. -/
+def cycleParameters : Parameters where
+  prime := 3
+  prime_prime := three_prime
+  depth := 2
+  depth_two := by norm_num
+  center := -953 / 2240
+  reset := -3 / 14
+  center_unit := ⟨by norm_num, val3_neg_953_div_2240⟩
+  center_sub_one_unit := ⟨by norm_num, by
+    norm_num only [div_sub_one]
+    simpa only [neg_div] using val3_neg_3193_div_2240⟩
+  reset_positive := ⟨by norm_num, by
+    rw [val3_neg_three_div_fourteen]
+    norm_num⟩
+
+theorem cycle_state_zero_ready :
+    Ready cycleParameters 1 (-3 / 14) := by
+  refine ⟨by norm_num, val3_neg_three_div_fourteen, ?_⟩
+  norm_num only [cycleParameters, Nat.cast_ofNat, pow_one]
+  simpa only [neg_div] using val3_neg_forty_five_div_fourteen
+
+theorem cycle_state_one_ready :
+    Ready cycleParameters 2 (117 / 400) := by
+  refine ⟨by norm_num, val3_117_div_400, ?_⟩
+  norm_num only [cycleParameters, Nat.cast_ofNat, pow_two]
+  simpa only [neg_div] using val3_neg_3483_div_400
+
+theorem cycle_state_two_ready :
+    Ready cycleParameters 3 (27 / 28) := by
+  refine ⟨by norm_num, val3_27_div_28, ?_⟩
+  norm_num only [cycleParameters, Nat.cast_ofNat, pow_succ, pow_two]
+  simpa only [neg_div] using val3_neg_729_div_28
+
+theorem cycle_residual_states :
+    stateOfResidual cycleParameters 1 = -3 / 14 ∧
+      stateOfResidual cycleParameters (5 / 17) = 117 / 400 ∧
+        stateOfResidual cycleParameters (43 / 283) = 27 / 28 := by
+  norm_num [stateOfResidual, cycleParameters, drift]
+
+theorem cycle_step_zero :
+    DecodedStep cycleParameters 1 (5 / 17) := by
+  refine ⟨1, ?_, ?_⟩
+  · rw [residualBranch_iff_ready]
+    simpa [cycle_residual_states.1] using cycle_state_zero_ready
+  · norm_num [residualStep, prefixDecode, centerTransform, cycleParameters, drift]
+
+theorem cycle_step_one :
+    DecodedStep cycleParameters (5 / 17) (43 / 283) := by
+  refine ⟨2, ?_, ?_⟩
+  · rw [residualBranch_iff_ready]
+    rw [cycle_residual_states.2.1]
+    exact cycle_state_one_ready
+  · norm_num [residualStep, prefixDecode, centerTransform, cycleParameters, drift]
+
+theorem cycle_step_two :
+    DecodedStep cycleParameters (43 / 283) 1 := by
+  refine ⟨3, ?_, ?_⟩
+  · rw [residualBranch_iff_ready]
+    rw [cycle_residual_states.2.2]
+    exact cycle_state_two_ready
+  · norm_num [residualStep, prefixDecode, centerTransform, cycleParameters, drift]
+
+/-- Exact rational period-three survivor with wait itinerary `1, 2, 3`. -/
+theorem cycle_decoded_orbit :
+    Relation.TransGen (DecodedStep cycleParameters) 1 1 :=
+  ((Relation.TransGen.single cycle_step_zero).tail cycle_step_one).tail cycle_step_two
+
+theorem cycle_terminalResidual :
+    terminalResidual cycleParameters = 473 / 3193 := by
+  norm_num [terminalResidual, cycleParameters, drift]
+
+theorem cycle_is_nonterminal :
+    terminalResidual cycleParameters ≠ 1 := by
+  rw [cycle_terminalResidual]
+  norm_num
+
+theorem cycle_ready_tails :
+    readyTail cycleParameters 1 (-3 / 14) = -14 / 5 ∧
+      readyTail cycleParameters 2 (117 / 400) = -400 / 43 ∧
+        readyTail cycleParameters 3 (27 / 28) = -28 := by
+  norm_num [readyTail, cycleParameters]
+
+theorem cycle_resonanceCenter :
+    resonanceCenter cycleParameters = -953 / 473 := by
+  norm_num [resonanceCenter, cycleParameters, drift]
+
+/-- The first two legs of the period-three orbit are consecutive equal-depth resonances. -/
+theorem cycle_first_two_resonant :
+    ResonantTail cycleParameters 1
+        (readyTail cycleParameters 1 (-3 / 14)) ∧
+      ResonantTail cycleParameters 2
+        (readyTail cycleParameters 2 (117 / 400)) := by
+  constructor
+  · rw [resonantTail_iff_hasValue, cycle_ready_tails.1,
+      cycle_resonanceCenter]
+    refine ⟨by norm_num, ?_⟩
+    norm_num only
+    simpa only [neg_div] using val3_neg_1857_div_2365
+  · rw [resonantTail_iff_hasValue, cycle_ready_tails.2.1,
+      cycle_resonanceCenter]
+    refine ⟨by norm_num, ?_⟩
+    norm_num only
+    simpa only [neg_div] using val3_neg_3447_div_473
+
+/-- The third leg is genuinely nonresonant; it descends from wait three back to wait one. -/
+theorem cycle_third_nonresonant :
+    ¬ResonantTail cycleParameters 3
+      (readyTail cycleParameters 3 (27 / 28)) := by
+  rw [resonantTail_iff_hasValue, cycle_ready_tails.2.2,
+    cycle_resonanceCenter]
+  rintro ⟨_, valuation⟩
+  norm_num only at valuation
+  change padicValRat 3 (-(12291 / 473) : ℚ) = 3 at valuation
+  have actual :
+      padicValRat 3 (-(12291 / 473) : ℚ) = 1 := by
+    simpa only [neg_div] using val3_neg_12291_div_473
+  rw [actual] at valuation
+  norm_num at valuation
 
 end
 end MatrixMortality.ReturnGuard.Examples
