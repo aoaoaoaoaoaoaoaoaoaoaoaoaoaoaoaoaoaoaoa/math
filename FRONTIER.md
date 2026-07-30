@@ -688,6 +688,22 @@ Thus waits grow at most linearly with orbit time. This removes superlinear clock
 as a universality mechanism, but it does not yield a finite state space: exponential height and
 linear counter growth remain possible.
 
+[`R32-S11`](SALVAGE.md#r32-s11-primitive-factor-terminal-gate) now performs the first exact
+local-global comparison. Let the primitive cyclotomic radical be the product of the distinct
+prime factors of `Φ_a(p)` which do not divide `a`. If that radical exceeds
+
+```text
+(|A−L|+|D|)H,
+```
+
+then the current state is terminal or at least one exact-order prime survives reduction and
+resets the next projective state to one modulo that prime. Conversely, if a nonterminal step
+evades every such finite quotient, the entire primitive radical is at most the terminal defect
+and hence at most this height envelope. The arithmetic residue is now exact: one needs either
+finite-quotient separation or lower bounds for the squarefree primitive part of cyclotomic
+values. Growth of `Φ_a(p)` alone does not suffice because repeated prime powers are discarded by
+the radical.
+
 The surviving obligation is therefore a source theorem, or its negation: prove that this
 countably branched rational address system can simulate universal deterministic computation
 inside infinitely nested equal-depth resonance, or decide finite terminal-address membership by
@@ -702,7 +718,7 @@ selected wait, or rational affine-counter problem remains in this architecture.
 | Amalgamated valuation guard | Compile a universal deterministic source into the resonant tail recurrence, or decide that recurrence | Matrix mortality is already equivalent to one deterministic orbit, but its remaining arithmetic is not covered by known p-adic dynamics |
 | Irreducible cubic return pencil | Replace the split spectrum by a cubic companion action whose `2 × 2` return sequence has no fixed rail or target strip | A candidate still needs an internal low-rank return and an exact arbitrary-word normal form |
 | Multi-prime ReturnSquare | Extend the rational-root support and finite walls from prime powers to bases with several prime factors | Mixed prime support permits roots not confined to one valuation ray |
-| Local-global sieve | Convert logarithmic waits and terminal congruence into a finite recurrent residue set | [`R32-S10`](SALVAGE.md#r32-s10-logarithmic-wait-and-height-envelope) bounds cancellation, wait, and one-step height, but exponential orbit height remains |
+| Local-global sieve | Separate terminality from finite exact-order resets, then make one branch effective | [`R32-S11`](SALVAGE.md#r32-s11-primitive-factor-terminal-gate) gives the exact radical/height dichotomy; neither primitive-radical growth nor quotient rejection is yet complete |
 | Valuation and cone dynamics | Extend the signed-cone pullback or a `p`-adic invariant across the remaining middle strip or a new pencil | Cancellation at poles and between spectral modes destroys naive monotonicity |
 | Same-zero return surgery | Change nonzero return values while preserving the zero semigroup, thereby evading exact Hankel taxes | No general same-zero minimization theorem exists; every surgery needs its own arbitrary-product converse |
 | Exceptional reverse compiler | Absorb the finite `αβ=0` disjunction into one three-dimensional many-one instance | The generic all-path compiler is complete; dimension three has no evident OR operation |

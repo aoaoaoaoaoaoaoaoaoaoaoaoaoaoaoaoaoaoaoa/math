@@ -95,6 +95,7 @@ file owns the mathematical stock.
 | [`R32-S08`](#r32-s08-terminal-defect-cocycle) | structure theorem | terminal-defect coordinates expose a second-order denominator recurrence and separate fixed from novel cancellation | formalized | active |
 | [`R32-S09`](#r32-s09-complete-cancellation-law) | structure theorem | every base-coprime cancellation depth is the minimum of the terminal-defect and displacement depths | formalized | active |
 | [`R32-S10`](#r32-s10-logarithmic-wait-and-height-envelope) | structure theorem | legal waits are logarithmic in primitive height and every reduced step is uniformly height-Lipschitz | formalized | active |
+| [`R32-S11`](#r32-s11-primitive-factor-terminal-gate) | structure theorem | a large primitive cyclotomic radical forces terminality or a surviving finite-quotient reset | formalized | active |
 | [`M4-C01`](#m4-c01-two-state-pushout-compiler) | compiler | binary deterministic two-state scalar control compiles to three `4 × 4` matrices | formalized | graduated |
 | [`M4-O01`](#m4-o01-exact-toggle-fusion-leaves-an-immortal-core) | obstruction | exact local toggle fusion preserves a nonzero common anchor | formalized | graduated |
 | [`M4-O02`](#m4-o02-two-private-state-phase-signature) | obstruction | two private quotient states cannot isolate one exceptional cyclic phase | formalized | graduated |
@@ -2639,6 +2640,83 @@ congruence to seek a finite set of recurrent projective residues.
 **Next:** derive an iterated terminal-defect height or finite-quotient recurrence that uses the
 linear wait bound. Conversely, construct a legal rational orbit whose terminal congruences
 saturate that envelope and encode an unbounded counter.
+
+### R32-S11: Primitive-factor terminal gate
+
+**Kind:** structure theorem
+**Evidence:** formalized
+**Disposition:** active
+
+For one legal integral step, let `g` be the primitive-reduction factor and let `T` be the source
+terminal defect. Given any finite family `S` of distinct cyclotomic primes dividing `pᵃ−1`,
+Lean combines pairwise coprimality with the reset-or-cancellation theorem to prove
+
+```text
+|T| < ∏_{ℓ∈S} ℓ
+  ⇒
+T=0
+  or
+∃ℓ∈S, ℓ∤g and m′≡n′ (mod ℓ).
+```
+
+Thus a family whose squarefree product is larger than the terminal defect cannot disappear
+silently. Either the source is already the true terminal projective point, or one factor
+survives primitive reduction and resets the reduced state to one in a finite projective
+quotient.
+
+The canonical family consists of the prime factors of `Φ_a(p)` which do not divide `a`. Every
+such factor is formally proved to be a primitive prime divisor of `pᵃ−1`. Writing
+
+```text
+radₚᵣᵢₘ(Φ_a(p)) = ∏ {ℓ : ℓ∣Φ_a(p), ℓ∤a},
+```
+
+the checked height form is
+
+```text
+radₚᵣᵢₘ(Φ_a(p)) >
+  (|A−L|+|D|)H(m,n)
+⇒
+T(m,n)=0
+or
+some exact-order quotient sees m′≡n′.
+```
+
+Equivalently, on a nonterminal step for which every primitive quotient reset is ruled out,
+
+```text
+radₚᵣᵢₘ(Φ_a(p))
+  ≤ |T(m,n)|
+  ≤ (|A−L|+|D|)H(m,n).
+```
+
+This is the precise local-global gate sought by [`R32-M05`](#r32-m05-cyclotomic-reset-or-cancellation-sieve).
+It replaces the vague requirement that “cyclotomic growth beat height” by a squarefree radical
+inequality and exposes exactly where pure size arguments stop.
+
+**Scope:** no unconditional lower bound strong enough for the primitive cyclotomic radical is
+proved. Cyclotomic values grow like `p^φ(a)`, but repeated prime powers can make their
+squarefree radical much smaller; controlling that loss uniformly is a genuinely number-theoretic
+obligation. Nor does a surviving reset automatically reject the terminal residue: it supplies a
+finite exact-order quotient whose future reachability must still be analyzed.
+
+**Artifact:** `primitiveCyclotomicPrimes`,
+`primitivePrimeDivisor_of_mem_primitiveCyclotomicPrimes`,
+`terminal_or_exists_cyclotomic_reset`,
+`cyclotomicProduct_le_terminalDefect_of_no_reset`,
+`terminalDefect_zero_or_exists_primitive_reset`, and
+`primitiveCyclotomicRadical_le_height_of_no_reset` in
+[`ReturnGuardTerminalGate.lean`](MatrixMortality/ReturnGuardTerminalGate.lean).
+
+**Use:** split the remaining decision attack cleanly. A surviving primitive factor enters a
+finite projective graph of exact multiplicative order `a`; if every such graph is inconclusive,
+the primitive radical is charged to one explicit terminal defect and bounded by primitive
+height.
+
+**Next:** prove either that enough primitive factors survive to yield a complete finite-quotient
+certificate, or that repeated failure forces a radical-divisibility history belonging to a
+known hard Diophantine class. A bare lower bound for `Φ_a(p)` is insufficient; the needed object
+is its primitive squarefree part.
 
 ## Three-Generator Four-State Frontier
 

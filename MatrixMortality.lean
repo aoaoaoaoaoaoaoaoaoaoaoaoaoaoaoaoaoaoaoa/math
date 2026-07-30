@@ -28,6 +28,7 @@ import MatrixMortality.ReturnGuardGauss
 import MatrixMortality.ReturnGuardAddress
 import MatrixMortality.ReturnGuardArithmetic
 import MatrixMortality.ReturnGuardValuation
+import MatrixMortality.ReturnGuardTerminalGate
 import MatrixMortality.ReturnGuardCocycle
 import MatrixMortality.ReturnGuardResonance
 import MatrixMortality.ReturnGuardRail

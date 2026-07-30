@@ -386,6 +386,15 @@
  Quot.sound]
 'MatrixMortality.ReturnGuard.integralStep_wait_le_log_height' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.ReturnGuard.integralStep_reduced_height_le' depends on axioms: [propext]
+'MatrixMortality.ReturnGuard.terminal_or_exists_cyclotomic_reset' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.primitiveCyclotomicRadical_le_height_of_no_reset' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.terminalDefect_zero_or_exists_primitive_reset' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.ReturnGuard.integralStep_cyclotomic_dvd_numerator_iff_terminalDefect' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]

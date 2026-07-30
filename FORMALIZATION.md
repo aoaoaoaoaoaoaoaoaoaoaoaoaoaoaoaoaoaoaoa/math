@@ -434,6 +434,7 @@ with a complete arbitrary-word converse.
 | `ReturnGuardGauss.lean` | canonical residual coordinate, exact branch spheres, and guarded-step conjugacy |
 | `ReturnGuardAddress.lean` | finite inverse-address mortality grammar and branch fixed-point incompatibility |
 | `ReturnGuardArithmetic.lean` | primitive-pair recurrence and cyclotomic reset-or-cancellation sieve |
+| `ReturnGuardTerminalGate.lean` | primitive cyclotomic radical and terminal-or-finite-reset gate |
 | `ReturnGuardCocycle.lean` | terminal-defect transport and the reduced second-order denominator recurrence |
 | `ReturnGuardResonance.lean` | nonresonant descent, resonance localization, and corrected nested readiness |
 | `ReturnGuardRail.lean` | polynomial divisibility and rational affine-wait rail obstruction |
@@ -548,6 +549,7 @@ with a complete arbitrary-word converse.
 | Terminal defects obey an exact cocycle and reduced second-order denominator recurrence | `ReturnGuard.integralStep_terminalDefect`, `ReturnGuard.reducedDenominator_recurrence` |
 | Every base-coprime cancellation depth is the minimum of the terminal-defect and displacement depths | `ReturnGuard.integralStep_cancel_iff_terminalDefect_and_displacement`, `ReturnGuard.integralStep_commonFactor_padicValInt` |
 | Legal waits are logarithmic in primitive height and reduced height is uniformly Lipschitz | `ReturnGuard.integralStep_wait_le_log_height`, `ReturnGuard.integralStep_reduced_height_le` |
+| A large primitive cyclotomic radical forces terminality or a surviving exact-order reset | `ReturnGuard.terminalDefect_zero_or_exists_primitive_reset`, `ReturnGuard.primitiveCyclotomicRadical_le_height_of_no_reset` |
 | Every nonresonant continuation descends and every infinite ready chain resonates arbitrarily late | `ReturnGuard.nonresonant_nextWait_lt`, `ReturnGuard.infinite_ready_chain_resonates` |
 | Resonant nesting has normalized depth `(s−1)(a+h)` | `ReturnGuard.resonance_ready_iff` |
 | No reduced rational chart realizes a nontrivial affine wait rail at infinitely many prime powers | `ReturnGuard.Rail.no_infinite_primePower_affineWait_rail` |
