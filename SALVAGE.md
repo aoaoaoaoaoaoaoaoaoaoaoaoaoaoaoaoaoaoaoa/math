@@ -105,6 +105,7 @@ file owns the mathematical stock.
 | [`R32-S18`](#r32-s18-fixed-support-localization-obstruction) | obstruction | fixed-support localization isolates the cyclotomic determinant but retains an infinite strict tower of novel cancellation depths | formalized | active |
 | [`R32-S19`](#r32-s19-canonical-cyclotomic-collision-ladders) | structure theorem and obstruction | tangent content is exactly multiplicative, yet one canonical reset orbit can swallow four successive novel cyclotomic factors | formalized | active |
 | [`R32-S20`](#r32-s20-center-drift-parameter-lifting) | partial mechanism | fixed-reset center perturbations move every reduced exit on one affine line, with a unique visible incidence digit | formalized | active |
+| [`R32-S21`](#r32-s21-sensitivity-cocycle-and-anti-hensel-compatibility) | structure theorem and obstruction | negative center sensitivity transports exactly, but incidence extends an annular prefix iff one cross-determinant survives | formalized | active |
 | [`M4-C01`](#m4-c01-two-state-pushout-compiler) | compiler | binary deterministic two-state scalar control compiles to three `4 × 4` matrices | formalized | graduated |
 | [`M4-O01`](#m4-o01-exact-toggle-fusion-leaves-an-immortal-core) | obstruction | exact local toggle fusion preserves a nonzero common anchor | formalized | graduated |
 | [`M4-O02`](#m4-o02-two-private-state-phase-signature) | obstruction | two private quotient states cannot isolate one exceptional cyclic phase | formalized | graduated |
@@ -3326,12 +3327,12 @@ After deleting fixed support, the consecutive novel factors are `8,2,4,2,13`. Th
 the first checked extension beyond the four-collision ladder of `R32-S19`.
 
 **Scope:** the affine perturbation and unique incidence digit are exact general theorems, and
-the five-step ladder is kernel-checked. They do not yet prove that the old legal prefix survives
+the five-step ladder is kernel-checked. They do not prove that the old legal prefix survives
 the chosen digit, that the tangent remains visible at every stage, or that one rational
-parameter realizes an infinite ladder. Exact arithmetic finds compatible finite prefixes
-through seventeen steps; that evidence is computational only. Their parameter moduli acquire
-both `3`-adic precision and repeated factors of thirteen, so the inverse-limit parameter may be
-profinite rather than rational.
+parameter realizes an infinite ladder. A later exact search uniquely extended the prescribed
+alternating `1/2, 3/13` scheme through collision twenty-five but found no compatible digit at
+collision twenty-six. That computation is audit evidence, not a formal theorem; `R32-S21`
+formalizes the general obstruction it exposed.
 
 **Artifact:** `ReturnGuard.integralResidualTransfer_centerDrift_add_mulVec`,
 `integralResidualTransfer_centerDrift_factor`, `existsUnique_incidenceDigit`, and
@@ -3345,10 +3346,77 @@ profinite rather than rational.
 three obligations cleanly: `p`-adic stability of the old prefix, visibility of the new
 moving-kernel observer, and arithmetic realization of the compatible digit system.
 
-**Next:** prove an inductive stability theorem for the alternating waits `1,3` and factors
-`2,13`, yielding canonical prefixes of every finite length. Then decide whether the resulting
-compatible residue tower contains a rational integer or only a nonrational element of
-`ℤ₃ × ℤ₁₃`.
+**Next:** replace bare visibility by the annular compatibility cocycle of `R32-S21`. Determine
+whether an adaptive wait/factor schedule can avoid its zero locus indefinitely, or whether the
+cocycle gives an effective per-instance bound.
+
+### R32-S21: Sensitivity cocycle and anti-Hensel compatibility
+
+**Kind:** structure theorem and obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+Along a ready fixed-reset orbit, differentiate the state with respect to the center. If the
+current sensitivity has negative `p`-adic value `v`, then one legal step of wait `a` changes it
+to
+
+```text
+v − s a.
+```
+
+The singular transported derivative dominates every integral term, so no cancellation caveat
+is hidden in this valuation law. This proves persistent first-order visibility after the
+sensitivity becomes negative.
+
+Visibility is not prefix stability. A ready condition records a normalized coefficient which
+must remain nonzero, not merely a divisibility equation. Abstract one old annular coefficient
+and one new incidence equation as
+
+```text
+oldValue + t oldSlope ≠ 0,
+newValue + t newSlope = 0.
+```
+
+When `newSlope ≠ 0`, the new equation selects one digit
+`t=−newValue/newSlope`. That digit preserves the old annulus exactly when
+
+```text
+oldValue·newSlope − oldSlope·newValue ≠ 0.
+```
+
+The cross-determinant is therefore the complete one-digit extension criterion. Its vanishing
+is an **anti-Hensel obstruction**: the unique digit solving the new incidence necessarily
+destroys an earlier exact valuation shell.
+
+This obstruction occurs inside the guard family, not only in an abstract affine model. For
+
+```text
+p=3, s=2, ρ=−168, α=−460+729d       (d∈ℤ),
+```
+
+every center in the full congruence cylinder shares the legal waits `1,3`; after those steps
+the state is a `3`-adic unit. No positive third wait exists anywhere in the cylinder.
+
+**Scope:** the sensitivity recurrence and cross-determinant criterion are exact over their
+stated fields, and the dead cylinder is an all-integer Lean theorem. They refute induction from
+first-order visibility alone. They do not bound arbitrary schedules, prove eventual death of
+every parameter cylinder, or exclude an adaptive infinite collision ladder.
+
+**Artifact:** `ReturnGuard.readyLegalValue_hasDerivAt` and
+`parameterSensitivityStep_hasValue` in
+[`ReturnGuardSensitivity.lean`](MatrixMortality/ReturnGuardSensitivity.lean);
+`ReturnGuard.exists_incidenceDigit_and_preserves_iff` and
+`no_incidenceDigit_preserves_of_liftCompatibility_eq_zero` in
+[`ReturnGuardAntiHensel.lean`](MatrixMortality/ReturnGuardAntiHensel.lean);
+`ReturnGuard.Examples.deadLift_twoStepPrefix` and `deadLift_noThirdStep` in
+[`ReturnGuardAntiHenselExamples.lean`](MatrixMortality/ReturnGuardAntiHenselExamples.lean).
+
+**Use:** model parameter synthesis as an annular compatibility cocycle. Every proposed next
+collision must satisfy both the incidence equation and the nonvanishing determinants of all
+active valuation shells.
+
+**Next:** derive the determinant transport under one guard step. Test whether its finite residue
+state admits an adaptive infinite path or yields a well-founded obstruction.
 
 ## Three-Generator Four-State Frontier
 

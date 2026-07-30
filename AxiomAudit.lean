@@ -276,6 +276,12 @@ open MatrixMortality
 #print axioms ReturnGuard.Examples.fiveCollision_decodedSteps
 #print axioms ReturnGuard.Examples.fiveCollision_primitiveSteps
 #print axioms ReturnGuard.Examples.fiveCollision_novelFactors
+#print axioms ReturnGuard.readyLegalValue_hasDerivAt
+#print axioms ReturnGuard.parameterSensitivityStep_hasValue
+#print axioms ReturnGuard.exists_incidenceDigit_and_preserves_iff
+#print axioms ReturnGuard.no_incidenceDigit_preserves_of_liftCompatibility_eq_zero
+#print axioms ReturnGuard.Examples.deadLift_twoStepPrefix
+#print axioms ReturnGuard.Examples.deadLift_noThirdStep
 #print axioms ReturnGuard.commonDivisor_dvd_det
 #print axioms ReturnGuard.integralStep_commonDivisor_dvd_cyclotomicSupport
 #print axioms ReturnGuard.integralStep_cyclotomic_reset_or_cancel

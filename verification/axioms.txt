@@ -550,6 +550,18 @@
 'MatrixMortality.ReturnGuard.Examples.fiveCollision_novelFactors' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.ReturnGuard.readyLegalValue_hasDerivAt' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ReturnGuard.parameterSensitivityStep_hasValue' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.exists_incidenceDigit_and_preserves_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.no_incidenceDigit_preserves_of_liftCompatibility_eq_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.Examples.deadLift_twoStepPrefix' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ReturnGuard.Examples.deadLift_noThirdStep' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.ReturnGuard.commonDivisor_dvd_det' depends on axioms: [propext, Quot.sound]
 'MatrixMortality.ReturnGuard.integralStep_commonDivisor_dvd_cyclotomicSupport' depends on axioms: [propext,
  Classical.choice,

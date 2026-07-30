@@ -75,38 +75,31 @@ The factor five in `20=5·4` belongs to the fixed drift support. Removing fixed 
 
 five consecutive nonunit novel reductions.
 
-## Computational extension and its limit
+## Computational extension and its failure
 
-Exact rational arithmetic, independent of Lean, extends the compatible parameter classes
-through seventeen collisions. After the checked prefix, the waits and selected factors repeat
-the pattern
+This section is superseded by the anti-Hensel audit below. Exact rational arithmetic,
+independent of Lean, extends the prescribed parameter classes uniquely through collision
+twenty-five. After the checked prefix, the waits and selected factors repeat the pattern
 
 ```text
 1/2, 3/13.
 ```
 
 A wait-one extension adds `3²`-adic precision. A wait-three, factor-thirteen extension adds
-`13·3⁶`. This is strong evidence for an arbitrary finite-prefix induction, but it is not a
-theorem and is not promoted as one.
+`13·3⁶`. At collision twenty-six, exhaustive exact evaluation of the relevant next digit
+classes finds no extension. The apparent induction was false.
 
-The same calculation exposes the decisive caveat. The compatible classes define a mixed
-`(3,13)`-adic inverse system; arbitrary finite rational prefixes need not be realized by one
-rational integer. Even a successful finite-prefix induction would refute every finite bound
-without yet producing an infinite rational orbit or undecidability.
+The failure is structural. Readiness requires an exact valuation, hence a nonzero normalized
+annular digit. The unique parameter digit imposing the new incidence may annihilate that old
+digit. [`m32-anti-hensel-prefix-obstruction-2026-07-30.md`](m32-anti-hensel-prefix-obstruction-2026-07-30.md)
+records the formal compatibility criterion and a small all-cylinder guard obstruction.
 
 ## Adjudication
 
-The local moving-kernel problem is solved whenever the tangent is visible: there is one and only
-one admissible parameter digit, and choosing it does not lose the current reduction factor. The
-remaining problem is global.
-
-1. Prove that the existing legal prefix is stable under the required higher-precision
-   perturbation.
-2. Prove that the next observer remains visible.
-3. Determine whether the compatible residue tower has a rational point.
-
-The first two obligations would establish arbitrary finite collision ladders. The third
-separates a compactness obstruction from a genuine rational nonperiodic orbit.
+The local moving-kernel equation is solved whenever the tangent is visible, but visibility does
+not imply prefix stability. The remaining problem is to transport every active annular
+coefficient together with the incidence observer. An adaptive schedule may avoid the
+compatibility zero locus; the fixed alternating schedule does not.
 
 ## Lean boundary
 

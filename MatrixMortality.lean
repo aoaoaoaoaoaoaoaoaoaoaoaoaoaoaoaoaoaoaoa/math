@@ -39,6 +39,9 @@ import MatrixMortality.ReturnGuardTangent
 import MatrixMortality.ReturnGuardLocalization
 import MatrixMortality.ReturnGuardTangentBudget
 import MatrixMortality.ReturnGuardParameterLift
+import MatrixMortality.ReturnGuardSensitivity
+import MatrixMortality.ReturnGuardAntiHensel
+import MatrixMortality.ReturnGuardAntiHenselExamples
 import MatrixMortality.ReturnGuardResonance
 import MatrixMortality.ReturnGuardRail
 import MatrixMortality.ReturnGuardExamples
