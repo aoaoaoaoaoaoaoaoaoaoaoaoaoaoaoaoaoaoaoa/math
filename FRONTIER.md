@@ -650,7 +650,10 @@ The first global arithmetic sieve is also exact.
 [`R32-M05`](SALVAGE.md#r32-m05-cyclotomic-reset-or-cancellation-sieve) projectivizes the
 primitive integer-pair recurrence and proves that every prime divisor of `pᵃ−1` either resets
 the reduced point to one or is swallowed by the common reduction factor. The latter event is
-now the only local-global escape, not an untyped failure of a finite quotient.
+not an untyped failure of a finite quotient: for every divisor `d ∣ pᵃ−1`, primitive reduction
+swallows `d` exactly when the source residual is congruent to the terminal residual modulo `d`.
+The remaining local-global escape is therefore repeated terminal shadowing at unbounded
+cyclotomic orders.
 
 The surviving obligation is therefore a source theorem, or its negation: prove that this
 countably branched rational address system can simulate universal deterministic computation
@@ -666,7 +669,7 @@ selected wait, or rational affine-counter problem remains in this architecture.
 | Amalgamated valuation guard | Compile a universal deterministic source into the resonant tail recurrence, or decide that recurrence | Matrix mortality is already equivalent to one deterministic orbit, but its remaining arithmetic is not covered by known p-adic dynamics |
 | Irreducible cubic return pencil | Replace the split spectrum by a cubic companion action whose `2 × 2` return sequence has no fixed rail or target strip | A candidate still needs an internal low-rank return and an exact arbitrary-word normal form |
 | Multi-prime ReturnSquare | Extend the rational-root support and finite walls from prime powers to bases with several prime factors | Mixed prime support permits roots not confined to one valuation ray |
-| Local-global sieve | Bound cyclotomic common cancellation or prove it has an effective finite nucleus | [`R32-M05`](SALVAGE.md#r32-m05-cyclotomic-reset-or-cancellation-sieve) shows that reset versus common cancellation is the exact dichotomy |
+| Local-global sieve | Bound repeated cyclotomic terminal congruence or prove it has an effective finite nucleus | [`R32-M05`](SALVAGE.md#r32-m05-cyclotomic-reset-or-cancellation-sieve) identifies swallowed factors exactly with terminal shadowing |
 | Valuation and cone dynamics | Extend the signed-cone pullback or a `p`-adic invariant across the remaining middle strip or a new pencil | Cancellation at poles and between spectral modes destroys naive monotonicity |
 | Same-zero return surgery | Change nonzero return values while preserving the zero semigroup, thereby evading exact Hankel taxes | No general same-zero minimization theorem exists; every surgery needs its own arbitrary-product converse |
 | Exceptional reverse compiler | Absorb the finite `αβ=0` disjunction into one three-dimensional many-one instance | The generic all-path compiler is complete; dimension three has no evident OR operation |

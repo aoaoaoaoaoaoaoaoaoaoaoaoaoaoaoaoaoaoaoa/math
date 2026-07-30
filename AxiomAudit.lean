@@ -201,6 +201,10 @@ open MatrixMortality
 #print axioms ReturnGuard.physical_isMortal_iff_inverseAddress
 #print axioms ReturnGuard.residualFixed_exclusive
 #print axioms ReturnGuard.integralStep_realizes_residualStep
+#print axioms ReturnGuard.divisor_pow_sub_one_isCoprime_base
+#print axioms ReturnGuard.divisor_dvd_commonFactor_iff
+#print axioms ReturnGuard.integralStep_cyclotomic_dvd_numerator_iff_terminalDefect
+#print axioms ReturnGuard.integralStep_cyclotomic_cancel_iff_terminalCongruent
 #print axioms ReturnGuard.commonDivisor_dvd_det
 #print axioms ReturnGuard.integralStep_commonDivisor_dvd_cyclotomicSupport
 #print axioms ReturnGuard.integralStep_cyclotomic_reset_or_cancel

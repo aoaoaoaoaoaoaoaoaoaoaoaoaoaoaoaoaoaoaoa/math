@@ -2399,20 +2399,43 @@ m′ ≡ n′ (mod ℓ).
 Thus every cyclotomic prime either disappears into a visible common cancellation or resets the
 reduced projective point to one. There is no third escape.
 
-**Scope:** this is a one-step sieve, not a decision algorithm. The cancellation branch can recur
-at unbounded orders and currently has no finite nucleus.
+The cancellation branch itself is now exact. For every positive wait and every divisor
+`d ∣ pᵃ−1`, primality is unnecessary: `d` is automatically coprime to `p`. If
+
+```text
+(m̃,ñ)=g(m′,n′),    gcd(m′,n′)=1,
+```
+
+then Lean proves
+
+```text
+d ∣ g
+  ↔
+(A−L)m ≡ −Dn (mod d).
+```
+
+The right side is precisely projective congruence of the source residual `m/n` with the terminal
+residual `−D/(A−L)`. A swallowed cyclotomic factor is therefore not an opaque failure of
+reduction: the source state already shadows the terminal divisor modulo that entire factor.
+
+**Scope:** this is a one-step local-global theorem, not a decision algorithm. Terminal
+congruence may recur at unbounded orders, and no bound on the accumulated cyclotomic factors or
+the terminal defect is yet proved.
 
 **Artifact:** `ReturnGuard.integralStep_realizes_residualStep`,
 `commonDivisor_dvd_det`, `integralStep_commonDivisor_dvd_cyclotomicSupport`, and
-`integralStep_cyclotomic_reset_or_cancel` in
+`integralStep_cyclotomic_reset_or_cancel`, together with the stronger
+`divisor_pow_sub_one_isCoprime_base` and
+`integralStep_cyclotomic_cancel_iff_terminalCongruent`, in
 [`ReturnGuardArithmetic.lean`](MatrixMortality/ReturnGuardArithmetic.lean).
 
 **Use:** finite quotients should track a projective residue plus an explicit cancellation state.
-An unreachable terminal residue certifies immortality; reaching the cancellation state identifies
-the sole arithmetic obstruction rather than producing an uninterpreted false positive.
+An unreachable terminal residue certifies immortality. Reaching the cancellation state now
+certifies terminal congruence upstairs and charges the swallowed factor to the integral terminal
+defect.
 
-**Next:** combine primitive divisors of `pᵃ−1` with bounds on common cancellation, or prove that
-the cancellation histories form an effective finite nucleus.
+**Next:** track primitive parts of `pᵃ−1` against the height of the terminal defect, or prove that
+the resulting terminal-congruence histories form an effective finite nucleus.
 
 ## Three-Generator Four-State Frontier
 

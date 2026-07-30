@@ -542,6 +542,7 @@ with a complete arbitrary-word converse.
 | Distinct positive residual branches have no common finite fixed point | `ReturnGuard.residualFixed_exclusive` |
 | The primitive-pair recurrence projectivizes to the residual step exactly | `ReturnGuard.integralStep_realizes_residualStep` |
 | Cyclotomic primes either reset the reduced pair or enter its common cancellation | `ReturnGuard.integralStep_cyclotomic_reset_or_cancel` |
+| A cyclotomic factor is swallowed exactly when the source pair is terminal-congruent modulo it | `ReturnGuard.integralStep_cyclotomic_cancel_iff_terminalCongruent` |
 | Every nonresonant continuation descends and every infinite ready chain resonates arbitrarily late | `ReturnGuard.nonresonant_nextWait_lt`, `ReturnGuard.infinite_ready_chain_resonates` |
 | Resonant nesting has normalized depth `(s−1)(a+h)` | `ReturnGuard.resonance_ready_iff` |
 | No reduced rational chart realizes a nontrivial affine wait rail at infinitely many prime powers | `ReturnGuard.Rail.no_infinite_primePower_affineWait_rail` |

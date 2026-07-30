@@ -22,8 +22,8 @@ def integralStepNumerator
   (centerNumerator - scale * prime ^ wait) * numerator +
     driftNumerator * denominator
 
-/-- Denominator of one decoded integer-pair step. -/
-def integralStepDenominator
+/-- Terminal linear defect, which is also the denominator of one decoded integer-pair step. -/
+def terminalDefect
     (centerNumerator driftNumerator scale : ℤ)
     (numerator denominator : ℤ) : ℤ :=
   (centerNumerator - scale) * numerator +
@@ -37,7 +37,7 @@ def IntegralStep
       integralStepNumerator prime centerNumerator driftNumerator scale
         wait numerator denominator ∧
     nextDenominator =
-      integralStepDenominator centerNumerator driftNumerator scale
+      terminalDefect centerNumerator driftNumerator scale
         numerator denominator
 
 /-- The integral recurrence is exactly the decoded residual map after projectivization. -/
@@ -63,7 +63,7 @@ theorem integralStep_realizes_residualStep
           drift parameters.center parameters.reset =
         (nextDenominator : ℚ) / (scale * denominator) := by
     rw [drift_eq, center_eq, step.2]
-    dsimp [integralStepDenominator]
+    dsimp [terminalDefect]
     field_simp [scale_ne, denominator_ne]
     ring
   have transform_ne :
@@ -111,8 +111,143 @@ theorem integralStep_difference
       scale * (1 - prime ^ wait) * numerator := by
   rcases step with ⟨numerator_eq, denominator_eq⟩
   rw [numerator_eq, denominator_eq]
-  simp [integralStepNumerator, integralStepDenominator]
+  simp [integralStepNumerator, terminalDefect]
   ring
+
+/-- Every divisor of a positive power minus one is coprime to the base. -/
+theorem divisor_pow_sub_one_isCoprime_base
+    {base exponent : Nat} {divisor : ℤ}
+    (exponent_positive : 0 < exponent)
+    (divides : divisor ∣ (base : ℤ) ^ exponent - 1) :
+    IsCoprime divisor (base : ℤ) := by
+  obtain ⟨prior, rfl⟩ := Nat.exists_eq_succ_of_ne_zero
+    (Nat.ne_of_gt exponent_positive)
+  obtain ⟨quotient, quotient_eq⟩ := divides
+  refine ⟨-quotient, (base : ℤ) ^ prior, ?_⟩
+  calc
+    -quotient * divisor + (base : ℤ) ^ prior * base =
+        (base : ℤ) ^ (Nat.succ prior) - divisor * quotient := by
+          rw [pow_succ]
+          ring
+    _ = 1 := by rw [← quotient_eq]; ring
+
+/-- A factorization through a primitive pair exposes every common divisor in its common
+factor. -/
+theorem divisor_dvd_commonFactor_iff
+    {left right common reducedLeft reducedRight divisor : ℤ}
+    (left_eq : left = common * reducedLeft)
+    (right_eq : right = common * reducedRight)
+    (reduced_primitive : IsCoprime reducedLeft reducedRight) :
+    divisor ∣ common ↔ divisor ∣ left ∧ divisor ∣ right := by
+  constructor
+  · intro divides_common
+    exact ⟨left_eq ▸ divides_common.mul_right reducedLeft,
+      right_eq ▸ divides_common.mul_right reducedRight⟩
+  · rintro ⟨divides_left, divides_right⟩
+    obtain ⟨leftCoefficient, rightCoefficient, bezout⟩ := reduced_primitive
+    have divides_combination :
+        divisor ∣ leftCoefficient * left + rightCoefficient * right :=
+      dvd_add (divides_left.mul_left leftCoefficient)
+        (divides_right.mul_left rightCoefficient)
+    convert divides_combination using 1
+    rw [left_eq, right_eq]
+    calc
+      common = common * 1 := by ring
+      _ = common *
+          (leftCoefficient * reducedLeft +
+            rightCoefficient * reducedRight) := by rw [bezout]
+      _ = leftCoefficient * (common * reducedLeft) +
+          rightCoefficient * (common * reducedRight) := by ring
+
+/-- Modulo a cyclotomic factor coprime to the base, the two raw output coordinates vanish
+together. -/
+theorem integralStep_cyclotomic_dvd_numerator_iff_terminalDefect
+    {prime depth : Nat} {centerNumerator driftNumerator scale : ℤ}
+    {wait : Nat} {numerator denominator nextNumerator nextDenominator divisor : ℤ}
+    (step :
+      IntegralStep prime depth centerNumerator driftNumerator scale
+        wait numerator denominator nextNumerator nextDenominator)
+    (wait_positive : 0 < wait)
+    (cyclotomic_divides :
+      divisor ∣ (prime : ℤ) ^ wait - 1) :
+    divisor ∣ nextNumerator ↔
+      divisor ∣
+        terminalDefect centerNumerator driftNumerator scale
+          numerator denominator := by
+  have divides_negative :
+      divisor ∣ 1 - (prime : ℤ) ^ wait := by
+    simpa only [neg_sub] using dvd_neg.mpr cyclotomic_divides
+  have divides_difference :
+      divisor ∣
+        (prime : ℤ) ^ (depth * wait) * nextNumerator -
+          nextDenominator := by
+    rw [integralStep_difference step]
+    exact (divides_negative.mul_left scale).mul_right numerator
+  rw [← step.2]
+  constructor
+  · intro divides_numerator
+    have divides_scaled :
+        divisor ∣
+          (prime : ℤ) ^ (depth * wait) * nextNumerator :=
+      divides_numerator.mul_left _
+    have :
+        divisor ∣
+          (prime : ℤ) ^ (depth * wait) * nextNumerator -
+            ((prime : ℤ) ^ (depth * wait) * nextNumerator -
+              nextDenominator) :=
+      dvd_sub divides_scaled divides_difference
+    simpa using this
+  · intro divides_denominator
+    have divides_scaled :
+        divisor ∣
+          (prime : ℤ) ^ (depth * wait) * nextNumerator := by
+      have sum := dvd_add divides_difference divides_denominator
+      simpa only [sub_add_cancel] using sum
+    have power_coprime :
+        IsCoprime divisor ((prime : ℤ) ^ (depth * wait)) :=
+      (divisor_pow_sub_one_isCoprime_base wait_positive
+        cyclotomic_divides).pow_right
+    exact
+      power_coprime.dvd_of_dvd_mul_left divides_scaled
+
+/-- Primitive reduction swallows an admissible cyclotomic modulus exactly when the source pair
+lies on the terminal projective divisor modulo that modulus. -/
+theorem integralStep_cyclotomic_cancel_iff_terminalCongruent
+    {prime depth : Nat} {centerNumerator driftNumerator scale : ℤ}
+    {wait : Nat} {numerator denominator nextNumerator nextDenominator
+      common reducedNumerator reducedDenominator divisor : ℤ}
+    (step :
+      IntegralStep prime depth centerNumerator driftNumerator scale
+        wait numerator denominator nextNumerator nextDenominator)
+    (numerator_reduced : nextNumerator = common * reducedNumerator)
+    (denominator_reduced : nextDenominator = common * reducedDenominator)
+    (reduced_primitive : IsCoprime reducedNumerator reducedDenominator)
+    (wait_positive : 0 < wait)
+    (cyclotomic_divides :
+      divisor ∣ (prime : ℤ) ^ wait - 1) :
+    divisor ∣ common ↔
+      (centerNumerator - scale) * numerator ≡
+        -driftNumerator * denominator [ZMOD divisor] := by
+  rw [divisor_dvd_commonFactor_iff numerator_reduced denominator_reduced
+    reduced_primitive]
+  rw [integralStep_cyclotomic_dvd_numerator_iff_terminalDefect step
+    wait_positive cyclotomic_divides]
+  rw [step.2, and_self, Int.modEq_iff_dvd]
+  constructor <;> intro divides
+  · rw [show
+      -driftNumerator * denominator -
+          (centerNumerator - scale) * numerator =
+        -terminalDefect centerNumerator driftNumerator scale
+          numerator denominator by
+        simp [terminalDefect]
+        ring]
+    exact dvd_neg.mpr divides
+  · rw [show
+      terminalDefect centerNumerator driftNumerator scale numerator denominator =
+        -(-driftNumerator * denominator -
+          (centerNumerator - scale) * numerator) by
+        simp [terminalDefect]]
+    exact dvd_neg.mpr divides
 
 /-- A common divisor of the image of a primitive integer pair divides the determinant. -/
 theorem commonDivisor_dvd_det
@@ -183,7 +318,7 @@ theorem integralStep_commonDivisor_dvd_fullSupport
     have scaled := divides_denominator.mul_left power
     rw [step.2] at scaled
     convert scaled using 1
-    dsimp [integralStepDenominator, power]
+    dsimp [terminalDefect, power]
     ring
   have determinant_divides :=
     commonDivisor_dvd_det primitive first_divides second_divides
