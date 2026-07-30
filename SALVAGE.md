@@ -100,6 +100,7 @@ file owns the mathematical stock.
 | [`R32-S13`](#r32-s13-canonical-decoded-integral-lift) | structure theorem | every decoded rational path lifts canonically to primitive integral execution | formalized | active |
 | [`R32-S14`](#r32-s14-drift-divisor-certificate-classification) | decidable stratum | drift-divisor certificates are exactly finite cyclic-orbit avoidance | formalized | active |
 | [`R32-S15`](#r32-s15-finite-quotient-completeness) | obstruction | terminal exclusion is cancellation exclusion; synchronized prime products cannot amplify certificates | formalized | active |
+| [`R32-S16`](#r32-s16-cancellation-blow-up-and-unbounded-depth) | obstruction | primitive cancellation is a surjective projective blow-up with no uniform finite-jet bound | formalized | active |
 | [`M4-C01`](#m4-c01-two-state-pushout-compiler) | compiler | binary deterministic two-state scalar control compiles to three `4 × 4` matrices | formalized | graduated |
 | [`M4-O01`](#m4-o01-exact-toggle-fusion-leaves-an-immortal-core) | obstruction | exact local toggle fusion preserves a nonzero common anchor | formalized | graduated |
 | [`M4-O02`](#m4-o02-two-private-state-phase-signature) | obstruction | two private quotient states cannot isolate one exceptional cyclic phase | formalized | graduated |
@@ -2973,6 +2974,91 @@ word annihilate the reset ray? Do not build products of cancellation-rejecting a
 **Next:** enrich the quotient state across swallowed factors. Track the exact valuation removed
 by primitive reduction and test whether bounded cancellation memory yields a finite nucleus or
 whether unbounded cancellation carries the missing computational stack.
+
+### R32-S16: Cancellation blow-up and unbounded depth
+
+**Kind:** obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+Let the two raw output coordinates be encoded by a terminal term
+
+```text
+T = ℓᵗT₀
+```
+
+and a cyclotomic displacement
+
+```text
+P N − T = ℓᵉC₀,
+```
+
+where `T₀,C₀` are `ℓ`-adic units. Dividing both coordinates by
+`ℓ^min(t,e)` gives an exact strict transform with three exits:
+
+```text
+t<e:  [N:T] ≡ [1:1],
+e<t:  [N:T] ≡ [1:0],
+t=e:  [N:T] ≡ [T₀+C₀:T₀]       (mod ℓ).
+```
+
+Thus only equal-depth cancellation retains information. Its tangent parameter is unrestricted:
+over every field the exceptional divisor maps surjectively onto `ℙ¹`. The two unequal-depth
+charts give one and infinity, while `C₀/T₀` ranges over every remaining affine point. A
+swallowed prime can therefore reconstruct *any* quotient state after normalization.
+
+This loss cannot be repaired by choosing a larger fixed modulus. For every truncation depth
+`N`, the raw pairs
+
+```text
+(ℓᴺ, −ℓᴺ),       (ℓᴺ, ℓᴺ⁺¹)
+```
+
+are indistinguishable modulo `ℓᴺ`, but their normalized exits are zero and one. No a priori
+fixed congruence jet determines continuation through every collision.
+
+The obstruction occurs inside the actual integral guard recurrence, not merely in an abstract
+local model. Any exact factorization
+
+```text
+pᵃ−1 = ℓᵈu,       ℓ∤u
+```
+
+has a uniform primitive source whose integral step cancels exactly `ℓᵈ`, remains primitive
+after division, and exits at zero modulo `ℓ`. Specializing to
+
+```text
+(p,s,A,D,L)=(5,2,29,1,1),       a=2·3^(d−1),
+```
+
+lifting the exponent gives `v₃(5ᵃ−1)=d`. Hence one fixed recurrence realizes every positive
+`3`-adic cancellation depth on primitive inputs.
+
+**Scope:** unboundedness is over the full primitive transition relation. It does not yet prove
+that one orbit from the fixed reset realizes unbounded depths. An orbit-specific height theorem
+could still yield a finite decision procedure. Nor does the result forbid an algorithm which
+carries exact valuations symbolically rather than factoring through a fixed finite congruence
+quotient.
+
+**Artifact:** `ReturnGuard.cancellationJet_eq`,
+`cancellationJet_terminalDepth_lt_ofPair`,
+`cancellationJet_displacementDepth_lt_ofPair`,
+`cancellationJet_depth_eq_mod`,
+`localCancellationExit_surjective`,
+`cancellationExit_escapes_fixed_truncation`,
+`primitive_integralStep_of_exact_cyclotomicDepth`,
+`exists_primitive_integralStep_with_three_cancellationDepth`, and
+`integralStep_cancellationExit` in
+[`ReturnGuardCancellationJet.lean`](MatrixMortality/ReturnGuardCancellationJet.lean).
+
+**Use:** abandon uniform fixed-jet quotient nuclei. On the decidability side, prove an
+orbit-specific bound on equal-depth tangent collisions or discover a symbolic normalization
+whose well-founded measure survives arbitrary depth. On the undecidability side, the equal-depth
+tangent is now a concrete unbounded storage channel: force one reset orbit to select its leading
+digits recursively.
+
+**Next:** decide whether the canonical reset orbit can realize unbounded cancellation depth.
+That is the exact fork between an orbit-specific finite nucleus and a cyclotomic stack.
 
 ## Three-Generator Four-State Frontier
 

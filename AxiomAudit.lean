@@ -208,6 +208,12 @@ open MatrixMortality
 #print axioms ReturnGuard.integralStep_commonFactor_padicValInt_expanded
 #print axioms ReturnGuard.integralStep_commonFactor_padicValInt_le_support
 #print axioms ReturnGuard.integralStep_commonFactor_natAbs_le_support
+#print axioms ReturnGuard.cancellationJet_eq
+#print axioms ReturnGuard.localCancellationExit_surjective
+#print axioms ReturnGuard.cancellationExit_escapes_fixed_truncation
+#print axioms ReturnGuard.primitive_integralStep_of_exact_cyclotomicDepth
+#print axioms ReturnGuard.exists_primitive_integralStep_with_three_cancellationDepth
+#print axioms ReturnGuard.integralStep_cancellationExit
 #print axioms ReturnGuard.padicValNat_pow_mul_sub_one_le
 #print axioms ReturnGuard.padicValNat_two_pow_mul_sub_one_le
 #print axioms ReturnGuard.integralStep_wait_le_log_height

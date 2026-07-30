@@ -761,6 +761,17 @@ factor. Further local-global progress must model what happens *through* primitiv
 renormalization, retaining swallowed-factor valuations instead of treating cancellation as an
 absorbing reject state.
 
+[`R32-S16`](SALVAGE.md#r32-s16-cancellation-blow-up-and-unbounded-depth) now computes that
+renormalization exactly. Comparing the terminal-defect depth `t` with the cyclotomic
+displacement depth `e` gives three exits: `t<e` forces one, `e<t` forces infinity, and `t=e`
+retains the tangent ratio `[T₀+C₀:T₀]`. The exceptional divisor is surjective onto the entire
+projective line. More strongly, no fixed congruence depth determines this exit, and one fixed
+valid integral recurrence realizes every positive `3`-adic cancellation depth on primitive
+inputs. Uniform finite-jet enrichment is therefore dead. The only possible finite nucleus is
+orbit-specific: it must prove that the canonical reset orbit cannot visit arbitrarily deep
+equal-depth collisions. The opposing universality program must make that one orbit do exactly
+so.
+
 The surviving obligation is therefore a source theorem, or its negation: prove that this
 countably branched rational address system can simulate universal deterministic computation
 inside infinitely nested equal-depth resonance, or decide finite terminal-address membership by
@@ -775,16 +786,18 @@ selected wait, or rational affine-counter problem remains in this architecture.
 | Amalgamated valuation guard | Compile a universal deterministic source into the resonant tail recurrence, or decide that recurrence | Matrix mortality is already equivalent to one deterministic orbit, but its remaining arithmetic is not covered by known p-adic dynamics |
 | Irreducible cubic return pencil | Replace the split spectrum by a cubic companion action whose `2 × 2` return sequence has no fixed rail or target strip | A candidate still needs an internal low-rank return and an exact arbitrary-word normal form |
 | Multi-prime ReturnSquare | Extend the rational-root support and finite walls from prime powers to bases with several prime factors | Mixed prime support permits roots not confined to one valuation ray |
-| Cancellation-aware local-global sieve | Build a finite quotient which resumes after primitive reduction, or prove that swallowed-factor memory is unbounded | [`R32-S15`](SALVAGE.md#r32-s15-finite-quotient-completeness) proves ordinary prime products cannot amplify certificates; all surviving arithmetic passes through cancellation |
+| Cancellation-aware local-global sieve | Bound equal-depth tangent collisions along the canonical reset orbit, or force that orbit to realize an unbounded cyclotomic stack | [`R32-S16`](SALVAGE.md#r32-s16-cancellation-blow-up-and-unbounded-depth) kills every uniform fixed-jet nucleus and realizes arbitrary depth over primitive inputs |
 | Valuation and cone dynamics | Extend the signed-cone pullback or a `p`-adic invariant across the remaining middle strip or a new pencil | Cancellation at poles and between spectral modes destroys naive monotonicity |
 | Same-zero return surgery | Change nonzero return values while preserving the zero semigroup, thereby evading exact Hankel taxes | No general same-zero minimization theorem exists; every surgery needs its own arbitrary-product converse |
 | Exceptional reverse compiler | Absorb the finite `αβ=0` disjunction into one three-dimensional many-one instance | The generic all-path compiler is complete; dimension three has no evident OR operation |
 
-The highest-value lunge is now the arithmetic of finite inverse addresses. The matrix compiler,
-all-word converse, wait decoder, and rational address grammar are complete; nonresonant dynamics
-and rational affine counter rails are closed. The next useful mathematics is a finite nucleus
-for cyclotomic cancellation, a genuinely nonperiodic rational stack construction, or a transfer
-from that dichotomy to a broader class of three-mode return recurrences.
+The highest-value lunge is now orbit-specific cancellation arithmetic. The matrix compiler,
+all-word converse, wait decoder, rational address grammar, and local blow-up are complete;
+nonresonant dynamics, rational affine counter rails, ordinary quotient products, and uniform
+fixed-jet nuclei are closed. The next useful mathematics is an effective bound on tangent depth
+along terminal-reaching reset orbits, a single rational orbit realizing an unbounded
+cyclotomic stack, or a transfer from that dichotomy to a broader class of three-mode return
+recurrences.
 
 The strategic boundary is now clear. The easy layer consisted of finding and repairing missing
 finite compilers. `M₃(2)` asks whether one low-dimensional recurrence family can store

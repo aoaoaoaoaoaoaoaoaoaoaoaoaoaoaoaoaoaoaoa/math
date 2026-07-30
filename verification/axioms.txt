@@ -380,6 +380,20 @@
 'MatrixMortality.ReturnGuard.integralStep_commonFactor_natAbs_le_support' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.ReturnGuard.cancellationJet_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ReturnGuard.localCancellationExit_surjective' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.cancellationExit_escapes_fixed_truncation' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.primitive_integralStep_of_exact_cyclotomicDepth' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.exists_primitive_integralStep_with_three_cancellationDepth' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.integralStep_cancellationExit' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.ReturnGuard.padicValNat_pow_mul_sub_one_le' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.ReturnGuard.padicValNat_two_pow_mul_sub_one_le' depends on axioms: [propext,
  Classical.choice,
