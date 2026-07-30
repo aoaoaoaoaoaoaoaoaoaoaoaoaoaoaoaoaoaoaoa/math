@@ -742,6 +742,15 @@ finite no-certificate. The condition is the clean group-theoretic exclusion
 `A/L∉⟨p⟩⊆𝔽ℓ×`. The physical theorem uses the canonical terminal pair, so an unreduced raw
 terminal presentation cannot make the certificate vacuous.
 
+[`R32-S14`](SALVAGE.md#r32-s14-drift-divisor-certificate-classification) closes this subfamily
+exactly. At a primitive drift divisor, *some* closed safe quotient invariant exists if and only
+if the center avoids the scaled base-power orbit. If a residue hits the center, closure from the
+reset forces either quotient annihilation or the terminal zero ray in one step; no smaller or
+less obvious invariant can rescue the certificate. If the scale survives, the forbidden orbit
+has exactly `e` elements and the classifier accepts exactly `ℓ−e` center residues. Thus large
+primitive factors of small order kill most center classes, while `e=ℓ−1` leaves only the zero
+center class. The test is executable in Lean and the modulo-eleven example is accepted by it.
+
 The surviving obligation is therefore a source theorem, or its negation: prove that this
 countably branched rational address system can simulate universal deterministic computation
 inside infinitely nested equal-depth resonance, or decide finite terminal-address membership by
@@ -756,7 +765,7 @@ selected wait, or rational affine-counter problem remains in this architecture.
 | Amalgamated valuation guard | Compile a universal deterministic source into the resonant tail recurrence, or decide that recurrence | Matrix mortality is already equivalent to one deterministic orbit, but its remaining arithmetic is not covered by known p-adic dynamics |
 | Irreducible cubic return pencil | Replace the split spectrum by a cubic companion action whose `2 × 2` return sequence has no fixed rail or target strip | A candidate still needs an internal low-rank return and an exact arbitrary-word normal form |
 | Multi-prime ReturnSquare | Extend the rational-root support and finite walls from prime powers to bases with several prime factors | Mixed prime support permits roots not confined to one valuation ray |
-| Local-global sieve | Prove completeness of parameter-divisor or primitive exact-order quotient certificates, or exhibit an orbit evading all of them | [`R32-S12`](SALVAGE.md#r32-s12-exact-order-projective-automata) and [`R32-S13`](SALVAGE.md#r32-s13-canonical-decoded-integral-lift) give sound physical no-certificates; saturated quotients and repeated cancellation remain |
+| Local-global sieve | Prove completeness of generic primitive exact-order quotient certificates, or exhibit an orbit evading all of them | [`R32-S14`](SALVAGE.md#r32-s14-drift-divisor-certificate-classification) completely classifies parameter-divisor certificates; generic quotients can saturate and repeated cancellation remains |
 | Valuation and cone dynamics | Extend the signed-cone pullback or a `p`-adic invariant across the remaining middle strip or a new pencil | Cancellation at poles and between spectral modes destroys naive monotonicity |
 | Same-zero return surgery | Change nonzero return values while preserving the zero semigroup, thereby evading exact Hankel taxes | No general same-zero minimization theorem exists; every surgery needs its own arbitrary-product converse |
 | Exceptional reverse compiler | Absorb the finite `αβ=0` disjunction into one three-dimensional many-one instance | The generic all-path compiler is complete; dimension three has no evident OR operation |

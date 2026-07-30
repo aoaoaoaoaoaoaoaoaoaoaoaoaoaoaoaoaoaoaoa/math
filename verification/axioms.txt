@@ -416,6 +416,29 @@
 'MatrixMortality.ReturnGuard.not_physical_isMortal_of_drift_divisor' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.IsPrimitivePrimeDivisor.unit_orderOf_eq_exponent' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.IsPrimitivePrimeDivisor.exponent_dvd_prime_sub_one' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.affineSurvivors_quotientInvariant_iff_centerPowerOrbit_avoids' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.hasQuotientCertificate_iff_centerPowerOrbit_avoids' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.mem_centerPowerOrbit_iff_centerRatio_mem_zpowers' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.card_centerPowerOrbit' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ReturnGuard.card_certifyingCenters' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ReturnGuard.hasQuotientCertificate_iff_driftDivisorCertifies' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.not_physical_isMortal_of_driftDivisorCertifies' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.ReturnGuard.integralStep_cyclotomic_dvd_numerator_iff_terminalDefect' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
@@ -463,6 +486,9 @@
 'MatrixMortality.ReturnGuard.Examples.cycle_integral_reductions' depends on axioms: [propext, Quot.sound]
 'MatrixMortality.ReturnGuard.Examples.cycle_commonFactors_dvd_fixedSupport' depends on axioms: [propext]
 'MatrixMortality.ReturnGuard.Examples.cycle_no_primitive_integral_terminal_execution' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.Examples.cycle_driftDivisorCertifies' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
 'MatrixMortality.ReturnGuard.Examples.cycle_not_physical_isMortal_by_quotient' depends on axioms: [propext,

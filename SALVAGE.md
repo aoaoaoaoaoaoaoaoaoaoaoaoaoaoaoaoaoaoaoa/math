@@ -98,6 +98,7 @@ file owns the mathematical stock.
 | [`R32-S11`](#r32-s11-primitive-factor-terminal-gate) | structure theorem | a large primitive cyclotomic radical forces terminality or a surviving finite-quotient reset | formalized | active |
 | [`R32-S12`](#r32-s12-exact-order-projective-automata) | structure theorem | primitive divisors induce finite projective automata with exact swallowed-factor semantics | formalized | active |
 | [`R32-S13`](#r32-s13-canonical-decoded-integral-lift) | structure theorem | every decoded rational path lifts canonically to primitive integral execution | formalized | active |
+| [`R32-S14`](#r32-s14-drift-divisor-certificate-classification) | decidable stratum | drift-divisor certificates are exactly finite cyclic-orbit avoidance | formalized | active |
 | [`M4-C01`](#m4-c01-two-state-pushout-compiler) | compiler | binary deterministic two-state scalar control compiles to three `4 × 4` matrices | formalized | graduated |
 | [`M4-O01`](#m4-o01-exact-toggle-fusion-leaves-an-immortal-core) | obstruction | exact local toggle fusion preserves a nonzero common anchor | formalized | graduated |
 | [`M4-O02`](#m4-o02-two-private-state-phase-signature) | obstruction | two private quotient states cannot isolate one exceptional cyclic phase | formalized | graduated |
@@ -2856,6 +2857,63 @@ without reopening rational-normalization soundness.
 **Next:** characterize which guarded parameters possess a drift-divisor certificate; then seek
 generic primitive quotients for the complement and determine whether repeated cancellation
 forces an effectively recognizable arithmetic history.
+
+### R32-S14: Drift-divisor certificate classification
+
+**Kind:** decidable stratum
+**Evidence:** formalized
+**Disposition:** active
+
+Fix a primitive divisor `ℓ` of `pᵉ−1` and assume `ℓ∣D`. The residual transfer modulo `ℓ` has
+only its first column. Define the scaled center orbit
+
+```text
+O={L pʳ : 0≤r<e}⊆𝔽ℓ.
+```
+
+Then the following are equivalent:
+
+1. some quotient invariant contains the reset and excludes both annihilation and the terminal
+   ray;
+2. the nonzero affine survivor shell is such an invariant;
+3. `A∉O`;
+4. when `A` and `L` survive, `A/L∉⟨p⟩⊆𝔽ℓ×`;
+5. the executable Boolean classifier `driftDivisorCertifies` returns true.
+
+The necessity is stronger than the earlier construction. If `A=Lpʳ`, closure from the reset
+under residue `r` reaches either annihilation, when the first column vanishes, or the terminal
+zero ray. Hence no alternative smaller invariant can repair a failed orbit test.
+
+The primitive-divisor hypothesis gives multiplicative order exactly `e`, with `e∣ℓ−1`. If
+`L≠0` modulo `ℓ`, the orbit has exactly `e` elements. Precisely `ℓ−e` center residues therefore
+admit drift-divisor certificates. This quantifies the stratum: a large factor of small order
+certifies most center classes, while a primitive-root factor (`e=ℓ−1`) certifies only the zero
+class.
+
+**Scope:** this classifies every safe invariant for quotients which divide `D`; it says nothing
+about primitive quotients with nonzero drift, combinations of several quotient factors, or
+completeness of the whole finite-quotient method. Failure of the Boolean test means that this
+one drift-divisor quotient cannot certify immortality, not that the physical pair is mortal.
+
+**Artifact:** `IsPrimitivePrimeDivisor.unit_orderOf_eq_exponent`,
+`IsPrimitivePrimeDivisor.exponent_dvd_prime_sub_one`,
+`ReturnGuard.affineSurvivors_quotientInvariant_iff_centerPowerOrbit_avoids`,
+`hasQuotientCertificate_iff_centerPowerOrbit_avoids`,
+`mem_centerPowerOrbit_iff_centerRatio_mem_zpowers`,
+`card_centerPowerOrbit`, `card_certifyingCenters`,
+`hasQuotientCertificate_iff_driftDivisorCertifies`, and
+`not_physical_isMortal_of_driftDivisorCertifies` in
+[`PrimitiveDivisor.lean`](MatrixMortality/PrimitiveDivisor.lean) and
+[`ReturnGuardDriftCertificate.lean`](MatrixMortality/ReturnGuardDriftCertificate.lean).
+
+**Use:** factor the nonzero drift numerator in a fixed integral presentation, test each primitive
+factor once, and discard the entire parameter set as immortal as soon as one factor accepts.
+Search effort on failed factors is now provably wasted; the next quotient must have nonzero
+drift.
+
+**Next:** study generic exact-order quotients with nonzero drift. Determine whether saturation
+in one factor can be escaped by another factor or by a product modulus, and isolate the exact
+role of the cancellation state in any failure of local-global separation.
 
 ## Three-Generator Four-State Frontier
 

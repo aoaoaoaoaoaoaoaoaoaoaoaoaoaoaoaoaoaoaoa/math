@@ -222,6 +222,15 @@ open MatrixMortality
 #print axioms ReturnGuard.decodedExecution_primitiveIntegral
 #print axioms ReturnGuard.not_physical_isMortal_of_quotientInvariant
 #print axioms ReturnGuard.not_physical_isMortal_of_drift_divisor
+#print axioms IsPrimitivePrimeDivisor.unit_orderOf_eq_exponent
+#print axioms IsPrimitivePrimeDivisor.exponent_dvd_prime_sub_one
+#print axioms ReturnGuard.affineSurvivors_quotientInvariant_iff_centerPowerOrbit_avoids
+#print axioms ReturnGuard.hasQuotientCertificate_iff_centerPowerOrbit_avoids
+#print axioms ReturnGuard.mem_centerPowerOrbit_iff_centerRatio_mem_zpowers
+#print axioms ReturnGuard.card_centerPowerOrbit
+#print axioms ReturnGuard.card_certifyingCenters
+#print axioms ReturnGuard.hasQuotientCertificate_iff_driftDivisorCertifies
+#print axioms ReturnGuard.not_physical_isMortal_of_driftDivisorCertifies
 #print axioms ReturnGuard.integralStep_cyclotomic_dvd_numerator_iff_terminalDefect
 #print axioms ReturnGuard.integralStep_cyclotomic_cancel_iff_terminalCongruent
 #print axioms ReturnGuard.integralStep_novel_cancel_iff_cyclotomic_terminalCongruent
@@ -249,4 +258,5 @@ open MatrixMortality
 #print axioms ReturnGuard.Examples.cycle_integral_reductions
 #print axioms ReturnGuard.Examples.cycle_commonFactors_dvd_fixedSupport
 #print axioms ReturnGuard.Examples.cycle_no_primitive_integral_terminal_execution
+#print axioms ReturnGuard.Examples.cycle_driftDivisorCertifies
 #print axioms ReturnGuard.Examples.cycle_not_physical_isMortal_by_quotient

@@ -265,26 +265,19 @@ theorem modEq_one {prime base exponent : Nat}
     (Nat.one_le_pow exponent base (Nat.zero_lt_of_lt primitive.one_lt_base))]
   exact primitive.dvd
 
-/-- A primitive divisor detects every exponent not divisible by its primitive exponent. -/
-theorem not_modEq_one_of_not_dvd {prime base exponent power : Nat}
-    (primitive : IsPrimitivePrimeDivisor prime base exponent)
-    (not_divides : ¬exponent ∣ power) :
-    ¬base ^ power ≡ 1 [MOD prime] := by
-  intro congruent
-  have base_coprime := primitive.base_coprime
-  let unit := ZMod.unitOfCoprime base base_coprime
+/-- The residue class of the base has exactly the primitive exponent as its multiplicative
+order. -/
+theorem unit_orderOf_eq_exponent {prime base exponent : Nat}
+    (primitive : IsPrimitivePrimeDivisor prime base exponent) :
+    orderOf (ZMod.unitOfCoprime base primitive.base_coprime) = exponent := by
+  let unit := ZMod.unitOfCoprime base primitive.base_coprime
   have unit_exponent : unit ^ exponent = 1 := by
     apply Units.ext
     simpa [unit, ZMod.coe_unitOfCoprime] using
-      (ZMod.natCast_eq_natCast_iff (base ^ exponent) 1 prime).mpr primitive.modEq_one
-  have unit_power : unit ^ power = 1 := by
-    apply Units.ext
-    simpa [unit, ZMod.coe_unitOfCoprime] using
-      (ZMod.natCast_eq_natCast_iff (base ^ power) 1 prime).mpr congruent
+      (ZMod.natCast_eq_natCast_iff (base ^ exponent) 1 prime).mpr
+        primitive.modEq_one
   have order_dvd_exponent : orderOf unit ∣ exponent :=
     orderOf_dvd_of_pow_eq_one unit_exponent
-  have order_dvd_power : orderOf unit ∣ power :=
-    orderOf_dvd_of_pow_eq_one unit_power
   have exponent_le_order : exponent ≤ orderOf unit := by
     apply le_of_not_gt
     intro order_lt
@@ -298,10 +291,38 @@ theorem not_modEq_one_of_not_dvd {prime base exponent power : Nat}
           (base ^ orderOf unit) 1 prime).mp (by
             simpa [unit, ZMod.coe_unitOfCoprime] using
               congrArg Units.val (pow_orderOf_eq_one unit)))
+  exact le_antisymm
+    (Nat.le_of_dvd primitive.exponent_positive order_dvd_exponent)
+    exponent_le_order
+
+/-- A primitive exponent divides the order of the residue field's unit group. -/
+theorem exponent_dvd_prime_sub_one {prime base exponent : Nat}
+    (primitive : IsPrimitivePrimeDivisor prime base exponent) :
+    exponent ∣ prime - 1 := by
+  letI : Fact prime.Prime := ⟨primitive.prime⟩
+  let unit := ZMod.unitOfCoprime base primitive.base_coprime
+  have order_dvd :
+      orderOf unit ∣ Fintype.card (ZMod prime)ˣ :=
+    orderOf_dvd_card
+  simpa [unit, primitive.unit_orderOf_eq_exponent,
+    Nat.totient_prime primitive.prime] using order_dvd
+
+/-- A primitive divisor detects every exponent not divisible by its primitive exponent. -/
+theorem not_modEq_one_of_not_dvd {prime base exponent power : Nat}
+    (primitive : IsPrimitivePrimeDivisor prime base exponent)
+    (not_divides : ¬exponent ∣ power) :
+    ¬base ^ power ≡ 1 [MOD prime] := by
+  intro congruent
+  have base_coprime := primitive.base_coprime
+  let unit := ZMod.unitOfCoprime base base_coprime
+  have unit_power : unit ^ power = 1 := by
+    apply Units.ext
+    simpa [unit, ZMod.coe_unitOfCoprime] using
+      (ZMod.natCast_eq_natCast_iff (base ^ power) 1 prime).mpr congruent
+  have order_dvd_power : orderOf unit ∣ power :=
+    orderOf_dvd_of_pow_eq_one unit_power
   have order_eq : orderOf unit = exponent :=
-    le_antisymm
-      (Nat.le_of_dvd primitive.exponent_positive order_dvd_exponent)
-      exponent_le_order
+    primitive.unit_orderOf_eq_exponent
   exact not_divides (order_eq ▸ order_dvd_power)
 
 end IsPrimitivePrimeDivisor

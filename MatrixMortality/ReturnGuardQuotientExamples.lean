@@ -1,5 +1,5 @@
 import MatrixMortality.ReturnGuardExamples
-import MatrixMortality.ReturnGuardIntegralLift
+import MatrixMortality.ReturnGuardDriftCertificate
 
 /-!
 # Exact finite quotient certificates for guard examples
@@ -146,6 +146,11 @@ theorem cycle_not_decodedReachable_by_quotient :
   · simpa [rationalPair] using cycleElevenInvariant_reset_mem
   · exact cycleElevenInvariant_canonicalTerminal_absent
 
+/-- The executable drift-divisor classifier recognizes the modulo-eleven certificate. -/
+theorem cycle_driftDivisorCertifies :
+    driftDivisorCertifies 11 cycleParameters.prime 5 (-953) 2240 = true := by
+  decide
+
 /-- The finite four-ray quotient is by itself a kernel-checked physical immortality
 certificate. -/
 theorem cycle_not_physical_isMortal_by_quotient :
@@ -153,14 +158,13 @@ theorem cycle_not_physical_isMortal_by_quotient :
       (ReturnFamily.pairGenerator
         (ambient (cycleParameters.prime : ℚ) cycleParameters.depth)
         (cut cycleParameters.center cycleParameters.reset)) := by
-  apply not_physical_isMortal_of_drift_divisor cycleParameters
+  apply not_physical_isMortal_of_driftDivisorCertifies cycleParameters
     (centerNumerator := -953) (driftNumerator := 473) (scale := 2240)
     (by norm_num [cycleParameters])
     (by norm_num [cycleParameters, drift])
     (by norm_num)
-    eleven_primitive_three_five (by decide) (by decide)
-  intro residue
-  fin_cases residue <;> decide
+    eleven_primitive_three_five (by decide)
+    cycle_driftDivisorCertifies
 
 /-- No primitively reduced integral guard execution connects the period-three reset residual
 to its terminal residual.  The certificate quantifies over every wait sequence, not only the
