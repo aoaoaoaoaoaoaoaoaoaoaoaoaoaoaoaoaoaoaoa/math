@@ -800,6 +800,17 @@ theorem decodedStep_legalStep
   · simpa [wait_eq, image_eq] using
       guardedStep_stateOfResidual parameters wait source branch
 
+/-- The decoded residual relation is single-valued. -/
+theorem decodedStep_functional
+    (parameters : Parameters) {source left right : ℚ}
+    (left_step : DecodedStep parameters source left)
+    (right_step : DecodedStep parameters source right) :
+    left = right := by
+  apply stateOfResidual_injective parameters
+  exact legalStep_functional parameters
+    (decodedStep_legalStep parameters left_step)
+    (decodedStep_legalStep parameters right_step)
+
 /-- A decoded transition cannot land at the residual pole zero. -/
 theorem decodedStep_target_isUnit
     (parameters : Parameters) {source target : ℚ}

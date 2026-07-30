@@ -58,6 +58,19 @@ theorem mono {α : Type*} {source target : α → α → Prop}
     ReachesIn target steps before after :=
   execution.map id embed
 
+/-- A relation-closed set contains the endpoint of every exact execution which starts in it. -/
+theorem target_mem {α : Type*} {relation : α → α → Prop}
+    {states : Set α} {steps : Nat} {before after : α}
+    (closed : ∀ {source target}, source ∈ states →
+      relation source target → target ∈ states)
+    (source_mem : before ∈ states)
+    (execution : ReachesIn relation steps before after) :
+    after ∈ states := by
+  induction execution with
+  | refl => exact source_mem
+  | head first _ induction =>
+      exact induction (closed source_mem first)
+
 /-- Forget the exact transition count. -/
 theorem toReflTransGen {α : Type*} {relation : α → α → Prop} {steps : Nat}
     {before after : α} (execution : ReachesIn relation steps before after) :

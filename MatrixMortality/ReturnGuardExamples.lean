@@ -1,3 +1,4 @@
+import MatrixMortality.IndexedExecution
 import MatrixMortality.ReturnGuardAddress
 import MatrixMortality.ReturnGuardCocycle
 import MatrixMortality.ReturnGuardResonance
@@ -347,6 +348,53 @@ theorem cycle_is_nonterminal :
     terminalResidual cycleParameters ≠ 1 := by
   rw [cycle_terminalResidual]
   norm_num
+
+/-- The three decoded residuals contain every continuation from the reset. -/
+def cycleResidualInvariant : Set ℚ :=
+  {1, 5 / 17, 43 / 283}
+
+theorem cycleResidualInvariant_closed
+    {source target : ℚ}
+    (source_mem : source ∈ cycleResidualInvariant)
+    (step : DecodedStep cycleParameters source target) :
+    target ∈ cycleResidualInvariant := by
+  simp only [cycleResidualInvariant, Set.mem_insert_iff,
+    Set.mem_singleton_iff] at source_mem ⊢
+  rcases source_mem with rfl | rfl | rfl
+  · exact Or.inr (Or.inl
+      (decodedStep_functional cycleParameters step cycle_step_zero))
+  · exact Or.inr (Or.inr
+      (decodedStep_functional cycleParameters step cycle_step_one))
+  · exact Or.inl
+      (decodedStep_functional cycleParameters step cycle_step_two)
+
+theorem cycleResidualInvariant_terminal_absent :
+    terminalResidual cycleParameters ∉ cycleResidualInvariant := by
+  rw [cycle_terminalResidual]
+  norm_num [cycleResidualInvariant]
+
+/-- The rational period-three survivor never reaches the terminal residual. -/
+theorem cycle_not_decodedReachable :
+    ¬DecodedReachable cycleParameters := by
+  intro reachable
+  obtain ⟨steps, _, execution⟩ :=
+    Relation.transGen_iff_exists_pos_reachesIn.mp reachable
+  have target_mem :
+      terminalResidual cycleParameters ∈ cycleResidualInvariant :=
+    execution.target_mem
+      (fun source_mem step =>
+        cycleResidualInvariant_closed source_mem step)
+      (by simp [cycleResidualInvariant])
+  exact cycleResidualInvariant_terminal_absent target_mem
+
+/-- The period-three parameters give a genuine immortal pair of rational `3 × 3` matrices. -/
+theorem cycle_not_physical_isMortal :
+    ¬IsMortal
+      (ReturnFamily.pairGenerator
+        (ambient (cycleParameters.prime : ℚ) cycleParameters.depth)
+        (cut cycleParameters.center cycleParameters.reset)) := by
+  rw [physical_isMortal_iff_decodedReachable]
+  exact cycle_not_decodedReachable
 
 theorem cycle_ready_tails :
     readyTail cycleParameters 1 (-3 / 14) = -14 / 5 ∧

@@ -215,6 +215,9 @@ open MatrixMortality
 #print axioms ReturnGuard.terminal_or_exists_cyclotomic_reset
 #print axioms ReturnGuard.primitiveCyclotomicRadical_le_height_of_no_reset
 #print axioms ReturnGuard.terminalDefect_zero_or_exists_primitive_reset
+#print axioms ReturnGuard.quotientTransition_integralStep_eq_cancelled_iff
+#print axioms ReturnGuard.no_primitiveExecution_of_quotientInvariant
+#print axioms ReturnGuard.no_primitiveExecution_of_drift_divisor
 #print axioms ReturnGuard.integralStep_cyclotomic_dvd_numerator_iff_terminalDefect
 #print axioms ReturnGuard.integralStep_cyclotomic_cancel_iff_terminalCongruent
 #print axioms ReturnGuard.integralStep_novel_cancel_iff_cyclotomic_terminalCongruent
@@ -233,6 +236,7 @@ open MatrixMortality
 #print axioms ReturnGuard.Examples.integer_zero_word
 #print axioms ReturnGuard.Examples.fixed_guarded_step
 #print axioms ReturnGuard.Examples.cycle_decoded_orbit
+#print axioms ReturnGuard.Examples.cycle_not_physical_isMortal
 #print axioms ReturnGuard.Examples.cycle_first_two_resonant
 #print axioms ReturnGuard.Examples.cycle_third_nonresonant
 #print axioms ReturnGuard.Examples.cycle_integral_step_zero
@@ -240,3 +244,4 @@ open MatrixMortality
 #print axioms ReturnGuard.Examples.cycle_integral_step_two
 #print axioms ReturnGuard.Examples.cycle_integral_reductions
 #print axioms ReturnGuard.Examples.cycle_commonFactors_dvd_fixedSupport
+#print axioms ReturnGuard.Examples.cycle_no_primitive_integral_terminal_execution

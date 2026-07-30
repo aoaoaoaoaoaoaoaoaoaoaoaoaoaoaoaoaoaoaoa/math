@@ -22,6 +22,17 @@ def ray {R : Type*} [Zero R] [One R] : Point R → Fin 2 → R
   | some z => ![z, 1]
   | none => ![1, 0]
 
+/-- Projectivization of one homogeneous pair.  The zero pair is sent to infinity; callers
+which need faithful projectivization must separately prove that the pair is nonzero. -/
+noncomputable def ofPair {K : Type*} [Field K] (numerator denominator : K) : Point K := by
+  classical
+  exact if denominator = 0 then none else some (numerator / denominator)
+
+/-- Homogeneous scalar removed by `ofPair`. -/
+noncomputable def pairWeight {K : Type*} [Field K] (numerator denominator : K) : K := by
+  classical
+  exact if denominator = 0 then numerator else denominator
+
 /-- Affine numerator of a `2 × 2` matrix at `[z:1]`. -/
 def numerator {R : Type*} [Semiring R] (matrix : Square (Fin 2) R) (z : R) : R :=
   matrix 0 0 * z + matrix 0 1
@@ -67,6 +78,43 @@ theorem ray_ne_zero {K : Type*} [Semiring K] [Nontrivial K] (point : Point K) :
       change (1 : K) = 0 at this
       exact one_ne_zero this
 
+/-- Projectivizing a pair removes exactly `pairWeight`. -/
+theorem pair_eq_weight_smul_ray
+    {K : Type*} [Field K] (numerator denominator : K) :
+    ![numerator, denominator] =
+      pairWeight numerator denominator • ray (ofPair numerator denominator) := by
+  by_cases denominator_zero : denominator = 0
+  · subst denominator
+    ext i
+    fin_cases i <;> simp [ofPair, pairWeight, ray]
+  · ext i
+    fin_cases i <;>
+      simp [ofPair, pairWeight, ray, denominator_zero]
+    all_goals field_simp
+
+/-- A nonzero homogeneous pair has nonzero projective weight. -/
+theorem pairWeight_ne_zero
+    {K : Type*} [Field K] {numerator denominator : K}
+    (pair_nonzero : ![numerator, denominator] ≠ 0) :
+    pairWeight numerator denominator ≠ 0 := by
+  intro weight_zero
+  apply pair_nonzero
+  rw [pair_eq_weight_smul_ray, weight_zero, zero_smul]
+
+/-- Nonzero homogeneous scaling does not change the represented projective point. -/
+theorem ofPair_smul
+    {K : Type*} [Field K] (scalar : K) (scalar_ne : scalar ≠ 0)
+    (numerator denominator : K) :
+    ofPair (scalar * numerator) (scalar * denominator) =
+      ofPair numerator denominator := by
+  by_cases denominator_zero : denominator = 0
+  · simp [ofPair, denominator_zero]
+  · have scaled_denominator_ne : scalar * denominator ≠ 0 :=
+      mul_ne_zero scalar_ne denominator_zero
+    simp [ofPair, denominator_zero, scaled_denominator_ne]
+    field_simp
+    ring
+
 theorem mulVec_ray_some {R : Type*} [CommSemiring R]
     (matrix : Square (Fin 2) R) (z : R) :
     matrix *ᵥ ray (some z) = ![numerator matrix z, denominator matrix z] := by
@@ -81,6 +129,41 @@ theorem mulVec_ray_none {R : Type*} [CommSemiring R]
   ext i
   fin_cases i <;>
     simp [ray, Matrix.mulVec, Matrix.dotProduct, Fin.sum_univ_succ]
+
+/-- `act` is exactly projectivization of the image of the canonical ray. -/
+theorem ofPair_mulVec_ray
+    {K : Type*} [Field K] (matrix : Square (Fin 2) K) (point : Point K) :
+    ofPair ((matrix *ᵥ ray point) 0) ((matrix *ᵥ ray point) 1) =
+      act matrix point := by
+  cases point with
+  | none =>
+      rw [mulVec_ray_none]
+      by_cases bottom_left_zero : matrix 1 0 = 0 <;>
+        simp [ofPair, act, bottom_left_zero]
+  | some z =>
+      rw [mulVec_ray_some]
+      by_cases denominator_zero : denominator matrix z = 0 <;>
+        simp [ofPair, act, denominator_zero]
+
+/-- Projective action commutes with projectivization of every nonzero homogeneous pair. -/
+theorem act_ofPair
+    {K : Type*} [Field K] (matrix : Square (Fin 2) K)
+    {numerator denominator : K}
+    (pair_nonzero : ![numerator, denominator] ≠ 0) :
+    act matrix (ofPair numerator denominator) =
+      ofPair ((matrix *ᵥ ![numerator, denominator]) 0)
+        ((matrix *ᵥ ![numerator, denominator]) 1) := by
+  let scalar := pairWeight numerator denominator
+  have scalar_ne : scalar ≠ 0 :=
+    pairWeight_ne_zero pair_nonzero
+  rw [pair_eq_weight_smul_ray, Matrix.mulVec_smul]
+  change
+    act matrix (ofPair numerator denominator) =
+      ofPair
+        (scalar * (matrix *ᵥ ray (ofPair numerator denominator)) 0)
+        (scalar * (matrix *ᵥ ray (ofPair numerator denominator)) 1)
+  rw [ofPair_smul scalar scalar_ne]
+  exact (ofPair_mulVec_ray matrix (ofPair numerator denominator)).symm
 
 /-- Every matrix acts on a projective ray by its total action and homogeneous weight. -/
 theorem mulVec_ray_act

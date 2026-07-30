@@ -29,10 +29,12 @@ import MatrixMortality.ReturnGuardAddress
 import MatrixMortality.ReturnGuardArithmetic
 import MatrixMortality.ReturnGuardValuation
 import MatrixMortality.ReturnGuardTerminalGate
+import MatrixMortality.ReturnGuardQuotient
 import MatrixMortality.ReturnGuardCocycle
 import MatrixMortality.ReturnGuardResonance
 import MatrixMortality.ReturnGuardRail
 import MatrixMortality.ReturnGuardExamples
+import MatrixMortality.ReturnGuardQuotientExamples
 
 /- Finite-controller amalgamation. -/
 import MatrixMortality.ControllerPushout
