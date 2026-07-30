@@ -99,6 +99,7 @@ file owns the mathematical stock.
 | [`R32-S12`](#r32-s12-exact-order-projective-automata) | structure theorem | primitive divisors induce finite projective automata with exact swallowed-factor semantics | formalized | active |
 | [`R32-S13`](#r32-s13-canonical-decoded-integral-lift) | structure theorem | every decoded rational path lifts canonically to primitive integral execution | formalized | active |
 | [`R32-S14`](#r32-s14-drift-divisor-certificate-classification) | decidable stratum | drift-divisor certificates are exactly finite cyclic-orbit avoidance | formalized | active |
+| [`R32-S15`](#r32-s15-finite-quotient-completeness) | obstruction | terminal exclusion is cancellation exclusion; synchronized prime products cannot amplify certificates | formalized | active |
 | [`M4-C01`](#m4-c01-two-state-pushout-compiler) | compiler | binary deterministic two-state scalar control compiles to three `4 × 4` matrices | formalized | graduated |
 | [`M4-O01`](#m4-o01-exact-toggle-fusion-leaves-an-immortal-core) | obstruction | exact local toggle fusion preserves a nonzero common anchor | formalized | graduated |
 | [`M4-O02`](#m4-o02-two-private-state-phase-signature) | obstruction | two private quotient states cannot isolate one exceptional cyclic phase | formalized | graduated |
@@ -2911,9 +2912,67 @@ factor once, and discard the entire parameter set as immortal as soon as one fac
 Search effort on failed factors is now provably wasted; the next quotient must have nonzero
 drift.
 
-**Next:** study generic exact-order quotients with nonzero drift. Determine whether saturation
-in one factor can be escaped by another factor or by a product modulus, and isolate the exact
-role of the cancellation state in any failure of local-global separation.
+**Next:** study generic exact-order quotients with nonzero drift. By
+[`R32-S15`](#r32-s15-finite-quotient-completeness), ordinary synchronized products cannot
+strengthen a failed factor; any further local-global method must retain information across
+primitive cancellation.
+
+### R32-S15: Finite-quotient completeness
+
+**Kind:** obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+For integral residual parameters `(A,D,L)`, the zero-wait quotient transfer is
+
+```text
+⎡ A−L  D ⎤
+⎣ A−L  D ⎦.
+```
+
+Its projective kernel is the terminal residual `τ=−D/(A−L)`. The canonical primitive integer
+pair of `τ` is therefore sent to the absorbing cancellation state by residue zero in every
+prime quotient. It follows that any transition-closed set containing the terminal already
+contains cancellation.
+
+Consequently the following are equivalent for every exact-order quotient:
+
+1. a safe invariant contains reset and excludes cancellation and terminality;
+2. a cancellation-free invariant contains reset;
+3. cancellation is unreachable from reset in the finite quotient automaton.
+
+The target-absence premise in the earlier certificate interface was redundant. A
+cancellation-free invariant alone is a physical immortality certificate through the canonical
+decoded-integral lift.
+
+This also closes the obvious multi-prime composition. A synchronized two-factor invariant must
+exclude cancellation in each coordinate. Projecting it onto either coordinate yields a
+single-factor cancellation-free invariant, because every raw wait remains available after
+projection. Hence a synchronized product cannot certify any instance missed by either
+component; it is strictly no stronger than its projections.
+
+**Scope:** this obstruction applies to products which track ordinary prime projective states
+and reject any swallowed factor. It does not exclude an enriched local state which records the
+factor's cancellation exponent and resumes after primitive renormalization, nor a composite
+ring model retaining such valuation data.
+
+**Artifact:** `ReturnGuard.quotientTransition_zero_terminal_eq_cancelled`,
+`terminal_mem_forces_cancelled`,
+`hasQuotientCertificate_iff_hasCancellationFreeInvariant`,
+`hasCancellationFreeInvariant_iff_cancelled_unreachable`,
+`hasQuotientCertificate_iff_cancelled_unreachable`,
+`not_physical_isMortal_of_cancellationFreeQuotient`,
+`not_physical_isMortal_of_cancelled_unreachable`,
+`hasSynchronizedCancellationFreeInvariant_imp_components`, and
+`hasSynchronizedCancellationFreeInvariant_imp_quotientCertificates` in
+[`ReturnGuardQuotientCompleteness.lean`](MatrixMortality/ReturnGuardQuotientCompleteness.lean).
+
+**Use:** reduce every ordinary finite-quotient search to one graph question: can any residue
+word annihilate the reset ray? Do not build products of cancellation-rejecting automata.
+
+**Next:** enrich the quotient state across swallowed factors. Track the exact valuation removed
+by primitive reduction and test whether bounded cancellation memory yields a finite nucleus or
+whether unbounded cancellation carries the missing computational stack.
 
 ## Three-Generator Four-State Frontier
 

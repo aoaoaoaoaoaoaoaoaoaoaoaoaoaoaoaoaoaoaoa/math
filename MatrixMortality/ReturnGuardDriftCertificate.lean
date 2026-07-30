@@ -1,4 +1,4 @@
-import MatrixMortality.ReturnGuardIntegralLift
+import MatrixMortality.ReturnGuardQuotientCompleteness
 
 /-!
 # Classification of drift-divisor quotient certificates
@@ -159,6 +159,56 @@ theorem quotientInvariant_orbit_hit_forces_cancelled_or_terminal
       simp [ProjectiveLine.ofPair, bottom_zero]
     rwa [point_eq, ← terminal_eq] at image_mem
 
+/-- When the drift vanishes, the raw terminal state is annihilated at residue zero even if its
+integral coordinates collapse simultaneously modulo the quotient factor. -/
+theorem quotientTransition_zero_driftZero_terminal_eq_cancelled
+    {factor prime depth : Nat} [Fact factor.Prime]
+    {centerNumerator driftNumerator scale : ℤ}
+    (drift_zero : (driftNumerator : ZMod factor) = 0) :
+    quotientTransition
+        (quotientTransfer factor prime depth
+          centerNumerator driftNumerator scale 0)
+        (quotientPairState factor
+          (-driftNumerator, centerNumerator - scale)) = none := by
+  apply quotientTransition_point_of_image_eq_zero
+  rw [quotientTransfer_zero]
+  by_cases denominator_zero :
+      (centerNumerator : ZMod factor) - (scale : ZMod factor) = 0
+  · ext i
+    fin_cases i <;>
+      simp [quotientPairState, quotientPoint, ProjectiveLine.ofPair,
+        ProjectiveLine.ray, Matrix.mulVec, Matrix.dotProduct,
+        Fin.sum_univ_succ, drift_zero, denominator_zero]
+  · ext i
+    fin_cases i <;>
+      simp [quotientPairState, quotientPoint, ProjectiveLine.ofPair,
+        ProjectiveLine.ray, Matrix.mulVec, Matrix.dotProduct,
+        Fin.sum_univ_succ, drift_zero, denominator_zero]
+
+/-- Orbit membership forces annihilation, possibly through the terminal ray as one
+intermediate state. -/
+theorem quotientInvariant_orbit_hit_forces_cancelled
+    {factor prime period depth : Nat} [Fact factor.Prime]
+    (period_positive : 0 < period)
+    {centerNumerator driftNumerator scale : ℤ}
+    (drift_zero : (driftNumerator : ZMod factor) = 0)
+    {states : Set (QuotientState (ZMod factor))}
+    (closed :
+      QuotientInvariant factor prime period depth
+        centerNumerator driftNumerator scale states)
+    (reset_mem :
+      quotientPairState factor ((1 : ℤ), (1 : ℤ)) ∈ states)
+    (orbit_mem :
+      (centerNumerator : ZMod factor) ∈
+        centerPowerOrbit factor prime period scale) :
+    none ∈ states := by
+  rcases quotientInvariant_orbit_hit_forces_cancelled_or_terminal
+      drift_zero closed reset_mem orbit_mem with cancelled | terminal
+  · exact cancelled
+  · have image_mem := closed _ terminal ⟨0, period_positive⟩
+    rwa [quotientTransition_zero_driftZero_terminal_eq_cancelled
+      drift_zero] at image_mem
+
 /-- For a drift-zero primitive quotient, the nonzero affine shell is invariant if and only if
 the center avoids the finite scaled power orbit.  This is an exact classification of this
 certificate architecture, not merely a sufficient condition. -/
@@ -193,18 +243,29 @@ theorem affineSurvivors_quotientInvariant_iff_centerPowerOrbit_avoids
         primitive.exponent_positive avoids)
       (not_mem_centerPowerOrbit_iff.mp avoids)
 
-/-- Existence of a closed finite quotient invariant which contains the source while excluding
-both annihilation and the target. -/
-def HasQuotientCertificate
-    (factor prime period depth : Nat) [Fact factor.Prime]
-    (centerNumerator driftNumerator scale : ℤ)
-    (source target : ℤ × ℤ) : Prop :=
-  ∃ states : Set (QuotientState (ZMod factor)),
-    QuotientInvariant factor prime period depth
-        centerNumerator driftNumerator scale states ∧
-      none ∉ states ∧
-      quotientPairState factor source ∈ states ∧
-      quotientPairState factor target ∉ states
+/-- At a primitive drift divisor, cancellation-free invariant existence is exactly scaled
+power-orbit avoidance. -/
+theorem hasCancellationFreeInvariant_iff_centerPowerOrbit_avoids
+    {factor prime period depth : Nat} [Fact factor.Prime]
+    (primitive : IsPrimitivePrimeDivisor factor prime period)
+    {centerNumerator driftNumerator scale : ℤ}
+    (drift_zero : (driftNumerator : ZMod factor) = 0) :
+    HasCancellationFreeInvariant factor prime period depth
+        centerNumerator driftNumerator scale ((1 : ℤ), (1 : ℤ)) ↔
+      (centerNumerator : ZMod factor) ∉
+        centerPowerOrbit factor prime period scale := by
+  constructor
+  · rintro ⟨states, closed, cancelled_absent, reset_mem⟩ orbit_mem
+    exact cancelled_absent
+      (quotientInvariant_orbit_hit_forces_cancelled
+        primitive.exponent_positive drift_zero closed reset_mem orbit_mem)
+  · intro avoids
+    exact ⟨
+      AffineSurvivors factor,
+      (affineSurvivors_quotientInvariant_iff_centerPowerOrbit_avoids
+        primitive drift_zero).mpr avoids,
+      by simp [AffineSurvivors],
+      quotientPairState_one_mem_affineSurvivors factor⟩
 
 /-- Orbit avoidance exactly classifies all safe quotient invariants at a primitive drift
 divisor.  If one residue hits the center, closure forces either annihilation or the terminal
@@ -342,6 +403,20 @@ theorem driftDivisorCertifies_eq_true_iff
         centerPowerOrbit factor prime period scale := by
   simp [driftDivisorCertifies]
 
+/-- The Boolean test decides cancellation-free invariant existence at a primitive drift
+divisor. -/
+theorem hasCancellationFreeInvariant_iff_driftDivisorCertifies
+    {factor prime period depth : Nat} [Fact factor.Prime]
+    (primitive : IsPrimitivePrimeDivisor factor prime period)
+    {centerNumerator driftNumerator scale : ℤ}
+    (drift_zero : (driftNumerator : ZMod factor) = 0) :
+    HasCancellationFreeInvariant factor prime period depth
+        centerNumerator driftNumerator scale ((1 : ℤ), (1 : ℤ)) ↔
+      driftDivisorCertifies factor prime period
+        centerNumerator scale = true :=
+  (hasCancellationFreeInvariant_iff_centerPowerOrbit_avoids
+    primitive drift_zero).trans driftDivisorCertifies_eq_true_iff.symm
+
 /-- The Boolean test decides existence of every safe invariant in the drift-zero quotient, not
 only the canonical affine shell. -/
 theorem hasQuotientCertificate_iff_driftDivisorCertifies
@@ -379,13 +454,12 @@ theorem not_physical_isMortal_of_driftDivisorCertifies
       (ReturnFamily.pairGenerator
         (ambient (parameters.prime : ℚ) parameters.depth)
         (cut parameters.center parameters.reset)) := by
-  have avoids :=
-    driftDivisorCertifies_eq_true_iff.mp certifies
-  exact not_physical_isMortal_of_drift_divisor parameters
-    center_eq drift_eq scale_ne primitive drift_zero
-    (terminal_denominator_ne_of_not_mem_centerPowerOrbit
-      primitive.exponent_positive avoids)
-    (not_mem_centerPowerOrbit_iff.mp avoids)
+  obtain ⟨states, closed, cancelled_absent, reset_mem⟩ :=
+    (hasCancellationFreeInvariant_iff_driftDivisorCertifies
+      primitive drift_zero).mpr certifies
+  apply not_physical_isMortal_of_cancellationFreeQuotient parameters
+    center_eq drift_eq scale_ne primitive closed cancelled_absent
+  simpa [rationalPair] using reset_mem
 
 end
 end MatrixMortality.ReturnGuard

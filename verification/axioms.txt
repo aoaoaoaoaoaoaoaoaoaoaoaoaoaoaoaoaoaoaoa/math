@@ -416,6 +416,31 @@
 'MatrixMortality.ReturnGuard.not_physical_isMortal_of_drift_divisor' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.ReturnGuard.rationalPair_terminalResidual_isTerminalPairMod' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.terminal_mem_forces_cancelled' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ReturnGuard.hasQuotientCertificate_iff_hasCancellationFreeInvariant' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.not_physical_isMortal_of_cancellationFreeQuotient' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.hasCancellationFreeInvariant_iff_cancelled_unreachable' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.hasQuotientCertificate_iff_cancelled_unreachable' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.not_physical_isMortal_of_cancelled_unreachable' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.hasSynchronizedCancellationFreeInvariant_imp_components' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.hasSynchronizedCancellationFreeInvariant_imp_quotientCertificates' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.IsPrimitivePrimeDivisor.unit_orderOf_eq_exponent' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
@@ -433,6 +458,9 @@
  Quot.sound]
 'MatrixMortality.ReturnGuard.card_centerPowerOrbit' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.ReturnGuard.card_certifyingCenters' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ReturnGuard.hasCancellationFreeInvariant_iff_driftDivisorCertifies' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.ReturnGuard.hasQuotientCertificate_iff_driftDivisorCertifies' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]

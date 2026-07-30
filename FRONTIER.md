@@ -708,9 +708,8 @@ the radical.
 exact finite proof system. A primitive divisor `ℓ` of exponent `e` yields a transition automaton
 on `ℙ¹(𝔽ℓ)⊔{cancelled}` whose labels are the `e` wait residues. On an actual primitive integral
 step, `cancelled` is reached exactly when `ℓ` is swallowed by normalization; otherwise the
-automaton follows the reduced rational state. A closed invariant containing the reset but
-neither cancellation nor the terminal ray is therefore a complete certificate against
-primitive terminal executions.
+automaton follows the reduced rational state. A closed invariant containing the reset but not
+cancellation is therefore a complete certificate against primitive terminal executions.
 
 [`R32-S13`](SALVAGE.md#r32-s13-canonical-decoded-integral-lift) closes the normalization
 direction needed to apply those certificates to the physical pair. Canonical rational
@@ -751,6 +750,17 @@ has exactly `e` elements and the classifier accepts exactly `ℓ−e` center res
 primitive factors of small order kill most center classes, while `e=ℓ−1` leaves only the zero
 center class. The test is executable in Lean and the modulo-eleven example is accepted by it.
 
+[`R32-S15`](SALVAGE.md#r32-s15-finite-quotient-completeness) closes the missing global clause.
+The zero-residue transfer is the rank-one reset with covector `(A−L,D)`, so its kernel is
+exactly the terminal residual. Any invariant containing terminality therefore contains
+cancellation one step later. Safe certificate existence is precisely cancellation
+unreachability; terminal exclusion is redundant. This also kills ordinary synchronized
+multi-prime products: every joint invariant excluding cancellation in either coordinate
+projects to a cancellation-free invariant in each factor. A product cannot rescue any failed
+factor. Further local-global progress must model what happens *through* primitive
+renormalization, retaining swallowed-factor valuations instead of treating cancellation as an
+absorbing reject state.
+
 The surviving obligation is therefore a source theorem, or its negation: prove that this
 countably branched rational address system can simulate universal deterministic computation
 inside infinitely nested equal-depth resonance, or decide finite terminal-address membership by
@@ -765,7 +775,7 @@ selected wait, or rational affine-counter problem remains in this architecture.
 | Amalgamated valuation guard | Compile a universal deterministic source into the resonant tail recurrence, or decide that recurrence | Matrix mortality is already equivalent to one deterministic orbit, but its remaining arithmetic is not covered by known p-adic dynamics |
 | Irreducible cubic return pencil | Replace the split spectrum by a cubic companion action whose `2 × 2` return sequence has no fixed rail or target strip | A candidate still needs an internal low-rank return and an exact arbitrary-word normal form |
 | Multi-prime ReturnSquare | Extend the rational-root support and finite walls from prime powers to bases with several prime factors | Mixed prime support permits roots not confined to one valuation ray |
-| Local-global sieve | Prove completeness of generic primitive exact-order quotient certificates, or exhibit an orbit evading all of them | [`R32-S14`](SALVAGE.md#r32-s14-drift-divisor-certificate-classification) completely classifies parameter-divisor certificates; generic quotients can saturate and repeated cancellation remains |
+| Cancellation-aware local-global sieve | Build a finite quotient which resumes after primitive reduction, or prove that swallowed-factor memory is unbounded | [`R32-S15`](SALVAGE.md#r32-s15-finite-quotient-completeness) proves ordinary prime products cannot amplify certificates; all surviving arithmetic passes through cancellation |
 | Valuation and cone dynamics | Extend the signed-cone pullback or a `p`-adic invariant across the remaining middle strip or a new pencil | Cancellation at poles and between spectral modes destroys naive monotonicity |
 | Same-zero return surgery | Change nonzero return values while preserving the zero semigroup, thereby evading exact Hankel taxes | No general same-zero minimization theorem exists; every surgery needs its own arbitrary-product converse |
 | Exceptional reverse compiler | Absorb the finite `αβ=0` disjunction into one three-dimensional many-one instance | The generic all-path compiler is complete; dimension three has no evident OR operation |
