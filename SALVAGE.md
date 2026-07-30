@@ -94,6 +94,7 @@ file owns the mathematical stock.
 | [`R32-M05`](#r32-m05-cyclotomic-reset-or-cancellation-sieve) | partial mechanism | every primitive reduction either resets modulo a cyclotomic prime or swallows it in the common cancellation | formalized | active |
 | [`R32-S08`](#r32-s08-terminal-defect-cocycle) | structure theorem | terminal-defect coordinates expose a second-order denominator recurrence and separate fixed from novel cancellation | formalized | active |
 | [`R32-S09`](#r32-s09-complete-cancellation-law) | structure theorem | every base-coprime cancellation depth is the minimum of the terminal-defect and displacement depths | formalized | active |
+| [`R32-S10`](#r32-s10-logarithmic-wait-and-height-envelope) | structure theorem | legal waits are logarithmic in primitive height and every reduced step is uniformly height-Lipschitz | formalized | active |
 | [`M4-C01`](#m4-c01-two-state-pushout-compiler) | compiler | binary deterministic two-state scalar control compiles to three `4 × 4` matrices | formalized | graduated |
 | [`M4-O01`](#m4-o01-exact-toggle-fusion-leaves-an-immortal-core) | obstruction | exact local toggle fusion preserves a nonzero common anchor | formalized | graduated |
 | [`M4-O02`](#m4-o02-two-private-state-phase-signature) | obstruction | two private quotient states cannot isolate one exceptional cyclic phase | formalized | graduated |
@@ -2552,10 +2553,11 @@ No further common-factor mechanism exists away from the base prime. In particula
 determinant-support theorem is a consequence-level bound; the intersection law is the local
 normal form.
 
-**Scope:** the formula does not bound either valuation. At fixed parameter primes,
-`vℓ(m)` may carry unbounded state, while `vℓ(pᵃ−1)` varies with the wait. A finite-nucleus
-argument must analyze those valuation recurrences rather than treating fixed support as a
-bounded nuisance.
+**Scope:** the exact displacement valuation contains `vℓ(m)`, but this does not survive as an
+unbounded size contribution on primitive legal states. The determinant-support theorem bounds
+the attained cancellation by `vℓ(DL(pᵃ−1))`; [`R32-S10`](#r32-s10-logarithmic-wait-and-height-envelope)
+records the resulting logarithmic law. The source valuation still decides whether the bound is
+attained.
 
 **Artifact:** `ReturnGuard.integralStep_cancel_iff_terminalDefect_and_displacement` and
 `ReturnGuard.integralStep_commonFactor_padicValInt` in
@@ -2565,10 +2567,78 @@ bounded nuisance.
 recovers cyclotomic terminal shadowing; inside fixed support it isolates the exact valuation
 state that a normalization quotient must retain.
 
-**Next:** expand the displacement valuation by multiplicativity and apply lifting-the-exponent
-at each fixed prime. Determine whether the resulting finite vector of source valuations is
-piecewise affine, bounded on terminal-reaching paths, or capable of carrying an unbounded
-stack.
+**Next:** combine the exact attainment condition with the global logarithmic height envelope.
+The unresolved state is terminal congruence, not the magnitude of fixed-prime cancellation.
+
+### R32-S10: Logarithmic wait and height envelope
+
+**Kind:** structure theorem
+**Evidence:** formalized
+**Disposition:** active
+
+For a primitive integral source pair of height
+
+```text
+H(m,n)=max(|m|,|n|),
+```
+
+every base-coprime primitive-reduction factor satisfies
+
+```text
+|g| ≤ |DL| |pᵃ−1|.
+```
+
+Prime locally,
+
+```text
+vℓ(g) ≤ vℓ(D)+vℓ(L)+vℓ(pᵃ−1).
+```
+
+Thus the source term in the complete displacement formula affects attainment but not size. For
+an odd fixed prime `ℓ`, if `r` is any seed period with `ℓ ∣ pʳ−1`, lifting the exponent gives
+
+```text
+vℓ(p^(rk)−1)=vℓ(pʳ−1)+vℓ(k)
+            ≤vℓ(pʳ−1)+logℓ(k).
+```
+
+Lean proves the corresponding logarithmic bound at `ℓ=2`, separating odd and even multipliers
+through the two-adic lifting formula.
+
+The same integral recurrence has a uniform archimedean envelope. If the depth `s≥2` and the next
+numerator is nonzero, then
+
+```text
+a ≤ log_p((|A|+|D|+|L|)H(m,n)).
+```
+
+Before and after primitive reduction,
+
+```text
+H(m′,n′) ≤ (|A|+|D|+|L|)H(m,n).
+```
+
+The wait therefore grows at most logarithmically in current height, while height grows by at
+most one fixed factor per transition. Along an orbit, waits can grow at most linearly in elapsed
+steps.
+
+**Scope:** this is not a finite nucleus. Linear wait growth and exponential height growth remain
+ample enough for counter-like computation. The theorems bound cancellation and scale but do not
+decide the terminal congruences that select a rational inverse address.
+
+**Artifact:** `ReturnGuard.integralStep_commonFactor_padicValInt_le_support`,
+`integralStep_commonFactor_natAbs_le_support`, `padicValNat_pow_mul_sub_one_le`,
+`padicValNat_two_pow_mul_sub_one_le`, `integralStep_wait_le_log_height`, and
+`integralStep_reduced_height_le` in
+[`ReturnGuardValuation.lean`](MatrixMortality/ReturnGuardValuation.lean).
+
+**Use:** exclude any universality proposal requiring one step to generate a superlinear clock or
+super-Lipschitz rational height. For a decision proof, combine the envelope with terminal-defect
+congruence to seek a finite set of recurrent projective residues.
+
+**Next:** derive an iterated terminal-defect height or finite-quotient recurrence that uses the
+linear wait bound. Conversely, construct a legal rational orbit whose terminal congruences
+saturate that envelope and encode an unbounded counter.
 
 ## Three-Generator Four-State Frontier
 

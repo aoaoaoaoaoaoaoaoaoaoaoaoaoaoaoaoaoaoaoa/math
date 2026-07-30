@@ -671,9 +671,22 @@ min(vℓ(T(m,n)), vℓ(L(1−pᵃ)m)).
 
 Fixed and novel cancellation are not separate algebraic phenomena: both are the intersection of
 the terminal divisor with one displacement divisor. The distinction is dynamical. Outside fixed
-support the displacement valuation is cyclotomic; at fixed primes it can also inherit unbounded
-valuation from the source numerator. The local-global lane must therefore control a finite
-vector of fixed-prime source valuations, not merely remove a constant `S`-unit factor.
+support the displacement valuation is cyclotomic; at fixed primes it can also contain source
+valuation. On a primitive source, however, determinant support bounds the cancellation actually
+attained by `vℓ(DL(pᵃ−1))`.
+
+[`R32-S10`](SALVAGE.md#r32-s10-logarithmic-wait-and-height-envelope) makes that bound effective.
+Lifting the exponent proves logarithmic wait dependence at every fixed prime, including the
+two-adic case. Globally, `|g|≤|DL||pᵃ−1|`. More importantly, a nonzero legal step obeys
+
+```text
+a ≤ log_p((|A|+|D|+|L|)H),
+H′ ≤ (|A|+|D|+|L|)H.
+```
+
+Thus waits grow at most linearly with orbit time. This removes superlinear clock amplification
+as a universality mechanism, but it does not yield a finite state space: exponential height and
+linear counter growth remain possible.
 
 The surviving obligation is therefore a source theorem, or its negation: prove that this
 countably branched rational address system can simulate universal deterministic computation
@@ -689,7 +702,7 @@ selected wait, or rational affine-counter problem remains in this architecture.
 | Amalgamated valuation guard | Compile a universal deterministic source into the resonant tail recurrence, or decide that recurrence | Matrix mortality is already equivalent to one deterministic orbit, but its remaining arithmetic is not covered by known p-adic dynamics |
 | Irreducible cubic return pencil | Replace the split spectrum by a cubic companion action whose `2 × 2` return sequence has no fixed rail or target strip | A candidate still needs an internal low-rank return and an exact arbitrary-word normal form |
 | Multi-prime ReturnSquare | Extend the rational-root support and finite walls from prime powers to bases with several prime factors | Mixed prime support permits roots not confined to one valuation ray |
-| Local-global sieve | Control the fixed-prime valuation state and repeated cyclotomic terminal congruence | [`R32-S09`](SALVAGE.md#r32-s09-complete-cancellation-law) gives the exact local valuation law; no bound on the inherited source valuations is known |
+| Local-global sieve | Convert logarithmic waits and terminal congruence into a finite recurrent residue set | [`R32-S10`](SALVAGE.md#r32-s10-logarithmic-wait-and-height-envelope) bounds cancellation, wait, and one-step height, but exponential orbit height remains |
 | Valuation and cone dynamics | Extend the signed-cone pullback or a `p`-adic invariant across the remaining middle strip or a new pencil | Cancellation at poles and between spectral modes destroys naive monotonicity |
 | Same-zero return surgery | Change nonzero return values while preserving the zero semigroup, thereby evading exact Hankel taxes | No general same-zero minimization theorem exists; every surgery needs its own arbitrary-product converse |
 | Exceptional reverse compiler | Absorb the finite `αβ=0` disjunction into one three-dimensional many-one instance | The generic all-path compiler is complete; dimension three has no evident OR operation |

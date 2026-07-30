@@ -371,6 +371,21 @@
 'MatrixMortality.ReturnGuard.integralStep_commonFactor_padicValInt' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.ReturnGuard.integralStep_commonFactor_padicValInt_expanded' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.integralStep_commonFactor_padicValInt_le_support' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.integralStep_commonFactor_natAbs_le_support' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.padicValNat_pow_mul_sub_one_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ReturnGuard.padicValNat_two_pow_mul_sub_one_le' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.integralStep_wait_le_log_height' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ReturnGuard.integralStep_reduced_height_le' depends on axioms: [propext]
 'MatrixMortality.ReturnGuard.integralStep_cyclotomic_dvd_numerator_iff_terminalDefect' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
