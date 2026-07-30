@@ -858,6 +858,25 @@ question is whether a renormalized weighted coordinate or finite higher jet make
 escape digit integral at every stage, or whether the accumulating ray precision forces every
 infinite compatible lift outside `ℚ²`.
 
+[`R32-S24`](SALVAGE.md#r32-s24-renormalized-parameter-jet) supplies that renormalization. An
+integrating factor `q' = −Cq` turns the exploding gradient into an additive mass/reset jet:
+
+```text
+j' = j + (1,H)/q'.
+```
+
+The increments have exact and increasing positive valuation. The normalized exterior defect
+
+```text
+κ = (H(g₀+g₁)−g₁)/q
+```
+
+is conserved through the stage carrying `H`; changing the next payload adds only
+`(H'−H)j₀'`. Thus the higher jet closes in fixed rational dimension. It does not close in a
+fixed unit annulus. For every `N>0`, an explicit unit tail makes `κ` have exact value `N`, and
+constant-stage iteration preserves that depth forever. Renormalization removes the false
+explosion but exposes an unbounded transverse-depth coordinate.
+
 The surviving obligation is therefore a source theorem, or its negation: prove that this
 countably branched rational address system can simulate universal deterministic computation
 inside infinitely nested equal-depth resonance, or decide finite terminal-address membership by
@@ -872,18 +891,19 @@ selected wait, or rational affine-counter problem remains in this architecture.
 | Amalgamated valuation guard | Compile a universal deterministic source into the resonant tail recurrence, or decide that recurrence | Matrix mortality is already equivalent to one deterministic orbit, but its remaining arithmetic is not covered by known p-adic dynamics |
 | Irreducible cubic return pencil | Replace the split spectrum by a cubic companion action whose `2 × 2` return sequence has no fixed rail or target strip | A candidate still needs an internal low-rank return and an exact arbitrary-word normal form |
 | Multi-prime ReturnSquare | Extend the rational-root support and finite walls from prime powers to bases with several prime factors | Mixed prime support permits roots not confined to one valuation ray |
-| Cancellation-aware local-global sieve | Derive the multi-step weight recurrence for affine escape digits and decide whether a renormalized higher jet stays integral | [`R32-S23`](SALVAGE.md#r32-s23-anisotropic-parameter-ray) proves that sensitivity rays freeze at increasing p-adic precision; one full weighted cylinder survives three waits, but arbitrary-prefix iteration is open |
+| Cancellation-aware local-global sieve | Control the variable-payload defect recurrence and decide whether rational guards have bounded or eventually periodic transverse depth | [`R32-S24`](SALVAGE.md#r32-s24-renormalized-parameter-jet) gives a fixed-dimensional additive jet but proves that its transverse defect can begin at any prescribed depth |
 | Valuation and cone dynamics | Extend the signed-cone pullback or a `p`-adic invariant across the remaining middle strip or a new pencil | Cancellation at poles and between spectral modes destroys naive monotonicity |
 | Same-zero return surgery | Change nonzero return values while preserving the zero semigroup, thereby evading exact Hankel taxes | No general same-zero minimization theorem exists; every surgery needs its own arbitrary-product converse |
 | Exceptional reverse compiler | Absorb the finite `αβ=0` disjunction into one three-dimensional many-one instance | The generic all-path compiler is complete; dimension three has no evident OR operation |
 
-The highest-value lunge is now the weighted parameter inverse limit. The matrix compiler,
-all-word converse, wait decoder, rational address grammar, and local blow-up are complete;
-nonresonant dynamics, rational affine counter rails, ordinary quotient products, and uniform
-unweighted first-order lifting are closed. The next useful mathematics is the transport law for
-the anisotropic affine digit itself: either renormalize the frozen sensitivity ray into an
-iteration-ready integral cocycle, or prove that every infinite compatible parameter pair is
-strictly profinite and hence cannot define the rational guard required by mortality.
+The highest-value lunge is now the variable-payload defect orbit. The matrix compiler, all-word
+converse, wait decoder, rational address grammar, local blow-up, and integrating-factor
+renormalization are complete; nonresonant dynamics, rational affine counter rails, ordinary
+quotient products, uniform unweighted lifting, and a uniform transverse unit annulus are closed.
+The next useful mathematics is the weighted Cramer digit driven by
+`κ' = κ+(H'−H)j₀'`: either prove rational parameters force bounded or eventually periodic defect
+depth, or construct one canonical rational orbit whose unbounded depth realizes an infinite
+compatible collision ladder.
 
 The strategic boundary is now clear. The easy layer consisted of finding and repairing missing
 finite compilers. `M₃(2)` asks whether one low-dimensional recurrence family can store

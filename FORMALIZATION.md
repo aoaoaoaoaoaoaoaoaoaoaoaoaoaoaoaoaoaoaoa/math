@@ -460,6 +460,7 @@ with a complete arbitrary-word converse.
 | `ReturnGuardParameterPlaneExamples.lean` | reset-only resurrection of a center cylinder killed by the one-parameter obstruction |
 | `ReturnGuardParameterLattice.lean` | exact anisotropic sensitivity valuations and p-adic freezing of the projective parameter ray |
 | `ReturnGuardParameterLatticeExamples.lean` | full center/reset congruence cylinder with the common legal wait prefix `1,3,1` |
+| `ReturnGuardParameterJet.lean` | integrating-factor normal form, conserved normalized transverse defect, and arbitrary-depth defect witnesses |
 | `ReturnGuardResonance.lean` | nonresonant descent, resonance localization, and corrected nested readiness |
 | `ReturnGuardRail.lean` | polynomial divisibility and rational affine-wait rail obstruction |
 | `ReturnGuardExamples.lean` | concrete mortal pair, nonterminal fixed point, and nested rational period-three orbit |

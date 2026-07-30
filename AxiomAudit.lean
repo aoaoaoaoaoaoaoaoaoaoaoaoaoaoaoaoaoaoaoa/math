@@ -301,6 +301,16 @@ open MatrixMortality
 #print axioms ReturnGuard.parameterGradientRay_step_isPositive
 #print axioms ReturnGuard.Examples.weightedEscape_threeStepPrefix
 #print axioms ReturnGuard.Examples.weightedEscape_zero_eq_resetEscape
+#print axioms ReturnGuard.sensitivityScaleStep_hasValue
+#print axioms ReturnGuard.renormalizedParameterGradient_step
+#print axioms ReturnGuard.renormalizedParameterGradient_step_displacement_hasValue
+#print axioms ReturnGuard.renormalizedTransverseDefect_step
+#print axioms ReturnGuard.renormalizedTransverseDefect_nextPayload
+#print axioms ReturnGuard.renormalizedTransverseDefect_orbit
+#print axioms ReturnGuard.sensitivityScaleOrbit_hasValue
+#print axioms ReturnGuard.prescribedTransverseDepthTail_isUnit
+#print axioms ReturnGuard.prescribedTransverseDepth_hasValue
+#print axioms ReturnGuard.prescribedTransverseDepth_orbit_hasValue
 #print axioms ReturnGuard.commonDivisor_dvd_det
 #print axioms ReturnGuard.integralStep_commonDivisor_dvd_cyclotomicSupport
 #print axioms ReturnGuard.integralStep_cyclotomic_reset_or_cancel

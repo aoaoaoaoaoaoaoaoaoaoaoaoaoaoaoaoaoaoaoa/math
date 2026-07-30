@@ -108,6 +108,7 @@ file owns the mathematical stock.
 | [`R32-S21`](#r32-s21-sensitivity-cocycle-and-anti-hensel-compatibility) | structure theorem and obstruction | negative center sensitivity transports exactly, but incidence extends an annular prefix iff one cross-determinant survives | formalized | active |
 | [`R32-S22`](#r32-s22-two-parameter-annular-escape) | partial mechanism | center/reset sensitivities form a two-dimensional affine cocycle whose transverse digits discharge the anti-Hensel conflict | formalized | active |
 | [`R32-S23`](#r32-s23-anisotropic-parameter-ray) | structure theorem and obstruction | parameter magnitude explodes while its projective direction freezes at an explicit p-adic rate; one full anisotropic cylinder retains waits `1,3,1` | formalized | active |
+| [`R32-S24`](#r32-s24-renormalized-parameter-jet) | structure theorem and obstruction | an exact integrating factor turns gradient growth into a convergent additive jet, but its conserved transverse defect has arbitrarily large prescribed depth | formalized | active |
 | [`M4-C01`](#m4-c01-two-state-pushout-compiler) | compiler | binary deterministic two-state scalar control compiles to three `4 × 4` matrices | formalized | graduated |
 | [`M4-O01`](#m4-o01-exact-toggle-fusion-leaves-an-immortal-core) | obstruction | exact local toggle fusion preserves a nonzero common anchor | formalized | graduated |
 | [`M4-O02`](#m4-o02-two-private-state-phase-signature) | obstruction | two private quotient states cannot isolate one exceptional cyclic phase | formalized | graduated |
@@ -3556,6 +3557,87 @@ unweighted two-digit Hensel step is now excluded.
 whether the frozen ray forces compatible digits into a strictly profinite, nonrational inverse
 limit, or whether a renormalized higher jet restores a uniformly integral transverse
 coordinate.
+
+### R32-S24: Renormalized parameter jet
+
+**Kind:** structure theorem and obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+The singular sensitivity cocycle admits an exact integrating factor. Write
+
+```text
+g' = (1−H,H) − Cg,
+q' = −Cq.
+```
+
+In mass/reset coordinates, the renormalized jet
+
+```text
+j(q,g) = ((g₀+g₁)/q, g₁/q)
+```
+
+obeys the additive law
+
+```text
+j(q',g') = j(q,g) + (1,H)/q'.
+```
+
+If `q` has value `v`, then `q'` has value `v−sa`, and both jet increments have exact value
+`sa−v`. Thus the raw exploding gradient is a scalar artifact: after renormalization, the
+two-coordinate jet is p-adically Cauchy along any constant legal stage.
+
+The correct transverse coordinate is
+
+```text
+κ(H,q,g) = (H(g₀+g₁)−g₁)/q.
+```
+
+It is the raw consecutive exterior product divided by `q`, and is exactly conserved through
+the stage carrying payload `H`. For a subsequent payload `H'`,
+
+```text
+κ(H',q',g') = κ(H,q,g) + (H'−H) · j(q',g')₀.
+```
+
+This is a fixed-dimensional recurrence. It isolates the only source of new transverse
+information: change of legal payload, not singular sensitivity transport.
+
+Uniform unit transversality nevertheless fails maximally. For every prime, positive `s,a`,
+and every positive depth `N`, the unit tail
+
+```text
+X_N = (1+p^N−p^(sa))/(p^a−1)
+```
+
+makes `H=1+p^N`. At the reset gradient `(0,1)` and scale one, `κ=p^N`; the normalized
+transverse defect therefore has exact value `N`. This value persists through arbitrarily many
+iterations of that constant stage. No fixed annulus, bounded precision tax, or finite
+equal-precision parameter basis can contain every transverse lift.
+
+**Scope:** the integrating-factor identities and valuation laws are exact over `ℚ`; the
+arbitrary-depth family works for every prime and every positive depth and wait. Constant-stage
+iteration is an algebraic sensitivity statement, not a claim that one guarded orbit repeats
+the same tail. The result does not decide whether variable payloads force a rational
+eventually periodic defect orbit or synthesize a nonrational inverse limit.
+
+**Artifact:** `ReturnGuard.renormalizedParameterGradient_step`,
+`renormalizedParameterGradient_step_displacement_hasValue`,
+`renormalizedTransverseDefect_step`, `renormalizedTransverseDefect_nextPayload`,
+`renormalizedTransverseDefect_orbit`, `sensitivityScaleOrbit_hasValue`,
+`prescribedTransverseDepthTail_isUnit`, and
+`prescribedTransverseDepth_orbit_hasValue` in
+[`ReturnGuardParameterJet.lean`](MatrixMortality/ReturnGuardParameterJet.lean).
+
+**Use:** replace raw parameter gradients by the integrating factor `q` and normalized jet
+`j`. Track `κ` as the first genuine higher-order datum. Any uniform lifting theorem must
+control the payload-difference forcing term; any decision theorem may instead exploit that
+arbitrary depth is possible only through exact rational cancellations in this one scalar
+recurrence.
+
+**Next:** derive the variable-payload multi-step sum for `κ` and the induced weighted Cramer
+digit. Decide whether rational guard parameters force the sequence of defect depths to be
+eventually periodic, or construct a canonical orbit with unbounded defect depth.
 
 ## Three-Generator Four-State Frontier
 
