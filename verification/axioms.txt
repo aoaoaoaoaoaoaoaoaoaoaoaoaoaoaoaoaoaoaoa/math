@@ -562,6 +562,31 @@
  Quot.sound]
 'MatrixMortality.ReturnGuard.Examples.deadLift_twoStepPrefix' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.ReturnGuard.Examples.deadLift_noThirdStep' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ReturnGuard.integralResidualTransfer_centerReset_add_mulVec' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.integralResidualTransfer_centerReset_factor' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.planeSolveDigit_spec' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ReturnGuard.affinePlaneValue_isUnit_add_of_positive' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.readyLegalValue_reset_hasDerivAt' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.planeCross_parameterGradientStep' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.exists_planeDigit_hits_parameterGradientStep_and_preserves' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.Examples.resetEscape_threeStepPrefix' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.Examples.resetEscape_strictly_extends_deadCenter' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.ReturnGuard.commonDivisor_dvd_det' depends on axioms: [propext, Quot.sound]
 'MatrixMortality.ReturnGuard.integralStep_commonDivisor_dvd_cyclotomicSupport' depends on axioms: [propext,
  Classical.choice,

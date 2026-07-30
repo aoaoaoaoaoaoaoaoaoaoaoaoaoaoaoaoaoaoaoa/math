@@ -282,6 +282,15 @@ open MatrixMortality
 #print axioms ReturnGuard.no_incidenceDigit_preserves_of_liftCompatibility_eq_zero
 #print axioms ReturnGuard.Examples.deadLift_twoStepPrefix
 #print axioms ReturnGuard.Examples.deadLift_noThirdStep
+#print axioms ReturnGuard.integralResidualTransfer_centerReset_add_mulVec
+#print axioms ReturnGuard.integralResidualTransfer_centerReset_factor
+#print axioms ReturnGuard.planeSolveDigit_spec
+#print axioms ReturnGuard.affinePlaneValue_isUnit_add_of_positive
+#print axioms ReturnGuard.readyLegalValue_reset_hasDerivAt
+#print axioms ReturnGuard.planeCross_parameterGradientStep
+#print axioms ReturnGuard.exists_planeDigit_hits_parameterGradientStep_and_preserves
+#print axioms ReturnGuard.Examples.resetEscape_threeStepPrefix
+#print axioms ReturnGuard.Examples.resetEscape_strictly_extends_deadCenter
 #print axioms ReturnGuard.commonDivisor_dvd_det
 #print axioms ReturnGuard.integralStep_commonDivisor_dvd_cyclotomicSupport
 #print axioms ReturnGuard.integralStep_cyclotomic_reset_or_cancel

@@ -829,9 +829,20 @@ The prescribed alternating `1/2, 3/13` computation reinforces the distinction. E
 finds one compatible digit at every stage through collision twenty-five and none at collision
 twenty-six. This bounded result is computational, but its failure mode is the formal
 anti-Hensel obstruction rather than a search limit. The fixed alternating induction is dead.
-The live question is whether an adaptive wait/factor schedule can keep every annular
-compatibility determinant nonzero, or whether their transport yields an effective
-per-instance bound.
+
+[`R32-S22`](SALVAGE.md#r32-s22-two-parameter-annular-escape) reopens the synthesis problem in
+its full parameter space. Center and reset sensitivities form a two-vector whose legal update
+is an affine rank-one recurrence. The exterior product with its successor cancels the singular
+transport term and equals one explicit scalar. Whenever that scalar is nonzero, a unique
+center/reset digit pair imposes the new incidence and normalizes the active old annulus to one;
+later positive-depth refinements preserve the discharged unit. This is not merely formal
+freedom: the center `998` dies after waits `1,3` at reset `−168`, while moving only the reset by
+`3⁸` yields the legal prefix `1,3,1`.
+
+The live question is now anisotropic. One must transport the two parameter sensitivities with
+their exact `p`-adic scales and prove that the transverse affine solution lies in the next
+center/reset refinement lattice, or expose a higher-jet obstruction. First-order compatibility
+does not grow with prefix length once old shells are discharged; arithmetic precision may.
 
 The surviving obligation is therefore a source theorem, or its negation: prove that this
 countably branched rational address system can simulate universal deterministic computation
@@ -847,7 +858,7 @@ selected wait, or rational affine-counter problem remains in this architecture.
 | Amalgamated valuation guard | Compile a universal deterministic source into the resonant tail recurrence, or decide that recurrence | Matrix mortality is already equivalent to one deterministic orbit, but its remaining arithmetic is not covered by known p-adic dynamics |
 | Irreducible cubic return pencil | Replace the split spectrum by a cubic companion action whose `2 × 2` return sequence has no fixed rail or target strip | A candidate still needs an internal low-rank return and an exact arbitrary-word normal form |
 | Multi-prime ReturnSquare | Extend the rational-root support and finite walls from prime powers to bases with several prime factors | Mixed prime support permits roots not confined to one valuation ray |
-| Cancellation-aware local-global sieve | Bound novel localized collisions for each fixed guard, or synthesize canonical prefixes of arbitrary length | [`R32-S21`](SALVAGE.md#r32-s21-sensitivity-cocycle-and-anti-hensel-compatibility) proves visibility persists but prefix extension additionally requires a nonzero annular cross-determinant; the fixed alternating schedule dies at collision twenty-six |
+| Cancellation-aware local-global sieve | Prove an anisotropic two-parameter lift for arbitrary finite collision prefixes, or derive its first unavoidable higher-jet obstruction | [`R32-S22`](SALVAGE.md#r32-s22-two-parameter-annular-escape) discharges the one-parameter anti-Hensel conflict whenever successive sensitivity vectors are transverse, but integrality at the required center/reset precisions is open |
 | Valuation and cone dynamics | Extend the signed-cone pullback or a `p`-adic invariant across the remaining middle strip or a new pencil | Cancellation at poles and between spectral modes destroys naive monotonicity |
 | Same-zero return surgery | Change nonzero return values while preserving the zero semigroup, thereby evading exact Hankel taxes | No general same-zero minimization theorem exists; every surgery needs its own arbitrary-product converse |
 | Exceptional reverse compiler | Absorb the finite `αβ=0` disjunction into one three-dimensional many-one instance | The generic all-path compiler is complete; dimension three has no evident OR operation |

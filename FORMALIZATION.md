@@ -456,6 +456,8 @@ with a complete arbitrary-word converse.
 | `ReturnGuardSensitivity.lean` | total center derivative and exact p-adic sensitivity transport |
 | `ReturnGuardAntiHensel.lean` | annular incidence compatibility determinant and complete one-digit obstruction |
 | `ReturnGuardAntiHenselExamples.lean` | a full center congruence cylinder with a common two-step prefix and no third step |
+| `ReturnGuardParameterPlane.lean` | exact center/reset perturbation plane, affine escape solver, shell discharge, and exterior sensitivity cocycle |
+| `ReturnGuardParameterPlaneExamples.lean` | reset-only resurrection of a center cylinder killed by the one-parameter obstruction |
 | `ReturnGuardResonance.lean` | nonresonant descent, resonance localization, and corrected nested readiness |
 | `ReturnGuardRail.lean` | polynomial divisibility and rational affine-wait rail obstruction |
 | `ReturnGuardExamples.lean` | concrete mortal pair, nonterminal fixed point, and nested rational period-three orbit |

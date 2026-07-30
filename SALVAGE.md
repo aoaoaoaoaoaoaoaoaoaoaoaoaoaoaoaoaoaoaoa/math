@@ -106,6 +106,7 @@ file owns the mathematical stock.
 | [`R32-S19`](#r32-s19-canonical-cyclotomic-collision-ladders) | structure theorem and obstruction | tangent content is exactly multiplicative, yet one canonical reset orbit can swallow four successive novel cyclotomic factors | formalized | active |
 | [`R32-S20`](#r32-s20-center-drift-parameter-lifting) | partial mechanism | fixed-reset center perturbations move every reduced exit on one affine line, with a unique visible incidence digit | formalized | active |
 | [`R32-S21`](#r32-s21-sensitivity-cocycle-and-anti-hensel-compatibility) | structure theorem and obstruction | negative center sensitivity transports exactly, but incidence extends an annular prefix iff one cross-determinant survives | formalized | active |
+| [`R32-S22`](#r32-s22-two-parameter-annular-escape) | partial mechanism | center/reset sensitivities form a two-dimensional affine cocycle whose transverse digits discharge the anti-Hensel conflict | formalized | active |
 | [`M4-C01`](#m4-c01-two-state-pushout-compiler) | compiler | binary deterministic two-state scalar control compiles to three `4 × 4` matrices | formalized | graduated |
 | [`M4-O01`](#m4-o01-exact-toggle-fusion-leaves-an-immortal-core) | obstruction | exact local toggle fusion preserves a nonzero common anchor | formalized | graduated |
 | [`M4-O02`](#m4-o02-two-private-state-phase-signature) | obstruction | two private quotient states cannot isolate one exceptional cyclic phase | formalized | graduated |
@@ -3417,6 +3418,70 @@ active valuation shells.
 
 **Next:** derive the determinant transport under one guard step. Test whether its finite residue
 state admits an adaptive infinite path or yields a well-founded obstruction.
+
+### R32-S22: Two-parameter annular escape
+
+**Kind:** partial mechanism
+**Evidence:** formalized
+**Disposition:** active
+
+The guard has two arithmetic parameters. Perturbing center by `ε` and reset by `η` changes the
+drift by `η−ε`. On a homogeneous residual source `(m,n)`, the exact transfer displacement is
+
+```text
+(ε(m−n)+ηn)·(1,p^(sa)).
+```
+
+Thus the one-parameter tangent of `R32-S20` is the restriction of a parameter-plane map. At
+first order, write the center/reset sensitivity as `g=(g₀,g₁)`. One legal step has the affine
+rank-one recurrence
+
+```text
+g' = (1−H,H) − Cg,
+```
+
+where `H` is the legal payload and `C` is the singular tail multiplier. Its exterior product
+with the incoming sensitivity is
+
+```text
+g∧g' = H(g₀+g₁)−g₁.
+```
+
+The singular transported term disappears. When this scalar is nonzero, the old and new affine
+conditions span the parameter plane. There is then one exact digit pair which makes the new
+incidence zero while normalizing the old annular coefficient to one. Later refinements whose
+old-gradient increment has positive `p`-adic value preserve that unit automatically. Discharged
+historical shells therefore do not force an ever-growing first-order state; the active
+obstruction is transversality together with the anisotropic valuation of the next digit pair.
+
+The escape occurs in the guard family. At center `998`, reset `−168` admits waits `1,3` and no
+third step by `R32-S21`. Keeping the center and changing reset by `3⁸` gives reset `6393` and
+the legal wait prefix `1,3,1`. This is an exact Lean witness that the dead center cylinder was
+codimension one rather than a terminal obstruction to two-parameter synthesis.
+
+**Scope:** the transfer identity, affine-plane solver, sensitivity recurrence, exterior
+transport, shell-discharge law, and three-step witness are exact. They do not prove that the
+required digit pair is integral in the next anisotropic parameter lattice, that transversality
+persists indefinitely, or that one rational parameter pair realizes an infinite ladder.
+
+**Artifact:** `ReturnGuard.integralResidualTransfer_centerReset_add_mulVec`,
+`planeSolveDigit_spec`, `affinePlaneValue_isUnit_add_of_positive`,
+`readyLegalValue_reset_hasDerivAt`, `planeCross_parameterGradientStep`, and
+`exists_planeDigit_hits_parameterGradientStep_and_preserves` in
+[`ReturnGuardParameterPlane.lean`](MatrixMortality/ReturnGuardParameterPlane.lean);
+`ReturnGuard.Examples.resetEscape_threeStepPrefix` and
+`resetEscape_strictly_extends_deadCenter` in
+[`ReturnGuardParameterPlaneExamples.lean`](MatrixMortality/ReturnGuardParameterPlaneExamples.lean).
+
+**Use:** search in the full center/reset lattice. Carry only the active two-vector sensitivity
+and its normalized annulus; discharge older shells by positive-depth stability. Treat
+vanishing of `H(g₀+g₁)−g₁` as the first-order obstruction and nonintegrality of the affine
+solver as a distinct arithmetic obstruction.
+
+**Next:** derive the anisotropic valuation transport of both sensitivity coordinates and their
+exterior product. Determine whether every transverse rational escape digit can be represented
+at the precision which preserves all discharged shells, or exhibit the first unavoidable
+higher-jet obstruction.
 
 ## Three-Generator Four-State Frontier
 
