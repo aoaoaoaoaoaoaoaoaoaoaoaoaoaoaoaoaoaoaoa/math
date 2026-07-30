@@ -35,9 +35,11 @@ import MatrixMortality.ReturnGuardIntegralLift
 import MatrixMortality.ReturnGuardQuotientCompleteness
 import MatrixMortality.ReturnGuardDriftCertificate
 import MatrixMortality.ReturnGuardCocycle
+import MatrixMortality.ReturnGuardTangent
 import MatrixMortality.ReturnGuardResonance
 import MatrixMortality.ReturnGuardRail
 import MatrixMortality.ReturnGuardExamples
+import MatrixMortality.ReturnGuardTangentExamples
 import MatrixMortality.ReturnGuardQuotientExamples
 
 /- Finite-controller amalgamation. -/

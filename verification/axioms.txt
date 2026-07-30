@@ -493,6 +493,20 @@
 'MatrixMortality.ReturnGuard.integralStepNumerator_eq_terminalDefect_add' depends on axioms: [propext, Quot.sound]
 'MatrixMortality.ReturnGuard.integralStep_terminalDefect' depends on axioms: [propext, Quot.sound]
 'MatrixMortality.ReturnGuard.reducedDenominator_recurrence' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.ReturnGuard.tangentTransfer_of_consecutive_reduction' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.tangentTransfer_det' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ReturnGuard.cancellationTangent_isCoprime_of_base' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.tangent_reductionFactor_dvd_support' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.ReturnGuard.tangent_novelDivisor_dvd_cyclotomic' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.tangentTransfer_mod_eq_zero_iff_terminal' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.ReturnGuard.commonDivisor_dvd_det' depends on axioms: [propext, Quot.sound]
 'MatrixMortality.ReturnGuard.integralStep_commonDivisor_dvd_cyclotomicSupport' depends on axioms: [propext,
  Classical.choice,
@@ -527,6 +541,11 @@
 'MatrixMortality.ReturnGuard.Examples.cycle_integral_step_two' depends on axioms: [propext, Quot.sound]
 'MatrixMortality.ReturnGuard.Examples.cycle_integral_reductions' depends on axioms: [propext, Quot.sound]
 'MatrixMortality.ReturnGuard.Examples.cycle_commonFactors_dvd_fixedSupport' depends on axioms: [propext]
+'MatrixMortality.ReturnGuard.Examples.cycle_tangent_step_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.Examples.cycle_tangent_step_one' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ReturnGuard.Examples.cycle_tangent_step_two' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.ReturnGuard.Examples.cycle_no_primitive_integral_terminal_execution' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]

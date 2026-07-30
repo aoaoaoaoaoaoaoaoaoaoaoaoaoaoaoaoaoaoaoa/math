@@ -449,9 +449,11 @@ with a complete arbitrary-word converse.
 | `ReturnGuardCancellationJet.lean` | primitive-cancellation blow-up, three projective exits, fixed-jet obstruction, and unbounded-depth integral witnesses |
 | `ReturnGuardDriftCertificate.lean` | exact drift-divisor certificate classification, cyclic subgroup criterion, and executable finite test |
 | `ReturnGuardCocycle.lean` | terminal-defect transport and the reduced second-order denominator recurrence |
+| `ReturnGuardTangent.lean` | exact primitive-cancellation tangent cocycle, determinant support, recursive cyclotomic gate, and finite-field kernel line |
 | `ReturnGuardResonance.lean` | nonresonant descent, resonance localization, and corrected nested readiness |
 | `ReturnGuardRail.lean` | polynomial divisibility and rational affine-wait rail obstruction |
 | `ReturnGuardExamples.lean` | concrete mortal pair, nonterminal fixed point, and nested rational period-three orbit |
+| `ReturnGuardTangentExamples.lean` | projective tangent three-cycle carried by the canonical rational survivor |
 | `ReturnGuardQuotientExamples.lean` | four-state modulo-eleven certificate excluding every primitive terminal execution of the period-three guard |
 | `BinaryDefect.lean` | binary two-word defect theorem and exact Neary macro obstruction |
 | `CHHNPacking.lean` | generic two-slot CHHN packing and six-state finite-Hankel kernels |

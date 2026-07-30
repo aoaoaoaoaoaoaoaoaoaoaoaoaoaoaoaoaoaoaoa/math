@@ -253,6 +253,12 @@ open MatrixMortality
 #print axioms ReturnGuard.integralStepNumerator_eq_terminalDefect_add
 #print axioms ReturnGuard.integralStep_terminalDefect
 #print axioms ReturnGuard.reducedDenominator_recurrence
+#print axioms ReturnGuard.tangentTransfer_of_consecutive_reduction
+#print axioms ReturnGuard.tangentTransfer_det
+#print axioms ReturnGuard.cancellationTangent_isCoprime_of_base
+#print axioms ReturnGuard.tangent_reductionFactor_dvd_support
+#print axioms ReturnGuard.tangent_novelDivisor_dvd_cyclotomic
+#print axioms ReturnGuard.tangentTransfer_mod_eq_zero_iff_terminal
 #print axioms ReturnGuard.commonDivisor_dvd_det
 #print axioms ReturnGuard.integralStep_commonDivisor_dvd_cyclotomicSupport
 #print axioms ReturnGuard.integralStep_cyclotomic_reset_or_cancel
@@ -273,6 +279,9 @@ open MatrixMortality
 #print axioms ReturnGuard.Examples.cycle_integral_step_two
 #print axioms ReturnGuard.Examples.cycle_integral_reductions
 #print axioms ReturnGuard.Examples.cycle_commonFactors_dvd_fixedSupport
+#print axioms ReturnGuard.Examples.cycle_tangent_step_zero
+#print axioms ReturnGuard.Examples.cycle_tangent_step_one
+#print axioms ReturnGuard.Examples.cycle_tangent_step_two
 #print axioms ReturnGuard.Examples.cycle_no_primitive_integral_terminal_execution
 #print axioms ReturnGuard.Examples.cycle_driftDivisorCertifies
 #print axioms ReturnGuard.Examples.cycle_not_physical_isMortal_by_quotient

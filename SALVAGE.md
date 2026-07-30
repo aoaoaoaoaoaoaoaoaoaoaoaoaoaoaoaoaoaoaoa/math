@@ -101,6 +101,7 @@ file owns the mathematical stock.
 | [`R32-S14`](#r32-s14-drift-divisor-certificate-classification) | decidable stratum | drift-divisor certificates are exactly finite cyclic-orbit avoidance | formalized | active |
 | [`R32-S15`](#r32-s15-finite-quotient-completeness) | obstruction | terminal exclusion is cancellation exclusion; synchronized prime products cannot amplify certificates | formalized | active |
 | [`R32-S16`](#r32-s16-cancellation-blow-up-and-unbounded-depth) | obstruction | primitive cancellation is a surjective projective blow-up with no uniform finite-jet bound | formalized | active |
+| [`R32-S17`](#r32-s17-normalized-tangent-cocycle) | structure theorem | consecutive primitive reductions form a recursive two-dimensional tangent cocycle with exact cyclotomic support | formalized | active |
 | [`M4-C01`](#m4-c01-two-state-pushout-compiler) | compiler | binary deterministic two-state scalar control compiles to three `4 × 4` matrices | formalized | graduated |
 | [`M4-O01`](#m4-o01-exact-toggle-fusion-leaves-an-immortal-core) | obstruction | exact local toggle fusion preserves a nonzero common anchor | formalized | graduated |
 | [`M4-O02`](#m4-o02-two-private-state-phase-signature) | obstruction | two private quotient states cannot isolate one exceptional cyclic phase | formalized | graduated |
@@ -3058,6 +3059,89 @@ tangent is now a concrete unbounded storage channel: force one reset orbit to se
 digits recursively.
 
 **Next:** decide whether the canonical reset orbit can realize unbounded cancellation depth.
+
+### R32-S17: Normalized tangent cocycle
+
+**Kind:** structure theorem
+**Evidence:** formalized
+**Disposition:** active
+
+Primitive cancellation resumes as an exact two-dimensional recurrence. For a reduced pair
+`(m,n)` in the chart belonging to a preceding wait `a`, put
+
+```text
+P = p^(sa),              v = (n, Pm−n).
+```
+
+If the next wait is `b`, define
+
+```text
+M(P,b) =
+  [ A−L+DP      A−L       ]
+  [ L(1−pᵇ)     L(1−pᵇ)   ].
+```
+
+For consecutive primitive reductions with next common factor `g`,
+
+```text
+M(P,b) v = Pg v′,
+```
+
+where `v′` is the tangent pair in the chart `p^(sb)`. This equality retains the complete
+normalization scalar. If `(m,n)` is primitive and `n` is coprime to `P`, then `v` is primitive
+as well.
+
+The determinant is
+
+```text
+det M(P,b) = DLP(1−pᵇ).
+```
+
+Hence the blow-up is recursive. Away from fixed parameter primes and the preceding `p`-power,
+every new tangent cancellation factor again divides `pᵇ−1`. Modulo such a cyclotomic prime the
+matrix has one explicit kernel line:
+
+```text
+(A−L+DP)T + (A−L)C = 0.
+```
+
+An ensuing swallowed factor is exactly passage of the normalized tangent `(T,C)` through this
+line. Primitive normalization has not converted the problem into a finite correction; it has
+recreated the same fixed-versus-cyclotomic cancellation dichotomy on the exceptional divisor.
+
+There is no unconditional scalar descent on this cocycle. The checked canonical period-three
+guard carries the exact nonzero projective tangent cycle
+
+```text
+(17,28) → (283,3200) → (1,728) → (17,28),
+```
+
+with normalization scalars `−252`, `−278640`, and `−116640`. Every ordinary normalization
+factor in this example lies in fixed parameter support, so the cycle does not refute an
+orbit-specific bound on *novel* tangent depth. It does prove that fixed-support normalization
+must precede any well-founded height argument.
+
+**Scope:** the theorem gives the exact local transport and support of every consecutive
+collision. It neither bounds equal-depth collisions on the canonical reset orbit nor constructs
+one reset orbit with unbounded novel depth.
+
+**Artifact:** `ReturnGuard.cancellationTangent`,
+`tangentTransfer_of_consecutive_reduction`, `tangentTransfer_det`,
+`cancellationTangent_isCoprime_of_base`, `tangent_reductionFactor_dvd_support`,
+`tangent_novelDivisor_dvd_cyclotomic`, and
+`tangentTransfer_mod_eq_zero_iff_terminal` in
+[`ReturnGuardTangent.lean`](MatrixMortality/ReturnGuardTangent.lean);
+`ReturnGuard.Examples.cycle_tangent_step_zero`, `cycle_tangent_step_one`, and
+`cycle_tangent_step_two` in
+[`ReturnGuardTangentExamples.lean`](MatrixMortality/ReturnGuardTangentExamples.lean).
+
+**Use:** treat repeated primitive collisions as a normalized matrix cocycle rather than an
+exceptional branch. Any decidability proof must first quotient fixed `S`-unit normalization and
+then control the novel cyclotomic factors of this cocycle. Any universality proof must steer
+successive tangent vectors through its moving kernel lines.
+
+**Next:** construct the fixed-support-normalized tangent recurrence and decide whether its novel
+normalization factors are orbitwise bounded or can encode an unbounded stack.
 That is the exact fork between an orbit-specific finite nucleus and a cyclotomic stack.
 
 ## Three-Generator Four-State Frontier
