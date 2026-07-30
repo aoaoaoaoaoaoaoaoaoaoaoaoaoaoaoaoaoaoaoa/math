@@ -434,6 +434,7 @@ with a complete arbitrary-word converse.
 | `ReturnGuardGauss.lean` | canonical residual coordinate, exact branch spheres, and guarded-step conjugacy |
 | `ReturnGuardAddress.lean` | finite inverse-address mortality grammar and branch fixed-point incompatibility |
 | `ReturnGuardArithmetic.lean` | primitive-pair recurrence and cyclotomic reset-or-cancellation sieve |
+| `ReturnGuardCocycle.lean` | terminal-defect transport and the reduced second-order denominator recurrence |
 | `ReturnGuardResonance.lean` | nonresonant descent, resonance localization, and corrected nested readiness |
 | `ReturnGuardRail.lean` | polynomial divisibility and rational affine-wait rail obstruction |
 | `ReturnGuardExamples.lean` | concrete mortal pair, nonterminal fixed point, and nested rational period-three orbit |
@@ -543,11 +544,14 @@ with a complete arbitrary-word converse.
 | The primitive-pair recurrence projectivizes to the residual step exactly | `ReturnGuard.integralStep_realizes_residualStep` |
 | Cyclotomic primes either reset the reduced pair or enter its common cancellation | `ReturnGuard.integralStep_cyclotomic_reset_or_cancel` |
 | A cyclotomic factor is swallowed exactly when the source pair is terminal-congruent modulo it | `ReturnGuard.integralStep_cyclotomic_cancel_iff_terminalCongruent` |
+| Outside the fixed parameter support, cancellation is exactly cyclotomic terminal congruence | `ReturnGuard.integralStep_novel_cancel_iff_cyclotomic_terminalCongruent` |
+| Terminal defects obey an exact cocycle and reduced second-order denominator recurrence | `ReturnGuard.integralStep_terminalDefect`, `ReturnGuard.reducedDenominator_recurrence` |
 | Every nonresonant continuation descends and every infinite ready chain resonates arbitrarily late | `ReturnGuard.nonresonant_nextWait_lt`, `ReturnGuard.infinite_ready_chain_resonates` |
 | Resonant nesting has normalized depth `(s−1)(a+h)` | `ReturnGuard.resonance_ready_iff` |
 | No reduced rational chart realizes a nontrivial affine wait rail at infinitely many prime powers | `ReturnGuard.Rail.no_infinite_primePower_affineWait_rail` |
 | The guarded return series intrinsically needs three states | `ReturnGuard.parameters_three_le_card_of_exact_realization` |
 | Rational resonant survivors can have exact period three | `ReturnGuard.Examples.cycle_decoded_orbit`, `ReturnGuard.Examples.cycle_first_two_resonant` |
+| Every normalization factor in the checked period-three survivor lies in the fixed parameter support | `ReturnGuard.Examples.cycle_commonFactors_dvd_fixedSupport` |
 | Rule and erasure matrices agree on the upper-side plane | `rule_erase_agree_on_upperSide` |
 | Every finite-controller letter routes its selected private channel exactly | `controllerMatrix_mulVec_controllerVector` |
 | Every suffix-controlled word obeys the generic total decoder | `controllerProduct_mulVec_controllerVector` |

@@ -371,6 +371,12 @@
 'MatrixMortality.ReturnGuard.integralStep_cyclotomic_cancel_iff_terminalCongruent' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.ReturnGuard.integralStep_novel_cancel_iff_cyclotomic_terminalCongruent' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.integralStepNumerator_eq_terminalDefect_add' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.ReturnGuard.integralStep_terminalDefect' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.ReturnGuard.reducedDenominator_recurrence' depends on axioms: [propext, Quot.sound]
 'MatrixMortality.ReturnGuard.commonDivisor_dvd_det' depends on axioms: [propext, Quot.sound]
 'MatrixMortality.ReturnGuard.integralStep_commonDivisor_dvd_cyclotomicSupport' depends on axioms: [propext,
  Classical.choice,
@@ -397,3 +403,8 @@
 'MatrixMortality.ReturnGuard.Examples.cycle_third_nonresonant' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.ReturnGuard.Examples.cycle_integral_step_zero' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.ReturnGuard.Examples.cycle_integral_step_one' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.ReturnGuard.Examples.cycle_integral_step_two' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.ReturnGuard.Examples.cycle_integral_reductions' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.ReturnGuard.Examples.cycle_commonFactors_dvd_fixedSupport' depends on axioms: [propext]

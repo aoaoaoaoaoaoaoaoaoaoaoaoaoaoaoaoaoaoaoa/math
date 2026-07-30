@@ -27,6 +27,7 @@ import MatrixMortality.ReturnGuardShift
 import MatrixMortality.ReturnGuardGauss
 import MatrixMortality.ReturnGuardAddress
 import MatrixMortality.ReturnGuardArithmetic
+import MatrixMortality.ReturnGuardCocycle
 import MatrixMortality.ReturnGuardResonance
 import MatrixMortality.ReturnGuardRail
 import MatrixMortality.ReturnGuardExamples

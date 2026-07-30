@@ -655,6 +655,13 @@ swallows `d` exactly when the source residual is congruent to the terminal resid
 The remaining local-global escape is therefore repeated terminal shadowing at unbounded
 cyclotomic orders.
 
+[`R32-S08`](SALVAGE.md#r32-s08-terminal-defect-cocycle) separates two arithmetically distinct
+normalization mechanisms. Outside the fixed prime support of `DL`, a common factor is swallowed
+exactly when it divides both `pᵃ−1` and the terminal defect. Inside that fixed support, large
+height collapse is already real: all three normalization factors of the checked period-three
+orbit divide `DL`. A finite-nucleus proof must therefore normalize the fixed `S`-unit directions
+before applying primitive-divisor growth; total gcd or ordinary height cannot be monotone.
+
 The surviving obligation is therefore a source theorem, or its negation: prove that this
 countably branched rational address system can simulate universal deterministic computation
 inside infinitely nested equal-depth resonance, or decide finite terminal-address membership by
@@ -669,7 +676,7 @@ selected wait, or rational affine-counter problem remains in this architecture.
 | Amalgamated valuation guard | Compile a universal deterministic source into the resonant tail recurrence, or decide that recurrence | Matrix mortality is already equivalent to one deterministic orbit, but its remaining arithmetic is not covered by known p-adic dynamics |
 | Irreducible cubic return pencil | Replace the split spectrum by a cubic companion action whose `2 × 2` return sequence has no fixed rail or target strip | A candidate still needs an internal low-rank return and an exact arbitrary-word normal form |
 | Multi-prime ReturnSquare | Extend the rational-root support and finite walls from prime powers to bases with several prime factors | Mixed prime support permits roots not confined to one valuation ray |
-| Local-global sieve | Bound repeated cyclotomic terminal congruence or prove it has an effective finite nucleus | [`R32-M05`](SALVAGE.md#r32-m05-cyclotomic-reset-or-cancellation-sieve) identifies swallowed factors exactly with terminal shadowing |
+| Local-global sieve | Bound repeated cyclotomic terminal congruence after quotienting fixed-prime normalization | [`R32-S08`](SALVAGE.md#r32-s08-terminal-defect-cocycle) proves the outside-support intersection law and exhibits fixed-support height collapse |
 | Valuation and cone dynamics | Extend the signed-cone pullback or a `p`-adic invariant across the remaining middle strip or a new pencil | Cancellation at poles and between spectral modes destroys naive monotonicity |
 | Same-zero return surgery | Change nonzero return values while preserving the zero semigroup, thereby evading exact Hankel taxes | No general same-zero minimization theorem exists; every surgery needs its own arbitrary-product converse |
 | Exceptional reverse compiler | Absorb the finite `αβ=0` disjunction into one three-dimensional many-one instance | The generic all-path compiler is complete; dimension three has no evident OR operation |

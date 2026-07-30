@@ -205,6 +205,10 @@ open MatrixMortality
 #print axioms ReturnGuard.divisor_dvd_commonFactor_iff
 #print axioms ReturnGuard.integralStep_cyclotomic_dvd_numerator_iff_terminalDefect
 #print axioms ReturnGuard.integralStep_cyclotomic_cancel_iff_terminalCongruent
+#print axioms ReturnGuard.integralStep_novel_cancel_iff_cyclotomic_terminalCongruent
+#print axioms ReturnGuard.integralStepNumerator_eq_terminalDefect_add
+#print axioms ReturnGuard.integralStep_terminalDefect
+#print axioms ReturnGuard.reducedDenominator_recurrence
 #print axioms ReturnGuard.commonDivisor_dvd_det
 #print axioms ReturnGuard.integralStep_commonDivisor_dvd_cyclotomicSupport
 #print axioms ReturnGuard.integralStep_cyclotomic_reset_or_cancel
@@ -219,3 +223,8 @@ open MatrixMortality
 #print axioms ReturnGuard.Examples.cycle_decoded_orbit
 #print axioms ReturnGuard.Examples.cycle_first_two_resonant
 #print axioms ReturnGuard.Examples.cycle_third_nonresonant
+#print axioms ReturnGuard.Examples.cycle_integral_step_zero
+#print axioms ReturnGuard.Examples.cycle_integral_step_one
+#print axioms ReturnGuard.Examples.cycle_integral_step_two
+#print axioms ReturnGuard.Examples.cycle_integral_reductions
+#print axioms ReturnGuard.Examples.cycle_commonFactors_dvd_fixedSupport

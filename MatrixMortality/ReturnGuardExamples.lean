@@ -1,4 +1,5 @@
 import MatrixMortality.ReturnGuardAddress
+import MatrixMortality.ReturnGuardCocycle
 import MatrixMortality.ReturnGuardResonance
 
 /-!
@@ -389,6 +390,37 @@ theorem cycle_third_nonresonant :
     simpa only [neg_div] using val3_neg_12291_div_473
   rw [actual] at valuation
   norm_num at valuation
+
+/-- Integral primitive-pair realization of the first period-three leg. -/
+theorem cycle_integral_step_zero :
+    IntegralStep 3 2 (-953) 473 2240 1 1 1 (-800) (-2720) := by
+  norm_num [IntegralStep, integralStepNumerator, terminalDefect]
+
+/-- Integral primitive-pair realization of the second period-three leg. -/
+theorem cycle_integral_step_one :
+    IntegralStep 3 2 (-953) 473 2240 2 5 17 (-1204) (-7924) := by
+  norm_num [IntegralStep, integralStepNumerator, terminalDefect]
+
+/-- Integral primitive-pair realization of the third period-three leg. -/
+theorem cycle_integral_step_two :
+    IntegralStep 3 2 (-953) 473 2240 3 43 283 (-3440) (-3440) := by
+  norm_num [IntegralStep, integralStepNumerator, terminalDefect]
+
+/-- The three raw outputs reduce by factors `160`, `28`, and `3440` to the checked residual
+cycle. -/
+theorem cycle_integral_reductions :
+    (-800 : ℤ) = -160 * 5 ∧ (-2720 : ℤ) = -160 * 17 ∧
+      (-1204 : ℤ) = -28 * 43 ∧ (-7924 : ℤ) = -28 * 283 ∧
+        (-3440 : ℤ) = -3440 * 1 ∧ (-3440 : ℤ) = -3440 * 1 := by
+  norm_num
+
+/-- Every cancellation factor in the period-three survivor is supported by the fixed parameter
+product `DL`; no novel cyclotomic prime is swallowed. -/
+theorem cycle_commonFactors_dvd_fixedSupport :
+    (160 : ℤ) ∣ 473 * 2240 ∧
+      (28 : ℤ) ∣ 473 * 2240 ∧
+        (3440 : ℤ) ∣ 473 * 2240 := by
+  norm_num
 
 end
 end MatrixMortality.ReturnGuard.Examples

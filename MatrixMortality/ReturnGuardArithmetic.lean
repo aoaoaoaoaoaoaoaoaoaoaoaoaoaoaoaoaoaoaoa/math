@@ -353,6 +353,52 @@ theorem integralStep_commonDivisor_dvd_cyclotomicSupport
       -(driftNumerator * scale * (1 - (prime : ℤ) ^ wait)) by ring]
   exact dvd_neg.mpr reduced
 
+/-- Away from the fixed parameter support, cancellation is exactly the intersection of the
+cyclotomic divisor and the terminal projective divisor. -/
+theorem integralStep_novel_cancel_iff_cyclotomic_terminalCongruent
+    {prime depth : Nat} {centerNumerator driftNumerator scale : ℤ}
+    {wait : Nat} {numerator denominator nextNumerator nextDenominator
+      common reducedNumerator reducedDenominator divisor : ℤ}
+    (primitive : IsCoprime numerator denominator)
+    (step :
+      IntegralStep prime depth centerNumerator driftNumerator scale
+        wait numerator denominator nextNumerator nextDenominator)
+    (numerator_reduced : nextNumerator = common * reducedNumerator)
+    (denominator_reduced : nextDenominator = common * reducedDenominator)
+    (reduced_primitive : IsCoprime reducedNumerator reducedDenominator)
+    (wait_positive : 0 < wait)
+    (base_coprime : IsCoprime divisor (prime : ℤ))
+    (fixed_coprime :
+      IsCoprime divisor (driftNumerator * scale)) :
+    divisor ∣ common ↔
+      divisor ∣ (prime : ℤ) ^ wait - 1 ∧
+        (centerNumerator - scale) * numerator ≡
+          -driftNumerator * denominator [ZMOD divisor] := by
+  constructor
+  · intro divides_common
+    have divides_numerator : divisor ∣ nextNumerator := by
+      rw [numerator_reduced]
+      exact divides_common.mul_right reducedNumerator
+    have divides_denominator : divisor ∣ nextDenominator := by
+      rw [denominator_reduced]
+      exact divides_common.mul_right reducedDenominator
+    have support :=
+      integralStep_commonDivisor_dvd_cyclotomicSupport primitive step
+        divides_numerator divides_denominator base_coprime
+    have cyclotomic_divides :
+        divisor ∣ (prime : ℤ) ^ wait - 1 := by
+      apply fixed_coprime.dvd_of_dvd_mul_left
+      simpa only [mul_assoc] using support
+    exact ⟨cyclotomic_divides,
+      (integralStep_cyclotomic_cancel_iff_terminalCongruent step
+        numerator_reduced denominator_reduced reduced_primitive
+        wait_positive cyclotomic_divides).mp divides_common⟩
+  · rintro ⟨cyclotomic_divides, terminal_congruent⟩
+    exact
+      (integralStep_cyclotomic_cancel_iff_terminalCongruent step
+        numerator_reduced denominator_reduced reduced_primitive
+        wait_positive cyclotomic_divides).mpr terminal_congruent
+
 /-- A cyclotomic prime either divides the primitive-reduction factor or resets the reduced
 projective pair to one. -/
 theorem cyclotomic_reset_or_cancel

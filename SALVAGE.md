@@ -92,6 +92,7 @@ file owns the mathematical stock.
 | [`R32-O06`](#r32-o06-rational-affine-wait-rail-rigidity) | obstruction | no reduced rational chart supports a nontrivial affine wait rail at infinitely many prime powers | formalized | graduated |
 | [`R32-S07`](#r32-s07-decoded-residual-address-normal-form) | structure theorem | mortality is finite inverse-address membership in disjoint rational p-adic branch spheres | formalized | active |
 | [`R32-M05`](#r32-m05-cyclotomic-reset-or-cancellation-sieve) | partial mechanism | every primitive reduction either resets modulo a cyclotomic prime or swallows it in the common cancellation | formalized | active |
+| [`R32-S08`](#r32-s08-terminal-defect-cocycle) | structure theorem | terminal-defect coordinates expose a second-order denominator recurrence and separate fixed from novel cancellation | formalized | active |
 | [`M4-C01`](#m4-c01-two-state-pushout-compiler) | compiler | binary deterministic two-state scalar control compiles to three `4 × 4` matrices | formalized | graduated |
 | [`M4-O01`](#m4-o01-exact-toggle-fusion-leaves-an-immortal-core) | obstruction | exact local toggle fusion preserves a nonzero common anchor | formalized | graduated |
 | [`M4-O02`](#m4-o02-two-private-state-phase-signature) | obstruction | two private quotient states cannot isolate one exceptional cyclic phase | formalized | graduated |
@@ -2436,6 +2437,78 @@ defect.
 
 **Next:** track primitive parts of `pᵃ−1` against the height of the terminal defect, or prove that
 the resulting terminal-congruence histories form an effective finite nucleus.
+
+### R32-S08: Terminal-defect cocycle
+
+**Kind:** structure theorem
+**Evidence:** formalized
+**Disposition:** active
+
+The terminal defect
+
+```text
+T(m,n)=(A−L)m+Dn
+```
+
+is exactly the next denominator before primitive reduction. In coordinates `(m,T)`, one integral
+step obeys
+
+```text
+pˢᵃ m̃ = T + L(1−pᵃ)m,
+pˢᵃ T(m̃,ñ)
+  = (A−L+Dpˢᵃ)T + (A−L)L(1−pᵃ)m.
+```
+
+If the raw output reduces by `g` to `(m₁,n₁)` and the following terminal defect reduces by
+`h` to `n₂`, Lean eliminates the numerator and obtains the exact second-order recurrence
+
+```text
+g pˢᵃ h n₂
+  = g(A−Lpᵃ+Dpˢᵃ)n₁ − DL(1−pᵃ)n₀.
+```
+
+The fixed parameter support must be separated from novel cyclotomic cancellation. For every
+modulus `d` coprime to `pDL`,
+
+```text
+d ∣ g
+  ↔
+d ∣ pᵃ−1
+  and
+(A−L)m ≡ −Dn (mod d).
+```
+
+This is the exact outside-support cancellation law.
+
+The checked rational period-three survivor makes the distinction necessary. Its three primitive
+reduction factors are
+
+```text
+160, 28, 3440,
+```
+
+and each divides the fixed product `DL=473·2240`. Its height grows from denominator `1` through
+`17` and `283`, then collapses to `1` without swallowing any novel cyclotomic prime. No theorem
+based on monotonicity of total height or total common cancellation can therefore work.
+
+**Scope:** the cocycle and recurrence are exact, but they do not bound the fixed-prime valuations
+or the outside-support cyclotomic part. The example disproves a naïve total-height argument; it
+does not disprove a height on the quotient by fixed `S`-unit normalization.
+
+**Artifact:** `ReturnGuard.integralStep_terminalDefect`,
+`reducedDenominator_recurrence`,
+`integralStep_novel_cancel_iff_cyclotomic_terminalCongruent`, and
+`ReturnGuard.Examples.cycle_commonFactors_dvd_fixedSupport` in
+[`ReturnGuardCocycle.lean`](MatrixMortality/ReturnGuardCocycle.lean),
+[`ReturnGuardArithmetic.lean`](MatrixMortality/ReturnGuardArithmetic.lean), and
+[`ReturnGuardExamples.lean`](MatrixMortality/ReturnGuardExamples.lean).
+
+**Use:** organize the decision attack as an `S`-arithmetic problem. Primes dividing `DL` own the
+normalization state; outside that fixed set, every cancellation factor simultaneously lies in
+`pᵃ−1` and the terminal defect.
+
+**Next:** define the fixed-support-free part of an integer, derive its transport through the
+denominator recurrence, and test whether it has an effective finite nucleus.
 
 ## Three-Generator Four-State Frontier
 
