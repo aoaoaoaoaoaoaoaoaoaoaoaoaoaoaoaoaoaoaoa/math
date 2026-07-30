@@ -159,6 +159,139 @@ theorem divisor_dvd_commonFactor_iff
       _ = leftCoefficient * (common * reducedLeft) +
           rightCoefficient * (common * reducedRight) := by ring
 
+/-- Every cancellation factor coprime to the base is exactly a common divisor of the source
+terminal defect and the step's cyclotomic displacement. -/
+theorem integralStep_cancel_iff_terminalDefect_and_displacement
+    {prime depth : Nat} {centerNumerator driftNumerator scale : ℤ}
+    {wait : Nat} {numerator denominator nextNumerator nextDenominator
+      common reducedNumerator reducedDenominator divisor : ℤ}
+    (step :
+      IntegralStep prime depth centerNumerator driftNumerator scale
+        wait numerator denominator nextNumerator nextDenominator)
+    (numerator_reduced : nextNumerator = common * reducedNumerator)
+    (denominator_reduced : nextDenominator = common * reducedDenominator)
+    (reduced_primitive : IsCoprime reducedNumerator reducedDenominator)
+    (base_coprime : IsCoprime divisor (prime : ℤ)) :
+    divisor ∣ common ↔
+      divisor ∣
+          terminalDefect centerNumerator driftNumerator scale
+            numerator denominator ∧
+        divisor ∣ scale * (1 - (prime : ℤ) ^ wait) * numerator := by
+  rw [divisor_dvd_commonFactor_iff numerator_reduced denominator_reduced
+    reduced_primitive, step.2]
+  constructor
+  · rintro ⟨divides_numerator, divides_terminal⟩
+    refine ⟨divides_terminal, ?_⟩
+    have divides_nextDenominator : divisor ∣ nextDenominator := by
+      rw [step.2]
+      exact divides_terminal
+    have divides_scaled :
+        divisor ∣
+          (prime : ℤ) ^ (depth * wait) * nextNumerator :=
+      divides_numerator.mul_left _
+    have divides_difference :=
+      dvd_sub divides_scaled divides_nextDenominator
+    rw [integralStep_difference step] at divides_difference
+    exact divides_difference
+  · rintro ⟨divides_terminal, divides_displacement⟩
+    refine ⟨?_, divides_terminal⟩
+    have divides_nextDenominator : divisor ∣ nextDenominator := by
+      rw [step.2]
+      exact divides_terminal
+    have divides_difference :
+        divisor ∣
+          (prime : ℤ) ^ (depth * wait) * nextNumerator -
+            nextDenominator := by
+      rw [integralStep_difference step]
+      exact divides_displacement
+    have divides_scaled :
+        divisor ∣
+          (prime : ℤ) ^ (depth * wait) * nextNumerator := by
+      have sum := dvd_add divides_difference divides_nextDenominator
+      simpa only [sub_add_cancel] using sum
+    have power_coprime :
+        IsCoprime divisor ((prime : ℤ) ^ (depth * wait)) :=
+      base_coprime.pow_right
+    exact power_coprime.dvd_of_dvd_mul_left divides_scaled
+
+/-- At every prime distinct from the base, the cancellation depth is the minimum of the terminal
+and displacement depths. -/
+theorem integralStep_commonFactor_padicValInt
+    {prime depth factor : Nat} [Fact factor.Prime]
+    {centerNumerator driftNumerator scale : ℤ}
+    {wait : Nat} {numerator denominator nextNumerator nextDenominator
+      common reducedNumerator reducedDenominator : ℤ}
+    (step :
+      IntegralStep prime depth centerNumerator driftNumerator scale
+        wait numerator denominator nextNumerator nextDenominator)
+    (numerator_reduced : nextNumerator = common * reducedNumerator)
+    (denominator_reduced : nextDenominator = common * reducedDenominator)
+    (reduced_primitive : IsCoprime reducedNumerator reducedDenominator)
+    (factor_base_coprime :
+      IsCoprime (factor : ℤ) (prime : ℤ))
+    (common_ne : common ≠ 0)
+    (terminal_ne :
+      terminalDefect centerNumerator driftNumerator scale
+        numerator denominator ≠ 0)
+    (displacement_ne :
+      scale * (1 - (prime : ℤ) ^ wait) * numerator ≠ 0) :
+    padicValInt factor common =
+      min
+        (padicValInt factor
+          (terminalDefect centerNumerator driftNumerator scale
+            numerator denominator))
+        (padicValInt factor
+          (scale * (1 - (prime : ℤ) ^ wait) * numerator)) := by
+  let cancellationDepth := padicValInt factor common
+  let terminalDepth :=
+    padicValInt factor
+      (terminalDefect centerNumerator driftNumerator scale numerator denominator)
+  let displacementDepth :=
+    padicValInt factor
+      (scale * (1 - (prime : ℤ) ^ wait) * numerator)
+  have power_base_coprime (exponent : Nat) :
+      IsCoprime ((factor : ℤ) ^ exponent) (prime : ℤ) :=
+    factor_base_coprime.pow_left
+  have cancellation_iff (exponent : Nat) :
+      (factor : ℤ) ^ exponent ∣ common ↔
+        (factor : ℤ) ^ exponent ∣
+            terminalDefect centerNumerator driftNumerator scale
+              numerator denominator ∧
+          (factor : ℤ) ^ exponent ∣
+            scale * (1 - (prime : ℤ) ^ wait) * numerator :=
+    integralStep_cancel_iff_terminalDefect_and_displacement step
+      numerator_reduced denominator_reduced reduced_primitive
+      (power_base_coprime exponent)
+  apply le_antisymm
+  · apply le_min
+    · have divides_terminal :=
+        (cancellation_iff cancellationDepth).mp
+          (padicValInt_dvd common) |>.1
+      exact (padicValInt_dvd_iff cancellationDepth _).mp
+        divides_terminal |>.resolve_left terminal_ne
+    · have divides_displacement :=
+        (cancellation_iff cancellationDepth).mp
+          (padicValInt_dvd common) |>.2
+      exact (padicValInt_dvd_iff cancellationDepth _).mp
+        divides_displacement |>.resolve_left displacement_ne
+  · have divides_terminal :
+        (factor : ℤ) ^ min terminalDepth displacementDepth ∣
+          terminalDefect centerNumerator driftNumerator scale
+            numerator denominator :=
+      (padicValInt_dvd_iff _ _).mpr
+        (Or.inr (min_le_left terminalDepth displacementDepth))
+    have divides_displacement :
+        (factor : ℤ) ^ min terminalDepth displacementDepth ∣
+          scale * (1 - (prime : ℤ) ^ wait) * numerator :=
+      (padicValInt_dvd_iff _ _).mpr
+        (Or.inr (min_le_right terminalDepth displacementDepth))
+    have divides_common :=
+      (cancellation_iff (min terminalDepth displacementDepth)).mpr
+        ⟨divides_terminal, divides_displacement⟩
+    exact
+      (padicValInt_dvd_iff (min terminalDepth displacementDepth) common).mp
+        divides_common |>.resolve_left common_ne
+
 /-- Modulo a cyclotomic factor coprime to the base, the two raw output coordinates vanish
 together. -/
 theorem integralStep_cyclotomic_dvd_numerator_iff_terminalDefect
@@ -228,11 +361,18 @@ theorem integralStep_cyclotomic_cancel_iff_terminalCongruent
     divisor ∣ common ↔
       (centerNumerator - scale) * numerator ≡
         -driftNumerator * denominator [ZMOD divisor] := by
-  rw [divisor_dvd_commonFactor_iff numerator_reduced denominator_reduced
-    reduced_primitive]
-  rw [integralStep_cyclotomic_dvd_numerator_iff_terminalDefect step
-    wait_positive cyclotomic_divides]
-  rw [step.2, and_self, Int.modEq_iff_dvd]
+  have base_coprime :
+      IsCoprime divisor (prime : ℤ) :=
+    divisor_pow_sub_one_isCoprime_base wait_positive cyclotomic_divides
+  have divides_displacement :
+      divisor ∣ scale * (1 - (prime : ℤ) ^ wait) * numerator := by
+    have divides_negative :
+        divisor ∣ 1 - (prime : ℤ) ^ wait := by
+      simpa only [neg_sub] using dvd_neg.mpr cyclotomic_divides
+    exact (divides_negative.mul_left scale).mul_right numerator
+  rw [integralStep_cancel_iff_terminalDefect_and_displacement step
+    numerator_reduced denominator_reduced reduced_primitive base_coprime,
+    and_iff_left divides_displacement, Int.modEq_iff_dvd]
   constructor <;> intro divides
   · rw [show
       -driftNumerator * denominator -

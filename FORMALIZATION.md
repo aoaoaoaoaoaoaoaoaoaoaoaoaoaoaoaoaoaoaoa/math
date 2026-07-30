@@ -546,6 +546,7 @@ with a complete arbitrary-word converse.
 | A cyclotomic factor is swallowed exactly when the source pair is terminal-congruent modulo it | `ReturnGuard.integralStep_cyclotomic_cancel_iff_terminalCongruent` |
 | Outside the fixed parameter support, cancellation is exactly cyclotomic terminal congruence | `ReturnGuard.integralStep_novel_cancel_iff_cyclotomic_terminalCongruent` |
 | Terminal defects obey an exact cocycle and reduced second-order denominator recurrence | `ReturnGuard.integralStep_terminalDefect`, `ReturnGuard.reducedDenominator_recurrence` |
+| Every base-coprime cancellation depth is the minimum of the terminal-defect and displacement depths | `ReturnGuard.integralStep_cancel_iff_terminalDefect_and_displacement`, `ReturnGuard.integralStep_commonFactor_padicValInt` |
 | Every nonresonant continuation descends and every infinite ready chain resonates arbitrarily late | `ReturnGuard.nonresonant_nextWait_lt`, `ReturnGuard.infinite_ready_chain_resonates` |
 | Resonant nesting has normalized depth `(s−1)(a+h)` | `ReturnGuard.resonance_ready_iff` |
 | No reduced rational chart realizes a nontrivial affine wait rail at infinitely many prime powers | `ReturnGuard.Rail.no_infinite_primePower_affineWait_rail` |

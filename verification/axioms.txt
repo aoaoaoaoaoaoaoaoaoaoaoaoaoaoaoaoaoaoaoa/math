@@ -365,6 +365,12 @@
  Quot.sound]
 'MatrixMortality.ReturnGuard.divisor_pow_sub_one_isCoprime_base' depends on axioms: [propext, Quot.sound]
 'MatrixMortality.ReturnGuard.divisor_dvd_commonFactor_iff' depends on axioms: [propext]
+'MatrixMortality.ReturnGuard.integralStep_cancel_iff_terminalDefect_and_displacement' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.integralStep_commonFactor_padicValInt' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.ReturnGuard.integralStep_cyclotomic_dvd_numerator_iff_terminalDefect' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]

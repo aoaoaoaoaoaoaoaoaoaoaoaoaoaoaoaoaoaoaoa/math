@@ -93,6 +93,7 @@ file owns the mathematical stock.
 | [`R32-S07`](#r32-s07-decoded-residual-address-normal-form) | structure theorem | mortality is finite inverse-address membership in disjoint rational p-adic branch spheres | formalized | active |
 | [`R32-M05`](#r32-m05-cyclotomic-reset-or-cancellation-sieve) | partial mechanism | every primitive reduction either resets modulo a cyclotomic prime or swallows it in the common cancellation | formalized | active |
 | [`R32-S08`](#r32-s08-terminal-defect-cocycle) | structure theorem | terminal-defect coordinates expose a second-order denominator recurrence and separate fixed from novel cancellation | formalized | active |
+| [`R32-S09`](#r32-s09-complete-cancellation-law) | structure theorem | every base-coprime cancellation depth is the minimum of the terminal-defect and displacement depths | formalized | active |
 | [`M4-C01`](#m4-c01-two-state-pushout-compiler) | compiler | binary deterministic two-state scalar control compiles to three `4 × 4` matrices | formalized | graduated |
 | [`M4-O01`](#m4-o01-exact-toggle-fusion-leaves-an-immortal-core) | obstruction | exact local toggle fusion preserves a nonzero common anchor | formalized | graduated |
 | [`M4-O02`](#m4-o02-two-private-state-phase-signature) | obstruction | two private quotient states cannot isolate one exceptional cyclic phase | formalized | graduated |
@@ -2509,6 +2510,65 @@ normalization state; outside that fixed set, every cancellation factor simultane
 
 **Next:** define the fixed-support-free part of an integer, derive its transport through the
 denominator recurrence, and test whether it has an effective finite nucleus.
+
+### R32-S09: Complete cancellation law
+
+**Kind:** structure theorem
+**Evidence:** formalized
+**Disposition:** active
+
+Let one integral step send a source pair `(m,n)` to a raw pair `(m̃,ñ)`, and write
+
+```text
+(m̃,ñ)=g(m′,n′),    gcd(m′,n′)=1.
+```
+
+For every integer divisor `d` coprime to the base `p`, Lean proves the exact equivalence
+
+```text
+d ∣ g
+  ↔
+d ∣ T(m,n)
+  and
+d ∣ L(1−pᵃ)m,
+```
+
+where `T(m,n)=(A−L)m+Dn` is the terminal defect. The theorem contains both previously separated
+mechanisms:
+
+- if `d ∣ pᵃ−1`, the displacement condition is automatic and cancellation is terminal
+  congruence;
+- if `d` lies in the fixed support of `L` or the source numerator `m`, cancellation need not be
+  cyclotomic, but it is still charged to the same terminal defect.
+
+Prime-power divisibility makes the local multiplicities exact. For every prime `ℓ≠p`, assuming
+the three relevant integers are nonzero,
+
+```text
+vℓ(g)=min(vℓ(T(m,n)), vℓ(L(1−pᵃ)m)).
+```
+
+No further common-factor mechanism exists away from the base prime. In particular, the
+determinant-support theorem is a consequence-level bound; the intersection law is the local
+normal form.
+
+**Scope:** the formula does not bound either valuation. At fixed parameter primes,
+`vℓ(m)` may carry unbounded state, while `vℓ(pᵃ−1)` varies with the wait. A finite-nucleus
+argument must analyze those valuation recurrences rather than treating fixed support as a
+bounded nuisance.
+
+**Artifact:** `ReturnGuard.integralStep_cancel_iff_terminalDefect_and_displacement` and
+`ReturnGuard.integralStep_commonFactor_padicValInt` in
+[`ReturnGuardArithmetic.lean`](MatrixMortality/ReturnGuardArithmetic.lean).
+
+**Use:** replace every coarse gcd estimate by a prime-local equality. Outside fixed support this
+recovers cyclotomic terminal shadowing; inside fixed support it isolates the exact valuation
+state that a normalization quotient must retain.
+
+**Next:** expand the displacement valuation by multiplicativity and apply lifting-the-exponent
+at each fixed prime. Determine whether the resulting finite vector of source valuations is
+piecewise affine, bounded on terminal-reaching paths, or capable of carrying an unbounded
+stack.
 
 ## Three-Generator Four-State Frontier
 

@@ -662,6 +662,19 @@ height collapse is already real: all three normalization factors of the checked 
 orbit divide `DL`. A finite-nucleus proof must therefore normalize the fixed `S`-unit directions
 before applying primitive-divisor growth; total gcd or ordinary height cannot be monotone.
 
+[`R32-S09`](SALVAGE.md#r32-s09-complete-cancellation-law) removes the remaining ambiguity in
+that split. For every prime `ℓ≠p`, the exact cancellation depth is
+
+```text
+min(vℓ(T(m,n)), vℓ(L(1−pᵃ)m)).
+```
+
+Fixed and novel cancellation are not separate algebraic phenomena: both are the intersection of
+the terminal divisor with one displacement divisor. The distinction is dynamical. Outside fixed
+support the displacement valuation is cyclotomic; at fixed primes it can also inherit unbounded
+valuation from the source numerator. The local-global lane must therefore control a finite
+vector of fixed-prime source valuations, not merely remove a constant `S`-unit factor.
+
 The surviving obligation is therefore a source theorem, or its negation: prove that this
 countably branched rational address system can simulate universal deterministic computation
 inside infinitely nested equal-depth resonance, or decide finite terminal-address membership by
@@ -676,7 +689,7 @@ selected wait, or rational affine-counter problem remains in this architecture.
 | Amalgamated valuation guard | Compile a universal deterministic source into the resonant tail recurrence, or decide that recurrence | Matrix mortality is already equivalent to one deterministic orbit, but its remaining arithmetic is not covered by known p-adic dynamics |
 | Irreducible cubic return pencil | Replace the split spectrum by a cubic companion action whose `2 × 2` return sequence has no fixed rail or target strip | A candidate still needs an internal low-rank return and an exact arbitrary-word normal form |
 | Multi-prime ReturnSquare | Extend the rational-root support and finite walls from prime powers to bases with several prime factors | Mixed prime support permits roots not confined to one valuation ray |
-| Local-global sieve | Bound repeated cyclotomic terminal congruence after quotienting fixed-prime normalization | [`R32-S08`](SALVAGE.md#r32-s08-terminal-defect-cocycle) proves the outside-support intersection law and exhibits fixed-support height collapse |
+| Local-global sieve | Control the fixed-prime valuation state and repeated cyclotomic terminal congruence | [`R32-S09`](SALVAGE.md#r32-s09-complete-cancellation-law) gives the exact local valuation law; no bound on the inherited source valuations is known |
 | Valuation and cone dynamics | Extend the signed-cone pullback or a `p`-adic invariant across the remaining middle strip or a new pencil | Cancellation at poles and between spectral modes destroys naive monotonicity |
 | Same-zero return surgery | Change nonzero return values while preserving the zero semigroup, thereby evading exact Hankel taxes | No general same-zero minimization theorem exists; every surgery needs its own arbitrary-product converse |
 | Exceptional reverse compiler | Absorb the finite `αβ=0` disjunction into one three-dimensional many-one instance | The generic all-path compiler is complete; dimension three has no evident OR operation |
