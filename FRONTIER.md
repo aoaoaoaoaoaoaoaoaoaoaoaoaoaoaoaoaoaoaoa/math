@@ -791,6 +791,15 @@ decoded step. All of its normalization is fixed-support, however. A finite-nucle
 still exist after quotienting those finitely many `S`-unit directions; the remaining enemy is
 novel cyclotomic normalization in the tangent cocycle.
 
+[`R32-S18`](SALVAGE.md#r32-s18-fixed-support-localization-obstruction) performs that quotient
+canonically. In the localization away from `D·L·p`, a tangent transfer is invertible exactly
+when `1−pᵇ` is a unit. This clean separation does **not** leave a uniform finite nucleus: the
+fixed guard `(5,2,29,1,1)` retains pairwise nonassociated cancellation factors
+`1,3,3²,…` after localization away from five. Uniformity over all primitive inputs is therefore
+dead. The remaining decidability claim must be orbit-specific to the canonical reset; the
+opposing construction must force that one orbit, rather than freely chosen inputs, through
+unbounded novel depth.
+
 The surviving obligation is therefore a source theorem, or its negation: prove that this
 countably branched rational address system can simulate universal deterministic computation
 inside infinitely nested equal-depth resonance, or decide finite terminal-address membership by
@@ -805,7 +814,7 @@ selected wait, or rational affine-counter problem remains in this architecture.
 | Amalgamated valuation guard | Compile a universal deterministic source into the resonant tail recurrence, or decide that recurrence | Matrix mortality is already equivalent to one deterministic orbit, but its remaining arithmetic is not covered by known p-adic dynamics |
 | Irreducible cubic return pencil | Replace the split spectrum by a cubic companion action whose `2 × 2` return sequence has no fixed rail or target strip | A candidate still needs an internal low-rank return and an exact arbitrary-word normal form |
 | Multi-prime ReturnSquare | Extend the rational-root support and finite walls from prime powers to bases with several prime factors | Mixed prime support permits roots not confined to one valuation ray |
-| Cancellation-aware local-global sieve | Normalize fixed-support tangent factors, then bound novel collisions along the canonical reset orbit or force that orbit to realize an unbounded cyclotomic stack | [`R32-S17`](SALVAGE.md#r32-s17-normalized-tangent-cocycle) shows that collision recursively recreates the cyclotomic problem and that unnormalized tangent height can cycle |
+| Cancellation-aware local-global sieve | Bound novel localized collisions along the canonical reset orbit, or force that orbit to realize an unbounded cyclotomic stack | [`R32-S18`](SALVAGE.md#r32-s18-fixed-support-localization-obstruction) kills every uniform fixed-support finite nucleus; only orbit-specific arithmetic remains |
 | Valuation and cone dynamics | Extend the signed-cone pullback or a `p`-adic invariant across the remaining middle strip or a new pencil | Cancellation at poles and between spectral modes destroys naive monotonicity |
 | Same-zero return surgery | Change nonzero return values while preserving the zero semigroup, thereby evading exact Hankel taxes | No general same-zero minimization theorem exists; every surgery needs its own arbitrary-product converse |
 | Exceptional reverse compiler | Absorb the finite `αβ=0` disjunction into one three-dimensional many-one instance | The generic all-path compiler is complete; dimension three has no evident OR operation |
@@ -813,10 +822,10 @@ selected wait, or rational affine-counter problem remains in this architecture.
 The highest-value lunge is now orbit-specific cancellation arithmetic. The matrix compiler,
 all-word converse, wait decoder, rational address grammar, and local blow-up are complete;
 nonresonant dynamics, rational affine counter rails, ordinary quotient products, and uniform
-fixed-jet nuclei are closed. The next useful mathematics is fixed-support normalization of the
-tangent cocycle followed by an effective bound on novel depth along terminal-reaching reset
-orbits, a single rational orbit realizing an unbounded cyclotomic stack, or a transfer from that
-dichotomy to a broader class of three-mode return recurrences.
+fixed-jet and fixed-support-localized uniform nuclei are closed. The next useful mathematics is
+an effective bound on novel depth along terminal-reaching reset orbits, a single rational reset
+orbit realizing an unbounded cyclotomic stack, or a transfer from that dichotomy to a broader
+class of three-mode return recurrences.
 
 The strategic boundary is now clear. The easy layer consisted of finding and repairing missing
 finite compilers. `M₃(2)` asks whether one low-dimensional recurrence family can store

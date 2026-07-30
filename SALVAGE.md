@@ -102,6 +102,7 @@ file owns the mathematical stock.
 | [`R32-S15`](#r32-s15-finite-quotient-completeness) | obstruction | terminal exclusion is cancellation exclusion; synchronized prime products cannot amplify certificates | formalized | active |
 | [`R32-S16`](#r32-s16-cancellation-blow-up-and-unbounded-depth) | obstruction | primitive cancellation is a surjective projective blow-up with no uniform finite-jet bound | formalized | active |
 | [`R32-S17`](#r32-s17-normalized-tangent-cocycle) | structure theorem | consecutive primitive reductions form a recursive two-dimensional tangent cocycle with exact cyclotomic support | formalized | active |
+| [`R32-S18`](#r32-s18-fixed-support-localization-obstruction) | obstruction | fixed-support localization isolates the cyclotomic determinant but retains an infinite strict tower of novel cancellation depths | formalized | active |
 | [`M4-C01`](#m4-c01-two-state-pushout-compiler) | compiler | binary deterministic two-state scalar control compiles to three `4 × 4` matrices | formalized | graduated |
 | [`M4-O01`](#m4-o01-exact-toggle-fusion-leaves-an-immortal-core) | obstruction | exact local toggle fusion preserves a nonzero common anchor | formalized | graduated |
 | [`M4-O02`](#m4-o02-two-private-state-phase-signature) | obstruction | two private quotient states cannot isolate one exceptional cyclic phase | formalized | graduated |
@@ -3143,6 +3144,65 @@ successive tangent vectors through its moving kernel lines.
 **Next:** construct the fixed-support-normalized tangent recurrence and decide whether its novel
 normalization factors are orbitwise bounded or can encode an unbounded stack.
 That is the exact fork between an orbit-specific finite nucleus and a cyclotomic stack.
+
+### R32-S18: Fixed-support localization obstruction
+
+**Kind:** obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+The canonical multiplicative way to erase fixed parameter factors is localization. Let `S` be
+the localization of a commutative ring away from `D·L·p`. Then `D`, `L`, and every chart power
+`P=p^(sa)` are units in `S`. The tangent determinant identity becomes
+
+```text
+det M(P,b)  ~  1−pᵇ,
+```
+
+where `~` denotes association. Consequently
+
+```text
+M(P,b) is invertible in S  ↔  1−pᵇ is a unit in S.
+```
+
+This is the exact fixed-versus-novel separation sought after
+[`R32-S17`](#r32-s17-normalized-tangent-cocycle). It also disproves the hoped-for *uniform*
+finite core. For the single guarded recurrence
+
+```text
+(p,s,A,D,L)=(5,2,29,1,1),
+```
+
+[`R32-S16`](#r32-s16-cancellation-blow-up-and-unbounded-depth) supplies primitive inputs with
+every positive `3`-adic cancellation depth. Localizing away from the fixed support `5` does not
+erase that axis:
+
+```text
+3^i  and  3^j
+```
+
+remain nonassociated whenever `i≠j`. The proof specializes the localization to
+`ℤ/(3^(min(i,j)+1))`; five stays invertible, while exactly one of the two powers vanishes.
+Thus the localized recurrence retains an infinite strict divisor tower, not merely one
+exceptional nonunit.
+
+**Scope:** this excludes a finite-state theorem uniform over all primitive inputs, even after
+the mathematically correct fixed-support normalization. It does not show that the one canonical
+reset orbit of a guarded mortality instance visits unbounded novel depth. An orbit-specific
+height bound remains viable.
+
+**Artifact:** `ReturnGuard.tangentTransfer_localized_isUnit_iff`,
+`awayFive_three_pow_not_associated_of_lt`, and
+`exists_localized_nonunit_three_cancellationDepth` in
+[`ReturnGuardLocalization.lean`](MatrixMortality/ReturnGuardLocalization.lean).
+
+**Use:** do not search for a uniform finite nucleus in the localized state space. A decision
+argument must exploit arithmetic restrictions of the reset orbit; a universality argument must
+make that same orbit traverse an unbounded chain of novel localized divisors.
+
+**Next:** derive an orbitwise product formula or height inequality comparing newly swallowed
+cyclotomic factors with the primitive tangent height, and test it on terminal-reaching reset
+executions.
 
 ## Three-Generator Four-State Frontier
 

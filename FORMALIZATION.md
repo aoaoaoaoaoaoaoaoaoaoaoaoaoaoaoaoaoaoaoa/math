@@ -450,6 +450,7 @@ with a complete arbitrary-word converse.
 | `ReturnGuardDriftCertificate.lean` | exact drift-divisor certificate classification, cyclic subgroup criterion, and executable finite test |
 | `ReturnGuardCocycle.lean` | terminal-defect transport and the reduced second-order denominator recurrence |
 | `ReturnGuardTangent.lean` | exact primitive-cancellation tangent cocycle, determinant support, recursive cyclotomic gate, and finite-field kernel line |
+| `ReturnGuardLocalization.lean` | canonical fixed-support localization, localized cyclotomic invertibility, and the strict surviving novel-depth tower |
 | `ReturnGuardResonance.lean` | nonresonant descent, resonance localization, and corrected nested readiness |
 | `ReturnGuardRail.lean` | polynomial divisibility and rational affine-wait rail obstruction |
 | `ReturnGuardExamples.lean` | concrete mortal pair, nonterminal fixed point, and nested rational period-three orbit |

@@ -259,6 +259,9 @@ open MatrixMortality
 #print axioms ReturnGuard.tangent_reductionFactor_dvd_support
 #print axioms ReturnGuard.tangent_novelDivisor_dvd_cyclotomic
 #print axioms ReturnGuard.tangentTransfer_mod_eq_zero_iff_terminal
+#print axioms ReturnGuard.tangentTransfer_localized_isUnit_iff
+#print axioms ReturnGuard.awayFive_three_pow_not_associated_of_lt
+#print axioms ReturnGuard.exists_localized_nonunit_three_cancellationDepth
 #print axioms ReturnGuard.commonDivisor_dvd_det
 #print axioms ReturnGuard.integralStep_commonDivisor_dvd_cyclotomicSupport
 #print axioms ReturnGuard.integralStep_cyclotomic_reset_or_cancel

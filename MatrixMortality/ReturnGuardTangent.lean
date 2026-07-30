@@ -78,6 +78,37 @@ theorem tangentTransfer_det
   simp [tangentTransfer]
   ring
 
+/-- Once the fixed determinant factor is a unit, the tangent determinant is associated to the
+next cyclotomic term. -/
+theorem tangentTransfer_det_associated_cyclotomic
+    {R : Type*} [CommRing R]
+    (centerNumerator driftNumerator scale power nextWaitPower : R)
+    (fixed_unit : IsUnit (driftNumerator * scale * power)) :
+    Associated
+      (tangentTransfer centerNumerator driftNumerator scale power
+        nextWaitPower).det
+      (1 - nextWaitPower) := by
+  rw [tangentTransfer_det]
+  exact
+    associated_unit_mul_left (1 - nextWaitPower)
+      (driftNumerator * scale * power) fixed_unit
+
+/-- Over a fixed-support localization, tangent transport is invertible exactly when the next
+cyclotomic term is a unit. -/
+theorem tangentTransfer_isUnit_iff_cyclotomic
+    {R : Type*} [CommRing R]
+    (centerNumerator driftNumerator scale power nextWaitPower : R)
+    (fixed_unit : IsUnit (driftNumerator * scale * power)) :
+    IsUnit
+        (tangentTransfer centerNumerator driftNumerator scale power
+          nextWaitPower) ↔
+      IsUnit (1 - nextWaitPower) := by
+  rw [Matrix.isUnit_iff_isUnit_det]
+  exact
+    (tangentTransfer_det_associated_cyclotomic
+      centerNumerator driftNumerator scale power nextWaitPower
+      fixed_unit).isUnit_iff
+
 /-- Primitive reduction divides the terminal/displacement pair by exactly the same scalar. -/
 theorem cancellationTangent_of_reducedIntegralStep
     {prime depth : Nat} {centerNumerator driftNumerator scale : ℤ}

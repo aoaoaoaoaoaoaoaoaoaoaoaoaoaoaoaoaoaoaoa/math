@@ -36,6 +36,7 @@ import MatrixMortality.ReturnGuardQuotientCompleteness
 import MatrixMortality.ReturnGuardDriftCertificate
 import MatrixMortality.ReturnGuardCocycle
 import MatrixMortality.ReturnGuardTangent
+import MatrixMortality.ReturnGuardLocalization
 import MatrixMortality.ReturnGuardResonance
 import MatrixMortality.ReturnGuardRail
 import MatrixMortality.ReturnGuardExamples
