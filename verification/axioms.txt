@@ -476,9 +476,30 @@
 'MatrixMortality.ReturnGuard.integralStep_novel_cancel_iff_cyclotomic_terminalCongruent' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-'MatrixMortality.ReturnGuard.integralStepNumerator_eq_terminalDefect_add' depends on axioms: [propext, Quot.sound]
-'MatrixMortality.ReturnGuard.integralStep_terminalDefect' depends on axioms: [propext, Quot.sound]
-'MatrixMortality.ReturnGuard.reducedDenominator_recurrence' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.ReturnGuard.primitiveIntegralStep_cumulativeEndpointStep' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.ReturnGuard.CumulativeEndpointStep.target_unique' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.PrimitiveEndpointReduction.content_natAbs_eq_gcd_support' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.reverseComplement_dvd_targetResultant' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.CumulativeEndpointExecution.transfer' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.cumulativeDenominator_recurrence' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.cumulativeUnitTail_transition' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ReturnGuard.cumulativeNumerator_recurrence' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.ReturnGuard.terminalTruncant_eq_cumulativeNumerator' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.Examples.decreasingMortal_cumulativeExecution' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.ReturnGuard.Examples.increasingMortal_cumulativeExecution' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.ReturnGuard.Examples.cycle_cumulativeExecution' depends on axioms: [propext, Quot.sound]
 'MatrixMortality.ReturnGuard.terminalCoordinate_residualStep' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.ReturnGuard.endpointTransfer_mul_endpointGauge' depends on axioms: [propext,
  Classical.choice,

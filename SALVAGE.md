@@ -92,7 +92,7 @@ file owns the mathematical stock.
 | [`R32-O06`](#r32-o06-rational-affine-wait-rail-rigidity) | obstruction | no reduced rational chart supports a nontrivial affine wait rail at infinitely many prime powers | formalized | graduated |
 | [`R32-S07`](#r32-s07-decoded-residual-address-normal-form) | structure theorem | mortality is finite inverse-address membership in disjoint rational p-adic branch spheres | formalized | active |
 | [`R32-M05`](#r32-m05-cyclotomic-reset-or-cancellation-sieve) | partial mechanism | every primitive reduction either resets modulo a cyclotomic prime or swallows it in the common cancellation | formalized | active |
-| [`R32-S08`](#r32-s08-terminal-defect-cocycle) | structure theorem | terminal-defect coordinates expose a second-order denominator recurrence and separate fixed from novel cancellation | formalized | active |
+| [`R32-S08`](#r32-s08-cumulative-endpoint-recurrence) | structure theorem | cumulative endpoint pairs absorb every normalization scalar into one deterministic exact-division recurrence | formalized | active |
 | [`R32-S09`](#r32-s09-complete-cancellation-law) | structure theorem | every base-coprime cancellation depth is the minimum of the terminal-defect and displacement depths | formalized | active |
 | [`R32-S10`](#r32-s10-logarithmic-wait-and-height-envelope) | structure theorem | legal waits are logarithmic in primitive height and every reduced step is uniformly height-Lipschitz | formalized | active |
 | [`R32-S11`](#r32-s11-primitive-factor-terminal-gate) | structure theorem | a large primitive cyclotomic radical forces terminality or a surviving finite-quotient reset | formalized | active |
@@ -2450,77 +2450,80 @@ defect.
 **Next:** track primitive parts of `pᵃ−1` against the height of the terminal defect, or prove that
 the resulting terminal-congruence histories form an effective finite nucleus.
 
-### R32-S08: Terminal-defect cocycle
+### R32-S08: Cumulative endpoint recurrence
 
 **Kind:** structure theorem
 **Evidence:** formalized
 **Disposition:** active
 
-The terminal defect
+For `α=A/L` and `ρ−α=D/L`, retain every signed primitive reduction factor in one cumulative
+endpoint pair `(Rᵢ,βᵢ)`. Its reset is `(A+D−L,1)`, and one wait `aᵢ` obeys
 
 ```text
-T(m,n)=(A−L)m+Dn
+p^(saᵢ)βᵢ₊₁ = Rᵢ − L(p^aᵢ−1)βᵢ,
+Rᵢ₊₁ = D Rᵢ + (A−L)βᵢ₊₁.
 ```
 
-is exactly the next denominator before primitive reduction. In coordinates `(m,T)`, one integral
-step obeys
+The target is unique for a fixed source and wait. Every primitive residual reduction induces
+this step after its removed signed content is absorbed into the target pair. Content is therefore
+a local Smith factor derived from the pair, not an independent dynamical register.
+
+Two steps eliminate the intermediate numerator:
 
 ```text
-pˢᵃ m̃ = T + L(1−pᵃ)m,
-pˢᵃ T(m̃,ñ)
-  = (A−L+Dpˢᵃ)T + (A−L)L(1−pᵃ)m.
+p^(saᵢ₊₁)βᵢ₊₂
+  = (A + Dp^(saᵢ) − Lp^aᵢ₊₁)βᵢ₊₁ + DL(p^aᵢ−1)βᵢ.
 ```
 
-If the raw output reduces by `g` to `(m₁,n₁)` and the following terminal defect reduces by
-`h` to `n₂`, Lean eliminates the numerator and obtains the exact second-order recurrence
+Equivalently, with `R₋₁=1`, the cumulative numerator alone satisfies
 
 ```text
-g pˢᵃ h n₂
-  = g(A−Lpᵃ+Dpˢᵃ)n₁ − DL(1−pᵃ)n₀.
+p^(saᵢ)Rᵢ₊₁
+  = (Dp^(saᵢ)+A−Lp^aᵢ)Rᵢ + DL(p^aᵢ−1)Rᵢ₋₁.
 ```
 
-The fixed parameter support must be separated from novel cyclotomic cancellation. For every
-modulus `d` coprime to `pDL`,
+Terminality is `Rᵢ=0`; the first row of the full endpoint product is
+`p^(sΣaᵢ)Rᵢ`. The tail `Xᵢ=Lβᵢ/βᵢ₊₁` obeys
 
 ```text
-d ∣ g
-  ↔
-d ∣ pᵃ−1
-  and
-(A−L)m ≡ −Dn (mod d).
+Xᵢ₊₁ = Lp^(saᵢ₊₁) /
+  (D(p^aᵢ−1)Xᵢ + A + Dp^(saᵢ) − Lp^aᵢ₊₁).
 ```
 
-This is the exact outside-support cancellation law.
+There is no factor `Xᵢ` in this numerator. The reported formula containing one was false.
 
-The checked rational period-three survivor makes the distinction necessary. Its three primitive
-reduction factors are
+Primitive reduction remains recoverable: removed content is the gcd of the endpoint prequotient
+with `DL(pᵃ−1)`, consecutive primitive denominators are coprime, and the next denominator is
+coprime to the complementary content. Reverse reconstruction gives a fixed target resultant.
+Its proof requires `pᵃ−1 ∣ p^(sa)−1`; omitting that geometric factor is invalid.
+
+Lean checks two terminal executions and the projective period-three return:
 
 ```text
-160, 28, 3440,
+(308,1) → (−12152,−4) → (0,−1240),
+(−67704,1) → (7041216,−504) → (0,41664),
+(−2720,1) → (1267840,−800) → (−15411200,192640)
+          → −15411200·(−2720,1).
 ```
 
-and each divides the fixed product `DL=473·2240`. Its height grows from denominator `1` through
-`17` and `283`, then collapses to `1` without swallowing any novel cyclotomic prime. No theorem
-based on monotonicity of total height or total common cancellation can therefore work.
+**Scope:** the recurrence is exact and content-free, but it does not bound integral height or
+prove that every infinite rational execution returns projectively. Primitive content theorems
+remain useful as derived local arithmetic; they no longer define the state.
 
-**Scope:** the cocycle and recurrence are exact, but they do not bound the fixed-prime valuations
-or the outside-support cyclotomic part. The example disproves a naïve total-height argument; it
-does not disprove a height on the quotient by fixed `S`-unit normalization.
+**Artifact:** `ReturnGuard.primitiveIntegralStep_cumulativeEndpointStep`,
+`CumulativeEndpointStep.target_unique`, `cumulativeDenominator_recurrence`,
+`cumulativeNumerator_recurrence`, `cumulativeUnitTail_transition`, and
+`terminalTruncant_eq_cumulativeNumerator` in
+[`ReturnGuardCumulative.lean`](MatrixMortality/ReturnGuardCumulative.lean); exact executions in
+[`ReturnGuardExamples.lean`](MatrixMortality/ReturnGuardExamples.lean); audit in
+[`m32-cumulative-endpoint-2026-07-31.md`](audits/m32-cumulative-endpoint-2026-07-31.md).
 
-**Artifact:** `ReturnGuard.integralStep_terminalDefect`,
-`reducedDenominator_recurrence`,
-`integralStep_novel_cancel_iff_cyclotomic_terminalCongruent`, and
-`ReturnGuard.Examples.cycle_commonFactors_dvd_fixedSupport` in
-[`ReturnGuardCocycle.lean`](MatrixMortality/ReturnGuardCocycle.lean),
-[`ReturnGuardArithmetic.lean`](MatrixMortality/ReturnGuardArithmetic.lean), and
-[`ReturnGuardExamples.lean`](MatrixMortality/ReturnGuardExamples.lean).
+**Use:** study one second-order exact-division recurrence. Quotient and height arguments should
+be stated on `(Rᵢ,βᵢ)` and derive primitive contents only when charging local cancellation.
 
-**Use:** organize the decision attack as an `S`-arithmetic problem. Primes dividing `DL` own the
-normalization state; outside that fixed set, every cancellation factor simultaneously lies in
-`pᵃ−1` and the terminal defect.
-
-**Next:** define the fixed-support-free part of an integer, derive its transport through the
-denominator recurrence, and test whether it has an effective finite nucleus.
+**Next:** prove that every infinite rational cumulative execution has proportional consecutive
+pairs effectively, or construct one nonperiodic rational execution. A proof must control blocks
+whose wait reaches a new maximum; this is the live mountain-gap problem.
 
 ### R32-S09: Complete cancellation law
 

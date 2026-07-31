@@ -33,13 +33,13 @@ import MatrixMortality.ReturnGuardQuotient
 import MatrixMortality.ReturnGuardIntegralLift
 import MatrixMortality.ReturnGuardQuotientCompleteness
 import MatrixMortality.ReturnGuardDriftCertificate
-import MatrixMortality.ReturnGuardCocycle
 import MatrixMortality.ReturnGuardFrame
 import MatrixMortality.ReturnGuardGap
 import MatrixMortality.ReturnGuardEndpoint
 import MatrixMortality.ReturnGuardAdelic
 import MatrixMortality.ReturnGuardPumping
 import MatrixMortality.ReturnGuardResonance
+import MatrixMortality.ReturnGuardCumulative
 import MatrixMortality.ReturnGuardRail
 import MatrixMortality.ReturnGuardExamples
 import MatrixMortality.ReturnGuardQuotientExamples

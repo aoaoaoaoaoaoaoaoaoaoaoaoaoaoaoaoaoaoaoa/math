@@ -1,7 +1,6 @@
 import MatrixMortality.IndexedExecution
 import MatrixMortality.ReturnGuardAddress
-import MatrixMortality.ReturnGuardCocycle
-import MatrixMortality.ReturnGuardEndpoint
+import MatrixMortality.ReturnGuardCumulative
 import MatrixMortality.ReturnGuardResonance
 
 /-!
@@ -669,6 +668,35 @@ theorem increasingMortal_terminalCoordinates :
         -41912 / 3 ∧
         terminalCoordinate (-57803) 403 10304 (403 / 68107) = 0 := by
   norm_num [terminalCoordinate]
+
+/-- Retaining removed content turns the decreasing mortal orbit into one exact integral
+execution; no primitive normalization variable remains. -/
+theorem decreasingMortal_cumulativeExecution :
+    CumulativeEndpointExecution 3 2 467 (-35) 124 [3, 1]
+      (308, 1) (0, -1240) := by
+  exact .cons (middle := (-12152, -4)) (by constructor <;> norm_num)
+    (.cons (by constructor <;> norm_num) (.nil _))
+
+/-- The increasing mortal orbit obeys the same content-free recurrence. -/
+theorem increasingMortal_cumulativeExecution :
+    CumulativeEndpointExecution 5 2 (-57803) 403 10304 [2, 3]
+      (-67704, 1) (0, 41664) := by
+  exact .cons (middle := (7041216, -504)) (by constructor <;> norm_num)
+    (.cons (by constructor <;> norm_num) (.nil _))
+
+/-- The rational period-three orbit is an integral projective cycle: after waits `1, 2, 3`,
+the cumulative pair returns to its initial ray with scale `-15411200`. -/
+theorem cycle_cumulativeExecution :
+    CumulativeEndpointExecution 3 2 (-953) 473 2240 [1, 2, 3]
+      (-2720, 1) (41918464000, -15411200) := by
+  exact .cons (middle := (1267840, -800)) (by constructor <;> norm_num)
+    (.cons (middle := (-15411200, 192640)) (by constructor <;> norm_num)
+      (.cons (by constructor <;> norm_num) (.nil _)))
+
+theorem cycle_cumulativeTarget_eq_scaledReset :
+    (41918464000, -15411200) =
+      ((-15411200 : ℤ) * (-2720), (-15411200 : ℤ) * 1) := by
+  norm_num
 
 end
 end MatrixMortality.ReturnGuard.Examples

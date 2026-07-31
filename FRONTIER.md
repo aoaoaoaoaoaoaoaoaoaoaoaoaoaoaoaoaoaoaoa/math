@@ -655,12 +655,13 @@ swallows `d` exactly when the source residual is congruent to the terminal resid
 The remaining local-global escape is therefore repeated terminal shadowing at unbounded
 cyclotomic orders.
 
-[`R32-S08`](SALVAGE.md#r32-s08-terminal-defect-cocycle) separates two arithmetically distinct
-normalization mechanisms. Outside the fixed prime support of `DL`, a common factor is swallowed
-exactly when it divides both `pᵃ−1` and the terminal defect. Inside that fixed support, large
-height collapse is already real: all three normalization factors of the checked period-three
-orbit divide `DL`. A finite-nucleus proof must therefore normalize the fixed `S`-unit directions
-before applying primitive-divisor growth; total gcd or ordinary height cannot be monotone.
+[`R32-S08`](SALVAGE.md#r32-s08-cumulative-endpoint-recurrence) removes primitive normalization
+from the state. Retaining every signed removed content yields one deterministic integral pair
+recurrence from `(A+D−L,1)`; the cumulative numerator alone obeys a second-order exact-division
+law, and terminality is exactly its vanishing. Primitive content, complementary content, and
+reduced denominators are derived local factors. The live global problem is a mountain-gap
+theorem: either every infinite rational execution effectively returns to a projective ray, or
+one nonperiodic cumulative orbit carries the missing computation.
 
 [`R32-S09`](SALVAGE.md#r32-s09-complete-cancellation-law) removes the remaining ambiguity in
 that split. For every prime `ℓ≠p`, the exact cancellation depth is
