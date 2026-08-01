@@ -659,9 +659,7 @@ cyclotomic orders.
 from the state. Retaining every signed removed content yields one deterministic integral pair
 recurrence from `(A+D−L,1)`; the cumulative numerator alone obeys a second-order exact-division
 law, and terminality is exactly its vanishing. Primitive content, complementary content, and
-reduced denominators are derived local factors. The live global problem is a mountain-gap
-theorem: either every infinite rational execution effectively returns to a projective ray, or
-one nonperiodic cumulative orbit carries the missing computation.
+reduced denominators are derived local factors.
 
 [`R32-S09`](SALVAGE.md#r32-s09-complete-cancellation-law) removes the remaining ambiguity in
 that split. For every prime `ℓ≠p`, the exact cancellation depth is
@@ -846,6 +844,31 @@ congruence in the reduced target. Two trajectories through the same branch obey 
 exterior-product law, and any repeated legal factor at arbitrary checkpoints is either an
 exact cycle or its p-adic expansion is bounded by the two rational height envelopes.
 
+[`R32-S30`](SALVAGE.md#r32-s30-fixed-cusp-and-record-ascent-calculus) gives the cumulative
+recurrence its canonical global coordinate. The complete quotient
+
+```text
+Zᵢ = −DL Rᵢ₋₁/Rᵢ
+```
+
+obeys one generalized continued-fraction law with fixed forbidden cusp `Z=−L`; the wait is
+exactly the approximation depth to the fixed ray `A Rᵢ=DL Rᵢ₋₁`. Terminal reverse content
+divides the fixed boundary `L(A+D−L)`, but this does not bound the last wait: every positive
+wait has an explicit terminal predecessor.
+
+At critical depth two, consecutive nondecreasing waits satisfy the sharper local budget
+
+```text
+p^(a+b)|hh′| ≤
+  (|D| + (1+|L|)(|A|+|L|)) H(R,β).
+```
+
+The intermediate height is eliminated, and the underlying decoder is an order-three core
+followed by one wait-dependent shear. This is the exact record-ascent wall. It remains an
+absolute estimate at a moving checkpoint: height accumulated before the ascent may already pay
+the displayed power. The report's stronger fresh-cyclotomic-core claim was rejected because its
+successive versions use incompatible loss exponents and omit the decisive valuation accounting.
+
 The remaining unbounded channel is now sharply Archimedean. The audited
 [`R32-D03`](SALVAGE.md#r32-d03-bounded-denominator-periodicity) theorem says that every
 infinite legal rational orbit with bounded reduced denominators is eventually periodic.
@@ -857,19 +880,20 @@ nonperiodic survivor must have unbounded reduced denominators.
 
 | Lane | Required move | Present obstruction |
 | --- | --- | --- |
-| Denominator-return theorem | Prove that unbounded reduced denominators force a coefficient-boundary obstruction, a pumpable repeated factor, or terminality | Endpoint contents control cancellation but leave a spare `p^((s−1)a)` denominator scale |
+| Global shear amortization | Compare every record ascent's fresh `p^(a+b)` charge with height inherited at its moving checkpoint | The local two-step theorem is absolute; accumulated height can finance a later ascent without violating it |
+| Active-core extraction | Prove a stable lower bound for the cyclotomic mass not swallowed by endpoint contents | The submitted `Ba`/`Ba^κ` losses conflict, and no audited valuation argument isolates a fresh core |
 | Denominator counter | Construct one coefficient-aligned orbit with unbounded denominators and a power-free wait word | Local p-adic symbolic freedom is complete, but endpoint content and rational height couple all branches globally |
 | Repeated-factor extraction | Force a sufficiently heavy repeated factor in every bounded-complexity wait prefix and apply `R32-S29` | Arbitrary repeated factors are controlled once found; no theorem yet extracts one from a moving denominator schedule |
 | Irreducible cubic fallback | Replace the split spectrum by a cubic return pencil with internal punctuation and a complete word normal form | No candidate yet matches the guard's exact illegal-branch soundness |
 | Exceptional reverse compiler | Absorb the finite `αβ=0` disjunction into one three-dimensional many-one instance | The generic rank-`(2,2)` compiler is complete; dimension three has no evident OR operation |
 
-The prospective hot path is the unbounded-denominator divisor recurrence, not another
+The prospective hot path is the fixed-cusp shear and its active cyclotomic core, not another
 parameter or tangent coordinate. The matrix compiler, arbitrary-word converse, deterministic
 wait decoder, rational inverse-address grammar, primitive integral lift, endpoint
-factorization, exact branch similarity, arbitrary repeated-factor pumping, and content-height
-budgets are complete. `M₃(2)` now asks whether a three-state rational recurrence can sustain
-unbounded reduced denominators while evading every coefficient quotient and every
-height-forced repetition.
+factorization, exact branch similarity, arbitrary repeated-factor pumping, and local
+record-ascent budget are complete. `M₃(2)` now asks whether a three-state rational recurrence
+can amortize unbounded record ascents along moving checkpoints while evading every coefficient
+quotient and every height-forced repetition.
 
 ## The dimension-two wall: `M₂(3)`
 

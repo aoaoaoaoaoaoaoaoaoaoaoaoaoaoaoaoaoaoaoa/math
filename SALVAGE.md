@@ -104,6 +104,7 @@ file owns the mathematical stock.
 | [`R32-S27`](#r32-s27-rational-gap-macro-pumping) | structure theorem and obstruction | exact branch similarity and rational height separation bound every noncyclic repetition of one fixed macro | formalized | active |
 | [`R32-S28`](#r32-s28-terminal-endpoint-and-complementary-content) | structure theorem and obstruction | a terminal gauge exposes complementary forward/reverse contents and coefficient-prime immortality certificates | formalized | active |
 | [`R32-S29`](#r32-s29-adelic-content-and-repeated-factor-budget) | structure theorem and obstruction | content-weighted height, full cyclotomic complement, exterior conservation, and arbitrary repeated-factor pumping share one calculus | formalized | active |
+| [`R32-S30`](#r32-s30-fixed-cusp-and-record-ascent-calculus) | structure theorem and obstruction | cumulative endpoints form a fixed-cusp continued fraction whose critical record ascents pay an exact two-step content budget | formalized | active |
 | [`R32-D03`](#r32-d03-bounded-denominator-periodicity) | decidable stratum | every infinite legal rational guard orbit with bounded reduced denominators is eventually periodic | audited | active |
 | [`M4-C01`](#m4-c01-two-state-pushout-compiler) | compiler | binary deterministic two-state scalar control compiles to three `4 × 4` matrices | formalized | graduated |
 | [`M4-O01`](#m4-o01-exact-toggle-fusion-leaves-an-immortal-core) | obstruction | exact local toggle fusion preserves a nonzero common anchor | formalized | graduated |
@@ -2483,14 +2484,7 @@ p^(saᵢ)Rᵢ₊₁
 ```
 
 Terminality is `Rᵢ=0`; the first row of the full endpoint product is
-`p^(sΣaᵢ)Rᵢ`. The tail `Xᵢ=Lβᵢ/βᵢ₊₁` obeys
-
-```text
-Xᵢ₊₁ = Lp^(saᵢ₊₁) /
-  (D(p^aᵢ−1)Xᵢ + A + Dp^(saᵢ) − Lp^aᵢ₊₁).
-```
-
-There is no factor `Xᵢ` in this numerator. The reported formula containing one was false.
+`p^(sΣaᵢ)Rᵢ`.
 
 Primitive reduction remains recoverable: removed content is the gcd of the endpoint prequotient
 with `DL(pᵃ−1)`, consecutive primitive denominators are coprime, and the next denominator is
@@ -2511,12 +2505,11 @@ prove that every infinite rational execution returns projectively. Primitive con
 remain useful as derived local arithmetic; they no longer define the state.
 
 **Artifact:** `ReturnGuard.primitiveIntegralStep_cumulativeEndpointStep`,
-`CumulativeEndpointStep.target_unique`, `cumulativeDenominator_recurrence`,
-`cumulativeNumerator_recurrence`, `cumulativeUnitTail_transition`, and
+`CumulativeEndpointStep.target_unique`, `cumulativeNumerator_recurrence`, and
 `terminalTruncant_eq_cumulativeNumerator` in
 [`ReturnGuardCumulative.lean`](MatrixMortality/ReturnGuardCumulative.lean); exact executions in
 [`ReturnGuardExamples.lean`](MatrixMortality/ReturnGuardExamples.lean); audit in
-[`m32-cumulative-endpoint-2026-07-31.md`](audits/m32-cumulative-endpoint-2026-07-31.md).
+[`m32-fixed-cusp-record-ascent-2026-08-01.md`](audits/m32-fixed-cusp-record-ascent-2026-08-01.md).
 
 **Use:** study one second-order exact-division recurrence. Quotient and height arguments should
 be stated on `(Rᵢ,βᵢ)` and derive primitive contents only when charging local cancellation.
@@ -3213,6 +3206,93 @@ wherever they occur, not only to powers from reset.
 
 **Next:** extract a sufficiently heavy repeated factor from bounded-denominator schedules, or
 construct a coefficient-aligned orbit whose denominator growth evades every such extraction.
+
+### R32-S30: Fixed-cusp and record-ascent calculus
+
+**Kind:** structure theorem and obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+For a primitive endpoint reduction, let `t` be the unreduced endpoint quotient and let `h` be
+the removed signed content. The normalization is exact:
+
+```text
+t = hβ′,
+|h| = gcd(|Dr|, |t|).
+```
+
+If `k` is the complementary reverse content, the reset defect factors as
+
+```text
+L(r′−(A+D−L)β′) = k(Lβ + Sₐt),
+Sₐ = 1 + pᵃ + ⋯ + p^((s−1)a).
+```
+
+At a terminal target this removes the wait entirely: `k ∣ L(A+D−L)`. This is a constraint on
+content, not on the last wait. Indeed every positive wait has an explicit integral terminal
+predecessor, so backward enumeration by wait cannot terminate.
+
+The canonical complete quotient
+
+```text
+Zᵢ = −DL Rᵢ₋₁/Rᵢ
+```
+
+obeys the cross-multiplied generalized continued-fraction law
+
+```text
+((pᵃ−1)Zᵢ − A + Lpᵃ)Zᵢ₊₁ = Dp^(sa)(Zᵢ₊₁+L).
+```
+
+The distinguished fixed cusp is `Z=−L`, and
+
+```text
+Zᵢ₊₁+L = L(A−L)βᵢ₊₁/Rᵢ₊₁.
+```
+
+Thus the cusp is forbidden whenever `L(A−L)βᵢ₊₁≠0`. Under the guard's unit hypotheses, the
+wait itself is the approximation depth to one fixed rational ray:
+
+```text
+vₚ(A Rᵢ − DL Rᵢ₋₁) = aᵢ.
+```
+
+At the critical depth `s=2`, two consecutive primitive steps with nondecreasing waits `a≤b`
+satisfy the exact local mountain budget
+
+```text
+p^(a+b)|hh′| ≤ C₂ H(r,β),
+C₂ = |D| + (1+|L|)(|A|+|L|).
+```
+
+The intermediate height has vanished. Algebraically, the critical decoder factors into one
+fixed order-three core and a wait-dependent shear:
+
+```text
+C(p⁻ᵃ) = J · [[1,0],[-p⁻ᵃ,1]],
+J³ = −I.
+```
+
+**Scope:** this is an absolute two-step budget at the start of a local record ascent. It does
+not yet compare the charged power with height accumulated before that ascent. The reported
+full “fresh cyclotomic core” lower bound was not promoted: two versions of the report use
+incompatible loss exponents, and neither supplies the missing valuation bookkeeping.
+
+**Artifact:** `PrimitiveEndpointReduction.content_natAbs_eq_gcd_driftSource_prequotient`,
+`PrimitiveEndpointReduction.resetDefect_eq_complement_mul`,
+`PrimitiveEndpointReduction.complement_dvd_terminalBoundary`, `terminalPredecessorPair_step`,
+`cumulativeCompleteQuotient_recurrence`, `cumulativeCompleteQuotient_sub_forbiddenCusp`,
+`cumulativeWaitForm_hasValue`, `PrimitiveEndpointReduction.twoStep_contentBudget`,
+`criticalDecoder_factor`, and `criticalDecoderCore_cube` in
+[`ReturnGuardContinued.lean`](MatrixMortality/ReturnGuardContinued.lean). Independent audit:
+[`m32-fixed-cusp-record-ascent-2026-08-01.md`](audits/m32-fixed-cusp-record-ascent-2026-08-01.md).
+
+**Use:** state the residual arithmetic in the fixed-cusp quotient and charge every
+nondecreasing pair locally before importing any primitive-divisor estimate.
+
+**Next:** prove a global shear or active-core amortization theorem comparing a record ascent's
+fresh `p^(a+b)` charge with the height inherited at its moving checkpoint. A merely absolute
+height estimate repeats the local theorem and cannot close the orbit.
 
 ### R32-D03: Bounded-denominator periodicity
 

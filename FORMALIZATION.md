@@ -448,6 +448,7 @@ with a complete arbitrary-word converse.
 | `ReturnGuardQuotientCompleteness.lean` | zero-wait terminal kernel, cancellation-reachability completeness, and synchronized-product no-amplification |
 | `ReturnGuardDriftCertificate.lean` | exact drift-divisor certificate classification, cyclic subgroup criterion, and executable finite test |
 | `ReturnGuardCumulative.lean` | content-free cumulative endpoint execution, exact second-order recurrence, and derived primitive content |
+| `ReturnGuardContinued.lean` | fixed-cusp complete quotients, exact terminal arithmetic, record-ascent content budget, and order-three decoder |
 | `ReturnGuardFrame.lean` | evaluation-frame coboundary and reset-shell localization of transverse depth |
 | `ReturnGuardGap.lean` | exact residual similarity, rational projective gaps, height envelopes, and fixed-macro pumping |
 | `ReturnGuardPumping.lean` | arbitrary repeated-factor pumping between decoded orbit checkpoints |
@@ -565,6 +566,11 @@ with a complete arbitrary-word converse.
 | A cyclotomic factor is swallowed exactly when the source pair is terminal-congruent modulo it | `ReturnGuard.integralStep_cyclotomic_cancel_iff_terminalCongruent` |
 | Outside the fixed parameter support, cancellation is exactly cyclotomic terminal congruence | `ReturnGuard.integralStep_novel_cancel_iff_cyclotomic_terminalCongruent` |
 | Primitive endpoint normalization collapses into one deterministic cumulative recurrence | `ReturnGuard.primitiveIntegralStep_cumulativeEndpointStep`, `ReturnGuard.CumulativeEndpointStep.target_unique`, `ReturnGuard.cumulativeNumerator_recurrence` |
+| Primitive content is exactly the gcd of the drift source and the unreduced quotient; reverse content satisfies a wait-free terminal divisor law | `ReturnGuard.PrimitiveEndpointReduction.content_natAbs_eq_gcd_driftSource_prequotient`, `ReturnGuard.PrimitiveEndpointReduction.resetDefect_eq_complement_mul`, `ReturnGuard.PrimitiveEndpointReduction.complement_dvd_terminalBoundary` |
+| Every positive wait has an exact terminal predecessor, so backward terminal search has no wait bound | `ReturnGuard.terminalPredecessorPair_step` |
+| Cumulative endpoints form a generalized continued fraction with one fixed forbidden cusp | `ReturnGuard.cumulativeCompleteQuotient_recurrence`, `ReturnGuard.cumulativeCompleteQuotient_sub_forbiddenCusp`, `ReturnGuard.cumulativeWaitForm_hasValue` |
+| At critical depth two, every nondecreasing pair of waits pays an exact two-step content budget | `ReturnGuard.PrimitiveEndpointReduction.twoStep_elimination`, `ReturnGuard.PrimitiveEndpointReduction.twoStep_contentBudget` |
+| The critical decoder is an order-three core followed by a wait-dependent shear | `ReturnGuard.criticalDecoder_factor`, `ReturnGuard.criticalDecoderCore_cube` |
 | Every base-coprime cancellation depth is the minimum of the terminal-defect and displacement depths | `ReturnGuard.integralStep_cancel_iff_terminalDefect_and_displacement`, `ReturnGuard.integralStep_commonFactor_padicValInt` |
 | Legal waits are logarithmic in primitive height and reduced height is uniformly Lipschitz | `ReturnGuard.integralStep_wait_le_log_height`, `ReturnGuard.integralStep_reduced_height_le` |
 | A large primitive cyclotomic radical forces terminality or a surviving exact-order reset | `ReturnGuard.terminalDefect_zero_or_exists_primitive_reset`, `ReturnGuard.primitiveCyclotomicRadical_le_height_of_no_reset` |

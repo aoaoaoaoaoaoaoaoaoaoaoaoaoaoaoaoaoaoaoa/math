@@ -40,6 +40,7 @@ import MatrixMortality.ReturnGuardAdelic
 import MatrixMortality.ReturnGuardPumping
 import MatrixMortality.ReturnGuardResonance
 import MatrixMortality.ReturnGuardCumulative
+import MatrixMortality.ReturnGuardContinued
 import MatrixMortality.ReturnGuardRail
 import MatrixMortality.ReturnGuardExamples
 import MatrixMortality.ReturnGuardQuotientExamples

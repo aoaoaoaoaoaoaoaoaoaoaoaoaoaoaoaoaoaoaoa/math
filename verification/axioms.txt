@@ -489,14 +489,31 @@
 'MatrixMortality.ReturnGuard.CumulativeEndpointExecution.transfer' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-'MatrixMortality.ReturnGuard.cumulativeDenominator_recurrence' depends on axioms: [propext,
- Classical.choice,
- Quot.sound]
-'MatrixMortality.ReturnGuard.cumulativeUnitTail_transition' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.ReturnGuard.cumulativeNumerator_recurrence' depends on axioms: [propext, Quot.sound]
 'MatrixMortality.ReturnGuard.terminalTruncant_eq_cumulativeNumerator' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.ReturnGuard.PrimitiveEndpointReduction.content_natAbs_eq_gcd_driftSource_prequotient' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.PrimitiveEndpointReduction.resetDefect_eq_complement_mul' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.PrimitiveEndpointReduction.complement_dvd_terminalBoundary' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.terminalPredecessorPair_step' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.ReturnGuard.cumulativeCompleteQuotient_recurrence' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.cumulativeCompleteQuotient_sub_forbiddenCusp' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.cumulativeWaitForm_hasValue' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ReturnGuard.PrimitiveEndpointReduction.twoStep_contentBudget' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.criticalDecoderCore_cube' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.ReturnGuard.Examples.decreasingMortal_cumulativeExecution' depends on axioms: [propext, Quot.sound]
 'MatrixMortality.ReturnGuard.Examples.increasingMortal_cumulativeExecution' depends on axioms: [propext, Quot.sound]
 'MatrixMortality.ReturnGuard.Examples.cycle_cumulativeExecution' depends on axioms: [propext, Quot.sound]
