@@ -538,6 +538,25 @@
  Classical.choice,
  Quot.sound]
 'MatrixMortality.ReturnGuard.criticalDecoderCore_cube' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ReturnGuard.exists_smithRubanSplit' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ReturnGuard.smithRubanDecoder_det' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ReturnGuard.smithRubanDecoder_weight_contraction' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.PrimitiveEndpointReduction.coreQuotient_dvd_complement' depends on axioms: [propext]
+'MatrixMortality.ReturnGuard.PrimitiveEndpointReduction.coreQuotient_coprime_targetDenominator' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.PrimitiveEndpointReduction.source_eq_smithRubanQuotient' depends on axioms: [propext,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.PrimitiveEndpointReduction.smithRuban_resetDefect' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.PrimitiveEndpointReduction.maximalCancellation' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.ReturnGuard.integralStep_laggedReturnCocycle' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.gaugedReturnCocycle_mulVec' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.ReturnGuard.Examples.decreasingMortal_cumulativeExecution' depends on axioms: [propext, Quot.sound]
 'MatrixMortality.ReturnGuard.Examples.increasingMortal_cumulativeExecution' depends on axioms: [propext, Quot.sound]
 'MatrixMortality.ReturnGuard.Examples.cycle_cumulativeExecution' depends on axioms: [propext, Quot.sound]

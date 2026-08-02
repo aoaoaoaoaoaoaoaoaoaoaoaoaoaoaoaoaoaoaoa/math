@@ -306,6 +306,25 @@ exact-order quotient invariant therefore proves physical immortality directly; t
 drift-divisor subgroup-avoidance family is nonvacuous even when the chosen terminal
 coefficients are not themselves primitive.
 
+At critical depth two, Lean now splits complementary endpoint contents as
+
+```text
+h=ηu,    k=θv,    ηθ=DL,    uv=pᵃ−1,
+u,v>0,      gcd(u,θ)=1.
+```
+
+The attached `2 × 2` decoder has determinant `−1`; its explicit inverse confines every
+subsequent common divisor to fixed coefficient support. Every prescribed factor of `pᵃ−1`
+not swallowed by `h` divides `k`, with multiplicity, and is coprime to the target denominator.
+In the weighted norm `|x|+4|y|`, every branch with `v≥2` contracts by at most `3/4` after
+the natural `p^(2a)` rescaling. The exceptional branch `v=1` is reduced to one exact
+first-order maximal-cancellation recurrence.
+
+The motivating multi-wait cocycle did not survive reconstruction. One step is exact in a
+lagged wait frame; changing to the next wait requires a separate rational gauge. Lean checks
+the lagged transfer, frame change, and honest composed cocycle. The ungauged global path bound
+is false and is not part of the corpus.
+
 These are structural and decidable-stratum theorems, not an `M₃(2)` resolution. The imported
 order-four Skolem theorem used to classify rank-one profiles is not reimplemented in Lean. The
 generic reverse edge compiler still assumes `αβ≠0`, and no universality or decision theorem is
@@ -449,6 +468,7 @@ with a complete arbitrary-word converse.
 | `ReturnGuardDriftCertificate.lean` | exact drift-divisor certificate classification, cyclic subgroup criterion, and executable finite test |
 | `ReturnGuardCumulative.lean` | content-free cumulative endpoint execution, exact second-order recurrence, and derived primitive content |
 | `ReturnGuardContinued.lean` | fixed-cusp complete quotients, exact terminal arithmetic, record-ascent content budget, and order-three decoder |
+| `ReturnGuardSmith.lean` | signed content split, unimodular endpoint decoder, nonmaximal contraction, maximal-cancellation throat, and corrected gauged cocycle |
 | `ReturnGuardPeriodicity.lean` | exact denominator recurrence and explicit record-ascent, wait, content, and numerator ceilings |
 | `ReturnGuardFiniteOrbit.lean` | bounded primitive endpoint streams, their finite state box, repetition, and eventual periodicity |
 | `ReturnGuardFrame.lean` | evaluation-frame coboundary and reset-shell localization of transverse depth |

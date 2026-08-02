@@ -105,6 +105,7 @@ file owns the mathematical stock.
 | [`R32-S28`](#r32-s28-terminal-endpoint-and-complementary-content) | structure theorem and obstruction | a terminal gauge exposes complementary forward/reverse contents and coefficient-prime immortality certificates | formalized | active |
 | [`R32-S29`](#r32-s29-adelic-content-and-repeated-factor-budget) | structure theorem and obstruction | content-weighted height, full cyclotomic complement, exterior conservation, and arbitrary repeated-factor pumping share one calculus | formalized | active |
 | [`R32-S30`](#r32-s30-fixed-cusp-and-record-ascent-calculus) | structure theorem and obstruction | cumulative endpoints form a fixed-cusp continued fraction whose critical record ascents pay an exact two-step content budget | formalized | active |
+| [`R32-S31`](#r32-s31-smith-decoder-and-maximal-cancellation-throat) | structure theorem and obstruction | a unimodular content decoder contracts every nonmaximal branch and isolates one exact maximal-cancellation recurrence | formalized | active |
 | [`R32-D03`](#r32-d03-bounded-denominator-periodicity) | decidable stratum | every infinite legal rational guard orbit with bounded reduced denominators is eventually periodic | formalized | graduated |
 | [`M4-C01`](#m4-c01-two-state-pushout-compiler) | compiler | binary deterministic two-state scalar control compiles to three `4 × 4` matrices | formalized | graduated |
 | [`M4-O01`](#m4-o01-exact-toggle-fusion-leaves-an-immortal-core) | obstruction | exact local toggle fusion preserves a nonzero common anchor | formalized | graduated |
@@ -3293,6 +3294,75 @@ nondecreasing pair locally before importing any primitive-divisor estimate.
 **Next:** prove a global shear or active-core amortization theorem comparing a record ascent's
 fresh `p^(a+b)` charge with the height inherited at its moving checkpoint. A merely absolute
 height estimate repeats the local theorem and cannot close the orbit.
+
+### R32-S31: Smith decoder and maximal-cancellation throat
+
+**Kind:** structure theorem and obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+At critical depth two, complementary endpoint contents admit the signed split
+
+```text
+h=ηu,    k=θv,    ηθ=DL,    uv=q−1,
+u,v>0,      gcd(u,θ)=1.
+```
+
+The corresponding endpoint decoder
+
+```text
+C(q,u,v) = [[v,q²],[1,(q+1)u]]
+```
+
+has determinant `−1`. Its inverse proves that every common reduction factor in the decoded
+pair divides the fixed coefficient `Lη`. More generally, for every `core∣q−1`, the part
+
+```text
+Ω=core/gcd(core,|h|)
+```
+
+divides `|k|`, is coprime to the reduced target denominator, and satisfies
+`core≤|h|Ω`. This folds the proposed primitive-core allocation into one exact gcd theorem
+with multiplicity.
+
+For `q≥3`, the weighted norm `||(x,y)||=|x|+4|y|` obeys
+
+```text
+4||C(q,u,v)x|| ≤ 3q²||x||
+```
+
+whenever `v≥2`. Hence the sole noncontracting local throat is `v=1`, where `u=q−1` and
+
+```text
+m=Lt+q²ηt′,
+r=(q−1)m,
+ηr′=Dm+(A−L)ηt′.
+```
+
+The submitted variable-wait cocycle required correction. In the frame
+`F_q(m,n)=(n,q²m−n)`, one step maps `F_q` to the same lagged frame `F_q`; changing the target
+to `F_Q` requires an explicit rational gauge `J(q,Q)`. Lean checks the lagged identity, the
+gauge, and their composition. The ungauged concatenating identity and all global tropical
+estimates derived from it are false in general and were rejected.
+
+**Scope:** contraction is local after natural `q²` rescaling. This record does not bound an
+arbitrary gauged product and does not classify an infinite chain of `v=1` steps.
+
+**Artifact:** `exists_smithRubanSplit`, `smithRubanDecoder_det`,
+`smithRubanDecoder_weight_contraction`,
+`PrimitiveEndpointReduction.coreQuotient_dvd_complement`,
+`PrimitiveEndpointReduction.smithRuban_resetDefect`,
+`PrimitiveEndpointReduction.maximalCancellation`, `integralStep_laggedReturnCocycle`, and
+`gaugedReturnCocycle_mulVec` in
+[`ReturnGuardSmith.lean`](MatrixMortality/ReturnGuardSmith.lean). Independent reconstruction:
+[`m32-smith-ruban-2026-08-02.md`](audits/m32-smith-ruban-2026-08-02.md).
+
+**Use:** split every large cyclotomic factor into a contracting branch or the exact maximal
+throat before applying height or primitive-divisor arguments. Never concatenate lagged frames
+without the intervening gauge.
+
+**Next:** prove a global norm or continued-fraction estimate for the gauged decoder product, or
+classify repeated maximal-cancellation steps by the displayed first-order recurrence.
 
 ### R32-D03: Bounded-denominator periodicity
 

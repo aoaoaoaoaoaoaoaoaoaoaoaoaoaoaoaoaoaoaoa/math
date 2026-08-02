@@ -869,6 +869,22 @@ absolute estimate at a moving checkpoint: height accumulated before the ascent m
 the displayed power. The report's stronger fresh-cyclotomic-core claim was rejected because its
 successive versions use incompatible loss exponents and omit the decisive valuation accounting.
 
+[`R32-S31`](SALVAGE.md#r32-s31-smith-decoder-and-maximal-cancellation-throat) resolves the local
+active-core allocation without adding state. Complementary contents split as
+
+```text
+h=ηu,    k=θv,    ηθ=DL,    uv=pᵃ−1,
+```
+
+and the associated endpoint decoder is unimodular. Every prescribed cyclotomic core not
+absorbed by `h` passes to `k`, with multiplicity. In a fixed weighted norm, all branches with
+`v≥2` contract uniformly after their natural `p^(2a)` scale; `v=1` is the unique
+noncontracting branch and obeys an exact first-order recurrence. This is a real dichotomy, but
+not yet a global contraction theorem: successive decoder coordinates use different wait
+frames. The correct variable-wait transfer contains an explicit gauge between those frames.
+The submitted ungauged cocycle and its tropical path bound were algebraically false and have
+been removed from the live branch.
+
 The remaining unbounded channel is now sharply Archimedean. The formalized
 [`R32-D03`](SALVAGE.md#r32-d03-bounded-denominator-periodicity) theorem says that every
 infinite legal rational orbit with bounded reduced denominators is eventually periodic.
@@ -880,20 +896,21 @@ survivor must have unbounded reduced denominators.
 
 | Lane | Required move | Present obstruction |
 | --- | --- | --- |
-| Global shear amortization | Compare every record ascent's fresh `p^(a+b)` charge with height inherited at its moving checkpoint | The local two-step theorem is absolute; accumulated height can finance a later ascent without violating it |
-| Active-core extraction | Prove a stable lower bound for the cyclotomic mass not swallowed by endpoint contents | The submitted `Ba`/`Ba^κ` losses conflict, and no audited valuation argument isolates a fresh core |
+| Gauged decoder amortization | Combine the `v≥2` contraction with the exact change-of-wait gauge along an arbitrary schedule | The local loss is uniform, but the moving gauge can re-expand the weighted norm |
+| Maximal-throat classification | Decide or pump chains with `v=1`, where all of `pᵃ−1` is swallowed forward | The exact first-order recurrence is known, but its successive signed coefficient factors still vary |
 | Denominator counter | Construct one coefficient-aligned orbit with unbounded denominators and a power-free wait word | Local p-adic symbolic freedom is complete, but endpoint content and rational height couple all branches globally |
 | Repeated-factor extraction | Force a sufficiently heavy repeated factor in every bounded-complexity wait prefix and apply `R32-S29` | Arbitrary repeated factors are controlled once found; no theorem yet extracts one from a moving denominator schedule |
 | Irreducible cubic fallback | Replace the split spectrum by a cubic return pencil with internal punctuation and a complete word normal form | No candidate yet matches the guard's exact illegal-branch soundness |
 | Exceptional reverse compiler | Absorb the finite `αβ=0` disjunction into one three-dimensional many-one instance | The generic rank-`(2,2)` compiler is complete; dimension three has no evident OR operation |
 
-The prospective hot path is the fixed-cusp shear and its active cyclotomic core, not another
-parameter or tangent coordinate. The matrix compiler, arbitrary-word converse, deterministic
-wait decoder, rational inverse-address grammar, primitive integral lift, endpoint
-factorization, exact branch similarity, arbitrary repeated-factor pumping, and local
-record-ascent budget are complete. `M₃(2)` now asks whether a three-state rational recurrence
-can amortize unbounded record ascents along moving checkpoints while evading every coefficient
-quotient and every height-forced repetition.
+The prospective hot path is now the Smith dichotomy inside the fixed-cusp recurrence, not
+another parameter or tangent coordinate. The matrix compiler, arbitrary-word converse,
+deterministic wait decoder, rational inverse-address grammar, primitive integral lift, endpoint
+factorization, exact branch similarity, arbitrary repeated-factor pumping, local record-ascent
+budget, and local content allocation are complete. `M₃(2)` asks whether an unbounded-denominator
+orbit can use moving frame gauges to repay infinitely many contracting branches, or remain
+forever in the exact maximal-cancellation throat while evading periodicity and every coefficient
+quotient.
 
 ## The dimension-two wall: `M₂(3)`
 

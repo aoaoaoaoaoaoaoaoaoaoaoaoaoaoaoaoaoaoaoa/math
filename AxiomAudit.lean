@@ -269,6 +269,16 @@ open MatrixMortality
 #print axioms ReturnGuard.BoundedPrimitiveEndpointStream.exists_state_repeat
 #print axioms ReturnGuard.BoundedPrimitiveEndpointStream.eventually_periodic
 #print axioms ReturnGuard.criticalDecoderCore_cube
+#print axioms ReturnGuard.exists_smithRubanSplit
+#print axioms ReturnGuard.smithRubanDecoder_det
+#print axioms ReturnGuard.smithRubanDecoder_weight_contraction
+#print axioms ReturnGuard.PrimitiveEndpointReduction.coreQuotient_dvd_complement
+#print axioms ReturnGuard.PrimitiveEndpointReduction.coreQuotient_coprime_targetDenominator
+#print axioms ReturnGuard.PrimitiveEndpointReduction.source_eq_smithRubanQuotient
+#print axioms ReturnGuard.PrimitiveEndpointReduction.smithRuban_resetDefect
+#print axioms ReturnGuard.PrimitiveEndpointReduction.maximalCancellation
+#print axioms ReturnGuard.integralStep_laggedReturnCocycle
+#print axioms ReturnGuard.gaugedReturnCocycle_mulVec
 #print axioms ReturnGuard.Examples.decreasingMortal_cumulativeExecution
 #print axioms ReturnGuard.Examples.increasingMortal_cumulativeExecution
 #print axioms ReturnGuard.Examples.cycle_cumulativeExecution
