@@ -513,6 +513,30 @@
 'MatrixMortality.ReturnGuard.PrimitiveEndpointReduction.twoStep_contentBudget' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.ReturnGuard.PrimitiveEndpointReduction.denominator_recurrence' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.ReturnGuard.PrimitiveEndpointReduction.denominator_growth_factorization' depends on axioms: [propext,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.PrimitiveEndpointReduction.nonDecreasing_wait_le_log_recordBound' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.PrimitiveEndpointReduction.wait_le_log_sourceBox' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.PrimitiveEndpointReduction.nonDecreasing_waits_le' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.BoundedPrimitiveEndpointStream.wait_le' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.BoundedPrimitiveEndpointStream.state_mem_box' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.BoundedPrimitiveEndpointStream.exists_state_repeat' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.BoundedPrimitiveEndpointStream.eventually_periodic' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.ReturnGuard.criticalDecoderCore_cube' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.ReturnGuard.Examples.decreasingMortal_cumulativeExecution' depends on axioms: [propext, Quot.sound]
 'MatrixMortality.ReturnGuard.Examples.increasingMortal_cumulativeExecution' depends on axioms: [propext, Quot.sound]

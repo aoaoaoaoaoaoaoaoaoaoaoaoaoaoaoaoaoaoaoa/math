@@ -869,12 +869,12 @@ absolute estimate at a moving checkpoint: height accumulated before the ascent m
 the displayed power. The report's stronger fresh-cyclotomic-core claim was rejected because its
 successive versions use incompatible loss exponents and omit the decisive valuation accounting.
 
-The remaining unbounded channel is now sharply Archimedean. The audited
+The remaining unbounded channel is now sharply Archimedean. The formalized
 [`R32-D03`](SALVAGE.md#r32-d03-bounded-denominator-periodicity) theorem says that every
 infinite legal rational orbit with bounded reduced denominators is eventually periodic.
-Its exact second-order recurrence is already formalized; the effective finiteness argument
-remains the one promoted result in this tranche not yet kernel-checked. Thus any genuinely
-nonperiodic survivor must have unbounded reduced denominators.
+Its proof gives an explicit record-ascent ceiling and finite primitive-state box for every
+supplied denominator bound and every depth at least two. Thus any genuinely nonperiodic
+survivor must have unbounded reduced denominators.
 
 ### Live attacks
 

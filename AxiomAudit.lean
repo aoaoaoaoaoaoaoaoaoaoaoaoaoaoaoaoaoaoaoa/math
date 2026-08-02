@@ -259,6 +259,15 @@ open MatrixMortality
 #print axioms ReturnGuard.cumulativeCompleteQuotient_sub_forbiddenCusp
 #print axioms ReturnGuard.cumulativeWaitForm_hasValue
 #print axioms ReturnGuard.PrimitiveEndpointReduction.twoStep_contentBudget
+#print axioms ReturnGuard.PrimitiveEndpointReduction.denominator_recurrence
+#print axioms ReturnGuard.PrimitiveEndpointReduction.denominator_growth_factorization
+#print axioms ReturnGuard.PrimitiveEndpointReduction.nonDecreasing_wait_le_log_recordBound
+#print axioms ReturnGuard.PrimitiveEndpointReduction.wait_le_log_sourceBox
+#print axioms ReturnGuard.PrimitiveEndpointReduction.nonDecreasing_waits_le
+#print axioms ReturnGuard.BoundedPrimitiveEndpointStream.wait_le
+#print axioms ReturnGuard.BoundedPrimitiveEndpointStream.state_mem_box
+#print axioms ReturnGuard.BoundedPrimitiveEndpointStream.exists_state_repeat
+#print axioms ReturnGuard.BoundedPrimitiveEndpointStream.eventually_periodic
 #print axioms ReturnGuard.criticalDecoderCore_cube
 #print axioms ReturnGuard.Examples.decreasingMortal_cumulativeExecution
 #print axioms ReturnGuard.Examples.increasingMortal_cumulativeExecution

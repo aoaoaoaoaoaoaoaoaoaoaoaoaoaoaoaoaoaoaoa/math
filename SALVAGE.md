@@ -105,7 +105,7 @@ file owns the mathematical stock.
 | [`R32-S28`](#r32-s28-terminal-endpoint-and-complementary-content) | structure theorem and obstruction | a terminal gauge exposes complementary forward/reverse contents and coefficient-prime immortality certificates | formalized | active |
 | [`R32-S29`](#r32-s29-adelic-content-and-repeated-factor-budget) | structure theorem and obstruction | content-weighted height, full cyclotomic complement, exterior conservation, and arbitrary repeated-factor pumping share one calculus | formalized | active |
 | [`R32-S30`](#r32-s30-fixed-cusp-and-record-ascent-calculus) | structure theorem and obstruction | cumulative endpoints form a fixed-cusp continued fraction whose critical record ascents pay an exact two-step content budget | formalized | active |
-| [`R32-D03`](#r32-d03-bounded-denominator-periodicity) | decidable stratum | every infinite legal rational guard orbit with bounded reduced denominators is eventually periodic | audited | active |
+| [`R32-D03`](#r32-d03-bounded-denominator-periodicity) | decidable stratum | every infinite legal rational guard orbit with bounded reduced denominators is eventually periodic | formalized | graduated |
 | [`M4-C01`](#m4-c01-two-state-pushout-compiler) | compiler | binary deterministic two-state scalar control compiles to three `4 × 4` matrices | formalized | graduated |
 | [`M4-O01`](#m4-o01-exact-toggle-fusion-leaves-an-immortal-core) | obstruction | exact local toggle fusion preserves a nonzero common anchor | formalized | graduated |
 | [`M4-O02`](#m4-o02-two-private-state-phase-signature) | obstruction | two private quotient states cannot isolate one exceptional cyclic phase | formalized | graduated |
@@ -3204,8 +3204,8 @@ recorded in
 **Use:** charge every swallowed factor immediately and apply pumping to repeated factors
 wherever they occur, not only to powers from reset.
 
-**Next:** extract a sufficiently heavy repeated factor from bounded-denominator schedules, or
-construct a coefficient-aligned orbit whose denominator growth evades every such extraction.
+**Next:** extract a sufficiently heavy repeated factor from an unbounded-denominator schedule,
+or construct a coefficient-aligned orbit whose growth evades every such extraction.
 
 ### R32-S30: Fixed-cusp and record-ascent calculus
 
@@ -3297,8 +3297,8 @@ height estimate repeats the local theorem and cannot close the orbit.
 ### R32-D03: Bounded-denominator periodicity
 
 **Kind:** decidable stratum
-**Evidence:** audited
-**Disposition:** active
+**Evidence:** formalized
+**Disposition:** graduated
 
 For a reduced endpoint state `xᵢ=rᵢ/tᵢ`, readiness and complementary content give the exact
 second-order recurrence
@@ -3310,24 +3310,30 @@ p^(saᵢ₊₁) hᵢ₊₁ tᵢ₊₂
 hᵢkᵢ = DL(p^aᵢ−1).
 ```
 
-If all positive reduced denominators `tᵢ` are bounded, every nondecreasing wait transition is
-effectively bounded. A positive integer wait sequence cannot decrease forever, so all waits
-are bounded. The recurrence then admits only finitely many reduced rational states, and the
-functional legal orbit is eventually periodic. Consequently every nonperiodic infinite guard
-orbit has unbounded reduced denominators.
+If all positive reduced denominators `tᵢ` are bounded, Lean constructs an explicit ceiling for
+both waits in every nondecreasing transition. A positive integer wait sequence cannot decrease
+forever, so every wait is bounded by the larger of that ceiling and the initial wait. The
+primitive numerators then lie in an explicit finite integral rectangle. Some state repeats,
+and every functional stream is eventually periodic. Consequently every nonperiodic infinite
+guard orbit has unbounded reduced denominators. The checked proof is uniform in every depth
+`s≥2`, not only the campaign's critical depth two.
 
-**Scope:** the proof is effective for a supplied denominator bound. The exact denominator
-recurrence is kernel-checked in the residual gauge; the finiteness argument has been
-independently reconstructed but is not yet formalized and must not be cited as a Lean theorem.
+**Scope:** the proof is effective for a supplied denominator bound. It does not compute such a
+bound for an arbitrary orbit and says nothing about the unbounded-denominator residue.
 
-**Artifact:**
-[`m32-endpoint-content-2026-07-30.md`](audits/m32-endpoint-content-2026-07-30.md).
+**Artifact:** `PrimitiveEndpointReduction.denominator_recurrence`,
+`PrimitiveEndpointReduction.nonDecreasing_waits_le`,
+`BoundedPrimitiveEndpointStream.state_mem_box`, and
+`BoundedPrimitiveEndpointStream.eventually_periodic` in
+[`ReturnGuardPeriodicity.lean`](MatrixMortality/ReturnGuardPeriodicity.lean) and
+[`ReturnGuardFiniteOrbit.lean`](MatrixMortality/ReturnGuardFiniteOrbit.lean). Independent audit:
+[`m32-bounded-denominator-periodicity-2026-08-02.md`](audits/m32-bounded-denominator-periodicity-2026-08-02.md).
 
 **Use:** abandon integer-valued or bounded-denominator universality. The sole surviving
 register in this split-spectrum guard is unbounded Archimedean denominator growth.
 
-**Next:** formalize the nondecreasing-wait bound and finite-orbit construction, or find a
-counterexample before promotion.
+**Next:** force a denominator return from unbounded growth, or construct one coefficient-aligned
+orbit with unbounded denominators and a genuinely nonperiodic wait word.
 
 ## Three-Generator Four-State Frontier
 

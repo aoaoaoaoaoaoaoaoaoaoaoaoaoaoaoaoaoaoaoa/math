@@ -449,6 +449,8 @@ with a complete arbitrary-word converse.
 | `ReturnGuardDriftCertificate.lean` | exact drift-divisor certificate classification, cyclic subgroup criterion, and executable finite test |
 | `ReturnGuardCumulative.lean` | content-free cumulative endpoint execution, exact second-order recurrence, and derived primitive content |
 | `ReturnGuardContinued.lean` | fixed-cusp complete quotients, exact terminal arithmetic, record-ascent content budget, and order-three decoder |
+| `ReturnGuardPeriodicity.lean` | exact denominator recurrence and explicit record-ascent, wait, content, and numerator ceilings |
+| `ReturnGuardFiniteOrbit.lean` | bounded primitive endpoint streams, their finite state box, repetition, and eventual periodicity |
 | `ReturnGuardFrame.lean` | evaluation-frame coboundary and reset-shell localization of transverse depth |
 | `ReturnGuardGap.lean` | exact residual similarity, rational projective gaps, height envelopes, and fixed-macro pumping |
 | `ReturnGuardPumping.lean` | arbitrary repeated-factor pumping between decoded orbit checkpoints |
@@ -570,6 +572,7 @@ with a complete arbitrary-word converse.
 | Every positive wait has an exact terminal predecessor, so backward terminal search has no wait bound | `ReturnGuard.terminalPredecessorPair_step` |
 | Cumulative endpoints form a generalized continued fraction with one fixed forbidden cusp | `ReturnGuard.cumulativeCompleteQuotient_recurrence`, `ReturnGuard.cumulativeCompleteQuotient_sub_forbiddenCusp`, `ReturnGuard.cumulativeWaitForm_hasValue` |
 | At critical depth two, every nondecreasing pair of waits pays an exact two-step content budget | `ReturnGuard.PrimitiveEndpointReduction.twoStep_elimination`, `ReturnGuard.PrimitiveEndpointReduction.twoStep_contentBudget` |
+| Every functional primitive endpoint stream of depth at least two with bounded positive denominators is eventually periodic | `ReturnGuard.PrimitiveEndpointReduction.nonDecreasing_waits_le`, `ReturnGuard.BoundedPrimitiveEndpointStream.wait_le`, `ReturnGuard.BoundedPrimitiveEndpointStream.eventually_periodic` |
 | The critical decoder is an order-three core followed by a wait-dependent shear | `ReturnGuard.criticalDecoder_factor`, `ReturnGuard.criticalDecoderCore_cube` |
 | Every base-coprime cancellation depth is the minimum of the terminal-defect and displacement depths | `ReturnGuard.integralStep_cancel_iff_terminalDefect_and_displacement`, `ReturnGuard.integralStep_commonFactor_padicValInt` |
 | Legal waits are logarithmic in primitive height and reduced height is uniformly Lipschitz | `ReturnGuard.integralStep_wait_le_log_height`, `ReturnGuard.integralStep_reduced_height_le` |
