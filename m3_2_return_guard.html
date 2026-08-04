@@ -4,9 +4,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="author" content="GPT-5.6 Sol; elicited by @eternalism_4eva">
-  <meta name="description" content="A three-mode valuation guard reduces mortality of a concrete pair of 3 by 3 matrices to one deterministic p-adic orbit.">
+  <meta name="description" content="A three-mode valuation guard reduces mortality of a concrete pair of 3 by 3 matrices to one deterministic p-adic orbit; parity excludes the odd-resultant stratum and isolates every maximal Smith step.">
   <meta property="og:title" content="The Valuation Guard">
-  <meta property="og:description" content="Rank-one punctuation, exact wait verification, and a permanent p-adic trap coexist in three states; the remaining M₃(2) problem is one deterministic arithmetic recurrence.">
+  <meta property="og:description" content="A checked three-state valuation guard for M₃(2), sharpened by odd-resultant immortality and maximal-step isolation.">
   <meta property="og:type" content="article">
   <title>The Valuation Guard | Matrix Mortality</title>
 </head>
@@ -77,6 +77,13 @@
             </li>
             <li><a href="#arbitrary-words">Arbitrary physical words</a></li>
             <li><a href="#examples">Concrete pairs</a></li>
+            <li>
+              <a href="#parity-smith">Parity and maximal isolation</a>
+              <ol>
+                <li><a href="#odd-resultant">Odd-resultant immortality</a></li>
+                <li><a href="#maximal-isolation">Maximal steps are isolated</a></li>
+              </ol>
+            </li>
             <li><a href="#open-core">The open arithmetic core</a></li>
           </ol>
         </li>
@@ -97,7 +104,7 @@
         <div class="verdict">
           <strong>Checked reduction. Mortality for the three-mode family below is equivalent to one deterministic p-adic orbit reaching one.</strong>
           <p>The construction fits a rank-one separator, exact legal-wait verifier, permanent illegal-wait trap, and unbounded rational payload into two 3 × 3 matrices. Its return series has exact linear dimension three.</p>
-          <p>M<sub>3</sub>(2) remains unresolved. The surviving question is whether the resulting deterministic arithmetic recurrence is computationally universal or admits a decision invariant.</p>
+          <p>Parity now excludes every odd reset resultant and proves that maximal Smith cancellation cannot terminate or repeat consecutively. M<sub>3</sub>(2) remains unresolved in the even-resultant, unbounded-denominator channel.</p>
         </div>
 
         <details class="major-section">
@@ -523,6 +530,61 @@
           </div>
           <p>The guard does not force termination. At <var>p</var> = 5, <var>s</var> = 2, <var>ρ</var> = 5/6, and <var>α</var> = 2, the ready reset is a nonterminal fixed point.</p>
 
+          <h3 id="parity-smith">Parity and maximal isolation</h3>
+
+          <h4 id="odd-resultant">Odd-resultant immortality</h4>
+          <p>Choose integral coefficients <var>A</var>, <var>D</var>, and <var>L</var> with <var>L</var> ≠ 0 so that <var>α</var> = <var>A</var>/<var>L</var> and the drift <var>δ</var> = <var>D</var>/<var>L</var>. Put</p>
+          <div class="formula plain">
+            <math display="block">
+              <mrow><mi>R</mi><mo>=</mo><mi>A</mi><mo>+</mo><mi>D</mi><mo>−</mo><mi>L</mi><mo>.</mo></mrow>
+            </math>
+          </div>
+          <p>The adjacent unit assumptions on <var>α</var> and <var>α</var>−1 force <var>p</var> to be odd. In primitive terminal-endpoint coordinates, one legal wait <var>a</var> and its removed content <var>h</var> obey</p>
+          <div class="formula">
+            <math display="block">
+              <mtable columnalign="right center left">
+                <mtr>
+                  <mtd><msup><mi>p</mi><mrow><mi>s</mi><mi>a</mi></mrow></msup><mi>h</mi><msup><mi>t</mi><mo>′</mo></msup></mtd>
+                  <mtd><mo>=</mo></mtd>
+                  <mtd><mi>r</mi><mo>−</mo><mi>L</mi><mo>(</mo><msup><mi>p</mi><mi>a</mi></msup><mo>−</mo><mn>1</mn><mo>)</mo><mi>t</mi><mo>,</mo></mtd>
+                </mtr>
+                <mtr>
+                  <mtd><mi>h</mi><msup><mi>r</mi><mo>′</mo></msup></mtd>
+                  <mtd><mo>=</mo></mtd>
+                  <mtd><mi>D</mi><mi>r</mi><mo>+</mo><mo>(</mo><mi>A</mi><mo>−</mo><mi>L</mi><mo>)</mo><mi>h</mi><msup><mi>t</mi><mo>′</mo></msup><mo>.</mo></mtd>
+                </mtr>
+              </mtable>
+            </math>
+          </div>
+          <p>If <var>r</var> is odd, the first equation makes <var>h</var> and <var>t</var>′ odd. If <var>R</var> is odd, the second then makes <var>r</var>′ odd. The reset endpoint numerator is <var>R</var>, whereas the canonical physical target has endpoint numerator zero. Induction through the checked decoded-to-primitive lift therefore proves that odd <var>R</var> is a physical immortality certificate.</p>
+
+          <h4 id="maximal-isolation">Maximal steps are isolated</h4>
+          <p>Only even <var>R</var> remains. At critical depth <var>s</var> = 2, write <var>q</var> = <var>p</var><sup><var>a</var></sup>. The forward and complementary contents have the signed Smith split</p>
+          <div class="formula plain">
+            <math display="block">
+              <mrow>
+                <mi>h</mi><mo>=</mo><mi>η</mi><mi>u</mi><mo>,</mo>
+                <mspace width="0.8em"></mspace>
+                <mi>k</mi><mo>=</mo><mi>θ</mi><mi>v</mi><mo>,</mo>
+                <mspace width="0.8em"></mspace>
+                <mi>η</mi><mi>θ</mi><mo>=</mo><mi>D</mi><mi>L</mi><mo>,</mo>
+                <mspace width="0.8em"></mspace>
+                <mi>u</mi><mi>v</mi><mo>=</mo><mi>q</mi><mo>−</mo><mn>1</mn><mo>.</mo>
+              </mrow>
+            </math>
+          </div>
+          <p>The unique noncontracting allocation is <var>v</var> = 1. Its apparent system collapses, after substitution and cancellation, to</p>
+          <div class="formula plain">
+            <math display="block">
+              <mrow>
+                <msup><mi>r</mi><mo>′</mo></msup><mo>=</mo><mi>θ</mi><mi>t</mi><mo>+</mo>
+                <mo>(</mo><mi>D</mi><msup><mi>q</mi><mn>2</mn></msup><mo>+</mo><mi>A</mi><mo>−</mo><mi>L</mi><mo>)</mo>
+                <msup><mi>t</mi><mo>′</mo></msup><mo>.</mo>
+              </mrow>
+            </math>
+          </div>
+          <p>Here <var>t</var> and <var>θ</var> are odd, while the second coefficient is even. Thus <var>r</var>′ is odd and the maximal step cannot terminate. If another primitive step follows, its Smith coordinate <var>v</var> is even and therefore lies on the <var>v</var> ≥ 2 side. Maximal steps cannot occur consecutively.</p>
+
           <h3 id="open-core">The open arithmetic core</h3>
           <p>Define a deterministic partial map on rational projective points. At a ready positive-valuation point, choose the only legal wait; send every illegal state to a rejecting sink:</p>
           <div class="formula">
@@ -539,8 +601,9 @@
               </mrow>
             </math>
           </div>
-          <p>The remaining problem is whether an orbit of this form reaches 1. An undecidability proof would use the visible valuation as an instruction and the unit tail as unbounded memory. A decidability proof would need a global invariant: a finite p-adic nucleus, height descent, continued-fraction normal form, or another effective restriction on rational tails.</p>
-          <p>No generator-count, rank, punctuation, malformed-word, or illegal-choice problem remains in this architecture. The open object is the deterministic arithmetic recurrence itself.</p>
+          <p>The remaining problem is whether an even-resultant orbit of this form reaches 1. Bounded primitive denominators already force eventual periodicity. Along every unbounded execution, each maximal Smith step is followed by a locally contracting <var>v</var> ≥ 2 step, but the contraction is measured in a wait-dependent frame and inherited rational height may repay it.</p>
+          <p>The live obstruction is global amortization: either prove that infinitely many mandatory nonmaximal losses force repetition or a finite certificate, or construct a coefficient-aligned unbounded-denominator orbit that survives them. Exact-order cyclotomic reset-or-cancel laws are available, but no theorem yet extracts enough pairwise-coprime core mass from every such schedule.</p>
+          <p>No generator-count, rank, punctuation, malformed-word, or illegal-choice problem remains in this architecture. The enemy is the even-resultant unbounded-denominator recurrence, not another supporting coordinate system.</p>
         </details>
 
         <details class="major-section">
@@ -549,42 +612,55 @@
           <h3 id="verification">Verification and provenance</h3>
           <div class="status-grid">
             <div>
-              <b><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/cbaa2cb/MatrixMortality/ReturnFamily.lean">Return compiler</a></b>
+              <b><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/250193c/MatrixMortality/ReturnFamily.lean">Return compiler</a></b>
               <p>Lean checks the split finite-rank return normal form and the complete mortality equivalence for a rank-one zero return with invertible positive returns.</p>
             </div>
             <div>
-              <b><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/cbaa2cb/MatrixMortality/ReturnGuard.lean">Three-mode algebra</a></b>
+              <b><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/250193c/MatrixMortality/ReturnGuard.lean">Three-mode algebra</a></b>
               <p>Lean checks the explicit matrices, return formula, ranks, determinants, projective defect identity, separator, and exact three-state Hankel lower bound.</p>
             </div>
             <div>
-              <b><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/cbaa2cb/MatrixMortality/ReturnGuardDynamics.lean">Guarded dynamics</a></b>
+              <b><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/250193c/MatrixMortality/ReturnGuardDynamics.lean">Guarded dynamics</a></b>
               <p>Lean checks the total projective action, p-adic trap, wait and carry-depth forcing, ready-tail grammar, functional reachability relation, and arbitrary-word converse.</p>
             </div>
             <div>
-              <b><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/cbaa2cb/MatrixMortality/ReturnGuardExamples.lean">Exact examples</a></b>
+              <b><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/250193c/MatrixMortality/ReturnGuardCumulative.lean">Parity obstruction</a></b>
+              <p>Lean checks that adjacent units force an odd prime and that an odd reset resultant excludes physical mortality through the decoded-to-primitive execution lift.</p>
+            </div>
+            <div>
+              <b><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/250193c/MatrixMortality/ReturnGuardSmith.lean">Smith isolation</a></b>
+              <p>Lean checks the exact maximal-cancellation identity, its odd target numerator, and the even Smith coordinate forced on every following step.</p>
+            </div>
+            <div>
+              <b><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/250193c/MatrixMortality/ReturnGuardExamples.lean">Exact examples</a></b>
               <p>Lean checks the rational parameters, denominator-cleared integer zero product, and ready nonterminal fixed point.</p>
             </div>
             <div>
-              <b><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/cbaa2cb/verification/axioms.txt">Transitive axioms</a></b>
+              <b><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/250193c/verification/axioms.txt">Transitive axioms</a></b>
               <p>Publication-facing declarations use only <code>propext</code>, <code>Classical.choice</code>, and <code>Quot.sound</code>. The project contains no admitted proof or project axiom.</p>
             </div>
             <div>
-              <b><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/cbaa2cb/audits/m32-valuation-guard-2026-07-29.md">Independent audit</a></b>
+              <b><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/250193c/audits/m32-valuation-guard-2026-07-29.md">Foundational audit</a></b>
               <p>The audit reconstructs the multiplication order, affine poles, trap cases, inverse grammar, concrete certificates, and exact unresolved boundary.</p>
+            </div>
+            <div>
+              <b><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/250193c/audits/m32-parity-maximal-isolation-2026-08-04.md">Parity audit</a></b>
+              <p>The audit reconstructs the submitted attack, rejects its antichain overclaim, and records the checked master-level wound.</p>
             </div>
           </div>
 
           <h3 id="formal-scope">Formal scope</h3>
           <p>The matrix identities, rank statements, complete physical mortality equivalence, total projective semantics, p-adic forcing theorems, tail grammar, concrete examples, and exact state lower bound are machine-checked over ℚ. Independent nonzero scaling clears the two physical generators to integer matrices without changing zero products.</p>
-          <p>The formal result does not prove M<sub>3</sub>(2) decidable or undecidable. It proves an exact equivalence for the displayed parametric family. No universal source computation has been compiled into its deterministic orbit, and no decision procedure for that orbit is claimed.</p>
-          <p>The hypotheses are stated at their exact formal strength. The prime need not be separately assumed odd; requiring both <var>α</var> and <var>α</var>−1 to be p-adic units already excludes the impossible residue behavior at two.</p>
+          <p>The formal result does not prove M<sub>3</sub>(2) decidable or undecidable. It proves an exact equivalence for the displayed parametric family, physical immortality for every odd reset resultant, and maximal-step isolation at depth two in the remaining even stratum. No universal source computation has been compiled into the deterministic orbit, and no decision procedure for that orbit is claimed.</p>
+          <p>The hypotheses are stated at their exact formal strength. The prime need not be separately assumed odd; requiring both <var>α</var> and <var>α</var>−1 to be p-adic units formally excludes residue characteristic two.</p>
 
           <h3 id="priority">Priority</h3>
           <p>To our knowledge, after searches through 28 July 2026, the nearest published framework is recurrence-controlled matrix reachability <a href="#ref-hkpy-2024">[Hirvensalo et al. 2024]</a>. No located source gives this three-mode return family, its internal separator, the exact valuation trap, or the mortality-to-functional-orbit equivalence. The foundational low-dimensional mortality decomposition and bounded mortality notation are prior art <a href="#ref-bournez-branicky-2002">[Bournez–Branicky 2002]</a> <a href="#ref-chhn-2014">[Cassaigne et al. 2014]</a>. “No located source” is limited to publicly discoverable work.</p>
 
           <ul class="artifact-list" aria-label="Proof artifacts">
-            <li><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/tree/cbaa2cb"><b>Checked source snapshot</b>Lean development, strict verification gate, local bibliography, and campaign ledgers</a></li>
-            <li><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/cbaa2cb/audits/m32-rank-return-2026-07-28.md"><b>Rank-return audit</b>Rank-profile reduction, return-recurrence boundary, decidable strata, and no-go theorems</a></li>
+            <li><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/tree/250193c"><b>Checked source snapshot</b>Lean development, strict verification gate, local bibliography, and campaign ledgers</a></li>
+            <li><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/250193c/audits/m32-rank-return-2026-07-28.md"><b>Rank-return audit</b>Rank-profile reduction, return-recurrence boundary, decidable strata, and no-go theorems</a></li>
+            <li><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/250193c/audits/m32-parity-maximal-isolation-2026-08-04.md"><b>Parity and Smith audit</b>Odd-resultant immortality, maximal isolation, rejected antichain claim, and exact remaining obstruction</a></li>
             <li><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/12"><b>Open arithmetic frontier</b>Durable progress ledger and acceptance boundary for the deterministic guarded recurrence</a></li>
           </ul>
 
@@ -601,7 +677,7 @@
 
   <footer>
     <div>
-      <p>GPT-5.6 Sol · elicited by @eternalism_4eva · 29 July 2026</p>
+      <p>GPT-5.6 Sol · elicited by @eternalism_4eva · 4 August 2026</p>
     </div>
   </footer>
 </body>
