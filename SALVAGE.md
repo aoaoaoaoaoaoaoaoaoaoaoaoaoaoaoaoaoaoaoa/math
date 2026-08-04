@@ -90,6 +90,7 @@ file owns the mathematical stock.
 | [`R32-S05`](#r32-s05-prefix-shift-and-affine-residual) | structure theorem | each legal step decodes one p-adic prefix and updates the reciprocal residual affinely | formalized | active |
 | [`R32-S06`](#r32-s06-resonance-localization) | structure theorem | every nonresonant continuation descends and every infinite ready chain resonates arbitrarily late | formalized | active |
 | [`R32-O06`](#r32-o06-rational-affine-wait-rail-rigidity) | obstruction | no reduced rational chart supports a nontrivial affine wait rail at infinitely many prime powers | formalized | graduated |
+| [`R32-O07`](#r32-o07-parity-immortality-and-maximal-isolation) | obstruction | odd reset resultants are immortal, while maximal Smith steps in the even stratum are isolated | formalized | graduated |
 | [`R32-S07`](#r32-s07-decoded-residual-address-normal-form) | structure theorem | mortality is finite inverse-address membership in disjoint rational p-adic branch spheres | formalized | active |
 | [`R32-M05`](#r32-m05-cyclotomic-reset-or-cancellation-sieve) | partial mechanism | every primitive reduction either resets modulo a cyclotomic prime or swallows it in the common cancellation | formalized | active |
 | [`R32-S08`](#r32-s08-cumulative-endpoint-recurrence) | structure theorem | cumulative endpoint pairs absorb every normalization scalar into one deterministic exact-division recurrence | formalized | active |
@@ -3346,7 +3347,8 @@ gauge, and their composition. The ungauged concatenating identity and all global
 estimates derived from it are false in general and were rejected.
 
 **Scope:** contraction is local after natural `q²` rescaling. This record does not bound an
-arbitrary gauged product and does not classify an infinite chain of `v=1` steps.
+arbitrary gauged product. The formerly open infinite chain of `v=1` steps is excluded by
+[`R32-O07`](#r32-o07-parity-immortality-and-maximal-isolation).
 
 **Artifact:** `exists_smithRubanSplit`, `smithRubanDecoder_det`,
 `smithRubanDecoder_weight_contraction`,
@@ -3361,8 +3363,57 @@ arbitrary gauged product and does not classify an infinite chain of `v=1` steps.
 throat before applying height or primitive-divisor arguments. Never concatenate lagged frames
 without the intervening gauge.
 
-**Next:** prove a global norm or continued-fraction estimate for the gauged decoder product, or
-classify repeated maximal-cancellation steps by the displayed first-order recurrence.
+**Next:** prove a global arithmetic or continued-fraction estimate amortizing the nonmaximal
+steps that occur at least after every maximal step. A moving-frame norm alone is insufficient.
+
+### R32-O07: Parity immortality and maximal isolation
+
+**Kind:** obstruction
+**Evidence:** formalized
+**Disposition:** graduated
+
+The adjacent p-adic unit hypotheses on `α` and `α−1` force the guard prime `p` to be odd. For
+integer endpoint coefficients put
+
+```text
+R=A+D−L.
+```
+
+If `R` is odd, parity propagates through every primitive integral guard step at every depth:
+an odd source endpoint numerator forces the scaled target denominator and numerator odd, hence
+the primitive target numerator itself is odd. The reset numerator is `R`; the canonical
+physical target has endpoint numerator zero. Physical mortality is therefore impossible.
+
+It remains to consider even `R` at critical depth two. A maximal Smith step has `v=1` and,
+after substituting its quotient and cancelling `η`, satisfies
+
+```text
+r′ = θt + (Dq²+A−L)t′.
+```
+
+Here `t` and `θ` are odd, while the second coefficient is even. Thus `r′` is odd and the
+maximal step cannot terminate. If a next primitive step exists, its forward content and Smith
+coordinate `u` are odd; since `uv=q′−1` is even, the next `v` is even. Consecutive maximal
+steps are impossible.
+
+**Scope:** the odd-resultant theorem excludes physical mortality for an actual guard through
+the checked decoded-to-primitive execution lift. The maximal-isolation theorems concern
+consecutive primitive depth-two endpoint reductions with their Smith splits. They do not
+globalize the local contraction on `v≥2` branches.
+
+**Artifact:** `PadicValuation.odd_prime_of_adjacent_units`, `Parameters.prime_odd`,
+`not_physical_isMortal_of_resetResultant_odd`,
+`PrimitiveEndpointReduction.maximalCancellation_targetNumerator_odd`, and
+`PrimitiveEndpointReduction.maximalCancellation_next_v_even` in
+[`PadicValuation.lean`](MatrixMortality/PadicValuation.lean),
+[`ReturnGuardDynamics.lean`](MatrixMortality/ReturnGuardDynamics.lean),
+[`ReturnGuardCumulative.lean`](MatrixMortality/ReturnGuardCumulative.lean), and
+[`ReturnGuardSmith.lean`](MatrixMortality/ReturnGuardSmith.lean). Independent audit:
+[`m32-parity-maximal-isolation-2026-08-04.md`](audits/m32-parity-maximal-isolation-2026-08-04.md).
+
+**Use:** discard residue characteristic two, the entire odd-resultant mortality stratum, and
+every eventually maximal schedule. Any surviving undecidability construction or decision
+argument must live in even `R` and traverse a `v≥2` branch after each maximal step.
 
 ### R32-D03: Bounded-denominator periodicity
 

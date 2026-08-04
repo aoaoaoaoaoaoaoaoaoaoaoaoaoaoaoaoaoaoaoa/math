@@ -248,7 +248,10 @@ open MatrixMortality
 #print axioms ReturnGuard.CumulativeEndpointStep.target_unique
 #print axioms ReturnGuard.PrimitiveEndpointReduction.content_natAbs_eq_gcd_support
 #print axioms ReturnGuard.reverseComplement_dvd_targetResultant
+#print axioms PadicValuation.odd_prime_of_adjacent_units
+#print axioms ReturnGuard.Parameters.prime_odd
 #print axioms ReturnGuard.CumulativeEndpointExecution.transfer
+#print axioms ReturnGuard.not_physical_isMortal_of_resetResultant_odd
 #print axioms ReturnGuard.cumulativeNumerator_recurrence
 #print axioms ReturnGuard.terminalTruncant_eq_cumulativeNumerator
 #print axioms ReturnGuard.PrimitiveEndpointReduction.content_natAbs_eq_gcd_driftSource_prequotient
@@ -277,6 +280,8 @@ open MatrixMortality
 #print axioms ReturnGuard.PrimitiveEndpointReduction.source_eq_smithRubanQuotient
 #print axioms ReturnGuard.PrimitiveEndpointReduction.smithRuban_resetDefect
 #print axioms ReturnGuard.PrimitiveEndpointReduction.maximalCancellation
+#print axioms ReturnGuard.PrimitiveEndpointReduction.maximalCancellation_targetNumerator_odd
+#print axioms ReturnGuard.PrimitiveEndpointReduction.maximalCancellation_next_v_even
 #print axioms ReturnGuard.integralStep_laggedReturnCocycle
 #print axioms ReturnGuard.gaugedReturnCocycle_mulVec
 #print axioms ReturnGuard.Examples.decreasingMortal_cumulativeExecution

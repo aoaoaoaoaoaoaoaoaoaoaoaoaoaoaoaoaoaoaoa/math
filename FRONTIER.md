@@ -885,6 +885,20 @@ frames. The correct variable-wait transfer contains an explicit gauge between th
 The submitted ungauged cocycle and its tropical path bound were algebraically false and have
 been removed from the live branch.
 
+[`R32-O07`](SALVAGE.md#r32-o07-parity-immortality-and-maximal-isolation) closes the maximal
+throat as a global escape. The adjacent unit hypotheses force `p` odd. If
+`R=A+D−L` is odd, every cumulative endpoint numerator stays odd and terminality is impossible.
+If `R` is even, a maximal step satisfies the sharper cancellation
+
+```text
+r′=θt+(Dq²+A−L)t′.
+```
+
+Its target numerator is odd, and the next Smith coordinate `v`, when a next step exists, is
+even. Maximal steps neither terminate nor occur consecutively. Eliminating the remaining Smith
+ratios returns the existing guarded scalar state; it does not supply a second register capable
+of repaying contraction.
+
 The remaining unbounded channel is now sharply Archimedean. The formalized
 [`R32-D03`](SALVAGE.md#r32-d03-bounded-denominator-periodicity) theorem says that every
 infinite legal rational orbit with bounded reduced denominators is eventually periodic.
@@ -896,21 +910,22 @@ survivor must have unbounded reduced denominators.
 
 | Lane | Required move | Present obstruction |
 | --- | --- | --- |
-| Gauged decoder amortization | Combine the `v≥2` contraction with the exact change-of-wait gauge along an arbitrary schedule | The local loss is uniform, but the moving gauge can re-expand the weighted norm |
-| Maximal-throat classification | Decide or pump chains with `v=1`, where all of `pᵃ−1` is swallowed forward | The exact first-order recurrence is known, but its successive signed coefficient factors still vary |
+| Global nonmaximal amortization | Convert the mandatory `v≥2` branches into a height, fixed-cusp, or content invariant along every even-resultant execution | Local contraction is measured after a wait-dependent normalization, while inherited rational height can still pay the loss |
+| Cyclotomic core extraction | Force superbudget pairwise-coprime core mass from every unbounded-denominator schedule | Reset-or-cancel renewal is exact once a core is supplied, but no theorem extracts enough cores unconditionally |
 | Denominator counter | Construct one coefficient-aligned orbit with unbounded denominators and a power-free wait word | Local p-adic symbolic freedom is complete, but endpoint content and rational height couple all branches globally |
 | Repeated-factor extraction | Force a sufficiently heavy repeated factor in every bounded-complexity wait prefix and apply `R32-S29` | Arbitrary repeated factors are controlled once found; no theorem yet extracts one from a moving denominator schedule |
 | Irreducible cubic fallback | Replace the split spectrum by a cubic return pencil with internal punctuation and a complete word normal form | No candidate yet matches the guard's exact illegal-branch soundness |
 | Exceptional reverse compiler | Absorb the finite `αβ=0` disjunction into one three-dimensional many-one instance | The generic rank-`(2,2)` compiler is complete; dimension three has no evident OR operation |
 
-The prospective hot path is now the Smith dichotomy inside the fixed-cusp recurrence, not
-another parameter or tangent coordinate. The matrix compiler, arbitrary-word converse,
+The prospective hot path is now global amortization of the mandatory nonmaximal branches inside
+the fixed-cusp recurrence, not another parameter or tangent coordinate. The matrix compiler, arbitrary-word converse,
 deterministic wait decoder, rational inverse-address grammar, primitive integral lift, endpoint
 factorization, exact branch similarity, arbitrary repeated-factor pumping, local record-ascent
-budget, and local content allocation are complete. `M₃(2)` asks whether an unbounded-denominator
-orbit can use moving frame gauges to repay infinitely many contracting branches, or remain
-forever in the exact maximal-cancellation throat while evading periodicity and every coefficient
-quotient.
+budget, local content allocation, and maximal-step isolation are complete. `M₃(2)` asks whether
+an even-resultant unbounded-denominator orbit can repay infinitely many forced nonmaximal losses,
+or whether those losses force repetition or a finite obstruction. The proposed reduction to an
+unbounded exact-order antichain is not yet a theorem: its missing premise is unconditional global
+core extraction.
 
 ## The dimension-two wall: `M₂(3)`
 

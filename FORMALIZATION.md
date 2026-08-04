@@ -320,6 +320,22 @@ In the weighted norm `|x|+4|y|`, every branch with `v≥2` contracts by at most 
 the natural `p^(2a)` rescaling. The exceptional branch `v=1` is reduced to one exact
 first-order maximal-cancellation recurrence.
 
+Parity now closes that exceptional branch as an infinite escape. Lean first proves generically
+that two adjacent rational p-adic units force the valuation prime to be odd, then applies this
+to the guard parameters. If `R=A+D−L` is odd, every primitive endpoint numerator reachable
+from reset is odd, while the canonical physical target has numerator zero. Thus physical
+mortality is impossible. If `R` is even, a maximal depth-two step simplifies to
+
+```text
+r′=θt+(Dq²+A−L)t′.
+```
+
+Its target numerator is odd; if another step follows, the next Smith coordinate `v` is even.
+Thus maximal steps cannot terminate or occur consecutively. The proof consumes the existing
+decoded-to-primitive lift, cumulative step equation, and Smith split; no second execution
+structure or quotient state was introduced. See
+[`audits/m32-parity-maximal-isolation-2026-08-04.md`](audits/m32-parity-maximal-isolation-2026-08-04.md).
+
 The motivating multi-wait cocycle did not survive reconstruction. One step is exact in a
 lagged wait frame; changing to the next wait requires a separate rational gauge. Lean checks
 the lagged transfer, frame change, and honest composed cocycle. The ungauged global path bound
@@ -454,7 +470,7 @@ with a complete arbitrary-word converse.
 | `ReturnJordan.lean` | parity-Jordan rail rigidity and modular immortality certificate |
 | `ReturnConvert.lean` | minimal two-scale return pencil and nonresonant multi-return zero |
 | `ProjectiveLine.lean` | total affine-chart presentation of `ℙ¹` and exact unit-word ray action |
-| `PadicValuation.lean` | nonzero rational p-adic shells and exact unequal-valuation calculus |
+| `PadicValuation.lean` | nonzero rational p-adic shells, unequal-valuation calculus, and the adjacent-unit odd-prime obstruction |
 | `ReturnGuard.lean` | three-mode amalgamated return algebra, split mortality compiler, and exact state lower bound |
 | `ReturnGuardDynamics.lean` | permanent trap, ready-tail grammar, and deterministic physical mortality equivalence |
 | `ReturnGuardShift.lean` | shifted prefix decoder and affine reciprocal-residual transport |
@@ -466,9 +482,9 @@ with a complete arbitrary-word converse.
 | `ReturnGuardIntegralLift.lean` | canonical rational pairs, decoded-to-integral execution lifting, and quotient certificates of physical immortality |
 | `ReturnGuardQuotientCompleteness.lean` | zero-wait terminal kernel, cancellation-reachability completeness, and synchronized-product no-amplification |
 | `ReturnGuardDriftCertificate.lean` | exact drift-divisor certificate classification, cyclic subgroup criterion, and executable finite test |
-| `ReturnGuardCumulative.lean` | content-free cumulative endpoint execution, exact second-order recurrence, and derived primitive content |
+| `ReturnGuardCumulative.lean` | content-free cumulative endpoint execution, exact second-order recurrence, odd-resultant immortality, and derived primitive content |
 | `ReturnGuardContinued.lean` | fixed-cusp complete quotients, exact terminal arithmetic, record-ascent content budget, and order-three decoder |
-| `ReturnGuardSmith.lean` | signed content split, unimodular endpoint decoder, nonmaximal contraction, maximal-cancellation throat, and corrected gauged cocycle |
+| `ReturnGuardSmith.lean` | signed content split, unimodular endpoint decoder, nonmaximal contraction, maximal-step isolation, and corrected gauged cocycle |
 | `ReturnGuardPeriodicity.lean` | exact denominator recurrence and explicit record-ascent, wait, content, and numerator ceilings |
 | `ReturnGuardFiniteOrbit.lean` | bounded primitive endpoint streams, their finite state box, repetition, and eventual periodicity |
 | `ReturnGuardFrame.lean` | evaluation-frame coboundary and reset-shell localization of transverse depth |

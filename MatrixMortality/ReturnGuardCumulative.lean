@@ -537,6 +537,136 @@ theorem cumulativeWaitForm_eq
       (centerNumerator - scale) * (source.1 + scale * source.2) := by
   linear_combination scale * previous_relation
 
+private theorem odd_ne_zero {value : ℤ} (odd : Odd value) : value ≠ 0 := by
+  intro value_zero
+  rw [value_zero] at odd
+  exact Int.not_even_iff_odd.mpr odd ⟨0, by ring⟩
+
+private theorem odd_linearCombination_of_coefficientSum_odd
+    {leftCoefficient rightCoefficient left right : ℤ}
+    (left_odd : Odd left) (right_odd : Odd right)
+    (coefficient_sum_odd : Odd (leftCoefficient + rightCoefficient)) :
+    Odd (leftCoefficient * left + rightCoefficient * right) := by
+  obtain ⟨leftHalf, left_eq⟩ := left_odd
+  obtain ⟨rightHalf, right_eq⟩ := right_odd
+  obtain ⟨sumHalf, sum_eq⟩ := coefficient_sum_odd
+  refine ⟨leftCoefficient * leftHalf + rightCoefficient * rightHalf + sumHalf, ?_⟩
+  rw [left_eq, right_eq]
+  linear_combination sum_eq
+
+private theorem CumulativeEndpointStep.target_odd
+    {prime depth : Nat} {centerNumerator driftNumerator scale : ℤ}
+    {wait : Nat} {source target : ℤ × ℤ}
+    (step : CumulativeEndpointStep prime depth centerNumerator driftNumerator scale
+      wait source target)
+    (prime_odd : Odd prime)
+    (reset_resultant_odd : Odd (centerNumerator + driftNumerator - scale))
+    (source_numerator_odd : Odd source.1) :
+    Odd target.1 ∧ Odd target.2 := by
+  have wait_power_odd : Odd ((prime : ℤ) ^ wait) := by
+    exact_mod_cast prime_odd.pow
+  have shift_even : Even ((prime : ℤ) ^ wait - 1) :=
+    wait_power_odd.sub_odd ⟨0, by ring⟩
+  have target_denominator_product_odd :
+      Odd ((prime : ℤ) ^ (depth * wait) * target.2) := by
+    rw [step.denominator]
+    exact source_numerator_odd.sub_even
+      ((shift_even.mul_left scale).mul_right source.2)
+  have target_denominator_odd : Odd target.2 :=
+    (Int.odd_mul.mp target_denominator_product_odd).2
+  refine ⟨?_, target_denominator_odd⟩
+  rw [step.numerator]
+  apply odd_linearCombination_of_coefficientSum_odd
+    source_numerator_odd target_denominator_odd
+  rw [show
+    driftNumerator + (centerNumerator - scale) =
+      centerNumerator + driftNumerator - scale by ring]
+  exact reset_resultant_odd
+
+private theorem PrimitiveIntegralStep.endpointTargetNumerator_odd
+    (parameters : Parameters)
+    {centerNumerator driftNumerator scale : ℤ}
+    {source target : ℤ × ℤ}
+    (primitive :
+      PrimitiveIntegralStep parameters.prime parameters.depth centerNumerator
+        driftNumerator scale source target)
+    (resetResultant_odd : Odd (centerNumerator + driftNumerator - scale))
+    (sourceEndpoint_odd :
+      Odd (endpointPair centerNumerator driftNumerator scale source).1) :
+    Odd (endpointPair centerNumerator driftNumerator scale target).1 := by
+  obtain ⟨_, content, step⟩ :=
+    primitiveIntegralStep_cumulativeEndpointStep primitive
+  exact (Int.odd_mul.mp
+    (step.target_odd parameters.prime_odd resetResultant_odd sourceEndpoint_odd).1).2
+
+/-- An odd reset resultant excludes physical mortality. Every primitive integral execution
+from reset retains an odd terminal defect, whereas the physical target has defect zero. -/
+theorem not_physical_isMortal_of_resetResultant_odd
+    (parameters : Parameters)
+    {centerNumerator driftNumerator scale : ℤ}
+    (center_eq :
+      parameters.center = (centerNumerator : ℚ) / scale)
+    (drift_eq :
+      drift parameters.center parameters.reset =
+        (driftNumerator : ℚ) / scale)
+    (scale_ne : scale ≠ 0)
+    (resetResultant_odd : Odd (centerNumerator + driftNumerator - scale)) :
+    ¬IsMortal
+      (ReturnFamily.pairGenerator
+        (ambient (parameters.prime : ℚ) parameters.depth)
+        (cut parameters.center parameters.reset)) := by
+  rw [physical_isMortal_iff_decodedReachable]
+  apply not_decodedReachable_of_no_primitiveExecution parameters
+    center_eq drift_eq scale_ne
+  rintro ⟨steps, execution⟩
+  have resetEndpoint_odd :
+      Odd
+        (endpointPair centerNumerator driftNumerator scale
+          (rationalPair 1)).1 := by
+    simpa [endpointPair, terminalDefect, rationalPair,
+      show centerNumerator - scale + driftNumerator =
+        centerNumerator + driftNumerator - scale by ring] using resetResultant_odd
+  have propagate : ∀ {localSteps source target},
+      Relation.ReachesIn
+          (PrimitiveIntegralStep parameters.prime parameters.depth
+            centerNumerator driftNumerator scale)
+          localSteps source target →
+        Odd (endpointPair centerNumerator driftNumerator scale source).1 →
+        Odd (endpointPair centerNumerator driftNumerator scale target).1 := by
+    intro localSteps source target localExecution sourceEndpoint_odd
+    induction localExecution with
+    | refl => exact sourceEndpoint_odd
+    | head primitive _ induction =>
+        exact induction
+          (primitive.endpointTargetNumerator_odd parameters resetResultant_odd
+            sourceEndpoint_odd)
+  have terminalEndpoint_odd :
+      Odd
+        (endpointPair centerNumerator driftNumerator scale
+          (rationalPair (terminalResidual parameters))).1 :=
+    propagate execution resetEndpoint_odd
+  apply odd_ne_zero terminalEndpoint_odd
+  have terminalNumerator_ne :
+      (rationalPair (terminalResidual parameters)).1 ≠ 0 := by
+    rw [rationalPair_fst, Rat.num_ne_zero]
+    exact (terminalResidual_isUnit parameters).1
+  have terminalRatio_zero :
+      ((endpointPair centerNumerator driftNumerator scale
+          (rationalPair (terminalResidual parameters))).1 : ℚ) /
+          (endpointPair centerNumerator driftNumerator scale
+            (rationalPair (terminalResidual parameters))).2 = 0 := by
+    rw [endpointPair_ratio_eq_terminalCoordinate _ _ _ _ terminalNumerator_ne]
+    convert terminalCoordinate_terminalResidual parameters
+      center_eq drift_eq scale_ne using 1
+    congr 1
+    simpa [rationalPair] using Rat.num_div_den (terminalResidual parameters)
+  have terminalEndpoint_zero_rat :
+      ((endpointPair centerNumerator driftNumerator scale
+        (rationalPair (terminalResidual parameters))).1 : ℚ) = 0 :=
+    (div_eq_zero_iff.mp terminalRatio_zero).resolve_right (by
+      exact_mod_cast terminalNumerator_ne)
+  exact_mod_cast terminalEndpoint_zero_rat
+
 /-- A cumulative endpoint pair is terminal exactly when its first coordinate vanishes. -/
 theorem cumulativeEndpoint_eq_zero_iff
     {numerator denominator : ℤ} (denominator_ne : denominator ≠ 0) :

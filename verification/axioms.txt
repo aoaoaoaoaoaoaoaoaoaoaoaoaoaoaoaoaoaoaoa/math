@@ -486,7 +486,12 @@
 'MatrixMortality.ReturnGuard.reverseComplement_dvd_targetResultant' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.PadicValuation.odd_prime_of_adjacent_units' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ReturnGuard.Parameters.prime_odd' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.ReturnGuard.CumulativeEndpointExecution.transfer' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.not_physical_isMortal_of_resetResultant_odd' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
 'MatrixMortality.ReturnGuard.cumulativeNumerator_recurrence' depends on axioms: [propext, Quot.sound]
@@ -553,6 +558,12 @@
  Classical.choice,
  Quot.sound]
 'MatrixMortality.ReturnGuard.PrimitiveEndpointReduction.maximalCancellation' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.ReturnGuard.PrimitiveEndpointReduction.maximalCancellation_targetNumerator_odd' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.PrimitiveEndpointReduction.maximalCancellation_next_v_even' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.ReturnGuard.integralStep_laggedReturnCocycle' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]

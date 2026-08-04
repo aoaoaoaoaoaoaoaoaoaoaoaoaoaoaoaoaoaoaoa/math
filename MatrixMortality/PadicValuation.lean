@@ -269,4 +269,103 @@ theorem negative_add_unit
   · exact negative_shell.2
   · simpa [unit_shell.2] using negative_shell.2
 
+/-- A prime admitting adjacent rational units cannot be two. -/
+theorem odd_prime_of_adjacent_units
+    {prime : Nat} [Fact prime.Prime] {value : ℚ}
+    (value_unit : IsUnit prime value)
+    (predecessor_unit : IsUnit prime (value - 1)) :
+    Odd prime := by
+  apply (Fact.out : prime.Prime).odd_of_ne_two
+  intro prime_two
+  subst prime
+  let numerator := value.num
+  let denominator := value.den
+  have numerator_ne : numerator ≠ 0 :=
+    Rat.num_ne_zero.mpr value_unit.1
+  have denominator_ne : denominator ≠ 0 := value.den_nz
+  have denominator_ne_rat : (denominator : ℚ) ≠ 0 := by
+    exact_mod_cast denominator_ne
+  have valuation_eq :
+      padicValInt 2 numerator = padicValNat 2 denominator := by
+    have unit_valuation := value_unit.2
+    change (padicValInt 2 numerator : ℤ) - padicValNat 2 denominator = 0 at unit_valuation
+    exact_mod_cast sub_eq_zero.mp unit_valuation
+  have common_valuation_zero : padicValInt 2 numerator = 0 := by
+    by_contra valuation_ne
+    have valuation_positive : 1 ≤ padicValInt 2 numerator :=
+      Nat.one_le_iff_ne_zero.mpr valuation_ne
+    have two_dvd_numerator : (2 : ℤ) ∣ numerator := by
+      simpa using (padicValInt_dvd_iff (p := 2) 1 numerator).mpr
+        (Or.inr valuation_positive)
+    have two_dvd_numerator_abs : 2 ∣ numerator.natAbs := by
+      have divisibility :=
+        (Int.natAbs_dvd_natAbs (a := (2 : ℤ)) (b := numerator)).mpr
+          two_dvd_numerator
+      norm_num at divisibility ⊢
+      exact divisibility
+    have denominator_valuation_positive : 1 ≤ padicValNat 2 denominator := by
+      rw [← valuation_eq]
+      exact valuation_positive
+    have two_dvd_denominator : 2 ∣ denominator := by
+      simpa using (padicValNat_dvd_iff (p := 2) 1 denominator).mpr
+        (Or.inr denominator_valuation_positive)
+    have two_dvd_gcd : 2 ∣ Nat.gcd numerator.natAbs denominator :=
+      Nat.dvd_gcd two_dvd_numerator_abs two_dvd_denominator
+    rw [value.reduced.gcd_eq_one] at two_dvd_gcd
+    norm_num at two_dvd_gcd
+  have denominator_valuation_zero : padicValNat 2 denominator = 0 := by
+    rw [← valuation_eq, common_valuation_zero]
+  have numerator_odd : Odd numerator := by
+    rw [← Int.not_even_iff_odd]
+    intro numerator_even
+    have valuation_positive : 1 ≤ padicValInt 2 numerator := by
+      have divisibility :=
+        (padicValInt_dvd_iff (p := 2) 1 numerator).mp (by
+          simpa using numerator_even.two_dvd)
+      exact divisibility.resolve_left numerator_ne
+    omega
+  have denominator_odd : Odd (denominator : ℤ) := by
+    rw [← Int.not_even_iff_odd]
+    intro denominator_even
+    have two_dvd_denominator : 2 ∣ denominator := by
+      exact_mod_cast denominator_even.two_dvd
+    have valuation_positive : 1 ≤ padicValNat 2 denominator := by
+      exact ((padicValNat_dvd_iff (p := 2) 1 denominator).mp (by
+        simpa using two_dvd_denominator)).resolve_left denominator_ne
+    omega
+  have predecessor_eq :
+      value - 1 = ((numerator - denominator : ℤ) : ℚ) / denominator := by
+    dsimp [numerator, denominator]
+    calc
+      value - 1 = (value.num : ℚ) / value.den - 1 :=
+        congrArg (fun rational : ℚ ↦ rational - 1) value.num_div_den.symm
+      _ = ((value.num - value.den : ℤ) : ℚ) / value.den := by
+        rw [div_sub_one]
+        · norm_num
+        · exact_mod_cast denominator_ne
+  have difference_ne : numerator - (denominator : ℤ) ≠ 0 := by
+    intro difference_zero
+    apply predecessor_unit.1
+    rw [predecessor_eq, difference_zero]
+    norm_num
+  have difference_valuation_zero :
+      padicValInt 2 (numerator - (denominator : ℤ)) = 0 := by
+    have unit_valuation := predecessor_unit.2
+    rw [predecessor_eq,
+      padicValRat.div (by exact_mod_cast difference_ne) denominator_ne_rat,
+      padicValRat.of_int, padicValRat.of_nat] at unit_valuation
+    change (padicValInt 2 (numerator - (denominator : ℤ)) : ℤ) -
+      padicValNat 2 denominator = 0 at unit_valuation
+    rw [denominator_valuation_zero] at unit_valuation
+    norm_num at unit_valuation
+    exact_mod_cast unit_valuation
+  have difference_even : Even (numerator - (denominator : ℤ)) :=
+    numerator_odd.sub_odd denominator_odd
+  have difference_valuation_positive :
+      1 ≤ padicValInt 2 (numerator - (denominator : ℤ)) := by
+    exact ((padicValInt_dvd_iff (p := 2) 1
+      (numerator - (denominator : ℤ))).mp (by
+        simpa using difference_even.two_dvd)).resolve_left difference_ne
+  omega
+
 end MatrixMortality.PadicValuation

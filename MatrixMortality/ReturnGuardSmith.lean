@@ -681,4 +681,132 @@ theorem gaugedReturnCocycle_mulVec
     laggedReturnCocycle_mulVec denominator_eq difference,
     Matrix.mulVec_smul, returnWaitFrameChange_mulVec nextQ _ _ q_ne]
 
+private theorem odd_of_isCoprime_of_even_left
+    {left right : ℤ} (coprime : IsCoprime left right) (left_even : Even left) :
+    Odd right := by
+  rw [← Int.not_even_iff_odd]
+  intro right_even
+  obtain ⟨leftCoefficient, rightCoefficient, bezout⟩ := coprime
+  have two_dvd_one : (2 : ℤ) ∣ 1 := by
+    rw [← bezout]
+    exact dvd_add
+      (left_even.two_dvd.mul_left leftCoefficient)
+      (right_even.two_dvd.mul_left rightCoefficient)
+  norm_num at two_dvd_one
+
+/-- In the even-resultant stratum, maximal cancellation has an odd target numerator and hence
+cannot be terminal. -/
+theorem PrimitiveEndpointReduction.maximalCancellation_targetNumerator_odd
+    {prime wait : Nat}
+    {centerNumerator driftNumerator scale : ℤ}
+    {source target : ℤ × ℤ} {content complement : ℤ}
+    (prime_odd : Odd prime)
+    (reduction : PrimitiveEndpointReduction prime 2 centerNumerator
+      driftNumerator scale wait source target content)
+    (split : SmithRubanSplit (driftNumerator * scale)
+      ((prime : ℤ) ^ wait - 1) content complement)
+    (reset_even : Even (centerNumerator + driftNumerator - scale))
+    (maximal : split.v = 1) :
+    Odd target.1 := by
+  let q : ℤ := (prime : ℤ) ^ wait
+  let centerDifference := centerNumerator - scale
+  let quotient :=
+    maximalCancellationQuotient q scale split.eta source.2 target.2
+  have q_odd : Odd q := by
+    dsimp [q]
+    exact_mod_cast prime_odd.pow
+  have shift_even : Even (q - 1) :=
+    q_odd.sub_odd ⟨0, by ring⟩
+  have maximal_equations := reduction.maximalCancellation split maximal
+  change source.1 = (q - 1) * quotient ∧
+    split.eta * target.1 =
+      driftNumerator * quotient + centerDifference * split.eta * target.2 at maximal_equations
+  have source_even : Even source.1 := by
+    rw [maximal_equations.1]
+    exact shift_even.mul_right quotient
+  have source_denominator_odd : Odd source.2 :=
+    odd_of_isCoprime_of_even_left reduction.source_coprime source_even
+  have u_eq : split.u = q - 1 := by
+    have shift_eq := split.shift_eq
+    change q - 1 = split.u * split.v at shift_eq
+    rw [maximal, mul_one] at shift_eq
+    exact shift_eq.symm
+  have u_even : Even split.u := u_eq.symm ▸ shift_even
+  have theta_odd : Odd split.theta :=
+    odd_of_isCoprime_of_even_left split.u_coprime_theta u_even
+  have eta_ne : split.eta ≠ 0 := by
+    intro eta_zero
+    apply reduction.content_ne
+    rw [split.content_eq, eta_zero, zero_mul]
+  have target_eq :
+      target.1 = split.theta * source.2 +
+        (driftNumerator * q ^ 2 + centerDifference) * target.2 := by
+    apply mul_left_cancel₀ eta_ne
+    calc
+      split.eta * target.1 =
+          driftNumerator * quotient +
+            centerDifference * split.eta * target.2 := maximal_equations.2
+      _ = split.eta *
+          (split.theta * source.2 +
+            (driftNumerator * q ^ 2 + centerDifference) * target.2) := by
+        dsimp [quotient, maximalCancellationQuotient]
+        linear_combination source.2 * split.fixed_eq
+  have coefficient_even :
+      Even (driftNumerator * q ^ 2 + centerDifference) := by
+    have fixed_sum_even : Even (driftNumerator + centerDifference) := by
+      convert reset_even using 1
+      dsimp [centerDifference]
+      ring
+    have square_shift_even : Even (q ^ 2 - 1) :=
+      q_odd.pow.sub_odd ⟨0, by ring⟩
+    rw [show
+      driftNumerator * q ^ 2 + centerDifference =
+        (driftNumerator + centerDifference) + driftNumerator * (q ^ 2 - 1) by ring]
+    exact fixed_sum_even.add (square_shift_even.mul_left driftNumerator)
+  rw [target_eq]
+  exact (theta_odd.mul source_denominator_odd).add_even
+    (coefficient_even.mul_right target.2)
+
+/-- A maximal Smith allocation forces the following allocation onto the even, hence
+nonmaximal, side of the split. -/
+theorem PrimitiveEndpointReduction.maximalCancellation_next_v_even
+    {prime wait nextWait : Nat}
+    {centerNumerator driftNumerator scale : ℤ}
+    {source target nextTarget : ℤ × ℤ}
+    {content complement nextContent nextComplement : ℤ}
+    (prime_odd : Odd prime)
+    (reduction : PrimitiveEndpointReduction prime 2 centerNumerator
+      driftNumerator scale wait source target content)
+    (split : SmithRubanSplit (driftNumerator * scale)
+      ((prime : ℤ) ^ wait - 1) content complement)
+    (nextReduction : PrimitiveEndpointReduction prime 2 centerNumerator
+      driftNumerator scale nextWait target nextTarget nextContent)
+    (nextSplit : SmithRubanSplit (driftNumerator * scale)
+      ((prime : ℤ) ^ nextWait - 1) nextContent nextComplement)
+    (reset_even : Even (centerNumerator + driftNumerator - scale))
+    (maximal : split.v = 1) :
+    Even nextSplit.v := by
+  have target_numerator_odd :=
+    reduction.maximalCancellation_targetNumerator_odd prime_odd split reset_even maximal
+  have next_power_odd : Odd ((prime : ℤ) ^ nextWait) := by
+    exact_mod_cast prime_odd.pow
+  have next_shift_even : Even ((prime : ℤ) ^ nextWait - 1) :=
+    next_power_odd.sub_odd ⟨0, by ring⟩
+  have denominator_product_odd : Odd
+      ((prime : ℤ) ^ (2 * nextWait) * (nextContent * nextTarget.2)) := by
+    rw [nextReduction.step.denominator]
+    exact target_numerator_odd.sub_even
+      ((next_shift_even.mul_left scale).mul_right target.2)
+  have prequotient_odd : Odd (nextContent * nextTarget.2) :=
+    (Int.odd_mul.mp denominator_product_odd).2
+  have content_odd : Odd nextContent := (Int.odd_mul.mp prequotient_odd).1
+  have u_odd : Odd nextSplit.u := by
+    rw [nextSplit.content_eq] at content_odd
+    exact (Int.odd_mul.mp content_odd).2
+  have split_product_even : Even (nextSplit.u * nextSplit.v) := by
+    rw [← nextSplit.shift_eq]
+    exact next_shift_even
+  exact (Int.even_mul.mp split_product_even).resolve_left
+    (Int.not_even_iff_odd.mpr u_odd)
+
 end MatrixMortality.ReturnGuard

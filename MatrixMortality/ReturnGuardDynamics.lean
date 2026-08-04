@@ -35,6 +35,11 @@ instance (parameters : Parameters) : Fact parameters.prime.Prime :=
   ⟨parameters.prime_prime⟩
 theorem prime_two (parameters : Parameters) : 2 ≤ parameters.prime :=
   parameters.prime_prime.two_le
+
+/-- The adjacent unit conditions exclude residue characteristic two. -/
+theorem prime_odd (parameters : Parameters) : Odd parameters.prime :=
+  odd_prime_of_adjacent_units parameters.center_unit parameters.center_sub_one_unit
+
 theorem prime_ne_zero (parameters : Parameters) : (parameters.prime : ℚ) ≠ 0 :=
   Nat.cast_ne_zero.mpr parameters.prime_prime.ne_zero
 theorem depth_positive (parameters : Parameters) : 0 < parameters.depth := by
