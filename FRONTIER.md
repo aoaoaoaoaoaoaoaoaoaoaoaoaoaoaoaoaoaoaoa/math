@@ -913,13 +913,13 @@ retired.
 the universal boundary. At depth two, for any prime `ℓ`, write
 
 ```text
-λ=vℓ(L),  ρ=vℓ(A+D−L),  μ=vℓ(D),
+λL=vℓ(L),  λR=vℓ(A+D−L),  λD=vℓ(D),
 e=vℓ(p−1),  ε=vℓ(2).
 ```
 
-If `ρ<λ+e` and `2ρ<μ+e+min(λ,ρ+ε)`, an explicit `ℓ`-adic ball around reset is invariant under
-every positive endpoint branch and excludes terminal. In particular every prime divisor of
-`p−1` must divide `A+D−L` in any mortal coefficient presentation. This kills the previous
+If `λR<λL+e` and `2λR<λD+e+min(λL,λR+ε)`, an explicit `ℓ`-adic ball around reset is
+invariant under every positive endpoint branch and excludes terminal. In particular every prime
+divisor of `p−1` must divide `A+D−L` in any mortal coefficient presentation. This kills the previous
 period-three fixed ray as an entire physical law, not merely as a bounded orbit. Passing the
 sieve supplies no height amortization: survivors may absorb the universal-boundary primes into
 their fixed coefficients.
@@ -944,9 +944,10 @@ survivor must have unbounded reduced denominators.
 | Exceptional reverse compiler | Absorb the finite `αβ=0` disjunction into one three-dimensional many-one instance | The generic rank-`(2,2)` compiler is complete; dimension three has no evident OR operation |
 
 The prospective hot path is now global amortization of the mandatory nonmaximal branches inside
-the fixed-cusp recurrence, not another parameter or tangent coordinate. The matrix compiler, arbitrary-word converse,
-deterministic wait decoder, rational inverse-address grammar, primitive integral lift, endpoint
-factorization, exact branch similarity, arbitrary repeated-factor pumping, local record-ascent
+the fixed-cusp recurrence, not another parameter or tangent coordinate. The matrix compiler,
+arbitrary-word converse, deterministic wait decoder, rational inverse-address grammar,
+primitive integral lift, endpoint factorization, exact branch similarity, arbitrary
+repeated-factor pumping, local record-ascent
 budget, local content allocation, maximal-step isolation, and universal-boundary valuation wall
 are complete. `M₃(2)` asks whether an even-resultant, universal-boundary-divisible,
 unbounded-denominator orbit can repay infinitely many forced nonmaximal losses, or whether those

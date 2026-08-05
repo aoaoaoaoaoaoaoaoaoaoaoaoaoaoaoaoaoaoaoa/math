@@ -55,38 +55,38 @@ The proof does not introduce another execution, normalization, or dynamical coor
 Let `ℓ` be any prime and write
 
 ```text
-λ=vℓ(L),    ρ=vℓ(R),    μ=vℓ(D),
+λL=vℓ(L),   λR=vℓ(R),   λD=vℓ(D),
 e=vℓ(p−1), ε=vℓ(2).
 ```
 
 Assume `R≠0` and
 
 ```text
-ρ < λ+e,                                      (U1)
-2ρ < μ+e+min(λ,ρ+ε).                          (U2)
+λR < λL+e,                                    (U1)
+2λR < λD+e+min(λL,λR+ε).                      (U2)
 ```
 
 Then every positive decoded branch preserves
 
 ```text
-Bℓ(R,ρ) = {R} ∪ {z : z−R≠0 and ρ<vℓ(z−R)}.
+Bℓ(R,λR) = {R} ∪ {z : z−R≠0 and λR<vℓ(z−R)}.
 ```
 
-Indeed, a point in this ball has valuation `ρ`. Since `p−1∣q−1`, (U1) makes the two
+Indeed, a point in this ball has valuation `λR`. Since `p−1∣q−1`, (U1) makes the two
 denominator terms have unequal valuations and gives
 
 ```text
-vℓ(z−L(q−1))=ρ.
+vℓ(z−L(q−1))=λR.
 ```
 
 The numerator blade satisfies
 
 ```text
-vℓ((q+1)z+L) ≥ min(λ,ρ+ε).
+vℓ((q+1)z+L) ≥ min(λL,λR+ε).
 ```
 
 Together with the factorization, (U2) puts the target strictly back inside the ball. Reset is
-inside; terminal `0` is outside because `vℓ(−R)=ρ`. The checked arbitrary-word compiler then
+inside; terminal `0` is outside because `vℓ(−R)=λR`. The checked arbitrary-word compiler then
 turns this branch invariant into physical immortality.
 
 The submitted proof silently applied a finite-valuation calculation when
@@ -104,7 +104,7 @@ For every prime `ℓ∣p−1`, mortality forces
 ℓ ∣ R.
 ```
 
-Otherwise `ρ=0`, while `e≥1` and every integral coefficient valuation is nonnegative; both
+Otherwise `λR=0`, while `e≥1` and every integral coefficient valuation is nonnegative; both
 (U1) and (U2) hold. Thus, in any integral presentation,
 
 ```text
@@ -113,7 +113,7 @@ rad(p−1) ∣ R
 
 is a necessary condition for mortality. The full inequality theorem is stronger: it also
 excludes coefficient tuples where `ℓ` already divides `R` but its valuation remains below the
-reset-ball wall. Scaling `A,D,L` together translates `λ,ρ,μ` equally, so both inequalities are
+reset-ball wall. Scaling `A,D,L` together translates `λL,λR,λD` equally, so both inequalities are
 presentation-invariant.
 
 Artifact: `ReturnGuard.universalBoundary_dvd_resetResultant_of_physical_isMortal` in
@@ -125,7 +125,7 @@ For the fixed ray
 p=3,    A=−446,    D=500,    L=56,    R=−2,
 ```
 
-the `2`-adic tuple is `(λ,ρ,μ,e,ε)=(3,1,2,1,1)`, so (U1) and (U2) hold. The entire physical
+the `2`-adic tuple is `(λL,λR,λD,e,ε)=(3,1,2,1,1)`, so (U1) and (U2) hold. The entire physical
 law is immortal, not merely periodic on its displayed ray. No example declaration was retained:
 the general theorem owns the result.
 

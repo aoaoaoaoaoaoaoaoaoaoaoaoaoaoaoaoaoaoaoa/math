@@ -3470,18 +3470,18 @@ center=A/L,    drift=D/L,    R=A+D−L.
 For any prime `ℓ`, put
 
 ```text
-λ=vℓ(L),    ρ=vℓ(R),    μ=vℓ(D),
+λL=vℓ(L),   λR=vℓ(R),   λD=vℓ(D),
 e=vℓ(p−1), ε=vℓ(2).
 ```
 
 If `R≠0` and
 
 ```text
-ρ < λ+e,
-2ρ < μ+e+min(λ,ρ+ε),
+λR < λL+e,
+2λR < λD+e+min(λL,λR+ε),
 ```
 
-then the open `ℓ`-adic ball of depth `ρ` around reset is invariant under every positive
+then the open `ℓ`-adic ball of depth `λR` around reset is invariant under every positive
 decoded branch. The exact mechanism is
 
 ```text

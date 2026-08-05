@@ -352,13 +352,13 @@ Depth two now also has a coefficient-level prime-adic wall. For an integral pres
 `center=A/L`, `drift=D/L`, put `R=A+D−L` and, at any prime `ℓ`,
 
 ```text
-λ=vℓ(L),  ρ=vℓ(R),  μ=vℓ(D),  e=vℓ(p−1),  ε=vℓ(2).
+λL=vℓ(L),  λR=vℓ(R),  λD=vℓ(D),  e=vℓ(p−1),  ε=vℓ(2).
 ```
 
-Lean proves that `R≠0`, `ρ<λ+e`, and
+Lean proves that `R≠0`, `λR<λL+e`, and
 
 ```text
-2ρ < μ+e+min(λ,ρ+ε)
+2λR < λD+e+min(λL,λR+ε)
 ```
 
 make the open `ℓ`-adic reset ball invariant under every positive decoded branch. The endpoint
