@@ -15,6 +15,8 @@ redistributable full text was located.
 | [DeMol11](de-mol-2011-simple-tag-systems.md) | peer-reviewed TCS 2011; author manuscript | Experimental and structural status of binary deletion-width-three tag systems |
 | [Kurilenko22](kurilenko-2022-post-tag-growth.md) | peer-reviewed Complex Systems 2022; arXiv copy | Unbounded growth in Post's width-three system; no universality or reachability decision theorem |
 | [FS23](fazekas-seki-2023-freezing-one-tag-states.md) | peer-reviewed AFL 2023 / EPTCS; CC-BY | Definition of one-tag systems with states and the exact source-model seam; no binary two-state universality bound |
+| [Moss08](moss-2008-confusion-memory.md) | peer-reviewed IPL 2008; author-posted manuscript | Binary single-queue halting is Σ₁-complete with unrestricted program control; the construction does not bound states or dequeue on every step |
+| [Pierce11](pierce-2011-iterated-length-preserving-transducers.md) | unpublished CMU senior thesis; institutional copy | Reset and binary-toggle iterated transducers support RE-hard safety problems, but the two constructions spend respectively a large alphabet and unrestricted finite control |
 | [BPS19](bell-potapov-semukhin-2019-mortality-problem.md) | MFCS 2019; journal 2021 | Independent post-correction statement of the six-generator `3 × 3` bound |
 | [Bacik25](bacik-2025-order-four-skolem.md) | peer-reviewed TheoretiCS 2025; CC-BY | Decidability of the algebraic Skolem problem through order four; definitive low-order boundary used by the `M₃(2)` rank census |
 | [Michels14](michels-2014-zsigmondy-theorem.md) | revised author exposition; not peer reviewed | Elementary proof of Zsigmondy’s primitive-prime-divisor theorem, including the `2⁶−1` and power-of-two exceptions |

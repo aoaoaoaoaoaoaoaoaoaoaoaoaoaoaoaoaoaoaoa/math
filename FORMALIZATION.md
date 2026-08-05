@@ -443,6 +443,13 @@ the even-track invariant through every reachable queue or the induced macro solv
 equivalence. The direct first-return obstruction [`M4-O05`](SALVAGE.md#m4-o05-direct-two-state-first-return-recoding)
 also remains reported. Neither claim enters the checked theorem ledger.
 
+The universal monomial cube-root blade [`M4-M02`](SALVAGE.md#m4-m02-universal-monomial-cube-root-blade)
+and its punctuation-image annihilator guard
+[`M4-O06`](SALVAGE.md#m4-o06-punctuation-image-annihilator) are audited but not formalized.
+The blade proves a uniform rank-one mixed word, not either source boundary alignment or an
+arbitrary-word converse. Its exact computational boundary is recorded in
+[`audits/m43-cube-root-incidence-2026-08-05.md`](audits/m43-cube-root-incidence-2026-08-05.md).
+
 No `M₄(3)` undecidability theorem follows from the present corpus. The missing source is an
 undecidable binary two-state controlled scalar system, or a matrix-level open-residue compiler
 with a complete arbitrary-word converse.

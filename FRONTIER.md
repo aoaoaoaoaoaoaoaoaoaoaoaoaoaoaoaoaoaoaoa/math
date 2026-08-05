@@ -263,13 +263,16 @@ Two architectures survive.
 2. **State-gauged matrix macro.** Let incomplete matrix fragments break the shared upper plane
    and reconstruct it only at macro boundaries, preserving the zero set rather than every
    coefficient. The cube-root incidence mechanism
-   [`M4-M01`](SALVAGE.md#m4-m01-mixed-cube-root-punctuation) is the concrete fallback, but it
-   still lacks a boundary-aligned rank-one word and an all-fragment converse.
+   [`M4-M01`](SALVAGE.md#m4-m01-mixed-cube-root-punctuation) is the concrete fallback. The
+   monomial blade [`M4-M02`](SALVAGE.md#m4-m02-universal-monomial-cube-root-blade) now gives a
+   rational rank-one word `G_xSG_xSG_x` uniformly in the paired role parameters. Its row and
+   column do not align with the source boundaries, and no all-fragment converse is known.
 
 The next source experiment should specify an open-residue invariant before choosing appendants.
-The next matrix experiment should solve the cube-root incidence varieties symbolically before
-enumerating words. Any proposal whose semantic queue is a finite word of complete tokens is
-already closed.
+The next matrix experiment should solve the monomial blade's two-sided boundary equations
+uniformly in the varying body, imposing the punctuation-image annihilator guard
+[`M4-O06`](SALVAGE.md#m4-o06-punctuation-image-annihilator) before searching longer fragments.
+Any proposal whose semantic queue is a finite word of complete tokens is already closed.
 
 ### 2. Zero-set compression and fused punctuation: `M₅(3)`
 

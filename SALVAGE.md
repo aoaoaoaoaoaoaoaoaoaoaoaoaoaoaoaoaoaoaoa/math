@@ -3768,13 +3768,84 @@ The search for a rank-one punctuation word is therefore a finite family of proje
 incidence equations in the cube-root conjugacy parameters, followed by row- and column-boundary
 alignment.
 
-**Scope:** no parameter satisfying all incidences and boundary alignments is known. Even such
-a solution would still require an arbitrary-product converse for every other mixed fragment.
+**Scope:** [`M4-M02`](#m4-m02-universal-monomial-cube-root-blade) now supplies a rational
+rank-one word uniformly, but no parameter satisfying both source boundary alignments is known.
+Even such a solution would still require an arbitrary-product converse for every other mixed
+fragment.
 
 **Use:** independent matrix-level fallback if the two-state source route stalls.
 
-**Next:** solve the incidence varieties symbolically before enumerating words; reject any
-candidate without a rank-stratified all-word grammar.
+**Next:** solve the two-sided boundary problem on the monomial blade, with the annihilator
+guard [`M4-O06`](#m4-o06-punctuation-image-annihilator) imposed before any all-word claim.
+
+### M4-M02: Universal monomial cube-root blade
+
+**Kind:** partial mechanism
+**Evidence:** audited
+**Disposition:** active
+
+For one paired data matrix, write
+
+```text
+G = [[1,l,u,e], [0,0,0,0], [0,0,a,0], [0,m,0,n]],
+B⁻¹GB = JF,
+F = [[1,u,e+l,l-e], [0,a,0,0], [0,0,(m+n)/2,(m-n)/2]].
+```
+
+When `a u (l+e) (m-n) (m+n) (em-ln)≠0`, put
+
+```text
+p = 2(em-ln)/(m+n),
+r = u(m-n)/(2a(l+e)),
+q = 1/(pr),
+A = [[0,0,p], [q,0,0], [0,r,0]].
+```
+
+Then `A³=I₃`. With `S=B diag(A,-1)B⁻¹`, direct calculation gives
+
+```text
+S³=T,                  rank(GSGSG)=1.
+```
+
+Indeed, for `Q=F diag(A,-1)J`, one has `det Q=e₂(Q)=0`, `rank Q=2`, and
+`B⁻¹(GSGSG)B=JQ²F` with `rank Q²=1`. Rank-one existence is therefore uniform in the role
+parameters; it is not an exceptional rational point on an incidence curve.
+
+**Scope:** the blade's row and column are generally wrong. On the audited `β=3`, body-`bb`,
+desynchronized diagnostic, the column is nonannihilating and the row has the safe length sign,
+but neither boundary aligns. Exact bounded context and digit-resultant searches found no repair;
+they are not impossibility theorems. No arbitrary-fragment converse is known.
+
+**Use:** start future cube-root attacks from this closed rank-one formula. Do not spend another
+search on bare rank-one incidence.
+
+**Artifact:** [`audits/m43-cube-root-incidence-2026-08-05.md`](audits/m43-cube-root-incidence-2026-08-05.md).
+
+**Next:** derive the blade's two projective boundaries symbolically for general `β` and body.
+Seek a uniform open desynchronization or short left/right contexts that align them while passing
+every local nonannihilation test.
+
+### M4-O06: Punctuation-image annihilator
+
+**Kind:** obstruction
+**Evidence:** audited
+**Disposition:** active
+
+If a proposed nonzero punctuation has rank-one form `P=CL`, then any legal context with
+`UC=0` or `LV=0` gives the unconditional zero word `UP=0` or `PV=0`. The usual self-incidence
+test `L C≠0`, equivalently `P²≠0`, does not exclude either defect.
+
+This kills the rational cubic component found for the repeated `Q_{b,2}²` incidence. Its
+punctuation image is the intended terminal line, but `Q_{b,2}C=0`; prepending the legal fragment
+`G_bS²` therefore annihilates the punctuation independently of the source computation.
+
+**Scope:** this is a necessary local guard, not an all-fragment converse. Passing every
+one-step guard does not exclude a longer annihilating context.
+
+**Use:** before promoting a cube-root candidate, test `Q_{x,r}C≠0` and the row-dual condition
+for both data letters and every residue modulo six. Then classify longer rank drops.
+
+**Artifact:** [`audits/m43-cube-root-incidence-2026-08-05.md`](audits/m43-cube-root-incidence-2026-08-05.md).
 
 ## Three-Letter Source Frontier
 
