@@ -3458,8 +3458,10 @@ orbit with unbounded denominators and a genuinely nonperiodic wait word.
 
 ## Three-Generator Four-State Frontier
 
-Formal promotion of this section is tracked in
-[#5](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/5).
+Formal promotion of the checked compiler was completed in
+[#5](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/5). The live
+monomial boundary and all-fragment converse are tracked in
+[#13](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/13).
 
 ### M4-C01: Two-state pushout compiler
 
