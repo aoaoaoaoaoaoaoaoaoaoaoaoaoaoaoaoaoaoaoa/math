@@ -456,10 +456,21 @@ an exceptional chain vanishes exactly when its induced `2 × 2` bridge word vani
 and exact promotion boundary are
 [`audits/m43-parabolic-blade-2026-08-05.md`](audits/m43-parabolic-blade-2026-08-05.md).
 
+The closed-phase obstruction [`M4-O08`](SALVAGE.md#m4-o08-closed-phase-two-ray-wall) is
+formalized in
+[`MatrixMortality/ParabolicClosedPhase.lean`](MatrixMortality/ParabolicClosedPhase.lean). After
+uniform integral scaling and reduction modulo three, every closed atom and the exceptional atom
+act on two protected rays with nonzero weight. Lean therefore proves
+`ParabolicBlade.closedPhase_wordProduct_ne_zero`: for every `β`, body, and word over `Q(b,1)` and
+the atoms `Q(x,3j)`, the product is nonzero. This removes arbitrary exceptional counts and all
+closed malformed waits without retaining the report's side-normal bounds or bridge-rank
+infrastructure. The audit is
+[`audits/m43-closed-phase-2026-08-05.md`](audits/m43-closed-phase-2026-08-05.md).
+
 No `M₄(3)` undecidability theorem follows from the present corpus. The missing source is an
 undecidable binary two-state controlled scalar system, or a matrix-level open-residue compiler
-whose two blade boundaries realize the paired zero series and whose `2 × 2` bridge language has
-the intended zero words only.
+whose first regular residue-one or residue-two block realizes the paired zero series and whose
+`2 × 2` bridge language has the intended zero words only.
 
 ## Modules
 
@@ -531,6 +542,7 @@ the intended zero words only.
 | `TerminalSource.lean` | generic primitive extraction and GPCP bridge |
 | `PairedCompression.lean` | reset/toggle specialization, explicit coordinate certificates, and arbitrary-word decoding |
 | `ParabolicBlade.lean` | open cube root, nonzero mixed blade, complete atom grammar, annihilator guards, and exact `2 × 2` exceptional-chain contraction |
+| `ParabolicClosedPhase.lean` | integral closed-atom numerators, modulo-three two-ray action, and arbitrary closed-phase immortality |
 | `PairedMortality.lean` | common-column mortality converse and exact integer `4 × 4` family |
 | `PairedRank.lean` | uniform exact rank-four certificate for the paired scalar series |
 | `PairedBoundaryTax.lean` | exact six-state lower bound for diagonal paired-series bridges |

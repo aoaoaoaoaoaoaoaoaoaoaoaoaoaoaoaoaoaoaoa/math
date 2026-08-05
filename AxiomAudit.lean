@@ -73,6 +73,7 @@ open MatrixMortality
 #print axioms ParabolicBlade.row_vecMul_atom_ne_zero
 #print axioms ParabolicBlade.two_exceptional_atoms_ne_zero
 #print axioms ParabolicBlade.exceptionalChain_eq_zero_iff
+#print axioms ParabolicBlade.closedPhase_wordProduct_ne_zero
 #print axioms isMortal_smulMatrix_iff
 #print axioms InternalSandwich.mortal_quotient_iff
 #print axioms InternalSandwich.ambient_mortal_of_quotient_subsingleton

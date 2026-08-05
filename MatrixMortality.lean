@@ -77,3 +77,4 @@ import MatrixMortality.PrefixFullAlgebra
 import MatrixMortality.ScheduledBinaryRank
 import MatrixMortality.TwoStateObstructions
 import MatrixMortality.ParabolicBlade
+import MatrixMortality.ParabolicClosedPhase
