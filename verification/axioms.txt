@@ -504,6 +504,9 @@
 'MatrixMortality.ReturnGuard.PrimitiveEndpointReduction.resetDefect_eq_complement_mul' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.ReturnGuard.PrimitiveEndpointReduction.recurrentBoundaryDivisor_persists' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.ReturnGuard.PrimitiveEndpointReduction.complement_dvd_terminalBoundary' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]

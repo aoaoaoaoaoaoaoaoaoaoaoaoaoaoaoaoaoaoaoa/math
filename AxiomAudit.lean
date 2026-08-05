@@ -256,6 +256,7 @@ open MatrixMortality
 #print axioms ReturnGuard.terminalTruncant_eq_cumulativeNumerator
 #print axioms ReturnGuard.PrimitiveEndpointReduction.content_natAbs_eq_gcd_driftSource_prequotient
 #print axioms ReturnGuard.PrimitiveEndpointReduction.resetDefect_eq_complement_mul
+#print axioms ReturnGuard.PrimitiveEndpointReduction.recurrentBoundaryDivisor_persists
 #print axioms ReturnGuard.PrimitiveEndpointReduction.complement_dvd_terminalBoundary
 #print axioms ReturnGuard.terminalPredecessorPair_step
 #print axioms ReturnGuard.cumulativeCompleteQuotient_recurrence

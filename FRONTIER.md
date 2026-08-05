@@ -899,6 +899,16 @@ even. Maximal steps neither terminate nor occur consecutively. Eliminating the r
 ratios returns the existing guarded scalar state; it does not supply a second register capable
 of repaying contraction.
 
+[`R32-O08`](SALVAGE.md#r32-o08-recurrent-boundary-divisors-stay-reverse) kills the proposed
+Jacobi prime-handoff shortcut. The exact denominator recurrence has coefficient
+`A+Dqˢ−Lq′`, not `L(q′−1)`. More decisively, if a divisor `d` of reverse content `k` recurs in
+the next boundary `L(q′−1)` and is coprime to `L(A+D−L)`, then `d` is coprime to the next
+forward content and divides the next reverse content with full multiplicity. The token stays
+reverse; it does not alternate into cancellation. Across intervening smaller waits its fate is
+again a projective incidence problem already owned by the exact-order quotient automata. The
+submitted normalized transfer, torsion rails, and global alternation argument are therefore
+retired.
+
 The remaining unbounded channel is now sharply Archimedean. The formalized
 [`R32-D03`](SALVAGE.md#r32-d03-bounded-denominator-periodicity) theorem says that every
 infinite legal rational orbit with bounded reduced denominators is eventually periodic.

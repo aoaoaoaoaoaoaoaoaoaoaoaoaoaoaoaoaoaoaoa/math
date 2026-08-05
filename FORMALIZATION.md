@@ -341,6 +341,13 @@ lagged wait frame; changing to the next wait requires a separate rational gauge.
 the lagged transfer, frame change, and honest composed cocycle. The ungauged global path bound
 is false and is not part of the corpus.
 
+The later Jacobi handoff proposal also failed reconstruction. The exact denominator recurrence
+retains the coefficient `A+Dqˢ−Lq′`. If a divisor of reverse content recurs in the next
+cyclotomic boundary outside `L(A+D−L)`, Lean proves that it is coprime to the next forward
+content and divides the next reverse content with full multiplicity. Thus recurring factors do
+not alternate into forward cancellation. See
+[`audits/m32-jacobi-handoff-2026-08-05.md`](audits/m32-jacobi-handoff-2026-08-05.md).
+
 These are structural and decidable-stratum theorems, not an `M₃(2)` resolution. The imported
 order-four Skolem theorem used to classify rank-one profiles is not reimplemented in Lean. The
 generic reverse edge compiler still assumes `αβ≠0`, and no universality or decision theorem is
@@ -483,7 +490,7 @@ with a complete arbitrary-word converse.
 | `ReturnGuardQuotientCompleteness.lean` | zero-wait terminal kernel, cancellation-reachability completeness, and synchronized-product no-amplification |
 | `ReturnGuardDriftCertificate.lean` | exact drift-divisor certificate classification, cyclic subgroup criterion, and executable finite test |
 | `ReturnGuardCumulative.lean` | content-free cumulative endpoint execution, exact second-order recurrence, odd-resultant immortality, and derived primitive content |
-| `ReturnGuardContinued.lean` | fixed-cusp complete quotients, exact terminal arithmetic, record-ascent content budget, and order-three decoder |
+| `ReturnGuardContinued.lean` | fixed-cusp complete quotients, exact terminal arithmetic, recurrent-boundary reverse persistence, record-ascent content budget, and order-three decoder |
 | `ReturnGuardSmith.lean` | signed content split, unimodular endpoint decoder, nonmaximal contraction, maximal-step isolation, and corrected gauged cocycle |
 | `ReturnGuardPeriodicity.lean` | exact denominator recurrence and explicit record-ascent, wait, content, and numerator ceilings |
 | `ReturnGuardFiniteOrbit.lean` | bounded primitive endpoint streams, their finite state box, repetition, and eventual periodicity |
@@ -605,6 +612,7 @@ with a complete arbitrary-word converse.
 | Outside the fixed parameter support, cancellation is exactly cyclotomic terminal congruence | `ReturnGuard.integralStep_novel_cancel_iff_cyclotomic_terminalCongruent` |
 | Primitive endpoint normalization collapses into one deterministic cumulative recurrence | `ReturnGuard.primitiveIntegralStep_cumulativeEndpointStep`, `ReturnGuard.CumulativeEndpointStep.target_unique`, `ReturnGuard.cumulativeNumerator_recurrence` |
 | Primitive content is exactly the gcd of the drift source and the unreduced quotient; reverse content satisfies a wait-free terminal divisor law | `ReturnGuard.PrimitiveEndpointReduction.content_natAbs_eq_gcd_driftSource_prequotient`, `ReturnGuard.PrimitiveEndpointReduction.resetDefect_eq_complement_mul`, `ReturnGuard.PrimitiveEndpointReduction.complement_dvd_terminalBoundary` |
+| A reverse-content divisor recurring in the next boundary outside fixed scale-reset support remains wholly reverse | `ReturnGuard.PrimitiveEndpointReduction.recurrentBoundaryDivisor_persists` |
 | Every positive wait has an exact terminal predecessor, so backward terminal search has no wait bound | `ReturnGuard.terminalPredecessorPair_step` |
 | Cumulative endpoints form a generalized continued fraction with one fixed forbidden cusp | `ReturnGuard.cumulativeCompleteQuotient_recurrence`, `ReturnGuard.cumulativeCompleteQuotient_sub_forbiddenCusp`, `ReturnGuard.cumulativeWaitForm_hasValue` |
 | At critical depth two, every nondecreasing pair of waits pays an exact two-step content budget | `ReturnGuard.PrimitiveEndpointReduction.twoStep_elimination`, `ReturnGuard.PrimitiveEndpointReduction.twoStep_contentBudget` |

@@ -91,6 +91,7 @@ file owns the mathematical stock.
 | [`R32-S06`](#r32-s06-resonance-localization) | structure theorem | every nonresonant continuation descends and every infinite ready chain resonates arbitrarily late | formalized | active |
 | [`R32-O06`](#r32-o06-rational-affine-wait-rail-rigidity) | obstruction | no reduced rational chart supports a nontrivial affine wait rail at infinitely many prime powers | formalized | graduated |
 | [`R32-O07`](#r32-o07-parity-immortality-and-maximal-isolation) | obstruction | odd reset resultants are immortal, while maximal Smith steps in the even stratum are isolated | formalized | graduated |
+| [`R32-O08`](#r32-o08-recurrent-boundary-divisors-stay-reverse) | obstruction | outside fixed scale-reset support, a reverse-content divisor recurring in the next boundary remains wholly reverse | formalized | graduated |
 | [`R32-S07`](#r32-s07-decoded-residual-address-normal-form) | structure theorem | mortality is finite inverse-address membership in disjoint rational p-adic branch spheres | formalized | active |
 | [`R32-M05`](#r32-m05-cyclotomic-reset-or-cancellation-sieve) | partial mechanism | every primitive reduction either resets modulo a cyclotomic prime or swallows it in the common cancellation | formalized | active |
 | [`R32-S08`](#r32-s08-cumulative-endpoint-recurrence) | structure theorem | cumulative endpoint pairs absorb every normalization scalar into one deterministic exact-division recurrence | formalized | active |
@@ -3414,6 +3415,44 @@ globalize the local contraction on `v≥2` branches.
 **Use:** discard residue characteristic two, the entire odd-resultant mortality stratum, and
 every eventually maximal schedule. Any surviving undecidability construction or decision
 argument must live in even `R` and traverse a `v≥2` branch after each maximal step.
+
+### R32-O08: Recurrent boundary divisors stay reverse
+
+**Kind:** obstruction
+**Evidence:** formalized
+**Disposition:** graduated
+
+Consider consecutive primitive endpoint reductions with signed forward and reverse contents
+
+```text
+h k   = DL(pᵃ−1),
+h′ k′ = DL(pᵇ−1),
+R     = A+D−L.
+```
+
+For every signed divisor `d`, Lean proves
+
+```text
+d∣k,  d∣L(pᵇ−1),  gcd(d,LR)=1
+  ⇒ gcd(d,h′)=1 ∧ d∣k′.
+```
+
+The result retains multiplicity and assumes neither that `d` is prime nor that the carry depth
+is two. It reverses the proposed prime-handoff rule: a recurring boundary factor already on the
+reverse side cannot switch to forward cancellation outside the fixed scale-reset support.
+
+**Scope:** the theorem concerns consecutive reductions for which the divisor occurs in the
+next boundary. A primitive divisor of a maximal wait is absent from every intervening smaller
+wait, so an intervening invertible projective bridge can still change the incidence at its next
+occurrence. The theorem supplies no global allocation law across such a bridge.
+
+**Artifact:** `PrimitiveEndpointReduction.recurrentBoundaryDivisor_persists` in
+[`ReturnGuardContinued.lean`](MatrixMortality/ReturnGuardContinued.lean). Independent audit:
+[`m32-jacobi-handoff-2026-08-05.md`](audits/m32-jacobi-handoff-2026-08-05.md).
+
+**Use:** do not model repeated primitive factors as alternating tokens. At an immediate repeated
+boundary they persist on the reverse side; across a smaller-wait bridge, use the existing
+exact-order projective automaton and prove the required incidence or valuation statement.
 
 ### R32-D03: Bounded-denominator periodicity
 

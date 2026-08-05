@@ -6,7 +6,8 @@ import MatrixMortality.ReturnGuardCumulative
 
 The cumulative endpoint recurrence admits one canonical Euclidean quotient and one fixed
 forbidden cusp.  This file records those laws without introducing another dynamical state.
-It also exposes the exact two-step identity behind record-wait height bounds.
+It also exposes reverse-content persistence and the exact two-step identity behind record-wait
+height bounds.
 -/
 
 namespace MatrixMortality.ReturnGuard
@@ -194,6 +195,74 @@ theorem PrimitiveEndpointReduction.complement_dvd_resetDefect
           (centerNumerator + driftNumerator - scale) * target.2) := by
   rw [reduction.resetDefect_eq_complement_mul complementary]
   exact dvd_mul_right _ _
+
+/-- A boundary divisor outside the fixed scale-reset support cannot pass from reverse content
+to forward content at the next occurrence.  It remains, with multiplicity, in the next reverse
+content. -/
+theorem PrimitiveEndpointReduction.recurrentBoundaryDivisor_persists
+    {prime depth : Nat} {centerNumerator driftNumerator scale : ℤ}
+    {wait nextWait : Nat} {source middle target : ℤ × ℤ}
+    {content complement nextContent nextComplement divisor : ℤ}
+    (first : PrimitiveEndpointReduction prime depth centerNumerator
+      driftNumerator scale wait source middle content)
+    (second : PrimitiveEndpointReduction prime depth centerNumerator
+      driftNumerator scale nextWait middle target nextContent)
+    (firstComplementary : content * complement =
+      driftNumerator * scale * ((prime : ℤ) ^ wait - 1))
+    (nextComplementary : nextContent * nextComplement =
+      driftNumerator * scale * ((prime : ℤ) ^ nextWait - 1))
+    (divisor_dvd_complement : divisor ∣ complement)
+    (divisor_dvd_nextBoundary :
+      divisor ∣ scale * ((prime : ℤ) ^ nextWait - 1))
+    (divisor_coprime_fixed : IsCoprime divisor
+      (scale * (centerNumerator + driftNumerator - scale))) :
+    IsCoprime divisor nextContent ∧ divisor ∣ nextComplement := by
+  have divisor_coprime_scale : IsCoprime divisor scale :=
+    divisor_coprime_fixed.of_mul_right_left
+  have divisor_coprime_reset :
+      IsCoprime divisor (centerNumerator + driftNumerator - scale) :=
+    divisor_coprime_fixed.of_mul_right_right
+  have middle_coprime_divisor : IsCoprime middle.2 divisor :=
+    IsCoprime.of_isCoprime_of_dvd_right
+      (first.denominator_coprime_complement firstComplementary)
+      divisor_dvd_complement
+  have divisor_coprime_resetMiddle :
+      IsCoprime divisor
+        ((centerNumerator + driftNumerator - scale) * middle.2) :=
+    divisor_coprime_reset.mul_right middle_coprime_divisor.symm
+  have divisor_dvd_resetDefect :
+      divisor ∣
+        middle.1 -
+          (centerNumerator + driftNumerator - scale) * middle.2 := by
+    apply divisor_coprime_scale.dvd_of_dvd_mul_right
+    rw [mul_comm]
+    rw [first.resetDefect_eq_complement_mul firstComplementary]
+    exact divisor_dvd_complement.mul_right _
+  have divisor_dvd_raw_sub_reset :
+      divisor ∣
+        (prime : ℤ) ^ (depth * nextWait) *
+            (nextContent * target.2) -
+          (centerNumerator + driftNumerator - scale) * middle.2 := by
+    rw [second.step.denominator]
+    convert dvd_sub divisor_dvd_resetDefect
+      (divisor_dvd_nextBoundary.mul_right middle.2) using 1
+    all_goals ring
+  have divisor_coprime_raw :
+      IsCoprime divisor
+        ((prime : ℤ) ^ (depth * nextWait) *
+          (nextContent * target.2)) := by
+    obtain ⟨differenceFactor, difference_eq⟩ := divisor_dvd_raw_sub_reset
+    obtain ⟨left, right, bezout⟩ := divisor_coprime_resetMiddle
+    refine ⟨left - right * differenceFactor, right, ?_⟩
+    linear_combination bezout + right * difference_eq
+  have divisor_coprime_nextContent : IsCoprime divisor nextContent :=
+    IsCoprime.of_isCoprime_of_dvd_right divisor_coprime_raw
+      ⟨(prime : ℤ) ^ (depth * nextWait) * target.2, by ring⟩
+  refine ⟨divisor_coprime_nextContent, ?_⟩
+  apply divisor_coprime_nextContent.dvd_of_dvd_mul_left
+  rw [nextComplementary]
+  simpa only [mul_assoc] using
+    divisor_dvd_nextBoundary.mul_left driftNumerator
 
 /-- At a primitive terminal target, the reverse content divides the smaller fixed boundary
 resultant; the factor `centerNumerator - scale` is absent. -/
