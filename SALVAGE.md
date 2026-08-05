@@ -92,6 +92,7 @@ file owns the mathematical stock.
 | [`R32-O06`](#r32-o06-rational-affine-wait-rail-rigidity) | obstruction | no reduced rational chart supports a nontrivial affine wait rail at infinitely many prime powers | formalized | graduated |
 | [`R32-O07`](#r32-o07-parity-immortality-and-maximal-isolation) | obstruction | odd reset resultants are immortal, while maximal Smith steps in the even stratum are isolated | formalized | graduated |
 | [`R32-O08`](#r32-o08-recurrent-boundary-divisors-stay-reverse) | obstruction | outside fixed scale-reset support, a reverse-content divisor recurring in the next boundary remains wholly reverse | formalized | graduated |
+| [`R32-O09`](#r32-o09-universal-boundary-reset-ball) | obstruction | a coefficient-prime reset ball excludes every depth-two guard below its explicit valuation wall | formalized | graduated |
 | [`R32-S07`](#r32-s07-decoded-residual-address-normal-form) | structure theorem | mortality is finite inverse-address membership in disjoint rational p-adic branch spheres | formalized | active |
 | [`R32-M05`](#r32-m05-cyclotomic-reset-or-cancellation-sieve) | partial mechanism | every primitive reduction either resets modulo a cyclotomic prime or swallows it in the common cancellation | formalized | active |
 | [`R32-S08`](#r32-s08-cumulative-endpoint-recurrence) | structure theorem | cumulative endpoint pairs absorb every normalization scalar into one deterministic exact-division recurrence | formalized | active |
@@ -3453,6 +3454,60 @@ occurrence. The theorem supplies no global allocation law across such a bridge.
 **Use:** do not model repeated primitive factors as alternating tokens. At an immediate repeated
 boundary they persist on the reverse side; across a smaller-wait bridge, use the existing
 exact-order projective automaton and prove the required incidence or valuation statement.
+
+### R32-O09: Universal-boundary reset ball
+
+**Kind:** obstruction
+**Evidence:** formalized
+**Disposition:** graduated
+
+At depth two, choose an integral coefficient presentation
+
+```text
+center=A/L,    drift=D/L,    R=A+D−L.
+```
+
+For any prime `ℓ`, put
+
+```text
+λ=vℓ(L),    ρ=vℓ(R),    μ=vℓ(D),
+e=vℓ(p−1), ε=vℓ(2).
+```
+
+If `R≠0` and
+
+```text
+ρ < λ+e,
+2ρ < μ+e+min(λ,ρ+ε),
+```
+
+then the open `ℓ`-adic ball of depth `ρ` around reset is invariant under every positive
+decoded branch. The exact mechanism is
+
+```text
+(F_q(z)−R)(z−L(q−1)) = D(q−1)((q+1)z+L),    q=pᵃ.
+```
+
+Reset belongs to the ball and terminal `0` does not, so the physical guard is immortal. If the
+last blade vanishes, the branch returns exactly to reset; this case must be separated before
+using finite valuations.
+
+Every prime `ℓ∣p−1` of a mortal guard consequently divides `R`; hence `rad(p−1)∣R`. The full
+valuation wall is stronger than this squarefree sieve and is unchanged by common rescaling of
+`A,D,L`.
+
+**Scope:** the invariant begins at reset. A tail whose waits are all multiples of `m` inherits
+the analogous `pᵐ−1` wall only if its entry endpoint is already in the corresponding ball. The
+theorem neither proves that entry nor amortizes a later wait outside `mℕ`.
+
+**Artifact:** `ReturnGuard.not_physical_isMortal_of_resetBall` and
+`ReturnGuard.universalBoundary_dvd_resetResultant_of_physical_isMortal` in
+[`ReturnGuardBoundary.lean`](MatrixMortality/ReturnGuardBoundary.lean). Independent audit:
+[`m32-universal-boundary-2026-08-05.md`](audits/m32-universal-boundary-2026-08-05.md).
+
+**Use:** reject depth-two coefficient laws below the wall before any orbit analysis. In the
+exact-order lane, prove reset-ball entry with sufficient multiplicity, then charge the first
+order-breaking bridge; do not infer trapping from a common-period tail alone.
 
 ### R32-D03: Bounded-denominator periodicity
 

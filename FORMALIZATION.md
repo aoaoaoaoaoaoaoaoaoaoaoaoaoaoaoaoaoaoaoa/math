@@ -348,6 +348,27 @@ content and divides the next reverse content with full multiplicity. Thus recurr
 not alternate into forward cancellation. See
 [`audits/m32-jacobi-handoff-2026-08-05.md`](audits/m32-jacobi-handoff-2026-08-05.md).
 
+Depth two now also has a coefficient-level prime-adic wall. For an integral presentation
+`center=A/L`, `drift=D/L`, put `R=A+D−L` and, at any prime `ℓ`,
+
+```text
+λ=vℓ(L),  ρ=vℓ(R),  μ=vℓ(D),  e=vℓ(p−1),  ε=vℓ(2).
+```
+
+Lean proves that `R≠0`, `ρ<λ+e`, and
+
+```text
+2ρ < μ+e+min(λ,ρ+ε)
+```
+
+make the open `ℓ`-adic reset ball invariant under every positive decoded branch. The endpoint
+identity is checked directly in the existing coordinate; the zero numerator-blade branch is
+handled separately and returns exactly to reset. Terminal lies outside the ball, so the
+arbitrary-word compiler yields physical immortality. Consequently every prime divisor of
+`p−1` divides `R` for a mortal guard. The theorem does not assert that an arbitrary
+common-period tail enters the ball. See
+[`audits/m32-universal-boundary-2026-08-05.md`](audits/m32-universal-boundary-2026-08-05.md).
+
 These are structural and decidable-stratum theorems, not an `M₃(2)` resolution. The imported
 order-four Skolem theorem used to classify rank-one profiles is not reimplemented in Lean. The
 generic reverse edge compiler still assumes `αβ≠0`, and no universality or decision theorem is
@@ -491,6 +512,7 @@ with a complete arbitrary-word converse.
 | `ReturnGuardDriftCertificate.lean` | exact drift-divisor certificate classification, cyclic subgroup criterion, and executable finite test |
 | `ReturnGuardCumulative.lean` | content-free cumulative endpoint execution, exact second-order recurrence, odd-resultant immortality, and derived primitive content |
 | `ReturnGuardContinued.lean` | fixed-cusp complete quotients, exact terminal arithmetic, recurrent-boundary reverse persistence, record-ascent content budget, and order-three decoder |
+| `ReturnGuardBoundary.lean` | depth-two universal-boundary reset ball, valuation-wall immortality, and primewise reset-resultant necessity |
 | `ReturnGuardSmith.lean` | signed content split, unimodular endpoint decoder, nonmaximal contraction, maximal-step isolation, and corrected gauged cocycle |
 | `ReturnGuardPeriodicity.lean` | exact denominator recurrence and explicit record-ascent, wait, content, and numerator ceilings |
 | `ReturnGuardFiniteOrbit.lean` | bounded primitive endpoint streams, their finite state box, repetition, and eventual periodicity |

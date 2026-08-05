@@ -909,6 +909,21 @@ again a projective incidence problem already owned by the exact-order quotient a
 submitted normalized transfer, torsion rails, and global alternation argument are therefore
 retired.
 
+[`R32-O09`](SALVAGE.md#r32-o09-universal-boundary-reset-ball) adds a coefficient-level wall at
+the universal boundary. At depth two, for any prime `ℓ`, write
+
+```text
+λ=vℓ(L),  ρ=vℓ(A+D−L),  μ=vℓ(D),
+e=vℓ(p−1),  ε=vℓ(2).
+```
+
+If `ρ<λ+e` and `2ρ<μ+e+min(λ,ρ+ε)`, an explicit `ℓ`-adic ball around reset is invariant under
+every positive endpoint branch and excludes terminal. In particular every prime divisor of
+`p−1` must divide `A+D−L` in any mortal coefficient presentation. This kills the previous
+period-three fixed ray as an entire physical law, not merely as a bounded orbit. Passing the
+sieve supplies no height amortization: survivors may absorb the universal-boundary primes into
+their fixed coefficients.
+
 The remaining unbounded channel is now sharply Archimedean. The formalized
 [`R32-D03`](SALVAGE.md#r32-d03-bounded-denominator-periodicity) theorem says that every
 infinite legal rational orbit with bounded reduced denominators is eventually periodic.
@@ -922,6 +937,7 @@ survivor must have unbounded reduced denominators.
 | --- | --- | --- |
 | Global nonmaximal amortization | Convert the mandatory `v≥2` branches into a height, fixed-cusp, or content invariant along every even-resultant execution | Local contraction is measured after a wait-dependent normalization, while inherited rational height can still pay the loss |
 | Cyclotomic core extraction | Force superbudget pairwise-coprime core mass from every unbounded-denominator schedule | Reset-or-cancel renewal is exact once a core is supplied, but no theorem extracts enough cores unconditionally |
+| Order-breaking bridge | Turn an exact-order reset incidence into entry in the corresponding reset ball, then charge the first wait outside that order | An all-multiple tail is trapped only after ball entry; divisibility of its waits alone does not place its initial endpoint there |
 | Denominator counter | Construct one coefficient-aligned orbit with unbounded denominators and a power-free wait word | Local p-adic symbolic freedom is complete, but endpoint content and rational height couple all branches globally |
 | Repeated-factor extraction | Force a sufficiently heavy repeated factor in every bounded-complexity wait prefix and apply `R32-S29` | Arbitrary repeated factors are controlled once found; no theorem yet extracts one from a moving denominator schedule |
 | Irreducible cubic fallback | Replace the split spectrum by a cubic return pencil with internal punctuation and a complete word normal form | No candidate yet matches the guard's exact illegal-branch soundness |
@@ -931,11 +947,12 @@ The prospective hot path is now global amortization of the mandatory nonmaximal 
 the fixed-cusp recurrence, not another parameter or tangent coordinate. The matrix compiler, arbitrary-word converse,
 deterministic wait decoder, rational inverse-address grammar, primitive integral lift, endpoint
 factorization, exact branch similarity, arbitrary repeated-factor pumping, local record-ascent
-budget, local content allocation, and maximal-step isolation are complete. `M₃(2)` asks whether
-an even-resultant unbounded-denominator orbit can repay infinitely many forced nonmaximal losses,
-or whether those losses force repetition or a finite obstruction. The proposed reduction to an
-unbounded exact-order antichain is not yet a theorem: its missing premise is unconditional global
-core extraction.
+budget, local content allocation, maximal-step isolation, and universal-boundary valuation wall
+are complete. `M₃(2)` asks whether an even-resultant, universal-boundary-divisible,
+unbounded-denominator orbit can repay infinitely many forced nonmaximal losses, or whether those
+losses force repetition or a finite obstruction. The order-breaking bridge is a sharper
+cyclotomic sublane, not a replacement for that global enemy: it still requires both reset-ball
+entry and unconditional core extraction.
 
 ## The dimension-two wall: `M₂(3)`
 

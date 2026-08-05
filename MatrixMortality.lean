@@ -41,6 +41,7 @@ import MatrixMortality.ReturnGuardPumping
 import MatrixMortality.ReturnGuardResonance
 import MatrixMortality.ReturnGuardCumulative
 import MatrixMortality.ReturnGuardContinued
+import MatrixMortality.ReturnGuardBoundary
 import MatrixMortality.ReturnGuardSmith
 import MatrixMortality.ReturnGuardPeriodicity
 import MatrixMortality.ReturnGuardFiniteOrbit
