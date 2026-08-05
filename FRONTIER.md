@@ -924,6 +924,20 @@ period-three fixed ray as an entire physical law, not merely as a bounded orbit.
 sieve supplies no height amortization: survivors may absorb the universal-boundary primes into
 their fixed coefficients.
 
+[`R32-O10`](SALVAGE.md#r32-o10-ready-order-breaking-bridge-ejection) closes the proposed first
+order-breaking bridge as an independent local consumer. The even-resultant law
+
+```text
+p=3,   A=R=249398,   D=L=1
+```
+
+has a ready wait-four entry into the strict `5`-adic reset ball, followed by a ready wait-one
+bridge back to its boundary. The bridge swallows no `5`-content, amplifies the primitive
+denominator from `19` to `270178`, and leaves another ready wait. Thus neither ball invariance,
+auxiliary-content loss, repetition, nor denominator descent can be charged uniformly to the
+first bridge, even under one-step continued survival. A theorem over an unbounded bridge sequence
+would still be a global amortization theorem and remains live only under that name.
+
 The remaining unbounded channel is now sharply Archimedean. The formalized
 [`R32-D03`](SALVAGE.md#r32-d03-bounded-denominator-periodicity) theorem says that every
 infinite legal rational orbit with bounded reduced denominators is eventually periodic.
@@ -937,7 +951,6 @@ survivor must have unbounded reduced denominators.
 | --- | --- | --- |
 | Global nonmaximal amortization | Convert the mandatory `v≥2` branches into a height, fixed-cusp, or content invariant along every even-resultant execution | Local contraction is measured after a wait-dependent normalization, while inherited rational height can still pay the loss |
 | Cyclotomic core extraction | Force superbudget pairwise-coprime core mass from every unbounded-denominator schedule | Reset-or-cancel renewal is exact once a core is supplied, but no theorem extracts enough cores unconditionally |
-| Order-breaking bridge | Turn an exact-order reset incidence into entry in the corresponding reset ball, then charge the first wait outside that order | An all-multiple tail is trapped only after ball entry; divisibility of its waits alone does not place its initial endpoint there |
 | Denominator counter | Construct one coefficient-aligned orbit with unbounded denominators and a power-free wait word | Local p-adic symbolic freedom is complete, but endpoint content and rational height couple all branches globally |
 | Repeated-factor extraction | Force a sufficiently heavy repeated factor in every bounded-complexity wait prefix and apply `R32-S29` | Arbitrary repeated factors are controlled once found; no theorem yet extracts one from a moving denominator schedule |
 | Irreducible cubic fallback | Replace the split spectrum by a cubic return pencil with internal punctuation and a complete word normal form | No candidate yet matches the guard's exact illegal-branch soundness |
@@ -949,11 +962,11 @@ arbitrary-word converse, deterministic wait decoder, rational inverse-address gr
 primitive integral lift, endpoint factorization, exact branch similarity, arbitrary
 repeated-factor pumping, local record-ascent
 budget, local content allocation, maximal-step isolation, and universal-boundary valuation wall
-are complete. `M₃(2)` asks whether an even-resultant, universal-boundary-divisible,
-unbounded-denominator orbit can repay infinitely many forced nonmaximal losses, or whether those
-losses force repetition or a finite obstruction. The order-breaking bridge is a sharper
-cyclotomic sublane, not a replacement for that global enemy: it still requires both reset-ball
-entry and unconditional core extraction.
+are complete; uniform first-bridge closure is false. `M₃(2)` asks whether an even-resultant,
+universal-boundary-divisible, unbounded-denominator orbit can repay infinitely many forced
+nonmaximal losses, or whether those losses force repetition or a finite obstruction. Exact-order
+factors remain usable inside a global proof, but their first order-breaking bridge supplies no
+independent monotone charge.
 
 ## The dimension-two wall: `M₂(3)`
 

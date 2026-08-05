@@ -623,6 +623,9 @@
 'MatrixMortality.ReturnGuard.Examples.increasingMortal_reachable' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.ReturnGuard.Examples.orderBreaker_shatters_resetBall' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.ReturnGuard.evaluationFrameTransition_eq_coboundary' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]

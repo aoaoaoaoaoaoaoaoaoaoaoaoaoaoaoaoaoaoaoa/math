@@ -9,7 +9,8 @@ import MatrixMortality.ReturnGuardResonance
 The first pair is the concrete one-step mortal integer pair from the construction. The second
 parameter set has a ready nonterminal fixed point. The third has an exact rational period-three
 decoded orbit with waits `1, 2, 3`, proving that nested resonance is not confined to fixed points
-or two-cycles.
+or two-cycles. The final witness enters an auxiliary reset ball and then ejects from it through a
+legal order-breaking branch without auxiliary-prime cancellation; the target remains ready.
 -/
 
 namespace MatrixMortality.ReturnGuard.Examples
@@ -668,6 +669,128 @@ theorem increasingMortal_terminalCoordinates :
         -41912 / 3 ∧
         terminalCoordinate (-57803) 403 10304 (403 / 68107) = 0 := by
   norm_num [terminalCoordinate]
+
+/-- Even-resultant guard exposing the exact-order bridge obstruction. Its endpoint reset is
+`249398`; wait four enters the strict `5`-adic reset ball, and wait one breaks the order of `3`
+modulo `5`. -/
+def orderBreakerParameters : Parameters where
+  prime := 3
+  prime_prime := three_prime
+  depth := 2
+  depth_two := by norm_num
+  center := 249398
+  reset := 249399
+  center_unit := ⟨by norm_num, val3_int_unit 249398 (by norm_num)⟩
+  center_sub_one_unit := ⟨by norm_num, by
+    norm_num only [sub_self]
+    exact val3_int_unit 249397 (by norm_num)⟩
+  reset_positive := ⟨by norm_num, by
+    have value :=
+      val3_scaled_fraction 4 3079 1 (by norm_num) (by norm_num)
+        (by norm_num) (by norm_num)
+    norm_num at value ⊢
+    exact value ▸ by norm_num⟩
+
+private theorem orderBreaker_reset_ready :
+    Ready orderBreakerParameters 4 249399 := by
+  refine ⟨by norm_num, ?_, ?_⟩
+  · rw [show (249399 : ℚ) = (3 : ℚ) ^ 4 * 3079 / 1 by norm_num]
+    exact val3_scaled_fraction 4 3079 1 (by norm_num) (by norm_num)
+      (by norm_num) (by norm_num)
+  · norm_num only [orderBreakerParameters, Nat.cast_ofNat, pow_succ, pow_two]
+    rw [show (249318 : ℚ) = (3 : ℚ) ^ 8 * 38 / 1 by norm_num]
+    exact val3_scaled_fraction 8 38 1 (by norm_num) (by norm_num)
+      (by norm_num) (by norm_num)
+
+private theorem orderBreaker_middle_ready :
+    Ready orderBreakerParameters 1 (4863261 / 19) := by
+  refine ⟨by norm_num, ?_, ?_⟩
+  · rw [show (4863261 / 19 : ℚ) =
+      (3 : ℚ) ^ 1 * 1621087 / 19 by norm_num]
+    exact val3_scaled_fraction 1 1621087 19 (by norm_num) (by norm_num)
+      (by norm_num) (by norm_num)
+  · norm_num only [orderBreakerParameters, Nat.cast_ofNat, pow_one]
+    rw [show (4863204 / 19 : ℚ) =
+      (3 : ℚ) ^ 2 * 540356 / 19 by norm_num]
+    exact val3_scaled_fraction 2 540356 19 (by norm_num) (by norm_num)
+      (by norm_num) (by norm_num)
+
+private theorem orderBreaker_first_step :
+    guardedStep orderBreakerParameters 4 (some 249399) = some (4863261 / 19) := by
+  rw [guardedStep_some orderBreakerParameters 4 249399
+    (by norm_num [orderBreakerParameters])]
+  norm_num [orderBreakerParameters, guardDefect, drift]
+
+private theorem orderBreaker_second_step :
+    guardedStep orderBreakerParameters 1 (some (4863261 / 19)) =
+      some (67384284465 / 270178) := by
+  rw [guardedStep_some orderBreakerParameters 1 (4863261 / 19)
+    (by norm_num [orderBreakerParameters])]
+  norm_num [orderBreakerParameters, guardDefect, drift]
+
+private theorem orderBreaker_target_ready :
+    Ready orderBreakerParameters 1 (67384284465 / 270178) := by
+  refine ⟨by norm_num, ?_, ?_⟩
+  · rw [show (67384284465 / 270178 : ℚ) =
+      (3 : ℚ) ^ 1 * 22461428155 / 270178 by norm_num]
+    exact val3_scaled_fraction 1 22461428155 270178 (by norm_num) (by norm_num)
+      (by norm_num) (by norm_num)
+  · norm_num only [orderBreakerParameters, Nat.cast_ofNat, pow_one]
+    rw [show (67383473931 / 270178 : ℚ) =
+      (3 : ℚ) ^ 2 * 7487052659 / 270178 by norm_num]
+    exact val3_scaled_fraction 2 7487052659 270178 (by norm_num) (by norm_num)
+      (by norm_num) (by norm_num)
+
+private theorem orderBreaker_endpoint_values :
+    padicValRat 5 ((4863261 / 19 : ℚ) - 1 - 249398) = 1 ∧
+      padicValRat 5 (249398 : ℚ) = 0 ∧
+        padicValRat 5 ((67384284465 / 270178 : ℚ) - 1 - 249398) = 0 := by
+  constructor
+  · rw [show ((4863261 / 19 : ℚ) - 1 - 249398) =
+      (5 : ℚ) ^ 1 * 24936 / 19 by norm_num]
+    exact val5_scaled_fraction 1 24936 19 (by norm_num) (by norm_num)
+      (by norm_num) (by norm_num)
+  constructor
+  · exact val5_int_unit 249398 (by norm_num)
+  · rw [show ((67384284465 / 270178 : ℚ) - 1 - 249398) =
+      (5 : ℚ) ^ 0 * 2161443 / 270178 by norm_num]
+    exact val5_scaled_fraction 0 2161443 270178 (by norm_num) (by norm_num)
+      (by norm_num) (by norm_num)
+
+private theorem orderBreaker_raw_endpoint :
+    endpointTransfer (3 : ℤ) 2 249398 1 1 1 *ᵥ ![(4863242 : ℤ), 19] =
+      ![(1212912257166 : ℤ), 4863204] := by
+  ext i
+  fin_cases i <;>
+    norm_num [endpointTransfer, Matrix.mulVec, Matrix.dotProduct,
+      Fin.sum_univ_succ]
+
+/-- A strict exact-order reset-ball entry can be destroyed by its first legal order-breaking
+bridge without auxiliary-prime cancellation, and its target remains ready. The bridge's raw
+endpoint pair reduces by exactly `18`; the primitive denominator grows from `19` to `270178`. -/
+theorem orderBreaker_shatters_resetBall :
+    Ready orderBreakerParameters 4 249399 ∧
+      guardedStep orderBreakerParameters 4 (some 249399) = some (4863261 / 19) ∧
+      Ready orderBreakerParameters 1 (4863261 / 19) ∧
+      guardedStep orderBreakerParameters 1 (some (4863261 / 19)) =
+        some (67384284465 / 270178) ∧
+      Ready orderBreakerParameters 1 (67384284465 / 270178) ∧
+      IsPrimitivePrimeDivisor 5 3 4 ∧
+      padicValRat 5 ((4863261 / 19 : ℚ) - 1 - 249398) = 1 ∧
+      padicValRat 5 (249398 : ℚ) = 0 ∧
+      padicValRat 5 ((67384284465 / 270178 : ℚ) - 1 - 249398) = 0 ∧
+      endpointTransfer (3 : ℤ) 2 249398 1 1 1 *ᵥ ![(4863242 : ℤ), 19] =
+        ![(1212912257166 : ℤ), 4863204] ∧
+      Nat.gcd 1212912257166 4863204 = 18 ∧
+      ¬(5 : ℤ) ∣ (18 : ℤ) := by
+  have primitive : IsPrimitivePrimeDivisor 5 3 4 := by
+    refine ⟨by norm_num, by norm_num, by norm_num, by norm_num, ?_⟩
+    intro earlier positive less
+    interval_cases earlier <;> norm_num at positive less ⊢
+  refine ⟨orderBreaker_reset_ready, orderBreaker_first_step,
+    orderBreaker_middle_ready, orderBreaker_second_step, orderBreaker_target_ready, primitive,
+    orderBreaker_endpoint_values.1, orderBreaker_endpoint_values.2.1,
+    orderBreaker_endpoint_values.2.2, orderBreaker_raw_endpoint, by norm_num, by norm_num⟩
 
 /-- Retaining removed content turns the decreasing mortal orbit into one exact integral
 execution; no primitive normalization variable remains. -/

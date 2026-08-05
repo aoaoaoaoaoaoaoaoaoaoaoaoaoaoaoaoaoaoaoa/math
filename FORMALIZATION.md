@@ -369,6 +369,16 @@ arbitrary-word compiler yields physical immortality. Consequently every prime di
 common-period tail enters the ball. See
 [`audits/m32-universal-boundary-2026-08-05.md`](audits/m32-universal-boundary-2026-08-05.md).
 
+The proposed exact-order continuation is now fenced on its other side. Lean checks the
+even-resultant guard `p=3`, `A=R=249398`, `D=L=1`: wait four enters the strict `5`-adic reset
+ball, wait one breaks the exact order and returns to its boundary, and the target remains ready
+at wait one. The bridge's primitive reduction removes exactly `18`, coprime to `5`, while its
+denominator grows from `19` to `270178`. This excludes every uniform first-bridge invariance,
+auxiliary-content, repetition, or denominator-descent charge under continued readiness. The
+submitted endpoint normalization formula was not duplicated: it is the existing complete
+cancellation law transported through the checked endpoint factorization. See
+[`audits/m32-order-breaking-bridge-2026-08-05.md`](audits/m32-order-breaking-bridge-2026-08-05.md).
+
 These are structural and decidable-stratum theorems, not an `M₃(2)` resolution. The imported
 order-four Skolem theorem used to classify rank-one profiles is not reimplemented in Lean. The
 generic reverse edge compiler still assumes `αβ≠0`, and no universality or decision theorem is
@@ -523,7 +533,7 @@ with a complete arbitrary-word converse.
 | `ReturnGuardAdelic.lean` | content-weighted height bounds, complete cyclotomic complement, and exact exterior-product conservation |
 | `ReturnGuardResonance.lean` | nonresonant descent, resonance localization, and corrected nested readiness |
 | `ReturnGuardRail.lean` | polynomial divisibility and rational affine-wait rail obstruction |
-| `ReturnGuardExamples.lean` | one- and two-step mortal pairs, nonterminal fixed point, nested rational period-three orbit, and endpoint boundary certificates |
+| `ReturnGuardExamples.lean` | one- and two-step mortal pairs, nonterminal fixed point, nested rational period-three orbit, endpoint boundary certificates, and ready order-breaking reset-ball ejection |
 | `ReturnGuardQuotientExamples.lean` | four-state modulo-eleven certificate excluding every primitive terminal execution of the period-three guard |
 | `BinaryDefect.lean` | binary two-word defect theorem and exact Neary macro obstruction |
 | `CHHNPacking.lean` | generic two-slot CHHN packing and six-state finite-Hankel kernels |

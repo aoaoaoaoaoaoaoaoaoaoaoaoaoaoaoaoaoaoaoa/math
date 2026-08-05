@@ -307,6 +307,7 @@ open MatrixMortality
 #print axioms ReturnGuard.Examples.collisionLadder_no_endpointTerminalWord
 #print axioms ReturnGuard.Examples.decreasingMortal_reachable
 #print axioms ReturnGuard.Examples.increasingMortal_reachable
+#print axioms ReturnGuard.Examples.orderBreaker_shatters_resetBall
 #print axioms ReturnGuard.evaluationFrameTransition_eq_coboundary
 #print axioms ReturnGuard.evaluationFrameTransition_det
 #print axioms ReturnGuard.deep_frameDefect_forces_stateDepth_eq_anchorDepth

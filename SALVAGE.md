@@ -93,6 +93,7 @@ file owns the mathematical stock.
 | [`R32-O07`](#r32-o07-parity-immortality-and-maximal-isolation) | obstruction | odd reset resultants are immortal, while maximal Smith steps in the even stratum are isolated | formalized | graduated |
 | [`R32-O08`](#r32-o08-recurrent-boundary-divisors-stay-reverse) | obstruction | outside fixed scale-reset support, a reverse-content divisor recurring in the next boundary remains wholly reverse | formalized | graduated |
 | [`R32-O09`](#r32-o09-universal-boundary-reset-ball) | obstruction | a coefficient-prime reset ball excludes every depth-two guard below its explicit valuation wall | formalized | graduated |
+| [`R32-O10`](#r32-o10-ready-order-breaking-bridge-ejection) | obstruction | a ready order-breaking bridge can eject a strict reset ball without auxiliary cancellation while amplifying denominator height | formalized | graduated |
 | [`R32-S07`](#r32-s07-decoded-residual-address-normal-form) | structure theorem | mortality is finite inverse-address membership in disjoint rational p-adic branch spheres | formalized | active |
 | [`R32-M05`](#r32-m05-cyclotomic-reset-or-cancellation-sieve) | partial mechanism | every primitive reduction either resets modulo a cyclotomic prime or swallows it in the common cancellation | formalized | active |
 | [`R32-S08`](#r32-s08-cumulative-endpoint-recurrence) | structure theorem | cumulative endpoint pairs absorb every normalization scalar into one deterministic exact-division recurrence | formalized | active |
@@ -3505,9 +3506,52 @@ theorem neither proves that entry nor amortizes a later wait outside `mℕ`.
 [`ReturnGuardBoundary.lean`](MatrixMortality/ReturnGuardBoundary.lean). Independent audit:
 [`m32-universal-boundary-2026-08-05.md`](audits/m32-universal-boundary-2026-08-05.md).
 
-**Use:** reject depth-two coefficient laws below the wall before any orbit analysis. In the
-exact-order lane, prove reset-ball entry with sufficient multiplicity, then charge the first
-order-breaking bridge; do not infer trapping from a common-period tail alone.
+**Use:** reject depth-two coefficient laws below the wall before any orbit analysis. Do not infer
+trapping from a common-period tail alone; [`R32-O10`](#r32-o10-ready-order-breaking-bridge-ejection)
+also excludes a uniform charge on its first order-breaking bridge.
+
+### R32-O10: Ready order-breaking bridge ejection
+
+**Kind:** obstruction
+**Evidence:** formalized
+**Disposition:** graduated
+
+At depth two, the coefficient law
+
+```text
+p=3,   A=R=249398,   D=L=1
+```
+
+has the ready prefix
+
+```text
+249399 ─4→ 4863261/19 ─1→ 67384284465/270178,
+```
+
+and the final target is itself ready at wait one. The auxiliary prime `5` is a primitive divisor
+of `3⁴−1`. In endpoint coordinates, wait four moves from reset into its strict `5`-adic
+ball, while the order-breaking wait one returns to the boundary:
+
+```text
+v₅(R)=0,   v₅(z₁−R)=1,   v₅(z₂−R)=0.
+```
+
+The bridge's raw endpoint pair has gcd `18`, coprime to `5`; no auxiliary content is swallowed.
+Its primitive denominator grows from `19` to `270178`. The reset resultant is even and the law
+passes every universal-boundary wall.
+
+**Scope:** this is a continuing legal prefix, not an infinite orbit. It refutes every uniform
+first-bridge invariant-ball, auxiliary-content, repetition, or denominator-descent charge, even
+when the target remains ready. It does not refute a global amortization theorem over complete
+surviving executions.
+
+**Artifact:** `ReturnGuard.Examples.orderBreaker_shatters_resetBall` in
+[`ReturnGuardExamples.lean`](MatrixMortality/ReturnGuardExamples.lean). Independent audit:
+[`m32-order-breaking-bridge-2026-08-05.md`](audits/m32-order-breaking-bridge-2026-08-05.md).
+
+**Use:** retire the first order-breaking bridge as an independent local consumer. Any exact-order
+proof must amortize an unbounded bridge sequence in one global invariant and is therefore part of
+the existing nonmaximal-amortization problem.
 
 ### R32-D03: Bounded-denominator periodicity
 
