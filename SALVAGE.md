@@ -116,6 +116,10 @@ file owns the mathematical stock.
 | [`M4-O04`](#m4-o04-exact-internal-final-code-defect) | obstruction | distinct exact binary codes for one macro force commuting upper images | formalized | graduated |
 | [`M4-O05`](#m4-o05-direct-two-state-first-return-recoding) | obstruction | the present four Neary roles have no direct two-state first-return code | reported | active |
 | [`M4-M01`](#m4-m01-mixed-cube-root-punctuation) | partial mechanism | rational cube-root toggles reduce mixed punctuation to incidence equations | audited | parked |
+| [`M4-M02`](#m4-m02-universal-monomial-cube-root-blade) | partial mechanism | a finite-order mixed word has uniform rank one but misses the source boundary | audited | parked |
+| [`M4-O06`](#m4-o06-punctuation-image-annihilator) | obstruction | every punctuation context must preserve both rank-one boundary rays | formalized | graduated |
+| [`M4-O07`](#m4-o07-closed-residue-monomial-obstruction) | obstruction | ternary closed residues cannot align the monomial blade column | audited | graduated |
+| [`M4-M03`](#m4-m03-parabolic-blade-and-bridge-grammar) | partial mechanism | an open cube root has one singular atom and exact `2 × 2` bridge semantics | formalized | active |
 | [`G3-O01`](#g3-o01-four-role-macro-irreducibility) | obstruction | exact nonerasing macros cannot reduce the four source roles to three letters | formalized | graduated |
 | [`G3-S01`](#g3-s01-shift-equivariant-zero-incidence) | structure theorem | same-zero state dimension is equivariant projective incidence dimension | audited | active |
 | [`G3-M01`](#g3-m01-free-group-discrepancy-engine) | partial mechanism | free cancellation implements queue deletion with an all-path converse | reported | active |
@@ -3784,7 +3788,7 @@ guard [`M4-O06`](#m4-o06-punctuation-image-annihilator) imposed before any all-w
 
 **Kind:** partial mechanism
 **Evidence:** audited
-**Disposition:** active
+**Disposition:** parked
 
 For one paired data matrix, write
 
@@ -3823,15 +3827,15 @@ search on bare rank-one incidence.
 
 **Artifact:** [`audits/m43-cube-root-incidence-2026-08-05.md`](audits/m43-cube-root-incidence-2026-08-05.md).
 
-**Next:** derive the blade's two projective boundaries symbolically for general `β` and body.
-Seek a uniform open desynchronization or short left/right contexts that align them while passing
-every local nonannihilation test.
+**Next:** revisit only if an incomplete finite-order-root context escapes
+[`M4-O07`](#m4-o07-closed-residue-monomial-obstruction). The parabolic construction
+[`M4-M03`](#m4-m03-parabolic-blade-and-bridge-grammar) now owns the live cube-root attack.
 
 ### M4-O06: Punctuation-image annihilator
 
 **Kind:** obstruction
-**Evidence:** audited
-**Disposition:** active
+**Evidence:** formalized
+**Disposition:** graduated
 
 If a proposed nonzero punctuation has rank-one form `P=CL`, then any legal context with
 `UC=0` or `LV=0` gives the unconditional zero word `UP=0` or `PV=0`. The usual self-incidence
@@ -3841,13 +3845,98 @@ This kills the rational cubic component found for the repeated `Q_{b,2}²` incid
 punctuation image is the intended terminal line, but `Q_{b,2}C=0`; prepending the legal fragment
 `G_bS²` therefore annihilates the punctuation independently of the source computation.
 
-**Scope:** this is a necessary local guard, not an all-fragment converse. Passing every
-one-step guard does not exclude a longer annihilating context.
+**Scope:** this is a necessary local guard, not an all-fragment converse. The parabolic atom
+family now passes every one-step guard, but longer annihilating contexts remain possible.
 
 **Use:** before promoting a cube-root candidate, test `Q_{x,r}C≠0` and the row-dual condition
 for both data letters and every residue modulo six. Then classify longer rank drops.
 
-**Artifact:** [`audits/m43-cube-root-incidence-2026-08-05.md`](audits/m43-cube-root-incidence-2026-08-05.md).
+**Artifact:** the source-independent laws are `unit_mulVec_ne_zero` and
+`vecMul_unit_ne_zero` in [`MatrixMortality/RankOne.lean`](MatrixMortality/RankOne.lean). The
+parabolic family is discharged by `ParabolicBlade.atom_mulVec_column_ne_zero` and
+`ParabolicBlade.row_vecMul_atom_ne_zero` in
+[`MatrixMortality/ParabolicBlade.lean`](MatrixMortality/ParabolicBlade.lean).
+
+### M4-O07: Closed-residue monomial obstruction
+
+**Kind:** obstruction
+
+**Evidence:** audited
+
+**Disposition:** graduated
+
+For the finite-order monomial blade, its reduced column `c` obeys
+
+```text
+Y(c) - (u/a)X(c) = 2(l+e)/(m+n).
+```
+
+Every forward or reverse closed ternary positional context sends the Neary terminal column to
+projective coordinates in `ℤ[1/3]`, and `u/a∈ℤ[1/3]`. For every nonempty lawful paired macro,
+the right side retains a denominator prime outside `3`: the terminal `b` case retains `5`, and
+the terminal `c` case is excluded by the final false digit modulo `3`. Closed contexts therefore
+cannot align the blade column.
+
+**Scope:** closed standard-ternary positional macros and their inverses. An incomplete root
+fragment adjacent to punctuation, a different same-zero series, or a nonmonomial root lies
+outside the theorem. The exact arithmetic has been reconstructed, but the report's complete
+“lawful macro” grammar is not yet a repository definition, so this record remains audited rather
+than Lean-checked.
+
+**Use:** do not spend further effort on closed-context repair of the finite-order monomial blade.
+
+**Artifact:** [`audits/m43-parabolic-blade-2026-08-05.md`](audits/m43-parabolic-blade-2026-08-05.md).
+
+### M4-M03: Parabolic blade and bridge grammar
+
+**Kind:** partial mechanism
+
+**Evidence:** formalized
+
+**Disposition:** active
+
+In the common-image basis, the rational open root
+
+```text
+S = [[0,-1,0,0], [1,-1,0,0], [0,0,1,0], [x,y,2/3,1]],
+x=(114ρ-11)/96,             y=-(38ρ-11)/32,
+ρ=3^β
+```
+
+satisfies `S³J=TJ`. For `R=F_bSJ`, Lean proves
+
+```text
+rank R = 2,
+R² = (1/32) c v,
+det(FₓSʳJ)=0  ↔  x=b and r=1.
+```
+
+Thus `G_bSG_bSG_b` is a nonzero rank-one physical word, every other gap atom is invertible,
+every one-step row and column guard holds, and two exceptional atoms separated by any regular
+atom word cannot vanish.
+
+Writing `R=AB` with `A` left-invertible and `B` right-invertible, define `K(M)=BMA`. The stronger
+formalizer reduction is
+
+```text
+R M₁ R ⋯ Mₖ R = 0  ↔  K(M₁)⋯K(Mₖ)=0,
+```
+
+for arbitrary `3 × 3` middle matrices. The complete malformed-word problem is therefore a
+`2 × 2` bridge-language problem.
+
+**Scope:** this constructs and classifies the matrix mechanism; it does not supply open contexts
+whose boundary rays realize the paired Neary zero series, nor prove isolation of every bridge
+zero. No `M₄(3)` theorem follows yet.
+
+**Use:** all further cube-root work should begin with the bridge language and the open boundary
+equations. Do not redo finite-gap searches or rank-one incidence.
+
+**Next:** construct boundary contexts `U,V` and prove that the induced bridge product vanishes
+exactly at the intended scalar core, or derive an invariant that kills this parabolic family.
+
+**Artifact:** [`MatrixMortality/ParabolicBlade.lean`](MatrixMortality/ParabolicBlade.lean) and
+[`audits/m43-parabolic-blade-2026-08-05.md`](audits/m43-parabolic-blade-2026-08-05.md).
 
 ## Three-Letter Source Frontier
 

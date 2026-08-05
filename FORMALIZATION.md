@@ -443,16 +443,23 @@ the even-track invariant through every reachable queue or the induced macro solv
 equivalence. The direct first-return obstruction [`M4-O05`](SALVAGE.md#m4-o05-direct-two-state-first-return-recoding)
 also remains reported. Neither claim enters the checked theorem ledger.
 
-The universal monomial cube-root blade [`M4-M02`](SALVAGE.md#m4-m02-universal-monomial-cube-root-blade)
-and its punctuation-image annihilator guard
-[`M4-O06`](SALVAGE.md#m4-o06-punctuation-image-annihilator) are audited but not formalized.
-The blade proves a uniform rank-one mixed word, not either source boundary alignment or an
-arbitrary-word converse. Its exact computational boundary is recorded in
-[`audits/m43-cube-root-incidence-2026-08-05.md`](audits/m43-cube-root-incidence-2026-08-05.md).
+The finite-order monomial blade [`M4-M02`](SALVAGE.md#m4-m02-universal-monomial-cube-root-blade)
+is parked after the audited closed-residue obstruction
+[`M4-O07`](SALVAGE.md#m4-o07-closed-residue-monomial-obstruction). Its live replacement
+[`M4-M03`](SALVAGE.md#m4-m03-parabolic-blade-and-bridge-grammar) is formalized in
+[`MatrixMortality/ParabolicBlade.lean`](MatrixMortality/ParabolicBlade.lean). Lean checks the
+open cube root's toggle action and invertibility, the nonzero rank-one physical blade, all six
+infinite gap determinant pencils, the unique singular rank-two atom, every one-step instance of
+the annihilator guard [`M4-O06`](SALVAGE.md#m4-o06-punctuation-image-annihilator), and nonzero
+products through two singular incidences. It also proves the stronger all-length contraction:
+an exceptional chain vanishes exactly when its induced `2 × 2` bridge word vanishes. The audit
+and exact promotion boundary are
+[`audits/m43-parabolic-blade-2026-08-05.md`](audits/m43-parabolic-blade-2026-08-05.md).
 
 No `M₄(3)` undecidability theorem follows from the present corpus. The missing source is an
 undecidable binary two-state controlled scalar system, or a matrix-level open-residue compiler
-with a complete arbitrary-word converse.
+whose two blade boundaries realize the paired zero series and whose `2 × 2` bridge language has
+the intended zero words only.
 
 ## Modules
 
@@ -523,6 +530,7 @@ with a complete arbitrary-word converse.
 | `TerminalReduction.lean` | rational and integer fixed-boundary mortality compiler |
 | `TerminalSource.lean` | generic primitive extraction and GPCP bridge |
 | `PairedCompression.lean` | reset/toggle specialization, explicit coordinate certificates, and arbitrary-word decoding |
+| `ParabolicBlade.lean` | open cube root, nonzero mixed blade, complete atom grammar, annihilator guards, and exact `2 × 2` exceptional-chain contraction |
 | `PairedMortality.lean` | common-column mortality converse and exact integer `4 × 4` family |
 | `PairedRank.lean` | uniform exact rank-four certificate for the paired scalar series |
 | `PairedBoundaryTax.lean` | exact six-state lower bound for diagonal paired-series bridges |

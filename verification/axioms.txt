@@ -82,6 +82,21 @@
  Quot.sound]
 'MatrixMortality.binarySpell_not_injective_commute' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.neary_exact_internal_final_code_impossible' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ParabolicBlade.root_cube_mul_pairedDataMatrix' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.root_isUnit' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ParabolicBlade.physicalBlade_outer' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ParabolicBlade.physicalBlade_ne_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ParabolicBlade.bAtom_one_rank' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ParabolicBlade.atom_det_eq_zero_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ParabolicBlade.atom_isUnit_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ParabolicBlade.atom_mulVec_column_ne_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ParabolicBlade.row_vecMul_atom_ne_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ParabolicBlade.two_exceptional_atoms_ne_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.exceptionalChain_eq_zero_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.isMortal_smulMatrix_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.InternalSandwich.mortal_quotient_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.InternalSandwich.ambient_mortal_of_quotient_subsingleton' depends on axioms: [propext,

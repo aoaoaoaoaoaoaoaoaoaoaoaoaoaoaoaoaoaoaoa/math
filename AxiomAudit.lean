@@ -62,6 +62,17 @@ open MatrixMortality
 #print axioms neary_twoPrivateState_phaseCompiler_impossible
 #print axioms binarySpell_not_injective_commute
 #print axioms neary_exact_internal_final_code_impossible
+#print axioms ParabolicBlade.root_cube_mul_pairedDataMatrix
+#print axioms ParabolicBlade.root_isUnit
+#print axioms ParabolicBlade.physicalBlade_outer
+#print axioms ParabolicBlade.physicalBlade_ne_zero
+#print axioms ParabolicBlade.bAtom_one_rank
+#print axioms ParabolicBlade.atom_det_eq_zero_iff
+#print axioms ParabolicBlade.atom_isUnit_iff
+#print axioms ParabolicBlade.atom_mulVec_column_ne_zero
+#print axioms ParabolicBlade.row_vecMul_atom_ne_zero
+#print axioms ParabolicBlade.two_exceptional_atoms_ne_zero
+#print axioms ParabolicBlade.exceptionalChain_eq_zero_iff
 #print axioms isMortal_smulMatrix_iff
 #print axioms InternalSandwich.mortal_quotient_iff
 #print axioms InternalSandwich.ambient_mortal_of_quotient_subsingleton

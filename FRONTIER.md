@@ -264,15 +264,22 @@ Two architectures survive.
    and reconstruct it only at macro boundaries, preserving the zero set rather than every
    coefficient. The cube-root incidence mechanism
    [`M4-M01`](SALVAGE.md#m4-m01-mixed-cube-root-punctuation) is the concrete fallback. The
-   monomial blade [`M4-M02`](SALVAGE.md#m4-m02-universal-monomial-cube-root-blade) now gives a
-   rational rank-one word `G_xSG_xSG_x` uniformly in the paired role parameters. Its row and
-   column do not align with the source boundaries, and no all-fragment converse is known.
+   finite-order monomial blade [`M4-M02`](SALVAGE.md#m4-m02-universal-monomial-cube-root-blade)
+   is parked: [`M4-O07`](SALVAGE.md#m4-o07-closed-residue-monomial-obstruction) excludes every
+   closed ternary-residue boundary repair. The live replacement
+   [`M4-M03`](SALVAGE.md#m4-m03-parabolic-blade-and-bridge-grammar) is a rational open cube
+   root. Lean proves its nonzero rank-one word `G_bSG_bSG_b`, classifies every incomplete-root
+   gap, and identifies `F_bSJ` as the unique singular atom. Every zero needs at least three such
+   atoms. More sharply, an arbitrary chain `R M₁ R⋯Mₖ R` vanishes exactly when the induced
+   product of `2 × 2` bridges `B Mᵢ A` vanishes.
 
 The next source experiment should specify an open-residue invariant before choosing appendants.
-The next matrix experiment should solve the monomial blade's two-sided boundary equations
-uniformly in the varying body, imposing the punctuation-image annihilator guard
-[`M4-O06`](SALVAGE.md#m4-o06-punctuation-image-annihilator) before searching longer fragments.
-Any proposal whose semantic queue is a finite word of complete tokens is already closed.
+The next matrix attack must either construct open contexts aligning both parabolic blade rays
+with the paired Neary zero series and prove isolation in the exact `2 × 2` bridge language, or
+derive an invariant that kills that family. The one-step annihilator obligation
+[`M4-O06`](SALVAGE.md#m4-o06-punctuation-image-annihilator) is already discharged for every
+gap; finite gap enumeration and bare rank-one incidence are no longer frontier work. Any
+proposal whose semantic queue is a finite word of complete tokens is already closed.
 
 ### 2. Zero-set compression and fused punctuation: `M₅(3)`
 
