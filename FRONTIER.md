@@ -938,6 +938,29 @@ auxiliary-content loss, repetition, nor denominator descent can be charged unifo
 first bridge, even under one-step continued survival. A theorem over an unbounded bridge sequence
 would still be a global amortization theorem and remains live only under that name.
 
+[`R32-O11`](SALVAGE.md#r32-o11-terminal-only-pole-contraction-is-a-decision-oracle) rejects a
+terminal-only fixed-frame contraction as a new intermediate theorem. The complete endpoint
+product does admit the exact form
+
+```text
+M=[[εK,−εRK],[c,S−Rc]],    π=R−S/c,
+```
+
+and Smith reconstruction identifies the lower-left shear `c` as the fixed-frame channel which
+can repay a local nonmaximal loss. For fixed coefficients, however, there is at most one
+first-hit terminal execution. Existential constants in
+
+```text
+H(π)≤C p^T ρ^m
+```
+
+can therefore be chosen after that execution is known, or arbitrarily when it does not exist.
+A uniform algorithm producing valid constants from the coefficients yields the desired terminal
+length bound and is conversely computable from a guard decider. The formulation is equivalent in
+effective content to guard decision unless an explicit coefficient formula is derived. Bare
+rational approximation also stops at the sharp natural lower scale
+`H(π)≥p^T/(1+|R|)`; any surviving estimate must use the semigroup recurrence to control `c`.
+
 The remaining unbounded channel is now sharply Archimedean. The formalized
 [`R32-D03`](SALVAGE.md#r32-d03-bounded-denominator-periodicity) theorem says that every
 infinite legal rational orbit with bounded reduced denominators is eventually periodic.

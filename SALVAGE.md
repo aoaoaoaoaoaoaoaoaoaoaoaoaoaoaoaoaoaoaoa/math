@@ -94,6 +94,7 @@ file owns the mathematical stock.
 | [`R32-O08`](#r32-o08-recurrent-boundary-divisors-stay-reverse) | obstruction | outside fixed scale-reset support, a reverse-content divisor recurring in the next boundary remains wholly reverse | formalized | graduated |
 | [`R32-O09`](#r32-o09-universal-boundary-reset-ball) | obstruction | a coefficient-prime reset ball excludes every depth-two guard below its explicit valuation wall | formalized | graduated |
 | [`R32-O10`](#r32-o10-ready-order-breaking-bridge-ejection) | obstruction | a ready order-breaking bridge can eject a strict reset ball without auxiliary cancellation while amplifying denominator height | formalized | graduated |
+| [`R32-O11`](#r32-o11-terminal-only-pole-contraction-is-a-decision-oracle) | obstruction | terminal-only contraction constants are pointwise vacuous; uniform effectivity is already a terminal bound | audited | graduated |
 | [`R32-S07`](#r32-s07-decoded-residual-address-normal-form) | structure theorem | mortality is finite inverse-address membership in disjoint rational p-adic branch spheres | formalized | active |
 | [`R32-M05`](#r32-m05-cyclotomic-reset-or-cancellation-sieve) | partial mechanism | every primitive reduction either resets modulo a cyclotomic prime or swallows it in the common cancellation | formalized | active |
 | [`R32-S08`](#r32-s08-cumulative-endpoint-recurrence) | structure theorem | cumulative endpoint pairs absorb every normalization scalar into one deterministic exact-division recurrence | formalized | active |
@@ -3552,6 +3553,84 @@ surviving executions.
 **Use:** retire the first order-breaking bridge as an independent local consumer. Any exact-order
 proof must amortize an unbounded bridge sequence in one global invariant and is therefore part of
 the existing nonmaximal-amortization problem.
+
+### R32-O11: Terminal-only pole contraction is a decision oracle
+
+**Kind:** obstruction
+**Evidence:** audited
+**Disposition:** graduated
+
+For a legal terminal execution, write `T=2∑aᵢ`, let `m` count its nonmaximal Smith steps, and
+let `π` be the pole of the complete endpoint product. The proposed fixed-frame contraction was
+
+```text
+H(π) ≤ C p^T ρ^m,    C>0, 0<ρ<1,
+```
+
+with constants depending on the fixed coefficient law. The guard is deterministic, so a fixed
+law has at most one first-hit terminal execution. Pointwise existence is therefore automatic:
+take `ρ=1/2`; in the immortal case any positive `C` works, while after a terminal word is known
+one may take
+
+```text
+C=max(1,H(π)2^m/p^T).
+```
+
+Calling each resulting rational number computable does not make the dependence on the
+coefficients effective. The missing datum is a single total algorithm which receives
+`(p,A,D,L)` and returns valid rational `C,ρ` without first solving terminal reachability.
+
+Such an algorithm is already a guard decider. The audited pole lower bound and checked
+maximal-step isolation give
+
+```text
+p^T/(1+|R|) ≤ H(π) ≤ C p^T ρ^m,    N≤2m.
+```
+
+Successive powers of rational `ρ` then compute a terminal-length bound. Conversely, a guard
+decider computes valid constants: output arbitrary constants in the immortal case, or simulate
+to the first terminal hit and use the displayed formula. Thus uniform terminal-only pole
+contraction is equivalent in effective content to the desired guard decision, not a smaller
+arithmetic lemma.
+
+The report's fixed-frame algebra is correct but does not escape this quantifier wall. For a
+terminal product the checked endpoint transport already forces
+
+```text
+M=[[εK,−εRK],[c,S−Rc]],    π=R−S/c.
+```
+
+Orbit-adapted triangularization rewrites `−c/S` as a mixed-radix extension sum. The Smith
+reconstruction identity
+
+```text
+[[R,−(A−L)v],[1,−v]] C(q,u,v)
+  = [[Dv,A−L+Dq²],[0,1]]
+```
+
+identifies `c` as the channel through which inherited height can repay local contraction, but
+supplies no bound on that channel. The prefix congruence gives exact approximation depth and
+only the natural height corridor
+
+```text
+p^T/(1+|R|) ≤ H(π) ≤ C_E^N p^T.
+```
+
+This excludes closure by bare rational approximation at the natural exponent. It does not
+exclude a semigroup-specific estimate.
+
+**Scope:** this record rejects the pointwise terminal formulation as frontier movement. It does
+not refute an explicit coefficient formula proved from the recurrence, a uniform inequality on
+a nonterminal class broad enough to have independent content, or a constructive infinite
+orbit. The elementary dual, triangular, and reconstruction identities were culled rather than
+installed as an unconsumed Lean API.
+
+**Artifact:** independent reconstruction in
+[`m32-fixed-frame-pole-2026-08-06.md`](audits/m32-fixed-frame-pole-2026-08-06.md).
+
+**Use:** require the next decision attack to output an explicit coefficient algorithm or
+terminal-length function and prove its estimate without invoking the terminal time. Do not
+accept existential constants chosen after the unique execution is known.
 
 ### R32-D03: Bounded-denominator periodicity
 
