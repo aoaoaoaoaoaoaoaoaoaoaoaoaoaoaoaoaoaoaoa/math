@@ -91,6 +91,26 @@
 'MatrixMortality.PhaseRigidity.neary_commutator_pencil_forgets_t' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.historyCode_injective' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.historyProduct_mulVec_column' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.historyCoefficient_eq_code_sub' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.historyCoefficient_zero_iff_decode_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.historyScaledGenerator_mulVec_anchor' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.historyMortalityFamily_rat_mortal_iff_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.historyMortalityFamily_int_mortal_iff_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.history_mortality_generator_count' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.minimalBody_terminal_word_unique' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.minimalBody_terminal_match' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.minimalBody_history_zero_iff_paired_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.minimalBody_historyMortality_iff_paired_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.NullHistoryCounterexample.terminal_word_not_unique' does not depend on any axioms
+'MatrixMortality.MinimalBodyExample.terminal_code' depends on axioms: [propext]
+'MatrixMortality.MinimalBodyExample.witness_decode' does not depend on any axioms
+'MatrixMortality.MinimalBodyExample.history_witness_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.MinimalBodyExample.paired_witness_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.MinimalBodyExample.mortality' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.paired_exact_diagonal_twoChannel_state_lower_bound' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]

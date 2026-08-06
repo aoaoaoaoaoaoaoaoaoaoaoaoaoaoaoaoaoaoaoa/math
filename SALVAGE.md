@@ -122,7 +122,8 @@ file owns the mathematical stock.
 | [`M4-M01`](#m4-m01-mixed-cube-root-punctuation) | partial mechanism | rational cube-root toggles reduce mixed punctuation to incidence equations | audited | parked |
 | [`G3-O01`](#g3-o01-four-role-macro-irreducibility) | obstruction | exact nonerasing macros cannot reduce the four source roles to three letters | formalized | graduated |
 | [`G3-S01`](#g3-s01-shift-equivariant-zero-incidence) | structure theorem | same-zero state dimension is equivariant projective incidence dimension | audited | active |
-| [`G3-O02`](#g3-o02-rational-phase-fracture) | obstruction | a mortal paired instance has no rational phase-state same-zero compression | audited | active |
+| [`G3-O02`](#g3-o02-rational-phase-fracture) | obstruction | a mortal paired instance has no rational phase-state same-zero compression | audited | stock |
+| [`G3-O03`](#g3-o03-history-sensitive-minimal-body-fracture) | obstruction | minimal bodies admit an exact history-sensitive three-state same-zero compiler | formalized | graduated |
 | [`G3-M01`](#g3-m01-free-group-discrepancy-engine) | partial mechanism | free cancellation implements queue deletion with an all-path converse | reported | active |
 | [`D2-S01`](#d2-s01-projective-hard-core) | structure theorem | `M₂(3)` is equivalent to two-generator projective incidence | audited | active |
 | [`D2-S02`](#d2-s02-monotone-affine-path-form) | structure theorem | normalized affine words form monotone exponent paths | audited | stock |
@@ -4088,7 +4089,7 @@ finite unsatisfiable cores as candidate zero-language dimension obstructions.
 
 **Evidence:** audited
 
-**Disposition:** active
+**Disposition:** stock
 
 Fix an admissible paired instance with a nonempty zero language. Let the checked four-state
 suffix column lie in one of the two embedded phase planes, and write its local projective point
@@ -4123,9 +4124,9 @@ identifications, and rational collapses to curves or lines. It does not exclude 
 that assigns different compressed points to words with the same checked suffix point. Such a
 survivor has a genuinely multivalued phase graph closure or positive-dimensional generic fibers.
 
-**Use:** cull every further phase-plane identification that is merely a rational function of the
-present paired state. Attack the history-sensitive graph correspondence itself, or abandon this
-compiler.
+**Use:** cull every phase-plane identification that is merely a rational function of the present
+paired state. [`G3-O03`](#g3-o03-history-sensitive-minimal-body-fracture) realizes the excluded
+history-sensitive escape and moves the live boundary to uniform computability.
 
 **Formalized core:** [`PhaseFracture.lean`](MatrixMortality/PhaseFracture.lean) checks phase
 normalization, erase-`c` nonvanishing, and the dimension-free final contradiction.
@@ -4137,9 +4138,72 @@ audited rather than kernel-checked.
 **Artifact:**
 [`audits/m34-rational-phase-fracture-2026-08-06.md`](audits/m34-rational-phase-fracture-2026-08-06.md).
 
-**Next:** prove that any three-state same-zero phase graph is generically single-valued, or build
-a valid multivalued counterexample with a complete arbitrary-word mortality lift. Independently,
-replace the four remaining function-field steps by Lean proofs or a finite algebraic certificate.
+### G3-O03: History-sensitive minimal-body fracture
+
+**Kind:** obstruction
+
+**Evidence:** formalized
+
+**Disposition:** graduated
+
+The report claiming uniqueness of the terminal role word for every admissible mortal paired
+instance is false. At deletion width three and body `bcbb`, the distinct words
+
+```text
+R_c E_b E_c R_b E_b E_b
+R_c E_b E_c R_b E_b E_b R_b E_b E_b R_c E_b E_b
+```
+
+both satisfy the complete terminal equation. The second appends a nonexecuted two-stroke null
+history after the lawful computation has already reached a short queue. Determinism of `TagStep`
+does not imply uniqueness of global history certificates.
+
+On the infinite minimum-body subclass
+
+```text
+2 < β,    body.length = β−1,
+```
+
+the null-history defect is impossible. Every terminal match is exactly
+
+```text
+ω(body) = R_c :: body.map E.
+```
+
+Assign the four roles digits `1,2,3,4` in base five. Three integral control matrices maintain
+
+```text
+(κ(decodePairedWord y), phaseSign(y), 1)ᵀ
+```
+
+for every arbitrary paired-control word. The row `(1,0,−κ(ω))` therefore vanishes exactly on the
+paired zero language. Adjoining its outer-product separator gives four `3 × 3` integral matrices;
+nonzero per-letter scaling and the fixed-anchor compiler prove the arbitrary-product mortality
+converse. For `β=3`, body `bb`, the target code is `92` and `ctbbt` is an explicit zero witness.
+
+The associated phase graph closures are independently audited as
+
+```text
+P² × ℓ_rule,    P² × ℓ_erase.
+```
+
+Their generic fibers are lines. Thus no theorem can force every history-sensitive three-state
+phase graph to be generically single-valued.
+
+**Scope:** exact same-zero representation and mortality are formalized only for minimum-length
+bodies. The full-product graph calculation is audited, not Lean-checked. Arbitrary admissible
+bodies can have several terminal words, and no source-computable parameter selecting all of them
+is supplied. This is not an undecidability reduction and does not settle `M₃(4)`.
+
+**Use:** close instancewise phase-graph exclusion and generic-single-valuedness as routes to the
+master problem. The paired route now requires a uniform computable three-state recognizer for all
+terminal histories, or a no-go for a precisely delimited uniform compiler class.
+
+**Artifact:** [`HistoryFracture.lean`](MatrixMortality/HistoryFracture.lean), including
+`NullHistoryCounterexample.terminal_word_not_unique`, `minimalBody_terminal_word_unique`,
+`minimalBody_history_zero_iff_paired_zero`, and
+`historyMortalityFamily_int_mortal_iff_zero`; bounded audit in
+[`m34-history-fracture-2026-08-06.md`](audits/m34-history-fracture-2026-08-06.md).
 
 ### G3-M01: Free-group discrepancy engine
 

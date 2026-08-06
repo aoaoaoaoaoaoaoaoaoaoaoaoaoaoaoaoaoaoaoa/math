@@ -10,6 +10,12 @@ Master: undecidability of mortality for four `3 × 3` integer matrices, `M₃(4)
 
 External attack: [shared Pro conversation](https://chatgpt.com/share/6a74b64e-5054-83ea-989c-cbfac7f6fae8)
 
+Status update: the subsequent
+[`m34-history-fracture-2026-08-06.md`](m34-history-fracture-2026-08-06.md) constructs the
+history-sensitive escape on minimum-length bodies and audits positive-dimensional generic
+fibers. The rational-map obstruction below remains valid; its final recommendation to prove
+generic single-valuedness is superseded by the uniform-computability boundary.
+
 ## Enemy Lock
 
 ```text

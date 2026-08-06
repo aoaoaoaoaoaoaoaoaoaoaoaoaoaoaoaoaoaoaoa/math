@@ -122,6 +122,23 @@ and arbitrary-rational two-translation rigidity remain independently audited. Th
 is recorded in
 [`m34-rational-phase-fracture-2026-08-06.md`](audits/m34-rational-phase-fracture-2026-08-06.md).
 
+The history-sensitive escape is now checked on the exact boundary where it is valid. Lean first
+refutes terminal-word uniqueness in general: at width three and body `bcbb`, two explicit,
+distinct role words satisfy the complete terminal equation. The longer word appends a null
+history after the deterministic execution has already halted. For every minimum-length body
+`body.length=β−1`, a length deficit excludes any such extension, so the sole terminal word is
+`R_c :: body.map erase`.
+
+An injective nonzero-digit base-five code of role words then yields three explicit integral
+control matrices. On every arbitrary control word their reachable column is exactly the decoded
+role code, suffix-phase sign, and homogeneous unit. The resulting coefficient has precisely the
+zeros of the paired compiler on every minimum-length body. An outer-product separator and the
+fixed-anchor compiler give four `3 × 3` integral matrices with a complete mortality converse.
+Lean checks the concrete instance `β=3`, body `bb`, code `92`, and control witness `ctbbt`. This
+does not prove `M₃(4)`: selecting a terminal code is nonuniform on unrestricted source instances.
+The independently audited full-product phase graph is recorded in
+[`m34-history-fracture-2026-08-06.md`](audits/m34-history-fracture-2026-08-06.md).
+
 For the `6 × 6` scalar compiler, Lean checks both explicit integer generators and a total
 two-bit decoder on the complete binary free monoid. Complete pairs emit the four source roles;
 an odd final bit preserves the coefficient. The decoder is surjective, the empty coefficient
@@ -572,6 +589,9 @@ with a complete arbitrary-word converse.
 | `TerminalSource.lean` | generic primitive extraction and GPCP bridge |
 | `PairedCompression.lean` | reset/toggle specialization, explicit coordinate certificates, and arbitrary-word decoding |
 | `PairedMortality.lean` | common-column mortality converse and exact integer `4 × 4` family |
+| `PhaseFracture.lean` | phase normalization and dimension-free projective-identification contradiction |
+| `PhaseRigidity.lean` | checked local role algebra, discrepancy commutators, and invariant-pencil rigidity |
+| `HistoryFracture.lean` | null-history counterexample, minimum-body base-five encoder, and integral mortality lift |
 | `PairedRank.lean` | uniform exact rank-four certificate for the paired scalar series |
 | `PairedBoundaryTax.lean` | exact six-state lower bound for diagonal paired-series bridges |
 | `PairedBinary.lean` | total two-bit decoder and exact six-state scalar representation |
@@ -724,6 +744,13 @@ with a complete arbitrary-word converse.
 | Phase-local roles, discrepancies, quotient scale, and mixing have their displayed forms | `PhaseRigidity.localRole_eq`, `PhaseRigidity.phase_discrepancies`, `PhaseRigidity.discrepancy_quotient`, `PhaseRigidity.ruleCMixing_ne_zero` |
 | The two phase commutators are one constant and one radial translation | `PhaseRigidity.erase_commutator`, `PhaseRigidity.discrepancy_commutator` |
 | Every invariant two-dimensional affine pencil forgets the accumulator | `PhaseRigidity.neary_commutator_pencil_forgets_t` |
+| Neary role words have an injective nonzero-digit base-five code | `historyCode_injective` |
+| Every history-control word reaches its decoded code and suffix-phase sign | `historyProduct_mulVec_column`, `historyCoefficient_eq_code_sub` |
+| Width three with body `bcbb` has two distinct terminal role words | `NullHistoryCounterexample.terminal_word_not_unique` |
+| A minimum-length body has exactly one terminal role word | `minimalBody_terminal_word_unique`, `minimalBody_terminal_match` |
+| The three-state history encoder has exactly the paired zeros on minimum-length bodies | `minimalBody_history_zero_iff_paired_zero` |
+| The four integral history matrices are mortal exactly at a history-code zero | `historyMortalityFamily_int_mortal_iff_zero`, `minimalBody_historyMortality_iff_paired_zero` |
+| The explicit code `92` family is mortal with decoded witness `ctbbt` | `MinimalBodyExample.terminal_code`, `MinimalBodyExample.witness_decode`, `MinimalBodyExample.mortality` |
 | Every exact diagonal paired-series bridge needs six states | `paired_exact_diagonal_twoChannel_state_lower_bound` |
 | Every literal Neary CHHN placement needs six exact states | `chhnNeary_exactRepresentation_six_le_card` |
 | Every two-state pushout word obeys its suffix decoder | `twoStateProduct_mulVec_phaseVector`, `twoStateCoefficient_eq_controlled` |
@@ -813,6 +840,11 @@ than Lean.
 The arbitrary-rational part of `G3-O02` remains an audited function-field theorem, not a formal
 dependency. Lean checks its exact finite algebra, invariant-pencil rigidity core, and terminal
 consumer, but not yet the dense-orbit extension or arbitrary rational-function rigidity.
+
+For `G3-O03`, Lean checks the null-history counterexample, minimum-body uniqueness, base-five
+encoder, exact same-zero theorem, and integral mortality lift. The statement that both phase graph
+closures are full products, with one-dimensional generic fibers, remains an independently audited
+Zariski-density calculation rather than a formal dependency.
 
 The scheduled compiler introduces a separate source-width seam. Neary's published construction
 sets `β = 10p`, where `p` is the simulated cyclic-tag program period. The fixed-width audit found

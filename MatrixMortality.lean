@@ -70,6 +70,7 @@ import MatrixMortality.Undecidability.UniversalNeary
 /- Source-specific obstructions and finite certificates. -/
 import MatrixMortality.MacroIrreducibility
 import MatrixMortality.PhaseRigidity
+import MatrixMortality.HistoryFracture
 import MatrixMortality.NearyBinaryDefect
 import MatrixMortality.NearyPhaseSignature
 import MatrixMortality.CHHNPackingRank
