@@ -456,21 +456,20 @@ an exceptional chain vanishes exactly when its induced `2 × 2` bridge word vani
 and exact promotion boundary are
 [`audits/m43-parabolic-blade-2026-08-05.md`](audits/m43-parabolic-blade-2026-08-05.md).
 
-The closed-phase obstruction [`M4-O08`](SALVAGE.md#m4-o08-closed-phase-two-ray-wall) is
+The residue-two obstruction [`M4-O08`](SALVAGE.md#m4-o08-residue-two-necessary-wall) is
 formalized in
-[`MatrixMortality/ParabolicClosedPhase.lean`](MatrixMortality/ParabolicClosedPhase.lean). After
-uniform integral scaling and reduction modulo three, every closed atom and the exceptional atom
-act on two protected rays with nonzero weight. Lean therefore proves
-`ParabolicBlade.closedPhase_wordProduct_ne_zero`: for every `β`, body, and word over `Q(b,1)` and
-the atoms `Q(x,3j)`, the product is nonzero. This removes arbitrary exceptional counts and all
-closed malformed waits without retaining the report's side-normal bounds or bridge-rank
-infrastructure. The audit is
-[`audits/m43-closed-phase-2026-08-05.md`](audits/m43-closed-phase-2026-08-05.md).
+[`MatrixMortality/ParabolicResidueWall.lean`](MatrixMortality/ParabolicResidueWall.lean). After
+one integral scaling and reduction modulo three, every residue-zero and residue-one atom acts on
+two protected rays with nonzero weight. Lean therefore proves
+`ParabolicBlade.residueTwoWall_wordProduct_ne_zero`: for every `β`, body, and word over
+`Q(x,3j)` and `Q(x,3j+1)`, the product is nonzero. This subsumes and deletes the former
+closed-phase theorem. The audit is
+[`audits/m43-residue-two-wall-2026-08-05.md`](audits/m43-residue-two-wall-2026-08-05.md).
 
 No `M₄(3)` undecidability theorem follows from the present corpus. The missing source is an
 undecidable binary two-state controlled scalar system, or a matrix-level open-residue compiler
-whose first regular residue-one or residue-two block realizes the paired zero series and whose
-`2 × 2` bridge language has the intended zero words only.
+whose first residue-two block realizes the paired zero series and whose `2 × 2` bridge language
+has the intended zero words only.
 
 ## Modules
 
@@ -542,7 +541,7 @@ whose first regular residue-one or residue-two block realizes the paired zero se
 | `TerminalSource.lean` | generic primitive extraction and GPCP bridge |
 | `PairedCompression.lean` | reset/toggle specialization, explicit coordinate certificates, and arbitrary-word decoding |
 | `ParabolicBlade.lean` | open cube root, nonzero mixed blade, complete atom grammar, annihilator guards, and exact `2 × 2` exceptional-chain contraction |
-| `ParabolicClosedPhase.lean` | integral closed-atom numerators, modulo-three two-ray action, and arbitrary closed-phase immortality |
+| `ParabolicResidueWall.lean` | integral residue-{0,1} atom numerators, modulo-three two-ray action, and the necessity of residue two |
 | `PairedMortality.lean` | common-column mortality converse and exact integer `4 × 4` family |
 | `PairedRank.lean` | uniform exact rank-four certificate for the paired scalar series |
 | `PairedBoundaryTax.lean` | exact six-state lower bound for diagonal paired-series bridges |

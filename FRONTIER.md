@@ -271,15 +271,15 @@ Two architectures survive.
    root. Lean proves its nonzero rank-one word `G_bSG_bSG_b`, classifies every incomplete-root
    gap, and identifies `F_bSJ` as the unique singular atom. Every zero needs at least three such
    atoms. More sharply, an arbitrary chain `R M₁ R⋯Mₖ R` vanishes exactly when the induced
-   product of `2 × 2` bridges `B Mᵢ A` vanishes. The closed-phase wall
-   [`M4-O08`](SALVAGE.md#m4-o08-closed-phase-two-ray-wall) now removes that entire sublanguage:
-   after integral scaling and reduction modulo three, `R` and every `Q(x,3j)` preserve two
-   nonzero rays. Hence no closed-phase word vanishes, at any length or exceptional count.
+   product of `2 × 2` bridges `B Mᵢ A` vanishes. The residue-two wall
+   [`M4-O08`](SALVAGE.md#m4-o08-residue-two-necessary-wall) now removes every word whose gaps
+   lie in residues zero and one: after integral scaling and reduction modulo three, every such
+   atom preserves two nonzero rays. Hence every exact zero contains a residue-two gap.
 
 The next source experiment should specify an open-residue invariant before choosing appendants.
-The next matrix attack begins at the first regular atom with gap residue one or two. It must lift
-the bridge automaton's exceptional modulo-three states either to an isolated paired-Neary
-boundary or to an unavoidable malformed zero. The one-step annihilator obligation
+The next matrix attack begins at the first residue-two atom, with arbitrary residue-{0,1} blocks
+on both sides. It must lift the bridge automaton's exceptional modulo-three states either to an
+isolated paired-Neary boundary or to an unavoidable malformed zero. The one-step annihilator obligation
 [`M4-O06`](SALVAGE.md#m4-o06-punctuation-image-annihilator) is already discharged for every gap;
 finite gap enumeration, bare rank-one incidence, and closed-block products are no longer frontier
 work. Any proposal whose semantic queue is a finite word of complete tokens is already closed.
