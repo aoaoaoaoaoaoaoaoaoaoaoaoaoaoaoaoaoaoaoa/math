@@ -62,6 +62,35 @@
 'MatrixMortality.paired_exact_state_lower_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.paired_native_state_card' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.paired_native_represents' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.pairedCoefficient_toggle_cons' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.pairedCoefficient_data_c_cons_ne_zero_of_erase' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.exists_erase_phase_eq_coefficient' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.no_zero_of_erase_c_projective_identification' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.PhaseRigidity.invariant_affine_pencil_forgets_t' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.PhaseRigidity.localRole_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.PhaseRigidity.localRole_erase_c_chart' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.PhaseRigidity.localRole_erase_b_chart' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.PhaseRigidity.eraseBDefect_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.PhaseRigidity.eraseBDefect_ne_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.PhaseRigidity.erase_commutator' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.PhaseRigidity.discrepancy_commutator' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.PhaseRigidity.erase_inverses' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.PhaseRigidity.phase_discrepancies' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.PhaseRigidity.discrepancy_quotient' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.PhaseRigidity.ruleCRho_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.PhaseRigidity.ruleCRho_div_nine_ne_one' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.PhaseRigidity.nearySideLowerC_eq_encoded' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.PhaseRigidity.ruleCMixing_numerator_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.PhaseRigidity.ruleCMixing_ne_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.PhaseRigidity.neary_commutator_pencil_forgets_t' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.paired_exact_diagonal_twoChannel_state_lower_bound' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]

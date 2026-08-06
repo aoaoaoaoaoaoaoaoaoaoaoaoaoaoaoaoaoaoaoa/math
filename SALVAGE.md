@@ -122,6 +122,7 @@ file owns the mathematical stock.
 | [`M4-M01`](#m4-m01-mixed-cube-root-punctuation) | partial mechanism | rational cube-root toggles reduce mixed punctuation to incidence equations | audited | parked |
 | [`G3-O01`](#g3-o01-four-role-macro-irreducibility) | obstruction | exact nonerasing macros cannot reduce the four source roles to three letters | formalized | graduated |
 | [`G3-S01`](#g3-s01-shift-equivariant-zero-incidence) | structure theorem | same-zero state dimension is equivariant projective incidence dimension | audited | active |
+| [`G3-O02`](#g3-o02-rational-phase-fracture) | obstruction | a mortal paired instance has no rational phase-state same-zero compression | audited | active |
 | [`G3-M01`](#g3-m01-free-group-discrepancy-engine) | partial mechanism | free cancellation implements queue deletion with an all-path converse | reported | active |
 | [`D2-S01`](#d2-s01-projective-hard-core) | structure theorem | `M₂(3)` is equivalent to two-generator projective incidence | audited | active |
 | [`D2-S02`](#d2-s02-monotone-affine-path-form) | structure theorem | normalized affine words form monotone exponent paths | audited | stock |
@@ -3999,9 +4000,9 @@ candidate without a rank-stratified all-word grammar.
 
 **Kind:** obstruction
 
-**Evidence:** audited
+**Evidence:** formalized
 
-**Disposition:** active
+**Disposition:** graduated
 
 Let the four fixed-boundary source roles be
 
@@ -4080,6 +4081,65 @@ incidence and shift equations.
 
 **Next:** construct increasing prefix/suffix instances, quotient projective gauge, and retain
 finite unsatisfiable cores as candidate zero-language dimension obstructions.
+
+### G3-O02: Rational phase fracture
+
+**Kind:** obstruction
+
+**Evidence:** audited
+
+**Disposition:** active
+
+Fix an admissible paired instance with a nonempty zero language. Let the checked four-state
+suffix column lie in one of the two embedded phase planes, and write its local projective point
+as `[v_y]∈P²(ℚ)`. There is no three-state same-zero realization whose compressed suffix point is
+
+```text
+[H_yγ] = Φ_P([v_y])
+```
+
+for rational maps `Φ_rule,Φ_erase : P² ⇢ P²` defined at every reachable point. The target
+generators may be singular, and either phase image may be a point, a line, or a nonlinear curve.
+
+The erase orbit is Zariski dense. Equivariance therefore holds as a rational identity. A
+non-line image makes the data generators invertible on the image; comparing the rule/erase
+discrepancies yields invariance under one nontrivial private scaling, while erase-`c` mixes that
+private direction back into the surviving coordinate. This forces a constant image. On a line,
+two exact commutators act as one constant and one radial translation in the accumulator; rational
+two-translation rigidity forces the line map to forget that accumulator. In every branch,
+
+```text
+Φ_erase ∘ E_c = Φ_erase.
+```
+
+If the original series has a zero, a toggle first normalizes its suffix phase to erase without
+changing the coefficient. Prefixing `c` then emits erase-`c`; its upper and lower binary words
+begin with different symbols, so the prefixed coefficient is nonzero. Projective invariance
+would preserve target vanishing, contradicting the same-zero hypothesis.
+
+**Scope:** the compressed suffix point must be rationally determined by the checked phase and
+local suffix point. The theorem excludes linear projective gluings, rational gauges, Cremona
+identifications, and rational collapses to curves or lines. It does not exclude a representation
+that assigns different compressed points to words with the same checked suffix point. Such a
+survivor has a genuinely multivalued phase graph closure or positive-dimensional generic fibers.
+
+**Use:** cull every further phase-plane identification that is merely a rational function of the
+present paired state. Attack the history-sensitive graph correspondence itself, or abandon this
+compiler.
+
+**Formalized core:** [`PhaseFracture.lean`](MatrixMortality/PhaseFracture.lean) checks phase
+normalization, erase-`c` nonvanishing, and the dimension-free final contradiction.
+[`PhaseRigidity.lean`](MatrixMortality/PhaseRigidity.lean) checks every displayed role matrix,
+scale, discrepancy, commutator, mixing coefficient, and the invariant-pencil rigidity step in the
+linear-fractional line branch. The density and arbitrary-rational function-field steps remain
+audited rather than kernel-checked.
+
+**Artifact:**
+[`audits/m34-rational-phase-fracture-2026-08-06.md`](audits/m34-rational-phase-fracture-2026-08-06.md).
+
+**Next:** prove that any three-state same-zero phase graph is generically single-valued, or build
+a valid multivalued counterexample with a complete arbitrary-word mortality lift. Independently,
+replace the four remaining function-field steps by Lean proofs or a finite algebraic certificate.
 
 ### G3-M01: Free-group discrepancy engine
 

@@ -454,6 +454,15 @@ Similarity, exact quotient or restriction, and nonzero per-letter rescaling cann
 three-state realization. A surviving matrix route must change the nonzero values and preserve
 only the zero language, or replace the compiler.
 
+The rational phase-fracture obstruction
+[`G3-O02`](SALVAGE.md#g3-o02-rational-phase-fracture) closes the next same-zero route. On every
+mortal paired instance, the compressed suffix point cannot be a rational function of the checked
+local suffix point and phase. This includes linear projective gluing, rational gauges, Cremona
+identifications, and rational collapses to a curve or line, even with singular target controls.
+The terminal contradiction and invariant-pencil rigidity core are Lean-checked; the general
+function-field rigidity is independently audited. A surviving paired compression must retain
+word history absent from the four-state suffix vector.
+
 The fixed-first property also remains useless: `R_c` recurs whenever the `c` rule fires.
 Absorbing its initial occurrence does not remove its interior role.
 
@@ -489,7 +498,7 @@ three symbol types but many transition rules does not meet this count.
 
 | Lane | Available leverage | Decisive obstruction or obligation |
 | --- | --- | --- |
-| Shift-equivariant zero incidence | Same-zero dimension three is point-line incidence in `P²`, formalized by [`G3-S01`](SALVAGE.md#g3-s01-shift-equivariant-zero-incidence) | Finite minimum rank is insufficient; all prefixes and suffixes must share three common shift maps over `ℚ` |
+| Shift-equivariant zero incidence | Same-zero dimension three is point-line incidence in `P²`, isolated by [`G3-S01`](SALVAGE.md#g3-s01-shift-equivariant-zero-incidence); rational phase-state graphs are excluded by [`G3-O02`](SALVAGE.md#g3-o02-rational-phase-fracture) | Prove every three-state phase graph generically single-valued, or construct a genuinely multivalued history-sensitive correspondence with common rational shifts |
 | Inverse-transducer discrepancy | Free cancellation performs queue-head deletion and Carvalho proves an all-path fixed-loop converse; see [`G3-M01`](SALVAGE.md#g3-m01-free-group-discrepancy-engine) | The closed-path subgroup has instance-dependent rank; inverses, free reduction, and subgroup control must be compiled into three positive letters |
 | Context and sliding-block codes | Adjacent ternary symbols can carry four semantic roles without fixed role macros | GPCP quantifies over the full free monoid; every boundary fragment, phase shift, and invalid overlap must be algebraically harmless |
 | Erasure and target recoding | Erasure escapes `G3-O01`; longer target atoms can split the one-letter images used in its proof | Empty contributions and code fragments create new boundary matches unless a global normal form excludes them |
@@ -504,8 +513,8 @@ it supplies the missing deletion semantics but not yet the bounded positive sour
 
 #### Operational program
 
-The highest-yield direct experiment is not another exact minimization. For increasing finite
-prefix and suffix sets, solve over `ℚ` for
+The highest-yield direct experiment is not another exact minimization or phase-plane gauge.
+For increasing finite prefix and suffix sets, solve over `ℚ` for
 
 ```text
 r_x, c_y ∈ ℚ³,       T_a ∈ ℚ^(3×3),
@@ -513,9 +522,10 @@ r_x c_y = 0  ↔  f(xy)=0,
 r_{xa}=r_xT_a,       c_{ay}=T_ac_y.
 ```
 
-The shift equations must be present from the first solve. Persistent solutions may expose a
-same-zero compiler; a finite unsatisfiable core may become a genuine zero-language
-dimension obstruction.
+The shift equations must be present from the first solve. Track pairs of suffixes that reach the
+same checked phase-local point but are forced to distinct target points. Persistent solutions
+must expose the hidden history as a multivalued phase correspondence; a finite unsatisfiable core
+may instead prove that every three-state graph is single-valued and compose with `G3-O02`.
 
 The highest-yield source experiment is Carvalho's smallest cyclic-tag transducer. Compute
 the rank and Stallings graph of its closed-path subgroup, classify the formal inverses used

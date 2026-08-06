@@ -106,6 +106,22 @@ states; its inactive row and column need only be nonzero. Consequently every exa
 two-channel realization of the paired series has at least six states. These declarations say
 nothing about another series with the same zero set or an off-diagonal bridge.
 
+The paired phase-fracture core is also checked. Lean derives the four local rule/erase matrices,
+their affine chart actions, both discrepancy shears, their nontrivial private scaling and mixing,
+and the two exact commutators. A two-dimensional pencil of affine forms invariant under the
+constant and radial commutators must forget the accumulator. This checks the algebraic rigidity
+step in the linear-fractional line-image branch once equivariance supplies pencil invariance.
+Independently of dimension, a same-zero realization whose erase-phase suffix target column after
+`c`-prefixing is a scalar multiple of its prior column cannot coexist with a paired zero: a toggle
+normalizes the phase without changing the coefficient, while the erase-`c` prefix forces distinct
+first binary symbols and hence a nonzero source coefficient.
+
+This does not make the full rational phase-fracture theorem Lean-checked. Zariski density of the
+reachable phase orbit, extension to rational-map identities, the fixed field of private scaling,
+and arbitrary-rational two-translation rigidity remain independently audited. The precise seam
+is recorded in
+[`m34-rational-phase-fracture-2026-08-06.md`](audits/m34-rational-phase-fracture-2026-08-06.md).
+
 For the `6 × 6` scalar compiler, Lean checks both explicit integer generators and a total
 two-bit decoder on the complete binary free monoid. Complete pairs emit the four source roles;
 an odd final bit preserves the coefficient. The decoder is surjective, the empty coefficient
@@ -702,6 +718,12 @@ with a complete arbitrary-word converse.
 | Fourth matrix is nonzero and rank one | `nearyMortality44_separator_ne_zero`, `nearyMortality44_separator_rank_eq_one` |
 | Paired scalar series has a nonsingular `4 × 4` Hankel section | `pairedRankHankel_det_ne_zero` |
 | Every exact paired-series realization needs four states | `paired_exact_state_lower_bound`, `paired_native_state_card`, `paired_native_represents` |
+| Toggle prefixing preserves the paired coefficient and can normalize any suffix to erase phase | `pairedCoefficient_toggle_cons`, `exists_erase_phase_eq_coefficient` |
+| An erase-phase `c` prefix never vanishes | `pairedCoefficient_data_c_cons_ne_zero_of_erase` |
+| Projectively forgetting erase-`c` excludes every paired zero, in any target dimension | `no_zero_of_erase_c_projective_identification` |
+| Phase-local roles, discrepancies, quotient scale, and mixing have their displayed forms | `PhaseRigidity.localRole_eq`, `PhaseRigidity.phase_discrepancies`, `PhaseRigidity.discrepancy_quotient`, `PhaseRigidity.ruleCMixing_ne_zero` |
+| The two phase commutators are one constant and one radial translation | `PhaseRigidity.erase_commutator`, `PhaseRigidity.discrepancy_commutator` |
+| Every invariant two-dimensional affine pencil forgets the accumulator | `PhaseRigidity.neary_commutator_pencil_forgets_t` |
 | Every exact diagonal paired-series bridge needs six states | `paired_exact_diagonal_twoChannel_state_lower_bound` |
 | Every literal Neary CHHN placement needs six exact states | `chhnNeary_exactRepresentation_six_le_card` |
 | Every two-state pushout word obeys its suffix decoder | `twoStateProduct_mulVec_phaseVector`, `twoStateCoefficient_eq_controlled` |
@@ -787,6 +809,10 @@ kernel-checked noncomputability theorem for `Nat.Partrec.Code` supplies the sour
 CHHN's generator–dimension and scalar-to-corner frontier transports remain external paper
 theorems. Bibliographic priority claims likewise depend on the recorded literature audits rather
 than Lean.
+
+The arbitrary-rational part of `G3-O02` remains an audited function-field theorem, not a formal
+dependency. Lean checks its exact finite algebra, invariant-pencil rigidity core, and terminal
+consumer, but not yet the dense-orbit extension or arbitrary rational-function rigidity.
 
 The scheduled compiler introduces a separate source-width seam. Neary's published construction
 sets `β = 10p`, where `p` is the simulated cyclic-tag program period. The fixed-width audit found
