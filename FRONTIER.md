@@ -696,12 +696,24 @@ prime factors of `Φ_a(p)` which do not divide `a`. If that radical exceeds
 ```
 
 then the current state is terminal or at least one exact-order prime survives reduction and
-resets the next projective state to one modulo that prime. Conversely, if a nonterminal step
-evades every such finite quotient, the entire primitive radical is at most the terminal defect
-and hence at most this height envelope. The arithmetic residue is now exact: one needs either
-finite-quotient separation or lower bounds for the squarefree primitive part of cyclotomic
-values. Growth of `Φ_a(p)` alone does not suffice because repeated prime powers are discarded by
-the radical.
+resets the next projective state to one modulo that prime. The complementary no-reset theorem
+retains every prime multiplicity: the full primitive part `P_a(p)` divides the removed content
+and satisfies
+
+```text
+p^((s−1)a) P_a(p) ≤ (|A|+|D|+|L|)H.
+```
+
+Thus repeated prime powers are no longer an uncontrolled escape. Glasby-Lübeck-Niemeyer-Praeger
+identify this part as `Φ_a(p)` or `Φ_a(p)/r` above exponent two. Lean now proves the exact
+surrogate needed for growth and combines it with the content budget:
+
+```text
+p^((s−1)a)(p−1)^φ(a) ≤ a(|A|+|D|+|L|)H.
+```
+
+The remaining task is global: combine strong-primitive absorption on no-reset branches with
+exact-order quotient dynamics on reset branches.
 
 [`R32-S12`](SALVAGE.md#r32-s12-exact-order-projective-automata) turns surviving factors into an
 exact finite proof system. A primitive divisor `ℓ` of exponent `e` yields a transition automaton
@@ -882,6 +894,13 @@ absorbed by `h` passes to `k`, with multiplicity. In a fixed weighted norm, all 
 noncontracting branch and obeys an exact first-order recurrence. This is a real dichotomy, but
 not yet a global contraction theorem: successive decoder coordinates use different wait
 frames. The correct variable-wait transfer contains an explicit gauge between those frames.
+The decoder now also has the checked continuant factorization
+
+```text
+C(q,u,v)=[[1,v],[0,1]][[0,1],[1,(q+1)u]],
+```
+
+which makes a continued-fraction bridge exact rather than analogical.
 The submitted ungauged cocycle and its tropical path bound were algebraically false and have
 been removed from the live branch.
 
@@ -968,19 +987,64 @@ Its proof gives an explicit record-ascent ceiling and finite primitive-state box
 supplied denominator bound and every depth at least two. Thus any genuinely nonperiodic
 survivor must have unbounded reduced denominators.
 
+The broad number-theory review
+[`m32-number-theory-triangulation-2026-08-06.md`](audits/m32-number-theory-triangulation-2026-08-06.md)
+now nominates two adjacent bridges rather than another local invariant. The first bridge has
+since been resolved algebraically. For consecutive primitive reductions, put
+
+```text
+q=p^a,  Q=p^b,  Xᵢ=(tᵢ,hᵢtᵢ₊₁)ᵀ.
+```
+
+Existing prequotient coprimality makes `Xᵢ` primitive, and Lean now proves at every depth `s`
+
+```text
+Q^s hᵢ Xᵢ₊₁ =
+  [[0,Q^s],[DL(q−1),A+Dq^s−LQ]] Xᵢ.
+```
+
+This removes the former mixed-endpoint state obstruction. It does not yet orient Panti descent:
+`Xᵢ` is attached to an outgoing edge, its second entry has the sign of `hᵢ`, and the moving Smith
+chart still divides by `uᵢ`. No checked identity makes the proposed positive two-decoder matrix
+the live transfer of `Xᵢ`.
+
+Capuano-Murru-Terracini's adelic continued-fraction criterion,
+extended by Capuano-Checcoli-Mula-Terracini to a fixed set of extraneous denominator places,
+gives finiteness under a strict all-place factor `ν<1` and finite-or-periodic behavior under
+`ν≤1`. The displayed transfer projectivizes to a generalized continued fraction with variable
+partial numerator `DL(q−1)/Q^s`. It is integral away from the base prime after normalizing the
+fixed coefficients, but the published scalar theorem does not directly cover this recurrence.
+What remains is to prove a local floor selector, retain the primitive-reduction scalar, and
+calculate the resulting all-place factor.
+
+The gauge is now exact in one common basis:
+
+```text
+[[1,0],[1,1]] J(q,Q) [[1,0],[−1,1]] = diag(1,Q²/q²).
+```
+
+Its real growth and p-adic size are product-formula duals. This removes an irreducible-shear
+interpretation but does not commute the dilation through the intervening cocycles. Every
+nonmaximal Smith branch contributes a checked `3/4` real saving, while maximal branches are
+isolated and nonterminal. The exact next theorem is therefore a block inequality for the carried
+generalized continuant, not another coordinate construction or pointwise pole bound. See
+[`m32-prequotient-adelic-2026-08-06.md`](audits/m32-prequotient-adelic-2026-08-06.md).
+
 ### Live attacks
 
 | Lane | Required move | Present obstruction |
 | --- | --- | --- |
-| Global nonmaximal amortization | Convert the mandatory `v≥2` branches into a height, fixed-cusp, or content invariant along every even-resultant execution | Local contraction is measured after a wait-dependent normalization, while inherited rational height can still pay the loss |
-| Cyclotomic core extraction | Force superbudget pairwise-coprime core mass from every unbounded-denominator schedule | Reset-or-cancel renewal is exact once a core is supplied, but no theorem extracts enough cores unconditionally |
+| Positive Smith blocks | Orient the carried primitive prequotient coordinate through signed Smith charts so every legal bounded macro is an inverse positive block | The coordinate need not lie in one positive cone, and no live conjugacy consumes the abstract two-decoder positivity product |
+| Gauged adelic finiteness | Prove an all-place height factor for the exact generalized continuant and its pure `Q²/q²` dilation | Variable partial numerators, the local wait selector, and the primitive-reduction scalar are not covered by the quoted scalar theorem |
+| Strong primitive pressure | Combine the checked cyclotomic pressure inequality with positive-block or gauged-adelic descent | Full multiplicity and its cyclotomic lower bound are charged on every no-reset branch, but inherited height may still pay a local charge |
+| Equality-locus classification | Reduce `ν=1` saturation to a fixed binary form or fixed-rank S-unit point | Moving-gcd and S-unit theorems do not apply until fixed support, rank, and slow coefficient growth are proved |
 | Denominator counter | Construct one coefficient-aligned orbit with unbounded denominators and a power-free wait word | Local p-adic symbolic freedom is complete, but endpoint content and rational height couple all branches globally |
 | Repeated-factor extraction | Force a sufficiently heavy repeated factor in every bounded-complexity wait prefix and apply `R32-S29` | Arbitrary repeated factors are controlled once found; no theorem yet extracts one from a moving denominator schedule |
 | Irreducible cubic fallback | Replace the split spectrum by a cubic return pencil with internal punctuation and a complete word normal form | No candidate yet matches the guard's exact illegal-branch soundness |
 | Exceptional reverse compiler | Absorb the finite `αβ=0` disjunction into one three-dimensional many-one instance | The generic rank-`(2,2)` compiler is complete; dimension three has no evident OR operation |
 
-The prospective hot path is now global amortization of the mandatory nonmaximal branches inside
-the fixed-cusp recurrence, not another parameter or tangent coordinate. The matrix compiler,
+The prospective hot path is now a coefficient-effective positive or adelic block theorem for
+the carried prequotient continuant, not another parameter or tangent coordinate. The matrix compiler,
 arbitrary-word converse, deterministic wait decoder, rational inverse-address grammar,
 primitive integral lift, endpoint factorization, exact branch similarity, arbitrary
 repeated-factor pumping, local record-ascent

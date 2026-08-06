@@ -418,6 +418,40 @@ theorem PrimitiveEndpointReduction.twoStep_elimination
   simp only [Prod.fst, Prod.snd] at first_numerator second_denominator ⊢
   linear_combination content * second_denominator + first_numerator
 
+/-- The primitive pair formed by a source denominator and its endpoint prequotient is carried
+through consecutive reductions by one integral generalized-continuant block.  The statement
+holds at every depth; no complementary-content split or moving auxiliary state is required. -/
+theorem PrimitiveEndpointReduction.twoStep_prequotient_transport
+    {prime depth : Nat} {centerNumerator driftNumerator scale : ℤ}
+    {wait nextWait : Nat} {source middle target : ℤ × ℤ}
+    {content nextContent : ℤ}
+    (first :
+      PrimitiveEndpointReduction prime depth centerNumerator driftNumerator scale
+        wait source middle content)
+    (second :
+      PrimitiveEndpointReduction prime depth centerNumerator driftNumerator scale
+        nextWait middle target nextContent) :
+    ((prime : ℤ) ^ (depth * nextWait) * content) •
+        ![middle.2, endpointPrequotient nextContent target] =
+      !![
+          0, (prime : ℤ) ^ (depth * nextWait);
+          driftNumerator * scale * ((prime : ℤ) ^ wait - 1),
+            centerNumerator +
+              driftNumerator * (prime : ℤ) ^ (depth * wait) -
+              scale * (prime : ℤ) ^ nextWait] *ᵥ
+        ![source.2, endpointPrequotient content middle] := by
+  ext i
+  fin_cases i
+  · simp [endpointPrequotient, Matrix.mulVec, Matrix.dotProduct,
+      Fin.sum_univ_succ, smul_eq_mul]
+    ring
+  · simp [Matrix.mulVec, Matrix.dotProduct, Fin.sum_univ_succ,
+      smul_eq_mul]
+    have eliminated := first.twoStep_elimination second
+    rw [first.source_eq_power_mul_prequotient] at eliminated
+    dsimp [endpointPrequotient] at eliminated ⊢
+    linear_combination eliminated
+
 /-- Parameter coefficient in the depth-two record-ascent budget. -/
 def twoStepContentCoefficient
     (centerNumerator driftNumerator scale : ℤ) : Nat :=

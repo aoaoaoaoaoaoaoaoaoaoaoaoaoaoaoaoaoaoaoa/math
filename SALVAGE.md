@@ -100,7 +100,7 @@ file owns the mathematical stock.
 | [`R32-S08`](#r32-s08-cumulative-endpoint-recurrence) | structure theorem | cumulative endpoint pairs absorb every normalization scalar into one deterministic exact-division recurrence | formalized | active |
 | [`R32-S09`](#r32-s09-complete-cancellation-law) | structure theorem | every base-coprime cancellation depth is the minimum of the terminal-defect and displacement depths | formalized | active |
 | [`R32-S10`](#r32-s10-logarithmic-wait-and-height-envelope) | structure theorem | legal waits are logarithmic in primitive height and every reduced step is uniformly height-Lipschitz | formalized | active |
-| [`R32-S11`](#r32-s11-primitive-factor-terminal-gate) | structure theorem | a large primitive cyclotomic radical forces terminality or a surviving finite-quotient reset | formalized | active |
+| [`R32-S11`](#r32-s11-primitive-factor-terminal-gate) | structure theorem | primitive cyclotomic factors either survive as reset witnesses or are swallowed with full multiplicity and charged to height | formalized | active |
 | [`R32-S12`](#r32-s12-exact-order-projective-automata) | structure theorem | primitive divisors induce finite projective automata with exact swallowed-factor semantics | formalized | active |
 | [`R32-S13`](#r32-s13-canonical-decoded-integral-lift) | structure theorem | every decoded rational path lifts canonically to primitive integral execution | formalized | active |
 | [`R32-S14`](#r32-s14-drift-divisor-certificate-classification) | decidable stratum | drift-divisor certificates are exactly finite cyclic-orbit avoidance | formalized | active |
@@ -109,8 +109,8 @@ file owns the mathematical stock.
 | [`R32-S27`](#r32-s27-rational-gap-macro-pumping) | structure theorem and obstruction | exact branch similarity and rational height separation bound every noncyclic repetition of one fixed macro | formalized | active |
 | [`R32-S28`](#r32-s28-terminal-endpoint-and-complementary-content) | structure theorem and obstruction | a terminal gauge exposes complementary forward/reverse contents and coefficient-prime immortality certificates | formalized | active |
 | [`R32-S29`](#r32-s29-adelic-content-and-repeated-factor-budget) | structure theorem and obstruction | content-weighted height, full cyclotomic complement, exterior conservation, and arbitrary repeated-factor pumping share one calculus | formalized | active |
-| [`R32-S30`](#r32-s30-fixed-cusp-and-record-ascent-calculus) | structure theorem and obstruction | cumulative endpoints form a fixed-cusp continued fraction whose critical record ascents pay an exact two-step content budget | formalized | active |
-| [`R32-S31`](#r32-s31-smith-decoder-and-maximal-cancellation-throat) | structure theorem and obstruction | a unimodular content decoder contracts every nonmaximal branch and isolates one exact maximal-cancellation recurrence | formalized | active |
+| [`R32-S30`](#r32-s30-fixed-cusp-and-record-ascent-calculus) | structure theorem and obstruction | cumulative endpoints form a fixed-cusp continued fraction; one primitive prequotient coordinate is carried by an exact generalized-continuant block | formalized | active |
+| [`R32-S31`](#r32-s31-smith-decoder-and-maximal-cancellation-throat) | structure theorem and obstruction | a positive unimodular content decoder contracts nonmaximal branches, while one fixed basis makes every wait gauge a pure base-prime dilation | formalized | active |
 | [`R32-D03`](#r32-d03-bounded-denominator-periodicity) | decidable stratum | every infinite legal rational guard orbit with bounded reduced denominators is eventually periodic | formalized | graduated |
 | [`M4-C01`](#m4-c01-two-state-pushout-compiler) | compiler | binary deterministic two-state scalar control compiles to three `4 × 4` matrices | formalized | graduated |
 | [`M4-O01`](#m4-o01-exact-toggle-fusion-leaves-an-immortal-core) | obstruction | exact local toggle fusion preserves a nonzero common anchor | formalized | graduated |
@@ -2673,7 +2673,8 @@ T=0
 Thus a family whose squarefree product is larger than the terminal defect cannot disappear
 silently. Either the source is already the true terminal projective point, or one factor
 survives primitive reduction and resets the reduced state to one in a finite projective
-quotient.
+quotient. This squarefree interface is deliberately strong: the witness prime is known not to
+divide `g` and therefore survives as a quotient transition.
 
 The canonical family consists of the prime factors of `Φ_a(p)` which do not divide `a`. Every
 such factor is formally proved to be a primitive prime divisor of `pᵃ−1`. Writing
@@ -2701,33 +2702,81 @@ radₚᵣᵢₘ(Φ_a(p))
   ≤ (|A−L|+|D|)H(m,n).
 ```
 
+The complementary interface now retains multiplicity. Define
+
+```text
+Pₐ(p)=∏ ℓ^vℓ(Φₐ(p)),
+```
+
+over the prime factors `ℓ` of `Φₐ(p)` which do not divide `a`. If no such prime resets the
+reduced target, the whole prime power is swallowed:
+
+```text
+Pₐ(p) ∣ g.
+```
+
+Consequently a nonterminal, nonzero step at depth `s` satisfies both
+
+```text
+Pₐ(p) ≤ (|A−L|+|D|)H,
+p^((s−1)a)Pₐ(p) ≤ (|A|+|D|+|L|)H.
+```
+
+The first inequality charges the full part to the terminal defect. The second charges it to the
+same content budget as the distinguished p-adic wait scale. Unlike the squarefree theorem, this
+does not assert that a reset prime survives reduction: it says that absent every reset, no
+primitive multiplicity can disappear without being paid by `g`.
+
+Glasby-Lübeck-Niemeyer-Praeger identify the corresponding strong primitive part as `Φₐ(p)` or
+`Φₐ(p)/r` for `a>2`, where `r` is the largest prime divisor of `a`. Lean now reconstructs the
+weaker exact interface needed for growth,
+
+```text
+Φₐ(p) ∣ aPₐ(p),
+(p−1)^φ(a) ≤ aPₐ(p),
+```
+
+and hence proves
+
+```text
+p^a(p−1)^φ(a) ≤ a(|A|+|D|+|L|)H
+```
+
+at depth two on every no-reset branch.
+
 This is the precise local-global gate sought by [`R32-M05`](#r32-m05-cyclotomic-reset-or-cancellation-sieve).
-It replaces the vague requirement that “cyclotomic growth beat height” by a squarefree radical
-inequality and exposes exactly where pure size arguments stop.
+It removes repeated prime powers as an uncontrolled escape and splits the arithmetic into a
+surviving finite quotient or full strong-primitive absorption.
 
-**Scope:** no unconditional lower bound strong enough for the primitive cyclotomic radical is
-proved. Cyclotomic values grow like `p^φ(a)`, but repeated prime powers can make their
-squarefree radical much smaller; controlling that loss uniformly is a genuinely number-theoretic
-obligation. Nor does a surviving reset automatically reject the terminal residue: it supplies a
-finite exact-order quotient whose future reachability must still be analyzed.
+**Scope:** inherited height can still pay the full factor; the inequality is local and must be
+combined with global adelic amortization. The exact equality with the published `Φ⁎ₐ(p)` is not
+formalized, but is no longer needed for the displayed growth bound. A surviving reset likewise
+supplies a finite exact-order transition, not automatic rejection of the terminal residue.
 
-**Artifact:** `primitiveCyclotomicPrimes`,
+**Artifact:** `primitiveCyclotomicPrimes`, `primitiveCyclotomicRadical`,
+`primitiveCyclotomicPart`, `primitiveCyclotomicPart_pos`,
+`cyclotomicValue_dvd_exponent_mul_primitiveCyclotomicPart`,
+`sub_one_pow_totient_le_exponent_mul_primitiveCyclotomicPart`,
 `primitivePrimeDivisor_of_mem_primitiveCyclotomicPrimes`,
-`terminal_or_exists_cyclotomic_reset`,
-`cyclotomicProduct_le_terminalDefect_of_no_reset`,
-`terminalDefect_zero_or_exists_primitive_reset`, and
-`primitiveCyclotomicRadical_le_height_of_no_reset` in
-[`ReturnGuardTerminalGate.lean`](MatrixMortality/ReturnGuardTerminalGate.lean).
+`terminal_or_exists_cyclotomic_reset`, `cyclotomicProduct_le_terminalDefect_of_no_reset`,
+`terminalDefect_zero_or_exists_primitive_reset`,
+`primitiveCyclotomicRadical_le_height_of_no_reset`,
+`primitiveCyclotomicPart_dvd_common_of_no_reset`, and
+`primitiveCyclotomicPart_le_height_of_no_reset` in
+[`ReturnGuardTerminalGate.lean`](MatrixMortality/ReturnGuardTerminalGate.lean), together with
+`primitiveCyclotomicPart_mul_wait_le_height_of_no_reset` and
+`strongPrimitivePressure_le_height_of_no_reset` in
+[`ReturnGuardAdelic.lean`](MatrixMortality/ReturnGuardAdelic.lean). Independent synthesis:
+[`m32-number-theory-triangulation-2026-08-06.md`](audits/m32-number-theory-triangulation-2026-08-06.md).
 
 **Use:** split the remaining decision attack cleanly. A surviving primitive factor enters a
-finite projective graph of exact multiplicative order `a`; if every such graph is inconclusive,
-the primitive radical is charged to one explicit terminal defect and bounded by primitive
-height.
+finite projective graph of exact multiplicative order `a`; if every primitive reset is absent,
+the entire strong primitive part is charged to one explicit content and height budget.
 
-**Next:** prove either that enough primitive factors survive to yield a complete finite-quotient
-certificate, or that repeated failure forces a radical-divisibility history belonging to a
-known hard Diophantine class. A bare lower bound for `Φ_a(p)` is insufficient; the needed object
-is its primitive squarefree part.
+**Next:** combine the checked strong primitive pressure with either a positive Smith-block
+height descent or the exact gauged Smith cocycle in an adelic continued-fraction inequality.
+Do not return to a squarefree-radical lower-bound problem unless a surviving quotient witness
+is specifically required.
 
 ### R32-S12: Exact-order projective automata
 
@@ -3263,6 +3312,19 @@ wait itself is the approximation depth to one fixed rational ray:
 vₚ(A Rᵢ − DL Rᵢ₋₁) = aᵢ.
 ```
 
+There is also a primitive coordinate carried through consecutive reductions without choosing a
+reverse content. Put `q=p^a`, `Q=p^b`, `sᵢ=hᵢtᵢ₊₁`, and `Xᵢ=(tᵢ,sᵢ)ᵀ`. Existing
+prequotient coprimality gives `gcd(Xᵢ)=1`, while Lean now proves at every depth `s`
+
+```text
+Q^s hᵢ Xᵢ₊₁ =
+  [[0,Q^s],[DL(q−1),A+Dq^s−LQ]] Xᵢ.
+```
+
+Thus the global projective transfer is a generalized continuant with no complementary-content
+or tangent state. The coordinate is attached to an outgoing edge and its second entry has the
+sign of `hᵢ`; a local floor selector and a common positive cone are not yet proved.
+
 At the critical depth `s=2`, two consecutive primitive steps with nondecreasing waits `a≤b`
 satisfy the exact local mountain budget
 
@@ -3279,26 +3341,30 @@ C(p⁻ᵃ) = J · [[1,0],[-p⁻ᵃ,1]],
 J³ = −I.
 ```
 
-**Scope:** this is an absolute two-step budget at the start of a local record ascent. It does
-not yet compare the charged power with height accumulated before that ascent. The reported
-full “fresh cyclotomic core” lower bound was not promoted: two versions of the report use
-incompatible loss exponents, and neither supplies the missing valuation bookkeeping.
+**Scope:** the carried coordinate removes a state-transport obstruction but supplies no global
+height descent. The record estimate remains an absolute two-step budget at the start of a local
+ascent and does not compare the charged power with inherited height. The reported full “fresh
+cyclotomic core” lower bound was not promoted: two versions use incompatible loss exponents,
+and neither supplies the missing valuation bookkeeping.
 
 **Artifact:** `PrimitiveEndpointReduction.content_natAbs_eq_gcd_driftSource_prequotient`,
 `PrimitiveEndpointReduction.resetDefect_eq_complement_mul`,
 `PrimitiveEndpointReduction.complement_dvd_terminalBoundary`, `terminalPredecessorPair_step`,
 `cumulativeCompleteQuotient_recurrence`, `cumulativeCompleteQuotient_sub_forbiddenCusp`,
-`cumulativeWaitForm_hasValue`, `PrimitiveEndpointReduction.twoStep_contentBudget`,
+`cumulativeWaitForm_hasValue`, `PrimitiveEndpointReduction.twoStep_prequotient_transport`,
+`PrimitiveEndpointReduction.twoStep_contentBudget`,
 `criticalDecoder_factor`, and `criticalDecoderCore_cube` in
 [`ReturnGuardContinued.lean`](MatrixMortality/ReturnGuardContinued.lean). Independent audit:
-[`m32-fixed-cusp-record-ascent-2026-08-01.md`](audits/m32-fixed-cusp-record-ascent-2026-08-01.md).
+[`m32-fixed-cusp-record-ascent-2026-08-01.md`](audits/m32-fixed-cusp-record-ascent-2026-08-01.md)
+and [`m32-prequotient-adelic-2026-08-06.md`](audits/m32-prequotient-adelic-2026-08-06.md).
 
-**Use:** state the residual arithmetic in the fixed-cusp quotient and charge every
-nondecreasing pair locally before importing any primitive-divisor estimate.
+**Use:** carry terminal corridors in the primitive prequotient coordinate; use the fixed-cusp
+quotient for wait selection and charge every nondecreasing pair before importing a
+primitive-divisor estimate.
 
-**Next:** prove a global shear or active-core amortization theorem comparing a record ascent's
-fresh `p^(a+b)` charge with the height inherited at its moving checkpoint. A merely absolute
-height estimate repeats the local theorem and cannot close the orbit.
+**Next:** prove a coefficient-effective positive or adelic block theorem for the displayed
+generalized continuant. It must control the edge-coordinate sign and removed scalar and compare
+each record charge with inherited height; another absolute estimate cannot close the orbit.
 
 ### R32-S31: Smith decoder and maximal-cancellation throat
 
@@ -3319,7 +3385,15 @@ The corresponding endpoint decoder
 C(q,u,v) = [[v,q²],[1,(q+1)u]]
 ```
 
-has determinant `−1`. Its inverse proves that every common reduction factor in the decoded
+has determinant `−1` and the exact continuant cut
+
+```text
+C(q,u,v) = [[1,v],[0,1]] [[0,1],[1,(q+1)u]].
+```
+
+Thus the moving Smith factors are a positive shear and one Gauss digit, not an opaque matrix
+norm. On positive coprime input, Lean verifies that the decoded pair remains coprime and its
+primitive max-height strictly increases. The inverse proves that every common reduction factor in the decoded
 pair divides the fixed coefficient `Lη`. More generally, for every `core∣q−1`, the part
 
 ```text
@@ -3347,28 +3421,41 @@ r=(q−1)m,
 The submitted variable-wait cocycle required correction. In the frame
 `F_q(m,n)=(n,q²m−n)`, one step maps `F_q` to the same lagged frame `F_q`; changing the target
 to `F_Q` requires an explicit rational gauge `J(q,Q)`. Lean checks the lagged identity, the
-gauge, and their composition. The ungauged concatenating identity and all global tropical
-estimates derived from it are false in general and were rejected.
+gauge, and their composition. One fixed basis now sharpens the gauge exactly:
 
-**Scope:** contraction is local after natural `q²` rescaling. This record does not bound an
-arbitrary gauged product. The formerly open infinite chain of `v=1` steps is excluded by
+```text
+[[1,0],[1,1]] J(q,Q) [[1,0],[−1,1]] = diag(1,Q²/q²).
+```
+
+The moving frame defect is therefore a pure base-prime dilation, not an irreducible shear. The
+ungauged concatenating identity and all global tropical estimates derived from it are false in
+general and were rejected.
+
+**Scope:** contraction is local after natural `q²` rescaling. Diagonalizing the gauge does not
+diagonalize the intervening Smith cocycles or bound their product. The formerly open infinite
+chain of `v=1` steps is excluded by
 [`R32-O07`](#r32-o07-parity-immortality-and-maximal-isolation).
 
 **Artifact:** `exists_smithRubanSplit`, `smithRubanDecoder_det`,
+`smithRubanDecoder_continuant_cut`,
+`smithRubanQuotient_isCoprime`, `smithRubanQuotient_height_gain_of_pos`,
 `smithRubanDecoder_weight_contraction`,
 `PrimitiveEndpointReduction.coreQuotient_dvd_complement`,
 `PrimitiveEndpointReduction.smithRuban_resetDefect`,
 `PrimitiveEndpointReduction.maximalCancellation`, `integralStep_laggedReturnCocycle`, and
-`gaugedReturnCocycle_mulVec` in
+`returnWaitFrameChange_diagonal`, `gaugedReturnCocycle_mulVec` in
 [`ReturnGuardSmith.lean`](MatrixMortality/ReturnGuardSmith.lean). Independent reconstruction:
-[`m32-smith-ruban-2026-08-02.md`](audits/m32-smith-ruban-2026-08-02.md).
+[`m32-smith-ruban-2026-08-02.md`](audits/m32-smith-ruban-2026-08-02.md) and
+[`m32-prequotient-adelic-2026-08-06.md`](audits/m32-prequotient-adelic-2026-08-06.md).
 
 **Use:** split every large cyclotomic factor into a contracting branch or the exact maximal
 throat before applying height or primitive-divisor arguments. Never concatenate lagged frames
 without the intervening gauge.
 
-**Next:** prove a global arithmetic or continued-fraction estimate amortizing the nonmaximal
-steps that occur at least after every maximal step. A moving-frame norm alone is insufficient.
+**Next:** orient the carried prequotient coordinate through the signed Smith charts as an inverse
+positive macro, or calculate the full adelic factor of its exact generalized continuant. The
+missing theorem must control cone entry, the moving chart diagonal, and primitive reduction;
+positivity of an abstract two-decoder product is not enough.
 
 ### R32-O07: Parity immortality and maximal isolation
 

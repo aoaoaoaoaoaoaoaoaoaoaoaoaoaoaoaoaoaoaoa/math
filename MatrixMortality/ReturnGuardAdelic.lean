@@ -4,10 +4,11 @@ import MatrixMortality.ReturnGuardGap
 /-!
 # Content and exterior-product budgets
 
-Primitive normalization removes a scalar from every integral transfer.  Retaining that scalar
-gives a sharper Archimedean height law.  Comparing two trajectories through the same branch
-gives an exact exterior-product conservation law: cyclotomic determinant content can only be
-removed on either trajectory or remain in their projective separation.
+Primitive normalization removes a scalar from every integral transfer. Retaining that scalar
+gives a sharper Archimedean height law; absent a primitive reset, its full cyclotomic prime-power
+part must pay the same budget as the distinguished wait scale. Comparing two trajectories
+through one branch gives an exact exterior-product conservation law: cyclotomic determinant
+content can only be removed on either trajectory or remain in their projective separation.
 -/
 
 namespace MatrixMortality.ReturnGuard
@@ -141,6 +142,97 @@ theorem integralStep_wait_content_le
         prime ^ wait * (coefficient * height) := by
     rwa [← mul_assoc, ← pow_add, exponent_eq]
   exact Nat.le_of_mul_le_mul_left factored waitPower_positive
+
+/-- If every primitive cyclotomic quotient misses reset, its full prime-power part is swallowed
+by the content and must pay the wait scale in the same Archimedean budget. -/
+theorem primitiveCyclotomicPart_mul_wait_le_height_of_no_reset
+    {prime depth : Nat} {centerNumerator driftNumerator scale : ℤ}
+    {wait : Nat} {numerator denominator nextNumerator nextDenominator
+      common reducedNumerator reducedDenominator : ℤ}
+    (prime_gt_one : 1 < prime)
+    (step :
+      IntegralStep prime depth centerNumerator driftNumerator scale
+        wait numerator denominator nextNumerator nextDenominator)
+    (numerator_reduced : nextNumerator = common * reducedNumerator)
+    (denominator_reduced : nextDenominator = common * reducedDenominator)
+    (nonterminal :
+      terminalDefect centerNumerator driftNumerator scale numerator denominator ≠ 0)
+    (reducedNumerator_ne : reducedNumerator ≠ 0)
+    (depth_positive : 0 < depth)
+    (no_reset :
+      ∀ factor ∈ primitiveCyclotomicPrimes prime wait,
+        ¬(factor : ℤ) ∣ reducedNumerator - reducedDenominator) :
+    prime ^ ((depth - 1) * wait) * primitiveCyclotomicPart prime wait ≤
+      (centerNumerator.natAbs + driftNumerator.natAbs + scale.natAbs) *
+        integralPairHeight numerator denominator := by
+  have part_dvd_common :
+      (primitiveCyclotomicPart prime wait : ℤ) ∣ common :=
+    primitiveCyclotomicPart_dvd_common_of_no_reset prime_gt_one
+      (integralStep_difference step) numerator_reduced denominator_reduced no_reset
+  have common_ne : common ≠ 0 := by
+    intro common_zero
+    apply nonterminal
+    rw [← step.2, denominator_reduced, common_zero, zero_mul]
+  have part_dvd_nat :
+      primitiveCyclotomicPart prime wait ∣ common.natAbs := by
+    simpa using Int.natAbs_dvd_natAbs.mpr part_dvd_common
+  have part_le_common :
+      primitiveCyclotomicPart prime wait ≤ common.natAbs :=
+    Nat.le_of_dvd (Int.natAbs_pos.mpr common_ne) part_dvd_nat
+  calc
+    prime ^ ((depth - 1) * wait) * primitiveCyclotomicPart prime wait ≤
+        prime ^ ((depth - 1) * wait) * common.natAbs :=
+      Nat.mul_le_mul_left _ part_le_common
+    _ ≤
+        (centerNumerator.natAbs + driftNumerator.natAbs + scale.natAbs) *
+          integralPairHeight numerator denominator :=
+      integralStep_wait_content_le step numerator_reduced reducedNumerator_ne
+        (by omega) depth_positive
+
+/-- Above wait two, cyclotomic growth itself pays the distinguished wait scale on every branch
+which evades all primitive resets. This is the formal strong primitive-pressure inequality. -/
+theorem strongPrimitivePressure_le_height_of_no_reset
+    {prime depth : Nat} {centerNumerator driftNumerator scale : ℤ}
+    {wait : Nat} {numerator denominator nextNumerator nextDenominator
+      common reducedNumerator reducedDenominator : ℤ}
+    (prime_gt_one : 1 < prime)
+    (wait_gt_two : 2 < wait)
+    (step :
+      IntegralStep prime depth centerNumerator driftNumerator scale
+        wait numerator denominator nextNumerator nextDenominator)
+    (numerator_reduced : nextNumerator = common * reducedNumerator)
+    (denominator_reduced : nextDenominator = common * reducedDenominator)
+    (nonterminal :
+      terminalDefect centerNumerator driftNumerator scale numerator denominator ≠ 0)
+    (reducedNumerator_ne : reducedNumerator ≠ 0)
+    (depth_positive : 0 < depth)
+    (no_reset :
+      ∀ factor ∈ primitiveCyclotomicPrimes prime wait,
+        ¬(factor : ℤ) ∣ reducedNumerator - reducedDenominator) :
+    prime ^ ((depth - 1) * wait) * (prime - 1) ^ wait.totient ≤
+      wait *
+        ((centerNumerator.natAbs + driftNumerator.natAbs + scale.natAbs) *
+          integralPairHeight numerator denominator) := by
+  have part_lower :
+      (prime - 1) ^ wait.totient ≤ wait * primitiveCyclotomicPart prime wait :=
+    sub_one_pow_totient_le_exponent_mul_primitiveCyclotomicPart
+      prime_gt_one wait_gt_two
+  have pressure :=
+    primitiveCyclotomicPart_mul_wait_le_height_of_no_reset prime_gt_one step
+      numerator_reduced denominator_reduced nonterminal reducedNumerator_ne
+      depth_positive no_reset
+  calc
+    prime ^ ((depth - 1) * wait) * (prime - 1) ^ wait.totient ≤
+        prime ^ ((depth - 1) * wait) *
+          (wait * primitiveCyclotomicPart prime wait) :=
+      Nat.mul_le_mul_left _ part_lower
+    _ = wait *
+        (prime ^ ((depth - 1) * wait) * primitiveCyclotomicPart prime wait) := by
+      ring
+    _ ≤ wait *
+        ((centerNumerator.natAbs + driftNumerator.natAbs + scale.natAbs) *
+          integralPairHeight numerator denominator) :=
+      Nat.mul_le_mul_left wait pressure
 
 /-- Two primitively reduced trajectories through one branch obey an exact all-place
 exterior-product law. -/

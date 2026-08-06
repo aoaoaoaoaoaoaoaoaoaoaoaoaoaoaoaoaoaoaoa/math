@@ -309,6 +309,18 @@
  Classical.choice,
  Quot.sound]
 'MatrixMortality.exists_primitivePrimeDivisor' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.cyclotomicValue_factorization_eq_one_of_odd_nonprimitive' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.cyclotomicValue_factorization_eq_one_of_two_nonprimitive' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.cyclotomicValue_dvd_exponent_mul_primitiveCyclotomicPart' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.sub_one_pow_totient_le_exponent_mul_primitiveCyclotomicPart' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.ReturnSquare.physical_isMortal_primePower_iff' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
@@ -393,6 +405,18 @@
  Classical.choice,
  Quot.sound]
 'MatrixMortality.ReturnGuard.terminalDefect_zero_or_exists_primitive_reset' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.primitiveCyclotomicPart_dvd_common_of_no_reset' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.primitiveCyclotomicPart_le_height_of_no_reset' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.primitiveCyclotomicPart_mul_wait_le_height_of_no_reset' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.strongPrimitivePressure_le_height_of_no_reset' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
 'MatrixMortality.ReturnGuard.quotientTransition_integralStep_eq_cancelled_iff' depends on axioms: [propext,
@@ -524,6 +548,9 @@
  Classical.choice,
  Quot.sound]
 'MatrixMortality.ReturnGuard.cumulativeWaitForm_hasValue' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ReturnGuard.PrimitiveEndpointReduction.twoStep_prequotient_transport' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.ReturnGuard.PrimitiveEndpointReduction.twoStep_contentBudget' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
@@ -554,6 +581,13 @@
 'MatrixMortality.ReturnGuard.criticalDecoderCore_cube' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.ReturnGuard.exists_smithRubanSplit' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.ReturnGuard.smithRubanDecoder_det' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ReturnGuard.smithRubanDecoder_continuant_cut' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.smithRubanQuotient_isCoprime' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.ReturnGuard.smithRubanQuotient_height_gain_of_pos' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.ReturnGuard.smithRubanDecoder_weight_contraction' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
@@ -576,6 +610,7 @@
 'MatrixMortality.ReturnGuard.integralStep_laggedReturnCocycle' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.ReturnGuard.returnWaitFrameChange_diagonal' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.ReturnGuard.gaugedReturnCocycle_mulVec' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.ReturnGuard.Examples.decreasingMortal_cumulativeExecution' depends on axioms: [propext, Quot.sound]
 'MatrixMortality.ReturnGuard.Examples.increasingMortal_cumulativeExecution' depends on axioms: [propext, Quot.sound]

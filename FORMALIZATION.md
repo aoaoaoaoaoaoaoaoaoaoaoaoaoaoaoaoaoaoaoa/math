@@ -298,6 +298,25 @@ For every prime `ℓ∣pᵃ−1`, the reduced pair either satisfies `m′≡n′
 common cancellation factor. This is an exact reset-or-cancellation dichotomy, not yet a finite
 decision sieve.
 
+The cyclotomic gate now retains multiplicity on the no-reset side. If every prime factor of
+`Φₐ(p)` outside the exponent support misses reset, the product of its full prime powers divides
+the common cancellation. A nonterminal step therefore obeys both a terminal-defect height bound
+and the sharper content-weighted pressure law
+
+```text
+p^((s−1)a) Pₐ(p) ≤ (|A|+|D|+|L|)H.
+```
+
+This removes repeated primitive prime powers as an untyped loss. Above wait two, Lean also
+reconstructs the strong-part growth interface
+
+```text
+Φₐ(p) ∣ aPₐ(p),
+p^((s−1)a)(p−1)^φ(a) ≤ a(|A|+|D|+|L|)H.
+```
+
+The literature's exact `Φ⁎ₐ(p)` classification is no longer required for this bound.
+
 The converse normalization seam is now closed. Lean proves that canonical rational
 numerator-denominator pairs are primitive, that the target unit condition forces the entire
 `p^(sa)` scale into the raw common factor, and hence that every decoded rational step lifts to
@@ -313,7 +332,13 @@ h=ηu,    k=θv,    ηθ=DL,    uv=pᵃ−1,
 u,v>0,      gcd(u,θ)=1.
 ```
 
-The attached `2 × 2` decoder has determinant `−1`; its explicit inverse confines every
+The attached `2 × 2` decoder has determinant `−1` and factors exactly as
+
+```text
+[[v,q²],[1,(q+1)u]] = [[1,v],[0,1]][[0,1],[1,(q+1)u]].
+```
+
+Thus its moving factors are continued-fraction data. Its explicit inverse confines every
 subsequent common divisor to fixed coefficient support. Every prescribed factor of `pᵃ−1`
 not swallowed by `h` divides `k`, with multiplicity, and is coprime to the target denominator.
 In the weighted norm `|x|+4|y|`, every branch with `v≥2` contracts by at most `3/4` after
@@ -340,6 +365,20 @@ The motivating multi-wait cocycle did not survive reconstruction. One step is ex
 lagged wait frame; changing to the next wait requires a separate rational gauge. Lean checks
 the lagged transfer, frame change, and honest composed cocycle. The ungauged global path bound
 is false and is not part of the corpus.
+
+Consecutive primitive endpoint reductions now carry one exact primitive edge coordinate. With
+`q=p^a`, `Q=p^b`, and `Xᵢ=(tᵢ,hᵢtᵢ₊₁)ᵀ`, prequotient coprimality and a new depth-uniform
+transport theorem give
+
+```text
+Q^s hᵢ Xᵢ₊₁ = [[0,Q^s],[DL(q−1),A+Dq^s−LQ]]Xᵢ.
+```
+
+No complementary content or tangent state enters the matrix. One fixed integral basis also
+conjugates every rational wait gauge to `diag(1,Q²/q²)`. These theorems remove the missing
+carried-coordinate and irreducible-shear obstructions, but do not prove cone entry, a local
+continued-fraction selector, or global height descent. See
+[`audits/m32-prequotient-adelic-2026-08-06.md`](audits/m32-prequotient-adelic-2026-08-06.md).
 
 The later Jacobi handoff proposal also failed reconstruction. The exact denominator recurrence
 retains the coefficient `A+Dqˢ−Lq′`. If a divisor of reverse content recurs in the next
@@ -498,7 +537,7 @@ with a complete arbitrary-word converse.
 | `TwoPlaneEdges.lean` | compatible two-plane realization of a `2 × 2` edge square and exact rank-two certificates |
 | `ReverseEdge.lean` | generic projective-incidence reverse compiler, basis adaptation, and all-path converse |
 | `PolynomialPencil.lean` | coefficient support and exact evaluation of words over affine matrix pencils |
-| `PrimitiveDivisor.lean` | cyclotomic prime support and Bang–Zsigmondy above exponent two |
+| `PrimitiveDivisor.lean` | cyclotomic support, nonprimitive index-prime valuations, and Bang–Zsigmondy above exponent two |
 | `ReturnSquare.lean` | exact rank-`(3,2)` laboratory, bridge normal form, and two-return square cage |
 | `ReturnSquareDynamics.lean` | homogeneous projective trap and outer negative immortality wall |
 | `ReturnSquarePrimePower.lean` | bridge-polynomial root support and finite quotient walls |
@@ -515,22 +554,22 @@ with a complete arbitrary-word converse.
 | `ReturnGuardGauss.lean` | canonical residual coordinate, exact branch spheres, and guarded-step conjugacy |
 | `ReturnGuardAddress.lean` | finite inverse-address mortality grammar and branch fixed-point incompatibility |
 | `ReturnGuardArithmetic.lean` | primitive-pair recurrence and cyclotomic reset-or-cancellation sieve |
-| `ReturnGuardTerminalGate.lean` | primitive cyclotomic radical and terminal-or-finite-reset gate |
+| `ReturnGuardTerminalGate.lean` | squarefree reset witnesses, full primitive cyclotomic absorption, and terminal height gates |
 | `ReturnGuardQuotient.lean` | exact-order finite projective automata, swallowed-factor semantics, and safe invariant certificates |
 | `ReturnGuardIntegralLift.lean` | canonical rational pairs, decoded-to-integral execution lifting, and quotient certificates of physical immortality |
 | `ReturnGuardQuotientCompleteness.lean` | zero-wait terminal kernel, cancellation-reachability completeness, and synchronized-product no-amplification |
 | `ReturnGuardDriftCertificate.lean` | exact drift-divisor certificate classification, cyclic subgroup criterion, and executable finite test |
 | `ReturnGuardCumulative.lean` | content-free cumulative endpoint execution, exact second-order recurrence, odd-resultant immortality, and derived primitive content |
-| `ReturnGuardContinued.lean` | fixed-cusp complete quotients, exact terminal arithmetic, recurrent-boundary reverse persistence, record-ascent content budget, and order-three decoder |
+| `ReturnGuardContinued.lean` | fixed-cusp complete quotients, primitive prequotient transport, recurrent-boundary reverse persistence, record-ascent content budget, and order-three decoder |
 | `ReturnGuardBoundary.lean` | depth-two universal-boundary reset ball, valuation-wall immortality, and primewise reset-resultant necessity |
-| `ReturnGuardSmith.lean` | signed content split, unimodular endpoint decoder, nonmaximal contraction, maximal-step isolation, and corrected gauged cocycle |
+| `ReturnGuardSmith.lean` | signed content split, positive-cone primitive-height gain, nonmaximal contraction, maximal-step isolation, and diagonalized gauged cocycle |
 | `ReturnGuardPeriodicity.lean` | exact denominator recurrence and explicit record-ascent, wait, content, and numerator ceilings |
 | `ReturnGuardFiniteOrbit.lean` | bounded primitive endpoint streams, their finite state box, repetition, and eventual periodicity |
 | `ReturnGuardFrame.lean` | evaluation-frame coboundary and reset-shell localization of transverse depth |
 | `ReturnGuardGap.lean` | exact residual similarity, rational projective gaps, height envelopes, and fixed-macro pumping |
 | `ReturnGuardPumping.lean` | arbitrary repeated-factor pumping between decoded orbit checkpoints |
 | `ReturnGuardEndpoint.lean` | terminal-centered divisor recurrence, whole-word determinant factorization, complementary forward/reverse contents, and coefficient-prime obstructions |
-| `ReturnGuardAdelic.lean` | content-weighted height bounds, complete cyclotomic complement, and exact exterior-product conservation |
+| `ReturnGuardAdelic.lean` | content-weighted height bounds, strong primitive pressure, complete cyclotomic complement, and exact exterior-product conservation |
 | `ReturnGuardResonance.lean` | nonresonant descent, resonance localization, and corrected nested readiness |
 | `ReturnGuardRail.lean` | polynomial divisibility and rational affine-wait rail obstruction |
 | `ReturnGuardExamples.lean` | one- and two-step mortal pairs, nonterminal fixed point, nested rational period-three orbit, endpoint boundary certificates, and ready order-breaking reset-ball ejection |
@@ -648,11 +687,20 @@ with a complete arbitrary-word converse.
 | Every positive wait has an exact terminal predecessor, so backward terminal search has no wait bound | `ReturnGuard.terminalPredecessorPair_step` |
 | Cumulative endpoints form a generalized continued fraction with one fixed forbidden cusp | `ReturnGuard.cumulativeCompleteQuotient_recurrence`, `ReturnGuard.cumulativeCompleteQuotient_sub_forbiddenCusp`, `ReturnGuard.cumulativeWaitForm_hasValue` |
 | At critical depth two, every nondecreasing pair of waits pays an exact two-step content budget | `ReturnGuard.PrimitiveEndpointReduction.twoStep_elimination`, `ReturnGuard.PrimitiveEndpointReduction.twoStep_contentBudget` |
+| Consecutive primitive reductions carry a primitive prequotient coordinate through one exact integral generalized-continuant block at every depth | `ReturnGuard.PrimitiveEndpointReduction.prequotient_coprime_denominator`, `ReturnGuard.PrimitiveEndpointReduction.twoStep_prequotient_transport` |
 | Every functional primitive endpoint stream of depth at least two with bounded positive denominators is eventually periodic | `ReturnGuard.PrimitiveEndpointReduction.nonDecreasing_waits_le`, `ReturnGuard.BoundedPrimitiveEndpointStream.wait_le`, `ReturnGuard.BoundedPrimitiveEndpointStream.eventually_periodic` |
 | The critical decoder is an order-three core followed by a wait-dependent shear | `ReturnGuard.criticalDecoder_factor`, `ReturnGuard.criticalDecoderCore_cube` |
+| The Smith decoder is a positive shear followed by one Gauss continuant generator | `ReturnGuard.smithRubanDecoder_continuant_cut` |
+| Positive Smith decoding preserves primitivity and strictly raises primitive-pair height | `ReturnGuard.smithRubanQuotient_isCoprime`, `ReturnGuard.smithRubanQuotient_height_gain_of_pos` |
+| One fixed rational basis diagonalizes every variable-wait frame gauge | `ReturnGuard.returnWaitFrameChange_diagonal` |
 | Every base-coprime cancellation depth is the minimum of the terminal-defect and displacement depths | `ReturnGuard.integralStep_cancel_iff_terminalDefect_and_displacement`, `ReturnGuard.integralStep_commonFactor_padicValInt` |
 | Legal waits are logarithmic in primitive height and reduced height is uniformly Lipschitz | `ReturnGuard.integralStep_wait_le_log_height`, `ReturnGuard.integralStep_reduced_height_le` |
 | A large primitive cyclotomic radical forces terminality or a surviving exact-order reset | `ReturnGuard.terminalDefect_zero_or_exists_primitive_reset`, `ReturnGuard.primitiveCyclotomicRadical_le_height_of_no_reset` |
+| Absent every primitive reset, the full primitive cyclotomic part divides the common reduction with all multiplicities | `ReturnGuard.primitiveCyclotomicPart_dvd_common_of_no_reset`, `ReturnGuard.primitiveCyclotomicPart_le_height_of_no_reset` |
+| The swallowed primitive part pays the distinguished wait scale in the same height budget | `ReturnGuard.primitiveCyclotomicPart_mul_wait_le_height_of_no_reset` |
+| Above exponent two, every index prime occurring in the cyclotomic value has valuation one | `cyclotomicValue_factorization_eq_one_of_odd_nonprimitive`, `cyclotomicValue_factorization_eq_one_of_two_nonprimitive` |
+| The cyclotomic value divides the exponent times its full primitive part, which inherits the elementary totient lower bound | `ReturnGuard.cyclotomicValue_dvd_exponent_mul_primitiveCyclotomicPart`, `ReturnGuard.sub_one_pow_totient_le_exponent_mul_primitiveCyclotomicPart` |
+| No-reset branches pay cyclotomic growth and the distinguished wait scale in one formal inequality | `ReturnGuard.strongPrimitivePressure_le_height_of_no_reset` |
 | Exact-order quotient dynamics is periodic in the wait, and its annihilation state is exactly swallowed primitive reduction | `ReturnGuard.quotientTransfer_mod_of_primitive`, `ReturnGuard.quotientTransition_integralStep_eq_cancelled_iff` |
 | A finite quotient invariant excluding annihilation and the target excludes every primitive integral execution | `ReturnGuard.no_primitiveExecution_of_quotientInvariant` |
 | A primitive divisor of the drift gives a reset-automaton no-certificate whenever the center ratio avoids the base subgroup | `ReturnGuard.no_primitiveExecution_of_drift_divisor` |

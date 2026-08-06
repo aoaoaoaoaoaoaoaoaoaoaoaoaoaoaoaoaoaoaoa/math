@@ -169,6 +169,10 @@ open MatrixMortality
 #print axioms ReturnSquare.not_physical_isMortal_of_nonneg
 #print axioms ReturnSquare.not_physical_isMortal_of_beyond_negative_wall
 #print axioms exists_primitivePrimeDivisor
+#print axioms cyclotomicValue_factorization_eq_one_of_odd_nonprimitive
+#print axioms cyclotomicValue_factorization_eq_one_of_two_nonprimitive
+#print axioms ReturnGuard.cyclotomicValue_dvd_exponent_mul_primitiveCyclotomicPart
+#print axioms ReturnGuard.sub_one_pow_totient_le_exponent_mul_primitiveCyclotomicPart
 #print axioms ReturnSquare.physical_isMortal_primePower_iff
 #print axioms ReturnSquareTax.finiteReturnHankel_det
 #print axioms ReturnSquareTax.reversibleStack_card_lower_bound
@@ -215,6 +219,10 @@ open MatrixMortality
 #print axioms ReturnGuard.terminal_or_exists_cyclotomic_reset
 #print axioms ReturnGuard.primitiveCyclotomicRadical_le_height_of_no_reset
 #print axioms ReturnGuard.terminalDefect_zero_or_exists_primitive_reset
+#print axioms ReturnGuard.primitiveCyclotomicPart_dvd_common_of_no_reset
+#print axioms ReturnGuard.primitiveCyclotomicPart_le_height_of_no_reset
+#print axioms ReturnGuard.primitiveCyclotomicPart_mul_wait_le_height_of_no_reset
+#print axioms ReturnGuard.strongPrimitivePressure_le_height_of_no_reset
 #print axioms ReturnGuard.quotientTransition_integralStep_eq_cancelled_iff
 #print axioms ReturnGuard.no_primitiveExecution_of_quotientInvariant
 #print axioms ReturnGuard.no_primitiveExecution_of_drift_divisor
@@ -264,6 +272,7 @@ open MatrixMortality
 #print axioms ReturnGuard.cumulativeCompleteQuotient_recurrence
 #print axioms ReturnGuard.cumulativeCompleteQuotient_sub_forbiddenCusp
 #print axioms ReturnGuard.cumulativeWaitForm_hasValue
+#print axioms ReturnGuard.PrimitiveEndpointReduction.twoStep_prequotient_transport
 #print axioms ReturnGuard.PrimitiveEndpointReduction.twoStep_contentBudget
 #print axioms ReturnGuard.PrimitiveEndpointReduction.denominator_recurrence
 #print axioms ReturnGuard.PrimitiveEndpointReduction.denominator_growth_factorization
@@ -277,6 +286,9 @@ open MatrixMortality
 #print axioms ReturnGuard.criticalDecoderCore_cube
 #print axioms ReturnGuard.exists_smithRubanSplit
 #print axioms ReturnGuard.smithRubanDecoder_det
+#print axioms ReturnGuard.smithRubanDecoder_continuant_cut
+#print axioms ReturnGuard.smithRubanQuotient_isCoprime
+#print axioms ReturnGuard.smithRubanQuotient_height_gain_of_pos
 #print axioms ReturnGuard.smithRubanDecoder_weight_contraction
 #print axioms ReturnGuard.PrimitiveEndpointReduction.coreQuotient_dvd_complement
 #print axioms ReturnGuard.PrimitiveEndpointReduction.coreQuotient_coprime_targetDenominator
@@ -286,6 +298,7 @@ open MatrixMortality
 #print axioms ReturnGuard.PrimitiveEndpointReduction.maximalCancellation_targetNumerator_odd
 #print axioms ReturnGuard.PrimitiveEndpointReduction.maximalCancellation_next_v_even
 #print axioms ReturnGuard.integralStep_laggedReturnCocycle
+#print axioms ReturnGuard.returnWaitFrameChange_diagonal
 #print axioms ReturnGuard.gaugedReturnCocycle_mulVec
 #print axioms ReturnGuard.Examples.decreasingMortal_cumulativeExecution
 #print axioms ReturnGuard.Examples.increasingMortal_cumulativeExecution
