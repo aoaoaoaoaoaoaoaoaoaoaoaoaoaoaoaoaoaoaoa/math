@@ -423,6 +423,15 @@ boundary is recorded in
 
 ## Audited But Unformalized
 
+The semantic core of [`G3-O04`](SALVAGE.md#g3-o04-expanding-affine-history-no-go) is formalized:
+the reset-affine orbit, finite reverse box, exact caged DFA, regularity, and universal
+noncomputability contradiction are kernel-checked. The remaining mechanization seam is uniform
+extraction of a mathlib `ComputablePred` decision procedure from an encoded rational
+normalization certificate. The finite graph algorithm is audited in
+[`m34-expanding-history-no-go-2026-08-06.md`](audits/m34-expanding-history-no-go-2026-08-06.md);
+the broader phrase “finitely many rational curves” is rejected without the formalized shared
+affine-coordinate transition law.
+
 The internal-sandwich audit retains two unformalized exact obstructions:
 
 | Record | Formalization obligation |
@@ -592,6 +601,7 @@ with a complete arbitrary-word converse.
 | `PhaseFracture.lean` | phase normalization and dimension-free projective-identification contradiction |
 | `PhaseRigidity.lean` | checked local role algebra, discrepancy commutators, and invariant-pencil rigidity |
 | `HistoryFracture.lean` | null-history counterexample, minimum-body base-five encoder, and integral mortality lift |
+| `ExpandingHistoryNoGo.lean` | reset-affine orbit, finite reverse automaton, regularity, and universal computability obstruction |
 | `PairedRank.lean` | uniform exact rank-four certificate for the paired scalar series |
 | `PairedBoundaryTax.lean` | exact six-state lower bound for diagonal paired-series bridges |
 | `PairedBinary.lean` | total two-bit decoder and exact six-state scalar representation |
@@ -751,6 +761,15 @@ with a complete arbitrary-word converse.
 | The three-state history encoder has exactly the paired zeros on minimum-length bodies | `minimalBody_history_zero_iff_paired_zero` |
 | The four integral history matrices are mortal exactly at a history-code zero | `historyMortalityFamily_int_mortal_iff_zero`, `minimalBody_historyMortality_iff_paired_zero` |
 | The explicit code `92` family is mortal with decoded witness `ctbbt` | `MinimalBodyExample.terminal_code`, `MinimalBodyExample.witness_decode`, `MinimalBodyExample.mortality` |
+| Every reset-affine control word obeys its exact coordinate and target equation | `ResetAffineHistory.wordProduct_mulVec_column`, `ResetAffineHistory.coefficient_eq` |
+| A zero and its leading toggle force the affine target to forget phase | `ResetAffineHistory.phaseWeight_eq_zero_of_toggle_pair` |
+| A phase-only reset-affine target has the exact two-phase zero test | `ResetAffineHistory.exists_zero_of_left_zero_iff` |
+| Every bounded target section of a finite-mode expanding affine history has finite reverse orbit | `ExpandingAffineHistory.reverseOrbit_finite`, `ClearedResetAffineHistory.reverseOrbit_finite` |
+| The caged finite automaton recognizes the bounded-target language exactly | `ExpandingAffineHistory.cagedRun_eq_some`, `ExpandingAffineHistory.run_eq_of_cagedRun_eq_some` |
+| Every bounded-target expanding affine history language is regular | `ExpandingAffineHistory.targetLanguage_isRegular` |
+| Every whole-chart target reduces to a finite-mode regular language | `ExpandingAffineHistory.modeLanguage_isRegular` |
+| Universal paired zero existence is exactly code halting and is not computable | `Undecidability.UniversalNeary.universalPairedZero_iff_codeHalts`, `Undecidability.UniversalNeary.universalPairedZero_not_computable` |
+| No computable predicate has exactly the universal paired zero answers | `Undecidability.UniversalNeary.no_computable_sameZero_predicate` |
 | Every exact diagonal paired-series bridge needs six states | `paired_exact_diagonal_twoChannel_state_lower_bound` |
 | Every literal Neary CHHN placement needs six exact states | `chhnNeary_exactRepresentation_six_le_card` |
 | Every two-state pushout word obeys its suffix decoder | `twoStateProduct_mulVec_phaseVector`, `twoStateCoefficient_eq_controlled` |

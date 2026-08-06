@@ -4205,6 +4205,68 @@ terminal histories, or a no-go for a precisely delimited uniform compiler class.
 `historyMortalityFamily_int_mortal_iff_zero`; bounded audit in
 [`m34-history-fracture-2026-08-06.md`](audits/m34-history-fracture-2026-08-06.md).
 
+### G3-O04: Expanding affine-history no-go
+
+**Kind:** obstruction
+
+**Evidence:** audited
+
+**Disposition:** graduated
+
+Let a history machine carry one integral coordinate `X` and finitely many modes. Each transition
+either preserves `X` or has the form
+
+```text
+(q,X) ↦ (q′,rX+D),    |r|≥2.
+```
+
+For a bound `N` containing every translation and target coordinate, a reverse data step obeys
+
+```text
+2|X| ≤ |r||X| = |Y−D| ≤ |Y|+|D| ≤ 2N.
+```
+
+Every predecessor of the target therefore lies in the finite box `Q×{−N,…,N}`. Lean constructs
+an exact caged DFA: a transition leaving the box enters a dead state, while every accepted run
+stays in the box because each intermediate state can still reach the target. The bounded-target
+language is regular even when collisions and cycles produce infinitely many terminal histories.
+
+This contains every effectively normalized reset-affine three-state compiler with
+source-dependent signed integer radices, rational phase digits after denominator clearing,
+arbitrary finite phase charts, and finitely many affine target fibers. The `u=0` row degeneracy is
+a two-phase test. On a nonempty same-zero source, a zero and its leading toggle force the phase
+coefficient to vanish without implying history uniqueness.
+
+The fixed universal family satisfies
+
+```text
+∃y, pairedCoefficient ℚ source.width (source.body e) y = 0
+  ↔ CodeHalts(e).
+```
+
+Hence no computable predicate, and therefore no total compiler with the finite reverse-search
+normalization above, has exactly these sourcewise zero answers.
+
+**Scope:** the finite-mode theorem requires one shared affine coordinate with stationary or
+expanding integral transitions. It does not cover arbitrary rational reparameterizations between
+curves, a genuinely two-dimensional projective orbit, infinite target sections, nonexpanding
+translations, denominator-generating dynamics, or singular ideals without such a normalization.
+The report's broader “finitely many rational curves” wording is rejected outside this explicit
+law.
+
+**Use:** cull every proposed replacement of the missing accumulator by a source-dependent radix,
+one phase bit or finitely many charts, and finitely many target codes. The next paired-route attack
+must exploit one of the stated escape mechanisms rather than alter digits, radix, collisions, or
+conjugacy.
+
+**Formalized core:** [`ExpandingHistoryNoGo.lean`](MatrixMortality/ExpandingHistoryNoGo.lean)
+checks the all-word orbit formula, toggle rigidity, phase-only degeneracy, reverse bound, finite
+reverse orbit, exact caged DFA, regularity, universal paired-zero equivalence, and the
+computability contradiction. Whole target charts have their own checked finite-mode automaton.
+Extracting mathlib `ComputablePred` code from an encoded rational
+normalization certificate remains audited. The bounded reconstruction is
+[`m34-expanding-history-no-go-2026-08-06.md`](audits/m34-expanding-history-no-go-2026-08-06.md).
+
 ### G3-M01: Free-group discrepancy engine
 
 **Kind:** partial mechanism

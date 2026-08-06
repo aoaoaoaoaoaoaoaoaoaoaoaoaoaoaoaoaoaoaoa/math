@@ -474,6 +474,17 @@ one-dimensional generic fibers. Thus generic single-valuedness of all three-stat
 false. The construction is not a reduction: its target code is a terminal witness, and the report
 supplied no total source-computable replacement on arbitrary bodies.
 
+[`G3-O04`](SALVAGE.md#g3-o04-expanding-affine-history-no-go) closes the first uniform
+replacement class. One source-dependent expanding affine history coordinate, any finite mode
+graph, and finitely many affine target fibers have an exact finite reverse automaton after
+denominator clearing. Mixed signed radices, arbitrary digits, collisions, rational conjugacy,
+and an instance-dependent number of modes do not help. Lean checks the all-word normal form,
+reverse box, exact caged DFA, regularity, and noncomputability of universal paired zero
+existence. The finite-chart claim requires one shared affine coordinate; arbitrary rational curve
+reparameterizations remain outside it. A surviving history compiler must use genuinely
+two-dimensional projective dynamics, an infinite target section, nonexpanding or
+denominator-generating arithmetic, or a singular ideal without effective affine normalization.
+
 The fixed-first property also remains useless: `R_c` recurs whenever the `c` rule fires.
 Absorbing its initial occurrence does not remove its interior role.
 
@@ -509,7 +520,7 @@ three symbol types but many transition rules does not meet this count.
 
 | Lane | Available leverage | Decisive obstruction or obligation |
 | --- | --- | --- |
-| Shift-equivariant zero incidence | Same-zero dimension three is point-line incidence in `P²`, isolated by [`G3-S01`](SALVAGE.md#g3-s01-shift-equivariant-zero-incidence); [`G3-O03`](SALVAGE.md#g3-o03-history-sensitive-minimal-body-fracture) gives exact multivalued instances and a mortality lift | Construct one total computable three-state family for all source instances without a halting-witness parameter, or prove a no-go for a precisely delimited uniform compiler class |
+| Shift-equivariant zero incidence | Same-zero dimension three is point-line incidence in `P²`, isolated by [`G3-S01`](SALVAGE.md#g3-s01-shift-equivariant-zero-incidence); [`G3-O03`](SALVAGE.md#g3-o03-history-sensitive-minimal-body-fracture) gives exact multivalued instances and [`G3-O04`](SALVAGE.md#g3-o04-expanding-affine-history-no-go) kills every finite-mode expanding one-coordinate uniformization | Construct a total family using genuinely two-dimensional projective history, an infinite section, or nonexpanding denominator growth; changing positional digits or finite charts is closed |
 | Inverse-transducer discrepancy | Free cancellation performs queue-head deletion and Carvalho proves an all-path fixed-loop converse; see [`G3-M01`](SALVAGE.md#g3-m01-free-group-discrepancy-engine) | The closed-path subgroup has instance-dependent rank; inverses, free reduction, and subgroup control must be compiled into three positive letters |
 | Context and sliding-block codes | Adjacent ternary symbols can carry four semantic roles without fixed role macros | GPCP quantifies over the full free monoid; every boundary fragment, phase shift, and invalid overlap must be algebraically harmless |
 | Erasure and target recoding | Erasure escapes `G3-O01`; longer target atoms can split the one-letter images used in its proof | Empty contributions and code fragments create new boundary matches unless a global normal form excludes them |
@@ -524,8 +535,8 @@ it supplies the missing deletion semantics but not yet the bounded positive sour
 
 #### Operational program
 
-The highest-yield direct experiment is now uniform, not instancewise. Seek one symbolic family
-computable from `(β,body)`,
+The highest-yield paired experiment is now a genuinely two-dimensional uniform construction.
+Seek one symbolic family computable from `(β,body)`,
 
 ```text
 λ(β,body), γ(β,body), H_b(β,body), H_c(β,body), H_t(β,body),
@@ -533,13 +544,17 @@ computable from `(β,body)`,
 λ H_y γ = 0  ↔  pairedCoefficient(β,body,y)=0
 ```
 
-on every control word and every admissible body. A parameter such as
+on every control word and every admissible body. Its projective orbit must leave the finite-mode
+expanding affine class of `G3-O04`; merely changing radix, digits, collisions, conjugacy, or chart
+count repeats a closed route. A parameter such as
 `K=κ(a terminal role word)` is forbidden unless a total source-computable formula produces it on
 both mortal and immortal inputs. Finite synthesis should share one formula template across a
 mixed ensemble of mortal, immortal, and null-history instances; independently fitted matrices no
-longer test the live obstruction. The opposing lane is a uniformity no-go: define an explicit
-compiler class broad enough to include rational source parameters and history recurrences, then
-prove that a total compiler in that class would decide the source predicate.
+longer test the live obstruction. The strongest candidate escapes are a two-coordinate
+projective recurrence with one terminal hyperplane, a nonexpanding denominator-growth mechanism
+with infinite reverse orbit, and a singular ideal grammar whose zero section is not a finite
+union of history fibers. A further no-go must consume at least one of those escapes rather than
+rename the affine-coordinate hypothesis.
 
 The highest-yield source experiment is Carvalho's smallest cyclic-tag transducer. Compute
 the rank and Stallings graph of its closed-path subgroup, classify the formal inverses used
