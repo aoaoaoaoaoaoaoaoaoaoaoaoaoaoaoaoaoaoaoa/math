@@ -124,6 +124,8 @@ file owns the mathematical stock.
 | [`G3-S01`](#g3-s01-shift-equivariant-zero-incidence) | structure theorem | same-zero state dimension is equivariant projective incidence dimension | audited | active |
 | [`G3-O02`](#g3-o02-rational-phase-fracture) | obstruction | a mortal paired instance has no rational phase-state same-zero compression | audited | stock |
 | [`G3-O03`](#g3-o03-history-sensitive-minimal-body-fracture) | obstruction | minimal bodies admit an exact history-sensitive three-state same-zero compiler | formalized | graduated |
+| [`G3-O04`](#g3-o04-expanding-affine-history-no-go) | obstruction | finite-mode expanding one-coordinate history has decidable target reachability | audited | graduated |
+| [`G3-O05`](#g3-o05-cancellative-projective-state-tax) | obstruction | inverse-saturated two-side projective dynamics need four states | audited | graduated |
 | [`G3-M01`](#g3-m01-free-group-discrepancy-engine) | partial mechanism | free cancellation implements queue deletion with an all-path converse | reported | active |
 | [`D2-S01`](#d2-s01-projective-hard-core) | structure theorem | `M₂(3)` is equivalent to two-generator projective incidence | audited | active |
 | [`D2-S02`](#d2-s02-monotone-affine-path-form) | structure theorem | normalized affine words form monotone exponent paths | audited | stock |
@@ -4266,6 +4268,66 @@ computability contradiction. Whole target charts have their own checked finite-m
 Extracting mathlib `ComputablePred` code from an encoded rational
 normalization certificate remains audited. The bounded reconstruction is
 [`m34-expanding-history-no-go-2026-08-06.md`](audits/m34-expanding-history-no-go-2026-08-06.md).
+
+### G3-O05: Cancellative projective state tax
+
+**Kind:** obstruction
+
+**Evidence:** audited
+
+**Disposition:** graduated
+
+For a paired control prefix `p`, suffix `s`, and the phase `q` entering from `s`, the terminal
+equation is exactly
+
+```text
+A(p,q)=B(s),
+A(p,q)=U(D_q(p))⁻¹L(D_q(p)),
+B(s)=U(D(s))mL(D(s))⁻¹
+```
+
+in the binary free group. Assign every phase-tagged residual an injective rational code `θ`, put
+
+```text
+v(t)=(1,t,t²)ᵀ,       ℓ(a,b)=(ab,−(a+b),1),
+```
+
+and use `ℓ(a,b)v(t)=(t−a)(t−b)`. This gives one global three-coordinate factorization with exactly
+the complete paired prefix-suffix zero support. Consequently every finite support submatrix has
+rational rank at most three. A zero-language dimension lower bound must use common shift maps;
+support/minrank alone cannot work.
+
+The positive role pairs also contain
+
+```text
+(zx^β,1),       (z(zx^β)z⁻¹,1),
+(1,z²),         (1,xz²x⁻¹).
+```
+
+The first two and last two freely generate `L_β` and `R`; their folded-core fiber product is a
+tree, so `L_β∩R={1}`. Hence they yield a freely acting `F₂×F₂` discrepancy orbit.
+
+If a projective recurrence extends every role to this two-sided group action and its target row
+remains exact on every formal inverse state, role matrices become invertible on the reachable
+span. The free discrepancy orbit then gives a faithful `F₂×F₂` action in `PGL_d(ℚ)`. No such
+action exists for `d≤3`: opposite-factor lifts commute linearly because a projective commutator
+scalar satisfies `μ³=1`, and the commutant of a faithful nonabelian subgroup of `GL₃` cannot
+contain another faithful nonabelian free group.
+
+**Scope:** the saturation hypothesis is essential. The theorem does not cover a positive-only
+orbit whose inverse continuations are absent, whose target law fails there, or whose singular
+maps destroy the group orbit. It does not prove general paired zero-language dimension four.
+
+**Use:** cull projective cross-multiplication of independently cancellative upper and lower word
+sides. Search must now preserve genuinely one-way semigroup behavior, or derive inverse
+saturation from the positive common-shift equations and thereby close the entire paired route.
+
+**Formalized core:** [`CancellativeProjectiveNoGo.lean`](MatrixMortality/CancellativeProjectiveNoGo.lean)
+checks the phase-aware decoder split, positive free-group embedding, terminal residual equation,
+global conic factorization, every finite support-rank bound, role-fraction identities, and the
+rational scalar-commutator law. The folded-graph, projective descent, and commutant classification
+remain audited in
+[`m34-cancellative-projective-no-go-2026-08-06.md`](audits/m34-cancellative-projective-no-go-2026-08-06.md).
 
 ### G3-M01: Free-group discrepancy engine
 

@@ -72,6 +72,7 @@ import MatrixMortality.MacroIrreducibility
 import MatrixMortality.PhaseRigidity
 import MatrixMortality.HistoryFracture
 import MatrixMortality.ExpandingHistoryNoGo
+import MatrixMortality.CancellativeProjectiveNoGo
 import MatrixMortality.NearyBinaryDefect
 import MatrixMortality.NearyPhaseSignature
 import MatrixMortality.CHHNPackingRank

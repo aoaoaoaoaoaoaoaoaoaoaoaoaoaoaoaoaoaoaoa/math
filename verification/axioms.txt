@@ -148,6 +148,35 @@
 'MatrixMortality.Undecidability.UniversalNeary.no_computable_sameZero_predicate' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.PairedResidual.decodeFrom_rule' depends on axioms: [propext]
+'MatrixMortality.PairedResidual.decodeFrom_append' depends on axioms: [propext]
+'MatrixMortality.PairedResidual.suffixDecode_append' depends on axioms: [propext]
+'MatrixMortality.TwoPhaseResidualSystem.incidenceMatrix_rank_le_three' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TwoPhaseResidualSystem.coefficient_eq_zero_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CancellativeRoleFraction.positiveWord_injective' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.CancellativeRoleFraction.terminal_eq_iff_residual_eq' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.CancellativeRoleFraction.terminal_match_append_iff_residual_eq' depends on axioms: [propext,
+ Quot.sound]
+'MatrixMortality.CancellativeRoleFraction.conicCoefficient_zero_iff_pairedCoefficient_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CancellativeRoleFraction.exists_supportMatrix_rank_le_three' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CancellativeRoleFraction.leftSeed_eq' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.CancellativeRoleFraction.leftConjugate_eq' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.CancellativeRoleFraction.rightSeed_eq' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.CancellativeRoleFraction.rightConjugate_eq' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.CancellativeProjectiveRigidity.eq_one_of_cube_eq_one' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CancellativeProjectiveRigidity.scalar_commutator_eq_one' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.paired_exact_diagonal_twoChannel_state_lower_bound' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]

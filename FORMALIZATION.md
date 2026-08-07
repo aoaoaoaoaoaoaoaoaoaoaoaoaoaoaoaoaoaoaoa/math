@@ -423,6 +423,16 @@ boundary is recorded in
 
 ## Audited But Unformalized
 
+The static half of [`G3-O05`](SALVAGE.md#g3-o05-cancellative-projective-state-tax) is fully
+formalized: phase-aware prefix decomposition, free-group residual equality, one global rational
+conic factorization of the paired zero support, and the rank-three bound for every finite sample.
+Lean also checks the four role fractions and the rational odd-dimensional commutator law. The
+remaining dimension-tax proof comprises the parameterized Stallings fiber product,
+inverse-saturated projective descent, fixed-locus lemma, and the commutant classification excluding
+`F₂×F₂≤PGL₃(ℚ)`. These are audited in
+[`m34-cancellative-projective-no-go-2026-08-06.md`](audits/m34-cancellative-projective-no-go-2026-08-06.md).
+No claim about general positive-only projective dynamics is made.
+
 The semantic core of [`G3-O04`](SALVAGE.md#g3-o04-expanding-affine-history-no-go) is formalized:
 the reset-affine orbit, finite reverse box, exact caged DFA, regularity, and universal
 noncomputability contradiction are kernel-checked. The remaining mechanization seam is uniform
@@ -602,6 +612,7 @@ with a complete arbitrary-word converse.
 | `PhaseRigidity.lean` | checked local role algebra, discrepancy commutators, and invariant-pencil rigidity |
 | `HistoryFracture.lean` | null-history counterexample, minimum-body base-five encoder, and integral mortality lift |
 | `ExpandingHistoryNoGo.lean` | reset-affine orbit, finite reverse automaton, regularity, and universal computability obstruction |
+| `CancellativeProjectiveNoGo.lean` | paired residual conic, finite support-rank closure, cancellative role fractions, and projective commutator rigidity |
 | `PairedRank.lean` | uniform exact rank-four certificate for the paired scalar series |
 | `PairedBoundaryTax.lean` | exact six-state lower bound for diagonal paired-series bridges |
 | `PairedBinary.lean` | total two-bit decoder and exact six-state scalar representation |
@@ -770,6 +781,12 @@ with a complete arbitrary-word converse.
 | Every whole-chart target reduces to a finite-mode regular language | `ExpandingAffineHistory.modeLanguage_isRegular` |
 | Universal paired zero existence is exactly code halting and is not computable | `Undecidability.UniversalNeary.universalPairedZero_iff_codeHalts`, `Undecidability.UniversalNeary.universalPairedZero_not_computable` |
 | No computable predicate has exactly the universal paired zero answers | `Undecidability.UniversalNeary.no_computable_sameZero_predicate` |
+| Prefix-suffix decoding feeds the suffix phase into the left context exactly | `PairedResidual.decodeFrom_append`, `PairedResidual.suffixDecode_append` |
+| Positive binary words embed in the binary free group and terminal matching is residual equality | `CancellativeRoleFraction.positiveWord_injective`, `CancellativeRoleFraction.terminal_eq_iff_residual_eq` |
+| One rational conic has exactly the complete paired prefix-suffix zero support | `CancellativeRoleFraction.conicCoefficient_zero_iff_pairedCoefficient_zero` |
+| Every finite paired support table has a rational realization of rank at most three | `CancellativeRoleFraction.exists_supportMatrix_rank_le_three` |
+| Cancellative role fractions contain the displayed independent left and right actions | `CancellativeRoleFraction.leftSeed_eq`, `CancellativeRoleFraction.leftConjugate_eq`, `CancellativeRoleFraction.rightSeed_eq`, `CancellativeRoleFraction.rightConjugate_eq` |
+| Projectively commuting invertible rational `3 × 3` matrices commute linearly | `CancellativeProjectiveRigidity.scalar_commutator_eq_one` |
 | Every exact diagonal paired-series bridge needs six states | `paired_exact_diagonal_twoChannel_state_lower_bound` |
 | Every literal Neary CHHN placement needs six exact states | `chhnNeary_exactRepresentation_six_le_card` |
 | Every two-state pushout word obeys its suffix decoder | `twoStateProduct_mulVec_phaseVector`, `twoStateCoefficient_eq_controlled` |

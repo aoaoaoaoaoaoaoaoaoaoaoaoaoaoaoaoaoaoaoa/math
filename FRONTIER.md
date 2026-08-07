@@ -485,6 +485,17 @@ reparameterizations remain outside it. A surviving history compiler must use gen
 two-dimensional projective dynamics, an infinite target section, nonexpanding or
 denominator-generating arithmetic, or a singular ideal without effective affine normalization.
 
+[`G3-O05`](SALVAGE.md#g3-o05-cancellative-projective-state-tax) separates static projective
+incidence from dynamics. Lean constructs one rational conic factorization of the complete paired
+prefix-suffix zero support, so every finite support submatrix has rank at most three. No
+support/minrank certificate can prove a four-state same-zero lower bound; common shift maps must
+carry the contradiction. Conversely, if a two-coordinate construction extends the upper and
+lower word sides to independent inverse actions and preserves the target law on every formal
+inverse state, its role group contains a freely acting `F₂×F₂`. Such a saturated projective
+recurrence needs at least four vector dimensions. The surviving projective route must therefore
+be intrinsically one-way: inverse states or their target law must fail, or a singular map must
+destroy the cancellative orbit.
+
 The fixed-first property also remains useless: `R_c` recurs whenever the `c` rule fires.
 Absorbing its initial occurrence does not remove its interior role.
 
@@ -520,7 +531,7 @@ three symbol types but many transition rules does not meet this count.
 
 | Lane | Available leverage | Decisive obstruction or obligation |
 | --- | --- | --- |
-| Shift-equivariant zero incidence | Same-zero dimension three is point-line incidence in `P²`, isolated by [`G3-S01`](SALVAGE.md#g3-s01-shift-equivariant-zero-incidence); [`G3-O03`](SALVAGE.md#g3-o03-history-sensitive-minimal-body-fracture) gives exact multivalued instances and [`G3-O04`](SALVAGE.md#g3-o04-expanding-affine-history-no-go) kills every finite-mode expanding one-coordinate uniformization | Construct a total family using genuinely two-dimensional projective history, an infinite section, or nonexpanding denominator growth; changing positional digits or finite charts is closed |
+| Shift-equivariant zero incidence | Same-zero dimension three is point-line incidence in `P²`; [`G3-O04`](SALVAGE.md#g3-o04-expanding-affine-history-no-go) kills finite-mode expanding one-coordinate uniformization, while [`G3-O05`](SALVAGE.md#g3-o05-cancellative-projective-state-tax) proves every finite support table has rank three but inverse-saturated two-side dynamics need four states | Construct an intrinsically one-way projective family, or derive cancellative saturation from positive common shifts; bare support tables, positional digits, and group-completable cross-multiplication are closed |
 | Inverse-transducer discrepancy | Free cancellation performs queue-head deletion and Carvalho proves an all-path fixed-loop converse; see [`G3-M01`](SALVAGE.md#g3-m01-free-group-discrepancy-engine) | The closed-path subgroup has instance-dependent rank; inverses, free reduction, and subgroup control must be compiled into three positive letters |
 | Context and sliding-block codes | Adjacent ternary symbols can carry four semantic roles without fixed role macros | GPCP quantifies over the full free monoid; every boundary fragment, phase shift, and invalid overlap must be algebraically harmless |
 | Erasure and target recoding | Erasure escapes `G3-O01`; longer target atoms can split the one-letter images used in its proof | Empty contributions and code fragments create new boundary matches unless a global normal form excludes them |
@@ -535,7 +546,7 @@ it supplies the missing deletion semantics but not yet the bounded positive sour
 
 #### Operational program
 
-The highest-yield paired experiment is now a genuinely two-dimensional uniform construction.
+The highest-yield paired experiment is now a genuinely one-way two-dimensional construction.
 Seek one symbolic family computable from `(β,body)`,
 
 ```text
@@ -546,15 +557,19 @@ Seek one symbolic family computable from `(β,body)`,
 
 on every control word and every admissible body. Its projective orbit must leave the finite-mode
 expanding affine class of `G3-O04`; merely changing radix, digits, collisions, conjugacy, or chart
-count repeats a closed route. A parameter such as
+count repeats a closed route. It must also evade `G3-O05`: formal inverse role continuations must
+either be undefined, lose the target equivalence, or be collapsed by a singular positive action.
+A parameter such as
 `K=κ(a terminal role word)` is forbidden unless a total source-computable formula produces it on
 both mortal and immortal inputs. Finite synthesis should share one formula template across a
 mixed ensemble of mortal, immortal, and null-history instances; independently fitted matrices no
-longer test the live obstruction. The strongest candidate escapes are a two-coordinate
-projective recurrence with one terminal hyperplane, a nonexpanding denominator-growth mechanism
-with infinite reverse orbit, and a singular ideal grammar whose zero section is not a finite
-union of history fibers. A further no-go must consume at least one of those escapes rather than
-rename the affine-coordinate hypothesis.
+longer test the live obstruction. Static zero-pattern fitting is now vacuous: the checked conic
+already fits every finite prefix-suffix table in three coordinates. Synthesis and lower-bound
+experiments must impose the same `H_b,H_c,H_t` on every left and right shift. The strongest
+candidate escapes are a non-group-completable denominator recurrence and a singular ideal grammar
+which irreversibly destroys illegal inverse histories. A further no-go should prove that positive
+shift equivariance forces the inverse saturation of `G3-O05`; that would kill the paired route
+rather than another ansatz.
 
 The highest-yield source experiment is Carvalho's smallest cyclic-tag transducer. Compute
 the rank and Stallings graph of its closed-path subgroup, classify the formal inverses used
