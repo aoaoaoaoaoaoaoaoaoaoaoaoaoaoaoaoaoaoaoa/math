@@ -126,6 +126,7 @@ file owns the mathematical stock.
 | [`G3-O03`](#g3-o03-history-sensitive-minimal-body-fracture) | obstruction | minimal bodies admit an exact history-sensitive three-state same-zero compiler | formalized | graduated |
 | [`G3-O04`](#g3-o04-expanding-affine-history-no-go) | obstruction | finite-mode expanding one-coordinate history has decidable target reachability | audited | graduated |
 | [`G3-O05`](#g3-o05-cancellative-projective-state-tax) | obstruction | inverse-saturated two-side projective dynamics need four states | audited | graduated |
+| [`G3-O06`](#g3-o06-periodic-ray-completion-and-branching-fracture) | compiler and obstruction | `bcbb` has an exact three-state periodic compiler, while `bcbc` defeats every single affine positional section | formalized | graduated |
 | [`G3-M01`](#g3-m01-free-group-discrepancy-engine) | partial mechanism | free cancellation implements queue deletion with an all-path converse | reported | active |
 | [`D2-S01`](#d2-s01-projective-hard-core) | structure theorem | `M₂(3)` is equivalent to two-generator projective incidence | audited | active |
 | [`D2-S02`](#d2-s02-monotone-affine-path-form) | structure theorem | normalized affine words form monotone exponent paths | audited | stock |
@@ -4343,6 +4344,68 @@ global conic factorization, every finite support-rank bound, role-fraction ident
 rational scalar-commutator law. The folded-graph, projective descent, and commutant classification
 remain audited in
 [`m34-cancellative-projective-no-go-2026-08-06.md`](audits/m34-cancellative-projective-no-go-2026-08-06.md).
+
+### G3-O06: Periodic-ray completion and branching fracture
+
+**Kind:** compiler and obstruction
+
+**Evidence:** formalized
+
+**Disposition:** graduated
+
+At width three with body `bcbb`, every null history is exactly
+
+```text
+(bbb,cbb)^k.
+```
+
+The complete terminal role language is therefore `P₀Q*`, where
+
+```text
+P₀ = R_c E_b E_c R_b E_b E_b,
+Q  = R_b E_b E_b R_c E_b E_b.
+```
+
+For most-significant-digit-first base-five code `V`, take
+
+```text
+κ=5443/15624,       α=5417371/9765000.
+```
+
+Lean proves `κ+V(w)=α5^|w|` exactly on `P₀Q*`. The converse uses
+`gcd(5443,5⁶−1)=1` to force length modulo six, rejects the empty word, and then applies
+injectivity of the role code. Three singular controls maintain the affine code, suffix-phase
+sign, and positional scale on every arbitrary control word. Clearing the rank-one separator
+gives four explicit integral `3 × 3` matrices whose mortality is equivalent to the `bcbb` paired
+zero language. Thus `bcbb` cannot support a same-zero dimension-four lower bound.
+
+The adjacent body `bcbc` branches. The equal-length null blocks
+
+```text
+BBB,CBC,BBB,CBC
+BBB,BCB,CBB,CBC
+```
+
+can be concatenated according to an arbitrary bit word. Prepending the fixed terminal history
+gives an injective family of terminal role words, all of length `6+12n` for `n` input bits. Hence
+one fixed length contains at least `2^n` terminal words. A single affine positional row fixes one
+injective code at each length, so it cannot recognize the complete `bcbc` language.
+
+**Scope:** the `bcbb` grammar, all-control affine converse, integral lift, `bcbc` binary terminal
+fork, and failure of a single affine positional section are Lean-checked. The report's stronger
+exact grammar `FD(B(DC)*F)*` for all `bcbc` terminal words is not promoted: its dead-residual
+induction does not state the invariant needed for the compressed cancellation step. The certified
+binary sublanguage already supplies the positional obstruction. No theorem here excludes an
+arbitrary rational three-state same-zero representation of `bcbc`.
+
+**Use:** delete `bcbb`, periodic rays, and positional digit refinements from the lower-bound
+frontier. Use `bcbc` as the first explicit branching target: either compile its complete terminal
+language with genuinely two-dimensional singular dynamics, or prove common positive shifts force
+same-zero dimension at least four.
+
+**Artifact:** [`PeriodicHistory.lean`](MatrixMortality/PeriodicHistory.lean),
+[`BranchingHistory.lean`](MatrixMortality/BranchingHistory.lean), and
+[`m34-periodic-ray-branching-fracture-2026-08-07.md`](audits/m34-periodic-ray-branching-fracture-2026-08-07.md).
 
 ### G3-M01: Free-group discrepancy engine
 

@@ -146,6 +146,32 @@ The unconditional separator reconstruction and the exact surviving `M₃(4)` obs
 recorded in
 [`m34-unconditional-separator-2026-08-07.md`](audits/m34-unconditional-separator-2026-08-07.md).
 
+The nonminimum body `bcbb` is now closed exactly. Lean proves that its null histories are
+precisely `(bbb,cbb)^k` and its complete terminal role language is `P₀Q*`. A second singular
+three-state decoder maintains the most-significant-digit-first role code, suffix-phase sign times
+`5^length`, and unsigned `5^length` on every control word. For
+
+```text
+κ=5443/15624,       α=5417371/9765000,
+```
+
+the affine row vanishes exactly on `P₀Q*`. The converse proves coprimality modulo `5⁶−1`, forces
+the decoded length modulo six, rejects the empty word, and then invokes injectivity of the
+base-five code. `bcbb_periodicCoefficient_zero_iff_paired_zero` identifies these zeros with the
+paired coefficient on the complete control free monoid. Clearing the rank-one separator gives
+four explicit integral `3 × 3` matrices, and
+`bcbbIntegralFamily_mortal_iff_paired_zero` proves their arbitrary-product converse.
+
+The adjacent body `bcbc` certifies the first branching wall. Lean checks two distinct
+four-stroke null blocks of equal length and injectively concatenates them according to arbitrary
+bit words. After the fixed terminal prefix, all `n`-bit images are terminal role words of length
+`6+12n`. Thus fixed-length slices have at least `2^n` words.
+`BranchingHistory.no_affine_positional_section` proves that no single affine row of the injective
+positional decoder recognizes the complete `bcbc` terminal language. This does not exclude an
+arbitrary rational three-state same-zero representation; that compiler or a common-shift
+dimension-four lower bound is the live seam. The reconstruction is
+[`m34-periodic-ray-branching-fracture-2026-08-07.md`](audits/m34-periodic-ray-branching-fracture-2026-08-07.md).
+
 For the `6 × 6` scalar compiler, Lean checks both explicit integer generators and a total
 two-bit decoder on the complete binary free monoid. Complete pairs emit the four source roles;
 an odd final bit preserves the coefficient. The decoder is surjective, the empty coefficient
@@ -779,6 +805,12 @@ with a complete arbitrary-word converse.
 | The three-state history encoder has exactly the paired zeros on minimum-length bodies | `minimalBody_history_zero_iff_paired_zero` |
 | The four integral history matrices are mortal exactly at a history-code zero | `historyMortalityFamily_int_mortal_iff_zero`, `minimalBody_historyMortality_iff_paired_zero` |
 | The explicit code `92` family is mortal with decoded witness `ctbbt` | `MinimalBodyExample.terminal_code`, `MinimalBodyExample.witness_decode`, `MinimalBodyExample.mortality` |
+| The `bcbb` null histories and complete terminal language are one exact periodic ray | `PeriodicHistory.bcbbNull_iff`, `PeriodicHistory.bcbb_terminal_match_iff` |
+| The singular positional decoder obeys its all-control affine state equation | `PeriodicHistory.periodicProduct_mulVec_column`, `PeriodicHistory.periodicCoefficient_eq` |
+| The `bcbb` affine section has no false zero and matches the paired zero language | `PeriodicHistory.bcbbAffine_zero_iff`, `PeriodicHistory.bcbb_periodicCoefficient_zero_iff_paired_zero` |
+| Four explicit integral `bcbb` matrices are mortal exactly at a paired zero | `PeriodicHistory.bcbbIntegralSeparator_cast`, `PeriodicHistory.bcbbIntegralFamily_mortal_iff_paired_zero` |
+| The `bcbc` terminal language contains injective equal-length binary forks | `BranchingHistory.bcbcForkRoles_injective`, `BranchingHistory.bcbcTerminalFork_injective`, `BranchingHistory.bcbcTerminalFork_match` |
+| No affine positional row section recognizes the complete `bcbc` terminal language | `BranchingHistory.no_affine_positional_section` |
 | Every reset-affine control word obeys its exact coordinate and target equation | `ResetAffineHistory.wordProduct_mulVec_column`, `ResetAffineHistory.coefficient_eq` |
 | A zero and its leading toggle force the affine target to forget phase | `ResetAffineHistory.phaseWeight_eq_zero_of_toggle_pair` |
 | A phase-only reset-affine target has the exact two-phase zero test | `ResetAffineHistory.exists_zero_of_left_zero_iff` |

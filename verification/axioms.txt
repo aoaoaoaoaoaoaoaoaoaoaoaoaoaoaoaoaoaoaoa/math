@@ -111,6 +111,34 @@
 'MatrixMortality.MinimalBodyExample.history_witness_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.MinimalBodyExample.paired_witness_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.MinimalBodyExample.mortality' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.PeriodicHistory.bcbbNull_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.PeriodicHistory.terminal_match_tileHistory_iff' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.PeriodicHistory.bcbb_terminal_match_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.PeriodicHistory.forwardHistoryCode_injective' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.PeriodicHistory.periodicProduct_mulVec_column' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.PeriodicHistory.periodicCoefficient_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.PeriodicHistory.bcbbAffine_zero_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.PeriodicHistory.bcbbAffine_zero_iff_terminal_match' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.PeriodicHistory.bcbb_periodicCoefficient_zero_iff_paired_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.PeriodicHistory.bcbbIntegralSeparator_cast' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.PeriodicHistory.bcbbIntegralFamily_mortal_iff_paired_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.BranchingHistory.bcbcNull_append' depends on axioms: [propext]
+'MatrixMortality.BranchingHistory.bcbcForkRoles_injective' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.BranchingHistory.bcbcTerminalFork_injective' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.BranchingHistory.bcbcTerminalFork_match' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.BranchingHistory.no_affine_positional_section' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.ResetAffineHistory.wordProduct_mulVec_column' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]

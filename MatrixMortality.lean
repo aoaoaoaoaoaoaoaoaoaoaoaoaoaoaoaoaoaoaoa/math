@@ -71,6 +71,8 @@ import MatrixMortality.Undecidability.UniversalNeary
 import MatrixMortality.MacroIrreducibility
 import MatrixMortality.PhaseRigidity
 import MatrixMortality.HistoryFracture
+import MatrixMortality.PeriodicHistory
+import MatrixMortality.BranchingHistory
 import MatrixMortality.ExpandingHistoryNoGo
 import MatrixMortality.CancellativeProjectiveNoGo
 import MatrixMortality.NearyBinaryDefect

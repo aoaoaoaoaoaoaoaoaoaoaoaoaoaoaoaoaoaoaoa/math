@@ -498,6 +498,16 @@ recurrence needs at least four vector dimensions. The surviving projective route
 be intrinsically one-way: inverse states or their target law must fail, or a singular map must
 destroy the cancellative orbit.
 
+[`G3-O06`](SALVAGE.md#g3-o06-periodic-ray-completion-and-branching-fracture) closes the concrete
+`bcbb` lane completely. Its null histories are exactly `(bbb,cbb)^k`, its terminal language is
+one periodic ray, and a singular three-state affine decoder recognizes it on every control word.
+The resulting four explicit integral matrices have a complete arbitrary-product mortality
+converse. The adjacent body `bcbc` is the first certified branching wall: two distinct
+equal-length null blocks concatenate according to arbitrary bit words, producing `2^n` terminal
+words at one length. Lean consequently excludes every single affine row section of the injective
+positional decoder. The report's proposed exact regular grammar for all `bcbc` terminals remains
+unpromoted; the binary sublanguage already kills positional-ray refinements.
+
 The mortality lift is no longer part of this obstruction. For arbitrary controls `H_a`, column
 `γ`, and row `λ` over a field, adjoining `γλ` gives mortality exactly when some
 `λH_yγ` vanishes. A zero product without the separator is already a scalar-zero witness; after
@@ -541,7 +551,7 @@ three symbol types but many transition rules does not meet this count.
 
 | Lane | Available leverage | Decisive obstruction or obligation |
 | --- | --- | --- |
-| Shift-equivariant zero incidence | Same-zero dimension three is point-line incidence in `P²`; [`G3-O04`](SALVAGE.md#g3-o04-expanding-affine-history-no-go) kills finite-mode expanding one-coordinate uniformization, while [`G3-O05`](SALVAGE.md#g3-o05-cancellative-projective-state-tax) proves every finite support table has rank three but inverse-saturated two-side dynamics need four states | Construct an intrinsically one-way projective family, or derive cancellative saturation from positive common shifts; bare support tables, positional digits, and group-completable cross-multiplication are closed |
+| Shift-equivariant zero incidence | Same-zero dimension three is point-line incidence in `P²`; [`G3-O04`](SALVAGE.md#g3-o04-expanding-affine-history-no-go) kills finite-mode expanding one-coordinate uniformization, [`G3-O05`](SALVAGE.md#g3-o05-cancellative-projective-state-tax) separates support rank from inverse-saturated dynamics, and [`G3-O06`](SALVAGE.md#g3-o06-periodic-ray-completion-and-branching-fracture) kills affine positional sections on explicit branching body `bcbc` | Compile the `bcbc` fork with intrinsically two-dimensional singular dynamics, or derive dimension four from its common positive shifts; bare support tables, positional digits, and group-completable cross-multiplication are closed |
 | Inverse-transducer discrepancy | Free cancellation performs queue-head deletion and Carvalho proves an all-path fixed-loop converse; see [`G3-M01`](SALVAGE.md#g3-m01-free-group-discrepancy-engine) | The closed-path subgroup has instance-dependent rank; inverses, free reduction, and subgroup control must be compiled into three positive letters |
 | Context and sliding-block codes | Adjacent ternary symbols can carry four semantic roles without fixed role macros | GPCP quantifies over the full free monoid; every boundary fragment, phase shift, and invalid overlap must be algebraically harmless |
 | Erasure and target recoding | Erasure escapes `G3-O01`; longer target atoms can split the one-letter images used in its proof | Empty contributions and code fragments create new boundary matches unless a global normal form excludes them |
@@ -556,8 +566,14 @@ it supplies the missing deletion semantics but not yet the bounded positive sour
 
 #### Operational program
 
-The highest-yield paired experiment is now a genuinely one-way two-dimensional construction.
-Seek one symbolic family computable from `(β,body)`,
+The first paired target is the explicit body `bcbc`. Either construct three rational states whose
+common shifts recognize its complete terminal language, including every malformed control, or
+prove that its branching zero set has rational same-zero dimension at least four. The checked
+equal-length binary fork must appear in either argument: a compiler must combine its alternatives
+without a finite union of affine rows, while a lower bound must use the shared positive actions
+rather than static support rank.
+
+Any positive construction must then extend to one symbolic family computable from `(β,body)`,
 
 ```text
 λ(β,body), γ(β,body), H_b(β,body), H_c(β,body), H_t(β,body),
@@ -567,7 +583,8 @@ Seek one symbolic family computable from `(β,body)`,
 
 on every control word and every admissible body. Its projective orbit must leave the finite-mode
 expanding affine class of `G3-O04`; merely changing radix, digits, collisions, conjugacy, or chart
-count repeats a closed route. It must also evade `G3-O05`: formal inverse role continuations must
+count repeats a closed route; `G3-O06` also excludes a single affine positional section even on
+`bcbc`. It must evade `G3-O05`: formal inverse role continuations must
 either be undefined, lose the target equivalence, or be collapsed by a singular positive action.
 A parameter such as
 `K=κ(a terminal role word)` is forbidden unless a total source-computable formula produces it on
