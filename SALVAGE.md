@@ -95,6 +95,7 @@ file owns the mathematical stock.
 | [`R32-O09`](#r32-o09-universal-boundary-reset-ball) | obstruction | a coefficient-prime reset ball excludes every depth-two guard below its explicit valuation wall | formalized | graduated |
 | [`R32-O10`](#r32-o10-ready-order-breaking-bridge-ejection) | obstruction | a ready order-breaking bridge can eject a strict reset ball without auxiliary cancellation while amplifying denominator height | formalized | graduated |
 | [`R32-O11`](#r32-o11-terminal-only-pole-contraction-is-a-decision-oracle) | obstruction | terminal-only contraction constants are pointwise vacuous; uniform effectivity is already a terminal bound | audited | graduated |
+| [`R32-O12`](#r32-o12-periodic-shadow-obstruction) | obstruction | one fixed guard has arbitrarily long off-reset primitive corridors with nonmaximal Smith allocation and rising carried and Smith coordinate runs | formalized | graduated |
 | [`R32-S07`](#r32-s07-decoded-residual-address-normal-form) | structure theorem | mortality is finite inverse-address membership in disjoint rational p-adic branch spheres | formalized | active |
 | [`R32-M05`](#r32-m05-cyclotomic-reset-or-cancellation-sieve) | partial mechanism | every primitive reduction either resets modulo a cyclotomic prime or swallows it in the common cancellation | formalized | active |
 | [`R32-S08`](#r32-s08-cumulative-endpoint-recurrence) | structure theorem | cumulative endpoint pairs absorb every normalization scalar into one deterministic exact-division recurrence | formalized | active |
@@ -3718,6 +3719,68 @@ installed as an unconsumed Lean API.
 **Use:** require the next decision attack to output an explicit coefficient algorithm or
 terminal-length function and prove its estimate without invoking the terminal time. Do not
 accept existential constants chosen after the unique execution is known.
+
+### R32-O12: Periodic-shadow obstruction
+
+**Kind:** obstruction
+**Evidence:** formalized
+**Disposition:** graduated
+
+The fixed depth-two guard
+
+```text
+p=3,   A=17,   D=−5,   L=16,   reset=3/4
+```
+
+has ready wait one at reset and maps reset back to itself. Nevertheless, for every `B` it has a
+legal corridor of length greater than `B` all of whose states lie off reset. The family is
+indexed by an odd shadow depth `K≥3`:
+
+```text
+t(K,n)=4−9^(K+1)+10^n9^(K+1−n),
+E(K,n)=(32t(K,n)−36t(K,n+1),t(K,n)).
+```
+
+Every internal edge is the actual wait-one guard step induced by the exact primitive endpoint
+reduction
+
+```text
+E(K,n) --h=−4--> E(K,n+1).
+```
+
+Its carried pair `(t(K,n),−4t(K,n+1))` is primitive. The fixed Smith split is
+
+```text
+(u,η,θ,v)=(1,−4,20,2),
+```
+
+and the raw Smith decoder output is exactly four times the primitive pair
+
+```text
+(8t(K,n)−9t(K,n+1), 4(t(K,n)−t(K,n+1))).
+```
+
+Both primitive-pair heights rise strictly along arbitrarily long runs of consecutive edge
+coordinates. The audit identifies the mechanism as a `3`-adic shadow of the fixed carried ray
+`x=−4`: each wait-one step removes exactly two units from `v₃(x+4)`. Hence no bound depending
+only on the coefficients can ensure a descending carried or Smith-height block inside every
+legal corridor, even when every edge has `v=2` and the wait gauge is constant.
+
+**Scope:** these are finite off-reset corridors. The reset orbit of this guard is fixed; the
+theorem neither reaches terminal nor constructs an infinite unbounded-denominator orbit. It
+does not refute an estimate anchored at reset, conditioned on first-hit terminality, or run in
+reverse from the terminal boundary.
+
+**Artifact:** `ReturnGuard.PrimitiveEndpointReduction.guardedStep_endpointState` in
+[`ReturnGuardCumulative.lean`](MatrixMortality/ReturnGuardCumulative.lean) and
+`ReturnGuard.Examples.periodicShadow_obstruction` in
+[`ReturnGuardPeriodicShadow.lean`](MatrixMortality/ReturnGuardPeriodicShadow.lean). Independent
+audit: [`m32-periodic-shadow-2026-08-06.md`](audits/m32-periodic-shadow-2026-08-06.md).
+
+**Use:** retire coefficient-uniform descent quantified over all legal corridors. A surviving
+decision proof must use reset or terminal history and retain the unbounded arithmetic depth of a
+near-periodic shadow; the opposing construction must make one fixed reset orbit concatenate such
+episodes rather than merely exhibit them off orbit.
 
 ### R32-D03: Bounded-denominator periodicity
 

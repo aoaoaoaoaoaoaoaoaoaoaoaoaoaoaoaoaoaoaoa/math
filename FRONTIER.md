@@ -980,6 +980,25 @@ effective content to guard decision unless an explicit coefficient formula is de
 rational approximation also stops at the sharp natural lower scale
 `H(π)≥p^T/(1+|R|)`; any surviving estimate must use the semigroup recurrence to control `c`.
 
+[`R32-O12`](SALVAGE.md#r32-o12-periodic-shadow-obstruction) kills coefficient-uniform descent
+over all legal primitive corridors. The fixed guard
+
+```text
+p=3,   A=17,   D=−5,   L=16,   reset=3/4
+```
+
+has ready wait one at reset and fixes reset, yet admits legal off-reset corridors longer than
+any prescribed bound. Every edge has wait one, exact forward content `−4`, and Smith coordinate
+`v=2`. The carried prequotient pair and the actual primitive Smith quotient are primitive and
+strictly increase along arbitrarily long runs of consecutive edge coordinates; the raw Smith
+decoder output is exactly four times the displayed primitive quotient. The repeated Smith
+transfer has audited all-place factor `10^j` on a `j`-step block. Thus neither bounded
+positive-Smith height nor the corresponding all-legal adelic height can supply uniform descent,
+even after the wait gauge becomes constant. The
+construction is not reset-started and does not reach terminal. It moves the live obstruction
+from local block geometry to the arithmetic depth with which the actual reset orbit may enter,
+shadow, and leave a periodic ray.
+
 The remaining unbounded channel is now sharply Archimedean. The formalized
 [`R32-D03`](SALVAGE.md#r32-d03-bounded-denominator-periodicity) theorem says that every
 infinite legal rational orbit with bounded reduced denominators is eventually periodic.
@@ -1008,14 +1027,14 @@ This removes the former mixed-endpoint state obstruction. It does not yet orient
 chart still divides by `uᵢ`. No checked identity makes the proposed positive two-decoder matrix
 the live transfer of `Xᵢ`.
 
-Capuano-Murru-Terracini's adelic continued-fraction criterion,
-extended by Capuano-Checcoli-Mula-Terracini to a fixed set of extraneous denominator places,
-gives finiteness under a strict all-place factor `ν<1` and finite-or-periodic behavior under
-`ν≤1`. The displayed transfer projectivizes to a generalized continued fraction with variable
-partial numerator `DL(q−1)/Q^s`. It is integral away from the base prime after normalizing the
-fixed coefficients, but the published scalar theorem does not directly cover this recurrence.
-What remains is to prove a local floor selector, retain the primitive-reduction scalar, and
-calculate the resulting all-place factor.
+Capuano-Murru-Terracini's adelic continued-fraction criterion, extended by
+Capuano-Checcoli-Mula-Terracini to a fixed set of extraneous denominator places, gives finiteness
+under a strict all-place factor `ν<1` and finite-or-periodic behavior under `ν≤1`. The displayed
+transfer projectivizes to a generalized continued fraction with variable partial numerator
+`DL(q−1)/Q^s`, but the published scalar theorem does not directly cover it. `R32-O12` now shows
+that no coefficient-uniform extension quantified over all legal guard corridors can provide the
+required strict factor. Any use of this literature must exploit reset-started or terminal
+history absent from the scalar recurrence alone.
 
 The gauge is now exact in one common basis:
 
@@ -1026,34 +1045,34 @@ The gauge is now exact in one common basis:
 Its real growth and p-adic size are product-formula duals. This removes an irreducible-shear
 interpretation but does not commute the dilation through the intervening cocycles. Every
 nonmaximal Smith branch contributes a checked `3/4` real saving, while maximal branches are
-isolated and nonterminal. The exact next theorem is therefore a block inequality for the carried
-generalized continuant, not another coordinate construction or pointwise pole bound. See
+isolated and nonterminal. Periodic shadows show that these local facts do not assemble into an
+all-legal block inequality for the carried generalized continuant. See
 [`m32-prequotient-adelic-2026-08-06.md`](audits/m32-prequotient-adelic-2026-08-06.md).
 
 ### Live attacks
 
 | Lane | Required move | Present obstruction |
 | --- | --- | --- |
-| Positive Smith blocks | Orient the carried primitive prequotient coordinate through signed Smith charts so every legal bounded macro is an inverse positive block | The coordinate need not lie in one positive cone, and no live conjugacy consumes the abstract two-decoder positivity product |
-| Gauged adelic finiteness | Prove an all-place height factor for the exact generalized continuant and its pure `Q²/q²` dilation | Variable partial numerators, the local wait selector, and the primitive-reduction scalar are not covered by the quoted scalar theorem |
-| Strong primitive pressure | Combine the checked cyclotomic pressure inequality with positive-block or gauged-adelic descent | Full multiplicity and its cyclotomic lower bound are charged on every no-reset branch, but inherited height may still pay a local charge |
-| Equality-locus classification | Reduce `ν=1` saturation to a fixed binary form or fixed-rank S-unit point | Moving-gcd and S-unit theorems do not apply until fixed support, rank, and slow coefficient growth are proved |
-| Denominator counter | Construct one coefficient-aligned orbit with unbounded denominators and a power-free wait word | Local p-adic symbolic freedom is complete, but endpoint content and rational height couple all branches globally |
+| Reset-anchored shadow control | Bound first-hit terminal executions from reset while retaining the depth of every near-periodic episode | Arbitrarily deep legal shadows exist off reset and spend exactly two units of `3`-adic fixed-ray depth per wait-one step |
+| Shadow concatenation | Construct one fixed reset orbit which enters periodic shadows at unbounded depths and never terminates | The checked family supplies arbitrarily long episodes for one guard, but that guard's reset is itself fixed and disconnected from them |
+| Strong primitive pressure | Combine the checked cyclotomic pressure inequality with reset-anchored shadow renewal | Full multiplicity is charged on every no-reset branch, but the local inequality alone does not distinguish an off-reset shadow from the actual reset history |
+| Shadow-depth arithmetic | Prove that the actual reset orbit cannot create unbounded approximation depth to a periodic ray without cycling or entering a terminally bounded regime | The required depth is an unbounded valuation/history variable invisible to the finite Smith type and constant wait label |
+| Denominator counter | Construct one coefficient-aligned reset orbit with unbounded denominators and recurrent shadow episodes | Local p-adic symbolic freedom is complete, but endpoint content and rational height couple all branches globally |
 | Repeated-factor extraction | Force a sufficiently heavy repeated factor in every bounded-complexity wait prefix and apply `R32-S29` | Arbitrary repeated factors are controlled once found; no theorem yet extracts one from a moving denominator schedule |
 | Irreducible cubic fallback | Replace the split spectrum by a cubic return pencil with internal punctuation and a complete word normal form | No candidate yet matches the guard's exact illegal-branch soundness |
 | Exceptional reverse compiler | Absorb the finite `αβ=0` disjunction into one three-dimensional many-one instance | The generic rank-`(2,2)` compiler is complete; dimension three has no evident OR operation |
 
-The prospective hot path is now a coefficient-effective positive or adelic block theorem for
-the carried prequotient continuant, not another parameter or tangent coordinate. The matrix compiler,
+The hot path is now reset-anchored renewal control of periodic shadows, with an infinite
+shadow-concatenating reset orbit as the opposing construction. The matrix compiler,
 arbitrary-word converse, deterministic wait decoder, rational inverse-address grammar,
 primitive integral lift, endpoint factorization, exact branch similarity, arbitrary
-repeated-factor pumping, local record-ascent
-budget, local content allocation, maximal-step isolation, and universal-boundary valuation wall
-are complete; uniform first-bridge closure is false. `M₃(2)` asks whether an even-resultant,
-universal-boundary-divisible, unbounded-denominator orbit can repay infinitely many forced
-nonmaximal losses, or whether those losses force repetition or a finite obstruction. Exact-order
-factors remain usable inside a global proof, but their first order-breaking bridge supplies no
-independent monotone charge.
+repeated-factor pumping, local record-ascent budget, local content allocation, maximal-step
+isolation, and universal-boundary valuation wall are complete. Uniform first-bridge closure and
+coefficient-uniform all-legal block descent are false. The rank-`(3,2)` artery asks whether an
+even-resultant, universal-boundary-divisible reset orbit can generate unbounded shadow depth and
+repay infinitely many forced nonmaximal losses, or whether reset/terminal history forces
+repetition or a finite obstruction. Exact-order factors remain usable only inside that global
+history-sensitive proof.
 
 ## The dimension-two wall: `M₂(3)`
 

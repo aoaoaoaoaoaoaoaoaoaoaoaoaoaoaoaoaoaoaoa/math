@@ -418,6 +418,24 @@ submitted endpoint normalization formula was not duplicated: it is the existing 
 cancellation law transported through the checked endpoint factorization. See
 [`audits/m32-order-breaking-bridge-2026-08-05.md`](audits/m32-order-breaking-bridge-2026-08-05.md).
 
+The proposed all-legal block theorem is now false. Lean checks the fixed guard
+
+```text
+p=3,   A=17,   D=−5,   L=16,   reset=3/4,
+```
+
+whose reset is ready and fixed, together with legal off-reset corridors longer than any
+prescribed bound. Every corridor edge has wait one, exact primitive content `−4`, and Smith
+coordinate `v=2`. Both the carried prequotient pair and the actual primitive Smith quotient are
+primitive and rise strictly along arbitrarily long runs of consecutive edge coordinates; the
+raw Smith decoder output is exactly four times the latter pair. A new generic theorem verifies
+that the primitive endpoint equation
+is the actual rational `guardedStep`, so legality is not inferred from a parallel recurrence.
+This rejects coefficient-uniform carried or Smith descent over all legal corridors. It does not
+reject a theorem anchored at reset or the terminal boundary: every constructed state is off
+reset, while reset itself is fixed. See
+[`audits/m32-periodic-shadow-2026-08-06.md`](audits/m32-periodic-shadow-2026-08-06.md).
+
 These are structural and decidable-stratum theorems, not an `M₃(2)` resolution. The imported
 order-four Skolem theorem used to classify rank-one profiles is not reimplemented in Lean. The
 generic reverse edge compiler still assumes `αβ≠0`, and no universality or decision theorem is
@@ -559,7 +577,7 @@ with a complete arbitrary-word converse.
 | `ReturnGuardIntegralLift.lean` | canonical rational pairs, decoded-to-integral execution lifting, and quotient certificates of physical immortality |
 | `ReturnGuardQuotientCompleteness.lean` | zero-wait terminal kernel, cancellation-reachability completeness, and synchronized-product no-amplification |
 | `ReturnGuardDriftCertificate.lean` | exact drift-divisor certificate classification, cyclic subgroup criterion, and executable finite test |
-| `ReturnGuardCumulative.lean` | content-free cumulative endpoint execution, exact second-order recurrence, odd-resultant immortality, and derived primitive content |
+| `ReturnGuardCumulative.lean` | content-free cumulative endpoint execution, exact second-order recurrence, primitive endpoint projectivization, odd-resultant immortality, and derived primitive content |
 | `ReturnGuardContinued.lean` | fixed-cusp complete quotients, primitive prequotient transport, recurrent-boundary reverse persistence, record-ascent content budget, and order-three decoder |
 | `ReturnGuardBoundary.lean` | depth-two universal-boundary reset ball, valuation-wall immortality, and primewise reset-resultant necessity |
 | `ReturnGuardSmith.lean` | signed content split, positive-cone primitive-height gain, nonmaximal contraction, maximal-step isolation, and diagonalized gauged cocycle |
@@ -573,6 +591,7 @@ with a complete arbitrary-word converse.
 | `ReturnGuardResonance.lean` | nonresonant descent, resonance localization, and corrected nested readiness |
 | `ReturnGuardRail.lean` | polynomial divisibility and rational affine-wait rail obstruction |
 | `ReturnGuardExamples.lean` | one- and two-step mortal pairs, nonterminal fixed point, nested rational period-three orbit, endpoint boundary certificates, and ready order-breaking reset-ball ejection |
+| `ReturnGuardPeriodicShadow.lean` | fixed-reset periodic-shadow family and uniform all-corridor carried/Smith descent obstruction |
 | `ReturnGuardQuotientExamples.lean` | four-state modulo-eleven certificate excluding every primitive terminal execution of the period-three guard |
 | `BinaryDefect.lean` | binary two-word defect theorem and exact Neary macro obstruction |
 | `CHHNPacking.lean` | generic two-slot CHHN packing and six-state finite-Hankel kernels |
@@ -682,6 +701,7 @@ with a complete arbitrary-word converse.
 | A cyclotomic factor is swallowed exactly when the source pair is terminal-congruent modulo it | `ReturnGuard.integralStep_cyclotomic_cancel_iff_terminalCongruent` |
 | Outside the fixed parameter support, cancellation is exactly cyclotomic terminal congruence | `ReturnGuard.integralStep_novel_cancel_iff_cyclotomic_terminalCongruent` |
 | Primitive endpoint normalization collapses into one deterministic cumulative recurrence | `ReturnGuard.primitiveIntegralStep_cumulativeEndpointStep`, `ReturnGuard.CumulativeEndpointStep.target_unique`, `ReturnGuard.cumulativeNumerator_recurrence` |
+| Every primitive endpoint reduction projectivizes to the corresponding rational guard step | `ReturnGuard.PrimitiveEndpointReduction.guardedStep_endpointState` |
 | Primitive content is exactly the gcd of the drift source and the unreduced quotient; reverse content satisfies a wait-free terminal divisor law | `ReturnGuard.PrimitiveEndpointReduction.content_natAbs_eq_gcd_driftSource_prequotient`, `ReturnGuard.PrimitiveEndpointReduction.resetDefect_eq_complement_mul`, `ReturnGuard.PrimitiveEndpointReduction.complement_dvd_terminalBoundary` |
 | A reverse-content divisor recurring in the next boundary outside fixed scale-reset support remains wholly reverse | `ReturnGuard.PrimitiveEndpointReduction.recurrentBoundaryDivisor_persists` |
 | Every positive wait has an exact terminal predecessor, so backward terminal search has no wait bound | `ReturnGuard.terminalPredecessorPair_step` |
@@ -720,6 +740,7 @@ with a complete arbitrary-word converse.
 | Two reduced trajectories through one branch obey an exact exterior-product conservation law | `ReturnGuard.primitiveSteps_projectivePairCross` |
 | Any repeated legal factor at two checkpoints is either an exact cycle or bounded by their rational height envelopes | `ReturnGuard.sharedSchedule_exact_or_power_le_heightEnvelope` |
 | Terminal-reaching guards can require two steps and their waits can either decrease or increase | `ReturnGuard.Examples.decreasingMortal_reachable`, `ReturnGuard.Examples.increasingMortal_reachable` |
+| One fixed guard has arbitrarily long off-reset legal corridors with `v=2`, exact content `−4`, and arbitrarily long rising carried and primitive Smith coordinate runs | `ReturnGuard.Examples.periodicShadow_obstruction` |
 | The former collision ladder and period-three survivor are excluded from terminality by one-prime endpoint coefficients | `ReturnGuard.Examples.collisionLadder_no_endpointTerminalWord`, `ReturnGuard.Examples.cycle_no_endpointTerminalWord` |
 | At a primitive drift divisor, a safe quotient certificate exists exactly when the center avoids the scaled base-power orbit | `ReturnGuard.hasQuotientCertificate_iff_centerPowerOrbit_avoids` |
 | For nonzero center and scale, the excluded orbit is exactly the cyclic subgroup generated by the base | `ReturnGuard.mem_centerPowerOrbit_iff_centerRatio_mem_zpowers` |

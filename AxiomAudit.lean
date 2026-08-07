@@ -254,6 +254,7 @@ open MatrixMortality
 #print axioms ReturnGuard.integralStep_novel_cancel_iff_cyclotomic_terminalCongruent
 #print axioms ReturnGuard.primitiveIntegralStep_cumulativeEndpointStep
 #print axioms ReturnGuard.CumulativeEndpointStep.target_unique
+#print axioms ReturnGuard.PrimitiveEndpointReduction.guardedStep_endpointState
 #print axioms ReturnGuard.PrimitiveEndpointReduction.content_natAbs_eq_gcd_support
 #print axioms ReturnGuard.reverseComplement_dvd_targetResultant
 #print axioms PadicValuation.odd_prime_of_adjacent_units
@@ -321,6 +322,7 @@ open MatrixMortality
 #print axioms ReturnGuard.Examples.decreasingMortal_reachable
 #print axioms ReturnGuard.Examples.increasingMortal_reachable
 #print axioms ReturnGuard.Examples.orderBreaker_shatters_resetBall
+#print axioms ReturnGuard.Examples.periodicShadow_obstruction
 #print axioms ReturnGuard.evaluationFrameTransition_eq_coboundary
 #print axioms ReturnGuard.evaluationFrameTransition_det
 #print axioms ReturnGuard.deep_frameDefect_forces_stateDepth_eq_anchorDepth

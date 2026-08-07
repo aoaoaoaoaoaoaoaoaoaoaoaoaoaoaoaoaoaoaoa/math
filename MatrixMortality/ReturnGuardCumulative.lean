@@ -20,6 +20,10 @@ noncomputable section
 def pairVector (pair : ℤ × ℤ) : Fin 2 → ℤ :=
   ![pair.1, pair.2]
 
+/-- Guard state represented by one primitive terminal-endpoint pair. -/
+def endpointState (scale : ℤ) (pair : ℤ × ℤ) : ℚ :=
+  1 + pair.1 / (scale * pair.2)
+
 /-- Terminal endpoint pair canonically induced by one integral residual pair. -/
 def endpointPair
     (centerNumerator driftNumerator scale : ℤ) (residual : ℤ × ℤ) :
@@ -101,6 +105,81 @@ structure PrimitiveEndpointReduction
   step :
     CumulativeEndpointStep prime depth centerNumerator driftNumerator scale
       wait source (content * target.1, content * target.2)
+
+/-- A primitive endpoint reduction is the corresponding rational guard step. -/
+theorem PrimitiveEndpointReduction.guardedStep_endpointState
+    (parameters : Parameters)
+    {centerNumerator driftNumerator scale : ℤ}
+    {wait : Nat} {source target : ℤ × ℤ} {content : ℤ}
+    (reduction : PrimitiveEndpointReduction parameters.prime parameters.depth
+      centerNumerator driftNumerator scale wait source target content)
+    (center_eq : parameters.center = (centerNumerator : ℚ) / scale)
+    (drift_eq : drift parameters.center parameters.reset = (driftNumerator : ℚ) / scale)
+    (scale_ne : scale ≠ 0) (source_denominator_ne : source.2 ≠ 0)
+    (target_denominator_ne : target.2 ≠ 0) :
+    guardedStep parameters wait (some (endpointState scale source)) =
+      some (endpointState scale target) := by
+  have scale_ne_rat : (scale : ℚ) ≠ 0 := by exact_mod_cast scale_ne
+  have source_denominator_ne_rat : (source.2 : ℚ) ≠ 0 := by
+    exact_mod_cast source_denominator_ne
+  have target_denominator_ne_rat : (target.2 : ℚ) ≠ 0 := by
+    exact_mod_cast target_denominator_ne
+  have content_ne_rat : (content : ℚ) ≠ 0 := by
+    exact_mod_cast reduction.content_ne
+  have prime_power_ne :
+      (parameters.prime : ℚ) ^ (parameters.depth * wait) ≠ 0 :=
+    pow_ne_zero _ parameters.prime_ne_zero
+  have denominator_eq :
+      endpointState scale source - parameters.prime ^ wait =
+        parameters.prime ^ (parameters.depth * wait) * content * target.2 /
+          (scale * source.2) := by
+    have integer_eq := reduction.step.denominator
+    have rational_eq :
+        (parameters.prime : ℚ) ^ (parameters.depth * wait) *
+            (content * target.2) =
+          source.1 - scale * ((parameters.prime : ℚ) ^ wait - 1) * source.2 := by
+      exact_mod_cast integer_eq
+    rw [endpointState]
+    field_simp [scale_ne_rat, source_denominator_ne_rat]
+    rw [Nat.mul_comm parameters.depth wait] at rational_eq
+    linear_combination -rational_eq
+  have not_pole : endpointState scale source ≠ parameters.prime ^ wait := by
+    apply sub_ne_zero.mp
+    rw [denominator_eq]
+    exact div_ne_zero
+      (mul_ne_zero (mul_ne_zero prime_power_ne content_ne_rat)
+        target_denominator_ne_rat)
+      (mul_ne_zero scale_ne_rat source_denominator_ne_rat)
+  rw [guardedStep_some parameters wait _ not_pole]
+  congr 1
+  have defect_eq :
+      guardDefect parameters wait (endpointState scale source) =
+        driftNumerator * source.1 / (scale * content * target.2) := by
+    rw [guardDefect, drift_eq, denominator_eq, endpointState]
+    field_simp [scale_ne_rat, source_denominator_ne_rat, content_ne_rat,
+      target_denominator_ne_rat, prime_power_ne]
+    ring
+  rw [defect_eq, endpointState, center_eq]
+  have integer_eq := reduction.step.numerator
+  have rational_eq :
+      (content : ℚ) * target.1 =
+        driftNumerator * source.1 +
+          (centerNumerator - scale) * (content * target.2) := by
+    exact_mod_cast integer_eq
+  calc
+    (centerNumerator : ℚ) / scale +
+          driftNumerator * source.1 / (scale * content * target.2) =
+        (centerNumerator * content * target.2 + driftNumerator * source.1) /
+          (scale * content * target.2) := by
+      field_simp [scale_ne_rat, content_ne_rat, target_denominator_ne_rat]
+      ring
+    _ = (scale * content * target.2 + content * target.1) /
+          (scale * content * target.2) := by
+      congr 1
+      linear_combination -rational_eq
+    _ = 1 + (target.1 : ℚ) / (scale * target.2) := by
+      field_simp [scale_ne_rat, content_ne_rat, target_denominator_ne_rat]
+      ring
 
 /-- Primitive reduction of the residual recurrence induces the content-free endpoint step.
 The removed content scales the target pair but never becomes an independent state variable. -/

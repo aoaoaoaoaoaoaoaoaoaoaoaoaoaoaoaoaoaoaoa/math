@@ -47,6 +47,7 @@ import MatrixMortality.ReturnGuardPeriodicity
 import MatrixMortality.ReturnGuardFiniteOrbit
 import MatrixMortality.ReturnGuardRail
 import MatrixMortality.ReturnGuardExamples
+import MatrixMortality.ReturnGuardPeriodicShadow
 import MatrixMortality.ReturnGuardQuotientExamples
 
 /- Finite-controller amalgamation. -/
