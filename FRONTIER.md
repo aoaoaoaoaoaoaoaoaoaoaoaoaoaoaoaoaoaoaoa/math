@@ -274,12 +274,19 @@ Two architectures survive.
    product of `2 × 2` bridges `B Mᵢ A` vanishes. The residue-two wall
    [`M4-O08`](SALVAGE.md#m4-o08-residue-two-necessary-wall) now removes every word whose gaps
    lie in residues zero and one: after integral scaling and reduction modulo three, every such
-   atom preserves two nonzero rays. Hence every exact zero contains a residue-two gap.
+   atom preserves two nonzero rays. Hence every exact zero contains a residue-two gap. The
+   residue-zero safe-bridge cone
+   [`M4-S02`](SALVAGE.md#m4-s02-residue-zero-safe-bridge-cone) also proves that every nonempty
+   regular bridge made solely from residue-zero atoms has negative determinant. Any singular
+   nonempty safe bridge must therefore contain a regular residue-one atom.
 
 The next source experiment should specify an open-residue invariant before choosing appendants.
 The next matrix attack begins at the first residue-two atom, with arbitrary residue-{0,1} blocks
-on both sides. It must lift the bridge automaton's exceptional modulo-three states either to an
-isolated paired-Neary boundary or to an unavoidable malformed zero. The one-step annihilator obligation
+on both sides. A safe-return proof may first compress maximal residue-zero runs and decide the
+remaining residue-one skeleton, but finite local valuation digits alone cannot supply that
+decision. The attack must
+lift the bridge automaton's exceptional modulo-three states either to an isolated paired-Neary
+boundary or to an unavoidable malformed zero. The one-step annihilator obligation
 [`M4-O06`](SALVAGE.md#m4-o06-punctuation-image-annihilator) is already discharged for every gap;
 finite gap enumeration, bare rank-one incidence, and closed-block products are no longer frontier
 work. Any proposal whose semantic queue is a finite word of complete tokens is already closed.

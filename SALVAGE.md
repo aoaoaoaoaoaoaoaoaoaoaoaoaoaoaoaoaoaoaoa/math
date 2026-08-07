@@ -121,6 +121,7 @@ file owns the mathematical stock.
 | [`M4-O07`](#m4-o07-closed-residue-monomial-obstruction) | obstruction | ternary closed residues cannot align the monomial blade column | audited | graduated |
 | [`M4-M03`](#m4-m03-parabolic-blade-and-bridge-grammar) | partial mechanism | an open cube root has one singular atom and exact `2 × 2` bridge semantics | formalized | active |
 | [`M4-O08`](#m4-o08-residue-two-necessary-wall) | obstruction | every residue-zero or residue-one atom preserves a nonvanishing two-ray quotient | formalized | graduated |
+| [`M4-S02`](#m4-s02-residue-zero-safe-bridge-cone) | structure theorem | every nonempty residue-zero regular safe bridge has negative determinant | audited | active |
 | [`G3-O01`](#g3-o01-four-role-macro-irreducibility) | obstruction | exact nonerasing macros cannot reduce the four source roles to three letters | formalized | graduated |
 | [`G3-S01`](#g3-s01-shift-equivariant-zero-incidence) | structure theorem | same-zero state dimension is equivariant projective incidence dimension | audited | active |
 | [`G3-M01`](#g3-m01-free-group-discrepancy-engine) | partial mechanism | free cancellation implements queue deletion with an all-path converse | reported | active |
@@ -3928,12 +3929,16 @@ for arbitrary `3 × 3` middle matrices. The complete malformed-word problem is t
 
 **Scope:** this constructs and classifies the matrix mechanism. The residue-two wall
 [`M4-O08`](#m4-o08-residue-two-necessary-wall) proves that every word whose gaps are congruent
-to zero or one modulo three is nonzero. It does not supply open contexts whose boundary rays
-realize the paired Neary zero series, nor classify bridge zeros after a residue-two atom occurs.
-No `M₄(3)` theorem follows yet.
+to zero or one modulo three is nonzero. The safe-bridge cone
+[`M4-S02`](#m4-s02-residue-zero-safe-bridge-cone) further excludes singular regular bridges
+made solely from residue-zero atoms. These results do not supply open contexts whose boundary
+rays realize the paired Neary zero series, nor classify bridge zeros after a residue-two atom
+occurs. No `M₄(3)` theorem follows yet.
 
 **Use:** all further cube-root work begins with the first residue-two atom in the bridge
-language. Do not redo finite-gap searches, rank-one incidence, or residue-{0,1} products.
+language. Any singular nonempty safe bridge must contain a regular residue-one atom. Do not redo
+finite-gap searches, rank-one incidence, raw residue-{0,1} products, or residue-zero-only safe
+return.
 
 **Next:** classify one residue-two atom with arbitrary residue-{0,1} contexts on both sides.
 Either construct boundary contexts whose bridge product vanishes exactly at the intended scalar
@@ -3978,6 +3983,43 @@ extend or fracture that classification at successive residue-two atoms.
 **Artifact:** `ParabolicBlade.residueTwoWall_wordProduct_ne_zero` in
 [`MatrixMortality/ParabolicResidueWall.lean`](MatrixMortality/ParabolicResidueWall.lean) and
 [`audits/m43-residue-two-wall-2026-08-05.md`](audits/m43-residue-two-wall-2026-08-05.md).
+
+### M4-S02: Residue-zero safe-bridge cone
+
+**Kind:** arbitrary-length bridge invariant
+
+**Evidence:** audited
+
+**Disposition:** active
+
+In triangle coordinates, bridge singularity is `u=0` and the empty bridge starts at
+`(u,v,w)=(0,22,9)`. The cone
+
+```text
+u≤0,       v>w>0
+```
+
+is sent strictly into `u<0, v>w>0` by every residue-zero `b`- or `c`-atom. The proof uses the
+exact transition rows and the uniform Neary inequalities `2M-L-5>0` and `3L-2M>0`. Induction
+therefore gives
+
+```text
+W nonempty and every gap of W is 0 mod 3  →  det K(W)<0.
+```
+
+**Scope:** arbitrary letters, waits, word length, `β`, and encoded body, but only regular bridge
+blocks containing residue-zero atoms. Residue-one atoms are not controlled. A companion
+two-letter family approaches the singular wall to arbitrary `3`-adic precision, so finite local
+digits cannot replace the Archimedean cone.
+
+**Use:** any singular nonempty safe bridge contains a regular residue-one atom. Compress maximal
+residue-zero runs and attack the resulting residue-one skeleton; do not revisit closed-only
+bridge return or finite local valuation separation.
+
+**Next:** prove or refute safe return for arbitrary alternations of residue-one atoms and
+residue-zero runs, then consume the result in the one-defect sandwich.
+
+**Artifact:** [`audits/m43-safe-return-2026-08-06.md`](audits/m43-safe-return-2026-08-06.md).
 
 ## Three-Letter Source Frontier
 
