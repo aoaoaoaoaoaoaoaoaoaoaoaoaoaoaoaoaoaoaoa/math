@@ -436,6 +436,23 @@ reject a theorem anchored at reset or the terminal boundary: every constructed s
 reset, while reset itself is fixed. See
 [`audits/m32-periodic-shadow-2026-08-06.md`](audits/m32-periodic-shadow-2026-08-06.md).
 
+The proposed positive-renewal continuation is also closed. The existing exact branch-similarity
+theorem already proves that every nonempty aligned macro subtracts its full schedule weight from
+p-adic separation, so no fixed macro or finite aligned ray cycle can replenish shadow depth.
+Formalization strengthens the fixed obstruction family in the other direction: exact remaining
+depth two, together with fixed coefficients, wait, content, and Smith label, coexists with
+arbitrarily large endpoint and carried heights. A new cumulative theorem records the
+reset-history datum exposed by this attack exactly:
+
+```text
+Δ(P₀,adj(M_u)V)=p^(s∑u)Δ(Pᶜ_u,V).
+```
+
+The local renewal dichotomy is therefore exhausted. The live question is an effective
+compactness theorem for these moving pulled-back rays, or an essentially aperiodic reset orbit
+which changes rays and threshold residues without repetition. See
+[`audits/m32-renewal-collapse-2026-08-07.md`](audits/m32-renewal-collapse-2026-08-07.md).
+
 These are structural and decidable-stratum theorems, not an `M₃(2)` resolution. The imported
 order-four Skolem theorem used to classify rank-one profiles is not reimplemented in Lean. The
 generic reverse edge compiler still assumes `αβ≠0`, and no universality or decision theorem is
@@ -577,7 +594,7 @@ with a complete arbitrary-word converse.
 | `ReturnGuardIntegralLift.lean` | canonical rational pairs, decoded-to-integral execution lifting, and quotient certificates of physical immortality |
 | `ReturnGuardQuotientCompleteness.lean` | zero-wait terminal kernel, cancellation-reachability completeness, and synchronized-product no-amplification |
 | `ReturnGuardDriftCertificate.lean` | exact drift-divisor certificate classification, cyclic subgroup criterion, and executable finite test |
-| `ReturnGuardCumulative.lean` | content-free cumulative endpoint execution, exact second-order recurrence, primitive endpoint projectivization, odd-resultant immortality, and derived primitive content |
+| `ReturnGuardCumulative.lean` | content-free cumulative endpoint execution, exact second-order recurrence, reset-ancestry pullback, primitive endpoint projectivization, odd-resultant immortality, and derived primitive content |
 | `ReturnGuardContinued.lean` | fixed-cusp complete quotients, primitive prequotient transport, recurrent-boundary reverse persistence, record-ascent content budget, and order-three decoder |
 | `ReturnGuardBoundary.lean` | depth-two universal-boundary reset ball, valuation-wall immortality, and primewise reset-resultant necessity |
 | `ReturnGuardSmith.lean` | signed content split, positive-cone primitive-height gain, nonmaximal contraction, maximal-step isolation, and diagonalized gauged cocycle |
@@ -591,7 +608,7 @@ with a complete arbitrary-word converse.
 | `ReturnGuardResonance.lean` | nonresonant descent, resonance localization, and corrected nested readiness |
 | `ReturnGuardRail.lean` | polynomial divisibility and rational affine-wait rail obstruction |
 | `ReturnGuardExamples.lean` | one- and two-step mortal pairs, nonterminal fixed point, nested rational period-three orbit, endpoint boundary certificates, and ready order-breaking reset-ball ejection |
-| `ReturnGuardPeriodicShadow.lean` | fixed-reset periodic-shadow family and uniform all-corridor carried/Smith descent obstruction |
+| `ReturnGuardPeriodicShadow.lean` | fixed-reset periodic-shadow family, uniform all-corridor descent obstruction, and fixed-depth unbounded endpoint-height obstruction |
 | `ReturnGuardQuotientExamples.lean` | four-state modulo-eleven certificate excluding every primitive terminal execution of the period-three guard |
 | `BinaryDefect.lean` | binary two-word defect theorem and exact Neary macro obstruction |
 | `CHHNPacking.lean` | generic two-slot CHHN packing and six-state finite-Hankel kernels |

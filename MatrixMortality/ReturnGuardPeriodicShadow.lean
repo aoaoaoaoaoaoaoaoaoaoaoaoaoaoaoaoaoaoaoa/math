@@ -7,7 +7,8 @@ One fixed even-resultant depth-two guard has a fixed reset yet admits arbitraril
 off-reset corridors. Every edge has nonmaximal Smith coordinate `v = 2` and exact forward
 content `-4`; arbitrarily long runs of consecutive carried and Smith coordinates are primitive
 and strictly height-increasing. This excludes coefficient-uniform bounded descent over all legal
-corridors; any surviving decision theorem must use reset or terminal history.
+corridors. Even after the remaining shadow depth and every local label are fixed, endpoint and
+carried height are unbounded; any surviving decision theorem must use reset or terminal history.
 -/
 
 namespace MatrixMortality.ReturnGuard.Examples
@@ -222,6 +223,75 @@ private theorem periodicShadowDenominator_lt_next
   have difference := periodicShadowDenominator_next_sub index_le
   have positive : 0 < (10 : ℤ) ^ index * 9 ^ (shadowDepth - index) := by positivity
   linarith
+
+private theorem periodicShadowDenominator_index_le
+    {shadowDepth index : Nat} (index_positive : 0 < index)
+    (index_le : index ≤ shadowDepth + 1) :
+    (index : ℤ) ≤ periodicShadowDenominator shadowDepth index := by
+  induction index with
+  | zero => omega
+  | succ index induction =>
+      by_cases index_zero : index = 0
+      · subst index
+        have positive :=
+          periodicShadowDenominator_positive
+            (shadowDepth := shadowDepth) (index := 1) (by omega) (by omega)
+        norm_num at positive ⊢
+        omega
+      · have prior := induction (Nat.pos_of_ne_zero index_zero) (by omega)
+        have ascent :=
+          periodicShadowDenominator_lt_next
+            (shadowDepth := shadowDepth) (index := index) (by omega)
+        push_cast
+        omega
+
+private theorem periodicShadowCarried_penultimate_depth
+    (index : Nat) (index_positive : 0 < index) :
+    HasValue 3
+      (((periodicShadowCarried (index + 1) index).2 : ℚ) /
+          (periodicShadowCarried (index + 1) index).1 + 4)
+      2 := by
+  let source := periodicShadowDenominator (index + 1) index
+  let target := periodicShadowDenominator (index + 1) (index + 1)
+  have source_unit : IsUnit 3 (source : ℚ) :=
+    periodicShadowDenominator_three_unit index_positive (by omega)
+  have difference :=
+    periodicShadowDenominator_next_sub
+      (shadowDepth := index + 1) (index := index) (by omega)
+  have difference_rat := congrArg (fun value : ℤ => (value : ℚ)) difference
+  push_cast at difference_rat
+  have minus_four_unit : IsUnit 3 (-4 : ℚ) := by
+    exact intCast_isUnit_of_not_dvd (by norm_num : ¬(3 : ℤ) ∣ (-4 : ℤ))
+  have ten_unit : IsUnit 3 (10 : ℚ) := by
+    exact intCast_isUnit_of_not_dvd (by norm_num : ¬(3 : ℤ) ∣ (10 : ℤ))
+  have ten_power_unit : IsUnit 3 ((10 : ℚ) ^ index) := by
+    refine ⟨pow_ne_zero index ten_unit.1, ?_⟩
+    rw [padicValRat.pow (p := 3) (q := (10 : ℚ)) ten_unit.1,
+      ten_unit.2]
+    simp
+  have numerator_value :
+      HasValue 3 ((3 : ℚ) ^ 2 * ((-4 : ℚ) * 10 ^ index)) 2 := by
+    simpa using
+      mul_hasValue (primePower_hasValue (prime := 3) 2)
+        (mul_hasValue minus_four_unit ten_power_unit)
+  have quotient_value := div_hasValue numerator_value source_unit
+  have expression :
+      ((periodicShadowCarried (index + 1) index).2 : ℚ) /
+            (periodicShadowCarried (index + 1) index).1 + 4 =
+        (3 : ℚ) ^ 2 * ((-4 : ℚ) * 10 ^ index) / source := by
+    simp only [periodicShadowCarried, Prod.fst, Prod.snd, Int.cast_mul,
+      Int.cast_neg, Int.cast_ofNat]
+    change (-4 : ℚ) * target / source + 4 =
+      (3 : ℚ) ^ 2 * ((-4 : ℚ) * 10 ^ index) / source
+    have exponent_eq : index + 1 - index = 1 := by omega
+    rw [exponent_eq, pow_one] at difference_rat
+    have target_eq : (target : ℚ) = source + 10 ^ index * 9 := by
+      linarith
+    rw [target_eq]
+    field_simp [source_unit.1]
+    ring
+  rw [expression]
+  exact quotient_value
 
 private theorem periodicShadowDenominator_constant_relation
     {shadowDepth index : Nat} (index_le : index ≤ shadowDepth) :
@@ -666,6 +736,89 @@ theorem periodicShadow_obstruction (bound : Nat) :
     periodicShadowSmith_raw_eq _ _,
     periodicShadowSmith_coprime shadowDepth_odd shadowDepth_three index_positive index_lt,
     periodicShadowSmith_height_lt index_positive index_lt⟩
+
+/-- Fixed coefficients, wait, content, Smith label, and remaining shadow depth do not bound the
+endpoint or carried height of a legal primitive edge. -/
+theorem periodicShadow_shatters_localCompactness (bound : Nat) :
+    ∃ shadowDepth index,
+      LegalStep periodicShadowParameters
+          (periodicShadowState shadowDepth index)
+          (periodicShadowState shadowDepth (index + 1)) ∧
+        periodicShadowState shadowDepth index ≠ periodicShadowParameters.reset ∧
+        PrimitiveEndpointReduction 3 2 17 (-5) 16 1
+          (periodicShadowEndpoint shadowDepth index)
+          (periodicShadowEndpoint shadowDepth (index + 1)) (-4) ∧
+        periodicShadowSmithSplit.v = 2 ∧
+        IsCoprime (periodicShadowCarried shadowDepth index).1
+          (periodicShadowCarried shadowDepth index).2 ∧
+        HasValue 3
+          (((periodicShadowCarried shadowDepth index).2 : ℚ) /
+              (periodicShadowCarried shadowDepth index).1 + 4)
+          2 ∧
+        bound <
+          integralPairHeight (periodicShadowEndpoint shadowDepth index).1
+            (periodicShadowEndpoint shadowDepth index).2 ∧
+        bound <
+          integralPairHeight (periodicShadowCarried shadowDepth index).1
+            (periodicShadowCarried shadowDepth index).2 := by
+  let index := 2 * (bound + 1)
+  let shadowDepth := index + 1
+  have shadowDepth_odd : Odd shadowDepth := by
+    exact ⟨bound + 1, by simp [shadowDepth, index]⟩
+  have shadowDepth_three : 3 ≤ shadowDepth := by simp [shadowDepth, index]
+  have index_positive : 0 < index := by simp [index]
+  have index_lt : index < shadowDepth := by simp [shadowDepth]
+  have denominator_positive :=
+    periodicShadowDenominator_positive
+      (shadowDepth := shadowDepth) (index := index) index_positive (by omega)
+  have index_le_denominator :=
+    periodicShadowDenominator_index_le
+      (shadowDepth := shadowDepth) (index := index) index_positive (by omega)
+  have index_le_abs :
+      index ≤ (periodicShadowDenominator shadowDepth index).natAbs := by
+    have cast_bound :
+        (index : ℤ) ≤
+          ((periodicShadowDenominator shadowDepth index).natAbs : ℤ) := by
+      rw [Int.natAbs_of_nonneg denominator_positive.le]
+      exact index_le_denominator
+    exact_mod_cast cast_bound
+  have bound_lt_abs :
+      bound < (periodicShadowDenominator shadowDepth index).natAbs :=
+    (by omega : bound < index).trans_le index_le_abs
+  refine ⟨shadowDepth, index,
+    periodicShadow_legalStep shadowDepth_odd shadowDepth_three index_positive index_lt,
+    periodicShadowState_ne_reset index_positive index_lt.le,
+    periodicShadow_reduction shadowDepth_odd shadowDepth_three index_positive index_lt,
+    rfl,
+    periodicShadowCarried_coprime shadowDepth_odd shadowDepth_three
+      index_positive index_lt,
+    ?_, ?_, ?_⟩
+  · simpa [shadowDepth] using
+      periodicShadowCarried_penultimate_depth index index_positive
+  · apply bound_lt_abs.trans_le
+    have denominator_le_height :
+        (periodicShadowDenominator shadowDepth index).natAbs ≤
+          integralPairHeight (periodicShadowEndpoint shadowDepth index).1
+            (periodicShadowEndpoint shadowDepth index).2 := by
+      change
+        (periodicShadowDenominator shadowDepth index).natAbs ≤
+          max
+            (32 * periodicShadowDenominator shadowDepth index -
+              36 * periodicShadowDenominator shadowDepth (index + 1)).natAbs
+            (periodicShadowDenominator shadowDepth index).natAbs
+      exact le_max_right _ _
+    exact denominator_le_height
+  · apply bound_lt_abs.trans_le
+    have denominator_le_height :
+        (periodicShadowDenominator shadowDepth index).natAbs ≤
+          integralPairHeight (periodicShadowCarried shadowDepth index).1
+            (periodicShadowCarried shadowDepth index).2 := by
+      change
+        (periodicShadowDenominator shadowDepth index).natAbs ≤
+          max (periodicShadowDenominator shadowDepth index).natAbs
+            (-4 * periodicShadowDenominator shadowDepth (index + 1)).natAbs
+      exact le_max_left _ _
+    exact denominator_le_height
 
 end
 end MatrixMortality.ReturnGuard.Examples

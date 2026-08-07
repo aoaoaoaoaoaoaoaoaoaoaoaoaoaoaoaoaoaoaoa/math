@@ -96,6 +96,7 @@ file owns the mathematical stock.
 | [`R32-O10`](#r32-o10-ready-order-breaking-bridge-ejection) | obstruction | a ready order-breaking bridge can eject a strict reset ball without auxiliary cancellation while amplifying denominator height | formalized | graduated |
 | [`R32-O11`](#r32-o11-terminal-only-pole-contraction-is-a-decision-oracle) | obstruction | terminal-only contraction constants are pointwise vacuous; uniform effectivity is already a terminal bound | audited | graduated |
 | [`R32-O12`](#r32-o12-periodic-shadow-obstruction) | obstruction | one fixed guard has arbitrarily long off-reset primitive corridors with nonmaximal Smith allocation and rising carried and Smith coordinate runs | formalized | graduated |
+| [`R32-O13`](#r32-o13-renewal-graph-collapse-and-reset-pullback) | obstruction | every aligned macro consumes shadow depth, local bounded depth does not bound height, and reset ancestry is one exact pulled-back determinant | formalized | graduated |
 | [`R32-S07`](#r32-s07-decoded-residual-address-normal-form) | structure theorem | mortality is finite inverse-address membership in disjoint rational p-adic branch spheres | formalized | active |
 | [`R32-M05`](#r32-m05-cyclotomic-reset-or-cancellation-sieve) | partial mechanism | every primitive reduction either resets modulo a cyclotomic prime or swallows it in the common cancellation | formalized | active |
 | [`R32-S08`](#r32-s08-cumulative-endpoint-recurrence) | structure theorem | cumulative endpoint pairs absorb every normalization scalar into one deterministic exact-division recurrence | formalized | active |
@@ -3781,6 +3782,69 @@ audit: [`m32-periodic-shadow-2026-08-06.md`](audits/m32-periodic-shadow-2026-08-
 decision proof must use reset or terminal history and retain the unbounded arithmetic depth of a
 near-periodic shadow; the opposing construction must make one fixed reset orbit concatenate such
 episodes rather than merely exhibit them off orbit.
+
+### R32-O13: Renewal-graph collapse and reset pullback
+
+**Kind:** obstruction
+**Evidence:** formalized
+**Disposition:** graduated
+
+The proposed episode-local renewal dichotomy has no surviving arm. Its reset-anchored bounded-
+depth arm could survive only by using full ancestry absent from a local renewal graph. For every
+legal wait word `w`, the already-checked exact similarity gives
+
+```text
+vₚ(F_w(x)−F_w(y))=vₚ(x−y)−s∑w.
+```
+
+Every honest aligned renewal edge therefore has negative depth weight, and every finite aligned
+cycle has strictly negative total weight. A misaligned ray switch caps sufficiently deep inputs
+at the fixed separation of the transported and target rays; extra depth occurs only on one
+threshold shell through leading-residue cancellation and is not an iterable macro weight.
+
+The opposite implication also fails locally. In the fixed guard of
+[`R32-O12`](#r32-o12-periodic-shadow-obstruction), for every bound there is a legal off-reset
+wait-one edge with content `−4`, Smith coordinate `v=2`, primitive carried pair `X`, and
+
+```text
+v₃(X₂/X₁+4)=2
+```
+
+whose endpoint and carried heights both exceed the bound. Thus bounded shadow depth plus every
+finite local label does not yield a finite endpoint box.
+
+Reset history is retained exactly by the new cumulative pullback law. If
+
+```text
+M_uP₀=p^(s∑u)Pᶜ_u,
+```
+
+then for every integral reference ray `V`,
+
+```text
+Δ(P₀,adj(M_u)V)=p^(s∑u)Δ(Pᶜ_u,V).
+```
+
+When `Pᶜ_u=H_uP_u`, this is the primitive-content form with the additional factor `H_u`. A deep
+shadow reached from reset is therefore one high-power divisibility condition on a moving
+pulled-back ray, not a finite renewal-state label.
+
+**Scope:** no compactness extraction has been proved. An infinite orbit may have unbounded
+height while remaining at bounded depth from every fixed rational periodic ray, or may visit
+infinitely many rays and threshold residues. Varying factors `p^a−1` prevent a fixed-support
+`S`-unit conclusion from the pullback identity alone.
+
+**Artifact:** `CumulativeEndpointExecution.pullback_projectivePairCross` in
+[`ReturnGuardCumulative.lean`](MatrixMortality/ReturnGuardCumulative.lean),
+`Examples.periodicShadow_shatters_localCompactness` in
+[`ReturnGuardPeriodicShadow.lean`](MatrixMortality/ReturnGuardPeriodicShadow.lean), and
+[`m32-renewal-collapse-2026-08-07.md`](audits/m32-renewal-collapse-2026-08-07.md).
+
+**Use:** retire fixed positive-depth renewal cycles and episode-local finite-box arguments. The
+live decision route must extract a fixed recurrent macro or ray from the complete reset ancestry,
+or directly bound the moving determinant family. The opposing construction must be essentially
+aperiodic and realize infinitely many threshold cancellations; repeating one finite shadow
+gadget cannot work.
 
 ### R32-D03: Bounded-denominator periodicity
 

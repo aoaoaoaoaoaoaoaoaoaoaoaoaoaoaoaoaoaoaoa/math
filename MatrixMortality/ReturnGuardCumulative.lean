@@ -6,7 +6,8 @@ import MatrixMortality.ReturnGuardEndpoint
 Primitive normalization is not dynamical state.  Retaining every removed scalar turns the
 terminal endpoint orbit into one integral pair recurrence with exact division by the forced
 base power.  The reduced denominators and their signed contents are recovered from that pair;
-they are not carried independently.
+they are not carried independently. Pulling a moving reference ray backward through a complete
+endpoint word exposes reset ancestry as one exact prime-power-divisible determinant.
 -/
 
 namespace MatrixMortality.ReturnGuard
@@ -366,6 +367,33 @@ theorem CumulativeEndpointExecution.transfer
       rw [endpointProduct_cons, ← Matrix.mulVec_mulVec, step.transfer,
         Matrix.mulVec_smul, induction, smul_smul]
       rw [List.sum_cons, Nat.mul_add, pow_add]
+
+/-- Pulling an integral reference ray through a cumulative endpoint word exposes the full
+reset-ancestry prime power in one exact projective determinant. -/
+theorem CumulativeEndpointExecution.pullback_projectivePairCross
+    {prime depth : Nat} {centerNumerator driftNumerator scale : ℤ}
+    {waits : List Nat} {source target : ℤ × ℤ}
+    (execution :
+      CumulativeEndpointExecution prime depth centerNumerator driftNumerator scale
+        waits source target)
+    (reference : ℤ × ℤ) :
+    projectivePairCross source
+        ((((endpointProduct (prime : ℤ) depth centerNumerator driftNumerator scale
+              waits).adjugate *ᵥ pairVector reference) 0),
+          (((endpointProduct (prime : ℤ) depth centerNumerator driftNumerator scale
+              waits).adjugate *ᵥ pairVector reference) 1)) =
+      (prime : ℤ) ^ (depth * waits.sum) *
+        projectivePairCross target reference := by
+  let matrix :=
+    endpointProduct (prime : ℤ) depth centerNumerator driftNumerator scale waits
+  have transported := execution.transfer
+  have first := congrFun transported 0
+  have second := congrFun transported 1
+  change matrix *ᵥ pairVector source =
+    (prime : ℤ) ^ (depth * waits.sum) • pairVector target at transported
+  simp [matrix, Matrix.adjugate_fin_two, projectivePairCross, Matrix.mulVec,
+    Matrix.dotProduct, Fin.sum_univ_succ, pairVector, smul_eq_mul] at first second ⊢
+  linear_combination reference.2 * first - reference.1 * second
 
 /-- The signed primitive content is exactly the gcd of the endpoint prequotient and the full
 cyclotomic determinant support. -/

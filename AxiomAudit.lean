@@ -260,6 +260,7 @@ open MatrixMortality
 #print axioms PadicValuation.odd_prime_of_adjacent_units
 #print axioms ReturnGuard.Parameters.prime_odd
 #print axioms ReturnGuard.CumulativeEndpointExecution.transfer
+#print axioms ReturnGuard.CumulativeEndpointExecution.pullback_projectivePairCross
 #print axioms ReturnGuard.not_physical_isMortal_of_resetResultant_odd
 #print axioms ReturnGuard.cumulativeNumerator_recurrence
 #print axioms ReturnGuard.terminalTruncant_eq_cumulativeNumerator
@@ -323,6 +324,7 @@ open MatrixMortality
 #print axioms ReturnGuard.Examples.increasingMortal_reachable
 #print axioms ReturnGuard.Examples.orderBreaker_shatters_resetBall
 #print axioms ReturnGuard.Examples.periodicShadow_obstruction
+#print axioms ReturnGuard.Examples.periodicShadow_shatters_localCompactness
 #print axioms ReturnGuard.evaluationFrameTransition_eq_coboundary
 #print axioms ReturnGuard.evaluationFrameTransition_det
 #print axioms ReturnGuard.deep_frameDefect_forces_stateDepth_eq_anchorDepth

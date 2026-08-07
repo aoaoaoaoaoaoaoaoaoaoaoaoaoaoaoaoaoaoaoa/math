@@ -518,6 +518,9 @@
 'MatrixMortality.ReturnGuard.CumulativeEndpointExecution.transfer' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.ReturnGuard.CumulativeEndpointExecution.pullback_projectivePairCross' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.ReturnGuard.not_physical_isMortal_of_resetResultant_odd' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
@@ -665,6 +668,9 @@
  Classical.choice,
  Quot.sound]
 'MatrixMortality.ReturnGuard.Examples.periodicShadow_obstruction' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.Examples.periodicShadow_shatters_localCompactness' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
 'MatrixMortality.ReturnGuard.evaluationFrameTransition_eq_coboundary' depends on axioms: [propext,

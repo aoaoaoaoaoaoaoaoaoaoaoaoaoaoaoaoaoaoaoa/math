@@ -999,6 +999,27 @@ construction is not reset-started and does not reach terminal. It moves the live
 from local block geometry to the arithmetic depth with which the actual reset orbit may enter,
 shadow, and leave a periodic ray.
 
+[`R32-O13`](SALVAGE.md#r32-o13-renewal-graph-collapse-and-reset-pullback) closes the resulting
+local renewal dichotomy. The exact common-branch similarity already proves that every nonempty
+aligned macro consumes `s∑aᵢ` units of p-adic shadow depth, so a fixed positive-depth renewal
+macro and every finite aligned ray cycle are impossible. A misaligned switch can exceed the
+fixed ray-separation depth only on one threshold shell through leading-residue cancellation; it
+has no iterable weight. Conversely, bounded depth does not give a local finite box. In the
+fixed periodic-shadow guard, exact remaining carried-ray depth two and fixed wait, content, and
+Smith label coexist with arbitrarily large endpoint and carried heights.
+
+Reset ancestry is instead the exact integral law
+
+```text
+Δ(P₀,adj(M_u)V)=p^(s∑u)Δ(Pᶜ_u,V),
+```
+
+where the cumulative endpoint `Pᶜ_u` retains every primitive normalization scalar. This
+identifies the surviving object without bounding it: the pulled-back ray and its cyclotomic
+prime support move with the whole prefix. Any infinite counter-orbit must therefore be
+essentially aperiodic, remaining shallow relative to each fixed ray or creating depth through
+infinitely many moving threshold cancellations.
+
 The remaining unbounded channel is now sharply Archimedean. The formalized
 [`R32-D03`](SALVAGE.md#r32-d03-bounded-denominator-periodicity) theorem says that every
 infinite legal rational orbit with bounded reduced denominators is eventually periodic.
@@ -1053,26 +1074,26 @@ all-legal block inequality for the carried generalized continuant. See
 
 | Lane | Required move | Present obstruction |
 | --- | --- | --- |
-| Reset-anchored shadow control | Bound first-hit terminal executions from reset while retaining the depth of every near-periodic episode | Arbitrarily deep legal shadows exist off reset and spend exactly two units of `3`-adic fixed-ray depth per wait-one step |
-| Shadow concatenation | Construct one fixed reset orbit which enters periodic shadows at unbounded depths and never terminates | The checked family supplies arbitrarily long episodes for one guard, but that guard's reset is itself fixed and disconnected from them |
-| Strong primitive pressure | Combine the checked cyclotomic pressure inequality with reset-anchored shadow renewal | Full multiplicity is charged on every no-reset branch, but the local inequality alone does not distinguish an off-reset shadow from the actual reset history |
-| Shadow-depth arithmetic | Prove that the actual reset orbit cannot create unbounded approximation depth to a periodic ray without cycling or entering a terminally bounded regime | The required depth is an unbounded valuation/history variable invisible to the finite Smith type and constant wait label |
-| Denominator counter | Construct one coefficient-aligned reset orbit with unbounded denominators and recurrent shadow episodes | Local p-adic symbolic freedom is complete, but endpoint content and rational height couple all branches globally |
+| Reset-ancestry compactness | Effectively extract one fixed ray or macro revisited at unbounded depth from every reset orbit with unbounded denominators | Fixed local labels and bounded depth do not bound height; the legal periodic rays and words form an infinite moving family |
+| Moving determinant bound | Control `Δ(P₀,adj(M_u)V_w)` uniformly over actual prefixes and legal periodic rays | The exact pullback carries the required base-prime power, but the moving ray retains varying cyclotomic support from `p^a−1` |
+| Strong primitive pressure | Combine full cyclotomic multiplicity with the reset-pullback determinant | The local pressure inequality does not bound the height or support of the pulled-back moving ray |
+| Aperiodic denominator counter | Construct one fixed reset orbit with unbounded denominators and infinitely many threshold ray switches | Every fixed aligned macro loses depth, so a counter-orbit must change rays, macros, or leading residues without eventual repetition |
 | Repeated-factor extraction | Force a sufficiently heavy repeated factor in every bounded-complexity wait prefix and apply `R32-S29` | Arbitrary repeated factors are controlled once found; no theorem yet extracts one from a moving denominator schedule |
 | Irreducible cubic fallback | Replace the split spectrum by a cubic return pencil with internal punctuation and a complete word normal form | No candidate yet matches the guard's exact illegal-branch soundness |
 | Exceptional reverse compiler | Absorb the finite `αβ=0` disjunction into one three-dimensional many-one instance | The generic rank-`(2,2)` compiler is complete; dimension three has no evident OR operation |
 
-The hot path is now reset-anchored renewal control of periodic shadows, with an infinite
-shadow-concatenating reset orbit as the opposing construction. The matrix compiler,
+The hot path is now reset-ancestry compactness for moving pulled-back rays, with an essentially
+aperiodic infinite reset orbit as the opposing construction. The matrix compiler,
 arbitrary-word converse, deterministic wait decoder, rational inverse-address grammar,
 primitive integral lift, endpoint factorization, exact branch similarity, arbitrary
 repeated-factor pumping, local record-ascent budget, local content allocation, maximal-step
 isolation, and universal-boundary valuation wall are complete. Uniform first-bridge closure and
-coefficient-uniform all-legal block descent are false. The rank-`(3,2)` artery asks whether an
-even-resultant, universal-boundary-divisible reset orbit can generate unbounded shadow depth and
-repay infinitely many forced nonmaximal losses, or whether reset/terminal history forces
-repetition or a finite obstruction. Exact-order factors remain usable only inside that global
-history-sensitive proof.
+coefficient-uniform all-legal block descent are false; fixed positive renewal cycles are
+impossible; bounded local shadow depth does not imply bounded height. The rank-`(3,2)` artery now
+asks whether an even-resultant, universal-boundary-divisible reset orbit can visit infinitely
+many moving arithmetic rays while repaying every forced nonmaximal loss, or whether the exact
+reset pullback forces recurrence or a finite obstruction. Exact-order factors remain usable only
+inside that global history-sensitive proof.
 
 ## The dimension-two wall: `M₂(3)`
 
