@@ -222,15 +222,14 @@ law formalized by `ExpandingAffineHistory`.
 
 ## Separator Audit
 
-The contradiction occurs before adjoining a separator. In the two-phase subcase with `u≠0`, the
-report's separator audit is nevertheless correct. Scaling each data matrix by `rₓ⁻¹` makes `e₁`
-a common fixed column. The normalized reachable boundary column retains nonzero homogeneous
-coordinate, and every terminal row satisfies `λe₁=u≠0`. The existing fixed-anchor rank-one
-compiler therefore excludes control-only, one-separator, exterior-separator, adjacent-separator,
-and malformed-bridge false positives. Independent denominator clearing preserves mortality.
+The contradiction occurs before adjoining a separator. The separator audit is now subsumed by
+`mortal_adjoin_outer_iff`: for arbitrary controls, `{H_a}∪{γλ}` is mortal exactly when
+`λH_yγ=0` for some control word. Control-only, one-separator, exterior-separator,
+adjacent-separator, and malformed-bridge products need no rescaling, fixed anchor, or
+nonsingularity hypothesis. Independent denominator clearing preserves mortality.
 
-No new separator declaration is retained: `HistoryFracture.lean` already owns the stronger
-generic fixed-anchor lift used by this architecture.
+No architecture-specific separator declaration is retained; `TerminalTile.lean` owns the
+unconditional lift.
 
 ## Claim Classification
 

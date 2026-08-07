@@ -177,10 +177,11 @@ A_K = γ(1,0,−K)
        [1,0,−K]].
 ```
 
-The physical family consists of `A_K,H_b,H_c,H_t`. The data controls have common eigenvector
-`e₁` with eigenvalue `5`; the toggle fixes `e₁`. Scaling each data control by `1/5` makes `e₁`
-pointwise fixed. Independent nonzero generator scaling preserves mortality, so the existing
-fixed-anchor rank-one compiler applies. Casting between integral and rational matrices is exact.
+The physical family consists of `A_K,H_b,H_c,H_t`. The unconditional outer-separator theorem
+applies directly: for arbitrary controls `H_a`, column `γ`, and row `λ`, the family
+`{H_a}∪{γλ}` is mortal exactly when `λH_yγ=0` for some control word. No rescaling, fixed
+eigenline, nonsingularity, or nonzero exterior orbit is required. Casting between the displayed
+integral matrices and their rational images is exact.
 
 Lean consequently proves
 
@@ -189,10 +190,11 @@ IsMortal {A_K,H_b,H_c,H_t}
   ↔ ∃ y, λ_K H_y γ = 0.
 ```
 
-The declarations are `historyMortalityFamily_rat_mortal_iff_zero` and
+The declarations are `mortal_adjoin_outer_iff`,
+`historyMortalityFamily_rat_mortal_iff_zero`, and
 `historyMortalityFamily_int_mortal_iff_zero`. The latter covers every number and placement of
 separators, control-only products, adjacent separators, toggle-only blocks, and malformed control
-words.
+words. The former scaling infrastructure has been deleted.
 
 For `β=3`, `body=[b,b]`,
 

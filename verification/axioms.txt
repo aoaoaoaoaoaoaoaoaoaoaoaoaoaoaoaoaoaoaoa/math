@@ -54,7 +54,7 @@
 'MatrixMortality.pairedMortalityFamily_int_mortal_iff_tagHaltsFrom' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-'MatrixMortality.fixedAnchor_mortal_adjoin_outer_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.mortal_adjoin_outer_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.pairedSeparator_int_ne_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.castMatrix_pairedSeparator_rank_eq_one' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.paired_mortality_generator_count' depends on axioms: [propext, Classical.choice, Quot.sound]
@@ -92,10 +92,10 @@
  Classical.choice,
  Quot.sound]
 'MatrixMortality.historyCode_injective' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.historyDataMatrix_det' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.historyProduct_mulVec_column' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.historyCoefficient_eq_code_sub' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.historyCoefficient_zero_iff_decode_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
-'MatrixMortality.historyScaledGenerator_mulVec_anchor' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.historyMortalityFamily_rat_mortal_iff_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.historyMortalityFamily_int_mortal_iff_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.history_mortality_generator_count' depends on axioms: [propext, Classical.choice, Quot.sound]

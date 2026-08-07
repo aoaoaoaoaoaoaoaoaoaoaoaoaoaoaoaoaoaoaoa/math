@@ -225,25 +225,6 @@ theorem ambient_isUnit
   apply isUnit_iff_ne_zero.mpr
   simp [Fin.prod_univ_succ, prime_ne_zero]
 
-/-- Positive returns are units under the arithmetic nondegeneracy conditions. -/
-theorem positiveTransfer_isUnit
-    (prime : ℕ) (depth : Nat) (center reset : ℚ)
-    (prime_two : 2 ≤ prime)
-    (drift_ne_zero : drift center reset ≠ 0) (wait : Nat) :
-    IsUnit (positiveTransfer (prime : ℚ) depth center reset wait) := by
-  apply (positiveTransfer (prime : ℚ) depth center reset wait).isUnit_iff_isUnit_det.mpr
-  rw [positiveTransfer, returnMatrix_eq_transfer, transfer_det]
-  apply isUnit_iff_ne_zero.mpr
-  refine mul_ne_zero (mul_ne_zero drift_ne_zero ?_) ?_
-  · positivity
-  · have power_gt_one : (1 : ℚ) < (prime : ℚ) ^ (wait + 1) := by
-      have prime_gt_one : (1 : ℚ) < prime := by exact_mod_cast prime_two
-      exact one_lt_pow prime_gt_one (by omega)
-    have inverse_power_lt_one :
-        ((prime : ℚ)⁻¹) ^ (wait + 1) < 1 := by
-      simpa [inv_pow] using inv_lt_one power_gt_one
-    linarith
-
 /-- Complete arbitrary-word normal form for the physical amalgamated pair. -/
 theorem physical_isMortal_iff_positiveBridge
     (prime : ℕ) (depth : Nat) (center reset : ℚ)
@@ -266,10 +247,6 @@ theorem physical_isMortal_iff_positiveBridge
           Matrix.vecMulVec ![reset, 1] ![1, -1]
         rw [returnMatrix_eq_transfer]
         simpa using transfer_one (R := ℚ) center reset)
-      (positiveTransfer_isUnit prime depth center reset
-        prime_two drift_ne_zero)
-      (by simp)
-      (by simp)
 
 /-- Closed rescaled return used by the projective guard. -/
 theorem guardTransfer_eq

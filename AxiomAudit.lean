@@ -42,7 +42,7 @@ open MatrixMortality
 #print axioms pairedMortalityFamily_rat_mortal_iff_paired_zero
 #print axioms pairedMortalityFamily_int_mortal_iff_terminal_match
 #print axioms pairedMortalityFamily_int_mortal_iff_tagHaltsFrom
-#print axioms fixedAnchor_mortal_adjoin_outer_iff
+#print axioms mortal_adjoin_outer_iff
 #print axioms pairedSeparator_int_ne_zero
 #print axioms castMatrix_pairedSeparator_rank_eq_one
 #print axioms paired_mortality_generator_count
@@ -72,10 +72,10 @@ open MatrixMortality
 #print axioms PhaseRigidity.ruleCMixing_ne_zero
 #print axioms PhaseRigidity.neary_commutator_pencil_forgets_t
 #print axioms historyCode_injective
+#print axioms historyDataMatrix_det
 #print axioms historyProduct_mulVec_column
 #print axioms historyCoefficient_eq_code_sub
 #print axioms historyCoefficient_zero_iff_decode_eq
-#print axioms historyScaledGenerator_mulVec_anchor
 #print axioms historyMortalityFamily_rat_mortal_iff_zero
 #print axioms historyMortalityFamily_int_mortal_iff_zero
 #print axioms history_mortality_generator_count

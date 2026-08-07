@@ -471,8 +471,10 @@ terminal histories. For every minimum-length body, however, the unique terminal 
 control word. The rank-one lift gives four integral `3 × 3` matrices with a complete
 arbitrary-product converse. Their phase graph closures are audited full products with
 one-dimensional generic fibers. Thus generic single-valuedness of all three-state phase graphs is
-false. The construction is not a reduction: its target code is a terminal witness, and the report
-supplied no total source-computable replacement on arbitrary bodies.
+false. The data maps are singular but retain an injective decoded-history code, so rank drop alone
+cannot force a positive residual collision. The construction is not a reduction: its target code
+is a terminal witness, and the report supplied no total source-computable replacement on arbitrary
+bodies.
 
 [`G3-O04`](SALVAGE.md#g3-o04-expanding-affine-history-no-go) closes the first uniform
 replacement class. One source-dependent expanding affine history coordinate, any finite mode
@@ -495,6 +497,14 @@ inverse state, its role group contains a freely acting `F₂×F₂`. Such a satu
 recurrence needs at least four vector dimensions. The surviving projective route must therefore
 be intrinsically one-way: inverse states or their target law must fail, or a singular map must
 destroy the cancellative orbit.
+
+The mortality lift is no longer part of this obstruction. For arbitrary controls `H_a`, column
+`γ`, and row `λ` over a field, adjoining `γλ` gives mortality exactly when some
+`λH_yγ` vanishes. A zero product without the separator is already a scalar-zero witness; after
+fracturing a product with separators, every internal scalar or zero exterior factor supplies one.
+Thus a rational three-state same-zero recognizer immediately yields four rational mortality
+generators, and generator-wise denominator clearing yields integral generators. All remaining
+work lies in the recognizer or its lower bound.
 
 The fixed-first property also remains useless: `R_c` recurs whenever the `c` rule fires.
 Absorbing its initial occurrence does not remove its interior role.
@@ -569,7 +579,8 @@ experiments must impose the same `H_b,H_c,H_t` on every left and right shift. Th
 candidate escapes are a non-group-completable denominator recurrence and a singular ideal grammar
 which irreversibly destroys illegal inverse histories. A further no-go should prove that positive
 shift equivariance forces the inverse saturation of `G3-O05`; that would kill the paired route
-rather than another ansatz.
+rather than another ansatz. Do not spend another attack on separator placement, fixed anchors, or
+control singularity after recognition; `MM-C01` closes them unconditionally.
 
 The highest-yield source experiment is Carvalho's smallest cyclic-tag transducer. Compute
 the rank and Stallings graph of its closed-path subgroup, classify the formal inverses used

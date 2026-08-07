@@ -85,6 +85,13 @@ def historyDataMatrix (R : Type*) [CommRing R] : TagLetter → Matrix (Fin 3) (F
          0, 0, -1;
          0, 0, 1]
 
+/-- Each data control is singular: it consumes the entering phase after encoding it in the new
+role digit. -/
+@[simp] theorem historyDataMatrix_det (R : Type*) [CommRing R] (letter : TagLetter) :
+    (historyDataMatrix R letter).det = 0 := by
+  cases letter <;>
+    simp [historyDataMatrix, Matrix.det_fin_three, Matrix.vecHead, Matrix.vecTail]
+
 /-- The toggle flips the phase sign without changing the role code. -/
 def historyToggleMatrix (R : Type*) [CommRing R] : Matrix (Fin 3) (Fin 3) R :=
   !![(1 : R), 0, 0;
@@ -180,91 +187,13 @@ def historyMortalityFamily (R : Type*) [CommRing R] (target : Nat) :
     Option PairedControl → Matrix (Fin 3) (Fin 3) R :=
   separatedGenerator (historySeparator R target) (historyGenerator R)
 
-/-- First basis vector used to certify nonvanishing control-only products. -/
-def historyAnchor (R : Type*) [CommRing R] : Fin 3 → R := ![1, 0, 0]
-
-/-- Rescale data controls so that the common eigenline becomes pointwise fixed. -/
-def historyControlScale : PairedControl → ℚ
-  | .data _ => 1 / 5
-  | .toggle => 1
-
-@[simp] theorem historyControlScale_ne_zero (control : PairedControl) :
-    historyControlScale control ≠ 0 := by
-  cases control with
-  | data letter => cases letter <;> norm_num [historyControlScale]
-  | toggle => norm_num [historyControlScale]
-
-/-- Rationally normalized history controls. -/
-def historyScaledGenerator (control : PairedControl) : Matrix (Fin 3) (Fin 3) ℚ :=
-  historyControlScale control • historyGenerator ℚ control
-
-theorem historyScaledGenerator_mulVec_anchor (control : PairedControl) :
-    historyScaledGenerator control *ᵥ historyAnchor ℚ = historyAnchor ℚ := by
-  cases control with
-  | data letter =>
-      cases letter <;>
-        ext coordinate <;>
-        fin_cases coordinate <;>
-        norm_num [historyScaledGenerator, historyControlScale, historyGenerator,
-          historyDataMatrix, historyAnchor, Matrix.mulVec, Matrix.dotProduct,
-          Fin.sum_univ_succ]
-  | toggle =>
-      ext coordinate
-      fin_cases coordinate <;>
-        norm_num [historyScaledGenerator, historyControlScale, historyGenerator,
-          historyToggleMatrix, historyAnchor, Matrix.mulVec, Matrix.dotProduct,
-          Fin.sum_univ_succ]
-
-private theorem historyScaled_bridge_zero_iff (target : Nat)
-    (word : List PairedControl) :
-    bridgeScalar (historyColumn ℚ) (historyRow ℚ target)
-        (wordProduct historyScaledGenerator word) = 0 ↔
-      historyCoefficient ℚ target word = 0 := by
-  have scale_product_ne : (word.map historyControlScale).prod ≠ 0 := by
-    apply List.prod_ne_zero
-    intro zero_mem
-    obtain ⟨control, _, scale_zero⟩ := List.mem_map.mp zero_mem
-    exact historyControlScale_ne_zero control scale_zero
-  change historyRow ℚ target ⬝ᵥ
-      wordProduct (fun control => historyControlScale control • historyGenerator ℚ control) word *ᵥ
-        historyColumn ℚ = 0 ↔
-    historyRow ℚ target ⬝ᵥ wordProduct (historyGenerator ℚ) word *ᵥ historyColumn ℚ = 0
-  rw [wordProduct_smulMatrix, Matrix.smul_mulVec_assoc, Matrix.dotProduct_smul]
-  exact mul_eq_zero.trans <| by simp [scale_product_ne]
-
 theorem historyMortalityFamily_rat_mortal_iff_zero (target : Nat) :
     IsMortal (historyMortalityFamily ℚ target) ↔
       ∃ word : List PairedControl, historyCoefficient ℚ target word = 0 := by
-  let familyScale : Option PairedControl → ℚ
-    | none => 1
-    | some control => historyControlScale control
-  have familyScale_ne : ∀ label, familyScale label ≠ 0 := by
-    intro label
-    cases label with
-    | none => norm_num [familyScale]
-    | some control => exact historyControlScale_ne_zero control
-  have scaled_eq :
-      (fun label => familyScale label • historyMortalityFamily ℚ target label) =
-        separatedGenerator (historySeparator ℚ target) historyScaledGenerator := by
-    funext label
-    cases label <;> simp [familyScale, historyMortalityFamily, separatedGenerator,
-      historyScaledGenerator]
-  calc
-    IsMortal (historyMortalityFamily ℚ target) ↔
-        IsMortal (fun label => familyScale label • historyMortalityFamily ℚ target label) :=
-      (isMortal_smulMatrix_iff familyScale familyScale_ne
-        (historyMortalityFamily ℚ target)).symm
-    _ ↔ IsMortal
-        (separatedGenerator (historySeparator ℚ target) historyScaledGenerator) := by
-          rw [scaled_eq]
-    _ ↔ ∃ word : List PairedControl,
-        bridgeScalar (historyColumn ℚ) (historyRow ℚ target)
-          (wordProduct historyScaledGenerator word) = 0 := by
-        apply fixedAnchor_mortal_adjoin_outer_iff historyScaledGenerator (historyAnchor ℚ)
-          (historyColumn ℚ) (historyRow ℚ target) historyScaledGenerator_mulVec_anchor
-        simp [historyRow, historyAnchor, Matrix.dotProduct, Fin.sum_univ_succ]
-    _ ↔ ∃ word : List PairedControl, historyCoefficient ℚ target word = 0 := by
-      exact exists_congr fun word => historyScaled_bridge_zero_iff target word
+  simpa [historyMortalityFamily, historySeparator, historyCoefficient, linearCoefficient,
+    bridgeScalar] using
+    mortal_adjoin_outer_iff (historyGenerator ℚ)
+      (historyColumn ℚ) (historyRow ℚ target)
 
 theorem historyGenerator_map {R S : Type*} [CommRing R] [CommRing S]
     (hom : R →+* S) (control : PairedControl) :

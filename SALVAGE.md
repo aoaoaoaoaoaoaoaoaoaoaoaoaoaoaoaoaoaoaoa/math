@@ -43,7 +43,7 @@ file owns the mathematical stock.
 
 | ID | Kind | Result | Evidence | Disposition |
 | --- | --- | --- | --- | --- |
-| [`MM-C01`](#mm-c01-fixed-anchor-rank-one-compiler) | compiler | common-fixed-column scalar zero to mortality | formalized | graduated |
+| [`MM-C01`](#mm-c01-unconditional-rank-one-separator) | compiler | arbitrary scalar zero to mortality by one outer product | formalized | graduated |
 | [`MM-C02`](#mm-c02-common-image-restriction) | compiler | mortality-preserving restriction to a common image | formalized | graduated |
 | [`MM-C03`](#mm-c03-scheduled-binary-compiler) | compiler | fixed-width tag strokes to a total two-letter scalar series | formalized | graduated |
 | [`MM-C04`](#mm-c04-internal-word-sandwich-minimization) | compiler | internal low-rank words repair reachable/observable minimization | formalized | graduated |
@@ -140,25 +140,35 @@ file owns the mathematical stock.
 
 ## Matrix Mortality
 
-### MM-C01: Fixed-anchor rank-one compiler
+### MM-C01: Unconditional rank-one separator
 
 **Kind:** compiler  
 **Evidence:** formalized
 **Disposition:** graduated
 
-Let every active matrix `X_a` fix a nonzero column `e`, let `Le ≠ 0`, and put `P = CL`. Then the
-family `{X_a} ∪ {P}` is mortal exactly when `LX_wC = 0` for some active word `w`. The converse
-fractures every arbitrary product at every occurrence of `P`; the fixed column replaces
-invertibility at the exterior row.
+For arbitrary square matrices `X_a` over a field, put `P=CL`. Then `{X_a}∪{P}` is mortal exactly
+when `LX_wC=0` for some active word `w`. A zero product without `P` is itself a scalar-zero
+witness. A product with separators factors as
 
-**Scope:** empty internal blocks are harmless only when `LC ≠ 0`; the theorem does not make the
-scalar source undecidable.
+```text
+(∏ᵢ LX_{wᵢ}C) · (X_{w₀}C)(LX_{wₘ}).
+```
 
-**Artifact:** `MatrixMortality.fixedAnchor_mortal_adjoin_outer_iff` in
+An internal scalar zero is immediate. If either exterior vector vanishes, its exterior active
+word is a scalar-zero witness. Thus singular controls, zero control-only products, adjacent or
+exterior separators, and zero rows or columns require no hypotheses.
+
+**Scope:** the field assumption supplies zero-product cancellation for the scalar factors. The
+theorem does not construct a scalar recognizer or make its zero language undecidable.
+
+**Artifact:** `MatrixMortality.mortal_adjoin_outer_iff` in
 [`TerminalTile.lean`](MatrixMortality/TerminalTile.lean).
 
-**Use:** prefer this theorem to a bespoke separator argument whenever a common fixed column is
-available.
+**Audit:**
+[`m34-unconditional-separator-2026-08-07.md`](audits/m34-unconditional-separator-2026-08-07.md).
+
+**Use:** adjoining one rank-one separator completely solves the scalar-to-mortality converse;
+never spend compiler structure on invertibility, a fixed anchor, or separator placement.
 
 ### MM-C02: Common-image restriction
 
@@ -4180,8 +4190,9 @@ Assign the four roles digits `1,2,3,4` in base five. Three integral control matr
 
 for every arbitrary paired-control word. The row `(1,0,−κ(ω))` therefore vanishes exactly on the
 paired zero language. Adjoining its outer-product separator gives four `3 × 3` integral matrices;
-nonzero per-letter scaling and the fixed-anchor compiler prove the arbitrary-product mortality
-converse. For `β=3`, body `bb`, the target code is `92` and `ctbbt` is an explicit zero witness.
+the unconditional rank-one separator theorem proves the arbitrary-product mortality converse
+directly, without rescaling the singular data controls. For `β=3`, body `bb`, the target code is
+`92` and `ctbbt` is an explicit zero witness.
 
 The associated phase graph closures are independently audited as
 
@@ -4198,14 +4209,18 @@ bodies can have several terminal words, and no source-computable parameter selec
 is supplied. This is not an undecidability reduction and does not settle `M₃(4)`.
 
 **Use:** close instancewise phase-graph exclusion and generic-single-valuedness as routes to the
-master problem. The paired route now requires a uniform computable three-state recognizer for all
-terminal histories, or a no-go for a precisely delimited uniform compiler class.
+master problem. The rank-two data maps also show that singularity can erase the entering phase
+without colliding decoded positive histories; rank drop alone cannot force inverse saturation.
+The paired route now requires a uniform computable three-state recognizer for all terminal
+histories, or a no-go for a precisely delimited uniform compiler class.
 
 **Artifact:** [`HistoryFracture.lean`](MatrixMortality/HistoryFracture.lean), including
 `NullHistoryCounterexample.terminal_word_not_unique`, `minimalBody_terminal_word_unique`,
 `minimalBody_history_zero_iff_paired_zero`, and
 `historyMortalityFamily_int_mortal_iff_zero`; bounded audit in
-[`m34-history-fracture-2026-08-06.md`](audits/m34-history-fracture-2026-08-06.md).
+[`m34-history-fracture-2026-08-06.md`](audits/m34-history-fracture-2026-08-06.md), with the
+unconditional separator strengthening in
+[`m34-unconditional-separator-2026-08-07.md`](audits/m34-unconditional-separator-2026-08-07.md).
 
 ### G3-O04: Expanding affine-history no-go
 

@@ -122,37 +122,17 @@ theorem separatedPositiveTransfer_comp_natEquivOption
   | zero => simp [separatedGenerator]
   | succ n => simp [separatedGenerator, positiveTransfer]
 
-private theorem two_le_pow_succ {q : ℤ} (hq : 2 ≤ q) (n : Nat) :
-    2 ≤ q ^ (n + 1) := by
-  rw [pow_succ]
-  have one_le_power : 1 ≤ q ^ n :=
-    one_le_pow_of_one_le (by omega) n
-  nlinarith [mul_le_mul_of_nonneg_right one_le_power (by omega : 0 ≤ q)]
-
-/-- Every positive return is invertible at integral scales at least two. -/
-theorem positiveTransfer_isUnit
-    (p q : ℤ) (c : ℚ) (hp : 2 ≤ p) (hq : 2 ≤ q)
-    (hc : c + 1 ≠ 0) (n : Nat) :
-    IsUnit (positiveTransfer (p : ℚ) (q : ℚ) c n) := by
-  apply transfer_isUnit
-  · exact hc
-  · positivity
-  · have q_power : (2 : ℚ) ≤ (q : ℚ) ^ (n + 1) := by
-      exact_mod_cast two_le_pow_succ hq n
-    linarith
-
 /-- Mortality of the complete return family is exactly one scalar bridge between zero waits. -/
 theorem transferFamily_isMortal_iff_positiveBridge
-    (p q : ℤ) (c : ℚ) (hp : 2 ≤ p) (hq : 2 ≤ q) (hc : c + 1 ≠ 0) :
+    (p q : ℤ) (c : ℚ) :
     IsMortal (fun n => transfer c ((p : ℚ) ^ n) ((q : ℚ) ^ n)) ↔
       ∃ waits, positiveBridge (p : ℚ) (q : ℚ) c waits = 0 := by
   rw [← separatedPositiveTransfer_comp_natEquivOption]
   rw [isMortal_comp_equiv]
   rw [transfer_one]
   simpa [positiveBridge] using
-    unitFamily_mortal_adjoin_outer_iff
+    mortal_adjoin_outer_iff
       (positiveTransfer (p : ℚ) (q : ℚ) c) ![1, 1] ![c, 1]
-      (positiveTransfer_isUnit p q c hp hq hc) (by simp) (by simp)
 
 /-- Determinant of the physical ambient matrix. -/
 theorem ambient_det {K : Type*} [Field K] (p q : K) :
@@ -183,11 +163,6 @@ theorem physical_isMortal_iff_positiveBridge
       (by
         rw [returnMatrix_eq_transfer]
         simpa using transfer_one ℚ c)
-      (fun wait => by
-        rw [returnMatrix_eq_transfer]
-        exact positiveTransfer_isUnit p q c hp hq hc wait)
-      (by simp)
-      (by simp)
 
 /-- Exact defect from the conversion rail `p ↦ q`. -/
 theorem projective_rail_defect {R : Type*} [CommRing R] (c p q z : R) :

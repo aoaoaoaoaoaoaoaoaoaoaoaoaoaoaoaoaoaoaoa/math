@@ -88,9 +88,10 @@ rule/erasure pair on the complete upper-word plane, and the explicit four-dimens
 representation. A right-to-left transducer decodes every arbitrary control word, and a constructive
 surjectivity theorem encodes every four-role word. The three control matrices have common first
 column `e₁`, and the toggle is an explicit permutation matrix. Adding the nonzero rank-one matrix
-`CL` gives four integer matrices; the mortality converse covers every number and placement of
-separators without assuming that control products are invertible. The two data controls are
-singular; the toggle is an invertible permutation matrix.
+`CL` gives four integer matrices. The unconditional outer-separator theorem proves the mortality
+converse for every number and placement of separators, arbitrary singular controls, and zero
+control-only or exterior blocks. The two data controls are singular; the toggle is an invertible
+permutation matrix.
 
 Lean also certifies exact minimality of the paired scalar series. Four prefixes and four suffixes
 over `{b,t}` give reachable and observable determinants
@@ -133,11 +134,17 @@ An injective nonzero-digit base-five code of role words then yields three explic
 control matrices. On every arbitrary control word their reachable column is exactly the decoded
 role code, suffix-phase sign, and homogeneous unit. The resulting coefficient has precisely the
 zeros of the paired compiler on every minimum-length body. An outer-product separator and the
-fixed-anchor compiler give four `3 × 3` integral matrices with a complete mortality converse.
-Lean checks the concrete instance `β=3`, body `bb`, code `92`, and control witness `ctbbt`. This
-does not prove `M₃(4)`: selecting a terminal code is nonuniform on unrestricted source instances.
-The independently audited full-product phase graph is recorded in
+unconditional separator theorem give four `3 × 3` integral matrices with a complete mortality
+converse; the former rational rescaling and fixed-anchor proof have been deleted. Lean checks the
+concrete instance `β=3`, body `bb`, code `92`, and control witness `ctbbt`. The data matrices are
+singular, yet their semantic state retains an injective code of every decoded positive history;
+singularity alone therefore supplies no positive collision. This does not prove `M₃(4)`: selecting
+a terminal code is nonuniform on unrestricted source instances. The independently audited
+full-product phase graph is recorded in
 [`m34-history-fracture-2026-08-06.md`](audits/m34-history-fracture-2026-08-06.md).
+The unconditional separator reconstruction and the exact surviving `M₃(4)` obstruction are
+recorded in
+[`m34-unconditional-separator-2026-08-07.md`](audits/m34-unconditional-separator-2026-08-07.md).
 
 For the `6 × 6` scalar compiler, Lean checks both explicit integer generators and a total
 two-bit decoder on the complete binary free monoid. Complete pairs emit the four source roles;

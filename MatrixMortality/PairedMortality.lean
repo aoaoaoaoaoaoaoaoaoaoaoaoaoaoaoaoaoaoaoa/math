@@ -4,10 +4,9 @@ import MatrixMortality.TerminalTile
 /-!
 # Mortality from paired-role scalar reachability
 
-The compressed data matrices are singular, so the invertible-block converse used by the
-three-dimensional mortality compiler does not apply.  Their common fixed column supplies the
-needed exterior nonvanishing instead.  This file proves the arbitrary-product converse over
-`ℚ`, then reflects it to the exact integer matrices.
+The compressed data matrices are singular. The unconditional outer-separator theorem nevertheless
+gives the arbitrary-product converse over `ℚ`; this file then reflects it to the exact integer
+matrices.
 -/
 
 namespace MatrixMortality
@@ -99,16 +98,11 @@ theorem pairedMortalityFamily_rat_mortal_iff_paired_zero (β : Nat)
     IsMortal (pairedMortalityFamily ℚ β body) ↔
       WordSeries.HasNonemptyZero (pairedCoefficient ℚ β body) := by
   let X := pairedGenerator ℚ β body
-  have fixed : ∀ control, X control *ᵥ pairedAnchor ℚ = pairedAnchor ℚ :=
-    pairedGenerator_mulVec_anchor ℚ β body
-  have anchor_pair : pairedRow ℚ ⬝ᵥ pairedAnchor ℚ ≠ 0 := by
-    simp [pairedRow, pairedAnchor]
   rw [show pairedMortalityFamily ℚ β body =
       separatedGenerator
         (Matrix.vecMulVec (pairedColumn ℚ β) (pairedRow ℚ)) X by
         rfl]
-  rw [fixedAnchor_mortal_adjoin_outer_iff X (pairedAnchor ℚ)
-    (pairedColumn ℚ β) (pairedRow ℚ) fixed anchor_pair]
+  rw [mortal_adjoin_outer_iff X (pairedColumn ℚ β) (pairedRow ℚ)]
   constructor
   · rintro ⟨word, bridge_zero⟩
     have coefficient_zero : pairedCoefficient ℚ β body word = 0 := by

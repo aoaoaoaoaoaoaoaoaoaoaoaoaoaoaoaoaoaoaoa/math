@@ -315,8 +315,8 @@ theorem pairGenerator_isMortal_iff
     · rw [wordProduct_blockedWord]
       exact blocked_zero
 
-/-- A split physical return pair whose zero-wait return is a nonzero outer product and whose
-positive returns are units is mortal exactly when one positive-return bridge vanishes. -/
+/-- A split physical return pair whose zero-wait return is an outer product is mortal exactly
+when one positive-return bridge vanishes. The positive returns may be singular or zero. -/
 theorem pairGenerator_isMortal_iff_positiveBridge
     {K Big Interface : Type*} [Field K]
     [Fintype Big] [DecidableEq Big] [Nonempty Big]
@@ -330,9 +330,7 @@ theorem pairGenerator_isMortal_iff_positiveBridge
     (left_inverse : inputLeftInverse * input = 1)
     (right_inverse : output * outputRightInverse = 1)
     (zero_return :
-      returnMatrix ambient input output 0 = Matrix.vecMulVec column row)
-    (positive_unit : ∀ wait, IsUnit (returnMatrix ambient input output (wait + 1)))
-    (column_ne : column ≠ 0) (row_ne : row ≠ 0) :
+      returnMatrix ambient input output 0 = Matrix.vecMulVec column row) :
     IsMortal (pairGenerator ambient (input * output)) ↔
       ∃ waits : List Nat,
         bridgeScalar column row
@@ -352,9 +350,8 @@ theorem pairGenerator_isMortal_iff_positiveBridge
     | zero => simpa [separatedGenerator] using zero_return.symm
     | succ wait => simp [separatedGenerator]
   rw [← separated_returns, isMortal_comp_equiv]
-  exact unitFamily_mortal_adjoin_outer_iff
-    (fun wait => returnMatrix ambient input output (wait + 1))
-    column row positive_unit column_ne row_ne
+  exact mortal_adjoin_outer_iff
+    (fun wait => returnMatrix ambient input output (wait + 1)) column row
 
 section RankOne
 

@@ -644,17 +644,15 @@ theorem positiveTransfer_isUnit (q : ℤ) (c : ℚ) (hq : 2 ≤ q) (hc : c + 1 �
 
 /-- Zero wait is an internal rank-one punctuation mark: mortality of the full return family is
 exactly vanishing of one scalar bridge over positive returns. -/
-theorem transferFamily_isMortal_iff_positiveBridge (q : ℤ) (c : ℚ)
-    (hq : 2 ≤ q) (hc : c + 1 ≠ 0) :
+theorem transferFamily_isMortal_iff_positiveBridge (q : ℤ) (c : ℚ) :
     IsMortal (fun n => transfer c ((q : ℚ) ^ n)) ↔
       ∃ waits, positiveBridge (q : ℚ) c waits = 0 := by
   rw [← separatedPositiveTransfer_comp_natEquivOption]
   rw [isMortal_comp_equiv]
   rw [transfer_one]
   simpa [positiveBridge] using
-    unitFamily_mortal_adjoin_outer_iff
+    mortal_adjoin_outer_iff
       (positiveTransfer (q : ℚ) c) ![1, 1] ![c, 1]
-      (positiveTransfer_isUnit q c hq hc) (by simp) (by simp)
 
 /-- Empty positive bridge is the separator's self-incidence scalar. -/
 theorem positiveBridge_nil (q c : ℚ) :
@@ -860,11 +858,6 @@ theorem physical_isMortal_iff_positiveBridge (q : ℤ) (c : ℚ)
       (by
         rw [returnMatrix_eq_transfer]
         simpa using transfer_one ℚ c)
-      (fun wait => by
-        rw [returnMatrix_eq_transfer]
-        exact positiveTransfer_isUnit q c hq hc wait)
-      (by simp)
-      (by simp)
 
 /-- The exact first research frontier for ReturnSquare: mortality is either a classified
 one-return resonance or a bridge with at least three positive returns. Two returns are impossible.
