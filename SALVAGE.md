@@ -122,6 +122,7 @@ file owns the mathematical stock.
 | [`M4-M03`](#m4-m03-parabolic-blade-and-bridge-grammar) | partial mechanism | an open cube root has one singular atom and exact `2 × 2` bridge semantics | formalized | active |
 | [`M4-O08`](#m4-o08-residue-two-necessary-wall) | obstruction | every residue-zero or residue-one atom preserves a nonvanishing two-ray quotient | formalized | graduated |
 | [`M4-S02`](#m4-s02-residue-zero-safe-bridge-cone) | structure theorem | every nonempty residue-zero regular safe bridge has negative determinant | audited | active |
+| [`M4-S03`](#m4-s03-one-defect-phase-cut) | structure theorem | a lone residue-two defect can survive only between opposite safe residues | formalized | active |
 | [`G3-O01`](#g3-o01-four-role-macro-irreducibility) | obstruction | exact nonerasing macros cannot reduce the four source roles to three letters | formalized | graduated |
 | [`G3-S01`](#g3-s01-shift-equivariant-zero-incidence) | structure theorem | same-zero state dimension is equivariant projective incidence dimension | audited | active |
 | [`G3-M01`](#g3-m01-free-group-discrepancy-engine) | partial mechanism | free cancellation implements queue deletion with an all-path converse | reported | active |
@@ -3933,16 +3934,19 @@ to zero or one modulo three is nonzero. The safe-bridge cone
 [`M4-S02`](#m4-s02-residue-zero-safe-bridge-cone) further excludes singular regular bridges
 made solely from residue-zero atoms. These results do not supply open contexts whose boundary
 rays realize the paired Neary zero series, nor classify bridge zeros after a residue-two atom
-occurs. No `M₄(3)` theorem follows yet.
+occurs. The one-defect phase cut
+[`M4-S03`](#m4-s03-one-defect-phase-cut) removes every empty-side or same-residue instance, but
+the two alternating phases and successive defects remain. No `M₄(3)` theorem follows yet.
 
 **Use:** all further cube-root work begins with the first residue-two atom in the bridge
 language. Any singular nonempty safe bridge must contain a regular residue-one atom. Do not redo
 finite-gap searches, rank-one incidence, raw residue-{0,1} products, or residue-zero-only safe
-return.
+return. A one-defect attack begins directly with phases `0|2|1` and `1|2|0`.
 
-**Next:** classify one residue-two atom with arbitrary residue-{0,1} contexts on both sides.
-Either construct boundary contexts whose bridge product vanishes exactly at the intended scalar
-core, or derive an unavoidable malformed zero that kills this parabolic family.
+**Next:** decide the two alternating one-defect phases under arbitrary safe contexts. Either
+construct boundary contexts whose bridge product vanishes exactly at the intended scalar core,
+or derive an unavoidable malformed zero that kills this parabolic family; then control
+successive residue-two defects.
 
 **Artifact:** [`MatrixMortality/ParabolicBlade.lean`](MatrixMortality/ParabolicBlade.lean),
 [`MatrixMortality/ParabolicResidueWall.lean`](MatrixMortality/ParabolicResidueWall.lean),
@@ -3977,8 +3981,9 @@ word containing `Q(x,3j+2)`.
 cannot repair the closed semantic boundary, even amid arbitrarily many other residue-zero and
 residue-one atoms.
 
-**Next:** classify one residue-two atom with arbitrary residue-{0,1} blocks on both sides, then
-extend or fracture that classification at successive residue-two atoms.
+**Next:** use [`M4-S03`](#m4-s03-one-defect-phase-cut) and classify the surviving phases
+`0|2|1` and `1|2|0` under arbitrary safe blocks, then extend or fracture that classification at
+successive residue-two atoms.
 
 **Artifact:** `ParabolicBlade.residueTwoWall_wordProduct_ne_zero` in
 [`MatrixMortality/ParabolicResidueWall.lean`](MatrixMortality/ParabolicResidueWall.lean) and
@@ -4020,6 +4025,47 @@ bridge return or finite local valuation separation.
 residue-zero runs, then consume the result in the one-defect sandwich.
 
 **Artifact:** [`audits/m43-safe-return-2026-08-06.md`](audits/m43-safe-return-2026-08-06.md).
+
+### M4-S03: One-defect phase cut
+
+**Kind:** arbitrary-context structure theorem
+
+**Evidence:** formalized
+
+**Disposition:** active
+
+After multiplying by 64 and reducing modulo three, every residue-two atom acts on
+`span(e₀,e₂)` as
+
+```text
+A₂ = [[1,1], [2,1]].
+```
+
+The safe residue matrices have rank-one factorizations `Aᵢ=pᵢqᵢᵀ`. Their only local
+one-defect scalar is
+
+```text
+phaseTable(i,k) = qᵢᵀ A₂ pₖ = [[2,0], [0,1]].
+```
+
+Hence a word with one residue-two atom and nonempty safe contexts is nonzero whenever the two
+adjacent safe atoms have the same residue. If either context is empty, safe-word nonvanishing and
+residue-two invertibility give the same conclusion. Only `0|2|1` and `1|2|0` survive.
+
+**Scope:** arbitrary `β`, body, letters, waits, safe-context lengths, and exceptional-atom count,
+but exactly one residue-two atom. The two alternating phases vanish modulo three; this proves
+only divisibility there, not an exact zero.
+
+**Use:** every exact one-defect zero has nonempty safe contexts whose adjacent residues are
+opposite. The five-atom word `R²Q(b,3j+2)R²` is the `1|2|1` instance and needs no separate
+theorem.
+
+**Next:** lift `0|2|1` and `1|2|0` through arbitrary safe contexts by an exact Archimedean,
+divisibility, or returning-word argument; then consume the answer in arbitrary bridge products.
+
+**Artifact:** `ParabolicBlade.oneDefect_wordProduct_ne_zero_of_same_residue` in
+[`MatrixMortality/ParabolicResidueWall.lean`](MatrixMortality/ParabolicResidueWall.lean) and
+[`audits/m43-one-defect-phase-2026-08-07.md`](audits/m43-one-defect-phase-2026-08-07.md).
 
 ## Three-Letter Source Frontier
 

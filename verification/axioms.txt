@@ -100,6 +100,9 @@
 'MatrixMortality.ParabolicBlade.residueTwoWall_wordProduct_ne_zero' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.ParabolicBlade.oneDefect_wordProduct_ne_zero_of_same_residue' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.isMortal_smulMatrix_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.InternalSandwich.mortal_quotient_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.InternalSandwich.ambient_mortal_of_quotient_subsingleton' depends on axioms: [propext,

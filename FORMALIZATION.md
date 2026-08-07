@@ -466,6 +466,13 @@ two protected rays with nonzero weight. Lean therefore proves
 closed-phase theorem. The audit is
 [`audits/m43-residue-two-wall-2026-08-05.md`](audits/m43-residue-two-wall-2026-08-05.md).
 
+The one-defect phase cut [`M4-S03`](SALVAGE.md#m4-s03-one-defect-phase-cut) is formalized in the
+same module. `ParabolicBlade.oneDefect_wordProduct_ne_zero_of_same_residue` proves that arbitrary
+safe contexts around one residue-two atom cannot vanish when their adjacent residues agree.
+Together with safe-word nonvanishing and residue-two atom invertibility, only adjacency phases
+`0|2|1` and `1|2|0` remain. The audit is
+[`audits/m43-one-defect-phase-2026-08-07.md`](audits/m43-one-defect-phase-2026-08-07.md).
+
 No `M₄(3)` undecidability theorem follows from the present corpus. The missing source is an
 undecidable binary two-state controlled scalar system, or a matrix-level open-residue compiler
 whose first residue-two block realizes the paired zero series and whose `2 × 2` bridge language
