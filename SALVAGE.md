@@ -123,6 +123,7 @@ file owns the mathematical stock.
 | [`M4-O08`](#m4-o08-residue-two-necessary-wall) | obstruction | every residue-zero or residue-one atom preserves a nonvanishing two-ray quotient | formalized | graduated |
 | [`M4-S02`](#m4-s02-residue-zero-safe-bridge-cone) | structure theorem | every nonempty residue-zero regular safe bridge has negative determinant | audited | active |
 | [`M4-S03`](#m4-s03-one-defect-phase-cut) | structure theorem | a lone residue-two defect can survive only between opposite safe residues | formalized | active |
+| [`M4-O09`](#m4-o09-one-coordinate-exterior-fracture) | obstruction | the wait-free scalar exterior coordinate does not close on residue-one `c` atoms | audited | graduated |
 | [`G3-O01`](#g3-o01-four-role-macro-irreducibility) | obstruction | exact nonerasing macros cannot reduce the four source roles to three letters | formalized | graduated |
 | [`G3-S01`](#g3-s01-shift-equivariant-zero-incidence) | structure theorem | same-zero state dimension is equivariant projective incidence dimension | audited | active |
 | [`G3-M01`](#g3-m01-free-group-discrepancy-engine) | partial mechanism | free cancellation implements queue deletion with an all-path converse | reported | active |
@@ -3936,17 +3937,19 @@ made solely from residue-zero atoms. These results do not supply open contexts w
 rays realize the paired Neary zero series, nor classify bridge zeros after a residue-two atom
 occurs. The one-defect phase cut
 [`M4-S03`](#m4-s03-one-defect-phase-cut) removes every empty-side or same-residue instance, but
-the two alternating phases and successive defects remain. No `M₄(3)` theorem follows yet.
+the two alternating phases and successive defects remain. The scalar exterior compression is
+retired by [`M4-O09`](#m4-o09-one-coordinate-exterior-fracture): residue-one `c` return needs a
+second projective coordinate. No `M₄(3)` theorem follows yet.
 
 **Use:** all further cube-root work begins with the first residue-two atom in the bridge
 language. Any singular nonempty safe bridge must contain a regular residue-one atom. Do not redo
 finite-gap searches, rank-one incidence, raw residue-{0,1} products, or residue-zero-only safe
-return. A one-defect attack begins directly with phases `0|2|1` and `1|2|0`.
+return. A one-defect attack begins directly with phases `0|2|1` and `1|2|0`; a return attack
+uses at least two projective coordinates or a parameter-uniform cone family.
 
-**Next:** decide the two alternating one-defect phases under arbitrary safe contexts. Either
-construct boundary contexts whose bridge product vanishes exactly at the intended scalar core,
-or derive an unavoidable malformed zero that kills this parabolic family; then control
-successive residue-two defects.
+**Next:** synthesize a parameter-uniform cone or multicone from the base and direction maps of
+the affine wait families. Use it either to exclude the two alternating phases and successive
+defects or to force an exact malformed wall crossing.
 
 **Artifact:** [`MatrixMortality/ParabolicBlade.lean`](MatrixMortality/ParabolicBlade.lean),
 [`MatrixMortality/ParabolicResidueWall.lean`](MatrixMortality/ParabolicResidueWall.lean),
@@ -3981,9 +3984,10 @@ word containing `Q(x,3j+2)`.
 cannot repair the closed semantic boundary, even amid arbitrarily many other residue-zero and
 residue-one atoms.
 
-**Next:** use [`M4-S03`](#m4-s03-one-defect-phase-cut) and classify the surviving phases
-`0|2|1` and `1|2|0` under arbitrary safe blocks, then extend or fracture that classification at
-successive residue-two atoms.
+**Next:** use [`M4-S03`](#m4-s03-one-defect-phase-cut) and
+[`M4-O09`](#m4-o09-one-coordinate-exterior-fracture) to classify the surviving alternating
+phases in the complete exterior state, then extend or fracture that classification at successive
+residue-two atoms.
 
 **Artifact:** `ParabolicBlade.residueTwoWall_wordProduct_ne_zero` in
 [`MatrixMortality/ParabolicResidueWall.lean`](MatrixMortality/ParabolicResidueWall.lean) and
@@ -4021,8 +4025,9 @@ digits cannot replace the Archimedean cone.
 residue-zero runs and attack the resulting residue-one skeleton; do not revisit closed-only
 bridge return or finite local valuation separation.
 
-**Next:** prove or refute safe return for arbitrary alternations of residue-one atoms and
-residue-zero runs, then consume the result in the one-defect sandwich.
+**Next:** reduce the affine wait families to their base and direction maps and search for a finite
+cone family controlling arbitrary residue-one alternation; then consume it in the one-defect
+sandwich.
 
 **Artifact:** [`audits/m43-safe-return-2026-08-06.md`](audits/m43-safe-return-2026-08-06.md).
 
@@ -4060,12 +4065,72 @@ only divisibility there, not an exact zero.
 opposite. The five-atom word `R²Q(b,3j+2)R²` is the `1|2|1` instance and needs no separate
 theorem.
 
-**Next:** lift `0|2|1` and `1|2|0` through arbitrary safe contexts by an exact Archimedean,
-divisibility, or returning-word argument; then consume the answer in arbitrary bridge products.
+**Next:** lift `0|2|1` and `1|2|0` through arbitrary safe contexts with a complete exterior
+cone, divisibility, or returning-word argument; do not use the fractured scalar `s` without a
+reachable-locus closure theorem.
 
 **Artifact:** `ParabolicBlade.oneDefect_wordProduct_ne_zero_of_same_residue` in
 [`MatrixMortality/ParabolicResidueWall.lean`](MatrixMortality/ParabolicResidueWall.lean) and
 [`audits/m43-one-defect-phase-2026-08-07.md`](audits/m43-one-defect-phase-2026-08-07.md).
+
+### M4-O09: One-coordinate exterior fracture
+
+**Kind:** obstruction
+
+**Evidence:** audited
+
+**Disposition:** graduated
+
+In triangle coordinates, safe-bridge singularity is `u=0`. On the chart `v≠0`, the scalar
+
+```text
+s=(u+w)/v
+```
+
+closes on every residue-zero atom:
+
+```text
+b0: s ↦ s/(9ρ)−(ρ−1)/(6ρ),
+c0: s ↦ s/3.
+```
+
+It also makes every regular residue-one `b` return wall wait-independent:
+
+```text
+u'=0  ↔  s=−2/(12ρ−1).
+```
+
+For a residue-one `c` atom, however, set `t=w/v`. Its candidate return wait has the form
+
+```text
+j = (a s+b+Δt)/(αs+M−3),
+Δ = (11L−38Mρ+11M+114ρ−92)/16.
+```
+
+The Neary bounds `ρ≥1`, `M≥27`, and `L≤M−2` give
+
+```text
+16Δ ≤ (−38M+114)(ρ−1)−16M < 0.
+```
+
+Thus the `c1` return equation depends essentially on the second projective coordinate `t`; the
+displayed scalar is not a closed state on the ambient chart. The same defect remains when the
+denominator vanishes.
+
+**Scope:** this rejects only the proposed scalar compression. It does not exclude an exact
+invariant relation `t=φ(s)` on the reachable locus, another one-dimensional coordinate, a
+two-dimensional projective invariant, or a finite multicone.
+
+**Use:** do not extend the `s` recurrence or its inverse-phase reformulation without first proving
+a reachable-locus closure theorem. Search instead for a parameter-uniform cone or multicone in
+the complete exterior state, or decide the `c1` quotient with both projective coordinates.
+
+**Next:** exploit the affine-in-wait decomposition `T(j)=T(0)+jD` to reduce a convex-cone
+certificate to finitely many base and direction maps; in parallel, seek a reachable counterexample
+to any proposed invariant graph.
+
+**Artifact:**
+[`audits/m43-alternating-defect-literature-2026-08-07.md`](audits/m43-alternating-defect-literature-2026-08-07.md).
 
 ## Three-Letter Source Frontier
 

@@ -281,15 +281,27 @@ Two architectures survive.
    nonempty safe bridge must therefore contain a regular residue-one atom. The one-defect phase
    cut [`M4-S03`](SALVAGE.md#m4-s03-one-defect-phase-cut) further proves that a lone residue-two
    atom cannot vanish at an edge or between equal safe residues. Only local phases `0|2|1` and
-   `1|2|0` survive.
+   `1|2|0` survive. The scalar exterior coordinate `s=(u+w)/v` closes on residue-zero atoms
+   and the residue-one `b` wall, but [`M4-O09`](SALVAGE.md#m4-o09-one-coordinate-exterior-fracture)
+   proves that residue-one `c` return depends essentially on `t=w/v`. One-coordinate recurrence
+   work is therefore retired absent a reachable-locus closure theorem.
 
-The next source experiment should specify an open-residue invariant before choosing appendants.
-The next matrix attack lifts `0|2|1` and `1|2|0` under arbitrary safe contexts, then controls
-successive residue-two atoms. The parallel safe-return lane may first compress maximal
-residue-zero runs and decide the remaining residue-one skeleton, but finite local valuation
-digits alone cannot supply either exact decision. The attack must lift the bridge automaton's
-exceptional modulo-three states either to an isolated paired-Neary boundary or to an unavoidable
-malformed zero. The one-step annihilator obligation
+The next matrix attack is a finite cone or multicone problem on the complete exterior state.
+Every wait family is affine; on its natural domain it has the form `T(j)=T(0)+jD`, except that
+the regular residue-one `b` family is based at `T(1)`. Invariance of a convex cone under the
+base and direction maps controls all natural waits. An exact rational polyhedral certificate
+avoiding `u=0` would eliminate singular nonempty safe bridges and leave only empty-block
+incidences for the exceptional-chain audit, while a forced wall crossing could expose a
+malformed zero. In parallel, determinant/content stratification may reduce a fixed residue
+skeleton to a flat rational `GL₂(ℚ)` language, but unbounded safe alternation is not flat by
+declaration.
+
+The source route should now favor open-tail cancellation over another exact Neary recoding.
+Carvalho's inverse-transducer discrepancy supplies implicit deletion with an all-path converse;
+the missing step is a bounded-alphabet four-dimensional return representation whose punctuation
+does not cost a fourth generator. The literature synthesis and exact acceptance tests are in
+[`audits/m43-alternating-defect-literature-2026-08-07.md`](audits/m43-alternating-defect-literature-2026-08-07.md).
+The one-step annihilator obligation
 [`M4-O06`](SALVAGE.md#m4-o06-punctuation-image-annihilator) is already discharged for every gap;
 finite gap enumeration, bare rank-one incidence, and closed-block products are no longer frontier
 work. Any proposal whose semantic queue is a finite word of complete tokens is already closed.
@@ -1284,10 +1296,10 @@ universal computation.
 
 ## Execution order
 
-1. Construct an open-tail binary two-state source invariant or solve the mixed cube-root
-   punctuation incidence equations. Use formalized `M4-O02`–`M4-O04` to reject every exact
-   two-private-state clock, finite closed-token source, and exact internal/final recoloring
-   before appendant search.
+1. Attack `M₄(3)` on two independent lanes: synthesize a finite exterior cone/multicone from the
+   base and direction maps of the affine wait families; and compile an open-tail cancellation
+   source through `M4-C01`. Use `M4-O01`–`M4-O05` and `M4-O09` to reject exact Neary recodings,
+   finite closed-token queues, and one-coordinate exterior reformulations before expansion.
 2. Use formalized `MM-O01`, `G3-O01`, `MM-O03`, and `MM-O04` to reject exact packings, macros,
    and bridges without conflating their scope with solvability preservation.
 3. Prove or refute the setter candidate's projective avoidance property, construct a

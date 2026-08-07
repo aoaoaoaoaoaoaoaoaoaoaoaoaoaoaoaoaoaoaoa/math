@@ -1,10 +1,10 @@
 # Local bibliography
 
-Each PDF has a same-stem synopsis recording its citation, provenance, content digest, facts used,
-and version hazards. A metadata-only synopsis records a relied-upon source when no
-redistributable full text was located.
+Each retained artifact has a same-stem synopsis recording its citation, provenance, digest,
+content, and version hazards. A metadata-only synopsis records a source when no redistributable
+full text was located.
 
-| Key | Status | Role in the matrix-mortality investigation |
+| Work | Status | Pointer |
 | --- | --- | --- |
 | [CHHN14](cassaigne-halava-harju-nicolas-2014-matrix-mortality.md) | arXiv v3; established paper | Previous antichains, ternary encoding, rank-one scalar-to-mortality reduction, and the neighboring `Z₅(3)` and `M₅(4)` bounds |
 | [HHH07](halava-harju-hirvensalo-2007-claus-instances.md) | peer-reviewed IJFCS 2007 | Closest prior art: forced-endpoint absorption into a rank-one idempotent |
@@ -21,12 +21,21 @@ redistributable full text was located.
 | [Bacik25](bacik-2025-order-four-skolem.md) | peer-reviewed TheoretiCS 2025; CC-BY | Decidability of the algebraic Skolem problem through order four; definitive low-order boundary used by the `M₃(2)` rank census |
 | [Michels14](michels-2014-zsigmondy-theorem.md) | revised author exposition; not peer reviewed | Elementary proof of Zsigmondy’s primitive-prime-divisor theorem, including the `2⁶−1` and power-of-two exceptions |
 | [HKPY24](hirvensalo-kawamura-potapov-yuyama-2024-linear-recurrence-automata.md) | peer-reviewed RP 2024; author accepted manuscript | Recurrence-controlled reachability vocabulary adjacent to the variable-index `Mₙ = VAⁿU` return problem |
+| [ABY10](avila-bochi-yoccoz-2010-uniform-hyperbolicity.md) | peer-reviewed CMH 2010; metadata-only local record | Uniform hyperbolicity of finite `SL₂(ℝ)` cocycles is equivalent to strict invariant multicones, including Markov constraints; component boundaries have bounded periodic `±I`, parabolic, or heteroclinic witnesses |
+| [BGT10](bell-ghioca-tucker-2010-dynamical-mordell-lang.md) | peer-reviewed AJM 2010; metadata-only local record | Étale single-map orbit intersections with subvarieties have eventually periodic hitting times, proved by `p`-adic analytic interpolation |
+| [JK20](jaax-kiefer-2020-affine-reachability.md) | peer-reviewed MFCS 2020; CC-BY | PSPACE-completeness for integer affine-register reachability, NP-completeness for determinant-`{1,0}` `2 × 2` mortality, and exact affine/upper-triangular reductions |
+| [LOPW24](lefaucheux-ouaknine-purser-worrell-2024-porous-invariants.md) | peer-reviewed FMSD 2024; CC-BY | Strongest lattice invariants for multipath integer systems, semilinear separators in decidable strata, and an undecidability boundary for nondeterministic semilinear invariant synthesis |
+| [Protasov26v2](protasov-2026-perron-matrix-semigroups-v2.md) | arXiv v2 preprint; CC BY-NC-SA | Whole-semigroup Perron spectra force common invariant cones under irreducibility and low index; dimensions at most four are classified |
 | [BB02](bournez-branicky-2002-low-dimensional-mortality.md) | peer-reviewed Theory Comput. Syst. 2002 | Decidability of two rational `2 × 2` generators and the rank-one-endpoint normal form |
 | [Dong23](dong-2023-semigroup-algorithms-survey.md) | peer-reviewed survey | Later matrix-semigroup context; no sharper bounded-generator result |
 | [Heckman19](heckman-2019-2x2-mortality-invertible.md) | arXiv v1 preprint | Decidability with at most one nonsingular `2 × 2` generator; singular-generator count reduction |
 | [NR08](nuccio-rodaro-2008-2x2-mortality-slides.md) | SOFSEM 2008 author slides; paper peer-reviewed | Original decidability result for singular plus unimodular `2 × 2` integer generators |
 | [PS17](potapov-semukhin-2017-gl2z-singular-membership.md) | peer-reviewed MFCS 2017; CC-BY | Membership, hence mortality, decidable for singular plus unimodular `2 × 2` integer generators |
 | [PS17b](potapov-semukhin-2017-nonsingular-2x2-membership.md) | peer-reviewed SODA 2017; author copy | Membership decidable for arbitrary nonsingular `2 × 2` integer generators; determinant-growth machinery |
+| [PS19](potapov-semukhin-2018-vector-scalar-reachability.md) | peer-reviewed JCSS 2019; metadata-only local record | Vector, scalar, and fractional-linear point reachability are decidable in `SL₂(ℤ)`, including regular constraints, through canonical modular-group languages |
+| [COSW19](colcombet-ouaknine-semukhin-worrell-2019-low-dimensional-reachability.md) | peer-reviewed ICALP 2019; CC-BY | Half-space reachability in `GL₂(ℤ)` and membership and half-space reachability in rational Heisenberg groups are decidable |
+| [DPS24v6](diekert-potapov-semukhin-2024-flat-rational-subsets.md) | arXiv v6 preprint; metadata-only local record | Bounded-alternation rational subsets of `GL₂(ℚ)` admit membership and Boolean-emptiness algorithms; unrestricted rational alternation remains outside the theorem |
+| [CCZ20](cadilhac-chistikov-zetzsche-2020-baumslag-solitar.md) | peer-reviewed ICALP 2020; CC-BY | Rational subsets of `BS(1,q)` have effective pointed-expansion automata and PSPACE-complete membership |
 | [BKP18](bournez-kurganskyy-potapov-2018-piecewise-affine-reachability.md) | peer-reviewed IJFCS 2018; author accepted manuscript | `p`-adic denominator-weight method for cooriented slopes on bounded intervals |
 | [DS25](dong-shafrir-2025-s-unit-equations.md) | arXiv v2 preprint; CC BY | Arbitrary-prime module `S`-unit equations lead to open linear-exponential systems; scope warning, not benchmark hardness |
 | [Nicolas08](nicolas-2008-gpcp-semi-thue.md) | arXiv v5 lecture notes | Definition and old open/undecidable bounds for bounded GPCP; fixes the four-generator counting convention |
@@ -41,6 +50,7 @@ redistributable full text was located.
 | [MNU14](myasnikov-nikolaev-ushakov-2013-pcp-groups.md) | peer-reviewed J. Group Theory 2014; arXiv copy | Group PCP/GPCP formulations; warns against transferring group-rank counts to positive monoids |
 | [JingEtAl13](jing-gao-gao-gong-li-shao-zhang-2013-minimum-rank-three.md) | arXiv precursor to LAA 2018 | Rank-three zero patterns as projective point-line incidence; rational-real field hazard |
 | [Kiefer20](kiefer-2020-weighted-automata-minimization.md) | arXiv expository notes | Exact Hankel rank equals minimum weighted-automaton dimension; no same-zero lower bound |
+| [BS21](bell-smertnig-2021-noncommutative-polya.md) | peer-reviewed Selecta 2021; CC-BY | Rational series with coefficients in a finitely generated multiplicative group are exactly unambiguous rational series, via unit equations and linear hulls |
 | [VY18](villagra-yakaryilmaz-2016-affine-automata.md) | peer-reviewed Natural Computing 2018; arXiv copy | Affine-automaton zero/nonzero succinctness and its nonlinear measurement seam |
 | [SYS19](salehi-yakaryilmaz-say-2019-vector-homing-automata.md) | peer-reviewed IJFCS 2019; arXiv copy | Two-state finite word separation and homing-vector connections to matrix products |
 | [YS10](yakaryilmaz-say-2010-nondeterministic-quantum-automata.md) | peer-reviewed QIC 2010; arXiv copy | Exclusive stochastic languages and the gap between zero semantics and integer scalar series |
