@@ -1049,6 +1049,18 @@ a nonempty one. Thus endpoint products create no malformed witnesses. The lawful
 universal one- or two-return terminal bound. See
 [`m32-fixed-geodesic-endpoint-completeness-2026-08-07.md`](audits/m32-fixed-geodesic-endpoint-completeness-2026-08-07.md).
 
+The fixed-support counter branch is also closed. If finitely many rational canonical-tail
+charts store counters in a fixed set of auxiliary-prime exponents and their waits depend
+affinely on those exponents, every uniformly valid edge has constant waits. Laurent-monomial
+charts then admit no nonconstant instruction, and arbitrary rational charts admit no repeatable
+control cycle: the common rank-one reduction modulo `p` gives the cycle a projective eigenvalue
+ratio of nonzero p-adic valuation, while every toric chart shift preserves the Gauss valuation.
+Thus an aperiodic counter-orbit cannot be a stationary FRACTRAN-style prime register. It must use
+continually moving cyclotomic support and retain history not rationally recoverable from a fixed
+finite torus. See
+[`R32-O15`](SALVAGE.md#r32-o15-fixed-support-toric-compiler-obstruction) and
+[`m32-fixed-support-toric-obstruction-2026-08-08.md`](audits/m32-fixed-support-toric-obstruction-2026-08-08.md).
+
 The remaining unbounded channel is now sharply Archimedean. The formalized
 [`R32-D03`](SALVAGE.md#r32-d03-bounded-denominator-periodicity) theorem says that every
 infinite legal rational orbit with bounded reduced denominators is eventually periodic.

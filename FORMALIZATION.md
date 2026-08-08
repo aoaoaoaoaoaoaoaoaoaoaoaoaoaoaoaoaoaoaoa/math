@@ -467,6 +467,16 @@ effective auxiliary-place bound on the global angular carry, opposed by an exact
 reset-started orbit with unbounded denominators. See
 [`audits/m32-fixed-geodesic-endpoint-completeness-2026-08-07.md`](audits/m32-fixed-geodesic-endpoint-completeness-2026-08-07.md).
 
+The fixed-support universality branch is now bounded without enlarging the Lean API. A finite
+control system whose canonical tails are rational functions of fixed auxiliary-prime powers and
+whose waits are affine in their exponents cannot execute a repeatable cycle. Laurent-monomial
+charts cannot execute even one nonconstant instruction, and one affine monomial ray has at most
+five exact instruction samples. The proof is an independently reconstructed combination of
+paired-prime-power Zariski density, Laurent-support comparison, the checked common mod-`p` flag,
+and the Gauss valuation. It is retained as audited `R32-O15`, not as a second polynomial-chart
+library. See
+[`audits/m32-fixed-support-toric-obstruction-2026-08-08.md`](audits/m32-fixed-support-toric-obstruction-2026-08-08.md).
+
 These are structural and decidable-stratum theorems, not an `M₃(2)` resolution. The imported
 order-four Skolem theorem used to classify rank-one profiles is not reimplemented in Lean. The
 generic reverse edge compiler still assumes `αβ≠0`, and no universality or decision theorem is

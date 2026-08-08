@@ -98,6 +98,7 @@ file owns the mathematical stock.
 | [`R32-O12`](#r32-o12-periodic-shadow-obstruction) | obstruction | one fixed guard has arbitrarily long off-reset primitive corridors with nonmaximal Smith allocation and rising carried and Smith coordinate runs | formalized | graduated |
 | [`R32-O13`](#r32-o13-renewal-graph-collapse-and-reset-pullback) | obstruction | every aligned macro consumes shadow depth, local bounded depth does not bound height, and reset ancestry is one exact pulled-back determinant | formalized | graduated |
 | [`R32-O14`](#r32-o14-fixed-reset-geodesic-and-complete-endpoint-language) | structure theorem and obstruction | endpoint terminality is exact and every actual reset prefix has the same distinguished-prime kernel direction | formalized | graduated |
+| [`R32-O15`](#r32-o15-fixed-support-toric-compiler-obstruction) | obstruction | rational fixed-prime counter charts with affine waits admit neither a nontrivial monomial instruction nor a repeatable control cycle | audited | graduated |
 | [`R32-S07`](#r32-s07-decoded-residual-address-normal-form) | structure theorem | mortality is finite inverse-address membership in disjoint rational p-adic branch spheres | formalized | active |
 | [`R32-M05`](#r32-m05-cyclotomic-reset-or-cancellation-sieve) | partial mechanism | every primitive reduction either resets modulo a cyclotomic prime or swallows it in the common cancellation | formalized | active |
 | [`R32-S08`](#r32-s08-cumulative-endpoint-recurrence) | structure theorem | cumulative endpoint pairs absorb every normalization scalar into one deterministic exact-division recurrence | formalized | active |
@@ -3919,6 +3920,48 @@ leave the two exceptional rank-`(2,2)` compiler positions before full `M₃(2)`.
 primitive-normalization savings at `p`, and a universal two-return bound. Analyze the remaining
 one-dimensional angular carry globally across its moving auxiliary prime support, or construct
 an exact aperiodic reset-started orbit that uses it to sustain unbounded denominators.
+
+### R32-O15: Fixed-support toric compiler obstruction
+
+**Kind:** obstruction
+**Evidence:** audited
+**Disposition:** graduated
+
+Write a ready state as
+
+```text
+R_a(t)=p^a+p^(sa)/t.
+```
+
+Suppose finitely many control charts store counters in a fixed set of auxiliary-prime powers,
+their canonical tails are rational functions of those powers, their waits are affine in the
+counter exponents, and every instruction translates the counter vector by a fixed amount on a
+cofinal orthant. Zariski density of the paired prime-power grid and Laurent-support comparison
+force both endpoint wait slopes of every instruction to vanish. If the charts are Laurent
+monomials, the p-unit constant term in the exact tail transition then forbids every nonconstant
+instruction; one affine monomial ray can meet its instruction equation at no more than five
+counter values.
+
+Arbitrary rational charts cannot restore iteration. Every fixed-wait tail matrix has one common
+rank-one reduction modulo `p`. A nonempty control-cycle product has unit trace and positive
+determinant valuation, hence a projective eigenvalue quotient of nonzero p-adic valuation. A
+toric chart shift scales every variable by a p-unit and preserves the Gauss valuation, which
+contradicts that quotient.
+
+**Scope:** this excludes separated rational charts over fixed auxiliary-prime support with
+affine wait dependence. It does not exclude an input-specific history with non-affine waits,
+continually changing factors of `p^a−1`, or angular state not rationally determined by a fixed
+torus.
+
+**Artifact:** independent reconstruction in
+[`m32-fixed-support-toric-obstruction-2026-08-08.md`](audits/m32-fixed-support-toric-obstruction-2026-08-08.md).
+The existing single-chart formal obstruction remains
+`ReturnGuard.Rail.no_infinite_primePower_affineWait_rail`; no parallel multivariate API was
+retained.
+
+**Use:** retire orthodox fixed-prime FRACTRAN and Minsky encodings in the guard. Any aperiodic
+counter-orbit must use genuinely moving cyclotomic support and unbounded history rather than a
+stationary prime-exponent register.
 
 ### R32-D03: Bounded-denominator periodicity
 
