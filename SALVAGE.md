@@ -128,6 +128,7 @@ file owns the mathematical stock.
 | [`G3-O05`](#g3-o05-cancellative-projective-state-tax) | obstruction | inverse-saturated two-side projective dynamics need four states | audited | graduated |
 | [`G3-O06`](#g3-o06-periodic-ray-completion-and-branching-fracture) | compiler and obstruction | `bcbb` has an exact three-state periodic compiler, while `bcbc` defeats every single affine positional section | formalized | graduated |
 | [`G3-O07`](#g3-o07-near-fork-carry-collision) | obstruction | a terminal and nonterminal `bcbc` near-fork collide under the entire one-coordinate phase-line carry family | formalized | graduated |
+| [`G3-C02`](#g3-c02-fixed-bcbc-singular-recognizer) | fixed-instance compiler | a transient guard over one affine carry recognizes the complete `bcbc` language | audited | graduated |
 | [`G3-M01`](#g3-m01-free-group-discrepancy-engine) | partial mechanism | free cancellation implements queue deletion with an all-path converse | reported | active |
 | [`D2-S01`](#d2-s01-projective-hard-core) | structure theorem | `M₂(3)` is equivalent to two-generator projective incidence | audited | active |
 | [`D2-S02`](#d2-s02-monotone-affine-path-form) | structure theorem | normalized affine words form monotone exponent paths | audited | stock |
@@ -4393,16 +4394,13 @@ one fixed length contains at least `2^n` terminal words. A single affine positio
 injective code at each length, so it cannot recognize the complete `bcbc` language.
 
 **Scope:** the `bcbb` grammar, all-control affine converse, integral lift, `bcbc` binary terminal
-fork, and failure of a single affine positional section are Lean-checked. The report's stronger
-exact grammar `FD(B(DC)*F)*` for all `bcbc` terminal words is not promoted: its dead-residual
-induction does not state the invariant needed for the compressed cancellation step. The certified
-binary sublanguage already supplies the positional obstruction. No theorem here excludes an
-arbitrary rational three-state same-zero representation of `bcbc`.
+fork, failure of a single affine positional section, and complete `bcbc` grammar
+`FD(X(DZ)*F)*` are Lean-checked. The residual proof explicitly establishes the missing
+right-residual rigidity invariant. The separate fixed-instance recognizer is [`G3-C02`](#g3-c02-fixed-bcbc-singular-recognizer).
 
-**Use:** delete `bcbb`, periodic rays, and positional digit refinements from the lower-bound
-frontier. Use `bcbc` as the first explicit branching target: either compile its complete terminal
-language with genuinely two-dimensional singular dynamics, or prove common positive shifts force
-same-zero dimension at least four.
+**Use:** delete `bcbb`, periodic rays, positional digit refinements, and branching cardinality by
+itself from the lower-bound frontier. The exact grammar is now reusable as a finite laboratory,
+but `bcbc` is no longer a viable four-state lower-bound target after [`G3-C02`](#g3-c02-fixed-bcbc-singular-recognizer).
 
 **Artifact:** [`PeriodicHistory.lean`](MatrixMortality/PeriodicHistory.lean),
 [`BranchingHistory.lean`](MatrixMortality/BranchingHistory.lean), and
@@ -4471,6 +4469,75 @@ invertibility.
 
 **Artifact:** [`BranchingHistory.lean`](MatrixMortality/BranchingHistory.lean) and
 [`m34-near-fork-carry-collision-2026-08-07.md`](audits/m34-near-fork-carry-collision-2026-08-07.md).
+
+### G3-C02: Fixed `bcbc` singular recognizer
+
+**Kind:** fixed-instance compiler
+
+**Evidence:** audited, with formalized core
+
+**Disposition:** graduated
+
+Write `X=BBB`, `D=BCB`, `Z=CBB`, and `F=CBC`. Canonical residual paths give the exact languages
+
+```text
+null histories      = (X(DZ)*F)*,
+terminal histories  = FD(X(DZ)*F)*.
+```
+
+The checked residual invariant says every reachable nonempty right residual is exactly `b`.
+Lean classifies the only entrances to the three live residuals and proves both grammars on
+arbitrary role words.
+
+There is a rational three-state candidate with row `λ=(1,0,0)`, column `γ=(1,2983,1)ᵀ`,
+singular data matrices
+
+```text
+B=[[0,1,1/2],                  C=[[0,1/6125,-29503/6125],
+   [0,5,385],                     [0,7,534],
+   [0,0,1]],                      [0,0,1]],
+```
+
+and affine involution
+
+```text
+T=[[1,0,0],[0,-1,2983],[0,0,1]].
+```
+
+Lean proves its complete raw-control recurrence from `δ=(1,0,1)ᵀ`:
+
+```text
+H_wδ=(X(w),Y(w),1)ᵀ,
+Y(bv)=5Y(v)+385,       X(bv)=Y(v)+1/2,
+Y(cv)=7Y(v)+534,       X(cv)=(Y(v)-29503)/6125,
+Y(tv)=2983-Y(v),       X(tv)=X(v).
+```
+
+Canonical terminal controls decode to the checked terminal grammar and vanish under both the
+matrix coefficient and paired coefficient. Both data determinants are zero and `det T=-1`.
+
+The audited reverse certificate removes `tt`, strips controls from targets `0` and `29503`, and
+closes on finite graphs of 22 and 44 states. Its accepted paths are exactly the reduced canonical
+language. Independent enumeration through length twelve checked 797,161 controls, sixteen zeros
+on each side, and no mismatch. Thus the audited conclusion is
+
+```text
+zdim_ℚ(L₃,bcbc) ≤ 3.
+```
+
+**Scope:** the grammars, recurrence, determinants, canonical decoder, and intended zeros are
+Lean-checked. The arbitrary-control reverse converse is audited but not yet kernel-checked, so the
+zero-language dimension inequality is not a formal theorem. The constants are fitted to one
+fixed regular language. A source-uniform finite-target affine construction would remain inside
+the decidable class of `G3-O04`.
+
+**Use:** retire `bcbc` as a lower-bound instance and reject branching width as evidence for four
+states. Preserve the mechanism as a design clue: singular dynamics may use one persistent carry
+and one transient guard to separate a malformed fork, then merge only at a complete block. The
+master target is now uniformity across the source family, not this fixed grammar.
+
+**Artifact:** [`BranchingRecognizer.lean`](MatrixMortality/BranchingRecognizer.lean) and
+[`m34-bcbc-singular-recognizer-2026-08-08.md`](audits/m34-bcbc-singular-recognizer-2026-08-08.md).
 
 ### G3-M01: Free-group discrepancy engine
 

@@ -150,6 +150,24 @@
  Classical.choice,
  Quot.sound]
 'MatrixMortality.BranchingHistory.no_phaseLine_bcbc_sameZero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.BranchingRecognizer.bcbcNull_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.BranchingRecognizer.bcbc_terminal_match_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.BranchingRecognizer.recognizerProduct_mulVec_delta' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.BranchingRecognizer.recognizerCoefficient_eq_guard' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.BranchingRecognizer.recognizerData_det' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.BranchingRecognizer.recognizerToggle_det' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.BranchingRecognizer.suffixDecode_historyControl' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.BranchingRecognizer.terminalControl_decode' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.BranchingRecognizer.recognizerCoefficient_terminalControl' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.BranchingRecognizer.pairedCoefficient_terminalControl' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.ResetAffineHistory.wordProduct_mulVec_column' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]

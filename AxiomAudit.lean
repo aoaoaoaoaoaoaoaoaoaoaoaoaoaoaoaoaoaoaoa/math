@@ -110,6 +110,16 @@ open MatrixMortality
 #print axioms BranchingHistory.no_bcbc_sameZero_of_local_fork
 #print axioms BranchingHistory.phaseLine_terminal_eq_nearFork
 #print axioms BranchingHistory.no_phaseLine_bcbc_sameZero
+#print axioms BranchingRecognizer.bcbcNull_iff
+#print axioms BranchingRecognizer.bcbc_terminal_match_iff
+#print axioms BranchingRecognizer.recognizerProduct_mulVec_delta
+#print axioms BranchingRecognizer.recognizerCoefficient_eq_guard
+#print axioms BranchingRecognizer.recognizerData_det
+#print axioms BranchingRecognizer.recognizerToggle_det
+#print axioms BranchingRecognizer.suffixDecode_historyControl
+#print axioms BranchingRecognizer.terminalControl_decode
+#print axioms BranchingRecognizer.recognizerCoefficient_terminalControl
+#print axioms BranchingRecognizer.pairedCoefficient_terminalControl
 #print axioms ResetAffineHistory.wordProduct_mulVec_column
 #print axioms ResetAffineHistory.coefficient_eq
 #print axioms ResetAffineHistory.phaseWeight_eq_zero_of_toggle_pair

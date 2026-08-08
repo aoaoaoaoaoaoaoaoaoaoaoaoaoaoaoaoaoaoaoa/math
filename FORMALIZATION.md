@@ -164,13 +164,20 @@ four explicit integral `3 × 3` matrices, and
 
 The adjacent body `bcbc` certifies the first branching wall. Lean checks two distinct
 four-stroke null blocks of equal length and injectively concatenates them according to arbitrary
-bit words. After the fixed terminal prefix, all `n`-bit images are terminal role words of length
-`6+12n`. Thus fixed-length slices have at least `2^n` words.
-`BranchingHistory.no_affine_positional_section` proves that no single affine row of the injective
-positional decoder recognizes the complete `bcbc` terminal language. This does not exclude an
-arbitrary rational three-state same-zero representation; that compiler or a common-shift
-dimension-four lower bound is the live seam. The reconstruction is
-[`m34-periodic-ray-branching-fracture-2026-08-07.md`](audits/m34-periodic-ray-branching-fracture-2026-08-07.md).
+bit words. It now also proves the complete null grammar `(X(DZ)*F)*` and terminal grammar
+`FD(X(DZ)*F)*` from a canonical residual path. The critical invariant is that every reachable
+nonempty right residual is exactly `b`; the proof classifies entrances to the three live
+residuals rather than using a false forward recursion.
+
+The reported singular rational matrices are formalized through their complete raw-control state
+recurrence. Lean proves both data determinants vanish, the toggle determinant is `−1`, canonical
+stroke controls decode to the exact terminal histories, and every such control is a matrix zero.
+The finite reverse-carry converse on malformed controls remains audited rather than kernel-checked.
+Its reverse graph, descending dead-state certificate, and bounded cross-check are recorded in
+[`m34-bcbc-singular-recognizer-2026-08-08.md`](audits/m34-bcbc-singular-recognizer-2026-08-08.md).
+Accordingly, `zdim_ℚ(L₃,bcbc)≤3` is an audited fixed-instance result, not a theorem in this file.
+The construction has source-fitted constants and does not weaken the uniform obstruction in
+`G3-O04`.
 
 The first scalar-carry response to that branching is also closed. Lean checks a terminal control
 and a same-length nonterminal near-fork, then proves a dimension-independent local collision law:
@@ -483,6 +490,13 @@ normalization certificate. The finite graph algorithm is audited in
 [`m34-expanding-history-no-go-2026-08-06.md`](audits/m34-expanding-history-no-go-2026-08-06.md);
 the broader phrase “finitely many rational curves” is rejected without the formalized shared
 affine-coordinate transition law.
+
+For [`G3-C02`](SALVAGE.md#g3-c02-fixed-bcbc-singular-recognizer), Lean checks the complete
+residual grammar, terminal grammar, affine state recurrence, determinants, canonical decoder, and
+all intended terminal zeros. The remaining theorem is the arbitrary-control converse for the
+displayed matrices. Its finite reverse graph is audited, but the rank certificate has not yet
+been transcribed into Lean. No publication-facing theorem identifies the matrix and paired zero
+sets until that transcription is complete.
 
 The internal-sandwich audit retains two unformalized exact obstructions:
 
@@ -822,6 +836,9 @@ with a complete arbitrary-word converse.
 | No affine positional row section recognizes the complete `bcbc` terminal language | `BranchingHistory.no_affine_positional_section` |
 | Local fork equality and two-step erase recovery force a terminal/nonterminal `bcbc` state collision | `BranchingHistory.bcbc_terminal_nearFork`, `BranchingHistory.bcbcNearFork_state_eq_of_local_fork`, `BranchingHistory.no_bcbc_sameZero_of_local_fork` |
 | The complete parametric phase-line carry family identifies the terminal prefix with its nonterminal near-fork | `BranchingHistory.phaseLine_terminal_eq_nearFork`, `BranchingHistory.no_phaseLine_bcbc_sameZero` |
+| The `bcbc` null and terminal histories have the complete nested-excursion grammars | `BranchingRecognizer.bcbcNull_iff`, `BranchingRecognizer.bcbc_terminal_match_iff` |
+| The reported singular recognizer obeys its exact all-control affine recurrence | `BranchingRecognizer.recognizerProduct_mulVec_delta`, `BranchingRecognizer.recognizerCoefficient_eq_guard` |
+| Canonical controls decode every `bcbc` terminal history and vanish in both scalar systems | `BranchingRecognizer.terminalControl_decode`, `BranchingRecognizer.recognizerCoefficient_terminalControl`, `BranchingRecognizer.pairedCoefficient_terminalControl` |
 | Every reset-affine control word obeys its exact coordinate and target equation | `ResetAffineHistory.wordProduct_mulVec_column`, `ResetAffineHistory.coefficient_eq` |
 | A zero and its leading toggle force the affine target to forget phase | `ResetAffineHistory.phaseWeight_eq_zero_of_toggle_pair` |
 | A phase-only reset-affine target has the exact two-phase zero test | `ResetAffineHistory.exists_zero_of_left_zero_iff` |

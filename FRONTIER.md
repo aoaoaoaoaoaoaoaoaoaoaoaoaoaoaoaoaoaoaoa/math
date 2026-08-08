@@ -505,8 +505,8 @@ The resulting four explicit integral matrices have a complete arbitrary-product 
 converse. The adjacent body `bcbc` is the first certified branching wall: two distinct
 equal-length null blocks concatenate according to arbitrary bit words, producing `2^n` terminal
 words at one length. Lean consequently excludes every single affine row section of the injective
-positional decoder. The report's proposed exact regular grammar for all `bcbc` terminals remains
-unpromoted; the binary sublanguage already kills positional-ray refinements.
+positional decoder. Lean now also proves the complete null grammar `(X(DZ)*F)*` and terminal
+grammar `FD(X(DZ)*F)*` from a canonical residual path.
 
 [`G3-O07`](SALVAGE.md#g3-o07-near-fork-carry-collision) closes the next attempted consumption of
 that branching. One terminal `bcbc` prefix and one same-length nonterminal near-fork collide
@@ -517,6 +517,15 @@ for every rational parameter away from the denominator pole. Thus rational contr
 singular phase reset do not rescue a scalar stroke carry. The unproved step is now internal:
 arbitrary three-state fork zeros need not identify partial-factor images before their common
 return to the terminal plane.
+
+[`G3-C02`](SALVAGE.md#g3-c02-fixed-bcbc-singular-recognizer) reverses the local verdict. A
+different singular three-state system uses one expanding integer carry and a transient first
+coordinate. Lean checks its all-control recurrence and every canonical terminal zero; an audited
+finite reverse graph gives the arbitrary-control converse. Thus `bcbc` has rational same-zero
+dimension at most three and cannot support the desired lower bound. The construction is
+instance-fitted and regular: a source-uniform finite-target version remains excluded by
+`G3-O04`. The paired route's live obstruction is now uniformity across bodies, not the state
+dimension of this fixed branching language.
 
 The mortality lift is no longer part of this obstruction. For arbitrary controls `H_a`, column
 `γ`, and row `λ` over a field, adjoining `γλ` gives mortality exactly when some
@@ -561,7 +570,7 @@ three symbol types but many transition rules does not meet this count.
 
 | Lane | Available leverage | Decisive obstruction or obligation |
 | --- | --- | --- |
-| Shift-equivariant zero incidence | Same-zero dimension three is point-line incidence in `P²`; [`G3-O04`](SALVAGE.md#g3-o04-expanding-affine-history-no-go) kills finite-mode expanding one-coordinate uniformization, [`G3-O05`](SALVAGE.md#g3-o05-cancellative-projective-state-tax) separates support rank from inverse-saturated dynamics, [`G3-O06`](SALVAGE.md#g3-o06-periodic-ray-completion-and-branching-fracture) kills affine positional sections on `bcbc`, and [`G3-O07`](SALVAGE.md#g3-o07-near-fork-carry-collision) kills its one-coordinate phase-line stroke carry | Compile the `bcbc` fork with intrinsically two-dimensional singular dynamics, or force its terminal plane through partial factors far enough to create the checked near-fork collision; bare support tables, positional digits, scalar carries, and group-completable cross-multiplication are closed |
+| Shift-equivariant zero incidence | Same-zero dimension three is point-line incidence in `P²`; [`G3-C02`](SALVAGE.md#g3-c02-fixed-bcbc-singular-recognizer) compiles the fixed branching test, while [`G3-O04`](SALVAGE.md#g3-o04-expanding-affine-history-no-go) kills its source-uniform finite-target affine extension and [`G3-O05`](SALVAGE.md#g3-o05-cancellative-projective-state-tax) kills inverse-saturated dynamics | Build one computable singular formula over a mixed source ensemble, with open or denominator-generating history; fixed-instance fitting, bare support tables, and group-completable cross-multiplication are closed |
 | Inverse-transducer discrepancy | Free cancellation performs queue-head deletion and Carvalho proves an all-path fixed-loop converse; see [`G3-M01`](SALVAGE.md#g3-m01-free-group-discrepancy-engine) | The closed-path subgroup has instance-dependent rank; inverses, free reduction, and subgroup control must be compiled into three positive letters |
 | Context and sliding-block codes | Adjacent ternary symbols can carry four semantic roles without fixed role macros | GPCP quantifies over the full free monoid; every boundary fragment, phase shift, and invalid overlap must be algebraically harmless |
 | Erasure and target recoding | Erasure escapes `G3-O01`; longer target atoms can split the one-letter images used in its proof | Empty contributions and code fragments create new boundary matches unless a global normal form excludes them |
@@ -576,25 +585,21 @@ it supplies the missing deletion semantics but not yet the bounded positive sour
 
 #### Operational program
 
-The first paired target is the explicit body `bcbc`. Either construct three rational states whose
-common shifts recognize its complete terminal language, including every malformed control, or
-prove that its branching zero set has rational same-zero dimension at least four. The checked
-equal-length binary fork must appear in either argument: a compiler must combine its alternatives
-without a finite union of affine rows, while a lower bound must use the shared positive actions
-rather than static support rank.
+The fixed `bcbc` target is complete enough to stop serving as the enemy. Its exact grammar and
+singular candidate expose the useful mechanism: one carry recognizes complete excursions, while
+a transient guard rejects malformed first controls. The audited reverse certificate handles the
+entire free monoid. Further fixed-body fitting has no bearing on `M₃(4)`.
 
-The scalar stroke-carry escape is now closed. In the notation
+The former scalar stroke-carry lane is closed only for its phase-line family. In the notation
 
 ```text
 D=B T C B,       Z=C T B B,       F=C T B C,       X=B T B B,
 ```
 
 the local identities `BBv=CBTγ` and `DZv=FXv` force a checked terminal/nonterminal collision.
-A lower bound must derive that collision, or another explicit false zero, from the complete
-all-context zero law without assuming either identity, cancellation, or inverse states. A
-construction must keep the near-fork suffix outside the recoverable `BB` image or separate the
-two partial fork paths by genuinely two-dimensional singular geometry; changing the scalar carry
-parameter cannot work.
+The successful fixed recognizer evades these identities with its transient guard. This confirms
+that the collision is an ansatz obstruction, not a lower bound. It remains useful as a regression
+test for any uniform formula.
 
 Any positive construction must then extend to one symbolic family computable from `(β,body)`,
 
@@ -606,11 +611,10 @@ Any positive construction must then extend to one symbolic family computable fro
 
 on every control word and every admissible body. Its projective orbit must leave the finite-mode
 expanding affine class of `G3-O04`; merely changing radix, digits, collisions, conjugacy, or chart
-count repeats a closed route; `G3-O06` also excludes a single affine positional section even on
-`bcbc`. It must evade `G3-O05`: formal inverse role continuations must
+count repeats a closed route. It must evade `G3-O05`: formal inverse role continuations must
 either be undefined, lose the target equivalence, or be collapsed by a singular positive action.
-A parameter such as
-`K=κ(a terminal role word)` is forbidden unless a total source-computable formula produces it on
+A parameter such as `K=κ(a terminal role word)`, including the fitted targets in `G3-C02`, is
+forbidden unless a total source-computable formula produces it on
 both mortal and immortal inputs. Finite synthesis should share one formula template across a
 mixed ensemble of mortal, immortal, and null-history instances; independently fitted matrices no
 longer test the live obstruction. Static zero-pattern fitting is now vacuous: the checked conic

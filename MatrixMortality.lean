@@ -73,6 +73,7 @@ import MatrixMortality.PhaseRigidity
 import MatrixMortality.HistoryFracture
 import MatrixMortality.PeriodicHistory
 import MatrixMortality.BranchingHistory
+import MatrixMortality.BranchingRecognizer
 import MatrixMortality.ExpandingHistoryNoGo
 import MatrixMortality.CancellativeProjectiveNoGo
 import MatrixMortality.NearyBinaryDefect
