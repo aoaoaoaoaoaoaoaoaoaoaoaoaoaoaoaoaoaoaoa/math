@@ -99,6 +99,7 @@ file owns the mathematical stock.
 | [`R32-O13`](#r32-o13-renewal-graph-collapse-and-reset-pullback) | obstruction | every aligned macro consumes shadow depth, local bounded depth does not bound height, and reset ancestry is one exact pulled-back determinant | formalized | graduated |
 | [`R32-O14`](#r32-o14-fixed-reset-geodesic-and-complete-endpoint-language) | structure theorem and obstruction | endpoint terminality is exact and every actual reset prefix has the same distinguished-prime kernel direction | formalized | graduated |
 | [`R32-O15`](#r32-o15-fixed-support-toric-compiler-obstruction) | obstruction | rational fixed-prime counter charts with affine waits admit neither a nontrivial monomial instruction nor a repeatable control cycle | audited | graduated |
+| [`R32-O16`](#r32-o16-irreducible-cubic-punctuation-collapse) | structure theorem and obstruction | irreducible cubic singular returns are finite unless all waits collapse modulo three | audited | graduated |
 | [`R32-S07`](#r32-s07-decoded-residual-address-normal-form) | structure theorem | mortality is finite inverse-address membership in disjoint rational p-adic branch spheres | formalized | active |
 | [`R32-M05`](#r32-m05-cyclotomic-reset-or-cancellation-sieve) | partial mechanism | every primitive reduction either resets modulo a cyclotomic prime or swallows it in the common cancellation | formalized | active |
 | [`R32-S08`](#r32-s08-cumulative-endpoint-recurrence) | structure theorem | cumulative endpoint pairs absorb every normalization scalar into one deterministic exact-division recurrence | formalized | active |
@@ -3962,6 +3963,46 @@ retained.
 **Use:** retire orthodox fixed-prime FRACTRAN and Minsky encodings in the guard. Any aperiodic
 counter-orbit must use genuinely moving cyclotomic support and unbounded history rather than a
 stationary prime-exponent register.
+
+### R32-O16: Irreducible-cubic punctuation collapse
+
+**Kind:** structure theorem and obstruction
+**Evidence:** audited
+**Disposition:** graduated
+
+Let `A ∈ GL₃(ℚ)` have irreducible cubic characteristic polynomial and put `Mₙ=VAⁿU`
+for rank-two interfaces `U,V`. The cubic-field sandwich map `z ↦ Vm_zU` is injective. Thus no
+return is zero, every singular return has rank one, every nonzero scalar observation has exact
+recurrence order three, and `det Mₙ` has exact irreducible order three under `∧²A`.
+
+Root-of-unity degeneracy occurs exactly for the pure cubic `χ_A=X³−N`, equivalently
+`A³=NI`. Otherwise the singular waits form a finite effectively enumerable set, and distinct
+waits give distinct projective returns. In the pure case Lean proves, for arbitrary words,
+
+```text
+M_(3q+r)=N^q M_r,
+mortality of {Mₙ : n≥0} ↔ mortality of {M₀,M₁,M₂}.
+```
+
+The residue triple is not arbitrary. Three determinant-polarization equations characterize its
+rank-two trace tensor. If exactly one residue is singular, the other two units differ by a
+projective involution. Zero singular residues give immortality; two singular residues reduce to
+four order-at-most-two recurrence tests. The sole pure-cubic residue is therefore a constrained
+involutive-ratio PI₂ instance.
+
+**Scope:** the Lean artifact checks the pure-cubic arbitrary-word collapse over a field. The
+field faithfulness, singular-time classification, trace tensor, and residual decision split are
+independently audited. Non-pure isolated singular cuts may still be joined by an unbounded word
+over the projectively injective unit returns; the one-singular pure case remains open.
+
+**Artifact:** `CubicReturn.returnProduct_eq_smul_residues` and
+`CubicReturn.pairGenerator_isMortal_iff_residue` in
+[`CubicReturn.lean`](MatrixMortality/CubicReturn.lean), with the complete reconstruction in
+[`m32-cubic-punctuation-collapse-2026-08-08.md`](audits/m32-cubic-punctuation-collapse-2026-08-08.md).
+
+**Use:** retire cubic singular timing as an unbounded store. Any nonsplit cubic attack must now
+solve an all-invertible projective bridge between finitely many isolated rank-one cuts, or solve
+the strictly constrained involutive-ratio PI₂ throat.
 
 ### R32-D03: Bounded-denominator periodicity
 

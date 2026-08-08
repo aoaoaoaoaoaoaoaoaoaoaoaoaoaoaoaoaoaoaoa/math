@@ -156,6 +156,7 @@ open MatrixMortality
 #print axioms ReturnFamily.returnHankel_card_le
 #print axioms ReturnFamily.pairGenerator_isMortal_iff
 #print axioms ReturnFamily.pairGenerator_isMortal_iff_positiveBridge
+#print axioms CubicReturn.pairGenerator_isMortal_iff_residue
 #print axioms EdgeCompression.isMortal_iff_exists_edgeProduct_eq_zero
 #print axioms TwoPlaneEdges.output_mul_input
 #print axioms TwoPlaneEdges.generator_rank

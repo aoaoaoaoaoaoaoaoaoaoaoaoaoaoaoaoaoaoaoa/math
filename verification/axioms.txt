@@ -284,6 +284,9 @@
 'MatrixMortality.ReturnFamily.pairGenerator_isMortal_iff_positiveBridge' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.CubicReturn.pairGenerator_isMortal_iff_residue' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.EdgeCompression.isMortal_iff_exists_edgeProduct_eq_zero' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]

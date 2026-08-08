@@ -9,6 +9,7 @@ import MatrixMortality.BoundaryTax
 /- Finite-rank repair. -/
 import MatrixMortality.InternalSandwich
 import MatrixMortality.ReturnFamily
+import MatrixMortality.CubicReturn
 import MatrixMortality.EdgeCompression
 import MatrixMortality.TwoPlaneEdges
 import MatrixMortality.ReverseEdge
