@@ -78,6 +78,7 @@ import MatrixMortality.SquareRootPunctuation
 import MatrixMortality.TernaryClosedBlockNoGo
 import MatrixMortality.ExpandingHistoryNoGo
 import MatrixMortality.CancellativeProjectiveNoGo
+import MatrixMortality.PositiveFreeCancellation
 import MatrixMortality.NearyBinaryDefect
 import MatrixMortality.NearyPhaseSignature
 import MatrixMortality.CHHNPackingRank

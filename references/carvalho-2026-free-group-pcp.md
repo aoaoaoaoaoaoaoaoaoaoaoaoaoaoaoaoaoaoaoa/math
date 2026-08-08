@@ -32,6 +32,14 @@ basis whose rank depends on the transducer. Passing to three positive source let
 still require a uniform rank bound or a sound positive-monoid compiler for that subgroup
 constraint.
 
+For the cyclic-tag transducer with `m` appendants, direct reconstruction of its Stallings graph
+gives closed-path rank `3m+1` and an explicit basis. Combining Proposition 3.2, Lemma 3.5, and
+the all-fixed-points-are-loops clause of Theorem 3.6 sharpens the construction: the fixed subgroup
+is trivial in the nonhalting case and infinite cyclic in the halting case. Through Theorem 4.1,
+the resulting PCP equalizer consequently has promised rank zero or one. This is a derived
+corollary of the paper's construction, not a theorem stated in the preprint; no external novelty
+claim is made for it.
+
 ## Audit notes
 
 The local file is arXiv v2. It is a new preprint and has not been peer reviewed. Free-group

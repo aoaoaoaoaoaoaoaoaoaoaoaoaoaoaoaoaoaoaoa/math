@@ -275,6 +275,13 @@
 'MatrixMortality.CancellativeProjectiveRigidity.scalar_commutator_eq_one' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.PositiveFreeCancellation.triangle_relations' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.PositiveFreeCancellation.triangleEvaluate_surjective' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.PositiveFreeCancellation.exists_nonempty_positive_identity' depends on axioms: [propext,
+ Classical.choice]
+'MatrixMortality.PositiveFreeCancellation.boundary_eq_of_accept_element_and_square' depends on axioms: [propext]
+'MatrixMortality.PositiveFreeCancellation.exists_nonempty_identity_witness' depends on axioms: [propext,
+ Classical.choice]
 'MatrixMortality.paired_exact_diagonal_twoChannel_state_lower_bound' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]

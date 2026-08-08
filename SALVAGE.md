@@ -131,7 +131,8 @@ file owns the mathematical stock.
 | [`G3-O07`](#g3-o07-near-fork-carry-collision) | obstruction | a terminal and nonterminal `bcbc` near-fork collide under the entire one-coordinate phase-line carry family | formalized | graduated |
 | [`G3-C02`](#g3-c02-fixed-bcbc-singular-recognizer) | fixed-instance compiler | a transient guard over one affine carry recognizes the complete `bcbc` language | audited | graduated |
 | [`G3-M02`](#g3-m02-square-root-punctuation-fracture) | partial mechanism | a rank-two square root gives an exact `SS`-free mortality grammar | formalized | active |
-| [`G3-M01`](#g3-m01-free-group-discrepancy-engine) | partial mechanism | free cancellation implements queue deletion with an all-path converse | reported | active |
+| [`G3-M01`](#g3-m01-free-group-discrepancy-engine) | partial mechanism | free cancellation implements queue deletion; the accepting subgroup is cyclic | audited | active |
+| [`G3-O09`](#g3-o09-quotient-blind-positive-boundary-collapse) | obstruction | all-loop-complete group-factorizing boundaries accept a nonempty identity spelling | formalized core | graduated |
 | [`D2-S01`](#d2-s01-projective-hard-core) | structure theorem | `M₂(3)` is equivalent to two-generator projective incidence | audited | active |
 | [`D2-S02`](#d2-s02-monotone-affine-path-form) | structure theorem | normalized affine words form monotone exponent paths | audited | stock |
 | [`D2-D01`](#d2-d01-projectively-unimodular-stratum) | decidable stratum | projectively unimodular hard-core instances are decidable | audited | stock |
@@ -4671,7 +4672,7 @@ isolated occurrence of `S`.
 
 **Kind:** partial mechanism
 
-**Evidence:** reported
+**Evidence:** audited
 
 **Disposition:** active
 
@@ -4687,20 +4688,83 @@ appends the production. An `H` marker counts simulated steps, a `p` marker preve
 trivial discrepancy on false paths, and every fixed point is forced to a closed transducer
 path. This supplies both implicit deletion and an arbitrary-path soundness invariant.
 
-**Scope:** the source is a free group, not a positive free monoid. The subgroup of closed
-input paths has a computed free basis whose rank depends on the transducer. No bound of
-three, positive encoding, or classical fixed-boundary GPCP compiler follows from the
-preprint.
+For a cyclic-tag transducer with `m` appendants, the complete closed-path subgroup has rank
+`3m+1`. An explicit Schreier basis is given by the closing `0` cycle, the `m` conjugated `1`
+chords, and the `2m` conjugated `H,p` loops. This prevents generation of the complete synchronizer
+by three group macros.
 
-**Use:** audit whether the closed-path subgroup can be generated uniformly by three
-positive macros or whether its control can be moved into boundaries without admitting
-spurious reduced words.
+The accepting subgroup is much smaller. Carvalho's first-letter trajectory and all-path converse
+imply
+
+```text
+Fix(T̃_C)={1}       if C does not halt,
+Fix(T̃_C)=⟨g_C⟩    if C halts.
+```
+
+The generator is a conjugate of the first marker-only cycle and is not a proper power. The free
+group PCP equalizer constructed from the transducer is therefore promised to have rank zero or
+one. This is an audited corollary of Carvalho's construction; no external novelty claim is made.
+The generator cannot be selected from any computable finite menu, since unique roots would turn
+such a menu into a halting decision.
+
+**Scope:** the source is a free group, not a positive free monoid. Low accepting rank is
+existential and halting-dependent; it does not supply a computable macro. Three positive letters
+can evaluate surjectively onto `F₂`, but nonempty identity spellings and malformed partial
+reductions must then be rejected before taking the quotient.
+
+**Use:** stop trying to compress the complete Stallings basis. Build a spelling-sensitive,
+one-way normal-form verifier whose legal action agrees with the virtual endomorphism and whose
+illegal positive words enter a permanent trap.
 
 **Source:** [`carvalho-2026-free-group-pcp.md`](references/carvalho-2026-free-group-pcp.md).
 
-**Next:** extract the transducer for the smallest universal cyclic-tag source, compute its
-closed-path subgroup rank, and identify exactly which formal inverses occur in the fixed-loop
-converse.
+**Artifact:**
+[`m34-free-group-discrepancy-2026-08-08.md`](audits/m34-free-group-discrepancy-2026-08-08.md).
+
+**Next:** couple the three-letter forbidden-triple normal form to Carvalho's state-dependent
+output map without state-indexed source letters, or implement the trap through singular positive
+matrix dynamics.
+
+### G3-O09: Quotient-blind positive boundary collapse
+
+**Kind:** obstruction
+
+**Evidence:** formalized core
+
+**Disposition:** graduated
+
+Three positive letters `x,y,z`, evaluated by
+
+```text
+x↦x,       y↦y,       z↦y⁻¹x⁻¹,
+```
+
+surject onto `F₂`; Lean proves this by free-group induction. The cyclic words `xyz,yzx,zxy` are
+nonempty spellings of the identity. Thus positivity does not itself remove formal inverses.
+
+Let a positive evaluation `π:S*→G` surject onto a group. Suppose fixed homomorphic boundaries
+accept a group element `g` and its square:
+
+```text
+ℓ α(g) r = ℓ′ β(g) r′,
+ℓ α(g²) r = ℓ′ β(g²) r′.
+```
+
+Group cancellation forces `ℓr=ℓ′r′`. Surjectivity gives a nonempty positive identity word, and
+the boundary equality accepts it. Lean proves the boundary-square lemma and constructs the false
+witness over arbitrary groups.
+
+**Scope:** the application to Carvalho assumes completeness for every nontrivial accepting fixed
+loop, hence for both `g_C` and `g_C²`, and assumes the final test factors only through the evaluated
+group element. It does not cover existential-only witness transport, a test of the unreduced
+positive spelling, partial action, or singular dynamics which destroy inverse continuations.
+
+**Use:** reject Nielsen or Schreier compression followed by quotient-blind fixed group boundaries.
+Any surviving cancellation compiler must carry positive normal-form state or be intrinsically
+one-way.
+
+**Artifact:** [`PositiveFreeCancellation.lean`](MatrixMortality/PositiveFreeCancellation.lean)
+and [`m34-free-group-discrepancy-2026-08-08.md`](audits/m34-free-group-discrepancy-2026-08-08.md).
 
 ## Dimension Two
 

@@ -172,6 +172,11 @@ open MatrixMortality
 #print axioms CancellativeRoleFraction.rightConjugate_eq
 #print axioms CancellativeProjectiveRigidity.eq_one_of_cube_eq_one
 #print axioms CancellativeProjectiveRigidity.scalar_commutator_eq_one
+#print axioms PositiveFreeCancellation.triangle_relations
+#print axioms PositiveFreeCancellation.triangleEvaluate_surjective
+#print axioms PositiveFreeCancellation.exists_nonempty_positive_identity
+#print axioms PositiveFreeCancellation.boundary_eq_of_accept_element_and_square
+#print axioms PositiveFreeCancellation.exists_nonempty_identity_witness
 #print axioms paired_exact_diagonal_twoChannel_state_lower_bound
 #print axioms chhnNeary_exactRepresentation_six_le_card
 #print axioms twoStateProduct_mulVec_phaseVector

@@ -535,6 +535,15 @@ universal compiler bodies are independently audited in
 Accordingly, the exact erasing-macro theorem is publication-facing; the broader closed-return
 no-go is not advertised as Lean-checked.
 
+For [`G3-M01`](SALVAGE.md#g3-m01-free-group-discrepancy-engine), the rank-`3m+1` closed-path
+basis, the trivial-or-cyclic fixed-subgroup classification, and the rank-zero-or-one equalizer
+corollary are audited consequences of Carvalho's explicit inverse transducer. Lean does not
+reconstruct that external transducer theorem. It checks the internal algebra needed at the next
+boundary: three positive letters surject onto the binary free group, every positive group cover
+has a nonempty identity spelling, and fixed homomorphic boundaries accepting `g` and `g²` accept
+such a spelling. The exact division is recorded in
+[`m34-free-group-discrepancy-2026-08-08.md`](audits/m34-free-group-discrepancy-2026-08-08.md).
+
 The internal-sandwich audit retains two unformalized exact obstructions:
 
 | Record | Formalization obligation |
@@ -706,6 +715,7 @@ with a complete arbitrary-word converse.
 | `HistoryFracture.lean` | null-history counterexample, minimum-body base-five encoder, and integral mortality lift |
 | `ExpandingHistoryNoGo.lean` | reset-affine orbit, finite reverse automaton, regularity, and universal computability obstruction |
 | `CancellativeProjectiveNoGo.lean` | paired residual conic, finite support-rank closure, cancellative role fractions, and projective commutator rigidity |
+| `PositiveFreeCancellation.lean` | three-letter positive cover of `F₂` and quotient-blind boundary-square collapse |
 | `PairedRank.lean` | uniform exact rank-four certificate for the paired scalar series |
 | `PairedBoundaryTax.lean` | exact six-state lower bound for diagonal paired-series bridges |
 | `PairedBinary.lean` | total two-bit decoder and exact six-state scalar representation |
@@ -898,6 +908,8 @@ with a complete arbitrary-word converse.
 | Every finite paired support table has a rational realization of rank at most three | `CancellativeRoleFraction.exists_supportMatrix_rank_le_three` |
 | Cancellative role fractions contain the displayed independent left and right actions | `CancellativeRoleFraction.leftSeed_eq`, `CancellativeRoleFraction.leftConjugate_eq`, `CancellativeRoleFraction.rightSeed_eq`, `CancellativeRoleFraction.rightConjugate_eq` |
 | Projectively commuting invertible rational `3 × 3` matrices commute linearly | `CancellativeProjectiveRigidity.scalar_commutator_eq_one` |
+| Three positive letters evaluate surjectively onto the binary free group | `PositiveFreeCancellation.triangleEvaluate_surjective` |
+| Quotient-blind boundaries accepting an element and its square admit a nonempty identity witness | `PositiveFreeCancellation.exists_nonempty_identity_witness` |
 | Every exact diagonal paired-series bridge needs six states | `paired_exact_diagonal_twoChannel_state_lower_bound` |
 | Every literal Neary CHHN placement needs six exact states | `chhnNeary_exactRepresentation_six_le_card` |
 | Every two-state pushout word obeys its suffix decoder | `twoStateProduct_mulVec_phaseVector`, `twoStateCoefficient_eq_controlled` |

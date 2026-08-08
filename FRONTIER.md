@@ -554,6 +554,23 @@ certificate also proves that exact coefficient preservation on the `SS`-free sub
 to nonzero letterwise scaling, would force the `R_b` matrix to be invertible. The live obligation
 is therefore genuinely zero-set nonlinear.
 
+[`G3-M01`](SALVAGE.md#g3-m01-free-group-discrepancy-engine) remains a genuinely different
+deletion mechanism, but its rank interpretation is now settled. For an `m`-appendant cyclic tag
+system, Carvalho's complete closed-path subgroup is free of rank `3m+1`; its accepting fixed
+subgroup is nevertheless trivial in a no-instance and cyclic in a yes-instance. The induced
+free-group PCP equalizer is promised rank zero or one. Thus the full Stallings basis stores
+synchronization, while the accepting generator is halting-dependent and cannot be chosen from a
+computable finite menu.
+
+Three positive letters already surject onto `F₂`: with `z=y⁻¹x⁻¹`, all three inverses have
+positive length-two spellings. [`G3-O09`](SALVAGE.md#g3-o09-quotient-blind-positive-boundary-collapse)
+formalizes the resulting trap. Fixed group boundaries which accept an element and its square also
+accept the identity; a surjective positive spelling then supplies a nonempty false witness. This
+kills all-loop-complete Nielsen or Schreier compression followed by quotient-blind boundaries.
+The live cancellation compiler must inspect the unreduced positive normal form, accept only an
+existential halting-dependent spelling, or use singular one-way dynamics which destroy inverse
+continuations.
+
 The ordinary mortality lift is likewise no longer part of the paired obstruction. For arbitrary
 controls `H_a`, column `γ`, and row `λ` over a field, adjoining `γλ` gives mortality exactly when some
 `λH_yγ` vanishes. A zero product without the separator is already a scalar-zero witness; after
@@ -599,7 +616,7 @@ three symbol types but many transition rules does not meet this count.
 | --- | --- | --- |
 | Shift-equivariant zero incidence | Same-zero dimension three is point-line incidence in `P²`; [`G3-C02`](SALVAGE.md#g3-c02-fixed-bcbc-singular-recognizer) compiles the fixed branching test, while [`G3-O04`](SALVAGE.md#g3-o04-expanding-affine-history-no-go) kills its source-uniform finite-target affine extension and [`G3-O05`](SALVAGE.md#g3-o05-cancellative-projective-state-tax) kills inverse-saturated dynamics | Build one computable singular formula over a mixed source ensemble, with open or denominator-generating history; fixed-instance fitting, bare support tables, and group-completable cross-multiplication are closed |
 | Square-root punctuation | A uniform rank-two `S` squares to the exact separator and [`G3-M02`](SALVAGE.md#g3-m02-square-root-punctuation-fracture) discharges every mortality grammar obligation | Preserve the old zero set on every `SS`-free word while changing nonzero values word-dependently; exact series, similarity, gauges, letter scaling, and additive rank-one fusion are closed |
-| Inverse-transducer discrepancy | Free cancellation performs queue-head deletion and Carvalho proves an all-path fixed-loop converse; see [`G3-M01`](SALVAGE.md#g3-m01-free-group-discrepancy-engine) | The closed-path subgroup has instance-dependent rank; inverses, free reduction, and subgroup control must be compiled into three positive letters |
+| Positive free-cancellation discrepancy | Free cancellation performs queue-head deletion; accepting loops are cyclic, and three positive letters surject onto `F₂` | Couple the seven-state forbidden-triple normal form to Carvalho's program-dependent virtual endomorphism; [`G3-O09`](SALVAGE.md#g3-o09-quotient-blind-positive-boundary-collapse) kills quotient-blind all-loop-complete boundaries, so malformed positive spellings need a permanent one-way trap |
 | State-dependent and sliding-block codes | Adjacent ternary symbols can carry four semantic roles without a stationary factorization | [`G3-O08`](SALVAGE.md#g3-o08-erasing-and-stationary-closed-block-obstruction) kills fixed spellings even with erasure and a common closed residual; a survivor must change spelling with state or keep its residue open, while rejecting every invalid overlap on the full free monoid |
 | Solvability-only target recoding | Longer noncommutative target atoms may discard additive bit-count preservation entirely | Cosmetic recoding and fixed residual shifts remain inside `G3-O08`; a survivor needs a global normal form which proves both witness transport and absence of new boundary matches |
 | New three-schema rewriting source | Bi-tag, cyclic-tag, Lag, queue, and small semi-Thue systems separate data motion from finite control | Count transition schemas, not data symbols; the program table must live in boundaries or target words without adding source letters |
@@ -668,11 +685,12 @@ inserted Hankel section proves it must. Cross-pollinate the transient guard from
 not fit body-specific targets or assume an intended phase pattern. A false zero at any malformed
 isolated `S` kills the reduction.
 
-The highest-yield source experiment is Carvalho's smallest cyclic-tag transducer. Compute
-the rank and Stallings graph of its closed-path subgroup, classify the formal inverses used
-by the fixed-loop proof, and test whether a rank-three positive basis or boundary-controlled
-subgroup language survives. In parallel, search ternary finite-delay codes whose decoder is
-total on all words, not merely correct on an intended subshift.
+The free-group lane no longer needs another Stallings computation. Its next experiment is a
+positive spelling machine: couple the regular forbidden-triple suffix state for
+`xyz,yzx,zxy→ε` to Carvalho's program-dependent virtual endomorphism, and demand a permanent trap
+for every incomplete or cross-boundary reduction. Race a direct singular `3×3` realization
+against a source-level ternary GPCP construction. In parallel, search state-dependent ternary
+codes whose decoder is total on all words, not merely correct on an intended subshift.
 
 No further additive local fusion of the four displayed pairs should be attempted. The audited
 boundary-aligned family is immortal; the square-root architecture is the live nonadditive escape.
@@ -1489,9 +1507,10 @@ universal computation.
 4. Treat `MM-O08` and `MM-O11` as formally closed exact-family obstructions. Search for
    `M₉(2)` only through a changed physical pair, changed nonzero behavior, or a nonlinear
    compiler.
-5. Run the `M₃(4)` program on three separate tracks: shift-equivariant point-line synthesis,
-   the closed-path subgroup of Carvalho's smallest transducer, and total ternary
-   synchronization codes. Do not collapse their distinct proof obligations into one prompt.
+5. Run the `M₃(4)` program on distinct tracks: shift-equivariant point-line synthesis,
+   square-root punctuation, spelling-sensitive positive cancellation, state-dependent ternary
+   synchronization, and native three-schema rewriting. Do not collapse their proof obligations
+   into one prompt.
 6. Formalize `D2-S02` and `D2-D05`–`D2-D07`, then attack the guarded `5`-adic critical shell
    with a finite carry nucleus and a counter-simulation falsifier in parallel. Keep the
    non-elementary lanes independent: adelic cone types, parabolic rational subsets,
