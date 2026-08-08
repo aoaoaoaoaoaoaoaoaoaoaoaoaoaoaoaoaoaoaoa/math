@@ -153,6 +153,19 @@ check_semantic_source() {
     exit 1
   fi
 
+  local level headings linked
+  for level in 2 3 4; do
+    headings="$(xmllint --html --xpath "count(//h$level)" "$publication" 2>/dev/null)"
+    linked="$(xmllint --html --xpath \
+      "count(//h$level[@id][count(a)=1][a[contains(concat(' ', normalize-space(@class), ' '), ' fragment-link ')][@href=concat('#', ../@id)][@aria-label='Link to this section'][normalize-space()='#']][*[last()][self::a]])" \
+      "$publication" 2>/dev/null)"
+    [[ "$headings" == "$linked" ]] || {
+      printf '%s: h%s headings do not own exact terminal fragment links\n' \
+        "$publication" "$level" >&2
+      exit 1
+    }
+  done
+
   local href
   while IFS= read -r href; do
     case "$href" in
@@ -223,9 +236,9 @@ check_publication() {
   assert_xpath_count 3 "$major_sections"
   assert_xpath_count 3 "$major_sections[not(@open)]"
   assert_xpath_count 3 "$major_sections/summary/h2"
-  assert_xpath_count 1 "($major_sections)[1]/summary/h2[@id='known-stuff' and normalize-space()='Known Stuff']"
-  assert_xpath_count 1 "($major_sections)[2]/summary/h2[@id='new-stuff' and normalize-space()='New Stuff']"
-  assert_xpath_count 1 "($major_sections)[3]/summary/h2[@id='bookkeeping' and normalize-space()='Bookkeeping']"
+  assert_xpath_count 1 "($major_sections)[1]/summary/h2[@id='known-stuff' and normalize-space(text()[1])='Known Stuff']"
+  assert_xpath_count 1 "($major_sections)[2]/summary/h2[@id='new-stuff' and normalize-space(text()[1])='New Stuff']"
+  assert_xpath_count 1 "($major_sections)[3]/summary/h2[@id='bookkeeping' and normalize-space(text()[1])='Bookkeeping']"
 
   assert_xpath_count 0 \
     "$article//table[contains(concat(' ', normalize-space(@class), ' '), ' status-table ')]"
@@ -248,13 +261,6 @@ check_publication() {
   assert_xpath_count 0 '//math[not(ancestor::div[contains(concat(" ", normalize-space(@class), " "), " formula ") or contains(concat(" ", normalize-space(@class), " "), " properties ")])]'
   assert_xpath_count 0 '//div[contains(concat(" ", normalize-space(@class), " "), " matrix-equation ") or contains(concat(" ", normalize-space(@class), " "), " matrix ")]'
 
-  local level
-  for level in 2 3 4; do
-    [[ "$(xpath_count "//h$level[not(@id)]")" == 0 ]] || {
-      printf '%s: h%s without fragment id\n' "$PUBLICATION" "$level" >&2
-      exit 1
-    }
-  done
   check_toc_level 2 '//nav[contains(concat(" ", normalize-space(@class), " "), " contents ")]/ol/li'
   check_toc_level 3 '//nav[contains(concat(" ", normalize-space(@class), " "), " contents ")]/ol/li/ol/li'
   check_toc_level 4 '//nav[contains(concat(" ", normalize-space(@class), " "), " contents ")]/ol/li/ol/li/ol/li'
@@ -276,7 +282,7 @@ check_collection() {
   assert_xpath_count 0 \
     "$article/details[contains(concat(' ', normalize-space(@class), ' '), ' major-section ')]"
   assert_xpath_count 1 \
-    "($article/*)[1][self::section/h2[@id='techniques' and normalize-space()='Techniques']]"
+    "($article/*)[1][self::section/h2[@id='techniques' and normalize-space(text()[1])='Techniques']]"
   assert_xpath_count "$collection_results" \
     "($article/section[h2[@id='techniques']])[1]/ul[contains(concat(' ', normalize-space(@class), ' '), ' artifact-list ')]/li/a"
   assert_xpath_count 1 \
@@ -302,13 +308,6 @@ check_collection() {
   assert_xpath_count 0 \
     '//math[not(ancestor::div[contains(concat(" ", normalize-space(@class), " "), " formula ")])]'
 
-  local level
-  for level in 2 3 4; do
-    [[ "$(xpath_count "//h$level[not(@id)]")" == 0 ]] || {
-      printf '%s: h%s without fragment id\n' "$PUBLICATION" "$level" >&2
-      exit 1
-    }
-  done
   check_toc_level 2 \
     '//nav[contains(concat(" ", normalize-space(@class), " "), " contents ")]/ol/li'
 

@@ -125,8 +125,11 @@ Unicode remains lawful for isolated symbols in prose, titles, metadata, and lite
 for mathematical markup.
 
 The contents list must mirror the document hierarchy through `h4`: `h2`, `h3`, and `h4` links
-occupy successive nested list levels, and every linked heading owns its fragment `id`. `h5` is a
-local heading inside a bounded proof component and does not enter the page-level contents.
+occupy successive nested list levels. Every `h2`, `h3`, and `h4` owns a stable fragment `id` and
+ends with exactly one semantic self-link of the form
+`<a class="fragment-link" href="#section-id" aria-label="Link to this section">#</a>`.
+The source owns this fragment contract; Eternalist owns its presentation. `h5` is a local heading
+inside a bounded proof component and does not enter the page-level contents.
 
 After changing a listed source, the manifest, or any artifact a source describes, publication is
 incomplete until `scripts/publish.sh` succeeds. This repository owns that release transaction
