@@ -12,6 +12,13 @@ open MatrixMortality
 #print axioms neary_source_generator_count
 #print axioms neary_morphisms_nonerasing
 #print axioms ExactNearyMacroFactorization.four_le_card
+#print axioms TernaryClosedBlockNoGo.tagEncode_count_true
+#print axioms TernaryClosedBlockNoGo.tagEncode_count_false
+#print axioms TernaryClosedBlockNoGo.closedNearyPairedParikh_vecMul_injective
+#print axioms TernaryClosedBlockNoGo.nearyPairedParikh_det_ne_zero
+#print axioms TernaryClosedBlockNoGo.ExactErasingMacroFactorization.four_le_card
+#print axioms TernaryClosedBlockNoGo.commonLowerDeletion_cases
+#print axioms TernaryClosedBlockNoGo.upperResidualShift_cases
 #print axioms representsSeries_iff_representsBehavior
 #print axioms finiteHankel_card_le
 #print axioms twoChannelBoundaryTax

@@ -121,6 +121,7 @@ file owns the mathematical stock.
 | [`M4-O05`](#m4-o05-direct-two-state-first-return-recoding) | obstruction | the present four Neary roles have no direct two-state first-return code | reported | active |
 | [`M4-M01`](#m4-m01-mixed-cube-root-punctuation) | partial mechanism | rational cube-root toggles reduce mixed punctuation to incidence equations | audited | parked |
 | [`G3-O01`](#g3-o01-four-role-macro-irreducibility) | obstruction | exact nonerasing macros cannot reduce the four source roles to three letters | formalized | graduated |
+| [`G3-O08`](#g3-o08-erasing-and-stationary-closed-block-obstruction) | obstruction | paired Parikh rank kills erasing exact macros and stationary closed-return block encoders | audited; formalized core | graduated |
 | [`G3-S01`](#g3-s01-shift-equivariant-zero-incidence) | structure theorem | same-zero state dimension is equivariant projective incidence dimension | audited | active |
 | [`G3-O02`](#g3-o02-rational-phase-fracture) | obstruction | a mortal paired instance has no rational phase-state same-zero compression | audited | stock |
 | [`G3-O03`](#g3-o03-history-sensitive-minimal-body-fracture) | obstruction | minimal bodies admit an exact history-sensitive three-state same-zero compiler | formalized | graduated |
@@ -4043,7 +4044,8 @@ required length and `X` is nonerasing, that macro is exactly `z`; its lower imag
 **Scope:** exact rolewise factorization through fixed macros with both new morphisms
 nonerasing. It does not cover erasure, target recoding, boundary residuals, overlapping or
 context-dependent codes, preservation of solvability alone, or a different computational
-source.
+source. [`G3-O08`](#g3-o08-erasing-and-stationary-closed-block-obstruction) subsequently removes
+erasure and one precise closed-overlap class.
 
 **Use:** reject every proposal to merge or macro-expand the present four roles unless it
 explicitly invokes one of the escape mechanisms outside the scope.
@@ -4052,6 +4054,62 @@ explicitly invokes one of the escape mechanisms outside the scope.
 [`MacroIrreducibility.lean`](MatrixMortality/MacroIrreducibility.lean). The structure
 `ExactNearyMacroFactorization` quantifies over arbitrary macro words and does not assume an
 injective role code, prefix code, or equal macro lengths.
+
+### G3-O08: Erasing and stationary closed-block obstruction
+
+**Kind:** obstruction
+
+**Evidence:** audited; formalized core
+
+**Disposition:** graduated
+
+For each Neary role pair, record the four additive channels
+
+```text
+(upper ones, upper zeros, lower ones, lower zeros).
+```
+
+In the order `R_c,R_b,D_b,D_c`, their matrix is
+
+```text
+[[1,0,2+2μ+ν,1+βμ],
+ [2,β,2,1],
+ [2,β,0,1],
+ [1,0,0,1]],
+```
+
+where `μ=|q|_b` and `ν=|q|_c`. Its determinant is `2β²μ`. Lean proves the stronger operational
+fact directly: the associated rational linear map is injective whenever `β>0` and `μ>0`.
+Every exact factorization through fixed physical macros factors this map through one dimension
+per physical letter. Consequently at least four letters are necessary even when both target
+morphisms erase, codewords are empty or coincident, and parsing is nonunique.
+
+The complete paper argument permits more overlap. Fix spellings `ρ_b,ρ_c,δ_b,δ_c`, arbitrary
+possibly erasing target morphisms, and arbitrary upper and lower residual words. Require only
+that every block comprising one rule and `β−1` deletions return to the same two residuals while
+emitting the correct complete binary pair. For `β≥4` and a body containing both `b` and `c`, no
+three-letter system satisfies these identities. After taking Parikh vectors, nonnegativity leaves
+two cases for the common lower deletion image and two cases for the upper residual shift. Lean
+checks those discrete reductions; the ensuing one-dimensional-kernel contradictions and the
+nonempty-deletion word argument are independently audited.
+
+The checked universal Neary family has `β=10p≥10` and mixed bodies, so the closed-block theorem
+applies throughout that family.
+
+**Scope:** fixed physical spellings which concatenate by semantic role and return to one common
+residual after each complete deletion-width block. The theorem does not cover state-dependent
+spellings, an open residual which persists between blocks, genuinely nonfactorial adjacent-role
+codes, or a target recoding that preserves only global solvability.
+
+**Use:** reject every further attempt to save a local four-to-three role code by permitting
+erasure, unequal or empty macro words, fixed boundary fragments, or a finite overlap which closes
+at each Neary block. Demand an explicit state transition or an unclosed residue.
+
+**Artifact:** [`TernaryClosedBlockNoGo.lean`](MatrixMortality/TernaryClosedBlockNoGo.lean) and
+[`m34-ternary-closed-block-no-go-2026-08-08.md`](audits/m34-ternary-closed-block-no-go-2026-08-08.md).
+
+**Next:** construct a state-dependent ternary spelling with a complete arbitrary-word converse,
+or prove that any such spelling can be synchronized to a forbidden stationary closed block.
 
 ### G3-S01: Shift-equivariant zero incidence
 

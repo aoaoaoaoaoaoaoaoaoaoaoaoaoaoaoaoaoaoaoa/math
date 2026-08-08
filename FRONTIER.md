@@ -437,15 +437,27 @@ R_c = initialization / c-rule,       R_b = b-rule,
 D_b = deletion of b,                 D_c = deletion of c.
 ```
 
-Two broad compressions are now excluded.
+Several broad compressions are now excluded.
 
 The exact nonerasing macro obstruction
 [`G3-O01`](SALVAGE.md#g3-o01-four-role-macro-irreducibility) proves that no
 fixed rolewise macros over three source letters reproduce these four word pairs exactly.
 Unequal macro lengths, noninjective role codes, and failure of prefix-freeness do not help.
-A surviving compiler must use erasure, target recoding, boundary or context residuals,
-overlap, solvability-only preservation, or a different source. Lean checks the obstruction as
-`ExactNearyMacroFactorization.four_le_card`.
+A surviving compiler must initially leave exact nonerasing role factorization. Lean checks the
+obstruction as `ExactNearyMacroFactorization.four_le_card`.
+
+The paired-Parikh obstruction
+[`G3-O08`](SALVAGE.md#g3-o08-erasing-and-stationary-closed-block-obstruction) closes the obvious
+escapes. The four role pairs have four independent additive bit-count channels whenever the body
+contains `b`; hence fixed exact macros still require four physical letters when either target
+morphism erases and the macro words are empty, coincident, or nonuniquely decoded. Lean checks the
+complete factorization theorem. An audited extension permits arbitrary fixed boundary fragments
+and output overlap, requiring only that one rule plus `β−1` deletion spellings return to a common
+residual. It excludes every such stationary closed-block ternary encoder for `β≥4` and a mixed
+body; Lean checks its complete integral case reduction. The universal Neary family satisfies
+these hypotheses. A live ternary compiler must now use state-dependent spelling, a genuinely
+nonfactorial code, a residual which remains open across blocks, solvability-only target recoding,
+or a different computational source.
 
 The body-independent Hankel certificate
 [`MM-O04`](SALVAGE.md#mm-o04-uniform-rank-four-paired-series) proves that the
@@ -588,8 +600,8 @@ three symbol types but many transition rules does not meet this count.
 | Shift-equivariant zero incidence | Same-zero dimension three is point-line incidence in `P²`; [`G3-C02`](SALVAGE.md#g3-c02-fixed-bcbc-singular-recognizer) compiles the fixed branching test, while [`G3-O04`](SALVAGE.md#g3-o04-expanding-affine-history-no-go) kills its source-uniform finite-target affine extension and [`G3-O05`](SALVAGE.md#g3-o05-cancellative-projective-state-tax) kills inverse-saturated dynamics | Build one computable singular formula over a mixed source ensemble, with open or denominator-generating history; fixed-instance fitting, bare support tables, and group-completable cross-multiplication are closed |
 | Square-root punctuation | A uniform rank-two `S` squares to the exact separator and [`G3-M02`](SALVAGE.md#g3-m02-square-root-punctuation-fracture) discharges every mortality grammar obligation | Preserve the old zero set on every `SS`-free word while changing nonzero values word-dependently; exact series, similarity, gauges, letter scaling, and additive rank-one fusion are closed |
 | Inverse-transducer discrepancy | Free cancellation performs queue-head deletion and Carvalho proves an all-path fixed-loop converse; see [`G3-M01`](SALVAGE.md#g3-m01-free-group-discrepancy-engine) | The closed-path subgroup has instance-dependent rank; inverses, free reduction, and subgroup control must be compiled into three positive letters |
-| Context and sliding-block codes | Adjacent ternary symbols can carry four semantic roles without fixed role macros | GPCP quantifies over the full free monoid; every boundary fragment, phase shift, and invalid overlap must be algebraically harmless |
-| Erasure and target recoding | Erasure escapes `G3-O01`; longer target atoms can split the one-letter images used in its proof | Empty contributions and code fragments create new boundary matches unless a global normal form excludes them |
+| State-dependent and sliding-block codes | Adjacent ternary symbols can carry four semantic roles without a stationary factorization | [`G3-O08`](SALVAGE.md#g3-o08-erasing-and-stationary-closed-block-obstruction) kills fixed spellings even with erasure and a common closed residual; a survivor must change spelling with state or keep its residue open, while rejecting every invalid overlap on the full free monoid |
+| Solvability-only target recoding | Longer noncommutative target atoms may discard additive bit-count preservation entirely | Cosmetic recoding and fixed residual shifts remain inside `G3-O08`; a survivor needs a global normal form which proves both witness transport and absence of new boundary matches |
 | New three-schema rewriting source | Bi-tag, cyclic-tag, Lag, queue, and small semi-Thue systems separate data motion from finite control | Count transition schemas, not data symbols; the program table must live in boundaries or target words without adding source letters |
 | Exclusive stochastic or affine recognition | Zero/nonzero languages can be much smaller than exact coefficient series | Affine normalization, quantum measurement, and finite pair separation are not raw integer scalar-zero representations |
 | Direct projective or affine dynamics | Three `3 × 3` controls can encode switched dynamics on two homogeneous coordinates | Unguarded matrix choice demands an irreversible checksum for every illegal branch |

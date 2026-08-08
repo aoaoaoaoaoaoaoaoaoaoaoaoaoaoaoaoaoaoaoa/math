@@ -75,6 +75,7 @@ import MatrixMortality.PeriodicHistory
 import MatrixMortality.BranchingHistory
 import MatrixMortality.BranchingRecognizer
 import MatrixMortality.SquareRootPunctuation
+import MatrixMortality.TernaryClosedBlockNoGo
 import MatrixMortality.ExpandingHistoryNoGo
 import MatrixMortality.CancellativeProjectiveNoGo
 import MatrixMortality.NearyBinaryDefect

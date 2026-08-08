@@ -78,10 +78,13 @@ primitive terminality, the ternary word-pair representation, the exact integer g
 the mortality converse for every nonempty word over all five labels. The four ordinary matrices
 are nonsingular and upper triangular. The fifth is nonzero and has rank one over `ℚ`.
 
-The exact Neary role pairs admit no nonerasing rolewise macro factorization through an alphabet
-of cardinality below four. The formal statement permits arbitrary unequal macro lengths and
-noninjective role codes. Erasing morphisms, target recoding, context-dependent codes, boundary
-residuals, and solvability-only transformations remain outside its scope.
+The exact Neary role pairs admit no rolewise macro factorization through an alphabet of
+cardinality below four. The original theorem permits arbitrary unequal macro lengths and
+noninjective role codes but assumes nonerasing target morphisms. A second paired-Parikh theorem
+removes nonerasure entirely: empty or coincident macro words and nonunique decoding still factor a
+nonsingular four-channel map through the physical alphabet, forcing at least four letters.
+State-dependent spelling, nonfactorial overlap, an open residual, target recoding, and
+solvability-only transformations remain outside the formal theorem.
 
 For the `4 × 4` compiler, Lean checks the side-separating change of basis, agreement of each
 rule/erasure pair on the complete upper-word plane, and the explicit four-dimensional paired-role
@@ -522,6 +525,16 @@ source-specific reverse-marker exclusion and the immortality of every boundary-a
 fusion are retained as audited paper proofs. They close a failed ansatz and are not dependencies
 of the live square-root construction.
 
+For [`G3-O08`](SALVAGE.md#g3-o08-erasing-and-stationary-closed-block-obstruction), Lean checks
+the exact paired bit counts, injectivity and nonsingularity of the four-role Parikh matrix, the
+arbitrary erasing macro factorization, and its cardinality-four consequence. It also checks the
+two complete integer case reductions used by the stationary closed-block theorem. The remaining
+kernel-dimension assembly, the nonempty-deletion word argument, and the application to mixed
+universal compiler bodies are independently audited in
+[`m34-ternary-closed-block-no-go-2026-08-08.md`](audits/m34-ternary-closed-block-no-go-2026-08-08.md).
+Accordingly, the exact erasing-macro theorem is publication-facing; the broader closed-return
+no-go is not advertised as Lean-checked.
+
 The internal-sandwich audit retains two unformalized exact obstructions:
 
 | Record | Formalization obligation |
@@ -731,6 +744,7 @@ with a complete arbitrary-word converse.
 | `Undecidability/UniversalNeary.lean` | complete computable reductions to binary `GPCP(4)`, `M₃(5)`, `M₄(4)`, `Z₆(2)`, and `M₁₀(2)` |
 | `Undecidability/NearyProblems.lean` | canonical `Fin 4` and `Fin 5` target instances |
 | `MacroIrreducibility.lean` | exact nonerasing Neary role-macro lower bound |
+| `TernaryClosedBlockNoGo.lean` | paired-Parikh independence, exact erasing macro lower bound, and stationary closed-block arithmetic |
 | `Undecidability/PairedProblems.lean` | canonical four-matrix target instance and structural promises |
 | `Undecidability/BinaryProblems.lean` | canonical structured `Z₆(2)` instance |
 | `Undecidability/PrefixProblems.lean` | canonical `M₁₀(2)` instance and all zero-padded dimensions |
@@ -752,6 +766,8 @@ with a complete arbitrary-word converse.
 | Four ordinary matrices are nonsingular and triangular | `nearyMortality_ordinary_det_ne_zero`, `nearyMortality_ordinary_upperTriangular` |
 | Exceptional matrix is nonzero and rank one | `nearyMortality_terminal_ne_zero`, `nearyMortality_terminal_rank_eq_one` |
 | Exact nonerasing Neary role macros require four letters | `ExactNearyMacroFactorization.four_le_card` |
+| Exact Neary role macros require four letters even with erasure | `TernaryClosedBlockNoGo.ExactErasingMacroFactorization.four_le_card` |
+| Stationary closed-block residuals obey the two discrete case splits | `TernaryClosedBlockNoGo.commonLowerDeletion_cases`, `TernaryClosedBlockNoGo.upperResidualShift_cases` |
 | A nonsingular finite Hankel section lower-bounds every exact realization | `finiteHankel_card_le` |
 | Exact diagonal two-channel bridges pay two additional states | `exactDiagonalTwoChannel_card_lower_bound` |
 | A split finite-rank binary pair is mortal exactly when one return product vanishes | `ReturnFamily.pairGenerator_isMortal_iff` |
@@ -971,6 +987,11 @@ than Lean.
 The arbitrary-rational part of `G3-O02` remains an audited function-field theorem, not a formal
 dependency. Lean checks its exact finite algebra, invariant-pencil rigidity core, and terminal
 consumer, but not yet the dense-orbit extension or arbitrary rational-function rigidity.
+
+The stationary closed-block part of `G3-O08` remains an audited finite-dimensional theorem, not
+a formal dependency. Lean checks its erasing exact-macro special case and its integral residual
+case splits, but not yet the abstract one-dimensional-kernel assembly or the universal-body
+membership corollary.
 
 For `G3-O03`, Lean checks the null-history counterexample, minimum-body uniqueness, base-five
 encoder, exact same-zero theorem, and integral mortality lift. The statement that both phase graph

@@ -10,6 +10,23 @@
 'MatrixMortality.neary_source_generator_count' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.neary_morphisms_nonerasing' depends on axioms: [propext]
 'MatrixMortality.ExactNearyMacroFactorization.four_le_card' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.TernaryClosedBlockNoGo.tagEncode_count_true' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.TernaryClosedBlockNoGo.tagEncode_count_false' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.TernaryClosedBlockNoGo.closedNearyPairedParikh_vecMul_injective' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TernaryClosedBlockNoGo.nearyPairedParikh_det_ne_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TernaryClosedBlockNoGo.ExactErasingMacroFactorization.four_le_card' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TernaryClosedBlockNoGo.commonLowerDeletion_cases' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TernaryClosedBlockNoGo.upperResidualShift_cases' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.representsSeries_iff_representsBehavior' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.finiteHankel_card_le' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.twoChannelBoundaryTax' depends on axioms: [propext, Classical.choice, Quot.sound]
