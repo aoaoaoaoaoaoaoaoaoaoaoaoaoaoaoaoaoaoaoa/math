@@ -548,13 +548,20 @@ rank (2,2): graph-constrained projective incidence on P¹(ℚ),
 rank (3,2): mortality of {VAⁿU : n≥0},  A∈GL₃(ℚ).
 ```
 
-The first already contains the dimension-two hard core. The generic reverse construction
-[`R32-M01`](SALVAGE.md#r32-m01-generic-reverse-edge-compiler) places one rank-one test loop and
-three invertible edges in a compatible two-plane square. Its basis adaptation and complete
-all-path converse are formalized for `αβ≠0`. Only the two exceptional projective positions
-remain: no checked three-dimensional OR gadget combines their finite disjunction into one
-many-one instance. Conversely, no theorem removes every graph constraint from an arbitrary
-rank-`(2,2)` pair. “Equivalent to `M₂(3)`” would therefore still be too strong.
+The first is now reduced exactly to the dimension-two hard core. Rank-one punctuation fractures
+every constrained path at consecutive singular edges. All edge-rank patterns are decidable
+except one compatible rank-one loop with three units; Lean transports that stratum to one
+intrinsic generic PI₂ instance and proves compatibility forces `β=1`. An audited effective
+cyclic-orbit algorithm, backed by effective `S`-unit enumeration, discharges the sole
+two-parameter cross-edge stratum. Together with the checked reverse compiler this gives
+
+```text
+Mort₃^(2,2) ≡ₘ GPI₂.
+```
+
+The graph constraint is therefore gone. The remaining seam runs in the opposite direction:
+arbitrary nongeneric PI₂ has not been reduced to generic PI₂, and generic PI₂ itself is
+unresolved. See [`R32-S32`](SALVAGE.md#r32-s32-rank-two-punctuation-and-graph-removal).
 
 The rank-`(3,2)` profile is the genuinely new artery. If `B=UV`, every binary word containing
 `B` is governed exactly by
@@ -1130,7 +1137,7 @@ all-legal block inequality for the carried generalized continuant. See
 | Aperiodic angular counter | Construct one exact fixed-coefficient reset orbit with unbounded denominators while the p-radial component remains on the reset ray | Fixed macros pump only exact cycles; the construction must vary waits or auxiliary allocation without eventual repetition |
 | Repeated-factor extraction | Force a sufficiently heavy repeated factor in every bounded-complexity wait prefix and apply `R32-S29` | Arbitrary repeated factors are controlled once found; no theorem yet extracts one from a moving denominator schedule |
 | Irreducible cubic bridge | Decide isolated-cut words over the non-pure projectively injective unit alphabet, or the pure involutive-ratio PI₂ residue | Singular timing is finite or modulo three and cannot supply unbounded punctuation |
-| Exceptional reverse compiler | Absorb the finite `αβ=0` disjunction into one three-dimensional many-one instance | The generic rank-`(2,2)` compiler is complete; dimension three has no evident OR operation |
+| Generic projective incidence | Decide GPI₂ directly, or reduce arbitrary PI₂ to its generic stratum | Rank-(2,2) adds no graph hardness; positive-word genericization still lacks an OR or singular data transport |
 
 The hot path is now a coefficient-effective auxiliary-place bound on the one-dimensional angular
 carry, with an essentially aperiodic unbounded-denominator reset orbit as the opposing

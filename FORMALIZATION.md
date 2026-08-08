@@ -486,6 +486,16 @@ leaves at most involutive-ratio PI₂. These algebraic-number arguments are reta
 `R32-O16`; only the consuming arbitrary-word reduction enters the Lean ontology. See
 [`audits/m32-cubic-punctuation-collapse-2026-08-08.md`](audits/m32-cubic-punctuation-collapse-2026-08-08.md).
 
+The rank-(2,2) graph is no longer an independent residue. `RankTwoPunctuation` proves that every
+compatible square with one rank-one loop and three units transports exactly to the existing raw
+reverse compiler. Its intrinsic first scalar is the loop self-bridge and compatibility forces
+the second scalar to one; mortality is exactly immediate loop nilpotence or one generic PI₂
+instance. The remaining edge-rank patterns and the effective cyclic-orbit discharge of the
+cross-edge case are audited as `R32-S32`, using the locally recorded Evertse–Győry unit-equation
+theorem. The full audited boundary is `Mort₃^(2,2) ≡ₘ GPI₂`, not a claim that arbitrary PI₂
+has been genericized. See
+[`audits/m32-rank-two-punctuation-2026-08-08.md`](audits/m32-rank-two-punctuation-2026-08-08.md).
+
 These are structural and decidable-stratum theorems, not an `M₃(2)` resolution. The imported
 order-four Skolem theorem used to classify rank-one profiles is not reimplemented in Lean. The
 generic reverse edge compiler still assumes `αβ≠0`, and no universality or decision theorem is
@@ -605,6 +615,7 @@ with a complete arbitrary-word converse.
 | `EdgeCompression.lean` | exact adjacent-edge compression for split finite-rank families |
 | `TwoPlaneEdges.lean` | compatible two-plane realization of a `2 × 2` edge square and exact rank-two certificates |
 | `ReverseEdge.lean` | generic projective-incidence reverse compiler, basis adaptation, and all-path converse |
+| `RankTwoPunctuation.lean` | intrinsic generic-incidence reduction of the unique hard one-loop edge stratum |
 | `PolynomialPencil.lean` | coefficient support and exact evaluation of words over affine matrix pencils |
 | `PrimitiveDivisor.lean` | cyclotomic support, nonprimitive index-prime valuations, and Bang–Zsigmondy above exponent two |
 | `ReturnSquare.lean` | exact rank-`(3,2)` laboratory, bridge normal form, and two-return square cage |
@@ -733,6 +744,7 @@ with a complete arbitrary-word converse.
 | A split finite-rank family is mortal exactly when one constrained edge path vanishes | `EdgeCompression.isMortal_iff_exists_edgeProduct_eq_zero` |
 | Every compatible two-plane edge square is realized by two rank-two generators | `TwoPlaneEdges.output_mul_input`, `TwoPlaneEdges.generator_rank` |
 | Generic projective incidence compiles to two rank-two `3 × 3` generators | `ReverseEdge.isMortal_adaptedGenerator_iff`, `ReverseEdge.adaptedGenerator_rank` |
+| A compatible one-loop edge square is mortal exactly at loop nilpotence or intrinsic generic incidence | `RankTwoPunctuation.exists_pathProduct_eq_zero_iff_selfBridge_or_incidence` |
 | ReturnSquare physical mortality is exactly positive-return scalar bridge zero | `ReturnSquare.physical_isMortal_iff_positiveBridge` |
 | Every nonresonant ReturnSquare zero uses at least three positive returns | `ReturnSquare.positiveBridge_zero_shape` |
 | Nonnegative and outer-negative ReturnSquare parameters are immortal | `ReturnSquare.not_physical_isMortal_of_nonneg`, `ReturnSquare.not_physical_isMortal_of_beyond_negative_wall` |

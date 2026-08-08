@@ -40,6 +40,7 @@ redistributable full text was located.
 | [BEG18](bugeaud-evertse-gyory-2018-s-parts-forms.md) | peer-reviewed Acta Arith. 2018; arXiv artifact | Effective fixed-`S` power savings for polynomial, binary-form, and decomposable-form values |
 | [GW20](grieve-wang-2020-moving-gcd.md) | peer-reviewed Trans. AMS 2020; postpublication arXiv v2 | Moving-target gcd dichotomy for fixed-rank S-unit points with slow coefficient growth |
 | [ESS02](evertse-schlickewei-schmidt-2002-multiplicative-linear-equations.md) | peer-reviewed Annals 2002; postpublication arXiv copy | Uniform bound for nondegenerate bounded-term linear equations in finite-rank multiplicative groups |
+| [EG13](evertse-gyory-2013-effective-unit-equations.md) | peer-reviewed MPCPS 2013; metadata only | Effective enumeration of two-variable unit equations over finitely generated characteristic-zero domains and effective exponent bounds |
 | [Nicolas08](nicolas-2008-gpcp-semi-thue.md) | arXiv v5 lecture notes | Definition and old open/undecidable bounds for bounded GPCP; fixes the four-generator counting convention |
 | [HH11](halava-holub-2011-binary-gpcp-reduction-tree.md) | peer-reviewed IJFCS 2011 | Reduction-tree and end-block structure at the decidable `GPCP(2)` endpoint; source-compression machinery |
 | [HHH99](halava-harju-hirvensalo-1999-marked-gpcp.md) | FCT 1999 author technical report; journal 2000 | Decidability of GPCP for marked morphisms; excludes marked three-letter source proposals |

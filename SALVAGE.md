@@ -116,6 +116,7 @@ file owns the mathematical stock.
 | [`R32-S29`](#r32-s29-adelic-content-and-repeated-factor-budget) | structure theorem and obstruction | content-weighted height, full cyclotomic complement, exterior conservation, and arbitrary repeated-factor pumping share one calculus | formalized | active |
 | [`R32-S30`](#r32-s30-fixed-cusp-and-record-ascent-calculus) | structure theorem and obstruction | cumulative endpoints form a fixed-cusp continued fraction; one primitive prequotient coordinate is carried by an exact generalized-continuant block | formalized | active |
 | [`R32-S31`](#r32-s31-smith-decoder-and-maximal-cancellation-throat) | structure theorem and obstruction | a positive unimodular content decoder contracts nonmaximal branches, while one fixed basis makes every wait gauge a pure base-prime dilation | formalized | active |
+| [`R32-S32`](#r32-s32-rank-two-punctuation-and-graph-removal) | structure theorem and reduction | compatible one-loop rank-two edge squares are intrinsic generic projective incidence; every other edge-rank pattern is decidable | audited | graduated |
 | [`R32-D03`](#r32-d03-bounded-denominator-periodicity) | decidable stratum | every infinite legal rational guard orbit with bounded reduced denominators is eventually periodic | formalized | graduated |
 | [`M4-C01`](#m4-c01-two-state-pushout-compiler) | compiler | binary deterministic two-state scalar control compiles to three `4 × 4` matrices | formalized | graduated |
 | [`M4-O01`](#m4-o01-exact-toggle-fusion-leaves-an-immortal-core) | obstruction | exact local toggle fusion preserves a nonzero common anchor | formalized | graduated |
@@ -4003,6 +4004,54 @@ over the projectively injective unit returns; the one-singular pure case remains
 **Use:** retire cubic singular timing as an unbounded store. Any nonsplit cubic attack must now
 solve an all-invertible projective bridge between finitely many isolated rank-one cuts, or solve
 the strictly constrained involutive-ratio PI₂ throat.
+
+### R32-S32: Rank-two punctuation and graph removal
+
+**Kind:** structure theorem and reduction
+**Evidence:** audited
+**Disposition:** graduated
+
+For a rank-(2,2) pair, all four compressed `2 × 2` edges are nonzero. Split every constrained
+path at its rank-one punctuation edges. The unit-only outer factors preserve nonzero rows and
+columns, so the path vanishes exactly when one bridge between consecutive punctuation edges has
+zero scalar incidence.
+
+This fractures the complete edge-rank census. With no punctuation every path is a unit. With at
+least two punctuation edges the remaining unit graph has at most two edges, so its bridge
+languages are finite unions of unary loops and are decidable by order-at-most-two recurrences.
+One rank-one cross-edge gives equality of two positive cyclic `PGL₂(ℚ)` orbits; an audited
+effective algorithm handles the parabolic cases elementarily and the semisimple cases by
+effective `S`-unit enumeration.
+
+The unique hard stratum has one rank-one loop `qr` and three unit edges. Lean transports every
+compatible square in this stratum exactly to the existing raw reverse compiler. The intrinsic
+instance has controls `A` and `BU`, row `rU`, column `Bq`, and exceptional scalars
+
+```text
+α=rq,   β=1.
+```
+
+Thus the square is mortal exactly when `rq=0`, giving immediate loop nilpotence, or the one
+intrinsic generic incidence instance has a zero word. Combining the checked reverse compiler
+with the audited decidable strata yields
+
+```text
+Mort₃^(2,2) ≡ₘ GPI₂.
+```
+
+**Scope:** the one-loop transport, forced `β=1`, and complete path equivalence are formalized.
+The forward reduction's cyclic-orbit branch imports effective unit equations and is audited,
+with source [`EG13`](references/evertse-gyory-2013-effective-unit-equations.md). This does not
+reduce arbitrary nongeneric PI₂ to generic PI₂ and does not decide generic PI₂.
+
+**Artifact:** `RankTwoPunctuation.transport_eq_rawEdge` and
+`RankTwoPunctuation.exists_pathProduct_eq_zero_iff_selfBridge_or_incidence` in
+[`RankTwoPunctuation.lean`](MatrixMortality/RankTwoPunctuation.lean), with the full rank census
+in [`m32-rank-two-punctuation-2026-08-08.md`](audits/m32-rank-two-punctuation-2026-08-08.md).
+
+**Use:** replace every rank-(2,2) graph attack by generic PI₂. The graph supplies neither a
+controller bit nor a distinct universality mechanism; the remaining seam is the projective
+incidence problem itself.
 
 ### R32-D03: Bounded-denominator periodicity
 

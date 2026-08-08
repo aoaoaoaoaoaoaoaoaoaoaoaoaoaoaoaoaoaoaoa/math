@@ -13,6 +13,7 @@ import MatrixMortality.CubicReturn
 import MatrixMortality.EdgeCompression
 import MatrixMortality.TwoPlaneEdges
 import MatrixMortality.ReverseEdge
+import MatrixMortality.RankTwoPunctuation
 import MatrixMortality.ReturnSquare
 import MatrixMortality.ReturnSquareDynamics
 import MatrixMortality.ReturnSquareNoGo
