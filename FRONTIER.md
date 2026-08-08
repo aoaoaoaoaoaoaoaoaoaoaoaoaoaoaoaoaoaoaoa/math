@@ -628,6 +628,33 @@ The first, second, seventh, eighth, and ninth lanes principally target direct `M
 fifth, and sixth can produce a genuine `GPCP(3)` theorem. The free-group lane is hybrid:
 it supplies the missing deletion semantics but not yet the bounded positive source.
 
+#### Raceable leaves
+
+After the four-front salvo, the net tree has seven independent mature leaves:
+
+1. **Source-uniform paired constructor.** Give one computable singular three-state same-zero
+   family for every checked `(β,body)` and every control word.
+2. **Positive-common-shift lower bound.** Derive inverse saturation or another broad contradiction
+   from the complete positive shift equations, killing the paired route rather than another
+   ansatz.
+3. **Square-root `SS`-free compiler.** Keep the checked punctuation root and solve, or broadly
+   refute, the zero-set-only representation problem on the full square-free subshift.
+4. **Stateful or open-residue Neary serialization.** Use genuinely changing spellings,
+   nonfactorial overlap, or a residual which does not close at deletion-width boundaries.
+5. **Global solvability-only GPCP recoding.** Abandon local role preservation and prove a new
+   three-pair normal form with both witness transport and no-new-solution directions.
+6. **Native three-schema source.** Bypass both Neary's four roles and Nicolas's recurrent `+2`
+   copy alphabet with a universal certificate having exactly three active schemas.
+7. **Spelling-sensitive positive cancellation.** Couple the three-letter free-group normal form
+   to Carvalho's virtual endomorphism, trapping every malformed positive spelling before group
+   quotient.
+
+Generic projective, stochastic, Rees/Brandt, and singular-reset ideas are implementation
+vocabularies inside leaves 1 or 3 until they supply a distinct source interface and complete
+all-word theorem. Another fixed-body fit, fixed macro, or punctuation placement is not a leaf.
+The joint derivation and evidence boundaries are recorded in
+[`m34-mirv-salvo-synthesis-2026-08-08.md`](audits/m34-mirv-salvo-synthesis-2026-08-08.md).
+
 #### Operational program
 
 The fixed `bcbc` target is complete enough to stop serving as the enemy. Its exact grammar and
