@@ -36,6 +36,7 @@ import MatrixMortality.ReturnGuardDriftCertificate
 import MatrixMortality.ReturnGuardFrame
 import MatrixMortality.ReturnGuardGap
 import MatrixMortality.ReturnGuardEndpoint
+import MatrixMortality.ReturnGuardEndpointCompleteness
 import MatrixMortality.ReturnGuardAdelic
 import MatrixMortality.ReturnGuardPumping
 import MatrixMortality.ReturnGuardResonance

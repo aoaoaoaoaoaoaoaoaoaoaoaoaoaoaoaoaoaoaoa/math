@@ -97,6 +97,7 @@ file owns the mathematical stock.
 | [`R32-O11`](#r32-o11-terminal-only-pole-contraction-is-a-decision-oracle) | obstruction | terminal-only contraction constants are pointwise vacuous; uniform effectivity is already a terminal bound | audited | graduated |
 | [`R32-O12`](#r32-o12-periodic-shadow-obstruction) | obstruction | one fixed guard has arbitrarily long off-reset primitive corridors with nonmaximal Smith allocation and rising carried and Smith coordinate runs | formalized | graduated |
 | [`R32-O13`](#r32-o13-renewal-graph-collapse-and-reset-pullback) | obstruction | every aligned macro consumes shadow depth, local bounded depth does not bound height, and reset ancestry is one exact pulled-back determinant | formalized | graduated |
+| [`R32-O14`](#r32-o14-fixed-reset-geodesic-and-complete-endpoint-language) | structure theorem and obstruction | endpoint terminality is exact and every actual reset prefix has the same distinguished-prime kernel direction | formalized | graduated |
 | [`R32-S07`](#r32-s07-decoded-residual-address-normal-form) | structure theorem | mortality is finite inverse-address membership in disjoint rational p-adic branch spheres | formalized | active |
 | [`R32-M05`](#r32-m05-cyclotomic-reset-or-cancellation-sieve) | partial mechanism | every primitive reduction either resets modulo a cyclotomic prime or swallows it in the common cancellation | formalized | active |
 | [`R32-S08`](#r32-s08-cumulative-endpoint-recurrence) | structure theorem | cumulative endpoint pairs absorb every normalization scalar into one deterministic exact-division recurrence | formalized | active |
@@ -3840,11 +3841,84 @@ infinitely many rays and threshold residues. Varying factors `p^a−1` prevent a
 [`ReturnGuardPeriodicShadow.lean`](MatrixMortality/ReturnGuardPeriodicShadow.lean), and
 [`m32-renewal-collapse-2026-08-07.md`](audits/m32-renewal-collapse-2026-08-07.md).
 
-**Use:** retire fixed positive-depth renewal cycles and episode-local finite-box arguments. The
-live decision route must extract a fixed recurrent macro or ray from the complete reset ancestry,
-or directly bound the moving determinant family. The opposing construction must be essentially
-aperiodic and realize infinitely many threshold cancellations; repeating one finite shadow
-gadget cannot work.
+**Use:** retire fixed positive-depth renewal cycles and episode-local finite-box arguments.
+[`R32-O14`](#r32-o14-fixed-reset-geodesic-and-complete-endpoint-language) subsequently proves
+that radial reset ancestry is already fixed. The surviving use of this record is therefore the
+threshold-cancellation obstruction: a decision proof must bound the global angular determinant
+or carry, while an opposing construction must vary waits or auxiliary allocation essentially
+aperiodically. Repeating one finite shadow gadget cannot work.
+
+### R32-O14: Fixed reset geodesic and complete endpoint language
+
+**Kind:** structure theorem and obstruction
+**Evidence:** formalized
+**Disposition:** graduated
+
+For every positive wait word `w`, the endpoint terminal equation is complete:
+
+```text
+EndpointTerminalWord(w) ↔ inverseAddress(w,terminalResidual)=1.
+```
+
+The inverse branches recover a lawful decoded execution, and their disjoint positive branch
+spheres make the terminal word unique. Thus the positive endpoint zero language is singleton-
+or-empty, and physical guard mortality is exactly the existence of a nonempty word in that
+language. Endpoint algebra creates no witnesses through a pole, an incorrect wait, or a
+malformed intermediate state.
+
+Modulo the distinguished prime, every nonempty positive endpoint product is
+
+```text
+A^(|w|−1) · [[A−L,(A−L)L],[1,L]].
+```
+
+In the normalized presentation, `A` is a p-unit, so this is one fixed nonzero rank-one flag.
+If `D` and `L` are p-units, the determinant valuation is exactly the full schedule weight
+`Ω=s∑w`. More strongly, every cumulative execution from the reset pair satisfies
+
+```text
+ker(M_w mod p^Ω) = (ℤ/p^Ωℤ) · (A+D−L,1).
+```
+
+The reset direction is therefore fixed at every depth. The moving determinant in
+[`R32-O13`](#r32-o13-renewal-graph-collapse-and-reset-pullback) varies only through its angular
+reference, not through a radial ancestral ray at `p`. A primitive positive-depth pullback also
+retains its full `p^(Ω+δ)` factor: its transverse coordinate is a p-unit, so primitive
+normalization removes no distinguished-prime power. This last consequence was audited from the
+checked pullback identity and not installed as a duplicate API.
+
+The lawful coefficients
+
+```text
+(p,s,A,D,L)=(3,2,122753,−17,39232)
+```
+
+have exactly one positive terminal word, `[1,1,1]`. Lean checks both the product and uniqueness,
+and derives mortality of the associated rational rank-`(3,2)` pair. This refutes every universal
+one- or two-return terminal bound.
+
+**Scope:** neither endpoint uniqueness nor the fixed reset geodesic bounds terminal length. The
+unresolved data are angular: factors of `p^a−1` split between forward and reverse contents and
+can finance an unbounded mixed-radix carry across auxiliary places. No effective carry bound and
+no aperiodic unbounded-denominator reset orbit has been obtained. Deciding this guard would still
+leave the two exceptional rank-`(2,2)` compiler positions before full `M₃(2)`.
+
+**Artifact:** `ReturnGuard.endpointProduct_mod_prime`,
+`ReturnGuard.endpointProduct_det_hasValue`,
+`ReturnGuard.CumulativeEndpointExecution.endpointKernel_eq_resetLine`,
+`ReturnGuard.endpointTerminalWord_iff_inverseAddress_eq_one`,
+`ReturnGuard.endpointTerminalWord_unique`, and
+`ReturnGuard.physical_isMortal_iff_endpointTerminalWord` in
+[`ReturnGuardEndpointCompleteness.lean`](MatrixMortality/ReturnGuardEndpointCompleteness.lean);
+`ReturnGuard.Examples.threeReturn_endpointTerminalWord_iff` and
+`ReturnGuard.Examples.threeReturn_physical_isMortal` in
+[`ReturnGuardExamples.lean`](MatrixMortality/ReturnGuardExamples.lean). Independent audit:
+[`m32-fixed-geodesic-endpoint-completeness-2026-08-07.md`](audits/m32-fixed-geodesic-endpoint-completeness-2026-08-07.md).
+
+**Use:** retire malformed endpoint witnesses, moving radial reset ancestry, hidden positive-depth
+primitive-normalization savings at `p`, and a universal two-return bound. Analyze the remaining
+one-dimensional angular carry globally across its moving auxiliary prime support, or construct
+an exact aperiodic reset-started orbit that uses it to sustain unbounded denominators.
 
 ### R32-D03: Bounded-denominator periodicity
 

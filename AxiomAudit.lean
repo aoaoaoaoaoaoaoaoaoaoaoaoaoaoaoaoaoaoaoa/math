@@ -308,8 +308,14 @@ open MatrixMortality
 #print axioms ReturnGuard.terminalCoordinate_residualStep
 #print axioms ReturnGuard.endpointTransfer_mul_endpointGauge
 #print axioms ReturnGuard.endpointProduct_det
+#print axioms ReturnGuard.endpointProduct_mod_prime
+#print axioms ReturnGuard.endpointProduct_det_hasValue
 #print axioms ReturnGuard.endpointProduct_first_eq_complementProduct
 #print axioms ReturnGuard.endpointTerminalWord_of_residualRun_eq_terminal
+#print axioms ReturnGuard.endpointTerminalWord_iff_inverseAddress_eq_one
+#print axioms ReturnGuard.endpointTerminalWord_unique
+#print axioms ReturnGuard.physical_isMortal_iff_endpointTerminalWord
+#print axioms ReturnGuard.CumulativeEndpointExecution.endpointKernel_eq_resetLine
 #print axioms ReturnGuard.not_endpointTerminalWord_of_prime_dvd_centerDifference
 #print axioms ReturnGuard.endpointAdjugate_mulVec_of_complementaryContent
 #print axioms ReturnGuard.integralStep_content_mul_height_le
@@ -325,6 +331,8 @@ open MatrixMortality
 #print axioms ReturnGuard.Examples.orderBreaker_shatters_resetBall
 #print axioms ReturnGuard.Examples.periodicShadow_obstruction
 #print axioms ReturnGuard.Examples.periodicShadow_shatters_localCompactness
+#print axioms ReturnGuard.Examples.threeReturn_endpointTerminalWord_iff
+#print axioms ReturnGuard.Examples.threeReturn_physical_isMortal
 #print axioms ReturnGuard.evaluationFrameTransition_eq_coboundary
 #print axioms ReturnGuard.evaluationFrameTransition_det
 #print axioms ReturnGuard.deep_frameDefect_forces_stateDepth_eq_anchorDepth

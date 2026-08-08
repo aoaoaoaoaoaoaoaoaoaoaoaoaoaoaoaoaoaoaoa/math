@@ -376,7 +376,7 @@ Q^s hᵢ Xᵢ₊₁ = [[0,Q^s],[DL(q−1),A+Dq^s−LQ]]Xᵢ.
 
 No complementary content or tangent state enters the matrix. One fixed integral basis also
 conjugates every rational wait gauge to `diag(1,Q²/q²)`. These theorems remove the missing
-carried-coordinate and irreducible-shear obstructions, but do not prove cone entry, a local
+carried-coordinate and wait-gauge shear obstructions, but do not prove cone entry, a local
 continued-fraction selector, or global height descent. See
 [`audits/m32-prequotient-adelic-2026-08-06.md`](audits/m32-prequotient-adelic-2026-08-06.md).
 
@@ -448,10 +448,24 @@ reset-history datum exposed by this attack exactly:
 Δ(P₀,adj(M_u)V)=p^(s∑u)Δ(Pᶜ_u,V).
 ```
 
-The local renewal dichotomy is therefore exhausted. The live question is an effective
-compactness theorem for these moving pulled-back rays, or an essentially aperiodic reset orbit
-which changes rays and threshold residues without repetition. See
+The local renewal dichotomy is therefore exhausted. See
 [`audits/m32-renewal-collapse-2026-08-07.md`](audits/m32-renewal-collapse-2026-08-07.md).
+
+The next ratchet shows that the pulled-back family is not radially moving at the distinguished
+prime. Every nonempty positive endpoint product reduces modulo `p` to one fixed rank-one flag,
+and every actual cumulative prefix from reset has the exact full-weight kernel
+
+```text
+ker(M_u mod p^(s∑u)) = (ℤ/p^(s∑u)ℤ)·P₀.
+```
+
+Positive endpoint terminality is also complete: it is equivalent to inverse address one, so the
+endpoint zero language is singleton-or-empty and physical mortality is exactly the existence of
+a nonempty endpoint zero. The coefficients `(3,2,122753,−17,39232)` have unique terminal word
+`[1,1,1]`, refuting every universal two-return bound. The live question is now a coefficient-
+effective auxiliary-place bound on the global angular carry, opposed by an exact aperiodic
+reset-started orbit with unbounded denominators. See
+[`audits/m32-fixed-geodesic-endpoint-completeness-2026-08-07.md`](audits/m32-fixed-geodesic-endpoint-completeness-2026-08-07.md).
 
 These are structural and decidable-stratum theorems, not an `M₃(2)` resolution. The imported
 order-four Skolem theorem used to classify rank-one profiles is not reimplemented in Lean. The
@@ -604,10 +618,11 @@ with a complete arbitrary-word converse.
 | `ReturnGuardGap.lean` | exact residual similarity, rational projective gaps, height envelopes, and fixed-macro pumping |
 | `ReturnGuardPumping.lean` | arbitrary repeated-factor pumping between decoded orbit checkpoints |
 | `ReturnGuardEndpoint.lean` | terminal-centered divisor recurrence, whole-word determinant factorization, complementary forward/reverse contents, and coefficient-prime obstructions |
+| `ReturnGuardEndpointCompleteness.lean` | complete positive endpoint language, fixed distinguished-prime flag and reset kernel, and exact endpoint Smith weight |
 | `ReturnGuardAdelic.lean` | content-weighted height bounds, strong primitive pressure, complete cyclotomic complement, and exact exterior-product conservation |
 | `ReturnGuardResonance.lean` | nonresonant descent, resonance localization, and corrected nested readiness |
 | `ReturnGuardRail.lean` | polynomial divisibility and rational affine-wait rail obstruction |
-| `ReturnGuardExamples.lean` | one- and two-step mortal pairs, nonterminal fixed point, nested rational period-three orbit, endpoint boundary certificates, and ready order-breaking reset-ball ejection |
+| `ReturnGuardExamples.lean` | one-, two-, and unique three-step mortal guards, nonterminal fixed point, nested rational period-three orbit, endpoint boundary certificates, and ready order-breaking reset-ball ejection |
 | `ReturnGuardPeriodicShadow.lean` | fixed-reset periodic-shadow family, uniform all-corridor descent obstruction, and fixed-depth unbounded endpoint-height obstruction |
 | `ReturnGuardQuotientExamples.lean` | four-state modulo-eleven certificate excluding every primitive terminal execution of the period-three guard |
 | `BinaryDefect.lean` | binary two-word defect theorem and exact Neary macro obstruction |
@@ -750,6 +765,9 @@ with a complete arbitrary-word converse.
 | Every cancellation-free synchronized two-prime invariant projects to both single-factor certificates | `ReturnGuard.hasSynchronizedCancellationFreeInvariant_imp_components`, `ReturnGuard.hasSynchronizedCancellationFreeInvariant_imp_quotientCertificates` |
 | Terminal coordinates are a fixed gauge of the primitive residual transfer, not an independent state | `ReturnGuard.endpointTransfer_mul_endpointGauge`, `ReturnGuard.terminalCoordinate_residualStep` |
 | A complete endpoint word factors its determinant into base powers and full cyclotomic factors | `ReturnGuard.endpointProduct_det` |
+| Every positive endpoint product modulo the distinguished prime is a scalar multiple of one fixed rank-one flag; in a normalized presentation its determinant valuation is the full schedule weight | `ReturnGuard.endpointProduct_mod_prime`, `ReturnGuard.endpointProduct_det_hasValue` |
+| At the complete prime-power weight of every nonempty positive cumulative prefix from reset, the endpoint-product kernel is exactly the scalar reset line | `ReturnGuard.CumulativeEndpointExecution.endpointKernel_eq_resetLine` |
+| A positive endpoint word is terminal exactly when its inverse address is reset; physical mortality is exactly existence of such a nonempty word and the terminal language is singleton-or-empty | `ReturnGuard.endpointTerminalWord_iff_inverseAddress_eq_one`, `ReturnGuard.physical_isMortal_iff_endpointTerminalWord`, `ReturnGuard.endpointTerminalWord_unique` |
 | Forward and reverse primitive contents are complementary, and the whole terminal coefficient is their signed reverse-content product | `ReturnGuard.endpointAdjugate_mulVec_of_complementaryContent`, `ReturnGuard.endpointProduct_first_eq_complementProduct` |
 | A prime dividing `A−L` but neither drift nor base excludes every endpoint terminal word | `ReturnGuard.not_endpointTerminalWord_of_prime_dvd_centerDifference` |
 | Primitive content and wait depth share one exact Archimedean height budget | `ReturnGuard.integralStep_content_mul_height_le`, `ReturnGuard.integralStep_wait_content_le` |
@@ -757,6 +775,7 @@ with a complete arbitrary-word converse.
 | Two reduced trajectories through one branch obey an exact exterior-product conservation law | `ReturnGuard.primitiveSteps_projectivePairCross` |
 | Any repeated legal factor at two checkpoints is either an exact cycle or bounded by their rational height envelopes | `ReturnGuard.sharedSchedule_exact_or_power_le_heightEnvelope` |
 | Terminal-reaching guards can require two steps and their waits can either decrease or increase | `ReturnGuard.Examples.decreasingMortal_reachable`, `ReturnGuard.Examples.increasingMortal_reachable` |
+| One lawful guard has exactly one positive terminal word, the three-return schedule `[1,1,1]` | `ReturnGuard.Examples.threeReturn_endpointTerminalWord_iff`, `ReturnGuard.Examples.threeReturn_physical_isMortal` |
 | One fixed guard has arbitrarily long off-reset legal corridors with `v=2`, exact content `−4`, and arbitrarily long rising carried and primitive Smith coordinate runs | `ReturnGuard.Examples.periodicShadow_obstruction` |
 | The former collision ladder and period-three survivor are excluded from terminality by one-prime endpoint coefficients | `ReturnGuard.Examples.collisionLadder_no_endpointTerminalWord`, `ReturnGuard.Examples.cycle_no_endpointTerminalWord` |
 | At a primitive drift divisor, a safe quotient certificate exists exactly when the center avoids the scaled base-power orbit | `ReturnGuard.hasQuotientCertificate_iff_centerPowerOrbit_avoids` |

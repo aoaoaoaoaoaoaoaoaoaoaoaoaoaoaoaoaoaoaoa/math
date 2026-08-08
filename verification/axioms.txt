@@ -626,10 +626,22 @@
  Classical.choice,
  Quot.sound]
 'MatrixMortality.ReturnGuard.endpointProduct_det' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ReturnGuard.endpointProduct_mod_prime' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ReturnGuard.endpointProduct_det_hasValue' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.ReturnGuard.endpointProduct_first_eq_complementProduct' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
 'MatrixMortality.ReturnGuard.endpointTerminalWord_of_residualRun_eq_terminal' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.endpointTerminalWord_iff_inverseAddress_eq_one' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.endpointTerminalWord_unique' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ReturnGuard.physical_isMortal_iff_endpointTerminalWord' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.CumulativeEndpointExecution.endpointKernel_eq_resetLine' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
 'MatrixMortality.ReturnGuard.not_endpointTerminalWord_of_prime_dvd_centerDifference' depends on axioms: [propext,
@@ -671,6 +683,12 @@
  Classical.choice,
  Quot.sound]
 'MatrixMortality.ReturnGuard.Examples.periodicShadow_shatters_localCompactness' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.Examples.threeReturn_endpointTerminalWord_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnGuard.Examples.threeReturn_physical_isMortal' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
 'MatrixMortality.ReturnGuard.evaluationFrameTransition_eq_coboundary' depends on axioms: [propext,

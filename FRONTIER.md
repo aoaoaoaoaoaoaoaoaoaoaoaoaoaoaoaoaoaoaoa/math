@@ -1015,10 +1015,39 @@ Reset ancestry is instead the exact integral law
 ```
 
 where the cumulative endpoint `Pᶜ_u` retains every primitive normalization scalar. This
-identifies the surviving object without bounding it: the pulled-back ray and its cyclotomic
-prime support move with the whole prefix. Any infinite counter-orbit must therefore be
-essentially aperiodic, remaining shallow relative to each fixed ray or creating depth through
-infinitely many moving threshold cancellations.
+identified the complete ancestral determinant but did not determine whether its radial direction
+moved with the prefix.
+
+[`R32-O14`](SALVAGE.md#r32-o14-fixed-reset-geodesic-and-complete-endpoint-language) closes that
+ambiguity. For every nonempty positive endpoint word,
+
+```text
+M_u mod p = A^(|u|−1) [[A−L,(A−L)L],[1,L]],
+```
+
+so a normalized coefficient presentation has one fixed nonzero rank-one flag. More strongly,
+for every actual cumulative prefix from reset, with `Ω=s∑u`, Lean proves
+
+```text
+ker(M_u mod p^Ω) = (ℤ/p^Ωℤ)·(A+D−L,1).
+```
+
+Reset ancestry therefore follows one fixed distinguished-prime geodesic; only its depth changes.
+The moving datum in the pullback law is angular: the reference ray and the allocation of the
+auxiliary factors of `p^a−1`, not the radial direction at `p`. At positive transverse depth,
+primitive normalization removes no distinguished-prime power, so no hidden p-adic saving remains.
+
+The same ratchet completes the endpoint language:
+
+```text
+EndpointTerminalWord(u) ↔ inverseAddress(u,terminalResidual)=1.
+```
+
+Positive endpoint terminal words are unique, and physical mortality is exactly the existence of
+a nonempty one. Thus endpoint products create no malformed witnesses. The lawful guard
+`(p,s,A,D,L)=(3,2,122753,−17,39232)` has unique positive terminal word `[1,1,1]`, excluding every
+universal one- or two-return terminal bound. See
+[`m32-fixed-geodesic-endpoint-completeness-2026-08-07.md`](audits/m32-fixed-geodesic-endpoint-completeness-2026-08-07.md).
 
 The remaining unbounded channel is now sharply Archimedean. The formalized
 [`R32-D03`](SALVAGE.md#r32-d03-bounded-denominator-periodicity) theorem says that every
@@ -1057,14 +1086,15 @@ that no coefficient-uniform extension quantified over all legal guard corridors 
 required strict factor. Any use of this literature must exploit reset-started or terminal
 history absent from the scalar recurrence alone.
 
-The gauge is now exact in one common basis:
+The moving wait gauge is exact in one common basis:
 
 ```text
 [[1,0],[1,1]] J(q,Q) [[1,0],[−1,1]] = diag(1,Q²/q²).
 ```
 
-Its real growth and p-adic size are product-formula duals. This removes an irreducible-shear
-interpretation but does not commute the dilation through the intervening cocycles. Every
+Its real growth and p-adic size are product-formula duals. This removes an irreducible shear from
+the wait gauge, but not the global angular carry between endpoint-adapted flags; the dilation
+still does not commute through the intervening cocycles. Every
 nonmaximal Smith branch contributes a checked `3/4` real saving, while maximal branches are
 isolated and nonterminal. Periodic shadows show that these local facts do not assemble into an
 all-legal block inequality for the carried generalized continuant. See
@@ -1074,26 +1104,26 @@ all-legal block inequality for the carried generalized continuant. See
 
 | Lane | Required move | Present obstruction |
 | --- | --- | --- |
-| Reset-ancestry compactness | Effectively extract one fixed ray or macro revisited at unbounded depth from every reset orbit with unbounded denominators | Fixed local labels and bounded depth do not bound height; the legal periodic rays and words form an infinite moving family |
-| Moving determinant bound | Control `Δ(P₀,adj(M_u)V_w)` uniformly over actual prefixes and legal periodic rays | The exact pullback carries the required base-prime power, but the moving ray retains varying cyclotomic support from `p^a−1` |
-| Strong primitive pressure | Combine full cyclotomic multiplicity with the reset-pullback determinant | The local pressure inequality does not bound the height or support of the pulled-back moving ray |
-| Aperiodic denominator counter | Construct one fixed reset orbit with unbounded denominators and infinitely many threshold ray switches | Every fixed aligned macro loses depth, so a counter-orbit must change rays, macros, or leading residues without eventual repetition |
+| Angular auxiliary-place bound | Give a coefficient-effective bound for the reset-started mixed-radix shear, sufficient to bound every first-hit terminal word | The radial p-component is fixed, but factors of `p^a−1` move across auxiliary primes and split between forward and reverse contents |
+| Strong primitive pressure | Combine full cyclotomic multiplicity, the product formula, and the exact fixed-kernel pullback into a global carry bound | The local pressure inequality does not bound the Archimedean size or moving auxiliary support of the angular reference |
+| Aperiodic angular counter | Construct one exact fixed-coefficient reset orbit with unbounded denominators while the p-radial component remains on the reset ray | Fixed macros pump only exact cycles; the construction must vary waits or auxiliary allocation without eventual repetition |
 | Repeated-factor extraction | Force a sufficiently heavy repeated factor in every bounded-complexity wait prefix and apply `R32-S29` | Arbitrary repeated factors are controlled once found; no theorem yet extracts one from a moving denominator schedule |
 | Irreducible cubic fallback | Replace the split spectrum by a cubic return pencil with internal punctuation and a complete word normal form | No candidate yet matches the guard's exact illegal-branch soundness |
 | Exceptional reverse compiler | Absorb the finite `αβ=0` disjunction into one three-dimensional many-one instance | The generic rank-`(2,2)` compiler is complete; dimension three has no evident OR operation |
 
-The hot path is now reset-ancestry compactness for moving pulled-back rays, with an essentially
-aperiodic infinite reset orbit as the opposing construction. The matrix compiler,
+The hot path is now a coefficient-effective auxiliary-place bound on the one-dimensional angular
+carry, with an essentially aperiodic unbounded-denominator reset orbit as the opposing
+construction. The matrix compiler,
 arbitrary-word converse, deterministic wait decoder, rational inverse-address grammar,
 primitive integral lift, endpoint factorization, exact branch similarity, arbitrary
 repeated-factor pumping, local record-ascent budget, local content allocation, maximal-step
-isolation, and universal-boundary valuation wall are complete. Uniform first-bridge closure and
-coefficient-uniform all-legal block descent are false; fixed positive renewal cycles are
-impossible; bounded local shadow depth does not imply bounded height. The rank-`(3,2)` artery now
-asks whether an even-resultant, universal-boundary-divisible reset orbit can visit infinitely
-many moving arithmetic rays while repaying every forced nonmaximal loss, or whether the exact
-reset pullback forces recurrence or a finite obstruction. Exact-order factors remain usable only
-inside that global history-sensitive proof.
+isolation, universal-boundary valuation wall, complete endpoint language, and fixed reset
+geodesic are complete. Uniform first-bridge closure and coefficient-uniform all-legal block
+descent are false; fixed positive renewal cycles are impossible; bounded local shadow depth does
+not imply bounded height; terminal length can exceed two. The rank-`(3,2)` artery now asks whether
+the moving auxiliary factors funding the angular shear admit an effective all-place bound, or can
+sustain one exact aperiodic reset orbit with unbounded denominators. Exact-order factors remain
+usable only inside that global history-sensitive proof.
 
 ## The dimension-two wall: `M₂(3)`
 
