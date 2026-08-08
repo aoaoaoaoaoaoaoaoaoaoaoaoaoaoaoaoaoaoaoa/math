@@ -333,6 +333,19 @@ def bridge (ρ : ℚ) (middle : Matrix (Fin 3) (Fin 3) ℚ) :
     Matrix (Fin 2) (Fin 2) ℚ :=
   coreInput * middle * coreOutput ρ
 
+/-- Bridge singularity is the first coordinate of the complete adjugate exterior state. -/
+theorem bridge_det_eq_adjugate_first (ρ : ℚ)
+    (middle : Matrix (Fin 3) (Fin 3) ℚ) :
+    (bridge ρ middle).det = (9 * ρ / 2) *
+      (-(middle.adjugateᵀ *ᵥ ![(22 : ℚ), -31, -36]) 0 -
+        (middle.adjugateᵀ *ᵥ ![(22 : ℚ), -31, -36]) 1 +
+          (middle.adjugateᵀ *ᵥ ![(22 : ℚ), -31, -36]) 2 / 4) := by
+  rw [Matrix.det_fin_two]
+  norm_num [bridge, coreInput, coreOutput, Matrix.adjugate_fin_three,
+    Matrix.transpose_apply, Matrix.mul_apply, Matrix.mulVec, Matrix.vecMul,
+    Matrix.dotProduct, Fin.sum_univ_succ]
+  ring
+
 /-- A chain of exceptional atoms separated by arbitrary three-dimensional matrices. -/
 def exceptionalChain (ρ : ℚ) : List (Matrix (Fin 3) (Fin 3) ℚ) →
     Matrix (Fin 3) (Fin 3) ℚ
@@ -660,7 +673,8 @@ private theorem neary_rule_c_code_lt_scale (β : Nat) (body : List TagLetter) :
   simp only [nearySideLowerC, nearySideLowerCScale]
   exact_mod_cast ternaryCode_lt_pow_length (nearyLower β body (.rule .c))
 
-private theorem neary_rule_c_residue_one_bounds
+/-- The actual nonempty Neary code keeps every residue-one `c` determinant pencil off zero. -/
+theorem neary_rule_c_residue_one_bounds
     (β : Nat) (body : List TagLetter) (body_nonempty : body ≠ []) :
     let L := nearySideLowerC β body
     let M := nearySideLowerCScale β body

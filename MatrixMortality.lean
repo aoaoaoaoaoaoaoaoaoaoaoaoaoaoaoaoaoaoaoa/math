@@ -76,5 +76,9 @@ import MatrixMortality.PairedBinaryFullAlgebra
 import MatrixMortality.PrefixFullAlgebra
 import MatrixMortality.ScheduledBinaryRank
 import MatrixMortality.TwoStateObstructions
+import MatrixMortality.OverlapQueue
 import MatrixMortality.ParabolicBlade
 import MatrixMortality.ParabolicResidueWall
+import MatrixMortality.ParabolicExterior
+import MatrixMortality.ParabolicFlag
+import MatrixMortality.ParabolicSafeFlag

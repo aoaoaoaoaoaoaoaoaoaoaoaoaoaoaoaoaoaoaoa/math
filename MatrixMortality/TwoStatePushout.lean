@@ -377,6 +377,19 @@ theorem twoStateCoefficient_eq_controlled (R : Type*) [CommRing R] {α : Type*}
     phaseHead R (controllerSuffixDecode δ terminal word).1
       (controllerRoleProduct R upper lower (controllerSuffixRoles δ terminal word) *ᵥ column)
 
+/-- With the canonical terminal column, a two-state coefficient is exact word equality. -/
+theorem twoStateCoefficient_eq_zero_iff_terminal_match {α : Type*}
+    (upper : α → List Bool) (lower : PairPhase → α → List Bool)
+    (δ : ControllerTransition PairPhase α) (terminal : PairPhase)
+    (marker : List Bool) (word : List α) :
+    twoStateCoefficient ℚ upper lower δ terminal (sideTerminalColumn ℚ marker) word = 0 ↔
+      spell (fun role => upper role.2) (controllerSuffixRoles δ terminal word) ++ marker =
+        spell (fun role => lower role.1 role.2) (controllerSuffixRoles δ terminal word) := by
+  rw [twoStateCoefficient_eq_controlled, sideTerminalColumn, Matrix.mulVec_mulVec,
+    controllerRoleProduct_eq_sidePcpMatrix, ← sidePcpMatrix_append,
+    sidePcpMatrix_mulVec_sideTailBasis_head_rat, sub_eq_zero, Nat.cast_inj]
+  simpa using ternaryCode_injective.eq_iff
+
 /-- The nonzero common first column fixed by every physical data generator. -/
 def twoStateAnchor (R : Type*) [CommRing R] : Fin 4 → R := ![1, 0, 0, 0]
 

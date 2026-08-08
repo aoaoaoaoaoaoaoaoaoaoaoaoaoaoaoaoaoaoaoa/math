@@ -172,7 +172,7 @@ The unknown cells immediately below this staircase are:
 | Cell | What would suffice | Automatic reward |
 | --- | --- | --- |
 | `M₃(4)` | three-active-role fixed-boundary PCP / `GPCP(3)`, or a new same-dimension generator compiler | by CHHN, also `M₉(2)` |
-| `M₄(3)` | an undecidable binary two-state controlled scalar source, or an open-residue matrix macro | by CHHN, also `M₈(2)` |
+| `M₄(3)` | an undecidable promised two-state overlap queue with pure deletion, or closure of the oriented parabolic defect language | by CHHN, also `M₈(2)` |
 | `M₅(3)` | a five-state binary same-zero root, a toggle/separator fusion, or fixed-width-three scheduled universality | supersedes `M₆(3)`; `M₁₀(2)` is already known |
 | `M₉(2)` | a changed physical pair, changed-zero-series compiler, or nonlinear reduction; the present pair spans `M₁₀(ℚ)` | improves the two-generator threshold by one |
 | `M₂(k≥3)` | a qualitatively different decidability or undecidability argument | settles the dimension-two wall |
@@ -221,94 +221,90 @@ replace exact finite-state simulation.
 
 ## Ranked attacks
 
-### 1. Two-state control and open residues: `M₄(3)`
+### 1. Two-state cancellation and open residues: `M₄(3)`
 
-The matrix half is complete. The pushout compiler
-[`M4-C01`](SALVAGE.md#m4-c01-two-state-pushout-compiler) represents any deterministic
-two-state role controller over `{b,c}` by two `4 × 4` integer data matrices. A rank-one third
-matrix gives mortality exactly when the controlled binary scalar series has a nonempty zero.
-The decoder is total on all binary words, and reset transitions may make a data matrix singular
-without weakening the mortality converse.
+Victory means a checked many-one reduction to mortality of three integer `4 × 4` matrices,
+including a nonempty witness, denominator clearing, and soundness for every matrix word. The
+frontier has two live trunks and three independently attackable nodes.
 
-The source theorem is missing. Fazekas and Seki define the required one-tag-with-states model
-and cite unrestricted circular-automata universality, but neither their paper nor the audited
-literature supplies the exact two-state binary bound
-([local synopsis](references/fazekas-seki-2023-freezing-one-tag-states.md)).
+#### Source trunk: positive overlap queues
 
-The present Neary source cannot be inserted letterwise:
+The generic pushout [`M4-C01`](SALVAGE.md#m4-c01-two-state-pushout-compiler) already compiles any
+binary deterministic two-state scalar zero into two data matrices and one rank-one separator.
+The new positive overlap-queue compiler
+[`M4-C02`](SALVAGE.md#m4-c02-positive-overlap-queue-compiler) supplies an exact source seam. A
+queue consumes its open head and appends `produce(q,x)`; four local positive frame identities
+relate production to cancellation. Empty-state isolation and avoidance of one framed return then
+give
 
-- exact local toggle fusion preserves an immortal two-plane
-  ([`M4-O01`](SALVAGE.md#m4-o01-exact-toggle-fusion-leaves-an-immortal-core));
-- agreement at two consecutive deletion phases in a two-private-state quotient propagates
-  around the cycle to the rule phase, contradicting the unequal Neary rule scales
-  ([`M4-O02`](SALVAGE.md#m4-o02-two-private-state-phase-signature));
-- the direct binary two-state first-return recoding is reported impossible
-  ([`M4-O05`](SALVAGE.md#m4-o05-direct-two-state-first-return-recoding)).
+```text
+promised binary two-state overlap-queue acceptance
+    ↔ mortality of three integer 4 × 4 matrices.
+```
 
-The odd-phase macro cut [`M4-S01`](SALVAGE.md#m4-s01-odd-phase-macro-cut) remains useful but
-does not restore the discarded route. Pairing every semantic role with the following `D_b`
-produces rule macros `K_x` and deletion macros `E_x`, reportedly with every solution forced
-into `(KE^(m−1))⁺`. Serializing those macros as complete blocks is impossible:
-[`M4-O03`](SALVAGE.md#m4-o03-closed-serialization-collapse) proves that every finite
-closed-token implementation collapses to decidable deletion-one substitution. Distinct exact
-internal and final block codes also fail by
-[`M4-O04`](SALVAGE.md#m4-o04-exact-internal-final-code-defect).
+The converse is genuinely universal over positive words. Prefix causality either reconstructs
+the whole queue trace or exposes an earlier genuine empty prefix; no block-language assumption
+survives in the theorem.
 
-Two architectures survive.
+The remaining source node is exact: prove this promised overlap-queue problem undecidable, or
+prove it decidable. [`M4-O11`](SALVAGE.md#m4-o11-pure-deletion-necessity) fixes the necessary
+shape. Every accepted initial queue of length greater than one uses a state-preserving role with
+both production and cancellation empty. A viable universal machine must devote one of its four
+state-letter roles to genuine open-front deletion and use the other three to reconstruct phase.
+The natural complete-frame/parity specialization collapses precisely because it forbids this
+mechanism.
 
-1. **Open-tail source.** Build four appendants whose invariant retains a phase-bearing proper
-   suffix at the front and an incomplete tail at the rear. Emission must merge with that tail;
-   it cannot be a concatenation of complete semantic objects. The next state and residue must
-   be reconstructed only at a larger pulse boundary.
-2. **State-gauged matrix macro.** Let incomplete matrix fragments break the shared upper plane
-   and reconstruct it only at macro boundaries, preserving the zero set rather than every
-   coefficient. The cube-root incidence mechanism
-   [`M4-M01`](SALVAGE.md#m4-m01-mixed-cube-root-punctuation) is the concrete fallback. The
-   finite-order monomial blade [`M4-M02`](SALVAGE.md#m4-m02-universal-monomial-cube-root-blade)
-   is parked: [`M4-O07`](SALVAGE.md#m4-o07-closed-residue-monomial-obstruction) excludes every
-   closed ternary-residue boundary repair. The live replacement
-   [`M4-M03`](SALVAGE.md#m4-m03-parabolic-blade-and-bridge-grammar) is a rational open cube
-   root. Lean proves its nonzero rank-one word `G_bSG_bSG_b`, classifies every incomplete-root
-   gap, and identifies `F_bSJ` as the unique singular atom. Every zero needs at least three such
-   atoms. More sharply, an arbitrary chain `R M₁ R⋯Mₖ R` vanishes exactly when the induced
-   product of `2 × 2` bridges `B Mᵢ A` vanishes. The residue-two wall
-   [`M4-O08`](SALVAGE.md#m4-o08-residue-two-necessary-wall) now removes every word whose gaps
-   lie in residues zero and one: after integral scaling and reduction modulo three, every such
-   atom preserves two nonzero rays. Hence every exact zero contains a residue-two gap. The
-   residue-zero safe-bridge cone
-   [`M4-S02`](SALVAGE.md#m4-s02-residue-zero-safe-bridge-cone) also proves that every nonempty
-   regular bridge made solely from residue-zero atoms has negative determinant. Any singular
-   nonempty safe bridge must therefore contain a regular residue-one atom. The one-defect phase
-   cut [`M4-S03`](SALVAGE.md#m4-s03-one-defect-phase-cut) further proves that a lone residue-two
-   atom cannot vanish at an edge or between equal safe residues. Only local phases `0|2|1` and
-   `1|2|0` survive. The scalar exterior coordinate `s=(u+w)/v` closes on residue-zero atoms
-   and the residue-one `b` wall, but [`M4-O09`](SALVAGE.md#m4-o09-one-coordinate-exterior-fracture)
-   proves that residue-one `c` return depends essentially on `t=w/v`. One-coordinate recurrence
-   work is therefore retired absent a reachable-locus closure theorem. The finite-cone replacement
-   is also closed. [`M4-O10`](SALVAGE.md#m4-o10-irrational-rotation-cone-fracture) proves that
-   the single legal atom `G=Q(b,4)` has a dominant irrational projective rotation. Its genuine
-   bridge orbit accumulates on `u=0` and changes sign infinitely often, while exact arithmetic
-   gives `uₙ=3ⁿaₙ` with `aₙ≡1 mod 3`. Hence no finite componentwise proper-cone system or finite
-   strict wall-separated Markov multicone can prove complete safe return.
-
-The next matrix attack is arithmetic on the complete exterior state. It must distinguish exact
-wall incidence from the arbitrarily close real returns already forced by `Q(b,4)`: a normalized
-`3`-adic flag or building invariant, an infinite or non-strict projective partition carrying
-exact residue data, or an exact returning word that retires the blade. A safe-return theorem must
-then be consumed immediately in the alternating one-defect phases and interactions among
-successive residue-two atoms; safe return alone does not close the arbitrary-word converse.
-Determinant/content stratification remains available only if it proves a bounded
-nonunimodular-alternation theorem. Unrestricted safe alternation is not flat by declaration.
-
-The source route should now favor open-tail cancellation over another exact Neary recoding.
-Carvalho's inverse-transducer discrepancy supplies implicit deletion with an all-path converse;
-the missing step is a bounded-alphabet four-dimensional return representation whose punctuation
-does not cost a fourth generator. The literature synthesis and exact acceptance tests are in
+This source node supersedes the earlier nebulous “open-tail compiler” request. Fazekas and Seki
+do not supply the two-state binary bound, while Carvalho's inverse-transducer discrepancy remains
+the strongest adjacent source of deletion semantics. The checked acceptance tests and literature
+map are in
+[`audits/m43-overlap-queue-2026-08-08.md`](audits/m43-overlap-queue-2026-08-08.md) and
 [`audits/m43-alternating-defect-literature-2026-08-07.md`](audits/m43-alternating-defect-literature-2026-08-07.md).
-The one-step annihilator obligation
-[`M4-O06`](SALVAGE.md#m4-o06-punctuation-image-annihilator) is already discharged for every gap;
-finite gap enumeration, bare rank-one incidence, and closed-block products are no longer frontier
-work. Any proposal whose semantic queue is a finite word of complete tokens is already closed.
+
+#### Matrix trunk: parabolic bridge language
+
+The parabolic blade [`M4-M03`](SALVAGE.md#m4-m03-parabolic-blade-and-bridge-grammar) remains the
+live zero-set construction. Lean classifies its unique singular gap atom `R`, proves every zero
+needs at least three copies, and contracts every arbitrary exceptional chain exactly to a product
+of `2 × 2` bridges. [`M4-O08`](SALVAGE.md#m4-o08-residue-two-necessary-wall) proves that every
+zero contains a residue-two gap. [`M4-S03`](SALVAGE.md#m4-s03-one-defect-phase-cut) removes a
+lone defect at an edge or between equal safe residues, leaving only `0|2|1` and `1|2|0`.
+
+The complete safe exterior state is now controlled. The arbitrary-switching flag
+[`M4-S04`](SALVAGE.md#m4-s04-arbitrary-switching-three-adic-exterior-flag) proves that every
+regular safe word remains in a normalized two-sector `3`-adic flag. The leftmost residue selects
+the sector, even after unbounded cancellation. If such a word lies on the bridge wall `u=0`,
+residue zero forces `ν₃(w)<ν₃(v)` and residue one forces `ν₃(v)<ν₃(w)`. For a regular
+residue-one `b` atom, wall incidence is exactly
+
+```text
+(12·3^β−1)(u+w)+2v=0.
+```
+
+This is not safe return: both flag sectors contain ambient wall points. It is the correct
+replacement for the retired one-coordinate and finite-cone attacks. The scalar state fracture
+[`M4-O09`](SALVAGE.md#m4-o09-one-coordinate-exterior-fracture) shows that residue-one `c` needs
+both projective coordinates, and the irrational cycle
+[`M4-O10`](SALVAGE.md#m4-o10-irrational-rotation-cone-fracture) excludes every finite strict
+wall-separated cone or Markov multicone.
+
+Two matrix nodes can now race.
+
+1. **Oriented safe-wall reachability.** Derive the remaining exact atom wound functionals and
+   decide whether a reachable flagged safe state can satisfy one. A proof of avoidance gives
+   safe return; an exact hit retires or redirects the blade. Approximate real returns and another
+   coarse valuation partition do not decide this node.
+2. **Residue-two defect grammar.** Attack `0|2|1`, `1|2|0`, and successive defects directly,
+   using the oriented safe contexts but not waiting for a standalone safe-return theorem. The
+   goal is an arbitrary-word converse, a malformed exact zero, or a different zero language that
+   closes the master problem.
+
+The dead subtrees remain dead: literal Neary role fusion (`M4-O01`, `M4-O02`, `M4-O05`), finite
+queues of complete tokens (`M4-O03`), exact internal/final block codes (`M4-O04`), closed
+finite-order roots (`M4-O07`), one-coordinate exterior dynamics (`M4-O09`), and finite strict
+cone separation (`M4-O10`). The annihilator guard [`M4-O06`](SALVAGE.md#m4-o06-punctuation-image-annihilator)
+is discharged. Finite gap catalogues, bare rank-one incidence, and unproved flatness are not
+frontier work.
 
 ### 2. Zero-set compression and fused punctuation: `M₅(3)`
 
@@ -1300,11 +1296,11 @@ universal computation.
 
 ## Execution order
 
-1. Attack `M₄(3)` on two independent lanes: construct an exact arithmetic/infinite exterior
-   invariant compatible with the irrational `Q(b,4)` cycle, or force a malformed wall hit; and
-   compile an open-tail cancellation source through `M4-C01`. Use `M4-O01`–`M4-O05`, `M4-O09`,
-   and `M4-O10` to reject exact Neary recodings, finite closed-token queues, one-coordinate
-   exterior reformulations, and finite wall-separated cone systems before expansion.
+1. Attack the three open `M₄(3)` nodes independently: universality versus decidability of the
+   promised overlap queue constrained by `M4-O11`; exact oriented safe-wall reachability under
+   `M4-S04`; and the alternating/multiple residue-two defect grammar. Cross-pollinate exact
+   source and exterior invariants, but do not revive complete-token queues, one-coordinate
+   dynamics, finite wall-separated cones, or literal Neary recodings.
 2. Use formalized `MM-O01`, `G3-O01`, `MM-O03`, and `MM-O04` to reject exact packings, macros,
    and bridges without conflating their scope with solvability preservation.
 3. Prove or refute the setter candidate's projective avoidance property, construct a

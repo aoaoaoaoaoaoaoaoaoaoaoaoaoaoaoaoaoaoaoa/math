@@ -65,7 +65,8 @@ private def numerator (β : Nat) (body : List TagLetter) :
           liftResidue (-342 * P * ρ + 99 * P + 38 * ρ - 11) 0,
           liftResidue (576 * P * j + 192 * P - 64 * j + 42) 2]
 
-private theorem cAtom_three_mul_add_one (ρ L M : ℚ) (j : Nat) :
+/-- Explicit residue-one `c` atom before integral clearing or exterior transport. -/
+theorem cAtom_three_mul_add_one_matrix (ρ L M : ℚ) (j : Nat) :
     cAtom ρ L M (3 * j + 1) =
       !![2 + (L - 1) * (114 * ρ - 11) / 96,
           -3 - (L - 1) * (38 * ρ - 11) / 32,
@@ -123,6 +124,20 @@ private theorem cast_numerator_b_one (β : Nat) (body : List TagLetter) (j : Nat
       Matrix.mul_apply, Fin.sum_univ_succ] <;>
     ring
 
+/-- Exact residue-one `b` atom, recovered from the already-cleared integral model. -/
+theorem residueTwoWallGenerator_b_one_matrix
+    (β : Nat) (body : List TagLetter) (j : Nat) :
+    residueTwoWallGenerator β body (.b, j, true) =
+      !![36 * (3 : ℚ) ^ β - 9 / 4, 27 / 4 - 36 * (3 : ℚ) ^ β, 48 * j + 18;
+         9 * (3 : ℚ) ^ β, -9 * (3 : ℚ) ^ β, 0;
+         57 * (3 : ℚ) ^ β / 4 - 11 / 8, 33 / 8 - 57 * (3 : ℚ) ^ β / 4,
+          24 * j + 11] := by
+  ext i k
+  have entry := congrArg (fun matrix => matrix i k) (cast_numerator_b_one β body j)
+  fin_cases i <;> fin_cases k <;>
+    norm_num [numerator, liftResidue, castMatrix, residueTwoWallGenerator] at entry ⊢ <;>
+    linarith
+
 private theorem cast_numerator_c_zero (β : Nat) (body : List TagLetter) (j : Nat) :
     castMatrix (numerator β body (.c, j, false)) =
       (64 : ℚ) • residueTwoWallGenerator β body (.c, j, false) := by
@@ -147,7 +162,7 @@ private theorem cast_numerator_c_one (β : Nat) (body : List TagLetter) (j : Nat
   rw [show residueTwoWallGenerator β body (.c, j, true) =
       cAtom ((3 : ℚ) ^ β) (nearySideLowerC β body)
         (nearySideLowerCScale β body) (3 * j + 1) by rfl,
-    cAtom_three_mul_add_one,
+    cAtom_three_mul_add_one_matrix,
     nearySideLowerC_eq_nine_mul_add_seven]
   rw [show nearySideLowerCScale β body =
       27 * (3 : ℚ) ^ (tagEncode β body).length by

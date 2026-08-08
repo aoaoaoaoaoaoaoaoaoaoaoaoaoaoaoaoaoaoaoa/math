@@ -437,6 +437,19 @@ obstruction [`M4-O04`](SALVAGE.md#m4-o04-exact-internal-final-code-defect) is fo
 first principles: noninjectivity of a binary free-monoid morphism forces its two letter images
 to commute, contradicting the two explicit Neary macro upper words.
 
+The positive overlap-queue compiler [`M4-C02`](SALVAGE.md#m4-c02-positive-overlap-queue-compiler)
+is formalized in
+[`MatrixMortality/OverlapQueue.lean`](MatrixMortality/OverlapQueue.lean). A binary two-state
+queue consumes its open head and appends a role-dependent word. Four positive frame-cocycle
+identities, empty-state isolation, and avoidance of one framed return suffice for an exact
+equivalence between acceptance and mortality of three integer `4 × 4` matrices. The proof
+quantifies over every positive physical word: `OverlapQueue.causality` forces an arbitrary
+coefficient equality to be a genuine trace or to contain an earlier empty prefix. The same file
+formalizes the source obstruction [`M4-O11`](SALVAGE.md#m4-o11-pure-deletion-necessity): every
+accepted initial queue of length greater than one has a state-preserving role whose production
+and cancellation words are both empty. The audit is
+[`audits/m43-overlap-queue-2026-08-08.md`](audits/m43-overlap-queue-2026-08-08.md).
+
 The odd-phase macro cut [`M4-S01`](SALVAGE.md#m4-s01-odd-phase-macro-cut) remains reported.
 Lean already defines the relevant phase residues and Table 2 tracks, but no theorem yet proves
 the even-track invariant through every reachable queue or the induced macro solvability
@@ -473,10 +486,24 @@ Together with safe-word nonvanishing and residue-two atom invertibility, only ad
 `0|2|1` and `1|2|0` remain. The audit is
 [`audits/m43-one-defect-phase-2026-08-07.md`](audits/m43-one-defect-phase-2026-08-07.md).
 
+The arbitrary-switching exterior flag
+[`M4-S04`](SALVAGE.md#m4-s04-arbitrary-switching-three-adic-exterior-flag) is formalized across
+[`MatrixMortality/ParabolicExterior.lean`](MatrixMortality/ParabolicExterior.lean),
+[`MatrixMortality/ParabolicFlag.lean`](MatrixMortality/ParabolicFlag.lean), and
+[`MatrixMortality/ParabolicSafeFlag.lean`](MatrixMortality/ParabolicSafeFlag.lean). Lean checks
+the complete adjugate exterior state, its exact left-multiplication law, and the bridge identity
+making its first coordinate the singular wall. Every regular safe atom sends the two-sector
+`3`-adic flag into the sector selected by its residue, even under arbitrary switching and
+unbounded common-power cancellation. On the wall, the leftmost residue forces a strict
+orientation of the other coordinates. This does not prove safe return because both sectors meet
+the wall. The first exact wound is also checked: a regular residue-one `b` atom returns precisely
+when `(12·3^β−1)(u+w)+2v=0`. The audit is
+[`audits/m43-parabolic-flag-2026-08-08.md`](audits/m43-parabolic-flag-2026-08-08.md).
+
 No `M₄(3)` undecidability theorem follows from the present corpus. The missing source is an
-undecidable binary two-state controlled scalar system, or a matrix-level open-residue compiler
-whose first residue-two block realizes the paired zero series and whose `2 × 2` bridge language
-has the intended zero words only.
+undecidable promised binary two-state overlap queue with a genuine deleting self-loop. On the
+matrix lane, one must prove or refute reachable incidence with the oriented safe wall, or close
+the alternating and multiple residue-two defect language directly.
 
 ## Modules
 
@@ -537,6 +564,7 @@ has the intended zero words only.
 | `ControllerPushout.lean` | arbitrary finite-controller pushout, total suffix decoder, and transposed prefix decoder |
 | `TwoStatePushout.lean` | rule/erasure specialization, exact rank classification, and integer mortality compiler |
 | `TwoStateObstructions.lean` | exact local toggle-fusion obstruction |
+| `OverlapQueue.lean` | positive two-frame queue semantics, arbitrary-word causality, exact mortality compiler, and pure-deletion necessity |
 | `IndexedExecution.lean` | exact finite relational execution and closure views |
 | `TagQueue.lean` | tag steps, indexed execution specializations, and generic history soundness |
 | `NearyEncoding.lean` | four ordinary tiles, synchronization, source equivalence, and composed reductions |
@@ -549,6 +577,9 @@ has the intended zero words only.
 | `PairedCompression.lean` | reset/toggle specialization, explicit coordinate certificates, and arbitrary-word decoding |
 | `ParabolicBlade.lean` | open cube root, nonzero mixed blade, complete atom grammar, annihilator guards, and exact `2 × 2` exceptional-chain contraction |
 | `ParabolicResidueWall.lean` | integral residue-{0,1} atom numerators, modulo-three two-ray action, and the necessity of residue two |
+| `ParabolicExterior.lean` | complete adjugate exterior state, bridge-wall coordinate, and four normalized safe actions |
+| `ParabolicFlag.lean` | valuation relations and the four arbitrary-cancellation atom invariants |
+| `ParabolicSafeFlag.lean` | arbitrary safe-word flag, wall orientation, and exact residue-one `b` wound |
 | `PairedMortality.lean` | common-column mortality converse and exact integer `4 × 4` family |
 | `PairedRank.lean` | uniform exact rank-four certificate for the paired scalar series |
 | `PairedBoundaryTax.lean` | exact six-state lower bound for diagonal paired-series bridges |
@@ -700,6 +731,9 @@ has the intended zero words only.
 | Every two-state pushout word obeys its suffix decoder | `twoStateProduct_mulVec_phaseVector`, `twoStateCoefficient_eq_controlled` |
 | A two-state reset has rank three; separated destinations have rank four | `twoStateDataMatrix_rank_eq_three_of_eq`, `twoStateDataMatrix_rank_eq_four_of_ne` |
 | The integer two-state family is mortal exactly at a nonempty controlled scalar zero | `twoStateMortalityFamily_int_mortal_iff_nonempty_zero` |
+| Promised positive overlap-queue acceptance is exactly mortality of three integer `4 × 4` matrices | `OverlapQueue.mortality_iff_accepts` |
+| Every long accepted overlap queue has a state-preserving pure-deletion role | `OverlapQueue.pure_deletion_of_accepts_large` |
+| Every regular safe word preserves the oriented `3`-adic exterior flag | `ParabolicBlade.exteriorState_safe_word_flag`, `ParabolicBlade.exteriorState_safe_word_wall_orientation` |
 | Exact left-context toggle fusion is immortal | `exactLeftToggleFusion_immortal` |
 | A finite closed-token queue halts iff no reachable token lies on a dependency cycle | `closedSubstitutionHalts_iff_noReachableCycle` |
 | Two private quotient states cannot isolate the Neary rule phase | `twoPrivateState_ruleScale_eq`, `neary_twoPrivateState_phaseCompiler_impossible` |

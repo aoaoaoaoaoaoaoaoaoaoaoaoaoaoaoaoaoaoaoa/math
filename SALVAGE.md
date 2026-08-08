@@ -125,6 +125,9 @@ file owns the mathematical stock.
 | [`M4-S03`](#m4-s03-one-defect-phase-cut) | structure theorem | a lone residue-two defect can survive only between opposite safe residues | formalized | active |
 | [`M4-O09`](#m4-o09-one-coordinate-exterior-fracture) | obstruction | the wait-free scalar exterior coordinate does not close on residue-one `c` atoms | audited | graduated |
 | [`M4-O10`](#m4-o10-irrational-rotation-cone-fracture) | obstruction | one legal safe cycle excludes finite wall-separated cone certificates | audited | graduated |
+| [`M4-C02`](#m4-c02-positive-overlap-queue-compiler) | compiler | promised positive two-frame queue acceptance compiles exactly to three integer `4 × 4` matrices | formalized | graduated |
+| [`M4-O11`](#m4-o11-pure-deletion-necessity) | obstruction | every long accepted overlap queue needs a state-preserving role empty on both correspondence sides | formalized | graduated |
+| [`M4-S04`](#m4-s04-arbitrary-switching-three-adic-exterior-flag) | structure theorem | every regular safe word preserves an oriented two-sector `3`-adic flag | formalized | active |
 | [`G3-O01`](#g3-o01-four-role-macro-irreducibility) | obstruction | exact nonerasing macros cannot reduce the four source roles to three letters | formalized | graduated |
 | [`G3-S01`](#g3-s01-shift-equivariant-zero-incidence) | structure theorem | same-zero state dimension is equivariant projective incidence dimension | audited | active |
 | [`G3-M01`](#g3-m01-free-group-discrepancy-engine) | partial mechanism | free cancellation implements queue deletion with an all-path converse | reported | active |
@@ -4180,6 +4183,145 @@ exact counterexample.
 
 **Artifact:**
 [`audits/m43-irrational-rotation-cone-fracture-2026-08-07.md`](audits/m43-irrational-rotation-cone-fracture-2026-08-07.md).
+
+### M4-C02: Positive overlap-queue compiler
+
+**Kind:** compiler
+
+**Evidence:** formalized
+
+**Disposition:** graduated
+
+Fix a binary queue alphabet and two controller states. A trace consumes the current head `x`
+and appends `produce(q,x)` at the open tail. For a nonempty initial queue `s`, use the two
+positive frames
+
+```text
+z_rule = 0 :: s,       z_erase = []
+```
+
+and require the four local word identities
+
+```text
+z_q ++ produce(q,x) = cancel(q,x) ++ z_δ(q,x).
+```
+
+Lean proves that these identities telescope along every word. More importantly, positive-word
+causality proves the arbitrary-word converse: if a nominal consumed word agrees with the queue
+history, either it is a genuine trace or a genuine prefix has already emptied the queue. Under
+the two semantic promises that every reachable empty queue is in `erase` and the initial
+configuration never returns to its longer framed queue, reversal converts queue acceptance into
+the exact suffix-controlled coefficient zero of [`M4-C01`](#m4-c01-two-state-pushout-compiler).
+Consequently
+
+```text
+queue accepts  ↔  mortality of three integer 4 × 4 matrices.
+```
+
+**Scope:** the theorem fixes two states, two queue letters, three matrices, a nonempty mortality
+witness, and all arbitrary physical words. The semantic promises are hypotheses on a source
+family; the compiler neither decides them nor constructs an undecidable family satisfying them.
+
+**Use:** this is now the shortest source-side route to `M₄(3)`. It supersedes vague requests for
+an “open tail”: prove undecidability of the promised overlap-queue problem and instantiate the
+checked theorem.
+
+**Next:** construct a computable undecidable family satisfying the cocycle and both semantic
+promises, necessarily with the deletion mechanism in [`M4-O11`](#m4-o11-pure-deletion-necessity),
+or prove that the promised two-state binary model is decidable.
+
+**Artifact:** `OverlapQueue.mortality_iff_accepts` in
+[`MatrixMortality/OverlapQueue.lean`](MatrixMortality/OverlapQueue.lean) and
+[`audits/m43-overlap-queue-2026-08-08.md`](audits/m43-overlap-queue-2026-08-08.md).
+
+### M4-O11: Pure-deletion necessity
+
+**Kind:** obstruction
+
+**Evidence:** formalized
+
+**Disposition:** graduated
+
+Charge an ordinary queue by its length and an `erase`-state queue by one additional unit. Under
+the positive frame cocycle, this potential cannot decrease if every state-preserving role emits
+a nonempty production word. An accepted initial queue of length greater than one would then have
+potential at least two but terminal potential one, a contradiction. Hence every such accepted
+instance contains a role `(q,x)` with
+
+```text
+δ(q,x)=q,       produce(q,x)=[],       cancel(q,x)=[].
+```
+
+The last equality is forced by the frame cocycle, not assumed separately.
+
+**Scope:** this is a necessity theorem for an accepted instance with nonempty initial queue of
+length greater than one. It does not say that the pure-deletion role is reachable, classify
+short instances, or prove decidability once such a role exists.
+
+**Use:** reject every proposed positive overlap source that merely transfers complete state
+frames and keeps all self-loops length-nondecreasing. A viable construction must spend one of
+its four state-letter roles on genuine open-front deletion while the other roles reconstruct
+enough computation to retain universality.
+
+**Next:** classify the remaining four-role machines around the forced deleting self-loop. Either
+embed an undecidable queue/tag system into that normal form or derive an effective finite or
+semilinear reachability description.
+
+**Artifact:** `OverlapQueue.pure_deletion_of_accepts_large` in
+[`MatrixMortality/OverlapQueue.lean`](MatrixMortality/OverlapQueue.lean) and
+[`audits/m43-overlap-queue-2026-08-08.md`](audits/m43-overlap-queue-2026-08-08.md).
+
+### M4-S04: Arbitrary-switching three-adic exterior flag
+
+**Kind:** arbitrary-length semigroup invariant
+
+**Evidence:** formalized
+
+**Disposition:** active
+
+The complete contragredient exterior state of a safe suffix is a vector `(u,v,w)`. Lean checks
+an invertible triangle-coordinate change for which bridge singularity is exactly `u=0`, the
+empty suffix is `(0,22,9)`, and physical left multiplication acts linearly even for singular
+atoms. Define two sectors by
+
+```text
+C₀: ν₃(v) > min(ν₃(u),ν₃(w)),
+C₁: ν₃(w) > min(ν₃(u),ν₃(v)),
+C = C₀ ∪ C₁,
+```
+
+with zero treated as valuation infinity. For the actual nonempty Neary body, every regular safe
+residue-zero atom sends `C` into `C₀`, and every regular safe residue-one atom sends `C` into
+`C₁`. The proof recomputes the exact common power of three after every multiplication and
+therefore survives arbitrary switching and arbitrarily deep cancellation. Induction gives the
+flag for every regular safe word. For a nonempty word lying on `u=0`, its leftmost residue also
+forces a strict orientation between `v` and `w`.
+
+The first exposed wall equation is exact. A regular residue-one `b` atom with wait `j>0` hits
+the wall precisely when
+
+```text
+(12·3^β−1)(u+w)+2v=0.
+```
+
+**Scope:** arbitrary regular safe words, all natural `β`, every nonempty encoded body, and all
+legal waits. The exceptional residue-one `b` label with wait zero is excluded because it is the
+singular atom, not a regular safe gap. The flag sectors themselves meet `u=0`; this theorem is
+not safe return and does not control residue-two defects.
+
+**Use:** arbitrary switching is no longer the unknown. Any safe wall hit must occur in one of
+two oriented `3`-adic boundary sectors, and each leftmost atom supplies an explicit exact wound
+functional. Continue with reachable-locus arithmetic, not a finite Archimedean cone or another
+coarse valuation partition.
+
+**Next:** derive and compare the wall functionals for all four atom families under the oriented
+flag, then prove their reachable avoidance or exhibit an exact safe returning word. In parallel,
+feed the oriented contexts directly into the alternating one-defect and multiple-defect grammar.
+
+**Artifact:** [`MatrixMortality/ParabolicExterior.lean`](MatrixMortality/ParabolicExterior.lean),
+[`MatrixMortality/ParabolicFlag.lean`](MatrixMortality/ParabolicFlag.lean),
+[`MatrixMortality/ParabolicSafeFlag.lean`](MatrixMortality/ParabolicSafeFlag.lean), and
+[`audits/m43-parabolic-flag-2026-08-08.md`](audits/m43-parabolic-flag-2026-08-08.md).
 
 ## Three-Letter Source Frontier
 
