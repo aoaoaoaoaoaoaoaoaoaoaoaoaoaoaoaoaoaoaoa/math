@@ -105,6 +105,11 @@ open MatrixMortality
 #print axioms BranchingHistory.bcbcTerminalFork_injective
 #print axioms BranchingHistory.bcbcTerminalFork_match
 #print axioms BranchingHistory.no_affine_positional_section
+#print axioms BranchingHistory.bcbc_terminal_nearFork
+#print axioms BranchingHistory.bcbcNearFork_state_eq_of_local_fork
+#print axioms BranchingHistory.no_bcbc_sameZero_of_local_fork
+#print axioms BranchingHistory.phaseLine_terminal_eq_nearFork
+#print axioms BranchingHistory.no_phaseLine_bcbc_sameZero
 #print axioms ResetAffineHistory.wordProduct_mulVec_column
 #print axioms ResetAffineHistory.coefficient_eq
 #print axioms ResetAffineHistory.phaseWeight_eq_zero_of_toggle_pair

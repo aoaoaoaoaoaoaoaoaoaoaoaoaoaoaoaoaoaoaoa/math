@@ -508,6 +508,16 @@ words at one length. Lean consequently excludes every single affine row section 
 positional decoder. The report's proposed exact regular grammar for all `bcbc` terminals remains
 unpromoted; the binary sublanguage already kills positional-ray refinements.
 
+[`G3-O07`](SALVAGE.md#g3-o07-near-fork-carry-collision) closes the next attempted consumption of
+that branching. One terminal `bcbc` prefix and one same-length nonterminal near-fork collide
+whenever the internal stroke paths obey `DZ=FX` on a witness recoverable through two erase-`b`
+steps. Lean proves this without dimension or invertibility assumptions. For the proposed
+one-projective-coordinate phase-line controls, the two full physical products are equal matrices
+for every rational parameter away from the denominator pole. Thus rational contraction and
+singular phase reset do not rescue a scalar stroke carry. The unproved step is now internal:
+arbitrary three-state fork zeros need not identify partial-factor images before their common
+return to the terminal plane.
+
 The mortality lift is no longer part of this obstruction. For arbitrary controls `H_a`, column
 `γ`, and row `λ` over a field, adjoining `γλ` gives mortality exactly when some
 `λH_yγ` vanishes. A zero product without the separator is already a scalar-zero witness; after
@@ -551,7 +561,7 @@ three symbol types but many transition rules does not meet this count.
 
 | Lane | Available leverage | Decisive obstruction or obligation |
 | --- | --- | --- |
-| Shift-equivariant zero incidence | Same-zero dimension three is point-line incidence in `P²`; [`G3-O04`](SALVAGE.md#g3-o04-expanding-affine-history-no-go) kills finite-mode expanding one-coordinate uniformization, [`G3-O05`](SALVAGE.md#g3-o05-cancellative-projective-state-tax) separates support rank from inverse-saturated dynamics, and [`G3-O06`](SALVAGE.md#g3-o06-periodic-ray-completion-and-branching-fracture) kills affine positional sections on explicit branching body `bcbc` | Compile the `bcbc` fork with intrinsically two-dimensional singular dynamics, or derive dimension four from its common positive shifts; bare support tables, positional digits, and group-completable cross-multiplication are closed |
+| Shift-equivariant zero incidence | Same-zero dimension three is point-line incidence in `P²`; [`G3-O04`](SALVAGE.md#g3-o04-expanding-affine-history-no-go) kills finite-mode expanding one-coordinate uniformization, [`G3-O05`](SALVAGE.md#g3-o05-cancellative-projective-state-tax) separates support rank from inverse-saturated dynamics, [`G3-O06`](SALVAGE.md#g3-o06-periodic-ray-completion-and-branching-fracture) kills affine positional sections on `bcbc`, and [`G3-O07`](SALVAGE.md#g3-o07-near-fork-carry-collision) kills its one-coordinate phase-line stroke carry | Compile the `bcbc` fork with intrinsically two-dimensional singular dynamics, or force its terminal plane through partial factors far enough to create the checked near-fork collision; bare support tables, positional digits, scalar carries, and group-completable cross-multiplication are closed |
 | Inverse-transducer discrepancy | Free cancellation performs queue-head deletion and Carvalho proves an all-path fixed-loop converse; see [`G3-M01`](SALVAGE.md#g3-m01-free-group-discrepancy-engine) | The closed-path subgroup has instance-dependent rank; inverses, free reduction, and subgroup control must be compiled into three positive letters |
 | Context and sliding-block codes | Adjacent ternary symbols can carry four semantic roles without fixed role macros | GPCP quantifies over the full free monoid; every boundary fragment, phase shift, and invalid overlap must be algebraically harmless |
 | Erasure and target recoding | Erasure escapes `G3-O01`; longer target atoms can split the one-letter images used in its proof | Empty contributions and code fragments create new boundary matches unless a global normal form excludes them |
@@ -572,6 +582,19 @@ prove that its branching zero set has rational same-zero dimension at least four
 equal-length binary fork must appear in either argument: a compiler must combine its alternatives
 without a finite union of affine rows, while a lower bound must use the shared positive actions
 rather than static support rank.
+
+The scalar stroke-carry escape is now closed. In the notation
+
+```text
+D=B T C B,       Z=C T B B,       F=C T B C,       X=B T B B,
+```
+
+the local identities `BBv=CBTγ` and `DZv=FXv` force a checked terminal/nonterminal collision.
+A lower bound must derive that collision, or another explicit false zero, from the complete
+all-context zero law without assuming either identity, cancellation, or inverse states. A
+construction must keep the near-fork suffix outside the recoverable `BB` image or separate the
+two partial fork paths by genuinely two-dimensional singular geometry; changing the scalar carry
+parameter cannot work.
 
 Any positive construction must then extend to one symbolic family computable from `(β,body)`,
 

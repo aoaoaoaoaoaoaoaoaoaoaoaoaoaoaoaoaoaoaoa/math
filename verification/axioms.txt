@@ -139,6 +139,17 @@
 'MatrixMortality.BranchingHistory.no_affine_positional_section' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.BranchingHistory.bcbc_terminal_nearFork' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.BranchingHistory.bcbcNearFork_state_eq_of_local_fork' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.BranchingHistory.no_bcbc_sameZero_of_local_fork' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.BranchingHistory.phaseLine_terminal_eq_nearFork' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.BranchingHistory.no_phaseLine_bcbc_sameZero' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.ResetAffineHistory.wordProduct_mulVec_column' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]

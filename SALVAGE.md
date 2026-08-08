@@ -127,6 +127,7 @@ file owns the mathematical stock.
 | [`G3-O04`](#g3-o04-expanding-affine-history-no-go) | obstruction | finite-mode expanding one-coordinate history has decidable target reachability | audited | graduated |
 | [`G3-O05`](#g3-o05-cancellative-projective-state-tax) | obstruction | inverse-saturated two-side projective dynamics need four states | audited | graduated |
 | [`G3-O06`](#g3-o06-periodic-ray-completion-and-branching-fracture) | compiler and obstruction | `bcbb` has an exact three-state periodic compiler, while `bcbc` defeats every single affine positional section | formalized | graduated |
+| [`G3-O07`](#g3-o07-near-fork-carry-collision) | obstruction | a terminal and nonterminal `bcbc` near-fork collide under the entire one-coordinate phase-line carry family | formalized | graduated |
 | [`G3-M01`](#g3-m01-free-group-discrepancy-engine) | partial mechanism | free cancellation implements queue deletion with an all-path converse | reported | active |
 | [`D2-S01`](#d2-s01-projective-hard-core) | structure theorem | `M₂(3)` is equivalent to two-generator projective incidence | audited | active |
 | [`D2-S02`](#d2-s02-monotone-affine-path-form) | structure theorem | normalized affine words form monotone exponent paths | audited | stock |
@@ -4406,6 +4407,70 @@ same-zero dimension at least four.
 **Artifact:** [`PeriodicHistory.lean`](MatrixMortality/PeriodicHistory.lean),
 [`BranchingHistory.lean`](MatrixMortality/BranchingHistory.lean), and
 [`m34-periodic-ray-branching-fracture-2026-08-07.md`](audits/m34-periodic-ray-branching-fracture-2026-08-07.md).
+
+### G3-O07: Near-fork carry collision
+
+**Kind:** obstruction
+
+**Evidence:** formalized
+
+**Disposition:** graduated
+
+For the body `bcbc`, the canonical controls
+
+```text
+p = c t b c b t c b t,
+q = b t c b c t c b t
+```
+
+decode respectively to the terminal prefix `R_c E_b E_c R_b E_c E_b` and the nonterminal
+near-fork `R_b E_c E_b R_c E_c E_b`. Lean proves that their paired coefficients are respectively
+zero and nonzero.
+
+Let `B,C,T` be arbitrary common controls, set
+
+```text
+D=B T C B,       Z=C T B B,
+F=C T B C,       X=B T B B,
+```
+
+and let `γ,v` be columns. Lean proves the dimension-independent implication
+
+```text
+B B v = C B T γ  ∧  D Z v = F X v  ⇒  H_q γ = H_p γ.
+```
+
+Thus no rational same-zero representation in any dimension can satisfy both local identities.
+This uses no global cancellation or invertibility; it isolates the exact internal comparison that
+the complete binary-fork zeros do not yet force.
+
+The proposed phase-line carry is closed parametrically. For `ρ≠−1`, put
+
+```text
+a=2/(ρ+1),       σ=ρ(ρ+1)²/4,
+
+B=[[1,0,0],[0,a,σ],[0,0,0]],
+C=[[1,ρ+1,−σ],[0,a,σ],[0,0,0]],
+T=[[1,0,0],[0,0,1],[0,1,0]].
+```
+
+Lean normalizes its three stroke products and proves `DG=FD`, so the full physical products for
+`p` and `q` are equal matrices. No row or column can repair the resulting false zero. This covers
+every intended `ρ≥3` and strengthens the reported projective-coordinate collision.
+
+**Scope:** the terminal/nonterminal pair, local collision law, parametric matrix identity, and
+same-zero impossibility for the displayed family are Lean-checked. The result does not prove that
+an arbitrary three-state recognizer satisfies the local recovery or fork identity. Singular
+partial factors may separate the internal paths and merge them only after a complete block.
+
+**Use:** delete two-phase, one-projective-coordinate stroke carries, including rational
+contractions outside `G3-O04`. A surviving construction must use genuinely two-dimensional
+projective history or prevent the near-fork suffix from entering the two-step erase image. A
+lower bound must derive an internal collision from all terminal contexts without assuming
+invertibility.
+
+**Artifact:** [`BranchingHistory.lean`](MatrixMortality/BranchingHistory.lean) and
+[`m34-near-fork-carry-collision-2026-08-07.md`](audits/m34-near-fork-carry-collision-2026-08-07.md).
 
 ### G3-M01: Free-group discrepancy engine
 

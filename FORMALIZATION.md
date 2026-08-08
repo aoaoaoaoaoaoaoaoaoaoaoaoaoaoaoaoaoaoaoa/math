@@ -172,6 +172,15 @@ arbitrary rational three-state same-zero representation; that compiler or a comm
 dimension-four lower bound is the live seam. The reconstruction is
 [`m34-periodic-ray-branching-fracture-2026-08-07.md`](audits/m34-periodic-ray-branching-fracture-2026-08-07.md).
 
+The first scalar-carry response to that branching is also closed. Lean checks a terminal control
+and a same-length nonterminal near-fork, then proves a dimension-independent local collision law:
+if `BBv=CBTγ` and `DZv=FXv` for the four stroke products, both controls reach the same state.
+No same-zero representation can satisfy those identities. For the proposed rational phase-line
+family, Lean strengthens the projective calculation to equality of the two full `3 × 3` control
+products for every parameter `ρ≠−1`; no row or column repairs the false zero. Arbitrary singular
+three-state dynamics need not satisfy the local identities and remain open. See
+[`m34-near-fork-carry-collision-2026-08-07.md`](audits/m34-near-fork-carry-collision-2026-08-07.md).
+
 For the `6 × 6` scalar compiler, Lean checks both explicit integer generators and a total
 two-bit decoder on the complete binary free monoid. Complete pairs emit the four source roles;
 an odd final bit preserves the coefficient. The decoder is surjective, the empty coefficient
@@ -811,6 +820,8 @@ with a complete arbitrary-word converse.
 | Four explicit integral `bcbb` matrices are mortal exactly at a paired zero | `PeriodicHistory.bcbbIntegralSeparator_cast`, `PeriodicHistory.bcbbIntegralFamily_mortal_iff_paired_zero` |
 | The `bcbc` terminal language contains injective equal-length binary forks | `BranchingHistory.bcbcForkRoles_injective`, `BranchingHistory.bcbcTerminalFork_injective`, `BranchingHistory.bcbcTerminalFork_match` |
 | No affine positional row section recognizes the complete `bcbc` terminal language | `BranchingHistory.no_affine_positional_section` |
+| Local fork equality and two-step erase recovery force a terminal/nonterminal `bcbc` state collision | `BranchingHistory.bcbc_terminal_nearFork`, `BranchingHistory.bcbcNearFork_state_eq_of_local_fork`, `BranchingHistory.no_bcbc_sameZero_of_local_fork` |
+| The complete parametric phase-line carry family identifies the terminal prefix with its nonterminal near-fork | `BranchingHistory.phaseLine_terminal_eq_nearFork`, `BranchingHistory.no_phaseLine_bcbc_sameZero` |
 | Every reset-affine control word obeys its exact coordinate and target equation | `ResetAffineHistory.wordProduct_mulVec_column`, `ResetAffineHistory.coefficient_eq` |
 | A zero and its leading toggle force the affine target to forget phase | `ResetAffineHistory.phaseWeight_eq_zero_of_toggle_pair` |
 | A phase-only reset-affine target has the exact two-phase zero test | `ResetAffineHistory.exists_zero_of_left_zero_iff` |
