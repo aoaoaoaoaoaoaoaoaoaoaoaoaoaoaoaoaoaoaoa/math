@@ -284,17 +284,21 @@ Two architectures survive.
    `1|2|0` survive. The scalar exterior coordinate `s=(u+w)/v` closes on residue-zero atoms
    and the residue-one `b` wall, but [`M4-O09`](SALVAGE.md#m4-o09-one-coordinate-exterior-fracture)
    proves that residue-one `c` return depends essentially on `t=w/v`. One-coordinate recurrence
-   work is therefore retired absent a reachable-locus closure theorem.
+   work is therefore retired absent a reachable-locus closure theorem. The finite-cone replacement
+   is also closed. [`M4-O10`](SALVAGE.md#m4-o10-irrational-rotation-cone-fracture) proves that
+   the single legal atom `G=Q(b,4)` has a dominant irrational projective rotation. Its genuine
+   bridge orbit accumulates on `u=0` and changes sign infinitely often, while exact arithmetic
+   gives `uₙ=3ⁿaₙ` with `aₙ≡1 mod 3`. Hence no finite componentwise proper-cone system or finite
+   strict wall-separated Markov multicone can prove complete safe return.
 
-The next matrix attack is a finite cone or multicone problem on the complete exterior state.
-Every wait family is affine; on its natural domain it has the form `T(j)=T(0)+jD`, except that
-the regular residue-one `b` family is based at `T(1)`. Invariance of a convex cone under the
-base and direction maps controls all natural waits. An exact rational polyhedral certificate
-avoiding `u=0` would eliminate singular nonempty safe bridges and leave only empty-block
-incidences for the exceptional-chain audit, while a forced wall crossing could expose a
-malformed zero. In parallel, determinant/content stratification may reduce a fixed residue
-skeleton to a flat rational `GL₂(ℚ)` language, but unbounded safe alternation is not flat by
-declaration.
+The next matrix attack is arithmetic on the complete exterior state. It must distinguish exact
+wall incidence from the arbitrarily close real returns already forced by `Q(b,4)`: a normalized
+`3`-adic flag or building invariant, an infinite or non-strict projective partition carrying
+exact residue data, or an exact returning word that retires the blade. A safe-return theorem must
+then be consumed immediately in the alternating one-defect phases and interactions among
+successive residue-two atoms; safe return alone does not close the arbitrary-word converse.
+Determinant/content stratification remains available only if it proves a bounded
+nonunimodular-alternation theorem. Unrestricted safe alternation is not flat by declaration.
 
 The source route should now favor open-tail cancellation over another exact Neary recoding.
 Carvalho's inverse-transducer discrepancy supplies implicit deletion with an all-path converse;
@@ -1296,10 +1300,11 @@ universal computation.
 
 ## Execution order
 
-1. Attack `M₄(3)` on two independent lanes: synthesize a finite exterior cone/multicone from the
-   base and direction maps of the affine wait families; and compile an open-tail cancellation
-   source through `M4-C01`. Use `M4-O01`–`M4-O05` and `M4-O09` to reject exact Neary recodings,
-   finite closed-token queues, and one-coordinate exterior reformulations before expansion.
+1. Attack `M₄(3)` on two independent lanes: construct an exact arithmetic/infinite exterior
+   invariant compatible with the irrational `Q(b,4)` cycle, or force a malformed wall hit; and
+   compile an open-tail cancellation source through `M4-C01`. Use `M4-O01`–`M4-O05`, `M4-O09`,
+   and `M4-O10` to reject exact Neary recodings, finite closed-token queues, one-coordinate
+   exterior reformulations, and finite wall-separated cone systems before expansion.
 2. Use formalized `MM-O01`, `G3-O01`, `MM-O03`, and `MM-O04` to reject exact packings, macros,
    and bridges without conflating their scope with solvability preservation.
 3. Prove or refute the setter candidate's projective avoidance property, construct a

@@ -39,5 +39,6 @@ was found. Any use must retain irreducibility, whole-semigroup Perronness, and i
 
 ## Project Use
 
-The `M₄(3)` audit uses the theorem as a spectral diagnostic for candidate exterior cones, not as
-an algorithm that has already established such a cone.
+The `M₄(3)` audit uses Fact 1 to exclude a finite componentwise proper-cone system for one repeated
+exterior atom whose spectral-radius eigenvalues are nonreal. It does not treat the paper as an
+algorithm for constructing or deciding cones.

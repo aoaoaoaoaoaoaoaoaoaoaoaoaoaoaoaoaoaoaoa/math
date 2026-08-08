@@ -4,6 +4,10 @@
 
 **Status:** the one-coordinate exterior route is fractured; `M₄(3)` remains open
 
+**Superseded route:** the finite cone/multicone tendril below was subsequently excluded by
+[`M4-O10`](../SALVAGE.md#m4-o10-irrational-rotation-cone-fracture); it remains here as the search
+boundary that led to that obstruction
+
 **Authorship:** GPT-5.6 Sol; elicited by @eternalism_4eva
 
 **Target:** adjudicate the fourth parabolic-blade return, reconstruct the whole `M₄(3)`

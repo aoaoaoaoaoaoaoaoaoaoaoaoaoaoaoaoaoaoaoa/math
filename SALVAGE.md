@@ -124,6 +124,7 @@ file owns the mathematical stock.
 | [`M4-S02`](#m4-s02-residue-zero-safe-bridge-cone) | structure theorem | every nonempty residue-zero regular safe bridge has negative determinant | audited | active |
 | [`M4-S03`](#m4-s03-one-defect-phase-cut) | structure theorem | a lone residue-two defect can survive only between opposite safe residues | formalized | active |
 | [`M4-O09`](#m4-o09-one-coordinate-exterior-fracture) | obstruction | the wait-free scalar exterior coordinate does not close on residue-one `c` atoms | audited | graduated |
+| [`M4-O10`](#m4-o10-irrational-rotation-cone-fracture) | obstruction | one legal safe cycle excludes finite wall-separated cone certificates | audited | graduated |
 | [`G3-O01`](#g3-o01-four-role-macro-irreducibility) | obstruction | exact nonerasing macros cannot reduce the four source roles to three letters | formalized | graduated |
 | [`G3-S01`](#g3-s01-shift-equivariant-zero-incidence) | structure theorem | same-zero state dimension is equivariant projective incidence dimension | audited | active |
 | [`G3-M01`](#g3-m01-free-group-discrepancy-engine) | partial mechanism | free cancellation implements queue deletion with an all-path converse | reported | active |
@@ -3939,17 +3940,20 @@ occurs. The one-defect phase cut
 [`M4-S03`](#m4-s03-one-defect-phase-cut) removes every empty-side or same-residue instance, but
 the two alternating phases and successive defects remain. The scalar exterior compression is
 retired by [`M4-O09`](#m4-o09-one-coordinate-exterior-fracture): residue-one `c` return needs a
-second projective coordinate. No `M₄(3)` theorem follows yet.
+second projective coordinate. The finite cone replacement is itself retired by
+[`M4-O10`](#m4-o10-irrational-rotation-cone-fracture): powers of the legal atom `Q(b,4)`
+accumulate projectively on the singular wall while remaining arithmetically nonzero. No `M₄(3)`
+theorem follows yet.
 
 **Use:** all further cube-root work begins with the first residue-two atom in the bridge
 language. Any singular nonempty safe bridge must contain a regular residue-one atom. Do not redo
 finite-gap searches, rank-one incidence, raw residue-{0,1} products, or residue-zero-only safe
 return. A one-defect attack begins directly with phases `0|2|1` and `1|2|0`; a return attack
-uses at least two projective coordinates or a parameter-uniform cone family.
+uses exact arithmetic or an infinite/non-strict invariant on the complete projective state.
 
-**Next:** synthesize a parameter-uniform cone or multicone from the base and direction maps of
-the affine wait families. Use it either to exclude the two alternating phases and successive
-defects or to force an exact malformed wall crossing.
+**Next:** construct an arithmetic, infinite, or hybrid safe-return invariant compatible with the
+irrational `Q(b,4)` cycle, or force an exact wall hit. Consume either outcome immediately in the
+alternating one-defect phases and successive defects.
 
 **Artifact:** [`MatrixMortality/ParabolicBlade.lean`](MatrixMortality/ParabolicBlade.lean),
 [`MatrixMortality/ParabolicResidueWall.lean`](MatrixMortality/ParabolicResidueWall.lean),
@@ -4025,9 +4029,9 @@ digits cannot replace the Archimedean cone.
 residue-zero runs and attack the resulting residue-one skeleton; do not revisit closed-only
 bridge return or finite local valuation separation.
 
-**Next:** reduce the affine wait families to their base and direction maps and search for a finite
-cone family controlling arbitrary residue-one alternation; then consume it in the one-defect
-sandwich.
+**Next:** use the residue-zero cone only as a local compression. The complete return proof must
+carry exact arithmetic through arbitrary residue-one alternation; finite wall-separated cone
+families are excluded by [`M4-O10`](#m4-o10-irrational-rotation-cone-fracture).
 
 **Artifact:** [`audits/m43-safe-return-2026-08-06.md`](audits/m43-safe-return-2026-08-06.md).
 
@@ -4065,9 +4069,10 @@ only divisibility there, not an exact zero.
 opposite. The five-atom word `R²Q(b,3j+2)R²` is the `1|2|1` instance and needs no separate
 theorem.
 
-**Next:** lift `0|2|1` and `1|2|0` through arbitrary safe contexts with a complete exterior
-cone, divisibility, or returning-word argument; do not use the fractured scalar `s` without a
-reachable-locus closure theorem.
+**Next:** lift `0|2|1` and `1|2|0` through arbitrary safe contexts with exact divisibility, an
+infinite/non-strict projective invariant, or a returning-word argument; do not use the fractured
+scalar `s` without a reachable-locus closure theorem or a finite wall-separated cone after
+[`M4-O10`](#m4-o10-irrational-rotation-cone-fracture).
 
 **Artifact:** `ParabolicBlade.oneDefect_wordProduct_ne_zero_of_same_residue` in
 [`MatrixMortality/ParabolicResidueWall.lean`](MatrixMortality/ParabolicResidueWall.lean) and
@@ -4122,15 +4127,59 @@ invariant relation `t=φ(s)` on the reachable locus, another one-dimensional coo
 two-dimensional projective invariant, or a finite multicone.
 
 **Use:** do not extend the `s` recurrence or its inverse-phase reformulation without first proving
-a reachable-locus closure theorem. Search instead for a parameter-uniform cone or multicone in
-the complete exterior state, or decide the `c1` quotient with both projective coordinates.
+a reachable-locus closure theorem. Decide the `c1` quotient with both projective coordinates and
+exact arithmetic; [`M4-O10`](#m4-o10-irrational-rotation-cone-fracture) excludes the former finite
+wall-separated cone fallback.
 
-**Next:** exploit the affine-in-wait decomposition `T(j)=T(0)+jD` to reduce a convex-cone
-certificate to finitely many base and direction maps; in parallel, seek a reachable counterexample
-to any proposed invariant graph.
+**Next:** seek a reachable exact invariant or counterexample on the full projective state whose
+arithmetic content distinguishes wall accumulation from wall incidence.
 
 **Artifact:**
 [`audits/m43-alternating-defect-literature-2026-08-07.md`](audits/m43-alternating-defect-literature-2026-08-07.md).
+
+### M4-O10: Irrational-rotation cone fracture
+
+**Kind:** obstruction
+
+**Evidence:** audited
+
+**Disposition:** graduated
+
+Fix `β≥1`, put `ρ=3^β`, and let `G=Q(b,4)`, the legal regular safe label `(b,1,true)`. In triangle
+coordinates its exterior action and empty state are
+
+```text
+Aρ = [[12−144ρ, −24, 12−144ρ],
+      [315ρ,       0,      216ρ],
+      [(297/2)ρ,   0,      108ρ]],
+x₀ = (0,22,9)ᵀ.
+```
+
+For `Aρⁿx₀=(uₙ,vₙ,wₙ)ᵀ`, exact Cayley–Hamilton arithmetic gives
+
+```text
+uₙ=3ⁿaₙ,       aₙ∈ℤ,       aₙ≡1 (mod 3).
+```
+
+Thus every cyclic bridge `Gⁿ` is invertible. Over `ℝ`, however, `Aρ` has one positive eigenvalue
+`α∈(0,8)` and a strictly dominant complex-conjugate pair `λ,λ̄`; `λ/λ̄` is not a root of unity.
+The projective orbit is dense in the dominant invariant projective line, accumulates on `u=0`,
+and has each sign of `u` infinitely often.
+
+**Scope:** for every `β≥1`, this excludes any finite componentwise system of proper closed convex
+cones invariant up to sign under `G`. It also excludes any finite strict Markov or closed
+projective certificate for the complete safe system whose recurrent regions remain separated
+from `u=0`. It does not exclude infinite cone families, non-strict regions whose closure meets the
+wall, arithmetic partitions, hybrid real/`3`-adic invariants, safe returns outside this cyclic
+language, or malformed zeros.
+
+**Use:** the complete safe-return problem cannot be solved by a finite Archimedean separation
+margin. Every replacement must distinguish irrational near returns from equality by exact
+arithmetic, admit infinitely many geometric states, touch the wall non-strictly, or expose an
+exact counterexample.
+
+**Artifact:**
+[`audits/m43-irrational-rotation-cone-fracture-2026-08-07.md`](audits/m43-irrational-rotation-cone-fracture-2026-08-07.md).
 
 ## Three-Letter Source Frontier
 
