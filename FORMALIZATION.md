@@ -496,6 +496,17 @@ theorem. The full audited boundary is `Mort₃^(2,2) ≡ₘ GPI₂`, not a claim
 has been genericized. See
 [`audits/m32-rank-two-punctuation-2026-08-08.md`](audits/m32-rank-two-punctuation-2026-08-08.md).
 
+The proposed endpoint-only angular compactness has a checked counterexample. For the lawful
+first-hit terminal word `[3,1]` at `(p,s,A,D,L)=(3,2,467,−35,124)`, Lean computes the full
+endpoint product and primitive pole `(494,−41)` and proves that its emergent primes `19,41`
+divide neither the coefficient/reset support nor any branch-cyclotomic factor. The surrounding
+audit shows why: terminality leaves the angular extension lift free, and the pure-`p` wait gauge
+has projective adelic height `p^(2|b−a|)` rather than one. `R32-O17` therefore retires every
+support-only or direction-free product-formula proof. The exact additive continuant was already
+present in the cumulative endpoint recurrence, so formalization adds only the consuming
+counterexample. See
+[`audits/m32-angular-emergent-primes-2026-08-08.md`](audits/m32-angular-emergent-primes-2026-08-08.md).
+
 These are structural and decidable-stratum theorems, not an `M₃(2)` resolution. The imported
 order-four Skolem theorem used to classify rank-one profiles is not reimplemented in Lean. The
 generic reverse edge compiler still assumes `αβ≠0`, and no universality or decision theorem is
@@ -808,6 +819,7 @@ with a complete arbitrary-word converse.
 | Two reduced trajectories through one branch obey an exact exterior-product conservation law | `ReturnGuard.primitiveSteps_projectivePairCross` |
 | Any repeated legal factor at two checkpoints is either an exact cycle or bounded by their rational height envelopes | `ReturnGuard.sharedSchedule_exact_or_power_le_heightEnvelope` |
 | Terminal-reaching guards can require two steps and their waits can either decrease or increase | `ReturnGuard.Examples.decreasingMortal_reachable`, `ReturnGuard.Examples.increasingMortal_reachable` |
+| A lawful first-hit terminal word has primitive angular primes outside every coefficient and branch-cyclotomic factor | `ReturnGuard.Examples.decreasingMortal_emergentAngularPrimes` |
 | One lawful guard has exactly one positive terminal word, the three-return schedule `[1,1,1]` | `ReturnGuard.Examples.threeReturn_endpointTerminalWord_iff`, `ReturnGuard.Examples.threeReturn_physical_isMortal` |
 | One fixed guard has arbitrarily long off-reset legal corridors with `v=2`, exact content `−4`, and arbitrarily long rising carried and primitive Smith coordinate runs | `ReturnGuard.Examples.periodicShadow_obstruction` |
 | The former collision ladder and period-three survivor are excluded from terminality by one-prime endpoint coefficients | `ReturnGuard.Examples.collisionLadder_no_endpointTerminalWord`, `ReturnGuard.Examples.cycle_no_endpointTerminalWord` |

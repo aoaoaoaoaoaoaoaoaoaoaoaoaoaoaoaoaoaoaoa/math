@@ -799,6 +799,34 @@ theorem decreasingMortal_cumulativeExecution :
   exact .cons (middle := (-12152, -4)) (by constructor <;> norm_num)
     (.cons (by constructor <;> norm_num) (.nil _))
 
+/-- The lawful first-hit word `[3, 1]` creates primitive angular primes absent from every
+coefficient and branch-cyclotomic factor.  Thus determinant support does not contain the
+terminal pole support. -/
+theorem decreasingMortal_emergentAngularPrimes :
+    endpointProduct (3 : ℤ) 2 467 (-35) 124 [3, 1] =
+        !![-789880, 243283040; -25420, -306280] ∧
+      endpointProduct (3 : ℤ) 2 467 (-35) 124 [3, 1] *ᵥ ![308, 1] =
+        ![0, -8135640] ∧
+      Nat.gcd 8135640 25420 = 620 ∧
+      (308 * (-25420) - (-8135640) : ℤ) = 620 * 494 ∧
+      (-25420 : ℤ) = 620 * (-41) ∧
+      (494 : ℤ) = 2 * 13 * 19 ∧
+      ¬(19 : ℤ) ∣
+        3 * 467 * 35 * 124 * 343 * 308 * (3 ^ 3 - 1) * (3 ^ 1 - 1) ∧
+      ¬(41 : ℤ) ∣
+        3 * 467 * 35 * 124 * 343 * 308 * (3 ^ 3 - 1) * (3 ^ 1 - 1) := by
+  constructor
+  · ext i j
+    fin_cases i <;> fin_cases j <;>
+      norm_num [endpointProduct, endpointTransfer, Matrix.mul_apply,
+        Fin.sum_univ_succ]
+  constructor
+  · ext i
+    fin_cases i <;>
+      norm_num [endpointProduct, endpointTransfer, Matrix.mulVec,
+        Matrix.mul_apply, Matrix.dotProduct, Fin.sum_univ_succ]
+  all_goals norm_num
+
 /-- The increasing mortal orbit obeys the same content-free recurrence. -/
 theorem increasingMortal_cumulativeExecution :
     CumulativeEndpointExecution 5 2 (-57803) 403 10304 [2, 3]

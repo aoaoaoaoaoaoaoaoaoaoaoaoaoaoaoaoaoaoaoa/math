@@ -100,6 +100,7 @@ file owns the mathematical stock.
 | [`R32-O14`](#r32-o14-fixed-reset-geodesic-and-complete-endpoint-language) | structure theorem and obstruction | endpoint terminality is exact and every actual reset prefix has the same distinguished-prime kernel direction | formalized | graduated |
 | [`R32-O15`](#r32-o15-fixed-support-toric-compiler-obstruction) | obstruction | rational fixed-prime counter charts with affine waits admit neither a nontrivial monomial instruction nor a repeatable control cycle | audited | graduated |
 | [`R32-O16`](#r32-o16-irreducible-cubic-punctuation-collapse) | structure theorem and obstruction | irreducible cubic singular returns are finite unless all waits collapse modulo three | audited | graduated |
+| [`R32-O17`](#r32-o17-angular-emergent-primes-and-endpoint-compactness-no-go) | obstruction | terminal angular poles create primes outside determinant support and the wait gauge has nontrivial directional adelic height | formalized | graduated |
 | [`R32-S07`](#r32-s07-decoded-residual-address-normal-form) | structure theorem | mortality is finite inverse-address membership in disjoint rational p-adic branch spheres | formalized | active |
 | [`R32-M05`](#r32-m05-cyclotomic-reset-or-cancellation-sieve) | partial mechanism | every primitive reduction either resets modulo a cyclotomic prime or swallows it in the common cancellation | formalized | active |
 | [`R32-S08`](#r32-s08-cumulative-endpoint-recurrence) | structure theorem | cumulative endpoint pairs absorb every normalization scalar into one deterministic exact-division recurrence | formalized | active |
@@ -4052,6 +4053,58 @@ in [`m32-rank-two-punctuation-2026-08-08.md`](audits/m32-rank-two-punctuation-20
 **Use:** replace every rank-(2,2) graph attack by generic PI₂. The graph supplies neither a
 controller bit nor a distinct universality mechanism; the remaining seam is the projective
 incidence problem itself.
+
+### R32-O17: Angular emergent primes and endpoint compactness no-go
+
+**Kind:** obstruction
+**Evidence:** formalized
+**Disposition:** graduated
+
+In endpoint-adapted bases, a terminal product is triangular with diagonal factors
+
+```text
+X=p^Ω∏h_i,   Y=(−1)^n∏k_i
+```
+
+and shear `β`. Changing complements alters `β` by `Xm₀−Ym_n`, so only its residue modulo
+`gcd(X,Y)` is intrinsic. In the physical basis the complete terminal boundary is
+
+```text
+M_w=[[Y,−RY],[c,X−Rc]],
+```
+
+where terminality leaves `c` free. The full fixed `p^Ω` kernel fixes one p-adic residue but
+does not bound the primitive pole `((Rc−X)/g,c/g)`, `g=gcd(X,c)`. Even all diagonal factors,
+Smith labels, valuations, and finitely many congruence labels permit unbounded abstract shear
+unless the actual off-diagonal recurrence is retained.
+
+The obstruction occurs in a genuine first-hit word. For
+
+```text
+(p,s,A,D,L)=(3,2,467,−35,124),   w=[3,1],
+```
+
+Lean checks the exact terminal product and primitive pole `(494,−41)`. The new pole primes
+`19` and `41` divide neither the coefficient/reset data nor either cyclotomic branch factor
+`3³−1`, `3¹−1`. Hence determinant allocation does not control angular support.
+
+Separately, the depth-two wait gauge is conjugate to `diag(1,p^(2(b−a)))`, whose projective
+adelic height is `p^(2|b−a|)`, not one. The product formula cancels common scalar size, not
+directional eigenvalue ratio.
+
+**Scope:** the exact emergent-prime certificate is formalized. The complement calculus,
+boundary-freedom theorem, and adelic gauge-height calculation are independently audited. They
+exclude arguments that discard the actual off-diagonal guard recurrence, not a bound exploiting
+that recurrence.
+
+**Artifact:** `ReturnGuard.Examples.decreasingMortal_emergentAngularPrimes` in
+[`ReturnGuardExamples.lean`](MatrixMortality/ReturnGuardExamples.lean), with reconstruction in
+[`m32-angular-emergent-primes-2026-08-08.md`](audits/m32-angular-emergent-primes-2026-08-08.md).
+The surviving additive continuant is already owned by the cumulative endpoint recurrence; no
+duplicate API was added.
+
+**Use:** abandon fixed-support `S`-unit bounds and direction-free product-formula compactness.
+Attack `gcd(X_n,c_n)` or the primitive additive continuant along actual legal terminal histories.
 
 ### R32-D03: Bounded-denominator periodicity
 

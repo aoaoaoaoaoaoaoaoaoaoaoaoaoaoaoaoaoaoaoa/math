@@ -1077,6 +1077,16 @@ finite torus. See
 [`R32-O15`](SALVAGE.md#r32-o15-fixed-support-toric-compiler-obstruction) and
 [`m32-fixed-support-toric-obstruction-2026-08-08.md`](audits/m32-fixed-support-toric-obstruction-2026-08-08.md).
 
+Endpoint/product-formula compactness has now been cut to its recurrence-sensitive core. A lawful
+first-hit terminal word has primitive pole `(494,−41)`, and Lean checks that its primes `19` and
+`41` are absent from every coefficient, reset, and branch-cyclotomic factor. Thus the angular
+carry is not an `S`-unit on determinant support. Abstract endpoint data leave its shear free even
+after all diagonal factors, Smith labels, valuations, and finite congruences are fixed; moreover,
+the wait gauge has projective adelic height `p^(2|b−a|)`, not one. Any surviving decision proof
+must use the actual additive continuant and its gcd with the radial factor. See
+[`R32-O17`](SALVAGE.md#r32-o17-angular-emergent-primes-and-endpoint-compactness-no-go) and
+[`m32-angular-emergent-primes-2026-08-08.md`](audits/m32-angular-emergent-primes-2026-08-08.md).
+
 The remaining unbounded channel is now sharply Archimedean. The formalized
 [`R32-D03`](SALVAGE.md#r32-d03-bounded-denominator-periodicity) theorem says that every
 infinite legal rational orbit with bounded reduced denominators is eventually periodic.
@@ -1132,8 +1142,8 @@ all-legal block inequality for the carried generalized continuant. See
 
 | Lane | Required move | Present obstruction |
 | --- | --- | --- |
-| Angular auxiliary-place bound | Give a coefficient-effective bound for the reset-started mixed-radix shear, sufficient to bound every first-hit terminal word | The radial p-component is fixed, but factors of `p^a−1` move across auxiliary primes and split between forward and reverse contents |
-| Strong primitive pressure | Combine full cyclotomic multiplicity, the product formula, and the exact fixed-kernel pullback into a global carry bound | The local pressure inequality does not bound the Archimedean size or moving auxiliary support of the angular reference |
+| Additive-continuant bound | Give a coefficient-effective bound for the primitive reset-started angular continuant, sufficient to bound every first-hit terminal word | Addition creates primes outside all coefficient and cyclotomic support; the decisive gcd is `gcd(X_n,c_n)` |
+| Recurrence-sensitive pressure | Combine the exact continuant recurrence, full cyclotomic multiplicity, and the fixed-kernel pullback into a global carry bound | Direction-free product-formula pressure fails because each wait gauge pays `p^(2|b−a|)` |
 | Aperiodic angular counter | Construct one exact fixed-coefficient reset orbit with unbounded denominators while the p-radial component remains on the reset ray | Fixed macros pump only exact cycles; the construction must vary waits or auxiliary allocation without eventual repetition |
 | Repeated-factor extraction | Force a sufficiently heavy repeated factor in every bounded-complexity wait prefix and apply `R32-S29` | Arbitrary repeated factors are controlled once found; no theorem yet extracts one from a moving denominator schedule |
 | Irreducible cubic bridge | Decide isolated-cut words over the non-pure projectively injective unit alphabet, or the pure involutive-ratio PI₂ residue | Singular timing is finite or modulo three and cannot supply unbounded punctuation |
