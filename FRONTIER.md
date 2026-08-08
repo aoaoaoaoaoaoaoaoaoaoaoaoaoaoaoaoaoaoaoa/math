@@ -544,7 +544,7 @@ the word problem.
 Thus two residues survive:
 
 ```text
-rank (2,2): graph-constrained projective incidence on P¹(ℚ),
+rank (2,2): generic projective incidence GPI₂,
 rank (3,2): mortality of {VAⁿU : n≥0},  A∈GL₃(ℚ).
 ```
 
@@ -1087,6 +1087,14 @@ must use the actual additive continuant and its gcd with the radial factor. See
 [`R32-O17`](SALVAGE.md#r32-o17-angular-emergent-primes-and-endpoint-compactness-no-go) and
 [`m32-angular-emergent-primes-2026-08-08.md`](audits/m32-angular-emergent-primes-2026-08-08.md).
 
+Finite rational carry-mode atlases cannot supply the opposing aperiodic orbit either. If each
+mode is a rational function of the current `p^a` and each transition has one fixed additive wait
+shift, every directed control cycle has total shift zero. On an actual infinite orbit the
+recurrent shifts are therefore a coboundary, the waits are bounded, and determinism forces exact
+eventual periodicity. A counterexample must carry unbounded angular history through infinitely
+many effective charts or shifts, or through state not rationally recoverable from `p^a` and
+finite control. See [`R32-O18`](SALVAGE.md#r32-o18-finite-rational-radial-atlas-obstruction).
+
 The remaining unbounded channel is now sharply Archimedean. The formalized
 [`R32-D03`](SALVAGE.md#r32-d03-bounded-denominator-periodicity) theorem says that every
 infinite legal rational orbit with bounded reduced denominators is eventually periodic.
@@ -1144,24 +1152,25 @@ all-legal block inequality for the carried generalized continuant. See
 | --- | --- | --- |
 | Additive-continuant bound | Give a coefficient-effective bound for the primitive reset-started angular continuant, sufficient to bound every first-hit terminal word | Addition creates primes outside all coefficient and cyclotomic support; the decisive gcd is `gcd(X_n,c_n)` |
 | Recurrence-sensitive pressure | Combine the exact continuant recurrence, full cyclotomic multiplicity, and the fixed-kernel pullback into a global carry bound | Direction-free product-formula pressure fails because each wait gauge pays `p^(2|b−a|)` |
-| Aperiodic angular counter | Construct one exact fixed-coefficient reset orbit with unbounded denominators while the p-radial component remains on the reset ray | Fixed macros pump only exact cycles; the construction must vary waits or auxiliary allocation without eventual repetition |
+| Aperiodic angular counter | Construct one exact fixed-coefficient reset orbit with unbounded denominators while the p-radial component remains on the reset ray | Every finite rational carry atlas is eventually periodic; the construction needs unbounded charts, wait differences, or independent history |
 | Repeated-factor extraction | Force a sufficiently heavy repeated factor in every bounded-complexity wait prefix and apply `R32-S29` | Arbitrary repeated factors are controlled once found; no theorem yet extracts one from a moving denominator schedule |
 | Irreducible cubic bridge | Decide isolated-cut words over the non-pure projectively injective unit alphabet, or the pure involutive-ratio PI₂ residue | Singular timing is finite or modulo three and cannot supply unbounded punctuation |
 | Generic projective incidence | Decide GPI₂ directly, or reduce arbitrary PI₂ to its generic stratum | Rank-(2,2) adds no graph hardness; positive-word genericization still lacks an OR or singular data transport |
 
-The hot path is now a coefficient-effective auxiliary-place bound on the one-dimensional angular
-carry, with an essentially aperiodic unbounded-denominator reset orbit as the opposing
-construction. The matrix compiler,
+The split-spectrum hot path is now a coefficient-effective bound on the primitive additive
+continuant and `gcd(X_n,c_n)`, with a genuinely history-sensitive aperiodic
+unbounded-denominator reset orbit as the opposing construction. The matrix compiler,
 arbitrary-word converse, deterministic wait decoder, rational inverse-address grammar,
 primitive integral lift, endpoint factorization, exact branch similarity, arbitrary
 repeated-factor pumping, local record-ascent budget, local content allocation, maximal-step
 isolation, universal-boundary valuation wall, complete endpoint language, and fixed reset
 geodesic are complete. Uniform first-bridge closure and coefficient-uniform all-legal block
 descent are false; fixed positive renewal cycles are impossible; bounded local shadow depth does
-not imply bounded height; terminal length can exceed two. The rank-`(3,2)` artery now asks whether
-the moving auxiliary factors funding the angular shear admit an effective all-place bound, or can
-sustain one exact aperiodic reset orbit with unbounded denominators. Exact-order factors remain
-usable only inside that global history-sensitive proof.
+not imply bounded height; terminal length can exceed two; endpoint support and finite rational
+carry atlases are insufficient. The rank-`(3,2)` artery now asks whether the actual additive
+continuant admits an effective recurrence-sensitive bound, or can sustain one exact aperiodic
+reset orbit with unbounded denominators and unbounded history. Exact-order factors remain usable
+only inside that coupled proof. In parallel, rank-(2,2) is exactly generic PI₂.
 
 ## The dimension-two wall: `M₂(3)`
 

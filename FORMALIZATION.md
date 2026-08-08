@@ -187,8 +187,10 @@ two rank-two generators, Lean compresses every nonempty word to the adjacent-edg
 shared source line assemble into two `3 × 3` generators, and split incoming edges force both
 generators to have rank exactly two. For the generic projective-incidence reverse construction
 `αβ≠0`, Lean now checks the independent basis changes, the rank-one loop fracture, the complete
-constrained-path grammar, and both mortality implications. The exceptional projective points
-remain outside the many-one compiler.
+constrained-path grammar, and both mortality implications. Lean now also transports the unique
+hard compatible one-loop edge stratum back to that compiler with intrinsic `β=1`; the audited
+remaining edge-rank census gives `Mort₃^(2,2) ≡ₘ GPI₂`. Arbitrary PI₂ genericization, not
+the edge graph, is the surviving seam.
 
 ReturnSquare instantiates the rank-`(3,2)` reduction. Lean proves the closed return matrix,
 split interfaces, exact cut rank, internal rank-one zero-wait return, unit positive returns,
@@ -507,11 +509,21 @@ present in the cumulative endpoint recurrence, so formalization adds only the co
 counterexample. See
 [`audits/m32-angular-emergent-primes-2026-08-08.md`](audits/m32-angular-emergent-primes-2026-08-08.md).
 
+The widened finite-atlas counter route is also closed without adding Lean code. For finitely
+many rational tail charts and finitely many fixed additive wait shifts, polynomial divisibility,
+degree at infinity, and leading/constant coefficient comparison force every control-cycle shift
+to sum to zero. Recurrent shifts are therefore a coboundary; waits become bounded and the
+deterministic rational orbit is eventually periodic. This is retained as audited `R32-O18`.
+The existing formal one-chart rail and bounded-denominator periodicity theorem already own both
+ends of the argument, while a general rational-function atlas would not tighten the surviving
+history-sensitive enemy. See
+[`audits/m32-finite-radial-atlas-2026-08-08.md`](audits/m32-finite-radial-atlas-2026-08-08.md).
+
 These are structural and decidable-stratum theorems, not an `M₃(2)` resolution. The imported
 order-four Skolem theorem used to classify rank-one profiles is not reimplemented in Lean. The
-generic reverse edge compiler still assumes `αβ≠0`, and no universality or decision theorem is
-known for rational inverse-address membership or its cyclotomic cancellation histories. Their
-boundary is recorded in
+reverse compiler still assumes `αβ≠0`, while arbitrary PI₂ has not been genericized; no
+universality or decision theorem is known for generic PI₂ or for rational inverse-address
+membership and its cyclotomic cancellation histories. Their boundary is recorded in
 [`audits/m32-rank-return-2026-07-28.md`](audits/m32-rank-return-2026-07-28.md) and scheduled in
 [#11](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/11) and
 [#12](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/12).

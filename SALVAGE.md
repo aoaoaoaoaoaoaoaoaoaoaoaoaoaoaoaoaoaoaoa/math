@@ -101,6 +101,7 @@ file owns the mathematical stock.
 | [`R32-O15`](#r32-o15-fixed-support-toric-compiler-obstruction) | obstruction | rational fixed-prime counter charts with affine waits admit neither a nontrivial monomial instruction nor a repeatable control cycle | audited | graduated |
 | [`R32-O16`](#r32-o16-irreducible-cubic-punctuation-collapse) | structure theorem and obstruction | irreducible cubic singular returns are finite unless all waits collapse modulo three | audited | graduated |
 | [`R32-O17`](#r32-o17-angular-emergent-primes-and-endpoint-compactness-no-go) | obstruction | terminal angular poles create primes outside determinant support and the wait gauge has nontrivial directional adelic height | formalized | graduated |
+| [`R32-O18`](#r32-o18-finite-rational-radial-atlas-obstruction) | obstruction | every finite rational carry-mode atlas with fixed additive wait shifts is eventually periodic | audited | graduated |
 | [`R32-S07`](#r32-s07-decoded-residual-address-normal-form) | structure theorem | mortality is finite inverse-address membership in disjoint rational p-adic branch spheres | formalized | active |
 | [`R32-M05`](#r32-m05-cyclotomic-reset-or-cancellation-sieve) | partial mechanism | every primitive reduction either resets modulo a cyclotomic prime or swallows it in the common cancellation | formalized | active |
 | [`R32-S08`](#r32-s08-cumulative-endpoint-recurrence) | structure theorem | cumulative endpoint pairs absorb every normalization scalar into one deterministic exact-division recurrence | formalized | active |
@@ -1972,20 +1973,19 @@ nonempty bridge erases its invisible plane changes to `WH`, where `W∈{G,H}*`; 
 exterior blocks remain nonzero products of units. Thus a constrained path vanishes exactly when
 one original incidence coefficient vanishes.
 
-**Scope:** the theorem assumes `αβ≠0`. The two exceptional projective positions remain a
-many-one preprocessing problem: a finite Turing disjunction appears straightforward, but no
-single three-dimensional emitted OR gadget is checked. This record does not assert a full
-many-one equivalence between `M₂(3)` and the rank-`(2,2)` profile.
+**Scope:** the theorem assumes `αβ≠0`. [`R32-S32`](#r32-s32-rank-two-punctuation-and-graph-removal)
+now proves that every rank-(2,2) pair reduces to one such generic instance after decidable edge
+strata are discharged. The opposite reduction from arbitrary nongeneric PI₂ to generic PI₂
+remains open, so this record does not assert equivalence with unrestricted `M₂(3)`.
 
 **Artifact:** `ReverseEdge.isMortal_adaptedGenerator_iff` and
 `adaptedGenerator_rank` in [`ReverseEdge.lean`](MatrixMortality/ReverseEdge.lean).
 
-**Use:** treat the generic rank-`(2,2)` stratum as inheriting the dimension-two projective hard
-core. Work now belongs on exceptional-point genericization or on the flat constrained edge
-languages not fractured by a rank-one loop.
+**Use:** compile generic PI₂ into rank-(2,2); use `R32-S32` in the forward direction. Work now
+belongs on generic PI₂ itself or on arbitrary-to-generic positive-word transport, not on the
+two-vertex edge language.
 
-**Next:** replace the exceptional finite disjunction by one computable emitted instance, or
-state and use its exact oracle strength.
+**Next:** decide generic PI₂, or construct a computable arbitrary-to-generic transformation.
 Tracked in
 [#11](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/11).
 
@@ -3905,7 +3905,7 @@ one- or two-return terminal bound.
 unresolved data are angular: factors of `p^a−1` split between forward and reverse contents and
 can finance an unbounded mixed-radix carry across auxiliary places. No effective carry bound and
 no aperiodic unbounded-denominator reset orbit has been obtained. Deciding this guard would still
-leave the two exceptional rank-`(2,2)` compiler positions before full `M₃(2)`.
+leave generic PI₂ before full `M₃(2)`.
 
 **Artifact:** `ReturnGuard.endpointProduct_mod_prime`,
 `ReturnGuard.endpointProduct_det_hasValue`,
@@ -4105,6 +4105,48 @@ duplicate API was added.
 
 **Use:** abandon fixed-support `S`-unit bounds and direction-free product-formula compactness.
 Attack `gcd(X_n,c_n)` or the primitive additive continuant along actual legal terminal histories.
+
+### R32-O18: Finite rational radial-atlas obstruction
+
+**Kind:** obstruction
+**Evidence:** audited
+**Disposition:** graduated
+
+Suppose finitely many modes express the ready tail as a reduced rational function
+
+```text
+t=T_v(p^a),
+```
+
+and every transition `e:v→w` changes the wait by one fixed integer `d_e`. Clearing the exact
+tail-transition identity forces `P_w(p^(d_e)X)` to divide the source denominator. The quotient
+divides `X−1`. Degree transport around a directed cycle then forces every quotient to be
+constant and all chart numerator and denominator degrees to agree.
+
+Comparing constant terms and the leading terms that must cancel yields
+
+```text
+C^ℓ=(∏_e p^(d_e))^(s+N).
+```
+
+Since `C` is a p-unit and `s+N>0`, every directed cycle has total shift `Σd_e=0`.
+For an actual nonperiodic orbit, every recurrent edge is sampled at infinitely many distinct
+prime powers and therefore satisfies the rational identity. Zero cycle weights make the
+recurrent shifts a graph coboundary, bounding all waits. Finitely many chart states remain, so
+determinism forces exact eventual periodicity and bounded reduced denominators.
+
+**Scope:** this excludes finite rational charts with a finite transition alphabet of fixed
+additive wait shifts. It does not exclude infinitely many charts or shifts, or angular state not
+rationally determined by the current `p^a` and one finite mode.
+
+**Artifact:** independent reconstruction in
+[`m32-finite-radial-atlas-2026-08-08.md`](audits/m32-finite-radial-atlas-2026-08-08.md).
+The checked one-chart rail and bounded-denominator orbit theorem remain the executable owners;
+no duplicate rational-atlas API was retained.
+
+**Use:** retire finite carry-mode counter machines even when no single global rail exists. A
+counter-orbit must retain genuinely unbounded angular history or an unbounded wait-difference
+alphabet.
 
 ### R32-D03: Bounded-denominator periodicity
 
