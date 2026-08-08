@@ -225,7 +225,7 @@ replace exact finite-state simulation.
 
 Victory means a checked many-one reduction to mortality of three integer `4 × 4` matrices,
 including a nonempty witness, denominator clearing, and soundness for every matrix word. The
-frontier has two live trunks and three independently attackable nodes.
+frontier has two live trunks and four independently attackable nodes.
 
 #### Source trunk: positive overlap queues
 
@@ -288,13 +288,18 @@ both projective coordinates, and the irrational cycle
 [`M4-O10`](SALVAGE.md#m4-o10-irrational-rotation-cone-fracture) excludes every finite strict
 wall-separated cone or Markov multicone.
 
-Two matrix nodes can now race.
+Three matrix nodes can now race.
 
-1. **Oriented safe-wall reachability.** Derive the remaining exact atom wound functionals and
+1. **Semantic boundary realization.** Construct open left and right blade contexts whose induced
+   bridge boundary realizes exactly the paired Neary coefficient-zero language. The present
+   parabolic algebra supplies a rank-one blade and exact contraction, but no checked contexts yet
+   connect its residue-two blocks to the undecidable source. A uniform impossibility theorem for
+   this family would retire it even if malformed words were later controlled.
+2. **Oriented safe-wall reachability.** Derive the remaining exact atom wound functionals and
    decide whether a reachable flagged safe state can satisfy one. A proof of avoidance gives
    safe return; an exact hit retires or redirects the blade. Approximate real returns and another
    coarse valuation partition do not decide this node.
-2. **Residue-two defect grammar.** Attack `0|2|1`, `1|2|0`, and successive defects directly,
+3. **Residue-two defect grammar.** Attack `0|2|1`, `1|2|0`, and successive defects directly,
    using the oriented safe contexts but not waiting for a standalone safe-return theorem. The
    goal is an arbitrary-word converse, a malformed exact zero, or a different zero language that
    closes the master problem.
@@ -1296,11 +1301,12 @@ universal computation.
 
 ## Execution order
 
-1. Attack the three open `M₄(3)` nodes independently: universality versus decidability of the
-   promised overlap queue constrained by `M4-O11`; exact oriented safe-wall reachability under
-   `M4-S04`; and the alternating/multiple residue-two defect grammar. Cross-pollinate exact
-   source and exterior invariants, but do not revive complete-token queues, one-coordinate
-   dynamics, finite wall-separated cones, or literal Neary recodings.
+1. Attack the four open `M₄(3)` nodes independently: universality versus decidability of the
+   promised overlap queue constrained by `M4-O11`; parabolic semantic boundary realization;
+   exact oriented safe-wall reachability under `M4-S04`; and the alternating/multiple residue-two
+   defect grammar. Cross-pollinate exact source and exterior invariants, but do not revive
+   complete-token queues, one-coordinate dynamics, finite wall-separated cones, or literal Neary
+   recodings.
 2. Use formalized `MM-O01`, `G3-O01`, `MM-O03`, and `MM-O04` to reject exact packings, macros,
    and bridges without conflating their scope with solvability preservation.
 3. Prove or refute the setter candidate's projective avoidance property, construct a

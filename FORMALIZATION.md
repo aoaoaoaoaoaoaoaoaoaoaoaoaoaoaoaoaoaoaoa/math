@@ -502,8 +502,9 @@ when `(12·3^β−1)(u+w)+2v=0`. The audit is
 
 No `M₄(3)` undecidability theorem follows from the present corpus. The missing source is an
 undecidable promised binary two-state overlap queue with a genuine deleting self-loop. On the
-matrix lane, one must prove or refute reachable incidence with the oriented safe wall, or close
-the alternating and multiple residue-two defect language directly.
+matrix lane, one must construct open blade contexts realizing the paired Neary coefficient,
+prove or refute reachable incidence with the oriented safe wall, and close the alternating and
+multiple residue-two defect language. These forward and converse obligations are independent.
 
 ## Modules
 

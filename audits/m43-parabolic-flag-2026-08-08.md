@@ -125,6 +125,7 @@ Formalized:
 
 Not proved:
 
+- open blade contexts realizing the paired Neary coefficient-zero language;
 - avoidance or reachability of `u=0` by nonempty safe words;
 - either alternating one-defect phase `0|2|1` or `1|2|0`;
 - interactions among multiple residue-two defects;
