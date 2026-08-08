@@ -129,6 +129,7 @@ file owns the mathematical stock.
 | [`G3-O06`](#g3-o06-periodic-ray-completion-and-branching-fracture) | compiler and obstruction | `bcbb` has an exact three-state periodic compiler, while `bcbc` defeats every single affine positional section | formalized | graduated |
 | [`G3-O07`](#g3-o07-near-fork-carry-collision) | obstruction | a terminal and nonterminal `bcbc` near-fork collide under the entire one-coordinate phase-line carry family | formalized | graduated |
 | [`G3-C02`](#g3-c02-fixed-bcbc-singular-recognizer) | fixed-instance compiler | a transient guard over one affine carry recognizes the complete `bcbc` language | audited | graduated |
+| [`G3-M02`](#g3-m02-square-root-punctuation-fracture) | partial mechanism | a rank-two square root gives an exact `SS`-free mortality grammar | formalized | active |
 | [`G3-M01`](#g3-m01-free-group-discrepancy-engine) | partial mechanism | free cancellation implements queue deletion with an all-path converse | reported | active |
 | [`D2-S01`](#d2-s01-projective-hard-core) | structure theorem | `M₂(3)` is equivalent to two-generator projective incidence | audited | active |
 | [`D2-S02`](#d2-s02-monotone-affine-path-form) | structure theorem | normalized affine words form monotone exponent paths | audited | stock |
@@ -4538,6 +4539,75 @@ master target is now uniformity across the source family, not this fixed grammar
 
 **Artifact:** [`BranchingRecognizer.lean`](MatrixMortality/BranchingRecognizer.lean) and
 [`m34-bcbc-singular-recognizer-2026-08-08.md`](audits/m34-bcbc-singular-recognizer-2026-08-08.md).
+
+### G3-M02: Square-root punctuation fracture
+
+**Kind:** partial mechanism
+
+**Evidence:** formalized
+
+**Disposition:** active
+
+Let `S` be one distinguished matrix among three ordinary controls and suppose
+
+```text
+S²=uvᵀ.
+```
+
+For a physical word `w`, put `c(w)=vᵀH_wu`. Whenever `w=l SS r`, rank-one multiplication gives
+
+```text
+c(w)=c(l)c(r).
+```
+
+Strong induction therefore extracts an `SS`-free scalar-zero residual from every zero product.
+Conversely, `c(z)=0` gives the explicit zero word `SS z SS`. Lean proves, over an arbitrary
+field and without rank or normalization assumptions,
+
+```text
+Mort({X₁,X₂,X₃,S}) ↔ ∃ z avoiding SS, vᵀH_zu=0.
+```
+
+For the side-normal Neary boundary `λ=(1,0,0)` and `γ=(μ,−1,T)ᵀ`, the source-uniform rational
+matrix
+
+```text
+S=[[1,       0, 0],
+   [−1/μ,    0, 0],
+   [T/μ+1,   μ, 0]]
+```
+
+has `S²=(γ/μ)λ`, rank exactly two, and determinant zero. Assigning isolated `S` to `R_b` is
+compatible with every lawful width-at-least-three history. The sole constructive obligation is
+now a three-state same-zero representation of the original role series on the complete
+`R_bR_b`-free subshift.
+
+A `3×3` inserted Hankel certificate on prefixes and suffixes `ε,D_c,D_b` proves that any
+three-state representation preserving the old coefficient exactly on that subshift makes its
+`R_b` matrix invertible. The conclusion survives arbitrary nonzero per-letter multiplicative
+weights. A successful completion must therefore change nonzero values in a genuinely
+word-dependent way.
+
+The adjacent additive family
+
+```text
+αA+cA^ε(γλ)A^δ,     ε,δ∈{0,1}, α≠0,
+```
+
+is separately audited immortal: the inverse active semigroup never reaches the terminal
+incidence, and the unique singular update preserves rank two through every interstitial word.
+
+**Scope:** the square identity, rank, complete arbitrary-word fracture, exact-series rigidity,
+and weighted rigidity are Lean-checked. The reverse-marker and additive-fusion obstructions are
+audited paper proofs. No same-zero matrices on the `SS`-free subshift are known.
+
+**Use:** race the `SS`-free compiler directly against the source-uniform paired compiler. Do not
+spend another attack on punctuation placement, additive rank-one perturbations, similarity, or
+letterwise rescaling. Any candidate need only preserve zeros, but it must cover every malformed
+isolated occurrence of `S`.
+
+**Artifact:** [`SquareRootPunctuation.lean`](MatrixMortality/SquareRootPunctuation.lean) and
+[`m34-square-root-punctuation-2026-08-08.md`](audits/m34-square-root-punctuation-2026-08-08.md).
 
 ### G3-M01: Free-group discrepancy engine
 

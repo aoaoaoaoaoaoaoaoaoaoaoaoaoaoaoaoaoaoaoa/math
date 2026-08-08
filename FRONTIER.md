@@ -527,13 +527,28 @@ instance-fitted and regular: a source-uniform finite-target version remains excl
 `G3-O04`. The paired route's live obstruction is now uniformity across bodies, not the state
 dimension of this fixed branching language.
 
-The mortality lift is no longer part of this obstruction. For arbitrary controls `H_a`, column
-`γ`, and row `λ` over a field, adjoining `γλ` gives mortality exactly when some
+[`G3-M02`](SALVAGE.md#g3-m02-square-root-punctuation-fracture) opens a distinct direct-mortality
+lane. The source-uniform rational rank-two matrix `S` satisfies
+
+```text
+S²=(γ/(λγ))λ.
+```
+
+Lean proves a stronger source-independent fracture: whenever `S²=uvᵀ`, the family
+`{X₁,X₂,X₃,S}` is mortal exactly when `vᵀH_zu=0` for some word `z` avoiding `SS`. This is a
+complete free-monoid theorem; every malformed isolated `S` remains in the residual language.
+Assigning `S` to `R_b` is compatible with every legal width-at-least-three history. A nine-context
+certificate also proves that exact coefficient preservation on the `SS`-free subshift, even up
+to nonzero letterwise scaling, would force the `R_b` matrix to be invertible. The live obligation
+is therefore genuinely zero-set nonlinear.
+
+The ordinary mortality lift is likewise no longer part of the paired obstruction. For arbitrary
+controls `H_a`, column `γ`, and row `λ` over a field, adjoining `γλ` gives mortality exactly when some
 `λH_yγ` vanishes. A zero product without the separator is already a scalar-zero witness; after
 fracturing a product with separators, every internal scalar or zero exterior factor supplies one.
 Thus a rational three-state same-zero recognizer immediately yields four rational mortality
 generators, and generator-wise denominator clearing yields integral generators. All remaining
-work lies in the recognizer or its lower bound.
+work lies either in the uniform paired recognizer or in its `SS`-free square-root variant.
 
 The fixed-first property also remains useless: `R_c` recurs whenever the `c` rule fires.
 Absorbing its initial occurrence does not remove its interior role.
@@ -571,6 +586,7 @@ three symbol types but many transition rules does not meet this count.
 | Lane | Available leverage | Decisive obstruction or obligation |
 | --- | --- | --- |
 | Shift-equivariant zero incidence | Same-zero dimension three is point-line incidence in `P²`; [`G3-C02`](SALVAGE.md#g3-c02-fixed-bcbc-singular-recognizer) compiles the fixed branching test, while [`G3-O04`](SALVAGE.md#g3-o04-expanding-affine-history-no-go) kills its source-uniform finite-target affine extension and [`G3-O05`](SALVAGE.md#g3-o05-cancellative-projective-state-tax) kills inverse-saturated dynamics | Build one computable singular formula over a mixed source ensemble, with open or denominator-generating history; fixed-instance fitting, bare support tables, and group-completable cross-multiplication are closed |
+| Square-root punctuation | A uniform rank-two `S` squares to the exact separator and [`G3-M02`](SALVAGE.md#g3-m02-square-root-punctuation-fracture) discharges every mortality grammar obligation | Preserve the old zero set on every `SS`-free word while changing nonzero values word-dependently; exact series, similarity, gauges, letter scaling, and additive rank-one fusion are closed |
 | Inverse-transducer discrepancy | Free cancellation performs queue-head deletion and Carvalho proves an all-path fixed-loop converse; see [`G3-M01`](SALVAGE.md#g3-m01-free-group-discrepancy-engine) | The closed-path subgroup has instance-dependent rank; inverses, free reduction, and subgroup control must be compiled into three positive letters |
 | Context and sliding-block codes | Adjacent ternary symbols can carry four semantic roles without fixed role macros | GPCP quantifies over the full free monoid; every boundary fragment, phase shift, and invalid overlap must be algebraically harmless |
 | Erasure and target recoding | Erasure escapes `G3-O01`; longer target atoms can split the one-letter images used in its proof | Empty contributions and code fragments create new boundary matches unless a global normal form excludes them |
@@ -579,8 +595,8 @@ three symbol types but many transition rules does not meet this count.
 | Direct projective or affine dynamics | Three `3 × 3` controls can encode switched dynamics on two homogeneous coordinates | Unguarded matrix choice demands an irreversible checksum for every illegal branch |
 | Semigroup ideals and reset structure | Rees or Brandt incidence can make incompatible phases fall into a zero ideal | Natural representations usually spend dimension on control states; the full arbitrary-product grammar remains mandatory |
 
-The first, sixth, seventh, and eighth lanes principally target direct `M₃(4)`. The third,
-fourth, and fifth can produce a genuine `GPCP(3)` theorem. The free-group lane is hybrid:
+The first, second, seventh, eighth, and ninth lanes principally target direct `M₃(4)`. The fourth,
+fifth, and sixth can produce a genuine `GPCP(3)` theorem. The free-group lane is hybrid:
 it supplies the missing deletion semantics but not yet the bounded positive source.
 
 #### Operational program
@@ -626,14 +642,28 @@ shift equivariance forces the inverse saturation of `G3-O05`; that would kill th
 rather than another ansatz. Do not spend another attack on separator placement, fixed anchors, or
 control singularity after recognition; `MM-C01` closes them unconditionally.
 
+The square-root lane races that full paired compiler on a strictly different domain. Keep the
+displayed source-uniform `S`, map its isolated occurrence to `R_b`, and construct only the other
+three matrices so that
+
+```text
+λH_z(γ/μ)=0  ↔  λA_{π(z)}γ=0
+```
+
+for every `SS`-free word `z`. The fracture theorem then supplies both directions of mortality
+with no further grammar. The candidate may alter every nonzero coefficient; indeed the checked
+inserted Hankel section proves it must. Cross-pollinate the transient guard from `G3-C02`, but do
+not fit body-specific targets or assume an intended phase pattern. A false zero at any malformed
+isolated `S` kills the reduction.
+
 The highest-yield source experiment is Carvalho's smallest cyclic-tag transducer. Compute
 the rank and Stallings graph of its closed-path subgroup, classify the formal inverses used
 by the fixed-loop proof, and test whether a rank-three positive basis or boundary-controlled
 subgroup language survives. In parallel, search ternary finite-delay codes whose decoder is
 total on all words, not merely correct on an intended subshift.
 
-No further local fusion of the four displayed pairs should be attempted without identifying
-which escape clause of `G3-O01` it uses.
+No further additive local fusion of the four displayed pairs should be attempted. The audited
+boundary-aligned family is immortal; the square-root architecture is the live nonadditive escape.
 
 ## The rank-three binary wall: `M₃(2)`
 

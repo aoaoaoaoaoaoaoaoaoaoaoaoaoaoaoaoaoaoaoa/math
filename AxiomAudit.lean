@@ -120,6 +120,16 @@ open MatrixMortality
 #print axioms BranchingRecognizer.terminalControl_decode
 #print axioms BranchingRecognizer.recognizerCoefficient_terminalControl
 #print axioms BranchingRecognizer.pairedCoefficient_terminalControl
+#print axioms SquareRootPunctuation.coefficient_append_square
+#print axioms SquareRootPunctuation.exists_squareFree_zero_of_zero
+#print axioms SquareRootPunctuation.isMortal_iff_exists_squareFree_zero
+#print axioms SquareRootPunctuation.nearySquareRoot_sq
+#print axioms SquareRootPunctuation.nearySquareRoot_rank
+#print axioms SquareRootPunctuation.nearySquareRoot_mortal_iff
+#print axioms SquareRootPunctuation.rigidityReachable_det
+#print axioms SquareRootPunctuation.rigidityObservable_det
+#print axioms SquareRootPunctuation.ruleB_isUnit_of_exact_on_squareFree
+#print axioms SquareRootPunctuation.ruleB_isUnit_of_weighted_exact_on_squareFree
 #print axioms ResetAffineHistory.wordProduct_mulVec_column
 #print axioms ResetAffineHistory.coefficient_eq
 #print axioms ResetAffineHistory.phaseWeight_eq_zero_of_toggle_pair

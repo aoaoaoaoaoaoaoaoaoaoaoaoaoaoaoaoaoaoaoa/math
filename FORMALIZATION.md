@@ -179,6 +179,24 @@ Accordingly, `zdim_ℚ(L₃,bcbc)≤3` is an audited fixed-instance result, not 
 The construction has source-fitted constants and does not weaken the uniform obstruction in
 `G3-O04`.
 
+A separate direct-mortality route now has a complete punctuation grammar. For arbitrary ordinary
+matrices and any distinguished `S` satisfying `S²=uvᵀ`, Lean proves that the physical family is
+mortal exactly when `vᵀH_zu=0` for some word `z` with no adjacent `S`. The proof recursively cuts
+at an arbitrary punctuation square; it does not assume rank, invertibility, normalized boundary
+vectors, or intended placement. For the side-normal Neary boundary, Lean checks the explicit
+source-uniform rational matrix
+
+```text
+S=[[1,0,0], [−1/μ,0,0], [T/μ+1,μ,0]]
+```
+
+has square `(γ/μ)λ`, rank exactly two, and determinant zero. A `3×3` inserted Hankel section on
+the contexts `ε,D_c,D_b` further proves that exact coefficient preservation on the complete
+`R_bR_b`-free subshift forces the proposed `R_b` matrix to be invertible. This remains true after
+arbitrary nonzero per-letter rescaling. The surviving obligation is precisely a word-dependent
+same-zero representation on that subshift; see
+[`m34-square-root-punctuation-2026-08-08.md`](audits/m34-square-root-punctuation-2026-08-08.md).
+
 The first scalar-carry response to that branching is also closed. Lean checks a terminal control
 and a same-length nonterminal near-fork, then proves a dimension-independent local collision law:
 if `BBv=CBTγ` and `DZv=FXv` for the four stroke products, both controls reach the same state.
@@ -497,6 +515,12 @@ all intended terminal zeros. The remaining theorem is the arbitrary-control conv
 displayed matrices. Its finite reverse graph is audited, but the rank certificate has not yet
 been transcribed into Lean. No publication-facing theorem identifies the matrix and paired zero
 sets until that transcription is complete.
+
+For [`G3-M02`](SALVAGE.md#g3-m02-square-root-punctuation-fracture), the complete fracture,
+explicit square identity, exact rank, and exact/weighted-series rigidity are formalized. The
+source-specific reverse-marker exclusion and the immortality of every boundary-aligned additive
+fusion are retained as audited paper proofs. They close a failed ansatz and are not dependencies
+of the live square-root construction.
 
 The internal-sandwich audit retains two unformalized exact obstructions:
 
@@ -839,6 +863,10 @@ with a complete arbitrary-word converse.
 | The `bcbc` null and terminal histories have the complete nested-excursion grammars | `BranchingRecognizer.bcbcNull_iff`, `BranchingRecognizer.bcbc_terminal_match_iff` |
 | The reported singular recognizer obeys its exact all-control affine recurrence | `BranchingRecognizer.recognizerProduct_mulVec_delta`, `BranchingRecognizer.recognizerCoefficient_eq_guard` |
 | Canonical controls decode every `bcbc` terminal history and vanish in both scalar systems | `BranchingRecognizer.terminalControl_decode`, `BranchingRecognizer.recognizerCoefficient_terminalControl`, `BranchingRecognizer.pairedCoefficient_terminalControl` |
+| A matrix square equal to an outer product gives the complete `SS`-free mortality grammar | `SquareRootPunctuation.isMortal_iff_exists_squareFree_zero` |
+| The explicit source-uniform Neary punctuation matrix has the required square and rank two | `SquareRootPunctuation.nearySquareRoot_sq`, `SquareRootPunctuation.nearySquareRoot_rank` |
+| Exact coefficient preservation on the `R_bR_b`-free subshift forces the `R_b` matrix to be a unit | `SquareRootPunctuation.ruleB_isUnit_of_exact_on_squareFree` |
+| Nonzero multiplicative letter weights do not evade the square-free exact-series rigidity | `SquareRootPunctuation.ruleB_isUnit_of_weighted_exact_on_squareFree` |
 | Every reset-affine control word obeys its exact coordinate and target equation | `ResetAffineHistory.wordProduct_mulVec_column`, `ResetAffineHistory.coefficient_eq` |
 | A zero and its leading toggle force the affine target to forget phase | `ResetAffineHistory.phaseWeight_eq_zero_of_toggle_pair` |
 | A phase-only reset-affine target has the exact two-phase zero test | `ResetAffineHistory.exists_zero_of_left_zero_iff` |
