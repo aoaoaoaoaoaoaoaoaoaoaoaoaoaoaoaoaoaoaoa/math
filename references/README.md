@@ -34,7 +34,7 @@ redistributable full text was located.
 | [Holub03](holub-2012-binary-equality-sets.md) | revised author version of Journal of Algebra 2003 | Binary non-periodic equality sets have rank at most two; published-lemma correction documented |
 | [Hadravová11](hadravova-2011-binary-equality-length-bound.md) | peer-reviewed; metadata only | Binary equality-word bounds and the historical ternary equality-set frontier |
 | [MS05](matiyasevich-senizergues-2005-few-rule-semi-thue.md) | peer-reviewed TCS 2005; metadata only | Three-rule accessibility undecidability; Nicolas's source for the `GPCP(5)` lower bound |
-| [Carvalho26](carvalho-2026-free-group-pcp.md) | arXiv v2 preprint | Inverse-transducer discrepancy, implicit queue deletion by free cancellation, and all-path converse |
+| [Carvalho26](carvalho-2026-free-group-pcp.md) | arXiv v2 preprint | Inverse-transducer queue deletion, all-path converse, and the derived exponent-one equalizer slice |
 | [CL20](ciobanu-logan-2020-pcp-equalisers.md) | peer-reviewed ICALP 2020; CC-BY | Decidable equalizers for marked monoid morphisms and free-group immersions |
 | [MNU14](myasnikov-nikolaev-ushakov-2013-pcp-groups.md) | peer-reviewed J. Group Theory 2014; arXiv copy | Group PCP/GPCP formulations; warns against transferring group-rank counts to positive monoids |
 | [JingEtAl13](jing-gao-gao-gong-li-shao-zhang-2013-minimum-rank-three.md) | arXiv precursor to LAA 2018 | Rank-three zero patterns as projective point-line incidence; rational-real field hazard |

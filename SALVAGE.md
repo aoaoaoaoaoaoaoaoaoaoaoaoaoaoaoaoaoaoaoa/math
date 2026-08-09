@@ -141,6 +141,8 @@ file owns the mathematical stock.
 | [`G3-O10`](#g3-o10-square-root-boundary-saturation) | obstruction | every nondegenerate rank-one square root preserves boundary coefficient zeros | formalized | graduated |
 | [`G3-M01`](#g3-m01-free-group-discrepancy-engine) | partial mechanism | free cancellation implements queue deletion; the accepting subgroup is cyclic | audited | active |
 | [`G3-O09`](#g3-o09-quotient-blind-positive-boundary-collapse) | obstruction | all-loop-complete group-factorizing boundaries accept a nonempty identity spelling | formalized core | graduated |
+| [`G3-O14`](#g3-o14-positive-cancellation-spelling-dichotomy) | obstruction | finite reversible spelling pumps, while singular one-coordinate spelling absorbs identity factors | formalized | graduated |
+| [`G3-O15`](#g3-o15-triangle-normal-form-rank-six) | obstruction | a standalone same-zero guard for triangle-irreducible spellings needs six states | formalized | graduated |
 | [`D2-S01`](#d2-s01-projective-hard-core) | structure theorem | `M₂(3)` is equivalent to two-generator projective incidence | audited | active |
 | [`D2-S02`](#d2-s02-monotone-affine-path-form) | structure theorem | normalized affine words form monotone exponent paths | audited | stock |
 | [`D2-D01`](#d2-d01-projectively-unimodular-stratum) | decidable stratum | projectively unimodular hard-core instances are decidable | audited | stock |
@@ -5003,23 +5005,34 @@ one. This is an audited corollary of Carvalho's construction; no external novelt
 The generator cannot be selected from any computable finite menu, since unique roots would turn
 such a menu into a halting decision.
 
-**Scope:** the source is a free group, not a positive free monoid. Low accepting rank is
-existential and halting-dependent; it does not supply a computable macro. Three positive letters
-can evaluate surjectively onto `F₂`, but nonempty identity spellings and malformed partial
-reductions must then be rejected before taking the quotient.
+Carvalho's `p`-exponent homomorphism supplies a better existential target. Numbered-state
+transitions preserve exponent one, and the halting loop constructed in Theorem 3.6 is conjugate
+to a marker word containing exactly one `p`. Conversely, any fixed point of exponent one is
+nontrivial. Under Theorem 4.1's equalizer maps `g,h:F_Y→F_A`, put `κ=χ∘h`; then
 
-**Use:** stop trying to compress the complete Stallings basis. Build a spelling-sensitive,
-one-way normal-form verifier whose legal action agrees with the virtual endomorphism and whose
-illegal positive words enter a permanent trap.
+```text
+C halts  ↔  ∃u∈F_Y, g(u)=h(u) and κ(u)=1.
+```
+
+This affine slice excludes the identity and selects the oriented primitive loop without choosing
+one positive spelling.
+
+**Scope:** the source is a free group, not a positive free monoid. Low accepting rank and the
+exponent-one witness are existential; neither supplies a three-control free-monoid compiler.
+Three positive letters evaluate surjectively onto `F₂`, but the affine constraint `κ=1` must be
+transported together with the program-dependent equalizer.
+
+**Use:** stop trying to compress the complete Stallings basis or select one irreducible spelling.
+Compile the exponent-one equalizer slice; positive identity padding may be quotiented away because
+it preserves the same genuine witness.
 
 **Source:** [`carvalho-2026-free-group-pcp.md`](references/carvalho-2026-free-group-pcp.md).
 
 **Artifact:**
 [`m34-free-group-discrepancy-2026-08-08.md`](audits/m34-free-group-discrepancy-2026-08-08.md).
 
-**Next:** couple the three-letter forbidden-triple normal form to Carvalho's state-dependent
-output map without state-indexed source letters, or implement the trap through singular positive
-matrix dynamics.
+**Next:** realize `g(u)=h(u), κ(u)=1` through three positive controls using an everywhere-invertible
+unbounded cocycle, or abandon the persistent two-dimensional invertible quotient.
 
 ### G3-O09: Quotient-blind positive boundary collapse
 
@@ -5055,12 +5068,69 @@ loop, hence for both `g_C` and `g_C²`, and assumes the final test factors only 
 group element. It does not cover existential-only witness transport, a test of the unreduced
 positive spelling, partial action, or singular dynamics which destroy inverse continuations.
 
-**Use:** reject Nielsen or Schreier compression followed by quotient-blind fixed group boundaries.
-Any surviving cancellation compiler must carry positive normal-form state or be intrinsically
-one-way.
+**Use:** reject Nielsen or Schreier compression followed by quotient-blind boundaries which accept
+the complete nontrivial fixed subgroup. A survivor must restrict the accepted quotient elements,
+not merely choose a positive normal form for all of them.
+
+The exponent-one slice in [`G3-M01`](#g3-m01-free-group-discrepancy-engine) escapes this theorem:
+it accepts the primitive orientation but not its square, since `κ(u^n)=n`.
 
 **Artifact:** [`PositiveFreeCancellation.lean`](MatrixMortality/PositiveFreeCancellation.lean)
 and [`m34-free-group-discrepancy-2026-08-08.md`](audits/m34-free-group-discrepancy-2026-08-08.md).
+
+### G3-O14: Positive cancellation spelling dichotomy
+
+**Kind:** obstruction
+
+**Evidence:** formalized
+
+**Disposition:** graduated
+
+An injective transition over a finite invariant semantic fibre is periodic on every fibre point.
+Thus a positive semantic identity word `r` satisfies `T_(r^k)ξ=ξ` for some `k>0`, even when the
+finite spelling state is twisted arbitrarily over the semantic discrepancy. Cancellative target
+overlap is bijective in the free-group completion and therefore cannot make every wrong-time
+identity insertion permanent with finite fibres.
+
+Singularity does not repair a three-dimensional lift which retains a two-dimensional invertible
+quotient. If `qP=ρq`, `ρ` is injective, `P` is singular, and `ker q` is one-dimensional, then
+`ker P=ker q`. Every quotient identity `qR=q` consequently satisfies `PR=P`. After the first
+singular prefix, later triangle-identity factors are equal as complete products and cannot be
+separated by boundaries.
+
+**Scope:** finite fibres are required in the invertible branch. The singular branch requires a
+one-dimensional extension of an injective quotient action. Everywhere-invertible infinite fibres,
+unbounded cocycles, and constructions whose persistent semantics are singular remain outside.
+
+**Use:** delete the seven-state cancellative spelling lift and transient singular third-coordinate
+guard. Attack the exponent-one slice from [`G3-M01`](#g3-m01-free-group-discrepancy-engine)
+without selecting a normal spelling.
+
+**Artifact:** [`PositiveFreeCancellation.lean`](MatrixMortality/PositiveFreeCancellation.lean) and
+[`m34-positive-cancellation-obstructions-2026-08-08.md`](audits/m34-positive-cancellation-obstructions-2026-08-08.md).
+
+### G3-O15: Triangle normal-form rank six
+
+**Kind:** obstruction
+
+**Evidence:** formalized
+
+Let `N` contain exactly the positive words avoiding `xyz`, `yzx`, and `zxy`. The coefficient table
+on prefixes and suffixes `x,y,z,xy,yz,zx` has six private nonzero entries. Columns `x,y,z` isolate
+rows `yz,zx,xy`; after those vanish, columns `yz,zx,xy` isolate rows `x,y,z`. Lean proves the rows
+independent over every field and proves that every row-column factorization has at least six
+states.
+
+**Scope:** the scalar zero language must equal the complete standalone irreducible language `N`.
+A legality predicate coupled inseparably to one program-specific halting equation can have a
+different support table and is not excluded.
+
+**Use:** reject every proposal to fuse a separate three-state triangle-normal-form detector with
+Carvalho semantics. Legality must disappear from the target or be inseparable from the
+exponent-one equalizer predicate.
+
+**Artifact:** [`PositiveFreeCancellation.lean`](MatrixMortality/PositiveFreeCancellation.lean) and
+[`m34-positive-cancellation-obstructions-2026-08-08.md`](audits/m34-positive-cancellation-obstructions-2026-08-08.md).
 
 ## Dimension Two
 

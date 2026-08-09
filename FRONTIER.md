@@ -606,9 +606,26 @@ positive length-two spellings. [`G3-O09`](SALVAGE.md#g3-o09-quotient-blind-posit
 formalizes the resulting trap. Fixed group boundaries which accept an element and its square also
 accept the identity; a surjective positive spelling then supplies a nonempty false witness. This
 kills all-loop-complete Nielsen or Schreier compression followed by quotient-blind boundaries.
-The live cancellation compiler must inspect the unreduced positive normal form, accept only an
-existential halting-dependent spelling, or use singular one-way dynamics which destroy inverse
-continuations.
+
+[`G3-O14`](SALVAGE.md#g3-o14-positive-cancellation-spelling-dichotomy) closes both finite-state
+repairs proposed after that result. An injective lift over a finite semantic fibre pumps every
+positive identity loop. A singular one-coordinate lift of a two-dimensional invertible quotient
+instead absorbs every later quotient-identity factor as an equality of complete products.
+[`G3-O15`](SALVAGE.md#g3-o15-triangle-normal-form-rank-six) independently proves that a standalone
+same-zero detector for the triangle-irreducible language needs six states. Finite spelling,
+transient singular spelling, and a separate three-state syntax guard are all dead.
+
+The surviving target no longer selects a spelling. Carvalho's `p`-exponent homomorphism and the
+equalizer identification give the audited equivalence
+
+```text
+C halts  ↔  ∃u, g(u)=h(u) and κ(u)=1.
+```
+
+Exponent one excludes the identity and the square while allowing arbitrary positive identity
+padding of a genuine witness. The remaining compiler must carry this affine equalizer slice through
+three positive controls using an everywhere-invertible infinite fibre or semantics which do not
+retain the two-dimensional invertible cancellation quotient.
 
 The ordinary mortality lift is likewise no longer part of the paired obstruction. For arbitrary
 controls `H_a`, column `γ`, and row `λ` over a field, adjoining `γλ` gives mortality exactly when some
@@ -668,7 +685,7 @@ delay, equal-height tableau, or acyclic verification tail cannot be its computat
 | Lane | Available leverage | Decisive obstruction or obligation |
 | --- | --- | --- |
 | Shift-equivariant zero incidence | Same-zero dimension three is point-line incidence in `P²`; [`G3-C02`](SALVAGE.md#g3-c02-fixed-bcbc-singular-recognizer) compiles the fixed branching test, while [`G3-O04`](SALVAGE.md#g3-o04-expanding-affine-history-no-go) kills its finite-target affine extension, [`G3-O05`](SALVAGE.md#g3-o05-cancellative-projective-state-tax) kills inverse-saturated dynamics, and [`G3-O12`](SALVAGE.md#g3-o12-positive-reset-dimension-tax) kills faithful full-cylinder queue codes | Build one computable history-sensitive singular formula over a mixed source ensemble; a legal cylinder must collapse to a plane and a transient coordinate must police the collision |
-| Positive free-cancellation discrepancy | Free cancellation performs queue-head deletion; accepting loops are cyclic, and three positive letters surject onto `F₂` | Couple the seven-state forbidden-triple normal form to Carvalho's program-dependent virtual endomorphism; [`G3-O09`](SALVAGE.md#g3-o09-quotient-blind-positive-boundary-collapse) kills quotient-blind all-loop-complete boundaries, so malformed positive spellings need a permanent one-way trap |
+| Positive free-cancellation discrepancy | Free cancellation performs queue-head deletion, and Carvalho halting is an exponent-one equalizer slice | Compile `g(u)=h(u), κ(u)=1` through three positive controls; [`G3-O14`](SALVAGE.md#g3-o14-positive-cancellation-spelling-dichotomy) kills finite fibres and singular one-coordinate quotient lifts, while [`G3-O15`](SALVAGE.md#g3-o15-triangle-normal-form-rank-six) kills a separate syntax guard |
 | Global word-residual recoding | Longer noncommutative target atoms may discard additive bit-count preservation entirely | [`G3-O13`](SALVAGE.md#g3-o13-rational-serializer-pumping) kills rational exact side transport, [`G3-D01`](SALVAGE.md#g3-d01-bounded-prefix-residuals) kills bounded lag, and [`G3-D02`](SALVAGE.md#g3-d02-virtually-cyclic-prefix-discrepancy) kills every computably supplied one-carrier normal witness; a survivor needs at least two independent counters, genuine word-order entropy, or a halting-dependent normal form |
 | New three-schema rewriting source | [`G3-C03`](SALVAGE.md#g3-c03-endpoint-prefix-compiler) compiles endpoint-forcing three-production normal systems directly | Prove endpoint forcing and recurrent mixed drift under every positive weighting; arbitrary-substring rule traces and one-sided finite-phase systems fail |
 | Exclusive stochastic or affine recognition | Zero/nonzero languages can be much smaller than exact coefficient series | Affine normalization, quantum measurement, and finite pair separation are not raw integer scalar-zero representations |
@@ -699,9 +716,10 @@ After the serializer audit, the net tree has five independent mature leaves:
    normal family satisfying [`G3-C03`](SALVAGE.md#g3-c03-endpoint-prefix-compiler), with an
    unbounded word-valued context channel and recurrent drift of both signs under every positive
    weighting. The terminal equality must reconstruct every arbitrary rule-name trace.
-5. **Spelling-sensitive positive cancellation.** Couple the three-letter free-group normal form
-   to Carvalho's virtual endomorphism, trapping every malformed positive spelling before group
-   quotient.
+5. **Exponent-one positive cancellation.** Compile Carvalho's affine equalizer slice
+   `g(u)=h(u), κ(u)=1` through three positive controls. The carrier must have an everywhere-
+   invertible infinite fibre or abandon the two-dimensional invertible quotient; it need not and
+   must not select one triangle-irreducible spelling.
 
 Generic projective, stochastic, Rees/Brandt, and singular-reset ideas are implementation
 vocabularies inside leaf 1 until they supply a distinct source interface and complete
@@ -754,13 +772,12 @@ residual cancellativity and inverse-orbit cofinality from the paired terminal gr
 ambient group completion. Do not spend another attack on separator placement, fixed anchors, or
 control singularity after recognition; `MM-C01` closes them unconditionally.
 
-The free-group lane no longer needs another Stallings computation. Its next experiment is a
-positive spelling machine: couple the regular forbidden-triple suffix state for
-`xyz,yzx,zxy→ε` to Carvalho's program-dependent virtual endomorphism, and demand a permanent trap
-for every incomplete or cross-boundary reduction. Race a direct singular `3×3` realization
-against a source-level ternary GPCP construction. The source-level race must now use a
-solution-sensitive or nonrational spelling domain with an unbounded word residual; another total
-finite-state decoder is closed by `G3-O13`.
+The free-group lane no longer needs another Stallings computation or positive normal-form machine.
+Its next experiment starts from the exponent-one equalizer predicate itself. Race an
+everywhere-invertible unbounded cocycle which transports both group discrepancy and `κ`, against a
+three-positive-letter source compiler whose quotient may identify every identity padding. A
+singular third coordinate over the persistent invertible quotient is closed by `G3-O14`; a
+standalone triangle syntax series is closed at dimension five by `G3-O15`.
 
 The native source race now has one exact acceptance test. Supply three productions
 `αₓX⟶Xβₓ` and prove that `sβ(w)=α(w)t` forces every cumulative `α` prefix for every arbitrary
@@ -1586,7 +1603,7 @@ universal computation.
    `M₉(2)` only through a changed physical pair, changed nonzero behavior, or a nonlinear
    compiler.
 5. Run the `M₃(4)` program on distinct tracks: history-sensitive singular point-line synthesis,
-   paired residual saturation, spelling-sensitive positive cancellation, global word-residual
+   paired residual saturation, exponent-one positive cancellation, global word-residual
    recoding, and native three-schema rewriting. Do not collapse their proof obligations into one
    prompt.
 6. Formalize `D2-S02` and `D2-D05`–`D2-D07`, then attack the guarded `5`-adic critical shell

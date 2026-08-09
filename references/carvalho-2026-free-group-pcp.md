@@ -40,6 +40,21 @@ the resulting PCP equalizer consequently has promised rank zero or one. This is 
 corollary of the paper's construction, not a theorem stated in the preprint; no external novelty
 claim is made for it.
 
+The construction also yields an exponent-one sharpening which does not require the cyclic
+classification. Carvalho's homomorphism `χ:F_A→ℤ` sends `p` to one and every other generator to
+zero. Numbered-state transitions preserve discrepancy `χ`; the initial discrepancy contains one
+`p`; and the halting loop constructed in Theorem 3.6 is conjugate to a marker word with exactly
+one `p`. Conversely, any fixed point with `χ=1` is nontrivial. If Theorem 4.1 supplies
+`g,h:F_Y→F_A` and `κ=χ∘h`, direct inspection therefore gives
+
+```text
+C halts  ↔  ∃u∈F_Y, g(u)=h(u) and κ(u)=1.
+```
+
+This is a derived affine-slice corollary, not a theorem stated in the preprint. It is the current
+positive-cancellation target because exponent one excludes the identity without selecting a
+particular positive spelling.
+
 ## Audit notes
 
 The local file is arXiv v2. It is a new preprint and has not been peer reviewed. Free-group

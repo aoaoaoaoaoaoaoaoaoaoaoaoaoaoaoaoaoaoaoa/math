@@ -594,12 +594,20 @@ No Lean declaration claims the generic decision procedure.
 
 For [`G3-M01`](SALVAGE.md#g3-m01-free-group-discrepancy-engine), the rank-`3m+1` closed-path
 basis, the trivial-or-cyclic fixed-subgroup classification, and the rank-zero-or-one equalizer
-corollary are audited consequences of Carvalho's explicit inverse transducer. Lean does not
-reconstruct that external transducer theorem. It checks the internal algebra needed at the next
-boundary: three positive letters surject onto the binary free group, every positive group cover
-has a nonempty identity spelling, and fixed homomorphic boundaries accepting `g` and `g²` accept
-such a spelling. The exact division is recorded in
-[`m34-free-group-discrepancy-2026-08-08.md`](audits/m34-free-group-discrepancy-2026-08-08.md).
+corollary are audited consequences of Carvalho's explicit inverse transducer. Direct source
+inspection also proves the exponent-one equalizer sharpening
+`C halts ↔ ∃u, g(u)=h(u) ∧ κ(u)=1`. Lean does not reconstruct the transducer or this external
+equivalence.
+
+Lean checks the internal algebra at the positive boundary: three positive letters surject onto
+the binary free group; quotient-blind boundaries accepting `g` and `g²` admit a nonempty identity
+witness; every injective transition on a finite invariant semantic fibre pumps an identity loop;
+and a singular lift over a one-dimensional kernel absorbs every later quotient identity. It also
+checks a six-row support certificate proving that any standalone scalar zero test for the
+triangle-irreducible spelling language needs at least six states. The exact division is recorded
+in [`m34-free-group-discrepancy-2026-08-08.md`](audits/m34-free-group-discrepancy-2026-08-08.md)
+and
+[`m34-positive-cancellation-obstructions-2026-08-08.md`](audits/m34-positive-cancellation-obstructions-2026-08-08.md).
 
 The internal-sandwich audit retains two unformalized exact obstructions:
 
@@ -772,7 +780,7 @@ with a complete arbitrary-word converse.
 | `HistoryFracture.lean` | null-history counterexample, minimum-body base-five encoder, and integral mortality lift |
 | `ExpandingHistoryNoGo.lean` | reset-affine orbit, finite reverse automaton, regularity, and universal computability obstruction |
 | `CancellativeProjectiveNoGo.lean` | paired residual conic, finite support-rank closure, cancellative role fractions, and projective commutator rigidity |
-| `PositiveFreeCancellation.lean` | three-letter positive cover of `F₂` and quotient-blind boundary-square collapse |
+| `PositiveFreeCancellation.lean` | positive `F₂` cover, finite-fibre pumping, singular quotient absorption, and rank-six syntax wall |
 | `PairedRank.lean` | uniform exact rank-four certificate for the paired scalar series |
 | `PairedBoundaryTax.lean` | exact six-state lower bound for diagonal paired-series bridges |
 | `PairedBinary.lean` | total two-bit decoder and exact six-state scalar representation |
@@ -990,6 +998,10 @@ with a complete arbitrary-word converse.
 | A homogeneous radix prepend cylinder has determinant `B²(B−1)(d_b−d_c)` | `PositiveResetNoGo.radixCylinder_det`, `PositiveResetNoGo.radixCylinder_det_ne_zero` |
 | Three positive letters evaluate surjectively onto the binary free group | `PositiveFreeCancellation.triangleEvaluate_surjective` |
 | Quotient-blind boundaries accepting an element and its square admit a nonempty identity witness | `PositiveFreeCancellation.exists_nonempty_identity_witness` |
+| Every injective transition on a finite invariant semantic fibre pumps a positive period | `PositiveFreeCancellation.finiteFibre_identity_pumps` |
+| A singular one-coordinate lift has the quotient kernel and absorbs every quotient identity | `PositiveFreeCancellation.singularLift_kernel_eq_quotientKernel`, `PositiveFreeCancellation.singularLift_absorbs_quotientIdentity` |
+| The triangle-irreducible Hankel support has six independent rows over every field | `PositiveFreeCancellation.forbiddenTripleSupport_rows_linearIndependent` |
+| Every row-column realization of the triangle-irreducible support needs six states | `PositiveFreeCancellation.six_le_card_of_forbiddenTripleSupport` |
 | Every exact diagonal paired-series bridge needs six states | `paired_exact_diagonal_twoChannel_state_lower_bound` |
 | Every literal Neary CHHN placement needs six exact states | `chhnNeary_exactRepresentation_six_le_card` |
 | Every two-state pushout word obeys its suffix decoder | `twoStateProduct_mulVec_phaseVector`, `twoStateCoefficient_eq_controlled` |

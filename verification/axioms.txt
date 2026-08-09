@@ -287,6 +287,21 @@
 'MatrixMortality.PositiveFreeCancellation.boundary_eq_of_accept_element_and_square' depends on axioms: [propext]
 'MatrixMortality.PositiveFreeCancellation.exists_nonempty_identity_witness' depends on axioms: [propext,
  Classical.choice]
+'MatrixMortality.PositiveFreeCancellation.finiteFibre_identity_pumps' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.PositiveFreeCancellation.singularLift_kernel_eq_quotientKernel' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.PositiveFreeCancellation.singularLift_absorbs_quotientIdentity' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.PositiveFreeCancellation.forbiddenTripleSupport_rows_linearIndependent' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.PositiveFreeCancellation.six_le_card_of_forbiddenTripleSupport' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.paired_exact_diagonal_twoChannel_state_lower_bound' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
