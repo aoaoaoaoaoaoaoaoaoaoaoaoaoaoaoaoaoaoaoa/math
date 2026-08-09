@@ -512,6 +512,15 @@ cancellativity. The injective semidirect-product labeling into a group containin
 infinite Fibonacci orbit, and the no-nilpotent-product strengthening remain audited paper
 arguments; the formal counterexample does not depend on them.
 
+[`G3-O12`](SALVAGE.md#g3-o12-positive-reset-dimension-tax) attacks the constructive side without
+formal inverses. Lean defines projective ray equality over an arbitrary finite-dimensional
+rational vector space and proves that a legal prepend cylinder spanning the space forces its data
+map to be injective. Applying this to both data letters at the single legal queue `qb` proves
+`v_q∼v_ε` from the four reverse rule/erase equations. It also checks the determinant
+`B²(B−1)(d_b−d_c)` for the standard homogeneous radix cylinder. The resulting four-dimensional
+ambient tax for a faithful three-vector legal chart is retained as an audited dimension
+corollary; the kernel theorem states the exact collision and hypotheses.
+
 The semantic core of [`G3-O04`](SALVAGE.md#g3-o04-expanding-affine-history-no-go) is formalized:
 the reset-affine orbit, finite reverse box, exact caged DFA, regularity, and universal
 noncomputability contradiction are kernel-checked. The remaining mechanization seam is uniform
@@ -932,6 +941,9 @@ with a complete arbitrary-word converse.
 | Three reachable columns and three observable rows have nonzero determinant | `PositiveShiftCountermodel.reachableMatrix_det`, `PositiveShiftCountermodel.observableMatrix_det` |
 | No positive countermodel matrix word is zero | `PositiveShiftCountermodel.wordProduct_int_ne_zero` |
 | The positive `b`-shift collapses distinct reachable states and defeats backward cancellation | `PositiveShiftCountermodel.column_b_eq_bt`, `PositiveShiftCountermodel.column_nil_ne_t`, `PositiveShiftCountermodel.not_backward_cancellative` |
+| A projectively full legal prepend cylinder forces its data map to be injective | `PositiveResetNoGo.injective_of_cylinder_span` |
+| The two legal rule views of `qb` force the persistent collision `v_q∼v_ε` | `PositiveResetNoGo.positiveReset_collision` |
+| A homogeneous radix prepend cylinder has determinant `B²(B−1)(d_b−d_c)` | `PositiveResetNoGo.radixCylinder_det`, `PositiveResetNoGo.radixCylinder_det_ne_zero` |
 | Three positive letters evaluate surjectively onto the binary free group | `PositiveFreeCancellation.triangleEvaluate_surjective` |
 | Quotient-blind boundaries accepting an element and its square admit a nonempty identity witness | `PositiveFreeCancellation.exists_nonempty_identity_witness` |
 | Every exact diagonal paired-series bridge needs six states | `paired_exact_diagonal_twoChannel_state_lower_bound` |

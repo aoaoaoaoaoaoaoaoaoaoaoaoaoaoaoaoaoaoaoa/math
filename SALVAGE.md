@@ -128,6 +128,7 @@ file owns the mathematical stock.
 | [`G3-O04`](#g3-o04-expanding-affine-history-no-go) | obstruction | finite-mode expanding one-coordinate history has decidable target reachability | audited | graduated |
 | [`G3-O05`](#g3-o05-cancellative-projective-state-tax) | obstruction | inverse-saturated two-side projective dynamics need four states | audited | graduated |
 | [`G3-O11`](#g3-o11-positive-shifts-do-not-force-saturation) | obstruction | positive common shifts need not be backward cancellative | formalized | graduated |
+| [`G3-O12`](#g3-o12-positive-reset-dimension-tax) | obstruction | projectively full residual-local reset codes identify `q` with `ε` | formalized | graduated |
 | [`G3-O06`](#g3-o06-periodic-ray-completion-and-branching-fracture) | compiler and obstruction | `bcbb` has an exact three-state periodic compiler, while `bcbc` defeats every single affine positional section | formalized | graduated |
 | [`G3-O07`](#g3-o07-near-fork-carry-collision) | obstruction | a terminal and nonterminal `bcbc` near-fork collide under the entire one-coordinate phase-line carry family | formalized | graduated |
 | [`G3-C02`](#g3-c02-fixed-bcbc-singular-recognizer) | fixed-instance compiler | a transient guard over one affine carry recognizes the complete `bcbc` language | audited | graduated |
@@ -4453,6 +4454,48 @@ system itself.
 **Artifact:** [`PositiveShiftCountermodel.lean`](MatrixMortality/PositiveShiftCountermodel.lean)
 and
 [`m34-positive-shift-countermodel-2026-08-08.md`](audits/m34-positive-shift-countermodel-2026-08-08.md).
+
+### G3-O12: Positive reset dimension tax
+
+**Kind:** obstruction
+
+**Evidence:** formalized
+
+**Disposition:** graduated
+
+Let `v_w` be a projective code of the current reverse queue, let `H_b,H_c` prepend data letters,
+and let `T` enter rule phase. Suppose the legal transitions satisfy
+
+```text
+H_bv_w∼v_bw,          H_cv_w∼v_cw,
+H_bTv_wb∼v_bw,        H_cTv_wqb∼v_cw,
+```
+
+and each complete prepend cylinder spans the ambient finite-dimensional rational vector space.
+Cylinder fullness makes both data maps invertible. At the legal queue `qb`, cancelling `H_b`
+identifies `Tv_qb` with `v_q`, while cancelling `H_c` identifies it with `v_ε`. Hence
+
+```text
+v_q∼v_ε.
+```
+
+The standard homogeneous radix code has cylinder determinant
+`B²(B−1)(d_b−d_c)`, so every nondegenerate two-coordinate radix or denominator recurrence lies
+inside the theorem.
+
+**Scope:** the proof is strictly positive and occurs on legal transitions; it uses no formal
+inverse orbit, expansion bound, finite target, or illegal-state trap. It assumes residual locality,
+both cylinder-fullness conditions, and persistent separation of `q` from `ε`. History-sensitive
+states, collapsed legal cylinders, and a transient coordinate policing an intentional persistent
+collision remain outside it.
+
+**Use:** cull faithful projectively full queue/deque engines, including variants which only send
+illegal histories into a denominator or ideal trap. The constructive paired leaf must now combine
+a singular legal cylinder with source-computable entrance history; the fixed `bcbc` recognizer is
+the model mechanism, not a uniform solution.
+
+**Artifact:** [`PositiveResetNoGo.lean`](MatrixMortality/PositiveResetNoGo.lean) and
+[`m34-positive-reset-dimension-tax-2026-08-08.md`](audits/m34-positive-reset-dimension-tax-2026-08-08.md).
 
 ### G3-O06: Periodic-ray completion and branching fracture
 

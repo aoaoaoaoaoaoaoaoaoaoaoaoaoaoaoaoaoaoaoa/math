@@ -79,6 +79,7 @@ import MatrixMortality.TernaryClosedBlockNoGo
 import MatrixMortality.ExpandingHistoryNoGo
 import MatrixMortality.CancellativeProjectiveNoGo
 import MatrixMortality.PositiveShiftCountermodel
+import MatrixMortality.PositiveResetNoGo
 import MatrixMortality.PositiveFreeCancellation
 import MatrixMortality.NearyBinaryDefect
 import MatrixMortality.NearyPhaseSignature

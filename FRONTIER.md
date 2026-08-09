@@ -547,6 +547,15 @@ instance-fitted and regular: a source-uniform finite-target version remains excl
 `G3-O04`. The paired route's live obstruction is now uniformity across bodies, not the state
 dimension of this fixed branching language.
 
+[`G3-O12`](SALVAGE.md#g3-o12-positive-reset-dimension-tax) removes the residual-local response.
+If both legal prepend cylinders of a reverse-queue code span the three-state space, their data
+maps are invertible. At the wholly legal queue `qb`, the `b`- and `c`-rule equations then force
+the persistent states of `q` and `ε` onto one projective ray. The standard two-coordinate radix
+code has nonzero cylinder determinant `B²(B−1)(d_b−d_c)`, even with denominator growth or a trap
+outside the legal locus. A surviving uniform constructor must be history-sensitive and singular
+on legal inputs: at least one full cylinder must lie in a plane, while a transient coordinate
+remembers enough route information to police the forced persistent collision.
+
 [`G3-M02`](SALVAGE.md#g3-m02-square-root-punctuation-fracture) supplied a complete direct-mortality
 grammar. The source-uniform rational rank-two matrix `S` satisfies
 
@@ -627,7 +636,7 @@ three symbol types but many transition rules does not meet this count.
 
 | Lane | Available leverage | Decisive obstruction or obligation |
 | --- | --- | --- |
-| Shift-equivariant zero incidence | Same-zero dimension three is point-line incidence in `P²`; [`G3-C02`](SALVAGE.md#g3-c02-fixed-bcbc-singular-recognizer) compiles the fixed branching test, while [`G3-O04`](SALVAGE.md#g3-o04-expanding-affine-history-no-go) kills its source-uniform finite-target affine extension and [`G3-O05`](SALVAGE.md#g3-o05-cancellative-projective-state-tax) kills inverse-saturated dynamics | Build one computable singular formula over a mixed source ensemble, with open or denominator-generating history; fixed-instance fitting, bare support tables, and group-completable cross-multiplication are closed |
+| Shift-equivariant zero incidence | Same-zero dimension three is point-line incidence in `P²`; [`G3-C02`](SALVAGE.md#g3-c02-fixed-bcbc-singular-recognizer) compiles the fixed branching test, while [`G3-O04`](SALVAGE.md#g3-o04-expanding-affine-history-no-go) kills its finite-target affine extension, [`G3-O05`](SALVAGE.md#g3-o05-cancellative-projective-state-tax) kills inverse-saturated dynamics, and [`G3-O12`](SALVAGE.md#g3-o12-positive-reset-dimension-tax) kills faithful full-cylinder queue codes | Build one computable history-sensitive singular formula over a mixed source ensemble; a legal cylinder must collapse to a plane and a transient coordinate must police the collision |
 | Positive free-cancellation discrepancy | Free cancellation performs queue-head deletion; accepting loops are cyclic, and three positive letters surject onto `F₂` | Couple the seven-state forbidden-triple normal form to Carvalho's program-dependent virtual endomorphism; [`G3-O09`](SALVAGE.md#g3-o09-quotient-blind-positive-boundary-collapse) kills quotient-blind all-loop-complete boundaries, so malformed positive spellings need a permanent one-way trap |
 | State-dependent and sliding-block codes | Adjacent ternary symbols can carry four semantic roles without a stationary factorization | [`G3-O08`](SALVAGE.md#g3-o08-erasing-and-stationary-closed-block-obstruction) kills fixed spellings even with erasure and a common closed residual; a survivor must change spelling with state or keep its residue open, while rejecting every invalid overlap on the full free monoid |
 | Solvability-only target recoding | Longer noncommutative target atoms may discard additive bit-count preservation entirely | Cosmetic recoding and fixed residual shifts remain inside `G3-O08`; a survivor needs a global normal form which proves both witness transport and absence of new boundary matches |
@@ -644,8 +653,10 @@ it supplies the missing deletion semantics but not yet the bounded positive sour
 
 After the square-root audit, the net tree has six independent mature leaves:
 
-1. **Source-uniform paired constructor.** Give one computable singular three-state same-zero
-   family for every checked `(β,body)` and every control word.
+1. **History-sensitive singular paired constructor.** Give one computable three-state same-zero
+   family for every checked `(β,body)` and every control word, with at least one legal prepend
+   cylinder confined to a plane and a transient route guard separating the forced `q∼ε`
+   persistent collision.
 2. **Paired residual saturation.** Prove backward residual cancellativity and inverse-orbit
    cofinality for the checked paired language, or find another broad shift-equivariant
    contradiction. Positive common shifts, minimality, and a cancellative semantic completion no
@@ -703,8 +714,9 @@ mixed ensemble of mortal, immortal, and null-history instances; independently fi
 longer test the live obstruction. Static zero-pattern fitting is now vacuous: the checked conic
 already fits every finite prefix-suffix table in three coordinates. Synthesis and lower-bound
 experiments must impose the same `H_b,H_c,H_t` on every left and right shift. The strongest
-candidate escapes are a non-group-completable denominator recurrence and a singular ideal grammar
-which irreversibly destroys illegal inverse histories. A further no-go must establish backward
+candidate escape is a history-sensitive singular ideal grammar whose data collapse occurs on the
+legal chart and whose transient guard irreversibly destroys illegal histories. Denominator growth
+outside a faithful full queue chart is closed by `G3-O12`. A further no-go must establish backward
 residual cancellativity and inverse-orbit cofinality from the paired terminal grammar itself;
 `G3-O11` refutes every derivation using only positive shift equivariance, minimality, or the
 ambient group completion. Do not spend another attack on separator placement, fixed anchors, or
