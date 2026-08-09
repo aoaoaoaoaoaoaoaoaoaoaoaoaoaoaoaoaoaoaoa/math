@@ -119,6 +119,7 @@ file owns the mathematical stock.
 | [`R32-S30`](#r32-s30-fixed-cusp-and-record-ascent-calculus) | structure theorem and obstruction | cumulative endpoints form a fixed-cusp continued fraction; one primitive prequotient coordinate is carried by an exact generalized-continuant block | formalized | active |
 | [`R32-S31`](#r32-s31-smith-decoder-and-maximal-cancellation-throat) | structure theorem and obstruction | a positive unimodular content decoder contracts nonmaximal branches, while one fixed basis makes every wait gauge a pure base-prime dilation | formalized | active |
 | [`R32-S32`](#r32-s32-rank-two-punctuation-and-graph-removal) | structure theorem and reduction | compatible one-loop rank-two edge squares are intrinsic generic projective incidence; every other edge-rank pattern is decidable | audited | graduated |
+| [`R32-S33`](#r32-s33-terminal-casoratian-and-two-sided-order-allocation) | structure theorem and decidable stratum | terminal normalization comes only from earlier branches, and exact orders persisting to either boundary have forced content orientation | formalized | active |
 | [`R32-D03`](#r32-d03-bounded-denominator-periodicity) | decidable stratum | every infinite legal rational guard orbit with bounded reduced denominators is eventually periodic | formalized | graduated |
 | [`M4-C01`](#m4-c01-two-state-pushout-compiler) | compiler | binary deterministic two-state scalar control compiles to three `4 × 4` matrices | formalized | graduated |
 | [`M4-O01`](#m4-o01-exact-toggle-fusion-leaves-an-immortal-core) | obstruction | exact local toggle fusion preserves a nonzero common anchor | formalized | graduated |
@@ -4147,6 +4148,52 @@ no duplicate rational-atlas API was retained.
 **Use:** retire finite carry-mode counter machines even when no single global rail exists. A
 counter-orbit must retain genuinely unbounded angular history or an unbounded wait-difference
 alphabet.
+
+### R32-S33: Terminal Casoratian and two-sided order allocation
+
+**Kind:** structure theorem and decidable stratum
+**Evidence:** formalized
+**Disposition:** active
+
+Let `P` be the endpoint product before the final branch, `c⁻=P₂₁`, and suppose the final
+product sends reset to terminal with scalar `X` and lower-left coefficient `c`. The lower row of
+the final transfer gives
+
+```text
+z c − X c⁻ = det P,
+```
+
+where `z` is the preceding cumulative denominator. Hence every common divisor of `X` and `c`
+already divides the determinant support before the final branch. Since the fixed mod-`p` flag
+makes `c` a p-unit,
+
+```text
+gcd(X,c) ∣ (DL)^(n−1) ∏_(i<n−1)(p^aᵢ−1).
+```
+
+No factor born at the terminal boundary can enter primitive pole normalization.
+
+For a terminal schedule define prefix and suffix wait gcds `eᵢ` and `dᵢ`. After deleting
+the fixed support of `DLR`, the full primitive cyclotomic part of exact order `dᵢ` divides
+forward content `hᵢ`, while that of exact order `eᵢ` divides reverse content `kᵢ`. Thus only
+mass whose order is broken on both chronological sides remains freely allocable. Primitive-part
+growth makes the gcd of all waits effectively finite and yields an explicit decider for the
+stratum `a₀∣a₁∣⋯∣aₙ₋₁`.
+
+**Scope:** the Casoratian is Lean-checked. The global content induction, effective threshold,
+and divisibility-chain algorithm are independently audited from checked local theorems. An
+arbitrary sequence of order-breaking bridges can replenish earlier determinant support; no
+global amortization or counter-orbit follows.
+
+**Artifact:** `ReturnGuard.endpointProduct_append`,
+`ReturnGuard.endpointTransfer_casoratian`, and
+`ReturnGuard.terminalCommonDivisor_dvd_previousDet` in
+[`ReturnGuardCumulative.lean`](MatrixMortality/ReturnGuardCumulative.lean), with the global proof in
+[`m32-casoratian-order-allocation-2026-08-09.md`](audits/m32-casoratian-order-allocation-2026-08-09.md).
+
+**Use:** replace the undifferentiated `gcd(Xₙ,cₙ)` obstruction by the doubly order-broken
+core. A decision proof must amortize bridges which destroy exact order on both sides; an
+undecidability construction must realize such recycled support along one exact reset orbit.
 
 ### R32-D03: Bounded-denominator periodicity
 

@@ -309,6 +309,8 @@ open MatrixMortality
 #print axioms ReturnGuard.Examples.cycle_cumulativeExecution
 #print axioms ReturnGuard.terminalCoordinate_residualStep
 #print axioms ReturnGuard.endpointTransfer_mul_endpointGauge
+#print axioms ReturnGuard.endpointTransfer_casoratian
+#print axioms ReturnGuard.terminalCommonDivisor_dvd_previousDet
 #print axioms ReturnGuard.endpointProduct_det
 #print axioms ReturnGuard.endpointProduct_mod_prime
 #print axioms ReturnGuard.endpointProduct_det_hasValue

@@ -509,6 +509,16 @@ present in the cumulative endpoint recurrence, so formalization adds only the co
 counterexample. See
 [`audits/m32-angular-emergent-primes-2026-08-08.md`](audits/m32-angular-emergent-primes-2026-08-08.md).
 
+The recurrence-sensitive gcd has now been localized. The lower row of the final endpoint
+transfer gives an exact Casoratian showing that every common divisor of the terminal scalar and
+the angular coefficient divides the determinant of the preceding word. The final branch creates
+no primitive normalization. The surrounding `R32-S33` audit combines this checked identity with
+the existing recurrent-boundary and primitive-part theorems: exact-order mass persisting to the
+right is forced forward, mass persisting to the left is forced reverse, the global wait gcd is
+effectively finite, and divisibility-chain terminal schedules are decidable. The unformalized
+global induction introduces no new state or recurrence API. See
+[`audits/m32-casoratian-order-allocation-2026-08-09.md`](audits/m32-casoratian-order-allocation-2026-08-09.md).
+
 The widened finite-atlas counter route is also closed without adding Lean code. For finitely
 many rational tail charts and finitely many fixed additive wait shifts, polynomial divisibility,
 degree at infinity, and leading/constant coefficient comparison force every control-cycle shift
@@ -662,7 +672,7 @@ with a complete arbitrary-word converse.
 | `ReturnGuardIntegralLift.lean` | canonical rational pairs, decoded-to-integral execution lifting, and quotient certificates of physical immortality |
 | `ReturnGuardQuotientCompleteness.lean` | zero-wait terminal kernel, cancellation-reachability completeness, and synchronized-product no-amplification |
 | `ReturnGuardDriftCertificate.lean` | exact drift-divisor certificate classification, cyclic subgroup criterion, and executable finite test |
-| `ReturnGuardCumulative.lean` | content-free cumulative endpoint execution, exact second-order recurrence, reset-ancestry pullback, primitive endpoint projectivization, odd-resultant immortality, and derived primitive content |
+| `ReturnGuardCumulative.lean` | chronological product algebra, pre-final Casoratian localization, content-free cumulative endpoint execution, exact second-order recurrence, reset-ancestry pullback, primitive endpoint projectivization, odd-resultant immortality, and derived primitive content |
 | `ReturnGuardContinued.lean` | fixed-cusp complete quotients, primitive prequotient transport, recurrent-boundary reverse persistence, record-ascent content budget, and order-three decoder |
 | `ReturnGuardBoundary.lean` | depth-two universal-boundary reset ball, valuation-wall immortality, and primewise reset-resultant necessity |
 | `ReturnGuardSmith.lean` | signed content split, positive-cone primitive-height gain, nonmaximal contraction, maximal-step isolation, and diagonalized gauged cocycle |
@@ -789,6 +799,7 @@ with a complete arbitrary-word converse.
 | A cyclotomic factor is swallowed exactly when the source pair is terminal-congruent modulo it | `ReturnGuard.integralStep_cyclotomic_cancel_iff_terminalCongruent` |
 | Outside the fixed parameter support, cancellation is exactly cyclotomic terminal congruence | `ReturnGuard.integralStep_novel_cancel_iff_cyclotomic_terminalCongruent` |
 | Primitive endpoint normalization collapses into one deterministic cumulative recurrence | `ReturnGuard.primitiveIntegralStep_cumulativeEndpointStep`, `ReturnGuard.CumulativeEndpointStep.target_unique`, `ReturnGuard.cumulativeNumerator_recurrence` |
+| Every common divisor of a terminal scalar and angular coefficient lies in the determinant support before the final branch | `ReturnGuard.endpointTransfer_casoratian`, `ReturnGuard.terminalCommonDivisor_dvd_previousDet` |
 | Every primitive endpoint reduction projectivizes to the corresponding rational guard step | `ReturnGuard.PrimitiveEndpointReduction.guardedStep_endpointState` |
 | Primitive content is exactly the gcd of the drift source and the unreduced quotient; reverse content satisfies a wait-free terminal divisor law | `ReturnGuard.PrimitiveEndpointReduction.content_natAbs_eq_gcd_driftSource_prequotient`, `ReturnGuard.PrimitiveEndpointReduction.resetDefect_eq_complement_mul`, `ReturnGuard.PrimitiveEndpointReduction.complement_dvd_terminalBoundary` |
 | A reverse-content divisor recurring in the next boundary outside fixed scale-reset support remains wholly reverse | `ReturnGuard.PrimitiveEndpointReduction.recurrentBoundaryDivisor_persists` |

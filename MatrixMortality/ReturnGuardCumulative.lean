@@ -17,6 +17,76 @@ open scoped Matrix
 
 noncomputable section
 
+/-- Chronological concatenation reverses the endpoint matrix-product order. -/
+theorem endpointProduct_append
+    {R : Type*} [CommRing R] (prime : R) (depth : Nat)
+    (centerNumerator driftNumerator scale : R) (left right : List Nat) :
+    endpointProduct prime depth centerNumerator driftNumerator scale (left ++ right) =
+      endpointProduct prime depth centerNumerator driftNumerator scale right *
+        endpointProduct prime depth centerNumerator driftNumerator scale left := by
+  induction left with
+  | nil => simp
+  | cons wait waits induction =>
+      simp only [List.cons_append, endpointProduct_cons, induction]
+      rw [Matrix.mul_assoc]
+
+/-- The lower row of one endpoint transfer gives an exact Casoratian with every incoming
+matrix. The identity is independent of terminality and retains the determinant of the complete
+preceding word. -/
+theorem endpointTransfer_casoratian
+    {R : Type*} [CommRing R] (prime : R) (depth : Nat)
+    (centerNumerator driftNumerator scale : R) (wait : Nat)
+    (matrix : Square (Fin 2) R) (source : R) :
+    (matrix *ᵥ ![source, 1]) 1 *
+          (endpointTransfer prime depth centerNumerator driftNumerator scale wait *
+            matrix) 1 0 -
+        ((endpointTransfer prime depth centerNumerator driftNumerator scale wait *
+            matrix) *ᵥ ![source, 1]) 1 * matrix 1 0 =
+      matrix.det := by
+  simp [endpointTransfer, Matrix.mul_apply, Matrix.mulVec, Matrix.dotProduct,
+    Matrix.det_fin_two, Fin.sum_univ_succ]
+  ring
+
+/-- Every common divisor of a terminal image scalar and the terminal product's lower-left
+coefficient already divides the determinant support before the final branch. -/
+theorem terminalCommonDivisor_dvd_previousDet
+    (prime depth : Nat) (centerNumerator driftNumerator scale : ℤ)
+    (initial : List Nat) (last : Nat) (source scalar divisor : ℤ)
+    (terminal :
+      endpointProduct (prime : ℤ) depth centerNumerator driftNumerator scale
+            (initial ++ [last]) *ᵥ ![source, 1] =
+        scalar • ![0, 1])
+    (divides_scalar : divisor ∣ scalar)
+    (divides_bottom :
+      divisor ∣
+        endpointProduct (prime : ℤ) depth centerNumerator driftNumerator scale
+          (initial ++ [last]) 1 0) :
+    divisor ∣
+      (endpointProduct (prime : ℤ) depth centerNumerator driftNumerator scale initial).det := by
+  let previous :=
+    endpointProduct (prime : ℤ) depth centerNumerator driftNumerator scale initial
+  let transfer :=
+    endpointTransfer (prime : ℤ) depth centerNumerator driftNumerator scale last
+  have product_eq :
+      endpointProduct (prime : ℤ) depth centerNumerator driftNumerator scale
+          (initial ++ [last]) = transfer * previous := by
+    simp [transfer, previous, endpointProduct_append]
+  have scalar_eq : ((transfer * previous) *ᵥ ![source, 1]) 1 = scalar := by
+    rw [← product_eq, terminal]
+    simp [smul_eq_mul]
+  have bottom_eq :
+      (transfer * previous) 1 0 =
+        endpointProduct (prime : ℤ) depth centerNumerator driftNumerator scale
+          (initial ++ [last]) 1 0 := by
+    rw [product_eq]
+  have casoratian :=
+    endpointTransfer_casoratian (prime : ℤ) depth centerNumerator driftNumerator scale
+      last previous source
+  rw [scalar_eq, bottom_eq] at casoratian
+  rw [← casoratian]
+  exact dvd_sub (divides_bottom.mul_left ((previous *ᵥ ![source, 1]) 1))
+    (divides_scalar.mul_right (previous 1 0))
+
 /-- Column represented by one integral projective pair. -/
 def pairVector (pair : ℤ × ℤ) : Fin 2 → ℤ :=
   ![pair.1, pair.2]

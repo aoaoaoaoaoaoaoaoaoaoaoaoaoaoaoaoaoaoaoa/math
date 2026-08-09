@@ -631,6 +631,10 @@
 'MatrixMortality.ReturnGuard.endpointTransfer_mul_endpointGauge' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.ReturnGuard.endpointTransfer_casoratian' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ReturnGuard.terminalCommonDivisor_dvd_previousDet' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.ReturnGuard.endpointProduct_det' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.ReturnGuard.endpointProduct_mod_prime' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.ReturnGuard.endpointProduct_det_hasValue' depends on axioms: [propext, Classical.choice, Quot.sound]

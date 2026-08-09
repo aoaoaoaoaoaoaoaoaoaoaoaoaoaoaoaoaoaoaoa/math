@@ -1087,6 +1087,24 @@ must use the actual additive continuant and its gcd with the radial factor. See
 [`R32-O17`](SALVAGE.md#r32-o17-angular-emergent-primes-and-endpoint-compactness-no-go) and
 [`m32-angular-emergent-primes-2026-08-08.md`](audits/m32-angular-emergent-primes-2026-08-08.md).
 
+The actual continuant cuts this obstruction further. If `P` is the endpoint product before the
+final branch, `X` is the terminal scalar, and `c` is the full lower-left coefficient, the final
+lower row gives
+
+```text
+z c − X c⁻ = det P.
+```
+
+Thus `gcd(X,c)` divides only the earlier determinant support; the final branch creates no new
+primitive normalization. More globally, every primitive exact-order factor whose order divides
+all waits to the right is forced into forward content, while one whose order divides all waits
+to the left is forced into reverse content. The global wait gcd is effectively finite, and the
+terminal stratum `a₀∣a₁∣⋯∣aₙ₋₁` is decidable. The lawful word `[3,1]` shows the exact
+residue: useful order must be broken on both chronological sides, allowing earlier reverse
+content to finance later angular cancellation. See
+[`R32-S33`](SALVAGE.md#r32-s33-terminal-casoratian-and-two-sided-order-allocation) and
+[`m32-casoratian-order-allocation-2026-08-09.md`](audits/m32-casoratian-order-allocation-2026-08-09.md).
+
 Finite rational carry-mode atlases cannot supply the opposing aperiodic orbit either. If each
 mode is a rational function of the current `p^a` and each transition has one fixed additive wait
 shift, every directed control cycle has total shift zero. On an actual infinite orbit the
@@ -1150,15 +1168,15 @@ all-legal block inequality for the carried generalized continuant. See
 
 | Lane | Required move | Present obstruction |
 | --- | --- | --- |
-| Additive-continuant bound | Give a coefficient-effective bound for the primitive reset-started angular continuant, sufficient to bound every first-hit terminal word | Addition creates primes outside all coefficient and cyclotomic support; the decisive gcd is `gcd(X_n,c_n)` |
-| Recurrence-sensitive pressure | Combine the exact continuant recurrence, full cyclotomic multiplicity, and the fixed-kernel pullback into a global carry bound | Direction-free product-formula pressure fails because each wait gauge pays `p^(2|b−a|)` |
+| Doubly order-broken continuant | Amortize exact-order mass across every bridge which breaks its order on both chronological sides | The Casoratian removes the final branch and persistent orders have forced orientation, but earlier reverse content can still finance later cancellation |
+| Recurrence-sensitive pressure | Combine the exact continuant recurrence, full cyclotomic multiplicity, and the fixed-kernel pullback into a global carry bound on the doubly broken residue | Direction-free product-formula pressure fails because each wait gauge pays `p^(2|b−a|)` |
 | Aperiodic angular counter | Construct one exact fixed-coefficient reset orbit with unbounded denominators while the p-radial component remains on the reset ray | Every finite rational carry atlas is eventually periodic; the construction needs unbounded charts, wait differences, or independent history |
 | Repeated-factor extraction | Force a sufficiently heavy repeated factor in every bounded-complexity wait prefix and apply `R32-S29` | Arbitrary repeated factors are controlled once found; no theorem yet extracts one from a moving denominator schedule |
 | Irreducible cubic bridge | Decide isolated-cut words over the non-pure projectively injective unit alphabet, or the pure involutive-ratio PI₂ residue | Singular timing is finite or modulo three and cannot supply unbounded punctuation |
 | Generic projective incidence | Decide GPI₂ directly, or reduce arbitrary PI₂ to its generic stratum | Rank-(2,2) adds no graph hardness; positive-word genericization still lacks an OR or singular data transport |
 
-The split-spectrum hot path is now a coefficient-effective bound on the primitive additive
-continuant and `gcd(X_n,c_n)`, with a genuinely history-sensitive aperiodic
+The split-spectrum hot path is now a coefficient-effective amortization of the doubly
+order-broken additive continuant, with a genuinely history-sensitive aperiodic
 unbounded-denominator reset orbit as the opposing construction. The matrix compiler,
 arbitrary-word converse, deterministic wait decoder, rational inverse-address grammar,
 primitive integral lift, endpoint factorization, exact branch similarity, arbitrary
@@ -1169,8 +1187,9 @@ descent are false; fixed positive renewal cycles are impossible; bounded local s
 not imply bounded height; terminal length can exceed two; endpoint support and finite rational
 carry atlases are insufficient. The rank-`(3,2)` artery now asks whether the actual additive
 continuant admits an effective recurrence-sensitive bound, or can sustain one exact aperiodic
-reset orbit with unbounded denominators and unbounded history. Exact-order factors remain usable
-only inside that coupled proof. In parallel, rank-(2,2) is exactly generic PI₂.
+reset orbit with unbounded denominators and unbounded history. The final boundary, persistent
+exact orders, and divisibility-chain schedules are closed; only recycled support across
+two-sided order breaks remains. In parallel, rank-(2,2) is exactly generic PI₂.
 
 ## The dimension-two wall: `M₂(3)`
 
