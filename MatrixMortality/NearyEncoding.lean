@@ -485,6 +485,57 @@ theorem spell_nearyUpper_tileHistory (β : Nat) (history : List (Stroke TagLette
     spell (nearyUpper β) (tileHistory history) = tagEncode β (consumed history) := by
   rw [spell_nearyUpper, map_letter_tileHistory]
 
+/-- The terminal equation on a nonempty stroke history is exactly the decoded queue equation.
+This is the semantic core used both by the arbitrary-word converse and by prefix rigidity. -/
+theorem tileHistory_semantic_eq_of_terminal_match (β : Nat) (body : List TagLetter)
+    (β_pos : 0 < β) (first : Stroke TagLetter β)
+    (history : List (Stroke TagLetter β))
+    (terminal_match :
+      spell (nearyUpper β) (tileHistory (first :: history)) ++ nearyMarker β =
+        spell (nearyLower β body) (tileHistory (first :: history))) :
+    consumed (first :: history) ++ [.b] =
+      .c :: nearyBody body first.head ++ [.b] ++ produced (tagOutput body) history := by
+  have bits_eq := congrArg (fun bits => bits ++ [true]) terminal_match
+  change
+    (spell (nearyUpper β) (tileHistory (first :: history)) ++ nearyMarker β) ++ [true] =
+      spell (nearyLower β body) (tileHistory (first :: history)) ++ [true] at bits_eq
+  rw [spell_nearyUpper_tileHistory,
+    spell_nearyLower_tileHistory_append_true] at bits_eq
+  apply tagEncode_injective β β_pos
+  simpa [tagEncode_append, marker_append_true, List.append_assoc] using bits_eq
+
+/-- Every nonempty terminal history begins with the distinguished c rule. -/
+theorem firstStroke_head_eq_c_of_terminal_match (β : Nat) (body : List TagLetter)
+    (β_pos : 0 < β) (first : Stroke TagLetter β)
+    (history : List (Stroke TagLetter β))
+    (terminal_match :
+      spell (nearyUpper β) (tileHistory (first :: history)) ++ nearyMarker β =
+        spell (nearyLower β body) (tileHistory (first :: history))) :
+    first.head = .c := by
+  have semantic_eq :=
+    tileHistory_semantic_eq_of_terminal_match β body β_pos first history terminal_match
+  have heads_eq := congrArg List.head? semantic_eq
+  simpa [consumed_cons, Stroke.letters] using heads_eq
+
+/-- Every arbitrary terminal-match word starts with the c-rule tile; this is a consequence of
+pulse synchronization and the decoded queue equation, not an intended-language assumption. -/
+theorem terminalMatch_starts_rule_c (β : Nat) (body : List TagLetter) (β_pos : 0 < β)
+    (word : List NearyTile)
+    (terminal_match :
+      spell (nearyUpper β) word ++ nearyMarker β = spell (nearyLower β body) word) :
+    ∃ tail, word = .rule .c :: tail := by
+  obtain ⟨history, rfl⟩ :=
+    tileHistory_of_terminal_match β body β_pos word terminal_match
+  have history_nonempty : history ≠ [] := by
+    intro history_empty
+    subst history
+    simp [spell, nearyMarker] at terminal_match
+  obtain ⟨first, history, rfl⟩ := List.exists_cons_of_ne_nil history_nonempty
+  have first_head :=
+    firstStroke_head_eq_c_of_terminal_match β body β_pos first history terminal_match
+  refine ⟨first.wake.map .erase ++ tileHistory history, ?_⟩
+  simp [tileHistory_cons, strokeTiles, first_head]
+
 /-- The global word equation cannot be reached by a malformed ordinary path.  It yields a
 lawful tag execution and stops as soon as the queue becomes shorter than `β`. -/
 theorem tagHaltsFrom_of_terminal_match (β : Nat) (body : List TagLetter)
@@ -498,16 +549,8 @@ theorem tagHaltsFrom_of_terminal_match (β : Nat) (body : List TagLetter)
     subst history
     simp [spell, nearyMarker] at hmatch
   obtain ⟨first, history, rfl⟩ := List.exists_cons_of_ne_nil hhistory
-  have hbits := congrArg (fun bits => bits ++ [true]) hmatch
-  change (spell (nearyUpper β) (tileHistory (first :: history)) ++ nearyMarker β) ++
-      [true] = spell (nearyLower β body) (tileHistory (first :: history)) ++ [true] at hbits
-  rw [spell_nearyUpper_tileHistory,
-    spell_nearyLower_tileHistory_append_true] at hbits
-  have hencoded : tagEncode β (consumed (first :: history) ++ [.b]) =
-      tagEncode β
-        (.c :: nearyBody body first.head ++ [.b] ++ produced (tagOutput body) history) := by
-    simpa [tagEncode_append, marker_append_true, List.append_assoc] using hbits
-  have hsemantic := tagEncode_injective β (by omega) hencoded
+  have hsemantic :=
+    tileHistory_semantic_eq_of_terminal_match β body (by omega) first history hmatch
   have hhead : first.head = .c := by
     have := congrArg List.head? hsemantic
     simpa [consumed_cons, Stroke.letters] using this

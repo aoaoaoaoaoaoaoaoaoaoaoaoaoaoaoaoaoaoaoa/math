@@ -130,7 +130,8 @@ file owns the mathematical stock.
 | [`G3-O06`](#g3-o06-periodic-ray-completion-and-branching-fracture) | compiler and obstruction | `bcbb` has an exact three-state periodic compiler, while `bcbc` defeats every single affine positional section | formalized | graduated |
 | [`G3-O07`](#g3-o07-near-fork-carry-collision) | obstruction | a terminal and nonterminal `bcbc` near-fork collide under the entire one-coordinate phase-line carry family | formalized | graduated |
 | [`G3-C02`](#g3-c02-fixed-bcbc-singular-recognizer) | fixed-instance compiler | a transient guard over one affine carry recognizes the complete `bcbc` language | audited | graduated |
-| [`G3-M02`](#g3-m02-square-root-punctuation-fracture) | partial mechanism | a rank-two square root gives an exact `SS`-free mortality grammar | formalized | active |
+| [`G3-M02`](#g3-m02-square-root-punctuation-fracture) | partial mechanism | a rank-two square root gives an exact `SS`-free mortality grammar | formalized | closed |
+| [`G3-O10`](#g3-o10-square-root-boundary-saturation) | obstruction | every nondegenerate rank-one square root preserves boundary coefficient zeros | formalized | graduated |
 | [`G3-M01`](#g3-m01-free-group-discrepancy-engine) | partial mechanism | free cancellation implements queue deletion; the accepting subgroup is cyclic | audited | active |
 | [`G3-O09`](#g3-o09-quotient-blind-positive-boundary-collapse) | obstruction | all-loop-complete group-factorizing boundaries accept a nonempty identity spelling | formalized core | graduated |
 | [`D2-S01`](#d2-s01-projective-hard-core) | structure theorem | `M₂(3)` is equivalent to two-generator projective incidence | audited | active |
@@ -828,7 +829,7 @@ symbolically, and prove a global maximal-run grammar or a symbolic no-go theorem
 
 **Kind:** partial mechanism
 **Evidence:** audited
-**Disposition:** active
+**Disposition:** closed
 
 Let `r=t/μ`, put
 
@@ -4660,13 +4661,51 @@ incidence, and the unique singular update preserves rank two through every inter
 and weighted rigidity are Lean-checked. The reverse-marker and additive-fusion obstructions are
 audited paper proofs. No same-zero matrices on the `SS`-free subshift are known.
 
-**Use:** race the `SS`-free compiler directly against the source-uniform paired compiler. Do not
-spend another attack on punctuation placement, additive rank-one perturbations, similarity, or
-letterwise rescaling. Any candidate need only preserve zeros, but it must cover every malformed
-isolated occurrence of `S`.
+**Use:** retain the fracture theorem as reusable punctuation, but do not pursue the direct Neary
+role identification. `G3-O10` proves that every admissible square root preserves coefficient
+vanishing when placed at either boundary, contradicting the source's initial-role rigidity.
 
 **Artifact:** [`SquareRootPunctuation.lean`](MatrixMortality/SquareRootPunctuation.lean) and
 [`m34-square-root-punctuation-2026-08-08.md`](audits/m34-square-root-punctuation-2026-08-08.md).
+
+### G3-O10: Square-root boundary saturation
+
+**Kind:** obstruction
+
+**Evidence:** formalized
+
+**Disposition:** graduated
+
+Over any field, let `P²=uvᵀ` with `vᵀu≠0`. Commutation with its square forces one nonzero scalar
+`σ` such that
+
+```text
+Pu=σu,        vᵀP=σvᵀ,        σ²=vᵀu.
+```
+
+Consequently the boundary insertions `Pw` and `wP` preserve the zero set of every scalar series
+`vᵀH_wu`, independently of dimension, rank, and the ordinary generators.
+
+The checked arbitrary-word Neary converse supplies the incompatible source fact. Every terminal
+match begins with `R_c`, so prefixing any role word by `R_b` can never produce a native zero. A
+terminal word and its physical `P`-prefix are both `PP`-free at deletion width at least three.
+Thus no same-zero representation on the complete `PP`-free fracture domain can identify `P` with
+`R_b`. This closes the square-root attack opened by `G3-M02`; choosing another root cannot evade
+the obstruction.
+
+**Scope:** Lean proves the dimension-free eigenvector theorem, both boundary zero equivalences,
+arbitrary-terminal-match initial-role rigidity, and the exact logical contradiction from a
+square-free witness pair. The routine composition producing that pair from a complete Neary
+history is audited at list-syntax level. Semantic macros, degenerate separators `vᵀu=0`, and
+fracture languages excluding boundary punctuation remain outside the theorem.
+
+**Use:** reject every nondegenerate rank-one square-root compiler using scalar readout on the full
+square-free domain and a direct Neary rule-role decoder. Any future punctuation route must alter
+one of those structural hypotheses, not merely the displayed root.
+
+**Artifact:** [`SquareRootPunctuation.lean`](MatrixMortality/SquareRootPunctuation.lean),
+[`NearyEncoding.lean`](MatrixMortality/NearyEncoding.lean), and
+[`m34-square-root-boundary-saturation-2026-08-08.md`](audits/m34-square-root-boundary-saturation-2026-08-08.md).
 
 ### G3-M01: Free-group discrepancy engine
 

@@ -522,8 +522,13 @@ sets until that transcription is complete.
 For [`G3-M02`](SALVAGE.md#g3-m02-square-root-punctuation-fracture), the complete fracture,
 explicit square identity, exact rank, and exact/weighted-series rigidity are formalized. The
 source-specific reverse-marker exclusion and the immortality of every boundary-aligned additive
-fusion are retained as audited paper proofs. They close a failed ansatz and are not dependencies
-of the live square-root construction.
+fusion are retained as audited paper proofs. [`G3-O10`](SALVAGE.md#g3-o10-square-root-boundary-saturation)
+now closes the construction itself: Lean proves that every nondegenerate rank-one square root
+scales both boundary vectors, hence preserves coefficient vanishing under either boundary
+insertion. It also proves that every arbitrary Neary terminal match starts with `R_c`, that an
+`R_b` prefix never vanishes, and the resulting same-zero contradiction on a square-free witness
+pair. The final assembly of that pair from a complete width-at-least-three stroke history remains
+an audited list-syntax composition, not a hidden publication-facing theorem.
 
 For [`G3-O08`](SALVAGE.md#g3-o08-erasing-and-stationary-closed-block-obstruction), Lean checks
 the exact paired bit counts, injectivity and nonsingularity of the four-role Parikh matrix, the
@@ -893,6 +898,11 @@ with a complete arbitrary-word converse.
 | The explicit source-uniform Neary punctuation matrix has the required square and rank two | `SquareRootPunctuation.nearySquareRoot_sq`, `SquareRootPunctuation.nearySquareRoot_rank` |
 | Exact coefficient preservation on the `R_bR_b`-free subshift forces the `R_b` matrix to be a unit | `SquareRootPunctuation.ruleB_isUnit_of_exact_on_squareFree` |
 | Nonzero multiplicative letter weights do not evade the square-free exact-series rigidity | `SquareRootPunctuation.ruleB_isUnit_of_weighted_exact_on_squareFree` |
+| Every nondegenerate rank-one square root scales both boundary vectors by one nonzero scalar | `SquareRootPunctuation.squareRoot_boundary_eigenvectors` |
+| Prefixing or suffixing an isolated square root preserves scalar vanishing | `SquareRootPunctuation.squareRoot_coefficient_cons_zero_iff`, `SquareRootPunctuation.squareRoot_coefficient_append_zero_iff` |
+| Every arbitrary Neary terminal match begins with the `c`-rule role | `terminalMatch_starts_rule_c` |
+| An `R_b`-prefixed role word cannot have zero native side coefficient | `SquareRootPunctuation.nearySide_ruleB_cons_ne_zero` |
+| Boundary saturation refutes a proposed square-free same-zero decoder on the witness pair | `SquareRootPunctuation.no_ruleB_squareRoot_sameZero_on_boundary_pair` |
 | Every reset-affine control word obeys its exact coordinate and target equation | `ResetAffineHistory.wordProduct_mulVec_column`, `ResetAffineHistory.coefficient_eq` |
 | A zero and its leading toggle force the affine target to forget phase | `ResetAffineHistory.phaseWeight_eq_zero_of_toggle_pair` |
 | A phase-only reset-affine target has the exact two-phase zero test | `ResetAffineHistory.exists_zero_of_left_zero_iff` |

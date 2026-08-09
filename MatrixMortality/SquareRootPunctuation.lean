@@ -148,6 +148,169 @@ theorem isMortal_iff_exists_squareFree_zero
 
 end Fracture
 
+/-! ## Boundary saturation forced by every nondegenerate square root -/
+
+section BoundarySaturation
+
+variable {α ι K : Type*} [Field K] [Fintype ι] [DecidableEq ι]
+
+omit [Fintype ι] [DecidableEq ι] in
+private theorem smul_vector_cancel {vector : ι → K} (vector_ne : vector ≠ 0)
+    {first second : K} (equal : first • vector = second • vector) :
+    first = second := by
+  by_contra scalars_ne
+  apply vector_ne
+  funext i
+  have coordinate := congr_fun equal i
+  simp only [Pi.smul_apply, smul_eq_mul] at coordinate
+  by_contra coordinate_ne
+  exact scalars_ne (mul_right_cancel₀ coordinate_ne coordinate)
+
+omit [Fintype ι] [DecidableEq ι] in
+private theorem outer_left_cancel {column : ι → K} (column_ne : column ≠ 0)
+    {first second : ι → K}
+    (equal : Matrix.vecMulVec column first = Matrix.vecMulVec column second) :
+    first = second := by
+  by_contra rows_ne
+  obtain ⟨j, coordinate_ne⟩ := Function.ne_iff.mp rows_ne
+  apply column_ne
+  funext i
+  have entry := congr_fun (congr_fun equal i) j
+  simp only [Matrix.vecMulVec_apply] at entry
+  by_contra column_ne
+  exact coordinate_ne (mul_left_cancel₀ column_ne entry)
+
+omit [DecidableEq ι] in
+private theorem outer_mulVec (column row active : ι → K) :
+    Matrix.vecMulVec column row *ᵥ active = (row ⬝ᵥ active) • column := by
+  ext i
+  simp only [Matrix.mulVec, Matrix.vecMulVec_apply, Matrix.dotProduct,
+    Pi.smul_apply, smul_eq_mul]
+  simp only [mul_assoc]
+  rw [← Finset.mul_sum]
+  ring
+
+omit [DecidableEq ι] in
+/-- Every square root of a nondegenerate rank-one separator scales both boundary vectors by the
+same nonzero scalar. The conclusion is independent of dimension and of the square root's rank. -/
+theorem squareRoot_boundary_eigenvectors
+    (squareRoot : Square ι K) (column row : ι → K)
+    (square : squareRoot * squareRoot = Matrix.vecMulVec column row)
+    (pairing_ne : row ⬝ᵥ column ≠ 0) :
+    ∃ scalar : K,
+      scalar ≠ 0 ∧
+        scalar ^ 2 = row ⬝ᵥ column ∧
+        squareRoot *ᵥ column = scalar • column ∧
+        row ᵥ* squareRoot = scalar • row := by
+  let pairing := row ⬝ᵥ column
+  have column_ne : column ≠ 0 := by
+    intro column_zero
+    apply pairing_ne
+    simp [column_zero]
+  have commutes :
+      squareRoot * Matrix.vecMulVec column row =
+        Matrix.vecMulVec column row * squareRoot := by
+    rw [← square]
+    simp [Matrix.mul_assoc]
+  have proportional :
+      pairing • (squareRoot *ᵥ column) =
+        (row ⬝ᵥ squareRoot *ᵥ column) • column := by
+    have applied := congrArg (fun matrix => matrix *ᵥ column) commutes
+    rw [mul_outer, outer_mul] at applied
+    change
+      Matrix.vecMulVec (squareRoot *ᵥ column) row *ᵥ column =
+        Matrix.vecMulVec column (row ᵥ* squareRoot) *ᵥ column at applied
+    rw [outer_mulVec, outer_mulVec] at applied
+    simpa [pairing, Matrix.dotProduct_mulVec] using applied
+  let scalar := pairing⁻¹ * (row ⬝ᵥ squareRoot *ᵥ column)
+  have column_eigen : squareRoot *ᵥ column = scalar • column := by
+    calc
+      squareRoot *ᵥ column = pairing⁻¹ • (pairing • (squareRoot *ᵥ column)) := by
+        simp [pairing, pairing_ne]
+      _ = pairing⁻¹ • ((row ⬝ᵥ squareRoot *ᵥ column) • column) := by
+        rw [proportional]
+      _ = scalar • column := by
+        simp [scalar, smul_smul]
+  have square_eigen : (scalar ^ 2) • column = pairing • column := by
+    calc
+      (scalar ^ 2) • column =
+          squareRoot *ᵥ (squareRoot *ᵥ column) := by
+            rw [column_eigen, Matrix.mulVec_smul, column_eigen]
+            simp [pow_two, smul_smul]
+      _ = pairing • column := by
+        calc
+          squareRoot *ᵥ (squareRoot *ᵥ column) =
+              (squareRoot * squareRoot) *ᵥ column := by
+            rw [Matrix.mulVec_mulVec]
+          _ = Matrix.vecMulVec column row *ᵥ column := by rw [square]
+          _ = pairing • column := by rw [outer_mulVec]
+  have scalar_square : scalar ^ 2 = pairing :=
+    smul_vector_cancel column_ne square_eigen
+  have scalar_ne : scalar ≠ 0 := by
+    intro scalar_zero
+    apply pairing_ne
+    change pairing = 0
+    rw [← scalar_square, scalar_zero]
+    simp
+  have row_eigen : row ᵥ* squareRoot = scalar • row := by
+    apply outer_left_cancel column_ne
+    calc
+      Matrix.vecMulVec column (row ᵥ* squareRoot) =
+          Matrix.vecMulVec column row * squareRoot := by
+            rw [outer_mul]
+      _ = squareRoot * Matrix.vecMulVec column row := commutes.symm
+      _ = Matrix.vecMulVec (squareRoot *ᵥ column) row := by
+        rw [mul_outer]
+      _ = Matrix.vecMulVec column (scalar • row) := by
+        rw [column_eigen]
+        ext i j
+        simp [Matrix.vecMulVec_apply]
+        ring
+  exact ⟨scalar, scalar_ne, scalar_square, column_eigen, row_eigen⟩
+
+/-- Prefixing one isolated square-root letter preserves scalar vanishing for every surrounding
+word and every choice of ordinary generators. -/
+theorem squareRoot_coefficient_cons_zero_iff
+    (squareRoot : Square ι K) (generators : α → Square ι K)
+    (column row : ι → K)
+    (square : squareRoot * squareRoot = Matrix.vecMulVec column row)
+    (pairing_ne : row ⬝ᵥ column ≠ 0) (word : List (Option α)) :
+    coefficient squareRoot generators column row (none :: word) = 0 ↔
+      coefficient squareRoot generators column row word = 0 := by
+  obtain ⟨scalar, scalar_ne, _, _, row_eigen⟩ :=
+    squareRoot_boundary_eigenvectors squareRoot column row square pairing_ne
+  have scaled :
+      coefficient squareRoot generators column row (none :: word) =
+        scalar * coefficient squareRoot generators column row word := by
+    simp only [coefficient, bridgeScalar, wordProduct_cons, separatedGenerator]
+    rw [← Matrix.mulVec_mulVec, Matrix.dotProduct_mulVec, row_eigen]
+    simp [Matrix.smul_dotProduct, smul_eq_mul]
+  rw [scaled, mul_eq_zero]
+  simp [scalar_ne]
+
+/-- Suffixing one isolated square-root letter preserves scalar vanishing for every surrounding
+word and every choice of ordinary generators. -/
+theorem squareRoot_coefficient_append_zero_iff
+    (squareRoot : Square ι K) (generators : α → Square ι K)
+    (column row : ι → K)
+    (square : squareRoot * squareRoot = Matrix.vecMulVec column row)
+    (pairing_ne : row ⬝ᵥ column ≠ 0) (word : List (Option α)) :
+    coefficient squareRoot generators column row (word ++ [none]) = 0 ↔
+      coefficient squareRoot generators column row word = 0 := by
+  obtain ⟨scalar, scalar_ne, _, column_eigen, _⟩ :=
+    squareRoot_boundary_eigenvectors squareRoot column row square pairing_ne
+  have scaled :
+      coefficient squareRoot generators column row (word ++ [none]) =
+        scalar * coefficient squareRoot generators column row word := by
+    simp only [coefficient, bridgeScalar, wordProduct_append, wordProduct_cons,
+      wordProduct_nil, Matrix.mul_one, separatedGenerator]
+    rw [← Matrix.mulVec_mulVec, column_eigen, Matrix.mulVec_smul]
+    simp [Matrix.dotProduct_smul, smul_eq_mul, mul_comm]
+  rw [scaled, mul_eq_zero]
+  simp [scalar_ne]
+
+end BoundarySaturation
+
 /-! ## Explicit side-normal square root -/
 
 /-- The side-normal marker value is nonzero over `ℚ`. -/
@@ -261,6 +424,47 @@ theorem nearySquareRoot_rank (β : Nat) : (nearySquareRoot β).rank = 2 := by
 theorem nearySquareRoot_det (β : Nat) : (nearySquareRoot β).det = 0 := by
   rw [Matrix.det_fin_three]
   simp [nearySquareRoot]
+
+/-- Every role word prefixed by the b-rule has nonzero native coefficient. The statement uses
+the complete arbitrary-word terminal converse, including malformed role orders. -/
+theorem nearySide_ruleB_cons_ne_zero (β : Nat) (body : List TagLetter)
+    (β_pos : 0 < β) (word : List NearyTile) :
+    sideCoefficient ℚ β body (.rule .b :: word) ≠ 0 := by
+  intro prefixed_zero
+  have prefixed_terminal :=
+    (sideCoefficient_eq_zero_iff_terminal_match_rat β body (.rule .b :: word)).mp
+      prefixed_zero
+  obtain ⟨tail, starts⟩ :=
+    terminalMatch_starts_rule_c β body β_pos (.rule .b :: word) prefixed_terminal
+  have heads_equal := (List.cons.inj starts).1
+  cases heads_equal
+
+/-- Boundary saturation contradicts any proposed same-zero compiler as soon as one native zero
+word and its physical b-rule prefix both lie in the square-free domain. -/
+theorem no_ruleB_squareRoot_sameZero_on_boundary_pair
+    {α : Type*} (β : Nat) (body : List TagLetter) (β_pos : 0 < β)
+    (generators : α → Square (Fin 3) ℚ) (decode : Option α → NearyTile)
+    (decode_squareRoot : decode none = .rule .b) (word : List (Option α))
+    (word_squareFree : IsSquareFree word)
+    (prefixed_squareFree : IsSquareFree (none :: word))
+    (native_zero : sideCoefficient ℚ β body (word.map decode) = 0)
+    (sameZero : ∀ physical, IsSquareFree physical →
+      (coefficient (nearySquareRoot β) generators
+          (normalizedNearyColumn β) nearySideRow physical = 0 ↔
+        sideCoefficient ℚ β body (physical.map decode) = 0)) :
+    False := by
+  have pairing_ne : nearySideRow ⬝ᵥ normalizedNearyColumn β ≠ 0 := by
+    rw [normalizedNearyColumn_eq]
+    norm_num [nearySideRow, Matrix.dotProduct, Fin.sum_univ_succ]
+  have physical_zero := (sameZero word word_squareFree).mpr native_zero
+  have prefixed_zero :=
+    (squareRoot_coefficient_cons_zero_iff
+      (nearySquareRoot β) generators (normalizedNearyColumn β) nearySideRow
+      (nearySquareRoot_sq β) pairing_ne word).mpr physical_zero
+  have impossible_native :=
+    (sameZero (none :: word) prefixed_squareFree).mp prefixed_zero
+  simp only [List.map_cons, decode_squareRoot] at impossible_native
+  exact nearySide_ruleB_cons_ne_zero β body β_pos _ impossible_native
 
 /-! ## Exact-series rigidity on the square-free subshift -/
 

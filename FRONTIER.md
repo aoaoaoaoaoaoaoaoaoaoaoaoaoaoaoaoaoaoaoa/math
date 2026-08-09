@@ -539,8 +539,8 @@ instance-fitted and regular: a source-uniform finite-target version remains excl
 `G3-O04`. The paired route's live obstruction is now uniformity across bodies, not the state
 dimension of this fixed branching language.
 
-[`G3-M02`](SALVAGE.md#g3-m02-square-root-punctuation-fracture) opens a distinct direct-mortality
-lane. The source-uniform rational rank-two matrix `S` satisfies
+[`G3-M02`](SALVAGE.md#g3-m02-square-root-punctuation-fracture) supplied a complete direct-mortality
+grammar. The source-uniform rational rank-two matrix `S` satisfies
 
 ```text
 S²=(γ/(λγ))λ.
@@ -549,10 +549,15 @@ S²=(γ/(λγ))λ.
 Lean proves a stronger source-independent fracture: whenever `S²=uvᵀ`, the family
 `{X₁,X₂,X₃,S}` is mortal exactly when `vᵀH_zu=0` for some word `z` avoiding `SS`. This is a
 complete free-monoid theorem; every malformed isolated `S` remains in the residual language.
-Assigning `S` to `R_b` is compatible with every legal width-at-least-three history. A nine-context
-certificate also proves that exact coefficient preservation on the `SS`-free subshift, even up
-to nonzero letterwise scaling, would force the `R_b` matrix to be invertible. The live obligation
-is therefore genuinely zero-set nonlinear.
+The remaining zero-set-only completion is now closed by
+[`G3-O10`](SALVAGE.md#g3-o10-square-root-boundary-saturation). Every nondegenerate root of a
+rank-one separator scales both boundary vectors by the same nonzero scalar, so prefixing or
+suffixing one isolated `S` preserves scalar vanishing. The arbitrary-word Neary converse instead
+forces every terminal match to begin with `R_c`; an `R_b` prefix is never a native zero. A legal
+terminal history and its `S`-prefix are both `SS`-free. Hence direct identification `S↦R_b`
+contradicts same-zero reflection on the very fracture domain required by the mortality theorem.
+Changing the square root, similarity, letter weights, or nonzero values cannot evade this
+dimension-free boundary invariant.
 
 [`G3-M01`](SALVAGE.md#g3-m01-free-group-discrepancy-engine) remains a genuinely different
 deletion mechanism, but its rank interpretation is now settled. For an `m`-appendant cyclic tag
@@ -576,8 +581,8 @@ controls `H_a`, column `γ`, and row `λ` over a field, adjoining `γλ` gives m
 `λH_yγ` vanishes. A zero product without the separator is already a scalar-zero witness; after
 fracturing a product with separators, every internal scalar or zero exterior factor supplies one.
 Thus a rational three-state same-zero recognizer immediately yields four rational mortality
-generators, and generator-wise denominator clearing yields integral generators. All remaining
-work lies either in the uniform paired recognizer or in its `SS`-free square-root variant.
+generators, and generator-wise denominator clearing yields integral generators. The surviving
+direct route is the uniform paired recognizer; the `SS`-free square-root variant is closed.
 
 The fixed-first property also remains useless: `R_c` recurs whenever the `c` rule fires.
 Absorbing its initial occurrence does not remove its interior role.
@@ -615,7 +620,6 @@ three symbol types but many transition rules does not meet this count.
 | Lane | Available leverage | Decisive obstruction or obligation |
 | --- | --- | --- |
 | Shift-equivariant zero incidence | Same-zero dimension three is point-line incidence in `P²`; [`G3-C02`](SALVAGE.md#g3-c02-fixed-bcbc-singular-recognizer) compiles the fixed branching test, while [`G3-O04`](SALVAGE.md#g3-o04-expanding-affine-history-no-go) kills its source-uniform finite-target affine extension and [`G3-O05`](SALVAGE.md#g3-o05-cancellative-projective-state-tax) kills inverse-saturated dynamics | Build one computable singular formula over a mixed source ensemble, with open or denominator-generating history; fixed-instance fitting, bare support tables, and group-completable cross-multiplication are closed |
-| Square-root punctuation | A uniform rank-two `S` squares to the exact separator and [`G3-M02`](SALVAGE.md#g3-m02-square-root-punctuation-fracture) discharges every mortality grammar obligation | Preserve the old zero set on every `SS`-free word while changing nonzero values word-dependently; exact series, similarity, gauges, letter scaling, and additive rank-one fusion are closed |
 | Positive free-cancellation discrepancy | Free cancellation performs queue-head deletion; accepting loops are cyclic, and three positive letters surject onto `F₂` | Couple the seven-state forbidden-triple normal form to Carvalho's program-dependent virtual endomorphism; [`G3-O09`](SALVAGE.md#g3-o09-quotient-blind-positive-boundary-collapse) kills quotient-blind all-loop-complete boundaries, so malformed positive spellings need a permanent one-way trap |
 | State-dependent and sliding-block codes | Adjacent ternary symbols can carry four semantic roles without a stationary factorization | [`G3-O08`](SALVAGE.md#g3-o08-erasing-and-stationary-closed-block-obstruction) kills fixed spellings even with erasure and a common closed residual; a survivor must change spelling with state or keep its residue open, while rejecting every invalid overlap on the full free monoid |
 | Solvability-only target recoding | Longer noncommutative target atoms may discard additive bit-count preservation entirely | Cosmetic recoding and fixed residual shifts remain inside `G3-O08`; a survivor needs a global normal form which proves both witness transport and absence of new boundary matches |
@@ -624,33 +628,31 @@ three symbol types but many transition rules does not meet this count.
 | Direct projective or affine dynamics | Three `3 × 3` controls can encode switched dynamics on two homogeneous coordinates | Unguarded matrix choice demands an irreversible checksum for every illegal branch |
 | Semigroup ideals and reset structure | Rees or Brandt incidence can make incompatible phases fall into a zero ideal | Natural representations usually spend dimension on control states; the full arbitrary-product grammar remains mandatory |
 
-The first, second, seventh, eighth, and ninth lanes principally target direct `M₃(4)`. The fourth,
-fifth, and sixth can produce a genuine `GPCP(3)` theorem. The free-group lane is hybrid:
+The first, sixth, seventh, and eighth lanes principally target direct `M₃(4)`. The third,
+fourth, and fifth can produce a genuine `GPCP(3)` theorem. The free-group lane is hybrid:
 it supplies the missing deletion semantics but not yet the bounded positive source.
 
 #### Raceable leaves
 
-After the four-front salvo, the net tree has seven independent mature leaves:
+After the square-root audit, the net tree has six independent mature leaves:
 
 1. **Source-uniform paired constructor.** Give one computable singular three-state same-zero
    family for every checked `(β,body)` and every control word.
 2. **Positive-common-shift lower bound.** Derive inverse saturation or another broad contradiction
    from the complete positive shift equations, killing the paired route rather than another
    ansatz.
-3. **Square-root `SS`-free compiler.** Keep the checked punctuation root and solve, or broadly
-   refute, the zero-set-only representation problem on the full square-free subshift.
-4. **Stateful or open-residue Neary serialization.** Use genuinely changing spellings,
+3. **Stateful or open-residue Neary serialization.** Use genuinely changing spellings,
    nonfactorial overlap, or a residual which does not close at deletion-width boundaries.
-5. **Global solvability-only GPCP recoding.** Abandon local role preservation and prove a new
+4. **Global solvability-only GPCP recoding.** Abandon local role preservation and prove a new
    three-pair normal form with both witness transport and no-new-solution directions.
-6. **Native three-schema source.** Bypass both Neary's four roles and Nicolas's recurrent `+2`
+5. **Native three-schema source.** Bypass both Neary's four roles and Nicolas's recurrent `+2`
    copy alphabet with a universal certificate having exactly three active schemas.
-7. **Spelling-sensitive positive cancellation.** Couple the three-letter free-group normal form
+6. **Spelling-sensitive positive cancellation.** Couple the three-letter free-group normal form
    to Carvalho's virtual endomorphism, trapping every malformed positive spelling before group
    quotient.
 
 Generic projective, stochastic, Rees/Brandt, and singular-reset ideas are implementation
-vocabularies inside leaves 1 or 3 until they supply a distinct source interface and complete
+vocabularies inside leaf 1 until they supply a distinct source interface and complete
 all-word theorem. Another fixed-body fit, fixed macro, or punctuation placement is not a leaf.
 The joint derivation and evidence boundaries are recorded in
 [`m34-mirv-salvo-synthesis-2026-08-08.md`](audits/m34-mirv-salvo-synthesis-2026-08-08.md).
@@ -697,20 +699,6 @@ which irreversibly destroys illegal inverse histories. A further no-go should pr
 shift equivariance forces the inverse saturation of `G3-O05`; that would kill the paired route
 rather than another ansatz. Do not spend another attack on separator placement, fixed anchors, or
 control singularity after recognition; `MM-C01` closes them unconditionally.
-
-The square-root lane races that full paired compiler on a strictly different domain. Keep the
-displayed source-uniform `S`, map its isolated occurrence to `R_b`, and construct only the other
-three matrices so that
-
-```text
-λH_z(γ/μ)=0  ↔  λA_{π(z)}γ=0
-```
-
-for every `SS`-free word `z`. The fracture theorem then supplies both directions of mortality
-with no further grammar. The candidate may alter every nonzero coefficient; indeed the checked
-inserted Hankel section proves it must. Cross-pollinate the transient guard from `G3-C02`, but do
-not fit body-specific targets or assume an intended phase pattern. A false zero at any malformed
-isolated `S` kills the reduction.
 
 The free-group lane no longer needs another Stallings computation. Its next experiment is a
 positive spelling machine: couple the regular forbidden-triple suffix state for
