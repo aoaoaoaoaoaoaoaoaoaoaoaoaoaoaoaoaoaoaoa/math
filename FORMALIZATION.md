@@ -503,6 +503,15 @@ inverse-saturated projective descent, fixed-locus lemma, and the commutant class
 [`m34-cancellative-projective-no-go-2026-08-06.md`](audits/m34-cancellative-projective-no-go-2026-08-06.md).
 No claim about general positive-only projective dynamics is made.
 
+[`G3-O11`](SALVAGE.md#g3-o11-positive-shifts-do-not-force-saturation) closes that omitted
+implication by counterexample. Lean checks three explicit integral generators on the whole free
+monoid: their scalar zero language is `{t}`, every generator has rank two, selected reachable and
+observable context matrices have determinants `1` and `−1`, and no matrix product vanishes. It
+also checks the decisive collision `H_bγ=H_bH_tγ` with `γ≠H_tγ`, hence failure of backward
+cancellativity. The injective semidirect-product labeling into a group containing `F₂×F₂`, the
+infinite Fibonacci orbit, and the no-nilpotent-product strengthening remain audited paper
+arguments; the formal counterexample does not depend on them.
+
 The semantic core of [`G3-O04`](SALVAGE.md#g3-o04-expanding-affine-history-no-go) is formalized:
 the reset-affine orbit, finite reverse box, exact caged DFA, regularity, and universal
 noncomputability contradiction are kernel-checked. The remaining mechanization seam is uniform
@@ -918,6 +927,11 @@ with a complete arbitrary-word converse.
 | Every finite paired support table has a rational realization of rank at most three | `CancellativeRoleFraction.exists_supportMatrix_rank_le_three` |
 | Cancellative role fractions contain the displayed independent left and right actions | `CancellativeRoleFraction.leftSeed_eq`, `CancellativeRoleFraction.leftConjugate_eq`, `CancellativeRoleFraction.rightSeed_eq`, `CancellativeRoleFraction.rightConjugate_eq` |
 | Projectively commuting invertible rational `3 × 3` matrices commute linearly | `CancellativeProjectiveRigidity.scalar_commutator_eq_one` |
+| The singular positive countermodel has complete integral zero language `{t}` | `PositiveShiftCountermodel.coefficient_int_eq_zero_iff` |
+| Every positive countermodel generator has rank exactly two | `PositiveShiftCountermodel.generator_rank` |
+| Three reachable columns and three observable rows have nonzero determinant | `PositiveShiftCountermodel.reachableMatrix_det`, `PositiveShiftCountermodel.observableMatrix_det` |
+| No positive countermodel matrix word is zero | `PositiveShiftCountermodel.wordProduct_int_ne_zero` |
+| The positive `b`-shift collapses distinct reachable states and defeats backward cancellation | `PositiveShiftCountermodel.column_b_eq_bt`, `PositiveShiftCountermodel.column_nil_ne_t`, `PositiveShiftCountermodel.not_backward_cancellative` |
 | Three positive letters evaluate surjectively onto the binary free group | `PositiveFreeCancellation.triangleEvaluate_surjective` |
 | Quotient-blind boundaries accepting an element and its square admit a nonempty identity witness | `PositiveFreeCancellation.exists_nonempty_identity_witness` |
 | Every exact diagonal paired-series bridge needs six states | `paired_exact_diagonal_twoChannel_state_lower_bound` |

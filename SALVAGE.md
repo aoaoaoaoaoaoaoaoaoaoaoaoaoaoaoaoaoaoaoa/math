@@ -127,6 +127,7 @@ file owns the mathematical stock.
 | [`G3-O03`](#g3-o03-history-sensitive-minimal-body-fracture) | obstruction | minimal bodies admit an exact history-sensitive three-state same-zero compiler | formalized | graduated |
 | [`G3-O04`](#g3-o04-expanding-affine-history-no-go) | obstruction | finite-mode expanding one-coordinate history has decidable target reachability | audited | graduated |
 | [`G3-O05`](#g3-o05-cancellative-projective-state-tax) | obstruction | inverse-saturated two-side projective dynamics need four states | audited | graduated |
+| [`G3-O11`](#g3-o11-positive-shifts-do-not-force-saturation) | obstruction | positive common shifts need not be backward cancellative | formalized | graduated |
 | [`G3-O06`](#g3-o06-periodic-ray-completion-and-branching-fracture) | compiler and obstruction | `bcbb` has an exact three-state periodic compiler, while `bcbc` defeats every single affine positional section | formalized | graduated |
 | [`G3-O07`](#g3-o07-near-fork-carry-collision) | obstruction | a terminal and nonterminal `bcbc` near-fork collide under the entire one-coordinate phase-line carry family | formalized | graduated |
 | [`G3-C02`](#g3-c02-fixed-bcbc-singular-recognizer) | fixed-instance compiler | a transient guard over one affine carry recognizes the complete `bcbc` language | audited | graduated |
@@ -4398,8 +4399,9 @@ orbit whose inverse continuations are absent, whose target law fails there, or w
 maps destroy the group orbit. It does not prove general paired zero-language dimension four.
 
 **Use:** cull projective cross-multiplication of independently cancellative upper and lower word
-sides. Search must now preserve genuinely one-way semigroup behavior, or derive inverse
-saturation from the positive common-shift equations and thereby close the entire paired route.
+sides. Search must preserve genuinely one-way semigroup behavior, or derive backward residual
+cancellativity and inverse-orbit cofinality from the paired grammar itself. `G3-O11` proves that
+positive common-shift equations alone do not supply them.
 
 **Formalized core:** [`CancellativeProjectiveNoGo.lean`](MatrixMortality/CancellativeProjectiveNoGo.lean)
 checks the phase-aware decoder split, positive free-group embedding, terminal residual equation,
@@ -4407,6 +4409,50 @@ global conic factorization, every finite support-rank bound, role-fraction ident
 rational scalar-commutator law. The folded-graph, projective descent, and commutant classification
 remain audited in
 [`m34-cancellative-projective-no-go-2026-08-06.md`](audits/m34-cancellative-projective-no-go-2026-08-06.md).
+
+### G3-O11: Positive shifts do not force saturation
+
+**Kind:** obstruction
+
+**Evidence:** formalized
+
+**Disposition:** graduated
+
+There are explicit integral rank-two matrices `H_b,H_c,H_t∈M₃(ℤ)`, a column `γ`, and a row
+`λ` such that
+
+```text
+λH_wγ=0 ↔ w=t
+```
+
+on the complete free monoid. Three selected reachable columns form the identity, and three
+selected observable rows have determinant `−1`. No matrix word is zero. Nevertheless
+
+```text
+H_bγ=H_bH_tγ,        γ≠H_tγ.
+```
+
+Thus the positive `b`-shift collapses two distinct zero residuals and fails backward
+cancellativity despite full reachability, observability, and arbitrary-word correctness.
+
+The positive source can moreover be embedded in
+`(⊕_{i∈ℤ}F(p_i,q_i))⋊ℤ`, which contains `F₂×F₂`: blocks between successive `t` letters occupy
+distinct free factors. This audited strengthening shows that neither a cancellative semantic
+monoid nor the forbidden subgroup in its group completion repairs the singular positive action.
+
+**Scope:** Lean checks the orbit recurrence, exact zero language, rank-two generators, full finite
+contexts, nonzero products, collision, and failed backward-cancellation law. The semidirect-product
+normal form, infinite Fibonacci orbit, and absence of nilpotent products are audited deductions.
+The singleton language is not the paired Neary language.
+
+**Use:** never infer the saturation hypothesis of `G3-O05` from positive shift equivariance,
+global minimality, or group-completion structure alone. A surviving paired lower bound must prove
+backward residual cancellativity and inverse-orbit cofinality on the terminal-relevant residual
+system itself.
+
+**Artifact:** [`PositiveShiftCountermodel.lean`](MatrixMortality/PositiveShiftCountermodel.lean)
+and
+[`m34-positive-shift-countermodel-2026-08-08.md`](audits/m34-positive-shift-countermodel-2026-08-08.md).
 
 ### G3-O06: Periodic-ray completion and branching fracture
 

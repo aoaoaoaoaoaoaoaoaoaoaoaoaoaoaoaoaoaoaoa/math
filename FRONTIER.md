@@ -510,6 +510,14 @@ recurrence needs at least four vector dimensions. The surviving projective route
 be intrinsically one-way: inverse states or their target law must fail, or a singular map must
 destroy the cancellative orbit.
 
+[`G3-O11`](SALVAGE.md#g3-o11-positive-shifts-do-not-force-saturation) proves that this escape is
+real, not a missing lemma. Three explicit rank-two integral matrices have complete zero language
+`{t}`, full reachable and observable context matrices, no zero product, and an injective positive
+semantic labeling into a group containing `F₂×F₂`. Yet the `b`-shift identifies the columns of
+`ε` and `t`. Positive shift equations therefore do not imply inverse saturation. The lower-bound
+leaf now requires two paired-specific theorems: backward cancellativity of terminal residuals and
+cofinal positive representation of the inverse orbit.
+
 [`G3-O06`](SALVAGE.md#g3-o06-periodic-ray-completion-and-branching-fracture) closes the concrete
 `bcbb` lane completely. Its null histories are exactly `(bbb,cbb)^k`, its terminal language is
 one periodic ray, and a singular three-state affine decoder recognizes it on every control word.
@@ -638,9 +646,10 @@ After the square-root audit, the net tree has six independent mature leaves:
 
 1. **Source-uniform paired constructor.** Give one computable singular three-state same-zero
    family for every checked `(β,body)` and every control word.
-2. **Positive-common-shift lower bound.** Derive inverse saturation or another broad contradiction
-   from the complete positive shift equations, killing the paired route rather than another
-   ansatz.
+2. **Paired residual saturation.** Prove backward residual cancellativity and inverse-orbit
+   cofinality for the checked paired language, or find another broad shift-equivariant
+   contradiction. Positive common shifts, minimality, and a cancellative semantic completion no
+   longer suffice.
 3. **Stateful or open-residue Neary serialization.** Use genuinely changing spellings,
    nonfactorial overlap, or a residual which does not close at deletion-width boundaries.
 4. **Global solvability-only GPCP recoding.** Abandon local role preservation and prove a new
@@ -695,9 +704,10 @@ longer test the live obstruction. Static zero-pattern fitting is now vacuous: th
 already fits every finite prefix-suffix table in three coordinates. Synthesis and lower-bound
 experiments must impose the same `H_b,H_c,H_t` on every left and right shift. The strongest
 candidate escapes are a non-group-completable denominator recurrence and a singular ideal grammar
-which irreversibly destroys illegal inverse histories. A further no-go should prove that positive
-shift equivariance forces the inverse saturation of `G3-O05`; that would kill the paired route
-rather than another ansatz. Do not spend another attack on separator placement, fixed anchors, or
+which irreversibly destroys illegal inverse histories. A further no-go must establish backward
+residual cancellativity and inverse-orbit cofinality from the paired terminal grammar itself;
+`G3-O11` refutes every derivation using only positive shift equivariance, minimality, or the
+ambient group completion. Do not spend another attack on separator placement, fixed anchors, or
 control singularity after recognition; `MM-C01` closes them unconditionally.
 
 The free-group lane no longer needs another Stallings computation. Its next experiment is a
