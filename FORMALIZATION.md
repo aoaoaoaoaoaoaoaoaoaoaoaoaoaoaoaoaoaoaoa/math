@@ -501,8 +501,8 @@ reverse compiler. Its intrinsic first scalar is the loop self-bridge and compati
 the second scalar to one; mortality is exactly immediate loop nilpotence or one generic PI₂
 instance. The remaining edge-rank patterns and the effective cyclic-orbit discharge of the
 cross-edge case are audited as `R32-S32`, using the locally recorded Evertse–Győry unit-equation
-theorem. The full audited boundary is `Mort₃^(2,2) ≡ₘ GPI₂`, not a claim that arbitrary PI₂
-has been genericized. See
+theorem. The full audited rank-(2,2) boundary is `Mort₃^(2,2) ≡ₘ GPI₂`; `R32-S35` separately
+reduces arbitrary PI₂ to at most two GPI₂ queries. See
 [`audits/m32-rank-two-punctuation-2026-08-08.md`](audits/m32-rank-two-punctuation-2026-08-08.md).
 
 The proposed endpoint-only angular compactness has a checked counterexample. For the lawful

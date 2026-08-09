@@ -1188,10 +1188,8 @@ all-legal block inequality for the carried generalized continuant. See
 
 | Lane | Required move | Present obstruction |
 | --- | --- | --- |
-| Doubly order-broken continuant | Amortize exact-order mass across every bridge which breaks its order on both chronological sides | The Casoratian removes the final branch and persistent orders have forced orientation, but earlier reverse content can still finance later cancellation |
-| Recurrence-sensitive pressure | Combine the exact continuant recurrence, full cyclotomic multiplicity, and the fixed-kernel pullback into a global carry bound on the doubly broken residue | Direction-free product-formula pressure fails because each wait gauge pays `p^(2|b−a|)` |
-| Aperiodic angular counter | Construct one exact fixed-coefficient reset orbit with unbounded denominators while the p-radial component remains on the reset ray | Every useful auxiliary prime needs a later exact-order synchronization and simultaneous endpoint divisibility; finite rational atlases are eventually periodic |
-| Repeated-factor extraction | Force a sufficiently heavy repeated factor in every bounded-complexity wait prefix and apply `R32-S29` | Arbitrary repeated factors are controlled once found; no theorem yet extracts one from a moving denominator schedule |
+| Split-guard decision | Amortize exact-order mass across the doubly order-broken continuant, using recurrence-sensitive carry pressure or forced repeated factors | The Casoratian removes the final branch and persistent orders have forced orientation, but earlier reverse content can still finance later cancellation |
+| Split-guard counter | Construct one exact fixed-coefficient reset orbit with unbounded denominators and a synchronized moving-prime genealogy | Every useful auxiliary prime needs a later exact-order synchronization and simultaneous endpoint divisibility; finite rational atlases are eventually periodic |
 | Irreducible cubic reflection orbit | Decide reachability between isolated singular lines under the non-pure order-three recurrence of projective involutions | Singular timing is finite; independently selected unit indices remain unbounded |
 | Generic projective incidence | Decide or prove undecidable the normalized `α=β=1` GPI₂ core | Arbitrary PI₂ already reduces by a bounded positive-prefix disjunction; a generic affine no-instance defeats every finite congruence sieve |
 

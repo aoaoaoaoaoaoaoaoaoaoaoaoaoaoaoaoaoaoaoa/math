@@ -130,6 +130,7 @@ level: unrestricted PI₂ now reduces to at most two GPI₂ queries. See
 ```text
 MASTER VERDICT: M₃(2) remains open
 REMOVED: the two-vertex graph as an independent hard core; all edge-rank patterns except one intrinsic generic incidence instance
-REMAINS: generic PI₂ itself, and the opposite genericization seam from arbitrary PI₂; the rank-(3,2) guard and cubic bridges
+REMAINS AT THIS RATCHET: generic PI₂ itself, and the opposite genericization seam from arbitrary PI₂; the rank-(3,2) guard and cubic bridges
+SUPERSEDED: `R32-S35` later removes the opposite genericization seam at bounded truth-table level
 DISTANCE: rank-(2,2) is now one known projective enemy, not a graph-constrained family of new enemies
 ```
