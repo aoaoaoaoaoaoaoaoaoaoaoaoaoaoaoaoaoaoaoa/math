@@ -519,6 +519,14 @@ effectively finite, and divisibility-chain terminal schedules are decidable. The
 global induction introduces no new state or recurrence API. See
 [`audits/m32-casoratian-order-allocation-2026-08-09.md`](audits/m32-casoratian-order-allocation-2026-08-09.md).
 
+The moving-support allocation is also exact. Outside `pDL`, an arbitrary composite divisor
+enters forward content if and only if it divides both the current endpoint numerator and the
+current branch boundary `pᵃ−1`. This theorem retains every prime-power multiplicity and gives the
+Casoratian's emergent-prime consequence an exact activation rule. The report's reciprocal
+coordinates and Wronskian were culled as duplicate representations; its no-Mahler theorem is
+already subsumed by the checked rational-rail degree obstruction. See `R32-S34` and
+[`audits/m32-moving-prime-ledger-2026-08-09.md`](audits/m32-moving-prime-ledger-2026-08-09.md).
+
 The widened finite-atlas counter route is also closed without adding Lean code. For finitely
 many rational tail charts and finitely many fixed additive wait shifts, polynomial divisibility,
 degree at infinity, and leading/constant coefficient comparison force every control-cycle shift
@@ -673,7 +681,7 @@ with a complete arbitrary-word converse.
 | `ReturnGuardQuotientCompleteness.lean` | zero-wait terminal kernel, cancellation-reachability completeness, and synchronized-product no-amplification |
 | `ReturnGuardDriftCertificate.lean` | exact drift-divisor certificate classification, cyclic subgroup criterion, and executable finite test |
 | `ReturnGuardCumulative.lean` | chronological product algebra, pre-final Casoratian localization, content-free cumulative endpoint execution, exact second-order recurrence, reset-ancestry pullback, primitive endpoint projectivization, odd-resultant immortality, and derived primitive content |
-| `ReturnGuardContinued.lean` | fixed-cusp complete quotients, primitive prequotient transport, recurrent-boundary reverse persistence, record-ascent content budget, and order-three decoder |
+| `ReturnGuardContinued.lean` | exact moving-divisor allocation, fixed-cusp complete quotients, primitive prequotient transport, recurrent-boundary reverse persistence, record-ascent content budget, and order-three decoder |
 | `ReturnGuardBoundary.lean` | depth-two universal-boundary reset ball, valuation-wall immortality, and primewise reset-resultant necessity |
 | `ReturnGuardSmith.lean` | signed content split, positive-cone primitive-height gain, nonmaximal contraction, maximal-step isolation, and diagonalized gauged cocycle |
 | `ReturnGuardPeriodicity.lean` | exact denominator recurrence and explicit record-ascent, wait, content, and numerator ceilings |
@@ -803,6 +811,7 @@ with a complete arbitrary-word converse.
 | Every primitive endpoint reduction projectivizes to the corresponding rational guard step | `ReturnGuard.PrimitiveEndpointReduction.guardedStep_endpointState` |
 | Primitive content is exactly the gcd of the drift source and the unreduced quotient; reverse content satisfies a wait-free terminal divisor law | `ReturnGuard.PrimitiveEndpointReduction.content_natAbs_eq_gcd_driftSource_prequotient`, `ReturnGuard.PrimitiveEndpointReduction.resetDefect_eq_complement_mul`, `ReturnGuard.PrimitiveEndpointReduction.complement_dvd_terminalBoundary` |
 | A reverse-content divisor recurring in the next boundary outside fixed scale-reset support remains wholly reverse | `ReturnGuard.PrimitiveEndpointReduction.recurrentBoundaryDivisor_persists` |
+| Outside fixed `pDL` support, a divisor enters forward content exactly at simultaneous endpoint and branch-boundary divisibility | `ReturnGuard.PrimitiveEndpointReduction.divisor_dvd_content_iff` |
 | Every positive wait has an exact terminal predecessor, so backward terminal search has no wait bound | `ReturnGuard.terminalPredecessorPair_step` |
 | Cumulative endpoints form a generalized continued fraction with one fixed forbidden cusp | `ReturnGuard.cumulativeCompleteQuotient_recurrence`, `ReturnGuard.cumulativeCompleteQuotient_sub_forbiddenCusp`, `ReturnGuard.cumulativeWaitForm_hasValue` |
 | At critical depth two, every nondecreasing pair of waits pays an exact two-step content budget | `ReturnGuard.PrimitiveEndpointReduction.twoStep_elimination`, `ReturnGuard.PrimitiveEndpointReduction.twoStep_contentBudget` |

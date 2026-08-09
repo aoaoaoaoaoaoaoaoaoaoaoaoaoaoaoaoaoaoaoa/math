@@ -79,6 +79,77 @@ theorem PrimitiveEndpointReduction.content_natAbs_eq_gcd_driftSource_prequotient
       exact ⟨common_dvd_prequotient, common_dvd_rawNumerator⟩
     exact Int.natAbs_dvd_natAbs.mpr common_dvd_content
 
+/-- Away from the fixed base, drift, and scale support, a divisor enters forward content
+exactly when it occurs simultaneously in the current endpoint numerator and branch boundary.
+The equivalence retains arbitrary prime-power multiplicity. -/
+theorem PrimitiveEndpointReduction.divisor_dvd_content_iff
+    {prime depth : Nat} {centerNumerator driftNumerator scale : ℤ}
+    {wait : Nat} {source target : ℤ × ℤ} {content divisor : ℤ}
+    (reduction :
+      PrimitiveEndpointReduction prime depth centerNumerator driftNumerator scale
+        wait source target content)
+    (divisor_coprime :
+      IsCoprime divisor ((prime : ℤ) * driftNumerator * scale)) :
+    divisor ∣ content ↔
+      divisor ∣ source.1 ∧ divisor ∣ (prime : ℤ) ^ wait - 1 := by
+  have coprime_prime : IsCoprime divisor (prime : ℤ) :=
+    IsCoprime.of_isCoprime_of_dvd_right divisor_coprime
+      ⟨driftNumerator * scale, by ring⟩
+  have coprime_drift : IsCoprime divisor driftNumerator :=
+    IsCoprime.of_isCoprime_of_dvd_right divisor_coprime
+      ⟨(prime : ℤ) * scale, by ring⟩
+  have coprime_scale : IsCoprime divisor scale :=
+    IsCoprime.of_isCoprime_of_dvd_right divisor_coprime
+      ⟨(prime : ℤ) * driftNumerator, by ring⟩
+  constructor
+  · intro divisor_dvd_content
+    have content_dvd_driftSource : content ∣ driftNumerator * source.1 := by
+      refine ⟨target.1 - (centerNumerator - scale) * target.2, ?_⟩
+      have numerator := reduction.step.numerator
+      simp only [Prod.fst, Prod.snd] at numerator
+      calc
+        driftNumerator * source.1 =
+            content * target.1 -
+              (centerNumerator - scale) * (content * target.2) := by
+          linarith
+        _ = content *
+            (target.1 - (centerNumerator - scale) * target.2) := by ring
+    have divisor_dvd_source : divisor ∣ source.1 :=
+      coprime_drift.dvd_of_dvd_mul_left
+        (divisor_dvd_content.trans content_dvd_driftSource)
+    have content_dvd_support :
+        content ∣ driftNumerator * scale * ((prime : ℤ) ^ wait - 1) := by
+      apply Int.natAbs_dvd_natAbs.mp
+      rw [reduction.content_natAbs_eq_gcd_support]
+      exact Nat.gcd_dvd_right _ _
+    have divisor_dvd_support :
+        divisor ∣ driftNumerator * scale * ((prime : ℤ) ^ wait - 1) :=
+      divisor_dvd_content.trans content_dvd_support
+    have coprime_fixed :
+        IsCoprime divisor (driftNumerator * scale) :=
+      coprime_drift.mul_right coprime_scale
+    exact ⟨divisor_dvd_source,
+      coprime_fixed.dvd_of_dvd_mul_left divisor_dvd_support⟩
+  · rintro ⟨divisor_dvd_source, divisor_dvd_boundary⟩
+    have divisor_dvd_prequotient : divisor ∣ content * target.2 := by
+      apply
+        (coprime_prime.pow_right (n := depth * wait)).dvd_of_dvd_mul_left
+      rw [reduction.step.denominator]
+      exact dvd_sub divisor_dvd_source
+        ((divisor_dvd_boundary.mul_left scale).mul_right source.2)
+    have divisor_dvd_rawNumerator : divisor ∣ content * target.1 := by
+      have numerator := reduction.step.numerator
+      simp only [Prod.fst, Prod.snd] at numerator
+      rw [numerator]
+      exact dvd_add (divisor_dvd_source.mul_left driftNumerator)
+        (divisor_dvd_prequotient.mul_left (centerNumerator - scale))
+    apply
+      (divisor_dvd_commonFactor_iff
+        (left := content * target.2) (right := content * target.1)
+        (common := content) (reducedLeft := target.2)
+        (reducedRight := target.1) rfl rfl reduction.target_coprime.symm).mpr
+    exact ⟨divisor_dvd_prequotient, divisor_dvd_rawNumerator⟩
+
 /-- Exact quotient before primitive content is removed. -/
 def endpointPrequotient (content : ℤ) (target : ℤ × ℤ) : ℤ :=
   content * target.2

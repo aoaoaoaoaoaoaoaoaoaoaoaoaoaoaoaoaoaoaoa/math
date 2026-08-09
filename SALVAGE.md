@@ -120,6 +120,7 @@ file owns the mathematical stock.
 | [`R32-S31`](#r32-s31-smith-decoder-and-maximal-cancellation-throat) | structure theorem and obstruction | a positive unimodular content decoder contracts nonmaximal branches, while one fixed basis makes every wait gauge a pure base-prime dilation | formalized | active |
 | [`R32-S32`](#r32-s32-rank-two-punctuation-and-graph-removal) | structure theorem and reduction | compatible one-loop rank-two edge squares are intrinsic generic projective incidence; every other edge-rank pattern is decidable | audited | graduated |
 | [`R32-S33`](#r32-s33-terminal-casoratian-and-two-sided-order-allocation) | structure theorem and decidable stratum | terminal normalization comes only from earlier branches, and exact orders persisting to either boundary have forced content orientation | formalized | active |
+| [`R32-S34`](#r32-s34-exact-moving-prime-ledger) | structure theorem | outside fixed support, a divisor enters forward content exactly at simultaneous endpoint and branch-boundary divisibility | formalized | active |
 | [`R32-D03`](#r32-d03-bounded-denominator-periodicity) | decidable stratum | every infinite legal rational guard orbit with bounded reduced denominators is eventually periodic | formalized | graduated |
 | [`M4-C01`](#m4-c01-two-state-pushout-compiler) | compiler | binary deterministic two-state scalar control compiles to three `4 × 4` matrices | formalized | graduated |
 | [`M4-O01`](#m4-o01-exact-toggle-fusion-leaves-an-immortal-core) | obstruction | exact local toggle fusion preserves a nonzero common anchor | formalized | graduated |
@@ -4194,6 +4195,42 @@ global amortization or counter-orbit follows.
 **Use:** replace the undifferentiated `gcd(Xₙ,cₙ)` obstruction by the doubly order-broken
 core. A decision proof must amortize bridges which destroy exact order on both sides; an
 undecidability construction must realize such recycled support along one exact reset orbit.
+
+### R32-S34: Exact moving-prime ledger
+
+**Kind:** structure theorem
+**Evidence:** formalized
+**Disposition:** active
+
+For a primitive endpoint reduction with source numerator `r`, forward content `h`, wait `a`,
+and any divisor `d` coprime to `pDL`, Lean proves
+
+```text
+d∣h ⇔ d∣r ∧ d∣(pᵃ−1).
+```
+
+This is prime-power exact and applies to composite divisors. Equivalently, for every prime
+`ℓ∤pDL`, forward content receives exactly the minimum of the multiplicities in `r` and
+`pᵃ−1`; the excess remains reverse. There is no hidden auxiliary-prime register outside the
+current endpoint numerator and branch boundary.
+
+Combined with `R32-S33`, an angularly emergent prime is inert when created. It can participate
+in later primitive cancellation only after a wait divisible by `ord_ℓ(p)` and simultaneous
+reappearance in the endpoint numerator. An aperiodic counter-orbit therefore needs an explicit
+infinite genealogy of synchronized births, not merely continual additive prime creation.
+
+**Scope:** this is a local allocation theorem. It supplies neither a global lower bound on
+content nor an infinite orbit. The reciprocal Euclidean coordinates and angular Wronskian are
+culled as restatements of the cumulative endpoint recurrence and `R32-S33`. Rational Mahler
+rails of degree at least two were already excluded by the stronger checked rail-degree theorem.
+
+**Artifact:** `ReturnGuard.PrimitiveEndpointReduction.divisor_dvd_content_iff` in
+[`ReturnGuardContinued.lean`](MatrixMortality/ReturnGuardContinued.lean), with synthesis in
+[`m32-moving-prime-ledger-2026-08-09.md`](audits/m32-moving-prime-ledger-2026-08-09.md).
+
+**Use:** on the constructive side, require every proposed auxiliary prime to satisfy both exact
+ledger conditions at each activation. On the decision side, combine those synchronization
+events with the two-sided order budget rather than bounding a fictitious hidden register.
 
 ### R32-D03: Bounded-denominator periodicity
 

@@ -537,6 +537,9 @@
 'MatrixMortality.ReturnGuard.PrimitiveEndpointReduction.content_natAbs_eq_gcd_driftSource_prequotient' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.ReturnGuard.PrimitiveEndpointReduction.divisor_dvd_content_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.ReturnGuard.PrimitiveEndpointReduction.resetDefect_eq_complement_mul' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]

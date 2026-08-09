@@ -1105,6 +1105,21 @@ content to finance later angular cancellation. See
 [`R32-S33`](SALVAGE.md#r32-s33-terminal-casoratian-and-two-sided-order-allocation) and
 [`m32-casoratian-order-allocation-2026-08-09.md`](audits/m32-casoratian-order-allocation-2026-08-09.md).
 
+The moving-support ledger is now exact as well. For every divisor `d` coprime to `pDL`, one
+primitive step satisfies
+
+```text
+d∣h ⇔ d∣r and d∣(pᵃ−1).
+```
+
+Thus an angularly emergent prime is inert until a later wait synchronizes with its
+multiplicative order and the current endpoint numerator contains the same multiplicity. There
+is no hidden prime register outside those two visible conditions. The reciprocal Euclidean
+rewrite and Wronskian collapse to existing endpoint coordinates and `R32-S33`; rational
+Mahler rails `a⁺=ka+d`, `k≥2`, were already excluded by the checked rail-degree theorem. See
+[`R32-S34`](SALVAGE.md#r32-s34-exact-moving-prime-ledger) and
+[`m32-moving-prime-ledger-2026-08-09.md`](audits/m32-moving-prime-ledger-2026-08-09.md).
+
 Finite rational carry-mode atlases cannot supply the opposing aperiodic orbit either. If each
 mode is a rational function of the current `p^a` and each transition has one fixed additive wait
 shift, every directed control cycle has total shift zero. On an actual infinite orbit the
@@ -1170,7 +1185,7 @@ all-legal block inequality for the carried generalized continuant. See
 | --- | --- | --- |
 | Doubly order-broken continuant | Amortize exact-order mass across every bridge which breaks its order on both chronological sides | The Casoratian removes the final branch and persistent orders have forced orientation, but earlier reverse content can still finance later cancellation |
 | Recurrence-sensitive pressure | Combine the exact continuant recurrence, full cyclotomic multiplicity, and the fixed-kernel pullback into a global carry bound on the doubly broken residue | Direction-free product-formula pressure fails because each wait gauge pays `p^(2|b−a|)` |
-| Aperiodic angular counter | Construct one exact fixed-coefficient reset orbit with unbounded denominators while the p-radial component remains on the reset ray | Every finite rational carry atlas is eventually periodic; the construction needs unbounded charts, wait differences, or independent history |
+| Aperiodic angular counter | Construct one exact fixed-coefficient reset orbit with unbounded denominators while the p-radial component remains on the reset ray | Every useful auxiliary prime needs a later exact-order synchronization and simultaneous endpoint divisibility; finite rational atlases are eventually periodic |
 | Repeated-factor extraction | Force a sufficiently heavy repeated factor in every bounded-complexity wait prefix and apply `R32-S29` | Arbitrary repeated factors are controlled once found; no theorem yet extracts one from a moving denominator schedule |
 | Irreducible cubic bridge | Decide isolated-cut words over the non-pure projectively injective unit alphabet, or the pure involutive-ratio PI₂ residue | Singular timing is finite or modulo three and cannot supply unbounded punctuation |
 | Generic projective incidence | Decide GPI₂ directly, or reduce arbitrary PI₂ to its generic stratum | Rank-(2,2) adds no graph hardness; positive-word genericization still lacks an OR or singular data transport |
