@@ -119,6 +119,33 @@ def badSource (G H : Square Interface ℚ) (row : Interface → ℚ) : Bool → 
 def badSources (G H : Square Interface ℚ) (row : Interface → ℚ) : Finset Point :=
   {badSource G H row false, badSource G H row true}
 
+private theorem sourcePoint_mulVec
+    (matrix : Square Interface ℚ) {vector : Interface → ℚ}
+    (vector_ne : vector ≠ 0) :
+    sourcePoint (matrix *ᵥ vector) =
+      ProjectiveLine.act matrix (sourcePoint vector) := by
+  have vector_eta : ![vector 0, vector 1] = vector := by
+    ext i
+    fin_cases i <;> rfl
+  have pair_ne : ![vector 0, vector 1] ≠ 0 := by
+    rwa [vector_eta]
+  simpa only [sourcePoint, vector_eta] using
+    (ProjectiveLine.act_ofPair matrix pair_ne).symm
+
+/-- Sources exceptional for both orientations of an unordered incidence pair. -/
+def commonBadSources
+    (G H : Square Interface ℚ) (row : Interface → ℚ) : Finset Point :=
+  badSources G H row ∩ badSources H G row
+
+/-- At most two source rays are exceptional in both orientations. -/
+theorem commonBadSources_card_le_two
+    (G H : Square Interface ℚ) (row : Interface → ℚ) :
+    (commonBadSources G H row).card ≤ 2 := by
+  apply (Finset.card_le_card Finset.inter_subset_left).trans
+  simpa [badSources] using
+    (Finset.card_le_two (a := badSource G H row false)
+      (b := badSource G H row true))
+
 /-- The first reverse-compiler scalar vanishes exactly on its first exceptional source ray. -/
 theorem alpha_eq_zero_iff_sourcePoint_eq_badSource
     (G H : Square Interface ℚ) (row column : Interface → ℚ)
@@ -190,6 +217,153 @@ theorem generic_iff_sourcePoint_not_mem_badSources
       exact neither (Or.inl (alpha_zero.mp alpha_is_zero))
     · intro beta_is_zero
       exact neither (Or.inr (beta_zero.mp beta_is_zero))
+
+/-- Outside the common exceptional set, one of the two generator orientations is generic. -/
+theorem generic_or_swapped_of_not_mem_commonBadSources
+    (G H : Square Interface ℚ) (row column : Interface → ℚ)
+    (G_unit : IsUnit G) (H_unit : IsUnit H)
+    (row_ne : row ≠ 0) (column_ne : column ≠ 0)
+    (source_good : sourcePoint column ∉ commonBadSources G H row) :
+    (ReverseEdge.alpha H row column ≠ 0 ∧
+        ReverseEdge.beta G H row column ≠ 0) ∨
+      (ReverseEdge.alpha G row column ≠ 0 ∧
+        ReverseEdge.beta H G row column ≠ 0) := by
+  rw [commonBadSources, Finset.mem_inter] at source_good
+  by_cases first_bad : sourcePoint column ∈ badSources G H row
+  · right
+    apply (generic_iff_sourcePoint_not_mem_badSources H G row column
+      H_unit G_unit row_ne column_ne).mpr
+    exact fun second_bad => source_good ⟨first_bad, second_bad⟩
+  · left
+    exact (generic_iff_sourcePoint_not_mem_badSources G H row column
+      G_unit H_unit row_ne column_ne).mpr first_bad
+
+private theorem relative_act_first
+    (G H : Square Interface ℚ) (row : Interface → ℚ)
+    (H_unit : IsUnit H) (row_ne : row ≠ 0) :
+    ProjectiveLine.act (G * H⁻¹) (badSource G H row false) =
+      badSource H G row false := by
+  rw [badSource, badSource,
+    sourcePoint_mulVec H (kernelColumn_ne_zero row_ne),
+    sourcePoint_mulVec G (kernelColumn_ne_zero row_ne),
+    ← ProjectiveLine.act_mul (G * H⁻¹) H H_unit,
+    Matrix.mul_assoc, nonsingInv_mul_of_isUnit H H_unit, Matrix.mul_one]
+
+private theorem relative_act_second
+    (G H : Square Interface ℚ) (row : Interface → ℚ)
+    (G_unit : IsUnit G) (H_unit : IsUnit H) (row_ne : row ≠ 0) :
+    ProjectiveLine.act (G * H⁻¹) (badSource G H row true) =
+      badSource G H row false := by
+  have bridge_unit : IsUnit (H * G⁻¹ * H) :=
+    (H_unit.mul (nonsingInv_isUnit G G_unit)).mul H_unit
+  rw [badSource, badSource,
+    sourcePoint_mulVec (H * G⁻¹ * H) (kernelColumn_ne_zero row_ne),
+    sourcePoint_mulVec H (kernelColumn_ne_zero row_ne),
+    ← ProjectiveLine.act_mul (G * H⁻¹) (H * G⁻¹ * H) bridge_unit]
+  congr 1
+  calc
+    (G * H⁻¹) * (H * G⁻¹ * H) =
+        G * (H⁻¹ * (H * (G⁻¹ * H))) := by
+      simp only [Matrix.mul_assoc]
+    _ = G * ((H⁻¹ * H) * (G⁻¹ * H)) := by
+      rw [Matrix.mul_assoc H⁻¹ H (G⁻¹ * H)]
+    _ = G * (G⁻¹ * H) := by
+      rw [nonsingInv_mul_of_isUnit H H_unit, Matrix.one_mul]
+    _ = (G * G⁻¹) * H := (Matrix.mul_assoc G G⁻¹ H).symm
+    _ = H := by rw [mul_nonsingInv_of_isUnit G G_unit, Matrix.one_mul]
+
+private theorem common_eq_badSources_of_card_eq_two
+    (G H : Square Interface ℚ) (row : Interface → ℚ)
+    (two : (commonBadSources G H row).card = 2) :
+    commonBadSources G H row = badSources G H row ∧
+      commonBadSources G H row = badSources H G row := by
+  have left_card : (badSources G H row).card ≤ 2 := by
+    simpa [badSources] using
+      (Finset.card_le_two (a := badSource G H row false)
+        (b := badSource G H row true))
+  have right_card : (badSources H G row).card ≤ 2 := by
+    simpa [badSources] using
+      (Finset.card_le_two (a := badSource H G row false)
+        (b := badSource H G row true))
+  constructor
+  · apply Finset.eq_of_subset_of_card_le Finset.inter_subset_left
+    calc
+      (badSources G H row).card ≤ 2 := left_card
+      _ = (commonBadSources G H row).card := two.symm
+  · apply Finset.eq_of_subset_of_card_le Finset.inter_subset_right
+    calc
+      (badSources H G row).card ≤ 2 := right_card
+      _ = (commonBadSources G H row).card := two.symm
+
+private theorem relative_maps_common
+    (G H : Square Interface ℚ) (row : Interface → ℚ)
+    (G_unit : IsUnit G) (H_unit : IsUnit H) (row_ne : row ≠ 0)
+    (two : (commonBadSources G H row).card = 2) :
+    ∀ point ∈ commonBadSources G H row,
+      ProjectiveLine.act (G * H⁻¹) point ∈ commonBadSources G H row := by
+  intro point point_mem
+  have common_eq_left := (common_eq_badSources_of_card_eq_two G H row two).1
+  have common_eq_right := (common_eq_badSources_of_card_eq_two G H row two).2
+  rw [common_eq_left, badSources, Finset.mem_insert, Finset.mem_singleton] at point_mem
+  rcases point_mem with rfl | rfl
+  · rw [relative_act_first G H row H_unit row_ne, common_eq_right]
+    simp [badSources]
+  · rw [relative_act_second G H row G_unit H_unit row_ne, common_eq_left]
+    simp [badSources]
+
+private theorem relative_mem_common_iff
+    (G H : Square Interface ℚ) (row : Interface → ℚ)
+    (G_unit : IsUnit G) (H_unit : IsUnit H) (row_ne : row ≠ 0)
+    (two : (commonBadSources G H row).card = 2) (point : Point) :
+    ProjectiveLine.act (G * H⁻¹) point ∈ commonBadSources G H row ↔
+      point ∈ commonBadSources G H row := by
+  let relative := G * H⁻¹
+  let common := commonBadSources G H row
+  have relative_unit : IsUnit relative :=
+    G_unit.mul (nonsingInv_isUnit H H_unit)
+  have relative_injective : Function.Injective (ProjectiveLine.act relative) :=
+    ProjectiveLine.act_injective relative relative_unit
+  have maps_common : ∀ point ∈ common,
+      ProjectiveLine.act relative point ∈ common := by
+    exact relative_maps_common G H row G_unit H_unit row_ne two
+  have image_subset : common.image (ProjectiveLine.act relative) ⊆ common := by
+    rw [Finset.image_subset_iff]
+    exact maps_common
+  have image_card :
+      (common.image (ProjectiveLine.act relative)).card = common.card :=
+    Finset.card_image_of_injective common relative_injective
+  have image_eq : common.image (ProjectiveLine.act relative) = common := by
+    apply Finset.eq_of_subset_of_card_le image_subset
+    rw [image_card]
+  constructor
+  · intro image_mem
+    have image_mem' :
+        ProjectiveLine.act relative point ∈
+          common.image (ProjectiveLine.act relative) := by
+      rwa [image_eq]
+    obtain ⟨preimage, preimage_mem, same_image⟩ :=
+      Finset.mem_image.mp image_mem'
+    have preimage_eq : preimage = point := relative_injective same_image
+    rwa [preimage_eq] at preimage_mem
+  · exact maps_common point
+
+/-- If both orientations have two common exceptional sources, the two letter transitions are
+simultaneously internal or external. This is the mechanism reducing three first exits to two. -/
+theorem commonBadSources_two_transition_iff
+    (G H : Square Interface ℚ) (row vector : Interface → ℚ)
+    (G_unit : IsUnit G) (H_unit : IsUnit H)
+    (row_ne : row ≠ 0) (vector_ne : vector ≠ 0)
+    (two : (commonBadSources G H row).card = 2) :
+    sourcePoint (G *ᵥ vector) ∈ commonBadSources G H row ↔
+      sourcePoint (H *ᵥ vector) ∈ commonBadSources G H row := by
+  have transition_eq :
+      sourcePoint (G *ᵥ vector) =
+        ProjectiveLine.act (G * H⁻¹) (sourcePoint (H *ᵥ vector)) := by
+    rw [sourcePoint_mulVec G vector_ne, sourcePoint_mulVec H vector_ne,
+      ← ProjectiveLine.act_mul (G * H⁻¹) H H_unit,
+      Matrix.mul_assoc, nonsingInv_mul_of_isUnit H H_unit, Matrix.mul_one]
+  rw [transition_eq]
+  exact relative_mem_common_iff G H row G_unit H_unit row_ne two _
 
 private theorem smulMatrix_isUnit
     {matrix : Square Interface ℚ} (matrix_unit : IsUnit matrix)

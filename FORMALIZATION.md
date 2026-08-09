@@ -191,9 +191,10 @@ constrained-path grammar, and both mortality implications. Lean now also transpo
 hard compatible one-loop edge stratum back to that compiler with intrinsic `β=1`; the audited
 remaining edge-rank census gives `Mort₃^(2,2) ≡ₘ GPI₂`. `ProjectiveIncidence` now proves the
 exact two-ray exceptional locus and rescales every generic instance to `α=β=1` while preserving
-all word zeros. The accompanying positive first-exit audit reduces arbitrary PI₂ to at most
-three GPI₂ queries; its sibling sharpens that count to two. The surviving enemy is GPI₂ itself,
-not genericization or the edge graph.
+all word zeros. It also proves that the relative projectivity permutes every two-point common
+bad set, forcing both labelled transitions to exit together. The positive first-exit audit then
+reduces arbitrary PI₂ to at most two GPI₂ queries. The surviving enemy is GPI₂ itself, not
+genericization or the edge graph.
 
 ReturnSquare instantiates the rank-`(3,2)` reduction. Lean proves the closed return matrix,
 split interfaces, exact cut rank, internal rank-one zero-wait return, unit positive returns,
@@ -545,9 +546,9 @@ history-sensitive enemy. See
 
 These are structural and decidable-stratum theorems, not an `M₃(2)` resolution. The imported
 order-four Skolem theorem used to classify rank-one profiles is not reimplemented in Lean. The
-reverse compiler still assumes `αβ≠0`, while arbitrary PI₂ has not been genericized; no
-universality or decision theorem is known for generic PI₂ or for rational inverse-address
-membership and its cyclotomic cancellation histories. Their boundary is recorded in
+reverse compiler still assumes `αβ≠0`, but arbitrary PI₂ now reduces to at most two generic
+queries. No universality or decision theorem is known for normalized GPI₂ or for rational
+inverse-address membership and its cyclotomic cancellation histories. Their boundary is recorded in
 [`audits/m32-rank-return-2026-07-28.md`](audits/m32-rank-return-2026-07-28.md) and scheduled in
 [#11](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/11) and
 [#12](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/12).
@@ -794,6 +795,7 @@ with a complete arbitrary-word converse.
 | Every compatible two-plane edge square is realized by two rank-two generators | `TwoPlaneEdges.output_mul_input`, `TwoPlaneEdges.generator_rank` |
 | Generic projective incidence compiles to two rank-two `3 × 3` generators | `ReverseEdge.isMortal_adaptedGenerator_iff`, `ReverseEdge.adaptedGenerator_rank` |
 | Genericity is avoidance of two exact source rays | `ProjectiveIncidence.generic_iff_sourcePoint_not_mem_badSources` |
+| At most two source rays are bad in both orientations, and their two transitions exit together | `ProjectiveIncidence.commonBadSources_card_le_two`, `ProjectiveIncidence.commonBadSources_two_transition_iff` |
 | Every generic PI₂ instance scales to `α=β=1` without changing its word-zero language | `ProjectiveIncidence.exists_unitNormalized` |
 | A compatible one-loop edge square is mortal exactly at loop nilpotence or intrinsic generic incidence | `RankTwoPunctuation.exists_pathProduct_eq_zero_iff_selfBridge_or_incidence` |
 | ReturnSquare physical mortality is exactly positive-return scalar bridge zero | `ReturnSquare.physical_isMortal_iff_positiveBridge` |

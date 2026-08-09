@@ -1977,18 +1977,19 @@ exterior blocks remain nonzero products of units. Thus a constrained path vanish
 one original incidence coefficient vanishes.
 
 **Scope:** the theorem assumes `αβ≠0`. [`R32-S32`](#r32-s32-rank-two-punctuation-and-graph-removal)
-now proves that every rank-(2,2) pair reduces to one such generic instance after decidable edge
-strata are discharged. The opposite reduction from arbitrary nongeneric PI₂ to generic PI₂
-remains open, so this record does not assert equivalence with unrestricted `M₂(3)`.
+proves that every rank-(2,2) pair reduces to one such generic instance after decidable edge
+strata are discharged. [`R32-S35`](#r32-s35-positive-projective-incidence-genericization) now
+reduces arbitrary PI₂ to at most two generic instances. This identifies their decidability
+status but is not a many-one equivalence with unrestricted PI₂.
 
 **Artifact:** `ReverseEdge.isMortal_adaptedGenerator_iff` and
 `adaptedGenerator_rank` in [`ReverseEdge.lean`](MatrixMortality/ReverseEdge.lean).
 
 **Use:** compile generic PI₂ into rank-(2,2); use `R32-S32` in the forward direction. Work now
-belongs on generic PI₂ itself or on arbitrary-to-generic positive-word transport, not on the
-two-vertex edge language.
+belongs on normalized GPI₂ itself, not on exceptional-scalar transport or the two-vertex edge
+language.
 
-**Next:** decide generic PI₂, or construct a computable arbitrary-to-generic transformation.
+**Next:** decide or prove undecidable normalized GPI₂.
 Tracked in
 [#11](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/11).
 
@@ -4061,8 +4062,8 @@ Mort₃^(2,2) ≡ₘ GPI₂.
 
 **Scope:** the one-loop transport, forced `β=1`, and complete path equivalence are formalized.
 The forward reduction's cyclic-orbit branch imports effective unit equations and is audited,
-with source [`EG13`](references/evertse-gyory-2013-effective-unit-equations.md). This does not
-reduce arbitrary nongeneric PI₂ to generic PI₂ and does not decide generic PI₂.
+with source [`EG13`](references/evertse-gyory-2013-effective-unit-equations.md). `R32-S35`
+separately removes arbitrary nongeneric PI₂ as a decidability seam; neither result decides GPI₂.
 
 **Artifact:** `RankTwoPunctuation.transport_eq_rawEdge` and
 `RankTwoPunctuation.exists_pathProduct_eq_zero_iff_selfBridge_or_incidence` in
@@ -4264,10 +4265,11 @@ H G⁻¹ H ker(r).
 ```
 
 Lean proves that `αβ≠0` is equivalent to the source avoiding these two rays. Intersecting this
-set with the exceptional set after swapping `G,H` leaves at most two sources. A positive-word
-first-exit argument therefore reduces unrestricted PI₂ nonadaptively to a finite disjunction of
-GPI₂ queries. The initial reconstruction gives at most three queries; its sibling sharpens this
-to two by exploiting the relative involution in the two-point case.
+set with the exceptional set after swapping `G,H` leaves at most two sources. If that common set
+has two points, Lean proves that the relative projectivity permutes it, so the two labelled
+successors are simultaneously internal or external. Positive first exit therefore reduces
+unrestricted PI₂ nonadaptively to at most two GPI₂ queries, each reached by a positive prefix of
+length at most two.
 
 Every generic instance also admits independent nonzero generator scalings
 
@@ -4278,15 +4280,19 @@ H' = αH,      G' = (α²/β)G
 for which `α'=β'=1`. Lean proves both identities and preserves the zero coefficient of every
 word, including the empty word.
 
-**Scope:** the exact exceptional locus and unit normalization are formalized. The finite
-first-exit theorem is independently audited and is strengthened in the next salvo ratchet. This
-is a bounded truth-table reduction, not a many-one reduction to one generic instance, and it
-does not decide GPI₂.
+**Scope:** the exact exceptional locus, common-set cardinality, two-point transition mechanism,
+and unit normalization are formalized. The finite first-exit synthesis is independently audited.
+This is a bounded truth-table reduction, not a many-one reduction to one generic instance, and
+it does not decide GPI₂. The residual fixed-ray and order-three one-query forms are culled from
+the master frontier because closing them would not decide any additional master stratum.
 
-**Artifact:** `ProjectiveIncidence.generic_iff_sourcePoint_not_mem_badSources` and
+**Artifact:** `ProjectiveIncidence.generic_iff_sourcePoint_not_mem_badSources`,
+`ProjectiveIncidence.commonBadSources_two_transition_iff`, and
 `ProjectiveIncidence.exists_unitNormalized` in
 [`ProjectiveIncidence.lean`](MatrixMortality/ProjectiveIncidence.lean), with reconstruction in
-[`m32-three-query-genericization-2026-08-09.md`](audits/m32-three-query-genericization-2026-08-09.md).
+[`m32-three-query-genericization-2026-08-09.md`](audits/m32-three-query-genericization-2026-08-09.md)
+and
+[`m32-two-query-genericization-2026-08-09.md`](audits/m32-two-query-genericization-2026-08-09.md).
 
 **Use:** identify PI₂ and GPI₂ at the level of decidability and normalize all further attacks to
 `α=β=1`. The live rank-(2,2) enemy is GPI₂ itself; exceptional-scalar plumbing is retired.

@@ -68,6 +68,8 @@ PI₂ ≤³_dtt GPI₂.
 This theorem is correct but not sharp. The sibling attack proves that in the only two-point
 case both labelled transitions are simultaneously internal or external, reducing the bound to
 two. The three-query result is therefore evidence for the route, not a separate surviving node.
+The sharpened reconstruction is
+[`m32-two-query-genericization-2026-08-09.md`](m32-two-query-genericization-2026-08-09.md).
 
 ## Unit Normalization
 

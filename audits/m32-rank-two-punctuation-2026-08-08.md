@@ -121,6 +121,10 @@ exact disjunction above for arbitrary constrained paths.
 | rank-(2,2) contributes a separate graph machine | rejected | every graph-only residue is decidable or the intrinsic PI₂ instance |
 | arbitrary PI₂ reduces to generic PI₂ | open | still needs a guarded positive-word genericizer or singular data transport |
 
+The subsequent positive first-exit reduction supersedes the last row at bounded truth-table
+level: unrestricted PI₂ now reduces to at most two GPI₂ queries. See
+[`m32-two-query-genericization-2026-08-09.md`](m32-two-query-genericization-2026-08-09.md).
+
 ## Wound
 
 ```text

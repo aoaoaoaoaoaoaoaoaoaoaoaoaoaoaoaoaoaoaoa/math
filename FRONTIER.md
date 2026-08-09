@@ -560,10 +560,11 @@ Mort₃^(2,2) ≡ₘ GPI₂.
 ```
 
 The graph constraint is therefore gone, and the opposite genericity seam is gone for
-decidability. The two exceptional source rays are exact; swapping the controls and taking the
-first positive exit reduces arbitrary PI₂ to at most three GPI₂ queries. Every generic instance
-also scales to `α=β=1` without changing any word zero. The sibling attack sharpens the query
-bound to two. Generic PI₂ itself remains unresolved. See
+decidability. The two exceptional source rays are exact. If both orientations are bad at two
+sources, their relative projectivity permutes those sources and both labelled transitions exit
+together. Positive first exit therefore reduces arbitrary PI₂ to at most two GPI₂ queries.
+Every generic instance also scales to `α=β=1` without changing any word zero. Generic PI₂
+itself remains unresolved. See
 [`R32-S35`](SALVAGE.md#r32-s35-positive-projective-incidence-genericization).
 
 The rank-`(3,2)` profile is the genuinely new artery. If `B=UV`, every binary word containing
