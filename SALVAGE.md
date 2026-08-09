@@ -380,10 +380,13 @@ infinitesimal argument without an uncontrolled `O(η)` term.
 
 **Formalization:** `Frankl/HalfSupport.lean` checks the scalar sign, global shape of `g`, and
 pointwise dependent-cost contraction. `Frankl/FiniteLaw.lean` checks the finite Jensen and
-polarization argument.
+polarization argument. `Frankl/OrbitHalfSupport.lean` constructs the simultaneous finite
+coordinatewise pushforward of an arbitrary symmetric orbit law, proves exact mass and mean
+preservation, aggregates all source kernels without iteration, proves dependent-entropy and
+complete-gap monotonicity, and re-reduces the transformed law to an identified restricted
+extreme.
 
-**Next:** connect the generic finite-law theorem to the symmetric-coupling replacement
-constructor.
+**Next:** reflect the two final compact objective certificates in Lean.
 
 ### FC-S07: Low-orbit contraction
 
@@ -426,9 +429,14 @@ polynomial, both self-pair bounds, exact mean weights, and ordered two-step cont
 `Frankl/OrbitCollapse.lean` expands the actual canonical low–low and low–endpoint orbit laws,
 proves their exact marginal and independent entropy differences, proves the dependent term is
 fixed, and lifts the scalar deficit estimates to monotonicity of the complete strict Yu gap.
+`Frankl/OrbitReindex.lean` and `Frankl/OrbitClassification.lean` reindex and sort arbitrary
+identified extremes, classify their half-supported coordinates, contract the one- and two-orbit
+cases, and compose the entire bounded-mean analytic reduction to the diagonal,
+diagonal–diagonal, or diagonal–endpoint objective family.
 
-**Next:** reindex an arbitrary identified extreme into these canonical two-orbit laws after the
-half-support classification.
+**Next:** reflect the rational interval certificate for the two nondegenerate objective
+families; the diagonal case is their boundary specialization and should be discharged alongside
+them.
 
 ### FC-M01: Rational Yu certificate
 

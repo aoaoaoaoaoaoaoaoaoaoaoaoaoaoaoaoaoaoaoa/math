@@ -49,12 +49,16 @@ The following analytic and finite-convex core is now kernel-checked:
   exact-target extremes;
 - realization of both ordered low–low contractions and the low–endpoint contraction on actual
   canonical two-orbit laws, including preservation of the dependent term and monotonicity of
-  the complete strict Yu gap.
+  the complete strict Yu gap;
+- a simultaneous finite half-support pushforward on arbitrary symmetric orbit laws, with exact
+  mass and mean preservation, an arbitrary-family polarization theorem, dependent-cost
+  contraction, and monotonicity of the complete strict Yu gap;
+- support reindexing, within-orbit sorting, classification of every identified half-supported
+  extreme, and the complete reduction of every bounded-mean finite symmetric coupling to the
+  diagonal, diagonal–diagonal, or diagonal–endpoint objective family.
 
 These declarations live under `Frankl/`. They do not yet promote the candidate bound: the
-coordinate-kernel constructor and its coupling-level comparison, reindexing/classification of an
-arbitrary identified extreme into the canonical two-orbit laws, the reflected interval cover,
-and the final union-closed entropy implication remain open.
+reflected interval cover and the final union-closed entropy implication remain open.
 
 The Lean development verifies the complete computable source reduction and the matrix compilers:
 

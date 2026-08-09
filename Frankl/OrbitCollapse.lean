@@ -67,6 +67,15 @@ noncomputable def lowEndpointOrbitLaw (a d target q : ℝ)
       endpointOrbitMean, Fintype.sum_bool, add_comm] using
       (orbitWeights_mean (a := a) (t := target) (b := endpointOrbitMean q) haEndpoint)
 
+/-- The unit-mass law on one symmetric orbit of mean `a`. -/
+noncomputable def singleLowOrbitLaw (a d : ℝ) :
+    FiniteOrbitLaw (Function.const Unit (a - d)) (Function.const Unit (a + d)) a where
+  weight _ := 1
+  weight_nonneg _ := by norm_num
+  weight_sum := by simp
+  moment_sum := by
+    simp [orbitMean]
+
 /-- Yu's dependent cost of a symmetric orbit in the low square depends only on its mean. -/
 theorem dependentCost_symmetric_low_eq_mean {a d : ℝ}
     (hupper : a + d ≤ 1 / 2) (hd : 0 ≤ d) :
@@ -77,6 +86,31 @@ theorem dependentCost_symmetric_low_eq_mean {a d : ℝ}
     max_eq_right hordered, max_eq_right hupper, max_self, max_eq_right haHalf]
   congr 2
   ring
+
+theorem singleLowOrbit_marginal_difference (a d : ℝ) :
+    orbitMarginalEntropy (singleLowOrbitLaw a 0)
+        - orbitMarginalEntropy (singleLowOrbitLaw a d) =
+      orbitDeficit binEntropy a d := by
+  simp [orbitMarginalEntropy, finiteExpectation, orbitMarginalWeight,
+    orbitMarginalPoint, singleLowOrbitLaw,
+    orbitDeficit, Fintype.sum_prod_type, Fintype.sum_bool]
+  ring
+
+theorem singleLowOrbit_independent_difference (a d : ℝ) :
+    orbitIndependentEntropy (singleLowOrbitLaw a 0)
+        - orbitIndependentEntropy (singleLowOrbitLaw a d) = selfPairDeficit a d := by
+  simp [orbitIndependentEntropy, finiteJoinEntropy, orbitMarginalWeight,
+    orbitMarginalPoint, singleLowOrbitLaw,
+    selfPairDeficit, Fintype.sum_prod_type, Fintype.sum_bool, join_comm]
+  ring
+
+theorem singleLowOrbit_dependent_eq {a d : ℝ}
+    (haUpper : a + d ≤ 1 / 2) (hd : 0 ≤ d) :
+    orbitDependentEntropy (singleLowOrbitLaw a 0) =
+      orbitDependentEntropy (singleLowOrbitLaw a d) := by
+  have hcost := dependentCost_symmetric_low_eq_mean haUpper hd
+  simpa [orbitDependentEntropy, singleLowOrbitLaw]
+    using hcost.symm
 
 /-- Contracting the lower orbit raises marginal entropy by its weighted Jensen deficit. -/
 theorem twoLowOrbit_lower_marginal_difference {a d target b e : ℝ}
@@ -215,6 +249,26 @@ theorem yuGap_le_of_join_difference_le_marginal {oldJoin newJoin oldMarginal new
     yuGap newJoin newMarginal dependent ≤ yuGap oldJoin oldMarginal dependent := by
   norm_num [yuGap, dependentShare, entropySlack] at *
   linarith
+
+/-- A single symmetric low orbit may collapse to its diagonal mean without increasing the
+strict Yu gap. -/
+theorem singleLowOrbit_collapse_le {a d : ℝ}
+    (haLower : 0 ≤ a - d) (haUpper : a + d ≤ 1 / 2) (hd : 0 ≤ d) :
+    orbitYuGap (singleLowOrbitLaw a 0) ≤ orbitYuGap (singleLowOrbitLaw a d) := by
+  have hjoin :
+      orbitIndependentEntropy (singleLowOrbitLaw a 0)
+          - orbitIndependentEntropy (singleLowOrbitLaw a d) ≤
+        orbitMarginalEntropy (singleLowOrbitLaw a 0)
+          - orbitMarginalEntropy (singleLowOrbitLaw a d) := by
+    rw [singleLowOrbit_independent_difference, singleLowOrbit_marginal_difference]
+    exact selfPairDeficit_le_orbitDeficit haLower haUpper hd
+  have hmarginal :
+      0 ≤ orbitMarginalEntropy (singleLowOrbitLaw a 0)
+        - orbitMarginalEntropy (singleLowOrbitLaw a d) := by
+    rw [singleLowOrbit_marginal_difference]
+    exact orbitDeficit_nonneg haLower (haUpper.trans (by norm_num)) hd
+  rw [orbitYuGap, orbitYuGap, singleLowOrbit_dependent_eq haUpper hd]
+  exact yuGap_le_of_join_difference_le_marginal hjoin hmarginal
 
 /-- The scalar lower-orbit estimate acts on the actual two-orbit Yu functional. -/
 theorem twoLowOrbit_lower_collapse_le {a d target b e : ℝ}

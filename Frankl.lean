@@ -10,3 +10,6 @@ import Frankl.OrbitLaw
 import Frankl.FixedMeanConcavity
 import Frankl.OrbitMeanLift
 import Frankl.OrbitCollapse
+import Frankl.OrbitHalfSupport
+import Frankl.OrbitReindex
+import Frankl.OrbitClassification
