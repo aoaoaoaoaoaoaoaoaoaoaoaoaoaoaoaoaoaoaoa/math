@@ -52,6 +52,7 @@ file owns the mathematical stock.
 | [`FC-S06`](#fc-s06-half-support-elimination) | structure theorem | entropy extremes may be confined to `[0,1/2]∪{1}` by a finite monotone kernel | formalized | graduated |
 | [`FC-S07`](#fc-s07-low-orbit-contraction) | structure theorem | every surviving two-orbit extreme contracts to one of two bivariate families | formalized | graduated |
 | [`FC-S08`](#fc-s08-diagonal-family-collapse) | structure theorem | every target-mean two-diagonal objective is bounded below by the point law | formalized | graduated |
+| [`FC-S09`](#fc-s09-endpoint-core-contraction) | structure theorem | the high-conditional-mean endpoint core contracts to the centered curve | formalized | graduated |
 | [`FC-M01`](#fc-m01-rational-yu-certificate) | partial mechanism | Arb certifies the two reduced gaps at `19099/50000` | computational | active |
 | [`FC-O01`](#fc-o01-homogeneous-tilt-persistence-fails) | obstruction | one-coordinate majority need not persist under homogeneous product tilt | audited | active |
 | [`FC-O02`](#fc-o02-uniform-fiber-semigroup-ceiling) | obstruction | finite full-fiber semigroup lifts cannot beat the uniform entropy barrier | audited | stock |
@@ -480,6 +481,42 @@ analytic work on the endpoint family.
 
 **Artifact:** `Frankl/DiagonalObjective.lean` and
 [`audits/frankl-yu-reduction-2026-08-08.md`](audits/frankl-yu-reduction-2026-08-08.md#analytic-collapse-of-the-diagonal-family).
+
+### FC-S09: Endpoint-core contraction
+
+**Kind:** structure theorem
+**Evidence:** formalized
+**Disposition:** graduated
+
+For the diagonal–endpoint certificate coordinates `(a,q)`, condition away the deterministic
+endpoint coordinate. The remaining low law has mean
+
+```text
+r = (a(1−2t)+tq)/(1+q−a−t).
+```
+
+If `a≥1/4`, `0≤q≤1/2`, and `r≥13/50`, both the original diagonal atom and the centered
+atom have saturated dependent cost `log 2`. The diagonal Jensen-deficit estimate then shows
+that replacing the conditional low law by its point mass at `r` cannot increase Yu's gap. The
+coefficient is largest at `r=13/50`, where
+
+```text
+(193/200)((1−t)/(1−r))((1−r)/(1+r)+1−4r/3)
+  = 5826723461/5827500000
+  < 10000001/10000000
+```
+
+with exact margin `3108487/23310000000`. Thus the full two-dimensional core is bounded below
+by the centered curve `q=a`.
+
+**Scope:** this does not yet prove that the centered curve is nonnegative and does not cover
+the complementary endpoint wedge where `a<1/4`, `q>1/2`, or `r<13/50`.
+
+**Use:** replace the numerically hardest interior of the endpoint certificate by one
+one-dimensional inequality and reserve exact subdivision for the boundary complement.
+
+**Artifact:** `Frankl/EndpointObjective.lean` and
+[`audits/frankl-yu-reduction-2026-08-08.md`](audits/frankl-yu-reduction-2026-08-08.md#endpoint-core-contraction).
 
 ### FC-M01: Rational Yu certificate
 

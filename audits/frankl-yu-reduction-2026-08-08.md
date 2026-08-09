@@ -451,6 +451,50 @@ kernel-replayed lower bound
 deficit estimates, their exact coefficient comparison, the point enclosure, and the resulting
 nonnegativity of the full lower and upper diagonal coordinate rectangles.
 
+## Endpoint-core contraction
+
+Write `β` for the endpoint-orbit mass and `m=1−β/2` for the total mass of the two
+nondeterministic coordinate values. Conditioning that subprobability law gives weights
+
+```text
+ℓ=(1−β)/m,     u=(β/2)/m
+```
+
+on `a,q`, with conditional mean
+
+```text
+r = ℓa+uq = (a(1−2t)+tq)/(1+q−a−t).
+```
+
+The independent and marginal entropies of the endpoint objective are respectively `m²` and
+`m` times those of this conditional binary law. If `a≥1/4`, `q≤1/2`, and `r≥13/50`, the
+dependent term is unchanged by contracting `a,q` to `r`: both its original and centered
+diagonal costs are `log 2`. It therefore suffices that
+
+```text
+(1−α)m((1−r)/(1+r)+1−4r/3) ≤ 1+ε.
+```
+
+The exact-mean relation gives `m=(1−t)/(1−r)`. After clearing the positive factors
+`1−r` and `1+r`, the left side is monotone decreasing on the core interval. At its boundary
+`r=13/50`, it is
+
+```text
+5826723461/5827500000,
+```
+
+below `10000001/10000000` by `3108487/23310000000`. Consequently
+
+```text
+J(r,r) ≤ J(a,q)
+```
+
+throughout the endpoint core. `Frankl/EndpointObjective.lean` formalizes the generic scaled
+Jensen-deficit contraction, the exact coefficient inequality, all conditional-weight and
+mean identities, and its specialization to the certificate coordinates. Positivity of the
+centered curve and certification of the complementary endpoint wedge remain separate
+obligations.
+
 ## Outward-rounded certificate
 
 [`tools/certify_frankl_38198.py`](../tools/certify_frankl_38198.py) uses

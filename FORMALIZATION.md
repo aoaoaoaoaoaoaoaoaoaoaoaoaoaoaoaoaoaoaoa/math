@@ -75,16 +75,22 @@ The following analytic, finite-convex, and certificate core is now kernel-checke
   the exact weighted loss coefficient has margin
   `5743059741/230330000000`, and a kernel-replayed dyadic enclosure proves the point objective
   positive.
+- an endpoint-core contraction: after conditioning away the deterministic endpoint coordinate,
+  every law with `a≥1/4`, `q≤1/2`, and conditional mean at least `13/50` is bounded below by
+  its centered `q=a` law. The exact boundary coefficient has margin
+  `3108487/23310000000` below the strict marginal penalty.
 
 These declarations live under `Frankl/`, principally in `CanonicalObjective.lean`,
 `LogBounds.lean`, `Interval.lean`, `IntervalEntropy.lean`, `CertificateExpr.lean`,
 `CertificateEval.lean`, `CertificateTree.lean`, `CertificateObjective.lean`,
-`CertificateAdaptive.lean`, `CertificateCorners.lean`, and `DiagonalObjective.lean`. The two
-diagonal regions are now kernel theorems and no longer depend on subdivision. The executable
-rational checker returns success on the remaining endpoint region at order `12`, fuel `64`,
-precision `32`, and depth `32`; this computation is evidence, not a theorem. The candidate
-bound is not promoted until the endpoint verdict is replayed by the kernel and the final
-union-closed entropy implication is formalized.
+`CertificateAdaptive.lean`, `CertificateCorners.lean`, `DiagonalObjective.lean`, and
+`EndpointObjective.lean`. The two diagonal regions are now kernel theorems and no longer depend
+on subdivision; the hardest interior of the endpoint region is reduced to a centered
+one-dimensional curve. The executable rational checker returns success on the full endpoint
+region at order `12`, fuel `64`, precision `32`, and depth `32`; this computation is evidence,
+not a theorem. The candidate bound is not promoted until the centered curve and complementary
+endpoint wedge are replayed by the kernel and the final union-closed entropy implication is
+formalized.
 
 The Lean development verifies the complete computable source reduction and the matrix compilers:
 
