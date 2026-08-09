@@ -51,6 +51,7 @@ file owns the mathematical stock.
 | [`FC-S05`](#fc-s05-exact-mean-yu-repair) | structure theorem | Yu's coupling reduction is valid after a monotone exact-mean lift | formalized | graduated |
 | [`FC-S06`](#fc-s06-half-support-elimination) | structure theorem | entropy extremes may be confined to `[0,1/2]∪{1}` by a finite monotone kernel | formalized | graduated |
 | [`FC-S07`](#fc-s07-low-orbit-contraction) | structure theorem | every surviving two-orbit extreme contracts to one of two bivariate families | formalized | graduated |
+| [`FC-S08`](#fc-s08-diagonal-family-collapse) | structure theorem | every target-mean two-diagonal objective is bounded below by the point law | formalized | graduated |
 | [`FC-M01`](#fc-m01-rational-yu-certificate) | partial mechanism | Arb certifies the two reduced gaps at `19099/50000` | computational | active |
 | [`FC-O01`](#fc-o01-homogeneous-tilt-persistence-fails) | obstruction | one-coordinate majority need not persist under homogeneous product tilt | audited | active |
 | [`FC-O02`](#fc-o02-uniform-fiber-semigroup-ceiling) | obstruction | finite full-fiber semigroup lifts cannot beat the uniform entropy barrier | audited | stock |
@@ -430,6 +431,56 @@ identified extremes, classify their half-supported coordinates, contract the one
 cases, and compose the entire bounded-mean analytic reduction to the diagonal,
 diagonal–diagonal, or diagonal–endpoint objective family.
 
+### FC-S08: Diagonal-family collapse
+
+**Kind:** structure theorem
+**Evidence:** formalized
+**Disposition:** graduated
+
+Let a binary law on `[0,1/2]` have masses `ℓ,u`, support `a,b`, and mean
+`t=19099/50000`. If `Δ=h(t)−ℓh(a)−uh(b)`, sequential join-curvature comparison gives
+
+```text
+h(t∨t)−E h(X∨Y)
+  ≤ ((1−t)/(1+t) + 1−4t/3)Δ.
+```
+
+For the capped diagonal cost, the function
+
+```text
+g(x)=2h(x)−h(min(2x,1/2))
+```
+
+lies below its affine support at `t`. Below `1/4`, this follows from convexity of
+`2h(x)−h(2x)` and its endpoint values; above `1/4`, it is the ordinary entropy tangent
+inequality. Averaging the support proves
+
+```text
+log 2−E h(min(2X,1/2)) ≤ 2Δ.
+```
+
+The weighted loss coefficient is exactly
+
+```text
+(193/200)((1−t)/(1+t)+1−4t/3)+(7/200)·2
+  = 56146740823/57582500000
+  < 10000001/10000000,
+```
+
+with margin `5743059741/230330000000`. Hence every two-diagonal objective is at least
+the point-mass objective. A kernel-replayed dyadic enclosure gives the latter a positive lower
+bound `1102953606749615/1152921504606846976`. Both diagonal certificate rectangles are
+therefore discharged analytically, without a subdivision verdict.
+
+**Scope:** this eliminates the diagonal–diagonal family only. The diagonal–endpoint surface
+and the final implication from Yu's entropy inequality to union-closed abundance remain open.
+
+**Use:** remove two of the three compact certificate regions and concentrate all numerical or
+analytic work on the endpoint family.
+
+**Artifact:** `Frankl/DiagonalObjective.lean` and
+[`audits/frankl-yu-reduction-2026-08-08.md`](audits/frankl-yu-reduction-2026-08-08.md#analytic-collapse-of-the-diagonal-family).
+
 ### FC-M01: Rational Yu certificate
 
 **Kind:** partial mechanism
@@ -459,9 +510,10 @@ constant beyond `(3−√5)/2`.
 and the `Frankl/Certificate*.lean`, `Frankl/Interval*.lean`, and `Frankl/LogBounds.lean`
 checker modules.
 
-**Next:** replace the successful executable adjudication with a tractable kernel-replayed
-verdict, then formalize the final entropy implication to union-closed abundance. Only then
-change the evidence label or universal-bound ledger.
+**Next:** replace the successful endpoint adjudication with a tractable kernel-replayed
+verdict, then formalize the final entropy implication to union-closed abundance. `FC-S08` has
+already removed both diagonal subdivision obligations. Only then change the evidence label or
+universal-bound ledger.
 
 ### FC-O02: Uniform-fiber semigroup ceiling
 

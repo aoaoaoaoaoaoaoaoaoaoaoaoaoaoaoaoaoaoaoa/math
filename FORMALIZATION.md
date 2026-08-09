@@ -17,7 +17,8 @@ It is deliberately not yet counted among the formal results. Promotion requires 
 2. the half-support kernel, including the finite-path scalar sign argument;
 3. the low-square curvature comparison, self-pair Bernstein polynomial, and ordered two-orbit
    contraction;
-4. both reduced compact entropy inequalities, including the two entropy-zero corners;
+4. the remaining diagonal–endpoint compact entropy inequality, including its two entropy-zero
+   corners (the diagonal–diagonal family is now analytic);
 5. the entropy implication from the certified coupling inequality to the stated universal
    union-closed abundance bound.
 
@@ -69,15 +70,21 @@ The following analytic, finite-convex, and certificate core is now kernel-checke
   extensionally identical to checking the generated tree;
 - analytic proofs of both entropy-zero endpoint squares, including the required logarithm,
   near-doubling entropy, ternary-fiber entropy, and concavity estimates.
+- an analytic collapse of every target-mean binary diagonal law to the point law, using one
+  marginal Jensen deficit to control both independent and capped dependent entropy losses;
+  the exact weighted loss coefficient has margin
+  `5743059741/230330000000`, and a kernel-replayed dyadic enclosure proves the point objective
+  positive.
 
 These declarations live under `Frankl/`, principally in `CanonicalObjective.lean`,
 `LogBounds.lean`, `Interval.lean`, `IntervalEntropy.lean`, `CertificateExpr.lean`,
 `CertificateEval.lean`, `CertificateTree.lean`, `CertificateObjective.lean`,
-`CertificateAdaptive.lean`, and `CertificateCorners.lean`. The executable rational checker
-returns success on all three compact regions at order `12`, fuel `64`, precision `32`, and
-depth `32`; this computation is evidence, not a theorem. The candidate bound is not promoted
-until the success verdict itself is replayed by the kernel and the final union-closed entropy
-implication is formalized.
+`CertificateAdaptive.lean`, `CertificateCorners.lean`, and `DiagonalObjective.lean`. The two
+diagonal regions are now kernel theorems and no longer depend on subdivision. The executable
+rational checker returns success on the remaining endpoint region at order `12`, fuel `64`,
+precision `32`, and depth `32`; this computation is evidence, not a theorem. The candidate
+bound is not promoted until the endpoint verdict is replayed by the kernel and the final
+union-closed entropy implication is formalized.
 
 The Lean development verifies the complete computable source reduction and the matrix compilers:
 

@@ -387,6 +387,70 @@ h(r(1−a)) ≥ (1−a)h(r).
 Here `β<2/5` and `1−β>3/5`. Dropping the nonnegative `q∨q` term leaves positive
 coefficients; the two rational inner margins exceed `0.105` and `0.078`.
 
+## Analytic collapse of the diagonal family
+
+The diagonal–diagonal region admits a stronger argument than interval subdivision. Let a
+binary law on `[0,1/2]` have masses `ℓ,u`, support `a,b`, and exact mean `t`, and put
+
+```text
+Δ = h(t)−ℓh(a)−uh(b) ≥ 0.
+```
+
+Applying the sharp join-curvature bound to the center row and the affine bound to the two
+outer rows gives
+
+```text
+h(t∨t)−E h(X∨Y)
+  ≤ ((1−t)/(1+t) + 1−4t/3)Δ.
+```
+
+The dependent term has a separate two-to-one comparison. Define
+
+```text
+g(x)=2h(x)−h(min(2x,1/2)).
+```
+
+On `[0,1/4]`, `g(x)=2h(x)−h(2x)` and
+
+```text
+g″(x)=2/((1−2x)(1−x)) ≥ 0.
+```
+
+Thus `g` lies below the chord through `0` and `1/4`. Both chord endpoints lie below the
+entropy tangent at `t`: the `1/4` endpoint is ordinary concavity of `h`, while the zero
+endpoint reduces to
+
+```text
+−log(2(1−t)²) ≥ 0.
+```
+
+Above `1/4`, the same supporting-line inequality is twice the entropy tangent inequality.
+Averaging it at mean `t` yields
+
+```text
+log 2−E h(min(2X,1/2)) ≤ 2Δ.
+```
+
+At the certified parameters the combined loss coefficient is
+
+```text
+(193/200)((1−t)/(1+t)+1−4t/3)+(7/200)·2
+  = 56146740823/57582500000,
+```
+
+which is below `10000001/10000000` by
+`5743059741/230330000000`. Every two-diagonal objective is consequently bounded below by
+the point-mass objective. The exact dual evaluator at that rational point gives the
+kernel-replayed lower bound
+
+```text
+1102953606749615/1152921504606846976 > 0.
+```
+
+`Frankl/DiagonalObjective.lean` formalizes the supporting line, the convex low branch, both
+deficit estimates, their exact coefficient comparison, the point enclosure, and the resulting
+nonnegativity of the full lower and upper diagonal coordinate rectangles.
+
 ## Outward-rounded certificate
 
 [`tools/certify_frankl_38198.py`](../tools/certify_frankl_38198.py) uses
@@ -430,11 +494,12 @@ in the preceding section, now formalized without numerical oracles.
 At parameters `(order,fuel,bits,depth)=(12,64,32,32)`, exact executable reduction of the Lean
 definitions returns `some ()` for the endpoint, lower-diagonal, and upper-diagonal rectangles.
 The joint replay took `9:03.89` wallclock, `530.79` user seconds, and `1,813,464 KiB` peak RSS
-under Lean 4.12.0. This is stronger implementation evidence than the independent Arb run, but
-it is not yet a kernel proof of those three closed equalities. Naive reduction of the rational
-expression tree inside the kernel has prohibitive time and memory behavior even on small seeded
-cells. The remaining certificate obligation is therefore to produce a compact proof trace,
-strengthen the analytic/monotonicity leaves enough to collapse the tree, or replace general
+under Lean 4.12.0. The subsequent analytic argument above has replaced both diagonal verdicts
+with kernel theorems. The endpoint verdict remains stronger implementation evidence than the
+independent Arb run, but is not yet a kernel theorem. Naive reduction of its rational expression
+tree inside the kernel has prohibitive time and memory behavior even on small seeded cells. The
+remaining certificate obligation is therefore to produce a compact endpoint proof trace,
+strengthen its analytic or monotonicity leaves enough to collapse the tree, or replace general
 rational reduction with a proved fixed-point checker.
 
 ## Evidence boundary

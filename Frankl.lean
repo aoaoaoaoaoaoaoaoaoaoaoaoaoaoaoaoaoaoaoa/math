@@ -21,5 +21,6 @@ import Frankl.CertificateExpr
 import Frankl.CertificateEval
 import Frankl.CertificateTree
 import Frankl.CertificateObjective
+import Frankl.DiagonalObjective
 import Frankl.CertificateAdaptive
 import Frankl.CertificateCorners

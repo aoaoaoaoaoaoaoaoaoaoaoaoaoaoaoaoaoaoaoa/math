@@ -80,7 +80,8 @@ theorem orbitDeficit_nonneg {a d : ℝ}
   dsimp [orbitDeficit]
   linarith
 
-private noncomputable def joinEntropyDifference (q coefficient x : ℝ) : ℝ :=
+/-- Curvature-comparison remainder between scaled marginal entropy and join entropy. -/
+noncomputable def joinEntropyDifference (q coefficient x : ℝ) : ℝ :=
   coefficient * binEntropy x - binEntropy (join x q)
 
 private noncomputable def joinEntropyDifferenceDeriv (q coefficient x : ℝ) : ℝ :=
@@ -130,7 +131,8 @@ private theorem hasDerivAt_joinEntropyDifferenceDeriv {q coefficient x : ℝ}
     ((hjcomplog.sub hjlog).const_mul (1 - q)) using 1
   simp only [joinEntropyDifferenceDeriv2, one_div]
 
-private theorem joinEntropyDifference_concaveOn {q coefficient : ℝ}
+/-- The join-curvature remainder is concave throughout the low interval. -/
+theorem joinEntropyDifference_concaveOn {q coefficient : ℝ}
     (hq₀ : 0 ≤ q) (hq₁ : q < 1)
     (hcoefficient : ∀ x ∈ Ioo (0 : ℝ) (1 / 2),
       x * (1 - q) / join x q ≤ coefficient) :
