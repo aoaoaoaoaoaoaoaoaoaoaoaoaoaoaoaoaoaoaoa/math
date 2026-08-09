@@ -119,6 +119,10 @@ The field and trace calculations are retained here rather than as a parallel alg
 library. The only theorem that changes the executable reduction boundary is the arbitrary-word
 pure-cubic collapse, which is formalized in `CubicReturn.lean`.
 
+The subsequent common-left reflection normal form and the automatic genericity of the pure
+one-singular stratum supersede the open boundary stated below; see
+[`m32-cubic-reflection-generic-bridge-2026-08-09.md`](m32-cubic-reflection-generic-bridge-2026-08-09.md).
+
 ## Wound
 
 ```text

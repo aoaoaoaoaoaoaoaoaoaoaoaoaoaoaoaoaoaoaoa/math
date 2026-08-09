@@ -479,14 +479,17 @@ and the Gauss valuation. It is retained as audited `R32-O15`, not as a second po
 library. See
 [`audits/m32-fixed-support-toric-obstruction-2026-08-08.md`](audits/m32-fixed-support-toric-obstruction-2026-08-08.md).
 
-The nonsplit cubic fallback has also lost its proposed punctuation channel. The new
-`CubicReturn` module proves that `A³=NI`, with `N≠0`, reduces every arbitrary return word exactly
-to a word over the three residue returns, and transfers the full split-pair mortality problem to
-that finite triple. The surrounding audit proves that an irreducible non-pure cubic has only
-finitely many singular returns, while the pure triple satisfies a trace-tensor constraint and
-leaves at most involutive-ratio PI₂. These algebraic-number arguments are retained as audited
-`R32-O16`; only the consuming arbitrary-word reduction enters the Lean ontology. See
-[`audits/m32-cubic-punctuation-collapse-2026-08-08.md`](audits/m32-cubic-punctuation-collapse-2026-08-08.md).
+The nonsplit cubic fallback has also lost its proposed punctuation channel. `CubicReturn` proves
+that `A³=NI`, with `N≠0`, reduces every arbitrary return word exactly to a word over the three
+residue returns and transfers physical mortality to that finite triple. The surrounding audits
+derive a common-left reflection form for every irreducible cubic and the exact pure
+one-singular normal form `(P R,P,P Jμ)`. Lean now checks the decisive synthesis: for row
+`(1,1)` and column `Pe₁`, both exceptional reverse-compiler scalars are `μ⁻¹`. The pure fork is
+therefore already GPI₂; only the non-pure recurrence-of-reflections orbit remains independently
+open. See
+[`audits/m32-cubic-punctuation-collapse-2026-08-08.md`](audits/m32-cubic-punctuation-collapse-2026-08-08.md)
+and
+[`audits/m32-cubic-reflection-generic-bridge-2026-08-09.md`](audits/m32-cubic-reflection-generic-bridge-2026-08-09.md).
 
 The rank-(2,2) graph is no longer an independent residue. `RankTwoPunctuation` proves that every
 compatible square with one rank-one loop and three units transports exactly to the existing raw
@@ -652,7 +655,7 @@ with a complete arbitrary-word converse.
 | `LinearRepresentation.lean` | finite Hankel sections and exact-realization state lower bounds |
 | `BoundaryTax.lean` | generic finite-witness two-channel boundary tax |
 | `ReturnFamily.lean` | split finite-rank return normal form and matrix-valued block-Hankel witnesses |
-| `CubicReturn.lean` | arbitrary-word collapse of a pure-cubic return family to its three residue returns |
+| `CubicReturn.lean` | pure-cubic arbitrary-word collapse and automatic genericity of the one-singular normal form |
 | `EdgeCompression.lean` | exact adjacent-edge compression for split finite-rank families |
 | `TwoPlaneEdges.lean` | compatible two-plane realization of a `2 × 2` edge square and exact rank-two certificates |
 | `ReverseEdge.lean` | generic projective-incidence reverse compiler, basis adaptation, and all-path converse |
@@ -782,6 +785,7 @@ with a complete arbitrary-word converse.
 | A split finite-rank binary pair is mortal exactly when one return product vanishes | `ReturnFamily.pairGenerator_isMortal_iff` |
 | Finite return block-Hankel sections factor through every exact ambient realization | `ReturnFamily.finiteReturnHankel_factor`, `ReturnFamily.returnHankel_card_le` |
 | A pure-cubic split pair is mortal exactly when its three residue returns are mortal | `CubicReturn.pairGenerator_isMortal_iff_residue` |
+| Both reverse-compiler scalars of the pure one-singular cubic normal form equal `μ⁻¹` | `CubicReturn.pureOneSingular_reverseEdgeScalars` |
 | A split finite-rank family is mortal exactly when one constrained edge path vanishes | `EdgeCompression.isMortal_iff_exists_edgeProduct_eq_zero` |
 | Every compatible two-plane edge square is realized by two rank-two generators | `TwoPlaneEdges.output_mul_input`, `TwoPlaneEdges.generator_rank` |
 | Generic projective incidence compiles to two rank-two `3 × 3` generators | `ReverseEdge.isMortal_adaptedGenerator_iff`, `ReverseEdge.adaptedGenerator_rank` |

@@ -99,7 +99,7 @@ file owns the mathematical stock.
 | [`R32-O13`](#r32-o13-renewal-graph-collapse-and-reset-pullback) | obstruction | every aligned macro consumes shadow depth, local bounded depth does not bound height, and reset ancestry is one exact pulled-back determinant | formalized | graduated |
 | [`R32-O14`](#r32-o14-fixed-reset-geodesic-and-complete-endpoint-language) | structure theorem and obstruction | endpoint terminality is exact and every actual reset prefix has the same distinguished-prime kernel direction | formalized | graduated |
 | [`R32-O15`](#r32-o15-fixed-support-toric-compiler-obstruction) | obstruction | rational fixed-prime counter charts with affine waits admit neither a nontrivial monomial instruction nor a repeatable control cycle | audited | graduated |
-| [`R32-O16`](#r32-o16-irreducible-cubic-punctuation-collapse) | structure theorem and obstruction | irreducible cubic singular returns are finite unless all waits collapse modulo three | audited | graduated |
+| [`R32-O16`](#r32-o16-irreducible-cubic-punctuation-collapse) | structure theorem and obstruction | cubic returns share a reflection form; the pure one-singular fork is already generic incidence | formalized | graduated |
 | [`R32-O17`](#r32-o17-angular-emergent-primes-and-endpoint-compactness-no-go) | obstruction | terminal angular poles create primes outside determinant support and the wait gauge has nontrivial directional adelic height | formalized | graduated |
 | [`R32-O18`](#r32-o18-finite-rational-radial-atlas-obstruction) | obstruction | every finite rational carry-mode atlas with fixed additive wait shifts is eventually periodic | audited | graduated |
 | [`R32-S07`](#r32-s07-decoded-residual-address-normal-form) | structure theorem | mortality is finite inverse-address membership in disjoint rational p-adic branch spheres | formalized | active |
@@ -3971,7 +3971,7 @@ stationary prime-exponent register.
 ### R32-O16: Irreducible-cubic punctuation collapse
 
 **Kind:** structure theorem and obstruction
-**Evidence:** audited
+**Evidence:** formalized
 **Disposition:** graduated
 
 Let `A ∈ GL₃(ℚ)` have irreducible cubic characteristic polynomial and put `Mₙ=VAⁿU`
@@ -3988,25 +3988,41 @@ M_(3q+r)=N^q M_r,
 mortality of {Mₙ : n≥0} ↔ mortality of {M₀,M₁,M₂}.
 ```
 
-The residue triple is not arbitrary. Three determinant-polarization equations characterize its
-rank-two trace tensor. If exactly one residue is singular, the other two units differ by a
-projective involution. Zero singular residues give immortality; two singular residues reduce to
-four order-at-most-two recurrence tests. The sole pure-cubic residue is therefore a constrained
-involutive-ratio PI₂ instance.
+Every irreducible-cubic return family has a computable common-left reflection form
+`Mₙ=QJₙ`, where each `Jₙ` is traceless. Unit indices are projective involutions and singular
+indices are square-zero rank-one maps. The non-pure residue is therefore exact reachability
+between finitely many forced endpoint lines under an order-three recurrence of reflections.
 
-**Scope:** the Lean artifact checks the pure-cubic arbitrary-word collapse over a field. The
-field faithfulness, singular-time classification, trace tensor, and residual decision split are
-independently audited. Non-pure isolated singular cuts may still be joined by an unbounded word
-over the projectively injective unit returns; the one-singular pure case remains open.
+The pure residue triple is still more rigid. Three determinant-polarization equations give the
+normal form
 
-**Artifact:** `CubicReturn.returnProduct_eq_smul_residues` and
-`CubicReturn.pairGenerator_isMortal_iff_residue` in
-[`CubicReturn.lean`](MatrixMortality/CubicReturn.lean), with the complete reconstruction in
-[`m32-cubic-punctuation-collapse-2026-08-08.md`](audits/m32-cubic-punctuation-collapse-2026-08-08.md).
+```text
+(P R, P, P Jμ),
+R=[[1,1],[0,0]],   Jμ=[[0,μ],[1,0]],   μ∈ℚ× ∖ ℚ×³.
+```
 
-**Use:** retire cubic singular timing as an unbounded store. Any nonsplit cubic attack must now
-solve an all-invertible projective bridge between finitely many isolated rank-one cuts, or solve
-the strictly constrained involutive-ratio PI₂ throat.
+Zero singular residues give immortality and two singular residues reduce to four
+order-at-most-two recurrence tests. In the unique one-singular stratum, Lean proves that both
+exceptional scalars of the existing reverse-edge compiler are exactly `μ⁻¹`. Hence this entire
+pure fork is already one GPI₂ instance, not an independent involutive-ratio problem.
+
+**Scope:** Lean checks the pure-cubic arbitrary-word collapse and the exact genericity scalars of
+the one-singular normal form. Field faithfulness, singular-time classification, common-left
+reflection form, trace-tensor classification, and the other singularity counts are independently
+audited. Non-pure isolated singular cuts may still be joined by an unbounded word over the
+projectively injective recurrence of unit reflections. GPI₂ itself remains open.
+
+**Artifact:** `CubicReturn.returnProduct_eq_smul_residues`,
+`CubicReturn.pairGenerator_isMortal_iff_residue`, and
+`CubicReturn.pureOneSingular_reverseEdgeScalars` in
+[`CubicReturn.lean`](MatrixMortality/CubicReturn.lean), with the reconstructions in
+[`m32-cubic-punctuation-collapse-2026-08-08.md`](audits/m32-cubic-punctuation-collapse-2026-08-08.md)
+and
+[`m32-cubic-reflection-generic-bridge-2026-08-09.md`](audits/m32-cubic-reflection-generic-bridge-2026-08-09.md).
+
+**Use:** retire cubic singular timing as an unbounded store and merge the pure one-singular fork
+into GPI₂. Any independent nonsplit cubic attack must now decide the non-pure reflection orbit
+between finitely many isolated rank-one cuts.
 
 ### R32-S32: Rank-two punctuation and graph removal
 

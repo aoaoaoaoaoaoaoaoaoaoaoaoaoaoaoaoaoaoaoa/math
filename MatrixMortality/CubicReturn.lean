@@ -1,4 +1,5 @@
 import MatrixMortality.ReturnFamily
+import MatrixMortality.ReverseEdge
 
 /-!
 # Pure-cubic return collapse
@@ -115,5 +116,84 @@ theorem pairGenerator_isMortal_iff_residue
     inputLeftInverse outputRightInverse ambient_unit left_inverse right_inverse]
   exact exists_returnProduct_eq_zero_iff_residue ambient input output scalar
     scalar_ne_zero cubic
+
+/-! ## The one-singular normal form -/
+
+/-- Normalized projective involution in the pure one-singular cubic residue. -/
+def pureInvolution (mu : ℚ) : Square (Fin 2) ℚ :=
+  !![0, mu; 1, 0]
+
+private theorem inv_mulVec_eq_of_mulVec_eq
+    {matrix : Square (Fin 2) ℚ} (matrix_unit : IsUnit matrix)
+    {source target : Fin 2 → ℚ} (action : matrix *ᵥ source = target) :
+    matrix⁻¹ *ᵥ target = source := by
+  calc
+    matrix⁻¹ *ᵥ target = matrix⁻¹ *ᵥ (matrix *ᵥ source) :=
+      congrArg (fun vector => matrix⁻¹ *ᵥ vector) action.symm
+    _ = (matrix⁻¹ * matrix) *ᵥ source :=
+      Matrix.mulVec_mulVec source matrix⁻¹ matrix
+    _ = 1 *ᵥ source := congrArg (fun M => M *ᵥ source)
+      (Matrix.nonsing_inv_mul matrix
+        (matrix.isUnit_iff_isUnit_det.mp matrix_unit))
+    _ = source := Matrix.one_mulVec source
+
+/-- In the pure one-singular normal form `(P R, P, P J_mu)`, both exceptional scalars of the
+reverse-edge compiler are `mu⁻¹`. Thus every such instance with `mu ≠ 0` is already generic. -/
+theorem pureOneSingular_reverseEdgeScalars
+    (P : Square (Fin 2) ℚ) (P_unit : IsUnit P)
+    (mu : ℚ) (mu_ne : mu ≠ 0) :
+    let J := pureInvolution mu
+    let row : Fin 2 → ℚ := ![1, 1]
+    let source : Fin 2 → ℚ := ![1, 0]
+    let column := P *ᵥ source
+    ReverseEdge.alpha (P * J) row column = mu⁻¹ ∧
+      ReverseEdge.beta P (P * J) row column = mu⁻¹ := by
+  dsimp only
+  let J := pureInvolution mu
+  let first : Fin 2 → ℚ := ![1, 0]
+  let second : Fin 2 → ℚ := ![0, 1]
+  let row : Fin 2 → ℚ := ![1, 1]
+  let column := P *ᵥ first
+  have J_unit : IsUnit J := by
+    rw [Matrix.isUnit_iff_isUnit_det]
+    apply isUnit_iff_ne_zero.mpr
+    simp [J, pureInvolution, Matrix.det_fin_two, mu_ne]
+  have H_unit : IsUnit (P * J) := P_unit.mul J_unit
+  have pulled_action :
+      (P * J) *ᵥ (mu⁻¹ • second) = column := by
+    have J_action : J *ᵥ (mu⁻¹ • second) = first := by
+      ext i
+      fin_cases i <;>
+        simp [J, pureInvolution, first, second, Matrix.mulVec,
+          Matrix.dotProduct, Fin.sum_univ_succ, mu_ne]
+    calc
+      (P * J) *ᵥ (mu⁻¹ • second) = P *ᵥ (J *ᵥ (mu⁻¹ • second)) :=
+        (Matrix.mulVec_mulVec (mu⁻¹ • second) P J).symm
+      _ = P *ᵥ first := congrArg (fun vector => P *ᵥ vector) J_action
+      _ = column := rfl
+  have pulled_eq :
+      ReverseEdge.pulledColumn (P * J) column = mu⁻¹ • second := by
+    exact inv_mulVec_eq_of_mulVec_eq H_unit pulled_action
+  have first_action :
+      (P * J) *ᵥ (mu⁻¹ • first) = P *ᵥ (mu⁻¹ • second) := by
+    have J_action : J *ᵥ (mu⁻¹ • first) = mu⁻¹ • second := by
+      ext i
+      fin_cases i <;>
+        simp [J, pureInvolution, first, second, Matrix.mulVec,
+          Matrix.dotProduct, Fin.sum_univ_succ]
+    calc
+      (P * J) *ᵥ (mu⁻¹ • first) = P *ᵥ (J *ᵥ (mu⁻¹ • first)) :=
+        (Matrix.mulVec_mulVec (mu⁻¹ • first) P J).symm
+      _ = P *ᵥ (mu⁻¹ • second) :=
+        congrArg (fun vector => P *ᵥ vector) J_action
+  have first_eq :
+      ReverseEdge.firstVector P (P * J) column = mu⁻¹ • first := by
+    rw [ReverseEdge.firstVector, pulled_eq]
+    exact inv_mulVec_eq_of_mulVec_eq H_unit first_action
+  constructor
+  · rw [ReverseEdge.alpha, pulled_eq]
+    simp [row, second, Matrix.dotProduct, Fin.sum_univ_succ]
+  · rw [ReverseEdge.beta, first_eq]
+    simp [row, first, Matrix.dotProduct, Fin.sum_univ_succ]
 
 end MatrixMortality.CubicReturn

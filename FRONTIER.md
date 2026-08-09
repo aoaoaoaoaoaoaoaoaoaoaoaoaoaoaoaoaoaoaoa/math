@@ -576,13 +576,14 @@ decidability for each fixed entry does not decide products of returns with indep
 waits.
 
 The irreducible-cubic fallback is now sharply reduced. Cubic-field faithfulness makes every
-return nonzero and every singular return rank one. Unless `χ_A=X³−N`, the singular waits are
-a finite effectively enumerable set and the unit returns are projectively injective. In the
-pure case `A³=NI`, Lean collapses every return word to the three residue returns; their trace
-tensor forbids arbitrary controls, and the sole open one-singular-residue stratum has two units
-whose ratio is a projective involution. Thus cubic singular punctuation cannot carry an
-aperiodic computation. The surviving cubic questions are all-invertible projective bridges,
-not another wait decoder. See [`R32-O16`](SALVAGE.md#r32-o16-irreducible-cubic-punctuation-collapse).
+return nonzero and every singular return rank one. A computable common-left factor makes every
+unit return a projective involution and every singular return square-zero. Unless
+`χ_A=X³−N`, the singular waits are finite and the remaining exact problem is reachability
+between their forced lines under an order-three recurrence of reflections. In the pure case,
+Lean collapses all waits modulo three. The unique one-singular normal form has reverse-compiler
+scalars `α=β=μ⁻¹`, so it is already GPI₂; zero- and two-singular triples are decidable. Thus only
+the non-pure reflection orbit remains as an independent cubic fork. See
+[`R32-O16`](SALVAGE.md#r32-o16-irreducible-cubic-punctuation-collapse).
 
 ### ReturnSquare laboratory
 
@@ -1187,7 +1188,7 @@ all-legal block inequality for the carried generalized continuant. See
 | Recurrence-sensitive pressure | Combine the exact continuant recurrence, full cyclotomic multiplicity, and the fixed-kernel pullback into a global carry bound on the doubly broken residue | Direction-free product-formula pressure fails because each wait gauge pays `p^(2|b−a|)` |
 | Aperiodic angular counter | Construct one exact fixed-coefficient reset orbit with unbounded denominators while the p-radial component remains on the reset ray | Every useful auxiliary prime needs a later exact-order synchronization and simultaneous endpoint divisibility; finite rational atlases are eventually periodic |
 | Repeated-factor extraction | Force a sufficiently heavy repeated factor in every bounded-complexity wait prefix and apply `R32-S29` | Arbitrary repeated factors are controlled once found; no theorem yet extracts one from a moving denominator schedule |
-| Irreducible cubic bridge | Decide isolated-cut words over the non-pure projectively injective unit alphabet, or the pure involutive-ratio PI₂ residue | Singular timing is finite or modulo three and cannot supply unbounded punctuation |
+| Irreducible cubic reflection orbit | Decide reachability between isolated singular lines under the non-pure order-three recurrence of projective involutions | Singular timing is finite; independently selected unit indices remain unbounded |
 | Generic projective incidence | Decide GPI₂ directly, or reduce arbitrary PI₂ to its generic stratum | Rank-(2,2) adds no graph hardness; positive-word genericization still lacks an OR or singular data transport |
 
 The split-spectrum hot path is now a coefficient-effective amortization of the doubly
