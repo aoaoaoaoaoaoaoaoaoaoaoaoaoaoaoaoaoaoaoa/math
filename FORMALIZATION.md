@@ -25,7 +25,7 @@ The Python/Arb program is retained as independent evidence and a box-generator, 
 oracle. The formal certificate must use proved rational enclosures for every logarithm and may
 not use `native_decide`, external declarations, or a generated axiom.
 
-The following analytic and finite-convex core is now kernel-checked:
+The following analytic, finite-convex, and certificate core is now kernel-checked:
 
 - exact target arithmetic, including `19099/50000>(3−√5)/2`;
 - low-square entropy curvature and Jensen-deficit bounds;
@@ -55,10 +55,29 @@ The following analytic and finite-convex core is now kernel-checked:
   contraction, and monotonicity of the complete strict Yu gap;
 - support reindexing, within-orbit sorting, classification of every identified half-supported
   extreme, and the complete reduction of every bounded-mean finite symmetric coupling to the
-  diagonal, diagonal–diagonal, or diagonal–endpoint objective family.
+  diagonal, diagonal–diagonal, or diagonal–endpoint objective family;
+- exact bivariate formulas and coordinate maps for the diagonal–diagonal and
+  diagonal–endpoint objective families, together with their domain proofs;
+- an exact rational ball arithmetic, outward dyadic rounding, monotone entropy enclosures,
+  and a four-term atanh logarithm enclosure with a proved geometric remainder and a fixed
+  rational enclosure of `log 2`;
+- a typed entropy-expression language with real semantics, coordinate derivatives, domain and
+  smoothness predicates, and a rounded dual evaluator whose value and derivative balls are
+  proved sound;
+- direct interval and first-order mean-value leaves, rational subdivision trees, adaptive and
+  seeded generators, executable direct adjudicators, and proofs that direct adjudication is
+  extensionally identical to checking the generated tree;
+- analytic proofs of both entropy-zero endpoint squares, including the required logarithm,
+  near-doubling entropy, ternary-fiber entropy, and concavity estimates.
 
-These declarations live under `Frankl/`. They do not yet promote the candidate bound: the
-reflected interval cover and the final union-closed entropy implication remain open.
+These declarations live under `Frankl/`, principally in `CanonicalObjective.lean`,
+`LogBounds.lean`, `Interval.lean`, `IntervalEntropy.lean`, `CertificateExpr.lean`,
+`CertificateEval.lean`, `CertificateTree.lean`, `CertificateObjective.lean`,
+`CertificateAdaptive.lean`, and `CertificateCorners.lean`. The executable rational checker
+returns success on all three compact regions at order `12`, fuel `64`, precision `32`, and
+depth `32`; this computation is evidence, not a theorem. The candidate bound is not promoted
+until the success verdict itself is replayed by the kernel and the final union-closed entropy
+implication is formalized.
 
 The Lean development verifies the complete computable source reduction and the matrix compilers:
 

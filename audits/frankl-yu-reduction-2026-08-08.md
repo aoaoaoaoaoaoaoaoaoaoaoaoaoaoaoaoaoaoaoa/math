@@ -409,6 +409,34 @@ diagonal-diagonal-upper: sha256 f870f4f48e71c34e49bb9cf4e2b7b365d3280c7b4b2a61ff
 Frankl entropy certificate at 19099/50000: PASS
 ```
 
+## Kernel-checked certificate architecture
+
+The formal development now owns the certificate mathematics rather than trusting Arb. It
+defines the three exact rational coordinate rectangles and objective expressions, proves that
+their semantics are the reduced objectives above, and checks every domain obligation. Its
+rational ball arithmetic has outward dyadic rounding. Logarithms use four odd terms of
+
+```text
+log((1+z)/(1−z)) = 2(z+z³/3+z⁵/5+z⁷/7+⋯)
+```
+
+with proved error `2|z|⁹/(1−|z|)`, after power-of-two scaling and a proved rational
+enclosure of `log 2`. Entropy and coordinate-derivative enclosures are derived from these
+primitives. A first-order mean-value leaf, rational subdivision checker, and adaptive seeded
+generator are proved sound; direct recursive adjudication is proved equal to checking its
+generated tree. The two singular endpoint squares are discharged by the analytic inequalities
+in the preceding section, now formalized without numerical oracles.
+
+At parameters `(order,fuel,bits,depth)=(12,64,32,32)`, exact executable reduction of the Lean
+definitions returns `some ()` for the endpoint, lower-diagonal, and upper-diagonal rectangles.
+The joint replay took `9:03.89` wallclock, `530.79` user seconds, and `1,813,464 KiB` peak RSS
+under Lean 4.12.0. This is stronger implementation evidence than the independent Arb run, but
+it is not yet a kernel proof of those three closed equalities. Naive reduction of the rational
+expression tree inside the kernel has prohibitive time and memory behavior even on small seeded
+cells. The remaining certificate obligation is therefore to produce a compact proof trace,
+strengthen the analytic/monotonicity leaves enough to collapse the tree, or replace general
+rational reduction with a proved fixed-point checker.
+
 ## Evidence boundary
 
 The analytic reduction above corrects two distinct weaknesses in the source chain: Yu's use

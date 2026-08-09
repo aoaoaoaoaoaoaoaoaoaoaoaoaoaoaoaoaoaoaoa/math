@@ -48,9 +48,9 @@ file owns the mathematical stock.
 | [`FC-S02`](#fc-s02-downward-boundary-obstruction) | structure theorem | a low-density counterexample has large average downward boundary | audited | active |
 | [`FC-S03`](#fc-s03-binary-semigroup-weighted-frankl-theorem) | structure theorem | weighted Frankl at homogeneous weight `1/2` | audited | active |
 | [`FC-S04`](#fc-s04-cubical-unique-root-obstruction) | structure theorem | a counterexample complement has too many uniquely rooted sets | audited | active |
-| [`FC-S05`](#fc-s05-exact-mean-yu-repair) | structure theorem | Yu's coupling reduction is valid after a monotone exact-mean lift | audited | active |
-| [`FC-S06`](#fc-s06-half-support-elimination) | structure theorem | entropy extremes may be confined to `[0,1/2]∪{1}` by a finite monotone kernel | audited | active |
-| [`FC-S07`](#fc-s07-low-orbit-contraction) | structure theorem | every surviving two-orbit extreme contracts to one of two bivariate families | audited | active |
+| [`FC-S05`](#fc-s05-exact-mean-yu-repair) | structure theorem | Yu's coupling reduction is valid after a monotone exact-mean lift | formalized | graduated |
+| [`FC-S06`](#fc-s06-half-support-elimination) | structure theorem | entropy extremes may be confined to `[0,1/2]∪{1}` by a finite monotone kernel | formalized | graduated |
+| [`FC-S07`](#fc-s07-low-orbit-contraction) | structure theorem | every surviving two-orbit extreme contracts to one of two bivariate families | formalized | graduated |
 | [`FC-M01`](#fc-m01-rational-yu-certificate) | partial mechanism | Arb certifies the two reduced gaps at `19099/50000` | computational | active |
 | [`FC-O01`](#fc-o01-homogeneous-tilt-persistence-fails) | obstruction | one-coordinate majority need not persist under homogeneous product tilt | audited | active |
 | [`FC-O02`](#fc-o02-uniform-fiber-semigroup-ceiling) | obstruction | finite full-fiber semigroup lifts cannot beat the uniform entropy barrier | audited | stock |
@@ -313,8 +313,8 @@ also use every strict coordinate majority; do not pursue homology alone.
 ### FC-S05: Exact-mean Yu repair
 
 **Kind:** structure theorem
-**Evidence:** audited
-**Disposition:** active
+**Evidence:** formalized
+**Disposition:** graduated
 
 For a finite symmetric coupling `P` whose marginal has mean `s<t`, mix in
 `γ=(t−s)/(1−s)` mass at `(1,1)`. The new coupling has exact marginal mean `t`; its
@@ -343,13 +343,11 @@ identified exactly. `Frankl/OrbitMeanLift.lean` realizes the `(1,1)` lift on sym
 laws, proves the quadratic/linear/linear scaling of the three entropy terms, and composes the
 lift with the extreme reduction in one theorem.
 
-**Next:** compose this extreme reduction with the coupling-level half-support kernel.
-
 ### FC-S06: Half-support elimination
 
 **Kind:** structure theorem
-**Evidence:** audited
-**Disposition:** active
+**Evidence:** formalized
+**Disposition:** graduated
 
 For each marginal atom `y∈(1/2,1)`, the kernel
 
@@ -386,13 +384,11 @@ preservation, aggregates all source kernels without iteration, proves dependent-
 complete-gap monotonicity, and re-reduces the transformed law to an identified restricted
 extreme.
 
-**Next:** reflect the two final compact objective certificates in Lean.
-
 ### FC-S07: Low-orbit contraction
 
 **Kind:** structure theorem
-**Evidence:** audited
-**Disposition:** active
+**Evidence:** formalized
+**Disposition:** graduated
 
 For `f_q(x)=h(x+q−xq)` on the low square,
 
@@ -434,10 +430,6 @@ identified extremes, classify their half-supported coordinates, contract the one
 cases, and compose the entire bounded-mean analytic reduction to the diagonal,
 diagonal–diagonal, or diagonal–endpoint objective family.
 
-**Next:** reflect the rational interval certificate for the two nondegenerate objective
-families; the diagonal case is their boundary specialization and should be discharged alongside
-them.
-
 ### FC-M01: Rational Yu certificate
 
 **Kind:** partial mechanism
@@ -462,11 +454,14 @@ certificate to pass the repository's strict Lean gate.
 **Use:** it fixes a concrete formalization target that would improve the universal abundance
 constant beyond `(3−√5)/2`.
 
-**Artifact:** [`tools/certify_frankl_38198.py`](tools/certify_frankl_38198.py) and
-[`audits/frankl-yu-reduction-2026-08-08.md`](audits/frankl-yu-reduction-2026-08-08.md#outward-rounded-certificate).
+**Artifact:** [`tools/certify_frankl_38198.py`](tools/certify_frankl_38198.py),
+[`audits/frankl-yu-reduction-2026-08-08.md`](audits/frankl-yu-reduction-2026-08-08.md#outward-rounded-certificate),
+and the `Frankl/Certificate*.lean`, `Frankl/Interval*.lean`, and `Frankl/LogBounds.lean`
+checker modules.
 
-**Next:** translate the two interval covers and the analytic reduction into suppression-free
-Lean; only then change the evidence label or universal-bound ledger.
+**Next:** replace the successful executable adjudication with a tractable kernel-replayed
+verdict, then formalize the final entropy implication to union-closed abundance. Only then
+change the evidence label or universal-bound ledger.
 
 ### FC-O02: Uniform-fiber semigroup ceiling
 
