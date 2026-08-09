@@ -18,9 +18,10 @@ Every record has a stable identifier and five core fields:
 Every active record also states the next promotion step. A graduated record instead cites its
 formal artifact.
 
-The first namespace component identifies the campaign: `MM` for general matrix-mortality
-compilers, `R32` for the rank-three binary frontier `M₃(2)`, `M4` for the `M₄(3)` frontier,
-`G3` for the three-letter GPCP and `M₃(4)` frontier, and `D2` for the dimension-two wall.
+The first namespace component identifies the campaign: `FC` for Frankl’s conjecture, `MM` for
+general matrix-mortality compilers, `R32` for the rank-three binary frontier `M₃(2)`, `M4` for
+the `M₄(3)` frontier, `G3` for the three-letter GPCP and `M₃(4)` frontier, and `D2` for the
+dimension-two wall.
 The second component identifies the result class: `C` compiler, `O` obstruction, `M` partial
 mechanism, `S` structure theorem, or `D` decidable stratum. Numbers never change after
 assignment.
@@ -43,6 +44,13 @@ file owns the mathematical stock.
 
 | ID | Kind | Result | Evidence | Disposition |
 | --- | --- | --- | --- | --- |
+| [`FC-S01`](#fc-s01-bidual-horn-density-dichotomy) | structure theorem | every bidual Horn function satisfies Frankl’s conjecture | audited | stock |
+| [`FC-S02`](#fc-s02-downward-boundary-obstruction) | structure theorem | a low-density counterexample has large average downward boundary | audited | active |
+| [`FC-S03`](#fc-s03-binary-semigroup-weighted-frankl-theorem) | structure theorem | weighted Frankl at homogeneous weight `1/2` | audited | active |
+| [`FC-S04`](#fc-s04-cubical-unique-root-obstruction) | structure theorem | a counterexample complement has too many uniquely rooted sets | audited | active |
+| [`FC-O01`](#fc-o01-homogeneous-tilt-persistence-fails) | obstruction | one-coordinate majority need not persist under homogeneous product tilt | audited | active |
+| [`FC-O02`](#fc-o02-uniform-fiber-semigroup-ceiling) | obstruction | finite full-fiber semigroup lifts cannot beat the uniform entropy barrier | audited | stock |
+| [`FC-O03`](#fc-o03-maximal-self-dual-completion-fails) | obstruction | maximal complement-free meet families need not be self-dual | audited | stock |
 | [`MM-C01`](#mm-c01-fixed-anchor-rank-one-compiler) | compiler | common-fixed-column scalar zero to mortality | formalized | graduated |
 | [`MM-C02`](#mm-c02-common-image-restriction) | compiler | mortality-preserving restriction to a common image | formalized | graduated |
 | [`MM-C03`](#mm-c03-scheduled-binary-compiler) | compiler | fixed-width tag strokes to a total two-letter scalar series | formalized | graduated |
@@ -129,6 +137,233 @@ file owns the mathematical stock.
 | [`D2-D06`](#d2-d06-private-prime-peeling) | decidable stratum | a private multiplier prime decides every noncritical endpoint shell | audited | stock |
 | [`D2-D07`](#d2-d07-bounded-valuation-orthants) | decidable stratum | bounded cooriented affine families have finite successful state spaces | audited | stock |
 | [`D2-M01`](#d2-m01-benchmark-critical-shell) | partial mechanism | the mixed-prime benchmark reduces generically to one guarded `5`-adic shell | audited | active |
+
+## Frankl Conjecture
+
+### FC-S01: Bidual-Horn density dichotomy
+
+**Kind:** structure theorem
+**Evidence:** audited
+**Disposition:** stock
+
+Let `h:2^[n]→{0,1}` be bidual Horn, with false points `F` and true points `T`. Then
+`F` is intersection-closed and `T` is union-closed. If `|T|≥2^(n−1)`, Karpas’s
+half-cube theorem gives an abundant coordinate in `T`, hence a rare coordinate in `F`.
+Otherwise `|F|>2^(n−1)` and the set-complement family
+
+```text
+F* = {[n]∖A : A∈F}
+```
+
+is union-closed. An abundant coordinate in `F*` is rare in `F`. Therefore every bidual
+Horn function with at least two false points satisfies Frankl’s conjecture; self-dual Horn
+functions are an immediate subclass.
+
+**Scope:** this proves the conjecture on the bidual class. It does not transform an arbitrary
+Horn function into a bidual one, improve the universal abundance constant, or settle Frankl’s
+conjecture.
+
+**Use:** remove bidual and self-dual Horn functions from any proposed minimal counterexample
+class. Any completion-based attack must preserve a counterexample while entering a class now
+known to be impossible.
+
+**Artifact:** [`audits/frankl-bidual-horn-density-2026-08-08.md`](audits/frankl-bidual-horn-density-2026-08-08.md#bidual-horn-theorem).
+
+### FC-S02: Downward boundary obstruction
+
+**Kind:** structure theorem
+**Evidence:** audited
+**Disposition:** active
+
+Let `C⊆2^[n]`, `n≥2`, have density `0<ρ≤1/2`. If every coordinate occurs in
+strictly more than half of `C`, then its average downward external degree satisfies
+
+```text
+(1/|C|) Σ_{A∈C} |{i∈A : A∖{i}∉C}| > 2(1−ρ).
+```
+
+The proof uses the level-zero and level-one Walsh coefficients of `1−2·1_C`, Parseval,
+and exact directional edge counts. It strengthens the `≤1` pointwise boundary condition
+behind Karpas’s theorem whenever `ρ<1/2`.
+
+**Scope:** the theorem is an obstruction, not a closure-derived upper bound. An arbitrary
+intersection-closed family need not have sparse downward boundary.
+
+**Use:** seek an independent meet-semilattice, lattice-minimality, or compression argument
+forcing average downward degree at most `2(1−ρ)`.
+
+**Artifact:** [`audits/frankl-bidual-horn-density-2026-08-08.md`](audits/frankl-bidual-horn-density-2026-08-08.md#boundary-theorem).
+
+**Next:** express the downward boundary through meet-irreducibles or canonical implications and
+test whether minimal counterexamples force a strict upper bound.
+
+### FC-O01: Homogeneous tilt persistence fails
+
+**Kind:** obstruction
+**Evidence:** audited
+**Disposition:** active
+
+There is a 17-coordinate, nine-set intersection-closed family `R` with one coordinate `i`
+occurring in `5/9` of its sets, yet under homogeneous product tilt `p=x/(1+x)` at
+`x=11/10`,
+
+```text
+Pr_p(i∈A | A∈R) < 1−p.
+```
+
+Its exact residual weight polynomials are
+
+```text
+P(x)=(1+x)^2+x^16,
+Q(x)=1+x^12(1+2x),
+Q(11/10)−(11/10)^2P(11/10)
+  = 146953492014968519/10^18 > 0.
+```
+
+**Scope:** other coordinates of `R` are rare, so this does not refute persistence under the
+joint assumption that every coordinate is initially frequent. It refutes any coordinatewise
+lemma based only on intersection closure and that coordinate’s uniform majority.
+
+**Use:** a Gendler product-measure attack must exploit all strict-majority inequalities
+simultaneously or choose coordinate parameters adaptively.
+
+**Artifact:** [`audits/frankl-bidual-horn-density-2026-08-08.md`](audits/frankl-bidual-horn-density-2026-08-08.md#exact-failure-of-homogeneous-one-coordinate-persistence).
+
+**Next:** derive the Jacobian of all conditional biases under coordinatewise log-odds and test
+whether a separating direction exists whenever every uniform bias is positive.
+
+### FC-S03: Binary semigroup weighted Frankl theorem
+
+**Kind:** structure theorem
+**Evidence:** audited
+**Disposition:** active
+
+For every probability measure `μ` on `[0,1]` of mean `0<φ<1/2`, Zargar's
+binary nilpotent entropy functional obeys the sharp lower bound
+
+```text
+F₂,₁(μ) ≥ φ(1−2φ) log 2 > 0.
+```
+
+Consequently, every finite intersection-closed family `C` with at least two members has a
+coordinate `i` such that
+
+```text
+Σ_{A∈C, i∉A} 2^(−|A|)
+  > (1/2) Σ_{A∈C} 2^(−|A|).
+```
+
+Dually, a nontrivial union-closed family has a coordinate strictly abundant under weights
+`2^|A|`. Strictness follows because equality in the total entropy comparison would make the
+uniform lifted law stationary under multiplication, while the one-coordinate stationarity
+equations in `{0,ε,1}` force every base coordinate to be constant.
+
+**Scope:** this closes the `k=2,m=1` analytic seam isolated by Zargar. It is a theorem at
+nonuniform weight `1/2`, not at uniform weight `1`, and it does not improve the universal
+uniform abundance constant.
+
+**Use:** anchor a homogeneous or coordinatewise tilt at an exact half-frequency endpoint. A
+universal attack must transport the simultaneous uniform strict-majority inequalities to this
+endpoint or extract a contradiction at the first coordinate crossing.
+
+**Artifact:**
+[`audits/frankl-binary-semigroup-kernel-2026-08-08.md`](audits/frankl-binary-semigroup-kernel-2026-08-08.md#weighted-frankl-consequence).
+
+**Next:** analyze a minimal counterexample at the first homogeneous crossing
+`t∈(1/2,1)` and determine whether meet-irreducibility or coordinatewise tilts force a second
+balanced coordinate.
+
+### FC-S04: Cubical unique-root obstruction
+
+**Kind:** structure theorem
+**Evidence:** audited
+**Disposition:** active
+
+Normalize a hypothetical union-closed counterexample `G⊆2^[n]` by adjoining `∅`, set
+`α=|G|/2^n`, and let `F=2^[n]∖G`. If `q(F)` counts members of the simply rooted
+family `F` having exactly one root, then
+
+```text
+q(F)=D↓(F)>2α|F|.
+```
+
+The equality is exact: a member has a downward external edge precisely when its Bhasin root
+set is a singleton. Set complementation transports this boundary to the small
+intersection-closed family, where `FC-S02` supplies the strict lower bound. Moreover,
+`X(F∪{∅})` is contractible; Bhasin's acyclicity induction upgrades because every piece and
+intersection in the gluing proof is contractible.
+
+**Scope:** contractibility or simple rootedness alone does not force the contrary upper bound.
+For `G={∅}` in an ambient `n`-cube, `q(F)=n` while `2α|F|<2`. Strict coordinate
+majorities, separation, or minimality must enter any successful estimate.
+
+**Use:** translate the Fourier target into cubical language. Seek a Morse, Laplacian, or root
+overlap inequality proving `q(F)≤2α|F|` for a normalized counterexample.
+
+**Artifact:**
+[`audits/frankl-cubical-unique-roots-2026-08-08.md`](audits/frankl-cubical-unique-roots-2026-08-08.md#counterexample-inequality).
+
+**Next:** express `q(F)` through intersections of the root down-sets and test inequalities that
+also use every strict coordinate majority; do not pursue homology alone.
+
+### FC-O02: Uniform-fiber semigroup ceiling
+
+**Kind:** obstruction
+**Evidence:** audited
+**Disposition:** stock
+
+Let a finite semigroup map homomorphically onto Boolean conjunction, with zero and one fibers
+of sizes `k` and `m`. Any uniform full-fiber entropy lift induces homogeneous set weight
+`t=m/k`. At a point-mass conditional law of omitted probability `x`, maximal entropy inside
+the product fibers gives
+
+```text
+entropy increment
+  ≤ B(2x−x^2)−B(x)+x(1−x)log(k/m).
+```
+
+Positivity for every `0<x<1/2`, as required for a half-frequency theorem, is possible only if
+
+```text
+t≤16/27.
+```
+
+At uniform weight `t=1`, the ceiling changes sign at `x=(3−√5)/2`. Therefore arbitrary
+finite-semigroup multiplication-table engineering inside this architecture cannot improve the
+golden-ratio uniform abundance constant through a functional required to be positive on every
+fixed-mean conditional law.
+
+**Scope:** the obstruction assumes uniform laws within two fixed full fibers, independent
+multiplication, and a coordinatewise Shannon-entropy comparison. It does not cover dependent
+couplings, nonuniform or history-dependent labels, or genuinely multi-coordinate inequalities.
+
+**Use:** retain `FC-S03` as a sharp tilt endpoint, but reject direct searches for a better
+uniform-weight finite semigroup of the same form.
+
+**Artifact:**
+[`audits/frankl-semigroup-fiber-ceiling-2026-08-08.md`](audits/frankl-semigroup-fiber-ceiling-2026-08-08.md#point-mass-ceiling).
+
+### FC-O03: Maximal self-dual completion fails
+
+**Kind:** obstruction
+**Evidence:** audited
+**Disposition:** stock
+
+There is a 13-member intersection-closed, complement-free family on five coordinates that is
+maximal under inclusion among families with those two properties. Every attempted adjunction,
+after taking meet closure, creates a complementary pair. Since a self-dual Boolean function
+would choose exactly one member of each of the 16 complementary pairs, maximality does not
+produce a self-dual Horn completion.
+
+**Scope:** this refutes only completion by inclusion on the same universe. It does not exclude a
+frequency-preserving lift to a larger universe or another non-inclusion transformation into the
+bidual class.
+
+**Use:** do not infer self-duality from Zorn-style maximality. Any completion attack must control
+the missing complementary pairs constructively and track coordinate frequencies.
+
+**Artifact:**
+[`audits/frankl-bidual-horn-density-2026-08-08.md`](audits/frankl-bidual-horn-density-2026-08-08.md#failure-of-naive-self-dual-completion).
 
 ## Matrix Mortality
 
