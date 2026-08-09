@@ -27,6 +27,11 @@
 'MatrixMortality.TernaryClosedBlockNoGo.upperResidualShift_cases' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.EndpointPrefixCompiler.DerivesAlong.endpointEquation' depends on axioms: [propext]
+'MatrixMortality.EndpointPrefixCompiler.endpointEquation_iff_derivesAlong' depends on axioms: [propext]
+'MatrixMortality.EndpointPrefixCompiler.underflow_endpointEquation' does not depend on any axioms
+'MatrixMortality.EndpointPrefixCompiler.underflow_not_derivesAlong' depends on axioms: [propext]
+'MatrixMortality.EndpointPrefixCompiler.nonnegative_prefix_budget' depends on axioms: [propext, Quot.sound]
 'MatrixMortality.representsSeries_iff_representsBehavior' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.finiteHankel_card_le' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.twoChannelBoundaryTax' depends on axioms: [propext, Classical.choice, Quot.sound]

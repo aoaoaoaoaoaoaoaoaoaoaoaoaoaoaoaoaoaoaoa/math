@@ -649,6 +649,20 @@ A useful rewriting attack must therefore either find a tighter compiler or build
 computational source whose certificate has three morphism schemas natively. A machine with
 three symbol types but many transition rules does not meet this count.
 
+[`G3-C03`](SALVAGE.md#g3-c03-endpoint-prefix-compiler) gives the exact tighter interface. A
+three-production prefix normal system compiles directly to `GPCP(3)` when its terminal equation
+forces every intermediate rule prefix. Lean proves both directions and checks that the
+unrestricted telescope admits a false underflow witness. The known three-rule semi-Thue source
+rewrites arbitrary substrings, so its rule-name trace omits redex contexts and does not satisfy
+this interface without a new context transporter.
+
+[`G3-D03`](SALVAGE.md#g3-d03-one-sided-corrected-drift) closes a broad source class before
+compilation. If some positive target-symbol weighting and finite-state potential make every trim
+transition drift in one direction, terminal equality bounds every accepting residual and exact
+finite reachability decides solvability. A surviving source must keep an unbounded word residual
+and recurrently expand and contract under every positive weighting. A finite parser, bounded
+delay, equal-height tableau, or acyclic verification tail cannot be its computational store.
+
 #### Research lanes
 
 | Lane | Available leverage | Decisive obstruction or obligation |
@@ -656,7 +670,7 @@ three symbol types but many transition rules does not meet this count.
 | Shift-equivariant zero incidence | Same-zero dimension three is point-line incidence in `P²`; [`G3-C02`](SALVAGE.md#g3-c02-fixed-bcbc-singular-recognizer) compiles the fixed branching test, while [`G3-O04`](SALVAGE.md#g3-o04-expanding-affine-history-no-go) kills its finite-target affine extension, [`G3-O05`](SALVAGE.md#g3-o05-cancellative-projective-state-tax) kills inverse-saturated dynamics, and [`G3-O12`](SALVAGE.md#g3-o12-positive-reset-dimension-tax) kills faithful full-cylinder queue codes | Build one computable history-sensitive singular formula over a mixed source ensemble; a legal cylinder must collapse to a plane and a transient coordinate must police the collision |
 | Positive free-cancellation discrepancy | Free cancellation performs queue-head deletion; accepting loops are cyclic, and three positive letters surject onto `F₂` | Couple the seven-state forbidden-triple normal form to Carvalho's program-dependent virtual endomorphism; [`G3-O09`](SALVAGE.md#g3-o09-quotient-blind-positive-boundary-collapse) kills quotient-blind all-loop-complete boundaries, so malformed positive spellings need a permanent one-way trap |
 | Global word-residual recoding | Longer noncommutative target atoms may discard additive bit-count preservation entirely | [`G3-O13`](SALVAGE.md#g3-o13-rational-serializer-pumping) kills rational exact side transport, [`G3-D01`](SALVAGE.md#g3-d01-bounded-prefix-residuals) kills bounded lag, and [`G3-D02`](SALVAGE.md#g3-d02-virtually-cyclic-prefix-discrepancy) kills every computably supplied one-carrier normal witness; a survivor needs at least two independent counters, genuine word-order entropy, or a halting-dependent normal form |
-| New three-schema rewriting source | Bi-tag, cyclic-tag, Lag, queue, and small semi-Thue systems separate data motion from finite control | Count transition schemas, not data symbols; the program table must live in boundaries or target words without adding source letters |
+| New three-schema rewriting source | [`G3-C03`](SALVAGE.md#g3-c03-endpoint-prefix-compiler) compiles endpoint-forcing three-production normal systems directly | Prove endpoint forcing and recurrent mixed drift under every positive weighting; arbitrary-substring rule traces and one-sided finite-phase systems fail |
 | Exclusive stochastic or affine recognition | Zero/nonzero languages can be much smaller than exact coefficient series | Affine normalization, quantum measurement, and finite pair separation are not raw integer scalar-zero representations |
 | Direct projective or affine dynamics | Three `3 × 3` controls can encode switched dynamics on two homogeneous coordinates | Unguarded matrix choice demands an irreversible checksum for every illegal branch |
 | Semigroup ideals and reset structure | Rees or Brandt incidence can make incompatible phases fall into a zero ideal | Natural representations usually spend dimension on control states; the full arbitrary-product grammar remains mandatory |
@@ -681,8 +695,10 @@ After the serializer audit, the net tree has five independent mature leaves:
    three-pair normal form with at least two independent unbounded factors, genuine word-order
    entropy, or a halting-dependent description unavailable to the reduction, together with both
    witness-transport directions.
-4. **Native three-schema source.** Bypass both Neary's four roles and Nicolas's recurrent `+2`
-   copy alphabet with a universal certificate having exactly three active schemas.
+4. **Endpoint-forcing native three-schema source.** Build an undecidable three-production prefix
+   normal family satisfying [`G3-C03`](SALVAGE.md#g3-c03-endpoint-prefix-compiler), with an
+   unbounded word-valued context channel and recurrent drift of both signs under every positive
+   weighting. The terminal equality must reconstruct every arbitrary rule-name trace.
 5. **Spelling-sensitive positive cancellation.** Couple the three-letter free-group normal form
    to Carvalho's virtual endomorphism, trapping every malformed positive spelling before group
    quotient.
@@ -745,6 +761,13 @@ for every incomplete or cross-boundary reduction. Race a direct singular `3×3` 
 against a source-level ternary GPCP construction. The source-level race must now use a
 solution-sensitive or nonrational spelling domain with an unbounded word residual; another total
 finite-state decoder is closed by `G3-O13`.
+
+The native source race now has one exact acceptance test. Supply three productions
+`αₓX⟶Xβₓ` and prove that `sβ(w)=α(w)t` forces every cumulative `α` prefix for every arbitrary
+trace `w`; [`G3-C03`](SALVAGE.md#g3-c03-endpoint-prefix-compiler) then performs the entire GPCP
+reduction. The source must fail both positive and negative drift feasibility from
+[`G3-D03`](SALVAGE.md#g3-d03-one-sided-corrected-drift). Recasting the known arbitrary-substring
+three-rule system without transporting redex contexts is underflow, not a compiler.
 
 No further local punctuation fusion of the four displayed pairs should be attempted. The audited
 boundary-aligned additive family is immortal, and `G3-O10` closes the nondegenerate square-root

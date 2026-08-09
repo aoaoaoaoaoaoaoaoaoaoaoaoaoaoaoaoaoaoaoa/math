@@ -132,6 +132,8 @@ file owns the mathematical stock.
 | [`G3-O13`](#g3-o13-rational-serializer-pumping) | obstruction | finite-control exact serialization pumps to an impossible stationary return | audited; formalized core | graduated |
 | [`G3-D01`](#g3-d01-bounded-prefix-residuals) | decidable stratum | a supplied bound on every accepting prefix residual gives a finite decision graph | audited | stock |
 | [`G3-D02`](#g3-d02-virtually-cyclic-prefix-discrepancy) | decidable stratum | finite-mode capped periodic residual rays reduce to one-counter reachability | audited; formalized core | graduated |
+| [`G3-D03`](#g3-d03-one-sided-corrected-drift) | decidable stratum | one-sided positive weighted drift bounds every accepting residual | audited; formalized core | graduated |
+| [`G3-C03`](#g3-c03-endpoint-prefix-compiler) | compiler | endpoint-forcing three-production normal systems compile directly to `GPCP(3)` | formalized | active |
 | [`G3-O06`](#g3-o06-periodic-ray-completion-and-branching-fracture) | compiler and obstruction | `bcbb` has an exact three-state periodic compiler, while `bcbc` defeats every single affine positional section | formalized | graduated |
 | [`G3-O07`](#g3-o07-near-fork-carry-collision) | obstruction | a terminal and nonterminal `bcbc` near-fork collide under the entire one-coordinate phase-line carry family | formalized | graduated |
 | [`G3-C02`](#g3-c02-fixed-bcbc-singular-recognizer) | fixed-instance compiler | a transient guard over one affine carry recognizes the complete `bcbc` language | audited | graduated |
@@ -4591,6 +4593,77 @@ word-valued residual.
 mismatch permanence and all signed transition and terminal equations. The two-power lemma and
 one-counter construction are audited in
 [`m34-virtually-cyclic-discrepancy-2026-08-08.md`](audits/m34-virtually-cyclic-discrepancy-2026-08-08.md).
+
+### G3-D03: One-sided corrected drift
+
+**Kind:** decidable stratum
+
+**Evidence:** audited; formalized core
+
+**Disposition:** graduated
+
+Give every transition of a finite-control paired certificate target words `(Uₑ,Vₑ)`, a positive
+symbol weight `ω`, and a state potential `π`. If every trim transition has
+
+```text
+κ(e)=|Uₑ|ω−|Vₑ|ω+π(source(e))−π(target(e)) ≥ 0,
+```
+
+then terminal equality fixes the total corrected drift. Every accepting prefix spends at most
+that budget. Prefix comparability identifies its weighted difference with the unmatched suffix,
+giving an effective residual-length bound and a finite exact reachability graph. Reversing both
+sides gives the nonpositive case. Existence of a suitable rational positive weight and potential
+is an exact linear feasibility problem.
+
+The same budget makes finite-control rewriting reachability decidable: every intermediate word
+on a successful path has bounded positive weight. A one-state universal source must therefore
+contain recurrent positive and negative drift under every positive symbol weighting.
+
+**Scope:** finite control, state-dependent word images, arbitrary fixed boundaries, erasure, and
+arbitrary word overlap are allowed. Mixed drift, an unbounded word-valued residual, and a normal
+form unavailable to the reduction remain outside the theorem.
+
+**Use:** reject bounded-delay, equal-height tableau, one-sided queue-growth, and acyclic-verifier
+three-schema sources before attempting a GPCP compiler.
+
+**Formalized core:** [`EndpointPrefixCompiler.lean`](MatrixMortality/EndpointPrefixCompiler.lean)
+checks that a nonnegative corrected trace spends at most its complete endpoint budget. The finite
+residual graph, potential criterion, and decision extraction are audited in
+[`m34-endpoint-prefix-compiler-2026-08-08.md`](audits/m34-endpoint-prefix-compiler-2026-08-08.md).
+
+### G3-C03: Endpoint-prefix compiler
+
+**Kind:** compiler
+
+**Evidence:** formalized
+
+**Disposition:** active
+
+For a prefix normal system with three productions `αₓX⟶Xβₓ`, every lawful trace `w` from `s` to
+`t` satisfies
+
+```text
+s β(w) = α(w) t.
+```
+
+If that endpoint equality itself forces every cumulative `α` prefix to be available at the
+corresponding intermediate queue, Lean reconstructs every step and proves the converse. Taking
+`g(x)=βₓ`, `h(x)=αₓ`, and boundaries `(s,ε,ε,t)` is then an exact three-pair GPCP compiler. The
+empty witness corresponds exactly to `s=t`.
+
+**Scope:** endpoint prefix forcing is a substantive source property. Lean's explicit underflow
+system satisfies the aggregate equation for trace `a` although its first production is not
+applicable. Arbitrary-substring semi-Thue traces also omit redex contexts, so the known
+three-rule accessibility theorem does not instantiate the compiler.
+
+**Use:** search directly for an undecidable family of endpoint-prefix-forcing three-production
+normal systems. The source must also evade [`G3-D03`](#g3-d03-one-sided-corrected-drift).
+
+**Artifact:** [`EndpointPrefixCompiler.lean`](MatrixMortality/EndpointPrefixCompiler.lean) and
+[`m34-endpoint-prefix-compiler-2026-08-08.md`](audits/m34-endpoint-prefix-compiler-2026-08-08.md).
+
+**Next:** make a three-rule queue architecture terminal-self-certifying without a recurrent copy
+schema; demand a complete arbitrary-trace converse, not merely forward telescoping.
 
 ### G3-O06: Periodic-ray completion and branching fracture
 

@@ -577,6 +577,21 @@ finite union of capped periodic rays to one-counter reachability remain independ
 [`m34-virtually-cyclic-discrepancy-2026-08-08.md`](audits/m34-virtually-cyclic-discrepancy-2026-08-08.md).
 No publication-facing declaration claims the generic decision procedure.
 
+[`G3-C03`](SALVAGE.md#g3-c03-endpoint-prefix-compiler) supplies the exact direct compiler for a
+three-production prefix normal system. Lean defines traced execution, proves that every lawful
+trace telescopes to its endpoint equation, and proves the converse under endpoint prefix forcing
+by reconstructing every intermediate residual. It also checks a three-production underflow
+counterexample: the aggregate boundary equation holds although the first rule is inapplicable.
+Thus the compiler theorem is publication-facing; existence of an undecidable source satisfying
+its hypothesis is not claimed.
+
+[`G3-D03`](SALVAGE.md#g3-d03-one-sided-corrected-drift) is formalized only at its arithmetic
+throat: every prefix of a nonnegative corrected-drift trace spends at most the total endpoint
+budget. The finite-control potential criterion, accepting-residual bound, exact search graph, and
+source-rewriting consequence are independently audited in
+[`m34-endpoint-prefix-compiler-2026-08-08.md`](audits/m34-endpoint-prefix-compiler-2026-08-08.md).
+No Lean declaration claims the generic decision procedure.
+
 For [`G3-M01`](SALVAGE.md#g3-m01-free-group-discrepancy-engine), the rank-`3m+1` closed-path
 basis, the trivial-or-cyclic fixed-subgroup classification, and the rank-zero-or-one equalizer
 corollary are audited consequences of Carvalho's explicit inverse transducer. Lean does not
@@ -798,6 +813,7 @@ with a complete arbitrary-word converse.
 | `MacroIrreducibility.lean` | exact nonerasing Neary role-macro lower bound |
 | `TernaryClosedBlockNoGo.lean` | paired-Parikh independence, exact erasing macro lower bound, block semantics, and closed-return arithmetic |
 | `WordDiscrepancy.lean` | first-mismatch permanence and exact signed free-monoid residual dynamics |
+| `EndpointPrefixCompiler.lean` | prefix-normal traces, endpoint-forcing three-pair compiler, underflow witness, and drift budget |
 | `Undecidability/PairedProblems.lean` | canonical four-matrix target instance and structural promises |
 | `Undecidability/BinaryProblems.lean` | canonical structured `Z₆(2)` instance |
 | `Undecidability/PrefixProblems.lean` | canonical `M₁₀(2)` instance and all zero-padded dimensions |
@@ -826,6 +842,9 @@ with a complete arbitrary-word converse.
 | Equality after arbitrary continuations forces prefix comparability | `WordDiscrepancy.prefixComparable_of_append_eq` |
 | An internal free-monoid mismatch cannot be repaired by continuations | `WordDiscrepancy.mismatch_persists` |
 | Signed prefix discrepancies obey the exact four transition laws and two terminal tests | `WordDiscrepancy.positive_positive_transition`, `WordDiscrepancy.positive_negative_transition`, `WordDiscrepancy.negative_negative_transition`, `WordDiscrepancy.negative_positive_transition`, `WordDiscrepancy.positive_terminal`, `WordDiscrepancy.negative_terminal` |
+| Endpoint prefix forcing makes the aggregate boundary equation equivalent to lawful traced execution | `EndpointPrefixCompiler.endpointEquation_iff_derivesAlong` |
+| The unrestricted endpoint telescope has an explicit false underflow witness | `EndpointPrefixCompiler.underflow_endpointEquation`, `EndpointPrefixCompiler.underflow_not_derivesAlong` |
+| Every nonnegative corrected-drift prefix stays within its terminal budget | `EndpointPrefixCompiler.nonnegative_prefix_budget` |
 | A nonsingular finite Hankel section lower-bounds every exact realization | `finiteHankel_card_le` |
 | Exact diagonal two-channel bridges pay two additional states | `exactDiagonalTwoChannel_card_lower_bound` |
 | A split finite-rank binary pair is mortal exactly when one return product vanishes | `ReturnFamily.pairGenerator_isMortal_iff` |

@@ -19,6 +19,11 @@ open MatrixMortality
 #print axioms TernaryClosedBlockNoGo.ExactErasingMacroFactorization.four_le_card
 #print axioms TernaryClosedBlockNoGo.commonLowerDeletion_cases
 #print axioms TernaryClosedBlockNoGo.upperResidualShift_cases
+#print axioms EndpointPrefixCompiler.DerivesAlong.endpointEquation
+#print axioms EndpointPrefixCompiler.endpointEquation_iff_derivesAlong
+#print axioms EndpointPrefixCompiler.underflow_endpointEquation
+#print axioms EndpointPrefixCompiler.underflow_not_derivesAlong
+#print axioms EndpointPrefixCompiler.nonnegative_prefix_budget
 #print axioms representsSeries_iff_representsBehavior
 #print axioms finiteHankel_card_le
 #print axioms twoChannelBoundaryTax
