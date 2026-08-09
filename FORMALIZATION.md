@@ -25,7 +25,7 @@ The Python/Arb program is retained as independent evidence and a box-generator, 
 oracle. The formal certificate must use proved rational enclosures for every logarithm and may
 not use `native_decide`, external declarations, or a generated axiom.
 
-The following analytic core is now kernel-checked:
+The following analytic and finite-convex core is now kernel-checked:
 
 - exact target arithmetic, including `19099/50000>(3−√5)/2`;
 - low-square entropy curvature and Jensen-deficit bounds;
@@ -35,10 +35,20 @@ The following analytic core is now kernel-checked:
 - the complete half-support scalar sign, global gain concavity and monotonicity, and pointwise
   dependent-cost contraction;
 - finite Jensen, bilinear polarization, and abstract mean-lift scaling and gap reflection.
+- the finite Alweiss--Huang--Sellke fixed-mean concavity theorem, proved directly from a
+  radially regularized entropy power series whose second variation is a nonpositive sum of
+  squares;
+- an elementary support-reduction algorithm for any concave functional on a one-moment finite
+  simplex, sharpened to a point mass at the mean or two atoms whose moments strictly straddle
+  it;
+- the symmetric-orbit realization of marginal, independent, and dependent entropy, and the
+  resulting unconditional reduction of every finite exact-mean symmetric coupling to at most
+  two orbit laws.
 
 These declarations live under `Frankl/`. They do not yet promote the candidate bound: the
-symmetric-coupling constructors, extreme-point reduction, reflected interval cover, and final
-union-closed entropy implication remain open.
+coordinate-kernel constructors and their coupling-level dependent-cost comparison, the low-orbit
+contraction bridge, reflected interval cover, and final union-closed entropy implication remain
+open.
 
 The Lean development verifies the complete computable source reduction and the matrix compilers:
 

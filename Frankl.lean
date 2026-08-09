@@ -5,3 +5,6 @@ import Frankl.TwoOrbit
 import Frankl.HalfSupport
 import Frankl.FiniteLaw
 import Frankl.MeanLift
+import Frankl.MomentReduction
+import Frankl.OrbitLaw
+import Frankl.FixedMeanConcavity

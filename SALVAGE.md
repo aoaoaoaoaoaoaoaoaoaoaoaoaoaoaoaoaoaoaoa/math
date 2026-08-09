@@ -334,7 +334,14 @@ printed global-concavity sentence.
 **Artifact:**
 [`audits/frankl-yu-reduction-2026-08-08.md`](audits/frankl-yu-reduction-2026-08-08.md#repairing-the-exact-mean-reduction).
 
-**Next:** formalize the lift, fixed-slice reduction, and finite orbit decomposition.
+**Formalization:** `Frankl/MeanLift.lean` checks the exact-mean lift algebra.
+`Frankl/FixedMeanConcavity.lean` proves the fixed-slice entropy concavity directly from its
+power series, while `Frankl/MomentReduction.lean` and `Frankl/OrbitLaw.lean` give the elementary
+finite extreme-point reduction and symmetric-orbit realization. The surviving law is formally
+either one exact-mean orbit or two orbit means strictly straddling the target.
+
+**Next:** connect the exact-mean lift to the coupling-level dependent term and then compose this
+extreme reduction with the half-support kernel.
 
 ### FC-S06: Half-support elimination
 
