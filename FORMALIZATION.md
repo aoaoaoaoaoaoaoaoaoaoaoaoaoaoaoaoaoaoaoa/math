@@ -450,6 +450,19 @@ accepted initial queue of length greater than one has a state-preserving role wh
 and cancellation words are both empty. The audit is
 [`audits/m43-overlap-queue-2026-08-08.md`](audits/m43-overlap-queue-2026-08-08.md).
 
+The zero-framed binary Lag specialization
+[`M4-C03`](SALVAGE.md#m4-c03-zero-framed-binary-two-lag-compiler) is formalized in
+[`MatrixMortality/OverlapLag.lean`](MatrixMortality/OverlapLag.lean). Lean identifies the
+scanner step with literal context-2 Lag deletion, proves both directions of chronological trace
+translation, translates empty-state isolation to singleton isolation and the framed-return
+promise to avoidance of `10ⁿ⁺¹`, and composes the exact kernel to three integer `4 × 4`
+matrices. The same module formalizes
+[`M4-O12`](SALVAGE.md#m4-o12-terminal-frame-morphism-obstruction), the length contradiction
+which kills direct terminal-to-frame morphic coding. The larger three-scanner classification
+[`M4-S05`](SALVAGE.md#m4-s05-deletion-scanner-normal-form) is independently audited rather
+than Lean-formalized. Its evidence boundary is recorded in
+[`audits/m43-deletion-scanner-2026-08-08.md`](audits/m43-deletion-scanner-2026-08-08.md).
+
 The odd-phase macro cut [`M4-S01`](SALVAGE.md#m4-s01-odd-phase-macro-cut) remains reported.
 Lean already defines the relevant phase residues and Table 2 tracks, but no theorem yet proves
 the even-track invariant through every reachable queue or the induced macro solvability
@@ -566,6 +579,7 @@ multiple residue-two defect language. These forward and converse obligations are
 | `TwoStatePushout.lean` | rule/erasure specialization, exact rank classification, and integer mortality compiler |
 | `TwoStateObstructions.lean` | exact local toggle-fusion obstruction |
 | `OverlapQueue.lean` | positive two-frame queue semantics, arbitrary-word causality, exact mortality compiler, and pure-deletion necessity |
+| `OverlapLag.lean` | literal binary context-2 Lag kernel, promise translation, mortality composition, and terminal-frame morphism obstruction |
 | `IndexedExecution.lean` | exact finite relational execution and closure views |
 | `TagQueue.lean` | tag steps, indexed execution specializations, and generic history soundness |
 | `NearyEncoding.lean` | four ordinary tiles, synchronization, source equivalence, and composed reductions |
@@ -734,6 +748,8 @@ multiple residue-two defect language. These forward and converse obligations are
 | The integer two-state family is mortal exactly at a nonempty controlled scalar zero | `twoStateMortalityFamily_int_mortal_iff_nonempty_zero` |
 | Promised positive overlap-queue acceptance is exactly mortality of three integer `4 × 4` matrices | `OverlapQueue.mortality_iff_accepts` |
 | Every long accepted overlap queue has a state-preserving pure-deletion role | `OverlapQueue.pure_deletion_of_accepts_large` |
+| Promised zero-framed binary context-2 Lag reachability is exactly mortality of three integer `4 × 4` matrices | `OverlapLag.mortality_iff_accepts` |
+| A fixed morphism cannot identify a terminal with its own compulsory return frame | `OverlapLag.terminal_image_ne_frame` |
 | Every regular safe word preserves the oriented `3`-adic exterior flag | `ParabolicBlade.exteriorState_safe_word_flag`, `ParabolicBlade.exteriorState_safe_word_wall_orientation` |
 | Exact left-context toggle fusion is immortal | `exactLeftToggleFusion_immortal` |
 | A finite closed-token queue halts iff no reachable token lies on a dependency cycle | `closedSubstitutionHalts_iff_noReachableCycle` |

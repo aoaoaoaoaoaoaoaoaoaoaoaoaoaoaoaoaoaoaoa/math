@@ -246,19 +246,37 @@ The converse is genuinely universal over positive words. Prefix causality either
 the whole queue trace or exposes an earlier genuine empty prefix; no block-language assumption
 survives in the theorem.
 
-The remaining source node is exact: prove this promised overlap-queue problem undecidable, or
-prove it decidable. [`M4-O11`](SALVAGE.md#m4-o11-pure-deletion-necessity) fixes the necessary
-shape. Every accepted initial queue of length greater than one uses a state-preserving role with
-both production and cancellation empty. A viable universal machine must devote one of its four
-state-letter roles to genuine open-front deletion and use the other three to reconstruct phase.
-The natural complete-frame/parity specialization collapses precisely because it forbids this
-mechanism.
+[`M4-O11`](SALVAGE.md#m4-o11-pure-deletion-necessity) forces every long accepting instance to
+spend one role on genuine open-front deletion. The independently audited deletion-scanner
+normal form [`M4-S05`](SALVAGE.md#m4-s05-deletion-scanner-normal-form) now exhausts the
+remaining transition tables. All non-scanning tables are decidable; the framed-return promise
+kills one scanner and leaves three incomparable kernels:
 
-This source node supersedes the earlier nebulous “open-tail compiler” request. Fazekas and Seki
-do not supply the two-state binary bound, while Carvalho's inverse-transducer discrepancy remains
-the strongest adjacent source of deletion semantics. The checked acceptance tests and literature
-map are in
-[`audits/m43-overlap-queue-2026-08-08.md`](audits/m43-overlap-queue-2026-08-08.md) and
+1. `Lₙ`, zero-framed binary context-2 Lag;
+2. `Bₙ`, zero-framed reset scanning;
+3. `C`, conjugate scanning with a nonempty periodic rule production.
+
+The principal kernel is formalized at exact strength in
+[`M4-C03`](SALVAGE.md#m4-c03-zero-framed-binary-two-lag-compiler). Its four productions are
+
+```text
+λ(00)=V,  λ(01)=W0ⁿ⁺¹,  λ(10)=U,  λ(11)=ε,
+```
+
+with initial word `10ⁿ`, accepting singleton `0`, isolation of every reachable singleton, and
+avoidance of `10ⁿ⁺¹`. Lean proves literal step-for-step equivalence and composes it to `M₄(3)`.
+Known Lag universality does not automatically cover this four-rule binary subclass.
+
+The direct Neary morphism is dead by
+[`M4-O12`](SALVAGE.md#m4-o12-terminal-frame-morphism-obstruction): a morphism cannot send the
+common terminal to `0` followed by the image of an initial word which already ends in that
+terminal. A source reduction must exploit overlap or history, or use a different universal
+source. Conversely, decision procedures for all three kernels decide the entire promised queue
+trunk.
+
+The exact checks and evidence boundary are in
+[`audits/m43-deletion-scanner-2026-08-08.md`](audits/m43-deletion-scanner-2026-08-08.md),
+[`audits/m43-overlap-queue-2026-08-08.md`](audits/m43-overlap-queue-2026-08-08.md), and
 [`audits/m43-alternating-defect-literature-2026-08-07.md`](audits/m43-alternating-defect-literature-2026-08-07.md).
 
 #### Matrix trunk: parabolic bridge language

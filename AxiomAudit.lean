@@ -61,6 +61,8 @@ open MatrixMortality
 #print axioms twoStateDataMatrix_rank_eq_three_of_eq
 #print axioms OverlapQueue.mortality_iff_accepts
 #print axioms OverlapQueue.pure_deletion_of_accepts_large
+#print axioms OverlapLag.mortality_iff_accepts
+#print axioms OverlapLag.terminal_image_ne_frame
 #print axioms exactLeftToggleFusion_immortal
 #print axioms closedSubstitutionHalts_iff_noReachableCycle
 #print axioms twoPrivateState_ruleScale_eq

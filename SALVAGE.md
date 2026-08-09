@@ -128,6 +128,9 @@ file owns the mathematical stock.
 | [`M4-C02`](#m4-c02-positive-overlap-queue-compiler) | compiler | promised positive two-frame queue acceptance compiles exactly to three integer `4 × 4` matrices | formalized | graduated |
 | [`M4-O11`](#m4-o11-pure-deletion-necessity) | obstruction | every long accepted overlap queue needs a state-preserving role empty on both correspondence sides | formalized | graduated |
 | [`M4-S04`](#m4-s04-arbitrary-switching-three-adic-exterior-flag) | structure theorem | every regular safe word preserves an oriented two-sector `3`-adic flag | formalized | active |
+| [`M4-S05`](#m4-s05-deletion-scanner-normal-form) | structure theorem | promised overlap queues contract to three exact deletion scanners | audited | active |
+| [`M4-C03`](#m4-c03-zero-framed-binary-two-lag-compiler) | compiler | the principal scanner is literally binary context-2 Lag and compiles to `M₄(3)` | formalized | graduated |
+| [`M4-O12`](#m4-o12-terminal-frame-morphism-obstruction) | obstruction | a fixed morphism cannot map a shared terminal to its own compulsory return frame | formalized | graduated |
 | [`G3-O01`](#g3-o01-four-role-macro-irreducibility) | obstruction | exact nonerasing macros cannot reduce the four source roles to three letters | formalized | graduated |
 | [`G3-S01`](#g3-s01-shift-equivariant-zero-incidence) | structure theorem | same-zero state dimension is equivariant projective incidence dimension | audited | active |
 | [`G3-M01`](#g3-m01-free-group-discrepancy-engine) | partial mechanism | free cancellation implements queue deletion with an all-path converse | reported | active |
@@ -4322,6 +4325,102 @@ feed the oriented contexts directly into the alternating one-defect and multiple
 [`MatrixMortality/ParabolicFlag.lean`](MatrixMortality/ParabolicFlag.lean),
 [`MatrixMortality/ParabolicSafeFlag.lean`](MatrixMortality/ParabolicSafeFlag.lean), and
 [`audits/m43-parabolic-flag-2026-08-08.md`](audits/m43-parabolic-flag-2026-08-08.md).
+
+### M4-S05: Deletion-scanner normal form
+
+**Kind:** structure theorem
+
+**Evidence:** audited
+
+**Disposition:** active
+
+Fix the pure-deletion self-loop forced by [`M4-O11`](#m4-o11-pure-deletion-necessity) and split
+the other three controller roles. Absorbing rows reduce to a two-letter dependency graph;
+unreachable accepting states and the `|s|=1` two-singleton orbit are decidable directly. Four
+apparent scanners remain. A last-return argument using the compulsory suffix `A=0::s` and the
+forbidden configuration `(rule,A)` eliminates the forward all-return scanner and forces unary
+zero frames in the forward one-loop and backward all-entry scanners.
+
+The unresolved promised source is therefore the union of three exact kernels:
+
+```text
+Lₙ: zero-framed binary context-2 Lag,
+Bₙ: zero-framed reset scanning,
+C:  a conjugate scanner with nonempty periodic rule production.
+```
+
+In `C` the rule self-loop equation `A ++ P = K ++ A` has exactly the conjugate form
+`K=u++v`, `P=v++u`, `A=(u++v)^r++u`. The split is exhaustive over the two-by-two transition
+table.
+
+**Scope:** promised binary two-state positive overlap queues. The transition classification and
+the elementary decision arguments have been independently audited but are not one Lean
+declaration. No decision procedure or undecidability reduction is claimed for `Lₙ`, `Bₙ`, or
+`C`.
+
+**Use:** replace the generic search over four arbitrary roles by three independent exact source
+problems. A proof that all three are decidable closes the entire promised overlap-queue trunk;
+undecidability of any one closes `M₄(3)` through `M4-C02`.
+
+**Next:** attack universality and decidability in opposition for each kernel. Do not return to
+complete-frame machines outside this normal form.
+
+**Artifact:**
+[`audits/m43-deletion-scanner-2026-08-08.md`](audits/m43-deletion-scanner-2026-08-08.md).
+
+### M4-C03: Zero-framed binary two-Lag compiler
+
+**Kind:** compiler
+
+**Evidence:** formalized
+
+**Disposition:** graduated
+
+For `n>0` and arbitrary binary appendants `U,V,W`, prefix the queue phase as a bit. The scanner
+
+```text
+λ(00)=V,  λ(01)=W0ⁿ⁺¹,  λ(10)=U,  λ(11)=ε
+```
+
+then performs the literal context-two Lag step `qxZ ↦ xZλ(qx)`. Lean proves both directions of
+the chronological trace equivalence. It also proves that empty-state isolation is exactly
+isolation of the reachable singleton `0` and that the framed-return promise forbids `10ⁿ⁺¹`
+from the initial word `10ⁿ`. Under these promises,
+
+```text
+singleton 0 is reachable  ↔  mortality of three integer 4 × 4 matrices.
+```
+
+**Scope:** arbitrary positive words and malformed Lag histories are included through the parent
+queue compiler. Universality of this constrained four-rule Lag class is not asserted.
+
+**Use:** an undecidability proof for this exact binary Lag problem now instantiates `M₄(3)`
+without further matrix engineering.
+
+**Artifact:** `OverlapLag.mortality_iff_accepts` in
+[`MatrixMortality/OverlapLag.lean`](MatrixMortality/OverlapLag.lean) and
+[`audits/m43-deletion-scanner-2026-08-08.md`](audits/m43-deletion-scanner-2026-08-08.md).
+
+### M4-O12: Terminal-frame morphism obstruction
+
+**Kind:** obstruction
+
+**Evidence:** formalized
+
+**Disposition:** graduated
+
+If a source initial word is `Jb`, no fixed monoid morphism `h` can map the shared terminal `b`
+to the compulsory return frame `0h(Jb)`. Lengths would give
+`|h(b)|=1+|h(J)|+|h(b)|`. The Lean theorem is alphabet-generic.
+
+**Scope:** fixed letterwise morphisms identifying the same terminal with the entire return
+frame. Overlapping, stateful, history-dependent, or nonliteral simulations remain possible.
+
+**Use:** kills the direct Neary-to-scanner morphism. Any surviving reduction must exploit the
+queue overlap itself or change source.
+
+**Artifact:** `OverlapLag.terminal_image_ne_frame` in
+[`MatrixMortality/OverlapLag.lean`](MatrixMortality/OverlapLag.lean).
 
 ## Three-Letter Source Frontier
 

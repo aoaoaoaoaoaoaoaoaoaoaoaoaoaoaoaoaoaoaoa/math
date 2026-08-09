@@ -79,6 +79,8 @@
 'MatrixMortality.twoStateDataMatrix_rank_eq_three_of_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.OverlapQueue.mortality_iff_accepts' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.OverlapQueue.pure_deletion_of_accepts_large' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.OverlapLag.mortality_iff_accepts' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.OverlapLag.terminal_image_ne_frame' depends on axioms: [propext, Quot.sound]
 'MatrixMortality.exactLeftToggleFusion_immortal' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.closedSubstitutionHalts_iff_noReachableCycle' depends on axioms: [propext,
  Classical.choice,
