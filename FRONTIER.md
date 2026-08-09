@@ -455,9 +455,18 @@ complete factorization theorem. An audited extension permits arbitrary fixed bou
 and output overlap, requiring only that one rule plus `β−1` deletion spellings return to a common
 residual. It excludes every such stationary closed-block ternary encoder for `β≥4` and a mixed
 body; Lean checks its complete integral case reduction. The universal Neary family satisfies
-these hypotheses. A live ternary compiler must now use state-dependent spelling, a genuinely
-nonfactorial code, a residual which remains open across blocks, solvability-only target recoding,
-or a different computational source.
+these hypotheses.
+
+[`G3-O13`](SALVAGE.md#g3-o13-rational-serializer-pumping) now closes the finite-control escape.
+An asynchronous transducer encoding arbitrarily large powers of four explicit blocks pumps to a
+stationary physical return, even with state-dependent and nonunique spelling, nonfactorial
+overlap, erasure, fixed contexts, and unbounded side lag. Three `b`-head pulses consume all three
+physical letters with lower image in `b*`; the mixed `c`-head pulse then contradicts them. The
+checked block equation includes arbitrary null histories. Separately,
+[`G3-D01`](SALVAGE.md#g3-d01-bounded-prefix-residuals) makes any supplied computable bound on
+accepting prefix discrepancy decidable. A live ternary compiler must therefore use a
+solution-sensitive or nonrational domain and an unbounded, non-effectively bounded word residual,
+preserving final solvability without exact side transport.
 
 The body-independent Hankel certificate
 [`MM-O04`](SALVAGE.md#mm-o04-uniform-rank-four-paired-series) proves that the
@@ -638,20 +647,19 @@ three symbol types but many transition rules does not meet this count.
 | --- | --- | --- |
 | Shift-equivariant zero incidence | Same-zero dimension three is point-line incidence in `P²`; [`G3-C02`](SALVAGE.md#g3-c02-fixed-bcbc-singular-recognizer) compiles the fixed branching test, while [`G3-O04`](SALVAGE.md#g3-o04-expanding-affine-history-no-go) kills its finite-target affine extension, [`G3-O05`](SALVAGE.md#g3-o05-cancellative-projective-state-tax) kills inverse-saturated dynamics, and [`G3-O12`](SALVAGE.md#g3-o12-positive-reset-dimension-tax) kills faithful full-cylinder queue codes | Build one computable history-sensitive singular formula over a mixed source ensemble; a legal cylinder must collapse to a plane and a transient coordinate must police the collision |
 | Positive free-cancellation discrepancy | Free cancellation performs queue-head deletion; accepting loops are cyclic, and three positive letters surject onto `F₂` | Couple the seven-state forbidden-triple normal form to Carvalho's program-dependent virtual endomorphism; [`G3-O09`](SALVAGE.md#g3-o09-quotient-blind-positive-boundary-collapse) kills quotient-blind all-loop-complete boundaries, so malformed positive spellings need a permanent one-way trap |
-| State-dependent and sliding-block codes | Adjacent ternary symbols can carry four semantic roles without a stationary factorization | [`G3-O08`](SALVAGE.md#g3-o08-erasing-and-stationary-closed-block-obstruction) kills fixed spellings even with erasure and a common closed residual; a survivor must change spelling with state or keep its residue open, while rejecting every invalid overlap on the full free monoid |
-| Solvability-only target recoding | Longer noncommutative target atoms may discard additive bit-count preservation entirely | Cosmetic recoding and fixed residual shifts remain inside `G3-O08`; a survivor needs a global normal form which proves both witness transport and absence of new boundary matches |
+| Global word-residual recoding | Longer noncommutative target atoms may discard additive bit-count preservation entirely | [`G3-O13`](SALVAGE.md#g3-o13-rational-serializer-pumping) kills rational exact side transport and [`G3-D01`](SALVAGE.md#g3-d01-bounded-prefix-residuals) kills computably bounded accepting lag; a survivor must be solution-sensitive or nonrational, carry an unbounded word residual, and prove both witness transport and absence of new boundary matches |
 | New three-schema rewriting source | Bi-tag, cyclic-tag, Lag, queue, and small semi-Thue systems separate data motion from finite control | Count transition schemas, not data symbols; the program table must live in boundaries or target words without adding source letters |
 | Exclusive stochastic or affine recognition | Zero/nonzero languages can be much smaller than exact coefficient series | Affine normalization, quantum measurement, and finite pair separation are not raw integer scalar-zero representations |
 | Direct projective or affine dynamics | Three `3 × 3` controls can encode switched dynamics on two homogeneous coordinates | Unguarded matrix choice demands an irreversible checksum for every illegal branch |
 | Semigroup ideals and reset structure | Rees or Brandt incidence can make incompatible phases fall into a zero ideal | Natural representations usually spend dimension on control states; the full arbitrary-product grammar remains mandatory |
 
-The first, sixth, seventh, and eighth lanes principally target direct `M₃(4)`. The third,
-fourth, and fifth can produce a genuine `GPCP(3)` theorem. The free-group lane is hybrid:
+The first, fifth, sixth, and seventh lanes principally target direct `M₃(4)`. The third and
+fourth can produce a genuine `GPCP(3)` theorem. The free-group lane is hybrid:
 it supplies the missing deletion semantics but not yet the bounded positive source.
 
 #### Raceable leaves
 
-After the square-root audit, the net tree has six independent mature leaves:
+After the serializer audit, the net tree has five independent mature leaves:
 
 1. **History-sensitive singular paired constructor.** Give one computable three-state same-zero
    family for every checked `(β,body)` and every control word, with at least one legal prepend
@@ -661,13 +669,12 @@ After the square-root audit, the net tree has six independent mature leaves:
    cofinality for the checked paired language, or find another broad shift-equivariant
    contradiction. Positive common shifts, minimality, and a cancellative semantic completion no
    longer suffice.
-3. **Stateful or open-residue Neary serialization.** Use genuinely changing spellings,
-   nonfactorial overlap, or a residual which does not close at deletion-width boundaries.
-4. **Global solvability-only GPCP recoding.** Abandon local role preservation and prove a new
-   three-pair normal form with both witness transport and no-new-solution directions.
-5. **Native three-schema source.** Bypass both Neary's four roles and Nicolas's recurrent `+2`
+3. **Global word-residual GPCP recoding.** Abandon exact side transport and prove a
+   solution-sensitive or nonrational three-pair normal form with an unbounded, non-effectively
+   bounded residual and both witness-transport directions.
+4. **Native three-schema source.** Bypass both Neary's four roles and Nicolas's recurrent `+2`
    copy alphabet with a universal certificate having exactly three active schemas.
-6. **Spelling-sensitive positive cancellation.** Couple the three-letter free-group normal form
+5. **Spelling-sensitive positive cancellation.** Couple the three-letter free-group normal form
    to Carvalho's virtual endomorphism, trapping every malformed positive spelling before group
    quotient.
 
@@ -726,11 +733,13 @@ The free-group lane no longer needs another Stallings computation. Its next expe
 positive spelling machine: couple the regular forbidden-triple suffix state for
 `xyz,yzx,zxy→ε` to Carvalho's program-dependent virtual endomorphism, and demand a permanent trap
 for every incomplete or cross-boundary reduction. Race a direct singular `3×3` realization
-against a source-level ternary GPCP construction. In parallel, search state-dependent ternary
-codes whose decoder is total on all words, not merely correct on an intended subshift.
+against a source-level ternary GPCP construction. The source-level race must now use a
+solution-sensitive or nonrational spelling domain with an unbounded word residual; another total
+finite-state decoder is closed by `G3-O13`.
 
-No further additive local fusion of the four displayed pairs should be attempted. The audited
-boundary-aligned family is immortal; the square-root architecture is the live nonadditive escape.
+No further local punctuation fusion of the four displayed pairs should be attempted. The audited
+boundary-aligned additive family is immortal, and `G3-O10` closes the nondegenerate square-root
+escape on its required fracture domain.
 
 ## The rank-three binary wall: `M₃(2)`
 
@@ -1544,10 +1553,10 @@ universal computation.
 4. Treat `MM-O08` and `MM-O11` as formally closed exact-family obstructions. Search for
    `M₉(2)` only through a changed physical pair, changed nonzero behavior, or a nonlinear
    compiler.
-5. Run the `M₃(4)` program on distinct tracks: shift-equivariant point-line synthesis,
-   square-root punctuation, spelling-sensitive positive cancellation, state-dependent ternary
-   synchronization, and native three-schema rewriting. Do not collapse their proof obligations
-   into one prompt.
+5. Run the `M₃(4)` program on distinct tracks: history-sensitive singular point-line synthesis,
+   paired residual saturation, spelling-sensitive positive cancellation, global word-residual
+   recoding, and native three-schema rewriting. Do not collapse their proof obligations into one
+   prompt.
 6. Formalize `D2-S02` and `D2-D05`–`D2-D07`, then attack the guarded `5`-adic critical shell
    with a finite carry nucleus and a counter-simulation falsifier in parallel. Keep the
    non-elementary lanes independent: adelic cone types, parabolic rational subsets,

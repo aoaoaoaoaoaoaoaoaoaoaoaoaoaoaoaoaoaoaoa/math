@@ -558,6 +558,17 @@ universal compiler bodies are independently audited in
 Accordingly, the exact erasing-macro theorem is publication-facing; the broader closed-return
 no-go is not advertised as Lean-checked.
 
+[`G3-O13`](SALVAGE.md#g3-o13-rational-serializer-pumping) closes the finite-control extension at
+the paper-audit level. Lean strengthens the checked seam to a bidirectional equivalence between
+the binary terminal equation and `consumed(H)·b=c·produced(H)` on every exact stroke history,
+including null extensions, and verifies the final natural-number contribution contradiction.
+The periodic-insertion lemma, asynchronous-transducer pumping, and three-pulse word-factor audit
+are independently reconstructed in
+[`m34-rational-serializer-pumping-2026-08-08.md`](audits/m34-rational-serializer-pumping-2026-08-08.md).
+The same audit proves [`G3-D01`](SALVAGE.md#g3-d01-bounded-prefix-residuals) by an explicit finite
+free-prefix-reduction graph; no Lean declaration currently extracts that generic decision
+procedure.
+
 For [`G3-M01`](SALVAGE.md#g3-m01-free-group-discrepancy-engine), the rank-`3m+1` closed-path
 basis, the trivial-or-cyclic fixed-subgroup classification, and the rank-zero-or-one equalizer
 corollary are audited consequences of Carvalho's explicit inverse transducer. Lean does not
@@ -777,7 +788,7 @@ with a complete arbitrary-word converse.
 | `Undecidability/UniversalNeary.lean` | complete computable reductions to binary `GPCP(4)`, `M₃(5)`, `M₄(4)`, `Z₆(2)`, and `M₁₀(2)` |
 | `Undecidability/NearyProblems.lean` | canonical `Fin 4` and `Fin 5` target instances |
 | `MacroIrreducibility.lean` | exact nonerasing Neary role-macro lower bound |
-| `TernaryClosedBlockNoGo.lean` | paired-Parikh independence, exact erasing macro lower bound, and stationary closed-block arithmetic |
+| `TernaryClosedBlockNoGo.lean` | paired-Parikh independence, exact erasing macro lower bound, block semantics, and closed-return arithmetic |
 | `Undecidability/PairedProblems.lean` | canonical four-matrix target instance and structural promises |
 | `Undecidability/BinaryProblems.lean` | canonical structured `Z₆(2)` instance |
 | `Undecidability/PrefixProblems.lean` | canonical `M₁₀(2)` instance and all zero-padded dimensions |
@@ -801,6 +812,8 @@ with a complete arbitrary-word converse.
 | Exact nonerasing Neary role macros require four letters | `ExactNearyMacroFactorization.four_le_card` |
 | Exact Neary role macros require four letters even with erasure | `TernaryClosedBlockNoGo.ExactErasingMacroFactorization.four_le_card` |
 | Stationary closed-block residuals obey the two discrete case splits | `TernaryClosedBlockNoGo.commonLowerDeletion_cases`, `TernaryClosedBlockNoGo.upperResidualShift_cases` |
+| Exact stroke terminal matching is equivalent to `consumed·b=c·produced` | `TernaryClosedBlockNoGo.tileHistory_terminal_match_iff_block_semantics` |
+| A positive morphism cannot contribute one lower letter per block across a width-at-least-two upper pulse | `TernaryClosedBlockNoGo.no_fractional_lower_contribution` |
 | A nonsingular finite Hankel section lower-bounds every exact realization | `finiteHankel_card_le` |
 | Exact diagonal two-channel bridges pay two additional states | `exactDiagonalTwoChannel_card_lower_bound` |
 | A split finite-rank binary pair is mortal exactly when one return product vanishes | `ReturnFamily.pairGenerator_isMortal_iff` |
@@ -1040,6 +1053,11 @@ The stationary closed-block part of `G3-O08` remains an audited finite-dimension
 a formal dependency. Lean checks its erasing exact-macro special case and its integral residual
 case splits, but not yet the abstract one-dimensional-kernel assembly or the universal-body
 membership corollary.
+
+The rational serializer theorem `G3-O13` and bounded-residual decision theorem `G3-D01` remain
+audited paper theorems. Lean checks their canonical block-semantic interface and the final
+fractional-contribution throat, but not the generic asynchronous-transducer pumping construction,
+three-pulse factor classification, or extracted finite residual decision graph.
 
 For `G3-O03`, Lean checks the null-history counterexample, minimum-body uniqueness, base-five
 encoder, exact same-zero theorem, and integral mortality lift. The statement that both phase graph

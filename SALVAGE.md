@@ -129,6 +129,8 @@ file owns the mathematical stock.
 | [`G3-O05`](#g3-o05-cancellative-projective-state-tax) | obstruction | inverse-saturated two-side projective dynamics need four states | audited | graduated |
 | [`G3-O11`](#g3-o11-positive-shifts-do-not-force-saturation) | obstruction | positive common shifts need not be backward cancellative | formalized | graduated |
 | [`G3-O12`](#g3-o12-positive-reset-dimension-tax) | obstruction | projectively full residual-local reset codes identify `q` with `ε` | formalized | graduated |
+| [`G3-O13`](#g3-o13-rational-serializer-pumping) | obstruction | finite-control exact serialization pumps to an impossible stationary return | audited; formalized core | graduated |
+| [`G3-D01`](#g3-d01-bounded-prefix-residuals) | decidable stratum | a supplied bound on every accepting prefix residual gives a finite decision graph | audited | stock |
 | [`G3-O06`](#g3-o06-periodic-ray-completion-and-branching-fracture) | compiler and obstruction | `bcbb` has an exact three-state periodic compiler, while `bcbc` defeats every single affine positional section | formalized | graduated |
 | [`G3-O07`](#g3-o07-near-fork-carry-collision) | obstruction | a terminal and nonterminal `bcbc` near-fork collide under the entire one-coordinate phase-line carry family | formalized | graduated |
 | [`G3-C02`](#g3-c02-fixed-bcbc-singular-recognizer) | fixed-instance compiler | a transient guard over one affine carry recognizes the complete `bcbc` language | audited | graduated |
@@ -4112,8 +4114,8 @@ at each Neary block. Demand an explicit state transition or an unclosed residue.
 **Artifact:** [`TernaryClosedBlockNoGo.lean`](MatrixMortality/TernaryClosedBlockNoGo.lean) and
 [`m34-ternary-closed-block-no-go-2026-08-08.md`](audits/m34-ternary-closed-block-no-go-2026-08-08.md).
 
-**Next:** construct a state-dependent ternary spelling with a complete arbitrary-word converse,
-or prove that any such spelling can be synchronized to a forbidden stationary closed block.
+The former next step is discharged by `G3-O13`: every rational exact state-dependent spelling
+with recurrent block powers synchronizes to a forbidden stationary return.
 
 ### G3-S01: Shift-equivariant zero incidence
 
@@ -4496,6 +4498,63 @@ the model mechanism, not a uniform solution.
 
 **Artifact:** [`PositiveResetNoGo.lean`](MatrixMortality/PositiveResetNoGo.lean) and
 [`m34-positive-reset-dimension-tax-2026-08-08.md`](audits/m34-positive-reset-dimension-tax-2026-08-08.md).
+
+### G3-O13: Rational serializer pumping
+
+**Kind:** obstruction
+
+**Evidence:** audited; formalized core
+
+**Disposition:** graduated
+
+For even `β≥4` and a mixed body, no three-letter asynchronous finite-transducer relation can
+exactly serialize arbitrarily large powers of four explicit Neary blocks. The serializer may use
+state-dependent and nonunique spellings, erasure, physical letters crossing block boundaries,
+fixed context on both target sides, and unbounded upper/lower lag.
+
+Pumping one accepting path exposes a loop consuming a positive block power and emitting a
+physical cycle. Exact transport for all pump counts makes both target images of that cycle powers
+of cyclic rotations of the block images. Three `b`-head pulses force at least three physical
+letters whose lower images lie in `b*`; hence every letter has that property. The mixed `c`-head
+pulse instead requires a lower image containing `c`, a contradiction.
+
+**Scope:** arbitrarily large powers of each test block must be encodable, and the two target sides
+must be transported exactly up to fixed contexts. A solution-sensitive domain which truncates
+most powers, final-equality-only transport, or a nonrational spelling relation remains outside the
+theorem.
+
+**Use:** close total finite-control stateful serialization and merge its genuine survivors into
+the global word-residual leaf. Finite state can police syntax, but it cannot itself be the
+computational store.
+
+**Formalized core:** [`TernaryClosedBlockNoGo.lean`](MatrixMortality/TernaryClosedBlockNoGo.lean)
+checks the bidirectional block-semantic equation on arbitrary stroke histories and the final
+fractional-contribution contradiction. The transducer pumping and three-pulse word-factor audit
+are recorded in
+[`m34-rational-serializer-pumping-2026-08-08.md`](audits/m34-rational-serializer-pumping-2026-08-08.md).
+
+### G3-D01: Bounded prefix residuals
+
+**Kind:** decidable stratum
+
+**Evidence:** audited
+
+**Disposition:** stock
+
+Given a GPCP instance and a certified bound `K` on every prefix discrepancy of every accepting
+word, free-prefix reduction has a finite state set `0,+s,−s` with `|s|≤K`, plus dead and overflow
+states. Final boundaries determine acceptance exactly; one bit enforces nonemptiness. Finite
+decoder state and regular side conditions may be multiplied into the same graph.
+
+**Scope:** the bound must be supplied effectively and need hold only on accepting paths. The
+theorem does not decide instances whose accepting residual is unbounded or lacks a computable
+uniform bound.
+
+**Use:** reject every proposed universal ternary reduction which exports a computable accepting-
+prefix residual ceiling. A surviving word residual must be unbounded and non-effectively bounded.
+
+**Artifact:**
+[`m34-rational-serializer-pumping-2026-08-08.md`](audits/m34-rational-serializer-pumping-2026-08-08.md).
 
 ### G3-O06: Periodic-ray completion and branching fracture
 

@@ -213,6 +213,54 @@ theorem ExactErasingMacroFactorization.four_le_card
 
 /-! ## Closed-block arithmetic skeleton -/
 
+/-- On an exact stroke history, the binary terminal equation is equivalent to the block-level
+queue equation: consumed letters followed by `b` equal the leading `c` followed by every rule
+output.  This includes arbitrary null-history extensions. -/
+theorem tileHistory_terminal_match_iff_block_semantics
+    (β : Nat) (body : List TagLetter) (β_pos : 0 < β)
+    (first : Stroke TagLetter β) (history : List (Stroke TagLetter β)) :
+    spell (nearyUpper β) (tileHistory (first :: history)) ++ nearyMarker β =
+        spell (nearyLower β body) (tileHistory (first :: history)) ↔
+      consumed (first :: history) ++ [.b] =
+        .c :: produced (tagOutput body) (first :: history) := by
+  constructor
+  · intro terminal_match
+    have semantic :=
+      tileHistory_semantic_eq_of_terminal_match
+        β body β_pos first history terminal_match
+    simpa [produced_cons, tagOutput, List.append_assoc] using semantic
+  · intro semantic
+    apply List.append_cancel_right (bs := [true])
+    rw [spell_nearyUpper_tileHistory, spell_nearyLower_tileHistory_append_true]
+    calc
+      (tagEncode β (consumed (first :: history)) ++ nearyMarker β) ++ [true] =
+          tagEncode β (consumed (first :: history) ++ [.b]) := by
+            rw [List.append_assoc, marker_append_true, ← tagEncode_append]
+      _ = tagEncode β (.c :: produced (tagOutput body) (first :: history)) := by
+        rw [semantic]
+      _ = tagEncode β
+          (.c :: nearyBody body first.head ++ [.b] ++
+            produced (tagOutput body) history) := by
+        simp [produced_cons, tagOutput, List.append_assoc]
+
+/-- The final arithmetic throat of the three-pulse obstruction: a positive word morphism cannot
+contribute one lower letter per block while spelling at least two upper letters per block. -/
+theorem no_fractional_lower_contribution
+    (β contribution blocks : Nat) (two_le : 2 ≤ β) (blocks_pos : 0 < blocks) :
+    contribution * β * blocks ≠ blocks := by
+  intro equal
+  by_cases contribution_zero : contribution = 0
+  · subst contribution
+    simp at equal
+    omega
+  · have contribution_pos : 0 < contribution := Nat.pos_of_ne_zero contribution_zero
+    have beta_le_product : β ≤ contribution * β := by
+      simpa using Nat.mul_le_mul_right β (Nat.succ_le_iff.mpr contribution_pos)
+    have factor_gt : 1 < contribution * β := lt_of_lt_of_le (by omega) beta_le_product
+    have scaled := mul_lt_mul_of_pos_right factor_gt blocks_pos
+    have blocks_lt : blocks < contribution * β * blocks := by simpa using scaled
+    exact (ne_of_gt blocks_lt) equal
+
 /-- Once stationary closed-block identities are reduced to paired Parikh data, the common lower
 deletion image has only the two possibilities used by the complete no-go proof. -/
 theorem commonLowerDeletion_cases
