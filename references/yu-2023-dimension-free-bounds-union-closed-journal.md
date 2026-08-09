@@ -20,8 +20,17 @@ value `Γ̂(t) ≥ 1.00000889`, with an optimizer supported on two elementary co
 
 ## Audit notes
 
-The reduction and the implication `Γ̂(t)>1 ⇒ abundance ≥t` are analytic. The displayed
-`0.38234` evaluation is numerical, with no outward-rounded certificate or exhaustive global-
-optimization proof supplied. The author’s current publication page likewise describes the paper
-as numerically evaluating Sawin’s bound. We therefore do not treat `0.38234` as a rigorously
-established constant until that finite check is certified.
+The implication `Γ̂(t)>1 ⇒ abundance ≥t` is analytic. The proof of Proposition 1 has a
+repairable concavity defect: it says that the independent entropy functional is globally concave
+and cites Alweiss–Huang–Sellke, Lemma 5, but that lemma proves concavity only among measures of
+one fixed mean. Global concavity is false. Before applying the lemma, a coupling of mean `s<t`
+can be mixed with `δ_(1,1)` in proportion `(t−s)/(1−s)`. This raises the mean to exactly `t`,
+multiplies the marginal and dependent entropy terms by `1−γ`, and multiplies the independent
+term by `(1−γ)²`; the objective ratio therefore cannot increase. The extreme-point argument is
+then valid on the exact-mean slice. The repair is proved in
+[`audits/frankl-yu-reduction-2026-08-08.md`](../audits/frankl-yu-reduction-2026-08-08.md#repairing-the-exact-mean-reduction).
+
+The displayed `0.38234` evaluation is numerical, with no outward-rounded certificate or
+exhaustive global-optimization proof supplied. The author’s current publication page likewise
+describes the paper as numerically evaluating Sawin’s bound. We therefore do not treat the
+source's numerical claim as a rigorously established constant on its own.

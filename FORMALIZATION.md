@@ -1,5 +1,45 @@
 # Formal Verification
 
+## Frankl candidate bound
+
+The candidate universal abundance bound
+
+```text
+19099/50000 = 0.38198 > (3−√5)/2
+```
+
+has a complete informal reduction and an outward-rounded Arb certificate in
+[`audits/frankl-yu-reduction-2026-08-08.md`](audits/frankl-yu-reduction-2026-08-08.md).
+It is deliberately not yet counted among the formal results. Promotion requires Lean proofs of:
+
+1. the exact-mean lift repairing Yu's concavity argument and the finite symmetric-orbit extreme
+   decomposition;
+2. the half-support kernel, including the finite-path scalar sign argument;
+3. the low-square curvature comparison, self-pair Bernstein polynomial, and ordered two-orbit
+   contraction;
+4. both reduced compact entropy inequalities, including the two entropy-zero corners;
+5. the entropy implication from the certified coupling inequality to the stated universal
+   union-closed abundance bound.
+
+The Python/Arb program is retained as independent evidence and a box-generator, not as a Lean
+oracle. The formal certificate must use proved rational enclosures for every logarithm and may
+not use `native_decide`, external declarations, or a generated axiom.
+
+The following analytic core is now kernel-checked:
+
+- exact target arithmetic, including `19099/50000>(3−√5)/2`;
+- low-square entropy curvature and Jensen-deficit bounds;
+- the Bernstein-positive self-pair kernel and both self-pair contraction bounds;
+- exact-mean orbit weights and the ordered low–low and low–endpoint contractions, including
+  the strict factor `18401/18750<1`;
+- the complete half-support scalar sign, global gain concavity and monotonicity, and pointwise
+  dependent-cost contraction;
+- finite Jensen, bilinear polarization, and abstract mean-lift scaling and gap reflection.
+
+These declarations live under `Frankl/`. They do not yet promote the candidate bound: the
+symmetric-coupling constructors, extreme-point reduction, reflected interval cover, and final
+union-closed entropy implication remain open.
+
 The Lean development verifies the complete computable source reduction and the matrix compilers:
 
 ```text

@@ -48,6 +48,10 @@ file owns the mathematical stock.
 | [`FC-S02`](#fc-s02-downward-boundary-obstruction) | structure theorem | a low-density counterexample has large average downward boundary | audited | active |
 | [`FC-S03`](#fc-s03-binary-semigroup-weighted-frankl-theorem) | structure theorem | weighted Frankl at homogeneous weight `1/2` | audited | active |
 | [`FC-S04`](#fc-s04-cubical-unique-root-obstruction) | structure theorem | a counterexample complement has too many uniquely rooted sets | audited | active |
+| [`FC-S05`](#fc-s05-exact-mean-yu-repair) | structure theorem | Yu's coupling reduction is valid after a monotone exact-mean lift | audited | active |
+| [`FC-S06`](#fc-s06-half-support-elimination) | structure theorem | entropy extremes may be confined to `[0,1/2]∪{1}` by a finite monotone kernel | audited | active |
+| [`FC-S07`](#fc-s07-low-orbit-contraction) | structure theorem | every surviving two-orbit extreme contracts to one of two bivariate families | audited | active |
+| [`FC-M01`](#fc-m01-rational-yu-certificate) | partial mechanism | Arb certifies the two reduced gaps at `19099/50000` | computational | active |
 | [`FC-O01`](#fc-o01-homogeneous-tilt-persistence-fails) | obstruction | one-coordinate majority need not persist under homogeneous product tilt | audited | active |
 | [`FC-O02`](#fc-o02-uniform-fiber-semigroup-ceiling) | obstruction | finite full-fiber semigroup lifts cannot beat the uniform entropy barrier | audited | stock |
 | [`FC-O03`](#fc-o03-maximal-self-dual-completion-fails) | obstruction | maximal complement-free meet families need not be self-dual | audited | stock |
@@ -305,6 +309,143 @@ overlap inequality proving `q(F)≤2α|F|` for a normalized counterexample.
 
 **Next:** express `q(F)` through intersections of the root down-sets and test inequalities that
 also use every strict coordinate majority; do not pursue homology alone.
+
+### FC-S05: Exact-mean Yu repair
+
+**Kind:** structure theorem
+**Evidence:** audited
+**Disposition:** active
+
+For a finite symmetric coupling `P` whose marginal has mean `s<t`, mix in
+`γ=(t−s)/(1−s)` mass at `(1,1)`. The new coupling has exact marginal mean `t`; its
+independent entropy term is multiplied by `(1−γ)²`, while its marginal and dependent
+entropy terms are multiplied by `1−γ`. The objective ratio cannot increase. Yu's cited
+concavity theorem may therefore be applied only after this lift, on the fixed-mean slice where
+it is valid. A negative gap then occurs at a symmetric extreme supported on at most two orbit
+laws.
+
+**Scope:** this repairs the functional reduction in Yu's Proposition 1 for finite couplings. It
+does not certify the remaining extreme-point minimum or vindicate global concavity, which is
+false.
+
+**Use:** begin every Yu/Sawin finite optimization at exact marginal mean. Do not reuse the
+printed global-concavity sentence.
+
+**Artifact:**
+[`audits/frankl-yu-reduction-2026-08-08.md`](audits/frankl-yu-reduction-2026-08-08.md#repairing-the-exact-mean-reduction).
+
+**Next:** formalize the lift, fixed-slice reduction, and finite orbit decomposition.
+
+### FC-S06: Half-support elimination
+
+**Kind:** structure theorem
+**Evidence:** audited
+**Disposition:** active
+
+For each marginal atom `y∈(1/2,1)`, the kernel
+
+```text
+y ↦ 2(1−y)δ_(1/2)+(2y−1)δ_1
+```
+
+preserves its mean and does not increase the max-entropy coupling cost pointwise. At
+`t=19099/50000`, `α=7/200`, and gap slack `10^(−7)`, bilinear polarization gives the exact
+finite identity
+
+```text
+A(μ′)−A(μ)=λ(E_μg+E_μ′g).
+```
+
+Concavity and monotonicity of `g`, followed by the checked scalar inequality
+`2g(t)<wg(0)`, show that the replacement cannot increase the independent-minus-marginal gap.
+Iterating removes every support point strictly between one half and one.
+
+**Scope:** the scalar derivative signs are specific to the displayed rational parameters,
+though the kernel and pointwise dependent-cost inequality are general. This repairs Cambie's
+infinitesimal argument without an uncontrolled `O(η)` term.
+
+**Use:** classify exact-mean extremes using only `[0,1/2]∪{1}` before numerical work.
+
+**Artifact:**
+[`audits/frankl-yu-reduction-2026-08-08.md`](audits/frankl-yu-reduction-2026-08-08.md#removing-support-above-one-half).
+
+**Formalization:** `Frankl/HalfSupport.lean` checks the scalar sign, global shape of `g`, and
+pointwise dependent-cost contraction. `Frankl/FiniteLaw.lean` checks the finite Jensen and
+polarization argument.
+
+**Next:** connect the generic finite-law theorem to the symmetric-coupling replacement
+constructor.
+
+### FC-S07: Low-orbit contraction
+
+**Kind:** structure theorem
+**Evidence:** audited
+**Disposition:** active
+
+For `f_q(x)=h(x+q−xq)` on the low square,
+
+```text
+|f_q″(x)|/|h″(x)| ≤ (1−q)/(1+q) ≤ 1−4q/3.
+```
+
+A separate Bernstein-positive polynomial proves that contracting a symmetric low orbit to its
+mean increases independent join entropy by no more than marginal entropy. In a two-low-orbit
+extreme, contract the lower-mean orbit first and the upper-mean orbit second. Their normalized
+costs are at most `1` and
+
+```text
+2−8t/3 = 18401/18750 < 1.
+```
+
+If the upper orbit contains `1`, the lower orbit contracts with cost at most one. Since the
+dependent term is fixed by each low orbit's mean, every restricted extreme reduces to either a
+diagonal–diagonal or diagonal–endpoint law.
+
+**Scope:** the theorem concerns symmetric extremes supported on `[0,1/2]∪{1}` at exact
+mean `t=19099/50000`. The curvature lemmas themselves have the wider domains stated in the
+audit.
+
+**Use:** replace Yu's four geometric orbit coordinates by the two bivariate objectives in
+`FC-M01`.
+
+**Artifact:**
+[`audits/frankl-yu-reduction-2026-08-08.md`](audits/frankl-yu-reduction-2026-08-08.md#contracting-the-surviving-low-orbits).
+
+**Formalization:** `Frankl/Entropy.lean`, `Frankl/OrbitContraction.lean`,
+`Frankl/SelfPair.lean`, and `Frankl/TwoOrbit.lean` check the curvature comparison, Bernstein
+polynomial, both self-pair bounds, exact mean weights, and ordered two-step contraction.
+
+**Next:** connect these deficit theorems to the finite orbit decomposition.
+
+### FC-M01: Rational Yu certificate
+
+**Kind:** partial mechanism
+**Evidence:** computational
+**Disposition:** active
+
+At `t=19099/50000`, `α=7/200`, and `ε=10^(−7)`, 160-bit Arb arithmetic
+certifies
+
+```text
+(1−α)A+αC−(1+ε)B ≥ 0
+```
+
+on both reduced bivariate families. Two entropy-zero corner squares are discharged by explicit
+analytic estimates. The run assesses 19,140 rational boxes and emits deterministic hashes for
+the 9,603 certified leaves.
+
+**Scope:** this is an outward-rounded certificate for the reduced objectives, not by itself an
+unbounded theorem. Promotion additionally requires the analytic reductions and numerical
+certificate to pass the repository's strict Lean gate.
+
+**Use:** it fixes a concrete formalization target that would improve the universal abundance
+constant beyond `(3−√5)/2`.
+
+**Artifact:** [`tools/certify_frankl_38198.py`](tools/certify_frankl_38198.py) and
+[`audits/frankl-yu-reduction-2026-08-08.md`](audits/frankl-yu-reduction-2026-08-08.md#outward-rounded-certificate).
+
+**Next:** translate the two interval covers and the analytic reduction into suppression-free
+Lean; only then change the evidence label or universal-bound ledger.
 
 ### FC-O02: Uniform-fiber semigroup ceiling
 

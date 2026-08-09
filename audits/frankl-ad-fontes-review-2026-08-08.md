@@ -49,10 +49,19 @@ of the form
 (1−β)Q_(a₁,a₂)+βQ_(b₁,b₂).
 ```
 
-This finite reduction is analytic. Its numerical minimization is the missing certificate in
-Yu and Cambie. The obstruction at the claimed optimum is explicit: a marginal supported on
+Yu's printed proof applies a fixed-mean concavity lemma as if it were global. The gap is
+repairable by raising every marginal of mean below `t` to exact mean `t` with mass at
+`(1,1)` before taking extreme points. The repaired reduction is analytic; the source's
+numerical minimization remains uncertified. The obstruction at the claimed optimum is explicit:
+a marginal supported on
 `{b,1}`, where `b≈0.329454738503037`, defeats every mixture of the independent and
 max-entropy protocols at `c≈0.382345533366703`.
+
+The local campaign has since reduced the repaired program to two bivariate families and obtained
+an outward-rounded Arb certificate at `19099/50000=0.38198`; see the
+[dedicated reduction audit](frankl-yu-reduction-2026-08-08.md). This is candidate new work, not
+part of the ad-fontes account of the published frontier, and is withheld from the established
+bound until its required Lean formalization closes.
 
 Liu's conditionally IID protocol escapes that obstruction because the extremal antithetic
 coupling is not a mixture of IID laws. His analytic compactness argument proves a strict gain.
@@ -99,16 +108,18 @@ need not be self-dual, so this class theorem does not reduce arbitrary Horn inst
 
 The following statements are not available as theorem premises:
 
-- the numerical global minima in Yu's or Cambie's worksheets;
+- the numerical global minima in Yu's or Cambie's worksheets, independently of the local
+  replacement certificate;
 - Liu's infinite-kernel PSD hypothesis or nine-dimensional optimizer shape;
 - the conjectured parity or power-set classification of tight families;
 - an upper bound on uniquely rooted vertices derived from cubical acyclicity alone;
 - persistence of a coordinate majority along homogeneous product tilt;
 - self-dual completion of an arbitrary complement-free Horn family.
 
-The audited new theorems and obstructions are indexed as `FC-S01` through `FC-S04` and
-`FC-O01` through `FC-O03` in `SALVAGE.md`. Strategy, live hypotheses, and experiment outcomes
-remain in Fidget Spinner rather than in this evidence audit.
+The first audit tranche is indexed as `FC-S01` through `FC-S04` and `FC-O01` through
+`FC-O03` in `SALVAGE.md`. The subsequent Yu repair and contraction lemmas remain candidate
+new work until formalization. Strategy, live hypotheses, and experiment outcomes remain in
+Fidget Spinner rather than in this evidence audit.
 
 ## Sources
 
