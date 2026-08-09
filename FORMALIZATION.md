@@ -189,8 +189,11 @@ generators to have rank exactly two. For the generic projective-incidence revers
 `αβ≠0`, Lean now checks the independent basis changes, the rank-one loop fracture, the complete
 constrained-path grammar, and both mortality implications. Lean now also transports the unique
 hard compatible one-loop edge stratum back to that compiler with intrinsic `β=1`; the audited
-remaining edge-rank census gives `Mort₃^(2,2) ≡ₘ GPI₂`. Arbitrary PI₂ genericization, not
-the edge graph, is the surviving seam.
+remaining edge-rank census gives `Mort₃^(2,2) ≡ₘ GPI₂`. `ProjectiveIncidence` now proves the
+exact two-ray exceptional locus and rescales every generic instance to `α=β=1` while preserving
+all word zeros. The accompanying positive first-exit audit reduces arbitrary PI₂ to at most
+three GPI₂ queries; its sibling sharpens that count to two. The surviving enemy is GPI₂ itself,
+not genericization or the edge graph.
 
 ReturnSquare instantiates the rank-`(3,2)` reduction. Lean proves the closed return matrix,
 split interfaces, exact cut rank, internal rank-one zero-wait return, unit positive returns,
@@ -659,6 +662,7 @@ with a complete arbitrary-word converse.
 | `EdgeCompression.lean` | exact adjacent-edge compression for split finite-rank families |
 | `TwoPlaneEdges.lean` | compatible two-plane realization of a `2 × 2` edge square and exact rank-two certificates |
 | `ReverseEdge.lean` | generic projective-incidence reverse compiler, basis adaptation, and all-path converse |
+| `ProjectiveIncidence.lean` | exceptional-source geometry and all-word unit normalization for projective incidence |
 | `RankTwoPunctuation.lean` | intrinsic generic-incidence reduction of the unique hard one-loop edge stratum |
 | `PolynomialPencil.lean` | coefficient support and exact evaluation of words over affine matrix pencils |
 | `PrimitiveDivisor.lean` | cyclotomic support, nonprimitive index-prime valuations, and Bang–Zsigmondy above exponent two |
@@ -789,6 +793,8 @@ with a complete arbitrary-word converse.
 | A split finite-rank family is mortal exactly when one constrained edge path vanishes | `EdgeCompression.isMortal_iff_exists_edgeProduct_eq_zero` |
 | Every compatible two-plane edge square is realized by two rank-two generators | `TwoPlaneEdges.output_mul_input`, `TwoPlaneEdges.generator_rank` |
 | Generic projective incidence compiles to two rank-two `3 × 3` generators | `ReverseEdge.isMortal_adaptedGenerator_iff`, `ReverseEdge.adaptedGenerator_rank` |
+| Genericity is avoidance of two exact source rays | `ProjectiveIncidence.generic_iff_sourcePoint_not_mem_badSources` |
+| Every generic PI₂ instance scales to `α=β=1` without changing its word-zero language | `ProjectiveIncidence.exists_unitNormalized` |
 | A compatible one-loop edge square is mortal exactly at loop nilpotence or intrinsic generic incidence | `RankTwoPunctuation.exists_pathProduct_eq_zero_iff_selfBridge_or_incidence` |
 | ReturnSquare physical mortality is exactly positive-return scalar bridge zero | `ReturnSquare.physical_isMortal_iff_positiveBridge` |
 | Every nonresonant ReturnSquare zero uses at least three positive returns | `ReturnSquare.positiveBridge_zero_shape` |

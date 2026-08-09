@@ -559,9 +559,12 @@ two-parameter cross-edge stratum. Together with the checked reverse compiler thi
 Mort₃^(2,2) ≡ₘ GPI₂.
 ```
 
-The graph constraint is therefore gone. The remaining seam runs in the opposite direction:
-arbitrary nongeneric PI₂ has not been reduced to generic PI₂, and generic PI₂ itself is
-unresolved. See [`R32-S32`](SALVAGE.md#r32-s32-rank-two-punctuation-and-graph-removal).
+The graph constraint is therefore gone, and the opposite genericity seam is gone for
+decidability. The two exceptional source rays are exact; swapping the controls and taking the
+first positive exit reduces arbitrary PI₂ to at most three GPI₂ queries. Every generic instance
+also scales to `α=β=1` without changing any word zero. The sibling attack sharpens the query
+bound to two. Generic PI₂ itself remains unresolved. See
+[`R32-S35`](SALVAGE.md#r32-s35-positive-projective-incidence-genericization).
 
 The rank-`(3,2)` profile is the genuinely new artery. If `B=UV`, every binary word containing
 `B` is governed exactly by
@@ -1189,7 +1192,7 @@ all-legal block inequality for the carried generalized continuant. See
 | Aperiodic angular counter | Construct one exact fixed-coefficient reset orbit with unbounded denominators while the p-radial component remains on the reset ray | Every useful auxiliary prime needs a later exact-order synchronization and simultaneous endpoint divisibility; finite rational atlases are eventually periodic |
 | Repeated-factor extraction | Force a sufficiently heavy repeated factor in every bounded-complexity wait prefix and apply `R32-S29` | Arbitrary repeated factors are controlled once found; no theorem yet extracts one from a moving denominator schedule |
 | Irreducible cubic reflection orbit | Decide reachability between isolated singular lines under the non-pure order-three recurrence of projective involutions | Singular timing is finite; independently selected unit indices remain unbounded |
-| Generic projective incidence | Decide GPI₂ directly, or reduce arbitrary PI₂ to its generic stratum | Rank-(2,2) adds no graph hardness; positive-word genericization still lacks an OR or singular data transport |
+| Generic projective incidence | Decide or prove undecidable the normalized `α=β=1` GPI₂ core | Arbitrary PI₂ already reduces by a bounded positive-prefix disjunction; a generic affine no-instance defeats every finite congruence sieve |
 
 The split-spectrum hot path is now a coefficient-effective amortization of the doubly
 order-broken additive continuant, with a genuinely history-sensitive aperiodic

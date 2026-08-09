@@ -164,6 +164,10 @@ open MatrixMortality
 #print axioms TwoPlaneEdges.isMortal_iff_exists_edgeProduct_eq_zero
 #print axioms ReverseEdge.adaptedGenerator_rank
 #print axioms ReverseEdge.isMortal_adaptedGenerator_iff
+#print axioms ProjectiveIncidence.alpha_eq_zero_iff_sourcePoint_eq_badSource
+#print axioms ProjectiveIncidence.beta_eq_zero_iff_sourcePoint_eq_badSource
+#print axioms ProjectiveIncidence.generic_iff_sourcePoint_not_mem_badSources
+#print axioms ProjectiveIncidence.exists_unitNormalized
 #print axioms RankTwoPunctuation.exists_pathProduct_eq_zero_iff_selfBridge_or_incidence
 #print axioms ReturnSquare.twoReturnDiscriminant_not_isSquare
 #print axioms ReturnSquare.positiveBridge_pair_ne_zero

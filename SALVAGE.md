@@ -121,6 +121,7 @@ file owns the mathematical stock.
 | [`R32-S32`](#r32-s32-rank-two-punctuation-and-graph-removal) | structure theorem and reduction | compatible one-loop rank-two edge squares are intrinsic generic projective incidence; every other edge-rank pattern is decidable | audited | graduated |
 | [`R32-S33`](#r32-s33-terminal-casoratian-and-two-sided-order-allocation) | structure theorem and decidable stratum | terminal normalization comes only from earlier branches, and exact orders persisting to either boundary have forced content orientation | formalized | active |
 | [`R32-S34`](#r32-s34-exact-moving-prime-ledger) | structure theorem | outside fixed support, a divisor enters forward content exactly at simultaneous endpoint and branch-boundary divisibility | formalized | active |
+| [`R32-S35`](#r32-s35-positive-projective-incidence-genericization) | reduction and normalization | arbitrary PI₂ is a bounded positive-prefix disjunction of GPI₂ instances, and every generic instance has `α=β=1` | formalized | active |
 | [`R32-D03`](#r32-d03-bounded-denominator-periodicity) | decidable stratum | every infinite legal rational guard orbit with bounded reduced denominators is eventually periodic | formalized | graduated |
 | [`M4-C01`](#m4-c01-two-state-pushout-compiler) | compiler | binary deterministic two-state scalar control compiles to three `4 × 4` matrices | formalized | graduated |
 | [`M4-O01`](#m4-o01-exact-toggle-fusion-leaves-an-immortal-core) | obstruction | exact local toggle fusion preserves a nonzero common anchor | formalized | graduated |
@@ -4247,6 +4248,48 @@ rails of degree at least two were already excluded by the stronger checked rail-
 **Use:** on the constructive side, require every proposed auxiliary prime to satisfy both exact
 ledger conditions at each activation. On the decision side, combine those synchronization
 events with the two-sided order budget rather than bounding a fictitious hidden register.
+
+### R32-S35: Positive projective-incidence genericization
+
+**Kind:** reduction and normalization
+**Evidence:** formalized
+**Disposition:** active
+
+For nonzero row and column and unit controls `G,H`, the two exceptional source rays of the
+ordered reverse compiler are exactly
+
+```text
+H ker(r),
+H G⁻¹ H ker(r).
+```
+
+Lean proves that `αβ≠0` is equivalent to the source avoiding these two rays. Intersecting this
+set with the exceptional set after swapping `G,H` leaves at most two sources. A positive-word
+first-exit argument therefore reduces unrestricted PI₂ nonadaptively to a finite disjunction of
+GPI₂ queries. The initial reconstruction gives at most three queries; its sibling sharpens this
+to two by exploiting the relative involution in the two-point case.
+
+Every generic instance also admits independent nonzero generator scalings
+
+```text
+H' = αH,      G' = (α²/β)G
+```
+
+for which `α'=β'=1`. Lean proves both identities and preserves the zero coefficient of every
+word, including the empty word.
+
+**Scope:** the exact exceptional locus and unit normalization are formalized. The finite
+first-exit theorem is independently audited and is strengthened in the next salvo ratchet. This
+is a bounded truth-table reduction, not a many-one reduction to one generic instance, and it
+does not decide GPI₂.
+
+**Artifact:** `ProjectiveIncidence.generic_iff_sourcePoint_not_mem_badSources` and
+`ProjectiveIncidence.exists_unitNormalized` in
+[`ProjectiveIncidence.lean`](MatrixMortality/ProjectiveIncidence.lean), with reconstruction in
+[`m32-three-query-genericization-2026-08-09.md`](audits/m32-three-query-genericization-2026-08-09.md).
+
+**Use:** identify PI₂ and GPI₂ at the level of decidability and normalize all further attacks to
+`α=β=1`. The live rank-(2,2) enemy is GPI₂ itself; exceptional-scalar plumbing is retired.
 
 ### R32-D03: Bounded-denominator periodicity
 

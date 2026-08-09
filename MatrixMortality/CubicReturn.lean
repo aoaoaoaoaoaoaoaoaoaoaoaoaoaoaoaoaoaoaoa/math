@@ -123,20 +123,6 @@ theorem pairGenerator_isMortal_iff_residue
 def pureInvolution (mu : ℚ) : Square (Fin 2) ℚ :=
   !![0, mu; 1, 0]
 
-private theorem inv_mulVec_eq_of_mulVec_eq
-    {matrix : Square (Fin 2) ℚ} (matrix_unit : IsUnit matrix)
-    {source target : Fin 2 → ℚ} (action : matrix *ᵥ source = target) :
-    matrix⁻¹ *ᵥ target = source := by
-  calc
-    matrix⁻¹ *ᵥ target = matrix⁻¹ *ᵥ (matrix *ᵥ source) :=
-      congrArg (fun vector => matrix⁻¹ *ᵥ vector) action.symm
-    _ = (matrix⁻¹ * matrix) *ᵥ source :=
-      Matrix.mulVec_mulVec source matrix⁻¹ matrix
-    _ = 1 *ᵥ source := congrArg (fun M => M *ᵥ source)
-      (Matrix.nonsing_inv_mul matrix
-        (matrix.isUnit_iff_isUnit_det.mp matrix_unit))
-    _ = source := Matrix.one_mulVec source
-
 /-- In the pure one-singular normal form `(P R, P, P J_mu)`, both exceptional scalars of the
 reverse-edge compiler are `mu⁻¹`. Thus every such instance with `mu ≠ 0` is already generic. -/
 theorem pureOneSingular_reverseEdgeScalars
@@ -173,7 +159,7 @@ theorem pureOneSingular_reverseEdgeScalars
       _ = column := rfl
   have pulled_eq :
       ReverseEdge.pulledColumn (P * J) column = mu⁻¹ • second := by
-    exact inv_mulVec_eq_of_mulVec_eq H_unit pulled_action
+    exact nonsingInv_mulVec_eq_of_mulVec_eq H_unit pulled_action
   have first_action :
       (P * J) *ᵥ (mu⁻¹ • first) = P *ᵥ (mu⁻¹ • second) := by
     have J_action : J *ᵥ (mu⁻¹ • first) = mu⁻¹ • second := by
@@ -189,7 +175,7 @@ theorem pureOneSingular_reverseEdgeScalars
   have first_eq :
       ReverseEdge.firstVector P (P * J) column = mu⁻¹ • first := by
     rw [ReverseEdge.firstVector, pulled_eq]
-    exact inv_mulVec_eq_of_mulVec_eq H_unit first_action
+    exact nonsingInv_mulVec_eq_of_mulVec_eq H_unit first_action
   constructor
   · rw [ReverseEdge.alpha, pulled_eq]
     simp [row, second, Matrix.dotProduct, Fin.sum_univ_succ]

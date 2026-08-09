@@ -14,6 +14,22 @@ open scoped Matrix
 /-- Square matrices indexed by `ι` over `R`. -/
 abbrev Square (ι R : Type*) := Matrix ι ι R
 
+/-- A nonsingular inverse reverses any stated matrix-vector action. -/
+theorem nonsingInv_mulVec_eq_of_mulVec_eq
+    {ι K : Type*} [Field K] [Fintype ι] [DecidableEq ι]
+    {matrix : Square ι K} (matrix_unit : IsUnit matrix)
+    {source target : ι → K} (action : matrix *ᵥ source = target) :
+    matrix⁻¹ *ᵥ target = source := by
+  calc
+    matrix⁻¹ *ᵥ target = matrix⁻¹ *ᵥ (matrix *ᵥ source) :=
+      congrArg (fun vector => matrix⁻¹ *ᵥ vector) action.symm
+    _ = (matrix⁻¹ * matrix) *ᵥ source :=
+      Matrix.mulVec_mulVec source matrix⁻¹ matrix
+    _ = 1 *ᵥ source := congrArg (fun M => M *ᵥ source)
+      (Matrix.nonsing_inv_mul matrix
+        (matrix.isUnit_iff_isUnit_det.mp matrix_unit))
+    _ = source := Matrix.one_mulVec source
+
 /-- Interpret a word by multiplying its generators from left to right. -/
 def wordProduct {α M : Type*} [Monoid M] (generators : α → M) (word : List α) : M :=
   (word.map generators).prod
