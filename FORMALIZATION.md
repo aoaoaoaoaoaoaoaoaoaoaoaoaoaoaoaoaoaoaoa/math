@@ -17,8 +17,8 @@ It is deliberately not yet counted among the formal results. Promotion requires 
 2. the half-support kernel, including the finite-path scalar sign argument;
 3. the low-square curvature comparison, self-pair Bernstein polynomial, and ordered two-orbit
    contraction;
-4. the remaining diagonal–endpoint compact entropy inequality, including its two entropy-zero
-   corners (the diagonal–diagonal family is now analytic);
+4. the complementary diagonal–endpoint wedge outside the now-analytic centered core, including
+   its two already-proved entropy-zero corners;
 5. the entropy implication from the certified coupling inequality to the stated universal
    union-closed abundance bound.
 
@@ -79,18 +79,21 @@ The following analytic, finite-convex, and certificate core is now kernel-checke
   every law with `a≥1/4`, `q≤1/2`, and conditional mean at least `13/50` is bounded below by
   its centered `q=a` law. The exact boundary coefficient has margin
   `3108487/23310000000` below the strict marginal penalty.
+- strict positivity of the centered endpoint curve on `13/50≤a≤19099/50000`: its third
+  derivative has an exact rational sign, so the second derivative is positive throughout the
+  interval; convex support at `1339/2000`, with kernel-checked bounds
+  `K>1/7000` and `|K′|<1/10000`, proves the claim and therefore the entire contracted core.
 
 These declarations live under `Frankl/`, principally in `CanonicalObjective.lean`,
 `LogBounds.lean`, `Interval.lean`, `IntervalEntropy.lean`, `CertificateExpr.lean`,
 `CertificateEval.lean`, `CertificateTree.lean`, `CertificateObjective.lean`,
-`CertificateAdaptive.lean`, `CertificateCorners.lean`, `DiagonalObjective.lean`, and
-`EndpointObjective.lean`. The two diagonal regions are now kernel theorems and no longer depend
-on subdivision; the hardest interior of the endpoint region is reduced to a centered
-one-dimensional curve. The executable rational checker returns success on the full endpoint
+`CertificateAdaptive.lean`, `CertificateCorners.lean`, `DiagonalObjective.lean`,
+`EndpointObjective.lean`, and `CenteredEndpoint.lean`. The two diagonal regions and the
+high-conditional-mean endpoint core are now kernel theorems and no longer depend on subdivision.
+The executable rational checker returns success on the full endpoint
 region at order `12`, fuel `64`, precision `32`, and depth `32`; this computation is evidence,
-not a theorem. The candidate bound is not promoted until the centered curve and complementary
-endpoint wedge are replayed by the kernel and the final union-closed entropy implication is
-formalized.
+not a theorem. The candidate bound is not promoted until the complementary endpoint wedge is
+replayed by the kernel and the final union-closed entropy implication is formalized.
 
 The Lean development verifies the complete computable source reduction and the matrix compilers:
 

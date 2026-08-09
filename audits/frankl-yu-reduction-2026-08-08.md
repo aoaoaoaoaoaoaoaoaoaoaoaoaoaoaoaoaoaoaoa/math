@@ -491,9 +491,40 @@ J(r,r) ≤ J(a,q)
 
 throughout the endpoint core. `Frankl/EndpointObjective.lean` formalizes the generic scaled
 Jensen-deficit contraction, the exact coefficient inequality, all conditional-weight and
-mean identities, and its specialization to the certificate coordinates. Positivity of the
-centered curve and certification of the complementary endpoint wedge remain separate
-obligations.
+mean identities, and its specialization to the certificate coordinates.
+
+## Centered endpoint curve
+
+Put `y=1−a` and multiply the centered objective `J(a,a)` by `y²`. The resulting scalar is
+
+```text
+K(y)=(1−α)(1−t)²h(y²)+α(2(1−t)y−y²)log 2−(1+ε)(1−t)yh(y).
+```
+
+On `1−t≤y≤37/50`, its third derivative is nonnegative. After clearing the positive
+denominator, this reduces to monotonic control of
+
+```text
+10000001y³+23855572y²−30000003y+3855570,
+```
+
+whose value is nonpositive throughout the interval by an exact factorization at `37/50`.
+Thus `K` is convex. Proved rational logarithm enclosures at `y₀=1339/2000` give
+
+```text
+K(y₀)>1/7000,     |K′(y₀)|<1/10000.
+```
+
+The supporting line at `y₀` is therefore positive across the interval. Finally,
+
+```text
+K(1−a)=(1−a)²J(a,a),
+```
+
+so `J(a,a)>0` on `13/50≤a≤t`. `Frankl/CenteredEndpoint.lean` kernel-checks every derivative,
+rational sign, logarithm enclosure, convexity step, and scaling identity. Together with the
+endpoint-core contraction, this proves strict positivity on the entire high-conditional-mean
+core. Certification of the complementary endpoint wedge remains separate.
 
 ## Outward-rounded certificate
 

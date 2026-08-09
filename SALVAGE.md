@@ -53,6 +53,7 @@ file owns the mathematical stock.
 | [`FC-S07`](#fc-s07-low-orbit-contraction) | structure theorem | every surviving two-orbit extreme contracts to one of two bivariate families | formalized | graduated |
 | [`FC-S08`](#fc-s08-diagonal-family-collapse) | structure theorem | every target-mean two-diagonal objective is bounded below by the point law | formalized | graduated |
 | [`FC-S09`](#fc-s09-endpoint-core-contraction) | structure theorem | the high-conditional-mean endpoint core contracts to the centered curve | formalized | graduated |
+| [`FC-S10`](#fc-s10-centered-endpoint-positivity) | analytic certificate | the centered endpoint curve and contracted core are strictly positive | formalized | graduated |
 | [`FC-M01`](#fc-m01-rational-yu-certificate) | partial mechanism | Arb certifies the two reduced gaps at `19099/50000` | computational | active |
 | [`FC-O01`](#fc-o01-homogeneous-tilt-persistence-fails) | obstruction | one-coordinate majority need not persist under homogeneous product tilt | audited | active |
 | [`FC-O02`](#fc-o02-uniform-fiber-semigroup-ceiling) | obstruction | finite full-fiber semigroup lifts cannot beat the uniform entropy barrier | audited | stock |
@@ -509,14 +510,54 @@ coefficient is largest at `r=13/50`, where
 with exact margin `3108487/23310000000`. Thus the full two-dimensional core is bounded below
 by the centered curve `q=a`.
 
-**Scope:** this does not yet prove that the centered curve is nonnegative and does not cover
-the complementary endpoint wedge where `a<1/4`, `q>1/2`, or `r<13/50`.
+**Scope:** `FC-S10` supplies positivity of the centered curve. The contraction still does not
+cover the complementary endpoint wedge where `a<1/4`, `q>1/2`, or `r<13/50`.
 
 **Use:** replace the numerically hardest interior of the endpoint certificate by one
 one-dimensional inequality and reserve exact subdivision for the boundary complement.
 
 **Artifact:** `Frankl/EndpointObjective.lean` and
 [`audits/frankl-yu-reduction-2026-08-08.md`](audits/frankl-yu-reduction-2026-08-08.md#endpoint-core-contraction).
+
+### FC-S10: Centered endpoint positivity
+
+**Kind:** analytic certificate
+**Evidence:** formalized
+**Disposition:** graduated
+
+In complement coordinates `y=1−a`, multiply the centered certificate objective by `y²` and
+write
+
+```text
+K(y)=(1−α)(1−t)²h(y²)+α(2(1−t)y−y²)log 2−(1+ε)(1−t)yh(y).
+```
+
+On `1−t≤y≤37/50`, the third derivative has positive sign after clearing its positive
+denominator; its numerator reduces to the exact cubic
+
+```text
+10000001y³+23855572y²−30000003y+3855570 ≤ 0.
+```
+
+Hence `K` is convex. At `y₀=1339/2000`, proved logarithm enclosures give
+`K(y₀)>1/7000` and `|K′(y₀)|<1/10000`. The convex supporting line stays positive on the whole
+interval. The exact identity
+
+```text
+K(1−a)=(1−a)²J(a,a)
+```
+
+then proves `J(a,a)>0` for `13/50≤a≤t`. Composed with `FC-S09`, every endpoint law in the
+high-conditional-mean core has strictly positive objective.
+
+**Scope:** the complementary wedge `a<1/4`, `q>1/2`, or `r<13/50` remains uncertified by the
+kernel.
+
+**Use:** remove the endpoint interior from the remaining certificate and restrict any exact
+subdivision or new inequality to the boundary complement.
+
+**Artifact:** `Frankl/CenteredEndpoint.lean` and
+[`audits/frankl-yu-reduction-2026-08-08.md`](audits/frankl-yu-reduction-2026-08-08.md#centered-endpoint-curve).
 
 ### FC-M01: Rational Yu certificate
 
