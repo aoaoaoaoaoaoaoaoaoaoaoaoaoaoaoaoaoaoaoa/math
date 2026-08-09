@@ -172,7 +172,7 @@ The unknown cells immediately below this staircase are:
 | Cell | What would suffice | Automatic reward |
 | --- | --- | --- |
 | `M₃(4)` | three-active-role fixed-boundary PCP / `GPCP(3)`, or a new same-dimension generator compiler | by CHHN, also `M₉(2)` |
-| `M₄(3)` | an undecidable promised two-state overlap queue with pure deletion, or closure of the oriented parabolic defect language | by CHHN, also `M₈(2)` |
+| `M₄(3)` | an undecidable promised two-state overlap queue with pure deletion, or closure of either parabolic bridge language | by CHHN, also `M₈(2)` |
 | `M₅(3)` | a five-state binary same-zero root, a toggle/separator fusion, or fixed-width-three scheduled universality | supersedes `M₆(3)`; `M₁₀(2)` is already known |
 | `M₉(2)` | a changed physical pair, changed-zero-series compiler, or nonlinear reduction; the present pair spans `M₁₀(ℚ)` | improves the two-generator threshold by one |
 | `M₂(k≥3)` | a qualitatively different decidability or undecidability argument | settles the dimension-two wall |
@@ -225,7 +225,7 @@ replace exact finite-state simulation.
 
 Victory means a checked many-one reduction to mortality of three integer `4 × 4` matrices,
 including a nonempty witness, denominator clearing, and soundness for every matrix word. The
-frontier has two live trunks and five independently attackable nodes.
+frontier has two live trunks and seven independently attackable nodes.
 
 #### Source trunk: positive overlap queues
 
@@ -313,16 +313,41 @@ defect block has an invertible bridge. Every arbitrary bridge zero descends to o
 between two consecutive singular bridges, with only invertible transport between them; additional
 walls cannot cancel collectively. On a wall `(0,v,w)`, the exact nonzero cokernel is `(v,-4w)`.
 
-Two matrix nodes can now race.
+A second parabolic family now supplies an exact semantic boundary.
+[`M4-M04`](SALVAGE.md#m4-m04-retuned-semantic-boundary) changes the digit functional and the
+open root so that gap two after `b` is the unique singular atom. Complete Neary gaps evaluate to
+sparse side-normal matrices, and one fixed minor of the literal three-generator context
 
-1. **Semantic incidence realization.** Construct two singular endpoint contexts and intervening
+```text
+G_b S² (complete Neary word) G_b S² G_b
+```
+
+vanishes exactly on the four-tile terminal equation. Fixed retractions recover its internal
+bridge, so the context is nonzero even at a match. There it is a nonzero outer product with fixed
+right row
+
+```text
+(-1, (15·3^β+3)/2, 28, 24).
+```
+
+Complete-gap continuations preserve the first coordinate and cannot annihilate this row.
+
+Four matrix nodes can now race.
+
+1. **Original semantic incidence.** Construct two singular endpoint contexts and intervening
    invertible bridge transport whose single projective incidence is exactly the paired-Neary
    coefficient-zero language. Prove the arbitrary-word converse at the same incidence, or exhibit
    a malformed exact hit. A uniform impossibility theorem for this family retires it.
-2. **Oriented projective transport.** Decide whether nonsingular mixed bridges can carry the
+2. **Original oriented transport.** Decide whether nonsingular mixed bridges can carry the
    outgoing row of one reachable wall into the unique sector and unit required to annihilate the
    next wall cokernel. Standalone safe return is sufficient but no longer prerequisite. Approximate
    returns and another coarse valuation partition do not decide this node.
+3. **Retuned right annihilator.** Construct a word over the same three generators, using at least
+   one incomplete root gap, which annihilates the displayed fixed row. A proof that its orbit
+   avoids zero retires the retuned family.
+4. **Retuned arbitrary-word converse.** Classify all words in the retuned semigroup and prove that
+   every zero contains a genuine terminal context followed by the lawful annihilator, or exhibit a
+   malformed zero. Intended-word semantics alone is not a mortality reduction.
 
 The dead subtrees remain dead: literal Neary role fusion (`M4-O01`, `M4-O02`, `M4-O05`), finite
 queues of complete tokens (`M4-O03`), exact internal/final block codes (`M4-O04`), closed
@@ -1321,12 +1346,13 @@ universal computation.
 
 ## Execution order
 
-1. Attack the five open `M₄(3)` nodes independently: universality versus decidability of each
-   deletion scanner `Lₙ`, `Bₙ`, and `C`; parabolic semantic incidence realization; and exact
-   oriented projective transport under `M4-S04` and `M4-S06`. The alternating/multiple residue-two
-   defect grammar is closed. Cross-pollinate exact source and exterior invariants, but do not revive
-   complete-token queues, one-coordinate dynamics, finite wall-separated cones, or literal Neary
-   recodings.
+1. Attack the seven open `M₄(3)` nodes independently: universality versus decidability of each
+   deletion scanner `Lₙ`, `Bₙ`, and `C`; original parabolic semantic incidence and oriented
+   transport under `M4-S04` and `M4-S06`; and the retuned fixed-row annihilator and arbitrary-word
+   converse under `M4-M04`. The alternating/multiple residue-two defect grammar and the retuned
+   intended-word semantics are closed. Cross-pollinate exact source and exterior invariants, but
+   do not revive complete-token queues, one-coordinate dynamics, finite wall-separated cones, or
+   literal Neary recodings.
 2. Use formalized `MM-O01`, `G3-O01`, `MM-O03`, and `MM-O04` to reject exact packings, macros,
    and bridges without conflating their scope with solvability preservation.
 3. Prove or refute the setter candidate's projective avoidance property, construct a

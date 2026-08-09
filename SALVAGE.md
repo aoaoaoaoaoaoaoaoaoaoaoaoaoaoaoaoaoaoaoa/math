@@ -120,6 +120,7 @@ file owns the mathematical stock.
 | [`M4-O06`](#m4-o06-punctuation-image-annihilator) | obstruction | every punctuation context must preserve both rank-one boundary rays | formalized | graduated |
 | [`M4-O07`](#m4-o07-closed-residue-monomial-obstruction) | obstruction | ternary closed residues cannot align the monomial blade column | audited | graduated |
 | [`M4-M03`](#m4-m03-parabolic-blade-and-bridge-grammar) | partial mechanism | an open cube root has one singular atom and exact `2 × 2` bridge semantics | formalized | active |
+| [`M4-M04`](#m4-m04-retuned-semantic-boundary) | partial mechanism | a retuned root realizes the Neary terminal language as one fixed physical minor | formalized | active |
 | [`M4-O08`](#m4-o08-residue-two-necessary-wall) | obstruction | every residue-zero or residue-one atom preserves a nonvanishing two-ray quotient | formalized | graduated |
 | [`M4-S02`](#m4-s02-residue-zero-safe-bridge-cone) | structure theorem | every nonempty residue-zero regular safe bridge has negative determinant | audited | active |
 | [`M4-S03`](#m4-s03-one-defect-phase-cut) | structure theorem | a lone residue-two defect can survive only between opposite safe residues | formalized | graduated |
@@ -3966,6 +3967,61 @@ independent way to decide which endpoints can occur.
 [`MatrixMortality/ParabolicDefect.lean`](MatrixMortality/ParabolicDefect.lean),
 [`audits/m43-parabolic-blade-2026-08-05.md`](audits/m43-parabolic-blade-2026-08-05.md), and
 [`audits/m43-arbitrary-defect-2026-08-08.md`](audits/m43-arbitrary-defect-2026-08-08.md).
+
+### M4-M04: Retuned semantic boundary
+
+**Kind:** partial mechanism
+
+**Evidence:** formalized
+
+**Disposition:** active
+
+The retuned rational root
+
+```text
+S = [[0,-1,0,0], [1,-1,0,0], [0,0,1,0], [-19/24,1/8,2/3,1]]
+```
+
+satisfies `S³J=TJ` and moves the unique singular reduced atom to the gap-two `b` atom. With
+`true ↦ 0` and `false ↦ 1`, every complete gap evaluates to a sparse side-normal matrix. The
+affine fraction `(19·code(z)+1)/3^|z|` is injective on the terminal suffix language, so the
+exceptional `2 × 2` bridge has determinant zero exactly on the four-tile Neary terminal equation.
+
+The bridge is internal to a literal word over the root and two data generators:
+
+```text
+P(z) = G_b S² G_z G_b S² G_b.
+```
+
+Lean proves that one fixed minor of `P(z)` is `-2052·3^β` times the bridge determinant and that
+fixed retractions recover the bridge from `P(z)`. Thus `P(z)` is never zero. On a terminal match
+it is a nonzero outer product with fixed right row
+
+```text
+(-1, (15·3^β+3)/2, 28, 24).
+```
+
+Right annihilation of `P(z)` is exactly annihilation of this row. Any continuation made only of
+complete gaps preserves its first coordinate and cannot work.
+
+**Scope:** positive deletion width and nonempty body for uniqueness of the singular atom;
+arbitrary complete Neary words for the semantic determinant; literal rational three-generator
+contexts. Uniform scaling by `24` clears denominators, but no integralized family is retained
+until a mortality witness consumes it. The theorem does not classify malformed words or provide
+the required incomplete-gap right annihilator.
+
+**Use:** the intended-language half of a new parabolic mortality reduction is complete. Search
+only for a fixed incomplete-gap word annihilating the displayed row and for an all-word converse.
+The original parabolic incidence route `M4-M03` remains incomparable rather than superseded.
+
+**Next:** construct or rule out the fixed right-annihilator orbit. In parallel, classify every
+arbitrary retuned word and prove that a zero factors through a genuine terminal context and that
+annihilator, or exhibit a malformed zero.
+
+**Artifact:** [`MatrixMortality/ParabolicRetuned.lean`](MatrixMortality/ParabolicRetuned.lean),
+[`MatrixMortality/ParabolicRetunedBoundary.lean`](MatrixMortality/ParabolicRetunedBoundary.lean),
+and
+[`audits/m43-retuned-semantic-boundary-2026-08-08.md`](audits/m43-retuned-semantic-boundary-2026-08-08.md).
 
 ### M4-O08: Residue-two necessary wall
 

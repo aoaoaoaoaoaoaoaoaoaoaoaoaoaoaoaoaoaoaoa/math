@@ -529,12 +529,29 @@ consecutive projective incidence. For wall exterior state `(0,v,w)`, the explici
 and evidence boundary are in
 [`audits/m43-arbitrary-defect-2026-08-08.md`](audits/m43-arbitrary-defect-2026-08-08.md).
 
+The retuned semantic boundary
+[`M4-M04`](SALVAGE.md#m4-m04-retuned-semantic-boundary) is formalized in
+[`MatrixMortality/ParabolicRetuned.lean`](MatrixMortality/ParabolicRetuned.lean) and
+[`MatrixMortality/ParabolicRetunedBoundary.lean`](MatrixMortality/ParabolicRetunedBoundary.lean).
+Lean proves the fixed root cube, all six reduced-atom determinant pencils, and uniqueness of the
+gap-two `b` singularity under the source hypotheses. A sparse ternary side normal form evaluates
+every complete Neary word without reversal. Its exceptional bridge determinant vanishes exactly
+on the terminal equation and, after paired decoding, exactly on `pairedCoefficient = 0`.
+
+The bridge is realized by a literal word over the root and two data generators. A fixed physical
+minor is `-2052·3^β` times its determinant; explicit retractions recover the bridge and prove the
+context never vanishes. On a terminal match the context is a nonzero outer product with fixed
+right row `(-1,(15·3^β+3)/2,28,24)`, and right multiplication kills the context exactly when it
+kills this row. Every complete-gap continuation preserves the row's first coordinate, so any
+annihilator must use an incomplete root gap. The audit is
+[`audits/m43-retuned-semantic-boundary-2026-08-08.md`](audits/m43-retuned-semantic-boundary-2026-08-08.md).
+
 No `M₄(3)` undecidability theorem follows from the present corpus. The missing source is an
 undecidable promised binary two-state overlap queue with a genuine deleting self-loop. On the
-matrix lane, one must construct two singular blade contexts realizing the paired Neary
-coefficient as their single consecutive-wall incidence and prove its arbitrary-word converse, or
-decide the oriented projective transport between reachable walls. These forward and converse
-obligations are independent.
+original matrix lane, one must realize the paired Neary coefficient as a consecutive-wall
+incidence or decide oriented transport. On the retuned lane, one must construct the fixed
+incomplete-gap right annihilator and prove the arbitrary-word converse. These obligations are
+independent.
 
 ## Modules
 
@@ -613,6 +630,8 @@ obligations are independent.
 | `ParabolicFlag.lean` | valuation relations and the four arbitrary-cancellation atom invariants |
 | `ParabolicSafeFlag.lean` | arbitrary safe-word flag, wall orientation, and exact residue-one `b` wound |
 | `ParabolicDefect.lean` | complete defect-run residue grammar, pure-defect bridge reset, and consecutive-wall projective fracture |
+| `ParabolicRetuned.lean` | retuned open root, sparse ternary code, determinant pencils, and unique gap-two singular atom |
+| `ParabolicRetunedBoundary.lean` | complete-gap semantics, literal physical contexts, fixed terminal minor and row, and complete-gap annihilator obstruction |
 | `PairedMortality.lean` | common-column mortality converse and exact integer `4 × 4` family |
 | `PairedRank.lean` | uniform exact rank-four certificate for the paired scalar series |
 | `PairedBoundaryTax.lean` | exact six-state lower bound for diagonal paired-series bridges |
@@ -773,6 +792,11 @@ obligations are independent.
 | Every nonempty pure-defect block has an invertible bridge | `ParabolicBlade.pureDefect_bridge_det_ne_zero` |
 | A varying wall chain vanishes exactly at one consecutive projective incidence | `ParabolicBlade.bridgeFractureChain_eq_zero_iff` |
 | A regular wall bridge has the explicit nonzero annihilating cokernel `(v,-4w)` | `ParabolicBlade.bridgeCokernel_eq_exteriorTail`, `ParabolicBlade.bridgeCokernel_regular_word_ne_zero`, `ParabolicBlade.bridgeCokernel_vecMul_bridge_of_wall` |
+| The retuned family has one singular reduced atom, at gap two after `b` | `ParabolicRetuned.atom_det_eq_zero_iff` |
+| The retuned bridge determinant is exactly the Neary terminal language | `ParabolicRetuned.bridge_tileProduct_det_eq_zero_iff_terminal_match` |
+| One fixed minor of a literal retuned three-generator context recognizes `pairedCoefficient = 0` | `ParabolicRetuned.contextWord_product`, `ParabolicRetuned.physicalMinor_decoded_det_eq_zero_iff_pairedCoefficient` |
+| A matched retuned context is nonzero and right annihilation is exactly annihilation of its fixed terminal row | `ParabolicRetuned.physicalContext_ne_zero`, `ParabolicRetuned.physicalContext_mul_eq_zero_iff_terminalRow` |
+| Complete-gap continuations cannot annihilate the retuned terminal row | `ParabolicRetuned.terminalRow_vecMul_physicalMiddle_ne_zero` |
 | Exact left-context toggle fusion is immortal | `exactLeftToggleFusion_immortal` |
 | A finite closed-token queue halts iff no reachable token lies on a dependency cycle | `closedSubstitutionHalts_iff_noReachableCycle` |
 | Two private quotient states cannot isolate the Neary rule phase | `twoPrivateState_ruleScale_eq`, `neary_twoPrivateState_phaseCompiler_impossible` |
