@@ -34,7 +34,7 @@ The following analytic and finite-convex core is now kernel-checked:
   the strict factor `18401/18750<1`;
 - the complete half-support scalar sign, global gain concavity and monotonicity, and pointwise
   dependent-cost contraction;
-- finite Jensen, bilinear polarization, and abstract mean-lift scaling and gap reflection.
+- finite Jensen, bilinear polarization, and coupling-level mean-lift scaling and gap reflection;
 - the finite Alweiss--Huang--Sellke fixed-mean concavity theorem, proved directly from a
   radially regularized entropy power series whose second variation is a nonpositive sum of
   squares;
@@ -43,12 +43,18 @@ The following analytic and finite-convex core is now kernel-checked:
   it;
 - the symmetric-orbit realization of marginal, independent, and dependent entropy, and the
   resulting unconditional reduction of every finite exact-mean symmetric coupling to at most
-  two orbit laws.
+  two orbit laws;
+- exact identification of the two surviving masses with the lower/upper orbit weights, and a
+  single composition theorem reducing every bounded-mean finite orbit law to identified
+  exact-target extremes;
+- realization of both ordered low–low contractions and the low–endpoint contraction on actual
+  canonical two-orbit laws, including preservation of the dependent term and monotonicity of
+  the complete strict Yu gap.
 
 These declarations live under `Frankl/`. They do not yet promote the candidate bound: the
-coordinate-kernel constructors and their coupling-level dependent-cost comparison, the low-orbit
-contraction bridge, reflected interval cover, and final union-closed entropy implication remain
-open.
+coordinate-kernel constructor and its coupling-level comparison, reindexing/classification of an
+arbitrary identified extreme into the canonical two-orbit laws, the reflected interval cover,
+and the final union-closed entropy implication remain open.
 
 The Lean development verifies the complete computable source reduction and the matrix compilers:
 

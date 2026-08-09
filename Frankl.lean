@@ -8,3 +8,5 @@ import Frankl.MeanLift
 import Frankl.MomentReduction
 import Frankl.OrbitLaw
 import Frankl.FixedMeanConcavity
+import Frankl.OrbitMeanLift
+import Frankl.OrbitCollapse

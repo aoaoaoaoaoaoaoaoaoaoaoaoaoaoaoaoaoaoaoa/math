@@ -407,4 +407,31 @@ theorem orbitYuGap_exists_support_straddles_of_mem {ι : Type*} [Fintype ι]
       orbitIndependentEntropy_fixedMean_concave hleft hright hp low high)
     law
 
+/-- The fully identified support shape of an extreme finite orbit law. -/
+def IsIdentifiedOrbitExtreme {ι : Type*} [Fintype ι]
+    {left right : ι → ℝ} {mean : ℝ} (law : FiniteOrbitLaw left right mean) : Prop :=
+  (∃ i, i ∈ law.support ∧ law.support.card = 1 ∧ orbitMean left right i = mean) ∨
+    ∃ i j, i ≠ j ∧ i ∈ law.support ∧ j ∈ law.support
+      ∧ law.support.card = 2
+      ∧ orbitMean left right i < mean ∧ mean < orbitMean left right j
+      ∧ law.weight i = lowerOrbitWeight (orbitMean left right i) mean
+        (orbitMean left right j)
+      ∧ law.weight j = upperOrbitWeight (orbitMean left right i) mean
+        (orbitMean left right j)
+
+/-- Fully identified orbit extreme: in the two-orbit case, the live masses are exactly the
+lower and upper exact-mean weights used by the contraction estimates. -/
+theorem orbitYuGap_exists_extreme_orbitWeights_of_mem {ι : Type*} [Fintype ι]
+    {left right : ι → ℝ} {mean : ℝ}
+    (hleft : ∀ i, left i ∈ Icc (0 : ℝ) 1)
+    (hright : ∀ i, right i ∈ Icc (0 : ℝ) 1)
+    (law : FiniteOrbitLaw left right mean) :
+    ∃ reduced : FiniteOrbitLaw left right mean,
+      orbitYuGap reduced ≤ orbitYuGap law ∧ IsIdentifiedOrbitExtreme reduced := by
+  simpa only [IsIdentifiedOrbitExtreme] using
+    FiniteMomentLaw.exists_support_straddles_with_weights
+      (orbitYuGap_isConcave fun p hp low high ↦
+        orbitIndependentEntropy_fixedMean_concave hleft hright hp low high)
+      law
+
 end Frankl

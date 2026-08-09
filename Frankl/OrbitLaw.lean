@@ -70,6 +70,25 @@ noncomputable def orbitIndependentEntropy {ι : Type*} [Fintype ι]
     {left right : ι → ℝ} {mean : ℝ} (law : FiniteOrbitLaw left right mean) : ℝ :=
   finiteJoinEntropy (orbitMarginalWeight law) (orbitMarginalPoint left right)
 
+/-- Independent join entropy of a genuine probability-valued orbit law is nonnegative. -/
+theorem orbitIndependentEntropy_nonneg {ι : Type*} [Fintype ι]
+    {left right : ι → ℝ} {mean : ℝ}
+    (hleft : ∀ i, left i ∈ Icc (0 : ℝ) 1)
+    (hright : ∀ i, right i ∈ Icc (0 : ℝ) 1)
+    (law : FiniteOrbitLaw left right mean) :
+    0 ≤ orbitIndependentEntropy law := by
+  classical
+  have hpoint := orbitMarginalPoint_mem hleft hright
+  dsimp [orbitIndependentEntropy, finiteJoinEntropy]
+  apply sum_nonneg
+  intro i _
+  apply sum_nonneg
+  intro j _
+  exact mul_nonneg
+    (mul_nonneg (orbitMarginalWeight_nonneg law i) (orbitMarginalWeight_nonneg law j))
+    (binEntropy_nonneg (join_mem_Icc (hpoint i) (hpoint j)).1
+      (join_mem_Icc (hpoint i) (hpoint j)).2)
+
 /-- Entropy of the marginal induced by an orbit law. -/
 noncomputable def orbitMarginalEntropy {ι : Type*} [Fintype ι]
     {left right : ι → ℝ} {mean : ℝ} (law : FiniteOrbitLaw left right mean) : ℝ :=

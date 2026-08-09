@@ -473,6 +473,95 @@ theorem support_nonempty (law : FiniteMomentLaw ι moment mean) : law.support.No
   rw [law.weight_sum, hempty] at hsum
   simp at hsum
 
+/-- Two named live atoms exhaust a support of cardinality two. -/
+theorem support_eq_pair_of_card_eq_two [DecidableEq ι]
+    (law : FiniteMomentLaw ι moment mean) {i j : ι}
+    (hij : i ≠ j) (hi : i ∈ law.support) (hj : j ∈ law.support)
+    (hcard : law.support.card = 2) :
+    law.support = {i, j} := by
+  classical
+  apply Finset.Subset.antisymm
+  · intro r hr
+    by_contra hpair
+    have hir : i ≠ r := by
+      intro hir
+      subst r
+      exact hpair (by simp)
+    have hjr : j ≠ r := by
+      intro hjr
+      subst r
+      exact hpair (by simp)
+    have hthree : ({i, j, r} : Finset ι) ⊆ law.support := by
+      intro x hx
+      simp only [Finset.mem_insert, Finset.mem_singleton] at hx
+      rcases hx with rfl | rfl | rfl
+      · exact hi
+      · exact hj
+      · exact hr
+    have hthreeCard : ({i, j, r} : Finset ι).card = 3 := by
+      simp [hij, hir, hjr]
+    have hle := Finset.card_le_card hthree
+    rw [hthreeCard, hcard] at hle
+    omega
+  · intro x hx
+    simp only [Finset.mem_insert, Finset.mem_singleton] at hx
+    rcases hx with rfl | rfl
+    · exact hi
+    · exact hj
+
+/-- The two live masses in a two-atom law sum to one. -/
+theorem two_support_weights_sum (law : FiniteMomentLaw ι moment mean) {i j : ι}
+    (hij : i ≠ j) (hi : i ∈ law.support) (hj : j ∈ law.support)
+    (hcard : law.support.card = 2) :
+    law.weight i + law.weight j = 1 := by
+  classical
+  have hsupport := law.support_eq_pair_of_card_eq_two hij hi hj hcard
+  have hsum := law.sum_weight_eq_sum_support (fun _ ↦ (1 : ℝ))
+  simp only [mul_one] at hsum
+  rw [law.weight_sum, hsupport] at hsum
+  simpa [hij] using hsum.symm
+
+/-- The two live weighted moments in a two-atom law realize the prescribed mean. -/
+theorem two_support_moment_sum (law : FiniteMomentLaw ι moment mean) {i j : ι}
+    (hij : i ≠ j) (hi : i ∈ law.support) (hj : j ∈ law.support)
+    (hcard : law.support.card = 2) :
+    law.weight i * moment i + law.weight j * moment j = mean := by
+  classical
+  have hsupport := law.support_eq_pair_of_card_eq_two hij hi hj hcard
+  have hsum := law.sum_weight_eq_sum_support moment
+  rw [law.moment_sum, hsupport] at hsum
+  simpa [hij] using hsum.symm
+
+/-- Exact mass identification for a two-atom law with ordered moments. -/
+theorem two_support_weights_eq_orbitWeights (law : FiniteMomentLaw ι moment mean) {i j : ι}
+    (hi : i ∈ law.support) (hj : j ∈ law.support) (hcard : law.support.card = 2)
+    (hordered : moment i < moment j) :
+    law.weight i = lowerOrbitWeight (moment i) mean (moment j) ∧
+      law.weight j = upperOrbitWeight (moment i) mean (moment j) := by
+  have hij : i ≠ j := fun hij ↦ by subst j; exact (lt_irrefl _ hordered)
+  have hmass := law.two_support_weights_sum hij hi hj hcard
+  have hmoment := law.two_support_moment_sum hij hi hj hcard
+  have hden : moment j - moment i ≠ 0 := (sub_pos.2 hordered).ne'
+  have hlowerIdentity :
+      law.weight i * (moment j - moment i) = moment j - mean := by
+    calc
+      law.weight i * (moment j - moment i) =
+          (law.weight i + law.weight j) * moment j
+            - (law.weight i * moment i + law.weight j * moment j) := by ring
+      _ = moment j - mean := by rw [hmass, hmoment, one_mul]
+  have hupperIdentity :
+      law.weight j * (moment j - moment i) = mean - moment i := by
+    calc
+      law.weight j * (moment j - moment i) =
+          (law.weight i * moment i + law.weight j * moment j)
+            - (law.weight i + law.weight j) * moment i := by ring
+      _ = mean - moment i := by rw [hmass, hmoment, one_mul]
+  constructor
+  · rw [lowerOrbitWeight, eq_div_iff hden]
+    exact hlowerIdentity
+  · rw [upperOrbitWeight, eq_div_iff hden]
+    exact hupperIdentity
+
 /-- The sharpened finite extreme-point reduction: the surviving law is either a point mass at
 the prescribed mean or has exactly two atoms whose moments strictly straddle that mean. -/
 theorem exists_support_straddles {functional : FiniteMomentLaw ι moment mean → ℝ}
@@ -507,16 +596,8 @@ theorem exists_support_straddles {functional : FiniteMomentLaw ι moment mean �
     have hjSupport : j ∈ reduced.support := by simp [hsupport]
     have hiWeight : 0 < reduced.weight i := reduced.weight_pos_of_mem_support hiSupport
     have hjWeight : 0 < reduced.weight j := reduced.weight_pos_of_mem_support hjSupport
-    have hmass : reduced.weight i + reduced.weight j = 1 := by
-      have hsum := reduced.sum_weight_eq_sum_support (fun _ ↦ (1 : ℝ))
-      simp only [mul_one] at hsum
-      rw [reduced.weight_sum, hsupport] at hsum
-      simpa [hij] using hsum.symm
-    have hmoment :
-        reduced.weight i * moment i + reduced.weight j * moment j = mean := by
-      have hsum := reduced.sum_weight_eq_sum_support moment
-      rw [reduced.moment_sum, hsupport] at hsum
-      simpa [hij] using hsum.symm
+    have hmass := reduced.two_support_weights_sum hij hiSupport hjSupport hcardTwo
+    have hmoment := reduced.two_support_moment_sum hij hiSupport hjSupport hcardTwo
     by_cases hmoments : moment i = moment j
     · rw [hmoments, ← add_mul, hmass, one_mul] at hmoment
       let left := pointMass i (hmoments.trans hmoment)
@@ -625,6 +706,26 @@ theorem exists_support_straddles {functional : FiniteMomentLaw ι moment mean �
           exact mul_pos hjWeight (sub_pos.2 hordered)
         exact ⟨reduced, hfunctional,
           Or.inr ⟨j, i, hij.symm, hjSupport, hiSupport, hcardTwo, hlower, hupper⟩⟩
+
+/-- The sharpened extreme-point reduction with the two surviving masses identified exactly. -/
+theorem exists_support_straddles_with_weights
+    {functional : FiniteMomentLaw ι moment mean → ℝ}
+    (hconcave : IsConcaveFunctional functional) (law : FiniteMomentLaw ι moment mean) :
+    ∃ reduced : FiniteMomentLaw ι moment mean,
+      functional reduced ≤ functional law ∧
+        ((∃ i, i ∈ reduced.support ∧ reduced.support.card = 1 ∧ moment i = mean) ∨
+          ∃ i j, i ≠ j ∧ i ∈ reduced.support ∧ j ∈ reduced.support
+            ∧ reduced.support.card = 2 ∧ moment i < mean ∧ mean < moment j
+            ∧ reduced.weight i = lowerOrbitWeight (moment i) mean (moment j)
+            ∧ reduced.weight j = upperOrbitWeight (moment i) mean (moment j)) := by
+  obtain ⟨reduced, hfunctional, hsupport⟩ := exists_support_straddles hconcave law
+  refine ⟨reduced, hfunctional, ?_⟩
+  rcases hsupport with hsingleton | ⟨i, j, hij, hi, hj, hcard, hlower, hupper⟩
+  · exact Or.inl hsingleton
+  · obtain ⟨hlowerWeight, hupperWeight⟩ :=
+      reduced.two_support_weights_eq_orbitWeights hi hj hcard (hlower.trans hupper)
+    exact Or.inr
+      ⟨i, j, hij, hi, hj, hcard, hlower, hupper, hlowerWeight, hupperWeight⟩
 
 end FiniteMomentLaw
 

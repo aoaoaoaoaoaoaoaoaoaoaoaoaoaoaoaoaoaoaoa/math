@@ -338,10 +338,12 @@ printed global-concavity sentence.
 `Frankl/FixedMeanConcavity.lean` proves the fixed-slice entropy concavity directly from its
 power series, while `Frankl/MomentReduction.lean` and `Frankl/OrbitLaw.lean` give the elementary
 finite extreme-point reduction and symmetric-orbit realization. The surviving law is formally
-either one exact-mean orbit or two orbit means strictly straddling the target.
+either one exact-mean orbit or two orbit means strictly straddling the target, with their masses
+identified exactly. `Frankl/OrbitMeanLift.lean` realizes the `(1,1)` lift on symmetric orbit
+laws, proves the quadratic/linear/linear scaling of the three entropy terms, and composes the
+lift with the extreme reduction in one theorem.
 
-**Next:** connect the exact-mean lift to the coupling-level dependent term and then compose this
-extreme reduction with the half-support kernel.
+**Next:** compose this extreme reduction with the coupling-level half-support kernel.
 
 ### FC-S06: Half-support elimination
 
@@ -421,8 +423,12 @@ audit.
 **Formalization:** `Frankl/Entropy.lean`, `Frankl/OrbitContraction.lean`,
 `Frankl/SelfPair.lean`, and `Frankl/TwoOrbit.lean` check the curvature comparison, Bernstein
 polynomial, both self-pair bounds, exact mean weights, and ordered two-step contraction.
+`Frankl/OrbitCollapse.lean` expands the actual canonical low–low and low–endpoint orbit laws,
+proves their exact marginal and independent entropy differences, proves the dependent term is
+fixed, and lifts the scalar deficit estimates to monotonicity of the complete strict Yu gap.
 
-**Next:** connect these deficit theorems to the finite orbit decomposition.
+**Next:** reindex an arbitrary identified extreme into these canonical two-orbit laws after the
+half-support classification.
 
 ### FC-M01: Rational Yu certificate
 
