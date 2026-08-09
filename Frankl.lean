@@ -26,3 +26,6 @@ import Frankl.EndpointObjective
 import Frankl.CenteredEndpoint
 import Frankl.CertificateAdaptive
 import Frankl.CertificateCorners
+import Frankl.EndpointCertificate
+import Frankl.EndpointTrace
+import Frankl.EndpointBoundary

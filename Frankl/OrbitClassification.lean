@@ -132,6 +132,7 @@ theorem identifiedPair_collapse_to_canonical {ι : Type*} [Fintype ι]
         ∃ htargetEndpoint : abundanceTarget ≤ endpointOrbitMean q,
           ∃ haEndpoint : a < endpointOrbitMean q,
             0 ≤ a ∧ 0 ≤ q ∧ q ≤ 1
+              ∧ (q ≤ 1 / 2 ∨ q = 1)
               ∧ orbitYuGap
                   (lowEndpointOrbitLaw a 0 abundanceTarget q haTarget htargetEndpoint
                     haEndpoint) ≤ orbitYuGap law := by
@@ -192,6 +193,12 @@ theorem identifiedPair_collapse_to_canonical {ι : Type*} [Fintype ι]
   · let q := min (left upper) (right upper)
     have hqZero : 0 ≤ q := le_min (hleft upper).1 (hright upper).1
     have hqOne : q ≤ 1 := (min_le_left _ _).trans (hleft upper).2
+    have hqRange : q ≤ 1 / 2 ∨ q = 1 := by
+      rcases (hhalf upper).1 with hleftHalf | hleftOne
+      · exact Or.inl ((min_le_left _ _).trans hleftHalf)
+      · rcases (hhalf upper).2 with hrightHalf | hrightOne
+        · exact Or.inl ((min_le_right _ _).trans hrightHalf)
+        · exact Or.inr (by simp [q, hleftOne, hrightOne])
     have hbEndpoint : b = endpointOrbitMean q := by
       dsimp [b, q, orbitMean, endpointOrbitMean]
       calc
@@ -220,7 +227,7 @@ theorem identifiedPair_collapse_to_canonical {ι : Type*} [Fintype ι]
     have hcollapse := lowEndpointOrbit_collapse_le haLower haUpper hd hqZero hqOne
       haTarget htargetEndpoint haEndpoint
     exact Or.inr ⟨a, q, haTarget, htargetEndpoint, haEndpoint,
-      by linarith [haLower], hqZero, hqOne,
+      by linarith [haLower], hqZero, hqOne, hqRange,
       (((hcollapse.trans_eq hcanonical).trans_eq hsortedGap).trans_eq hpairedGap)⟩
   · have hupperLow := halfSupported_pair_low_of_max_ne_one
       (hleft upper) (hright upper) (hhalf upper).1 (hhalf upper).2 hupperEndpoint
@@ -283,6 +290,7 @@ theorem orbitYuGap_exists_canonical_of_mem {ι : Type*} [Fintype ι]
           ∃ htargetEndpoint : abundanceTarget ≤ endpointOrbitMean q,
             ∃ haEndpoint : a < endpointOrbitMean q,
               0 ≤ a ∧ 0 ≤ q ∧ q ≤ 1
+                ∧ (q ≤ 1 / 2 ∨ q = 1)
                 ∧ orbitYuGap
                     (lowEndpointOrbitLaw a 0 abundanceTarget q haTarget htargetEndpoint
                       haEndpoint) ≤ orbitYuGap law) := by
@@ -311,8 +319,9 @@ theorem orbitYuGap_exists_canonical_of_mem {ι : Type*} [Fintype ι]
     · right
       right
       rcases hendpoint with
-        ⟨a, q, haTarget, htargetEndpoint, haEndpoint, haZero, hqZero, hqOne, hgap⟩
-      exact ⟨a, q, haTarget, htargetEndpoint, haEndpoint, haZero, hqZero, hqOne,
+        ⟨a, q, haTarget, htargetEndpoint, haEndpoint, haZero, hqZero, hqOne,
+          hqRange, hgap⟩
+      exact ⟨a, q, haTarget, htargetEndpoint, haEndpoint, haZero, hqZero, hqOne, hqRange,
         hgap.trans hreducedGap⟩
 
 /-- The three canonical objective families imply nonnegativity of the strict Yu gap for every
@@ -331,7 +340,7 @@ theorem orbitYuGap_nonneg_of_canonical_families {ι : Type*} [Fintype ι]
     (hendpoint : ∀ (a q : ℝ) (haTarget : a ≤ abundanceTarget)
       (htargetEndpoint : abundanceTarget ≤ endpointOrbitMean q)
       (haEndpoint : a < endpointOrbitMean q),
-      0 ≤ a → 0 ≤ q → q ≤ 1 →
+      0 ≤ a → 0 ≤ q → q ≤ 1 → (q ≤ 1 / 2 ∨ q = 1) →
         0 ≤ orbitYuGap
           (lowEndpointOrbitLaw a 0 abundanceTarget q haTarget htargetEndpoint haEndpoint)) :
     0 ≤ orbitYuGap law := by
@@ -347,9 +356,10 @@ theorem orbitYuGap_nonneg_of_canonical_families {ι : Type*} [Fintype ι]
       · rcases hlowFamily with ⟨a, b, haTarget, htargetB, hab, haZero, hbHalf, hgap⟩
         exact (hlow a b haTarget htargetB hab haZero hbHalf).trans hgap
       · rcases hendpointFamily with
-          ⟨a, q, haTarget, htargetEndpoint, haEndpoint, haZero, hqZero, hqOne, hgap⟩
+          ⟨a, q, haTarget, htargetEndpoint, haEndpoint, haZero, hqZero, hqOne,
+            hqRange, hgap⟩
         exact (hendpoint a q haTarget htargetEndpoint haEndpoint
-          haZero hqZero hqOne).trans hgap
+          haZero hqZero hqOne hqRange).trans hgap
   exact orbitYuGap_nonneg_of_meanLift_of_mem hleft hright law hsourceTarget hsourceOne
     (abundanceTarget_lt_half.trans (by norm_num)) hliftedNonneg
 

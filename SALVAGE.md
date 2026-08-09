@@ -54,6 +54,7 @@ file owns the mathematical stock.
 | [`FC-S08`](#fc-s08-diagonal-family-collapse) | structure theorem | every target-mean two-diagonal objective is bounded below by the point law | formalized | graduated |
 | [`FC-S09`](#fc-s09-endpoint-core-contraction) | structure theorem | the high-conditional-mean endpoint core contracts to the centered curve | formalized | graduated |
 | [`FC-S10`](#fc-s10-centered-endpoint-positivity) | analytic certificate | the centered endpoint curve and contracted core are strictly positive | formalized | graduated |
+| [`FC-S11`](#fc-s11-endpoint-boundary-certificate) | certificate | every canonical endpoint objective is nonnegative at `19099/50000` | formalized | graduated |
 | [`FC-M01`](#fc-m01-rational-yu-certificate) | partial mechanism | Arb certifies the two reduced gaps at `19099/50000` | computational | active |
 | [`FC-O01`](#fc-o01-homogeneous-tilt-persistence-fails) | obstruction | one-coordinate majority need not persist under homogeneous product tilt | audited | active |
 | [`FC-O02`](#fc-o02-uniform-fiber-semigroup-ceiling) | obstruction | finite full-fiber semigroup lifts cannot beat the uniform entropy barrier | audited | stock |
@@ -474,8 +475,9 @@ the point-mass objective. A kernel-replayed dyadic enclosure gives the latter a 
 bound `1102953606749615/1152921504606846976`. Both diagonal certificate rectangles are
 therefore discharged analytically, without a subdivision verdict.
 
-**Scope:** this eliminates the diagonal–diagonal family only. The diagonal–endpoint surface
-and the final implication from Yu's entropy inequality to union-closed abundance remain open.
+**Scope:** this eliminates the diagonal–diagonal family only. `FC-S11` now discharges the
+diagonal–endpoint surface; the final implication from Yu's entropy inequality to union-closed
+abundance remains open.
 
 **Use:** remove two of the three compact certificate regions and concentrate all numerical or
 analytic work on the endpoint family.
@@ -550,14 +552,50 @@ K(1−a)=(1−a)²J(a,a)
 then proves `J(a,a)>0` for `13/50≤a≤t`. Composed with `FC-S09`, every endpoint law in the
 high-conditional-mean core has strictly positive objective.
 
-**Scope:** the complementary wedge `a<1/4`, `q>1/2`, or `r<13/50` remains uncertified by the
-kernel.
+**Scope:** this proves only the centered interval and its contracted core. `FC-S11` now covers
+the complementary endpoint boundary.
 
 **Use:** remove the endpoint interior from the remaining certificate and restrict any exact
 subdivision or new inequality to the boundary complement.
 
 **Artifact:** `Frankl/CenteredEndpoint.lean` and
 [`audits/frankl-yu-reduction-2026-08-08.md`](audits/frankl-yu-reduction-2026-08-08.md#centered-endpoint-curve).
+
+### FC-S11: Endpoint boundary certificate
+
+**Kind:** certificate
+**Evidence:** formalized
+**Disposition:** graduated
+
+Half support forces the endpoint coordinate into the exact dichotomy `q≤1/2 ∨ q=1`; the
+apparent strip `1/2<q<1` is not realizable. The analytic core covers `a≥1/4` whenever either
+`a≥13/40` or `q≥31/100`. Static reflected subdivisions cover the complement:
+
+```text
+0≤a≤1/4,       0≤q≤1/2;
+1/4≤a≤13/40,   0≤q≤31/100;
+1/1000≤a≤t,    q=1.
+```
+
+The remaining `q=1, a≤1/1000` corner is analytic. Each generated leaf contains a closed
+rational subdivision term and a definitional equality showing that the proved checker returns
+success. Ninety-six trace modules are replayed by the kernel; coverage theorems compose them
+without a runtime decision procedure. Together with `FC-S08` through `FC-S10`, this proves
+`orbitYuGap_nonneg` for every finite symmetric orbit law of mean at most
+`t=19099/50000`.
+
+**Scope:** this is the complete finite-coupling objective inequality at the displayed rational
+parameters. It is not yet the universal union-closed abundance theorem; that conclusion still
+requires formalizing Yu's entropy argument from coordinatewise couplings to a contradiction on
+a finite union-closed family.
+
+**Use:** treat the two-variable optimization as closed. Further improvement must either ratchet
+the rational parameters and regenerate the certificate or strengthen the entropy/coupling
+architecture.
+
+**Artifact:** `Frankl/OrbitClassification.lean`, `Frankl/EndpointCertificate.lean`,
+`Frankl/EndpointTrace/`, `Frankl/EndpointBoundary.lean`, and
+`tools/GenerateFranklEndpointTrace.lean`.
 
 ### FC-M01: Rational Yu certificate
 
@@ -588,10 +626,9 @@ constant beyond `(3−√5)/2`.
 and the `Frankl/Certificate*.lean`, `Frankl/Interval*.lean`, and `Frankl/LogBounds.lean`
 checker modules.
 
-**Next:** replace the successful endpoint adjudication with a tractable kernel-replayed
-verdict, then formalize the final entropy implication to union-closed abundance. `FC-S08` has
-already removed both diagonal subdivision obligations. Only then change the evidence label or
-universal-bound ledger.
+**Next:** retain this as an independent outward-rounded oracle for parameter search. `FC-S11`
+supersedes its endpoint proof obligation; formalize the final entropy implication before changing
+the universal-bound ledger.
 
 ### FC-O02: Uniform-fiber semigroup ceiling
 

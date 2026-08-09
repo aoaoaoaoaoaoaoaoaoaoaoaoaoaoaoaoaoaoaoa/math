@@ -1,4 +1,4 @@
-# Matrix Mortality Frontier Campaign
+# Mathematics Frontier Campaign
 
 Established-result ledger and dimension-two research audit: 2026-07-25. A question mark means
 “not resolved by any valid result found in the present literature audit,” not an assertion that
@@ -7,6 +7,38 @@ no unpublished argument exists.
 Reusable lemmas, obstructions, certificates, and partial mechanisms from unsuccessful attacks
 are indexed in [`SALVAGE.md`](SALVAGE.md). Its evidence labels are authoritative; this file
 records only their strategic consequences.
+
+## Frankl abundance frontier
+
+The current rational target is
+
+```text
+t=19099/50000,    α=7/200,    ε=1/10000000.
+```
+
+Lean now proves the strict affine Yu objective nonnegative for every finite symmetric orbit law
+whose source mean is at most `t`. The proof repairs the exact-mean reduction, eliminates support
+in `(1/2,1)`, contracts every extreme to three canonical families, handles both diagonal families
+analytically, and combines an analytic endpoint core with 96 kernel-replayed static certificate
+modules for the boundary. See [`FC-S05`](SALVAGE.md#fc-s05-exact-mean-yu-repair) through
+[`FC-S11`](SALVAGE.md#fc-s11-endpoint-boundary-certificate).
+
+This does not yet establish a universal abundance bound. The smallest surviving proof obligation
+is the entropy bridge: construct the independent and dependent coordinatewise couplings on a
+finite union-closed family, sum the checked one-coordinate inequality through the entropy chain
+rule, and derive a strict entropy increase inside a finite support. The proof must include the
+conditioning inequality and the finite-support entropy ceiling; no appeal to Yu's printed global
+concavity sentence is permitted.
+
+Two attacks remain live and incomparable:
+
+1. Formalize that entropy bridge at `t=19099/50000`. This promotes the present finite objective
+   theorem to a rigorous improvement over `(3−√5)/2`.
+2. Ratchet the parameters before freezing the publication result. Search for a rational
+   `t>19099/50000` and compatible rational `α,ε>0`, using the static certificate generator as the
+   adjudicator. A new target must recheck the half-support scalar inequality, diagonal loss
+   coefficient, centered endpoint core, and boundary certificate. The numerical Yu/Cambie range
+   near `0.38234` is reconnaissance, not a rigorous target.
 
 ## The source theorem
 
