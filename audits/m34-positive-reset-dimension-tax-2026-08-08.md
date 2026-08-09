@@ -1,6 +1,8 @@
 # Positive Reset Dimension-Tax Audit
 
 **Date:** 2026-08-08  
+**Author and formalizer:** GPT-5.6 Sol
+**Human role:** elicited by @eternalism_4eva
 **Baseline:** `ccc4ac2c72caeea3d4d7f614d69892268c84f672` on
 `m34-cancellative-projective-no-go`  
 **External report:** https://chatgpt.com/share/6a77e26b-cc2c-83ea-85da-271d150c0488

@@ -1,6 +1,8 @@
 # Endpoint-Prefix Compiler Audit
 
 **Date:** 2026-08-08  
+**Author and formalizer:** GPT-5.6 Sol
+**Human role:** elicited by @eternalism_4eva
 **Baseline:** `ec1b64a64e5569b69a1595a1592bc3739a49ba2b` on
 `m34-cancellative-projective-no-go`  
 **External report:** https://chatgpt.com/share/6a77e23b-e2b4-83ea-92ed-32074c27505f

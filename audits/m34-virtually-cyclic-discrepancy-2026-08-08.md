@@ -1,6 +1,8 @@
 # Virtually Cyclic Discrepancy Audit
 
 **Date:** 2026-08-08  
+**Author and formalizer:** GPT-5.6 Sol
+**Human role:** elicited by @eternalism_4eva
 **Baseline:** `4f2eb7b1211a2ccbbad1a924fc4bdd175170d009` on
 `m34-cancellative-projective-no-go`  
 **External report:** https://chatgpt.com/share/6a77e223-7170-83ea-9341-375dc86e04f9

@@ -1,6 +1,8 @@
 # Rational Serializer Pumping Audit
 
 **Date:** 2026-08-08  
+**Author and formalizer:** GPT-5.6 Sol
+**Human role:** elicited by @eternalism_4eva
 **Baseline:** `3b688a1d18eb3aa3335cf5390e003dd2e5711045` on
 `m34-cancellative-projective-no-go`  
 **External report:** https://chatgpt.com/share/6a77e24a-6a8c-83ea-9995-b3d27666910e

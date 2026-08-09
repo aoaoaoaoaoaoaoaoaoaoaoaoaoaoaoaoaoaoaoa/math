@@ -698,7 +698,7 @@ it supplies the missing deletion semantics but not yet the bounded positive sour
 
 #### Raceable leaves
 
-After the serializer audit, the net tree has five independent mature leaves:
+After the seven-report open-node audit, the net tree has five independent mature leaves:
 
 1. **History-sensitive singular paired constructor.** Give one computable three-state same-zero
    family for every checked `(β,body)` and every control word, with at least one legal prepend
@@ -725,7 +725,7 @@ Generic projective, stochastic, Rees/Brandt, and singular-reset ideas are implem
 vocabularies inside leaf 1 until they supply a distinct source interface and complete
 all-word theorem. Another fixed-body fit, fixed macro, or punctuation placement is not a leaf.
 The joint derivation and evidence boundaries are recorded in
-[`m34-mirv-salvo-synthesis-2026-08-08.md`](audits/m34-mirv-salvo-synthesis-2026-08-08.md).
+[`m34-open-node-salvo-synthesis-2026-08-08.md`](audits/m34-open-node-salvo-synthesis-2026-08-08.md).
 
 #### Operational program
 
@@ -777,7 +777,7 @@ Its next experiment starts from the exponent-one equalizer predicate itself. Rac
 everywhere-invertible unbounded cocycle which transports both group discrepancy and `κ`, against a
 three-positive-letter source compiler whose quotient may identify every identity padding. A
 singular third coordinate over the persistent invertible quotient is closed by `G3-O14`; a
-standalone triangle syntax series is closed at dimension five by `G3-O15`.
+standalone triangle syntax series requires six states by `G3-O15`.
 
 The native source race now has one exact acceptance test. Supply three productions
 `αₓX⟶Xβₓ` and prove that `sβ(w)=α(w)t` forces every cumulative `α` prefix for every arbitrary

@@ -1,6 +1,8 @@
 # Positive Common-Shift Countermodel Audit
 
 **Date:** 2026-08-08  
+**Author and formalizer:** GPT-5.6 Sol
+**Human role:** elicited by @eternalism_4eva
 **Baseline:** `77d285f0b7dc27804d3a05be3cdfcb240e087946` on
 `m34-cancellative-projective-no-go`  
 **External report:** https://chatgpt.com/share/6a77e22e-470c-83ea-875a-b0acebfde4d4

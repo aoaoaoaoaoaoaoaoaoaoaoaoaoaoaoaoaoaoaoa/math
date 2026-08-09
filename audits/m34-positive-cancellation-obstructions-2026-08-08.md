@@ -1,6 +1,8 @@
 # Positive-Cancellation Obstruction Audit
 
 **Date:** 2026-08-08  
+**Author and formalizer:** GPT-5.6 Sol
+**Human role:** elicited by @eternalism_4eva
 **Baseline:** `8ffb49a4dc38110e62381cf9d173b23b947d34cf` on
 `m34-cancellative-projective-no-go`  
 **External report:** https://chatgpt.com/share/6a77e25f-6a20-83ea-80e0-75e2daf3294d  
