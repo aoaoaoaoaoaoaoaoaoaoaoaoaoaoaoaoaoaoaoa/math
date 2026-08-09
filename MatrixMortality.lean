@@ -83,3 +83,4 @@ import MatrixMortality.ParabolicResidueWall
 import MatrixMortality.ParabolicExterior
 import MatrixMortality.ParabolicFlag
 import MatrixMortality.ParabolicSafeFlag
+import MatrixMortality.ParabolicDefect

@@ -31,7 +31,7 @@ def residueTwoWallGenerator (β : Nat) (body : List TagLetter) :
   | (letter, j, true) => atom β body letter (3 * j + 1)
 
 /-- Sixty-four times each residue-zero or residue-one atom, represented integrally. -/
-private def numerator (β : Nat) (body : List TagLetter) :
+def safeNumerator (β : Nat) (body : List TagLetter) :
     TagLetter × Nat × Bool → Matrix (Fin 3) (Fin 3) ℤ
   | (.b, j, false) =>
       let ρ : ℤ := 3 ^ β
@@ -100,19 +100,19 @@ private theorem cAtom_three_mul_add_two (ρ L M : ℚ) (j : Nat) :
     ring
 
 private theorem cast_numerator_b_zero (β : Nat) (body : List TagLetter) (j : Nat) :
-    castMatrix (numerator β body (.b, j, false)) =
+    castMatrix (safeNumerator β body (.b, j, false)) =
       (64 : ℚ) • residueTwoWallGenerator β body (.b, j, false) := by
   rw [show residueTwoWallGenerator β body (.b, j, false) =
       bAtom ((3 : ℚ) ^ β) (3 * j) by rfl,
     bAtom, normalRoot_pow_three_mul]
   ext i k
   fin_cases i <;> fin_cases k <;>
-    norm_num [numerator, liftResidue, bFlank, flank, drift, injection, castMatrix,
+    norm_num [safeNumerator, liftResidue, bFlank, flank, drift, injection, castMatrix,
       Matrix.mul_apply, Fin.sum_univ_succ] <;>
     ring
 
 private theorem cast_numerator_b_one (β : Nat) (body : List TagLetter) (j : Nat) :
-    castMatrix (numerator β body (.b, j, true)) =
+    castMatrix (safeNumerator β body (.b, j, true)) =
       (64 : ℚ) • residueTwoWallGenerator β body (.b, j, true) := by
   rw [show residueTwoWallGenerator β body (.b, j, true) =
       bAtom ((3 : ℚ) ^ β) (3 * j + 1) by rfl,
@@ -120,7 +120,7 @@ private theorem cast_numerator_b_one (β : Nat) (body : List TagLetter) (j : Nat
   simp only [pow_one]
   ext i k
   fin_cases i <;> fin_cases k <;>
-    norm_num [numerator, liftResidue, bFlank, flank, drift, normalRoot, injection, castMatrix,
+    norm_num [safeNumerator, liftResidue, bFlank, flank, drift, normalRoot, injection, castMatrix,
       Matrix.mul_apply, Fin.sum_univ_succ] <;>
     ring
 
@@ -135,11 +135,11 @@ theorem residueTwoWallGenerator_b_one_matrix
   ext i k
   have entry := congrArg (fun matrix => matrix i k) (cast_numerator_b_one β body j)
   fin_cases i <;> fin_cases k <;>
-    norm_num [numerator, liftResidue, castMatrix, residueTwoWallGenerator] at entry ⊢ <;>
+    norm_num [safeNumerator, liftResidue, castMatrix, residueTwoWallGenerator] at entry ⊢ <;>
     linarith
 
 private theorem cast_numerator_c_zero (β : Nat) (body : List TagLetter) (j : Nat) :
-    castMatrix (numerator β body (.c, j, false)) =
+    castMatrix (safeNumerator β body (.c, j, false)) =
       (64 : ℚ) • residueTwoWallGenerator β body (.c, j, false) := by
   rw [show residueTwoWallGenerator β body (.c, j, false) =
       cAtom ((3 : ℚ) ^ β) (nearySideLowerC β body)
@@ -152,12 +152,12 @@ private theorem cast_numerator_c_zero (β : Nat) (body : List TagLetter) (j : Na
         ring]
   ext i k
   fin_cases i <;> fin_cases k <;>
-    norm_num [numerator, liftResidue, cFlank, flank, drift, injection, castMatrix,
+    norm_num [safeNumerator, liftResidue, cFlank, flank, drift, injection, castMatrix,
       Matrix.mul_apply, Fin.sum_univ_succ] <;>
     ring
 
 private theorem cast_numerator_c_one (β : Nat) (body : List TagLetter) (j : Nat) :
-    castMatrix (numerator β body (.c, j, true)) =
+    castMatrix (safeNumerator β body (.c, j, true)) =
       (64 : ℚ) • residueTwoWallGenerator β body (.c, j, true) := by
   rw [show residueTwoWallGenerator β body (.c, j, true) =
       cAtom ((3 : ℚ) ^ β) (nearySideLowerC β body)
@@ -170,12 +170,12 @@ private theorem cast_numerator_c_one (β : Nat) (body : List TagLetter) (j : Nat
         ring]
   ext i k
   fin_cases i <;> fin_cases k <;>
-    norm_num [numerator, liftResidue, castMatrix] <;>
+    norm_num [safeNumerator, liftResidue, castMatrix] <;>
     ring
 
 private theorem cast_numerator
     (β : Nat) (body : List TagLetter) (label : TagLetter × Nat × Bool) :
-    castMatrix (numerator β body label) =
+    castMatrix (safeNumerator β body label) =
       (64 : ℚ) • residueTwoWallGenerator β body label := by
   obtain ⟨letter, j, residueOne⟩ := label
   cases letter <;> cases residueOne
@@ -184,8 +184,15 @@ private theorem cast_numerator
   · exact cast_numerator_c_zero β body j
   · exact cast_numerator_c_one β body j
 
+/-- Casting a safe numerator recovers sixty-four times its rational atom. -/
+theorem cast_safeNumerator
+    (β : Nat) (body : List TagLetter) (label : TagLetter × Nat × Bool) :
+    castMatrix (safeNumerator β body label) =
+      (64 : ℚ) • residueTwoWallGenerator β body label :=
+  cast_numerator β body label
+
 /-- Sixty-four times a residue-two atom, represented integrally. -/
-private def defectNumerator (β : Nat) (body : List TagLetter) :
+def residueTwoNumerator (β : Nat) (body : List TagLetter) :
     TagLetter × Nat → Matrix (Fin 3) (Fin 3) ℤ
   | (.b, j) =>
       let ρ : ℤ := 3 ^ β
@@ -208,20 +215,20 @@ private def defectNumerator (β : Nat) (body : List TagLetter) :
 
 private theorem cast_defectNumerator_b
     (β : Nat) (body : List TagLetter) (j : Nat) :
-    castMatrix (defectNumerator β body (.b, j)) =
+    castMatrix (residueTwoNumerator β body (.b, j)) =
       (64 : ℚ) • atom β body .b (3 * j + 2) := by
   rw [show atom β body .b (3 * j + 2) =
       bAtom ((3 : ℚ) ^ β) (3 * j + 2) by rfl,
     bAtom, pow_add, normalRoot_pow_three_mul]
   ext i k
   fin_cases i <;> fin_cases k <;>
-    norm_num [defectNumerator, liftResidue, bFlank, flank, drift, normalRoot, injection,
+    norm_num [residueTwoNumerator, liftResidue, bFlank, flank, drift, normalRoot, injection,
       castMatrix, pow_succ, Matrix.mul_apply, Fin.sum_univ_succ] <;>
     ring
 
 private theorem cast_defectNumerator_c
     (β : Nat) (body : List TagLetter) (j : Nat) :
-    castMatrix (defectNumerator β body (.c, j)) =
+    castMatrix (residueTwoNumerator β body (.c, j)) =
       (64 : ℚ) • atom β body .c (3 * j + 2) := by
   rw [show atom β body .c (3 * j + 2) =
       cAtom ((3 : ℚ) ^ β) (nearySideLowerC β body)
@@ -234,12 +241,13 @@ private theorem cast_defectNumerator_c
         ring]
   ext i k
   fin_cases i <;> fin_cases k <;>
-    norm_num [defectNumerator, liftResidue, castMatrix] <;>
+    norm_num [residueTwoNumerator, liftResidue, castMatrix] <;>
     ring
 
-private theorem cast_defectNumerator
+/-- Casting a residue-two numerator recovers sixty-four times its rational atom. -/
+theorem cast_residueTwoNumerator
     (β : Nat) (body : List TagLetter) (label : TagLetter × Nat) :
-    castMatrix (defectNumerator β body label) =
+    castMatrix (residueTwoNumerator β body label) =
       (64 : ℚ) • atom β body label.1 (3 * label.2 + 2) := by
   obtain ⟨letter, j⟩ := label
   cases letter
@@ -248,16 +256,17 @@ private theorem cast_defectNumerator
 
 private theorem cast_numerator_wordProduct
     (β : Nat) (body : List TagLetter) (word : List (TagLetter × Nat × Bool)) :
-    castMatrix (wordProduct (numerator β body) word) =
+    castMatrix (wordProduct (safeNumerator β body) word) =
       (word.map fun _ => (64 : ℚ)).prod •
         wordProduct (residueTwoWallGenerator β body) word := by
   rw [castMatrix_wordProduct]
-  change wordProduct (fun label => castMatrix (numerator β body label)) word = _
+  change wordProduct (fun label => castMatrix (safeNumerator β body label)) word = _
   simp_rw [cast_numerator]
   exact wordProduct_smulMatrix (fun _ => (64 : ℚ))
     (residueTwoWallGenerator β body) word
 
-private def residue : Bool → Matrix (Fin 3) (Fin 3) (ZMod 3)
+/-- Modulo-three reduction of a cleared safe atom, selected by its gap phase. -/
+def safeResidue : Bool → Matrix (Fin 3) (Fin 3) (ZMod 3)
   | false =>
       !![1, 2, 2;
          0, 0, 0;
@@ -267,28 +276,33 @@ private def residue : Bool → Matrix (Fin 3) (Fin 3) (ZMod 3)
          0, 0, 0;
          2, 0, 2]
 
-private def defectResidue : Matrix (Fin 3) (Fin 3) (ZMod 3) :=
+/-- Uniform modulo-three reduction of every residue-two atom numerator. -/
+def residueTwoResidue : Matrix (Fin 3) (Fin 3) (ZMod 3) :=
   !![1, 0, 1;
      0, 0, 0;
      2, 1, 1]
 
-private theorem mapped_numerator
+/-- Every cleared safe atom has the reduction selected by its gap residue. -/
+theorem mapped_safeNumerator
     (β : Nat) (body : List TagLetter) (label : TagLetter × Nat × Bool) :
-    (numerator β body label).map (Int.castRingHom (ZMod 3)) = residue label.2.2 := by
+    (safeNumerator β body label).map (Int.castRingHom (ZMod 3)) =
+      safeResidue label.2.2 := by
   letI : Fact (Nat.Prime 3) := ⟨by norm_num⟩
   obtain ⟨letter, j, residueOne⟩ := label
   cases letter <;> cases residueOne <;>
     ext i k <;> fin_cases i <;> fin_cases k <;>
-    simp [numerator, residue, Matrix.vecHead, Matrix.vecTail]
+    simp [safeNumerator, safeResidue, Matrix.vecHead, Matrix.vecTail]
 
-private theorem mapped_defectNumerator
+/-- Every residue-two numerator has the same modulo-three reduction. -/
+theorem mapped_residueTwoNumerator
     (β : Nat) (body : List TagLetter) (label : TagLetter × Nat) :
-    (defectNumerator β body label).map (Int.castRingHom (ZMod 3)) = defectResidue := by
+    (residueTwoNumerator β body label).map (Int.castRingHom (ZMod 3)) =
+      residueTwoResidue := by
   letI : Fact (Nat.Prime 3) := ⟨by norm_num⟩
   obtain ⟨letter, j⟩ := label
   cases letter <;>
     ext i k <;> fin_cases i <;> fin_cases k <;>
-    simp [defectNumerator, defectResidue, Matrix.vecHead, Matrix.vecTail]
+    simp [residueTwoNumerator, residueTwoResidue, Matrix.vecHead, Matrix.vecTail]
 
 private def ray : Bool → Fin 3 → ZMod 3
   | false => ![1, 0, 0]
@@ -336,30 +350,30 @@ private theorem rayWeight_ne_zero
       exact mul_ne_zero (induction state)
         (weight_ne_zero label (rayState transition tail state))
 
-private theorem mapped_numerator_mulVec
+private theorem mapped_safeNumerator_mulVec
     (β : Nat) (body : List TagLetter)
     (label : TagLetter × Nat × Bool) (state : Bool) :
     Matrix.mulVec
-        ((numerator β body label).map (Int.castRingHom (ZMod 3)))
+        ((safeNumerator β body label).map (Int.castRingHom (ZMod 3)))
         (ray state) =
       weight label state • ray (transition label state) := by
-  rw [mapped_numerator β body label]
+  rw [mapped_safeNumerator β body label]
   obtain ⟨letter, j, residueOne⟩ := label
   cases letter <;> cases residueOne <;> cases state <;>
     ext i <;> fin_cases i <;>
-    norm_num [residue, ray, transition, weight, Matrix.mulVec, Matrix.dotProduct,
+    norm_num [safeResidue, ray, transition, weight, Matrix.mulVec, Matrix.dotProduct,
       Fin.sum_univ_succ]
 
 private theorem mapped_same_residue_defect_action
     (β : Nat) (body : List TagLetter)
     (left right : TagLetter × Nat × Bool) (defect : TagLetter × Nat)
     (sameResidue : left.2.2 = right.2.2) :
-    Matrix.mulVec ((numerator β body left).map (Int.castRingHom (ZMod 3)))
-        (Matrix.mulVec ((defectNumerator β body defect).map (Int.castRingHom (ZMod 3)))
+    Matrix.mulVec ((safeNumerator β body left).map (Int.castRingHom (ZMod 3)))
+        (Matrix.mulVec ((residueTwoNumerator β body defect).map (Int.castRingHom (ZMod 3)))
           (ray right.2.2)) =
       defectWeight right.2.2 • ray left.2.2 := by
   letI : Fact (Nat.Prime 3) := ⟨by norm_num⟩
-  rw [mapped_numerator, mapped_defectNumerator]
+  rw [mapped_safeNumerator, mapped_residueTwoNumerator]
   obtain ⟨leftLetter, leftWait, leftResidue⟩ := left
   obtain ⟨rightLetter, rightWait, rightResidue⟩ := right
   cases leftResidue <;> cases rightResidue <;> simp at sameResidue
@@ -367,7 +381,7 @@ private theorem mapped_same_residue_defect_action
     ext i
     fin_cases i
     all_goals
-      norm_num [residue, defectResidue, ray, defectWeight, Matrix.mulVec,
+      norm_num [safeResidue, residueTwoResidue, ray, defectWeight, Matrix.mulVec,
         Matrix.dotProduct, Fin.sum_univ_succ] <;>
       first
       | exact (show (5 : ZMod 3) = 2 by decide)
@@ -380,28 +394,28 @@ private theorem mapped_oneDefect_ne_zero_of_same_residue
     (defect : TagLetter × Nat)
     (sameResidue : leftAdjacent.2.2 = rightAdjacent.2.2) :
     wordProduct
-          (fun label => (numerator β body label).map (Int.castRingHom (ZMod 3)))
+          (fun label => (safeNumerator β body label).map (Int.castRingHom (ZMod 3)))
           (leftPrefix ++ [leftAdjacent]) *
-        (defectNumerator β body defect).map (Int.castRingHom (ZMod 3)) *
+        (residueTwoNumerator β body defect).map (Int.castRingHom (ZMod 3)) *
       wordProduct
-          (fun label => (numerator β body label).map (Int.castRingHom (ZMod 3)))
+          (fun label => (safeNumerator β body label).map (Int.castRingHom (ZMod 3)))
           (rightAdjacent :: rightSuffix) ≠ 0 := by
   let mapped :=
-    fun label => (numerator β body label).map (Int.castRingHom (ZMod 3))
+    fun label => (safeNumerator β body label).map (Int.castRingHom (ZMod 3))
   have prefixAction :=
     wordProduct_mulVec_ray_action mapped ray transition weight
-      (mapped_numerator_mulVec β body) leftPrefix leftAdjacent.2.2
+      (mapped_safeNumerator_mulVec β body) leftPrefix leftAdjacent.2.2
   have rightAction :
       Matrix.mulVec (wordProduct mapped (rightAdjacent :: rightSuffix)) (ray false) =
         rayWeight transition weight (rightAdjacent :: rightSuffix) false •
           ray rightAdjacent.2.2 := by
     simpa [rayState, transition] using
       wordProduct_mulVec_ray_action mapped ray transition weight
-        (mapped_numerator_mulVec β body) (rightAdjacent :: rightSuffix) false
+        (mapped_safeNumerator_mulVec β body) (rightAdjacent :: rightSuffix) false
   have coreAction :
       Matrix.mulVec (mapped leftAdjacent)
           (Matrix.mulVec
-            ((defectNumerator β body defect).map (Int.castRingHom (ZMod 3)))
+            ((residueTwoNumerator β body defect).map (Int.castRingHom (ZMod 3)))
             (ray rightAdjacent.2.2)) =
         defectWeight rightAdjacent.2.2 • ray leftAdjacent.2.2 := by
     simpa [mapped] using
@@ -409,7 +423,7 @@ private theorem mapped_oneDefect_ne_zero_of_same_residue
   have imageAction :
       Matrix.mulVec
           (wordProduct mapped (leftPrefix ++ [leftAdjacent]) *
-              (defectNumerator β body defect).map (Int.castRingHom (ZMod 3)) *
+              (residueTwoNumerator β body defect).map (Int.castRingHom (ZMod 3)) *
             wordProduct mapped (rightAdjacent :: rightSuffix))
           (ray false) =
         rayWeight transition weight (rightAdjacent :: rightSuffix) false •
@@ -434,18 +448,18 @@ private theorem mapped_oneDefect_ne_zero_of_same_residue
   rw [← imageAction, productZero, Matrix.zero_mulVec]
 
 private theorem numerator_immortal (β : Nat) (body : List TagLetter) :
-    ¬IsMortal (numerator β body) := by
+    ¬IsMortal (safeNumerator β body) := by
   letI : Fact (Nat.Prime 3) := ⟨by norm_num⟩
   let quotient :=
     ((Int.castRingHom (ZMod 3)).mapMatrix (m := Fin 3)).toMonoidWithZeroHom
-  apply not_isMortal_of_map_not_isMortal quotient (numerator β body)
+  apply not_isMortal_of_map_not_isMortal quotient (safeNumerator β body)
   apply not_isMortal_of_ray_action
-    (quotient ∘ numerator β body) ray transition weight false
+    (quotient ∘ safeNumerator β body) ray transition weight false
   · exact ray_ne_zero
   · exact weight_ne_zero
   · intro label state
     simpa [quotient, Function.comp_def] using
-      mapped_numerator_mulVec β body label state
+      mapped_safeNumerator_mulVec β body label state
 
 /-- Every atom word whose gaps are congruent to zero or one modulo three is nonzero. Equivalently,
 every zero word contains a residue-two gap. -/
@@ -453,11 +467,11 @@ theorem residueTwoWall_wordProduct_ne_zero
     (β : Nat) (body : List TagLetter) (word : List (TagLetter × Nat × Bool)) :
     wordProduct (residueTwoWallGenerator β body) word ≠ 0 := by
   intro product_zero
-  have cast_immortal : ¬IsMortal (castMatrix ∘ numerator β body) := by
+  have cast_immortal : ¬IsMortal (castMatrix ∘ safeNumerator β body) := by
     rw [isMortal_cast_iff]
     exact numerator_immortal β body
   have cast_eq :
-      castMatrix ∘ numerator β body =
+      castMatrix ∘ safeNumerator β body =
         fun label => (64 : ℚ) • residueTwoWallGenerator β body label := by
     funext label
     exact cast_numerator β body label
@@ -483,20 +497,20 @@ theorem oneDefect_wordProduct_ne_zero_of_same_residue
         wordProduct (residueTwoWallGenerator β body) (rightAdjacent :: rightSuffix) ≠ 0 := by
   intro productZero
   have integerZero :
-      wordProduct (numerator β body) (leftPrefix ++ [leftAdjacent]) *
-            defectNumerator β body defect *
-          wordProduct (numerator β body) (rightAdjacent :: rightSuffix) = 0 := by
+      wordProduct (safeNumerator β body) (leftPrefix ++ [leftAdjacent]) *
+            residueTwoNumerator β body defect *
+          wordProduct (safeNumerator β body) (rightAdjacent :: rightSuffix) = 0 := by
     apply (castMatrix_eq_zero_iff _).mp
     rw [show
       castMatrix
-          (wordProduct (numerator β body) (leftPrefix ++ [leftAdjacent]) *
-              defectNumerator β body defect *
-            wordProduct (numerator β body) (rightAdjacent :: rightSuffix)) =
-        castMatrix (wordProduct (numerator β body) (leftPrefix ++ [leftAdjacent])) *
-            castMatrix (defectNumerator β body defect) *
-          castMatrix (wordProduct (numerator β body) (rightAdjacent :: rightSuffix)) by
+          (wordProduct (safeNumerator β body) (leftPrefix ++ [leftAdjacent]) *
+              residueTwoNumerator β body defect *
+            wordProduct (safeNumerator β body) (rightAdjacent :: rightSuffix)) =
+        castMatrix (wordProduct (safeNumerator β body) (leftPrefix ++ [leftAdjacent])) *
+            castMatrix (residueTwoNumerator β body defect) *
+          castMatrix (wordProduct (safeNumerator β body) (rightAdjacent :: rightSuffix)) by
       simp only [castMatrix, Matrix.map_mul]]
-    rw [cast_numerator_wordProduct, cast_defectNumerator, cast_numerator_wordProduct]
+    rw [cast_numerator_wordProduct, cast_residueTwoNumerator, cast_numerator_wordProduct]
     simp only [Matrix.smul_mul, Matrix.mul_smul, smul_smul]
     rw [productZero, smul_zero]
   have mappedZero :=

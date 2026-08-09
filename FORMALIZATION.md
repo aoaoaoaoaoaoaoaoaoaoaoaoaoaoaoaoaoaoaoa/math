@@ -513,11 +513,28 @@ the wall. The first exact wound is also checked: a regular residue-one `b` atom 
 when `(12·3^β−1)(u+w)+2v=0`. The audit is
 [`audits/m43-parabolic-flag-2026-08-08.md`](audits/m43-parabolic-flag-2026-08-08.md).
 
+The arbitrary defect grammar
+[`M4-S06`](SALVAGE.md#m4-s06-arbitrary-defect-bridge-grammar) is formalized in
+[`MatrixMortality/ParabolicDefect.lean`](MatrixMortality/ParabolicDefect.lean). Lean proves
+`A₂⁴=2I` for the protected-plane defect action and the complete four-periodic local-incidence
+table. It factors every arbitrary cleared `3 × 3` residue skeleton into those incidences and
+composes the result with the concrete integral numerators: every physical skeleton without a bad
+internal run is nonzero over `ℚ`. This subsumes the one-defect phase cut `M4-S03`.
+
+The same module proves the exact pure-defect reset: every nonempty block of residue-two atoms has
+an invertible bridge. Every regular wall bridge is a nonzero rank-one outer product, and an
+arbitrary chain of varying walls separated by arbitrary transports vanishes exactly at one
+consecutive projective incidence. For wall exterior state `(0,v,w)`, the explicit cokernel is
+`(v,-4w)`; it is nonzero on every regular wall word and annihilates the bridge. The exact checks
+and evidence boundary are in
+[`audits/m43-arbitrary-defect-2026-08-08.md`](audits/m43-arbitrary-defect-2026-08-08.md).
+
 No `M₄(3)` undecidability theorem follows from the present corpus. The missing source is an
 undecidable promised binary two-state overlap queue with a genuine deleting self-loop. On the
-matrix lane, one must construct open blade contexts realizing the paired Neary coefficient,
-prove or refute reachable incidence with the oriented safe wall, and close the alternating and
-multiple residue-two defect language. These forward and converse obligations are independent.
+matrix lane, one must construct two singular blade contexts realizing the paired Neary
+coefficient as their single consecutive-wall incidence and prove its arbitrary-word converse, or
+decide the oriented projective transport between reachable walls. These forward and converse
+obligations are independent.
 
 ## Modules
 
@@ -595,6 +612,7 @@ multiple residue-two defect language. These forward and converse obligations are
 | `ParabolicExterior.lean` | complete adjugate exterior state, bridge-wall coordinate, and four normalized safe actions |
 | `ParabolicFlag.lean` | valuation relations and the four arbitrary-cancellation atom invariants |
 | `ParabolicSafeFlag.lean` | arbitrary safe-word flag, wall orientation, and exact residue-one `b` wound |
+| `ParabolicDefect.lean` | complete defect-run residue grammar, pure-defect bridge reset, and consecutive-wall projective fracture |
 | `PairedMortality.lean` | common-column mortality converse and exact integer `4 × 4` family |
 | `PairedRank.lean` | uniform exact rank-four certificate for the paired scalar series |
 | `PairedBoundaryTax.lean` | exact six-state lower bound for diagonal paired-series bridges |
@@ -751,6 +769,10 @@ multiple residue-two defect language. These forward and converse obligations are
 | Promised zero-framed binary context-2 Lag reachability is exactly mortality of three integer `4 × 4` matrices | `OverlapLag.mortality_iff_accepts` |
 | A fixed morphism cannot identify a terminal with its own compulsory return frame | `OverlapLag.terminal_image_ne_frame` |
 | Every regular safe word preserves the oriented `3`-adic exterior flag | `ParabolicBlade.exteriorState_safe_word_flag`, `ParabolicBlade.exteriorState_safe_word_wall_orientation` |
+| Every concrete defect skeleton without a bad four-periodic run is nonzero | `ParabolicBlade.defectSkeletonProduct_ne_zero_of_not_bad` |
+| Every nonempty pure-defect block has an invertible bridge | `ParabolicBlade.pureDefect_bridge_det_ne_zero` |
+| A varying wall chain vanishes exactly at one consecutive projective incidence | `ParabolicBlade.bridgeFractureChain_eq_zero_iff` |
+| A regular wall bridge has the explicit nonzero annihilating cokernel `(v,-4w)` | `ParabolicBlade.bridgeCokernel_eq_exteriorTail`, `ParabolicBlade.bridgeCokernel_regular_word_ne_zero`, `ParabolicBlade.bridgeCokernel_vecMul_bridge_of_wall` |
 | Exact left-context toggle fusion is immortal | `exactLeftToggleFusion_immortal` |
 | A finite closed-token queue halts iff no reachable token lies on a dependency cycle | `closedSubstitutionHalts_iff_noReachableCycle` |
 | Two private quotient states cannot isolate the Neary rule phase | `twoPrivateState_ruleScale_eq`, `neary_twoPrivateState_phaseCompiler_impossible` |

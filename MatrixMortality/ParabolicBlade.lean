@@ -274,20 +274,24 @@ theorem exceptionalMinor_det_ne_zero (β : Nat) :
   rw [exceptionalMinor_det]
   positivity
 
-private def coreOutput (ρ : ℚ) : Matrix (Fin 3) (Fin 2) ℚ :=
+/-- Full-column-rank output factor of the exceptional rank-two atom. -/
+def coreOutput (ρ : ℚ) : Matrix (Fin 3) (Fin 2) ℚ :=
   !![36 * ρ - 9 / 4, 18;
      9 * ρ, 0;
      57 * ρ / 4 - 11 / 8, 11]
 
-private def coreInput : Matrix (Fin 2) (Fin 3) ℚ :=
+/-- Full-row-rank input factor of the exceptional rank-two atom. -/
+def coreInput : Matrix (Fin 2) (Fin 3) ℚ :=
   !![1, -1, 0;
      0, 1 / 4, 1]
 
-private def coreLeftInverse (ρ : ℚ) : Matrix (Fin 2) (Fin 3) ℚ :=
+/-- Retraction of the exceptional atom's output factor. -/
+def coreLeftInverse (ρ : ℚ) : Matrix (Fin 2) (Fin 3) ℚ :=
   !![0, 1 / (9 * ρ), 0;
      0, -(57 * ρ / 4 - 11 / 8) / (99 * ρ), 1 / 11]
 
-private def coreRightInverse : Matrix (Fin 3) (Fin 2) ℚ :=
+/-- Section of the exceptional atom's input factor. -/
+def coreRightInverse : Matrix (Fin 3) (Fin 2) ℚ :=
   !![1, 0;
      0, 0;
      0, 1]

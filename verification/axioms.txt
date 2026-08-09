@@ -127,6 +127,21 @@
 'MatrixMortality.ParabolicBlade.exteriorTransition_b_one_first_eq_zero_iff' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.ParabolicBlade.defectSkeletonProduct_ne_zero_of_not_bad' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.pureDefect_bridge_det_ne_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.bridgeFractureChain_eq_zero_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.bridgeCokernel_regular_word_ne_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.bridgeCokernel_vecMul_bridge_of_wall' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.isMortal_smulMatrix_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.InternalSandwich.mortal_quotient_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.InternalSandwich.ambient_mortal_of_quotient_subsingleton' depends on axioms: [propext,

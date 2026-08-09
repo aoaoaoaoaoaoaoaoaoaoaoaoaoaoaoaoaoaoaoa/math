@@ -89,6 +89,11 @@ open MatrixMortality
 #print axioms ParabolicBlade.exteriorState_safe_word_flag
 #print axioms ParabolicBlade.exteriorState_safe_word_wall_orientation
 #print axioms ParabolicBlade.exteriorTransition_b_one_first_eq_zero_iff
+#print axioms ParabolicBlade.defectSkeletonProduct_ne_zero_of_not_bad
+#print axioms ParabolicBlade.pureDefect_bridge_det_ne_zero
+#print axioms ParabolicBlade.bridgeFractureChain_eq_zero_iff
+#print axioms ParabolicBlade.bridgeCokernel_regular_word_ne_zero
+#print axioms ParabolicBlade.bridgeCokernel_vecMul_bridge_of_wall
 #print axioms isMortal_smulMatrix_iff
 #print axioms InternalSandwich.mortal_quotient_iff
 #print axioms InternalSandwich.ambient_mortal_of_quotient_subsingleton

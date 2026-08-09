@@ -225,7 +225,7 @@ replace exact finite-state simulation.
 
 Victory means a checked many-one reduction to mortality of three integer `4 × 4` matrices,
 including a nonempty witness, denominator clearing, and soundness for every matrix word. The
-frontier has two live trunks and four independently attackable nodes.
+frontier has two live trunks and five independently attackable nodes.
 
 #### Source trunk: positive overlap queues
 
@@ -285,8 +285,7 @@ The parabolic blade [`M4-M03`](SALVAGE.md#m4-m03-parabolic-blade-and-bridge-gram
 live zero-set construction. Lean classifies its unique singular gap atom `R`, proves every zero
 needs at least three copies, and contracts every arbitrary exceptional chain exactly to a product
 of `2 × 2` bridges. [`M4-O08`](SALVAGE.md#m4-o08-residue-two-necessary-wall) proves that every
-zero contains a residue-two gap. [`M4-S03`](SALVAGE.md#m4-s03-one-defect-phase-cut) removes a
-lone defect at an edge or between equal safe residues, leaving only `0|2|1` and `1|2|0`.
+zero contains a residue-two gap.
 
 The complete safe exterior state is now controlled. The arbitrary-switching flag
 [`M4-S04`](SALVAGE.md#m4-s04-arbitrary-switching-three-adic-exterior-flag) proves that every
@@ -306,28 +305,31 @@ both projective coordinates, and the irrational cycle
 [`M4-O10`](SALVAGE.md#m4-o10-irrational-rotation-cone-fracture) excludes every finite strict
 wall-separated cone or Markov multicone.
 
-Three matrix nodes can now race.
+The arbitrary grammar [`M4-S06`](SALVAGE.md#m4-s06-arbitrary-defect-bridge-grammar) closes the
+defect-count node. Every cleared residue skeleton factors into local incidences; its only possible
+zero runs have length `1 mod 4` between opposite phases or length `3 mod 4` between equal phases.
+A concrete rational skeleton avoiding those runs is nonzero. More strongly, every nonempty pure-
+defect block has an invertible bridge. Every arbitrary bridge zero descends to one incidence
+between two consecutive singular bridges, with only invertible transport between them; additional
+walls cannot cancel collectively. On a wall `(0,v,w)`, the exact nonzero cokernel is `(v,-4w)`.
 
-1. **Semantic boundary realization.** Construct open left and right blade contexts whose induced
-   bridge boundary realizes exactly the paired Neary coefficient-zero language. The present
-   parabolic algebra supplies a rank-one blade and exact contraction, but no checked contexts yet
-   connect its residue-two blocks to the undecidable source. A uniform impossibility theorem for
-   this family would retire it even if malformed words were later controlled.
-2. **Oriented safe-wall reachability.** Derive the remaining exact atom wound functionals and
-   decide whether a reachable flagged safe state can satisfy one. A proof of avoidance gives
-   safe return; an exact hit retires or redirects the blade. Approximate real returns and another
-   coarse valuation partition do not decide this node.
-3. **Residue-two defect grammar.** Attack `0|2|1`, `1|2|0`, and successive defects directly,
-   using the oriented safe contexts but not waiting for a standalone safe-return theorem. The
-   goal is an arbitrary-word converse, a malformed exact zero, or a different zero language that
-   closes the master problem.
+Two matrix nodes can now race.
+
+1. **Semantic incidence realization.** Construct two singular endpoint contexts and intervening
+   invertible bridge transport whose single projective incidence is exactly the paired-Neary
+   coefficient-zero language. Prove the arbitrary-word converse at the same incidence, or exhibit
+   a malformed exact hit. A uniform impossibility theorem for this family retires it.
+2. **Oriented projective transport.** Decide whether nonsingular mixed bridges can carry the
+   outgoing row of one reachable wall into the unique sector and unit required to annihilate the
+   next wall cokernel. Standalone safe return is sufficient but no longer prerequisite. Approximate
+   returns and another coarse valuation partition do not decide this node.
 
 The dead subtrees remain dead: literal Neary role fusion (`M4-O01`, `M4-O02`, `M4-O05`), finite
 queues of complete tokens (`M4-O03`), exact internal/final block codes (`M4-O04`), closed
 finite-order roots (`M4-O07`), one-coordinate exterior dynamics (`M4-O09`), and finite strict
 cone separation (`M4-O10`). The annihilator guard [`M4-O06`](SALVAGE.md#m4-o06-punctuation-image-annihilator)
-is discharged. Finite gap catalogues, bare rank-one incidence, and unproved flatness are not
-frontier work.
+is discharged. Finite gap catalogues, bare rank-one incidence, defect-count casework, collective-
+wall cancellation, pure-defect endpoints, and unproved flatness are not frontier work.
 
 ### 2. Zero-set compression and fused punctuation: `M₅(3)`
 
@@ -1319,10 +1321,10 @@ universal computation.
 
 ## Execution order
 
-1. Attack the four open `M₄(3)` nodes independently: universality versus decidability of the
-   promised overlap queue constrained by `M4-O11`; parabolic semantic boundary realization;
-   exact oriented safe-wall reachability under `M4-S04`; and the alternating/multiple residue-two
-   defect grammar. Cross-pollinate exact source and exterior invariants, but do not revive
+1. Attack the five open `M₄(3)` nodes independently: universality versus decidability of each
+   deletion scanner `Lₙ`, `Bₙ`, and `C`; parabolic semantic incidence realization; and exact
+   oriented projective transport under `M4-S04` and `M4-S06`. The alternating/multiple residue-two
+   defect grammar is closed. Cross-pollinate exact source and exterior invariants, but do not revive
    complete-token queues, one-coordinate dynamics, finite wall-separated cones, or literal Neary
    recodings.
 2. Use formalized `MM-O01`, `G3-O01`, `MM-O03`, and `MM-O04` to reject exact packings, macros,

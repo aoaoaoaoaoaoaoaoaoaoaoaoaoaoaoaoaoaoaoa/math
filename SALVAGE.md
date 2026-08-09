@@ -122,13 +122,14 @@ file owns the mathematical stock.
 | [`M4-M03`](#m4-m03-parabolic-blade-and-bridge-grammar) | partial mechanism | an open cube root has one singular atom and exact `2 × 2` bridge semantics | formalized | active |
 | [`M4-O08`](#m4-o08-residue-two-necessary-wall) | obstruction | every residue-zero or residue-one atom preserves a nonvanishing two-ray quotient | formalized | graduated |
 | [`M4-S02`](#m4-s02-residue-zero-safe-bridge-cone) | structure theorem | every nonempty residue-zero regular safe bridge has negative determinant | audited | active |
-| [`M4-S03`](#m4-s03-one-defect-phase-cut) | structure theorem | a lone residue-two defect can survive only between opposite safe residues | formalized | active |
+| [`M4-S03`](#m4-s03-one-defect-phase-cut) | structure theorem | a lone residue-two defect can survive only between opposite safe residues | formalized | graduated |
 | [`M4-O09`](#m4-o09-one-coordinate-exterior-fracture) | obstruction | the wait-free scalar exterior coordinate does not close on residue-one `c` atoms | audited | graduated |
 | [`M4-O10`](#m4-o10-irrational-rotation-cone-fracture) | obstruction | one legal safe cycle excludes finite wall-separated cone certificates | audited | graduated |
 | [`M4-C02`](#m4-c02-positive-overlap-queue-compiler) | compiler | promised positive two-frame queue acceptance compiles exactly to three integer `4 × 4` matrices | formalized | graduated |
 | [`M4-O11`](#m4-o11-pure-deletion-necessity) | obstruction | every long accepted overlap queue needs a state-preserving role empty on both correspondence sides | formalized | graduated |
 | [`M4-S04`](#m4-s04-arbitrary-switching-three-adic-exterior-flag) | structure theorem | every regular safe word preserves an oriented two-sector `3`-adic flag | formalized | active |
 | [`M4-S05`](#m4-s05-deletion-scanner-normal-form) | structure theorem | promised overlap queues contract to three exact deletion scanners | audited | active |
+| [`M4-S06`](#m4-s06-arbitrary-defect-bridge-grammar) | structure theorem | arbitrary defect skeletons and bridge walls reduce to one consecutive projective incidence | formalized | active |
 | [`M4-C03`](#m4-c03-zero-framed-binary-two-lag-compiler) | compiler | the principal scanner is literally binary context-2 Lag and compiles to `M₄(3)` | formalized | graduated |
 | [`M4-O12`](#m4-o12-terminal-frame-morphism-obstruction) | obstruction | a fixed morphism cannot map a shared terminal to its own compulsory return frame | formalized | graduated |
 | [`G3-O01`](#g3-o01-four-role-macro-irreducibility) | obstruction | exact nonerasing macros cannot reduce the four source roles to three letters | formalized | graduated |
@@ -3941,30 +3942,30 @@ for arbitrary `3 × 3` middle matrices. The complete malformed-word problem is t
 to zero or one modulo three is nonzero. The safe-bridge cone
 [`M4-S02`](#m4-s02-residue-zero-safe-bridge-cone) further excludes singular regular bridges
 made solely from residue-zero atoms. These results do not supply open contexts whose boundary
-rays realize the paired Neary zero series, nor classify bridge zeros after a residue-two atom
-occurs. The one-defect phase cut
-[`M4-S03`](#m4-s03-one-defect-phase-cut) removes every empty-side or same-residue instance, but
-the two alternating phases and successive defects remain. The scalar exterior compression is
+rays realize the paired Neary zero series. The arbitrary grammar
+[`M4-S06`](#m4-s06-arbitrary-defect-bridge-grammar) now proves that every bridge zero descends
+to one projective incidence between consecutive singular bridges; it excludes every good
+residue skeleton and every nonempty pure-defect endpoint. The surviving incidence is not yet
+identified semantically. The scalar exterior compression is
 retired by [`M4-O09`](#m4-o09-one-coordinate-exterior-fracture): residue-one `c` return needs a
 second projective coordinate. The finite cone replacement is itself retired by
 [`M4-O10`](#m4-o10-irrational-rotation-cone-fracture): powers of the legal atom `Q(b,4)`
 accumulate projectively on the singular wall while remaining arithmetically nonzero. No `M₄(3)`
 theorem follows yet.
 
-**Use:** all further cube-root work begins with the first residue-two atom in the bridge
-language. Any singular nonempty safe bridge must contain a regular residue-one atom. Do not redo
-finite-gap searches, rank-one incidence, raw residue-{0,1} products, or residue-zero-only safe
-return. A one-defect attack begins directly with phases `0|2|1` and `1|2|0`; a return attack
-uses exact arithmetic or an infinite/non-strict invariant on the complete projective state.
+**Use:** all further cube-root work starts from the consecutive-wall incidence normal form in
+`M4-S06`. Do not redo finite-gap searches, rank-one factorization, defect-count casework, raw
+residue-{0,1} products, pure-defect endpoints, or collective-wall cancellation.
 
-**Next:** construct an arithmetic, infinite, or hybrid safe-return invariant compatible with the
-irrational `Q(b,4)` cycle, or force an exact wall hit. Consume either outcome immediately in the
-alternating one-defect phases and successive defects.
+**Next:** realize the paired-Neary boundary in one incidence and prove its arbitrary-word
+converse, or exhibit a malformed incidence. Oriented safe-wall reachability remains an
+independent way to decide which endpoints can occur.
 
 **Artifact:** [`MatrixMortality/ParabolicBlade.lean`](MatrixMortality/ParabolicBlade.lean),
 [`MatrixMortality/ParabolicResidueWall.lean`](MatrixMortality/ParabolicResidueWall.lean),
+[`MatrixMortality/ParabolicDefect.lean`](MatrixMortality/ParabolicDefect.lean),
 [`audits/m43-parabolic-blade-2026-08-05.md`](audits/m43-parabolic-blade-2026-08-05.md), and
-[`audits/m43-residue-two-wall-2026-08-05.md`](audits/m43-residue-two-wall-2026-08-05.md).
+[`audits/m43-arbitrary-defect-2026-08-08.md`](audits/m43-arbitrary-defect-2026-08-08.md).
 
 ### M4-O08: Residue-two necessary wall
 
@@ -4047,7 +4048,7 @@ families are excluded by [`M4-O10`](#m4-o10-irrational-rotation-cone-fracture).
 
 **Evidence:** formalized
 
-**Disposition:** active
+**Disposition:** graduated
 
 After multiplying by 64 and reducing modulo three, every residue-two atom acts on
 `span(e₀,e₂)` as
@@ -4075,10 +4076,8 @@ only divisibility there, not an exact zero.
 opposite. The five-atom word `R²Q(b,3j+2)R²` is the `1|2|1` instance and needs no separate
 theorem.
 
-**Next:** lift `0|2|1` and `1|2|0` through arbitrary safe contexts with exact divisibility, an
-infinite/non-strict projective invariant, or a returning-word argument; do not use the fractured
-scalar `s` without a reachable-locus closure theorem or a finite wall-separated cone after
-[`M4-O10`](#m4-o10-irrational-rotation-cone-fracture).
+**Promotion:** subsumed by the complete arbitrary-run table
+[`M4-S06`](#m4-s06-arbitrary-defect-bridge-grammar).
 
 **Artifact:** `ParabolicBlade.oneDefect_wordProduct_ne_zero_of_same_residue` in
 [`MatrixMortality/ParabolicResidueWall.lean`](MatrixMortality/ParabolicResidueWall.lean) and
@@ -4367,6 +4366,57 @@ complete-frame machines outside this normal form.
 
 **Artifact:**
 [`audits/m43-deletion-scanner-2026-08-08.md`](audits/m43-deletion-scanner-2026-08-08.md).
+
+### M4-S06: Arbitrary defect bridge grammar
+
+**Kind:** arbitrary-length structure theorem
+
+**Evidence:** formalized
+
+**Disposition:** active
+
+After the canonical integral clearing, every safe atom restricts to one of two rank-one matrices
+and every residue-two atom restricts to
+
+```text
+A₂ = [[1,1],[2,1]],    A₂⁴ = 2I
+```
+
+on the protected plane. A maximal run of `m` defects between safe phases `i,k` has zero local
+incidence exactly when
+
+```text
+m ≡ 1 (mod 4) and i ≠ k,
+m ≡ 3 (mod 4) and i = k.
+```
+
+Lean factors every arbitrary skeleton into the product of these local incidences and proves the
+same theorem for the full cleared `3 × 3` residues. It then consumes the reduction at the
+physical level: a concrete rational safe/defect skeleton avoiding all bad runs is nonzero. This
+subsumes the one-defect phase cut `M4-S03`.
+
+A separate integral exterior lift proves that every nonempty pure-defect block induces an
+invertible `2 × 2` bridge. For arbitrary regular blocks, bridge singularity is exactly the
+exterior wall, every wall bridge is a nonzero outer product, and an arbitrary varying wall chain
+vanishes exactly at one incidence between consecutive walls. Its explicit nonzero cokernel is
+`(v,-4w)` for wall state `(0,v,w)`.
+
+**Scope:** all natural `β`, every body, both letters, arbitrary waits, arbitrary safe/defect run
+lengths, and arbitrarily many singular bridges. A bad residue skeleton is only a necessary
+first-layer condition; it is not asserted to be a rational zero. The theorem does not identify
+the surviving projective incidence with a semantic computation.
+
+**Use:** every minimal parabolic zero now has exactly two singular endpoint bridges, only
+invertible transport between them, and one zero projective incidence. Neither endpoint can be a
+nonempty pure-defect block. Delete all extra walls and all defect-count casework before attacking
+the remaining incidence.
+
+**Next:** construct paired-Neary endpoint contexts and identify the resulting incidence in both
+directions, or produce a malformed exact incidence. In parallel, decide whether nonsingular
+mixed bridges can transport the oriented cokernel into the annihilating sector.
+
+**Artifact:** [`MatrixMortality/ParabolicDefect.lean`](MatrixMortality/ParabolicDefect.lean) and
+[`audits/m43-arbitrary-defect-2026-08-08.md`](audits/m43-arbitrary-defect-2026-08-08.md).
 
 ### M4-C03: Zero-framed binary two-Lag compiler
 
