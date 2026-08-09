@@ -229,10 +229,12 @@ check_publication() {
 
   local major_sections='//main[@id="article"]/article/details[contains(concat(" ", normalize-space(@class), " "), " major-section ")]'
   local article='//main[@id="article"]/article'
-  local headline_result="$article/div[contains(concat(' ', normalize-space(@class), ' '), ' verdict ')]"
-  assert_xpath_count 1 "$headline_result"
-  assert_xpath_count 1 "($article/*)[1][self::div[contains(concat(' ', normalize-space(@class), ' '), ' verdict ')]]"
-  assert_xpath_count 2 "$headline_result/p"
+  local abstract='//div[contains(concat(" ", normalize-space(@class), " "), " shell ")]/section[contains(concat(" ", normalize-space(@class), " "), " abstract ")]'
+  assert_xpath_count 1 "$abstract[@aria-label='Abstract']"
+  assert_xpath_count 1 '(//div[contains(concat(" ", normalize-space(@class), " "), " shell ")]/*)[1][self::section[contains(concat(" ", normalize-space(@class), " "), " abstract ")]]'
+  assert_xpath_count 1 "$abstract/strong[string-length(normalize-space(.)) > 0]"
+  assert_xpath_count 2 "$abstract/p[string-length(normalize-space(.)) > 0]"
+  assert_xpath_count 0 '//head/meta[@name="description" or @property="og:description"]'
   assert_xpath_count 3 "$major_sections"
   assert_xpath_count 3 "$major_sections[not(@open)]"
   assert_xpath_count 3 "$major_sections/summary/h2"
@@ -278,7 +280,7 @@ check_collection() {
 
   assert_xpath_count 1 '//h1[normalize-space()="Matrix Mortality"]'
   assert_xpath_count 0 \
-    "$article/div[contains(concat(' ', normalize-space(@class), ' '), ' verdict ')]"
+    '//section[contains(concat(" ", normalize-space(@class), " "), " abstract ")]'
   assert_xpath_count 0 \
     "$article/details[contains(concat(' ', normalize-space(@class), ' '), ' major-section ')]"
   assert_xpath_count 1 \

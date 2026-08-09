@@ -117,6 +117,12 @@ real `h2` inside the `summary`. Do not replace this with JavaScript, synthetic b
 presentational concealment. Subsection fragment links must remain capable of revealing their
 closed ancestor, and print must expose all section contents.
 
+Every long-form result begins its `.shell` with one visible
+`<section class="abstract" aria-label="Abstract">` before the contents. State the searchable
+problem name, parameters, conclusion, restrictions, consequences, and unresolved boundary with
+the density of the existing verdict blocks. This prose is the sole abstract source; Eternalist
+derives description metadata from it. Do not maintain a hidden or separately authored abstract.
+
 The standalone HTML owns its mathematics directly. Author every structurally mathematical
 expression as native MathML; matrices use `mtable`. Do not introduce MathJax, KaTeX, TeX
 preprocessing, generated equation images, CSS-drawn notation, or a second mathematical source.
