@@ -468,6 +468,14 @@ accepting prefix discrepancy decidable. A live ternary compiler must therefore u
 solution-sensitive or nonrational domain and an unbounded, non-effectively bounded word residual,
 preserving final solvability without exact side transport.
 
+[`G3-D02`](SALVAGE.md#g3-d02-virtually-cyclic-prefix-discrepancy) cuts further into that global
+leaf. Even if only one computably selected witness per yes-instance is normal, a finite union of
+capped periodic residual rays reduces exact discrepancy evolution to one-counter reachability.
+The arbitrary-word converse then makes search within that decidable subclass sound. Fixed caps,
+orientation changes, overlapping rays, erasure, regular modes, and an indefinitely open carrier
+do not help. The residual must retain at least two independent unbounded factors, unbounded word
+order at fixed length, or a halting-dependent normal form unavailable to the reduction.
+
 The body-independent Hankel certificate
 [`MM-O04`](SALVAGE.md#mm-o04-uniform-rank-four-paired-series) proves that the
 current three-control paired coefficient series has exact rank four already on `{b,t}*`.
@@ -647,7 +655,7 @@ three symbol types but many transition rules does not meet this count.
 | --- | --- | --- |
 | Shift-equivariant zero incidence | Same-zero dimension three is point-line incidence in `P²`; [`G3-C02`](SALVAGE.md#g3-c02-fixed-bcbc-singular-recognizer) compiles the fixed branching test, while [`G3-O04`](SALVAGE.md#g3-o04-expanding-affine-history-no-go) kills its finite-target affine extension, [`G3-O05`](SALVAGE.md#g3-o05-cancellative-projective-state-tax) kills inverse-saturated dynamics, and [`G3-O12`](SALVAGE.md#g3-o12-positive-reset-dimension-tax) kills faithful full-cylinder queue codes | Build one computable history-sensitive singular formula over a mixed source ensemble; a legal cylinder must collapse to a plane and a transient coordinate must police the collision |
 | Positive free-cancellation discrepancy | Free cancellation performs queue-head deletion; accepting loops are cyclic, and three positive letters surject onto `F₂` | Couple the seven-state forbidden-triple normal form to Carvalho's program-dependent virtual endomorphism; [`G3-O09`](SALVAGE.md#g3-o09-quotient-blind-positive-boundary-collapse) kills quotient-blind all-loop-complete boundaries, so malformed positive spellings need a permanent one-way trap |
-| Global word-residual recoding | Longer noncommutative target atoms may discard additive bit-count preservation entirely | [`G3-O13`](SALVAGE.md#g3-o13-rational-serializer-pumping) kills rational exact side transport and [`G3-D01`](SALVAGE.md#g3-d01-bounded-prefix-residuals) kills computably bounded accepting lag; a survivor must be solution-sensitive or nonrational, carry an unbounded word residual, and prove both witness transport and absence of new boundary matches |
+| Global word-residual recoding | Longer noncommutative target atoms may discard additive bit-count preservation entirely | [`G3-O13`](SALVAGE.md#g3-o13-rational-serializer-pumping) kills rational exact side transport, [`G3-D01`](SALVAGE.md#g3-d01-bounded-prefix-residuals) kills bounded lag, and [`G3-D02`](SALVAGE.md#g3-d02-virtually-cyclic-prefix-discrepancy) kills every computably supplied one-carrier normal witness; a survivor needs at least two independent counters, genuine word-order entropy, or a halting-dependent normal form |
 | New three-schema rewriting source | Bi-tag, cyclic-tag, Lag, queue, and small semi-Thue systems separate data motion from finite control | Count transition schemas, not data symbols; the program table must live in boundaries or target words without adding source letters |
 | Exclusive stochastic or affine recognition | Zero/nonzero languages can be much smaller than exact coefficient series | Affine normalization, quantum measurement, and finite pair separation are not raw integer scalar-zero representations |
 | Direct projective or affine dynamics | Three `3 × 3` controls can encode switched dynamics on two homogeneous coordinates | Unguarded matrix choice demands an irreversible checksum for every illegal branch |
@@ -670,8 +678,9 @@ After the serializer audit, the net tree has five independent mature leaves:
    contradiction. Positive common shifts, minimality, and a cancellative semantic completion no
    longer suffice.
 3. **Global word-residual GPCP recoding.** Abandon exact side transport and prove a
-   solution-sensitive or nonrational three-pair normal form with an unbounded, non-effectively
-   bounded residual and both witness-transport directions.
+   three-pair normal form with at least two independent unbounded factors, genuine word-order
+   entropy, or a halting-dependent description unavailable to the reduction, together with both
+   witness-transport directions.
 4. **Native three-schema source.** Bypass both Neary's four roles and Nicolas's recurrent `+2`
    copy alphabet with a universal certificate having exactly three active schemas.
 5. **Spelling-sensitive positive cancellation.** Couple the three-letter free-group normal form

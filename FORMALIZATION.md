@@ -569,6 +569,14 @@ The same audit proves [`G3-D01`](SALVAGE.md#g3-d01-bounded-prefix-residuals) by 
 free-prefix-reduction graph; no Lean declaration currently extracts that generic decision
 procedure.
 
+[`G3-D02`](SALVAGE.md#g3-d02-virtually-cyclic-prefix-discrepancy) strengthens the global decision
+boundary. Lean checks that equality after arbitrary continuations forces the original prefixes to
+be comparable, so a first mismatch is permanent, and proves all four signed residual update laws
+and both terminal-boundary tests exactly. The two-power periodicity lemma and reduction of a
+finite union of capped periodic rays to one-counter reachability remain independently audited in
+[`m34-virtually-cyclic-discrepancy-2026-08-08.md`](audits/m34-virtually-cyclic-discrepancy-2026-08-08.md).
+No publication-facing declaration claims the generic decision procedure.
+
 For [`G3-M01`](SALVAGE.md#g3-m01-free-group-discrepancy-engine), the rank-`3m+1` closed-path
 basis, the trivial-or-cyclic fixed-subgroup classification, and the rank-zero-or-one equalizer
 corollary are audited consequences of Carvalho's explicit inverse transducer. Lean does not
@@ -789,6 +797,7 @@ with a complete arbitrary-word converse.
 | `Undecidability/NearyProblems.lean` | canonical `Fin 4` and `Fin 5` target instances |
 | `MacroIrreducibility.lean` | exact nonerasing Neary role-macro lower bound |
 | `TernaryClosedBlockNoGo.lean` | paired-Parikh independence, exact erasing macro lower bound, block semantics, and closed-return arithmetic |
+| `WordDiscrepancy.lean` | first-mismatch permanence and exact signed free-monoid residual dynamics |
 | `Undecidability/PairedProblems.lean` | canonical four-matrix target instance and structural promises |
 | `Undecidability/BinaryProblems.lean` | canonical structured `Z₆(2)` instance |
 | `Undecidability/PrefixProblems.lean` | canonical `M₁₀(2)` instance and all zero-padded dimensions |
@@ -814,6 +823,9 @@ with a complete arbitrary-word converse.
 | Stationary closed-block residuals obey the two discrete case splits | `TernaryClosedBlockNoGo.commonLowerDeletion_cases`, `TernaryClosedBlockNoGo.upperResidualShift_cases` |
 | Exact stroke terminal matching is equivalent to `consumed·b=c·produced` | `TernaryClosedBlockNoGo.tileHistory_terminal_match_iff_block_semantics` |
 | A positive morphism cannot contribute one lower letter per block across a width-at-least-two upper pulse | `TernaryClosedBlockNoGo.no_fractional_lower_contribution` |
+| Equality after arbitrary continuations forces prefix comparability | `WordDiscrepancy.prefixComparable_of_append_eq` |
+| An internal free-monoid mismatch cannot be repaired by continuations | `WordDiscrepancy.mismatch_persists` |
+| Signed prefix discrepancies obey the exact four transition laws and two terminal tests | `WordDiscrepancy.positive_positive_transition`, `WordDiscrepancy.positive_negative_transition`, `WordDiscrepancy.negative_negative_transition`, `WordDiscrepancy.negative_positive_transition`, `WordDiscrepancy.positive_terminal`, `WordDiscrepancy.negative_terminal` |
 | A nonsingular finite Hankel section lower-bounds every exact realization | `finiteHankel_card_le` |
 | Exact diagonal two-channel bridges pay two additional states | `exactDiagonalTwoChannel_card_lower_bound` |
 | A split finite-rank binary pair is mortal exactly when one return product vanishes | `ReturnFamily.pairGenerator_isMortal_iff` |
@@ -1058,6 +1070,10 @@ The rational serializer theorem `G3-O13` and bounded-residual decision theorem `
 audited paper theorems. Lean checks their canonical block-semantic interface and the final
 fractional-contribution throat, but not the generic asynchronous-transducer pumping construction,
 three-pulse factor classification, or extracted finite residual decision graph.
+
+The virtually cyclic decision theorem `G3-D02` remains audited. Lean checks the discrepancy
+transition calculus on which it acts, but not the two-power eventual-periodicity algorithm or the
+one-counter reachability reduction.
 
 For `G3-O03`, Lean checks the null-history counterexample, minimum-body uniqueness, base-five
 encoder, exact same-zero theorem, and integral mortality lift. The statement that both phase graph

@@ -131,6 +131,7 @@ file owns the mathematical stock.
 | [`G3-O12`](#g3-o12-positive-reset-dimension-tax) | obstruction | projectively full residual-local reset codes identify `q` with `ε` | formalized | graduated |
 | [`G3-O13`](#g3-o13-rational-serializer-pumping) | obstruction | finite-control exact serialization pumps to an impossible stationary return | audited; formalized core | graduated |
 | [`G3-D01`](#g3-d01-bounded-prefix-residuals) | decidable stratum | a supplied bound on every accepting prefix residual gives a finite decision graph | audited | stock |
+| [`G3-D02`](#g3-d02-virtually-cyclic-prefix-discrepancy) | decidable stratum | finite-mode capped periodic residual rays reduce to one-counter reachability | audited; formalized core | graduated |
 | [`G3-O06`](#g3-o06-periodic-ray-completion-and-branching-fracture) | compiler and obstruction | `bcbb` has an exact three-state periodic compiler, while `bcbc` defeats every single affine positional section | formalized | graduated |
 | [`G3-O07`](#g3-o07-near-fork-carry-collision) | obstruction | a terminal and nonterminal `bcbc` near-fork collide under the entire one-coordinate phase-line carry family | formalized | graduated |
 | [`G3-C02`](#g3-c02-fixed-bcbc-singular-recognizer) | fixed-instance compiler | a transient guard over one affine carry recognizes the complete `bcbc` language | audited | graduated |
@@ -4555,6 +4556,41 @@ prefix residual ceiling. A surviving word residual must be unbounded and non-eff
 
 **Artifact:**
 [`m34-rational-serializer-pumping-2026-08-08.md`](audits/m34-rational-serializer-pumping-2026-08-08.md).
+
+### G3-D02: Virtually cyclic prefix discrepancy
+
+**Kind:** decidable stratum
+
+**Evidence:** audited; formalized core
+
+**Disposition:** graduated
+
+For any GPCP instance, restrict the search to words whose signed prefix discrepancy stays, in
+each supplied finite mode, inside a finite set plus finitely many capped periodic rays
+
+```text
+±u p^n v.
+```
+
+Existence of a terminal word in this normal subclass is decidable. Every ray-to-ray update is a
+two-power word equation; its exponent pairs are effectively finite plus at most one arithmetic
+tail. Above a finite threshold, residual length is therefore one counter with fixed increments
+and finite congruence control. Pushdown reachability decides acceptance.
+
+**Scope:** caps, signs, periods, rotations, overlaps, erasing images, regular source modes, and an
+indefinitely open residual are allowed. The ray templates and mode graph must be computably
+supplied. Two independent exponents, unbounded word order at fixed length, and a halting-dependent
+normal form remain outside the theorem.
+
+**Use:** a global three-letter reduction cannot merely preserve one computably normal witness and
+use its arbitrary-word converse for soundness; if that witness has a virtually cyclic residual
+path, searching the normal subclass decides the source. Demand at least two counters or a genuine
+word-valued residual.
+
+**Formalized core:** [`WordDiscrepancy.lean`](MatrixMortality/WordDiscrepancy.lean) checks first-
+mismatch permanence and all signed transition and terminal equations. The two-power lemma and
+one-counter construction are audited in
+[`m34-virtually-cyclic-discrepancy-2026-08-08.md`](audits/m34-virtually-cyclic-discrepancy-2026-08-08.md).
 
 ### G3-O06: Periodic-ray completion and branching fracture
 

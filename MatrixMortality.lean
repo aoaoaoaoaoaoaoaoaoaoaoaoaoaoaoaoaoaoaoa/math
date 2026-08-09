@@ -76,6 +76,7 @@ import MatrixMortality.BranchingHistory
 import MatrixMortality.BranchingRecognizer
 import MatrixMortality.SquareRootPunctuation
 import MatrixMortality.TernaryClosedBlockNoGo
+import MatrixMortality.WordDiscrepancy
 import MatrixMortality.ExpandingHistoryNoGo
 import MatrixMortality.CancellativeProjectiveNoGo
 import MatrixMortality.PositiveShiftCountermodel
