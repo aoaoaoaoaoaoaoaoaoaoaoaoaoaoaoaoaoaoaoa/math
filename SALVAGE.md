@@ -142,9 +142,11 @@ file owns the mathematical stock.
 | [`G3-M02`](#g3-m02-square-root-punctuation-fracture) | partial mechanism | a rank-two square root gives an exact `SS`-free mortality grammar | formalized | closed |
 | [`G3-O10`](#g3-o10-square-root-boundary-saturation) | obstruction | every nondegenerate rank-one square root preserves boundary coefficient zeros | formalized | graduated |
 | [`G3-M01`](#g3-m01-free-group-discrepancy-engine) | partial mechanism | free cancellation implements queue deletion; the accepting subgroup is cyclic | audited | active |
+| [`G3-M03`](#g3-m03-three-positive-affine-exponent-cover) | partial mechanism | three positive letters cover every affine first-exponent slice exactly | formalized | active |
 | [`G3-O09`](#g3-o09-quotient-blind-positive-boundary-collapse) | obstruction | all-loop-complete group-factorizing boundaries accept a nonempty identity spelling | formalized core | graduated |
 | [`G3-O14`](#g3-o14-positive-cancellation-spelling-dichotomy) | obstruction | finite reversible spelling pumps, while singular one-coordinate spelling absorbs identity factors | formalized | graduated |
 | [`G3-O15`](#g3-o15-triangle-normal-form-rank-six) | obstruction | a standalone same-zero guard for triangle-irreducible spellings needs six states | formalized | graduated |
+| [`G3-O16`](#g3-o16-full-augmented-pair-dimension-tax) | obstruction | an independent `F×F×ℤ` detector cannot act faithfully in three dimensions | audited | graduated |
 | [`D2-S01`](#d2-s01-projective-hard-core) | structure theorem | `M₂(3)` is equivalent to two-generator projective incidence | audited | active |
 | [`D2-S02`](#d2-s02-monotone-affine-path-form) | structure theorem | normalized affine words form monotone exponent paths | audited | stock |
 | [`D2-D01`](#d2-d01-projectively-unimodular-stratum) | decidable stratum | projectively unimodular hard-core instances are decidable | audited | stock |
@@ -5117,6 +5119,48 @@ it preserves the same genuine witness.
 **Next:** realize `g(u)=h(u), κ(u)=1` through three positive controls using an everywhere-invertible
 unbounded cocycle, or abandon the persistent two-dimensional invertible quotient.
 
+### G3-M03: Three-positive affine exponent cover
+
+**Kind:** partial mechanism
+
+**Evidence:** formalized
+
+**Disposition:** active
+
+Let three positive letters evaluate in `F(a,b)` by
+
+```text
+x ↦ a,       y ↦ b,       z ↦ b⁻¹a⁻¹.
+```
+
+Give them signed weights `1,0,−1`. The induced word weight is exactly the exponent of `a` after
+free reduction. Lean proves the stronger slice statement: for every integer `d`, evaluation maps
+the positive words of weight `d` surjectively onto all free-group elements whose `a`-exponent is
+`d`. Thus the positive alphabet loses no element of an affine exponent slice, and the converse is
+automatic for every arbitrary positive spelling.
+
+The identity word `xyz` has weight zero. Appending it changes neither evaluation nor weight, so
+positive identity padding is harmless for exponent-one acceptance.
+
+For a rank-`r` source group with primitive `κ`, the audited Nielsen-Schreier step embeds it into
+the index-`r−1` subgroup of `F(a,b)` so that the `a`-exponent becomes `(r−1)κ`. Consequently
+Carvalho's predicate becomes a three-positive equalizer with one exact signed-weight constraint.
+
+**Scope:** the transported morphisms are defined on the finite-index subgroup, not on all of
+`F(a,b)`. Signed weight is an affine side condition, not yet an ordinary GPCP boundary equation or
+one scalar zero. The Nielsen basis and subgroup embedding remain audited paper algebra; Lean
+checks the complete ambient positive-cover seam.
+
+**Use:** abandon positive normal-form filters. Extend the correlated equalizer from the
+finite-index subgroup to three ambient positive controls while retaining the exact weight slice,
+or represent the group discrepancy and cocycle inseparably in three projective coordinates.
+
+**Artifact:** [`PositiveFreeCancellation.lean`](MatrixMortality/PositiveFreeCancellation.lean) and
+[`m34-three-positive-affine-cover-2026-08-10.md`](audits/m34-three-positive-affine-cover-2026-08-10.md).
+
+**Next:** compile the subgroup-domain equalizer and weight equation jointly into ordinary
+three-pair GPCP or a three-state scalar-zero series.
+
 ### G3-O09: Quotient-blind positive boundary collapse
 
 **Kind:** obstruction
@@ -5214,6 +5258,35 @@ exponent-one equalizer predicate.
 
 **Artifact:** [`PositiveFreeCancellation.lean`](MatrixMortality/PositiveFreeCancellation.lean) and
 [`m34-positive-cancellation-obstructions-2026-08-08.md`](audits/m34-positive-cancellation-obstructions-2026-08-08.md).
+
+### G3-O16: Full augmented-pair dimension tax
+
+**Kind:** obstruction
+
+**Evidence:** audited
+
+**Disposition:** graduated
+
+Suppose a homomorphic linear detector represents the full independent carrier
+`F×F×ℤ` and vanishes exactly when its first two entries agree and the integer entry is one.
+Fixing that integer slice and comparing diagonal pairs forces the two factor actions to be
+faithful; the product law makes their images commute.
+
+In characteristic zero, two commuting faithful nonabelian free groups do not embed in `GL₃`.
+An irreducible first factor has scalar commutant. A reducible representation has composition
+factors `1+1+1`, giving solvable image, or `2+1`, whose unit commutant is solvable. Either case
+contradicts faithfulness of the second free factor.
+
+**Scope:** this excludes the full independent direct-product carrier. Carvalho supplies only the
+correlated graph `u↦(g(u),h(u),κ(u))`; a three-dimensional representation of that graph need not
+extend to independent factors. The centralizer classification is independently audited, not
+kernel-checked here.
+
+**Use:** reject constructions which first represent two arbitrary free-group values and an
+independent counter, then compare them. Preserve program correlation throughout the recurrence.
+
+**Artifact:**
+[`m34-three-positive-affine-cover-2026-08-10.md`](audits/m34-three-positive-affine-cover-2026-08-10.md).
 
 ## Dimension Two
 

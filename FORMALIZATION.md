@@ -615,6 +615,15 @@ inspection also proves the exponent-one equalizer sharpening
 `C halts ↔ ∃u, g(u)=h(u) ∧ κ(u)=1`. Lean does not reconstruct the transducer or this external
 equivalence.
 
+[`G3-M03`](SALVAGE.md#g3-m03-three-positive-affine-exponent-cover) isolates the exact positive
+cover used by that surviving slice. Lean defines the first-generator exponent on `F₂` and the
+signed positive weight `#x−#z`, then proves that triangle evaluation preserves them exactly. More
+strongly, evaluation from positive words of any prescribed signed weight onto free-group elements
+of the matching exponent is surjective. The positive identity spelling `xyz` has weight zero, so
+padding preserves both the group value and affine constraint. The Nielsen-Schreier embedding of
+Carvalho's source group into the finite-index exponent subgroup and the full-pair `GL₃` no-go
+remain audited rather than formal dependencies.
+
 Lean checks the internal algebra at the positive boundary: three positive letters surject onto
 the binary free group; quotient-blind boundaries accepting `g` and `g²` admit a nonempty identity
 witness; every injective transition on a finite invariant semantic fibre pumps an identity loop;
@@ -1016,6 +1025,8 @@ with a complete arbitrary-word converse.
 | Transverse rank-two quotient fibres meet in the bilinear ray `[rv:us:vs]` | `PositiveResetNoGo.sameRay_bilinearFibrePoint` |
 | A homogeneous radix prepend cylinder has determinant `B²(B−1)(d_b−d_c)` | `PositiveResetNoGo.radixCylinder_det`, `PositiveResetNoGo.radixCylinder_det_ne_zero` |
 | Three positive letters evaluate surjectively onto the binary free group | `PositiveFreeCancellation.triangleEvaluate_surjective` |
+| Three positive letters cover every prescribed first-exponent slice exactly | `PositiveFreeCancellation.firstExponent_triangleEvaluate`, `PositiveFreeCancellation.triangleSliceEvaluate_surjective` |
+| Positive identity-triangle padding preserves both value and affine weight | `PositiveFreeCancellation.triangle_identity_padding` |
 | Quotient-blind boundaries accepting an element and its square admit a nonempty identity witness | `PositiveFreeCancellation.exists_nonempty_identity_witness` |
 | Every injective transition on a finite invariant semantic fibre pumps a positive period | `PositiveFreeCancellation.finiteFibre_identity_pumps` |
 | A singular one-coordinate lift has the quotient kernel and absorbs every quotient identity | `PositiveFreeCancellation.singularLift_kernel_eq_quotientKernel`, `PositiveFreeCancellation.singularLift_absorbs_quotientIdentity` |

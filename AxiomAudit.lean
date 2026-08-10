@@ -196,6 +196,9 @@ open MatrixMortality
 #print axioms PositiveResetNoGo.radixCylinder_det_ne_zero
 #print axioms PositiveFreeCancellation.triangle_relations
 #print axioms PositiveFreeCancellation.triangleEvaluate_surjective
+#print axioms PositiveFreeCancellation.firstExponent_triangleEvaluate
+#print axioms PositiveFreeCancellation.triangleSliceEvaluate_surjective
+#print axioms PositiveFreeCancellation.triangle_identity_padding
 #print axioms PositiveFreeCancellation.exists_nonempty_positive_identity
 #print axioms PositiveFreeCancellation.boundary_eq_of_accept_element_and_square
 #print axioms PositiveFreeCancellation.exists_nonempty_identity_witness

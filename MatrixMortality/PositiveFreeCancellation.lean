@@ -83,6 +83,98 @@ theorem triangleEvaluate_surjective : Function.Surjective triangleEvaluate := by
       rcases right_spelling with ⟨right_word, right_eq⟩
       exact ⟨left_word ++ right_word, by simp [left_eq, right_eq]⟩
 
+/-! ## Exact affine exponent slices -/
+
+/-- Signed weight recording one `x`, no `y`, and minus one `z`. -/
+def triangleWeight : TriangleLetter → ℤ
+  | .x => 1
+  | .y => 0
+  | .z => -1
+
+/-- Total signed weight of a positive triangle word. -/
+def triangleWordWeight (word : List TriangleLetter) : ℤ :=
+  (word.map triangleWeight).sum
+
+@[simp]
+theorem triangleWordWeight_append (left right : List TriangleLetter) :
+    triangleWordWeight (left ++ right) =
+      triangleWordWeight left + triangleWordWeight right := by
+  simp [triangleWordWeight]
+
+/-- Exponent homomorphism which counts the first binary free generator and ignores the second. -/
+def firstExponentHom : FreeGroup Bool →* Multiplicative ℤ :=
+  FreeGroup.lift fun bit => Multiplicative.ofAdd (if bit then 0 else 1)
+
+/-- First-generator exponent of a binary free-group element. -/
+def firstExponent (element : FreeGroup Bool) : ℤ :=
+  Multiplicative.toAdd (firstExponentHom element)
+
+@[simp]
+theorem firstExponent_one : firstExponent (1 : FreeGroup Bool) = 0 := by
+  simp [firstExponent]
+
+@[simp]
+theorem firstExponent_mul (left right : FreeGroup Bool) :
+    firstExponent (left * right) = firstExponent left + firstExponent right := by
+  simp [firstExponent]
+
+@[simp]
+theorem firstExponent_inv (element : FreeGroup Bool) :
+    firstExponent element⁻¹ = -firstExponent element := by
+  simp [firstExponent]
+
+@[simp]
+theorem firstExponent_of (bit : Bool) :
+    firstExponent (FreeGroup.of bit) = if bit then 0 else 1 := by
+  simp [firstExponent, firstExponentHom]
+
+/-- Positive triangle evaluation transports the signed word weight exactly to the affine group
+exponent. -/
+theorem firstExponent_triangleEvaluate (word : List TriangleLetter) :
+    firstExponent (triangleEvaluate word) = triangleWordWeight word := by
+  induction word with
+  | nil => simp [triangleWordWeight]
+  | cons letter word induction =>
+      cases letter <;>
+        simp [triangleWordWeight, triangleWeight, triangleGenerator, induction]
+
+/-- Positive words and free-group elements on one prescribed affine exponent slice. -/
+def TriangleWeightSlice (weight : ℤ) :=
+  {word : List TriangleLetter // triangleWordWeight word = weight}
+
+/-- Binary free-group elements on one prescribed first-generator exponent slice. -/
+def FirstExponentSlice (weight : ℤ) :=
+  {element : FreeGroup Bool // firstExponent element = weight}
+
+/-- Evaluation restricts from one positive signed-weight slice to the matching group slice. -/
+def triangleSliceEvaluate (weight : ℤ) :
+    TriangleWeightSlice weight → FirstExponentSlice weight :=
+  fun word =>
+    ⟨triangleEvaluate word.1, firstExponent_triangleEvaluate word.1 ▸ word.property⟩
+
+/-- Every element of an affine free-group exponent slice has a positive spelling on the exact
+matching signed-weight slice. -/
+theorem triangleSliceEvaluate_surjective (weight : ℤ) :
+    Function.Surjective (triangleSliceEvaluate weight) := by
+  intro element
+  obtain ⟨word, word_eq⟩ := triangleEvaluate_surjective element.1
+  have word_weight : triangleWordWeight word = weight := by
+    rw [← firstExponent_triangleEvaluate, word_eq]
+    exact element.property
+  exact ⟨⟨word, word_weight⟩, Subtype.ext word_eq⟩
+
+/-- The three-letter identity spelling has zero affine weight. -/
+theorem triangle_identity_weight : triangleWordWeight [.x, .y, .z] = 0 := by
+  rfl
+
+/-- Appending the positive identity triangle changes neither group value nor affine weight. -/
+theorem triangle_identity_padding (word : List TriangleLetter) :
+    triangleEvaluate (word ++ [.x, .y, .z]) = triangleEvaluate word ∧
+      triangleWordWeight (word ++ [.x, .y, .z]) = triangleWordWeight word := by
+  constructor
+  · simp [triangle_relations.1]
+  · simp [triangle_identity_weight]
+
 /-! ## Quotient-blind boundary collapse -/
 
 /-- Evaluation of a positive word in an arbitrary monoid. -/

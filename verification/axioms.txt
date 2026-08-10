@@ -315,6 +315,9 @@
 'MatrixMortality.PositiveResetNoGo.radixCylinder_det_ne_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.PositiveFreeCancellation.triangle_relations' depends on axioms: [propext, Quot.sound]
 'MatrixMortality.PositiveFreeCancellation.triangleEvaluate_surjective' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.PositiveFreeCancellation.firstExponent_triangleEvaluate' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.PositiveFreeCancellation.triangleSliceEvaluate_surjective' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.PositiveFreeCancellation.triangle_identity_padding' depends on axioms: [propext, Quot.sound]
 'MatrixMortality.PositiveFreeCancellation.exists_nonempty_positive_identity' depends on axioms: [propext,
  Classical.choice]
 'MatrixMortality.PositiveFreeCancellation.boundary_eq_of_accept_element_and_square' depends on axioms: [propext]
