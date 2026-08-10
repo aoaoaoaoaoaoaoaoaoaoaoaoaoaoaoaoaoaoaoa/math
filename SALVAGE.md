@@ -129,11 +129,12 @@ file owns the mathematical stock.
 | [`M4-C02`](#m4-c02-positive-overlap-queue-compiler) | compiler | promised positive two-frame queue acceptance compiles exactly to three integer `4 × 4` matrices | formalized | graduated |
 | [`M4-O11`](#m4-o11-pure-deletion-necessity) | obstruction | every long accepted overlap queue needs a state-preserving role empty on both correspondence sides | formalized | graduated |
 | [`M4-S04`](#m4-s04-arbitrary-switching-three-adic-exterior-flag) | structure theorem | every regular safe word preserves an oriented two-sector `3`-adic flag | formalized | active |
-| [`M4-S05`](#m4-s05-deletion-scanner-normal-form) | structure theorem | promised overlap queues contract to three exact deletion scanners | audited | active |
+| [`M4-S05`](#m4-s05-deletion-scanner-normal-form) | structure theorem | promised overlap queues contract to three exact deletion scanners | audited | graduated |
 | [`M4-S06`](#m4-s06-arbitrary-defect-bridge-grammar) | structure theorem | arbitrary defect skeletons and bridge walls reduce to one consecutive projective incidence | formalized | active |
 | [`M4-C03`](#m4-c03-zero-framed-binary-two-lag-compiler) | compiler | the principal scanner is literally binary context-2 Lag and compiles to `M₄(3)` | formalized | graduated |
 | [`M4-D01`](#m4-d01-zero-framed-binary-two-lag-decision) | decidable stratum | the entire zero-framed binary context-2 Lag kernel has an exact syntactic classification | formalized | graduated |
 | [`M4-D02`](#m4-d02-zero-framed-reset-scanner-decision) | decidable stratum | zero-run reduction contracts the reset scanner to a regular two-token quotient | audited | graduated |
+| [`M4-D03`](#m4-d03-periodic-conjugate-scanner-decision) | decidable stratum | primitive conjugacy and an odd-gap quotient decide the final periodic scanner | audited | graduated |
 | [`M4-O12`](#m4-o12-terminal-frame-morphism-obstruction) | obstruction | a fixed morphism cannot map a shared terminal to its own compulsory return frame | formalized | graduated |
 | [`G3-O01`](#g3-o01-four-role-macro-irreducibility) | obstruction | exact nonerasing macros cannot reduce the four source roles to three letters | formalized | graduated |
 | [`G3-S01`](#g3-s01-shift-equivariant-zero-incidence) | structure theorem | same-zero state dimension is equivariant projective incidence dimension | audited | active |
@@ -4389,7 +4390,7 @@ feed the oriented contexts directly into the alternating one-defect and multiple
 
 **Evidence:** audited
 
-**Disposition:** active
+**Disposition:** graduated
 
 Fix the pure-deletion self-loop forced by [`M4-O11`](#m4-o11-pure-deletion-necessity) and split
 the other three controller roles. Absorbing rows reduce to a two-letter dependency graph;
@@ -4408,20 +4409,21 @@ C:  a conjugate scanner with nonempty periodic rule production.
 
 In `C` the rule self-loop equation `A ++ P = K ++ A` has exactly the conjugate form
 `K=u++v`, `P=v++u`, `A=(u++v)^r++u`. The split is exhaustive over the two-by-two transition
-table. [`M4-D01`](#m4-d01-zero-framed-binary-two-lag-decision) subsequently decides `Lₙ`, and
-[`M4-D02`](#m4-d02-zero-framed-reset-scanner-decision) decides `Bₙ`, so only `C` remains live.
+table. [`M4-D01`](#m4-d01-zero-framed-binary-two-lag-decision) subsequently decides `Lₙ`,
+[`M4-D02`](#m4-d02-zero-framed-reset-scanner-decision) decides `Bₙ`, and
+[`M4-D03`](#m4-d03-periodic-conjugate-scanner-decision) decides `C`. The exhaustive source
+class is closed.
 
 **Scope:** promised binary two-state positive overlap queues. The transition classification and
 the elementary decisions outside the three kernels have been independently audited but are not
-one Lean declaration. `M4-D01` owns the later formal decision of `Lₙ`, and `M4-D02` owns the
-audited decision of `Bₙ`; no decision procedure or undecidability reduction is yet claimed here
-for `C`.
+one Lean declaration. `M4-D01` owns the formal decision of `Lₙ`; `M4-D02` and `M4-D03` own the
+audited decisions of `Bₙ` and `C`.
 
-**Use:** replace the generic search over four arbitrary roles by the one remaining exact source
-problem `C`. Its decision closes the entire promised overlap-queue trunk; its undecidability
-closes `M₄(3)` through `M4-C02`.
+**Use:** records why no universal source can inhabit the promised overlap-queue class compiled
+by `M4-C02`. Any new source route must leave this exhaustive normal form rather than revive one
+of its scanners.
 
-**Next:** decide or prove universality of `C`. Do not revisit `Lₙ`, `Bₙ`, or complete-frame
+**Next:** none inside this source class. Do not revisit `Lₙ`, `Bₙ`, `C`, or complete-frame
 machines outside this normal form.
 
 **Artifact:**
@@ -4576,11 +4578,48 @@ third is invariant. Translating `(bΣ)*b` back gives `(101|11)*10`.
 promise is used. The result is independently reconstructed but not Lean-formalized. It does not
 classify reset scanners outside `M4-S05`.
 
-**Use:** deletes `Bₙ` from the source frontier. The overlap-queue trunk now lives or dies solely
-with the periodic-conjugate scanner `C`.
+**Use:** deletes `Bₙ` from the source frontier. `M4-D03` subsequently closes the remaining
+periodic-conjugate scanner `C`.
 
 **Artifact:**
 [`audits/m43-reset-scanner-decision-2026-08-10.md`](audits/m43-reset-scanner-decision-2026-08-10.md).
+
+### M4-D03: Periodic-conjugate scanner decision
+
+**Kind:** decidable stratum
+
+**Evidence:** audited
+
+**Disposition:** graduated
+
+Let `A=0s`, with `s` nonempty, and let nonempty `P` obey `AP=KA`. The periodic-conjugate
+scanner is decidable on every instance promised to avoid `(R,A)`. Its initial rule phase is
+computed directly. If that phase returns, promised acceptance forces
+
+```text
+a=c=0,    A∈0⁺,    U∈0*,    W∈0*.
+```
+
+Put `p=#₁(K)`. The scanner rejects when `p=0` or `p` is even. For odd `p`, let `γᵣ` be the
+zero-gap preceding the `r`th `1` of `K²`, set `t₁=γ₁−1` and `tᵢ=γ_(2i−1)` for `2≤i≤p`, and
+put `Tᵢ=t₁+⋯+tᵢ`. It accepts exactly when `pTᵢ=2i−1` for some `i≤p`.
+
+The proof normalizes every conjugacy as `K=qᵈ`, `q=xy`, `P=(yx)ᵈ`, `A=qʳx`. A prefix telescope
+handles self-consumed production without block assumptions. Its counter
+`Δᵢ=pTᵢ−(2i−1)` counts the ones left on entry to erase state. The first `p` odd gaps exhaust
+the cyclic phases of `K`; thereafter every full phase block adds at least `#₀(K)−2≥0`, plus
+nonnegative unary spacers, so a later first acceptance is impossible.
+
+**Scope:** all finite binary parameters satisfying the conjugacy equation and the exact
+`M4-S05` promises. Avoidance of `(R,A)` is essential; unlike `M4-D01` and `M4-D02`, this is not
+an unconditional scanner theorem. The result is independently reconstructed but not
+Lean-formalized.
+
+**Use:** deletes `C`, the final kernel of `M4-S05`. The positive overlap-queue source trunk is
+closed; `M₄(3)` now lives on the parabolic matrix trunk.
+
+**Artifact:**
+[`audits/m43-periodic-conjugate-decision-2026-08-10.md`](audits/m43-periodic-conjugate-decision-2026-08-10.md).
 
 ### M4-O12: Terminal-frame morphism obstruction
 

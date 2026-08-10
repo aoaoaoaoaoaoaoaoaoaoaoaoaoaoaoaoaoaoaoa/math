@@ -484,6 +484,15 @@ when `W` contains `1` and the regular language `(101|11)*10` when `W∈0*`. No a
 code was retained because the result deletes its own attack lane. The exact evidence boundary is
 [`audits/m43-reset-scanner-decision-2026-08-10.md`](audits/m43-reset-scanner-decision-2026-08-10.md).
 
+The periodic-conjugate scanner is likewise decided outside the Lean ledger.
+[`M4-D03`](SALVAGE.md#m4-d03-periodic-conjugate-scanner-decision) computes the initial return,
+normalizes `AP=KA` into primitive conjugate powers, and reduces every remaining promised orbit
+to at most `#₁(K)` odd-gap tests. Its prefix telescope was independently reconstructed against
+self-consumed appendants and malformed queues. This closes the final consumer of the audited
+scanner semantics, so no scanner-specific Lean layer is retained. The evidence and exact use of
+the `(R,A)` avoidance promise are in
+[`audits/m43-periodic-conjugate-decision-2026-08-10.md`](audits/m43-periodic-conjugate-decision-2026-08-10.md).
+
 The odd-phase macro cut [`M4-S01`](SALVAGE.md#m4-s01-odd-phase-macro-cut) remains reported.
 Lean already defines the relevant phase residues and Table 2 tracks, but no theorem yet proves
 the even-track invariant through every reachable queue or the induced macro solvability

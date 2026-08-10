@@ -225,9 +225,9 @@ replace exact finite-state simulation.
 
 Victory means a checked many-one reduction to mortality of three integer `4 × 4` matrices,
 including a nonempty witness, denominator clearing, and soundness for every matrix word. The
-frontier has two live trunks and seven independently attackable nodes.
+frontier has one live trunk and four independently attackable nodes.
 
-#### Source trunk: positive overlap queues
+#### Closed source trunk: positive overlap queues
 
 The generic pushout [`M4-C01`](SALVAGE.md#m4-c01-two-state-pushout-compiler) already compiles any
 binary deterministic two-state scalar zero into two data matrices and one rank-one separator.
@@ -285,20 +285,28 @@ reduction contracts every postinitial rule boundary to the exact token system
 ```
 
 When `W` contains `1`, only `S=b` accepts. When `W∈0*`, `Q=ε` and pair deletion decides
-acceptance by the regular language `(101|11)*10`. This proof also uses neither promise. The
-source trunk is therefore down to the periodic-conjugate scanner `C` alone.
+acceptance by the regular language `(101|11)*10`. This proof also uses neither promise.
 
-The direct Neary morphism is dead by
+The final periodic-conjugate node `C` is retired by
+[`M4-D03`](SALVAGE.md#m4-d03-periodic-conjugate-scanner-decision). A finite first-return
+calculation eliminates every case except the unary-zero frame. Primitive conjugacy then reduces
+that residue to at most `#₁(K)` odd-gap tests in `K²`; a monotone block counter proves that no
+later phase can accept first. This theorem uses the promised avoidance of `(R,A)`. All three
+kernels in the exhaustive `M4-S05` normal form are therefore decidable, and the positive
+overlap-queue source trunk is closed.
+
+The direct Neary morphism is independently dead by
 [`M4-O12`](SALVAGE.md#m4-o12-terminal-frame-morphism-obstruction): a morphism cannot send the
 common terminal to `0` followed by the image of an initial word which already ends in that
-terminal. A reduction into either surviving scanner must exploit overlap or history, or use a
-different universal source.
+terminal. Any new source compiler must leave the exhaustive positive overlap-queue class rather
+than alter or revive one of its scanners.
 
 The exact checks and evidence boundary are in
 [`audits/m43-deletion-scanner-2026-08-08.md`](audits/m43-deletion-scanner-2026-08-08.md),
 [`audits/m43-overlap-queue-2026-08-08.md`](audits/m43-overlap-queue-2026-08-08.md),
 [`audits/m43-overlap-lag-decision-2026-08-10.md`](audits/m43-overlap-lag-decision-2026-08-10.md),
-[`audits/m43-reset-scanner-decision-2026-08-10.md`](audits/m43-reset-scanner-decision-2026-08-10.md), and
+[`audits/m43-reset-scanner-decision-2026-08-10.md`](audits/m43-reset-scanner-decision-2026-08-10.md),
+[`audits/m43-periodic-conjugate-decision-2026-08-10.md`](audits/m43-periodic-conjugate-decision-2026-08-10.md), and
 [`audits/m43-alternating-defect-literature-2026-08-07.md`](audits/m43-alternating-defect-literature-2026-08-07.md).
 
 #### Matrix trunk: parabolic bridge language
@@ -1368,12 +1376,12 @@ universal computation.
 
 ## Execution order
 
-1. Attack the five open `M₄(3)` nodes independently: universality versus decidability of the
-   periodic-conjugate scanner `C`; original parabolic semantic incidence and oriented
-   transport under `M4-S04` and `M4-S06`; and the retuned fixed-row annihilator and arbitrary-word
-   converse under `M4-M04`. `Lₙ`, `Bₙ`, the alternating/multiple residue-two defect grammar,
-   and the retuned intended-word semantics are closed. Cross-pollinate exact source and exterior
-   invariants, but do not revive complete-token queues, one-coordinate dynamics, finite
+1. Attack the four open `M₄(3)` matrix nodes independently: original parabolic semantic
+   incidence and oriented transport under `M4-S04` and `M4-S06`; and the retuned fixed-row
+   annihilator and arbitrary-word converse under `M4-M04`. The exhaustive positive
+   overlap-queue source class, alternating/multiple residue-two defect grammar, and retuned
+   intended-word semantics are closed. Cross-pollinate exact exterior invariants, but do not
+   revive deletion scanners, complete-token queues, one-coordinate dynamics, finite
    wall-separated cones, or literal Neary recodings.
 2. Use formalized `MM-O01`, `G3-O01`, `MM-O03`, and `MM-O04` to reject exact packings, macros,
    and bridges without conflating their scope with solvability preservation.
