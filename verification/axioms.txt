@@ -29,6 +29,11 @@
  Quot.sound]
 'MatrixMortality.EndpointPrefixCompiler.DerivesAlong.endpointEquation' depends on axioms: [propext]
 'MatrixMortality.EndpointPrefixCompiler.endpointEquation_iff_derivesAlong' depends on axioms: [propext]
+'MatrixMortality.EndpointPrefixCompiler.derivesAlong_of_endpointEquation_of_headSeparated' depends on axioms: [propext,
+ Quot.sound]
+'MatrixMortality.EndpointPrefixCompiler.endpointPrefixForcing_of_headSeparated' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.EndpointPrefixCompiler.endpointEquation_iff_derivesAlong_of_headSeparated' depends on axioms: [propext,
+ Quot.sound]
 'MatrixMortality.EndpointPrefixCompiler.underflow_endpointEquation' does not depend on any axioms
 'MatrixMortality.EndpointPrefixCompiler.underflow_not_derivesAlong' depends on axioms: [propext]
 'MatrixMortality.EndpointPrefixCompiler.nonnegative_prefix_budget' depends on axioms: [propext, Quot.sound]

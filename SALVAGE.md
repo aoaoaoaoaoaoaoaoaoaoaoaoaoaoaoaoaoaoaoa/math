@@ -134,6 +134,7 @@ file owns the mathematical stock.
 | [`G3-D02`](#g3-d02-virtually-cyclic-prefix-discrepancy) | decidable stratum | finite-mode capped periodic residual rays reduce to one-counter reachability | audited; formalized core | graduated |
 | [`G3-D03`](#g3-d03-one-sided-corrected-drift) | decidable stratum | one-sided positive weighted drift bounds every accepting residual | audited; formalized core | graduated |
 | [`G3-C03`](#g3-c03-endpoint-prefix-compiler) | compiler | endpoint-forcing three-production normal systems compile directly to `GPCP(3)` | formalized | active |
+| [`G3-C04`](#g3-c04-head-separated-endpoint-debt) | compiler criterion | a fresh output head makes every endpoint witness causally lawful | formalized | active |
 | [`G3-O06`](#g3-o06-periodic-ray-completion-and-branching-fracture) | compiler and obstruction | `bcbb` has an exact three-state periodic compiler, while `bcbc` defeats every single affine positional section | formalized | graduated |
 | [`G3-O07`](#g3-o07-near-fork-carry-collision) | obstruction | a terminal and nonterminal `bcbc` near-fork collide under the entire one-coordinate phase-line carry family | formalized | graduated |
 | [`G3-C02`](#g3-c02-fixed-bcbc-singular-recognizer) | fixed-instance compiler | a transient guard over one affine carry recognizes the complete `bcbc` language | audited | graduated |
@@ -4666,6 +4667,41 @@ normal systems. The source must also evade [`G3-D03`](#g3-d03-one-sided-correcte
 
 **Next:** make a three-rule queue architecture terminal-self-certifying without a recurrent copy
 schema; demand a complete arbitrary-trace converse, not merely forward telescoping.
+
+### G3-C04: Head-separated endpoint debt
+
+**Kind:** compiler criterion
+
+**Evidence:** formalized
+
+**Disposition:** active
+
+For every production `αₓX⟶Xβₓ`, suppose `βₓ` begins with a symbol which occurs nowhere in `αₓ`.
+Compare the source and `αₓ` at the first rule of an arbitrary endpoint witness. If `αₓ` is not
+already a prefix of the source, prefix comparability forces
+
+```text
+αₓ = source · d,       βₓ β(rest) = d α(rest) target
+```
+
+for a nonempty debt `d`. The left equation's second line begins with the fresh output symbol;
+the right side begins with a symbol of `αₓ`, a contradiction. Repeating this argument after each
+lawful step reconstructs the whole trace. Lean proves both the direct reconstruction and the
+stronger consequence that endpoint prefix forcing holds for every source and target.
+
+**Scope:** the condition is sufficient, not necessary. It neither constructs a universal
+three-production source nor defeats the one-sided corrected-drift decision boundary. A cyclic
+marker scheme which closes into finitely many token types remains decidable.
+
+**Use:** make fresh output heads a default invariant in the native-source lane. The remaining
+construction problem is wholly global: retain an unbounded open word residue and mixed drift
+while using only three such productions.
+
+**Artifact:** [`EndpointPrefixCompiler.lean`](MatrixMortality/EndpointPrefixCompiler.lean) and
+[`m34-head-separated-endpoint-debt-2026-08-10.md`](audits/m34-head-separated-endpoint-debt-2026-08-10.md).
+
+**Next:** construct or exclude an undecidable three-production head-separated prefix-normal
+family with mixed drift in every positive Parikh direction.
 
 ### G3-O06: Periodic-ray completion and branching fracture
 

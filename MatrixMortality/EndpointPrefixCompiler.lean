@@ -93,6 +93,106 @@ def EndpointPrefixForcing {Rule Symbol : Type*} (system : NormalSystem Rule Symb
     EndpointEquation system source target (past ++ rule :: suffix) →
       consumed system (past ++ [rule]) <+: source ++ produced system past
 
+/-- Every output begins with a symbol absent from the word consumed by the same rule. -/
+def HeadSeparated {Rule Symbol : Type*} (system : NormalSystem Rule Symbol) : Prop :=
+  ∀ rule, ∃ head tail,
+    system.produce rule = head :: tail ∧ head ∉ system.consume rule
+
+private theorem first_consume_prefix_of_endpointEquation
+    {Rule Symbol : Type*} (system : NormalSystem Rule Symbol)
+    (separated : HeadSeparated system) (rule : Rule) (trace : List Rule)
+    (source target : List Symbol)
+    (endpoint : EndpointEquation system source target (rule :: trace)) :
+    system.consume rule <+: source := by
+  simp only [EndpointEquation, consumed, produced] at endpoint
+  rw [List.append_assoc] at endpoint
+  rcases List.append_eq_append_iff.mp endpoint with
+    ⟨debt, consume_eq, output_eq⟩ | ⟨residual, source_eq, _⟩
+  · cases debt with
+    | nil =>
+        exact ⟨[], by simpa using consume_eq⟩
+    | cons debtHead debtTail =>
+        obtain ⟨outputHead, outputTail, produce_eq, absent⟩ := separated rule
+        have heads_eq : outputHead = debtHead := by
+          simpa [produce_eq] using congrArg List.head? output_eq
+        apply False.elim
+        apply absent
+        rw [heads_eq, consume_eq]
+        exact List.mem_append_right source (List.mem_cons_self debtHead debtTail)
+  · exact ⟨residual, source_eq.symm⟩
+
+/-- Local head separation rules out the first underflow in every endpoint witness. -/
+theorem derivesAlong_of_endpointEquation_of_headSeparated
+    {Rule Symbol : Type*} (system : NormalSystem Rule Symbol)
+    (separated : HeadSeparated system) {trace : List Rule} {source target : List Symbol}
+    (endpoint : EndpointEquation system source target trace) :
+    DerivesAlong system trace source target := by
+  induction trace generalizing source with
+  | nil =>
+      have source_eq : source = target := by
+        simpa [EndpointEquation, consumed, produced] using endpoint
+      subst target
+      exact DerivesAlong.nil source
+  | cons rule trace induction =>
+      obtain ⟨residual, source_eq⟩ :=
+        first_consume_prefix_of_endpointEquation system separated rule trace source target endpoint
+      let middle := residual ++ system.produce rule
+      have tail_endpoint : EndpointEquation system middle target trace := by
+        simp only [EndpointEquation, consumed, produced] at endpoint ⊢
+        rw [← source_eq] at endpoint
+        apply List.append_cancel_left (as := system.consume rule)
+        simpa [middle, List.append_assoc] using endpoint
+      exact DerivesAlong.cons ⟨residual, source_eq.symm, rfl⟩
+        (induction tail_endpoint)
+
+private theorem DerivesAlong.consumed_prefix_at
+    {Rule Symbol : Type*} {system : NormalSystem Rule Symbol}
+    {trace : List Rule} {source target : List Symbol}
+    (derivation : DerivesAlong system trace source target)
+    (past : List Rule) (rule : Rule) (suffix : List Rule)
+    (trace_eq : trace = past ++ rule :: suffix) :
+    consumed system (past ++ [rule]) <+: source ++ produced system past := by
+  induction past generalizing trace source with
+  | nil =>
+      subst trace
+      cases derivation with
+      | cons step _ =>
+          obtain ⟨residual, source_eq, _⟩ := step
+          exact ⟨residual, by simpa [consumed, produced] using source_eq.symm⟩
+  | cons first past induction =>
+      subst trace
+      cases derivation with
+      | @cons _ _ _ middle _ step tail =>
+          obtain ⟨residual, source_eq, middle_eq⟩ := step
+          obtain ⟨remainder, prefix_eq⟩ :=
+            induction tail rfl
+          refine ⟨remainder, ?_⟩
+          rw [middle_eq] at prefix_eq
+          rw [source_eq]
+          simp only [consumed, produced, List.cons_append, List.append_assoc]
+          simpa only [List.append_assoc] using
+            congrArg (system.consume first ++ ·) prefix_eq
+
+/-- Head separation is a source-local sufficient condition for endpoint prefix forcing. -/
+theorem endpointPrefixForcing_of_headSeparated
+    {Rule Symbol : Type*} (system : NormalSystem Rule Symbol)
+    (separated : HeadSeparated system) (source target : List Symbol) :
+    EndpointPrefixForcing system source target := by
+  intro past rule suffix endpoint
+  have derivation :=
+    derivesAlong_of_endpointEquation_of_headSeparated system separated endpoint
+  exact derivation.consumed_prefix_at past rule suffix rfl
+
+/-- Under head separation, the aggregate endpoint equation is already an exact execution
+certificate for every source, target, and trace. -/
+theorem endpointEquation_iff_derivesAlong_of_headSeparated
+    {Rule Symbol : Type*} (system : NormalSystem Rule Symbol)
+    (separated : HeadSeparated system) (source target : List Symbol) (trace : List Rule) :
+    EndpointEquation system source target trace ↔
+      DerivesAlong system trace source target := by
+  exact ⟨derivesAlong_of_endpointEquation_of_headSeparated system separated,
+    DerivesAlong.endpointEquation system⟩
+
 private theorem derivesSuffix_of_endpointEquation {Rule Symbol : Type*}
     (system : NormalSystem Rule Symbol) (source target : List Symbol)
     (forcing : EndpointPrefixForcing system source target)

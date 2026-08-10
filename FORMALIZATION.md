@@ -585,6 +585,14 @@ counterexample: the aggregate boundary equation holds although the first rule is
 Thus the compiler theorem is publication-facing; existence of an undecidable source satisfying
 its hypothesis is not claimed.
 
+[`G3-C04`](SALVAGE.md#g3-c04-head-separated-endpoint-debt) discharges that forcing hypothesis
+locally whenever every production emits a nonempty word whose first symbol is absent from the
+same production's consumed word. Lean compares the two initial prefixes of an endpoint equality:
+if the source ends inside the consumed word, the remaining nonempty debt begins with a consumed
+symbol, while the output begins with the forbidden fresh symbol. This contradiction removes the
+first underflow, reconstructs the complete trace, and proves endpoint prefix forcing for every
+source and target. Universality inside this restricted source class remains open.
+
 [`G3-D03`](SALVAGE.md#g3-d03-one-sided-corrected-drift) is formalized only at its arithmetic
 throat: every prefix of a nonnegative corrected-drift trace spends at most the total endpoint
 budget. The finite-control potential criterion, accepting-residual bound, exact search graph, and
@@ -851,6 +859,7 @@ with a complete arbitrary-word converse.
 | An internal free-monoid mismatch cannot be repaired by continuations | `WordDiscrepancy.mismatch_persists` |
 | Signed prefix discrepancies obey the exact four transition laws and two terminal tests | `WordDiscrepancy.positive_positive_transition`, `WordDiscrepancy.positive_negative_transition`, `WordDiscrepancy.negative_negative_transition`, `WordDiscrepancy.negative_positive_transition`, `WordDiscrepancy.positive_terminal`, `WordDiscrepancy.negative_terminal` |
 | Endpoint prefix forcing makes the aggregate boundary equation equivalent to lawful traced execution | `EndpointPrefixCompiler.endpointEquation_iff_derivesAlong` |
+| A locally head-separated output makes every endpoint witness a lawful trace | `EndpointPrefixCompiler.endpointEquation_iff_derivesAlong_of_headSeparated`, `EndpointPrefixCompiler.endpointPrefixForcing_of_headSeparated` |
 | The unrestricted endpoint telescope has an explicit false underflow witness | `EndpointPrefixCompiler.underflow_endpointEquation`, `EndpointPrefixCompiler.underflow_not_derivesAlong` |
 | Every nonnegative corrected-drift prefix stays within its terminal budget | `EndpointPrefixCompiler.nonnegative_prefix_budget` |
 | A nonsingular finite Hankel section lower-bounds every exact realization | `finiteHankel_card_le` |
