@@ -102,11 +102,6 @@ private theorem endpointSupportContractionCoefficient_a_zero_le {a : ℝ}
     linarith [abundanceTarget_lt_half]
   have hrDenominator : 0 < 1 - a - abundanceTarget := by
     nlinarith [abundanceTarget_lt_half]
-  have htwoA : 2 * a - 1 < 0 := by
-    nlinarith [abundanceTarget_lt_half]
-  have hlinear : 247062 * a - 170593 < 0 := by
-    norm_num [abundanceTarget] at haUpper ⊢
-    nlinarith
   have hbracket : 0 < 2 - 2 * a - 3 * abundanceTarget + 2 * a * abundanceTarget := by
     norm_num [abundanceTarget]
     nlinarith
@@ -139,28 +134,37 @@ private theorem endpointSupportContractionCoefficient_a_zero_le {a : ℝ}
     simp only [mul_zero, add_zero]
     field_simp [hrDenominator.ne']
     ring
-  have hquadratic :
-      1725224063520 * a ^ 2 - 1252425163513 * a + 141473747640 ≤ 0 := by
+  let certificateNumerator : ℝ :=
+    (1 + entropySlack) *
+        (2 - 2 * a - 3 * abundanceTarget + 2 * a * abundanceTarget) *
+        (3 * (1 - abundanceTarget) * (1 - 2 * a)) -
+      (1 - dependentShare) * targetComplement *
+        ((1 - a - abundanceTarget) *
+            (3 * (1 - abundanceTarget) * (1 - 2 * a)) +
+          (3 * (1 - a - abundanceTarget) - 4 * a * (1 - 2 * abundanceTarget)) *
+            (2 - 2 * a - 3 * abundanceTarget + 2 * a * abundanceTarget))
+  have hcertificateNumerator : 0 ≤ certificateNumerator := by
     have hinterval : 0 ≤ (a - 1 / 4) * (abundanceTarget - a) :=
       mul_nonneg (sub_nonneg.2 haLower) (sub_nonneg.2 haUpper)
-    norm_num [abundanceTarget] at hinterval haLower haUpper ⊢
+    dsimp only [certificateNumerator]
+    norm_num [dependentShare, entropySlack, targetComplement, abundanceTarget]
+      at hinterval haLower haUpper ⊢
     nlinarith
   rw [← sub_nonneg]
   rw [show
     (1 + entropySlack) -
           endpointSupportContractionCoefficient a (endpointConditionalMean a 0) =
-        -(1725224063520 * a ^ 2 - 1252425163513 * a + 141473747640) /
-          (30000000 * (2 * a - 1) * (247062 * a - 170593)) by
+        certificateNumerator /
+          ((2 - 2 * a - 3 * abundanceTarget + 2 * a * abundanceTarget) *
+            (3 * (1 - abundanceTarget) * (1 - 2 * a))) by
       change
         (1 + entropySlack) - endpointSupportContractionCoefficient a center = _
       rw [endpointSupportContractionCoefficient, hfirstRatio, hsecondRatio]
-      dsimp only [dependentShare, targetComplement, entropySlack]
-      field_simp [hbracket.ne', hsecondDenominator.ne', htwoA.ne, hlinear.ne]
-      norm_num [abundanceTarget]
+      dsimp only [certificateNumerator]
+      field_simp [hbracket.ne', hsecondDenominator.ne']
       ring]
-  exact div_nonneg (neg_nonneg.2 hquadratic)
-    (mul_nonneg_of_nonpos_of_nonpos
-      (mul_nonpos_of_nonneg_of_nonpos (by norm_num) htwoA.le) hlinear.le)
+  exact div_nonneg hcertificateNumerator
+    (mul_nonneg hbracket.le hsecondDenominator.le)
 
 private theorem endpointSupportContractionCoefficient_quarter_q_le {q : ℝ}
     (hqLower : 1 / 4 ≤ q) (hqUpper : q ≤ 1 / 2) :
@@ -208,37 +212,34 @@ private theorem endpointSupportContractionCoefficient_quarter_q_le {q : ℝ}
     rw [hcenterFormula]
     field_simp [hdenominator.ne', hdenominatorDifference.ne']
     ring
-  have hcubic :
-      12987041327040 * q ^ 3 + 791906745892 * q ^ 2 -
-          3557481722348 * q - 623772054713 ≤ 0 := by
-    have hcube : q ^ 3 ≤ (1 / 2 : ℝ) * q ^ 2 := by
-      nlinarith [mul_nonneg (sq_nonneg q) (sub_nonneg.2 hqUpper)]
-    have hsquare : q ^ 2 ≤ (1 / 2 : ℝ) * q := by
-      nlinarith [mul_nonneg hq₀.le (sub_nonneg.2 hqUpper)]
+  have hcube : q ^ 3 ≤ (1 / 2 : ℝ) * q ^ 2 := by
+    nlinarith [mul_nonneg (sq_nonneg q) (sub_nonneg.2 hqUpper)]
+  have hsquare : q ^ 2 ≤ (1 / 2 : ℝ) * q := by
+    nlinarith [mul_nonneg hq₀.le (sub_nonneg.2 hqUpper)]
+  let certificateNumerator : ℝ :=
+    (1 + entropySlack) * joinNumerator * (3 * (denominator - numerator)) -
+      (1 - dependentShare) * targetComplement *
+        (q * denominator * (3 * (denominator - numerator)) +
+          (3 * denominator - 4 * numerator) * joinNumerator)
+  have hcertificateNumerator : 0 ≤ certificateNumerator := by
+    dsimp only [certificateNumerator, joinNumerator, numerator, denominator]
+    norm_num [dependentShare, entropySlack, targetComplement, abundanceTarget]
+      at hcube hsquare hqLower hqUpper ⊢
     nlinarith
-  have hlinearPositive : 0 < 2 * q + 1 := by linarith
-  have hquadraticPositive :
-      0 < 247062 * q ^ 2 + 276469 * q + 23531 := by
-    nlinarith [sq_nonneg q]
   rw [← sub_nonneg]
   rw [show
     (1 + entropySlack) -
           endpointSupportContractionCoefficient q (endpointConditionalMean (1 / 4) q) =
-        -(12987041327040 * q ^ 3 + 791906745892 * q ^ 2 -
-            3557481722348 * q - 623772054713) /
-          (60000000 * (2 * q + 1) *
-            (247062 * q ^ 2 + 276469 * q + 23531)) by
+        certificateNumerator /
+          (joinNumerator * (3 * (denominator - numerator))) by
       change
         (1 + entropySlack) - endpointSupportContractionCoefficient q center = _
       rw [endpointSupportContractionCoefficient, hfirstRatio, hsecondRatio]
-      dsimp only [dependentShare, targetComplement, entropySlack]
-      field_simp [hjoinNumerator.ne', hdenominatorDifference.ne',
-        hlinearPositive.ne', hquadraticPositive.ne']
-      dsimp only [joinNumerator, numerator, denominator]
-      norm_num [abundanceTarget]
+      dsimp only [certificateNumerator]
+      field_simp [hjoinNumerator.ne', hdenominatorDifference.ne']
       ring]
-  exact div_nonneg (neg_nonneg.2 hcubic)
-    (mul_nonneg (mul_nonneg (by norm_num) hlinearPositive.le) hquadraticPositive.le)
+  exact div_nonneg hcertificateNumerator
+    (mul_nonneg hjoinNumerator.le (mul_nonneg (by norm_num) hdenominatorDifference.le))
 
 /-- On the high-diagonal endpoint rectangle, the support-aware contraction coefficient fits
 inside Yu's strict entropy slack. -/

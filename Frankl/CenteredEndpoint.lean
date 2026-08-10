@@ -32,7 +32,11 @@ private noncomputable def endpointCenteredCurveDeriv3 (y : ℝ) : ℝ :=
     (y * (y - 1) ^ 2 * (y + 1) ^ 2)
 
 private noncomputable def endpointCenteredCurveThirdPolynomial (y : ℝ) : ℝ :=
-  10000001 * y ^ 3 + 23841483 * y ^ 2 - 30000003 * y + 3841481
+  4 * ((1 - dependentShare) * targetComplement ^ 2) * y ^ 2
+    + 4 * ((1 - dependentShare) * targetComplement ^ 2)
+    + ((1 + entropySlack) * targetComplement) * y ^ 3
+    - 3 * ((1 + entropySlack) * targetComplement) * y
+    - 2 * ((1 + entropySlack) * targetComplement)
 
 private theorem hasDerivAt_endpointCenteredCurve {y : ℝ} (hy₀ : 0 < y) (hy₁ : y < 1) :
     HasDerivAt endpointCenteredCurve (endpointCenteredCurveDeriv y) y := by
@@ -216,20 +220,36 @@ private theorem endpointCenteredCurveThirdPolynomial_monotoneOn :
   have hxyProduct : targetComplement ^ 2 ≤ x * y := by
     nlinarith [mul_nonneg (sub_nonneg.2 hx.1) hy₀,
       mul_nonneg hs₀ (sub_nonneg.2 (hx.1.trans hxy))]
+  have haNonneg :
+      0 ≤ 4 * ((1 - dependentShare) * targetComplement ^ 2) := by
+    norm_num [dependentShare, targetComplement, abundanceTarget]
+  have hsNonneg : 0 ≤ (1 + entropySlack) * targetComplement := by
+    norm_num [entropySlack, targetComplement, abundanceTarget]
   have hbase :
-      0 < 10000001 * (3 * targetComplement ^ 2) +
-        23841483 * (2 * targetComplement) - 30000003 := by
-    norm_num [targetComplement, abundanceTarget]
+      0 < (1 + entropySlack) * targetComplement * (3 * targetComplement ^ 2) +
+        4 * ((1 - dependentShare) * targetComplement ^ 2) *
+          (2 * targetComplement) -
+        3 * ((1 + entropySlack) * targetComplement) := by
+    norm_num [dependentShare, entropySlack, targetComplement, abundanceTarget]
+  have hsquareSum :
+      3 * targetComplement ^ 2 ≤ y ^ 2 + y * x + x ^ 2 := by
+    nlinarith
+  have hlinearSum : 2 * targetComplement ≤ y + x := by
+    nlinarith [hx.1, hx.1.trans hxy]
+  have hsquareScaled := mul_le_mul_of_nonneg_left hsquareSum hsNonneg
+  have hlinearScaled := mul_le_mul_of_nonneg_left hlinearSum haNonneg
   have hquotient :
-      0 ≤ 10000001 * (y ^ 2 + y * x + x ^ 2) +
-        23841483 * (y + x) - 30000003 := by
-    nlinarith [hxyProduct]
+      0 ≤ (1 + entropySlack) * targetComplement * (y ^ 2 + y * x + x ^ 2) +
+        4 * ((1 - dependentShare) * targetComplement ^ 2) * (y + x) -
+        3 * ((1 + entropySlack) * targetComplement) := by
+    nlinarith
   rw [← sub_nonneg]
   rw [show endpointCenteredCurveThirdPolynomial y -
         endpointCenteredCurveThirdPolynomial x =
       (y - x) *
-        (10000001 * (y ^ 2 + y * x + x ^ 2) +
-          23841483 * (y + x) - 30000003) by
+        ((1 + entropySlack) * targetComplement * (y ^ 2 + y * x + x ^ 2) +
+          4 * ((1 - dependentShare) * targetComplement ^ 2) * (y + x) -
+          3 * ((1 + entropySlack) * targetComplement)) by
     dsimp only [endpointCenteredCurveThirdPolynomial]
     ring]
   exact mul_nonneg (sub_nonneg.2 hxy) hquotient
@@ -237,92 +257,107 @@ private theorem endpointCenteredCurveThirdPolynomial_monotoneOn :
 private theorem endpointCenteredCurveDeriv3_nonneg_of_polynomial_nonpos {y : ℝ}
     (hy₀ : 0 ≤ y) (hpolynomial : endpointCenteredCurveThirdPolynomial y ≤ 0) :
     0 ≤ endpointCenteredCurveDeriv3 y := by
-  have hnumerator :
-      4 * ((1 - dependentShare) * targetComplement ^ 2) * y ^ 2 +
-          4 * ((1 - dependentShare) * targetComplement ^ 2) +
-          ((1 + entropySlack) * targetComplement) * y ^ 3 -
-          3 * ((1 + entropySlack) * targetComplement) * y -
-          2 * ((1 + entropySlack) * targetComplement) ≤ 0 := by
-    rw [show
-      4 * ((1 - dependentShare) * targetComplement ^ 2) * y ^ 2 +
-            4 * ((1 - dependentShare) * targetComplement ^ 2) +
-            ((1 + entropySlack) * targetComplement) * y ^ 3 -
-            3 * ((1 + entropySlack) * targetComplement) * y -
-            2 * ((1 + entropySlack) * targetComplement) =
-          (123531 / 2000000000000 : ℝ) * endpointCenteredCurveThirdPolynomial y by
-        norm_num [dependentShare, entropySlack, targetComplement, abundanceTarget,
-          endpointCenteredCurveThirdPolynomial]
-        ring]
-    exact mul_nonpos_of_nonneg_of_nonpos (by norm_num)
-      hpolynomial
   rw [endpointCenteredCurveDeriv3]
-  exact div_nonneg (neg_nonneg.2 hnumerator)
+  exact div_nonneg (neg_nonneg.2 hpolynomial)
     (mul_nonneg (mul_nonneg hy₀ (sq_nonneg (y - 1))) (sq_nonneg (y + 1)))
 
 private theorem endpointCenteredCurveDeriv3_nonpos_of_polynomial_nonneg {y : ℝ}
     (hy₀ : 0 ≤ y) (hpolynomial : 0 ≤ endpointCenteredCurveThirdPolynomial y) :
     endpointCenteredCurveDeriv3 y ≤ 0 := by
-  have hnumerator :
-      0 ≤ 4 * ((1 - dependentShare) * targetComplement ^ 2) * y ^ 2 +
-          4 * ((1 - dependentShare) * targetComplement ^ 2) +
-          ((1 + entropySlack) * targetComplement) * y ^ 3 -
-          3 * ((1 + entropySlack) * targetComplement) * y -
-          2 * ((1 + entropySlack) * targetComplement) := by
-    rw [show
-      4 * ((1 - dependentShare) * targetComplement ^ 2) * y ^ 2 +
-            4 * ((1 - dependentShare) * targetComplement ^ 2) +
-            ((1 + entropySlack) * targetComplement) * y ^ 3 -
-            3 * ((1 + entropySlack) * targetComplement) * y -
-            2 * ((1 + entropySlack) * targetComplement) =
-          (123531 / 2000000000000 : ℝ) * endpointCenteredCurveThirdPolynomial y by
-        norm_num [dependentShare, entropySlack, targetComplement, abundanceTarget,
-          endpointCenteredCurveThirdPolynomial]
-        ring]
-    exact mul_nonneg (by norm_num) hpolynomial
   rw [endpointCenteredCurveDeriv3]
-  exact div_nonpos_of_nonpos_of_nonneg (neg_nonpos.2 hnumerator)
+  exact div_nonpos_of_nonpos_of_nonneg (neg_nonpos.2 hpolynomial)
     (mul_nonneg (mul_nonneg hy₀ (sq_nonneg (y - 1))) (sq_nonneg (y + 1)))
 
-private noncomputable def endpointCenteredTangent : ℝ := 33497 / 50000
+private noncomputable def endpointCenteredTangent : ℝ :=
+  670545261496963 / 1000000000000000
 
-private theorem endpointCenteredTangent_bounds :
-    1 / 6000000 < endpointCenteredCurve endpointCenteredTangent ∧
-      0 < endpointCenteredCurveDeriv endpointCenteredTangent ∧
-      endpointCenteredCurveDeriv endpointCenteredTangent < 1 / 5000000 := by
-  have hy := abs_log_sub_scaledLogSeries_le (terms := 40) (scale := 1)
+private theorem endpointCenteredTangent_log_bounds :
+    (-39966407444181545942 : ℝ) / 10 ^ 20 < log endpointCenteredTangent ∧
+      log endpointCenteredTangent < (-39966407444181545941 : ℝ) / 10 ^ 20 := by
+  have h := abs_log_sub_scaledLogSeries_le (terms := 72) (scale := 1)
     (x := endpointCenteredTangent)
     (by norm_num [endpointCenteredTangent])
     (by norm_num [endpointCenteredTangent, abs_of_nonneg])
-  have hcomplement := abs_log_sub_scaledLogSeries_le (terms := 40) (scale := 2)
+  rw [abs_le] at h
+  norm_num [scaledLogSeries, scaledLogSeriesError, logSeries, logSeriesError,
+    Finset.sum_range_succ, endpointCenteredTangent, abs_of_nonneg, abs_of_nonpos] at h ⊢
+  constructor <;> linarith
+
+private theorem endpointCenteredTangent_complement_log_bounds :
+    (-111031629865384492052 : ℝ) / 10 ^ 20 < log (1 - endpointCenteredTangent) ∧
+      log (1 - endpointCenteredTangent) <
+        (-111031629865384492051 : ℝ) / 10 ^ 20 := by
+  have h := abs_log_sub_scaledLogSeries_le (terms := 72) (scale := 2)
     (x := 1 - endpointCenteredTangent)
     (by norm_num [endpointCenteredTangent])
     (by norm_num [endpointCenteredTangent, abs_of_nonneg])
-  have hsquare := abs_log_sub_scaledLogSeries_le (terms := 40) (scale := 1)
+  rw [abs_le] at h
+  norm_num [scaledLogSeries, scaledLogSeriesError, logSeries, logSeriesError,
+    Finset.sum_range_succ, endpointCenteredTangent, abs_of_nonneg, abs_of_nonpos] at h ⊢
+  constructor <;> linarith
+
+private theorem endpointCenteredTangent_square_log_bounds :
+    (-79932814888363091883 : ℝ) / 10 ^ 20 < log (endpointCenteredTangent ^ 2) ∧
+      log (endpointCenteredTangent ^ 2) <
+        (-79932814888363091882 : ℝ) / 10 ^ 20 := by
+  have h := abs_log_sub_scaledLogSeries_le (terms := 72) (scale := 1)
     (x := endpointCenteredTangent ^ 2)
     (by norm_num [endpointCenteredTangent])
     (by norm_num [endpointCenteredTangent, abs_of_nonneg, abs_of_nonpos])
-  have hsquareComplement := abs_log_sub_scaledLogSeries_le (terms := 40) (scale := 1)
+  rw [abs_le] at h
+  norm_num [scaledLogSeries, scaledLogSeriesError, logSeries, logSeriesError,
+    Finset.sum_range_succ, endpointCenteredTangent, abs_of_nonneg, abs_of_nonpos] at h ⊢
+  constructor <;> linarith
+
+private theorem endpointCenteredTangent_squareComplement_log_bounds :
+    (-59716622162557994496 : ℝ) / 10 ^ 20 <
+        log (1 - endpointCenteredTangent ^ 2) ∧
+      log (1 - endpointCenteredTangent ^ 2) <
+        (-59716622162557994495 : ℝ) / 10 ^ 20 := by
+  have h := abs_log_sub_scaledLogSeries_le (terms := 72) (scale := 1)
     (x := 1 - endpointCenteredTangent ^ 2)
     (by norm_num [endpointCenteredTangent])
     (by norm_num [endpointCenteredTangent, abs_of_nonneg, abs_of_nonpos])
-  have htwo := abs_log_two_sub_center_le
-  rw [abs_le] at hy hcomplement hsquare hsquareComplement htwo
-  rw [show 1 - endpointCenteredTangent ^ 2 = (1377950991 : ℝ) / 2500000000 by
-    norm_num [endpointCenteredTangent]] at hsquareComplement
-  rw [show endpointCenteredTangent ^ 2 = (1122049009 : ℝ) / 2500000000 by
-    norm_num [endpointCenteredTangent]]
-    at hsquare
+  rw [abs_le] at h
   norm_num [scaledLogSeries, scaledLogSeriesError, logSeries, logSeriesError,
-    Finset.sum_range_succ, endpointCenteredTangent, abs_of_nonneg, abs_of_nonpos] at hy
-  norm_num [scaledLogSeries, scaledLogSeriesError, logSeries, logSeriesError,
-    Finset.sum_range_succ, endpointCenteredTangent, abs_of_nonneg, abs_of_nonpos]
-    at hcomplement
-  norm_num [scaledLogSeries, scaledLogSeriesError, logSeries, logSeriesError,
-    Finset.sum_range_succ, abs_of_nonneg, abs_of_nonpos] at hsquare
-  norm_num [scaledLogSeries, scaledLogSeriesError, logSeries, logSeriesError,
-    Finset.sum_range_succ, abs_of_nonneg, abs_of_nonpos] at hsquareComplement
-  norm_num [logTwoCenter, logTwoRadius] at htwo
-  have hcurve : 1 / 6000000 < endpointCenteredCurve endpointCenteredTangent := by
+    Finset.sum_range_succ, endpointCenteredTangent, abs_of_nonneg, abs_of_nonpos] at h ⊢
+  constructor <;> linarith
+
+private theorem endpointCenteredTangent_logTwo_bounds :
+    (69314718055994530941 : ℝ) / 10 ^ 20 < log 2 ∧
+      log 2 < (69314718055994530942 : ℝ) / 10 ^ 20 := by
+  have h := abs_log_sub_logSeries_le (terms := 72)
+    (x := (1 : ℝ) / 2) (by norm_num [abs_of_nonneg])
+  have hhalfLog : log ((1 : ℝ) / 2) = -log 2 := by
+    rw [one_div, log_inv]
+  rw [hhalfLog] at h
+  rw [abs_le] at h
+  norm_num [logSeries, logSeriesError, Finset.sum_range_succ, abs_of_nonneg,
+    abs_of_nonpos] at h ⊢
+  constructor <;> linarith
+
+private theorem endpointCenteredTangent_bounds :
+    1 / (25 * 10 ^ 16) < endpointCenteredCurve endpointCenteredTangent ∧
+      0 < endpointCenteredCurveDeriv endpointCenteredTangent ∧
+      endpointCenteredCurveDeriv endpointCenteredTangent <
+        1 / (7 * 10 ^ 17) := by
+  have hy := endpointCenteredTangent_log_bounds
+  have hcomplement := endpointCenteredTangent_complement_log_bounds
+  have hsquare := endpointCenteredTangent_square_log_bounds
+  have hsquareComplement := endpointCenteredTangent_squareComplement_log_bounds
+  have htwo := endpointCenteredTangent_logTwo_bounds
+  rcases hy with ⟨hyLower, hyUpper⟩
+  rcases hcomplement with ⟨hcomplementLower, hcomplementUpper⟩
+  rcases hsquare with ⟨hsquareLower, hsquareUpper⟩
+  rcases hsquareComplement with ⟨hsquareComplementLower, hsquareComplementUpper⟩
+  rcases htwo with ⟨htwoLower, htwoUpper⟩
+  norm_num [endpointCenteredTangent] at hyLower hyUpper
+  norm_num [endpointCenteredTangent] at hcomplementLower hcomplementUpper
+  norm_num [endpointCenteredTangent] at hsquareLower hsquareUpper
+  norm_num [endpointCenteredTangent] at hsquareComplementLower hsquareComplementUpper
+  norm_num at htwoLower htwoUpper
+  have hcurve :
+      1 / (25 * 10 ^ 16) < endpointCenteredCurve endpointCenteredTangent := by
     rw [endpointCenteredCurve, binEntropy_eq_negMulLog_add_negMulLog_one_sub,
       binEntropy_eq_negMulLog_add_negMulLog_one_sub]
     simp only [negMulLog]
@@ -335,7 +370,9 @@ private theorem endpointCenteredTangent_bounds :
     norm_num [dependentShare, entropySlack, targetComplement, abundanceTarget,
       endpointCenteredTangent]
     linarith
-  have hderivUpper : endpointCenteredCurveDeriv endpointCenteredTangent < 1 / 5000000 := by
+  have hderivUpper :
+      endpointCenteredCurveDeriv endpointCenteredTangent <
+        1 / (7 * 10 ^ 17) := by
     rw [endpointCenteredCurveDeriv, binEntropy_eq_negMulLog_add_negMulLog_one_sub]
     simp only [negMulLog]
     norm_num [dependentShare, entropySlack, targetComplement, abundanceTarget,
@@ -498,28 +535,30 @@ theorem endpointCenteredCurve_pos {y : ℝ}
   have hbounds := endpointCenteredTangent_bounds
   have htangent := endpointCenteredCurve_tangent_lower hy
   rcases le_total y endpointCenteredTangent with _ | hTangentY
-  · have hdelta : endpointCenteredTangent - y < 1 / 19 := by
+  · have hdelta : endpointCenteredTangent - y < 1 / 18 := by
       have hyLower := hy.1
       norm_num [endpointCenteredTangent, targetComplement, abundanceTarget] at hyLower ⊢
       linarith
     have hproductUpper :
         endpointCenteredCurveDeriv endpointCenteredTangent *
-            (endpointCenteredTangent - y) < 1 / 95000000 := by
+            (endpointCenteredTangent - y) < 1 / (126 * 10 ^ 17) := by
       calc
         endpointCenteredCurveDeriv endpointCenteredTangent *
               (endpointCenteredTangent - y) <
-            endpointCenteredCurveDeriv endpointCenteredTangent * (1 / 19) :=
+            endpointCenteredCurveDeriv endpointCenteredTangent * (1 / 18) :=
           mul_lt_mul_of_pos_left hdelta hbounds.2.1
-        _ < (1 / 5000000) * (1 / 19) :=
+        _ < (1 / (7 * 10 ^ 17)) * (1 / 18) :=
           mul_lt_mul_of_pos_right hbounds.2.2 (by norm_num)
-        _ = 1 / 95000000 := by norm_num
+        _ = 1 / (126 * 10 ^ 17) := by norm_num
     norm_num at hbounds hproductUpper ⊢
     linarith [hbounds.1]
   · have hproductNonneg :
         0 ≤ endpointCenteredCurveDeriv endpointCenteredTangent *
           (y - endpointCenteredTangent) :=
       mul_nonneg hbounds.2.1.le (sub_nonneg.2 hTangentY)
-    linarith [hbounds.1]
+    have hcurvePos : 0 < endpointCenteredCurve endpointCenteredTangent :=
+      (by norm_num : (0 : ℝ) < 1 / (25 * 10 ^ 16)).trans hbounds.1
+    exact (add_pos_of_pos_of_nonneg hcurvePos hproductNonneg).trans_le htangent
 
 private theorem curve_eq_scaled_endpointCertificateObjective {x : ℝ}
     (hxLower : 1 / 4 ≤ x) (hxUpper : x ≤ 1 / 2) :

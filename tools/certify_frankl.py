@@ -4,7 +4,7 @@
 # dependencies = ["python-flint==0.9.0"]
 # ///
 
-"""Outward-rounded certificate for the Frankl abundance bound 76469/200000.
+"""Outward-rounded certificates for the Frankl abundance bounds.
 
 The analytic reduction leaves two compact bivariate entropy gaps.  This script
 certifies those gaps with Arb ball arithmetic.  Two entropy-zero corner squares
@@ -33,16 +33,29 @@ Box = tuple[Interval, Interval]
 
 ctx.prec = 160
 
+
+@dataclass(frozen=True)
+class Parameters:
+    target: Q
+    dependent_share: Q
+    entropy_slack: Q
+
+
 TARGETS = {
-    "19099/50000": Q(19099, 50000),
-    "76469/200000": Q(76469, 200000),
+    "19099/50000": Parameters(Q(19099, 50000), Q(7, 200), Q(1, 10_000_000)),
+    "76469/200000": Parameters(Q(76469, 200000), Q(7, 200), Q(1, 10_000_000)),
+    "38234553336670271/100000000000000000": Parameters(
+        Q(38_234_553_336_670_271, 100_000_000_000_000_000),
+        Q(356_069_804_374_481, 10_000_000_000_000_000),
+        Q(1, 1_000_000_000_000_000_000),
+    ),
 }
 
 
-def target_argument(arguments: list[str]) -> tuple[str, Q]:
+def target_argument(arguments: list[str]) -> tuple[str, Parameters]:
     match arguments:
         case []:
-            label = "76469/200000"
+            label = "38234553336670271/100000000000000000"
         case ["--target", label]:
             pass
         case _:
@@ -54,9 +67,10 @@ def target_argument(arguments: list[str]) -> tuple[str, Q]:
     return label, TARGETS[label]
 
 
-TARGET_LABEL, TARGET_Q = target_argument(sys.argv[1:])
-ALPHA_Q = Q(7, 200)
-SLACK_Q = Q(1, 10_000_000)
+TARGET_LABEL, PARAMETERS = target_argument(sys.argv[1:])
+TARGET_Q = PARAMETERS.target
+ALPHA_Q = PARAMETERS.dependent_share
+SLACK_Q = PARAMETERS.entropy_slack
 CORNER_Q = Q(1, 1000)
 
 

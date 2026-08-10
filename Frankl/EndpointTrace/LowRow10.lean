@@ -1,5 +1,6 @@
 import Frankl.EndpointTrace.LowRow10Trace0
 import Frankl.EndpointTrace.LowRow10Trace1
+import Frankl.EndpointTrace.LowRow10Trace2
 
 namespace Frankl
 

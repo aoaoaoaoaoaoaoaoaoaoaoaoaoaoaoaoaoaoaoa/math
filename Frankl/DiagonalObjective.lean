@@ -596,11 +596,11 @@ private def diagonalPointRectangle : RatRectangle :=
 
 private def diagonalPointDual : DualBall :=
   { value :=
-      { center := (5260542694123 : ℚ) / 9007199254740992
-        radius := (232255961151111 : ℚ) / 18446744073709551616 }
+      { center := (11081782092117185 : ℚ) / 18446744073709551616
+        radius := (233921511375501 : ℚ) / 18446744073709551616 }
     gradient := some
       ({ center := 0
-         radius := (594384274312103 : ℚ) / 18446744073709551616 },
+         radius := (597631279288919 : ℚ) / 18446744073709551616 },
        { center := 0, radius := 0 }) }
 
 private theorem lowerRegionExpression_point_nonneg :

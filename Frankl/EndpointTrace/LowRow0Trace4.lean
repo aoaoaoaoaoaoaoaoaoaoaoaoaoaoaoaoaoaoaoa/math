@@ -116,7 +116,9 @@ private def lowRow0Cell1RootULUTree : Subdivision :=
   (.leaf .interval)
   (.leaf .interval)))
   (.vertical ((2911 : ℚ) / 128000)
+  (.horizontal ((1 : ℚ) / 2000)
   (.leaf .interval)
+  (.leaf .interval))
   (.leaf .interval))
 
 private theorem lowRow0Cell1RootULUTree_certified :

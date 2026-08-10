@@ -530,8 +530,8 @@ theorem unionClosed_exists_abundant_coordinate_of_two {n : ℕ}
   have hcardPositive : (0 : ℝ) < family.card := by exact_mod_cast hfamily.card_pos
   exact ⟨coordinate, (lt_div_iff hcardPositive).1 hmean⟩
 
-/-- Universal abundance theorem at `76469 / 200000` for finite nontrivial union-closed Boolean
-families. -/
+/-- Universal abundance theorem at `38234553336670271 / 100000000000000000` for finite
+nontrivial union-closed Boolean families. -/
 theorem unionClosed_exists_abundant_coordinate {n : ℕ} (family : Finset (BitCube n))
     (hfamily : family.Nonempty) (hnontrivial : family ≠ {BitCube.zero n})
     (hclosed : ∀ x ∈ family, ∀ y ∈ family, BitCube.union x y ∈ family) :

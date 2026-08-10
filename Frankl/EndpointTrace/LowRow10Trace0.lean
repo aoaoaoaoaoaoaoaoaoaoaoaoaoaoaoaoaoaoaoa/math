@@ -242,44 +242,4 @@ theorem lowRow10Cell5Root_nonneg {a q : ℝ}
     apply RatBall.ofBounds_contains <;> norm_num at * <;> linarith
   · exact lowRow10Cell5RootTree_certified
 
-private def lowRow10Cell6RootRectangle : RatRectangle :=
-  ⟨RatBall.ofBounds ((9 : ℚ) / 64) ((5 : ℚ) / 32),
-    RatBall.ofBounds ((5 : ℚ) / 32) ((3 : ℚ) / 16)⟩
-
-private def lowRow10Cell6RootTree : Subdivision :=
-.horizontal ((19 : ℚ) / 128)
-  (.vertical ((11 : ℚ) / 64)
-  (.leaf .interval)
-  (.leaf .interval))
-  (.vertical ((11 : ℚ) / 64)
-  (.leaf .interval)
-  (.leaf .interval))
-
-private theorem lowRow10Cell6RootTree_certified :
-    certifySubdivision 12 64 32 lowRow10Cell6RootRectangle
-      CertificateObjective.endpointExpression lowRow10Cell6RootTree =
-        some () := by
-  rfl
-
-/-- One static reflected endpoint-certificate chunk. -/
-theorem lowRow10Cell6Root_nonneg {a q : ℝ}
-    (haLower : ((9 : ℝ) / 64) ≤ a)
-    (haUpper : a ≤ ((5 : ℝ) / 32))
-    (hqLower : ((5 : ℝ) / 32) ≤ q)
-    (hqUpper : q ≤ ((3 : ℝ) / 16)) :
-    0 ≤ endpointCertificateObjective a q := by
-  apply endpointCertificateObjective_nonneg_of_subdivision
-      (rectangle := lowRow10Cell6RootRectangle) (tree := lowRow10Cell6RootTree)
-  · norm_num [lowRow10Cell6RootRectangle, RatBall.ofBounds, RatBall.lower]
-  · norm_num [lowRow10Cell6RootRectangle, RatBall.ofBounds]
-  · norm_num [lowRow10Cell6RootRectangle, RatBall.ofBounds, RatBall.lower]
-  · norm_num [lowRow10Cell6RootRectangle, RatBall.ofBounds, RatBall.upper, abundanceTarget]
-  · norm_num [lowRow10Cell6RootRectangle, RatBall.ofBounds, RatBall.lower]
-  · norm_num [lowRow10Cell6RootRectangle, RatBall.ofBounds, RatBall.upper]
-  · rw [lowRow10Cell6RootRectangle]
-    apply RatBall.ofBounds_contains <;> norm_num at * <;> linarith
-  · rw [lowRow10Cell6RootRectangle]
-    apply RatBall.ofBounds_contains <;> norm_num at * <;> linarith
-  · exact lowRow10Cell6RootTree_certified
-
 end Frankl

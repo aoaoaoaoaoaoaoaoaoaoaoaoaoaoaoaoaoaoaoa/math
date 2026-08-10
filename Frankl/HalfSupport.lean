@@ -5,11 +5,17 @@ namespace Frankl
 
 open Real Set
 
-/-- The dependent-coupling share in the strict Yu gap. -/
-noncomputable def dependentShare : ℝ := 7 / 200
+/-- Exact rational dependent-coupling share in the strict Yu gap. -/
+abbrev dependentShareQ : ℚ := 356069804374481 / 10000000000000000
 
-/-- The strict multiplicative slack in the marginal entropy term. -/
-noncomputable def entropySlack : ℝ := 1 / 10000000
+/-- Real-valued dependent-coupling share used by the analytic reduction. -/
+noncomputable def dependentShare : ℝ := dependentShareQ
+
+/-- Exact rational multiplicative slack in the marginal entropy term. -/
+abbrev entropySlackQ : ℚ := 1 / 1000000000000000000
+
+/-- Real-valued strict multiplicative slack used by the analytic reduction. -/
+noncomputable def entropySlack : ℝ := entropySlackQ
 
 /-- The linear marginal coefficient after normalizing the independent term of the strict Yu
 gap. -/

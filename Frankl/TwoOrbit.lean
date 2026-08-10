@@ -4,8 +4,11 @@ namespace Frankl
 
 open Real Set
 
-/-- The abundance threshold certified by the present Frankl reduction. -/
-noncomputable def abundanceTarget : ℝ := 76469 / 200000
+/-- Exact rational abundance threshold certified by the present Frankl reduction. -/
+abbrev abundanceTargetQ : ℚ := 38234553336670271 / 100000000000000000
+
+/-- Real-valued abundance threshold used by the analytic reduction. -/
+noncomputable def abundanceTarget : ℝ := abundanceTargetQ
 
 theorem abundanceTarget_gt_three_eighths : (3 : ℝ) / 8 < abundanceTarget := by
   norm_num [abundanceTarget]
@@ -18,7 +21,7 @@ theorem goldenRatioThreshold_lt_abundanceTarget :
     (3 - √5) / 2 < abundanceTarget := by
   have hsqrt : 0 ≤ √(5 : ℝ) := sqrt_nonneg 5
   have hsquare : (√(5 : ℝ)) ^ 2 = 5 := sq_sqrt (by norm_num)
-  dsimp [abundanceTarget]
+  norm_num [abundanceTarget, abundanceTargetQ]
   nlinarith
 
 /-- The mass on the lower mean in the two-point exact-mean decomposition. -/

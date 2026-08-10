@@ -11,9 +11,9 @@ namespace CertificateObjective
 def yuGap (independent marginal dependent : EntropyExpr) : EntropyExpr :=
   .sub
     (.add
-      (.mul (.constant (193 / 200)) independent)
-      (.mul (.constant (7 / 200)) dependent))
-    (.mul (.constant (10000001 / 10000000)) marginal)
+      (.mul (.constant (1 - dependentShareQ)) independent)
+      (.mul (.constant dependentShareQ) dependent))
+    (.mul (.constant (1 + entropySlackQ)) marginal)
 
 /-- Exact independent entropy of two diagonal atoms. -/
 def diagonalIndependent
@@ -79,7 +79,7 @@ def endpoint
 /-- Endpoint-orbit mass in certificate coordinates. -/
 def endpointUpperWeight : EntropyExpr :=
   .div
-    (.mul (.constant 2) (.sub (.constant (76469 / 200000)) .horizontal))
+    (.mul (.constant 2) (.sub (.constant abundanceTargetQ) .horizontal))
     (.sub
       (.add (.constant 1) .vertical)
       (.mul (.constant 2) .horizontal))
@@ -92,17 +92,17 @@ def endpointExpression : EntropyExpr :=
 /-- Lower diagonal mean on the region `w ≤ 2t`. -/
 def lowerRegionLowerMeanExpression : EntropyExpr :=
   .sub
-    (.constant (76469 / 200000))
+    (.constant abundanceTargetQ)
     (.mul .horizontal
       (.div
-        (.mul .vertical (.sub (.constant (1 / 2)) (.constant (76469 / 200000))))
+        (.mul .vertical (.sub (.constant (1 / 2)) (.constant abundanceTargetQ)))
         (.sub (.constant 1) .horizontal)))
 
 /-- Upper diagonal mean on the region `w ≤ 2t`. -/
 def lowerRegionUpperMeanExpression : EntropyExpr :=
   .add
-    (.constant (76469 / 200000))
-    (.mul .vertical (.sub (.constant (1 / 2)) (.constant (76469 / 200000))))
+    (.constant abundanceTargetQ)
+    (.mul .vertical (.sub (.constant (1 / 2)) (.constant abundanceTargetQ)))
 
 /-- Reflected diagonal objective on the region `w ≤ 2t`. -/
 def lowerRegionExpression : EntropyExpr :=
@@ -111,16 +111,16 @@ def lowerRegionExpression : EntropyExpr :=
 
 /-- Lower diagonal mean on the region `2t ≤ w`. -/
 def upperRegionLowerMeanExpression : EntropyExpr :=
-  .mul (.constant (76469 / 200000)) (.sub (.constant 1) .vertical)
+  .mul (.constant abundanceTargetQ) (.sub (.constant 1) .vertical)
 
 /-- Upper diagonal mean on the region `2t ≤ w`. -/
 def upperRegionUpperMeanExpression : EntropyExpr :=
   .add
-    (.constant (76469 / 200000))
+    (.constant abundanceTargetQ)
     (.mul
       (.sub (.constant 1) .horizontal)
       (.div
-        (.mul .vertical (.constant (76469 / 200000)))
+        (.mul .vertical (.constant abundanceTargetQ))
         .horizontal))
 
 /-- Reflected diagonal objective on the region `2t ≤ w`. -/
@@ -133,14 +133,14 @@ conditional complement. -/
 def centeredCurveExpression : EntropyExpr :=
   yuGap
     (.mul
-      (.constant ((123531 / 200000) ^ 2))
+      (.constant ((1 - abundanceTargetQ) ^ 2))
       (.entropy (.mul .horizontal .horizontal)))
     (.mul
-      (.mul (.constant (123531 / 200000)) .horizontal)
+      (.mul (.constant (1 - abundanceTargetQ)) .horizontal)
       (.entropy .horizontal))
     (.mul
       (.sub
-        (.mul (.constant (123531 / 100000)) .horizontal)
+        (.mul (.constant (2 * (1 - abundanceTargetQ))) .horizontal)
         (.mul .horizontal .horizontal))
       (.entropy (.constant (1 / 2))))
 
@@ -264,9 +264,9 @@ theorem diagonal_domain {lowerWeight upperWeight lowerMean upperMean : EntropyEx
       (mul_domain hupperWeight hupperCapped)
   exact sub_domain
     (add_domain
-      (mul_domain (constant_domain (193 / 200) x y) hindependent)
-      (mul_domain (constant_domain (7 / 200) x y) hdependent))
-    (mul_domain (constant_domain (10000001 / 10000000) x y) hmarginal)
+      (mul_domain (constant_domain (1 - dependentShareQ) x y) hindependent)
+      (mul_domain (constant_domain dependentShareQ x y) hdependent))
+    (mul_domain (constant_domain (1 + entropySlackQ) x y) hmarginal)
 
 theorem endpoint_domain {lowerWeight upperWeight lowerMean q : EntropyExpr}
     {x y : ℝ}
@@ -315,9 +315,9 @@ theorem endpoint_domain {lowerWeight upperWeight lowerMean q : EntropyExpr}
   have hdependent := mul_domain hlowerWeight hlowerCapped
   exact sub_domain
     (add_domain
-      (mul_domain (constant_domain (193 / 200) x y) hindependent)
-      (mul_domain (constant_domain (7 / 200) x y) hdependent))
-    (mul_domain (constant_domain (10000001 / 10000000) x y) hmarginal)
+      (mul_domain (constant_domain (1 - dependentShareQ) x y) hindependent)
+      (mul_domain (constant_domain dependentShareQ x y) hdependent))
+    (mul_domain (constant_domain (1 + entropySlackQ) x y) hmarginal)
 
 theorem endpointUpperWeight_domain {a q : ℝ}
     (haUpper : a ≤ abundanceTarget) (hqLower : 0 ≤ q) :
@@ -533,19 +533,19 @@ theorem centeredCurveExpression_domain {y auxiliary : ℝ}
     apply entropy_domain (constant_domain (1 / 2) y auxiliary)
     norm_num [EntropyExpr.eval]
   have hindependent := mul_domain
-    (constant_domain ((123531 / 200000) ^ 2) y auxiliary) hySquareEntropy
+    (constant_domain ((1 - abundanceTargetQ) ^ 2) y auxiliary) hySquareEntropy
   have hmarginal := mul_domain
-    (mul_domain (constant_domain (123531 / 200000) y auxiliary) hyDomain) hyEntropy
+    (mul_domain (constant_domain (1 - abundanceTargetQ) y auxiliary) hyDomain) hyEntropy
   have hdependent := mul_domain
     (sub_domain
-      (mul_domain (constant_domain (123531 / 100000) y auxiliary) hyDomain)
+      (mul_domain (constant_domain (2 * (1 - abundanceTargetQ)) y auxiliary) hyDomain)
       (mul_domain hyDomain hyDomain))
     hhalfEntropy
   exact sub_domain
     (add_domain
-      (mul_domain (constant_domain (193 / 200) y auxiliary) hindependent)
-      (mul_domain (constant_domain (7 / 200) y auxiliary) hdependent))
-    (mul_domain (constant_domain (10000001 / 10000000) y auxiliary) hmarginal)
+      (mul_domain (constant_domain (1 - dependentShareQ) y auxiliary) hindependent)
+      (mul_domain (constant_domain dependentShareQ y auxiliary) hdependent))
+    (mul_domain (constant_domain (1 + entropySlackQ) y auxiliary) hmarginal)
 
 theorem centeredCurveExpression_eval (y auxiliary : ℝ) :
     centeredCurveExpression.eval y auxiliary =

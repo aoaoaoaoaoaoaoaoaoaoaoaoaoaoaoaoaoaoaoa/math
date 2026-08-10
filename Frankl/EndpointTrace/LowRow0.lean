@@ -65,8 +65,11 @@ private theorem lowRow0Cell1RootCover {a q : ℝ}
         · exact lowRow0Cell1RootLLUU_nonneg
             (by linarith) (by linarith) (by linarith) (by linarith)
     · by_cases hlowRow0Cell1RootLU : q ≤ ((79 : ℝ) / 6400)
-      · exact lowRow0Cell1RootLUL_nonneg
-          (by linarith) (by linarith) (by linarith) (by linarith)
+      · by_cases hlowRow0Cell1RootLUL : q ≤ ((669 : ℝ) / 64000)
+        · exact lowRow0Cell1RootLULL_nonneg
+            (by linarith) (by linarith) (by linarith) (by linarith)
+        · exact lowRow0Cell1RootLULU_nonneg
+            (by linarith) (by linarith) (by linarith) (by linarith)
       · exact lowRow0Cell1RootLUU_nonneg
           (by linarith) (by linarith) (by linarith) (by linarith)
   · by_cases hlowRow0Cell1RootU : q ≤ ((379 : ℝ) / 16000)
