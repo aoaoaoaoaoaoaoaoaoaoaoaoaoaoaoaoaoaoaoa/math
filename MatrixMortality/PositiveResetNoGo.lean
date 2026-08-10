@@ -104,6 +104,76 @@ theorem positiveReset_collision [FiniteDimensional ℚ V]
       (sameRay_trans ruleC_at_critical (sameRay_symm eraseC_at_empty))
   exact sameRay_trans (sameRay_symm toggle_to_q) toggle_to_empty
 
+/-! ## Rank-two kernel bifurcation -/
+
+/-- A route difference confined to a common data kernel survives toggles only until the next data
+action. -/
+theorem commonKernel_route_erased
+    (kernel : Submodule ℚ V) (dataB dataC toggle : V →ₗ[ℚ] V)
+    (toggle_stable : ∀ vector ∈ kernel, toggle vector ∈ kernel)
+    (kernel_le_dataB : kernel ≤ LinearMap.ker dataB)
+    (kernel_le_dataC : kernel ≤ LinearMap.ker dataC)
+    (difference : V) (difference_mem : difference ∈ kernel) (toggles : Nat) :
+    dataB ((toggle : V → V)^[toggles] difference) = 0 ∧
+      dataC ((toggle : V → V)^[toggles] difference) = 0 := by
+  have iterate_mem : (toggle : V → V)^[toggles] difference ∈ kernel := by
+    induction toggles with
+    | zero => exact difference_mem
+    | succ toggles induction =>
+        rw [Function.iterate_succ_apply']
+        exact toggle_stable _ induction
+  exact ⟨LinearMap.mem_ker.mp (kernel_le_dataB iterate_mem),
+    LinearMap.mem_ker.mp (kernel_le_dataC iterate_mem)⟩
+
+/-- Quotient by the first coordinate axis. -/
+def leftKernelQuotient (point : Fin 3 → ℚ) : Fin 2 → ℚ :=
+  ![point 1, point 2]
+
+/-- Quotient by the second coordinate axis. -/
+def rightKernelQuotient (point : Fin 3 → ℚ) : Fin 2 → ℚ :=
+  ![point 0, point 2]
+
+/-- Bilinear intersection of the two transverse rank-two projective fibres. -/
+def bilinearFibrePoint (u v r s : ℚ) : Fin 3 → ℚ :=
+  ![r * v, u * s, v * s]
+
+/-- Two transverse rank-two quotient targets determine one projective point. The nonzero final
+coordinates exclude the exceptional lines through the two kernel points. -/
+theorem sameRay_bilinearFibrePoint
+    (point : Fin 3 → ℚ) (u v r s : ℚ) (s_ne : s ≠ 0)
+    (left_same : SameRay (leftKernelQuotient point) ![u, v])
+    (right_same : SameRay (rightKernelQuotient point) ![r, s]) :
+    SameRay point (bilinearFibrePoint u v r s) := by
+  obtain ⟨leftScale, leftScale_ne, left_eq⟩ := left_same
+  obtain ⟨rightScale, _, right_eq⟩ := right_same
+  have point_one : point 1 = leftScale * u := by
+    simpa [leftKernelQuotient] using congrFun left_eq 0
+  have point_two_left : point 2 = leftScale * v := by
+    simpa [leftKernelQuotient] using congrFun left_eq 1
+  have point_zero : point 0 = rightScale * r := by
+    simpa [rightKernelQuotient] using congrFun right_eq 0
+  have point_two_right : point 2 = rightScale * s := by
+    simpa [rightKernelQuotient] using congrFun right_eq 1
+  have scale_relation : rightScale * s = leftScale * v := by
+    exact point_two_right.symm.trans point_two_left
+  have rightScale_eq : rightScale = leftScale * v / s := by
+    exact (eq_div_iff s_ne).2 scale_relation
+  refine ⟨leftScale / s, div_ne_zero leftScale_ne s_ne, ?_⟩
+  funext coordinate
+  fin_cases coordinate
+  · change point 0 = leftScale / s * (r * v)
+    rw [point_zero, rightScale_eq]
+    field_simp
+    ring
+  · change point 1 = leftScale / s * (u * s)
+    rw [point_one]
+    field_simp
+    ring
+  · change point 2 = leftScale / s * (v * s)
+    rw [point_two_left]
+    field_simp
+    ring
+
 /-! ## Fullness of the standard homogeneous radix cylinder -/
 
 /-- Three states in one prepend cylinder of a homogeneous radix queue code. -/

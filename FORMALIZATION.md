@@ -521,6 +521,14 @@ map to be injective. Applying this to both data letters at the single legal queu
 ambient tax for a faithful three-vector legal chart is retained as an audited dimension
 corollary; the kernel theorem states the exact collision and hypotheses.
 
+[`G3-S02`](SALVAGE.md#g3-s02-rank-two-kernel-bifurcation) records the singular geometry left by
+that tax. Lean proves that a route difference in a common data kernel remains there through any
+number of kernel-preserving toggles and is annihilated by the first subsequent data action. For
+transverse coordinate kernels it also proves the exact projective fibre intersection: quotient
+targets `[u:v]` and `[r:s]`, with `s≠0`, determine the bilinear ray `[rv:us:vs]`. These are
+structure theorems, not a universal exclusion of common-kernel history-sensitive compilers or a
+construction of the missing shift-equivariant bilinear invariant.
+
 The semantic core of [`G3-O04`](SALVAGE.md#g3-o04-expanding-affine-history-no-go) is formalized:
 the reset-affine orbit, finite reverse box, exact caged DFA, regularity, and universal
 noncomputability contradiction are kernel-checked. The remaining mechanization seam is uniform
@@ -1004,6 +1012,8 @@ with a complete arbitrary-word converse.
 | The positive `b`-shift collapses distinct reachable states and defeats backward cancellation | `PositiveShiftCountermodel.column_b_eq_bt`, `PositiveShiftCountermodel.column_nil_ne_t`, `PositiveShiftCountermodel.not_backward_cancellative` |
 | A projectively full legal prepend cylinder forces its data map to be injective | `PositiveResetNoGo.injective_of_cylinder_span` |
 | The two legal rule views of `qb` force the persistent collision `v_q∼v_ε` | `PositiveResetNoGo.positiveReset_collision` |
+| A common-kernel route difference is erased by the first later data action | `PositiveResetNoGo.commonKernel_route_erased` |
+| Transverse rank-two quotient fibres meet in the bilinear ray `[rv:us:vs]` | `PositiveResetNoGo.sameRay_bilinearFibrePoint` |
 | A homogeneous radix prepend cylinder has determinant `B²(B−1)(d_b−d_c)` | `PositiveResetNoGo.radixCylinder_det`, `PositiveResetNoGo.radixCylinder_det_ne_zero` |
 | Three positive letters evaluate surjectively onto the binary free group | `PositiveFreeCancellation.triangleEvaluate_surjective` |
 | Quotient-blind boundaries accepting an element and its square admit a nonempty identity witness | `PositiveFreeCancellation.exists_nonempty_identity_witness` |

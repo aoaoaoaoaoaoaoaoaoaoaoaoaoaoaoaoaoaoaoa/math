@@ -285,6 +285,34 @@
 'MatrixMortality.CancellativeProjectiveRigidity.scalar_commutator_eq_one' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.PositiveShiftCountermodel.coefficient_int_eq_zero_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.PositiveShiftCountermodel.generator_rank' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.PositiveShiftCountermodel.reachableMatrix_det' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.PositiveShiftCountermodel.observableMatrix_det' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.PositiveShiftCountermodel.wordProduct_int_ne_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.PositiveShiftCountermodel.column_b_eq_bt' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.PositiveShiftCountermodel.column_nil_ne_t' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.PositiveShiftCountermodel.not_backward_cancellative' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.PositiveResetNoGo.injective_of_cylinder_span' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.PositiveResetNoGo.positiveReset_collision' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.PositiveResetNoGo.commonKernel_route_erased' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.PositiveResetNoGo.sameRay_bilinearFibrePoint' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.PositiveResetNoGo.radixCylinder_det' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.PositiveResetNoGo.radixCylinder_det_ne_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.PositiveFreeCancellation.triangle_relations' depends on axioms: [propext, Quot.sound]
 'MatrixMortality.PositiveFreeCancellation.triangleEvaluate_surjective' depends on axioms: [propext, Quot.sound]
 'MatrixMortality.PositiveFreeCancellation.exists_nonempty_positive_identity' depends on axioms: [propext,

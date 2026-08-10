@@ -123,6 +123,7 @@ file owns the mathematical stock.
 | [`G3-O01`](#g3-o01-four-role-macro-irreducibility) | obstruction | exact nonerasing macros cannot reduce the four source roles to three letters | formalized | graduated |
 | [`G3-O08`](#g3-o08-erasing-and-stationary-closed-block-obstruction) | obstruction | paired Parikh rank kills erasing exact macros and stationary closed-return block encoders | audited; formalized core | graduated |
 | [`G3-S01`](#g3-s01-shift-equivariant-zero-incidence) | structure theorem | same-zero state dimension is equivariant projective incidence dimension | audited | active |
+| [`G3-S02`](#g3-s02-rank-two-kernel-bifurcation) | structure theorem | common kernels erase route differences; transverse fibres retain one bilinear survivor | formalized | active |
 | [`G3-O02`](#g3-o02-rational-phase-fracture) | obstruction | a mortal paired instance has no rational phase-state same-zero compression | audited | stock |
 | [`G3-O03`](#g3-o03-history-sensitive-minimal-body-fracture) | obstruction | minimal bodies admit an exact history-sensitive three-state same-zero compiler | formalized | graduated |
 | [`G3-O04`](#g3-o04-expanding-affine-history-no-go) | obstruction | finite-mode expanding one-coordinate history has decidable target reachability | audited | graduated |
@@ -4504,6 +4505,52 @@ the model mechanism, not a uniform solution.
 
 **Artifact:** [`PositiveResetNoGo.lean`](MatrixMortality/PositiveResetNoGo.lean) and
 [`m34-positive-reset-dimension-tax-2026-08-08.md`](audits/m34-positive-reset-dimension-tax-2026-08-08.md).
+
+### G3-S02: Rank-two kernel bifurcation
+
+**Kind:** structure theorem
+
+**Evidence:** formalized
+
+**Disposition:** active
+
+Let the two data controls have rank two. Their projective fibres are lines through their kernel
+points. If the kernels coincide, a route difference in that common kernel remains invisible to
+both data maps. When toggles preserve the kernel, any number of toggles retains the difference
+and the first later data action annihilates it exactly.
+
+For transverse coordinate kernels, use quotient charts
+
+```text
+π_b[x:y:z]=[y:z],       π_c[x:y:z]=[x:z].
+```
+
+If their target rays are `[u:v]` and `[r:s]`, with `s≠0`, Lean proves that every common fibre
+point lies on the bilinear ray
+
+```text
+[rv : us : vs].
+```
+
+This is the precise survivor left by collapsed legal cylinders: two separately routed quotient
+coordinates can coexist only through their common homogenizing product.
+
+**Scope:** common-kernel erasure is conditional on the route difference already lying in the
+kernel and on toggle invariance. It does not exclude refreshing a transient guard after every
+data action, so the report's global deletion of all common-kernel compilers is rejected. The
+transverse formula is a fibre-intersection law, not a source-computable invariant surface or an
+all-word same-zero construction.
+
+**Use:** split every rank-two paired proposal by kernel geometry. In the common-kernel branch,
+name how route information is refreshed after erasure. In the transverse branch, solve the
+bilinear shift-equivariance equations rather than returning to one-coordinate affine carries.
+
+**Artifact:** [`PositiveResetNoGo.lean`](MatrixMortality/PositiveResetNoGo.lean) and
+[`m34-rank-two-kernel-bifurcation-2026-08-10.md`](audits/m34-rank-two-kernel-bifurcation-2026-08-10.md).
+
+**Next:** construct a source-computable invariant surface in `P¹×P¹` closed under both prepend
+maps and the bilinear reset, or prove that no linear terminal section can be exact on every
+control word.
 
 ### G3-O13: Rational serializer pumping
 
