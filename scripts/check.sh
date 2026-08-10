@@ -228,15 +228,22 @@ check_toc_level() {
 check_publication() {
   PUBLICATION="$1"
   local expected_properties="$2"
+  local profile="${3:-result}"
 
   local major_sections='//main[@id="article"]/article/details[contains(concat(" ", normalize-space(@class), " "), " major-section ")]'
   local article='//main[@id="article"]/article'
   local abstract='//div[contains(concat(" ", normalize-space(@class), " "), " shell ")]/section[contains(concat(" ", normalize-space(@class), " "), " abstract ")]'
-  assert_xpath_count 1 "$abstract[@aria-label='Abstract']"
-  assert_xpath_count 1 '(//div[contains(concat(" ", normalize-space(@class), " "), " shell ")]/*)[1][self::section[contains(concat(" ", normalize-space(@class), " "), " abstract ")]]'
-  assert_xpath_count 1 "$abstract/strong[string-length(normalize-space(.)) > 0]"
-  assert_xpath_count 2 "$abstract/p[string-length(normalize-space(.)) > 0]"
-  assert_xpath_count 0 '//head/meta[@name="description" or @property="og:description"]'
+  if [[ "$profile" == result ]]; then
+    assert_xpath_count 1 "$abstract[@aria-label='Abstract']"
+    assert_xpath_count 1 '(//div[contains(concat(" ", normalize-space(@class), " "), " shell ")]/*)[1][self::section[contains(concat(" ", normalize-space(@class), " "), " abstract ")]]'
+    assert_xpath_count 1 "$abstract/strong[string-length(normalize-space(.)) > 0]"
+    assert_xpath_count 2 "$abstract/p[string-length(normalize-space(.)) > 0]"
+    assert_xpath_count 0 '//head/meta[@name="description" or @property="og:description"]'
+  else
+    assert_xpath_count 0 "$abstract"
+    assert_xpath_count 1 '//head/meta[@name="description"]'
+    assert_xpath_count 1 '//head/meta[@property="og:description"]'
+  fi
   assert_xpath_count 3 "$major_sections"
   assert_xpath_count 3 "$major_sections[not(@open)]"
   assert_xpath_count 3 "$major_sections/summary/h2"
@@ -323,6 +330,7 @@ check_collection() {
 }
 
 check_collection matrix_mortality.html matrix_mortality
+check_publication frankl.html 0 collection
 check_publication m3_5.html 3
 check_publication m4_4.html 0
 check_publication binary_compilers.html 0
@@ -339,7 +347,7 @@ done < <(jq -r '.publications[] | select(.kind == "collection") | .route' "$MANI
 
 diff --unified \
   <(jq -r '.publications[] | select(.kind != "index") | .source' "$MANIFEST" | sort) \
-  <(printf '%s\n' binary_compilers.html m3_2_return_guard.html matrix_mortality.html m3_5.html m4_4.html | sort)
+  <(printf '%s\n' binary_compilers.html frankl.html m3_2_return_guard.html matrix_mortality.html m3_5.html m4_4.html | sort)
 
 tectonic --bundle "$TECTONIC_BUNDLE" --outdir "$SCRATCH" paper/main.tex
 cmp --silent "$SCRATCH/main.pdf" paper/main.pdf || {

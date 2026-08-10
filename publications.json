@@ -8,6 +8,11 @@
     },
     {
       "kind": "collection",
+      "source": "frankl.html",
+      "route": "frankl"
+    },
+    {
+      "kind": "collection",
       "source": "matrix_mortality.html",
       "route": "matrix_mortality"
     },
