@@ -81,6 +81,7 @@ import MatrixMortality.PriorityAffineResidual
 import MatrixMortality.EndpointPrefixCompiler
 import MatrixMortality.ExpandingHistoryNoGo
 import MatrixMortality.CancellativeProjectiveNoGo
+import MatrixMortality.PairedInverseChamber
 import MatrixMortality.PositiveShiftCountermodel
 import MatrixMortality.PositiveResetNoGo
 import MatrixMortality.PositiveFreeCancellation

@@ -512,6 +512,15 @@ cancellativity. The injective semidirect-product labeling into a group containin
 infinite Fibonacci orbit, and the no-nilpotent-product strengthening remain audited paper
 arguments; the formal counterexample does not depend on them.
 
+[`G3-O17`](SALVAGE.md#g3-o17-paired-inverse-chamber) closes the paired-specific saturation
+repair itself. Lean proves that every actual suffix residual has reduced sign form `+*−*`, every
+phase-aware prefix residual has form `−*+*`, and the formal inverse states
+`x⁻ᵝzxᵝz⁻¹` and `xz⁻²x⁻¹z²` have both sign turns. It checks their exact origin in the independent
+role discrepancies, every Neary upper/lower endpoint letter, free reduction of all positive
+continuations, and disjointness of both complete forward cones from every actual residual. Thus
+inverse-orbit cofinality is false for the grammar; only an extra representation-specific
+projective completion remains outside the theorem.
+
 [`G3-O12`](SALVAGE.md#g3-o12-positive-reset-dimension-tax) attacks the constructive side without
 formal inverses. Lean defines projective ray equality over an arbitrary finite-dimensional
 rational vector space and proves that a legal prepend cylinder spanning the space forces its data
@@ -813,6 +822,7 @@ with a complete arbitrary-word converse.
 | `HistoryFracture.lean` | null-history counterexample, minimum-body base-five encoder, and integral mortality lift |
 | `ExpandingHistoryNoGo.lean` | reset-affine orbit, finite reverse automaton, regularity, and universal computability obstruction |
 | `CancellativeProjectiveNoGo.lean` | paired residual conic, finite support-rank closure, cancellative role fractions, and projective commutator rigidity |
+| `PairedInverseChamber.lean` | one-turn residual chambers, protected formal inverse states, and positive forward-cone separation |
 | `PositiveFreeCancellation.lean` | positive `F₂` cover, finite-fibre pumping, singular quotient absorption, and rank-six syntax wall |
 | `PairedRank.lean` | uniform exact rank-four certificate for the paired scalar series |
 | `PairedBoundaryTax.lean` | exact six-state lower bound for diagonal paired-series bridges |
@@ -1025,6 +1035,10 @@ with a complete arbitrary-word converse.
 | Every finite paired support table has a rational realization of rank at most three | `CancellativeRoleFraction.exists_supportMatrix_rank_le_three` |
 | Cancellative role fractions contain the displayed independent left and right actions | `CancellativeRoleFraction.leftSeed_eq`, `CancellativeRoleFraction.leftConjugate_eq`, `CancellativeRoleFraction.rightSeed_eq`, `CancellativeRoleFraction.rightConjugate_eq` |
 | Projectively commuting invertible rational `3 × 3` matrices commute linearly | `CancellativeProjectiveRigidity.scalar_commutator_eq_one` |
+| Every paired suffix and prefix residual lies in its respective one-turn chamber | `PairedInverseChamber.suffixResidual_positiveNegative`, `PairedInverseChamber.prefixResidual_negativePositive` |
+| The two protected states are exact formal inverse combinations and have both sign turns | `PairedInverseChamber.leftInverseState_eq_formalCombination`, `PairedInverseChamber.rightInverseState_eq_formalCombination`, `PairedInverseChamber.leftInverseState_not_positiveNegative`, `PairedInverseChamber.rightInverseState_not_negativePositive` |
+| Every positive Neary role continuation preserves both forbidden turns | `PairedInverseChamber.leftRoleContinuation_outsideChambers`, `PairedInverseChamber.rightRoleContinuation_outsideChambers` |
+| Both formal inverse forward cones miss every actual suffix and phase-aware prefix residual | `PairedInverseChamber.leftRoleContinuation_ne_suffixResidual`, `PairedInverseChamber.leftRoleContinuation_ne_prefixResidual`, `PairedInverseChamber.rightRoleContinuation_ne_suffixResidual`, `PairedInverseChamber.rightRoleContinuation_ne_prefixResidual` |
 | The singular positive countermodel has complete integral zero language `{t}` | `PositiveShiftCountermodel.coefficient_int_eq_zero_iff` |
 | Every positive countermodel generator has rank exactly two | `PositiveShiftCountermodel.generator_rank` |
 | Three reachable columns and three observable rows have nonzero determinant | `PositiveShiftCountermodel.reachableMatrix_det`, `PositiveShiftCountermodel.observableMatrix_det` |

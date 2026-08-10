@@ -4412,9 +4412,11 @@ orbit whose inverse continuations are absent, whose target law fails there, or w
 maps destroy the group orbit. It does not prove general paired zero-language dimension four.
 
 **Use:** cull projective cross-multiplication of independently cancellative upper and lower word
-sides. Search must preserve genuinely one-way semigroup behavior, or derive backward residual
-cancellativity and inverse-orbit cofinality from the paired grammar itself. `G3-O11` proves that
-positive common-shift equations alone do not supply them.
+sides. Search must preserve genuinely one-way semigroup behavior. `G3-O11` proves that positive
+common-shift equations alone do not supply inverse saturation, and
+[`G3-O17`](#g3-o17-paired-inverse-chamber) proves that the paired grammar itself has no cofinal
+positive inverse orbit. Only a representation-specific faithful Ore completion could now invoke
+this tax.
 
 **Formalized core:** [`CancellativeProjectiveNoGo.lean`](MatrixMortality/CancellativeProjectiveNoGo.lean)
 checks the phase-aware decoder split, positive free-group embedding, terminal residual equation,
@@ -4459,9 +4461,9 @@ normal form, infinite Fibonacci orbit, and absence of nilpotent products are aud
 The singleton language is not the paired Neary language.
 
 **Use:** never infer the saturation hypothesis of `G3-O05` from positive shift equivariance,
-global minimality, or group-completion structure alone. A surviving paired lower bound must prove
-backward residual cancellativity and inverse-orbit cofinality on the terminal-relevant residual
-system itself.
+global minimality, or group-completion structure alone. The former program of proving its two
+missing hypotheses on the paired residual system is closed by
+[`G3-O17`](#g3-o17-paired-inverse-chamber): inverse-orbit cofinality is false uniformly.
 
 **Artifact:** [`PositiveShiftCountermodel.lean`](MatrixMortality/PositiveShiftCountermodel.lean)
 and
@@ -5335,6 +5337,53 @@ independent counter, then compare them. Preserve program correlation throughout 
 
 **Artifact:**
 [`m34-three-positive-affine-cover-2026-08-10.md`](audits/m34-three-positive-affine-cover-2026-08-10.md).
+
+### G3-O17: Paired inverse chamber
+
+**Kind:** obstruction
+
+**Evidence:** formalized
+
+**Disposition:** graduated
+
+Let `P={x,z}*` be the positive submonoid of the binary free group. Every checked paired suffix
+residual belongs to `PP⁻¹`; its reduced signed word has no negative-to-positive turn. Every
+phase-aware prefix residual belongs to `P⁻¹P`; its reduced signed word has no
+positive-to-negative turn.
+
+The independent role discrepancies from [`G3-O05`](#g3-o05-cancellative-projective-state-tax)
+produce the formal inverse states
+
+```text
+ξ_L = x⁻ᵝ z xᵝ z⁻¹,
+ξ_R = x z⁻² x⁻¹ z².
+```
+
+For `β>0`, both words are freely reduced and contain both sign turns. Every Neary upper role word
+ends in `z`, while every lower role word ends in `x`. Consequently a positive role continuation
+`U ξ V⁻¹` cancels neither seed boundary; both internal turns survive. Lean proves, for every body,
+role sequence, suffix, prefix context, and entering phase,
+
+```text
+U ξ_L V⁻¹, U ξ_R V⁻¹ ∉ PP⁻¹ ∪ P⁻¹P,
+U ξ_L V⁻¹, U ξ_R V⁻¹ ≠ every actual suffix or prefix residual.
+```
+
+Thus entire positive forward cones of two indispensable formal inverse states are absent from the
+paired residual grammar. No Ore-style common future or positive representative can supply the
+inverse saturation required by `G3-O05`.
+
+**Scope:** this kills grammar-forced inverse-orbit cofinality, not every representation-specific
+projective extension. A particular matrix representation could impose extra projective points and
+incidences, but their faithful equivariant continuation would be an additional hypothesis not
+determined by the zero language. The theorem does not prove a four-state lower bound.
+
+**Use:** delete paired residual saturation as a raceable lower-bound leaf. The next one-sided
+lower-bound object is a finite positive projective transition diagram carrying actual generator
+ranks, kernels, images, and base loci across every singular rank pattern.
+
+**Artifact:** [`PairedInverseChamber.lean`](MatrixMortality/PairedInverseChamber.lean) and
+[`m34-paired-inverse-chamber-2026-08-10.md`](audits/m34-paired-inverse-chamber-2026-08-10.md).
 
 ## Dimension Two
 
