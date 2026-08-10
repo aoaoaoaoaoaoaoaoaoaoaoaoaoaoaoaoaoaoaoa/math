@@ -122,6 +122,8 @@ file owns the mathematical stock.
 | [`R32-S33`](#r32-s33-terminal-casoratian-and-two-sided-order-allocation) | structure theorem and decidable stratum | terminal normalization comes only from earlier branches, and exact orders persisting to either boundary have forced content orientation | formalized | active |
 | [`R32-S34`](#r32-s34-exact-moving-prime-ledger) | structure theorem | outside fixed support, a divisor enters forward content exactly at simultaneous endpoint and branch-boundary divisibility | formalized | active |
 | [`R32-S35`](#r32-s35-positive-projective-incidence-genericization) | reduction and normalization | arbitrary PI₂ is a bounded positive-prefix disjunction of GPI₂ instances, and every generic instance has `α=β=1` | formalized | active |
+| [`R32-S36`](#r32-s36-guarded-affine-projective-incidence) | compiler | p-adic denominator poisoning gives an all-word guarded affine compiler into normalized GPI₂ | audited | active |
+| [`R32-O19`](#r32-o19-projective-queue-centralizer-obstruction) | obstruction | an injective homomorphic projective word store with finite controller cannot recurrently delete and append queue data | audited | graduated |
 | [`R32-D03`](#r32-d03-bounded-denominator-periodicity) | decidable stratum | every infinite legal rational guard orbit with bounded reduced denominators is eventually periodic | formalized | graduated |
 | [`M4-C01`](#m4-c01-two-state-pushout-compiler) | compiler | binary deterministic two-state scalar control compiles to three `4 × 4` matrices | formalized | graduated |
 | [`M4-O01`](#m4-o01-exact-toggle-fusion-leaves-an-immortal-core) | obstruction | exact local toggle fusion preserves a nonzero common anchor | formalized | graduated |
@@ -4296,6 +4298,67 @@ and
 
 **Use:** identify PI₂ and GPI₂ at the level of decidability and normalize all further attacks to
 `α=β=1`. The live rank-(2,2) enemy is GPI₂ itself; exceptional-scalar plumbing is retired.
+
+### R32-S36: Guarded affine projective incidence
+
+**Kind:** compiler
+**Evidence:** audited
+**Disposition:** active
+
+For a prime `p`, two branches
+
+```text
+Fᵢ(z)=(aᵢz+bᵢ)/p,       p∤aᵢ,
+```
+
+with distinct legal residues compile to two upper-triangular projective matrices. The first
+illegal branch from a p-integral state creates valuation `−1`; every subsequent branch lowers
+that valuation. Hence a word reaches a p-integral target if and only if every letter was legal.
+At `p=2`, the residues exhaust parity and the resulting source dynamics is deterministic.
+
+Two explicit predecessor nonincidences are exactly the genericity conditions. When they hold,
+the existing scalar normalization makes `α=β=1` without changing any word zero.
+
+**Scope:** this proves a compiler and a complete malformed-word converse, not universality or
+decidability of binary guarded affine reachability.
+
+**Artifact:** [`audits/m32-projective-arithmetic-guard-2026-08-10.md`](audits/m32-projective-arithmetic-guard-2026-08-10.md).
+
+**Use:** search for intrinsic arithmetic universality inside normalized GPI₂ rather than a
+separate finite word controller. Any decision theorem must consume the parity-selected family.
+
+**Next:** decide reachability for two-branch parity-selected affine maps, or reduce a known
+undecidable arithmetic system to that exact family while preserving the two genericity
+nonincidences.
+
+### R32-O19: Projective queue centralizer obstruction
+
+**Kind:** obstruction
+**Evidence:** audited
+**Disposition:** graduated
+
+Let `ρ:Σ*→PGL₂(ℚ)` be a homomorphic word store with an orbit containing at least three points.
+Every projectivity implementing the tail-uniform update `(q,uv)↦(q′,vp)` has the necessary form
+
+```text
+S_q′ Z ρ(u)⁻¹ S_q⁻¹,
+```
+
+where `Z` centralizes every store letter and maps `x_q` to `ρ(p)x_q′`. If the store is injective
+on a binary free monoid, its common centralizer is trivial: otherwise the generated group lies
+in a virtually abelian Möbius centralizer, contradicting exponential positive-word growth.
+Every finite-controller cycle therefore has empty appendants, so total storage growth is
+bounded.
+
+**Scope:** the theorem concerns injective homomorphic projective stores and tail-uniform fixed
+prefix/suffix rules. It does not exclude nonhomomorphic arithmetic encodings such as
+[`R32-S36`](#r32-s36-guarded-affine-projective-incidence).
+
+**Artifact:** [`audits/m32-projective-arithmetic-guard-2026-08-10.md`](audits/m32-projective-arithmetic-guard-2026-08-10.md).
+
+**Use:** do not reopen free Möbius, continued-fraction, radix, tag, or queue stores with a finite
+projective controller. A rank-(2,2) universality proof must obtain its memory from intrinsic
+arithmetic dynamics.
 
 ### R32-D03: Bounded-denominator periodicity
 

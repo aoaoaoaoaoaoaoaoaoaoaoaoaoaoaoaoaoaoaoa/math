@@ -567,6 +567,16 @@ Every generic instance also scales to `α=β=1` without changing any word zero. 
 itself remains unresolved. See
 [`R32-S35`](SALVAGE.md#r32-s35-positive-projective-incidence-genericization).
 
+The first exact arithmetic subfamily is now isolated. Two affine branches with common prime
+denominator use p-adic denominator poisoning as a complete all-word legality guard; at `p=2`,
+the two legal residues give one deterministic parity-selected orbit. Conversely, an injective
+homomorphic Möbius word store cannot support recurrent delete-front/append-back updates through
+any finite projective controller: every such update is a deleted-prefix inverse times a common
+centralizer element, and an injective binary store has trivial centralizer. Thus the live
+undecidability route is intrinsic nonhomomorphic arithmetic dynamics, not a free-word store with
+finite queue control. See [`R32-S36`](SALVAGE.md#r32-s36-guarded-affine-projective-incidence)
+and [`R32-O19`](SALVAGE.md#r32-o19-projective-queue-centralizer-obstruction).
+
 The rank-`(3,2)` profile is the genuinely new artery. If `B=UV`, every binary word containing
 `B` is governed exactly by
 
@@ -1191,7 +1201,7 @@ all-legal block inequality for the carried generalized continuant. See
 | Split-guard decision | Amortize exact-order mass across the doubly order-broken continuant, using recurrence-sensitive carry pressure or forced repeated factors | The Casoratian removes the final branch and persistent orders have forced orientation, but earlier reverse content can still finance later cancellation |
 | Split-guard counter | Construct one exact fixed-coefficient reset orbit with unbounded denominators and a synchronized moving-prime genealogy | Every useful auxiliary prime needs a later exact-order synchronization and simultaneous endpoint divisibility; finite rational atlases are eventually periodic |
 | Irreducible cubic reflection orbit | Decide reachability between isolated singular lines under the non-pure order-three recurrence of projective involutions | Singular timing is finite; independently selected unit indices remain unbounded |
-| Generic projective incidence | Decide or prove undecidable the normalized `α=β=1` GPI₂ core | Arbitrary PI₂ already reduces by a bounded positive-prefix disjunction; a generic affine no-instance defeats every finite congruence sieve |
+| Generic projective incidence | Decide or prove undecidable the normalized `α=β=1` GPI₂ core through intrinsic arithmetic dynamics | P-adic legality gives exact deterministic binary arithmetic, while homomorphic free-word stores with finite queue controllers are impossible |
 
 The split-spectrum hot path is now a coefficient-effective amortization of the doubly
 order-broken additive continuant, with a genuinely history-sensitive aperiodic
