@@ -196,6 +196,15 @@ bad set, forcing both labelled transitions to exit together. The positive first-
 reduces arbitrary PI₂ to at most two GPI₂ queries. The surviving enemy is GPI₂ itself, not
 genericization or the edge graph.
 
+`ProjectiveCollatz` now checks an exact fixed-projectivity arithmetic benchmark inside that
+enemy. The inverse maps `A(z)=2z` and `B(z)=(2z−1)/3` generate an integer `n` from `1` exactly
+when shortcut Collatz reaches `1` from `n`. Lean identifies the inductive predecessor language
+with the conventional forward relation and proves the arbitrary-word converse by permanent
+negative 3-adic valuation after the first illegal odd predecessor. For every nonzero integer
+target it then constructs unit scalar representatives with `α=β=1` and proves that normalization
+preserves the complete zero language. See `R32-S37` and
+[`audits/m32-collatz-incidence-2026-08-10.md`](audits/m32-collatz-incidence-2026-08-10.md).
+
 ReturnSquare instantiates the rank-`(3,2)` reduction. Lean proves the closed return matrix,
 split interfaces, exact cut rank, internal rank-one zero-wait return, unit positive returns,
 complete physical mortality equivalence, reachable and observable determinants, and the
@@ -547,8 +556,9 @@ history-sensitive enemy. See
 These are structural and decidable-stratum theorems, not an `M₃(2)` resolution. The imported
 order-four Skolem theorem used to classify rank-one profiles is not reimplemented in Lean. The
 reverse compiler still assumes `αβ≠0`, but arbitrary PI₂ now reduces to at most two generic
-queries. No universality or decision theorem is known for normalized GPI₂ or for rational
-inverse-address membership and its cyclotomic cancellation histories. Their boundary is recorded in
+queries. No universality or decision theorem is known for normalized GPI₂, despite its exact
+shortcut-Collatz subfamily, or for rational inverse-address membership and its cyclotomic
+cancellation histories. Their boundary is recorded in
 [`audits/m32-rank-return-2026-07-28.md`](audits/m32-rank-return-2026-07-28.md) and scheduled in
 [#11](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/11) and
 [#12](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/12).
@@ -664,6 +674,7 @@ with a complete arbitrary-word converse.
 | `TwoPlaneEdges.lean` | compatible two-plane realization of a `2 × 2` edge square and exact rank-two certificates |
 | `ReverseEdge.lean` | generic projective-incidence reverse compiler, basis adaptation, and all-path converse |
 | `ProjectiveIncidence.lean` | exceptional-source geometry and all-word unit normalization for projective incidence |
+| `ProjectiveCollatz.lean` | exact shortcut-Collatz predecessor language, 3-adic malformed-word guard, and normalized GPI₂ reduction |
 | `RankTwoPunctuation.lean` | intrinsic generic-incidence reduction of the unique hard one-loop edge stratum |
 | `PolynomialPencil.lean` | coefficient support and exact evaluation of words over affine matrix pencils |
 | `PrimitiveDivisor.lean` | cyclotomic support, nonprimitive index-prime valuations, and Bang–Zsigmondy above exponent two |
@@ -797,6 +808,9 @@ with a complete arbitrary-word converse.
 | Genericity is avoidance of two exact source rays | `ProjectiveIncidence.generic_iff_sourcePoint_not_mem_badSources` |
 | At most two source rays are bad in both orientations, and their two transitions exit together | `ProjectiveIncidence.commonBadSources_card_le_two`, `ProjectiveIncidence.commonBadSources_two_transition_iff` |
 | Every generic PI₂ instance scales to `α=β=1` without changing its word-zero language | `ProjectiveIncidence.exists_unitNormalized` |
+| The inverse predecessor language is exactly shortcut-Collatz reachability | `ProjectiveCollatz.reachesOne_iff_shortcutCollatz` |
+| Every malformed Collatz predecessor word remains nonintegral by negative 3-adic valuation | `ProjectiveCollatz.predecessorState_reaches_or_negative` |
+| Every nonzero shortcut-Collatz target reduces exactly to normalized GPI₂ | `ProjectiveCollatz.normalizedScalars`, `ProjectiveCollatz.exists_normalizedIncidence_zero_iff` |
 | A compatible one-loop edge square is mortal exactly at loop nilpotence or intrinsic generic incidence | `RankTwoPunctuation.exists_pathProduct_eq_zero_iff_selfBridge_or_incidence` |
 | ReturnSquare physical mortality is exactly positive-return scalar bridge zero | `ReturnSquare.physical_isMortal_iff_positiveBridge` |
 | Every nonresonant ReturnSquare zero uses at least three positive returns | `ReturnSquare.positiveBridge_zero_shape` |

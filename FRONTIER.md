@@ -577,6 +577,19 @@ undecidability route is intrinsic nonhomomorphic arithmetic dynamics, not a free
 finite queue control. See [`R32-S36`](SALVAGE.md#r32-s36-guarded-affine-projective-incidence)
 and [`R32-O19`](SALVAGE.md#r32-o19-projective-queue-centralizer-obstruction).
 
+This arithmetic core already contains an exact named benchmark. The fixed projective maps
+
+```text
+A(z)=2z,       B(z)=(2z−1)/3
+```
+
+generate an integer target from `1` if and only if that target reaches `1` under shortcut
+Collatz. A first illegal odd-predecessor letter creates negative 3-adic valuation permanently,
+so the converse holds for every binary word. Central rescaling puts every nonzero target
+instance in the `α=β=1` chart without changing its zero language. This is a hardness boundary,
+not an undecidability result; see
+[`R32-S37`](SALVAGE.md#r32-s37-normalized-shortcut-collatz-incidence).
+
 The rank-`(3,2)` profile is the genuinely new artery. If `B=UV`, every binary word containing
 `B` is governed exactly by
 
@@ -1201,7 +1214,7 @@ all-legal block inequality for the carried generalized continuant. See
 | Split-guard decision | Amortize exact-order mass across the doubly order-broken continuant, using recurrence-sensitive carry pressure or forced repeated factors | The Casoratian removes the final branch and persistent orders have forced orientation, but earlier reverse content can still finance later cancellation |
 | Split-guard counter | Construct one exact fixed-coefficient reset orbit with unbounded denominators and a synchronized moving-prime genealogy | Every useful auxiliary prime needs a later exact-order synchronization and simultaneous endpoint divisibility; finite rational atlases are eventually periodic |
 | Irreducible cubic reflection orbit | Decide reachability between isolated singular lines under the non-pure order-three recurrence of projective involutions | Singular timing is finite; independently selected unit indices remain unbounded |
-| Generic projective incidence | Decide or prove undecidable the normalized `α=β=1` GPI₂ core through intrinsic arithmetic dynamics | P-adic legality gives exact deterministic binary arithmetic, while homomorphic free-word stores with finite queue controllers are impossible |
+| Generic projective incidence | Decide or prove undecidable the normalized `α=β=1` GPI₂ core through intrinsic arithmetic dynamics | It contains exact fixed-projectivity shortcut-Collatz reachability; homomorphic free-word stores with finite queue controllers are impossible |
 
 The split-spectrum hot path is now a coefficient-effective amortization of the doubly
 order-broken additive continuant, with a genuinely history-sensitive aperiodic

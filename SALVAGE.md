@@ -4331,6 +4331,51 @@ separate finite word controller. Any decision theorem must consume the parity-se
 undecidable arithmetic system to that exact family while preserving the two genericity
 nonincidences.
 
+### R32-S37: Normalized shortcut-Collatz incidence
+
+**Kind:** reduction and arithmetic benchmark
+**Evidence:** formalized
+**Disposition:** active
+
+The fixed projective inverse branches
+
+```text
+A(z)=2z,       B(z)=(2z−1)/3
+```
+
+carry the pointwise shortcut-Collatz reaches-one set exactly. Starting at `1`, every binary word
+either stays on integral legal predecessors or acquires negative 3-adic valuation at its first
+illegal `B`; later letters cannot restore integrality. For every nonzero integer target `n`, the
+row `(1,−n)`, column `(1,1)ᵀ`, and scalar representatives
+
+```text
+Hₙ=(1/2−n)A,       Gₙ=((1/2−n)²/(−3n))B
+```
+
+have `α=β=1` and the same complete word-zero language. Lean proves
+
+```text
+∃w, incidence(Gₙ,Hₙ,(1,−n),(1,1)ᵀ,w)=0
+  ↔ n reaches 1 under shortcut Collatz.
+```
+
+**Scope:** this is a pointwise reduction, not a proof of the universal Collatz conjecture and
+not an undecidability theorem. The normalized matrix representatives vary by central scalar,
+but their two projective transformations are fixed.
+
+**Artifact:** `ProjectiveCollatz.reachesOne_iff_shortcutCollatz`,
+`ProjectiveCollatz.predecessorState_reaches_or_negative`,
+`ProjectiveCollatz.normalizedScalars`, and
+`ProjectiveCollatz.exists_normalizedIncidence_zero_iff` in
+[`ProjectiveCollatz.lean`](MatrixMortality/ProjectiveCollatz.lean), with reconstruction in
+[`m32-collatz-incidence-2026-08-10.md`](audits/m32-collatz-incidence-2026-08-10.md).
+
+**Use:** every normalized GPI₂ decision proof must consume this intrinsic arithmetic family.
+Do not replace it with an intended-language simulation or a finite malformed-word controller.
+
+**Next:** decide the fixed-projectivity predecessor family by an exact symbolic arithmetic
+invariant, or embed a known universal guarded-affine system through the same all-word p-adic gate.
+
 ### R32-O19: Projective queue centralizer obstruction
 
 **Kind:** obstruction

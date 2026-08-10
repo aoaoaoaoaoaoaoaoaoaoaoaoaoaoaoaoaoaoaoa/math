@@ -171,6 +171,10 @@ open MatrixMortality
 #print axioms ProjectiveIncidence.generic_or_swapped_of_not_mem_commonBadSources
 #print axioms ProjectiveIncidence.commonBadSources_two_transition_iff
 #print axioms ProjectiveIncidence.exists_unitNormalized
+#print axioms ProjectiveCollatz.reachesOne_iff_shortcutCollatz
+#print axioms ProjectiveCollatz.predecessorState_reaches_or_negative
+#print axioms ProjectiveCollatz.normalizedScalars
+#print axioms ProjectiveCollatz.exists_normalizedIncidence_zero_iff
 #print axioms RankTwoPunctuation.exists_pathProduct_eq_zero_iff_selfBridge_or_incidence
 #print axioms ReturnSquare.twoReturnDiscriminant_not_isSquare
 #print axioms ReturnSquare.positiveBridge_pair_ne_zero

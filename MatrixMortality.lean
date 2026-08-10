@@ -14,6 +14,7 @@ import MatrixMortality.EdgeCompression
 import MatrixMortality.TwoPlaneEdges
 import MatrixMortality.ReverseEdge
 import MatrixMortality.ProjectiveIncidence
+import MatrixMortality.ProjectiveCollatz
 import MatrixMortality.RankTwoPunctuation
 import MatrixMortality.ReturnSquare
 import MatrixMortality.ReturnSquareDynamics

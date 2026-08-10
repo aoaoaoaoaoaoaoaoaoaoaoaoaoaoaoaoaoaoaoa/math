@@ -319,6 +319,14 @@
  Classical.choice,
  Quot.sound]
 'MatrixMortality.ProjectiveIncidence.exists_unitNormalized' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ProjectiveCollatz.reachesOne_iff_shortcutCollatz' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.ProjectiveCollatz.predecessorState_reaches_or_negative' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ProjectiveCollatz.normalizedScalars' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ProjectiveCollatz.exists_normalizedIncidence_zero_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.RankTwoPunctuation.exists_pathProduct_eq_zero_iff_selfBridge_or_incidence' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
