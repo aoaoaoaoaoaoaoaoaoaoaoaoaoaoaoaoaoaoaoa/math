@@ -346,6 +346,7 @@ open MatrixMortality
 #print axioms ReturnGuard.Examples.decreasingMortal_reachable
 #print axioms ReturnGuard.Examples.increasingMortal_reachable
 #print axioms ReturnGuard.Examples.orderBreaker_shatters_resetBall
+#print axioms ReturnGuard.Examples.orderBreaker_candidate_enters_trap
 #print axioms ReturnGuard.Examples.periodicShadow_obstruction
 #print axioms ReturnGuard.Examples.periodicShadow_shatters_localCompactness
 #print axioms ReturnGuard.Examples.threeReturn_endpointTerminalWord_iff

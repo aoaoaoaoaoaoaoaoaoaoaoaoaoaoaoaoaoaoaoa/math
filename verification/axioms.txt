@@ -722,6 +722,9 @@
 'MatrixMortality.ReturnGuard.Examples.orderBreaker_shatters_resetBall' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.ReturnGuard.Examples.orderBreaker_candidate_enters_trap' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.ReturnGuard.Examples.periodicShadow_obstruction' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]

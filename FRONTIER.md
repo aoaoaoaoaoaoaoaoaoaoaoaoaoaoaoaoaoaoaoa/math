@@ -1148,6 +1148,25 @@ Mahler rails `a⁺=ka+d`, `k≥2`, were already excluded by the checked rail-deg
 [`R32-S34`](SALVAGE.md#r32-s34-exact-moving-prime-ledger) and
 [`m32-moving-prime-ledger-2026-08-09.md`](audits/m32-moving-prime-ledger-2026-08-09.md).
 
+The checked content-height law now has a global genealogy synthesis. In the endpoint-adapted norm
+`Ψ(r,t)=max(|D||t|,|r−(A−L)t|)`, cumulative forward content and reduced denominator satisfy
+
+```text
+(∏_{n<N}|hₙ|)Ψ_N ≤ |D|Γᴺ,
+Q_N∏_{n<N}|hₙ| ≤ |L|Γᴺ,
+p^aⁿ∏_{j≤n}|hⱼ| ≤ Γⁿ⁺¹.
+```
+
+Thus fresh activated primes have count `O(N/log N)`; every activated packet on an aperiodic
+orbit is microscopic relative to its current height and imposes a logarithmic recovery delay;
+consecutive whole-numerator handoffs have bounded second wait. Formalization also continued the
+proposed `(3,2,249398,1,1)` counterorbit beyond the reported prefix: its forced waits are
+`[4,1,1,1,1]`, after which it reaches a nonterminal 3-adic unit and enters the trap. The surviving
+construction is therefore not that tuple, nor any dense or macroscopic prime rail, but a sparse,
+microscopic, doubly order-broken genealogy. See
+[`R32-S29`](SALVAGE.md#r32-s29-adelic-content-and-repeated-factor-budget) and
+[`m32-sparse-genealogy-budget-2026-08-10.md`](audits/m32-sparse-genealogy-budget-2026-08-10.md).
+
 Finite rational carry-mode atlases cannot supply the opposing aperiodic orbit either. If each
 mode is a rational function of the current `p^a` and each transition has one fixed additive wait
 shift, every directed control cycle has total shift zero. On an actual infinite orbit the
@@ -1211,14 +1230,14 @@ all-legal block inequality for the carried generalized continuant. See
 
 | Lane | Required move | Present obstruction |
 | --- | --- | --- |
-| Split-guard decision | Amortize exact-order mass across the doubly order-broken continuant, using recurrence-sensitive carry pressure or forced repeated factors | The Casoratian removes the final branch and persistent orders have forced orientation, but earlier reverse content can still finance later cancellation |
-| Split-guard counter | Construct one exact fixed-coefficient reset orbit with unbounded denominators and a synchronized moving-prime genealogy | Every useful auxiliary prime needs a later exact-order synchronization and simultaneous endpoint divisibility; finite rational atlases are eventually periodic |
+| Split-guard decision | Prove an effective reset-anchored recurrence-or-escape certificate for the doubly order-broken continuant | Forward activation is exponentially budgeted, but sparse microscopic packets financed by earlier reverse content remain possible |
+| Split-guard counter | Construct one exact fixed-coefficient reset orbit with a sparse microscopic doubly order-broken moving-prime genealogy | The reported order-breaking tuple traps after `[4,1,1,1,1]`; dense births, macroscopic allocations, rapid recovery, and full-numerator rails are excluded |
 | Irreducible cubic reflection orbit | Decide reachability between isolated singular lines under the non-pure order-three recurrence of projective involutions | Singular timing is finite; independently selected unit indices remain unbounded |
 | Generic projective incidence | Decide or prove undecidable the normalized `α=β=1` GPI₂ core through intrinsic arithmetic dynamics | It contains exact fixed-projectivity shortcut-Collatz reachability; homomorphic free-word stores with finite queue controllers are impossible |
 
-The split-spectrum hot path is now a coefficient-effective amortization of the doubly
-order-broken additive continuant, with a genuinely history-sensitive aperiodic
-unbounded-denominator reset orbit as the opposing construction. The matrix compiler,
+The split-spectrum hot path is now an effective reset-anchored recurrence-or-escape theorem for
+the doubly order-broken additive continuant, opposed by a genuinely history-sensitive aperiodic
+unbounded-denominator reset orbit with sparse microscopic activations. The matrix compiler,
 arbitrary-word converse, deterministic wait decoder, rational inverse-address grammar,
 primitive integral lift, endpoint factorization, exact branch similarity, arbitrary
 repeated-factor pumping, local record-ascent budget, local content allocation, maximal-step

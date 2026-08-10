@@ -115,7 +115,7 @@ file owns the mathematical stock.
 | [`R32-S26`](#r32-s26-evaluation-frame-gauge-closure) | structure theorem and closure | the parameter-jet transition is an exact frame coboundary, and deep frame defect localizes to the reset shell | formalized | graduated |
 | [`R32-S27`](#r32-s27-rational-gap-macro-pumping) | structure theorem and obstruction | exact branch similarity and rational height separation bound every noncyclic repetition of one fixed macro | formalized | active |
 | [`R32-S28`](#r32-s28-terminal-endpoint-and-complementary-content) | structure theorem and obstruction | a terminal gauge exposes complementary forward/reverse contents and coefficient-prime immortality certificates | formalized | active |
-| [`R32-S29`](#r32-s29-adelic-content-and-repeated-factor-budget) | structure theorem and obstruction | content-weighted height, full cyclotomic complement, exterior conservation, and arbitrary repeated-factor pumping share one calculus | formalized | active |
+| [`R32-S29`](#r32-s29-adelic-content-and-repeated-factor-budget) | structure theorem and obstruction | content-weighted height, full cyclotomic complement, exterior conservation, and arbitrary repeated-factor pumping share one calculus | formalized core; audited corollaries | active |
 | [`R32-S30`](#r32-s30-fixed-cusp-and-record-ascent-calculus) | structure theorem and obstruction | cumulative endpoints form a fixed-cusp continued fraction; one primitive prequotient coordinate is carried by an exact generalized-continuant block | formalized | active |
 | [`R32-S31`](#r32-s31-smith-decoder-and-maximal-cancellation-throat) | structure theorem and obstruction | a positive unimodular content decoder contracts nonmaximal branches, while one fixed basis makes every wait gauge a pure base-prime dilation | formalized | active |
 | [`R32-S32`](#r32-s32-rank-two-punctuation-and-graph-removal) | structure theorem and reduction | compatible one-loop rank-two edge squares are intrinsic generic projective incidence; every other edge-rank pattern is decidable | audited | graduated |
@@ -123,6 +123,7 @@ file owns the mathematical stock.
 | [`R32-S34`](#r32-s34-exact-moving-prime-ledger) | structure theorem | outside fixed support, a divisor enters forward content exactly at simultaneous endpoint and branch-boundary divisibility | formalized | active |
 | [`R32-S35`](#r32-s35-positive-projective-incidence-genericization) | reduction and normalization | arbitrary PI₂ is a bounded positive-prefix disjunction of GPI₂ instances, and every generic instance has `α=β=1` | formalized | active |
 | [`R32-S36`](#r32-s36-guarded-affine-projective-incidence) | compiler | p-adic denominator poisoning gives an all-word guarded affine compiler into normalized GPI₂ | audited | active |
+| [`R32-S37`](#r32-s37-normalized-shortcut-collatz-incidence) | reduction and arithmetic benchmark | fixed projectivities encode pointwise shortcut-Collatz reaches-one exactly inside normalized GPI₂ | formalized | active |
 | [`R32-O19`](#r32-o19-projective-queue-centralizer-obstruction) | obstruction | an injective homomorphic projective word store with finite controller cannot recurrently delete and append queue data | audited | graduated |
 | [`R32-D03`](#r32-d03-bounded-denominator-periodicity) | decidable stratum | every infinite legal rational guard orbit with bounded reduced denominators is eventually periodic | formalized | graduated |
 | [`M4-C01`](#m4-c01-two-state-pushout-compiler) | compiler | binary deterministic two-state scalar control compiles to three `4 × 4` matrices | formalized | graduated |
@@ -3227,7 +3228,7 @@ subgroup tests, then combine all three coefficient boundaries with denominator g
 ### R32-S29: Adelic content and repeated-factor budget
 
 **Kind:** structure theorem and obstruction
-**Evidence:** formalized
+**Evidence:** formalized core; audited corollaries
 **Disposition:** active
 
 If one integral step reduces as `(M,N)=h(m′,n′)`, primitive height satisfies
@@ -3259,6 +3260,28 @@ product of their projective heights.
 to occur in an arbitrary wait word and do not bound a schedule whose reduced denominators grow
 without bound.
 
+In the endpoint-adapted norm
+
+```text
+Ψ(r,t)=max(|D||t|,|r−(A−L)t|),       Γ=|A|+|D|+|L|,
+```
+
+the same one-step calculus gives `|h|Ψ⁺≤ΓΨ` and `pᵃ|D||h|≤ΓΨ` at depth two. Iteration from
+reset yields
+
+```text
+(∏_{n<N}|hₙ|)Ψ_N ≤ |D|Γᴺ,
+Q_N∏_{n<N}|hₙ| ≤ |L|Γᴺ,
+p^aⁿ∏_{j≤n}|hⱼ| ≤ Γⁿ⁺¹.
+```
+
+Consequently distinct activated fresh primes occur only `O(N/log N)` times before return `N`;
+on an aperiodic orbit every activated packet `d_i` satisfies `d_i=o(Ψ_{n_i})`, and regaining its
+pre-activation height takes at least `⌈log_Γ d_i⌉` returns. Two consecutive steps which swallow
+their entire source numerators also have a coefficient-effective second-wait bound. These are
+audited corollaries, not a second formal recurrence API. They still permit a sparse microscopic
+doubly order-broken genealogy.
+
 **Artifact:** `ReturnGuard.integralStep_content_mul_height_le`,
 `integralStep_wait_content_le`, `cyclotomicComplement_dvd_targetDifference`, and
 `primitiveSteps_projectivePairCross` in
@@ -3266,14 +3289,14 @@ without bound.
 `sharedSchedule_exact_or_power_le_pairHeights` and
 `sharedSchedule_exact_or_power_le_heightEnvelope` in
 [`ReturnGuardPumping.lean`](MatrixMortality/ReturnGuardPumping.lean). Independent synthesis is
-recorded in
-[`m32-endpoint-content-2026-07-30.md`](audits/m32-endpoint-content-2026-07-30.md).
+recorded in [`m32-endpoint-content-2026-07-30.md`](audits/m32-endpoint-content-2026-07-30.md) and
+[`m32-sparse-genealogy-budget-2026-08-10.md`](audits/m32-sparse-genealogy-budget-2026-08-10.md).
 
 **Use:** charge every swallowed factor immediately and apply pumping to repeated factors
 wherever they occur, not only to powers from reset.
 
-**Next:** extract a sufficiently heavy repeated factor from an unbounded-denominator schedule,
-or construct a coefficient-aligned orbit whose growth evades every such extraction.
+**Next:** prove a reset-anchored recurrence-or-escape certificate for the sparse microscopic
+two-sided-order-break residue, or construct an exact orbit which realizes that residue.
 
 ### R32-S30: Fixed-cusp and record-ascent calculus
 
