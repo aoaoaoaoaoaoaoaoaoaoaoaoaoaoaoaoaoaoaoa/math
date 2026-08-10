@@ -274,8 +274,19 @@ This Lag node is retired by
 ```
 
 The complete backward cone of `10` and a forward `1`-containment invariant prove the formula in
-Lean. The source trunk is therefore down to `Bₙ` and `C`; deciding both closes the promised
-overlap-queue route.
+Lean.
+
+The reset node `Bₙ` is also retired by
+[`M4-D02`](SALVAGE.md#m4-d02-zero-framed-reset-scanner-decision). If `U₀=0ʳ1V`, zero-run
+reduction contracts every postinitial rule boundary to the exact token system
+
+```text
+ε ↦ S,     aX ↦ XaS,     bcX ↦ XQ,     b ↦ accept.
+```
+
+When `W` contains `1`, only `S=b` accepts. When `W∈0*`, `Q=ε` and pair deletion decides
+acceptance by the regular language `(101|11)*10`. This proof also uses neither promise. The
+source trunk is therefore down to the periodic-conjugate scanner `C` alone.
 
 The direct Neary morphism is dead by
 [`M4-O12`](SALVAGE.md#m4-o12-terminal-frame-morphism-obstruction): a morphism cannot send the
@@ -286,7 +297,8 @@ different universal source.
 The exact checks and evidence boundary are in
 [`audits/m43-deletion-scanner-2026-08-08.md`](audits/m43-deletion-scanner-2026-08-08.md),
 [`audits/m43-overlap-queue-2026-08-08.md`](audits/m43-overlap-queue-2026-08-08.md),
-[`audits/m43-overlap-lag-decision-2026-08-10.md`](audits/m43-overlap-lag-decision-2026-08-10.md), and
+[`audits/m43-overlap-lag-decision-2026-08-10.md`](audits/m43-overlap-lag-decision-2026-08-10.md),
+[`audits/m43-reset-scanner-decision-2026-08-10.md`](audits/m43-reset-scanner-decision-2026-08-10.md), and
 [`audits/m43-alternating-defect-literature-2026-08-07.md`](audits/m43-alternating-defect-literature-2026-08-07.md).
 
 #### Matrix trunk: parabolic bridge language
@@ -1356,11 +1368,11 @@ universal computation.
 
 ## Execution order
 
-1. Attack the six open `M₄(3)` nodes independently: universality versus decidability of deletion
-   scanners `Bₙ` and `C`; original parabolic semantic incidence and oriented
+1. Attack the five open `M₄(3)` nodes independently: universality versus decidability of the
+   periodic-conjugate scanner `C`; original parabolic semantic incidence and oriented
    transport under `M4-S04` and `M4-S06`; and the retuned fixed-row annihilator and arbitrary-word
-   converse under `M4-M04`. `Lₙ`, the alternating/multiple residue-two defect grammar, and the
-   retuned intended-word semantics are closed. Cross-pollinate exact source and exterior
+   converse under `M4-M04`. `Lₙ`, `Bₙ`, the alternating/multiple residue-two defect grammar,
+   and the retuned intended-word semantics are closed. Cross-pollinate exact source and exterior
    invariants, but do not revive complete-token queues, one-coordinate dynamics, finite
    wall-separated cones, or literal Neary recodings.
 2. Use formalized `MM-O01`, `G3-O01`, `MM-O03`, and `MM-O04` to reject exact packings, macros,

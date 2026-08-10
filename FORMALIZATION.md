@@ -477,6 +477,13 @@ Under the existing compiler promises it also classifies mortality of the associa
 integer `4 × 4` matrices. The audit is
 [`audits/m43-overlap-lag-decision-2026-08-10.md`](audits/m43-overlap-lag-decision-2026-08-10.md).
 
+The reset scanner is independently decided, but remains outside the Lean ledger.
+[`M4-D02`](SALVAGE.md#m4-d02-zero-framed-reset-scanner-decision) contracts complete rule
+boundaries by zero-run reduction to a two-token quotient. Its accepting set is a direct equality
+when `W` contains `1` and the regular language `(101|11)*10` when `W∈0*`. No auxiliary scanner
+code was retained because the result deletes its own attack lane. The exact evidence boundary is
+[`audits/m43-reset-scanner-decision-2026-08-10.md`](audits/m43-reset-scanner-decision-2026-08-10.md).
+
 The odd-phase macro cut [`M4-S01`](SALVAGE.md#m4-s01-odd-phase-macro-cut) remains reported.
 Lean already defines the relevant phase residues and Table 2 tracks, but no theorem yet proves
 the even-track invariant through every reachable queue or the induced macro solvability

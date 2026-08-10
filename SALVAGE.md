@@ -133,6 +133,7 @@ file owns the mathematical stock.
 | [`M4-S06`](#m4-s06-arbitrary-defect-bridge-grammar) | structure theorem | arbitrary defect skeletons and bridge walls reduce to one consecutive projective incidence | formalized | active |
 | [`M4-C03`](#m4-c03-zero-framed-binary-two-lag-compiler) | compiler | the principal scanner is literally binary context-2 Lag and compiles to `M₄(3)` | formalized | graduated |
 | [`M4-D01`](#m4-d01-zero-framed-binary-two-lag-decision) | decidable stratum | the entire zero-framed binary context-2 Lag kernel has an exact syntactic classification | formalized | graduated |
+| [`M4-D02`](#m4-d02-zero-framed-reset-scanner-decision) | decidable stratum | zero-run reduction contracts the reset scanner to a regular two-token quotient | audited | graduated |
 | [`M4-O12`](#m4-o12-terminal-frame-morphism-obstruction) | obstruction | a fixed morphism cannot map a shared terminal to its own compulsory return frame | formalized | graduated |
 | [`G3-O01`](#g3-o01-four-role-macro-irreducibility) | obstruction | exact nonerasing macros cannot reduce the four source roles to three letters | formalized | graduated |
 | [`G3-S01`](#g3-s01-shift-equivariant-zero-incidence) | structure theorem | same-zero state dimension is equivariant projective incidence dimension | audited | active |
@@ -4407,19 +4408,20 @@ C:  a conjugate scanner with nonempty periodic rule production.
 
 In `C` the rule self-loop equation `A ++ P = K ++ A` has exactly the conjugate form
 `K=u++v`, `P=v++u`, `A=(u++v)^r++u`. The split is exhaustive over the two-by-two transition
-table. [`M4-D01`](#m4-d01-zero-framed-binary-two-lag-decision) subsequently decides `Lₙ`, so
-only `Bₙ` and `C` remain live.
+table. [`M4-D01`](#m4-d01-zero-framed-binary-two-lag-decision) subsequently decides `Lₙ`, and
+[`M4-D02`](#m4-d02-zero-framed-reset-scanner-decision) decides `Bₙ`, so only `C` remains live.
 
 **Scope:** promised binary two-state positive overlap queues. The transition classification and
 the elementary decisions outside the three kernels have been independently audited but are not
-one Lean declaration. `M4-D01` owns the later formal decision of `Lₙ`; no decision procedure or
-undecidability reduction is yet claimed here for `Bₙ` or `C`.
+one Lean declaration. `M4-D01` owns the later formal decision of `Lₙ`, and `M4-D02` owns the
+audited decision of `Bₙ`; no decision procedure or undecidability reduction is yet claimed here
+for `C`.
 
-**Use:** replace the generic search over four arbitrary roles by two remaining exact source
-problems. Decisions for `Bₙ` and `C` close the entire promised overlap-queue trunk; undecidability
-of either closes `M₄(3)` through `M4-C02`.
+**Use:** replace the generic search over four arbitrary roles by the one remaining exact source
+problem `C`. Its decision closes the entire promised overlap-queue trunk; its undecidability
+closes `M₄(3)` through `M4-C02`.
 
-**Next:** decide or prove universality of `Bₙ` and `C`. Do not revisit `Lₙ` or complete-frame
+**Next:** decide or prove universality of `C`. Do not revisit `Lₙ`, `Bₙ`, or complete-frame
 machines outside this normal form.
 
 **Artifact:**
@@ -4538,6 +4540,47 @@ survives.
 `OverlapLag.mortality_iff_syntax` in
 [`MatrixMortality/OverlapLagDecision.lean`](MatrixMortality/OverlapLagDecision.lean), with audit
 [`audits/m43-overlap-lag-decision-2026-08-10.md`](audits/m43-overlap-lag-decision-2026-08-10.md).
+
+### M4-D02: Zero-framed reset scanner decision
+
+**Kind:** decidable stratum
+
+**Evidence:** audited
+
+**Disposition:** graduated
+
+Let `U₀=0ʳ1V` when `U₀` is not all-zero, and let `zr` contract every nonempty zero-run to
+one zero. The unrestricted reset scanner accepts exactly when
+
+```text
+U₀∈0*
+or
+(U₁∈0* and
+  if W contains 1 then zr(VW0)=10
+  else zr(VW0)∈(101|11)*10).
+```
+
+After the first return, every rule boundary ends in zero. The quotient code `a↦01`, `b↦1`
+turns its complete boundary dynamics into
+
+```text
+ε ↦ S,     aX ↦ XaS,     bcX ↦ XQ,     b ↦ accept.
+```
+
+If `W` contains `1`, both appendants begin in `a`, so only the initial token `S=b` accepts. If
+`W∈0*`, then `Q=ε`; the token monoid partitions into `(bΣ)*b`, `(bΣ)*`, and words with an
+`a` in an odd position. The first class reaches `b`, the second cycles through `ε`, and the
+third is invariant. Translating `(bΣ)*b` back gives `(101|11)*10`.
+
+**Scope:** every positive frame length and arbitrary binary `U₀,U₁,W`; neither compiler
+promise is used. The result is independently reconstructed but not Lean-formalized. It does not
+classify reset scanners outside `M4-S05`.
+
+**Use:** deletes `Bₙ` from the source frontier. The overlap-queue trunk now lives or dies solely
+with the periodic-conjugate scanner `C`.
+
+**Artifact:**
+[`audits/m43-reset-scanner-decision-2026-08-10.md`](audits/m43-reset-scanner-decision-2026-08-10.md).
 
 ### M4-O12: Terminal-frame morphism obstruction
 
