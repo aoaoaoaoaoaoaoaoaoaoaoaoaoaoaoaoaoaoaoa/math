@@ -463,6 +463,20 @@ which kills direct terminal-to-frame morphic coding. The larger three-scanner cl
 than Lean-formalized. Its evidence boundary is recorded in
 [`audits/m43-deletion-scanner-2026-08-08.md`](audits/m43-deletion-scanner-2026-08-08.md).
 
+The Lag source itself is now closed by
+[`M4-D01`](SALVAGE.md#m4-d01-zero-framed-binary-two-lag-decision), formalized in
+[`MatrixMortality/OverlapLagDecision.lean`](MatrixMortality/OverlapLagDecision.lean). For every
+positive `n` and arbitrary `U,V,W`, Lean proves
+
+```text
+Accepts(n,U,V,W) ↔ (n=1 ∧ U=ε) ∨ (V=ε ∧ U∈0*).
+```
+
+This classification is unconditional and yields a decision procedure without orbit simulation.
+Under the existing compiler promises it also classifies mortality of the associated three
+integer `4 × 4` matrices. The audit is
+[`audits/m43-overlap-lag-decision-2026-08-10.md`](audits/m43-overlap-lag-decision-2026-08-10.md).
+
 The odd-phase macro cut [`M4-S01`](SALVAGE.md#m4-s01-odd-phase-macro-cut) remains reported.
 Lean already defines the relevant phase residues and Table 2 tracks, but no theorem yet proves
 the even-track invariant through every reachable queue or the induced macro solvability
@@ -614,6 +628,7 @@ independent.
 | `TwoStateObstructions.lean` | exact local toggle-fusion obstruction |
 | `OverlapQueue.lean` | positive two-frame queue semantics, arbitrary-word causality, exact mortality compiler, and pure-deletion necessity |
 | `OverlapLag.lean` | literal binary context-2 Lag kernel, promise translation, mortality composition, and terminal-frame morphism obstruction |
+| `OverlapLagDecision.lean` | unconditional syntactic decision of the zero-framed binary context-2 Lag kernel |
 | `IndexedExecution.lean` | exact finite relational execution and closure views |
 | `TagQueue.lean` | tag steps, indexed execution specializations, and generic history soundness |
 | `NearyEncoding.lean` | four ordinary tiles, synchronization, source equivalence, and composed reductions |
@@ -786,6 +801,7 @@ independent.
 | Promised positive overlap-queue acceptance is exactly mortality of three integer `4 × 4` matrices | `OverlapQueue.mortality_iff_accepts` |
 | Every long accepted overlap queue has a state-preserving pure-deletion role | `OverlapQueue.pure_deletion_of_accepts_large` |
 | Promised zero-framed binary context-2 Lag reachability is exactly mortality of three integer `4 × 4` matrices | `OverlapLag.mortality_iff_accepts` |
+| Zero-framed binary context-2 Lag acceptance is exactly `(n=1 ∧ U=ε) ∨ (V=ε ∧ U∈0*)` | `OverlapLag.accepts_iff`, `OverlapLag.mortality_iff_syntax` |
 | A fixed morphism cannot identify a terminal with its own compulsory return frame | `OverlapLag.terminal_image_ne_frame` |
 | Every regular safe word preserves the oriented `3`-adic exterior flag | `ParabolicBlade.exteriorState_safe_word_flag`, `ParabolicBlade.exteriorState_safe_word_wall_orientation` |
 | Every concrete defect skeleton without a bad four-periodic run is nonzero | `ParabolicBlade.defectSkeletonProduct_ne_zero_of_not_bad` |

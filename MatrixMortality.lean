@@ -78,6 +78,7 @@ import MatrixMortality.ScheduledBinaryRank
 import MatrixMortality.TwoStateObstructions
 import MatrixMortality.OverlapQueue
 import MatrixMortality.OverlapLag
+import MatrixMortality.OverlapLagDecision
 import MatrixMortality.ParabolicBlade
 import MatrixMortality.ParabolicResidueWall
 import MatrixMortality.ParabolicExterior

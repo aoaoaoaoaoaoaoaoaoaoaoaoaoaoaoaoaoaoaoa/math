@@ -248,9 +248,9 @@ survives in the theorem.
 
 [`M4-O11`](SALVAGE.md#m4-o11-pure-deletion-necessity) forces every long accepting instance to
 spend one role on genuine open-front deletion. The independently audited deletion-scanner
-normal form [`M4-S05`](SALVAGE.md#m4-s05-deletion-scanner-normal-form) now exhausts the
+normal form [`M4-S05`](SALVAGE.md#m4-s05-deletion-scanner-normal-form) exhausts the
 remaining transition tables. All non-scanning tables are decidable; the framed-return promise
-kills one scanner and leaves three incomparable kernels:
+kills one scanner and leaves three kernels:
 
 1. `Lₙ`, zero-framed binary context-2 Lag;
 2. `Bₙ`, zero-framed reset scanning;
@@ -265,18 +265,28 @@ The principal kernel is formalized at exact strength in
 
 with initial word `10ⁿ`, accepting singleton `0`, isolation of every reachable singleton, and
 avoidance of `10ⁿ⁺¹`. Lean proves literal step-for-step equivalence and composes it to `M₄(3)`.
-Known Lag universality does not automatically cover this four-rule binary subclass.
+
+This Lag node is retired by
+[`M4-D01`](SALVAGE.md#m4-d01-zero-framed-binary-two-lag-decision). Without either promise,
+
+```text
+10ⁿ →* 0 ⇔ (n=1 ∧ U=ε) ∨ (V=ε ∧ U∈0*).
+```
+
+The complete backward cone of `10` and a forward `1`-containment invariant prove the formula in
+Lean. The source trunk is therefore down to `Bₙ` and `C`; deciding both closes the promised
+overlap-queue route.
 
 The direct Neary morphism is dead by
 [`M4-O12`](SALVAGE.md#m4-o12-terminal-frame-morphism-obstruction): a morphism cannot send the
 common terminal to `0` followed by the image of an initial word which already ends in that
-terminal. A source reduction must exploit overlap or history, or use a different universal
-source. Conversely, decision procedures for all three kernels decide the entire promised queue
-trunk.
+terminal. A reduction into either surviving scanner must exploit overlap or history, or use a
+different universal source.
 
 The exact checks and evidence boundary are in
 [`audits/m43-deletion-scanner-2026-08-08.md`](audits/m43-deletion-scanner-2026-08-08.md),
-[`audits/m43-overlap-queue-2026-08-08.md`](audits/m43-overlap-queue-2026-08-08.md), and
+[`audits/m43-overlap-queue-2026-08-08.md`](audits/m43-overlap-queue-2026-08-08.md),
+[`audits/m43-overlap-lag-decision-2026-08-10.md`](audits/m43-overlap-lag-decision-2026-08-10.md), and
 [`audits/m43-alternating-defect-literature-2026-08-07.md`](audits/m43-alternating-defect-literature-2026-08-07.md).
 
 #### Matrix trunk: parabolic bridge language
@@ -1346,13 +1356,13 @@ universal computation.
 
 ## Execution order
 
-1. Attack the seven open `M₄(3)` nodes independently: universality versus decidability of each
-   deletion scanner `Lₙ`, `Bₙ`, and `C`; original parabolic semantic incidence and oriented
+1. Attack the six open `M₄(3)` nodes independently: universality versus decidability of deletion
+   scanners `Bₙ` and `C`; original parabolic semantic incidence and oriented
    transport under `M4-S04` and `M4-S06`; and the retuned fixed-row annihilator and arbitrary-word
-   converse under `M4-M04`. The alternating/multiple residue-two defect grammar and the retuned
-   intended-word semantics are closed. Cross-pollinate exact source and exterior invariants, but
-   do not revive complete-token queues, one-coordinate dynamics, finite wall-separated cones, or
-   literal Neary recodings.
+   converse under `M4-M04`. `Lₙ`, the alternating/multiple residue-two defect grammar, and the
+   retuned intended-word semantics are closed. Cross-pollinate exact source and exterior
+   invariants, but do not revive complete-token queues, one-coordinate dynamics, finite
+   wall-separated cones, or literal Neary recodings.
 2. Use formalized `MM-O01`, `G3-O01`, `MM-O03`, and `MM-O04` to reject exact packings, macros,
    and bridges without conflating their scope with solvability preservation.
 3. Prove or refute the setter candidate's projective avoidance property, construct a

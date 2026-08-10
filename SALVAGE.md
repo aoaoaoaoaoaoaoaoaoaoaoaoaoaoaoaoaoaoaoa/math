@@ -132,6 +132,7 @@ file owns the mathematical stock.
 | [`M4-S05`](#m4-s05-deletion-scanner-normal-form) | structure theorem | promised overlap queues contract to three exact deletion scanners | audited | active |
 | [`M4-S06`](#m4-s06-arbitrary-defect-bridge-grammar) | structure theorem | arbitrary defect skeletons and bridge walls reduce to one consecutive projective incidence | formalized | active |
 | [`M4-C03`](#m4-c03-zero-framed-binary-two-lag-compiler) | compiler | the principal scanner is literally binary context-2 Lag and compiles to `M₄(3)` | formalized | graduated |
+| [`M4-D01`](#m4-d01-zero-framed-binary-two-lag-decision) | decidable stratum | the entire zero-framed binary context-2 Lag kernel has an exact syntactic classification | formalized | graduated |
 | [`M4-O12`](#m4-o12-terminal-frame-morphism-obstruction) | obstruction | a fixed morphism cannot map a shared terminal to its own compulsory return frame | formalized | graduated |
 | [`G3-O01`](#g3-o01-four-role-macro-irreducibility) | obstruction | exact nonerasing macros cannot reduce the four source roles to three letters | formalized | graduated |
 | [`G3-S01`](#g3-s01-shift-equivariant-zero-incidence) | structure theorem | same-zero state dimension is equivariant projective incidence dimension | audited | active |
@@ -4396,7 +4397,7 @@ apparent scanners remain. A last-return argument using the compulsory suffix `A=
 forbidden configuration `(rule,A)` eliminates the forward all-return scanner and forces unary
 zero frames in the forward one-loop and backward all-entry scanners.
 
-The unresolved promised source is therefore the union of three exact kernels:
+The promised source is therefore the union of three exact kernels:
 
 ```text
 Lₙ: zero-framed binary context-2 Lag,
@@ -4406,19 +4407,20 @@ C:  a conjugate scanner with nonempty periodic rule production.
 
 In `C` the rule self-loop equation `A ++ P = K ++ A` has exactly the conjugate form
 `K=u++v`, `P=v++u`, `A=(u++v)^r++u`. The split is exhaustive over the two-by-two transition
-table.
+table. [`M4-D01`](#m4-d01-zero-framed-binary-two-lag-decision) subsequently decides `Lₙ`, so
+only `Bₙ` and `C` remain live.
 
 **Scope:** promised binary two-state positive overlap queues. The transition classification and
-the elementary decision arguments have been independently audited but are not one Lean
-declaration. No decision procedure or undecidability reduction is claimed for `Lₙ`, `Bₙ`, or
-`C`.
+the elementary decisions outside the three kernels have been independently audited but are not
+one Lean declaration. `M4-D01` owns the later formal decision of `Lₙ`; no decision procedure or
+undecidability reduction is yet claimed here for `Bₙ` or `C`.
 
-**Use:** replace the generic search over four arbitrary roles by three independent exact source
-problems. A proof that all three are decidable closes the entire promised overlap-queue trunk;
-undecidability of any one closes `M₄(3)` through `M4-C02`.
+**Use:** replace the generic search over four arbitrary roles by two remaining exact source
+problems. Decisions for `Bₙ` and `C` close the entire promised overlap-queue trunk; undecidability
+of either closes `M₄(3)` through `M4-C02`.
 
-**Next:** attack universality and decidability in opposition for each kernel. Do not return to
-complete-frame machines outside this normal form.
+**Next:** decide or prove universality of `Bₙ` and `C`. Do not revisit `Lₙ` or complete-frame
+machines outside this normal form.
 
 **Artifact:**
 [`audits/m43-deletion-scanner-2026-08-08.md`](audits/m43-deletion-scanner-2026-08-08.md).
@@ -4506,6 +4508,36 @@ without further matrix engineering.
 **Artifact:** `OverlapLag.mortality_iff_accepts` in
 [`MatrixMortality/OverlapLag.lean`](MatrixMortality/OverlapLag.lean) and
 [`audits/m43-deletion-scanner-2026-08-08.md`](audits/m43-deletion-scanner-2026-08-08.md).
+
+### M4-D01: Zero-framed binary two-Lag decision
+
+**Kind:** decidable stratum
+
+**Evidence:** formalized
+
+**Disposition:** graduated
+
+For `n>0`, the unrestricted scanner in `M4-C03` accepts exactly when
+
+```text
+(n=1 and U=ε) or (V=ε and U∈0*).
+```
+
+Every accepting trace has last predecessor `10` or `00`. The full backward cone of `10` is
+`1ᵏ0`, while a `1` in `U` is forward invariant and excludes `00`. The two displayed conditions
+give explicit all-zero traces. Neither compiler promise enters the classification.
+
+**Scope:** all binary `U,V,W`, every positive `n`, every malformed intermediate word, and the
+chronological tail-appending convention of `M4-C03`. The theorem classifies source acceptance;
+its matrix corollary retains the compiler's singleton-isolation and framed-return hypotheses.
+
+**Use:** deletes `Lₙ` from the source frontier. No universality attack on this Lag subclass
+survives.
+
+**Artifact:** `OverlapLag.accepts_iff`, `OverlapLag.acceptsDecidable`, and
+`OverlapLag.mortality_iff_syntax` in
+[`MatrixMortality/OverlapLagDecision.lean`](MatrixMortality/OverlapLagDecision.lean), with audit
+[`audits/m43-overlap-lag-decision-2026-08-10.md`](audits/m43-overlap-lag-decision-2026-08-10.md).
 
 ### M4-O12: Terminal-frame morphism obstruction
 

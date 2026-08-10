@@ -62,6 +62,8 @@ open MatrixMortality
 #print axioms OverlapQueue.mortality_iff_accepts
 #print axioms OverlapQueue.pure_deletion_of_accepts_large
 #print axioms OverlapLag.mortality_iff_accepts
+#print axioms OverlapLag.accepts_iff
+#print axioms OverlapLag.mortality_iff_syntax
 #print axioms OverlapLag.terminal_image_ne_frame
 #print axioms exactLeftToggleFusion_immortal
 #print axioms closedSubstitutionHalts_iff_noReachableCycle
