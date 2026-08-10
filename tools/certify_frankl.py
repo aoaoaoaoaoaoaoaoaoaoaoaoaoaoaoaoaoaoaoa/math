@@ -4,7 +4,7 @@
 # dependencies = ["python-flint==0.9.0"]
 # ///
 
-"""Outward-rounded certificate for the Frankl abundance bound 19099/50000.
+"""Outward-rounded certificate for the Frankl abundance bound 76469/200000.
 
 The analytic reduction leaves two compact bivariate entropy gaps.  This script
 certifies those gaps with Arb ball arithmetic.  Two entropy-zero corner squares
@@ -19,6 +19,7 @@ from fractions import Fraction
 import hashlib
 import heapq
 import itertools
+import sys
 
 # PEP 723 installs python-flint only in the script runtime; standalone ty cannot
 # discover that ephemeral environment.
@@ -32,7 +33,28 @@ Box = tuple[Interval, Interval]
 
 ctx.prec = 160
 
-TARGET_Q = Q(19099, 50000)
+TARGETS = {
+    "19099/50000": Q(19099, 50000),
+    "76469/200000": Q(76469, 200000),
+}
+
+
+def target_argument(arguments: list[str]) -> tuple[str, Q]:
+    match arguments:
+        case []:
+            label = "76469/200000"
+        case ["--target", label]:
+            pass
+        case _:
+            raise SystemExit("usage: certify_frankl.py [--target TARGET]")
+    if label not in TARGETS:
+        raise SystemExit(
+            f"unsupported target {label!r}; expected one of {tuple(TARGETS)}"
+        )
+    return label, TARGETS[label]
+
+
+TARGET_LABEL, TARGET_Q = target_argument(sys.argv[1:])
 ALPHA_Q = Q(7, 200)
 SLACK_Q = Q(1, 10_000_000)
 CORNER_Q = Q(1, 1000)
@@ -496,7 +518,7 @@ def main() -> None:
     verify(
         "diagonal-diagonal-upper", upper_region, lambda value: diagonal_gap(value, 1)
     )
-    print("Frankl entropy certificate at 19099/50000: PASS")
+    print(f"Frankl entropy certificate at {TARGET_LABEL}: PASS")
 
 
 if __name__ == "__main__":

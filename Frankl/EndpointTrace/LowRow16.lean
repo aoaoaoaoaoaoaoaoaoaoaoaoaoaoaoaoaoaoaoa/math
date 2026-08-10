@@ -2,6 +2,7 @@ import Frankl.EndpointTrace.LowRow16Trace0
 import Frankl.EndpointTrace.LowRow16Trace1
 import Frankl.EndpointTrace.LowRow16Trace2
 import Frankl.EndpointTrace.LowRow16Trace3
+import Frankl.EndpointTrace.LowRow16Trace4
 
 namespace Frankl
 
@@ -83,7 +84,10 @@ private theorem lowRow16Cell8RootCover {a q : ℝ}
     (hqLower : ((7 : ℝ) / 32) ≤ q)
     (hqUpper : q ≤ ((1 : ℝ) / 4)) :
     0 ≤ endpointCertificateObjective a q := by
-  exact lowRow16Cell8Root_nonneg
+  by_cases hlowRow16Cell8Root : a ≤ ((31 : ℝ) / 128)
+  · exact lowRow16Cell8RootL_nonneg
+      (by linarith) (by linarith) (by linarith) (by linarith)
+  · exact lowRow16Cell8RootU_nonneg
       (by linarith) (by linarith) (by linarith) (by linarith)
 
 private theorem lowRow16Cell9RootCover {a q : ℝ}
@@ -92,7 +96,10 @@ private theorem lowRow16Cell9RootCover {a q : ℝ}
     (hqLower : ((1 : ℝ) / 4) ≤ q)
     (hqUpper : q ≤ ((9 : ℝ) / 32)) :
     0 ≤ endpointCertificateObjective a q := by
-  exact lowRow16Cell9Root_nonneg
+  by_cases hlowRow16Cell9Root : a ≤ ((31 : ℝ) / 128)
+  · exact lowRow16Cell9RootL_nonneg
+      (by linarith) (by linarith) (by linarith) (by linarith)
+  · exact lowRow16Cell9RootU_nonneg
       (by linarith) (by linarith) (by linarith) (by linarith)
 
 private theorem lowRow16Cell10RootCover {a q : ℝ}

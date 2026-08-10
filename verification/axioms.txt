@@ -1,3 +1,8 @@
+'Frankl.abundanceTarget_gt_three_eighths' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Frankl.goldenRatioThreshold_lt_abundanceTarget' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Frankl.orbitYuGap_nonneg' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Frankl.unionClosed_not_coordinateMeansLE' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Frankl.unionClosed_exists_abundant_coordinate' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.terminal_match_iff_tagHaltsFrom' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.nearyPCP_solvable_iff_tagHaltsFrom' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.nearyPCP_primitive_terminal' depends on axioms: [propext, Classical.choice, Quot.sound]

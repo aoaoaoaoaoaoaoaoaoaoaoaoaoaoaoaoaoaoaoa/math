@@ -53,9 +53,11 @@ file owns the mathematical stock.
 | [`FC-S07`](#fc-s07-low-orbit-contraction) | structure theorem | every surviving two-orbit extreme contracts to one of two bivariate families | formalized | graduated |
 | [`FC-S08`](#fc-s08-diagonal-family-collapse) | structure theorem | every target-mean two-diagonal objective is bounded below by the point law | formalized | graduated |
 | [`FC-S09`](#fc-s09-endpoint-core-contraction) | structure theorem | the high-conditional-mean endpoint core contracts to the centered curve | formalized | graduated |
-| [`FC-S10`](#fc-s10-centered-endpoint-positivity) | analytic certificate | the centered endpoint curve and contracted core are strictly positive | formalized | graduated |
-| [`FC-S11`](#fc-s11-endpoint-boundary-certificate) | certificate | every canonical endpoint objective is nonnegative at `19099/50000` | formalized | graduated |
-| [`FC-M01`](#fc-m01-rational-yu-certificate) | partial mechanism | Arb certifies the two reduced gaps at `19099/50000` | computational | active |
+| [`FC-S10`](#fc-s10-centered-endpoint-positivity) | analytic certificate | the saturated centered endpoint curve is positive through complement `21/25` | formalized | graduated |
+| [`FC-S11`](#fc-s11-endpoint-boundary-certificate) | certificate | every canonical endpoint objective is nonnegative at `76469/200000` | formalized | graduated |
+| [`FC-S12`](#fc-s12-finite-entropy-bridge) | structure theorem | the finite affine coupling inequality implies strict union-closed abundance | formalized | graduated |
+| [`FC-S13`](#fc-s13-rational-universal-abundance) | theorem | every nontrivial finite union-closed family has abundance greater than `76469/200000` | formalized | graduated |
+| [`FC-M01`](#fc-m01-rational-yu-certificate) | partial mechanism | Arb independently checks the reduced gaps at `76469/200000` | computational | active |
 | [`FC-O01`](#fc-o01-homogeneous-tilt-persistence-fails) | obstruction | one-coordinate majority need not persist under homogeneous product tilt | audited | active |
 | [`FC-O02`](#fc-o02-uniform-fiber-semigroup-ceiling) | obstruction | finite full-fiber semigroup lifts cannot beat the uniform entropy barrier | audited | stock |
 | [`FC-O03`](#fc-o03-maximal-self-dual-completion-fails) | obstruction | maximal complement-free meet families need not be self-dual | audited | stock |
@@ -512,11 +514,10 @@ coefficient is largest at `r=13/50`, where
 with exact margin `3108487/23310000000`. Thus the full two-dimensional core is bounded below
 by the centered curve `q=a`.
 
-**Scope:** `FC-S10` supplies positivity of the centered curve. The contraction still does not
-cover the complementary endpoint wedge where `a<1/4`, `q>1/2`, or `r<13/50`.
+**Scope:** this was the first core contraction at the former target. The support-aware theorem in
+`FC-S11` strictly subsumes its high-`a` role at `76469/200000`.
 
-**Use:** replace the numerically hardest interior of the endpoint certificate by one
-one-dimensional inequality and reserve exact subdivision for the boundary complement.
+**Use:** retain its Jensen-deficit architecture; use `FC-S11` for the current bound.
 
 **Artifact:** `Frankl/EndpointObjective.lean` and
 [`audits/frankl-yu-reduction-2026-08-08.md`](audits/frankl-yu-reduction-2026-08-08.md#endpoint-core-contraction).
@@ -527,36 +528,38 @@ one-dimensional inequality and reserve exact subdivision for the boundary comple
 **Evidence:** formalized
 **Disposition:** graduated
 
-In complement coordinates `y=1−a`, multiply the centered certificate objective by `y²` and
-write
+In complement coordinates `y=1−r`, multiply the saturated centered objective by `y²` and write
 
 ```text
 K(y)=(1−α)(1−t)²h(y²)+α(2(1−t)y−y²)log 2−(1+ε)(1−t)yh(y).
 ```
 
-On `1−t≤y≤37/50`, the third derivative has positive sign after clearing its positive
-denominator; its numerator reduces to the exact cubic
+At `t=76469/200000`, the sign of the third derivative is governed by the exact cubic
 
 ```text
-10000001y³+23855572y²−30000003y+3855570 ≤ 0.
+Q(y)=10000001y³+23841483y²−30000003y+3841481.
 ```
 
-Hence `K` is convex. At `y₀=1339/2000`, proved logarithm enclosures give
-`K(y₀)>1/7000` and `|K′(y₀)|<1/10000`. The convex supporting line stays positive on the whole
-interval. The exact identity
+The polynomial `Q` is increasing on `1−t≤y≤21/25`. Thus `K'''` changes sign at most once,
+from positive to negative, and `K''` reaches its minimum at an endpoint. Four-term atanh
+enclosures prove `K''(1−t)>0` and `K''(21/25)>0`, so `K` is convex on the whole interval. At
+`y₀=33497/50000`, sharper rational logarithm enclosures give
+`K(y₀)>1/6000000` and `0<K′(y₀)<1/5000000`; its supporting line remains positive.
+
+The exact identity
 
 ```text
-K(1−a)=(1−a)²J(a,a)
+K(1−r)=(1−r)² G̃(r)
 ```
 
-then proves `J(a,a)>0` for `13/50≤a≤t`. Composed with `FC-S09`, every endpoint law in the
-high-conditional-mean core has strictly positive objective.
+then proves positivity of the saturated centered objective for `4/25≤r≤t`. This lower endpoint
+is exactly strong enough for every conditional center produced by `a≥1/4`.
 
-**Scope:** this proves only the centered interval and its contracted core. `FC-S11` now covers
-the complementary endpoint boundary.
+**Scope:** this is the one-dimensional analytic component of the high-endpoint proof. It does
+not cover `a≤1/4`, where the static low-rectangle certificate remains necessary.
 
-**Use:** remove the endpoint interior from the remaining certificate and restrict any exact
-subdivision or new inequality to the boundary complement.
+**Use:** combine with the support-aware coefficient in `Frankl/SupportEndpoint.lean`; no
+high-`a` residual subdivision is needed.
 
 **Artifact:** `Frankl/CenteredEndpoint.lean` and
 [`audits/frankl-yu-reduction-2026-08-08.md`](audits/frankl-yu-reduction-2026-08-08.md#centered-endpoint-curve).
@@ -568,34 +571,101 @@ subdivision or new inequality to the boundary complement.
 **Disposition:** graduated
 
 Half support forces the endpoint coordinate into the exact dichotomy `q≤1/2 ∨ q=1`; the
-apparent strip `1/2<q<1` is not realizable. The analytic core covers `a≥1/4` whenever either
-`a≥13/40` or `q≥31/100`. Static reflected subdivisions cover the complement:
+apparent strip `1/2<q<1` is not realizable. On the whole high rectangle
 
 ```text
-0≤a≤1/4,       0≤q≤1/2;
-1/4≤a≤13/40,   0≤q≤31/100;
-1/1000≤a≤t,    q=1.
+1/4≤a≤76469/200000,    0≤q≤1/2,
 ```
 
-The remaining `q=1, a≤1/1000` corner is analytic. Each generated leaf contains a closed
-rational subdivision term and a definitional equality showing that the proved checker returns
-success. Ninety-six trace modules are replayed by the kernel; coverage theorems compose them
-without a runtime decision procedure. Together with `FC-S08` through `FC-S10`, this proves
+condition away the deterministic coordinate, put `M=max(a,q)`, and compare the independent
+loss with support-aware coefficient
+
+```text
+Ψ(M,r)=(193/200)(1−t)
+  (M/(M+r−Mr)+(1−4r/3)/(1−r)).
+```
+
+The coefficient decreases in `r`. Splitting at `q≤a` and `a≤q` reduces it to two exact
+rational polynomial signs, proving `Ψ≤1+10⁻⁷`. `FC-S10` then gives strict positivity throughout
+the high rectangle. When `q=1`, replacing its deterministic endpoint atom by the symmetric
+endpoint orbit at `q=a` preserves the marginal law and independent entropy while decreasing
+the dependent entropy term. Thus the `q=1` objective is bounded below by a point already in the
+low or high rectangle. Static reflected subdivisions remain only on
+
+```text
+0≤a≤1/4,       0≤q≤1/2.
+```
+
+Each generated leaf contains a closed rational subdivision term and a definitional equality
+showing that the proved checker returns success. Coverage theorems compose them without a
+runtime decision procedure. Together with `FC-S08` through `FC-S10`, this proves
 `orbitYuGap_nonneg` for every finite symmetric orbit law of mean at most
-`t=19099/50000`.
+`t=76469/200000`.
 
 **Scope:** this is the complete finite-coupling objective inequality at the displayed rational
-parameters. It is not yet the universal union-closed abundance theorem; that conclusion still
-requires formalizing Yu's entropy argument from coordinatewise couplings to a contradiction on
-a finite union-closed family.
+parameters. `FC-S12` supplies the independent bridge to union-closed families.
 
-**Use:** treat the two-variable optimization as closed. Further improvement must either ratchet
-the rational parameters and regenerate the certificate or strengthen the entropy/coupling
-architecture.
+**Use:** further parameter work need only regenerate the low rectangle while rechecking the
+analytic scalar inequalities.
 
 **Artifact:** `Frankl/OrbitClassification.lean`, `Frankl/EndpointCertificate.lean`,
 `Frankl/EndpointTrace/`, `Frankl/EndpointBoundary.lean`, and
-`tools/GenerateFranklEndpointTrace.lean`.
+`tools/GenerateFranklEndpointTrace.lean`; see
+[`audits/frankl-rational-abundance-2026-08-10.md`](audits/frankl-rational-abundance-2026-08-10.md#endpoint-closure).
+
+### FC-S12: Finite entropy bridge
+
+**Kind:** structure theorem
+**Evidence:** formalized
+**Disposition:** graduated
+
+For a finite law on an iterated Boolean cube, each coordinate's conditional success
+probabilities form a finite marginal law. Two couplings are constructed: the independent
+product and a recursive symmetric coupling whose local Boolean kernel maximizes the entropy of
+the union. The orbit theorem applies to every coordinate because the mean of its conditional
+law is exactly that coordinate's unconditional frequency.
+
+The Shannon chain rule and conditioning monotonicity give lower bounds for the two union
+entropies. If every coordinate frequency were at most `t`, summing the strict affine inequality
+would force a convex combination of those union entropies to exceed the source entropy. Both
+union laws remain supported on the original finite union-closed family, whose uniform law has
+the maximal possible entropy. This is impossible.
+
+**Scope:** the theorem is finite and fully handles null conditioning fibers. It concerns ordinary
+families of distinct sets, not weighted multisets.
+
+**Use:** any future finite affine-coupling certificate at another target can reuse the bridge
+without change.
+
+**Artifact:** `Frankl/FiniteEntropy.lean`, `Frankl/ConditionalEntropy.lean`,
+`Frankl/FiniteCoupling.lean`, and `Frankl/AffineEntropyBridge.lean`; see
+[`audits/frankl-rational-abundance-2026-08-10.md`](audits/frankl-rational-abundance-2026-08-10.md#finite-entropy-bridge).
+
+### FC-S13: Rational universal abundance
+
+**Kind:** theorem
+**Evidence:** formalized
+**Disposition:** graduated
+
+Every finite union-closed family `F` with `F≠∅` and `F≠{∅}` contains an element occurring in
+strictly more than
+
+```text
+(76469/200000)|F|
+```
+
+members. The inequality `76469/200000>(3−√5)/2` is also exact and kernel-checked. This is an
+explicit rigorous advance over the AHS benchmark. It remains numerically below Cambie's
+uncertified `0.382345533366703…` candidate and Liu's conditional `0.382709087…` candidate.
+
+**Scope:** the theorem does not settle Frankl's conjectured `1/2` bound and makes no absolute
+priority claim beyond the audited literature comparison.
+
+**Use:** this is the publication theorem and the new baseline for any parameter ratchet.
+
+**Artifact:** `Frankl.unionClosed_exists_abundant_coordinate` in
+`Frankl/AffineEntropyBridge.lean` and
+[`audits/frankl-rational-abundance-2026-08-10.md`](audits/frankl-rational-abundance-2026-08-10.md).
 
 ### FC-M01: Rational Yu certificate
 
@@ -603,7 +673,7 @@ architecture.
 **Evidence:** computational
 **Disposition:** active
 
-At `t=19099/50000`, `α=7/200`, and `ε=10^(−7)`, 160-bit Arb arithmetic
+At `t=76469/200000`, `α=7/200`, and `ε=10^(−7)`, 160-bit Arb arithmetic
 certifies
 
 ```text
@@ -611,24 +681,29 @@ certifies
 ```
 
 on both reduced bivariate families. Two entropy-zero corner squares are discharged by explicit
-analytic estimates. The run assesses 19,140 rational boxes and emits deterministic hashes for
-the 9,603 certified leaves.
+analytic estimates. The run assesses 41,080 rational boxes and emits 20,573 certified leaves
+with deterministic family hashes
+
+```text
+diagonal-endpoint:       ece95829c653da9cb647c97bd42a448a77b614c8483087427d95d34cd96649c3
+diagonal-diagonal-lower: 01f86c782d8bca623fd5d650387f799939b604f636a921c8b92fbe9696396dd0
+diagonal-diagonal-upper: dc55e20e4bccb82d2dd6af0155cf77d2de7b396f5ef0f61552ca8ffc112b9df4
+```
 
 **Scope:** this is an outward-rounded certificate for the reduced objectives, not by itself an
 unbounded theorem. Promotion additionally requires the analytic reductions and numerical
 certificate to pass the repository's strict Lean gate.
 
-**Use:** it fixes a concrete formalization target that would improve the universal abundance
-constant beyond `(3−√5)/2`.
+**Use:** retain it as an independent regression oracle and parameter-search adjudicator. The
+Lean theorem does not depend on Arb.
 
-**Artifact:** [`tools/certify_frankl_38198.py`](tools/certify_frankl_38198.py),
+**Artifact:** [`tools/certify_frankl.py`](tools/certify_frankl.py),
 [`audits/frankl-yu-reduction-2026-08-08.md`](audits/frankl-yu-reduction-2026-08-08.md#outward-rounded-certificate),
 and the `Frankl/Certificate*.lean`, `Frankl/Interval*.lean`, and `Frankl/LogBounds.lean`
 checker modules.
 
-**Next:** retain this as an independent outward-rounded oracle for parameter search. `FC-S11`
-supersedes its endpoint proof obligation; formalize the final entropy implication before changing
-the universal-bound ledger.
+**Next:** use this oracle to screen rational targets above Cambie's reported numerical candidate;
+promote only candidates that also pass the strict Lean gate.
 
 ### FC-O02: Uniform-fiber semigroup ceiling
 

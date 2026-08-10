@@ -2,6 +2,8 @@
 
 Date: 2026-08-08
 
+Revised: 2026-08-10
+
 Author: GPT-5.6 Sol
 
 Human role: elicited by @eternalism_4eva
@@ -25,17 +27,19 @@ from at least half its members.
 | Result | Value | Evidence | Exact boundary |
 | --- | ---: | --- | --- |
 | Alweiss–Huang–Sellke | `(3−√5)/2 = 0.381966011250105…` | peer-reviewed theorem | The final scalar inequality has an independent analytic proof by Boppana. |
+| GPT-5.6 Sol, present work | `76469/200000 = 0.382345` | Lean theorem with strict repository audit | The complete finite entropy bridge and reduced objective certificate are kernel-checked; the remaining static trace covers only the low endpoint rectangle. |
 | Sawin | `>(3−√5)/2` | proof sketch | Compactness and stability are not made quantitative. |
 | Yu | `0.38234` | analytic finite reduction; numerical evaluation | No outward-rounded global certificate for the reduced program. |
 | Cambie | `0.382345533366703…` | analytic reductions plus graphical/numerical minimization | The paper expressly calls the computer verification less rigorous; its ceiling law is the two-point marginal on `{b,1}`. |
 | Liu | `>0.382345533366703…` | peer-reviewed analytic strict-improvement mechanism | The theorem is existential; it gives no certified explicit increment. |
 | Liu candidate | `0.382709087918741…` | conditional numerical program | Requires an unproved infinite-kernel PSD statement and an unproved global optimizer shape. |
 
-Thus the last explicit universal constant supported throughout by a published proof is the
-Alweiss–Huang–Sellke value. Liu proves that an unspecified larger constant exists, assuming the
-Cambie/Sawin endpoint used in his comparison is available; his displayed numerical constant is
-not a theorem. Any claimed explicit advance must certify both its functional reduction and its
-global finite optimization.
+Thus the last explicit universal constant supported throughout by an external published proof
+is the Alweiss–Huang–Sellke value. The present work supplies a larger explicit theorem with a
+kernel-checked proof, but has not yet passed external peer review. Liu proves that an unspecified
+larger constant exists, assuming the Cambie/Sawin endpoint used in his comparison is available;
+his displayed numerical constant is not a theorem. Any claimed explicit advance must certify
+both its functional reduction and its global finite optimization.
 
 ## Entropy Line
 
@@ -57,11 +61,11 @@ a marginal supported on
 `{b,1}`, where `b≈0.329454738503037`, defeats every mixture of the independent and
 max-entropy protocols at `c≈0.382345533366703`.
 
-The local campaign has since reduced the repaired program to two bivariate families and obtained
-an outward-rounded Arb certificate at `19099/50000=0.38198`; see the
-[dedicated reduction audit](frankl-yu-reduction-2026-08-08.md). This is candidate new work, not
-part of the ad-fontes account of the published frontier, and is withheld from the established
-bound until its required Lean formalization closes.
+The local campaign reduced the repaired program to two bivariate families, first certified
+`19099/50000`, then ratcheted the exact target to `76469/200000`. The finite entropy bridge,
+functional reductions, analytic regions, and low-rectangle certificate are now Lean-checked;
+see the [formal result audit](frankl-rational-abundance-2026-08-10.md). The separate Arb run is
+retained only as an outward-rounded regression oracle.
 
 Liu's conditionally IID protocol escapes that obstruction because the extremal antithetic
 coupling is not a mixture of IID laws. His analytic compactness argument proves a strict gain.
@@ -117,9 +121,9 @@ The following statements are not available as theorem premises:
 - self-dual completion of an arbitrary complement-free Horn family.
 
 The first audit tranche is indexed as `FC-S01` through `FC-S04` and `FC-O01` through
-`FC-O03` in `SALVAGE.md`. The subsequent Yu repair and contraction lemmas remain candidate
-new work until formalization. Strategy, live hypotheses, and experiment outcomes remain in
-Fidget Spinner rather than in this evidence audit.
+`FC-O03` in `SALVAGE.md`. The formalized Yu repair, contractions, entropy bridge, and universal
+theorem are indexed as `FC-S05` through `FC-S13`. Strategy, live hypotheses, and experiment
+outcomes remain in Fidget Spinner rather than in this evidence audit.
 
 ## Sources
 

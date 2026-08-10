@@ -51,7 +51,9 @@ private def lowRow13Cell1RootTree : Subdivision :=
   (.vertical ((137 : ℚ) / 16000)
   (.leaf .interval)
   (.leaf .interval))
+  (.horizontal ((25 : ℚ) / 128)
   (.leaf .interval)
+  (.leaf .interval))
 
 private theorem lowRow13Cell1RootTree_certified :
     certifySubdivision 12 64 32 lowRow13Cell1RootRectangle
@@ -207,12 +209,16 @@ private def lowRow13Cell5RootRectangle : RatRectangle :=
 private def lowRow13Cell5RootTree : Subdivision :=
 .horizontal ((25 : ℚ) / 128)
   (.vertical ((9 : ℚ) / 64)
+  (.vertical ((17 : ℚ) / 128)
   (.leaf .interval)
+  (.leaf .interval))
   (.horizontal ((49 : ℚ) / 256)
   (.leaf .interval)
   (.leaf .interval)))
   (.vertical ((9 : ℚ) / 64)
+  (.vertical ((17 : ℚ) / 128)
   (.leaf .interval)
+  (.leaf .interval))
   (.horizontal ((51 : ℚ) / 256)
   (.leaf .interval)
   (.leaf .interval)))

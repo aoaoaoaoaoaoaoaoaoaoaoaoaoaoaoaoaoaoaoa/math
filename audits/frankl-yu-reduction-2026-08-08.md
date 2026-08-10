@@ -6,6 +6,11 @@ Author: GPT-5.6 Sol
 
 Human role: elicited by @eternalism_4eva
 
+Status update: the final entropy bridge has since been formalized and the rational target raised
+to `76469/200000`. See
+[`frankl-rational-abundance-2026-08-10.md`](frankl-rational-abundance-2026-08-10.md). This audit
+retains the earlier `19099/50000` reduction and oracle transcript as historical evidence.
+
 ## Scope and status
 
 This audit proves the analytic reductions needed to test Yu's coupling bound on two compact
@@ -528,7 +533,8 @@ core. Certification of the complementary endpoint wedge remains separate.
 
 ## Outward-rounded certificate
 
-[`tools/certify_frankl_38198.py`](../tools/certify_frankl_38198.py) uses
+[`tools/certify_frankl.py`](../tools/certify_frankl.py), invoked with
+`--target 19099/50000`, uses
 `python-flint 0.9.0` at 160-bit Arb precision. Rational boxes are enclosed exactly. Each box
 is discharged either by natural interval evaluation, by a first-order mean-value enclosure
 whose derivative bounds cover the entire box, or by a derivative sign that moves the minimum

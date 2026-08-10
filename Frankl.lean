@@ -24,8 +24,13 @@ import Frankl.CertificateObjective
 import Frankl.DiagonalObjective
 import Frankl.EndpointObjective
 import Frankl.CenteredEndpoint
+import Frankl.SupportEndpoint
 import Frankl.CertificateAdaptive
 import Frankl.CertificateCorners
 import Frankl.EndpointCertificate
 import Frankl.EndpointTrace
 import Frankl.EndpointBoundary
+import Frankl.FiniteEntropy
+import Frankl.ConditionalEntropy
+import Frankl.FiniteCoupling
+import Frankl.AffineEntropyBridge

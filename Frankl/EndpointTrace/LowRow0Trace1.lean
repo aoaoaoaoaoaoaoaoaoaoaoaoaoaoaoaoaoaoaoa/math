@@ -61,7 +61,9 @@ private def lowRow0Cell1RootLLLLULUTree : Subdivision :=
   (.leaf .interval))
   (.leaf .interval))
   (.horizontal ((1 : ℚ) / 8000)
+  (.vertical ((2839 : ℚ) / 1024000)
   (.leaf .interval)
+  (.leaf .interval))
   (.leaf .interval)))
   (.leaf .interval)
 

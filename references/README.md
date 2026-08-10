@@ -31,11 +31,12 @@ redistributable full text was located.
 | [Bhasin24](bhasin-2024-cubical-complements-union-closed.md) | arXiv v1; CC BY | Cubical complex of simply rooted families; the audit upgrades acyclicity to contractibility and documents three local source defects |
 | [Zargar23](zargar-2023-union-closed-nonuniform-distributions.md) | arXiv v2; CC BY | Nilpotent/group semigroup lift; its `k=2,m=1` seam is closed in the binary-kernel audit, yielding weighted Frankl at `t=1/2` |
 
-The constants `0.38234`, `0.382345533…`, and `0.382709087…` have different
-epistemic status. Yu's and Cambie's values depend on uncertified global numerical
-minimization; Liu's larger value additionally assumes an infinite-kernel PSD statement and
-an optimizer-shape hypothesis. They are targets, not replacements for the rigorous AHS
-benchmark.
+The constants `0.38234`, `0.382345533…`, and `0.382709087…` have different epistemic
+status. Yu's and Cambie's values depend on uncertified global numerical minimization; Liu's
+larger value additionally assumes an infinite-kernel PSD statement and an optimizer-shape
+hypothesis. AHS remains the last explicit benchmark supported by an external published proof.
+The present repository separately proves and kernel-checks the local result
+`76469/200000=0.382345`; it does not exceed Cambie's reported numerical candidate.
 
 ## Matrix mortality
 

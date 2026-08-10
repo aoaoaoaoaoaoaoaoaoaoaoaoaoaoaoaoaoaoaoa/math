@@ -79,7 +79,7 @@ def endpoint
 /-- Endpoint-orbit mass in certificate coordinates. -/
 def endpointUpperWeight : EntropyExpr :=
   .div
-    (.mul (.constant 2) (.sub (.constant (19099 / 50000)) .horizontal))
+    (.mul (.constant 2) (.sub (.constant (76469 / 200000)) .horizontal))
     (.sub
       (.add (.constant 1) .vertical)
       (.mul (.constant 2) .horizontal))
@@ -92,17 +92,17 @@ def endpointExpression : EntropyExpr :=
 /-- Lower diagonal mean on the region `w ≤ 2t`. -/
 def lowerRegionLowerMeanExpression : EntropyExpr :=
   .sub
-    (.constant (19099 / 50000))
+    (.constant (76469 / 200000))
     (.mul .horizontal
       (.div
-        (.mul .vertical (.sub (.constant (1 / 2)) (.constant (19099 / 50000))))
+        (.mul .vertical (.sub (.constant (1 / 2)) (.constant (76469 / 200000))))
         (.sub (.constant 1) .horizontal)))
 
 /-- Upper diagonal mean on the region `w ≤ 2t`. -/
 def lowerRegionUpperMeanExpression : EntropyExpr :=
   .add
-    (.constant (19099 / 50000))
-    (.mul .vertical (.sub (.constant (1 / 2)) (.constant (19099 / 50000))))
+    (.constant (76469 / 200000))
+    (.mul .vertical (.sub (.constant (1 / 2)) (.constant (76469 / 200000))))
 
 /-- Reflected diagonal objective on the region `w ≤ 2t`. -/
 def lowerRegionExpression : EntropyExpr :=
@@ -111,22 +111,38 @@ def lowerRegionExpression : EntropyExpr :=
 
 /-- Lower diagonal mean on the region `2t ≤ w`. -/
 def upperRegionLowerMeanExpression : EntropyExpr :=
-  .mul (.constant (19099 / 50000)) (.sub (.constant 1) .vertical)
+  .mul (.constant (76469 / 200000)) (.sub (.constant 1) .vertical)
 
 /-- Upper diagonal mean on the region `2t ≤ w`. -/
 def upperRegionUpperMeanExpression : EntropyExpr :=
   .add
-    (.constant (19099 / 50000))
+    (.constant (76469 / 200000))
     (.mul
       (.sub (.constant 1) .horizontal)
       (.div
-        (.mul .vertical (.constant (19099 / 50000)))
+        (.mul .vertical (.constant (76469 / 200000)))
         .horizontal))
 
 /-- Reflected diagonal objective on the region `2t ≤ w`. -/
 def upperRegionExpression : EntropyExpr :=
   diagonal (.sub (.constant 1) .horizontal) .horizontal
     upperRegionLowerMeanExpression upperRegionUpperMeanExpression
+
+/-- The saturated centered endpoint objective after multiplication by the square of the
+conditional complement. -/
+def centeredCurveExpression : EntropyExpr :=
+  yuGap
+    (.mul
+      (.constant ((123531 / 200000) ^ 2))
+      (.entropy (.mul .horizontal .horizontal)))
+    (.mul
+      (.mul (.constant (123531 / 200000)) .horizontal)
+      (.entropy .horizontal))
+    (.mul
+      (.sub
+        (.mul (.constant (123531 / 100000)) .horizontal)
+        (.mul .horizontal .horizontal))
+      (.entropy (.constant (1 / 2))))
 
 theorem constant_domain (value : ℚ) (x y : ℝ) :
     (EntropyExpr.constant value).DomainAt x y := by
@@ -497,6 +513,48 @@ theorem upperRegionExpression_domain {upperWeight displacement : ℝ}
     exact hmeans.1
   · rw [upperRegionUpperMeanExpression_eval]
     exact hmeans.2
+
+theorem centeredCurveExpression_domain {y auxiliary : ℝ}
+    (hy₀ : 0 < y) (hy₁ : y < 1) :
+    centeredCurveExpression.DomainAt y auxiliary := by
+  have hyDomain := horizontal_domain y auxiliary
+  have hyMem : (EntropyExpr.horizontal.eval y auxiliary) ∈ Icc (0 : ℝ) 1 := by
+    simpa only [EntropyExpr.eval] using And.intro hy₀.le hy₁.le
+  have hySquareMem :
+      (EntropyExpr.mul .horizontal .horizontal).eval y auxiliary ∈ Icc (0 : ℝ) 1 := by
+    simp only [EntropyExpr.eval]
+    constructor
+    · positivity
+    · nlinarith [mul_nonneg hy₀.le (sub_nonneg.2 hy₁.le)]
+  have hySquareEntropy := entropy_domain (mul_domain hyDomain hyDomain) hySquareMem
+  have hyEntropy := entropy_domain hyDomain hyMem
+  have hhalfEntropy :
+      (EntropyExpr.entropy (.constant (1 / 2))).DomainAt y auxiliary := by
+    apply entropy_domain (constant_domain (1 / 2) y auxiliary)
+    norm_num [EntropyExpr.eval]
+  have hindependent := mul_domain
+    (constant_domain ((123531 / 200000) ^ 2) y auxiliary) hySquareEntropy
+  have hmarginal := mul_domain
+    (mul_domain (constant_domain (123531 / 200000) y auxiliary) hyDomain) hyEntropy
+  have hdependent := mul_domain
+    (sub_domain
+      (mul_domain (constant_domain (123531 / 100000) y auxiliary) hyDomain)
+      (mul_domain hyDomain hyDomain))
+    hhalfEntropy
+  exact sub_domain
+    (add_domain
+      (mul_domain (constant_domain (193 / 200) y auxiliary) hindependent)
+      (mul_domain (constant_domain (7 / 200) y auxiliary) hdependent))
+    (mul_domain (constant_domain (10000001 / 10000000) y auxiliary) hmarginal)
+
+theorem centeredCurveExpression_eval (y auxiliary : ℝ) :
+    centeredCurveExpression.eval y auxiliary =
+      (1 - dependentShare) * targetComplement ^ 2 * binEntropy (y ^ 2) +
+        dependentShare * (2 * targetComplement * y - y ^ 2) * log 2 -
+        (1 + entropySlack) * targetComplement * y * binEntropy y := by
+  simp [centeredCurveExpression, yuGap, EntropyExpr.eval, EntropyExpr.sub,
+    dependentShare, entropySlack, targetComplement, abundanceTarget]
+  ring
 
 theorem endpointExpression_eval {a q : ℝ} (haHalf : a ≤ 1 / 2) :
     endpointExpression.eval a q = endpointCertificateObjective a q := by

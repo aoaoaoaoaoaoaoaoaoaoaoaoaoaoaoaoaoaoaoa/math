@@ -88,7 +88,9 @@ private def lowRow9Cell9RootRectangle : RatRectangle :=
 
 private def lowRow9Cell9RootTree : Subdivision :=
 .horizontal ((17 : ℚ) / 128)
+  (.vertical ((17 : ℚ) / 64)
   (.leaf .interval)
+  (.leaf .interval))
   (.vertical ((17 : ℚ) / 64)
   (.leaf .interval)
   (.leaf .interval))
@@ -233,7 +235,9 @@ private def lowRow9Cell13RootRectangle : RatRectangle :=
     RatBall.ofBounds ((3 : ℚ) / 8) ((13 : ℚ) / 32)⟩
 
 private def lowRow9Cell13RootTree : Subdivision :=
-.leaf .interval
+.horizontal ((17 : ℚ) / 128)
+  (.leaf .interval)
+  (.leaf .interval)
 
 private theorem lowRow9Cell13RootTree_certified :
     certifySubdivision 12 64 32 lowRow9Cell13RootRectangle

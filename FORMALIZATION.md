@@ -1,101 +1,53 @@
 # Formal Verification
 
-## Frankl candidate bound
+## Frankl abundance theorem
 
-The candidate universal abundance bound
+Lean proves the following unconditional finite theorem at
 
 ```text
-19099/50000 = 0.38198 > (3−√5)/2
+76469/200000 = 0.382345 > (3−√5)/2.
 ```
 
-has a complete informal reduction and an outward-rounded Arb certificate in
-[`audits/frankl-yu-reduction-2026-08-08.md`](audits/frankl-yu-reduction-2026-08-08.md).
-It is deliberately not yet counted among the formal results. The exact-mean reduction,
-half-support kernel, orbit contractions, and all three canonical objective families are now
-formalized. Promotion still requires the entropy implication from the certified finite-coupling
-inequality to the stated universal union-closed abundance bound.
+For every finite union-closed family of distinct Boolean vectors that is nonempty and not
+`{∅}`, some coordinate occurs in strictly more than `76469/200000` of its members. The
+publication-facing declaration is `Frankl.unionClosed_exists_abundant_coordinate` in
+`Frankl/AffineEntropyBridge.lean`.
 
-The Python/Arb program is retained as independent evidence and a box-generator, not as a Lean
-oracle. The formal certificate must use proved rational enclosures for every logarithm and may
-not use `native_decide`, external declarations, or a generated axiom.
+The proof is kernel-checked from the finite family to the scalar certificate. Its main layers are:
 
-The following analytic, finite-convex, and certificate core is now kernel-checked:
+- finite Shannon entropy, conditioning, deterministic pushforwards, product laws, and the chain
+  rule, including zero-probability fibers;
+- independent and recursively dependent symmetric couplings with the prescribed marginals;
+- the exact entropy bridge: Yu's strict one-coordinate affine inequality sums to an entropy gain
+  for a union that remains supported on the original finite union-closed family;
+- exact-mean lifting, fixed-mean concavity, one-moment support reduction, half-support
+  elimination, orbit classification, and contraction to canonical objective families;
+- analytic collapse of the diagonal family;
+- a support-aware endpoint contraction on
+  `1/4≤a≤76469/200000, 0≤q≤1/2`, using support `max(a,q)` and conditional center
 
-- exact target arithmetic, including `19099/50000>(3−√5)/2`;
-- low-square entropy curvature and Jensen-deficit bounds;
-- the Bernstein-positive self-pair kernel and both self-pair contraction bounds;
-- exact-mean orbit weights and the ordered low–low and low–endpoint contractions, including
-  the strict factor `18401/18750<1`;
-- the complete half-support scalar sign, global gain concavity and monotonicity, and pointwise
-  dependent-cost contraction;
-- finite Jensen, bilinear polarization, and coupling-level mean-lift scaling and gap reflection;
-- the finite Alweiss--Huang--Sellke fixed-mean concavity theorem, proved directly from a
-  radially regularized entropy power series whose second variation is a nonpositive sum of
-  squares;
-- an elementary support-reduction algorithm for any concave functional on a one-moment finite
-  simplex, sharpened to a point mass at the mean or two atoms whose moments strictly straddle
-  it;
-- the symmetric-orbit realization of marginal, independent, and dependent entropy, and the
-  resulting unconditional reduction of every finite exact-mean symmetric coupling to at most
-  two orbit laws;
-- exact identification of the two surviving masses with the lower/upper orbit weights, and a
-  single composition theorem reducing every bounded-mean finite orbit law to identified
-  exact-target extremes;
-- realization of both ordered low–low contractions and the low–endpoint contraction on actual
-  canonical two-orbit laws, including preservation of the dependent term and monotonicity of
-  the complete strict Yu gap;
-- a simultaneous finite half-support pushforward on arbitrary symmetric orbit laws, with exact
-  mass and mean preservation, an arbitrary-family polarization theorem, dependent-cost
-  contraction, and monotonicity of the complete strict Yu gap;
-- support reindexing, within-orbit sorting, classification of every identified half-supported
-  extreme, and the complete reduction of every bounded-mean finite symmetric coupling to the
-  diagonal, diagonal–diagonal, or diagonal–endpoint objective family;
-- the endpoint support dichotomy `q≤1/2 ∨ q=1`, which removes the spurious open strip
-  `1/2<q<1` from the final canonical family;
-- exact bivariate formulas and coordinate maps for the diagonal–diagonal and
-  diagonal–endpoint objective families, together with their domain proofs;
-- an exact rational ball arithmetic, outward dyadic rounding, monotone entropy enclosures,
-  and a four-term atanh logarithm enclosure with a proved geometric remainder and a fixed
-  rational enclosure of `log 2`;
-- a typed entropy-expression language with real semantics, coordinate derivatives, domain and
-  smoothness predicates, and a rounded dual evaluator whose value and derivative balls are
-  proved sound;
-- direct interval and first-order mean-value leaves, rational subdivision trees, adaptive and
-  seeded generators, executable direct adjudicators, and proofs that direct adjudication is
-  extensionally identical to checking the generated tree;
-- analytic proofs of both entropy-zero endpoint squares, including the required logarithm,
-  near-doubling entropy, ternary-fiber entropy, and concavity estimates.
-- an analytic collapse of every target-mean binary diagonal law to the point law, using one
-  marginal Jensen deficit to control both independent and capped dependent entropy losses;
-  the exact weighted loss coefficient has margin
-  `5743059741/230330000000`, and a kernel-replayed dyadic enclosure proves the point objective
-  positive.
-- an endpoint-core contraction: after conditioning away the deterministic endpoint coordinate,
-  every law with `a≥1/4`, `q≤1/2`, and conditional mean at least `13/50` is bounded below by
-  its centered `q=a` law. The exact boundary coefficient has margin
-  `3108487/23310000000` below the strict marginal penalty.
-- strict positivity of the centered endpoint curve on `13/50≤a≤19099/50000`: its third
-  derivative has an exact rational sign, so the second derivative is positive throughout the
-  interval; convex support at `1339/2000`, with kernel-checked bounds
-  `K>1/7000` and `|K′|<1/10000`, proves the claim and therefore the entire contracted core.
-- a generated static certificate for the remaining endpoint boundary: 96 Lean modules replay
-  exact subdivision leaves over `a≤1/4, q≤1/2`, the residual rectangle
-  `1/4≤a≤13/40, q≤31/100`, and the `q=1` edge. The generated coverage theorems compose those
-  leaves with the analytic core into `endpointCertificateObjective_nonneg`.
-- the final finite objective theorem `orbitYuGap_nonneg`: every finite symmetric orbit law with
-  source mean at most `19099/50000` satisfies Yu's strict affine entropy inequality at
-  `α=7/200` and `ε=10⁻⁷`.
+  ```text
+  r=(a(1−2t)+tq)/(1+q−a−t);
+  ```
+- exact positivity of the saturated centered curve on `1−t≤y≤21/25`. Its third-derivative
+  polynomial is monotone; this makes the second derivative unimodal, so rational logarithm
+  enclosures at the two endpoints prove convexity on the whole interval;
+- analytic domination of the `q=1` endpoint by `q=a`, which preserves the marginal law and
+  independent entropy while decreasing the dependent entropy term;
+- kernel replay of generated static certificates only on the low endpoint rectangle
+  `0≤a≤1/4, 0≤q≤1/2`. The former residual high-`a` subdivision and `q=1` trace are gone.
 
-These declarations live under `Frankl/`, principally in `CanonicalObjective.lean`,
-`LogBounds.lean`, `Interval.lean`, `IntervalEntropy.lean`, `CertificateExpr.lean`,
-`CertificateEval.lean`, `CertificateTree.lean`, `CertificateObjective.lean`,
-`CertificateAdaptive.lean`, `CertificateCorners.lean`, `DiagonalObjective.lean`,
-`EndpointObjective.lean`, `CenteredEndpoint.lean`, `EndpointCertificate.lean`,
-`EndpointTrace.lean`, and `EndpointBoundary.lean`. The diagonal regions and
-high-conditional-mean endpoint core are analytic kernel theorems; the boundary complement is a
-kernel-replayed static certificate generated by `tools/GenerateFranklEndpointTrace.lean`.
-The candidate abundance bound is not promoted until the final union-closed entropy implication
-is formalized.
+The generated trace is ordinary proof data: every leaf contains a closed rational subdivision
+term and a definitional equality that the proved checker accepts it. The Python/Arb program is
+retained as an independent outward-rounded oracle, not as a Lean premise. No theorem uses
+`native_decide`, an external declaration, a generated axiom, or another proof aperture.
+
+The principal files are `Frankl/EndpointBoundary.lean`, `Frankl/SupportEndpoint.lean`,
+`Frankl/CenteredEndpoint.lean`, `Frankl/FiniteEntropy.lean`,
+`Frankl/ConditionalEntropy.lean`, `Frankl/FiniteCoupling.lean`, and
+`Frankl/AffineEntropyBridge.lean`. The target remains compartmentalized: `lake build Frankl`
+builds the Frankl library without building `MatrixMortality`; the repository-wide
+`scripts/check.sh` intentionally runs both publication gates.
 
 The Lean development verifies the complete computable source reduction and the matrix compilers:
 

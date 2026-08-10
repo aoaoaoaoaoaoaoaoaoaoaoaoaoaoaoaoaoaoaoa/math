@@ -210,10 +210,14 @@ private def lowRow11Cell5RootTree : Subdivision :=
 .horizontal ((21 : ℚ) / 128)
   (.vertical ((9 : ℚ) / 64)
   (.leaf .interval)
-  (.leaf .interval))
+  (.vertical ((19 : ℚ) / 128)
+  (.leaf .interval)
+  (.leaf .interval)))
   (.vertical ((9 : ℚ) / 64)
   (.leaf .interval)
-  (.leaf .interval))
+  (.vertical ((19 : ℚ) / 128)
+  (.leaf .interval)
+  (.leaf .interval)))
 
 private theorem lowRow11Cell5RootTree_certified :
     certifySubdivision 12 64 32 lowRow11Cell5RootRectangle

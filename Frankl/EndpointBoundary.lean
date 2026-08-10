@@ -1,31 +1,46 @@
 import Frankl.CanonicalObjective
-import Frankl.CenteredEndpoint
+import Frankl.SupportEndpoint
 import Frankl.EndpointTrace
 
 namespace Frankl
 
 open Real Set
 
-private theorem endpointConditionalMean_ge_core_of_large_a {a q : ℝ}
-    (haLower : 13 / 40 ≤ a) (haUpper : a ≤ abundanceTarget) (hqLower : 0 ≤ q) :
-    endpointCoreThreshold ≤ endpointConditionalMean a q := by
-  have hdenominator : 0 < 1 + q - a - abundanceTarget := by
-    nlinarith [abundanceTarget_lt_half]
-  rw [endpointConditionalMean]
-  apply (le_div_iff₀ hdenominator).2
-  norm_num [endpointCoreThreshold, abundanceTarget] at haLower haUpper ⊢
-  nlinarith
-
-private theorem endpointConditionalMean_ge_core_of_large_q {a q : ℝ}
-    (haLower : 1 / 4 ≤ a) (haUpper : a ≤ abundanceTarget)
-    (hqLower : 31 / 100 ≤ q) :
-    endpointCoreThreshold ≤ endpointConditionalMean a q := by
-  have hdenominator : 0 < 1 + q - a - abundanceTarget := by
-    nlinarith [abundanceTarget_lt_half]
-  rw [endpointConditionalMean]
-  apply (le_div_iff₀ hdenominator).2
-  norm_num [endpointCoreThreshold, abundanceTarget] at haLower haUpper hqLower ⊢
-  nlinarith
+/-- Replacing a deterministic endpoint atom by the symmetric endpoint orbit at the low
+diagonal preserves the marginal law and independent entropy, but can only lower Yu's
+dependent entropy term. -/
+theorem endpointCertificateObjective_diagonal_le_one {a : ℝ}
+    (haLower : 0 ≤ a) (haUpper : a ≤ abundanceTarget) :
+    endpointCertificateObjective a a ≤ endpointCertificateObjective a 1 := by
+  let weight := (abundanceTarget - a) / (1 - a)
+  have haOne : a < 1 :=
+    haUpper.trans_lt (abundanceTarget_lt_half.trans (by norm_num))
+  have hdenominator : 1 - a ≠ 0 := (sub_pos.2 haOne).ne'
+  have hweight : 0 ≤ weight :=
+    div_nonneg (sub_nonneg.2 haUpper) (sub_nonneg.2 haOne.le)
+  have hweightOne : endpointCertificateWeight a 1 = weight := by
+    dsimp only [endpointCertificateWeight, weight]
+    rw [show 1 + 1 - 2 * a = 2 * (1 - a) by ring]
+    field_simp [hdenominator]
+    ring
+  have hweightDiagonal : endpointCertificateWeight a a = 2 * weight := by
+    dsimp only [endpointCertificateWeight, weight]
+    rw [show 1 + a - 2 * a = 1 - a by ring]
+    field_simp [hdenominator]
+  have haHalf : a ≤ 1 / 2 := haUpper.trans abundanceTarget_lt_half.le
+  have hdependent : 0 ≤ dependentCost a a := by
+    rw [dependentCost_self_eq_cappedEntropy haHalf]
+    exact binEntropy_nonneg
+      (le_min (by nlinarith) (by norm_num))
+      ((min_le_right (2 * a) (1 / 2)).trans (by norm_num))
+  rw [← sub_nonneg]
+  rw [show
+      endpointCertificateObjective a 1 - endpointCertificateObjective a a =
+        dependentShare * weight * dependentCost a a by
+    simp only [endpointCertificateObjective, diagonalEndpointObjective, yuGap,
+      hweightOne, hweightDiagonal, join_one_right, binEntropy_one]
+    ring]
+  exact mul_nonneg (mul_nonneg (by norm_num [dependentShare]) hweight) hdependent
 
 /-- Every canonical endpoint law allowed by half support has nonnegative certificate objective
 at the abundance target. -/
@@ -39,21 +54,16 @@ theorem endpointCertificateObjective_nonneg {a q : ℝ}
     · exact endpointCertificateObjective_low_nonneg
         (by norm_num; exact haLower) haQuarter (by norm_num; exact hqLower) hqHalf
     · have haQuarterLower : 1 / 4 ≤ a := (not_le.1 haQuarter).le
-      by_cases haResidual : a ≤ 13 / 40
-      · by_cases hqResidual : q ≤ 31 / 100
-        · exact endpointCertificateObjective_residual_nonneg
-            haQuarterLower haResidual (by norm_num; exact hqLower) hqResidual
-        · exact (endpointCertificateObjective_core_pos haQuarterLower haUpper hqLower
-            hqHalf (endpointConditionalMean_ge_core_of_large_q haQuarterLower haUpper
-              (not_le.1 hqResidual).le)).le
-      · exact (endpointCertificateObjective_core_pos haQuarterLower haUpper hqLower
-          hqHalf (endpointConditionalMean_ge_core_of_large_a
-            (not_le.1 haResidual).le haUpper hqLower)).le
-  · by_cases haCorner : a ≤ 1 / 1000
-    · exact CertificateCorner.endpointCertificateObjective_one_corner
-        haLower haCorner (by norm_num) (by norm_num)
-    · exact endpointCertificateObjective_qOne_nonneg
-        (not_le.1 haCorner).le haUpper (by norm_num) (by norm_num)
+      exact (endpointCertificateObjective_high_pos haQuarterLower haUpper hqLower hqHalf).le
+  · have hdiagonal : 0 ≤ endpointCertificateObjective a a := by
+      by_cases haQuarter : a ≤ 1 / 4
+      · exact endpointCertificateObjective_low_nonneg
+          (by norm_num; exact haLower) haQuarter (by norm_num; exact haLower)
+          (haQuarter.trans (by norm_num))
+      · have haQuarterLower : 1 / 4 ≤ a := (not_le.1 haQuarter).le
+        exact (endpointCertificateObjective_high_pos haQuarterLower haUpper haLower
+          (haUpper.trans abundanceTarget_lt_half.le)).le
+    exact hdiagonal.trans (endpointCertificateObjective_diagonal_le_one haLower haUpper)
 
 private theorem singleLowOrbitYuGap_nonneg :
     0 ≤ orbitYuGap (singleLowOrbitLaw abundanceTarget 0) := by

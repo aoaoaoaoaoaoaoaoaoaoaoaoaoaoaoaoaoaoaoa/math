@@ -8,7 +8,9 @@ private def lowRow6Cell7RootRectangle : RatRectangle :=
 
 private def lowRow6Cell7RootTree : Subdivision :=
 .horizontal ((11 : ℚ) / 128)
+  (.vertical ((13 : ℚ) / 64)
   (.leaf .interval)
+  (.leaf .interval))
   (.vertical ((13 : ℚ) / 64)
   (.leaf .interval)
   (.leaf .interval))

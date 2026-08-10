@@ -105,8 +105,12 @@ private def lowRow12Cell8RootRectangle : RatRectangle :=
 private def lowRow12Cell8RootTree : Subdivision :=
 .horizontal ((23 : ℚ) / 128)
   (.vertical ((15 : ℚ) / 64)
+  (.horizontal ((45 : ℚ) / 256)
   (.leaf .interval)
   (.leaf .interval))
+  (.horizontal ((45 : ℚ) / 256)
+  (.leaf .interval)
+  (.leaf .interval)))
   (.vertical ((15 : ℚ) / 64)
   (.horizontal ((47 : ℚ) / 256)
   (.leaf .interval)
@@ -141,45 +145,5 @@ theorem lowRow12Cell8Root_nonneg {a q : ℝ}
   · rw [lowRow12Cell8RootRectangle]
     apply RatBall.ofBounds_contains <;> norm_num at * <;> linarith
   · exact lowRow12Cell8RootTree_certified
-
-private def lowRow12Cell9RootRectangle : RatRectangle :=
-  ⟨RatBall.ofBounds ((11 : ℚ) / 64) ((3 : ℚ) / 16),
-    RatBall.ofBounds ((1 : ℚ) / 4) ((9 : ℚ) / 32)⟩
-
-private def lowRow12Cell9RootTree : Subdivision :=
-.horizontal ((23 : ℚ) / 128)
-  (.vertical ((17 : ℚ) / 64)
-  (.leaf .interval)
-  (.leaf .interval))
-  (.vertical ((17 : ℚ) / 64)
-  (.leaf .interval)
-  (.leaf .interval))
-
-private theorem lowRow12Cell9RootTree_certified :
-    certifySubdivision 12 64 32 lowRow12Cell9RootRectangle
-      CertificateObjective.endpointExpression lowRow12Cell9RootTree =
-        some () := by
-  rfl
-
-/-- One static reflected endpoint-certificate chunk. -/
-theorem lowRow12Cell9Root_nonneg {a q : ℝ}
-    (haLower : ((11 : ℝ) / 64) ≤ a)
-    (haUpper : a ≤ ((3 : ℝ) / 16))
-    (hqLower : ((1 : ℝ) / 4) ≤ q)
-    (hqUpper : q ≤ ((9 : ℝ) / 32)) :
-    0 ≤ endpointCertificateObjective a q := by
-  apply endpointCertificateObjective_nonneg_of_subdivision
-      (rectangle := lowRow12Cell9RootRectangle) (tree := lowRow12Cell9RootTree)
-  · norm_num [lowRow12Cell9RootRectangle, RatBall.ofBounds, RatBall.lower]
-  · norm_num [lowRow12Cell9RootRectangle, RatBall.ofBounds]
-  · norm_num [lowRow12Cell9RootRectangle, RatBall.ofBounds, RatBall.lower]
-  · norm_num [lowRow12Cell9RootRectangle, RatBall.ofBounds, RatBall.upper, abundanceTarget]
-  · norm_num [lowRow12Cell9RootRectangle, RatBall.ofBounds, RatBall.lower]
-  · norm_num [lowRow12Cell9RootRectangle, RatBall.ofBounds, RatBall.upper]
-  · rw [lowRow12Cell9RootRectangle]
-    apply RatBall.ofBounds_contains <;> norm_num at * <;> linarith
-  · rw [lowRow12Cell9RootRectangle]
-    apply RatBall.ofBounds_contains <;> norm_num at * <;> linarith
-  · exact lowRow12Cell9RootTree_certified
 
 end Frankl

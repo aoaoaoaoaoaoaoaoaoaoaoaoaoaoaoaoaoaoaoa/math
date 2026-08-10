@@ -36,7 +36,8 @@ theorem binarySpreadDeficit_joinEntropy_le {lowerWeight upperWeight lower upper 
         lowerWeight upperWeight lower upper ≤
       coefficient * binarySpreadDeficit binEntropy
         lowerWeight upperWeight lower upper := by
-  have hjensen := (joinEntropyDifference_concaveOn hq₀ hq₁ hcoefficient).2
+  have hjensen := (joinEntropyDifference_concaveOn (upper := (1 : ℝ) / 2)
+    (by norm_num) hq₀ hq₁ hcoefficient).2
     hlower hupper hlowerWeight hupperWeight hweight
   dsimp only [smul_eq_mul, joinEntropyDifference] at hjensen
   dsimp only [binarySpreadDeficit]
@@ -59,6 +60,44 @@ theorem binarySpreadDeficit_joinEntropy_le_ratio
   intro x hx
   exact join_curvature_ratio_le hx.1 hx.2.le hq₀ hq₁
 
+/-- The sharp join-curvature coefficient restricted to the actual support ceiling. -/
+theorem binarySpreadDeficit_joinEntropy_le_support
+    {lowerWeight upperWeight lower upper support q : ℝ}
+    (hlowerWeight : 0 ≤ lowerWeight) (hupperWeight : 0 ≤ upperWeight)
+    (hweight : lowerWeight + upperWeight = 1)
+    (hlower : lower ∈ Icc (0 : ℝ) support)
+    (hupper : upper ∈ Icc (0 : ℝ) support)
+    (hsupport₀ : 0 < support) (hsupport₁ : support < 1)
+    (hq₀ : 0 ≤ q) (hq₁ : q ≤ 1 / 2) :
+    binarySpreadDeficit (fun x ↦ binEntropy (join x q))
+        lowerWeight upperWeight lower upper ≤
+      support * (1 - q) / join support q *
+        binarySpreadDeficit binEntropy lowerWeight upperWeight lower upper := by
+  have hqOne : q < 1 := hq₁.trans_lt (by norm_num)
+  have hcoefficient : ∀ x ∈ Ioo (0 : ℝ) support,
+      x * (1 - q) / join x q ≤ support * (1 - q) / join support q := by
+    intro x hx
+    have hxJoin : 0 < join x q := join_pos_of_pos_left hx.1 hq₀ hqOne.le
+    have hsupportJoin : 0 < join support q :=
+      join_pos_of_pos_left hsupport₀ hq₀ hqOne.le
+    apply (div_le_div_iff hxJoin hsupportJoin).2
+    have hdifference :
+        0 ≤ support * (1 - q) * join x q -
+          x * (1 - q) * join support q := by
+      rw [show support * (1 - q) * join x q -
+          x * (1 - q) * join support q =
+        q * (1 - q) * (support - x) by
+          simp only [join]
+          ring]
+      exact mul_nonneg (mul_nonneg hq₀ (sub_nonneg.2 hqOne.le))
+        (sub_nonneg.2 hx.2.le)
+    linarith
+  have hjensen := (joinEntropyDifference_concaveOn
+    hsupport₁ hq₀ hqOne hcoefficient).2 hlower hupper
+    hlowerWeight hupperWeight hweight
+  dsimp only [smul_eq_mul, joinEntropyDifference, binarySpreadDeficit] at hjensen ⊢
+  linarith
+
 /-- Affine join-curvature coefficient for a low external parameter. -/
 theorem binarySpreadDeficit_joinEntropy_le_affine
     {lowerWeight upperWeight lower upper q : ℝ}
@@ -76,20 +115,22 @@ theorem binarySpreadDeficit_joinEntropy_le_affine
   intro x hx
   exact join_curvature_ratio_le_affine hx.1 hx.2.le hq₀ hq₁
 
-/-- Spreading a low diagonal law loses at most a fixed multiple of its marginal entropy. -/
-theorem diagonalIndependent_deficit_le
-    {lowerWeight upperWeight lower target upper : ℝ}
+/-- Spreading a diagonal law with a known support ceiling loses at most the corresponding
+sharp multiple of its marginal entropy. -/
+theorem diagonalIndependent_deficit_le_support
+    {lowerWeight upperWeight lower target upper support : ℝ}
     (hlowerWeight : 0 ≤ lowerWeight) (hupperWeight : 0 ≤ upperWeight)
     (hweight : lowerWeight + upperWeight = 1)
-    (hlower : lower ∈ Icc (0 : ℝ) (1 / 2))
+    (hlower : lower ∈ Icc (0 : ℝ) support)
     (htarget : target ∈ Icc (0 : ℝ) (1 / 2))
-    (hupper : upper ∈ Icc (0 : ℝ) (1 / 2))
+    (hupper : upper ∈ Icc (0 : ℝ) support)
+    (hsupport₀ : 0 < support) (hsupportHalf : support ≤ 1 / 2)
     (hmean : lowerWeight * lower + upperWeight * upper = target) :
     binEntropy (join target target) -
         (lowerWeight ^ 2 * binEntropy (join lower lower) +
           2 * lowerWeight * upperWeight * binEntropy (join lower upper) +
           upperWeight ^ 2 * binEntropy (join upper upper)) ≤
-      ((1 - target) / (1 + target) + (1 - 4 * target / 3)) *
+      (support * (1 - target) / join support target + (1 - 4 * target / 3)) *
         binarySpreadDeficit binEntropy lowerWeight upperWeight lower upper := by
   let deficit := binarySpreadDeficit binEntropy lowerWeight upperWeight lower upper
   let middle := lowerWeight * binEntropy (join target lower) +
@@ -103,21 +144,26 @@ theorem diagonalIndependent_deficit_le
       (lowerWeight ^ 2 * binEntropy (join lower lower) +
         2 * lowerWeight * upperWeight * binEntropy (join lower upper) +
         upperWeight ^ 2 * binEntropy (join upper upper)) ≤
-    ((1 - target) / (1 + target) + (1 - 4 * target / 3)) * deficit
-  have hcenterRaw := binarySpreadDeficit_joinEntropy_le_ratio
-    hlowerWeight hupperWeight hweight hlower hupper htarget.1 htarget.2
+    (support * (1 - target) / join support target + (1 - 4 * target / 3)) * deficit
+  have hlowerHalf : lower ∈ Icc (0 : ℝ) (1 / 2) :=
+    ⟨hlower.1, hlower.2.trans hsupportHalf⟩
+  have hupperHalf : upper ∈ Icc (0 : ℝ) (1 / 2) :=
+    ⟨hupper.1, hupper.2.trans hsupportHalf⟩
+  have hcenterRaw := binarySpreadDeficit_joinEntropy_le_support
+    hlowerWeight hupperWeight hweight hlower hupper hsupport₀
+      (hsupportHalf.trans_lt (by norm_num)) htarget.1 htarget.2
   have hcenter :
       binEntropy (join target target) - middle ≤
-        (1 - target) / (1 + target) * deficit := by
+        support * (1 - target) / join support target * deficit := by
     dsimp only [binarySpreadDeficit] at hcenterRaw
     rw [hmean] at hcenterRaw
     rw [hdeficit]
     simpa only [middle, join_comm target lower,
       join_comm target upper] using hcenterRaw
   have hlowerRow := binarySpreadDeficit_joinEntropy_le_affine
-    hlowerWeight hupperWeight hweight hlower hupper hlower.1 hlower.2
+    hlowerWeight hupperWeight hweight hlowerHalf hupperHalf hlower.1 hlowerHalf.2
   have hupperRow := binarySpreadDeficit_joinEntropy_le_affine
-    hlowerWeight hupperWeight hweight hlower hupper hupper.1 hupper.2
+    hlowerWeight hupperWeight hweight hlowerHalf hupperHalf hupper.1 hupperHalf.2
   have hlowerScaled := mul_le_mul_of_nonneg_left hlowerRow hlowerWeight
   have hupperScaled := mul_le_mul_of_nonneg_left hupperRow hupperWeight
   have hrows :
@@ -170,9 +216,39 @@ theorem diagonalIndependent_deficit_le
             (lowerWeight ^ 2 * binEntropy (join lower lower) +
               2 * lowerWeight * upperWeight * binEntropy (join lower upper) +
               upperWeight ^ 2 * binEntropy (join upper upper))) := by ring
-    _ ≤ (1 - target) / (1 + target) * deficit +
+    _ ≤ support * (1 - target) / join support target * deficit +
         (1 - 4 * target / 3) * deficit := add_le_add hcenter hrows
-    _ = ((1 - target) / (1 + target) + (1 - 4 * target / 3)) * deficit := by ring
+    _ = (support * (1 - target) / join support target +
+        (1 - 4 * target / 3)) * deficit := by ring
+
+/-- Spreading a low diagonal law loses at most a fixed multiple of its marginal entropy. -/
+theorem diagonalIndependent_deficit_le
+    {lowerWeight upperWeight lower target upper : ℝ}
+    (hlowerWeight : 0 ≤ lowerWeight) (hupperWeight : 0 ≤ upperWeight)
+    (hweight : lowerWeight + upperWeight = 1)
+    (hlower : lower ∈ Icc (0 : ℝ) (1 / 2))
+    (htarget : target ∈ Icc (0 : ℝ) (1 / 2))
+    (hupper : upper ∈ Icc (0 : ℝ) (1 / 2))
+    (hmean : lowerWeight * lower + upperWeight * upper = target) :
+    binEntropy (join target target) -
+        (lowerWeight ^ 2 * binEntropy (join lower lower) +
+          2 * lowerWeight * upperWeight * binEntropy (join lower upper) +
+          upperWeight ^ 2 * binEntropy (join upper upper)) ≤
+      ((1 - target) / (1 + target) + (1 - 4 * target / 3)) *
+        binarySpreadDeficit binEntropy lowerWeight upperWeight lower upper := by
+  have hgeneral := diagonalIndependent_deficit_le_support hlowerWeight hupperWeight hweight
+    hlower htarget hupper (by norm_num) (by norm_num) hmean
+  have hdenominator : 1 + target ≠ 0 := by linarith [htarget.1]
+  have hcoefficient :
+      (1 / 2 : ℝ) * (1 - target) / join (1 / 2) target =
+        (1 - target) / (1 + target) := by
+    rw [show join (1 / 2 : ℝ) target = (1 + target) / 2 by
+      simp only [join]
+      ring]
+    apply (div_eq_div_iff (by linarith [htarget.1]) hdenominator).2
+    ring
+  rw [hcoefficient] at hgeneral
+  exact hgeneral
 
 /-- The tangent to binary entropy at an interior probability supports its whole unit interval. -/
 theorem binEntropy_le_tangent {target x : ℝ}
@@ -520,11 +596,11 @@ private def diagonalPointRectangle : RatRectangle :=
 
 private def diagonalPointDual : DualBall :=
   { value :=
-      { center := (17879639045548115 : ℚ) / 18446744073709551616
-        radius := (232381337554275 : ℚ) / 18446744073709551616 }
+      { center := (5260542694123 : ℚ) / 9007199254740992
+        radius := (232255961151111 : ℚ) / 18446744073709551616 }
     gradient := some
       ({ center := 0
-         radius := (149073401575459 : ℚ) / 4611686018427387904 },
+         radius := (594384274312103 : ℚ) / 18446744073709551616 },
        { center := 0, radius := 0 }) }
 
 private theorem lowerRegionExpression_point_nonneg :

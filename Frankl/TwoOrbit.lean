@@ -5,7 +5,7 @@ namespace Frankl
 open Real Set
 
 /-- The abundance threshold certified by the present Frankl reduction. -/
-noncomputable def abundanceTarget : ℝ := 19099 / 50000
+noncomputable def abundanceTarget : ℝ := 76469 / 200000
 
 theorem abundanceTarget_gt_three_eighths : (3 : ℝ) / 8 < abundanceTarget := by
   norm_num [abundanceTarget]
@@ -88,10 +88,7 @@ theorem targetUpperContractionFactor_lt_one {a b : ℝ}
     2 * upperOrbitWeight a abundanceTarget b * (1 - 4 * b / 3)
         + 2 * lowerOrbitWeight a abundanceTarget b * ((1 - a) / (1 + a)) < 1 := by
   have hfactor := upperContractionFactor_le ha₀ htb hb hab
-  have htarget : 2 - 8 * abundanceTarget / 3 = (18401 : ℝ) / 18750 := by
-    norm_num [abundanceTarget]
-  rw [htarget] at hfactor
-  exact hfactor.trans_lt (by norm_num)
+  exact hfactor.trans_lt (by norm_num [abundanceTarget])
 
 /-- The endpoint contraction coefficient is at most one. -/
 theorem endpointContractionFactor_le_one {q lowerWeight upperWeight : ℝ}

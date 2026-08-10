@@ -263,15 +263,15 @@ theorem certifySeededGrid_eq_subdivision (terms fuel bits depth : ℕ)
 
 /-- The endpoint certificate rectangle `0 ≤ a ≤ t, 0 ≤ q ≤ 1`. -/
 def endpointRectangle : RatRectangle :=
-  ⟨RatBall.ofBounds 0 (19099 / 50000), RatBall.ofBounds 0 1⟩
+  ⟨RatBall.ofBounds 0 (76469 / 200000), RatBall.ofBounds 0 1⟩
 
 /-- The lower diagonal certificate rectangle `0 ≤ w ≤ 2t, 0 ≤ d ≤ 1`. -/
 def lowerRegionRectangle : RatRectangle :=
-  ⟨RatBall.ofBounds 0 (19099 / 25000), RatBall.ofBounds 0 1⟩
+  ⟨RatBall.ofBounds 0 (76469 / 100000), RatBall.ofBounds 0 1⟩
 
 /-- The upper diagonal certificate rectangle `2t ≤ w ≤ 1, 0 ≤ d ≤ 1`. -/
 def upperRegionRectangle : RatRectangle :=
-  ⟨RatBall.ofBounds (19099 / 25000) 1, RatBall.ofBounds 0 1⟩
+  ⟨RatBall.ofBounds (76469 / 100000) 1, RatBall.ofBounds 0 1⟩
 
 /-- Endpoint-orbit coordinate cuts. -/
 def endpointVerticalCuts : List ℚ :=

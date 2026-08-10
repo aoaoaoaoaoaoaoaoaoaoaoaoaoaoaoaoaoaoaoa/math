@@ -49,7 +49,9 @@ private def lowRow7Cell8RootRectangle : RatRectangle :=
 private def lowRow7Cell8RootTree : Subdivision :=
 .horizontal ((13 : ℚ) / 128)
   (.leaf .interval)
+  (.vertical ((15 : ℚ) / 64)
   (.leaf .interval)
+  (.leaf .interval))
 
 private theorem lowRow7Cell8RootTree_certified :
     certifySubdivision 12 64 32 lowRow7Cell8RootRectangle

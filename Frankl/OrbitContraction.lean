@@ -131,14 +131,16 @@ private theorem hasDerivAt_joinEntropyDifferenceDeriv {q coefficient x : ℝ}
     ((hjcomplog.sub hjlog).const_mul (1 - q)) using 1
   simp only [joinEntropyDifferenceDeriv2, one_div]
 
-/-- The join-curvature remainder is concave throughout the low interval. -/
-theorem joinEntropyDifference_concaveOn {q coefficient : ℝ}
+/-- The join-curvature remainder is concave on every interval where its curvature ratio is
+bounded. -/
+theorem joinEntropyDifference_concaveOn {q coefficient upper : ℝ}
+    (hupper₁ : upper < 1)
     (hq₀ : 0 ≤ q) (hq₁ : q < 1)
-    (hcoefficient : ∀ x ∈ Ioo (0 : ℝ) (1 / 2),
+    (hcoefficient : ∀ x ∈ Ioo (0 : ℝ) upper,
       x * (1 - q) / join x q ≤ coefficient) :
-    ConcaveOn ℝ (Icc (0 : ℝ) (1 / 2)) (joinEntropyDifference q coefficient) := by
+    ConcaveOn ℝ (Icc (0 : ℝ) upper) (joinEntropyDifference q coefficient) := by
   refine concaveOn_of_hasDerivWithinAt2_nonpos (f' := joinEntropyDifferenceDeriv q coefficient)
-    (f'' := joinEntropyDifferenceDeriv2 q coefficient) (convex_Icc 0 (1 / 2))
+    (f'' := joinEntropyDifferenceDeriv2 q coefficient) (convex_Icc 0 upper)
     (by
       apply Continuous.continuousOn
       change Continuous (fun x ↦ coefficient * binEntropy x - binEntropy (x + q - x * q))
@@ -146,7 +148,7 @@ theorem joinEntropyDifference_concaveOn {q coefficient : ℝ}
     ?_ ?_ ?_
   · intro x hx
     rw [interior_Icc] at hx
-    norm_num at hx
+    change 0 < x ∧ x < upper at hx
     have hx₀ : x ≠ 0 := ne_of_gt hx.1
     have hx₁ : x ≠ 1 := by linarith
     have hjoin_pos : 0 < join x q := join_pos_of_pos_left hx.1 hq₀ hq₁.le
@@ -154,7 +156,7 @@ theorem joinEntropyDifference_concaveOn {q coefficient : ℝ}
     exact (hasDerivAt_joinEntropyDifference hx₀ hx₁ hjoin_pos.ne' hjoin_lt.ne).hasDerivWithinAt
   · intro x hx
     rw [interior_Icc] at hx
-    norm_num at hx
+    change 0 < x ∧ x < upper at hx
     have hx₀ : x ≠ 0 := ne_of_gt hx.1
     have hx₁ : x ≠ 1 := by linarith
     have hjoin_pos : 0 < join x q := join_pos_of_pos_left hx.1 hq₀ hq₁.le
@@ -162,7 +164,7 @@ theorem joinEntropyDifference_concaveOn {q coefficient : ℝ}
     exact (hasDerivAt_joinEntropyDifferenceDeriv hx₀ hx₁ hjoin_pos.ne' hjoin_lt.ne).hasDerivWithinAt
   · intro x hx
     rw [interior_Icc] at hx
-    norm_num at hx
+    change 0 < x ∧ x < upper at hx
     have hx₁ : x < 1 := by linarith
     have hjoin_pos : 0 < join x q := join_pos_of_pos_left hx.1 hq₀ hq₁.le
     have hjoin_lt : join x q < 1 := join_lt_one_of_lt_left hx₁ hq₁
@@ -189,7 +191,8 @@ theorem orbitDeficit_joinEntropy_le {a d q coefficient : ℝ}
       coefficient * orbitDeficit binEntropy a d := by
   have hleft : a - d ∈ Icc (0 : ℝ) (1 / 2) := ⟨ha₀, by linarith⟩
   have hright : a + d ∈ Icc (0 : ℝ) (1 / 2) := ⟨by linarith, ha₁⟩
-  have hmid := (joinEntropyDifference_concaveOn hq₀ hq₁ hcoefficient).2
+  have hmid := (joinEntropyDifference_concaveOn (upper := (1 : ℝ) / 2)
+    (by norm_num) hq₀ hq₁ hcoefficient).2
     hleft hright (show 0 ≤ (1 / 2 : ℝ) by norm_num) (show 0 ≤ (1 / 2 : ℝ) by norm_num)
     (show (1 / 2 : ℝ) + 1 / 2 = 1 by norm_num)
   dsimp [joinEntropyDifference] at hmid

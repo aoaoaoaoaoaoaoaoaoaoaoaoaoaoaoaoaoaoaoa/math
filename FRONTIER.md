@@ -10,35 +10,34 @@ records only their strategic consequences.
 
 ## Frankl abundance frontier
 
-The current rational target is
+The current formal theorem is
 
 ```text
-t=19099/50000,    α=7/200,    ε=1/10000000.
+t=76469/200000,    α=7/200,    ε=1/10000000.
 ```
 
-Lean now proves the strict affine Yu objective nonnegative for every finite symmetric orbit law
-whose source mean is at most `t`. The proof repairs the exact-mean reduction, eliminates support
-in `(1/2,1)`, contracts every extreme to three canonical families, handles both diagonal families
-analytically, and combines an analytic endpoint core with 96 kernel-replayed static certificate
-modules for the boundary. See [`FC-S05`](SALVAGE.md#fc-s05-exact-mean-yu-repair) through
-[`FC-S11`](SALVAGE.md#fc-s11-endpoint-boundary-certificate).
+Lean proves both the finite affine Yu inequality and its entropy bridge to every finite
+nontrivial union-closed family. The endpoint proof now uses a support-aware analytic contraction
+on the whole high-`a` rectangle. The `q=1` edge is dominated analytically by the diagonal
+endpoint `q=a`; static replay remains only on the low rectangle. The publication theorem is
+`Frankl.unionClosed_exists_abundant_coordinate`.
 
-This does not yet establish a universal abundance bound. The smallest surviving proof obligation
-is the entropy bridge: construct the independent and dependent coordinatewise couplings on a
-finite union-closed family, sum the checked one-coordinate inequality through the entropy chain
-rule, and derive a strict entropy increase inside a finite support. The proof must include the
-conditioning inequality and the finite-support entropy ceiling; no appeal to Yu's printed global
-concavity sentence is permitted.
+This is an explicit, fully kernel-checked improvement over the published AHS constant
+`(3−√5)/2`. It does not exceed Cambie's uncertified numerical candidate
+`0.382345533366703…`, nor Liu's conditional `0.382709087…` candidate. Priority language must
+keep those distinct epistemic categories intact.
 
-Two attacks remain live and incomparable:
+The next live attacks are:
 
-1. Formalize that entropy bridge at `t=19099/50000`. This promotes the present finite objective
-   theorem to a rigorous improvement over `(3−√5)/2`.
-2. Ratchet the parameters before freezing the publication result. Search for a rational
-   `t>19099/50000` and compatible rational `α,ε>0`, using the static certificate generator as the
-   adjudicator. A new target must recheck the half-support scalar inequality, diagonal loss
-   coefficient, centered endpoint core, and boundary certificate. The numerical Yu/Cambie range
-   near `0.38234` is reconnaissance, not a rigorous target.
+1. Ratchet the present Sawin–Yu architecture past `0.382345533366703…`. The low endpoint
+   rectangle is now the only numerical surface; the high rectangle, diagonal family, entropy
+   bridge, and support reductions are analytic.
+2. Import Liu's conditionally-IID gain without assuming the infinite-kernel PSD statement or the
+   reported optimizer shape. A finite exact positivity decomposition would give genuine room
+   beyond the two-coupling ceiling.
+3. Search for a target-dependent analytic inequality on the low endpoint rectangle. Eliminating
+   its static trace would expose a symbolic parameter interval and make further rational ratchets
+   much cheaper.
 
 ## The source theorem
 
