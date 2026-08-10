@@ -18,9 +18,10 @@ Every record has a stable identifier and five core fields:
 Every active record also states the next promotion step. A graduated record instead cites its
 formal artifact.
 
-The first namespace component identifies the campaign: `MM` for general matrix-mortality
-compilers, `R32` for the rank-three binary frontier `M₃(2)`, `M4` for the `M₄(3)` frontier,
-`G3` for the three-letter GPCP and `M₃(4)` frontier, and `D2` for the dimension-two wall.
+The first namespace component identifies the campaign: `FC` for Frankl’s conjecture, `MM` for
+general matrix-mortality compilers, `R32` for the rank-three binary frontier `M₃(2)`, `M4` for
+the `M₄(3)` frontier, `G3` for the three-letter GPCP and `M₃(4)` frontier, and `D2` for the
+dimension-two wall.
 The second component identifies the result class: `C` compiler, `O` obstruction, `M` partial
 mechanism, `S` structure theorem, or `D` decidable stratum. Numbers never change after
 assignment.
@@ -43,6 +44,23 @@ file owns the mathematical stock.
 
 | ID | Kind | Result | Evidence | Disposition |
 | --- | --- | --- | --- | --- |
+| [`FC-S01`](#fc-s01-bidual-horn-density-dichotomy) | structure theorem | every bidual Horn function satisfies Frankl’s conjecture | audited | stock |
+| [`FC-S02`](#fc-s02-downward-boundary-obstruction) | structure theorem | a low-density counterexample has large average downward boundary | audited | active |
+| [`FC-S03`](#fc-s03-binary-semigroup-weighted-frankl-theorem) | structure theorem | weighted Frankl at homogeneous weight `1/2` | audited | active |
+| [`FC-S04`](#fc-s04-cubical-unique-root-obstruction) | structure theorem | a counterexample complement has too many uniquely rooted sets | audited | active |
+| [`FC-S05`](#fc-s05-exact-mean-yu-repair) | structure theorem | Yu's coupling reduction is valid after a monotone exact-mean lift | formalized | graduated |
+| [`FC-S06`](#fc-s06-half-support-elimination) | structure theorem | entropy extremes may be confined to `[0,1/2]∪{1}` by a finite monotone kernel | formalized | graduated |
+| [`FC-S07`](#fc-s07-low-orbit-contraction) | structure theorem | every surviving two-orbit extreme contracts to one of two bivariate families | formalized | graduated |
+| [`FC-S08`](#fc-s08-diagonal-family-collapse) | structure theorem | every target-mean two-diagonal objective is bounded below by the point law | formalized | graduated |
+| [`FC-S09`](#fc-s09-endpoint-core-contraction) | structure theorem | the high-conditional-mean endpoint core contracts to the centered curve | formalized | graduated |
+| [`FC-S10`](#fc-s10-centered-endpoint-positivity) | analytic certificate | the saturated centered endpoint curve is positive through complement `21/25` | formalized | graduated |
+| [`FC-S11`](#fc-s11-endpoint-boundary-certificate) | certificate | every canonical endpoint objective is nonnegative at `76469/200000` | formalized | graduated |
+| [`FC-S12`](#fc-s12-finite-entropy-bridge) | structure theorem | the finite affine coupling inequality implies strict union-closed abundance | formalized | graduated |
+| [`FC-S13`](#fc-s13-rational-universal-abundance) | theorem | every nontrivial finite union-closed family has abundance greater than `76469/200000` | formalized | graduated |
+| [`FC-M01`](#fc-m01-rational-yu-certificate) | partial mechanism | Arb independently checks the reduced gaps at `76469/200000` | computational | active |
+| [`FC-O01`](#fc-o01-homogeneous-tilt-persistence-fails) | obstruction | one-coordinate majority need not persist under homogeneous product tilt | audited | active |
+| [`FC-O02`](#fc-o02-uniform-fiber-semigroup-ceiling) | obstruction | finite full-fiber semigroup lifts cannot beat the uniform entropy barrier | audited | stock |
+| [`FC-O03`](#fc-o03-maximal-self-dual-completion-fails) | obstruction | maximal complement-free meet families need not be self-dual | audited | stock |
 | [`MM-C01`](#mm-c01-fixed-anchor-rank-one-compiler) | compiler | common-fixed-column scalar zero to mortality | formalized | graduated |
 | [`MM-C02`](#mm-c02-common-image-restriction) | compiler | mortality-preserving restriction to a common image | formalized | graduated |
 | [`MM-C03`](#mm-c03-scheduled-binary-compiler) | compiler | fixed-width tag strokes to a total two-letter scalar series | formalized | graduated |
@@ -129,6 +147,622 @@ file owns the mathematical stock.
 | [`D2-D06`](#d2-d06-private-prime-peeling) | decidable stratum | a private multiplier prime decides every noncritical endpoint shell | audited | stock |
 | [`D2-D07`](#d2-d07-bounded-valuation-orthants) | decidable stratum | bounded cooriented affine families have finite successful state spaces | audited | stock |
 | [`D2-M01`](#d2-m01-benchmark-critical-shell) | partial mechanism | the mixed-prime benchmark reduces generically to one guarded `5`-adic shell | audited | active |
+
+## Frankl Conjecture
+
+### FC-S01: Bidual-Horn density dichotomy
+
+**Kind:** structure theorem
+**Evidence:** audited
+**Disposition:** stock
+
+Let `h:2^[n]→{0,1}` be bidual Horn, with false points `F` and true points `T`. Then
+`F` is intersection-closed and `T` is union-closed. If `|T|≥2^(n−1)`, Karpas’s
+half-cube theorem gives an abundant coordinate in `T`, hence a rare coordinate in `F`.
+Otherwise `|F|>2^(n−1)` and the set-complement family
+
+```text
+F* = {[n]∖A : A∈F}
+```
+
+is union-closed. An abundant coordinate in `F*` is rare in `F`. Therefore every bidual
+Horn function with at least two false points satisfies Frankl’s conjecture; self-dual Horn
+functions are an immediate subclass.
+
+**Scope:** this proves the conjecture on the bidual class. It does not transform an arbitrary
+Horn function into a bidual one, improve the universal abundance constant, or settle Frankl’s
+conjecture.
+
+**Use:** remove bidual and self-dual Horn functions from any proposed minimal counterexample
+class. Any completion-based attack must preserve a counterexample while entering a class now
+known to be impossible.
+
+**Artifact:** [`audits/frankl-bidual-horn-density-2026-08-08.md`](audits/frankl-bidual-horn-density-2026-08-08.md#bidual-horn-theorem).
+
+### FC-S02: Downward boundary obstruction
+
+**Kind:** structure theorem
+**Evidence:** audited
+**Disposition:** active
+
+Let `C⊆2^[n]`, `n≥2`, have density `0<ρ≤1/2`. If every coordinate occurs in
+strictly more than half of `C`, then its average downward external degree satisfies
+
+```text
+(1/|C|) Σ_{A∈C} |{i∈A : A∖{i}∉C}| > 2(1−ρ).
+```
+
+The proof uses the level-zero and level-one Walsh coefficients of `1−2·1_C`, Parseval,
+and exact directional edge counts. It strengthens the `≤1` pointwise boundary condition
+behind Karpas’s theorem whenever `ρ<1/2`.
+
+**Scope:** the theorem is an obstruction, not a closure-derived upper bound. An arbitrary
+intersection-closed family need not have sparse downward boundary.
+
+**Use:** seek an independent meet-semilattice, lattice-minimality, or compression argument
+forcing average downward degree at most `2(1−ρ)`.
+
+**Artifact:** [`audits/frankl-bidual-horn-density-2026-08-08.md`](audits/frankl-bidual-horn-density-2026-08-08.md#boundary-theorem).
+
+**Next:** express the downward boundary through meet-irreducibles or canonical implications and
+test whether minimal counterexamples force a strict upper bound.
+
+### FC-O01: Homogeneous tilt persistence fails
+
+**Kind:** obstruction
+**Evidence:** audited
+**Disposition:** active
+
+There is a 17-coordinate, nine-set intersection-closed family `R` with one coordinate `i`
+occurring in `5/9` of its sets, yet under homogeneous product tilt `p=x/(1+x)` at
+`x=11/10`,
+
+```text
+Pr_p(i∈A | A∈R) < 1−p.
+```
+
+Its exact residual weight polynomials are
+
+```text
+P(x)=(1+x)^2+x^16,
+Q(x)=1+x^12(1+2x),
+Q(11/10)−(11/10)^2P(11/10)
+  = 146953492014968519/10^18 > 0.
+```
+
+**Scope:** other coordinates of `R` are rare, so this does not refute persistence under the
+joint assumption that every coordinate is initially frequent. It refutes any coordinatewise
+lemma based only on intersection closure and that coordinate’s uniform majority.
+
+**Use:** a Gendler product-measure attack must exploit all strict-majority inequalities
+simultaneously or choose coordinate parameters adaptively.
+
+**Artifact:** [`audits/frankl-bidual-horn-density-2026-08-08.md`](audits/frankl-bidual-horn-density-2026-08-08.md#exact-failure-of-homogeneous-one-coordinate-persistence).
+
+**Next:** derive the Jacobian of all conditional biases under coordinatewise log-odds and test
+whether a separating direction exists whenever every uniform bias is positive.
+
+### FC-S03: Binary semigroup weighted Frankl theorem
+
+**Kind:** structure theorem
+**Evidence:** audited
+**Disposition:** active
+
+For every probability measure `μ` on `[0,1]` of mean `0<φ<1/2`, Zargar's
+binary nilpotent entropy functional obeys the sharp lower bound
+
+```text
+F₂,₁(μ) ≥ φ(1−2φ) log 2 > 0.
+```
+
+Consequently, every finite intersection-closed family `C` with at least two members has a
+coordinate `i` such that
+
+```text
+Σ_{A∈C, i∉A} 2^(−|A|)
+  > (1/2) Σ_{A∈C} 2^(−|A|).
+```
+
+Dually, a nontrivial union-closed family has a coordinate strictly abundant under weights
+`2^|A|`. Strictness follows because equality in the total entropy comparison would make the
+uniform lifted law stationary under multiplication, while the one-coordinate stationarity
+equations in `{0,ε,1}` force every base coordinate to be constant.
+
+**Scope:** this closes the `k=2,m=1` analytic seam isolated by Zargar. It is a theorem at
+nonuniform weight `1/2`, not at uniform weight `1`, and it does not improve the universal
+uniform abundance constant.
+
+**Use:** anchor a homogeneous or coordinatewise tilt at an exact half-frequency endpoint. A
+universal attack must transport the simultaneous uniform strict-majority inequalities to this
+endpoint or extract a contradiction at the first coordinate crossing.
+
+**Artifact:**
+[`audits/frankl-binary-semigroup-kernel-2026-08-08.md`](audits/frankl-binary-semigroup-kernel-2026-08-08.md#weighted-frankl-consequence).
+
+**Next:** analyze a minimal counterexample at the first homogeneous crossing
+`t∈(1/2,1)` and determine whether meet-irreducibility or coordinatewise tilts force a second
+balanced coordinate.
+
+### FC-S04: Cubical unique-root obstruction
+
+**Kind:** structure theorem
+**Evidence:** audited
+**Disposition:** active
+
+Normalize a hypothetical union-closed counterexample `G⊆2^[n]` by adjoining `∅`, set
+`α=|G|/2^n`, and let `F=2^[n]∖G`. If `q(F)` counts members of the simply rooted
+family `F` having exactly one root, then
+
+```text
+q(F)=D↓(F)>2α|F|.
+```
+
+The equality is exact: a member has a downward external edge precisely when its Bhasin root
+set is a singleton. Set complementation transports this boundary to the small
+intersection-closed family, where `FC-S02` supplies the strict lower bound. Moreover,
+`X(F∪{∅})` is contractible; Bhasin's acyclicity induction upgrades because every piece and
+intersection in the gluing proof is contractible.
+
+**Scope:** contractibility or simple rootedness alone does not force the contrary upper bound.
+For `G={∅}` in an ambient `n`-cube, `q(F)=n` while `2α|F|<2`. Strict coordinate
+majorities, separation, or minimality must enter any successful estimate.
+
+**Use:** translate the Fourier target into cubical language. Seek a Morse, Laplacian, or root
+overlap inequality proving `q(F)≤2α|F|` for a normalized counterexample.
+
+**Artifact:**
+[`audits/frankl-cubical-unique-roots-2026-08-08.md`](audits/frankl-cubical-unique-roots-2026-08-08.md#counterexample-inequality).
+
+**Next:** express `q(F)` through intersections of the root down-sets and test inequalities that
+also use every strict coordinate majority; do not pursue homology alone.
+
+### FC-S05: Exact-mean Yu repair
+
+**Kind:** structure theorem
+**Evidence:** formalized
+**Disposition:** graduated
+
+For a finite symmetric coupling `P` whose marginal has mean `s<t`, mix in
+`γ=(t−s)/(1−s)` mass at `(1,1)`. The new coupling has exact marginal mean `t`; its
+independent entropy term is multiplied by `(1−γ)²`, while its marginal and dependent
+entropy terms are multiplied by `1−γ`. The objective ratio cannot increase. Yu's cited
+concavity theorem may therefore be applied only after this lift, on the fixed-mean slice where
+it is valid. A negative gap then occurs at a symmetric extreme supported on at most two orbit
+laws.
+
+**Scope:** this repairs the functional reduction in Yu's Proposition 1 for finite couplings. It
+does not certify the remaining extreme-point minimum or vindicate global concavity, which is
+false.
+
+**Use:** begin every Yu/Sawin finite optimization at exact marginal mean. Do not reuse the
+printed global-concavity sentence.
+
+**Artifact:**
+[`audits/frankl-yu-reduction-2026-08-08.md`](audits/frankl-yu-reduction-2026-08-08.md#repairing-the-exact-mean-reduction).
+
+**Formalization:** `Frankl/MeanLift.lean` checks the exact-mean lift algebra.
+`Frankl/FixedMeanConcavity.lean` proves the fixed-slice entropy concavity directly from its
+power series, while `Frankl/MomentReduction.lean` and `Frankl/OrbitLaw.lean` give the elementary
+finite extreme-point reduction and symmetric-orbit realization. The surviving law is formally
+either one exact-mean orbit or two orbit means strictly straddling the target, with their masses
+identified exactly. `Frankl/OrbitMeanLift.lean` realizes the `(1,1)` lift on symmetric orbit
+laws, proves the quadratic/linear/linear scaling of the three entropy terms, and composes the
+lift with the extreme reduction in one theorem.
+
+### FC-S06: Half-support elimination
+
+**Kind:** structure theorem
+**Evidence:** formalized
+**Disposition:** graduated
+
+For each marginal atom `y∈(1/2,1)`, the kernel
+
+```text
+y ↦ 2(1−y)δ_(1/2)+(2y−1)δ_1
+```
+
+preserves its mean and does not increase the max-entropy coupling cost pointwise. At
+`t=19099/50000`, `α=7/200`, and gap slack `10^(−7)`, bilinear polarization gives the exact
+finite identity
+
+```text
+A(μ′)−A(μ)=λ(E_μg+E_μ′g).
+```
+
+Concavity and monotonicity of `g`, followed by the checked scalar inequality
+`2g(t)<wg(0)`, show that the replacement cannot increase the independent-minus-marginal gap.
+Iterating removes every support point strictly between one half and one.
+
+**Scope:** the scalar derivative signs are specific to the displayed rational parameters,
+though the kernel and pointwise dependent-cost inequality are general. This repairs Cambie's
+infinitesimal argument without an uncontrolled `O(η)` term.
+
+**Use:** classify exact-mean extremes using only `[0,1/2]∪{1}` before numerical work.
+
+**Artifact:**
+[`audits/frankl-yu-reduction-2026-08-08.md`](audits/frankl-yu-reduction-2026-08-08.md#removing-support-above-one-half).
+
+**Formalization:** `Frankl/HalfSupport.lean` checks the scalar sign, global shape of `g`, and
+pointwise dependent-cost contraction. `Frankl/FiniteLaw.lean` checks the finite Jensen and
+polarization argument. `Frankl/OrbitHalfSupport.lean` constructs the simultaneous finite
+coordinatewise pushforward of an arbitrary symmetric orbit law, proves exact mass and mean
+preservation, aggregates all source kernels without iteration, proves dependent-entropy and
+complete-gap monotonicity, and re-reduces the transformed law to an identified restricted
+extreme.
+
+### FC-S07: Low-orbit contraction
+
+**Kind:** structure theorem
+**Evidence:** formalized
+**Disposition:** graduated
+
+For `f_q(x)=h(x+q−xq)` on the low square,
+
+```text
+|f_q″(x)|/|h″(x)| ≤ (1−q)/(1+q) ≤ 1−4q/3.
+```
+
+A separate Bernstein-positive polynomial proves that contracting a symmetric low orbit to its
+mean increases independent join entropy by no more than marginal entropy. In a two-low-orbit
+extreme, contract the lower-mean orbit first and the upper-mean orbit second. Their normalized
+costs are at most `1` and
+
+```text
+2−8t/3 = 18401/18750 < 1.
+```
+
+If the upper orbit contains `1`, the lower orbit contracts with cost at most one. Since the
+dependent term is fixed by each low orbit's mean, every restricted extreme reduces to either a
+diagonal–diagonal or diagonal–endpoint law.
+
+**Scope:** the theorem concerns symmetric extremes supported on `[0,1/2]∪{1}` at exact
+mean `t=19099/50000`. The curvature lemmas themselves have the wider domains stated in the
+audit.
+
+**Use:** replace Yu's four geometric orbit coordinates by the two bivariate objectives in
+`FC-M01`.
+
+**Artifact:**
+[`audits/frankl-yu-reduction-2026-08-08.md`](audits/frankl-yu-reduction-2026-08-08.md#contracting-the-surviving-low-orbits).
+
+**Formalization:** `Frankl/Entropy.lean`, `Frankl/OrbitContraction.lean`,
+`Frankl/SelfPair.lean`, and `Frankl/TwoOrbit.lean` check the curvature comparison, Bernstein
+polynomial, both self-pair bounds, exact mean weights, and ordered two-step contraction.
+`Frankl/OrbitCollapse.lean` expands the actual canonical low–low and low–endpoint orbit laws,
+proves their exact marginal and independent entropy differences, proves the dependent term is
+fixed, and lifts the scalar deficit estimates to monotonicity of the complete strict Yu gap.
+`Frankl/OrbitReindex.lean` and `Frankl/OrbitClassification.lean` reindex and sort arbitrary
+identified extremes, classify their half-supported coordinates, contract the one- and two-orbit
+cases, and compose the entire bounded-mean analytic reduction to the diagonal,
+diagonal–diagonal, or diagonal–endpoint objective family.
+
+### FC-S08: Diagonal-family collapse
+
+**Kind:** structure theorem
+**Evidence:** formalized
+**Disposition:** graduated
+
+Let a binary law on `[0,1/2]` have masses `ℓ,u`, support `a,b`, and mean
+`t=19099/50000`. If `Δ=h(t)−ℓh(a)−uh(b)`, sequential join-curvature comparison gives
+
+```text
+h(t∨t)−E h(X∨Y)
+  ≤ ((1−t)/(1+t) + 1−4t/3)Δ.
+```
+
+For the capped diagonal cost, the function
+
+```text
+g(x)=2h(x)−h(min(2x,1/2))
+```
+
+lies below its affine support at `t`. Below `1/4`, this follows from convexity of
+`2h(x)−h(2x)` and its endpoint values; above `1/4`, it is the ordinary entropy tangent
+inequality. Averaging the support proves
+
+```text
+log 2−E h(min(2X,1/2)) ≤ 2Δ.
+```
+
+The weighted loss coefficient is exactly
+
+```text
+(193/200)((1−t)/(1+t)+1−4t/3)+(7/200)·2
+  = 56146740823/57582500000
+  < 10000001/10000000,
+```
+
+with margin `5743059741/230330000000`. Hence every two-diagonal objective is at least
+the point-mass objective. A kernel-replayed dyadic enclosure gives the latter a positive lower
+bound `1102953606749615/1152921504606846976`. Both diagonal certificate rectangles are
+therefore discharged analytically, without a subdivision verdict.
+
+**Scope:** this eliminates the diagonal–diagonal family only. `FC-S11` now discharges the
+diagonal–endpoint surface; the final implication from Yu's entropy inequality to union-closed
+abundance remains open.
+
+**Use:** remove two of the three compact certificate regions and concentrate all numerical or
+analytic work on the endpoint family.
+
+**Artifact:** `Frankl/DiagonalObjective.lean` and
+[`audits/frankl-yu-reduction-2026-08-08.md`](audits/frankl-yu-reduction-2026-08-08.md#analytic-collapse-of-the-diagonal-family).
+
+### FC-S09: Endpoint-core contraction
+
+**Kind:** structure theorem
+**Evidence:** formalized
+**Disposition:** graduated
+
+For the diagonal–endpoint certificate coordinates `(a,q)`, condition away the deterministic
+endpoint coordinate. The remaining low law has mean
+
+```text
+r = (a(1−2t)+tq)/(1+q−a−t).
+```
+
+If `a≥1/4`, `0≤q≤1/2`, and `r≥13/50`, both the original diagonal atom and the centered
+atom have saturated dependent cost `log 2`. The diagonal Jensen-deficit estimate then shows
+that replacing the conditional low law by its point mass at `r` cannot increase Yu's gap. The
+coefficient is largest at `r=13/50`, where
+
+```text
+(193/200)((1−t)/(1−r))((1−r)/(1+r)+1−4r/3)
+  = 5826723461/5827500000
+  < 10000001/10000000
+```
+
+with exact margin `3108487/23310000000`. Thus the full two-dimensional core is bounded below
+by the centered curve `q=a`.
+
+**Scope:** this was the first core contraction at the former target. The support-aware theorem in
+`FC-S11` strictly subsumes its high-`a` role at `76469/200000`.
+
+**Use:** retain its Jensen-deficit architecture; use `FC-S11` for the current bound.
+
+**Artifact:** `Frankl/EndpointObjective.lean` and
+[`audits/frankl-yu-reduction-2026-08-08.md`](audits/frankl-yu-reduction-2026-08-08.md#endpoint-core-contraction).
+
+### FC-S10: Centered endpoint positivity
+
+**Kind:** analytic certificate
+**Evidence:** formalized
+**Disposition:** graduated
+
+In complement coordinates `y=1−r`, multiply the saturated centered objective by `y²` and write
+
+```text
+K(y)=(1−α)(1−t)²h(y²)+α(2(1−t)y−y²)log 2−(1+ε)(1−t)yh(y).
+```
+
+At `t=76469/200000`, the sign of the third derivative is governed by the exact cubic
+
+```text
+Q(y)=10000001y³+23841483y²−30000003y+3841481.
+```
+
+The polynomial `Q` is increasing on `1−t≤y≤21/25`. Thus `K'''` changes sign at most once,
+from positive to negative, and `K''` reaches its minimum at an endpoint. Four-term atanh
+enclosures prove `K''(1−t)>0` and `K''(21/25)>0`, so `K` is convex on the whole interval. At
+`y₀=33497/50000`, sharper rational logarithm enclosures give
+`K(y₀)>1/6000000` and `0<K′(y₀)<1/5000000`; its supporting line remains positive.
+
+The exact identity
+
+```text
+K(1−r)=(1−r)² G̃(r)
+```
+
+then proves positivity of the saturated centered objective for `4/25≤r≤t`. This lower endpoint
+is exactly strong enough for every conditional center produced by `a≥1/4`.
+
+**Scope:** this is the one-dimensional analytic component of the high-endpoint proof. It does
+not cover `a≤1/4`, where the static low-rectangle certificate remains necessary.
+
+**Use:** combine with the support-aware coefficient in `Frankl/SupportEndpoint.lean`; no
+high-`a` residual subdivision is needed.
+
+**Artifact:** `Frankl/CenteredEndpoint.lean` and
+[`audits/frankl-yu-reduction-2026-08-08.md`](audits/frankl-yu-reduction-2026-08-08.md#centered-endpoint-curve).
+
+### FC-S11: Endpoint boundary certificate
+
+**Kind:** certificate
+**Evidence:** formalized
+**Disposition:** graduated
+
+Half support forces the endpoint coordinate into the exact dichotomy `q≤1/2 ∨ q=1`; the
+apparent strip `1/2<q<1` is not realizable. On the whole high rectangle
+
+```text
+1/4≤a≤76469/200000,    0≤q≤1/2,
+```
+
+condition away the deterministic coordinate, put `M=max(a,q)`, and compare the independent
+loss with support-aware coefficient
+
+```text
+Ψ(M,r)=(193/200)(1−t)
+  (M/(M+r−Mr)+(1−4r/3)/(1−r)).
+```
+
+The coefficient decreases in `r`. Splitting at `q≤a` and `a≤q` reduces it to two exact
+rational polynomial signs, proving `Ψ≤1+10⁻⁷`. `FC-S10` then gives strict positivity throughout
+the high rectangle. When `q=1`, replacing its deterministic endpoint atom by the symmetric
+endpoint orbit at `q=a` preserves the marginal law and independent entropy while decreasing
+the dependent entropy term. Thus the `q=1` objective is bounded below by a point already in the
+low or high rectangle. Static reflected subdivisions remain only on
+
+```text
+0≤a≤1/4,       0≤q≤1/2.
+```
+
+Each generated leaf contains a closed rational subdivision term and a definitional equality
+showing that the proved checker returns success. Coverage theorems compose them without a
+runtime decision procedure. Together with `FC-S08` through `FC-S10`, this proves
+`orbitYuGap_nonneg` for every finite symmetric orbit law of mean at most
+`t=76469/200000`.
+
+**Scope:** this is the complete finite-coupling objective inequality at the displayed rational
+parameters. `FC-S12` supplies the independent bridge to union-closed families.
+
+**Use:** further parameter work need only regenerate the low rectangle while rechecking the
+analytic scalar inequalities.
+
+**Artifact:** `Frankl/OrbitClassification.lean`, `Frankl/EndpointCertificate.lean`,
+`Frankl/EndpointTrace/`, `Frankl/EndpointBoundary.lean`, and
+`tools/GenerateFranklEndpointTrace.lean`; see
+[`audits/frankl-rational-abundance-2026-08-10.md`](audits/frankl-rational-abundance-2026-08-10.md#endpoint-closure).
+
+### FC-S12: Finite entropy bridge
+
+**Kind:** structure theorem
+**Evidence:** formalized
+**Disposition:** graduated
+
+For a finite law on an iterated Boolean cube, each coordinate's conditional success
+probabilities form a finite marginal law. Two couplings are constructed: the independent
+product and a recursive symmetric coupling whose local Boolean kernel maximizes the entropy of
+the union. The orbit theorem applies to every coordinate because the mean of its conditional
+law is exactly that coordinate's unconditional frequency.
+
+The Shannon chain rule and conditioning monotonicity give lower bounds for the two union
+entropies. If every coordinate frequency were at most `t`, summing the strict affine inequality
+would force a convex combination of those union entropies to exceed the source entropy. Both
+union laws remain supported on the original finite union-closed family, whose uniform law has
+the maximal possible entropy. This is impossible.
+
+**Scope:** the theorem is finite and fully handles null conditioning fibers. It concerns ordinary
+families of distinct sets, not weighted multisets.
+
+**Use:** any future finite affine-coupling certificate at another target can reuse the bridge
+without change.
+
+**Artifact:** `Frankl/FiniteEntropy.lean`, `Frankl/ConditionalEntropy.lean`,
+`Frankl/FiniteCoupling.lean`, and `Frankl/AffineEntropyBridge.lean`; see
+[`audits/frankl-rational-abundance-2026-08-10.md`](audits/frankl-rational-abundance-2026-08-10.md#finite-entropy-bridge).
+
+### FC-S13: Rational universal abundance
+
+**Kind:** theorem
+**Evidence:** formalized
+**Disposition:** graduated
+
+Every finite union-closed family `F` with `F≠∅` and `F≠{∅}` contains an element occurring in
+strictly more than
+
+```text
+(76469/200000)|F|
+```
+
+members. The inequality `76469/200000>(3−√5)/2` is also exact and kernel-checked. This is an
+explicit rigorous advance over the AHS benchmark. It remains numerically below Cambie's
+uncertified `0.382345533366703…` candidate and Liu's conditional `0.382709087…` candidate.
+
+**Scope:** the theorem does not settle Frankl's conjectured `1/2` bound and makes no absolute
+priority claim beyond the audited literature comparison.
+
+**Use:** this is the publication theorem and the new baseline for any parameter ratchet.
+
+**Artifact:** `Frankl.unionClosed_exists_abundant_coordinate` in
+`Frankl/AffineEntropyBridge.lean` and
+[`audits/frankl-rational-abundance-2026-08-10.md`](audits/frankl-rational-abundance-2026-08-10.md).
+
+### FC-M01: Rational Yu certificate
+
+**Kind:** partial mechanism
+**Evidence:** computational
+**Disposition:** active
+
+At `t=76469/200000`, `α=7/200`, and `ε=10^(−7)`, 160-bit Arb arithmetic
+certifies
+
+```text
+(1−α)A+αC−(1+ε)B ≥ 0
+```
+
+on both reduced bivariate families. Two entropy-zero corner squares are discharged by explicit
+analytic estimates. The run assesses 41,080 rational boxes and emits 20,573 certified leaves
+with deterministic family hashes
+
+```text
+diagonal-endpoint:       ece95829c653da9cb647c97bd42a448a77b614c8483087427d95d34cd96649c3
+diagonal-diagonal-lower: 01f86c782d8bca623fd5d650387f799939b604f636a921c8b92fbe9696396dd0
+diagonal-diagonal-upper: dc55e20e4bccb82d2dd6af0155cf77d2de7b396f5ef0f61552ca8ffc112b9df4
+```
+
+**Scope:** this is an outward-rounded certificate for the reduced objectives, not by itself an
+unbounded theorem. Promotion additionally requires the analytic reductions and numerical
+certificate to pass the repository's strict Lean gate.
+
+**Use:** retain it as an independent regression oracle and parameter-search adjudicator. The
+Lean theorem does not depend on Arb.
+
+**Artifact:** [`tools/certify_frankl.py`](tools/certify_frankl.py),
+[`audits/frankl-yu-reduction-2026-08-08.md`](audits/frankl-yu-reduction-2026-08-08.md#outward-rounded-certificate),
+and the `Frankl/Certificate*.lean`, `Frankl/Interval*.lean`, and `Frankl/LogBounds.lean`
+checker modules.
+
+**Next:** use this oracle to screen rational targets above Cambie's reported numerical candidate;
+promote only candidates that also pass the strict Lean gate.
+
+### FC-O02: Uniform-fiber semigroup ceiling
+
+**Kind:** obstruction
+**Evidence:** audited
+**Disposition:** stock
+
+Let a finite semigroup map homomorphically onto Boolean conjunction, with zero and one fibers
+of sizes `k` and `m`. Any uniform full-fiber entropy lift induces homogeneous set weight
+`t=m/k`. At a point-mass conditional law of omitted probability `x`, maximal entropy inside
+the product fibers gives
+
+```text
+entropy increment
+  ≤ B(2x−x^2)−B(x)+x(1−x)log(k/m).
+```
+
+Positivity for every `0<x<1/2`, as required for a half-frequency theorem, is possible only if
+
+```text
+t≤16/27.
+```
+
+At uniform weight `t=1`, the ceiling changes sign at `x=(3−√5)/2`. Therefore arbitrary
+finite-semigroup multiplication-table engineering inside this architecture cannot improve the
+golden-ratio uniform abundance constant through a functional required to be positive on every
+fixed-mean conditional law.
+
+**Scope:** the obstruction assumes uniform laws within two fixed full fibers, independent
+multiplication, and a coordinatewise Shannon-entropy comparison. It does not cover dependent
+couplings, nonuniform or history-dependent labels, or genuinely multi-coordinate inequalities.
+
+**Use:** retain `FC-S03` as a sharp tilt endpoint, but reject direct searches for a better
+uniform-weight finite semigroup of the same form.
+
+**Artifact:**
+[`audits/frankl-semigroup-fiber-ceiling-2026-08-08.md`](audits/frankl-semigroup-fiber-ceiling-2026-08-08.md#point-mass-ceiling).
+
+### FC-O03: Maximal self-dual completion fails
+
+**Kind:** obstruction
+**Evidence:** audited
+**Disposition:** stock
+
+There is a 13-member intersection-closed, complement-free family on five coordinates that is
+maximal under inclusion among families with those two properties. Every attempted adjunction,
+after taking meet closure, creates a complementary pair. Since a self-dual Boolean function
+would choose exactly one member of each of the 16 complementary pairs, maximality does not
+produce a self-dual Horn completion.
+
+**Scope:** this refutes only completion by inclusion on the same universe. It does not exclude a
+frequency-preserving lift to a larger universe or another non-inclusion transformation into the
+bidual class.
+
+**Use:** do not infer self-duality from Zorn-style maximality. Any completion attack must control
+the missing complementary pairs constructively and track coordinate frequencies.
+
+**Artifact:**
+[`audits/frankl-bidual-horn-density-2026-08-08.md`](audits/frankl-bidual-horn-density-2026-08-08.md#failure-of-naive-self-dual-completion).
 
 ## Matrix Mortality
 

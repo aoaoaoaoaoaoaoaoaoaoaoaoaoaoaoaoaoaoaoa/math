@@ -1,4 +1,4 @@
-# Matrix Mortality Frontier Campaign
+# Mathematics Frontier Campaign
 
 Established-result ledger and dimension-two research audit: 2026-07-25. A question mark means
 “not resolved by any valid result found in the present literature audit,” not an assertion that
@@ -7,6 +7,37 @@ no unpublished argument exists.
 Reusable lemmas, obstructions, certificates, and partial mechanisms from unsuccessful attacks
 are indexed in [`SALVAGE.md`](SALVAGE.md). Its evidence labels are authoritative; this file
 records only their strategic consequences.
+
+## Frankl abundance frontier
+
+The current formal theorem is
+
+```text
+t=76469/200000,    α=7/200,    ε=1/10000000.
+```
+
+Lean proves both the finite affine Yu inequality and its entropy bridge to every finite
+nontrivial union-closed family. The endpoint proof now uses a support-aware analytic contraction
+on the whole high-`a` rectangle. The `q=1` edge is dominated analytically by the diagonal
+endpoint `q=a`; static replay remains only on the low rectangle. The publication theorem is
+`Frankl.unionClosed_exists_abundant_coordinate`.
+
+This is an explicit, fully kernel-checked improvement over the published AHS constant
+`(3−√5)/2`. It does not exceed Cambie's uncertified numerical candidate
+`0.382345533366703…`, nor Liu's conditional `0.382709087…` candidate. Priority language must
+keep those distinct epistemic categories intact.
+
+The next live attacks are:
+
+1. Ratchet the present Sawin–Yu architecture past `0.382345533366703…`. The low endpoint
+   rectangle is now the only numerical surface; the high rectangle, diagonal family, entropy
+   bridge, and support reductions are analytic.
+2. Import Liu's conditionally-IID gain without assuming the infinite-kernel PSD statement or the
+   reported optimizer shape. A finite exact positivity decomposition would give genuine room
+   beyond the two-coupling ceiling.
+3. Search for a target-dependent analytic inequality on the low endpoint rectangle. Eliminating
+   its static trace would expose a symbolic parameter interval and make further rational ratchets
+   much cheaper.
 
 ## The source theorem
 

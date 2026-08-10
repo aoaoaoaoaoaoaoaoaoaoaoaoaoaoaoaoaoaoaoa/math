@@ -4,6 +4,42 @@ Each PDF has a same-stem synopsis recording its citation, provenance, content di
 and version hazards. A metadata-only synopsis records a relied-upon source when no
 redistributable full text was located.
 
+## Frankl's union-closed sets conjecture
+
+| Key | Status | Role in the investigation |
+| --- | --- | --- |
+| [Gilmer22](gilmer-2022-constant-lower-bound-union-closed.md) | arXiv v2; CC BY | First dimension-free constant and the entropy-growth engine |
+| [Sawin23](sawin-2022-improved-lower-bound-union-closed.md) | arXiv v3; metadata only | Golden-ratio sharpening, dependent coupling, and failure of Gilmer's stronger conjecture |
+| [CL22](chase-lovett-2022-approximate-union-closed.md) | arXiv v1; metadata only | Golden-ratio bound and sharp barrier for approximately union-closed families |
+| [AHS24](alweiss-huang-sellke-2024-improved-lower-bound-frankl-journal.md) | peer-reviewed EJC; CC BY-ND | Unconditional benchmark `(3 − √5)/2` |
+| [Boppana23](boppana-2023-binary-entropy-inequality.md) | arXiv v1; CC BY | Independent analytic proof of the baseline entropy inequality |
+| [Yu23](yu-2023-dimension-free-bounds-union-closed-journal.md) | peer-reviewed Entropy; CC BY | Finite coupling optimization and uncertified numerical `0.38234` evaluation |
+| [Cambie25](cambie-2022-better-bounds-union-closed.md) | arXiv v2; CC BY | Two-variable reduction and uncertified Sawin ceiling `0.382345533…` |
+| [Liu24](liu-2023-conditionally-iid-coupling-union-closed.md) | peer-reviewed CISS / arXiv; metadata only | Analytic strict-improvement mechanism and conditional `0.382709087…` candidate |
+| [Cambie23](cambie-2023-progress-union-closed.md) | peer-reviewed survey; CC BY | Post-breakthrough strategy map and entropy barriers |
+| [BruhnSchaudt15](bruhn-schaudt-2015-journey-union-closed.md) | peer-reviewed survey; metadata only | Classical results, failed routes, and exact lattice equivalence |
+| [Hu23](hu-2023-on-union-closed.md) | peer-reviewed Discrete Math.; metadata only | Minimal-counterexample bounds and historical false-proof warning |
+| [Bouchard25](bouchard-2025-lattice-formulation-union-closed.md) | arXiv v1; metadata only | Necessary conditions for a smallest lattice counterexample |
+| [CarvalhoMachiavelo25](carvalho-machiavelo-2024-normalized-families-frankl.md) | arXiv v2; metadata only | Normalized-family duality and canonical root-deletion recursion |
+| [DasWu25](das-wu-2024-frequent-elements-union-closed.md) | arXiv v3; CC BY | Multiple-frequency theorem and corroboration of the current numerical frontier |
+| [vdHRoos26](van-der-hout-roos-2026-frankl-results-conjectures.md) | peer-reviewed JANO; CC BY | 2026 open status and tight-family parity equivalence |
+| [LozinZamaraev24](lozin-zamaraev-2024-frankl-horn-functions.md) | peer-reviewed JCTA; CC BY | Horn-function equivalence and class theorems; its stated bidual/self-dual open cases are closed by the audited Karpas density dichotomy |
+| [EiterIbarakiMakino99](eiter-ibaraki-makino-1999-bidual-horn-extensions.md) | peer-reviewed Discrete Appl. Math.; metadata only | Structural and algorithmic theory of bidual Horn extensions, including the failure of naive closure-disjointness sufficiency |
+| [Karpas17](karpas-2017-two-results-union-closed.md) | arXiv v1; metadata only | Boolean-influence proof of Frankl’s conjecture for union-closed families occupying at least half the cube; directed-influence labels require a documented swap |
+| [Gendler25](gendler-2025-union-closed-weighted-cube.md) | arXiv v1; metadata only | Product-measure generalization of Karpas’s half-cube theorem and an independent sign-consistent reconstruction |
+| [DeFranco26](defranco-2026-boolean-polynomials-union-closed.md) | arXiv v1; CC BY | Boolean-polynomial encoding; sole located forward citation of the 2024 Horn paper and negative evidence for the bidual-Horn priority check |
+| [Bhasin24](bhasin-2024-cubical-complements-union-closed.md) | arXiv v1; CC BY | Cubical complex of simply rooted families; the audit upgrades acyclicity to contractibility and documents three local source defects |
+| [Zargar23](zargar-2023-union-closed-nonuniform-distributions.md) | arXiv v2; CC BY | Nilpotent/group semigroup lift; its `k=2,m=1` seam is closed in the binary-kernel audit, yielding weighted Frankl at `t=1/2` |
+
+The constants `0.38234`, `0.382345533…`, and `0.382709087…` have different epistemic
+status. Yu's and Cambie's values depend on uncertified global numerical minimization; Liu's
+larger value additionally assumes an infinite-kernel PSD statement and an optimizer-shape
+hypothesis. AHS remains the last explicit benchmark supported by an external published proof.
+The present repository separately proves and kernel-checks the local result
+`76469/200000=0.382345`; it does not exceed Cambie's reported numerical candidate.
+
+## Matrix mortality
+
 | Key | Status | Role in the matrix-mortality investigation |
 | --- | --- | --- |
 | [CHHN14](cassaigne-halava-harju-nicolas-2014-matrix-mortality.md) | arXiv v3; established paper | Previous antichains, ternary encoding, rank-one scalar-to-mortality reduction, and the neighboring `Z₅(3)` and `M₅(4)` bounds |

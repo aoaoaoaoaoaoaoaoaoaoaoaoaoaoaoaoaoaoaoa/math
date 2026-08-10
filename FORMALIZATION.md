@@ -1,5 +1,54 @@
 # Formal Verification
 
+## Frankl abundance theorem
+
+Lean proves the following unconditional finite theorem at
+
+```text
+76469/200000 = 0.382345 > (3−√5)/2.
+```
+
+For every finite union-closed family of distinct Boolean vectors that is nonempty and not
+`{∅}`, some coordinate occurs in strictly more than `76469/200000` of its members. The
+publication-facing declaration is `Frankl.unionClosed_exists_abundant_coordinate` in
+`Frankl/AffineEntropyBridge.lean`.
+
+The proof is kernel-checked from the finite family to the scalar certificate. Its main layers are:
+
+- finite Shannon entropy, conditioning, deterministic pushforwards, product laws, and the chain
+  rule, including zero-probability fibers;
+- independent and recursively dependent symmetric couplings with the prescribed marginals;
+- the exact entropy bridge: Yu's strict one-coordinate affine inequality sums to an entropy gain
+  for a union that remains supported on the original finite union-closed family;
+- exact-mean lifting, fixed-mean concavity, one-moment support reduction, half-support
+  elimination, orbit classification, and contraction to canonical objective families;
+- analytic collapse of the diagonal family;
+- a support-aware endpoint contraction on
+  `1/4≤a≤76469/200000, 0≤q≤1/2`, using support `max(a,q)` and conditional center
+
+  ```text
+  r=(a(1−2t)+tq)/(1+q−a−t);
+  ```
+- exact positivity of the saturated centered curve on `1−t≤y≤21/25`. Its third-derivative
+  polynomial is monotone; this makes the second derivative unimodal, so rational logarithm
+  enclosures at the two endpoints prove convexity on the whole interval;
+- analytic domination of the `q=1` endpoint by `q=a`, which preserves the marginal law and
+  independent entropy while decreasing the dependent entropy term;
+- kernel replay of generated static certificates only on the low endpoint rectangle
+  `0≤a≤1/4, 0≤q≤1/2`. The former residual high-`a` subdivision and `q=1` trace are gone.
+
+The generated trace is ordinary proof data: every leaf contains a closed rational subdivision
+term and a definitional equality that the proved checker accepts it. The Python/Arb program is
+retained as an independent outward-rounded oracle, not as a Lean premise. No theorem uses
+`native_decide`, an external declaration, a generated axiom, or another proof aperture.
+
+The principal files are `Frankl/EndpointBoundary.lean`, `Frankl/SupportEndpoint.lean`,
+`Frankl/CenteredEndpoint.lean`, `Frankl/FiniteEntropy.lean`,
+`Frankl/ConditionalEntropy.lean`, `Frankl/FiniteCoupling.lean`, and
+`Frankl/AffineEntropyBridge.lean`. The target remains compartmentalized: `lake build Frankl`
+builds the Frankl library without building `MatrixMortality`; the repository-wide
+`scripts/check.sh` intentionally runs both publication gates.
+
 The Lean development verifies the complete computable source reduction and the matrix compilers:
 
 ```text

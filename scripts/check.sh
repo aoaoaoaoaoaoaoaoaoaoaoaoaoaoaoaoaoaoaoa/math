@@ -104,6 +104,7 @@ readonly PYTHON_CHECKERS=(
   tools/audit_chhn_packing_rank.py
   tools/audit_prefix_algebra.py
   tools/audit_six_state_sandwich.py
+  tools/certify_frankl.py
   tools/explore_setter_projective.py
   tools/scour_source.py
 )
@@ -113,6 +114,7 @@ uvx --from ty==0.0.58 ty check "${PYTHON_CHECKERS[@]}"
 uv run --script tools/audit_prefix_algebra.py
 uv run --script tools/audit_chhn_packing_rank.py
 uv run --script tools/audit_six_state_sandwich.py
+uv run --script tools/certify_frankl.py
 uv run --script tools/explore_setter_projective.py --audit --primes 3
 uv run --script tools/scour_source.py
 

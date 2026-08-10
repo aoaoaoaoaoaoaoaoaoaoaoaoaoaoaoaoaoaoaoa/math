@@ -1,6 +1,14 @@
+import Frankl
 import MatrixMortality
 
+open Frankl
 open MatrixMortality
+
+#print axioms abundanceTarget_gt_three_eighths
+#print axioms goldenRatioThreshold_lt_abundanceTarget
+#print axioms orbitYuGap_nonneg
+#print axioms unionClosed_not_coordinateMeansLE
+#print axioms unionClosed_exists_abundant_coordinate
 
 #print axioms terminal_match_iff_tagHaltsFrom
 #print axioms nearyPCP_solvable_iff_tagHaltsFrom
