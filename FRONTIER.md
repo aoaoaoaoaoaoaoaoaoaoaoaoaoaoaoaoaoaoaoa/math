@@ -1167,6 +1167,15 @@ microscopic, doubly order-broken genealogy. See
 [`R32-S29`](SALVAGE.md#r32-s29-adelic-content-and-repeated-factor-budget) and
 [`m32-sparse-genealogy-budget-2026-08-10.md`](audits/m32-sparse-genealogy-budget-2026-08-10.md).
 
+The remaining reverse reservoir cannot be charged by a function of the projective endpoints.
+For the checked period-three guard, Lean now verifies exact primitive contents and a second
+rational eigenline of the endpoint macro. Repeating the lawful cycle fixes the reset orbit while
+placing exactly one new factor of thirteen per period in the transverse eigenvalue; the reset
+eigenvalue remains coprime to thirteen. Thus endpoint-only all-packet amortization is false even
+with fixed coefficients. The first-hit terminal and aperiodic hypotheses are now essential, not
+technical residue. See [`R32-O20`](SALVAGE.md#r32-o20-transverse-reverse-reservoir) and
+[`m32-transverse-reverse-reservoir-2026-08-10.md`](audits/m32-transverse-reverse-reservoir-2026-08-10.md).
+
 Finite rational carry-mode atlases cannot supply the opposing aperiodic orbit either. If each
 mode is a rational function of the current `p^a` and each transition has one fixed additive wait
 shift, every directed control cycle has total shift zero. On an actual infinite orbit the
@@ -1230,7 +1239,7 @@ all-legal block inequality for the carried generalized continuant. See
 
 | Lane | Required move | Present obstruction |
 | --- | --- | --- |
-| Split-guard decision | Prove an effective reset-anchored recurrence-or-escape certificate for the doubly order-broken continuant | Forward activation is exponentially budgeted, but sparse microscopic packets financed by earlier reverse content remain possible |
+| Split-guard decision | Prove an effective reset-anchored recurrence-or-escape certificate for the doubly order-broken continuant | Forward activation is exponentially budgeted, while endpoint-only charging of the transverse reverse reservoir is false |
 | Split-guard counter | Construct one exact fixed-coefficient reset orbit with a sparse microscopic doubly order-broken moving-prime genealogy | The reported order-breaking tuple traps after `[4,1,1,1,1]`; dense births, macroscopic allocations, rapid recovery, and full-numerator rails are excluded |
 | Irreducible cubic reflection orbit | Decide reachability between isolated singular lines under the non-pure order-three recurrence of projective involutions | Singular timing is finite; independently selected unit indices remain unbounded |
 | Generic projective incidence | Decide or prove undecidable the normalized `α=β=1` GPI₂ core through intrinsic arithmetic dynamics | It contains exact fixed-projectivity shortcut-Collatz reachability; homomorphic free-word stores with finite queue controllers are impossible |
@@ -1245,7 +1254,8 @@ isolation, universal-boundary valuation wall, complete endpoint language, and fi
 geodesic are complete. Uniform first-bridge closure and coefficient-uniform all-legal block
 descent are false; fixed positive renewal cycles are impossible; bounded local shadow depth does
 not imply bounded height; terminal length can exceed two; endpoint support and finite rational
-carry atlases are insufficient. The rank-`(3,2)` artery now asks whether the actual additive
+carry atlases are insufficient; reverse mass is invisible to projective endpoints on exact
+cycles. The rank-`(3,2)` artery now asks whether the actual additive
 continuant admits an effective recurrence-sensitive bound, or can sustain one exact aperiodic
 reset orbit with unbounded denominators and unbounded history. The final boundary, persistent
 exact orders, and divisibility-chain schedules are closed; only recycled support across

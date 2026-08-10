@@ -125,6 +125,7 @@ file owns the mathematical stock.
 | [`R32-S36`](#r32-s36-guarded-affine-projective-incidence) | compiler | p-adic denominator poisoning gives an all-word guarded affine compiler into normalized GPI₂ | audited | active |
 | [`R32-S37`](#r32-s37-normalized-shortcut-collatz-incidence) | reduction and arithmetic benchmark | fixed projectivities encode pointwise shortcut-Collatz reaches-one exactly inside normalized GPI₂ | formalized | active |
 | [`R32-O19`](#r32-o19-projective-queue-centralizer-obstruction) | obstruction | an injective homomorphic projective word store with finite controller cannot recurrently delete and append queue data | audited | graduated |
+| [`R32-O20`](#r32-o20-transverse-reverse-reservoir) | obstruction | a lawful fixed projective cycle accumulates unbounded reverse 13-adic mass on its transverse eigenline | formalized | graduated |
 | [`R32-D03`](#r32-d03-bounded-denominator-periodicity) | decidable stratum | every infinite legal rational guard orbit with bounded reduced denominators is eventually periodic | formalized | graduated |
 | [`M4-C01`](#m4-c01-two-state-pushout-compiler) | compiler | binary deterministic two-state scalar control compiles to three `4 × 4` matrices | formalized | graduated |
 | [`M4-O01`](#m4-o01-exact-toggle-fusion-leaves-an-immortal-core) | obstruction | exact local toggle fusion preserves a nonzero common anchor | formalized | graduated |
@@ -3282,6 +3283,13 @@ their entire source numerators also have a coefficient-effective second-wait bou
 audited corollaries, not a second formal recurrence API. They still permit a sparse microscopic
 doubly order-broken genealogy.
 
+For reset defect `Δ=r−(A+D−L)t`, one also has `pᵃ−1∣hΔ⁺`. A reset-avoiding prefix therefore
+has a coefficient-effective quadratic bound on total wait mass, and a first-hit terminal word
+has an exponential bound on its complete forward-content product and terminal
+scalar/coefficient gcd. These remain bounds in the unknown length. `R32-O20` proves that the
+unreactivated reverse product cannot be bounded from the projective endpoints: a fixed lawful
+cycle hides an arbitrary 13-power on its transverse eigenline.
+
 **Artifact:** `ReturnGuard.integralStep_content_mul_height_le`,
 `integralStep_wait_content_le`, `cyclotomicComplement_dvd_targetDifference`, and
 `primitiveSteps_projectivePairCross` in
@@ -4427,6 +4435,39 @@ prefix/suffix rules. It does not exclude nonhomomorphic arithmetic encodings suc
 **Use:** do not reopen free Möbius, continued-fraction, radix, tag, or queue stores with a finite
 projective controller. A rank-(2,2) universality proof must obtain its memory from intrinsic
 arithmetic dynamics.
+
+### R32-O20: Transverse reverse reservoir
+
+**Kind:** obstruction
+**Evidence:** formalized
+**Disposition:** graduated
+
+The lawful period-three guard `(p,s,A,D,L)=(3,2,−953,473,2240)` has primitive endpoint contents
+
+```text
+h=(−160,−1204,−80),    k=(−13244,−7040,−344344),
+hᵢkᵢ=DL(3^aⁱ−1).
+```
+
+Its endpoint macro fixes the reset ray with eigenvalue `3¹²∏hᵢ`, while its second rational
+eigenline has eigenvalue `(−1)³∏kᵢ`. The former is coprime to thirteen and the latter has exact
+13-adic valuation one. Repeating the legal cycle `N` times fixes the rational reset orbit but
+raises those eigenvalues to the `N`th powers. Arbitrary reverse 13-mass is therefore invisible
+to the projective endpoints.
+
+**Scope:** this is an immortal periodic orbit. It kills path-independent or endpoint-coercive
+charging of every reverse packet, not a bound exploiting first-hit terminality, reset anchoring,
+and aperiodicity.
+
+**Artifact:** `ReturnGuard.Examples.cycle_endpointReductions` and
+`cycle_transverseReservoir` in
+[`ReturnGuardTransverseReservoir.lean`](MatrixMortality/ReturnGuardTransverseReservoir.lean),
+with reconstruction in
+[`m32-transverse-reverse-reservoir-2026-08-10.md`](audits/m32-transverse-reverse-reservoir-2026-08-10.md).
+
+**Use:** exclude endpoint-only reverse-mass potentials from the split decision lane. Any
+surviving certificate must use the reset-started first-hit orbit and distinguish aperiodic
+escape from periodic transverse storage.
 
 ### R32-D03: Bounded-denominator periodicity
 
