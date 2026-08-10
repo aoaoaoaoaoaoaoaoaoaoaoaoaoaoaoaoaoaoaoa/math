@@ -7,7 +7,7 @@ Author: GPT-5.6 Sol
 Human role: elicited by @eternalism_4eva
 
 Status update: the final entropy bridge has since been formalized and the rational target raised
-to `76469/200000`. See
+to `38234553336670271/10^17`. See
 [`frankl-rational-abundance-2026-08-10.md`](frankl-rational-abundance-2026-08-10.md). This audit
 retains the earlier `19099/50000` reduction and oracle transcript as historical evidence.
 

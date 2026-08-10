@@ -54,13 +54,14 @@ file owns the mathematical stock.
 | [`FC-S08`](#fc-s08-diagonal-family-collapse) | structure theorem | every target-mean two-diagonal objective is bounded below by the point law | formalized | graduated |
 | [`FC-S09`](#fc-s09-endpoint-core-contraction) | structure theorem | the high-conditional-mean endpoint core contracts to the centered curve | formalized | graduated |
 | [`FC-S10`](#fc-s10-centered-endpoint-positivity) | analytic certificate | the saturated centered endpoint curve is positive through complement `21/25` | formalized | graduated |
-| [`FC-S11`](#fc-s11-endpoint-boundary-certificate) | certificate | every canonical endpoint objective is nonnegative at `76469/200000` | formalized | graduated |
+| [`FC-S11`](#fc-s11-endpoint-boundary-certificate) | certificate | every canonical endpoint objective is nonnegative at `38234553336670271/10^17` | formalized | graduated |
 | [`FC-S12`](#fc-s12-finite-entropy-bridge) | structure theorem | the finite affine coupling inequality implies strict union-closed abundance | formalized | graduated |
-| [`FC-S13`](#fc-s13-rational-universal-abundance) | theorem | every nontrivial finite union-closed family has abundance greater than `76469/200000` | formalized | graduated |
-| [`FC-M01`](#fc-m01-rational-yu-certificate) | partial mechanism | Arb independently checks the reduced gaps at `76469/200000` | computational | active |
+| [`FC-S13`](#fc-s13-rational-universal-abundance) | theorem | every nontrivial finite union-closed family has abundance greater than `38234553336670271/10^17` | formalized | graduated |
+| [`FC-M01`](#fc-m01-rational-yu-certificate) | partial mechanism | Arb independently checks the reduced gaps at `38234553336670271/10^17` | computational | active |
 | [`FC-O01`](#fc-o01-homogeneous-tilt-persistence-fails) | obstruction | one-coordinate majority need not persist under homogeneous product tilt | audited | active |
 | [`FC-O02`](#fc-o02-uniform-fiber-semigroup-ceiling) | obstruction | finite full-fiber semigroup lifts cannot beat the uniform entropy barrier | audited | stock |
 | [`FC-O03`](#fc-o03-maximal-self-dual-completion-fails) | obstruction | maximal complement-free meet families need not be self-dual | audited | stock |
+| [`FC-O04`](#fc-o04-affine-two-coupling-wall) | obstruction | the independent/max-entropy affine scheme cannot pass `c⋆=0.382345533366702721…` | audited | stock |
 | [`MM-C01`](#mm-c01-fixed-anchor-rank-one-compiler) | compiler | common-fixed-column scalar zero to mortality | formalized | graduated |
 | [`MM-C02`](#mm-c02-common-image-restriction) | compiler | mortality-preserving restriction to a common image | formalized | graduated |
 | [`MM-C03`](#mm-c03-scheduled-binary-compiler) | compiler | fixed-width tag strokes to a total two-letter scalar series | formalized | graduated |
@@ -361,9 +362,8 @@ For each marginal atom `y∈(1/2,1)`, the kernel
 y ↦ 2(1−y)δ_(1/2)+(2y−1)δ_1
 ```
 
-preserves its mean and does not increase the max-entropy coupling cost pointwise. At
-`t=19099/50000`, `α=7/200`, and gap slack `10^(−7)`, bilinear polarization gives the exact
-finite identity
+preserves its mean and does not increase the max-entropy coupling cost pointwise. At the current
+rational target and affine parameters, bilinear polarization gives the exact finite identity
 
 ```text
 A(μ′)−A(μ)=λ(E_μg+E_μ′g).
@@ -373,7 +373,7 @@ Concavity and monotonicity of `g`, followed by the checked scalar inequality
 `2g(t)<wg(0)`, show that the replacement cannot increase the independent-minus-marginal gap.
 Iterating removes every support point strictly between one half and one.
 
-**Scope:** the scalar derivative signs are specific to the displayed rational parameters,
+**Scope:** the scalar derivative signs are specific to the current rational parameters,
 though the kernel and pointwise dependent-cost inequality are general. This repairs Cambie's
 infinitesimal argument without an uncontrolled `O(η)` term.
 
@@ -405,18 +405,14 @@ For `f_q(x)=h(x+q−xq)` on the low square,
 A separate Bernstein-positive polynomial proves that contracting a symmetric low orbit to its
 mean increases independent join entropy by no more than marginal entropy. In a two-low-orbit
 extreme, contract the lower-mean orbit first and the upper-mean orbit second. Their normalized
-costs are at most `1` and
-
-```text
-2−8t/3 = 18401/18750 < 1.
-```
+costs are at most `1` and `2−8t/3<1`.
 
 If the upper orbit contains `1`, the lower orbit contracts with cost at most one. Since the
 dependent term is fixed by each low orbit's mean, every restricted extreme reduces to either a
 diagonal–diagonal or diagonal–endpoint law.
 
-**Scope:** the theorem concerns symmetric extremes supported on `[0,1/2]∪{1}` at exact
-mean `t=19099/50000`. The curvature lemmas themselves have the wider domains stated in the
+**Scope:** the theorem concerns symmetric extremes supported on `[0,1/2]∪{1}` at the current
+exact rational target. The curvature lemmas themselves have the wider domains stated in the
 audit.
 
 **Use:** replace Yu's four geometric orbit coordinates by the two bivariate objectives in
@@ -442,8 +438,8 @@ diagonal–diagonal, or diagonal–endpoint objective family.
 **Evidence:** formalized
 **Disposition:** graduated
 
-Let a binary law on `[0,1/2]` have masses `ℓ,u`, support `a,b`, and mean
-`t=19099/50000`. If `Δ=h(t)−ℓh(a)−uh(b)`, sequential join-curvature comparison gives
+Let a binary law on `[0,1/2]` have masses `ℓ,u`, support `a,b`, and mean `t`. If
+`Δ=h(t)−ℓh(a)−uh(b)`, sequential join-curvature comparison gives
 
 ```text
 h(t∨t)−E h(X∨Y)
@@ -464,22 +460,18 @@ inequality. Averaging the support proves
 log 2−E h(min(2X,1/2)) ≤ 2Δ.
 ```
 
-The weighted loss coefficient is exactly
+At the current `t`, dependent share `α`, and strict slack `ε`, exact rational arithmetic proves
 
 ```text
-(193/200)((1−t)/(1+t)+1−4t/3)+(7/200)·2
-  = 56146740823/57582500000
-  < 10000001/10000000,
+(1−α)((1−t)/(1+t)+1−4t/3)+2α < 1+ε.
 ```
 
-with margin `5743059741/230330000000`. Hence every two-diagonal objective is at least
-the point-mass objective. A kernel-replayed dyadic enclosure gives the latter a positive lower
-bound `1102953606749615/1152921504606846976`. Both diagonal certificate rectangles are
+Hence every two-diagonal objective is at least the point-mass objective. The centered-curve
+proof gives the latter a strict positive lower bound. Both diagonal certificate rectangles are
 therefore discharged analytically, without a subdivision verdict.
 
-**Scope:** this eliminates the diagonal–diagonal family only. `FC-S11` now discharges the
-diagonal–endpoint surface; the final implication from Yu's entropy inequality to union-closed
-abundance remains open.
+**Scope:** this eliminates the diagonal–diagonal family only. `FC-S11` discharges the
+diagonal–endpoint surface, and `FC-S12` supplies the union-closed implication.
 
 **Use:** remove two of the three compact certificate regions and concentrate all numerical or
 analytic work on the endpoint family.
@@ -534,17 +526,26 @@ In complement coordinates `y=1−r`, multiply the saturated centered objective b
 K(y)=(1−α)(1−t)²h(y²)+α(2(1−t)y−y²)log 2−(1+ε)(1−t)yh(y).
 ```
 
-At `t=76469/200000`, the sign of the third derivative is governed by the exact cubic
+At
 
 ```text
-Q(y)=10000001y³+23841483y²−30000003y+3841481.
+t=38234553336670271/10^17,
+α=356069804374481/10^16,
+ε=10⁻¹⁸,
 ```
 
-The polynomial `Q` is increasing on `1−t≤y≤21/25`. Thus `K'''` changes sign at most once,
+the sign of the third derivative is governed by
+
+```text
+P(y)=4(1−α)(1−t)²(y²+1)
+     +(1+ε)(1−t)(y³−3y−2).
+```
+
+The polynomial `P` is increasing on `1−t≤y≤21/25`. Thus `K'''` changes sign at most once,
 from positive to negative, and `K''` reaches its minimum at an endpoint. Four-term atanh
 enclosures prove `K''(1−t)>0` and `K''(21/25)>0`, so `K` is convex on the whole interval. At
-`y₀=33497/50000`, sharper rational logarithm enclosures give
-`K(y₀)>1/6000000` and `0<K′(y₀)<1/5000000`; its supporting line remains positive.
+`y₀=670545261496963/10^15`, 72-term rational logarithm enclosures give
+`K(y₀)>1/(25·10^16)` and `0<K′(y₀)<1/(7·10^17)`; its supporting line remains positive.
 
 The exact identity
 
@@ -574,19 +575,19 @@ Half support forces the endpoint coordinate into the exact dichotomy `q≤1/2 �
 apparent strip `1/2<q<1` is not realizable. On the whole high rectangle
 
 ```text
-1/4≤a≤76469/200000,    0≤q≤1/2,
+1/4≤a≤38234553336670271/10^17,    0≤q≤1/2,
 ```
 
 condition away the deterministic coordinate, put `M=max(a,q)`, and compare the independent
 loss with support-aware coefficient
 
 ```text
-Ψ(M,r)=(193/200)(1−t)
+Ψ(M,r)=(1−α)(1−t)
   (M/(M+r−Mr)+(1−4r/3)/(1−r)).
 ```
 
 The coefficient decreases in `r`. Splitting at `q≤a` and `a≤q` reduces it to two exact
-rational polynomial signs, proving `Ψ≤1+10⁻⁷`. `FC-S10` then gives strict positivity throughout
+rational polynomial signs, proving `Ψ≤1+10⁻¹⁸`. `FC-S10` then gives strict positivity throughout
 the high rectangle. When `q=1`, replacing its deterministic endpoint atom by the symmetric
 endpoint orbit at `q=a` preserves the marginal law and independent entropy while decreasing
 the dependent entropy term. Thus the `q=1` objective is bounded below by a point already in the
@@ -600,7 +601,7 @@ Each generated leaf contains a closed rational subdivision term and a definition
 showing that the proved checker returns success. Coverage theorems compose them without a
 runtime decision procedure. Together with `FC-S08` through `FC-S10`, this proves
 `orbitYuGap_nonneg` for every finite symmetric orbit law of mean at most
-`t=76469/200000`.
+`t=38234553336670271/10^17`.
 
 **Scope:** this is the complete finite-coupling objective inequality at the displayed rational
 parameters. `FC-S12` supplies the independent bridge to union-closed families.
@@ -651,17 +652,18 @@ Every finite union-closed family `F` with `F≠∅` and `F≠{∅}` contains an 
 strictly more than
 
 ```text
-(76469/200000)|F|
+(38234553336670271/10^17)|F|
 ```
 
-members. The inequality `76469/200000>(3−√5)/2` is also exact and kernel-checked. This is an
-explicit rigorous advance over the AHS benchmark. It remains numerically below Cambie's
-uncertified `0.382345533366703…` candidate and Liu's conditional `0.382709087…` candidate.
+members. The inequality `38234553336670271/10^17>(3−√5)/2` is also exact and kernel-checked.
+This is an explicit rigorous advance over the AHS benchmark. `FC-O04` locates the affine
+architecture's analytic wall less than `1.2×10⁻¹⁷` above the checked target. Liu's larger
+`0.382709087…` candidate remains conditional.
 
 **Scope:** the theorem does not settle Frankl's conjectured `1/2` bound and makes no absolute
 priority claim beyond the audited literature comparison.
 
-**Use:** this is the publication theorem and the new baseline for any parameter ratchet.
+**Use:** this is the publication theorem and the baseline for every stronger-coupling attack.
 
 **Artifact:** `Frankl.unionClosed_exists_abundant_coordinate` in
 `Frankl/AffineEntropyBridge.lean` and
@@ -673,7 +675,7 @@ priority claim beyond the audited literature comparison.
 **Evidence:** computational
 **Disposition:** active
 
-At `t=76469/200000`, `α=7/200`, and `ε=10^(−7)`, 160-bit Arb arithmetic
+At `t=38234553336670271/10^17`, `α=356069804374481/10^16`, and `ε=10⁻¹⁸`, 160-bit Arb arithmetic
 certifies
 
 ```text
@@ -681,13 +683,13 @@ certifies
 ```
 
 on both reduced bivariate families. Two entropy-zero corner squares are discharged by explicit
-analytic estimates. The run assesses 41,080 rational boxes and emits 20,573 certified leaves
+analytic estimates. The run assesses 110,760 rational boxes and emits 55,413 certified leaves
 with deterministic family hashes
 
 ```text
-diagonal-endpoint:       ece95829c653da9cb647c97bd42a448a77b614c8483087427d95d34cd96649c3
-diagonal-diagonal-lower: 01f86c782d8bca623fd5d650387f799939b604f636a921c8b92fbe9696396dd0
-diagonal-diagonal-upper: dc55e20e4bccb82d2dd6af0155cf77d2de7b396f5ef0f61552ca8ffc112b9df4
+diagonal-endpoint:       1f49c7cafc3831fe32708f70609e08dd47fae3c8950dc34f44005205618594bb
+diagonal-diagonal-lower: 725cac791c5d71c17fbfe39ef8aa4206cd0e324eb63ae3b146e40d21587f1174
+diagonal-diagonal-upper: 015ae1cc40f89b679f814b41c7d3a86174d0d80b5659ae4aacf5bba3bc67ace1
 ```
 
 **Scope:** this is an outward-rounded certificate for the reduced objectives, not by itself an
@@ -702,8 +704,9 @@ Lean theorem does not depend on Arb.
 and the `Frankl/Certificate*.lean`, `Frankl/Interval*.lean`, and `Frankl/LogBounds.lean`
 checker modules.
 
-**Next:** use this oracle to screen rational targets above Cambie's reported numerical candidate;
-promote only candidates that also pass the strict Lean gate.
+**Next:** extend the oracle only for a genuinely new coupling protocol, or formalize the exact
+wall if that becomes strategically useful. `FC-O04` rules out a material ratchet within the
+present affine architecture.
 
 ### FC-O02: Uniform-fiber semigroup ceiling
 
@@ -763,6 +766,53 @@ the missing complementary pairs constructively and track coordinate frequencies.
 
 **Artifact:**
 [`audits/frankl-bidual-horn-density-2026-08-08.md`](audits/frankl-bidual-horn-density-2026-08-08.md#failure-of-naive-self-dual-completion).
+
+### FC-O04: Affine two-coupling wall
+
+**Kind:** obstruction
+**Evidence:** audited
+**Disposition:** stock
+
+Let `h` be binary entropy, `ℓ=log 2`, and let `y⋆` be the locally unique zero of
+
+```text
+h(y)²−ℓ(2h(y)−h(y²))
+```
+
+inside the certified interval
+
+```text
+(0.6705452614969630276082946160,
+ 0.6705452614969630276082946162).
+```
+
+Put `s⋆=y⋆h(y⋆)/h(y⋆²)` and `c⋆=1−s⋆`. Outward-rounded Arb arithmetic gives
+
+```text
+0.38234553336670272114599300
+  < c⋆ <
+0.38234553336670272114599301.
+```
+
+For the centered endpoint objective `K`, exact algebra gives, at `s=1−t`,
+
+```text
+K(s,α,0;y⋆)=(s−s⋆)[(1−α)h(y⋆²)s+αy⋆(2log 2−h(y⋆))].
+```
+
+The bracket is positive for every `α∈[0,1]`. Hence every affine mixture of the independent and
+max-entropy couplings fails throughout `c⋆<t≤1/2`, even before positive entropy slack is
+imposed. The formal target in `FC-S13` lies between `11×10⁻¹⁸` and `12×10⁻¹⁸` below this wall.
+
+**Scope:** this is an upper obstruction for the two-coupling affine architecture. It neither
+rules out conditionally IID or other new couplings nor supplies an exact Lean theorem at `c⋆`.
+
+**Use:** stop decimal ratcheting inside the exhausted architecture; new progress must alter the
+coupling family or the entropy functional.
+
+**Artifact:**
+[`audits/frankl-affine-wall-2026-08-10.md`](audits/frankl-affine-wall-2026-08-10.md) and the
+default wall check in [`tools/certify_frankl.py`](tools/certify_frankl.py).
 
 ## Matrix Mortality
 

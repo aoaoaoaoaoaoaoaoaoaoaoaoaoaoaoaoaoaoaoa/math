@@ -5,13 +5,19 @@
 Lean proves the following unconditional finite theorem at
 
 ```text
-76469/200000 = 0.382345 > (3−√5)/2.
+38234553336670271/100000000000000000
+  = 0.38234553336670271
+  > (3−√5)/2.
 ```
 
 For every finite union-closed family of distinct Boolean vectors that is nonempty and not
-`{∅}`, some coordinate occurs in strictly more than `76469/200000` of its members. The
+`{∅}`, some coordinate occurs in strictly more than this fraction of its members. The
 publication-facing declaration is `Frankl.unionClosed_exists_abundant_coordinate` in
-`Frankl/AffineEntropyBridge.lean`.
+`Frankl/AffineEntropyBridge.lean`. Its affine parameters are
+
+```text
+α=356069804374481/10000000000000000,    ε=10⁻¹⁸.
+```
 
 The proof is kernel-checked from the finite family to the scalar certificate. Its main layers are:
 
@@ -24,14 +30,15 @@ The proof is kernel-checked from the finite family to the scalar certificate. It
   elimination, orbit classification, and contraction to canonical objective families;
 - analytic collapse of the diagonal family;
 - a support-aware endpoint contraction on
-  `1/4≤a≤76469/200000, 0≤q≤1/2`, using support `max(a,q)` and conditional center
+  `1/4≤a≤38234553336670271/10^17, 0≤q≤1/2`, using support `max(a,q)` and conditional center
 
   ```text
   r=(a(1−2t)+tq)/(1+q−a−t);
   ```
 - exact positivity of the saturated centered curve on `1−t≤y≤21/25`. Its third-derivative
   polynomial is monotone; this makes the second derivative unimodal, so rational logarithm
-  enclosures at the two endpoints prove convexity on the whole interval;
+  enclosures at the two endpoints prove convexity on the whole interval. A 72-term rational
+  enclosure at `y=670545261496963/10^15` supplies the strict supporting line;
 - analytic domination of the `q=1` endpoint by `q=a`, which preserves the marginal law and
   independent entropy while decreasing the dependent entropy term;
 - kernel replay of generated static certificates only on the low endpoint rectangle
@@ -41,6 +48,17 @@ The generated trace is ordinary proof data: every leaf contains a closed rationa
 term and a definitional equality that the proved checker accepts it. The Python/Arb program is
 retained as an independent outward-rounded oracle, not as a Lean premise. No theorem uses
 `native_decide`, an external declaration, a generated axiom, or another proof aperture.
+
+An independently audited centered-endpoint factorization places the affine two-coupling wall in
+
+```text
+(0.38234553336670272114599300,
+ 0.38234553336670272114599301).
+```
+
+Thus the checked target is less than `1.2×10⁻¹⁷` below the analytic obstruction. This exact real
+wall is not formalized and is not a premise of the rational theorem; its finite Arb enclosure and
+written algebra are recorded in `audits/frankl-affine-wall-2026-08-10.md`.
 
 The principal files are `Frankl/EndpointBoundary.lean`, `Frankl/SupportEndpoint.lean`,
 `Frankl/CenteredEndpoint.lean`, `Frankl/FiniteEntropy.lean`,

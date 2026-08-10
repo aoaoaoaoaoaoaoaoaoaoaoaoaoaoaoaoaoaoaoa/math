@@ -27,10 +27,11 @@ from at least half its members.
 | Result | Value | Evidence | Exact boundary |
 | --- | ---: | --- | --- |
 | Alweiss–Huang–Sellke | `(3−√5)/2 = 0.381966011250105…` | peer-reviewed theorem | The final scalar inequality has an independent analytic proof by Boppana. |
-| GPT-5.6 Sol, present work | `76469/200000 = 0.382345` | Lean theorem with strict repository audit | The complete finite entropy bridge and reduced objective certificate are kernel-checked; the remaining static trace covers only the low endpoint rectangle. |
+| GPT-5.6 Sol, present work | `38234553336670271/10^17 = 0.38234553336670271` | Lean theorem with strict repository audit | The complete finite entropy bridge and reduced objective certificate are kernel-checked; the remaining static trace covers only the low endpoint rectangle. |
 | Sawin | `>(3−√5)/2` | proof sketch | Compactness and stability are not made quantitative. |
 | Yu | `0.38234` | analytic finite reduction; numerical evaluation | No outward-rounded global certificate for the reduced program. |
-| Cambie | `0.382345533366703…` | analytic reductions plus graphical/numerical minimization | The paper expressly calls the computer verification less rigorous; its ceiling law is the two-point marginal on `{b,1}`. |
+| Cambie | `0.382345533366703…` | analytic reductions plus graphical/numerical minimization | The paper expressly calls the computer verification less rigorous; the present wall audit corrects its final displayed digits. |
+| Affine wall, present work | `c*=0.38234553336670272114599300…` | exact endpoint factorization plus outward-rounded local Arb enclosure | Upper obstruction for every affine mixture of the independent and max-entropy couplings; not a Lean theorem. |
 | Liu | `>0.382345533366703…` | peer-reviewed analytic strict-improvement mechanism | The theorem is existential; it gives no certified explicit increment. |
 | Liu candidate | `0.382709087918741…` | conditional numerical program | Requires an unproved infinite-kernel PSD statement and an unproved global optimizer shape. |
 
@@ -57,12 +58,15 @@ Yu's printed proof applies a fixed-mean concavity lemma as if it were global. Th
 repairable by raising every marginal of mean below `t` to exact mean `t` with mass at
 `(1,1)` before taking extreme points. The repaired reduction is analytic; the source's
 numerical minimization remains uncertified. The obstruction at the claimed optimum is explicit:
-a marginal supported on
-`{b,1}`, where `b≈0.329454738503037`, defeats every mixture of the independent and
-max-entropy protocols at `c≈0.382345533366703`.
+a marginal supported on `{b,1}`, where `b≈0.3294547385030369723917053839`, defeats every
+mixture of the independent and max-entropy protocols above
+`c*=0.38234553336670272114599300…`. The defining entropy equation, exact factorization, and
+rigorous root enclosure are recorded in the
+[affine-wall audit](frankl-affine-wall-2026-08-10.md).
 
 The local campaign reduced the repaired program to two bivariate families, first certified
-`19099/50000`, then ratcheted the exact target to `76469/200000`. The finite entropy bridge,
+`19099/50000`, then `76469/200000`, and finally
+`38234553336670271/10^17`. The finite entropy bridge,
 functional reductions, analytic regions, and low-rectangle certificate are now Lean-checked;
 see the [formal result audit](frankl-rational-abundance-2026-08-10.md). The separate Arb run is
 retained only as an outward-rounded regression oracle.
@@ -114,6 +118,9 @@ The following statements are not available as theorem premises:
 
 - the numerical global minima in Yu's or Cambie's worksheets, independently of the local
   replacement certificate;
+- the exact real affine wall `c*` as a Lean premise; its local root enclosure and obstruction
+  factorization are independently audited, while the promoted theorem uses only a rational
+  target;
 - Liu's infinite-kernel PSD hypothesis or nine-dimensional optimizer shape;
 - the conjectured parity or power-set classification of tight families;
 - an upper bound on uniquely rooted vertices derived from cubical acyclicity alone;
@@ -121,7 +128,7 @@ The following statements are not available as theorem premises:
 - self-dual completion of an arbitrary complement-free Horn family.
 
 The first audit tranche is indexed as `FC-S01` through `FC-S04` and `FC-O01` through
-`FC-O03` in `SALVAGE.md`. The formalized Yu repair, contractions, entropy bridge, and universal
+`FC-O04` in `SALVAGE.md`. The formalized Yu repair, contractions, entropy bridge, and universal
 theorem are indexed as `FC-S05` through `FC-S13`. Strategy, live hypotheses, and experiment
 outcomes remain in Fidget Spinner rather than in this evidence audit.
 

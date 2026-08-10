@@ -14,7 +14,7 @@ redistributable full text was located.
 | [AHS24](alweiss-huang-sellke-2024-improved-lower-bound-frankl-journal.md) | peer-reviewed EJC; CC BY-ND | Unconditional benchmark `(3 − √5)/2` |
 | [Boppana23](boppana-2023-binary-entropy-inequality.md) | arXiv v1; CC BY | Independent analytic proof of the baseline entropy inequality |
 | [Yu23](yu-2023-dimension-free-bounds-union-closed-journal.md) | peer-reviewed Entropy; CC BY | Finite coupling optimization and uncertified numerical `0.38234` evaluation |
-| [Cambie25](cambie-2022-better-bounds-union-closed.md) | arXiv v2; CC BY | Two-variable reduction and uncertified Sawin ceiling `0.382345533…` |
+| [Cambie25](cambie-2022-better-bounds-union-closed.md) | arXiv v2; CC BY | Two-variable reduction and the numerical precursor of the affine wall `0.382345533…` |
 | [Liu24](liu-2023-conditionally-iid-coupling-union-closed.md) | peer-reviewed CISS / arXiv; metadata only | Analytic strict-improvement mechanism and conditional `0.382709087…` candidate |
 | [Cambie23](cambie-2023-progress-union-closed.md) | peer-reviewed survey; CC BY | Post-breakthrough strategy map and entropy barriers |
 | [BruhnSchaudt15](bruhn-schaudt-2015-journey-union-closed.md) | peer-reviewed survey; metadata only | Classical results, failed routes, and exact lattice equivalence |
@@ -32,11 +32,13 @@ redistributable full text was located.
 | [Zargar23](zargar-2023-union-closed-nonuniform-distributions.md) | arXiv v2; CC BY | Nilpotent/group semigroup lift; its `k=2,m=1` seam is closed in the binary-kernel audit, yielding weighted Frankl at `t=1/2` |
 
 The constants `0.38234`, `0.382345533…`, and `0.382709087…` have different epistemic
-status. Yu's and Cambie's values depend on uncertified global numerical minimization; Liu's
-larger value additionally assumes an infinite-kernel PSD statement and an optimizer-shape
+status. Yu's and Cambie's published values depend on uncertified global numerical minimization;
+Liu's larger value additionally assumes an infinite-kernel PSD statement and an optimizer-shape
 hypothesis. AHS remains the last explicit benchmark supported by an external published proof.
-The present repository separately proves and kernel-checks the local result
-`76469/200000=0.382345`; it does not exceed Cambie's reported numerical candidate.
+The present repository separately proves and kernel-checks
+`38234553336670271/10^17=0.38234553336670271`. Its independent affine-wall audit corrects
+Cambie's final reported digits and places the two-coupling obstruction less than `1.2×10⁻¹⁷`
+above the formal target; that exact real wall is not a Lean theorem.
 
 ## Matrix mortality
 

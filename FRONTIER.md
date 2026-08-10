@@ -13,7 +13,9 @@ records only their strategic consequences.
 The current formal theorem is
 
 ```text
-t=76469/200000,    α=7/200,    ε=1/10000000.
+t=38234553336670271/10^17,
+α=356069804374481/10^16,
+ε=10⁻¹⁸.
 ```
 
 Lean proves both the finite affine Yu inequality and its entropy bridge to every finite
@@ -23,21 +25,33 @@ endpoint `q=a`; static replay remains only on the low rectangle. The publication
 `Frankl.unionClosed_exists_abundant_coordinate`.
 
 This is an explicit, fully kernel-checked improvement over the published AHS constant
-`(3−√5)/2`. It does not exceed Cambie's uncertified numerical candidate
-`0.382345533366703…`, nor Liu's conditional `0.382709087…` candidate. Priority language must
-keep those distinct epistemic categories intact.
+`(3−√5)/2`. An independently audited centered-endpoint factorization gives an upper wall
+
+```text
+0.38234553336670272114599300 < c⋆ < 0.38234553336670272114599301
+```
+
+for every affine mixture of the independent and max-entropy couplings. The Lean target lies
+between `11×10⁻¹⁸` and `12×10⁻¹⁸` below this wall. Cambie's reported last digits were slightly
+high; the corrected obstruction explains his numerical optimizer. Liu's conditional
+`0.382709087…` candidate belongs to a stronger conditionally IID architecture. Priority
+language must keep the kernel theorem, the audited wall, and conditional numerical values in
+their distinct epistemic categories.
 
 The next live attacks are:
 
-1. Ratchet the present Sawin–Yu architecture past `0.382345533366703…`. The low endpoint
-   rectangle is now the only numerical surface; the high rectangle, diagonal family, entropy
-   bridge, and support reductions are analytic.
-2. Import Liu's conditionally-IID gain without assuming the infinite-kernel PSD statement or the
+1. Import Liu's conditionally IID gain without assuming the infinite-kernel PSD statement or the
    reported optimizer shape. A finite exact positivity decomposition would give genuine room
-   beyond the two-coupling ceiling.
-3. Search for a target-dependent analytic inequality on the low endpoint rectangle. Eliminating
-   its static trace would expose a symbolic parameter interval and make further rational ratchets
-   much cheaper.
+   beyond the exhausted two-coupling wall.
+2. Search for a third coupling or a nonlinear entropy combination whose local objective is
+   strictly positive on the wall witness `y⋆`. The exact factorization in `FC-O04` is now a cheap
+   falsification test for every proposed extension.
+3. Replace the infinite-kernel step by a finite target-dependent certificate: truncate with a
+   proved tail bound, derive a sum-of-squares or moment representation, and feed only the final
+   finite positivity statement into Lean.
+4. Formalize the exact real wall only if it supports one of those attacks. The rational theorem
+   already resolves the decimal ratchet to less than `1.2×10⁻¹⁷`; more digits inside the same
+   architecture have negligible mathematical value.
 
 ## The source theorem
 

@@ -4,18 +4,18 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="author" content="GPT-5.6 Sol; elicited by @eternalism_4eva">
-  <meta name="description" content="A kernel-checked 0.382345 universal abundance bound for Frankl’s union-closed sets conjecture, with proofs for bidual Horn functions and a weighted binary-semigroup case.">
-  <meta property="og:title" content="Frankl’s Conjecture at 0.382345">
-  <meta property="og:description" content="A kernel-checked 0.382345 universal abundance bound for Frankl’s union-closed sets conjecture, with proofs for bidual Horn functions and a weighted binary-semigroup case.">
+  <meta name="description" content="A kernel-checked 0.38234553336670271 universal abundance bound for Frankl’s union-closed sets conjecture, an audited affine wall, and two structural theorems.">
+  <meta property="og:title" content="Frankl’s Conjecture at 0.38234553336670271">
+  <meta property="og:description" content="A kernel-checked 0.38234553336670271 universal abundance bound for Frankl’s union-closed sets conjecture, an audited affine wall, and two structural theorems.">
   <meta property="og:type" content="website">
-  <title>Frankl’s Conjecture at 0.382345 | Mathematics</title>
+  <title>Frankl’s Conjecture at 0.38234553336670271 | Mathematics</title>
 </head>
 <body>
   <a class="skip-link" href="#article">Skip to the exposition</a>
 
   <header class="masthead">
     <div class="masthead-inner">
-      <h1>Frankl’s Conjecture at 0.382345</h1>
+      <h1>Frankl’s Conjecture at 0.38234553336670271</h1>
       <p class="byline">GPT-5.6 Sol · elicited by <a href="https://x.com/eternalism_4eva">@eternalism_4eva</a></p>
     </div>
   </header>
@@ -61,6 +61,13 @@
                 <li><a href="#orbit-reduction">Orbit reduction</a></li>
                 <li><a href="#endpoint-closure">Endpoint closure</a></li>
                 <li><a href="#reflected-kernel">The reflected kernel</a></li>
+              </ol>
+            </li>
+            <li>
+              <a href="#affine-wall">The affine wall</a>
+              <ol>
+                <li><a href="#wall-equation">The boundary equation</a></li>
+                <li><a href="#wall-factorization">The obstruction</a></li>
               </ol>
             </li>
             <li>
@@ -196,7 +203,7 @@
               </mrow>
             </math>
           </div>
-          <p>Yu reported a numerical certificate at 0.38234. Cambie reduced the same scheme to two bivariate cases and reported the apparent ceiling 0.382345533366703…, but described the closing Maple and graphical verification as less rigorous <a href="#ref-cambie-2025">[5]</a>. Liu proved an analytic strict-improvement mechanism for conditionally IID couplings; the displayed value 0.382709087918741 remains conditional on an infinite matrix-positivity conjecture and an unproved global optimizer shape <a href="#ref-liu-2024">[6]</a>.</p>
+          <p>Yu reported a numerical certificate at 0.38234. Cambie reduced the same scheme to two bivariate cases and reported an apparent ceiling near 0.382345533366703, but described the closing Maple and graphical verification as less rigorous <a href="#ref-cambie-2025">[5]</a>. The exact endpoint equation below corrects the final digits. Liu proved an analytic strict-improvement mechanism for conditionally IID couplings; the displayed value 0.382709087918741 remains conditional on an infinite matrix-positivity conjecture and an unproved global optimizer shape <a href="#ref-liu-2024">[6]</a>.</p>
 
           <h3 id="structural-questions">Two structural questions<a class="fragment-link" href="#structural-questions" aria-label="Link to this section">#</a></h3>
 
@@ -212,15 +219,15 @@
 
           <h3 id="abundance-theorem">The rational abundance theorem<a class="fragment-link" href="#abundance-theorem" aria-label="Link to this section">#</a></h3>
           <div class="theorem">
-            <p><strong>Theorem.</strong> Let 𝓕 be a nonempty finite union-closed family of subsets of a finite set. If 𝓕 is not the singleton family containing only the empty set, then some coordinate belongs to strictly more than 76,469/200,000 of the members of 𝓕.</p>
+            <p><strong>Theorem.</strong> Let 𝓕 be a nonempty finite union-closed family of subsets of a finite set. If 𝓕 is not the singleton family containing only the empty set, then some coordinate belongs to strictly more than 38,234,553,336,670,271/100,000,000,000,000,000 of the members of 𝓕.</p>
           </div>
           <div class="formula plain">
             <math display="block">
               <mrow>
                 <munder><mi>max</mi><mrow><mi>i</mi><mo>∈</mo><mi>U</mi></mrow></munder>
                 <msub><mi>f</mi><mi>i</mi></msub><mo>(</mo><mi>𝓕</mi><mo>)</mo>
-                <mo>&gt;</mo><mfrac><mn>76469</mn><mn>200000</mn></mfrac>
-                <mo>=</mo><mn>0.382345</mn>
+                <mo>&gt;</mo><mfrac><mn>38234553336670271</mn><mn>100000000000000000</mn></mfrac>
+                <mo>=</mo><mn>0.38234553336670271</mn>
                 <mo>&gt;</mo><mfrac><mrow><mn>3</mn><mo>−</mo><msqrt><mn>5</mn></msqrt></mrow><mn>2</mn></mfrac><mo>.</mo>
               </mrow>
             </math>
@@ -244,14 +251,24 @@
           <p>Two symmetric self-couplings are constructed recursively. The first is independent. The second couples the revealed prefixes symmetrically and, conditional on a prefix pair with success probabilities <var>p</var> and <var>q</var>, uses a Boolean coupling whose union has parameter <var>d</var>(<var>p</var>,<var>q</var>). Both output coordinates have the original marginal law.</p>
 
           <h4 id="global-contradiction">The global contradiction<a class="fragment-link" href="#global-contradiction" aria-label="Link to this section">#</a></h4>
-          <p>The scalar theorem proved below states that every finite symmetric orbit law of mean at most <var>t</var> = 76,469/200,000 satisfies</p>
+          <p>The scalar theorem proved below uses the exact parameters</p>
+          <div class="formula">
+            <math display="block">
+              <mtable columnalign="right left" rowspacing="0.35em">
+                <mtr><mtd><mi>t</mi></mtd><mtd><mo>=</mo><mfrac><mn>38234553336670271</mn><mn>100000000000000000</mn></mfrac><mo>,</mo></mtd></mtr>
+                <mtr><mtd><mi>α</mi></mtd><mtd><mo>=</mo><mfrac><mn>356069804374481</mn><mn>10000000000000000</mn></mfrac><mo>,</mo></mtd></mtr>
+                <mtr><mtd><mi>ε</mi></mtd><mtd><mo>=</mo><mfrac><mn>1</mn><msup><mn>10</mn><mn>18</mn></msup></mfrac><mo>.</mo></mtd></mtr>
+              </mtable>
+            </math>
+          </div>
+          <p>Every finite symmetric orbit law of mean at most <var>t</var> satisfies</p>
           <div class="formula plain">
             <math display="block">
               <mrow>
-                <mfrac><mn>193</mn><mn>200</mn></mfrac><mi>A</mi><mo>(</mo><mi>μ</mi><mo>)</mo>
-                <mo>+</mo><mfrac><mn>7</mn><mn>200</mn></mfrac><mi>C</mi><mo>(</mo><mi>π</mi><mo>)</mo>
+                <mo>(</mo><mn>1</mn><mo>−</mo><mi>α</mi><mo>)</mo><mi>A</mi><mo>(</mo><mi>μ</mi><mo>)</mo>
+                <mo>+</mo><mi>α</mi><mi>C</mi><mo>(</mo><mi>π</mi><mo>)</mo>
                 <mo>≥</mo>
-                <mo>(</mo><mn>1</mn><mo>+</mo><msup><mn>10</mn><mrow><mo>−</mo><mn>7</mn></mrow></msup><mo>)</mo>
+                <mo>(</mo><mn>1</mn><mo>+</mo><mi>ε</mi><mo>)</mo>
                 <mi>B</mi><mo>(</mo><mi>μ</mi><mo>)</mo><mo>.</mo>
               </mrow>
             </math>
@@ -260,13 +277,13 @@
           <div class="formula plain">
             <math display="block">
               <mrow>
-                <mfrac><mn>193</mn><mn>200</mn></mfrac>
+                <mo>(</mo><mn>1</mn><mo>−</mo><mi>α</mi><mo>)</mo>
                 <mi>H</mi><mo>(</mo><msup><mi>X</mi><mn>0</mn></msup><mo>∪</mo><msup><mi>Y</mi><mn>0</mn></msup><mo>)</mo>
                 <mo>+</mo>
-                <mfrac><mn>7</mn><mn>200</mn></mfrac>
+                <mi>α</mi>
                 <mi>H</mi><mo>(</mo><msup><mi>X</mi><mn>1</mn></msup><mo>∪</mo><msup><mi>Y</mi><mn>1</mn></msup><mo>)</mo>
                 <mo>≥</mo>
-                <mo>(</mo><mn>1</mn><mo>+</mo><msup><mn>10</mn><mrow><mo>−</mo><mn>7</mn></mrow></msup><mo>)</mo>
+                <mo>(</mo><mn>1</mn><mo>+</mo><mi>ε</mi><mo>)</mo>
                 <mi>H</mi><mo>(</mo><mi>X</mi><mo>)</mo><mo>.</mo>
               </mrow>
             </math>
@@ -300,13 +317,13 @@
               <mrow>
                 <mi>Ψ</mi><mo>(</mo><mi>M</mi><mo>,</mo><mi>r</mi><mo>)</mo>
                 <mo>=</mo>
-                <mfrac><mn>193</mn><mn>200</mn></mfrac><mo>(</mo><mn>1</mn><mo>−</mo><mi>t</mi><mo>)</mo>
+                <mo>(</mo><mn>1</mn><mo>−</mo><mi>α</mi><mo>)</mo><mo>(</mo><mn>1</mn><mo>−</mo><mi>t</mi><mo>)</mo>
                 <mo>(</mo>
                 <mfrac><mi>M</mi><mrow><mi>M</mi><mo>+</mo><mi>r</mi><mo>−</mo><mi>M</mi><mi>r</mi></mrow></mfrac>
                 <mo>+</mo>
                 <mfrac><mrow><mn>1</mn><mo>−</mo><mfrac><mrow><mn>4</mn><mi>r</mi></mrow><mn>3</mn></mfrac></mrow><mrow><mn>1</mn><mo>−</mo><mi>r</mi></mrow></mfrac>
                 <mo>)</mo>
-                <mo>≤</mo><mn>1</mn><mo>+</mo><msup><mn>10</mn><mrow><mo>−</mo><mn>7</mn></mrow></msup><mo>.</mo>
+                <mo>≤</mo><mn>1</mn><mo>+</mo><mi>ε</mi><mo>.</mo>
               </mrow>
             </math>
           </div>
@@ -315,11 +332,11 @@
             <math display="block">
               <mrow>
                 <mi>K</mi><mo>(</mo><mi>y</mi><mo>)</mo><mo>=</mo>
-                <mfrac><mn>193</mn><mn>200</mn></mfrac><msup><mrow><mo>(</mo><mn>1</mn><mo>−</mo><mi>t</mi><mo>)</mo></mrow><mn>2</mn></msup>
+                <mo>(</mo><mn>1</mn><mo>−</mo><mi>α</mi><mo>)</mo><msup><mrow><mo>(</mo><mn>1</mn><mo>−</mo><mi>t</mi><mo>)</mo></mrow><mn>2</mn></msup>
                 <mi>h</mi><mo>(</mo><msup><mi>y</mi><mn>2</mn></msup><mo>)</mo>
-                <mo>+</mo><mfrac><mn>7</mn><mn>200</mn></mfrac>
+                <mo>+</mo><mi>α</mi>
                 <mo>(</mo><mn>2</mn><mo>(</mo><mn>1</mn><mo>−</mo><mi>t</mi><mo>)</mo><mi>y</mi><mo>−</mo><msup><mi>y</mi><mn>2</mn></msup><mo>)</mo><mi>log</mi><mn>2</mn>
-                <mo>−</mo><mo>(</mo><mn>1</mn><mo>+</mo><msup><mn>10</mn><mrow><mo>−</mo><mn>7</mn></mrow></msup><mo>)</mo>
+                <mo>−</mo><mo>(</mo><mn>1</mn><mo>+</mo><mi>ε</mi><mo>)</mo>
                 <mo>(</mo><mn>1</mn><mo>−</mo><mi>t</mi><mo>)</mo><mi>y</mi><mi>h</mi><mo>(</mo><mi>y</mi><mo>)</mo><mo>.</mo>
               </mrow>
             </math>
@@ -328,15 +345,24 @@
           <div class="formula plain">
             <math display="block">
               <mrow>
-                <mi>Q</mi><mo>(</mo><mi>y</mi><mo>)</mo><mo>=</mo>
-                <mn>10000001</mn><msup><mi>y</mi><mn>3</mn></msup>
-                <mo>+</mo><mn>23841483</mn><msup><mi>y</mi><mn>2</mn></msup>
-                <mo>−</mo><mn>30000003</mn><mi>y</mi>
-                <mo>+</mo><mn>3841481</mn><mo>.</mo>
+                <mi>P</mi><mo>(</mo><mi>y</mi><mo>)</mo><mo>=</mo>
+                <mn>4</mn><mo>(</mo><mn>1</mn><mo>−</mo><mi>α</mi><mo>)</mo><msup><mrow><mo>(</mo><mn>1</mn><mo>−</mo><mi>t</mi><mo>)</mo></mrow><mn>2</mn></msup><mo>(</mo><msup><mi>y</mi><mn>2</mn></msup><mo>+</mo><mn>1</mn><mo>)</mo>
+                <mo>+</mo><mo>(</mo><mn>1</mn><mo>+</mo><mi>ε</mi><mo>)</mo><mo>(</mo><mn>1</mn><mo>−</mo><mi>t</mi><mo>)</mo>
+                <mo>(</mo><msup><mi>y</mi><mn>3</mn></msup><mo>−</mo><mn>3</mn><mi>y</mi><mo>−</mo><mn>2</mn><mo>)</mo><mo>.</mo>
               </mrow>
             </math>
           </div>
-          <p>Thus <var>K</var>″ reaches its minimum at an endpoint. Rational atanh enclosures make both endpoint values positive, and a rational supporting line proves <var>K</var> positive throughout the interval.</p>
+          <p>Thus <var>K</var>″ reaches its minimum at an endpoint. Rational atanh enclosures make both endpoint values positive. At a rational center, 72-term logarithm enclosures prove</p>
+          <div class="formula">
+            <math display="block">
+              <mtable columnalign="right left" rowspacing="0.35em">
+                <mtr><mtd><msub><mi>y</mi><mn>0</mn></msub></mtd><mtd><mo>=</mo><mfrac><mn>670545261496963</mn><msup><mn>10</mn><mn>15</mn></msup></mfrac><mo>,</mo></mtd></mtr>
+                <mtr><mtd><mi>K</mi><mo>(</mo><msub><mi>y</mi><mn>0</mn></msub><mo>)</mo></mtd><mtd><mo>&gt;</mo><mfrac><mn>1</mn><mrow><mn>25</mn><mo>·</mo><msup><mn>10</mn><mn>16</mn></msup></mrow></mfrac><mo>,</mo></mtd></mtr>
+                <mtr><mtd><mn>0</mn></mtd><mtd><mo>&lt;</mo><msup><mi>K</mi><mo>′</mo></msup><mo>(</mo><msub><mi>y</mi><mn>0</mn></msub><mo>)</mo><mo>&lt;</mo><mfrac><mn>1</mn><mrow><mn>7</mn><mo>·</mo><msup><mn>10</mn><mn>17</mn></msup></mrow></mfrac><mo>.</mo></mtd></mtr>
+              </mtable>
+            </math>
+          </div>
+          <p>The resulting supporting line remains positive throughout the interval.</p>
           <p>The edge <var>q</var> = 1 needs no certificate. Replacing its deterministic endpoint atom by the symmetric orbit at <var>q</var> = <var>a</var> preserves the marginal law and the independent term and can only decrease the dependent term. In the endpoint objective <var>J</var>,</p>
           <div class="formula plain">
             <math display="block">
@@ -351,6 +377,111 @@
           <h4 id="reflected-kernel">The reflected kernel<a class="fragment-link" href="#reflected-kernel" aria-label="Link to this section">#</a></h4>
           <p>Only the rectangle 0 ≤ <var>a</var> ≤ 1/4, 0 ≤ <var>q</var> ≤ 1/2 remains. A small expression language represents rational operations, binary entropy, capped entropy, and self-union. Its Lean theorem proves that a successful subdivision certificate implies nonnegativity throughout the represented rectangle.</p>
           <p>The committed trace contains rational boxes and closed proof data. Every leaf uses certified interval values, first-order slope bounds, or an analytic entropy-zero corner rule; every internal node proves exact coverage. The generated files reduce by definitional equality to a successful checker result. Python is neither invoked nor trusted by Lean.</p>
+
+          <h3 id="affine-wall">The affine wall<a class="fragment-link" href="#affine-wall" aria-label="Link to this section">#</a></h3>
+
+          <h4 id="wall-equation">The boundary equation<a class="fragment-link" href="#wall-equation" aria-label="Link to this section">#</a></h4>
+          <p>The final endpoint witness has a closed one-variable description:</p>
+          <div class="formula">
+            <math display="block">
+              <mtable columnalign="right left" rowspacing="0.35em">
+                <mtr><mtd><mi>ℓ</mi></mtd><mtd><mo>=</mo><mi>log</mi><mn>2</mn><mo>,</mo></mtd></mtr>
+                <mtr>
+                  <mtd><mi>Φ</mi><mo>(</mo><mi>y</mi><mo>)</mo></mtd>
+                  <mtd><mo>=</mo><msup><mrow><mi>h</mi><mo>(</mo><mi>y</mi><mo>)</mo></mrow><mn>2</mn></msup>
+                    <mo>−</mo><mi>ℓ</mi><mo>(</mo><mn>2</mn><mi>h</mi><mo>(</mo><mi>y</mi><mo>)</mo>
+                    <mo>−</mo><mi>h</mi><mo>(</mo><msup><mi>y</mi><mn>2</mn></msup><mo>)</mo><mo>)</mo><mo>.</mo></mtd>
+                </mtr>
+              </mtable>
+            </math>
+          </div>
+          <p>Outward-rounded 160-bit Arb arithmetic certifies a sign change and a positive derivative on the following interval:</p>
+          <div class="formula">
+            <math display="block">
+              <mtable columnalign="right left" rowspacing="0.35em">
+                <mtr>
+                  <mtd><mn>0.6705452614969630276082946160</mn></mtd>
+                  <mtd><mo>&lt;</mo><msub><mi>y</mi><mo>⋆</mo></msub><mo>&lt;</mo><mn>0.6705452614969630276082946162</mn><mo>,</mo></mtd>
+                </mtr>
+                <mtr>
+                  <mtd><mi>Φ</mi><mo>(</mo><msub><mi>y</mi><mo>⋆</mo></msub><mo>)</mo></mtd>
+                  <mtd><mo>=</mo><mn>0</mn><mo>,</mo><mspace width="1em"></mspace><msup><mi>Φ</mi><mo>′</mo></msup><mo>&gt;</mo><mfrac><mn>27</mn><mn>100</mn></mfrac><mo>.</mo></mtd>
+                </mtr>
+              </mtable>
+            </math>
+          </div>
+          <p>The intermediate-value theorem and monotonicity give a unique root in that interval. Define</p>
+          <div class="formula">
+            <math display="block">
+              <mtable columnalign="right left" rowspacing="0.35em">
+                <mtr>
+                  <mtd><msub><mi>s</mi><mo>⋆</mo></msub></mtd>
+                  <mtd><mo>=</mo><mfrac><mrow><msub><mi>y</mi><mo>⋆</mo></msub><mi>h</mi><mo>(</mo><msub><mi>y</mi><mo>⋆</mo></msub><mo>)</mo></mrow><mrow><mi>h</mi><mo>(</mo><msubsup><mi>y</mi><mo>⋆</mo><mn>2</mn></msubsup><mo>)</mo></mrow></mfrac><mo>,</mo></mtd>
+                </mtr>
+                <mtr>
+                  <mtd><msub><mi>c</mi><mo>⋆</mo></msub></mtd>
+                  <mtd><mo>=</mo><mn>1</mn><mo>−</mo><msub><mi>s</mi><mo>⋆</mo></msub><mo>.</mo></mtd>
+                </mtr>
+              </mtable>
+            </math>
+          </div>
+          <div class="formula plain">
+            <math display="block">
+              <mrow>
+                <mn>0.38234553336670272114599300</mn>
+                <mo>&lt;</mo><msub><mi>c</mi><mo>⋆</mo></msub>
+                <mo>&lt;</mo><mn>0.38234553336670272114599301</mn><mo>.</mo>
+              </mrow>
+            </math>
+          </div>
+          <p>This is a local root enclosure, not an assumed global optimizer computation.</p>
+
+          <h4 id="wall-factorization">The obstruction<a class="fragment-link" href="#wall-factorization" aria-label="Link to this section">#</a></h4>
+          <p>Let <var>H</var> and <var>Q</var> denote the entropy of the root and of its square. The root equation gives</p>
+          <div class="formula">
+            <math display="block">
+              <mtable columnalign="right left" rowspacing="0.35em">
+                <mtr><mtd><mi>H</mi></mtd><mtd><mo>=</mo><mi>h</mi><mo>(</mo><msub><mi>y</mi><mo>⋆</mo></msub><mo>)</mo><mo>,</mo></mtd></mtr>
+                <mtr><mtd><mi>Q</mi></mtd><mtd><mo>=</mo><mi>h</mi><mo>(</mo><msubsup><mi>y</mi><mo>⋆</mo><mn>2</mn></msubsup><mo>)</mo><mo>,</mo></mtd></mtr>
+                <mtr><mtd><msub><mi>s</mi><mo>⋆</mo></msub><mi>Q</mi></mtd><mtd><mo>=</mo><msub><mi>y</mi><mo>⋆</mo></msub><mi>H</mi><mo>,</mo></mtd></mtr>
+                <mtr><mtd><msub><mi>s</mi><mo>⋆</mo></msub><mi>H</mi></mtd><mtd><mo>=</mo><mo>(</mo><mn>2</mn><msub><mi>s</mi><mo>⋆</mo></msub><mo>−</mo><msub><mi>y</mi><mo>⋆</mo></msub><mo>)</mo><mi>ℓ</mi><mo>.</mo></mtd></mtr>
+              </mtable>
+            </math>
+          </div>
+          <p>Let <var>s</var> denote the complement of a target <var>t</var>. The centered endpoint numerator with affine share <var>α</var> and slack <var>ε</var> is</p>
+          <div class="formula">
+            <math display="block">
+              <mrow>
+                <mi>K</mi><mo>(</mo><mi>s</mi><mo>,</mo><mi>α</mi><mo>,</mo><mi>ε</mi><mo>;</mo><mi>y</mi><mo>)</mo><mo>=</mo>
+                <mo>(</mo><mn>1</mn><mo>−</mo><mi>α</mi><mo>)</mo><msup><mi>s</mi><mn>2</mn></msup><mi>h</mi><mo>(</mo><msup><mi>y</mi><mn>2</mn></msup><mo>)</mo>
+                <mo>+</mo><mi>α</mi><mo>(</mo><mn>2</mn><mi>s</mi><mi>y</mi><mo>−</mo><msup><mi>y</mi><mn>2</mn></msup><mo>)</mo><mi>ℓ</mi>
+                <mo>−</mo><mo>(</mo><mn>1</mn><mo>+</mo><mi>ε</mi><mo>)</mo><mi>s</mi><mi>y</mi><mi>h</mi><mo>(</mo><mi>y</mi><mo>)</mo><mo>.</mo>
+              </mrow>
+            </math>
+          </div>
+          <p>At the root, exact algebra factors the zero-slack objective as</p>
+          <div class="formula plain">
+            <math display="block">
+              <mrow>
+                <mi>K</mi><mo>(</mo><mi>s</mi><mo>,</mo><mi>α</mi><mo>,</mo><mn>0</mn><mo>;</mo><msub><mi>y</mi><mo>⋆</mo></msub><mo>)</mo>
+                <mo>=</mo><mo>(</mo><mi>s</mi><mo>−</mo><msub><mi>s</mi><mo>⋆</mo></msub><mo>)</mo>
+                <mo>[</mo><mo>(</mo><mn>1</mn><mo>−</mo><mi>α</mi><mo>)</mo><mi>Q</mi><mi>s</mi>
+                <mo>+</mo><mi>α</mi><msub><mi>y</mi><mo>⋆</mo></msub><mo>(</mo><mn>2</mn><mi>ℓ</mi><mo>−</mo><mi>H</mi><mo>)</mo><mo>]</mo><mo>.</mo>
+              </mrow>
+            </math>
+          </div>
+          <p>The bracket is positive for every affine share. Throughout the relevant range <var>c</var><sub>⋆</sub> &lt; <var>t</var> ≤ 1/2, one has <var>s</var> &lt; <var>s</var><sub>⋆</sub>, so this admissible endpoint objective is negative; nonnegative slack only decreases it. No affine mixture of the independent and max-entropy couplings can pass the wall.</p>
+          <p>Writing <var>T</var> for the rational Lean target, the independent enclosure proves</p>
+          <div class="formula plain">
+            <math display="block">
+              <mrow>
+                <mn>11</mn><mo>·</mo><msup><mn>10</mn><mrow><mo>−</mo><mn>18</mn></mrow></msup>
+                <mo>&lt;</mo><msub><mi>c</mi><mo>⋆</mo></msub><mo>−</mo><mi>T</mi>
+                <mo>&lt;</mo><mn>12</mn><mo>·</mo><msup><mn>10</mn><mrow><mo>−</mo><mn>18</mn></mrow></msup><mo>.</mo>
+              </mrow>
+            </math>
+          </div>
+          <p>The lower theorem is kernel-checked. The exact wall is an independently audited factorization with a rigorous finite Arb enclosure, not a Lean premise and not a claim that the exact boundary theorem has been formalized.</p>
 
           <h3 id="bidual-theorem">The bidual Horn theorem<a class="fragment-link" href="#bidual-theorem" aria-label="Link to this section">#</a></h3>
           <div class="theorem">
@@ -526,8 +657,14 @@
                 <tr>
                   <th scope="row">Explicit universal abundance</th>
                   <td>(3−√5)/2</td>
-                  <td>76,469/200,000</td>
+                  <td>38,234,553,336,670,271/10<sup>17</sup></td>
                   <td>Lean</td>
+                </tr>
+                <tr>
+                  <th scope="row">Affine architecture wall</th>
+                  <td>Cambie’s graphical decimal</td>
+                  <td>0.38234553336670272114599300…</td>
+                  <td>Exact factorization and rigorous Arb enclosure</td>
                 </tr>
                 <tr>
                   <th scope="row">Entropy implication</th>
@@ -565,11 +702,11 @@
           <p>The Lean libraries are compartmentalized. <code>lake build Frankl</code> builds only this development; <code>lake build MatrixMortality</code> builds only the matrix-mortality development. The repository release gate intentionally builds both.</p>
 
           <h4 id="independent-oracle">Independent oracle<a class="fragment-link" href="#independent-oracle" aria-label="Link to this section">#</a></h4>
-          <p>A separate Python program evaluates the reduced objectives with 160-bit Arb interval arithmetic. At 76,469/200,000 it reports 41,080 assessed rational boxes and 20,573 certified leaves across the endpoint and two diagonal families. The program reproduces the earlier 19,099/50,000 audit when given that historical target.</p>
+          <p>A separate Python program evaluates the reduced objectives with 160-bit Arb interval arithmetic. At the present target it reports 110,760 assessed rational boxes and 55,413 certified leaves across the endpoint and two diagonal families. The same run certifies the narrow affine-wall enclosure; historical targets remain reproducible.</p>
           <p>The oracle is a regression check and parameter-search instrument. No Lean declaration imports its output. Regenerating the committed low trace from the Lean generator is byte-for-byte reproducible.</p>
 
           <h3 id="scope-priority">Scope and priority<a class="fragment-link" href="#scope-priority" aria-label="Link to this section">#</a></h3>
-          <p>The rational theorem improves the previous explicit peer-reviewed universal constant and is fully kernel-checked. It does not prove the conjectured half bound. It is numerically below Cambie’s 0.382345533366703… candidate and Liu’s conditional 0.382709087918741 candidate, and it does not claim to dominate Liu’s nonquantitative analytic strict-improvement theorem.</p>
+          <p>The rational theorem improves the previous explicit peer-reviewed universal constant and is fully kernel-checked. It does not prove the conjectured half bound. The accompanying wall theorem exhausts only affine mixtures of the independent and max-entropy couplings. It does not reach Liu’s stronger conditionally IID architecture or validate Liu’s conditional 0.382709087918741 candidate.</p>
           <p>The priority search closed on 8 August 2026. No earlier source was located for an explicit rigorous constant above (3−√5)/2, for the bidual Horn density corollary, or for the binary <var>k</var> = 2, <var>m</var> = 1 theorem. These are bounded literature findings, not claims about unindexed manuscripts or private communication. None of the present results has passed external peer review.</p>
           <p>The bidual Horn and binary semigroup theorems have complete independent written proofs but are not Lean-formalized. They are segregated from the kernel-checked universal bound throughout the source ledger.</p>
 
@@ -591,6 +728,12 @@
               <a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/main/audits/frankl-rational-abundance-2026-08-10.md">
                 <b>Rational-bound audit</b>
                 The exact old/new boundary, certificate counts, and trust statement.
+              </a>
+            </li>
+            <li>
+              <a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/main/audits/frankl-affine-wall-2026-08-10.md">
+                <b>Affine-wall audit</b>
+                The defining equation, exact obstruction, root enclosure, and evidence boundary.
               </a>
             </li>
             <li>

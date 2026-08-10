@@ -11,7 +11,8 @@ Human role: elicited by @eternalism_4eva
 For every finite nontrivial union-closed family `F`, some element belongs to strictly more than
 
 ```text
-(76469/200000)|F| = 0.382345|F|
+(38234553336670271/10^17)|F|
+  = 0.38234553336670271|F|
 ```
 
 members. Lean checks the complete implication from a finite union-closed family through the
@@ -21,21 +22,22 @@ affine coupling inequality. The publication declaration is
 Lean also proves the exact strict comparison
 
 ```text
-(3−√5)/2 < 76469/200000.
+(3−√5)/2 < 38234553336670271/10^17.
 ```
 
 The result is therefore an explicit rigorous improvement over the Alweiss–Huang–Sellke
-constant. It is numerically smaller than Cambie's reported `0.382345533366703…` candidate and
-Liu's conditional `0.382709087…` candidate. Those values have weaker evidence but remain the
-correct numerical comparisons.
+constant. An independently audited analytic obstruction places the ceiling of this affine
+two-coupling architecture below `0.38234553336670272114599301`; the checked theorem is less
+than `1.2×10⁻¹⁷` below it. Liu's `0.382709087…` candidate uses a stronger architecture and
+remains conditional.
 
 ## Theorem scope
 
 The formal statement represents a family as a `Finset (BitCube n)`, assumes closure under
 coordinatewise union, nonemptiness, and inequality with the singleton family containing only
 the zero vector. It returns a coordinate whose real-valued frequency is strictly greater than
-`(76469/200000)|F|`. Every finite set family has such a Boolean-cube presentation after its
-finite ground set is enumerated.
+`(38234553336670271/10^17)|F|`. Every finite set family has such a Boolean-cube presentation
+after its finite ground set is enumerated.
 
 The theorem does not prove Frankl's conjectured half-frequency bound. It has not passed external
 peer review. The priority claim is limited to the inspected literature recorded in
@@ -45,16 +47,18 @@ peer review. The priority claim is limited to the inspected literature recorded 
 
 | Seam | Prior state | Present state |
 | --- | --- | --- |
-| Explicit rigorous universal constant | `(3−√5)/2` in AHS | `76469/200000` |
-| Local rational certificate | `19099/50000` | `76469/200000` |
+| Explicit rigorous universal constant | `(3−√5)/2` in AHS | `38234553336670271/10^17` |
+| Local rational certificate | `76469/200000` | `38234553336670271/10^17` |
 | Union-closed entropy implication | informal finite bridge | Lean theorem |
 | High endpoint rectangle | residual static subdivision plus a conditional-mean core | support-aware analytic contraction on `1/4≤a≤t`, `0≤q≤1/2` |
 | Deterministic endpoint `q=1` | analytic corner plus static edge trace | dominated analytically by `q=a` |
 | Remaining static certificate | low rectangle, high residual, and `q=1` edge | low rectangle only |
+| Affine architecture ceiling | Cambie's graphical decimal | analytic factorization plus rigorous local Arb enclosure |
 
-The comparison with Cambie is epistemic rather than numerical: `0.382345` is below
-`0.382345533366703…`, but the former now has a complete checked proof and the latter remains a
-reported numerical global minimum.
+Cambie's reported decimal was an uncertified numerical global minimum. The present wall audit
+corrects its final displayed digits and proves the obstruction without assuming a global
+optimizer shape. The wall itself is audited rather than Lean-formalized; only the rational
+lower theorem is a kernel claim.
 
 ## Finite entropy bridge
 
@@ -70,7 +74,7 @@ fact that conditioning cannot increase entropy sum the local inequalities into
 
 ```text
 (1−α)H(X⁰∨Y⁰)+αH(X¹∨Y¹) ≥ (1+ε)H(X),
-α=7/200, ε=10⁻⁷.
+α=356069804374481/10^16, ε=10⁻¹⁸.
 ```
 
 Union closure keeps both output laws inside the original family, so each output entropy is at
@@ -116,14 +120,21 @@ The Lean proof does not call Python or Arb. As an independent check,
 `tools/certify_frankl.py` uses 160-bit Arb interval arithmetic and reports:
 
 ```text
-diagonal-endpoint:       34868 assessed boxes; 17453 certified leaves
-diagonal-diagonal-lower:  4036 assessed boxes;  2026 certified leaves
-diagonal-diagonal-upper:  2176 assessed boxes;  1094 certified leaves
-Frankl entropy certificate at 76469/200000: PASS
+affine wall: certified in
+  (0.38234553336670272114599300, 0.38234553336670272114599301)
+diagonal-endpoint:       104672 assessed boxes; 52355 certified leaves
+diagonal-diagonal-lower:   3958 assessed boxes;  1987 certified leaves
+diagonal-diagonal-upper:   2130 assessed boxes;  1071 certified leaves
+Frankl entropy certificate at 38234553336670271/10^17: PASS
 ```
 
 The deterministic hashes are recorded in [`SALVAGE.md`](../SALVAGE.md#fc-m01-rational-yu-certificate).
-The same program with `--target 19099/50000` reproduces the earlier audit exactly.
+The same program accepts the historical targets `76469/200000` and `19099/50000`.
+
+The wall calculation is proved in
+[`frankl-affine-wall-2026-08-10.md`](frankl-affine-wall-2026-08-10.md). Its root enclosure is
+finite outward-rounded computation; the universal exclusion of every affine share is an exact
+factorization. Neither part is imported by Lean.
 
 ## Formal trust boundary
 

@@ -4,7 +4,7 @@
 # dependencies = ["python-flint==0.9.0"]
 # ///
 
-"""Outward-rounded certificates for the Frankl abundance bounds.
+"""Outward-rounded certificates for the Frankl abundance bound and affine wall.
 
 The analytic reduction leaves two compact bivariate entropy gaps.  This script
 certifies those gaps with Arb ball arithmetic.  Two entropy-zero corner squares
@@ -85,6 +85,11 @@ ZERO = arb(0)
 HALF = point(Q(1, 2))
 QUARTER = point(Q(1, 4))
 LOG_TWO = arb(2).log()
+
+AFFINE_WALL_Y_LOWER_Q = Q(6_705_452_614_969_630_276_082_946_160, 10**28)
+AFFINE_WALL_Y_UPPER_Q = Q(6_705_452_614_969_630_276_082_946_162, 10**28)
+AFFINE_WALL_C_LOWER_Q = Q(38_234_553_336_670_272_114_599_300, 10**26)
+AFFINE_WALL_C_UPPER_Q = Q(38_234_553_336_670_272_114_599_301, 10**26)
 
 
 def ball(lower: Q, upper: Q) -> arb:
@@ -439,6 +444,54 @@ def require_positive(name: str, value: arb) -> None:
         raise AssertionError(f"{name} was not certified positive: {value}")
 
 
+def audit_affine_wall() -> None:
+    """Localize the centered-endpoint obstruction to the affine scheme."""
+    lower = point(AFFINE_WALL_Y_LOWER_Q)
+    upper = point(AFFINE_WALL_Y_UPPER_Q)
+    interval = ball(AFFINE_WALL_Y_LOWER_Q, AFFINE_WALL_Y_UPPER_Q)
+
+    def phi(value: arb) -> arb:
+        entropy_y = entropy_value(value)
+        entropy_square = entropy_value(value * value)
+        return entropy_y * entropy_y - LOG_TWO * (2 * entropy_y - entropy_square)
+
+    entropy_y = entropy_value(interval)
+    entropy_square = entropy_value(interval * interval)
+    entropy_deriv = ((1 - interval) / interval).log()
+    entropy_square_deriv = (
+        2 * interval * ((1 - interval * interval) / (interval * interval)).log()
+    )
+    phi_deriv = 2 * entropy_y * entropy_deriv - LOG_TWO * (
+        2 * entropy_deriv - entropy_square_deriv
+    )
+    complement = 1 - interval * entropy_y / entropy_square
+
+    require_positive("affine-wall lower sign", -phi(lower))
+    require_positive("affine-wall upper sign", phi(upper))
+    require_positive("affine-wall local monotonicity", phi_deriv - point(Q(27, 100)))
+    require_positive(
+        "affine-wall lower enclosure",
+        complement - point(AFFINE_WALL_C_LOWER_Q),
+    )
+    require_positive(
+        "affine-wall upper enclosure",
+        point(AFFINE_WALL_C_UPPER_Q) - complement,
+    )
+    require_positive(
+        "affine-wall gap exceeds 11e-18",
+        complement - TARGET - point(Q(11, 10**18)),
+    )
+    require_positive(
+        "affine-wall gap is below 12e-18",
+        TARGET + point(Q(12, 10**18)) - complement,
+    )
+    print(
+        "affine wall: certified in "
+        "(0.38234553336670272114599300, "
+        "0.38234553336670272114599301)"
+    )
+
+
 def audit_scalar_lemmas() -> None:
     one = Q(1)
     complement = one - TARGET_Q
@@ -491,6 +544,8 @@ def audit_scalar_lemmas() -> None:
 
 
 def main() -> None:
+    if TARGET_LABEL == "38234553336670271/100000000000000000":
+        audit_affine_wall()
     audit_scalar_lemmas()
     zero = Q(0)
     one = Q(1)
