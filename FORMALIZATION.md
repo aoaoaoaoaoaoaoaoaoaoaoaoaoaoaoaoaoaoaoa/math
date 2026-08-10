@@ -576,12 +576,20 @@ kills this row. Every complete-gap continuation preserves the row's first coordi
 annihilator must use an incomplete root gap. The audit is
 [`audits/m43-retuned-semantic-boundary-2026-08-08.md`](audits/m43-retuned-semantic-boundary-2026-08-08.md).
 
-No `M₄(3)` undecidability theorem follows from the present corpus. The missing source is an
-undecidable promised binary two-state overlap queue with a genuine deleting self-loop. On the
-original matrix lane, one must realize the paired Neary coefficient as a consecutive-wall
-incidence or decide oriented transport. On the retuned lane, one must construct the fixed
-incomplete-gap right annihilator and prove the arbitrary-word converse. These obligations are
-independent.
+The fixed-row closure is refuted by
+[`M4-O13`](SALVAGE.md#m4-o13-retuned-pseudo-terminal-obstruction), formalized in
+[`MatrixMortality/ParabolicRetunedObstruction.lean`](MatrixMortality/ParabolicRetunedObstruction.lean).
+For the admissible nonhalting source `(β,body)=(3,bbcc)`, Lean proves that a literal length-100
+word with one gap-thirty pseudo-production is a nonzero outer product with terminal row
+`(-1,204,28,24)`. Appending an arbitrary physical word gives zero exactly when that word
+annihilates the row. The same module proves the legal tag orbit cycles and hence has no genuine
+terminal match. The exact evidence boundary is
+[`audits/m43-retuned-pseudo-terminal-obstruction-2026-08-10.md`](audits/m43-retuned-pseudo-terminal-obstruction-2026-08-10.md).
+
+No `M₄(3)` undecidability theorem follows from the present corpus. The exhaustive promised
+positive overlap-queue source class and the retuned fixed-row closure are closed. On the original
+matrix lane, one must realize the paired Neary coefficient as a consecutive-wall incidence or
+decide oriented transport. These are the two live obligations.
 
 ## Modules
 
@@ -663,6 +671,7 @@ independent.
 | `ParabolicDefect.lean` | complete defect-run residue grammar, pure-defect bridge reset, and consecutive-wall projective fracture |
 | `ParabolicRetuned.lean` | retuned open root, sparse ternary code, determinant pencils, and unique gap-two singular atom |
 | `ParabolicRetunedBoundary.lean` | complete-gap semantics, literal physical contexts, fixed terminal minor and row, and complete-gap annihilator obstruction |
+| `ParabolicRetunedObstruction.lean` | explicit malformed terminal no-instance defeating standalone fixed-row closure |
 | `PairedMortality.lean` | common-column mortality converse and exact integer `4 × 4` family |
 | `PairedRank.lean` | uniform exact rank-four certificate for the paired scalar series |
 | `PairedBoundaryTax.lean` | exact six-state lower bound for diagonal paired-series bridges |
@@ -829,6 +838,7 @@ independent.
 | One fixed minor of a literal retuned three-generator context recognizes `pairedCoefficient = 0` | `ParabolicRetuned.contextWord_product`, `ParabolicRetuned.physicalMinor_decoded_det_eq_zero_iff_pairedCoefficient` |
 | A matched retuned context is nonzero and right annihilation is exactly annihilation of its fixed terminal row | `ParabolicRetuned.physicalContext_ne_zero`, `ParabolicRetuned.physicalContext_mul_eq_zero_iff_terminalRow` |
 | Complete-gap continuations cannot annihilate the retuned terminal row | `ParabolicRetuned.terminalRow_vecMul_physicalMiddle_ne_zero` |
+| The admissible source `(3,bbcc)` has no genuine terminal word, yet one malformed context is killed exactly by the lawful terminal-row annihilators | `ParabolicRetuned.poison_no_terminal_match`, `ParabolicRetuned.poisonContext_append_zero_iff`, `ParabolicRetuned.poison_fixedTerminalRow_obstruction` |
 | Exact left-context toggle fusion is immortal | `exactLeftToggleFusion_immortal` |
 | A finite closed-token queue halts iff no reachable token lies on a dependency cycle | `closedSubstitutionHalts_iff_noReachableCycle` |
 | Two private quotient states cannot isolate the Neary rule phase | `twoPrivateState_ruleScale_eq`, `neary_twoPrivateState_phaseCompiler_impossible` |

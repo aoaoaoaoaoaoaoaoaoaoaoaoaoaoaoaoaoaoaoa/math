@@ -87,3 +87,4 @@ import MatrixMortality.ParabolicSafeFlag
 import MatrixMortality.ParabolicDefect
 import MatrixMortality.ParabolicRetuned
 import MatrixMortality.ParabolicRetunedBoundary
+import MatrixMortality.ParabolicRetunedObstruction

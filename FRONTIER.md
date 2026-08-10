@@ -225,7 +225,7 @@ replace exact finite-state simulation.
 
 Victory means a checked many-one reduction to mortality of three integer `4 × 4` matrices,
 including a nonempty witness, denominator clearing, and soundness for every matrix word. The
-frontier has one live trunk and four independently attackable nodes.
+frontier has one live trunk and two independently attackable nodes.
 
 #### Closed source trunk: positive overlap queues
 
@@ -360,9 +360,15 @@ right row
 (-1, (15·3^β+3)/2, 28, 24).
 ```
 
-Complete-gap continuations preserve the first coordinate and cannot annihilate this row.
+Complete-gap continuations preserve the first coordinate and cannot annihilate this row. The
+fixed-row closure is now retired by
+[`M4-O13`](SALVAGE.md#m4-o13-retuned-pseudo-terminal-obstruction). At `(β,B)=(3,bbcc)`, the
+legal tag system cycles forever, while one gap-thirty pseudo-production creates a nonzero
+malformed context with the same terminal row. Every annihilator of that row therefore creates a
+false zero. If no annihilator exists, the intended forward closure fails instead. The two
+retuned obligations collapse into this losing fork; `M4-M04` is parked.
 
-Four matrix nodes can now race.
+Two matrix nodes remain.
 
 1. **Original semantic incidence.** Construct two singular endpoint contexts and intervening
    invertible bridge transport whose single projective incidence is exactly the paired-Neary
@@ -372,12 +378,6 @@ Four matrix nodes can now race.
    outgoing row of one reachable wall into the unique sector and unit required to annihilate the
    next wall cokernel. Standalone safe return is sufficient but no longer prerequisite. Approximate
    returns and another coarse valuation partition do not decide this node.
-3. **Retuned right annihilator.** Construct a word over the same three generators, using at least
-   one incomplete root gap, which annihilates the displayed fixed row. A proof that its orbit
-   avoids zero retires the retuned family.
-4. **Retuned arbitrary-word converse.** Classify all words in the retuned semigroup and prove that
-   every zero contains a genuine terminal context followed by the lawful annihilator, or exhibit a
-   malformed zero. Intended-word semantics alone is not a mortality reduction.
 
 The dead subtrees remain dead: literal Neary role fusion (`M4-O01`, `M4-O02`, `M4-O05`), finite
 queues of complete tokens (`M4-O03`), exact internal/final block codes (`M4-O04`), closed
@@ -1376,13 +1376,12 @@ universal computation.
 
 ## Execution order
 
-1. Attack the four open `M₄(3)` matrix nodes independently: original parabolic semantic
-   incidence and oriented transport under `M4-S04` and `M4-S06`; and the retuned fixed-row
-   annihilator and arbitrary-word converse under `M4-M04`. The exhaustive positive
+1. Attack the two open `M₄(3)` matrix nodes independently: original parabolic semantic
+   incidence and oriented transport under `M4-S04` and `M4-S06`. The exhaustive positive
    overlap-queue source class, alternating/multiple residue-two defect grammar, and retuned
-   intended-word semantics are closed. Cross-pollinate exact exterior invariants, but do not
-   revive deletion scanners, complete-token queues, one-coordinate dynamics, finite
-   wall-separated cones, or literal Neary recodings.
+   fixed-row closure are closed. Cross-pollinate exact exterior invariants, but do not revive
+   deletion scanners, the retuned annihilator/converse split, complete-token queues,
+   one-coordinate dynamics, finite wall-separated cones, or literal Neary recodings.
 2. Use formalized `MM-O01`, `G3-O01`, `MM-O03`, and `MM-O04` to reject exact packings, macros,
    and bridges without conflating their scope with solvability preservation.
 3. Prove or refute the setter candidate's projective avoidance property, construct a

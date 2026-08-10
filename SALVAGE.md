@@ -120,7 +120,7 @@ file owns the mathematical stock.
 | [`M4-O06`](#m4-o06-punctuation-image-annihilator) | obstruction | every punctuation context must preserve both rank-one boundary rays | formalized | graduated |
 | [`M4-O07`](#m4-o07-closed-residue-monomial-obstruction) | obstruction | ternary closed residues cannot align the monomial blade column | audited | graduated |
 | [`M4-M03`](#m4-m03-parabolic-blade-and-bridge-grammar) | partial mechanism | an open cube root has one singular atom and exact `2 × 2` bridge semantics | formalized | active |
-| [`M4-M04`](#m4-m04-retuned-semantic-boundary) | partial mechanism | a retuned root realizes the Neary terminal language as one fixed physical minor | formalized | active |
+| [`M4-M04`](#m4-m04-retuned-semantic-boundary) | partial mechanism | a retuned root realizes the Neary terminal language as one fixed physical minor | formalized | parked |
 | [`M4-O08`](#m4-o08-residue-two-necessary-wall) | obstruction | every residue-zero or residue-one atom preserves a nonvanishing two-ray quotient | formalized | graduated |
 | [`M4-S02`](#m4-s02-residue-zero-safe-bridge-cone) | structure theorem | every nonempty residue-zero regular safe bridge has negative determinant | audited | active |
 | [`M4-S03`](#m4-s03-one-defect-phase-cut) | structure theorem | a lone residue-two defect can survive only between opposite safe residues | formalized | graduated |
@@ -136,6 +136,7 @@ file owns the mathematical stock.
 | [`M4-D02`](#m4-d02-zero-framed-reset-scanner-decision) | decidable stratum | zero-run reduction contracts the reset scanner to a regular two-token quotient | audited | graduated |
 | [`M4-D03`](#m4-d03-periodic-conjugate-scanner-decision) | decidable stratum | primitive conjugacy and an odd-gap quotient decide the final periodic scanner | audited | graduated |
 | [`M4-O12`](#m4-o12-terminal-frame-morphism-obstruction) | obstruction | a fixed morphism cannot map a shared terminal to its own compulsory return frame | formalized | graduated |
+| [`M4-O13`](#m4-o13-retuned-pseudo-terminal-obstruction) | obstruction | a malformed terminal context defeats every fixed-row annihilator on an admissible no-instance | formalized | graduated |
 | [`G3-O01`](#g3-o01-four-role-macro-irreducibility) | obstruction | exact nonerasing macros cannot reduce the four source roles to three letters | formalized | graduated |
 | [`G3-S01`](#g3-s01-shift-equivariant-zero-incidence) | structure theorem | same-zero state dimension is equivariant projective incidence dimension | audited | active |
 | [`G3-M01`](#g3-m01-free-group-discrepancy-engine) | partial mechanism | free cancellation implements queue deletion with an all-path converse | reported | active |
@@ -3977,7 +3978,7 @@ independent way to decide which endpoints can occur.
 
 **Evidence:** formalized
 
-**Disposition:** active
+**Disposition:** parked
 
 The retuned rational root
 
@@ -4009,22 +4010,58 @@ complete gaps preserves its first coordinate and cannot work.
 
 **Scope:** positive deletion width and nonempty body for uniqueness of the singular atom;
 arbitrary complete Neary words for the semantic determinant; literal rational three-generator
-contexts. Uniform scaling by `24` clears denominators, but no integralized family is retained
-until a mortality witness consumes it. The theorem does not classify malformed words or provide
-the required incomplete-gap right annihilator.
+contexts. Uniform scaling by `24` clears denominators. The fixed-row closure is obstructed by
+[`M4-O13`](#m4-o13-retuned-pseudo-terminal-obstruction); no full semigroup decision is claimed.
 
-**Use:** the intended-language half of a new parabolic mortality reduction is complete. Search
-only for a fixed incomplete-gap word annihilating the displayed row and for an all-word converse.
-The original parabolic incidence route `M4-M03` remains incomparable rather than superseded.
+**Use:** preserves the exact semantic boundary as stock. A standalone annihilator is useless:
+`M4-O13` proves that it also closes a malformed context on an admissible no-instance. The
+original parabolic incidence route `M4-M03` remains live and incomparable.
 
-**Next:** construct or rule out the fixed right-annihilator orbit. In parallel, classify every
-arbitrary retuned word and prove that a zero factors through a genuine terminal context and that
-annihilator, or exhibit a malformed zero.
+**Next:** none under the fixed-row closure. Reopen only with an exact theorem making annihilator
+reachability itself equivalent to legal source halting, including the `M4-O13` poison instance,
+or with a different endpoint row.
 
 **Artifact:** [`MatrixMortality/ParabolicRetuned.lean`](MatrixMortality/ParabolicRetuned.lean),
 [`MatrixMortality/ParabolicRetunedBoundary.lean`](MatrixMortality/ParabolicRetunedBoundary.lean),
 and
 [`audits/m43-retuned-semantic-boundary-2026-08-08.md`](audits/m43-retuned-semantic-boundary-2026-08-08.md).
+
+### M4-O13: Retuned pseudo-terminal obstruction
+
+**Kind:** obstruction
+
+**Evidence:** formalized
+
+**Disposition:** graduated
+
+At deletion width three with body `bbcc`, the legal restricted tag orbit is
+
+```text
+ccb → bbccb → cbb → bbccb → ⋯,
+```
+
+so the checked Neary source has no genuine terminal word. A single malformed gap-thirty `b`
+atom nevertheless acts as the extra production `b↦ccb`. Lean evaluates an explicit literal
+length-100 word containing this atom and proves that its product is a nonzero outer product with
+the lawful terminal row `(-1,204,28,24)`. For every literal continuation `z`,
+
+```text
+product(poison ++ z)=0 ↔ (-1,204,28,24) · product(z)=0.
+```
+
+**Scope:** one exact admissible no-instance suffices to refute a uniform or body-independent
+fixed-row closure. The theorem does not decide whether a row annihilator exists for every body,
+or classify all retuned zeros. Uniform denominator clearing preserves the obstruction.
+
+**Use:** jointly deletes the retuned right-annihilator and independent-converse nodes. If the row
+has no annihilator, forward closure fails; if it has one on the poison instance, soundness fails.
+The only reopening is a new theorem making annihilator reachability itself source-equivalent, or
+a different endpoint geometry.
+
+**Artifact:**
+[`MatrixMortality/ParabolicRetunedObstruction.lean`](MatrixMortality/ParabolicRetunedObstruction.lean)
+and
+[`audits/m43-retuned-pseudo-terminal-obstruction-2026-08-10.md`](audits/m43-retuned-pseudo-terminal-obstruction-2026-08-10.md).
 
 ### M4-O08: Residue-two necessary wall
 

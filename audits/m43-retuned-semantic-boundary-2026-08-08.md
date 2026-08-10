@@ -5,6 +5,10 @@
 **Status:** retuned three-generator boundary formalized; fixed right-annihilator orbit and
 arbitrary-word converse open
 
+**Subsequent disposition:** the independent annihilator/converse closure is retired by
+[`M4-O13`](../SALVAGE.md#m4-o13-retuned-pseudo-terminal-obstruction); the semantic boundary is
+parked stock
+
 **Authorship:** GPT-5.6 Sol; elicited by @eternalism_4eva
 
 **Target:** realize the four-tile Neary terminal language inside a literal word over three
