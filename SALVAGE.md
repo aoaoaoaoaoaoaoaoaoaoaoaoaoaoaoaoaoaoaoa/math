@@ -4063,6 +4063,59 @@ a different endpoint geometry.
 and
 [`audits/m43-retuned-pseudo-terminal-obstruction-2026-08-10.md`](audits/m43-retuned-pseudo-terminal-obstruction-2026-08-10.md).
 
+### M4-O14: Original fixed-ray semantic obstruction
+
+**Kind:** obstruction
+
+**Evidence:** formalized
+
+**Disposition:** graduated
+
+Put one complete side-normal correspondence block between the original parabolic exceptional
+factors. In the reduced blade basis it is
+
+```text
+M(X,Y,σ,τ) = [[1,X,2Y], [0,σ,0], [0,0,τ]],
+```
+
+and Lean proves this is a fixed conjugate of `sidePcpMatrix`. Each original rule gap of length
+three and erasure gap of length zero evaluates to this middle, and the identity composes over
+arbitrary complete tile words. Its bridge determinant is
+
+```text
+det Kρ(M) = (9ρ/2)[τ(22X+31)-σ(22τ+11Y+9)].
+```
+
+It is strictly negative when both concrete ternary words are nonempty. Thus a nonempty complete
+Neary block cannot itself be a wall.
+
+For arbitrary fixed endpoint rays, the scalar incidence
+
+```text
+F(X,Y,σ,τ)=c₀+cX·X+cY·Y+cσ·σ+cτ·τ
+```
+
+obeys `22c₀-31cX-18cY=0`. If `F` vanishes on the formal terminal plane
+`Y=X+mσ, τ=tσ`, Lean proves that it vanishes on the entire length plane `τ=tσ`. No fixed pair
+of rays can therefore recognize formal terminal equality through one intact complete block, even
+only by its zero set.
+
+**Scope:** fixed left and right rays, one complete side-normal middle, and identity on the formal
+rational terminal plane. The theorem does not exclude a coincidence confined to the discrete
+encoded language, history-dependent or malformed endpoint contexts, incomplete gaps, or an
+arbitrary nonsingular mixed transport. The report's depth-`n+β+1` 3-adic cylinder is an audited
+necessary condition for a genuine hit, not a global avoidance theorem.
+
+**Use:** delete nonempty complete blocks as endpoint walls and delete the direct fixed-ray
+terminal-coefficient compiler. The original semantic node now requires endpoint geometry carrying
+history or malformed structure; the oriented node must decide reachability of the exact deep
+3-adic cylinder and its remaining unit equation.
+
+**Artifact:**
+[`MatrixMortality/ParabolicSemanticObstruction.lean`](MatrixMortality/ParabolicSemanticObstruction.lean)
+and
+[`audits/m43-original-semantic-obstruction-2026-08-10.md`](audits/m43-original-semantic-obstruction-2026-08-10.md).
+
 ### M4-O08: Residue-two necessary wall
 
 **Kind:** obstruction

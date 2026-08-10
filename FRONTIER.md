@@ -368,23 +368,36 @@ malformed context with the same terminal row. Every annihilator of that row ther
 false zero. If no annihilator exists, the intended forward closure fails instead. The two
 retuned obligations collapse into this losing fork; `M4-M04` is parked.
 
-Two matrix nodes remain.
+The original direct semantic punctuation is also closed.
+[`M4-O14`](SALVAGE.md#m4-o14-original-fixed-ray-semantic-obstruction) places one intact complete
+side-normal block between arbitrary fixed endpoint rays. Its bridge determinant is negative for
+every nonempty pair of encoded words, so such a block cannot be an endpoint wall. Every fixed
+incidence obeys `22c₀-31cX-18cY=0`; vanishing on the formal terminal plane forces vanishing on
+the entire length plane. Thus fixed rays cannot recognize terminal equality even by their formal
+zero set. This does not exclude coincidences confined to the discrete language or endpoints
+whose rays themselves carry malformed or history-dependent data.
 
-1. **Original semantic incidence.** Construct two singular endpoint contexts and intervening
-   invertible bridge transport whose single projective incidence is exactly the paired-Neary
-   coefficient-zero language. Prove the arbitrary-word converse at the same incidence, or exhibit
-   a malformed exact hit. A uniform impossibility theorem for this family retires it.
-2. **Original oriented transport.** Decide whether nonsingular mixed bridges can carry the
-   outgoing row of one reachable wall into the unique sector and unit required to annihilate the
-   next wall cokernel. Standalone safe return is sufficient but no longer prerequisite. Approximate
-   returns and another coarse valuation partition do not decide this node.
+One projective-incidence node remains, with two opposing attack fronts.
+
+1. **History-bearing semantic incidence.** Construct singular endpoint contexts whose rays or
+   intervening incomplete gaps carry enough history that their one incidence is exactly the
+   paired-Neary coefficient-zero language. The middle cannot be one intact complete block between
+   fixed rays. Prove the arbitrary-word converse at the same incidence, or exhibit a malformed
+   exact hit that kills the construction.
+2. **Oriented-cylinder reachability.** A genuine terminal block of upper length `n` can be hit
+   only when the transformed left row lies at 3-adic depth `n+β+1`, has the prescribed leading
+   unit, and satisfies the unreduced rational incidence equation. Decide whether arbitrary
+   nonsingular mixed bridges can reach that cylinder. Global avoidance retires the family; an
+   exact reachable hit must be classified for semantic use or malformed unsoundness. Standalone
+   safe return is sufficient but no longer prerequisite.
 
 The dead subtrees remain dead: literal Neary role fusion (`M4-O01`, `M4-O02`, `M4-O05`), finite
 queues of complete tokens (`M4-O03`), exact internal/final block codes (`M4-O04`), closed
 finite-order roots (`M4-O07`), one-coordinate exterior dynamics (`M4-O09`), and finite strict
 cone separation (`M4-O10`). The annihilator guard [`M4-O06`](SALVAGE.md#m4-o06-punctuation-image-annihilator)
 is discharged. Finite gap catalogues, bare rank-one incidence, defect-count casework, collective-
-wall cancellation, pure-defect endpoints, and unproved flatness are not frontier work.
+wall cancellation, pure-defect endpoints, fixed-ray complete-block semantics, and unproved
+flatness are not frontier work.
 
 ### 2. Zero-set compression and fused punctuation: `M₅(3)`
 
@@ -1376,11 +1389,13 @@ universal computation.
 
 ## Execution order
 
-1. Attack the two open `M₄(3)` matrix nodes independently: original parabolic semantic
-   incidence and oriented transport under `M4-S04` and `M4-S06`. The exhaustive positive
+1. Attack the two fronts of the one open `M₄(3)` matrix incidence independently:
+   history-bearing semantic endpoints and exact oriented-cylinder reachability under `M4-S04`,
+   `M4-S06`, and `M4-O14`. The exhaustive positive
    overlap-queue source class, alternating/multiple residue-two defect grammar, and retuned
    fixed-row closure are closed. Cross-pollinate exact exterior invariants, but do not revive
-   deletion scanners, the retuned annihilator/converse split, complete-token queues,
+   deletion scanners, the retuned annihilator/converse split, complete-token queues, fixed-ray
+   complete-block semantics,
    one-coordinate dynamics, finite wall-separated cones, or literal Neary recodings.
 2. Use formalized `MM-O01`, `G3-O01`, `MM-O03`, and `MM-O04` to reject exact packings, macros,
    and bridges without conflating their scope with solvability preservation.

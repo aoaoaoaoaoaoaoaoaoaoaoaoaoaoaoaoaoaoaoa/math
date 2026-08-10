@@ -27,7 +27,7 @@ private def pseudoLetter : PseudoTile → TagLetter
   | .inr _ => .b
 
 private def pseudoGap : PseudoTile → Nat
-  | .inl tile => tileGap tile
+  | .inl tile => ParabolicBlade.completeGap tile
   | .inr _ => 30
 
 private def pseudoUpper : PseudoTile → List Bool
@@ -155,7 +155,7 @@ def poisonContextWord : List (Option TagLetter) :=
 
 theorem poisonContextWord_length : poisonContextWord.length = 100 := by
   norm_num [poisonContextWord, pseudoMiddleWord, poisonTiles, pseudoWord, pseudoGap,
-    ordinary, poisonB, tileGap]
+    ordinary, poisonB, ParabolicBlade.completeGap]
 
 private theorem poisonContextWord_product :
     wordProduct (generator 3 poisonBody) poisonContextWord = poisonContext := by

@@ -39,15 +39,10 @@ theorem semanticMatrix_append
       Matrix.vecHead, Matrix.vecTail, pow_add] <;>
     ring
 
-/-- Root gap naming the rule or erasure phase of one Neary tile. -/
-def tileGap : NearyTile → Nat
-  | .rule _ => 3
-  | .erase _ => 0
-
 /-- Reduced retuned atom named by one complete Neary tile. -/
 def tileAtom (β : Nat) (body : List TagLetter) (tile : NearyTile) :
     Matrix (Fin 3) (Fin 3) ℚ :=
-  atom β body tile.letter (tileGap tile)
+  atom β body tile.letter (ParabolicBlade.completeGap tile)
 
 private theorem markerCode_cast (β : Nat) :
     (markerCode β : ℚ) = ((3 : ℚ) ^ β - 1) / 2 := by
@@ -70,8 +65,8 @@ theorem tileAtom_eq_semanticMatrix
   | erase letter =>
       cases letter with
       | b =>
-          simp only [tileAtom, tileGap, NearyTile.letter, semanticMatrix, nearyUpper,
-            nearyLower]
+          simp only [tileAtom, ParabolicBlade.completeGap, NearyTile.letter,
+            semanticMatrix, nearyUpper, nearyLower]
           rw [show sparseCode (tagCode β .b) = upperBCode β by rfl]
           ext i j
           fin_cases i <;> fin_cases j <;>
@@ -80,8 +75,8 @@ theorem tileAtom_eq_semanticMatrix
               sparseDigit, Matrix.mul_apply, Fin.sum_univ_succ] ;
             ring
       | c =>
-          simp only [tileAtom, tileGap, NearyTile.letter, semanticMatrix, nearyUpper,
-            nearyLower]
+          simp only [tileAtom, ParabolicBlade.completeGap, NearyTile.letter,
+            semanticMatrix, nearyUpper, nearyLower]
           ext i j
           fin_cases i <;> fin_cases j <;>
             norm_num [atom, dataFlank, cFlank, ParabolicBlade.flank,
@@ -91,8 +86,8 @@ theorem tileAtom_eq_semanticMatrix
   | rule letter =>
       cases letter with
       | b =>
-          simp only [tileAtom, tileGap, NearyTile.letter, semanticMatrix, nearyUpper,
-            nearyLower]
+          simp only [tileAtom, ParabolicBlade.completeGap, NearyTile.letter,
+            semanticMatrix, nearyUpper, nearyLower]
           rw [show sparseCode (tagCode β .b) = upperBCode β by rfl]
           rw [atom, root_cube]
           ext i j
@@ -102,8 +97,8 @@ theorem tileAtom_eq_semanticMatrix
               Nat.ofDigits, Matrix.mul_apply, Fin.sum_univ_succ] ;
             ring
       | c =>
-          simp only [tileAtom, tileGap, NearyTile.letter, semanticMatrix, nearyUpper,
-            nearyLower]
+          simp only [tileAtom, ParabolicBlade.completeGap, NearyTile.letter,
+            semanticMatrix, nearyUpper, nearyLower]
           rw [atom, root_cube]
           ext i j
           fin_cases i <;> fin_cases j <;>
@@ -315,7 +310,7 @@ theorem bridge_decoded_det_eq_zero_iff_pairedCoefficient
 /-- Physical macro for one complete Neary tile. -/
 def physicalTile (β : Nat) (body : List TagLetter) (tile : NearyTile) :
     Matrix (Fin 4) (Fin 4) ℚ :=
-  dataGenerator β body tile.letter * root ^ tileGap tile
+  dataGenerator β body tile.letter * root ^ ParabolicBlade.completeGap tile
 
 /-- Physical product of the complete tile macros. -/
 def physicalMiddle (β : Nat) (body : List TagLetter) (word : List NearyTile) :
@@ -354,7 +349,7 @@ theorem generator_count : Fintype.card (Option TagLetter) = 3 := by decide
 
 /-- Literal three-letter word realizing one complete Neary tile. -/
 def tileWord (tile : NearyTile) : List (Option TagLetter) :=
-  some tile.letter :: List.replicate (tileGap tile) none
+  some tile.letter :: List.replicate (ParabolicBlade.completeGap tile) none
 
 /-- Literal concatenation of the complete tile words. -/
 def middleWord (word : List NearyTile) : List (Option TagLetter) :=
@@ -434,11 +429,12 @@ private theorem physicalTile_preserves_first
   cases tile with
   | erase letter =>
       cases letter <;>
-        norm_num [physicalTile, tileGap, NearyTile.letter, dataGenerator, dataFlank,
-          bFlank, cFlank, ParabolicBlade.injection, ParabolicBlade.flank, Matrix.vecMul,
-          Matrix.dotProduct, Matrix.one_apply, Matrix.mul_apply, Fin.sum_univ_succ]
+        norm_num [physicalTile, ParabolicBlade.completeGap, NearyTile.letter,
+          dataGenerator, dataFlank, bFlank, cFlank, ParabolicBlade.injection,
+          ParabolicBlade.flank, Matrix.vecMul, Matrix.dotProduct, Matrix.one_apply,
+          Matrix.mul_apply, Fin.sum_univ_succ]
   | rule letter =>
-      rw [physicalTile, tileGap, root_cube]
+      rw [physicalTile, ParabolicBlade.completeGap, root_cube]
       cases letter <;>
         norm_num [NearyTile.letter, dataGenerator, dataFlank, bFlank, cFlank,
           ParabolicBlade.injection, ParabolicBlade.flank, ParabolicBlade.drift,

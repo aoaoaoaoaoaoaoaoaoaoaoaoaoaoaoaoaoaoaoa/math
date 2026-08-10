@@ -559,6 +559,20 @@ consecutive projective incidence. For wall exterior state `(0,v,w)`, the explici
 and evidence boundary are in
 [`audits/m43-arbitrary-defect-2026-08-08.md`](audits/m43-arbitrary-defect-2026-08-08.md).
 
+The original fixed-ray semantic route is obstructed by
+[`M4-O14`](SALVAGE.md#m4-o14-original-fixed-ray-semantic-obstruction), formalized in
+[`MatrixMortality/ParabolicSemanticObstruction.lean`](MatrixMortality/ParabolicSemanticObstruction.lean).
+Lean identifies the complete ternary correspondence middle as a fixed conjugate of
+`sidePcpMatrix`, proves that every original complete gap evaluates to it, composes arbitrary
+complete tile words, and computes their exceptional bridge determinant. The determinant is
+strictly negative for every nonempty complete Neary word, so such a word cannot be a wall. For
+arbitrary fixed endpoint rays, vanishing on the formal terminal plane
+forces vanishing on the entire compulsory length plane. Thus no fixed incidence through one
+intact complete block recognizes terminal equality by its zero set. The proof does not classify
+discrete coincidences or endpoint rays carrying malformed or history-dependent data. The exact
+evidence boundary is
+[`audits/m43-original-semantic-obstruction-2026-08-10.md`](audits/m43-original-semantic-obstruction-2026-08-10.md).
+
 The retuned semantic boundary
 [`M4-M04`](SALVAGE.md#m4-m04-retuned-semantic-boundary) is formalized in
 [`MatrixMortality/ParabolicRetuned.lean`](MatrixMortality/ParabolicRetuned.lean) and
@@ -587,9 +601,10 @@ terminal match. The exact evidence boundary is
 [`audits/m43-retuned-pseudo-terminal-obstruction-2026-08-10.md`](audits/m43-retuned-pseudo-terminal-obstruction-2026-08-10.md).
 
 No `M₄(3)` undecidability theorem follows from the present corpus. The exhaustive promised
-positive overlap-queue source class and the retuned fixed-row closure are closed. On the original
-matrix lane, one must realize the paired Neary coefficient as a consecutive-wall incidence or
-decide oriented transport. These are the two live obligations.
+positive overlap-queue source class, the retuned fixed-row closure, and the original fixed-ray
+complete-block compiler are closed. The original matrix lane has one live projective-incidence
+problem with two attack fronts: history-bearing endpoint semantics and exact reachability of the
+required oriented 3-adic cylinder.
 
 ## Modules
 
@@ -669,6 +684,7 @@ decide oriented transport. These are the two live obligations.
 | `ParabolicFlag.lean` | valuation relations and the four arbitrary-cancellation atom invariants |
 | `ParabolicSafeFlag.lean` | arbitrary safe-word flag, wall orientation, and exact residue-one `b` wound |
 | `ParabolicDefect.lean` | complete defect-run residue grammar, pure-defect bridge reset, and consecutive-wall projective fracture |
+| `ParabolicSemanticObstruction.lean` | complete-block determinant wall and fixed-ray formal terminal-plane obstruction |
 | `ParabolicRetuned.lean` | retuned open root, sparse ternary code, determinant pencils, and unique gap-two singular atom |
 | `ParabolicRetunedBoundary.lean` | complete-gap semantics, literal physical contexts, fixed terminal minor and row, and complete-gap annihilator obstruction |
 | `ParabolicRetunedObstruction.lean` | explicit malformed terminal no-instance defeating standalone fixed-row closure |
@@ -833,6 +849,9 @@ decide oriented transport. These are the two live obligations.
 | Every nonempty pure-defect block has an invertible bridge | `ParabolicBlade.pureDefect_bridge_det_ne_zero` |
 | A varying wall chain vanishes exactly at one consecutive projective incidence | `ParabolicBlade.bridgeFractureChain_eq_zero_iff` |
 | A regular wall bridge has the explicit nonzero annihilating cokernel `(v,-4w)` | `ParabolicBlade.bridgeCokernel_eq_exteriorTail`, `ParabolicBlade.bridgeCokernel_regular_word_ne_zero`, `ParabolicBlade.bridgeCokernel_vecMul_bridge_of_wall` |
+| Every nonempty complete semantic block has a negative original bridge determinant | `ParabolicBlade.bridge_semanticWordMiddle_det_neg` |
+| Every nonempty complete original Neary word has a negative bridge determinant | `ParabolicBlade.completeTileProduct_eq_semanticWordMiddle`, `ParabolicBlade.bridge_completeTileProduct_det_neg` |
+| A fixed original incidence vanishing on the formal terminal plane vanishes on the whole length plane | `ParabolicBlade.semanticIncidence_terminal_forces_length`, `ParabolicBlade.no_fixed_semanticIncidence_terminal_zero_set` |
 | The retuned family has one singular reduced atom, at gap two after `b` | `ParabolicRetuned.atom_det_eq_zero_iff` |
 | The retuned bridge determinant is exactly the Neary terminal language | `ParabolicRetuned.bridge_tileProduct_det_eq_zero_iff_terminal_match` |
 | One fixed minor of a literal retuned three-generator context recognizes `pairedCoefficient = 0` | `ParabolicRetuned.contextWord_product`, `ParabolicRetuned.physicalMinor_decoded_det_eq_zero_iff_pairedCoefficient` |

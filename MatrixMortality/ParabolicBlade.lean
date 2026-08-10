@@ -766,6 +766,11 @@ theorem cAtom_det_three_mul_add_two_ne_zero
   have residueEquality := congrArg (fun value : ℤ => value % 3) integerEquality
   norm_num [Int.add_emod, Int.sub_emod, Int.mul_emod] at residueEquality
 
+/-- Complete rule and erasure gaps under either parabolic open root. -/
+def completeGap : NearyTile → Nat
+  | .rule _ => 3
+  | .erase _ => 0
+
 /-- The complete reduced atom family of the parabolic three-generator candidate. -/
 def atom (β : Nat) (body : List TagLetter) (letter : TagLetter) (gap : Nat) :
     Matrix (Fin 3) (Fin 3) ℚ :=

@@ -96,6 +96,15 @@ open MatrixMortality
 #print axioms ParabolicBlade.bridgeFractureChain_eq_zero_iff
 #print axioms ParabolicBlade.bridgeCokernel_regular_word_ne_zero
 #print axioms ParabolicBlade.bridgeCokernel_vecMul_bridge_of_wall
+#print axioms ParabolicBlade.completeTileAtom_eq_semanticWordMiddle
+#print axioms ParabolicBlade.completeTileProduct_eq_semanticWordMiddle
+#print axioms ParabolicBlade.semanticWordMiddle_eq_sidePcpMatrix_conjugate
+#print axioms ParabolicBlade.bridge_semanticMiddle_det
+#print axioms ParabolicBlade.bridge_semanticWordMiddle_det_neg
+#print axioms ParabolicBlade.bridge_completeTileProduct_det_neg
+#print axioms ParabolicBlade.semanticIncidence_eq
+#print axioms ParabolicBlade.semanticIncidence_terminal_forces_length
+#print axioms ParabolicBlade.no_fixed_semanticIncidence_terminal_zero_set
 #print axioms ParabolicRetuned.root_cube
 #print axioms ParabolicRetuned.atom_det_eq_zero_iff
 #print axioms ParabolicRetuned.tileProduct_eq_semanticMatrix

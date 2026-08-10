@@ -144,6 +144,29 @@
 'MatrixMortality.ParabolicBlade.bridgeCokernel_vecMul_bridge_of_wall' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.ParabolicBlade.completeTileAtom_eq_semanticWordMiddle' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.completeTileProduct_eq_semanticWordMiddle' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.semanticWordMiddle_eq_sidePcpMatrix_conjugate' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.bridge_semanticMiddle_det' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ParabolicBlade.bridge_semanticWordMiddle_det_neg' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.bridge_completeTileProduct_det_neg' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.semanticIncidence_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ParabolicBlade.semanticIncidence_terminal_forces_length' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.no_fixed_semanticIncidence_terminal_zero_set' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.ParabolicRetuned.root_cube' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.ParabolicRetuned.atom_det_eq_zero_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.ParabolicRetuned.tileProduct_eq_semanticMatrix' depends on axioms: [propext,
