@@ -609,8 +609,19 @@ unit return a projective involution and every singular return square-zero. Unles
 between their forced lines under an order-three recurrence of reflections. In the pure case,
 Lean collapses all waits modulo three. The unique one-singular normal form has reverse-compiler
 scalars `α=β=μ⁻¹`, so it is already GPI₂; zero- and two-singular triples are decidable. Thus only
-the non-pure reflection orbit remains as an independent cubic fork. See
-[`R32-O16`](SALVAGE.md#r32-o16-irreducible-cubic-punctuation-collapse).
+the non-pure reflection orbit remains as an independent cubic fork.
+
+That fork now has a canonical endpoint form. Projected multiplication on the cubic field's
+trace-zero plane writes every faithful family as `Mₙ=F T_(γθⁿ)`, and every
+`F∈GL₂(ℚ)` occurs: the physical origin imposes no twist constraint. Clifford normalization makes
+the exact residue a null-conic orbit under the adjoint isometry of an arbitrary `Q` interleaved
+with recurrence reflections. An explicit physical family with `χ_A=X³−X−1` has unit returns
+`M₁=F`, `M₄=FR` generating a free binary submonoid and an injective rational-line orbit. Hence
+recurrence order, involutivity, and finite singular timing do not force finitely many bridge
+states or bounded bridge length. The selected line is not a singular endpoint, so the exact
+remaining seam is endpoint-faithful null-conic reachability. See
+[`R32-O16`](SALVAGE.md#r32-o16-irreducible-cubic-punctuation-collapse) and
+[`m32-cubic-null-conic-orbit-2026-08-10.md`](audits/m32-cubic-null-conic-orbit-2026-08-10.md).
 
 ### ReturnSquare laboratory
 
@@ -1241,7 +1252,7 @@ all-legal block inequality for the carried generalized continuant. See
 | --- | --- | --- |
 | Split-guard decision | Prove an effective reset-anchored recurrence-or-escape certificate for the doubly order-broken continuant | Forward activation is exponentially budgeted, while endpoint-only charging of the transverse reverse reservoir is false |
 | Split-guard counter | Construct one exact fixed-coefficient reset orbit with a sparse microscopic doubly order-broken moving-prime genealogy | The reported order-breaking tuple traps after `[4,1,1,1,1]`; dense births, macroscopic allocations, rapid recovery, and full-numerator rails are excluded |
-| Irreducible cubic reflection orbit | Decide reachability between isolated singular lines under the non-pure order-three recurrence of projective involutions | Singular timing is finite; independently selected unit indices remain unbounded |
+| Irreducible cubic reflection orbit | Decide endpoint-faithful null-conic reachability under the non-pure recurrence reflections | The twist is arbitrary and two unit indices can generate a free binary submonoid; only the special singular endpoint placement remains |
 | Generic projective incidence | Decide or prove undecidable the normalized `α=β=1` GPI₂ core through intrinsic arithmetic dynamics | It contains exact fixed-projectivity shortcut-Collatz reachability; homomorphic free-word stores with finite queue controllers are impossible |
 
 The split-spectrum hot path is now an effective reset-anchored recurrence-or-escape theorem for

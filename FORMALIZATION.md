@@ -504,6 +504,16 @@ open. See
 and
 [`audits/m32-cubic-reflection-generic-bridge-2026-08-09.md`](audits/m32-cubic-reflection-generic-bridge-2026-08-09.md).
 
+The non-pure fork is now canonical without another Lean API. Projected multiplication on the
+cubic field's trace-zero plane gives `Mₙ=F T_(γθⁿ)` with arbitrary twist `F`; Clifford
+normalization turns mortality into endpoint reachability on the determinant null conic. The
+explicit physical family with characteristic polynomial `X³−X−1` has two unit returns generating
+a free binary submonoid with an injective rational-line orbit. This rejects finite bridge-state
+or bounded-length collapse from recurrence order and involutivity alone. The line witness is not
+singular-endpoint-faithful, so the null-conic orbit remains open. The trace/Jordan coordinates
+were culled as a duplicate formal representation; see
+[`audits/m32-cubic-null-conic-orbit-2026-08-10.md`](audits/m32-cubic-null-conic-orbit-2026-08-10.md).
+
 The rank-(2,2) graph is no longer an independent residue. `RankTwoPunctuation` proves that every
 compatible square with one rank-one loop and three units transports exactly to the existing raw
 reverse compiler. Its intrinsic first scalar is the loop self-bridge and compatibility forces

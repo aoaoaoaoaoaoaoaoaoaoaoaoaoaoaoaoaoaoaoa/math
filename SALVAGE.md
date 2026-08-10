@@ -99,7 +99,7 @@ file owns the mathematical stock.
 | [`R32-O13`](#r32-o13-renewal-graph-collapse-and-reset-pullback) | obstruction | every aligned macro consumes shadow depth, local bounded depth does not bound height, and reset ancestry is one exact pulled-back determinant | formalized | graduated |
 | [`R32-O14`](#r32-o14-fixed-reset-geodesic-and-complete-endpoint-language) | structure theorem and obstruction | endpoint terminality is exact and every actual reset prefix has the same distinguished-prime kernel direction | formalized | graduated |
 | [`R32-O15`](#r32-o15-fixed-support-toric-compiler-obstruction) | obstruction | rational fixed-prime counter charts with affine waits admit neither a nontrivial monomial instruction nor a repeatable control cycle | audited | graduated |
-| [`R32-O16`](#r32-o16-irreducible-cubic-punctuation-collapse) | structure theorem and obstruction | cubic returns share a reflection form; the pure one-singular fork is already generic incidence | formalized | graduated |
+| [`R32-O16`](#r32-o16-irreducible-cubic-punctuation-collapse) | structure theorem and obstruction | cubic returns have an arbitrary-twist trace form; the pure fork is GPI₂ while non-pure unit bridges can be free | formalized core; audited strengthening | graduated |
 | [`R32-O17`](#r32-o17-angular-emergent-primes-and-endpoint-compactness-no-go) | obstruction | terminal angular poles create primes outside determinant support and the wait gauge has nontrivial directional adelic height | formalized | graduated |
 | [`R32-O18`](#r32-o18-finite-rational-radial-atlas-obstruction) | obstruction | every finite rational carry-mode atlas with fixed additive wait shifts is eventually periodic | audited | graduated |
 | [`R32-S07`](#r32-s07-decoded-residual-address-normal-form) | structure theorem | mortality is finite inverse-address membership in disjoint rational p-adic branch spheres | formalized | active |
@@ -4006,7 +4006,7 @@ stationary prime-exponent register.
 ### R32-O16: Irreducible-cubic punctuation collapse
 
 **Kind:** structure theorem and obstruction
-**Evidence:** formalized
+**Evidence:** formalized core; audited strengthening
 **Disposition:** graduated
 
 Let `A ∈ GL₃(ℚ)` have irreducible cubic characteristic polynomial and put `Mₙ=VAⁿU`
@@ -4028,6 +4028,39 @@ Every irreducible-cubic return family has a computable common-left reflection fo
 indices are square-zero rank-one maps. The non-pure residue is therefore exact reachability
 between finitely many forced endpoint lines under an order-three recurrence of reflections.
 
+This reflection form has a canonical trace model. If `K₀` is the trace-zero plane of the cubic
+field and `Tₓ(u)=π(xu)` is projected multiplication, then, after interface conjugation,
+
+```text
+Mₙ=F T_(γθⁿ).
+```
+
+The twist `F∈GL₂(ℚ)` is arbitrary: every such tuple has a rank-two physical realization. The
+singular conic is parametrized by inversion, `Tₓ` is singular exactly when `x⁻¹∈K₀`, and its
+kernel is `⟨x⁻¹⟩`. Clifford normalization turns the remaining bridge equation into reachability
+on that rational null conic under the adjoint twist of an arbitrary `Q` interleaved with the recurrence
+reflections.
+
+No algebraic finite-state collapse follows. The explicit non-pure family
+
+```text
+A=[[0,0,1],[1,0,1],[0,1,0]],
+U=[[0,−2/3],[1,0],[0,1]],
+V=[[0,0,31],[1,0,0]]
+```
+
+has `χ_A=X³−X−1`, a singular return `M₀`, and unit returns
+
+```text
+M₁=F=diag(31,1),    M₄=FR,
+R=[[1,1/3],[1,1]].
+```
+
+Real ping-pong proves that `F,R` generate their free product. Hence `M₁,M₄` generate a free
+binary submonoid with an injective rational-line orbit. This kills bounded bridge length or a
+finite set of projective bridge states as consequences of cubic recurrence and involutivity
+alone; it does not decide reachability between the actual singular endpoint lines.
+
 The pure residue triple is still more rigid. Three determinant-polarization equations give the
 normal form
 
@@ -4042,10 +4075,11 @@ exceptional scalars of the existing reverse-edge compiler are exactly `μ⁻¹`.
 pure fork is already one GPI₂ instance, not an independent involutive-ratio problem.
 
 **Scope:** Lean checks the pure-cubic arbitrary-word collapse and the exact genericity scalars of
-the one-singular normal form. Field faithfulness, singular-time classification, common-left
-reflection form, trace-tensor classification, and the other singularity counts are independently
-audited. Non-pure isolated singular cuts may still be joined by an unbounded word over the
-projectively injective recurrence of unit reflections. GPI₂ itself remains open.
+the one-singular normal form. Field faithfulness, singular-time classification, canonical trace
+and null-conic forms, arbitrary twist, and the free physical bridge are independently audited.
+The free witness's rational base line is not asserted to be a singular endpoint. Non-pure
+isolated cuts may still be joined by an unbounded word over the projectively injective recurrence
+of unit reflections. GPI₂ itself remains open.
 
 **Artifact:** `CubicReturn.returnProduct_eq_smul_residues`,
 `CubicReturn.pairGenerator_isMortal_iff_residue`, and
@@ -4054,10 +4088,14 @@ projectively injective recurrence of unit reflections. GPI₂ itself remains ope
 [`m32-cubic-punctuation-collapse-2026-08-08.md`](audits/m32-cubic-punctuation-collapse-2026-08-08.md)
 and
 [`m32-cubic-reflection-generic-bridge-2026-08-09.md`](audits/m32-cubic-reflection-generic-bridge-2026-08-09.md).
+The arbitrary-twist, null-conic, and free-bridge strengthening is reconstructed in
+[`m32-cubic-null-conic-orbit-2026-08-10.md`](audits/m32-cubic-null-conic-orbit-2026-08-10.md).
 
 **Use:** retire cubic singular timing as an unbounded store and merge the pure one-singular fork
-into GPI₂. Any independent nonsplit cubic attack must now decide the non-pure reflection orbit
-between finitely many isolated rank-one cuts.
+into GPI₂. Do not seek a finite bridge-state collapse from recurrence order or involutivity.
+
+**Next:** decide the endpoint-faithful non-pure null-conic orbit, or compile universality while
+making every unselected recurrence index harmless.
 
 ### R32-S32: Rank-two punctuation and graph removal
 
