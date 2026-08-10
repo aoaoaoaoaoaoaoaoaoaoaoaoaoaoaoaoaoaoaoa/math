@@ -560,17 +560,20 @@ and evidence boundary are in
 [`audits/m43-arbitrary-defect-2026-08-08.md`](audits/m43-arbitrary-defect-2026-08-08.md).
 
 The original fixed-ray semantic route is obstructed by
-[`M4-O14`](SALVAGE.md#m4-o14-original-fixed-ray-semantic-obstruction), formalized in
+[`M4-O14`](SALVAGE.md#m4-o14-original-semantic-endpoint-obstruction), formalized in
 [`MatrixMortality/ParabolicSemanticObstruction.lean`](MatrixMortality/ParabolicSemanticObstruction.lean).
 Lean identifies the complete ternary correspondence middle as a fixed conjugate of
 `sidePcpMatrix`, proves that every original complete gap evaluates to it, composes arbitrary
 complete tile words, and computes their exceptional bridge determinant. The determinant is
 strictly negative for every nonempty complete Neary word, so such a word cannot be a wall. For
-arbitrary fixed endpoint rays, vanishing on the formal terminal plane
-forces vanishing on the entire compulsory length plane. Thus no fixed incidence through one
-intact complete block recognizes terminal equality by its zero set. The proof does not classify
-discrete coincidences or endpoint rays carrying malformed or history-dependent data. The exact
-evidence boundary is
+arbitrary fixed endpoint rays, vanishing on the correct formal terminal plane `Y=tX+m, τ=tσ`
+forces vanishing on the entire compulsory length plane. The proof does not classify coincidences
+confined to the discrete code locus.
+
+The same module formalizes the conditional compiler [`M4-C04`](SALVAGE.md#m4-c04-original-mixed-gap-endpoint-compiler).
+Two explicit endpoint ray equations make one semantic bridge followed by the empty bridge vanish
+exactly on the Neary terminal language. Complete semantic contexts cannot reach either ray, so
+both endpoint words must contain incomplete gaps. The exact evidence boundary is
 [`audits/m43-original-semantic-obstruction-2026-08-10.md`](audits/m43-original-semantic-obstruction-2026-08-10.md).
 
 The retuned semantic boundary
@@ -602,9 +605,9 @@ terminal match. The exact evidence boundary is
 
 No `M₄(3)` undecidability theorem follows from the present corpus. The exhaustive promised
 positive overlap-queue source class, the retuned fixed-row closure, and the original fixed-ray
-complete-block compiler are closed. The original matrix lane has one live projective-incidence
-problem with two attack fronts: history-bearing endpoint semantics and exact reachability of the
-required oriented 3-adic cylinder.
+formal-plane compiler are closed. The original matrix lane has one live projective-incidence
+problem: reach or exclude the two `M4-C04` mixed-gap endpoint rays and prove the global
+consecutive-incidence converse. The former oriented 3-adic cylinder is rejected.
 
 ## Modules
 
@@ -852,6 +855,9 @@ required oriented 3-adic cylinder.
 | Every nonempty complete semantic block has a negative original bridge determinant | `ParabolicBlade.bridge_semanticWordMiddle_det_neg` |
 | Every nonempty complete original Neary word has a negative bridge determinant | `ParabolicBlade.completeTileProduct_eq_semanticWordMiddle`, `ParabolicBlade.bridge_completeTileProduct_det_neg` |
 | A fixed original incidence vanishing on the formal terminal plane vanishes on the whole length plane | `ParabolicBlade.semanticIncidence_terminal_forces_length`, `ParabolicBlade.no_fixed_semanticIncidence_terminal_zero_set` |
+| The actual Neary formal terminal plane cannot be recognized by fixed original endpoint rays | `ParabolicBlade.no_fixed_semanticIncidence_neary_terminal_zero_set` |
+| The two mixed-gap endpoint equations conditionally compile exact Neary terminal matching | `ParabolicBlade.conditional_semanticBridgeProduct_zero_iff_terminal` |
+| Complete semantic contexts miss both conditional-compiler endpoint rays | `ParabolicBlade.no_complete_semantic_left_target`, `ParabolicBlade.no_complete_semantic_right_target` |
 | The retuned family has one singular reduced atom, at gap two after `b` | `ParabolicRetuned.atom_det_eq_zero_iff` |
 | The retuned bridge determinant is exactly the Neary terminal language | `ParabolicRetuned.bridge_tileProduct_det_eq_zero_iff_terminal_match` |
 | One fixed minor of a literal retuned three-generator context recognizes `pairedCoefficient = 0` | `ParabolicRetuned.contextWord_product`, `ParabolicRetuned.physicalMinor_decoded_det_eq_zero_iff_pairedCoefficient` |

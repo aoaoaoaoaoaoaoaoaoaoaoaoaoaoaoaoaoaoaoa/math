@@ -137,6 +137,8 @@ file owns the mathematical stock.
 | [`M4-D03`](#m4-d03-periodic-conjugate-scanner-decision) | decidable stratum | primitive conjugacy and an odd-gap quotient decide the final periodic scanner | audited | graduated |
 | [`M4-O12`](#m4-o12-terminal-frame-morphism-obstruction) | obstruction | a fixed morphism cannot map a shared terminal to its own compulsory return frame | formalized | graduated |
 | [`M4-O13`](#m4-o13-retuned-pseudo-terminal-obstruction) | obstruction | a malformed terminal context defeats every fixed-row annihilator on an admissible no-instance | formalized | graduated |
+| [`M4-C04`](#m4-c04-original-mixed-gap-endpoint-compiler) | conditional compiler | two explicit mixed-gap ray equations compile the Neary terminal language into one consecutive-wall zero | formalized | active |
+| [`M4-O14`](#m4-o14-original-semantic-endpoint-obstruction) | obstruction | fixed rays fail on the formal terminal plane and complete-gap contexts miss both compiler rays | formalized | graduated |
 | [`G3-O01`](#g3-o01-four-role-macro-irreducibility) | obstruction | exact nonerasing macros cannot reduce the four source roles to three letters | formalized | graduated |
 | [`G3-S01`](#g3-s01-shift-equivariant-zero-incidence) | structure theorem | same-zero state dimension is equivariant projective incidence dimension | audited | active |
 | [`G3-M01`](#g3-m01-free-group-discrepancy-engine) | partial mechanism | free cancellation implements queue deletion with an all-path converse | reported | active |
@@ -4063,7 +4065,59 @@ a different endpoint geometry.
 and
 [`audits/m43-retuned-pseudo-terminal-obstruction-2026-08-10.md`](audits/m43-retuned-pseudo-terminal-obstruction-2026-08-10.md).
 
-### M4-O14: Original fixed-ray semantic obstruction
+### M4-C04: Original mixed-gap endpoint compiler
+
+**Kind:** conditional compiler
+
+**Evidence:** formalized
+
+**Disposition:** active
+
+For `ρ=3^β`, let
+
+```text
+u* = (0,−2,1)ᵀ,                      k = (4,4,−1)ᵀ,
+p  = (18,11)ᵀ,
+c* = ((5ρ−1)/2,3ρ,−1/2)ᵀ.
+```
+
+The vector `k` spans the kernel of the exceptional input factor and `p` is the column of the
+empty rank-one bridge. The complete semantic middle `N(upper,lower)` sends `c*` to the ray `u*`
+exactly at a Neary terminal match.
+
+Lean packages the remaining forward construction. For three-dimensional contexts `C,D`, a left
+inverse of `C`, and nonzero scalars `λ,μ`, assume
+
+```text
+C u* = λk,
+D A p = μc*.
+```
+
+Then
+
+```text
+Kρ(C N(upper,lower) D) Kρ(I) = 0
+  ↔ upper ++ nearyMarker β = lower.
+```
+
+The existing exceptional-chain contraction turns this into the reduced literal word
+`R(CND)RR`. Uniform denominator clearing is already available.
+
+**Scope:** the theorem is conditional on exact endpoint contexts. It proves both directions for
+the semantic middle once those contexts are supplied; it does not prove their reachability or the
+global converse for every other consecutive-wall incidence.
+
+**Use:** endpoint reachability is now the only missing forward semantic implication. Find regular
+mixed-gap atom words `C,D` satisfying the two displayed equations uniformly in the Neary
+instance, or prove either ray unreachable. Then consume the result immediately in the global
+incidence grammar [`M4-S06`](#m4-s06-arbitrary-defect-bridge-grammar).
+
+**Artifact:**
+[`MatrixMortality/ParabolicSemanticObstruction.lean`](MatrixMortality/ParabolicSemanticObstruction.lean)
+and
+[`audits/m43-original-semantic-obstruction-2026-08-10.md`](audits/m43-original-semantic-obstruction-2026-08-10.md).
+
+### M4-O14: Original semantic endpoint obstruction
 
 **Kind:** obstruction
 
@@ -4095,21 +4149,39 @@ For arbitrary fixed endpoint rays, the scalar incidence
 F(X,Y,σ,τ)=c₀+cX·X+cY·Y+cσ·σ+cτ·τ
 ```
 
-obeys `22c₀-31cX-18cY=0`. If `F` vanishes on the formal terminal plane
-`Y=X+mσ, τ=tσ`, Lean proves that it vanishes on the entire length plane `τ=tσ`. No fixed pair
-of rays can therefore recognize formal terminal equality through one intact complete block, even
-only by its zero set.
+obeys `22c₀-31cX-18cY=0`. With the repository's left-to-right ternary code, the actual terminal
+plane is
 
-**Scope:** fixed left and right rays, one complete side-normal middle, and identity on the formal
-rational terminal plane. The theorem does not exclude a coincidence confined to the discrete
-encoded language, history-dependent or malformed endpoint contexts, incomplete gaps, or an
-arbitrary nonsingular mixed transport. The report's depth-`n+β+1` 3-adic cylinder is an audited
-necessary condition for a genuine hit, not a global avoidance theorem.
+```text
+Y=tX+m,       τ=tσ,
+m=(5·3^β−1)/2,       t=3^(β+1).
+```
+
+If `F` vanishes on this formal plane, its coefficients satisfy
+
+```text
+(31t−22m−18)cY=(38·3^β−7)cY=0.
+```
+
+Lean therefore proves that `F` vanishes on the entire length plane `τ=tσ`. This rules out exact
+formal-plane recognition. It does not exclude a same-zero coincidence confined to the discrete
+encoded language.
+
+The two endpoint rays required by the conditional compiler [`M4-C04`](#m4-c04-original-mixed-gap-endpoint-compiler)
+cannot be supplied by complete semantic contexts. The left equation would force a ratio of powers
+of three to equal two; the right equation conflicts with a strict sign pattern. Both contexts
+must contain incomplete gaps.
+
+**Scope:** fixed left and right rays on the full formal terminal plane, and complete semantic
+contexts at the two explicit compiler endpoints. The theorem does not exclude a discrete
+same-zero coincidence, history-dependent or malformed mixed-gap contexts, or arbitrary
+nonsingular transport. The former depth-`n+β+1` cylinder used the wrong terminal convention and
+is rejected.
 
 **Use:** delete nonempty complete blocks as endpoint walls and delete the direct fixed-ray
-terminal-coefficient compiler. The original semantic node now requires endpoint geometry carrying
-history or malformed structure; the oriented node must decide reachability of the exact deep
-3-adic cylinder and its remaining unit equation.
+formal-plane identity. Delete complete-gap endpoint contexts. Attack the exact mixed-gap ray
+equations in `M4-C04`, along with the arbitrary-incidence converse; do not build another terminal
+coefficient abstraction.
 
 **Artifact:**
 [`MatrixMortality/ParabolicSemanticObstruction.lean`](MatrixMortality/ParabolicSemanticObstruction.lean)

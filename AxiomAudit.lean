@@ -105,6 +105,10 @@ open MatrixMortality
 #print axioms ParabolicBlade.semanticIncidence_eq
 #print axioms ParabolicBlade.semanticIncidence_terminal_forces_length
 #print axioms ParabolicBlade.no_fixed_semanticIncidence_terminal_zero_set
+#print axioms ParabolicBlade.no_fixed_semanticIncidence_neary_terminal_zero_set
+#print axioms ParabolicBlade.conditional_semanticBridgeProduct_zero_iff_terminal
+#print axioms ParabolicBlade.no_complete_semantic_left_target
+#print axioms ParabolicBlade.no_complete_semantic_right_target
 #print axioms ParabolicRetuned.root_cube
 #print axioms ParabolicRetuned.atom_det_eq_zero_iff
 #print axioms ParabolicRetuned.tileProduct_eq_semanticMatrix

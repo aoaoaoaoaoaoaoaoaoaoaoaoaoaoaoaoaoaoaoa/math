@@ -1,168 +1,227 @@
-# M₄(3) original semantic-incidence obstruction audit
+# M₄(3) original semantic-endpoint audit
 
 **Date:** 10 August 2026
 
-**Status:** fixed-boundary complete-block realization obstructed; arbitrary mixed transport open
+**Status:** correct terminal plane formalized; mixed-gap endpoint reachability and converse open
 
 **Authorship:** GPT-5.6 Sol; elicited by @eternalism_4eva
 
-**Target:** decide whether one complete side-normal Neary block between fixed original
-parabolic endpoint rays can realize the terminal equation
+**Target:** decide whether the original parabolic consecutive-wall incidence can realize the
+Neary terminal language
 
 ## Verdict
 
-The direct semantic realization fails. The original exceptional bridge sends a complete
-side-normal correspondence block to an affine `2 × 2` family whose constant, upper-code, and
-lower-code coefficients obey one endpoint-independent linear law. The Neary terminal coefficient
-violates that law. More strongly, if any fixed endpoint incidence vanishes on the entire formal
-terminal plane, it vanishes on the compulsory length plane and hence accepts nonmatches.
+The delayed semantic report exposed a terminal-code convention error in the preceding transport
+report and the first version of this audit. The repository uses the usual left-to-right ternary
+value
 
-Lean also proves that the bridge determinant is negative for every pair of nonempty ternary
-words. A nonempty complete Neary block therefore cannot itself be a singular endpoint wall.
+```text
+code(x ++ y) = 3^|y| code(x) + code(y).
+```
 
-This is not global nonincidence. The theorem concerns one intact complete semantic block with
-fixed endpoint rays and the formal affine terminal plane. Reachable malformed endpoints,
-incomplete gaps, and discrete accidental incidences remain possible. The full original
-parabolic transport problem and `M₄(3)` remain open.
+For marker value `m=(5ρ−1)/2` and marker scale `t=3ρ`, the actual terminal plane is therefore
+
+```text
+Y=tX+m,       τ=tσ,
+```
+
+not `Y=X+mσ`. The former depth-`n+β+1` cylinder and its unit equation were derived after the
+wrong substitution and are withdrawn.
+
+The fixed-ray formal-plane obstruction survives by a corrected calculation. Formalization also
+strengthens the delayed report in the direction that matters to the master: it proves an exact
+conditional compiler. If two regular mixed-gap contexts reach two explicit projective rays, one
+semantic bridge followed by the empty bridge vanishes exactly on the Neary terminal language.
+No complete-gap context can reach either target. The open problem is now the exact mixed-gap
+reachability of those rays and the global malformed-incidence converse.
+
+This does not close `M₄(3)`. It also does not exclude a fixed incidence whose zero set agrees only
+on the discrete encoded locus without extending to the formal terminal plane.
 
 ## Source Lock
 
-The external report read branch `m43-cube-root-incidence` at
-`5cb071fa338f46b484f21764d2df4ba4d2bc0227`. Its transient final report has SHA-256 digest
-`129691e64f9f5e0a01944ac238b1da635b1d8587a13a3c80e46b3ad2bf06de2f`.
-The six-report salvo was adjudicated before synthesis; this ratchet was reconstructed after the
-source-scanner and retuned-boundary siblings had moved the branch to
-`402b5aa8442d04c0f788ad68a0ec4b9f899fbcb9`.
+Both external attacks read branch `m43-cube-root-incidence` at
+`5cb071fa338f46b484f21764d2df4ba4d2bc0227`.
+
+- The original transport report has final-report SHA-256 digest
+  `129691e64f9f5e0a01944ac238b1da635b1d8587a13a3c80e46b3ad2bf06de2f`.
+  Its complete-middle and bridge calculations survive; its terminal substitution and every
+  dependent cylinder claim do not.
+- The delayed semantic report has final-report SHA-256 digest
+  `397d1cad7211146259a7c8224c6e9fa68632585b92596808d0dff580701bccc3`.
+  It supplied the corrected convention, forced endpoint rays, conditional zero word, and
+  complete-gap endpoint obstructions.
+
+The first report had already moved the branch to
+`0bd22487a8969cadee8fe91c71c97cd1f085c6dc` before the delayed report returned. This audit
+records the corrective reconstruction from that pushed boundary.
 
 ## Complete Middle
 
 For upper and lower ternary codes `X,Y` and scales `σ,τ`, the reduced original middle is
 
 ```text
-M(X,Y,σ,τ) = [[1, X, 2Y],
+N(X,Y,σ,τ) = [[1, X, 2Y],
               [0, σ,  0],
               [0, 0,  τ]].
 ```
 
-Lean proves that for concrete words this is exactly the fixed conjugate
+Lean proves that every original rule gap of length three and erasure gap of length zero evaluates
+to this matrix, that arbitrary complete tile words compose into one such middle, and that it is a
+fixed conjugate of `sidePcpMatrix`.
+
+The exceptional bridge determinant is
 
 ```text
-M = E · sidePcpMatrix(upper,lower) · E⁻¹,
-
-E   = [[1,0,0], [0,0,1], [0,1/2,0]],
-E⁻¹ = [[1,0,0], [0,0,2], [0,1,0]].
+det Kρ(N) = (9ρ/2)
+  [τ(22X+31) − σ(22τ+11Y+9)].
 ```
 
-It also evaluates all four physical complete gaps: rule gaps have length three, erasure gaps
-have length zero, and each reduced atom is the corresponding `M(X,Y,σ,τ)`. Induction composes an
-arbitrary complete Neary tile word to the single semantic middle of its two spelled words.
+It is strictly negative for every nonempty complete Neary word. A complete word cannot itself be
+a wall; this result is independent of the corrected terminal convention.
 
-Using the existing exceptional factors `Kρ(M)=coreInput · M · coreOutput ρ`, direct expansion
-gives
+## Correct Fixed-Ray Obstruction
+
+Every incidence between fixed endpoint rays through `N` is affine:
 
 ```text
-det Kρ(M) = (9ρ/2) ·
-  [τ(22X+31) - σ(22τ+11Y+9)].
+F(X,Y,σ,τ)=c₀+cX·X+cY·Y+cσ·σ+cτ·τ,
 ```
 
-For nonempty upper and lower words, nonzero ternary digits give
+with the endpoint-independent coefficient law
 
 ```text
-X < σ,       τ/3 ≤ Y,       3 ≤ σ,τ.
+22c₀−31cX−18cY=0.
 ```
 
-These bounds make the bracket strictly negative. Since the Neary morphisms are nonerasing, no
-nonempty complete Neary block is a wall.
-
-## Fixed-Incidence Law
-
-For fixed endpoint vectors `a,b`, put
+If `F` vanishes on the actual formal terminal plane `Y=tX+m, τ=tσ`, coefficient comparison gives
 
 ```text
-F(X,Y,σ,τ) = a · Kρ(M(X,Y,σ,τ)) · b
-           = c₀ + cX·X + cY·Y + cσ·σ + cτ·τ.
+c₀+m cY=0,
+cX+t cY=0,
+cσ+t cτ=0.
 ```
 
-The exact bridge expansion yields
+Substitution into the fixed law yields
 
 ```text
-c₀ = (36ρ-9/4)a₀b₀ + 18a₀b₁,
-cX = 9ρa₀b₀,
-cY = (57ρ/2-11/4)a₀b₀ + 22a₀b₁,
-cσ = (-9ρa₀ + 9ρa₁/4)b₀,
-cτ = (57ρ/4-11/8)a₁b₀ + 11a₁b₁.
+(31t−22m−18)cY = (38ρ−7)cY = 0.
 ```
 
-Elimination gives the fixed law
+Since `ρ=3^β`, the factor is positive. Hence `c₀=cX=cY=0` and
+`F` vanishes on the entire length plane `τ=tσ`. Lean proves this generic affine-plane theorem
+and its concrete Neary corollary.
+
+The quantifier matters. This rules out formal-plane recognition and exact polynomial identities
+of this fixed-ray form. It does not prove that the discrete set of genuine terminal encodings is
+Zariski dense, so it does not exclude every possible discrete same-zero coincidence.
+
+The delayed report gives a concrete false positive for the surviving pure length test. If
+`E=|tagEncodeβ(body)|`, then
 
 ```text
-22c₀ - 31cX - 18cY = 0.
+ω=(rule c)^(β+1) (erase b)^(E+1)
 ```
 
-The paired terminal coefficient `X+mσ-Y` has `(c₀,cX,cY)=(0,1,-1)`, for which the left side is
-`-13`. It therefore cannot equal any nonzero scalar multiple of a fixed incidence, even after
-adding a multiple of the compulsory length equation `τ-tσ`.
+has `τ=tσ` but is not terminal: its lower spelling contains an internal positive zero-run of
+length one, impossible in a tag encoding plus marker when `β>2`. This discrete witness was
+audited but was not retained as a separate Lean layer.
 
-Lean proves the same-zero statement without treating coefficient comparison as an informal
-polynomial argument. If
+## Conditional Compiler
+
+Put
 
 ```text
-F(X, X+mσ, σ, tσ) = 0    for every X,σ ∈ ℚ,
+u* = (0,−2,1)ᵀ,                      k = (4,4,−1)ᵀ,
+p  = (18,11)ᵀ,
+c* = (m,t,−1/2)ᵀ.
 ```
 
-then specialization at `(X,σ)=(0,0),(1,0),(0,1)` and the fixed law force
-`c₀=cX=cY=0` and `cσ+t cτ=0`. Hence
+Here `k` spans the kernel of the exceptional input factor and `p` is the column of the empty
+rank-one bridge. A terminal semantic middle satisfies
 
 ```text
-F(X,Y,σ,tσ)=0    for every X,Y,σ ∈ ℚ.
+N c* ∼ u*.
 ```
 
-No fixed pair of rays recognizes the formal terminal equation by its zero set.
-
-## Oriented Survivor
-
-The report also derived a necessary condition for an actual incidence through a genuine terminal
-block. With `ρ=3^β`, transform the left-wall row to `a=(a₀,a₁)` and normalize it so that the
-smaller 3-adic valuation is zero. If the upper word has length `n`, vanishing requires
+Lean proves the following exact seam. Let `C,D` be three-dimensional contexts, let `C⁻¹` be any
+left inverse of `C`, and suppose nonzero scalars `λ,μ` satisfy
 
 ```text
-ν₃(a₁)-ν₃(a₀) = n+β+1
+C u* = λk,
+D A p = μc*.
 ```
 
-and, after writing `a₁=3^(n+β+1)u`, the leading units must satisfy
+Then
 
 ```text
-u+a₀ = 0  in 𝔽₃.
+Kρ(C N(upper,lower) D) Kρ(I) = 0
+  ↔ upper ++ nearyMarker β = lower.
 ```
 
-The exact unreduced unit equation remains open. These valuation conditions were independently
-checked against the displayed rational bridge expansion but were not retained as a Lean layer:
-they guide the surviving arbitrary-transport attack and do not themselves exclude a reachable
-wall.
+The existing exceptional-chain contraction turns this bridge identity into the reduced literal
+word `R(CND)RR`. Thus endpoint reachability, not another semantic calculation, is the missing
+forward implication.
+
+Formalization also proves that neither target can be reached by a complete semantic context.
+On the left, `N u*∼k` would force a ratio of powers of three to equal two. On the right,
+`N A p` has positive second and third coordinates, whereas `c*` has opposite signs there.
+Both contexts must contain genuinely incomplete gaps.
+
+## Forced Determinant Rays
+
+The delayed report additionally classifies exact determinant identities. If fixed contexts make
+`det Kρ(CND)` a nonzero multiple of the cross-multiplied terminal polynomial, coefficient
+comparison forces
+
+```text
+C u* ∼ k,
+Dᵀ v* ∼ n,
+
+v*=(t,−m,0)ᵀ,       n=(22,−31,−36)ᵀ.
+```
+
+This uniqueness calculation and its Cauchy-Binet derivation were independently checked but not
+retained as another formal layer. The weaker right equation `D A p∼c*` already feeds the checked
+conditional compiler and is the smaller live target.
+
+## Withdrawn Cylinder
+
+The former claims
+
+```text
+ν₃(a₁)−ν₃(a₀)=n+β+1
+```
+
+and the associated leading-unit and unreduced equations used the false relation `Y=X+mσ`.
+They have no evidentiary standing. Any oriented arithmetic attack must be re-derived from
+`Y=tX+m` or, preferably, attack the exact mixed-gap ray equations directly.
 
 ## Claim Disposition
 
 | Claim | Disposition |
 | --- | --- |
-| Complete semantic-middle conjugacy | formalized |
 | Complete original atom and word evaluation | formalized |
-| Exact bridge determinant and nonempty negativity | formalized |
-| Endpoint-independent coefficient law | formalized inside the same-zero theorem |
-| Fixed-ray formal terminal recognition | refuted and formalized |
-| Exact 3-adic cylinder and leading unit for a genuine hit | audited; necessary only |
-| Original empty punctuation cannot surround a terminal block | audited consequence of the cylinder |
-| Global nonincidence for arbitrary mixed bridges | open |
-| An actual legal or malformed incidence hit | open |
+| Complete-middle conjugacy and bridge determinant | formalized |
+| Negative determinant for every nonempty complete word | formalized |
+| Correct actual terminal plane `Y=tX+m, τ=tσ` | reconstructed |
+| Fixed-ray formal-plane recognition | obstructed and formalized |
+| Fixed-ray recognition only on the discrete code locus | open |
+| Conditional mixed-gap endpoint compiler | formalized |
+| Complete-gap attainment of either compiler endpoint | obstructed and formalized |
+| Forced determinant rays | audited |
+| Uniform malformed witness for the pure length test | audited |
+| Former depth-`n+β+1` cylinder | rejected |
+| Mixed-gap endpoint reachability and global converse | open |
 | `M₄(3)` | open |
 
 ## Frontier Cut
 
-Delete complete semantic blocks as endpoint walls and delete all fixed-ray attempts to make one
-intact complete block equal the terminal plane. The semantic node survives only through
-history-dependent or malformed endpoint geometry, incomplete gaps, or a discrete incidence not
-obtained from formal-plane recognition. The oriented node is now exact: decide whether reachable
-left walls can enter the depth-`n+β+1` cylinder with the required leading unit and satisfy the
-remaining rational equation.
+Delete the false cylinder. Delete complete-gap endpoint contexts and fixed-ray formal-plane
+identities. The live semantic construction is now exact: find regular mixed-gap words `C,D`
+reaching `u*→k` and `A p→c*`, uniformly in the Neary instance, then prove the consecutive-wall
+converse. The opposing route proves either target unreachable under every regular mixed-gap word
+or produces a malformed exact incidence.
 
 ## Artifact
 
