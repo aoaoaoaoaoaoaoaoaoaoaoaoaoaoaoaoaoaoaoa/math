@@ -476,6 +476,15 @@ orientation changes, overlapping rays, erasure, regular modes, and an indefinite
 do not help. The residual must retain at least two independent unbounded factors, unbounded word
 order at fixed length, or a halting-dependent normal form unavailable to the reduction.
 
+[`G3-D04`](SALVAGE.md#g3-d04-priority-affine-residual-atlas) closes every finite-dimensional
+fixed-priority affine-counter enlargement of that normal form. Modes, arbitrary counter
+reversals, recurrent exact tests, and any computable number of independent factors remain
+decidable whenever updates are translations guarded by constants on one nested initial segment.
+The reduction is to VASS with nested zero tests; Lean checks the exact debit-test-credit macro and
+the finite atlas theorem is audited against the LICS 2025 reachability result. A surviving global
+residual must therefore use incomparable or changing-priority tests, transfer/reset/copy
+operations, genuine word order, or a halting-dependent atlas unavailable to the reduction.
+
 The body-independent Hankel certificate
 [`MM-O04`](SALVAGE.md#mm-o04-uniform-rank-four-paired-series) proves that the
 current three-control paired coefficient series has exact rank four already on `{b,t}*`.
@@ -531,9 +540,17 @@ destroy the cancellative orbit.
 real, not a missing lemma. Three explicit rank-two integral matrices have complete zero language
 `{t}`, full reachable and observable context matrices, no zero product, and an injective positive
 semantic labeling into a group containing `F₂×F₂`. Yet the `b`-shift identifies the columns of
-`ε` and `t`. Positive shift equations therefore do not imply inverse saturation. The lower-bound
-leaf now requires two paired-specific theorems: backward cancellativity of terminal residuals and
-cofinal positive representation of the inverse orbit.
+`ε` and `t`. Positive shift equations therefore do not imply inverse saturation.
+
+[`G3-O17`](SALVAGE.md#g3-o17-paired-inverse-chamber) now closes the paired-specific repair.
+Every actual suffix residual has reduced sign form `+*−*`, and every phase-aware prefix residual
+has form `−*+*`. Two explicit formal inverse states required by the independent left and right
+free factors contain both sign turns. Every Neary upper role ends in `z` and every lower role ends
+in `x`, so no positive role continuation cancels either protected turn. Lean proves both complete
+forward cones disjoint from every actual residual. Grammar-intrinsic inverse cofinality and every
+Ore/common-future version of the saturation leaf are therefore false. A lower bound must use a
+finite positive projective transition diagram with actual ranks, kernels, images, and base loci;
+formal group completion is no longer a raceable argument.
 
 [`G3-O06`](SALVAGE.md#g3-o06-periodic-ray-completion-and-branching-fracture) closes the concrete
 `bcbb` lane completely. Its null histories are exactly `(bbb,cbb)^k`, its terminal language is
@@ -572,6 +589,15 @@ code has nonzero cylinder determinant `B²(B−1)(d_b−d_c)`, even with denomin
 outside the legal locus. A surviving uniform constructor must be history-sensitive and singular
 on legal inputs: at least one full cylinder must lie in a plane, while a transient coordinate
 remembers enough route information to police the forced persistent collision.
+
+[`G3-S02`](SALVAGE.md#g3-s02-rank-two-kernel-bifurcation) splits that singular escape into two
+real architectures. With one common data kernel preserved by the toggle, a route difference
+already in the kernel is erased by the first later data action; persistence is impossible, but a
+fresh transient guard may still be minted after every data step. With transverse data kernels,
+the two quotient fibres meet in the exact bilinear ray `[rv:us:vs]`, retaining one coordinate
+visible to each data map and their common scale. The first branch needs an all-word refresh
+invariant; the second needs a source-computable shift-equivariant surface in `P¹×P¹`. Neither is
+subsumed by the other, and neither is yet a uniform recognizer.
 
 [`G3-M02`](SALVAGE.md#g3-m02-square-root-punctuation-fracture) supplied a complete direct-mortality
 grammar. The source-uniform rational rank-two matrix `S` satisfies
@@ -627,6 +653,26 @@ padding of a genuine witness. The remaining compiler must carry this affine equa
 three positive controls using an everywhere-invertible infinite fibre or semantics which do not
 retain the two-dimensional invertible cancellation quotient.
 
+[`G3-M03`](SALVAGE.md#g3-m03-three-positive-affine-exponent-cover) removes positive spelling,
+domain recognition, and identity padding from that obligation. The three positive letters
+
+```text
+x↦a,       y↦b,       z↦b⁻¹a⁻¹,       ω(x,y,z)=(1,0,−1)
+```
+
+surject onto every prescribed `a`-exponent slice of `F₂`, with `ω` equal to that exponent on
+every arbitrary positive word. A Nielsen-Schreier embedding transports Carvalho's primitive
+exponent to one slice, so halting is exactly a graph-correlated equalizer together with one
+affine weight equation over three positive controls. Positive identity padding preserves both
+conditions. The remaining problem is joint detection and extension from the correlated subgroup,
+not a normal-form parser.
+
+[`G3-O16`](SALVAGE.md#g3-o16-full-augmented-pair-dimension-tax) excludes the brutish completion:
+a homomorphic detector for all independent triples in `F×F×ℤ` would contain two commuting
+faithful free groups and needs at least four dimensions. This does not exclude the program-
+correlated graph. The live compiler must preserve that correlation throughout a graph-specific
+cocycle; first representing two arbitrary group values and an independent counter is dead.
+
 The ordinary mortality lift is likewise no longer part of the paired obstruction. For arbitrary
 controls `H_a`, column `γ`, and row `λ` over a field, adjoining `γλ` gives mortality exactly when some
 `λH_yγ` vanishes. A zero product without the separator is already a scalar-zero witness; after
@@ -673,6 +719,14 @@ unrestricted telescope admits a false underflow witness. The known three-rule se
 rewrites arbitrary substrings, so its rule-name trace omits redex contexts and does not satisfy
 this interface without a new context transporter.
 
+[`G3-C04`](SALVAGE.md#g3-c04-head-separated-endpoint-debt) makes arbitrary-trace soundness local
+for a broad subclass. If every produced word is nonempty and its head symbol occurs nowhere in
+the corresponding consumed word, the first illegal prefix creates an unrepairable debt; Lean
+proves every aggregate endpoint equality is then a lawful derivation and discharges the complete
+`G3-C03` forcing hypothesis. The live source problem is therefore to obtain undecidability with
+three head-separated productions while retaining an open unbounded word residue. It is no longer
+a simultaneous source-and-compiler correctness problem.
+
 [`G3-D03`](SALVAGE.md#g3-d03-one-sided-corrected-drift) closes a broad source class before
 compilation. If some positive target-symbol weighting and finite-state potential make every trim
 transition drift in one direction, terminal equality bounds every accepting residual and exact
@@ -684,48 +738,53 @@ delay, equal-height tableau, or acyclic verification tail cannot be its computat
 
 | Lane | Available leverage | Decisive obstruction or obligation |
 | --- | --- | --- |
-| Shift-equivariant zero incidence | Same-zero dimension three is point-line incidence in `P²`; [`G3-C02`](SALVAGE.md#g3-c02-fixed-bcbc-singular-recognizer) compiles the fixed branching test, while [`G3-O04`](SALVAGE.md#g3-o04-expanding-affine-history-no-go) kills its finite-target affine extension, [`G3-O05`](SALVAGE.md#g3-o05-cancellative-projective-state-tax) kills inverse-saturated dynamics, and [`G3-O12`](SALVAGE.md#g3-o12-positive-reset-dimension-tax) kills faithful full-cylinder queue codes | Build one computable history-sensitive singular formula over a mixed source ensemble; a legal cylinder must collapse to a plane and a transient coordinate must police the collision |
-| Positive free-cancellation discrepancy | Free cancellation performs queue-head deletion, and Carvalho halting is an exponent-one equalizer slice | Compile `g(u)=h(u), κ(u)=1` through three positive controls; [`G3-O14`](SALVAGE.md#g3-o14-positive-cancellation-spelling-dichotomy) kills finite fibres and singular one-coordinate quotient lifts, while [`G3-O15`](SALVAGE.md#g3-o15-triangle-normal-form-rank-six) kills a separate syntax guard |
-| Global word-residual recoding | Longer noncommutative target atoms may discard additive bit-count preservation entirely | [`G3-O13`](SALVAGE.md#g3-o13-rational-serializer-pumping) kills rational exact side transport, [`G3-D01`](SALVAGE.md#g3-d01-bounded-prefix-residuals) kills bounded lag, and [`G3-D02`](SALVAGE.md#g3-d02-virtually-cyclic-prefix-discrepancy) kills every computably supplied one-carrier normal witness; a survivor needs at least two independent counters, genuine word-order entropy, or a halting-dependent normal form |
-| New three-schema rewriting source | [`G3-C03`](SALVAGE.md#g3-c03-endpoint-prefix-compiler) compiles endpoint-forcing three-production normal systems directly | Prove endpoint forcing and recurrent mixed drift under every positive weighting; arbitrary-substring rule traces and one-sided finite-phase systems fail |
-| Exclusive stochastic or affine recognition | Zero/nonzero languages can be much smaller than exact coefficient series | Affine normalization, quantum measurement, and finite pair separation are not raw integer scalar-zero representations |
-| Direct projective or affine dynamics | Three `3 × 3` controls can encode switched dynamics on two homogeneous coordinates | Unguarded matrix choice demands an irreversible checksum for every illegal branch |
-| Semigroup ideals and reset structure | Rees or Brandt incidence can make incompatible phases fall into a zero ideal | Natural representations usually spend dimension on control states; the full arbitrary-product grammar remains mandatory |
+| Common-kernel guard refresh | The fitted singular recognizer proves a transient route guard can police one complete local grammar | A kernel-carried difference dies at the next data action; mint a fresh guard after every data step and prove the complete all-word invariant uniformly in `(β,body)` |
+| Transverse-kernel bilinear recurrence | Two rank-two quotient fibres meet exactly in `[rv:us:vs]` | Construct a computable invariant surface in `P¹×P¹`, closed under every shift and malformed word, with the exact terminal section |
+| Positive projective transition lower bound | Same-zero dimension three is point-line incidence in `P²`, and actual one-sided shifts retain finite rank/kernel/image data | Exhibit a finite shift-closed diagram impossible for every singular rank pattern; static support rank and formal inverse completion are forbidden |
+| Global word-residual recoding | Longer noncommutative atoms can retain order while discarding the four additive role channels | Escape `G3-D04`: fixed-priority affine counters, arbitrary reversals, and any computable finite dimension are decidable |
+| Head-separated three-schema source | `G3-C04` discharges every arbitrary-trace forcing obligation locally | Prove undecidability with exactly three head-separated prefix productions, an open word residue, and both drift signs under every positive weighting |
+| Graph-specific exponent-one equalizer | `G3-M03` gives an exact three-positive affine cover with harmless identity padding | Detect equality and affine weight on the correlated Carvalho graph; full `F×F×ℤ`, finite fibres, singular quotient lifts, and a separate syntax guard are closed |
 
-The first, fifth, sixth, and seventh lanes principally target direct `M₃(4)`. The third and
-fourth can produce a genuine `GPCP(3)` theorem. The free-group lane is hybrid:
-it supplies the missing deletion semantics but not yet the bounded positive source.
+These six lanes form three trunks. The first three race a direct paired construction against its
+one-sided projective lower bound. The next two seek genuine `GPCP(3)` through either global
+recoding or a native source. The last is a hybrid free-cancellation source already normalized to
+three positive controls.
 
 #### Raceable leaves
 
-After the seven-report open-node audit, the net tree has five independent mature leaves:
+After the five-report `e656e0d9` wave, the net tree has six independent raceable leaves:
 
-1. **History-sensitive singular paired constructor.** Give one computable three-state same-zero
-   family for every checked `(β,body)` and every control word, with at least one legal prepend
-   cylinder confined to a plane and a transient route guard separating the forced `q∼ε`
-   persistent collision.
-2. **Paired residual saturation.** Prove backward residual cancellativity and inverse-orbit
-   cofinality for the checked paired language, or find another broad shift-equivariant
-   contradiction. Positive common shifts, minimality, and a cancellative semantic completion no
-   longer suffice.
-3. **Global word-residual GPCP recoding.** Abandon exact side transport and prove a
-   three-pair normal form with at least two independent unbounded factors, genuine word-order
-   entropy, or a halting-dependent description unavailable to the reduction, together with both
-   witness-transport directions.
-4. **Endpoint-forcing native three-schema source.** Build an undecidable three-production prefix
-   normal family satisfying [`G3-C03`](SALVAGE.md#g3-c03-endpoint-prefix-compiler), with an
-   unbounded word-valued context channel and recurrent drift of both signs under every positive
-   weighting. The terminal equality must reconstruct every arbitrary rule-name trace.
-5. **Exponent-one positive cancellation.** Compile Carvalho's affine equalizer slice
-   `g(u)=h(u), κ(u)=1` through three positive controls. The carrier must have an everywhere-
-   invertible infinite fibre or abandon the two-dimensional invertible quotient; it need not and
-   must not select one triangle-irreducible spelling.
+1. **Common-kernel refresh constructor.** Give one computable three-state paired recognizer in
+   which each data action erases the old kernel guard and simultaneously creates the next one.
+   Prove its state formula and scalar-zero equivalence on the complete free control monoid.
+2. **Transverse-kernel bilinear constructor.** Realize the fibre law `[rv:us:vs]` on one
+   source-computable invariant surface, including exceptional fibres, both shifts, malformed
+   controls, and the exact terminal section.
+3. **Positive projective transition-diagram obstruction.** Produce a finite actual paired diagram
+   which no three-dimensional rational same-zero representation can realize for any combination
+   of generator ranks and kernels. It must use shifts; the conic already realizes every static
+   incidence table, and `G3-O17` forbids inverse saturation as a premise.
+4. **Global non-priority word-residual recoding.** Give a computable three-pair reduction with
+   both witness directions and a complete arbitrary-new-word converse. Its searchable witnesses
+   must use changing/incomparable tests, nonadditive transfers, or genuine unbounded word order
+   outside `G3-D04`.
+5. **Head-separated native three-schema source.** Build an undecidable family of exactly three
+   prefix-normal productions satisfying `G3-C04`, with an unbounded word-valued residual and
+   mixed recurrent drift under every positive weighting. The checked compiler then gives
+   `GPCP(3)` without another soundness theorem.
+6. **Graph-specific exponent-one affine equalizer.** Starting from the exact `G3-M03` positive
+   cover, compile transported equality plus weight `d` into ordinary `GPCP(3)` or a three-state
+   scalar-zero family. Preserve the program correlation; do not represent independent
+   `F×F×ℤ` data or select a positive normal spelling.
 
-Generic projective, stochastic, Rees/Brandt, and singular-reset ideas are implementation
-vocabularies inside leaf 1 until they supply a distinct source interface and complete
-all-word theorem. Another fixed-body fit, fixed macro, or punctuation placement is not a leaf.
-The joint derivation and evidence boundaries are recorded in
-[`m34-open-node-salvo-synthesis-2026-08-08.md`](audits/m34-open-node-salvo-synthesis-2026-08-08.md).
+The count rose by one only because the former singular-constructor leaf split along a proved
+kernel dichotomy. The paired saturation leaf was deleted outright and replaced by a genuinely
+one-sided lower-bound problem. Generic stochastic, Rees/Brandt, affine, and singular-reset ideas
+are implementation vocabularies inside leaves 1–3 until they furnish an exact source interface
+and all-word theorem. Another fixed-body fit, fixed macro, punctuation placement, affine atlas,
+or formal-inverse argument is not a leaf. The joint derivation and evidence boundaries are
+recorded in
+[`m34-wave-e656e0d9-synthesis-2026-08-10.md`](audits/m34-wave-e656e0d9-synthesis-2026-08-10.md).
 
 #### Operational program
 
@@ -755,8 +814,10 @@ Any positive construction must then extend to one symbolic family computable fro
 
 on every control word and every admissible body. Its projective orbit must leave the finite-mode
 expanding affine class of `G3-O04`; merely changing radix, digits, collisions, conjugacy, or chart
-count repeats a closed route. It must evade `G3-O05`: formal inverse role continuations must
-either be undefined, lose the target equivalence, or be collapsed by a singular positive action.
+count repeats a closed route. `G3-O17` proves that the semantic orbit is already intrinsically
+one-way: two required formal inverse components have no positive common future. A constructor
+should exploit that absence through singular positive dynamics, not attempt to represent the
+inverse completion excluded by `G3-O05`.
 A parameter such as `K=κ(a terminal role word)`, including the fitted targets in `G3-C02`, is
 forbidden unless a total source-computable formula produces it on
 both mortal and immortal inputs. Finite synthesis should share one formula template across a
@@ -766,23 +827,33 @@ already fits every finite prefix-suffix table in three coordinates. Synthesis an
 experiments must impose the same `H_b,H_c,H_t` on every left and right shift. The strongest
 candidate escape is a history-sensitive singular ideal grammar whose data collapse occurs on the
 legal chart and whose transient guard irreversibly destroys illegal histories. Denominator growth
-outside a faithful full queue chart is closed by `G3-O12`. A further no-go must establish backward
-residual cancellativity and inverse-orbit cofinality from the paired terminal grammar itself;
-`G3-O11` refutes every derivation using only positive shift equivariance, minimality, or the
-ambient group completion. Do not spend another attack on separator placement, fixed anchors, or
-control singularity after recognition; `MM-C01` closes them unconditionally.
+outside a faithful full queue chart is closed by `G3-O12`.
 
-The free-group lane no longer needs another Stallings computation or positive normal-form machine.
-Its next experiment starts from the exponent-one equalizer predicate itself. Race an
-everywhere-invertible unbounded cocycle which transports both group discrepancy and `κ`, against a
-three-positive-letter source compiler whose quotient may identify every identity padding. A
-singular third coordinate over the persistent invertible quotient is closed by `G3-O14`; a
-standalone triangle syntax series requires six states by `G3-O15`.
+Rank-two data maps must now branch at the outset. A common-kernel construction may use only a
+fresh guard between consecutive data actions; any difference already in the kernel is erased at
+the next one. A transverse-kernel construction must realize the bilinear fibre intersection
+`[rv:us:vs]` on a shift-invariant surface. A lower-bound attack must exclude both positive
+architectures through actual transition data. Backward cancellation, inverse cofinality, and
+static incidence cannot do so. Do not spend another attack on separator placement, fixed anchors,
+or control singularity after recognition; `MM-C01` closes them unconditionally.
 
-The native source race now has one exact acceptance test. Supply three productions
-`αₓX⟶Xβₓ` and prove that `sβ(w)=α(w)t` forces every cumulative `α` prefix for every arbitrary
-trace `w`; [`G3-C03`](SALVAGE.md#g3-c03-endpoint-prefix-compiler) then performs the entire GPCP
-reduction. The source must fail both positive and negative drift feasibility from
+The global recoding lane must now state its non-priority mechanism before algebra begins.
+Adding finitely many affine factors, sign modes, counter reversals, and recurrent nested tests is
+inside `G3-D04`. The credible exits are changing or incomparable tests, nonadditive transfer and
+reset operations, or a literal word-order carrier whose same-length entropy is unbounded.
+
+The free-group lane no longer needs another Stallings computation, domain parser, or positive
+normal-form machine. `G3-M03` already presents the exponent-one equalizer on three positive
+letters with exact affine weight and harmless identity padding. The next experiment must jointly
+detect transported equality and that weight on the correlated program graph. Extending first to
+independent `F×F×ℤ` data is four-dimensional by `G3-O16`; a singular third coordinate over a
+persistent invertible quotient is closed by `G3-O14`; a standalone syntax series requires six
+states by `G3-O15`.
+
+The native source race now has a local sufficient acceptance test. Supply three head-separated
+productions `αₓX⟶Xβₓ`; `G3-C04` then proves that `sβ(w)=α(w)t` forces every cumulative `α` prefix
+for every arbitrary trace, and `G3-C03` performs the entire GPCP reduction. The source must fail
+both positive and negative drift feasibility from
 [`G3-D03`](SALVAGE.md#g3-d03-one-sided-corrected-drift). Recasting the known arbitrary-substring
 three-rule system without transporting redex contexts is underflow, not a compiler.
 
