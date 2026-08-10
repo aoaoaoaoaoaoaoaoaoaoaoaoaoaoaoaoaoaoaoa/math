@@ -27,6 +27,16 @@
 'MatrixMortality.TernaryClosedBlockNoGo.upperResidualShift_cases' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.WordDiscrepancy.prefixComparable_of_append_eq' depends on axioms: [propext]
+'MatrixMortality.WordDiscrepancy.mismatch_persists' depends on axioms: [propext]
+'MatrixMortality.WordDiscrepancy.positive_positive_transition' depends on axioms: [propext]
+'MatrixMortality.WordDiscrepancy.positive_negative_transition' depends on axioms: [propext]
+'MatrixMortality.WordDiscrepancy.negative_negative_transition' depends on axioms: [propext]
+'MatrixMortality.WordDiscrepancy.negative_positive_transition' depends on axioms: [propext]
+'MatrixMortality.WordDiscrepancy.positive_terminal' depends on axioms: [propext]
+'MatrixMortality.WordDiscrepancy.negative_terminal' depends on axioms: [propext]
+'MatrixMortality.PriorityAffineResidual.nestedZero_mono' does not depend on any axioms
+'MatrixMortality.PriorityAffineResidual.guardedTranslation_iff_nestedZeroMacro' depends on axioms: [propext, Quot.sound]
 'MatrixMortality.EndpointPrefixCompiler.DerivesAlong.endpointEquation' depends on axioms: [propext]
 'MatrixMortality.EndpointPrefixCompiler.endpointEquation_iff_derivesAlong' depends on axioms: [propext]
 'MatrixMortality.EndpointPrefixCompiler.derivesAlong_of_endpointEquation_of_headSeparated' depends on axioms: [propext,

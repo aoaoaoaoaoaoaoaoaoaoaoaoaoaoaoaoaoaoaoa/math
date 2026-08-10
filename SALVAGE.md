@@ -134,6 +134,7 @@ file owns the mathematical stock.
 | [`G3-D01`](#g3-d01-bounded-prefix-residuals) | decidable stratum | a supplied bound on every accepting prefix residual gives a finite decision graph | audited | stock |
 | [`G3-D02`](#g3-d02-virtually-cyclic-prefix-discrepancy) | decidable stratum | finite-mode capped periodic residual rays reduce to one-counter reachability | audited; formalized core | graduated |
 | [`G3-D03`](#g3-d03-one-sided-corrected-drift) | decidable stratum | one-sided positive weighted drift bounds every accepting residual | audited; formalized core | graduated |
+| [`G3-D04`](#g3-d04-priority-affine-residual-atlas) | decidable stratum | finite-dimensional proper affine residuals with nested priority guards reduce to VASSnz | audited; formalized core | graduated |
 | [`G3-C03`](#g3-c03-endpoint-prefix-compiler) | compiler | endpoint-forcing three-production normal systems compile directly to `GPCP(3)` | formalized | active |
 | [`G3-C04`](#g3-c04-head-separated-endpoint-debt) | compiler criterion | a fresh output head makes every endpoint witness causally lawful | formalized | active |
 | [`G3-O06`](#g3-o06-periodic-ray-completion-and-branching-fracture) | compiler and obstruction | `bcbb` has an exact three-state periodic compiler, while `bcbc` defeats every single affine positional section | formalized | graduated |
@@ -4682,6 +4683,53 @@ three-schema sources before attempting a GPCP compiler.
 checks that a nonnegative corrected trace spends at most its complete endpoint budget. The finite
 residual graph, potential criterion, and decision extraction are audited in
 [`m34-endpoint-prefix-compiler-2026-08-08.md`](audits/m34-endpoint-prefix-compiler-2026-08-08.md).
+
+### G3-D04: Priority-affine residual atlas
+
+**Kind:** decidable stratum
+
+**Evidence:** audited; formalized core
+
+**Disposition:** graduated
+
+Let a finite-mode normal-witness class parameterize every signed word residual by counters
+`n∈N^d`. Require the parameterization to be effectively proper: a bound on residual length
+effectively bounds every counter. Suppose every exact letter update is a finite union of affine
+translations
+
+```text
+n ↦ n+v
+```
+
+guarded by fixed values of the first `j` counters, for one global counter priority. Initial and
+terminal residual bounds then have finite counter preimages. Each guarded translation compiles
+exactly to three counter operations: subtract the guarded constants, zero-test the first `j`
+counters, and restore the constants while adding `v`. The resulting machine is a VASS with
+nested zero tests, whose reachability is decidable.
+
+Consequently, if an arbitrary-word converse is sound and every yes-instance has one witness in
+such a computably emitted atlas, the old predicate is decidable. The atlas may have any fixed
+finite dimension, cycles, reversals, sign modes, erasing images, and only one structured witness
+per yes-instance.
+
+**Scope:** guards must follow one fixed nested priority and updates must be additive translations.
+Incomparable recurrent zero tests, priority permutations, counter transfer or reset, unbounded
+word order not captured by counters, and a noncomputable halting-dependent atlas remain outside.
+The generic atlas assembly is an audited reduction; Lean checks the complete guarded-transition
+macro but does not reimplement VASSnz reachability.
+
+**Use:** reject every literal finite-factor residual carrier whose exponents evolve affinely under
+one nested guard hierarchy. A surviving global recoding must exhibit the precise non-priority,
+non-additive, or genuinely word-valued operation it uses.
+
+**Source:**
+[`guttenberg-czerwinski-lasota-2025-vass-nested-zero-tests.md`](references/guttenberg-czerwinski-lasota-2025-vass-nested-zero-tests.md).
+
+**Artifact:** [`PriorityAffineResidual.lean`](MatrixMortality/PriorityAffineResidual.lean) and
+[`m34-priority-affine-residual-atlas-2026-08-10.md`](audits/m34-priority-affine-residual-atlas-2026-08-10.md).
+
+**Next:** force either two incomparable recurrent tests, a changing priority, a nonlinear counter
+operation, or an unbounded freely ordered residual in every proposed three-pair recoding.
 
 ### G3-C03: Endpoint-prefix compiler
 

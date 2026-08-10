@@ -77,6 +77,7 @@ import MatrixMortality.BranchingRecognizer
 import MatrixMortality.SquareRootPunctuation
 import MatrixMortality.TernaryClosedBlockNoGo
 import MatrixMortality.WordDiscrepancy
+import MatrixMortality.PriorityAffineResidual
 import MatrixMortality.EndpointPrefixCompiler
 import MatrixMortality.ExpandingHistoryNoGo
 import MatrixMortality.CancellativeProjectiveNoGo

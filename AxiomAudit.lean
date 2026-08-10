@@ -19,6 +19,16 @@ open MatrixMortality
 #print axioms TernaryClosedBlockNoGo.ExactErasingMacroFactorization.four_le_card
 #print axioms TernaryClosedBlockNoGo.commonLowerDeletion_cases
 #print axioms TernaryClosedBlockNoGo.upperResidualShift_cases
+#print axioms WordDiscrepancy.prefixComparable_of_append_eq
+#print axioms WordDiscrepancy.mismatch_persists
+#print axioms WordDiscrepancy.positive_positive_transition
+#print axioms WordDiscrepancy.positive_negative_transition
+#print axioms WordDiscrepancy.negative_negative_transition
+#print axioms WordDiscrepancy.negative_positive_transition
+#print axioms WordDiscrepancy.positive_terminal
+#print axioms WordDiscrepancy.negative_terminal
+#print axioms PriorityAffineResidual.nestedZero_mono
+#print axioms PriorityAffineResidual.guardedTranslation_iff_nestedZeroMacro
 #print axioms EndpointPrefixCompiler.DerivesAlong.endpointEquation
 #print axioms EndpointPrefixCompiler.endpointEquation_iff_derivesAlong
 #print axioms EndpointPrefixCompiler.derivesAlong_of_endpointEquation_of_headSeparated
