@@ -761,6 +761,15 @@ finite reachability decides solvability. A surviving source must keep an unbound
 and recurrently expand and contract under every positive weighting. A finite parser, bounded
 delay, equal-height tableau, or acyclic verification tail cannot be its computational store.
 
+[`G3-D06`](SALVAGE.md#g3-d06-functional-phase-transfer-guillotine) now removes the natural
+three-chamber repair. If rule `i` consumes positive projected charge from phase `i` and sends all
+net charge to one different phase `τ(i)`, the loopless functional graph has one cycle. Lean
+constructs positive phase weights with a common drift sign in every labeled topology and lifts
+them through any positive quotient to symbol weights; fixed-endpoint reachability is then finite.
+Arbitrary balanced payload and an open word residue do not help. The sharp surviving topology is
+two competing forward schemas `P→Q` and one return `Q→P`, with the two cycle products straddling
+one. Empty-consume pumping and genuinely phase-splitting transport are separate boundaries.
+
 #### Research lanes
 
 | Lane | Available leverage | Decisive obstruction or obligation |
@@ -769,7 +778,7 @@ delay, equal-height tableau, or acyclic verification tail cannot be its computat
 | Transverse-kernel terminal dynamics | Fixed integral transverse controls encode every history and exactly recognize all minimum bodies | Replace the singleton target row by an infinite, source-computable terminal section for unrestricted bodies |
 | Positive projective transition lower bound | Same-zero dimension three is point-line incidence in `P²`, and actual one-sided shifts retain finite rank/kernel/image data | Derive a uniform shift incompatibility from an unbounded terminal section; static support rank, formal inverse completion, and fixed equal-length return flowers are forbidden |
 | Global word-residual recoding | Longer noncommutative atoms can retain order while discarding the four additive role channels | Escape `G3-D05`: fixed-priority affine counters and all one-way reset/transfer/fanout cascades are decidable |
-| Head-separated three-schema source | `G3-C04` discharges every arbitrary-trace forcing obligation locally | Prove undecidability with exactly three head-separated prefix productions, an open word residue, and both drift signs under every positive weighting |
+| Head-separated three-schema source | `G3-C04` discharges every arbitrary-trace forcing obligation locally | Make the `G3-D06` forked two-cycle, an empty pump, or nonfunctional splitting carry an undecidable open word residue |
 | Graph-specific exponent-one equalizer | `G3-M03` gives an exact three-positive affine cover with harmless identity padding | Detect equality and affine weight on the correlated Carvalho graph; full `F×F×ℤ`, finite fibres, singular quotient lifts, and a separate syntax guard are closed |
 
 These six lanes form three trunks. The first three race a direct paired construction against its
@@ -798,10 +807,11 @@ After the five-report `e656e0d9` wave, the net tree has six independent raceable
    must use feedback or backward transfer, source-preserving copy, recurring priority cycles,
    counter products, changing/incomparable tests, or genuine unbounded word order outside
    `G3-D05`.
-5. **Head-separated native three-schema source.** Build an undecidable family of exactly three
-   prefix-normal productions satisfying `G3-C04`, with an unbounded word-valued residual and
-   mixed recurrent drift under every positive weighting. The checked compiler then gives
-   `GPCP(3)` without another soundness theorem.
+5. **Forked head-separated native source.** Build an undecidable family of exactly three
+   prefix-normal productions satisfying `G3-C04` around two competing `P→Q` schemas and one
+   `Q→P` return, with cycle products strictly on opposite sides of one and an unbounded
+   word-valued residual. The empty-pump and genuinely splitting variants remain secondary
+   constructions. Functional private-head routing is closed by `G3-D06`.
 6. **Graph-specific exponent-one affine equalizer.** Starting from the exact `G3-M03` positive
    cover, compile transported equality plus weight `d` into ordinary `GPCP(3)` or a three-state
    scalar-zero family. Preserve the program correlation; do not represent independent
@@ -890,7 +900,10 @@ productions `αₓX⟶Xβₓ`; `G3-C04` then proves that `sβ(w)=α(w)t` forces 
 for every arbitrary trace, and `G3-C03` performs the entire GPCP reduction. The source must fail
 both positive and negative drift feasibility from
 [`G3-D03`](SALVAGE.md#g3-d03-one-sided-corrected-drift). Recasting the known arbitrary-substring
-three-rule system without transporting redex contexts is underflow, not a compiler.
+three-rule system without transporting redex contexts is underflow, not a compiler. A pure
+private-head cycle is now equally dead: `G3-D06` gives it a positive one-sided weighting even
+with unbounded balanced payload. The primary source shape is the checked forked two-cycle; its
+mixed drift is necessary evidence, not yet a computational construction.
 
 No further local punctuation fusion of the four displayed pairs should be attempted. The audited
 boundary-aligned additive family is immortal, and `G3-O10` closes the nondegenerate square-root

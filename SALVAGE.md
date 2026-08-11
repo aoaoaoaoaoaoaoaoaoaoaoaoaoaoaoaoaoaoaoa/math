@@ -136,6 +136,8 @@ file owns the mathematical stock.
 | [`G3-D02`](#g3-d02-virtually-cyclic-prefix-discrepancy) | decidable stratum | finite-mode capped periodic residual rays reduce to one-counter reachability | audited; formalized core | graduated |
 | [`G3-D03`](#g3-d03-one-sided-corrected-drift) | decidable stratum | one-sided positive weighted drift bounds every accepting residual | audited; formalized core | graduated |
 | [`G3-D04`](#g3-d04-priority-affine-residual-atlas) | decidable stratum | finite-dimensional proper affine residuals with nested priority guards reduce to VASSnz | audited; formalized core | graduated |
+| [`G3-D05`](#g3-d05-priority-triangular-transfer-atlas) | decidable stratum | fixed-priority destructive transfer and fanout reduce to VASSnz drain stages | audited; formalized core | graduated |
+| [`G3-D06`](#g3-d06-functional-phase-transfer-guillotine) | decidable stratum | three functional positive phase transfers always admit one-sided drift | audited; formalized core | graduated |
 | [`G3-C03`](#g3-c03-endpoint-prefix-compiler) | compiler | endpoint-forcing three-production normal systems compile directly to `GPCP(3)` | formalized | active |
 | [`G3-C04`](#g3-c04-head-separated-endpoint-debt) | compiler criterion | a fresh output head makes every endpoint witness causally lawful | formalized | active |
 | [`G3-O06`](#g3-o06-periodic-ray-completion-and-branching-fracture) | compiler and obstruction | `bcbb` has an exact three-state periodic compiler, while `bcbc` defeats every single affine positional section | formalized | graduated |
@@ -4843,6 +4845,62 @@ nonlinear interaction, changing tests, or irreducible word order.
 
 **Next:** force a backward edge, source-preserving feedback, a recurring transfer cycle, a
 counter product, incomparable tests, changing priority, or an unbounded free-word residual.
+
+### G3-D06: Functional phase-transfer guillotine
+
+**Kind:** decidable stratum
+
+**Evidence:** audited; formalized core
+
+**Disposition:** graduated
+
+Let three productions have positive net phase transfers
+
+```text
+Qdᵢ = −Aᵢeᵢ+Bᵢeτ(i),    Aᵢ,Bᵢ>0,    τ(i)≠i,
+```
+
+where `Q` is a nonnegative phase-by-symbol quotient with positive support in every symbol
+column. The loopless functional graph `i↦τ(i)` is either one three-cycle or one two-cycle with a
+feeder. In all eight labeled cases, positive rational phase weights can kill two edge drifts
+exactly. The remaining edge chooses a common weak sign for all three. Lifting through `Q` gives
+a strictly positive symbol weighting with that same one-sided drift.
+
+For fixed source and target words, the induced word weight bounds every state in a successful
+derivation by the heavier endpoint. The bounded word graph is finite and effectively searchable,
+so every such functional private-head transporter has decidable reachability. Internal word
+order and arbitrarily large charge-balanced payload do not evade the argument.
+
+Lean checks the complete eight-shape classification, constructs the positive weights, proves the
+quotient-lifting identity and strict symbol positivity, and proves both directions of the local
+two- and three-cycle product inequalities. The finite reachability enumeration is audited rather
+than implemented as a second normal-system decision procedure.
+
+The boundary is sharp at the drift level. The head-separated fork
+
+```text
+ppX ⟶ Xq,    pX ⟶ Xqq,    qX ⟶ Xp
+```
+
+has a strict positive and a strict negative drift under every positive weighting. It represents
+two competing `P→Q` edges and one `Q→P` return, whose two cycle products straddle one. Lean proves
+this universal mixed-drift statement. It does not prove the fork undecidable.
+
+**Scope:** every rule must consume positive projected charge from its own phase and deposit all
+net positive charge into one definite different phase. Multiple forward edges from the same
+phase, empty-consume pumps, splitting into several target phases, overlapping incomparable phase
+channels, and displacements without such a positive quotient remain outside.
+
+**Use:** reject cyclic private-head queues, two-cycles with a functional feeder, and any
+balanced-payload refinement admitting the quotient above. A native head-separated source must
+now use a forked two-cycle with products on opposite sides of one, an empty pump, or genuinely
+nonfunctional phase splitting.
+
+**Artifact:** [`FunctionalPhaseNoGo.lean`](MatrixMortality/FunctionalPhaseNoGo.lean) and
+[`m34-functional-phase-transfer-2026-08-11.md`](audits/m34-functional-phase-transfer-2026-08-11.md).
+
+**Next:** make the forked two-cycle transport an unbounded word-valued computational residue, or
+prove a decision theorem that survives competing forward edges.
 
 ### G3-C03: Endpoint-prefix compiler
 

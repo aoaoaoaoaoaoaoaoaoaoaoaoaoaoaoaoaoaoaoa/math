@@ -48,6 +48,26 @@
  Classical.choice,
  Quot.sound]
 'MatrixMortality.PriorityTriangularResidual.reset_not_finite_translation_union' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.FunctionalPhaseNoGo.liftWeight_pos' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.FunctionalPhaseNoGo.symbolDrift_liftWeight' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.FunctionalPhaseNoGo.symbolDrift_liftWeight_of_transfer' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.FunctionalPhaseNoGo.RouteShape.next_ne_self' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.FunctionalPhaseNoGo.exists_routeShape' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.FunctionalPhaseNoGo.exists_positive_weight_oneSided' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.FunctionalPhaseNoGo.exists_positive_symbolWeight_oneSided' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.FunctionalPhaseNoGo.twoCycle_product_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.FunctionalPhaseNoGo.twoCycle_product_ge' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.FunctionalPhaseNoGo.threeCycle_product_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.FunctionalPhaseNoGo.threeCycle_product_ge' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.FunctionalPhaseNoGo.forkDrift_mixed' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.FunctionalPhaseNoGo.forkDrift_not_oneSided' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.FunctionalPhaseNoGo.emptyConsume_drift_pos' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.EndpointPrefixCompiler.DerivesAlong.endpointEquation' depends on axioms: [propext]
 'MatrixMortality.EndpointPrefixCompiler.endpointEquation_iff_derivesAlong' depends on axioms: [propext]
 'MatrixMortality.EndpointPrefixCompiler.derivesAlong_of_endpointEquation_of_headSeparated' depends on axioms: [propext,

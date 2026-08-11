@@ -82,6 +82,7 @@ import MatrixMortality.WordDiscrepancy
 import MatrixMortality.PriorityAffineResidual
 import MatrixMortality.PriorityTriangularResidual
 import MatrixMortality.EndpointPrefixCompiler
+import MatrixMortality.FunctionalPhaseNoGo
 import MatrixMortality.ExpandingHistoryNoGo
 import MatrixMortality.CancellativeProjectiveNoGo
 import MatrixMortality.PairedInverseChamber

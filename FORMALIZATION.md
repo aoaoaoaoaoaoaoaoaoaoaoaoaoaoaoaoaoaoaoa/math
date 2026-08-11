@@ -625,6 +625,16 @@ unbounded reset graph is not a finite union of translations, establishing strict
 `G3-D04`. Cascading private stages, finite atlas assembly, properness reduction, and VASSnz
 decidability remain audited rather than encoded as a new reachability implementation.
 
+[`G3-D06`](SALVAGE.md#g3-d06-functional-phase-transfer-guillotine) closes the functional
+private-head source architecture. Lean classifies all eight labeled loopless maps on three
+phases, constructs positive rational weights which kill two transfer drifts exactly, and proves
+that the remaining drift makes all three one-sided. A separate finite-sum theorem lifts those
+phase weights through every nonnegative quotient with positive column support to strictly
+positive symbol weights. Lean also checks the two- and three-cycle product inequalities and the
+sharp forked two-cycle whose three Parikh drifts remain mixed under every positive weighting. The
+bounded-word reachability enumeration induced by the one-sided weight is audited rather than
+implemented as a second decision procedure.
+
 [`G3-C03`](SALVAGE.md#g3-c03-endpoint-prefix-compiler) supplies the exact direct compiler for a
 three-production prefix normal system. Lean defines traced execution, proves that every lawful
 trace telescopes to its endpoint equation, and proves the converse under endpoint prefix forcing
@@ -892,6 +902,7 @@ with a complete arbitrary-word converse.
 | `WordDiscrepancy.lean` | first-mismatch permanence and exact signed free-monoid residual dynamics |
 | `PriorityAffineResidual.lean` | exact compilation of priority-affine guards into nested-zero-test counter macros |
 | `PriorityTriangularResidual.lean` | exact destructive drain-loop transfer and strict reset separation from finite translations |
+| `FunctionalPhaseNoGo.lean` | positive quotient lifting, complete three-functional-phase weighting, cycle products, and the sharp fork |
 | `EndpointPrefixCompiler.lean` | prefix-normal traces, endpoint-forcing three-pair compiler, underflow witness, and drift budget |
 | `Undecidability/PairedProblems.lean` | canonical four-matrix target instance and structural promises |
 | `Undecidability/BinaryProblems.lean` | canonical structured `Z₆(2)` instance |
@@ -926,6 +937,10 @@ with a complete arbitrary-word converse.
 | A forward destructive fanout is exactly a VASS drain loop followed by the next nested zero test | `PriorityTriangularResidual.drainTransfer_iff_exitIteration` |
 | The nested exit fixes the drain count and natural semantics forbids overdrain | `PriorityTriangularResidual.drainIteration_exit_steps`, `PriorityTriangularResidual.drainIteration_steps_le` |
 | Unbounded reset is not a finite union of fixed translations | `PriorityTriangularResidual.reset_not_finite_translation_union` |
+| Every loopless functional graph on three phases has one three-cycle or a two-cycle with feeder | `FunctionalPhaseNoGo.exists_routeShape` |
+| Every positive functional three-phase quotient induces a strictly positive one-sided symbol drift | `FunctionalPhaseNoGo.exists_positive_symbolWeight_oneSided` |
+| Local positive transfers force the corresponding two- and three-cycle product inequalities | `FunctionalPhaseNoGo.twoCycle_product_le`, `FunctionalPhaseNoGo.twoCycle_product_ge`, `FunctionalPhaseNoGo.threeCycle_product_le`, `FunctionalPhaseNoGo.threeCycle_product_ge` |
+| The forked two-cycle has both strict drift signs under every positive weighting | `FunctionalPhaseNoGo.forkDrift_mixed`, `FunctionalPhaseNoGo.forkDrift_not_oneSided` |
 | Endpoint prefix forcing makes the aggregate boundary equation equivalent to lawful traced execution | `EndpointPrefixCompiler.endpointEquation_iff_derivesAlong` |
 | A locally head-separated output makes every endpoint witness a lawful trace | `EndpointPrefixCompiler.endpointEquation_iff_derivesAlong_of_headSeparated`, `EndpointPrefixCompiler.endpointPrefixForcing_of_headSeparated` |
 | The unrestricted endpoint telescope has an explicit false underflow witness | `EndpointPrefixCompiler.underflow_endpointEquation`, `EndpointPrefixCompiler.underflow_not_derivesAlong` |
@@ -1208,6 +1223,11 @@ drain-stage gadget and the strict containment of resets beyond finite translatio
 cascade through private modes and the imported VASSnz decision theorem remain audited. No Lean
 declaration claims decidability for feedback, cyclic transfer, nonlinear multiplication,
 incomparable tests, or changing priority.
+
+The functional phase-transfer theorem `G3-D06` is kernel-checked through construction of the
+positive symbol weight. The last step, enumeration of the finite bounded word graph for fixed
+endpoints, is audited. No Lean declaration claims that the forked two-cycle, an empty-consume
+pump, or a nonfunctional splitting quotient is decidable or universal.
 
 For `G3-O03`, Lean checks the null-history counterexample, minimum-body uniqueness, base-five
 encoder, exact same-zero theorem, and integral mortality lift. The statement that both phase graph
