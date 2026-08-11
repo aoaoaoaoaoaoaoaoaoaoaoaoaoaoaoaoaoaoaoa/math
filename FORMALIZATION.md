@@ -559,6 +559,16 @@ consecutive projective incidence. For wall exterior state `(0,v,w)`, the explici
 and evidence boundary are in
 [`audits/m43-arbitrary-defect-2026-08-08.md`](audits/m43-arbitrary-defect-2026-08-08.md).
 
+The one-sided wall-orbit normal form
+[`M4-S07`](SALVAGE.md#m4-s07-one-sided-wall-orbit-normal-form) has a formal kernel spine in
+[`MatrixMortality/ParabolicIncidence.lean`](MatrixMortality/ParabolicIncidence.lean). Lean
+defines the canonical right kernel `coreLeftInverse ρ *ᵥ (adj(M) *ᵥ bladeKernel)`, proves that
+the exceptional output factor maps it back to `adj(M) *ᵥ bladeKernel` on the wall, proves that
+the bridge annihilates it, and proves nonvanishing for every regular wall word. The final
+two-wall identity and its one-sided exterior target are independently audited rather than
+claimed as formalized. The evidence boundary is
+[`audits/m43-one-sided-wall-orbit-2026-08-11.md`](audits/m43-one-sided-wall-orbit-2026-08-11.md).
+
 The original fixed-ray semantic route is obstructed by
 [`M4-O14`](SALVAGE.md#m4-o14-original-semantic-endpoint-obstruction), formalized in
 [`MatrixMortality/ParabolicSemanticObstruction.lean`](MatrixMortality/ParabolicSemanticObstruction.lean).
@@ -697,6 +707,7 @@ that excludes pseudo-terminals. The former oriented 3-adic cylinder is rejected.
 | `ParabolicSafeFlag.lean` | arbitrary safe-word flag, wall orientation, and exact residue-one `b` wound |
 | `ParabolicDefect.lean` | complete defect-run residue grammar, pure-defect bridge reset, and consecutive-wall projective fracture |
 | `ParabolicSemanticObstruction.lean` | complete-block determinant wall and fixed-ray formal terminal-plane obstruction |
+| `ParabolicIncidence.lean` | canonical nonzero right kernel of every regular wall bridge |
 | `ParabolicRetuned.lean` | retuned open root, sparse ternary code, determinant pencils, and unique gap-two singular atom |
 | `ParabolicRetunedBoundary.lean` | complete-gap semantics, literal physical contexts, fixed terminal minor and row, and complete-gap annihilator obstruction |
 | `ParabolicRetunedObstruction.lean` | explicit malformed terminal no-instance defeating the retuned fixed-row and original endpoint closures |
@@ -861,6 +872,7 @@ that excludes pseudo-terminals. The former oriented 3-adic cylinder is rejected.
 | Every nonempty pure-defect block has an invertible bridge | `ParabolicBlade.pureDefect_bridge_det_ne_zero` |
 | A varying wall chain vanishes exactly at one consecutive projective incidence | `ParabolicBlade.bridgeFractureChain_eq_zero_iff` |
 | A regular wall bridge has the explicit nonzero annihilating cokernel `(v,-4w)` | `ParabolicBlade.bridgeCokernel_eq_exteriorTail`, `ParabolicBlade.bridgeCokernel_regular_word_ne_zero`, `ParabolicBlade.bridgeCokernel_vecMul_bridge_of_wall` |
+| A regular wall bridge has a canonical nonzero right kernel | `ParabolicBlade.bridgeKernel_regular_word_ne_zero`, `ParabolicBlade.bridge_mulVec_bridgeKernel_of_wall` |
 | Every nonempty complete semantic block has a negative original bridge determinant | `ParabolicBlade.bridge_semanticWordMiddle_det_neg` |
 | Every nonempty complete original Neary word has a negative bridge determinant | `ParabolicBlade.completeTileProduct_eq_semanticWordMiddle`, `ParabolicBlade.bridge_completeTileProduct_det_neg` |
 | A fixed original incidence vanishing on the formal terminal plane vanishes on the whole length plane | `ParabolicBlade.semanticIncidence_terminal_forces_length`, `ParabolicBlade.no_fixed_semanticIncidence_terminal_zero_set` |

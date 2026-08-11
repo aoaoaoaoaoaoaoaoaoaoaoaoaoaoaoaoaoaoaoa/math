@@ -86,6 +86,7 @@ import MatrixMortality.ParabolicFlag
 import MatrixMortality.ParabolicSafeFlag
 import MatrixMortality.ParabolicDefect
 import MatrixMortality.ParabolicSemanticObstruction
+import MatrixMortality.ParabolicIncidence
 import MatrixMortality.ParabolicRetuned
 import MatrixMortality.ParabolicRetunedBoundary
 import MatrixMortality.ParabolicRetunedObstruction
