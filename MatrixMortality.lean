@@ -75,6 +75,7 @@ import MatrixMortality.PairedBoundaryTax
 import MatrixMortality.PairedBinaryFullAlgebra
 import MatrixMortality.PrefixFullAlgebra
 import MatrixMortality.ScheduledBinaryRank
+import MatrixMortality.SchottkyPunctuation
 import MatrixMortality.TwoStateObstructions
 import MatrixMortality.OverlapQueue
 import MatrixMortality.OverlapLag

@@ -128,6 +128,36 @@ theorem unitFamily_mortal_adjoin_outer_iff {α : Type*}
             rankOneIntercalatedProduct_formula column row 1 1 [wordProduct generators word]]
     simp [bridge_zero]
 
+/-- One rank-one separator carrying fixed data boundaries on its two rays. -/
+def boundaryOuter {α : Type*} (generators : α → Square ι 𝕜) (left right : List α)
+    (column row : ι → 𝕜) : Square ι 𝕜 :=
+  Matrix.vecMulVec (wordProduct generators right *ᵥ column)
+    (row ᵥ* wordProduct generators left)
+
+/-- Fixed boundaries cost no state and no generator: one boundary-bearing separator recognizes
+the scalar zero language between two arbitrary occurrences, with a converse over every physical
+word. -/
+theorem unitFamily_mortal_boundaryOuter_iff {α : Type*} [Nonempty ι]
+    (generators : α → Square ι 𝕜) (left right : List α) (column row : ι → 𝕜)
+    (generator_unit : ∀ label, IsUnit (generators label))
+    (column_ne : column ≠ 0) (row_ne : row ≠ 0) :
+    IsMortal (separatedGenerator
+      (boundaryOuter generators left right column row) generators) ↔
+      ∃ word : List α,
+        row ⬝ᵥ wordProduct generators (left ++ word ++ right) *ᵥ column = 0 := by
+  have right_unit := wordProduct_isUnit generators generator_unit right
+  have left_unit := wordProduct_isUnit generators generator_unit left
+  have bounded_column_ne : wordProduct generators right *ᵥ column ≠ 0 :=
+    unit_mulVec_ne_zero right_unit column_ne
+  have bounded_row_ne : row ᵥ* wordProduct generators left ≠ 0 :=
+    vecMul_unit_ne_zero row_ne left_unit
+  rw [boundaryOuter, unitFamily_mortal_adjoin_outer_iff generators _ _ generator_unit
+    bounded_column_ne bounded_row_ne]
+  apply exists_congr
+  intro word
+  rw [bridgeScalar_fold_boundaries]
+  rw [wordProduct_append, wordProduct_append]
+
 /-- A common fixed column replaces invertibility in the rank-one scalar-to-mortality compiler. -/
 theorem fixedAnchor_mortal_adjoin_outer_iff {α : Type*} (X : α → Square ι 𝕜)
     (anchor column row : ι → 𝕜) (fixed : ∀ label, X label *ᵥ anchor = anchor)

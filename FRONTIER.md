@@ -225,7 +225,7 @@ replace exact finite-state simulation.
 
 Victory means a checked many-one reduction to mortality of three integer `4 × 4` matrices,
 including a nonempty witness, denominator clearing, and soundness for every matrix word. The
-frontier has one live trunk and two independently attackable nodes.
+frontier now has two live trunks and four independently attackable nodes.
 
 #### Closed source trunk: positive overlap queues
 
@@ -439,6 +439,54 @@ cone separation (`M4-O10`). The annihilator guard [`M4-O06`](SALVAGE.md#m4-o06-p
 is discharged. Finite gap catalogues, bare rank-one incidence, defect-count casework, collective-
 wall cancellation, pure-defect endpoints, fixed-ray complete-block semantics, spare-eigenvalue
 checksums, and unproved flatness are not frontier work.
+
+#### Orthogonal trunk: free cancellation and homogeneous punctuation
+
+The Carvalho route no longer depends on compressing its high-rank Stallings presentation.
+The audited fixed-program specialization
+[`G3-M01`](SALVAGE.md#g3-m01-free-group-discrepancy-engine) reduces source halting to one
+positive sequential-transducer equation:
+
+```text
+∃τ∈{0,1,H,p}*, n≥0: τ p H^n=d_e Ψ(τ).
+```
+
+First-letter cancellation gives a converse for every positive `τ`. The natural closed-path
+subgroup nevertheless has rank `648b+7≥655`, and
+[`M4-O17`](SALVAGE.md#m4-o17-positive-nielsen-basis-obstruction) proves that the positive
+monoid on its explicit all-positive Nielsen basis intersects the equalizer only in the identity.
+Basis compression is not a live node.
+
+The matrix end of the route is now complete. The homogeneous punctuation mechanism
+[`M4-M05`](SALVAGE.md#m4-m05-boundary-guarded-homogeneous-punctuation) embeds a pair of binary
+free-group homomorphisms into two unimodular `4 × 4` left--right actions. If fixed binary
+boundaries `L,R` disagree at the empty interior, one rank-one boundary separator gives
+
+```text
+three integer 4 × 4 matrices mortal
+  ↔ ∃w∈{0,1}*: α(LwR)=β(LwR),
+```
+
+with a converse over every physical matrix word. The fifth affine coordinate is unnecessary.
+
+Two free-cancellation nodes survive and should be raced against each other.
+
+1. **Constructive binary compiler.** Compile the four-letter marker-tail equation into positive
+   binary fixed-boundary free-group equality, preserving solvability in both directions over the
+   complete binary free monoid and forcing an empty-interior mismatch. A solution closes
+   `M₄(3)` immediately through `M4-M05`.
+2. **Fixed-rank classification.** Decide the same restricted binary fixed-boundary problem, or
+   prove a structural obstruction to carrying the Carvalho equation.
+   [`Logan`](references/logan-2022-equalizer-rank-two.md) bounds injective equalizers from `F₂`
+   by rank two but gives no general triviality algorithm;
+   [`Ciobanu--Logan`](references/ciobanu-logan-2021-free-group-pcp-variations.md) use hypotheses
+   and a two-generator overhead to remove boundaries. A decision theorem kills this trunk and
+   must be sought as aggressively as the compiler.
+
+The two trunks cross-pollinate only at the master problem. The parabolic route is arithmetic
+projective reachability inside one explicit family; the Carvalho route is positive coding in a
+free group followed by a finished rank-one separator. Neither is supporting infrastructure for
+the other, and failure of one does not weaken the other.
 
 ### 2. Zero-set compression and fused punctuation: `M₅(3)`
 

@@ -621,12 +621,27 @@ that the admissible source `(β,body)=(3,bbcc)` has no terminal word, while ever
 of the `M4-C04` endpoint hypotheses kills a regular 33-tile middle containing `(b,30)`. Thus
 endpoint failure destroys completeness and endpoint success destroys soundness.
 
+The orthogonal free-group punctuation mechanism
+[`M4-M05`](SALVAGE.md#m4-m05-boundary-guarded-homogeneous-punctuation) has two formal layers.
+[`MatrixMortality/SchottkyPunctuation.lean`](MatrixMortality/SchottkyPunctuation.lean) defines
+the four-dimensional left--right action `B.adjugateᵀ⊗A`, proves its multiplication law and
+unimodularity, and computes its fixed row--column coefficient as the determinant of the first
+columns of `A` and `B`. The explicit Schottky ping-pong argument making this coefficient an
+equality detector is audited rather than Lean-checked.
+
+[`MatrixMortality/TerminalTile.lean`](MatrixMortality/TerminalTile.lean) now proves the generic
+boundary-fold theorem `unitFamily_mortal_boundaryOuter_iff`. For any unit data family, fixed
+left and right data words are absorbed into the two rays of one rank-one separator; mortality is
+equivalent to a zero scalar on one bounded interior word, with a converse over every placement
+and number of separators. No source compiler from Carvalho's four-letter marker-tail equation to
+positive binary fixed-boundary equality is claimed.
+
 No `M₄(3)` undecidability theorem follows from the present corpus. The exhaustive promised
 positive overlap-queue source class, the retuned fixed-row closure, the original fixed-ray
 formal-plane compiler, and the four-parameter `M4-C04` endpoint architecture are closed. The
-original matrix lane retains two distinct problems: classify every arbitrary consecutive wall
-incidence, or construct a syntax-sensitive semantic geometry or narrower universal source image
-that excludes pseudo-terminals. The former oriented 3-adic cylinder is rejected.
+original matrix lane retains exterior collision avoidance and syntax-sensitive semantics. The
+free-cancellation lane retains the positive binary fixed-boundary compiler and its opposing
+fixed-rank decision problem.
 
 ## Modules
 
@@ -696,7 +711,8 @@ that excludes pseudo-terminals. The former oriented 3-adic cylinder is rejected.
 | `MarkedTerminal.lean` | fresh marker, primitive terminality, and binary recoding |
 | `TernaryEncoding.lean` | injective nonzero ternary representation |
 | `PCPEncoding.lean` | `3 × 3` word-pair morphism and equality entry |
-| `TerminalTile.lean` | arbitrary rank-one chains and fracture at every separator |
+| `TerminalTile.lean` | arbitrary rank-one chains, fracture at every separator, and fixed-boundary folding into separator rays |
+| `SchottkyPunctuation.lean` | four-dimensional integral left--right action and homogeneous first-column incidence coefficient |
 | `TerminalReduction.lean` | rational and integer fixed-boundary mortality compiler |
 | `TerminalSource.lean` | generic primitive extraction and GPCP bridge |
 | `PairedCompression.lean` | reset/toggle specialization, explicit coordinate certificates, and arbitrary-word decoding |
@@ -770,6 +786,9 @@ that excludes pseudo-terminals. The former oriented 3-adic cylinder is rejected.
 | Arithmetic-envelope specialization | `NearyArithmeticEnvelope.mortality_iff_halts` |
 | Four ordinary matrices are nonsingular and triangular | `nearyMortality_ordinary_det_ne_zero`, `nearyMortality_ordinary_upperTriangular` |
 | Exceptional matrix is nonzero and rank one | `nearyMortality_terminal_ne_zero`, `nearyMortality_terminal_rank_eq_one` |
+| Fixed data boundaries fold into one rank-one separator with a complete mortality converse | `unitFamily_mortal_boundaryOuter_iff` |
+| The four-dimensional left--right coefficient is the determinant of two first columns | `SchottkyPunctuation.equalityCoefficient` |
+| Unimodular pairs give multiplicative unimodular left--right actions | `SchottkyPunctuation.leftRight_mul`, `SchottkyPunctuation.leftRight_det` |
 | Exact nonerasing Neary role macros require four letters | `ExactNearyMacroFactorization.four_le_card` |
 | A nonsingular finite Hankel section lower-bounds every exact realization | `finiteHankel_card_le` |
 | Exact diagonal two-channel bridges pay two additional states | `exactDiagonalTwoChannel_card_lower_bound` |

@@ -47,6 +47,8 @@ full text was located.
 | [MS05](matiyasevich-senizergues-2005-few-rule-semi-thue.md) | peer-reviewed TCS 2005; metadata only | Three-rule accessibility undecidability; Nicolas's source for the `GPCP(5)` lower bound |
 | [Carvalho26](carvalho-2026-free-group-pcp.md) | arXiv v2 preprint | Inverse-transducer discrepancy, implicit queue deletion by free cancellation, and all-path converse |
 | [CL20](ciobanu-logan-2020-pcp-equalisers.md) | peer-reviewed ICALP 2020; CC-BY | Decidable equalizers for marked monoid morphisms and free-group immersions |
+| [CL21](ciobanu-logan-2021-free-group-pcp-variations.md) | peer-reviewed DLT 2021; author manuscript | Relations among free-group PCP, fixed-boundary GPCP, rational constraints, and rank/basis computation, with exact source-rank overheads |
+| [Logan22](logan-2022-equalizer-rank-two.md) | peer-reviewed QJM 2022; CC-BY | Equalizers from `F₂` have rank at most two when an input map is injective; basis computation is proved only under retract-image hypotheses |
 | [MNU14](myasnikov-nikolaev-ushakov-2013-pcp-groups.md) | peer-reviewed J. Group Theory 2014; arXiv copy | Group PCP/GPCP formulations; warns against transferring group-rank counts to positive monoids |
 | [JingEtAl13](jing-gao-gao-gong-li-shao-zhang-2013-minimum-rank-three.md) | arXiv precursor to LAA 2018 | Rank-three zero patterns as projective point-line incidence; rational-real field hazard |
 | [Kiefer20](kiefer-2020-weighted-automata-minimization.md) | arXiv expository notes | Exact Hankel rank equals minimum weighted-automaton dimension; no same-zero lower bound |
