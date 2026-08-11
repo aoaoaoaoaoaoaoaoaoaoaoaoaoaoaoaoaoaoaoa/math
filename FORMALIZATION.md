@@ -662,8 +662,8 @@ For [`G3-M01`](SALVAGE.md#g3-m01-free-group-discrepancy-engine), the rank-`3m+1`
 basis, the trivial-or-cyclic fixed-subgroup classification, and the rank-zero-or-one equalizer
 corollary are audited consequences of Carvalho's explicit inverse transducer. Direct source
 inspection also proves the exponent-one equalizer sharpening
-`C halts ↔ ∃u, g(u)=h(u) ∧ κ(u)=1`. Lean does not reconstruct the transducer or this external
-equivalence.
+`C halts ↔ ∃u, g(u)=h(u) ∧ κ(u)=1` and the global character identity `χ∘g=χ∘h`. Lean does not
+reconstruct the transducer or these external consequences.
 
 [`G3-M03`](SALVAGE.md#g3-m03-three-positive-affine-exponent-cover) isolates the exact positive
 cover used by that surviving slice. Lean defines the first-generator exponent on `F₂` and the
@@ -673,6 +673,15 @@ of the matching exponent is surjective. The positive identity spelling `xyz` has
 padding preserves both the group value and affine constraint. The Nielsen-Schreier embedding of
 Carvalho's source group into the finite-index exponent subgroup and the full-pair `GL₃` no-go
 remain audited rather than formal dependencies.
+
+[`G3-O19`](SALVAGE.md#g3-o19-correlated-affine-slice-density) is wholly audited rather than a
+Lean dependency. For the synthetic graph `h=id`, `g(a)=a`, `g(b)=b²`, the equalizer and affine
+slices are checked by free-product normal form. Zariski density follows from dense projections,
+algebraic Goursat, and the unequal projective trace-squared values `16` and `196`; the
+dimension-four carrier bound then uses the characteristic-zero representations of
+`SL₂×SL₂`. Exact arithmetic reproduces the displayed `4×4` Hankel minor and determinant
+`1,197,990`. None of these claims is promoted to the actual Carvalho program graph or to a
+same-zero language lower bound.
 
 Lean checks the internal algebra at the positive boundary: three positive letters surject onto
 the binary free group; quotient-blind boundaries accepting `g` and `g²` admit a nonempty identity

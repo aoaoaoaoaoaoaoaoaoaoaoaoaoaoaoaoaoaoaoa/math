@@ -147,6 +147,7 @@ file owns the mathematical stock.
 | [`G3-O10`](#g3-o10-square-root-boundary-saturation) | obstruction | every nondegenerate rank-one square root preserves boundary coefficient zeros | formalized | graduated |
 | [`G3-M01`](#g3-m01-free-group-discrepancy-engine) | partial mechanism | free cancellation implements queue deletion; the accepting subgroup is cyclic | audited | active |
 | [`G3-M03`](#g3-m03-three-positive-affine-exponent-cover) | partial mechanism | three positive letters cover every affine first-exponent slice exactly | formalized | active |
+| [`G3-O19`](#g3-o19-correlated-affine-slice-density) | obstruction | the coarse Carvalho promises permit a correlated graph whose every exponent slice is Zariski dense | audited | graduated |
 | [`G3-O09`](#g3-o09-quotient-blind-positive-boundary-collapse) | obstruction | all-loop-complete group-factorizing boundaries accept a nonempty identity spelling | formalized core | graduated |
 | [`G3-O14`](#g3-o14-positive-cancellation-spelling-dichotomy) | obstruction | finite reversible spelling pumps, while singular one-coordinate spelling absorbs identity factors | formalized | graduated |
 | [`G3-O15`](#g3-o15-triangle-normal-form-rank-six) | obstruction | a standalone same-zero guard for triangle-irreducible spellings needs six states | formalized | graduated |
@@ -5382,7 +5383,10 @@ C halts  ↔  ∃u∈F_Y, g(u)=h(u) and κ(u)=1.
 ```
 
 This affine slice excludes the identity and selects the oriented primitive loop without choosing
-one positive spelling.
+one positive spelling. In fact the character is globally shared: every numbered-state edge has
+equal input and output `χ`, while the entry and inverse exit defects cancel on every closed loop.
+Since Theorem 4.1 defines `h` by input labels and `g` by output labels of a closed-path basis,
+`χ∘g=χ∘h` on all of `F_Y`, not merely on the equalizer.
 
 **Scope:** the source is a free group, not a positive free monoid. Low accepting rank and the
 exponent-one witness are existential; neither supplies a three-control free-monoid compiler.
@@ -5398,8 +5402,10 @@ it preserves the same genuine witness.
 **Artifact:**
 [`m34-free-group-discrepancy-2026-08-08.md`](audits/m34-free-group-discrepancy-2026-08-08.md).
 
-**Next:** realize `g(u)=h(u), κ(u)=1` through three positive controls using an everywhere-invertible
-unbounded cocycle, or abandon the persistent two-dimensional invertible quotient.
+**Next:** determine the Zariski closure of the actual program-dependent graph on `κ=1`, or realize
+`g(u)=h(u), κ(u)=1` through three positive controls with a spelling-sensitive or nonalgebraic
+carrier. Coarse shared-character and cyclic-equalizer promises alone cannot compress the pair by
+[`G3-O19`](#g3-o19-correlated-affine-slice-density).
 
 ### G3-M03: Three-positive affine exponent cover
 
@@ -5442,6 +5448,60 @@ or represent the group discrepancy and cocycle inseparably in three projective c
 
 **Next:** compile the subgroup-domain equalizer and weight equation jointly into ordinary
 three-pair GPCP or a three-state scalar-zero series.
+
+### G3-O19: Correlated affine-slice density
+
+**Kind:** obstruction
+
+**Evidence:** audited
+
+**Disposition:** graduated
+
+The coarse Carvalho promises do not force an algebraic dimension drop. Let `F=F(a,b)`,
+
+```text
+h=id,    g(a)=a,    g(b)=b²,    κ=expₐ.
+```
+
+Then `h` is injective, `κ∘g=κ∘h`, and `Eq(g,h)=⟨a⟩`; every slice
+`Eq(g,h)∩κ⁻¹(t)` is the singleton `{aᵗ}`. Under Carvalho's explicit faithful embedding
+`ρ:F₂→SL₂(ℤ)`, the correlated graph of `ker κ` has Zariski-dense projections. Algebraic Goursat
+leaves either the full product or the graph of an automorphism of `PSL₂`. The graph case would
+send `ρ(b)` to `ρ(b²)`, impossible because projective trace-squared is respectively `16` and
+`196`. Thus every fixed-`κ` slice of the correlated graph is Zariski dense in `PSL₂×PSL₂`.
+
+Any rational multiplicative carrier extending algebraically from this graph and depending
+nontrivially on both factors has dimension at least four: irreducible product representations
+have dimension `(m+1)(n+1)≥4`, and separate nontrivial constituents cost `2+2`. Projective and
+two-dimensional affine-cocycle versions have the same bound after lifting or homogenizing.
+
+The canonical mixed carrier has an explicit rank-four Hankel certificate. For rows
+`ε,x,y,xy` and columns `ε,z,xz,zy`, its scalar section is
+
+```text
+[[ 0, −2,   1, 465],
+ [ 0,  1,  22,  51],
+ [ 2,  0, 429,  23],
+ [−1,  0, 843,   2]],
+```
+
+with determinant `1,197,990`. Exact arithmetic independently reproduces the certificate.
+
+**Scope:** this is a synthetic correlated graph satisfying injectivity, a globally shared
+primitive character, cyclic equalizer, and singleton exponent-one slice. It is not proved to be
+the graph emitted by Carvalho's cyclic-tag reduction. The example's accepted language is
+visibly `π(w)=a` and itself has a two-state same-zero detector, so the result is not a general
+same-zero or language-rank lower bound.
+
+**Use:** reject every proposed dimension-three theorem derived only from the coarse source
+promises or from conditioning on the shared affine character. A viable algebraic attack must use
+additional structure of the actual program graph; otherwise it must become spelling-sensitive,
+nonalgebraic, or infinite-dimensional before scalarization.
+
+**Source:** [`carvalho-2026-free-group-pcp.md`](references/carvalho-2026-free-group-pcp.md).
+
+**Artifact:**
+[`m34-correlated-affine-slice-density-2026-08-11.md`](audits/m34-correlated-affine-slice-density-2026-08-11.md).
 
 ### G3-O09: Quotient-blind positive boundary collapse
 

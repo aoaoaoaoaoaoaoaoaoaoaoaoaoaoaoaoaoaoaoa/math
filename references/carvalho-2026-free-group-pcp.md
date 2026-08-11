@@ -55,6 +55,24 @@ This is a derived affine-slice corollary, not a theorem stated in the preprint. 
 positive-cancellation target because exponent one excludes the identity without selecting a
 particular positive spelling.
 
+The same transition audit gives a stronger global identity. Every numbered-state edge has equal
+input and output `χ`; in output-minus-input convention, the entry edge has defect one and its
+inverse exit has defect minus one. Every reduced loop at the initial state uses the entry and exit
+once, so its total defect is zero.
+Theorem 4.1 takes a basis of these input loops for `h` and their output labels for `g`. Therefore
+
+```text
+χ∘g = χ∘h
+```
+
+on the entire source free group, not only on its equalizer. This is again a derived consequence
+of the displayed construction rather than a separately stated theorem.
+
+Section 6 also supplies the faithful embedding `ρ:F₂→SL₂(ℤ)` used in the graph-carrier audit,
+with generator matrices `[[3,2],[1,1]]` and `[[1,1],[2,3]]`. The paper records that they freely
+generate a subgroup in which every nonidentity element has trace of absolute value greater than
+two.
+
 ## Audit notes
 
 The local file is arXiv v2. It is a new preprint and has not been peer reviewed. Free-group

@@ -700,6 +700,15 @@ faithful free groups and needs at least four dimensions. This does not exclude t
 correlated graph. The live compiler must preserve that correlation throughout a graph-specific
 cocycle; first representing two arbitrary group values and an independent counter is dead.
 
+[`G3-O19`](SALVAGE.md#g3-o19-correlated-affine-slice-density) blocks a subtler overreach. The
+actual Carvalho maps do share the `p`-character globally, but injective `h`, a shared primitive
+character, cyclic equalizer, and even a singleton exponent-one slice do not force an algebraic
+dimension drop. A synthetic graph with all these promises has every fixed-character slice dense
+in `PSL₂×PSL₂`, so every algebraically extendable carrier using both coordinates needs four
+dimensions. Its language nevertheless has a two-state same-zero detector. Thus neither the
+promise-level carrier obstruction nor its rank-four Hankel minor is a language lower bound, and
+neither may be attributed to the actual program graph.
+
 The ordinary mortality lift is likewise no longer part of the paired obstruction. For arbitrary
 controls `H_a`, column `γ`, and row `λ` over a field, adjoining `γλ` gives mortality exactly when some
 `λH_yγ` vanishes. A zero product without the separator is already a scalar-zero witness; after
@@ -779,7 +788,7 @@ one. Empty-consume pumping and genuinely phase-splitting transport are separate 
 | Positive projective transition lower bound | Same-zero dimension three is point-line incidence in `P²`, and actual one-sided shifts retain finite rank/kernel/image data | Derive a uniform shift incompatibility from an unbounded terminal section; static support rank, formal inverse completion, and fixed equal-length return flowers are forbidden |
 | Global word-residual recoding | Longer noncommutative atoms can retain order while discarding the four additive role channels | Escape `G3-D05`: fixed-priority affine counters and all one-way reset/transfer/fanout cascades are decidable |
 | Head-separated three-schema source | `G3-C04` discharges every arbitrary-trace forcing obligation locally | Make the `G3-D06` forked two-cycle, an empty pump, or nonfunctional splitting carry an undecidable open word residue |
-| Graph-specific exponent-one equalizer | `G3-M03` gives an exact three-positive affine cover with harmless identity padding | Detect equality and affine weight on the correlated Carvalho graph; full `F×F×ℤ`, finite fibres, singular quotient lifts, and a separate syntax guard are closed |
+| Graph-specific exponent-one equalizer | `G3-M03` gives an exact three-positive affine cover and the actual maps share the character globally | Analyze the actual program graph or build a spelling-sensitive carrier; promise-only algebraic compression is closed by `G3-O19` |
 
 These six lanes form three trunks. The first three race a direct paired construction against its
 one-sided projective lower bound. The next two seek genuine `GPCP(3)` through either global
@@ -814,8 +823,9 @@ After the five-report `e656e0d9` wave, the net tree has six independent raceable
    constructions. Functional private-head routing is closed by `G3-D06`.
 6. **Graph-specific exponent-one affine equalizer.** Starting from the exact `G3-M03` positive
    cover, compile transported equality plus weight `d` into ordinary `GPCP(3)` or a three-state
-   scalar-zero family. Preserve the program correlation; do not represent independent
-   `F×F×ℤ` data or select a positive normal spelling.
+   scalar-zero family. Either compute and exploit the actual program graph's Zariski closure or
+   use a spelling-sensitive/nonalgebraic carrier which need not extend to the closure. Preserve
+   program correlation; `G3-O19` forbids compression from the coarse promises alone.
 
 The count rose by one only because the former singular-constructor leaf split along a proved
 kernel dichotomy. The paired saturation leaf was deleted outright and replaced by a genuinely
@@ -889,11 +899,14 @@ word-order carrier whose same-length entropy is unbounded.
 
 The free-group lane no longer needs another Stallings computation, domain parser, or positive
 normal-form machine. `G3-M03` already presents the exponent-one equalizer on three positive
-letters with exact affine weight and harmless identity padding. The next experiment must jointly
-detect transported equality and that weight on the correlated program graph. Extending first to
-independent `F×F×ℤ` data is four-dimensional by `G3-O16`; a singular third coordinate over a
+letters with exact affine weight and harmless identity padding, and direct source inspection now
+shows `χ∘g=χ∘h` globally. The next experiment must jointly detect transported equality and that
+weight on the actual correlated program graph. Extending first to independent `F×F×ℤ` data is
+four-dimensional by `G3-O16`; inferring an algebraic compression merely from the shared
+character and cyclic equalizer is closed by `G3-O19`; a singular third coordinate over a
 persistent invertible quotient is closed by `G3-O14`; a standalone syntax series requires six
-states by `G3-O15`.
+states by `G3-O15`. A rank-four coefficient for a synthetic semantic carrier is not a same-zero
+lower bound.
 
 The native source race now has a local sufficient acceptance test. Supply three head-separated
 productions `αₓX⟶Xβₓ`; `G3-C04` then proves that `sβ(w)=α(w)t` forces every cumulative `α` prefix

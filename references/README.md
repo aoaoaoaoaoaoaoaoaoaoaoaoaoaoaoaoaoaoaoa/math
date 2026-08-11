@@ -34,7 +34,7 @@ redistributable full text was located.
 | [Holub03](holub-2012-binary-equality-sets.md) | revised author version of Journal of Algebra 2003 | Binary non-periodic equality sets have rank at most two; published-lemma correction documented |
 | [Hadravová11](hadravova-2011-binary-equality-length-bound.md) | peer-reviewed; metadata only | Binary equality-word bounds and the historical ternary equality-set frontier |
 | [MS05](matiyasevich-senizergues-2005-few-rule-semi-thue.md) | peer-reviewed TCS 2005; metadata only | Three-rule accessibility undecidability; Nicolas's source for the `GPCP(5)` lower bound |
-| [Carvalho26](carvalho-2026-free-group-pcp.md) | arXiv v2 preprint | Inverse-transducer queue deletion, all-path converse, and the derived exponent-one equalizer slice |
+| [Carvalho26](carvalho-2026-free-group-pcp.md) | arXiv v2 preprint | Inverse-transducer queue deletion, all-path converse, and the derived globally shared exponent character and exponent-one equalizer slice |
 | [GCL25](guttenberg-czerwinski-lasota-2025-vass-nested-zero-tests.md) | peer-reviewed LICS 2025; metadata only | Ackermannian reachability and related decision procedures for vector addition systems with nested initial-segment zero tests |
 | [CL20](ciobanu-logan-2020-pcp-equalisers.md) | peer-reviewed ICALP 2020; CC-BY | Decidable equalizers for marked monoid morphisms and free-group immersions |
 | [MNU14](myasnikov-nikolaev-ushakov-2013-pcp-groups.md) | peer-reviewed J. Group Theory 2014; arXiv copy | Group PCP/GPCP formulations; warns against transferring group-rank counts to positive monoids |
