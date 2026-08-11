@@ -124,6 +124,7 @@ file owns the mathematical stock.
 | [`G3-O08`](#g3-o08-erasing-and-stationary-closed-block-obstruction) | obstruction | paired Parikh rank kills erasing exact macros and stationary closed-return block encoders | audited; formalized core | graduated |
 | [`G3-S01`](#g3-s01-shift-equivariant-zero-incidence) | structure theorem | same-zero state dimension is equivariant projective incidence dimension | audited | active |
 | [`G3-S02`](#g3-s02-rank-two-kernel-bifurcation) | structure theorem | common kernels erase route differences; transverse fibres retain one bilinear survivor | formalized | active |
+| [`G3-O18`](#g3-o18-transverse-minimum-body-countermodel) | fixed-subclass compiler | distinct rank-two kernels encode every paired history and exactly recognize all minimum bodies | formalized | graduated |
 | [`G3-O02`](#g3-o02-rational-phase-fracture) | obstruction | a mortal paired instance has no rational phase-state same-zero compression | audited | stock |
 | [`G3-O03`](#g3-o03-history-sensitive-minimal-body-fracture) | obstruction | minimal bodies admit an exact history-sensitive three-state same-zero compiler | formalized | graduated |
 | [`G3-O04`](#g3-o04-expanding-affine-history-no-go) | obstruction | finite-mode expanding one-coordinate history has decidable target reachability | audited | graduated |
@@ -148,6 +149,7 @@ file owns the mathematical stock.
 | [`G3-O14`](#g3-o14-positive-cancellation-spelling-dichotomy) | obstruction | finite reversible spelling pumps, while singular one-coordinate spelling absorbs identity factors | formalized | graduated |
 | [`G3-O15`](#g3-o15-triangle-normal-form-rank-six) | obstruction | a standalone same-zero guard for triangle-irreducible spellings needs six states | formalized | graduated |
 | [`G3-O16`](#g3-o16-full-augmented-pair-dimension-tax) | obstruction | an independent `F×F×ℤ` detector cannot act faithfully in three dimensions | audited | graduated |
+| [`G3-O17`](#g3-o17-paired-inverse-chamber) | obstruction | protected two-turn inverse states have no positive future in the actual paired residual chambers | formalized | graduated |
 | [`D2-S01`](#d2-s01-projective-hard-core) | structure theorem | `M₂(3)` is equivalent to two-generator projective incidence | audited | active |
 | [`D2-S02`](#d2-s02-monotone-affine-path-form) | structure theorem | normalized affine words form monotone exponent paths | audited | stock |
 | [`D2-D01`](#d2-d01-projectively-unimodular-stratum) | decidable stratum | projectively unimodular hard-core instances are decidable | audited | stock |
@@ -4560,6 +4562,51 @@ and [`m34-common-kernel-shuttle-2026-08-11.md`](audits/m34-common-kernel-shuttle
 **Next:** construct a source-computable invariant surface in `P¹×P¹` closed under both prepend
 maps and the bilinear reset, or prove that no linear terminal section can be exact on every
 control word.
+
+### G3-O18: Transverse minimum-body countermodel
+
+**Kind:** fixed-subclass compiler
+
+**Evidence:** formalized
+
+**Disposition:** graduated
+
+Assign the four paired roles the variable-radix recurrences
+
+```text
+R_b:w↦4κ(w)+1,    E_b:w↦4κ(w)+3,
+R_c:w↦8κ(w)+2,    E_c:w↦8κ(w)+4.
+```
+
+Their residues modulo four distinguish the roles, so `κ` is injective. Three fixed integral
+controls maintain the exact all-word state
+
+```text
+(8κ(w)−ε, 4κ(w)−ε, 1)ᵀ,
+```
+
+where `ε∈{±1}` is the retained paired phase. The two data controls have exact kernels `ℚe₁`
+and `ℚe₂`; the phase toggle is an involution. The row `(1,−1,−4K)` vanishes exactly when the
+decoded role word has code `K`.
+
+Every minimum body has the unique terminal role word `R_c E(body)`. Choosing its computable code
+therefore gives an exact three-state transverse-kernel recognizer on the complete paired-control
+free monoid for every `β>2` and `|body|=β−1`.
+
+**Scope:** this is an infinite, source-computable fixed subclass, but every instance in the
+subclass has one known terminal word. It does not recognize unrestricted bodies, whose terminal
+sets may be infinite. The result kills any lower bound derived from distinct rank-two kernels,
+the bilinear fibre law, or exceptional projective fibres alone.
+
+**Use:** a transverse constructor must now supply an infinite terminal section or genuinely
+two-dimensional terminal dynamics. A lower bound must exploit unrestricted terminal arithmetic,
+not transverse geometry by itself.
+
+**Artifact:** [`TransverseHistory.lean`](MatrixMortality/TransverseHistory.lean) and
+[`m34-transverse-history-2026-08-11.md`](audits/m34-transverse-history-2026-08-11.md).
+
+**Next:** uniformize the terminal section beyond singleton target codes, or prove that every
+source-computable transverse section with arbitrary-body soundness falls into a decidable class.
 
 ### G3-O13: Rational serializer pumping
 

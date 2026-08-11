@@ -599,6 +599,14 @@ is therefore a non-invariant shuttle, not persistent refresh. With transverse da
 two quotient fibres meet in the exact bilinear ray `[rv:us:vs]`. Neither architecture is yet a
 source-uniform recognizer.
 
+[`G3-O18`](SALVAGE.md#g3-o18-transverse-minimum-body-countermodel) proves that transverse
+geometry itself is no obstruction. A variable-radix code with four distinct residues is carried
+by fixed integral rank-two data controls with kernels `ℚe₁` and `ℚe₂`. Lean checks the exact
+state recurrence on every raw control word and an exact paired recognizer for every minimum body.
+Its terminal row selects one computable history code, so it does not handle arbitrary bodies with
+several or infinitely many terminal histories. The live transverse problem is an infinite
+terminal section or genuinely two-dimensional terminal dynamics, not exceptional fibres.
+
 [`G3-M02`](SALVAGE.md#g3-m02-square-root-punctuation-fracture) supplied a complete direct-mortality
 grammar. The source-uniform rational rank-two matrix `S` satisfies
 
@@ -739,7 +747,7 @@ delay, equal-height tableau, or acyclic verification tail cannot be its computat
 | Lane | Available leverage | Decisive obstruction or obligation |
 | --- | --- | --- |
 | Common-kernel shuttle | The exact `bcbb` compiler moves its common data kernel out through the toggle and recovers it at the next data action | Uniformize this non-invariant shuttle in `(β,body)`; every toggle-invariant guard factors through the two-dimensional quotient |
-| Transverse-kernel bilinear recurrence | Two rank-two quotient fibres meet exactly in `[rv:us:vs]` | Construct a computable invariant surface in `P¹×P¹`, closed under every shift and malformed word, with the exact terminal section |
+| Transverse-kernel terminal dynamics | Fixed integral transverse controls encode every history and exactly recognize all minimum bodies | Replace the singleton target row by an infinite, source-computable terminal section for unrestricted bodies |
 | Positive projective transition lower bound | Same-zero dimension three is point-line incidence in `P²`, and actual one-sided shifts retain finite rank/kernel/image data | Exhibit a finite shift-closed diagram impossible for every singular rank pattern; static support rank and formal inverse completion are forbidden |
 | Global word-residual recoding | Longer noncommutative atoms can retain order while discarding the four additive role channels | Escape `G3-D04`: fixed-priority affine counters, arbitrary reversals, and any computable finite dimension are decidable |
 | Head-separated three-schema source | `G3-C04` discharges every arbitrary-trace forcing obligation locally | Prove undecidability with exactly three head-separated prefix productions, an open word residue, and both drift signs under every positive weighting |
@@ -758,9 +766,9 @@ After the five-report `e656e0d9` wave, the net tree has six independent raceable
    which the toggle moves a freshly minted common-kernel guard back into visible quotient data.
    Prove its state formula and scalar-zero equivalence uniformly in `(β,body)` on the complete
    free control monoid. Toggle-invariant refresh is closed.
-2. **Transverse-kernel bilinear constructor.** Realize the fibre law `[rv:us:vs]` on one
-   source-computable invariant surface, including exceptional fibres, both shifts, malformed
-   controls, and the exact terminal section.
+2. **Transverse-kernel terminal constructor.** Extend the checked mixed-radix transverse orbit
+   from one target code to a source-computable infinite terminal section for unrestricted bodies.
+   Pure kernel geometry, exceptional fibres, and minimum-body examples are closed.
 3. **Positive projective transition-diagram obstruction.** Produce a finite actual paired diagram
    which no three-dimensional rational same-zero representation can realize for any combination
    of generator ranks and kernels. It must use shifts; the conic already realizes every static
@@ -833,8 +841,9 @@ outside a faithful full queue chart is closed by `G3-O12`.
 Rank-two data maps must now branch at the outset. A common-kernel construction must move its
 hidden direction out through a non-invariant toggle; if the kernel is toggle-invariant, the next
 data action erases it and only the two-dimensional quotient persists. A transverse-kernel
-construction must realize the bilinear fibre intersection
-`[rv:us:vs]` on a shift-invariant surface. A lower-bound attack must exclude both positive
+construction already realizes the bilinear fibre intersection and every minimum-body history;
+it must now realize an unrestricted, generally infinite terminal section. A lower-bound attack
+must exclude both positive
 architectures through actual transition data. Backward cancellation, inverse cofinality, and
 static incidence cannot do so. Do not spend another attack on separator placement, fixed anchors,
 or control singularity after recognition; `MM-C01` closes them unconditionally.

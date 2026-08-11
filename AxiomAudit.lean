@@ -129,6 +129,13 @@ open MatrixMortality
 #print axioms PeriodicHistory.bcbb_periodicCoefficient_zero_iff_paired_zero
 #print axioms PeriodicHistory.bcbbIntegralSeparator_cast
 #print axioms PeriodicHistory.bcbbIntegralFamily_mortal_iff_paired_zero
+#print axioms TransverseHistory.roleResidue_injective
+#print axioms TransverseHistory.code_injective
+#print axioms TransverseHistory.product_mulVec_column
+#print axioms TransverseHistory.coefficient_eq
+#print axioms TransverseHistory.coefficient_zero_iff_decode_eq
+#print axioms TransverseHistory.minimalBody_zero_iff_paired_zero
+#print axioms TransverseHistory.data_mulVec_eq_zero_iff
 #print axioms BranchingHistory.bcbcNull_append
 #print axioms BranchingHistory.bcbcForkRoles_injective
 #print axioms BranchingHistory.bcbcTerminalFork_injective

@@ -823,6 +823,7 @@ with a complete arbitrary-word converse.
 | `PhaseFracture.lean` | phase normalization and dimension-free projective-identification contradiction |
 | `PhaseRigidity.lean` | checked local role algebra, discrepancy commutators, and invariant-pencil rigidity |
 | `HistoryFracture.lean` | null-history counterexample, minimum-body base-five encoder, and integral mortality lift |
+| `TransverseHistory.lean` | injective mixed-radix history code, transverse rank-two controls, and exact minimum-body zero language |
 | `ExpandingHistoryNoGo.lean` | reset-affine orbit, finite reverse automaton, regularity, and universal computability obstruction |
 | `CancellativeProjectiveNoGo.lean` | paired residual conic, finite support-rank closure, cancellative role fractions, and projective commutator rigidity |
 | `PairedInverseChamber.lean` | one-turn residual chambers, protected formal inverse states, and positive forward-cone separation |
@@ -1003,6 +1004,9 @@ with a complete arbitrary-word converse.
 | The three-state history encoder has exactly the paired zeros on minimum-length bodies | `minimalBody_history_zero_iff_paired_zero` |
 | The four integral history matrices are mortal exactly at a history-code zero | `historyMortalityFamily_int_mortal_iff_zero`, `minimalBody_historyMortality_iff_paired_zero` |
 | The explicit code `92` family is mortal with decoded witness `ctbbt` | `MinimalBodyExample.terminal_code`, `MinimalBodyExample.witness_decode`, `MinimalBodyExample.mortality` |
+| The mixed-radix paired-history code is injective | `TransverseHistory.code_injective` |
+| Fixed transverse-kernel controls maintain that code on every raw control word | `TransverseHistory.product_mulVec_column`, `TransverseHistory.data_mulVec_eq_zero_iff` |
+| The transverse controls have exactly the paired zeros on every minimum body | `TransverseHistory.coefficient_zero_iff_decode_eq`, `TransverseHistory.minimalBody_zero_iff_paired_zero` |
 | The `bcbb` null histories and complete terminal language are one exact periodic ray | `PeriodicHistory.bcbbNull_iff`, `PeriodicHistory.bcbb_terminal_match_iff` |
 | The singular positional decoder obeys its all-control affine state equation | `PeriodicHistory.periodicProduct_mulVec_column`, `PeriodicHistory.periodicCoefficient_eq` |
 | The `bcbb` affine section has no false zero and matches the paired zero language | `PeriodicHistory.bcbbAffine_zero_iff`, `PeriodicHistory.bcbb_periodicCoefficient_zero_iff_paired_zero` |
@@ -1178,6 +1182,12 @@ For `G3-O06`, Lean additionally checks that both periodic data controls have exa
 `ℚ(1,1,0)`, that the toggle sends its generator to `(1,-1,0)`, and that either next data control
 recovers `(2,0,0)`. This is the formal non-invariant kernel shuttle promised by the all-word
 periodic recurrence; it does not make the fixed boundary constants source-uniform.
+
+For `G3-O18`, Lean proves injectivity of the variable-radix role code, the exact state recurrence
+under fixed integral transverse-kernel controls on every raw word, the scalar equality with one
+prescribed code, both coordinate kernels, and the complete minimum-body paired equivalence. The
+projective blow-up description is not a formal dependency: every actual orbit stays in the
+affine chart with homogeneous coordinate one.
 
 The scheduled compiler introduces a separate source-width seam. Neary's published construction
 sets `β = 10p`, where `p` is the simulated cyclic-tag program period. The fixed-width audit found
