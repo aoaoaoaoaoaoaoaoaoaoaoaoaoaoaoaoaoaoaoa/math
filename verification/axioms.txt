@@ -37,6 +37,17 @@
 'MatrixMortality.WordDiscrepancy.negative_terminal' depends on axioms: [propext]
 'MatrixMortality.PriorityAffineResidual.nestedZero_mono' does not depend on any axioms
 'MatrixMortality.PriorityAffineResidual.guardedTranslation_iff_nestedZeroMacro' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.PriorityTriangularResidual.drainShift_pivot' depends on axioms: [propext]
+'MatrixMortality.PriorityTriangularResidual.drainIteration_steps_le' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.PriorityTriangularResidual.drainIteration_exit_steps' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.PriorityTriangularResidual.drainTransfer_iff_exitIteration' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.PriorityTriangularResidual.reset_not_finite_translation_union' depends on axioms: [propext, Quot.sound]
 'MatrixMortality.EndpointPrefixCompiler.DerivesAlong.endpointEquation' depends on axioms: [propext]
 'MatrixMortality.EndpointPrefixCompiler.endpointEquation_iff_derivesAlong' depends on axioms: [propext]
 'MatrixMortality.EndpointPrefixCompiler.derivesAlong_of_endpointEquation_of_headSeparated' depends on axioms: [propext,

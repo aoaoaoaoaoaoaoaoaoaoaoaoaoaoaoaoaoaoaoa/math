@@ -29,6 +29,11 @@ open MatrixMortality
 #print axioms WordDiscrepancy.negative_terminal
 #print axioms PriorityAffineResidual.nestedZero_mono
 #print axioms PriorityAffineResidual.guardedTranslation_iff_nestedZeroMacro
+#print axioms PriorityTriangularResidual.drainShift_pivot
+#print axioms PriorityTriangularResidual.drainIteration_steps_le
+#print axioms PriorityTriangularResidual.drainIteration_exit_steps
+#print axioms PriorityTriangularResidual.drainTransfer_iff_exitIteration
+#print axioms PriorityTriangularResidual.reset_not_finite_translation_union
 #print axioms EndpointPrefixCompiler.DerivesAlong.endpointEquation
 #print axioms EndpointPrefixCompiler.endpointEquation_iff_derivesAlong
 #print axioms EndpointPrefixCompiler.derivesAlong_of_endpointEquation_of_headSeparated

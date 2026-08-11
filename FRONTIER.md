@@ -485,6 +485,15 @@ the finite atlas theorem is audited against the LICS 2025 reachability result. A
 residual must therefore use incomparable or changing-priority tests, transfer/reset/copy
 operations, genuine word order, or a halting-dependent atlas unavailable to the reduction.
 
+[`G3-D05`](SALVAGE.md#g3-d05-priority-triangular-transfer-atlas) removes the first apparent
+escape. Reset, destructive transfer, fanout, and arbitrary fixed multiplication remain
+decidable when each operation drains the current priority frontier and deposits only into later
+counters. Lean proves that the nested exit forces exactly the old counter value many loop
+iterations and that reset strictly exceeds every finite union of translations. The audited
+cascade still reduces to the same VASSnz theorem. The live global mechanisms are now feedback or
+backward transfer, source-preserving copy, cyclic reuse of priorities, counter products,
+incomparable or changing tests, literal word order, or a noncomputable atlas.
+
 The body-independent Hankel certificate
 [`MM-O04`](SALVAGE.md#mm-o04-uniform-rank-four-paired-series) proves that the
 current three-control paired coefficient series has exact rank four already on `{b,t}*`.
@@ -759,7 +768,7 @@ delay, equal-height tableau, or acyclic verification tail cannot be its computat
 | Common-kernel shuttle | The exact `bcbb` compiler moves its common data kernel out through the toggle and recovers it at the next data action | Uniformize this non-invariant shuttle in `(β,body)`; every toggle-invariant guard factors through the two-dimensional quotient |
 | Transverse-kernel terminal dynamics | Fixed integral transverse controls encode every history and exactly recognize all minimum bodies | Replace the singleton target row by an infinite, source-computable terminal section for unrestricted bodies |
 | Positive projective transition lower bound | Same-zero dimension three is point-line incidence in `P²`, and actual one-sided shifts retain finite rank/kernel/image data | Derive a uniform shift incompatibility from an unbounded terminal section; static support rank, formal inverse completion, and fixed equal-length return flowers are forbidden |
-| Global word-residual recoding | Longer noncommutative atoms can retain order while discarding the four additive role channels | Escape `G3-D04`: fixed-priority affine counters, arbitrary reversals, and any computable finite dimension are decidable |
+| Global word-residual recoding | Longer noncommutative atoms can retain order while discarding the four additive role channels | Escape `G3-D05`: fixed-priority affine counters and all one-way reset/transfer/fanout cascades are decidable |
 | Head-separated three-schema source | `G3-C04` discharges every arbitrary-trace forcing obligation locally | Prove undecidability with exactly three head-separated prefix productions, an open word residue, and both drift signs under every positive weighting |
 | Graph-specific exponent-one equalizer | `G3-M03` gives an exact three-positive affine cover with harmless identity padding | Detect equality and affine weight on the correlated Carvalho graph; full `F×F×ℤ`, finite fibres, singular quotient lifts, and a separate syntax guard are closed |
 
@@ -786,8 +795,9 @@ After the five-report `e656e0d9` wave, the net tree has six independent raceable
    saturation, and `G3-C05` realizes the strongest fixed equal-length flower yet isolated.
 4. **Global non-priority word-residual recoding.** Give a computable three-pair reduction with
    both witness directions and a complete arbitrary-new-word converse. Its searchable witnesses
-   must use changing/incomparable tests, nonadditive transfers, or genuine unbounded word order
-   outside `G3-D04`.
+   must use feedback or backward transfer, source-preserving copy, recurring priority cycles,
+   counter products, changing/incomparable tests, or genuine unbounded word order outside
+   `G3-D05`.
 5. **Head-separated native three-schema source.** Build an undecidable family of exactly three
    prefix-normal productions satisfying `G3-C04`, with an unbounded word-valued residual and
    mixed recurrent drift under every positive weighting. The checked compiler then gives
@@ -862,8 +872,10 @@ or control singularity after recognition; `MM-C01` closes them unconditionally.
 
 The global recoding lane must now state its non-priority mechanism before algebra begins.
 Adding finitely many affine factors, sign modes, counter reversals, and recurrent nested tests is
-inside `G3-D04`. The credible exits are changing or incomparable tests, nonadditive transfer and
-reset operations, or a literal word-order carrier whose same-length entropy is unbounded.
+inside `G3-D04`; one-way destructive reset, transfer, fanout, and fixed multiplication are inside
+`G3-D05`. The credible exits are feedback, backward or source-preserving transfer, cyclic
+priority reuse, nonlinear counter interaction, changing or incomparable tests, or a literal
+word-order carrier whose same-length entropy is unbounded.
 
 The free-group lane no longer needs another Stallings computation, domain parser, or positive
 normal-form machine. `G3-M03` already presents the exponent-one equalizer on three positive

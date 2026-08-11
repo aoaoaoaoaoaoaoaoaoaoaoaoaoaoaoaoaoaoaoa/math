@@ -616,6 +616,15 @@ the requested translation. It also proves nesting monotonicity. Decidability of 
 VASS with nested zero tests is imported from Guttenberg, Czerwiński, and Lasota; the effective
 atlas-to-machine assembly and normal-witness decision theorem remain independently audited.
 
+[`G3-D05`](SALVAGE.md#g3-d05-priority-triangular-transfer-atlas) extends that boundary beyond
+finite unions of translations. Lean defines one destructive forward fanout, proves that natural
+semantics forbids overdrain, and proves that the next nested-prefix exit test forces exactly one
+loop per old pivot token. The resulting equivalence identifies the logical reset/transfer with
+an ordinary VASS drain loop plus one nested test in both directions. Lean also proves that the
+unbounded reset graph is not a finite union of translations, establishing strict extension of
+`G3-D04`. Cascading private stages, finite atlas assembly, properness reduction, and VASSnz
+decidability remain audited rather than encoded as a new reachability implementation.
+
 [`G3-C03`](SALVAGE.md#g3-c03-endpoint-prefix-compiler) supplies the exact direct compiler for a
 three-production prefix normal system. Lean defines traced execution, proves that every lawful
 trace telescopes to its endpoint equation, and proves the converse under endpoint prefix forcing
@@ -882,6 +891,7 @@ with a complete arbitrary-word converse.
 | `TernaryClosedBlockNoGo.lean` | paired-Parikh independence, exact erasing macro lower bound, block semantics, and closed-return arithmetic |
 | `WordDiscrepancy.lean` | first-mismatch permanence and exact signed free-monoid residual dynamics |
 | `PriorityAffineResidual.lean` | exact compilation of priority-affine guards into nested-zero-test counter macros |
+| `PriorityTriangularResidual.lean` | exact destructive drain-loop transfer and strict reset separation from finite translations |
 | `EndpointPrefixCompiler.lean` | prefix-normal traces, endpoint-forcing three-pair compiler, underflow witness, and drift budget |
 | `Undecidability/PairedProblems.lean` | canonical four-matrix target instance and structural promises |
 | `Undecidability/BinaryProblems.lean` | canonical structured `Z₆(2)` instance |
@@ -913,6 +923,9 @@ with a complete arbitrary-word converse.
 | Signed prefix discrepancies obey the exact four transition laws and two terminal tests | `WordDiscrepancy.positive_positive_transition`, `WordDiscrepancy.positive_negative_transition`, `WordDiscrepancy.negative_negative_transition`, `WordDiscrepancy.negative_positive_transition`, `WordDiscrepancy.positive_terminal`, `WordDiscrepancy.negative_terminal` |
 | A guarded priority-affine translation is exactly one debit, nested zero test, and credit macro | `PriorityAffineResidual.guardedTranslation_iff_nestedZeroMacro` |
 | Nested initial-segment zero tests are monotone in their priority cut | `PriorityAffineResidual.nestedZero_mono` |
+| A forward destructive fanout is exactly a VASS drain loop followed by the next nested zero test | `PriorityTriangularResidual.drainTransfer_iff_exitIteration` |
+| The nested exit fixes the drain count and natural semantics forbids overdrain | `PriorityTriangularResidual.drainIteration_exit_steps`, `PriorityTriangularResidual.drainIteration_steps_le` |
+| Unbounded reset is not a finite union of fixed translations | `PriorityTriangularResidual.reset_not_finite_translation_union` |
 | Endpoint prefix forcing makes the aggregate boundary equation equivalent to lawful traced execution | `EndpointPrefixCompiler.endpointEquation_iff_derivesAlong` |
 | A locally head-separated output makes every endpoint witness a lawful trace | `EndpointPrefixCompiler.endpointEquation_iff_derivesAlong_of_headSeparated`, `EndpointPrefixCompiler.endpointPrefixForcing_of_headSeparated` |
 | The unrestricted endpoint telescope has an explicit false underflow witness | `EndpointPrefixCompiler.underflow_endpointEquation`, `EndpointPrefixCompiler.underflow_not_derivesAlong` |
@@ -1189,6 +1202,12 @@ The priority-affine atlas theorem `G3-D04` remains audited above its transition 
 the exact guarded-translation macro, while the finite atlas assembly and VASSnz reachability
 algorithm are external. The latter is supported by the fully inspected metadata-only synopsis of
 Guttenberg, Czerwiński, and Lasota's LICS 2025 theorem.
+
+The priority-triangular extension `G3-D05` has the same external boundary. Lean proves the exact
+drain-stage gadget and the strict containment of resets beyond finite translations. The finite
+cascade through private modes and the imported VASSnz decision theorem remain audited. No Lean
+declaration claims decidability for feedback, cyclic transfer, nonlinear multiplication,
+incomparable tests, or changing priority.
 
 For `G3-O03`, Lean checks the null-history counterexample, minimum-body uniqueness, base-five
 encoder, exact same-zero theorem, and integral mortality lift. The statement that both phase graph

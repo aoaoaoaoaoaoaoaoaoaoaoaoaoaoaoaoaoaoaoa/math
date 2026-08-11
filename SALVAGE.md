@@ -4765,11 +4765,13 @@ such a computably emitted atlas, the old predicate is decidable. The atlas may h
 finite dimension, cycles, reversals, sign modes, erasing images, and only one structured witness
 per yes-instance.
 
-**Scope:** guards must follow one fixed nested priority and updates must be additive translations.
-Incomparable recurrent zero tests, priority permutations, counter transfer or reset, unbounded
-word order not captured by counters, and a noncomputable halting-dependent atlas remain outside.
-The generic atlas assembly is an audited reduction; Lean checks the complete guarded-transition
-macro but does not reimplement VASSnz reachability.
+**Scope:** guards must follow one fixed nested priority and updates here are additive
+translations. Priority-aligned destructive transfer and reset are subsumed by
+[`G3-D05`](#g3-d05-priority-triangular-transfer-atlas). Incomparable recurrent zero tests,
+priority permutations, feedback, source-preserving copy, nonlinear counter interaction,
+unbounded word order, and a noncomputable halting-dependent atlas remain outside. The generic
+atlas assembly is audited; Lean checks the arithmetic macro but does not reimplement VASSnz
+reachability.
 
 **Use:** reject every literal finite-factor residual carrier whose exponents evolve affinely under
 one nested guard hierarchy. A surviving global recoding must exhibit the precise non-priority,
@@ -4781,8 +4783,66 @@ non-additive, or genuinely word-valued operation it uses.
 **Artifact:** [`PriorityAffineResidual.lean`](MatrixMortality/PriorityAffineResidual.lean) and
 [`m34-priority-affine-residual-atlas-2026-08-10.md`](audits/m34-priority-affine-residual-atlas-2026-08-10.md).
 
-**Next:** force either two incomparable recurrent tests, a changing priority, a nonlinear counter
-operation, or an unbounded freely ordered residual in every proposed three-pair recoding.
+**Next:** force either feedback, two incomparable recurrent tests, a changing priority, a
+nonlinear counter operation, or an unbounded freely ordered residual in every proposed
+three-pair recoding.
+
+### G3-D05: Priority-triangular transfer atlas
+
+**Kind:** decidable stratum
+
+**Evidence:** audited; formalized core
+
+**Disposition:** graduated
+
+Fix one global counter order. A priority-triangular drain at pivot `i` repeatedly applies the
+ordinary VASS shift
+
+```text
+−eᵢ+Aᵢ,
+```
+
+where the nonnegative fanout `Aᵢ` is supported strictly after `i`. The only stage exit tests that
+the first `i+1` counters vanish. If the pivot enters with value `s`, natural-state semantics
+permits at most `s` iterations and the exit test permits at least `s`; every successful stage
+therefore executes exactly `s` loops. Its exact effect is
+
+```text
+nᵢ ↦ 0,
+nₜ ↦ nₜ+s(Aᵢ)ₜ  for t>i.
+```
+
+Cascading these private stages after the existing debit guard and before a fixed final drift
+compiles guarded reset, destructive transfer, fanout, and multiplication by arbitrary fixed
+nonnegative constants into a VASS whose only tests are one nested hierarchy of initial
+segments. Finite unions, modes, and compositions remain finite. Effective properness again
+makes the initial and terminal residual fibres finite, so VASSnz reachability decides the
+normal-witness search.
+
+Lean proves the exact one-stage equivalence between the logical destructive transfer and an
+existential number of ordinary loop iterations followed by the nested exit test. It separately
+proves that the reset graph `n↦0` is not any finite union of fixed translations, so this record
+strictly extends [`G3-D04`](#g3-d04-priority-affine-residual-atlas). The finite-mode atlas
+assembly and imported VASSnz decision theorem remain audited.
+
+**Scope:** fanout must be destructive and strictly forward in one fixed physical priority.
+Backward transfer, source-preserving copy, cyclic reuse of priority levels, unbounded products
+or data-dependent multipliers, incomparable or changing tests, and literal free-word order are
+not covered.
+
+**Use:** reject proposed escapes whose apparent nonlinearity is only a one-way drain, reset,
+fanout, or fixed multiplier. The global recoding beam must now expose genuine feedback,
+nonlinear interaction, changing tests, or irreducible word order.
+
+**Source:**
+[`guttenberg-czerwinski-lasota-2025-vass-nested-zero-tests.md`](references/guttenberg-czerwinski-lasota-2025-vass-nested-zero-tests.md).
+
+**Artifact:**
+[`PriorityTriangularResidual.lean`](MatrixMortality/PriorityTriangularResidual.lean) and
+[`m34-priority-triangular-transfer-2026-08-11.md`](audits/m34-priority-triangular-transfer-2026-08-11.md).
+
+**Next:** force a backward edge, source-preserving feedback, a recurring transfer cycle, a
+counter product, incomparable tests, changing priority, or an unbounded free-word residual.
 
 ### G3-C03: Endpoint-prefix compiler
 
