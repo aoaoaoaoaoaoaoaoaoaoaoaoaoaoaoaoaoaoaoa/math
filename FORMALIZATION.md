@@ -570,9 +570,10 @@ arbitrary fixed endpoint rays, vanishing on the correct formal terminal plane `Y
 forces vanishing on the entire compulsory length plane. The proof does not classify coincidences
 confined to the discrete code locus.
 
-The same module formalizes the conditional compiler [`M4-C04`](SALVAGE.md#m4-c04-original-mixed-gap-endpoint-compiler).
-Two explicit endpoint ray equations make one semantic bridge followed by the empty bridge vanish
-exactly on the Neary terminal language. Complete semantic contexts cannot reach either ray, so
+The same module formalizes the conditional identity
+[`M4-C04`](SALVAGE.md#m4-c04-original-mixed-gap-endpoint-compiler). Two explicit endpoint ray
+equations make one semantic bridge followed by the empty bridge vanish exactly on the
+four-parameter Neary terminal equation. Complete semantic contexts cannot reach either ray, so
 both endpoint words must contain incomplete gaps. The exact evidence boundary is
 [`audits/m43-original-semantic-obstruction-2026-08-10.md`](audits/m43-original-semantic-obstruction-2026-08-10.md).
 
@@ -603,11 +604,19 @@ annihilates the row. The same module proves the legal tag orbit cycles and hence
 terminal match. The exact evidence boundary is
 [`audits/m43-retuned-pseudo-terminal-obstruction-2026-08-10.md`](audits/m43-retuned-pseudo-terminal-obstruction-2026-08-10.md).
 
+The same gap-thirty pseudo-production refutes the original conditional endpoint architecture.
+[`M4-O15`](SALVAGE.md#m4-o15-original-pseudo-terminal-endpoint-obstruction) evaluates the
+malformed atom and the complete poison word in the original side-normal semantics. Lean proves
+that the admissible source `(β,body)=(3,bbcc)` has no terminal word, while every instantiation
+of the `M4-C04` endpoint hypotheses kills a regular 33-tile middle containing `(b,30)`. Thus
+endpoint failure destroys completeness and endpoint success destroys soundness.
+
 No `M₄(3)` undecidability theorem follows from the present corpus. The exhaustive promised
-positive overlap-queue source class, the retuned fixed-row closure, and the original fixed-ray
-formal-plane compiler are closed. The original matrix lane has one live projective-incidence
-problem: reach or exclude the two `M4-C04` mixed-gap endpoint rays and prove the global
-consecutive-incidence converse. The former oriented 3-adic cylinder is rejected.
+positive overlap-queue source class, the retuned fixed-row closure, the original fixed-ray
+formal-plane compiler, and the four-parameter `M4-C04` endpoint architecture are closed. The
+original matrix lane retains two distinct problems: classify every arbitrary consecutive wall
+incidence, or construct a syntax-sensitive semantic geometry or narrower universal source image
+that excludes pseudo-terminals. The former oriented 3-adic cylinder is rejected.
 
 ## Modules
 
@@ -690,7 +699,7 @@ consecutive-incidence converse. The former oriented 3-adic cylinder is rejected.
 | `ParabolicSemanticObstruction.lean` | complete-block determinant wall and fixed-ray formal terminal-plane obstruction |
 | `ParabolicRetuned.lean` | retuned open root, sparse ternary code, determinant pencils, and unique gap-two singular atom |
 | `ParabolicRetunedBoundary.lean` | complete-gap semantics, literal physical contexts, fixed terminal minor and row, and complete-gap annihilator obstruction |
-| `ParabolicRetunedObstruction.lean` | explicit malformed terminal no-instance defeating standalone fixed-row closure |
+| `ParabolicRetunedObstruction.lean` | explicit malformed terminal no-instance defeating the retuned fixed-row and original endpoint closures |
 | `PairedMortality.lean` | common-column mortality converse and exact integer `4 × 4` family |
 | `PairedRank.lean` | uniform exact rank-four certificate for the paired scalar series |
 | `PairedBoundaryTax.lean` | exact six-state lower bound for diagonal paired-series bridges |
@@ -864,6 +873,7 @@ consecutive-incidence converse. The former oriented 3-adic cylinder is rejected.
 | A matched retuned context is nonzero and right annihilation is exactly annihilation of its fixed terminal row | `ParabolicRetuned.physicalContext_ne_zero`, `ParabolicRetuned.physicalContext_mul_eq_zero_iff_terminalRow` |
 | Complete-gap continuations cannot annihilate the retuned terminal row | `ParabolicRetuned.terminalRow_vecMul_physicalMiddle_ne_zero` |
 | The admissible source `(3,bbcc)` has no genuine terminal word, yet one malformed context is killed exactly by the lawful terminal-row annihilators | `ParabolicRetuned.poison_no_terminal_match`, `ParabolicRetuned.poisonContext_append_zero_iff`, `ParabolicRetuned.poison_fixedTerminalRow_obstruction` |
+| Every instantiation of the original conditional endpoint compiler kills a regular gap-thirty pseudo-terminal on the admissible nonhalting source `(3,bbcc)` | `ParabolicRetuned.poison_originalEndpointCompiler_obstruction` |
 | Exact left-context toggle fusion is immortal | `exactLeftToggleFusion_immortal` |
 | A finite closed-token queue halts iff no reachable token lies on a dependency cycle | `closedSubstitutionHalts_iff_noReachableCycle` |
 | Two private quotient states cannot isolate the Neary rule phase | `twoPrivateState_ruleScale_eq`, `neary_twoPrivateState_phaseCompiler_impossible` |

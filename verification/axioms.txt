@@ -216,6 +216,9 @@
  Quot.sound]
 'MatrixMortality.ParabolicRetuned.poison_not_tagHaltsFrom' depends on axioms: [propext]
 'MatrixMortality.ParabolicRetuned.poison_no_terminal_match' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ParabolicRetuned.poison_originalEndpointCompiler_obstruction' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.ParabolicRetuned.poison_fixedTerminalRow_obstruction' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]

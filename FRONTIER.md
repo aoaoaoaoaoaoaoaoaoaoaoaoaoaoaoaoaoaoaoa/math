@@ -376,28 +376,34 @@ incidence obeys `22c₀-31cX-18cY=0`. Under the correct terminal convention
 `Y=tX+m, τ=tσ`, vanishing on the formal terminal plane forces vanishing on the entire length
 plane. This does not exclude a coincidence confined to the discrete language.
 
-The positive semantic target is now exact. The conditional compiler
-[`M4-C04`](SALVAGE.md#m4-c04-original-mixed-gap-endpoint-compiler) closes the intended incidence
-if regular contexts `C,D` reach
+The conditional identity
+[`M4-C04`](SALVAGE.md#m4-c04-original-mixed-gap-endpoint-compiler) recognizes the intended
+four-parameter equation if regular contexts `C,D` reach
 
 ```text
 C(0,−2,1)ᵀ ∼ (4,4,−1)ᵀ,
 D A(18,11)ᵀ ∼ ((5·3^β−1)/2,3^(β+1),−1/2)ᵀ.
 ```
 
-Lean proves the resulting bridge product vanishes exactly on the Neary terminal language. It
-also proves that neither context can consist only of complete gaps. Both must carry genuinely
-incomplete mixed-gap history.
+Lean proves the resulting bridge product vanishes exactly on the Neary terminal equation. It
+also proves that neither context can consist only of complete gaps.
 
-One projective-incidence node remains, with two opposing directions at the same throat.
+This architecture is now retired by
+[`M4-O15`](SALVAGE.md#m4-o15-original-pseudo-terminal-endpoint-obstruction). On the admissible
+nonhalting instance `(β,body)=(3,bbcc)`, one regular gap-thirty pseudo-production yields a
+33-tile middle satisfying the same corrected terminal equation. If the endpoint contexts do not
+exist, the forward reduction fails; if they exist, that middle is a false zero. Reaching the two
+rays is therefore no longer frontier work.
 
-1. **Constructive reachability.** Produce regular mixed-gap words `C,D` satisfying the two
-   displayed ray equations uniformly in the Neary instance, then prove that every other zero
-   incidence decodes to a terminal match.
-2. **Adversarial reachability.** Classify the projective action of arbitrary regular mixed-gap
-   words on those rays. Prove either target unreachable, or exhibit an exact malformed incidence.
-   The oriented flag `M4-S04` remains stock, but the former depth-`n+β+1` cylinder used the wrong
-   terminal convention and is rejected.
+Two original-family nodes survive, and they must not be conflated.
+
+1. **All-word classification.** Use `M4-S04` and `M4-S06` to classify arbitrary consecutive
+   wall incidences under every regular transport. Prove immortality, or identify the exact
+   residual zero mechanism and decide whether it cuts the master problem.
+2. **Syntax-sensitive semantics.** Construct an incidence that carries a certificate of lawful
+   source history beyond `(X,Y,σ,τ)`, or restrict to a computable universal source image on which
+   pseudo-terminal side normals are impossible. It must prove both the forward zero and the
+   arbitrary-word converse; another restatement of the terminal plane is dead on arrival.
 
 The dead subtrees remain dead: literal Neary role fusion (`M4-O01`, `M4-O02`, `M4-O05`), finite
 queues of complete tokens (`M4-O03`), exact internal/final block codes (`M4-O04`), closed
@@ -1397,14 +1403,14 @@ universal computation.
 
 ## Execution order
 
-1. Attack the two directions of the one open `M₄(3)` mixed-gap endpoint incidence:
-   constructive ray reachability through `M4-C04`, and adversarial reachability/converse under
-   `M4-S04`, `M4-S06`, and `M4-O14`. The exhaustive positive
-   overlap-queue source class, alternating/multiple residue-two defect grammar, and retuned
-   fixed-row closure are closed. Cross-pollinate exact exterior invariants, but do not revive
-   deletion scanners, the retuned annihilator/converse split, complete-token queues, fixed-ray
-   complete-block semantics,
-   one-coordinate dynamics, finite wall-separated cones, or literal Neary recodings.
+1. Attack the two surviving `M₄(3)` nodes: an all-word classification of arbitrary consecutive
+   wall incidences under `M4-S04` and `M4-S06`, and a syntax-sensitive compiler or strictly
+   narrower universal source image that excludes `M4-O15` pseudo-terminals. The exhaustive
+   positive overlap-queue source class, alternating/multiple residue-two defect grammar, retuned
+   fixed-row closure, and `M4-C04` endpoint architecture are closed. Cross-pollinate exact
+   exterior invariants, but do not revive deletion scanners, complete-token queues, fixed-ray
+   complete-block semantics, one-coordinate dynamics, finite wall-separated cones, or literal
+   Neary recodings.
 2. Use formalized `MM-O01`, `G3-O01`, `MM-O03`, and `MM-O04` to reject exact packings, macros,
    and bridges without conflating their scope with solvability preservation.
 3. Prove or refute the setter candidate's projective avoidance property, construct a

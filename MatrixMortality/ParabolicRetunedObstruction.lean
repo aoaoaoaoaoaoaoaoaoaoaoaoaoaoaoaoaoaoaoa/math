@@ -1,13 +1,16 @@
 import MatrixMortality.ParabolicRetunedBoundary
+import MatrixMortality.ParabolicSemanticObstruction
 import MatrixMortality.Undecidability.TagExecution
 
 /-!
-# Malformed terminal obstruction for the retuned blade
+# Malformed terminal obstructions for the parabolic blades
 
 One gap-thirty `b` atom acts as an extra tag production.  For the admissible nonhalting source
 `(β, body) = (3, bbcc)`, an explicit word using that atom has terminal sparse semantics and the
-same fixed terminal row as a lawful context.  Every annihilator of that row therefore creates a
-malformed zero.
+same fixed terminal row as a lawful retuned context.  Every annihilator of that row therefore
+creates a malformed zero.  The same pseudo-production also satisfies the original family's
+four-parameter terminal equation, defeating every instantiation of its conditional endpoint
+compiler.
 -/
 
 namespace MatrixMortality
@@ -85,6 +88,57 @@ private theorem pseudoReducedProduct_eq_semanticMatrix
       rw [pseudoReducedProduct, wordProduct_cons, pseudoTile_reduced_eq_semanticMatrix]
       change semanticMatrix _ _ * wordProduct (pseudoReduced body) word = _
       rw [← pseudoReducedProduct, induction, ← semanticMatrix_append]
+      rfl
+
+private def originalPseudoReduced (body : List TagLetter) (tile : PseudoTile) :
+    Matrix (Fin 3) (Fin 3) ℚ :=
+  ParabolicBlade.atom 3 body (pseudoLetter tile) (pseudoGap tile)
+
+private theorem originalPoisonAtom_eq_semanticWordMiddle (body : List TagLetter) :
+    originalPseudoReduced body poisonB =
+      ParabolicBlade.semanticWordMiddle (pseudoUpper poisonB) (pseudoLower body poisonB) := by
+  rw [originalPseudoReduced, poisonB, pseudoLetter, pseudoGap, ParabolicBlade.atom]
+  change ParabolicBlade.bAtom ((3 : ℚ) ^ 3) 30 = _
+  rw [show 30 = 3 * 10 by norm_num, ParabolicBlade.bAtom,
+    ParabolicBlade.normalRoot_pow_three_mul]
+  ext i j
+  fin_cases i <;> fin_cases j <;>
+    norm_num [ParabolicBlade.semanticWordMiddle, ParabolicBlade.semanticMiddle,
+      pseudoUpper, pseudoLower, poisonB, ParabolicBlade.bFlank, ParabolicBlade.flank,
+      ParabolicBlade.drift, ParabolicBlade.injection, tagCode, ternaryCode, ternaryDigit,
+      Nat.ofDigits, Matrix.mul_apply, Fin.sum_univ_succ]
+
+private theorem originalPseudoTile_reduced_eq_semanticWordMiddle
+    (body : List TagLetter) (tile : PseudoTile) :
+    originalPseudoReduced body tile =
+      ParabolicBlade.semanticWordMiddle (pseudoUpper tile) (pseudoLower body tile) := by
+  cases tile with
+  | inl tile =>
+      simpa [originalPseudoReduced, pseudoLetter, pseudoGap, pseudoUpper, pseudoLower,
+        ParabolicBlade.completeTileAtom] using
+        ParabolicBlade.completeTileAtom_eq_semanticWordMiddle 3 body tile
+  | inr payload =>
+      cases payload
+      exact originalPoisonAtom_eq_semanticWordMiddle body
+
+private def originalPseudoReducedProduct (body : List TagLetter) (word : List PseudoTile) :
+    Matrix (Fin 3) (Fin 3) ℚ :=
+  wordProduct (originalPseudoReduced body) word
+
+private theorem originalPseudoReducedProduct_eq_semanticWordMiddle
+    (body : List TagLetter) (word : List PseudoTile) :
+    originalPseudoReducedProduct body word =
+      ParabolicBlade.semanticWordMiddle
+        (spell pseudoUpper word) (spell (pseudoLower body) word) := by
+  induction word with
+  | nil => simp [originalPseudoReducedProduct, wordProduct, spell]
+  | cons tile word induction =>
+      rw [originalPseudoReducedProduct, wordProduct_cons,
+        originalPseudoTile_reduced_eq_semanticWordMiddle]
+      change ParabolicBlade.semanticWordMiddle _ _ *
+          wordProduct (originalPseudoReduced body) word = _
+      rw [← originalPseudoReducedProduct, induction,
+        ← ParabolicBlade.semanticWordMiddle_append]
       rfl
 
 /-- The admissible body on which the legal restricted tag system cycles forever. -/
@@ -291,6 +345,54 @@ theorem poison_no_terminal_match :
     (terminal_match_iff_tagHaltsFrom 3 poisonBody (by norm_num)
       (by norm_num [poisonBody]) (by norm_num [poisonBody])).mp terminal
   exact poison_not_tagHaltsFrom halts
+
+/-- The original endpoint compiler accepts an explicit malformed regular middle on the
+admissible nonhalting poison instance. -/
+theorem poison_originalEndpointCompiler_obstruction
+    (leftContext rightContext leftInverse : Matrix (Fin 3) (Fin 3) ℚ)
+    (leftScale rightScale : ℚ)
+    (leftScale_ne : leftScale ≠ 0) (rightScale_ne : rightScale ≠ 0)
+    (left_inverse : leftInverse * leftContext = 1)
+    (left_target :
+      leftContext *ᵥ ParabolicBlade.semanticTerminalTail =
+        leftScale • ParabolicBlade.bladeKernel)
+    (right_target :
+      (rightContext * ParabolicBlade.coreOutput ((3 : ℚ) ^ 3)) *ᵥ
+          ParabolicBlade.emptyBridgeColumn =
+        rightScale • ParabolicBlade.semanticTerminalColumn 3) :
+    (¬∃ word : List NearyTile,
+      spell (nearyUpper 3) word ++ nearyMarker 3 =
+        spell (nearyLower 3 poisonBody) word) ∧
+      ∃ word : List (TagLetter × Nat),
+        (.b, 30) ∈ word ∧
+          (∀ label ∈ word, label ≠ (.b, 1)) ∧
+          ParabolicBlade.exceptionalChain ((3 : ℚ) ^ 3)
+            [leftContext *
+                wordProduct
+                  (fun label => ParabolicBlade.atom 3 poisonBody label.1 label.2) word *
+                rightContext,
+              1] = 0 := by
+  refine ⟨poison_no_terminal_match, ?_⟩
+  let word := poisonTiles.map fun tile => (pseudoLetter tile, pseudoGap tile)
+  refine ⟨word, ?_, ?_, ?_⟩
+  · simp [word, poisonTiles, pseudoLetter, pseudoGap, ordinary, poisonB]
+  · intro label member
+    obtain ⟨tile, _, rfl⟩ := List.mem_map.mp member
+    cases tile with
+    | inl tile => cases tile <;> norm_num [pseudoLetter, pseudoGap, ParabolicBlade.completeGap]
+    | inr payload => cases payload; norm_num [pseudoLetter, pseudoGap]
+  · have product_eq :
+        wordProduct (fun label => ParabolicBlade.atom 3 poisonBody label.1 label.2) word =
+          originalPseudoReducedProduct poisonBody poisonTiles := by
+        rfl
+    rw [product_eq, originalPseudoReducedProduct_eq_semanticWordMiddle]
+    rw [ParabolicBlade.exceptionalChain_eq_zero_iff _ (by positivity)]
+    have bridge_zero :=
+      (ParabolicBlade.conditional_semanticBridgeProduct_zero_iff_terminal
+      3 (spell pseudoUpper poisonTiles) (spell (pseudoLower poisonBody) poisonTiles)
+      leftContext rightContext leftInverse leftScale rightScale leftScale_ne rightScale_ne
+      left_inverse left_target right_target).mpr poisonTiles_terminal
+    simpa [wordProduct] using bridge_zero
 
 /-- The fixed-terminal-row closure fails on one admissible no-instance: every lawful row
 annihilator also completes the explicit malformed context to a zero word. -/

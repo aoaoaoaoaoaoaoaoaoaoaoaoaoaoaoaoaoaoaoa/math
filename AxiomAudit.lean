@@ -126,6 +126,7 @@ open MatrixMortality
 #print axioms ParabolicRetuned.poisonContext_append_zero_iff
 #print axioms ParabolicRetuned.poison_not_tagHaltsFrom
 #print axioms ParabolicRetuned.poison_no_terminal_match
+#print axioms ParabolicRetuned.poison_originalEndpointCompiler_obstruction
 #print axioms ParabolicRetuned.poison_fixedTerminalRow_obstruction
 #print axioms isMortal_smulMatrix_iff
 #print axioms InternalSandwich.mortal_quotient_iff

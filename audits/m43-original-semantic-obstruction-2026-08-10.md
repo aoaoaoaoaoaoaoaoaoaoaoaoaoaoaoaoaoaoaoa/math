@@ -1,8 +1,8 @@
 # M₄(3) original semantic-endpoint audit
 
-**Date:** 10 August 2026
+**Date:** 10–11 August 2026
 
-**Status:** correct terminal plane formalized; mixed-gap endpoint reachability and converse open
+**Status:** four-parameter endpoint compiler defeated; broader original incidence open
 
 **Authorship:** GPT-5.6 Sol; elicited by @eternalism_4eva
 
@@ -29,14 +29,19 @@ not `Y=X+mσ`. The former depth-`n+β+1` cylinder and its unit equation were der
 wrong substitution and are withdrawn.
 
 The fixed-ray formal-plane obstruction survives by a corrected calculation. Formalization also
-strengthens the delayed report in the direction that matters to the master: it proves an exact
-conditional compiler. If two regular mixed-gap contexts reach two explicit projective rays, one
-semantic bridge followed by the empty bridge vanishes exactly on the Neary terminal language.
-No complete-gap context can reach either target. The open problem is now the exact mixed-gap
-reachability of those rays and the global malformed-incidence converse.
+proves an exact conditional compiler: if two regular mixed-gap contexts reach two explicit
+projective rays, one semantic bridge followed by the empty bridge vanishes exactly when its four
+side-normal parameters satisfy the Neary terminal equation.
 
-This does not close `M₄(3)`. It also does not exclude a fixed incidence whose zero set agrees only
-on the discrete encoded locus without extending to the formal terminal plane.
+That compiler is not a sound reduction. At `(β,body)=(3,bbcc)`, the lawful source cycles forever,
+but one regular gap-thirty `b` atom realizes an extra pseudo-production. An explicit 33-tile word
+then satisfies the corrected terminal equation. If the two endpoint contexts do not exist, the
+forward compiler is absent; if they exist, this malformed middle produces a zero on the
+nonhalting instance. Thus `M4-C04` survives as an exact semantic identity but is parked as a
+route to the master problem.
+
+This does not close `M₄(3)`, classify all original-family zeros, or exclude a syntax-sensitive
+incidence that remembers more than the four side-normal parameters.
 
 ## Source Lock
 
@@ -55,6 +60,12 @@ Both external attacks read branch `m43-cube-root-incidence` at
 The first report had already moved the branch to
 `0bd22487a8969cadee8fe91c71c97cd1f085c6dc` before the delayed report returned. This audit
 records the corrective reconstruction from that pushed boundary.
+
+- The pseudo-terminal attack has final-report SHA-256 digest
+  `6aaf849c3c9e9d9ff129fb0632d4648ce0be09c2623785bdc28f9204518e79bb`.
+  It was reconstructed against the semantically corrected branch boundary
+  `c656107678ad3bb48ba0b558139e976d2fb1c7fb`. Its gap-thirty transfer and losing fork are
+  formalized below.
 
 ## Complete Middle
 
@@ -160,13 +171,52 @@ Kρ(C N(upper,lower) D) Kρ(I) = 0
 ```
 
 The existing exceptional-chain contraction turns this bridge identity into the reduced literal
-word `R(CND)RR`. Thus endpoint reachability, not another semantic calculation, is the missing
-forward implication.
+word `R(CND)RR`. The identity is exact, but it recognizes the side-normal terminal equation
+without certifying that the middle encodes a lawful source history.
 
 Formalization also proves that neither target can be reached by a complete semantic context.
 On the left, `N u*∼k` would force a ratio of powers of three to equal two. On the right,
 `N A p` has positive second and third coordinates, whereas `c*` has opposite signs there.
 Both contexts must contain genuinely incomplete gaps.
+
+## Original Pseudo-Terminal Poison
+
+Set `β=3`, `ρ=27`, `body=bbcc`, `m=67`, and `t=81`. The lawful restricted tag orbit is
+
+```text
+ccb → bbccb → cbb → bbccb → ⋯,
+```
+
+so the source has no terminal word. The original gap-thirty atom is nevertheless
+
+```text
+Q(b,30)=N(203,241,243,243),
+203=[10001]₃,   241=[11110]₃.
+```
+
+It therefore acts as the malformed side-normal pair `10001/11110`. Insert this atom into the
+explicit 33-tile pseudo word already used by the retuned obstruction. Its concatenated spellings
+`U,V` obey
+
+```text
+V=U ++ 1000,   |U|=113,   |V|=117,
+```
+
+and hence
+
+```text
+Y=81X+67,   τ=81σ.
+```
+
+Every label in the middle is regular: the word contains `(b,30)` but not the unique singular
+label `(b,1)`. Lean composes the original atom semantics and proves that for every proposed
+endpoint pair satisfying the conditional compiler hypotheses, this middle gives an exceptional
+chain equal to zero. The same theorem simultaneously proves that the lawful source has no
+terminal word.
+
+This is not a failed search for the endpoint contexts. It is a losing fork valid for every
+instantiation of them. Any endpoint geometry factoring only through `(X,Y,σ,τ)` accepts the
+pseudo-terminal because those parameters contain no certificate of lawful history.
 
 ## Forced Determinant Rays
 
@@ -182,8 +232,9 @@ v*=(t,−m,0)ᵀ,       n=(22,−31,−36)ᵀ.
 ```
 
 This uniqueness calculation and its Cauchy-Binet derivation were independently checked but not
-retained as another formal layer. The weaker right equation `D A p∼c*` already feeds the checked
-conditional compiler and is the smaller live target.
+retained as another formal layer. The weaker right equation `D A p∼c*` feeds the checked
+conditional compiler. Neither reachability problem remains a master-path target after the
+pseudo-terminal obstruction.
 
 ## Withdrawn Cylinder
 
@@ -207,22 +258,29 @@ They have no evidentiary standing. Any oriented arithmetic attack must be re-der
 | Correct actual terminal plane `Y=tX+m, τ=tσ` | reconstructed |
 | Fixed-ray formal-plane recognition | obstructed and formalized |
 | Fixed-ray recognition only on the discrete code locus | open |
-| Conditional mixed-gap endpoint compiler | formalized |
+| Conditional mixed-gap endpoint identity | formalized |
 | Complete-gap attainment of either compiler endpoint | obstructed and formalized |
+| Gap-thirty pseudo-terminal on an admissible no-instance | obstruction formalized |
+| Conditional endpoint compiler as a uniform reduction | rejected |
 | Forced determinant rays | audited |
 | Uniform malformed witness for the pure length test | audited |
 | Former depth-`n+β+1` cylinder | rejected |
-| Mixed-gap endpoint reachability and global converse | open |
+| Mixed-gap endpoint reachability | no longer a master-path target |
+| All-word original-family classification | open |
+| Syntax-sensitive semantic incidence | open |
 | `M₄(3)` | open |
 
 ## Frontier Cut
 
-Delete the false cylinder. Delete complete-gap endpoint contexts and fixed-ray formal-plane
-identities. The live semantic construction is now exact: find regular mixed-gap words `C,D`
-reaching `u*→k` and `A p→c*`, uniformly in the Neary instance, then prove the consecutive-wall
-converse. The opposing route proves either target unreachable under every regular mixed-gap word
-or produces a malformed exact incidence.
+Delete the false cylinder, complete-gap endpoint contexts, fixed-ray formal-plane identities,
+and the four-parameter endpoint compiler as a reduction. Do not spend master-path effort reaching
+its two rays: success activates the explicit false zero. The original family remains live only
+through an all-word classification of arbitrary consecutive wall incidences, or a genuinely
+syntax-sensitive construction whose state excludes pseudo-terminals rather than merely restating
+`Y=tX+m, τ=tσ`.
 
 ## Artifact
 
 [`MatrixMortality/ParabolicSemanticObstruction.lean`](../MatrixMortality/ParabolicSemanticObstruction.lean)
+and
+[`MatrixMortality/ParabolicRetunedObstruction.lean`](../MatrixMortality/ParabolicRetunedObstruction.lean)
