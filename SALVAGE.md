@@ -140,6 +140,7 @@ file owns the mathematical stock.
 | [`M4-C04`](#m4-c04-original-mixed-gap-endpoint-compiler) | conditional compiler | two explicit mixed-gap ray equations recognize the four-parameter Neary terminal equation | formalized | parked |
 | [`M4-O14`](#m4-o14-original-semantic-endpoint-obstruction) | obstruction | fixed rays fail on the formal terminal plane and complete-gap contexts miss both compiler rays | formalized | graduated |
 | [`M4-O15`](#m4-o15-original-pseudo-terminal-endpoint-obstruction) | obstruction | one regular gap-thirty pseudo-production defeats every instantiation of the original endpoint compiler | formalized | graduated |
+| [`M4-O16`](#m4-o16-one-complement-spectral-checksum-obstruction) | obstruction | every rational one-complement cube root is resonant with affine aliases or yields an immortal family | audited | graduated |
 | [`G3-O01`](#g3-o01-four-role-macro-irreducibility) | obstruction | exact nonerasing macros cannot reduce the four source roles to three letters | formalized | graduated |
 | [`G3-S01`](#g3-s01-shift-equivariant-zero-incidence) | structure theorem | same-zero state dimension is equivariant projective incidence dimension | audited | active |
 | [`G3-M01`](#g3-m01-free-group-discrepancy-engine) | partial mechanism | free cancellation implements queue deletion with an all-path converse | reported | active |
@@ -4236,6 +4237,42 @@ computable source image that cannot realize the poison.
 [`MatrixMortality/ParabolicRetunedObstruction.lean`](MatrixMortality/ParabolicRetunedObstruction.lean)
 and
 [`audits/m43-original-semantic-obstruction-2026-08-10.md`](audits/m43-original-semantic-obstruction-2026-08-10.md).
+
+### M4-O16: One-complement spectral-checksum obstruction
+
+**Kind:** obstruction
+
+**Evidence:** audited
+
+**Disposition:** graduated
+
+Retain the paired data matrices and let the unused one-dimensional complement of the cube root
+carry a rational eigenvalue `q`. The compulsory identity `Ŝ³J=TJ` has exactly two branches:
+
+```text
+q=1:   z=2/3, x and y free;
+q≠1:   x=y=0, z=(1+q³)/(q²+q+1).
+```
+
+In the nonresonant branch, every reduced `b`- and `c`-gap atom is invertible for every natural
+gap. A full arbitrary-word factorization then gives rank three to every word containing a data
+letter; pure root words are also nonzero. The three-generator family is immortal.
+
+In the resonant branch, complete gaps lie on the affine erase--rule line. At
+`j_k=(9^k-1)/8`, gap `3j_k` realizes the exact pseudo-production with lower word `1^(2k)0`.
+The intended gaps `0` and `3` are followed by the gap-thirty poison already formalized in
+[`M4-O15`](#m4-o15-original-pseudo-terminal-endpoint-obstruction).
+
+**Scope:** rational roots retaining the paired order-three block and placing all new syntax in
+its one-dimensional complement. This does not cover nontriangular roots, nonlinear projective
+legality invariants, or another three-generator family. Multilinear interpolation is not used as
+a generic no-go: forward completeness need not accept every Boolean assignment to one skeleton.
+
+**Use:** do not revisit exponential gap checksums in the spare eigenvalue. `q≠1` destroys every
+wall; `q=1` restores the affine pseudo-terminals.
+
+**Artifact:**
+[`audits/m43-spectral-checksum-obstruction-2026-08-11.md`](audits/m43-spectral-checksum-obstruction-2026-08-11.md).
 
 ### M4-O08: Residue-two necessary wall
 

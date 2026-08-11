@@ -395,15 +395,25 @@ nonhalting instance `(β,body)=(3,bbcc)`, one regular gap-thirty pseudo-producti
 exist, the forward reduction fails; if they exist, that middle is a false zero. Reaching the two
 rays is therefore no longer frontier work.
 
+The spare-eigenvalue repair is closed by
+[`M4-O16`](SALVAGE.md#m4-o16-one-complement-spectral-checksum-obstruction). Among all rational
+roots retaining the paired order-three block and carrying syntax only in its one-dimensional
+complement, the cube identity forces a dichotomy: a nonunit eigenvalue removes both wall
+couplings and makes every word nonzero, while eigenvalue one restores the affine erase--rule
+line and its infinite pseudo-production ladder. The strongest linear interpolation no-go claimed
+in the external report is rejected: completeness need not accept every Boolean tile assignment
+on a fixed skeleton.
+
 Two original-family nodes survive, and they must not be conflated.
 
 1. **All-word classification.** Use `M4-S04` and `M4-S06` to classify arbitrary consecutive
    wall incidences under every regular transport. Prove immortality, or identify the exact
    residual zero mechanism and decide whether it cuts the master problem.
-2. **Syntax-sensitive semantics.** Construct an incidence that carries a certificate of lawful
-   source history beyond `(X,Y,σ,τ)`, or restrict to a computable universal source image on which
-   pseudo-terminal side normals are impossible. It must prove both the forward zero and the
-   arbitrary-word converse; another restatement of the terminal plane is dead on arrival.
+2. **Syntax-sensitive semantics.** Construct a nonlinear legality invariant inseparable from
+   the resonant wall incidence, use a genuinely different root family, or restrict to a
+   computable universal source image on which pseudo-terminal side normals are impossible. It
+   must prove both the forward zero and the arbitrary-word converse. Fixed endpoint statistics,
+   the spare rational eigenvalue, and another restatement of the terminal plane are dead.
 
 An ontology guard applies to both nodes. The exterior dynamics act by the conjugated
 adjugate-transpose `exteriorTransition(C)`, while endpoint contexts act by the primal matrix
@@ -415,8 +425,8 @@ queues of complete tokens (`M4-O03`), exact internal/final block codes (`M4-O04`
 finite-order roots (`M4-O07`), one-coordinate exterior dynamics (`M4-O09`), and finite strict
 cone separation (`M4-O10`). The annihilator guard [`M4-O06`](SALVAGE.md#m4-o06-punctuation-image-annihilator)
 is discharged. Finite gap catalogues, bare rank-one incidence, defect-count casework, collective-
-wall cancellation, pure-defect endpoints, fixed-ray complete-block semantics, and unproved
-flatness are not frontier work.
+wall cancellation, pure-defect endpoints, fixed-ray complete-block semantics, spare-eigenvalue
+checksums, and unproved flatness are not frontier work.
 
 ### 2. Zero-set compression and fused punctuation: `M₅(3)`
 
