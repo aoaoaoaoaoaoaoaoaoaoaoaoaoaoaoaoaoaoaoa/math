@@ -1178,6 +1178,23 @@ microscopic, doubly order-broken genealogy. See
 [`R32-S29`](SALVAGE.md#r32-s29-adelic-content-and-repeated-factor-budget) and
 [`m32-sparse-genealogy-budget-2026-08-10.md`](audits/m32-sparse-genealogy-budget-2026-08-10.md).
 
+The counter lane now has an exact schedule-incidence formulation. For adjacent primitive
+reductions, the native quotient `τᵢ=Ltᵢ/(hᵢtᵢ₊₁)` obeys
+
+```text
+qᵢ₊₁+qᵢ₊₁ˢ/τᵢ₊₁=A/L+(D/L)(qᵢˢ+(qᵢ−1)τᵢ).
+```
+
+Every prescribed positive wait schedule determines one compatible p-adic Jacobi tail, but it is
+reset-started and rational only when one explicit continued fraction equals the rational reset
+value. Adjacent handoffs must approximate `A/D` to growing p-adic precision and pay matching
+Archimedean height. Finite handoff alphabets are eventually periodic, while readiness forces any
+single fixed rational chart into the already excluded monomial rail. Thus a genuine aperiodic
+counterorbit requires an infinite unbounded-height alphabet of history-dependent charts; choosing
+an aperiodic wait substitution is not a construction. See
+[`R32-S38`](SALVAGE.md#r32-s38-jacobi-schedule-incidence) and
+[`m32-jacobi-schedule-incidence-2026-08-11.md`](audits/m32-jacobi-schedule-incidence-2026-08-11.md).
+
 The remaining reverse reservoir cannot be charged by a function of the projective endpoints.
 For the checked period-three guard, Lean now verifies exact primitive contents and a second
 rational eigenline of the endpoint macro. Repeating the lawful cycle fixes the reset orbit while
@@ -1251,13 +1268,14 @@ all-legal block inequality for the carried generalized continuant. See
 | Lane | Required move | Present obstruction |
 | --- | --- | --- |
 | Split-guard decision | Prove an effective reset-anchored recurrence-or-escape certificate for the doubly order-broken continuant | Forward activation is exponentially budgeted, while endpoint-only charging of the transverse reverse reservoir is false |
-| Split-guard counter | Construct one exact fixed-coefficient reset orbit with a sparse microscopic doubly order-broken moving-prime genealogy | The reported order-breaking tuple traps after `[4,1,1,1,1]`; dense births, macroscopic allocations, rapid recovery, and full-numerator rails are excluded |
+| Split-guard counter | Solve the rational reset incidence for an aperiodic p-adic Jacobi schedule with sparse microscopic doubly order-broken packets | Finite handoff alphabets and fixed rational charts are periodic or impossible; the history-dependent handoff height must be unbounded |
 | Irreducible cubic reflection orbit | Decide endpoint-faithful null-conic reachability under the non-pure recurrence reflections | The twist is arbitrary and two unit indices can generate a free binary submonoid; only the special singular endpoint placement remains |
 | Generic projective incidence | Decide or prove undecidable the normalized `α=β=1` GPI₂ core through intrinsic arithmetic dynamics | It contains exact fixed-projectivity shortcut-Collatz reachability; homomorphic free-word stores with finite queue controllers are impossible |
 
 The split-spectrum hot path is now an effective reset-anchored recurrence-or-escape theorem for
 the doubly order-broken additive continuant, opposed by a genuinely history-sensitive aperiodic
-unbounded-denominator reset orbit with sparse microscopic activations. The matrix compiler,
+unbounded-denominator reset orbit solving one rational p-adic Jacobi incidence with sparse
+microscopic activations. The matrix compiler,
 arbitrary-word converse, deterministic wait decoder, rational inverse-address grammar,
 primitive integral lift, endpoint factorization, exact branch similarity, arbitrary
 repeated-factor pumping, local record-ascent budget, local content allocation, maximal-step

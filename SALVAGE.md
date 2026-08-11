@@ -124,6 +124,7 @@ file owns the mathematical stock.
 | [`R32-S35`](#r32-s35-positive-projective-incidence-genericization) | reduction and normalization | arbitrary PI₂ is a bounded positive-prefix disjunction of GPI₂ instances, and every generic instance has `α=β=1` | formalized | active |
 | [`R32-S36`](#r32-s36-guarded-affine-projective-incidence) | compiler | p-adic denominator poisoning gives an all-word guarded affine compiler into normalized GPI₂ | audited | active |
 | [`R32-S37`](#r32-s37-normalized-shortcut-collatz-incidence) | reduction and arithmetic benchmark | fixed projectivities encode pointwise shortcut-Collatz reaches-one exactly inside normalized GPI₂ | formalized | active |
+| [`R32-S38`](#r32-s38-jacobi-schedule-incidence) | structure theorem and obstruction | every wait schedule has one p-adic Jacobi tail, while reset realization is one rational continued-fraction incidence requiring unbounded history-dependent handoffs | formalized core; audited strengthening | active |
 | [`R32-O19`](#r32-o19-projective-queue-centralizer-obstruction) | obstruction | an injective homomorphic projective word store with finite controller cannot recurrently delete and append queue data | audited | graduated |
 | [`R32-O20`](#r32-o20-transverse-reverse-reservoir) | obstruction | a lawful fixed projective cycle accumulates unbounded reverse 13-adic mass on its transverse eigenline | formalized | graduated |
 | [`R32-D03`](#r32-d03-bounded-denominator-periodicity) | decidable stratum | every infinite legal rational guard orbit with bounded reduced denominators is eventually periodic | formalized | graduated |
@@ -4444,6 +4445,58 @@ Do not replace it with an intended-language simulation or a finite malformed-wor
 
 **Next:** decide the fixed-projectivity predecessor family by an exact symbolic arithmetic
 invariant, or embed a known universal guarded-affine system through the same all-word p-adic gate.
+
+### R32-S38: Jacobi schedule incidence
+
+**Kind:** structure theorem and obstruction
+**Evidence:** formalized core; audited strengthening
+**Disposition:** active
+
+For consecutive primitive endpoint reductions, the native edge quotient
+
+```text
+τᵢ=L tᵢ/(hᵢtᵢ₊₁)
+```
+
+obeys the exact generalized Jacobi transition
+
+```text
+qᵢ₊₁+qᵢ₊₁ˢ/τᵢ₊₁
+  = A/L+(D/L)(qᵢˢ+(qᵢ−1)τᵢ).
+```
+
+Lean proves this directly from two primitive endpoint reductions. With
+`βᵢ=(qᵢ−1)τᵢ`, the backward update is fractional-linear in `βᵢ₊₁`; Lean also proves its exact
+difference factor. Iterating that factor shows that every prescribed positive wait schedule has
+one compatible p-adic unit tail. It comes from the rational reset exactly when one explicit
+p-adic continued fraction equals
+
+```text
+Lq₀ˢ(q₀−1)/(A+D−Lq₀).
+```
+
+Every adjacent handoff `αᵢ=βᵢ/(qᵢ₊₁−1)` approximates `A/D` to depth
+`min(aᵢ₊₁,saᵢ)` and pays the corresponding Archimedean rational height. A finite handoff alphabet
+therefore has bounded waits and is eventually periodic. If all states lie on one fixed rational
+ready-tail chart, target readiness itself forces an affine monomial wait rail; the checked rail
+theorem excludes it without assuming the successor schedule in advance.
+
+**Scope:** no aperiodic rational schedule, fixed coefficient tuple, or undecidability reduction
+is constructed. The p-adic completion, reset equivalence, handoff-height consequence, and
+automatic one-chart reduction are audited; only the finite Jacobi identities are kernel checked.
+The packet-allocation table is already owned by `R32-S34` and is not duplicated.
+
+**Artifact:** `jacobiTail`, `jacobiBackward_sub`, and
+`PrimitiveEndpointReduction.jacobiTail_transition` in
+[`ReturnGuardContinued.lean`](MatrixMortality/ReturnGuardContinued.lean), with reconstruction in
+[`m32-jacobi-schedule-incidence-2026-08-11.md`](audits/m32-jacobi-schedule-incidence-2026-08-11.md).
+
+**Use:** reject schedule-first counterexamples. A genuine split counterorbit must solve the
+rational reset incidence through an infinite unbounded-height handoff alphabet whose chart
+depends on accumulated history.
+
+**Next:** construct such a reset incidence, or prove that its moving Jacobi tail cannot coexist
+with first-hit terminality and the global content budget.
 
 ### R32-O19: Projective queue centralizer obstruction
 

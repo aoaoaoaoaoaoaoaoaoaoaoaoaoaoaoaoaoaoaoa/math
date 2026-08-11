@@ -728,6 +728,120 @@ theorem PrimitiveEndpointReduction.twoStep_contentBudget
       Nat.mul_le_mul_left x second_right_le
     _ ≤ y * (coefficient * height) := scaled_right_le
 
+/-! ## Jacobi tail -/
+
+/-- Rational edge quotient exposing the generalized Jacobi recurrence. It is a coordinate of
+two adjacent primitive endpoint pairs, not an additional dynamical register. -/
+def jacobiTail (scale content sourceDenominator targetDenominator : ℤ) : ℚ :=
+  scale * sourceDenominator / (content * targetDenominator)
+
+/-- Backward Jacobi update for the cyclotomic-normalized ready tail. -/
+def jacobiBackward
+    (depth : Nat) (center drift scale q nextQ tail : ℚ) : ℚ :=
+  -center / drift - q ^ depth + scale / drift * nextQ +
+    scale / drift * (nextQ ^ depth * (nextQ - 1) / tail)
+
+/-- The backward Jacobi update contracts differences by its explicit reciprocal factor. -/
+theorem jacobiBackward_sub
+    (depth : Nat) (center drift scale q nextQ left right : ℚ)
+    (drift_ne : drift ≠ 0) (left_ne : left ≠ 0) (right_ne : right ≠ 0) :
+    jacobiBackward depth center drift scale q nextQ left -
+        jacobiBackward depth center drift scale q nextQ right =
+      -(scale / drift * nextQ ^ depth * (nextQ - 1)) *
+        (left - right) / (left * right) := by
+  simp only [jacobiBackward]
+  field_simp
+  ring
+
+/-- Consecutive primitive endpoint reductions obey one exact generalized Jacobi shell law. -/
+theorem PrimitiveEndpointReduction.jacobiTail_transition
+    {prime depth : Nat} {centerNumerator driftNumerator scale : ℤ}
+    {wait nextWait : Nat} {source middle target : ℤ × ℤ}
+    {content nextContent : ℤ}
+    (first : PrimitiveEndpointReduction prime depth centerNumerator
+      driftNumerator scale wait source middle content)
+    (second : PrimitiveEndpointReduction prime depth centerNumerator
+      driftNumerator scale nextWait middle target nextContent)
+    (scale_ne : scale ≠ 0) (middleDenominator_ne : middle.2 ≠ 0) :
+    (prime : ℚ) ^ nextWait +
+        (prime : ℚ) ^ (depth * nextWait) /
+          jacobiTail scale nextContent middle.2 target.2 =
+      (centerNumerator : ℚ) / scale +
+        (driftNumerator : ℚ) / scale *
+          ((prime : ℚ) ^ (depth * wait) +
+            ((prime : ℚ) ^ wait - 1) *
+              jacobiTail scale content source.2 middle.2) := by
+  have content_ne : (content : ℚ) ≠ 0 := by exact_mod_cast first.content_ne
+  have scale_ne' : (scale : ℚ) ≠ 0 := by exact_mod_cast scale_ne
+  have middleDenominator_ne' : (middle.2 : ℚ) ≠ 0 := by
+    exact_mod_cast middleDenominator_ne
+  have first_source :
+      (source.1 : ℚ) =
+        (prime : ℚ) ^ (depth * wait) * (content * middle.2) +
+          scale * ((prime : ℚ) ^ wait - 1) * source.2 := by
+    exact_mod_cast first.source_eq_power_mul_prequotient
+  have first_target :
+      (content * middle.1 : ℤ) =
+        driftNumerator * source.1 +
+          (centerNumerator - scale) * (content * middle.2) := by
+    simpa only [endpointPrequotient] using first.target_eq_drift_add_prequotient
+  have first_target' :
+      (content : ℚ) * middle.1 =
+        driftNumerator * source.1 +
+          (centerNumerator - scale) * (content * middle.2) := by
+    exact_mod_cast first_target
+  have second_source :
+      (middle.1 : ℚ) =
+        (prime : ℚ) ^ (depth * nextWait) * (nextContent * target.2) +
+          scale * ((prime : ℚ) ^ nextWait - 1) * middle.2 := by
+    exact_mod_cast second.source_eq_power_mul_prequotient
+  have source_ratio :
+      (source.1 : ℚ) / (content * middle.2) =
+        (prime : ℚ) ^ (depth * wait) +
+          scale * ((prime : ℚ) ^ wait - 1) * source.2 /
+            (content * middle.2) := by
+    rw [first_source]
+    field_simp [content_ne, middleDenominator_ne']
+  have middle_ratio :
+      (middle.1 : ℚ) / middle.2 =
+        driftNumerator * (source.1 / (content * middle.2)) +
+          (centerNumerator - scale) := by
+    calc
+      (middle.1 : ℚ) / middle.2 =
+          (content * middle.1) / (content * middle.2) := by
+        field_simp [content_ne, middleDenominator_ne']
+        ring
+      _ =
+          (driftNumerator * source.1 +
+            (centerNumerator - scale) * (content * middle.2)) /
+              (content * middle.2) := by rw [first_target']
+      _ =
+          driftNumerator * (source.1 / (content * middle.2)) +
+            (centerNumerator - scale) := by
+        field_simp [content_ne, middleDenominator_ne']
+  dsimp [jacobiTail]
+  calc
+    (prime : ℚ) ^ nextWait +
+          (prime : ℚ) ^ (depth * nextWait) /
+            (scale * middle.2 / (nextContent * target.2)) =
+        1 + middle.1 / (scale * middle.2) := by
+      rw [second_source]
+      field_simp [scale_ne', middleDenominator_ne']
+      ring
+    _ =
+        (centerNumerator : ℚ) / scale +
+          (driftNumerator : ℚ) / scale *
+            ((prime : ℚ) ^ (depth * wait) +
+              ((prime : ℚ) ^ wait - 1) *
+                (scale * source.2 / (content * middle.2))) := by
+      rw [show
+        (middle.1 : ℚ) / (scale * middle.2) =
+          (middle.1 / middle.2) / scale by
+            rw [div_div, mul_comm (scale : ℚ) middle.2]]
+      rw [middle_ratio, source_ratio]
+      field_simp [content_ne, scale_ne', middleDenominator_ne']
+      ring
+
 /-- Critical depth-two decoder. -/
 def criticalDecoder (q : ℚ) : Matrix (Fin 2) (Fin 2) ℚ :=
   !![q, -1; 1 - q, 1]

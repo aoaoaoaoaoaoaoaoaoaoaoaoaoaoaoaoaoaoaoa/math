@@ -291,6 +291,8 @@ open MatrixMortality
 #print axioms ReturnGuard.cumulativeWaitForm_hasValue
 #print axioms ReturnGuard.PrimitiveEndpointReduction.twoStep_prequotient_transport
 #print axioms ReturnGuard.PrimitiveEndpointReduction.twoStep_contentBudget
+#print axioms ReturnGuard.jacobiBackward_sub
+#print axioms ReturnGuard.PrimitiveEndpointReduction.jacobiTail_transition
 #print axioms ReturnGuard.PrimitiveEndpointReduction.denominator_recurrence
 #print axioms ReturnGuard.PrimitiveEndpointReduction.denominator_growth_factorization
 #print axioms ReturnGuard.PrimitiveEndpointReduction.nonDecreasing_wait_le_log_recordBound

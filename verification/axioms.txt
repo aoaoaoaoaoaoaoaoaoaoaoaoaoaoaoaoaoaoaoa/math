@@ -599,6 +599,10 @@
 'MatrixMortality.ReturnGuard.PrimitiveEndpointReduction.twoStep_contentBudget' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.ReturnGuard.jacobiBackward_sub' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ReturnGuard.PrimitiveEndpointReduction.jacobiTail_transition' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.ReturnGuard.PrimitiveEndpointReduction.denominator_recurrence' depends on axioms: [propext, Quot.sound]
 'MatrixMortality.ReturnGuard.PrimitiveEndpointReduction.denominator_growth_factorization' depends on axioms: [propext,
  Quot.sound]

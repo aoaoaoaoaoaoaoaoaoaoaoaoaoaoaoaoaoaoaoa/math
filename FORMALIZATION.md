@@ -583,6 +583,15 @@ ends of the argument, while a general rational-function atlas would not tighten 
 history-sensitive enemy. See
 [`audits/m32-finite-radial-atlas-2026-08-08.md`](audits/m32-finite-radial-atlas-2026-08-08.md).
 
+The schedule-first counter route now has one exact Jacobi coordinate. Lean proves the consecutive
+shell transition and the backward map's reciprocal difference factor. Their p-adic iteration
+gives one compatible unit tail for every prescribed wait schedule; reset-started rational
+realization is one scalar continued-fraction incidence. The audited consequences exclude finite
+handoff alphabets and one fixed rational ready-tail chart from every aperiodic orbit. These
+infinite completion and height arguments are not kernel checked; they consume the checked finite
+identities and the existing formal rail theorem. See `R32-S38` and
+[`audits/m32-jacobi-schedule-incidence-2026-08-11.md`](audits/m32-jacobi-schedule-incidence-2026-08-11.md).
+
 These are structural and decidable-stratum theorems, not an `M₃(2)` resolution. The imported
 order-four Skolem theorem used to classify rank-one profiles is not reimplemented in Lean. The
 reverse compiler still assumes `αβ≠0`, but arbitrary PI₂ now reduces to at most two generic
@@ -730,7 +739,7 @@ with a complete arbitrary-word converse.
 | `ReturnGuardQuotientCompleteness.lean` | zero-wait terminal kernel, cancellation-reachability completeness, and synchronized-product no-amplification |
 | `ReturnGuardDriftCertificate.lean` | exact drift-divisor certificate classification, cyclic subgroup criterion, and executable finite test |
 | `ReturnGuardCumulative.lean` | chronological product algebra, pre-final Casoratian localization, content-free cumulative endpoint execution, exact second-order recurrence, reset-ancestry pullback, primitive endpoint projectivization, odd-resultant immortality, and derived primitive content |
-| `ReturnGuardContinued.lean` | exact moving-divisor allocation, fixed-cusp complete quotients, primitive prequotient transport, recurrent-boundary reverse persistence, record-ascent content budget, and order-three decoder |
+| `ReturnGuardContinued.lean` | exact moving-divisor allocation, fixed-cusp complete quotients, primitive prequotient and Jacobi-tail transport, recurrent-boundary reverse persistence, record-ascent content budget, and order-three decoder |
 | `ReturnGuardBoundary.lean` | depth-two universal-boundary reset ball, valuation-wall immortality, and primewise reset-resultant necessity |
 | `ReturnGuardSmith.lean` | signed content split, positive-cone primitive-height gain, nonmaximal contraction, maximal-step isolation, and diagonalized gauged cocycle |
 | `ReturnGuardPeriodicity.lean` | exact denominator recurrence and explicit record-ascent, wait, content, and numerator ceilings |
@@ -874,6 +883,7 @@ with a complete arbitrary-word converse.
 | Cumulative endpoints form a generalized continued fraction with one fixed forbidden cusp | `ReturnGuard.cumulativeCompleteQuotient_recurrence`, `ReturnGuard.cumulativeCompleteQuotient_sub_forbiddenCusp`, `ReturnGuard.cumulativeWaitForm_hasValue` |
 | At critical depth two, every nondecreasing pair of waits pays an exact two-step content budget | `ReturnGuard.PrimitiveEndpointReduction.twoStep_elimination`, `ReturnGuard.PrimitiveEndpointReduction.twoStep_contentBudget` |
 | Consecutive primitive reductions carry a primitive prequotient coordinate through one exact integral generalized-continuant block at every depth | `ReturnGuard.PrimitiveEndpointReduction.prequotient_coprime_denominator`, `ReturnGuard.PrimitiveEndpointReduction.twoStep_prequotient_transport` |
+| Consecutive primitive reductions obey the exact generalized Jacobi shell law, whose backward map has an explicit reciprocal difference factor | `ReturnGuard.PrimitiveEndpointReduction.jacobiTail_transition`, `ReturnGuard.jacobiBackward_sub` |
 | Every functional primitive endpoint stream of depth at least two with bounded positive denominators is eventually periodic | `ReturnGuard.PrimitiveEndpointReduction.nonDecreasing_waits_le`, `ReturnGuard.BoundedPrimitiveEndpointStream.wait_le`, `ReturnGuard.BoundedPrimitiveEndpointStream.eventually_periodic` |
 | The critical decoder is an order-three core followed by a wait-dependent shear | `ReturnGuard.criticalDecoder_factor`, `ReturnGuard.criticalDecoderCore_cube` |
 | The Smith decoder is a positive shear followed by one Gauss continuant generator | `ReturnGuard.smithRubanDecoder_continuant_cut` |
