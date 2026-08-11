@@ -788,16 +788,17 @@ one. Empty-consume pumping and genuinely phase-splitting transport are separate 
 | Positive projective transition lower bound | Same-zero dimension three is point-line incidence in `P²`, and actual one-sided shifts retain finite rank/kernel/image data | Derive a uniform shift incompatibility from an unbounded terminal section; static support rank, formal inverse completion, and fixed equal-length return flowers are forbidden |
 | Global word-residual recoding | Longer noncommutative atoms can retain order while discarding the four additive role channels | Escape `G3-D05`: fixed-priority affine counters and all one-way reset/transfer/fanout cascades are decidable |
 | Head-separated three-schema source | `G3-C04` discharges every arbitrary-trace forcing obligation locally | Make the `G3-D06` forked two-cycle, an empty pump, or nonfunctional splitting carry an undecidable open word residue |
-| Graph-specific exponent-one equalizer | `G3-M03` gives an exact three-positive affine cover and the actual maps share the character globally | Analyze the actual program graph or build a spelling-sensitive carrier; promise-only algebraic compression is closed by `G3-O19` |
+| Actual Carvalho program-graph geometry | The actual maps share the character globally, so every required affine slice is a coset of one correlated kernel graph | Determine the actual graph's Zariski closure; exploit a proper three-dimensional quotient or prove density and close algebraic compression for this source |
+| Spelling-sensitive Carvalho carrier | `G3-M03` gives an exact three-positive affine cover with harmless identity padding | Jointly detect actual equality and weight through graph-only, nonalgebraic, or spelling-sensitive dynamics; promise-only algebraic compression is closed by `G3-O19` |
 
-These six lanes form three trunks. The first three race a direct paired construction against its
+These seven lanes form three trunks. The first three race a direct paired construction against its
 one-sided projective lower bound. The next two seek genuine `GPCP(3)` through either global
-recoding or a native source. The last is a hybrid free-cancellation source already normalized to
-three positive controls.
+recoding or a native source. The last two race algebraic analysis of the actual Carvalho graph
+against a direct nonalgebraic carrier for its three-positive language.
 
 #### Raceable leaves
 
-After the five-report `e656e0d9` wave, the net tree has six independent raceable leaves:
+After the six-report `68b831a` wave, the net tree has seven independent raceable leaves:
 
 1. **Common-kernel shuttle constructor.** Give one computable three-state paired recognizer in
    which the toggle moves a freshly minted common-kernel guard back into visible quotient data.
@@ -821,20 +822,26 @@ After the five-report `e656e0d9` wave, the net tree has six independent raceable
    `Q→P` return, with cycle products strictly on opposite sides of one and an unbounded
    word-valued residual. The empty-pump and genuinely splitting variants remain secondary
    constructions. Functional private-head routing is closed by `G3-D06`.
-6. **Graph-specific exponent-one affine equalizer.** Starting from the exact `G3-M03` positive
-   cover, compile transported equality plus weight `d` into ordinary `GPCP(3)` or a three-state
-   scalar-zero family. Either compute and exploit the actual program graph's Zariski closure or
-   use a spelling-sensitive/nonalgebraic carrier which need not extend to the closure. Preserve
-   program correlation; `G3-O19` forbids compression from the coarse promises alone.
+6. **Actual Carvalho program-graph geometry.** Compute the Zariski closure of the actual
+   correlated program graph and its fixed-character slices uniformly enough for the reduction.
+   If it has a proper invariant quotient, turn that quotient into a three-state detector; if it
+   is dense, close algebraically extendable compression for the actual source. The synthetic
+   graph in `G3-O19` is a test case, not a substitute for this computation.
+7. **Spelling-sensitive Carvalho carrier.** Starting from the exact `G3-M03` positive cover,
+   compile transported equality plus weight `d` into ordinary `GPCP(3)` or a three-state
+   scalar-zero family by graph-only, nonalgebraic, or spelling-sensitive dynamics. Prove the
+   complete arbitrary-positive-word converse and preserve identity padding. The carrier need not
+   extend to the correlated graph's Zariski closure.
 
-The count rose by one only because the former singular-constructor leaf split along a proved
-kernel dichotomy. The paired saturation leaf was deleted outright and replaced by a genuinely
-one-sided lower-bound problem. Generic stochastic, Rees/Brandt, affine, and singular-reset ideas
-are implementation vocabularies inside leaves 1–3 until they furnish an exact source interface
-and all-word theorem. Another fixed-body fit, fixed macro, punctuation placement, affine atlas,
-or formal-inverse argument is not a leaf. The joint derivation and evidence boundaries are
-recorded in
-[`m34-wave-e656e0d9-synthesis-2026-08-10.md`](audits/m34-wave-e656e0d9-synthesis-2026-08-10.md).
+The count rose from six to seven only because the Carvalho leaf split along a proved semantic
+seam: algebraic information about the actual correlated group and nonalgebraic information about
+positive spellings are distinct tasks. Every other leaf narrowed. Empty-consume pumping and
+nonfunctional splitting remain boundaries inside leaf 5 until they supply a concrete
+computational mechanism. Generic stochastic, Rees/Brandt, affine, and singular-reset ideas are
+implementation vocabularies inside leaves 1–3 until they furnish an exact source interface and
+all-word theorem. Another fixed-body fit, fixed macro, punctuation placement, affine atlas, or
+formal-inverse argument is not a leaf. The joint derivation and evidence boundaries are recorded
+in [`m34-wave-68b831a-synthesis-2026-08-11.md`](audits/m34-wave-68b831a-synthesis-2026-08-11.md).
 
 #### Operational program
 
@@ -897,11 +904,13 @@ inside `G3-D04`; one-way destructive reset, transfer, fanout, and fixed multipli
 priority reuse, nonlinear counter interaction, changing or incomparable tests, or a literal
 word-order carrier whose same-length entropy is unbounded.
 
-The free-group lane no longer needs another Stallings computation, domain parser, or positive
+The free-group trunk no longer needs another Stallings computation, domain parser, or positive
 normal-form machine. `G3-M03` already presents the exponent-one equalizer on three positive
 letters with exact affine weight and harmless identity padding, and direct source inspection now
-shows `χ∘g=χ∘h` globally. The next experiment must jointly detect transported equality and that
-weight on the actual correlated program graph. Extending first to independent `F×F×ℤ` data is
+shows `χ∘g=χ∘h` globally. Its two experiments must remain distinct. The algebraic lane computes
+the Zariski closure of the actual program graph and either exploits a proper invariant or proves
+density. The constructive lane directly detects equality and weight through spelling-sensitive,
+graph-only, or nonalgebraic positive dynamics. Extending first to independent `F×F×ℤ` data is
 four-dimensional by `G3-O16`; inferring an algebraic compression merely from the shared
 character and cyclic equalizer is closed by `G3-O19`; a singular third coordinate over a
 persistent invertible quotient is closed by `G3-O14`; a standalone syntax series requires six
