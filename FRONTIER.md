@@ -581,6 +581,16 @@ instance-fitted and regular: a source-uniform finite-target version remains excl
 `G3-O04`. The paired route's live obstruction is now uniformity across bodies, not the state
 dimension of this fixed branching language.
 
+[`G3-C05`](SALVAGE.md#g3-c05-equal-length-mixed-branching-recognizer) sharpens that verdict on
+the body `bcbcbb`. Its complete grammar is `P₀(A₀|B₀)*`, with two distinct equal-length null
+blocks and therefore `2ⁿ` terminal histories at every block depth. Lean proves an explicit
+integral three-state recognizer equal to the paired zero language on the entire raw control
+monoid. The proof scours arbitrary toggle pairs and kernel-checks the complete inverse
+congruence graph, including both dead competing branches. Equal-length branching, exponential
+same-level growth, finite return flowers, and common-kernel guard refresh are therefore not
+positive projective obstructions. Any surviving lower bound must obtain incompatible shifts
+uniformly from an unbounded terminal section; another fixed finite flower is closed.
+
 [`G3-O12`](SALVAGE.md#g3-o12-positive-reset-dimension-tax) removes the residual-local response.
 If both legal prepend cylinders of a reverse-queue code span the three-state space, their data
 maps are invertible. At the wholly legal queue `qb`, the `b`- and `c`-rule equations then force
@@ -748,7 +758,7 @@ delay, equal-height tableau, or acyclic verification tail cannot be its computat
 | --- | --- | --- |
 | Common-kernel shuttle | The exact `bcbb` compiler moves its common data kernel out through the toggle and recovers it at the next data action | Uniformize this non-invariant shuttle in `(β,body)`; every toggle-invariant guard factors through the two-dimensional quotient |
 | Transverse-kernel terminal dynamics | Fixed integral transverse controls encode every history and exactly recognize all minimum bodies | Replace the singleton target row by an infinite, source-computable terminal section for unrestricted bodies |
-| Positive projective transition lower bound | Same-zero dimension three is point-line incidence in `P²`, and actual one-sided shifts retain finite rank/kernel/image data | Exhibit a finite shift-closed diagram impossible for every singular rank pattern; static support rank and formal inverse completion are forbidden |
+| Positive projective transition lower bound | Same-zero dimension three is point-line incidence in `P²`, and actual one-sided shifts retain finite rank/kernel/image data | Derive a uniform shift incompatibility from an unbounded terminal section; static support rank, formal inverse completion, and fixed equal-length return flowers are forbidden |
 | Global word-residual recoding | Longer noncommutative atoms can retain order while discarding the four additive role channels | Escape `G3-D04`: fixed-priority affine counters, arbitrary reversals, and any computable finite dimension are decidable |
 | Head-separated three-schema source | `G3-C04` discharges every arbitrary-trace forcing obligation locally | Prove undecidability with exactly three head-separated prefix productions, an open word residue, and both drift signs under every positive weighting |
 | Graph-specific exponent-one equalizer | `G3-M03` gives an exact three-positive affine cover with harmless identity padding | Detect equality and affine weight on the correlated Carvalho graph; full `F×F×ℤ`, finite fibres, singular quotient lifts, and a separate syntax guard are closed |
@@ -769,10 +779,11 @@ After the five-report `e656e0d9` wave, the net tree has six independent raceable
 2. **Transverse-kernel terminal constructor.** Extend the checked mixed-radix transverse orbit
    from one target code to a source-computable infinite terminal section for unrestricted bodies.
    Pure kernel geometry, exceptional fibres, and minimum-body examples are closed.
-3. **Positive projective transition-diagram obstruction.** Produce a finite actual paired diagram
-   which no three-dimensional rational same-zero representation can realize for any combination
-   of generator ranks and kernels. It must use shifts; the conic already realizes every static
-   incidence table, and `G3-O17` forbids inverse saturation as a premise.
+3. **Positive projective transition obstruction.** Derive from a source-unbounded terminal
+   section a finite shift incompatibility which no three-dimensional rational same-zero
+   representation can realize for any combination of generator ranks and kernels. It must use
+   uniform shifts: the conic realizes every static incidence table, `G3-O17` forbids inverse
+   saturation, and `G3-C05` realizes the strongest fixed equal-length flower yet isolated.
 4. **Global non-priority word-residual recoding.** Give a computable three-pair reduction with
    both witness directions and a complete arbitrary-new-word converse. Its searchable witnesses
    must use changing/incomparable tests, nonadditive transfers, or genuine unbounded word order
@@ -797,10 +808,11 @@ recorded in
 
 #### Operational program
 
-The fixed `bcbc` target is complete enough to stop serving as the enemy. Its exact grammar and
-singular candidate expose the useful mechanism: one carry recognizes complete excursions, while
-a transient guard rejects malformed first controls. The audited reverse certificate handles the
-entire free monoid. Further fixed-body fitting has no bearing on `M₃(4)`.
+The fixed `bcbc` and `bcbcbb` targets have stopped serving as the enemy. Their exact grammars
+expose the useful mechanism: one carry recognizes complete excursions, while a transient guard
+rejects malformed first controls. For `bcbcbb`, the entire reverse certificate is now
+kernel-checked on the free monoid. Further fixed-body fitting has no bearing on `M₃(4)` unless it
+isolates a transition law that survives uniformization across an unbounded source family.
 
 The former scalar stroke-carry lane is closed only for its phase-line family. In the notation
 

@@ -5050,6 +5050,64 @@ master target is now uniformity across the source family, not this fixed grammar
 **Artifact:** [`BranchingRecognizer.lean`](MatrixMortality/BranchingRecognizer.lean) and
 [`m34-bcbc-singular-recognizer-2026-08-08.md`](audits/m34-bcbc-singular-recognizer-2026-08-08.md).
 
+### G3-C05: Equal-length mixed branching recognizer
+
+**Kind:** fixed-instance compiler
+
+**Evidence:** formalized
+
+**Disposition:** graduated
+
+At width three, the body `bcbcbb` has the complete terminal-history language
+
+```text
+P₀(A₀|B₀)*,
+P₀=(CBC,BCB,BBB),
+A₀=(BBB,BCB,CBB),
+B₀=(BBB,CBC,BBB).
+```
+
+The two null blocks have the same length. Hence level `n` contains `2ⁿ` terminal histories,
+without the nested-depth variation used by `bcbc`. Lean derives this grammar from a four-state
+word-residual path and proves the terminal prefix by three exact cancellation steps.
+
+Three explicit integral controls recognize the entire raw paired zero language:
+
+```text
+B=[[0,2,1],              C=[[0,2,-432372898],       T=[[1,0,0],
+   [0,5,3703455],           [0,7,5236172],             [0,-1,21436039],
+   [0,0,1]],                [0,0,1]],                   [0,0,1]].
+```
+
+With `λ=(1,0,0)` and `γ=(1,21436039,1)ᵀ`, Lean proves on every raw control word `w`
+
+```text
+λH_wγ=0  ↔  pairedCoefficient(ℚ,3,bcbcbb,w)=0.
+```
+
+The converse is not an enumeration. Adjacent toggles are scoured exactly, every normal control
+word is decomposed into four affine carry macros, and a complete integer inverse-congruence
+graph proves that the only target paths are one eight-macro entrance followed by arbitrary
+nine-macro `A` or `B` returns. Both reported competing branches are formally shown to have no
+integer predecessor, and the unmatched terminal toggle is excluded by carrying both possible
+base states through the recursive classification.
+
+Both data controls have determinant zero and exact common kernel `ℤ(1,0,0)ᵀ`; `T²=I` and
+`det T=-1`. Every suffix state has last coordinate one, and no generator product is zero.
+
+**Scope:** this is an exact all-word theorem for one fixed body. It refutes equal-length binary
+branching, exponentially many same-level witnesses, finite return flowers, and common-kernel
+guard refresh as lower-bound invariants. It neither constructs a source-uniform recognizer nor
+proves that every body has a regular terminal section.
+
+**Use:** delete fixed mixed-branching diagrams from the positive-projective lower-bound beam.
+Any surviving obstruction must force incompatible transitions uniformly across an unbounded
+terminal section, rather than count branches or exhibit finitely many return cycles.
+
+**Artifact:** [`MixedBranchingHistory.lean`](MatrixMortality/MixedBranchingHistory.lean),
+[`MixedBranchingRecognizer.lean`](MatrixMortality/MixedBranchingRecognizer.lean), and
+[`m34-mixed-branching-recognizer-2026-08-11.md`](audits/m34-mixed-branching-recognizer-2026-08-11.md).
+
 ### G3-M02: Square-root punctuation fracture
 
 **Kind:** partial mechanism

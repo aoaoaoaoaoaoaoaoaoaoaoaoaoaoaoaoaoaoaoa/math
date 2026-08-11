@@ -75,6 +75,7 @@ import MatrixMortality.PeriodicHistory
 import MatrixMortality.TransverseHistory
 import MatrixMortality.BranchingHistory
 import MatrixMortality.BranchingRecognizer
+import MatrixMortality.MixedBranchingRecognizer
 import MatrixMortality.SquareRootPunctuation
 import MatrixMortality.TernaryClosedBlockNoGo
 import MatrixMortality.WordDiscrepancy

@@ -557,6 +557,17 @@ displayed matrices. Its finite reverse graph is audited, but the rank certificat
 been transcribed into Lean. No publication-facing theorem identifies the matrix and paired zero
 sets until that transcription is complete.
 
+For [`G3-C05`](SALVAGE.md#g3-c05-equal-length-mixed-branching-recognizer), no converse remains
+outside Lean. The body `bcbcbb` has exact terminal grammar `P₀(A₀|B₀)*`, with two distinct
+equal-length null blocks. Lean proves the grammar from residual paths, the complete raw-control
+toggle normal form, the integral affine recurrence, and every node and dead branch of the
+inverse congruence graph. The publication-facing theorem
+`MixedBranchingRecognizer.recognizerCoefficient_eq_zero_iff_paired` identifies the displayed
+three-state coefficient zero set with the paired coefficient zero set on every control word.
+The same module checks singular data determinants, the exact common kernel, toggle involution,
+nonzero boundary vectors, affine-chart suffix states, and absence of zero generator products.
+This is a fixed-body countermodel only; no source-uniform terminal-section theorem is claimed.
+
 For [`G3-M02`](SALVAGE.md#g3-m02-square-root-punctuation-fracture), the complete fracture,
 explicit square identity, exact rank, and exact/weighted-series rigidity are formalized. The
 source-specific reverse-marker exclusion and the immortality of every boundary-aligned additive
@@ -824,6 +835,8 @@ with a complete arbitrary-word converse.
 | `PhaseRigidity.lean` | checked local role algebra, discrepancy commutators, and invariant-pencil rigidity |
 | `HistoryFracture.lean` | null-history counterexample, minimum-body base-five encoder, and integral mortality lift |
 | `TransverseHistory.lean` | injective mixed-radix history code, transverse rank-two controls, and exact minimum-body zero language |
+| `MixedBranchingHistory.lean` | equal-length mixed terminal grammar and exact raw-toggle normal form |
+| `MixedBranchingRecognizer.lean` | complete inverse carry graph and integral three-state same-zero recognizer |
 | `ExpandingHistoryNoGo.lean` | reset-affine orbit, finite reverse automaton, regularity, and universal computability obstruction |
 | `CancellativeProjectiveNoGo.lean` | paired residual conic, finite support-rank closure, cancellative role fractions, and projective commutator rigidity |
 | `PairedInverseChamber.lean` | one-turn residual chambers, protected formal inverse states, and positive forward-cone separation |
@@ -1018,6 +1031,10 @@ with a complete arbitrary-word converse.
 | The `bcbc` null and terminal histories have the complete nested-excursion grammars | `BranchingRecognizer.bcbcNull_iff`, `BranchingRecognizer.bcbc_terminal_match_iff` |
 | The reported singular recognizer obeys its exact all-control affine recurrence | `BranchingRecognizer.recognizerProduct_mulVec_delta`, `BranchingRecognizer.recognizerCoefficient_eq_guard` |
 | Canonical controls decode every `bcbc` terminal history and vanish in both scalar systems | `BranchingRecognizer.terminalControl_decode`, `BranchingRecognizer.recognizerCoefficient_terminalControl`, `BranchingRecognizer.pairedCoefficient_terminalControl` |
+| The `bcbcbb` terminal histories are exactly one fixed prefix followed by arbitrary equal-length binary null blocks | `MixedBranchingRecognizer.mixedNull_iff`, `MixedBranchingRecognizer.mixed_terminal_match_iff` |
+| Toggle scouring gives the exact two normal spellings of each mixed terminal history | `MixedBranchingRecognizer.decode_eq_terminal_iff_scourToggles` |
+| The integral mixed recognizer equals the paired zero language on every raw control word | `MixedBranchingRecognizer.recognizerCoefficient_eq_zero_iff`, `MixedBranchingRecognizer.pairedCoefficient_eq_zero_iff`, `MixedBranchingRecognizer.recognizerCoefficient_eq_zero_iff_paired` |
+| Its data maps have one exact common kernel, its toggle is involutive, and no generator product is zero | `MixedBranchingRecognizer.recognizerData_mulVec_eq_zero_iff`, `MixedBranchingRecognizer.recognizerToggle_involutive`, `MixedBranchingRecognizer.recognizerProduct_ne_zero` |
 | A matrix square equal to an outer product gives the complete `SS`-free mortality grammar | `SquareRootPunctuation.isMortal_iff_exists_squareFree_zero` |
 | The explicit source-uniform Neary punctuation matrix has the required square and rank two | `SquareRootPunctuation.nearySquareRoot_sq`, `SquareRootPunctuation.nearySquareRoot_rank` |
 | Exact coefficient preservation on the `R_bR_b`-free subshift forces the `R_b` matrix to be a unit | `SquareRootPunctuation.ruleB_isUnit_of_exact_on_squareFree` |
