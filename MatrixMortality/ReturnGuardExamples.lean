@@ -921,5 +921,52 @@ theorem threeReturn_physical_isMortal :
   exact ⟨[1, 1, 1], by simp, by simp [PositiveAddress],
     threeReturn_endpointTerminalWord⟩
 
+/-- A reset-terminal step can have a same-address primitive companion whose complementary
+reverse content is arbitrarily smaller than the terminal step's forward content.  The exterior
+displacement of the two sources is the exact square `-9(12n+1)²`; hence neither terminal
+anchoring nor one-step shadow comparison gives a monotone contraction. -/
+theorem resetCompanion_counterfamily
+    (n : ℤ) (n_positive : 0 < n) :
+    let c := 24 * n + 1
+    let reset := 24 * n + 2
+    let halfScale := (12 * n + 1) * (108 * n + 5)
+    let scale := 2 * halfScale
+    PrimitiveEndpointReduction 3 2 (scale + 1) c scale 1
+        (reset, 1) (0, 1) (-c * reset) ∧
+      PrimitiveEndpointReduction 3 2 (scale + 1) c scale 1
+        (halfScale, -2) (reset, 1) halfScale ∧
+      (-c * reset) * (-(9 * c + 1)) = c * scale * (3 ^ 1 - 1) ∧
+      halfScale * (4 * c) = c * scale * (3 ^ 1 - 1) ∧
+      projectivePairCross (reset, 1) (halfScale, -2) =
+        -9 * (12 * n + 1) ^ 2 ∧
+      2 * (c * reset) = (4 * c) * (12 * n + 1) ∧
+      4 * c < c * reset := by
+  dsimp
+  constructor
+  · refine ⟨⟨0, 1, by ring⟩, ⟨0, 1, by ring⟩, by norm_num, ?_, ?_⟩
+    · have c_positive : 0 < 24 * n + 1 := by omega
+      have reset_positive : 0 < 24 * n + 2 := by omega
+      exact mul_ne_zero (neg_ne_zero.mpr (ne_of_gt c_positive))
+        (ne_of_gt reset_positive)
+    · constructor <;> ring
+  constructor
+  · refine ⟨?_, ⟨0, 1, by ring⟩, by norm_num, ?_, ?_⟩
+    · refine ⟨1, 648 * n ^ 2 + 84 * n + 2, ?_⟩
+      ring
+    · have left_positive : 0 < 12 * n + 1 := by omega
+      have right_positive : 0 < 108 * n + 5 := by omega
+      exact mul_ne_zero (ne_of_gt left_positive) (ne_of_gt right_positive)
+    · constructor <;> ring
+  constructor
+  · ring
+  constructor
+  · ring
+  constructor
+  · simp [projectivePairCross]
+    ring
+  constructor
+  · ring
+  · nlinarith
+
 end
 end MatrixMortality.ReturnGuard.Examples

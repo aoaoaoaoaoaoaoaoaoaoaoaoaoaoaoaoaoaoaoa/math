@@ -747,6 +747,9 @@
 'MatrixMortality.ReturnGuard.Examples.threeReturn_physical_isMortal' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.ReturnGuard.Examples.resetCompanion_counterfamily' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.ReturnGuard.Examples.decreasingMortal_emergentAngularPrimes' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]

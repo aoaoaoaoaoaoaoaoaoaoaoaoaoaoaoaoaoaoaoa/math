@@ -125,6 +125,7 @@ file owns the mathematical stock.
 | [`R32-S36`](#r32-s36-guarded-affine-projective-incidence) | compiler | p-adic denominator poisoning gives an all-word guarded affine compiler into normalized GPI₂ | audited | active |
 | [`R32-S37`](#r32-s37-normalized-shortcut-collatz-incidence) | reduction and arithmetic benchmark | fixed projectivities encode pointwise shortcut-Collatz reaches-one exactly inside normalized GPI₂ | formalized | active |
 | [`R32-S38`](#r32-s38-jacobi-schedule-incidence) | structure theorem and obstruction | every wait schedule has one p-adic Jacobi tail, while reset realization is one rational continued-fraction incidence requiring unbounded history-dependent handoffs | formalized core; audited strengthening | active |
+| [`R32-S39`](#r32-s39-reset-companion-and-bilateral-shadow) | structure theorem and obstruction | every first-hit terminal address has a canonical reset companion transmuting reverse content, but its bilateral shadow need not contract even once | formalized core; audited strengthening | active |
 | [`R32-O19`](#r32-o19-projective-queue-centralizer-obstruction) | obstruction | an injective homomorphic projective word store with finite controller cannot recurrently delete and append queue data | audited | graduated |
 | [`R32-O20`](#r32-o20-transverse-reverse-reservoir) | obstruction | a lawful fixed projective cycle accumulates unbounded reverse 13-adic mass on its transverse eigenline | formalized | graduated |
 | [`R32-D03`](#r32-d03-bounded-denominator-periodicity) | decidable stratum | every infinite legal rational guard orbit with bounded reduced denominators is eventually periodic | formalized | graduated |
@@ -4497,6 +4498,70 @@ depends on accumulated history.
 
 **Next:** construct such a reset incidence, or prove that its moving Jacobi tail cannot coexist
 with first-hit terminality and the global content budget.
+
+### R32-S39: Reset companion and bilateral shadow
+
+**Kind:** structure theorem and obstruction
+**Evidence:** formalized core; audited strengthening
+**Disposition:** active
+
+Every reset-started first-hit terminal address canonically pulls the reset backward through the
+same inverse branches. The resulting primitive companion follows the same waits and ends at
+reset. If `Wᵢ` is the projective cross of the actual and companion states, their forward
+contents are `hᵢ,ĥᵢ`, and the actual complementary content is `kᵢ`, then
+
+```text
+p^(saᵢ) ĥᵢ Wᵢ₊₁ = −kᵢ Wᵢ.
+```
+
+After removing the forced suffix power, the crosses are nonzero p-unit integers `δᵢ` with
+terminal value `±R`. For the four content products this gives
+
+```text
+δ₀=(±1)RĤ/K=(±1)RH/K̂.
+```
+
+Thus actual reverse mass outside reset support reappears as companion forward mass. The endpoint
+product compresses the uncancelled residue to one angular gcd deficit
+
+```text
+|δ₀|=|RH|/|K̂|.
+```
+
+Primewise differences of consecutive `δᵢ` are the exact bilateral packet ledger. Existing
+boundary theorems force every moving layer surviving in `H/K̂` to be order-broken on both
+chronological sides.
+
+Monotone descent is nevertheless false. The checked positive family indexed by `n` has
+
+```text
+c=24n+1,  R=24n+2,
+(R,1) --h=−cR--> (0,1),
+((12n+1)(108n+5),−2) --ĥ=(12n+1)(108n+5)--> (R,1),
+K̂=4c,
+|H|/|K̂|=R/4=(12n+1)/2.
+```
+
+The expansion is unbounded, even though the actual step is nonmaximal. It is supported on the
+fixed tuple through `2R`, so it refutes per-step or coefficient-uniform contraction but not a
+coefficient-effective global amortization.
+
+**Scope:** companion existence and the bilateral identities are audited compositions of the
+checked inverse-address, integral-lift, exterior-product, and complementary-content theorems.
+Lean checks the complete parametric counterfamily. No terminal bound or amortization constant is
+claimed.
+
+**Artifact:** `ReturnGuard.Examples.resetCompanion_counterfamily` in
+[`ReturnGuardExamples.lean`](MatrixMortality/ReturnGuardExamples.lean), with reconstruction in
+[`m32-reset-companion-2026-08-11.md`](audits/m32-reset-companion-2026-08-11.md).
+
+**Use:** replace endpoint-only reverse charging by the canonical first-hit companion. Reject
+monotone shadow descent and any proof multiplying local Smith savings without charging bilateral
+packet overlap.
+
+**Next:** prove coefficient-effective bilateral shadow amortization
+`|Hₓ|/|K̂ₓ|≤Cρ^m(w)` for first-hit terminal words, or construct a rational reset-incidence
+orbit whose doubly broken packet intervals repay every Smith loss aperiodically.
 
 ### R32-O19: Projective queue centralizer obstruction
 

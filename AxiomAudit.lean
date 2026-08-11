@@ -355,6 +355,7 @@ open MatrixMortality
 #print axioms ReturnGuard.Examples.periodicShadow_shatters_localCompactness
 #print axioms ReturnGuard.Examples.threeReturn_endpointTerminalWord_iff
 #print axioms ReturnGuard.Examples.threeReturn_physical_isMortal
+#print axioms ReturnGuard.Examples.resetCompanion_counterfamily
 #print axioms ReturnGuard.Examples.decreasingMortal_emergentAngularPrimes
 #print axioms ReturnGuard.evaluationFrameTransition_eq_coboundary
 #print axioms ReturnGuard.evaluationFrameTransition_det

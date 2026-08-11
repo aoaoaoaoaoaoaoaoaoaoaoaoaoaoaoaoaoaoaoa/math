@@ -1204,6 +1204,18 @@ with fixed coefficients. The first-hit terminal and aperiodic hypotheses are now
 technical residue. See [`R32-O20`](SALVAGE.md#r32-o20-transverse-reverse-reservoir) and
 [`m32-transverse-reverse-reservoir-2026-08-10.md`](audits/m32-transverse-reverse-reservoir-2026-08-10.md).
 
+First-hit terminality now supplies the missing nonzero boundary. Pulling reset backward through
+the same address gives one canonical lawful companion ending at reset. Its projective cross with
+the actual trajectory obeys an exact exterior recurrence that converts every actual reverse
+content outside reset support into companion forward content. The uncancelled residue is one
+angular gcd deficit `|RH|/|K̂|`; every moving prime surviving there is order-broken on both
+chronological sides. This does not yet contract. A Lean-checked one-return family has
+`|H|/|K̂|=(12n+1)/2`, unbounded even on a nonmaximal Smith step. The exact decision throat is
+therefore coefficient-effective bilateral shadow amortization over complete first-hit histories,
+not multiplication of local savings. See
+[`R32-S39`](SALVAGE.md#r32-s39-reset-companion-and-bilateral-shadow) and
+[`m32-reset-companion-2026-08-11.md`](audits/m32-reset-companion-2026-08-11.md).
+
 Finite rational carry-mode atlases cannot supply the opposing aperiodic orbit either. If each
 mode is a rational function of the current `p^a` and each transition has one fixed additive wait
 shift, every directed control cycle has total shift zero. On an actual infinite orbit the
@@ -1267,13 +1279,13 @@ all-legal block inequality for the carried generalized continuant. See
 
 | Lane | Required move | Present obstruction |
 | --- | --- | --- |
-| Split-guard decision | Prove an effective reset-anchored recurrence-or-escape certificate for the doubly order-broken continuant | Forward activation is exponentially budgeted, while endpoint-only charging of the transverse reverse reservoir is false |
+| Split-guard decision | Prove coefficient-effective bilateral shadow amortization for the canonical first-hit reset companion | Every residual packet is doubly order-broken, but one wait can service nested packets and one-step companion contraction is unboundedly false |
 | Split-guard counter | Solve the rational reset incidence for an aperiodic p-adic Jacobi schedule with sparse microscopic doubly order-broken packets | Finite handoff alphabets and fixed rational charts are periodic or impossible; the history-dependent handoff height must be unbounded |
 | Irreducible cubic reflection orbit | Decide endpoint-faithful null-conic reachability under the non-pure recurrence reflections | The twist is arbitrary and two unit indices can generate a free binary submonoid; only the special singular endpoint placement remains |
 | Generic projective incidence | Decide or prove undecidable the normalized `α=β=1` GPI₂ core through intrinsic arithmetic dynamics | It contains exact fixed-projectivity shortcut-Collatz reachability; homomorphic free-word stores with finite queue controllers are impossible |
 
 The split-spectrum hot path is now an effective reset-anchored recurrence-or-escape theorem for
-the doubly order-broken additive continuant, opposed by a genuinely history-sensitive aperiodic
+the canonical companion's bilateral shadow, opposed by a genuinely history-sensitive aperiodic
 unbounded-denominator reset orbit solving one rational p-adic Jacobi incidence with sparse
 microscopic activations. The matrix compiler,
 arbitrary-word converse, deterministic wait decoder, rational inverse-address grammar,
@@ -1284,8 +1296,9 @@ geodesic are complete. Uniform first-bridge closure and coefficient-uniform all-
 descent are false; fixed positive renewal cycles are impossible; bounded local shadow depth does
 not imply bounded height; terminal length can exceed two; endpoint support and finite rational
 carry atlases are insufficient; reverse mass is invisible to projective endpoints on exact
-cycles. The rank-`(3,2)` artery now asks whether the actual additive
-continuant admits an effective recurrence-sensitive bound, or can sustain one exact aperiodic
+cycles; even the reset companion need not contract at one nonmaximal step. The rank-`(3,2)`
+artery now asks whether the bilateral packet ledger admits a coefficient-effective amortized
+bound across a complete first-hit history, or can sustain one exact aperiodic
 reset orbit with unbounded denominators and unbounded history. The final boundary, persistent
 exact orders, and divisibility-chain schedules are closed; only recycled support across
 two-sided order breaks remains. In parallel, rank-(2,2) is exactly generic PI₂.
