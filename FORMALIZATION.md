@@ -216,6 +216,17 @@ the existing p-adic gate, genericity theorem, normalization, and two-plane compi
 every formal matrix seam. See
 [`audits/m32-binary-affine-syracuse-2026-08-11.md`](audits/m32-binary-affine-syracuse-2026-08-11.md).
 
+The GPI₂ decision report reaches the same arithmetic core from group theory. An effective basis
+change turns any projective incidence into intersection of the positive monoid with an explicit
+upper-triangular coset in `GL₂(ℤ[S⁻¹])`, equivalently identity membership in a rational
+subset. For the checked Collatz projectivities, the generated group is the rank-two affine cusp
+`ℤ[1/6]⋊ℤ²`, and the target varies only as a translation tested against one fixed rational
+subset. This independently kills the proposed Tits-alternative split: the obstruction already
+lies in the metabelian branch, while the positive monoid itself is free. The reduction is
+retained as audited `R32-S41`; no general rational-subset library or unproved decision oracle was
+added to Lean. See
+[`audits/m32-parabolic-rational-subset-2026-08-11.md`](audits/m32-parabolic-rational-subset-2026-08-11.md).
+
 ReturnSquare instantiates the rank-`(3,2)` reduction. Lean proves the closed return matrix,
 split interfaces, exact cut rank, internal rank-one zero-wait return, unit positive returns,
 complete physical mortality equivalence, reachable and observable determinants, and the

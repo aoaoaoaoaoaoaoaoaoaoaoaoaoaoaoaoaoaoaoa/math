@@ -608,6 +608,18 @@ source set. See
 [`R32-S40`](SALVAGE.md#r32-s40-binary-affine-syracuse-collapse) and
 [`m32-binary-affine-syracuse-2026-08-11.md`](audits/m32-binary-affine-syracuse-2026-08-11.md).
 
+The opposing GPI₂ decision route now has an exact ambient normal form. After an effective
+rational basis change and localization at finitely many primes, arbitrary projective incidence
+is identity membership in a rational subset of `GL₂(ℤ[S⁻¹])`, formed from the positive monoid
+and one explicit upper-triangular coset. A uniform rational-subset algorithm would settle this
+lane, but the supposedly elementary solvable side already contains the obstruction. The fixed
+Collatz projectivities generate the metabelian cusp `Γ₆=ℤ[1/6]⋊ℤ²`; pointwise shortcut
+Collatz is membership of a variable translation in one fixed rational subset `R=PK` of `Γ₆`.
+The positive monoid is free. What is hard is its ordered intersection with the parabolic coset,
+not relations or non-elementary geometry. See
+[`R32-S41`](SALVAGE.md#r32-s41-parabolic-rational-subset-normal-form) and
+[`m32-parabolic-rational-subset-2026-08-11.md`](audits/m32-parabolic-rational-subset-2026-08-11.md).
+
 The rank-`(3,2)` profile is the genuinely new artery. If `B=UV`, every binary word containing
 `B` is governed exactly by
 
@@ -1300,7 +1312,7 @@ all-legal block inequality for the carried generalized continuant. See
 | Split-guard decision | Prove coefficient-effective bilateral shadow amortization for the canonical first-hit reset companion | Every residual packet is doubly order-broken, but one wait can service nested packets and one-step companion contraction is unboundedly false |
 | Split-guard counter | Solve the rational reset incidence for an aperiodic p-adic Jacobi schedule with sparse microscopic doubly order-broken packets | Finite handoff alphabets and fixed rational charts are periodic or impossible; the history-dependent handoff height must be unbounded |
 | Irreducible cubic reflection orbit | Decide endpoint-faithful null-conic reachability under the non-pure recurrence reflections | The twist is arbitrary and two unit indices can generate a free binary submonoid; only the special singular endpoint placement remains |
-| Generic projective incidence | Decide or prove undecidable normalized GPI₂ through intrinsic arithmetic or projective dynamics | The affine compiler narrows to mixed signed Syracuse carry dynamics; direct radix, FRACTRAN, and finite-controller stores are excluded |
+| Generic projective incidence | Decide rational-subset membership in the rank-two affine cusp, or encode universality through its carry dynamics | Fixed-subset shortcut Collatz already occupies `ℤ[1/6]⋊ℤ²`; the Tits split, direct stores, and one-dilation algorithms miss it |
 
 The split-spectrum hot path is now an effective reset-anchored recurrence-or-escape theorem for
 the canonical companion's bilateral shadow, opposed by a genuinely history-sensitive aperiodic

@@ -127,6 +127,7 @@ file owns the mathematical stock.
 | [`R32-S38`](#r32-s38-jacobi-schedule-incidence) | structure theorem and obstruction | every wait schedule has one p-adic Jacobi tail, while reset realization is one rational continued-fraction incidence requiring unbounded history-dependent handoffs | formalized core; audited strengthening | active |
 | [`R32-S39`](#r32-s39-reset-companion-and-bilateral-shadow) | structure theorem and obstruction | every first-hit terminal address has a canonical reset companion transmuting reverse content, but its bilateral shadow need not contract even once | formalized core; audited strengthening | active |
 | [`R32-S40`](#r32-s40-binary-affine-syracuse-collapse) | structure theorem and obstruction | parity-selected affine reachability is decidable outside one mixed-slope signed Syracuse family, where only nonhomomorphic carry dynamics remains | audited | active |
+| [`R32-S41`](#r32-s41-parabolic-rational-subset-normal-form) | reduction and obstruction | PI₂ is a parabolic rational-subset problem, already containing fixed-subset shortcut Collatz inside the rank-two affine cusp `ℤ[1/6]⋊ℤ²` | audited | active |
 | [`R32-O19`](#r32-o19-projective-queue-centralizer-obstruction) | obstruction | an injective homomorphic projective word store with finite controller cannot recurrently delete and append queue data | audited | graduated |
 | [`R32-O20`](#r32-o20-transverse-reverse-reservoir) | obstruction | a lawful fixed projective cycle accumulates unbounded reverse 13-adic mass on its transverse eigenline | formalized | graduated |
 | [`R32-D03`](#r32-d03-bounded-denominator-periodicity) | decidable stratum | every infinite legal rational guard orbit with bounded reduced denominators is eventually periodic | formalized | graduated |
@@ -4619,6 +4620,69 @@ or finite affine-controller encodings.
 **Next:** exhibit an invariant configuration-code family driven by multiplication carries in
 the fixed `ax+B` map, prove that family's reachability decidable, or leave the guarded-affine
 lane for a genuinely projective mechanism.
+
+### R32-S41: Parabolic rational-subset normal form
+
+**Kind:** reduction and obstruction
+**Evidence:** audited
+**Disposition:** active
+
+For arbitrary `G,H∈GL₂(ℚ)` and nonzero incidence row and column, choose rational bases `C,D`
+whose first columns are the source and a target-kernel vector. After localizing at the finite set
+of coefficient and determinant primes,
+
+```text
+∃p∈{G,H}*, rpc=0
+⇔ I ∈ {G,H}*^⁻¹ D Bₛ C⁻¹,
+```
+
+where `Bₛ` is the explicitly finitely generated upper-triangular subgroup of
+`GL₂(ℤ[S⁻¹])`. Thus arbitrary PI₂, and hence normalized GPI₂, is one effective
+identity-membership question for a rational subset of an `S`-arithmetic matrix group. Uniform
+decidability of that problem, here named SARSM₂, would decide the rank-(2,2) profile; no such
+theorem is imported or claimed.
+
+The fixed shortcut-Collatz projectivities already generate
+
+```text
+Γ₆=ℤ[1/6]⋊ℤ².
+```
+
+Let `P` be their positive monoid, `K` the stabilizer of one, `R=PK`, and
+`τₙ(z)=z+N−1`. Then
+
+```text
+τₙ∈R ⇔ ∃p∈P, p(1)=N
+     ⇔ N reaches 1 under shortcut Collatz.
+```
+
+The final equivalence is the checked all-word predecessor theorem. Hence only the queried
+translation varies: one fixed rational subset of one fixed metabelian group already contains
+the arithmetic benchmark.
+
+The positive monoid is free by an explicit affine normal form, so relations are not the
+obstruction. Nor does the Tits alternative close the decision lane. Every finite-index subgroup
+of `Γ₆` retains rank-two multiplier image and cannot reduce to a one-dilation affine group;
+adjoining non-elementary generators does not stop an automaton from remaining inside this
+exponentially distorted cusp. Fixed-arity `S`-unit equations do not control its unbounded ordered
+translation sums.
+
+**Scope:** the parabolic reduction, cusp computation, fixed-subset equivalence, and freeness
+argument are independently audited. Claims about the current literature remain reported, not
+theorem evidence. Neither SARSM₂, Collatz decidability, nor an undecidability reduction is supplied.
+No broad rational-subset infrastructure was added to Lean; the existing formal predecessor and
+GPI₂ compilers are the kernel-checked consumers.
+
+**Artifact:**
+[`m32-parabolic-rational-subset-2026-08-11.md`](audits/m32-parabolic-rational-subset-2026-08-11.md).
+
+**Use:** abandon a Tits-alternative split that treats the solvable branch as routine. Any GPI₂
+decision theorem must control automaton membership in the rank-two affine cusp; any
+undecidability theorem must cross the fixed two-branch Collatz boundary without assuming it.
+
+**Next:** decide rational-subset membership for `ℤ[1/6]⋊ℤ²` or the narrower fixed subset
+`R`, find a sound reduction into that fixed pair, or identify additional normalization structure
+that makes GPI₂ smaller than ambient SARSM₂.
 
 ### R32-O19: Projective queue centralizer obstruction
 
