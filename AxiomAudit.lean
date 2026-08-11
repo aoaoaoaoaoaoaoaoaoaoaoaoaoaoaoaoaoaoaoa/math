@@ -118,6 +118,10 @@ open MatrixMortality
 #print axioms PeriodicHistory.terminal_match_tileHistory_iff
 #print axioms PeriodicHistory.bcbb_terminal_match_iff
 #print axioms PeriodicHistory.forwardHistoryCode_injective
+#print axioms PeriodicHistory.periodicData_mulVec_eq_zero_iff
+#print axioms PeriodicHistory.periodicData_mulVec_kernel
+#print axioms PeriodicHistory.periodicToggle_mulVec_kernel
+#print axioms PeriodicHistory.periodicData_mulVec_toggle_kernel
 #print axioms PeriodicHistory.periodicProduct_mulVec_column
 #print axioms PeriodicHistory.periodicCoefficient_eq
 #print axioms PeriodicHistory.bcbbAffine_zero_iff

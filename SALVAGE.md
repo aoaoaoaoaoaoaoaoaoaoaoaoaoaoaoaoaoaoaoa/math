@@ -4541,17 +4541,21 @@ This is the precise survivor left by collapsed legal cylinders: two separately r
 coordinates can coexist only through their common homogenizing product.
 
 **Scope:** common-kernel erasure is conditional on the route difference already lying in the
-kernel and on toggle invariance. It does not exclude refreshing a transient guard after every
-data action, so the report's global deletion of all common-kernel compilers is rejected. The
-transverse formula is a fibre-intersection law, not a source-computable invariant surface or an
-all-word same-zero construction.
+kernel and on toggle invariance. The periodic `bcbb` compiler shows that toggle invariance is not
+forced: its two data controls have exact common kernel `ℚ(1,1,0)`, the toggle sends its generator
+to `(1,-1,0)`, and either next data control recovers `(2,0,0)`. Thus non-invariant kernel shuttling
+is useful on an exact all-word paired language. The transverse formula is a fibre-intersection
+law, not a source-computable invariant surface or an all-word same-zero construction.
 
-**Use:** split every rank-two paired proposal by kernel geometry. In the common-kernel branch,
-name how route information is refreshed after erasure. In the transverse branch, solve the
-bilinear shift-equivariance equations rather than returning to one-coordinate affine carries.
+**Use:** split every rank-two paired proposal by kernel geometry. A common-kernel constructor must
+use a non-invariant shuttle or accept quotient factorization; a toggle-invariant persistent guard
+is closed. In the transverse branch, solve the bilinear shift-equivariance equations rather than
+returning to one-coordinate affine carries.
 
-**Artifact:** [`PositiveResetNoGo.lean`](MatrixMortality/PositiveResetNoGo.lean) and
-[`m34-rank-two-kernel-bifurcation-2026-08-10.md`](audits/m34-rank-two-kernel-bifurcation-2026-08-10.md).
+**Artifact:** [`PositiveResetNoGo.lean`](MatrixMortality/PositiveResetNoGo.lean),
+[`PeriodicHistory.lean`](MatrixMortality/PeriodicHistory.lean),
+[`m34-rank-two-kernel-bifurcation-2026-08-10.md`](audits/m34-rank-two-kernel-bifurcation-2026-08-10.md),
+and [`m34-common-kernel-shuttle-2026-08-11.md`](audits/m34-common-kernel-shuttle-2026-08-11.md).
 
 **Next:** construct a source-computable invariant surface in `P¹×P¹` closed under both prepend
 maps and the bilinear reset, or prove that no linear terminal section can be exact on every
@@ -4834,7 +4838,10 @@ Lean proves `κ+V(w)=α5^|w|` exactly on `P₀Q*`. The converse uses
 injectivity of the role code. Three singular controls maintain the affine code, suffix-phase
 sign, and positional scale on every arbitrary control word. Clearing the rank-one separator
 gives four explicit integral `3 × 3` matrices whose mortality is equivalent to the `bcbb` paired
-zero language. Thus `bcbb` cannot support a same-zero dimension-four lower bound.
+zero language. Their data maps have exact common kernel `ℚ(1,1,0)`, while the toggle moves its
+generator outside that kernel and the next data action recovers it nontrivially. Thus `bcbb`
+cannot support a same-zero dimension-four lower bound, and common-kernel shift laws do not imply
+toggle invariance.
 
 The adjacent body `bcbc` branches. The equal-length null blocks
 
@@ -4859,7 +4866,9 @@ but `bcbc` is no longer a viable four-state lower-bound target after [`G3-C02`](
 
 **Artifact:** [`PeriodicHistory.lean`](MatrixMortality/PeriodicHistory.lean),
 [`BranchingHistory.lean`](MatrixMortality/BranchingHistory.lean), and
-[`m34-periodic-ray-branching-fracture-2026-08-07.md`](audits/m34-periodic-ray-branching-fracture-2026-08-07.md).
+[`m34-periodic-ray-branching-fracture-2026-08-07.md`](audits/m34-periodic-ray-branching-fracture-2026-08-07.md),
+with the shuttle classification audited in
+[`m34-common-kernel-shuttle-2026-08-11.md`](audits/m34-common-kernel-shuttle-2026-08-11.md).
 
 ### G3-O07: Near-fork carry collision
 

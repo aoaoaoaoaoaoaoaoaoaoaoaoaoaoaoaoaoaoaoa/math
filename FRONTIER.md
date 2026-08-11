@@ -591,13 +591,13 @@ on legal inputs: at least one full cylinder must lie in a plane, while a transie
 remembers enough route information to police the forced persistent collision.
 
 [`G3-S02`](SALVAGE.md#g3-s02-rank-two-kernel-bifurcation) splits that singular escape into two
-real architectures. With one common data kernel preserved by the toggle, a route difference
-already in the kernel is erased by the first later data action; persistence is impossible, but a
-fresh transient guard may still be minted after every data step. With transverse data kernels,
-the two quotient fibres meet in the exact bilinear ray `[rv:us:vs]`, retaining one coordinate
-visible to each data map and their common scale. The first branch needs an all-word refresh
-invariant; the second needs a source-computable shift-equivariant surface in `P¹×P¹`. Neither is
-subsumed by the other, and neither is yet a uniform recognizer.
+real architectures. With one common data kernel preserved by the toggle, a difference in that
+kernel is erased by the first later data action, so the computation factors through the quotient
+between data controls. Toggle invariance is not forced: the exact `bcbb` compiler moves its common
+kernel out and recovers it nontrivially at the next data action. The live common-kernel mechanism
+is therefore a non-invariant shuttle, not persistent refresh. With transverse data kernels, the
+two quotient fibres meet in the exact bilinear ray `[rv:us:vs]`. Neither architecture is yet a
+source-uniform recognizer.
 
 [`G3-M02`](SALVAGE.md#g3-m02-square-root-punctuation-fracture) supplied a complete direct-mortality
 grammar. The source-uniform rational rank-two matrix `S` satisfies
@@ -738,7 +738,7 @@ delay, equal-height tableau, or acyclic verification tail cannot be its computat
 
 | Lane | Available leverage | Decisive obstruction or obligation |
 | --- | --- | --- |
-| Common-kernel guard refresh | The fitted singular recognizer proves a transient route guard can police one complete local grammar | A kernel-carried difference dies at the next data action; mint a fresh guard after every data step and prove the complete all-word invariant uniformly in `(β,body)` |
+| Common-kernel shuttle | The exact `bcbb` compiler moves its common data kernel out through the toggle and recovers it at the next data action | Uniformize this non-invariant shuttle in `(β,body)`; every toggle-invariant guard factors through the two-dimensional quotient |
 | Transverse-kernel bilinear recurrence | Two rank-two quotient fibres meet exactly in `[rv:us:vs]` | Construct a computable invariant surface in `P¹×P¹`, closed under every shift and malformed word, with the exact terminal section |
 | Positive projective transition lower bound | Same-zero dimension three is point-line incidence in `P²`, and actual one-sided shifts retain finite rank/kernel/image data | Exhibit a finite shift-closed diagram impossible for every singular rank pattern; static support rank and formal inverse completion are forbidden |
 | Global word-residual recoding | Longer noncommutative atoms can retain order while discarding the four additive role channels | Escape `G3-D04`: fixed-priority affine counters, arbitrary reversals, and any computable finite dimension are decidable |
@@ -754,9 +754,10 @@ three positive controls.
 
 After the five-report `e656e0d9` wave, the net tree has six independent raceable leaves:
 
-1. **Common-kernel refresh constructor.** Give one computable three-state paired recognizer in
-   which each data action erases the old kernel guard and simultaneously creates the next one.
-   Prove its state formula and scalar-zero equivalence on the complete free control monoid.
+1. **Common-kernel shuttle constructor.** Give one computable three-state paired recognizer in
+   which the toggle moves a freshly minted common-kernel guard back into visible quotient data.
+   Prove its state formula and scalar-zero equivalence uniformly in `(β,body)` on the complete
+   free control monoid. Toggle-invariant refresh is closed.
 2. **Transverse-kernel bilinear constructor.** Realize the fibre law `[rv:us:vs]` on one
    source-computable invariant surface, including exceptional fibres, both shifts, malformed
    controls, and the exact terminal section.
@@ -829,9 +830,10 @@ candidate escape is a history-sensitive singular ideal grammar whose data collap
 legal chart and whose transient guard irreversibly destroys illegal histories. Denominator growth
 outside a faithful full queue chart is closed by `G3-O12`.
 
-Rank-two data maps must now branch at the outset. A common-kernel construction may use only a
-fresh guard between consecutive data actions; any difference already in the kernel is erased at
-the next one. A transverse-kernel construction must realize the bilinear fibre intersection
+Rank-two data maps must now branch at the outset. A common-kernel construction must move its
+hidden direction out through a non-invariant toggle; if the kernel is toggle-invariant, the next
+data action erases it and only the two-dimensional quotient persists. A transverse-kernel
+construction must realize the bilinear fibre intersection
 `[rv:us:vs]` on a shift-invariant surface. A lower-bound attack must exclude both positive
 architectures through actual transition data. Backward cancellation, inverse cofinality, and
 static incidence cannot do so. Do not spend another attack on separator placement, fixed anchors,

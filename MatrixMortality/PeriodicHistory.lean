@@ -402,6 +402,67 @@ def periodicGenerator (R : Type*) [CommRing R] :
   | .data letter => periodicDataMatrix R letter
   | .toggle => historyToggleMatrix R
 
+/-! ## Non-invariant common-kernel shuttle -/
+
+/-- The common kernel direction of both periodic data controls. -/
+def periodicKernel : Fin 3 → ℚ := ![1, 1, 0]
+
+/-- Both data controls have exactly the same one-dimensional kernel. -/
+theorem periodicData_mulVec_eq_zero_iff (letter : TagLetter) (vector : Fin 3 → ℚ) :
+    periodicDataMatrix ℚ letter *ᵥ vector = 0 ↔
+      vector 2 = 0 ∧ vector 0 = vector 1 := by
+  cases letter with
+  | b =>
+      constructor
+      · intro zero
+        have coordinate0 := congrFun zero 0
+        have coordinate2 := congrFun zero 2
+        simp [periodicDataMatrix, Matrix.mulVec, Matrix.dotProduct,
+          Fin.sum_univ_succ] at coordinate0 coordinate2
+        constructor <;> linarith
+      · rintro ⟨lastZero, firstEqual⟩
+        ext coordinate
+        fin_cases coordinate <;>
+          simp [periodicDataMatrix, Matrix.mulVec, Matrix.dotProduct, Fin.sum_univ_succ,
+            lastZero, firstEqual]
+  | c =>
+      constructor
+      · intro zero
+        have coordinate0 := congrFun zero 0
+        have coordinate2 := congrFun zero 2
+        simp [periodicDataMatrix, Matrix.mulVec, Matrix.dotProduct,
+          Fin.sum_univ_succ] at coordinate0 coordinate2
+        constructor <;> linarith
+      · rintro ⟨lastZero, firstEqual⟩
+        ext coordinate
+        fin_cases coordinate <;>
+          simp [periodicDataMatrix, Matrix.mulVec, Matrix.dotProduct, Fin.sum_univ_succ,
+            lastZero, firstEqual]
+
+/-- The common kernel direction is killed by either data control. -/
+@[simp] theorem periodicData_mulVec_kernel (letter : TagLetter) :
+    periodicDataMatrix ℚ letter *ᵥ periodicKernel = 0 := by
+  rw [periodicData_mulVec_eq_zero_iff]
+  decide
+
+/-- The phase toggle moves the common data kernel out of itself. -/
+theorem periodicToggle_mulVec_kernel :
+    historyToggleMatrix ℚ *ᵥ periodicKernel = ![1, -1, 0] := by
+  ext coordinate
+  fin_cases coordinate <;>
+    norm_num [historyToggleMatrix, periodicKernel, Matrix.mulVec, Matrix.dotProduct,
+      Fin.sum_univ_succ]
+
+/-- After one toggle, either data control recovers a nonzero copy of the hidden direction. -/
+theorem periodicData_mulVec_toggle_kernel (letter : TagLetter) :
+    periodicDataMatrix ℚ letter *ᵥ (historyToggleMatrix ℚ *ᵥ periodicKernel) =
+      ![2, 0, 0] := by
+  rw [periodicToggle_mulVec_kernel]
+  cases letter <;>
+    ext coordinate <;>
+    fin_cases coordinate <;>
+    norm_num [periodicDataMatrix, Matrix.mulVec, Matrix.dotProduct, Fin.sum_univ_succ]
+
 /-- Initial affine offset, phase sign, and positional scale. -/
 def periodicColumn (R : Type*) [CommRing R] (κ : R) : Fin 3 → R := ![κ, 1, 1]
 

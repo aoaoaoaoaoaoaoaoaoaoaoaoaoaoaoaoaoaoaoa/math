@@ -154,6 +154,16 @@
 'MatrixMortality.PeriodicHistory.forwardHistoryCode_injective' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.PeriodicHistory.periodicData_mulVec_eq_zero_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.PeriodicHistory.periodicData_mulVec_kernel' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.PeriodicHistory.periodicToggle_mulVec_kernel' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.PeriodicHistory.periodicData_mulVec_toggle_kernel' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.PeriodicHistory.periodicProduct_mulVec_column' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]

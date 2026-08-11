@@ -536,7 +536,10 @@ number of kernel-preserving toggles and is annihilated by the first subsequent d
 transverse coordinate kernels it also proves the exact projective fibre intersection: quotient
 targets `[u:v]` and `[r:s]`, with `s≠0`, determine the bilinear ray `[rv:us:vs]`. These are
 structure theorems, not a universal exclusion of common-kernel history-sensitive compilers or a
-construction of the missing shift-equivariant bilinear invariant.
+construction of the missing shift-equivariant bilinear invariant. The existing periodic compiler
+now supplies the sharp countercase: Lean computes its exact common data kernel, proves that its
+toggle leaves that kernel, and proves nonzero recovery by either next data action. Hence only the
+toggle-invariant common-kernel subcase factors away.
 
 The semantic core of [`G3-O04`](SALVAGE.md#g3-o04-expanding-affine-history-no-go) is formalized:
 the reset-affine orbit, finite reverse box, exact caged DFA, regularity, and universal
@@ -1170,6 +1173,11 @@ For `G3-O03`, Lean checks the null-history counterexample, minimum-body uniquene
 encoder, exact same-zero theorem, and integral mortality lift. The statement that both phase graph
 closures are full products, with one-dimensional generic fibers, remains an independently audited
 Zariski-density calculation rather than a formal dependency.
+
+For `G3-O06`, Lean additionally checks that both periodic data controls have exact common kernel
+`ℚ(1,1,0)`, that the toggle sends its generator to `(1,-1,0)`, and that either next data control
+recovers `(2,0,0)`. This is the formal non-invariant kernel shuttle promised by the all-word
+periodic recurrence; it does not make the fixed boundary constants source-uniform.
 
 The scheduled compiler introduces a separate source-width seam. Neary's published construction
 sets `β = 10p`, where `p` is the simulated cyclic-tag program period. The fixed-width audit found
