@@ -107,6 +107,14 @@ forced around meet-irreducibles. These constraints do not close the lattice argu
 Carvalho and Machiavelo provide the corresponding canonical root-deletion recursion for
 normalized families, but no abundance quantity known from their paper is monotone under it.
 
+Tian's 2022 preprint states the strict no-empty-set form of Frankl's conjecture for families
+whose maximum chain has at most three members. Colbert's peer-reviewed 2026 theorem proves
+non-strict abundance for the corresponding dimension-two posets, even for infinite families.
+Thus the rank-three lattice exclusion rediscovered in the local counterexample audit is not a
+new statement. Tian's strictness is what permits a deleted bottom member to be restored in
+both parities; Colbert's non-strict theorem alone leaves the odd-cardinality equality case. The
+local incidence count independently proves the full finite rank-three exclusion.
+
 Lozin and Zamaraev state the bidual and self-dual Horn cases as open. The density dichotomy in
 the local audit closes both: apply Karpas to the larger of the true family and the
 set-complement of the false family. A maximal complement-free intersection-closed completion
@@ -137,3 +145,4 @@ outcomes remain in Fidget Spinner rather than in this evidence audit.
 See the Frankl section of [`references/README.md`](../references/README.md). The decisive
 primary sources are Gilmer, Sawin, Alweiss–Huang–Sellke, Boppana, Yu, Cambie, Liu, Karpas,
 Gendler, Zargar, Bhasin, Lozin–Zamaraev, Bouchard, Carvalho–Machiavelo, and van der Hout–Roos.
+Tian and Colbert supply the low-height comparison used in the later counterexample audit.

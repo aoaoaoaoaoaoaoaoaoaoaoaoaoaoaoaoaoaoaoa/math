@@ -18,6 +18,8 @@ redistributable full text was located.
 | [Liu24](liu-2023-conditionally-iid-coupling-union-closed.md) | peer-reviewed CISS / arXiv; metadata only | Analytic strict-improvement mechanism and conditional `0.382709087…` candidate |
 | [Cambie23](cambie-2023-progress-union-closed.md) | peer-reviewed survey; CC BY | Post-breakthrough strategy map and entropy barriers |
 | [BruhnSchaudt15](bruhn-schaudt-2015-journey-union-closed.md) | peer-reviewed survey; metadata only | Classical results, failed routes, and exact lattice equivalence |
+| [Tian22](tian-2022-height-union-closed.md) | arXiv v2; CC BY | Frankl's conjecture for finite families of height at most three or at least `n−1`; low-height predecessor to Colbert |
+| [Colbert26](colbert-2026-chain-conditions-union-closed.md) | peer-reviewed Order; CC BY | Abundant optimal coordinates for union-closed families of chain dimension at most two, including infinite families |
 | [Hu23](hu-2023-on-union-closed.md) | peer-reviewed Discrete Math.; metadata only | Minimal-counterexample bounds and historical false-proof warning |
 | [Bouchard25](bouchard-2025-lattice-formulation-union-closed.md) | arXiv v1; metadata only | Necessary conditions for a smallest lattice counterexample |
 | [CarvalhoMachiavelo25](carvalho-machiavelo-2024-normalized-families-frankl.md) | arXiv v2; metadata only | Normalized-family duality and canonical root-deletion recursion |

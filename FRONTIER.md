@@ -52,6 +52,10 @@ The next live attacks are:
 4. Formalize the exact real wall only if it supports one of those attacks. The rational theorem
    already resolves the decimal ratchet to less than `1.2×10⁻¹⁷`; more digits inside the same
    architecture have negligible mathematical value.
+5. On the counterexample side, use the exact blocker-pivot normal form `FC-S14`: try to couple
+   its local pivot stars to the global deletion-bias inequalities by a double count. The proposed
+   inflated-`B₃` picture is only a heuristic and does not merit blind enumeration absent that
+   coupling inequality.
 
 ## The source theorem
 

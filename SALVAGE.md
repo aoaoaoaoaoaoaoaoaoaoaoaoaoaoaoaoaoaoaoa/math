@@ -57,6 +57,7 @@ file owns the mathematical stock.
 | [`FC-S11`](#fc-s11-endpoint-boundary-certificate) | certificate | every canonical endpoint objective is nonnegative at `38234553336670271/10^17` | formalized | graduated |
 | [`FC-S12`](#fc-s12-finite-entropy-bridge) | structure theorem | the finite affine coupling inequality implies strict union-closed abundance | formalized | graduated |
 | [`FC-S13`](#fc-s13-rational-universal-abundance) | theorem | every nontrivial finite union-closed family has abundance greater than `38234553336670271/10^17` | formalized | graduated |
+| [`FC-S14`](#fc-s14-blocker-pivot-normal-form) | structure theorem | every normalized counterexample is an exactly biased deletion blocker with a local pivot at each deleted set | audited | active |
 | [`FC-M01`](#fc-m01-rational-yu-certificate) | partial mechanism | Arb independently checks the reduced gaps at `38234553336670271/10^17` | computational | active |
 | [`FC-O01`](#fc-o01-homogeneous-tilt-persistence-fails) | obstruction | one-coordinate majority need not persist under homogeneous product tilt | audited | active |
 | [`FC-O02`](#fc-o02-uniform-fiber-semigroup-ceiling) | obstruction | finite full-fiber semigroup lifts cannot beat the uniform entropy barrier | audited | stock |
@@ -668,6 +669,59 @@ priority claim beyond the audited literature comparison.
 **Artifact:** `Frankl.unionClosed_exists_abundant_coordinate` in
 `Frankl/AffineEntropyBridge.lean` and
 [`audits/frankl-rational-abundance-2026-08-10.md`](audits/frankl-rational-abundance-2026-08-10.md).
+
+### FC-S14: Blocker pivot normal form
+
+**Kind:** structure theorem
+**Evidence:** audited
+**Disposition:** active
+
+Normalize a hypothetical counterexample `F` on `U`, `|U|=n`, by adjoining `∅`, and put
+
+```text
+F₀ = {∅} ∪ {A⊆U : |A|≥2},
+R = F₀∖F,
+r = |R|,
+r_i = |{A∈R : i∈A}|.
+```
+
+Then `R⊆{A:2≤|A|≤n−1}`, and the counterexample conditions are exactly
+
+```text
+2r_i−r ≥ n−1                                      for every i∈U,
+C∈R and A∪B=C  implies  A∈R or B∈R               for A,B∈F₀.
+```
+
+The blocker clauses are equivalent to a local pivot normal form: for every `C∈R` there is
+`x_C∈C` such that every non-singleton `A` with `x_C∈A⊆C` also lies in `R`. Consequently
+
+```text
+|R∩2^C| ≥ 2^(|C|−1)−1.
+```
+
+For distinct retained `A,B`, the cancellation profile
+
+```text
+{C∈F : A∪C=B∪C}
+```
+
+has size strictly below `|F|/2`, since it is contained in one coordinate star.
+
+**Scope:** this is an exact reformulation and local obstruction, not a counterexample or a
+proof of Frankl's conjecture. It does not force the report's proposed inflated-`B₃` shape. The
+related exclusion of rank-three counterexample lattices is already stated through Tian's strict
+height theorem; Colbert's dimension-two theorem independently corroborates the reduced
+non-strict case.
+
+**Use:** encode counterexample search with pivot variables, or seek a global double count
+showing that the local pivot stars cannot satisfy every coordinate-bias inequality
+simultaneously.
+
+**Artifact:**
+[`audits/frankl-counterexample-lunge-2026-08-10.md`](audits/frankl-counterexample-lunge-2026-08-10.md).
+
+**Next:** derive or refute an inequality coupling pivot reuse across incomparable deleted sets;
+do not enumerate vague high-collision lattices without first exploiting the exact pivot clauses.
 
 ### FC-M01: Rational Yu certificate
 
