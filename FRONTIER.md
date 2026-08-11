@@ -590,6 +590,24 @@ instance in the `α=β=1` chart without changing its zero language. This is a ha
 not an undecidability result; see
 [`R32-S37`](SALVAGE.md#r32-s37-normalized-shortcut-collatz-incidence).
 
+The guarded-affine universality lane has now collapsed to its true arithmetic seam. Clearing any
+odd denominator adds no register. When both parity-branch slopes have magnitude one, every orbit
+enters an explicit finite interval; when both have magnitude at least three, every orbit outside
+an explicit interval escapes monotonically. Only one unit slope paired with one odd expansive
+slope survives. After affine conjugacy and acceleration it is a signed generalized Syracuse map
+
+```text
+n ↦ (±1)^(v₂(an+B)−1)(an+B)/2^v₂(an+B).
+```
+
+Every affine macro has an odd-numerator multiplier, so direct radix-tag append, direct FRACTRAN
+valuation decrement, and finite affine-chart microcoding fail by slope or telescoping. The only
+remaining memory mechanism is nonhomomorphic carry propagation against the fixed eventually
+periodic 2-adic word `−B/a`. Genericity is discharged by bounded traversal of the common bad
+source set. See
+[`R32-S40`](SALVAGE.md#r32-s40-binary-affine-syracuse-collapse) and
+[`m32-binary-affine-syracuse-2026-08-11.md`](audits/m32-binary-affine-syracuse-2026-08-11.md).
+
 The rank-`(3,2)` profile is the genuinely new artery. If `B=UV`, every binary word containing
 `B` is governed exactly by
 
@@ -1282,7 +1300,7 @@ all-legal block inequality for the carried generalized continuant. See
 | Split-guard decision | Prove coefficient-effective bilateral shadow amortization for the canonical first-hit reset companion | Every residual packet is doubly order-broken, but one wait can service nested packets and one-step companion contraction is unboundedly false |
 | Split-guard counter | Solve the rational reset incidence for an aperiodic p-adic Jacobi schedule with sparse microscopic doubly order-broken packets | Finite handoff alphabets and fixed rational charts are periodic or impossible; the history-dependent handoff height must be unbounded |
 | Irreducible cubic reflection orbit | Decide endpoint-faithful null-conic reachability under the non-pure recurrence reflections | The twist is arbitrary and two unit indices can generate a free binary submonoid; only the special singular endpoint placement remains |
-| Generic projective incidence | Decide or prove undecidable the normalized `α=β=1` GPI₂ core through intrinsic arithmetic dynamics | It contains exact fixed-projectivity shortcut-Collatz reachability; homomorphic free-word stores with finite queue controllers are impossible |
+| Generic projective incidence | Decide or prove undecidable normalized GPI₂ through intrinsic arithmetic or projective dynamics | The affine compiler narrows to mixed signed Syracuse carry dynamics; direct radix, FRACTRAN, and finite-controller stores are excluded |
 
 The split-spectrum hot path is now an effective reset-anchored recurrence-or-escape theorem for
 the canonical companion's bilateral shadow, opposed by a genuinely history-sensitive aperiodic

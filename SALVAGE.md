@@ -126,6 +126,7 @@ file owns the mathematical stock.
 | [`R32-S37`](#r32-s37-normalized-shortcut-collatz-incidence) | reduction and arithmetic benchmark | fixed projectivities encode pointwise shortcut-Collatz reaches-one exactly inside normalized GPI₂ | formalized | active |
 | [`R32-S38`](#r32-s38-jacobi-schedule-incidence) | structure theorem and obstruction | every wait schedule has one p-adic Jacobi tail, while reset realization is one rational continued-fraction incidence requiring unbounded history-dependent handoffs | formalized core; audited strengthening | active |
 | [`R32-S39`](#r32-s39-reset-companion-and-bilateral-shadow) | structure theorem and obstruction | every first-hit terminal address has a canonical reset companion transmuting reverse content, but its bilateral shadow need not contract even once | formalized core; audited strengthening | active |
+| [`R32-S40`](#r32-s40-binary-affine-syracuse-collapse) | structure theorem and obstruction | parity-selected affine reachability is decidable outside one mixed-slope signed Syracuse family, where only nonhomomorphic carry dynamics remains | audited | active |
 | [`R32-O19`](#r32-o19-projective-queue-centralizer-obstruction) | obstruction | an injective homomorphic projective word store with finite controller cannot recurrently delete and append queue data | audited | graduated |
 | [`R32-O20`](#r32-o20-transverse-reverse-reservoir) | obstruction | a lawful fixed projective cycle accumulates unbounded reverse 13-adic mass on its transverse eigenline | formalized | graduated |
 | [`R32-D03`](#r32-d03-bounded-denominator-periodicity) | decidable stratum | every infinite legal rational guard orbit with bounded reduced denominators is eventually periodic | formalized | graduated |
@@ -4562,6 +4563,62 @@ packet overlap.
 **Next:** prove coefficient-effective bilateral shadow amortization
 `|Hₓ|/|K̂ₓ|≤Cρ^m(w)` for first-hit terminal words, or construct a rational reset-incidence
 orbit whose doubly broken packet intervals repay every Smith loss aperiodically.
+
+### R32-S40: Binary affine Syracuse collapse
+
+**Kind:** structure theorem and obstruction
+**Evidence:** audited
+**Disposition:** active
+
+At denominator two, the guarded-affine GPI₂ compiler is exactly an integer least-significant-bit
+map
+
+```text
+T(2m)=a₀m+c₀,       T(2m+1)=a₁m+c₁,
+```
+
+with odd slopes. A common odd denominator merely conjugates the rational 2-integral orbit to
+the numerator orbit and supplies no extra register. If both slope magnitudes are one, every
+orbit enters an explicit invariant interval. If both are at least three, absolute value escapes
+monotonically outside an explicit interval. Both strata are decidable by exact finite-box
+simulation.
+
+Only the mixed stratum survives. Affine conjugacy and acceleration through the unit branch put
+it in one of the two forms
+
+```text
+S₊(n)=(an+B)/2^v₂(an+B),
+S₋(n)=(−1)^(v₂(an+B)−1)(an+B)/2^v₂(an+B),
+```
+
+for fixed odd `a,B`. Every length-`N` macro has linear multiplier with odd numerator
+`a₀^N₀a₁^N₁` and denominator `2ⁿ`. This excludes direct radix-tag append, direct
+FRACTRAN valuation decrement, and finite affine-chart microcoding: the last chart factors
+always telescope on controller cycles. It does not exclude computation by carries. Writing
+`η=−B/a∈ℤ₂`, the positive map deletes the maximal common binary prefix of `n` and the
+fixed eventually periodic word `η`, then multiplies the odd tail by `a`. That nonhomomorphic
+carry transducer is the sole surviving universality seam inside this compiler.
+
+The genericity exceptions are bounded preprocessing, not a second obstruction. Follow the
+deterministic orbit through the at-most-two common bad source rays until target, repetition, or
+first exit; after exit one ordering is generic, and the checked scalar normalization and
+two-plane pushout complete the reduction.
+
+**Scope:** no invariant universal configuration code, halting converse, undecidability theorem,
+or decision theorem for the mixed Syracuse family is obtained. The literature-exhaustion claims
+are not promoted. The arithmetic conjugacies, finite-box arguments, and scoped multiplier
+obstructions are independently audited; no narrow duplicate Lean orbit API was added.
+
+**Artifact:**
+[`m32-binary-affine-syracuse-2026-08-11.md`](audits/m32-binary-affine-syracuse-2026-08-11.md).
+
+**Use:** restrict further guarded-affine universality attacks to the mixed signed Syracuse
+family. Do not spend the all-word compiler on direct radix, tag, FRACTRAN, denominator-register,
+or finite affine-controller encodings.
+
+**Next:** exhibit an invariant configuration-code family driven by multiplication carries in
+the fixed `ax+B` map, prove that family's reachability decidable, or leave the guarded-affine
+lane for a genuinely projective mechanism.
 
 ### R32-O19: Projective queue centralizer obstruction
 

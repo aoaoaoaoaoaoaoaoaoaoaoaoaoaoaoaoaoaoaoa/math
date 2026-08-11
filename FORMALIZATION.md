@@ -205,6 +205,17 @@ target it then constructs unit scalar representatives with `α=β=1` and proves 
 preserves the complete zero language. See `R32-S37` and
 [`audits/m32-collatz-incidence-2026-08-10.md`](audits/m32-collatz-incidence-2026-08-10.md).
 
+The broader guarded-affine route now has an audited terminal normal form. Clearing an odd
+denominator reduces rational 2-integral reachability to an integer parity map. The all-unit and
+all-expansive slope strata admit explicit finite-box decision algorithms; every mixed stratum is
+affinely conjugate, after accelerating the unit branch, to one signed generalized `ax+B`
+Syracuse map. Macro multipliers and finite-chart telescoping reject direct radix-tag, FRACTRAN,
+and affine-controller encodings. Only carry propagation against the fixed eventually periodic
+2-adic word `−B/a` remains. This is `R32-S40`, retained without a duplicate Lean orbit API because
+the existing p-adic gate, genericity theorem, normalization, and two-plane compiler already own
+every formal matrix seam. See
+[`audits/m32-binary-affine-syracuse-2026-08-11.md`](audits/m32-binary-affine-syracuse-2026-08-11.md).
+
 ReturnSquare instantiates the rank-`(3,2)` reduction. Lean proves the closed return matrix,
 split interfaces, exact cut rank, internal rank-one zero-wait return, unit positive returns,
 complete physical mortality equivalence, reachable and observable determinants, and the
