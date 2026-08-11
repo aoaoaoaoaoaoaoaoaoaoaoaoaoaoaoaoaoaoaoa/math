@@ -10,6 +10,7 @@ import MatrixMortality.BoundaryTax
 import MatrixMortality.InternalSandwich
 import MatrixMortality.ReturnFamily
 import MatrixMortality.CubicReturn
+import MatrixMortality.CubicReturnNonPure
 import MatrixMortality.EdgeCompression
 import MatrixMortality.TwoPlaneEdges
 import MatrixMortality.ReverseEdge

@@ -648,10 +648,20 @@ the exact residue a null-conic orbit under the adjoint isometry of an arbitrary 
 with recurrence reflections. An explicit physical family with `χ_A=X³−X−1` has unit returns
 `M₁=F`, `M₄=FR` generating a free binary submonoid and an injective rational-line orbit. Hence
 recurrence order, involutivity, and finite singular timing do not force finitely many bridge
-states or bounded bridge length. The selected line is not a singular endpoint, so the exact
-remaining seam is endpoint-faithful null-conic reachability. See
+states or bounded bridge length. See
 [`R32-O16`](SALVAGE.md#r32-o16-irreducible-cubic-punctuation-collapse) and
 [`m32-cubic-null-conic-orbit-2026-08-10.md`](audits/m32-cubic-null-conic-orbit-2026-08-10.md).
+
+The endpoint seam is now closed, and it exposes a sharper enemy. For the non-pure companion
+ambient `A³+A²=I`, one rank-two physical twist places the actual singular image at the base of a
+free selected binary semigroup and makes selected wait one hit the actual singular kernel. A
+second twist has an injective free orbit over selected waits `{1,5}` and Lean proves that no
+selected word hits the kernel. Nevertheless the strictly unselected unit word
+`[12,12,8,12,12,15,8]` creates an exact zero. Selected ping-pong therefore supplies no all-waits
+soundness. The remaining cubic problem is endpoint reachability for the complete fixed recurrence
+`M_(n+3)=M_n−M_(n+2)`, or a normalization proving every first hit has a selected representative.
+See [`R32-S42`](SALVAGE.md#r32-s42-non-pure-cubic-endpoints-and-false-waits) and
+[`m32-cubic-endpoint-false-waits-2026-08-11.md`](audits/m32-cubic-endpoint-false-waits-2026-08-11.md).
 
 ### ReturnSquare laboratory
 
@@ -1311,7 +1321,7 @@ all-legal block inequality for the carried generalized continuant. See
 | --- | --- | --- |
 | Split-guard decision | Prove coefficient-effective bilateral shadow amortization for the canonical first-hit reset companion | Every residual packet is doubly order-broken, but one wait can service nested packets and one-step companion contraction is unboundedly false |
 | Split-guard counter | Solve the rational reset incidence for an aperiodic p-adic Jacobi schedule with sparse microscopic doubly order-broken packets | Finite handoff alphabets and fixed rational charts are periodic or impossible; the history-dependent handoff height must be unbounded |
-| Irreducible cubic reflection orbit | Decide endpoint-faithful null-conic reachability under the non-pure recurrence reflections | The twist is arbitrary and two unit indices can generate a free binary submonoid; only the special singular endpoint placement remains |
+| Irreducible cubic reflection orbit | Decide all-positive-wait endpoint reachability for the fixed non-pure order-three recurrence | Actual endpoints support free selected dynamics, but an explicit unselected seven-wait word defeats perfect selected ping-pong |
 | Generic projective incidence | Decide rational-subset membership in the rank-two affine cusp, or encode universality through its carry dynamics | Fixed-subset shortcut Collatz already occupies `ℤ[1/6]⋊ℤ²`; the Tits split, direct stores, and one-dilation algorithms miss it |
 
 The split-spectrum hot path is now an effective reset-anchored recurrence-or-escape theorem for

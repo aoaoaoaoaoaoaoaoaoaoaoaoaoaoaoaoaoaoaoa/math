@@ -128,6 +128,7 @@ file owns the mathematical stock.
 | [`R32-S39`](#r32-s39-reset-companion-and-bilateral-shadow) | structure theorem and obstruction | every first-hit terminal address has a canonical reset companion transmuting reverse content, but its bilateral shadow need not contract even once | formalized core; audited strengthening | active |
 | [`R32-S40`](#r32-s40-binary-affine-syracuse-collapse) | structure theorem and obstruction | parity-selected affine reachability is decidable outside one mixed-slope signed Syracuse family, where only nonhomomorphic carry dynamics remains | audited | active |
 | [`R32-S41`](#r32-s41-parabolic-rational-subset-normal-form) | reduction and obstruction | PI₂ is a parabolic rational-subset problem, already containing fixed-subset shortcut Collatz inside the rank-two affine cusp `ℤ[1/6]⋊ℤ²` | audited | active |
+| [`R32-S42`](#r32-s42-non-pure-cubic-endpoints-and-false-waits) | structure theorem and obstruction | actual singular endpoints support free selected dynamics, but a clean one-singular family has an exact zero made solely from unselected unit waits | formalized core; audited strengthening | active |
 | [`R32-O19`](#r32-o19-projective-queue-centralizer-obstruction) | obstruction | an injective homomorphic projective word store with finite controller cannot recurrently delete and append queue data | audited | graduated |
 | [`R32-O20`](#r32-o20-transverse-reverse-reservoir) | obstruction | a lawful fixed projective cycle accumulates unbounded reverse 13-adic mass on its transverse eigenline | formalized | graduated |
 | [`R32-D03`](#r32-d03-bounded-denominator-periodicity) | decidable stratum | every infinite legal rational guard orbit with bounded reduced denominators is eventually periodic | formalized | graduated |
@@ -4081,9 +4082,9 @@ pure fork is already one GPI₂ instance, not an independent involutive-ratio pr
 **Scope:** Lean checks the pure-cubic arbitrary-word collapse and the exact genericity scalars of
 the one-singular normal form. Field faithfulness, singular-time classification, canonical trace
 and null-conic forms, arbitrary twist, and the free physical bridge are independently audited.
-The free witness's rational base line is not asserted to be a singular endpoint. Non-pure
-isolated cuts may still be joined by an unbounded word over the projectively injective recurrence
-of unit reflections. GPI₂ itself remains open.
+The free witness in this record did not use a singular endpoint. `R32-S42` subsequently closes
+that placement seam and isolates arbitrary unselected waits as the surviving obstruction.
+GPI₂ itself remains open.
 
 **Artifact:** `CubicReturn.returnProduct_eq_smul_residues`,
 `CubicReturn.pairGenerator_isMortal_iff_residue`, and
@@ -4098,8 +4099,8 @@ The arbitrary-twist, null-conic, and free-bridge strengthening is reconstructed 
 **Use:** retire cubic singular timing as an unbounded store and merge the pure one-singular fork
 into GPI₂. Do not seek a finite bridge-state collapse from recurrence order or involutivity.
 
-**Next:** decide the endpoint-faithful non-pure null-conic orbit, or compile universality while
-making every unselected recurrence index harmless.
+**Next:** superseded by `R32-S42`: decide the endpoint-faithful all-waits recurrence, or compile
+universality while making every unselected recurrence index harmless.
 
 ### R32-S32: Rank-two punctuation and graph removal
 
@@ -4683,6 +4684,73 @@ undecidability theorem must cross the fixed two-branch Collatz boundary without 
 **Next:** decide rational-subset membership for `ℤ[1/6]⋊ℤ²` or the narrower fixed subset
 `R`, find a sound reduction into that fixed pair, or identify additional normalization structure
 that makes GPI₂ smaller than ambient SARSM₂.
+
+### R32-S42: Non-pure cubic endpoints and false waits
+
+**Kind:** structure theorem and obstruction
+**Evidence:** formalized core; audited strengthening
+**Disposition:** active
+
+For the non-pure companion ambient with polynomial `X³+X²−1`, Lean checks
+
+```text
+A³+A²=I,       det A=1,       A³≠λI,
+M_(n+3)=M_n−M_(n+2).
+```
+
+Its positive returns are units and wait zero is the unique singular return. The arbitrary
+physical twist has enough freedom to align the actual singular image and kernel while retaining
+a free selected binary semigroup. In one explicit rank-two physical family,
+
+```text
+M₀M₁M₀=0,
+```
+
+and exact interval ping-pong for selected waits one and five proves freeness. Endpoint placement
+is therefore not the non-pure obstruction.
+
+A second physical twist isolates the true failure. Its selected returns are upper triangular
+with nonzero lower diagonal, and Lean proves that every word over waits `{1,5}` sends the actual
+singular image `[79:90]` to a ray with nonzero lower coordinate. The selected endpoint orbit is
+also injective by audited disjoint-interval ping-pong. Nevertheless every letter of
+
+```text
+[12,12,8,12,12,15,8]
+```
+
+is positive and strictly unselected, while Lean proves
+
+```text
+M₀ M₁₂ M₁₂ M₈ M₁₂ M₁₂ M₁₅ M₈ M₀=0.
+```
+
+Thus selected freeness, actual endpoint faithfulness, and selected immortality give no
+arbitrary-word converse. After normalization, the complete remaining predicate is one endpoint
+coefficient for an arbitrary common left factor `P` and the fixed relative recurrence
+
+```text
+H₁=I,       H₅∼diag(2/5,1),       H_(n+3)=H_n−H_(n+2).
+```
+
+**Scope:** Lean checks the ambient and return recurrence, unit ambient, non-pure relation,
+rank-two cuts, terminal-aligned zero, strict unselected word, its exact false zero, and avoidance
+of the kernel by every selected word. Irreducibility, the unique singular-index calculation,
+and both ping-pong arguments are independently audited. No all-waits decision or sound universal
+subalphabet is claimed.
+
+**Artifact:** `CubicReturn.NonPure.terminal_zero`,
+`CubicReturn.NonPure.falseWait_zero`, and
+`CubicReturn.NonPure.selected_lower_ne_zero` in
+[`CubicReturnNonPure.lean`](MatrixMortality/CubicReturnNonPure.lean), with reconstruction in
+[`m32-cubic-endpoint-false-waits-2026-08-11.md`](audits/m32-cubic-endpoint-false-waits-2026-08-11.md).
+
+**Use:** retire endpoint-alignment no-go arguments and selected ping-pong as a syntax guard. A
+cubic universality proof must first exclude every false hit from the full positive-wait
+recurrence; a decision proof may attack that exact recurrence directly.
+
+**Next:** decide endpoint reachability for the fixed `H_n` recurrence, or find an arithmetic
+normalization proving every first hit has a selected-word representative. Finite congruence
+filters alone cannot isolate `{1,5}` because ambient powers are periodic modulo every modulus.
 
 ### R32-O19: Projective queue centralizer obstruction
 

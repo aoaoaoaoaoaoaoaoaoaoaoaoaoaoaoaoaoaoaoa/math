@@ -531,10 +531,22 @@ cubic field's trace-zero plane gives `Mₙ=F T_(γθⁿ)` with arbitrary twist `
 normalization turns mortality into endpoint reachability on the determinant null conic. The
 explicit physical family with characteristic polynomial `X³−X−1` has two unit returns generating
 a free binary submonoid with an injective rational-line orbit. This rejects finite bridge-state
-or bounded-length collapse from recurrence order and involutivity alone. The line witness is not
-singular-endpoint-faithful, so the null-conic orbit remains open. The trace/Jordan coordinates
-were culled as a duplicate formal representation; see
+or bounded-length collapse from recurrence order and involutivity alone. That first line witness
+was not singular-endpoint-faithful; `R32-S42` below closes precisely that former seam. The
+trace/Jordan coordinates were culled as a duplicate formal representation; see
 [`audits/m32-cubic-null-conic-orbit-2026-08-10.md`](audits/m32-cubic-null-conic-orbit-2026-08-10.md).
+
+The formerly missing endpoint placement is now realized, and formalization cuts deeper than the
+submitted numerical instance. `CubicReturnNonPure` defines one common non-pure companion ambient,
+proves its exact order-three return recurrence, invertibility, failure of every pure-cubic
+relation, and rank two of two physical cuts. The first twist checks
+`M₀M₁M₀=0`, while audited interval ping-pong keeps its selected semigroup free. For the
+second twist Lean proves that every word over selected waits `{1,5}` misses the actual singular
+kernel, yet the strictly unselected word `[12,12,8,12,12,15,8]` gives an exact zero between
+singular returns. This closes endpoint geometry and kills selected ping-pong as an arbitrary-word
+guard. The live cubic object is the complete fixed recurrence, not another reflection coordinate
+system. See `R32-S42` and
+[`audits/m32-cubic-endpoint-false-waits-2026-08-11.md`](audits/m32-cubic-endpoint-false-waits-2026-08-11.md).
 
 The rank-(2,2) graph is no longer an independent residue. `RankTwoPunctuation` proves that every
 compatible square with one rank-one loop and three units transports exactly to the existing raw
@@ -744,6 +756,7 @@ with a complete arbitrary-word converse.
 | `BoundaryTax.lean` | generic finite-witness two-channel boundary tax |
 | `ReturnFamily.lean` | split finite-rank return normal form and matrix-valued block-Hankel witnesses |
 | `CubicReturn.lean` | pure-cubic arbitrary-word collapse and automatic genericity of the one-singular normal form |
+| `CubicReturnNonPure.lean` | non-pure physical endpoint alignment, fixed return recurrence, and exact unselected-wait obstruction |
 | `EdgeCompression.lean` | exact adjacent-edge compression for split finite-rank families |
 | `TwoPlaneEdges.lean` | compatible two-plane realization of a `2 × 2` edge square and exact rank-two certificates |
 | `ReverseEdge.lean` | generic projective-incidence reverse compiler, basis adaptation, and all-path converse |
@@ -878,6 +891,8 @@ with a complete arbitrary-word converse.
 | Finite return block-Hankel sections factor through every exact ambient realization | `ReturnFamily.finiteReturnHankel_factor`, `ReturnFamily.returnHankel_card_le` |
 | A pure-cubic split pair is mortal exactly when its three residue returns are mortal | `CubicReturn.pairGenerator_isMortal_iff_residue` |
 | Both reverse-compiler scalars of the pure one-singular cubic normal form equal `μ⁻¹` | `CubicReturn.pureOneSingular_reverseEdgeScalars` |
+| One non-pure rank-two physical family aligns the actual singular endpoints through selected wait one | `CubicReturn.NonPure.terminalCut_rank`, `CubicReturn.NonPure.terminal_zero` |
+| A second non-pure family avoids the kernel on every selected word but has an exact zero made only from strictly unselected positive waits | `CubicReturn.NonPure.falseWaitCut_rank`, `CubicReturn.NonPure.selected_lower_ne_zero`, `CubicReturn.NonPure.falseWaitWord_strictly_unselected`, `CubicReturn.NonPure.falseWait_zero` |
 | A split finite-rank family is mortal exactly when one constrained edge path vanishes | `EdgeCompression.isMortal_iff_exists_edgeProduct_eq_zero` |
 | Every compatible two-plane edge square is realized by two rank-two generators | `TwoPlaneEdges.output_mul_input`, `TwoPlaneEdges.generator_rank` |
 | Generic projective incidence compiles to two rank-two `3 × 3` generators | `ReverseEdge.isMortal_adaptedGenerator_iff`, `ReverseEdge.adaptedGenerator_rank` |

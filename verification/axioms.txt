@@ -290,6 +290,18 @@
 'MatrixMortality.CubicReturn.pureOneSingular_reverseEdgeScalars' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.ambient_recurrence' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.ambient_isUnit' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.ambient_not_pureCubic' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.terminalCut_rank' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitCut_rank' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.return_recurrence' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.terminal_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitWord_strictly_unselected' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWait_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.selected_lower_ne_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.EdgeCompression.isMortal_iff_exists_edgeProduct_eq_zero' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]

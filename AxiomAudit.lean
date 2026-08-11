@@ -158,6 +158,16 @@ open MatrixMortality
 #print axioms ReturnFamily.pairGenerator_isMortal_iff_positiveBridge
 #print axioms CubicReturn.pairGenerator_isMortal_iff_residue
 #print axioms CubicReturn.pureOneSingular_reverseEdgeScalars
+#print axioms CubicReturn.NonPure.ambient_recurrence
+#print axioms CubicReturn.NonPure.ambient_isUnit
+#print axioms CubicReturn.NonPure.ambient_not_pureCubic
+#print axioms CubicReturn.NonPure.terminalCut_rank
+#print axioms CubicReturn.NonPure.falseWaitCut_rank
+#print axioms CubicReturn.NonPure.return_recurrence
+#print axioms CubicReturn.NonPure.terminal_zero
+#print axioms CubicReturn.NonPure.falseWaitWord_strictly_unselected
+#print axioms CubicReturn.NonPure.falseWait_zero
+#print axioms CubicReturn.NonPure.selected_lower_ne_zero
 #print axioms EdgeCompression.isMortal_iff_exists_edgeProduct_eq_zero
 #print axioms TwoPlaneEdges.output_mul_input
 #print axioms TwoPlaneEdges.generator_rank
