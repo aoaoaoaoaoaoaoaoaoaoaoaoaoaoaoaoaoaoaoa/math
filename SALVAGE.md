@@ -4579,12 +4579,16 @@ the wall precisely when
 **Scope:** arbitrary regular safe words, all natural `β`, every nonempty encoded body, and all
 legal waits. The exceptional residue-one `b` label with wait zero is excluded because it is the
 singular atom, not a regular safe gap. The flag sectors themselves meet `u=0`; this theorem is
-not safe return and does not control residue-two defects.
+not safe return and does not control residue-two defects. Its state action is
+`exteriorChange · adjugate(C)ᵀ · exteriorChangeInv`, not the primal action `C`. Exterior
+invariants cannot be applied to primal endpoint equations without a separate intertwiner.
 
 **Use:** arbitrary switching is no longer the unknown. Any safe wall hit must occur in one of
 two oriented `3`-adic boundary sectors, and each leftmost atom supplies an explicit exact wound
 functional. Continue with reachable-locus arithmetic, not a finite Archimedean cone or another
-coarse valuation partition.
+coarse valuation partition. In particular, the quadratic-conic claim for `C u*∼k` is invalid:
+the regular primal atom `atom 3 bbcc b 0` sends `(0,0,1)ᵀ` from conic value zero to value
+`24`.
 
 **Next:** derive and compare the wall functionals for all four atom families under the oriented
 flag, then prove their reachable avoidance or exhibit an exact safe returning word. In parallel,

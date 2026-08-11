@@ -405,6 +405,11 @@ Two original-family nodes survive, and they must not be conflated.
    pseudo-terminal side normals are impossible. It must prove both the forward zero and the
    arbitrary-word converse; another restatement of the terminal plane is dead on arrival.
 
+An ontology guard applies to both nodes. The exterior dynamics act by the conjugated
+adjugate-transpose `exteriorTransition(C)`, while endpoint contexts act by the primal matrix
+`C`. A conic invariant of the former does not constrain `C u*∼k`; the regular primal atom
+`atom 3 bbcc b 0` already sends a conic-null vector to conic value `24`.
+
 The dead subtrees remain dead: literal Neary role fusion (`M4-O01`, `M4-O02`, `M4-O05`), finite
 queues of complete tokens (`M4-O03`), exact internal/final block codes (`M4-O04`), closed
 finite-order roots (`M4-O07`), one-coordinate exterior dynamics (`M4-O09`), and finite strict
@@ -1408,7 +1413,8 @@ universal computation.
    narrower universal source image that excludes `M4-O15` pseudo-terminals. The exhaustive
    positive overlap-queue source class, alternating/multiple residue-two defect grammar, retuned
    fixed-row closure, and `M4-C04` endpoint architecture are closed. Cross-pollinate exact
-   exterior invariants, but do not revive deletion scanners, complete-token queues, fixed-ray
+   exterior invariants only within their contragredient representation; do not transplant them
+   to primal endpoint actions or revive deletion scanners, complete-token queues, fixed-ray
    complete-block semantics, one-coordinate dynamics, finite wall-separated cones, or literal
    Neary recodings.
 2. Use formalized `MM-O01`, `G3-O01`, `MM-O03`, and `MM-O04` to reject exact packings, macros,

@@ -66,6 +66,10 @@ records the corrective reconstruction from that pushed boundary.
   It was reconstructed against the semantically corrected branch boundary
   `c656107678ad3bb48ba0b558139e976d2fb1c7fb`. Its gap-thirty transfer and losing fork are
   formalized below.
+- The exterior-conic report has final-report SHA-256 digest
+  `d73897827cfbfe0e3516bd33347980b4b0899b745ea02ae75749079fac7d9736`.
+  Its claimed nonreachability theorem is rejected: it transfers an invariant from the
+  contragredient exterior representation to the primal endpoint action.
 
 ## Complete Middle
 
@@ -218,6 +222,45 @@ This is not a failed search for the endpoint contexts. It is a losing fork valid
 instantiation of them. Any endpoint geometry factoring only through `(X,Y,σ,τ)` accepts the
 pseudo-terminal because those parameters contain no certificate of lawful history.
 
+## Rejected Exterior-Conic Argument
+
+The second report proposes
+
+```text
+q(u,v,w)=v²+4uw
+```
+
+and argues that every regular context preserves its null conic, while `q(u*)=4` and `q(k)=0`.
+Those endpoint values are correct; the asserted action is not. In the repository the exterior
+state transforms by
+
+```text
+exteriorTransition(C)
+  = exteriorChange · adjugate(C)ᵀ · exteriorChangeInv,
+```
+
+whereas the conditional endpoint equation is the primal equation `C u*=λk`. A symmetric-square
+or binary-quadratic invariant of `exteriorTransition(C)` does not become an invariant of `C`.
+
+One regular atom disproves the required primal certificate. Let `e₂=(0,0,1)ᵀ` and
+
+```text
+C = atom 3 bbcc b 0.
+```
+
+The checked regularity criterion makes `C` a unit, but direct exact evaluation gives
+
+```text
+q(e₂)=0,
+C e₂=(2,0,3)ᵀ,
+q(C e₂)=24.
+```
+
+Thus no identity `CᵀJC=δJ` with nonzero `δ` holds for primal atoms in the claimed chart. The
+report's quantified conclusion `C u*≁k` is unsupported. This rejection does not establish
+reachability; after the pseudo-terminal fork, that reachability question is immaterial to
+`M4-C04` as a master reduction.
+
 ## Forced Determinant Rays
 
 The delayed report additionally classifies exact determinant identities. If fixed contexts make
@@ -262,6 +305,7 @@ They have no evidentiary standing. Any oriented arithmetic attack must be re-der
 | Complete-gap attainment of either compiler endpoint | obstructed and formalized |
 | Gap-thirty pseudo-terminal on an admissible no-instance | obstruction formalized |
 | Conditional endpoint compiler as a uniform reduction | rejected |
+| Exterior-conic obstruction to primal endpoint reachability | rejected: representation mismatch |
 | Forced determinant rays | audited |
 | Uniform malformed witness for the pure length test | audited |
 | Former depth-`n+β+1` cylinder | rejected |
