@@ -14,6 +14,8 @@ cd -- "$ROOT"
 export ELAN_HOME
 export SOURCE_DATE_EPOCH
 
+"$ROOT/scripts/share-lake-packages.sh" "$ROOT"
+
 [[ "$(tectonic --version)" == "$TECTONIC_VERSION" ]] || {
   printf 'paper reproduction requires %s\n' "$TECTONIC_VERSION" >&2
   exit 1

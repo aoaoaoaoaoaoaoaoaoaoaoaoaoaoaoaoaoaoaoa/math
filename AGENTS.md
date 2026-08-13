@@ -43,6 +43,24 @@ invoke `/usr/bin/lean`, `/usr/bin/lake`, `/usr/bin/cargo`, an absolute `.elan/to
 binary, or otherwise bypass or widen the shared affinity. Repository scripts such as
 `scripts/check.sh` inherit the cap automatically through `lake`.
 
+## Lake package sharing
+
+All worktrees share dependency checkouts and dependency build artifacts through manifest-keyed
+pools below the primary checkout's `.lake/shared-packages/`. Each worktree's own `.lake/build/`
+remains private. `scripts/share-lake-packages.sh` owns this layout; do not replace its links with
+copied package directories.
+
+The common `post-checkout` hook links new worktrees automatically. Run
+`scripts/share-lake-packages.sh --install` after a fresh clone to install the hook and reconcile
+all existing worktrees. The canonical check also repairs the current worktree before invoking
+Lake.
+
+Never run `lake update` against a shared package link. Before intentionally changing the Lean
+toolchain or dependency declarations, or before invoking `lake update`, run
+`scripts/share-lake-packages.sh --detach`; perform the update; then run
+`scripts/share-lake-packages.sh` to validate and move the result into its new manifest-keyed
+pool. The detach uses copy-on-write when the filesystem supports it.
+
 ## Authorship
 
 Unless explicitly countermanded for a particular work, credit agentic mathematical work in
