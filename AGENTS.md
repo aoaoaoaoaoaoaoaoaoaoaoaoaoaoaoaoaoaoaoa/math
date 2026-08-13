@@ -27,22 +27,6 @@ restriction linters that merely compel ceremonial prose are not. Kernel acceptan
 floor: audit definitions for vacuity, quantifier drift, wrong multiplication order, empty-witness
 loopholes, coercion loss, and mismatch with the publication claim.
 
-## Compiler resource ceiling
-
-All Lean and contained Cargo work on this machine shares a hard six-logical-CPU ceiling. The
-machine-local policy in `~/.config/compiler-lanes` assigns compilers to CPUs `6-11` at niceness
-`5`. The commands `lean`, `lake`, `leanc`, `leanmake`, and `cargo` must resolve through the
-launchers in `/home/main/bin/`; `scripts/cargo6` receives the same lanes through `~/.zshenv`.
-Each launcher pins its complete compiler process tree, so independent invocations across all
-worktrees compete on the same six CPUs. CPUs `0-5` and their SMT siblings `12-17` are reserved
-for performance-sensitive benchmarks; compilers must not execute on them.
-
-Before substantial compiler work, run `command -v lean lake cargo`. Every path must begin with
-`/home/main/bin/`. In a shell predating this policy, run `source ~/.zshenv && rehash`. Do not
-invoke `/usr/bin/lean`, `/usr/bin/lake`, `/usr/bin/cargo`, an absolute `.elan/toolchains/...`
-binary, or otherwise bypass or widen the shared affinity. Repository scripts such as
-`scripts/check.sh` inherit the cap automatically through `lake`.
-
 ## Lake package sharing
 
 All worktrees share dependency checkouts and dependency build artifacts through manifest-keyed
