@@ -32,6 +32,47 @@ basis whose rank depends on the transducer. Passing to three positive source let
 still require a uniform rank bound or a sound positive-monoid compiler for that subgroup
 constraint.
 
+For the cyclic-tag transducer with `m` appendants, direct reconstruction of its Stallings graph
+gives closed-path rank `3m+1` and an explicit basis. Combining Proposition 3.2, Lemma 3.5, and
+the all-fixed-points-are-loops clause of Theorem 3.6 sharpens the construction: the fixed subgroup
+is trivial in the nonhalting case and infinite cyclic in the halting case. Through Theorem 4.1,
+the resulting PCP equalizer consequently has promised rank zero or one. This is a derived
+corollary of the paper's construction, not a theorem stated in the preprint; no external novelty
+claim is made for it.
+
+The construction also yields an exponent-one sharpening which does not require the cyclic
+classification. Carvalho's homomorphism `χ:F_A→ℤ` sends `p` to one and every other generator to
+zero. Numbered-state transitions preserve discrepancy `χ`; the initial discrepancy contains one
+`p`; and the halting loop constructed in Theorem 3.6 is conjugate to a marker word with exactly
+one `p`. Conversely, any fixed point with `χ=1` is nontrivial. If Theorem 4.1 supplies
+`g,h:F_Y→F_A` and `κ=χ∘h`, direct inspection therefore gives
+
+```text
+C halts  ↔  ∃u∈F_Y, g(u)=h(u) and κ(u)=1.
+```
+
+This is a derived affine-slice corollary, not a theorem stated in the preprint. It is the current
+positive-cancellation target because exponent one excludes the identity without selecting a
+particular positive spelling.
+
+The same transition audit gives a stronger global identity. Every numbered-state edge has equal
+input and output `χ`; in output-minus-input convention, the entry edge has defect one and its
+inverse exit has defect minus one. Every reduced loop at the initial state uses the entry and exit
+once, so its total defect is zero.
+Theorem 4.1 takes a basis of these input loops for `h` and their output labels for `g`. Therefore
+
+```text
+χ∘g = χ∘h
+```
+
+on the entire source free group, not only on its equalizer. This is again a derived consequence
+of the displayed construction rather than a separately stated theorem.
+
+Section 6 also supplies the faithful embedding `ρ:F₂→SL₂(ℤ)` used in the graph-carrier audit,
+with generator matrices `[[3,2],[1,1]]` and `[[1,1],[2,3]]`. The paper records that they freely
+generate a subgroup in which every nonidentity element has trace of absolute value greater than
+two.
+
 ## Audit notes
 
 The local file is arXiv v2. It is a new preprint and has not been peer reviewed. Free-group

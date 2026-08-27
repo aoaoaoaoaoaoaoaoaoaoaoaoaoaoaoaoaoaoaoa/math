@@ -78,6 +78,26 @@ import MatrixMortality.Undecidability.UniversalNeary
 
 /- Source-specific obstructions and finite certificates. -/
 import MatrixMortality.MacroIrreducibility
+import MatrixMortality.PhaseRigidity
+import MatrixMortality.HistoryFracture
+import MatrixMortality.PeriodicHistory
+import MatrixMortality.TransverseHistory
+import MatrixMortality.BranchingHistory
+import MatrixMortality.BranchingRecognizer
+import MatrixMortality.MixedBranchingRecognizer
+import MatrixMortality.SquareRootPunctuation
+import MatrixMortality.TernaryClosedBlockNoGo
+import MatrixMortality.WordDiscrepancy
+import MatrixMortality.PriorityAffineResidual
+import MatrixMortality.PriorityTriangularResidual
+import MatrixMortality.EndpointPrefixCompiler
+import MatrixMortality.FunctionalPhaseNoGo
+import MatrixMortality.ExpandingHistoryNoGo
+import MatrixMortality.CancellativeProjectiveNoGo
+import MatrixMortality.PairedInverseChamber
+import MatrixMortality.PositiveShiftCountermodel
+import MatrixMortality.PositiveResetNoGo
+import MatrixMortality.PositiveFreeCancellation
 import MatrixMortality.NearyBinaryDefect
 import MatrixMortality.NearyPhaseSignature
 import MatrixMortality.CHHNPackingRank

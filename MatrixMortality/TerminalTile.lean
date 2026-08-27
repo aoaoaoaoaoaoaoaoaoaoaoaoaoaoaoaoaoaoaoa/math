@@ -49,69 +49,65 @@ theorem rankOneIntercalatedProduct_formula (c r : ι → 𝕜) (P₀ Pₜ : Squa
       rw [outer_mul_outer]
       simp [bridgeScalar, smul_smul, mul_comm]
 
-/-- A family of units plus one nonzero rank-one separator is mortal exactly when one scalar
-bridge between separators vanishes. -/
-theorem unitFamily_mortal_adjoin_outer_iff {α : Type*}
-    (generators : α → Square ι 𝕜) (column row : ι → 𝕜)
-    [Nonempty ι]
-    (generator_unit : ∀ label, IsUnit (generators label))
-    (column_ne : column ≠ 0) (row_ne : row ≠ 0) :
+/-- Adjoining one outer-product separator to an arbitrary matrix family is mortal exactly when
+one scalar bridge vanishes. Singular controls, zero control products, and zero exterior blocks
+need no separate hypotheses: each already supplies a scalar-zero word. -/
+theorem mortal_adjoin_outer_iff {α : Type*} (generators : α → Square ι 𝕜)
+    (column row : ι → 𝕜) :
     IsMortal (separatedGenerator (Matrix.vecMulVec column row) generators) ↔
       ∃ word : List α, bridgeScalar column row (wordProduct generators word) = 0 := by
   let separator := Matrix.vecMulVec column row
   constructor
   · rintro ⟨raw, _, product_zero⟩
-    have separator_mem : none ∈ raw := by
-      by_contra no_separator
-      obtain ⟨word, rfl⟩ := exists_eq_map_some_of_none_not_mem raw no_separator
+    by_cases separator_mem : none ∈ raw
+    · rw [wordProduct_separatedGenerator_eq_intercalatedProduct] at product_zero
+      have fracture_length := fracture_length_two_le_of_none_mem separator_mem
+      have fracture_nonempty := fracture_ne_nil raw
+      obtain ⟨first, rest, fracture_eq⟩ := List.exists_cons_of_ne_nil fracture_nonempty
+      have rest_nonempty : rest ≠ [] := by
+        intro rest_empty
+        rw [fracture_eq, rest_empty] at fracture_length
+        simp at fracture_length
+      let last := rest.getLast rest_nonempty
+      let middle := rest.dropLast
+      have fracture_decomposition : fracture raw = first :: middle ++ [last] := by
+        rw [fracture_eq]
+        congr 1
+        exact (List.dropLast_append_getLast rest_nonempty).symm
+      have mapped_decomposition : (fracture raw).map (wordProduct generators) =
+          wordProduct generators first ::
+            middle.map (wordProduct generators) ++ [wordProduct generators last] := by
+        simp [fracture_decomposition]
+      rw [mapped_decomposition] at product_zero
+      change intercalatedProduct separator
+        (wordProduct generators first ::
+          middle.map (wordProduct generators) ++ [wordProduct generators last]) = 0
+        at product_zero
+      rw [rankOneIntercalatedProduct_formula] at product_zero
+      by_cases first_column_zero : wordProduct generators first *ᵥ column = 0
+      · exact ⟨first, by simp [bridgeScalar, first_column_zero]⟩
+      by_cases last_row_zero : row ᵥ* wordProduct generators last = 0
+      · refine ⟨last, ?_⟩
+        rw [bridgeScalar, Matrix.dotProduct_mulVec, last_row_zero]
+        simp
+      have boundary_nonzero :
+          Matrix.vecMulVec (wordProduct generators first *ᵥ column)
+            (row ᵥ* wordProduct generators last) ≠ 0 :=
+        outer_ne_zero first_column_zero last_row_zero
+      have scalar_product_zero :
+          ((middle.map (wordProduct generators)).map
+            (bridgeScalar column row)).prod = 0 :=
+        (smul_eq_zero.mp product_zero).resolve_right boundary_nonzero
+      have zero_mem :
+          0 ∈ (middle.map (wordProduct generators)).map
+            (bridgeScalar column row) :=
+        List.prod_eq_zero_iff.mp scalar_product_zero
+      obtain ⟨matrix, matrix_mem, bridge_zero⟩ := List.mem_map.mp zero_mem
+      obtain ⟨word, _, rfl⟩ := List.mem_map.mp matrix_mem
+      exact ⟨word, bridge_zero⟩
+    · obtain ⟨word, rfl⟩ := exists_eq_map_some_of_none_not_mem raw separator_mem
       rw [wordProduct_separatedGenerator_map_some] at product_zero
-      exact (wordProduct_isUnit generators generator_unit word).ne_zero product_zero
-    rw [wordProduct_separatedGenerator_eq_intercalatedProduct] at product_zero
-    have fracture_length := fracture_length_two_le_of_none_mem separator_mem
-    have fracture_nonempty := fracture_ne_nil raw
-    obtain ⟨first, rest, fracture_eq⟩ :=
-      List.exists_cons_of_ne_nil fracture_nonempty
-    have rest_nonempty : rest ≠ [] := by
-      intro rest_empty
-      rw [fracture_eq, rest_empty] at fracture_length
-      simp at fracture_length
-    let last := rest.getLast rest_nonempty
-    let middle := rest.dropLast
-    have fracture_decomposition : fracture raw = first :: middle ++ [last] := by
-      rw [fracture_eq]
-      congr 1
-      exact (List.dropLast_append_getLast rest_nonempty).symm
-    have mapped_decomposition : (fracture raw).map (wordProduct generators) =
-        wordProduct generators first ::
-          middle.map (wordProduct generators) ++ [wordProduct generators last] := by
-      simp [fracture_decomposition]
-    rw [mapped_decomposition] at product_zero
-    change intercalatedProduct separator
-      (wordProduct generators first ::
-        middle.map (wordProduct generators) ++ [wordProduct generators last]) = 0
-      at product_zero
-    rw [rankOneIntercalatedProduct_formula] at product_zero
-    have first_column_nonzero :
-        wordProduct generators first *ᵥ column ≠ 0 :=
-      unit_mulVec_ne_zero (wordProduct_isUnit generators generator_unit first) column_ne
-    have last_row_nonzero :
-        row ᵥ* wordProduct generators last ≠ 0 :=
-      vecMul_unit_ne_zero row_ne (wordProduct_isUnit generators generator_unit last)
-    have boundary_nonzero :
-        Matrix.vecMulVec (wordProduct generators first *ᵥ column)
-          (row ᵥ* wordProduct generators last) ≠ 0 :=
-      outer_ne_zero first_column_nonzero last_row_nonzero
-    have scalar_product_zero :
-        ((middle.map (wordProduct generators)).map
-          (bridgeScalar column row)).prod = 0 :=
-      (smul_eq_zero.mp product_zero).resolve_right boundary_nonzero
-    have zero_mem :
-        0 ∈ (middle.map (wordProduct generators)).map
-          (bridgeScalar column row) :=
-      List.prod_eq_zero_iff.mp scalar_product_zero
-    obtain ⟨matrix, matrix_mem, bridge_zero⟩ := List.mem_map.mp zero_mem
-    obtain ⟨word, _, rfl⟩ := List.mem_map.mp matrix_mem
-    exact ⟨word, bridge_zero⟩
+      exact ⟨word, by simp [bridgeScalar, product_zero]⟩
   · rintro ⟨word, bridge_zero⟩
     refine ⟨none :: word.map some ++ [none], by simp, ?_⟩
     have fracture_shape : fracture (none :: word.map some ++ [none]) = [[], word, []] := by
@@ -126,99 +122,6 @@ theorem unitFamily_mortal_adjoin_outer_iff {α : Type*}
         Matrix.vecMulVec column row by
           simpa [separator] using
             rankOneIntercalatedProduct_formula column row 1 1 [wordProduct generators word]]
-    simp [bridge_zero]
-
-/-- A common fixed column replaces invertibility in the rank-one scalar-to-mortality compiler. -/
-theorem fixedAnchor_mortal_adjoin_outer_iff {α : Type*} (X : α → Square ι 𝕜)
-    (anchor column row : ι → 𝕜) (fixed : ∀ label, X label *ᵥ anchor = anchor)
-    (row_anchor_nonzero : row ⬝ᵥ anchor ≠ 0) :
-    IsMortal (separatedGenerator (Matrix.vecMulVec column row) X) ↔
-      ∃ word : List α, bridgeScalar column row (wordProduct X word) = 0 := by
-  let separator := Matrix.vecMulVec column row
-  have anchor_nonzero : anchor ≠ 0 := by
-    intro anchor_zero
-    apply row_anchor_nonzero
-    rw [anchor_zero]
-    simp
-  have separator_free_fixed :
-      ∀ (word : List (Option α)), none ∉ word →
-        wordProduct (separatedGenerator separator X) word *ᵥ anchor = anchor := by
-    intro word no_separator
-    induction word with
-    | nil => simp
-    | cons head tail induction =>
-        cases head with
-        | none => exact (no_separator (by simp)).elim
-        | some label =>
-            have tail_no_separator : none ∉ tail := by
-              intro member
-              exact no_separator (by simp [member])
-            rw [wordProduct_cons, separatedGenerator, ← Matrix.mulVec_mulVec]
-            change X label *ᵥ (wordProduct (separatedGenerator separator X) tail *ᵥ anchor) =
-              anchor
-            rw [induction tail_no_separator, fixed]
-  constructor
-  · rintro ⟨raw, _, product_zero⟩
-    have chain_zero : wordProduct (separatedGenerator separator X) raw = 0 :=
-      product_zero
-    have separator_mem : none ∈ raw := by
-      by_contra no_separator
-      have product_fixed := separator_free_fixed raw no_separator
-      rw [chain_zero] at product_fixed
-      exact anchor_nonzero (by simpa using product_fixed.symm)
-    rw [wordProduct_separatedGenerator_eq_intercalatedProduct] at chain_zero
-    have fracture_length := fracture_length_two_le_of_none_mem separator_mem
-    have fracture_nonempty := fracture_ne_nil raw
-    obtain ⟨first, rest, fracture_eq⟩ := List.exists_cons_of_ne_nil fracture_nonempty
-    have rest_nonempty : rest ≠ [] := by
-      intro rest_empty
-      rw [fracture_eq, rest_empty] at fracture_length
-      simp at fracture_length
-    let last := rest.getLast rest_nonempty
-    let middle := rest.dropLast
-    have fracture_decomposition : fracture raw = first :: middle ++ [last] := by
-      rw [fracture_eq]
-      congr 1
-      exact (List.dropLast_append_getLast rest_nonempty).symm
-    have mapped_decomposition : (fracture raw).map (wordProduct X) =
-        wordProduct X first :: middle.map (wordProduct X) ++ [wordProduct X last] := by
-      simp [fracture_decomposition]
-    rw [mapped_decomposition] at chain_zero
-    change intercalatedProduct (Matrix.vecMulVec column row)
-      (wordProduct X first :: middle.map (wordProduct X) ++ [wordProduct X last]) = 0
-      at chain_zero
-    rw [rankOneIntercalatedProduct_formula] at chain_zero
-    by_cases first_column_zero : wordProduct X first *ᵥ column = 0
-    · refine ⟨first, ?_⟩
-      simp [bridgeScalar, first_column_zero]
-    · have last_row_nonzero : row ᵥ* wordProduct X last ≠ 0 := by
-        simpa [wordProduct] using
-          vecMul_wordProduct_ne_zero_of_fixed X anchor row fixed row_anchor_nonzero last
-      have boundary_nonzero :
-          Matrix.vecMulVec (wordProduct X first *ᵥ column)
-            (row ᵥ* wordProduct X last) ≠ 0 :=
-        outer_ne_zero first_column_zero last_row_nonzero
-      have scalar_product_zero :
-          ((middle.map (wordProduct X)).map (bridgeScalar column row)).prod = 0 :=
-        (smul_eq_zero.mp chain_zero).resolve_right boundary_nonzero
-      have zero_mem :
-          0 ∈ (middle.map (wordProduct X)).map (bridgeScalar column row) :=
-        List.prod_eq_zero_iff.mp scalar_product_zero
-      obtain ⟨matrix, matrix_mem, bridge_zero⟩ := List.mem_map.mp zero_mem
-      obtain ⟨word, _, rfl⟩ := List.mem_map.mp matrix_mem
-      exact ⟨word, bridge_zero⟩
-  · rintro ⟨word, bridge_zero⟩
-    refine ⟨none :: word.map some ++ [none], by simp, ?_⟩
-    have fracture_shape : fracture (none :: word.map some ++ [none]) = [[], word, []] := by
-      simp [fracture, fracture_map_some_append_none]
-    change wordProduct (separatedGenerator separator X) (none :: word.map some ++ [none]) = 0
-    rw [wordProduct_separatedGenerator_eq_intercalatedProduct, fracture_shape]
-    rw [show ([[], word, []] : List (List α)).map (wordProduct X) =
-      [1, wordProduct X word, 1] by simp [wordProduct]]
-    rw [show intercalatedProduct separator [1, wordProduct X word, 1] =
-      bridgeScalar column row (wordProduct X word) • Matrix.vecMulVec column row by
-        simpa [separator] using
-          rankOneIntercalatedProduct_formula column row 1 1 [wordProduct X word]]
     simp [bridge_zero]
 
 end RankOneChain

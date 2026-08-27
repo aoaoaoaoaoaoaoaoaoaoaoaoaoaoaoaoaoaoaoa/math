@@ -63,7 +63,7 @@ file owns the mathematical stock.
 | [`FC-O02`](#fc-o02-uniform-fiber-semigroup-ceiling) | obstruction | finite full-fiber semigroup lifts cannot beat the uniform entropy barrier | audited | stock |
 | [`FC-O03`](#fc-o03-maximal-self-dual-completion-fails) | obstruction | maximal complement-free meet families need not be self-dual | audited | stock |
 | [`FC-O04`](#fc-o04-affine-two-coupling-wall) | obstruction | the independent/max-entropy affine scheme cannot pass `c⋆=0.382345533366702721…` | audited | stock |
-| [`MM-C01`](#mm-c01-fixed-anchor-rank-one-compiler) | compiler | common-fixed-column scalar zero to mortality | formalized | graduated |
+| [`MM-C01`](#mm-c01-unconditional-rank-one-separator) | compiler | arbitrary scalar zero to mortality by one outer product | formalized | graduated |
 | [`MM-C02`](#mm-c02-common-image-restriction) | compiler | mortality-preserving restriction to a common image | formalized | graduated |
 | [`MM-C03`](#mm-c03-scheduled-binary-compiler) | compiler | fixed-width tag strokes to a total two-letter scalar series | formalized | graduated |
 | [`MM-C04`](#mm-c04-internal-word-sandwich-minimization) | compiler | internal low-rank words repair reachable/observable minimization | formalized | graduated |
@@ -161,8 +161,38 @@ file owns the mathematical stock.
 | [`M4-O05`](#m4-o05-direct-two-state-first-return-recoding) | obstruction | the present four Neary roles have no direct two-state first-return code | reported | active |
 | [`M4-M01`](#m4-m01-mixed-cube-root-punctuation) | partial mechanism | rational cube-root toggles reduce mixed punctuation to incidence equations | audited | parked |
 | [`G3-O01`](#g3-o01-four-role-macro-irreducibility) | obstruction | exact nonerasing macros cannot reduce the four source roles to three letters | formalized | graduated |
+| [`G3-O08`](#g3-o08-erasing-and-stationary-closed-block-obstruction) | obstruction | paired Parikh rank kills erasing exact macros and stationary closed-return block encoders | audited; formalized core | graduated |
 | [`G3-S01`](#g3-s01-shift-equivariant-zero-incidence) | structure theorem | same-zero state dimension is equivariant projective incidence dimension | audited | active |
-| [`G3-M01`](#g3-m01-free-group-discrepancy-engine) | partial mechanism | free cancellation implements queue deletion with an all-path converse | reported | active |
+| [`G3-S02`](#g3-s02-rank-two-kernel-bifurcation) | structure theorem | common kernels erase route differences; transverse fibres retain one bilinear survivor | formalized | active |
+| [`G3-O18`](#g3-o18-transverse-minimum-body-countermodel) | fixed-subclass compiler | distinct rank-two kernels encode every paired history and exactly recognize all minimum bodies | formalized | graduated |
+| [`G3-O02`](#g3-o02-rational-phase-fracture) | obstruction | a mortal paired instance has no rational phase-state same-zero compression | audited | stock |
+| [`G3-O03`](#g3-o03-history-sensitive-minimal-body-fracture) | obstruction | minimal bodies admit an exact history-sensitive three-state same-zero compiler | formalized | graduated |
+| [`G3-O04`](#g3-o04-expanding-affine-history-no-go) | obstruction | finite-mode expanding one-coordinate history has decidable target reachability | audited | graduated |
+| [`G3-O05`](#g3-o05-cancellative-projective-state-tax) | obstruction | inverse-saturated two-side projective dynamics need four states | audited | graduated |
+| [`G3-O11`](#g3-o11-positive-shifts-do-not-force-saturation) | obstruction | positive common shifts need not be backward cancellative | formalized | graduated |
+| [`G3-O12`](#g3-o12-positive-reset-dimension-tax) | obstruction | projectively full residual-local reset codes identify `q` with `ε` | formalized | graduated |
+| [`G3-O13`](#g3-o13-rational-serializer-pumping) | obstruction | finite-control exact serialization pumps to an impossible stationary return | audited; formalized core | graduated |
+| [`G3-D01`](#g3-d01-bounded-prefix-residuals) | decidable stratum | a supplied bound on every accepting prefix residual gives a finite decision graph | audited | stock |
+| [`G3-D02`](#g3-d02-virtually-cyclic-prefix-discrepancy) | decidable stratum | finite-mode capped periodic residual rays reduce to one-counter reachability | audited; formalized core | graduated |
+| [`G3-D03`](#g3-d03-one-sided-corrected-drift) | decidable stratum | one-sided positive weighted drift bounds every accepting residual | audited; formalized core | graduated |
+| [`G3-D04`](#g3-d04-priority-affine-residual-atlas) | decidable stratum | finite-dimensional proper affine residuals with nested priority guards reduce to VASSnz | audited; formalized core | graduated |
+| [`G3-D05`](#g3-d05-priority-triangular-transfer-atlas) | decidable stratum | fixed-priority destructive transfer and fanout reduce to VASSnz drain stages | audited; formalized core | graduated |
+| [`G3-D06`](#g3-d06-functional-phase-transfer-guillotine) | decidable stratum | three functional positive phase transfers always admit one-sided drift | audited; formalized core | graduated |
+| [`G3-C03`](#g3-c03-endpoint-prefix-compiler) | compiler | endpoint-forcing three-production normal systems compile directly to `GPCP(3)` | formalized | active |
+| [`G3-C04`](#g3-c04-head-separated-endpoint-debt) | compiler criterion | a fresh output head makes every endpoint witness causally lawful | formalized | active |
+| [`G3-O06`](#g3-o06-periodic-ray-completion-and-branching-fracture) | compiler and obstruction | `bcbb` has an exact three-state periodic compiler, while `bcbc` defeats every single affine positional section | formalized | graduated |
+| [`G3-O07`](#g3-o07-near-fork-carry-collision) | obstruction | a terminal and nonterminal `bcbc` near-fork collide under the entire one-coordinate phase-line carry family | formalized | graduated |
+| [`G3-C02`](#g3-c02-fixed-bcbc-singular-recognizer) | fixed-instance compiler | a transient guard over one affine carry recognizes the complete `bcbc` language | audited | graduated |
+| [`G3-M02`](#g3-m02-square-root-punctuation-fracture) | partial mechanism | a rank-two square root gives an exact `SS`-free mortality grammar | formalized | closed |
+| [`G3-O10`](#g3-o10-square-root-boundary-saturation) | obstruction | every nondegenerate rank-one square root preserves boundary coefficient zeros | formalized | graduated |
+| [`G3-M01`](#g3-m01-free-group-discrepancy-engine) | partial mechanism | free cancellation implements queue deletion; the accepting subgroup is cyclic | audited | active |
+| [`G3-M03`](#g3-m03-three-positive-affine-exponent-cover) | partial mechanism | three positive letters cover every affine first-exponent slice exactly | formalized | active |
+| [`G3-O19`](#g3-o19-correlated-affine-slice-density) | obstruction | the coarse Carvalho promises permit a correlated graph whose every exponent slice is Zariski dense | audited | graduated |
+| [`G3-O09`](#g3-o09-quotient-blind-positive-boundary-collapse) | obstruction | all-loop-complete group-factorizing boundaries accept a nonempty identity spelling | formalized core | graduated |
+| [`G3-O14`](#g3-o14-positive-cancellation-spelling-dichotomy) | obstruction | finite reversible spelling pumps, while singular one-coordinate spelling absorbs identity factors | formalized | graduated |
+| [`G3-O15`](#g3-o15-triangle-normal-form-rank-six) | obstruction | a standalone same-zero guard for triangle-irreducible spellings needs six states | formalized | graduated |
+| [`G3-O16`](#g3-o16-full-augmented-pair-dimension-tax) | obstruction | an independent `F×F×ℤ` detector cannot act faithfully in three dimensions | audited | graduated |
+| [`G3-O17`](#g3-o17-paired-inverse-chamber) | obstruction | protected two-turn inverse states have no positive future in the actual paired residual chambers | formalized | graduated |
 | [`D2-S01`](#d2-s01-projective-hard-core) | structure theorem | `M₂(3)` is equivalent to two-generator projective incidence | audited | active |
 | [`D2-S02`](#d2-s02-monotone-affine-path-form) | structure theorem | normalized affine words form monotone exponent paths | audited | stock |
 | [`D2-D01`](#d2-d01-projectively-unimodular-stratum) | decidable stratum | projectively unimodular hard-core instances are decidable | audited | stock |
@@ -894,25 +924,35 @@ default wall check in [`tools/certify_frankl.py`](tools/certify_frankl.py).
 
 ## Matrix Mortality
 
-### MM-C01: Fixed-anchor rank-one compiler
+### MM-C01: Unconditional rank-one separator
 
 **Kind:** compiler  
 **Evidence:** formalized
 **Disposition:** graduated
 
-Let every active matrix `X_a` fix a nonzero column `e`, let `Le ≠ 0`, and put `P = CL`. Then the
-family `{X_a} ∪ {P}` is mortal exactly when `LX_wC = 0` for some active word `w`. The converse
-fractures every arbitrary product at every occurrence of `P`; the fixed column replaces
-invertibility at the exterior row.
+For arbitrary square matrices `X_a` over a field, put `P=CL`. Then `{X_a}∪{P}` is mortal exactly
+when `LX_wC=0` for some active word `w`. A zero product without `P` is itself a scalar-zero
+witness. A product with separators factors as
 
-**Scope:** empty internal blocks are harmless only when `LC ≠ 0`; the theorem does not make the
-scalar source undecidable.
+```text
+(∏ᵢ LX_{wᵢ}C) · (X_{w₀}C)(LX_{wₘ}).
+```
 
-**Artifact:** `MatrixMortality.fixedAnchor_mortal_adjoin_outer_iff` in
+An internal scalar zero is immediate. If either exterior vector vanishes, its exterior active
+word is a scalar-zero witness. Thus singular controls, zero control-only products, adjacent or
+exterior separators, and zero rows or columns require no hypotheses.
+
+**Scope:** the field assumption supplies zero-product cancellation for the scalar factors. The
+theorem does not construct a scalar recognizer or make its zero language undecidable.
+
+**Artifact:** `MatrixMortality.mortal_adjoin_outer_iff` in
 [`TerminalTile.lean`](MatrixMortality/TerminalTile.lean).
 
-**Use:** prefer this theorem to a bespoke separator argument whenever a common fixed column is
-available.
+**Audit:**
+[`m34-unconditional-separator-2026-08-07.md`](audits/m34-unconditional-separator-2026-08-07.md).
+
+**Use:** adjoining one rank-one separator completely solves the scalar-to-mortality converse;
+never spend compiler structure on invertibility, a fixed anchor, or separator placement.
 
 ### MM-C02: Common-image restriction
 
@@ -1566,7 +1606,7 @@ symbolically, and prove a global maximal-run grammar or a symbolic no-go theorem
 
 **Kind:** partial mechanism
 **Evidence:** audited
-**Disposition:** active
+**Disposition:** closed
 
 Let `r=t/μ`, put
 
@@ -5919,9 +5959,9 @@ candidate without a rank-stratified all-word grammar.
 
 **Kind:** obstruction
 
-**Evidence:** audited
+**Evidence:** formalized
 
-**Disposition:** active
+**Disposition:** graduated
 
 Let the four fixed-boundary source roles be
 
@@ -5945,7 +5985,8 @@ required length and `X` is nonerasing, that macro is exactly `z`; its lower imag
 **Scope:** exact rolewise factorization through fixed macros with both new morphisms
 nonerasing. It does not cover erasure, target recoding, boundary residuals, overlapping or
 context-dependent codes, preservation of solvability alone, or a different computational
-source.
+source. [`G3-O08`](#g3-o08-erasing-and-stationary-closed-block-obstruction) subsequently removes
+erasure and one precise closed-overlap class.
 
 **Use:** reject every proposal to merge or macro-expand the present four roles unless it
 explicitly invokes one of the escape mechanisms outside the scope.
@@ -5954,6 +5995,62 @@ explicitly invokes one of the escape mechanisms outside the scope.
 [`MacroIrreducibility.lean`](MatrixMortality/MacroIrreducibility.lean). The structure
 `ExactNearyMacroFactorization` quantifies over arbitrary macro words and does not assume an
 injective role code, prefix code, or equal macro lengths.
+
+### G3-O08: Erasing and stationary closed-block obstruction
+
+**Kind:** obstruction
+
+**Evidence:** audited; formalized core
+
+**Disposition:** graduated
+
+For each Neary role pair, record the four additive channels
+
+```text
+(upper ones, upper zeros, lower ones, lower zeros).
+```
+
+In the order `R_c,R_b,D_b,D_c`, their matrix is
+
+```text
+[[1,0,2+2μ+ν,1+βμ],
+ [2,β,2,1],
+ [2,β,0,1],
+ [1,0,0,1]],
+```
+
+where `μ=|q|_b` and `ν=|q|_c`. Its determinant is `2β²μ`. Lean proves the stronger operational
+fact directly: the associated rational linear map is injective whenever `β>0` and `μ>0`.
+Every exact factorization through fixed physical macros factors this map through one dimension
+per physical letter. Consequently at least four letters are necessary even when both target
+morphisms erase, codewords are empty or coincident, and parsing is nonunique.
+
+The complete paper argument permits more overlap. Fix spellings `ρ_b,ρ_c,δ_b,δ_c`, arbitrary
+possibly erasing target morphisms, and arbitrary upper and lower residual words. Require only
+that every block comprising one rule and `β−1` deletions return to the same two residuals while
+emitting the correct complete binary pair. For `β≥4` and a body containing both `b` and `c`, no
+three-letter system satisfies these identities. After taking Parikh vectors, nonnegativity leaves
+two cases for the common lower deletion image and two cases for the upper residual shift. Lean
+checks those discrete reductions; the ensuing one-dimensional-kernel contradictions and the
+nonempty-deletion word argument are independently audited.
+
+The checked universal Neary family has `β=10p≥10` and mixed bodies, so the closed-block theorem
+applies throughout that family.
+
+**Scope:** fixed physical spellings which concatenate by semantic role and return to one common
+residual after each complete deletion-width block. The theorem does not cover state-dependent
+spellings, an open residual which persists between blocks, genuinely nonfactorial adjacent-role
+codes, or a target recoding that preserves only global solvability.
+
+**Use:** reject every further attempt to save a local four-to-three role code by permitting
+erasure, unequal or empty macro words, fixed boundary fragments, or a finite overlap which closes
+at each Neary block. Demand an explicit state transition or an unclosed residue.
+
+**Artifact:** [`TernaryClosedBlockNoGo.lean`](MatrixMortality/TernaryClosedBlockNoGo.lean) and
+[`m34-ternary-closed-block-no-go-2026-08-08.md`](audits/m34-ternary-closed-block-no-go-2026-08-08.md).
+
+The former next step is discharged by `G3-O13`: every rational exact state-dependent spelling
+with recurrent block powers synchronizes to a forbidden stationary return.
 
 ### G3-S01: Shift-equivariant zero incidence
 
@@ -6001,11 +6098,1167 @@ incidence and shift equations.
 **Next:** construct increasing prefix/suffix instances, quotient projective gauge, and retain
 finite unsatisfiable cores as candidate zero-language dimension obstructions.
 
+### G3-O02: Rational phase fracture
+
+**Kind:** obstruction
+
+**Evidence:** audited
+
+**Disposition:** stock
+
+Fix an admissible paired instance with a nonempty zero language. Let the checked four-state
+suffix column lie in one of the two embedded phase planes, and write its local projective point
+as `[v_y]∈P²(ℚ)`. There is no three-state same-zero realization whose compressed suffix point is
+
+```text
+[H_yγ] = Φ_P([v_y])
+```
+
+for rational maps `Φ_rule,Φ_erase : P² ⇢ P²` defined at every reachable point. The target
+generators may be singular, and either phase image may be a point, a line, or a nonlinear curve.
+
+The erase orbit is Zariski dense. Equivariance therefore holds as a rational identity. A
+non-line image makes the data generators invertible on the image; comparing the rule/erase
+discrepancies yields invariance under one nontrivial private scaling, while erase-`c` mixes that
+private direction back into the surviving coordinate. This forces a constant image. On a line,
+two exact commutators act as one constant and one radial translation in the accumulator; rational
+two-translation rigidity forces the line map to forget that accumulator. In every branch,
+
+```text
+Φ_erase ∘ E_c = Φ_erase.
+```
+
+If the original series has a zero, a toggle first normalizes its suffix phase to erase without
+changing the coefficient. Prefixing `c` then emits erase-`c`; its upper and lower binary words
+begin with different symbols, so the prefixed coefficient is nonzero. Projective invariance
+would preserve target vanishing, contradicting the same-zero hypothesis.
+
+**Scope:** the compressed suffix point must be rationally determined by the checked phase and
+local suffix point. The theorem excludes linear projective gluings, rational gauges, Cremona
+identifications, and rational collapses to curves or lines. It does not exclude a representation
+that assigns different compressed points to words with the same checked suffix point. Such a
+survivor has a genuinely multivalued phase graph closure or positive-dimensional generic fibers.
+
+**Use:** cull every phase-plane identification that is merely a rational function of the present
+paired state. [`G3-O03`](#g3-o03-history-sensitive-minimal-body-fracture) realizes the excluded
+history-sensitive escape and moves the live boundary to uniform computability.
+
+**Formalized core:** [`PhaseFracture.lean`](MatrixMortality/PhaseFracture.lean) checks phase
+normalization, erase-`c` nonvanishing, and the dimension-free final contradiction.
+[`PhaseRigidity.lean`](MatrixMortality/PhaseRigidity.lean) checks every displayed role matrix,
+scale, discrepancy, commutator, mixing coefficient, and the invariant-pencil rigidity step in the
+linear-fractional line branch. The density and arbitrary-rational function-field steps remain
+audited rather than kernel-checked.
+
+**Artifact:**
+[`audits/m34-rational-phase-fracture-2026-08-06.md`](audits/m34-rational-phase-fracture-2026-08-06.md).
+
+### G3-O03: History-sensitive minimal-body fracture
+
+**Kind:** obstruction
+
+**Evidence:** formalized
+
+**Disposition:** graduated
+
+The report claiming uniqueness of the terminal role word for every admissible mortal paired
+instance is false. At deletion width three and body `bcbb`, the distinct words
+
+```text
+R_c E_b E_c R_b E_b E_b
+R_c E_b E_c R_b E_b E_b R_b E_b E_b R_c E_b E_b
+```
+
+both satisfy the complete terminal equation. The second appends a nonexecuted two-stroke null
+history after the lawful computation has already reached a short queue. Determinism of `TagStep`
+does not imply uniqueness of global history certificates.
+
+On the infinite minimum-body subclass
+
+```text
+2 < β,    body.length = β−1,
+```
+
+the null-history defect is impossible. Every terminal match is exactly
+
+```text
+ω(body) = R_c :: body.map E.
+```
+
+Assign the four roles digits `1,2,3,4` in base five. Three integral control matrices maintain
+
+```text
+(κ(decodePairedWord y), phaseSign(y), 1)ᵀ
+```
+
+for every arbitrary paired-control word. The row `(1,0,−κ(ω))` therefore vanishes exactly on the
+paired zero language. Adjoining its outer-product separator gives four `3 × 3` integral matrices;
+the unconditional rank-one separator theorem proves the arbitrary-product mortality converse
+directly, without rescaling the singular data controls. For `β=3`, body `bb`, the target code is
+`92` and `ctbbt` is an explicit zero witness.
+
+The associated phase graph closures are independently audited as
+
+```text
+P² × ℓ_rule,    P² × ℓ_erase.
+```
+
+Their generic fibers are lines. Thus no theorem can force every history-sensitive three-state
+phase graph to be generically single-valued.
+
+**Scope:** exact same-zero representation and mortality are formalized only for minimum-length
+bodies. The full-product graph calculation is audited, not Lean-checked. Arbitrary admissible
+bodies can have several terminal words, and no source-computable parameter selecting all of them
+is supplied. This is not an undecidability reduction and does not settle `M₃(4)`.
+
+**Use:** close instancewise phase-graph exclusion and generic-single-valuedness as routes to the
+master problem. The rank-two data maps also show that singularity can erase the entering phase
+without colliding decoded positive histories; rank drop alone cannot force inverse saturation.
+The paired route now requires a uniform computable three-state recognizer for all terminal
+histories, or a no-go for a precisely delimited uniform compiler class.
+
+**Artifact:** [`HistoryFracture.lean`](MatrixMortality/HistoryFracture.lean), including
+`NullHistoryCounterexample.terminal_word_not_unique`, `minimalBody_terminal_word_unique`,
+`minimalBody_history_zero_iff_paired_zero`, and
+`historyMortalityFamily_int_mortal_iff_zero`; bounded audit in
+[`m34-history-fracture-2026-08-06.md`](audits/m34-history-fracture-2026-08-06.md), with the
+unconditional separator strengthening in
+[`m34-unconditional-separator-2026-08-07.md`](audits/m34-unconditional-separator-2026-08-07.md).
+
+### G3-O04: Expanding affine-history no-go
+
+**Kind:** obstruction
+
+**Evidence:** audited
+
+**Disposition:** graduated
+
+Let a history machine carry one integral coordinate `X` and finitely many modes. Each transition
+either preserves `X` or has the form
+
+```text
+(q,X) ↦ (q′,rX+D),    |r|≥2.
+```
+
+For a bound `N` containing every translation and target coordinate, a reverse data step obeys
+
+```text
+2|X| ≤ |r||X| = |Y−D| ≤ |Y|+|D| ≤ 2N.
+```
+
+Every predecessor of the target therefore lies in the finite box `Q×{−N,…,N}`. Lean constructs
+an exact caged DFA: a transition leaving the box enters a dead state, while every accepted run
+stays in the box because each intermediate state can still reach the target. The bounded-target
+language is regular even when collisions and cycles produce infinitely many terminal histories.
+
+This contains every effectively normalized reset-affine three-state compiler with
+source-dependent signed integer radices, rational phase digits after denominator clearing,
+arbitrary finite phase charts, and finitely many affine target fibers. The `u=0` row degeneracy is
+a two-phase test. On a nonempty same-zero source, a zero and its leading toggle force the phase
+coefficient to vanish without implying history uniqueness.
+
+The fixed universal family satisfies
+
+```text
+∃y, pairedCoefficient ℚ source.width (source.body e) y = 0
+  ↔ CodeHalts(e).
+```
+
+Hence no computable predicate, and therefore no total compiler with the finite reverse-search
+normalization above, has exactly these sourcewise zero answers.
+
+**Scope:** the finite-mode theorem requires one shared affine coordinate with stationary or
+expanding integral transitions. It does not cover arbitrary rational reparameterizations between
+curves, a genuinely two-dimensional projective orbit, infinite target sections, nonexpanding
+translations, denominator-generating dynamics, or singular ideals without such a normalization.
+The report's broader “finitely many rational curves” wording is rejected outside this explicit
+law.
+
+**Use:** cull every proposed replacement of the missing accumulator by a source-dependent radix,
+one phase bit or finitely many charts, and finitely many target codes. The next paired-route attack
+must exploit one of the stated escape mechanisms rather than alter digits, radix, collisions, or
+conjugacy.
+
+**Formalized core:** [`ExpandingHistoryNoGo.lean`](MatrixMortality/ExpandingHistoryNoGo.lean)
+checks the all-word orbit formula, toggle rigidity, phase-only degeneracy, reverse bound, finite
+reverse orbit, exact caged DFA, regularity, universal paired-zero equivalence, and the
+computability contradiction. Whole target charts have their own checked finite-mode automaton.
+Extracting mathlib `ComputablePred` code from an encoded rational
+normalization certificate remains audited. The bounded reconstruction is
+[`m34-expanding-history-no-go-2026-08-06.md`](audits/m34-expanding-history-no-go-2026-08-06.md).
+
+### G3-O05: Cancellative projective state tax
+
+**Kind:** obstruction
+
+**Evidence:** audited
+
+**Disposition:** graduated
+
+For a paired control prefix `p`, suffix `s`, and the phase `q` entering from `s`, the terminal
+equation is exactly
+
+```text
+A(p,q)=B(s),
+A(p,q)=U(D_q(p))⁻¹L(D_q(p)),
+B(s)=U(D(s))mL(D(s))⁻¹
+```
+
+in the binary free group. Assign every phase-tagged residual an injective rational code `θ`, put
+
+```text
+v(t)=(1,t,t²)ᵀ,       ℓ(a,b)=(ab,−(a+b),1),
+```
+
+and use `ℓ(a,b)v(t)=(t−a)(t−b)`. This gives one global three-coordinate factorization with exactly
+the complete paired prefix-suffix zero support. Consequently every finite support submatrix has
+rational rank at most three. A zero-language dimension lower bound must use common shift maps;
+support/minrank alone cannot work.
+
+The positive role pairs also contain
+
+```text
+(zx^β,1),       (z(zx^β)z⁻¹,1),
+(1,z²),         (1,xz²x⁻¹).
+```
+
+The first two and last two freely generate `L_β` and `R`; their folded-core fiber product is a
+tree, so `L_β∩R={1}`. Hence they yield a freely acting `F₂×F₂` discrepancy orbit.
+
+If a projective recurrence extends every role to this two-sided group action and its target row
+remains exact on every formal inverse state, role matrices become invertible on the reachable
+span. The free discrepancy orbit then gives a faithful `F₂×F₂` action in `PGL_d(ℚ)`. No such
+action exists for `d≤3`: opposite-factor lifts commute linearly because a projective commutator
+scalar satisfies `μ³=1`, and the commutant of a faithful nonabelian subgroup of `GL₃` cannot
+contain another faithful nonabelian free group.
+
+**Scope:** the saturation hypothesis is essential. The theorem does not cover a positive-only
+orbit whose inverse continuations are absent, whose target law fails there, or whose singular
+maps destroy the group orbit. It does not prove general paired zero-language dimension four.
+
+**Use:** cull projective cross-multiplication of independently cancellative upper and lower word
+sides. Search must preserve genuinely one-way semigroup behavior. `G3-O11` proves that positive
+common-shift equations alone do not supply inverse saturation, and
+[`G3-O17`](#g3-o17-paired-inverse-chamber) proves that the paired grammar itself has no cofinal
+positive inverse orbit. Only a representation-specific faithful Ore completion could now invoke
+this tax.
+
+**Formalized core:** [`CancellativeProjectiveNoGo.lean`](MatrixMortality/CancellativeProjectiveNoGo.lean)
+checks the phase-aware decoder split, positive free-group embedding, terminal residual equation,
+global conic factorization, every finite support-rank bound, role-fraction identities, and the
+rational scalar-commutator law. The folded-graph, projective descent, and commutant classification
+remain audited in
+[`m34-cancellative-projective-no-go-2026-08-06.md`](audits/m34-cancellative-projective-no-go-2026-08-06.md).
+
+### G3-O11: Positive shifts do not force saturation
+
+**Kind:** obstruction
+
+**Evidence:** formalized
+
+**Disposition:** graduated
+
+There are explicit integral rank-two matrices `H_b,H_c,H_t∈M₃(ℤ)`, a column `γ`, and a row
+`λ` such that
+
+```text
+λH_wγ=0 ↔ w=t
+```
+
+on the complete free monoid. Three selected reachable columns form the identity, and three
+selected observable rows have determinant `−1`. No matrix word is zero. Nevertheless
+
+```text
+H_bγ=H_bH_tγ,        γ≠H_tγ.
+```
+
+Thus the positive `b`-shift collapses two distinct zero residuals and fails backward
+cancellativity despite full reachability, observability, and arbitrary-word correctness.
+
+The positive source can moreover be embedded in
+`(⊕_{i∈ℤ}F(p_i,q_i))⋊ℤ`, which contains `F₂×F₂`: blocks between successive `t` letters occupy
+distinct free factors. This audited strengthening shows that neither a cancellative semantic
+monoid nor the forbidden subgroup in its group completion repairs the singular positive action.
+
+**Scope:** Lean checks the orbit recurrence, exact zero language, rank-two generators, full finite
+contexts, nonzero products, collision, and failed backward-cancellation law. The semidirect-product
+normal form, infinite Fibonacci orbit, and absence of nilpotent products are audited deductions.
+The singleton language is not the paired Neary language.
+
+**Use:** never infer the saturation hypothesis of `G3-O05` from positive shift equivariance,
+global minimality, or group-completion structure alone. The former program of proving its two
+missing hypotheses on the paired residual system is closed by
+[`G3-O17`](#g3-o17-paired-inverse-chamber): inverse-orbit cofinality is false uniformly.
+
+**Artifact:** [`PositiveShiftCountermodel.lean`](MatrixMortality/PositiveShiftCountermodel.lean)
+and
+[`m34-positive-shift-countermodel-2026-08-08.md`](audits/m34-positive-shift-countermodel-2026-08-08.md).
+
+### G3-O12: Positive reset dimension tax
+
+**Kind:** obstruction
+
+**Evidence:** formalized
+
+**Disposition:** graduated
+
+Let `v_w` be a projective code of the current reverse queue, let `H_b,H_c` prepend data letters,
+and let `T` enter rule phase. Suppose the legal transitions satisfy
+
+```text
+H_bv_w∼v_bw,          H_cv_w∼v_cw,
+H_bTv_wb∼v_bw,        H_cTv_wqb∼v_cw,
+```
+
+and each complete prepend cylinder spans the ambient finite-dimensional rational vector space.
+Cylinder fullness makes both data maps invertible. At the legal queue `qb`, cancelling `H_b`
+identifies `Tv_qb` with `v_q`, while cancelling `H_c` identifies it with `v_ε`. Hence
+
+```text
+v_q∼v_ε.
+```
+
+The standard homogeneous radix code has cylinder determinant
+`B²(B−1)(d_b−d_c)`, so every nondegenerate two-coordinate radix or denominator recurrence lies
+inside the theorem.
+
+**Scope:** the proof is strictly positive and occurs on legal transitions; it uses no formal
+inverse orbit, expansion bound, finite target, or illegal-state trap. It assumes residual locality,
+both cylinder-fullness conditions, and persistent separation of `q` from `ε`. History-sensitive
+states, collapsed legal cylinders, and a transient coordinate policing an intentional persistent
+collision remain outside it.
+
+**Use:** cull faithful projectively full queue/deque engines, including variants which only send
+illegal histories into a denominator or ideal trap. The constructive paired leaf must now combine
+a singular legal cylinder with source-computable entrance history; the fixed `bcbc` recognizer is
+the model mechanism, not a uniform solution.
+
+**Artifact:** [`PositiveResetNoGo.lean`](MatrixMortality/PositiveResetNoGo.lean) and
+[`m34-positive-reset-dimension-tax-2026-08-08.md`](audits/m34-positive-reset-dimension-tax-2026-08-08.md).
+
+### G3-S02: Rank-two kernel bifurcation
+
+**Kind:** structure theorem
+
+**Evidence:** formalized
+
+**Disposition:** active
+
+Let the two data controls have rank two. Their projective fibres are lines through their kernel
+points. If the kernels coincide, a route difference in that common kernel remains invisible to
+both data maps. When toggles preserve the kernel, any number of toggles retains the difference
+and the first later data action annihilates it exactly.
+
+For transverse coordinate kernels, use quotient charts
+
+```text
+π_b[x:y:z]=[y:z],       π_c[x:y:z]=[x:z].
+```
+
+If their target rays are `[u:v]` and `[r:s]`, with `s≠0`, Lean proves that every common fibre
+point lies on the bilinear ray
+
+```text
+[rv : us : vs].
+```
+
+This is the precise survivor left by collapsed legal cylinders: two separately routed quotient
+coordinates can coexist only through their common homogenizing product.
+
+**Scope:** common-kernel erasure is conditional on the route difference already lying in the
+kernel and on toggle invariance. The periodic `bcbb` compiler shows that toggle invariance is not
+forced: its two data controls have exact common kernel `ℚ(1,1,0)`, the toggle sends its generator
+to `(1,-1,0)`, and either next data control recovers `(2,0,0)`. Thus non-invariant kernel shuttling
+is useful on an exact all-word paired language. The transverse formula is a fibre-intersection
+law, not a source-computable invariant surface or an all-word same-zero construction.
+
+**Use:** split every rank-two paired proposal by kernel geometry. A common-kernel constructor must
+use a non-invariant shuttle or accept quotient factorization; a toggle-invariant persistent guard
+is closed. In the transverse branch, solve the bilinear shift-equivariance equations rather than
+returning to one-coordinate affine carries.
+
+**Artifact:** [`PositiveResetNoGo.lean`](MatrixMortality/PositiveResetNoGo.lean),
+[`PeriodicHistory.lean`](MatrixMortality/PeriodicHistory.lean),
+[`m34-rank-two-kernel-bifurcation-2026-08-10.md`](audits/m34-rank-two-kernel-bifurcation-2026-08-10.md),
+and [`m34-common-kernel-shuttle-2026-08-11.md`](audits/m34-common-kernel-shuttle-2026-08-11.md).
+
+**Next:** construct a source-computable invariant surface in `P¹×P¹` closed under both prepend
+maps and the bilinear reset, or prove that no linear terminal section can be exact on every
+control word.
+
+### G3-O18: Transverse minimum-body countermodel
+
+**Kind:** fixed-subclass compiler
+
+**Evidence:** formalized
+
+**Disposition:** graduated
+
+Assign the four paired roles the variable-radix recurrences
+
+```text
+R_b:w↦4κ(w)+1,    E_b:w↦4κ(w)+3,
+R_c:w↦8κ(w)+2,    E_c:w↦8κ(w)+4.
+```
+
+Their residues modulo four distinguish the roles, so `κ` is injective. Three fixed integral
+controls maintain the exact all-word state
+
+```text
+(8κ(w)−ε, 4κ(w)−ε, 1)ᵀ,
+```
+
+where `ε∈{±1}` is the retained paired phase. The two data controls have exact kernels `ℚe₁`
+and `ℚe₂`; the phase toggle is an involution. The row `(1,−1,−4K)` vanishes exactly when the
+decoded role word has code `K`.
+
+Every minimum body has the unique terminal role word `R_c E(body)`. Choosing its computable code
+therefore gives an exact three-state transverse-kernel recognizer on the complete paired-control
+free monoid for every `β>2` and `|body|=β−1`.
+
+**Scope:** this is an infinite, source-computable fixed subclass, but every instance in the
+subclass has one known terminal word. It does not recognize unrestricted bodies, whose terminal
+sets may be infinite. The result kills any lower bound derived from distinct rank-two kernels,
+the bilinear fibre law, or exceptional projective fibres alone.
+
+**Use:** a transverse constructor must now supply an infinite terminal section or genuinely
+two-dimensional terminal dynamics. A lower bound must exploit unrestricted terminal arithmetic,
+not transverse geometry by itself.
+
+**Artifact:** [`TransverseHistory.lean`](MatrixMortality/TransverseHistory.lean) and
+[`m34-transverse-history-2026-08-11.md`](audits/m34-transverse-history-2026-08-11.md).
+
+**Next:** uniformize the terminal section beyond singleton target codes, or prove that every
+source-computable transverse section with arbitrary-body soundness falls into a decidable class.
+
+### G3-O13: Rational serializer pumping
+
+**Kind:** obstruction
+
+**Evidence:** audited; formalized core
+
+**Disposition:** graduated
+
+For even `β≥4` and a mixed body, no three-letter asynchronous finite-transducer relation can
+exactly serialize arbitrarily large powers of four explicit Neary blocks. The serializer may use
+state-dependent and nonunique spellings, erasure, physical letters crossing block boundaries,
+fixed context on both target sides, and unbounded upper/lower lag.
+
+Pumping one accepting path exposes a loop consuming a positive block power and emitting a
+physical cycle. Exact transport for all pump counts makes both target images of that cycle powers
+of cyclic rotations of the block images. Three `b`-head pulses force at least three physical
+letters whose lower images lie in `b*`; hence every letter has that property. The mixed `c`-head
+pulse instead requires a lower image containing `c`, a contradiction.
+
+**Scope:** arbitrarily large powers of each test block must be encodable, and the two target sides
+must be transported exactly up to fixed contexts. A solution-sensitive domain which truncates
+most powers, final-equality-only transport, or a nonrational spelling relation remains outside the
+theorem.
+
+**Use:** close total finite-control stateful serialization and merge its genuine survivors into
+the global word-residual leaf. Finite state can police syntax, but it cannot itself be the
+computational store.
+
+**Formalized core:** [`TernaryClosedBlockNoGo.lean`](MatrixMortality/TernaryClosedBlockNoGo.lean)
+checks the bidirectional block-semantic equation on arbitrary stroke histories and the final
+fractional-contribution contradiction. The transducer pumping and three-pulse word-factor audit
+are recorded in
+[`m34-rational-serializer-pumping-2026-08-08.md`](audits/m34-rational-serializer-pumping-2026-08-08.md).
+
+### G3-D01: Bounded prefix residuals
+
+**Kind:** decidable stratum
+
+**Evidence:** audited
+
+**Disposition:** stock
+
+Given a GPCP instance and a certified bound `K` on every prefix discrepancy of every accepting
+word, free-prefix reduction has a finite state set `0,+s,−s` with `|s|≤K`, plus dead and overflow
+states. Final boundaries determine acceptance exactly; one bit enforces nonemptiness. Finite
+decoder state and regular side conditions may be multiplied into the same graph.
+
+**Scope:** the bound must be supplied effectively and need hold only on accepting paths. The
+theorem does not decide instances whose accepting residual is unbounded or lacks a computable
+uniform bound.
+
+**Use:** reject every proposed universal ternary reduction which exports a computable accepting-
+prefix residual ceiling. A surviving word residual must be unbounded and non-effectively bounded.
+
+**Artifact:**
+[`m34-rational-serializer-pumping-2026-08-08.md`](audits/m34-rational-serializer-pumping-2026-08-08.md).
+
+### G3-D02: Virtually cyclic prefix discrepancy
+
+**Kind:** decidable stratum
+
+**Evidence:** audited; formalized core
+
+**Disposition:** graduated
+
+For any GPCP instance, restrict the search to words whose signed prefix discrepancy stays, in
+each supplied finite mode, inside a finite set plus finitely many capped periodic rays
+
+```text
+±u p^n v.
+```
+
+Existence of a terminal word in this normal subclass is decidable. Every ray-to-ray update is a
+two-power word equation; its exponent pairs are effectively finite plus at most one arithmetic
+tail. Above a finite threshold, residual length is therefore one counter with fixed increments
+and finite congruence control. Pushdown reachability decides acceptance.
+
+**Scope:** caps, signs, periods, rotations, overlaps, erasing images, regular source modes, and an
+indefinitely open residual are allowed. The ray templates and mode graph must be computably
+supplied. Two independent exponents, unbounded word order at fixed length, and a halting-dependent
+normal form remain outside the theorem.
+
+**Use:** a global three-letter reduction cannot merely preserve one computably normal witness and
+use its arbitrary-word converse for soundness; if that witness has a virtually cyclic residual
+path, searching the normal subclass decides the source. Demand at least two counters or a genuine
+word-valued residual.
+
+**Formalized core:** [`WordDiscrepancy.lean`](MatrixMortality/WordDiscrepancy.lean) checks first-
+mismatch permanence and all signed transition and terminal equations. The two-power lemma and
+one-counter construction are audited in
+[`m34-virtually-cyclic-discrepancy-2026-08-08.md`](audits/m34-virtually-cyclic-discrepancy-2026-08-08.md).
+
+### G3-D03: One-sided corrected drift
+
+**Kind:** decidable stratum
+
+**Evidence:** audited; formalized core
+
+**Disposition:** graduated
+
+Give every transition of a finite-control paired certificate target words `(Uₑ,Vₑ)`, a positive
+symbol weight `ω`, and a state potential `π`. If every trim transition has
+
+```text
+κ(e)=|Uₑ|ω−|Vₑ|ω+π(source(e))−π(target(e)) ≥ 0,
+```
+
+then terminal equality fixes the total corrected drift. Every accepting prefix spends at most
+that budget. Prefix comparability identifies its weighted difference with the unmatched suffix,
+giving an effective residual-length bound and a finite exact reachability graph. Reversing both
+sides gives the nonpositive case. Existence of a suitable rational positive weight and potential
+is an exact linear feasibility problem.
+
+The same budget makes finite-control rewriting reachability decidable: every intermediate word
+on a successful path has bounded positive weight. A one-state universal source must therefore
+contain recurrent positive and negative drift under every positive symbol weighting.
+
+**Scope:** finite control, state-dependent word images, arbitrary fixed boundaries, erasure, and
+arbitrary word overlap are allowed. Mixed drift, an unbounded word-valued residual, and a normal
+form unavailable to the reduction remain outside the theorem.
+
+**Use:** reject bounded-delay, equal-height tableau, one-sided queue-growth, and acyclic-verifier
+three-schema sources before attempting a GPCP compiler.
+
+**Formalized core:** [`EndpointPrefixCompiler.lean`](MatrixMortality/EndpointPrefixCompiler.lean)
+checks that a nonnegative corrected trace spends at most its complete endpoint budget. The finite
+residual graph, potential criterion, and decision extraction are audited in
+[`m34-endpoint-prefix-compiler-2026-08-08.md`](audits/m34-endpoint-prefix-compiler-2026-08-08.md).
+
+### G3-D04: Priority-affine residual atlas
+
+**Kind:** decidable stratum
+
+**Evidence:** audited; formalized core
+
+**Disposition:** graduated
+
+Let a finite-mode normal-witness class parameterize every signed word residual by counters
+`n∈N^d`. Require the parameterization to be effectively proper: a bound on residual length
+effectively bounds every counter. Suppose every exact letter update is a finite union of affine
+translations
+
+```text
+n ↦ n+v
+```
+
+guarded by fixed values of the first `j` counters, for one global counter priority. Initial and
+terminal residual bounds then have finite counter preimages. Each guarded translation compiles
+exactly to three counter operations: subtract the guarded constants, zero-test the first `j`
+counters, and restore the constants while adding `v`. The resulting machine is a VASS with
+nested zero tests, whose reachability is decidable.
+
+Consequently, if an arbitrary-word converse is sound and every yes-instance has one witness in
+such a computably emitted atlas, the old predicate is decidable. The atlas may have any fixed
+finite dimension, cycles, reversals, sign modes, erasing images, and only one structured witness
+per yes-instance.
+
+**Scope:** guards must follow one fixed nested priority and updates here are additive
+translations. Priority-aligned destructive transfer and reset are subsumed by
+[`G3-D05`](#g3-d05-priority-triangular-transfer-atlas). Incomparable recurrent zero tests,
+priority permutations, feedback, source-preserving copy, nonlinear counter interaction,
+unbounded word order, and a noncomputable halting-dependent atlas remain outside. The generic
+atlas assembly is audited; Lean checks the arithmetic macro but does not reimplement VASSnz
+reachability.
+
+**Use:** reject every literal finite-factor residual carrier whose exponents evolve affinely under
+one nested guard hierarchy. A surviving global recoding must exhibit the precise non-priority,
+non-additive, or genuinely word-valued operation it uses.
+
+**Source:**
+[`guttenberg-czerwinski-lasota-2025-vass-nested-zero-tests.md`](references/guttenberg-czerwinski-lasota-2025-vass-nested-zero-tests.md).
+
+**Artifact:** [`PriorityAffineResidual.lean`](MatrixMortality/PriorityAffineResidual.lean) and
+[`m34-priority-affine-residual-atlas-2026-08-10.md`](audits/m34-priority-affine-residual-atlas-2026-08-10.md).
+
+**Next:** force either feedback, two incomparable recurrent tests, a changing priority, a
+nonlinear counter operation, or an unbounded freely ordered residual in every proposed
+three-pair recoding.
+
+### G3-D05: Priority-triangular transfer atlas
+
+**Kind:** decidable stratum
+
+**Evidence:** audited; formalized core
+
+**Disposition:** graduated
+
+Fix one global counter order. A priority-triangular drain at pivot `i` repeatedly applies the
+ordinary VASS shift
+
+```text
+−eᵢ+Aᵢ,
+```
+
+where the nonnegative fanout `Aᵢ` is supported strictly after `i`. The only stage exit tests that
+the first `i+1` counters vanish. If the pivot enters with value `s`, natural-state semantics
+permits at most `s` iterations and the exit test permits at least `s`; every successful stage
+therefore executes exactly `s` loops. Its exact effect is
+
+```text
+nᵢ ↦ 0,
+nₜ ↦ nₜ+s(Aᵢ)ₜ  for t>i.
+```
+
+Cascading these private stages after the existing debit guard and before a fixed final drift
+compiles guarded reset, destructive transfer, fanout, and multiplication by arbitrary fixed
+nonnegative constants into a VASS whose only tests are one nested hierarchy of initial
+segments. Finite unions, modes, and compositions remain finite. Effective properness again
+makes the initial and terminal residual fibres finite, so VASSnz reachability decides the
+normal-witness search.
+
+Lean proves the exact one-stage equivalence between the logical destructive transfer and an
+existential number of ordinary loop iterations followed by the nested exit test. It separately
+proves that the reset graph `n↦0` is not any finite union of fixed translations, so this record
+strictly extends [`G3-D04`](#g3-d04-priority-affine-residual-atlas). The finite-mode atlas
+assembly and imported VASSnz decision theorem remain audited.
+
+**Scope:** fanout must be destructive and strictly forward in one fixed physical priority.
+Backward transfer, source-preserving copy, cyclic reuse of priority levels, unbounded products
+or data-dependent multipliers, incomparable or changing tests, and literal free-word order are
+not covered.
+
+**Use:** reject proposed escapes whose apparent nonlinearity is only a one-way drain, reset,
+fanout, or fixed multiplier. The global recoding beam must now expose genuine feedback,
+nonlinear interaction, changing tests, or irreducible word order.
+
+**Source:**
+[`guttenberg-czerwinski-lasota-2025-vass-nested-zero-tests.md`](references/guttenberg-czerwinski-lasota-2025-vass-nested-zero-tests.md).
+
+**Artifact:**
+[`PriorityTriangularResidual.lean`](MatrixMortality/PriorityTriangularResidual.lean) and
+[`m34-priority-triangular-transfer-2026-08-11.md`](audits/m34-priority-triangular-transfer-2026-08-11.md).
+
+**Next:** force a backward edge, source-preserving feedback, a recurring transfer cycle, a
+counter product, incomparable tests, changing priority, or an unbounded free-word residual.
+
+### G3-D06: Functional phase-transfer guillotine
+
+**Kind:** decidable stratum
+
+**Evidence:** audited; formalized core
+
+**Disposition:** graduated
+
+Let three productions have positive net phase transfers
+
+```text
+Qdᵢ = −Aᵢeᵢ+Bᵢeτ(i),    Aᵢ,Bᵢ>0,    τ(i)≠i,
+```
+
+where `Q` is a nonnegative phase-by-symbol quotient with positive support in every symbol
+column. The loopless functional graph `i↦τ(i)` is either one three-cycle or one two-cycle with a
+feeder. In all eight labeled cases, positive rational phase weights can kill two edge drifts
+exactly. The remaining edge chooses a common weak sign for all three. Lifting through `Q` gives
+a strictly positive symbol weighting with that same one-sided drift.
+
+For fixed source and target words, the induced word weight bounds every state in a successful
+derivation by the heavier endpoint. The bounded word graph is finite and effectively searchable,
+so every such functional private-head transporter has decidable reachability. Internal word
+order and arbitrarily large charge-balanced payload do not evade the argument.
+
+Lean checks the complete eight-shape classification, constructs the positive weights, proves the
+quotient-lifting identity and strict symbol positivity, and proves both directions of the local
+two- and three-cycle product inequalities. The finite reachability enumeration is audited rather
+than implemented as a second normal-system decision procedure.
+
+The boundary is sharp at the drift level. The head-separated fork
+
+```text
+ppX ⟶ Xq,    pX ⟶ Xqq,    qX ⟶ Xp
+```
+
+has a strict positive and a strict negative drift under every positive weighting. It represents
+two competing `P→Q` edges and one `Q→P` return, whose two cycle products straddle one. Lean proves
+this universal mixed-drift statement. It does not prove the fork undecidable.
+
+**Scope:** every rule must consume positive projected charge from its own phase and deposit all
+net positive charge into one definite different phase. Multiple forward edges from the same
+phase, empty-consume pumps, splitting into several target phases, overlapping incomparable phase
+channels, and displacements without such a positive quotient remain outside.
+
+**Use:** reject cyclic private-head queues, two-cycles with a functional feeder, and any
+balanced-payload refinement admitting the quotient above. A native head-separated source must
+now use a forked two-cycle with products on opposite sides of one, an empty pump, or genuinely
+nonfunctional phase splitting.
+
+**Artifact:** [`FunctionalPhaseNoGo.lean`](MatrixMortality/FunctionalPhaseNoGo.lean) and
+[`m34-functional-phase-transfer-2026-08-11.md`](audits/m34-functional-phase-transfer-2026-08-11.md).
+
+**Next:** make the forked two-cycle transport an unbounded word-valued computational residue, or
+prove a decision theorem that survives competing forward edges.
+
+### G3-C03: Endpoint-prefix compiler
+
+**Kind:** compiler
+
+**Evidence:** formalized
+
+**Disposition:** active
+
+For a prefix normal system with three productions `αₓX⟶Xβₓ`, every lawful trace `w` from `s` to
+`t` satisfies
+
+```text
+s β(w) = α(w) t.
+```
+
+If that endpoint equality itself forces every cumulative `α` prefix to be available at the
+corresponding intermediate queue, Lean reconstructs every step and proves the converse. Taking
+`g(x)=βₓ`, `h(x)=αₓ`, and boundaries `(s,ε,ε,t)` is then an exact three-pair GPCP compiler. The
+empty witness corresponds exactly to `s=t`.
+
+**Scope:** endpoint prefix forcing is a substantive source property. Lean's explicit underflow
+system satisfies the aggregate equation for trace `a` although its first production is not
+applicable. Arbitrary-substring semi-Thue traces also omit redex contexts, so the known
+three-rule accessibility theorem does not instantiate the compiler.
+
+**Use:** search directly for an undecidable family of endpoint-prefix-forcing three-production
+normal systems. The source must also evade [`G3-D03`](#g3-d03-one-sided-corrected-drift).
+
+**Artifact:** [`EndpointPrefixCompiler.lean`](MatrixMortality/EndpointPrefixCompiler.lean) and
+[`m34-endpoint-prefix-compiler-2026-08-08.md`](audits/m34-endpoint-prefix-compiler-2026-08-08.md).
+
+**Next:** make a three-rule queue architecture terminal-self-certifying without a recurrent copy
+schema; demand a complete arbitrary-trace converse, not merely forward telescoping.
+
+### G3-C04: Head-separated endpoint debt
+
+**Kind:** compiler criterion
+
+**Evidence:** formalized
+
+**Disposition:** active
+
+For every production `αₓX⟶Xβₓ`, suppose `βₓ` begins with a symbol which occurs nowhere in `αₓ`.
+Compare the source and `αₓ` at the first rule of an arbitrary endpoint witness. If `αₓ` is not
+already a prefix of the source, prefix comparability forces
+
+```text
+αₓ = source · d,       βₓ β(rest) = d α(rest) target
+```
+
+for a nonempty debt `d`. The left equation's second line begins with the fresh output symbol;
+the right side begins with a symbol of `αₓ`, a contradiction. Repeating this argument after each
+lawful step reconstructs the whole trace. Lean proves both the direct reconstruction and the
+stronger consequence that endpoint prefix forcing holds for every source and target.
+
+**Scope:** the condition is sufficient, not necessary. It neither constructs a universal
+three-production source nor defeats the one-sided corrected-drift decision boundary. A cyclic
+marker scheme which closes into finitely many token types remains decidable.
+
+**Use:** make fresh output heads a default invariant in the native-source lane. The remaining
+construction problem is wholly global: retain an unbounded open word residue and mixed drift
+while using only three such productions.
+
+**Artifact:** [`EndpointPrefixCompiler.lean`](MatrixMortality/EndpointPrefixCompiler.lean) and
+[`m34-head-separated-endpoint-debt-2026-08-10.md`](audits/m34-head-separated-endpoint-debt-2026-08-10.md).
+
+**Next:** construct or exclude an undecidable three-production head-separated prefix-normal
+family with mixed drift in every positive Parikh direction.
+
+### G3-O06: Periodic-ray completion and branching fracture
+
+**Kind:** compiler and obstruction
+
+**Evidence:** formalized
+
+**Disposition:** graduated
+
+At width three with body `bcbb`, every null history is exactly
+
+```text
+(bbb,cbb)^k.
+```
+
+The complete terminal role language is therefore `P₀Q*`, where
+
+```text
+P₀ = R_c E_b E_c R_b E_b E_b,
+Q  = R_b E_b E_b R_c E_b E_b.
+```
+
+For most-significant-digit-first base-five code `V`, take
+
+```text
+κ=5443/15624,       α=5417371/9765000.
+```
+
+Lean proves `κ+V(w)=α5^|w|` exactly on `P₀Q*`. The converse uses
+`gcd(5443,5⁶−1)=1` to force length modulo six, rejects the empty word, and then applies
+injectivity of the role code. Three singular controls maintain the affine code, suffix-phase
+sign, and positional scale on every arbitrary control word. Clearing the rank-one separator
+gives four explicit integral `3 × 3` matrices whose mortality is equivalent to the `bcbb` paired
+zero language. Their data maps have exact common kernel `ℚ(1,1,0)`, while the toggle moves its
+generator outside that kernel and the next data action recovers it nontrivially. Thus `bcbb`
+cannot support a same-zero dimension-four lower bound, and common-kernel shift laws do not imply
+toggle invariance.
+
+The adjacent body `bcbc` branches. The equal-length null blocks
+
+```text
+BBB,CBC,BBB,CBC
+BBB,BCB,CBB,CBC
+```
+
+can be concatenated according to an arbitrary bit word. Prepending the fixed terminal history
+gives an injective family of terminal role words, all of length `6+12n` for `n` input bits. Hence
+one fixed length contains at least `2^n` terminal words. A single affine positional row fixes one
+injective code at each length, so it cannot recognize the complete `bcbc` language.
+
+**Scope:** the `bcbb` grammar, all-control affine converse, integral lift, `bcbc` binary terminal
+fork, failure of a single affine positional section, and complete `bcbc` grammar
+`FD(X(DZ)*F)*` are Lean-checked. The residual proof explicitly establishes the missing
+right-residual rigidity invariant. The separate fixed-instance recognizer is [`G3-C02`](#g3-c02-fixed-bcbc-singular-recognizer).
+
+**Use:** delete `bcbb`, periodic rays, positional digit refinements, and branching cardinality by
+itself from the lower-bound frontier. The exact grammar is now reusable as a finite laboratory,
+but `bcbc` is no longer a viable four-state lower-bound target after [`G3-C02`](#g3-c02-fixed-bcbc-singular-recognizer).
+
+**Artifact:** [`PeriodicHistory.lean`](MatrixMortality/PeriodicHistory.lean),
+[`BranchingHistory.lean`](MatrixMortality/BranchingHistory.lean), and
+[`m34-periodic-ray-branching-fracture-2026-08-07.md`](audits/m34-periodic-ray-branching-fracture-2026-08-07.md),
+with the shuttle classification audited in
+[`m34-common-kernel-shuttle-2026-08-11.md`](audits/m34-common-kernel-shuttle-2026-08-11.md).
+
+### G3-O07: Near-fork carry collision
+
+**Kind:** obstruction
+
+**Evidence:** formalized
+
+**Disposition:** graduated
+
+For the body `bcbc`, the canonical controls
+
+```text
+p = c t b c b t c b t,
+q = b t c b c t c b t
+```
+
+decode respectively to the terminal prefix `R_c E_b E_c R_b E_c E_b` and the nonterminal
+near-fork `R_b E_c E_b R_c E_c E_b`. Lean proves that their paired coefficients are respectively
+zero and nonzero.
+
+Let `B,C,T` be arbitrary common controls, set
+
+```text
+D=B T C B,       Z=C T B B,
+F=C T B C,       X=B T B B,
+```
+
+and let `γ,v` be columns. Lean proves the dimension-independent implication
+
+```text
+B B v = C B T γ  ∧  D Z v = F X v  ⇒  H_q γ = H_p γ.
+```
+
+Thus no rational same-zero representation in any dimension can satisfy both local identities.
+This uses no global cancellation or invertibility; it isolates the exact internal comparison that
+the complete binary-fork zeros do not yet force.
+
+The proposed phase-line carry is closed parametrically. For `ρ≠−1`, put
+
+```text
+a=2/(ρ+1),       σ=ρ(ρ+1)²/4,
+
+B=[[1,0,0],[0,a,σ],[0,0,0]],
+C=[[1,ρ+1,−σ],[0,a,σ],[0,0,0]],
+T=[[1,0,0],[0,0,1],[0,1,0]].
+```
+
+Lean normalizes its three stroke products and proves `DG=FD`, so the full physical products for
+`p` and `q` are equal matrices. No row or column can repair the resulting false zero. This covers
+every intended `ρ≥3` and strengthens the reported projective-coordinate collision.
+
+**Scope:** the terminal/nonterminal pair, local collision law, parametric matrix identity, and
+same-zero impossibility for the displayed family are Lean-checked. The result does not prove that
+an arbitrary three-state recognizer satisfies the local recovery or fork identity. Singular
+partial factors may separate the internal paths and merge them only after a complete block.
+
+**Use:** delete two-phase, one-projective-coordinate stroke carries, including rational
+contractions outside `G3-O04`. A surviving construction must use genuinely two-dimensional
+projective history or prevent the near-fork suffix from entering the two-step erase image. A
+lower bound must derive an internal collision from all terminal contexts without assuming
+invertibility.
+
+**Artifact:** [`BranchingHistory.lean`](MatrixMortality/BranchingHistory.lean) and
+[`m34-near-fork-carry-collision-2026-08-07.md`](audits/m34-near-fork-carry-collision-2026-08-07.md).
+
+### G3-C02: Fixed `bcbc` singular recognizer
+
+**Kind:** fixed-instance compiler
+
+**Evidence:** audited, with formalized core
+
+**Disposition:** graduated
+
+Write `X=BBB`, `D=BCB`, `Z=CBB`, and `F=CBC`. Canonical residual paths give the exact languages
+
+```text
+null histories      = (X(DZ)*F)*,
+terminal histories  = FD(X(DZ)*F)*.
+```
+
+The checked residual invariant says every reachable nonempty right residual is exactly `b`.
+Lean classifies the only entrances to the three live residuals and proves both grammars on
+arbitrary role words.
+
+There is a rational three-state candidate with row `λ=(1,0,0)`, column `γ=(1,2983,1)ᵀ`,
+singular data matrices
+
+```text
+B=[[0,1,1/2],                  C=[[0,1/6125,-29503/6125],
+   [0,5,385],                     [0,7,534],
+   [0,0,1]],                      [0,0,1]],
+```
+
+and affine involution
+
+```text
+T=[[1,0,0],[0,-1,2983],[0,0,1]].
+```
+
+Lean proves its complete raw-control recurrence from `δ=(1,0,1)ᵀ`:
+
+```text
+H_wδ=(X(w),Y(w),1)ᵀ,
+Y(bv)=5Y(v)+385,       X(bv)=Y(v)+1/2,
+Y(cv)=7Y(v)+534,       X(cv)=(Y(v)-29503)/6125,
+Y(tv)=2983-Y(v),       X(tv)=X(v).
+```
+
+Canonical terminal controls decode to the checked terminal grammar and vanish under both the
+matrix coefficient and paired coefficient. Both data determinants are zero and `det T=-1`.
+
+The audited reverse certificate removes `tt`, strips controls from targets `0` and `29503`, and
+closes on finite graphs of 22 and 44 states. Its accepted paths are exactly the reduced canonical
+language. Independent enumeration through length twelve checked 797,161 controls, sixteen zeros
+on each side, and no mismatch. Thus the audited conclusion is
+
+```text
+zdim_ℚ(L₃,bcbc) ≤ 3.
+```
+
+**Scope:** the grammars, recurrence, determinants, canonical decoder, and intended zeros are
+Lean-checked. The arbitrary-control reverse converse is audited but not yet kernel-checked, so the
+zero-language dimension inequality is not a formal theorem. The constants are fitted to one
+fixed regular language. A source-uniform finite-target affine construction would remain inside
+the decidable class of `G3-O04`.
+
+**Use:** retire `bcbc` as a lower-bound instance and reject branching width as evidence for four
+states. Preserve the mechanism as a design clue: singular dynamics may use one persistent carry
+and one transient guard to separate a malformed fork, then merge only at a complete block. The
+master target is now uniformity across the source family, not this fixed grammar.
+
+**Artifact:** [`BranchingRecognizer.lean`](MatrixMortality/BranchingRecognizer.lean) and
+[`m34-bcbc-singular-recognizer-2026-08-08.md`](audits/m34-bcbc-singular-recognizer-2026-08-08.md).
+
+### G3-C05: Equal-length mixed branching recognizer
+
+**Kind:** fixed-instance compiler
+
+**Evidence:** formalized
+
+**Disposition:** graduated
+
+At width three, the body `bcbcbb` has the complete terminal-history language
+
+```text
+P₀(A₀|B₀)*,
+P₀=(CBC,BCB,BBB),
+A₀=(BBB,BCB,CBB),
+B₀=(BBB,CBC,BBB).
+```
+
+The two null blocks have the same length. Hence level `n` contains `2ⁿ` terminal histories,
+without the nested-depth variation used by `bcbc`. Lean derives this grammar from a four-state
+word-residual path and proves the terminal prefix by three exact cancellation steps.
+
+Three explicit integral controls recognize the entire raw paired zero language:
+
+```text
+B=[[0,2,1],              C=[[0,2,-432372898],       T=[[1,0,0],
+   [0,5,3703455],           [0,7,5236172],             [0,-1,21436039],
+   [0,0,1]],                [0,0,1]],                   [0,0,1]].
+```
+
+With `λ=(1,0,0)` and `γ=(1,21436039,1)ᵀ`, Lean proves on every raw control word `w`
+
+```text
+λH_wγ=0  ↔  pairedCoefficient(ℚ,3,bcbcbb,w)=0.
+```
+
+The converse is not an enumeration. Adjacent toggles are scoured exactly, every normal control
+word is decomposed into four affine carry macros, and a complete integer inverse-congruence
+graph proves that the only target paths are one eight-macro entrance followed by arbitrary
+nine-macro `A` or `B` returns. Both reported competing branches are formally shown to have no
+integer predecessor, and the unmatched terminal toggle is excluded by carrying both possible
+base states through the recursive classification.
+
+Both data controls have determinant zero and exact common kernel `ℤ(1,0,0)ᵀ`; `T²=I` and
+`det T=-1`. Every suffix state has last coordinate one, and no generator product is zero.
+
+**Scope:** this is an exact all-word theorem for one fixed body. It refutes equal-length binary
+branching, exponentially many same-level witnesses, finite return flowers, and common-kernel
+guard refresh as lower-bound invariants. It neither constructs a source-uniform recognizer nor
+proves that every body has a regular terminal section.
+
+**Use:** delete fixed mixed-branching diagrams from the positive-projective lower-bound beam.
+Any surviving obstruction must force incompatible transitions uniformly across an unbounded
+terminal section, rather than count branches or exhibit finitely many return cycles.
+
+**Artifact:** [`MixedBranchingHistory.lean`](MatrixMortality/MixedBranchingHistory.lean),
+[`MixedBranchingRecognizer.lean`](MatrixMortality/MixedBranchingRecognizer.lean), and
+[`m34-mixed-branching-recognizer-2026-08-11.md`](audits/m34-mixed-branching-recognizer-2026-08-11.md).
+
+### G3-M02: Square-root punctuation fracture
+
+**Kind:** partial mechanism
+
+**Evidence:** formalized
+
+**Disposition:** active
+
+Let `S` be one distinguished matrix among three ordinary controls and suppose
+
+```text
+S²=uvᵀ.
+```
+
+For a physical word `w`, put `c(w)=vᵀH_wu`. Whenever `w=l SS r`, rank-one multiplication gives
+
+```text
+c(w)=c(l)c(r).
+```
+
+Strong induction therefore extracts an `SS`-free scalar-zero residual from every zero product.
+Conversely, `c(z)=0` gives the explicit zero word `SS z SS`. Lean proves, over an arbitrary
+field and without rank or normalization assumptions,
+
+```text
+Mort({X₁,X₂,X₃,S}) ↔ ∃ z avoiding SS, vᵀH_zu=0.
+```
+
+For the side-normal Neary boundary `λ=(1,0,0)` and `γ=(μ,−1,T)ᵀ`, the source-uniform rational
+matrix
+
+```text
+S=[[1,       0, 0],
+   [−1/μ,    0, 0],
+   [T/μ+1,   μ, 0]]
+```
+
+has `S²=(γ/μ)λ`, rank exactly two, and determinant zero. Assigning isolated `S` to `R_b` is
+compatible with every lawful width-at-least-three history. The sole constructive obligation is
+now a three-state same-zero representation of the original role series on the complete
+`R_bR_b`-free subshift.
+
+A `3×3` inserted Hankel certificate on prefixes and suffixes `ε,D_c,D_b` proves that any
+three-state representation preserving the old coefficient exactly on that subshift makes its
+`R_b` matrix invertible. The conclusion survives arbitrary nonzero per-letter multiplicative
+weights. A successful completion must therefore change nonzero values in a genuinely
+word-dependent way.
+
+The adjacent additive family
+
+```text
+αA+cA^ε(γλ)A^δ,     ε,δ∈{0,1}, α≠0,
+```
+
+is separately audited immortal: the inverse active semigroup never reaches the terminal
+incidence, and the unique singular update preserves rank two through every interstitial word.
+
+**Scope:** the square identity, rank, complete arbitrary-word fracture, exact-series rigidity,
+and weighted rigidity are Lean-checked. The reverse-marker and additive-fusion obstructions are
+audited paper proofs. No same-zero matrices on the `SS`-free subshift are known.
+
+**Use:** retain the fracture theorem as reusable punctuation, but do not pursue the direct Neary
+role identification. `G3-O10` proves that every admissible square root preserves coefficient
+vanishing when placed at either boundary, contradicting the source's initial-role rigidity.
+
+**Artifact:** [`SquareRootPunctuation.lean`](MatrixMortality/SquareRootPunctuation.lean) and
+[`m34-square-root-punctuation-2026-08-08.md`](audits/m34-square-root-punctuation-2026-08-08.md).
+
+### G3-O10: Square-root boundary saturation
+
+**Kind:** obstruction
+
+**Evidence:** formalized
+
+**Disposition:** graduated
+
+Over any field, let `P²=uvᵀ` with `vᵀu≠0`. Commutation with its square forces one nonzero scalar
+`σ` such that
+
+```text
+Pu=σu,        vᵀP=σvᵀ,        σ²=vᵀu.
+```
+
+Consequently the boundary insertions `Pw` and `wP` preserve the zero set of every scalar series
+`vᵀH_wu`, independently of dimension, rank, and the ordinary generators.
+
+The checked arbitrary-word Neary converse supplies the incompatible source fact. Every terminal
+match begins with `R_c`, so prefixing any role word by `R_b` can never produce a native zero. A
+terminal word and its physical `P`-prefix are both `PP`-free at deletion width at least three.
+Thus no same-zero representation on the complete `PP`-free fracture domain can identify `P` with
+`R_b`. This closes the square-root attack opened by `G3-M02`; choosing another root cannot evade
+the obstruction.
+
+**Scope:** Lean proves the dimension-free eigenvector theorem, both boundary zero equivalences,
+arbitrary-terminal-match initial-role rigidity, and the exact logical contradiction from a
+square-free witness pair. The routine composition producing that pair from a complete Neary
+history is audited at list-syntax level. Semantic macros, degenerate separators `vᵀu=0`, and
+fracture languages excluding boundary punctuation remain outside the theorem.
+
+**Use:** reject every nondegenerate rank-one square-root compiler using scalar readout on the full
+square-free domain and a direct Neary rule-role decoder. Any future punctuation route must alter
+one of those structural hypotheses, not merely the displayed root.
+
+**Artifact:** [`SquareRootPunctuation.lean`](MatrixMortality/SquareRootPunctuation.lean),
+[`NearyEncoding.lean`](MatrixMortality/NearyEncoding.lean), and
+[`m34-square-root-boundary-saturation-2026-08-08.md`](audits/m34-square-root-boundary-saturation-2026-08-08.md).
+
 ### G3-M01: Free-group discrepancy engine
 
 **Kind:** partial mechanism
 
-**Evidence:** reported
+**Evidence:** audited
 
 **Disposition:** active
 
@@ -6021,20 +7274,328 @@ appends the production. An `H` marker counts simulated steps, a `p` marker preve
 trivial discrepancy on false paths, and every fixed point is forced to a closed transducer
 path. This supplies both implicit deletion and an arbitrary-path soundness invariant.
 
-**Scope:** the source is a free group, not a positive free monoid. The subgroup of closed
-input paths has a computed free basis whose rank depends on the transducer. No bound of
-three, positive encoding, or classical fixed-boundary GPCP compiler follows from the
-preprint.
+For a cyclic-tag transducer with `m` appendants, the complete closed-path subgroup has rank
+`3m+1`. An explicit Schreier basis is given by the closing `0` cycle, the `m` conjugated `1`
+chords, and the `2m` conjugated `H,p` loops. This prevents generation of the complete synchronizer
+by three group macros.
 
-**Use:** audit whether the closed-path subgroup can be generated uniformly by three
-positive macros or whether its control can be moved into boundaries without admitting
-spurious reduced words.
+The accepting subgroup is much smaller. Carvalho's first-letter trajectory and all-path converse
+imply
+
+```text
+Fix(T̃_C)={1}       if C does not halt,
+Fix(T̃_C)=⟨g_C⟩    if C halts.
+```
+
+The generator is a conjugate of the first marker-only cycle and is not a proper power. The free
+group PCP equalizer constructed from the transducer is therefore promised to have rank zero or
+one. This is an audited corollary of Carvalho's construction; no external novelty claim is made.
+The generator cannot be selected from any computable finite menu, since unique roots would turn
+such a menu into a halting decision.
+
+Carvalho's `p`-exponent homomorphism supplies a better existential target. Numbered-state
+transitions preserve exponent one, and the halting loop constructed in Theorem 3.6 is conjugate
+to a marker word containing exactly one `p`. Conversely, any fixed point of exponent one is
+nontrivial. Under Theorem 4.1's equalizer maps `g,h:F_Y→F_A`, put `κ=χ∘h`; then
+
+```text
+C halts  ↔  ∃u∈F_Y, g(u)=h(u) and κ(u)=1.
+```
+
+This affine slice excludes the identity and selects the oriented primitive loop without choosing
+one positive spelling. In fact the character is globally shared: every numbered-state edge has
+equal input and output `χ`, while the entry and inverse exit defects cancel on every closed loop.
+Since Theorem 4.1 defines `h` by input labels and `g` by output labels of a closed-path basis,
+`χ∘g=χ∘h` on all of `F_Y`, not merely on the equalizer.
+
+**Scope:** the source is a free group, not a positive free monoid. Low accepting rank and the
+exponent-one witness are existential; neither supplies a three-control free-monoid compiler.
+Three positive letters evaluate surjectively onto `F₂`, but the affine constraint `κ=1` must be
+transported together with the program-dependent equalizer.
+
+**Use:** stop trying to compress the complete Stallings basis or select one irreducible spelling.
+Compile the exponent-one equalizer slice; positive identity padding may be quotiented away because
+it preserves the same genuine witness.
 
 **Source:** [`carvalho-2026-free-group-pcp.md`](references/carvalho-2026-free-group-pcp.md).
 
-**Next:** extract the transducer for the smallest universal cyclic-tag source, compute its
-closed-path subgroup rank, and identify exactly which formal inverses occur in the fixed-loop
-converse.
+**Artifact:**
+[`m34-free-group-discrepancy-2026-08-08.md`](audits/m34-free-group-discrepancy-2026-08-08.md).
+
+**Next:** determine the Zariski closure of the actual program-dependent graph on `κ=1`, or realize
+`g(u)=h(u), κ(u)=1` through three positive controls with a spelling-sensitive or nonalgebraic
+carrier. Coarse shared-character and cyclic-equalizer promises alone cannot compress the pair by
+[`G3-O19`](#g3-o19-correlated-affine-slice-density).
+
+### G3-M03: Three-positive affine exponent cover
+
+**Kind:** partial mechanism
+
+**Evidence:** formalized
+
+**Disposition:** active
+
+Let three positive letters evaluate in `F(a,b)` by
+
+```text
+x ↦ a,       y ↦ b,       z ↦ b⁻¹a⁻¹.
+```
+
+Give them signed weights `1,0,−1`. The induced word weight is exactly the exponent of `a` after
+free reduction. Lean proves the stronger slice statement: for every integer `d`, evaluation maps
+the positive words of weight `d` surjectively onto all free-group elements whose `a`-exponent is
+`d`. Thus the positive alphabet loses no element of an affine exponent slice, and the converse is
+automatic for every arbitrary positive spelling.
+
+The identity word `xyz` has weight zero. Appending it changes neither evaluation nor weight, so
+positive identity padding is harmless for exponent-one acceptance.
+
+For a rank-`r` source group with primitive `κ`, the audited Nielsen-Schreier step embeds it into
+the index-`r−1` subgroup of `F(a,b)` so that the `a`-exponent becomes `(r−1)κ`. Consequently
+Carvalho's predicate becomes a three-positive equalizer with one exact signed-weight constraint.
+
+**Scope:** the transported morphisms are defined on the finite-index subgroup, not on all of
+`F(a,b)`. Signed weight is an affine side condition, not yet an ordinary GPCP boundary equation or
+one scalar zero. The Nielsen basis and subgroup embedding remain audited paper algebra; Lean
+checks the complete ambient positive-cover seam.
+
+**Use:** abandon positive normal-form filters. Extend the correlated equalizer from the
+finite-index subgroup to three ambient positive controls while retaining the exact weight slice,
+or represent the group discrepancy and cocycle inseparably in three projective coordinates.
+
+**Artifact:** [`PositiveFreeCancellation.lean`](MatrixMortality/PositiveFreeCancellation.lean) and
+[`m34-three-positive-affine-cover-2026-08-10.md`](audits/m34-three-positive-affine-cover-2026-08-10.md).
+
+**Next:** compile the subgroup-domain equalizer and weight equation jointly into ordinary
+three-pair GPCP or a three-state scalar-zero series.
+
+### G3-O19: Correlated affine-slice density
+
+**Kind:** obstruction
+
+**Evidence:** audited
+
+**Disposition:** graduated
+
+The coarse Carvalho promises do not force an algebraic dimension drop. Let `F=F(a,b)`,
+
+```text
+h=id,    g(a)=a,    g(b)=b²,    κ=expₐ.
+```
+
+Then `h` is injective, `κ∘g=κ∘h`, and `Eq(g,h)=⟨a⟩`; every slice
+`Eq(g,h)∩κ⁻¹(t)` is the singleton `{aᵗ}`. Under Carvalho's explicit faithful embedding
+`ρ:F₂→SL₂(ℤ)`, the correlated graph of `ker κ` has Zariski-dense projections. Algebraic Goursat
+leaves either the full product or the graph of an automorphism of `PSL₂`. The graph case would
+send `ρ(b)` to `ρ(b²)`, impossible because projective trace-squared is respectively `16` and
+`196`. Thus every fixed-`κ` slice of the correlated graph is Zariski dense in `PSL₂×PSL₂`.
+
+Any rational multiplicative carrier extending algebraically from this graph and depending
+nontrivially on both factors has dimension at least four: irreducible product representations
+have dimension `(m+1)(n+1)≥4`, and separate nontrivial constituents cost `2+2`. Projective and
+two-dimensional affine-cocycle versions have the same bound after lifting or homogenizing.
+
+The canonical mixed carrier has an explicit rank-four Hankel certificate. For rows
+`ε,x,y,xy` and columns `ε,z,xz,zy`, its scalar section is
+
+```text
+[[ 0, −2,   1, 465],
+ [ 0,  1,  22,  51],
+ [ 2,  0, 429,  23],
+ [−1,  0, 843,   2]],
+```
+
+with determinant `1,197,990`. Exact arithmetic independently reproduces the certificate.
+
+**Scope:** this is a synthetic correlated graph satisfying injectivity, a globally shared
+primitive character, cyclic equalizer, and singleton exponent-one slice. It is not proved to be
+the graph emitted by Carvalho's cyclic-tag reduction. The example's accepted language is
+visibly `π(w)=a` and itself has a two-state same-zero detector, so the result is not a general
+same-zero or language-rank lower bound.
+
+**Use:** reject every proposed dimension-three theorem derived only from the coarse source
+promises or from conditioning on the shared affine character. A viable algebraic attack must use
+additional structure of the actual program graph; otherwise it must become spelling-sensitive,
+nonalgebraic, or infinite-dimensional before scalarization.
+
+**Source:** [`carvalho-2026-free-group-pcp.md`](references/carvalho-2026-free-group-pcp.md).
+
+**Artifact:**
+[`m34-correlated-affine-slice-density-2026-08-11.md`](audits/m34-correlated-affine-slice-density-2026-08-11.md).
+
+### G3-O09: Quotient-blind positive boundary collapse
+
+**Kind:** obstruction
+
+**Evidence:** formalized core
+
+**Disposition:** graduated
+
+Three positive letters `x,y,z`, evaluated by
+
+```text
+x↦x,       y↦y,       z↦y⁻¹x⁻¹,
+```
+
+surject onto `F₂`; Lean proves this by free-group induction. The cyclic words `xyz,yzx,zxy` are
+nonempty spellings of the identity. Thus positivity does not itself remove formal inverses.
+
+Let a positive evaluation `π:S*→G` surject onto a group. Suppose fixed homomorphic boundaries
+accept a group element `g` and its square:
+
+```text
+ℓ α(g) r = ℓ′ β(g) r′,
+ℓ α(g²) r = ℓ′ β(g²) r′.
+```
+
+Group cancellation forces `ℓr=ℓ′r′`. Surjectivity gives a nonempty positive identity word, and
+the boundary equality accepts it. Lean proves the boundary-square lemma and constructs the false
+witness over arbitrary groups.
+
+**Scope:** the application to Carvalho assumes completeness for every nontrivial accepting fixed
+loop, hence for both `g_C` and `g_C²`, and assumes the final test factors only through the evaluated
+group element. It does not cover existential-only witness transport, a test of the unreduced
+positive spelling, partial action, or singular dynamics which destroy inverse continuations.
+
+**Use:** reject Nielsen or Schreier compression followed by quotient-blind boundaries which accept
+the complete nontrivial fixed subgroup. A survivor must restrict the accepted quotient elements,
+not merely choose a positive normal form for all of them.
+
+The exponent-one slice in [`G3-M01`](#g3-m01-free-group-discrepancy-engine) escapes this theorem:
+it accepts the primitive orientation but not its square, since `κ(u^n)=n`.
+
+**Artifact:** [`PositiveFreeCancellation.lean`](MatrixMortality/PositiveFreeCancellation.lean)
+and [`m34-free-group-discrepancy-2026-08-08.md`](audits/m34-free-group-discrepancy-2026-08-08.md).
+
+### G3-O14: Positive cancellation spelling dichotomy
+
+**Kind:** obstruction
+
+**Evidence:** formalized
+
+**Disposition:** graduated
+
+An injective transition over a finite invariant semantic fibre is periodic on every fibre point.
+Thus a positive semantic identity word `r` satisfies `T_(r^k)ξ=ξ` for some `k>0`, even when the
+finite spelling state is twisted arbitrarily over the semantic discrepancy. Cancellative target
+overlap is bijective in the free-group completion and therefore cannot make every wrong-time
+identity insertion permanent with finite fibres.
+
+Singularity does not repair a three-dimensional lift which retains a two-dimensional invertible
+quotient. If `qP=ρq`, `ρ` is injective, `P` is singular, and `ker q` is one-dimensional, then
+`ker P=ker q`. Every quotient identity `qR=q` consequently satisfies `PR=P`. After the first
+singular prefix, later triangle-identity factors are equal as complete products and cannot be
+separated by boundaries.
+
+**Scope:** finite fibres are required in the invertible branch. The singular branch requires a
+one-dimensional extension of an injective quotient action. Everywhere-invertible infinite fibres,
+unbounded cocycles, and constructions whose persistent semantics are singular remain outside.
+
+**Use:** delete the seven-state cancellative spelling lift and transient singular third-coordinate
+guard. Attack the exponent-one slice from [`G3-M01`](#g3-m01-free-group-discrepancy-engine)
+without selecting a normal spelling.
+
+**Artifact:** [`PositiveFreeCancellation.lean`](MatrixMortality/PositiveFreeCancellation.lean) and
+[`m34-positive-cancellation-obstructions-2026-08-08.md`](audits/m34-positive-cancellation-obstructions-2026-08-08.md).
+
+### G3-O15: Triangle normal-form rank six
+
+**Kind:** obstruction
+
+**Evidence:** formalized
+
+Let `N` contain exactly the positive words avoiding `xyz`, `yzx`, and `zxy`. The coefficient table
+on prefixes and suffixes `x,y,z,xy,yz,zx` has six private nonzero entries. Columns `x,y,z` isolate
+rows `yz,zx,xy`; after those vanish, columns `yz,zx,xy` isolate rows `x,y,z`. Lean proves the rows
+independent over every field and proves that every row-column factorization has at least six
+states.
+
+**Scope:** the scalar zero language must equal the complete standalone irreducible language `N`.
+A legality predicate coupled inseparably to one program-specific halting equation can have a
+different support table and is not excluded.
+
+**Use:** reject every proposal to fuse a separate three-state triangle-normal-form detector with
+Carvalho semantics. Legality must disappear from the target or be inseparable from the
+exponent-one equalizer predicate.
+
+**Artifact:** [`PositiveFreeCancellation.lean`](MatrixMortality/PositiveFreeCancellation.lean) and
+[`m34-positive-cancellation-obstructions-2026-08-08.md`](audits/m34-positive-cancellation-obstructions-2026-08-08.md).
+
+### G3-O16: Full augmented-pair dimension tax
+
+**Kind:** obstruction
+
+**Evidence:** audited
+
+**Disposition:** graduated
+
+Suppose a homomorphic linear detector represents the full independent carrier
+`F×F×ℤ` and vanishes exactly when its first two entries agree and the integer entry is one.
+Fixing that integer slice and comparing diagonal pairs forces the two factor actions to be
+faithful; the product law makes their images commute.
+
+In characteristic zero, two commuting faithful nonabelian free groups do not embed in `GL₃`.
+An irreducible first factor has scalar commutant. A reducible representation has composition
+factors `1+1+1`, giving solvable image, or `2+1`, whose unit commutant is solvable. Either case
+contradicts faithfulness of the second free factor.
+
+**Scope:** this excludes the full independent direct-product carrier. Carvalho supplies only the
+correlated graph `u↦(g(u),h(u),κ(u))`; a three-dimensional representation of that graph need not
+extend to independent factors. The centralizer classification is independently audited, not
+kernel-checked here.
+
+**Use:** reject constructions which first represent two arbitrary free-group values and an
+independent counter, then compare them. Preserve program correlation throughout the recurrence.
+
+**Artifact:**
+[`m34-three-positive-affine-cover-2026-08-10.md`](audits/m34-three-positive-affine-cover-2026-08-10.md).
+
+### G3-O17: Paired inverse chamber
+
+**Kind:** obstruction
+
+**Evidence:** formalized
+
+**Disposition:** graduated
+
+Let `P={x,z}*` be the positive submonoid of the binary free group. Every checked paired suffix
+residual belongs to `PP⁻¹`; its reduced signed word has no negative-to-positive turn. Every
+phase-aware prefix residual belongs to `P⁻¹P`; its reduced signed word has no
+positive-to-negative turn.
+
+The independent role discrepancies from [`G3-O05`](#g3-o05-cancellative-projective-state-tax)
+produce the formal inverse states
+
+```text
+ξ_L = x⁻ᵝ z xᵝ z⁻¹,
+ξ_R = x z⁻² x⁻¹ z².
+```
+
+For `β>0`, both words are freely reduced and contain both sign turns. Every Neary upper role word
+ends in `z`, while every lower role word ends in `x`. Consequently a positive role continuation
+`U ξ V⁻¹` cancels neither seed boundary; both internal turns survive. Lean proves, for every body,
+role sequence, suffix, prefix context, and entering phase,
+
+```text
+U ξ_L V⁻¹, U ξ_R V⁻¹ ∉ PP⁻¹ ∪ P⁻¹P,
+U ξ_L V⁻¹, U ξ_R V⁻¹ ≠ every actual suffix or prefix residual.
+```
+
+Thus entire positive forward cones of two indispensable formal inverse states are absent from the
+paired residual grammar. No Ore-style common future or positive representative can supply the
+inverse saturation required by `G3-O05`.
+
+**Scope:** this kills grammar-forced inverse-orbit cofinality, not every representation-specific
+projective extension. A particular matrix representation could impose extra projective points and
+incidences, but their faithful equivariant continuation would be an additional hypothesis not
+determined by the zero language. The theorem does not prove a four-state lower bound.
+
+**Use:** delete paired residual saturation as a raceable lower-bound leaf. The next one-sided
+lower-bound object is a finite positive projective transition diagram carrying actual generator
+ranks, kernels, images, and base loci across every singular rank pattern.
+
+**Artifact:** [`PairedInverseChamber.lean`](MatrixMortality/PairedInverseChamber.lean) and
+[`m34-paired-inverse-chamber-2026-08-10.md`](audits/m34-paired-inverse-chamber-2026-08-10.md).
 
 ## Dimension Two
 

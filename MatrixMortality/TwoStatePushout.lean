@@ -424,7 +424,7 @@ def twoStateMortalityFamily (R : Type*) [CommRing R] {α : Type*}
     (Matrix.vecMulVec (twoStateColumn R terminal column) (twoStateRow R))
     (twoStateDataMatrix R upper lower δ)
 
-/-- The fixed-anchor separator compiler is exact even when a data letter is singular. -/
+/-- The outer-product separator compiler is exact even when a data letter is singular. -/
 theorem twoStateMortalityFamily_mortal_iff_nonempty_zero {α : Type*}
     (upper : α → List Bool) (lower : PairPhase → α → List Bool)
     (δ : ControllerTransition PairPhase α) (terminal : PairPhase) (column : Fin 3 → ℚ)
@@ -433,17 +433,9 @@ theorem twoStateMortalityFamily_mortal_iff_nonempty_zero {α : Type*}
       ∃ word : List α,
         word ≠ [] ∧ twoStateCoefficient ℚ upper lower δ terminal column word = 0 := by
   rw [twoStateMortalityFamily]
-  have fixed :
-      ∀ letter,
-        twoStateDataMatrix ℚ upper lower δ letter *ᵥ twoStateAnchor ℚ =
-          twoStateAnchor ℚ :=
-    twoStateDataMatrix_mulVec_anchor ℚ upper lower δ
-  have row_anchor_nonzero : twoStateRow ℚ ⬝ᵥ twoStateAnchor ℚ ≠ 0 := by
-    simp
-  rw [fixedAnchor_mortal_adjoin_outer_iff
+  rw [mortal_adjoin_outer_iff
     (twoStateDataMatrix ℚ upper lower δ)
-    (twoStateAnchor ℚ) (twoStateColumn ℚ terminal column) (twoStateRow ℚ)
-    fixed row_anchor_nonzero]
+    (twoStateColumn ℚ terminal column) (twoStateRow ℚ)]
   constructor
   · rintro ⟨word, bridge_zero⟩
     refine ⟨word, ?_, ?_⟩

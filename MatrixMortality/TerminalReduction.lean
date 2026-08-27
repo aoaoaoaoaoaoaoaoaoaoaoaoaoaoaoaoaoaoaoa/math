@@ -121,16 +121,11 @@ theorem absorbedFamily_mortal_iff_terminal_match {α : Type*} (u v : α → List
     IsMortal (absorbedFamily ℚ u v uₜ vₜ) ↔
       ∃ word : List α, spell u word ++ uₜ = spell v word ++ vₜ := by
   let X : α → Matrix (Fin 3) (Fin 3) ℚ := fun i => pcpMatrix ℚ (u i) (v i)
-  have fixed : ∀ label, X label *ᵥ headBasis ℚ = headBasis ℚ :=
-    fun label => pcpMatrix_mulVec_headBasis ℚ (u label) (v label)
-  have anchor_pair : headBasis ℚ ⬝ᵥ headBasis ℚ ≠ 0 := by
-    simp [headBasis]
   rw [show absorbedFamily ℚ u v uₜ vₜ =
       separatedGenerator
         (Matrix.vecMulVec (terminalColumn ℚ uₜ vₜ) (headBasis ℚ)) X by
         rfl]
-  rw [fixedAnchor_mortal_adjoin_outer_iff X (headBasis ℚ)
-    (terminalColumn ℚ uₜ vₜ) (headBasis ℚ) fixed anchor_pair]
+  rw [mortal_adjoin_outer_iff X (terminalColumn ℚ uₜ vₜ) (headBasis ℚ)]
   constructor
   · rintro ⟨word, bridge_zero⟩
     exact ⟨word, (bridgeScalar_tileProduct u v uₜ vₜ word).mp
