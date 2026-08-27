@@ -221,7 +221,7 @@ The unknown cells immediately below this staircase are:
 | Cell | What would suffice | Automatic reward |
 | --- | --- | --- |
 | `M₃(4)` | three-active-role fixed-boundary PCP / `GPCP(3)`, or a new same-dimension generator compiler | by CHHN, also `M₉(2)` |
-| `M₄(3)` | an undecidable binary two-state controlled scalar source, or an open-residue matrix macro | by CHHN, also `M₈(2)` |
+| `M₄(3)` | an undecidable promised two-state overlap queue with pure deletion, or closure of either parabolic bridge language | by CHHN, also `M₈(2)` |
 | `M₅(3)` | a five-state binary same-zero root, a toggle/separator fusion, or fixed-width-three scheduled universality | supersedes `M₆(3)`; `M₁₀(2)` is already known |
 | `M₉(2)` | a changed physical pair, changed-zero-series compiler, or nonlinear reduction; the present pair spans `M₁₀(ℚ)` | improves the two-generator threshold by one |
 | `M₂(k≥3)` | a qualitatively different decidability or undecidability argument | settles the dimension-two wall |
@@ -270,55 +270,272 @@ replace exact finite-state simulation.
 
 ## Ranked attacks
 
-### 1. Two-state control and open residues: `M₄(3)`
+### 1. Two-state cancellation and open residues: `M₄(3)`
 
-The matrix half is complete. The pushout compiler
-[`M4-C01`](SALVAGE.md#m4-c01-two-state-pushout-compiler) represents any deterministic
-two-state role controller over `{b,c}` by two `4 × 4` integer data matrices. A rank-one third
-matrix gives mortality exactly when the controlled binary scalar series has a nonempty zero.
-The decoder is total on all binary words, and reset transitions may make a data matrix singular
-without weakening the mortality converse.
+Victory means a checked many-one reduction to mortality of three integer `4 × 4` matrices,
+including a nonempty witness, denominator clearing, and soundness for every matrix word. The
+frontier now has two live trunks and four independently attackable nodes.
 
-The source theorem is missing. Fazekas and Seki define the required one-tag-with-states model
-and cite unrestricted circular-automata universality, but neither their paper nor the audited
-literature supplies the exact two-state binary bound
-([local synopsis](references/fazekas-seki-2023-freezing-one-tag-states.md)).
+#### Closed source trunk: positive overlap queues
 
-The present Neary source cannot be inserted letterwise:
+The generic pushout [`M4-C01`](SALVAGE.md#m4-c01-two-state-pushout-compiler) already compiles any
+binary deterministic two-state scalar zero into two data matrices and one rank-one separator.
+The new positive overlap-queue compiler
+[`M4-C02`](SALVAGE.md#m4-c02-positive-overlap-queue-compiler) supplies an exact source seam. A
+queue consumes its open head and appends `produce(q,x)`; four local positive frame identities
+relate production to cancellation. Empty-state isolation and avoidance of one framed return then
+give
 
-- exact local toggle fusion preserves an immortal two-plane
-  ([`M4-O01`](SALVAGE.md#m4-o01-exact-toggle-fusion-leaves-an-immortal-core));
-- agreement at two consecutive deletion phases in a two-private-state quotient propagates
-  around the cycle to the rule phase, contradicting the unequal Neary rule scales
-  ([`M4-O02`](SALVAGE.md#m4-o02-two-private-state-phase-signature));
-- the direct binary two-state first-return recoding is reported impossible
-  ([`M4-O05`](SALVAGE.md#m4-o05-direct-two-state-first-return-recoding)).
+```text
+promised binary two-state overlap-queue acceptance
+    ↔ mortality of three integer 4 × 4 matrices.
+```
 
-The odd-phase macro cut [`M4-S01`](SALVAGE.md#m4-s01-odd-phase-macro-cut) remains useful but
-does not restore the discarded route. Pairing every semantic role with the following `D_b`
-produces rule macros `K_x` and deletion macros `E_x`, reportedly with every solution forced
-into `(KE^(m−1))⁺`. Serializing those macros as complete blocks is impossible:
-[`M4-O03`](SALVAGE.md#m4-o03-closed-serialization-collapse) proves that every finite
-closed-token implementation collapses to decidable deletion-one substitution. Distinct exact
-internal and final block codes also fail by
-[`M4-O04`](SALVAGE.md#m4-o04-exact-internal-final-code-defect).
+The converse is genuinely universal over positive words. Prefix causality either reconstructs
+the whole queue trace or exposes an earlier genuine empty prefix; no block-language assumption
+survives in the theorem.
 
-Two architectures survive.
+[`M4-O11`](SALVAGE.md#m4-o11-pure-deletion-necessity) forces every long accepting instance to
+spend one role on genuine open-front deletion. The independently audited deletion-scanner
+normal form [`M4-S05`](SALVAGE.md#m4-s05-deletion-scanner-normal-form) exhausts the
+remaining transition tables. All non-scanning tables are decidable; the framed-return promise
+kills one scanner and leaves three kernels:
 
-1. **Open-tail source.** Build four appendants whose invariant retains a phase-bearing proper
-   suffix at the front and an incomplete tail at the rear. Emission must merge with that tail;
-   it cannot be a concatenation of complete semantic objects. The next state and residue must
-   be reconstructed only at a larger pulse boundary.
-2. **State-gauged matrix macro.** Let incomplete matrix fragments break the shared upper plane
-   and reconstruct it only at macro boundaries, preserving the zero set rather than every
-   coefficient. The cube-root incidence mechanism
-   [`M4-M01`](SALVAGE.md#m4-m01-mixed-cube-root-punctuation) is the concrete fallback, but it
-   still lacks a boundary-aligned rank-one word and an all-fragment converse.
+1. `Lₙ`, zero-framed binary context-2 Lag;
+2. `Bₙ`, zero-framed reset scanning;
+3. `C`, conjugate scanning with a nonempty periodic rule production.
 
-The next source experiment should specify an open-residue invariant before choosing appendants.
-The next matrix experiment should solve the cube-root incidence varieties symbolically before
-enumerating words. Any proposal whose semantic queue is a finite word of complete tokens is
-already closed.
+The principal kernel is formalized at exact strength in
+[`M4-C03`](SALVAGE.md#m4-c03-zero-framed-binary-two-lag-compiler). Its four productions are
+
+```text
+λ(00)=V,  λ(01)=W0ⁿ⁺¹,  λ(10)=U,  λ(11)=ε,
+```
+
+with initial word `10ⁿ`, accepting singleton `0`, isolation of every reachable singleton, and
+avoidance of `10ⁿ⁺¹`. Lean proves literal step-for-step equivalence and composes it to `M₄(3)`.
+
+This Lag node is retired by
+[`M4-D01`](SALVAGE.md#m4-d01-zero-framed-binary-two-lag-decision). Without either promise,
+
+```text
+10ⁿ →* 0 ⇔ (n=1 ∧ U=ε) ∨ (V=ε ∧ U∈0*).
+```
+
+The complete backward cone of `10` and a forward `1`-containment invariant prove the formula in
+Lean.
+
+The reset node `Bₙ` is also retired by
+[`M4-D02`](SALVAGE.md#m4-d02-zero-framed-reset-scanner-decision). If `U₀=0ʳ1V`, zero-run
+reduction contracts every postinitial rule boundary to the exact token system
+
+```text
+ε ↦ S,     aX ↦ XaS,     bcX ↦ XQ,     b ↦ accept.
+```
+
+When `W` contains `1`, only `S=b` accepts. When `W∈0*`, `Q=ε` and pair deletion decides
+acceptance by the regular language `(101|11)*10`. This proof also uses neither promise.
+
+The final periodic-conjugate node `C` is retired by
+[`M4-D03`](SALVAGE.md#m4-d03-periodic-conjugate-scanner-decision). A finite first-return
+calculation eliminates every case except the unary-zero frame. Primitive conjugacy then reduces
+that residue to at most `#₁(K)` odd-gap tests in `K²`; a monotone block counter proves that no
+later phase can accept first. This theorem uses the promised avoidance of `(R,A)`. All three
+kernels in the exhaustive `M4-S05` normal form are therefore decidable, and the positive
+overlap-queue source trunk is closed.
+
+The direct Neary morphism is independently dead by
+[`M4-O12`](SALVAGE.md#m4-o12-terminal-frame-morphism-obstruction): a morphism cannot send the
+common terminal to `0` followed by the image of an initial word which already ends in that
+terminal. Any new source compiler must leave the exhaustive positive overlap-queue class rather
+than alter or revive one of its scanners.
+
+The exact checks and evidence boundary are in
+[`audits/m43-deletion-scanner-2026-08-08.md`](audits/m43-deletion-scanner-2026-08-08.md),
+[`audits/m43-overlap-queue-2026-08-08.md`](audits/m43-overlap-queue-2026-08-08.md),
+[`audits/m43-overlap-lag-decision-2026-08-10.md`](audits/m43-overlap-lag-decision-2026-08-10.md),
+[`audits/m43-reset-scanner-decision-2026-08-10.md`](audits/m43-reset-scanner-decision-2026-08-10.md),
+[`audits/m43-periodic-conjugate-decision-2026-08-10.md`](audits/m43-periodic-conjugate-decision-2026-08-10.md), and
+[`audits/m43-alternating-defect-literature-2026-08-07.md`](audits/m43-alternating-defect-literature-2026-08-07.md).
+
+#### Matrix trunk: parabolic bridge language
+
+The parabolic blade [`M4-M03`](SALVAGE.md#m4-m03-parabolic-blade-and-bridge-grammar) remains the
+live zero-set construction. Lean classifies its unique singular gap atom `R`, proves every zero
+needs at least three copies, and contracts every arbitrary exceptional chain exactly to a product
+of `2 × 2` bridges. [`M4-O08`](SALVAGE.md#m4-o08-residue-two-necessary-wall) proves that every
+zero contains a residue-two gap.
+
+The complete safe exterior state is now controlled. The arbitrary-switching flag
+[`M4-S04`](SALVAGE.md#m4-s04-arbitrary-switching-three-adic-exterior-flag) proves that every
+regular safe word remains in a normalized two-sector `3`-adic flag. The leftmost residue selects
+the sector, even after unbounded cancellation. If such a word lies on the bridge wall `u=0`,
+residue zero forces `ν₃(w)<ν₃(v)` and residue one forces `ν₃(v)<ν₃(w)`. For a regular
+residue-one `b` atom, wall incidence is exactly
+
+```text
+(12·3^β−1)(u+w)+2v=0.
+```
+
+This is not safe return: both flag sectors contain ambient wall points. It is the correct
+replacement for the retired one-coordinate and finite-cone attacks. The scalar state fracture
+[`M4-O09`](SALVAGE.md#m4-o09-one-coordinate-exterior-fracture) shows that residue-one `c` needs
+both projective coordinates, and the irrational cycle
+[`M4-O10`](SALVAGE.md#m4-o10-irrational-rotation-cone-fracture) excludes every finite strict
+wall-separated cone or Markov multicone.
+
+The arbitrary grammar [`M4-S06`](SALVAGE.md#m4-s06-arbitrary-defect-bridge-grammar) closes the
+defect-count node. Every cleared residue skeleton factors into local incidences; its only possible
+zero runs have length `1 mod 4` between opposite phases or length `3 mod 4` between equal phases.
+A concrete rational skeleton avoiding those runs is nonzero. More strongly, every nonempty pure-
+defect block has an invertible bridge. Every arbitrary bridge zero descends to one incidence
+between two consecutive singular bridges, with only invertible transport between them; additional
+walls cannot cancel collectively. On a wall `(0,v,w)`, the exact nonzero cokernel is `(v,-4w)`.
+
+A second parabolic family now supplies an exact semantic boundary.
+[`M4-M04`](SALVAGE.md#m4-m04-retuned-semantic-boundary) changes the digit functional and the
+open root so that gap two after `b` is the unique singular atom. Complete Neary gaps evaluate to
+sparse side-normal matrices, and one fixed minor of the literal three-generator context
+
+```text
+G_b S² (complete Neary word) G_b S² G_b
+```
+
+vanishes exactly on the four-tile terminal equation. Fixed retractions recover its internal
+bridge, so the context is nonzero even at a match. There it is a nonzero outer product with fixed
+right row
+
+```text
+(-1, (15·3^β+3)/2, 28, 24).
+```
+
+Complete-gap continuations preserve the first coordinate and cannot annihilate this row. The
+fixed-row closure is now retired by
+[`M4-O13`](SALVAGE.md#m4-o13-retuned-pseudo-terminal-obstruction). At `(β,B)=(3,bbcc)`, the
+legal tag system cycles forever, while one gap-thirty pseudo-production creates a nonzero
+malformed context with the same terminal row. Every annihilator of that row therefore creates a
+false zero. If no annihilator exists, the intended forward closure fails instead. The two
+retuned obligations collapse into this losing fork; `M4-M04` is parked.
+
+The original fixed-ray formal-plane punctuation is also closed.
+[`M4-O14`](SALVAGE.md#m4-o14-original-semantic-endpoint-obstruction) places one intact complete
+side-normal block between arbitrary fixed endpoint rays. Its bridge determinant is negative for
+every nonempty pair of encoded words, so such a block cannot be an endpoint wall. Every fixed
+incidence obeys `22c₀-31cX-18cY=0`. Under the correct terminal convention
+`Y=tX+m, τ=tσ`, vanishing on the formal terminal plane forces vanishing on the entire length
+plane. This does not exclude a coincidence confined to the discrete language.
+
+The conditional identity
+[`M4-C04`](SALVAGE.md#m4-c04-original-mixed-gap-endpoint-compiler) recognizes the intended
+four-parameter equation if regular contexts `C,D` reach
+
+```text
+C(0,−2,1)ᵀ ∼ (4,4,−1)ᵀ,
+D A(18,11)ᵀ ∼ ((5·3^β−1)/2,3^(β+1),−1/2)ᵀ.
+```
+
+Lean proves the resulting bridge product vanishes exactly on the Neary terminal equation. It
+also proves that neither context can consist only of complete gaps.
+
+This architecture is now retired by
+[`M4-O15`](SALVAGE.md#m4-o15-original-pseudo-terminal-endpoint-obstruction). On the admissible
+nonhalting instance `(β,body)=(3,bbcc)`, one regular gap-thirty pseudo-production yields a
+33-tile middle satisfying the same corrected terminal equation. If the endpoint contexts do not
+exist, the forward reduction fails; if they exist, that middle is a false zero. Reaching the two
+rays is therefore no longer frontier work.
+
+The spare-eigenvalue repair is closed by
+[`M4-O16`](SALVAGE.md#m4-o16-one-complement-spectral-checksum-obstruction). Among all rational
+roots retaining the paired order-three block and carrying syntax only in its one-dimensional
+complement, the cube identity forces a dichotomy: a nonunit eigenvalue removes both wall
+couplings and makes every word nonzero, while eigenvalue one restores the affine erase--rule
+line and its infinite pseudo-production ladder. The strongest linear interpolation no-go claimed
+in the external report is rejected: completeness need not accept every Boolean tile assignment
+on a fixed skeleton.
+
+The all-word node has now contracted further. The one-sided orbit normal form
+[`M4-S07`](SALVAGE.md#m4-s07-one-sided-wall-orbit-normal-form) supplies a canonical nonzero
+right kernel `κ(U)` for every regular left wall. After any invertible bridge transport `T`, put
+`adj(T)κ(U)=(a,b)`. A regular right word `V` closes the incidence exactly when
+
+```text
+exteriorState(V) ∼ (0,4b,a).
+```
+
+The target ray itself forces right wallhood. Together with `M4-S06`, this is equivalent to a
+literal zero of the physical three-generator family. Two original-family nodes survive, and they
+must not be conflated.
+
+1. **Exterior collision avoidance.** Use `M4-S04`, `M4-S06`, and `M4-S07` to decide whether a
+   regular exterior orbit can reach the explicit projective ray generated by a left wall and an
+   invertible bridge transport. Uniform avoidance proves this family immortal; one hit gives an
+   exact physical zero word. Do not rebuild a grammar for the right walls.
+2. **Syntax-sensitive semantics.** Construct a nonlinear legality invariant inseparable from
+   the resonant wall incidence, use a genuinely different root family, or restrict to a
+   computable universal source image on which pseudo-terminal side normals are impossible. It
+   must prove both the forward zero and the arbitrary-word converse. Fixed endpoint statistics,
+   the spare rational eigenvalue, and another restatement of the terminal plane are dead.
+
+An ontology guard applies to both nodes. The exterior dynamics act by the conjugated
+adjugate-transpose `exteriorTransition(C)`, while endpoint contexts act by the primal matrix
+`C`. A conic invariant of the former does not constrain `C u*∼k`; the regular primal atom
+`atom 3 bbcc b 0` already sends a conic-null vector to conic value `24`.
+
+The dead subtrees remain dead: literal Neary role fusion (`M4-O01`, `M4-O02`, `M4-O05`), finite
+queues of complete tokens (`M4-O03`), exact internal/final block codes (`M4-O04`), closed
+finite-order roots (`M4-O07`), one-coordinate exterior dynamics (`M4-O09`), and finite strict
+cone separation (`M4-O10`). The annihilator guard [`M4-O06`](SALVAGE.md#m4-o06-punctuation-image-annihilator)
+is discharged. Finite gap catalogues, bare rank-one incidence, defect-count casework, collective-
+wall cancellation, pure-defect endpoints, fixed-ray complete-block semantics, spare-eigenvalue
+checksums, and unproved flatness are not frontier work.
+
+#### Orthogonal trunk: free cancellation and homogeneous punctuation
+
+The Carvalho route no longer depends on compressing its high-rank Stallings presentation.
+The audited fixed-program specialization
+[`G3-M01`](SALVAGE.md#g3-m01-free-group-discrepancy-engine) reduces source halting to one
+positive sequential-transducer equation:
+
+```text
+∃τ∈{0,1,H,p}*, n≥0: τ p H^n=d_e Ψ(τ).
+```
+
+First-letter cancellation gives a converse for every positive `τ`. The natural closed-path
+subgroup nevertheless has rank `648b+7≥655`, and
+[`M4-O17`](SALVAGE.md#m4-o17-positive-nielsen-basis-obstruction) proves that the positive
+monoid on its explicit all-positive Nielsen basis intersects the equalizer only in the identity.
+Basis compression is not a live node.
+
+The matrix end of the route is now complete. The homogeneous punctuation mechanism
+[`M4-M05`](SALVAGE.md#m4-m05-boundary-guarded-homogeneous-punctuation) embeds a pair of binary
+free-group homomorphisms into two unimodular `4 × 4` left--right actions. If fixed binary
+boundaries `L,R` disagree at the empty interior, one rank-one boundary separator gives
+
+```text
+three integer 4 × 4 matrices mortal
+  ↔ ∃w∈{0,1}*: α(LwR)=β(LwR),
+```
+
+with a converse over every physical matrix word. The fifth affine coordinate is unnecessary.
+
+Two free-cancellation nodes survive and should be raced against each other.
+
+1. **Constructive binary compiler.** Compile the four-letter marker-tail equation into positive
+   binary fixed-boundary free-group equality, preserving solvability in both directions over the
+   complete binary free monoid and forcing an empty-interior mismatch. A solution closes
+   `M₄(3)` immediately through `M4-M05`.
+2. **Fixed-rank classification.** Decide the same restricted binary fixed-boundary problem, or
+   prove a structural obstruction to carrying the Carvalho equation.
+   [`Logan`](references/logan-2022-equalizer-rank-two.md) bounds injective equalizers from `F₂`
+   by rank two but gives no general triviality algorithm;
+   [`Ciobanu--Logan`](references/ciobanu-logan-2021-free-group-pcp-variations.md) use hypotheses
+   and a two-generator overhead to remove boundaries. A decision theorem kills this trunk and
+   must be sought as aggressively as the compiler.
+
+The two trunks cross-pollinate only at the master problem. The parabolic route is arithmetic
+projective reachability inside one explicit family; the Carvalho route is positive coding in a
+free group followed by a finished rank-one separator. Neither is supporting infrastructure for
+the other, and failure of one does not weaken the other.
 
 ### 2. Zero-set compression and fused punctuation: `M₅(3)`
 
@@ -2131,10 +2348,15 @@ universal computation.
 
 ## Execution order
 
-1. Construct an open-tail binary two-state source invariant or solve the mixed cube-root
-   punctuation incidence equations. Use formalized `M4-O02`–`M4-O04` to reject every exact
-   two-private-state clock, finite closed-token source, and exact internal/final recoloring
-   before appendant search.
+1. Attack the two surviving `M₄(3)` nodes: an all-word classification of arbitrary consecutive
+   wall incidences under `M4-S04` and `M4-S06`, and a syntax-sensitive compiler or strictly
+   narrower universal source image that excludes `M4-O15` pseudo-terminals. The exhaustive
+   positive overlap-queue source class, alternating/multiple residue-two defect grammar, retuned
+   fixed-row closure, and `M4-C04` endpoint architecture are closed. Cross-pollinate exact
+   exterior invariants only within their contragredient representation; do not transplant them
+   to primal endpoint actions or revive deletion scanners, complete-token queues, fixed-ray
+   complete-block semantics, one-coordinate dynamics, finite wall-separated cones, or literal
+   Neary recodings.
 2. Use formalized `MM-O01`, `G3-O01`, `MM-O03`, and `MM-O04` to reject exact packings, macros,
    and bridges without conflating their scope with solvability preservation.
 3. Prove or refute the setter candidate's projective avoidance property, construct a

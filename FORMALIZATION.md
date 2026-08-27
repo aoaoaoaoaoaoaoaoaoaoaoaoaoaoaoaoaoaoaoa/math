@@ -1106,15 +1106,211 @@ obstruction [`M4-O04`](SALVAGE.md#m4-o04-exact-internal-final-code-defect) is fo
 first principles: noninjectivity of a binary free-monoid morphism forces its two letter images
 to commute, contradicting the two explicit Neary macro upper words.
 
+The positive overlap-queue compiler [`M4-C02`](SALVAGE.md#m4-c02-positive-overlap-queue-compiler)
+is formalized in
+[`MatrixMortality/OverlapQueue.lean`](MatrixMortality/OverlapQueue.lean). A binary two-state
+queue consumes its open head and appends a role-dependent word. Four positive frame-cocycle
+identities, empty-state isolation, and avoidance of one framed return suffice for an exact
+equivalence between acceptance and mortality of three integer `4 × 4` matrices. The proof
+quantifies over every positive physical word: `OverlapQueue.causality` forces an arbitrary
+coefficient equality to be a genuine trace or to contain an earlier empty prefix. The same file
+formalizes the source obstruction [`M4-O11`](SALVAGE.md#m4-o11-pure-deletion-necessity): every
+accepted initial queue of length greater than one has a state-preserving role whose production
+and cancellation words are both empty. The audit is
+[`audits/m43-overlap-queue-2026-08-08.md`](audits/m43-overlap-queue-2026-08-08.md).
+
+The zero-framed binary Lag specialization
+[`M4-C03`](SALVAGE.md#m4-c03-zero-framed-binary-two-lag-compiler) is formalized in
+[`MatrixMortality/OverlapLag.lean`](MatrixMortality/OverlapLag.lean). Lean identifies the
+scanner step with literal context-2 Lag deletion, proves both directions of chronological trace
+translation, translates empty-state isolation to singleton isolation and the framed-return
+promise to avoidance of `10ⁿ⁺¹`, and composes the exact kernel to three integer `4 × 4`
+matrices. The same module formalizes
+[`M4-O12`](SALVAGE.md#m4-o12-terminal-frame-morphism-obstruction), the length contradiction
+which kills direct terminal-to-frame morphic coding. The larger three-scanner classification
+[`M4-S05`](SALVAGE.md#m4-s05-deletion-scanner-normal-form) is independently audited rather
+than Lean-formalized. Its evidence boundary is recorded in
+[`audits/m43-deletion-scanner-2026-08-08.md`](audits/m43-deletion-scanner-2026-08-08.md).
+
+The Lag source itself is now closed by
+[`M4-D01`](SALVAGE.md#m4-d01-zero-framed-binary-two-lag-decision), formalized in
+[`MatrixMortality/OverlapLagDecision.lean`](MatrixMortality/OverlapLagDecision.lean). For every
+positive `n` and arbitrary `U,V,W`, Lean proves
+
+```text
+Accepts(n,U,V,W) ↔ (n=1 ∧ U=ε) ∨ (V=ε ∧ U∈0*).
+```
+
+This classification is unconditional and yields a decision procedure without orbit simulation.
+Under the existing compiler promises it also classifies mortality of the associated three
+integer `4 × 4` matrices. The audit is
+[`audits/m43-overlap-lag-decision-2026-08-10.md`](audits/m43-overlap-lag-decision-2026-08-10.md).
+
+The reset scanner is independently decided, but remains outside the Lean ledger.
+[`M4-D02`](SALVAGE.md#m4-d02-zero-framed-reset-scanner-decision) contracts complete rule
+boundaries by zero-run reduction to a two-token quotient. Its accepting set is a direct equality
+when `W` contains `1` and the regular language `(101|11)*10` when `W∈0*`. No auxiliary scanner
+code was retained because the result deletes its own attack lane. The exact evidence boundary is
+[`audits/m43-reset-scanner-decision-2026-08-10.md`](audits/m43-reset-scanner-decision-2026-08-10.md).
+
+The periodic-conjugate scanner is likewise decided outside the Lean ledger.
+[`M4-D03`](SALVAGE.md#m4-d03-periodic-conjugate-scanner-decision) computes the initial return,
+normalizes `AP=KA` into primitive conjugate powers, and reduces every remaining promised orbit
+to at most `#₁(K)` odd-gap tests. Its prefix telescope was independently reconstructed against
+self-consumed appendants and malformed queues. This closes the final consumer of the audited
+scanner semantics, so no scanner-specific Lean layer is retained. The evidence and exact use of
+the `(R,A)` avoidance promise are in
+[`audits/m43-periodic-conjugate-decision-2026-08-10.md`](audits/m43-periodic-conjugate-decision-2026-08-10.md).
+
 The odd-phase macro cut [`M4-S01`](SALVAGE.md#m4-s01-odd-phase-macro-cut) remains reported.
 Lean already defines the relevant phase residues and Table 2 tracks, but no theorem yet proves
 the even-track invariant through every reachable queue or the induced macro solvability
 equivalence. The direct first-return obstruction [`M4-O05`](SALVAGE.md#m4-o05-direct-two-state-first-return-recoding)
 also remains reported. Neither claim enters the checked theorem ledger.
 
-No `M₄(3)` undecidability theorem follows from the present corpus. The missing source is an
-undecidable binary two-state controlled scalar system, or a matrix-level open-residue compiler
-with a complete arbitrary-word converse.
+The finite-order monomial blade [`M4-M02`](SALVAGE.md#m4-m02-universal-monomial-cube-root-blade)
+is parked after the audited closed-residue obstruction
+[`M4-O07`](SALVAGE.md#m4-o07-closed-residue-monomial-obstruction). Its live replacement
+[`M4-M03`](SALVAGE.md#m4-m03-parabolic-blade-and-bridge-grammar) is formalized in
+[`MatrixMortality/ParabolicBlade.lean`](MatrixMortality/ParabolicBlade.lean). Lean checks the
+open cube root's toggle action and invertibility, the nonzero rank-one physical blade, all six
+infinite gap determinant pencils, the unique singular rank-two atom, every one-step instance of
+the annihilator guard [`M4-O06`](SALVAGE.md#m4-o06-punctuation-image-annihilator), and nonzero
+products through two singular incidences. It also proves the stronger all-length contraction:
+an exceptional chain vanishes exactly when its induced `2 × 2` bridge word vanishes. The audit
+and exact promotion boundary are
+[`audits/m43-parabolic-blade-2026-08-05.md`](audits/m43-parabolic-blade-2026-08-05.md).
+
+The residue-two obstruction [`M4-O08`](SALVAGE.md#m4-o08-residue-two-necessary-wall) is
+formalized in
+[`MatrixMortality/ParabolicResidueWall.lean`](MatrixMortality/ParabolicResidueWall.lean). After
+one integral scaling and reduction modulo three, every residue-zero and residue-one atom acts on
+two protected rays with nonzero weight. Lean therefore proves
+`ParabolicBlade.residueTwoWall_wordProduct_ne_zero`: for every `β`, body, and word over
+`Q(x,3j)` and `Q(x,3j+1)`, the product is nonzero. This subsumes and deletes the former
+closed-phase theorem. The audit is
+[`audits/m43-residue-two-wall-2026-08-05.md`](audits/m43-residue-two-wall-2026-08-05.md).
+
+The one-defect phase cut [`M4-S03`](SALVAGE.md#m4-s03-one-defect-phase-cut) is formalized in the
+same module. `ParabolicBlade.oneDefect_wordProduct_ne_zero_of_same_residue` proves that arbitrary
+safe contexts around one residue-two atom cannot vanish when their adjacent residues agree.
+Together with safe-word nonvanishing and residue-two atom invertibility, only adjacency phases
+`0|2|1` and `1|2|0` remain. The audit is
+[`audits/m43-one-defect-phase-2026-08-07.md`](audits/m43-one-defect-phase-2026-08-07.md).
+
+The arbitrary-switching exterior flag
+[`M4-S04`](SALVAGE.md#m4-s04-arbitrary-switching-three-adic-exterior-flag) is formalized across
+[`MatrixMortality/ParabolicExterior.lean`](MatrixMortality/ParabolicExterior.lean),
+[`MatrixMortality/ParabolicFlag.lean`](MatrixMortality/ParabolicFlag.lean), and
+[`MatrixMortality/ParabolicSafeFlag.lean`](MatrixMortality/ParabolicSafeFlag.lean). Lean checks
+the complete adjugate exterior state, its exact left-multiplication law, and the bridge identity
+making its first coordinate the singular wall. Every regular safe atom sends the two-sector
+`3`-adic flag into the sector selected by its residue, even under arbitrary switching and
+unbounded common-power cancellation. On the wall, the leftmost residue forces a strict
+orientation of the other coordinates. This does not prove safe return because both sectors meet
+the wall. The first exact wound is also checked: a regular residue-one `b` atom returns precisely
+when `(12·3^β−1)(u+w)+2v=0`. The audit is
+[`audits/m43-parabolic-flag-2026-08-08.md`](audits/m43-parabolic-flag-2026-08-08.md).
+
+The arbitrary defect grammar
+[`M4-S06`](SALVAGE.md#m4-s06-arbitrary-defect-bridge-grammar) is formalized in
+[`MatrixMortality/ParabolicDefect.lean`](MatrixMortality/ParabolicDefect.lean). Lean proves
+`A₂⁴=2I` for the protected-plane defect action and the complete four-periodic local-incidence
+table. It factors every arbitrary cleared `3 × 3` residue skeleton into those incidences and
+composes the result with the concrete integral numerators: every physical skeleton without a bad
+internal run is nonzero over `ℚ`. This subsumes the one-defect phase cut `M4-S03`.
+
+The same module proves the exact pure-defect reset: every nonempty block of residue-two atoms has
+an invertible bridge. Every regular wall bridge is a nonzero rank-one outer product, and an
+arbitrary chain of varying walls separated by arbitrary transports vanishes exactly at one
+consecutive projective incidence. For wall exterior state `(0,v,w)`, the explicit cokernel is
+`(v,-4w)`; it is nonzero on every regular wall word and annihilates the bridge. The exact checks
+and evidence boundary are in
+[`audits/m43-arbitrary-defect-2026-08-08.md`](audits/m43-arbitrary-defect-2026-08-08.md).
+
+The one-sided wall-orbit normal form
+[`M4-S07`](SALVAGE.md#m4-s07-one-sided-wall-orbit-normal-form) has a formal kernel spine in
+[`MatrixMortality/ParabolicIncidence.lean`](MatrixMortality/ParabolicIncidence.lean). Lean
+defines the canonical right kernel `coreLeftInverse ρ *ᵥ (adj(M) *ᵥ bladeKernel)`, proves that
+the exceptional output factor maps it back to `adj(M) *ᵥ bladeKernel` on the wall, proves that
+the bridge annihilates it, and proves nonvanishing for every regular wall word. The final
+two-wall identity and its one-sided exterior target are independently audited rather than
+claimed as formalized. The evidence boundary is
+[`audits/m43-one-sided-wall-orbit-2026-08-11.md`](audits/m43-one-sided-wall-orbit-2026-08-11.md).
+
+The original fixed-ray semantic route is obstructed by
+[`M4-O14`](SALVAGE.md#m4-o14-original-semantic-endpoint-obstruction), formalized in
+[`MatrixMortality/ParabolicSemanticObstruction.lean`](MatrixMortality/ParabolicSemanticObstruction.lean).
+Lean identifies the complete ternary correspondence middle as a fixed conjugate of
+`sidePcpMatrix`, proves that every original complete gap evaluates to it, composes arbitrary
+complete tile words, and computes their exceptional bridge determinant. The determinant is
+strictly negative for every nonempty complete Neary word, so such a word cannot be a wall. For
+arbitrary fixed endpoint rays, vanishing on the correct formal terminal plane `Y=tX+m, τ=tσ`
+forces vanishing on the entire compulsory length plane. The proof does not classify coincidences
+confined to the discrete code locus.
+
+The same module formalizes the conditional identity
+[`M4-C04`](SALVAGE.md#m4-c04-original-mixed-gap-endpoint-compiler). Two explicit endpoint ray
+equations make one semantic bridge followed by the empty bridge vanish exactly on the
+four-parameter Neary terminal equation. Complete semantic contexts cannot reach either ray, so
+both endpoint words must contain incomplete gaps. The exact evidence boundary is
+[`audits/m43-original-semantic-obstruction-2026-08-10.md`](audits/m43-original-semantic-obstruction-2026-08-10.md).
+
+The retuned semantic boundary
+[`M4-M04`](SALVAGE.md#m4-m04-retuned-semantic-boundary) is formalized in
+[`MatrixMortality/ParabolicRetuned.lean`](MatrixMortality/ParabolicRetuned.lean) and
+[`MatrixMortality/ParabolicRetunedBoundary.lean`](MatrixMortality/ParabolicRetunedBoundary.lean).
+Lean proves the fixed root cube, all six reduced-atom determinant pencils, and uniqueness of the
+gap-two `b` singularity under the source hypotheses. A sparse ternary side normal form evaluates
+every complete Neary word without reversal. Its exceptional bridge determinant vanishes exactly
+on the terminal equation and, after paired decoding, exactly on `pairedCoefficient = 0`.
+
+The bridge is realized by a literal word over the root and two data generators. A fixed physical
+minor is `-2052·3^β` times its determinant; explicit retractions recover the bridge and prove the
+context never vanishes. On a terminal match the context is a nonzero outer product with fixed
+right row `(-1,(15·3^β+3)/2,28,24)`, and right multiplication kills the context exactly when it
+kills this row. Every complete-gap continuation preserves the row's first coordinate, so any
+annihilator must use an incomplete root gap. The audit is
+[`audits/m43-retuned-semantic-boundary-2026-08-08.md`](audits/m43-retuned-semantic-boundary-2026-08-08.md).
+
+The fixed-row closure is refuted by
+[`M4-O13`](SALVAGE.md#m4-o13-retuned-pseudo-terminal-obstruction), formalized in
+[`MatrixMortality/ParabolicRetunedObstruction.lean`](MatrixMortality/ParabolicRetunedObstruction.lean).
+For the admissible nonhalting source `(β,body)=(3,bbcc)`, Lean proves that a literal length-100
+word with one gap-thirty pseudo-production is a nonzero outer product with terminal row
+`(-1,204,28,24)`. Appending an arbitrary physical word gives zero exactly when that word
+annihilates the row. The same module proves the legal tag orbit cycles and hence has no genuine
+terminal match. The exact evidence boundary is
+[`audits/m43-retuned-pseudo-terminal-obstruction-2026-08-10.md`](audits/m43-retuned-pseudo-terminal-obstruction-2026-08-10.md).
+
+The same gap-thirty pseudo-production refutes the original conditional endpoint architecture.
+[`M4-O15`](SALVAGE.md#m4-o15-original-pseudo-terminal-endpoint-obstruction) evaluates the
+malformed atom and the complete poison word in the original side-normal semantics. Lean proves
+that the admissible source `(β,body)=(3,bbcc)` has no terminal word, while every instantiation
+of the `M4-C04` endpoint hypotheses kills a regular 33-tile middle containing `(b,30)`. Thus
+endpoint failure destroys completeness and endpoint success destroys soundness.
+
+The orthogonal free-group punctuation mechanism
+[`M4-M05`](SALVAGE.md#m4-m05-boundary-guarded-homogeneous-punctuation) has two formal layers.
+[`MatrixMortality/SchottkyPunctuation.lean`](MatrixMortality/SchottkyPunctuation.lean) defines
+the four-dimensional left--right action `B.adjugateᵀ⊗A`, proves its multiplication law and
+unimodularity, and computes its fixed row--column coefficient as the determinant of the first
+columns of `A` and `B`. The explicit Schottky ping-pong argument making this coefficient an
+equality detector is audited rather than Lean-checked.
+
+[`MatrixMortality/TerminalTile.lean`](MatrixMortality/TerminalTile.lean) now proves the generic
+boundary-fold theorem `unitFamily_mortal_boundaryOuter_iff`. For any unit data family, fixed
+left and right data words are absorbed into the two rays of one rank-one separator; mortality is
+equivalent to a zero scalar on one bounded interior word, with a converse over every placement
+and number of separators. No source compiler from Carvalho's four-letter marker-tail equation to
+positive binary fixed-boundary equality is claimed.
+
+No `M₄(3)` undecidability theorem follows from the present corpus. The exhaustive promised
+positive overlap-queue source class, the retuned fixed-row closure, the original fixed-ray
+formal-plane compiler, and the four-parameter `M4-C04` endpoint architecture are closed. The
+original matrix lane retains exterior collision avoidance and syntax-sensitive semantics. The
+free-cancellation lane retains the positive binary fixed-boundary compiler and its opposing
+fixed-rank decision problem.
 
 ## Modules
 
@@ -1185,16 +1381,31 @@ with a complete arbitrary-word converse.
 | `ControllerPushout.lean` | arbitrary finite-controller pushout, total suffix decoder, and transposed prefix decoder |
 | `TwoStatePushout.lean` | rule/erasure specialization, exact rank classification, and integer mortality compiler |
 | `TwoStateObstructions.lean` | exact local toggle-fusion obstruction |
+| `OverlapQueue.lean` | positive two-frame queue semantics, arbitrary-word causality, exact mortality compiler, and pure-deletion necessity |
+| `OverlapLag.lean` | literal binary context-2 Lag kernel, promise translation, mortality composition, and terminal-frame morphism obstruction |
+| `OverlapLagDecision.lean` | unconditional syntactic decision of the zero-framed binary context-2 Lag kernel |
 | `IndexedExecution.lean` | exact finite relational execution and closure views |
 | `TagQueue.lean` | tag steps, indexed execution specializations, and generic history soundness |
 | `NearyEncoding.lean` | four ordinary tiles, synchronization, source equivalence, and composed reductions |
 | `MarkedTerminal.lean` | fresh marker, primitive terminality, and binary recoding |
 | `TernaryEncoding.lean` | injective nonzero ternary representation |
 | `PCPEncoding.lean` | `3 × 3` word-pair morphism and equality entry |
-| `TerminalTile.lean` | arbitrary rank-one chains and fracture at every separator |
+| `TerminalTile.lean` | arbitrary rank-one chains, fracture at every separator, and fixed-boundary folding into separator rays |
+| `SchottkyPunctuation.lean` | four-dimensional integral left--right action and homogeneous first-column incidence coefficient |
 | `TerminalReduction.lean` | rational and integer fixed-boundary mortality compiler |
 | `TerminalSource.lean` | generic primitive extraction and GPCP bridge |
 | `PairedCompression.lean` | reset/toggle specialization, explicit coordinate certificates, and arbitrary-word decoding |
+| `ParabolicBlade.lean` | open cube root, nonzero mixed blade, complete atom grammar, annihilator guards, and exact `2 × 2` exceptional-chain contraction |
+| `ParabolicResidueWall.lean` | integral residue-{0,1} atom numerators, modulo-three two-ray action, and the necessity of residue two |
+| `ParabolicExterior.lean` | complete adjugate exterior state, bridge-wall coordinate, and four normalized safe actions |
+| `ParabolicFlag.lean` | valuation relations and the four arbitrary-cancellation atom invariants |
+| `ParabolicSafeFlag.lean` | arbitrary safe-word flag, wall orientation, and exact residue-one `b` wound |
+| `ParabolicDefect.lean` | complete defect-run residue grammar, pure-defect bridge reset, and consecutive-wall projective fracture |
+| `ParabolicSemanticObstruction.lean` | complete-block determinant wall and fixed-ray formal terminal-plane obstruction |
+| `ParabolicIncidence.lean` | canonical nonzero right kernel of every regular wall bridge |
+| `ParabolicRetuned.lean` | retuned open root, sparse ternary code, determinant pencils, and unique gap-two singular atom |
+| `ParabolicRetunedBoundary.lean` | complete-gap semantics, literal physical contexts, fixed terminal minor and row, and complete-gap annihilator obstruction |
+| `ParabolicRetunedObstruction.lean` | explicit malformed terminal no-instance defeating the retuned fixed-row and original endpoint closures |
 | `PairedMortality.lean` | common-column mortality converse and exact integer `4 × 4` family |
 | `PhaseFracture.lean` | phase normalization and dimension-free projective-identification contradiction |
 | `PhaseRigidity.lean` | checked local role algebra, discrepancy commutators, and invariant-pencil rigidity |
@@ -1270,6 +1481,9 @@ with a complete arbitrary-word converse.
 | Arithmetic-envelope specialization | `NearyArithmeticEnvelope.mortality_iff_halts` |
 | Four ordinary matrices are nonsingular and triangular | `nearyMortality_ordinary_det_ne_zero`, `nearyMortality_ordinary_upperTriangular` |
 | Exceptional matrix is nonzero and rank one | `nearyMortality_terminal_ne_zero`, `nearyMortality_terminal_rank_eq_one` |
+| Fixed data boundaries fold into one rank-one separator with a complete mortality converse | `unitFamily_mortal_boundaryOuter_iff` |
+| The four-dimensional left--right coefficient is the determinant of two first columns | `SchottkyPunctuation.equalityCoefficient` |
+| Unimodular pairs give multiplicative unimodular left--right actions | `SchottkyPunctuation.leftRight_mul`, `SchottkyPunctuation.leftRight_det` |
 | Exact nonerasing Neary role macros require four letters | `ExactNearyMacroFactorization.four_le_card` |
 | Exact Neary role macros require four letters even with erasure | `TernaryClosedBlockNoGo.ExactErasingMacroFactorization.four_le_card` |
 | Stationary closed-block residuals obey the two discrete case splits | `TernaryClosedBlockNoGo.commonLowerDeletion_cases`, `TernaryClosedBlockNoGo.upperResidualShift_cases` |
@@ -1493,6 +1707,30 @@ with a complete arbitrary-word converse.
 | Every two-state pushout word obeys its suffix decoder | `twoStateProduct_mulVec_phaseVector`, `twoStateCoefficient_eq_controlled` |
 | A two-state reset has rank three; separated destinations have rank four | `twoStateDataMatrix_rank_eq_three_of_eq`, `twoStateDataMatrix_rank_eq_four_of_ne` |
 | The integer two-state family is mortal exactly at a nonempty controlled scalar zero | `twoStateMortalityFamily_int_mortal_iff_nonempty_zero` |
+| Promised positive overlap-queue acceptance is exactly mortality of three integer `4 × 4` matrices | `OverlapQueue.mortality_iff_accepts` |
+| Every long accepted overlap queue has a state-preserving pure-deletion role | `OverlapQueue.pure_deletion_of_accepts_large` |
+| Promised zero-framed binary context-2 Lag reachability is exactly mortality of three integer `4 × 4` matrices | `OverlapLag.mortality_iff_accepts` |
+| Zero-framed binary context-2 Lag acceptance is exactly `(n=1 ∧ U=ε) ∨ (V=ε ∧ U∈0*)` | `OverlapLag.accepts_iff`, `OverlapLag.mortality_iff_syntax` |
+| A fixed morphism cannot identify a terminal with its own compulsory return frame | `OverlapLag.terminal_image_ne_frame` |
+| Every regular safe word preserves the oriented `3`-adic exterior flag | `ParabolicBlade.exteriorState_safe_word_flag`, `ParabolicBlade.exteriorState_safe_word_wall_orientation` |
+| Every concrete defect skeleton without a bad four-periodic run is nonzero | `ParabolicBlade.defectSkeletonProduct_ne_zero_of_not_bad` |
+| Every nonempty pure-defect block has an invertible bridge | `ParabolicBlade.pureDefect_bridge_det_ne_zero` |
+| A varying wall chain vanishes exactly at one consecutive projective incidence | `ParabolicBlade.bridgeFractureChain_eq_zero_iff` |
+| A regular wall bridge has the explicit nonzero annihilating cokernel `(v,-4w)` | `ParabolicBlade.bridgeCokernel_eq_exteriorTail`, `ParabolicBlade.bridgeCokernel_regular_word_ne_zero`, `ParabolicBlade.bridgeCokernel_vecMul_bridge_of_wall` |
+| A regular wall bridge has a canonical nonzero right kernel | `ParabolicBlade.bridgeKernel_regular_word_ne_zero`, `ParabolicBlade.bridge_mulVec_bridgeKernel_of_wall` |
+| Every nonempty complete semantic block has a negative original bridge determinant | `ParabolicBlade.bridge_semanticWordMiddle_det_neg` |
+| Every nonempty complete original Neary word has a negative bridge determinant | `ParabolicBlade.completeTileProduct_eq_semanticWordMiddle`, `ParabolicBlade.bridge_completeTileProduct_det_neg` |
+| A fixed original incidence vanishing on the formal terminal plane vanishes on the whole length plane | `ParabolicBlade.semanticIncidence_terminal_forces_length`, `ParabolicBlade.no_fixed_semanticIncidence_terminal_zero_set` |
+| The actual Neary formal terminal plane cannot be recognized by fixed original endpoint rays | `ParabolicBlade.no_fixed_semanticIncidence_neary_terminal_zero_set` |
+| The two mixed-gap endpoint equations conditionally compile exact Neary terminal matching | `ParabolicBlade.conditional_semanticBridgeProduct_zero_iff_terminal` |
+| Complete semantic contexts miss both conditional-compiler endpoint rays | `ParabolicBlade.no_complete_semantic_left_target`, `ParabolicBlade.no_complete_semantic_right_target` |
+| The retuned family has one singular reduced atom, at gap two after `b` | `ParabolicRetuned.atom_det_eq_zero_iff` |
+| The retuned bridge determinant is exactly the Neary terminal language | `ParabolicRetuned.bridge_tileProduct_det_eq_zero_iff_terminal_match` |
+| One fixed minor of a literal retuned three-generator context recognizes `pairedCoefficient = 0` | `ParabolicRetuned.contextWord_product`, `ParabolicRetuned.physicalMinor_decoded_det_eq_zero_iff_pairedCoefficient` |
+| A matched retuned context is nonzero and right annihilation is exactly annihilation of its fixed terminal row | `ParabolicRetuned.physicalContext_ne_zero`, `ParabolicRetuned.physicalContext_mul_eq_zero_iff_terminalRow` |
+| Complete-gap continuations cannot annihilate the retuned terminal row | `ParabolicRetuned.terminalRow_vecMul_physicalMiddle_ne_zero` |
+| The admissible source `(3,bbcc)` has no genuine terminal word, yet one malformed context is killed exactly by the lawful terminal-row annihilators | `ParabolicRetuned.poison_no_terminal_match`, `ParabolicRetuned.poisonContext_append_zero_iff`, `ParabolicRetuned.poison_fixedTerminalRow_obstruction` |
+| Every instantiation of the original conditional endpoint compiler kills a regular gap-thirty pseudo-terminal on the admissible nonhalting source `(3,bbcc)` | `ParabolicRetuned.poison_originalEndpointCompiler_obstruction` |
 | Exact left-context toggle fusion is immortal | `exactLeftToggleFusion_immortal` |
 | A finite closed-token queue halts iff no reachable token lies on a dependency cycle | `closedSubstitutionHalts_iff_noReachableCycle` |
 | Two private quotient states cannot isolate the Neary rule phase | `twoPrivateState_ruleScale_eq`, `neary_twoPrivateState_phaseCompiler_impossible` |

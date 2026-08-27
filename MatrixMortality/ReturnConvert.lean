@@ -151,9 +151,8 @@ theorem transferFamily_isMortal_iff_positiveBridge
   rw [isMortal_comp_equiv]
   rw [transfer_one]
   simpa [positiveBridge] using
-    unitFamily_mortal_adjoin_outer_iff
+    mortal_adjoin_outer_iff
       (positiveTransfer (p : ℚ) (q : ℚ) c) ![1, 1] ![c, 1]
-      (positiveTransfer_isUnit p q c hp hq hc) (by simp) (by simp)
 
 /-- Determinant of the physical ambient matrix. -/
 theorem ambient_det {K : Type*} [Field K] (p q : K) :

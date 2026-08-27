@@ -124,6 +124,25 @@ theorem mortal_adjoin_outer_iff {α : Type*} (generators : α → Square ι 𝕜
             rankOneIntercalatedProduct_formula column row 1 1 [wordProduct generators word]]
     simp [bridge_zero]
 
+/-- One rank-one separator carrying fixed word boundaries on its two rays. -/
+def boundaryOuter {α : Type*} (generators : α → Square ι 𝕜) (left right : List α)
+    (column row : ι → 𝕜) : Square ι 𝕜 :=
+  Matrix.vecMulVec (wordProduct generators right *ᵥ column)
+    (row ᵥ* wordProduct generators left)
+
+/-- Fixed word boundaries fold into one separator without hypotheses on the matrix family or
+boundary vectors. -/
+theorem mortal_boundaryOuter_iff {α : Type*} (generators : α → Square ι 𝕜)
+    (left right : List α) (column row : ι → 𝕜) :
+    IsMortal (separatedGenerator
+      (boundaryOuter generators left right column row) generators) ↔
+      ∃ word : List α,
+        row ⬝ᵥ wordProduct generators (left ++ word ++ right) *ᵥ column = 0 := by
+  rw [boundaryOuter, mortal_adjoin_outer_iff]
+  apply exists_congr
+  intro word
+  rw [bridgeScalar_fold_boundaries, wordProduct_append, wordProduct_append]
+
 end RankOneChain
 
 end MatrixMortality

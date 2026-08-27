@@ -477,11 +477,22 @@
  Quot.sound]
 'MatrixMortality.chhnNeary_exactRepresentation_six_le_card' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.twoStateProduct_mulVec_phaseVector' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.controllerRoleProduct_eq_sidePcpMatrix' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.controllerSuffixDecode_reverse' depends on axioms: [propext]
+'MatrixMortality.twoStateCoefficient_eq_zero_iff_terminal_match' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.twoStateMortalityFamily_int_mortal_iff_nonempty_zero' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
 'MatrixMortality.twoStateDataMatrix_rank_eq_four_of_ne' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.twoStateDataMatrix_rank_eq_three_of_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.OverlapQueue.mortality_iff_accepts' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.OverlapQueue.pure_deletion_of_accepts_large' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.OverlapLag.mortality_iff_accepts' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.OverlapLag.accepts_iff' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.OverlapLag.mortality_iff_syntax' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.OverlapLag.terminal_image_ne_frame' depends on axioms: [propext, Quot.sound]
 'MatrixMortality.exactLeftToggleFusion_immortal' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.closedSubstitutionHalts_iff_noReachableCycle' depends on axioms: [propext,
  Classical.choice,
@@ -492,6 +503,135 @@
  Quot.sound]
 'MatrixMortality.binarySpell_not_injective_commute' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.neary_exact_internal_final_code_impossible' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ParabolicBlade.root_cube_mul_pairedDataMatrix' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.root_isUnit' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ParabolicBlade.physicalBlade_outer' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ParabolicBlade.physicalBlade_ne_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ParabolicBlade.bAtom_one_rank' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ParabolicBlade.atom_det_eq_zero_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ParabolicBlade.atom_isUnit_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ParabolicBlade.atom_mulVec_column_ne_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ParabolicBlade.row_vecMul_atom_ne_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ParabolicBlade.two_exceptional_atoms_ne_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.exceptionalChain_eq_zero_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ParabolicBlade.residueTwoWall_wordProduct_ne_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.oneDefect_wordProduct_ne_zero_of_same_residue' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.bridge_det_eq_exteriorState_first' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.exteriorState_mul' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ParabolicBlade.exteriorTransition_residueTwoWallGenerator' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.cOneElimination_flag' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ParabolicBlade.exteriorState_safe_word_flag' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ParabolicBlade.exteriorState_safe_word_wall_orientation' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.exteriorTransition_b_one_first_eq_zero_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.defectSkeletonProduct_ne_zero_of_not_bad' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.pureDefect_bridge_det_ne_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.bridgeFractureChain_eq_zero_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.bridgeCokernel_regular_word_ne_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.bridgeCokernel_vecMul_bridge_of_wall' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.completeTileAtom_eq_semanticWordMiddle' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.completeTileProduct_eq_semanticWordMiddle' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.semanticWordMiddle_eq_sidePcpMatrix_conjugate' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.bridge_semanticMiddle_det' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ParabolicBlade.bridge_semanticWordMiddle_det_neg' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.bridge_completeTileProduct_det_neg' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.semanticIncidence_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ParabolicBlade.semanticIncidence_terminal_forces_length' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.no_fixed_semanticIncidence_terminal_zero_set' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.no_fixed_semanticIncidence_neary_terminal_zero_set' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.conditional_semanticBridgeProduct_zero_iff_terminal' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.no_complete_semantic_left_target' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.no_complete_semantic_right_target' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicRetuned.root_cube' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ParabolicRetuned.atom_det_eq_zero_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ParabolicRetuned.tileProduct_eq_semanticMatrix' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicRetuned.bridge_tileProduct_det_eq_zero_iff_terminal_match' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicRetuned.bridge_decoded_det_eq_zero_iff_pairedCoefficient' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicRetuned.contextWord_product' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ParabolicRetuned.physicalContext_factor' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ParabolicRetuned.physicalMiddle_preserves_first' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicRetuned.terminalRow_vecMul_physicalMiddle_ne_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicRetuned.physicalContext_ne_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ParabolicRetuned.physicalContext_outer_of_terminal_match' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicRetuned.physicalContext_mul_eq_zero_iff_terminalRow' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicRetuned.physicalMinor_decoded_det_eq_zero_iff_pairedCoefficient' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicRetuned.poisonContextWord_product_outer' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicRetuned.poisonContext_append_zero_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicRetuned.poison_not_tagHaltsFrom' depends on axioms: [propext]
+'MatrixMortality.ParabolicRetuned.poison_no_terminal_match' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ParabolicRetuned.poison_originalEndpointCompiler_obstruction' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicRetuned.poison_fixedTerminalRow_obstruction' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.isMortal_smulMatrix_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.InternalSandwich.mortal_quotient_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.InternalSandwich.ambient_mortal_of_quotient_subsingleton' depends on axioms: [propext,

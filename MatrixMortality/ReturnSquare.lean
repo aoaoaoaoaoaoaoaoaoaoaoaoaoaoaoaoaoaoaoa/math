@@ -654,9 +654,7 @@ theorem transferFamily_isMortal_iff_positiveBridge (q : ℤ) (c : ℚ)
   rw [isMortal_comp_equiv]
   rw [transfer_one]
   simpa [positiveBridge] using
-    unitFamily_mortal_adjoin_outer_iff
-      (positiveTransfer (q : ℚ) c) ![1, 1] ![c, 1]
-      (positiveTransfer_isUnit q c hq hc) (by simp) (by simp)
+    mortal_adjoin_outer_iff (positiveTransfer (q : ℚ) c) ![1, 1] ![c, 1]
 
 /-- Empty positive bridge is the separator's self-incidence scalar. -/
 theorem positiveBridge_nil (q c : ℚ) :

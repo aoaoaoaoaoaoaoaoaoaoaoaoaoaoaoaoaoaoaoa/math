@@ -10,9 +10,9 @@ namespace MatrixMortality
 
 open scoped Matrix
 
-variable {ι 𝕜 : Type*} [Fintype ι] [Field 𝕜]
+variable {ι κ μ 𝕜 : Type*} [Fintype ι] [Field 𝕜]
 
-theorem mul_outer (matrix : Square ι 𝕜) (column row : ι → 𝕜) :
+theorem mul_outer (matrix : Matrix κ ι 𝕜) (column : ι → 𝕜) (row : μ → 𝕜) :
     matrix * Matrix.vecMulVec column row = Matrix.vecMulVec (matrix *ᵥ column) row := by
   ext i j
   simp only [Matrix.mul_apply, Matrix.mulVec, Matrix.vecMulVec_apply, dotProduct]
@@ -21,7 +21,7 @@ theorem mul_outer (matrix : Square ι 𝕜) (column row : ι → 𝕜) :
   intro x _
   ring
 
-theorem outer_mul (column row : ι → 𝕜) (matrix : Square ι 𝕜) :
+theorem outer_mul (column : κ → 𝕜) (row : ι → 𝕜) (matrix : Matrix ι μ 𝕜) :
     Matrix.vecMulVec column row * matrix = Matrix.vecMulVec column (row ᵥ* matrix) := by
   ext i j
   simp only [Matrix.mul_apply, Matrix.vecMul, Matrix.vecMulVec_apply, dotProduct]

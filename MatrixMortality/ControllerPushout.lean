@@ -191,6 +191,30 @@ def controllerRoleProduct (R : Type*) [CommRing R] {State Symbol : Type*}
     (word : List (ControllerRole State Symbol)) : Matrix (Fin 3) (Fin 3) R :=
   wordProduct (controllerRoleMatrix R upper lower) word
 
+/-- A decoded controller product is the side-normal matrix of its two emitted words. -/
+theorem controllerRoleProduct_eq_sidePcpMatrix
+    (R : Type*) [CommRing R] {State Symbol : Type*}
+    (upper : Symbol → List Bool) (lower : State → Symbol → List Bool)
+    (word : List (ControllerRole State Symbol)) :
+    controllerRoleProduct R upper lower word =
+      sidePcpMatrix R
+        (spell (fun role => upper role.2) word)
+        (spell (fun role => lower role.1 role.2) word) := by
+  induction word with
+  | nil => simp [controllerRoleProduct, spell]
+  | cons role word induction =>
+      simp only [controllerRoleProduct, wordProduct_cons]
+      change wordProduct (controllerRoleMatrix R upper lower) word = _ at induction
+      rw [induction]
+      change sidePcpMatrix R (upper role.2) (lower role.1 role.2) *
+          sidePcpMatrix R
+            (spell (fun current => upper current.2) word)
+            (spell (fun current => lower current.1 current.2) word) =
+        sidePcpMatrix R
+          (upper role.2 ++ spell (fun current => upper current.2) word)
+          (lower role.1 role.2 ++ spell (fun current => lower current.1 current.2) word)
+      exact (sidePcpMatrix_append R _ _ _ _).symm
+
 /-- Every suffix-controlled physical word obeys its total decoder. -/
 theorem controllerProduct_mulVec_controllerVector
     (R : Type*) [CommRing R] {State Symbol : Type*}
@@ -258,6 +282,25 @@ theorem controllerRolesFrom_append {State Symbol : Type*}
       simp only [List.cons_append, controllerRolesFrom, List.cons_append,
         controllerResidualFrom]
       exact congrArg ((state, symbol) :: ·) (induction (δ state symbol))
+
+/-- Suffix decoding a reversed word is prefix control in reverse matrix-product order. -/
+theorem controllerSuffixDecode_reverse {State Symbol : Type*}
+    (δ : ControllerTransition State Symbol) (state : State) (word : List Symbol) :
+    controllerSuffixDecode δ state word.reverse =
+      (controllerResidualFrom δ state word,
+        (controllerRolesFrom δ state word).reverse) := by
+  induction word using List.reverseRecOn generalizing state with
+  | nil => rfl
+  | append_singleton word symbol induction =>
+      rw [List.reverse_append]
+      simp only [List.reverse_singleton, List.singleton_append, controllerSuffixDecode]
+      change
+        (δ (controllerSuffixDecode δ state word.reverse).1 symbol,
+          ((controllerSuffixDecode δ state word.reverse).1, symbol) ::
+            (controllerSuffixDecode δ state word.reverse).2) = _
+      rw [induction state]
+      simp [controllerResidualFrom_append, controllerRolesFrom_append,
+        controllerResidualFrom, controllerRolesFrom]
 
 theorem controllerDecodeFrom_eq_reverse_roles {State Symbol : Type*}
     (δ : ControllerTransition State Symbol) (state : State) (word : List Symbol) :
