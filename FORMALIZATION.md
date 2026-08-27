@@ -1058,6 +1058,14 @@ the swapped construction is reconstructed in
 promotion remains in
 [#6](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
 
+The boundary-correct setter shear detour is closed in Lean. Record
+[`MM-O12`](SALVAGE.md#mm-o12-boundary-calibrated-setter-shear-is-gauge) comprises
+`SetterShear.sideBasis_det`, `SetterShear.delimiter_cube`,
+`SetterShear.delimiter_square_distinguishedColumn`, and `SetterShear.transfer_tail`. Together
+they prove that the side-basis shear changes coordinates but, after physical calibration,
+changes neither the internal rank-one separator nor the transfer tail. It therefore cannot
+repair the missing arbitrary-depth projective-avoidance theorem.
+
 The dimension-two affine audit produced five independently checked records:
 
 | Record | Formalization obligation |
@@ -1386,6 +1394,7 @@ fixed-rank decision problem.
 | `OverlapLagDecision.lean` | unconditional syntactic decision of the zero-framed binary context-2 Lag kernel |
 | `IndexedExecution.lean` | exact finite relational execution and closure views |
 | `TagQueue.lean` | tag steps, indexed execution specializations, and generic history soundness |
+| `PrefixResidual.lean` | canonical oriented prefix residuals, generic tag-history paths, and completion semantics |
 | `NearyEncoding.lean` | four ordinary tiles, synchronization, source equivalence, and composed reductions |
 | `MarkedTerminal.lean` | fresh marker, primitive terminality, and binary recoding |
 | `TernaryEncoding.lean` | injective nonzero ternary representation |
@@ -1406,6 +1415,7 @@ fixed-rank decision problem.
 | `ParabolicRetuned.lean` | retuned open root, sparse ternary code, determinant pencils, and unique gap-two singular atom |
 | `ParabolicRetunedBoundary.lean` | complete-gap semantics, literal physical contexts, fixed terminal minor and row, and complete-gap annihilator obstruction |
 | `ParabolicRetunedObstruction.lean` | explicit malformed terminal no-instance defeating the retuned fixed-row and original endpoint closures |
+| `SetterShear.lean` | boundary-calibrated side-basis shear, internal separator invariance, and transfer-tail gauge obstruction |
 | `PairedMortality.lean` | common-column mortality converse and exact integer `4 × 4` family |
 | `PhaseFracture.lean` | phase normalization and dimension-free projective-identification contradiction |
 | `PhaseRigidity.lean` | checked local role algebra, discrepancy commutators, and invariant-pencil rigidity |

@@ -1,4 +1,4 @@
-import Mathlib.Data.Matrix.Kronecker
+import Mathlib.LinearAlgebra.Matrix.Kronecker
 import MatrixMortality.TerminalTile
 
 namespace MatrixMortality.SchottkyPunctuation
@@ -24,9 +24,9 @@ def equalityRow : Fin 2 × Fin 2 → R := fun index =>
 theorem equalityCoefficient (A B : Matrix (Fin 2) (Fin 2) R) :
     equalityRow ⬝ᵥ leftRight A B *ᵥ equalityColumn =
       A 1 0 * B 0 0 - A 0 0 * B 1 0 := by
-  simp [equalityRow, equalityColumn, leftRight, Matrix.dotProduct, Matrix.mulVec,
-    Matrix.kronecker_apply, Matrix.adjugate_fin_two, Matrix.transpose_apply,
-    Matrix.vecHead, Matrix.vecTail, Fintype.sum_prod_type, Fin.sum_univ_two]
+  simp [equalityRow, equalityColumn, leftRight, dotProduct, Matrix.mulVec,
+    Matrix.adjugate_fin_two, Matrix.transpose_apply, Fintype.sum_prod_type,
+    Fin.sum_univ_two]
   ring
 
 /-- Left-right actions compose covariantly in both group coordinates. -/

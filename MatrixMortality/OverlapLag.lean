@@ -151,9 +151,9 @@ theorem accepts_iff_queueAccepts (n : Nat) (U V W : List Bool) :
         (List.replicate n false) := by
   constructor
   · rintro ⟨word, trace⟩
-    exact ⟨word, by simpa using toQueueTrace trace⟩
+    exact ⟨word, by simpa [bitPhase] using toQueueTrace trace⟩
   · rintro ⟨word, trace⟩
-    exact ⟨word, by simpa using ofQueueTrace trace⟩
+    exact ⟨word, by simpa [phaseBit] using ofQueueTrace trace⟩
 
 theorem singletonIsolation_iff_emptyIsAccepting (n : Nat) (U V W : List Bool) :
     SingletonIsolation n U V W ↔
@@ -181,11 +181,11 @@ theorem avoidsLongFrame_iff_avoidsFramedReturn (n : Nat) (U V W : List Bool) :
   · intro avoids word trace
     apply avoids word
     rw [← frame_eq]
-    simpa using ofQueueTrace trace
+    simpa [phaseBit] using ofQueueTrace trace
   · intro avoids word trace
     apply avoids word
     rw [frame_eq]
-    simpa using toQueueTrace trace
+    simpa [bitPhase] using toQueueTrace trace
 
 /-- The scanner productions and cancellation words obey the exact local frame law. -/
 theorem cocycle (n : Nat) (U V W : List Bool) :
@@ -193,8 +193,7 @@ theorem cocycle (n : Nat) (U V W : List Bool) :
       (produce n U V W) (cancel n U V W) := by
   intro phase head
   cases phase <;> cases head <;>
-    simp [OverlapQueue.frame, transition, bitPhase, produce, cancel, List.replicate_succ,
-      List.append_assoc]
+    simp [OverlapQueue.frame, transition, bitPhase, produce, cancel, List.replicate_succ]
 
 /-- The literal binary two-Lag kernel compiles to three integer 4 by 4 matrices.
 
@@ -226,7 +225,7 @@ theorem terminal_image_ne_frame {α : Type*} (map : α → List Bool)
     map terminal ≠ false :: spell map (stem ++ [terminal]) := by
   intro equality
   have lengths := congrArg List.length equality
-  simp [spell_append, spell] at lengths
+  simp [spell] at lengths
   omega
 
 end MatrixMortality.OverlapLag

@@ -75,15 +75,15 @@ theorem guardedTranslation_iff_nestedZeroMacro
     · intro coordinate tested
       have debit_eq := debited coordinate
       have middle_eq := zero coordinate tested
-      simp [IntegerStep, guardDebit, tested, middle_eq] at debit_eq
+      simp [guardDebit, tested, middle_eq] at debit_eq
       omega
     · intro coordinate
       have debit_eq := debited coordinate
       have credit_eq := credited coordinate
       by_cases tested : coordinate.val < cut
-      · simp [IntegerStep, guardDebit, guardCredit, tested] at debit_eq credit_eq
+      · simp [guardDebit, guardCredit, tested] at debit_eq credit_eq
         omega
-      · simp [IntegerStep, guardDebit, guardCredit, tested] at debit_eq credit_eq
+      · simp [guardDebit, guardCredit, tested] at debit_eq credit_eq
         omega
 
 end PriorityAffineResidual

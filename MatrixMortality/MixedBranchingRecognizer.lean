@@ -78,12 +78,12 @@ theorem recognizerProduct_mulVec_delta (word : List PairedControl) :
           ext coordinate
           fin_cases coordinate <;>
             simp [recognizerGenerator, recognizerGuard, recognizerCarry, Matrix.mulVec,
-              Matrix.dotProduct, Fin.sum_univ_succ, toggleCentre]
+              dotProduct, Fin.sum_univ_succ, toggleCentre]
           ring
       | data letter =>
           cases letter <;> ext coordinate <;> fin_cases coordinate
           all_goals simp [recognizerGenerator, recognizerData, recognizerGuard,
-            recognizerCarry, Matrix.mulVec, Matrix.dotProduct, Fin.sum_univ_succ,
+            recognizerCarry, Matrix.mulVec, dotProduct, Fin.sum_univ_succ,
             carryB, carryC, acceptingCarry]
           all_goals ring
 
@@ -92,7 +92,7 @@ theorem recognizerColumn_eq_toggle_delta :
   ext coordinate
   fin_cases coordinate <;>
     norm_num [recognizerColumn, recognizerGenerator, recognizerDelta, Matrix.mulVec,
-      Matrix.dotProduct, Fin.sum_univ_succ, toggleCentre]
+      dotProduct, Fin.sum_univ_succ, toggleCentre]
 
 /-- Scalar coefficient of the explicit integral representation. -/
 def recognizerCoefficient (word : List PairedControl) : ℤ :=
@@ -115,26 +115,25 @@ theorem recognizerCoefficient_eq_guard (word : List PairedControl) :
         simp [wordProduct]
       _ = _ := recognizerProduct_mulVec_delta (word ++ [.toggle])
   rw [recognizerCoefficient, linearCoefficient, state]
-  simp [recognizerRow, Matrix.dotProduct, Fin.sum_univ_succ]
+  simp [recognizerRow, dotProduct, Fin.sum_univ_succ]
 
 @[simp] theorem recognizerData_det (letter : TagLetter) :
     (recognizerData letter).det = 0 := by
   cases letter <;>
-    norm_num [recognizerData, Matrix.det_fin_three, Matrix.vecHead, Matrix.vecTail,
-      carryB, carryC]
+    norm_num [recognizerData, Matrix.det_fin_three, Matrix.cons_val_two,
+      Matrix.vecHead, Matrix.vecTail, carryB, carryC]
 
 @[simp] theorem recognizerToggle_det :
     (recognizerGenerator .toggle).det = -1 := by
-  norm_num [recognizerGenerator, Matrix.det_fin_three, Matrix.vecHead, Matrix.vecTail,
-    toggleCentre]
+  norm_num [recognizerGenerator, Matrix.det_fin_three, Matrix.cons_val_two,
+    Matrix.vecHead, Matrix.vecTail, toggleCentre]
 
 theorem recognizerToggle_involutive :
     recognizerGenerator .toggle * recognizerGenerator .toggle = 1 := by
   ext row column
   fin_cases row <;> fin_cases column <;>
     norm_num [recognizerGenerator, Matrix.mul_apply, Matrix.one_apply, Fin.sum_univ_succ,
-      toggleCentre] <;>
-    split <;> simp_all
+      toggleCentre]
 
 /-! ## Centred macro dynamics -/
 
@@ -179,12 +178,12 @@ private theorem ToggleNormal.exists_macro_expansion {word : List PairedControl}
       obtain ⟨macros, trailing, rfl⟩ := induction
       exact ⟨plainMacro letter :: macros, trailing, by
         cases letter <;>
-          simp [expandMacros, plainMacro, CarryMacro.controls, List.append_assoc]⟩
+          simp [expandMacros, plainMacro, CarryMacro.controls]⟩
   | toggleData letter _ induction =>
       obtain ⟨macros, trailing, rfl⟩ := induction
       exact ⟨flippedMacro letter :: macros, trailing, by
         cases letter <;>
-          simp [expandMacros, flippedMacro, CarryMacro.controls, List.append_assoc]⟩
+          simp [expandMacros, flippedMacro, CarryMacro.controls]⟩
 
 private def centredCarry (word : List PairedControl) : ℤ :=
   2 * recognizerCarry word - toggleCentre
@@ -688,8 +687,7 @@ private theorem expand_terminalMacros (bits : List Bool) :
       expandMacros (prefixMacros ++ returnMacros bits) = _
   rw [expandMacros_append, expand_returnMacros]
   simp [prefixMacros, expandMacros, CarryMacro.controls, terminalHistory, prefixHistory,
-    historyControl_append, historyControl, strokeControl, strokeCBC, strokeBCB, strokeBBB,
-    stroke₃, List.append_assoc]
+    historyControl, strokeControl, strokeCBC, strokeBCB, strokeBBB, stroke₃]
 
 private theorem terminalControl_eq_macro_expansion (bits : List Bool) :
     terminalControl bits =
@@ -780,8 +778,7 @@ private theorem guard_boundary_zero_of_normal {word : List PairedControl}
   | nil =>
       cases trailing <;>
         simp [expandMacros, terminalToggle, recognizerGuard,
-          terminalControl_eq_macro_expansion, toggle_terminalControl_eq_macro_expansion,
-          CarryMacro.controls]
+          terminalControl_eq_macro_expansion, CarryMacro.controls]
   | cons token tokens =>
       cases token with
       | b =>
@@ -953,12 +950,12 @@ theorem recognizerData_mulVec_eq_zero_iff (letter : TagLetter) (vector : Fin 3 �
     have second := congrFun killed (1 : Fin 3)
     have third := congrFun killed (2 : Fin 3)
     cases letter <;>
-      simp [recognizerData, Matrix.mulVec, Matrix.dotProduct, Fin.sum_univ_succ,
+      simp [recognizerData, Matrix.mulVec, dotProduct, Fin.sum_univ_succ,
         carryB, carryC] at second third <;>
       omega
   · rintro ⟨second, third⟩
     cases letter <;> ext coordinate <;> fin_cases coordinate <;>
-      simp [recognizerData, Matrix.mulVec, Matrix.dotProduct, Fin.sum_univ_succ,
+      simp [recognizerData, Matrix.mulVec, dotProduct, Fin.sum_univ_succ,
         carryB, carryC, second, third]
 
 /-- The common data kernel is nontrivial. -/

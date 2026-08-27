@@ -39,7 +39,7 @@ def sparseCode (word : List Bool) : Nat :=
 theorem sparseCode_append (left right : List Bool) :
     sparseCode (left ++ right) =
       3 ^ right.length * sparseCode left + sparseCode right := by
-  simp [sparseCode, List.reverse_append, Nat.ofDigits_append, add_comm, mul_comm]
+  simp [sparseCode, List.reverse_append, Nat.ofDigits_append, add_comm]
 
 @[simp] theorem sparseCode_singleton (bit : Bool) : sparseCode [bit] = sparseDigit bit := by
   cases bit <;> decide
@@ -72,7 +72,7 @@ theorem sparseCode_injective_of_length_eq {left right : List Bool}
     left = right := by
   induction left using List.reverseRecOn generalizing right with
   | nil =>
-      have right_empty : right = [] := List.length_eq_zero.mp (by simpa using length_eq.symm)
+      have right_empty : right = [] := List.length_eq_zero_iff.mp (by simpa using length_eq.symm)
       exact right_empty.symm
   | append_singleton left bit induction =>
       induction right using List.reverseRecOn with
@@ -193,12 +193,6 @@ private theorem drift_zero : ParabolicBlade.drift 0 = 1 := by
   ext i j
   fin_cases i <;> fin_cases j <;>
     norm_num [ParabolicBlade.drift, Matrix.one_apply]
-  all_goals
-    split
-    · rename_i equality
-      have valueEquality := congrArg Fin.val equality
-      norm_num at valueEquality
-    · norm_num
 
 theorem root_pow_three_mul (j : Nat) : root ^ (3 * j) = ParabolicBlade.drift j := by
   induction j with
@@ -280,7 +274,8 @@ theorem atom_b_det_three_mul (β : Nat) (body : List TagLetter) (j : Nat) :
     (atom β body .b (3 * j)).det = 27 * (3 : ℚ) ^ β * (8 * j + 1) := by
   rw [atom, dataFlank, bFlank, root_pow_three_mul, Matrix.det_fin_three]
   norm_num [ParabolicBlade.flank, ParabolicBlade.drift, ParabolicBlade.injection,
-    Matrix.mul_apply, Fin.sum_univ_succ]
+    Matrix.mul_apply, Fin.sum_univ_succ, Matrix.cons_val_two,
+    Matrix.vecHead, Matrix.vecTail]
   ring
 
 /-- Determinant pencil of residue-one `b` atoms. -/
@@ -288,7 +283,8 @@ theorem atom_b_det_three_mul_add_one (β : Nat) (body : List TagLetter) (j : Nat
     (atom β body .b (3 * j + 1)).det = 9 * (3 : ℚ) ^ β * (24 * j - 5) := by
   rw [atom, dataFlank, bFlank, root_pow_three_mul_add_one, Matrix.det_fin_three]
   norm_num [ParabolicBlade.flank, ParabolicBlade.drift, root,
-    ParabolicBlade.injection, Matrix.mul_apply, Fin.sum_univ_succ]
+    ParabolicBlade.injection, Matrix.mul_apply, Fin.sum_univ_succ,
+    Matrix.cons_val_two, Matrix.vecHead, Matrix.vecTail]
   ring
 
 /-- Determinant pencil of residue-two `b` atoms. -/
@@ -296,7 +292,8 @@ theorem atom_b_det_three_mul_add_two (β : Nat) (body : List TagLetter) (j : Nat
     (atom β body .b (3 * j + 2)).det = 216 * j * (3 : ℚ) ^ β := by
   rw [atom, dataFlank, bFlank, root_pow_three_mul_add_two, Matrix.det_fin_three]
   norm_num [ParabolicBlade.flank, ParabolicBlade.drift, root,
-    ParabolicBlade.injection, pow_succ, Matrix.mul_apply, Fin.sum_univ_succ]
+    ParabolicBlade.injection, pow_succ, Matrix.mul_apply, Fin.sum_univ_succ,
+    Matrix.cons_val_two, Matrix.vecHead, Matrix.vecTail]
   ring
 
 /-- Determinant pencil of residue-zero `c` atoms. -/
@@ -305,7 +302,8 @@ theorem atom_c_det_three_mul (β : Nat) (body : List TagLetter) (j : Nat) :
       3 * ((lowerCScale β body - 3 : ℚ) * j + 3) := by
   rw [atom, dataFlank, cFlank, root_pow_three_mul, Matrix.det_fin_three]
   norm_num [ParabolicBlade.flank, ParabolicBlade.drift, ParabolicBlade.injection,
-    Matrix.mul_apply, Fin.sum_univ_succ]
+    Matrix.mul_apply, Fin.sum_univ_succ, Matrix.cons_val_two,
+    Matrix.vecHead, Matrix.vecTail]
   ring
 
 /-- Determinant pencil of residue-one `c` atoms. -/
@@ -315,7 +313,8 @@ theorem atom_c_det_three_mul_add_one (β : Nat) (body : List TagLetter) (j : Nat
         lowerCScale β body - 9 * j + 6 := by
   rw [atom, dataFlank, cFlank, root_pow_three_mul_add_one, Matrix.det_fin_three]
   norm_num [ParabolicBlade.flank, ParabolicBlade.drift, root,
-    ParabolicBlade.injection, Matrix.mul_apply, Fin.sum_univ_succ]
+    ParabolicBlade.injection, Matrix.mul_apply, Fin.sum_univ_succ,
+    Matrix.cons_val_two, Matrix.vecHead, Matrix.vecTail]
   ring
 
 /-- Determinant pencil of residue-two `c` atoms. -/
@@ -326,7 +325,8 @@ theorem atom_c_det_three_mul_add_two (β : Nat) (body : List TagLetter) (j : Nat
           lowerCScale β body - 24 * j + 8) := by
   rw [atom, dataFlank, cFlank, root_pow_three_mul_add_two, Matrix.det_fin_three]
   norm_num [ParabolicBlade.flank, ParabolicBlade.drift, root,
-    ParabolicBlade.injection, pow_succ, Matrix.mul_apply, Fin.sum_univ_succ]
+    ParabolicBlade.injection, pow_succ, Matrix.mul_apply, Fin.sum_univ_succ,
+    Matrix.cons_val_two, Matrix.vecHead, Matrix.vecTail]
   ring
 
 private theorem lowerCScale_ge_twenty_seven (β : Nat) (body : List TagLetter) :
@@ -385,7 +385,7 @@ private theorem lowerC_four_suffix
           List.singleton_append]
         have extended := congrArg
           (fun word : List Bool => word ++ [true, true, false]) stem_shape
-        simpa only [List.cons_append, List.append_assoc] using extended
+        simpa only [List.cons_append, List.append_assoc, List.nil_append] using extended
 
 private theorem lowerC_eighty_one_data
     (β : Nat) (body : List TagLetter) (β_pos : 0 < β) (body_nonempty : body ≠ []) :

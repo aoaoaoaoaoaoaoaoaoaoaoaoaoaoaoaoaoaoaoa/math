@@ -49,10 +49,10 @@ private theorem compatible_firstColumn
       crossOut *ᵥ ![1, 0] = control *ᵥ ![1, 0] := by
   constructor
   · ext i
-    simpa [Matrix.mulVec, Matrix.dotProduct, Fin.sum_univ_succ] using
+    simpa [oneLoopEdge, Matrix.mulVec, dotProduct, Fin.sum_univ_succ] using
       compatible false i
   · ext i
-    simpa [Matrix.mulVec, Matrix.dotProduct, Fin.sum_univ_succ] using
+    simpa [oneLoopEdge, Matrix.mulVec, dotProduct, Fin.sum_univ_succ] using
       compatible true i
 
 private theorem intrinsic_pulledColumn
@@ -129,7 +129,7 @@ private theorem intrinsic_beta_eq_one
     rw [← compatible_columns.1]
     ext i
     fin_cases i <;>
-      simp [first, pivot, Matrix.mulVec, Matrix.dotProduct,
+      simp [pivot, Matrix.mulVec, dotProduct,
         Matrix.vecMulVec_apply, Fin.sum_univ_succ] <;> ring
   have first_ne : first ≠ 0 := by
     intro first_zero
@@ -179,11 +179,11 @@ private theorem intrinsic_beta_eq_one
           ReverseEdge.firstVector control (crossOut * crossIn)
             (intrinsicColumn crossOut column))) := by
       rw [ReverseEdge.beta, intrinsicRow, ← Matrix.dotProduct_mulVec,
-        Matrix.dotProduct_smul]
+        dotProduct_smul]
       simp [smul_eq_mul]
     _ = row ⬝ᵥ first := by rw [crossIn_firstVector_scaled]
     _ = pivot * 1 := by
-      simp [first, pivot, Matrix.dotProduct, Fin.sum_univ_succ]
+      simp [first, pivot, dotProduct, Fin.sum_univ_succ]
 
 /-- Normalizing a compatible one-loop edge square produces the existing raw reverse edge
 exactly.  In particular, its second exceptional scalar is forced to one. -/

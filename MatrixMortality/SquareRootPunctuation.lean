@@ -56,10 +56,10 @@ theorem coefficient_append_square
   have product_eq :
       wordProduct family (left ++ none :: none :: right) =
         leftProduct * Matrix.vecMulVec column row * rightProduct := by
-    simp only [wordProduct_append, wordProduct_cons, family, separatedGenerator,
-      wordProduct_nil, Matrix.mul_one]
+    simp only [wordProduct_append, wordProduct_cons, family, leftProduct,
+      separatedGenerator]
     rw [← Matrix.mul_assoc squareRoot squareRoot rightProduct, square]
-    simp [leftProduct, rightProduct, Matrix.mul_assoc]
+    simp [rightProduct, Matrix.mul_assoc]
   have core_eq :
       leftProduct * Matrix.vecMulVec column row * rightProduct =
         Matrix.vecMulVec (leftProduct *ᵥ column) (row ᵥ* rightProduct) := by
@@ -68,7 +68,7 @@ theorem coefficient_append_square
   simp only [coefficient, bridgeScalar, Matrix.dotProduct_mulVec,
     leftProduct, rightProduct, family]
   rw [vecMul_outer]
-  simp only [Matrix.smul_dotProduct, Matrix.dotProduct_mulVec, smul_eq_mul]
+  simp only [smul_dotProduct, Matrix.dotProduct_mulVec, smul_eq_mul]
 
 /-- Every scalar-zero physical word contains a punctuation-square-free scalar-zero residual.
 The residual may be empty; this is necessary when the two boundary vectors are orthogonal. -/
@@ -184,7 +184,7 @@ omit [DecidableEq ι] in
 private theorem outer_mulVec (column row active : ι → K) :
     Matrix.vecMulVec column row *ᵥ active = (row ⬝ᵥ active) • column := by
   ext i
-  simp only [Matrix.mulVec, Matrix.vecMulVec_apply, Matrix.dotProduct,
+  simp only [Matrix.mulVec, Matrix.vecMulVec_apply, dotProduct,
     Pi.smul_apply, smul_eq_mul]
   simp only [mul_assoc]
   rw [← Finset.mul_sum]
@@ -284,7 +284,7 @@ theorem squareRoot_coefficient_cons_zero_iff
         scalar * coefficient squareRoot generators column row word := by
     simp only [coefficient, bridgeScalar, wordProduct_cons, separatedGenerator]
     rw [← Matrix.mulVec_mulVec, Matrix.dotProduct_mulVec, row_eigen]
-    simp [Matrix.smul_dotProduct, smul_eq_mul]
+    simp [smul_dotProduct, smul_eq_mul]
   rw [scaled, mul_eq_zero]
   simp [scalar_ne]
 
@@ -305,7 +305,7 @@ theorem squareRoot_coefficient_append_zero_iff
     simp only [coefficient, bridgeScalar, wordProduct_append, wordProduct_cons,
       wordProduct_nil, Matrix.mul_one, separatedGenerator]
     rw [← Matrix.mulVec_mulVec, column_eigen, Matrix.mulVec_smul]
-    simp [Matrix.dotProduct_smul, smul_eq_mul, mul_comm]
+    simp [dotProduct_smul, smul_eq_mul]
   rw [scaled, mul_eq_zero]
   simp [scalar_ne]
 
@@ -381,14 +381,14 @@ theorem nearySquareRoot_factor (β : Nat) :
   ext i j
   fin_cases i <;> fin_cases j <;>
     simp [nearySquareRoot, nearySquareRootInput, nearySquareRootOutput,
-      Matrix.vecHead, Matrix.vecTail, Matrix.mul_apply, Fin.sum_univ_succ]
+      Matrix.mul_apply, Fin.sum_univ_succ]
 
 theorem nearySquareRootLeftInverse_mul_input (β : Nat) :
     nearySquareRootLeftInverse β * nearySquareRootInput β = 1 := by
   ext i j
   fin_cases i <;> fin_cases j <;>
     simp [nearySquareRootLeftInverse, nearySquareRootInput, Matrix.mul_apply,
-      Matrix.one_apply, Fin.sum_univ_succ, nearySideMarkerValue_ne_zero]
+      Fin.sum_univ_succ, nearySideMarkerValue_ne_zero]
   all_goals ring
 
 theorem nearySquareRootOutput_mul_rightInverse :
@@ -455,7 +455,7 @@ theorem no_ruleB_squareRoot_sameZero_on_boundary_pair
     False := by
   have pairing_ne : nearySideRow ⬝ᵥ normalizedNearyColumn β ≠ 0 := by
     rw [normalizedNearyColumn_eq]
-    norm_num [nearySideRow, Matrix.dotProduct, Fin.sum_univ_succ]
+    norm_num [nearySideRow, dotProduct, Fin.sum_univ_succ]
   have physical_zero := (sameZero word word_squareFree).mpr native_zero
   have prefixed_zero :=
     (squareRoot_coefficient_cons_zero_iff
@@ -502,7 +502,7 @@ theorem finiteInsertedSection_factor
           finiteSuffixStates generators column suffixes) p s := by
       rw [Matrix.mul_assoc]
       simp [finitePrefixStates, finiteSuffixStates, Matrix.mul_apply,
-        Matrix.mulVec, Matrix.dotProduct]
+        Matrix.mulVec, dotProduct]
 
 /-- The three native reachable rows used by the rigidity certificate. -/
 def rigidityReachable (β : Nat) : Square (Fin 3) ℚ :=
@@ -525,8 +525,8 @@ theorem rigidityReachable_native (β : Nat) (body : List TagLetter) :
   ext i j
   fin_cases i <;> fin_cases j <;>
     simp [finitePrefixStates, rigidityPrefixes, rigidityReachable, nearySideRole,
-      nearySideRow, sidePcpMatrix, sideTileProduct, nearyUpper, nearyLower,
-      wordProduct, Matrix.vecHead, Matrix.vecTail, Matrix.vecMul, Matrix.dotProduct,
+      nearySideRow, sidePcpMatrix, nearyUpper, nearyLower,
+      wordProduct, Matrix.vecMul, dotProduct,
       Fin.sum_univ_succ, ternaryDigit, nearySideUpperB]
 
 theorem rigidityObservable_native (β : Nat) (body : List TagLetter) :
@@ -538,29 +538,28 @@ theorem rigidityObservable_native (β : Nat) (body : List TagLetter) :
     simp [finiteSuffixStates, rigiditySuffixes, rigidityObservable, nearySideRole,
       nearySideNativeColumn, sidePcpMatrix, wordProduct, nearyUpper, nearyLower,
       nearySideMarkerValue, nearySideMarkerScale, nearySideUpperB,
-      nearySideUpperBScale, Matrix.vecHead, Matrix.vecTail, Matrix.mulVec,
-      Matrix.dotProduct, Matrix.one_apply, Fin.sum_univ_succ, ternaryDigit]
+      Matrix.mulVec,
+      dotProduct, Matrix.one_apply, Fin.sum_univ_succ, ternaryDigit]
   all_goals norm_num [tagCode, ternaryCode, ternaryDigit, Nat.ofDigits]
   all_goals ring
 
 theorem rigidityReachable_det (β : Nat) :
     (rigidityReachable β).det = nearySideUpperB β - 2 := by
   rw [Matrix.det_fin_three]
-  simp [rigidityReachable, Matrix.vecHead, Matrix.vecTail]
+  simp [rigidityReachable]
 
 theorem rigidityObservable_det (β : Nat) :
     (rigidityObservable β).det =
       nearySideMarkerScale β ^ 2 * (nearySideMarkerScale β - 1) := by
   rw [Matrix.det_fin_three]
-  simp [rigidityObservable, Matrix.vecHead, Matrix.vecTail]
+  simp [rigidityObservable]
   rw [nearySideMarkerValue_eq, nearySideMarkerScale_eq]
   ring
 
 theorem nearySideRuleB_det (β : Nat) (body : List TagLetter) :
     (nearySideRole β body (.rule .b)).det = 81 * nearySideMarkerScale β := by
   rw [nearySideRole_eq_native, Matrix.det_fin_three]
-  simp [nearySideNativeRole, nearySideUpperBScale_relation,
-    Matrix.vecHead, Matrix.vecTail]
+  simp [nearySideNativeRole, nearySideUpperBScale_relation]
   ring
 
 theorem rigidityReachable_det_ne_zero (β : Nat) (three_le : 3 ≤ β) :
@@ -647,8 +646,8 @@ theorem linearCoefficient_smulMatrix
     (word : List α) :
     linearCoefficient (fun letter => scales letter • generators letter) row column word =
       (word.map scales).prod * linearCoefficient generators row column word := by
-  rw [linearCoefficient, wordProduct_smulMatrix, Matrix.smul_mulVec_assoc,
-    Matrix.dotProduct_smul]
+  rw [linearCoefficient, wordProduct_smulMatrix, Matrix.smul_mulVec,
+    dotProduct_smul]
   rfl
 
 /-- Multiplicative nonzero letter weights do not rescue exact coefficient preservation on the

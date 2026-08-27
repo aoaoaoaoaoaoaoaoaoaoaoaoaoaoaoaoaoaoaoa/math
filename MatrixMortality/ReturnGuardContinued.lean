@@ -106,7 +106,6 @@ theorem PrimitiveEndpointReduction.divisor_dvd_content_iff
     have content_dvd_driftSource : content ∣ driftNumerator * source.1 := by
       refine ⟨target.1 - (centerNumerator - scale) * target.2, ?_⟩
       have numerator := reduction.step.numerator
-      simp only [Prod.fst, Prod.snd] at numerator
       calc
         driftNumerator * source.1 =
             content * target.1 -
@@ -139,7 +138,9 @@ theorem PrimitiveEndpointReduction.divisor_dvd_content_iff
         ((divisor_dvd_boundary.mul_left scale).mul_right source.2)
     have divisor_dvd_rawNumerator : divisor ∣ content * target.1 := by
       have numerator := reduction.step.numerator
-      simp only [Prod.fst, Prod.snd] at numerator
+      change content * target.1 =
+        driftNumerator * source.1 +
+          (centerNumerator - scale) * (content * target.2) at numerator
       rw [numerator]
       exact dvd_add (divisor_dvd_source.mul_left driftNumerator)
         (divisor_dvd_prequotient.mul_left (centerNumerator - scale))
@@ -315,9 +316,10 @@ theorem PrimitiveEndpointReduction.recurrentBoundaryDivisor_persists
             (nextContent * target.2) -
           (centerNumerator + driftNumerator - scale) * middle.2 := by
     rw [second.step.denominator]
-    convert dvd_sub divisor_dvd_resetDefect
-      (divisor_dvd_nextBoundary.mul_right middle.2) using 1
-    all_goals ring
+    obtain ⟨resetQuotient, resetEq⟩ := divisor_dvd_resetDefect
+    obtain ⟨boundaryQuotient, boundaryEq⟩ := divisor_dvd_nextBoundary
+    refine ⟨resetQuotient - boundaryQuotient * middle.2, ?_⟩
+    linear_combination resetEq - middle.2 * boundaryEq
   have divisor_coprime_raw :
       IsCoprime divisor
         ((prime : ℤ) ^ (depth * nextWait) *
@@ -513,11 +515,9 @@ theorem PrimitiveEndpointReduction.twoStep_prequotient_transport
         ![source.2, endpointPrequotient content middle] := by
   ext i
   fin_cases i
-  · simp [endpointPrequotient, Matrix.mulVec, Matrix.dotProduct,
-      Fin.sum_univ_succ, smul_eq_mul]
+  · simp [endpointPrequotient, Matrix.mulVec, dotProduct, Fin.sum_univ_succ]
     ring
-  · simp [Matrix.mulVec, Matrix.dotProduct, Fin.sum_univ_succ,
-      smul_eq_mul]
+  · simp [Matrix.mulVec, dotProduct, Fin.sum_univ_succ]
     have eliminated := first.twoStep_elimination second
     rw [first.source_eq_power_mul_prequotient] at eliminated
     dsimp [endpointPrequotient] at eliminated ⊢
@@ -810,7 +810,6 @@ theorem PrimitiveEndpointReduction.jacobiTail_transition
       (middle.1 : ℚ) / middle.2 =
           (content * middle.1) / (content * middle.2) := by
         field_simp [content_ne, middleDenominator_ne']
-        ring
       _ =
           (driftNumerator * source.1 +
             (centerNumerator - scale) * (content * middle.2)) /

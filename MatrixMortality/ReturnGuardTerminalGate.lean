@@ -288,8 +288,9 @@ theorem primitiveCyclotomicPart_dvd_common_of_no_reset
   let factors := primitiveCyclotomicPrimes prime wait
   have pairwise :
       (↑factors : Set Nat).Pairwise
-        (IsCoprime on fun factor : Nat =>
-          (factor : ℤ) ^ value.factorization factor) := by
+        (fun left right => IsCoprime
+          ((left : ℤ) ^ value.factorization left)
+          ((right : ℤ) ^ value.factorization right)) := by
     intro left left_mem right right_mem distinct
     have left_prime : left.Prime :=
       Nat.prime_of_mem_primeFactors (mem_primitiveCyclotomicPrimes.mp left_mem).1
@@ -600,7 +601,7 @@ theorem terminalDefect_zero_or_exists_primitive_reset_of_part_height_lt
   · exact Or.inl terminal
   right
   by_contra no_reset
-  push_neg at no_reset
+  push Not at no_reset
   exact (not_lt_of_ge <|
     primitiveCyclotomicPart_le_height_of_no_reset prime_gt_one step
       numerator_reduced denominator_reduced terminal no_reset) large

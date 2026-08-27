@@ -76,7 +76,7 @@ private theorem cycle_macro_eigenlines :
     ext i <;>
     fin_cases i <;>
     norm_num [endpointProduct, endpointTransfer, pairVector, Matrix.mul_apply,
-      Matrix.mulVec, Matrix.dotProduct, Fin.sum_univ_succ, smul_eq_mul]
+      Matrix.mulVec, dotProduct, Fin.sum_univ_succ, smul_eq_mul]
 
 private theorem cycle_repeat_follows_and_returns (periods : Nat) :
     FollowsResidualSchedule cycleParameters

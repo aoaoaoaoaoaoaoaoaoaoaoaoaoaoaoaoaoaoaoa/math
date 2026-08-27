@@ -1,6 +1,6 @@
 import Mathlib.GroupTheory.FreeGroup.Basic
 import Mathlib.Data.Fintype.Card
-import Mathlib.LinearAlgebra.FiniteDimensional
+import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
 import Mathlib.LinearAlgebra.Matrix.ToLinearEquiv
 import Mathlib.Tactic.Group
 import Mathlib.Tactic.FinCases
@@ -61,27 +61,23 @@ theorem triangle_relations :
 theorem triangleEvaluate_surjective : Function.Surjective triangleEvaluate := by
   intro element
   induction element using FreeGroup.induction_on with
-  | C1 => exact ⟨[], triangleEvaluate_nil⟩
-  | Cp bit =>
+  | of bit =>
       cases bit
       · refine ⟨[.x], ?_⟩
-        change triangleEvaluate [.x] = FreeGroup.of false
         simp [triangleGenerator]
       · refine ⟨[.y], ?_⟩
-        change triangleEvaluate [.y] = FreeGroup.of true
         simp [triangleGenerator]
-  | Ci bit _ =>
+  | inv_of bit _ =>
       cases bit
       · refine ⟨[.y, .z], ?_⟩
-        change triangleEvaluate [.y, .z] = (FreeGroup.of false)⁻¹
-        simp [triangleGenerator, mul_assoc]
+        simp [triangleGenerator]
       · refine ⟨[.z, .x], ?_⟩
-        change triangleEvaluate [.z, .x] = (FreeGroup.of true)⁻¹
         simp [triangleGenerator, mul_assoc]
-  | Cm left right left_spelling right_spelling =>
+  | mul left right left_spelling right_spelling =>
       rcases left_spelling with ⟨left_word, left_eq⟩
       rcases right_spelling with ⟨right_word, right_eq⟩
       exact ⟨left_word ++ right_word, by simp [left_eq, right_eq]⟩
+  | C1 => exact ⟨[], triangleEvaluate_nil⟩
 
 /-! ## Exact affine exponent slices -/
 
@@ -341,7 +337,7 @@ theorem singularLift_kernel_eq_quotientKernel
     (compatible : quotient.comp lift = quotientAction.comp quotient)
     (quotientAction_injective : Function.Injective quotientAction)
     (lift_singular : ¬Function.Injective lift)
-    (kernel_one : FiniteDimensional.finrank K (LinearMap.ker quotient) = 1) :
+    (kernel_one : Module.finrank K (LinearMap.ker quotient) = 1) :
     LinearMap.ker lift = LinearMap.ker quotient := by
   have kernel_le : LinearMap.ker lift ≤ LinearMap.ker quotient := by
     intro point point_mem
@@ -356,7 +352,7 @@ theorem singularLift_kernel_eq_quotientKernel
   have lift_kernel_ne_bot : LinearMap.ker lift ≠ ⊥ := by
     intro kernel_bot
     exact lift_singular (LinearMap.ker_eq_bot.mp kernel_bot)
-  apply FiniteDimensional.eq_of_le_of_finrank_le kernel_le
+  apply Submodule.eq_of_le_of_finrank_le kernel_le
   rw [kernel_one]
   exact Submodule.one_le_finrank_iff.mpr lift_kernel_ne_bot
 
@@ -370,12 +366,13 @@ theorem singularLift_absorbs_quotientIdentity
     (compatible : quotient.comp lift = quotientAction.comp quotient)
     (quotientAction_injective : Function.Injective quotientAction)
     (lift_singular : ¬Function.Injective lift)
-    (kernel_one : FiniteDimensional.finrank K (LinearMap.ker quotient) = 1)
+    (kernel_one : Module.finrank K (LinearMap.ker quotient) = 1)
     (identity_downstairs : quotient.comp quotientIdentity = quotient) :
     lift.comp quotientIdentity = lift := by
   have kernel_eq := singularLift_kernel_eq_quotientKernel quotient lift quotientAction compatible
     quotientAction_injective lift_singular kernel_one
   ext point
+  change lift (quotientIdentity point) = lift point
   have identity_point : quotient (quotientIdentity point) = quotient point := by
     simpa using LinearMap.congr_fun identity_downstairs point
   have difference_mem : quotientIdentity point - point ∈ LinearMap.ker quotient := by
@@ -408,7 +405,7 @@ theorem forbiddenTripleSupport_rows_linearIndependent
     {K : Type*} [Field K] (a b c d e f g h i : K)
     (a_ne : a ≠ 0) (b_ne : b ≠ 0) (c_ne : c ≠ 0)
     (d_ne : d ≠ 0) (f_ne : f ≠ 0) (h_ne : h ≠ 0) :
-    LinearIndependent K (forbiddenTripleSupportMatrix a b c d e f g h i) := by
+    LinearIndependent K (fun row => forbiddenTripleSupportMatrix a b c d e f g h i row) := by
   rw [Fintype.linearIndependent_iff]
   intro coefficients combination_zero index
   have column_zero := congrFun combination_zero 0
@@ -426,12 +423,12 @@ theorem forbiddenTripleSupport_rows_linearIndependent
   have column_three := congrFun combination_zero 3
   have column_four := congrFun combination_zero 4
   have column_five := congrFun combination_zero 5
-  norm_num [forbiddenTripleSupportMatrix, Fin.sum_univ_succ, coefficient_three,
-    coefficient_four, coefficient_five] at column_three
-  norm_num [forbiddenTripleSupportMatrix, Fin.sum_univ_succ, coefficient_three,
-    coefficient_four, coefficient_five] at column_four
-  norm_num [forbiddenTripleSupportMatrix, Fin.sum_univ_succ, coefficient_three,
-    coefficient_four, coefficient_five] at column_five
+  norm_num [forbiddenTripleSupportMatrix, Matrix.cons_val_three, Fin.sum_univ_succ,
+    coefficient_three, coefficient_four, coefficient_five] at column_three
+  norm_num [forbiddenTripleSupportMatrix, Matrix.cons_val_four, Fin.sum_univ_succ,
+    coefficient_three, coefficient_four, coefficient_five] at column_four
+  norm_num [forbiddenTripleSupportMatrix, Fin.sum_univ_succ,
+    coefficient_three, coefficient_four, coefficient_five] at column_five
   have row_zero_five : ![(0 : K), 0, 0, 0, a, 0] (5 : Fin 6) = 0 := rfl
   have row_one_five : ![(0 : K), 0, 0, 0, 0, b] (5 : Fin 6) = b := rfl
   have row_two_five : ![(0 : K), 0, 0, c, 0, 0] (5 : Fin 6) = 0 := rfl
@@ -444,9 +441,9 @@ theorem forbiddenTripleSupport_rows_linearIndependent
   change coefficients 2 * c + coefficients 4 * g = 0 at column_three
   change coefficients 0 * a + coefficients 5 * i = 0 at column_four
   change coefficients 1 * b + coefficients 3 * e = 0 at column_five
-  simp [coefficient_three, coefficient_four, coefficient_five] at column_three
-  simp [coefficient_three, coefficient_four, coefficient_five] at column_four
-  simp [coefficient_three, coefficient_four, coefficient_five] at column_five
+  simp [coefficient_four] at column_three
+  simp [coefficient_five] at column_four
+  simp [coefficient_three] at column_five
   have coefficient_two : coefficients 2 = 0 :=
     column_three.resolve_right c_ne
   have coefficient_zero : coefficients 0 = 0 :=
@@ -467,21 +464,21 @@ theorem six_le_card_of_forbiddenTripleSupport
     (rows : Fin 6 → State → K) (columns : Fin 6 → State → K)
     (a b c d e f g h i : K)
     (coefficient_eq :
-      (fun row column => Matrix.dotProduct (rows row) (columns column)) =
+      (fun row column => dotProduct (rows row) (columns column)) =
         forbiddenTripleSupportMatrix a b c d e f g h i)
     (a_ne : a ≠ 0) (b_ne : b ≠ 0) (c_ne : c ≠ 0)
     (d_ne : d ≠ 0) (f_ne : f ≠ 0) (h_ne : h ≠ 0) :
     6 ≤ Fintype.card State := by
   let probe : (State → K) →ₗ[K] (Fin 6 → K) :=
-    { toFun := fun vector column => Matrix.dotProduct vector (columns column)
+    { toFun := fun vector column => dotProduct vector (columns column)
       map_add' := by
         intro left right
         funext column
-        exact Matrix.add_dotProduct left right (columns column)
+        exact add_dotProduct left right (columns column)
       map_smul' := by
         intro scalar vector
         funext column
-        exact Matrix.smul_dotProduct scalar vector (columns column) }
+        exact smul_dotProduct scalar vector (columns column) }
   have probe_row (row : Fin 6) :
       probe (rows row) = forbiddenTripleSupportMatrix a b c d e f g h i row := by
     funext column
@@ -502,7 +499,7 @@ theorem six_le_card_of_forbiddenTripleSupport
       _ = probe (∑ row, coefficients row • rows row) := by
         simp
       _ = 0 := by rw [combination_zero]; exact probe.map_zero
-  simpa [FiniteDimensional.finrank_fintype_fun_eq_card] using
+  simpa [Module.finrank_fintype_fun_eq_card] using
     row_independent.fintype_card_le_finrank
 
 end PositiveFreeCancellation

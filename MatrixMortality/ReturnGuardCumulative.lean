@@ -43,7 +43,7 @@ theorem endpointTransfer_casoratian
         ((endpointTransfer prime depth centerNumerator driftNumerator scale wait *
             matrix) *ᵥ ![source, 1]) 1 * matrix 1 0 =
       matrix.det := by
-  simp [endpointTransfer, Matrix.mul_apply, Matrix.mulVec, Matrix.dotProduct,
+  simp [endpointTransfer, Matrix.mul_apply, Matrix.mulVec, dotProduct,
     Matrix.det_fin_two, Fin.sum_univ_succ]
   ring
 
@@ -73,7 +73,7 @@ theorem terminalCommonDivisor_dvd_previousDet
     simp [transfer, previous, endpointProduct_append]
   have scalar_eq : ((transfer * previous) *ᵥ ![source, 1]) 1 = scalar := by
     rw [← product_eq, terminal]
-    simp [smul_eq_mul]
+    simp
   have bottom_eq :
       (transfer * previous) 1 0 =
         endpointProduct (prime : ℤ) depth centerNumerator driftNumerator scale
@@ -243,14 +243,12 @@ theorem PrimitiveEndpointReduction.guardedStep_endpointState
         (centerNumerator * content * target.2 + driftNumerator * source.1) /
           (scale * content * target.2) := by
       field_simp [scale_ne_rat, content_ne_rat, target_denominator_ne_rat]
-      ring
     _ = (scale * content * target.2 + content * target.1) /
           (scale * content * target.2) := by
       congr 1
       linear_combination -rational_eq
     _ = 1 + (target.1 : ℚ) / (scale * target.2) := by
       field_simp [scale_ne_rat, content_ne_rat, target_denominator_ne_rat]
-      ring
 
 /-- Primitive reduction of the residual recurrence induces the content-free endpoint step.
 The removed content scales the target pair but never becomes an independent state variable. -/
@@ -461,8 +459,8 @@ theorem CumulativeEndpointExecution.pullback_projectivePairCross
   have second := congrFun transported 1
   change matrix *ᵥ pairVector source =
     (prime : ℤ) ^ (depth * waits.sum) • pairVector target at transported
-  simp [matrix, Matrix.adjugate_fin_two, projectivePairCross, Matrix.mulVec,
-    Matrix.dotProduct, Fin.sum_univ_succ, pairVector, smul_eq_mul] at first second ⊢
+  simp [Matrix.adjugate_fin_two, projectivePairCross, Matrix.mulVec,
+    dotProduct, Fin.sum_univ_succ, pairVector] at first second ⊢
   linear_combination reference.2 * first - reference.1 * second
 
 /-- The signed primitive content is exactly the gcd of the endpoint prequotient and the full

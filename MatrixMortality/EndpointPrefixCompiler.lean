@@ -1,5 +1,5 @@
 import MatrixMortality.WordMorphism
-import Mathlib.Algebra.BigOperators.Group.List
+import Mathlib.Algebra.BigOperators.Group.List.Lemmas
 import Mathlib.Algebra.Order.BigOperators.Group.List
 
 /-!
@@ -118,7 +118,7 @@ private theorem first_consume_prefix_of_endpointEquation
         apply False.elim
         apply absent
         rw [heads_eq, consume_eq]
-        exact List.mem_append_right source (List.mem_cons_self debtHead debtTail)
+        exact List.mem_append_right source List.mem_cons_self
   · exact ⟨residual, source_eq.symm⟩
 
 /-- Local head separation rules out the first underflow in every endpoint witness. -/
@@ -205,7 +205,7 @@ private theorem derivesSuffix_of_endpointEquation {Rule Symbol : Type*}
   | nil =>
       have endpoint' :
           source ++ produced system past = consumed system past ++ target := by
-        simpa using endpoint
+        simpa [EndpointEquation] using endpoint
       have current_eq : current = target := by
         apply List.append_cancel_left (as := consumed system past)
         exact pastState.symm.trans endpoint'

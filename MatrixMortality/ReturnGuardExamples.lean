@@ -765,7 +765,7 @@ private theorem orderBreaker_raw_endpoint :
       ![(1212912257166 : ℤ), 4863204] := by
   ext i
   fin_cases i <;>
-    norm_num [endpointTransfer, Matrix.mulVec, Matrix.dotProduct,
+    norm_num [endpointTransfer, Matrix.mulVec, dotProduct,
       Fin.sum_univ_succ]
 
 /-- A strict exact-order reset-ball entry can be destroyed by its first legal order-breaking
@@ -828,7 +828,7 @@ theorem decreasingMortal_emergentAngularPrimes :
   · ext i
     fin_cases i <;>
       norm_num [endpointProduct, endpointTransfer, Matrix.mulVec,
-        Matrix.mul_apply, Matrix.dotProduct, Fin.sum_univ_succ]
+        Matrix.mul_apply, dotProduct, Fin.sum_univ_succ]
   all_goals norm_num
 
 /-- The increasing mortal orbit obeys the same content-free recurrence. -/
@@ -893,7 +893,7 @@ def threeReturnParameters : Parameters where
 theorem threeReturn_endpointTerminalWord :
     EndpointTerminalWord 3 2 122753 (-17) 39232 [1, 1, 1] := by
   norm_num [EndpointTerminalWord, endpointProduct, endpointTransfer,
-    Matrix.mulVec, Matrix.dotProduct, Matrix.mul_apply, Fin.sum_univ_succ]
+    Matrix.mulVec, dotProduct, Matrix.mul_apply, Fin.sum_univ_succ]
 
 /-- Every positive endpoint word for these coefficients is terminal exactly when it is the
 three-letter schedule `[1, 1, 1]`; in particular no one- or two-return bound is possible. -/

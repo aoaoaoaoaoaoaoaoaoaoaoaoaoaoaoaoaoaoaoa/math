@@ -30,7 +30,7 @@ private theorem three_mul_int_div_unit_positive
   rw [quotient.2]
   have value_nonnegative : 0 ≤ padicValRat 3 (value : ℚ) := by
     rw [padicValRat.of_int]
-    exact Int.ofNat_zero_le _
+    exact Int.natCast_nonneg _
   omega
 
 private theorem safeExteriorAction_c_one_flag
@@ -75,7 +75,7 @@ private theorem safeExteriorAction_c_one_flag
   have P_ge_three : 3 ≤ P := by
     have encoded_nonempty : tagEncode β body ≠ [] :=
       (tagEncode_eq_nil_iff β body).not.mpr body_nonempty
-    have length_positive := List.length_pos.mpr encoded_nonempty
+    have length_positive := List.length_pos_of_ne_nil encoded_nonempty
     have power_bound : 3 ^ 1 ≤ 3 ^ (tagEncode β body).length :=
       Nat.pow_le_pow_right (by norm_num) length_positive
     dsimp [P]
@@ -100,7 +100,7 @@ private theorem safeExteriorAction_c_one_flag
   have eᵢ_ne : eᵢ ≠ 0 := by
     cases j with
     | zero => dsimp [eᵢ]; omega
-    | succ j => dsimp [eᵢ]; push_cast; nlinarith
+    | succ j => dsimp [eᵢ]; nlinarith
   have e_positive : IsPositive 3 e := by
     rw [e_eq]
     exact three_mul_int_div_unit_positive eᵢ 8 eᵢ_ne
@@ -181,14 +181,14 @@ private theorem safeExteriorAction_c_one_flag
       rw [quotient.2]
       simp only [sub_zero]
       rw [padicValRat.of_int]
-      exact Int.ofNat_zero_le _
+      exact Int.natCast_nonneg _
   have action :
       safeExteriorAction ρ L M (.c, j, true) *ᵥ ![u, v, w] =
         ![first, middle, last] := by
     funext i
     fin_cases i <;>
       norm_num [safeExteriorAction, first, middle, last, A, C, d, e, f, g, Δ,
-        Matrix.vecHead, Matrix.vecTail, Matrix.mulVec, Matrix.dotProduct, Fin.sum_univ_succ]
+        Matrix.vecHead, Matrix.vecTail, Matrix.mulVec, dotProduct, Fin.sum_univ_succ]
     all_goals ring
   have last_elimination : d * last - f * middle = Δ * w := by
     dsimp [middle, last, d, e, f, g, Δ]
@@ -274,11 +274,11 @@ theorem safeExteriorTransition_sector
     else
       ExteriorSector0 (exteriorTransition (residueTwoWallGenerator β body label) *ᵥ state) := by
   have normalized := safeExteriorAction_sector β body body_nonempty label regular state flag
-  rw [exteriorTransition_residueTwoWallGenerator, Matrix.smul_mulVec_assoc]
+  rw [exteriorTransition_residueTwoWallGenerator, Matrix.smul_mulVec]
   by_cases residueOne : label.2.2
   · simp only [residueOne, if_true] at normalized ⊢
     exact exteriorSector1_smul 3 (by norm_num) normalized
-  · simp only [residueOne, if_false] at normalized ⊢
+  · simp only [residueOne] at normalized ⊢
     exact exteriorSector0_smul 3 (by norm_num) normalized
 
 /-- Every regular safe word preserves the normalized two-sector exterior flag. -/
@@ -337,7 +337,7 @@ theorem exteriorState_safe_word_wall_orientation
     rcases sector with first | middle
     · exact False.elim (first.1 wall)
     · exact middle
-  · simp only [residueOne, if_false] at sector ⊢
+  · simp only [residueOne] at sector ⊢
     rcases sector with first | last
     · exact False.elim (first.1 wall)
     · exact last
@@ -348,9 +348,9 @@ theorem exteriorTransition_b_one_first
     (β j : Nat) (body : List TagLetter) (state : Fin 3 → ℚ) :
     (exteriorTransition (residueTwoWallGenerator β body (.b, j, true)) *ᵥ state) 0 =
       -12 * j * (((12 * (3 : ℚ) ^ β - 1) * (state 0 + state 2)) + 2 * state 1) := by
-  rw [exteriorTransition_residueTwoWallGenerator, Matrix.smul_mulVec_assoc]
+  rw [exteriorTransition_residueTwoWallGenerator, Matrix.smul_mulVec]
   norm_num [safeExteriorAction, Matrix.vecHead, Matrix.vecTail, Matrix.mulVec,
-    Matrix.dotProduct, Fin.sum_univ_succ]
+    dotProduct, Fin.sum_univ_succ]
   ring
 
 /-- A regular residue-one `b` transition hits the bridge wall exactly when its wound functional

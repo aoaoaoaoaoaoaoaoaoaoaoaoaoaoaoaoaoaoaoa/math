@@ -144,7 +144,7 @@ theorem positiveTransfer_isUnit
 
 /-- Mortality of the complete return family is exactly one scalar bridge between zero waits. -/
 theorem transferFamily_isMortal_iff_positiveBridge
-    (p q : ℤ) (c : ℚ) (hp : 2 ≤ p) (hq : 2 ≤ q) (hc : c + 1 ≠ 0) :
+    (p q : ℤ) (c : ℚ) :
     IsMortal (fun n => transfer c ((p : ℚ) ^ n) ((q : ℚ) ^ n)) ↔
       ∃ waits, positiveBridge (p : ℚ) (q : ℚ) c waits = 0 := by
   rw [← separatedPositiveTransfer_comp_natEquivOption]
@@ -169,7 +169,7 @@ theorem ambient_isUnit {K : Type*} [Field K] (p q : K)
 
 /-- Complete arbitrary-word normal form for the physical two-scale pair. -/
 theorem physical_isMortal_iff_positiveBridge
-    (p q : ℤ) (c : ℚ) (hp : 2 ≤ p) (hq : 2 ≤ q) (hc : c + 1 ≠ 0) :
+    (p q : ℤ) (c : ℚ) (hp : p ≠ 0) (hq : q ≠ 0) (hc : c + 1 ≠ 0) :
     IsMortal (ReturnFamily.pairGenerator (ambient (p : ℚ) (q : ℚ)) (cut c)) ↔
       ∃ waits, positiveBridge (p : ℚ) (q : ℚ) c waits = 0 := by
   change
@@ -184,17 +184,13 @@ theorem physical_isMortal_iff_positiveBridge
       (ambient (p : ℚ) (q : ℚ)) input (output c)
       ReturnSquare.inputLeftInverse (ReturnSquare.outputRightInverse c)
       ![1, 1] ![c, 1]
-      (ambient_isUnit (p : ℚ) (q : ℚ) (by positivity) (by positivity))
+      (ambient_isUnit (p : ℚ) (q : ℚ)
+        (by exact_mod_cast hp) (by exact_mod_cast hq))
       ReturnSquare.inputLeftInverse_mul_input
       (ReturnSquare.output_mul_outputRightInverse c hc)
       (by
         rw [returnMatrix_eq_transfer]
         simpa using transfer_one ℚ c)
-      (fun wait => by
-        rw [returnMatrix_eq_transfer]
-        exact positiveTransfer_isUnit p q c hp hq hc wait)
-      (by simp)
-      (by simp)
   constructor
   · intro mortal
     obtain ⟨waits, vanishes⟩ := reduction.mp mortal

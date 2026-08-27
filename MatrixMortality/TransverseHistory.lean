@@ -60,9 +60,9 @@ def code : List NearyTile → Nat
     code (tile :: word) % 4 = roleResidue tile := by
   cases tile with
   | rule letter =>
-      cases letter <;> simp [code, roleRadix, roleDigit, roleResidue] <;> omega
+      cases letter <;> simp [code, roleRadix, roleDigit, roleResidue]; omega
   | erase letter =>
-      cases letter <;> simp [code, roleRadix, roleDigit, roleResidue] <;> omega
+      cases letter <;> simp [code, roleRadix, roleDigit, roleResidue]; omega
 
 theorem code_injective : Function.Injective code := by
   intro left
@@ -85,7 +85,6 @@ theorem code_injective : Function.Injective code := by
       | cons rightHead rightTail =>
           have residueEquality : roleResidue leftHead = roleResidue rightHead := by
             have reduced := congrArg (· % 4) equality
-            dsimp at reduced
             rw [code_cons_mod_four, code_cons_mod_four] at reduced
             exact reduced
           have headEquality := roleResidue_injective residueEquality
@@ -149,7 +148,7 @@ theorem product_mulVec_column (R : Type*) [CommRing R] (word : List PairedContro
                 ext coordinate <;>
                 fin_cases coordinate <;>
                 simp [generator, toggleMatrix, state, suffixDecode, decodedEquality,
-                  PairPhase.flip, historyPhaseSign, Matrix.mulVec, Matrix.dotProduct,
+                  PairPhase.flip, historyPhaseSign, Matrix.mulVec, dotProduct,
                   Fin.sum_univ_succ] <;>
                 ring
           | data letter =>
@@ -158,7 +157,7 @@ theorem product_mulVec_column (R : Type*) [CommRing R] (word : List PairedContro
                 fin_cases coordinate <;>
                 simp [generator, dataMatrix, state, suffixDecode, decodedEquality,
                   PairPhase.tile, historyPhaseSign, code, roleRadix, roleDigit, Matrix.mulVec,
-                  Matrix.dotProduct, Fin.sum_univ_succ] <;>
+                  dotProduct, Fin.sum_univ_succ] <;>
                 ring
 
 /-- A terminal row selecting one prescribed mixed-radix history code. -/
@@ -175,7 +174,7 @@ theorem coefficient_eq (target : Nat) (word : List PairedControl) :
   cases decodedEquality : suffixDecode word with
   | mk phase decoded =>
       cases phase <;>
-        simp [row, state, decodePairedWord, decodedEquality, Matrix.dotProduct,
+        simp [row, state, decodePairedWord, decodedEquality, dotProduct,
           Fin.sum_univ_succ] <;>
         ring
 
@@ -223,26 +222,26 @@ theorem data_mulVec_eq_zero_iff (letter : TagLetter) (vector : Fin 3 → ℚ) :
       · intro zero
         have coordinate1 := congrFun zero 1
         have coordinate2 := congrFun zero 2
-        simp [dataMatrix, Matrix.mulVec, Matrix.dotProduct,
+        simp [dataMatrix, Matrix.mulVec, dotProduct,
           Fin.sum_univ_succ] at coordinate1 coordinate2
         constructor <;> linarith
       · rintro ⟨middleZero, lastZero⟩
         ext coordinate
         fin_cases coordinate <;>
-          simp [dataMatrix, Matrix.mulVec, Matrix.dotProduct, Fin.sum_univ_succ,
+          simp [dataMatrix, Matrix.mulVec, dotProduct, Fin.sum_univ_succ,
             middleZero, lastZero]
   | c =>
       constructor
       · intro zero
         have coordinate1 := congrFun zero 1
         have coordinate2 := congrFun zero 2
-        simp [dataMatrix, Matrix.mulVec, Matrix.dotProduct,
+        simp [dataMatrix, Matrix.mulVec, dotProduct,
           Fin.sum_univ_succ] at coordinate1 coordinate2
         constructor <;> linarith
       · rintro ⟨firstZero, lastZero⟩
         ext coordinate
         fin_cases coordinate <;>
-          simp [dataMatrix, Matrix.mulVec, Matrix.dotProduct, Fin.sum_univ_succ,
+          simp [dataMatrix, Matrix.mulVec, dotProduct, Fin.sum_univ_succ,
             firstZero, lastZero]
 
 end TransverseHistory

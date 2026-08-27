@@ -455,7 +455,7 @@ theorem physical_isMortal_prime_iff (p : Nat) (prime : p.Prime) (c : ℚ) :
       have c_nonnegative : 0 ≤ c := le_of_not_gt not_negative
       exact not_physical_isMortal_of_nonneg (p : ℤ) c p_two_int c_nonnegative mortal
     obtain ⟨waits, bridge_zero⟩ :=
-      (physical_isMortal_iff_positiveBridge (p : ℤ) c p_two_int c_add_one_ne).mp mortal
+      (physical_isMortal_iff_positiveBridge (p : ℤ) c (by positivity) c_add_one_ne).mp mortal
     let d := -c
     have d_positive : 0 < d := by dsimp [d]; linarith
     have d_ne_one : d ≠ 1 := by
@@ -504,7 +504,7 @@ theorem physical_isMortal_prime_iff (p : Nat) (prime : p.Prime) (c : ℚ) :
         linarith only [sum_zero]
       apply (physical_isMortal_iff_positiveBridge
         (p : ℤ) (-((p : ℚ) ^ (power + 1))⁻¹)
-        p_two_int c_add_one_ne).mpr
+        (by positivity) c_add_one_ne).mpr
       refine ⟨[power], ?_⟩
       rw [positiveBridge_singleton]
       field_simp
@@ -927,7 +927,7 @@ theorem physical_isMortal_of_resonance
       linarith only [sum_zero]
     apply (physical_isMortal_iff_positiveBridge
       q (-((q : ℚ) ^ (power + 1))⁻¹)
-      q_at_least_two c_add_one_ne).mpr
+      (by omega) c_add_one_ne).mpr
     refine ⟨[power], ?_⟩
     rw [positiveBridge_singleton]
     field_simp

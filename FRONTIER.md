@@ -580,7 +580,10 @@ Three live routes remain.
    `Φ_z` must avoid their poles from the reset values `0` and `1/μ`, except for a genuine
    terminal match. The source boundary fixes `r=t/μ`
    ([`MM-O07`](SALVAGE.md#mm-o07-setter-parameter-rigidity)); generic parameter selection is
-   not a live escape. Reversing the two nonzero ternary digits is lawful and strictly sharper:
+   not a live escape. Nor is the remaining side-basis shear: after physical boundary
+   calibration, [`MM-O12`](SALVAGE.md#mm-o12-boundary-calibrated-setter-shear-is-gauge)
+   proves that it disappears from both the mixed separator and the projective transfer.
+   Reversing the two nonzero ternary digits is lawful and strictly sharper:
    [`MM-M04`](SALVAGE.md#mm-m04-swapped-digit-setter) preserves the regular decoder and mixed
    separator while moving the common projective center below zero and making every transfer
    orientation preserving.
@@ -1198,6 +1201,25 @@ boundary-aligned additive family is immortal, and `G3-O10` closes the nondegener
 escape on its required fracture domain.
 
 ## The rank-three binary wall: `M₃(2)`
+
+### Shared dimension-two artery
+
+The apparent `(3,2)↔(2,3)` symmetry is not a general exchange of dimension and generator count,
+but the hard strata are nearly interreducible. The rank-`(2,2)` part of `M₃(2)` is many-one
+equivalent to generic rational projective incidence `GPI₂`. The hard rank pattern of `M₂(3)` is
+arbitrary rational projective incidence `PI₂`; genericization reduces each `PI₂` instance to at
+most two `GPI₂` queries, while every `GPI₂` instance is already an `M₂(3)` instance. Thus the
+decision-theoretic chain is
+
+```text
+Mort₃^(2,2) ≡ₘ GPI₂ ≤ₘ M₂(3) ≤₂-query GPI₂.
+```
+
+Work on projective incidence should therefore be treated as a joint `M₃(2)`/`M₂(3)` campaign.
+A `GPI₂` algorithm decides all of `M₂(3)` and the rank-`(2,2)` artery of `M₃(2)`; a universal
+encoding in either incidence form transfers to the other. This does not settle full `M₃(2)`:
+the rank-`(3,2)` return-recurrence artery below remains independent. Conversely, arguments using
+its order-three return structure need not say anything about `M₂(3)`.
 
 ### Rank census
 

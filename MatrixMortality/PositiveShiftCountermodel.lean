@@ -68,7 +68,7 @@ theorem wordProduct_mulVec_column (R : Type*) [Semiring R] (word : List Letter) 
       cases letter <;>
         ext i <;>
         fin_cases i <;>
-        simp [generator, state, Matrix.mulVec, Matrix.dotProduct, Fin.sum_univ_succ,
+        simp [generator, state, Matrix.mulVec, dotProduct, Fin.sum_univ_succ,
           add_assoc]
 
 /-- Scalar coefficient of the countermodel. -/
@@ -79,7 +79,7 @@ def coefficient (R : Type*) [Semiring R] (word : List Letter) : R :=
 theorem coefficient_eq (R : Type*) [Semiring R] (word : List Letter) :
     coefficient R word = (state word 0 + state word 2 : Nat) := by
   rw [coefficient, linearCoefficient, wordProduct_mulVec_column]
-  simp [row, Matrix.dotProduct, Fin.sum_univ_succ]
+  simp [row, dotProduct, Fin.sum_univ_succ]
 
 /-- Apart from `ε` and the sole accepting word `t`, every reachable state has positive final
 coordinate. -/
@@ -102,7 +102,8 @@ theorem coefficient_int_eq_zero_iff (word : List Letter) :
   constructor
   · intro zero
     rcases state_trichotomy word with (rfl | word_eq | positive)
-    · norm_num [coefficient_eq, state] at zero
+    · norm_num [coefficient_eq, state, Matrix.cons_val_two,
+        Matrix.vecHead, Matrix.vecTail] at zero
     · exact word_eq
     · exfalso
       rw [coefficient_eq] at zero
@@ -112,7 +113,7 @@ theorem coefficient_int_eq_zero_iff (word : List Letter) :
         exact_mod_cast sum_positive
       exact cast_positive.ne' zero
   · rintro rfl
-    norm_num [coefficient_eq, state]
+    norm_num [coefficient_eq, state, Matrix.cons_val_two, Matrix.vecHead, Matrix.vecTail]
 
 /-- No positive matrix word vanishes. -/
 theorem wordProduct_int_ne_zero (word : List Letter) :
@@ -156,8 +157,7 @@ theorem generator_factor (R : Type*) [Semiring R] (letter : Letter) :
   cases letter <;>
     ext i j <;>
     fin_cases i <;> fin_cases j <;>
-    simp [generator, imageFactor, quotientFactor, Matrix.mul_apply, Fin.sum_univ_succ,
-      Matrix.vecHead, Matrix.vecTail]
+    simp [generator, imageFactor, quotientFactor, Matrix.mul_apply, Fin.sum_univ_succ]
 
 theorem imageRetraction_mul_imageFactor (K : Type*) [Field K] (letter : Letter) :
     imageRetraction K letter * imageFactor K letter = 1 := by
@@ -172,8 +172,7 @@ theorem quotientFactor_mul_quotientSection (R : Type*) [Semiring R] (letter : Le
   cases letter <;>
     ext i j <;>
     fin_cases i <;> fin_cases j <;>
-    simp [quotientFactor, quotientSection, Matrix.mul_apply, Matrix.one_apply,
-      Fin.sum_univ_succ, Matrix.vecHead, Matrix.vecTail]
+    simp [quotientFactor, quotientSection, Matrix.mul_apply, Fin.sum_univ_succ]
 
 /-- All three positive generators have rank exactly two. -/
 theorem generator_rank (K : Type*) [Field K] (letter : Letter) :
@@ -214,15 +213,15 @@ theorem reachableMatrix_eq : reachableMatrix = 1 := by
   ext i j
   fin_cases i <;> fin_cases j <;>
     norm_num [reachableMatrix, finiteSuffixStates, reachableSuffix, wordProduct, generator,
-      column, Matrix.mulVec, Matrix.dotProduct, Matrix.one_apply, Fin.sum_univ_succ,
-      Matrix.vecHead, Matrix.vecTail, Fin.ext_iff]
+      column, Matrix.mulVec, dotProduct, Matrix.cons_val_two, Matrix.vecHead,
+      Matrix.vecTail, Fin.sum_univ_succ]
 
 theorem observableMatrix_eq :
     observableMatrix = !![1, 0, 1; 0, 1, 1; 1, 1, 1] := by
   ext i j
   fin_cases i <;> fin_cases j <;>
     norm_num [observableMatrix, finitePrefixStates, observablePrefix, wordProduct, generator,
-      row, Matrix.vecMul, Matrix.dotProduct, Fin.sum_univ_succ, Matrix.vecHead, Matrix.vecTail]
+      row, Matrix.vecMul, dotProduct, Fin.sum_univ_succ, Matrix.vecHead, Matrix.vecTail]
   all_goals simp [Matrix.one_apply, Fin.ext_iff]
 
 /-- The selected reachable columns span all three states. -/
@@ -233,7 +232,7 @@ theorem reachableMatrix_det : reachableMatrix.det = 1 := by
 /-- The selected observable rows span the full dual space. -/
 theorem observableMatrix_det : observableMatrix.det = -1 := by
   rw [observableMatrix_eq, Matrix.det_fin_three]
-  norm_num
+  norm_num [Matrix.cons_val_two, Matrix.vecHead, Matrix.vecTail]
 
 /-- A positive `b`-shift collapses the distinct columns reached by `ε` and `t`. -/
 theorem column_b_eq_bt :
@@ -241,7 +240,7 @@ theorem column_b_eq_bt :
       wordProduct (generator ℚ) [.b, .t] *ᵥ column ℚ := by
   rw [wordProduct_mulVec_column, wordProduct_mulVec_column]
   ext i
-  fin_cases i <;> norm_num [state]
+  fin_cases i <;> norm_num [state, Matrix.cons_val_two, Matrix.vecHead, Matrix.vecTail]
 
 /-- The columns before the collapsed `b`-shift are distinct. -/
 theorem column_nil_ne_t :

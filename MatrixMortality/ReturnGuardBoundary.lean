@@ -41,7 +41,7 @@ private theorem endpointResetDefect
     (endpointTransfer_mulVec_terminalCoordinate parameters
       center_eq drift_eq scale_ne branch) 0
   rw [depth_two] at action
-  simp [endpointTransfer, Matrix.mulVec, Matrix.dotProduct,
+  simp [endpointTransfer, Matrix.mulVec, dotProduct,
     Fin.sum_univ_succ, smul_eq_mul] at action
   have power_eq :
       (parameters.prime : ℚ) ^ (2 * wait) =
@@ -105,6 +105,7 @@ theorem not_physical_isMortal_of_resetBall
       (padicValRat.of_int (p := factor) (z := driftNumerator))
   have two_value : HasValue factor (2 : ℚ) epsilon := by
     refine ⟨by norm_num, ?_⟩
+    change padicValRat factor (((2 : ℤ) : ℚ)) = epsilon
     simpa only [epsilon] using (padicValRat.of_int (p := factor) (z := (2 : ℤ)))
   have prime_boundary_ne : (parameters.prime : ℤ) - 1 ≠ 0 := by
     have prime_gt_one : (1 : ℤ) < parameters.prime := by
@@ -147,7 +148,7 @@ theorem not_physical_isMortal_of_resetBall
         sourceCoordinate = (resetResultant : ℚ) ∨
           (sourceCoordinate - resetResultant ≠ 0 ∧
             rho < padicValRat factor (sourceCoordinate - resetResultant)) := by
-      simpa only [inside, Set.mem_setOf_eq, sourceCoordinate] using source_inside
+      simpa only [inside, Set.mem_ofPred_eq, sourceCoordinate] using source_inside
     have source_value : HasValue factor sourceCoordinate rho := by
       rcases source_inside' with source_reset | source_deep
       · rw [source_reset]
@@ -162,7 +163,7 @@ theorem not_physical_isMortal_of_resetBall
           add_hasValue_left reset_value error_value source_deep.2
         convert sum_value using 1; ring
     have power_gt_one : 1 < parameters.prime ^ wait :=
-      one_lt_pow parameters.prime_prime.one_lt branch.1.ne'
+      one_lt_pow₀ parameters.prime_prime.one_lt branch.1.ne'
     have boundary_ne_int :
         (parameters.prime : ℤ) ^ wait - 1 ≠ 0 := by
       have cast_gt : (1 : ℤ) < (parameters.prime : ℤ) ^ wait := by
@@ -205,7 +206,7 @@ theorem not_physical_isMortal_of_resetBall
       have bound :
           epsilon ≤ padicValRat factor (q - 1 + 2) := by
         simpa only [min_eq_right epsilon_le_b] using lower
-      convert bound using 1; ring
+      convert bound using 1; ring_nf
     have scaled_boundary_value :
         HasValue factor ((scale : ℚ) * (q - 1)) (lam + b) :=
       mul_hasValue scale_value boundary_value
@@ -379,4 +380,3 @@ theorem universalBoundary_dvd_resetResultant_of_physical_isMortal
 
 end
 end MatrixMortality.ReturnGuard
-

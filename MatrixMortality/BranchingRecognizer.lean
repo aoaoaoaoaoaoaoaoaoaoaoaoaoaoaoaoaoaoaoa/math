@@ -1,4 +1,5 @@
 import MatrixMortality.BranchingHistory
+import MatrixMortality.PrefixResidual
 
 /-!
 # Exact three-state recognition of the branching `bcbc` language
@@ -13,7 +14,7 @@ namespace MatrixMortality
 
 namespace BranchingRecognizer
 
-open BranchingHistory PeriodicHistory
+open BranchingHistory PeriodicHistory PrefixResidual
 open scoped Matrix
 
 /-! ## Exact null-history grammar -/
@@ -24,20 +25,7 @@ abbrev descentStroke : Stroke TagLetter 3 := strokeBCB
 /-- The stroke `cbb`, used to return one residual level. -/
 abbrev ascentStroke : Stroke TagLetter 3 := strokeCBB
 
-/-- A canonical unmatched suffix after cancelling two word prefixes. -/
-private inductive Residual where
-  | flush
-  | left (head : TagLetter) (tail : List TagLetter)
-  | right (head : TagLetter) (tail : List TagLetter)
-  deriving DecidableEq
-
-private def Residual.leftWord : Residual → List TagLetter
-  | .flush | .right _ _ => []
-  | .left head tail => head :: tail
-
-private def Residual.rightWord : Residual → List TagLetter
-  | .flush | .left _ _ => []
-  | .right head tail => head :: tail
+private abbrev Residual := PrefixResidual.Residual TagLetter
 
 private def startResidual : Residual := .right .b []
 
@@ -48,221 +36,56 @@ private def deepResidual : Residual := .left .b [.c, .b]
 private def outputBlock (stroke : Stroke TagLetter 3) : List TagLetter :=
   tagOutput bcbcBody stroke.head
 
-private theorem consumed_append (left right : List (Stroke TagLetter 3)) :
-    consumed (left ++ right) = consumed left ++ consumed right := by
-  simp [consumed, List.map_append]
-
-private theorem produced_append (left right : List (Stroke TagLetter 3)) :
-    produced (tagOutput bcbcBody) (left ++ right) =
-      produced (tagOutput bcbcBody) left ++ produced (tagOutput bcbcBody) right := by
-  simp [produced, List.map_append]
-
-/-- One residual transition after appending a stroke to both morphic prefixes. -/
 private def ResidualStep (before : Residual) (stroke : Stroke TagLetter 3)
     (after : Residual) : Prop :=
   before.leftWord ++ stroke.letters ++ after.rightWord =
     before.rightWord ++ outputBlock stroke ++ after.leftWord
 
-/-- A residual path reads its stroke word from left to right. The snoc presentation makes
-backwards classification of accepting paths exact rather than heuristic. -/
-private inductive ResidualPath (initial : Residual) :
-    List (Stroke TagLetter 3) → Residual → Prop where
-  | nil : ResidualPath initial [] initial
-  | snoc {history before stroke after} :
-      ResidualPath initial history before →
-      ResidualStep before stroke after →
-      ResidualPath initial (history ++ [stroke]) after
+private abbrev ResidualPath (initial : Residual) :
+    List (Stroke TagLetter 3) → Residual → Prop :=
+  PrefixResidual.Path (tagOutput bcbcBody) initial
+
+private theorem ResidualPath.nil {initial : Residual} :
+    ResidualPath initial [] initial := PrefixResidual.Path.nil
+
+private theorem ResidualPath.snoc {initial before after : Residual}
+    {stroke : Stroke TagLetter 3} {history : List (Stroke TagLetter 3)}
+    (path : ResidualPath initial history before) (step : ResidualStep before stroke after) :
+    ResidualPath initial (history ++ [stroke]) after := PrefixResidual.Path.snoc path step
 
 private theorem ResidualPath.cons {initial before after : Residual}
     {stroke : Stroke TagLetter 3} {history : List (Stroke TagLetter 3)}
     (step : ResidualStep initial stroke before)
     (path : ResidualPath before history after) :
-    ResidualPath initial (stroke :: history) after := by
-  induction path with
-  | nil => simpa using ResidualPath.snoc ResidualPath.nil step
-  | @snoc history middle last final _ lastStep induction =>
-      exact ResidualPath.snoc induction lastStep
+    ResidualPath initial (stroke :: history) after := PrefixResidual.Path.cons step path
 
 private theorem ResidualPath.append {initial middle final : Residual}
     {left right : List (Stroke TagLetter 3)}
     (leftPath : ResidualPath initial left middle)
     (rightPath : ResidualPath middle right final) :
-    ResidualPath initial (left ++ right) final := by
-  induction rightPath with
-  | nil => simpa using leftPath
-  | snoc _ step induction =>
-      simpa [List.append_assoc] using ResidualPath.snoc induction step
+    ResidualPath initial (left ++ right) final := PrefixResidual.Path.append leftPath rightPath
 
 private theorem ResidualPath.snoc_of_ne_nil {initial final : Residual}
     {history : List (Stroke TagLetter 3)} (path : ResidualPath initial history final)
     (nonempty : history ≠ []) :
     ∃ priorHistory before stroke,
       history = priorHistory ++ [stroke] ∧
-        ResidualPath initial priorHistory before ∧ ResidualStep before stroke final := by
-  cases path with
-  | nil => exact False.elim (nonempty rfl)
-  | snoc priorPath step => exact ⟨_, _, _, rfl, priorPath, step⟩
-
-private def Residual.Realizes (residual : Residual)
-    (left right : List TagLetter) : Prop :=
-  left ++ residual.rightWord = right ++ residual.leftWord
-
-private theorem residual_exists_of_comparable {left right : List TagLetter}
-    (comparable : left <+: right ∨ right <+: left) :
-    ∃ residual, Residual.Realizes residual left right := by
-  rcases comparable with leftPrefix | rightPrefix
-  · obtain ⟨suffix, equality⟩ := leftPrefix
-    cases suffix with
-    | nil =>
-        refine ⟨.flush, ?_⟩
-        simpa [Residual.Realizes, Residual.leftWord, Residual.rightWord] using equality
-    | cons head tail =>
-        refine ⟨.right head tail, ?_⟩
-        simpa [Residual.Realizes, Residual.leftWord, Residual.rightWord] using equality
-  · obtain ⟨suffix, equality⟩ := rightPrefix
-    cases suffix with
-    | nil =>
-        refine ⟨.flush, ?_⟩
-        simpa [Residual.Realizes, Residual.leftWord, Residual.rightWord] using equality.symm
-    | cons head tail =>
-        refine ⟨.left head tail, ?_⟩
-        simpa [Residual.Realizes, Residual.leftWord, Residual.rightWord] using equality.symm
-
-private theorem residualStep_of_realizes {before after : Residual}
-    {left right : List TagLetter} {stroke : Stroke TagLetter 3}
-    (beforeRealizes : Residual.Realizes before left right)
-    (afterRealizes : Residual.Realizes after (left ++ stroke.letters)
-      (right ++ outputBlock stroke)) :
-    ResidualStep before stroke after := by
-  cases before with
-  | flush =>
-      have left_eq_right : left = right := by
-        simpa [Residual.Realizes, Residual.leftWord, Residual.rightWord] using beforeRealizes
-      subst right
-      have reduced := List.append_cancel_left (as := left) (by
-        simpa [Residual.Realizes, Residual.leftWord, Residual.rightWord,
-          List.append_assoc] using afterRealizes)
-      simpa [ResidualStep, Residual.leftWord, Residual.rightWord,
-        List.append_assoc] using reduced
-  | left head tail =>
-      have left_eq : left = right ++ head :: tail := by
-        simpa [Residual.Realizes, Residual.leftWord, Residual.rightWord] using beforeRealizes
-      subst left
-      have reduced := List.append_cancel_left (as := right) (by
-        simpa [Residual.Realizes, Residual.leftWord, Residual.rightWord,
-          List.append_assoc] using afterRealizes)
-      simpa [ResidualStep, Residual.leftWord, Residual.rightWord,
-        List.append_assoc] using reduced
-  | right head tail =>
-      have right_eq : right = left ++ head :: tail := by
-        simpa [Residual.Realizes, Residual.leftWord, Residual.rightWord] using beforeRealizes.symm
-      subst right
-      have reduced := List.append_cancel_left (as := left) (by
-        simpa [Residual.Realizes, Residual.leftWord, Residual.rightWord,
-          List.append_assoc] using afterRealizes)
-      simpa [ResidualStep, Residual.leftWord, Residual.rightWord,
-        List.append_assoc] using reduced
-
-private theorem realizes_after_step {before after : Residual}
-    {left right : List TagLetter} {stroke : Stroke TagLetter 3}
-    (realizes : Residual.Realizes before left right)
-    (step : ResidualStep before stroke after) :
-    Residual.Realizes after (left ++ stroke.letters) (right ++ outputBlock stroke) := by
-  cases before with
-  | flush =>
-      have left_eq_right : left = right := by
-        simpa [Residual.Realizes, Residual.leftWord, Residual.rightWord] using realizes
-      subst right
-      simpa [Residual.Realizes, ResidualStep, Residual.leftWord, Residual.rightWord,
-        List.append_assoc] using congrArg (fun suffix => left ++ suffix) step
-  | left head tail =>
-      have left_eq : left = right ++ head :: tail := by
-        simpa [Residual.Realizes, Residual.leftWord, Residual.rightWord] using realizes
-      subst left
-      simpa [Residual.Realizes, ResidualStep, Residual.leftWord, Residual.rightWord,
-        List.append_assoc] using congrArg (fun suffix => right ++ suffix) step
-  | right head tail =>
-      have right_eq : right = left ++ head :: tail := by
-        simpa [Residual.Realizes, Residual.leftWord, Residual.rightWord] using realizes.symm
-      subst right
-      simpa [Residual.Realizes, ResidualStep, Residual.leftWord, Residual.rightWord,
-        List.append_assoc] using congrArg (fun suffix => left ++ suffix) step
-
-private theorem realizes_start_of_boundary {residual : Residual}
-    {left right : List TagLetter} (realizes : Residual.Realizes residual left right)
-    (boundary : left ++ [.b] = right) : residual = startResidual := by
-  cases residual with
-  | flush =>
-      have equality : left = right := by
-        simpa [Residual.Realizes, Residual.leftWord, Residual.rightWord] using realizes
-      have lengths := congrArg List.length boundary
-      rw [equality] at lengths
-      simp at lengths
-  | left head tail =>
-      have equality : left = right ++ head :: tail := by
-        simpa [Residual.Realizes, Residual.leftWord, Residual.rightWord] using realizes
-      have lengths := congrArg List.length boundary
-      rw [equality] at lengths
-      simp at lengths
-  | right head tail =>
-      have equality : left ++ head :: tail = right := by
-        simpa [Residual.Realizes, Residual.leftWord, Residual.rightWord] using realizes
-      have suffix : head :: tail = [.b] := by
-        apply List.append_cancel_left (as := left)
-        exact equality.trans boundary.symm
-      have canonical := congrArg
-        (fun word => match word with
-          | [] => Residual.flush
-          | first :: rest => Residual.right first rest) suffix
-      simpa [startResidual] using canonical
-
-private theorem path_of_completion (initial : Residual)
-    (left right : List TagLetter) (history : List (Stroke TagLetter 3))
-    (realizes : Residual.Realizes initial left right)
-    (completion : left ++ consumed history ++ [.b] =
-      right ++ produced (tagOutput bcbcBody) history) :
-    ResidualPath initial history startResidual := by
-  induction history generalizing initial left right with
-  | nil =>
-      have initial_eq := realizes_start_of_boundary realizes (by simpa using completion)
-      subst initial
-      exact ResidualPath.nil
-  | cons stroke history induction =>
-      let nextLeft := left ++ stroke.letters
-      let nextRight := right ++ outputBlock stroke
-      have nextLeftPrefix : nextLeft <+:
-          right ++ produced (tagOutput bcbcBody) (stroke :: history) := by
-        refine ⟨consumed history ++ [.b], ?_⟩
-        simpa [nextLeft, consumed_cons, List.append_assoc] using completion
-      have nextRightPrefix : nextRight <+:
-          right ++ produced (tagOutput bcbcBody) (stroke :: history) := by
-        refine ⟨produced (tagOutput bcbcBody) history, ?_⟩
-        simp [nextRight, produced_cons, outputBlock, List.append_assoc]
-      obtain ⟨next, nextRealizes⟩ := residual_exists_of_comparable
-        (List.prefix_or_prefix_of_prefix nextLeftPrefix nextRightPrefix)
-      apply ResidualPath.cons (residualStep_of_realizes realizes nextRealizes)
-      apply induction next nextLeft nextRight nextRealizes
-      simpa [nextLeft, nextRight, consumed_cons, produced_cons, outputBlock,
-        List.append_assoc] using completion
+        ResidualPath initial priorHistory before ∧ ResidualStep before stroke final :=
+  PrefixResidual.Path.snoc_of_ne_nil path nonempty
 
 private theorem ResidualPath.realizes {initial final : Residual}
     {history : List (Stroke TagLetter 3)} {left right : List TagLetter}
     (path : ResidualPath initial history final)
     (realizes : Residual.Realizes initial left right) :
     Residual.Realizes final (left ++ consumed history)
-      (right ++ produced (tagOutput bcbcBody) history) := by
-  induction path with
-  | nil => simpa using realizes
-  | @snoc history before stroke after _ step induction =>
-      have advanced := realizes_after_step induction step
-      simpa [consumed_append, produced_append, consumed, produced, outputBlock,
-        List.append_assoc] using advanced
+      (right ++ produced (tagOutput bcbcBody) history) :=
+  PrefixResidual.Path.realizes path realizes
 
 private theorem bcbcNull_iff_path (history : List (Stroke TagLetter 3)) :
     bcbcNull history ↔ ResidualPath startResidual history startResidual := by
   constructor
   · intro null
-    apply path_of_completion startResidual [] [.b] history
+    apply PrefixResidual.path_of_completion (tagOutput bcbcBody) .b startResidual [] [.b] history
     · rfl
     · simpa [bcbcNull] using null
   · intro path
@@ -300,16 +123,16 @@ private theorem rightRigid_step {before after : Residual}
           cases strokeHead with
           | b =>
               have lengths := congrArg List.length step
-              simp [ResidualStep, Residual.leftWord, Residual.rightWord, outputBlock,
-                Stroke.letters, bcbcBody, tagOutput, nearyBody] at lengths
+              simp [Residual.leftWord, Residual.rightWord, outputBlock,
+                Stroke.letters, tagOutput, nearyBody] at lengths
           | c =>
               have lengths := congrArg List.length step
-              simp [ResidualStep, Residual.leftWord, Residual.rightWord, outputBlock,
+              simp [Residual.leftWord, Residual.rightWord, outputBlock,
                 Stroke.letters, bcbcBody, tagOutput, nearyBody] at lengths
               have beforeTailEmpty : beforeTail = [] :=
-                List.length_eq_zero.mp (by omega)
+                List.length_eq_zero_iff.mp (by omega)
               have afterTailEmpty : afterTail = [] :=
-                List.length_eq_zero.mp (by omega)
+                List.length_eq_zero_iff.mp (by omega)
               subst beforeTail
               subst afterTail
               simp [ResidualStep, Residual.leftWord, Residual.rightWord, outputBlock,
@@ -343,11 +166,11 @@ private theorem enters_start {before : Residual} {stroke : Stroke TagLetter 3}
       cases head with
       | b =>
           have lengths := congrArg List.length step
-          simp [ResidualStep, Residual.leftWord, Residual.rightWord, startResidual,
-            outputBlock, Stroke.letters, bcbcBody, tagOutput, nearyBody] at lengths
+          simp [Residual.leftWord, Residual.rightWord, startResidual,
+            outputBlock, Stroke.letters, tagOutput, nearyBody] at lengths
       | c =>
           have lengths := congrArg List.length step
-          simp [ResidualStep, Residual.leftWord, Residual.rightWord, startResidual,
+          simp [Residual.leftWord, Residual.rightWord, startResidual,
             outputBlock, Stroke.letters, bcbcBody, tagOutput, nearyBody] at lengths
           subst beforeTail
           cases wake₁ <;> cases wake₂ <;>
@@ -377,11 +200,11 @@ private theorem enters_left {before : Residual} {stroke : Stroke TagLetter 3}
       cases head with
       | b =>
           have lengths := congrArg List.length step
-          simp [ResidualStep, Residual.leftWord, Residual.rightWord, leftResidual,
-            outputBlock, Stroke.letters, bcbcBody, tagOutput, nearyBody] at lengths
+          simp [Residual.leftWord, Residual.rightWord, leftResidual,
+            outputBlock, Stroke.letters, tagOutput, nearyBody] at lengths
       | c =>
           have lengths := congrArg List.length step
-          simp [ResidualStep, Residual.leftWord, Residual.rightWord, leftResidual,
+          simp [Residual.leftWord, Residual.rightWord, leftResidual,
             outputBlock, Stroke.letters, bcbcBody, tagOutput, nearyBody] at lengths
           obtain ⟨tail₁, tail₂, rfl⟩ := List.length_eq_two.mp (by omega : beforeTail.length = 2)
           cases tail₁ <;> cases tail₂ <;> cases wake₁ <;> cases wake₂ <;>
@@ -409,16 +232,16 @@ private theorem enters_deep {before : Residual} {stroke : Stroke TagLetter 3}
       cases head with
       | b =>
           have lengths := congrArg List.length step
-          simp [ResidualStep, Residual.leftWord, Residual.rightWord, deepResidual,
-            outputBlock, Stroke.letters, bcbcBody, tagOutput, nearyBody] at lengths
+          simp [Residual.leftWord, Residual.rightWord, deepResidual,
+            outputBlock, Stroke.letters, tagOutput, nearyBody] at lengths
           subst beforeTail
           cases wake₁ <;> cases wake₂ <;>
             simp_all [ResidualStep, Residual.leftWord, Residual.rightWord, leftResidual,
-              deepResidual, outputBlock, strokeBCB, stroke₃, Stroke.letters, bcbcBody,
+              deepResidual, outputBlock, strokeBCB, stroke₃, Stroke.letters,
               tagOutput, nearyBody]
       | c =>
           have lengths := congrArg List.length step
-          simp [ResidualStep, Residual.leftWord, Residual.rightWord, deepResidual,
+          simp [Residual.leftWord, Residual.rightWord, deepResidual,
             outputBlock, Stroke.letters, bcbcBody, tagOutput, nearyBody] at lengths
           have beforeLength : (beforeHead :: beforeTail).length =
               (outputBlock ⟨.c, [wake₁, wake₂], width⟩).length := by
@@ -433,7 +256,7 @@ private theorem enters_deep {before : Residual} {stroke : Stroke TagLetter 3}
               ([TagLetter.b, .c, .b, .c, .b] : List TagLetter).length := by
             simpa [outputBlock, bcbcBody, tagOutput, nearyBody] using beforeLength
           have strokeEquality := List.append_inj_right rawEquality prefixLength
-          simp [Stroke.letters] at strokeEquality
+          simp at strokeEquality
 
 @[simp] private theorem step_start_left :
     ResidualStep startResidual strokeBBB leftResidual := by rfl
@@ -499,7 +322,7 @@ private theorem path_to_left_split {history : List (Stroke TagLetter 3)}
     subst history
     have realized := ResidualPath.realizes path
       (left := []) (right := [.b]) (by rfl)
-    simp [Residual.Realizes, startResidual, leftResidual, Residual.leftWord,
+    simp [Residual.Realizes, leftResidual, Residual.leftWord,
       Residual.rightWord] at realized
   obtain ⟨priorHistory, before, stroke, history_eq, priorPath, finalStep⟩ :=
     path.snoc_of_ne_nil nonempty
@@ -513,7 +336,7 @@ private theorem path_to_left_split {history : List (Stroke TagLetter 3)}
       subst priorHistory
       have realized := ResidualPath.realizes priorPath
         (left := []) (right := [.b]) (by rfl)
-      simp [Residual.Realizes, startResidual, deepResidual, Residual.leftWord,
+      simp [Residual.Realizes, deepResidual, Residual.leftWord,
         Residual.rightWord] at realized
     obtain ⟨earlier, before', stroke', prior_eq, earlierPath, deepStep⟩ :=
       priorPath.snoc_of_ne_nil priorNonempty
@@ -572,7 +395,7 @@ private theorem bcbcTail_iff (history : List (Stroke TagLetter 3)) :
       obtain ⟨wake₁, wake₂, rfl⟩ := List.length_eq_two.mp wakeLength
       cases head <;> cases wake₁ <;> cases wake₂ <;>
         simp [bcbcTail, bcbcNull, consumed_cons, produced_cons, strokeBCB, stroke₃,
-          Stroke.letters, bcbcBody, tagOutput, nearyBody, List.append_assoc]
+          Stroke.letters, bcbcBody, tagOutput, nearyBody]
 
 /-- The complete terminal history `F D (X (D Z)ⁿ F)*`. -/
 def terminalHistory (depths : List Nat) : List (Stroke TagLetter 3) :=
@@ -598,8 +421,7 @@ theorem bcbc_terminal_match_iff (word : List NearyTile) :
     have wakeLength : wake.length = 2 := by omega
     obtain ⟨wake₁, wake₂, rfl⟩ := List.length_eq_two.mp wakeLength
     cases head <;> cases wake₁ <;> cases wake₂ <;>
-      simp [consumed_cons, produced_cons, bcbcBody, tagOutput, nearyBody,
-        Stroke.letters, List.append_assoc] at semantic
+      simp [consumed_cons, bcbcBody, nearyBody, Stroke.letters] at semantic
     obtain ⟨nullTail, tail_eq, null⟩ := (bcbcTail_iff tail).mp semantic
     obtain ⟨depths, null_eq⟩ := (bcbcNull_iff nullTail).mp null
     refine ⟨depths, ?_⟩
@@ -671,12 +493,12 @@ theorem recognizerProduct_mulVec_delta (word : List PairedControl) :
           ext coordinate
           fin_cases coordinate
           all_goals simp [recognizerGenerator, recognizerGuard, recognizerCarry, Matrix.mulVec,
-            Matrix.dotProduct, Fin.sum_univ_succ]
+            dotProduct, Fin.sum_univ_succ]
           all_goals ring
       | data letter =>
           cases letter <;> ext coordinate <;> fin_cases coordinate
           all_goals simp [recognizerGenerator, recognizerData, recognizerGuard, recognizerCarry,
-            Matrix.mulVec, Matrix.dotProduct, Fin.sum_univ_succ]
+            Matrix.mulVec, dotProduct, Fin.sum_univ_succ]
           all_goals norm_num
           all_goals ring
 
@@ -685,7 +507,7 @@ theorem recognizerColumn_eq_toggle_delta :
   ext coordinate
   fin_cases coordinate <;>
     norm_num [recognizerColumn, recognizerGenerator, recognizerDelta, Matrix.mulVec,
-      Matrix.dotProduct, Fin.sum_univ_succ]
+      dotProduct, Fin.sum_univ_succ]
 
 /-- Scalar coefficient of the explicit rational matrices. -/
 def recognizerCoefficient (word : List PairedControl) : ℚ :=
@@ -708,16 +530,18 @@ theorem recognizerCoefficient_eq_guard (word : List PairedControl) :
         simp [wordProduct]
       _ = _ := recognizerProduct_mulVec_delta (word ++ [.toggle])
   rw [recognizerCoefficient, linearCoefficient, state]
-  simp [recognizerRow, Matrix.dotProduct, Fin.sum_univ_succ]
+  simp [recognizerRow, dotProduct, Fin.sum_univ_succ]
 
 @[simp] theorem recognizerData_det (letter : TagLetter) :
     (recognizerData letter).det = 0 := by
   cases letter <;>
-    norm_num [recognizerData, Matrix.det_fin_three, Matrix.vecHead, Matrix.vecTail]
+    norm_num [recognizerData, Matrix.det_fin_three, Matrix.cons_val_two,
+      Matrix.vecHead, Matrix.vecTail]
 
 @[simp] theorem recognizerToggle_det :
     (recognizerGenerator .toggle).det = -1 := by
-  norm_num [recognizerGenerator, Matrix.det_fin_three, Matrix.vecHead, Matrix.vecTail]
+  norm_num [recognizerGenerator, Matrix.det_fin_three, Matrix.cons_val_two,
+    Matrix.vecHead, Matrix.vecTail]
 
 /-! ## Canonical terminal controls -/
 
@@ -748,7 +572,7 @@ theorem suffixDecode_historyControl (history : List (Stroke TagLetter 3)) :
       obtain ⟨wake₁, wake₂, rfl⟩ := List.length_eq_two.mp wakeLength
       cases head <;> cases wake₁ <;> cases wake₂ <;>
         simp [historyControl, strokeControl, suffixDecode, tileHistory, strokeTiles,
-          PairPhase.flip, PairPhase.tile, induction, List.append_assoc]
+          PairPhase.flip, PairPhase.tile, induction]
 
 /-- Canonical control spelling of one complete terminal history. -/
 def terminalControl (depths : List Nat) : List PairedControl :=
@@ -803,8 +627,9 @@ private theorem nullExcursion_preserves_zero (depth : Nat) (tail : List PairedCo
     (tailCarry : recognizerCarry tail = 0) :
     recognizerCarry (historyControl (nullExcursion depth) ++ tail) = 0 := by
   rw [nullExcursion]
-  simp only [historyControl, List.append_assoc]
-  rw [show strokeControl strokeBBB = xControl by rfl, carry_x]
+  change recognizerCarry
+    (strokeControl strokeBBB ++ historyControl (nestedCore depth ++ [strokeCBC]) ++ tail) = 0
+  rw [show strokeControl strokeBBB = xControl by rfl, List.append_assoc, carry_x]
   have afterCore :
       recognizerCarry
         (historyControl (nestedCore depth) ++ strokeControl strokeCBC ++ tail) = 30 := by
@@ -816,10 +641,7 @@ private theorem nullExcursion_preserves_zero (depth : Nat) (tail : List PairedCo
   have afterCore' :
       recognizerCarry (historyControl (nestedCore depth ++ [strokeCBC]) ++ tail) = 30 := by
     simpa [historyControl_append, historyControl, List.append_assoc] using afterCore
-  have carryEquality :
-      recognizerCarry (historyControl ((nestedCore depth).append [strokeCBC]) ++ tail) = 30 :=
-    afterCore'
-  rw [carryEquality]
+  rw [afterCore']
   norm_num
 
 private theorem nullHistory_preserves_zero (depths : List Nat) (tail : List PairedControl)

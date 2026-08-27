@@ -64,6 +64,7 @@ private theorem periodicShadow_reset_ready :
     rw [show (-9 / 4 : ℚ) = (3 : ℚ) ^ 2 * (-1 : ℤ) / (4 : ℤ) by norm_num]
     exact primePower_mul_int_div_int_hasValue 2 (by norm_num) (by norm_num)
   convert difference_value.2 using 1
+  all_goals norm_num [periodicShadowParameters]
 
 /-- The legal reset branch is a nonterminal fixed point. -/
 private theorem periodicShadow_reset_fixed :
@@ -191,7 +192,7 @@ private theorem periodicShadowDenominator_positive
     0 < periodicShadowDenominator shadowDepth index := by
   have index_ne : index ≠ 0 := Nat.ne_of_gt index_positive
   have power_lt : (9 : ℤ) ^ index < 10 ^ index :=
-    pow_lt_pow_left (by norm_num) (by norm_num) index_ne
+    pow_lt_pow_left₀ (by norm_num) (by norm_num) index_ne
   have remaining_positive : 0 < (9 : ℤ) ^ (shadowDepth + 1 - index) := by positivity
   have scaled_lt :
       (9 : ℤ) ^ index * 9 ^ (shadowDepth + 1 - index) <
@@ -266,8 +267,7 @@ private theorem periodicShadowCarried_penultimate_depth
     exact intCast_isUnit_of_not_dvd (by norm_num : ¬(3 : ℤ) ∣ (10 : ℤ))
   have ten_power_unit : IsUnit 3 ((10 : ℚ) ^ index) := by
     refine ⟨pow_ne_zero index ten_unit.1, ?_⟩
-    rw [padicValRat.pow (p := 3) (q := (10 : ℚ)) ten_unit.1,
-      ten_unit.2]
+    rw [padicValRat.pow (p := 3) (q := (10 : ℚ)), ten_unit.2]
     simp
   have numerator_value :
       HasValue 3 ((3 : ℚ) ^ 2 * ((-4 : ℚ) * 10 ^ index)) 2 := by
@@ -279,7 +279,7 @@ private theorem periodicShadowCarried_penultimate_depth
       ((periodicShadowCarried (index + 1) index).2 : ℚ) /
             (periodicShadowCarried (index + 1) index).1 + 4 =
         (3 : ℚ) ^ 2 * ((-4 : ℚ) * 10 ^ index) / source := by
-    simp only [periodicShadowCarried, Prod.fst, Prod.snd, Int.cast_mul,
+    simp only [periodicShadowCarried, Int.cast_mul,
       Int.cast_neg, Int.cast_ofNat]
     change (-4 : ℚ) * target / source + 4 =
       (3 : ℚ) ^ 2 * ((-4 : ℚ) * 10 ^ index) / source
@@ -366,9 +366,11 @@ private theorem periodicShadowEndpoint_coprime
     periodicShadowDenominator_coprime_thirty_six index_positive
       (by omega : index ≤ shadowDepth)
   have source_coprime_scaled_target := source_coprime_thirty_six.mul_right consecutive
+  obtain ⟨sourceCoefficient, targetCoefficient, bezout⟩ :=
+    source_coprime_scaled_target
   dsimp [periodicShadowEndpoint]
-  convert (source_coprime_scaled_target.symm.add_mul_right_left (-32)).neg_left using 1
-  all_goals ring
+  refine ⟨-targetCoefficient, sourceCoefficient + 32 * targetCoefficient, ?_⟩
+  linear_combination bezout
 
 private theorem periodicShadowEndpoint_target_coprime
     {shadowDepth index : Nat} (shadowDepth_odd : Odd shadowDepth)
@@ -394,9 +396,9 @@ private theorem periodicShadow_reduction
       index_positive index_lt,
     by norm_num, by norm_num, ?_⟩
   constructor
-  · simp only [periodicShadowEndpoint, Prod.fst, Prod.snd]
+  · simp only [periodicShadowEndpoint]
     ring
-  · simp only [periodicShadowEndpoint, Prod.fst, Prod.snd]
+  · simp only [periodicShadowEndpoint]
     have recurrence := periodicShadowDenominator_recurrence index_lt
     linear_combination 16 * recurrence
 
@@ -411,8 +413,9 @@ private theorem periodicShadowState_eq
         (4 * periodicShadowDenominator shadowDepth index) := by
   have denominator_ne : (periodicShadowDenominator shadowDepth index : ℚ) ≠ 0 := by
     exact_mod_cast ne_of_gt (periodicShadowDenominator_positive index_positive index_le)
-  simp only [periodicShadowState, endpointState, periodicShadowEndpoint, Prod.fst, Prod.snd]
+  simp only [periodicShadowState, endpointState, periodicShadowEndpoint]
   field_simp [denominator_ne]
+  push_cast
   ring
 
 /-- Every internal periodic-shadow state is ready at wait one. Its exact shadow depth is not
@@ -433,7 +436,8 @@ private theorem periodicShadow_ready
       mul_hasValue (primePower_hasValue (prime := 3) 2) (neg_hasValue target_unit)
     have denominator_value := mul_hasValue four_unit source_unit
     convert div_hasValue numerator_value denominator_value using 1
-    ring
+    · ring
+    · norm_num
   have state_value :
       HasValue 3 (periodicShadowState shadowDepth index) 1 := by
     rw [periodicShadowState_eq index_positive (by omega : index ≤ shadowDepth + 1),
@@ -517,16 +521,16 @@ private theorem periodicShadowCarried_height_lt
   have middle_lt_target : middle < target :=
     periodicShadowDenominator_lt_next (by omega)
   have source_abs_lt_middle_scaled : source.natAbs < (-4 * middle).natAbs := by
-    simpa only [Int.natAbs_mul] using
+    simpa [Int.natAbs_mul] using
       Int.natAbs_lt_natAbs_of_nonneg_of_lt source_positive.le
         (by nlinarith : source < 4 * middle)
   have middle_scaled_lt_target_scaled :
       (-4 * middle).natAbs < (-4 * target).natAbs := by
-    simpa only [Int.natAbs_mul] using
+    simpa [Int.natAbs_mul] using
       (Nat.mul_lt_mul_left (by norm_num : 0 < 4)).mpr
         (Int.natAbs_lt_natAbs_of_nonneg_of_lt middle_positive.le middle_lt_target)
   rw [integralPairHeight, integralPairHeight]
-  simp only [periodicShadowCarried, Prod.fst, Prod.snd]
+  simp only [periodicShadowCarried]
   change max source.natAbs (-4 * middle).natAbs <
     max middle.natAbs (-4 * target).natAbs
   rw [max_eq_right source_abs_lt_middle_scaled.le]
@@ -556,7 +560,7 @@ private theorem periodicShadowSmith_raw_eq (shadowDepth index : Nat) :
   ext coordinate
   fin_cases coordinate <;>
     simp [periodicShadowSmithSplit, smithRubanQuotient, pairVector,
-      periodicShadowSmith, periodicShadowEndpoint, smul_eq_mul] <;>
+      periodicShadowSmith, periodicShadowEndpoint] <;>
     ring
 
 private theorem periodicShadowSmith_first_mod_six
@@ -595,15 +599,16 @@ private theorem periodicShadowSmith_coprime
   have consecutive := periodicShadowDenominators_coprime shadowDepth_odd
     shadowDepth_three index_lt.le
   have target_coprime_difference : IsCoprime target difference := by
-    convert consecutive.symm.add_mul_left_right (-1) using 1
-    all_goals
-      simp [source, target, difference]
-      ring
+    obtain ⟨sourceCoefficient, targetCoefficient, bezout⟩ := consecutive
+    refine ⟨sourceCoefficient + targetCoefficient, sourceCoefficient, ?_⟩
+    dsimp [source, target, difference] at bezout ⊢
+    linear_combination bezout
   have first_coprime_difference : IsCoprime first difference := by
-    convert (target_coprime_difference.add_mul_right_left (-8)).neg_left using 1
-    all_goals
-      simp [first, source, target, difference]
-      ring
+    obtain ⟨targetCoefficient, differenceCoefficient, bezout⟩ :=
+      target_coprime_difference
+    refine ⟨-targetCoefficient, differenceCoefficient + 8 * targetCoefficient, ?_⟩
+    dsimp [first, source, target, difference] at bezout ⊢
+    linear_combination bezout
   simpa [periodicShadowSmith, first, source, target, difference] using
     first_coprime_four.mul_right first_coprime_difference
 
@@ -642,7 +647,7 @@ private theorem periodicShadowSmith_height_lt
       (by linarith : 0 ≤ -first) (by linarith : -first < -nextFirst)
     simpa only [Int.natAbs_neg] using absolute
   rw [integralPairHeight, integralPairHeight]
-  simp only [periodicShadowSmith, Prod.fst, Prod.snd]
+  simp only [periodicShadowSmith]
   change max first.natAbs second.natAbs <
     max nextFirst.natAbs (4 * (middle - target)).natAbs
   rw [max_eq_left second_abs_lt_first_abs.le]

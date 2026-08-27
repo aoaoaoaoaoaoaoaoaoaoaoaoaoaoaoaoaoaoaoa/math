@@ -33,14 +33,12 @@ theorem exteriorChangeInv_mul_exteriorChange : exteriorChangeInv * exteriorChang
   fin_cases i <;> fin_cases j <;>
     norm_num [exteriorChangeInv, exteriorChange, Matrix.one_apply, Matrix.mul_apply,
       Fin.sum_univ_succ]
-  all_goals simp_all
 
 theorem exteriorChange_mul_exteriorChangeInv : exteriorChange * exteriorChangeInv = 1 := by
   ext i j
   fin_cases i <;> fin_cases j <;>
     norm_num [exteriorChangeInv, exteriorChange, Matrix.one_apply, Matrix.mul_apply,
       Fin.sum_univ_succ]
-  all_goals simp_all
 
 /-- Complete contragredient exterior state of a safe suffix product. -/
 def exteriorState (middle : Matrix (Fin 3) (Fin 3) ℚ) : Fin 3 → ℚ :=
@@ -55,8 +53,8 @@ def exteriorTransition (atom : Matrix (Fin 3) (Fin 3) ℚ) :
   rw [exteriorState, Matrix.adjugate_one, Matrix.transpose_one, Matrix.one_mulVec]
   funext i
   fin_cases i <;>
-    norm_num [exteriorSeed, exteriorChange, Matrix.vecHead, Matrix.vecTail, Matrix.mulVec,
-      Matrix.dotProduct, Fin.sum_univ_succ]
+    norm_num [exteriorSeed, exteriorChange, Matrix.cons_val_two, Matrix.vecHead,
+      Matrix.vecTail, Matrix.mulVec, dotProduct, Fin.sum_univ_succ]
 
 /-- The exterior transition respects physical left multiplication, including singular atoms. -/
 theorem exteriorState_mul (atom middle : Matrix (Fin 3) (Fin 3) ℚ) :
@@ -75,8 +73,8 @@ theorem bridge_det_eq_exteriorState_first (ρ : ℚ)
     (bridge ρ middle).det = (9 * ρ / 2) * exteriorState middle 0 := by
   rw [bridge_det_eq_adjugate_first]
   congr 1
-  norm_num [exteriorState, exteriorChange, exteriorSeed, Matrix.vecHead, Matrix.vecTail,
-    Matrix.mulVec, Matrix.dotProduct, Fin.sum_univ_succ]
+  norm_num [exteriorState, exteriorChange, exteriorSeed, Matrix.cons_val_two,
+    Matrix.vecHead, Matrix.vecTail, Matrix.mulVec, dotProduct, Fin.sum_univ_succ]
   ring
 
 private theorem bAtom_three_mul_matrix (ρ : ℚ) (j : Nat) :
@@ -87,7 +85,7 @@ private theorem bAtom_three_mul_matrix (ρ : ℚ) (j : Nat) :
   rw [bAtom, normalRoot_pow_three_mul]
   ext i k
   fin_cases i <;> fin_cases k <;>
-    norm_num [bFlank, flank, drift, injection, Matrix.vecHead, Matrix.vecTail,
+    norm_num [bFlank, flank, drift, injection, Matrix.cons_val_two, Matrix.vecHead, Matrix.vecTail,
       Matrix.mul_apply, Fin.sum_univ_succ] <;>
     ring
 
@@ -99,7 +97,7 @@ private theorem cAtom_three_mul_matrix (ρ L M : ℚ) (j : Nat) :
   rw [cAtom, normalRoot_pow_three_mul]
   ext i k
   fin_cases i <;> fin_cases k <;>
-    norm_num [cFlank, flank, drift, injection, Matrix.vecHead, Matrix.vecTail,
+    norm_num [cFlank, flank, drift, injection, Matrix.cons_val_two, Matrix.vecHead, Matrix.vecTail,
       Matrix.mul_apply, Fin.sum_univ_succ] <;>
     ring
 
@@ -119,8 +117,8 @@ private theorem exteriorTransition_matrix
   ext row column
   fin_cases row <;> fin_cases column <;>
     norm_num [exteriorTransition, exteriorChange, exteriorChangeInv, Matrix.adjugate_fin_three,
-      Matrix.transpose_apply, Matrix.vecHead, Matrix.vecTail, Matrix.mul_apply,
-      Fin.sum_univ_succ] <;>
+      Matrix.transpose_apply, Matrix.cons_val_two, Matrix.vecHead, Matrix.vecTail,
+      Matrix.mul_apply, Matrix.vecMul, dotProduct, Fin.sum_univ_succ] <;>
     ring
 
 /-- The four normalized safe exterior actions. -/
@@ -158,7 +156,7 @@ private theorem exteriorTransition_b_zero (β : Nat) (body : List TagLetter) (j 
     bAtom_three_mul_matrix, exteriorTransition_matrix]
   ext i k
   fin_cases i <;> fin_cases k <;>
-    norm_num [safeExteriorAction, Matrix.vecHead, Matrix.vecTail] <;>
+    norm_num [safeExteriorAction, Matrix.cons_val_two, Matrix.vecHead, Matrix.vecTail] <;>
     ring
 
 private theorem exteriorTransition_b_one (β : Nat) (body : List TagLetter) (j : Nat) :
@@ -168,7 +166,7 @@ private theorem exteriorTransition_b_one (β : Nat) (body : List TagLetter) (j :
   rw [residueTwoWallGenerator_b_one_matrix, exteriorTransition_matrix]
   ext i k
   fin_cases i <;> fin_cases k <;>
-    norm_num [safeExteriorAction, Matrix.vecHead, Matrix.vecTail] <;>
+    norm_num [safeExteriorAction, Matrix.cons_val_two, Matrix.vecHead, Matrix.vecTail] <;>
     ring
 
 private theorem exteriorTransition_c_zero (β : Nat) (body : List TagLetter) (j : Nat) :
@@ -181,7 +179,7 @@ private theorem exteriorTransition_c_zero (β : Nat) (body : List TagLetter) (j 
     cAtom_three_mul_matrix, exteriorTransition_matrix]
   ext i k
   fin_cases i <;> fin_cases k <;>
-    norm_num [safeExteriorAction, Matrix.vecHead, Matrix.vecTail] <;>
+    norm_num [safeExteriorAction, Matrix.cons_val_two, Matrix.vecHead, Matrix.vecTail] <;>
     ring
 
 private theorem exteriorTransition_c_one (β : Nat) (body : List TagLetter) (j : Nat) :
@@ -194,7 +192,7 @@ private theorem exteriorTransition_c_one (β : Nat) (body : List TagLetter) (j :
     cAtom_three_mul_add_one_matrix, exteriorTransition_matrix]
   ext i k
   fin_cases i <;> fin_cases k <;>
-    norm_num [safeExteriorAction, Matrix.vecHead, Matrix.vecTail] <;>
+    norm_num [safeExteriorAction, Matrix.cons_val_two, Matrix.vecHead, Matrix.vecTail] <;>
     ring
 
 /-- Every physical safe atom induces three times its normalized exterior action. -/

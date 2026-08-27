@@ -182,7 +182,7 @@ theorem physical_isMortal_iff_guardedOrbit (parameters : Parameters) :
       ∃ waits, guardedOrbit parameters waits = some 1 := by
   rw [physical_isMortal_iff_positiveBridge
     parameters.prime parameters.depth parameters.center parameters.reset
-    parameters.prime_two parameters.drift_ne_zero]
+    parameters.prime_prime.ne_zero parameters.drift_ne_zero]
   apply exists_congr
   exact positiveBridge_zero_iff_guardedOrbit parameters
 

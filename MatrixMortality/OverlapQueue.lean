@@ -148,7 +148,7 @@ private theorem spell_singletons (roles : List (PairPhase × Bool)) :
   induction roles with
   | nil => rfl
   | cons role roles induction =>
-      simp only [spell, List.map_cons, List.join_cons, List.singleton_append]
+      simp only [spell, List.map_cons]
       exact congrArg (role.2 :: ·) induction
 
 private theorem roles_symbols (δ : ControllerTransition PairPhase Bool)
@@ -179,8 +179,10 @@ theorem coefficient_zero_iff (δ : ControllerTransition PairPhase Bool)
   rw [controllerSuffixRoles, controllerSuffixDecode_reverse]
   simp only [spell_singletons, List.map_reverse, roles_symbols, spell_reverse]
   constructor <;> intro equality
-  · simpa [List.reverse_append] using congrArg List.reverse equality
-  · simpa [List.reverse_append] using congrArg List.reverse equality
+  · change false :: word =
+      spell (fun role => cancel role.1 role.2) (controllerRolesFrom δ .rule word)
+    simpa [List.reverse_append] using congrArg List.reverse equality
+  · simpa [emitted, List.reverse_append] using congrArg List.reverse equality
 
 /-- The fixed three-matrix family emitted by a positive overlap-queue source. -/
 def mortalityFamily (δ : ControllerTransition PairPhase Bool)
@@ -281,23 +283,23 @@ private theorem potential_step_le (initial : List Bool)
       cases destination : δ .rule head with
       | rule =>
           have production_positive : 0 < (produce .rule head).length :=
-            List.length_pos.mpr (no_pure_delete .rule head destination)
-          simp [potential, destination, List.length_append]
+            List.length_pos_of_ne_nil (no_pure_delete .rule head destination)
+          simp [potential, List.length_append]
           omega
       | erase =>
-          simp [potential, destination, List.length_append]
+          simp [potential, List.length_append]
   | erase =>
       cases destination : δ .erase head with
       | erase =>
           have production_positive : 0 < (produce .erase head).length :=
-            List.length_pos.mpr (no_pure_delete .erase head destination)
-          simp [potential, destination, List.length_append]
+            List.length_pos_of_ne_nil (no_pure_delete .erase head destination)
+          simp [potential, List.length_append]
           omega
       | rule =>
           have frame_length := congrArg List.length (cocycle .erase head)
-          have initial_positive : 0 < initial.length := List.length_pos.mpr initial_nonempty
+          have initial_positive : 0 < initial.length := List.length_pos_of_ne_nil initial_nonempty
           simp [frame, destination, List.length_append] at frame_length
-          simp [potential, destination, List.length_append]
+          simp [potential, List.length_append]
           omega
 
 /-- Without state-preserving deletion, the charged queue length cannot decrease along a trace. -/
@@ -335,7 +337,7 @@ theorem pure_deletion_of_accepts_large (initial : List Bool)
             (cancel phase head).length + (frame initial phase).length := by
         simpa [fixed, production_empty, List.length_append] using
           congrArg List.length (cocycle phase head)
-      exact List.length_eq_zero.mp (by omega)⟩
+      exact List.length_eq_zero_iff.mp (by omega)⟩
   obtain ⟨word, trace⟩ := accepts
   have bound := trace.potential_le initial_nonempty cocycle no_pure_delete
   simp [potential] at bound

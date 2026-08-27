@@ -27,7 +27,6 @@ def semanticMatrix (upper lower : List Bool) : Matrix (Fin 3) (Fin 3) ℚ :=
   ext i j
   fin_cases i <;> fin_cases j <;>
     norm_num [semanticMatrix, Matrix.one_apply, Matrix.vecHead, Matrix.vecTail]
-  all_goals split <;> simp_all
 
 theorem semanticMatrix_append
     (upper lower nextUpper nextLower : List Bool) :
@@ -36,7 +35,7 @@ theorem semanticMatrix_append
   ext i j
   fin_cases i <;> fin_cases j <;>
     simp [semanticMatrix, sparseCode_append, Matrix.mul_apply, Fin.sum_univ_succ,
-      Matrix.vecHead, Matrix.vecTail, pow_add] <;>
+      pow_add] <;>
     ring
 
 /-- Reduced retuned atom named by one complete Neary tile. -/
@@ -168,6 +167,15 @@ theorem bridge_semanticMatrix_det
     Matrix.mul_apply, Fin.sum_univ_succ]
   ring
 
+/-- The upper-right bridge entry is a positive affine function of the lower sparse code. -/
+theorem bridge_semanticMatrix_top_right
+    (β : Nat) (upper lower : List Bool) :
+    bridge β (semanticMatrix upper lower) 0 1 =
+      2 + 38 * (sparseCode lower : ℚ) := by
+  norm_num [bridge, semanticMatrix, bladeInput, bladeOutput,
+    Matrix.mul_apply, Fin.sum_univ_succ]
+  ring
+
 /-- The bridge always retains a nonzero lower-right entry. -/
 theorem bridge_semanticMatrix_bottom_right
     (β : Nat) (upper lower : List Bool) :
@@ -253,7 +261,7 @@ private theorem bridge_one_det_ne_zero (β : Nat) (β_pos : 0 < β) :
   have scale_ge : (3 : ℚ) ≤ 3 ^ β := by
     calc
       (3 : ℚ) = 3 ^ 1 := by norm_num
-      _ ≤ 3 ^ β := pow_le_pow_right (by norm_num) β_pos
+      _ ≤ 3 ^ β := pow_le_pow_right₀ (by norm_num) (by omega)
   rw [Matrix.det_fin_two]
   norm_num [bridge, bladeInput, bladeOutput, Matrix.one_apply, Matrix.mul_apply,
     Fin.sum_univ_succ]
@@ -353,7 +361,7 @@ def tileWord (tile : NearyTile) : List (Option TagLetter) :=
 
 /-- Literal concatenation of the complete tile words. -/
 def middleWord (word : List NearyTile) : List (Option TagLetter) :=
-  word.bind tileWord
+  word.flatMap tileWord
 
 private theorem tileWord_product
     (β : Nat) (body : List TagLetter) (tile : NearyTile) :
@@ -366,9 +374,9 @@ private theorem middleWord_product
   induction word with
   | nil => simp [middleWord, physicalMiddle, wordProduct]
   | cons tile word induction =>
-      change wordProduct (generator β body) (word.bind tileWord) =
+      change wordProduct (generator β body) (word.flatMap tileWord) =
         physicalMiddle β body word at induction
-      rw [middleWord, List.bind_cons, wordProduct_append, tileWord_product,
+      rw [middleWord, List.flatMap_cons, wordProduct_append, tileWord_product,
         physicalMiddle, wordProduct_cons, induction]
       rfl
 
@@ -431,14 +439,14 @@ private theorem physicalTile_preserves_first
       cases letter <;>
         norm_num [physicalTile, ParabolicBlade.completeGap, NearyTile.letter,
           dataGenerator, dataFlank, bFlank, cFlank, ParabolicBlade.injection,
-          ParabolicBlade.flank, Matrix.vecMul, Matrix.dotProduct, Matrix.one_apply,
+          ParabolicBlade.flank, Matrix.vecMul, dotProduct, Matrix.one_apply,
           Matrix.mul_apply, Fin.sum_univ_succ]
   | rule letter =>
       rw [physicalTile, ParabolicBlade.completeGap, root_cube]
       cases letter <;>
         norm_num [NearyTile.letter, dataGenerator, dataFlank, bFlank, cFlank,
           ParabolicBlade.injection, ParabolicBlade.flank, ParabolicBlade.drift,
-          Matrix.vecMul, Matrix.dotProduct, Matrix.mul_apply, Fin.sum_univ_succ]
+          Matrix.vecMul, dotProduct, Matrix.mul_apply, Fin.sum_univ_succ]
 
 /-- Every continuation made only of complete Neary gaps preserves the first row coordinate. -/
 theorem physicalMiddle_preserves_first
@@ -473,7 +481,6 @@ private theorem injectionRetraction_mul_injection :
   fin_cases i <;> fin_cases j <;>
     norm_num [injectionRetraction, ParabolicBlade.injection, Matrix.one_apply,
       Matrix.mul_apply, Fin.sum_univ_succ]
-  all_goals split <;> simp_all
 
 /-- Retraction of the exceptional output factor. -/
 def bladeRetraction (β : Nat) : Matrix (Fin 2) (Fin 3) ℚ :=
@@ -525,7 +532,7 @@ private theorem bFlank_mul_bFlankSection (β : Nat) :
       Matrix.mul_apply, Fin.sum_univ_succ] ;
     field_simp [scale_ne] ;
     ring
-  all_goals first | exact scale_cancel | (split <;> simp_all)
+  all_goals exact scale_cancel
 
 /-- Multiplying the physical context by fixed retractions recovers its bridge exactly. -/
 theorem recover_bridge
@@ -546,9 +553,7 @@ theorem recover_bridge
       simp only [Matrix.mul_assoc]
     _ = bridge β (tileProduct β body word) := by
       rw [injectionRetraction_mul_injection, bFlank_mul_bFlankSection]
-      simp only [Matrix.mul_one, Matrix.one_mul]
-      change (bladeRetraction β * bladeOutput β) *
-          bridge β (tileProduct β body word) * (bladeInput * bladeSection) = _
+      simp only [Matrix.mul_one]
       rw [bladeRetraction_mul_bladeOutput, bladeInput_mul_bladeSection]
       simp
 
@@ -634,8 +639,9 @@ theorem physicalMinor_det
       -2052 * (3 : ℚ) ^ β * (bridge β (tileProduct β body word)).det := by
   rw [physicalMinor, physicalContext_factor, Matrix.det_fin_two]
   norm_num [bladeOutput, bladeInput, bFlank, ParabolicBlade.injection,
-    ParabolicBlade.flank, Matrix.mul_apply, Matrix.vecMul, Matrix.dotProduct,
-    Matrix.det_fin_two, Fin.sum_univ_succ]
+    ParabolicBlade.flank, Matrix.mul_apply, Matrix.vecMul, dotProduct,
+    Matrix.det_fin_two, Fin.sum_univ_succ, Matrix.cons_val_two,
+    Matrix.cons_val_three, Matrix.vecHead, Matrix.vecTail]
   ring
 
 /-- The fixed physical minor vanishes exactly on the Neary terminal equation. -/

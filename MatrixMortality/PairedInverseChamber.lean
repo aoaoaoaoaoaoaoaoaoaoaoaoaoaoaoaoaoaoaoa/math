@@ -25,28 +25,28 @@ def CancellationSafe (left right : Bool × Bool) : Prop :=
 
 /-- A raw signed word has no adjacent inverse pair. -/
 def FreelyReduced (word : List (Bool × Bool)) : Prop :=
-  word.Chain' CancellationSafe
+  word.IsChain CancellationSafe
 
 /-- A reduced word has no negative-to-positive sign turn. -/
 def PositiveNegative (word : List (Bool × Bool)) : Prop :=
-  word.Chain' fun left right => ¬(left.2 = false ∧ right.2 = true)
+  word.IsChain fun left right => ¬(left.2 = false ∧ right.2 = true)
 
 /-- A reduced word has no positive-to-negative sign turn. -/
 def NegativePositive (word : List (Bool × Bool)) : Prop :=
-  word.Chain' fun left right => ¬(left.2 = true ∧ right.2 = false)
+  word.IsChain fun left right => ¬(left.2 = true ∧ right.2 = false)
 
 private theorem chainAll {α : Type*} (word : List α) :
-    word.Chain' fun _ _ => True := by
+    word.IsChain fun _ _ => True := by
   induction word with
-  | nil => trivial
+  | nil => exact .nil
   | cons first word induction =>
       cases word with
-      | nil => exact List.chain'_singleton first
-      | cons second rest => exact List.Chain'.cons trivial induction
+      | nil => exact List.isChain_singleton first
+      | cons second rest => exact List.IsChain.cons_cons trivial induction
 
 private theorem signedWord_freelyReduced (sign : Bool) (word : List Bool) :
     FreelyReduced (signedWord sign word) := by
-  rw [FreelyReduced, signedWord, List.chain'_map]
+  rw [FreelyReduced, signedWord, List.isChain_map]
   exact (chainAll word).imp fun left right _ => by simp [CancellationSafe]
 
 private theorem reduce_eq_self_of_freelyReduced {word : List (Bool × Bool)}
@@ -57,7 +57,7 @@ private theorem reduce_eq_self_of_freelyReduced {word : List (Bool × Bool)}
       cases word with
       | nil => rfl
       | cons second rest =>
-          have boundary := reduced.rel_head
+          have boundary := reduced.rel
           have tail_reduced := reduced.tail
           rw [FreeGroup.reduce.cons, induction tail_reduced]
           change
@@ -127,10 +127,10 @@ private theorem reduce_negative_positive_shape (negative positive : List Bool) :
 private theorem positive_negative_signedWords
     (positive negative : List Bool) :
     PositiveNegative (signedWord true positive ++ signedWord false negative) := by
-  apply List.Chain'.append
-  · rw [signedWord, List.chain'_map]
+  apply List.IsChain.append
+  · rw [signedWord, List.isChain_map]
     exact (chainAll positive).imp fun _ _ _ => by simp
-  · rw [signedWord, List.chain'_map]
+  · rw [signedWord, List.isChain_map]
     exact (chainAll negative).imp fun _ _ _ => by simp
   · intro left left_mem right right_mem
     simp [signedWord] at left_mem right_mem
@@ -140,10 +140,10 @@ private theorem positive_negative_signedWords
 private theorem negative_positive_signedWords
     (negative positive : List Bool) :
     NegativePositive (signedWord false negative ++ signedWord true positive) := by
-  apply List.Chain'.append
-  · rw [signedWord, List.chain'_map]
+  apply List.IsChain.append
+  · rw [signedWord, List.isChain_map]
     exact (chainAll negative).imp fun _ _ _ => by simp
-  · rw [signedWord, List.chain'_map]
+  · rw [signedWord, List.isChain_map]
     exact (chainAll positive).imp fun _ _ _ => by simp
   · intro left left_mem right right_mem
     simp [signedWord] at left_mem right_mem
@@ -285,7 +285,7 @@ private theorem leftInverseWord_freelyReduced {β : Nat} (β_pos : 0 < β) :
         (signedWord false (List.replicate β false) ++ [(true, true)]) := by
     rw [FreelyReduced]
     apply (signedWord_freelyReduced false _).append
-    · exact List.chain'_singleton _
+    · exact List.isChain_singleton _
     · simp [signedWord, CancellationSafe, List.getLast?_replicate, β_ne]
   have negative_z_positive :
       FreelyReduced
@@ -297,7 +297,7 @@ private theorem leftInverseWord_freelyReduced {β : Nat} (β_pos : 0 < β) :
   rw [FreelyReduced] at negative_z_positive
   rw [leftInverseWord, FreelyReduced]
   apply negative_z_positive.append
-  · exact List.chain'_singleton _
+  · exact List.isChain_singleton _
   · intro left left_mem right right_mem
     have positive_ne : signedWord true (List.replicate β false) ≠ [] := by
       simp [signedWord, β_ne]
@@ -336,9 +336,7 @@ theorem leftInverseState_eq (β : Nat) :
   simp only [signedWord, List.map_replicate]
   rw [← FreeGroup.mul_mk, ← FreeGroup.mul_mk, ← FreeGroup.mul_mk]
   rw [mk_replicate_signed, mk_replicate_signed]
-  simp [x, z, FreeGroup.of, FreeGroup.inv_mk, FreeGroup.invRev, inv_pow]
-  rw [show FreeGroup.mk [(false, false)] =
-    (FreeGroup.mk [(false, true)])⁻¹ by rfl, inv_pow]
+  simp [x, z, FreeGroup.of, FreeGroup.inv_mk, FreeGroup.invRev]
 
 /-- Group formula for the right two-turn state. -/
 theorem rightInverseState_eq :
@@ -354,7 +352,6 @@ theorem rightInverseState_eq :
 theorem leftInverseState_eq_formalCombination (β : Nat) :
     leftInverseState β = (leftSeed β).1⁻¹ * (leftConjugate β).1 := by
   rw [leftInverseState_eq, leftSeed_eq, leftConjugate_eq]
-  simp only [Prod.fst]
   group
 
 /-- The right state is exactly the discrepancy induced by the formal inverse product of the two
@@ -378,7 +375,7 @@ theorem leftInverseState_not_positiveNegative {β : Nat} (β_pos : 0 < β) :
         [(false, false), (true, true)]
         (List.replicate (n + 1) (false, true) ++ [(true, false)]))
   have impossible := chamber.infix transition
-  simp [PositiveNegative] at impossible
+  simp at impossible
 
 theorem leftInverseState_not_negativePositive {β : Nat} (β_pos : 0 < β) :
     ¬NegativePositive (FreeGroup.toWord (leftInverseState β)) := by
@@ -393,7 +390,7 @@ theorem leftInverseState_not_negativePositive {β : Nat} (β_pos : 0 < β) :
           [(true, true)] ++ List.replicate n (false, true))
         [(false, true), (true, false)] [])
   have impossible := chamber.infix transition
-  simp [NegativePositive] at impossible
+  simp at impossible
 
 theorem rightInverseState_not_positiveNegative :
     ¬PositiveNegative (FreeGroup.toWord rightInverseState) := by

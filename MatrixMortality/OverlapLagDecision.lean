@@ -35,7 +35,7 @@ private theorem trace_empty_split {n : Nat} {U V W : List Bool}
       specialize induction target_eq residual_eq
       rcases induction with terminal | terminal | terminal
       · obtain ⟨rfl, empty⟩ := terminal
-        have split := List.append_eq_nil.mp empty
+        have split := List.append_eq_nil_iff.mp empty
         have tail_empty : tail = [] := split.1
         have appendant_empty : appendant n U V W phase false = [] := split.2
         subst tail

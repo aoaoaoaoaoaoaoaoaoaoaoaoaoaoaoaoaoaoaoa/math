@@ -82,23 +82,11 @@ theorem basisInv_mul_basis : basisInv * basis = 1 := by
   ext i j
   fin_cases i <;> fin_cases j <;>
     norm_num [basisInv, basis, Matrix.one_apply, Matrix.mul_apply, Fin.sum_univ_succ]
-  all_goals
-    split
-    · rename_i equality
-      have valueEquality := congrArg Fin.val equality
-      norm_num at valueEquality
-    · norm_num
 
 theorem basis_mul_basisInv : basis * basisInv = 1 := by
   ext i j
   fin_cases i <;> fin_cases j <;>
     norm_num [basisInv, basis, Matrix.one_apply, Matrix.mul_apply, Fin.sum_univ_succ]
-  all_goals
-    split
-    · rename_i equality
-      have valueEquality := congrArg Fin.val equality
-      norm_num at valueEquality
-    · norm_num
 
 private theorem basis_isUnit : IsUnit basis := by
   exact isUnit_iff_exists.mpr ⟨basisInv, basis_mul_basisInv, basisInv_mul_basis⟩
@@ -133,7 +121,7 @@ private theorem conjugate_mul (left right : Matrix (Fin 4) (Fin 4) ℚ) :
           simp only [Matrix.mul_assoc]
     _ = basis * (left * right) * basisInv := by
       rw [basisInv_mul_basis]
-      simp only [Matrix.mul_assoc, mul_one, one_mul]
+      simp only [Matrix.mul_assoc, mul_one]
 
 private theorem normalForm_mul (left right : Matrix (Fin 4) (Fin 4) ℚ) :
     basisInv * (left * right) * basis =
@@ -145,7 +133,7 @@ private theorem normalForm_mul (left right : Matrix (Fin 4) (Fin 4) ℚ) :
           simp only [Matrix.mul_assoc]
     _ = basisInv * (left * right) * basis := by
       rw [basis_mul_basisInv]
-      simp only [Matrix.mul_assoc, mul_one, one_mul]
+      simp only [Matrix.mul_assoc, mul_one]
 
 /-- The physical open root cubes to the fixed unipotent shear. -/
 theorem root_cube (ρ : ℚ) : root ρ ^ 3 = physicalDrift := by
@@ -248,13 +236,13 @@ private theorem column_ne_zero (ρ : ℚ) : column ρ ≠ 0 := by
   intro column_zero
   have second := congr_fun column_zero 1
   have third := congr_fun column_zero 2
-  norm_num [column] at second third
+  norm_num [column, Matrix.cons_val_two, Matrix.vecHead, Matrix.vecTail] at second third
   linarith
 
 private theorem row_ne_zero (ρ : ℚ) : row ρ ≠ 0 := by
   intro row_zero
   have entry := congr_fun row_zero 2
-  norm_num [row] at entry
+  norm_num [row, Matrix.cons_val_two, Matrix.vecHead, Matrix.vecTail] at entry
 
 /-- A fixed nonzero minor certifying that the exceptional atom has rank at least two. -/
 def exceptionalMinor (ρ : ℚ) : Matrix (Fin 2) (Fin 2) ℚ :=
@@ -265,7 +253,7 @@ def exceptionalMinor (ρ : ℚ) : Matrix (Fin 2) (Fin 2) ℚ :=
 theorem exceptionalMinor_det (ρ : ℚ) : (exceptionalMinor ρ).det = 99 * ρ := by
   rw [Matrix.det_fin_two]
   norm_num [exceptionalMinor, bAtom, bFlank, flank, normalRoot, injection, pow_succ,
-    Matrix.mul_apply, Fin.sum_univ_succ]
+    Matrix.mul_apply, Matrix.cons_val_two, Matrix.vecHead, Matrix.vecTail, Fin.sum_univ_succ]
   ring
 
 /-- The exceptional atom has a nonzero rank-two minor at every Neary width. -/
@@ -347,7 +335,7 @@ theorem bridge_det_eq_adjugate_first (ρ : ℚ)
   rw [Matrix.det_fin_two]
   norm_num [bridge, coreInput, coreOutput, Matrix.adjugate_fin_three,
     Matrix.transpose_apply, Matrix.mul_apply, Matrix.mulVec, Matrix.vecMul,
-    Matrix.dotProduct, Fin.sum_univ_succ]
+    dotProduct, Matrix.cons_val_two, Matrix.vecHead, Matrix.vecTail, Fin.sum_univ_succ]
   ring
 
 /-- A chain of exceptional atoms separated by arbitrary three-dimensional matrices. -/
@@ -422,7 +410,7 @@ theorem bAtom_one_mulVec_column (ρ : ℚ) :
   funext i
   fin_cases i <;>
     norm_num [bAtom, bFlank, flank, normalRoot, injection, column, pow_succ,
-      Matrix.mul_apply, Matrix.mulVec, Matrix.dotProduct, Fin.sum_univ_succ] <;>
+      Matrix.mul_apply, Matrix.mulVec, dotProduct, Fin.sum_univ_succ] <;>
     ring
 
 /-- The blade row is a left eigenray of the exceptional atom. -/
@@ -431,7 +419,7 @@ theorem row_vecMul_bAtom_one (ρ : ℚ) :
   funext i
   fin_cases i <;>
     norm_num [bAtom, bFlank, flank, normalRoot, injection, row, pow_succ,
-      Matrix.mul_apply, Matrix.vecMul, Matrix.dotProduct, Fin.sum_univ_succ] <;>
+      Matrix.mul_apply, Matrix.vecMul, dotProduct, Fin.sum_univ_succ] <;>
     ring
 
 /-- The physical mixed word that realizes the parabolic blade. -/
@@ -463,15 +451,15 @@ private theorem injected_column_ne_zero (β : Nat) :
   intro product_zero
   have entry := congr_fun product_zero 1
   apply (show (648 : ℚ) * 3 ^ β ≠ 0 by positivity)
-  simp [injection, column, Matrix.mulVec, Matrix.dotProduct, Fin.sum_univ_succ] at entry
+  simp [injection, column, Matrix.mulVec, dotProduct, Fin.sum_univ_succ] at entry
 
 private theorem flanked_row_ne_zero (β : Nat) :
     row ((3 : ℚ) ^ β) ᵥ* bFlank ((3 : ℚ) ^ β) ≠ 0 := by
   intro product_zero
   have entry := congr_fun product_zero 0
-  have scale_one : (1 : ℚ) ≤ 3 ^ β := one_le_pow_of_one_le (by norm_num) _
+  have scale_one : (1 : ℚ) ≤ 3 ^ β := one_le_pow₀ (by norm_num)
   apply (show (12 : ℚ) * 3 ^ β - 1 ≠ 0 by nlinarith)
-  simp [row, bFlank, flank, Matrix.vecMul, Matrix.dotProduct, Fin.sum_univ_succ] at entry
+  simp [row, bFlank, flank, Matrix.vecMul, dotProduct, Fin.sum_univ_succ] at entry
   exact entry
 
 /-- The physical parabolic blade is nonzero. -/
@@ -499,12 +487,6 @@ private theorem drift_zero : drift 0 = 1 := by
   ext i l
   fin_cases i <;> fin_cases l <;>
     norm_num [drift, Matrix.one_apply]
-  all_goals
-    split
-    · rename_i equality
-      have valueEquality := congrArg Fin.val equality
-      norm_num at valueEquality
-    · norm_num
 
 private theorem drift_isUnit (j : ℚ) : IsUnit (drift j) := by
   apply isUnit_iff_exists.mpr
@@ -544,7 +526,8 @@ private theorem normalRoot_pow_three_mul_add_two (ρ : ℚ) (j : Nat) :
 theorem bAtom_det_three_mul (ρ : ℚ) (j : Nat) :
     (bAtom ρ (3 * j)).det = 27 * ρ * (8 * j + 1) := by
   rw [bAtom, normalRoot_pow_three_mul, Matrix.det_fin_three]
-  norm_num [bFlank, flank, drift, injection, Matrix.mul_apply, Fin.sum_univ_succ]
+  norm_num [bFlank, flank, drift, injection, Matrix.mul_apply,
+    Matrix.cons_val_two, Matrix.vecHead, Matrix.vecTail, Fin.sum_univ_succ]
   ring
 
 /-- Determinant of every residue-one `b` gap atom. -/
@@ -552,7 +535,7 @@ theorem bAtom_det_three_mul_add_one (ρ : ℚ) (j : Nat) :
     (bAtom ρ (3 * j + 1)).det = 216 * j * ρ := by
   rw [bAtom, normalRoot_pow_three_mul_add_one, Matrix.det_fin_three]
   norm_num [bFlank, flank, drift, normalRoot, injection, Matrix.mul_apply,
-    Fin.sum_univ_succ]
+    Matrix.cons_val_two, Matrix.vecHead, Matrix.vecTail, Fin.sum_univ_succ]
   ring
 
 /-- Determinant of every residue-two `b` gap atom. -/
@@ -560,6 +543,7 @@ theorem bAtom_det_three_mul_add_two (ρ : ℚ) (j : Nat) :
     (bAtom ρ (3 * j + 2)).det = (9 * ρ / 2) * (48 * j - 114 * ρ + 49) := by
   rw [bAtom, normalRoot_pow_three_mul_add_two, Matrix.det_fin_three]
   norm_num [bFlank, flank, drift, normalRoot, injection, pow_succ, Matrix.mul_apply,
+    Matrix.cons_val_two, Matrix.vecHead, Matrix.vecTail,
     Fin.sum_univ_succ]
   ring
 
@@ -567,7 +551,8 @@ theorem bAtom_det_three_mul_add_two (ρ : ℚ) (j : Nat) :
 theorem cAtom_det_three_mul (ρ L M : ℚ) (j : Nat) :
     (cAtom ρ L M (3 * j)).det = 3 * ((M - 3) * j + 3) := by
   rw [cAtom, normalRoot_pow_three_mul, Matrix.det_fin_three]
-  norm_num [cFlank, flank, drift, injection, Matrix.mul_apply, Fin.sum_univ_succ]
+  norm_num [cFlank, flank, drift, injection, Matrix.mul_apply,
+    Matrix.cons_val_two, Matrix.vecHead, Matrix.vecTail, Fin.sum_univ_succ]
   ring
 
 /-- Determinant of every residue-one `c` gap atom. -/
@@ -576,7 +561,7 @@ theorem cAtom_det_three_mul_add_one (ρ L M : ℚ) (j : Nat) :
       (3 / 16 : ℚ) * (16 * j * (M - 3) + 9 * M - 11 * L + 32) := by
   rw [cAtom, normalRoot_pow_three_mul_add_one, Matrix.det_fin_three]
   norm_num [cFlank, flank, drift, normalRoot, injection, Matrix.mul_apply,
-    Fin.sum_univ_succ]
+    Matrix.cons_val_two, Matrix.vecHead, Matrix.vecTail, Fin.sum_univ_succ]
   ring
 
 /-- Determinant of every residue-two `c` gap atom. -/
@@ -587,6 +572,7 @@ theorem cAtom_det_three_mul_add_two (ρ L M : ℚ) (j : Nat) :
           (114 * ρ + 53) * M + 96) := by
   rw [cAtom, normalRoot_pow_three_mul_add_two, Matrix.det_fin_three]
   norm_num [cFlank, flank, drift, normalRoot, injection, pow_succ, Matrix.mul_apply,
+    Matrix.cons_val_two, Matrix.vecHead, Matrix.vecTail,
     Fin.sum_univ_succ]
   ring
 
@@ -663,7 +649,7 @@ private theorem neary_rule_c_scale_gt_twenty_seven
     (tagEncode_eq_nil_iff β body).not.mpr body_nonempty
   have four_le : 4 ≤ (nearyLower β body (.rule .c)).length := by
     simp only [nearyLower, List.length_append, List.length_cons, List.length_nil]
-    have encoded_length := List.length_pos.mpr encoded_nonempty
+    have encoded_length := List.length_pos_of_ne_nil encoded_nonempty
     omega
   have power_lt : 27 < 3 ^ (nearyLower β body (.rule .c)).length := by
     have := Nat.pow_le_pow_right (by norm_num : 0 < 3) four_le
@@ -697,7 +683,7 @@ theorem cAtom_det_three_mul_ne_zero (β : Nat) (body : List TagLetter) (j : Nat)
   have scaleLarge : (3 : ℚ) < nearySideLowerCScale β body := by
     rw [nearySideLowerCScale_eq_nine_mul, pow_succ]
     have encodedScaleOne : (1 : ℚ) ≤ 3 ^ (tagEncode β body).length :=
-      one_le_pow_of_one_le (by norm_num) _
+      one_le_pow₀ (by norm_num)
     nlinarith
   have gapNonnegative : 0 ≤ nearySideLowerCScale β body - 3 := by linarith
   have indexNonnegative : (0 : ℚ) ≤ j := by positivity

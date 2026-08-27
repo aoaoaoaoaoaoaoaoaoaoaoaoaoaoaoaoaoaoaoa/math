@@ -1,4 +1,4 @@
-import Mathlib.Data.Matrix.Notation
+import Mathlib.LinearAlgebra.Matrix.Notation
 import Mathlib.Tactic
 
 /-!
@@ -16,17 +16,17 @@ open scoped Matrix
 namespace SetterShear
 
 /-- Coefficient of the third basis vector in the physical terminal row. -/
-def hook {R : Type*} [CommRing R] (r upper distinguished alpha : R) : R :=
+def hook {R : Type*} [CommRing R] (r upper alpha : R) : R :=
   1 + r * upper - alpha
 
 /-- The denominator left after resolving the distinguished side vector. -/
-def gap {R : Type*} [CommRing R] (r upper distinguished scale : R) : R :=
+def gap {R : Type*} [CommRing R] (r upper scale : R) : R :=
   scale - 1 - r * upper
 
 /-- Side basis whose columns are `f`, `p`, and `R_c f - alpha f`. -/
 def sideBasis {R : Type*} [CommRing R]
     (r upper distinguishedScale alpha : R) : Matrix (Fin 3) (Fin 3) R :=
-  !![1, 0, hook r upper distinguishedScale alpha;
+  !![1, 0, hook r upper alpha;
      0, -1, 0;
      r, 0, r * (distinguishedScale - alpha)]
 
@@ -61,8 +61,7 @@ theorem delimiter_cube {R : Type*} [CommRing R] (q lambda : R) :
   ext row column
   fin_cases row <;> fin_cases column <;>
     simp [delimiter, firstAxis, terminalRow, pow_succ, Matrix.mul_apply,
-      Matrix.dotProduct, Fin.sum_univ_succ]
-  all_goals ring
+      Fin.sum_univ_succ]
 
 /-- Coordinates of `R_c f` in the sheared side basis. -/
 def distinguishedColumn {R : Type*} [CommRing R] (alpha : R) : Fin 5 → R :=
@@ -75,23 +74,24 @@ def separatorColumn {R : Type*} [CommRing R] (marker : R) : Fin 5 → R :=
 /-- Repairing the terminal row also repairs the mixed separator, independently of the shear. -/
 theorem delimiter_square_distinguishedColumn
     {R : Type*} [CommRing R]
-    (r upper distinguishedScale alpha lambda marker : R)
+    (r upper alpha lambda marker : R)
     (calibrated : lambda * marker = 1 + r * upper) :
-    delimiter (hook r upper distinguishedScale alpha) lambda ^ 2 *ᵥ
+    delimiter (hook r upper alpha) lambda ^ 2 *ᵥ
         distinguishedColumn alpha =
       lambda • separatorColumn marker := by
   ext coordinate
   fin_cases coordinate <;>
     simp [delimiter, hook, distinguishedColumn, separatorColumn, pow_succ,
-      Matrix.mulVec, Matrix.dotProduct, Fin.sum_univ_succ]
-  all_goals linear_combination calibrated
+      Matrix.mulVec, dotProduct, Fin.sum_univ_succ]
+  all_goals
+    rw [calibrated]
 
 /-- Resolving a side product in a sheared basis yields the original transfer tail. -/
 theorem transfer_tail
     {R : Type*} [CommRing R]
     (a x resolvedHead resolvedTail r upper distinguishedUpper alpha value scale : R)
     (headEquation :
-      resolvedHead + hook r distinguishedUpper scale alpha * resolvedTail =
+      resolvedHead + hook r distinguishedUpper alpha * resolvedTail =
         (1 + r * upper) * a - value * x)
     (scaleEquation :
       resolvedHead + (scale - alpha) * resolvedTail = distinguishedUpper * a) :
@@ -99,11 +99,11 @@ theorem transfer_tail
       (distinguishedUpper - 1 - r * upper) * a + value * x := by
   calc
     gap r distinguishedUpper scale * resolvedTail =
-        ((scale - alpha) - hook r distinguishedUpper scale alpha) * resolvedTail := by
+        ((scale - alpha) - hook r distinguishedUpper alpha) * resolvedTail := by
       simp [gap, hook]
       ring
     _ = (resolvedHead + (scale - alpha) * resolvedTail) -
-        (resolvedHead + hook r distinguishedUpper scale alpha * resolvedTail) := by
+        (resolvedHead + hook r distinguishedUpper alpha * resolvedTail) := by
       ring
     _ = distinguishedUpper * a - ((1 + r * upper) * a - value * x) := by
       rw [scaleEquation, headEquation]

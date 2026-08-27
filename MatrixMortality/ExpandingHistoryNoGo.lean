@@ -1,5 +1,5 @@
 import Mathlib.Computability.DFA
-import Mathlib.Data.Set.Finite
+import Mathlib.Data.Set.Finite.Lemmas
 import MatrixMortality.HistoryFracture
 import MatrixMortality.Undecidability.UniversalNeary
 
@@ -85,14 +85,14 @@ theorem wordProduct_mulVec_column (parameters : ResetAffineHistory R)
                 ext coordinate <;>
                 fin_cases coordinate <;>
                 simp [generator, toggleMatrix, state, value, suffixDecode, decoded_eq,
-                  PairPhase.flip, historyPhaseSign, Matrix.mulVec, Matrix.dotProduct,
+                  PairPhase.flip, historyPhaseSign, Matrix.mulVec, dotProduct,
                   Fin.sum_univ_succ]
           | data letter =>
               cases phase <;> cases letter <;>
                 ext coordinate <;>
                 fin_cases coordinate <;>
                 simp [generator, dataMatrix, state, value, suffixDecode, decoded_eq,
-                  PairPhase.tile, historyPhaseSign, Matrix.mulVec, Matrix.dotProduct,
+                  PairPhase.tile, historyPhaseSign, Matrix.mulVec, dotProduct,
                   Fin.sum_univ_succ] <;>
                 ring
 
@@ -114,7 +114,7 @@ theorem coefficient_eq (parameters : ResetAffineHistory R) (left phase constant 
   cases decoded_eq : suffixDecode word with
   | mk suffixPhase decoded =>
       cases suffixPhase <;>
-        simp [row, state, decoded_eq, Matrix.dotProduct, Fin.sum_univ_succ]
+        simp [row, state, decoded_eq, dotProduct, Fin.sum_univ_succ]
       all_goals ring
 
 /-- If one word and its leading toggle both vanish, the target functional cannot see phase. -/
@@ -381,8 +381,8 @@ def modeDFA (machine : ExpandingAffineHistory Mode Control) (start : Mode)
 theorem modeLanguage_isRegular {Mode Control : Type} [Finite Mode]
     (machine : ExpandingAffineHistory Mode Control) (start : Mode) (target : Set Mode) :
     (machine.modeLanguage start target).IsRegular := by
-  letI : Fintype Mode := Fintype.ofFinite Mode
-  refine ⟨Mode, inferInstance, machine.modeDFA start target, ?_⟩
+  let modeFintype : Fintype Mode := Fintype.ofFinite Mode
+  refine ⟨Mode, modeFintype, machine.modeDFA start target, ?_⟩
   rfl
 
 /-- The finite automaton obtained by killing every transition which leaves the reverse box. -/
@@ -400,8 +400,13 @@ theorem targetLanguage_isRegular {Mode Control : Type} [Finite Mode]
     (offset_bounded : ∀ mode control, (machine.offset mode control).natAbs ≤ bound)
     (target_bounded : ∀ state ∈ target, state.2.natAbs ≤ bound) :
     (machine.targetLanguage start target).IsRegular := by
-  letI : Fintype (CagedState Mode bound) := (coordinateBox_finite bound).fintype
-  refine ⟨Option (CagedState Mode bound), inferInstance,
+  let cagedFintype : Fintype (CagedState Mode bound) :=
+    (coordinateBox_finite bound).fintype
+  let optionFintype : Fintype (Option (CagedState Mode bound)) :=
+    ⟨Finset.insertNone cagedFintype.elems, by
+      intro state
+      cases state <;> simp [cagedFintype.complete]⟩
+  refine ⟨Option (CagedState Mode bound), optionFintype,
     machine.cagedDFA start target bound, ?_⟩
   ext word
   constructor

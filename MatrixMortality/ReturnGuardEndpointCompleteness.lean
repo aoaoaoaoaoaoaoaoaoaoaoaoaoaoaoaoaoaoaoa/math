@@ -31,7 +31,7 @@ private theorem endpointTransfer_mod_prime
   ext i j
   fin_cases i <;> fin_cases j
   all_goals
-    simp [endpointTransfer, ZMod.natCast_self, wait_ne, depth_wait_ne]
+    simp [endpointTransfer, wait_ne, depth_wait_ne]
   all_goals ring
 
 private theorem endpointFlag_sq
@@ -268,8 +268,8 @@ theorem CumulativeEndpointExecution.endpointKernel_eq_resetLine
   · intro annihilated
     have point_equation := congrFun annihilated 1
     have reset_equation := congrFun reset_killed 1
-    simp [Matrix.mulVec, Matrix.dotProduct, Fin.sum_univ_two] at point_equation
-    simp [reset, Matrix.mulVec, Matrix.dotProduct, Fin.sum_univ_two] at reset_equation
+    simp [Matrix.mulVec, dotProduct, Fin.sum_univ_two] at point_equation
+    simp [reset, Matrix.mulVec, dotProduct, Fin.sum_univ_two] at reset_equation
     have point_first : point 0 = reset 0 * point 1 := by
       dsimp [reset]
       push_cast
@@ -400,7 +400,8 @@ theorem endpointTerminalWord_iff_inverseAddress_eq_one
         funext i
         fin_cases i <;> simp [cast]
       rw [vector_eq] at cast_zero
-      simpa only [matrix, Int.cast_add, Int.cast_sub] using cast_zero
+      simpa only [matrix, cast, Int.coe_castRingHom, Int.cast_add, Int.cast_sub,
+        Int.cast_natCast, map_zero] using cast_zero
     have reset_first_zero :
         (matrix *ᵥ
           ![terminalCoordinate centerNumerator driftNumerator scale 1, 1]) 0 = 0 := by
@@ -408,7 +409,7 @@ theorem endpointTerminalWord_iff_inverseAddress_eq_one
     have matrix_first_ne : matrix 0 0 ≠ 0 := by
       intro matrix_first_zero
       have matrix_second_zero : matrix 0 1 = 0 := by
-        simp [Matrix.mulVec, Matrix.dotProduct, Fin.sum_univ_two] at reset_first_zero
+        simp [Matrix.mulVec, dotProduct, Fin.sum_univ_two] at reset_first_zero
         rw [matrix_first_zero, zero_mul, zero_add] at reset_first_zero
         exact reset_first_zero
       apply matrix_det_ne
@@ -419,7 +420,7 @@ theorem endpointTerminalWord_iff_inverseAddress_eq_one
           terminalCoordinate centerNumerator driftNumerator scale 1 := by
       have address_equation := address_first_zero
       have reset_equation := reset_first_zero
-      simp [Matrix.mulVec, Matrix.dotProduct, Fin.sum_univ_two] at address_equation reset_equation
+      simp [Matrix.mulVec, dotProduct, Fin.sum_univ_two] at address_equation reset_equation
       have product_zero :
           matrix 0 0 *
               (terminalCoordinate centerNumerator driftNumerator scale address -

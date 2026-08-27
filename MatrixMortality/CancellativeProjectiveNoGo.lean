@@ -134,7 +134,7 @@ theorem coefficient_eq (system : TwoPhaseResidualSystem Prefix Suffix Residual)
           system.code (.rule, system.prefixResidual context .rule)) *
         (system.code (system.suffixPhase suffix, system.suffixResidual suffix) -
           system.code (.erase, system.prefixResidual context .erase)) := by
-  simp [coefficient, line, point, Matrix.dotProduct, Fin.sum_univ_succ]
+  simp [coefficient, line, point, dotProduct, Fin.sum_univ_succ]
   ring
 
 /-- Conic incidence is exactly equality with the residual selected by the suffix phase. -/
@@ -152,22 +152,22 @@ theorem coefficient_eq_zero_iff
         · have tagged_eq := system.code.injective (sub_eq_zero.mp rule_zero)
           simpa [phase_eq] using congrArg Prod.snd tagged_eq
         · have tagged_eq := system.code.injective (sub_eq_zero.mp erase_zero)
-          simp [phase_eq] at tagged_eq
+          simp at tagged_eq
       · intro residual_eq
         left
         apply sub_eq_zero.mpr
-        simp [phase_eq, residual_eq]
+        simp [residual_eq]
   | erase =>
       constructor
       · rintro (rule_zero | erase_zero)
         · have tagged_eq := system.code.injective (sub_eq_zero.mp rule_zero)
-          simp [phase_eq] at tagged_eq
+          simp at tagged_eq
         · have tagged_eq := system.code.injective (sub_eq_zero.mp erase_zero)
           simpa [phase_eq] using congrArg Prod.snd tagged_eq
       · intro residual_eq
         right
         apply sub_eq_zero.mpr
-        simp [phase_eq, residual_eq]
+        simp [residual_eq]
 
 end TwoPhaseResidualSystem
 

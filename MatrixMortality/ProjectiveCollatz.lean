@@ -81,7 +81,7 @@ theorem predecessorState_cons (label : Bool) (word : List Bool) :
 private theorem double_negative {value : ℚ}
     (negative : IsNegative 3 value) :
     IsNegative 3 (2 * value) := by
-  haveI : Fact (Nat.Prime 3) := ⟨by norm_num⟩
+  have : Fact (Nat.Prime 3) := ⟨by norm_num⟩
   have two_unit : HasValue 3 (2 : ℚ) 0 :=
     intCast_isUnit_of_not_dvd (by norm_num)
   have value_exact : HasValue 3 value (padicValRat 3 value) :=
@@ -94,7 +94,7 @@ private theorem double_negative {value : ℚ}
 private theorem odd_predecessor_negative {value : ℚ}
     (negative : IsNegative 3 value) :
     IsNegative 3 ((2 * value - 1) / 3) := by
-  haveI : Fact (Nat.Prime 3) := ⟨by norm_num⟩
+  have : Fact (Nat.Prime 3) := ⟨by norm_num⟩
   have numerator_negative : IsNegative 3 (2 * value - 1) := by
     have minus_one_unit : IsUnit 3 (-1 : ℚ) :=
       neg_hasValue (intCast_isUnit_of_not_dvd (by norm_num))
@@ -114,7 +114,7 @@ private theorem odd_predecessor_negative {value : ℚ}
 private theorem odd_integer_predecessor_negative
     (target : ℤ) (illegal : ¬(3 : ℤ) ∣ 2 * target - 1) :
     IsNegative 3 ((((2 * target - 1 : ℤ) : ℚ)) / 3) := by
-  haveI : Fact (Nat.Prime 3) := ⟨by norm_num⟩
+  have : Fact (Nat.Prime 3) := ⟨by norm_num⟩
   have numerator_unit :
       HasValue 3 ((2 * target - 1 : ℤ) : ℚ) 0 :=
     intCast_isUnit_of_not_dvd illegal
@@ -163,7 +163,7 @@ private theorem integer_not_negative (value : ℤ) :
   change (value : ℚ) ≠ 0 ∧ padicValRat 3 (value : ℚ) < 0 at negative
   have valuation_negative := negative.2
   rw [padicValRat.of_int] at valuation_negative
-  exact (not_lt_of_ge (Int.ofNat_zero_le _)) valuation_negative
+  exact (not_lt_of_ge (Int.natCast_nonneg _)) valuation_negative
 
 private theorem exists_predecessorState_eq_of_reaches
     {value : ℤ} (reaches : ReachesOne value) :
@@ -229,7 +229,7 @@ private theorem rawGenerator_mulVec (label : Bool) (value : ℚ) :
     ext i <;>
     fin_cases i <;>
     simp [rawGenerator, oddMatrix, evenMatrix, branchScale, predecessor,
-      Matrix.mulVec, Matrix.dotProduct, Fin.sum_univ_succ]
+      Matrix.mulVec, dotProduct, Fin.sum_univ_succ]
   ring
 
 /-- Raw matrix multiplication realizes the inverse-branch word exactly. -/
@@ -267,7 +267,7 @@ theorem rawIncidence_eq (value : ℤ) (word : List Bool) :
   rw [ReverseEdge.incidence]
   change targetRow value ⬝ᵥ wordProduct rawGenerator word *ᵥ sourceColumn = _
   rw [show sourceColumn = ![(1 : ℚ), 1] by rfl, rawProduct_mulVec]
-  simp [targetRow, Matrix.dotProduct, Fin.sum_univ_succ]
+  simp [targetRow, dotProduct, Fin.sum_univ_succ]
   ring
 
 /-- Raw projective incidence reaches an integral target exactly when shortcut Collatz reaches
@@ -346,7 +346,7 @@ theorem normalizedScalars {value : ℤ} (value_ne : value ≠ 0) :
     ext i
     fin_cases i <;>
       simp [H, evenMatrix, pulled, sourceColumn, Matrix.mulVec,
-        Matrix.dotProduct, Fin.sum_univ_succ, lambda_ne_zero value]
+        dotProduct, Fin.sum_univ_succ, lambda_ne_zero value]
     all_goals field_simp [lambda_ne_zero value]
   have pulled_eq :
       ReverseEdge.pulledColumn (H value) sourceColumn = pulled :=
@@ -358,8 +358,7 @@ theorem normalizedScalars {value : ℤ} (value_ne : value ≠ 0) :
     ext i
     fin_cases i <;>
       simp [H, G, oddMatrix, evenMatrix, pulled, first, Matrix.mulVec,
-        Matrix.dotProduct, Fin.sum_univ_succ, lambda_ne_zero value,
-        mu_ne_zero value_ne]
+        dotProduct, Fin.sum_univ_succ]
     all_goals field_simp [lambda_ne_zero value, mu_ne_zero value_ne]
     all_goals ring
   have first_eq :
@@ -371,7 +370,7 @@ theorem normalizedScalars {value : ℤ} (value_ne : value ≠ 0) :
     calc
       targetRow value ⬝ᵥ pulled =
           (lambda value)⁻¹ * (1 / 2 - value) := by
-        simp [targetRow, pulled, Matrix.dotProduct, Fin.sum_univ_succ]
+        simp [targetRow, pulled, dotProduct, Fin.sum_univ_succ]
         ring
       _ = 1 := by
         rw [← lambda]
@@ -380,11 +379,10 @@ theorem normalizedScalars {value : ℤ} (value_ne : value ≠ 0) :
     calc
       targetRow value ⬝ᵥ first =
           -(value : ℚ) * (3 / mu value) := by
-        simp [targetRow, first, Matrix.dotProduct, Fin.sum_univ_succ]
+        simp [targetRow, first, dotProduct, Fin.sum_univ_succ]
       _ = 1 := by
         rw [mu]
         field_simp [mu_ne_zero value_ne]
-        ring
 
 /-- Nonzero scalar relating each normalized letter to its raw projective map. -/
 def normalizedScale (value : ℤ) : Bool → ℚ
@@ -420,7 +418,7 @@ theorem normalizedIncidence_zero_iff
           ReverseEdge.incidence oddMatrix evenMatrix
             (targetRow value) sourceColumn word := by
     rw [ReverseEdge.incidence, ReverseEdge.incidence, normalizedGenerator_eq,
-      wordProduct_smulMatrix, Matrix.smul_mulVec_assoc, Matrix.dotProduct_smul]
+      wordProduct_smulMatrix, Matrix.smul_mulVec, dotProduct_smul]
     rfl
   rw [scaled_eq]
   have product_ne :

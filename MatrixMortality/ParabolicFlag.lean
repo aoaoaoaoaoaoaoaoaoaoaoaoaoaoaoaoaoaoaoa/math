@@ -51,7 +51,7 @@ private theorem intCast_threeIntegral (value : ℤ) : ThreeIntegral (value : ℚ
   · exact Or.inl (by simp [value_zero])
   · right
     rw [padicValRat.of_int]
-    exact Int.ofNat_zero_le _
+    exact Int.natCast_nonneg _
 
 private theorem valLt_sub {base left right : ℚ}
     (left_high : ValLt base left) (right_high : ValLt base right) :
@@ -239,7 +239,7 @@ theorem safeExteriorAction_b_zero_flag
     funext i
     fin_cases i <;>
       norm_num [safeExteriorAction, first, middle, last, A, B, C, D, ρ,
-        Matrix.vecHead, Matrix.vecTail, Matrix.mulVec, Matrix.dotProduct, Fin.sum_univ_succ] <;>
+        Matrix.vecHead, Matrix.vecTail, Matrix.mulVec, dotProduct, Fin.sum_univ_succ] <;>
       ring
   rw [show (3 : ℚ) ^ β = ρ by rfl, action]
   change ValLt first middle ∨ ValLt last middle
@@ -303,7 +303,7 @@ theorem safeExteriorAction_b_zero_flag
         HasValue 3 middle
           (2 + β + padicValRat 3 A + padicValRat 3 v) := by
       have nine_value : HasValue 3 (9 : ℚ) 2 := by
-        simpa using (primePower_hasValue (prime := 3) 2)
+        convert (primePower_hasValue (prime := 3) 2) using 1 <;> norm_num
       dsimp [middle]
       exact mul_hasValue
         (mul_hasValue (mul_hasValue nine_value rho_value) ⟨A_ne, rfl⟩) ⟨v_zero, rfl⟩
@@ -563,13 +563,12 @@ theorem safeExteriorAction_c_zero_flag
         (((9 * ternaryCode (true :: tagEncode β body) + 6) * j + 1 : ℤ) : ℚ) :=
       intCast_isUnit_of_not_dvd (by
         intro divides
-        have base_dvd : (3 : ℤ) ∣
-            (9 * ternaryCode (true :: tagEncode β body) + 6) * j := by
+        have base_dvd : @Dvd.dvd ℤ semigroupDvd (3 : ℤ)
+            ((9 * ternaryCode (true :: tagEncode β body) + 6) * j) := by
           refine ⟨(3 * ternaryCode (true :: tagEncode β body) + 2) * j, ?_⟩
           ring
-        have one_dvd : (3 : ℤ) ∣ 1 := by
-          convert dvd_sub divides base_dvd using 1
-          ring
+        have one_dvd : @Dvd.dvd ℤ semigroupDvd ((3 : ℕ) : ℤ) 1 := by
+          simpa only [add_sub_cancel_left] using dvd_sub divides base_dvd
         norm_num at one_dvd)
     have denominator : IsUnit 3 (2 : ℚ) :=
       intCast_isUnit_of_not_dvd (by norm_num)
@@ -589,14 +588,14 @@ theorem safeExteriorAction_c_zero_flag
     funext i
     fin_cases i
     · norm_num [safeExteriorAction, L, M, a, B, d₀, Matrix.vecHead, Matrix.vecTail,
-        Matrix.mulVec, Matrix.dotProduct, Fin.sum_univ_succ]
+        Matrix.mulVec, dotProduct, Fin.sum_univ_succ]
       ring
     · norm_num [safeExteriorAction, L, M, a, B, d₀, Matrix.vecHead, Matrix.vecTail,
-        Matrix.mulVec, Matrix.dotProduct, Fin.sum_univ_succ]
+        Matrix.mulVec, dotProduct, Fin.sum_univ_succ]
       left
       ring
     · norm_num [safeExteriorAction, L, M, a, B, d₀, Matrix.vecHead, Matrix.vecTail,
-        Matrix.mulVec, Matrix.dotProduct, Fin.sum_univ_succ]
+        Matrix.mulVec, dotProduct, Fin.sum_univ_succ]
   rw [action]
   exact formula
 
@@ -618,7 +617,7 @@ theorem safeExteriorAction_b_one_flag
     funext i
     fin_cases i <;>
       norm_num [safeExteriorAction, h, F, first, middle, last, Matrix.vecHead,
-        Matrix.vecTail, Matrix.mulVec, Matrix.dotProduct, Fin.sum_univ_succ] <;>
+        Matrix.vecTail, Matrix.mulVec, dotProduct, Fin.sum_univ_succ] <;>
       ring
   rw [show (3 : ℚ) ^ β = ρ by rfl, action]
   change ValLt first last ∨ ValLt middle last
@@ -663,7 +662,7 @@ theorem safeExteriorAction_b_one_flag
   have last_value :
       HasValue 3 last (2 + β + padicValRat 3 h) := by
     have nine_value : HasValue 3 (9 : ℚ) 2 := by
-      simpa using (primePower_hasValue (prime := 3) 2)
+      convert (primePower_hasValue (prime := 3) 2) using 1 <;> norm_num
     have two_unit : IsUnit 3 (2 : ℚ) :=
       intCast_isUnit_of_not_dvd (by norm_num)
     dsimp [last]
@@ -940,7 +939,7 @@ theorem exteriorFlag_seed : ExteriorFlag ![(0 : ℚ), 22, 9] := by
   have middle_unit : IsUnit 3 (22 : ℚ) :=
     intCast_isUnit_of_not_dvd (by norm_num)
   have last_value : HasValue 3 (9 : ℚ) 2 := by
-    simpa using (primePower_hasValue (prime := 3) 2)
+    convert (primePower_hasValue (prime := 3) 2) using 1 <;> norm_num
   right
   right
   refine ⟨by norm_num, Or.inr ?_⟩

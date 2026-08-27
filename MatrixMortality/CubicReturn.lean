@@ -35,7 +35,7 @@ theorem pow_eq_smul_residue
   conv_lhs => rw [← Nat.div_add_mod wait 3]
   rw [pow_add, show ambient ^ (3 * (wait / 3)) = (ambient ^ 3) ^ (wait / 3) by
     rw [pow_mul], cubic]
-  simp [smul_pow, Matrix.smul_mul]
+  simp [smul_pow]
 
 omit [Fintype Small] [DecidableEq Small] in
 /-- Every pure-cubic return is a nonzero scalar multiple of one of the first three returns. -/
@@ -151,7 +151,7 @@ theorem pureOneSingular_reverseEdgeScalars
       ext i
       fin_cases i <;>
         simp [J, pureInvolution, first, second, Matrix.mulVec,
-          Matrix.dotProduct, Fin.sum_univ_succ, mu_ne]
+          dotProduct, Fin.sum_univ_succ, mu_ne]
     calc
       (P * J) *ᵥ (mu⁻¹ • second) = P *ᵥ (J *ᵥ (mu⁻¹ • second)) :=
         (Matrix.mulVec_mulVec (mu⁻¹ • second) P J).symm
@@ -166,7 +166,7 @@ theorem pureOneSingular_reverseEdgeScalars
       ext i
       fin_cases i <;>
         simp [J, pureInvolution, first, second, Matrix.mulVec,
-          Matrix.dotProduct, Fin.sum_univ_succ]
+          dotProduct, Fin.sum_univ_succ]
     calc
       (P * J) *ᵥ (mu⁻¹ • first) = P *ᵥ (J *ᵥ (mu⁻¹ • first)) :=
         (Matrix.mulVec_mulVec (mu⁻¹ • first) P J).symm
@@ -178,8 +178,8 @@ theorem pureOneSingular_reverseEdgeScalars
     exact nonsingInv_mulVec_eq_of_mulVec_eq H_unit first_action
   constructor
   · rw [ReverseEdge.alpha, pulled_eq]
-    simp [row, second, Matrix.dotProduct, Fin.sum_univ_succ]
+    simp [second, dotProduct, Fin.sum_univ_succ]
   · rw [ReverseEdge.beta, first_eq]
-    simp [row, first, Matrix.dotProduct, Fin.sum_univ_succ]
+    simp [first, dotProduct, Fin.sum_univ_succ]
 
 end MatrixMortality.CubicReturn

@@ -15,8 +15,6 @@ open scoped Matrix
 
 namespace PhaseRigidity
 
-open FiniteDimensional
-
 /-- Affine forms `a + bt + cr`, stored in the coordinate order `(a,b,c)`. -/
 abbrev AffineForm := Fin 3 → ℚ
 
@@ -42,7 +40,7 @@ of numerator and denominator: a target Möbius action is exactly preservation of
 -/
 theorem invariant_affine_pencil_forgets_t
     (pencil : Submodule ℚ AffineForm)
-    (pencil_rank : finrank ℚ pencil = 2)
+    (pencil_rank : Module.finrank ℚ pencil = 2)
     (s c : ℚ) (s_ne : s ≠ 0) (c_ne : c ≠ 0)
     (constant_invariant : ∀ form ∈ pencil, constantTranslation s form ∈ pencil)
     (radial_invariant : ∀ form ∈ pencil, radialTranslation c form ∈ pencil) :
@@ -87,12 +85,12 @@ theorem invariant_affine_pencil_forgets_t
     intro coefficient_zero
     have at_t := LinearMap.congr_fun coefficient_zero (![0, 1, 0] : AffineForm)
     norm_num [tCoefficient] at at_t
-  have kernel_rank : finrank ℚ (LinearMap.ker tCoefficient) = 2 := by
+  have kernel_rank : Module.finrank ℚ (LinearMap.ker tCoefficient) = 2 := by
     have rank_nullity := Module.Dual.finrank_ker_add_one_of_ne_zero coefficient_ne
-    rw [FiniteDimensional.finrank_fin_fun] at rank_nullity
+    rw [Module.finrank_fin_fun] at rank_nullity
     omega
   have kernel_eq : LinearMap.ker tCoefficient = pencil :=
-    FiniteDimensional.eq_of_le_of_finrank_eq kernel_le (by rw [kernel_rank, pencil_rank])
+    Submodule.eq_of_le_of_finrank_eq kernel_le (by rw [kernel_rank, pencil_rank])
   have : form ∈ LinearMap.ker tCoefficient := by rw [kernel_eq]; exact form_mem
   exact t_ne this
 
@@ -133,7 +131,7 @@ theorem localRole_eq (β : Nat) (body : List TagLetter) :
     ext i j
     fin_cases i <;> fin_cases j <;>
       simp [payloadSwap, nearySideNativeRole, Matrix.mul_apply, Matrix.vecHead,
-        Matrix.vecTail, Fin.sum_univ_succ]
+        Fin.sum_univ_succ]
 
 /-- The affine chart vector with coordinates
 `r=h/x` and `t=(z-x-h/2)/x`, normalized by `x=1`. -/
@@ -153,8 +151,7 @@ theorem localRole_erase_c_chart (β : Nat) (body : List TagLetter) (t r : ℚ) :
   rw [(localRole_eq β body).2.2.1]
   ext coordinate
   fin_cases coordinate <;>
-    simp [chartVector, Matrix.mulVec, Matrix.dotProduct, Matrix.vecHead, Matrix.vecTail,
-      Fin.sum_univ_succ]
+    simp [chartVector, Matrix.mulVec, dotProduct, Fin.sum_univ_succ]
   ring
 
 /-- Erase-`b` acts by `(t,r) ↦ ((t+d)/a,(3/a)r)` projectively. -/
@@ -170,14 +167,14 @@ theorem localRole_erase_b_chart (β : Nat) (body : List TagLetter) (t r : ℚ) :
     simpa [eraseBScale] using scale_ne
   ext coordinate
   fin_cases coordinate
-  · simp [chartVector, eraseBDefect, eraseBScale, Matrix.mulVec, Matrix.dotProduct,
-      Matrix.vecHead, Matrix.vecTail, Fin.sum_univ_succ]
+  · simp [chartVector, eraseBDefect, eraseBScale, Matrix.mulVec, dotProduct,
+      Fin.sum_univ_succ]
     field_simp [native_scale_ne]
     ring
-  · simp [chartVector, eraseBScale, Matrix.mulVec, Matrix.dotProduct,
-      Matrix.vecHead, Matrix.vecTail, Fin.sum_univ_succ]
-  · simp [chartVector, eraseBScale, Matrix.mulVec, Matrix.dotProduct,
-      Matrix.vecHead, Matrix.vecTail, Fin.sum_univ_succ]
+  · simp [chartVector, eraseBScale, Matrix.mulVec, dotProduct,
+      Fin.sum_univ_succ]
+  · simp [chartVector, eraseBScale, Matrix.mulVec, dotProduct,
+      Fin.sum_univ_succ]
     field_simp [native_scale_ne]
 
 /-- The fixed-width relation reduces the erase-`b` defect to `(3-q)/2`. -/
@@ -231,7 +228,7 @@ theorem erase_commutator (a d : ℚ) (a_ne : a ≠ 0) (point : ℚ × ℚ) :
     simp [eraseCPoint, eraseBPoint, eraseCPointInv, eraseBPointInv]
   all_goals
     field_simp [a_ne]
-    ring
+  ring
 
 /-- The discrepancy commutator is the radial translation `t ↦ t-(8/9)r`. -/
 theorem discrepancy_commutator (point : ℚ × ℚ) :
@@ -273,14 +270,14 @@ theorem erase_inverses (β : Nat) (body : List TagLetter) :
       simpa [eraseBScale] using scale_ne
     ext i j
     fin_cases i <;> fin_cases j <;>
-      simp [eraseBInverse, eraseBScale, Matrix.mul_apply, Matrix.one_apply, Matrix.vecHead,
-        Matrix.vecTail, Fin.sum_univ_succ]
+      simp [eraseBInverse, eraseBScale, Matrix.mul_apply, Fin.sum_univ_succ]
     all_goals field_simp [native_scale_ne]
+    all_goals ring
   · rw [(localRole_eq β body).2.2.1]
     ext i j
     fin_cases i <;> fin_cases j <;>
-      norm_num [eraseCInverse, Matrix.mul_apply, Matrix.one_apply, Matrix.vecHead,
-        Matrix.vecTail, Fin.sum_univ_succ, Fin.ext_iff]
+      norm_num [eraseCInverse, Matrix.mul_apply, Matrix.vecHead,
+        Fin.sum_univ_succ, Fin.ext_iff]
 
 /-- The two rule/erase discrepancies are diagonal shears. -/
 theorem phase_discrepancies (β : Nat) (body : List TagLetter) :
@@ -300,14 +297,13 @@ theorem phase_discrepancies (β : Nat) (body : List TagLetter) :
       simpa [eraseBScale] using scale_ne
     ext i j
     fin_cases i <;> fin_cases j <;>
-      simp [eraseBInverse, eraseBScale, Matrix.mul_apply, Matrix.vecHead, Matrix.vecTail,
-        Fin.sum_univ_succ]
+      simp [eraseBInverse, eraseBScale, Matrix.mul_apply, Fin.sum_univ_succ]
     all_goals field_simp [native_scale_ne]
     all_goals ring
   · rw [(localRole_eq β body).2.2.2]
     ext i j
     fin_cases i <;> fin_cases j <;>
-      norm_num [eraseCInverse, ruleCRho, Matrix.mul_apply, Matrix.vecHead, Matrix.vecTail,
+      norm_num [eraseCInverse, ruleCRho, Matrix.mul_apply, Matrix.vecTail,
         Fin.sum_univ_succ]
     all_goals ring
 
@@ -326,7 +322,7 @@ theorem discrepancy_quotient (β : Nat) (body : List TagLetter) :
   rw [(phase_discrepancies β body).2]
   ext i j
   fin_cases i <;> fin_cases j <;>
-    norm_num [discrepancyBInverse, Matrix.mul_apply, Matrix.vecHead, Matrix.vecTail,
+    norm_num [discrepancyBInverse, Matrix.mul_apply, Matrix.vecTail,
       Fin.sum_univ_succ]
   all_goals ring
 
@@ -343,9 +339,9 @@ theorem ruleCRho_div_nine_ne_one (β : Nat) (body : List TagLetter)
   have encoded_nonempty : tagEncode β body ≠ [] :=
     (tagEncode_eq_nil_iff β body).not.mpr body_nonempty
   have encoded_length_pos : 0 < (tagEncode β body).length :=
-    List.length_pos.mpr encoded_nonempty
+    List.length_pos_of_ne_nil encoded_nonempty
   have power_gt_one : (1 : ℚ) < 3 ^ (tagEncode β body).length := by
-    exact one_lt_pow (by norm_num) encoded_length_pos.ne'
+    exact one_lt_pow₀ (by norm_num) encoded_length_pos.ne'
   norm_num
   exact ne_of_gt power_gt_one
 
@@ -378,9 +374,9 @@ theorem ruleCMixing_ne_zero (β : Nat) (body : List TagLetter)
   have encoded_nonempty : tagEncode β body ≠ [] :=
     (tagEncode_eq_nil_iff β body).not.mpr body_nonempty
   have encoded_length_pos : 0 < (tagEncode β body).length :=
-    List.length_pos.mpr encoded_nonempty
+    List.length_pos_of_ne_nil encoded_nonempty
   have power_gt_one : (1 : ℚ) < 3 ^ (tagEncode β body).length :=
-    one_lt_pow (by norm_num) encoded_length_pos.ne'
+    one_lt_pow₀ (by norm_num) encoded_length_pos.ne'
   have signed :
       9 * (1 - (3 : ℚ) ^ (tagEncode β body).length -
         2 * ternaryCode (tagEncode β body)) < 0 := by
@@ -398,7 +394,7 @@ theorem ruleCMixing_ne_zero (β : Nat) (body : List TagLetter)
 forget `t`. -/
 theorem neary_commutator_pencil_forgets_t
     (β : Nat) (three_le : 3 ≤ β)
-    (pencil : Submodule ℚ AffineForm) (pencil_rank : finrank ℚ pencil = 2)
+    (pencil : Submodule ℚ AffineForm) (pencil_rank : Module.finrank ℚ pencil = 2)
     (constant_invariant :
       ∀ form ∈ pencil,
         constantTranslation

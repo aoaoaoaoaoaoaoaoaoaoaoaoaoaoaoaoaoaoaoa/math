@@ -78,6 +78,7 @@ file owns the mathematical stock.
 | [`MM-O09`](#mm-o09-two-state-ternary-prefix-image) | obstruction | a literal two-state ternary decoder has no five-state common-image restriction | audited | stock |
 | [`MM-O10`](#mm-o10-additive-toggle-fusion-cycle) | obstruction | the normalized toggle-minus-separator ansatz has rank three at every power | audited | stock |
 | [`MM-O11`](#mm-o11-full-algebra-paired-binary-family) | obstruction | the paired-binary mortality family spans the full six-state algebra | formalized | graduated |
+| [`MM-O12`](#mm-o12-boundary-calibrated-setter-shear-is-gauge) | obstruction | boundary calibration erases the setter's side-basis shear from its separator and transfer | formalized | graduated |
 | [`MM-M01`](#mm-m01-off-diagonal-companion-interface) | partial mechanism | off-diagonal rank-two bridge has a complete fracture grammar | audited | stock |
 | [`MM-M02`](#mm-m02-bordered-toggle) | partial mechanism | one lifted toggle has a stable rank-two third power | audited | parked |
 | [`MM-M03`](#mm-m03-five-state-setter-punctuation) | partial mechanism | a mixed delimiter word is an exact internal rank-one separator | audited | active |
@@ -1556,6 +1557,43 @@ through the generic exact-behavior bridge in
 [`MatrixMortality/FullMatrixBehavior.lean`](MatrixMortality/FullMatrixBehavior.lean);
 `pairedBinaryMortality_wordProductSpan_eq_top` and
 `pairedBinaryMortality_exactSandwich_six_le_finrank`.
+
+### MM-O12: Boundary-calibrated setter shear is gauge
+
+**Kind:** obstruction
+**Evidence:** formalized
+**Disposition:** graduated
+
+The five-state setter admits a one-parameter side-basis shear `α`. Its side-basis determinant is
+
+```text
+−r(scale−1−r·upper),
+```
+
+independent of `α`. The boundary-correct delimiter has cube
+`firstAxis ⊗ terminalRow(hook(r,upper,α))`; after the physical calibration
+`lambda·marker=1+r·upper`, its square sends the sheared distinguished column to
+`lambda·separatorColumn(marker)`. Eliminating the two side-coordinate equations leaves the
+transfer tail
+
+```text
+(scale−1−r·distinguishedUpper)·resolvedTail
+  = (distinguishedUpper−1−r·upper)·a + value·x,
+```
+
+again independent of `α`.
+
+**Scope:** the boundary-correct coordinate shear of the established five-state setter. The
+result does not exclude a different delimiter, a nonlinear coordinate change, or another
+five-state physical family.
+
+**Use:** do not reopen the setter projective-avoidance problem by varying this shear. Boundary
+calibration makes it a gauge: it changes coordinates but neither the mixed separator nor the
+projective transfer obstruction.
+
+**Formalization:** [`MatrixMortality/SetterShear.lean`](MatrixMortality/SetterShear.lean),
+through `sideBasis_det`, `delimiter_cube`, `delimiter_square_distinguishedColumn`, and
+`transfer_tail`.
 
 ### MM-M01: Off-diagonal companion interface
 

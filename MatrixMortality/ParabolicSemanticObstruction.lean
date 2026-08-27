@@ -81,8 +81,7 @@ theorem completeTileAtom_eq_semanticWordMiddle
 @[simp] theorem semanticWordMiddle_nil : semanticWordMiddle [] [] = 1 := by
   ext i j
   fin_cases i <;> fin_cases j <;>
-    simp [semanticWordMiddle, semanticMiddle, Matrix.one_apply, Matrix.vecHead,
-      Matrix.vecTail]
+    simp [semanticWordMiddle, semanticMiddle]
 
 /-- Complete semantic middles compose in chronological word order. -/
 theorem semanticWordMiddle_append
@@ -92,7 +91,7 @@ theorem semanticWordMiddle_append
   ext i j
   fin_cases i <;> fin_cases j <;>
     simp [semanticWordMiddle, semanticMiddle, ternaryCode_append, pow_add,
-      Matrix.mul_apply, Matrix.vecHead, Matrix.vecTail, Fin.sum_univ_succ] <;>
+      Matrix.mul_apply, Fin.sum_univ_succ] <;>
     ring
 
 /-- Reduced product of the complete original gaps named by a Neary word. -/
@@ -154,7 +153,7 @@ private theorem semanticWordMiddle_mulVec_terminalColumn_head
       (ternaryCode (upper ++ nearyMarker β) : ℚ) - ternaryCode lower := by
   norm_num [semanticWordMiddle, semanticMiddle, semanticTerminalColumn,
     nearySideMarkerValue, nearySideMarkerScale, ternaryCode_append,
-    Matrix.mulVec, Matrix.dotProduct, Fin.sum_univ_succ]
+    Matrix.mulVec, dotProduct, Fin.sum_univ_succ]
   ring
 
 private theorem semanticWordMiddle_mulVec_terminalColumn_of_terminal
@@ -167,7 +166,7 @@ private theorem semanticWordMiddle_mulVec_terminalColumn_of_terminal
   fin_cases i <;>
     norm_num [semanticWordMiddle, semanticMiddle, semanticTerminalColumn,
       semanticTerminalTail, nearySideMarkerValue, nearySideMarkerScale,
-      ternaryCode_append, Matrix.mulVec, Matrix.dotProduct, Fin.sum_univ_succ,
+      ternaryCode_append, Matrix.mulVec, dotProduct, Fin.sum_univ_succ,
       pow_add] <;>
     ring
 
@@ -181,10 +180,10 @@ private theorem coreInput_mulVec_eq_zero_iff (vector : Fin 3 → ℚ) :
     funext i
     fin_cases i
     · norm_num [bladeKernel]
-    · norm_num [coreInput, Matrix.mulVec, Matrix.dotProduct, Fin.sum_univ_succ] at first
+    · norm_num [coreInput, Matrix.mulVec, dotProduct, Fin.sum_univ_succ] at first
       norm_num [bladeKernel]
       linear_combination -first
-    · norm_num [coreInput, Matrix.mulVec, Matrix.dotProduct, Fin.sum_univ_succ] at first second
+    · norm_num [coreInput, Matrix.mulVec, dotProduct, Fin.sum_univ_succ] at first second
       norm_num [bladeKernel]
       change vector (2 : Fin 3) = -(vector 0 / 4)
       linear_combination (1 / 4) * first + second
@@ -192,7 +191,7 @@ private theorem coreInput_mulVec_eq_zero_iff (vector : Fin 3 → ℚ) :
     funext i
     fin_cases i
     all_goals
-      norm_num [coreInput, bladeKernel, Matrix.mulVec, Matrix.dotProduct,
+      norm_num [coreInput, bladeKernel, Matrix.mulVec, dotProduct,
         Fin.sum_univ_succ]
     all_goals ring
 
@@ -200,8 +199,11 @@ private theorem mulVec_injective_of_left_inverse
     (matrix inverse : Matrix (Fin 3) (Fin 3) ℚ)
     (left_inverse : inverse * matrix = 1) :
     Function.Injective matrix.mulVec := by
-  apply Matrix.mulVec_injective_iff_isUnit.mpr
-  exact Matrix.exists_left_inverse_iff_isUnit.mp ⟨inverse, left_inverse⟩
+  intro left right equality
+  have lifted := congrArg (fun vector => inverse *ᵥ vector) equality
+  rw [Matrix.mulVec_mulVec, Matrix.mulVec_mulVec, left_inverse,
+    Matrix.one_mulVec] at lifted
+  simpa using lifted
 
 private theorem emptyBridgeRow_ne_zero (ρ : ℚ) : emptyBridgeRow ρ ≠ 0 := by
   intro zero
@@ -253,7 +255,6 @@ private theorem core_semantic_zero_iff_terminal
       ext i
       simp only [Pi.smul_apply, smul_eq_mul]
       field_simp [leftScale_ne]
-      ring
     have middle_eq : middleVector = (scalar / leftScale) • semanticTerminalTail :=
       mulVec_injective_of_left_inverse leftContext leftInverse left_inverse scaled_target
     have head_zero : middleVector 0 = 0 := by
@@ -308,7 +309,8 @@ theorem no_complete_semantic_left_target (upper lower : List Bool) :
   have second := congr_fun target 1
   have third := congr_fun target 2
   norm_num [semanticWordMiddle, semanticMiddle, semanticTerminalTail, bladeKernel,
-    Matrix.mulVec, Matrix.dotProduct, Fin.sum_univ_succ] at second third
+    Matrix.mulVec, dotProduct, Matrix.cons_val_two, Matrix.vecHead, Matrix.vecTail,
+    Fin.sum_univ_succ] at second third
   have scaleEquality : (3 : ℚ) ^ upper.length = 2 * 3 ^ lower.length := by
     linarith
   have naturalEquality : 3 ^ upper.length = 2 * 3 ^ lower.length := by
@@ -331,17 +333,20 @@ theorem no_complete_semantic_right_target
       0 < ((semanticWordMiddle upper lower * coreOutput ((3 : ℚ) ^ β)) *ᵥ
         emptyBridgeColumn) 1 := by
     norm_num [semanticWordMiddle, semanticMiddle, coreOutput, emptyBridgeColumn,
-      Matrix.mul_apply, Matrix.mulVec, Matrix.dotProduct, Fin.sum_univ_succ]
+      Matrix.mul_apply, Matrix.mulVec, dotProduct, Matrix.cons_val_two,
+      Matrix.vecHead, Matrix.vecTail, Fin.sum_univ_succ]
   have third_pos :
       0 < ((semanticWordMiddle upper lower * coreOutput ((3 : ℚ) ^ β)) *ᵥ
         emptyBridgeColumn) 2 := by
     norm_num [semanticWordMiddle, semanticMiddle, coreOutput, emptyBridgeColumn,
-      Matrix.mul_apply, Matrix.mulVec, Matrix.dotProduct, Fin.sum_univ_succ]
+      Matrix.mul_apply, Matrix.mulVec, dotProduct, Matrix.cons_val_two,
+      Matrix.vecHead, Matrix.vecTail, Fin.sum_univ_succ]
     ring_nf
     positivity
   rw [second] at second_pos
   rw [third] at third_pos
-  norm_num [semanticTerminalColumn] at second_pos third_pos
+  norm_num [semanticTerminalColumn, Matrix.cons_val_two, Matrix.vecHead,
+    Matrix.vecTail] at second_pos third_pos
   have markerScale_pos : 0 < nearySideMarkerScale β := by
     rw [nearySideMarkerScale_eq]
     positivity
@@ -367,8 +372,8 @@ theorem bridge_semanticWordMiddle_det_neg
   rw [semanticWordMiddle, bridge_semanticMiddle_det]
   have upperCodeBound := ternaryCode_lt_pow_length upper
   have lowerCodeBound := ternaryCode_lower_bound lower lower_nonempty
-  have upperLength : 0 < upper.length := List.length_pos.mpr upper_nonempty
-  have lowerLength : 0 < lower.length := List.length_pos.mpr lower_nonempty
+  have upperLength : 0 < upper.length := List.length_pos_of_ne_nil upper_nonempty
+  have lowerLength : 0 < lower.length := List.length_pos_of_ne_nil lower_nonempty
   have upperScaleThree : (3 : ℚ) ≤ 3 ^ upper.length := by
     exact_mod_cast Nat.pow_le_pow_right (by norm_num : 0 < 3) upperLength
   have lowerScaleThree : (3 : ℚ) ≤ 3 ^ lower.length := by
@@ -428,7 +433,7 @@ theorem semanticIncidence_eq
       ((57 * ρ / 4 - 11 / 8) * left 1 * right 0 +
         11 * left 1 * right 1) * lowerScale := by
   norm_num [semanticIncidence, bridge, semanticMiddle, coreInput, coreOutput,
-    Matrix.mul_apply, Matrix.mulVec, Matrix.dotProduct, Fin.sum_univ_succ]
+    Matrix.mul_apply, Matrix.mulVec, dotProduct, Fin.sum_univ_succ]
   ring
 
 /-- If a fixed incidence vanishes on an affine terminal plane whose code slope escapes the
@@ -517,7 +522,7 @@ theorem no_fixed_semanticIncidence_neary_terminal_zero_set
         lowerCode = nearySideMarkerScale β * upperCode + nearySideMarkerValue β := by
   apply no_fixed_semanticIncidence_terminal_zero_set
   rw [nearySideMarkerScale_eq, nearySideMarkerValue_eq]
-  have scale_one : (1 : ℚ) ≤ 3 ^ β := one_le_pow_of_one_le (by norm_num) _
+  have scale_one : (1 : ℚ) ≤ 3 ^ β := one_le_pow₀ (by norm_num)
   intro equality
   have positive : (0 : ℚ) < 38 * 3 ^ β - 7 := by linarith
   apply positive.ne'

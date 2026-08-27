@@ -646,8 +646,7 @@ theorem positiveTransfer_isUnit (q : ℤ) (c : ℚ) (hq : 2 ≤ q) (hc : c + 1 �
 
 /-- Zero wait is an internal rank-one punctuation mark: mortality of the full return family is
 exactly vanishing of one scalar bridge over positive returns. -/
-theorem transferFamily_isMortal_iff_positiveBridge (q : ℤ) (c : ℚ)
-    (hq : 2 ≤ q) (hc : c + 1 ≠ 0) :
+theorem transferFamily_isMortal_iff_positiveBridge (q : ℤ) (c : ℚ) :
     IsMortal (fun n => transfer c ((q : ℚ) ^ n)) ↔
       ∃ waits, positiveBridge (q : ℚ) c waits = 0 := by
   rw [← separatedPositiveTransfer_comp_natEquivOption]
@@ -847,8 +846,8 @@ theorem physical_isMortal_iff_returnProduct {K : Type*} [Field K]
 /-- Complete ReturnSquare normal form: physical mortality is exactly one scalar bridge between
 two internal zero-wait punctuation returns, with every intervening return positive and invertible.
 -/
-theorem physical_isMortal_iff_positiveBridge (q : ℤ) (c : ℚ)
-    (hq : 2 ≤ q) (hc : c + 1 ≠ 0) :
+theorem physical_isMortal_iff_positiveBridge
+    (q : ℤ) (c : ℚ) (q_ne_zero : q ≠ 0) (hc : c + 1 ≠ 0) :
     IsMortal (ReturnFamily.pairGenerator (ambient (q : ℚ)) (cut c)) ↔
       ∃ waits, positiveBridge (q : ℚ) c waits = 0 := by
   change
@@ -859,17 +858,12 @@ theorem physical_isMortal_iff_positiveBridge (q : ℤ) (c : ℚ)
   have reduction := ReturnFamily.pairGenerator_isMortal_iff_positiveBridge
       (ambient (q : ℚ)) input (output c) inputLeftInverse (outputRightInverse c)
       ![1, 1] ![c, 1]
-      (ambient_isUnit (q : ℚ) (by positivity))
+      (ambient_isUnit (q : ℚ) (by exact_mod_cast q_ne_zero))
       inputLeftInverse_mul_input
       (output_mul_outputRightInverse c hc)
       (by
         rw [returnMatrix_eq_transfer]
         simpa using transfer_one ℚ c)
-      (fun wait => by
-        rw [returnMatrix_eq_transfer]
-        exact positiveTransfer_isUnit q c hq hc wait)
-      (by simp)
-      (by simp)
   constructor
   · intro mortal
     obtain ⟨waits, vanishes⟩ := reduction.mp mortal
@@ -888,7 +882,7 @@ theorem physical_isMortal_iff_oneReturn_or_longBridge (q : ℤ) (c : ℚ)
     IsMortal (ReturnFamily.pairGenerator (ambient (q : ℚ)) (cut c)) ↔
       (∃ n, c * (q : ℚ) ^ (n + 1) + 1 = 0) ∨
         ∃ waits, 3 ≤ waits.length ∧ positiveBridge (q : ℚ) c waits = 0 := by
-  rw [physical_isMortal_iff_positiveBridge q c hq hc]
+  rw [physical_isMortal_iff_positiveBridge q c (by omega) hc]
   constructor
   · rintro ⟨waits, bridge_zero⟩
     rcases positiveBridge_zero_shape q c waits hq hc bridge_zero with short | long
@@ -908,7 +902,7 @@ case `c=0`, which a strict-positivity statement would miss. -/
 theorem not_physical_isMortal_of_nonneg (q : ℤ) (c : ℚ)
     (hq : 2 ≤ q) (hc : 0 ≤ c) :
     ¬IsMortal (ReturnFamily.pairGenerator (ambient (q : ℚ)) (cut c)) := by
-  rw [physical_isMortal_iff_positiveBridge q c hq (by nlinarith)]
+  rw [physical_isMortal_iff_positiveBridge q c (by omega) (by nlinarith)]
   rintro ⟨waits, bridge_zero⟩
   exact (positiveBridge_pos_of_nonneg q c waits hq hc).ne' bridge_zero
 

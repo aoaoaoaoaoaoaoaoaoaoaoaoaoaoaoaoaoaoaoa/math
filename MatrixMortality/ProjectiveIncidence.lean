@@ -70,13 +70,13 @@ private theorem sourcePoint_eq_iff_cross_eq_zero
 
 private theorem cross_mulVec (matrix : Square Interface ℚ) (left right : Interface → ℚ) :
     cross (matrix *ᵥ left) (matrix *ᵥ right) = matrix.det * cross left right := by
-  simp [cross, Matrix.mulVec, Matrix.dotProduct, Fin.sum_univ_succ,
+  simp [cross, Matrix.mulVec, dotProduct, Fin.sum_univ_succ,
     Matrix.det_fin_two]
   ring
 
 private theorem dotProduct_eq_cross_kernelColumn (row vector : Interface → ℚ) :
     row ⬝ᵥ vector = cross vector (kernelColumn row) := by
-  simp [cross, kernelColumn, Matrix.dotProduct, Fin.sum_univ_succ]
+  simp [cross, kernelColumn, dotProduct, Fin.sum_univ_succ]
   ring
 
 private theorem image_ne_zero
@@ -398,7 +398,7 @@ theorem exists_unitNormalized
   let pulled := ReverseEdge.pulledColumn H column
   let first := ReverseEdge.firstVector G H column
   have pulled_action : H' *ᵥ (alpha⁻¹ • pulled) = column := by
-    rw [show H' = alpha • H by rfl, Matrix.smul_mulVec_assoc,
+    rw [show H' = alpha • H by rfl, Matrix.smul_mulVec,
       Matrix.mulVec_smul, smul_smul]
     rw [mul_inv_cancel₀ alpha_ne', one_smul]
     exact ReverseEdge.mulVec_pulledColumn H column H_unit
@@ -406,25 +406,24 @@ theorem exists_unitNormalized
       ReverseEdge.pulledColumn H' column = alpha⁻¹ • pulled := by
     exact nonsingInv_mulVec_eq_of_mulVec_eq H'_unit pulled_action
   have normalized_alpha : ReverseEdge.alpha H' row column = 1 := by
-    rw [ReverseEdge.alpha, pulled_eq, Matrix.dotProduct_smul]
+    rw [ReverseEdge.alpha, pulled_eq, dotProduct_smul]
     change alpha⁻¹ * alpha = 1
     exact inv_mul_cancel₀ alpha_ne'
   have first_action : H' *ᵥ (beta⁻¹ • first) = G' *ᵥ (alpha⁻¹ • pulled) := by
     rw [show H' = alpha • H by rfl, show G' = gScale • G by rfl,
-      Matrix.smul_mulVec_assoc, Matrix.smul_mulVec_assoc,
+      Matrix.smul_mulVec, Matrix.smul_mulVec,
       Matrix.mulVec_smul, Matrix.mulVec_smul, smul_smul, smul_smul]
     rw [show H *ᵥ first = G *ᵥ pulled by
       exact ReverseEdge.mulVec_firstVector G H column H_unit]
     congr 1
     dsimp [gScale]
     field_simp
-    ring
   have first_eq :
       ReverseEdge.firstVector G' H' column = beta⁻¹ • first := by
     rw [ReverseEdge.firstVector, pulled_eq]
     exact nonsingInv_mulVec_eq_of_mulVec_eq H'_unit first_action
   have normalized_beta : ReverseEdge.beta G' H' row column = 1 := by
-    rw [ReverseEdge.beta, first_eq, Matrix.dotProduct_smul]
+    rw [ReverseEdge.beta, first_eq, dotProduct_smul]
     change beta⁻¹ * beta = 1
     exact inv_mul_cancel₀ beta_ne'
   refine ⟨G', H', G'_unit, H'_unit, normalized_alpha, normalized_beta, ?_⟩
@@ -438,7 +437,7 @@ theorem exists_unitNormalized
     funext label
     cases label <;> rfl
   rw [ReverseEdge.incidence, ReverseEdge.incidence, generator_eq,
-    wordProduct_smulMatrix, Matrix.smul_mulVec_assoc, Matrix.dotProduct_smul]
+    wordProduct_smulMatrix, Matrix.smul_mulVec, dotProduct_smul]
   have scales_ne : ∀ label, scales label ≠ 0 := by
     intro label
     cases label
@@ -453,7 +452,7 @@ theorem exists_unitNormalized
   · intro scaled_zero
     exact (mul_eq_zero.mp scaled_zero).resolve_left product_ne
   · intro original_zero
-    simp [original_zero]
+    exact mul_eq_zero.mpr (Or.inr original_zero)
 
 end
 

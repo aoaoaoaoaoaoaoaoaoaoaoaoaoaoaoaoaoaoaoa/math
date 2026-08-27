@@ -77,9 +77,7 @@ theorem skeletonIncidence_add_four (left right : Bool) (count : Nat) :
     skeletonIncidence left (count + 4) right =
       2 * skeletonIncidence left count right := by
   rw [skeletonIncidence, pow_add, skeletonDefect_pow_four]
-  simp [skeletonIncidence, Matrix.mul_smul, Matrix.mul_one,
-    Matrix.smul_mulVec_assoc, Matrix.dotProduct, Matrix.mulVec,
-    Finset.mul_sum]
+  simp [skeletonIncidence, dotProduct, Matrix.mulVec]
   ring
 
 /-- Exact four-periodic zero table for one maximal defect run. -/
@@ -92,7 +90,7 @@ theorem skeletonIncidence_eq_zero_iff (left right : Bool) (count : Nat) :
       by_cases small : count < 4
       · interval_cases count <;> cases left <;> cases right <;>
           norm_num [skeletonIncidence, skeletonDefect, skeletonColumn, skeletonRow,
-            pow_succ, Matrix.mulVec, Matrix.dotProduct, Fin.sum_univ_succ] <;>
+            pow_succ, Matrix.mulVec, dotProduct, Fin.sum_univ_succ] <;>
           decide
       · let prior := count - 4
         have prior_lt : prior < count := by
@@ -104,7 +102,7 @@ theorem skeletonIncidence_eq_zero_iff (left right : Bool) (count : Nat) :
         rw [count_eq, skeletonIncidence_add_four, mul_eq_zero]
         have two_ne : (2 : ZMod 3) ≠ 0 := by decide
         simp only [two_ne, false_or, induction prior prior_lt]
-        simp [Nat.add_mod]
+        simp
 
 /-- Exact rank-one factorization of a safe/defect/safe block. -/
 theorem skeleton_run_factor (left right : Bool) (count : Nat) :
@@ -216,7 +214,7 @@ private theorem residueTwoResidue_mulVec_skeletonLift (vector : Fin 2 → ZMod 3
   funext i
   fin_cases i <;>
     norm_num [residueTwoResidue, skeletonLift, skeletonDefect, Matrix.mulVec,
-      Matrix.dotProduct, Fin.sum_univ_succ]
+      dotProduct, Fin.sum_univ_succ]
 
 private theorem residueTwoResidue_pow_mulVec_skeletonLift
     (count : Nat) (vector : Fin 2 → ZMod 3) :
@@ -232,7 +230,7 @@ private theorem skeletonFullRow_dot_skeletonLift
     (residue : Bool) (vector : Fin 2 → ZMod 3) :
     skeletonFullRow residue ⬝ᵥ skeletonLift vector = skeletonRow residue ⬝ᵥ vector := by
   cases residue <;>
-    norm_num [skeletonFullRow, skeletonLift, skeletonRow, Matrix.dotProduct,
+    norm_num [skeletonFullRow, skeletonLift, skeletonRow, dotProduct,
       Fin.sum_univ_succ]
 
 private theorem skeletonFullIncidence_eq
@@ -360,10 +358,6 @@ private theorem cast_defectSkeletonNumerator
         cast_safeNumerator]
   | cons link tail induction =>
       rw [defectSkeletonNumerator, defectSkeletonProduct]
-      change castMatrix
-          (safeNumerator β body first *
-            wordProduct (residueTwoNumerator β body) link.defects *
-              defectSkeletonNumerator β body link.nextSafe tail) = _
       rw [show castMatrix
           (safeNumerator β body first *
             wordProduct (residueTwoNumerator β body) link.defects *
@@ -515,7 +509,7 @@ private theorem defectExteriorResidue_mulVec_seed :
   funext i
   fin_cases i <;>
     norm_num [defectExteriorResidue, defectExteriorSeed, defectExteriorRay,
-      Matrix.mulVec, Matrix.dotProduct, Fin.sum_univ_succ]
+      Matrix.mulVec, dotProduct, Fin.sum_univ_succ]
   exact (show (31 : ZMod 3) = 1 by decide)
 
 private theorem defectExteriorResidue_mulVec_ray :
@@ -524,7 +518,7 @@ private theorem defectExteriorResidue_mulVec_ray :
   funext i
   fin_cases i <;>
     norm_num [defectExteriorResidue, defectExteriorRay, Matrix.mulVec,
-      Matrix.dotProduct, Fin.sum_univ_succ]
+      dotProduct, Fin.sum_univ_succ]
 
 private theorem defectExteriorResidue_pow_succ_mulVec_seed (count : Nat) :
     defectExteriorResidue ^ (count + 1) *ᵥ defectExteriorSeed (ZMod 3) =
@@ -588,7 +582,7 @@ private theorem cast_defectExteriorState
       (castMatrix (wordProduct (defectExteriorNumerator β body) word) *ᵥ
         castVector (defectExteriorSeed ℤ)) i by
       exact (Int.castRingHom ℚ).map_mulVec _ _ i]
-  rw [cast_defectExteriorWord, seed_cast, Matrix.smul_mulVec_assoc,
+  rw [cast_defectExteriorWord, seed_cast, Matrix.smul_mulVec,
     ← exteriorState_defect_word]
 
 /-- Every nonempty pure residue-two block induces an invertible bridge. -/
@@ -605,10 +599,17 @@ theorem pureDefect_bridge_det_ne_zero
     rw [show ((integerState 0 : ℤ) : ZMod 3) =
         (((wordProduct (defectExteriorNumerator β body) (head :: tail)).map
             (Int.castRingHom (ZMod 3))) *ᵥ defectExteriorSeed (ZMod 3)) 0 by
-      simpa [integerState, defectExteriorSeed] using
+      have mapped :=
         (Int.castRingHom (ZMod 3)).map_mulVec
           (wordProduct (defectExteriorNumerator β body) (head :: tail))
-          (defectExteriorSeed ℤ) 0]
+          (defectExteriorSeed ℤ) 0
+      have seed_cast :
+          (fun i => (defectExteriorSeed ℤ i : ZMod 3)) =
+            defectExteriorSeed (ZMod 3) := by
+        funext i
+        fin_cases i <;> norm_num [defectExteriorSeed]
+      rw [← seed_cast]
+      simpa [integerState, Function.comp_def] using mapped]
     rw [mapped_defectExteriorWord, List.length_cons,
       defectExteriorResidue_pow_succ_mulVec_seed]
     simp [defectExteriorRay]
@@ -678,7 +679,7 @@ theorem exists_outer_of_det_eq_zero
         norm_num at entry
       · ext i j
         fin_cases i <;> fin_cases j <;>
-          simp [Matrix.vecMulVec_apply, a, b, c, d, a_entry, c_entry]
+          simp [Matrix.vecMulVec_apply, b, d, a_entry, c_entry]
     · have b_zero : b = 0 := not_ne_iff.mp b_ne
       have a_entry : matrix 0 0 = 0 := a_zero
       have b_entry : matrix 0 1 = 0 := b_zero
@@ -695,14 +696,14 @@ theorem exists_outer_of_det_eq_zero
         apply matrix_ne
         ext i j
         fin_cases i <;> fin_cases j <;>
-          simp [a, b, c, d, a_entry, b_entry, c_entry, d_entry]
+          simp [a_entry, b_entry, c_entry, d_entry]
       refine ⟨![0, 1], ![c, d], ?_, row_ne, ?_⟩
       · intro zero
         have entry := congr_fun zero 1
         norm_num at entry
       · ext i j
         fin_cases i <;> fin_cases j <;>
-          simp [Matrix.vecMulVec_apply, a, b, c, d, a_entry, b_entry]
+          simp [Matrix.vecMulVec_apply, c, d, a_entry, b_entry]
 
 /-- One transport followed by the next rank-one wall in a bridge fracture. -/
 structure BridgeFractureLink where
@@ -773,7 +774,7 @@ theorem bridge_regular_word_ne_zero
   intro bridge_zero
   have bridge_word_zero :
       wordProduct (bridge ρ) [M] = 0 := by
-    simpa [wordProduct] using bridge_zero
+    simpa [ρ, M, wordProduct] using bridge_zero
   have chain_zero :
       exceptionalChain ρ [M] = 0 :=
     (exceptionalChain_eq_zero_iff ρ (by positivity) [M]).mpr bridge_word_zero
@@ -818,7 +819,8 @@ theorem bridgeCokernel_eq_exteriorTail (middle : Matrix (Fin 3) (Fin 3) ℚ) :
   funext i
   fin_cases i <;>
     norm_num [bridgeCokernel, coreRightInverse, exteriorState, exteriorChange, exteriorSeed,
-      Matrix.vecMul, Matrix.mulVec, Matrix.dotProduct, Fin.sum_univ_succ] <;>
+      Matrix.vecMul, Matrix.mulVec, dotProduct, Fin.sum_univ_succ,
+      Matrix.cons_val_two, Matrix.vecHead, Matrix.vecTail] <;>
     ring
 
 /-- On the bridge wall, the selected cokernel row retracts to the full exterior covector. -/
@@ -829,21 +831,21 @@ theorem bridgeCokernel_vecMul_coreInput_of_wall
   have wall_relation : -live 0 - live 1 + live 2 / 4 = 0 := by
     dsimp [live]
     norm_num [exteriorState, exteriorChange, exteriorSeed, Matrix.mulVec,
-      Matrix.vecMul, Matrix.dotProduct, Fin.sum_univ_succ] at wall ⊢
+      Matrix.vecMul, dotProduct, Fin.sum_univ_succ] at wall ⊢
     linear_combination wall
   have cokernel_eq : bridgeCokernel middle = ![live 0, live 2] := by
     funext i
     fin_cases i <;>
       simp [bridgeCokernel, coreRightInverse, live, Matrix.vecMul,
-        Matrix.dotProduct, Fin.sum_univ_succ]
+        dotProduct, Fin.sum_univ_succ]
   rw [cokernel_eq]
   change ![live 0, live 2] ᵥ* coreInput = live
   funext i
   fin_cases i
-  · norm_num [coreInput, Matrix.vecMul, Matrix.dotProduct, Fin.sum_univ_succ]
-  · norm_num [coreInput, Matrix.vecMul, Matrix.dotProduct, Fin.sum_univ_succ]
+  · norm_num [coreInput, Matrix.vecMul, dotProduct, Fin.sum_univ_succ]
+  · norm_num [coreInput, Matrix.vecMul, dotProduct, Fin.sum_univ_succ]
     linear_combination wall_relation
-  · norm_num [coreInput, Matrix.vecMul, Matrix.dotProduct, Fin.sum_univ_succ]
+  · norm_num [coreInput, Matrix.vecMul, dotProduct, Fin.sum_univ_succ]
     rfl
 
 /-- An invertible middle block gives a genuine nonzero projective cokernel on the wall. -/
@@ -860,7 +862,7 @@ theorem bridgeCokernel_ne_zero_of_isUnit
       middle.det • exteriorSeed = exteriorSeed ᵥ* (middle.det • 1) := by
         funext i
         fin_cases i <;>
-          norm_num [exteriorSeed, Matrix.vecMul, Matrix.dotProduct, Matrix.one_apply,
+          norm_num [exteriorSeed, Matrix.vecMul, dotProduct, Matrix.one_apply,
             Matrix.smul_apply, Fin.sum_univ_succ] <;>
           ring
       _ = exteriorSeed ᵥ* (middle.adjugate * middle) := by rw [Matrix.adjugate_mul]
@@ -910,7 +912,7 @@ theorem bridgeCokernel_vecMul_bridge_of_wall
     _ = 0 := by
       funext i
       fin_cases i <;>
-        norm_num [coreOutput, exteriorSeed, Matrix.vecMul, Matrix.dotProduct,
+        norm_num [coreOutput, exteriorSeed, Matrix.vecMul, dotProduct,
           Matrix.one_apply, Matrix.smul_apply, Fin.sum_univ_succ] <;>
         ring
 

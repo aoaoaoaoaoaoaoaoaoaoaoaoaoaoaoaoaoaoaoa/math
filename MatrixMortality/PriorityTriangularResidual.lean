@@ -54,7 +54,7 @@ theorem drainIteration_pivot {dimension : Nat} (pivot : Fin dimension)
     (iteration : DrainIteration pivot fanout steps source target) :
     (target pivot : ℤ) = (source pivot : ℤ) - steps := by
   have pivotEquation := iteration pivot
-  simp [DrainIteration, IntegerStep, drainShift, later pivot (by rfl)] at pivotEquation
+  simp [drainShift, later pivot (by rfl)] at pivotEquation
   omega
 
 /-- Natural-state semantics forbids more drain iterations than the pivot initially contains. -/
@@ -94,10 +94,10 @@ theorem drainTransfer_iff_exitIteration {dimension : Nat} (pivot : Fin dimension
       have transferEquation := transfer coordinate
       by_cases atPivot : coordinate = pivot
       · subst coordinate
-        simp [DrainIteration, IntegerStep, drainShift,
+        simp [drainShift,
           later pivot (by rfl)] at transferEquation ⊢
         omega
-      · simp [DrainIteration, IntegerStep, drainShift, atPivot] at transferEquation ⊢
+      · simp [drainShift, atPivot] at transferEquation ⊢
         omega
     · intro coordinate coordinate_lt
       have coordinate_le : coordinate.val ≤ pivot.val := by omega
@@ -124,7 +124,7 @@ theorem drainTransfer_iff_exitIteration {dimension : Nat} (pivot : Fin dimension
         subst coordinate
         omega
       have noFanout := later coordinate (by omega)
-      simp [DrainIteration, IntegerStep, drainShift, notPivot, noFanout,
+      simp [drainShift, notPivot, noFanout,
         targetZero] at iterationEquation
       omega
     · intro coordinate
@@ -132,9 +132,9 @@ theorem drainTransfer_iff_exitIteration {dimension : Nat} (pivot : Fin dimension
       by_cases atPivot : coordinate = pivot
       · subst coordinate
         have targetZero := exitZero pivot (by omega)
-        simp [DrainTransfer, targetZero]
-      · simp [DrainIteration, IntegerStep, drainShift, atPivot, steps_eq] at iterationEquation
-        simp [DrainTransfer, atPivot]
+        simp [targetZero]
+      · simp [drainShift, atPivot, steps_eq] at iterationEquation
+        simp [atPivot]
         omega
 
 /-- A finite list of fixed translations cannot realize the reset graph `n ↦ 0` on all natural
@@ -146,13 +146,13 @@ theorem reset_not_finite_translation_union (shifts : List ℤ) :
   let bound : Nat := (shifts.map Int.natAbs).sum
   obtain ⟨shift, shift_mem, reset⟩ := covered (bound + 1)
   have abs_mem : shift.natAbs ∈ shifts.map Int.natAbs :=
-    List.mem_map_of_mem Int.natAbs shift_mem
+    List.mem_map.mpr ⟨shift, shift_mem, rfl⟩
   have abs_le : shift.natAbs ≤ bound := by
     exact List.single_le_sum (by simp) _ abs_mem
   have shift_eq : shift = -((bound + 1 : Nat) : ℤ) := by omega
   have abs_eq : shift.natAbs = bound + 1 := by
     rw [shift_eq, Int.natAbs_neg]
-    exact Int.natAbs_ofNat (bound + 1)
+    exact Int.natAbs_natCast (bound + 1)
   omega
 
 end PriorityTriangularResidual

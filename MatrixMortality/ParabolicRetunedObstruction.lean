@@ -60,7 +60,7 @@ private theorem poisonAtom_eq_semanticMatrix (body : List TagLetter) :
   ext i j
   fin_cases i <;> fin_cases j <;>
     norm_num [semanticMatrix, poisonB, pseudoUpper, pseudoLower, tagCode, sparseCode,
-      sparseDigit, Nat.ofDigits, ParabolicBlade.flank, ParabolicBlade.drift,
+      sparseDigit, Nat.ofDigits, List.replicate_succ, ParabolicBlade.flank, ParabolicBlade.drift,
       ParabolicBlade.injection, Matrix.mul_apply, Fin.sum_univ_succ]
 
 private theorem pseudoTile_reduced_eq_semanticMatrix
@@ -98,7 +98,6 @@ private theorem originalPoisonAtom_eq_semanticWordMiddle (body : List TagLetter)
     originalPseudoReduced body poisonB =
       ParabolicBlade.semanticWordMiddle (pseudoUpper poisonB) (pseudoLower body poisonB) := by
   rw [originalPseudoReduced, poisonB, pseudoLetter, pseudoGap, ParabolicBlade.atom]
-  change ParabolicBlade.bAtom ((3 : ℚ) ^ 3) 30 = _
   rw [show 30 = 3 * 10 by norm_num, ParabolicBlade.bAtom,
     ParabolicBlade.normalRoot_pow_three_mul]
   ext i j
@@ -106,7 +105,7 @@ private theorem originalPoisonAtom_eq_semanticWordMiddle (body : List TagLetter)
     norm_num [ParabolicBlade.semanticWordMiddle, ParabolicBlade.semanticMiddle,
       pseudoUpper, pseudoLower, poisonB, ParabolicBlade.bFlank, ParabolicBlade.flank,
       ParabolicBlade.drift, ParabolicBlade.injection, tagCode, ternaryCode, ternaryDigit,
-      Nat.ofDigits, Matrix.mul_apply, Fin.sum_univ_succ]
+      Nat.ofDigits, List.replicate_succ, Matrix.mul_apply, Fin.sum_univ_succ]
 
 private theorem originalPseudoTile_reduced_eq_semanticWordMiddle
     (body : List TagLetter) (tile : PseudoTile) :
@@ -180,7 +179,7 @@ private theorem pseudoPhysicalProduct_mul_injection
       simp only [pseudoPhysical, pseudoReduced, dataGenerator, atom, Matrix.mul_assoc]
 
 private def pseudoMiddleWord (word : List PseudoTile) : List (Option TagLetter) :=
-  word.bind pseudoWord
+  word.flatMap pseudoWord
 
 private theorem pseudoTile_word_product (body : List TagLetter) (tile : PseudoTile) :
     wordProduct (generator 3 body) (pseudoWord tile) = pseudoPhysical body tile := by
@@ -192,9 +191,9 @@ private theorem pseudoMiddleWord_product (body : List TagLetter) (word : List Ps
   induction word with
   | nil => simp [pseudoMiddleWord, pseudoPhysicalProduct, wordProduct]
   | cons tile word induction =>
-      change wordProduct (generator 3 body) (word.bind pseudoWord) =
+      change wordProduct (generator 3 body) (word.flatMap pseudoWord) =
         pseudoPhysicalProduct body word at induction
-      rw [pseudoMiddleWord, List.bind_cons, wordProduct_append, pseudoTile_word_product,
+      rw [pseudoMiddleWord, List.flatMap_cons, wordProduct_append, pseudoTile_word_product,
         pseudoPhysicalProduct, wordProduct_cons, induction]
       rfl
 
@@ -273,12 +272,27 @@ private theorem poisonContext_outer :
         Matrix.mul_apply, Matrix.vecMulVec, Fin.sum_univ_succ]
     all_goals try rw [core_columns i]
     all_goals ring
+  have bridge_entry :
+      bridge 3 middle 0 1 =
+        2 + 38 * (sparseCode (upper ++ nearyMarker 3) : ℚ) := by
+    change bridge 3 (semanticMatrix upper (upper ++ nearyMarker 3)) 0 1 = _
+    exact bridge_semanticMatrix_top_right 3 upper (upper ++ nearyMarker 3)
+  have core_entry :
+      core 1 1 = -9 * (3 : ℚ) ^ 3 * bridge 3 middle 0 1 := by
+    norm_num [core, ParabolicBlade.injection, bladeOutput,
+      Matrix.mul_apply, Fin.sum_univ_succ, Matrix.cons_val_one, Matrix.cons_val_two,
+      Matrix.vecHead, Matrix.vecTail, Matrix.vecMul, dotProduct]
   refine ⟨column, ?_, outer⟩
   intro column_zero
   have entry_zero := congr_fun column_zero 1
-  norm_num [column, core, middle, upper, bridge, semanticMatrix, bladeOutput, bladeInput,
-    ParabolicBlade.injection, Matrix.mul_apply, Fin.sum_univ_succ] at entry_zero
-  linarith
+  have entry_ne : core 1 1 / 2 ≠ 0 := by
+    rw [core_entry, bridge_entry]
+    have code_nonnegative :
+        (0 : ℚ) ≤ sparseCode (upper ++ nearyMarker 3) := by
+      exact_mod_cast Nat.zero_le (sparseCode (upper ++ nearyMarker 3))
+    intro zero
+    nlinarith
+  exact entry_ne (by simpa [column] using entry_zero)
 
 /-- The malformed context is a nonzero outer product with the lawful fixed terminal row. -/
 theorem poisonContextWord_product_outer :

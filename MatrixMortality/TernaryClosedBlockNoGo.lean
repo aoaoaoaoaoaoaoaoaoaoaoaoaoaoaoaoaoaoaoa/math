@@ -32,7 +32,7 @@ theorem tagEncode_count_true (β : Nat) (body : List TagLetter) :
     (tagEncode β body).count true = 2 * body.count .b + body.count .c := by
   change (spell (tagCode β) body).count true = _
   induction body with
-  | nil => simp [tagEncode, spell]
+  | nil => simp [spell]
   | cons letter tail induction =>
       change (tagCode β letter ++ spell (tagCode β) tail).count true = _
       rw [List.count_append, induction]
@@ -44,12 +44,12 @@ theorem tagEncode_count_false (β : Nat) (body : List TagLetter) :
     (tagEncode β body).count false = β * body.count .b := by
   change (spell (tagCode β) body).count false = _
   induction body with
-  | nil => simp [tagEncode, spell]
+  | nil => simp [spell]
   | cons letter tail induction =>
       change (tagCode β letter ++ spell (tagCode β) tail).count false = _
       rw [List.count_append, induction]
       cases letter <;>
-        simp [tagCode, List.count_replicate, Nat.succ_mul, Nat.mul_succ]
+        simp [tagCode, Nat.mul_succ]
       all_goals omega
 
 /-- Closed arithmetic form of the paired-Parikh matrix. -/
@@ -66,7 +66,7 @@ theorem nearyPairedParikh_eq_closed (β : Nat) (body : List TagLetter) :
   fin_cases i <;> fin_cases j <;>
     simp [nearyPairedParikh, pairedParikh, role, closedNearyPairedParikh,
       nearyUpper, nearyLower, tagCode, List.count_append, tagEncode_count_true,
-      tagEncode_count_false, List.count_replicate, Matrix.vecHead, Matrix.vecTail]
+      tagEncode_count_false, List.count_replicate]
   all_goals ring
 
 /-- The four closed role vectors are independent whenever the deletion width and the number of
@@ -79,7 +79,7 @@ theorem closedNearyPairedParikh_vecMul_injective
   have at1 := congr_fun equality 1
   have at2 := congr_fun equality 2
   have at3 := congr_fun equality 3
-  simp [closedNearyPairedParikh, Matrix.vecMul, Matrix.dotProduct,
+  simp [closedNearyPairedParikh, Matrix.vecMul, dotProduct,
     Fin.sum_univ_succ] at at0 at1 at2 at3
   change x 0 + (x 1 * 2 + (x 2 * 2 + x 3)) =
     y 0 + (y 1 * 2 + (y 2 * 2 + y 3)) at at0
@@ -127,7 +127,7 @@ theorem nearyPairedParikh_vecMul_injective
   rw [nearyPairedParikh_eq_closed]
   apply closedNearyPairedParikh_vecMul_injective
   · exact_mod_cast β_pos
-  · exact_mod_cast List.count_pos_iff_mem.mpr body_has_b
+  · exact_mod_cast List.count_pos_iff.mpr body_has_b
 
 theorem nearyPairedParikh_det_ne_zero
     (β : Nat) (body : List TagLetter) (β_pos : 0 < β) (body_has_b : .b ∈ body) :
@@ -155,7 +155,6 @@ private theorem count_spell_eq_sum {C D : Type*} [Fintype C] [DecidableEq C]
     ((spell side word).count symbol : ℚ) =
       ∑ letter : C,
         (word.count letter : ℚ) * (side letter).count symbol := by
-  change ((spell side word).count symbol : ℚ) = _
   induction word with
   | nil => simp [spell]
   | cons head tail induction =>
@@ -168,12 +167,11 @@ private theorem count_spell_eq_sum {C D : Type*} [Fintype C] [DecidableEq C]
       simp
 
 private def macroCountMatrix {β : Nat} {body : List TagLetter} {C : Type*}
-    [Fintype C] [DecidableEq C]
+    [DecidableEq C]
     (factorization : ExactErasingMacroFactorization β body C) : Matrix (Fin 4) C ℚ :=
   fun index letter => factorization.code (role index) |>.count letter
 
 private def letterParikhMatrix {β : Nat} {body : List TagLetter} {C : Type*}
-    [Fintype C] [DecidableEq C]
     (factorization : ExactErasingMacroFactorization β body C) : Matrix C (Fin 4) ℚ :=
   fun letter => pairedParikh (factorization.upper letter) (factorization.lower letter)
 

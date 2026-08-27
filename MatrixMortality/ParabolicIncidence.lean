@@ -25,13 +25,13 @@ private theorem exterior_wall_dot (middle : Matrix (Fin 3) (Fin 3) ℚ) :
       -4 * exteriorState middle 0 := by
   norm_num [exteriorSeed, bladeKernel, exteriorState, exteriorChange,
     Matrix.adjugate_fin_three, Matrix.transpose_apply, Matrix.mulVec,
-    Matrix.dotProduct, Fin.sum_univ_succ]
+    dotProduct, Fin.sum_univ_succ]
   ring
 
 private theorem outer_mulVec_apply (column row vector : Fin 3 → ℚ) :
     Matrix.vecMulVec column row *ᵥ vector = (row ⬝ᵥ vector) • column := by
   funext i
-  simp only [Matrix.mulVec, Matrix.vecMulVec_apply, Matrix.dotProduct,
+  simp only [Matrix.mulVec, Matrix.vecMulVec_apply, dotProduct,
     Pi.smul_apply, smul_eq_mul]
   calc
     (∑ x, column i * row x * vector x) =
@@ -47,7 +47,7 @@ theorem coreOutput_mulVec_bridgeKernel_of_wall
     (wall : exteriorState middle 0 = 0) :
     coreOutput ρ *ᵥ bridgeKernel ρ middle = middle.adjugate *ᵥ bladeKernel := by
   rw [bridgeKernel, Matrix.mulVec_mulVec, core_projection ρ ρ_ne]
-  rw [Matrix.sub_mulVec, Matrix.one_mulVec, Matrix.smul_mulVec_assoc, outer_mulVec_apply]
+  rw [Matrix.sub_mulVec, Matrix.one_mulVec, Matrix.smul_mulVec, outer_mulVec_apply]
   rw [exterior_wall_dot, wall]
   simp
 
@@ -66,7 +66,7 @@ theorem bridgeKernel_ne_zero_of_isUnit
           (middle.det • (1 : Matrix (Fin 3) (Fin 3) ℚ)) *ᵥ bladeKernel := by
         funext i
         fin_cases i <;>
-          norm_num [bladeKernel, Matrix.mulVec, Matrix.dotProduct, Matrix.one_apply,
+          norm_num [bladeKernel, Matrix.mulVec, dotProduct, Matrix.one_apply,
             Matrix.smul_apply, Fin.sum_univ_succ]
       _ = (middle * middle.adjugate) *ᵥ bladeKernel := by rw [Matrix.mul_adjugate]
       _ = middle *ᵥ (middle.adjugate *ᵥ bladeKernel) := by
@@ -83,7 +83,7 @@ theorem bridgeKernel_ne_zero_of_isUnit
 private theorem coreInput_mulVec_bladeKernel : coreInput *ᵥ bladeKernel = 0 := by
   funext i
   fin_cases i <;>
-    norm_num [coreInput, bladeKernel, Matrix.mulVec, Matrix.dotProduct, Fin.sum_univ_succ]
+    norm_num [coreInput, bladeKernel, Matrix.mulVec, dotProduct, Fin.sum_univ_succ]
 
 theorem bridge_mulVec_bridgeKernel_of_wall
     (ρ : ℚ) (ρ_ne : ρ ≠ 0) (middle : Matrix (Fin 3) (Fin 3) ℚ)
@@ -94,7 +94,7 @@ theorem bridge_mulVec_bridgeKernel_of_wall
     ← Matrix.mulVec_mulVec _ coreInput middle,
     coreOutput_mulVec_bridgeKernel_of_wall ρ ρ_ne middle wall]
   rw [Matrix.mulVec_mulVec bladeKernel middle middle.adjugate, Matrix.mul_adjugate]
-  rw [Matrix.smul_mulVec_assoc, Matrix.one_mulVec, Matrix.mulVec_smul,
+  rw [Matrix.smul_mulVec, Matrix.one_mulVec, Matrix.mulVec_smul,
     coreInput_mulVec_bladeKernel]
   simp
 

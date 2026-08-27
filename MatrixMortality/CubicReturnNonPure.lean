@@ -66,11 +66,11 @@ theorem ambient_recurrence : ambient ^ 3 + ambient ^ 2 = 1 := by
   fin_cases i <;> fin_cases j <;>
     norm_num [ambient, Matrix.mul_apply, Matrix.one_apply,
       Fin.sum_univ_succ, pow_succ]
-  all_goals split <;> simp_all [Fin.ext_iff]
 
 /-- The non-pure ambient has determinant one. -/
 theorem ambient_det : ambient.det = 1 := by
-  norm_num [ambient, Matrix.det_fin_three, Matrix.vecHead, Matrix.vecTail]
+  norm_num [ambient, Matrix.det_fin_three, Matrix.cons_val_two,
+    Matrix.vecHead, Matrix.vecTail]
 
 /-- The non-pure ambient is invertible. -/
 theorem ambient_isUnit : IsUnit ambient := by
@@ -269,9 +269,9 @@ theorem selected_lower_ne_zero (word : List Bool) :
             (if selected then (-150 : ℚ) else 60) * tail 1 := by
         cases selected
         · rw [falseWaitReturn_one]
-          simp [Matrix.mulVec, Matrix.dotProduct, Fin.sum_univ_succ]
+          simp [Matrix.mulVec, dotProduct, Fin.sum_univ_succ]
         · rw [falseWaitReturn_five]
-          simp [Matrix.mulVec, Matrix.dotProduct, Fin.sum_univ_succ]
+          simp [Matrix.mulVec, dotProduct, Fin.sum_univ_succ]
       rw [action]
       exact mul_ne_zero (by cases selected <;> norm_num) induction
 

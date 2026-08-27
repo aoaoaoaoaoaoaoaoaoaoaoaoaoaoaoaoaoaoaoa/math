@@ -29,12 +29,12 @@ def bcbcNull (history : List (Stroke TagLetter 3)) : Prop :=
 
 private theorem consumed_append (left right : List (Stroke TagLetter 3)) :
     consumed (left ++ right) = consumed left ++ consumed right := by
-  simp [consumed, List.map_append]
+  simp [consumed]
 
 private theorem produced_append (left right : List (Stroke TagLetter 3)) :
     produced (tagOutput bcbcBody) (left ++ right) =
       produced (tagOutput bcbcBody) left ++ produced (tagOutput bcbcBody) right := by
-  simp [produced, List.map_append]
+  simp [produced]
 
 theorem bcbcNull_append {left right : List (Stroke TagLetter 3)}
     (leftNull : bcbcNull left) (rightNull : bcbcNull right) :
@@ -50,7 +50,7 @@ theorem bcbcNull_append {left right : List (Stroke TagLetter 3)}
     _ = ([.b] ++ produced (tagOutput bcbcBody) left) ++
         produced (tagOutput bcbcBody) right := by rw [leftNull]
     _ = [.b] ++ (produced (tagOutput bcbcBody) left ++
-        produced (tagOutput bcbcBody) right) := by simp [List.append_assoc]
+        produced (tagOutput bcbcBody) right) := by simp
 
 /-- Two short excursions concatenated into one four-stroke null block. -/
 def flatBlock : List (Stroke TagLetter 3) :=
@@ -171,7 +171,8 @@ theorem bcbcTerminalFork_injective : Function.Injective bcbcTerminalFork := by
   intro left right equality
   apply bcbcForkRoles_injective
   have tails := congrArg (List.drop 6) equality
-  simpa [bcbcTerminalFork] using tails
+  simpa [bcbcTerminalFork, tileHistory, strokeTiles, strokeCBC, strokeBCB, stroke₃]
+    using tails
 
 theorem bcbcTerminalFork_match (bits : List Bool) :
     spell (nearyUpper 3) (bcbcTerminalFork bits) ++ nearyMarker 3 =

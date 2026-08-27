@@ -28,8 +28,8 @@ theorem pairedCoefficient_toggle_cons (β : Nat) (body : List TagLetter)
   congr 1
   ext coordinate
   fin_cases coordinate <;>
-    simp [pairedRow, pairedToggleMatrix_eq_explicit, Matrix.vecMul, Matrix.dotProduct,
-      Matrix.vecHead, Matrix.vecTail, Fin.sum_univ_succ]
+    simp [pairedRow, pairedToggleMatrix_eq_explicit, Matrix.vecMul, dotProduct,
+      Fin.sum_univ_succ]
 
 /-- A leading `c` read in erase phase cannot vanish: its two decoded words begin with different
 binary letters. -/
@@ -85,7 +85,7 @@ theorem no_zero_of_erase_c_projective_identification
   have prefixed_target_zero :
       linearCoefficient generators row column (.data .c :: erased) = 0 := by
     rw [linearCoefficient, wordProduct_cons, ← Matrix.mulVec_mulVec, projective]
-    rw [Matrix.dotProduct_smul]
+    rw [dotProduct_smul]
     simp [show row ⬝ᵥ wordProduct generators erased *ᵥ column = 0 by
       simpa [linearCoefficient] using erased_target_zero]
   have prefixed_source_zero :

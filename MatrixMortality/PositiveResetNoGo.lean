@@ -164,15 +164,12 @@ theorem sameRay_bilinearFibrePoint
   · change point 0 = leftScale / s * (r * v)
     rw [point_zero, rightScale_eq]
     field_simp
-    ring
   · change point 1 = leftScale / s * (u * s)
     rw [point_one]
     field_simp
-    ring
   · change point 2 = leftScale / s * (v * s)
     rw [point_two_left]
     field_simp
-    ring
 
 /-! ## Fullness of the standard homogeneous radix cylinder -/
 
@@ -188,7 +185,7 @@ theorem radixCylinder_det (K : Type*) [CommRing K] (base digitB digitC digitA : 
     (radixCylinder K base digitB digitC digitA).det =
       base ^ 2 * (base - 1) * (digitB - digitC) := by
   rw [Matrix.det_fin_three]
-  simp [radixCylinder, Matrix.vecHead, Matrix.vecTail]
+  simp [radixCylinder]
   ring
 
 /-- Every ordinary nondegenerate radix prepend cylinder spans three vector dimensions. -/

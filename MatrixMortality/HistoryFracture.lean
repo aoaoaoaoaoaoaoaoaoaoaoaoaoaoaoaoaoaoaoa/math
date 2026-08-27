@@ -90,7 +90,7 @@ role digit. -/
 @[simp] theorem historyDataMatrix_det (R : Type*) [CommRing R] (letter : TagLetter) :
     (historyDataMatrix R letter).det = 0 := by
   cases letter <;>
-    simp [historyDataMatrix, Matrix.det_fin_three, Matrix.vecHead, Matrix.vecTail]
+  simp [historyDataMatrix, Matrix.det_fin_three]
 
 /-- The toggle flips the phase sign without changing the role code. -/
 def historyToggleMatrix (R : Type*) [CommRing R] : Matrix (Fin 3) (Fin 3) R :=
@@ -137,14 +137,14 @@ theorem historyProduct_mulVec_column (R : Type*) [CommRing R]
                 fin_cases coordinate <;>
                 simp [historyGenerator, historyToggleMatrix, historyState, suffixDecode,
                   decoded_eq, PairPhase.flip, historyPhaseSign, Matrix.mulVec,
-                  Matrix.dotProduct, Fin.sum_univ_succ]
+                  dotProduct, Fin.sum_univ_succ]
           | data letter =>
               cases phase <;> cases letter <;>
                 ext coordinate <;>
                 fin_cases coordinate <;>
                 simp [historyGenerator, historyDataMatrix, historyState, suffixDecode,
                   decoded_eq, PairPhase.tile, historyPhaseSign, historyCode, historyDigit,
-                  Nat.ofDigits, Matrix.mulVec, Matrix.dotProduct, Fin.sum_univ_succ] <;>
+                  Nat.ofDigits, Matrix.mulVec, dotProduct, Fin.sum_univ_succ] <;>
                 ring
 
 /-- Scalar emitted by the history encoder for one prescribed role word. -/
@@ -160,7 +160,7 @@ theorem historyCoefficient_eq_code_sub (R : Type*) [CommRing R] (target : Nat)
   cases decoded_eq : suffixDecode word with
   | mk phase decoded =>
       cases phase <;>
-        simp [historyRow, historyState, decodePairedWord, decoded_eq, Matrix.dotProduct,
+        simp [historyRow, historyState, decodePairedWord, decoded_eq, dotProduct,
           Fin.sum_univ_succ, sub_eq_add_neg]
 
 theorem historyCoefficient_zero_iff_decode_eq (target : List NearyTile)
@@ -203,7 +203,7 @@ theorem historyGenerator_map {R S : Type*} [CommRing R] [CommRing S]
       cases letter <;>
         ext i j <;>
         fin_cases i <;> fin_cases j <;>
-        simp [historyGenerator, historyDataMatrix, Matrix.vecHead, Matrix.vecTail]
+  simp [historyGenerator, historyDataMatrix]
       all_goals
         first
         | exact map_ofNat hom 5
@@ -212,7 +212,7 @@ theorem historyGenerator_map {R S : Type*} [CommRing R] [CommRing S]
   | toggle =>
       ext i j
       fin_cases i <;> fin_cases j <;>
-        simp [historyGenerator, historyToggleMatrix, Matrix.vecHead, Matrix.vecTail]
+  simp [historyGenerator, historyToggleMatrix]
 
 theorem historyColumn_map {R S : Type*} [CommRing R] [CommRing S]
     (hom : R →+* S) : hom ∘ historyColumn R = historyColumn S := by

@@ -35,7 +35,7 @@ def bcbbNull (history : List (Stroke TagLetter 3)) : Prop :=
   consumed history ++ [.b] = [.b] ++ produced (tagOutput bcbbBody) history
 
 private def wakes (history : List (Stroke TagLetter 3)) : List TagLetter :=
-  (history.map Stroke.wake).join
+  (history.map Stroke.wake).flatten
 
 private theorem countC_consumed (history : List (Stroke TagLetter 3)) :
     (consumed history).count .c =
@@ -85,7 +85,7 @@ private theorem produced_length (history : List (Stroke TagLetter 3)) :
 private theorem bcbbNull_wakes (history : List (Stroke TagLetter 3))
     (null : bcbbNull history) : (wakes history).count .c = 0 := by
   have counts := congrArg (List.count TagLetter.c) null
-  simp only [bcbbNull, List.count_append, List.count_cons, List.count_nil,
+  simp only [List.count_append, List.count_cons, List.count_nil,
     countC_consumed, countC_produced] at counts
   omega
 
@@ -96,7 +96,7 @@ private theorem stroke_eq_B_or_C {history : List (Stroke TagLetter 3)}
   have wake_no_c : TagLetter.c ∉ stroke.wake := by
     intro wake_c
     have c_in_wakes : TagLetter.c ∈ wakes history := by
-      simp only [wakes, List.mem_join, List.mem_map]
+      simp only [wakes, List.mem_flatten, List.mem_map]
       exact ⟨stroke.wake, ⟨stroke, member, rfl⟩, wake_c⟩
     exact (List.count_eq_zero.mp wake_count) c_in_wakes
   rcases stroke with ⟨head, wake, width⟩
@@ -118,18 +118,18 @@ private theorem bcbbNull_length (history : List (Stroke TagLetter 3))
     (null : bcbbNull history) :
     history.length = 2 * (history.map Stroke.head).count .c := by
   have lengths := congrArg List.length null
-  simp only [bcbbNull, List.length_append, List.length_cons, List.length_nil,
+  simp only [List.length_append, List.length_cons, List.length_nil,
     consumed_length, produced_length] at lengths
   omega
 
 private theorem exists_C_of_ne_nil {history : List (Stroke TagLetter 3)}
     (null : bcbbNull history) (nonempty : history ≠ []) : strokeCBB ∈ history := by
   have count_pos : 0 < (history.map Stroke.head).count .c := by
-    have length_pos := List.length_pos.mpr nonempty
+    have length_pos := List.length_pos_of_ne_nil nonempty
     have := bcbbNull_length history null
     omega
   have c_mem : TagLetter.c ∈ history.map Stroke.head :=
-    List.count_pos_iff_mem.mp count_pos
+    List.count_pos_iff.mp count_pos
   obtain ⟨source, source_mem, source_head⟩ := List.mem_map.mp c_mem
   have source_C := stroke_eq_B_or_C null source_mem
   rcases source_C with source_B | source_C
@@ -163,7 +163,7 @@ private def leadingB (word : List TagLetter) : Nat :=
     leadingB (List.replicate length .b ++ .c :: tail) = length := by
   induction length with
   | zero => simp [leadingB]
-  | succ length induction => simp [leadingB, List.replicate_succ, induction]
+  | succ length induction => simp [leadingB, List.replicate_succ]
 
 @[simp] private theorem consumed_replicate_B (length : Nat) :
     consumed (List.replicate length strokeBBB) = List.replicate (3 * length) .b := by
@@ -186,12 +186,12 @@ private def leadingB (word : List TagLetter) : Nat :=
 
 private theorem consumed_append (left right : List (Stroke TagLetter 3)) :
     consumed (left ++ right) = consumed left ++ consumed right := by
-  simp [consumed, List.map_append]
+  simp [consumed]
 
 private theorem produced_append (left right : List (Stroke TagLetter 3)) :
     produced (tagOutput bcbbBody) (left ++ right) =
       produced (tagOutput bcbbBody) left ++ produced (tagOutput bcbbBody) right := by
-  simp [produced, List.map_append]
+  simp [produced]
 
 private theorem leadingB_null_left (prefixLength : Nat) (tail : List TagLetter) :
     leadingB
@@ -207,7 +207,7 @@ private theorem leadingB_null_left (prefixLength : Nat) (tail : List TagLetter) 
   induction prefixLength with
   | zero => simp [leadingB]
   | succ prefixLength induction =>
-      simp [List.replicate_succ, leadingB, induction, Nat.add_assoc]
+      simp [List.replicate_succ, leadingB, Nat.add_assoc]
 
 private theorem bcbbNull_peel (history : List (Stroke TagLetter 3))
     (null : bcbbNull history) :
@@ -249,7 +249,7 @@ def bcbbNullRay : Nat → List (Stroke TagLetter 3)
 @[simp] theorem bcbbNull_pair_iff (tail : List (Stroke TagLetter 3)) :
     bcbbNull (strokeBBB :: strokeCBB :: tail) ↔ bcbbNull tail := by
   simp [bcbbNull, strokeBBB, strokeCBB, stroke₃, Stroke.letters, bcbbBody,
-    tagOutput, nearyBody, List.append_assoc]
+    tagOutput, nearyBody]
 
 @[simp] theorem bcbbNull_ray (k : Nat) : bcbbNull (bcbbNullRay k) := by
   induction k with
@@ -325,7 +325,7 @@ private theorem bcbbTail_iff (history : List (Stroke TagLetter 3)) :
       obtain ⟨wake₁, wake₂, rfl⟩ := List.length_eq_two.mp wake_length
       cases head <;> cases wake₁ <;> cases wake₂ <;>
         simp [bcbbTail, bcbbNull, consumed_cons, produced_cons, strokeBBB, stroke₃,
-          Stroke.letters, bcbbBody, tagOutput, nearyBody, List.append_assoc]
+          Stroke.letters, bcbbBody, tagOutput, nearyBody]
 
 /-- The complete terminal history `cbc,bbb,(bbb,cbb)^k`. -/
 def bcbbTerminalHistory (k : Nat) : List (Stroke TagLetter 3) :=
@@ -349,8 +349,7 @@ theorem bcbb_terminal_match_iff (word : List NearyTile) :
     have wake_length : wake.length = 2 := by omega
     obtain ⟨wake₁, wake₂, rfl⟩ := List.length_eq_two.mp wake_length
     cases head <;> cases wake₁ <;> cases wake₂ <;>
-      simp [consumed_cons, produced_cons, bcbbBody, tagOutput, nearyBody,
-        Stroke.letters, List.append_assoc] at semantic
+      simp [consumed_cons, bcbbBody, nearyBody, Stroke.letters] at semantic
     obtain ⟨nullTail, tail_eq, null⟩ := (bcbbTail_iff tail).mp semantic
     obtain ⟨k, null_eq⟩ := (bcbbNull_iff nullTail).mp null
     refine ⟨k, ?_⟩
@@ -378,7 +377,7 @@ theorem forwardHistoryCode_append (left right : List NearyTile) :
     forwardHistoryCode (left ++ right) =
       5 ^ right.length * forwardHistoryCode left + forwardHistoryCode right := by
   simp [forwardHistoryCode, historyCode, List.map_append, Nat.ofDigits_append,
-    Nat.mul_comm, Nat.add_comm]
+    Nat.add_comm]
 
 theorem forwardHistoryCode_injective : Function.Injective forwardHistoryCode := by
   intro left right equality
@@ -417,26 +416,26 @@ theorem periodicData_mulVec_eq_zero_iff (letter : TagLetter) (vector : Fin 3 →
       · intro zero
         have coordinate0 := congrFun zero 0
         have coordinate2 := congrFun zero 2
-        simp [periodicDataMatrix, Matrix.mulVec, Matrix.dotProduct,
+        simp [periodicDataMatrix, Matrix.mulVec, dotProduct,
           Fin.sum_univ_succ] at coordinate0 coordinate2
         constructor <;> linarith
       · rintro ⟨lastZero, firstEqual⟩
         ext coordinate
         fin_cases coordinate <;>
-          simp [periodicDataMatrix, Matrix.mulVec, Matrix.dotProduct, Fin.sum_univ_succ,
+          simp [periodicDataMatrix, Matrix.mulVec, dotProduct, Fin.sum_univ_succ,
             lastZero, firstEqual]
   | c =>
       constructor
       · intro zero
         have coordinate0 := congrFun zero 0
         have coordinate2 := congrFun zero 2
-        simp [periodicDataMatrix, Matrix.mulVec, Matrix.dotProduct,
+        simp [periodicDataMatrix, Matrix.mulVec, dotProduct,
           Fin.sum_univ_succ] at coordinate0 coordinate2
         constructor <;> linarith
       · rintro ⟨lastZero, firstEqual⟩
         ext coordinate
         fin_cases coordinate <;>
-          simp [periodicDataMatrix, Matrix.mulVec, Matrix.dotProduct, Fin.sum_univ_succ,
+          simp [periodicDataMatrix, Matrix.mulVec, dotProduct, Fin.sum_univ_succ,
             lastZero, firstEqual]
 
 /-- The common kernel direction is killed by either data control. -/
@@ -450,7 +449,7 @@ theorem periodicToggle_mulVec_kernel :
     historyToggleMatrix ℚ *ᵥ periodicKernel = ![1, -1, 0] := by
   ext coordinate
   fin_cases coordinate <;>
-    norm_num [historyToggleMatrix, periodicKernel, Matrix.mulVec, Matrix.dotProduct,
+    norm_num [historyToggleMatrix, periodicKernel, Matrix.mulVec, dotProduct,
       Fin.sum_univ_succ]
 
 /-- After one toggle, either data control recovers a nonzero copy of the hidden direction. -/
@@ -461,7 +460,7 @@ theorem periodicData_mulVec_toggle_kernel (letter : TagLetter) :
   cases letter <;>
     ext coordinate <;>
     fin_cases coordinate <;>
-    norm_num [periodicDataMatrix, Matrix.mulVec, Matrix.dotProduct, Fin.sum_univ_succ]
+    norm_num [periodicDataMatrix, Matrix.mulVec, dotProduct, Fin.sum_univ_succ]
 
 /-- Initial affine offset, phase sign, and positional scale. -/
 def periodicColumn (R : Type*) [CommRing R] (κ : R) : Fin 3 → R := ![κ, 1, 1]
@@ -496,14 +495,14 @@ theorem periodicProduct_mulVec_column (R : Type*) [CommRing R] (κ : R)
                 fin_cases coordinate <;>
                 simp [periodicGenerator, historyToggleMatrix, periodicState, suffixDecode,
                   decoded_eq, PairPhase.flip, historyPhaseSign, Matrix.mulVec,
-                  Matrix.dotProduct, Fin.sum_univ_succ]
+                  dotProduct, Fin.sum_univ_succ]
           | data letter =>
               cases phase <;> cases letter <;>
                 ext coordinate <;>
                 fin_cases coordinate <;>
                 simp [periodicGenerator, periodicDataMatrix, periodicState, suffixDecode,
                   decoded_eq, PairPhase.tile, historyPhaseSign, historyDigit, Matrix.mulVec,
-                  Matrix.dotProduct, Fin.sum_univ_succ, pow_succ'] <;>
+                  dotProduct, Fin.sum_univ_succ, pow_succ'] <;>
                 ring
 
 /-- Scalar cut out by one affine row section of the positional decoder. -/
@@ -518,7 +517,7 @@ theorem periodicCoefficient_eq (κ α : ℚ) (word : List PairedControl) :
   cases decoded_eq : suffixDecode word with
   | mk phase decoded =>
       cases phase <;>
-        simp [periodicRow, periodicState, decodePairedWord, decoded_eq, Matrix.dotProduct,
+        simp [periodicRow, periodicState, decodePairedWord, decoded_eq, dotProduct,
           Fin.sum_univ_succ, sub_eq_add_neg]
 
 /-- The fixed role prefix `P₀`. -/
@@ -564,7 +563,7 @@ theorem bcbbRoleRay_eq_terminal (k : Nat) :
       have terminal_succ :
           bcbbTerminalHistory (k + 1) =
             bcbbTerminalHistory k ++ [strokeBBB, strokeCBB] := by
-        simp [bcbbTerminalHistory, bcbbNullRay_succ_append, List.append_assoc]
+        simp [bcbbTerminalHistory, bcbbNullRay_succ_append]
       rw [terminal_succ, tileHistory_append]
       rfl
 
@@ -656,7 +655,7 @@ theorem bcbbAffine_zero_iff (word : List NearyTile) :
     have length_dvd := bcbbAffine_length_dvd_six word zero
     have length_ne : word.length ≠ 0 := by
       intro length_zero
-      have word_nil := List.length_eq_zero.mp length_zero
+      have word_nil := List.length_eq_zero_iff.mp length_zero
       subst word
       norm_num [bcbbAffine, bcbbKappa, bcbbAlpha] at zero
     obtain ⟨multiple, length_eq⟩ := length_dvd
@@ -721,7 +720,7 @@ theorem periodicGenerator_map {R S : Type*} [CommRing R] [CommRing S]
       cases letter <;>
         ext i j <;>
         fin_cases i <;> fin_cases j <;>
-        simp [periodicGenerator, periodicDataMatrix, Matrix.vecHead, Matrix.vecTail]
+        simp [periodicGenerator, periodicDataMatrix]
       all_goals
         first
         | exact map_ofNat hom 5
@@ -759,7 +758,7 @@ private theorem bcbbCleared_bridge (word : List PairedControl) :
       152568360000 * periodicCoefficient bcbbKappa bcbbAlpha word := by
   rw [bcbbClearedColumn_eq]
   simp [bridgeScalar, periodicCoefficient, linearCoefficient, Matrix.mulVec_smul,
-    Matrix.dotProduct_smul]
+    dotProduct_smul]
 
 theorem bcbbRationalFamily_mortal_iff_zero :
     IsMortal

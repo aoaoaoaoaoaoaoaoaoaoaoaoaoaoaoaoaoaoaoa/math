@@ -328,7 +328,7 @@ theorem twoCycle_product_le {consume₀ consume₁ produce₀ produce₁ weight�
     (mul_nonneg produce₀_nonnegative weight₁_positive.le)
   have weightProduct_positive : 0 < weight₀ * weight₁ :=
     mul_pos weight₀_positive weight₁_positive
-  apply (mul_le_mul_right weightProduct_positive).mp
+  apply (mul_le_mul_iff_of_pos_left weightProduct_positive).mp
   convert multiplied using 1 <;> ring
 
 /-- Reversing both inequalities reverses the two-cycle product comparison. -/
@@ -364,7 +364,7 @@ theorem threeCycle_product_le
       (mul_nonneg produce₁_nonnegative weight₂_positive.le))
   have weightProduct_positive : 0 < weight₀ * weight₁ * weight₂ :=
     mul_pos (mul_pos weight₀_positive weight₁_positive) weight₂_positive
-  apply (mul_le_mul_right weightProduct_positive).mp
+  apply (mul_le_mul_iff_of_pos_left weightProduct_positive).mp
   convert multiplied using 1 <;> ring
 
 /-- Reversing all three local inequalities reverses the three-cycle product comparison. -/
@@ -410,7 +410,7 @@ theorem forkDrift_mixed (pWeight qWeight : ℚ)
     · exact ⟨.contract, by simpa [forkDrift] using q_lt_twice_p⟩
     · refine ⟨.return, ?_⟩
       simp only [forkDrift]
-      push_neg at q_lt_twice_p
+      push Not at q_lt_twice_p
       linarith
   · by_cases q_le_half_p : qWeight ≤ pWeight / 2
     · refine ⟨.return, ?_⟩
@@ -418,7 +418,7 @@ theorem forkDrift_mixed (pWeight qWeight : ℚ)
       linarith
     · refine ⟨.expand, ?_⟩
       simp only [forkDrift]
-      push_neg at q_le_half_p
+      push Not at q_le_half_p
       linarith
 
 /-- The sharp fork admits no positive one-sided weighting. -/

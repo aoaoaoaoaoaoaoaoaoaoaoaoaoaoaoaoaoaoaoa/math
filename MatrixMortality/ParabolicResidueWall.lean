@@ -287,22 +287,22 @@ theorem mapped_safeNumerator
     (β : Nat) (body : List TagLetter) (label : TagLetter × Nat × Bool) :
     (safeNumerator β body label).map (Int.castRingHom (ZMod 3)) =
       safeResidue label.2.2 := by
-  letI : Fact (Nat.Prime 3) := ⟨by norm_num⟩
+  have : Fact (Nat.Prime 3) := ⟨by norm_num⟩
   obtain ⟨letter, j, residueOne⟩ := label
   cases letter <;> cases residueOne <;>
     ext i k <;> fin_cases i <;> fin_cases k <;>
-    simp [safeNumerator, safeResidue, Matrix.vecHead, Matrix.vecTail]
+    simp [safeNumerator, safeResidue]
 
 /-- Every residue-two numerator has the same modulo-three reduction. -/
 theorem mapped_residueTwoNumerator
     (β : Nat) (body : List TagLetter) (label : TagLetter × Nat) :
     (residueTwoNumerator β body label).map (Int.castRingHom (ZMod 3)) =
       residueTwoResidue := by
-  letI : Fact (Nat.Prime 3) := ⟨by norm_num⟩
+  have : Fact (Nat.Prime 3) := ⟨by norm_num⟩
   obtain ⟨letter, j⟩ := label
   cases letter <;>
     ext i k <;> fin_cases i <;> fin_cases k <;>
-    simp [residueTwoNumerator, residueTwoResidue, Matrix.vecHead, Matrix.vecTail]
+    simp [residueTwoNumerator, residueTwoResidue]
 
 private def ray : Bool → Fin 3 → ZMod 3
   | false => ![1, 0, 0]
@@ -326,7 +326,7 @@ private theorem ray_ne_zero (state : Bool) : ray state ≠ 0 := by
     norm_num [ray] at entry
   · intro ray_zero
     have entry := congr_fun ray_zero 2
-    norm_num [ray] at entry
+    norm_num [ray, Matrix.cons_val_two, Matrix.vecHead, Matrix.vecTail] at entry
 
 private theorem weight_ne_zero (label : TagLetter × Nat × Bool) (state : Bool) :
     weight label state ≠ 0 := by
@@ -361,7 +361,7 @@ private theorem mapped_safeNumerator_mulVec
   obtain ⟨letter, j, residueOne⟩ := label
   cases letter <;> cases residueOne <;> cases state <;>
     ext i <;> fin_cases i <;>
-    norm_num [safeResidue, ray, transition, weight, Matrix.mulVec, Matrix.dotProduct,
+    norm_num [safeResidue, ray, transition, weight, Matrix.mulVec, dotProduct,
       Fin.sum_univ_succ]
 
 private theorem mapped_same_residue_defect_action
@@ -372,7 +372,7 @@ private theorem mapped_same_residue_defect_action
         (Matrix.mulVec ((residueTwoNumerator β body defect).map (Int.castRingHom (ZMod 3)))
           (ray right.2.2)) =
       defectWeight right.2.2 • ray left.2.2 := by
-  letI : Fact (Nat.Prime 3) := ⟨by norm_num⟩
+  have : Fact (Nat.Prime 3) := ⟨by norm_num⟩
   rw [mapped_safeNumerator, mapped_residueTwoNumerator]
   obtain ⟨leftLetter, leftWait, leftResidue⟩ := left
   obtain ⟨rightLetter, rightWait, rightResidue⟩ := right
@@ -382,10 +382,8 @@ private theorem mapped_same_residue_defect_action
     fin_cases i
     all_goals
       norm_num [safeResidue, residueTwoResidue, ray, defectWeight, Matrix.mulVec,
-        Matrix.dotProduct, Fin.sum_univ_succ] <;>
-      first
-      | exact (show (5 : ZMod 3) = 2 by decide)
-      | exact (show (4 : ZMod 3) = 1 by decide)
+        dotProduct, Fin.sum_univ_succ] <;>
+      decide +revert
 
 private theorem mapped_oneDefect_ne_zero_of_same_residue
     (β : Nat) (body : List TagLetter)
@@ -449,7 +447,7 @@ private theorem mapped_oneDefect_ne_zero_of_same_residue
 
 private theorem numerator_immortal (β : Nat) (body : List TagLetter) :
     ¬IsMortal (safeNumerator β body) := by
-  letI : Fact (Nat.Prime 3) := ⟨by norm_num⟩
+  have : Fact (Nat.Prime 3) := ⟨by norm_num⟩
   let quotient :=
     ((Int.castRingHom (ZMod 3)).mapMatrix (m := Fin 3)).toMonoidWithZeroHom
   apply not_isMortal_of_map_not_isMortal quotient (safeNumerator β body)
@@ -515,7 +513,7 @@ theorem oneDefect_wordProduct_ne_zero_of_same_residue
     rw [productZero, smul_zero]
   have mappedZero :=
     congrArg (fun matrix => matrix.map (Int.castRingHom (ZMod 3))) integerZero
-  simp only [Matrix.map_mul, map_zero] at mappedZero
+  simp only [Matrix.map_mul] at mappedZero
   rw [wordProduct_mapMatrix, wordProduct_mapMatrix] at mappedZero
   exact mapped_oneDefect_ne_zero_of_same_residue β body leftPrefix rightSuffix
     leftAdjacent rightAdjacent defect sameResidue mappedZero
