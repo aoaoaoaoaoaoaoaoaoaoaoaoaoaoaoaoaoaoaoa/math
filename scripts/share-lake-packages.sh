@@ -8,6 +8,7 @@ readonly GIT_COMMON_DIR
 PRIMARY_ROOT="$(dirname -- "$GIT_COMMON_DIR")"
 readonly PRIMARY_ROOT
 readonly POOL_ROOT="$PRIMARY_ROOT/.lake/shared-packages"
+readonly DETACHED_ROOT="$POOL_ROOT/.detached"
 readonly HOOK="$GIT_COMMON_DIR/hooks/post-checkout"
 readonly HOOK_SOURCE="$PRIMARY_ROOT/.githooks/post-checkout"
 
@@ -88,6 +89,33 @@ package_link_target() {
   realpath --relative-to="$(dirname -- "$packages")" "$pool"
 }
 
+path_is_below() {
+  local path root
+  path="$(readlink -f -- "$1")"
+  root="$(readlink -f -- "$2")"
+  [[ "$path" == "$root"/* ]]
+}
+
+adopt_detached_tree() {
+  local packages="$1"
+  local tree="$2"
+  local pool="$3"
+  local manifest="$4"
+
+  assert_pristine_package_tree "$tree" "$manifest"
+  if directory_is_empty "$pool"; then
+    unlink -- "$packages"
+    rmdir -- "$pool"
+    mv -- "$tree" "$pool"
+    replace_with_link "$packages" "$pool"
+  else
+    assert_pristine_package_tree "$pool" "$manifest"
+    unlink -- "$packages"
+    replace_with_link "$packages" "$pool"
+    rm -rf -- "$tree"
+  fi
+}
+
 share_worktree() {
   local root
   root="$(worktree_root "$1")"
@@ -113,6 +141,12 @@ share_worktree() {
   if [[ -L "$packages" ]]; then
     if [[ "$(readlink -- "$packages")" == "$(package_link_target "$packages" "$pool")" ]] &&
       [[ "$(readlink -f -- "$packages")" == "$(readlink -f -- "$pool")" ]]; then
+      return
+    fi
+    local linked
+    linked="$(readlink -f -- "$packages")"
+    if path_is_below "$linked" "$DETACHED_ROOT"; then
+      adopt_detached_tree "$packages" "$linked" "$pool" "$manifest"
       return
     fi
     unlink -- "$packages"
@@ -146,23 +180,59 @@ detach_worktree() {
   local root
   root="$(worktree_root "$1")"
   assert_same_repository "$root"
-  share_worktree "$root"
-
   local packages="$root/.lake/packages"
-  [[ -L "$packages" ]] || return
+  if [[ -L "$packages" ]] && path_is_below "$packages" "$DETACHED_ROOT"; then
+    return
+  fi
 
-  local source scratch
+  local active
+  active="$(find -H "$DETACHED_ROOT" -mindepth 1 -maxdepth 1 -type d \
+    ! -name '.copying.*' -print -quit)"
+  [[ -z "$active" ]] ||
+    die "another package update is detached at '$active'; reconcile it first"
+
+  share_worktree "$root"
+  [[ -L "$packages" ]] || die "'$packages' was not linked after reconciliation"
+
+  local detached source scratch token
   source="$(readlink -f -- "$packages")"
   [[ -d "$source" ]] || die "package link '$packages' has no directory target"
-  scratch="$root/.lake/packages.detaching.$$"
+  scratch="$(mktemp -d "$DETACHED_ROOT/.copying.XXXXXXXX")"
 
-  mkdir -- "$scratch"
   if ! cp -a --reflink=auto "$source/." "$scratch/"; then
     rm -rf -- "$scratch"
     die "could not detach '$packages'"
   fi
+  token="${scratch##*/.copying.}"
+  detached="$DETACHED_ROOT/$token"
+  mv -- "$scratch" "$detached"
   unlink -- "$packages"
-  mv -- "$scratch" "$packages"
+  replace_with_link "$packages" "$detached"
+}
+
+collect_unused_pools() {
+  local field packages pool root target
+  local -A live=()
+
+  while IFS= read -r -d '' field; do
+    [[ "$field" == worktree\ * ]] || continue
+    root="${field#worktree }"
+    packages="$root/.lake/packages"
+    [[ -L "$packages" ]] || continue
+    target="$(readlink -f -- "$packages")"
+    [[ -n "$target" ]] && live["$target"]=1
+  done < <(git worktree list --porcelain -z)
+
+  while IFS= read -r -d '' pool; do
+    target="$(readlink -f -- "$pool")"
+    [[ ${live[$target]+present} ]] && continue
+    printf 'Collecting unreferenced Lake package pool %s\n' "$pool"
+    rm -rf -- "$pool"
+  done < <(
+    find -H "$POOL_ROOT" -mindepth 1 -maxdepth 1 -type d \
+      \( -name '.detached' -o -name '.copying.*' \) -prune -o -type d -print0
+    find -H "$DETACHED_ROOT" -mindepth 1 -maxdepth 1 -type d -print0
+  )
 }
 
 install_hook() {
@@ -196,10 +266,11 @@ usage() {
     'usage: scripts/share-lake-packages.sh [WORKTREE]' \
     '       scripts/share-lake-packages.sh --all' \
     '       scripts/share-lake-packages.sh --detach [WORKTREE]' \
+    '       scripts/share-lake-packages.sh --gc' \
     '       scripts/share-lake-packages.sh --install'
 }
 
-mkdir -p -- "$POOL_ROOT"
+mkdir -p -- "$DETACHED_ROOT"
 exec 9>"$PRIMARY_ROOT/.lake/shared-packages.lock"
 flock 9
 
@@ -211,6 +282,10 @@ case "${1:-}" in
   --detach)
     [[ $# -le 2 ]] || { usage >&2; exit 64; }
     detach_worktree "${2:-$INVOCATION_ROOT}"
+    ;;
+  --gc)
+    [[ $# -eq 1 ]] || { usage >&2; exit 64; }
+    collect_unused_pools
     ;;
   --install)
     [[ $# -eq 1 ]] || { usage >&2; exit 64; }
