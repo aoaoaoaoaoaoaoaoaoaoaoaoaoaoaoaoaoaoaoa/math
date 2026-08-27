@@ -120,7 +120,7 @@ theorem certifyAdaptive_eq_subdivision (terms fuel bits : ℕ) (allowCorners : B
         simp only [Bool.false_eq_true, if_false]
         unfold certifyAdaptive.split adaptiveSubdivision.split
         cases hcoordinate : preferHorizontalSplit terms fuel bits rectangle expression <;>
-          simp only [hcoordinate, Bool.false_eq_true, if_false, if_true]
+          simp only [Bool.false_eq_true, if_false, if_true]
         · simp only [certifySubdivision, hverticalCut, and_self, if_true]
           rw [ih (rectangle.upperVertical rectangle.vertical.center) hhorizontalRadius
               (RatBall.upperAt_radius_nonnegative hverticalCut.2),
@@ -147,7 +147,7 @@ theorem certifyAdaptive_eq_subdivision (terms fuel bits : ℕ) (allowCorners : B
             simp only
             unfold certifyAdaptive.split adaptiveSubdivision.split
             cases hcoordinate : preferHorizontalSplit terms fuel bits rectangle expression <;>
-              simp only [hcoordinate, Bool.false_eq_true, if_false, if_true]
+              simp only [Bool.false_eq_true, if_false, if_true]
             · simp only [certifySubdivision, hverticalCut, and_self, if_true]
               rw [ih (rectangle.upperVertical rectangle.vertical.center) hhorizontalRadius
                   (RatBall.upperAt_radius_nonnegative hverticalCut.2),
@@ -227,7 +227,7 @@ theorem certifySeededVertical_eq_subdivision (terms fuel bits depth : ℕ)
   | cons cut cuts ih =>
     unfold certifySeededVertical seededVerticalSubdivision certifySubdivision
     by_cases hcut : rectangle.vertical.lower ≤ cut ∧ cut ≤ rectangle.vertical.upper
-    · simp only [hcut, if_true]
+    · simp only [hcut]
       rw [certifyAdaptive_eq_subdivision terms fuel bits allowCorners
           (rectangle.lowerVertical cut) expression depth hhorizontalRadius
           (RatBall.lowerAt_radius_nonnegative hcut.1),
@@ -253,7 +253,7 @@ theorem certifySeededGrid_eq_subdivision (terms fuel bits depth : ℕ)
   | cons cut cuts ih =>
     unfold certifySeededGrid seededGridSubdivision certifySubdivision
     by_cases hcut : rectangle.horizontal.lower ≤ cut ∧ cut ≤ rectangle.horizontal.upper
-    · simp only [hcut, if_true]
+    · simp only [hcut]
       rw [certifySeededVertical_eq_subdivision terms fuel bits depth allowCorners
           (rectangle.lowerHorizontal cut) expression verticalCuts
           (RatBall.lowerAt_radius_nonnegative hcut.1) hverticalRadius,

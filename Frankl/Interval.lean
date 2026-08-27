@@ -167,7 +167,7 @@ theorem add_contains {left right : RatBall} {x y : ℝ}
         |(x - left.center) + (y - right.center)| := by
       congr 1
       ring
-    _ ≤ |x - left.center| + |y - right.center| := abs_add _ _
+    _ ≤ |x - left.center| + |y - right.center| := abs_add_le _ _
     _ ≤ left.radius + right.radius := add_le_add hx hy
 
 theorem neg_contains {ball : RatBall} {x : ℝ} (hx : ball.Contains x) :
@@ -210,7 +210,7 @@ theorem mul_contains {left right : RatBall} {x y : ℝ}
     _ ≤ |(left.center : ℝ) * (y - right.center)|
           + |(right.center : ℝ) * (x - left.center)|
           + |(x - left.center) * (y - right.center)| := by
-      exact (abs_add _ _).trans (add_le_add_right (abs_add _ _) _)
+      exact (abs_add_le _ _).trans (add_le_add (abs_add_le _ _) le_rfl)
     _ = |(left.center : ℝ)| * |y - right.center|
           + |(right.center : ℝ)| * |x - left.center|
           + |x - left.center| * |y - right.center| := by rw [abs_mul, abs_mul, abs_mul]
@@ -328,7 +328,7 @@ theorem inv_contains {ball inverse : RatBall} {x : ℝ}
     (hx : ball.Contains x) (hinverse : ball.inv? = some inverse) :
     inverse.Contains x⁻¹ := by
   have hbounds := (contains_iff_bounds).mp hx
-  simp only [inv?, Option.some.injEq] at hinverse
+  simp only [inv?] at hinverse
   split at hinverse <;> rename_i hlower
   · simp only [Option.some.injEq] at hinverse
     subst inverse
@@ -444,7 +444,7 @@ theorem fastRationalLogBall_contains {fuel : ℕ} {x : ℚ} {ball : RatBall}
     ball.Contains (log x) := by
   simp only [fastRationalLogBall] at hball
   split at hball <;> rename_i hvalid
-  · simp only [Option.some.injEq, RatBall.mk.injEq] at hball
+  · simp only [Option.some.injEq] at hball
     rcases hball with ⟨rfl, rfl⟩
     rw [RatBall.Contains, coe_ratFastScaledLogError, coe_ratFastScaledLog]
     apply abs_log_sub_fastScaledLog_le

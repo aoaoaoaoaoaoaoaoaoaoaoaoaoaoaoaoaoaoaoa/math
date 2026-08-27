@@ -54,8 +54,8 @@ theorem GarbageBoundary.progress {period : Nat} (system : CyclicTag period)
     simp only [next, encodeJunk_append]
     rw [List.drop_append_of_le_length phase_le_rest]
   refine ⟨next, ⟨instruction, restCode ++ emitted, ?_, next_eq⟩, ?_⟩
-  · have restCode_pos := List.length_pos.mpr restCode_nonempty
-    have emitted_pos := List.length_pos.mpr emitted_nonempty
+  · have restCode_pos := List.length_pos_of_ne_nil restCode_nonempty
+    have emitted_pos := List.length_pos_of_ne_nil emitted_nonempty
     simp only [List.length_append]
     omega
   · simpa [rest, next, encodeJunk_cons] using execution
@@ -104,8 +104,8 @@ theorem semantic_haltsIn_implies_firing {period : Nat} (system : CyclicTag perio
       system.FiringAvoidingReaches haltPhase
           { data := dataBits tokens, phase := instruction } firing ∧
         CyclicTag.FiresAt haltPhase firing := by
-  induction steps using Nat.strong_induction_on generalizing instruction tokens with
-  | h steps ih =>
+  induction steps using Nat.strongRecOn generalizing instruction tokens with
+  | ind steps ih =>
       cases bits_eq : dataBits tokens with
       | nil =>
           exact False.elim <|

@@ -252,10 +252,10 @@ theorem binarySpell_not_injective_commute {α : Type*}
         congrArg (left ++ ·) commute_residue
 termination_by left.length + right.length
 decreasing_by
-  all_goals simp_all only [List.length_append, List.nil_append, List.append_nil]
+  all_goals simp_all only [List.length_append]
   all_goals
-    have left_positive := List.length_pos.mpr left_empty
-    have right_positive := List.length_pos.mpr right_empty
+    have left_positive := List.length_pos_iff.mpr left_empty
+    have right_positive := List.length_pos_iff.mpr right_empty
     omega
 
 /-- A generic binary morphism is the corresponding `binarySpell`. -/

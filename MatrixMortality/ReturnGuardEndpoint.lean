@@ -73,7 +73,7 @@ theorem endpointGauge_mulVec
         numerator denominator := by
   ext i
   fin_cases i <;>
-    simp [endpointGauge, endpointVector, Matrix.mulVec, Matrix.dotProduct,
+    simp [endpointGauge, endpointVector, Matrix.mulVec, dotProduct,
       Fin.sum_univ_succ]
 
 /-- The terminal coordinate is the original guarded state translated by one and scaled by the
@@ -93,7 +93,7 @@ theorem terminalCoordinate_eq_scaled_state
     exact_mod_cast scale_ne
   by_cases residual_zero : residual = 0
   · subst residual
-    simp [terminalCoordinate, stateOfResidual, drift_eq, center_eq]
+    simp [terminalCoordinate, stateOfResidual, center_eq]
     field_simp [scale_ne_rat]
   · rw [terminalCoordinate, stateOfResidual, drift_eq, center_eq]
     field_simp [scale_ne_rat, residual_zero]
@@ -175,6 +175,7 @@ theorem terminalCoordinate_residualStep
             ((parameters.center - parameters.prime ^ wait) * source +
               drift parameters.center parameters.reset) := by
       dsimp [raw]
+      push_cast
       rw [drift_eq, center_eq]
       field_simp [scale_ne_rat]
     rw [raw_eq]
@@ -196,6 +197,7 @@ theorem terminalCoordinate_residualStep
           ((parameters.prime : ℚ) ^ (parameters.depth * wait) * terminal) := by
     rw [residualStep_eq parameters wait source center_transform_ne.1]
     dsimp [raw, terminal]
+    push_cast
     rw [drift_eq, center_eq]
     field_simp [scale_ne_rat, prime_power_ne]
   have coordinate_eq :
@@ -208,10 +210,10 @@ theorem terminalCoordinate_residualStep
           ((parameters.prime : ℚ) ^ (parameters.depth * wait) * source) := by
     rw [coordinate_eq]
     dsimp [terminalTail, raw]
-    field_simp [source_ne, prime_power_ne]
-    ring
+    push_cast
+    field_simp [source_ne, prime_power_ne] ; ring
   rw [residual_eq, tail_eq, coordinate_eq]
-  simp only [terminalCoordinate, terminalStep, Int.cast_sub]
+  simp only [terminalCoordinate, terminalStep]
   field_simp [source_ne, prime_power_ne, raw_ne, terminal_ne]
   ring
 
@@ -337,7 +339,7 @@ theorem first_mul_scalar_eq_det_of_mulVec_eq_terminal
     matrix 0 0 * scalar = matrix.det := by
   have first := congrFun action 0
   have second := congrFun action 1
-  simp [Matrix.mulVec, Matrix.dotProduct, Fin.sum_univ_succ,
+  simp [Matrix.mulVec, dotProduct, Fin.sum_univ_succ,
     smul_eq_mul] at first second
   rw [Matrix.det_fin_two]
   linear_combination -(matrix 0 0) * second + matrix 1 0 * first
@@ -440,12 +442,12 @@ theorem endpointTransfer_mulVec_ray
     rw [tail_eq, denominator_zero, zero_div]
   ext i
   fin_cases i
-  · simp [endpointTransfer, Matrix.mulVec, Matrix.dotProduct,
+  · simp [endpointTransfer, Matrix.mulVec, dotProduct,
       Fin.sum_univ_succ, smul_eq_mul]
     rw [next_eq, tail_eq]
     field_simp [denominator_ne]
     ring
-  · simp [endpointTransfer, Matrix.mulVec, Matrix.dotProduct,
+  · simp [endpointTransfer, Matrix.mulVec, dotProduct,
       Fin.sum_univ_succ, smul_eq_mul]
     ring
 
@@ -488,8 +490,7 @@ theorem terminalTail_ne_of_residualBranch
       (centerNumerator - scale * (parameters.prime : ℤ) ^ wait) * source +
           driftNumerator = 0 := by
     field_simp [source_ne, power_ne] at tail_zero
-    simp only [Int.cast_sub, Int.cast_mul, Int.cast_pow,
-      Int.cast_natCast] at tail_zero ⊢
+    simp only [Int.cast_natCast] at tail_zero ⊢
     linear_combination tail_zero
   apply numerator_ne
   apply mul_left_cancel₀ scale_ne_rat
@@ -604,7 +605,7 @@ theorem endpointTerminalWord_of_residualRun_eq_terminal
           ![centerNumerator + driftNumerator - scale, 1]) 0) = 0 := by
     rw [RingHom.map_mulVec]
     rw [endpointProduct_map]
-    convert rational_zero using 1
+    simpa [cast] using rational_zero
   change
     (((endpointProduct (parameters.prime : ℤ) parameters.depth
         centerNumerator driftNumerator scale waits *ᵥ
@@ -641,7 +642,7 @@ theorem endpointProduct_first_ne_of_centerDifference_eq_zero
                 driftNumerator * prime ^ (depth * wait)) * source 0 +
               (-(centerNumerator - scale) * scale *
                 (prime ^ wait - 1)) * source 1 by
-        simp [endpointTransfer, Matrix.mulVec, Matrix.dotProduct,
+        simp [endpointTransfer, Matrix.mulVec, dotProduct,
           Fin.sum_univ_succ]]
       rw [centerDifference_zero]
       simp only [zero_add, zero_mul, neg_zero, add_zero]
@@ -668,7 +669,7 @@ theorem endpointProduct_first_of_scale_eq_zero
   | nil => simp
   | cons wait waits induction =>
       rw [endpointProduct_cons, ← Matrix.mulVec_mulVec, induction]
-      simp [endpointTransfer, Matrix.mulVec, Matrix.dotProduct,
+      simp [endpointTransfer, Matrix.mulVec, dotProduct,
         Fin.sum_univ_succ, scale_zero]
       ring
 
@@ -685,7 +686,7 @@ theorem endpointTransfer_mulVec_driftZero_reset
       ![centerNumerator - scale, 1] := by
   ext i
   fin_cases i <;>
-    simp [endpointTransfer, Matrix.mulVec, Matrix.dotProduct,
+    simp [endpointTransfer, Matrix.mulVec, dotProduct,
       Fin.sum_univ_succ, drift_zero, smul_eq_mul]
   all_goals ring
 
@@ -839,7 +840,7 @@ theorem not_endpointTerminalWord_of_prime_dvd_centerDifference
     rw [Ne, ZMod.intCast_zmod_eq_zero_iff_dvd]
     exact drift_survives
   have prime_ne : (prime : ZMod factor) ≠ 0 := by
-    rw [Ne, ZMod.natCast_zmod_eq_zero_iff_dvd]
+    rw [Ne, ZMod.natCast_eq_zero_iff]
     exact base_survives
   have source_first_ne :
       ((centerNumerator + driftNumerator - scale : ℤ) :
@@ -916,8 +917,8 @@ theorem endpointTransfer_mulVec_of_primitiveIntegralStep
   rw [numerator_reduced, denominator_reduced]
   ext i
   fin_cases i <;>
-    simp [endpointGauge, endpointVector, Matrix.mulVec, Matrix.dotProduct,
-      Fin.sum_univ_succ, smul_eq_mul]
+    simp [endpointGauge, endpointVector, Matrix.mulVec, dotProduct,
+      Fin.sum_univ_succ]
   all_goals ring
 
 /-- The factor removed forward and the factor removed by reverse reconstruction are
@@ -958,8 +959,8 @@ theorem endpointAdjugate_mulVec_of_complementaryContent
             endpointVector centerNumerator driftNumerator scale
               source.1 source.2) := by
     rw [← Matrix.mulVec_smul, ← forward, Matrix.mulVec_mulVec,
-      endpointAdjugate_mul_endpointTransfer, Matrix.smul_mulVec_assoc,
-      smul_smul]
+      endpointAdjugate_mul_endpointTransfer, Matrix.smul_mulVec,
+      Matrix.one_mulVec, smul_smul]
     have scalar_eq :
         -driftNumerator * scale * (prime : ℤ) ^ (depth * wait) *
             ((prime : ℤ) ^ wait - 1) =
@@ -974,7 +975,6 @@ theorem endpointAdjugate_mulVec_of_complementaryContent
               (common * complement) := by rw [complementary]
         _ = _ := by ring
     rw [scalar_eq]
-    simp
   ext i
   apply mul_left_cancel₀ scalar_ne
   simpa [smul_eq_mul] using congrFun scaled i

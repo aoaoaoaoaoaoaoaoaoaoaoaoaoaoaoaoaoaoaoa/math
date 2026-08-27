@@ -71,8 +71,8 @@ theorem exists_primitive_of_solution {α β : Type*} (u v : α → List β)
   have descend : ∀ n, ∀ candidate : List α, candidate.length = n →
       IsPCPSolution u v candidate → ∃ primitive, IsPrimitivePCPSolution u v primitive := by
     intro n
-    induction n using Nat.strong_induction_on with
-    | h n ih =>
+    induction n using Nat.strongRecOn with
+    | ind n ih =>
         intro candidate hlength hcandidate
         by_cases hprimitive : IsPrimitivePCPSolution u v candidate
         · exact ⟨candidate, hprimitive⟩
@@ -83,7 +83,7 @@ theorem exists_primitive_of_solution {α β : Type*} (u v : α → List β)
           rcases hsplit with ⟨x, y, _, hy, hxy, hxsolution, _⟩
           have hxlength : x.length < n := by
             rw [← hlength, hxy, List.length_append]
-            exact Nat.lt_add_of_pos_right (List.length_pos.mpr hy)
+            exact Nat.lt_add_of_pos_right (List.length_pos_iff.mpr hy)
           exact ih x.length hxlength x rfl hxsolution
   exact descend word.length word rfl hword
 
@@ -96,7 +96,13 @@ def fullSide {α β : Type*} (side : α → List β) (terminal : List β) :
 theorem spell_map_some_append_none {α β : Type*} (side : α → List β)
     (terminal : List β) (word : List α) :
     spell (fullSide side terminal) (word.map some ++ [none]) = spell side word ++ terminal := by
-  simp [spell, List.map_append, List.map_map, Function.comp_def, fullSide]
+  have mapped : List.flatMap (fullSide side terminal) (word.map some) =
+      List.flatMap side word := by
+    induction word with
+    | nil => rfl
+    | cons head tail ih => simp [fullSide, ih]
+  simp only [spell, List.flatMap_append, mapped, List.flatMap_cons,
+    List.flatMap_nil, fullSide, List.append_nil]
 
 /-- If every primitive solution uses the distinguished tile exactly once and at the end, ordinary
 PCP solvability is equivalent to the terminal matching problem used by the matrix reduction. -/
@@ -155,7 +161,7 @@ theorem pcp_solvable_iff_right_bounded_gpcpPlus_of_primitive_terminal
     refine ⟨interior, ?_, hmatch⟩
     intro hinterior
     subst interior
-    exact hterminalWords (by simpa [IsGPCPSolution] using hmatch)
+    exact hterminalWords (by simpa [IsGPCPSolution, spell] using hmatch)
   · rintro ⟨interior, _, hmatch⟩
     exact ⟨interior, hmatch⟩
 

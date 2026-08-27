@@ -98,7 +98,7 @@ theorem product_coeff_zero
   | cons label tail induction =>
       ext i j
       rw [product_cons, Matrix.mul_apply,
-        Polynomial.finset_sum_coeff, wordProduct_cons, Matrix.mul_apply]
+        Polynomial.finsetSum_coeff, wordProduct_cons, Matrix.mul_apply]
       apply Finset.sum_congr rfl
       intro k _
       rw [Polynomial.coeff_mul]
@@ -119,12 +119,12 @@ theorem product_coeff_length
   | cons label tail induction =>
       ext i j
       rw [product_cons, Matrix.mul_apply,
-        Polynomial.finset_sum_coeff, wordProduct_cons, Matrix.mul_apply]
+        Polynomial.finsetSum_coeff, wordProduct_cons, Matrix.mul_apply]
       simp only [List.length_cons]
       apply Finset.sum_congr rfl
       intro k _
       rw [show tail.length + 1 = 1 + tail.length by omega]
-      rw [Polynomial.coeff_mul_of_natDegree_le
+      rw [Polynomial.coeff_mul_add_eq_of_natDegree_le
         (affine_natDegree_le_one (constant label) (slope label) i k)
         (product_natDegree_le_length constant slope tail k j)]
       rw [affine_coeff_one]
@@ -145,7 +145,7 @@ theorem eval₂_product
   | nil =>
       ext i j
       rw [product_nil, wordProduct]
-      by_cases indices : i = j <;> simp [Matrix.one_apply, indices]
+      by_cases indices : i = j <;> simp [indices]
   | cons label tail induction =>
       rw [product_cons, Matrix.map_mul, induction, wordProduct_cons]
       congr 1
@@ -163,6 +163,9 @@ theorem eval_product
     (constant slope : α → Square ι R) (word : List α) (x : R) :
     (product constant slope word).map (Polynomial.evalRingHom x) =
       wordProduct (fun label => constant label + x • slope label) word := by
+  change (product constant slope word).map
+      (Polynomial.eval₂RingHom (RingHom.id R) x) =
+    wordProduct (fun label => constant label + x • slope label) word
   simpa using eval₂_product (RingHom.id R) constant slope word x
 
 end

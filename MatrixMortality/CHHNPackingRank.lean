@@ -40,9 +40,10 @@ private theorem chhnNeary_row_pair_linearIndependent
     (β : Nat) (body : List TagLetter) (first second : NearyTile)
     (three_le : 3 ≤ β) (body_nonempty : body ≠ []) (distinct : first ≠ second) :
     LinearIndependent ℚ
-      ![nearySideRow,
+      (![nearySideRow,
         nearySideRow ᵥ* nearySideRole β body first,
-        nearySideRow ᵥ* nearySideRole β body second] := by
+        nearySideRow ᵥ* nearySideRole β body second] :
+          Matrix (Fin 3) (Fin 3) ℚ) := by
   have upper_b_large_q :
       (50 : ℚ) < nearySideUpperB β := by
     simpa [nearySideUpperB] using
@@ -91,14 +92,19 @@ private theorem chhnNeary_row_pair_linearIndependent
     linarith
   rw [nearySideRow_vecMul_role β body first,
     nearySideRow_vecMul_role β body second]
+  let matrix : Matrix (Fin 3) (Fin 3) ℚ :=
+    ![nearySideRow,
+      nearySideNativeRow β body first,
+      nearySideNativeRow β body second]
+  change LinearIndependent ℚ fun index => matrix index
+  apply finThree_rows_linearIndependent_of_det_ne_zero matrix
   rcases first with ⟨_ | _⟩ | ⟨_ | _⟩ <;>
     rcases second with ⟨_ | _⟩ | ⟨_ | _⟩
   all_goals simp at distinct
-  all_goals apply finThree_rows_linearIndependent_of_det_ne_zero
   all_goals rw [Matrix.det_fin_three]
   all_goals
-    simp [nearySideRow, nearySideNativeRow, nearySideUpperB,
-      nearySideLowerC, Matrix.vecHead, Matrix.vecTail]
+    simp [matrix, nearySideRow, nearySideNativeRow, nearySideUpperB,
+      nearySideLowerC]
   all_goals ring_nf
   all_goals first | assumption | nlinarith
 
@@ -108,9 +114,10 @@ private theorem chhnNeary_row_triple_linearIndependent
     (first_second : first ≠ second) (first_third : first ≠ third)
     (second_third : second ≠ third) :
     LinearIndependent ℚ
-      ![nearySideRow ᵥ* nearySideRole β body first,
+      (![nearySideRow ᵥ* nearySideRole β body first,
         nearySideRow ᵥ* nearySideRole β body second,
-        nearySideRow ᵥ* nearySideRole β body third] := by
+        nearySideRow ᵥ* nearySideRole β body third] :
+          Matrix (Fin 3) (Fin 3) ℚ) := by
   have upper_b_large_q :
       (50 : ℚ) < nearySideUpperB β := by
     simpa [nearySideUpperB] using
@@ -137,15 +144,19 @@ private theorem chhnNeary_row_triple_linearIndependent
   rw [nearySideRow_vecMul_role β body first,
     nearySideRow_vecMul_role β body second,
     nearySideRow_vecMul_role β body third]
+  let matrix : Matrix (Fin 3) (Fin 3) ℚ :=
+    ![nearySideNativeRow β body first,
+      nearySideNativeRow β body second,
+      nearySideNativeRow β body third]
+  change LinearIndependent ℚ fun index => matrix index
+  apply finThree_rows_linearIndependent_of_det_ne_zero matrix
   rcases first with ⟨_ | _⟩ | ⟨_ | _⟩ <;>
     rcases second with ⟨_ | _⟩ | ⟨_ | _⟩ <;>
       rcases third with ⟨_ | _⟩ | ⟨_ | _⟩
   all_goals simp at first_second first_third second_third
-  all_goals apply finThree_rows_linearIndependent_of_det_ne_zero
   all_goals rw [Matrix.det_fin_three]
   all_goals
-    simp [nearySideNativeRow, nearySideUpperB, nearySideLowerC,
-      Matrix.vecHead, Matrix.vecTail]
+    simp [matrix, nearySideNativeRow, nearySideUpperB, nearySideLowerC]
   all_goals ring_nf
   all_goals linarith
 
@@ -153,10 +164,11 @@ private theorem chhnNeary_composite_row_linearIndependent
     (β : Nat) (body : List TagLetter) (root leading : NearyTile)
     (three_le : 3 ≤ β) (body_nonempty : body ≠ []) (distinct : root ≠ leading) :
     LinearIndependent ℚ
-      ![nearySideRow,
+      (![nearySideRow,
         nearySideRow ᵥ* nearySideRole β body root,
         nearySideRow ᵥ*
-          (nearySideRole β body leading * nearySideRole β body root)] := by
+          (nearySideRole β body leading * nearySideRole β body root)] :
+          Matrix (Fin 3) (Fin 3) ℚ) := by
   have upper_b_large_q :
       (50 : ℚ) < nearySideUpperB β := by
     simpa [nearySideUpperB] using
@@ -202,15 +214,20 @@ private theorem chhnNeary_composite_row_linearIndependent
   ring_nf at upper_b_scale_gap_product_positive
   rw [nearySideRole_eq_native β body root,
     nearySideRole_eq_native β body leading]
+  let matrix : Matrix (Fin 3) (Fin 3) ℚ :=
+    ![nearySideRow,
+      nearySideRow ᵥ* nearySideNativeRole β body root,
+      nearySideRow ᵥ*
+        (nearySideNativeRole β body leading * nearySideNativeRole β body root)]
+  change LinearIndependent ℚ fun index => matrix index
+  apply finThree_rows_linearIndependent_of_det_ne_zero matrix
   rcases root with ⟨_ | _⟩ | ⟨_ | _⟩ <;>
     rcases leading with ⟨_ | _⟩ | ⟨_ | _⟩
   all_goals simp at distinct
-  all_goals apply finThree_rows_linearIndependent_of_det_ne_zero
   all_goals rw [Matrix.det_fin_three]
   all_goals
-    simp [nearySideRow, nearySideNativeRole,
-      Matrix.vecHead, Matrix.vecTail, Matrix.vecMul, Matrix.dotProduct,
-      Fin.sum_univ_succ, Matrix.mul_apply]
+    simp [matrix, nearySideRow, nearySideNativeRole,
+      Matrix.vecHead, Matrix.vecTail]
   all_goals ring_nf
   all_goals first
     | exact upper_b_three_ne_six
@@ -223,36 +240,37 @@ private theorem chhnNeary_rule_c_erase_c_columns_linearIndependent
         nearySideRole β body (.rule .c) *ᵥ nearySideColumn β,
         nearySideRole β body (.erase .c) *ᵥ nearySideColumn β] := by
   have lower_length : 4 ≤ (nearyLower β body (.rule .c)).length := by
-    simp only [nearyLower, nearyBody, List.length_append, List.length_cons, List.length_nil]
+    simp only [nearyLower, List.length_append, List.length_cons, List.length_nil]
     have encoded_nonempty : tagEncode β body ≠ [] :=
       (tagEncode_eq_nil_iff β body).not.mpr body_nonempty
-    have encoded_length := List.length_pos.mpr encoded_nonempty
+    have encoded_length := List.length_pos_of_ne_nil encoded_nonempty
     omega
   have lower_scale_large :
       (3 : ℚ) < nearySideLowerCScale β body := by
     have exponent_large :
         (1 : Nat) < (nearyLower β body (.rule .c)).length := by
       omega
-    exact pow_lt_pow_right (R := ℚ) (a := (3 : ℚ)) (by norm_num) exponent_large
+    exact pow_lt_pow_right₀ (a := (3 : ℚ)) (by norm_num) exponent_large
   have marker_scale_positive : (0 : ℚ) < nearySideMarkerScale β := by
     exact pow_pos (by norm_num) _
   rw [nearySideColumn_eq_native,
     nearySideRole_eq_native β body (.rule .c),
     nearySideRole_eq_native β body (.erase .c)]
-  apply finThree_rows_linearIndependent_of_det_ne_zero
-  rw [show Matrix.det
-      ((![nearySideNativeColumn β,
-          nearySideNativeRole β body (.rule .c) *ᵥ nearySideNativeColumn β,
-          nearySideNativeRole β body (.erase .c) *ᵥ nearySideNativeColumn β] :
-        Matrix (Fin 3) (Fin 3) ℚ)) =
+  let matrix : Matrix (Fin 3) (Fin 3) ℚ :=
+    ![nearySideNativeColumn β,
+      nearySideNativeRole β body (.rule .c) *ᵥ nearySideNativeColumn β,
+      nearySideNativeRole β body (.erase .c) *ᵥ nearySideNativeColumn β]
+  change LinearIndependent ℚ fun index => matrix index
+  apply finThree_rows_linearIndependent_of_det_ne_zero matrix
+  have matrix_det : Matrix.det matrix =
       nearySideMarkerScale β ^ 2 *
-        (nearySideLowerCScale β body - 3) / 3 by
+        (nearySideLowerCScale β body - 3) / 3 := by
     rw [Matrix.det_fin_three]
-    simp [nearySideNativeColumn, nearySideNativeRole,
+    simp [matrix, nearySideNativeColumn, nearySideNativeRole,
       nearySideMarkerScale_eq, nearySideMarkerValue_eq,
-      Matrix.mulVec, Matrix.dotProduct, Matrix.vecHead, Matrix.vecTail,
-      Fin.sum_univ_succ]
-    ring]
+      Matrix.vecHead, Matrix.vecTail]
+    ring
+  rw [matrix_det]
   exact div_ne_zero
     (mul_ne_zero (pow_ne_zero 2 (ne_of_gt marker_scale_positive))
       (sub_ne_zero.mpr (ne_of_gt lower_scale_large)))
@@ -269,27 +287,28 @@ private theorem chhnNeary_rule_b_erase_b_columns_linearIndependent
     rw [nearySideMarkerScale, nearyMarker_length]
     have exponent_large : (2 : Nat) < β + 1 := by
       omega
-    exact pow_lt_pow_right (R := ℚ) (a := (3 : ℚ)) (by norm_num) exponent_large
+    exact pow_lt_pow_right₀ (a := (3 : ℚ)) (by norm_num) exponent_large
   have marker_scale_ne_zero : nearySideMarkerScale β ≠ 0 := by
     exact ne_of_gt (pow_pos (by norm_num) _)
   rw [nearySideColumn_eq_native,
     nearySideRole_eq_native β body (.rule .b),
     nearySideRole_eq_native β body (.erase .b)]
-  apply finThree_rows_linearIndependent_of_det_ne_zero
-  rw [show Matrix.det
-      ((![nearySideNativeColumn β,
-          nearySideNativeRole β body (.rule .b) *ᵥ nearySideNativeColumn β,
-          nearySideNativeRole β body (.erase .b) *ᵥ nearySideNativeColumn β] :
-        Matrix (Fin 3) (Fin 3) ℚ)) =
+  let matrix : Matrix (Fin 3) (Fin 3) ℚ :=
+    ![nearySideNativeColumn β,
+      nearySideNativeRole β body (.rule .b) *ᵥ nearySideNativeColumn β,
+      nearySideNativeRole β body (.erase .b) *ᵥ nearySideNativeColumn β]
+  change LinearIndependent ℚ fun index => matrix index
+  apply finThree_rows_linearIndependent_of_det_ne_zero matrix
+  have matrix_det : Matrix.det matrix =
       -4 * nearySideMarkerScale β *
-        (nearySideMarkerScale β - 9) by
+        (nearySideMarkerScale β - 9) := by
     rw [Matrix.det_fin_three]
-    simp [nearySideNativeColumn, nearySideNativeRole,
+    simp [matrix, nearySideNativeColumn, nearySideNativeRole,
       nearySideMarkerScale_eq, nearySideMarkerValue_eq,
       nearySideUpperB_eq, nearySideUpperBScale_eq,
-      Matrix.mulVec, Matrix.dotProduct, Matrix.vecHead, Matrix.vecTail,
-      Fin.sum_univ_succ]
-    ring]
+      Matrix.vecHead, Matrix.vecTail]
+    ring
+  rw [matrix_det]
   exact mul_ne_zero
     (mul_ne_zero (by norm_num) marker_scale_ne_zero)
     (sub_ne_zero.mpr (ne_of_gt marker_scale_large))
@@ -300,7 +319,7 @@ private theorem chhnNeary_pairing_ne_zero (β : Nat) :
       (ternaryCode (nearyMarker β) : ℚ) ≠ 0 := by
     exact_mod_cast ternaryCode_nearyMarker_ne_zero β
   simpa [nearySideRow, nearySideColumn, sideTerminalColumn, sidePcpMatrix,
-    sideTailBasis, Matrix.mulVec, Matrix.dotProduct, Fin.sum_univ_succ] using
+    sideTailBasis, Matrix.mulVec, dotProduct, Fin.sum_univ_succ] using
     marker_ne_zero
 
 private theorem chhnPlacement_semantic_at_nonseparator

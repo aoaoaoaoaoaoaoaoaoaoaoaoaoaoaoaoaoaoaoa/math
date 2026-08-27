@@ -96,13 +96,12 @@ theorem testLoop_mulVec_firstVector
   have expanded_beta :
       row 0 * firstVector G H column 0 +
           row 1 * firstVector G H column 1 ≠ 0 := by
-    simpa [beta, Matrix.dotProduct, Fin.sum_univ_succ] using beta_nonzero
+    simpa [beta, dotProduct, Fin.sum_univ_succ] using beta_nonzero
   ext i
   fin_cases i <;>
-    simp [testLoop, beta, Matrix.mulVec, Matrix.dotProduct, Matrix.vecMulVec_apply,
-      Fin.sum_univ_succ, beta_nonzero]
+    simp [testLoop, beta, Matrix.mulVec, dotProduct, Matrix.vecMulVec_apply,
+      Fin.sum_univ_succ]
   all_goals field_simp [expanded_beta]
-  all_goals ring
 
 theorem rawEdge_agrees
     {K : Type*} [Field K]
@@ -129,7 +128,7 @@ theorem frame_mulVec_first (vector : Interface → ℚ) :
     frame vector *ᵥ ![1, 0] = vector := by
   ext i
   fin_cases i <;>
-    simp [frame, Matrix.mulVec, Matrix.dotProduct, Fin.sum_univ_succ]
+    simp [frame, Matrix.mulVec, dotProduct, Fin.sum_univ_succ]
 
 theorem frame_det (vector : Interface → ℚ) :
     (frame vector).det = vector 0 ^ 2 + vector 1 ^ 2 := by
@@ -415,8 +414,8 @@ theorem pathBlocks_closed (start : Bool) (tail : List Bool) :
                 ClosedBlock block ∧ ClosedPrefix (next :: blocks) := by
               simpa [blocks_eq, ClosedPrefix] using recursively_closed.1
             constructor
-            · simpa [pathBlocks, blocks_eq, ClosedPrefix] using
-                And.intro (Or.inr (endsH_cons .skip head_ends))
+            · simpa [pathBlocks, blocks_eq, ClosedBlock, ClosedPrefix] using
+                And.intro (endsH_cons .skip head_ends)
                   recursive_parts.2
             · simp
       · have recursively_closed := induction false
@@ -431,8 +430,8 @@ theorem pathBlocks_closed (start : Bool) (tail : List Bool) :
               simpa [blocks_eq, ClosedPrefix] using recursively_closed.1
             have head_ends := endsH_h_cons recursive_parts.1
             constructor
-            · simpa [pathBlocks, blocks_eq, ClosedPrefix] using
-                And.intro (Or.inr head_ends) recursive_parts.2
+            · simpa [pathBlocks, blocks_eq, ClosedBlock, ClosedPrefix] using
+                And.intro head_ends recursive_parts.2
             · simpa [pathBlocks, blocks_eq, FirstEndsH] using head_ends
       · have recursively_closed := induction true
         obtain ⟨block, blocks, blocks_eq⟩ :=
@@ -448,8 +447,8 @@ theorem pathBlocks_closed (start : Bool) (tail : List Bool) :
                 ClosedBlock block ∧ ClosedPrefix (next :: blocks) := by
               simpa [blocks_eq, ClosedPrefix] using recursively_closed.1
             constructor
-            · simpa [pathBlocks, blocks_eq, ClosedPrefix] using
-                And.intro (Or.inr prefixed_ends) recursive_parts.2
+            · simpa [pathBlocks, blocks_eq, ClosedBlock, ClosedPrefix] using
+                And.intro prefixed_ends recursive_parts.2
             · simpa [pathBlocks, blocks_eq, FirstEndsH] using prefixed_ends
 
 /-- Delete invisible source-plane changes and retain the `G/H` word. -/
@@ -471,13 +470,14 @@ theorem wordProduct_unitEdgeMatrix
   | nil => rfl
   | cons edge block induction =>
       cases edge
-      · simpa [wordProduct, unitEdgeMatrix, eraseSkips, eraseUnitEdge] using induction
+      · simpa only [wordProduct_cons, unitEdgeMatrix, eraseSkips, List.filterMap_cons,
+          eraseUnitEdge, one_mul] using induction
       · simp only [wordProduct_cons, unitEdgeMatrix, eraseSkips, List.filterMap_cons,
-          eraseUnitEdge, Option.toList_some, List.cons_append, incidenceGenerator]
+          eraseUnitEdge, incidenceGenerator]
         rw [induction]
         simp [eraseSkips]
       · simp only [wordProduct_cons, unitEdgeMatrix, eraseSkips, List.filterMap_cons,
-          eraseUnitEdge, Option.toList_some, List.cons_append, incidenceGenerator]
+          eraseUnitEdge, incidenceGenerator]
         rw [induction]
         simp [eraseSkips]
 
@@ -499,7 +499,7 @@ theorem closedPrefix_mem_dropLast
       cases rest with
       | nil => simp at member
       | cons next rest =>
-          rw [List.dropLast_cons₂] at member
+          rw [List.dropLast_cons_cons] at member
           rcases List.mem_cons.mp member with rfl | member
           · exact closed.1
           · exact induction closed.2 member
@@ -561,7 +561,7 @@ theorem closedBlock_bridge_ne_zero
   · simp only [wordProduct_nil]
     rw [bridgeScalar, Matrix.one_mulVec]
     change row ⬝ᵥ ((beta G H row column)⁻¹ • pulledColumn H column) ≠ 0
-    rw [Matrix.dotProduct_smul]
+    rw [dotProduct_smul]
     exact mul_ne_zero (inv_ne_zero beta_nonzero) alpha_nonzero
   · obtain ⟨word, erased_eq⟩ := eraseSkips_endsH ends_h
     rw [wordProduct_unitEdgeMatrix, erased_eq, wordProduct_append, wordProduct_cons,
@@ -571,7 +571,7 @@ theorem closedBlock_bridge_ne_zero
     change row ⬝ᵥ
       wordProduct (incidenceGenerator G H) word *ᵥ
         ((beta G H row column)⁻¹ • column) ≠ 0
-    rw [Matrix.mulVec_smul, Matrix.dotProduct_smul]
+    rw [Matrix.mulVec_smul, dotProduct_smul]
     exact mul_ne_zero (inv_ne_zero beta_nonzero) (incidence_nonzero word)
 
 /-- Under the generic nondegeneracy hypotheses, no constrained raw edge path can vanish unless
@@ -606,7 +606,7 @@ theorem rawEdge_pathProduct_ne_zero
         congr 1
         exact (List.dropLast_append_getLast remaining_nonempty).symm
       rw [blocks_decomposition]
-      simp only [List.map_cons, List.map_append, List.map_singleton, List.map_nil]
+      simp only [List.map_cons, List.map_append, List.map_nil]
       rw [testLoop_eq_outer, rankOneIntercalatedProduct_formula]
       apply smul_ne_zero
       · apply List.prod_ne_zero
@@ -617,8 +617,7 @@ theorem rawEdge_pathProduct_ne_zero
         have block_closed : ClosedBlock block := by
           apply closedPrefix_mem_dropLast blocks (pathBlocks_closed start tail).1 block
           rw [blocks_decomposition]
-          change block ∈ ((first :: middle) ++ [last]).dropLast
-          rw [List.dropLast_append_cons, List.dropLast_single, List.append_nil]
+          rw [List.dropLast_append_cons, List.dropLast_singleton, List.append_nil]
           exact List.mem_cons_of_mem first block_mem
         exact closedBlock_bridge_ne_zero G H row column H_unit alpha_nonzero
           beta_nonzero incidence_nonzero block block_closed bridge_zero
@@ -666,7 +665,7 @@ theorem realizeTail_pathProduct
   | cons letter word induction =>
       cases start <;> cases letter <;>
         simp [realizeTail, EdgeCompression.pathProduct, rawEdge, letterDestination,
-          incidenceGenerator, wordProduct, induction, Matrix.mul_assoc]
+          incidenceGenerator, wordProduct, induction]
 
 theorem realizeTail_append_h_terminal (start : Bool) (word : List Bool) :
     EdgeCompression.terminal start (realizeTail start (word ++ [true])) = false := by
@@ -706,10 +705,10 @@ theorem exists_rawEdge_pathProduct_eq_zero_of_incidence
       wordProduct (incidenceGenerator G H) word *ᵥ
         ((beta G H row column)⁻¹ • (H *ᵥ pulledColumn H column)) = 0
     rw [mulVec_pulledColumn H column H_unit, Matrix.mulVec_smul,
-      Matrix.dotProduct_smul]
+      dotProduct_smul]
     change (beta G H row column)⁻¹ * incidence G H row column word = 0
     rw [incidence_zero, mul_zero]
-  simp only [rawEdge, EdgeCompression.pathProduct, Matrix.mul_one]
+  simp only [rawEdge, Matrix.mul_one]
   rw [testLoop_eq_outer, ← Matrix.mul_assoc, outer_mul, outer_mul_outer]
   rw [← Matrix.dotProduct_mulVec]
   change bridgeScalar (testColumn G H row column) row

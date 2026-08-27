@@ -110,7 +110,10 @@ def haltPhase {ι : Type*} [Primcodable ι] {accepts : ι → Prop}
 theorem haltPhase_nonzero {ι : Type*} [Primcodable ι] {accepts : ι → Prop}
     (source : TwoTagSource ι accepts) :
     source.haltPhase.val ≠ 0 := by
-  rw [haltPhase, CyclicTag.shift_initial_val source.alphabet_pos (by
+  change
+    (CyclicTag.shift (CyclicTag.initialPhase source.alphabet_pos)
+      source.haltLabel.val).val ≠ 0
+  rw [CyclicTag.shift_initial_val source.alphabet_pos (by
     have := source.haltLabel.isLt
     omega)]
   exact source.haltLabel_nonzero

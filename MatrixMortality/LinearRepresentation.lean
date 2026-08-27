@@ -106,7 +106,7 @@ theorem finiteHankel_factor {α ι P S R : Type*} [CommSemiring R]
   rw [finiteHankel, ← exact (prefixes pidx ++ suffixes sidx)]
   rw [linearCoefficient, wordProduct_append, ← Matrix.mulVec_mulVec,
     Matrix.dotProduct_mulVec]
-  simp [finitePrefixStates, finiteSuffixStates, Matrix.mul_apply, Matrix.dotProduct]
+  simp [finitePrefixStates, finiteSuffixStates, Matrix.mul_apply, dotProduct]
 
 /-- A nonsingular square product through `ι` forces at least as many states as rows. -/
 theorem card_le_of_det_rectangular_product_ne_zero
@@ -126,7 +126,7 @@ theorem card_le_of_det_rectangular_product_ne_zero
   have dimension_bound :=
     LinearMap.finrank_le_finrank_of_injective
       (f := right.mulVecLin) right_injective
-  simpa [FiniteDimensional.finrank_pi] using dimension_bound
+  simpa [Module.finrank_pi] using dimension_bound
 
 /-- A nonsingular finite Hankel section lower-bounds every exact realization's state count. -/
 theorem finiteHankel_card_le {α ν ι K : Type*} [Field K]

@@ -15,7 +15,7 @@ private theorem lowRow13Cell16RootTree_certified :
     certifySubdivision 12 64 32 lowRow13Cell16RootRectangle
       CertificateObjective.endpointExpression lowRow13Cell16RootTree =
         some () := by
-  rfl
+  close_endpoint_certificate
 
 /-- One static reflected endpoint-certificate chunk. -/
 theorem lowRow13Cell16Root_nonneg {a q : ℝ}

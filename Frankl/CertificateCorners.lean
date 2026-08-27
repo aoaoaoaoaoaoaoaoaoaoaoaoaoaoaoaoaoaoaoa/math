@@ -355,11 +355,11 @@ private theorem diagonalEndpointObjective_zero_corner {a q beta lowWeight : ℝ}
   have hselfA : (9 : ℝ) / 5 * binEntropy a ≤ binEntropy (join a a) := by
     convert binEntropy_self_union ha₀ haδ using 1
     dsimp [join]
-    ring
+    ring_nf
   have hselfQ : (9 : ℝ) / 5 * binEntropy q ≤ binEntropy (join q q) := by
     convert binEntropy_self_union hq₀ hqδ using 1
     dsimp [join]
-    ring
+    ring_nf
   have hdependent : dependentCost a a = binEntropy (2 * a) := by
     rw [dependentCost_self_eq_cappedEntropy (by linarith : a ≤ (1 : ℝ) / 2)]
     rw [min_eq_left (by linarith : 2 * a ≤ (1 : ℝ) / 2)]
@@ -543,7 +543,7 @@ private theorem diagonalEndpointObjective_one_corner {a r beta lowWeight : ℝ}
   have hselfA : (9 : ℝ) / 5 * binEntropy a ≤ binEntropy (join a a) := by
     convert binEntropy_self_union ha₀ haδ using 1
     dsimp [join]
-    ring
+    ring_nf
   have hjoinIdentity :
       binEntropy (join a (1 - r)) = binEntropy (r * (1 - a)) := by
     rw [show join a (1 - r) = 1 - r * (1 - a) by
@@ -637,7 +637,7 @@ private theorem endpointWeight_one_corner_bounds {a q : ℝ}
   unfold endpointCertificateWeight
   constructor
   · exact div_nonneg (by norm_num [abundanceTarget]; linarith) hdenominator.le
-  · apply (div_lt_iff hdenominator).2
+  · apply (div_lt_iff₀ hdenominator).2
     norm_num [abundanceTarget]
     nlinarith
 

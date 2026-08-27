@@ -20,24 +20,6 @@ attribute [local simp]
   fin_succ_five_eq_six fin_succ_six_eq_seven fin_succ_seven_eq_eight
   fin_succ_eight_eq_nine
 
-private theorem mulVec_const_mul {ι : Type*} [Fintype ι]
-    (matrix : Matrix ι ι ℚ) (scalar : ℚ) (vector : ι → ℚ) :
-    matrix *ᵥ ((fun _ => scalar) * vector) =
-      (fun _ => scalar) * (matrix *ᵥ vector) := by
-  change matrix *ᵥ (scalar • vector) = scalar • (matrix *ᵥ vector)
-  exact Matrix.mulVec_smul matrix scalar vector
-
-private theorem mulVec_mul_const {ι : Type*} [Fintype ι]
-    (matrix : Matrix ι ι ℚ) (scalar : ℚ) (vector : ι → ℚ) :
-    matrix *ᵥ (vector * fun _ => scalar) =
-      (matrix *ᵥ vector) * fun _ => scalar := by
-  have vector_mul : vector * (fun _ => scalar) = scalar • vector := by
-    funext index
-    simp [mul_comm]
-  rw [vector_mul, Matrix.mulVec_smul]
-  funext index
-  simp [mul_comm]
-
 private theorem mulVec_nine_mul {ι : Type*} [Fintype ι]
     (matrix : Matrix ι ι ℚ) (vector : ι → ℚ) :
     matrix *ᵥ ((9 : ι → ℚ) * vector) =
@@ -222,7 +204,7 @@ private theorem prefixAlgebraAdaptedClosedColumn_step_zero
   ext row
   fin_cases row <;>
     (simp [prefixAlgebraAdaptedClosedColumn, prefixAlgebraAdaptedClosed,
-      prefixAlgebraLowerGap, Matrix.vecHead, Matrix.vecTail] <;> ring)
+      prefixAlgebraLowerGap] <;> ring)
 
 private theorem prefixAlgebraAdaptedClosedColumn_step_one
     (β : Nat) (body : List TagLetter) :
@@ -234,7 +216,7 @@ private theorem prefixAlgebraAdaptedClosedColumn_step_one
   ext row
   fin_cases row <;>
     (simp [prefixAlgebraAdaptedClosedColumn, prefixAlgebraAdaptedClosed,
-      prefixAlgebraLowerGap, Matrix.vecHead, Matrix.vecTail] <;> ring)
+      prefixAlgebraLowerGap] <;> ring)
 
 private theorem prefixAlgebraAdaptedClosedColumn_cut_a
     (β : Nat) (body : List TagLetter) :
@@ -247,7 +229,7 @@ private theorem prefixAlgebraAdaptedClosedColumn_cut_a
   ext row
   fin_cases row <;>
     (simp [prefixAlgebraAdaptedClosedColumn, prefixAlgebraAdaptedClosed,
-      prefixAlgebraLowerGap, Matrix.vecHead, Matrix.vecTail] <;> ring)
+      prefixAlgebraLowerGap] <;> ring)
 
 private theorem prefixAlgebraAdaptedClosedColumn_step_three
     (β : Nat) (body : List TagLetter) :
@@ -259,7 +241,7 @@ private theorem prefixAlgebraAdaptedClosedColumn_step_three
   ext row
   fin_cases row <;>
     (simp [prefixAlgebraAdaptedClosedColumn, prefixAlgebraAdaptedClosed,
-      prefixAlgebraLowerGap, Matrix.vecHead, Matrix.vecTail] <;> ring)
+      prefixAlgebraLowerGap] <;> ring)
 
 private theorem prefixAlgebraAdaptedClosedColumn_step_four
     (β : Nat) (body : List TagLetter) :
@@ -271,7 +253,7 @@ private theorem prefixAlgebraAdaptedClosedColumn_step_four
   ext row
   fin_cases row <;>
     (simp [prefixAlgebraAdaptedClosedColumn, prefixAlgebraAdaptedClosed,
-      prefixAlgebraLowerGap, Matrix.vecHead, Matrix.vecTail] <;> ring)
+      prefixAlgebraLowerGap] <;> ring)
 
 private theorem prefixAlgebraAdaptedClosedColumn_cut_c
     (β : Nat) (body : List TagLetter) :
@@ -284,7 +266,7 @@ private theorem prefixAlgebraAdaptedClosedColumn_cut_c
   ext row
   fin_cases row <;>
     (simp [prefixAlgebraAdaptedClosedColumn, prefixAlgebraAdaptedClosed,
-      prefixAlgebraLowerGap, Matrix.vecHead, Matrix.vecTail] <;> ring)
+      prefixAlgebraLowerGap] <;> ring)
 
 private theorem prefixAlgebraAdaptedClosedColumn_step_six
     (β : Nat) (body : List TagLetter) :
@@ -296,7 +278,7 @@ private theorem prefixAlgebraAdaptedClosedColumn_step_six
   ext row
   fin_cases row <;>
     (simp [prefixAlgebraAdaptedClosedColumn, prefixAlgebraAdaptedClosed,
-      prefixAlgebraLowerGap, Matrix.vecHead, Matrix.vecTail] <;> ring)
+      prefixAlgebraLowerGap] <;> ring)
 
 private theorem prefixAlgebraAdaptedClosedColumn_step_seven
     (β : Nat) (body : List TagLetter) :
@@ -308,7 +290,7 @@ private theorem prefixAlgebraAdaptedClosedColumn_step_seven
   ext row
   fin_cases row <;>
     (simp [prefixAlgebraAdaptedClosedColumn, prefixAlgebraAdaptedClosed,
-      prefixAlgebraLowerGap, Matrix.vecHead, Matrix.vecTail] <;> ring)
+      prefixAlgebraLowerGap] <;> ring)
 
 private theorem prefixAlgebraAdaptedClosedColumn_cut_b
     (β : Nat) (body : List TagLetter) :
@@ -321,7 +303,7 @@ private theorem prefixAlgebraAdaptedClosedColumn_cut_b
   ext row
   fin_cases row <;>
     (simp [prefixAlgebraAdaptedClosedColumn, prefixAlgebraAdaptedClosed,
-      prefixAlgebraLowerGap, Matrix.vecHead, Matrix.vecTail] <;> ring)
+      prefixAlgebraLowerGap] <;> ring)
 
 private theorem prefixAlgebraSeedA_eq_closed
     (β : Nat) (body : List TagLetter) :
@@ -354,8 +336,7 @@ private theorem prefixAlgebraObservableClosedRow_zero (β : Nat) :
     prefixAlgebraRow β = prefixAlgebraObservableClosedRow β 0 := by
   ext column
   fin_cases column <;>
-    simp [prefixAlgebraRow, prefixAlgebraObservableClosedRow,
-      prefixAlgebraObservableClosed]
+    simp [prefixAlgebraRow, prefixAlgebraObservableClosedRow]
 
 private theorem prefixAlgebraObservableClosedRow_step_zero (β : Nat)
     (body : List TagLetter) :
@@ -366,8 +347,7 @@ private theorem prefixAlgebraObservableClosedRow_step_zero (β : Nat)
     prefixAlgebraGeneratorClosed_vecMul_true]
   ext column
   fin_cases column <;>
-    simp [prefixAlgebraObservableClosedRow, prefixAlgebraObservableClosed,
-      Matrix.vecHead, Matrix.vecTail]
+    simp [prefixAlgebraObservableClosedRow]
 
 private theorem prefixAlgebraObservableClosedRow_step_one_zero (β : Nat)
     (body : List TagLetter) :
@@ -378,8 +358,7 @@ private theorem prefixAlgebraObservableClosedRow_step_one_zero (β : Nat)
     prefixAlgebraGeneratorClosed_vecMul_false]
   ext column
   fin_cases column <;>
-    simp [prefixAlgebraObservableClosedRow, prefixAlgebraObservableClosed,
-      Matrix.vecHead, Matrix.vecTail]
+    simp [prefixAlgebraObservableClosedRow]
 
 private theorem prefixAlgebraObservableClosedRow_step_one_one (β : Nat)
     (body : List TagLetter) :
@@ -390,8 +369,7 @@ private theorem prefixAlgebraObservableClosedRow_step_one_one (β : Nat)
     prefixAlgebraGeneratorClosed_vecMul_true]
   ext column
   fin_cases column <;>
-    simp [prefixAlgebraObservableClosedRow, prefixAlgebraObservableClosed,
-      Matrix.vecHead, Matrix.vecTail]
+    simp [prefixAlgebraObservableClosedRow]
 
 private theorem prefixAlgebraObservableClosedRow_step_two (β : Nat)
     (body : List TagLetter) :
@@ -402,8 +380,7 @@ private theorem prefixAlgebraObservableClosedRow_step_two (β : Nat)
     prefixAlgebraGeneratorClosed_vecMul_true]
   ext column
   fin_cases column <;>
-    (simp [prefixAlgebraObservableClosedRow, prefixAlgebraObservableClosed,
-      Matrix.vecHead, Matrix.vecTail] <;> ring)
+    (simp [prefixAlgebraObservableClosedRow] <;> ring)
 
 private theorem prefixAlgebraObservableClosedRow_step_three (β : Nat)
     (body : List TagLetter) :
@@ -414,8 +391,7 @@ private theorem prefixAlgebraObservableClosedRow_step_three (β : Nat)
     prefixAlgebraGeneratorClosed_vecMul_false]
   ext column
   fin_cases column <;>
-    (simp [prefixAlgebraObservableClosedRow, prefixAlgebraObservableClosed,
-      Matrix.vecHead, Matrix.vecTail] <;> ring)
+    (simp [prefixAlgebraObservableClosedRow] <;> ring)
 
 private theorem prefixAlgebraObservableClosedRow_step_four (β : Nat)
     (body : List TagLetter) :
@@ -426,8 +402,7 @@ private theorem prefixAlgebraObservableClosedRow_step_four (β : Nat)
     prefixAlgebraGeneratorClosed_vecMul_true]
   ext column
   fin_cases column <;>
-    simp [prefixAlgebraObservableClosedRow, prefixAlgebraObservableClosed,
-      Matrix.vecHead, Matrix.vecTail]
+    simp [prefixAlgebraObservableClosedRow]
 
 private theorem prefixAlgebraObservableClosedRow_step_five (β : Nat)
     (body : List TagLetter) :
@@ -438,8 +413,7 @@ private theorem prefixAlgebraObservableClosedRow_step_five (β : Nat)
     prefixAlgebraGeneratorClosed_vecMul_true]
   ext column
   fin_cases column <;>
-    simp [prefixAlgebraObservableClosedRow, prefixAlgebraObservableClosed,
-      Matrix.vecHead, Matrix.vecTail]
+    simp [prefixAlgebraObservableClosedRow]
 
 private theorem prefixAlgebraObservableClosedRow_step_six (β : Nat)
     (body : List TagLetter) :
@@ -450,8 +424,7 @@ private theorem prefixAlgebraObservableClosedRow_step_six (β : Nat)
     prefixAlgebraGeneratorClosed_vecMul_false]
   ext column
   fin_cases column <;>
-    simp [prefixAlgebraObservableClosedRow, prefixAlgebraObservableClosed,
-      Matrix.vecHead, Matrix.vecTail]
+    simp [prefixAlgebraObservableClosedRow]
 
 private theorem prefixAlgebraObservableClosedRow_step_seven (β : Nat)
     (body : List TagLetter) :
@@ -462,8 +435,7 @@ private theorem prefixAlgebraObservableClosedRow_step_seven (β : Nat)
     prefixAlgebraGeneratorClosed_vecMul_false]
   ext column
   fin_cases column <;>
-    simp [prefixAlgebraObservableClosedRow, prefixAlgebraObservableClosed,
-      Matrix.vecHead, Matrix.vecTail]
+    simp [prefixAlgebraObservableClosedRow]
 
 theorem prefixAlgebraReachable_mul_change (β : Nat) (body : List TagLetter) :
     prefixAlgebraReachable β body * prefixAlgebraReachabilityChange β =
@@ -474,7 +446,7 @@ theorem prefixAlgebraReachable_mul_change (β : Nat) (body : List TagLetter) :
       prefixAlgebraAdapted, prefixAlgebraSeedA, prefixAlgebraSeedB,
       prefixAlgebraSeedC, contextColumns, prefixAlgebraLeftWords,
       wordProduct, Matrix.mul_apply, Matrix.mulVec_sub, Matrix.mulVec_smul,
-      mulVec_const_mul, mulVec_mul_const, mulVec_nine_mul,
+      mulVec_nine_mul,
       Fin.sum_univ_succ] <;>
     (repeat' rw [← Matrix.mulVec_mulVec]
      ring)

@@ -15,6 +15,7 @@ namespace MatrixMortality
 
 /-- Canonical primitive-recursive coding for a finite type. Keep it local when an imported type
 does not already own a `Primcodable` instance. -/
+@[instance_reducible]
 noncomputable def finitePrimcodable (α : Type*) [Fintype α] : Primcodable α :=
   Primcodable.ofEquiv (Fin (Fintype.card α)) (Fintype.equivFin α)
 
@@ -114,7 +115,7 @@ theorem list_dropLast : _root_.Primrec (@List.dropLast α) := by
   exact
     (_root_.Primrec.list_reverse.comp
       (_root_.Primrec.list_tail.comp _root_.Primrec.list_reverse)).of_eq fun list => by
-        rw [List.tail_reverse_eq_reverse_dropLast, List.reverse_reverse]
+        rw [List.tail_reverse, List.reverse_reverse]
 
 /-- A finite function-valued map is primitive recursive when each component is. -/
 theorem fin_function {β : Type*} [Primcodable β] {n : Nat}
@@ -169,8 +170,10 @@ theorem nat_bits : _root_.Primrec Nat.bits := by
             rw [List.getI_eq_getElem
               (List.map Nat.bits (List.range (number + 1))) half_lt_history]
             simp only [List.getElem_map, List.getElem_range]
-            rw [Nat.bits, Nat.binaryRec_of_ne_zero [] (fun bit _ digits => bit :: digits) positive]
+            conv_rhs => rw [Nat.bits]
+            rw [Nat.binaryRec_of_ne_zero [] (fun bit _ digits => bit :: digits) positive]
             simp
+            rw [Nat.bits]
   exact (strong.comp (_root_.Primrec.const ()) _root_.Primrec.id)
 
 end Primrec

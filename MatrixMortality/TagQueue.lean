@@ -54,12 +54,12 @@ end Stroke
 
 /-- The symbols deleted by a finite stroke history. -/
 def consumed {α : Type*} {β : Nat} (history : List (Stroke α β)) : List α :=
-  (history.map Stroke.letters).join
+  history.flatMap Stroke.letters
 
 /-- The rule words appended by a finite stroke history. -/
 def produced {α : Type*} {β : Nat} (output : α → List α)
     (history : List (Stroke α β)) : List α :=
-  (history.map fun stroke => output stroke.head).join
+  history.flatMap fun stroke => output stroke.head
 
 @[simp] theorem consumed_nil {α : Type*} {β : Nat} :
     consumed ([] : List (Stroke α β)) = [] := rfl
@@ -137,7 +137,8 @@ theorem tagStep_deterministic {α : Type*} {β : Nat} {output : α → List α}
   have letters_length : stroke₁.letters.length = stroke₂.letters.length := by
     simp
   have letters_eq : stroke₁.letters = stroke₂.letters :=
-    (common_prefix_of_length_le prefix₁ prefix₂ letters_length.le).eq_of_length letters_length
+    (common_prefix_of_length_le prefix₁ prefix₂ (Nat.le_of_eq letters_length)).eq_of_length
+      letters_length
   have heads_eq : stroke₁.head = stroke₂.head := by
     have := congrArg List.head? letters_eq
     simpa [Stroke.letters] using this
@@ -181,11 +182,11 @@ theorem headAvoidingTagStep_relabel_iff {α γ : Type*} {β : Nat}
   · exact HeadAvoidingTagStep.relabel relabel
 
 /-- Reflexive-transitive reachability under one fixed-width tag step. -/
-def TagReaches {α : Type*} (β : Nat) (output : α → List α) : List α → List α → Prop :=
+abbrev TagReaches {α : Type*} (β : Nat) (output : α → List α) : List α → List α → Prop :=
   Relation.ReflTransGen (TagStep β output)
 
 /-- Reflexive-transitive tag execution that never reads the distinguished symbol. -/
-def HeadAvoidingTagReaches {α : Type*} (β : Nat) (output : α → List α) (target : α) :
+abbrev HeadAvoidingTagReaches {α : Type*} (β : Nat) (output : α → List α) (target : α) :
     List α → List α → Prop :=
   Relation.ReflTransGen (HeadAvoidingTagStep β output target)
 
@@ -276,7 +277,7 @@ theorem tagStep_two_iff {α : Type*} (output : α → List α) (before after : L
   constructor
   · rintro ⟨⟨head, wake, width⟩, tail, before_eq, after_eq⟩
     have wake_length : wake.length = 1 := by omega
-    obtain ⟨wakeHead, rfl⟩ := List.length_eq_one.mp wake_length
+    obtain ⟨wakeHead, rfl⟩ := List.length_eq_one_iff.mp wake_length
     exact ⟨head, wakeHead, tail, before_eq, after_eq⟩
   · rintro ⟨head, wake, tail, rfl, rfl⟩
     exact ⟨⟨head, [wake], rfl⟩, tail, rfl, rfl⟩
@@ -290,7 +291,7 @@ theorem headAvoidingTagStep_two_iff {α : Type*} (output : α → List α) (targ
   constructor
   · rintro ⟨⟨head, wake, width⟩, tail, head_ne, before_eq, after_eq⟩
     have wake_length : wake.length = 1 := by omega
-    obtain ⟨wakeHead, rfl⟩ := List.length_eq_one.mp wake_length
+    obtain ⟨wakeHead, rfl⟩ := List.length_eq_one_iff.mp wake_length
     exact ⟨head, wakeHead, tail, head_ne, before_eq, after_eq⟩
   · rintro ⟨head, wake, tail, head_ne, rfl, rfl⟩
     exact ⟨⟨head, [wake], rfl⟩, tail, head_ne, rfl, rfl⟩

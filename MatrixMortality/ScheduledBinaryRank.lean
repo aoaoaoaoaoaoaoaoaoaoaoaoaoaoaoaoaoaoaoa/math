@@ -1,4 +1,5 @@
 import MatrixMortality.LinearRepresentation
+import MatrixMortality.NearySideNormal
 import MatrixMortality.ScheduledBinary
 
 /-!
@@ -22,6 +23,36 @@ def scheduledWidthThreePrefixes : Fin 5 → List Bool :=
 def scheduledWidthThreeSuffixes : Fin 5 → List Bool :=
   ![[], [false], [true], [false, false], [false, true]]
 
+@[simp] private theorem scheduledWidthThreePrefixes_zero :
+    scheduledWidthThreePrefixes 0 = [] := rfl
+
+@[simp] private theorem scheduledWidthThreePrefixes_one :
+    scheduledWidthThreePrefixes 1 = [false] := rfl
+
+@[simp] private theorem scheduledWidthThreePrefixes_two :
+    scheduledWidthThreePrefixes 2 = [true] := rfl
+
+@[simp] private theorem scheduledWidthThreePrefixes_three :
+    scheduledWidthThreePrefixes 3 = [false, false] := rfl
+
+@[simp] private theorem scheduledWidthThreePrefixes_four :
+    scheduledWidthThreePrefixes 4 = [true, false] := rfl
+
+@[simp] private theorem scheduledWidthThreeSuffixes_zero :
+    scheduledWidthThreeSuffixes 0 = [] := rfl
+
+@[simp] private theorem scheduledWidthThreeSuffixes_one :
+    scheduledWidthThreeSuffixes 1 = [false] := rfl
+
+@[simp] private theorem scheduledWidthThreeSuffixes_two :
+    scheduledWidthThreeSuffixes 2 = [true] := rfl
+
+@[simp] private theorem scheduledWidthThreeSuffixes_three :
+    scheduledWidthThreeSuffixes 3 = [false, false] := rfl
+
+@[simp] private theorem scheduledWidthThreeSuffixes_four :
+    scheduledWidthThreeSuffixes 4 = [false, true] := rfl
+
 /-- The certified integer Hankel minor. -/
 def scheduledWidthThreeHankel (body : List TagLetter) : Matrix (Fin 5) (Fin 5) ℤ :=
   finiteHankel (scheduledCoefficient ℤ 3 body (by decide))
@@ -37,19 +68,235 @@ def scheduledWidthThreeHankelClosed
      4012155, 974954637, 13578093 - 9 * r, 236914032195, 3299477328;
      49554, 12036276, 167652 - 9 * r, 2924864154, 40733847]
 
-theorem scheduledWidthThreeHankel_eq_closed (body : List TagLetter) :
-    scheduledWidthThreeHankel body = scheduledWidthThreeHankelClosed body := by
-  ext i j
-  fin_cases i <;> fin_cases j <;>
+local macro "crush_scheduled_decode" : tactic =>
+  `(tactic|
+    norm_num [decodeScheduled, decodeScheduledFrom_nil, decodeScheduledFrom_cons,
+      scheduledInitialPhase, scheduledNextPhase, scheduledTile, scheduledPhase,
+      scheduledLetter, PairPhase.tile])
+
+@[simp] private theorem decodeScheduled_three_nil :
+    decodeScheduled (β := 3) (by decide) [] = [] := by
+  crush_scheduled_decode
+
+@[simp] private theorem decodeScheduled_three_false :
+    decodeScheduled (β := 3) (by decide) [false] = [.erase .b] := by
+  crush_scheduled_decode
+
+@[simp] private theorem decodeScheduled_three_true :
+    decodeScheduled (β := 3) (by decide) [true] = [.erase .c] := by
+  crush_scheduled_decode
+
+@[simp] private theorem decodeScheduled_three_false_false :
+    decodeScheduled (β := 3) (by decide) [false, false] = [.erase .b, .erase .b] := by
+  crush_scheduled_decode
+
+@[simp] private theorem decodeScheduled_three_false_true :
+    decodeScheduled (β := 3) (by decide) [false, true] = [.erase .c, .erase .b] := by
+  crush_scheduled_decode
+
+@[simp] private theorem decodeScheduled_three_true_false :
+    decodeScheduled (β := 3) (by decide) [true, false] = [.erase .b, .erase .c] := by
+  crush_scheduled_decode
+
+@[simp] private theorem decodeScheduled_three_true_true :
+    decodeScheduled (β := 3) (by decide) [true, true] = [.erase .c, .erase .c] := by
+  crush_scheduled_decode
+
+@[simp] private theorem decodeScheduled_three_false_false_false :
+    decodeScheduled (β := 3) (by decide) [false, false, false] =
+      [.rule .b, .erase .b, .erase .b] := by
+  crush_scheduled_decode
+
+@[simp] private theorem decodeScheduled_three_false_false_true :
+    decodeScheduled (β := 3) (by decide) [false, false, true] =
+      [.rule .c, .erase .b, .erase .b] := by
+  crush_scheduled_decode
+
+@[simp] private theorem decodeScheduled_three_true_false_false :
+    decodeScheduled (β := 3) (by decide) [true, false, false] =
+      [.rule .b, .erase .b, .erase .c] := by
+  crush_scheduled_decode
+
+@[simp] private theorem decodeScheduled_three_true_false_true :
+    decodeScheduled (β := 3) (by decide) [true, false, true] =
+      [.rule .c, .erase .b, .erase .c] := by
+  crush_scheduled_decode
+
+@[simp] private theorem decodeScheduled_three_false_false_false_false :
+    decodeScheduled (β := 3) (by decide) [false, false, false, false] =
+      [.erase .b, .rule .b, .erase .b, .erase .b] := by
+  crush_scheduled_decode
+
+@[simp] private theorem decodeScheduled_three_false_false_false_true :
+    decodeScheduled (β := 3) (by decide) [false, false, false, true] =
+      [.erase .c, .rule .b, .erase .b, .erase .b] := by
+  crush_scheduled_decode
+
+@[simp] private theorem decodeScheduled_three_true_false_false_false :
+    decodeScheduled (β := 3) (by decide) [true, false, false, false] =
+      [.erase .b, .rule .b, .erase .b, .erase .c] := by
+  crush_scheduled_decode
+
+@[simp] private theorem decodeScheduled_three_true_false_false_true :
+    decodeScheduled (β := 3) (by decide) [true, false, false, true] =
+      [.erase .c, .rule .b, .erase .b, .erase .c] := by
+  crush_scheduled_decode
+
+@[simp] private theorem nearyLower_three_rule_b_length (body : List TagLetter) :
+    (nearyLower 3 body (.rule .b)).length = 3 := by
+  simp [nearyLower]
+
+@[simp] private theorem nearyLower_three_erase_length (body : List TagLetter)
+    (letter : TagLetter) :
+    (nearyLower 3 body (.erase letter)).length = 1 := by
+  cases letter <;> simp [nearyLower]
+
+local macro "crush_scheduled_hankel_entry" : tactic =>
+  `(tactic|
     norm_num [scheduledWidthThreeHankel, scheduledWidthThreeHankelClosed,
       finiteHankel, scheduledWidthThreePrefixes, scheduledWidthThreeSuffixes,
       scheduledCoefficient_eq_sideCoefficient, sideCoefficient_eq_ternaryCode_sub,
-      decodeScheduled, decodeScheduledFrom_nil, decodeScheduledFrom_cons,
-      scheduledInitialPhase, scheduledNextPhase,
-      scheduledTile, scheduledPhase, scheduledLetter, PairPhase.tile, spell, nearyMarker,
-      nearyUpper, nearyLower, tagCode, ternaryCode_append, ternaryCode_cons, ternaryDigit,
-      List.replicate_succ, pow_add] <;>
-    ring
+      spell, nearyMarker,
+      nearyUpper, tagCode, ternaryCode_append, ternaryCode_cons, ternaryDigit,
+      ternaryCode_neary_rule_b, ternaryCode_neary_erase,
+      List.replicate_succ, pow_add, Matrix.cons_val_zero, Matrix.cons_val_one,
+      Matrix.cons_val_two, Matrix.cons_val_three, Matrix.cons_val_four] <;>
+    ring)
+
+@[simp] private theorem scheduledWidthThreeHankel_entry_zero_zero (body : List TagLetter) :
+    scheduledWidthThreeHankel body 0 0 = scheduledWidthThreeHankelClosed body 0 0 := by
+  crush_scheduled_hankel_entry
+
+@[simp] private theorem scheduledWidthThreeHankel_entry_zero_one (body : List TagLetter) :
+    scheduledWidthThreeHankel body 0 1 = scheduledWidthThreeHankelClosed body 0 1 := by
+  crush_scheduled_hankel_entry
+
+@[simp] private theorem scheduledWidthThreeHankel_entry_zero_two (body : List TagLetter) :
+    scheduledWidthThreeHankel body 0 2 = scheduledWidthThreeHankelClosed body 0 2 := by
+  crush_scheduled_hankel_entry
+
+@[simp] private theorem scheduledWidthThreeHankel_entry_zero_three (body : List TagLetter) :
+    scheduledWidthThreeHankel body 0 3 = scheduledWidthThreeHankelClosed body 0 3 := by
+  crush_scheduled_hankel_entry
+
+@[simp] private theorem scheduledWidthThreeHankel_entry_zero_four (body : List TagLetter) :
+    scheduledWidthThreeHankel body 0 4 = scheduledWidthThreeHankelClosed body 0 4 := by
+  crush_scheduled_hankel_entry
+
+@[simp] private theorem scheduledWidthThreeHankel_entry_one_zero (body : List TagLetter) :
+    scheduledWidthThreeHankel body 1 0 = scheduledWidthThreeHankelClosed body 1 0 := by
+  crush_scheduled_hankel_entry
+
+@[simp] private theorem scheduledWidthThreeHankel_entry_one_one (body : List TagLetter) :
+    scheduledWidthThreeHankel body 1 1 = scheduledWidthThreeHankelClosed body 1 1 := by
+  crush_scheduled_hankel_entry
+
+@[simp] private theorem scheduledWidthThreeHankel_entry_one_two (body : List TagLetter) :
+    scheduledWidthThreeHankel body 1 2 = scheduledWidthThreeHankelClosed body 1 2 := by
+  crush_scheduled_hankel_entry
+
+@[simp] private theorem scheduledWidthThreeHankel_entry_one_three (body : List TagLetter) :
+    scheduledWidthThreeHankel body 1 3 = scheduledWidthThreeHankelClosed body 1 3 := by
+  crush_scheduled_hankel_entry
+
+@[simp] private theorem scheduledWidthThreeHankel_entry_one_four (body : List TagLetter) :
+    scheduledWidthThreeHankel body 1 4 = scheduledWidthThreeHankelClosed body 1 4 := by
+  crush_scheduled_hankel_entry
+
+@[simp] private theorem scheduledWidthThreeHankel_entry_two_zero (body : List TagLetter) :
+    scheduledWidthThreeHankel body 2 0 = scheduledWidthThreeHankelClosed body 2 0 := by
+  crush_scheduled_hankel_entry
+
+@[simp] private theorem scheduledWidthThreeHankel_entry_two_one (body : List TagLetter) :
+    scheduledWidthThreeHankel body 2 1 = scheduledWidthThreeHankelClosed body 2 1 := by
+  crush_scheduled_hankel_entry
+
+@[simp] private theorem scheduledWidthThreeHankel_entry_two_two (body : List TagLetter) :
+    scheduledWidthThreeHankel body 2 2 = scheduledWidthThreeHankelClosed body 2 2 := by
+  crush_scheduled_hankel_entry
+
+@[simp] private theorem scheduledWidthThreeHankel_entry_two_three (body : List TagLetter) :
+    scheduledWidthThreeHankel body 2 3 = scheduledWidthThreeHankelClosed body 2 3 := by
+  crush_scheduled_hankel_entry
+
+@[simp] private theorem scheduledWidthThreeHankel_entry_two_four (body : List TagLetter) :
+    scheduledWidthThreeHankel body 2 4 = scheduledWidthThreeHankelClosed body 2 4 := by
+  crush_scheduled_hankel_entry
+
+@[simp] private theorem scheduledWidthThreeHankel_entry_three_zero (body : List TagLetter) :
+    scheduledWidthThreeHankel body 3 0 = scheduledWidthThreeHankelClosed body 3 0 := by
+  crush_scheduled_hankel_entry
+
+@[simp] private theorem scheduledWidthThreeHankel_entry_three_one (body : List TagLetter) :
+    scheduledWidthThreeHankel body 3 1 = scheduledWidthThreeHankelClosed body 3 1 := by
+  crush_scheduled_hankel_entry
+
+@[simp] private theorem scheduledWidthThreeHankel_entry_three_two (body : List TagLetter) :
+    scheduledWidthThreeHankel body 3 2 = scheduledWidthThreeHankelClosed body 3 2 := by
+  crush_scheduled_hankel_entry
+
+@[simp] private theorem scheduledWidthThreeHankel_entry_three_three (body : List TagLetter) :
+    scheduledWidthThreeHankel body 3 3 = scheduledWidthThreeHankelClosed body 3 3 := by
+  crush_scheduled_hankel_entry
+
+@[simp] private theorem scheduledWidthThreeHankel_entry_three_four (body : List TagLetter) :
+    scheduledWidthThreeHankel body 3 4 = scheduledWidthThreeHankelClosed body 3 4 := by
+  crush_scheduled_hankel_entry
+
+@[simp] private theorem scheduledWidthThreeHankel_entry_four_zero (body : List TagLetter) :
+    scheduledWidthThreeHankel body 4 0 = scheduledWidthThreeHankelClosed body 4 0 := by
+  crush_scheduled_hankel_entry
+
+@[simp] private theorem scheduledWidthThreeHankel_entry_four_one (body : List TagLetter) :
+    scheduledWidthThreeHankel body 4 1 = scheduledWidthThreeHankelClosed body 4 1 := by
+  crush_scheduled_hankel_entry
+
+@[simp] private theorem scheduledWidthThreeHankel_entry_four_two (body : List TagLetter) :
+    scheduledWidthThreeHankel body 4 2 = scheduledWidthThreeHankelClosed body 4 2 := by
+  crush_scheduled_hankel_entry
+
+@[simp] private theorem scheduledWidthThreeHankel_entry_four_three (body : List TagLetter) :
+    scheduledWidthThreeHankel body 4 3 = scheduledWidthThreeHankelClosed body 4 3 := by
+  crush_scheduled_hankel_entry
+
+@[simp] private theorem scheduledWidthThreeHankel_entry_four_four (body : List TagLetter) :
+    scheduledWidthThreeHankel body 4 4 = scheduledWidthThreeHankelClosed body 4 4 := by
+  crush_scheduled_hankel_entry
+
+private theorem scheduledWidthThreeHankel_row_zero (body : List TagLetter) :
+    scheduledWidthThreeHankel body 0 = scheduledWidthThreeHankelClosed body 0 := by
+  ext j
+  fin_cases j <;> simp
+
+private theorem scheduledWidthThreeHankel_row_one (body : List TagLetter) :
+    scheduledWidthThreeHankel body 1 = scheduledWidthThreeHankelClosed body 1 := by
+  ext j
+  fin_cases j <;> simp
+
+private theorem scheduledWidthThreeHankel_row_two (body : List TagLetter) :
+    scheduledWidthThreeHankel body 2 = scheduledWidthThreeHankelClosed body 2 := by
+  ext j
+  fin_cases j <;> simp
+
+private theorem scheduledWidthThreeHankel_row_three (body : List TagLetter) :
+    scheduledWidthThreeHankel body 3 = scheduledWidthThreeHankelClosed body 3 := by
+  ext j
+  fin_cases j <;> simp
+
+private theorem scheduledWidthThreeHankel_row_four (body : List TagLetter) :
+    scheduledWidthThreeHankel body 4 = scheduledWidthThreeHankelClosed body 4 := by
+  ext j
+  fin_cases j <;> simp
+
+theorem scheduledWidthThreeHankel_eq_closed (body : List TagLetter) :
+    scheduledWidthThreeHankel body = scheduledWidthThreeHankelClosed body := by
+  funext i
+  fin_cases i
+  · exact scheduledWidthThreeHankel_row_zero body
+  · exact scheduledWidthThreeHankel_row_one body
+  · exact scheduledWidthThreeHankel_row_two body
+  · exact scheduledWidthThreeHankel_row_three body
+  · exact scheduledWidthThreeHankel_row_four body
 
 /-- Reachable-row factor of the certified minor. -/
 def scheduledWidthThreeReachable : Matrix (Fin 5) (Fin 5) ℤ :=
@@ -92,9 +339,7 @@ theorem scheduledWidthThreeReachable_adjugate_mul :
   ext i j
   fin_cases i <;> fin_cases j <;>
     norm_num [scheduledWidthThreeReachableAdjugate, scheduledWidthThreeReachable,
-      Matrix.mul_apply, Matrix.one_apply, Fin.sum_univ_succ] <;>
-    simp [Fin.ext_iff] <;>
-    omega
+      Matrix.mul_apply, Matrix.one_apply, Fin.sum_univ_succ]
 
 theorem scheduledWidthThreeReachable_det_ne_zero :
     scheduledWidthThreeReachable.det ≠ 0 := by
@@ -143,7 +388,9 @@ theorem scheduledWidthThreeObservableMinor_det (body : List TagLetter) :
   have castSucc_two : Fin.castSucc (2 : Fin 3) = (2 : Fin 4) := rfl
   rw [Matrix.det_succ_row_zero]
   norm_num [scheduledWidthThreeObservableMinor, Fin.sum_univ_succ,
-    Matrix.det_fin_three, succAbove_two_two, succAbove_one_two, castSucc_two]
+    Matrix.det_fin_three, succAbove_two_two, succAbove_one_two, castSucc_two,
+    Matrix.cons_val_zero, Matrix.cons_val_one, Matrix.cons_val_two,
+    Matrix.cons_val_three]
   ring
 
 theorem ternaryCode_nearyLower_three_rule_c_large (body : List TagLetter)
@@ -152,11 +399,11 @@ theorem ternaryCode_nearyLower_three_rule_c_large (body : List TagLetter)
   have encoded_nonempty : tagEncode 3 body ≠ [] :=
     (tagEncode_eq_nil_iff 3 body).not.mpr body_nonempty
   have lower_length : 4 ≤ (nearyLower 3 body (.rule .c)).length := by
-    simp only [nearyLower, nearyBody, List.length_append, List.length_cons, List.length_nil]
-    have encoded_length := List.length_pos.mpr encoded_nonempty
+    simp only [nearyLower, List.length_append, List.length_cons, List.length_nil]
+    have encoded_length := List.length_pos_of_ne_nil encoded_nonempty
     omega
   have lower_nonempty : nearyLower 3 body (.rule .c) ≠ [] := by
-    simp [nearyLower, nearyBody]
+    simp [nearyLower]
   have code_bound :=
     ternaryCode_lower_bound (nearyLower 3 body (.rule .c)) lower_nonempty
   have exponent_bound : 3 ≤ (nearyLower 3 body (.rule .c)).length - 1 := by

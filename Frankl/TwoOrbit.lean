@@ -34,6 +34,7 @@ theorem orbitWeights_sum {a t b : ℝ} (hab : a < b) :
     lowerOrbitWeight a t b + upperOrbitWeight a t b = 1 := by
   dsimp [lowerOrbitWeight, upperOrbitWeight]
   field_simp [sub_ne_zero.mpr (ne_of_gt hab)]
+  ring
 
 theorem orbitWeights_mean {a t b : ℝ} (hab : a < b) :
     lowerOrbitWeight a t b * a + upperOrbitWeight a t b * b = t := by

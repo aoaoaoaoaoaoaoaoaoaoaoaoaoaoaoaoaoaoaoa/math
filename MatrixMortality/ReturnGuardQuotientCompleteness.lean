@@ -48,6 +48,7 @@ theorem rationalPair_terminalResidual_isTerminalPairMod
       parameters.center - 1 =
         (centerNumerator - scale : ℤ) / (scale : ℚ) := by
     rw [center_eq]
+    rw [Int.cast_sub]
     field_simp [scale_ne_rat]
   have terminal_zero :
       (parameters.center - 1) * terminal +
@@ -130,7 +131,7 @@ theorem quotientTransition_zero_terminal_eq_cancelled
     rw [quotientTransfer_zero]
     ext i
     fin_cases i <;>
-      simp [coordinates, Matrix.mulVec, Matrix.dotProduct, Fin.sum_univ_succ,
+      simp [coordinates, Matrix.mulVec, dotProduct, Fin.sum_univ_succ,
         IsTerminalPairMod] at terminal ⊢
     all_goals exact terminal
   have weight_ne :

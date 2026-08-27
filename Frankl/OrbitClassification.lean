@@ -64,7 +64,7 @@ theorem identifiedSingle_collapse_to_diagonal {ι : Type*} [Fintype ι]
         - (max (left i) (right i) - min (left i) (right i)) / 2 =
       min (left i) (right i) by
         rcases le_total (left i) (right i) with h | h <;>
-          simp [min_eq_left, min_eq_right, max_eq_left, max_eq_right, h] <;> ring]
+          simp [h] <;> ring]
     exact le_min (hleft i).1 (hright i).1
   have haUpper : abundanceTarget + d ≤ 1 / 2 := by
     have hcenter : (left i + right i) / 2 = abundanceTarget := by
@@ -75,7 +75,7 @@ theorem identifiedSingle_collapse_to_diagonal {ι : Type*} [Fintype ι]
         + (max (left i) (right i) - min (left i) (right i)) / 2 =
       max (left i) (right i) by
         rcases le_total (left i) (right i) with h | h <;>
-          simp [min_eq_left, min_eq_right, max_eq_left, max_eq_right, h] <;> ring]
+          simp [h] <;> ring]
     exact max_le hlow.1 hlow.2
   have hd : 0 ≤ d := div_nonneg (sub_nonneg.2
     (min_le_max : min (left i) (right i) ≤ max (left i) (right i))) (by norm_num)
@@ -87,7 +87,7 @@ theorem identifiedSingle_collapse_to_diagonal {ι : Type*} [Fintype ι]
     rw [← hcenter]
     dsimp [d, sortedOrbitLeft]
     rcases le_total (left i) (right i) with h | h <;>
-      simp [min_eq_left, min_eq_right, max_eq_left, max_eq_right, h] <;> ring
+      simp [h] <;> ring
   have hrightSorted :
       (sortedOrbitRight (Function.const Unit (left i))
         (Function.const Unit (right i))) () = abundanceTarget + d := by
@@ -96,7 +96,7 @@ theorem identifiedSingle_collapse_to_diagonal {ι : Type*} [Fintype ι]
     rw [← hcenter]
     dsimp [d, sortedOrbitRight]
     rcases le_total (left i) (right i) with h | h <;>
-      simp [min_eq_left, min_eq_right, max_eq_left, max_eq_right, h] <;> ring
+      simp [h] <;> ring
   have hcanonical := singleLowOrbitLaw_gap_eq_of_coordinates sorted
     hleftSorted hrightSorted (by simp [sorted, single, sortedOrbitLaw,
       reindexedSingleOrbitLaw])
@@ -157,7 +157,7 @@ theorem identifiedPair_collapse_to_canonical {ι : Type*} [Fintype ι]
         - (max (left lower) (right lower) - min (left lower) (right lower)) / 2 =
       min (left lower) (right lower) by
         rcases le_total (left lower) (right lower) with h | h <;>
-          simp [min_eq_left, min_eq_right, max_eq_left, max_eq_right, h] <;> ring]
+          simp [h] <;> ring]
     exact le_min (hleft lower).1 (hright lower).1
   have haUpper : a + d ≤ 1 / 2 := by
     dsimp [a, d, orbitMean]
@@ -165,7 +165,7 @@ theorem identifiedPair_collapse_to_canonical {ι : Type*} [Fintype ι]
         + (max (left lower) (right lower) - min (left lower) (right lower)) / 2 =
       max (left lower) (right lower) by
         rcases le_total (left lower) (right lower) with h | h <;>
-          simp [min_eq_left, min_eq_right, max_eq_left, max_eq_right, h] <;> ring]
+          simp [h] <;> ring]
     exact max_le hlowerLow.1 hlowerLow.2
   have hd : 0 ≤ d := by
     exact div_nonneg (sub_nonneg.2
@@ -176,13 +176,13 @@ theorem identifiedPair_collapse_to_canonical {ι : Type*} [Fintype ι]
         (reindexedPairCoordinate right lower upper)) false = a - d := by
     dsimp [a, d, paired, sorted, sortedOrbitLeft, reindexedPairCoordinate, orbitMean]
     rcases le_total (left lower) (right lower) with h | h <;>
-      simp [min_eq_left, min_eq_right, max_eq_left, max_eq_right, h] <;> ring
+      simp [h] <;> ring
   have hrightLower :
       (sortedOrbitRight (reindexedPairCoordinate left lower upper)
         (reindexedPairCoordinate right lower upper)) false = a + d := by
     dsimp [a, d, paired, sorted, sortedOrbitRight, reindexedPairCoordinate, orbitMean]
     rcases le_total (left lower) (right lower) with h | h <;>
-      simp [min_eq_left, min_eq_right, max_eq_left, max_eq_right, h] <;> ring
+      simp [h] <;> ring
   have hsortedLowerWeight : sorted.weight false = lowerOrbitWeight a abundanceTarget b := by
     simpa [sorted, paired, sortedOrbitLaw, reindexedPairOrbitLaw, reindexedPairWeight, a, b]
       using hlowerWeight
@@ -237,7 +237,7 @@ theorem identifiedPair_collapse_to_canonical {ι : Type*} [Fintype ι]
           - (max (left upper) (right upper) - min (left upper) (right upper)) / 2 =
         min (left upper) (right upper) by
           rcases le_total (left upper) (right upper) with h | h <;>
-            simp [min_eq_left, min_eq_right, max_eq_left, max_eq_right, h] <;> ring]
+            simp [h] <;> ring]
       exact le_min (hleft upper).1 (hright upper).1
     have hbUpper : b + e ≤ 1 / 2 := by
       dsimp [b, e, orbitMean]
@@ -245,7 +245,7 @@ theorem identifiedPair_collapse_to_canonical {ι : Type*} [Fintype ι]
           + (max (left upper) (right upper) - min (left upper) (right upper)) / 2 =
         max (left upper) (right upper) by
           rcases le_total (left upper) (right upper) with h | h <;>
-            simp [min_eq_left, min_eq_right, max_eq_left, max_eq_right, h] <;> ring]
+            simp [h] <;> ring]
       exact max_le hupperLow.1 hupperLow.2
     have he : 0 ≤ e := by
       exact div_nonneg (sub_nonneg.2
@@ -256,13 +256,13 @@ theorem identifiedPair_collapse_to_canonical {ι : Type*} [Fintype ι]
           (reindexedPairCoordinate right lower upper)) true = b - e := by
       dsimp [b, e, paired, sorted, sortedOrbitLeft, reindexedPairCoordinate, orbitMean]
       rcases le_total (left upper) (right upper) with h | h <;>
-        simp [min_eq_left, min_eq_right, max_eq_left, max_eq_right, h] <;> ring
+        simp [h] <;> ring
     have hrightUpper :
         (sortedOrbitRight (reindexedPairCoordinate left lower upper)
           (reindexedPairCoordinate right lower upper)) true = b + e := by
       dsimp [b, e, paired, sorted, sortedOrbitRight, reindexedPairCoordinate, orbitMean]
       rcases le_total (left upper) (right upper) with h | h <;>
-        simp [min_eq_left, min_eq_right, max_eq_left, max_eq_right, h] <;> ring
+        simp [h] <;> ring
     have hcanonical := twoLowOrbitLaw_gap_eq_of_coordinates sorted haTarget htargetB hab
       hleftLower hrightLower hleftUpper hrightUpper
       hsortedLowerWeight hsortedUpperWeight

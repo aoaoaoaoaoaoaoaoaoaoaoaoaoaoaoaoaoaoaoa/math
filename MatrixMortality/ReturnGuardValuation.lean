@@ -221,7 +221,7 @@ theorem integralStepNumerator_natAbs_le_height
             (scale * (prime : ℤ) ^ wait).natAbs :=
         Int.natAbs_sub_le _ _
       _ = centerNumerator.natAbs + scale.natAbs * prime ^ wait := by
-        simp only [Int.natAbs_mul, Int.natAbs_pow, Int.natAbs_ofNat]
+        simp only [Int.natAbs_mul, Int.natAbs_pow, Int.natAbs_natCast]
   have numerator_le :
       numerator.natAbs ≤ integralPairHeight numerator denominator :=
     le_max_left _ _
@@ -274,7 +274,7 @@ theorem integralStep_power_le_numerator_natAbs
       (integralStepNumerator prime centerNumerator driftNumerator scale
         wait numerator denominator).natAbs := by
           rw [← step.1]
-          simp only [Int.natAbs_mul, Int.natAbs_pow, Int.natAbs_ofNat]
+          simp only [Int.natAbs_mul, Int.natAbs_pow, Int.natAbs_natCast]
 
 /-- For depth at least two, every legal nonzero step has wait logarithmic in the current
 integral height. -/
@@ -420,7 +420,7 @@ theorem integralStep_next_height_le
                 dsimp [fullPower]
                 rw [← step.1]
                 simp only [Int.natAbs_mul, Int.natAbs_pow,
-                  Int.natAbs_ofNat]
+                  Int.natAbs_natCast]
         _ ≤
             (centerNumerator.natAbs + driftNumerator.natAbs +
                 scale.natAbs * prime ^ wait) * height :=
@@ -495,26 +495,35 @@ theorem padicValNat_pow_sub_pow_of_exponent_coprime
     (factor_not_dvd_exponent : ¬factor ∣ exponent) :
     padicValNat factor (left ^ exponent - right ^ exponent) =
       padicValNat factor (left - right) := by
-  have exponent_ne : exponent ≠ 0 := by
-    intro exponent_eq
-    apply factor_not_dvd_exponent
-    simp [exponent_eq]
-  rw [← PartENat.natCast_inj]
-  iterate 2 rw [padicValNat_def, PartENat.natCast_get]
-  · iterate 2 rw [← multiplicity.Int.natCast_multiplicity]
-    rw [Int.ofNat_sub
-      (Nat.pow_le_pow_left (Nat.le_of_lt right_lt_left) exponent),
-      Int.ofNat_sub (Nat.le_of_lt right_lt_left)]
-    push_cast
-    apply multiplicity.pow_sub_pow_of_prime
-      (Nat.prime_iff_prime_int.mp Fact.out)
-    · rw [← Int.natCast_sub (Nat.le_of_lt right_lt_left)]
-      exact Int.natCast_dvd_natCast.mpr factor_divides
-    · exact_mod_cast factor_not_dvd_left
-    · exact_mod_cast factor_not_dvd_exponent
-  · exact Nat.sub_pos_of_lt right_lt_left
-  · exact Nat.sub_pos_of_lt
-      (Nat.pow_lt_pow_left right_lt_left exponent_ne)
+  have right_le : right ≤ left := right_lt_left.le
+  have right_power_le : right ^ exponent ≤ left ^ exponent :=
+    Nat.pow_le_pow_left right_le exponent
+  have factor_prime_int : Prime (factor : ℤ) :=
+    Nat.prime_iff_prime_int.mp Fact.out
+  have factor_divides_int :
+      (factor : ℤ) ∣ (left : ℤ) - right := by
+    rw [← Int.natCast_sub right_le, Int.natCast_dvd_natCast]
+    exact factor_divides
+  have factor_not_dvd_left_int : ¬(factor : ℤ) ∣ (left : ℤ) := by
+    rw [Int.natCast_dvd_natCast]
+    exact factor_not_dvd_left
+  have factor_not_dvd_exponent_int :
+      ¬(factor : ℤ) ∣ (exponent : ℤ) := by
+    rw [Int.natCast_dvd_natCast]
+    exact factor_not_dvd_exponent
+  have emultiplicity_eq :=
+    emultiplicity_pow_sub_pow_of_prime factor_prime_int
+      factor_divides_int factor_not_dvd_left_int factor_not_dvd_exponent_int
+  have power_difference_cast :
+      ((left ^ exponent - right ^ exponent : Nat) : ℤ) =
+        (left : ℤ) ^ exponent - (right : ℤ) ^ exponent := by
+    rw [Int.natCast_sub right_power_le, Int.natCast_pow, Int.natCast_pow]
+  have difference_cast :
+      ((left - right : Nat) : ℤ) = (left : ℤ) - (right : ℤ) := by
+    rw [Int.natCast_sub right_le]
+  rw [← power_difference_cast, ← difference_cast,
+    Int.natCast_emultiplicity, Int.natCast_emultiplicity] at emultiplicity_eq
+  simpa only [Nat.toNat_emultiplicity] using congrArg ENat.toNat emultiplicity_eq
 
 /-- Odd-prime lifting of the exponent for a wait that is a multiple of one seed period. -/
 theorem padicValNat_pow_mul_sub_one

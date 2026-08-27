@@ -36,8 +36,6 @@ theorem nearyMarkerValueInt_relation (β : Nat) :
       norm_num [nearyMarkerValueInt, nearyWidthScaleInt, nearyMarker, ternaryCode, ternaryDigit]
   | succ β induction =>
       rw [nearyMarkerValueInt_succ]
-      change 2 * (3 * nearyMarkerValueInt β + 1) + 1 =
-        5 * nearyWidthScaleInt (β + 1)
       rw [nearyWidthScaleInt, pow_succ, ← nearyWidthScaleInt]
       nlinarith
 
@@ -129,8 +127,7 @@ theorem nearySideColumn_eq_native (β : Nat) :
   fin_cases coordinate <;>
     simp [nearySideColumn, nearySideNativeColumn, nearySideMarkerValue,
       nearySideMarkerScale, sideTerminalColumn, sidePcpMatrix, sideTailBasis,
-      Matrix.mulVec, Matrix.dotProduct, Matrix.vecHead, Matrix.vecTail,
-      Fin.sum_univ_succ]
+      Matrix.mulVec, dotProduct, Fin.sum_univ_succ]
 
 /-- The four Neary matrices after all fixed words have been evaluated. -/
 def nearySideNativeRole (β : Nat) (body : List TagLetter) :
@@ -160,16 +157,14 @@ theorem nearySideRole_eq_native (β : Nat) (body : List TagLetter) (tile : Neary
   | rule letter =>
       cases letter <;> fin_cases row <;> fin_cases column <;>
         simp [nearySideRole, nearySideNativeRole, nearySideUpperB,
-          nearySideLowerC, nearySideMarkerScale, nearySideUpperBScale,
-          nearySideLowerCScale, sidePcpMatrix, nearyUpper, nearyLower,
-          Matrix.vecHead, Matrix.vecTail, ternaryDigit]
+          nearySideLowerC, nearySideUpperBScale, nearySideLowerCScale,
+          sidePcpMatrix, nearyUpper, nearyLower]
       all_goals norm_num [tagCode, ternaryCode, ternaryDigit, Nat.ofDigits]
   | erase letter =>
       cases letter <;> fin_cases row <;> fin_cases column <;>
         simp [nearySideRole, nearySideNativeRole, nearySideUpperB,
-          nearySideLowerC, nearySideMarkerScale, nearySideUpperBScale,
-          nearySideLowerCScale, sidePcpMatrix, nearyUpper, nearyLower,
-          Matrix.vecHead, Matrix.vecTail, ternaryDigit]
+          nearySideUpperBScale, sidePcpMatrix, nearyUpper, nearyLower,
+          ternaryDigit]
       all_goals norm_num [tagCode, ternaryCode, ternaryDigit, Nat.ofDigits]
 
 /-- Closed semantic normal form of the four reachable Neary rows. -/
@@ -188,11 +183,11 @@ theorem nearySideRow_vecMul_role (β : Nat) (body : List TagLetter) (tile : Near
   | rule letter =>
       cases letter <;> ext coordinate <;> fin_cases coordinate <;>
         simp [nearySideRow, nearySideNativeRow, nearySideNativeRole,
-          Matrix.vecMul, Matrix.dotProduct, Fin.sum_univ_succ]
+          Matrix.vecMul, dotProduct, Fin.sum_univ_succ]
   | erase letter =>
       cases letter <;> ext coordinate <;> fin_cases coordinate <;>
         simp [nearySideRow, nearySideNativeRow, nearySideNativeRole,
-          Matrix.vecMul, Matrix.dotProduct, Fin.sum_univ_succ]
+          Matrix.vecMul, dotProduct, Fin.sum_univ_succ]
 
 @[simp] theorem ternaryCode_tagCode_c (β : Nat) :
     ternaryCode (tagCode β .c) = 2 := by
@@ -215,11 +210,11 @@ theorem ternaryCode_neary_rule_c_gt_twenty_five
   have encoded_nonempty : tagEncode β body ≠ [] :=
     (tagEncode_eq_nil_iff β body).not.mpr body_nonempty
   have lower_length : 4 ≤ (nearyLower β body (.rule .c)).length := by
-    simp only [nearyLower, nearyBody, List.length_append, List.length_cons, List.length_nil]
-    have encoded_length := List.length_pos.mpr encoded_nonempty
+    simp only [nearyLower, List.length_append, List.length_cons, List.length_nil]
+    have encoded_length := List.length_pos_of_ne_nil encoded_nonempty
     omega
   have lower_nonempty : nearyLower β body (.rule .c) ≠ [] := by
-    simp [nearyLower, nearyBody]
+    simp [nearyLower]
   have code_bound :=
     ternaryCode_lower_bound (nearyLower β body (.rule .c)) lower_nonempty
   have exponent_bound : 3 ≤ (nearyLower β body (.rule .c)).length - 1 := by
@@ -259,7 +254,7 @@ theorem nearySideUpperB_relation (β : Nat) :
       exact_mod_cast ternaryCode_tagCode_b β
     simpa [nearySideUpperB] using casted
   rw [upper_relation]
-  simp only [nearySideMarkerScale, nearyMarker_length, nearyWidthScaleInt, pow_succ]
+  simp only [nearySideMarkerScale, nearyMarker_length, pow_succ]
   nlinarith
 
 /-- The long upper scale is three times the marker scale. -/
@@ -305,6 +300,6 @@ theorem nearySideMarkerScale_gt_twenty_five (β : Nat) (three_le : 3 ≤ β) :
   rw [nearySideMarkerScale, nearyMarker_length]
   calc
     (25 : ℚ) < 3 ^ 4 := by norm_num
-    _ ≤ 3 ^ (β + 1) := pow_le_pow_right (by norm_num) (by omega)
+    _ ≤ 3 ^ (β + 1) := pow_le_pow_right₀ (a := (3 : ℚ)) (by norm_num) (by omega)
 
 end MatrixMortality

@@ -54,7 +54,10 @@ inductive PrefixState where
   | one
   | ten
   | eleven
-  deriving DecidableEq, Fintype, Repr
+  deriving DecidableEq, Repr
+
+instance : Fintype PrefixState :=
+  Fintype.ofList [.root, .one, .ten, .eleven] fun state => by cases state <;> simp
 
 /-- Deterministic prefix-state transition. -/
 def prefixNext : PrefixState → Bool → PrefixState
@@ -103,7 +106,7 @@ theorem prefixMachine_run (β : Nat) (body : List TagLetter) (state : PrefixStat
       let decoded := prefixDecode state word
       (decoded.1, wordProduct (normalizedNearyFamily β body) decoded.2) := by
   induction word generalizing state with
-  | nil => simp [prefixMachine, prefixDecode, WeightedTransducer.run]
+  | nil => simp [prefixDecode, WeightedTransducer.run]
   | cons bit word induction =>
       rw [WeightedTransducer.run, induction]
       cases state <;>
@@ -220,7 +223,7 @@ theorem normalizedNearyFamily_rule_erase_row_zero (β : Nat)
       normalizedNearyFamily β body (some (.erase letter)) 0 column := by
   rw [normalizedNearyFamily_some, normalizedNearyFamily_some]
   fin_cases column <;>
-    simp [sidePcpMatrix, nearyUpper, Matrix.vecHead, Matrix.vecTail]
+    simp [sidePcpMatrix, nearyUpper]
 
 theorem normalizedNearyFamily_rule_erase_row_two (β : Nat)
     (body : List TagLetter) (letter : TagLetter) (column : Fin 3) :
@@ -228,7 +231,7 @@ theorem normalizedNearyFamily_rule_erase_row_two (β : Nat)
       normalizedNearyFamily β body (some (.erase letter)) 2 column := by
   rw [normalizedNearyFamily_some, normalizedNearyFamily_some]
   fin_cases column <;>
-    simp [sidePcpMatrix, nearyUpper, Matrix.vecHead, Matrix.vecTail]
+    simp [sidePcpMatrix, nearyUpper]
 
 /-- Small coordinate represented by each coordinate of the four three-state prefix blocks. -/
 def prefixCoordinate : PrefixState → Fin 3 → Fin 10
@@ -320,7 +323,7 @@ theorem prefixGenerator_sharesRows (β : Nat) (body : List TagLetter) (bit : Boo
     rintro ⟨finish, column⟩ <;>
     cases finish <;>
     fin_cases column <;>
-    simp [SharesPrefixRows, prefixMachine, WeightedTransducer.generator, prefixNext,
+    simp [prefixMachine, WeightedTransducer.generator, prefixNext,
       prefixOutput, prefixEmission, normalizedNearyFamily_rule_erase_row_zero,
       normalizedNearyFamily_rule_erase_row_two]
 

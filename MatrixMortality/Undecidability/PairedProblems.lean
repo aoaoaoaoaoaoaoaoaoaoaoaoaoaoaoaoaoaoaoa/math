@@ -61,10 +61,11 @@ private theorem pairedDataMatrix_int_entry_primrec (β : Nat) (letter : TagLette
   have ruleCode := ternaryCode_int_primrec.comp ruleWord
   have eraseCode := ternaryCode_int_primrec.comp eraseWord
   have ruleScale := ternaryScale_int_primrec.comp ruleWord
+  have eraseScale := ternaryScale_int_primrec.comp eraseWord
   fin_cases row <;> fin_cases column <;>
-    simp [pairedDataMatrix_eq_explicit, Matrix.vecHead, Matrix.vecTail]
+    simp [pairedDataMatrix_eq_explicit]
   all_goals first | exact Primrec.const _ | exact ruleCode | exact eraseCode |
-    exact ruleScale
+    exact ruleScale | exact eraseScale
 
 /-- The four-matrix paired compiler is primitive recursive in its variable body. -/
 theorem nearyMortality44_primrec (β : Nat) :
@@ -93,15 +94,12 @@ theorem nearyMortality44_control_fixes_anchor (β : Nat) (body : List TagLetter)
     ((nearyMortality44 β body).matrix (Fin.castSucc label)) *ᵥ pairedAnchor ℤ =
       pairedAnchor ℤ := by
   fin_cases label
-  · simpa [MortalityProblem.matrix, nearyMortality44, pairedMortalityLabelOfFin,
-      pairedMortalityFamily, separatedGenerator] using
-      pairedGenerator_mulVec_anchor ℤ β body (.data .b)
-  · simpa [MortalityProblem.matrix, nearyMortality44, pairedMortalityLabelOfFin,
-      pairedMortalityFamily, separatedGenerator] using
-      pairedGenerator_mulVec_anchor ℤ β body (.data .c)
-  · simpa [MortalityProblem.matrix, nearyMortality44, pairedMortalityLabelOfFin,
-      pairedMortalityFamily, separatedGenerator] using
-      pairedGenerator_mulVec_anchor ℤ β body .toggle
+  · change pairedGenerator ℤ β body (.data .b) *ᵥ pairedAnchor ℤ = pairedAnchor ℤ
+    exact pairedGenerator_mulVec_anchor ℤ β body (.data .b)
+  · change pairedGenerator ℤ β body (.data .c) *ᵥ pairedAnchor ℤ = pairedAnchor ℤ
+    exact pairedGenerator_mulVec_anchor ℤ β body (.data .c)
+  · change pairedGenerator ℤ β body .toggle *ᵥ pairedAnchor ℤ = pairedAnchor ℤ
+    exact pairedGenerator_mulVec_anchor ℤ β body .toggle
 
 /-- The third control generator swaps one-based coordinates two and four,
 equivalently `Fin 4` indices `1` and `3`. -/

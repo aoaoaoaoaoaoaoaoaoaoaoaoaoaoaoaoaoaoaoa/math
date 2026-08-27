@@ -34,7 +34,7 @@ def ternaryCode (word : List Bool) : ℕ :=
 
 theorem ternaryCode_append (x y : List Bool) :
     ternaryCode (x ++ y) = 3 ^ y.length * ternaryCode x + ternaryCode y := by
-  simp [ternaryCode, List.reverse_append, Nat.ofDigits_append, add_comm, mul_comm]
+  simp [ternaryCode, List.reverse_append, Nat.ofDigits_append, add_comm]
 
 private theorem ternaryCode_eq_foldl (word : List Bool) :
     ternaryCode word =
@@ -52,7 +52,7 @@ private theorem ternaryCode_eq_foldl (word : List Bool) :
 /-- The nonzero ternary word code is primitive recursive. -/
 theorem ternaryCode_primrec : Primrec ternaryCode := by
   have digitRec : Primrec ternaryDigit :=
-    Primrec.dom_fintype _
+    Primrec.dom_finite _
   have step :
       Primrec₂ fun (_ : List Bool) (state : Nat × Bool) =>
         3 * state.1 + ternaryDigit state.2 :=

@@ -331,8 +331,7 @@ theorem avoiding_firing_reflects {alphabet : Nat} (system : TwoTag alphabet)
         | cons head rest =>
             have frontLength :
                 ((oneHot head).take target.val).length = target.val := by
-              simp [List.length_take, oneHot_length,
-                Nat.min_eq_left (Nat.le_of_lt target.isLt)]
+              simp [List.length_take, oneHot_length]
             have split :
                 (oneHot head).take target.val ++
                     ((oneHot head).drop target.val ++ encodeWord rest) =

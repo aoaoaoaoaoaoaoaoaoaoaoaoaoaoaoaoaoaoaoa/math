@@ -138,10 +138,10 @@ theorem terminal_or_exists_cyclotomic_reset
   · exact Or.inl terminal
   right
   by_contra no_survivor
-  push_neg at no_survivor
+  push Not at no_survivor
   have pairwise :
       (↑factors : Set Nat).Pairwise
-        (IsCoprime on fun factor : Nat => (factor : ℤ)) := by
+        (fun left right => IsCoprime (left : ℤ) (right : ℤ)) := by
     intro left left_mem right right_mem distinct
     exact
       ((Nat.coprime_primes (factor_prime left left_mem)

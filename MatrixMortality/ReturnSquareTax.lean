@@ -72,8 +72,7 @@ theorem stackHankel_factor {R : Type*} [CommRing R] (q κ : R) :
   ext i j
   rcases i with i | i <;> rcases j with j | j <;>
     simp [stackHankel, stackVandermonde, stackCoefficientBlock,
-      Matrix.fromBlocks_multiply, stackTransfer_eq, mul_add, add_mul,
-      Matrix.mul_smul, Matrix.smul_mul]
+      Matrix.fromBlocks_multiply, stackTransfer_eq]
   all_goals ring
 
 /-- Constant coefficient is nonsingular with determinant `-1`. -/

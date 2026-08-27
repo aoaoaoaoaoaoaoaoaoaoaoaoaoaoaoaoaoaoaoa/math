@@ -154,11 +154,14 @@ theorem positiveBridge_zero_iff_guardedOrbit
           wordProduct
             (positiveTransfer parameters.prime parameters.depth
               parameters.center parameters.reset) waits := by
-    simpa [positiveGuardTransfer_eq] using
-      wordProduct_smulMatrix
-        (fun index => (parameters.prime : ℚ) ^ (index + 1))
-        (positiveTransfer parameters.prime parameters.depth
-          parameters.center parameters.reset) waits
+    change wordProduct
+      (fun index => (parameters.prime : ℚ) ^ (index + 1) •
+        positiveTransfer parameters.prime parameters.depth
+          parameters.center parameters.reset index) waits = _
+    exact wordProduct_smulMatrix
+      (fun index => (parameters.prime : ℚ) ^ (index + 1))
+      (positiveTransfer parameters.prime parameters.depth
+        parameters.center parameters.reset) waits
   have scale_ne :
       (waits.map (fun index => (parameters.prime : ℚ) ^ (index + 1))).prod ≠ 0 := by
     apply List.prod_ne_zero
@@ -166,7 +169,7 @@ theorem positiveBridge_zero_iff_guardedOrbit
     obtain ⟨index, _, power_zero⟩ := List.mem_map.mp zero_mem
     exact primePower_ne_zero parameters.prime_prime (index + 1) power_zero
   rw [scaled_product] at projective_cut
-  rw [Matrix.smul_mulVec_assoc, Matrix.dotProduct_smul] at projective_cut
+  rw [Matrix.smul_mulVec, dotProduct_smul] at projective_cut
   simpa [positiveBridge, bridgeScalar, ProjectiveLine.ray, smul_eq_mul,
     scale_ne] using projective_cut
 
@@ -569,6 +572,7 @@ theorem readyState_readyTail
     primePower_ne_zero parameters.prime_prime _
   simp [readyState, readyTail]
   field_simp [power_ne]
+  ring
 
 /-- Every unit tail names a ready point in its indexed cylinder. -/
 theorem readyState_ready
@@ -697,8 +701,10 @@ theorem legalValue_inverseTail
     refine mul_ne_zero parameters.drift_ne_zero ?_
     exact (primePower_positive parameters wait wait_positive |>
       positive_sub_one).1
+  have power_sub_one_ne : (parameters.prime : ℚ) ^ wait - 1 ≠ 0 :=
+    (primePower_positive parameters wait wait_positive |> positive_sub_one).1
   simp [legalValue, inverseTail]
-  field_simp [denominator_ne]
+  field_simp [denominator_ne, parameters.drift_ne_zero, power_sub_one_ne]
   ring
 
 /-- The terminal tail is itself a p-adic unit. -/
@@ -743,8 +749,10 @@ theorem legalValue_targetTail
     (mul_hasValue parameters.drift_unit
       (positive_sub_one
         (primePower_positive parameters wait wait_positive))).1
+  have power_sub_one_ne : (parameters.prime : ℚ) ^ wait - 1 ≠ 0 :=
+    (primePower_positive parameters wait wait_positive |> positive_sub_one).1
   simp [legalValue, targetTail]
-  field_simp [denominator_ne]
+  field_simp [denominator_ne, parameters.drift_ne_zero, power_sub_one_ne]
   ring
 
 /-- The terminal tail is the unique legal payload that reaches one. -/
@@ -813,7 +821,7 @@ def LegalStep (parameters : Parameters) (source target : ℚ) : Prop :=
       guardedStep parameters (index + 1) (some source) = some target
 
 /-- Deterministic target reachability induced by the guarded arithmetic map. -/
-def GuardedReachable (parameters : Parameters) : Prop :=
+abbrev GuardedReachable (parameters : Parameters) : Prop :=
   Relation.TransGen (LegalStep parameters) parameters.reset 1
 
 theorem legalStep_source_live
@@ -978,13 +986,13 @@ theorem parameters_three_le_card_of_exact_realization
   have prime_gt_one : (1 : ℚ) < parameters.prime := by
     exact_mod_cast parameters.prime_prime.one_lt
   have inverse_lt_one : (parameters.prime : ℚ)⁻¹ < 1 :=
-    inv_lt_one prime_gt_one
+    inv_lt_one_of_one_lt₀ prime_gt_one
   have exponent_positive : 0 < parameters.depth - 1 := by
     exact Nat.sub_pos_of_lt
       (lt_of_lt_of_le Nat.one_lt_two parameters.depth_two)
   have expanding_gt_one :
       (1 : ℚ) < parameters.prime ^ (parameters.depth - 1) :=
-    one_lt_pow prime_gt_one exponent_positive.ne'
+    one_lt_pow₀ prime_gt_one exponent_positive.ne'
   exact three_le_card_of_exact_realization
     parameters.prime parameters.depth parameters.center parameters.reset
     otherAmbient otherInput otherOutput exact

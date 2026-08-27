@@ -80,7 +80,7 @@ theorem binarySpreadDeficit_joinEntropy_le_support
     have hxJoin : 0 < join x q := join_pos_of_pos_left hx.1 hq₀ hqOne.le
     have hsupportJoin : 0 < join support q :=
       join_pos_of_pos_left hsupport₀ hq₀ hqOne.le
-    apply (div_le_div_iff hxJoin hsupportJoin).2
+    apply (div_le_div_iff₀ hxJoin hsupportJoin).2
     have hdifference :
         0 ≤ support * (1 - q) * join x q -
           x * (1 - q) * join support q := by
@@ -289,10 +289,14 @@ private theorem hasDerivAt_lowCappedEntropyGap {x : ℝ}
   have hscaled : HasDerivAt (fun y : ℝ ↦ 2 * y) 2 x := by
     simpa only [id_eq, mul_one] using (hasDerivAt_id x).const_mul 2
   have hdouble := (hasDerivAt_binEntropy hdouble₀ hdouble₁).comp x hscaled
-  convert ((hasDerivAt_binEntropy hx₀ hx₁).const_mul 2).sub hdouble using 1
-  all_goals
-    simp only [lowCappedEntropyGap, lowCappedEntropyGapDeriv]
-    ring
+  have raw := ((hasDerivAt_binEntropy hx₀ hx₁).const_mul 2).sub hdouble
+  have derivative : HasDerivAt _ (lowCappedEntropyGapDeriv x) x :=
+    raw.congr_deriv (by
+      dsimp only [lowCappedEntropyGapDeriv]
+      ring)
+  apply derivative.congr_of_eventuallyEq
+  filter_upwards with y
+  dsimp only [lowCappedEntropyGap, Pi.sub_apply, Function.comp_apply]
 
 private theorem lowCappedEntropyGapDeriv2_eq {x : ℝ}
     (hx₀ : x ≠ 0) (hx₁ : x ≠ 1) (hdouble₁ : 2 * x ≠ 1) :
@@ -321,9 +325,15 @@ private theorem hasDerivAt_lowCappedEntropyGapDeriv {x : ℝ}
       (-2 / (1 - 2 * x)) x := by
     simpa only [one_div] using
       (hscaled.const_sub 1 |>.log (sub_ne_zero.mpr hdouble₁.symm))
-  convert ((hxcomplog.sub hxlog).const_mul 2).sub
-    ((hdoublecomplog.sub hdoublelog).const_mul 2) using 1
-  simpa only [one_div] using lowCappedEntropyGapDeriv2_eq hx₀ hx₁ hdouble₁
+  have raw := ((hxcomplog.sub hxlog).const_mul 2).sub
+    ((hdoublecomplog.sub hdoublelog).const_mul 2)
+  have derivative : HasDerivAt _ (lowCappedEntropyGapDeriv2 x) x :=
+    raw.congr_deriv (by
+      rw [lowCappedEntropyGapDeriv2_eq hx₀ hx₁ hdouble₁]
+      simp only [one_div])
+  apply derivative.congr_of_eventuallyEq
+  filter_upwards with y
+  dsimp only [lowCappedEntropyGapDeriv, Pi.sub_apply]
 
 /-- The low capped-entropy gap is convex up to the cap transition. -/
 theorem lowCappedEntropyGap_convexOn :
@@ -615,7 +625,9 @@ private theorem lowerRegionExpression_point_nonneg :
     (show (0 : ℝ) ≤ 0 by norm_num) (show (0 : ℝ) ≤ 1 by norm_num)
   have hencloses := evaluateDual_encloses hhorizontal hvertical hdomain
     (show evaluateDual 12 64 64 diagonalPointRectangle
-      CertificateObjective.lowerRegionExpression = some diagonalPointDual by rfl)
+      CertificateObjective.lowerRegionExpression = some diagonalPointDual by
+        set_option maxRecDepth 10000 in
+          with_unfolding_all rfl)
   have hbounds := RatBall.contains_iff_bounds.mp hencloses.1
   have hlower : (0 : ℝ) ≤ diagonalPointDual.value.lower := by
     norm_num [diagonalPointDual, RatBall.lower]

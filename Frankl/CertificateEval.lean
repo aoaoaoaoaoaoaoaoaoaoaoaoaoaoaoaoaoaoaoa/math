@@ -280,7 +280,10 @@ theorem eval_ge_center_sub_gradient_error {terms fuel bits : ℕ}
       have hderiv := EntropyExpr.hasDerivAt_along
         (coordinate := EntropyExpr.Coordinate.horizontal)
         huDomain huSmooth
-      simpa only [EntropyExpr.along, EntropyExpr.lineBase] using hderiv.differentiableAt
+      have hactual : HasDerivAt (fun z : ℝ => expression.eval z y)
+          (expression.slope .horizontal u y) u :=
+        hderiv.congr_of_eventuallyEq (Filter.Eventually.of_forall fun _ ↦ rfl)
+      exact hactual.differentiableAt
     have hbound : ∀ u ∈ Icc (rectangle.horizontal.lower : ℝ)
         rectangle.horizontal.upper,
         ‖deriv (fun z => expression.eval z y) u‖ ≤ (gradient.1.absUpper : ℝ) := by
@@ -294,7 +297,10 @@ theorem eval_ge_center_sub_gradient_error {terms fuel bits : ℕ}
         huDomain huSmooth
       have hslope : deriv (fun z => expression.eval z y) u =
           expression.slope .horizontal u y := by
-        simpa only [EntropyExpr.along, EntropyExpr.lineBase] using hderiv.deriv
+        have hactual : HasDerivAt (fun z : ℝ => expression.eval z y)
+            (expression.slope .horizontal u y) u :=
+          hderiv.congr_of_eventuallyEq (Filter.Eventually.of_forall fun _ ↦ rfl)
+        exact hactual.deriv
       have hencloses := evaluateDual_encloses huBall hy huDomain hdual
       have hgradientContains := (hencloses.2 gradient hgradient).1
       rw [hslope, Real.norm_eq_abs]
@@ -317,7 +323,10 @@ theorem eval_ge_center_sub_gradient_error {terms fuel bits : ℕ}
       have hderiv := EntropyExpr.hasDerivAt_along
         (coordinate := EntropyExpr.Coordinate.vertical)
         hvDomain hvSmooth
-      simpa only [EntropyExpr.along, EntropyExpr.lineBase] using hderiv.differentiableAt
+      have hactual : HasDerivAt (fun z : ℝ => expression.eval rectangle.horizontal.center z)
+          (expression.slope .vertical rectangle.horizontal.center v) v :=
+        hderiv.congr_of_eventuallyEq (Filter.Eventually.of_forall fun _ ↦ rfl)
+      exact hactual.differentiableAt
     have hbound : ∀ v ∈ Icc (rectangle.vertical.lower : ℝ)
         rectangle.vertical.upper,
         ‖deriv (fun z => expression.eval rectangle.horizontal.center z) v‖ ≤
@@ -331,7 +340,10 @@ theorem eval_ge_center_sub_gradient_error {terms fuel bits : ℕ}
         hvDomain hvSmooth
       have hslope : deriv (fun z => expression.eval rectangle.horizontal.center z) v =
           expression.slope .vertical rectangle.horizontal.center v := by
-        simpa only [EntropyExpr.along, EntropyExpr.lineBase] using hderiv.deriv
+        have hactual : HasDerivAt (fun z : ℝ => expression.eval rectangle.horizontal.center z)
+            (expression.slope .vertical rectangle.horizontal.center v) v :=
+          hderiv.congr_of_eventuallyEq (Filter.Eventually.of_forall fun _ ↦ rfl)
+        exact hactual.deriv
       have hencloses := evaluateDual_encloses hcenterHorizontal hvBall hvDomain hdual
       have hgradientContains := (hencloses.2 gradient hgradient).2
       rw [hslope, Real.norm_eq_abs]

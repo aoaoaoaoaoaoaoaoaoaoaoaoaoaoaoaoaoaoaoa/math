@@ -17,19 +17,23 @@ private theorem hasDerivAt_entropyDerivative {x : ℝ} (hx₀ : x ≠ 0) (hx₁ 
     HasDerivAt entropyDerivative (entropyDerivative2 x) x := by
   have hleft := ((hasDerivAt_id x).const_sub 1).log (sub_ne_zero.mpr hx₁.symm)
   have hright := (hasDerivAt_id x).log hx₀
-  simpa only [entropyDerivative, entropyDerivative2, id_eq] using hleft.sub hright
+  unfold entropyDerivative entropyDerivative2
+  apply HasDerivAt.sub
+  · exact hleft
+  · exact hright
 
 private theorem hasDerivAt_entropyDerivative2 {x : ℝ} (hx₀ : x ≠ 0) (hx₁ : x ≠ 1) :
     HasDerivAt entropyDerivative2 (entropyDerivative3 x) x := by
   have hleft := (((hasDerivAt_id x).const_sub 1).inv (sub_ne_zero.mpr hx₁.symm)).neg
   have hright := (hasDerivAt_id x).inv hx₀
-  convert hleft.sub hright using 1
-  · funext y
-    simp only [entropyDerivative2, id_eq, one_div]
-    ring
+  refine ((hleft.sub hright).congr_deriv ?_).congr_of_eventuallyEq ?_
   · simp only [entropyDerivative3, id_eq, one_div]
     field_simp [hx₀, sub_ne_zero.mpr hx₁.symm]
     ring
+  · exact Filter.Eventually.of_forall fun _ ↦ by
+      simp only [entropyDerivative2, Pi.inv_apply, Pi.neg_apply, Pi.sub_apply, id_eq,
+        div_eq_mul_inv]
+      ring
 
 /-- The continuous extension of `x h'(x²) - h'(x)` to `x=1`. -/
 noncomputable def curvatureR (x : ℝ) : ℝ :=
@@ -54,9 +58,11 @@ private theorem hasDerivAt_curvatureR {x : ℝ} (hx₀ : x ≠ 0) (hx₁ : x ≠
   have hmiddle := (hasDerivAt_id x).mul honeAddLog
   have hcoefficient := (hasDerivAt_id x).const_mul 2 |>.const_sub 1
   have hlast := hcoefficient.mul ((hasDerivAt_id x).log hx₀)
-  convert (honeSub.add hmiddle).add hlast using 1
-  simp only [curvatureRDeriv, id_eq]
-  ring
+  refine (((honeSub.add hmiddle).add hlast).congr_deriv ?_).congr_of_eventuallyEq ?_
+  · simp only [curvatureRDeriv, id_eq]
+    ring
+  · exact Filter.Eventually.of_forall fun _ ↦ by
+      simp only [curvatureR, Function.comp_apply, Pi.add_apply, Pi.mul_apply, id_eq]
 
 private theorem hasDerivAt_curvatureRDeriv {x : ℝ} (hx₀ : x ≠ 0) (hx₁ : x ≠ 1)
     (hxneg₁ : x ≠ -1) : HasDerivAt curvatureRDeriv (curvatureRDeriv2 x) x := by
@@ -71,13 +77,15 @@ private theorem hasDerivAt_curvatureRDeriv {x : ℝ} (hx₀ : x ≠ 0) (hx₁ : 
   have hlog := ((hasDerivAt_id x).log hx₀).const_mul 2
   have hcoefficient := (hasDerivAt_id x).const_mul 2 |>.const_sub 1
   have hlast := hcoefficient.div (hasDerivAt_id x) hx₀
-  convert (((honeSubLog.const_add 1).add honeAddLog).add hfraction).sub hlog |>.add hlast using 1
-  · funext y
-    simp only [curvatureRDeriv, id_eq]
-    ring
+  refine
+    (((((honeSubLog.const_add 1).add honeAddLog).add hfraction).sub hlog |>.add hlast).congr_deriv
+      ?_).congr_of_eventuallyEq ?_
   · simp only [curvatureRDeriv2, id_eq]
     field_simp [hx₀, sub_ne_zero.mpr hx₁.symm, honeAddNe]
     ring
+  · exact Filter.Eventually.of_forall fun _ ↦ by
+      simp only [curvatureRDeriv, Pi.add_apply, Pi.sub_apply, Pi.div_apply, id_eq]
+      ring
 
 private theorem curvatureRDeriv2_eq {x : ℝ} (hx₀ : x ≠ 0) (hx₁ : x ≠ 1)
     (hxneg₁ : x ≠ -1) :
@@ -102,16 +110,13 @@ private theorem curvatureRDeriv2_eq {x : ℝ} (hx₀ : x ≠ 0) (hx₁ : x ≠ 1
   have h₃ : (1 / (1 + x) ^ 2) * (x ^ 2 * (x - 1) * (x + 1) ^ 2) =
       x ^ 2 * (x - 1) := by
     field_simp [honeAddNe']
-    left
     ring
   have h₄ : (-2 / x) * (x ^ 2 * (x - 1) * (x + 1) ^ 2) =
       -2 * x * (x - 1) * (x + 1) ^ 2 := by
     field_simp [hx₀]
-    ring
   have h₅ : (-1 / x ^ 2) * (x ^ 2 * (x - 1) * (x + 1) ^ 2) =
       -(x - 1) * (x + 1) ^ 2 := by
     field_simp [hx₀]
-    ring
   simp only [curvatureRDeriv2]
   apply (eq_div_iff hdenominator).2
   calc
@@ -149,9 +154,13 @@ private theorem hasDerivAt_curvatureKernel {x y : ℝ}
   have hxy := (hasDerivAt_id x).mul_const y
   have he := (hasDerivAt_entropyDerivative hxy₀ hxy₁).comp x hxy
   have hcoefficient := (hasDerivAt_id x).sub_const y
-  convert (hr.sub_const (curvatureR y)).sub (hcoefficient.mul he) using 1
-  simp only [curvatureKernelDeriv, id_eq, Function.comp_apply]
-  ring
+  refine
+    (((hr.sub_const (curvatureR y)).sub (hcoefficient.mul he)).congr_deriv
+      ?_).congr_of_eventuallyEq ?_
+  · simp only [curvatureKernelDeriv, id_eq, Function.comp_apply]
+    ring
+  · exact Filter.Eventually.of_forall fun _ ↦ by
+      simp only [curvatureKernel, Function.comp_apply, Pi.sub_apply, Pi.mul_apply, id_eq]
 
 private theorem hasDerivAt_curvatureKernelDeriv {x y : ℝ}
     (hx₀ : x ≠ 0) (hx₁ : x ≠ 1) (hxneg₁ : x ≠ -1)
@@ -162,9 +171,11 @@ private theorem hasDerivAt_curvatureKernelDeriv {x y : ℝ}
   have he1 := (hasDerivAt_entropyDerivative hxy₀ hxy₁).comp x hxy
   have he2 := (hasDerivAt_entropyDerivative2 hxy₀ hxy₁).comp x hxy
   have hcoefficient := ((hasDerivAt_id x).sub_const y).mul_const y
-  convert (hr.sub he1).sub (hcoefficient.mul he2) using 1
-  simp only [curvatureKernelDeriv2, id_eq, Function.comp_apply]
-  ring
+  refine (((hr.sub he1).sub (hcoefficient.mul he2)).congr_deriv ?_).congr_of_eventuallyEq ?_
+  · simp only [curvatureKernelDeriv2, id_eq, Function.comp_apply]
+    ring
+  · exact Filter.Eventually.of_forall fun _ ↦ by
+      simp only [curvatureKernelDeriv, Function.comp_apply, Pi.sub_apply, Pi.mul_apply, id_eq]
 
 private theorem curvatureKernelDeriv2_eq {x y : ℝ}
     (hx₀ : x ≠ 0) (hx₁ : x ≠ 1) (hxneg₁ : x ≠ -1)
@@ -186,13 +197,26 @@ private theorem curvatureKernelDeriv2_eq {x y : ℝ}
   rw [eq_div_iff hdenominator]
   rw [curvatureRDeriv2_eq hx₀ hx₁ hxneg₁]
   simp only [entropyDerivative2, entropyDerivative3]
+  have hy₀ : y ≠ 0 := by
+    intro hy
+    apply hxy₀
+    simp [hy]
   have hRdenominator : x ^ 2 * (x - 1) * (x + 1) ^ 2 ≠ 0 := by
     exact mul_ne_zero (mul_ne_zero (pow_ne_zero 2 hx₀) (sub_ne_zero.mpr hx₁))
       (pow_ne_zero 2 (by simpa [add_comm] using honeAddNe))
-  field_simp [hx₀, sub_ne_zero.mpr hx₁.symm, honeAddNe, hxy₀,
-    sub_ne_zero.mpr hxy₁.symm, hRdenominator]
+  have honeAddExpanded : 1 + x * 2 + x ^ 2 ≠ 0 := by
+    rw [show 1 + x * 2 + x ^ 2 = (1 + x) ^ 2 by ring]
+    exact pow_ne_zero 2 honeAddNe
+  field_simp [hx₀, hy₀, sub_ne_zero.mpr hx₁.symm, honeAddNe, hxy₀,
+    sub_ne_zero.mpr hxy₁.symm, hRdenominator, honeAddExpanded]
   simp only [curvaturePolynomial]
-  ring
+  have honeAddSq : (x + 1) ^ 2 ≠ 0 :=
+    pow_ne_zero 2 (by simpa [add_comm] using honeAddNe)
+  have hcancel : (x + 1) ^ 2 *
+      (((3 * x + 1) * (1 - x * y)) / (x + 1) ^ 2) =
+      (3 * x + 1) * (1 - x * y) :=
+    mul_div_cancel₀ _ honeAddSq
+  linear_combination ((1 - x * y) * (1 - x)) * hcancel
 
 private theorem curvatureKernel_continuousOn {y : ℝ} (hy₀ : 0 < y) (hy₁ : y < 1) :
     ContinuousOn (fun x ↦ curvatureKernel x y) (Icc y 1) := by
@@ -206,15 +230,19 @@ private theorem curvatureKernel_continuousOn {y : ℝ} (hy₀ : 0 < y) (hy₁ : 
       x * y ≤ 1 * y := mul_le_mul_of_nonneg_right hx.2 hy₀.le
       _ = y := one_mul y
       _ < 1 := hy₁
-  have hneg : ContinuousAt (fun z : ℝ ↦ negMulLog (1 - z)) x :=
-    by simpa only [Function.comp_apply] using
-      continuous_negMulLog.continuousAt.comp (continuousAt_const.sub continuousAt_id)
-  have hlogOneAdd : ContinuousAt (fun z : ℝ ↦ log (1 + z)) x :=
-    by simpa only [Function.comp_apply] using
-      (continuousAt_log honeAdd).comp (continuousAt_const.add continuousAt_id)
+  have hconstOne : ContinuousAt (fun _ : ℝ ↦ (1 : ℝ)) x := continuousAt_const
+  have hneg : ContinuousAt (fun z : ℝ ↦ negMulLog (1 - z)) x := by
+    refine (continuous_negMulLog.continuousAt.comp
+      (hconstOne.sub continuousAt_id)).congr_of_eventuallyEq ?_
+    exact Filter.Eventually.of_forall fun _ ↦ by
+      simp only [Function.comp_apply, Pi.sub_apply, id_eq]
+  have hlogOneAdd : ContinuousAt (fun z : ℝ ↦ log (1 + z)) x := by
+    refine ((continuousAt_log honeAdd).comp
+      (hconstOne.add continuousAt_id)).congr_of_eventuallyEq ?_
+    exact Filter.Eventually.of_forall fun _ ↦ by
+      simp only [Function.comp_apply]
   have hlogX : ContinuousAt log x := continuousAt_log hx₀
   have hR : ContinuousAt curvatureR x := by
-    dsimp only [curvatureR]
     exact (hneg.add (continuousAt_id.mul hlogOneAdd)).add
       ((continuousAt_const.sub (continuousAt_const.mul continuousAt_id)).mul hlogX)
   have hproduct : ContinuousAt (fun z : ℝ ↦ z * y) x :=
@@ -326,7 +354,8 @@ theorem curvatureKernel_nonneg {x y : ℝ} (hy : 1 / 2 ≤ y) (hyx : y ≤ x)
     (div_nonneg (sub_nonneg.2 hx) hdenominator.le)
     (div_nonneg (sub_nonneg.2 hyx) hdenominator.le)
     (show (1 - x) / (1 - y) + (x - y) / (1 - y) = 1 by
-      field_simp [hdenominator.ne'])
+      field_simp [hdenominator.ne']
+      ring)
   dsimp only [smul_eq_mul] at hchord
   rw [hleft] at hchord
   have hpoint :
@@ -335,7 +364,7 @@ theorem curvatureKernel_nonneg {x y : ℝ} (hy : 1 / 2 ≤ y) (hyx : y ≤ x)
       (1 - x) / (1 - y) * y + (x - y) / (1 - y) * (1 : ℝ) =
           ((1 - x) * y) / (1 - y) + ((x - y) * 1) / (1 - y) := by
             rw [div_mul_eq_mul_div, div_mul_eq_mul_div]
-      _ = ((1 - x) * y + (x - y) * 1) / (1 - y) := div_add_div_same _ _ _
+      _ = ((1 - x) * y + (x - y) * 1) / (1 - y) := (add_div _ _ _).symm
       _ = x := (div_eq_iff hdenominator.ne').2 (by ring)
   rw [hpoint] at hchord
   have hweight : 0 ≤ (x - y) / (1 - y) :=
@@ -392,7 +421,7 @@ private theorem hasDerivAt_selfPairAdvantage {a s : ℝ}
   have hMarginalY := (hasDerivAt_binEntropy hy₀.ne' hy₁.ne).comp s hy
   have hindependent := ((hEntropyX.add (hEntropyXY.const_mul 2)).add hEntropyY).div_const 4
   have hmarginal := (hMarginalX.add hMarginalY).div_const 2
-  convert hindependent.sub hmarginal using 1
+  apply (hindependent.sub hmarginal).congr_deriv
   simp only [curvatureKernel, x, y]
   rw [curvatureR_eq hx₀ hx₁, curvatureR_eq hy₀ hy₁]
   simp only [entropyDerivative]

@@ -22,7 +22,6 @@ theorem endpointCertificateObjective_diagonal_le_one {a : ℝ}
     dsimp only [endpointCertificateWeight, weight]
     rw [show 1 + 1 - 2 * a = 2 * (1 - a) by ring]
     field_simp [hdenominator]
-    ring
   have hweightDiagonal : endpointCertificateWeight a a = 2 * weight := by
     dsimp only [endpointCertificateWeight, weight]
     rw [show 1 + a - 2 * a = 1 - a by ring]
@@ -72,8 +71,7 @@ private theorem singleLowOrbitYuGap_nonneg :
     classical
     simp [orbitYuGap, orbitIndependentEntropy, orbitMarginalEntropy,
       orbitDependentEntropy, finiteJoinEntropy, finiteExpectation, orbitMarginalWeight,
-      orbitMarginalPoint, singleLowOrbitLaw, diagonalPairObjective, Fintype.sum_prod_type,
-      Fintype.sum_bool]
+      orbitMarginalPoint, singleLowOrbitLaw, diagonalPairObjective, Fintype.sum_prod_type]
     ring_nf
   rw [hgap]
   exact diagonalPairObjective_point_nonneg

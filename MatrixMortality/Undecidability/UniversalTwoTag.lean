@@ -150,29 +150,28 @@ theorem symbolEquiv_symm_haltLabel :
 
 @[simp]
 theorem symbolEquiv_live : symbolEquiv liveSymbol = zeroLabel := by
-  simp only [symbolEquiv, Equiv.trans_apply]
-  rw [Equiv.swap_apply_left]
+  let raw : CockeMinsky.Symbol ReadState ≃ Fin alphabet :=
+    Fintype.equivFin (CockeMinsky.Symbol ReadState)
+  let exposeLive := Equiv.swap (raw liveSymbol) zeroLabel
+  change
+    (Equiv.swap (exposeLive (raw (.halt : CockeMinsky.Symbol ReadState))) haltLabel)
+        (exposeLive (raw liveSymbol)) = zeroLabel
+  rw [show exposeLive (raw liveSymbol) = zeroLabel by
+    exact Equiv.swap_apply_left _ _]
   apply Equiv.swap_apply_of_ne_of_ne
   · intro equality
     have exposed_eq :
-        (Equiv.swap
-            ((Fintype.equivFin (CockeMinsky.Symbol ReadState)) liveSymbol)
-            zeroLabel)
-            ((Fintype.equivFin (CockeMinsky.Symbol ReadState)) liveSymbol) =
-          (Equiv.swap
-            ((Fintype.equivFin (CockeMinsky.Symbol ReadState)) liveSymbol)
-            zeroLabel)
-            ((Fintype.equivFin (CockeMinsky.Symbol ReadState))
-              (CockeMinsky.Symbol.halt)) := by
-      rw [Equiv.swap_apply_left]
+        exposeLive (raw liveSymbol) =
+          exposeLive (raw (.halt : CockeMinsky.Symbol ReadState)) := by
+      rw [show exposeLive (raw liveSymbol) = zeroLabel by
+        exact Equiv.swap_apply_left _ _]
       exact equality
-    have halt_eq_live := (Equiv.swap _ _).injective exposed_eq
-    have := (Fintype.equivFin (CockeMinsky.Symbol ReadState)).injective halt_eq_live
+    have halt_eq_live := exposeLive.injective exposed_eq
+    have := raw.injective halt_eq_live
     simp [liveSymbol] at this
   · intro equality
     apply haltLabel_nonzero
-    rw [← equality]
-    rfl
+    simpa [zeroLabel] using congrArg Fin.val equality.symm
 
 /-- Relabel a Cocke–Minsky queue by `symbolEquiv`. -/
 noncomputable def encodeWord (word : List (CockeMinsky.Symbol ReadState)) :
@@ -200,8 +199,8 @@ private theorem initialWord_eq_frame (source : Nat.Partrec.Code) :
 
 /-- The fixed two-tag input compiler is primitive recursive in the source code. -/
 theorem initialWord_primrec : Primrec initialWord := by
-  letI : Primcodable ReadState := finitePrimcodable ReadState
-  letI : Primcodable (CockeMinsky.Symbol ReadState) :=
+  let _ : Primcodable ReadState := finitePrimcodable ReadState
+  let _ : Primcodable (CockeMinsky.Symbol ReadState) :=
     finitePrimcodable (CockeMinsky.Symbol ReadState)
   have encodedSource :
       Primrec fun source : Nat.Partrec.Code => [Encodable.encode source, 0] :=
@@ -210,7 +209,7 @@ theorem initialWord_primrec : Primrec initialWord := by
     UniversalTM0.binaryInput_primrec.comp encodedSource
   have stateOfBit :
       Primrec fun bit : Bool => (TM0ToRead.State.normal default bit : ReadState) :=
-    Primrec.dom_fintype _
+    Primrec.dom_finite _
   have stateRec : Primrec sourceState :=
     stateOfBit.comp (Primrec.list_headI.comp inputRec)
   have rightRec : Primrec sourceRight :=
@@ -220,7 +219,7 @@ theorem initialWord_primrec : Primrec initialWord := by
         match CockeMinsky.direction readMachine state with
         | .right => true
         | .left => false :=
-    Primrec.dom_fintype _
+    Primrec.dom_finite _
   have movesRightSource :
       Primrec fun source =>
         match CockeMinsky.direction readMachine (sourceState source) with
@@ -236,27 +235,27 @@ theorem initialWord_primrec : Primrec initialWord := by
   have anchorCell :
       Primrec fun state : ReadState =>
         CockeMinsky.cell (CockeMinsky.Symbol.anchor state) (CockeMinsky.Symbol.pad state) :=
-    Primrec.dom_fintype _
+    Primrec.dom_finite _
   have digitCell :
       Primrec fun state : ReadState =>
         CockeMinsky.cell (CockeMinsky.Symbol.digit state) (CockeMinsky.Symbol.pad state) :=
-    Primrec.dom_fintype _
+    Primrec.dom_finite _
   have boundaryCell :
       Primrec fun state : ReadState =>
         CockeMinsky.cell (CockeMinsky.Symbol.boundary state) (CockeMinsky.Symbol.pad state) :=
-    Primrec.dom_fintype _
+    Primrec.dom_finite _
   have boundaryDigitCell :
       Primrec fun state : ReadState =>
         CockeMinsky.cell
           (CockeMinsky.Symbol.boundaryDigit state) (CockeMinsky.Symbol.pad state) :=
-    Primrec.dom_fintype _
+    Primrec.dom_finite _
   have digitCells :
       Primrec fun source =>
         (List.replicate (sourceCounters source).1
           (CockeMinsky.cell
             (CockeMinsky.Symbol.digit (sourceState source))
-            (CockeMinsky.Symbol.pad (sourceState source)))).join :=
-    Primrec.list_join.comp <|
+            (CockeMinsky.Symbol.pad (sourceState source)))).flatten :=
+    Primrec.list_flatten.comp <|
       (MatrixMortality.Primrec.list_replicate).comp
         (Primrec.fst.comp countersRec) (digitCell.comp stateRec)
   have boundaryDigitCells :
@@ -264,8 +263,8 @@ theorem initialWord_primrec : Primrec initialWord := by
         (List.replicate (sourceCounters source).2
           (CockeMinsky.cell
             (CockeMinsky.Symbol.boundaryDigit (sourceState source))
-            (CockeMinsky.Symbol.pad (sourceState source)))).join :=
-    Primrec.list_join.comp <|
+            (CockeMinsky.Symbol.pad (sourceState source)))).flatten :=
+    Primrec.list_flatten.comp <|
       (MatrixMortality.Primrec.list_replicate).comp
         (Primrec.snd.comp countersRec) (boundaryDigitCell.comp stateRec)
   have frameRec :
@@ -279,7 +278,7 @@ theorem initialWord_primrec : Primrec initialWord := by
             simp only [CockeMinsky.frame, CockeMinsky.cells, List.append_assoc]
   have symbolRec :
       Primrec fun symbol : CockeMinsky.Symbol ReadState => symbolEquiv symbol :=
-    Primrec.dom_fintype _
+    Primrec.dom_finite _
   exact
     (Primrec.list_map frameRec (symbolRec.comp₂ Primrec₂.right)).of_eq fun source =>
       (initialWord_eq_frame source).symm

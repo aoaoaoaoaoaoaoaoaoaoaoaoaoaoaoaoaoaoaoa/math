@@ -45,8 +45,7 @@ theorem primePower_ne_zero
 theorem primePower_valuation
     {prime : Nat} [prime_fact : Fact prime.Prime] (exponent : Nat) :
     padicValRat prime ((prime : ℚ) ^ exponent) = exponent := by
-  rw [padicValRat.pow (p := prime) (q := (prime : ℚ))
-      (Nat.cast_ne_zero.mpr prime_fact.out.ne_zero) (k := exponent),
+  rw [padicValRat.pow (p := prime) (prime : ℚ) (k := exponent),
     padicValRat.self prime_fact.out.one_lt]
   simp
 
@@ -357,8 +356,10 @@ theorem odd_prime_of_adjacent_units
     change (padicValInt 2 (numerator - (denominator : ℤ)) : ℤ) -
       padicValNat 2 denominator = 0 at unit_valuation
     rw [denominator_valuation_zero] at unit_valuation
-    norm_num at unit_valuation
-    exact_mod_cast unit_valuation
+    have cast_valuation :
+        (padicValInt 2 (numerator - (denominator : ℤ)) : ℤ) = 0 := by
+      simpa only [Nat.cast_zero, sub_zero] using unit_valuation
+    exact Int.ofNat_inj.mp cast_valuation
   have difference_even : Even (numerator - (denominator : ℤ)) :=
     numerator_odd.sub_odd denominator_odd
   have difference_valuation_positive :

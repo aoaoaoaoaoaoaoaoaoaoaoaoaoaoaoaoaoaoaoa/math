@@ -136,7 +136,7 @@ theorem evaluationFrame_transpose_mulVec_massReset
   fin_cases i
   all_goals
     simp [evaluationFrame, massResetDisplacement, Matrix.mulVec,
-      Matrix.dotProduct, Fin.sum_univ_succ]
+      dotProduct, Fin.sum_univ_succ]
   all_goals ring
 
 /-- Projective shadow carried by a nonvertical evaluation jet. -/

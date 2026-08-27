@@ -15,12 +15,29 @@ noncomputable def orbitCrossKernel {ι : Type*} (left right : ι → ℝ) (i j :
     + binEntropy (join (right i) (left j))
     + binEntropy (join (right i) (right j))) / 4
 
+@[simp] private theorem orbitMean_const_unit {ι : Type*} (left right : ι → ℝ) (i : ι) :
+    orbitMean (Function.const Unit (left i)) (Function.const Unit (right i)) () =
+      orbitMean left right i := by
+  simp [orbitMean]
+
+@[simp] private theorem orbitMarginalKernel_const_unit {ι : Type*}
+    (left right : ι → ℝ) (i : ι) :
+    orbitMarginalKernel (Function.const Unit (left i))
+        (Function.const Unit (right i)) () =
+      orbitMarginalKernel left right i := rfl
+
+@[simp] private theorem orbitCrossKernel_const_unit {ι : Type*}
+    (left right : ι → ℝ) (i : ι) :
+    orbitCrossKernel (Function.const Unit (left i))
+        (Function.const Unit (right i)) () () =
+      orbitCrossKernel left right i i := rfl
+
 theorem orbitMarginalEntropy_eq_kernel_sum {ι : Type*} [Fintype ι]
     {left right : ι → ℝ} {mean : ℝ} (law : FiniteOrbitLaw left right mean) :
     orbitMarginalEntropy law = ∑ i, law.weight i * orbitMarginalKernel left right i := by
   classical
   simp [orbitMarginalEntropy, finiteExpectation, orbitMarginalWeight,
-    orbitMarginalPoint, orbitMarginalKernel, Fintype.sum_prod_type, Fintype.sum_bool]
+    orbitMarginalPoint, orbitMarginalKernel, Fintype.sum_prod_type]
   apply sum_congr rfl
   intro i _
   ring
@@ -31,7 +48,7 @@ theorem orbitIndependentEntropy_eq_kernel_sum {ι : Type*} [Fintype ι]
       ∑ i, ∑ j, law.weight i * law.weight j * orbitCrossKernel left right i j := by
   classical
   simp [orbitIndependentEntropy, finiteJoinEntropy, orbitMarginalWeight,
-    orbitMarginalPoint, orbitCrossKernel, Fintype.sum_prod_type, Fintype.sum_bool,
+    orbitMarginalPoint, orbitCrossKernel, Fintype.sum_prod_type,
     join_comm]
   apply sum_congr rfl
   intro i _
@@ -275,8 +292,7 @@ theorem orbitCrossKernel_sorted {ι : Type*} (left right : ι → ℝ) (i j : ι
   rcases le_total (left i) (right i) with hi | hi <;>
     rcases le_total (left j) (right j) with hj | hj
   all_goals
-    simp [orbitCrossKernel, sortedOrbitLeft, sortedOrbitRight, min_eq_left,
-      min_eq_right, max_eq_left, max_eq_right, hi, hj, join_comm]
+    simp [orbitCrossKernel, sortedOrbitLeft, sortedOrbitRight, hi, hj, join_comm]
   all_goals ring
 
 theorem dependentCost_sorted {ι : Type*} (left right : ι → ℝ) (i : ι) :

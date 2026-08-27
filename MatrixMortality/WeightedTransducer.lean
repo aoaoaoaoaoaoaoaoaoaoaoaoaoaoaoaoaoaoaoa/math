@@ -62,28 +62,33 @@ theorem wordProduct_apply (machine : WeightedTransducer State Letter Index R)
       by_cases state_eq : start = finish
       · subst finish
         simp [wordProduct, Matrix.one_apply]
-      · simp [wordProduct, Matrix.one_apply, state_eq]
+      · simp [wordProduct, state_eq]
   | cons letter word induction =>
       rw [wordProduct_cons, Matrix.mul_apply]
       rw [Fintype.sum_prod_type]
       by_cases final_eq : (machine.run (machine.next start letter) word).1 = finish
-      · simp only [generator, if_pos final_eq, run_cons]
+      · simp only [generator, run_cons]
+        simp only [Matrix.mul_apply]
         rw [Finset.sum_eq_single (machine.next start letter)]
-        · simp only [if_pos, Matrix.mul_apply]
+        · simp only [if_pos]
+          simp only [final_eq]
           apply Finset.sum_congr rfl
           intro index _
           rw [induction]
-          simp [final_eq]
+          rw [if_pos final_eq]
         · intro state _ state_ne
           simp [Ne.symm state_ne]
         · intro state_absent
           exact (state_absent (Finset.mem_univ _)).elim
-      · simp only [generator, if_neg final_eq, run_cons]
+      · simp only [generator, run_cons]
         rw [Finset.sum_eq_single (machine.next start letter)]
-        · apply Finset.sum_eq_zero
+        · simp only [if_pos]
+          simp only [final_eq]
+          apply Finset.sum_eq_zero
           intro index _
           rw [induction]
-          simp [final_eq]
+          rw [if_neg final_eq]
+          simp
         · intro state _ state_ne
           simp [Ne.symm state_ne]
         · intro state_absent

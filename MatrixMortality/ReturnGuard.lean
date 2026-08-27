@@ -137,6 +137,7 @@ theorem output_mul_outputRightInverse
     norm_num [output, outputRightInverse, drift, Matrix.mul_apply, Matrix.one_apply,
       Fin.sum_univ_succ]
   all_goals field_simp [difference_ne]
+  all_goals ring
 
 /-- Nonzero drift gives the return output full row rank. -/
 theorem output_rank
@@ -165,10 +166,11 @@ theorem cut_rank
       calc
         output center reset =
             (1 : Square (Fin 2) ℚ) * output center reset := by simp
-        _ = inputLeftInverse * input * output center reset := by
-          rw [inputLeftInverse_mul_input]
-        _ = inputLeftInverse * cut center reset := by
-          simp [cut, Matrix.mul_assoc]
+        _ = (inputLeftInverse * input) * output center reset :=
+          (congrArg (fun matrix : Square (Fin 2) ℚ => matrix * output center reset)
+            inputLeftInverse_mul_input).symm
+        _ = inputLeftInverse * (input * output center reset) := Matrix.mul_assoc _ _ _
+        _ = inputLeftInverse * cut center reset := rfl
     have lower : (output center reset).rank ≤ (cut center reset).rank := by
       rw [output_factor]
       exact Matrix.rank_mul_le_right inputLeftInverse (cut center reset)
@@ -184,8 +186,8 @@ theorem returnMatrix_eq_transfer
   fin_cases i <;> fin_cases j
   all_goals
     simp [returnAt, ReturnFamily.returnMatrix, ambient, input, output, transfer,
-      Matrix.diagonal_pow, Matrix.mul_apply, Matrix.vecMul, Matrix.dotProduct,
-      Matrix.diagonal_apply, Fin.sum_univ_succ, pow_mul]
+      Matrix.diagonal_pow, Matrix.mul_apply, Matrix.vecMul, dotProduct,
+      Matrix.diagonal_apply, Fin.sum_univ_succ]
   all_goals ring
 
 /-- Determinant of one two-scale return. -/
@@ -238,10 +240,10 @@ theorem positiveTransfer_isUnit
   · positivity
   · have power_gt_one : (1 : ℚ) < (prime : ℚ) ^ (wait + 1) := by
       have prime_gt_one : (1 : ℚ) < prime := by exact_mod_cast prime_two
-      exact one_lt_pow prime_gt_one (by omega)
+      exact one_lt_pow₀ prime_gt_one (by omega)
     have inverse_power_lt_one :
         ((prime : ℚ)⁻¹) ^ (wait + 1) < 1 := by
-      simpa [inv_pow] using inv_lt_one power_gt_one
+      simpa [inv_pow] using inv_lt_one_of_one_lt₀ power_gt_one
     linarith
 
 /-- Complete arbitrary-word normal form for the physical amalgamated pair. -/
@@ -253,8 +255,17 @@ theorem physical_isMortal_iff_positiveBridge
         (ReturnFamily.pairGenerator
           (ambient (prime : ℚ) depth) (cut center reset)) ↔
       ∃ waits, positiveBridge (prime : ℚ) depth center reset waits = 0 := by
-  simpa [cut, positiveBridge, positiveTransfer, returnAt] using
-    ReturnFamily.pairGenerator_isMortal_iff_positiveBridge
+  change
+    IsMortal
+        (ReturnFamily.pairGenerator
+          (ambient (prime : ℚ) depth) (input * output center reset)) ↔
+      ∃ waits,
+        bridgeScalar ![reset, 1] ![1, -1]
+          (wordProduct
+            (fun wait => ReturnFamily.returnMatrix
+              (ambient (prime : ℚ) depth) input (output center reset) (wait + 1))
+            waits) = 0
+  exact ReturnFamily.pairGenerator_isMortal_iff_positiveBridge
       (ambient (prime : ℚ) depth) input (output center reset)
       inputLeftInverse (outputRightInverse center reset)
       ![reset, 1] ![1, -1]
@@ -340,7 +351,7 @@ theorem guardTransfer_isUnit
   apply isUnit_iff_ne_zero.mpr
   refine mul_ne_zero (mul_ne_zero drift_ne_zero (by positivity)) ?_
   have power_gt_one : (1 : ℚ) < (prime : ℚ) ^ wait := by
-    exact one_lt_pow (by exact_mod_cast prime_two) wait_positive.ne'
+    exact one_lt_pow₀ (by exact_mod_cast prime_two) wait_positive.ne'
   linarith
 
 /-- The affine chart of the guard return has the displayed numerator and denominator. -/
@@ -397,7 +408,7 @@ theorem projectiveStep_some
   rw [projectiveStep, guardTransfer_eq
     prime depth center reset wait prime_ne_zero depth_positive]
   simp [ProjectiveLine.act, ProjectiveLine.denominator, ProjectiveLine.numerator,
-    projectiveDenominator, projectiveNumerator, denominator_ne]
+    projectiveDenominator, projectiveNumerator]
   ring_nf
   simp [denominator_ne]
 
@@ -424,14 +435,14 @@ theorem reachableCertificate_det (prime : ℚ) (depth : Nat) :
     (reachableCertificate prime depth).det =
       prime ^ (depth - 1) - prime⁻¹ := by
   rw [Matrix.det_fin_three]
-  norm_num [reachableCertificate, Matrix.vecHead, Matrix.vecTail]
+  simp [reachableCertificate]
 
 theorem observableCertificate_det
     (prime : ℚ) (depth : Nat) (center reset : ℚ) :
     (observableCertificate prime depth center reset).det =
       center * drift center reset * (prime⁻¹ - 1) := by
   rw [Matrix.det_fin_three]
-  norm_num [observableCertificate, Matrix.vecHead, Matrix.vecTail]
+  simp [observableCertificate]
   ring
 
 theorem coefficientPrefixRows_eq

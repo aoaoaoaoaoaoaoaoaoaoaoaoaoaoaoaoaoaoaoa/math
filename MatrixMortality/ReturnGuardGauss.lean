@@ -66,7 +66,7 @@ def DecodedStep (parameters : Parameters) (source target : ℚ) : Prop :=
       residualStep parameters wait source = target
 
 /-- Terminal reachability in decoded residual coordinates. -/
-def DecodedReachable (parameters : Parameters) : Prop :=
+abbrev DecodedReachable (parameters : Parameters) : Prop :=
   Relation.TransGen (DecodedStep parameters) 1 (terminalResidual parameters)
 
 /-- Iterated inverse branches, written in forward address order. -/
@@ -134,12 +134,18 @@ theorem residualBranchCenter_sub_root_hasValue
         (parameters.center *
           (parameters.center - parameters.prime ^ wait)) :=
     mul_hasValue parameters.center_unit branch_unit
-  have quotient_value :=
-    div_hasValue numerator_value denominator_unit
+  have quotient_value :
+      HasValue parameters.prime
+        (-drift parameters.center parameters.reset *
+          parameters.prime ^ wait /
+          (parameters.center *
+            (parameters.center - parameters.prime ^ wait))) wait := by
+    simpa only [sub_zero] using
+      div_hasValue numerator_value denominator_unit
   convert quotient_value using 1
   simp [residualBranchCenter, residualRoot]
   field_simp [parameters.center_unit.1, branch_unit.1]
-  ring
+  ring_nf
 
 /-- Denominator of the inverse branch. -/
 def inverseResidualDenominator
@@ -309,7 +315,8 @@ theorem centerTransform_denominator_inverseResidual
       _
   field_simp [inverse_denominator_unit.1]
   simp [inverseResidualDenominator]
-  ring
+  ring_nf
+  exact Or.inl trivial
 
 theorem centerTransform_denominator_inverseResidual_isUnit
     (parameters : Parameters) (wait : Nat) (wait_positive : 0 < wait)
@@ -378,7 +385,6 @@ theorem residualStep_inverseResidual
       (primePower_positive parameters wait wait_positive)).1
   field_simp [inverse_denominator_unit.1, transform_denominator_unit.1,
     power_ne, parameters.drift_ne_zero, power_sub_one_ne]
-  ring
 
 /-- The residual-map numerator is the branch displacement times its unit coefficient. -/
 theorem centerTransform_numerator_eq_branchDisplacement
@@ -485,62 +491,35 @@ theorem inverseResidual_residualStep
   have transform_denominator_unit :=
     centerTransform_denominator_isUnit_of_branch
       parameters wait residual branch
-  rw [residualStep_eq parameters wait residual transform_denominator_unit.1]
+  have target_unit :=
+    residualStep_isUnit_of_branch parameters wait residual branch
+  have inverse_denominator_ne :=
+    (inverseResidualDenominator_isUnit parameters wait branch.1
+      (residualStep parameters wait residual) target_unit).1
   have power_ne :
       (parameters.prime : ℚ) ^ (parameters.depth * wait) ≠ 0 :=
     primePower_ne_zero parameters.prime_prime _
-  have power_sub_one_ne :
-      (1 : ℚ) - parameters.prime ^ wait ≠ 0 :=
-    (one_sub_positive
-      (primePower_positive parameters wait branch.1)).1
-  have collapsed_ne :
-      drift parameters.center parameters.reset *
-          parameters.prime ^ (parameters.depth * wait) -
-        drift parameters.center parameters.reset *
-            parameters.prime ^ (parameters.depth * wait) *
-          parameters.prime ^ wait ≠ 0 := by
-    rw [show
-      drift parameters.center parameters.reset *
-            parameters.prime ^ (parameters.depth * wait) -
-          drift parameters.center parameters.reset *
-              parameters.prime ^ (parameters.depth * wait) *
-            parameters.prime ^ wait =
-        drift parameters.center parameters.reset *
-          parameters.prime ^ (parameters.depth * wait) *
-          (1 - parameters.prime ^ wait) by ring]
-    exact mul_ne_zero
-      (mul_ne_zero parameters.drift_ne_zero power_ne) power_sub_one_ne
-  simp [inverseResidual, inverseResidualDenominator]
-  field_simp [transform_denominator_unit.1, power_ne,
-    parameters.drift_ne_zero, power_sub_one_ne]
-  rw [show
+  have scaled_denominator_ne :
+      parameters.prime ^ (parameters.depth * wait) *
+          ((parameters.center - 1) * residual +
+            drift parameters.center parameters.reset) ≠ 0 :=
+    mul_ne_zero power_ne transform_denominator_unit.1
+  have reordered_denominator_ne :
+      residual * (parameters.center - 1) +
+          drift parameters.center parameters.reset ≠ 0 := by
+    convert transform_denominator_unit.1 using 1
+    ring
+  change
       drift parameters.center parameters.reset *
           (parameters.prime ^ (parameters.depth * wait) *
-              ((parameters.center - parameters.prime ^ wait) * residual +
-                drift parameters.center parameters.reset) -
-            parameters.prime ^ (parameters.depth * wait) *
-              ((parameters.center - 1) * residual +
-                drift parameters.center parameters.reset)) =
-        (drift parameters.center parameters.reset *
-              parameters.prime ^ (parameters.depth * wait) -
-            drift parameters.center parameters.reset *
-                parameters.prime ^ (parameters.depth * wait) *
-              parameters.prime ^ wait) * residual by ring]
-  rw [show
-      (parameters.center - parameters.prime ^ wait) *
-            (parameters.prime ^ (parameters.depth * wait) *
-              ((parameters.center - 1) * residual +
-                drift parameters.center parameters.reset)) -
-          (parameters.center - 1) *
-              parameters.prime ^ (parameters.depth * wait) *
-            ((parameters.center - parameters.prime ^ wait) * residual +
-              drift parameters.center parameters.reset) =
-        drift parameters.center parameters.reset *
-            parameters.prime ^ (parameters.depth * wait) -
-          drift parameters.center parameters.reset *
-              parameters.prime ^ (parameters.depth * wait) *
-            parameters.prime ^ wait by ring]
-  exact mul_div_cancel_left₀ residual collapsed_ne
+              residualStep parameters wait residual - 1) /
+        inverseResidualDenominator parameters wait
+          (residualStep parameters wait residual) = residual
+  rw [div_eq_iff inverse_denominator_ne]
+  rw [residualStep_eq parameters wait residual transform_denominator_unit.1]
+  unfold inverseResidualDenominator
+  field_simp [scaled_denominator_ne, reordered_denominator_ne]
+  ring
 
 /-- Exact branch spheres are precisely the images of the unit shell under one inverse branch. -/
 theorem residualBranch_iff_exists_inverseResidual
@@ -604,6 +583,7 @@ theorem stateOfResidual_residualOfState
   have drift_ne := parameters.drift_ne_zero
   simp [residualOfState, stateOfResidual]
   field_simp [drift_ne]
+  ring
 
 /-- Canonical equivalence between guarded states and decoded residuals. -/
 def residualEquiv (parameters : Parameters) : ℚ ≃ ℚ where

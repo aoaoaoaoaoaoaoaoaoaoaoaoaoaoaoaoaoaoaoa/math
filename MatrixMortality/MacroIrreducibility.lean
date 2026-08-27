@@ -31,7 +31,7 @@ private theorem word_length_le_spell_length {α δ : Type*} (side : α → List 
   | nil => simp [spell]
   | cons letter word ih =>
       have letter_length : 0 < (side letter).length :=
-        List.length_pos.mpr (nonerasing letter)
+        List.length_pos_of_ne_nil (nonerasing letter)
       change (letter :: word).length ≤ (side letter ++ spell side word).length
       simp only [List.length_cons, List.length_append]
       omega
@@ -45,9 +45,9 @@ private theorem exists_eq_singleton_of_spell_eq_singleton {α δ : Type*}
   have word_ne_nil : word ≠ [] := by
     intro word_nil
     simp [word_nil, spell] at exact
-  have length_pos : 0 < word.length := List.length_pos.mpr word_ne_nil
+  have length_pos : 0 < word.length := List.length_pos_of_ne_nil word_ne_nil
   have length_eq : word.length = 1 := by omega
-  exact List.length_eq_one.mp length_eq
+  exact List.length_eq_one_iff.mp length_eq
 
 private theorem image_length_le_spell_length_of_mem {α δ : Type*}
     (side : α → List δ) {letter : α} {word : List α} (member : letter ∈ word) :
@@ -81,12 +81,12 @@ private theorem eq_singleton_of_mem_of_spell_eq_image {α δ : Type*}
         have tail_nil : tail = [] := by
           by_contra tail_ne_nil
           have positive : 0 < (spell side tail).length := by
-            have : 0 < tail.length := List.length_pos.mpr tail_ne_nil
+            have : 0 < tail.length := List.length_pos_of_ne_nil tail_ne_nil
             exact this.trans_le (word_length_le_spell_length side nonerasing tail)
           simp [tail_spell_nil] at positive
         simp [tail_nil]
       · have head_length_pos : 0 < (side head).length :=
-          List.length_pos.mpr (nonerasing head)
+          List.length_pos_of_ne_nil (nonerasing head)
         have image_le : (side letter).length ≤ (spell side tail).length :=
           image_length_le_spell_length_of_mem side member
         have length_exact :
@@ -151,7 +151,7 @@ theorem ExactNearyMacroFactorization.four_le_card {C : Type*} [Fintype C]
       false ∈ spell factorization.upper (factorization.code (.rule .b)) := by
     rw [factorization.upper_exact]
     simp [nearyUpper, tagCode, β_pos.ne']
-  obtain ⟨image, image_mem, false_mem_image⟩ := List.mem_join.mp false_mem_rule_b
+  obtain ⟨image, image_mem, false_mem_image⟩ := List.mem_flatten.mp false_mem_rule_b
   obtain ⟨w, w_mem, image_eq⟩ := List.mem_map.mp image_mem
   subst image
   have w_ne_x : w ≠ x := by

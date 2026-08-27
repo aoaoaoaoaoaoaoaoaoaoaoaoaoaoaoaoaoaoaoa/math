@@ -44,7 +44,7 @@ theorem integralResidualTransfer_mulVec
             driftNumerator * denominator)] := by
   ext i
   fin_cases i <;>
-    simp [integralResidualTransfer, Matrix.mulVec, Matrix.dotProduct,
+    simp [integralResidualTransfer, Matrix.mulVec, dotProduct,
       Fin.sum_univ_succ]
   ring
 
@@ -117,7 +117,10 @@ theorem quotientTransition_point_of_image_ne_zero
     (image_ne : matrix *ᵥ ProjectiveLine.ray point ≠ 0) :
     quotientTransition matrix (some point) =
       some (ProjectiveLine.act matrix point) := by
-  simp [quotientTransition, image_ne]
+  classical
+  change (if matrix *ᵥ ProjectiveLine.ray point = 0 then none
+    else some (ProjectiveLine.act matrix point)) = _
+  rw [if_neg image_ne]
 
 theorem quotientTransition_point_of_image_eq_zero
     {K : Type*} [Field K] (matrix : Square (Fin 2) K)
@@ -139,7 +142,7 @@ theorem quotientTransition_firstColumn
         z • ![top, bottom] := by
     ext i
     fin_cases i <;>
-      simp [matrix, ProjectiveLine.ray, Matrix.mulVec, Matrix.dotProduct,
+      simp [matrix, ProjectiveLine.ray, Matrix.mulVec, dotProduct,
         Fin.sum_univ_succ]
     all_goals ring
   have image_ne :
@@ -223,7 +226,7 @@ theorem quotientTransfer_mulVec_of_integralStep
   rw [quotientTransfer, integralResidualTransfer_mulVec]
   ext i
   fin_cases i
-  · simp only [Matrix.cons_val_zero, Pi.smul_apply, smul_eq_mul]
+  · simp only [Pi.smul_apply, smul_eq_mul]
     have equality :
         (centerNumerator - scale * (prime : ℤ) ^ wait) * numerator +
             driftNumerator * denominator =
@@ -233,8 +236,7 @@ theorem quotientTransfer_mulVec_of_integralStep
           simpa [integralStepNumerator] using step.1.symm
         _ = _ := by rw [numerator_reduced]; ring
     simpa using congrArg (fun value : ℤ => (value : ZMod factor)) equality
-  · simp only [Matrix.cons_val_one, Matrix.cons_val_zero, Pi.smul_apply,
-      smul_eq_mul]
+  · simp only [Pi.smul_apply, smul_eq_mul]
     have equality :
         (prime : ℤ) ^ (depth * wait) *
             ((centerNumerator - scale) * numerator +
@@ -290,7 +292,7 @@ theorem quotientTransition_integralStep_of_not_dvd_common
   have prime_ne : (prime : ZMod factor) ≠ 0 := by
     intro prime_zero
     have divides : factor ∣ prime :=
-      (ZMod.natCast_zmod_eq_zero_iff_dvd prime factor).mp prime_zero
+      (ZMod.natCast_eq_zero_iff prime factor).mp prime_zero
     exact factor_not_dvd_prime (by exact_mod_cast divides)
   have common_ne : (common : ZMod factor) ≠ 0 := by
     intro common_zero
@@ -423,7 +425,7 @@ theorem quotientTransition_integralStep_eq_cancelled_iff
         source_primitive step numerator_reduced denominator_reduced
         reduced_primitive factor_not_dvd_prime survives
     rw [cancelled] at follows
-    exact Option.noConfusion follows
+    simp at follows
   · exact
       quotientTransition_integralStep_of_dvd_common
         source_primitive step numerator_reduced denominator_reduced
@@ -822,7 +824,7 @@ theorem no_primitiveExecution_of_drift_divisor
   have base_ne : (prime : ZMod factor) ≠ 0 := by
     intro base_zero
     have factor_dvd_prime : factor ∣ prime :=
-      (ZMod.natCast_zmod_eq_zero_iff_dvd prime factor).mp base_zero
+      (ZMod.natCast_eq_zero_iff prime factor).mp base_zero
     exact primitivePrimeDivisor_not_dvd_base_int primitive
       (by exact_mod_cast factor_dvd_prime)
   exact no_primitiveExecution_of_quotientInvariant

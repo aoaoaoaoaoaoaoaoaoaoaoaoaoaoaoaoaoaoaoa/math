@@ -107,7 +107,7 @@ noncomputable def independentBernoulliCoupling (p q : ℝ)
   first_eq := first_product _ _
   second_eq := second_product _ _
   or_true := by
-    simp [Fintype.sum_prod_type, Fintype.sum_bool, product, join]
+    simp [Fintype.sum_prod_type, product, join]
     ring
 
 theorem independentBernoulliCoupling_swap_weight (p q : ℝ)
@@ -166,11 +166,11 @@ noncomputable def dependentBernoulliCoupling (p q : ℝ)
       or_true := ?_ }
   · apply ext
     funext b
-    cases b <;> simp [first_weight, joint, bernoulli, Fintype.sum_bool]
+    cases b <;> simp [first_weight, joint, bernoulli]
   · apply ext
     funext b
-    cases b <;> simp [second_weight, joint, bernoulli, Fintype.sum_bool]
-  · simp [joint, Fintype.sum_prod_type, Fintype.sum_bool]
+    cases b <;> simp [second_weight, joint, bernoulli]
+  · simp [joint, d, Fintype.sum_prod_type]
 
 theorem dependentBernoulliCoupling_swap_weight (p q : ℝ)
     (hp : p ∈ Icc (0 : ℝ) 1) (hq : q ∈ Icc (0 : ℝ) 1) (x y : Bool) :
@@ -202,9 +202,8 @@ noncomputable def SymmetricCoupling.appendBool
     classical
     cases x <;> cases y <;>
       simp only [joint, map_weight, raw, extend, regroup, Fintype.sum_prod_type,
-        Fintype.sum_bool, Bool.false_or, Bool.true_or, Bool.or_false, Bool.or_true,
-        Bool.false_eq_true, Bool.true_eq_false, if_false, if_true, Prod.mk.injEq,
-        true_and, and_true, false_and, and_false, zero_add, add_zero]
+        Fintype.sum_bool, Bool.false_eq_true, Bool.true_eq_false, if_false, Prod.mk.injEq,
+        and_true, false_and, and_false, zero_add, add_zero]
     all_goals exact sum_pair_indicator _ u v
   refine
     { joint := joint
@@ -285,9 +284,8 @@ theorem SymmetricCoupling.appendBool_joint_weight
   classical
   cases x <;> cases y <;>
     simp only [SymmetricCoupling.appendBool, map_weight, extend, Fintype.sum_prod_type,
-      Fintype.sum_bool, Bool.false_or, Bool.true_or, Bool.or_false, Bool.or_true,
-      Bool.false_eq_true, Bool.true_eq_false, if_false, if_true, Prod.mk.injEq,
-      true_and, and_true, false_and, and_false, zero_add, add_zero]
+      Fintype.sum_bool, Bool.false_eq_true, Bool.true_eq_false, if_false, Prod.mk.injEq,
+      and_true, false_and, and_false, zero_add, add_zero]
   all_goals exact sum_pair_indicator _ u v
 
 theorem SymmetricCoupling.appendBool_independent_joint
@@ -297,7 +295,7 @@ theorem SymmetricCoupling.appendBool_independent_joint
       (fun u v ↦ independentBernoulliCoupling
         (source.successParameter u) (source.successParameter v)
         (source.successParameter_mem u) (source.successParameter_mem v))
-      (fun u v x y ↦ independentBernoulliCoupling_swap_weight _ _ _ _ x y)).joint =
+      (fun _ _ x y ↦ independentBernoulliCoupling_swap_weight _ _ _ _ x y)).joint =
       (SymmetricCoupling.independent source).joint := by
   apply ext
   funext z

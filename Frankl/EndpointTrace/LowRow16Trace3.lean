@@ -29,11 +29,13 @@ private def lowRow16Cell10RootTree : Subdivision :=
   (.leaf .interval)
   (.leaf .interval))))
 
+set_option maxHeartbeats 1000000 in
+-- Kernel normalization of this reflected subdivision exceeds Lean's default heartbeat budget.
 private theorem lowRow16Cell10RootTree_certified :
     certifySubdivision 12 64 32 lowRow16Cell10RootRectangle
       CertificateObjective.endpointExpression lowRow16Cell10RootTree =
         some () := by
-  rfl
+  close_endpoint_certificate
 
 /-- One static reflected endpoint-certificate chunk. -/
 theorem lowRow16Cell10Root_nonneg {a q : ℝ}
@@ -77,11 +79,13 @@ private def lowRow16Cell11RootTree : Subdivision :=
   (.leaf .interval)
   (.leaf .interval)))
 
+set_option maxHeartbeats 1000000 in
+-- Kernel normalization of this reflected subdivision exceeds Lean's default heartbeat budget.
 private theorem lowRow16Cell11RootTree_certified :
     certifySubdivision 12 64 32 lowRow16Cell11RootRectangle
       CertificateObjective.endpointExpression lowRow16Cell11RootTree =
         some () := by
-  rfl
+  close_endpoint_certificate
 
 /-- One static reflected endpoint-certificate chunk. -/
 theorem lowRow16Cell11Root_nonneg {a q : ℝ}
@@ -125,11 +129,13 @@ private def lowRow16Cell12RootTree : Subdivision :=
   (.leaf .interval)
   (.leaf .interval)))
 
+set_option maxHeartbeats 1000000 in
+-- Kernel normalization of this reflected subdivision exceeds Lean's default heartbeat budget.
 private theorem lowRow16Cell12RootTree_certified :
     certifySubdivision 12 64 32 lowRow16Cell12RootRectangle
       CertificateObjective.endpointExpression lowRow16Cell12RootTree =
         some () := by
-  rfl
+  close_endpoint_certificate
 
 /-- One static reflected endpoint-certificate chunk. -/
 theorem lowRow16Cell12Root_nonneg {a q : ℝ}

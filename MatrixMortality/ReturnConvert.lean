@@ -86,8 +86,8 @@ theorem returnMatrix_eq_transfer {R : Type*} [CommRing R]
   all_goals
     simp [ReturnFamily.returnMatrix, ambient, input, output, transfer,
       ReturnSquare.input, ReturnSquare.output,
-      Matrix.diagonal_pow, Matrix.mul_apply, Matrix.vecMul, Matrix.dotProduct,
-      Matrix.diagonal_apply, Fin.sum_univ_succ, pow_mul]
+      Matrix.diagonal_pow, Matrix.mul_apply, Matrix.vecMul, dotProduct,
+      Matrix.diagonal_apply, Fin.sum_univ_succ]
   all_goals ring
 
 /-- Determinant of one return. -/
@@ -125,8 +125,9 @@ theorem separatedPositiveTransfer_comp_natEquivOption
 private theorem two_le_pow_succ {q : ℤ} (hq : 2 ≤ q) (n : Nat) :
     2 ≤ q ^ (n + 1) := by
   rw [pow_succ]
-  have one_le_power : 1 ≤ q ^ n :=
-    one_le_pow_of_one_le (by omega) n
+  have one_le_power : 1 ≤ q ^ n := by
+    have : 0 < q ^ n := pow_pos (by omega) n
+    omega
   nlinarith [mul_le_mul_of_nonneg_right one_le_power (by omega : 0 ≤ q)]
 
 /-- Every positive return is invertible at integral scales at least two. -/
@@ -172,8 +173,15 @@ theorem physical_isMortal_iff_positiveBridge
     (p q : ℤ) (c : ℚ) (hp : 2 ≤ p) (hq : 2 ≤ q) (hc : c + 1 ≠ 0) :
     IsMortal (ReturnFamily.pairGenerator (ambient (p : ℚ) (q : ℚ)) (cut c)) ↔
       ∃ waits, positiveBridge (p : ℚ) (q : ℚ) c waits = 0 := by
-  simpa [cut, positiveBridge, positiveTransfer, returnMatrix_eq_transfer] using
-    ReturnFamily.pairGenerator_isMortal_iff_positiveBridge
+  change
+    IsMortal
+        (ReturnFamily.pairGenerator (ambient (p : ℚ) (q : ℚ)) (input * output c)) ↔
+      ∃ waits,
+        bridgeScalar ![1, 1] ![c, 1]
+          (wordProduct
+            (fun wait => transfer c ((p : ℚ) ^ (wait + 1)) ((q : ℚ) ^ (wait + 1)))
+            waits) = 0
+  have reduction := ReturnFamily.pairGenerator_isMortal_iff_positiveBridge
       (ambient (p : ℚ) (q : ℚ)) input (output c)
       ReturnSquare.inputLeftInverse (ReturnSquare.outputRightInverse c)
       ![1, 1] ![c, 1]
@@ -188,6 +196,15 @@ theorem physical_isMortal_iff_positiveBridge
         exact positiveTransfer_isUnit p q c hp hq hc wait)
       (by simp)
       (by simp)
+  constructor
+  · intro mortal
+    obtain ⟨waits, vanishes⟩ := reduction.mp mortal
+    refine ⟨waits, ?_⟩
+    simpa only [returnMatrix_eq_transfer] using vanishes
+  · rintro ⟨waits, vanishes⟩
+    apply reduction.mpr
+    refine ⟨waits, ?_⟩
+    simpa only [returnMatrix_eq_transfer] using vanishes
 
 /-- Exact defect from the conversion rail `p ↦ q`. -/
 theorem projective_rail_defect {R : Type*} [CommRing R] (c p q z : R) :
@@ -218,7 +235,7 @@ theorem observableCertificate_det {R : Type*} [CommRing R] (p q c : R) :
     (observableCertificate p q c).det =
       -(c + 1) * (p - 1) * (q - 1) * (q - p) := by
   rw [Matrix.det_fin_three]
-  norm_num [observableCertificate, Matrix.vecHead, Matrix.vecTail]
+  simp [observableCertificate]
   ring
 
 theorem coefficientPrefixRows_eq {R : Type*} [CommRing R] (p q c : R) :
@@ -293,7 +310,7 @@ theorem twoReturn_coefficient {R : Type*} [CommRing R]
         (q₁ * q₂ * c ^ 2 +
           (q₁ * q₂ + q₁ * p₂ - q₁ + p₁) * c +
           p₁ * p₂) := by
-  simp [transfer, Matrix.mulVec, Matrix.dotProduct, Fin.sum_univ_succ]
+  simp [transfer, Matrix.mulVec, dotProduct, Fin.sum_univ_succ]
   ring
 
 /-- Two physical waits `n,m` produce the displayed quadratic bridge polynomial. -/
@@ -340,10 +357,11 @@ theorem example_positive_returns_are_units :
 theorem example_nonresonant (n : Nat) :
     (-1 / 9 : ℚ) ≠ -(3 / 6 : ℚ) ^ n := by
   intro resonance
-  have power_eq : (2 : ℚ) ^ n = 9 := by
-    rw [show (3 / 6 : ℚ) = 1 / 2 by norm_num] at resonance
-    field_simp at resonance
-    nlinarith
+  rw [show (3 / 6 : ℚ) = 1 / 2 by norm_num] at resonance
+  have positive : (1 / 9 : ℚ) = (1 / 2) ^ n := by linarith
+  have inverse_eq : (9 : ℚ)⁻¹ = ((2 : ℚ) ^ n)⁻¹ := by
+    simpa only [one_div, inv_pow] using positive
+  have power_eq : (2 : ℚ) ^ n = 9 := (inv_injective inverse_eq).symm
   have power_eq_nat : (2 : ℕ) ^ n = 9 := by
     exact_mod_cast power_eq
   cases n with

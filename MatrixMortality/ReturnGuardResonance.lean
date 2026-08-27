@@ -89,6 +89,7 @@ theorem resonantTail_iff_hasValue
     refine ⟨residual, residual_unit, ?_⟩
     dsimp [tailAtDepth, residual]
     field_simp [primePower_ne_zero parameters.prime_prime wait]
+    ring
 
 /-- Expansion separating the wait scale from the tail-center scale. -/
 theorem legalValue_tailAtDepth

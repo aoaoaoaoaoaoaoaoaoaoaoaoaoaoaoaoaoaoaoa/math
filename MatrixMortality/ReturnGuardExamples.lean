@@ -127,7 +127,8 @@ theorem mortal_guarded_step :
 
 theorem mortal_reachable : GuardedReachable mortalParameters :=
   Relation.TransGen.single
-    ⟨0, by simpa using mortal_reset_ready, by simpa using mortal_guarded_step⟩
+    ⟨0, by simpa [mortalParameters] using mortal_reset_ready,
+      by simpa [mortalParameters] using mortal_guarded_step⟩
 
 theorem mortal_rational_pair :
     IsMortal
@@ -155,15 +156,18 @@ theorem integerAmbient_eq :
   fin_cases i <;> fin_cases j <;>
     norm_num [integerAmbient, ambient, Matrix.smul_apply,
       Matrix.diagonal_apply]
-  all_goals split <;> simp_all [Fin.ext_iff]
 
 theorem integerCut_eq :
     integerCut.map ((↑) : ℤ → ℚ) =
       28 • cut (869 / 28) 30 := by
   ext i j
+  change
+    (integerCut.map ((↑) : ℤ → ℚ)) i j =
+      28 * ∑ k : Fin 2,
+        (input : Matrix (Fin 3) (Fin 2) ℚ) i k *
+          output (869 / 28) 30 k j
   fin_cases i <;> fin_cases j <;>
-    norm_num [integerCut, cut, input, output, drift,
-      Matrix.smul_apply, Matrix.mul_apply, Fin.sum_univ_succ]
+    norm_num [integerCut, input, output, drift, Fin.sum_univ_succ]
 
 /-- Explicit denominator-cleared zero word `B² A B²`. -/
 theorem integer_zero_word :
@@ -419,7 +423,7 @@ theorem cycle_not_physical_isMortal :
 parameters.  This strictly subsumes the older orbit-specific terminal exclusion. -/
 theorem cycle_no_endpointTerminalWord (waits : List Nat) :
     ¬EndpointTerminalWord 3 2 (-953) 473 2240 waits := by
-  letI : Fact (Nat.Prime 31) := ⟨by norm_num⟩
+  let _ : Fact (Nat.Prime 31) := ⟨by norm_num⟩
   exact
     not_endpointTerminalWord_of_prime_dvd_centerDifference
       (factor := 31) (by norm_num) (by norm_num) (by norm_num) waits
@@ -453,12 +457,12 @@ theorem cycle_first_two_resonant :
       cycle_resonanceCenter]
     refine ⟨by norm_num, ?_⟩
     norm_num only
-    simpa only [neg_div] using val3_neg_1857_div_2365
+    simpa only [cycleParameters, neg_div] using val3_neg_1857_div_2365
   · rw [resonantTail_iff_hasValue, cycle_ready_tails.2.1,
       cycle_resonanceCenter]
     refine ⟨by norm_num, ?_⟩
     norm_num only
-    simpa only [neg_div] using val3_neg_3447_div_473
+    simpa only [cycleParameters, neg_div] using val3_neg_3447_div_473
 
 /-- The third leg is genuinely nonresonant; it descends from wait three back to wait one. -/
 theorem cycle_third_nonresonant :

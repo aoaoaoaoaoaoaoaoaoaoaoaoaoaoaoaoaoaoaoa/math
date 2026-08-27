@@ -73,7 +73,7 @@ theorem pairedBinaryMortality_exactSandwich_six_le_finrank
     (exact : InternalSandwich.RepresentsSandwich
       (matrixEndGenerators (pairedBinaryMortalityGenerator β body)) input output
       realization realizationInput realizationOutput) :
-    6 ≤ FiniteDimensional.finrank ℚ State := by
+    6 ≤ Module.finrank ℚ State := by
   simpa using card_le_of_wordProductSpan_eq_top_of_represents
     (pairedBinaryMortalityGenerator β body) input output
     (pairedBinaryMortality_wordProductSpan_eq_top β body three_le)

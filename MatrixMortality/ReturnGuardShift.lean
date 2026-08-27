@@ -132,9 +132,8 @@ theorem centerTransform_denominator_prefixDecode
     · exact primePower_ne_zero parameters.prime_prime _
     · exact sub_ne_zero.mpr not_target
   field_simp [denominator_ne]
-  exact
-    (projectiveNumerator_sub_denominator_eq_prefixTransform
-      parameters wait z).symm
+  simpa only [mul_comm] using
+    (projectiveNumerator_sub_denominator_eq_prefixTransform parameters wait z).symm
 
 /-- One nonterminal-input, non-pole guard step is prefix decoding followed by the fixed
 fractional-linear formula. Lean's total division makes the equality valid when the output is
@@ -152,8 +151,7 @@ theorem shift_step
   have scale_ne :
       (parameters.prime : ℚ) ^ (parameters.depth * wait) ≠ 0 :=
     primePower_ne_zero parameters.prime_prime _
-  simp [shiftCoordinate, centerTransform, prefixDecode, guardDefect,
-    prefixDenominator, prefixNumerator, drift]
+  simp [shiftCoordinate, centerTransform, prefixDecode, guardDefect, drift]
   field_simp [target_defect_ne, pole_defect_ne, scale_ne]
   ring
 
@@ -223,8 +221,22 @@ theorem residualStep_eq
   have scale_ne :
       (parameters.prime : ℚ) ^ (parameters.depth * wait) ≠ 0 :=
     primePower_ne_zero parameters.prime_prime _
-  simp [residualStep, prefixDecode, centerTransform]
-  field_simp [transform_denominator_ne, scale_ne]
+  let denominator : ℚ :=
+    (parameters.center - 1) * residual +
+      drift parameters.center parameters.reset
+  have denominator_ne : denominator ≠ 0 := by
+    simpa only [denominator] using transform_denominator_ne
+  unfold residualStep prefixDecode centerTransform
+  change
+    ((parameters.prime : ℚ) ^ wait +
+        (1 - (parameters.prime : ℚ) ^ wait) *
+          ((parameters.center * residual + drift parameters.center parameters.reset) /
+            denominator)) /
+        (parameters.prime : ℚ) ^ (parameters.depth * wait) =
+      (((parameters.center - (parameters.prime : ℚ) ^ wait) * residual +
+          drift parameters.center parameters.reset) /
+        ((parameters.prime : ℚ) ^ (parameters.depth * wait) * denominator))
+  field_simp [denominator_ne, scale_ne]
   ring
 
 /-- One branch cylinder cancels the variable numerator of the residual map. -/
@@ -253,9 +265,9 @@ theorem residualStep_branchCylinder
       parameters.prime ^ (parameters.depth * wait) * residual := by
     simp [branchCylinder]
     field_simp [branch_denominator_ne]
+    ring
   rw [numerator_eq]
   field_simp [scale_ne, transform_denominator_ne]
-  ring
 
 /-- After stripping one branch prefix, the reciprocal residual is updated affinely. -/
 theorem reciprocalResidual_affine

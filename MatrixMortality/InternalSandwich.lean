@@ -32,7 +32,7 @@ theorem reachable_invariant (generators : Glyph → Module.End K V) (input : Q �
   apply Submodule.span_le.mpr
   rintro _ ⟨word, q, rfl⟩
   apply Submodule.subset_span
-  exact ⟨label :: word, q, by simp [LinearMap.mul_apply]⟩
+  exact ⟨label :: word, q, by simp [Module.End.mul_apply]⟩
 
 /-- Restrict one physical generator to the canonical reachable carrier. -/
 def reachableGenerator (generators : Glyph → Module.End K V) (input : Q →ₗ[K] V)
@@ -53,7 +53,7 @@ theorem reachableWord_apply (generators : Glyph → Module.End K V) (input : Q �
   induction word with
   | nil => simp
   | cons label tail induction =>
-      simp only [wordProduct_cons, LinearMap.mul_apply]
+      simp only [wordProduct_cons, Module.End.mul_apply]
       rw [reachableGenerator_apply, induction]
 
 /-- Reachable vectors invisible to every future interface observation. -/
@@ -88,13 +88,15 @@ theorem unobservable_invariant (generators : Glyph → Module.End K V)
       ∀ future : List Glyph,
         x ∈ LinearMap.ker ((output.comp (wordProduct generators future)).domRestrict
           (reachable generators input)) := by
-    apply (Submodule.mem_iInf (fun future : List Glyph =>
-      LinearMap.ker ((output.comp (wordProduct generators future)).domRestrict
-        (reachable generators input)))).mp
-    simpa only [unobservable] using hx
+    intro future
+    exact (show unobservable generators input output ≤
+        LinearMap.ker ((output.comp (wordProduct generators future)).domRestrict
+          (reachable generators input)) by
+      rw [unobservable]
+      exact iInf_le _ future) hx
   have invisible := invisible_all (word ++ [label])
   simpa [LinearMap.mem_ker, reachableGenerator_apply, wordProduct_append,
-    LinearMap.mul_apply] using invisible
+    Module.End.mul_apply] using invisible
 
 /-- The generator induced on the reachable-observable quotient. -/
 def quotientGenerator (generators : Glyph → Module.End K V) (input : Q →ₗ[K] V)
@@ -123,7 +125,7 @@ theorem quotientWord_mk (generators : Glyph → Module.End K V) (input : Q →�
   induction word with
   | nil => simp
   | cons label tail induction =>
-      simp only [wordProduct_cons, LinearMap.mul_apply, induction]
+      simp only [wordProduct_cons, Module.End.mul_apply, induction]
       rw [quotientGenerator_mk]
 
 /-- The interface input with codomain restricted to the reachable carrier. -/
@@ -176,14 +178,14 @@ theorem ambient_mortal_of_quotient_mortal
     have observed_zero :=
       unobservable_output_zero generators input output
         ⟨wordProduct (reachableGenerator generators input) word x, invisible⟩
-    simpa [LinearMap.ext_iff, LinearMap.comp_apply, reachableWord_apply, reachableInput] using
+    simpa [x, LinearMap.comp_apply, reachableWord_apply, reachableInput] using
       observed_zero
   refine ⟨repairWord ++ word ++ repairWord, by simp [repair_nonempty], ?_⟩
   rw [wordProduct_append, wordProduct_append, repair]
   apply LinearMap.ext
   intro x
   have vanished := LinearMap.congr_fun middle_zero (output x)
-  simpa [LinearMap.mul_apply, LinearMap.comp_apply] using congrArg input vanished
+  simpa [Module.End.mul_apply, LinearMap.comp_apply] using congrArg input vanished
 
 /-- A physical finite-rank word preserves mortality under canonical reachable-observable
 minimization of its sandwich series. -/
@@ -265,7 +267,7 @@ theorem behavior_word (generators : Glyph → Module.End K V)
       blockHankelColumn generators input output past q := by
   funext future
   simp [behavior, blockHankelColumn, behaviorColumn, linearBehavior,
-    wordProduct_append, LinearMap.mul_apply]
+    wordProduct_append, Module.End.mul_apply]
 
 theorem reachableBehavior_word (generators : Glyph → Module.End K V)
     (input : Q →ₗ[K] V) (output : V →ₗ[K] Q) (past : List Glyph) (q : Q) :
@@ -288,20 +290,20 @@ theorem range_reachableBehavior_eq_span (generators : Glyph → Module.End K V)
       Submodule.span K {column | ∃ past : List Glyph, ∃ q : Q,
         column = blockHankelColumn generators input output past q}
     refine Submodule.span_induction
-      (p := fun vector : V =>
+      (p := fun vector : V => fun _ ↦
         behavior generators output vector ∈
           Submodule.span K {column | ∃ past : List Glyph, ∃ q : Q,
             column = blockHankelColumn generators input output past q})
       (s := {vector | ∃ past : List Glyph, ∃ q : Q,
         vector = wordProduct generators past (input q)})
-      (by simpa only [reachable] using x.property) ?_ ?_ ?_ ?_
+      ?_ ?_ ?_ ?_ (by simpa only [reachable] using x.property)
     · rintro vector ⟨past, q, rfl⟩
       rw [behavior_word]
       exact Submodule.subset_span ⟨past, q, rfl⟩
     · simp
-    · intro x y hx hy
+    · intro x y _ _ hx hy
       simpa using Submodule.add_mem _ hx hy
-    · intro scalar x hx
+    · intro scalar x _ hx
       simpa using Submodule.smul_mem _ scalar hx
   · rw [Submodule.span_le]
     rintro column ⟨past, q, rfl⟩
@@ -324,9 +326,9 @@ noncomputable def quotientEquivHankelRange
 /-- Finite-dimensional state count equals flattened block-Hankel column rank. -/
 theorem quotient_finrank_eq_blockHankel
     (generators : Glyph → Module.End K V) (input : Q →ₗ[K] V) (output : V →ₗ[K] Q) :
-    FiniteDimensional.finrank K
+    Module.finrank K
         ((reachable generators input) ⧸ unobservable generators input output) =
-      FiniteDimensional.finrank K
+      Module.finrank K
         (LinearMap.range (reachableBehavior generators input output)) :=
   (quotientEquivHankelRange generators input output).finrank_eq
 
@@ -353,7 +355,7 @@ theorem blockHankelColumn_mem_realizationBehavior
   have coefficient := LinearMap.congr_fun (exact (future ++ past)) q
   simpa [behavior, blockHankelColumn, behaviorColumn, linearBehavior,
     RepresentsSandwich, RepresentsBehavior, wordProduct_append,
-    LinearMap.mul_apply, LinearMap.comp_apply] using coefficient
+    Module.End.mul_apply, LinearMap.comp_apply] using coefficient
 
 /-- Every exact realization has at least the canonical quotient's state dimension. -/
 theorem quotient_finrank_le_of_represents
@@ -364,9 +366,9 @@ theorem quotient_finrank_le_of_represents
     (realizationOutput : State →ₗ[K] Q)
     (exact :
       RepresentsSandwich generators input output realization realizationInput realizationOutput) :
-    FiniteDimensional.finrank K
+    Module.finrank K
         ((reachable generators input) ⧸ unobservable generators input output) ≤
-      FiniteDimensional.finrank K State := by
+      Module.finrank K State := by
   rw [quotient_finrank_eq_blockHankel]
   have range_le :
       LinearMap.range (reachableBehavior generators input output) ≤

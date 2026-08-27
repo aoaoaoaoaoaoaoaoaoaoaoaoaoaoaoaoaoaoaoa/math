@@ -45,8 +45,8 @@ theorem endpointPair_ratio_eq_terminalCoordinate
         ((residual.1 : ℚ) / residual.2) := by
   have numerator_ne_rat : (residual.1 : ℚ) ≠ 0 := by
     exact_mod_cast numerator_ne
-  simp only [endpointPair, terminalDefect, terminalCoordinate, Prod.fst, Prod.snd,
-    Int.cast_add, Int.cast_sub, Int.cast_mul]
+  simp only [endpointPair, terminalDefect, terminalCoordinate, Int.cast_add,
+    Int.cast_sub, Int.cast_mul]
   field_simp [numerator_ne_rat]
 
 /-- The reset endpoint pair; all cumulative normalization is derived from this state. -/
@@ -194,7 +194,7 @@ theorem PrimitiveEndpointReduction.cumulativeStep
           (centerNumerator - scale) *
             (cumulative * content * target.2)
     have numerator := reduction.step.numerator
-    simp only [Prod.fst, Prod.snd] at numerator
+    simp only at numerator
     calc
       cumulative * content * target.1 =
           cumulative * (content * target.1) := by ring
@@ -241,8 +241,8 @@ theorem CumulativeEndpointStep.transfer
       (prime : ℤ) ^ (depth * wait) • (pairVector target) := by
   ext i
   fin_cases i
-  · simp [endpointTransfer, Matrix.mulVec, Matrix.dotProduct,
-      Fin.sum_univ_succ, pairVector, smul_eq_mul]
+  · simp [endpointTransfer, Matrix.mulVec, dotProduct,
+      Fin.sum_univ_succ, pairVector]
     rw [step.numerator]
     have main :
         (centerNumerator - scale +
@@ -266,8 +266,8 @@ theorem CumulativeEndpointStep.transfer
         _ = _ := by ring
     convert main using 1
     all_goals ring
-  · simpa [endpointTransfer, Matrix.mulVec, Matrix.dotProduct,
-      Fin.sum_univ_succ, pairVector, smul_eq_mul] using step.denominator.symm
+  · simpa [endpointTransfer, Matrix.mulVec, dotProduct,
+      Fin.sum_univ_succ, pairVector, sub_eq_add_neg] using step.denominator.symm
 
 /-- A cumulative execution transports its initial pair by the full endpoint product and strips
 exactly the product of the forced base powers. -/
@@ -316,7 +316,7 @@ theorem PrimitiveEndpointReduction.content_natAbs_eq_gcd_support
   have content_dvd_drift_source : content ∣ driftNumerator * source.1 := by
     use target.1 - (centerNumerator - scale) * target.2
     have target_eq := reduction.step.numerator
-    simp only [Prod.fst, Prod.snd] at target_eq
+    simp only at target_eq
     calc
       driftNumerator * source.1 =
           content * target.1 -
@@ -362,13 +362,6 @@ theorem PrimitiveEndpointReduction.content_natAbs_eq_gcd_support
         (driftNumerator * (prime : ℤ) ^ (depth * wait) +
             centerNumerator - scale) * prequotientFactor +
           source.2 * supportFactor
-      change
-        driftNumerator * source.1 +
-            (centerNumerator - scale) * prequotient =
-          common *
-            ((driftNumerator * (prime : ℤ) ^ (depth * wait) +
-                centerNumerator - scale) * prequotientFactor +
-              source.2 * supportFactor)
       have support_expanded := support_eq
       dsimp [support] at support_expanded
       linear_combination
@@ -421,7 +414,7 @@ theorem PrimitiveEndpointReduction.denominator_coprime_complement
       Int.gcd (content * target.2) (content * complement) = content.natAbs := by
     rw [complementary, Int.gcd_eq_natAbs]
     exact reduction.content_natAbs_eq_gcd_support.symm
-  apply Int.gcd_eq_one_iff_coprime.mp
+  apply Int.isCoprime_iff_gcd_eq_one.mpr
   rw [Int.gcd_mul_left] at gcd_eq
   have content_positive : 0 < content.natAbs :=
     Int.natAbs_pos.mpr reduction.content_ne
@@ -448,18 +441,20 @@ theorem reverseComplement_dvd_targetResultant
       scale * ((prime : ℤ) ^ wait - 1) * defect =
         -complement * source.1 := by
     have coordinate := congrFun reverse 0
-    simp only [endpointAdjugate, Matrix.mulVec, Matrix.dotProduct,
-      Fin.sum_univ_succ, pairVector, smul_eq_mul] at coordinate
-    convert coordinate using 1
-    all_goals dsimp [defect]; ring
+    simp only [endpointAdjugate, Matrix.mulVec, dotProduct,
+      Fin.sum_univ_succ, pairVector] at coordinate
+    simp at coordinate
+    dsimp [defect]
+    linear_combination coordinate
   have second :
       defect + driftNumerator * (prime : ℤ) ^ (depth * wait) * target.2 =
         -complement * source.2 := by
     have coordinate := congrFun reverse 1
-    simp only [endpointAdjugate, Matrix.mulVec, Matrix.dotProduct,
-      Fin.sum_univ_succ, pairVector, smul_eq_mul] at coordinate
-    convert coordinate using 1
-    all_goals dsimp [defect]; ring
+    simp only [endpointAdjugate, Matrix.mulVec, dotProduct,
+      Fin.sum_univ_succ, pairVector] at coordinate
+    simp at coordinate
+    dsimp [defect]
+    linear_combination coordinate
   have first_dvd :
       complement ∣ scale * ((prime : ℤ) ^ wait - 1) * defect := by
     exact ⟨-source.1, by rw [first]; ring⟩
@@ -488,8 +483,11 @@ theorem reverseComplement_dvd_targetResultant
     dvd_sub
       (second_dvd.mul_left (scale * defect))
       (first_scaled_dvd.mul_left (driftNumerator * target.2))
-  convert combination using 1
-  all_goals dsimp [defect]; ring
+  obtain ⟨quotient, quotient_eq⟩ := combination
+  refine ⟨quotient, ?_⟩
+  rw [← quotient_eq]
+  dsimp [defect]
+  ring
 
 /-- The cumulative numerator alone obeys a deterministic second-order exact-division law. -/
 theorem cumulativeNumerator_recurrence
@@ -691,7 +689,7 @@ theorem terminalTruncant_eq_cumulativeNumerator
       (prime : ℤ) ^ (depth * waits.sum) * target.1 := by
   have transported := congrFun execution.transfer 0
   simpa [endpointProduct, cumulativeResetPair, pairVector,
-    Matrix.mulVec, Matrix.dotProduct,
+    Matrix.mulVec, dotProduct,
     Fin.sum_univ_succ, smul_eq_mul, mul_comm] using transported
 
 end

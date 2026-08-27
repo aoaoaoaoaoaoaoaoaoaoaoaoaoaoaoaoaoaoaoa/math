@@ -25,7 +25,7 @@ theorem pcpMatrix_map {R S : Type*} [CommRing R] [CommRing S]
   have map_three : hom (3 : R) = (3 : S) := map_ofNat hom 3
   ext i j
   fin_cases i <;> fin_cases j <;>
-    simp [pcpMatrix, Matrix.vecHead, Matrix.vecTail, map_three]
+    simp [pcpMatrix, map_three]
 
 /-- Every entry of the integral PCP matrix is primitive recursive in two primitive-recursive word
 families. -/
@@ -63,13 +63,13 @@ theorem pcpMatrixInt_entry_primrec {α : Type*} [Primcodable α] {x y : α → L
 
 @[simp] theorem pcpMatrix_nil (R : Type*) [CommRing R] : pcpMatrix R [] [] = 1 := by
   ext i j
-  fin_cases i <;> fin_cases j <;> simp [pcpMatrix, Matrix.vecHead, Matrix.vecTail]
+  fin_cases i <;> fin_cases j <;> simp [pcpMatrix]
 
 theorem pcpMatrix_append (R : Type*) [CommRing R] (x y x' y' : List Bool) :
     pcpMatrix R (x ++ x') (y ++ y') = pcpMatrix R x y * pcpMatrix R x' y' := by
   ext i j
   fin_cases i <;> fin_cases j <;>
-    simp [pcpMatrix, Matrix.vecHead, Matrix.vecTail, Matrix.mul_apply, Fin.sum_univ_succ,
+    simp [pcpMatrix, Matrix.mul_apply, Fin.sum_univ_succ,
       ternaryCode_append] <;> ring
 
 @[simp] theorem pcpMatrix_top_right (R : Type*) [CommRing R] (x y : List Bool) :
@@ -89,13 +89,13 @@ theorem pcpMatrix_top_right_eq_zero_iff_rat (x y : List Bool) :
 theorem pcpMatrix_det (R : Type*) [CommRing R] (x y : List Bool) :
     (pcpMatrix R x y).det = (3 : R) ^ (x.length + y.length) := by
   rw [Matrix.det_fin_three]
-  simp [pcpMatrix, Matrix.vecHead, Matrix.vecTail, pow_add, mul_comm]
+  simp [pcpMatrix, pow_add, mul_comm]
 
 theorem pcpMatrix_upperTriangular (R : Type*) [CommRing R] (x y : List Bool) :
     (pcpMatrix R x y).BlockTriangular id := by
   intro i j h
   fin_cases i <;> fin_cases j <;>
-    simp [pcpMatrix, Matrix.vecHead, Matrix.vecTail] at h ⊢
+    simp [pcpMatrix] at h ⊢
 
 theorem pcpMatrix_det_ne_zero_int (x y : List Bool) : (pcpMatrix ℤ x y).det ≠ 0 := by
   rw [pcpMatrix_det]

@@ -85,8 +85,7 @@ theorem orbitYuGap_twoLowDiagonal_eq_objective {a target b : ℝ}
   simp [orbitYuGap, orbitIndependentEntropy, orbitMarginalEntropy,
     orbitDependentEntropy, finiteJoinEntropy, finiteExpectation, orbitMarginalWeight,
     orbitMarginalPoint, twoLowOrbitLaw, twoOrbitWeight, twoLowOrbitLeft,
-    twoLowOrbitRight, diagonalPairObjective, Fintype.sum_prod_type, Fintype.sum_bool,
-    join_comm]
+    twoLowOrbitRight, diagonalPairObjective, Fintype.sum_prod_type, join_comm]
   ring_nf
 
 theorem orbitYuGap_lowEndpointDiagonal_eq_objective {a target q : ℝ}
@@ -101,8 +100,8 @@ theorem orbitYuGap_lowEndpointDiagonal_eq_objective {a target q : ℝ}
   simp [orbitYuGap, orbitIndependentEntropy, orbitMarginalEntropy,
     orbitDependentEntropy, finiteJoinEntropy, finiteExpectation, orbitMarginalWeight,
     orbitMarginalPoint, lowEndpointOrbitLaw, twoOrbitWeight, lowEndpointOrbitLeft,
-    lowEndpointOrbitRight, diagonalEndpointObjective, Fintype.sum_prod_type,
-    Fintype.sum_bool, join_comm, hendpoint]
+    lowEndpointOrbitRight, diagonalEndpointObjective, Fintype.sum_prod_type, join_comm,
+    hendpoint]
   ring_nf
 
 theorem endpointCertificateWeight_eq_upperOrbitWeight {a q : ℝ}
@@ -117,7 +116,6 @@ theorem endpointCertificateWeight_eq_upperOrbitWeight {a q : ℝ}
     dsimp [endpointOrbitMean]
     ring]
   field_simp [hdenominator]
-  ring_nf
 
 theorem endpointCertificateObjective_eq_orbitYuGap {a q : ℝ}
     (haTarget : a ≤ abundanceTarget)

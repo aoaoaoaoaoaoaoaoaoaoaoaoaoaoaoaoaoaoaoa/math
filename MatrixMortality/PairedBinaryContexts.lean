@@ -80,7 +80,7 @@ theorem pairedBinaryAlgebraGeneratorClosed_false_mulVec
         0] := by
   ext coordinate
   fin_cases coordinate <;>
-    simp [pairedBinaryAlgebraGeneratorClosed, Matrix.mulVec, Matrix.dotProduct,
+    simp [pairedBinaryAlgebraGeneratorClosed, Matrix.mulVec, dotProduct,
       Fin.sum_univ_succ]
   all_goals ring
 
@@ -96,7 +96,7 @@ theorem pairedBinaryAlgebraGeneratorClosed_true_mulVec
         vector 1] := by
   ext coordinate
   fin_cases coordinate <;>
-    simp [pairedBinaryAlgebraGeneratorClosed, Matrix.mulVec, Matrix.dotProduct,
+    simp [pairedBinaryAlgebraGeneratorClosed, Matrix.mulVec, dotProduct,
       Fin.sum_univ_succ]
   all_goals ring
 
@@ -112,7 +112,7 @@ theorem pairedBinaryAlgebraGeneratorClosed_vecMul_false
         vector 0 + 3 * vector 1] := by
   ext coordinate
   fin_cases coordinate <;>
-    simp [pairedBinaryAlgebraGeneratorClosed, Matrix.vecMul, Matrix.dotProduct,
+    simp [pairedBinaryAlgebraGeneratorClosed, Matrix.vecMul, dotProduct,
       Fin.sum_univ_succ]
   all_goals ring
 
@@ -129,7 +129,7 @@ theorem pairedBinaryAlgebraGeneratorClosed_vecMul_true
         vector 0 + 3 * vector 1] := by
   ext coordinate
   fin_cases coordinate <;>
-    simp [pairedBinaryAlgebraGeneratorClosed, Matrix.vecMul, Matrix.dotProduct,
+    simp [pairedBinaryAlgebraGeneratorClosed, Matrix.vecMul, dotProduct,
       Fin.sum_univ_succ]
   all_goals ring
 
@@ -182,12 +182,10 @@ private theorem pairedBinaryAlgebraGenerator_eq_closed (β : Nat) (body : List T
     ext row column <;>
     fin_cases row <;> fin_cases column <;>
     simp [pairedBinaryAlgebraGenerator, pairedBinaryAlgebraGeneratorClosed,
-      pairedBinaryGenerator, upper_b, upper_b_scale, upper_c, upper_c_scale,
-      rule_upper_b, rule_upper_b_scale, rule_upper_c, rule_upper_c_scale,
+      pairedBinaryGenerator, rule_upper_b, rule_upper_b_scale,
+      rule_upper_c, rule_upper_c_scale,
       rule_b_scale, rule_c, rule_c_scale, erase_scale,
-      Matrix.transpose_apply] <;>
-    simp only [Matrix.vecHead, Matrix.vecTail]
-  all_goals rfl
+      Matrix.transpose_apply]
 
 theorem pairedBinaryAlgebraGenerator_eq_closed_fun (β : Nat) (body : List TagLetter) :
     pairedBinaryAlgebraGenerator β body =
@@ -204,8 +202,7 @@ theorem pairedBinaryAlgebraColumn_eq_closed (β : Nat) :
   fin_cases coordinate <;>
     simp [pairedBinaryAlgebraColumn, pairedBinaryAlgebraColumnClosed,
       pairedBinaryBoundaryRow, pairedBinaryRow, sideTerminalColumn, sidePcpMatrix,
-      sideTailBasis, marker, nearySideMarkerScale_eq,
-      Matrix.mulVec, Matrix.dotProduct, Matrix.vecHead, Matrix.vecTail,
+      sideTailBasis, marker, Matrix.mulVec, dotProduct,
       Fin.sum_univ_succ]
   all_goals ring
 

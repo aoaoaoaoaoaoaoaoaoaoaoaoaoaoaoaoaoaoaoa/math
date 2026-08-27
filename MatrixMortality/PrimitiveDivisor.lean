@@ -34,7 +34,7 @@ theorem isRoot_cyclotomic_of_prime_dvd_value
     {prime base exponent : Nat} (prime_spec : prime.Prime)
     (divides : prime ∣ cyclotomicValue base exponent) :
     IsRoot (cyclotomic exponent (ZMod prime)) (base : ZMod prime) := by
-  letI : Fact prime.Prime := ⟨prime_spec⟩
+  have : Fact prime.Prime := ⟨prime_spec⟩
   rw [IsRoot.def, ← map_cyclotomic_int exponent (ZMod prime), eval_map]
   rw [show (base : ZMod prime) =
     (Int.castRingHom (ZMod prime)) (base : ℤ) by simp, Polynomial.eval₂_hom]
@@ -49,7 +49,7 @@ theorem coprime_of_prime_dvd_cyclotomicValue
     (exponent_positive : 0 < exponent)
     (divides : prime ∣ cyclotomicValue base exponent) :
     base.Coprime prime := by
-  letI : Fact prime.Prime := ⟨prime_spec⟩
+  have : Fact prime.Prime := ⟨prime_spec⟩
   exact Polynomial.coprime_of_root_cyclotomic exponent_positive
     (isRoot_cyclotomic_of_prime_dvd_value prime_spec divides)
 
@@ -59,19 +59,19 @@ theorem isPrimitiveRoot_ordCompl_of_prime_dvd_cyclotomicValue
     {prime base exponent : Nat} (prime_spec : prime.Prime)
     (exponent_positive : 0 < exponent)
     (divides : prime ∣ cyclotomicValue base exponent) :
-    IsPrimitiveRoot (base : ZMod prime) (ord_compl[prime] exponent) := by
-  letI : Fact prime.Prime := ⟨prime_spec⟩
-  let core := ord_compl[prime] exponent
+    IsPrimitiveRoot (base : ZMod prime) (ordCompl[prime] exponent) := by
+  have : Fact prime.Prime := ⟨prime_spec⟩
+  let core := ordCompl[prime] exponent
   have exponent_ne : exponent ≠ 0 := exponent_positive.ne'
   have core_not_dvd : ¬prime ∣ core :=
-    Nat.not_dvd_ord_compl prime_spec exponent_ne
-  letI : NeZero (core : ZMod prime) :=
+    Nat.not_dvd_ordCompl prime_spec exponent_ne
+  have : NeZero (core : ZMod prime) :=
     NeZero.of_not_dvd (ZMod prime) core_not_dvd
   have root :=
     isRoot_cyclotomic_of_prime_dvd_value prime_spec divides
   have decomposition :
       prime ^ exponent.factorization prime * core = exponent :=
-    Nat.ord_proj_mul_ord_compl_eq_self exponent prime
+    Nat.ordProj_mul_ordCompl_eq_self exponent prime
   rw [← decomposition] at root
   exact Polynomial.isRoot_cyclotomic_prime_pow_mul_iff_of_charP.mp root
 
@@ -82,7 +82,7 @@ theorem primitivePrimeDivisor_of_prime_dvd_cyclotomicValue
     (divides : prime ∣ cyclotomicValue base exponent)
     (not_dvd_exponent : ¬prime ∣ exponent) :
     IsPrimitivePrimeDivisor prime base exponent := by
-  have core_eq : ord_compl[prime] exponent = exponent := by
+  have core_eq : ordCompl[prime] exponent = exponent := by
     simp [Nat.factorization_eq_zero_of_not_dvd not_dvd_exponent]
   have primitive_root : IsPrimitiveRoot (base : ZMod prime) exponent := by
     simpa [core_eq] using
@@ -115,13 +115,13 @@ theorem other_prime_lt_of_dvd_cyclotomicValue
     (prime_value : prime ∣ cyclotomicValue base exponent)
     (other_exponent : other ∣ exponent) (other_ne : other ≠ prime) :
     other < prime := by
-  letI : Fact prime.Prime := ⟨prime_spec⟩
-  let core := ord_compl[prime] exponent
+  have : Fact prime.Prime := ⟨prime_spec⟩
+  let core := ordCompl[prime] exponent
   have root : IsPrimitiveRoot (base : ZMod prime) core :=
     isPrimitiveRoot_ordCompl_of_prime_dvd_cyclotomicValue
       prime_spec exponent_positive prime_value
   have core_positive : 0 < core :=
-    Nat.ord_compl_pos prime exponent_positive.ne'
+    Nat.ordCompl_pos prime exponent_positive.ne'
   have base_nonzero : (base : ZMod prime) ≠ 0 :=
     root.ne_zero core_positive.ne'
   have core_dvd_pred : core ∣ prime - 1 := by
@@ -137,7 +137,7 @@ theorem other_prime_lt_of_dvd_cyclotomicValue
     exact other_ne
       ((Nat.prime_dvd_prime_iff_eq prime_spec other_spec).mp prime_dvd_other).symm
   exact (Nat.le_of_dvd core_positive
-    (Nat.dvd_ord_compl_of_dvd_not_dvd other_exponent prime_not_dvd_other)).trans_lt
+    (Nat.dvd_ordCompl_of_dvd_not_dvd other_exponent prime_not_dvd_other)).trans_lt
       core_lt
 
 /-- If an exponent has no primitive divisor, its cyclotomic value is a power of the unique
@@ -250,7 +250,7 @@ theorem base_coprime {prime base exponent : Nat}
   have prime_dvd_power : prime ∣ base ^ exponent :=
     dvd_pow prime_dvd_base primitive.exponent_positive.ne'
   have prime_dvd_one : prime ∣ 1 := by
-    have difference := Nat.dvd_sub' prime_dvd_power primitive.dvd
+    have difference := Nat.dvd_sub prime_dvd_power primitive.dvd
     have power_one_le : 1 ≤ base ^ exponent :=
       Nat.one_le_pow exponent base (Nat.zero_lt_of_lt primitive.one_lt_base)
     rw [Nat.sub_sub_self power_one_le] at difference
@@ -270,6 +270,7 @@ order. -/
 theorem unit_orderOf_eq_exponent {prime base exponent : Nat}
     (primitive : IsPrimitivePrimeDivisor prime base exponent) :
     orderOf (ZMod.unitOfCoprime base primitive.base_coprime) = exponent := by
+  have : Fact prime.Prime := ⟨primitive.prime⟩
   let unit := ZMod.unitOfCoprime base primitive.base_coprime
   have unit_exponent : unit ^ exponent = 1 := by
     apply Units.ext
@@ -289,7 +290,9 @@ theorem unit_orderOf_eq_exponent {prime base exponent : Nat}
         apply Nat.ModEq.symm
         exact (ZMod.natCast_eq_natCast_iff
           (base ^ orderOf unit) 1 prime).mp (by
-            simpa [unit, ZMod.coe_unitOfCoprime] using
+            simpa only [unit, ZMod.coe_unitOfCoprime,
+              Units.val_pow_eq_pow_val, Units.val_one,
+              Nat.cast_pow, Nat.cast_one] using
               congrArg Units.val (pow_orderOf_eq_one unit)))
   exact le_antisymm
     (Nat.le_of_dvd primitive.exponent_positive order_dvd_exponent)
@@ -299,7 +302,7 @@ theorem unit_orderOf_eq_exponent {prime base exponent : Nat}
 theorem exponent_dvd_prime_sub_one {prime base exponent : Nat}
     (primitive : IsPrimitivePrimeDivisor prime base exponent) :
     exponent ∣ prime - 1 := by
-  letI : Fact prime.Prime := ⟨primitive.prime⟩
+  have : Fact prime.Prime := ⟨primitive.prime⟩
   let unit := ZMod.unitOfCoprime base primitive.base_coprime
   have order_dvd :
       orderOf unit ∣ Fintype.card (ZMod prime)ˣ :=
@@ -331,19 +334,19 @@ end IsPrimitivePrimeDivisor
 theorem ord_compl_dvd_div_of_prime_dvd
     {prime exponent : Nat} (prime_spec : prime.Prime) (exponent_positive : 0 < exponent)
     (prime_dvd : prime ∣ exponent) :
-    ord_compl[prime] exponent ∣ exponent / prime := by
+    ordCompl[prime] exponent ∣ exponent / prime := by
   apply (Nat.dvd_div_iff_mul_dvd prime_dvd).2
   have factor_positive : 0 < exponent.factorization prime :=
     prime_spec.factorization_pos_of_dvd exponent_positive.ne' prime_dvd
   have prime_dvd_projection : prime ∣ prime ^ exponent.factorization prime :=
     dvd_pow_self prime factor_positive.ne'
   have product_dvd :
-      prime * ord_compl[prime] exponent ∣
-        prime ^ exponent.factorization prime * ord_compl[prime] exponent :=
-    Nat.mul_dvd_mul_right prime_dvd_projection (ord_compl[prime] exponent)
+      prime * ordCompl[prime] exponent ∣
+        prime ^ exponent.factorization prime * ordCompl[prime] exponent :=
+    Nat.mul_dvd_mul_right prime_dvd_projection (ordCompl[prime] exponent)
   have decomposition :
-      prime ^ exponent.factorization prime * ord_compl[prime] exponent = exponent :=
-    Nat.ord_proj_mul_ord_compl_eq_self exponent prime
+      prime ^ exponent.factorization prime * ordCompl[prime] exponent = exponent :=
+    Nat.ordProj_mul_ordCompl_eq_self exponent prime
   rw [decomposition] at product_dvd
   exact product_dvd
 
@@ -355,8 +358,8 @@ theorem prime_dvd_pow_div_sub_one
     (prime_dvd_value : prime ∣ cyclotomicValue base exponent)
     (prime_dvd_exponent : prime ∣ exponent) :
     prime ∣ base ^ (exponent / prime) - 1 := by
-  letI : Fact prime.Prime := ⟨prime_spec⟩
-  let core := ord_compl[prime] exponent
+  have : Fact prime.Prime := ⟨prime_spec⟩
+  let core := ordCompl[prime] exponent
   have root : IsPrimitiveRoot (base : ZMod prime) core :=
     isPrimitiveRoot_ordCompl_of_prime_dvd_cyclotomicValue
       prime_spec exponent_positive prime_dvd_value
@@ -398,11 +401,11 @@ theorem cyclotomicValue_primePower_exponent_one_of_odd
     rw [← value_eq]
     exact pow_sub_one_mul_cyclotomicValue_dvd base_gt_one divisor_proper
   have base_power_gt_one : 1 < base ^ divisor :=
-    one_lt_pow base_gt_one divisor_positive.ne'
+    Nat.one_lt_pow divisor_positive.ne' base_gt_one
   have base_power_sub_ne : base ^ divisor - 1 ≠ 0 :=
     Nat.sub_ne_zero_of_lt base_power_gt_one
   have full_sub_ne : base ^ exponent - 1 ≠ 0 :=
-    Nat.sub_ne_zero_of_lt (one_lt_pow base_gt_one exponent_positive.ne')
+    Nat.sub_ne_zero_of_lt (Nat.one_lt_pow exponent_positive.ne' base_gt_one)
   have factor_le :
       ((base ^ divisor - 1) * prime ^ k).factorization prime ≤
         (base ^ exponent - 1).factorization prime :=
@@ -417,7 +420,7 @@ theorem cyclotomicValue_primePower_exponent_one_of_odd
       coprime_of_prime_dvd_cyclotomicValue
         prime_spec exponent_positive prime_dvd_value
     exact prime_spec.coprime_iff_not_dvd.mp (base_coprime.pow_left divisor).symm
-  letI : Fact prime.Prime := ⟨prime_spec⟩
+  have : Fact prime.Prime := ⟨prime_spec⟩
   have lte := padicValNat.pow_sub_pow prime_odd
     (show (1 : Nat) < base ^ divisor from base_power_gt_one)
     (prime_dvd_pow_div_sub_one prime_spec base_gt_one exponent_positive
@@ -484,10 +487,10 @@ theorem eq_two_pow_of_unique_two
 theorem cyclotomicValue_two_pow_succ (base power : Nat) :
     cyclotomicValue base (2 ^ (power + 1)) = base ^ (2 ^ power) + 1 := by
   rw [cyclotomicValue, cyclotomic_prime_pow_eq_geom_sum Nat.prime_two]
-  norm_num [Polynomial.eval_finset_sum, Polynomial.eval_pow, Polynomial.eval_X,
-    Int.natAbs_ofNat]
+  norm_num [Polynomial.eval_finsetSum, Polynomial.eval_pow, Polynomial.eval_X]
   rw [show (base : ℤ) ^ (2 ^ power) + 1 =
-    (base ^ (2 ^ power) + 1 : Nat) by norm_cast, Int.natAbs_ofNat]
+    (base ^ (2 ^ power) + 1 : Nat) by norm_cast,
+    Int.natAbs_natCast]
 
 /-- The prime `2` also occurs only once in a nonprimitive cyclotomic value above exponent
 two. -/
@@ -570,7 +573,7 @@ theorem exists_primitivePrimeDivisor_of_base_gt_two
     {base exponent : Nat} (base_gt_two : 2 < base) (exponent_gt_two : 2 < exponent) :
     ∃ prime : Nat, IsPrimitivePrimeDivisor prime base exponent := by
   by_contra none
-  push_neg at none
+  push Not at none
   obtain ⟨prime, prime_spec, prime_dvd_exponent, value_eq, _⟩ :=
     cyclotomicValue_eq_prime_of_no_primitive (by omega) exponent_gt_two none
   have totient_positive : 0 < exponent.totient :=
@@ -581,7 +584,7 @@ theorem exists_primitivePrimeDivisor_of_base_gt_two
   have prime_pred_le_totient : prime - 1 ≤ exponent.totient :=
     Nat.le_of_dvd totient_positive totient_divides
   have prime_le_two_pow : prime ≤ 2 ^ (prime - 1) := by
-    have strict := Nat.lt_two_pow (prime - 1)
+    have strict := (prime - 1).lt_two_pow_self
     have recover : prime - 1 + 1 = prime := Nat.sub_add_cancel prime_spec.one_le
     omega
   have two_pow_le : 2 ^ (prime - 1) ≤ 2 ^ exponent.totient :=
@@ -643,14 +646,14 @@ theorem ord_compl_lt_of_prime_dvd_cyclotomicValue
     {prime base exponent : Nat} (prime_spec : prime.Prime)
     (exponent_positive : 0 < exponent)
     (prime_dvd_value : prime ∣ cyclotomicValue base exponent) :
-    ord_compl[prime] exponent < prime := by
-  letI : Fact prime.Prime := ⟨prime_spec⟩
-  let core := ord_compl[prime] exponent
+    ordCompl[prime] exponent < prime := by
+  have : Fact prime.Prime := ⟨prime_spec⟩
+  let core := ordCompl[prime] exponent
   have root : IsPrimitiveRoot (base : ZMod prime) core :=
     isPrimitiveRoot_ordCompl_of_prime_dvd_cyclotomicValue
       prime_spec exponent_positive prime_dvd_value
   have core_positive : 0 < core :=
-    Nat.ord_compl_pos prime exponent_positive.ne'
+    Nat.ordCompl_pos prime exponent_positive.ne'
   have base_nonzero : (base : ZMod prime) ≠ 0 :=
     root.ne_zero core_positive.ne'
   have core_dvd_pred : core ∣ prime - 1 := by
@@ -668,14 +671,14 @@ theorem factorization_eq_one_of_cyclotomicValue_two_eq_prime
     (value_eq : cyclotomicValue 2 exponent = prime) :
     exponent.factorization prime = 1 := by
   let power := exponent.factorization prime
-  let core := ord_compl[prime] exponent
+  let core := ordCompl[prime] exponent
   have exponent_positive : 0 < exponent := by omega
   have power_positive : 0 < power :=
     prime_spec.factorization_pos_of_dvd exponent_positive.ne' prime_dvd_exponent
   have decomposition : prime ^ power * core = exponent :=
-    Nat.ord_proj_mul_ord_compl_eq_self exponent prime
+    Nat.ordProj_mul_ordCompl_eq_self exponent prime
   have core_positive : 0 < core :=
-    Nat.ord_compl_pos prime exponent_positive.ne'
+    Nat.ordCompl_pos prime exponent_positive.ne'
   apply le_antisymm ?_ (by omega)
   by_contra power_not_le
   have power_at_least_two : 2 ≤ power := by omega
@@ -695,7 +698,7 @@ theorem factorization_eq_one_of_cyclotomicValue_two_eq_prime
   have prime_le_power : prime ≤ prime ^ (extra + 1) :=
     Nat.le_self_pow (by omega) prime
   have prime_lt_shifted : prime < shiftedBase :=
-    (Nat.lt_two_pow prime).trans_le
+    prime.lt_two_pow_self.trans_le
       (Nat.pow_le_pow_right (by decide) prime_le_power)
   have shifted_gt_one : 1 < shiftedBase :=
     lt_trans prime_spec.one_lt prime_lt_shifted
@@ -744,7 +747,7 @@ theorem cast_cyclotomicValue_real
   calc
     ((eval (base : ℤ) (cyclotomic exponent ℤ)).natAbs : ℝ) =
         ((eval (base : ℤ) (cyclotomic exponent ℤ) : ℤ) : ℝ) := by
-          rw [Int.cast_natAbs, abs_of_pos integer_positive]
+          rw [Nat.cast_natAbs, abs_of_pos integer_positive]
     _ = eval (base : ℝ) (cyclotomic exponent ℝ) := by
       simpa using
         (cyclotomic.eval_apply (base : ℤ) exponent (algebraMap ℤ ℝ)).symm
@@ -787,21 +790,21 @@ theorem nonprimitive_cyclotomic_prime_le_three_at_two
     (prime_dvd_exponent : prime ∣ exponent)
     (value_eq : cyclotomicValue 2 exponent = prime) :
     prime ≤ 3 := by
-  let core := ord_compl[prime] exponent
+  let core := ordCompl[prime] exponent
   have exponent_positive : 0 < exponent := by omega
   have factorization_eq :=
     factorization_eq_one_of_cyclotomicValue_two_eq_prime
       prime_spec exponent_gt_two prime_dvd_exponent value_eq
   have decomposition : prime * core = exponent := by
-    have full := Nat.ord_proj_mul_ord_compl_eq_self exponent prime
+    have full := Nat.ordProj_mul_ordCompl_eq_self exponent prime
     rw [factorization_eq, pow_one] at full
     dsimp [core]
     rw [factorization_eq, pow_one]
     exact full
   have core_positive : 0 < core :=
-    Nat.ord_compl_pos prime exponent_positive.ne'
+    Nat.ordCompl_pos prime exponent_positive.ne'
   have core_not_dvd : ¬prime ∣ core :=
-    Nat.not_dvd_ord_compl prime_spec exponent_positive.ne'
+    Nat.not_dvd_ordCompl prime_spec exponent_positive.ne'
   have expanded :=
     cyclotomicValue_expand_mul 2 prime core prime_spec core_not_dvd
   have index_eq : core * prime = exponent := by rw [mul_comm, decomposition]
@@ -810,7 +813,7 @@ theorem nonprimitive_cyclotomic_prime_le_three_at_two
   have prime_at_least_four : 4 ≤ prime := by omega
   let shiftedBase := 2 ^ prime
   have shifted_gt_one : 1 < shiftedBase :=
-    one_lt_pow (by decide : (1 : Nat) < 2) prime_spec.ne_zero
+    Nat.one_lt_pow prime_spec.ne_zero (by decide : (1 : Nat) < 2)
   have totient_positive : 0 < core.totient :=
     Nat.totient_pos.mpr core_positive
   have lower_le :
@@ -844,7 +847,7 @@ theorem exists_primitivePrimeDivisor_two
     {exponent : Nat} (exponent_gt_two : 2 < exponent) (not_six : exponent ≠ 6) :
     ∃ prime : Nat, IsPrimitivePrimeDivisor prime 2 exponent := by
   by_contra none
-  push_neg at none
+  push Not at none
   obtain ⟨prime, prime_spec, prime_dvd_exponent, value_eq, _⟩ :=
     cyclotomicValue_eq_prime_of_no_primitive (by decide) exponent_gt_two none
   have exponent_positive : 0 < exponent := by omega
@@ -863,15 +866,15 @@ theorem exists_primitivePrimeDivisor_two
   have factorization_eq :=
     factorization_eq_one_of_cyclotomicValue_two_eq_prime
       prime_spec exponent_gt_two prime_dvd_exponent value_eq
-  let core := ord_compl[prime] exponent
+  let core := ordCompl[prime] exponent
   have decomposition : prime * core = exponent := by
-    have full := Nat.ord_proj_mul_ord_compl_eq_self exponent prime
+    have full := Nat.ordProj_mul_ordCompl_eq_self exponent prime
     rw [factorization_eq, pow_one] at full
     dsimp [core]
     rw [factorization_eq, pow_one]
     exact full
   have core_positive : 0 < core :=
-    Nat.ord_compl_pos prime exponent_positive.ne'
+    Nat.ordCompl_pos prime exponent_positive.ne'
   have core_lt : core < prime :=
     ord_compl_lt_of_prime_dvd_cyclotomicValue
       prime_spec exponent_positive prime_dvd_value

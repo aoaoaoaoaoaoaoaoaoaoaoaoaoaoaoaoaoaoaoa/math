@@ -499,7 +499,7 @@
 'MatrixMortality.ReturnGuard.not_physical_isMortal_of_resetResultant_odd' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-'MatrixMortality.ReturnGuard.cumulativeNumerator_recurrence' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.ReturnGuard.cumulativeNumerator_recurrence' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.ReturnGuard.terminalTruncant_eq_cumulativeNumerator' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
@@ -523,8 +523,11 @@
 'MatrixMortality.ReturnGuard.PrimitiveEndpointReduction.twoStep_contentBudget' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-'MatrixMortality.ReturnGuard.PrimitiveEndpointReduction.denominator_recurrence' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.ReturnGuard.PrimitiveEndpointReduction.denominator_recurrence' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.ReturnGuard.PrimitiveEndpointReduction.denominator_growth_factorization' depends on axioms: [propext,
+ Classical.choice,
  Quot.sound]
 'MatrixMortality.ReturnGuard.PrimitiveEndpointReduction.nonDecreasing_wait_le_log_recordBound' depends on axioms: [propext,
  Classical.choice,
@@ -553,16 +556,20 @@
 'MatrixMortality.ReturnGuard.smithRubanDecoder_weight_contraction' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-'MatrixMortality.ReturnGuard.PrimitiveEndpointReduction.coreQuotient_dvd_complement' depends on axioms: [propext]
+'MatrixMortality.ReturnGuard.PrimitiveEndpointReduction.coreQuotient_dvd_complement' depends on axioms: [propext,
+ Quot.sound]
 'MatrixMortality.ReturnGuard.PrimitiveEndpointReduction.coreQuotient_coprime_targetDenominator' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
 'MatrixMortality.ReturnGuard.PrimitiveEndpointReduction.source_eq_smithRubanQuotient' depends on axioms: [propext,
+ Classical.choice,
  Quot.sound]
 'MatrixMortality.ReturnGuard.PrimitiveEndpointReduction.smithRuban_resetDefect' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-'MatrixMortality.ReturnGuard.PrimitiveEndpointReduction.maximalCancellation' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.ReturnGuard.PrimitiveEndpointReduction.maximalCancellation' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.ReturnGuard.PrimitiveEndpointReduction.maximalCancellation_targetNumerator_odd' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]

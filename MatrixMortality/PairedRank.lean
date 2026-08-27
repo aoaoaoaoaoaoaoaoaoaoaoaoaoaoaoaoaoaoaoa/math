@@ -54,40 +54,129 @@ def pairedRankObservableNative (β : Nat) (body : List TagLetter) :
     Matrix (Fin 4) (Fin 4) ℤ :=
   finiteSuffixStates (pairedGenerator ℤ β body) (pairedColumn ℤ β) pairedRankSuffixes
 
+private theorem pairedRankDataRow (β : Nat) (body : List TagLetter) :
+    pairedRow ℤ ᵥ* pairedGenerator ℤ β body (.data .b) = pairedRankReachable β 1 := by
+  ext j
+  fin_cases j <;>
+    simp [pairedRankReachable, pairedGenerator, pairedDataMatrix_eq_explicit,
+      pairedRow, nearyUpper, nearyLower, ternaryCode_tagCode_b,
+      ternaryCode_cons, ternaryDigit, Matrix.vecMul,
+      dotProduct, Fin.sum_univ_succ]
+
+private theorem pairedRankPrefixState_zero (β : Nat) (body : List TagLetter) :
+    pairedRow ℤ ᵥ* wordProduct (pairedGenerator ℤ β body) (pairedRankPrefixes 0) =
+      pairedRankReachable β 0 := by
+  ext j
+  fin_cases j <;>
+    simp [pairedRankPrefixes, pairedRankReachable, pairedRow, wordProduct,
+      Matrix.vecMul_one]
+
+private theorem pairedRankPrefixState_one (β : Nat) (body : List TagLetter) :
+    pairedRow ℤ ᵥ* wordProduct (pairedGenerator ℤ β body) (pairedRankPrefixes 1) =
+      pairedRankReachable β 1 := by
+  simpa [pairedRankPrefixes, wordProduct] using pairedRankDataRow β body
+
+private theorem pairedRankPrefixState_two (β : Nat) (body : List TagLetter) :
+    pairedRow ℤ ᵥ* wordProduct (pairedGenerator ℤ β body) (pairedRankPrefixes 2) =
+      pairedRankReachable β 2 := by
+  rw [show pairedRankPrefixes 2 = [.data .b, .data .b] from rfl,
+    wordProduct_cons, wordProduct_cons, wordProduct_nil, mul_one,
+    ← Matrix.vecMul_vecMul, pairedRankDataRow]
+  ext j
+  fin_cases j <;>
+    simp [pairedRankReachable, pairedGenerator, pairedDataMatrix_eq_explicit,
+      nearyUpper, nearyLower, ternaryCode_tagCode_b, ternaryCode_cons,
+      ternaryDigit, nearyWidthScaleInt, pow_succ,
+      Matrix.vecMul, dotProduct, Fin.sum_univ_succ]
+  all_goals ring
+
+private theorem pairedRankPrefixState_three (β : Nat) (body : List TagLetter) :
+    pairedRow ℤ ᵥ* wordProduct (pairedGenerator ℤ β body) (pairedRankPrefixes 3) =
+      pairedRankReachable β 3 := by
+  rw [show pairedRankPrefixes 3 = [.data .b, .toggle] from rfl,
+    wordProduct_cons, wordProduct_cons, wordProduct_nil, mul_one,
+    ← Matrix.vecMul_vecMul, pairedRankDataRow]
+  ext j
+  fin_cases j <;>
+    simp [pairedRankReachable, pairedGenerator, pairedToggleMatrix_eq_explicit,
+      Matrix.vecMul, dotProduct, Fin.sum_univ_succ]
+
 theorem pairedRankReachableNative_eq (β : Nat) (body : List TagLetter) :
     pairedRankReachableNative β body = pairedRankReachable β := by
   ext i j
-  fin_cases i <;> fin_cases j <;>
-    simp [pairedRankReachableNative, finitePrefixStates, pairedRankPrefixes,
-      pairedRankReachable, pairedGenerator, pairedDataMatrix_eq_explicit,
-      pairedToggleMatrix_eq_explicit,
-      pairedRow, wordProduct, nearyUpper, nearyLower, ternaryCode_tagCode_b,
-      ternaryCode_cons, ternaryCode_singleton, ternaryDigit, nearyWidthScaleInt, pow_succ,
-      Matrix.vecHead, Matrix.vecTail, Matrix.vecMul_one, Matrix.vecMul, Matrix.dotProduct,
-      Matrix.one_apply, Fin.ext_iff, Matrix.mul_apply, Fin.sum_univ_succ]
-  all_goals
-    solve
-    | ring
-    | omega
+  change (pairedRow ℤ ᵥ*
+    wordProduct (pairedGenerator ℤ β body) (pairedRankPrefixes i)) j =
+      pairedRankReachable β i j
+  fin_cases i
+  · exact congrFun (pairedRankPrefixState_zero β body) j
+  · exact congrFun (pairedRankPrefixState_one β body) j
+  · exact congrFun (pairedRankPrefixState_two β body) j
+  · exact congrFun (pairedRankPrefixState_three β body) j
+
+private theorem pairedRankSuffixState_zero (β : Nat) (body : List TagLetter) :
+    wordProduct (pairedGenerator ℤ β body) (pairedRankSuffixes 0) *ᵥ pairedColumn ℤ β =
+      fun i => pairedRankObservable β i 0 := by
+  ext i
+  fin_cases i <;>
+    simp [pairedRankSuffixes, pairedRankObservable, pairedColumn, phaseVector,
+      controllerVector, pairControllerEquiv, sideTerminalColumn, sidePcpMatrix,
+      sideTailBasis, wordProduct, nearyMarkerValueInt, nearyWidthScaleInt, pow_succ]
+  all_goals ring
+
+private theorem pairedRankToggleColumn (β : Nat) (body : List TagLetter) :
+    pairedGenerator ℤ β body .toggle *ᵥ pairedColumn ℤ β =
+      fun i => pairedRankObservable β i 1 := by
+  ext i
+  fin_cases i <;>
+    simp [pairedRankObservable, pairedGenerator, pairedToggleMatrix_eq_explicit,
+      pairedColumn, phaseVector, controllerVector, pairControllerEquiv,
+      sideTerminalColumn, sidePcpMatrix, sideTailBasis, nearyMarkerValueInt,
+      nearyWidthScaleInt, pow_succ, Matrix.mulVec, dotProduct, Fin.sum_univ_succ]
+  all_goals ring
+
+private theorem pairedRankSuffixState_one (β : Nat) (body : List TagLetter) :
+    wordProduct (pairedGenerator ℤ β body) (pairedRankSuffixes 1) *ᵥ pairedColumn ℤ β =
+      fun i => pairedRankObservable β i 1 := by
+  simpa [pairedRankSuffixes, wordProduct] using pairedRankToggleColumn β body
+
+private theorem pairedRankSuffixState_two (β : Nat) (body : List TagLetter) :
+    wordProduct (pairedGenerator ℤ β body) (pairedRankSuffixes 2) *ᵥ pairedColumn ℤ β =
+      fun i => pairedRankObservable β i 2 := by
+  ext i
+  fin_cases i <;>
+    simp [pairedRankSuffixes, pairedRankObservable, pairedGenerator,
+      pairedDataMatrix_eq_explicit, pairedColumn, phaseVector, controllerVector,
+      pairControllerEquiv, sideTerminalColumn, sidePcpMatrix, sideTailBasis,
+      wordProduct, nearyUpper, nearyLower, ternaryCode_tagCode_b,
+      ternaryCode_cons, ternaryDigit,
+      nearyMarkerValueInt, nearyWidthScaleInt, pow_succ,
+      Matrix.mulVec, dotProduct, Fin.sum_univ_succ]
+  all_goals ring
+
+private theorem pairedRankSuffixState_three (β : Nat) (body : List TagLetter) :
+    wordProduct (pairedGenerator ℤ β body) (pairedRankSuffixes 3) *ᵥ pairedColumn ℤ β =
+      fun i => pairedRankObservable β i 3 := by
+  rw [show pairedRankSuffixes 3 = [.data .b, .toggle] from rfl,
+    wordProduct_cons, wordProduct_cons, wordProduct_nil, mul_one,
+    ← Matrix.mulVec_mulVec, pairedRankToggleColumn]
+  ext i
+  fin_cases i <;>
+    simp [pairedRankObservable, pairedGenerator, pairedDataMatrix_eq_explicit,
+      nearyUpper, nearyLower, ternaryCode_tagCode_b, ternaryCode_cons,
+      ternaryDigit, nearyMarkerValueInt,
+      nearyWidthScaleInt, pow_succ, Matrix.mulVec, dotProduct, Fin.sum_univ_succ]
+  all_goals ring
 
 theorem pairedRankObservableNative_eq (β : Nat) (body : List TagLetter) :
     pairedRankObservableNative β body = pairedRankObservable β := by
   ext i j
-  fin_cases i <;> fin_cases j <;>
-    simp [pairedRankObservableNative, finiteSuffixStates, pairedRankSuffixes,
-      pairedRankObservable, pairedGenerator, pairedDataMatrix_eq_explicit,
-      pairedToggleMatrix_eq_explicit,
-      pairedColumn, phaseVector, controllerVector, pairControllerEquiv,
-      sideTerminalColumn, sidePcpMatrix, sideTailBasis,
-      wordProduct, nearyUpper, nearyLower, ternaryCode_tagCode_b,
-      ternaryCode_cons, ternaryCode_singleton, ternaryDigit,
-      nearyMarkerValueInt, nearyWidthScaleInt, pow_succ,
-      Matrix.vecHead, Matrix.vecTail, Matrix.one_mulVec, Matrix.mulVec, Matrix.dotProduct,
-      Matrix.one_apply, Fin.ext_iff, Matrix.mul_apply, Fin.sum_univ_succ]
-  all_goals
-    solve
-    | ring
-    | omega
+  change (wordProduct (pairedGenerator ℤ β body) (pairedRankSuffixes j) *ᵥ
+    pairedColumn ℤ β) i = pairedRankObservable β i j
+  fin_cases j
+  · exact congrFun (pairedRankSuffixState_zero β body) i
+  · exact congrFun (pairedRankSuffixState_one β body) i
+  · exact congrFun (pairedRankSuffixState_two β body) i
+  · exact congrFun (pairedRankSuffixState_three β body) i
 
 /-- Three-dimensional minor left by the sparse first reachable row. -/
 def pairedRankReachableMinor (β : Nat) : Matrix (Fin 3) (Fin 3) ℤ :=
@@ -113,7 +202,8 @@ theorem pairedRankReachable_det (β : Nat) :
       48 * (3 * nearyMarkerValueInt β + 2) *
         (13 * (9 * nearyWidthScaleInt β) - 15) := by
   rw [pairedRankReachable_det_eq_minor, Matrix.det_fin_three]
-  norm_num [pairedRankReachableMinor]
+  norm_num [pairedRankReachableMinor, Matrix.cons_val_zero, Matrix.cons_val_one,
+    Matrix.cons_val_two]
   ring
 
 /-- Three-dimensional minor left by the sparse second observable row. -/
@@ -141,7 +231,8 @@ theorem pairedRankObservableMinor_det (β : Nat) :
       -24 * (3 * nearyWidthScaleInt β) *
         (nearyMarkerValueInt β - 3 * nearyWidthScaleInt β + 2) := by
   rw [Matrix.det_fin_three]
-  norm_num [pairedRankObservableMinor]
+  norm_num [pairedRankObservableMinor, Matrix.cons_val_zero, Matrix.cons_val_one,
+    Matrix.cons_val_two]
   ring
 
 theorem pairedRankObservable_det (β : Nat) :

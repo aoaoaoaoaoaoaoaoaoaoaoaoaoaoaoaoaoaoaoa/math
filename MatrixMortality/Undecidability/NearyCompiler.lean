@@ -16,7 +16,6 @@ open scoped BigOperators
 
 namespace MatrixMortality.Undecidability.NearyCompiler
 
-open Mathlib (Vector)
 
 /-- The prime code for the empty cyclic-tag symbol. -/
 def epsilonPrime : List TagLetter :=
@@ -37,14 +36,14 @@ theorem bitPrime_length (bit : Bool) : (bitPrime bit).length = 11 := by
 
 /-- Prime-code a binary word. -/
 def encodePrimes (bits : List Bool) : List TagLetter :=
-  (bits.map bitPrime).join
+  (bits.map bitPrime).flatten
 
 /-- Prime coding is primitive recursive. -/
 theorem encodePrimes_primrec : Primrec encodePrimes := by
   have bitPrimeRec : Primrec bitPrime :=
-    Primrec.dom_fintype _
+    Primrec.dom_finite _
   exact
-    (Primrec.list_join.comp
+    (Primrec.list_flatten.comp
       (Primrec.list_map Primrec.id (bitPrimeRec.comp₂ Primrec₂.right))).of_eq fun bits => by
         rfl
 
@@ -58,7 +57,7 @@ theorem encodePrimes_length (bits : List Bool) : (encodePrimes bits).length = 11
 
 /-- Repeat and concatenate one word. -/
 def repeatWord {α : Type*} (count : Nat) (word : List α) : List α :=
-  (List.replicate count word).join
+  (List.replicate count word).flatten
 
 @[simp]
 theorem repeatWord_length {α : Type*} (count : Nat) (word : List α) :
@@ -216,7 +215,7 @@ def instructionAt {period : Nat} (phase : Fin (deletionWidth period)) : Fin peri
 
 /-- Table 2's input track. -/
 def inputTrack {period : Nat} (system : CyclicTag period) (input : List Bool)
-    (period_pos : 0 < period) : Vector TagLetter (trackWidth system input) :=
+    (period_pos : 0 < period) : List.Vector TagLetter (trackWidth system input) :=
   ⟨padBetween (trackWidth system input) .c
       (List.replicate (deletionWidth period - 2) TagLetter.b ++ encodePrimes input)
       (repeatWord period epsilonPrime),
@@ -267,7 +266,7 @@ theorem inputTrack_last {period : Nat} (system : CyclicTag period) (input : List
       exact Nat.pred_lt (trackWidth_pos system input).ne'⟩
   change track.val.get index = .b
   have index_eq : index =
-      ⟨track.val.length - 1, Nat.pred_lt (List.length_pos.mpr track_ne).ne'⟩ := by
+      ⟨track.val.length - 1, Nat.pred_lt (List.length_pos_of_ne_nil track_ne).ne'⟩ := by
     apply Fin.ext
     simp [index, track.property]
   rw [index_eq, List.get_length_sub_one]
@@ -275,7 +274,7 @@ theorem inputTrack_last {period : Nat} (system : CyclicTag period) (input : List
 
 /-- The common `⟨ε⟩` and `⟨0⟩` track, with the wraparound track clipped on the left. -/
 def epsilonTrack {period : Nat} (system : CyclicTag period) (input : List Bool)
-    (period_pos : 0 < period) (wraps : Bool) : Vector TagLetter (trackWidth system input) :=
+    (period_pos : 0 < period) (wraps : Bool) : List.Vector TagLetter (trackWidth system input) :=
   if wraps then
     ⟨padRight (trackWidth system input) .c
         (epsilonPrime.tail ++ repeatWord (period - 1) epsilonPrime),
@@ -287,7 +286,7 @@ def epsilonTrack {period : Nat} (system : CyclicTag period) (input : List Bool)
 /-- The ordinary `⟨1⟩` track for one cyclic appendant. -/
 def appendantTrack {period : Nat} (system : CyclicTag period) (input : List Bool)
     (period_pos : 0 < period) (phase : Fin period) (wraps : Bool) :
-    Vector TagLetter (trackWidth system input) :=
+    List.Vector TagLetter (trackWidth system input) :=
   if wraps then
     ⟨padRight (trackWidth system input) .c (encodePrimes (system.appendant phase)).tail,
       padRight_length TagLetter.c _
@@ -299,32 +298,63 @@ def appendantTrack {period : Nat} (system : CyclicTag period) (input : List Bool
 
 /-- The exceptional `⟨1⟩` track that initiates the tag-system halting cascade. -/
 def haltingTrack {period : Nat} (system : CyclicTag period) (input : List Bool) :
-    Vector TagLetter (trackWidth system input) :=
+    List.Vector TagLetter (trackWidth system input) :=
   ⟨.b :: List.replicate (trackWidth system input - 1) .c, by
     have positive : 0 < trackWidth system input := by
       simp [trackWidth]
     simp
     omega⟩
 
+/-- Unrefined list underlying one exact Table 2 track. -/
+def tableTrackVal {period : Nat} (system : CyclicTag period) (input : List Bool)
+    (haltPhase : Fin period) (period_pos : 0 < period)
+    (phase : Fin (deletionWidth period)) : List TagLetter :=
+  if phase.val = deletionWidth period - 1 then
+    (inputTrack system input period_pos).val
+  else if phase.val % 10 = 1 then
+    List.replicate (trackWidth system input) .c
+  else if phase.val % 10 = 3 then
+    let instruction := instructionAt phase
+    if instruction = haltPhase then
+      (haltingTrack system input).val
+    else
+      (appendantTrack system input period_pos instruction (instruction.val = 0)).val
+  else if phase.val % 10 = 5 then
+    let instruction := instructionAt phase
+    (epsilonTrack system input period_pos (instruction.val = 0)).val
+  else if phase.val % 10 = 7 then
+    let instruction := instructionAt phase
+    (epsilonTrack system input period_pos (instruction.val = 0)).val
+  else
+    List.replicate (trackWidth system input) .b
+
+private theorem tableTrackVal_length {period : Nat} (system : CyclicTag period)
+    (input : List Bool) (haltPhase : Fin period) (period_pos : 0 < period)
+    (phase : Fin (deletionWidth period)) :
+    (tableTrackVal system input haltPhase period_pos phase).length =
+      trackWidth system input := by
+  unfold tableTrackVal
+  split
+  · exact (inputTrack system input period_pos).property
+  · split
+    · simp
+    · split
+      · dsimp only
+        split
+        · exact (haltingTrack system input).property
+        · exact (appendantTrack system input period_pos _ _).property
+      · split
+        · exact (epsilonTrack system input period_pos _).property
+        · split
+          · exact (epsilonTrack system input period_pos _).property
+          · simp
+
 /-- The exact length-`s` track assigned to one of the `β = 10p` phases in Table 2. -/
 def tableTrack {period : Nat} (system : CyclicTag period) (input : List Bool)
     (haltPhase : Fin period) (period_pos : 0 < period)
-    (phase : Fin (deletionWidth period)) : Vector TagLetter (trackWidth system input) :=
-  if phase.val = deletionWidth period - 1 then
-    inputTrack system input period_pos
-  else
-    match phase.val % 10 with
-    | 1 => ⟨List.replicate (trackWidth system input) .c, by simp⟩
-    | 3 =>
-        let instruction := instructionAt phase
-        if instruction = haltPhase then
-          haltingTrack system input
-        else
-          appendantTrack system input period_pos instruction (instruction.val = 0)
-    | 5 | 7 =>
-        let instruction := instructionAt phase
-        epsilonTrack system input period_pos (instruction.val = 0)
-    | _ => ⟨List.replicate (trackWidth system input) .b, by simp⟩
+    (phase : Fin (deletionWidth period)) : List.Vector TagLetter (trackWidth system input) :=
+  ⟨tableTrackVal system input haltPhase period_pos phase,
+    tableTrackVal_length system input haltPhase period_pos phase⟩
 
 private def appendantStemAt {period : Nat} (system : CyclicTag period)
     (phase : Fin (deletionWidth period)) : List TagLetter :=
@@ -386,11 +416,11 @@ theorem tableTrack_val_primrec₂ {period : Nat} (system : CyclicTag period)
   have appendantStemRec :
       Primrec fun pair : List Bool × Fin (deletionWidth period) =>
         appendantStemAt system pair.2 :=
-    (Primrec.dom_fintype (appendantStemAt system)).comp Primrec.snd
+    (Primrec.dom_finite (appendantStemAt system)).comp Primrec.snd
   have epsilonStemRec :
       Primrec fun pair : List Bool × Fin (deletionWidth period) =>
         epsilonStemAt pair.2 :=
-    (Primrec.dom_fintype epsilonStemAt).comp Primrec.snd
+    (Primrec.dom_finite epsilonStemAt).comp Primrec.snd
   have appendantTrackRec :
       Primrec fun pair : List Bool × Fin (deletionWidth period) =>
         padRight (trackWidth system pair.1) TagLetter.c
@@ -425,7 +455,8 @@ theorem tableTrack_val_primrec₂ {period : Nat} (system : CyclicTag period)
       [DecidablePred predicate] :
       PrimrecPred fun pair : List Bool × Fin (deletionWidth period) =>
         predicate pair.2 :=
-    (Primrec.dom_fintype fun phase => decide (predicate phase)).comp Primrec.snd
+    ⟨inferInstance,
+      (Primrec.dom_finite fun phase => decide (predicate phase)).comp Primrec.snd⟩
   have lastPred :
       PrimrecPred fun pair : List Bool × Fin (deletionWidth period) =>
         pair.2.val = deletionWidth period - 1 :=
@@ -453,15 +484,19 @@ theorem tableTrack_val_primrec₂ {period : Nat} (system : CyclicTag period)
                 (constantTrackRec TagLetter.b)))))).of_eq ?_
     rintro ⟨input, phase⟩
     by_cases last : phase.val = deletionWidth period - 1
-    · simp [tableTrack, last, inputTrack, padBetween, List.append_assoc]
-    · simp only [tableTrack, last, if_false]
-      have residue_lt : phase.val % 10 < 10 :=
-        Nat.mod_lt _ (by omega)
-      interval_cases residue : phase.val % 10 <;>
-        simp [residue, appendantTrack_val_eq_stem, epsilonTrack_val_eq_stem,
-          haltingTrack]
-      split <;>
-        simp_all [appendantTrack_val_eq_stem]
+    · simp [tableTrack, tableTrackVal, last, inputTrack, padBetween, List.append_assoc]
+    · simp only [tableTrack, tableTrackVal, last, if_false]
+      split
+      · simp_all
+      · split
+        · split
+          · simp_all [haltingTrack]
+          · simp_all [appendantTrack_val_eq_stem]
+        · split
+          · simp_all [epsilonTrack_val_eq_stem]
+          · split
+            · simp_all [epsilonTrack_val_eq_stem]
+            · simp_all
   exact bodyRec.to₂
 
 /-- Final phase in the woven Table 2 word. -/
@@ -473,7 +508,8 @@ theorem tableTrack_lastPhase {period : Nat} (system : CyclicTag period) (input :
     (haltPhase : Fin period) (period_pos : 0 < period) :
     tableTrack system input haltPhase period_pos (lastPhase period_pos) =
       inputTrack system input period_pos := by
-  simp [tableTrack, lastPhase]
+  apply Subtype.ext
+  simp [tableTrack, tableTrackVal, lastPhase]
 
 /-- Whole `c`-appendant, including its final `b`, obtained by weaving the prescribed tracks. -/
 def wholeAppendant {period : Nat} (system : CyclicTag period) (input : List Bool)
@@ -508,8 +544,8 @@ theorem gridTrack_tableTrack {period : Nat} (system : CyclicTag period) (input :
         phase =
       (tableTrack system input haltPhase period_pos phase).val := by
   unfold gridTrack
-  rw [← Mathlib.Vector.toList_ofFn]
-  exact congrArg Mathlib.Vector.toList <| Mathlib.Vector.ext fun column => by simp
+  rw [← List.Vector.toList_ofFn]
+  exact congrArg List.Vector.toList <| List.Vector.ext fun column => by simp
 
 @[simp]
 theorem wholeAppendant_length {period : Nat} (system : CyclicTag period) (input : List Bool)
@@ -611,10 +647,11 @@ theorem trackIndex_last {period : Nat} (system : CyclicTag period) (input : List
 
 theorem wholeAppendant_get_lastTrack {period : Nat} (system : CyclicTag period)
     (input : List Bool) (haltPhase : Fin period) (period_pos : 0 < period) :
-    (wholeAppendant system input haltPhase period_pos).get
-        (Fin.cast (wholeAppendant_length system input haltPhase period_pos).symm
-          (trackIndex (lastPhase period_pos) (lastColumn system input))) = .b := by
-  simpa [wholeAppendant, inputTrack_last] using
+    (wholeAppendant system input haltPhase period_pos)[
+        (trackIndex (lastPhase period_pos) (lastColumn system input)).val]'(by
+          rw [wholeAppendant_length]
+          exact (trackIndex (lastPhase period_pos) (lastColumn system input)).isLt) = .b := by
+  simpa [wholeAppendant, List.get_eq_getElem, inputTrack_last] using
     weave_get_track (deletionWidth_pos period_pos)
       (fun phase column => (tableTrack system input haltPhase period_pos phase).get column)
       (lastPhase period_pos) (lastColumn system input)
@@ -638,17 +675,9 @@ theorem wholeAppendant_getLast {period : Nat} (system : CyclicTag period) (input
     have width_pos := trackWidth_pos system input
     simp at lengths
     omega
-  let index : Fin word.length :=
-    Fin.cast (wholeAppendant_length system input haltPhase period_pos).symm
-      (trackIndex (lastPhase period_pos) (lastColumn system input))
-  have index_eq : index =
-      ⟨word.length - 1, Nat.pred_lt (List.length_pos.mpr word_ne).ne'⟩ := by
-    apply Fin.ext
-    simp [index, word, trackIndex_last, wholeAppendant_length]
   have at_index := wholeAppendant_get_lastTrack system input haltPhase period_pos
-  change word.get index = .b at at_index
-  rw [index_eq, List.get_length_sub_one] at at_index
-  exact at_index
+  simpa [word, List.getLast_eq_getElem, trackIndex_last,
+    wholeAppendant_length] using at_index
 
 /-- The variable body consumed by the fixed-boundary source theorem. -/
 def body {period : Nat} (system : CyclicTag period) (input : List Bool)
@@ -754,14 +783,33 @@ theorem expandPrime_replicate_b {period : Nat} (system : CyclicTag period) (inpu
       List.replicate count .b := by
   induction count with
   | zero => rfl
-  | succ count ih => simp [expandPrime, spell, compiledOutput, ih]
+  | succ count ih =>
+      rw [List.replicate_succ]
+      change
+        TagLetter.b ::
+            expandPrime system input haltPhase period_pos
+              (List.replicate count .b) =
+          TagLetter.b :: List.replicate count .b
+      rw [ih]
 
 @[simp]
 theorem expandPrime_replicate_c {period : Nat} (system : CyclicTag period) (input : List Bool)
     (haltPhase : Fin period) (period_pos : 0 < period) (count : Nat) :
     expandPrime system input haltPhase period_pos (List.replicate count .c) =
       repeatWord count (wholeAppendant system input haltPhase period_pos) := by
-  simp [expandPrime, repeatWord, spell, compiledOutput]
+  induction count with
+  | zero => rfl
+  | succ count ih =>
+      rw [List.replicate_succ]
+      change
+        wholeAppendant system input haltPhase period_pos ++
+            expandPrime system input haltPhase period_pos
+              (List.replicate count .c) =
+          wholeAppendant system input haltPhase period_pos ++
+            (List.replicate count
+              (wholeAppendant system input haltPhase period_pos)).flatten
+      rw [ih]
+      rfl
 
 @[simp]
 theorem epsilonObject_eq {period : Nat} (system : CyclicTag period) (input : List Bool)
@@ -769,30 +817,27 @@ theorem epsilonObject_eq {period : Nat} (system : CyclicTag period) (input : Lis
     epsilonObject system input haltPhase period_pos =
       List.replicate 4 .b ++ wholeAppendant system input haltPhase period_pos ++
         List.replicate 6 .b := by
-  simp [epsilonObject, expandPrime, epsilonPrime, spell_append, spell, compiledOutput,
-    List.append_assoc]
+  simp [epsilonObject, expandPrime, epsilonPrime, spell, compiledOutput]
 
 theorem bitObject_eq_false {period : Nat} (system : CyclicTag period) (input : List Bool)
     (haltPhase : Fin period) (period_pos : 0 < period) :
     bitObject system input haltPhase period_pos false =
       List.replicate 6 .b ++ wholeAppendant system input haltPhase period_pos ++
         List.replicate 4 .b := by
-  simp [bitObject, expandPrime, bitPrime, spell_append, spell, compiledOutput,
-    List.append_assoc]
+  simp [bitObject, expandPrime, bitPrime, spell, compiledOutput]
 
 theorem bitObject_eq_true {period : Nat} (system : CyclicTag period) (input : List Bool)
     (haltPhase : Fin period) (period_pos : 0 < period) :
     bitObject system input haltPhase period_pos true =
       List.replicate 8 .b ++ wholeAppendant system input haltPhase period_pos ++
         List.replicate 2 .b := by
-  simp [bitObject, expandPrime, bitPrime, spell_append, spell, compiledOutput,
-    List.append_assoc]
+  simp [bitObject, expandPrime, bitPrime, spell, compiledOutput]
 
 theorem expandPrime_encodePrimes {period : Nat} (system : CyclicTag period)
     (input : List Bool) (haltPhase : Fin period) (period_pos : 0 < period)
     (bits : List Bool) :
     expandPrime system input haltPhase period_pos (encodePrimes bits) =
-      (bits.map (bitObject system input haltPhase period_pos)).join := by
+      (bits.map (bitObject system input haltPhase period_pos)).flatten := by
   induction bits with
   | nil => rfl
   | cons bit bits ih =>
@@ -839,6 +884,15 @@ def arithmeticEnvelope {period : Nat} (system : CyclicTag period) (input : List 
   paddingRounds := safetyBound system input
   beta_large := deletionWidth_large period_pos
   body_length := body_length system input haltPhase period_pos
+
+@[simp] theorem arithmeticEnvelope_beta {period : Nat} (system : CyclicTag period)
+    (input : List Bool) (haltPhase : Fin period) (period_pos : 0 < period) :
+    (arithmeticEnvelope system input haltPhase period_pos).β = deletionWidth period := rfl
+
+@[simp] theorem arithmeticEnvelope_body {period : Nat} (system : CyclicTag period)
+    (input : List Bool) (haltPhase : Fin period) (period_pos : 0 < period) :
+    (arithmeticEnvelope system input haltPhase period_pos).body =
+      body system input haltPhase period_pos := rfl
 
 theorem initial_eq_drop_whole {period : Nat} (system : CyclicTag period) (input : List Bool)
     (haltPhase : Fin period) (period_pos : 0 < period) :

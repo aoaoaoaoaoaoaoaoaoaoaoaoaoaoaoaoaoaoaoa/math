@@ -519,7 +519,7 @@ theorem centeredCurveExpression_domain {y auxiliary : ℝ}
     centeredCurveExpression.DomainAt y auxiliary := by
   have hyDomain := horizontal_domain y auxiliary
   have hyMem : (EntropyExpr.horizontal.eval y auxiliary) ∈ Icc (0 : ℝ) 1 := by
-    simpa only [EntropyExpr.eval] using And.intro hy₀.le hy₁.le
+    simpa only [EntropyExpr.eval, Set.mem_Icc] using And.intro hy₀.le hy₁.le
   have hySquareMem :
       (EntropyExpr.mul .horizontal .horizontal).eval y auxiliary ∈ Icc (0 : ℝ) 1 := by
     simp only [EntropyExpr.eval]
@@ -554,7 +554,7 @@ theorem centeredCurveExpression_eval (y auxiliary : ℝ) :
         (1 + entropySlack) * targetComplement * y * binEntropy y := by
   simp [centeredCurveExpression, yuGap, EntropyExpr.eval, EntropyExpr.sub,
     dependentShare, entropySlack, targetComplement, abundanceTarget]
-  ring
+  ring_nf
 
 theorem endpointExpression_eval {a q : ℝ} (haHalf : a ≤ 1 / 2) :
     endpointExpression.eval a q = endpointCertificateObjective a q := by
@@ -564,7 +564,7 @@ theorem endpointExpression_eval {a q : ℝ} (haHalf : a ≤ 1 / 2) :
     endpointUpperWeight, yuGap, EntropyExpr.eval, EntropyExpr.sub, EntropyExpr.div,
     EntropyExpr.join, EntropyExpr.selfJoin, endpointCertificateWeight, Frankl.yuGap,
     Frankl.join, abundanceTarget, dependentShare, entropySlack]
-  ring
+  ring_nf
 
 theorem lowerRegionExpression_eval {upperWeight displacement : ℝ}
     (hlowerHalf : lowerRegionLowerMean upperWeight displacement ≤ 1 / 2)
@@ -579,7 +579,7 @@ theorem lowerRegionExpression_eval {upperWeight displacement : ℝ}
     lowerRegionLowerMean, lowerRegionUpperMean, yuGap, EntropyExpr.eval, EntropyExpr.sub,
     EntropyExpr.div, EntropyExpr.join, EntropyExpr.selfJoin, Frankl.yuGap, Frankl.join,
     abundanceTarget, dependentShare, entropySlack]
-  ring
+  ring_nf
 
 theorem upperRegionExpression_eval {upperWeight displacement : ℝ}
     (hlowerHalf : upperRegionLowerMean displacement ≤ 1 / 2)
@@ -594,7 +594,7 @@ theorem upperRegionExpression_eval {upperWeight displacement : ℝ}
     upperRegionLowerMean, upperRegionUpperMean, yuGap, EntropyExpr.eval, EntropyExpr.sub,
     EntropyExpr.div, EntropyExpr.join, EntropyExpr.selfJoin, Frankl.yuGap, Frankl.join,
     abundanceTarget, dependentShare, entropySlack]
-  ring
+  ring_nf
 
 end CertificateObjective
 

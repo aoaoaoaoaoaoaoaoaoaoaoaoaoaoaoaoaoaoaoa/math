@@ -54,7 +54,7 @@ def logTwoBall (terms fuel bits : ℕ) : Option RatBall :=
 
 theorem logTwoBall_contains {terms fuel bits : ℕ} {ball : RatBall}
     (hball : logTwoBall terms fuel bits = some ball) : ball.Contains (log 2) := by
-  simp only [logTwoBall, Option.map_eq_some'] at hball
+  simp only [logTwoBall, Option.map_eq_some_iff] at hball
   rcases hball with ⟨halfLog, hhalfLog, rfl⟩
   have hhalf := roundedRationalLogBall_contains hhalfLog
   have hneg := neg_contains hhalf
@@ -82,17 +82,17 @@ theorem entropyPointBall_contains {terms fuel bits : ℕ} {x : ℚ} {ball : RatB
     subst ball
     rcases hendpoint with rfl | rfl <;>
       simpa using point_contains 0
-  · push_neg at hendpoint
+  · push Not at hendpoint
     generalize hleftResult : roundedRationalLogBall terms fuel bits x = leftResult at hball
     cases leftResult with
-    | none => simp [hleftResult] at hball
+    | none => simp at hball
     | some leftLog =>
       generalize hrightResult :
           roundedRationalLogBall terms fuel bits (1 - x) = rightResult at hball
       cases rightResult with
-      | none => simp [hleftResult, hrightResult] at hball
+      | none => simp at hball
       | some rightLog =>
-        simp [hleftResult, hrightResult] at hball
+        simp at hball
         subst ball
         have hleftLog := roundedRationalLogBall_contains hleftResult
         have hrightLog := roundedRationalLogBall_contains hrightResult
@@ -149,7 +149,7 @@ theorem entropyRangeBall_contains {terms fuel bits : ℕ} {source ball : RatBall
   unfold entropyRangeBall at hball
   generalize hlowerResult : entropyPointBall terms fuel bits lower = lowerResult at hball
   cases lowerResult with
-  | none => simp [lower, upper, hlowerResult] at hball
+  | none => simp [lower, hlowerResult] at hball
   | some lowerEntropy =>
     generalize hupperResult : entropyPointBall terms fuel bits upper = upperResult at hball
     cases upperResult with
@@ -157,9 +157,9 @@ theorem entropyRangeBall_contains {terms fuel bits : ℕ} {source ball : RatBall
     | some upperEntropy =>
       generalize htwoResult : logTwoBall terms fuel bits = twoResult at hball
       cases twoResult with
-      | none => simp [lower, upper, hlowerResult, hupperResult, htwoResult] at hball
+      | none => simp [lower, upper, hlowerResult, hupperResult] at hball
       | some logTwo =>
-        simp only [lower, upper, hlowerResult, hupperResult, htwoResult,
+        simp only [lower, upper, hlowerResult, hupperResult,
           Option.bind_eq_bind] at hball
         split at hball <;> rename_i hupperHalf
         · simp at hball

@@ -45,7 +45,7 @@ theorem prefixAlgebra_exactSandwich_ten_le_finrank
     (exact : InternalSandwich.RepresentsSandwich
       (matrixEndGenerators (prefixAlgebraGenerator β body)) input output
       realization realizationInput realizationOutput) :
-    10 ≤ FiniteDimensional.finrank ℚ State := by
+    10 ≤ Module.finrank ℚ State := by
   simpa using card_le_of_wordProductSpan_eq_top_of_represents
     (prefixAlgebraGenerator β body) input output
     (prefixAlgebra_wordProductSpan_eq_top β body three_le body_long)

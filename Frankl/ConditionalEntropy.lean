@@ -1,4 +1,5 @@
 import Frankl.FiniteEntropy
+import Mathlib.Algebra.BigOperators.Field
 
 namespace Frankl
 
@@ -85,7 +86,7 @@ private theorem fiber_conditionalEntropy_le (law : FiniteProbabilityLaw (ι × B
       calc
         (∑ i, if f i = k then law.first.weight i / coarseMass else 0) =
             (∑ i, if f i = k then law.first.weight i else 0) / coarseMass := by
-          rw [sum_div]
+          rw [Finset.sum_div]
           apply sum_congr rfl
           intro i _
           by_cases hi : f i = k <;> simp [hi]
@@ -109,7 +110,7 @@ private theorem fiber_conditionalEntropy_le (law : FiniteProbabilityLaw (ι × B
             (law.coarsenFirst f).first.weight k else 0) * law.successParameter i) =
             (∑ i, if f i = k then law.weight (i, true) else 0) /
               (law.coarsenFirst f).first.weight k := by
-          rw [sum_div]
+          rw [Finset.sum_div]
           apply sum_congr rfl
           intro i _
           by_cases hi : f i = k

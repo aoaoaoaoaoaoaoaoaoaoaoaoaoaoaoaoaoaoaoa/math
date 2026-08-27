@@ -24,7 +24,7 @@ theorem prependColumn_mulVec {ι ν K : Type*} [Field K] [Fintype ν]
     prependColumn column matrix *ᵥ coefficients =
       coefficients none • column + matrix *ᵥ fun index => coefficients (some index) := by
   ext state
-  simp [prependColumn, Matrix.mulVec, Matrix.dotProduct, Fintype.sum_option, mul_comm]
+  simp [prependColumn, Matrix.mulVec, dotProduct, Fintype.sum_option, mul_comm]
 
 /--
 A nonsingular `ν × ν` section factored through `stateColumns`, together with a nonzero
@@ -93,27 +93,28 @@ theorem twoChannelBoundaryTax
       augmented_surjective (Pi.single state 1)
     have annihilated :
         inactiveRow ⬝ᵥ (augmented *ᵥ coefficients) = 0 := by
-      rw [prependColumn_mulVec, Matrix.dotProduct_add, Matrix.dotProduct_smul,
+      rw [prependColumn_mulVec, dotProduct_add, dotProduct_smul,
         row_annihilates_column, Matrix.dotProduct_mulVec, row_annihilates_columns]
       simp
-    rw [coefficients_image, Matrix.dotProduct_single_one] at annihilated
+    rw [coefficients_image, dotProduct_single_one] at annihilated
     exact row_state_ne_zero annihilated
   have cardinal_le : Fintype.card (Option ν) ≤ Fintype.card ι := by
-    simpa [FiniteDimensional.finrank_pi] using
+    simpa [Module.finrank_pi] using
       LinearMap.finrank_le_finrank_of_injective
         (f := augmented.mulVecLin) augmented_injective
   have cardinal_ne : Fintype.card (Option ν) ≠ Fintype.card ι := by
     intro cardinal_eq
     have finrank_eq :
-        FiniteDimensional.finrank K (Option ν → K) =
-          FiniteDimensional.finrank K (ι → K) := by
-      simpa [FiniteDimensional.finrank_pi] using cardinal_eq
+        Module.finrank K (Option ν → K) =
+          Module.finrank K (ι → K) := by
+      simpa [Module.finrank_pi] using cardinal_eq
     exact augmented_not_surjective
       ((LinearMap.injective_iff_surjective_of_finrank_eq_finrank
         (f := augmented.mulVecLin) finrank_eq).mp augmented_injective)
   have cardinal_lt : Fintype.card (Option ν) < Fintype.card ι :=
     lt_of_le_of_ne cardinal_le cardinal_ne
-  simpa [Fintype.card_option] using cardinal_lt
+  rw [Fintype.card_option] at cardinal_lt
+  omega
 
 /--
 Finite-witness form of the exact diagonal two-channel theorem.  The three vanishing bridge

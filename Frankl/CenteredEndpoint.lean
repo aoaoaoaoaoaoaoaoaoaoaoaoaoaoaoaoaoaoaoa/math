@@ -46,41 +46,55 @@ private theorem hasDerivAt_endpointCenteredCurve {y : ℝ} (hy₀ : 0 < y) (hy�
     exact this.ne
   have hEntropySquare : HasDerivAt (fun z : ℝ ↦ binEntropy (z ^ 2))
       ((log (1 - y ^ 2) - log (y ^ 2)) * (2 * y)) y := by
-    have hraw := (hasDerivAt_binEntropy hySquare₀ hySquare₁).comp
+    have raw := (hasDerivAt_binEntropy hySquare₀ hySquare₁).comp
       (h := fun z : ℝ ↦ z ^ 2) y
       (hasDerivAt_pow 2 y)
-    convert hraw using 1
-    norm_num
+    have derivative : HasDerivAt _
+        ((log (1 - y ^ 2) - log (y ^ 2)) * (2 * y)) y :=
+      raw.congr_deriv (by norm_num)
+    apply derivative.congr_of_eventuallyEq
+    exact Filter.Eventually.of_forall fun _ ↦ rfl
   have hquadratic : HasDerivAt
       (fun z : ℝ ↦ 2 * targetComplement * z - z ^ 2)
       (2 * targetComplement - 2 * y) y := by
-    convert ((hasDerivAt_id y).const_mul (2 * targetComplement)).sub
-      ((hasDerivAt_id y).pow 2) using 1
-    simp [id]
+    have raw := ((hasDerivAt_id y).const_mul (2 * targetComplement)).sub
+      ((hasDerivAt_id y).pow 2)
+    have derivative : HasDerivAt _ (2 * targetComplement - 2 * y) y :=
+      raw.congr_deriv (by
+        simp only [id_eq]
+        ring)
+    apply derivative.congr_of_eventuallyEq
+    filter_upwards with z
+    rfl
   have hweightedEntropy : HasDerivAt (fun z : ℝ ↦ z * binEntropy z)
       (binEntropy y + y * (log (1 - y) - log y)) y := by
-    convert (hasDerivAt_id y).mul
-      (hasDerivAt_binEntropy hy₀.ne' hy₁.ne) using 1
-    all_goals simp [id]
+    have raw := (hasDerivAt_id y).mul
+      (hasDerivAt_binEntropy hy₀.ne' hy₁.ne)
+    have derivative : HasDerivAt _
+        (binEntropy y + y * (log (1 - y) - log y)) y :=
+      raw.congr_deriv (by
+        simp only [id_eq]
+        ring)
+    apply derivative.congr_of_eventuallyEq
+    filter_upwards with z
+    rfl
   have hcombined :=
     ((hEntropySquare.const_mul ((1 - dependentShare) * targetComplement ^ 2)).add
       (hquadratic.const_mul (dependentShare * log 2))).sub
       (hweightedEntropy.const_mul ((1 + entropySlack) * targetComplement))
-  convert hcombined using 1
-  · funext z
-    simp [endpointCenteredCurve, id]
-    ring
-  · simp [endpointCenteredCurveDeriv, id]
-    ring
+  have derivative : HasDerivAt _ (endpointCenteredCurveDeriv y) y :=
+    hcombined.congr_deriv (by
+      dsimp only [endpointCenteredCurveDeriv]
+      ring)
+  apply derivative.congr_of_eventuallyEq
+  filter_upwards with z
+  dsimp only [endpointCenteredCurve, Pi.add_apply, Pi.sub_apply]
+  ring
 
 private theorem hasDerivAt_endpointCenteredCurveDeriv {y : ℝ} (hy₀ : 0 < y) (hy₁ : y < 1) :
     HasDerivAt endpointCenteredCurveDeriv (endpointCenteredCurveDeriv2 y) y := by
   have hySquare : HasDerivAt (fun z : ℝ ↦ z ^ 2) (2 * y) y := by
-    convert (hasDerivAt_id y).mul (hasDerivAt_id y) using 1
-    · funext z
-      simp [pow_two]
-    · simp [id]
-      ring
+    exact (hasDerivAt_pow 2 y).congr_deriv (by norm_num)
   have hySquare₀ : y ^ 2 ≠ 0 := pow_ne_zero 2 hy₀.ne'
   have hySquare₁ : y ^ 2 ≠ 1 := by
     have : y ^ 2 < 1 := by nlinarith [sq_nonneg (1 - y)]
@@ -102,28 +116,44 @@ private theorem hasDerivAt_endpointCenteredCurveDeriv {y : ℝ} (hy₀ : 0 < y) 
       (fun z : ℝ ↦ 2 * z * (log (1 - z ^ 2) - log (z ^ 2)))
       (2 * (log (1 - y ^ 2) - log (y ^ 2)) +
         2 * y * (-(2 * y) / (1 - y ^ 2) - 2 * y / y ^ 2)) y := by
-    convert ((hasDerivAt_id y).const_mul 2).mul hSquareLogDifference using 1
-    all_goals simp [id]
+    have raw := ((hasDerivAt_id y).const_mul 2).mul hSquareLogDifference
+    have derivative : HasDerivAt _
+        (2 * (log (1 - y ^ 2) - log (y ^ 2)) +
+          2 * y * (-(2 * y) / (1 - y ^ 2) - 2 * y / y ^ 2)) y :=
+      raw.congr_deriv (by
+        simp only [id_eq, Pi.sub_apply]
+        ring)
+    apply derivative.congr_of_eventuallyEq
+    filter_upwards with z
+    rfl
   have hlast : HasDerivAt
       (fun z : ℝ ↦ binEntropy z + z * (log (1 - z) - log z))
       ((log (1 - y) - log y) +
         ((log (1 - y) - log y) + y * (-1 / (1 - y) - 1 / y))) y := by
-    convert hEntropy.add ((hasDerivAt_id y).mul hLogDifference) using 1
-    all_goals simp [id]
+    have raw := hEntropy.add ((hasDerivAt_id y).mul hLogDifference)
+    have derivative : HasDerivAt _
+        ((log (1 - y) - log y) +
+          ((log (1 - y) - log y) + y * (-1 / (1 - y) - 1 / y))) y :=
+      raw.congr_deriv (by
+        simp only [id_eq, Pi.sub_apply]
+        ring)
+    apply derivative.congr_of_eventuallyEq
+    filter_upwards with z
+    rfl
   have hlogSquare : log (y ^ 2) = 2 * log y := by
     rw [log_pow]
     norm_num
   have hfirstSimplified : HasDerivAt
       (fun z : ℝ ↦ 2 * z * (log (1 - z ^ 2) - log (z ^ 2)))
       (2 * (log (1 - y ^ 2) - 2 * log y) - 4 / (1 - y ^ 2)) y := by
-    convert hfirst using 1
+    apply hfirst.congr_deriv
     rw [hlogSquare]
     field_simp [hy₀.ne', sub_ne_zero.mpr hySquare₁.symm]
     ring
   have hlastSimplified : HasDerivAt
       (fun z : ℝ ↦ binEntropy z + z * (log (1 - z) - log z))
       (2 * (log (1 - y) - log y) - 1 / (1 - y)) y := by
-    convert hlast using 1
+    apply hlast.congr_deriv
     field_simp [hy₀.ne', sub_ne_zero.mpr hy₁.ne']
     ring
   have hcombined :=
@@ -131,18 +161,19 @@ private theorem hasDerivAt_endpointCenteredCurveDeriv {y : ℝ} (hy₀ : 0 < y) 
       (((hasDerivAt_const y (2 * targetComplement)).sub
         ((hasDerivAt_id y).const_mul 2)).const_mul (dependentShare * log 2))).sub
       (hlastSimplified.const_mul ((1 + entropySlack) * targetComplement))
-  convert hcombined using 1
-  · funext z
-    simp [endpointCenteredCurveDeriv, id]
-    ring
-  · simp only [endpointCenteredCurveDeriv2]
-    ring
+  have derivative : HasDerivAt _ (endpointCenteredCurveDeriv2 y) y :=
+    hcombined.congr_deriv (by
+      dsimp only [endpointCenteredCurveDeriv2]
+      ring)
+  apply derivative.congr_of_eventuallyEq
+  filter_upwards with z
+  simp only [endpointCenteredCurveDeriv, Pi.add_apply, Pi.sub_apply, id_eq]
+  ring
 
 private theorem hasDerivAt_endpointCenteredCurveDeriv2 {y : ℝ} (hy₀ : 0 < y) (hy₁ : y < 1) :
     HasDerivAt endpointCenteredCurveDeriv2 (endpointCenteredCurveDeriv3 y) y := by
   have hySquare : HasDerivAt (fun z : ℝ ↦ z ^ 2) (2 * y) y := by
-    convert hasDerivAt_pow 2 y using 1
-    norm_num
+    exact (hasDerivAt_pow 2 y).congr_deriv (by norm_num)
   have hySquare₁ : y ^ 2 ≠ 1 := by
     have : y ^ 2 < 1 := by nlinarith [sq_nonneg (1 - y)]
     exact this.ne
@@ -155,8 +186,7 @@ private theorem hasDerivAt_endpointCenteredCurveDeriv2 {y : ℝ} (hy₀ : 0 < y)
     hSquareComplement.log hSquareComplementNe
   have hSquareComplementInv : HasDerivAt (fun z : ℝ ↦ (1 - z ^ 2)⁻¹)
       (2 * y / (1 - y ^ 2) ^ 2) y := by
-    convert hSquareComplement.inv hSquareComplementNe using 1
-    all_goals ring
+    exact (hSquareComplement.inv hSquareComplementNe).congr_deriv (by ring)
   have hLog : HasDerivAt (fun z : ℝ ↦ log z) (1 / y) y := by
     simpa only [id_eq] using (hasDerivAt_id y).log hy₀.ne'
   have hComplement : HasDerivAt (fun z : ℝ ↦ 1 - z) (-1) y := by
@@ -166,17 +196,21 @@ private theorem hasDerivAt_endpointCenteredCurveDeriv2 {y : ℝ} (hy₀ : 0 < y)
     hComplement.log hComplementNe
   have hComplementInv : HasDerivAt (fun z : ℝ ↦ (1 - z)⁻¹)
       (1 / (1 - y) ^ 2) y := by
-    convert hComplement.inv hComplementNe using 1
-    all_goals ring
+    exact (hComplement.inv hComplementNe).congr_deriv (by ring)
   have hfirstRaw :=
     ((hSquareComplementLog.sub (hLog.const_mul 2)).const_mul 2).sub
       (hSquareComplementInv.const_mul 4)
   have hfirst : HasDerivAt
       (fun z : ℝ ↦ 2 * (log (1 - z ^ 2) - 2 * log z) - 4 / (1 - z ^ 2))
       (-4 * (y ^ 2 + 1) / (y * (1 - y ^ 2) ^ 2)) y := by
-    convert hfirstRaw using 1
-    field_simp [hy₀.ne', hSquareComplementNe]
-    ring
+    have derivative : HasDerivAt _
+        (-4 * (y ^ 2 + 1) / (y * (1 - y ^ 2) ^ 2)) y :=
+      hfirstRaw.congr_deriv (by
+        field_simp [hy₀.ne', hSquareComplementNe]
+        ring)
+    apply derivative.congr_of_eventuallyEq
+    filter_upwards with z
+    simp only [Pi.sub_apply, div_eq_mul_inv]
   have hsecondRaw :=
     ((hComplementLog.sub hLog).const_mul 2).sub hComplementInv
   have hsecond : HasDerivAt
@@ -186,25 +220,29 @@ private theorem hasDerivAt_endpointCenteredCurveDeriv2 {y : ℝ} (hy₀ : 0 < y)
         2 * (-1 / (1 - y) - 1 / y) - 1 / (1 - y) ^ 2 := by
       field_simp [hy₀.ne', hComplementNe]
       ring
-    convert hsecondRaw using 1
-    funext z
-    simp only [one_div]
+    have derivative : HasDerivAt _ (-(2 - y) / (y * (1 - y) ^ 2)) y :=
+      hsecondRaw.congr_deriv hidentity.symm
+    apply derivative.congr_of_eventuallyEq
+    filter_upwards with z
+    simp only [Pi.sub_apply, div_eq_mul_inv, one_mul]
   have hcombined :=
     ((hfirst.const_mul ((1 - dependentShare) * targetComplement ^ 2)).add
       (hasDerivAt_const y (-2 * dependentShare * log 2))).sub
       (hsecond.const_mul ((1 + entropySlack) * targetComplement))
-  convert hcombined using 1
-  · funext z
-    simp only [endpointCenteredCurveDeriv2]
-    ring
-  · simp only [endpointCenteredCurveDeriv3]
-    have hyPlus : y + 1 ≠ 0 := by nlinarith
-    have hyMinus : y - 1 ≠ 0 := by nlinarith
-    rw [show y * (1 - y ^ 2) ^ 2 =
-      y * (y - 1) ^ 2 * (y + 1) ^ 2 by ring]
-    rw [show y * (1 - y) ^ 2 = y * (y - 1) ^ 2 by ring]
-    field_simp [hy₀.ne', hyPlus, hyMinus]
-    ring
+  have derivative : HasDerivAt _ (endpointCenteredCurveDeriv3 y) y :=
+    hcombined.congr_deriv (by
+      dsimp only [endpointCenteredCurveDeriv3]
+      have hyPlus : y + 1 ≠ 0 := by nlinarith
+      have hyMinus : y - 1 ≠ 0 := by nlinarith
+      rw [show y * (1 - y ^ 2) ^ 2 =
+        y * (y - 1) ^ 2 * (y + 1) ^ 2 by ring]
+      rw [show y * (1 - y) ^ 2 = y * (y - 1) ^ 2 by ring]
+      field_simp [hy₀.ne', hyPlus, hyMinus]
+      ring)
+  apply derivative.congr_of_eventuallyEq
+  filter_upwards with z
+  dsimp only [endpointCenteredCurveDeriv2, Pi.add_apply, Pi.sub_apply]
+  ring
 
 private theorem endpointCenteredCurveThirdPolynomial_monotoneOn :
     MonotoneOn endpointCenteredCurveThirdPolynomial

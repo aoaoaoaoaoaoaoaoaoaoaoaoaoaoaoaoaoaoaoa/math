@@ -1,4 +1,4 @@
-import Mathlib.Computability.TuringMachine
+import Mathlib.Computability.TuringMachine.StackTuringMachine
 
 /-!
 # Finite restriction of supported TM0 machines
@@ -19,6 +19,9 @@ namespace FiniteTM0
 /-- A canonical initial state plus the labels in a finite support. -/
 abbrev State {label : Type*} (support : Finset label) :=
   Unit ⊕ { q // q ∈ support }
+
+instance {label : Type*} {support : Finset label} : Inhabited (State support) :=
+  Sum.inhabitedLeft
 
 /-- Erase the finite wrapper back to the source label type. -/
 def State.value {label : Type*} [Inhabited label]
@@ -77,26 +80,26 @@ def config {label : Type*} [Inhabited label]
 theorem respects {label : Type*} [Inhabited label] [DecidableEq label]
     (source : TM0.Machine Bool label) (support : Finset label)
     (supported : TM0.Supports source ↑support) :
-    Turing.Respects (TM0.step (machine source support)) (TM0.step source)
+    StateTransition.Respects (TM0.step (machine source support)) (TM0.step source)
       fun finiteConfig sourceConfig => config finiteConfig = sourceConfig := by
-  rw [Turing.fun_respects]
+  rw [StateTransition.fun_respects]
   rintro ⟨q, tape⟩
   cases transition : source q.value tape.head with
   | none =>
       have restricted_none := machine_eq_none source support q tape.head transition
-      simp [Turing.FRespects, TM0.step, restricted_none, config, transition]
+      simp [StateTransition.FRespects, TM0.step, restricted_none, config, transition]
   | some command =>
       obtain ⟨q', statement⟩ := command
       have restricted_some :=
         machine_eq_some source support supported q tape.head q' statement transition
       cases statement with
       | move direction =>
-        simp only [TM0.step, restricted_some, Option.map_some, Turing.FRespects]
+        simp only [TM0.step, restricted_some, Option.map_some, StateTransition.FRespects]
         apply Relation.TransGen.single
         simp [TM0.step, transition, config]
         rfl
       | write symbol =>
-        simp only [TM0.step, restricted_some, Option.map_some, Turing.FRespects]
+        simp only [TM0.step, restricted_some, Option.map_some, StateTransition.FRespects]
         apply Relation.TransGen.single
         simp [TM0.step, transition, config]
         rfl
@@ -111,10 +114,10 @@ theorem config_init {label : Type*} [Inhabited label]
 theorem eval_dom_iff {label : Type*} [Inhabited label] [DecidableEq label]
     (source : TM0.Machine Bool label) (support : Finset label)
     (supported : TM0.Supports source ↑support) (input : List Bool) :
-    (Turing.eval (TM0.step (machine source support))
+    (StateTransition.eval (TM0.step (machine source support))
         (TM0.init input : TM0.Cfg Bool (State support))).Dom ↔
-      (Turing.eval (TM0.step source) (TM0.init input)).Dom := by
-  exact Turing.tr_eval_dom (respects source support supported) (config_init support input)
+      (StateTransition.eval (TM0.step source) (TM0.init input)).Dom := by
+  exact StateTransition.tr_eval_dom (respects source support supported) (config_init support input)
     |>.symm
 
 end FiniteTM0

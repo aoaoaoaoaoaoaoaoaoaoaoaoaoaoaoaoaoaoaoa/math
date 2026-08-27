@@ -42,7 +42,7 @@ theorem orbitMarginalEntropy_meanLift {ι : Type*} [Fintype ι]
   classical
   simp [orbitMarginalEntropy, finiteExpectation, orbitMarginalWeight,
     orbitMarginalPoint, meanLiftOrbitLaw, meanLiftWeight, meanLiftPoint,
-    Fintype.sum_prod_type, Fintype.sum_bool, mul_sum]
+    Fintype.sum_prod_type, mul_sum]
   apply sum_congr rfl
   intro i _
   ring
@@ -77,7 +77,7 @@ theorem orbitIndependentEntropy_meanLift {ι : Type*} [Fintype ι]
   classical
   simp [orbitIndependentEntropy, finiteJoinEntropy, orbitMarginalWeight,
     orbitMarginalPoint, meanLiftOrbitLaw, meanLiftWeight, meanLiftPoint,
-    Fintype.sum_prod_type, Fintype.sum_bool, mul_sum]
+    Fintype.sum_prod_type, mul_sum]
   apply sum_congr rfl
   intro i _
   rw [mul_add, mul_sum, mul_sum]

@@ -34,20 +34,20 @@ theorem exists_matrix_mulVec_eq_of_ne_zero
   classical
   have exists_coordinate : ∃ index, source index ≠ 0 := by
     by_contra no_coordinate
-    push_neg at no_coordinate
+    push Not at no_coordinate
     apply source_nonzero
     funext index
     exact no_coordinate index
   obtain ⟨index, coordinate_nonzero⟩ := exists_coordinate
   refine ⟨Matrix.vecMulVec target (Pi.single index (source index)⁻¹), ?_⟩
   ext row
-  simp only [Matrix.mulVec, Matrix.dotProduct, Matrix.vecMulVec_apply]
+  simp only [Matrix.mulVec, dotProduct, Matrix.vecMulVec_apply]
   simp_rw [mul_assoc]
   rw [← Finset.mul_sum]
   rw [Fintype.sum_eq_single index]
   · simp [coordinate_nonzero]
   · intro other other_ne
-    simp [Pi.single_apply, Ne.symm other_ne]
+    simp [Ne.symm other_ne]
 
 theorem wordProductSpan_mulVec_mem_reachable
     (generators : Glyph → Square ι K) (input : Q →ₗ[K] (ι → K))
@@ -56,24 +56,24 @@ theorem wordProductSpan_mulVec_mem_reachable
     matrix *ᵥ input q ∈
       InternalSandwich.reachable (matrixEndGenerators generators) input := by
   refine Submodule.span_induction
-    (p := fun candidate : Square ι K =>
+    (p := fun candidate : Square ι K => fun _ ↦
       candidate *ᵥ input q ∈
         InternalSandwich.reachable (matrixEndGenerators generators) input)
     (s := Set.range (wordProduct generators))
-    (by simpa only [wordProductSpan] using matrix_mem) ?_ ?_ ?_ ?_
+    ?_ ?_ ?_ ?_ (by simpa only [wordProductSpan] using matrix_mem)
   · rintro _ ⟨word, rfl⟩
     apply Submodule.subset_span
     refine ⟨word, q, ?_⟩
     rw [wordProduct_matrixEndGenerators]
     rfl
   · simp
-  · intro left right left_mem right_mem
+  · intro left right _ _ left_mem right_mem
     rw [Matrix.add_mulVec]
     exact
       (InternalSandwich.reachable (matrixEndGenerators generators) input).add_mem
         left_mem right_mem
-  · intro scalar candidate candidate_mem
-    rw [Matrix.smul_mulVec_assoc]
+  · intro scalar candidate _ candidate_mem
+    rw [Matrix.smul_mulVec]
     exact
       (InternalSandwich.reachable (matrixEndGenerators generators) input).smul_mem
         scalar candidate_mem
@@ -85,7 +85,7 @@ theorem reachable_eq_top_of_wordProductSpan_eq_top
     InternalSandwich.reachable (matrixEndGenerators generators) input = ⊤ := by
   have exists_input : ∃ q, input q ≠ 0 := by
     by_contra no_input
-    push_neg at no_input
+    push Not at no_input
     apply input_nonzero
     apply LinearMap.ext
     intro q
@@ -131,18 +131,18 @@ theorem wordProductSpan_output_mulVec_eq_zero
     have invisible := invisible_all word
     exact LinearMap.mem_ker.mp invisible
   refine Submodule.span_induction
-    (p := fun candidate : Square ι K =>
+    (p := fun candidate : Square ι K => fun _ ↦
       output (candidate *ᵥ (x : ι → K)) = 0)
     (s := Set.range (wordProduct generators))
-    (by simpa only [wordProductSpan] using matrix_mem) ?_ ?_ ?_ ?_
+    ?_ ?_ ?_ ?_ (by simpa only [wordProductSpan] using matrix_mem)
   · rintro _ ⟨word, rfl⟩
     rw [← Matrix.toLin'_apply, ← wordProduct_matrixEndGenerators]
     exact invisible_word word
   · simp
-  · intro left right left_zero right_zero
+  · intro left right _ _ left_zero right_zero
     rw [Matrix.add_mulVec, map_add, left_zero, right_zero, add_zero]
-  · intro scalar candidate candidate_zero
-    rw [Matrix.smul_mulVec_assoc, map_smul, candidate_zero, smul_zero]
+  · intro scalar candidate _ candidate_zero
+    rw [Matrix.smul_mulVec, map_smul, candidate_zero, smul_zero]
 
 /-- Full generated algebra and one nonzero output direction force complete observability. -/
 theorem unobservable_eq_bot_of_wordProductSpan_eq_top
@@ -153,7 +153,7 @@ theorem unobservable_eq_bot_of_wordProductSpan_eq_top
       (matrixEndGenerators generators) input output = ⊥ := by
   have exists_output : ∃ target, output target ≠ 0 := by
     by_contra no_output
-    push_neg at no_output
+    push Not at no_output
     apply output_nonzero
     apply LinearMap.ext
     intro target
@@ -181,7 +181,7 @@ theorem quotient_finrank_eq_card_of_wordProductSpan_eq_top
     (output : (ι → K) →ₗ[K] Q)
     (full : wordProductSpan generators = ⊤)
     (input_nonzero : input ≠ 0) (output_nonzero : output ≠ 0) :
-    FiniteDimensional.finrank K
+    Module.finrank K
         ((InternalSandwich.reachable (matrixEndGenerators generators) input) ⧸
           InternalSandwich.unobservable
             (matrixEndGenerators generators) input output) =
@@ -195,7 +195,7 @@ theorem quotient_finrank_eq_card_of_wordProductSpan_eq_top
     (InternalSandwich.unobservable
       (matrixEndGenerators generators) input output).finrank_quotient_add_finrank
   rw [unobservable_bot, finrank_bot, add_zero, reachable_top,
-    finrank_top, FiniteDimensional.finrank_pi] at dimension_sum
+    finrank_top, Module.finrank_pi] at dimension_sum
   rw [unobservable_bot, reachable_top]
   exact dimension_sum
 
@@ -214,7 +214,7 @@ theorem card_le_of_wordProductSpan_eq_top_of_represents
     (exact : InternalSandwich.RepresentsSandwich
       (matrixEndGenerators generators) input output
       realization realizationInput realizationOutput) :
-    Fintype.card ι ≤ FiniteDimensional.finrank K State := by
+    Fintype.card ι ≤ Module.finrank K State := by
   rw [← quotient_finrank_eq_card_of_wordProductSpan_eq_top
     generators input output full input_nonzero output_nonzero]
   exact InternalSandwich.quotient_finrank_le_of_represents

@@ -44,7 +44,7 @@ theorem normalizedTransfer_eq {R : Type*} [CommRing R] (d t : R) :
   ext i j
   fin_cases i <;> fin_cases j <;>
     simp [normalizedTransfer, normalizedConstant, normalizedSlope,
-      Matrix.add_apply, Matrix.smul_apply]
+      Matrix.add_apply]
   all_goals ring
 
 /-- The normalized pencil is conjugate to the original return wherever the basis is invertible;
@@ -74,14 +74,14 @@ theorem negativeBasis_mulVec_first {R : Type*} [CommRing R] (d : R) :
     negativeBasis d *ᵥ ![1, 0] = ![1, 1] := by
   ext i
   fin_cases i <;>
-    simp [negativeBasis, Matrix.mulVec, Matrix.dotProduct, Fin.sum_univ_succ]
+    simp [negativeBasis, Matrix.mulVec, dotProduct, Fin.sum_univ_succ]
 
 /-- The terminal covector becomes `(1-d,0)` in normalized coordinates. -/
 theorem terminal_vecMul_negativeBasis {R : Type*} [CommRing R] (d : R) :
     Matrix.vecMul ![-d, 1] (negativeBasis d) = ![1 - d, 0] := by
   ext j
   fin_cases j <;>
-    simp [negativeBasis, Matrix.vecMul, Matrix.dotProduct, Fin.sum_univ_succ]
+    simp [negativeBasis, Matrix.vecMul, dotProduct, Fin.sum_univ_succ]
   all_goals ring
 
 /-- Exact bridge normalization, including the degenerate value `d=1`. -/
@@ -92,7 +92,7 @@ theorem bridgeScalar_neg_eq (d : ℚ) (scales : List ℚ) :
   rw [bridgeScalar, ← negativeBasis_mulVec_first d, Matrix.mulVec_mulVec,
     transferWord_mul_negativeBasis, ← Matrix.mulVec_mulVec, Matrix.dotProduct_mulVec,
     terminal_vecMul_negativeBasis]
-  simp [Matrix.dotProduct, Matrix.mulVec, Fin.sum_univ_succ]
+  simp [dotProduct, Matrix.mulVec, Fin.sum_univ_succ]
 
 /-- Integer affine-pencil whose evaluation is `normalizedTransfer`. -/
 def normalizedPencil (t : ℤ) : Square (Fin 2) ℤ[X] :=
@@ -106,7 +106,7 @@ def bridgePolynomial (scales : List ℤ) : ℤ[X] :=
 theorem normalizedConstant_word_entry (scales : List ℤ) :
     (wordProduct normalizedConstant scales) 0 0 = scales.prod := by
   induction scales with
-  | nil => simp [wordProduct, Matrix.one_apply]
+  | nil => simp [wordProduct]
   | cons t scales induction =>
       rw [wordProduct_cons, Matrix.mul_apply]
       simp [normalizedConstant, Fin.sum_univ_succ, induction]
@@ -115,7 +115,7 @@ theorem normalizedConstant_word_entry (scales : List ℤ) :
 theorem normalizedSlope_word_lowerLeft (scales : List ℤ) :
     (wordProduct normalizedSlope scales) 1 0 = 0 := by
   induction scales with
-  | nil => simp [wordProduct, Matrix.one_apply]
+  | nil => simp [wordProduct]
   | cons t scales _ =>
       rw [wordProduct_cons, Matrix.mul_apply]
       simp [normalizedSlope, Fin.sum_univ_succ]
@@ -125,7 +125,7 @@ theorem normalizedSlope_word_entry (scales : List ℤ) :
     (wordProduct normalizedSlope scales) 0 0 =
       (-1 : ℤ) ^ scales.length * scales.prod ^ 2 := by
   induction scales with
-  | nil => simp [wordProduct, Matrix.one_apply]
+  | nil => simp [wordProduct]
   | cons t scales induction =>
       rw [wordProduct_cons, Matrix.mul_apply]
       simp [normalizedSlope, Fin.sum_univ_succ, induction, List.prod_cons,
@@ -292,7 +292,7 @@ theorem rational_root_prime_support
       (IsFractionRing.num ℤ d).natAbs ∣ p ^ exponent := by
     have absolute := Int.natAbs_dvd_natAbs.mpr numerator_dvd_int
     rw [product_eq] at absolute
-    simpa only [Int.natAbs_ofNat] using absolute
+    simpa only [Int.natAbs_natCast] using absolute
   obtain ⟨numeratorExponent, _, numerator_eq⟩ :=
     (Nat.dvd_prime_pow prime).mp numerator_dvd
   have denominator_dvd_int :
@@ -308,7 +308,7 @@ theorem rational_root_prime_support
           p ^ (2 * exponent) := by
       rw [Int.natAbs_mul, Int.natAbs_pow, Int.natAbs_neg, Int.natAbs_one,
         one_pow, one_mul, product_eq]
-      rw [Int.natAbs_pow, Int.natAbs_ofNat]
+      rw [Int.natAbs_pow, Int.natAbs_natCast]
       rw [← pow_mul]
       congr 1
       omega
@@ -318,7 +318,7 @@ theorem rational_root_prime_support
     (Nat.dvd_prime_pow prime).mp denominator_dvd
   refine ⟨numeratorExponent, denominatorExponent, numerator_eq, denominator_eq, ?_⟩
   by_contra neither_zero
-  push_neg at neither_zero
+  push Not at neither_zero
   have prime_dvd_numerator :
       p ∣ (IsFractionRing.num ℤ d).natAbs := by
     rw [numerator_eq]
@@ -355,7 +355,7 @@ theorem abs_eq_fractionRing_natAbs_div (d : ℚ) :
         ((IsFractionRing.num ℤ d).natAbs : ℚ) /
           ((IsFractionRing.den ℤ d : ℤ).natAbs : ℚ) := by
       have abs_cast (value : ℤ) : |(value : ℚ)| = (value.natAbs : ℚ) := by
-        rw [← Int.cast_abs, ← Int.cast_natAbs]
+        rw [← Int.cast_abs, ← Nat.cast_natAbs]
       rw [abs_cast, abs_cast]
 
 /-- Positive rational roots supported on one prime are either a nonnegative power of that prime
@@ -404,7 +404,7 @@ theorem prime_power_beyond_negative_wall
     nlinarith [sq_nonneg ((p : ℚ) - 1)]
   obtain ⟨k, rfl⟩ := Nat.exists_eq_succ_of_ne_zero power_positive.ne'
   have one_le_power : (1 : ℚ) ≤ (p : ℚ) ^ k :=
-    one_le_pow_of_one_le (by linarith) k
+    one_le_pow₀ (by linarith)
   have power_ge_p : (p : ℚ) ≤ (p : ℚ) ^ (k + 1) := by
     rw [pow_succ]
     simpa using mul_le_mul_of_nonneg_right one_le_power p_pos.le
@@ -491,7 +491,7 @@ theorem physical_isMortal_prime_iff (p : Nat) (prime : p.Prime) (c : ℚ) :
     · have power_gt_one : (1 : ℚ) < (p : ℚ) ^ (power + 1) := by
         rw [pow_succ]
         have one_le : (1 : ℚ) ≤ (p : ℚ) ^ power :=
-          one_le_pow_of_one_le (by exact_mod_cast prime.one_le) power
+          one_le_pow₀ (by exact_mod_cast prime.one_le)
         have p_two : (2 : ℚ) ≤ p := by exact_mod_cast p_two_nat
         nlinarith
       have power_ne : (p : ℚ) ^ (power + 1) ≠ 0 := by positivity
@@ -508,6 +508,7 @@ theorem physical_isMortal_prime_iff (p : Nat) (prime : p.Prime) (c : ℚ) :
       refine ⟨[power], ?_⟩
       rw [positiveBridge_singleton]
       field_simp
+      norm_num [Int.cast_natCast]
 
 /-! ## Integral finite-quotient walls -/
 
@@ -587,20 +588,20 @@ theorem mapped_integralGenerator_positiveRay
       ext i
       fin_cases i <;>
         simp [integralGenerator, integralScaledCut, positiveRay, Matrix.mulVec,
-          Matrix.dotProduct, Fin.sum_univ_succ]
+          dotProduct, Fin.sum_univ_succ]
       all_goals ring
   | some point =>
       ext i
       fin_cases i <;>
         simp [integralGenerator, ambient, positiveRay, Matrix.mulVec,
-          Matrix.dotProduct, Matrix.diagonal_apply, Fin.sum_univ_succ, q_one]
+          dotProduct, Matrix.diagonal_apply, q_one]
 
 /-- A prime quotient in which `q=1` but `D≠1` certifies immortality of the cleared pair. -/
 theorem not_integralGenerator_isMortal_of_mod_one
     (q D : ℤ) (ell : Nat) (ell_prime : ell.Prime)
     (q_one : (q : ZMod ell) = 1) (D_ne_one : (D : ZMod ell) ≠ 1) :
     ¬IsMortal (integralGenerator q D) := by
-  letI : Fact ell.Prime := ⟨ell_prime⟩
+  let _ : Fact ell.Prime := ⟨ell_prime⟩
   let quotient :=
     ((Int.castRingHom (ZMod ell)).mapMatrix (m := Fin 3)).toMonoidWithZeroHom
   apply not_isMortal_of_map_not_isMortal quotient (integralGenerator q D)
@@ -646,7 +647,7 @@ theorem mapped_integralGenerator_signedRay
         ext i <;>
         fin_cases i <;>
         simp [integralGenerator, integralScaledCut, positiveRay, alternatingRay,
-          signedRayWeight, signedRayTransition, Matrix.mulVec, Matrix.dotProduct,
+          signedRayWeight, signedRayTransition, Matrix.mulVec, dotProduct,
           Fin.sum_univ_succ]
       all_goals ring
   | some point =>
@@ -654,8 +655,8 @@ theorem mapped_integralGenerator_signedRay
         ext i <;>
         fin_cases i <;>
         simp [integralGenerator, ambient, positiveRay, alternatingRay,
-          signedRayWeight, signedRayTransition, Matrix.mulVec, Matrix.dotProduct,
-          Matrix.diagonal_apply, Fin.sum_univ_succ, q_neg_one]
+          signedRayWeight, signedRayTransition, Matrix.mulVec, dotProduct,
+          Matrix.diagonal_apply, q_neg_one]
 
 /-- A prime quotient with `q=-1` and `D≠±1` certifies immortality through a two-ray
 automaton. -/
@@ -664,7 +665,7 @@ theorem not_integralGenerator_isMortal_of_mod_neg_one
     (q_neg_one : (q : ZMod ell) = -1)
     (D_ne_one : (D : ZMod ell) ≠ 1) (D_ne_neg_one : (D : ZMod ell) ≠ -1) :
     ¬IsMortal (integralGenerator q D) := by
-  letI : Fact ell.Prime := ⟨ell_prime⟩
+  let _ : Fact ell.Prime := ⟨ell_prime⟩
   let quotient :=
     ((Int.castRingHom (ZMod ell)).mapMatrix (m := Fin 3)).toMonoidWithZeroHom
   apply not_isMortal_of_map_not_isMortal quotient (integralGenerator q D)
@@ -798,12 +799,12 @@ theorem hasFiniteWall_prime_square
         _ = -1 + 1 := by rw [equality]
         _ = 0 := by ring
     have ell_dvd_two : ell ∣ 2 :=
-      (ZMod.natCast_zmod_eq_zero_iff_dvd 2 ell).mp two_zero
+      (ZMod.natCast_eq_zero_iff 2 ell).mp two_zero
     exact ell_ne_two
       (Nat.le_antisymm (Nat.le_of_dvd (by decide) ell_dvd_two) ell_prime.two_le)
   have p_sq_neg_one : ((2 * k + 1 : ZMod ell) ^ 2) = -1 := by
     have sum_zero : (((2 * k + 1) ^ 2 + 1 : Nat) : ZMod ell) = 0 :=
-      (ZMod.natCast_zmod_eq_zero_iff_dvd _ _).mpr ell_dvd_sum
+      (ZMod.natCast_eq_zero_iff _ _).mpr ell_dvd_sum
     norm_num [Nat.cast_add, Nat.cast_pow] at sum_zero ⊢
     exact eq_neg_of_add_eq_zero_left sum_zero
   have power_odd : Odd power :=
@@ -914,7 +915,7 @@ theorem physical_isMortal_of_resonance
     have power_gt_one : (1 : ℚ) < (q : ℚ) ^ (power + 1) := by
       rw [pow_succ]
       have one_le : (1 : ℚ) ≤ (q : ℚ) ^ power :=
-        one_le_pow_of_one_le (by linarith) power
+        one_le_pow₀ (by linarith)
       nlinarith
     have power_ne : (q : ℚ) ^ (power + 1) ≠ 0 := by positivity
     have c_add_one_ne : -((q : ℚ) ^ (power + 1))⁻¹ + 1 ≠ 0 := by
@@ -930,6 +931,7 @@ theorem physical_isMortal_of_resonance
     refine ⟨[power], ?_⟩
     rw [positiveBridge_singleton]
     field_simp
+    ring
 
 end
 

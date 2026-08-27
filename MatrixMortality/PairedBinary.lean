@@ -77,8 +77,8 @@ theorem pairedBinaryRow_start (R : Type*) [CommRing R] (β : Nat)
   cases bit <;>
     funext i <;>
     fin_cases i <;>
-    simp [pairedBinaryRow, pairedBinaryGenerator, pairedBinaryPhase, Matrix.vecHead,
-      Matrix.vecTail, Matrix.vecMul, Matrix.dotProduct, Fin.sum_univ_succ, vecSix_last]
+    simp [pairedBinaryRow, pairedBinaryGenerator, pairedBinaryPhase,
+      Matrix.vecMul, dotProduct, Fin.sum_univ_succ, vecSix_last]
 
 theorem pairedBinaryRow_finish (R : Type*) [CommRing R] (β : Nat)
     (body : List TagLetter) (vector : Fin 3 → R) (phase : PairPhase) (bit : Bool) :
@@ -91,8 +91,8 @@ theorem pairedBinaryRow_finish (R : Type*) [CommRing R] (β : Nat)
     funext i <;>
     fin_cases i <;>
     simp [pairedBinaryRow, pairedBinaryGenerator, pairedBinaryLetter, PairPhase.tile,
-      sidePcpMatrix, nearyUpper, Matrix.vecHead, Matrix.vecTail, Matrix.vecMul,
-      Matrix.mulVec, Matrix.dotProduct, Fin.sum_univ_succ, vecSix_last]
+      sidePcpMatrix, nearyUpper, Matrix.vecMul,
+      Matrix.mulVec, dotProduct, Fin.sum_univ_succ, vecSix_last]
   all_goals ring
 
 theorem pairedBinaryRow_pair (R : Type*) [CommRing R] (β : Nat)
@@ -164,17 +164,17 @@ theorem pairedBinaryGenerator_transpose_fixes_boundaryColumn
   cases bit <;>
     funext i <;>
     fin_cases i <;>
-    simp [pairedBinaryGenerator, pairedBinaryBoundaryColumn, Matrix.vecHead, Matrix.vecTail,
-      Matrix.mulVec, Matrix.dotProduct, Fin.sum_univ_succ]
+    simp [pairedBinaryGenerator, pairedBinaryBoundaryColumn,
+      Matrix.mulVec, dotProduct, Fin.sum_univ_succ]
 
 theorem pairedBinaryRow_dot_boundaryColumn (R : Type*) [CommRing R]
     (phase : Option PairPhase) (vector : Fin 3 → R) :
     pairedBinaryRow R phase vector ⬝ᵥ pairedBinaryBoundaryColumn R = vector 0 := by
   cases phase with
-  | none => simp [pairedBinaryRow, pairedBinaryBoundaryColumn, Matrix.single_dotProduct]
+  | none => simp [pairedBinaryRow, pairedBinaryBoundaryColumn]
   | some phase =>
       cases phase <;>
-        simp [pairedBinaryRow, pairedBinaryBoundaryColumn, Matrix.single_dotProduct]
+        simp [pairedBinaryRow, pairedBinaryBoundaryColumn]
 
 /-- Scalar series represented by the binary six-state compiler. -/
 def pairedBinaryCoefficient (R : Type*) [CommRing R] (β : Nat)
@@ -195,8 +195,8 @@ theorem pairedBinaryCoefficient_eq_sideCoefficient (R : Type*) [CommRing R] (β 
     pairedBinaryCoefficient R β body [] = (ternaryCode (nearyMarker β) : R) := by
   rw [pairedBinaryCoefficient_eq_sideCoefficient]
   simp [decodePairedBinary, sideCoefficient, sideTileProduct, sideTerminalColumn,
-    sidePcpMatrix, sideTailBasis, Matrix.vecHead, Matrix.vecTail, Matrix.mulVec,
-    Matrix.dotProduct, Fin.sum_univ_succ]
+    sidePcpMatrix, sideTailBasis, Matrix.mulVec,
+    dotProduct, Fin.sum_univ_succ]
 
 theorem pairedBinaryCoefficient_nil_ne_zero (β : Nat) (body : List TagLetter) :
     pairedBinaryCoefficient ℤ β body [] ≠ 0 := by

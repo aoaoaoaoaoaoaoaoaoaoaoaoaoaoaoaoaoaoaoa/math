@@ -90,9 +90,9 @@ theorem isRoot_defectPolynomial_of_railAt
     simpa [scalePower, eval_comp] using substituted_numerator_ne
   simp only [IsRoot, defectPolynomial, leftTerm, directTerm, reciprocalTerm,
     eval_sub, eval_add, eval_mul, eval_C, eval_pow, eval_X,
-    map_one, scalePower] at equation ⊢
+    scalePower] at equation ⊢
   rw [eval_comp, eval_comp] at equation ⊢
-  simp only [eval_mul, eval_C, eval_pow, eval_X] at equation ⊢
+  simp only [eval_mul, eval_C, eval_pow, eval_X, eval_one] at equation ⊢
   field_simp [denominator_ne, substituted_eval_ne] at equation ⊢
   linear_combination equation
 
@@ -330,7 +330,7 @@ theorem natDegree_leftTerm_le
       ((C center + C offset * X ^ depth) * denominator :
           ℚ[X]).natDegree ≤
         depth + denominator.natDegree :=
-    natDegree_mul_le.trans (add_le_add_right coefficient_le _)
+    natDegree_mul_le.trans (add_le_add_left coefficient_le _)
   have x_sub_one_le : (X - 1 : ℚ[X]).natDegree ≤ 1 := by
     apply le_trans (natDegree_sub_le _ _)
     simp
@@ -342,7 +342,7 @@ theorem natDegree_leftTerm_le
         (C offset * (X - 1) : ℚ[X]).natDegree ≤ 1 := by
       apply le_trans natDegree_mul_le
       simpa using x_sub_one_le
-    exact add_le_add_right coefficient_product_le _
+    exact add_le_add_left coefficient_product_le _
   have bracket_le :
       ((C center + C offset * X ^ depth) * denominator +
           C offset * (X - 1) * numerator : ℚ[X]).natDegree ≤
@@ -351,7 +351,7 @@ theorem natDegree_leftTerm_le
     (natDegree_add_le _ _).trans (max_le_max first_le second_le)
   apply le_trans natDegree_mul_le
   rw [natDegree_scalePower scale degree scale_ne_zero numerator_ne_zero]
-  exact add_le_add_right bracket_le _
+  exact add_le_add_left bracket_le _
 
 /-- Arithmetic degree gap behind the rational-rail obstruction. -/
 theorem degreeGap
@@ -526,7 +526,7 @@ theorem identity_constant_balance
       offset * numerator.coeff 0 := by
   have evaluated :=
     congrArg (Polynomial.eval 0) identity
-  simp only [Identity, leftTerm, directTerm, reciprocalTerm] at evaluated
+  simp only [leftTerm, directTerm, reciprocalTerm] at evaluated
   simp [eval_mul, scalePower, eval_comp, depth_positive.ne',
     degree_positive.ne'] at evaluated
   rcases evaluated with balance | numerator_zero
@@ -587,7 +587,7 @@ theorem leftBracket_degree_leading
       apply le_trans natDegree_mul_le
       simpa using x_sub_one_le
     rw [← equal_degree]
-    exact add_le_add_right coefficient_product_le _
+    exact add_le_add_left coefficient_product_le _
   have remainder_le :
       remainder.natDegree ≤ 1 + denominator.natDegree := by
     dsimp [remainder]
@@ -754,7 +754,7 @@ theorem no_rational_affineWait_rail
       numerator_constant_ne_zero coprime identity).2
   have valuation_eq := congrArg (padicValRat prime) center_eq
   rw [center_unit.2,
-    padicValRat.pow scale_has_value.1, scale_has_value.2] at valuation_eq
+    padicValRat.pow scale, scale_has_value.2] at valuation_eq
   have exponent_ne :
       ((depth + numerator.natDegree : Nat) : ℤ) ≠ 0 := by
     exact_mod_cast (show depth + numerator.natDegree ≠ 0 by omega)
@@ -818,7 +818,7 @@ theorem no_infinite_primePower_affineWait_rail
   let powers : Nat → ℚ := fun exponent => (prime : ℚ) ^ exponent
   have powers_injective : Function.Injective powers := by
     exact
-      (pow_right_strictMono (by
+      (pow_right_strictMono₀ (by
         exact_mod_cast (Fact.out : prime.Prime).one_lt)).injective
   have image_infinite : (powers '' samples).Infinite :=
     infinite.image powers_injective.injOn

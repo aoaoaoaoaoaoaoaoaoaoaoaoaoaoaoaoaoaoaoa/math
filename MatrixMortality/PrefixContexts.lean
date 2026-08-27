@@ -144,9 +144,9 @@ private theorem cast_normalizedNearyFamily_none (β : Nat) (body : List TagLette
     simp [normalizedNearyFamily, nearyMortalityFamilyInt, absorbedFamily,
       separatedGenerator, terminalGenerator, terminalColumn, sideChange,
       sideChangeInv, pcpMatrix, castMatrix, Matrix.transpose_apply,
-      Matrix.vecMulVec, Matrix.mul_apply, Matrix.mulVec, Matrix.dotProduct,
+      Matrix.vecMulVec, Matrix.mulVec, dotProduct,
       Matrix.vecHead, Matrix.vecTail, headBasis, tailBasis, Fin.sum_univ_succ,
-      marker_value, marker_scale] <;>
+      marker_value] <;>
     ring
 
 private theorem cast_normalizedNearyFamily_some
@@ -156,8 +156,7 @@ private theorem cast_normalizedNearyFamily_some
   rw [normalizedNearyFamily_some]
   ext row column
   fin_cases row <;> fin_cases column <;>
-    simp [castMatrix, sidePcpMatrix, Matrix.transpose_apply, Matrix.vecHead,
-      Matrix.vecTail]
+    simp [castMatrix, sidePcpMatrix, Matrix.transpose_apply]
 
 private theorem cast_prefixOutput_eq_closed (β : Nat) (body : List TagLetter)
     (state : PrefixState) (bit : Bool) :
@@ -175,28 +174,25 @@ private theorem cast_prefixOutput_eq_closed (β : Nat) (body : List TagLetter)
     rfl
   · ext row column
     fin_cases row <;> fin_cases column <;>
-      simp [prefixOutput, prefixEmission, prefixAlgebraOutputClosed, castMatrix,
-        Matrix.one_apply]
+      simp [prefixOutput, prefixEmission, prefixAlgebraOutputClosed, castMatrix]
   · ext row column
     fin_cases row <;> fin_cases column <;>
-      simp [prefixOutput, prefixEmission, prefixAlgebraOutputClosed, castMatrix,
-        Matrix.one_apply]
+      simp [prefixOutput, prefixEmission, prefixAlgebraOutputClosed, castMatrix]
   · ext row column
     fin_cases row <;> fin_cases column <;>
-      simp [prefixOutput, prefixEmission, prefixAlgebraOutputClosed, castMatrix,
-        Matrix.one_apply]
+      simp [prefixOutput, prefixEmission, prefixAlgebraOutputClosed, castMatrix]
   · rw [prefixOutput, prefixEmission, cast_normalizedNearyFamily_some]
     ext row column
     fin_cases row <;> fin_cases column <;>
       simp [prefixAlgebraOutputClosed, sidePcpMatrix, nearyUpper, nearyLower,
-        Matrix.transpose_apply, Matrix.vecHead, Matrix.vecTail,
+        Matrix.transpose_apply,
         nearySideLowerC, nearySideLowerCScale, ternaryCode, ternaryDigit,
         tagCode, pow_add]
   · rw [prefixOutput, prefixEmission, cast_normalizedNearyFamily_some]
     ext row column
     fin_cases row <;> fin_cases column <;>
       simp [prefixAlgebraOutputClosed, sidePcpMatrix, nearyUpper, nearyLower,
-        Matrix.transpose_apply, Matrix.vecHead, Matrix.vecTail, upper_b,
+        Matrix.transpose_apply, upper_b,
         rule_b_value]
     all_goals norm_num
     all_goals ring
@@ -204,13 +200,12 @@ private theorem cast_prefixOutput_eq_closed (β : Nat) (body : List TagLetter)
     ext row column
     fin_cases row <;> fin_cases column <;>
       simp [prefixAlgebraOutputClosed, sidePcpMatrix, nearyUpper, nearyLower,
-        Matrix.transpose_apply, Matrix.vecHead, Matrix.vecTail, ternaryCode,
-        ternaryDigit, tagCode, pow_add]
+        Matrix.transpose_apply, ternaryCode, ternaryDigit, tagCode]
   · rw [prefixOutput, prefixEmission, cast_normalizedNearyFamily_some]
     ext row column
     fin_cases row <;> fin_cases column <;>
       simp [prefixAlgebraOutputClosed, sidePcpMatrix, nearyUpper, nearyLower,
-        Matrix.transpose_apply, Matrix.vecHead, Matrix.vecTail, upper_b,
+        Matrix.transpose_apply, upper_b,
         erase_value, pow_add]
     all_goals ring
 
@@ -297,7 +292,7 @@ theorem prefixAlgebraGeneratorClosed_false_mulVec
         vector 0 + 3 * vector 1] := by
   ext coordinate
   fin_cases coordinate <;>
-    simp [prefixAlgebraGeneratorClosed, Matrix.mulVec, Matrix.dotProduct,
+    simp [prefixAlgebraGeneratorClosed, Matrix.mulVec, dotProduct,
       Fin.sum_univ_succ]
   all_goals ring
 
@@ -319,7 +314,7 @@ theorem prefixAlgebraGeneratorClosed_true_mulVec
         vector 0 + 3 * vector 1] := by
   ext coordinate
   fin_cases coordinate <;>
-    simp [prefixAlgebraGeneratorClosed, Matrix.mulVec, Matrix.dotProduct,
+    simp [prefixAlgebraGeneratorClosed, Matrix.mulVec, dotProduct,
       Fin.sum_univ_succ]
 
 /-- Row action on the closed zero generator. -/
@@ -341,7 +336,7 @@ theorem prefixAlgebraGeneratorClosed_vecMul_false
         0] := by
   ext coordinate
   fin_cases coordinate <;>
-    simp [prefixAlgebraGeneratorClosed, Matrix.vecMul, Matrix.dotProduct,
+    simp [prefixAlgebraGeneratorClosed, Matrix.vecMul, dotProduct,
       Fin.sum_univ_succ]
   all_goals ring
 
@@ -363,7 +358,7 @@ theorem prefixAlgebraGeneratorClosed_vecMul_true
         vector 4] := by
   ext coordinate
   fin_cases coordinate <;>
-    simp [prefixAlgebraGeneratorClosed, Matrix.vecMul, Matrix.dotProduct,
+    simp [prefixAlgebraGeneratorClosed, Matrix.vecMul, dotProduct,
       Fin.sum_univ_succ]
   all_goals ring
 
@@ -376,15 +371,15 @@ private theorem prefixAlgebraGenerator_mulVec_eq_closed
     ext coordinate
     fin_cases coordinate <;>
       simp [Matrix.mulVec, prefixAlgebraGenerator_apply, prefixAlgebraOutputClosed,
-        prefixRepresentative, prefixCoordinate, prefixNext, Matrix.dotProduct,
-        Matrix.vecHead, Matrix.vecTail, Matrix.one_apply, Fin.sum_univ_succ]
+        prefixRepresentative, prefixCoordinate, prefixNext, dotProduct,
+        Matrix.one_apply, Fin.sum_univ_succ]
     all_goals ring
   · rw [prefixAlgebraGeneratorClosed_true_mulVec]
     ext coordinate
     fin_cases coordinate <;>
       simp [Matrix.mulVec, prefixAlgebraGenerator_apply, prefixAlgebraOutputClosed,
-        prefixRepresentative, prefixCoordinate, prefixNext, Matrix.dotProduct,
-        Matrix.vecHead, Matrix.vecTail, Matrix.one_apply, Fin.sum_univ_succ]
+        prefixRepresentative, prefixCoordinate, prefixNext, dotProduct,
+        Matrix.one_apply, Fin.sum_univ_succ]
 
 theorem prefixAlgebraGenerator_eq_closed (β : Nat) (body : List TagLetter)
     (bit : Bool) :
@@ -425,12 +420,7 @@ theorem prefixAlgebra_zero_cube (β : Nat) (body : List TagLetter) :
   intro vector
   simp only [Matrix.toLin'_apply', Matrix.mulVecLin_apply]
   rw [prefixAlgebraGenerator_eq_closed_fun]
-  change
-    ((1 * prefixAlgebraGeneratorClosed β body false *
-          prefixAlgebraGeneratorClosed β body false) *
-        prefixAlgebraGeneratorClosed β body false) *ᵥ vector =
-      Matrix.vecMulVec (prefixAlgebraColumn β body) (prefixAlgebraRow β) *ᵥ vector
-  simp only [one_mul]
+  simp only [wordProduct_cons, wordProduct_nil, mul_one]
   rw [← Matrix.mulVec_mulVec, ← Matrix.mulVec_mulVec]
   change
     prefixAlgebraGeneratorClosed β body false *ᵥ
@@ -443,7 +433,7 @@ theorem prefixAlgebra_zero_cube (β : Nat) (body : List TagLetter) :
   ext coordinate
   fin_cases coordinate <;>
     simp [prefixAlgebraColumn, prefixAlgebraRow, Matrix.mulVec,
-      Matrix.dotProduct, Fin.sum_univ_succ] <;>
+      dotProduct, Fin.sum_univ_succ] <;>
     ring
 
 end MatrixMortality

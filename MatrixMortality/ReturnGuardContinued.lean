@@ -1,4 +1,4 @@
-import Mathlib.Algebra.GeomSum
+import Mathlib.Algebra.Ring.GeomSum
 import MatrixMortality.ReturnGuardCumulative
 
 /-!
@@ -40,7 +40,7 @@ theorem PrimitiveEndpointReduction.content_natAbs_eq_gcd_driftSource_prequotient
     · apply Int.natAbs_dvd_natAbs.mpr
       use target.1 - (centerNumerator - scale) * target.2
       have numerator := reduction.step.numerator
-      simp only [Prod.fst, Prod.snd] at numerator
+      simp only at numerator
       calc
         driftNumerator * source.1 =
             content * target.1 -
@@ -143,7 +143,7 @@ theorem PrimitiveEndpointReduction.resetDefect_eq_complement_mul
         driftNumerator * scale *
           (source.1 - content * target.2)
     have numerator := reduction.step.numerator
-    simp only [Prod.fst, Prod.snd] at numerator
+    simp only at numerator
     linear_combination scale * numerator
   have source_sub_prequotient :
       source.1 - endpointPrequotient content target =
@@ -228,7 +228,7 @@ theorem terminalPredecessorPair_step
       (terminalPredecessorPair prime depth centerNumerator driftNumerator scale wait)
       (0, -driftNumerator * scale * ((prime : ℤ) ^ wait - 1)) := by
   constructor <;>
-    simp only [terminalPredecessorPair, Prod.fst, Prod.snd] <;> ring
+    simp only [terminalPredecessorPair] <;> ring
 
 /-- Consecutive cumulative numerators form the canonical complete quotient. -/
 def cumulativeCompleteQuotient
@@ -346,7 +346,7 @@ theorem PrimitiveEndpointReduction.twoStep_elimination
           (content * middle.2) := by
   have first_numerator := first.step.numerator
   have second_denominator := second.step.denominator
-  simp only [Prod.fst, Prod.snd] at first_numerator second_denominator ⊢
+  simp only at first_numerator second_denominator ⊢
   linear_combination content * second_denominator + first_numerator
 
 /-- Parameter coefficient in the depth-two record-ascent budget. -/
@@ -405,9 +405,9 @@ theorem PrimitiveEndpointReduction.twoStep_contentBudget
         (source.1 -
           scale * ((prime : ℤ) ^ wait - 1) * source.2).natAbs := by
     have denominator := first.step.denominator
-    simp only [Prod.fst, Prod.snd] at denominator
+    simp only at denominator
     have absolute := congrArg Int.natAbs denominator
-    simp only [Int.natAbs_mul, Int.natAbs_pow, Int.natAbs_ofNat] at absolute
+    simp only [Int.natAbs_mul, Int.natAbs_pow, Int.natAbs_natCast] at absolute
     rw [show 2 * wait = wait + wait by omega, pow_add] at absolute
     rw [Int.natAbs_mul]
     simpa only [x, mul_assoc] using absolute
@@ -454,7 +454,7 @@ theorem PrimitiveEndpointReduction.twoStep_contentBudget
             (content * middle.2)).natAbs := by
     have eliminated := first.twoStep_elimination second
     have absolute := congrArg Int.natAbs eliminated
-    simp only [Int.natAbs_mul, Int.natAbs_pow, Int.natAbs_ofNat] at absolute
+    simp only [Int.natAbs_mul, Int.natAbs_pow, Int.natAbs_natCast] at absolute
     rw [show 2 * nextWait = nextWait + nextWait by omega, pow_add] at absolute
     rw [Int.natAbs_mul content nextContent]
     simpa only [y, mul_assoc] using absolute
@@ -498,7 +498,7 @@ theorem PrimitiveEndpointReduction.twoStep_contentBudget
                   (scale * (prime : ℤ) ^ nextWait).natAbs :=
               Int.natAbs_sub_le _ _
             _ = centerNumerator.natAbs + scale.natAbs * y := by
-              simp only [Int.natAbs_mul, Int.natAbs_pow, Int.natAbs_ofNat, y]
+              simp only [Int.natAbs_mul, Int.natAbs_pow, Int.natAbs_natCast, y]
   have scaled_right_le :
       x *
           (driftNumerator.natAbs * height +

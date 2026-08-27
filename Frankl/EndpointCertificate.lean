@@ -5,6 +5,12 @@ namespace Frankl
 
 open Real Set
 
+/-- Kernel-close one generated endpoint trace despite Lean's conservative default transparency. -/
+macro (name := closeEndpointCertificate) "close_endpoint_certificate" : tactic =>
+  `(tactic|
+    set_option maxRecDepth 10000 in
+      rfl')
+
 /-- A successful reflected subdivision proves the endpoint objective throughout its rectangle. -/
 theorem endpointCertificateObjective_nonneg_of_subdivision
     {rectangle : RatRectangle} {tree : Subdivision} {a q : ℝ}

@@ -288,7 +288,15 @@ theorem pairGenerator_isMortal_iff
                 ambient ^ last.length = 0 := by
         rw [← intercalatedPowers_eq ambient (input * output) first.length last.length
           (middle.map List.length)]
-        simpa using product_zero
+        have mapped_middle :
+            (middle.map List.length).map (fun exponent ↦ ambient ^ exponent) =
+              middle.map (fun block ↦ ambient ^ block.length) := by
+          rw [List.map_map]
+          apply List.map_congr_left
+          intro block _
+          rfl
+        rw [mapped_middle]
+        exact product_zero
       have blocked_zero :
           blockedProduct ambient (input * output) (middle.map List.length) = 0 :=
         (unit_sandwich_eq_zero_iff

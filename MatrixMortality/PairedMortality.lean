@@ -184,7 +184,7 @@ theorem pairedSeparator_int_ne_zero (β : Nat) : pairedSeparator ℤ β ≠ 0 :=
   intro separator_zero
   apply rational_nonzero
   rw [← pairedSeparator_map (Int.castRingHom ℚ), separator_zero]
-  simp [castMatrix]
+  simp
 
 theorem castMatrix_pairedSeparator_rank_eq_one (β : Nat) :
     (castMatrix (pairedSeparator ℤ β)).toLin'.rank = 1 := by
@@ -194,9 +194,7 @@ theorem castMatrix_pairedSeparator_rank_eq_one (β : Nat) :
   rw [Cardinal.one_le_iff_ne_zero]
   intro rank_zero
   have range_bot : LinearMap.range (Matrix.toLin' (pairedSeparator ℚ β)) = ⊥ := by
-    letI : Subsingleton (LinearMap.range (Matrix.toLin' (pairedSeparator ℚ β))) :=
-      rank_zero_iff.mp rank_zero
-    exact Submodule.eq_bot_of_subsingleton
+    exact Submodule.rank_eq_zero.mp rank_zero
   have linear_zero : Matrix.toLin' (pairedSeparator ℚ β) = 0 :=
     LinearMap.range_eq_bot.mp range_bot
   have separator_zero : pairedSeparator ℚ β = 0 := by

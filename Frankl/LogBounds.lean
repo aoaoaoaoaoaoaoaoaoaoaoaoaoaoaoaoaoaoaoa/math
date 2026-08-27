@@ -1,5 +1,5 @@
 import Mathlib.Analysis.SpecialFunctions.Log.Deriv
-import Mathlib.Data.Complex.ExponentialBounds
+import Mathlib.Analysis.Complex.ExponentialBounds
 
 namespace Frankl
 
@@ -59,7 +59,7 @@ theorem abs_log_sub_scaledLogSeries_le {terms scale : ℕ} {x : ℝ} (hx : 0 < x
         |log ((2 : ℝ) ^ scale * x)
             - logSeries terms ((2 : ℝ) ^ scale * x)|
           + |scale * (log ((1 : ℝ) / 2) - logSeries terms (1 / 2))| :=
-      abs_add _ _
+      abs_add_le _ _
     _ = |log ((2 : ℝ) ^ scale * x)
             - logSeries terms ((2 : ℝ) ^ scale * x)|
           + scale * |log ((1 : ℝ) / 2) - logSeries terms (1 / 2)| := by
