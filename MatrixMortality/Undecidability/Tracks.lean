@@ -126,7 +126,7 @@ def weaveTracks {α : Type*} [Inhabited α] (period columns : Nat)
       (index % period)
 
 theorem weaveTracks_eq_weave {α : Type*} [Inhabited α] {period columns : Nat}
-    (period_pos : 0 < period) (tracks : Fin period → Mathlib.Vector α columns) :
+    (period_pos : 0 < period) (tracks : Fin period → List.Vector α columns) :
     weaveTracks period columns (fun phase => (tracks phase).val) =
       weave period columns period_pos fun phase column => (tracks phase).get column := by
   apply List.ext_getElem

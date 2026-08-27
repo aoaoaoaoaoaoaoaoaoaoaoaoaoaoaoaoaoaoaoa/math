@@ -23,11 +23,13 @@ private def lowRow11Cell6RootTree : Subdivision :=
   (.leaf .interval)
   (.leaf .interval)))
 
+set_option maxHeartbeats 1000000 in
+-- Kernel normalization of this reflected subdivision exceeds Lean's default heartbeat budget.
 private theorem lowRow11Cell6RootTree_certified :
     certifySubdivision 12 64 32 lowRow11Cell6RootRectangle
       CertificateObjective.endpointExpression lowRow11Cell6RootTree =
         some () := by
-  rfl
+  close_endpoint_certificate
 
 /-- One static reflected endpoint-certificate chunk. -/
 theorem lowRow11Cell6Root_nonneg {a q : ℝ}
@@ -69,11 +71,13 @@ private def lowRow11Cell7RootTree : Subdivision :=
   (.leaf .interval)
   (.leaf .interval)))
 
+set_option maxHeartbeats 1000000 in
+-- Kernel normalization of this reflected subdivision exceeds Lean's default heartbeat budget.
 private theorem lowRow11Cell7RootTree_certified :
     certifySubdivision 12 64 32 lowRow11Cell7RootRectangle
       CertificateObjective.endpointExpression lowRow11Cell7RootTree =
         some () := by
-  rfl
+  close_endpoint_certificate
 
 /-- One static reflected endpoint-certificate chunk. -/
 theorem lowRow11Cell7Root_nonneg {a q : ℝ}
@@ -115,7 +119,7 @@ private theorem lowRow11Cell8RootTree_certified :
     certifySubdivision 12 64 32 lowRow11Cell8RootRectangle
       CertificateObjective.endpointExpression lowRow11Cell8RootTree =
         some () := by
-  rfl
+  close_endpoint_certificate
 
 /-- One static reflected endpoint-certificate chunk. -/
 theorem lowRow11Cell8Root_nonneg {a q : ℝ}
@@ -155,7 +159,7 @@ private theorem lowRow11Cell9RootTree_certified :
     certifySubdivision 12 64 32 lowRow11Cell9RootRectangle
       CertificateObjective.endpointExpression lowRow11Cell9RootTree =
         some () := by
-  rfl
+  close_endpoint_certificate
 
 /-- One static reflected endpoint-certificate chunk. -/
 theorem lowRow11Cell9Root_nonneg {a q : ℝ}
@@ -195,7 +199,7 @@ private theorem lowRow11Cell10RootTree_certified :
     certifySubdivision 12 64 32 lowRow11Cell10RootRectangle
       CertificateObjective.endpointExpression lowRow11Cell10RootTree =
         some () := by
-  rfl
+  close_endpoint_certificate
 
 /-- One static reflected endpoint-certificate chunk. -/
 theorem lowRow11Cell10Root_nonneg {a q : ℝ}

@@ -53,7 +53,7 @@ theorem Nat.le_mul_quotient_gcd
     {core left : Nat} (left_positive : 0 < left) :
     core ≤ left * (core / Nat.gcd core left) := by
   let common := Nat.gcd core left
-  have common_le : common ≤ left := Nat.gcd_le_right left left_positive
+  have common_le : common ≤ left := Nat.gcd_le_right core left_positive
   have core_eq : core = core / common * common := by
     dsimp [common]
     exact (Nat.div_mul_cancel (Nat.gcd_dvd_left core left)).symm
@@ -122,7 +122,7 @@ theorem smithRubanDecoder_mulVec
   ext i
   fin_cases i <;>
     simp [smithRubanDecoder, smithRubanQuotient, Matrix.mulVec,
-      Matrix.dotProduct, Fin.sum_univ_succ] <;>
+      dotProduct, Fin.sum_univ_succ] <;>
     ring
 
 theorem smithRubanDecoder_weight_contraction
@@ -154,7 +154,7 @@ theorem smithRubanDecoder_weight_contraction
         v * |point 0| + q ^ 2 * |point 1| := by
     calc
       |v * point 0 + q ^ 2 * point 1| ≤
-          |v * point 0| + |q ^ 2 * point 1| := abs_add _ _
+          |v * point 0| + |q ^ 2 * point 1| := abs_add_le _ _
       _ = v * |point 0| + q ^ 2 * |point 1| := by
         rw [abs_mul, abs_mul, abs_of_nonneg v_nonneg,
           abs_of_nonneg (sq_nonneg q)]
@@ -163,7 +163,7 @@ theorem smithRubanDecoder_weight_contraction
         |point 0| + (q + 1) * u * |point 1| := by
     calc
       |point 0 + (q + 1) * u * point 1| ≤
-          |point 0| + |(q + 1) * u * point 1| := abs_add _ _
+          |point 0| + |(q + 1) * u * point 1| := abs_add_le _ _
       _ = |point 0| + (q + 1) * u * |point 1| := by
         rw [abs_mul, abs_mul, abs_of_nonneg (by linarith : 0 ≤ q + 1),
           abs_of_nonneg u_nonneg]
@@ -185,7 +185,7 @@ theorem smithRubanDecoder_weight_contraction
         gcongr
       _ = 3 * q ^ 2 * (|point 0| + 4 * |point 1|) := by ring
   simpa [smithRubanWeight, smithRubanDecoder, Matrix.mulVec,
-    Matrix.dotProduct, Fin.sum_univ_succ] using bound
+    dotProduct, Fin.sum_univ_succ] using bound
 
 theorem smithRubanQuotient_inverse
     {q u v : ℤ} (shift_eq : q - 1 = u * v)
@@ -197,8 +197,7 @@ theorem smithRubanQuotient_inverse
         q ^ 2 * smithRubanQuotient q scale u v eta sourceDenominator targetDenominator 1 -
           (q + 1) * u *
             smithRubanQuotient q scale u v eta sourceDenominator targetDenominator 0 := by
-  simp only [smithRubanQuotient, Matrix.cons_val_zero, Matrix.cons_val_one,
-    Matrix.head_cons]
+  simp only [smithRubanQuotient, Matrix.cons_val_zero, Matrix.cons_val_one]
   constructor
   · calc
       eta * targetDenominator =
@@ -237,13 +236,11 @@ theorem smithRubanQuotient_commonDivisor_iff
       exact dvd_sub first (second.mul_left v)
   · rintro ⟨source, target⟩
     refine ⟨?_, ?_⟩
-    · dsimp [quotient]
-      simp only [smithRubanQuotient, Matrix.cons_val_zero]
+    · simp only [smithRubanQuotient, Matrix.cons_val_zero]
       exact dvd_add
         (by simpa [mul_assoc, mul_comm, mul_left_comm] using source.mul_left v)
         (by simpa [mul_assoc, mul_comm, mul_left_comm] using target.mul_left (q ^ 2))
-    · dsimp [quotient]
-      simp only [smithRubanQuotient, Matrix.cons_val_one, Matrix.head_cons]
+    · simp only [smithRubanQuotient, Matrix.cons_val_one]
       exact dvd_add source
         (by simpa [mul_assoc, mul_comm, mul_left_comm] using
           target.mul_left ((q + 1) * u))
@@ -265,7 +262,7 @@ theorem exists_smithRubanSplit
     rw [core_zero, zero_mul] at content_eq
     exact content_ne content_eq
   have contentCore_fixedCore_coprime : IsCoprime contentCore fixedCore :=
-    Int.gcd_eq_one_iff_coprime.mp core_coprime
+    Int.isCoprime_iff_gcd_eq_one.mpr core_coprime
   by_cases contentCore_pos : 0 < contentCore
   · let u := contentCore
     let eta : ℤ := Int.gcd content fixed
@@ -369,7 +366,7 @@ theorem PrimitiveEndpointReduction.smithRubanSplit
       ((prime : ℤ) ^ wait - 1) content complement) := by
   apply exists_smithRubanSplit
   · have power_gt_one : 1 < prime ^ wait :=
-      one_lt_pow (Fact.out : prime.Prime).one_lt reduction.wait_positive.ne'
+      one_lt_pow₀ (Fact.out : prime.Prime).one_lt reduction.wait_positive.ne'
     have power_gt_one_int : (1 : ℤ) < (prime : ℤ) ^ wait := by
       exact_mod_cast power_gt_one
     omega
@@ -414,7 +411,6 @@ theorem PrimitiveEndpointReduction.coreQuotient_coprime_targetDenominator
       complement = Int.sign complement * complement.natAbs :=
         (Int.sign_mul_natAbs complement).symm
       _ = Int.sign complement * ((quotient * factor : Nat) : ℤ) := by
-        dsimp [quotient]
         rw [factor_eq]
       _ = (quotient : ℤ) * (Int.sign complement * factor) := by push_cast; ring
   exact IsCoprime.of_isCoprime_of_dvd_right
@@ -514,7 +510,7 @@ theorem PrimitiveEndpointReduction.smithRuban_resetDefect
             endpointPrequotient content target =
         smithRubanQuotient ((prime : ℤ) ^ wait) scale split.u split.v split.eta
           source.2 target.2 1 := by
-    simp only [smithRubanQuotient, Matrix.cons_val_one, Matrix.head_cons]
+    simp only [smithRubanQuotient, Matrix.cons_val_one]
     calc
       scale * source.2 +
           geometricPowerSum ((prime : ℤ) ^ wait) 2 *
@@ -618,10 +614,10 @@ theorem laggedReturnCocycle_mulVec
   ext i
   fin_cases i
   · simp [laggedReturnCocycle, returnWaitFrame, Matrix.mulVec,
-      Matrix.dotProduct, Fin.sum_univ_succ, smul_eq_mul]
+      dotProduct, Fin.sum_univ_succ, smul_eq_mul]
     linear_combination -(q ^ 2) * denominator_eq
   · simp [laggedReturnCocycle, returnWaitFrame, Matrix.mulVec,
-      Matrix.dotProduct, Fin.sum_univ_succ, smul_eq_mul]
+      dotProduct, Fin.sum_univ_succ, smul_eq_mul]
     linear_combination -(q ^ 2) * difference
 
 theorem integralStep_laggedReturnCocycle
@@ -652,7 +648,7 @@ theorem returnWaitFrameChange_mulVec
   fin_cases i
   all_goals
     simp [returnWaitFrameChange, returnWaitFrame, Matrix.mulVec,
-      Matrix.dotProduct, Fin.sum_univ_succ]
+      dotProduct, Fin.sum_univ_succ]
   field_simp [q_ne]
   ring
 

@@ -20,7 +20,11 @@ inductive CHHNSlot where
   | leftTrailing
   | rightLeading
   | rightTrailing
-  deriving DecidableEq, Fintype, Repr
+  deriving DecidableEq, Repr
+
+instance : Fintype CHHNSlot where
+  elems := {.root, .leftLeading, .leftTrailing, .rightLeading, .rightTrailing}
+  complete slot := by cases slot <;> simp
 
 /-- Exchange the two payload pairs while fixing the root slot. -/
 def CHHNSlot.mirror : CHHNSlot → CHHNSlot
@@ -36,7 +40,11 @@ inductive CHHNPayloadSlot where
   | leftTrailing
   | rightLeading
   | rightTrailing
-  deriving DecidableEq, Fintype, Repr
+  deriving DecidableEq, Repr
+
+instance : Fintype CHHNPayloadSlot where
+  elems := {.leftLeading, .leftTrailing, .rightLeading, .rightTrailing}
+  complete slot := by cases slot <;> simp
 
 /-- Embed a payload slot into the five-slot packing. -/
 def CHHNPayloadSlot.toSlot : CHHNPayloadSlot → CHHNSlot
@@ -50,7 +58,11 @@ inductive CHHNControl where
   | shift
   | left
   | right
-  deriving DecidableEq, Fintype, Repr
+  deriving DecidableEq, Repr
+
+instance : Fintype CHHNControl where
+  elems := {.shift, .left, .right}
+  complete control := by cases control <;> simp
 
 /-- Exchange the two payload controls while fixing the cyclic shift. -/
 def CHHNControl.mirror : CHHNControl → CHHNControl
@@ -124,7 +136,7 @@ private theorem chhnPairVector_vecMul_shift {R : Type*} [CommRing R]
       chhnPairVector right (left ᵥ* root) := by
   ext index
   cases index <;>
-    simp [chhnPairVector, chhnShift, Matrix.vecMul, Matrix.dotProduct, Matrix.one_apply]
+    simp [chhnPairVector, chhnShift, Matrix.vecMul, dotProduct, Matrix.one_apply]
 
 private theorem chhnPairVector_vecMul_payload {R : Type*} [CommRing R]
     (leading trailing : Matrix (Fin 3) (Fin 3) R) (left right : Fin 3 → R) :
@@ -132,7 +144,7 @@ private theorem chhnPairVector_vecMul_payload {R : Type*} [CommRing R]
       chhnPairVector (left ᵥ* leading) (left ᵥ* trailing) := by
   ext index
   cases index <;>
-    simp [chhnPairVector, chhnPayload, Matrix.vecMul, Matrix.dotProduct]
+    simp [chhnPairVector, chhnPayload, Matrix.vecMul, dotProduct]
 
 private theorem chhnPairVector_vecMul_payload_shift {R : Type*} [CommRing R]
     (root leading trailing : Matrix (Fin 3) (Fin 3) R) (left right : Fin 3 → R) :
@@ -161,7 +173,7 @@ private theorem smul_vecMul {K : Type*} [Field K]
     (scalar : K) (vector : Fin 3 → K) (matrix : Matrix (Fin 3) (Fin 3) K) :
     (scalar • vector) ᵥ* matrix = scalar • (vector ᵥ* matrix) := by
   ext index
-  simp only [Matrix.vecMul, Matrix.dotProduct, Pi.smul_apply, smul_eq_mul]
+  simp only [Matrix.vecMul, dotProduct, Pi.smul_apply, smul_eq_mul]
   rw [Finset.mul_sum]
   apply Finset.sum_congr rfl
   intro coordinate _
@@ -173,7 +185,7 @@ private theorem chhnShift_mulVec_pairVector {R : Type*} [CommRing R]
       chhnPairVector (root *ᵥ right) left := by
   ext index
   cases index <;>
-    simp [chhnPairVector, chhnShift, Matrix.mulVec, Matrix.dotProduct, Matrix.one_apply]
+    simp [chhnPairVector, chhnShift, Matrix.mulVec, dotProduct, Matrix.one_apply]
 
 private theorem chhnPayload_mulVec_pairVector {R : Type*} [CommRing R]
     (leading trailing : Matrix (Fin 3) (Fin 3) R) (left right : Fin 3 → R) :
@@ -181,7 +193,7 @@ private theorem chhnPayload_mulVec_pairVector {R : Type*} [CommRing R]
       chhnPairVector (leading *ᵥ left + trailing *ᵥ right) 0 := by
   ext index
   cases index <;>
-    simp [chhnPairVector, chhnPayload, Matrix.mulVec, Matrix.dotProduct]
+    simp [chhnPairVector, chhnPayload, Matrix.mulVec, dotProduct]
 
 /-! ## Six-vector independence kernels -/
 
@@ -497,7 +509,7 @@ private theorem chhnPayloadWord_mulVec_packedColumn
   cases slot <;>
     ext state <;>
     cases state <;>
-    simp [chhnPayloadWord, chhnPackedGenerator, chhnPackedColumn,
+    simp [chhnPayloadWord, chhnPackedGenerator,
       chhnSlotColumn, CHHNPayloadSlot.toSlot, wordProduct, ← Matrix.mulVec_mulVec,
       chhnShift_mulVec_pairVector, chhnPayload_mulVec_pairVector]
 
@@ -510,8 +522,8 @@ private theorem chhnShiftPayloadWord_mulVec_packedColumn
       chhnPairVector 0 (chhnSlotColumn source column slot.toSlot) := by
   rw [wordProduct_append, ← Matrix.mulVec_mulVec,
     chhnPayloadWord_mulVec_packedColumn]
-  simpa using chhnShift_mulVec_pairVector (source .root)
-    (chhnSlotColumn source column slot.toSlot) 0
+  simp only [wordProduct_cons, wordProduct_nil, mul_one, chhnPackedGenerator]
+  rw [chhnShift_mulVec_pairVector, Matrix.mulVec_zero]
 
 private theorem chhnShift_mul_payloadWord_mulVec_packedColumn
     {K : Type*} [Field K]
@@ -572,17 +584,15 @@ theorem chhnRootPrefixStates_linearIndependent
           simp [expected, chhnJoinedSextet, chhnJoinLinear, chhnSextet, chhnRootPrefixes,
             finitePrefixStates, chhnPackedRow,
             chhnPackedGenerator, wordProduct, chhnPairVector_vecMul_shift,
-            chhnPairVector_vecMul_payload, chhnPairVector_vecMul_payload_shift, root_separator,
-            vecMul_outer, vecMul_mul_outer, μ, a₁, a₂, a₃, a₄, κ₁, κ₃, chhnSlotRow,
-            Matrix.vecMul_zero]
+            chhnPairVector_vecMul_payload, root_separator,
+            vecMul_outer, μ, a₁, a₂, a₃, a₄, κ₁, κ₃, chhnSlotRow]
     | inr blockIndex =>
         fin_cases blockIndex <;> ext state <;> cases state <;>
           simp [expected, chhnJoinedSextet, chhnJoinLinear, chhnSextet, chhnRootPrefixes,
             finitePrefixStates, chhnPackedRow,
-            chhnPackedGenerator, wordProduct, chhnPairVector_vecMul_shift,
+            chhnPackedGenerator, wordProduct,
             chhnPairVector_vecMul_payload, chhnPairVector_vecMul_payload_shift, root_separator,
-            vecMul_outer, vecMul_mul_outer, μ, a₁, a₂, a₃, a₄, κ₁, κ₃, chhnSlotRow,
-            Matrix.vecMul_zero]
+            vecMul_outer, μ, a₁, a₂, a₃, a₄, κ₁, κ₃, chhnSlotRow]
   rw [rows_eq]
   exact expected_independent
 
@@ -630,19 +640,18 @@ theorem chhnLeftLeadingPrefixStates_linearIndependent
           simp [expected, chhnJoinedSextet, chhnJoinLinear, chhnSextet,
             chhnLeftLeadingPrefixes, finitePrefixStates, chhnPackedRow,
             chhnPackedGenerator, wordProduct, chhnPairVector_vecMul_shift,
-            chhnPairVector_vecMul_payload, chhnPairVector_vecMul_payload_shift,
-            chhnPairVector_vecMul_shift_sq, smul_vecMul,
+            chhnPairVector_vecMul_payload,
             separator, vecMul_outer, μ, a₀, a₂, a₃, a₄,
-            chhnSlotRow, Matrix.vecMul_zero]
+            chhnSlotRow]
     | inr blockIndex =>
         fin_cases blockIndex <;> ext state <;> cases state <;>
           simp [expected, chhnJoinedSextet, chhnJoinLinear, chhnSextet,
             chhnLeftLeadingPrefixes, finitePrefixStates, chhnPackedRow,
-            chhnPackedGenerator, wordProduct, chhnPairVector_vecMul_shift,
+            chhnPackedGenerator, wordProduct,
             chhnPairVector_vecMul_payload, chhnPairVector_vecMul_payload_shift,
             chhnPairVector_vecMul_shift_sq, smul_vecMul,
             separator, vecMul_outer, μ, a₀, a₂, a₃, a₄,
-            chhnSlotRow, Matrix.vecMul_zero]
+            chhnSlotRow]
   rw [rows_eq]
   exact expected_independent
 
@@ -710,21 +719,17 @@ theorem chhnLeftTrailingPrefixStates_linearIndependent
           simp [expected, chhnJoinedSextet, chhnJoinLinear, chhnSextet,
             chhnLeftTrailingPrefixes, finitePrefixStates, chhnPackedRow,
             chhnPackedGenerator, wordProduct, chhnPairVector_vecMul_shift,
-            chhnPairVector_vecMul_payload, chhnPairVector_vecMul_payload_shift,
-            chhnPairVector_vecMul_shift_sq, chhnPairVector_vecMul_payload_shift_sq,
-            smul_vecMul,
-            separator, vecMul_outer, vecMul_mul_outer, μ, a₀, a₁, a₁₀,
-            chhnSlotRow, Matrix.vecMul_zero]
+            chhnPairVector_vecMul_shift_sq,
+            μ, a₀, a₁, a₁₀, chhnSlotRow]
     | inr blockIndex =>
         fin_cases blockIndex <;> ext state <;> cases state <;>
           simp [expected, chhnJoinedSextet, chhnJoinLinear, chhnSextet,
             chhnLeftTrailingPrefixes, finitePrefixStates, chhnPackedRow,
-            chhnPackedGenerator, wordProduct, chhnPairVector_vecMul_shift,
+            chhnPackedGenerator, wordProduct,
             chhnPairVector_vecMul_payload, chhnPairVector_vecMul_payload_shift,
-            chhnPairVector_vecMul_shift_sq, chhnPairVector_vecMul_payload_shift_sq,
+            chhnPairVector_vecMul_payload_shift_sq,
             smul_vecMul,
-            separator, vecMul_outer, vecMul_mul_outer, μ, a₀, a₁, a₁₀,
-            chhnSlotRow, Matrix.vecMul_zero]
+            separator, vecMul_outer, μ, a₀, a₁, a₁₀, chhnSlotRow]
   rw [rows_eq]
   exact expected_independent
 
@@ -782,15 +787,13 @@ theorem chhnReachableSuffixStates_linearIndependent
             chhnReachableSuffixes, finiteSuffixStates, chhnPackedColumn,
             chhnPackedGenerator, chhnShift_mulVec_pairVector,
             chhnPayloadWord_mulVec_packedColumn,
-            chhnShiftPayloadWord_mulVec_packedColumn,
-            chhnShift_mul_payloadWord_mulVec_packedColumn, h, k]
+            h, k]
     | inr blockIndex =>
         fin_cases blockIndex <;> cases state <;>
           simp [expected, chhnJoinedSextet, chhnJoinLinear, chhnSextet,
             chhnReachableSuffixes, finiteSuffixStates, chhnPackedColumn,
-            chhnPackedGenerator, chhnShift_mulVec_pairVector,
+            chhnPackedGenerator,
             chhnPayloadWord_mulVec_packedColumn,
-            chhnShiftPayloadWord_mulVec_packedColumn,
             chhnShift_mul_payloadWord_mulVec_packedColumn, h, k]
   rw [columns_eq]
   exact expected_independent
@@ -836,7 +839,17 @@ theorem chhnFiniteHankel_det_ne_zero
   rw [finiteHankel_factor _ _ _ _ _ _ exact]
   apply det_mul_ne_zero_of_linearIndependent_rows_cols
   · exact prefix_independent
-  · simpa [Matrix.transpose_apply] using suffix_independent
+  · have family_eq :
+        (fun index =>
+          (finiteSuffixStates (chhnPackedGenerator source) (chhnPackedColumn column)
+            suffixes)ᵀ index) =
+          (fun index state =>
+            finiteSuffixStates (chhnPackedGenerator source) (chhnPackedColumn column)
+              suffixes state index) := by
+      funext index state
+      rfl
+    rw [family_eq]
+    exact suffix_independent
 
 /-- A nonsingular packed certificate forces six states in every exact scalar realization. -/
 theorem chhnExactRepresentation_six_le_card

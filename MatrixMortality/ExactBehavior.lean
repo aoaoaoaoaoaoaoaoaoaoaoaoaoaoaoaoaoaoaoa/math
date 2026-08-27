@@ -40,7 +40,7 @@ theorem linearBehavior_append_apply (generators : Glyph → Module.End K State)
     linearBehavior generators input output (future ++ past) value =
       output (wordProduct generators future
         (wordProduct generators past (input value))) := by
-  simp [linearBehavior, wordProduct_append, LinearMap.mul_apply]
+  simp [linearBehavior, wordProduct_append, Module.End.mul_apply]
 
 /-- Matrix multiplication and linear-map composition interpret every word identically. -/
 theorem wordProduct_toLin {ι : Type*} [Fintype ι] [DecidableEq ι]
@@ -48,17 +48,17 @@ theorem wordProduct_toLin {ι : Type*} [Fintype ι] [DecidableEq ι]
     wordProduct (fun label => Matrix.toLin' (generators label)) word =
       Matrix.toLin' (wordProduct generators word) := by
   induction word with
-  | nil => simp [LinearMap.one_eq_id]
+  | nil => simp [Module.End.one_eq_id]
   | cons label tail induction =>
-      simp only [wordProduct_cons, induction, Matrix.toLin'_mul, LinearMap.mul_eq_comp]
+      simp only [wordProduct_cons, induction, Matrix.toLin'_mul, Module.End.mul_eq_comp]
 
 /-! ## Scalar specialization -/
 
 /-- A row vector as a linear output functional. -/
 def rowOutput {ι : Type*} [Fintype ι] (row : ι → K) : (ι → K) →ₗ[K] K where
   toFun vector := row ⬝ᵥ vector
-  map_add' left right := Matrix.dotProduct_add row left right
-  map_smul' scalar vector := Matrix.dotProduct_smul scalar row vector
+  map_add' left right := dotProduct_add row left right
+  map_smul' scalar vector := dotProduct_smul scalar row vector
 
 /-- A scalar series regarded as a one-dimensional linear behavior. -/
 def scalarBehavior (series : List Glyph → K) : List Glyph → (K →ₗ[K] K) :=

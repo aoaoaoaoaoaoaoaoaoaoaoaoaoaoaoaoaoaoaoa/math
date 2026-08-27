@@ -1,5 +1,5 @@
 import Mathlib.LinearAlgebra.Dimension.Finite
-import Mathlib.LinearAlgebra.FiniteDimensional
+import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
 import Mathlib.Tactic.FinCases
 
 /-!
@@ -25,7 +25,7 @@ theorem twoPrivateState_agree_at_rulePhase
     (clockScale returnScale : K)
     (returnScale_ne : returnScale ≠ 0)
     (returnSteps : Nat)
-    (dimension_le : FiniteDimensional.finrank K Q ≤ 2)
+    (dimension_le : Module.finrank K Q ≤ 2)
     (clock_first :
       clock firstDeletion = clockScale • secondDeletion)
     (clock_return :
@@ -77,9 +77,9 @@ theorem twoPrivateState_agree_at_rulePhase
       intro coefficient equality
       exact dependent (Submodule.mem_span_singleton.mpr ⟨coefficient, equality⟩)
     have two_le_dimension :
-        2 ≤ FiniteDimensional.finrank K Q := by
+        2 ≤ Module.finrank K Q := by
       simpa using independent.fintype_card_le_finrank
-    have dimension_eq : FiniteDimensional.finrank K Q = 2 :=
+    have dimension_eq : Module.finrank K Q = 2 :=
       Nat.le_antisymm dimension_le two_le_dimension
     have span_eq_top :
         Submodule.span K (Set.range ![firstDeletion, secondDeletion]) = ⊤ :=
@@ -111,7 +111,7 @@ theorem twoPrivateState_ruleScale_eq
     (clockScale returnScale leftScale rightScale : K)
     (returnScale_ne : returnScale ≠ 0)
     (returnSteps : Nat)
-    (dimension_le : FiniteDimensional.finrank K Q ≤ 2)
+    (dimension_le : Module.finrank K Q ≤ 2)
     (clock_first :
       clock firstDeletion = clockScale • secondDeletion)
     (clock_return :

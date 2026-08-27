@@ -113,14 +113,13 @@ theorem ofPair_smul
       mul_ne_zero scalar_ne denominator_zero
     simp [ofPair, denominator_zero, scaled_denominator_ne]
     field_simp
-    ring
 
 theorem mulVec_ray_some {R : Type*} [CommSemiring R]
     (matrix : Square (Fin 2) R) (z : R) :
     matrix *ᵥ ray (some z) = ![numerator matrix z, denominator matrix z] := by
   ext i
   fin_cases i <;>
-    simp [ray, numerator, denominator, Matrix.mulVec, Matrix.dotProduct,
+    simp [ray, numerator, denominator, Matrix.mulVec, dotProduct,
       Fin.sum_univ_succ]
 
 theorem mulVec_ray_none {R : Type*} [CommSemiring R]
@@ -128,7 +127,7 @@ theorem mulVec_ray_none {R : Type*} [CommSemiring R]
     matrix *ᵥ ray none = ![matrix 0 0, matrix 1 0] := by
   ext i
   fin_cases i <;>
-    simp [ray, Matrix.mulVec, Matrix.dotProduct, Fin.sum_univ_succ]
+    simp [ray, Matrix.mulVec, dotProduct, Fin.sum_univ_succ]
 
 /-- `act` is exactly projectivization of the image of the canonical ray. -/
 theorem ofPair_mulVec_ray
@@ -227,11 +226,11 @@ theorem targetOne_iff {K : Type*} [Field K] (point : Point K) :
   cases point with
   | none =>
       constructor
-      · norm_num [ray, Matrix.dotProduct, Fin.sum_univ_succ]
+      · norm_num [ray, dotProduct, Fin.sum_univ_succ]
       · intro impossible
         cases impossible
   | some z =>
-      norm_num [ray, Matrix.dotProduct, Fin.sum_univ_succ]
+      norm_num [ray, dotProduct, Fin.sum_univ_succ]
       constructor
       · intro difference_zero
         exact sub_eq_zero.mp (by simpa [sub_eq_add_neg] using difference_zero)
@@ -253,7 +252,7 @@ theorem targetOne_word_iff
     (fun label state =>
       mulVec_ray_act (generators label) state)
     word point]
-  rw [Matrix.dotProduct_smul]
+  rw [dotProduct_smul]
   have accumulated_ne :=
     rayWeight_ne_zero generators generator_unit word point
   simpa [smul_eq_mul, accumulated_ne] using

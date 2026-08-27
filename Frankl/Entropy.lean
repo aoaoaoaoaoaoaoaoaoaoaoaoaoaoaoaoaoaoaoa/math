@@ -66,7 +66,7 @@ theorem join_curvature_ratio_le {p q : ℝ} (hp₀ : 0 < p) (hp₁ : p ≤ 1 / 2
   have hq_lt_one : q < 1 := by linarith
   have hjoin : 0 < join p q := join_pos_of_pos_left hp₀ hq₀ hq_lt_one.le
   have hdenominator : 0 < 1 + q := by linarith
-  rw [div_le_div_iff hjoin hdenominator]
+  rw [div_le_div_iff₀ hjoin hdenominator]
   have hcore : p * (1 + q) ≤ join p q := by
     dsimp [join]
     nlinarith [mul_nonneg hq₀ (sub_nonneg.2 hp₁)]

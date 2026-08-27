@@ -45,7 +45,7 @@ theorem pairedDataMatrix_eq_explicit (R : Type*) [CommRing R] (β : Nat)
   ext i j
   fin_cases i <;> fin_cases j <;>
     simp [pairedDataMatrix, twoStateDataMatrix, controllerMatrix, pairControllerEquiv,
-      PairPhase.tile, Matrix.reindex_apply, Matrix.vecHead, Matrix.vecTail]
+      PairPhase.tile, Matrix.reindex_apply]
 
 /-- The integral phase-swap matrix. -/
 def pairedToggleMatrix (R : Type*) [CommRing R] : Matrix (Fin 4) (Fin 4) R :=
@@ -62,7 +62,7 @@ theorem pairedToggleMatrix_eq_explicit (R : Type*) [CommRing R] :
   ext i j
   fin_cases i <;> fin_cases j <;>
     simp [pairedToggleMatrix, controllerStateMatrix, controllerMatrix, pairControllerEquiv,
-      PairPhase.flip, Matrix.reindex_apply, Matrix.vecHead, Matrix.vecTail]
+      PairPhase.flip, Matrix.reindex_apply]
 
 /-- The phase toggle swaps one-based coordinates two and four,
 equivalently `Fin 4` indices `1` and `3`. -/
@@ -71,10 +71,10 @@ theorem pairedToggleMatrix_eq_permMatrix (R : Type*) [CommRing R] :
   ext i j
   change pairedToggleMatrix R i j =
     (Equiv.swap (1 : Fin 4) 3).toPEquiv.toMatrix i j
-  rw [PEquiv.equiv_toPEquiv_toMatrix]
+  rw [PEquiv.toMatrix_toPEquiv_apply]
   fin_cases i <;> fin_cases j <;>
     simp [pairedToggleMatrix, controllerStateMatrix, controllerMatrix, pairControllerEquiv,
-      PairPhase.flip, Equiv.swap_apply_def, Matrix.one_apply, Matrix.vecHead, Matrix.vecTail]
+      PairPhase.flip, Equiv.swap_apply_def]
 
 /-- The three compressed control generators. -/
 def pairedGenerator (R : Type*) [CommRing R] (β : Nat) (body : List TagLetter) :
@@ -157,7 +157,7 @@ theorem pairedProduct_mulVec_column (R : Type*) [CommRing R] (β : Nat)
 
 theorem pairedRow_dot_phaseVector (R : Type*) [CommRing R] (phase : PairPhase)
     (vector : Fin 3 → R) : pairedRow R ⬝ᵥ phaseVector R phase vector = vector 0 := by
-  simpa [pairedRow, Matrix.dotProduct, Fin.sum_univ_succ] using phaseHead R phase vector
+  simpa [pairedRow, dotProduct, Fin.sum_univ_succ] using phaseHead R phase vector
 
 /-- The scalar coefficient recognized by the compressed control representation. -/
 def pairedCoefficient (R : Type*) [CommRing R] (β : Nat) (body : List TagLetter)
@@ -177,7 +177,7 @@ theorem pairedColumn_map {R S : Type*} [CommRing R] [CommRing S]
   fin_cases index <;>
     simp [pairedColumn, phaseVector, controllerVector, pairControllerEquiv,
       sideTerminalColumn, sidePcpMatrix, sideTailBasis, nearyMarker, Matrix.vecHead,
-      Matrix.vecTail, Matrix.mulVec, Matrix.dotProduct, Fin.sum_univ_succ]
+      Matrix.vecTail]
   all_goals
     congr 1
     exact map_ofNat hom 3
@@ -187,9 +187,13 @@ theorem pairedGenerator_map {R S : Type*} [CommRing R] [CommRing S]
     (pairedGenerator R β body control).map hom = pairedGenerator S β body control := by
   cases control with
   | toggle =>
-      simpa [pairedGenerator, pairedToggleMatrix] using
-        congrArg (Matrix.reindex pairControllerEquiv pairControllerEquiv)
-          (controllerStateMatrix_map hom PairPhase.flip)
+      ext i j
+      change hom ((controllerStateMatrix R PairPhase.flip)
+          (pairControllerEquiv.symm i) (pairControllerEquiv.symm j)) =
+        (controllerStateMatrix S PairPhase.flip)
+          (pairControllerEquiv.symm i) (pairControllerEquiv.symm j)
+      exact congrFun (congrFun (controllerStateMatrix_map hom PairPhase.flip)
+        (pairControllerEquiv.symm i)) (pairControllerEquiv.symm j)
   | data letter =>
       simpa [pairedGenerator, pairedDataMatrix] using
         twoStateDataMatrix_map hom

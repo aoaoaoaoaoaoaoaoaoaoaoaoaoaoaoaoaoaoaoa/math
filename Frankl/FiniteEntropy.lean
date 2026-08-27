@@ -47,7 +47,7 @@ noncomputable def bernoulli (p : ℝ) (hp : p ∈ Icc (0 : ℝ) 1) :
   weight_nonneg b := by
     cases b <;> simp [hp.1, sub_nonneg.2 hp.2]
   weight_sum := by
-    simp [Fintype.sum_bool]
+    simp
 
 omit [DecidableEq ι] [DecidableEq κ] [DecidableEq τ] in
 @[simp]
@@ -63,8 +63,7 @@ omit [DecidableEq ι] [DecidableEq κ] [DecidableEq τ] in
 @[simp]
 theorem entropy_bernoulli (p : ℝ) (hp : p ∈ Icc (0 : ℝ) 1) :
     (bernoulli p hp).entropy = binEntropy p := by
-  simp [entropy, Fintype.sum_bool, binEntropy_eq_negMulLog_add_negMulLog_one_sub,
-    add_comm]
+  simp [entropy, binEntropy_eq_negMulLog_add_negMulLog_one_sub]
 
 /-- The uniform probability law on a nonempty finite set. -/
 noncomputable def uniformOn (s : Finset ι) (hs : s.Nonempty) : FiniteProbabilityLaw ι := by
@@ -155,7 +154,7 @@ theorem map_comp (law : FiniteProbabilityLaw ι) (f : ι → κ) (g : κ → τ)
       rw [sum_eq_single (f x)]
       · simp
       · intro y _ hy
-        simp [hy, Ne.symm hy]
+        simp [Ne.symm hy]
       · simp
 
 @[simp]
@@ -329,7 +328,12 @@ omit [DecidableEq κ] in
 theorem first_product (left : FiniteProbabilityLaw ι)
     (right : FiniteProbabilityLaw κ) :
     (left.product right).first = left := by
-  simpa only [product] using first_extend left (fun _ ↦ right)
+  classical
+  apply ext
+  funext i
+  rw [first_weight]
+  dsimp only [product]
+  rw [← mul_sum, right.weight_sum, mul_one]
 
 omit [DecidableEq ι] in
 @[simp]
@@ -398,6 +402,7 @@ theorem extend_successParameter (law : FiniteProbabilityLaw (ι × Bool)) :
         (1 - law.weight (i, true) / law.first.weight i) = law.weight (i, false)
       rw [first_weight, Fintype.sum_bool] at hmarginal ⊢
       field_simp [hmarginal]
+      ring
     · change law.first.weight i * law.successParameter i = law.weight (i, true)
       simp only [successParameter]
       exact mul_div_cancel₀ _ hmarginal

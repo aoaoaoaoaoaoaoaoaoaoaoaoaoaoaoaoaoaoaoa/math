@@ -48,9 +48,7 @@ theorem endpointCore_coefficient {center : ℝ}
         ((1 - dependentShare) * (1 - abundanceTarget) *
           ((1 - center) + (1 - 4 * center / 3) * (1 + center))) /
             ((1 - center) * (1 + center)) by
-      field_simp [hleftPositive.ne', hrightPositive.ne']
-      left
-      ring]
+      field_simp [hleftPositive.ne', hrightPositive.ne']]
   apply (div_le_iff₀ (mul_pos hleftPositive hrightPositive)).2
   norm_num [dependentShare, abundanceTarget, entropySlack, endpointCoreThreshold] at hcenterLower ⊢
   nlinarith
@@ -308,7 +306,6 @@ theorem endpointCertificateObjective_saturated_center_le {a q support : ℝ}
       dsimp only [lowMass, endpointSupportContractionCoefficient]
       dsimp only [targetComplement]
       field_simp [hcenterComplementPositive.ne', hsupportJoin.ne']
-      ring
     rw [hequality]
     exact hcoefficient
   have hcontraction := diagonalEndpointObjective_saturated_center_le hlowMass hleftWeight
@@ -320,7 +317,6 @@ theorem endpointCertificateObjective_saturated_center_le {a q support : ℝ}
     rw [htargetMinusCenter, hcenterComplement]
     unfold endpointCertificateWeight
     field_simp [htargetComplement.ne', hdenominator.ne', hendpointDenominator.ne']
-    ring
   have hleftScale :
       lowMass * leftWeight = 1 - endpointCertificateWeight a q := by
     rw [hcertificateWeight]
@@ -332,7 +328,6 @@ theorem endpointCertificateObjective_saturated_center_le {a q support : ℝ}
     rw [hcertificateWeight]
     dsimp only [lowMass, rightWeight]
     field_simp [htargetComplement.ne', hcenterComplementPositive.ne']
-    ring
   rw [hleftScale, hrightScale] at hcontraction
   simpa only [endpointSaturatedCenteredObjective, endpointCertificateObjective, center,
     lowMass, leftWeight, targetComplement, hleftScale] using hcontraction
@@ -414,7 +409,6 @@ theorem endpointCertificateObjective_core_center_le {a q : ℝ}
     rw [htargetMinusCenter, hcenterComplement]
     unfold endpointCertificateWeight
     field_simp [htargetComplement.ne', hdenominator.ne', hendpointDenominator.ne']
-    ring
   have hleftScale :
       lowMass * leftWeight = 1 - endpointCertificateWeight a q := by
     rw [hcertificateWeight]
@@ -426,7 +420,6 @@ theorem endpointCertificateObjective_core_center_le {a q : ℝ}
     rw [hcertificateWeight]
     dsimp only [lowMass, rightWeight]
     field_simp [htargetComplement.ne', hcenterComplementPositive.ne']
-    ring
   have hcenterWeight :
       endpointCertificateWeight center center = endpointCertificateWeight a q := by
     rw [hcertificateWeight]

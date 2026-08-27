@@ -75,8 +75,9 @@ theorem exists_eq_map_some_of_none_not_mem {ι : Type*} {word : List (Option ι)
 theorem spell_marked_ordinary {ι α : Type*} (side : ι → List α)
     (terminal : List α) (word : List ι) :
     spell (markedSide side terminal) (word.map some) = (spell side word).map some := by
-  simpa only [spell, markedSide, fullSide, List.map_map, Function.comp_apply] using
-    (spell_map (fun a : α => some a) side word)
+  rw [← spell_comp_map]
+  simpa [Function.comp_def, markedSide, fullSide] using
+    spell_map (fun letter ↦ some letter) side word
 
 /-- If the ordinary tiles have no solution, every solution of the marked instance uses the
 terminal tile. -/
@@ -313,12 +314,8 @@ theorem binaryMarked_solvable_iff_terminal_match_of_final_mismatch {ι : Type*}
 theorem spell_binaryMarkedOrdinary {ι : Type*} (side : ι → List Bool) (word : List ι) :
     spell (binaryMarkedOrdinary side) word =
       encodeMarkedBits ((spell side word).map some) := by
-  induction word with
-  | nil => rfl
-  | cons i word ih =>
-      simp only [spell, List.map_cons, List.join_cons, List.map_append, binaryMarkedOrdinary]
-      change encodeMarkedBits ((side i).map some) ++ spell (binaryMarkedOrdinary side) word =
-        encodeMarkedBits ((side i).map some ++ (spell side word).map some)
-      rw [ih, ← encodeMarkedBits_append]
+  change spell (fun i ↦ spell markedBitCode ((side i).map some)) word =
+    spell markedBitCode ((spell side word).map some)
+  rw [← spell_comp_spell, spell_map]
 
 end MatrixMortality

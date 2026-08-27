@@ -67,12 +67,10 @@ noncomputable def mix (p : ℝ) (left right : FiniteMomentLaw ι moment mean)
     add_nonneg (mul_nonneg hp.1 (left.weight_nonneg i))
       (mul_nonneg (sub_nonneg.2 hp.2) (right.weight_nonneg i))
   weight_sum := by
-    change ∑ i, (p * left.weight i + (1 - p) * right.weight i) = 1
     rw [sum_add_distrib]
     rw [← mul_sum, ← mul_sum, left.weight_sum, right.weight_sum]
     ring
   moment_sum := by
-    change ∑ i, (p * left.weight i + (1 - p) * right.weight i) * moment i = mean
     simp_rw [add_mul, mul_assoc]
     rw [sum_add_distrib, ← mul_sum, ← mul_sum, left.moment_sum, right.moment_sum]
     ring
@@ -124,7 +122,7 @@ private theorem threeDirection_ne_zero {i j k : ι}
   by_cases hm : moment i = moment j
   · intro hzero
     have hi := congr_fun hzero i
-    simp [threeDirection, hm, hij, hik] at hi
+    simp [threeDirection, hm, hij] at hi
   · intro hzero
     have hk := congr_fun hzero k
     simp [threeDirection, hm, hik.symm, hjk.symm] at hk
@@ -138,7 +136,7 @@ private theorem threeDirection_live {law : FiniteMomentLaw ι moment mean} {i j 
   by_cases hm : moment i = moment j
   · have hr : r = i ∨ r = j := by
       by_contra hnot
-      push_neg at hnot
+      push Not at hnot
       apply hdir
       simp [threeDirection, hm, hnot.1, hnot.2]
     rcases hr with rfl | rfl
@@ -146,7 +144,7 @@ private theorem threeDirection_live {law : FiniteMomentLaw ι moment mean} {i j 
     · exact law.weight_pos_of_mem_support hj
   · have hr : r = i ∨ r = j ∨ r = k := by
       by_contra hnot
-      push_neg at hnot
+      push Not at hnot
       apply hdir
       simp [threeDirection, hm, hnot.1, hnot.2.1, hnot.2.2]
     rcases hr with rfl | rfl | rfl
@@ -300,8 +298,6 @@ private noncomputable def forwardLaw (law : FiniteMomentLaw ι moment mean)
   weight_nonneg := forward_weight_nonneg hnegative hlive
   weight_sum := by rw [sum_add_distrib, ← mul_sum, law.weight_sum, hsum, mul_zero, add_zero]
   moment_sum := by
-    change ∑ i, (law.weight i + forwardStep law direction hnegative * direction i)
-      * moment i = mean
     simp_rw [add_mul, mul_assoc]
     rw [sum_add_distrib, ← mul_sum, law.moment_sum, hmoment, mul_zero, add_zero]
 
@@ -315,8 +311,6 @@ private noncomputable def backwardLaw (law : FiniteMomentLaw ι moment mean)
   weight_nonneg := backward_weight_nonneg hpositive hlive
   weight_sum := by rw [sum_sub_distrib, ← mul_sum, law.weight_sum, hsum, mul_zero, sub_zero]
   moment_sum := by
-    change ∑ i, (law.weight i - backwardStep law direction hpositive * direction i)
-      * moment i = mean
     simp_rw [sub_mul, mul_assoc]
     rw [sum_sub_distrib, ← mul_sum, law.moment_sum, hmoment, mul_zero, sub_zero]
 
@@ -338,6 +332,7 @@ private theorem forward_support_lt {law : FiniteMomentLaw ι moment mean}
     dsimp [forwardLaw]
     rw [forwardStep, ← heq]
     field_simp [hdir.ne]
+    ring
   have hsubset : (forwardLaw law direction hsum hmoment hnegative hlive).support ⊆
       law.support := by
     intro r hr
@@ -377,6 +372,7 @@ private theorem backward_support_lt {law : FiniteMomentLaw ι moment mean}
     dsimp [backwardLaw]
     rw [backwardStep, ← heq]
     field_simp [hdir.ne']
+    ring
   have hsubset : (backwardLaw law direction hsum hmoment hpositive hlive).support ⊆
       law.support := by
     intro r hr
@@ -423,9 +419,20 @@ private theorem exists_strict_split (law : FiniteMomentLaw ι moment mean)
   refine ⟨p, ⟨hp₀, hp₁⟩, left, right, ?_, ?_, ?_⟩
   · apply FiniteMomentLaw.ext
     funext i
-    dsimp [mix, left, right, forwardLaw, backwardLaw, p, forward, backward]
-    field_simp [(add_pos hforward hbackward).ne']
-    ring
+    change law.weight i =
+      p * (law.weight i + forward * direction i) +
+        (1 - p) * (law.weight i - backward * direction i)
+    have balance : p * forward = (1 - p) * backward := by
+      dsimp [p]
+      field_simp [(add_pos hforward hbackward).ne']
+      ring
+    symm
+    calc
+      p * (law.weight i + forward * direction i) +
+          (1 - p) * (law.weight i - backward * direction i) =
+        law.weight i +
+          (p * forward - (1 - p) * backward) * direction i := by ring
+      _ = law.weight i := by rw [balance, sub_self, zero_mul, add_zero]
   · exact forward_support_lt hnegative hlive
   · exact backward_support_lt hpositive hlive
 
@@ -437,8 +444,8 @@ theorem exists_support_card_le_two {functional : FiniteMomentLaw ι moment mean 
       reduced.support.card ≤ 2 ∧ functional reduced ≤ functional law := by
   classical
   generalize hn : law.support.card = n
-  induction n using Nat.strong_induction_on generalizing law with
-  | h n ih =>
+  induction n using Nat.strongRecOn generalizing law with
+  | ind n ih =>
       by_cases hsmall : law.support.card ≤ 2
       · exact ⟨law, hsmall, le_rfl⟩
       · have hlarge : 2 < law.support.card := Nat.lt_of_not_ge hsmall
@@ -448,7 +455,7 @@ theorem exists_support_card_le_two {functional : FiniteMomentLaw ι moment mean 
         rw [← hlaw] at hsegment
         have hworse : functional left ≤ functional law ∨ functional right ≤ functional law := by
           by_contra hnot
-          push_neg at hnot
+          push Not at hnot
           have hleftPositive : 0 < p * (functional left - functional law) :=
             mul_pos hp.1 (sub_pos.2 hnot.1)
           have hrightPositive : 0 < (1 - p) * (functional right - functional law) :=
@@ -610,7 +617,7 @@ theorem exists_support_straddles {functional : FiniteMomentLaw ι moment mean �
         funext r
         by_cases hri : r = i
         · subst r
-          simp [mix, left, right, pointMass, hij, hmass]
+          simp [mix, left, right, pointMass, hij]
         · by_cases hrj : r = j
           · subst r
             simp [mix, left, right, pointMass, hri]
@@ -626,7 +633,7 @@ theorem exists_support_straddles {functional : FiniteMomentLaw ι moment mean �
       have hendpoint : functional left ≤ functional reduced ∨
           functional right ≤ functional reduced := by
         by_contra hnot
-        push_neg at hnot
+        push Not at hnot
         have hleftPositive :
             0 < reduced.weight i * (functional left - functional reduced) :=
           mul_pos hiWeight (sub_pos.2 hnot.1)

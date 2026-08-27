@@ -21,7 +21,7 @@ noncomputable section
 /-- The canonical numerator and denominator of a rational are coprime over the integers. -/
 theorem rat_num_den_isCoprime (value : ℚ) :
     IsCoprime value.num (value.den : ℤ) := by
-  rw [Int.coprime_iff_nat_coprime]
+  rw [Int.isCoprime_iff_nat_coprime]
   simpa using value.reduced
 
 /-- A rational `p`-adic unit has denominator prime to `p` in canonical form. -/
@@ -66,7 +66,7 @@ theorem primePower_dvd_common_of_unit_denominator
     (prime : ℤ) ^ exponent ∣ common := by
   have prime_denominator_coprime :
       IsCoprime (prime : ℤ) (value.den : ℤ) := by
-    rw [Int.coprime_iff_nat_coprime]
+    rw [Int.isCoprime_iff_nat_coprime]
     simpa using (Fact.out : prime.Prime).coprime_iff_not_dvd.mpr
       (by
         intro divides
@@ -115,7 +115,6 @@ theorem residualStep_eq_integralRatio
     simp only [terminalDefect, Int.cast_add, Int.cast_sub, Int.cast_mul,
       Int.cast_natCast]
     field_simp [denominator_ne, scale_ne_rat]
-    ring
   have numerator_eq :
       (parameters.center - parameters.prime ^ wait) * source +
           drift parameters.center parameters.reset =
@@ -127,7 +126,6 @@ theorem residualStep_eq_integralRatio
     simp only [integralStepNumerator, Int.cast_add, Int.cast_sub,
       Int.cast_mul, Int.cast_pow, Int.cast_natCast]
     field_simp [denominator_ne, scale_ne_rat]
-    ring
   have terminal_ne :
       terminalDefect centerNumerator driftNumerator scale
           source.num source.den ≠ 0 := by
@@ -139,6 +137,7 @@ theorem residualStep_eq_integralRatio
     numerator_eq, transform_eq]
   field_simp [denominator_ne, scale_ne_rat,
     primePower_ne_zero parameters.prime_prime, terminal_ne]
+  norm_num
 
 /-- Canonical primitive homogeneous coordinates of a rational. -/
 def rationalPair (value : ℚ) : ℤ × ℤ :=
@@ -416,9 +415,9 @@ theorem not_physical_isMortal_of_drift_divisor
     rw [show
       (centerNumerator : ℚ) / scale - 1 =
         (centerNumerator - scale : ℤ) / scale by
+          rw [Int.cast_sub]
           field_simp [scale_ne_rat]]
     field_simp [scale_ne_rat, denominator_ne_rat]
-    ring
   have terminal_state_eq :
       quotientPairState factor
           (rationalPair (terminalResidual parameters)) =
@@ -442,7 +441,7 @@ theorem not_physical_isMortal_of_drift_divisor
       (by
         intro base_zero
         have factor_dvd_base : factor ∣ parameters.prime :=
-          (ZMod.natCast_zmod_eq_zero_iff_dvd parameters.prime factor).mp
+          (ZMod.natCast_eq_zero_iff parameters.prime factor).mp
             base_zero
         exact primitivePrimeDivisor_not_dvd_base_int primitive
           (by exact_mod_cast factor_dvd_base))

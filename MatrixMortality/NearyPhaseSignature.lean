@@ -29,12 +29,12 @@ theorem nearyLowerScale_rule_ne
   have lower_length :
       3 < (nearyLower β body (.rule .c)).length := by
     simp only [nearyLower, List.length_append, List.length_cons, List.length_nil]
-    have encoded_length := List.length_pos.mpr encoded_nonempty
+    have encoded_length := List.length_pos_of_ne_nil encoded_nonempty
     omega
   have scale_lt :
       (3 : ℚ) ^ 3 <
         3 ^ (nearyLower β body (.rule .c)).length :=
-    pow_lt_pow_right (R := ℚ) (by norm_num) lower_length
+    pow_lt_pow_right₀ (a := (3 : ℚ)) (by norm_num) lower_length
   exact ne_of_lt (by
     simpa only [nearyLowerScale, nearyLower, List.length_cons, List.length_nil] using
       scale_lt)
@@ -51,7 +51,7 @@ theorem neary_twoPrivateState_phaseCompiler_impossible
     (clockScale returnScale : ℚ)
     (returnScale_ne : returnScale ≠ 0)
     (returnSteps : Nat)
-    (dimension_le : FiniteDimensional.finrank ℚ Q ≤ 2)
+    (dimension_le : Module.finrank ℚ Q ≤ 2)
     (clock_first :
       clock firstDeletion = clockScale • secondDeletion)
     (clock_return :

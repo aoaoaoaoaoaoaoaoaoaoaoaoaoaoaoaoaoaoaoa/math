@@ -138,6 +138,9 @@ theorem residualStep_sub
   have power_ne :
       (parameters.prime : ℚ) ^ (parameters.depth * wait) ≠ 0 :=
     primePower_ne_zero parameters.prime_prime _
+  rw [div_sub_div _ _
+    (mul_ne_zero power_ne left_denominator_ne)
+    (mul_ne_zero power_ne right_denominator_ne)]
   field_simp [power_ne, left_denominator_ne, right_denominator_ne]
   ring
 
@@ -191,6 +194,8 @@ theorem residualStep_sub_hasValue
         (mul_hasValue (primePower_hasValue (parameters.depth * wait))
           left_denominator)
         right_denominator using 1
+    push_cast
+    ring
   simpa using div_hasValue numerator_value denominator_value
 
 /-- A perturbation deeper than one branch sphere preserves that branch. -/
@@ -233,8 +238,9 @@ theorem residualRun_sub_hasValue
       have tail :=
         induction left_follows.2 right_follows.2 stepped
       convert tail using 1
-      simp only [scheduleWeight_cons]
-      ring
+      · simp only [residualRun_cons]
+      · rw [scheduleWeight_cons]
+        ring
 
 /-- A perturbation deeper than the full schedule weight follows the same legal schedule. -/
 theorem followsResidualSchedule_of_deep_sub
@@ -323,7 +329,7 @@ theorem primePower_le_pairHeight_of_dvd_cross
     Int.natAbs_le_of_dvd_ne_zero divides cross_ne
   have cast_abs :
       ((prime : ℤ) ^ depth).natAbs = prime ^ depth := by
-    rw [Int.natAbs_pow, Int.natAbs_ofNat]
+    rw [Int.natAbs_pow, Int.natAbs_natCast]
   rw [cast_abs] at divisor_le
   exact divisor_le.trans (projectivePairCross_natAbs_le source target)
 
@@ -344,7 +350,6 @@ theorem rationalPairCross_div_denominators
       simp only [projectivePairCross, rationalPair_fst, rationalPair_snd,
         Int.cast_sub, Int.cast_mul, Int.cast_natCast]
       field_simp [left_den_ne, right_den_ne]
-      ring
     _ = left - right := by rw [left.num_div_den, right.num_div_den]
 
 /-- Distinct rationals have distinct canonical projective rays. -/
@@ -721,9 +726,10 @@ theorem residualMacroOrbit_follows_and_separates
         residualRun_sub_hasValue parameters waits
           current_follows prior_follows prior_separation
       convert transported using 1
-      rw [scheduleWeight_eq_natCast]
-      push_cast
-      ring
+      · simp only [residualMacroOrbit_succ]
+      · rw [scheduleWeight_eq_natCast]
+        push_cast
+        ring
 
 /-- A repeated legal macro forces its first return to be at least linearly deep unless that
 return is already exact. -/

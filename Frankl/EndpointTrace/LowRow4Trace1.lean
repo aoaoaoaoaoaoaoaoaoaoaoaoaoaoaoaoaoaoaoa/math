@@ -19,7 +19,7 @@ private theorem lowRow4Cell5RootTree_certified :
     certifySubdivision 12 64 32 lowRow4Cell5RootRectangle
       CertificateObjective.endpointExpression lowRow4Cell5RootTree =
         some () := by
-  rfl
+  close_endpoint_certificate
 
 /-- One static reflected endpoint-certificate chunk. -/
 theorem lowRow4Cell5Root_nonneg {a q : ℝ}
@@ -57,7 +57,7 @@ private theorem lowRow4Cell6RootTree_certified :
     certifySubdivision 12 64 32 lowRow4Cell6RootRectangle
       CertificateObjective.endpointExpression lowRow4Cell6RootTree =
         some () := by
-  rfl
+  close_endpoint_certificate
 
 /-- One static reflected endpoint-certificate chunk. -/
 theorem lowRow4Cell6Root_nonneg {a q : ℝ}
@@ -93,7 +93,7 @@ private theorem lowRow4Cell7RootTree_certified :
     certifySubdivision 12 64 32 lowRow4Cell7RootRectangle
       CertificateObjective.endpointExpression lowRow4Cell7RootTree =
         some () := by
-  rfl
+  close_endpoint_certificate
 
 /-- One static reflected endpoint-certificate chunk. -/
 theorem lowRow4Cell7Root_nonneg {a q : ℝ}
@@ -129,7 +129,7 @@ private theorem lowRow4Cell8RootTree_certified :
     certifySubdivision 12 64 32 lowRow4Cell8RootRectangle
       CertificateObjective.endpointExpression lowRow4Cell8RootTree =
         some () := by
-  rfl
+  close_endpoint_certificate
 
 /-- One static reflected endpoint-certificate chunk. -/
 theorem lowRow4Cell8Root_nonneg {a q : ℝ}
@@ -165,7 +165,7 @@ private theorem lowRow4Cell9RootTree_certified :
     certifySubdivision 12 64 32 lowRow4Cell9RootRectangle
       CertificateObjective.endpointExpression lowRow4Cell9RootTree =
         some () := by
-  rfl
+  close_endpoint_certificate
 
 /-- One static reflected endpoint-certificate chunk. -/
 theorem lowRow4Cell9Root_nonneg {a q : ℝ}
@@ -199,7 +199,7 @@ private theorem lowRow4Cell10RootTree_certified :
     certifySubdivision 12 64 32 lowRow4Cell10RootRectangle
       CertificateObjective.endpointExpression lowRow4Cell10RootTree =
         some () := by
-  rfl
+  close_endpoint_certificate
 
 /-- One static reflected endpoint-certificate chunk. -/
 theorem lowRow4Cell10Root_nonneg {a q : ℝ}
@@ -233,7 +233,7 @@ private theorem lowRow4Cell11RootTree_certified :
     certifySubdivision 12 64 32 lowRow4Cell11RootRectangle
       CertificateObjective.endpointExpression lowRow4Cell11RootTree =
         some () := by
-  rfl
+  close_endpoint_certificate
 
 /-- One static reflected endpoint-certificate chunk. -/
 theorem lowRow4Cell11Root_nonneg {a q : ℝ}
@@ -267,7 +267,7 @@ private theorem lowRow4Cell12RootTree_certified :
     certifySubdivision 12 64 32 lowRow4Cell12RootRectangle
       CertificateObjective.endpointExpression lowRow4Cell12RootTree =
         some () := by
-  rfl
+  close_endpoint_certificate
 
 /-- One static reflected endpoint-certificate chunk. -/
 theorem lowRow4Cell12Root_nonneg {a q : ℝ}
@@ -301,7 +301,7 @@ private theorem lowRow4Cell13RootTree_certified :
     certifySubdivision 12 64 32 lowRow4Cell13RootRectangle
       CertificateObjective.endpointExpression lowRow4Cell13RootTree =
         some () := by
-  rfl
+  close_endpoint_certificate
 
 /-- One static reflected endpoint-certificate chunk. -/
 theorem lowRow4Cell13Root_nonneg {a q : ℝ}
@@ -335,7 +335,7 @@ private theorem lowRow4Cell14RootTree_certified :
     certifySubdivision 12 64 32 lowRow4Cell14RootRectangle
       CertificateObjective.endpointExpression lowRow4Cell14RootTree =
         some () := by
-  rfl
+  close_endpoint_certificate
 
 /-- One static reflected endpoint-certificate chunk. -/
 theorem lowRow4Cell14Root_nonneg {a q : ℝ}
@@ -369,7 +369,7 @@ private theorem lowRow4Cell15RootTree_certified :
     certifySubdivision 12 64 32 lowRow4Cell15RootRectangle
       CertificateObjective.endpointExpression lowRow4Cell15RootTree =
         some () := by
-  rfl
+  close_endpoint_certificate
 
 /-- One static reflected endpoint-certificate chunk. -/
 theorem lowRow4Cell15Root_nonneg {a q : ℝ}
@@ -403,7 +403,7 @@ private theorem lowRow4Cell16RootTree_certified :
     certifySubdivision 12 64 32 lowRow4Cell16RootRectangle
       CertificateObjective.endpointExpression lowRow4Cell16RootTree =
         some () := by
-  rfl
+  close_endpoint_certificate
 
 /-- One static reflected endpoint-certificate chunk. -/
 theorem lowRow4Cell16Root_nonneg {a q : ℝ}

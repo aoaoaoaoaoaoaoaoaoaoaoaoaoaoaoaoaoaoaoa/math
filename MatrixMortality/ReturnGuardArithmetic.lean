@@ -65,6 +65,7 @@ theorem integralStep_realizes_residualStep
     rw [drift_eq, center_eq, step.2]
     dsimp [terminalDefect]
     field_simp [scale_ne, denominator_ne]
+    norm_cast
     ring
   have transform_ne :
       (parameters.center - 1) * ((numerator : ℚ) / denominator) +
@@ -93,12 +94,10 @@ theorem integralStep_realizes_residualStep
       dsimp [integralStepNumerator] at integer_step
       exact_mod_cast integer_step
     field_simp [scale_ne, denominator_ne]
-    linear_combination
-      -((scale : ℚ) ^ 2 * (denominator : ℚ)) * cast_step
+    linear_combination -cast_step
   rw [numerator_eq, transform_eq]
   field_simp [parameters.prime_ne_zero, scale_ne, denominator_ne,
     nextDenominator_ne]
-  ring
 
 /-- Exact difference identity for the integral pair recurrence. -/
 theorem integralStep_difference
@@ -457,9 +456,15 @@ theorem integralStep_commonDivisor_dvd_fullSupport
           (power * driftNumerator) * denominator := by
     have scaled := divides_denominator.mul_left power
     rw [step.2] at scaled
-    convert scaled using 1
-    dsimp [terminalDefect, power]
-    ring
+    have identity :
+        (power * (centerNumerator - scale)) * numerator +
+            (power * driftNumerator) * denominator =
+          power * terminalDefect centerNumerator driftNumerator scale
+            numerator denominator := by
+      simp [terminalDefect]
+      ring
+    rw [identity]
+    exact scaled
   have determinant_divides :=
     commonDivisor_dvd_det primitive first_divides second_divides
   convert determinant_divides using 1

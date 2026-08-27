@@ -17,7 +17,10 @@ namespace MatrixMortality
 inductive TagLetter where
   | b
   | c
-  deriving DecidableEq, Fintype, Inhabited, Repr
+  deriving DecidableEq, Inhabited, Repr
+
+instance : Fintype TagLetter :=
+  Fintype.ofList [.b, .c] fun letter => by cases letter <;> simp
 
 noncomputable instance : Primcodable TagLetter :=
   finitePrimcodable TagLetter
@@ -43,9 +46,9 @@ def tagEncode (β : Nat) (word : List TagLetter) : List Bool := spell (tagCode �
 theorem tagEncode_primrec (β : Nat) :
     Primrec (tagEncode β) := by
   have tagCodeRec : Primrec (tagCode β) :=
-    Primrec.dom_fintype _
+    Primrec.dom_finite _
   exact
-    (Primrec.list_bind Primrec.id
+    (Primrec.list_flatMap Primrec.id
       (tagCodeRec.comp₂ Primrec₂.right)).of_eq fun word => by
         rfl
 
@@ -141,19 +144,17 @@ theorem tagEncode_injective (β : Nat) (hβ : 0 < β) : Function.Injective (tagE
               cases x <;> cases y
               · simp only [tagEncode_cons, tagCode, List.append_cancel_left_eq] at hxy
                 exact congrArg (TagLetter.b :: ·) (ih hxy)
-              · simp only [tagEncode_cons, tagCode, List.replicate_succ, List.cons.injEq,
-                  true_and] at hxy
+              · simp only [tagEncode_cons, tagCode, List.replicate_succ] at hxy
                 have htail : false :: List.replicate β false ++ [true] ++
                     tagEncode (β + 1) xs = tagEncode (β + 1) ys := by
                   exact (List.cons.inj hxy).2
                 exact False.elim <| tagEncode_ne_false_cons (β + 1) ys _ htail.symm
-              · simp only [tagEncode_cons, tagCode, List.replicate_succ, List.cons.injEq,
-                  true_and] at hxy
+              · simp only [tagEncode_cons, tagCode, List.replicate_succ] at hxy
                 have htail : tagEncode (β + 1) xs = false :: List.replicate β false ++
                     [true] ++ tagEncode (β + 1) ys := by
                   exact (List.cons.inj hxy).2
                 exact False.elim <| tagEncode_ne_false_cons (β + 1) xs _ htail
-              · simp only [tagEncode_cons, tagCode, List.cons.injEq, true_and] at hxy
+              · simp only [tagEncode_cons, tagCode] at hxy
                 exact congrArg (TagLetter.c :: ·) (ih <| List.append_cancel_left hxy)
 
 /-! ## Pulse automaton -/
@@ -186,7 +187,7 @@ theorem pulseScan_append (β : Nat) (state : Pulse) (x y : List Bool) :
   | nil => rfl
   | cons bit x ih =>
       simp only [List.cons_append, pulseScan]
-      cases hstep : pulseBit β state bit <;> simp [hstep, ih]
+      cases hstep : pulseBit β state bit <;> simp [ih]
 
 theorem pulseScan_false_replicate (β k n : Nat) (hbound : k + n ≤ β) :
     pulseScan β (.gap k) (List.replicate n false) = some (.gap (k + n)) := by
@@ -195,7 +196,7 @@ theorem pulseScan_false_replicate (β k n : Nat) (hbound : k + n ≤ β) :
   | succ n ih =>
       have hk : k < β := by omega
       have htail : k + 1 + n ≤ β := by omega
-      simp only [List.replicate_succ, pulseScan, pulseBit, hk, ↓reduceIte, Option.bind_eq_bind]
+      simp only [List.replicate_succ, pulseScan, pulseBit, hk, ↓reduceIte]
       simpa [Nat.add_assoc, Nat.add_comm, Nat.add_left_comm] using ih (k + 1) htail
 
 theorem pulseScan_tagCode_from_high (β : Nat) (hβ : 0 < β) (letter : TagLetter) :
@@ -205,10 +206,10 @@ theorem pulseScan_tagCode_from_high (β : Nat) (hβ : 0 < β) (letter : TagLette
   | b =>
       change pulseScan β (.gap 0) (([true] ++ List.replicate β false) ++ [true]) = _
       rw [pulseScan_append, pulseScan_append]
-      simp only [pulseScan, pulseBit, Option.some_bind]
-      simp only [true_or, if_true, Option.some_bind]
+      simp only [pulseScan, pulseBit]
+      simp only [true_or, if_true, Option.bind_some]
       rw [pulseScan_false_replicate β 0 β (by simp)]
-      simp [pulseScan, pulseBit, hβ.ne']
+      simp [hβ.ne']
 
 theorem pulseScan_tagCode_from_virgin (β : Nat) (hβ : 0 < β) (letter : TagLetter) :
     pulseScan β .virgin (tagCode β letter) = some (.gap 0) := by
@@ -217,9 +218,9 @@ theorem pulseScan_tagCode_from_virgin (β : Nat) (hβ : 0 < β) (letter : TagLet
   | b =>
       change pulseScan β .virgin (([true] ++ List.replicate β false) ++ [true]) = _
       rw [pulseScan_append, pulseScan_append]
-      simp only [pulseScan, pulseBit, Option.some_bind]
+      simp only [pulseScan, pulseBit, Option.bind_some]
       rw [pulseScan_false_replicate β 0 β (by simp)]
-      simp [pulseScan, pulseBit, hβ.ne']
+      simp [hβ.ne']
 
 theorem pulseScan_tagEncode_from_high (β : Nat) (hβ : 0 < β)
     (word : List TagLetter) :
@@ -233,13 +234,13 @@ theorem pulseScan_tagEncode_from_high (β : Nat) (hβ : 0 < β)
 theorem pulseScan_marker_from_high (β : Nat) :
     pulseScan β (.gap 0) (nearyMarker β) = some (.gap β) := by
   rw [nearyMarker, pulseScan]
-  simp only [pulseBit, Option.some_bind]
+  simp only [pulseBit]
   simpa using pulseScan_false_replicate β 0 β (by simp)
 
 theorem pulseScan_marker_from_virgin (β : Nat) :
     pulseScan β .virgin (nearyMarker β) = some (.gap β) := by
   rw [nearyMarker, pulseScan]
-  simp only [pulseBit, Option.some_bind]
+  simp only [pulseBit]
   simpa using pulseScan_false_replicate β 0 β (by simp)
 
 theorem pulseScan_tagEncode_from_virgin (β : Nat) (hβ : 0 < β)
@@ -275,7 +276,7 @@ theorem pulseScan_nearyLower_rule_from_virgin (β : Nat) (body : List TagLetter)
   | c =>
       change pulseScan β .virgin ([true] ++ (tagEncode β body ++ [true, false])) = _
       rw [pulseScan_append]
-      simp only [pulseScan, pulseBit, Option.some_bind]
+      simp only [pulseScan, pulseBit, Option.bind_some]
       rw [pulseScan_append]
       rw [pulseScan_tagEncode_from_high β hβ]
       simp [pulseScan, pulseBit, hβ]
@@ -291,7 +292,7 @@ theorem pulseScan_nearyLower_rule_from_gap (β n : Nat) (body : List TagLetter)
     | c =>
         change pulseScan β (.gap n) ([true] ++ (tagEncode β body ++ [true, false])) = _
         rw [pulseScan_append]
-        simp only [pulseScan, pulseBit, hready, ↓reduceIte, Option.some_bind]
+        simp only [pulseScan, pulseBit, hready, ↓reduceIte, Option.bind_some]
         rw [pulseScan_append]
         rw [pulseScan_tagEncode_from_high β hβ]
         simp [pulseScan, pulseBit, hβ]
@@ -310,7 +311,7 @@ def strokeTiles {β : Nat} (stroke : Stroke TagLetter β) : List NearyTile :=
 
 /-- Concatenate the ordinary-tile blocks encoding a stroke history. -/
 def tileHistory {β : Nat} (history : List (Stroke TagLetter β)) : List NearyTile :=
-  (history.map strokeTiles).join
+  (history.map strokeTiles).flatten
 
 @[simp] theorem tileHistory_nil {β : Nat} :
     tileHistory ([] : List (Stroke TagLetter β)) = [] := rfl
@@ -327,7 +328,7 @@ private theorem tileHistory_of_scan_continuation (β : Nat) (body : List TagLett
       .rule head :: wake.map .erase ++ rest = tileHistory history := by
   induction rest generalizing head wake n with
   | nil =>
-      simp only [spell, pulseScan] at hscan
+      simp only [spell] at hscan
       have hnβ : n = β := by simpa using Option.some.inj hscan
       let stroke : Stroke TagLetter β := ⟨head, wake, hwidth.trans hnβ⟩
       exact ⟨[stroke], by simp [tileHistory, strokeTiles, stroke]⟩
@@ -339,7 +340,7 @@ private theorem tileHistory_of_scan_continuation (β : Nat) (body : List TagLett
       | erase letter =>
           rw [pulseScan_nearyLower_erase] at hscan
           by_cases hstep : n < β
-          · simp only [hstep, ↓reduceIte, Option.some_bind] at hscan
+          · simp only [hstep, ↓reduceIte, Option.bind_some] at hscan
             have hwidth' : (wake ++ [letter]).length + 1 = n + 1 := by
               simp [hwidth]
             obtain ⟨history, hhistory⟩ :=
@@ -353,7 +354,7 @@ private theorem tileHistory_of_scan_continuation (β : Nat) (body : List TagLett
           have hnβ : n = β := by
             by_contra hne
             simp [hn0, hne] at hscan
-          simp only [hnβ, or_true, ↓reduceIte, Option.some_bind] at hscan
+          simp only [hnβ, or_true, ↓reduceIte, Option.bind_some] at hscan
           obtain ⟨history, hhistory⟩ :=
             ih letter [] 1 (by simp) (by omega) hscan
           let stroke : Stroke TagLetter β := ⟨head, wake, hwidth.trans hnβ⟩
@@ -369,7 +370,7 @@ theorem tileHistory_of_pulseScan (β : Nat) (body : List TagLetter) (hβ : 0 < �
     (hscan : pulseScan β .virgin (spell (nearyLower β body) word) = some (.gap β)) :
     ∃ history : List (Stroke TagLetter β), word = tileHistory history := by
   cases word with
-  | nil => simp [spell, pulseScan] at hscan
+  | nil => simp [spell] at hscan
   | cons tile rest =>
       rw [show spell (nearyLower β body) (tile :: rest) =
           nearyLower β body tile ++ spell (nearyLower β body) rest by rfl,
@@ -378,7 +379,7 @@ theorem tileHistory_of_pulseScan (β : Nat) (body : List TagLetter) (hβ : 0 < �
       | erase letter => simp [nearyLower, pulseScan, pulseBit] at hscan
       | rule head =>
           rw [pulseScan_nearyLower_rule_from_virgin β body hβ] at hscan
-          simp only [Option.some_bind] at hscan
+          simp only [Option.bind_some] at hscan
           exact tileHistory_of_scan_continuation β body hβ head [] 1
             (by simp) (by omega) rest hscan
 
@@ -448,7 +449,7 @@ theorem marker_append_encoded_c (β : Nat) (word : List TagLetter) :
 theorem marker_append_true (β : Nat) :
     nearyMarker β ++ [true] = tagEncode β [.b] := by
   rw [tagEncode_cons, tagEncode_nil]
-  simp [nearyMarker, tagCode, List.append_assoc]
+  simp [nearyMarker, tagCode]
 
 /-- Appending one final `1` completes the last dangling marker.  The decoded lower string is
 the initialization payload followed by one complete tag output for every later stroke. -/
@@ -569,7 +570,7 @@ theorem nearyInitial_invariant (β : Nat) (body : List TagLetter)
   · exact ⟨body.drop (β - 1), rfl⟩
   · have hdropDiv : β - 1 ∣ (body.drop (β - 1)).length := by
       rw [List.length_drop]
-      exact Nat.dvd_sub' hbodyDiv dvd_rfl
+      exact Nat.dvd_sub hbodyDiv dvd_rfl
     simpa using hdropDiv.modEq_zero_nat.add (Nat.ModEq.refl (n := β - 1) 1)
 
 theorem nearyInvariant_step (β : Nat) (body : List TagLetter) (hβ : 1 < β)
@@ -602,7 +603,7 @@ theorem nearyInvariant_short_eq_b (β : Nat) (hβ : 2 < β) {queue : List TagLet
     simpa [show 1 + (β - 1) = β by omega] using hshort
   have hle : (front ++ [TagLetter.b]).length ≤ 1 :=
     Nat.ModEq.le_of_lt_add hinvariant.2 hbound
-  have hfront : front = [] := List.length_eq_zero.mp <| by simpa using hle
+  have hfront : front = [] := List.length_eq_zero_iff.mp <| by simpa using hle
   simp [hfront]
 
 /-- Conversely, every terminating restricted tag computation emits a terminal match over the
@@ -674,7 +675,7 @@ theorem nearyTile_final_mismatch (β : Nat) (body : List TagLetter) :
       cases letter with
       | b =>
           exact ⟨[true] ++ List.replicate β false, [true, true],
-            by simp [nearyUpper, tagCode, List.append_assoc], rfl⟩
+            by simp [nearyUpper, tagCode], rfl⟩
       | c =>
           exact ⟨[], [true] ++ tagEncode β body ++ [true], rfl,
             by simp [nearyLower, List.append_assoc]⟩
@@ -682,7 +683,7 @@ theorem nearyTile_final_mismatch (β : Nat) (body : List TagLetter) :
       cases letter with
       | b =>
           exact ⟨[true] ++ List.replicate β false, [],
-            by simp [nearyUpper, tagCode, List.append_assoc], rfl⟩
+            by simp [nearyUpper, tagCode], rfl⟩
       | c => exact ⟨[], [], rfl, rfl⟩
 
 /-- The upper morphism of the corrected binary five-pair PCP instance. -/

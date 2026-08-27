@@ -43,8 +43,7 @@ theorem pcpMatrix_mulVec_headBasis (R : Type*) [CommRing R] (upper lower : List 
     pcpMatrix R upper lower *ᵥ headBasis R = headBasis R := by
   funext i
   fin_cases i <;>
-    simp [pcpMatrix, headBasis, Matrix.vecHead, Matrix.vecTail, Matrix.mulVec,
-      Matrix.dotProduct, Fin.sum_univ_succ]
+    simp [pcpMatrix, headBasis, Matrix.mulVec, dotProduct, Fin.sum_univ_succ]
 
 /-- Product of the PCP matrices selected by a tile-index word. -/
 def tileProduct {α R : Type*} [CommRing R] (u v : α → List Bool) (word : List α) :
@@ -57,7 +56,7 @@ theorem tileProduct_eq_pcpMatrix {α R : Type*} [CommRing R]
   induction word with
   | nil => simp [tileProduct, spell]
   | cons i word ih =>
-      simp only [tileProduct, wordProduct_cons, spell, List.map_cons, List.join_cons]
+      simp only [tileProduct, wordProduct_cons, spell, List.flatMap_cons]
       change pcpMatrix R (u i) (v i) * tileProduct u v word = _
       rw [ih, ← pcpMatrix_append]
       simp [spell]
@@ -88,7 +87,7 @@ theorem terminalGenerator_rank_eq_one (uₜ vₜ : List Bool) :
   rw [Cardinal.one_le_iff_ne_zero]
   intro hrank
   have hrange : LinearMap.range (Matrix.toLin' (terminalGenerator ℚ uₜ vₜ)) = ⊥ := by
-    letI : Subsingleton (LinearMap.range (Matrix.toLin' (terminalGenerator ℚ uₜ vₜ))) :=
+    let _ : Subsingleton (LinearMap.range (Matrix.toLin' (terminalGenerator ℚ uₜ vₜ))) :=
       rank_zero_iff.mp hrank
     exact Submodule.eq_bot_of_subsingleton
   have hlin : Matrix.toLin' (terminalGenerator ℚ uₜ vₜ) = 0 :=
@@ -108,8 +107,7 @@ theorem bridgeScalar_tileProduct {α : Type*} (u v : α → List Bool)
   change headBasis ℚ ⬝ᵥ
       ((tileProduct u v word * pcpMatrix ℚ uₜ vₜ) *ᵥ tailBasis ℚ) = 0 ↔ _
   rw [tileProduct_eq_pcpMatrix, ← pcpMatrix_append]
-  simp only [headBasis, tailBasis, Matrix.single_dotProduct, one_mul,
-    Matrix.mulVec_single, mul_one]
+  simp only [headBasis, tailBasis, Matrix.mulVec_single_one, single_one_dotProduct]
   exact pcpMatrix_top_right_eq_zero_iff_rat _ _
 
 /-- The rational family of ordinary PCP matrices and one absorbed terminal separator. -/
@@ -174,7 +172,7 @@ theorem terminalGenerator_int_entry_primrec {Input : Type*} [Primcodable Input]
   have zeroRec : Primrec fun _ : Input => (0 : ℤ) := Primrec.const 0
   fin_cases column
   · simpa [terminalGenerator, terminalColumn, Matrix.vecMulVec, Matrix.mulVec,
-      Matrix.dotProduct, headBasis, tailBasis, Fin.sum_univ_succ] using terminalColumnRec
+      dotProduct, headBasis, tailBasis, Fin.sum_univ_succ] using terminalColumnRec
   · simpa [terminalGenerator, Matrix.vecMulVec, headBasis] using zeroRec
   · simpa [terminalGenerator, Matrix.vecMulVec, headBasis] using zeroRec
 
@@ -206,7 +204,7 @@ theorem terminalGenerator_int_ne_zero (uₜ vₜ : List Bool) :
   intro hzero
   apply terminalGenerator_ne_zero uₜ vₜ
   rw [← terminalGenerator_map (Int.castRingHom ℚ), hzero]
-  simp [castMatrix]
+  simp
 
 theorem absorbedFamily_int_mortal_iff_terminal_match {α : Type*} (u v : α → List Bool)
     (uₜ vₜ : List Bool) :

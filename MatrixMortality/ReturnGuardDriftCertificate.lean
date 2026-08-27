@@ -87,7 +87,7 @@ theorem quotientPairState_driftZero_terminal_not_mem_affineSurvivors
       drift_zero terminal_denominator_ne
   · simp only [ne_eq, not_not] at terminal_denominator_ne
     simp [AffineSurvivors, quotientPairState, quotientPoint,
-      ProjectiveLine.ofPair, drift_zero, terminal_denominator_ne]
+      ProjectiveLine.ofPair, terminal_denominator_ne]
 
 /-- If the center lies on the scaled power orbit, closure from the reset forces either
 quotient annihilation or the drift-zero terminal state in one transition. -/
@@ -135,7 +135,7 @@ theorem quotientInvariant_orbit_hit_forces_cancelled_or_terminal
       rw [bottom_zero]
       ext i
       fin_cases i <;>
-        simp [ProjectiveLine.ray, Matrix.mulVec, Matrix.dotProduct,
+        simp [ProjectiveLine.ray, Matrix.mulVec, dotProduct,
           Fin.sum_univ_succ]
     rwa [transition_cancelled] at image_mem
   · right
@@ -176,13 +176,13 @@ theorem quotientTransition_zero_driftZero_terminal_eq_cancelled
       (centerNumerator : ZMod factor) - (scale : ZMod factor) = 0
   · ext i
     fin_cases i <;>
-      simp [quotientPairState, quotientPoint, ProjectiveLine.ofPair,
-        ProjectiveLine.ray, Matrix.mulVec, Matrix.dotProduct,
+      simp [quotientPoint, ProjectiveLine.ofPair,
+        ProjectiveLine.ray, Matrix.mulVec, dotProduct,
         Fin.sum_univ_succ, drift_zero, denominator_zero]
   · ext i
     fin_cases i <;>
-      simp [quotientPairState, quotientPoint, ProjectiveLine.ofPair,
-        ProjectiveLine.ray, Matrix.mulVec, Matrix.dotProduct,
+      simp [quotientPoint, ProjectiveLine.ofPair,
+        ProjectiveLine.ray, Matrix.mulVec, dotProduct,
         Fin.sum_univ_succ, drift_zero, denominator_zero]
 
 /-- Orbit membership forces annihilation, possibly through the terminal ray as one
@@ -235,7 +235,7 @@ theorem affineSurvivors_quotientInvariant_iff_centerPowerOrbit_avoids
     have base_ne : (prime : ZMod factor) ≠ 0 := by
       intro base_zero
       have factor_dvd_prime : factor ∣ prime :=
-        (ZMod.natCast_zmod_eq_zero_iff_dvd prime factor).mp base_zero
+        (ZMod.natCast_eq_zero_iff prime factor).mp base_zero
       exact primitivePrimeDivisor_not_dvd_base_int primitive
         (by exact_mod_cast factor_dvd_prime)
     exact affineSurvivors_quotientInvariant drift_zero base_ne
@@ -383,8 +383,8 @@ theorem card_certifyingCenters
     ((Finset.univ : Finset (ZMod factor)) \
         centerPowerOrbit factor prime period scale).card =
       factor - period := by
-  rw [Finset.card_sdiff (Finset.subset_univ _), Finset.card_univ,
-    ZMod.card, card_centerPowerOrbit primitive scale_ne]
+  rw [Finset.card_sdiff]
+  simp [card_centerPowerOrbit primitive scale_ne]
 
 /-- Executable finite test for the drift-divisor certificate. -/
 def driftDivisorCertifies

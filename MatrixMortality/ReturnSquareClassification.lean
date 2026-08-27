@@ -27,7 +27,7 @@ theorem physical_isMortal_primePower_iff_of_finiteWalls
   have q_two_nat : 2 ≤ p ^ r := by
     obtain ⟨k, rfl⟩ := Nat.exists_eq_succ_of_ne_zero r_positive.ne'
     rw [pow_succ]
-    have one_le : 1 ≤ p ^ k := one_le_pow_of_one_le prime.one_le k
+    have one_le : 1 ≤ p ^ k := one_le_pow₀ prime.one_le
     nlinarith
   have q_two_int : 2 ≤ ((p ^ r : Nat) : ℤ) := by exact_mod_cast q_two_nat
   constructor
@@ -78,7 +78,7 @@ theorem physical_isMortal_primePower_iff_of_finiteWalls
         have p_power_ge_p : (p : ℚ) ≤ (p : ℚ) ^ Nat.succ k := by
           rw [pow_succ]
           have one_le : (1 : ℚ) ≤ (p : ℚ) ^ k :=
-            one_le_pow_of_one_le (by exact_mod_cast prime.one_le) k
+            one_le_pow₀ (by exact_mod_cast prime.one_le)
           simpa using
             mul_le_mul_of_nonneg_right one_le (by positivity : (0 : ℚ) ≤ p)
         calc

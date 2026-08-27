@@ -87,11 +87,6 @@ theorem bitsNat_div_two (bits : ListBlank Bool) :
   rw [← Nat.div2_val, div2_bitsNat]
 
 @[simp]
-theorem bit_div_two (bit : Bool) (bits : Nat) :
-    Nat.bit bit bits / 2 = bits := by
-  rw [← Nat.div2_val, Nat.div2_bit]
-
-@[simp]
 theorem bit_head_tail_bitsNat (bits : ListBlank Bool) :
     Nat.bit bits.head (bitsNat bits.tail) = bitsNat bits := by
   rw [← bitsNat_cons, ListBlank.cons_head_tail]
@@ -133,30 +128,25 @@ def config {label : Type*} (source : TM0.Cfg Bool label) :
 
 /-- The read-state normal form refines every `TM0` transition by one or two transitions. -/
 theorem respects {label : Type*} [Inhabited label] (source : TM0.Machine Bool label) :
-    Turing.Respects (TM0.step source) (CockeMinsky.next (machine source))
+    StateTransition.Respects (TM0.step source) (CockeMinsky.next (machine source))
       fun sourceConfig readConfig => config sourceConfig = readConfig := by
-  rw [Turing.fun_respects]
+  rw [StateTransition.fun_respects]
   rintro ⟨q, ⟨head, left, right⟩⟩
   cases transition : source q head with
   | none =>
-      simp [Turing.FRespects, TM0.step, CockeMinsky.next, machine, config, transition]
+      simp [StateTransition.FRespects, TM0.step, CockeMinsky.next, machine, config, transition]
   | some command =>
       obtain ⟨q', statement⟩ := command
       cases statement with
       | move moveDirection =>
-          simp only [TM0.step, transition, Option.map_some, Turing.FRespects]
+          simp only [TM0.step, transition, Option.map_some, StateTransition.FRespects]
           cases moveDirection
           · apply Relation.TransGen.single
-            simp [Turing.FRespects, TM0.step, CockeMinsky.next, CockeMinsky.applyAction,
-              machine, config, transition, Tape.move, Nat.div2_val]
+            simp [CockeMinsky.next, machine, config, transition, Tape.move]
           · apply Relation.TransGen.single
-            simp [Turing.FRespects, TM0.step, CockeMinsky.next, CockeMinsky.applyAction,
-              machine, config, transition, Tape.move, Nat.div2_val]
+            simp [CockeMinsky.next, machine, config, transition, Tape.move]
       | write bit =>
-          simp only [TM0.step, transition, Option.map_some, Turing.FRespects]
-          change Turing.Reaches₁ (CockeMinsky.next (machine source))
-            (config ⟨q, ⟨head, left, right⟩⟩)
-            (config ⟨q', (⟨head, left, right⟩ : Tape Bool).write bit⟩)
+          simp only [TM0.step, transition, Option.map_some, StateTransition.FRespects]
           let middle : CockeMinsky.Config (State label) :=
             { state := .restore q' right.head
               left := Nat.bit bit (bitsNat left)
@@ -169,16 +159,16 @@ theorem respects {label : Type*} [Inhabited label] (source : TM0.Machine Bool la
               config ⟨q', (⟨head, left, right⟩ : Tape Bool).write bit⟩ ∈
                 CockeMinsky.next (machine source) middle := by
             simp [middle, CockeMinsky.next, machine, config, Tape.write, Nat.bodd_bit,
-              Nat.div2_bit, Nat.div2_val]
+              Nat.div2_val]
           exact Relation.TransGen.head first (Relation.TransGen.single second)
 
 /-- The normalized read-state machine halts exactly when the source `TM0` machine halts. -/
 theorem halts_iff_eval_dom {label : Type*} [Inhabited label]
     (source : TM0.Machine Bool label) (initial : TM0.Cfg Bool label) :
     CockeMinsky.Halts (machine source) (config initial) ↔
-      (Turing.eval (TM0.step source) initial).Dom := by
+      (StateTransition.eval (TM0.step source) initial).Dom := by
   rw [CockeMinsky.halts_iff_eval_dom]
-  exact Turing.tr_eval_dom (respects source) rfl
+  exact StateTransition.tr_eval_dom (respects source) rfl
 
 end TM0ToRead
 end Undecidability

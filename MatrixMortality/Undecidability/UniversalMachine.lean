@@ -1,4 +1,4 @@
-import Mathlib.Computability.TMToPartrec
+import Mathlib.Computability.TuringMachine.ToPartrec
 
 /-!
 # A finite-state universal source machine
@@ -9,16 +9,17 @@ without choosing a program noncomputably: the universal interpreter remains unde
 until a reduction proof fixes it once and for all.
 -/
 
-open Mathlib (Vector)
 open Turing
 
 namespace MatrixMortality.Undecidability
 
-private def universalEval (v : Vector ℕ 2) : Part ℕ :=
+private def universalEval (v : List.Vector ℕ 2) : Part ℕ :=
   Nat.Partrec.Code.eval (Denumerable.ofNat Nat.Partrec.Code v.head) v.tail.head
 
 private theorem universalEval_partrec : Nat.Partrec' universalEval := by
-  simpa [universalEval] using Nat.Partrec'.part_iff₂.mpr
+  change Nat.Partrec' fun v : List.Vector ℕ 2 =>
+    Nat.Partrec.Code.eval (Denumerable.ofNat Nat.Partrec.Code v.head) v.tail.head
+  exact Nat.Partrec'.part_iff₂.mpr
     (Nat.Partrec.Code.eval_part.comp₂
       ((Computable.ofNat Nat.Partrec.Code).comp Computable.fst).to₂
       Computable.snd.to₂)
@@ -31,7 +32,7 @@ theorem exists_universalToPartrecCode :
   obtain ⟨interpreter, hinterpreter⟩ := ToPartrec.Code.exists_code universalEval_partrec
   refine ⟨interpreter, fun source input => ?_⟩
   have h := hinterpreter
-    (⟨[Encodable.encode source, input], by simp⟩ : Vector ℕ 2)
+    (⟨[Encodable.encode source, input], by simp⟩ : List.Vector ℕ 2)
   change interpreter.eval [Encodable.encode source, input] =
     ((fun output => [output]) <$>
       Nat.Partrec.Code.eval (Denumerable.ofNat Nat.Partrec.Code (Encodable.encode source)) input)
@@ -40,7 +41,7 @@ theorem exists_universalToPartrecCode :
 
 /-- Halting of mathlib's verified `TM2` interpreter from a concrete configuration. -/
 def UniversalTM2Halts (cfg : PartrecToTM2.Cfg') : Prop :=
-  (Turing.eval (TM2.step PartrecToTM2.tr) cfg).Dom
+  (StateTransition.eval (TM2.step PartrecToTM2.tr) cfg).Dom
 
 /-- One fixed, effectively finite `TM2` program recognizes universal code halting. -/
 theorem exists_universalTM2 :

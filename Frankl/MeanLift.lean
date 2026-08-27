@@ -42,7 +42,7 @@ theorem meanLiftWeight_sum {ι : Type*} [Fintype ι] {weight : ι → ℝ} {rate
     (hmass : ∑ i, weight i = 1) :
     ∑ i, meanLiftWeight rate weight i = 1 := by
   classical
-  simp [meanLiftWeight, hmass, mul_sum]
+  simp [meanLiftWeight]
   rw [← mul_sum, hmass]
   ring
 
@@ -79,7 +79,7 @@ theorem finiteExpectation_meanLift_id
     finiteExpectation (meanLiftWeight rate weight) (meanLiftPoint point) id =
       rate + (1 - rate) * mean := by
   classical
-  simp [finiteExpectation, meanLiftWeight, meanLiftPoint, hmean, mul_sum]
+  simp [finiteExpectation, meanLiftWeight, meanLiftPoint]
   rw [← hmean]
   rw [mul_sum]
   apply sum_congr rfl

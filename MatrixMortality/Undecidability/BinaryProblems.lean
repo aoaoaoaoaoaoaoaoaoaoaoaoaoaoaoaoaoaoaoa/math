@@ -49,10 +49,11 @@ private theorem pairedBinaryGenerator_int_entry_primrec (β : Nat) (bit : Bool)
       have ruleCode := ternaryCode_int_primrec.comp ruleWord
       have eraseCode := ternaryCode_int_primrec.comp eraseWord
       have ruleScale := ternaryScale_int_primrec.comp ruleWord
+      have eraseScale := ternaryScale_int_primrec.comp eraseWord
       fin_cases row <;> fin_cases column <;>
-        simp [pairedBinaryGenerator, Matrix.vecHead, Matrix.vecTail]
+        simp [pairedBinaryGenerator]
       all_goals first | exact Primrec.const _ | exact ruleCode | exact eraseCode |
-        exact ruleScale
+        exact ruleScale | exact eraseScale
 
 /-- The two-matrix scalar-zero compiler is primitive recursive in its variable body. -/
 theorem nearyScalarZero62_primrec (β : Nat) :
@@ -60,9 +61,9 @@ theorem nearyScalarZero62_primrec (β : Nat) :
   apply ScalarZeroProblem.primrec_mk
   · intro label row column
     fin_cases label
-    · simpa [nearyScalarZero62] using
+    · simpa [nearyScalarZero62, finTwoEquiv] using
         pairedBinaryGenerator_int_entry_primrec β false column row
-    · simpa [nearyScalarZero62] using
+    · simpa [nearyScalarZero62, finTwoEquiv] using
         pairedBinaryGenerator_int_entry_primrec β true column row
   · intro coordinate
     exact Primrec.const _

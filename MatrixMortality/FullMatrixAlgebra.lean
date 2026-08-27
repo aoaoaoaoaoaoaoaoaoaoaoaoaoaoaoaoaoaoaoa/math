@@ -19,7 +19,6 @@ def matrixSandwichLinear (left right : Square ι K) :
     Square ι K →ₗ[K] Square ι K :=
   (LinearMap.mulRight K right).comp (LinearMap.mulLeft K left)
 
-omit [DecidableEq ι] in
 @[simp]
 theorem matrixSandwichLinear_apply (left right matrix : Square ι K) :
     matrixSandwichLinear left right matrix = left * matrix * right := rfl
@@ -47,7 +46,7 @@ theorem matrixSandwichLinear_injective
 theorem sandwichMatrixUnits_linearIndependent
     {left right : Square ι K} (left_unit : IsUnit left) (right_unit : IsUnit right) :
     LinearIndependent K fun index : ι × ι =>
-      left * Matrix.stdBasisMatrix index.1 index.2 1 * right := by
+      left * Matrix.single index.1 index.2 1 * right := by
   have mapped :=
     (Matrix.stdBasis K ι ι).linearIndependent.map'
       (matrixSandwichLinear left right)
@@ -56,10 +55,10 @@ theorem sandwichMatrixUnits_linearIndependent
   have family_eq :
       matrixSandwichLinear left right ∘ ⇑(Matrix.stdBasis K ι ι) =
         fun index : ι × ι =>
-          left * Matrix.stdBasisMatrix index.1 index.2 1 * right := by
+          left * Matrix.single index.1 index.2 1 * right := by
     funext index
     rw [Function.comp_apply, matrixSandwichLinear_apply,
-      Matrix.stdBasis_eq_stdBasisMatrix]
+      Matrix.stdBasis_eq_single]
   rw [family_eq] at mapped
   exact mapped
 
@@ -68,19 +67,20 @@ theorem sandwichMatrixUnits_span_eq_top [Nonempty ι]
     {left right : Square ι K} (left_unit : IsUnit left) (right_unit : IsUnit right) :
     Submodule.span K
         (Set.range fun index : ι × ι =>
-          left * Matrix.stdBasisMatrix index.1 index.2 1 * right) =
+          left * Matrix.single index.1 index.2 1 * right) =
       ⊤ := by
   apply
     (sandwichMatrixUnits_linearIndependent left_unit right_unit).span_eq_top_of_card_eq_finrank
-  simp [FiniteDimensional.finrank_matrix]
+  simp [Module.finrank_matrix]
 
 /-- Pairwise outer products of the columns of `left` and rows of `right` are matrix-unit
 sandwiches. -/
 theorem sandwichMatrixUnit_eq_outer (left right : Square ι K) (i j : ι) :
-    left * Matrix.stdBasisMatrix i j 1 * right =
+    left * Matrix.single i j 1 * right =
       Matrix.vecMulVec (fun row => left row i) (right j) := by
-  rw [Matrix.stdBasisMatrix_eq_single_vecMulVec_single, mul_outer, outer_mul]
-  simp [Matrix.mulVec_single_one, Matrix.single_one_vecMul]
+  rw [Matrix.single_eq_single_vecMulVec_single, mul_outer, outer_mul]
+  rw [Matrix.mulVec_single_one, Matrix.single_one_vecMul]
+  rfl
 
 /-- Reachable columns selected by physical left contexts. -/
 def contextColumns (generators : Glyph → Square ι K) (column : ι → K)
@@ -130,7 +130,7 @@ theorem wordProductSpan_eq_top_of_rankOne_contexts [Nonempty ι]
   rintro _ ⟨⟨i, j⟩, rfl⟩
   change
     contextColumns generators column leftWords *
-        Matrix.stdBasisMatrix i j 1 *
+        Matrix.single i j 1 *
         contextRows generators row rightWords ∈
       wordProductSpan generators
   rw [sandwichMatrixUnit_eq_outer,

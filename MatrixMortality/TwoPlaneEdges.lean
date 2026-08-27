@@ -78,16 +78,10 @@ theorem output_mul_input {R : Type*} [CommSemiring R]
     (target source : Bool) :
     output edge target * input source = edge target source := by
   ext row column
-  cases source
-  · fin_cases row <;> fin_cases column <;>
-      norm_num [output, input, Matrix.mul_apply, Fin.sum_univ_succ]
-  · fin_cases row <;> fin_cases column
-    · norm_num [output, input, Matrix.mul_apply, Fin.sum_univ_succ]
-      exact compatible target 0
-    · norm_num [output, input, Matrix.mul_apply, Fin.sum_univ_succ]
-    · norm_num [output, input, Matrix.mul_apply, Fin.sum_univ_succ]
-      exact compatible target 1
-    · norm_num [output, input, Matrix.mul_apply, Fin.sum_univ_succ]
+  change (∑ index, output edge target row index * input source index column) =
+    edge target source row column
+  cases source <;> fin_cases row <;> fin_cases column <;>
+    simp [output, input, Fin.sum_univ_succ, compatible target 0, compatible target 1]
 
 /-- The generic compression path product is the prescribed compatible edge product. -/
 theorem edgeProduct_eq_pathProduct {R : Type*} [CommSemiring R]
@@ -102,8 +96,22 @@ theorem edgeProduct_eq_pathProduct {R : Type*} [CommSemiring R]
   induction tail generalizing start with
   | nil => rfl
   | cons next tail induction =>
-      rw [EdgeCompression.pathProduct, output_mul_input edge compatible, induction,
-        EdgeCompression.pathProduct]
+      rw [EdgeCompression.pathProduct]
+      calc
+        (output edge start * input next) *
+            EdgeCompression.pathProduct
+              (fun target source => output edge target * input source) next tail =
+          edge start next *
+            EdgeCompression.pathProduct
+              (fun target source => output edge target * input source) next tail :=
+          congrArg (fun matrix => matrix *
+            EdgeCompression.pathProduct
+              (fun target source => output edge target * input source) next tail)
+            (output_mul_input edge compatible start next)
+        _ = edge start next * EdgeCompression.pathProduct edge next tail :=
+          congrArg (fun matrix => edge start next * matrix) (induction next)
+        _ = EdgeCompression.pathProduct edge start (next :: tail) := by
+          rw [EdgeCompression.pathProduct]
 
 /-- Independent source-plane coordinates turn agreement on arbitrary nonzero source vectors
 into the canonical shared-first-column compatibility condition. -/
@@ -123,7 +131,7 @@ theorem transport_compatible {R : Type*} [CommSemiring R]
       Matrix.mulVec (transport edge change inverse target false) ![1, 0] =
         Matrix.mulVec (transport edge change inverse target true) ![1, 0] := by
     simp only [transport, ← Matrix.mulVec_mulVec, change_first, agrees]
-  simpa [Matrix.mulVec, Matrix.dotProduct, Fin.sum_univ_succ] using congrFun transported row
+  simpa [Matrix.mulVec, dotProduct, Fin.sum_univ_succ] using congrFun transported row
 
 /-- Coordinate changes telescope along every constrained edge path. -/
 theorem transport_edgeProduct {R : Type*} [CommSemiring R]
@@ -171,7 +179,15 @@ theorem output_mul_rightInverse {R : Type*} [CommSemiring R]
     output edge target *
         ((input source : Matrix (Fin 3) (Fin 2) R) * edgeRightInverse) =
       (1 : Square (Fin 2) R) := by
-  rw [← Matrix.mul_assoc, output_mul_input edge compatible, edge_split]
+  calc
+    output edge target *
+        ((input source : Matrix (Fin 3) (Fin 2) R) * edgeRightInverse) =
+      (output edge target * input source) * edgeRightInverse :=
+        (Matrix.mul_assoc _ _ _).symm
+    _ = edge target source * edgeRightInverse :=
+      congrArg (fun matrix => matrix * edgeRightInverse)
+        (output_mul_input edge compatible target source)
+    _ = 1 := edge_split
 
 /-- A split incoming edge forces the corresponding ambient generator to have rank exactly two. -/
 theorem generator_rank
@@ -192,13 +208,28 @@ theorem generator_rank
               generator edge target *
             ((input source : Matrix (Fin 3) (Fin 2) K) * edgeRightInverse) =
           1 := by
-      rw [generator]
-      rw [← Matrix.mul_assoc
-        (inputLeftInverse target : Matrix (Fin 2) (Fin 3) K)
-        (input target : Matrix (Fin 3) (Fin 2) K) (output edge target)]
-      rw [inputLeftInverse_mul_input]
-      simpa only [Matrix.one_mul] using
-        output_mul_rightInverse edge compatible target source edgeRightInverse edge_split
+      have left_collapse :
+          (inputLeftInverse target : Matrix (Fin 2) (Fin 3) K) *
+              generator edge target = output edge target := by
+        rw [generator]
+        calc
+          (inputLeftInverse target : Matrix (Fin 2) (Fin 3) K) *
+              (input target * output edge target) =
+            ((inputLeftInverse target : Matrix (Fin 2) (Fin 3) K) * input target) *
+              output edge target := (Matrix.mul_assoc _ _ _).symm
+          _ = 1 * output edge target :=
+            congrArg (fun matrix => matrix * output edge target)
+              (inputLeftInverse_mul_input target)
+          _ = output edge target := Matrix.one_mul _
+      calc
+        ((inputLeftInverse target : Matrix (Fin 2) (Fin 3) K) * generator edge target) *
+            ((input source : Matrix (Fin 3) (Fin 2) K) * edgeRightInverse) =
+          output edge target *
+            ((input source : Matrix (Fin 3) (Fin 2) K) * edgeRightInverse) :=
+            congrArg (fun matrix => matrix *
+              ((input source : Matrix (Fin 3) (Fin 2) K) * edgeRightInverse)) left_collapse
+        _ = 1 :=
+          output_mul_rightInverse edge compatible target source edgeRightInverse edge_split
     have outer_bound :=
       Matrix.rank_mul_le_left
         ((inputLeftInverse target : Matrix (Fin 2) (Fin 3) K) * generator edge target)

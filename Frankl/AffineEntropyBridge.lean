@@ -6,10 +6,12 @@ namespace Frankl
 open Finset Real Set
 
 /-- Boolean cubes presented as iterated prefix/last-bit products. -/
+@[reducible]
 def BitCube : ℕ → Type
   | 0 => Unit
   | n + 1 => BitCube n × Bool
 
+@[instance_reducible]
 private def bitCubeFintype : ∀ n, Fintype (BitCube n)
   | 0 => by
       change Fintype Unit
@@ -19,6 +21,7 @@ private def bitCubeFintype : ∀ n, Fintype (BitCube n)
       letI := bitCubeFintype n
       exact inferInstance
 
+@[instance_reducible]
 private def bitCubeDecidableEq : ∀ n, DecidableEq (BitCube n)
   | 0 => by
       change DecidableEq Unit
@@ -61,7 +64,8 @@ theorem BitCube.exists_true_coordinate {n : ℕ} {x : BitCube n} (hx : x ≠ Bit
       cases bit
       · have hprefix : stemBits ≠ BitCube.zero n := by
           intro h
-          exact hx (by simp [BitCube.zero, h])
+          apply hx
+          rw [BitCube.zero, h]
         obtain ⟨coordinate, hcoordinate⟩ := ih hprefix
         exact ⟨.prior coordinate, hcoordinate⟩
       · exact ⟨.last, rfl⟩
@@ -213,7 +217,7 @@ theorem coordinateMean_last {n : ℕ}
   rw [Fintype.sum_prod_type]
   apply sum_congr rfl
   intro stemBits _
-  simp [Fintype.sum_bool, BitCube.read]
+  simp
 
 theorem coordinateMean_prior {n : ℕ}
     (source : FiniteProbabilityLaw (BitCube (n + 1)))
@@ -271,7 +275,7 @@ theorem exists_coordinateMean_gt_of_not {n : ℕ}
     (hsource : ¬CoordinateMeansLE n source) :
     ∃ coordinate, abundanceTarget < coordinateMean source coordinate := by
   rw [coordinateMeansLE_iff] at hsource
-  push_neg at hsource
+  push Not at hsource
   exact hsource
 
 private theorem dependentParameter_mem_Icc {p q : ℝ}
@@ -414,7 +418,7 @@ theorem affineEntropyAmplification : ∀ n (source : FiniteProbabilityLaw (BitCu
         (sub_nonneg.2 (show dependentShare ≤ 1 by norm_num [dependentShare]))
       have hdependentScaled := mul_le_mul_of_nonneg_left hdependentGain
         (show 0 ≤ dependentShare by norm_num [dependentShare])
-      rw [hchain] at *
+      rw [hchain]
       linarith
 
 /-- Closure under a binary operation keeps the output of any self-coupling inside the original
@@ -528,7 +532,7 @@ theorem unionClosed_exists_abundant_coordinate_of_two {n : ℕ}
     exists_coordinateMean_gt_of_not (FiniteProbabilityLaw.uniformOn family hfamily) hnot
   rw [coordinateMean_uniformOn family hfamily coordinate] at hmean
   have hcardPositive : (0 : ℝ) < family.card := by exact_mod_cast hfamily.card_pos
-  exact ⟨coordinate, (lt_div_iff hcardPositive).1 hmean⟩
+  exact ⟨coordinate, (lt_div_iff₀ hcardPositive).1 hmean⟩
 
 /-- Universal abundance theorem at `38234553336670271 / 100000000000000000` for finite
 nontrivial union-closed Boolean families. -/

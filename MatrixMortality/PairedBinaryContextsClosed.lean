@@ -19,39 +19,33 @@ theorem pairedBinaryAlgebraReachable_eq_closed (β : Nat) (body : List TagLetter
     pairedBinaryAlgebraColumn_eq_closed]
   ext row column
   fin_cases column <;>
-    simp [contextColumns, pairedBinaryAlgebraLeftWords, Matrix.vecHead, Matrix.vecTail]
+    simp [contextColumns, pairedBinaryAlgebraLeftWords]
   · fin_cases row <;>
-      simp [pairedBinaryAlgebraReachableClosed, pairedBinaryAlgebraColumnClosed,
-        Matrix.vecHead, Matrix.vecTail]
+      simp [pairedBinaryAlgebraReachableClosed, pairedBinaryAlgebraColumnClosed]
   · rw [pairedBinaryAlgebraGeneratorClosed_false_mulVec]
     fin_cases row <;>
-      simp [pairedBinaryAlgebraReachableClosed, pairedBinaryAlgebraColumnClosed,
-        Matrix.vecHead, Matrix.vecTail]
+      simp [pairedBinaryAlgebraReachableClosed, pairedBinaryAlgebraColumnClosed]
   · rw [pairedBinaryAlgebraGeneratorClosed_true_mulVec]
     fin_cases row <;>
-      simp [pairedBinaryAlgebraReachableClosed, pairedBinaryAlgebraColumnClosed,
-        Matrix.vecHead, Matrix.vecTail]
+      simp [pairedBinaryAlgebraReachableClosed, pairedBinaryAlgebraColumnClosed]
   · rw [← Matrix.mulVec_mulVec]
     rw [pairedBinaryAlgebraGeneratorClosed_false_mulVec]
     rw [pairedBinaryAlgebraGeneratorClosed_false_mulVec]
     fin_cases row <;>
-      simp [pairedBinaryAlgebraReachableClosed, pairedBinaryAlgebraColumnClosed,
-        Matrix.vecHead, Matrix.vecTail] <;>
+      simp [pairedBinaryAlgebraReachableClosed, pairedBinaryAlgebraColumnClosed] <;>
       ring
   · rw [← Matrix.mulVec_mulVec]
     rw [pairedBinaryAlgebraGeneratorClosed_false_mulVec]
     rw [pairedBinaryAlgebraGeneratorClosed_true_mulVec]
     fin_cases row <;>
-      simp [pairedBinaryAlgebraReachableClosed, pairedBinaryAlgebraColumnClosed,
-        Matrix.vecHead, Matrix.vecTail] <;>
+      simp [pairedBinaryAlgebraReachableClosed, pairedBinaryAlgebraColumnClosed] <;>
       ring
   · rw [← Matrix.mulVec_mulVec, ← Matrix.mulVec_mulVec]
     rw [pairedBinaryAlgebraGeneratorClosed_false_mulVec]
     rw [pairedBinaryAlgebraGeneratorClosed_false_mulVec]
     rw [pairedBinaryAlgebraGeneratorClosed_false_mulVec]
     fin_cases row <;>
-      simp [pairedBinaryAlgebraReachableClosed, pairedBinaryAlgebraColumnClosed,
-        Matrix.vecHead, Matrix.vecTail] <;>
+      simp [pairedBinaryAlgebraReachableClosed, pairedBinaryAlgebraColumnClosed] <;>
       ring
 
 theorem pairedBinaryAlgebraObservable_eq_closed (β : Nat) (body : List TagLetter) :
@@ -61,31 +55,31 @@ theorem pairedBinaryAlgebraObservable_eq_closed (β : Nat) (body : List TagLette
     pairedBinaryAlgebraRow_eq]
   ext row column
   fin_cases row <;>
-    simp [contextRows, pairedBinaryAlgebraRightWords, Matrix.vecHead, Matrix.vecTail]
+    simp [contextRows, pairedBinaryAlgebraRightWords]
   · fin_cases column <;>
-      simp [pairedBinaryAlgebraObservableClosed, Matrix.vecHead, Matrix.vecTail]
+      simp [pairedBinaryAlgebraObservableClosed]
   · rw [pairedBinaryAlgebraGeneratorClosed_vecMul_false]
     fin_cases column <;>
-      simp [pairedBinaryAlgebraObservableClosed, Matrix.vecHead, Matrix.vecTail]
+      simp [pairedBinaryAlgebraObservableClosed]
   · rw [pairedBinaryAlgebraGeneratorClosed_vecMul_true]
     fin_cases column <;>
-      simp [pairedBinaryAlgebraObservableClosed, Matrix.vecHead, Matrix.vecTail]
+      simp [pairedBinaryAlgebraObservableClosed]
   · rw [← Matrix.vecMul_vecMul]
     rw [pairedBinaryAlgebraGeneratorClosed_vecMul_false]
     rw [pairedBinaryAlgebraGeneratorClosed_vecMul_false]
     fin_cases column <;>
-      simp [pairedBinaryAlgebraObservableClosed, Matrix.vecHead, Matrix.vecTail]
+      simp [pairedBinaryAlgebraObservableClosed]
   · rw [← Matrix.vecMul_vecMul]
     rw [pairedBinaryAlgebraGeneratorClosed_vecMul_false]
     rw [pairedBinaryAlgebraGeneratorClosed_vecMul_true]
     fin_cases column <;>
-      simp [pairedBinaryAlgebraObservableClosed, Matrix.vecHead, Matrix.vecTail]
+      simp [pairedBinaryAlgebraObservableClosed]
   · rw [← Matrix.vecMul_vecMul, ← Matrix.vecMul_vecMul]
     rw [pairedBinaryAlgebraGeneratorClosed_vecMul_false]
     rw [pairedBinaryAlgebraGeneratorClosed_vecMul_false]
     rw [pairedBinaryAlgebraGeneratorClosed_vecMul_false]
     fin_cases column <;>
-      simp [pairedBinaryAlgebraObservableClosed, Matrix.vecHead, Matrix.vecTail] <;>
+      simp [pairedBinaryAlgebraObservableClosed] <;>
       ring
 
 end MatrixMortality

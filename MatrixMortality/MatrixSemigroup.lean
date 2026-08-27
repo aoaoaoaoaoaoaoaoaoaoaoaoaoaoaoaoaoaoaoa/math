@@ -164,7 +164,7 @@ theorem fracture_length_two_le_of_none_mem {α : Type*} {word : List (Option α)
       cases head with
       | none =>
           simp only [fracture, List.length_cons]
-          have positive := List.length_pos.mpr (fracture_ne_nil word)
+          have positive := List.length_pos_iff.mpr (fracture_ne_nil word)
           omega
       | some label =>
           have tail_none_mem : none ∈ word := by simpa using none_mem
@@ -224,7 +224,7 @@ theorem wordProduct_separatedGenerator_eq_intercalatedProduct {α M : Type*} [Mo
           rw [show fracture (some label :: word) =
               (fracture word).modifyHead (label :: ·) by rfl, fracture_eq]
           simp only [List.modifyHead, List.map_cons, wordProduct, List.prod_cons]
-          simpa using (intercalatedProduct_modifyHead separator (generators label)
+          simpa [wordProduct] using (intercalatedProduct_modifyHead separator (generators label)
             (List.cons_ne_nil (wordProduct generators block)
               (blocks.map (wordProduct generators)))).symm
 
@@ -523,7 +523,7 @@ theorem wordProduct_mapMatrix {α ι R S : Type*} [Semiring R] [Semiring S]
     (generators : α → Square ι R) (word : List α) :
     (wordProduct generators word).map map =
       wordProduct (fun label => (generators label).map map) word := by
-  simpa using
+  simpa [Function.comp_def] using
     (wordProduct_map map.mapMatrix.toMonoidHom generators word).symm
 
 /-- Entrywise scalar extension commutes with outer products. -/
@@ -811,7 +811,7 @@ theorem scalarCoefficient_transpose {α ι R : Type*} [CommSemiring R] [Fintype 
     (word : List α) :
     column ⬝ᵥ wordProduct (Matrix.transpose ∘ generators) word *ᵥ row =
       row ⬝ᵥ wordProduct generators word.reverse *ᵥ column := by
-  rw [wordProduct_transpose, Matrix.mulVec_transpose, Matrix.dotProduct_comm,
+  rw [wordProduct_transpose, Matrix.mulVec_transpose, dotProduct_comm,
     ← Matrix.dotProduct_mulVec]
 
 /-- Transposition and word reversal preserve matrix mortality. -/

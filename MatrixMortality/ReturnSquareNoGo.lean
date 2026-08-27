@@ -36,7 +36,7 @@ def mapsAffine {K : Type*} [CommRing K]
 
 /-- Coefficient normal form of every quadratic pencil exchanging `t` and `κt²`. -/
 theorem swap_coefficients
-    {K : Type*} [LinearOrderedField K]
+    {K : Type*} [Field K] [LinearOrder K] [IsStrictOrderedRing K]
     (κ a₀ a₁ a₂ b₀ b₁ b₂ c₀ c₁ c₂ d₀ d₁ d₂ : K)
     (κ_ne_zero : κ ≠ 0)
     (push : ∀ t : K,
@@ -118,7 +118,7 @@ For `2 × 2` matrices, determinant zero is equivalent to rank at most one over a
 excludes every diagonal three-state realization in which each spectral mode crosses the return
 interface through one state. -/
 theorem threeMode_swap_eq_zero
-    {K : Type*} [LinearOrderedField K]
+    {K : Type*} [Field K] [LinearOrder K] [IsStrictOrderedRing K]
     (κ : K) (constant linear quadratic : Square (Fin 2) K)
     (κ_ne_zero : κ ≠ 0)
     (push : ∀ t, mapsAffine (quadraticPencil constant linear quadratic t) t (κ * t ^ 2))
@@ -135,10 +135,10 @@ theorem threeMode_swap_eq_zero
       (constant 1 1) (linear 1 1) (quadratic 1 1)
       κ_ne_zero
       (fun t => by
-        simpa [mapsAffine, quadraticPencil, Matrix.mulVec, Matrix.dotProduct,
+        simpa [mapsAffine, quadraticPencil, Matrix.mulVec, dotProduct,
           Fin.sum_univ_succ, mul_comm] using push t)
       (fun t => by
-        simpa [mapsAffine, quadraticPencil, Matrix.mulVec, Matrix.dotProduct,
+        simpa [mapsAffine, quadraticPencil, Matrix.mulVec, dotProduct,
           Fin.sum_univ_succ, mul_comm] using pop t)
   rcases coefficients with
     ⟨constant₀₀, linear₀₀, quadratic₀₀, constant₀₁, linear₀₁, quadratic₀₁,
@@ -169,7 +169,7 @@ theorem threeMode_swap_eq_zero
 
 /-- Coefficient normal form forced by verified squaring at both scales `t` and `qt`. -/
 theorem verifiedPush_coefficients
-    {K : Type*} [LinearOrderedField K]
+    {K : Type*} [Field K] [LinearOrder K] [IsStrictOrderedRing K]
     (q a₀ a₁ a₂ b₀ b₁ b₂ c₀ c₁ c₂ d₀ d₁ d₂ : K)
     (q_ne_zero : q ≠ 0) (q_ne_one : q ≠ 1)
     (first : ∀ t : K,
@@ -269,7 +269,7 @@ def blindScale {K : Type*} [CommRing K]
 The resulting projective map is `z ↦ t*z` on every input, so it verifies no equality beyond the
 two prescribed identities. -/
 theorem verifiedPush_eq_blindScale
-    {K : Type*} [LinearOrderedField K]
+    {K : Type*} [Field K] [LinearOrder K] [IsStrictOrderedRing K]
     (q : K) (constant linear quadratic : Square (Fin 2) K)
     (q_ne_zero : q ≠ 0) (q_ne_one : q ≠ 1)
     (first : ∀ t,
@@ -286,10 +286,10 @@ theorem verifiedPush_eq_blindScale
       (constant 1 1) (linear 1 1) (quadratic 1 1)
       q_ne_zero q_ne_one
       (fun t => by
-        simpa [mapsAffine, quadraticPencil, Matrix.mulVec, Matrix.dotProduct,
+        simpa [mapsAffine, quadraticPencil, Matrix.mulVec, dotProduct,
           Fin.sum_univ_succ, mul_comm] using first t)
       (fun t => by
-        simpa [mapsAffine, quadraticPencil, Matrix.mulVec, Matrix.dotProduct,
+        simpa [mapsAffine, quadraticPencil, Matrix.mulVec, dotProduct,
           Fin.sum_univ_succ, mul_comm] using second t)
   rcases coefficients with
     ⟨constant₀₀, linear₀₀, quadratic₀₀, constant₀₁, linear₀₁, quadratic₀₁,

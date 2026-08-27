@@ -167,7 +167,6 @@ theorem scheduledEraseRun {β : Nat} (β_pos : 0 < β) (phase : Fin β)
           scheduledNextPhase β_pos phase = ⟨phase.val + 1, next_lt⟩ := by
         simp [scheduledNextPhase, next_lt]
       have tail_within : phase.val + 1 + letters.length < β := by
-        change phase.val + 1 + letters.length < β
         omega
       obtain ⟨roles, residual⟩ :=
         induction (phase := ⟨phase.val + 1, next_lt⟩) tail_within
@@ -211,17 +210,12 @@ theorem scheduledStrokeCode_roles {β : Nat} (β_pos : 0 < β)
   obtain ⟨prefix_roles, prefix_residual⟩ :=
     scheduledEraseRun β_pos (scheduledInitialPhase β_pos) stroke.wake.reverse prefix_within
   rw [scheduledStrokeCode, scheduledRolesFrom_append, prefix_roles, prefix_residual]
-  have final_phase :
-      (⟨(scheduledInitialPhase β_pos).val + stroke.wake.reverse.length,
-          prefix_within⟩ : Fin β).val + 1 = β := by
-    simp [scheduledInitialPhase, wake_length]
-    omega
   have final_phase' :
       (scheduledInitialPhase β_pos).val + stroke.wake.length + 1 = β := by
     simp [scheduledInitialPhase, wake_length]
     omega
-  simp [scheduledRolesFrom, controllerRolesFrom, scheduledTransition, scheduledTile,
-    scheduledPhase, final_phase, strokeTiles, final_phase', PairPhase.tile, List.map_reverse]
+  simp [scheduledRolesFrom, controllerRolesFrom, scheduledTile, scheduledPhase,
+    strokeTiles, final_phase', PairPhase.tile, List.map_reverse]
 
 theorem scheduledStrokeCode_residual {β : Nat} (β_pos : 0 < β)
     (stroke : Stroke TagLetter β) :
@@ -330,8 +324,8 @@ def scheduledBoundaryColumn (R : Type*) [CommRing R] (β : Nat) : ScheduledIndex
 theorem scheduledRow_dot_boundaryColumn (R : Type*) [CommRing R] {β : Nat}
     (phase : Fin β) (vector : Fin 3 → R) :
     scheduledRow R phase vector ⬝ᵥ scheduledBoundaryColumn R β = vector 0 := by
-  simp [scheduledRow, controllerVector, scheduledBoundaryColumn, Matrix.dotProduct,
-    Fintype.sum_sum_type, Fin.sum_univ_succ]
+  simp [scheduledRow, controllerVector, scheduledBoundaryColumn, dotProduct,
+    Fintype.sum_sum_type]
 
 /-- Scalar series represented by the scheduled binary compiler. -/
 def scheduledCoefficient (R : Type*) [CommRing R] (β : Nat) (body : List TagLetter)
@@ -377,10 +371,10 @@ theorem scheduledGenerator_transpose_fixes_boundaryColumn
   | inl index =>
       fin_cases index <;>
         simp [scheduledGenerator, controllerMatrix, scheduledBoundaryColumn, Matrix.mulVec,
-          Matrix.dotProduct, Fintype.sum_sum_type, Fin.sum_univ_succ]
+          dotProduct, Fintype.sum_sum_type]
   | inr phase =>
       simp [scheduledGenerator, controllerMatrix, scheduledBoundaryColumn, Matrix.mulVec,
-        Matrix.dotProduct, Fintype.sum_sum_type]
+        dotProduct, Fintype.sum_sum_type]
 
 theorem decodeScheduledFrom_length {β : Nat} (β_pos : 0 < β)
     (phase : Fin β) (word : List Bool) :
@@ -389,8 +383,7 @@ theorem decodeScheduledFrom_length {β : Nat} (β_pos : 0 < β)
   | nil => rfl
   | cons bit word induction =>
       simp only [decodeScheduledFrom, controllerDecodeFrom, scheduledTransition,
-        List.map_append, List.length_map, List.length_append, List.length_singleton,
-        List.length_cons]
+        List.map_append, List.length_map, List.length_append, List.length_cons]
       rw [show
         (controllerDecodeFrom (scheduledTransition β_pos)
             (scheduledNextPhase β_pos phase) word).length = word.length by

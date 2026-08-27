@@ -66,7 +66,8 @@ theorem halfSupportKernel_live_range {x : ℝ} (choice : Bool)
     split_ifs with hxHalf
     · have hfalse : False := by
         simp only [halfSupportKernelWeight] at hlive
-        split_ifs at hlive <;> linarith
+        split_ifs at hlive
+        all_goals linarith
       exact hfalse.elim
     · exact Or.inr rfl
 

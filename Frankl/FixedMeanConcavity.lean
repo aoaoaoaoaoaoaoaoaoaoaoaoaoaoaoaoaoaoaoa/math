@@ -17,26 +17,38 @@ private theorem hasSum_entropyRemainder {z : ℝ} (hz : |z| < 1) :
       (-log (1 - z) - series 0) := by
     simpa [series] using (hasSum_nat_add_iff' 1).2 hlog
   have hdifference := (hlog.mul_left z).sub htail
-  convert hdifference using 1
-  · funext n
+  have hterms :
+      (fun n ↦ z * series n - series (n + 1)) = entropyPower z := by
+    funext n
     dsimp [entropyPower, series]
+    rw [show n + 2 = (n + 1) + 1 by omega, pow_succ]
+    norm_num [Nat.cast_add]
     field_simp
     ring
-  · dsimp [series]
+  have hsum :
+      z * -log (1 - z) - (-log (1 - z) - series 0) =
+        z + (1 - z) * log (1 - z) := by
+    dsimp [series]
+    norm_num
     ring
+  rw [hterms, hsum] at hdifference
+  exact hdifference
 
 private theorem hasSum_binEntropyTail {z : ℝ} (hz₀ : 0 ≤ z) (hz₁ : z < 1) :
     HasSum (fun n : ℕ ↦ -entropyPower z n)
       (binEntropy z - negMulLog z - z) := by
   obtain rfl | hz₀ := hz₀.eq_or_lt
-  · simpa [entropyPower] using (hasSum_zero : HasSum (fun _ : ℕ ↦ (0 : ℝ)) 0)
+  · simp [entropyPower]
   have habs : |z| < 1 := by rw [abs_of_pos hz₀]; exact hz₁
   have hseries := (hasSum_entropyRemainder habs).neg
-  convert hseries using 1
-  rw [binEntropy]
-  rw [log_inv, log_inv]
-  dsimp [negMulLog]
-  ring
+  have value_identity :
+      binEntropy z - negMulLog z - z =
+        -(z + (1 - z) * log (1 - z)) := by
+    rw [Real.binEntropy, log_inv, log_inv]
+    dsimp [negMulLog]
+    ring
+  rw [value_identity]
+  exact hseries
 
 private theorem doubleSum_product {ι : Type*} [Fintype ι] (left right : ι → ℝ) :
     ∑ i, ∑ j, left i * right j = (∑ i, left i) * ∑ j, right j := by
@@ -146,11 +158,11 @@ private theorem scaledProductKernel_nonpos {ι : Type*} [Fintype ι]
             * (difference j * scaled j ^ (n + 2)))) / denominator := by
         apply sum_congr rfl
         intro i _
-        rw [sum_div]
+        simp only [div_eq_mul_inv, sum_mul]
       _ = (∑ i, ∑ j,
           -(difference i * scaled i ^ (n + 2)
             * (difference j * scaled j ^ (n + 2)))) / denominator := by
-        rw [sum_div]
+        simp only [div_eq_mul_inv, sum_mul]
       _ = (-∑ i, ∑ j,
           difference i * scaled i ^ (n + 2)
             * (difference j * scaled j ^ (n + 2))) / denominator := by

@@ -119,13 +119,18 @@ theorem hasDerivAt_cappedEntropy_at_quarter :
       ContinuousAt (fun _ : ℝ => (1 : ℝ) / 2) (1 / 4))
     convert hmin using 1
     all_goals norm_num [cap]
-  have hcapBig :
-      (fun z : ℝ => cap z - 1 / 2) =O[𝓝 (1 / 4)]
-        fun z => z - 1 / 4 := by
-    apply IsBigO.of_bound 2
+  rw [hasDerivAt_iff_isLittleO]
+  rw [show min (2 * (1 / 4 : ℝ)) (1 / 2) = (1 : ℝ) / 2 by norm_num]
+  simp only [smul_zero, sub_zero]
+  change ((fun z : ℝ => binEntropy z - binEntropy (1 / 2)) ∘ cap) =o[𝓝 (1 / 4)]
+    fun z => z - 1 / 4
+  apply IsLittleO.trans_isBigO (F := ℝ)
+    (g := (fun z : ℝ => z - 1 / 2) ∘ cap)
+  · exact houterLittle.comp_tendsto hcapTendsto
+  · apply IsBigO.of_bound 2
     filter_upwards
     intro z
-    simp only [Real.norm_eq_abs, norm_eq_abs]
+    simp only [Function.comp_apply, Real.norm_eq_abs, norm_eq_abs]
     by_cases hz : 2 * z ≤ (1 : ℝ) / 2
     · have hz' : 2 * z ≤ (2 : ℝ)⁻¹ := by
         norm_num at hz ⊢
@@ -138,10 +143,6 @@ theorem hasDerivAt_cappedEntropy_at_quarter :
         exact hz.le
       rw [show cap z = (1 : ℝ) / 2 by simp [cap, min_eq_right hz']]
       simp
-  rw [hasDerivAt_iff_isLittleO]
-  have hcomposed := (houterLittle.comp_tendsto hcapTendsto).trans_isBigO hcapBig
-  rw [show min (2 * (1 / 4 : ℝ)) (1 / 2) = (1 : ℝ) / 2 by norm_num]
-  simpa only [Function.comp_apply, sub_zero, smul_zero] using hcomposed
 
 theorem along_at_base (expression : EntropyExpr) (coordinate : Coordinate) (x y : ℝ) :
     expression.along coordinate x y (lineBase coordinate x y) = expression.eval x y := by
@@ -153,7 +154,11 @@ theorem continuousAt_along {expression : EntropyExpr} {coordinate : Coordinate} 
     ContinuousAt (expression.along coordinate x y) (lineBase coordinate x y) := by
   induction expression with
   | constant value =>
-    cases coordinate <;> simpa [along, lineBase, eval] using continuousAt_const
+    cases coordinate
+    · change ContinuousAt (fun _ : ℝ => (value : ℝ)) x
+      exact continuousAt_const
+    · change ContinuousAt (fun _ : ℝ => (value : ℝ)) y
+      exact continuousAt_const
   | horizontal =>
     cases coordinate
     · change ContinuousAt (fun z : ℝ => z) x
@@ -169,24 +174,37 @@ theorem continuousAt_along {expression : EntropyExpr} {coordinate : Coordinate} 
   | add left right hleft hright =>
     rcases hdomain with ⟨hleftDomain, hrightDomain⟩
     cases coordinate <;>
-      simpa only [along, lineBase, eval] using (hleft hleftDomain).add (hright hrightDomain)
+      refine ((hleft hleftDomain).add (hright hrightDomain)).congr_of_eventuallyEq ?_ <;>
+      exact Filter.Eventually.of_forall fun _ => by
+        simp only [along, eval, Pi.add_apply]
   | neg body hbody =>
-    cases coordinate <;> simpa only [along, lineBase, eval] using (hbody hdomain).neg
+    cases coordinate <;>
+      refine (hbody hdomain).neg.congr_of_eventuallyEq ?_ <;>
+      exact Filter.Eventually.of_forall fun _ => by
+        simp only [along, eval, Pi.neg_apply]
   | mul left right hleft hright =>
     rcases hdomain with ⟨hleftDomain, hrightDomain⟩
     cases coordinate <;>
-      simpa only [along, lineBase, eval] using (hleft hleftDomain).mul (hright hrightDomain)
+      refine ((hleft hleftDomain).mul (hright hrightDomain)).congr_of_eventuallyEq ?_ <;>
+      exact Filter.Eventually.of_forall fun _ => by
+        simp only [along, eval, Pi.mul_apply]
   | inv body hbody =>
     rcases hdomain with ⟨hbodyDomain, hpositive⟩
     have hcontinuous := hbody hbodyDomain
     have hnonzero : body.along coordinate x y (lineBase coordinate x y) ≠ 0 := by
       rw [along_at_base]
       exact hpositive.ne'
-    cases coordinate <;> simpa only [along, lineBase, eval] using hcontinuous.inv₀ hnonzero
+    cases coordinate <;>
+      refine (hcontinuous.inv₀ hnonzero).congr_of_eventuallyEq ?_ <;>
+      exact Filter.Eventually.of_forall fun _ => by
+        simp only [along, eval, Pi.inv_apply]
   | entropy body hbody =>
     rcases hdomain with ⟨hbodyDomain, _hvalue⟩
     have hcontinuous := binEntropy_continuous.continuousAt.comp (hbody hbodyDomain)
-    cases coordinate <;> simpa only [along, lineBase, eval] using hcontinuous
+    cases coordinate <;>
+      refine hcontinuous.congr_of_eventuallyEq ?_ <;>
+      exact Filter.Eventually.of_forall fun _ => by
+        simp only [along, eval, Function.comp_apply]
   | cappedEntropy body hbody =>
     rcases hdomain with ⟨hbodyDomain, _hvalue⟩
     have hbodyContinuous := hbody hbodyDomain
@@ -197,13 +215,18 @@ theorem continuousAt_along {expression : EntropyExpr} {coordinate : Coordinate} 
       continuousAt_const
     have hmin := hdouble.min hhalf
     have hcontinuous := binEntropy_continuous.continuousAt.comp hmin
-    cases coordinate <;> simpa only [along, lineBase, eval] using hcontinuous
+    cases coordinate <;>
+      refine hcontinuous.congr_of_eventuallyEq ?_ <;>
+      exact Filter.Eventually.of_forall fun _ => by
+        simp only [along, eval, Function.comp_apply]
   | selfUnion body hbody =>
     rcases hdomain with ⟨hbodyDomain, _hvalue⟩
     have hcontinuous := hbody hbodyDomain
     cases coordinate <;>
-      simpa only [along, lineBase, eval, Frankl.join] using
-        hcontinuous.add hcontinuous |>.sub (hcontinuous.mul hcontinuous)
+      refine ((hcontinuous.add hcontinuous).sub
+        (hcontinuous.mul hcontinuous)).congr_of_eventuallyEq ?_ <;>
+      exact Filter.Eventually.of_forall fun _ => by
+        simp only [along, eval, Frankl.join, Pi.add_apply, Pi.sub_apply, Pi.mul_apply]
 
 /-- The formal signed slope is the actual derivative on every smooth coordinate line. -/
 theorem hasDerivAt_along {expression : EntropyExpr} {coordinate : Coordinate} {x y : ℝ}
@@ -232,23 +255,31 @@ theorem hasDerivAt_along {expression : EntropyExpr} {coordinate : Coordinate} {x
   | add left right hleft hright =>
     rcases hdomain with ⟨hleftDomain, hrightDomain⟩
     rcases hsmooth with ⟨hleftSmooth, hrightSmooth⟩
-    cases coordinate <;> simpa only [along, lineBase, slope] using
-      (hleft hleftDomain hleftSmooth).add (hright hrightDomain hrightSmooth)
+    have hderiv := (hleft hleftDomain hleftSmooth).add (hright hrightDomain hrightSmooth)
+    cases coordinate <;>
+      exact (hderiv.congr_deriv rfl).congr_of_eventuallyEq
+        (Filter.Eventually.of_forall fun _ => rfl)
   | neg body hbody =>
-    cases coordinate <;> simpa only [along, lineBase, slope] using
-      (hbody hdomain hsmooth).neg
+    have hderiv := (hbody hdomain hsmooth).neg
+    cases coordinate <;>
+      exact (hderiv.congr_deriv rfl).congr_of_eventuallyEq
+        (Filter.Eventually.of_forall fun _ => rfl)
   | mul left right hleft hright =>
     rcases hdomain with ⟨hleftDomain, hrightDomain⟩
     rcases hsmooth with ⟨hleftSmooth, hrightSmooth⟩
-    cases coordinate <;> simpa only [along, lineBase, eval, slope] using
-      (hleft hleftDomain hleftSmooth).mul (hright hrightDomain hrightSmooth)
+    have hderiv := (hleft hleftDomain hleftSmooth).mul (hright hrightDomain hrightSmooth)
+    cases coordinate <;>
+      exact (hderiv.congr_deriv rfl).congr_of_eventuallyEq
+        (Filter.Eventually.of_forall fun _ => rfl)
   | inv body hbody =>
     rcases hdomain with ⟨hbodyDomain, hpositive⟩
     have hderiv := (hbody hbodyDomain hsmooth).inv (by
       rw [along_at_base]
       exact hpositive.ne')
     cases coordinate <;>
-      simpa only [along, lineBase, eval, slope, div_eq_mul_inv, pow_two] using hderiv
+      exact (hderiv.congr_deriv (by
+        simp only [slope, along_at_base, div_eq_mul_inv, pow_two])).congr_of_eventuallyEq
+        (Filter.Eventually.of_forall fun _ => rfl)
   | entropy body hbody =>
     rcases hdomain with ⟨hbodyDomain, _hvalue⟩
     rcases hsmooth with ⟨hbodySmooth, hzero, hone⟩
@@ -257,7 +288,9 @@ theorem hasDerivAt_along {expression : EntropyExpr} {coordinate : Coordinate} {x
         (body.along coordinate x y (lineBase coordinate x y)) := by
       simpa only [along_at_base] using hasDerivAt_binEntropy hzero hone
     have hderiv := houter.comp (lineBase coordinate x y) (hbody hbodyDomain hbodySmooth)
-    cases coordinate <;> simpa only [along, lineBase, eval, slope] using hderiv
+    cases coordinate <;>
+      exact (hderiv.congr_deriv rfl).congr_of_eventuallyEq
+        (Filter.Eventually.of_forall fun _ => rfl)
   | cappedEntropy body hbody =>
     rcases hdomain with ⟨hbodyDomain, _hvalue⟩
     rcases hsmooth with ⟨hbodySmooth, hzero⟩
@@ -287,9 +320,10 @@ theorem hasDerivAt_along {expression : EntropyExpr} {coordinate : Coordinate} {x
           change binEntropy (min (2 * body.eval x z) (1 / 2)) = binEntropy (2 * body.eval x z)
           rw [min_eq_left (by linarith)]
       have hactual := HasDerivAt.congr_of_eventuallyEq hentropy heq
-      cases coordinate <;> convert hactual using 1 <;>
-        simp only [along, lineBase, eval, slope, hbelow, if_true, zero_mul, zero_add] <;>
-        ring
+      cases coordinate <;>
+        exact (hactual.congr_deriv (by
+          simp only [slope, hbelow, if_true, zero_mul, zero_add]
+          ring)).congr_of_eventuallyEq (Filter.Eventually.of_forall fun _ => rfl)
     · by_cases hequal : body.eval x y = (1 : ℝ) / 4
       · have houter : HasDerivAt
             (fun z : ℝ => binEntropy (min (2 * z) (1 / 2))) 0
@@ -297,8 +331,9 @@ theorem hasDerivAt_along {expression : EntropyExpr} {coordinate : Coordinate} {x
           simpa only [along_at_base, hequal] using hasDerivAt_cappedEntropy_at_quarter
         have hactual := houter.comp (lineBase coordinate x y) hbodyDeriv
         cases coordinate <;>
-          simpa only [Function.comp_apply, along, lineBase, eval, slope, hbelow, if_false,
-            zero_mul] using hactual
+          exact (hactual.congr_deriv (by
+            simp only [slope, hbelow, if_false, zero_mul])).congr_of_eventuallyEq
+            (Filter.Eventually.of_forall fun _ => rfl)
       · have habove : (1 : ℝ) / 4 < body.eval x y :=
           lt_of_le_of_ne (le_of_not_gt hbelow) (Ne.symm hequal)
         have haboveBase : (1 : ℝ) / 4 <
@@ -321,16 +356,19 @@ theorem hasDerivAt_along {expression : EntropyExpr} {coordinate : Coordinate} {x
           (binEntropy ((1 : ℝ) / 2))
         have hactual := HasDerivAt.congr_of_eventuallyEq hconstant heq
         cases coordinate <;>
-          simpa only [along, lineBase, slope, hbelow, if_false] using hactual
+          exact (hactual.congr_deriv (by
+            simp only [slope, hbelow, if_false])).congr_of_eventuallyEq
+            (Filter.Eventually.of_forall fun _ => rfl)
   | selfUnion body hbody =>
     rcases hdomain with ⟨hbodyDomain, _hvalue⟩
     have hderiv := hbody hbodyDomain hsmooth
     have hsum := hderiv.add hderiv
     have hproduct := hderiv.mul hderiv
+    have hactual := hsum.sub hproduct
     cases coordinate <;>
-      convert hsum.sub hproduct using 1 <;>
-      simp only [along, lineBase, eval, slope, Frankl.join] <;>
-      ring
+      exact (hactual.congr_deriv (by
+        simp only [slope, along_at_base]
+        ring)).congr_of_eventuallyEq (Filter.Eventually.of_forall fun _ => rfl)
 
 /-- Subtraction in the certificate expression language. -/
 def sub (left right : EntropyExpr) : EntropyExpr := .add left (.neg right)
@@ -666,7 +704,7 @@ theorem inv_encloses {bits : ℕ} {source inverse : DualBall}
       | none =>
         simp [hsourceGradient] at hinverse
         subst inverse
-        simp [hsourceGradient] at hgradient
+        simp at hgradient
       | some sourceGradient =>
         simp only [hsourceGradient] at hinverse
         let square := RatBall.roundedMul bits source.value source.value
@@ -674,11 +712,11 @@ theorem inv_encloses {bits : ℕ} {source inverse : DualBall}
         | none =>
           simp [square, hinverseSquare] at hinverse
           subst inverse
-          simp [hsourceGradient, square, hinverseSquare] at hgradient
+          simp at hgradient
         | some inverseSquare =>
           simp [square, hinverseSquare] at hinverse
           subst inverse
-          simp [hsourceGradient, square, hinverseSquare] at hgradient
+          simp at hgradient
           subst gradient
           have hslopes := hsource.2 sourceGradient hsourceGradient
           have hsquare := RatBall.roundedMul_contains (bits := bits) hsource.1 hsource.1
@@ -715,7 +753,7 @@ theorem entropy_encloses {terms fuel bits : ℕ} {source result : DualBall}
         | none =>
           simp [hsourceGradient] at hresult
           subst result
-          simp [hsourceGradient] at hgradient
+          simp at hgradient
         | some sourceGradient =>
           simp only [hsourceGradient] at hresult
           let complement := RatBall.roundedSub bits (RatBall.point 1) source.value
@@ -724,18 +762,18 @@ theorem entropy_encloses {terms fuel bits : ℕ} {source result : DualBall}
           | none =>
             simp [complement, hcomplementLog] at hresult
             subst result
-            simp [hsourceGradient, complement, hcomplementLog] at hgradient
+            simp at hgradient
           | some complementLog =>
             cases hsourceLog :
                 RatBall.roundedIntervalLogBall terms fuel bits source.value with
             | none =>
               simp [complement, hcomplementLog, hsourceLog] at hresult
               subst result
-              simp [hsourceGradient, complement, hcomplementLog, hsourceLog] at hgradient
+              simp at hgradient
             | some sourceLog =>
               simp [complement, hcomplementLog, hsourceLog] at hresult
               subst result
-              simp [hsourceGradient, complement, hcomplementLog, hsourceLog] at hgradient
+              simp at hgradient
               subst gradient
               have hslopes := hsource.2 sourceGradient hsourceGradient
               have hcomplement : complement.Contains (1 - value) := by
@@ -750,9 +788,9 @@ theorem entropy_encloses {terms fuel bits : ℕ} {source result : DualBall}
                 hcomplementLogContains hsourceLogContains
               exact ⟨RatBall.roundedMul_contains hslope hslopes.1,
                 RatBall.roundedMul_contains hslope hslopes.2⟩
-      · simp [hinterior] at hresult
+      · simp at hresult
         subst result
-        simp [hinterior] at hgradient
+        simp at hgradient
 
 theorem entropy_encloses_half_zero {terms fuel bits : ℕ} {source result : DualBall}
     {value horizontalSlope verticalSlope : ℝ}
@@ -778,7 +816,7 @@ theorem entropy_encloses_half_zero {terms fuel bits : ℕ} {source result : Dual
         | none =>
           simp [hsourceGradient] at hresult
           subst result
-          simp [hsourceGradient] at hgradient
+          simp at hgradient
         | some sourceGradient =>
           simp only [hsourceGradient] at hresult
           let complement := RatBall.roundedSub bits (RatBall.point 1) source.value
@@ -787,18 +825,18 @@ theorem entropy_encloses_half_zero {terms fuel bits : ℕ} {source result : Dual
           | none =>
             simp [complement, hcomplementLog] at hresult
             subst result
-            simp [hsourceGradient, complement, hcomplementLog] at hgradient
+            simp at hgradient
           | some complementLog =>
             cases hsourceLog :
                 RatBall.roundedIntervalLogBall terms fuel bits source.value with
             | none =>
               simp [complement, hcomplementLog, hsourceLog] at hresult
               subst result
-              simp [hsourceGradient, complement, hcomplementLog, hsourceLog] at hgradient
+              simp at hgradient
             | some sourceLog =>
               simp [complement, hcomplementLog, hsourceLog] at hresult
               subst result
-              simp [hsourceGradient, complement, hcomplementLog, hsourceLog] at hgradient
+              simp at hgradient
               subst gradient
               have hslopes := hsource.2 sourceGradient hsourceGradient
               have hone : (RatBall.point 1).Contains (1 : ℝ) := by
@@ -821,9 +859,9 @@ theorem entropy_encloses_half_zero {terms fuel bits : ℕ} {source result : Dual
                   simpa using RatBall.roundedMul_contains hzeroSlope hslopes.1,
                 by
                   simpa using RatBall.roundedMul_contains hzeroSlope hslopes.2⟩
-      · simp [hinterior] at hresult
+      · simp at hresult
         subst result
-        simp [hinterior] at hgradient
+        simp at hgradient
 
 theorem cappedEntropy_encloses {terms fuel bits : ℕ} {source result : DualBall}
     {value horizontalSlope verticalSlope : ℝ}
@@ -849,7 +887,7 @@ theorem cappedEntropy_encloses {terms fuel bits : ℕ} {source result : DualBall
     convert hentropy using 1 <;>
       simp only [not_lt_of_ge hvalueAbove, if_false,
         min_eq_right (by linarith : (1 : ℝ) / 2 ≤ 2 * value),
-        Rat.cast_div, Rat.cast_one, Rat.cast_ofNat, zero_mul, add_zero] <;>
+        Rat.cast_div, Rat.cast_one, Rat.cast_ofNat] <;>
       norm_num
   · have hdoubled := mul_encloses (bits := bits) (constant_encloses 2) hsource
     by_cases hvalueBelow : value < (1 : ℝ) / 4
@@ -859,8 +897,8 @@ theorem cappedEntropy_encloses {terms fuel bits : ℕ} {source result : DualBall
       convert hentropy using 1 <;>
         simp only [hvalueBelow, if_true,
           min_eq_left (by linarith : 2 * value ≤ (1 : ℝ) / 2),
-          neg_mul, zero_mul, zero_add] <;>
-        ring
+          zero_mul, zero_add] <;>
+        ring_nf
     · have hsourceQuarter : source.value.Contains ((1 : ℝ) / 4) := by
         have hbounds := RatBall.contains_iff_bounds.mp hsource.1
         rw [RatBall.contains_iff_bounds]
@@ -872,8 +910,7 @@ theorem cappedEntropy_encloses {terms fuel bits : ℕ} {source result : DualBall
       have hdoubledHalf :
           (mul bits (constant 2) source).value.Contains ((1 : ℝ) / 2) := by
         have hproduct := RatBall.roundedMul_contains (bits := bits) htwo hsourceQuarter
-        convert hproduct using 1
-        norm_num [mul, constant]
+        convert hproduct using 1 <;> norm_num [mul, constant]
       have hentropy := entropy_encloses_half_zero hdoubled hdoubledHalf hresult
       convert hentropy using 1 <;>
         simp only [hvalueBelow, if_false,

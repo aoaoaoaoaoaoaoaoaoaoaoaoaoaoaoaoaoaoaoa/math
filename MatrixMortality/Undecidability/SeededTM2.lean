@@ -1,4 +1,4 @@
-import Mathlib.Computability.TuringMachine
+import Mathlib.Computability.TuringMachine.StackTuringMachine
 
 /-!
 # Rooting a TM2 machine at an arbitrary label
@@ -50,17 +50,17 @@ def machine {stack : Type*} {symbol : stack → Type*} {source store : Type*}
 def config {stack : Type*} {symbol : stack → Type*} {source store : Type*}
     (root : source) :
     TM2.Cfg symbol (Label source) store → TM2.Cfg symbol source store
-  | ⟨label, storeValue, stacks⟩ => ⟨label.map (Label.value root), storeValue, stacks⟩
+  | ⟨label, storeValue, tapes⟩ => ⟨label.map (Label.value root), storeValue, tapes⟩
 
 theorem config_stepAux_liftStmt {stack : Type*} [DecidableEq stack]
     {symbol : stack → Type*} {source store : Type*}
     (embed : source → Label source) (root : source)
     (embed_value : ∀ q, Label.value root (embed q) = q)
     (statement : TM2.Stmt symbol source store) (storeValue : store)
-    (stacks : ∀ k, List (symbol k)) :
-    config root (TM2.stepAux (liftStmt embed statement) storeValue stacks) =
-      TM2.stepAux statement storeValue stacks := by
-  induction statement generalizing storeValue stacks with
+    (tapes : ∀ k, List (symbol k)) :
+    config root (TM2.stepAux (liftStmt embed statement) storeValue tapes) =
+      TM2.stepAux statement storeValue tapes := by
+  induction statement generalizing storeValue tapes with
   | push k write _continuation ih =>
       exact ih _ _
   | peek k read _continuation ih =>
@@ -71,8 +71,8 @@ theorem config_stepAux_liftStmt {stack : Type*} [DecidableEq stack]
       exact ih _ _
   | branch test yes no yes_ih no_ih =>
       by_cases test_true : test storeValue
-      · simpa [liftStmt, TM2.stepAux, test_true] using yes_ih storeValue stacks
-      · simpa [liftStmt, TM2.stepAux, test_true] using no_ih storeValue stacks
+      · simpa [liftStmt, TM2.stepAux, test_true] using yes_ih storeValue tapes
+      · simpa [liftStmt, TM2.stepAux, test_true] using no_ih storeValue tapes
   | goto next =>
       simp [liftStmt, config, embed_value]
   | halt =>
@@ -82,20 +82,20 @@ theorem config_stepAux_liftStmt {stack : Type*} [DecidableEq stack]
 theorem respects {stack : Type*} [DecidableEq stack]
     {symbol : stack → Type*} {source store : Type*}
     (sourceMachine : source → TM2.Stmt symbol source store) (root : source) :
-    Turing.Respects (TM2.step (machine sourceMachine root)) (TM2.step sourceMachine)
+    StateTransition.Respects (TM2.step (machine sourceMachine root)) (TM2.step sourceMachine)
       fun rooted sourceConfig => config root rooted = sourceConfig := by
-  rw [Turing.fun_respects]
-  rintro ⟨label, storeValue, stacks⟩
+  rw [StateTransition.fun_respects]
+  rintro ⟨label, storeValue, tapes⟩
   cases label with
   | none =>
       rfl
   | some label =>
-      simp only [TM2.step, machine, Turing.FRespects]
+      simp only [TM2.step, machine, StateTransition.FRespects]
       apply Relation.TransGen.single
-      simp only [Option.mem_def, Option.some.injEq]
+      simp only [Option.mem_def]
       simpa [TM2.step, config] using congrArg some
         (config_stepAux_liftStmt Label.source root (fun _ => rfl)
-          (sourceMachine (label.value root)) storeValue stacks).symm
+          (sourceMachine (label.value root)) storeValue tapes).symm
 
 theorem supportsStmt_liftStmt {stack : Type*} {symbol : stack → Type*}
     {source store : Type*} [DecidableEq source] (support : Finset source)

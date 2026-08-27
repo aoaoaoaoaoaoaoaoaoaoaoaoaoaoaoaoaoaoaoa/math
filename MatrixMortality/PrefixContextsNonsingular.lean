@@ -237,7 +237,7 @@ private theorem prefixAlgebraReachableBlockB_isUnit
   apply isUnit_iff_ne_zero.mpr
   have ρ_positive : (0 : ℚ) < (3 : ℚ) ^ β := by positivity
   have ρ_one : (1 : ℚ) ≤ (3 : ℚ) ^ β :=
-    one_le_pow_of_one_le (by norm_num) β
+    one_le_pow₀ (by norm_num)
   exact div_ne_zero
     (mul_ne_zero
       (mul_ne_zero (by norm_num)
@@ -279,18 +279,18 @@ private theorem prefixAlgebraAdaptedClosed_mulVec_eq_zero
   have row₇ := congrFun product_zero (7 : Fin 10)
   have row₈ := congrFun product_zero (8 : Fin 10)
   have row₉ := congrFun product_zero (9 : Fin 10)
-  simp [prefixAlgebraAdaptedClosed, Matrix.mulVec, Matrix.dotProduct,
-    Fin.sum_univ_succ, ρ, m, x] at row₀ row₁ row₂ row₃ row₄ row₅ row₆ row₇ row₈ row₉
+  simp [prefixAlgebraAdaptedClosed, Matrix.mulVec, dotProduct,
+    Fin.sum_univ_succ] at row₀ row₁ row₂ row₃ row₄ row₅ row₆ row₇ row₈ row₉
   let first : Fin 3 → ℚ := ![vector 0, vector 1, vector 2]
   have first_product : prefixAlgebraReachableBlockA β *ᵥ first = 0 := by
     funext coordinate
     fin_cases coordinate
     · simpa [prefixAlgebraReachableBlockA, first, ρ, m, Matrix.mulVec,
-        Matrix.dotProduct, Fin.sum_univ_succ] using row₀
+        dotProduct, Fin.sum_univ_succ] using row₀
     · simpa [prefixAlgebraReachableBlockA, first, ρ, m, Matrix.mulVec,
-        Matrix.dotProduct, Fin.sum_univ_succ] using row₆
+        dotProduct, Fin.sum_univ_succ] using row₆
     · simpa [prefixAlgebraReachableBlockA, first, ρ, m, Matrix.mulVec,
-        Matrix.dotProduct, Fin.sum_univ_succ] using row₃
+        dotProduct, Fin.sum_univ_succ] using row₃
   have first_zero : first = 0 := by
     apply (Matrix.mulVec_injective_iff_isUnit.mpr
       (prefixAlgebraReachableBlockA_isUnit β three_le))
@@ -302,17 +302,17 @@ private theorem prefixAlgebraAdaptedClosed_mulVec_eq_zero
   have middle_product : prefixAlgebraReachableBlockC β *ᵥ middle = 0 := by
     funext coordinate
     fin_cases coordinate
-    · simp [coordinate₀, coordinate₁, coordinate₂] at row₂
-      simp [prefixAlgebraReachableBlockC, middle, ρ, m, Matrix.mulVec,
-        Matrix.dotProduct, Fin.sum_univ_succ]
+    · simp [coordinate₁, coordinate₂] at row₂
+      simp [prefixAlgebraReachableBlockC, middle, Matrix.mulVec,
+        dotProduct, Fin.sum_univ_succ]
       linear_combination row₂
     · simp [coordinate₀, coordinate₁, coordinate₂] at row₈
-      simp [prefixAlgebraReachableBlockC, middle, ρ, m, Matrix.mulVec,
-        Matrix.dotProduct, Fin.sum_univ_succ]
+      simp [prefixAlgebraReachableBlockC, middle, Matrix.mulVec,
+        dotProduct, Fin.sum_univ_succ]
       linear_combination row₈
     · simp [coordinate₀, coordinate₁, coordinate₂] at row₅
-      simp [prefixAlgebraReachableBlockC, middle, ρ, m, Matrix.mulVec,
-        Matrix.dotProduct, Fin.sum_univ_succ]
+      simp [prefixAlgebraReachableBlockC, middle, Matrix.mulVec,
+        dotProduct, Fin.sum_univ_succ]
       linear_combination row₅
   have middle_zero : middle = 0 := by
     apply (Matrix.mulVec_injective_iff_isUnit.mpr
@@ -325,22 +325,22 @@ private theorem prefixAlgebraAdaptedClosed_mulVec_eq_zero
   have last_product : prefixAlgebraReachableBlockB β body *ᵥ last = 0 := by
     funext coordinate
     fin_cases coordinate
-    · simp [coordinate₀, coordinate₁, coordinate₂, coordinate₃, coordinate₄,
-        coordinate₅, prefixAlgebraLowerGap] at row₁
-      simp [prefixAlgebraReachableBlockB, last, ρ, m, x,
-        prefixAlgebraLowerGap, Matrix.mulVec, Matrix.dotProduct,
+    · simp [coordinate₁, coordinate₂, coordinate₃, coordinate₄,
+        coordinate₅] at row₁
+      simp [prefixAlgebraReachableBlockB, last,
+        prefixAlgebraLowerGap, Matrix.mulVec, dotProduct,
         Fin.sum_univ_succ]
       linear_combination row₁
     · simp [coordinate₀, coordinate₁, coordinate₂, coordinate₃, coordinate₄,
         coordinate₅, prefixAlgebraLowerGap] at row₉
-      simp [prefixAlgebraReachableBlockB, last, ρ, m, x,
-        prefixAlgebraLowerGap, Matrix.mulVec, Matrix.dotProduct,
+      simp [prefixAlgebraReachableBlockB, last,
+        prefixAlgebraLowerGap, Matrix.mulVec, dotProduct,
         Fin.sum_univ_succ]
       linear_combination row₉
     · simp [coordinate₀, coordinate₁, coordinate₂, coordinate₃, coordinate₄,
-        coordinate₅, prefixAlgebraLowerGap] at row₄
-      simp [prefixAlgebraReachableBlockB, last, ρ, m, x,
-        prefixAlgebraLowerGap, Matrix.mulVec, Matrix.dotProduct,
+        coordinate₅] at row₄
+      simp [prefixAlgebraReachableBlockB, last,
+        prefixAlgebraLowerGap, Matrix.mulVec, dotProduct,
         Fin.sum_univ_succ]
       linear_combination row₄
   have last_zero : last = 0 := by
@@ -363,7 +363,7 @@ private theorem prefixAlgebraAdaptedClosed_mulVec_eq_zero
   have m_positive : 0 < m := by
     dsimp [m]
     have ρ_one : (1 : ℚ) ≤ ρ :=
-      one_le_pow_of_one_le (by norm_num) β
+      one_le_pow₀ (by norm_num)
     linarith
   have coordinate₉ : vector 9 = 0 := by
     simp [coordinate₀, coordinate₁, coordinate₂, coordinate₃, coordinate₄,
@@ -406,7 +406,8 @@ theorem prefixAlgebraReachable_isUnit
       prefixAlgebraReachable β body *
           (prefixAlgebraReachabilityChange β * repair) = 1 := by
     rw [← Matrix.mul_assoc, product_mul_repair]
-  exact Matrix.isUnit_of_right_inverse right_inverse
+  rw [Matrix.isUnit_iff_isUnit_det]
+  exact Matrix.isUnit_det_of_right_inverse right_inverse
 
 private theorem prefixAlgebraObservableClosed_mulVec_eq_zero
     (β : Nat) (three_le : 3 ≤ β)
@@ -424,19 +425,19 @@ private theorem prefixAlgebraObservableClosed_mulVec_eq_zero
   have row₈ := congrFun product_zero (8 : Fin 10)
   have row₉ := congrFun product_zero (9 : Fin 10)
   simp [prefixAlgebraObservableClosed, prefixAlgebraObservableClosedRow,
-    Matrix.mulVec, Matrix.dotProduct, Fin.sum_univ_succ] at row₀ row₁ row₂ row₃ row₄
+    Matrix.mulVec, dotProduct, Fin.sum_univ_succ] at row₀ row₁ row₂ row₃ row₄
   simp [prefixAlgebraObservableClosed, prefixAlgebraObservableClosedRow,
-    Matrix.mulVec, Matrix.dotProduct, Fin.sum_univ_succ] at row₅ row₆ row₇ row₈ row₉
+    Matrix.mulVec, dotProduct, Fin.sum_univ_succ] at row₅ row₆ row₇ row₈ row₉
   let first : Fin 3 → ℚ := ![vector 0, vector 1, vector 2]
   have first_product : prefixAlgebraObservableBlock β *ᵥ first = 0 := by
     funext coordinate
     fin_cases coordinate
     · simpa [prefixAlgebraObservableBlock, first, Matrix.mulVec,
-        Matrix.dotProduct, Fin.sum_univ_succ] using row₀
+        dotProduct, Fin.sum_univ_succ] using row₀
     · simpa [prefixAlgebraObservableBlock, first, Matrix.mulVec,
-        Matrix.dotProduct, Fin.sum_univ_succ] using row₄
+        dotProduct, Fin.sum_univ_succ] using row₄
     · simpa [prefixAlgebraObservableBlock, first, Matrix.mulVec,
-        Matrix.dotProduct, Fin.sum_univ_succ] using row₅
+        dotProduct, Fin.sum_univ_succ] using row₅
   have first_zero : first = 0 := by
     apply (Matrix.mulVec_injective_iff_isUnit.mpr
       (prefixAlgebraObservableBlock_isUnit β three_le))
@@ -449,11 +450,11 @@ private theorem prefixAlgebraObservableClosed_mulVec_eq_zero
     funext coordinate
     fin_cases coordinate
     · simpa [prefixAlgebraObservableBlock, middle, Matrix.mulVec,
-        Matrix.dotProduct, Fin.sum_univ_succ] using row₁
+        dotProduct, Fin.sum_univ_succ] using row₁
     · simpa [prefixAlgebraObservableBlock, middle, Matrix.mulVec,
-        Matrix.dotProduct, Fin.sum_univ_succ] using row₆
+        dotProduct, Fin.sum_univ_succ] using row₆
     · simpa [prefixAlgebraObservableBlock, middle, Matrix.mulVec,
-        Matrix.dotProduct, Fin.sum_univ_succ] using row₇
+        dotProduct, Fin.sum_univ_succ] using row₇
   have middle_zero : middle = 0 := by
     apply (Matrix.mulVec_injective_iff_isUnit.mpr
       (prefixAlgebraObservableBlock_isUnit β three_le))
@@ -466,11 +467,11 @@ private theorem prefixAlgebraObservableClosed_mulVec_eq_zero
     funext coordinate
     fin_cases coordinate
     · simpa [prefixAlgebraObservableBlock, last, Matrix.mulVec,
-        Matrix.dotProduct, Fin.sum_univ_succ] using row₂
+        dotProduct, Fin.sum_univ_succ] using row₂
     · simpa [prefixAlgebraObservableBlock, last, Matrix.mulVec,
-        Matrix.dotProduct, Fin.sum_univ_succ] using row₈
+        dotProduct, Fin.sum_univ_succ] using row₈
     · simpa [prefixAlgebraObservableBlock, last, Matrix.mulVec,
-        Matrix.dotProduct, Fin.sum_univ_succ] using row₉
+        dotProduct, Fin.sum_univ_succ] using row₉
   have last_zero : last = 0 := by
     apply (Matrix.mulVec_injective_iff_isUnit.mpr
       (prefixAlgebraObservableBlock_isUnit β three_le))

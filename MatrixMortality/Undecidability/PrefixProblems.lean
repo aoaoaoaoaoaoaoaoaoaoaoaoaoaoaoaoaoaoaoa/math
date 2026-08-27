@@ -33,7 +33,7 @@ private theorem prefixOutput_int_entry_primrec (β : Nat) (state : PrefixState)
     have lowerScale := ternaryScale_int_primrec.comp lowerWord
     fin_cases row <;> fin_cases column <;>
       simp [prefixOutput, prefixEmission, normalizedNearyFamily_some,
-        sidePcpMatrix, Matrix.vecHead, Matrix.vecTail]
+        sidePcpMatrix]
     all_goals first | exact Primrec.const _ | exact lowerCode | exact lowerScale
   case ten.true =>
     exact
@@ -115,7 +115,7 @@ theorem nearyMortality10Plus_mortal_iff_tagHaltsFrom (extra β : Nat)
       TagHaltsFrom β (tagOutput body) (body.drop (β - 1) ++ [.b]) := by
   change IsMortal
       (Matrix.reindex finSumFinEquiv finSumFinEquiv ∘
-        (zeroPad (κ := Fin extra) ∘ nearyMortality102 β body)) ↔ _
+        (zeroPad (κ := Fin extra) ∘ (nearyMortality102 β body).matrix)) ↔ _
   rw [isMortal_reindex_iff, isMortal_zeroPad_iff]
   exact nearyMortality102_mortal_iff_tagHaltsFrom β body β_large body_long body_divisible
 

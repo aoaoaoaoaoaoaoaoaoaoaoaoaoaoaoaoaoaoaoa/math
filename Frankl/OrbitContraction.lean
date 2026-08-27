@@ -94,11 +94,11 @@ private noncomputable def joinEntropyDifferenceDeriv2 (q coefficient x : ℝ) : 
 
 private theorem hasDerivAt_join (q x : ℝ) :
     HasDerivAt (fun y ↦ join y q) (1 - q) x := by
-  convert ((hasDerivAt_id x).mul_const (1 - q)).const_add q using 1
-  · funext y
-    simp only [join, id_eq]
-    ring
-  · ring
+  have h : HasDerivAt (fun y : ℝ ↦ q + y * (1 - q)) (1 - q) x := by
+    simpa only [id_eq, one_mul] using ((hasDerivAt_id x).mul_const (1 - q)).const_add q
+  refine h.congr_of_eventuallyEq (Filter.Eventually.of_forall fun y ↦ ?_)
+  simp only [join]
+  ring
 
 private theorem hasDerivAt_joinEntropyDifference {q coefficient x : ℝ}
     (hx₀ : x ≠ 0) (hx₁ : x ≠ 1) (hjoin₀ : join x q ≠ 0) (hjoin₁ : join x q ≠ 1) :
@@ -108,8 +108,10 @@ private theorem hasDerivAt_joinEntropyDifference {q coefficient x : ℝ}
   have hcomp := houter.comp x (hasDerivAt_join q x)
   convert ((hasDerivAt_binEntropy hx₀ hx₁).const_mul coefficient).sub hcomp using 1
   all_goals
-    simp only [joinEntropyDifference, joinEntropyDifferenceDeriv]
-    ring
+    first
+    | simp only [joinEntropyDifferenceDeriv]
+      ring
+    | rfl
 
 private theorem hasDerivAt_joinEntropyDifferenceDeriv {q coefficient x : ℝ}
     (hx₀ : x ≠ 0) (hx₁ : x ≠ 1) (hjoin₀ : join x q ≠ 0) (hjoin₁ : join x q ≠ 1) :
@@ -127,9 +129,16 @@ private theorem hasDerivAt_joinEntropyDifferenceDeriv {q coefficient x : ℝ}
       (-(1 - q) / (1 - join x q)) x := by
     simpa only [one_div] using
       (hj.const_sub 1 |>.log (sub_ne_zero.mpr hjoin₁.symm))
-  convert ((hxcomplog.sub hxlog).const_mul coefficient).sub
-    ((hjcomplog.sub hjlog).const_mul (1 - q)) using 1
-  simp only [joinEntropyDifferenceDeriv2, one_div]
+  unfold joinEntropyDifferenceDeriv joinEntropyDifferenceDeriv2
+  apply HasDerivAt.sub
+  · apply HasDerivAt.const_mul
+    apply HasDerivAt.sub
+    · exact hxcomplog
+    · simpa only [one_div] using hxlog
+  · apply HasDerivAt.const_mul
+    apply HasDerivAt.sub
+    · exact hjcomplog
+    · exact hjlog
 
 /-- The join-curvature remainder is concave on every interval where its curvature ratio is
 bounded. -/
@@ -201,7 +210,7 @@ theorem orbitDeficit_joinEntropy_le {a d q coefficient : ℝ}
       ((coefficient * binEntropy (a - d) - binEntropy (join (a - d) q))
           + (coefficient * binEntropy (a + d) - binEntropy (join (a + d) q))) / 2 ≤
         coefficient * binEntropy a - binEntropy (join a q) := by
-    convert hmid using 1 <;> ring_nf
+    convert hmid using 1 <;> first | rfl | ring_nf
   linarith
 
 /-- The sharp elementary curvature coefficient for a low external parameter. -/

@@ -93,7 +93,7 @@ theorem singleLowOrbit_marginal_difference (a d : ℝ) :
       orbitDeficit binEntropy a d := by
   simp [orbitMarginalEntropy, finiteExpectation, orbitMarginalWeight,
     orbitMarginalPoint, singleLowOrbitLaw,
-    orbitDeficit, Fintype.sum_prod_type, Fintype.sum_bool]
+    orbitDeficit, Fintype.sum_prod_type]
   ring
 
 theorem singleLowOrbit_independent_difference (a d : ℝ) :
@@ -101,7 +101,7 @@ theorem singleLowOrbit_independent_difference (a d : ℝ) :
         - orbitIndependentEntropy (singleLowOrbitLaw a d) = selfPairDeficit a d := by
   simp [orbitIndependentEntropy, finiteJoinEntropy, orbitMarginalWeight,
     orbitMarginalPoint, singleLowOrbitLaw,
-    selfPairDeficit, Fintype.sum_prod_type, Fintype.sum_bool, join_comm]
+    selfPairDeficit, Fintype.sum_prod_type, join_comm]
   ring
 
 theorem singleLowOrbit_dependent_eq {a d : ℝ}
@@ -121,7 +121,7 @@ theorem twoLowOrbit_lower_marginal_difference {a d target b e : ℝ}
   classical
   simp [orbitMarginalEntropy, finiteExpectation, orbitMarginalWeight,
     orbitMarginalPoint, twoLowOrbitLaw, twoOrbitWeight, twoLowOrbitLeft,
-    twoLowOrbitRight, orbitDeficit, Fintype.sum_prod_type, Fintype.sum_bool]
+    twoLowOrbitRight, orbitDeficit, Fintype.sum_prod_type]
   ring
 
 /-- Contracting the upper orbit after the lower one raises marginal entropy by its weighted
@@ -134,7 +134,7 @@ theorem twoLowOrbit_upper_marginal_difference {a target b e : ℝ}
   classical
   simp [orbitMarginalEntropy, finiteExpectation, orbitMarginalWeight,
     orbitMarginalPoint, twoLowOrbitLaw, twoOrbitWeight, twoLowOrbitLeft,
-    twoLowOrbitRight, orbitDeficit, Fintype.sum_prod_type, Fintype.sum_bool]
+    twoLowOrbitRight, orbitDeficit, Fintype.sum_prod_type]
   ring
 
 /-- Exact independent-entropy cost of contracting the lower of two low orbits. -/
@@ -150,7 +150,7 @@ theorem twoLowOrbit_lower_independent_difference {a d target b e : ℝ}
   simp [orbitIndependentEntropy, finiteJoinEntropy, orbitMarginalWeight,
     orbitMarginalPoint, twoLowOrbitLaw, twoOrbitWeight, twoLowOrbitLeft,
     twoLowOrbitRight, selfPairDeficit, orbitDeficit, Fintype.sum_prod_type,
-    Fintype.sum_bool, join_comm]
+    join_comm]
   ring
 
 /-- Exact independent-entropy cost of contracting the upper orbit after the lower orbit. -/
@@ -165,7 +165,7 @@ theorem twoLowOrbit_upper_independent_difference {a target b e : ℝ}
   simp [orbitIndependentEntropy, finiteJoinEntropy, orbitMarginalWeight,
     orbitMarginalPoint, twoLowOrbitLaw, twoOrbitWeight, twoLowOrbitLeft,
     twoLowOrbitRight, selfPairDeficit, orbitDeficit, Fintype.sum_prod_type,
-    Fintype.sum_bool, join_comm]
+    join_comm]
   ring
 
 /-- Contracting the lower low orbit preserves Yu's dependent entropy term. -/
@@ -177,7 +177,7 @@ theorem twoLowOrbit_lower_dependent_eq {a d target b e : ℝ}
   classical
   have hcost := dependentCost_symmetric_low_eq_mean haUpper hd
   simp [orbitDependentEntropy, twoLowOrbitLaw, twoOrbitWeight, twoLowOrbitLeft,
-    twoLowOrbitRight, Fintype.sum_bool, hcost]
+    twoLowOrbitRight, hcost]
 
 /-- Contracting the upper low orbit preserves Yu's dependent entropy term. -/
 theorem twoLowOrbit_upper_dependent_eq {a target b e : ℝ}
@@ -188,7 +188,7 @@ theorem twoLowOrbit_upper_dependent_eq {a target b e : ℝ}
   classical
   have hcost := dependentCost_symmetric_low_eq_mean hbUpper he
   simp [orbitDependentEntropy, twoLowOrbitLaw, twoOrbitWeight, twoLowOrbitLeft,
-    twoLowOrbitRight, Fintype.sum_bool, hcost]
+    twoLowOrbitRight, hcost]
 
 /-- Contracting the low orbit against `(q,1)` raises marginal entropy by its weighted Jensen
 deficit. -/
@@ -203,7 +203,7 @@ theorem lowEndpointOrbit_marginal_difference {a d target q : ℝ}
   classical
   simp [orbitMarginalEntropy, finiteExpectation, orbitMarginalWeight,
     orbitMarginalPoint, lowEndpointOrbitLaw, twoOrbitWeight, lowEndpointOrbitLeft,
-    lowEndpointOrbitRight, orbitDeficit, Fintype.sum_prod_type, Fintype.sum_bool]
+    lowEndpointOrbitRight, orbitDeficit, Fintype.sum_prod_type]
   ring
 
 /-- Exact independent-entropy cost of contracting a low orbit against `(q,1)`. -/
@@ -223,7 +223,7 @@ theorem lowEndpointOrbit_independent_difference {a d target q : ℝ}
   simp [orbitIndependentEntropy, finiteJoinEntropy, orbitMarginalWeight,
     orbitMarginalPoint, lowEndpointOrbitLaw, twoOrbitWeight, lowEndpointOrbitLeft,
     lowEndpointOrbitRight, selfPairDeficit, orbitDeficit, Fintype.sum_prod_type,
-    Fintype.sum_bool, join_comm]
+    join_comm]
   ring
 
 /-- Contracting the low orbit against `(q,1)` preserves Yu's dependent term. -/
@@ -238,7 +238,7 @@ theorem lowEndpointOrbit_dependent_eq {a d target q : ℝ}
   classical
   have hcost := dependentCost_symmetric_low_eq_mean haUpper hd
   simp [orbitDependentEntropy, lowEndpointOrbitLaw, twoOrbitWeight,
-    lowEndpointOrbitLeft, lowEndpointOrbitRight, Fintype.sum_bool, hcost]
+    lowEndpointOrbitLeft, lowEndpointOrbitRight, hcost]
 
 /-- If a contraction raises independent entropy by no more than marginal entropy, it cannot
 raise the strict Yu gap while the dependent term is fixed. -/

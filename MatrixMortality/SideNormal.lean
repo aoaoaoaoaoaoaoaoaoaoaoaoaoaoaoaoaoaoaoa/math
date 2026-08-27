@@ -25,7 +25,7 @@ theorem sidePcpMatrix_map {R S : Type*} [CommRing R] [CommRing S]
     (sidePcpMatrix R x y).map hom = sidePcpMatrix S x y := by
   ext i j
   fin_cases i <;> fin_cases j <;>
-    simp [sidePcpMatrix, Matrix.vecHead, Matrix.vecTail]
+    simp [sidePcpMatrix]
   all_goals
     congr 1
     exact map_ofNat hom 3
@@ -46,36 +46,36 @@ theorem sideChangeInv_mul_sideChange (R : Type*) [CommRing R] :
     sideChangeInv R * sideChange R = 1 := by
   ext i j
   fin_cases i <;> fin_cases j <;>
-    simp [sideChangeInv, sideChange, Matrix.vecHead, Matrix.vecTail, Matrix.mul_apply,
+    simp [sideChangeInv, sideChange, Matrix.mul_apply,
       Fin.sum_univ_succ]
 
 theorem sideChange_mul_sideChangeInv (R : Type*) [CommRing R] :
     sideChange R * sideChangeInv R = 1 := by
   ext i j
   fin_cases i <;> fin_cases j <;>
-    simp [sideChangeInv, sideChange, Matrix.vecHead, Matrix.vecTail, Matrix.mul_apply,
+    simp [sideChangeInv, sideChange, Matrix.mul_apply,
       Fin.sum_univ_succ]
 
 theorem sidePcpMatrix_eq_conjugate (R : Type*) [CommRing R] (x y : List Bool) :
     sidePcpMatrix R x y = sideChangeInv R * pcpMatrix R x y * sideChange R := by
   ext i j
   fin_cases i <;> fin_cases j <;>
-    simp [sidePcpMatrix, sideChangeInv, sideChange, pcpMatrix, Matrix.vecHead,
-      Matrix.vecTail, Matrix.mul_apply, Fin.sum_univ_succ]
+    simp [sidePcpMatrix, sideChangeInv, sideChange, pcpMatrix, Matrix.mul_apply,
+      Fin.sum_univ_succ]
   all_goals ring
 
 @[simp] theorem sidePcpMatrix_nil (R : Type*) [CommRing R] :
     sidePcpMatrix R [] [] = 1 := by
   ext i j
   fin_cases i <;> fin_cases j <;>
-    simp [sidePcpMatrix, Matrix.vecHead, Matrix.vecTail]
+    simp [sidePcpMatrix]
 
 theorem sidePcpMatrix_append (R : Type*) [CommRing R] (x y x' y' : List Bool) :
     sidePcpMatrix R (x ++ x') (y ++ y') =
       sidePcpMatrix R x y * sidePcpMatrix R x' y' := by
   ext i j
   fin_cases i <;> fin_cases j <;>
-    simp [sidePcpMatrix, Matrix.vecHead, Matrix.vecTail, Matrix.mul_apply,
+    simp [sidePcpMatrix, Matrix.mul_apply,
       Fin.sum_univ_succ, ternaryCode_append]
   all_goals ring
 
@@ -102,8 +102,8 @@ theorem sideTerminalColumn_map {R S : Type*} [CommRing R] [CommRing S]
 
 @[simp] theorem sideTerminalColumn_zero (R : Type*) [CommRing R] (marker : List Bool) :
     sideTerminalColumn R marker 0 = (ternaryCode marker : R) := by
-  simp [sideTerminalColumn, sidePcpMatrix, sideTailBasis, Matrix.vecHead, Matrix.vecTail,
-    Matrix.mulVec, Matrix.dotProduct, Fin.sum_univ_succ]
+  simp [sideTerminalColumn, sidePcpMatrix, sideTailBasis, Matrix.mulVec, dotProduct,
+    Fin.sum_univ_succ]
 
 /-- Product of the side-normal matrices named by a Neary role word. -/
 def sideTileProduct (R : Type*) [CommRing R] (β : Nat) (body : List TagLetter)
@@ -152,8 +152,8 @@ theorem rule_erase_agree_on_upperSide (R : Type*) [CommRing R] (β : Nat)
   change vector 1 = 0 at upperSide
   funext i
   fin_cases i <;>
-    simp [sidePcpMatrix, nearyUpper, Matrix.vecHead, Matrix.vecTail,
-      Matrix.mulVec, Matrix.dotProduct, Fin.sum_univ_succ, upperSide]
+    simp [sidePcpMatrix, nearyUpper, Matrix.mulVec, dotProduct, Fin.sum_univ_succ,
+      upperSide]
 
 /-- The coefficient of one side-normal role word. -/
 def sideCoefficient (R : Type*) [CommRing R] (β : Nat) (body : List TagLetter)
@@ -177,8 +177,7 @@ theorem sidePcpMatrix_mulVec_sideTailBasis_head (R : Type*) [CommRing R]
     (x y : List Bool) :
     (sidePcpMatrix R x y *ᵥ sideTailBasis R) 0 =
       (ternaryCode x : R) - ternaryCode y := by
-  simp [sidePcpMatrix, sideTailBasis, Matrix.vecHead, Matrix.vecTail, Matrix.mulVec,
-    Matrix.dotProduct, Fin.sum_univ_succ]
+  simp [sidePcpMatrix, sideTailBasis, Matrix.mulVec, dotProduct, Fin.sum_univ_succ]
   ring
 
 theorem sidePcpMatrix_mulVec_sideTailBasis_head_rat (x y : List Bool) :

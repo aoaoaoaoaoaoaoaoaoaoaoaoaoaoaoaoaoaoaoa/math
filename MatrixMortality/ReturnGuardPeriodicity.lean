@@ -155,7 +155,6 @@ theorem PrimitiveEndpointReduction.denominator_recurrence
         complement * source.2 := by
   apply mul_left_cancel₀ first.content_ne
   have eliminated := first.twoStep_elimination second
-  simp only [Prod.fst, Prod.snd] at eliminated ⊢
   rw [first.source_eq_power_mul_prequotient] at eliminated
   dsimp [endpointPrequotient] at eliminated
   calc
@@ -210,7 +209,6 @@ theorem PrimitiveEndpointReduction.denominator_growth_factorization
             ((prime : ℤ) ^ (depth * gap) * nextContent * target.2 -
               driftNumerator * middle.2)) := by
   have recurrence := first.denominator_recurrence second complementary
-  simp only [Prod.snd] at recurrence ⊢
   have depth_decomp : depth - 1 + 1 = depth := Nat.sub_add_cancel depth_positive
   have full_exponent :
       depth * (wait + gap) =
@@ -258,7 +256,6 @@ theorem PrimitiveEndpointReduction.denominator_growth_error_le
   have power_positive : 0 < power := Nat.pow_pos prime_positive
   have factorization :=
     first.denominator_growth_factorization second depth_positive complementary
-  simp only [Prod.snd] at factorization
   have complement_le :
       complement.natAbs ≤ (driftNumerator * scale).natAbs * power :=
     complementaryContent_natAbs_le prime_positive first.content_ne complementary
@@ -290,7 +287,7 @@ theorem PrimitiveEndpointReduction.denominator_growth_error_le
         simp only [denominatorErrorBound]
         ring
   have absolute := congrArg Int.natAbs factorization
-  simp only [Int.natAbs_mul, Int.natAbs_pow, Int.natAbs_ofNat] at absolute
+  simp only [Int.natAbs_mul, Int.natAbs_pow, Int.natAbs_natCast] at absolute
   change error.natAbs ≤ _
   apply Nat.le_of_mul_le_mul_left _ power_positive
   rw [← absolute]
@@ -361,7 +358,6 @@ theorem PrimitiveEndpointReduction.nonDecreasing_wait_le_log_recordBound
         source_denominator_le middle_denominator_le second complementary
   have factorization :=
     first.denominator_growth_factorization second depth_positive complementary
-  simp only [Prod.snd] at factorization
   have factorization' :
       centerNumerator * middle.2 + complement * source.2 =
         (prime : ℤ) ^ wait * error := by
@@ -391,10 +387,7 @@ theorem PrimitiveEndpointReduction.nonDecreasing_wait_le_log_recordBound
       intro prime_dvd_core
       have prime_dvd_scale_middle : (prime : ℤ) ∣ scale * middle.2 := by
         have difference := dvd_sub prime_dvd_core prime_dvd_remainder
-        convert difference using 1
-        all_goals
-          dsimp [core]
-          ring
+        simpa [core] using difference
       exact scale_middle_unit prime_dvd_scale_middle
     have core_ne : core ≠ 0 := fun core_zero =>
       core_unit (core_zero ▸ dvd_zero (prime : ℤ))
@@ -406,7 +399,7 @@ theorem PrimitiveEndpointReduction.nonDecreasing_wait_le_log_recordBound
       rw [error_eq]
       exact dvd_mul_right _ _
     have gap_power_le_error : prime ^ gap ≤ error.natAbs := by
-      simpa only [Int.natAbs_pow, Int.natAbs_ofNat] using
+      simpa only [Int.natAbs_pow, Int.natAbs_natCast] using
         Int.natAbs_le_of_dvd_ne_zero gap_power_dvd error_ne
     have gap_power_le_bound : prime ^ gap ≤ errorBound :=
       gap_power_le_error.trans error_le
@@ -431,7 +424,7 @@ theorem PrimitiveEndpointReduction.nonDecreasing_wait_le_log_recordBound
       subst gap
       have quotient_eq : quotient = driftNumerator * middle.2 := by
         dsimp [bracket] at bracket_zero
-        simp only [mul_zero, pow_zero, one_mul] at bracket_zero
+        simp only [pow_zero, one_mul] at bracket_zero
         linarith
       have middle_isUnit : IsUnit middle.2 := by
         apply second.prequotient_coprime_denominator.symm.isUnit_of_dvd
@@ -496,13 +489,16 @@ theorem PrimitiveEndpointReduction.nonDecreasing_wait_le_log_recordBound
           prime ^ wait ≤ scale.natAbs * prime ^ wait :=
             Nat.le_mul_of_pos_left _ scale_abs_positive
           _ = (scale * (prime : ℤ) ^ wait).natAbs := by
-            simp only [Int.natAbs_mul, Int.natAbs_pow, Int.natAbs_ofNat]
+            simp only [Int.natAbs_mul, Int.natAbs_pow, Int.natAbs_natCast]
           _ ≤ (scale * (prime : ℤ) ^ wait - centerNumerator).natAbs +
                 centerNumerator.natAbs := by
             have triangle :=
               Int.natAbs_add_le centerNumerator
                 (scale * (prime : ℤ) ^ wait - centerNumerator)
-            convert triangle using 1 <;> ring
+            rw [show centerNumerator +
+                (scale * (prime : ℤ) ^ wait - centerNumerator) =
+              scale * (prime : ℤ) ^ wait by ring] at triangle
+            simpa only [add_comm] using triangle
           _ ≤ _ := by
             simpa only [add_comm] using
               Nat.add_le_add_right linear_abs_le centerNumerator.natAbs
@@ -521,17 +517,18 @@ theorem PrimitiveEndpointReduction.nonDecreasing_wait_le_log_recordBound
                 (scale * (prime : ℤ) ^ gap * middle.2).natAbs := by
           have := Int.natAbs_sub_le error
             (scale * (prime : ℤ) ^ gap * middle.2)
-          convert this using 1
-          all_goals
+          rw [show error - scale * (prime : ℤ) ^ gap * middle.2 =
+              (prime : ℤ) ^ exponent * bracket by
             dsimp [error]
-            ring
+            ring] at this
+          exact this
         calc
           prime ^ exponent ≤ prime ^ exponent * bracket.natAbs :=
             Nat.le_mul_of_pos_right _ bracket_abs_positive
           _ = ((prime : ℤ) ^ exponent * bracket).natAbs := by
-            simp only [Int.natAbs_mul, Int.natAbs_pow, Int.natAbs_ofNat]
+            simp only [Int.natAbs_mul, Int.natAbs_pow, Int.natAbs_natCast]
           _ ≤ _ := by
-            simpa only [Int.natAbs_mul, Int.natAbs_pow, Int.natAbs_ofNat,
+            simpa only [Int.natAbs_mul, Int.natAbs_pow, Int.natAbs_natCast,
               mul_assoc] using product_le
       have powered_bracket_bound :
           prime ^ exponent ≤ errorBound *
@@ -602,10 +599,7 @@ theorem PrimitiveEndpointReduction.nonDecreasing_wait_le_log_recordBound
             exact Nat.mul_ne_zero depth_positive.ne'
               (ne_of_gt (exponent_positive.trans exponent_lt_gap))
           have difference := dvd_sub prime_dvd_powered_quotient prime_dvd_bracket
-          convert difference using 1
-          all_goals
-            dsimp [bracket]
-            ring
+          simpa [bracket] using difference
         exact drift_middle_unit prime_dvd_drift_middle
       have difference_equation :
           (driftNumerator - scale) * middle.2 =
@@ -613,7 +607,7 @@ theorem PrimitiveEndpointReduction.nonDecreasing_wait_le_log_recordBound
         have expanded := core_zero
         dsimp [core, bracket] at expanded
         rw [gap_eq] at expanded
-        simp only [Nat.sub_self, pow_zero, one_mul] at expanded
+        simp only [Nat.sub_self, pow_zero] at expanded
         rw [gap_eq]
         linear_combination -expanded
       have right_ne :
@@ -632,7 +626,7 @@ theorem PrimitiveEndpointReduction.nonDecreasing_wait_le_log_recordBound
         calc
           prime ^ (depth * gap) ≤
               ((driftNumerator - scale) * middle.2).natAbs := by
-            simpa only [Int.natAbs_pow, Int.natAbs_ofNat] using
+            simpa only [Int.natAbs_pow, Int.natAbs_natCast] using
               Int.natAbs_le_of_dvd_ne_zero power_dvd_difference_product right_ne
           _ = (driftNumerator - scale).natAbs * middle.2.natAbs := by
             simp only [Int.natAbs_mul]
@@ -651,7 +645,7 @@ theorem PrimitiveEndpointReduction.nonDecreasing_wait_le_log_recordBound
       have exponent_power_le : prime ^ exponent ≤ errorBound := by
         calc
           prime ^ exponent ≤ error.natAbs := by
-            simpa only [Int.natAbs_pow, Int.natAbs_ofNat] using
+            simpa only [Int.natAbs_pow, Int.natAbs_natCast] using
               Int.natAbs_le_of_dvd_ne_zero exponent_power_dvd error_zero
           _ ≤ errorBound := error_le
       apply Nat.le_log_of_pow_le prime_gt_one
@@ -682,7 +676,7 @@ theorem PrimitiveEndpointReduction.wait_le_log_sourceBox
   have target_abs_positive : 0 < target.2.natAbs :=
     Int.natAbs_pos.mpr (ne_of_gt target_denominator_positive)
   have raw_absolute := congrArg Int.natAbs reduction.step.denominator
-  simp only [Prod.snd, Int.natAbs_mul, Int.natAbs_pow, Int.natAbs_ofNat] at raw_absolute
+  simp only [Int.natAbs_mul, Int.natAbs_pow, Int.natAbs_natCast] at raw_absolute
   have full_power_le_raw :
       prime ^ (depth * wait) ≤
         (source.1 - scale * ((prime : ℤ) ^ wait - 1) * source.2).natAbs := by
@@ -779,7 +773,7 @@ theorem PrimitiveEndpointReduction.source_numerator_le_box
       Int.natAbs_add_le _ _
     _ = prime ^ (depth * wait) * content.natAbs * target.2.natAbs +
           scale.natAbs * ((prime : ℤ) ^ wait - 1).natAbs * source.2.natAbs := by
-      simp only [Int.natAbs_mul, Int.natAbs_pow, Int.natAbs_ofNat, mul_assoc]
+      simp only [Int.natAbs_mul, Int.natAbs_pow, Int.natAbs_natCast, mul_assoc]
     _ ≤ prime ^ (depth * waitBound) *
             endpointContentBound prime waitBound driftNumerator scale *
               denominatorBound +

@@ -4,6 +4,12 @@ namespace Frankl
 
 open Real Set
 
+private theorem sub_two_divisions_mul_denominators
+    {x c y z u v : ℝ} (hu : u ≠ 0) (hv : v ≠ 0) :
+    (x - c * (y / u + z / v)) * (u * v) =
+      x * u * v - c * (y * v + z * u) := by
+  field_simp
+
 private theorem endpointSupportContractionCoefficient_antitone_center
     {support lower upper : ℝ}
     (hsupport₀ : 0 < support) (hsupportHalf : support ≤ 1 / 2)
@@ -27,7 +33,7 @@ private theorem endpointSupportContractionCoefficient_antitone_center
   have hsecond :
       (1 - 4 * upper / 3) / (1 - upper) ≤
         (1 - 4 * lower / 3) / (1 - lower) := by
-    apply (div_le_div_iff hupperComplement hlowerComplement).2
+    apply (div_le_div_iff₀ hupperComplement hlowerComplement).2
     nlinarith
   unfold endpointSupportContractionCoefficient
   exact mul_le_mul_of_nonneg_left (add_le_add hfirst hsecond)
@@ -64,7 +70,7 @@ private theorem endpointConditionalMean_mono_q {a q : ℝ}
     nlinarith [abundanceTarget_lt_half]
   rw [endpointConditionalMean, endpointConditionalMean]
   simp only [mul_zero, add_zero]
-  apply (div_le_div_iff hzeroDenominator hqDenominator).2
+  apply (div_le_div_iff₀ hzeroDenominator hqDenominator).2
   have hproduct : 0 ≤ q * (abundanceTarget - a) * (1 - abundanceTarget) :=
     mul_nonneg (mul_nonneg hq₀ (sub_nonneg.2 haUpper))
       (sub_nonneg.2 (abundanceTarget_lt_half.le.trans (by norm_num)))
@@ -78,7 +84,7 @@ private theorem endpointConditionalMean_mono_a {a q : ℝ}
   have haDenominator : 0 < 1 + q - a - abundanceTarget := by
     nlinarith [abundanceTarget_lt_half]
   rw [endpointConditionalMean, endpointConditionalMean]
-  apply (div_le_div_iff hquarterDenominator haDenominator).2
+  apply (div_le_div_iff₀ hquarterDenominator haDenominator).2
   have hproduct :
       0 ≤ (4 * a - 1) * (1 - abundanceTarget) *
         (q + 1 - 2 * abundanceTarget) := by
@@ -123,7 +129,6 @@ private theorem endpointSupportContractionCoefficient_a_zero_le {a : ℝ}
           (2 - 2 * a - 3 * abundanceTarget + 2 * a * abundanceTarget) := by
     rw [hjoinFormula]
     field_simp [ha₀.ne', hrDenominator.ne', hbracket.ne']
-    ring
   have hsecondRatio :
       (1 - 4 * center / 3) / (1 - center) =
         (3 * (1 - a - abundanceTarget) -
@@ -159,10 +164,10 @@ private theorem endpointSupportContractionCoefficient_a_zero_le {a : ℝ}
             (3 * (1 - abundanceTarget) * (1 - 2 * a))) by
       change
         (1 + entropySlack) - endpointSupportContractionCoefficient a center = _
+      apply (eq_div_iff (mul_ne_zero hbracket.ne' hsecondDenominator.ne')).2
       rw [endpointSupportContractionCoefficient, hfirstRatio, hsecondRatio]
       dsimp only [certificateNumerator]
-      field_simp [hbracket.ne', hsecondDenominator.ne']
-      ring]
+      exact sub_two_divisions_mul_denominators hbracket.ne' hsecondDenominator.ne']
   exact div_nonneg hcertificateNumerator
     (mul_nonneg hbracket.le hsecondDenominator.le)
 
@@ -211,7 +216,6 @@ private theorem endpointSupportContractionCoefficient_quarter_q_le {q : ℝ}
         (3 * denominator - 4 * numerator) / (3 * (denominator - numerator)) := by
     rw [hcenterFormula]
     field_simp [hdenominator.ne', hdenominatorDifference.ne']
-    ring
   have hcube : q ^ 3 ≤ (1 / 2 : ℝ) * q ^ 2 := by
     nlinarith [mul_nonneg (sq_nonneg q) (sub_nonneg.2 hqUpper)]
   have hsquare : q ^ 2 ≤ (1 / 2 : ℝ) * q := by
@@ -236,8 +240,7 @@ private theorem endpointSupportContractionCoefficient_quarter_q_le {q : ℝ}
         (1 + entropySlack) - endpointSupportContractionCoefficient q center = _
       rw [endpointSupportContractionCoefficient, hfirstRatio, hsecondRatio]
       dsimp only [certificateNumerator]
-      field_simp [hjoinNumerator.ne', hdenominatorDifference.ne']
-      ring]
+      field_simp [hjoinNumerator.ne', hdenominatorDifference.ne']]
   exact div_nonneg hcertificateNumerator
     (mul_nonneg hjoinNumerator.le (mul_nonneg (by norm_num) hdenominatorDifference.le))
 
@@ -301,7 +304,6 @@ private theorem centeredCurve_eq_scaled_endpointSaturatedCenteredObjective {cent
       (1 - center) ^ 2 * lowMass = targetComplement * (1 - center) := by
     dsimp only [lowMass]
     field_simp [hcomplement]
-    ring
   rw [endpointCenteredCurve]
   calc
     (1 - dependentShare) * targetComplement ^ 2 * binEntropy ((1 - center) ^ 2) +

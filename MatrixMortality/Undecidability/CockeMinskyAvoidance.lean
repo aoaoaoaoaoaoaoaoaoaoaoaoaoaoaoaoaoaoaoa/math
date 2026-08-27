@@ -46,7 +46,7 @@ private theorem sweep_run_avoiding_indexed {α : Type*} (output : α → List α
     (head_ne : head ≠ target) (digit_ne : digit ≠ target) :
     HeadAvoidingTagReachesIn 2 output target (count + 1)
       (cell head wake ++ cells digit wake count ++ tail)
-      (tail ++ output head ++ (List.replicate count (output digit)).join) := by
+      (tail ++ output head ++ (List.replicate count (output digit)).flatten) := by
   have heads :
       ∀ pair ∈ (head, wake) :: List.replicate count (digit, wake),
         pair.1 ≠ target := by
@@ -65,7 +65,7 @@ theorem sweep_run_avoiding {α : Type*} (output : α → List α) (target head d
     (count : Nat) (tail : List α) (head_ne : head ≠ target) (digit_ne : digit ≠ target) :
     HeadAvoidingTagReaches 2 output target
       (cell head wake ++ cells digit wake count ++ tail)
-      (tail ++ output head ++ (List.replicate count (output digit)).join) := by
+      (tail ++ output head ++ (List.replicate count (output digit)).flatten) := by
   exact
     (sweep_run_avoiding_indexed output target head digit wake count tail
       head_ne digit_ne).toReflTransGen
@@ -76,15 +76,25 @@ theorem sweep_run_avoiding_strict {α : Type*} (output : α → List α)
     (head_ne : head ≠ target) (digit_ne : digit ≠ target) :
     Relation.TransGen (HeadAvoidingTagStep 2 output target)
       (cell head wake ++ cells digit wake count ++ tail)
-      (tail ++ output head ++ (List.replicate count (output digit)).join) := by
+      (tail ++ output head ++ (List.replicate count (output digit)).flatten) := by
   exact
     (sweep_run_avoiding_indexed output target head digit wake count tail
       head_ne digit_ne).toTransGen (by omega)
 
 /-- Encoded tag execution whose rule-selecting heads avoid the unique halt symbol. -/
-def HaltHeadAvoidingReaches {state : Type*} (machine : Machine state) :
+abbrev HaltHeadAvoidingReaches {state : Type*} (machine : Machine state) :
     List (Symbol state) → List (Symbol state) → Prop :=
   HeadAvoidingTagReaches 2 (production machine) .halt
+
+private theorem flatten_replicate_digit_production {state : Type*}
+    (machine : Machine state) (q : state) (action : Action state) (count : Nat)
+    (at_q : machine q = some action) :
+    (List.replicate count (production machine (.digit q))).flatten =
+      cells (.doubledDigit q) (.pad q) (2 * count) := by
+  rw [show production machine (.digit q) =
+    cell (.doubledDigit q) (.pad q) ++ cell (.doubledDigit q) (.pad q) by
+      simp [production, at_q]]
+  exact join_replicate_double_cell _ _ _
 
 private theorem sweep_write_avoiding {state : Type*} (machine : Machine state) (q : state)
     (action : Action state) (behind ahead : Nat) (at_q : machine q = some action) :
@@ -96,9 +106,10 @@ private theorem sweep_write_avoiding {state : Type*} (machine : Machine state) (
       (.anchor q) (.digit q) (.pad q) behind
       (cell (.boundary q) (.pad q) ++ cells (.boundaryDigit q) (.pad q) ahead)
       (by simp) (by simp)
+  rw [flatten_replicate_digit_production machine q action behind at_q] at run
   cases write_eq : action.write <;>
     simpa [HaltHeadAvoidingReaches, frame, doubledBlock, production, at_q, write_eq, written,
-      List.append_assoc, join_replicate_double_cell, cells_succ] using run
+      List.append_assoc, cells_succ] using run
 
 private theorem sweep_write_avoiding_strict {state : Type*} (machine : Machine state)
     (q : state) (action : Action state) (behind ahead : Nat)
@@ -113,9 +124,10 @@ private theorem sweep_write_avoiding_strict {state : Type*} (machine : Machine s
       (.anchor q) (.digit q) (.pad q) behind
       (cell (.boundary q) (.pad q) ++ cells (.boundaryDigit q) (.pad q) ahead)
       (by simp) (by simp)
+  rw [flatten_replicate_digit_production machine q action behind at_q] at run
   cases write_eq : action.write <;>
     simpa [frame, doubledBlock, production, at_q, write_eq, written,
-      List.append_assoc, join_replicate_double_cell, cells_succ] using run
+      List.append_assoc, cells_succ] using run
 
 private theorem sweep_to_halving_avoiding {state : Type*} (machine : Machine state) (q : state)
     (action : Action state) (writtenCount ahead : Nat) (at_q : machine q = some action) :
@@ -171,8 +183,8 @@ private theorem sweep_even_front_avoiding {state : Type*} (machine : Machine sta
         [(.halvingAnchor q, .parityAnchor true q)]
         (.parityAnchor false q ::
           cells (.parityDigit true q) (.parityDigit false q) writtenCount) (by simp)
-      simpa [HaltHeadAvoidingReaches, halvingBlock, branchBlock, pairWord, pairOutput,
-        production, List.append_assoc] using run
+      simpa [HaltHeadAvoidingReaches, halvingBlock, parityBlock, branchBlock, pairWord, pairOutput,
+        cells, production, List.append_assoc] using run
   | succ half =>
       let pairs : List (Symbol state × Symbol state) :=
         ((.halvingAnchor q, .halvingDigit q) ::
@@ -187,7 +199,7 @@ private theorem sweep_even_front_avoiding {state : Type*} (machine : Machine sta
           cells (.parityDigit true q) (.parityDigit false q) writtenCount) heads
       dsimp only [pairs] at run
       rw [pairWord_evenRun, pairOutput_evenRun] at run
-      simpa [HaltHeadAvoidingReaches, halvingBlock, branchBlock, production,
+      simpa [HaltHeadAvoidingReaches, halvingBlock, parityBlock, branchBlock, cells, production,
         List.append_assoc] using run
 
 private theorem sweep_odd_written_avoiding {state : Type*} (machine : Machine state) (q : state)
@@ -313,10 +325,10 @@ private theorem sweep_pending_false_avoiding {state : Type*} (machine : Machine 
       (anchorBlock q firstCount) (by simp) (by simp)
   apply Relation.ReflTransGen.trans
     (b := pendingSecond false q secondCount ++ anchorBlock q firstCount)
-  · simpa [HaltHeadAvoidingReaches, pendingFrame_eq, pendingFirst, anchorBlock, production,
+  · simpa [HaltHeadAvoidingReaches, pendingFrame_eq, pendingFirst, anchorBlock, cells, production,
       List.append_assoc] using firstSweep
-  · simpa [HaltHeadAvoidingReaches, pendingSecond, boundaryBlock, frame_eq_blocks, production,
-      List.append_assoc] using secondSweep
+  · simpa [HaltHeadAvoidingReaches, pendingSecond, boundaryBlock, frame_eq_blocks,
+      cells, production, List.append_assoc] using secondSweep
 
 private theorem sweep_pending_true_avoiding {state : Type*} (machine : Machine state)
     (q : state) (firstCount secondCount : Nat) :
@@ -336,14 +348,14 @@ private theorem sweep_pending_true_avoiding {state : Type*} (machine : Machine s
       (anchorBlock q secondCount) (by simp) (by simp)
   apply Relation.ReflTransGen.trans
     (b := pendingSecond true q secondCount ++ delayedBlock q firstCount)
-  · simpa [HaltHeadAvoidingReaches, pendingFrame_eq, pendingFirst, delayedBlock, production,
+  · simpa [HaltHeadAvoidingReaches, pendingFrame_eq, pendingFirst, delayedBlock, cells, production,
       List.append_assoc] using firstSweep
   · apply Relation.ReflTransGen.trans
       (b := delayedBlock q firstCount ++ anchorBlock q secondCount)
-    · simpa [HaltHeadAvoidingReaches, pendingSecond, anchorBlock, production,
+    · simpa [HaltHeadAvoidingReaches, pendingSecond, anchorBlock, cells, production,
         List.append_assoc] using secondSweep
-    · simpa [HaltHeadAvoidingReaches, delayedBlock, boundaryBlock, frame_eq_blocks, production,
-        List.append_assoc] using delayedSweep
+    · simpa [HaltHeadAvoidingReaches, delayedBlock, boundaryBlock, frame_eq_blocks,
+        cells, production, List.append_assoc] using delayedSweep
 
 private theorem sweep_pending_avoiding {state : Type*} (machine : Machine state) (swap : Bool)
     (q : state) (firstCount secondCount : Nat) :
@@ -605,8 +617,8 @@ theorem tag_reaches_head_halt_implies_halts {state : Type*} (machine : Machine s
     (reach : EncodedReaches machine (encode machine initial) (.halt :: tail)) :
     Halts machine initial := by
   obtain ⟨steps, indexed⟩ := exists_tagReachesIn_of_reaches reach
-  induction steps using Nat.strong_induction_on generalizing initial tail with
-  | h steps ih =>
+  induction steps using Nat.strongRecOn generalizing initial tail with
+  | ind steps ih =>
       cases at_state : machine initial.state with
       | none =>
           exact ⟨initial, Relation.ReflTransGen.refl, at_state⟩
@@ -662,8 +674,8 @@ theorem tagHaltsIn_encode_implies_halts {state : Type*} (machine : Machine state
     (steps : Nat) (initial : Config state)
     (halts : TagHaltsIn 2 (production machine) steps (encode machine initial)) :
     Halts machine initial := by
-  induction steps using Nat.strong_induction_on generalizing initial with
-  | h steps ih =>
+  induction steps using Nat.strongRecOn generalizing initial with
+  | ind steps ih =>
       cases at_state : machine initial.state with
       | none =>
           exact ⟨initial, Relation.ReflTransGen.refl, at_state⟩

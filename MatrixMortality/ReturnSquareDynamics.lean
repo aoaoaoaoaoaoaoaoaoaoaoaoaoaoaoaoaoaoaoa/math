@@ -13,8 +13,9 @@ namespace MatrixMortality.ReturnSquare
 private theorem self_le_pow_succ (q : ℤ) (hq : 2 ≤ q) (n : Nat) :
     q ≤ q ^ (n + 1) := by
   rw [pow_succ]
-  have one_le_power : 1 ≤ q ^ n :=
-    one_le_pow_of_one_le (by omega) n
+  have one_le_power : 1 ≤ q ^ n := by
+    have : 0 < q ^ n := pow_pos (by omega) n
+    omega
   have q_nonneg : 0 ≤ q := by omega
   nlinarith [mul_le_mul_of_nonneg_right one_le_power q_nonneg]
 
@@ -101,7 +102,7 @@ theorem positiveBridge_ne_zero_of_beyond_negative_wall
     have prefix_ne : (-d + 1) * (q : ℚ) ^ (wait + 1) ≠ 0 :=
       mul_ne_zero (by nlinarith) (by positivity)
     have scalar_zero :
-        Matrix.dotProduct ![-d * (q : ℚ) ^ (wait + 1), 1]
+        dotProduct ![-d * (q : ℚ) ^ (wait + 1), 1]
             (Matrix.mulVec
               (wordProduct (positiveTransfer (q : ℚ) (-d)) waits) ![1, 1]) = 0 :=
       (mul_eq_zero.mp bridge_zero).resolve_left prefix_ne
@@ -110,8 +111,9 @@ theorem positiveBridge_ne_zero_of_beyond_negative_wall
         (wordProduct (positiveTransfer (q : ℚ) (-d)) waits) ![1, 1]
     have target_line :
         residual 1 = d * (q : ℚ) ^ (wait + 1) * residual 0 := by
-      have identity := scalar_zero
-      simp [residual, Matrix.dotProduct, Fin.sum_univ_succ] at identity
+      have identity :
+          dotProduct ![-d * (q : ℚ) ^ (wait + 1), 1] residual = 0 := scalar_zero
+      simp (config := { zeta := false }) [dotProduct, Fin.sum_univ_succ] at identity
       linarith
     have residual_ne_zero : residual ≠ 0 := by
       apply unit_mulVec_ne_zero

@@ -128,9 +128,12 @@ theorem nearyGPCP4_solvable_iff_tagHaltsFrom (beta : Nat) (body : List TagLetter
     (nearyGPCP4 beta body).Solvable ↔
       TagHaltsFrom beta (tagOutput body) (body.drop (beta - 1) ++ [.b]) := by
   rw [← nearyGPCP_solvable_iff_tagHaltsFrom beta body beta_large body_long body_divisible]
-  simpa [BinaryGPCP4.Solvable, nearyGPCP4, IsGPCPSolution] using
-    gpcpSolvable_relabel_equiv (nearyUpper beta) (nearyLower beta body)
-      [] (nearyMarker beta) [] [] nearyTileEquivFin.symm
+  have inverse_eq :
+      (nearyTileEquivFin.symm : Fin 4 → NearyTile) = nearyTileOfFin := rfl
+  simp only [BinaryGPCP4.Solvable, nearyGPCP4, IsGPCPSolution]
+  rw [← inverse_eq]
+  exact gpcpSolvable_relabel_equiv (nearyUpper beta) (nearyLower beta body)
+    [] (nearyMarker beta) [] [] nearyTileEquivFin.symm
 
 /-- The five `3 × 3` integer matrices emitted by one restricted tag source. -/
 def nearyMortality35 (beta : Nat) (body : List TagLetter) : Mortality35 :=

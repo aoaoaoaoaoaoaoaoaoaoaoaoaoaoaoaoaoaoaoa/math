@@ -1,4 +1,5 @@
 import Mathlib.Data.Fintype.Card
+import Mathlib.Data.Fintype.EquivFin
 
 /-!
 # Closed-token substitution
@@ -38,7 +39,7 @@ theorem substitutionTreeSize_eq {Γ : Type*} (τ : Γ → List Γ)
   rw [substitutionTreeSize, WellFounded.fix_eq]
   exact congrArg (fun size : Nat => 1 + size) (congrArg List.sum (by
     simpa only [substitutionTreeSize] using
-      List.attach_map_val (τ token) (substitutionTreeSize τ wf)))
+      (List.attach_map_val (l := τ token) (f := substitutionTreeSize τ wf))))
 
 /-- Total number of nodes in the substitution forest represented by a queue. -/
 noncomputable def substitutionForestSize {Γ : Type*} (τ : Γ → List Γ)
@@ -81,7 +82,7 @@ theorem substitutionChild_wellFounded_of_noCycle {Γ : Type*} [Finite Γ]
     (τ : Γ → List Γ) (no_cycle : NoSubstitutionCycle τ) :
     WellFounded (SubstitutionChild τ) := by
   let closure := Relation.TransGen (SubstitutionChild τ)
-  letI : IsIrrefl Γ closure := ⟨no_cycle⟩
+  have : Std.Irrefl closure := ⟨no_cycle⟩
   have closure_wf : WellFounded closure :=
     Finite.wellFounded_of_trans_of_irrefl closure
   exact Subrelation.wf (fun edge => Relation.TransGen.single edge) closure_wf
@@ -190,16 +191,18 @@ theorem liftDescendantWord_map_val {Γ : Type*} (τ : Γ → List Γ)
     (liftDescendantWord τ word).map Subtype.val = word := by
   unfold liftDescendantWord
   rw [List.map_map]
-  simpa only [Function.comp_apply, id_eq, List.map_id] using
-    List.attach_map_val word id
+  change word.attach.map (fun root => root.1) = word
+  simpa only [id_eq, List.map_id] using
+    (List.attach_map_val (l := word) (f := id))
 
 theorem descendantSubstitution_map_val {Γ : Type*} (τ : Γ → List Γ)
     (word : List Γ) (parent : DescendantToken τ word) :
     (descendantSubstitution τ word parent).map Subtype.val = τ parent.1 := by
   unfold descendantSubstitution
   rw [List.map_map]
-  simpa only [Function.comp_apply, id_eq, List.map_id] using
-    List.attach_map_val (τ parent.1) id
+  change (τ parent.1).attach.map (fun child => child.1) = τ parent.1
+  simpa only [id_eq, List.map_id] using
+    (List.attach_map_val (l := τ parent.1) (f := id))
 
 theorem closedSubstitutionStep_descendant_map_val {Γ : Type*}
     (τ : Γ → List Γ) (initial : List Γ)
@@ -209,7 +212,8 @@ theorem closedSubstitutionStep_descendant_map_val {Γ : Type*}
   cases word with
   | nil => rfl
   | cons head tail =>
-      simp [closedSubstitutionStep, List.map_append, descendantSubstitution_map_val]
+      simp only [closedSubstitutionStep, List.map_append, List.map_cons]
+      rw [descendantSubstitution_map_val]
 
 theorem iterate_closedSubstitutionStep_descendant_map_val {Γ : Type*}
     (τ : Γ → List Γ) (initial : List Γ) (steps : Nat)
@@ -232,11 +236,12 @@ theorem closedSubstitutionHalts_descendant_iff {Γ : Type*}
   · rintro ⟨steps, empty⟩
     refine ⟨steps, ?_⟩
     have mapped := congrArg (List.map Subtype.val) empty
-    simpa [iterate_closedSubstitutionStep_descendant_map_val,
-      liftDescendantWord_map_val] using mapped
+    rw [iterate_closedSubstitutionStep_descendant_map_val,
+      liftDescendantWord_map_val] at mapped
+    simpa using mapped
   · rintro ⟨steps, empty⟩
     refine ⟨steps, ?_⟩
-    apply List.map_eq_nil.mp
+    apply List.map_eq_nil_iff.mp
     rw [iterate_closedSubstitutionStep_descendant_map_val,
       liftDescendantWord_map_val, empty]
 
@@ -254,10 +259,9 @@ theorem descendant_cycle_projects {Γ : Type*} (τ : Γ → List Γ)
     Relation.TransGen (SubstitutionChild τ) token.1 token.1 := by
   refine cycle.lift Subtype.val ?_
   intro child parent edge
-  have mapped :
-      child.1 ∈ (descendantSubstitution τ initial parent).map Subtype.val :=
-    List.mem_map_of_mem Subtype.val edge
-  simpa [descendantSubstitution_map_val] using mapped
+  change child.1 ∈ τ parent.1
+  rw [← descendantSubstitution_map_val τ initial parent]
+  exact List.mem_map_of_mem edge
 
 theorem descendantSubstitution_noCycle {Γ : Type*} (τ : Γ → List Γ)
     (initial : List Γ) (no_cycle : NoDescendantSubstitutionCycle τ initial) :

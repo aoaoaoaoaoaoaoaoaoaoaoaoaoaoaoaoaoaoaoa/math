@@ -155,7 +155,7 @@ theorem appendantEmission_eq_objects_junk {period : Nat} (system : CyclicTag per
     (input : List Bool) (haltPhase instruction : Fin period) (period_pos : 0 < period) :
     appendantEmission system input haltPhase instruction period_pos =
       ((system.appendant instruction).map
-          (bitObject system input haltPhase period_pos)).join ++
+          (bitObject system input haltPhase period_pos)).flatten ++
         encodeJunk system input haltPhase period_pos
           (List.replicate
             (trackWidth system input - 11 * (system.appendant instruction).length +
@@ -181,7 +181,7 @@ theorem read_epsilonRun_indexed {period : Nat} (system : CyclicTag period) (inpu
   induction count generalizing instruction rest with
   | zero =>
       refine ⟨[], 0, Iff.rfl, Or.inl rfl, ?_⟩
-      simp only [repeatWord, List.replicate_zero, List.join_nil, List.nil_append,
+      simp only [repeatWord, List.replicate_zero, List.flatten_nil, List.nil_append,
         CyclicTag.shift_zero, encodeJunk_nil, List.append_nil]
       exact .refl _
   | succ count ih =>
@@ -243,7 +243,7 @@ theorem read_epsilonRun_indexed {period : Nat} (system : CyclicTag period) (inpu
             (objectEntryPhase nextInstruction).val) := by
         rw [start_split]
         rw [← intermediate]
-        simpa [List.append_assoc] using first
+        simpa [epsilon, nextInstruction, emission, List.append_assoc] using first
       have extended_long : deletionWidth period ≤ (rest ++ emission).length :=
         rest_long.trans (by simp)
       obtain ⟨laterCode, laterSteps, _, _, later⟩ :=
@@ -404,7 +404,7 @@ theorem encodeData_junk {period : Nat} (system : CyclicTag period) (input : List
 theorem encodeData_bits {period : Nat} (system : CyclicTag period) (input : List Bool)
     (haltPhase : Fin period) (period_pos : 0 < period) (bits : List Bool) :
     encodeData system input haltPhase period_pos (bits.map .bit) =
-      (bits.map (bitObject system input haltPhase period_pos)).join := by
+      (bits.map (bitObject system input haltPhase period_pos)).flatten := by
   induction bits with
   | nil => rfl
   | cons bit bits ih => simp [ih, dataTokenWord]
@@ -441,13 +441,18 @@ theorem spell_inputTrack {period : Nat} (system : CyclicTag period) (input : Lis
       (List.replicate (deletionWidth period - 2) .b ++ encodePrimes input ++
         List.replicate (inputGarbageCount system input) .c ++
           repeatWord period epsilonPrime) = _
-  simp only [spell_append, Function.comp_apply]
+  simp only [spell_append]
   rw [show spell (compiledOutput system input haltPhase period_pos)
       (List.replicate (deletionWidth period - 2) TagLetter.b) =
         List.replicate (deletionWidth period - 2) .b by
       induction deletionWidth period - 2 with
       | zero => rfl
-      | succ count ih => simp [spell, compiledOutput, ih]]
+      | succ count ih =>
+          rw [List.replicate_succ]
+          change [.b] ++ spell (compiledOutput system input haltPhase period_pos)
+            (List.replicate count .b) = .b :: List.replicate count .b
+          rw [ih]
+          rfl]
   rw [← expandPrime, expandPrime_encodePrimes]
   rw [← expandPrime, expandPrime_replicate_c]
   rw [← expandPrime, expandPrime_repeatWord]
@@ -457,8 +462,7 @@ theorem spell_inputTrack {period : Nat} (system : CyclicTag period) (input : Lis
   rw [encodeData_append, encodeData_bits, encodeData_junk]
   unfold initialJunkCode
   rw [encodeJunk_append, encodeJunk_replicate_raw]
-  simp [initialTokens, initialJunkCode, junkAtomWord, inputGarbageCount,
-    epsilonObject, List.append_assoc]
+  simp [junkAtomWord, inputGarbageCount, epsilonObject, List.append_assoc]
 
 /-- Cyclic data obtained by deleting garbage from a semantic token stream. -/
 def dataBits : List DataToken → List Bool
@@ -509,7 +513,12 @@ theorem spell_inputTrack_drop_initial {period : Nat} (system : CyclicTag period)
     rw [take_eq]
     induction count with
     | zero => rfl
-    | succ count ih => simp [spell, output, compiledOutput, ih]
+    | succ count ih =>
+        rw [List.replicate_succ]
+        change [.b] ++ spell output (List.replicate count .b) =
+          .b :: List.replicate count .b
+        rw [ih]
+        rfl
   have split : spell output track =
       spell output (track.take count) ++ spell output (track.drop count) := by
     rw [← spell_append, List.take_append_drop]
@@ -522,7 +531,7 @@ theorem spell_inputTrack_drop_initial {period : Nat} (system : CyclicTag period)
     simp only [count]
     omega
   rw [count_split]
-  simp [List.drop_append_eq_append_drop]
+  simp [List.drop_append]
 
 /-- Any stream containing a garbage token represents at least one complete deletion block. -/
 theorem encodeData_long_of_junk_mem {period : Nat} (system : CyclicTag period)
@@ -563,7 +572,9 @@ theorem appendantJunkCode_nonempty {period : Nat} (system : CyclicTag period)
         (if instruction.val = 0 then 1 else 0) := by
     unfold safetyBound at safety_bounded
     omega
-  simp [appendantJunkCode, Nat.ne_of_gt count_pos]
+  unfold appendantJunkCode
+  intro empty
+  exact Nat.ne_of_gt count_pos ((List.replicate_eq_nil_iff JunkAtom.raw).mp empty)
 
 theorem silentEmission_eq_encodeData {period : Nat} (system : CyclicTag period)
     (input : List Bool) (haltPhase instruction : Fin period) (period_pos : 0 < period) :
@@ -794,7 +805,7 @@ theorem read_dataPulse_transGen {period : Nat} (system : CyclicTag period)
             ordinaryBitEmission system input instruction value)).drop
               (objectEntryPhase nextInstruction).val := by
         simp [encodeData_append, encodeData_junk, bitEmission, leadingEmission,
-          List.append_assoc]
+          tailWord, List.append_assoc]
   rw [finalShape] at bitRead
   exact ⟨emittedLeading, Relation.TransGen.trans_right leadingRead' bitRead⟩
 

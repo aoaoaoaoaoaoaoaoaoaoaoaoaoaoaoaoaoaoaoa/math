@@ -19,7 +19,7 @@ private theorem lowRow10Cell0RootTree_certified :
     certifySubdivision 12 64 32 lowRow10Cell0RootRectangle
       CertificateObjective.endpointExpression lowRow10Cell0RootTree =
         some () := by
-  rfl
+  close_endpoint_certificate
 
 /-- One static reflected endpoint-certificate chunk. -/
 theorem lowRow10Cell0Root_nonneg {a q : ℝ}
@@ -59,7 +59,7 @@ private theorem lowRow10Cell1RootTree_certified :
     certifySubdivision 12 64 32 lowRow10Cell1RootRectangle
       CertificateObjective.endpointExpression lowRow10Cell1RootTree =
         some () := by
-  rfl
+  close_endpoint_certificate
 
 /-- One static reflected endpoint-certificate chunk. -/
 theorem lowRow10Cell1Root_nonneg {a q : ℝ}
@@ -99,7 +99,7 @@ private theorem lowRow10Cell2RootTree_certified :
     certifySubdivision 12 64 32 lowRow10Cell2RootRectangle
       CertificateObjective.endpointExpression lowRow10Cell2RootTree =
         some () := by
-  rfl
+  close_endpoint_certificate
 
 /-- One static reflected endpoint-certificate chunk. -/
 theorem lowRow10Cell2Root_nonneg {a q : ℝ}
@@ -139,7 +139,7 @@ private theorem lowRow10Cell3RootTree_certified :
     certifySubdivision 12 64 32 lowRow10Cell3RootRectangle
       CertificateObjective.endpointExpression lowRow10Cell3RootTree =
         some () := by
-  rfl
+  close_endpoint_certificate
 
 /-- One static reflected endpoint-certificate chunk. -/
 theorem lowRow10Cell3Root_nonneg {a q : ℝ}
@@ -179,7 +179,7 @@ private theorem lowRow10Cell4RootTree_certified :
     certifySubdivision 12 64 32 lowRow10Cell4RootRectangle
       CertificateObjective.endpointExpression lowRow10Cell4RootTree =
         some () := by
-  rfl
+  close_endpoint_certificate
 
 /-- One static reflected endpoint-certificate chunk. -/
 theorem lowRow10Cell4Root_nonneg {a q : ℝ}
@@ -219,7 +219,7 @@ private theorem lowRow10Cell5RootTree_certified :
     certifySubdivision 12 64 32 lowRow10Cell5RootRectangle
       CertificateObjective.endpointExpression lowRow10Cell5RootTree =
         some () := by
-  rfl
+  close_endpoint_certificate
 
 /-- One static reflected endpoint-certificate chunk. -/
 theorem lowRow10Cell5Root_nonneg {a q : ℝ}

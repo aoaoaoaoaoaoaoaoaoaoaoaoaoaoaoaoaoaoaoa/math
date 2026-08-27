@@ -85,7 +85,7 @@ theorem integralStep_wait_content_le
           (integralStepNumerator prime centerNumerator driftNumerator scale
             wait numerator denominator).natAbs := by
         rw [← step.1, numerator_reduced]
-        simp only [Int.natAbs_mul, Int.natAbs_pow, Int.natAbs_ofNat]
+        simp only [Int.natAbs_mul, Int.natAbs_pow, Int.natAbs_natCast]
         ring
   have coefficient_wait_le :
       centerNumerator.natAbs + driftNumerator.natAbs +

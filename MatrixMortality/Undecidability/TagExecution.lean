@@ -12,8 +12,6 @@ canonical stroke history that consumes a prescribed number of complete blocks fr
 construction is the low-level bridge between Neary's fixed-stride tracks and tag-system dynamics.
 -/
 
-open Mathlib (Vector)
-
 namespace MatrixMortality.Undecidability
 
 /-- Every lawful tag step has a complete deletion block at its source. -/
@@ -97,8 +95,8 @@ theorem not_tagHaltsFrom_of_transGen_progress {α : Type*} {β : Nat}
     ¬TagHaltsFrom β output queue := by
   rw [tagHaltsFrom_iff_exists_tagHaltsIn]
   rintro ⟨steps, halts⟩
-  induction steps using Nat.strong_induction_on generalizing queue with
-  | h steps ih =>
+  induction steps using Nat.strongRecOn generalizing queue with
+  | ind steps ih =>
       obtain ⟨next, next_holds, reach⟩ := progress holds
       obtain ⟨laterSteps, later_lt, later_halts⟩ :=
         tagHaltsIn_after_transGen reach halts
@@ -144,33 +142,31 @@ theorem tagTransGen_history {α : Type*} {β : Nat} (output : α → List α)
 
 /-- The first `width` symbols of a sufficiently long word, with their exact length retained. -/
 def frontVector {α : Type*} (width : Nat) (word : List α) (fits : width ≤ word.length) :
-    Vector α width :=
-  ⟨word.take width, by simp [List.length_take, Nat.min_eq_left fits]⟩
+    List.Vector α width :=
+  ⟨word.take width, by simp [Nat.min_eq_left fits]⟩
 
 /-- Regard a nonempty fixed-length vector as one tag stroke. -/
 def vectorStroke {α : Type*} {width : Nat} (width_pos : 0 < width)
-    (block : Vector α width) : Stroke α width where
-  head := block.val.head (by
+    (block : List.Vector α width) : Stroke α width where
+  head := block.toList.head (by
     intro empty
     have lengths := congrArg List.length empty
-    rw [block.property] at lengths
+    rw [block.toList_length] at lengths
     simp at lengths
     omega)
-  wake := block.val.tail
+  wake := block.toList.tail
   width := by
-    rw [List.length_tail, block.property]
+    rw [List.length_tail, block.toList_length]
     omega
 
 @[simp]
 theorem vectorStroke_letters {α : Type*} {width : Nat} (width_pos : 0 < width)
-    (block : Vector α width) :
-    (vectorStroke width_pos block).letters = block.val := by
-  exact List.head_cons_tail _ (by
-    intro empty
-    have lengths := congrArg List.length empty
-    rw [block.property] at lengths
-    simp at lengths
-    omega)
+    (block : List.Vector α width) :
+    (vectorStroke width_pos block).letters = block.toList := by
+  obtain ⟨list, length_eq⟩ := block
+  cases list with
+  | nil => simp at length_eq; omega
+  | cons _ _ => rfl
 
 /-- Canonical strokes consuming `count` complete blocks from the front of `word`. -/
 def chunkHistory {α : Type*} (width : Nat) (width_pos : 0 < width) :
@@ -205,15 +201,16 @@ theorem consumed_chunkHistory {α : Type*} (width : Nat) (width_pos : 0 < width)
   induction count generalizing word with
   | zero => simp only [chunkHistory, consumed_nil, Nat.zero_mul, List.take_zero]
   | succ count ih =>
-      simp only [chunkHistory, consumed_cons, vectorStroke_letters, frontVector]
+      simp only [chunkHistory, consumed_cons]
+      rw [vectorStroke_letters]
+      simp only [frontVector, List.Vector.toList_mk]
       rw [ih]
       rw [show (count + 1) * width = width + count * width by
         simp [Nat.add_mul, Nat.add_comm]]
       rw [← List.take_append_drop width (word.take (width + count * width))]
       simp only [List.take_take, List.drop_take]
       congr 1
-      · rw [Nat.min_eq_left]
-        omega
+      · rw [Nat.min_eq_left (by omega)]
       · congr 1
         omega
 
@@ -278,7 +275,7 @@ def ConstantAtMultiples {α : Type*} (stride : Nat) (letter : α) (word : List �
 theorem ConstantAtMultiples.replicate {α : Type*} (stride count : Nat) (letter : α) :
     ConstantAtMultiples stride letter (List.replicate count letter) := by
   intro index index_lt _
-  exact List.getElem_replicate letter index_lt
+  exact List.getElem_replicate index_lt
 
 theorem ConstantAtMultiples.append {α : Type*} {stride : Nat} {letter : α}
     {left right : List α} (left_clean : ConstantAtMultiples stride letter left)
@@ -287,15 +284,15 @@ theorem ConstantAtMultiples.append {α : Type*} {stride : Nat} {letter : α}
     ConstantAtMultiples stride letter (left ++ right) := by
   intro index index_lt index_aligned
   by_cases in_left : index < left.length
-  · rw [List.getElem_append_left left right in_left]
+  · rw [List.getElem_append_left in_left]
     exact left_clean index in_left index_aligned
   · have left_le : left.length ≤ index := Nat.le_of_not_gt in_left
     have right_lt : index - left.length < right.length := by
       simp only [List.length_append] at index_lt
       omega
-    rw [List.getElem_append_right left right in_left]
+    rw [List.getElem_append_right (Nat.le_of_not_gt in_left)]
     exact right_clean (index - left.length) right_lt
-      (Nat.dvd_sub left_le index_aligned left_aligned)
+      (Nat.dvd_sub index_aligned left_aligned)
 
 theorem ConstantAtMultiples.drop {α : Type*} {stride : Nat} {letter : α}
     {word : List α} (clean : ConstantAtMultiples stride letter word)
@@ -333,7 +330,7 @@ theorem tagHaltsFrom_of_constantAtMultiples {α : Type*} (width : Nat)
         have next_clean : ConstantAtMultiples width letter next := by
           intro index index_lt index_aligned
           by_cases in_drop : index < (queue.drop width).length
-          · rw [List.getElem_append_left (queue.drop width) [letter] in_drop]
+          · rw [List.getElem_append_left in_drop]
             rw [List.getElem_drop]
             have source_lt : width + index < queue.length := by
               simp only [List.length_drop] at in_drop
@@ -350,7 +347,7 @@ theorem tagHaltsFrom_of_constantAtMultiples {α : Type*} (width : Nat)
         exact tagHaltsFrom_of_reaches reach (drain next next_clean)
     termination_by queue.length
     decreasing_by
-      simp only [next, List.length_append, List.length_drop, List.length_cons, List.length_nil]
+      simp only [List.length_append, List.length_drop, List.length_cons, List.length_nil]
       omega
   exact drain word clean
 
@@ -393,10 +390,7 @@ theorem tagReachesIn_chunks {α : Type*} (width : Nat) (width_pos : 0 < width)
   have emitted : produced output (chunkHistory width width_pos count word enough) =
       spell output (sampleHeads width width_pos count word enough) := by
     unfold produced spell
-    rw [show (chunkHistory width width_pos count word enough).map
-          (fun stroke => output stroke.head) =
-        ((chunkHistory width width_pos count word enough).map Stroke.head).map output by
-          simp [List.map_map]]
+    rw [← List.flatMap_map]
     rw [chunkHistory_heads]
   rw [emitted] at execution
   exact execution
@@ -445,7 +439,7 @@ theorem sampleHeads_weave {α : Type*} {period columns : Nat} (period_pos : 0 < 
       omega
     rw [Nat.mul_comm period columns]
     omega
-  rw [List.get_eq_getElem, List.getElem_append_left _ _ sample_in_drop]
+  rw [List.get_eq_getElem, List.getElem_append_left sample_in_drop]
   have source_index : phase.val + column.val * period <
       (weave period columns period_pos grid).length := by
     rw [weave_length, Nat.mul_comm period columns]
@@ -453,7 +447,7 @@ theorem sampleHeads_weave {α : Type*} {period columns : Nat} (period_pos : 0 < 
       Nat.mul_le_mul_right period (Nat.succ_le_of_lt column.isLt)
     rw [Nat.succ_mul] at next_column
     omega
-  rw [← List.getElem_drop' (weave period columns period_pos grid) source_index]
+  rw [← List.getElem_drop' source_index]
   have prescribed := weave_get_track period_pos grid phase column
   rw [List.get_eq_getElem] at prescribed
   simpa [trackIndex, Nat.add_comm, Nat.mul_comm] using prescribed
@@ -480,7 +474,7 @@ theorem gridTrackSlice_zero {α : Type*} {period columns : Nat}
   apply List.ext_getElem
   · simp [gridTrackSlice, gridTrack, Nat.min_eq_left fits]
   · intro index slice_bound track_bound
-    rw [List.getElem_take']
+    rw [List.getElem_take]
     simp [gridTrackSlice, gridTrack]
 
 theorem gridTrackSlice_suffix {α : Type*} {period columns : Nat}
@@ -525,13 +519,13 @@ theorem sampleHeads_weave_slice {α : Type*} {period columns : Nat} (period_pos 
     rw [Nat.lt_sub_iff_add_lt]
     convert source_index_lt using 1
     all_goals simp only [Nat.mul_add]; ac_rfl
-  rw [List.get_eq_getElem, List.getElem_append_left _ _ sample_in_drop]
+  rw [List.get_eq_getElem, List.getElem_append_left sample_in_drop]
   have source_index : phase.val + period * start + index.val * period <
       (weave period columns period_pos grid).length := by
     rw [weave_length]
     convert source_index_lt using 1
     all_goals simp only [Nat.mul_add]; ac_rfl
-  rw [← List.getElem_drop' (weave period columns period_pos grid) source_index]
+  rw [← List.getElem_drop' source_index]
   have prescribed := weave_get_track period_pos grid phase column
   rw [List.get_eq_getElem] at prescribed
   simpa [trackIndex, column, Nat.add_comm, Nat.add_left_comm, Nat.add_assoc,
@@ -550,7 +544,7 @@ theorem tagReaches_rotate_terminal {α : Type*} (width : Nat) (width_pos : 0 < w
       (spell output (track.drop (width - 1))) := by
   let front := track.dropLast
   let middle := front.drop (width - 1)
-  have front_length : front.length = track.length - 1 := List.length_dropLast track
+  have front_length : front.length = track.length - 1 := List.length_dropLast
   have prefix_fits : width - 1 ≤ front.length := by
     rw [front_length]
     omega
@@ -576,7 +570,9 @@ theorem tagReaches_rotate_terminal {α : Type*} (width : Nat) (width_pos : 0 < w
           List.replicate (width - 1) letter := by
       induction width - 1 with
       | zero => rfl
-      | succ count ih => simp [List.replicate_succ, spell, letter_output, ih]
+      | succ count ih =>
+          change List.flatMap output (List.replicate count letter) = _ at ih
+          simp [List.replicate_succ, spell, letter_output, ih]
     rw [spell_replicate]
     have replicate_width :
         List.replicate width letter = letter :: List.replicate (width - 1) letter := by
@@ -584,7 +580,7 @@ theorem tagReaches_rotate_terminal {α : Type*} (width : Nat) (width_pos : 0 < w
         rw [show width = (width - 1) + 1 by omega]
         rw [List.replicate_succ]
     rw [replicate_width]
-    simp [List.append_assoc]
+    simp
   have source_long : width ≤ ([letter] ++ spell output front).length := by
     rw [source_shape]
     simp

@@ -70,7 +70,7 @@ private theorem pairedBinaryAlgebraObservabilityGap_ne_zero
     rw [pairedBinaryAlgebraObservabilityGap,
       nearySideLowerC_eq_nine_mul_add_seven]
     push_cast
-    simp [pow_add, pow_mul, encodedPrefix, widthScale]
+    simp [pow_add, encodedPrefix, widthScale]
     ring
   rw [gap_eq]
   exact nine_mul_integer_add_three_ne_zero _
@@ -93,8 +93,8 @@ private theorem pairedBinaryAlgebraReachableClosed_mulVec_eq_zero
   have row₃ := congrFun product_zero (3 : Fin 6)
   have row₄ := congrFun product_zero (4 : Fin 6)
   have row₅ := congrFun product_zero (5 : Fin 6)
-  simp [pairedBinaryAlgebraReachableClosed, Matrix.mulVec, Matrix.dotProduct,
-    Fin.sum_univ_succ, ρ, m, u, V, B, H, J] at row₀ row₁ row₂ row₃ row₄ row₅
+  simp [pairedBinaryAlgebraReachableClosed, Matrix.mulVec, dotProduct,
+    Fin.sum_univ_succ] at row₀ row₁ row₂ row₃ row₄ row₅
   have ρ_large_nat : 27 ≤ 3 ^ β := by
     change 3 ^ 3 ≤ 3 ^ β
     exact Nat.pow_le_pow_right (by norm_num) three_le
@@ -107,8 +107,8 @@ private theorem pairedBinaryAlgebraReachableClosed_mulVec_eq_zero
   have B_large : (9 : ℚ) ≤ B := by
     dsimp [B]
     rw [nearySideLowerCScale_eq_nine_mul]
-    nlinarith [one_le_pow_of_one_le (by norm_num : (1 : ℚ) ≤ 3)
-      (tagEncode β body).length.succ]
+    nlinarith [one_le_pow₀ (n := (tagEncode β body).length.succ)
+      (by norm_num : (1 : ℚ) ≤ 3)]
   have gap_ne :
       pairedBinaryAlgebraReachabilityGap β body ≠ 0 :=
     pairedBinaryAlgebraReachabilityGap_ne_zero β body (by omega)
@@ -187,8 +187,8 @@ private theorem pairedBinaryAlgebraObservableClosed_mulVec_eq_zero
   have row₃ := congrFun product_zero (3 : Fin 6)
   have row₄ := congrFun product_zero (4 : Fin 6)
   have row₅ := congrFun product_zero (5 : Fin 6)
-  simp [pairedBinaryAlgebraObservableClosed, Matrix.mulVec, Matrix.dotProduct,
-    Fin.sum_univ_succ, ρ, u, V, K] at row₀ row₁ row₂ row₃ row₄ row₅
+  simp [pairedBinaryAlgebraObservableClosed, Matrix.mulVec, dotProduct,
+    Fin.sum_univ_succ] at row₀ row₁ row₂ row₃ row₄ row₅
   have u_ne : u ≠ 0 := by
     dsimp [u]
     positivity

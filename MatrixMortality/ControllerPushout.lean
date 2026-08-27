@@ -35,8 +35,9 @@ theorem controllerRoleMatrix_det_rat {State Symbol : Type*}
     (controllerRoleMatrix ℚ upper lower role).det =
       (3 : ℚ) ^ (upper role.2).length * (3 : ℚ) ^ (lower role.1 role.2).length := by
   rw [Matrix.det_fin_three]
-  norm_num [controllerRoleMatrix, sidePcpMatrix, Matrix.vecHead, Matrix.vecTail]
-  ring
+  norm_num [controllerRoleMatrix, sidePcpMatrix, Matrix.cons_val_zero,
+    Matrix.cons_val_one, Matrix.cons_val_two]
+  ring_nf
 
 theorem controllerRoleMatrix_rank_rat {State Symbol : Type*}
     (upper : Symbol → List Bool) (lower : State → Symbol → List Bool)
@@ -82,12 +83,11 @@ theorem controllerMatrix_mulVec_controllerVector
   | inl target =>
       fin_cases target <;>
         simp [controllerMatrix, controllerVector, controllerRoleMatrix, sidePcpMatrix,
-          Matrix.vecHead, Matrix.vecTail, Matrix.mulVec, Matrix.dotProduct,
-          Fin.sum_univ_succ, Fintype.sum_sum_type]
+          Matrix.mulVec, dotProduct, Fin.sum_univ_succ, Fintype.sum_sum_type]
       all_goals ring
   | inr target =>
       simp only [controllerMatrix, controllerVector, controllerRoleMatrix, sidePcpMatrix,
-        Matrix.mulVec, Matrix.dotProduct, Fintype.sum_sum_type]
+        Matrix.mulVec, dotProduct, Fintype.sum_sum_type]
       rw [Finset.sum_eq_single state]
       · by_cases destination : δ state symbol = target
         · subst target
@@ -143,12 +143,12 @@ theorem controllerMatrix_map {R S State Symbol : Type*} [CommRing R] [CommRing S
   ext target source
   rcases target with target | target <;> rcases source with source | source
   · fin_cases target <;> fin_cases source <;>
-      simp [controllerMatrix, Matrix.vecHead, Matrix.vecTail]
+      simp [controllerMatrix]
     all_goals
       congr 1
       exact map_ofNat hom 3
   · fin_cases target <;>
-      simp [controllerMatrix, Matrix.vecHead, Matrix.vecTail]
+      simp [controllerMatrix]
   · simp [controllerMatrix]
   · by_cases routed : δ source symbol = target
     · simp [controllerMatrix, routed]

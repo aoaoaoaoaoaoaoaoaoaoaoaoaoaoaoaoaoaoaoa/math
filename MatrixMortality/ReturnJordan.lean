@@ -61,7 +61,7 @@ theorem even_rail (n : Nat) (even : Even n) :
     2 * (parityReturn n *ᵥ ![(n : ℤ), 1]) 0 =
       (n : ℤ) * (parityReturn n *ᵥ ![(n : ℤ), 1]) 1 := by
   rw [parityReturn_of_even n even]
-  simp [Matrix.mulVec, Matrix.dotProduct, Fin.sum_univ_succ]
+  simp [Matrix.mulVec, dotProduct, Fin.sum_univ_succ]
   ring
 
 /-- Cross-multiplied exactness of the odd `3n+1` rail. -/
@@ -69,7 +69,7 @@ theorem odd_rail (n : Nat) (odd : Odd n) :
     (parityReturn n *ᵥ ![(n : ℤ), 1]) 0 =
       (3 * (n : ℤ) + 1) * (parityReturn n *ᵥ ![(n : ℤ), 1]) 1 := by
   rw [parityReturn_of_odd n odd]
-  simp [Matrix.mulVec, Matrix.dotProduct, Fin.sum_univ_succ]
+  simp [Matrix.mulVec, dotProduct, Fin.sum_univ_succ]
   ring
 
 /-- Zero wait is a nonzero rank-one separator. -/
@@ -151,13 +151,12 @@ theorem physicalAmbient_pow (n : Nat) :
       ext i j
       fin_cases i <;> fin_cases j <;>
         norm_num [ambientPower, Matrix.one_apply, Matrix.vecHead, Matrix.vecTail]
-      all_goals decide
   | succ n induction =>
       rw [pow_succ, induction]
       ext i j
       fin_cases i <;> fin_cases j <;>
         simp [ambientPower, physicalAmbient, castMatrix, Matrix.mul_apply,
-          Matrix.vecHead, Matrix.vecTail, Fin.sum_univ_succ, pow_succ]
+          Fin.sum_univ_succ, pow_succ]
       all_goals ring
 
 theorem input_mul_output :
@@ -228,9 +227,9 @@ theorem rail_normal_form
   have oddOne := odd 1 (by decide)
   have oddThree := odd 3 (by decide)
   have oddFive := odd 5 (by decide)
-  simp [Matrix.mulVec, Matrix.dotProduct, Matrix.add_apply, Matrix.sub_apply,
+  simp [Matrix.mulVec, dotProduct, Matrix.add_apply,
     Matrix.smul_apply, Fin.sum_univ_succ] at evenTwo evenFour evenSix evenEight
-  simp [Matrix.mulVec, Matrix.dotProduct, Matrix.add_apply, Matrix.sub_apply,
+  simp [Matrix.mulVec, dotProduct, Matrix.sub_apply,
     Matrix.smul_apply, Fin.sum_univ_succ] at oddOne oddThree oddFive
   ring_nf at evenTwo evenFour evenSix evenEight oddOne oddThree oddFive
   constructor
@@ -270,7 +269,7 @@ theorem normalEven_zero_det (f h i j l : ℚ) :
       2 * (f - h) * (f - h + j) := by
   rw [Matrix.det_fin_two]
   simp [normalEven, normalConstant, normalAlternating, normalDrift,
-    Matrix.add_apply, Matrix.smul_apply]
+    Matrix.add_apply]
   ring
 
 theorem normalEven_det (f h i j l n : ℚ) :
@@ -278,7 +277,7 @@ theorem normalEven_det (f h i j l n : ℚ) :
       (f - h - i * n) * (2 * f - 2 * h + 2 * j - l * n) := by
   rw [Matrix.det_fin_two]
   simp [normalEven, normalConstant, normalAlternating, normalDrift,
-    Matrix.add_apply, Matrix.smul_apply]
+    Matrix.add_apply]
   ring
 
 theorem normalOdd_det (f h i j l n : ℚ) :
@@ -286,7 +285,7 @@ theorem normalOdd_det (f h i j l n : ℚ) :
       (6 * f + i * n) * (6 * f - j + 3 * l * n + l) / 3 := by
   rw [Matrix.det_fin_two]
   simp [normalOdd, normalConstant, normalAlternating, normalDrift,
-    Matrix.sub_apply, Matrix.smul_apply]
+    Matrix.sub_apply]
   ring
 
 /-- The rank constraints, separator, and the first positive return in each parity leave only
@@ -416,13 +415,13 @@ def eigenvalue : Bool → ZMod 7
 theorem mapped_generator_mulVec (label : Bool) :
     Matrix.mulVec ((generator label).map (Int.castRingHom (ZMod 7))) witness =
       eigenvalue label • witness := by
-  letI : Fact (Nat.Prime 7) := ⟨by norm_num⟩
+  let : Fact (Nat.Prime 7) := ⟨by norm_num⟩
   cases label <;> decide
 
 /-- The exact parity-Collatz Jordan branch is immortal, certified in `ZMod 7`. -/
 theorem not_isMortal_generator :
     ¬IsMortal generator := by
-  letI : Fact (Nat.Prime 7) := ⟨by norm_num⟩
+  let : Fact (Nat.Prime 7) := ⟨by norm_num⟩
   let quotient :=
     ((Int.castRingHom (ZMod 7)).mapMatrix (m := Fin 3)).toMonoidWithZeroHom
   apply not_isMortal_of_map_not_isMortal quotient generator

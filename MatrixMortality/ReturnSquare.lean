@@ -124,8 +124,9 @@ theorem cut_eq {R : Type*} [CommRing R] (c : R) :
          c, 1, 0;
          -1, 1, c + 1] := by
   ext i j
+  change (∑ index, input i index * output c index j) = _
   fin_cases i <;> fin_cases j <;>
-    norm_num [cut, input, output, Matrix.mul_apply, Fin.sum_univ_succ]
+    simp [input, output, Fin.sum_univ_succ]
 
 /-- `input` is split over every commutative ring. -/
 theorem inputLeftInverse_mul_input {R : Type*} [CommRing R] :
@@ -160,7 +161,7 @@ theorem observableCertificate_det {R : Type*} [CommRing R] (q c : R) :
     (observableCertificate q c).det =
       -q * (c + 1) * (q - 1) ^ 3 * (q + 1) := by
   rw [Matrix.det_fin_three]
-  norm_num [observableCertificate, Matrix.vecHead, Matrix.vecTail]
+  simp [observableCertificate]
   ring
 
 /-- Every ambient return has the two-state closed form `transfer c (q^n)`. -/
@@ -172,8 +173,8 @@ theorem returnMatrix_eq_transfer {R : Type*} [CommRing R]
   fin_cases i <;> fin_cases j
   all_goals
     simp [ReturnFamily.returnMatrix, ambient, input, output, transfer,
-      Matrix.diagonal_pow, Matrix.mul_apply, Matrix.vecMul, Matrix.dotProduct,
-      Matrix.diagonal_apply, Fin.sum_univ_succ, pow_mul]
+      Matrix.diagonal_pow, Matrix.mul_apply, Matrix.vecMul, dotProduct,
+      Matrix.diagonal_apply, Fin.sum_univ_succ]
   all_goals ring
 
 /-- Determinant of one return. -/
@@ -268,7 +269,7 @@ theorem trapBound_spec (d q t : ℚ) (q_at_least_two : 2 ≤ q)
   have d_pos : 0 < d := by linarith
   have threshold : q - 1 < (d - 1) * q ^ 2 := by
     have shifted_wall : (q - 1) / q ^ 2 < d - 1 := by linarith
-    exact (div_lt_iff q_sq_pos).mp shifted_wall
+    exact (div_lt_iff₀ q_sq_pos).mp shifted_wall
   have scale_q_pos : 0 < trapScale d q := by
     unfold trapScale
     nlinarith [sq_nonneg q]
@@ -292,7 +293,7 @@ theorem trapBound_spec (d q t : ℚ) (q_at_least_two : 2 ≤ q)
     lt_of_lt_of_le scale_q_gt_d scale_mono
   have zero_le_bound : t / trapScale d t ≤ trapBound d q := by
     rw [trapBound]
-    apply (div_le_div_iff scale_t_pos scale_q_pos).mpr
+    apply (div_le_div_iff₀ scale_t_pos scale_q_pos).mpr
     have factorization :
         q * trapScale d t - t * trapScale d q =
           (t - q) * ((d - 1) * q * t - 1) := by
@@ -351,7 +352,7 @@ theorem negativeStep_preimage_trap (d q t z : ℚ) (q_at_least_two : 2 ≤ q)
   · have numerator_pos : 0 < numerator := signs.1
     have denominator_pos : 0 < denominator := signs.2
     have z_upper : z < t / trapScale d t := by
-      rw [lt_div_iff scale_t_pos]
+      rw [lt_div_iff₀ scale_t_pos]
       have : trapScale d t * z < t := sub_pos.mp numerator_pos
       simpa [mul_comm] using this
     have z_bounded : z ≤ trapBound d q := z_upper.le.trans zero_le_bound
@@ -445,7 +446,7 @@ theorem positiveTrap_preimage
     · exact positive
     · exact (not_lt_of_ge t_pos.le t_neg).elim
   have x_lt_scale_ratio : x < (t / trapScale d t) * y := by
-    rw [div_mul_eq_mul_div, lt_div_iff scale_pos]
+    rw [div_mul_eq_mul_div, lt_div_iff₀ scale_pos]
     nlinarith
   have scale_ratio_le_bound :
       (t / trapScale d t) * y ≤ trapBound d q * y :=
@@ -480,7 +481,7 @@ theorem transfer_mulVec_chart {R : Type*} [CommRing R] (c t z : R) :
   ext i
   fin_cases i <;>
     simp [transfer, projectiveNumerator, projectiveDenominator, Matrix.mulVec,
-      Matrix.dotProduct, Fin.sum_univ_succ]
+      dotProduct, Fin.sum_univ_succ]
 
 /-- Matrix form of backward invariance of the signed trap. -/
 theorem transfer_neg_preimage_signedTrap_mulVec
@@ -495,11 +496,11 @@ theorem transfer_neg_preimage_signedTrap_mulVec
   have first_coordinate :
       Matrix.mulVec (transfer (-d) t) v 0 =
         t * v 1 - trapScale d t * v 0 := by
-    simp [transfer, trapScale, Matrix.mulVec, Matrix.dotProduct, Fin.sum_univ_succ]
+    simp [transfer, trapScale, Matrix.mulVec, dotProduct, Fin.sum_univ_succ]
     ring
   have second_coordinate :
       Matrix.mulVec (transfer (-d) t) v 1 = t * v 1 - d * v 0 := by
-    simp [transfer, Matrix.mulVec, Matrix.dotProduct, Fin.sum_univ_succ]
+    simp [transfer, Matrix.mulVec, dotProduct, Fin.sum_univ_succ]
     ring
   rw [first_coordinate, second_coordinate] at image_trapped
   exact transfer_neg_preimage_signedTrap d q t (v 0) (v 1) q_at_least_two
@@ -510,14 +511,14 @@ theorem covector_collapse {R : Type*} [CommRing R] (c t : R) :
     ![c, 1] ᵥ* transfer c t = ((c + 1) * t) • ![c * t, 1] := by
   ext i
   fin_cases i <;>
-    simp [transfer, Matrix.vecMul, Matrix.dotProduct, Fin.sum_univ_succ] <;>
+    simp [transfer, Matrix.vecMul, dotProduct, Fin.sum_univ_succ] <;>
     ring
 
 /-- One positive return has a completely factored acceptance coefficient. -/
 theorem oneReturn_coefficient {R : Type*} [CommRing R] (c t : R) :
     ![c, 1] ⬝ᵥ transfer c t *ᵥ ![1, 1] =
       (c + 1) * t * (c * t + 1) := by
-  simp [transfer, Matrix.mulVec, Matrix.dotProduct, Fin.sum_univ_succ]
+  simp [transfer, Matrix.mulVec, dotProduct, Fin.sum_univ_succ]
   ring
 
 /-- The irreducible quadratic core of a two-return acceptance coefficient. -/
@@ -544,7 +545,7 @@ def twoReturnFence {R : Type*} [CommRing R] (x y : R) : R :=
 theorem twoReturn_coefficient {R : Type*} [CommRing R] (c x y : R) :
     ![c, 1] ⬝ᵥ transfer c y *ᵥ (transfer c x *ᵥ ![1, 1]) =
       y * (c + 1) * twoReturnCore c x y := by
-  simp [transfer, twoReturnCore, Matrix.mulVec, Matrix.dotProduct, Fin.sum_univ_succ]
+  simp [transfer, twoReturnCore, Matrix.mulVec, dotProduct, Fin.sum_univ_succ]
   ring
 
 /-- Exact gap above the lower square in the discriminant cage. -/
@@ -628,8 +629,9 @@ private theorem two_le_pow_of_two_le {q : ℤ} (hq : 2 ≤ q) {n : Nat} (hn : 0 
     2 ≤ q ^ n := by
   obtain ⟨k, rfl⟩ := Nat.exists_eq_succ_of_ne_zero (Nat.ne_of_gt hn)
   rw [pow_succ]
-  have hq1 : (1 : ℤ) ≤ q := by omega
-  have hp : 1 ≤ q ^ k := one_le_pow_of_one_le hq1 k
+  have hp : 1 ≤ q ^ k := by
+    have : 0 < q ^ k := pow_pos (by omega) k
+    omega
   nlinarith
 
 /-- Every positive-wait return is invertible at an integral base at least two. -/
@@ -659,7 +661,7 @@ theorem transferFamily_isMortal_iff_positiveBridge (q : ℤ) (c : ℚ)
 /-- Empty positive bridge is the separator's self-incidence scalar. -/
 theorem positiveBridge_nil (q c : ℚ) :
     positiveBridge q c [] = c + 1 := by
-  simp [positiveBridge, bridgeScalar, Matrix.dotProduct, Fin.sum_univ_succ]
+  simp [positiveBridge, bridgeScalar, dotProduct, Fin.sum_univ_succ]
 
 /-- Closed form of a bridge containing one positive return. -/
 theorem positiveBridge_singleton (q c : ℚ) (n : Nat) :
@@ -674,13 +676,13 @@ theorem positiveBridge_singleton (q c : ℚ) (n : Nat) :
 theorem positiveBridge_cons (q c : ℚ) (wait : Nat) (waits : List Nat) :
     positiveBridge q c (wait :: waits) =
       (c + 1) * q ^ (wait + 1) *
-        Matrix.dotProduct ![c * q ^ (wait + 1), 1]
+        dotProduct ![c * q ^ (wait + 1), 1]
           (Matrix.mulVec (wordProduct (positiveTransfer q c) waits) ![1, 1]) := by
   simp only [positiveBridge, bridgeScalar, wordProduct_cons, positiveTransfer]
   rw [← Matrix.mulVec_mulVec]
   rw [Matrix.dotProduct_mulVec]
   rw [covector_collapse]
-  simp [Matrix.dotProduct_smul]
+  simp
   ring
 
 /-- Closed form of a bridge containing two positive returns. -/
@@ -749,10 +751,10 @@ theorem positiveTransfer_mulVec_pos (q : ℤ) (c : ℚ) (hq : 2 ≤ q) (hc : 0 �
     nlinarith [sq_nonneg ((q : ℚ) ^ (n + 1))]
   intro i
   fin_cases i
-  · simp [positiveTransfer, transfer, Matrix.mulVec, Matrix.dotProduct,
+  · simp [positiveTransfer, transfer, Matrix.mulVec, dotProduct,
       Fin.sum_univ_succ]
     exact add_pos (mul_pos hlead (hv 0)) (mul_pos (by positivity) (hv 1))
-  · simp [positiveTransfer, transfer, Matrix.mulVec, Matrix.dotProduct,
+  · simp [positiveTransfer, transfer, Matrix.mulVec, dotProduct,
       Fin.sum_univ_succ]
     exact add_pos_of_nonneg_of_pos
       (mul_nonneg hc (hv 0).le) (mul_pos (by positivity) (hv 1))
@@ -776,7 +778,7 @@ theorem positiveBridge_pos_of_nonneg (q : ℤ) (c : ℚ) (waits : List Nat)
     ![c, 1] ⬝ᵥ wordProduct (positiveTransfer (q : ℚ) c) waits *ᵥ ![1, 1] =
       c * (wordProduct (positiveTransfer (q : ℚ) c) waits *ᵥ ![1, 1]) 0 +
         (wordProduct (positiveTransfer (q : ℚ) c) waits *ᵥ ![1, 1]) 1 by
-          simp [Matrix.dotProduct, Fin.sum_univ_succ]]
+          simp [dotProduct, Fin.sum_univ_succ]]
   exact add_pos_of_nonneg_of_pos (mul_nonneg hc (vector_pos 0).le) (vector_pos 1)
 
 /-- Determinant of the diagonal ambient generator. -/
@@ -814,10 +816,11 @@ theorem cut_rank {K : Type*} [Field K] (c : K) (c_add_one_ne : c + 1 ≠ 0) :
         output c = inputLeftInverse * cut c := by
       calc
         output c = (1 : Square (Fin 2) K) * output c := by simp
-        _ = (inputLeftInverse : Matrix (Fin 2) (Fin 3) K) * input * output c := by
-          rw [inputLeftInverse_mul_input]
-        _ = inputLeftInverse * cut c := by
-          simp [cut, Matrix.mul_assoc]
+        _ = ((inputLeftInverse : Matrix (Fin 2) (Fin 3) K) * input) * output c :=
+          (congrArg (fun matrix : Square (Fin 2) K => matrix * output c)
+            inputLeftInverse_mul_input).symm
+        _ = inputLeftInverse * (input * output c) := Matrix.mul_assoc _ _ _
+        _ = inputLeftInverse * cut c := rfl
     have lower : (output c).rank ≤ (cut c).rank := by
       rw [output_factor]
       exact Matrix.rank_mul_le_right
@@ -850,8 +853,12 @@ theorem physical_isMortal_iff_positiveBridge (q : ℤ) (c : ℚ)
     (hq : 2 ≤ q) (hc : c + 1 ≠ 0) :
     IsMortal (ReturnFamily.pairGenerator (ambient (q : ℚ)) (cut c)) ↔
       ∃ waits, positiveBridge (q : ℚ) c waits = 0 := by
-  simpa [cut, positiveBridge, positiveTransfer, returnMatrix_eq_transfer] using
-    ReturnFamily.pairGenerator_isMortal_iff_positiveBridge
+  change
+    IsMortal (ReturnFamily.pairGenerator (ambient (q : ℚ)) (input * output c)) ↔
+      ∃ waits,
+        bridgeScalar ![1, 1] ![c, 1]
+          (wordProduct (fun wait => transfer c ((q : ℚ) ^ (wait + 1))) waits) = 0
+  have reduction := ReturnFamily.pairGenerator_isMortal_iff_positiveBridge
       (ambient (q : ℚ)) input (output c) inputLeftInverse (outputRightInverse c)
       ![1, 1] ![c, 1]
       (ambient_isUnit (q : ℚ) (by positivity))
@@ -865,6 +872,15 @@ theorem physical_isMortal_iff_positiveBridge (q : ℤ) (c : ℚ)
         exact positiveTransfer_isUnit q c hq hc wait)
       (by simp)
       (by simp)
+  constructor
+  · intro mortal
+    obtain ⟨waits, vanishes⟩ := reduction.mp mortal
+    refine ⟨waits, ?_⟩
+    simpa only [returnMatrix_eq_transfer] using vanishes
+  · rintro ⟨waits, vanishes⟩
+    apply reduction.mpr
+    refine ⟨waits, ?_⟩
+    simpa only [returnMatrix_eq_transfer] using vanishes
 
 /-- The exact first research frontier for ReturnSquare: mortality is either a classified
 one-return resonance or a bridge with at least three positive returns. Two returns are impossible.

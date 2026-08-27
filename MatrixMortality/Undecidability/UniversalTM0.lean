@@ -11,7 +11,6 @@ Mathlib's verified universal interpreter is translated through its `TM2 → TM1`
 finitely supported label type by an actual finite type.
 -/
 
-open Mathlib (Vector)
 open Turing
 open scoped Classical
 
@@ -19,7 +18,7 @@ namespace MatrixMortality
 namespace Undecidability
 namespace UniversalTM0
 
-instance : Fintype PartrecToTM2.K' where
+instance partrecToTM2KPrimeFintype : Fintype PartrecToTM2.K' where
   elems := {.main, .rev, .aux, .stack}
   complete index := by cases index <;> simp
 
@@ -44,15 +43,15 @@ noncomputable def binaryWidth : Nat :=
   (TM1to1.exists_enc_dec (Γ := StackAlphabet)).choose
 
 /-- Fixed-width binary encoder for the stack alphabet. -/
-noncomputable def binaryEncode : StackAlphabet → Vector Bool binaryWidth :=
+noncomputable def binaryEncode : StackAlphabet → List.Vector Bool binaryWidth :=
   (TM1to1.exists_enc_dec (Γ := StackAlphabet)).choose_spec.choose
 
 /-- Decoder inverse to `binaryEncode` on encoded stack symbols. -/
-noncomputable def binaryDecode : Vector Bool binaryWidth → StackAlphabet :=
+noncomputable def binaryDecode : List.Vector Bool binaryWidth → StackAlphabet :=
   (TM1to1.exists_enc_dec (Γ := StackAlphabet)).choose_spec.choose_spec.choose
 
 theorem binaryEncode_blank :
-    binaryEncode default = Vector.replicate binaryWidth false :=
+    binaryEncode default = List.Vector.replicate binaryWidth false :=
   (TM1to1.exists_enc_dec (Γ := StackAlphabet)).choose_spec.choose_spec.choose_spec.1
 
 theorem binaryDecode_encode (symbol : StackAlphabet) :
@@ -65,7 +64,7 @@ def stackInput (input : List ℕ) : List StackAlphabet :=
 
 /-- Fixed-width binary spelling of `stackInput`. -/
 noncomputable def binaryInput (input : List ℕ) : List Bool :=
-  (stackInput input).bind fun symbol => (binaryEncode symbol).toList
+  (stackInput input).flatMap fun symbol => (binaryEncode symbol).toList
 
 private def bitSymbol : Bool → PartrecToTM2.Γ'
   | false => .bit0
@@ -85,7 +84,7 @@ private theorem trNum_bit0 {number : Num} (nonzero : number ≠ 0) :
 
 private theorem trNat_eq_bits (number : Nat) :
     PartrecToTM2.trNat number = number.bits.map bitSymbol := by
-  refine Nat.binaryRec' (C := fun n =>
+  refine Nat.binaryRec' (motive := fun n =>
     PartrecToTM2.trNat n = n.bits.map bitSymbol) (by rfl) (fun bit n canonical ih => ?_)
     number
   unfold PartrecToTM2.trNat
@@ -94,10 +93,7 @@ private theorem trNat_eq_bits (number : Nat) :
   have ih' :
       PartrecToTM2.trNum (Num.ofNat' n) = List.map bitSymbol (Nat.bits n) := by
     simpa [PartrecToTM2.trNat] using ih
-  rw [Num.ofNat'_bit, Nat.bits,
-    Nat.binaryRec_eq' (z := []) (f := fun digit _ digits => digit :: digits) bit n
-      (Or.inr canonical),
-    List.map_cons]
+  rw [Num.ofNat'_bit, Nat.bits_append_bit n bit canonical, List.map_cons]
   cases bit
   · simp only [cond_false]
     rw [trNum_bit0]
@@ -119,8 +115,8 @@ private def markStackHead (symbol : StackAlphabet) : StackAlphabet :=
 
 /-- The variable input of the fixed universal binary machine is primitive recursive. -/
 theorem binaryInput_primrec : Primrec binaryInput := by
-  letI : Primcodable PartrecToTM2.Γ' := finitePrimcodable PartrecToTM2.Γ'
-  letI : Primcodable StackAlphabet := finitePrimcodable StackAlphabet
+  let : Primcodable PartrecToTM2.Γ' := finitePrimcodable PartrecToTM2.Γ'
+  let : Primcodable StackAlphabet := finitePrimcodable StackAlphabet
   have bitSymbol_primrec : Primrec bitSymbol := Primrec.dom_bool bitSymbol
   have trNat_primrec : Primrec PartrecToTM2.trNat :=
     (Primrec.list_map MatrixMortality.Primrec.nat_bits
@@ -133,14 +129,14 @@ theorem binaryInput_primrec : Primrec binaryInput := by
       Primrec.list_append.comp (trNat_primrec.comp Primrec.snd)
         (Primrec.const [PartrecToTM2.Γ'.cons])
   have trList_primrec : Primrec PartrecToTM2.trList :=
-    (Primrec.list_bind Primrec.id trListLetter).of_eq fun numbers => by
+    (Primrec.list_flatMap Primrec.id trListLetter).of_eq fun numbers => by
       induction numbers with
       | nil => rfl
       | cons number numbers ih =>
-          simp only [List.bind_cons, PartrecToTM2.trList, List.append_cancel_left_eq]
+          simp only [PartrecToTM2.trList]
           simpa using ih
   have stackSymbol_primrec : Primrec stackSymbol :=
-    Primrec.dom_fintype stackSymbol
+    Primrec.dom_finite stackSymbol
   have reversed_primrec :
       Primrec fun input => (PartrecToTM2.trList input).reverse :=
     Primrec.list_reverse.comp trList_primrec
@@ -149,7 +145,7 @@ theorem binaryInput_primrec : Primrec binaryInput := by
         (PartrecToTM2.trList input).reverse.map stackSymbol :=
     Primrec.list_map reversed_primrec (stackSymbol_primrec.comp₂ Primrec₂.right)
   have markStackHead_primrec : Primrec markStackHead :=
-    Primrec.dom_fintype markStackHead
+    Primrec.dom_finite markStackHead
   have stackInput_primrec : Primrec stackInput :=
     (Primrec.list_cons.comp
       (markStackHead_primrec.comp (Primrec.list_headI.comp stackSymbols_primrec))
@@ -157,9 +153,9 @@ theorem binaryInput_primrec : Primrec binaryInput := by
         rfl
   have binarySpell_primrec :
       Primrec fun symbol : StackAlphabet => (binaryEncode symbol).toList :=
-    Primrec.dom_fintype _
+    Primrec.dom_finite _
   exact
-    Primrec.list_bind stackInput_primrec
+    Primrec.list_flatMap stackInput_primrec
       (binarySpell_primrec.comp₂ Primrec₂.right)
 
 /-- The root label that specializes the fixed interpreter while leaving its input variable. -/
@@ -237,7 +233,7 @@ theorem binary_trCfg_init (input : List ℕ) :
 /-- The rooted four-stack interpreter remains inside its explicit finite support. -/
 theorem seeded_supported (interpreter : ToPartrec.Code) :
     TM2.Supports (seededMachine interpreter) (seededSupport interpreter) := by
-  letI : Inhabited PartrecToTM2.Λ' := ⟨rootLabel interpreter⟩
+  let : Inhabited PartrecToTM2.Λ' := ⟨rootLabel interpreter⟩
   exact SeededTM2.supports PartrecToTM2.tr (rootLabel interpreter)
     (PartrecToTM2.codeSupp interpreter PartrecToTM2.Cont'.halt)
     (universalTM2_finiteSupport interpreter)
@@ -260,7 +256,7 @@ theorem post_supported (interpreter : ToPartrec.Code) :
 /-- The finite binary `TM0` restriction halts exactly when the fixed four-stack interpreter
 halts on the same input. -/
 theorem eval_dom_iff_tm2 (interpreter : ToPartrec.Code) (input : List ℕ) :
-    (Turing.eval
+    (StateTransition.eval
         (TM0.step
           (FiniteTM0.machine (postMachine interpreter) (postSupport interpreter)))
         (TM0.init (binaryInput input) :
@@ -269,47 +265,47 @@ theorem eval_dom_iff_tm2 (interpreter : ToPartrec.Code) (input : List ℕ) :
   rw [FiniteTM0.eval_dom_iff (postMachine interpreter) (postSupport interpreter)
     (post_supported interpreter) (binaryInput input)]
   change
-    (Turing.eval (TM0.step (TM1to0.tr (binaryMachine interpreter)))
+    (StateTransition.eval (TM0.step (TM1to0.tr (binaryMachine interpreter)))
       (TM0.init (binaryInput input))).Dom ↔
         UniversalTM2Halts (PartrecToTM2.init interpreter input)
-  rw [Turing.tr_eval_dom
+  rw [StateTransition.tr_eval_dom
     (a₁ := TM1.init (binaryInput input))
     (a₂ := TM0.init (binaryInput input))
     (TM1to0.tr_respects (binaryMachine interpreter)) rfl]
   change
-    (Turing.eval
+    (StateTransition.eval
       (TM1.step (TM1to1.tr binaryEncode binaryDecode (stackMachine interpreter)))
       (TM1.init (binaryInput input))).Dom ↔
         UniversalTM2Halts (PartrecToTM2.init interpreter input)
-  rw [Turing.tr_eval_dom
+  rw [StateTransition.tr_eval_dom
     (TM1to1.tr_respects binaryDecode (stackMachine interpreter) binaryDecode_encode)
     (binary_trCfg_init input)]
   have translated :=
     TM2to1.tr_eval_dom (seededMachine interpreter) PartrecToTM2.K'.main
       (PartrecToTM2.trList input)
   change
-    (Turing.eval
+    (StateTransition.eval
       (TM1.step (TM2to1.tr (seededMachine interpreter)))
       (TM1.init
         (TM2to1.trInit PartrecToTM2.K'.main (PartrecToTM2.trList input)))).Dom ↔
-      (Turing.eval
+      (StateTransition.eval
         (TM2.step (seededMachine interpreter))
         (TM2.init PartrecToTM2.K'.main (PartrecToTM2.trList input))).Dom
     at translated
   change
-    (Turing.eval
+    (StateTransition.eval
       (TM1.step (TM2to1.tr (seededMachine interpreter)))
       (TM1.init
         (TM2to1.trInit PartrecToTM2.K'.main (PartrecToTM2.trList input)))).Dom ↔
         UniversalTM2Halts (PartrecToTM2.init interpreter input)
   rw [translated]
   change
-    (Turing.eval
+    (StateTransition.eval
       (TM2.step (seededMachine interpreter))
       (TM2.init PartrecToTM2.K'.main (PartrecToTM2.trList input))).Dom ↔
-        (Turing.eval (TM2.step PartrecToTM2.tr)
+        (StateTransition.eval (TM2.step PartrecToTM2.tr)
           (PartrecToTM2.init interpreter input)).Dom
-  rw [Turing.tr_eval_dom
+  rw [StateTransition.tr_eval_dom
     (SeededTM2.respects PartrecToTM2.tr (rootLabel interpreter))
     (seeded_init_eq interpreter input)]
   rfl

@@ -1,6 +1,8 @@
 import MatrixMortality.Undecidability.CyclicTag
 import MatrixMortality.Undecidability.TagExecution
-import Mathlib.Computability.TuringMachine
+import Mathlib.Computability.TuringMachine.StackTuringMachine
+import Mathlib.Data.Fintype.Sigma
+import Mathlib.Data.Fintype.Sum
 import Mathlib.Tactic.DeriveFintype
 
 /-!
@@ -89,7 +91,7 @@ theorem next_eq_some_applyAction {state : Type*} (machine : Machine state)
 /-- Reflexive-transitive execution of machine configurations. -/
 def ConfigReaches {state : Type*} (machine : Machine state) :
     Config state → Config state → Prop :=
-  Turing.Reaches (next machine)
+  StateTransition.Reaches (next machine)
 
 /-- The two counters in motion-relative order: behind the head, then in front of it. -/
 def orientedCounters {state : Type*} (machine : Machine state) (config : Config state) :
@@ -123,11 +125,11 @@ inductive Symbol (state : Type*)
   deriving DecidableEq, Fintype
 
 /-- A two-symbol cell whose second symbol is never read at a configuration boundary. -/
-def cell {α : Type*} (head wake : α) : List α := [head, wake]
+abbrev cell {α : Type*} (head wake : α) : List α := [head, wake]
 
 /-- A unary run of pair-aligned cells. -/
-def cells {α : Type*} (head wake : α) (count : Nat) : List α :=
-  (List.replicate count (cell head wake)).join
+abbrev cells {α : Type*} (head wake : α) (count : Nat) : List α :=
+  (List.replicate count (cell head wake)).flatten
 
 @[simp]
 theorem cells_zero {α : Type*} (head wake : α) :
@@ -161,15 +163,15 @@ theorem cons_cells_cons {α : Type*} (head wake : α) (count : Nat) (tail : List
 theorem cells_add {α : Type*} (head wake : α) (m n : Nat) :
     cells head wake (m + n) = cells head wake m ++ cells head wake n := by
   unfold cells
-  rw [List.replicate_add, List.join_append]
+  rw [List.replicate_add, List.flatten_append]
 
 theorem join_replicate_double_cell {α : Type*} (head wake : α) (count : Nat) :
-    (List.replicate count (cell head wake ++ cell head wake)).join =
+    (List.replicate count (cell head wake ++ cell head wake)).flatten =
       cells head wake (2 * count) := by
   induction count with
   | zero => rfl
   | succ count ih =>
-      simp only [List.replicate_succ, List.join_cons, ih]
+      simp only [List.replicate_succ, List.flatten_cons, ih]
       rw [show 2 * (count + 1) = 2 + 2 * count by omega, cells_add]
       rfl
 
@@ -334,17 +336,17 @@ def Step {state : Type*} (machine : Machine state) :
   TagStep 2 (production machine)
 
 /-- Tag-queue execution of encoded machine configurations. -/
-def EncodedReaches {state : Type*} (machine : Machine state) :
+abbrev EncodedReaches {state : Type*} (machine : Machine state) :
     List (Symbol state) → List (Symbol state) → Prop :=
   MatrixMortality.TagReaches 2 (production machine)
 
 /-- Flatten pair cells in their queue order. -/
 def pairWord {α : Type*} (pairs : List (α × α)) : List α :=
-  (pairs.map fun pair => [pair.1, pair.2]).join
+  (pairs.map fun pair => [pair.1, pair.2]).flatten
 
 /-- Outputs emitted by the read member of each pair. -/
 def pairOutput {α : Type*} (output : α → List α) (pairs : List (α × α)) : List α :=
-  (pairs.map fun pair => output pair.1).join
+  (pairs.map fun pair => output pair.1).flatten
 
 theorem pairWord_append {α : Type*} (left right : List (α × α)) :
     pairWord (left ++ right) = pairWord left ++ pairWord right := by
@@ -361,7 +363,7 @@ theorem pairWord_replicate_same {α : Type*} (digit : α) (count : Nat) :
   induction count with
   | zero => rfl
   | succ count ih =>
-      simp only [List.replicate_succ, pairWord, List.map_cons, List.join_cons]
+      simp only [List.replicate_succ, pairWord, List.map_cons, List.flatten_cons]
       change digit :: digit :: pairWord (List.replicate count (digit, digit)) =
         List.replicate (2 * (count + 1)) digit
       rw [ih]
@@ -382,7 +384,7 @@ theorem pairWord_oddRun {α : Type*} (anchor digit : α) (count : Nat) :
 theorem pairOutput_oddRun {α : Type*} (output : α → List α)
     (anchor digit : α) (count : Nat) :
     pairOutput output ((anchor, digit) :: List.replicate count (digit, digit)) =
-      output anchor ++ (List.replicate count (output digit)).join := by
+      output anchor ++ (List.replicate count (output digit)).flatten := by
   simp [pairOutput, List.map_replicate]
 
 theorem pairWord_evenRun {α : Type*} (anchor digit sentinel : α) (count : Nat) :
@@ -399,15 +401,16 @@ theorem pairWord_evenRun {α : Type*} (anchor digit sentinel : α) (count : Nat)
     _ = (anchor :: List.replicate (2 * count + 1) digit) ++ [digit, sentinel] := by
           rw [pairWord_oddRun]
     _ = anchor :: List.replicate (2 * (count + 1)) digit ++ [sentinel] := by
-          rw [show 2 * (count + 1) = (2 * count + 1) + 1 by omega,
-            List.replicate_succ' (2 * count + 1), List.replicate_succ' (2 * count)]
+          rw [show 2 * (count + 1) = 2 * count + 2 by omega,
+            List.replicate_add (2 * count) 2 digit,
+            List.replicate_add (2 * count) 1 digit]
           simp [List.append_assoc]
 
 theorem pairOutput_evenRun {α : Type*} (output : α → List α)
     (anchor digit sentinel : α) (count : Nat) :
     pairOutput output
         (((anchor, digit) :: List.replicate count (digit, digit)) ++ [(digit, sentinel)]) =
-      output anchor ++ (List.replicate (count + 1) (output digit)).join := by
+      output anchor ++ (List.replicate (count + 1) (output digit)).flatten := by
   rw [pairOutput_append, pairOutput_oddRun]
   rw [List.replicate_succ']
   simp [pairOutput, List.append_assoc]
@@ -418,14 +421,14 @@ theorem pairWord_staggeredRun {α : Type*} (anchorHead digitHead wake sentinel :
         (((anchorHead, wake) :: List.replicate count (digitHead, wake)) ++
           [(digitHead, sentinel)]) =
       [anchorHead, wake] ++ cells digitHead wake count ++ [digitHead, sentinel] := by
-  simp [pairWord_append, pairWord, cell, cells, List.map_replicate]
+  simp [pairWord, cell, cells, List.map_replicate]
 
 theorem pairOutput_staggeredRun {α : Type*} (output : α → List α)
     (anchorHead digitHead wake sentinel : α) (count : Nat) :
     pairOutput output
         (((anchorHead, wake) :: List.replicate count (digitHead, wake)) ++
           [(digitHead, sentinel)]) =
-      output anchorHead ++ (List.replicate (count + 1) (output digitHead)).join := by
+      output anchorHead ++ (List.replicate (count + 1) (output digitHead)).flatten := by
   rw [pairOutput_append]
   simp [pairOutput, List.map_replicate, List.replicate_succ', List.append_assoc]
 
@@ -435,15 +438,15 @@ def Halts {state : Type*} (machine : Machine state) (initial : Config state) : P
 
 /-- The relational halting predicate agrees with mathlib's evaluator. -/
 theorem halts_iff_eval_dom {state : Type*} (machine : Machine state) (initial : Config state) :
-    Halts machine initial ↔ (Turing.eval (next machine) initial).Dom := by
+    Halts machine initial ↔ (StateTransition.eval (next machine) initial).Dom := by
   constructor
   · rintro ⟨final, execution, at_final⟩
     rw [Part.dom_iff_mem]
-    refine ⟨final, Turing.mem_eval.mpr ⟨execution, ?_⟩⟩
+    refine ⟨final, StateTransition.mem_eval.mpr ⟨execution, ?_⟩⟩
     simp [next, at_final]
   · rw [Part.dom_iff_mem]
     rintro ⟨final, evaluated⟩
-    obtain ⟨execution, terminal⟩ := Turing.mem_eval.mp evaluated
+    obtain ⟨execution, terminal⟩ := StateTransition.mem_eval.mp evaluated
     refine ⟨final, execution, ?_⟩
     cases at_final : machine final.state with
     | none => rfl

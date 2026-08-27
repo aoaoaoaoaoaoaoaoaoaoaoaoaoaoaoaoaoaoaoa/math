@@ -19,7 +19,7 @@ theorem inputTrack_take_initialPadding {period : Nat} (system : CyclicTag period
   have split : deletionWidth period - 1 = deletionWidth period - 2 + 1 := by omega
   rw [split]
   cases bit <;>
-    simp [inputTrack, padBetween, encodePrimes, bitPrime, List.take_append_eq_append_take,
+    simp [inputTrack, padBetween, encodePrimes, bitPrime, List.take_append,
       List.replicate_add]
 
 /-- Physical compiler track reached inside an object whose leading padding has shift `offset + 1`.
@@ -61,7 +61,7 @@ theorem objectEntryPhase_mod {period : Nat} (instruction : Fin period) :
   by_cases instruction_zero : instruction.val = 0
   · rw [objectEntryPhase_zero instruction instruction_zero]
   · rw [objectEntryPhase_nonzero instruction instruction_zero]
-    simp [Nat.add_mod, Nat.mul_mod]
+    simp [Nat.add_mod]
 
 theorem objectEntryPhase_sub_padding {period : Nat} (instruction : Fin period)
     (instruction_nonzero : instruction.val ≠ 0) (offset : Fin 10)
@@ -130,8 +130,8 @@ theorem paddedObject_drop_nonzero {period : Nat} (system : CyclicTag period)
       (Nat.le_mul_of_pos_right _ (trackWidth_pos system input))
   unfold paddedObject
   rw [List.append_assoc]
-  rw [List.drop_append_eq_append_drop]
-  rw [List.drop_eq_nil_iff_le.mpr prefix_le', List.nil_append]
+  rw [List.drop_append]
+  rw [List.drop_eq_nil_iff.mpr prefix_le', List.nil_append]
   rw [List.length_replicate]
   rw [objectEntryPhase_sub_padding instruction instruction_nonzero offset offset_pos]
   rw [List.drop_append_of_le_length track_le]
@@ -187,8 +187,8 @@ theorem read_paddedObject_nonzero_transGen {period : Nat} (system : CyclicTag pe
       (List.replicate (9 - offset.val) TagLetter.b ++ rest).drop
           (objectTrackPhase instruction offset offset_pos).val =
         rest.drop (objectEntryPhase (CyclicTag.shift instruction 1)).val := by
-    rw [List.drop_append_eq_append_drop]
-    rw [List.drop_eq_nil_iff_le.mpr suffix_le', List.nil_append, List.length_replicate]
+    rw [List.drop_append]
+    rw [List.drop_eq_nil_iff.mpr suffix_le', List.nil_append, List.length_replicate]
     rw [objectTrackPhase_sub_suffix]
   rw [dropped] at traversal
   rw [paddedObject_drop_nonzero system input haltPhase instruction period_pos offset offset_pos
@@ -288,8 +288,8 @@ theorem read_paddedObject_zero_transGen {period : Nat} (system : CyclicTag perio
           (wholeAppendant system input haltPhase period_pos ++
             (List.replicate (9 - offset.val) .b ++ rest)) by
       simp [List.append_assoc]]
-    rw [List.drop_append_eq_append_drop]
-    rw [List.drop_eq_nil_iff_le.mpr prefix_le, List.nil_append, List.length_replicate]
+    rw [List.drop_append]
+    rw [List.drop_eq_nil_iff.mpr prefix_le, List.nil_append, List.length_replicate]
     rw [objectTrackPhase_zero instruction instruction_zero]
     rw [List.drop_append_of_le_length phase_le_word]
     simp [List.append_assoc]
@@ -313,8 +313,8 @@ theorem read_paddedObject_zero_transGen {period : Nat} (system : CyclicTag perio
       (objectTrackPhase instruction offset offset_pos).val := by
     simp only [List.length_replicate, objectTrackPhase]
     omega
-  rw [List.drop_append_eq_append_drop,
-    List.drop_eq_nil_iff_le.mpr suffix_le, List.nil_append, List.length_replicate,
+  rw [List.drop_append,
+    List.drop_eq_nil_iff.mpr suffix_le, List.nil_append, List.length_replicate,
     objectTrackPhase_sub_suffix] at traversal
   have composed := Relation.TransGen.head' first' traversal
   simpa [queue, List.append_assoc] using composed
@@ -388,7 +388,7 @@ theorem objectTrackPhase_mod {period : Nat} (instruction : Fin period) (offset :
     (offset_pos : 0 < offset.val) :
     (objectTrackPhase instruction offset offset_pos).val % 10 = 10 - offset.val := by
   have remainder_lt : 10 - offset.val < 10 := by omega
-  simp [objectTrackPhase, Nat.add_mod, Nat.mul_mod, Nat.mod_eq_of_lt remainder_lt]
+  simp [objectTrackPhase, Nat.add_mod, Nat.mod_eq_of_lt remainder_lt]
 
 @[simp]
 theorem phaseBlock_objectTrackPhase {period : Nat} (instruction : Fin period)
@@ -458,7 +458,7 @@ theorem deletionWidth_sub_one_mod {period : Nat} (period_pos : 0 < period) :
     simp only [deletionWidth]
     omega
   rw [normal]
-  simp [Nat.add_mod, Nat.mul_mod]
+  simp [Nat.add_mod]
 
 theorem epsilonPhase_ne_last {period : Nat} (period_pos : 0 < period)
     (instruction : Fin period) :
@@ -501,22 +501,27 @@ theorem tableTrack_objectEntryPhase {period : Nat} (system : CyclicTag period)
     (input : List Bool) (haltPhase instruction : Fin period) (period_pos : 0 < period) :
     tableTrack system input haltPhase period_pos (objectEntryPhase instruction) =
       ⟨List.replicate (trackWidth system input) .c, by simp⟩ := by
-  simp [tableTrack, objectEntryPhase_ne_last period_pos, objectEntryPhase_mod]
+  apply Subtype.ext
+  simp [tableTrack, tableTrackVal, objectEntryPhase_ne_last period_pos,
+    objectEntryPhase_mod]
 
 @[simp]
 theorem tableTrack_epsilonPhase {period : Nat} (system : CyclicTag period)
     (input : List Bool) (haltPhase instruction : Fin period) (period_pos : 0 < period) :
     tableTrack system input haltPhase period_pos (epsilonPhase instruction) =
       epsilonTrack system input period_pos (instruction.val = 0) := by
-  simp [tableTrack, epsilonPhase_ne_last period_pos, epsilonPhase_mod,
-    instructionAt_epsilonPhase]
+  apply Subtype.ext
+  simp [tableTrack, tableTrackVal, epsilonPhase_ne_last period_pos,
+    epsilonPhase_mod, instructionAt_epsilonPhase]
 
 @[simp]
 theorem tableTrack_zeroPhase {period : Nat} (system : CyclicTag period)
     (input : List Bool) (haltPhase instruction : Fin period) (period_pos : 0 < period) :
     tableTrack system input haltPhase period_pos (zeroPhase instruction) =
       epsilonTrack system input period_pos (instruction.val = 0) := by
-  simp [tableTrack, zeroPhase_ne_last period_pos, zeroPhase_mod, instructionAt_zeroPhase]
+  apply Subtype.ext
+  simp [tableTrack, tableTrackVal, zeroPhase_ne_last period_pos, zeroPhase_mod,
+    instructionAt_zeroPhase]
 
 @[simp]
 theorem tableTrack_onePhase {period : Nat} (system : CyclicTag period)
@@ -526,7 +531,10 @@ theorem tableTrack_onePhase {period : Nat} (system : CyclicTag period)
         haltingTrack system input
       else
         appendantTrack system input period_pos instruction (instruction.val = 0) := by
-  simp [tableTrack, onePhase_ne_last period_pos, onePhase_mod, instructionAt_onePhase]
+  apply Subtype.ext
+  by_cases halted : instruction = haltPhase <;>
+    simp [tableTrack, tableTrackVal, onePhase_ne_last period_pos, onePhase_mod,
+      instructionAt_onePhase, halted]
 
 /-- A raw compiler word is read by a nonempty shift-neutral execution and emits only raw compiler
 words. -/
@@ -660,7 +668,7 @@ theorem spell_appendantTrack_nonwrap {period : Nat} (system : CyclicTag period)
     spell (compiledOutput system input haltPhase period_pos)
         (appendantTrack system input period_pos instruction false).val =
       ((system.appendant instruction).map
-          (bitObject system input haltPhase period_pos)).join ++
+          (bitObject system input haltPhase period_pos)).flatten ++
         repeatWord
           (trackWidth system input - 11 * (system.appendant instruction).length)
           (wholeAppendant system input haltPhase period_pos) := by
@@ -675,7 +683,7 @@ theorem spell_appendantTrack_wrap {period : Nat} (system : CyclicTag period)
     [.b] ++ spell (compiledOutput system input haltPhase period_pos)
         (appendantTrack system input period_pos instruction true).val =
       ((system.appendant instruction).map
-          (bitObject system input haltPhase period_pos)).join ++
+          (bitObject system input haltPhase period_pos)).flatten ++
         repeatWord
           (trackWidth system input - 11 * (system.appendant instruction).length + 1)
           (wholeAppendant system input haltPhase period_pos) := by
@@ -683,9 +691,6 @@ theorem spell_appendantTrack_wrap {period : Nat} (system : CyclicTag period)
       padRight (trackWidth system input) .c
         (encodePrimes (system.appendant instruction)).tail by rfl]
   rw [spell_padRight]
-  change [.b] ++
-      (expandPrime system input haltPhase period_pos
-          (encodePrimes (system.appendant instruction)).tail ++ _) = _
   rw [← List.append_assoc,
     encodePrimes_restore system input _ haltPhase period_pos appendant_nonempty]
   rw [expandPrime_encodePrimes]
@@ -698,7 +703,7 @@ theorem spell_appendantTrack_wrap {period : Nat} (system : CyclicTag period)
   have width_bound := appendant_fixed_fits system input period_pos instruction
   rw [encodePrimes_length] at width_bound
   have scaled_pos : 0 < 11 * (system.appendant instruction).length :=
-    Nat.mul_pos (by decide) (List.length_pos.mpr appendant_nonempty)
+    Nat.mul_pos (by decide) (List.length_pos_of_ne_nil appendant_nonempty)
   omega
 
 theorem spell_haltingTrack {period : Nat} (system : CyclicTag period) (input : List Bool)
@@ -706,9 +711,10 @@ theorem spell_haltingTrack {period : Nat} (system : CyclicTag period) (input : L
     spell (compiledOutput system input haltPhase period_pos) (haltingTrack system input).val =
       [.b] ++ repeatWord (trackWidth system input - 1)
         (wholeAppendant system input haltPhase period_pos) := by
-  change spell (compiledOutput system input haltPhase period_pos)
-      (.b :: List.replicate (trackWidth system input - 1) .c) = _
-  simp [spell, compiledOutput, repeatWord]
+  change [.b] ++
+      expandPrime system input haltPhase period_pos
+        (List.replicate (trackWidth system input - 1) .c) = _
+  rw [expandPrime_replicate_c]
 
 /-- Garbage packet emitted when a zero or epsilon object is read. -/
 def silentEmission {period : Nat} (system : CyclicTag period) (input : List Bool)
@@ -736,7 +742,7 @@ theorem silentEmission_eq {period : Nat} (system : CyclicTag period) (input : Li
 def appendantEmission {period : Nat} (system : CyclicTag period) (input : List Bool)
     (haltPhase instruction : Fin period) (period_pos : 0 < period) : List TagLetter :=
   ((system.appendant instruction).map
-      (bitObject system input haltPhase period_pos)).join ++
+      (bitObject system input haltPhase period_pos)).flatten ++
     repeatWord
       (trackWidth system input - 11 * (system.appendant instruction).length +
         if instruction.val = 0 then 1 else 0)
@@ -893,7 +899,7 @@ theorem read_haltingObject {period : Nat} (system : CyclicTag period) (input : L
       onePhase haltPhase := rfl
   rw [phase_eq] at read
   rw [tableTrack_onePhase, if_pos rfl] at read
-  simp only [haltPhase_nonzero, ↓reduceIte, List.nil_append] at read
+  simp only [haltPhase_nonzero, ↓reduceIte] at read
   rw [spell_haltingTrack] at read
   simpa [List.append_assoc] using read
 

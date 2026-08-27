@@ -107,7 +107,7 @@ theorem shift_add {period : Nat} (phase : Fin period) (m n : Nat) :
 @[simp]
 theorem shift_period {period : Nat} (phase : Fin period) : shift phase period = phase := by
   apply Fin.ext
-  simp [shift, Nat.add_mod, Nat.mod_eq_of_lt phase.isLt]
+  simp [shift, Nat.mod_eq_of_lt phase.isLt]
 
 /-- Execute one cyclic-tag transition, or halt on the empty dataword. -/
 def next {period : Nat} (system : CyclicTag period) : Config period → Option (Config period)
@@ -133,7 +133,7 @@ inductive FiringAvoidingStep {period : Nat} (system : CyclicTag period)
           phase := shift phase 1 }
 
 /-- Reflexive-transitive cyclic-tag execution containing no distinguished true pulse. -/
-def FiringAvoidingReaches {period : Nat} (system : CyclicTag period)
+abbrev FiringAvoidingReaches {period : Nat} (system : CyclicTag period)
     (haltPhase : Fin period) :
     Config period → Config period → Prop :=
   Relation.ReflTransGen (FiringAvoidingStep system haltPhase)
@@ -225,8 +225,6 @@ theorem discharge_append {period : Nat} (system : CyclicTag period) (phase : Fin
   | nil => simp [discharge]
   | cons bit left ih =>
       simp only [List.cons_append, List.length_cons, discharge]
-      change (if bit then system.appendant phase else []) ++
-          system.discharge (shift phase 1) (left ++ right) = _
       rw [ih (shift phase 1)]
       simp only [List.append_assoc]
       congr 1
@@ -238,7 +236,9 @@ theorem discharge_false_replicate {period : Nat} (system : CyclicTag period)
     system.discharge phase (List.replicate length false) = [] := by
   induction length generalizing phase with
   | zero => rfl
-  | succ length ih => simp [discharge, ih]
+  | succ length ih =>
+      rw [List.replicate_succ, discharge]
+      exact ih (shift phase 1)
 
 /-- One-hot encoding with the selected bit exposed between two false runs. -/
 def oneHot {alphabet : Nat} (symbol : Fin alphabet) : List Bool :=
@@ -252,17 +252,14 @@ theorem oneHot_length {alphabet : Nat} (symbol : Fin alphabet) :
 
 /-- Extend the one-hot code morphically to tag words. -/
 def encodeWord {alphabet : Nat} (word : List (Fin alphabet)) : List Bool :=
-  (word.map oneHot).join
+  word.flatMap oneHot
 
 /-- One-hot word encoding is primitive recursive for every fixed alphabet size. -/
 theorem encodeWord_primrec {alphabet : Nat} :
     Primrec (@encodeWord alphabet) := by
   have oneHotRec : Primrec (@oneHot alphabet) :=
-    Primrec.dom_fintype _
-  exact
-    (Primrec.list_join.comp
-      (Primrec.list_map Primrec.id (oneHotRec.comp₂ Primrec₂.right))).of_eq fun word => by
-        rfl
+    Primrec.dom_finite _
+  exact Primrec.list_flatMap Primrec.id (oneHotRec.comp₂ Primrec₂.right)
 
 @[simp]
 theorem encodeWord_nil {alphabet : Nat} : encodeWord ([] : List (Fin alphabet)) = [] := rfl
@@ -274,7 +271,7 @@ theorem encodeWord_cons {alphabet : Nat} (symbol : Fin alphabet)
 
 theorem encodeWord_append {alphabet : Nat} (left right : List (Fin alphabet)) :
     encodeWord (left ++ right) = encodeWord left ++ encodeWord right := by
-  simp [encodeWord, List.map_append]
+  simp [encodeWord]
 
 @[simp]
 theorem encodeWord_length {alphabet : Nat} (word : List (Fin alphabet)) :
@@ -290,7 +287,7 @@ theorem encodeWord_ne_nil {alphabet : Nat} (alphabet_nonempty : 0 < alphabet)
     encodeWord word ≠ [] :=
   List.ne_nil_of_length_pos <| by
     rw [encodeWord_length]
-    exact Nat.mul_pos alphabet_nonempty (List.length_pos.mpr word_nonempty)
+    exact Nat.mul_pos alphabet_nonempty (List.length_pos_iff.mpr word_nonempty)
 
 /-- Cook's compiler: production appendants followed by one empty phase per alphabet symbol. -/
 def ofTwoTag {alphabet : Nat} (system : TwoTag alphabet) : CyclicTag (alphabet + alphabet) where
@@ -358,7 +355,7 @@ theorem discharge_oneHot_first {alphabet : Nat} (system : TwoTag alphabet)
   rw [show shift (initialPhase alphabet_nonempty) symbol.val =
       shift (initialPhase alphabet_nonempty) symbol from rfl]
   rw [ofTwoTag_appendant_first system alphabet_nonempty symbol]
-  simp [discharge_false_replicate]
+  simp
 
 theorem discharge_oneHot_second {alphabet : Nat} (system : TwoTag alphabet)
     (alphabet_nonempty : 0 < alphabet) (symbol : Fin alphabet) :
@@ -369,7 +366,7 @@ theorem discharge_oneHot_second {alphabet : Nat} (system : TwoTag alphabet)
   rw [show shift (shift (initialPhase alphabet_nonempty) alphabet) symbol.val =
       shift (shift (initialPhase alphabet_nonempty) alphabet) symbol from rfl]
   rw [ofTwoTag_appendant_second system alphabet_nonempty symbol]
-  simp [discharge_false_replicate]
+  simp
 
 theorem run_oneHot_first {alphabet : Nat} (system : TwoTag alphabet)
     (alphabet_nonempty : 0 < alphabet) (symbol : Fin alphabet) (tail : List Bool) :
@@ -406,8 +403,7 @@ theorem simulate_step {alphabet : Nat} (system : TwoTag alphabet)
         { data := encodeWord (tail ++ system.production head)
           phase := initialPhase alphabet_nonempty } := by
   rw [run_add]
-  rw [show encodeWord (head :: wake :: tail) =
-      oneHot head ++ (oneHot wake ++ encodeWord tail) by rfl]
+  rw [encodeWord_cons, encodeWord_cons]
   rw [run_oneHot_first]
   rw [show (oneHot wake ++ encodeWord tail) ++ encodeWord (system.production head) =
       oneHot wake ++ (encodeWord tail ++ encodeWord (system.production head)) by
@@ -474,7 +470,8 @@ theorem reaches_firing_phase {alphabet : Nat} (system : TwoTag alphabet)
   refine ⟨cycles * (alphabet + alphabet) + symbol.val,
     List.replicate (alphabet - symbol - 1) false ++ encodeWord wordTail, ?_⟩
   rw [run_add, hcycles]
-  exact run_oneHot_to_pulse system alphabet_nonempty symbol (encodeWord wordTail)
+  simpa [encodeWord_cons] using
+    run_oneHot_to_pulse system alphabet_nonempty symbol (encodeWord wordTail)
 
 end CyclicTag
 end Undecidability

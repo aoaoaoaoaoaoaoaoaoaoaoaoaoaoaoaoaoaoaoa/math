@@ -1,5 +1,5 @@
 import Frankl.TwoOrbit
-import Mathlib.Data.Complex.ExponentialBounds
+import Mathlib.Analysis.Complex.ExponentialBounds
 
 namespace Frankl
 
@@ -81,9 +81,11 @@ private theorem hasDerivAt_halfSupportScalar {z : ℝ}
   have hscaled : HasDerivAt (fun x : ℝ ↦ targetComplement * x) targetComplement z := by
     simpa only [id_eq, mul_one] using (hasDerivAt_id z).const_mul targetComplement
   have hreplacement := (hasDerivAt_binEntropy hrz₀ hrz₁).comp z hscaled |>.const_mul 2
-  convert (hlinear.add hmarginal).sub hreplacement using 1
-  simp only [halfSupportScalar, halfSupportScalarDeriv]
-  ring
+  refine (((hlinear.add hmarginal).sub hreplacement).congr_deriv ?_).congr_of_eventuallyEq ?_
+  · simp only [halfSupportScalarDeriv]
+    ring
+  · exact Filter.Eventually.of_forall fun _ ↦ by
+      simp only [halfSupportScalar, Function.comp_apply, Pi.add_apply, Pi.sub_apply]
 
 private theorem hasDerivAt_halfSupportScalarDeriv {z : ℝ}
     (hz₀ : z ≠ 0) (hz₁ : z ≠ 1)
@@ -104,14 +106,15 @@ private theorem hasDerivAt_halfSupportScalarDeriv {z : ℝ}
       (-targetComplement / (1 - targetComplement * z)) z := by
     simpa only [one_div] using
       (hscaled.const_sub 1 |>.log (sub_ne_zero.mpr hrz₁.symm))
-  convert ((hzcomplog.sub hzlog).const_mul marginalPenalty).sub
-    ((hscaledcomplog.sub hscaledlog).const_mul (2 * targetComplement)) |>.const_add
-      (4 * binEntropy (targetComplement / 2) - 2 * marginalPenalty * log 2) using 1
-  · funext x
-    simp only [halfSupportScalarDeriv]
-    ring
+  refine (((((hzcomplog.sub hzlog).const_mul marginalPenalty).sub
+    ((hscaledcomplog.sub hscaledlog).const_mul (2 * targetComplement))).const_add
+      (4 * binEntropy (targetComplement / 2) - 2 * marginalPenalty * log 2)).congr_deriv
+        ?_).congr_of_eventuallyEq ?_
   · simp only [halfSupportScalarDeriv2]
     ring
+  · exact Filter.Eventually.of_forall fun _ ↦ by
+      simp only [halfSupportScalarDeriv, Pi.sub_apply]
+      ring
 
 private theorem halfSupportScalarDeriv2_eq {z : ℝ}
     (hz₀ : z ≠ 0) (hz₁ : z ≠ 1)
@@ -122,9 +125,11 @@ private theorem halfSupportScalarDeriv2_eq {z : ℝ}
         (z * (1 - z) * (1 - targetComplement * z)) := by
   have hr₀ : targetComplement ≠ 0 := targetComplement_pos.ne'
   have hrz₀ : targetComplement * z ≠ 0 := mul_ne_zero hr₀ hz₀
+  have hzr₁ : z * targetComplement ≠ 1 := by
+    simpa only [mul_comm] using hrz₁
   dsimp [halfSupportScalarDeriv2]
   field_simp [hz₀, sub_ne_zero.mpr hz₁.symm, hr₀, hrz₀,
-    sub_ne_zero.mpr hrz₁.symm]
+    sub_ne_zero.mpr hrz₁.symm, sub_ne_zero.mpr hzr₁.symm]
   ring
 
 private theorem halfSupportNumerator_eq (z : ℝ) :
@@ -351,12 +356,14 @@ theorem halfSupportScalar_neg {z : ℝ} (hz₀ : 0 < z) (hzHalf : z < 1 / 2) :
         (halfSupportInflection - z) / halfSupportInflection
             + z / halfSupportInflection = 1 := by
       field_simp [halfSupportInflection_pos.ne']
+      ring
     have hchord := hconvex.2 hzeroMem hinflectionMem hleftWeight hrightWeight hweightSum
     dsimp only [smul_eq_mul] at hchord
     have hpoint :
         (halfSupportInflection - z) / halfSupportInflection * 0
             + z / halfSupportInflection * halfSupportInflection = z := by
       field_simp [halfSupportInflection_pos.ne']
+      ring
     rw [hpoint, halfSupportScalar_zero] at hchord
     have hrightNeg :
         z / halfSupportInflection * halfSupportScalar halfSupportInflection < 0 :=
@@ -394,7 +401,10 @@ private theorem hasDerivAt_entropySlope {x : ℝ} (hx₀ : x ≠ 0) (hx₁ : x �
     HasDerivAt entropySlope (entropyCurvature x) x := by
   have hleft := ((hasDerivAt_id x).const_sub 1).log (sub_ne_zero.mpr hx₁.symm)
   have hright := (hasDerivAt_id x).log hx₀
-  simpa only [entropySlope, entropyCurvature, id_eq] using hleft.sub hright
+  unfold entropySlope entropyCurvature
+  apply HasDerivAt.sub
+  · exact hleft
+  · exact hright
 
 private noncomputable def halfSupportGainDeriv (z x : ℝ) : ℝ :=
   z * (entropySlope (z * (1 - x)) - entropySlope ((1 - x) / 2))
@@ -427,13 +437,16 @@ private theorem hasDerivAt_halfSupportGain {z x : ℝ}
   have hhalfArg : HasDerivAt (fun y : ℝ ↦ (1 - y) / 2) (-1 / 2) x := by
     exact ((hasDerivAt_id x).const_sub 1).div_const 2
   have hscaledArg : HasDerivAt (fun y : ℝ ↦ z * (1 - y)) (-z) x := by
-    convert ((hasDerivAt_id x).const_sub 1).const_mul z using 1
-    ring
+    simpa only [id_eq, mul_neg, mul_one] using
+      ((hasDerivAt_id x).const_sub 1).const_mul z
   have hhalfEntropy := (hasDerivAt_binEntropy hargs.2.2.1.ne' hargs.2.2.2.ne).comp x hhalfArg
   have hscaledEntropy := (hasDerivAt_binEntropy hargs.1.ne' hargs.2.1.ne).comp x hscaledArg
-  convert (hhalfEntropy.const_mul (2 * z)).sub hscaledEntropy using 1
-  simp only [halfSupportGain, halfSupportGainDeriv, entropySlope]
-  ring
+  refine (((hhalfEntropy.const_mul (2 * z)).sub hscaledEntropy).congr_deriv
+    ?_).congr_of_eventuallyEq ?_
+  · simp only [halfSupportGainDeriv, entropySlope]
+    ring
+  · exact Filter.Eventually.of_forall fun _ ↦ by
+      simp only [halfSupportGain, Function.comp_apply, Pi.sub_apply]
 
 private theorem hasDerivAt_halfSupportGainDeriv {z x : ℝ}
     (hz₀ : 0 < z) (hzHalf : z ≤ 1 / 2) (hx₀ : 0 ≤ x) (hx₁ : x < 1) :
@@ -442,13 +455,16 @@ private theorem hasDerivAt_halfSupportGainDeriv {z x : ℝ}
   have hhalfArg : HasDerivAt (fun y : ℝ ↦ (1 - y) / 2) (-1 / 2) x := by
     exact ((hasDerivAt_id x).const_sub 1).div_const 2
   have hscaledArg : HasDerivAt (fun y : ℝ ↦ z * (1 - y)) (-z) x := by
-    convert ((hasDerivAt_id x).const_sub 1).const_mul z using 1
-    ring
+    simpa only [id_eq, mul_neg, mul_one] using
+      ((hasDerivAt_id x).const_sub 1).const_mul z
   have hhalfSlope := (hasDerivAt_entropySlope hargs.2.2.1.ne' hargs.2.2.2.ne).comp x hhalfArg
   have hscaledSlope := (hasDerivAt_entropySlope hargs.1.ne' hargs.2.1.ne).comp x hscaledArg
-  convert (hscaledSlope.sub hhalfSlope).const_mul z using 1
-  simp only [halfSupportGainDeriv, halfSupportGainDeriv2, id_eq]
-  ring
+  refine (((hscaledSlope.sub hhalfSlope).const_mul z).congr_deriv
+    ?_).congr_of_eventuallyEq ?_
+  · simp only [halfSupportGainDeriv2]
+    ring
+  · exact Filter.Eventually.of_forall fun _ ↦ by
+      simp only [halfSupportGainDeriv, Function.comp_apply, Pi.sub_apply]
 
 private theorem halfSupportGainDeriv_nonneg {z x : ℝ}
     (hz₀ : 0 < z) (hzHalf : z ≤ 1 / 2) (hx₀ : 0 ≤ x) (hx₁ : x < 1) :
@@ -495,7 +511,7 @@ private theorem halfSupportGainDeriv2_nonpos {z x : ℝ}
     ring
   rw [hidentity]
   have hbracket : 1 / (1 - z * (1 - x)) - 2 / (1 + x) ≤ 0 := by
-    rw [sub_nonpos, div_le_div_iff honeScaled honeAdd]
+    rw [sub_nonpos, div_le_div_iff₀ honeScaled honeAdd]
     nlinarith [mul_nonneg (sub_nonneg.2 hzHalf) honeSub.le]
   exact mul_nonpos_of_nonneg_of_nonpos (div_nonneg hz₀.le honeSub.le) hbracket
 
