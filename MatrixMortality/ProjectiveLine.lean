@@ -204,6 +204,59 @@ theorem weight_ne_zero
   apply Matrix.mulVec_injective_iff_isUnit.mpr matrix_unit
   simpa using image_zero
 
+@[simp]
+theorem act_one {K : Type*} [Field K] (point : Point K) :
+    act (1 : Square (Fin 2) K) point = point := by
+  cases point <;> simp [act, numerator, denominator]
+
+/-- Projectivization respects multiplication when the right matrix is nonsingular. -/
+theorem act_mul
+    {K : Type*} [Field K]
+    (left right : Square (Fin 2) K) (right_unit : IsUnit right)
+    (point : Point K) :
+    act (left * right) point = act left (act right point) := by
+  have image_ne : right *ᵥ ray point ≠ 0 := by
+    intro image_zero
+    apply ray_ne_zero point
+    apply Matrix.mulVec_injective_iff_isUnit.mpr right_unit
+    simpa using image_zero
+  have image_eta :
+      ![(right *ᵥ ray point) 0, (right *ᵥ ray point) 1] =
+        right *ᵥ ray point := by
+    ext i
+    fin_cases i <;> rfl
+  have image_pair_ne :
+      ![(right *ᵥ ray point) 0, (right *ᵥ ray point) 1] ≠ 0 := by
+    rwa [image_eta]
+  calc
+    act (left * right) point =
+        ofPair (((left * right) *ᵥ ray point) 0)
+          (((left * right) *ᵥ ray point) 1) :=
+      (ofPair_mulVec_ray (left * right) point).symm
+    _ = ofPair ((left *ᵥ (right *ᵥ ray point)) 0)
+        ((left *ᵥ (right *ᵥ ray point)) 1) := by
+      rw [Matrix.mulVec_mulVec]
+    _ = act left
+        (ofPair ((right *ᵥ ray point) 0) ((right *ᵥ ray point) 1)) := by
+      simpa only [image_eta] using
+        (act_ofPair left image_pair_ne).symm
+    _ = act left (act right point) := by
+      rw [ofPair_mulVec_ray right point]
+
+/-- A nonsingular matrix acts injectively on projective points. -/
+theorem act_injective
+    {K : Type*} [Field K]
+    (matrix : Square (Fin 2) K) (matrix_unit : IsUnit matrix) :
+    Function.Injective (act matrix) := by
+  intro left right images_eq
+  have pulled_eq := congrArg (act matrix⁻¹) images_eq
+  rw [← act_mul matrix⁻¹ matrix matrix_unit,
+    Matrix.nonsing_inv_mul matrix (matrix.isUnit_iff_isUnit_det.mp matrix_unit),
+    act_one, ← act_mul matrix⁻¹ matrix matrix_unit,
+    Matrix.nonsing_inv_mul matrix (matrix.isUnit_iff_isUnit_det.mp matrix_unit),
+    act_one] at pulled_eq
+  exact pulled_eq
+
 /-- Every word over unit matrices accumulates a nonzero projective weight. -/
 theorem rayWeight_ne_zero
     {Label K : Type*} [Field K]

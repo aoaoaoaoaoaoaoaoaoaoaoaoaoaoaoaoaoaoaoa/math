@@ -254,8 +254,45 @@ two rank-two generators, Lean compresses every nonempty word to the adjacent-edg
 shared source line assemble into two `3 × 3` generators, and split incoming edges force both
 generators to have rank exactly two. For the generic projective-incidence reverse construction
 `αβ≠0`, Lean now checks the independent basis changes, the rank-one loop fracture, the complete
-constrained-path grammar, and both mortality implications. The exceptional projective points
-remain outside the many-one compiler.
+constrained-path grammar, and both mortality implications. Lean now also transports the unique
+hard compatible one-loop edge stratum back to that compiler with intrinsic `β=1`; the audited
+remaining edge-rank census gives `Mort₃^(2,2) ≡ₘ GPI₂`. `ProjectiveIncidence` now proves the
+exact two-ray exceptional locus and rescales every generic instance to `α=β=1` while preserving
+all word zeros. It also proves that the relative projectivity permutes every two-point common
+bad set, forcing both labelled transitions to exit together. The positive first-exit audit then
+reduces arbitrary PI₂ to at most two GPI₂ queries. The surviving enemy is GPI₂ itself, not
+genericization or the edge graph.
+
+`ProjectiveCollatz` now checks an exact fixed-projectivity arithmetic benchmark inside that
+enemy. The inverse maps `A(z)=2z` and `B(z)=(2z−1)/3` generate an integer `n` from `1` exactly
+when shortcut Collatz reaches `1` from `n`. Lean identifies the inductive predecessor language
+with the conventional forward relation and proves the arbitrary-word converse by permanent
+negative 3-adic valuation after the first illegal odd predecessor. For every nonzero integer
+target it then constructs unit scalar representatives with `α=β=1` and proves that normalization
+preserves the complete zero language. See `R32-S37` and
+[`audits/m32-collatz-incidence-2026-08-10.md`](audits/m32-collatz-incidence-2026-08-10.md).
+
+The broader guarded-affine route now has an audited terminal normal form. Clearing an odd
+denominator reduces rational 2-integral reachability to an integer parity map. The all-unit and
+all-expansive slope strata admit explicit finite-box decision algorithms; every mixed stratum is
+affinely conjugate, after accelerating the unit branch, to one signed generalized `ax+B`
+Syracuse map. Macro multipliers and finite-chart telescoping reject direct radix-tag, FRACTRAN,
+and affine-controller encodings. Only carry propagation against the fixed eventually periodic
+2-adic word `−B/a` remains. This is `R32-S40`, retained without a duplicate Lean orbit API because
+the existing p-adic gate, genericity theorem, normalization, and two-plane compiler already own
+every formal matrix seam. See
+[`audits/m32-binary-affine-syracuse-2026-08-11.md`](audits/m32-binary-affine-syracuse-2026-08-11.md).
+
+The GPI₂ decision report reaches the same arithmetic core from group theory. An effective basis
+change turns any projective incidence into intersection of the positive monoid with an explicit
+upper-triangular coset in `GL₂(ℤ[S⁻¹])`, equivalently identity membership in a rational
+subset. For the checked Collatz projectivities, the generated group is the rank-two affine cusp
+`ℤ[1/6]⋊ℤ²`, and the target varies only as a translation tested against one fixed rational
+subset. This independently kills the proposed Tits-alternative split: the obstruction already
+lies in the metabelian branch, while the positive monoid itself is free. The reduction is
+retained as audited `R32-S41`; no general rational-subset library or unproved decision oracle was
+added to Lean. See
+[`audits/m32-parabolic-rational-subset-2026-08-11.md`](audits/m32-parabolic-rational-subset-2026-08-11.md).
 
 ReturnSquare instantiates the rank-`(3,2)` reduction. Lean proves the closed return matrix,
 split interfaces, exact cut rank, internal rank-one zero-wait return, unit positive returns,
@@ -365,6 +402,25 @@ For every prime `ℓ∣pᵃ−1`, the reduced pair either satisfies `m′≡n′
 common cancellation factor. This is an exact reset-or-cancellation dichotomy, not yet a finite
 decision sieve.
 
+The cyclotomic gate now retains multiplicity on the no-reset side. If every prime factor of
+`Φₐ(p)` outside the exponent support misses reset, the product of its full prime powers divides
+the common cancellation. A nonterminal step therefore obeys both a terminal-defect height bound
+and the sharper content-weighted pressure law
+
+```text
+p^((s−1)a) Pₐ(p) ≤ (|A|+|D|+|L|)H.
+```
+
+This removes repeated primitive prime powers as an untyped loss. Above wait two, Lean also
+reconstructs the strong-part growth interface
+
+```text
+Φₐ(p) ∣ aPₐ(p),
+p^((s−1)a)(p−1)^φ(a) ≤ a(|A|+|D|+|L|)H.
+```
+
+The literature's exact `Φ⁎ₐ(p)` classification is no longer required for this bound.
+
 The converse normalization seam is now closed. Lean proves that canonical rational
 numerator-denominator pairs are primitive, that the target unit condition forces the entire
 `p^(sa)` scale into the raw common factor, and hence that every decoded rational step lifts to
@@ -380,7 +436,13 @@ h=ηu,    k=θv,    ηθ=DL,    uv=pᵃ−1,
 u,v>0,      gcd(u,θ)=1.
 ```
 
-The attached `2 × 2` decoder has determinant `−1`; its explicit inverse confines every
+The attached `2 × 2` decoder has determinant `−1` and factors exactly as
+
+```text
+[[v,q²],[1,(q+1)u]] = [[1,v],[0,1]][[0,1],[1,(q+1)u]].
+```
+
+Thus its moving factors are continued-fraction data. Its explicit inverse confines every
 subsequent common divisor to fixed coefficient support. Every prescribed factor of `pᵃ−1`
 not swallowed by `h` divides `k`, with multiplicity, and is coprime to the target denominator.
 In the weighted norm `|x|+4|y|`, every branch with `v≥2` contracts by at most `3/4` after
@@ -408,11 +470,248 @@ lagged wait frame; changing to the next wait requires a separate rational gauge.
 the lagged transfer, frame change, and honest composed cocycle. The ungauged global path bound
 is false and is not part of the corpus.
 
+Consecutive primitive endpoint reductions now carry one exact primitive edge coordinate. With
+`q=p^a`, `Q=p^b`, and `Xᵢ=(tᵢ,hᵢtᵢ₊₁)ᵀ`, prequotient coprimality and a new depth-uniform
+transport theorem give
+
+```text
+Q^s hᵢ Xᵢ₊₁ = [[0,Q^s],[DL(q−1),A+Dq^s−LQ]]Xᵢ.
+```
+
+No complementary content or tangent state enters the matrix. One fixed integral basis also
+conjugates every rational wait gauge to `diag(1,Q²/q²)`. These theorems remove the missing
+carried-coordinate and wait-gauge shear obstructions, but do not prove cone entry, a local
+continued-fraction selector, or global height descent. See
+[`audits/m32-prequotient-adelic-2026-08-06.md`](audits/m32-prequotient-adelic-2026-08-06.md).
+
+The later Jacobi handoff proposal also failed reconstruction. The exact denominator recurrence
+retains the coefficient `A+Dqˢ−Lq′`. If a divisor of reverse content recurs in the next
+cyclotomic boundary outside `L(A+D−L)`, Lean proves that it is coprime to the next forward
+content and divides the next reverse content with full multiplicity. Thus recurring factors do
+not alternate into forward cancellation. See
+[`audits/m32-jacobi-handoff-2026-08-05.md`](audits/m32-jacobi-handoff-2026-08-05.md).
+
+Depth two now also has a coefficient-level prime-adic wall. For an integral presentation
+`center=A/L`, `drift=D/L`, put `R=A+D−L` and, at any prime `ℓ`,
+
+```text
+λL=vℓ(L),  λR=vℓ(R),  λD=vℓ(D),  e=vℓ(p−1),  ε=vℓ(2).
+```
+
+Lean proves that `R≠0`, `λR<λL+e`, and
+
+```text
+2λR < λD+e+min(λL,λR+ε)
+```
+
+make the open `ℓ`-adic reset ball invariant under every positive decoded branch. The endpoint
+identity is checked directly in the existing coordinate; the zero numerator-blade branch is
+handled separately and returns exactly to reset. Terminal lies outside the ball, so the
+arbitrary-word compiler yields physical immortality. Consequently every prime divisor of
+`p−1` divides `R` for a mortal guard. The theorem does not assert that an arbitrary
+common-period tail enters the ball. See
+[`audits/m32-universal-boundary-2026-08-05.md`](audits/m32-universal-boundary-2026-08-05.md).
+
+The proposed exact-order continuation is now fenced on its other side. Lean checks the
+even-resultant guard `p=3`, `A=R=249398`, `D=L=1`: wait four enters the strict `5`-adic reset
+ball, wait one breaks the exact order and returns to its boundary, and the target remains ready
+at wait one. The bridge's primitive reduction removes exactly `18`, coprime to `5`, while its
+denominator grows from `19` to `270178`. This excludes every uniform first-bridge invariance,
+auxiliary-content, repetition, or denominator-descent charge under continued readiness. The
+submitted endpoint normalization formula was not duplicated: it is the existing complete
+cancellation law transported through the checked endpoint factorization. See
+[`audits/m32-order-breaking-bridge-2026-08-05.md`](audits/m32-order-breaking-bridge-2026-08-05.md).
+
+The proposed all-legal block theorem is now false. Lean checks the fixed guard
+
+```text
+p=3,   A=17,   D=−5,   L=16,   reset=3/4,
+```
+
+whose reset is ready and fixed, together with legal off-reset corridors longer than any
+prescribed bound. Every corridor edge has wait one, exact primitive content `−4`, and Smith
+coordinate `v=2`. Both the carried prequotient pair and the actual primitive Smith quotient are
+primitive and rise strictly along arbitrarily long runs of consecutive edge coordinates; the
+raw Smith decoder output is exactly four times the latter pair. A new generic theorem verifies
+that the primitive endpoint equation
+is the actual rational `guardedStep`, so legality is not inferred from a parallel recurrence.
+This rejects coefficient-uniform carried or Smith descent over all legal corridors. It does not
+reject a theorem anchored at reset or the terminal boundary: every constructed state is off
+reset, while reset itself is fixed. See
+[`audits/m32-periodic-shadow-2026-08-06.md`](audits/m32-periodic-shadow-2026-08-06.md).
+
+The proposed positive-renewal continuation is also closed. The existing exact branch-similarity
+theorem already proves that every nonempty aligned macro subtracts its full schedule weight from
+p-adic separation, so no fixed macro or finite aligned ray cycle can replenish shadow depth.
+Formalization strengthens the fixed obstruction family in the other direction: exact remaining
+depth two, together with fixed coefficients, wait, content, and Smith label, coexists with
+arbitrarily large endpoint and carried heights. A new cumulative theorem records the
+reset-history datum exposed by this attack exactly:
+
+```text
+Δ(P₀,adj(M_u)V)=p^(s∑u)Δ(Pᶜ_u,V).
+```
+
+The local renewal dichotomy is therefore exhausted. See
+[`audits/m32-renewal-collapse-2026-08-07.md`](audits/m32-renewal-collapse-2026-08-07.md).
+
+The next ratchet shows that the pulled-back family is not radially moving at the distinguished
+prime. Every nonempty positive endpoint product reduces modulo `p` to one fixed rank-one flag,
+and every actual cumulative prefix from reset has the exact full-weight kernel
+
+```text
+ker(M_u mod p^(s∑u)) = (ℤ/p^(s∑u)ℤ)·P₀.
+```
+
+Positive endpoint terminality is also complete: it is equivalent to inverse address one, so the
+endpoint zero language is singleton-or-empty and physical mortality is exactly the existence of
+a nonempty endpoint zero. The coefficients `(3,2,122753,−17,39232)` have unique terminal word
+`[1,1,1]`, refuting every universal two-return bound. The live question is now a coefficient-
+effective auxiliary-place bound on the global angular carry, opposed by an exact aperiodic
+reset-started orbit with unbounded denominators. See
+[`audits/m32-fixed-geodesic-endpoint-completeness-2026-08-07.md`](audits/m32-fixed-geodesic-endpoint-completeness-2026-08-07.md).
+
+The fixed-support universality branch is now bounded without enlarging the Lean API. A finite
+control system whose canonical tails are rational functions of fixed auxiliary-prime powers and
+whose waits are affine in their exponents cannot execute a repeatable cycle. Laurent-monomial
+charts cannot execute even one nonconstant instruction, and one affine monomial ray has at most
+five exact instruction samples. The proof is an independently reconstructed combination of
+paired-prime-power Zariski density, Laurent-support comparison, the checked common mod-`p` flag,
+and the Gauss valuation. It is retained as audited `R32-O15`, not as a second polynomial-chart
+library. See
+[`audits/m32-fixed-support-toric-obstruction-2026-08-08.md`](audits/m32-fixed-support-toric-obstruction-2026-08-08.md).
+
+The nonsplit cubic fallback has also lost its proposed punctuation channel. `CubicReturn` proves
+that `A³=NI`, with `N≠0`, reduces every arbitrary return word exactly to a word over the three
+residue returns and transfers physical mortality to that finite triple. The surrounding audits
+derive a common-left reflection form for every irreducible cubic and the exact pure
+one-singular normal form `(P R,P,P Jμ)`. Lean now checks the decisive synthesis: for row
+`(1,1)` and column `Pe₁`, both exceptional reverse-compiler scalars are `μ⁻¹`. The pure fork is
+therefore already GPI₂; only the non-pure recurrence-of-reflections orbit remains independently
+open. See
+[`audits/m32-cubic-punctuation-collapse-2026-08-08.md`](audits/m32-cubic-punctuation-collapse-2026-08-08.md)
+and
+[`audits/m32-cubic-reflection-generic-bridge-2026-08-09.md`](audits/m32-cubic-reflection-generic-bridge-2026-08-09.md).
+
+The non-pure fork is now canonical without another Lean API. Projected multiplication on the
+cubic field's trace-zero plane gives `Mₙ=F T_(γθⁿ)` with arbitrary twist `F`; Clifford
+normalization turns mortality into endpoint reachability on the determinant null conic. The
+explicit physical family with characteristic polynomial `X³−X−1` has two unit returns generating
+a free binary submonoid with an injective rational-line orbit. This rejects finite bridge-state
+or bounded-length collapse from recurrence order and involutivity alone. That first line witness
+was not singular-endpoint-faithful; `R32-S42` below closes precisely that former seam. The
+trace/Jordan coordinates were culled as a duplicate formal representation; see
+[`audits/m32-cubic-null-conic-orbit-2026-08-10.md`](audits/m32-cubic-null-conic-orbit-2026-08-10.md).
+
+The formerly missing endpoint placement is now realized, and formalization cuts deeper than the
+submitted numerical instance. `CubicReturnNonPure` defines one common non-pure companion ambient,
+proves its exact order-three return recurrence, invertibility, failure of every pure-cubic
+relation, and rank two of two physical cuts. The first twist checks
+`M₀M₁M₀=0`, while audited interval ping-pong keeps its selected semigroup free. For the
+second twist Lean proves that every word over selected waits `{1,5}` misses the actual singular
+kernel, yet the strictly unselected word `[12,12,8,12,12,15,8]` gives an exact zero between
+singular returns. This closes endpoint geometry and kills selected ping-pong as an arbitrary-word
+guard. The live cubic object is the complete fixed recurrence, not another reflection coordinate
+system. See `R32-S42` and
+[`audits/m32-cubic-endpoint-false-waits-2026-08-11.md`](audits/m32-cubic-endpoint-false-waits-2026-08-11.md).
+
+The rank-(2,2) graph is no longer an independent residue. `RankTwoPunctuation` proves that every
+compatible square with one rank-one loop and three units transports exactly to the existing raw
+reverse compiler. Its intrinsic first scalar is the loop self-bridge and compatibility forces
+the second scalar to one; mortality is exactly immediate loop nilpotence or one generic PI₂
+instance. The remaining edge-rank patterns and the effective cyclic-orbit discharge of the
+cross-edge case are audited as `R32-S32`, using the locally recorded Evertse–Győry unit-equation
+theorem. The full audited rank-(2,2) boundary is `Mort₃^(2,2) ≡ₘ GPI₂`; `R32-S35` separately
+reduces arbitrary PI₂ to at most two GPI₂ queries. See
+[`audits/m32-rank-two-punctuation-2026-08-08.md`](audits/m32-rank-two-punctuation-2026-08-08.md).
+
+The proposed endpoint-only angular compactness has a checked counterexample. For the lawful
+first-hit terminal word `[3,1]` at `(p,s,A,D,L)=(3,2,467,−35,124)`, Lean computes the full
+endpoint product and primitive pole `(494,−41)` and proves that its emergent primes `19,41`
+divide neither the coefficient/reset support nor any branch-cyclotomic factor. The surrounding
+audit shows why: terminality leaves the angular extension lift free, and the pure-`p` wait gauge
+has projective adelic height `p^(2|b−a|)` rather than one. `R32-O17` therefore retires every
+support-only or direction-free product-formula proof. The exact additive continuant was already
+present in the cumulative endpoint recurrence, so formalization adds only the consuming
+counterexample. See
+[`audits/m32-angular-emergent-primes-2026-08-08.md`](audits/m32-angular-emergent-primes-2026-08-08.md).
+
+The recurrence-sensitive gcd has now been localized. The lower row of the final endpoint
+transfer gives an exact Casoratian showing that every common divisor of the terminal scalar and
+the angular coefficient divides the determinant of the preceding word. The final branch creates
+no primitive normalization. The surrounding `R32-S33` audit combines this checked identity with
+the existing recurrent-boundary and primitive-part theorems: exact-order mass persisting to the
+right is forced forward, mass persisting to the left is forced reverse, the global wait gcd is
+effectively finite, and divisibility-chain terminal schedules are decidable. The unformalized
+global induction introduces no new state or recurrence API. See
+[`audits/m32-casoratian-order-allocation-2026-08-09.md`](audits/m32-casoratian-order-allocation-2026-08-09.md).
+
+The moving-support allocation is also exact. Outside `pDL`, an arbitrary composite divisor
+enters forward content if and only if it divides both the current endpoint numerator and the
+current branch boundary `pᵃ−1`. This theorem retains every prime-power multiplicity and gives the
+Casoratian's emergent-prime consequence an exact activation rule. The report's reciprocal
+coordinates and Wronskian were culled as duplicate representations; its no-Mahler theorem is
+already subsumed by the checked rational-rail degree obstruction. See `R32-S34` and
+[`audits/m32-moving-prime-ledger-2026-08-09.md`](audits/m32-moving-prime-ledger-2026-08-09.md).
+
+The content calculus also subsumes the proposed endpoint potential without another Lean API.
+Iteration in its fixed endpoint-adapted norm bounds cumulative content jointly with reduced
+denominator, forces fresh activated primes to have count `O(N/log N)`, makes every activated
+packet microscopic on an aperiodic orbit, and imposes logarithmic recovery after large
+allocation. Consecutive full-numerator handoffs have bounded second wait. Formalization then
+continued the reported order-breaking tuple instead of leaving it as an unproved candidate:
+Lean checks its forced wait prefix `[4,1,1,1,1]` and the ensuing nonterminal 3-adic unit, which
+lies in the forward-invariant trap. See `R32-S29`,
+`ReturnGuard.Examples.orderBreaker_candidate_enters_trap`, and
+[`audits/m32-sparse-genealogy-budget-2026-08-10.md`](audits/m32-sparse-genealogy-budget-2026-08-10.md).
+
+The proposed all-packet endpoint potential is false. The period-three guard has exact primitive
+forward and reverse contents, and its endpoint macro has two rational eigenlines. Lean proves
+that every repeated legal period fixes the residual reset while the transverse eigenvalue gains
+one exact factor of thirteen and the reset eigenvalue remains coprime to thirteen. This is
+`R32-O20`, formalized by `ReturnGuard.Examples.cycle_endpointReductions` and
+`cycle_transverseReservoir`; the associated reset-defect and terminal-content estimates are
+audited corollaries of the existing `R32-S29` calculus rather than a duplicate API. See
+[`audits/m32-transverse-reverse-reservoir-2026-08-10.md`](audits/m32-transverse-reverse-reservoir-2026-08-10.md).
+
+First-hit terminality now has a sharper replacement for that false endpoint potential. Pulling
+reset backward through the terminal address gives a canonical same-address companion, and the
+existing inverse-address, primitive-lift, exterior-product, and complementary-content theorems
+already own its exact transport law. Their audited synthesis turns actual reverse content into
+companion forward content and compresses the unresolved mass to one angular gcd deficit. No
+duplicate companion API was added. Lean instead checks the consuming counterexample:
+`ReturnGuard.Examples.resetCompanion_counterfamily` is an unbounded family of one-return
+first-hit histories for which the actual forward product exceeds the companion reverse product
+by `(12n+1)/2`. Thus per-step shadow descent and multiplication of local Smith savings are false;
+only coefficient-effective bilateral amortization across a complete first-hit history remains.
+See `R32-S39` and
+[`audits/m32-reset-companion-2026-08-11.md`](audits/m32-reset-companion-2026-08-11.md).
+
+The widened finite-atlas counter route is also closed without adding Lean code. For finitely
+many rational tail charts and finitely many fixed additive wait shifts, polynomial divisibility,
+degree at infinity, and leading/constant coefficient comparison force every control-cycle shift
+to sum to zero. Recurrent shifts are therefore a coboundary; waits become bounded and the
+deterministic rational orbit is eventually periodic. This is retained as audited `R32-O18`.
+The existing formal one-chart rail and bounded-denominator periodicity theorem already own both
+ends of the argument, while a general rational-function atlas would not tighten the surviving
+history-sensitive enemy. See
+[`audits/m32-finite-radial-atlas-2026-08-08.md`](audits/m32-finite-radial-atlas-2026-08-08.md).
+
+The schedule-first counter route now has one exact Jacobi coordinate. Lean proves the consecutive
+shell transition and the backward map's reciprocal difference factor. Their p-adic iteration
+gives one compatible unit tail for every prescribed wait schedule; reset-started rational
+realization is one scalar continued-fraction incidence. The audited consequences exclude finite
+handoff alphabets and one fixed rational ready-tail chart from every aperiodic orbit. These
+infinite completion and height arguments are not kernel checked; they consume the checked finite
+identities and the existing formal rail theorem. See `R32-S38` and
+[`audits/m32-jacobi-schedule-incidence-2026-08-11.md`](audits/m32-jacobi-schedule-incidence-2026-08-11.md).
+
 These are structural and decidable-stratum theorems, not an `M₃(2)` resolution. The imported
 order-four Skolem theorem used to classify rank-one profiles is not reimplemented in Lean. The
-generic reverse edge compiler still assumes `αβ≠0`, and no universality or decision theorem is
-known for rational inverse-address membership or its cyclotomic cancellation histories. Their
-boundary is recorded in
+reverse compiler still assumes `αβ≠0`, but arbitrary PI₂ now reduces to at most two generic
+queries. No universality or decision theorem is known for normalized GPI₂, despite its exact
+shortcut-Collatz subfamily, or for rational inverse-address membership and its cyclotomic
+cancellation histories. Their boundary is recorded in
 [`audits/m32-rank-return-2026-07-28.md`](audits/m32-rank-return-2026-07-28.md) and scheduled in
 [#11](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/11) and
 [#12](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/12).
@@ -523,11 +822,16 @@ with a complete arbitrary-word converse.
 | `LinearRepresentation.lean` | finite Hankel sections and exact-realization state lower bounds |
 | `BoundaryTax.lean` | generic finite-witness two-channel boundary tax |
 | `ReturnFamily.lean` | split finite-rank return normal form and matrix-valued block-Hankel witnesses |
+| `CubicReturn.lean` | pure-cubic arbitrary-word collapse and automatic genericity of the one-singular normal form |
+| `CubicReturnNonPure.lean` | non-pure physical endpoint alignment, fixed return recurrence, and exact unselected-wait obstruction |
 | `EdgeCompression.lean` | exact adjacent-edge compression for split finite-rank families |
 | `TwoPlaneEdges.lean` | compatible two-plane realization of a `2 × 2` edge square and exact rank-two certificates |
 | `ReverseEdge.lean` | generic projective-incidence reverse compiler, basis adaptation, and all-path converse |
+| `ProjectiveIncidence.lean` | exceptional-source geometry and all-word unit normalization for projective incidence |
+| `ProjectiveCollatz.lean` | exact shortcut-Collatz predecessor language, 3-adic malformed-word guard, and normalized GPI₂ reduction |
+| `RankTwoPunctuation.lean` | intrinsic generic-incidence reduction of the unique hard one-loop edge stratum |
 | `PolynomialPencil.lean` | coefficient support and exact evaluation of words over affine matrix pencils |
-| `PrimitiveDivisor.lean` | cyclotomic prime support and Bang–Zsigmondy above exponent two |
+| `PrimitiveDivisor.lean` | cyclotomic support, nonprimitive index-prime valuations, and Bang–Zsigmondy above exponent two |
 | `ReturnSquare.lean` | exact rank-`(3,2)` laboratory, bridge normal form, and two-return square cage |
 | `ReturnSquareDynamics.lean` | homogeneous projective trap and outer negative immortality wall |
 | `ReturnSquarePrimePower.lean` | bridge-polynomial root support and finite quotient walls |
@@ -544,24 +848,29 @@ with a complete arbitrary-word converse.
 | `ReturnGuardGauss.lean` | canonical residual coordinate, exact branch spheres, and guarded-step conjugacy |
 | `ReturnGuardAddress.lean` | finite inverse-address mortality grammar and branch fixed-point incompatibility |
 | `ReturnGuardArithmetic.lean` | primitive-pair recurrence and cyclotomic reset-or-cancellation sieve |
-| `ReturnGuardTerminalGate.lean` | primitive cyclotomic radical and terminal-or-finite-reset gate |
+| `ReturnGuardTerminalGate.lean` | squarefree reset witnesses, full primitive cyclotomic absorption, and terminal height gates |
 | `ReturnGuardQuotient.lean` | exact-order finite projective automata, swallowed-factor semantics, and safe invariant certificates |
 | `ReturnGuardIntegralLift.lean` | canonical rational pairs, decoded-to-integral execution lifting, and quotient certificates of physical immortality |
 | `ReturnGuardQuotientCompleteness.lean` | zero-wait terminal kernel, cancellation-reachability completeness, and synchronized-product no-amplification |
 | `ReturnGuardDriftCertificate.lean` | exact drift-divisor certificate classification, cyclic subgroup criterion, and executable finite test |
-| `ReturnGuardCumulative.lean` | content-free cumulative endpoint execution, exact second-order recurrence, odd-resultant immortality, and derived primitive content |
-| `ReturnGuardContinued.lean` | fixed-cusp complete quotients, exact terminal arithmetic, record-ascent content budget, and order-three decoder |
-| `ReturnGuardSmith.lean` | signed content split, unimodular endpoint decoder, nonmaximal contraction, maximal-step isolation, and corrected gauged cocycle |
+| `ReturnGuardCumulative.lean` | chronological product algebra, pre-final Casoratian localization, content-free cumulative endpoint execution, exact second-order recurrence, reset-ancestry pullback, primitive endpoint projectivization, odd-resultant immortality, and derived primitive content |
+| `ReturnGuardContinued.lean` | exact moving-divisor allocation, fixed-cusp complete quotients, primitive prequotient and Jacobi-tail transport, recurrent-boundary reverse persistence, record-ascent content budget, and order-three decoder |
+| `ReturnGuardBoundary.lean` | depth-two universal-boundary reset ball, valuation-wall immortality, and primewise reset-resultant necessity |
+| `ReturnGuardSmith.lean` | signed content split, positive-cone primitive-height gain, nonmaximal contraction, maximal-step isolation, and diagonalized gauged cocycle |
 | `ReturnGuardPeriodicity.lean` | exact denominator recurrence and explicit record-ascent, wait, content, and numerator ceilings |
 | `ReturnGuardFiniteOrbit.lean` | bounded primitive endpoint streams, their finite state box, repetition, and eventual periodicity |
 | `ReturnGuardFrame.lean` | evaluation-frame coboundary and reset-shell localization of transverse depth |
 | `ReturnGuardGap.lean` | exact residual similarity, rational projective gaps, height envelopes, and fixed-macro pumping |
 | `ReturnGuardPumping.lean` | arbitrary repeated-factor pumping between decoded orbit checkpoints |
 | `ReturnGuardEndpoint.lean` | terminal-centered divisor recurrence, whole-word determinant factorization, complementary forward/reverse contents, and coefficient-prime obstructions |
-| `ReturnGuardAdelic.lean` | content-weighted height bounds, complete cyclotomic complement, and exact exterior-product conservation |
+| `ReturnGuardEndpointCompleteness.lean` | complete positive endpoint language, fixed distinguished-prime flag and reset kernel, and exact endpoint Smith weight |
+| `ReturnGuardAdelic.lean` | content-weighted height bounds, strong primitive pressure, complete cyclotomic complement, and exact exterior-product conservation |
 | `ReturnGuardResonance.lean` | nonresonant descent, resonance localization, and corrected nested readiness |
 | `ReturnGuardRail.lean` | polynomial divisibility and rational affine-wait rail obstruction |
-| `ReturnGuardExamples.lean` | one- and two-step mortal pairs, nonterminal fixed point, nested rational period-three orbit, and endpoint boundary certificates |
+| `ReturnGuardExamples.lean` | mortal and periodic guards, endpoint boundary certificates, and ready order-breaking reset-ball ejection |
+| `ReturnGuardCounterorbit.lean` | exact forced continuation and trap termination of the proposed order-breaking counterorbit |
+| `ReturnGuardTransverseReservoir.lean` | exact primitive period-three contents and unbounded transverse reverse mass invisible to its fixed reset orbit |
+| `ReturnGuardPeriodicShadow.lean` | fixed-reset periodic-shadow family, uniform all-corridor descent obstruction, and fixed-depth unbounded endpoint-height obstruction |
 | `ReturnGuardQuotientExamples.lean` | four-state modulo-eleven certificate excluding every primitive terminal execution of the period-three guard |
 | `BinaryDefect.lean` | binary two-word defect theorem and exact Neary macro obstruction |
 | `CHHNPacking.lean` | generic two-slot CHHN packing and six-state finite-Hankel kernels |
@@ -647,9 +956,20 @@ with a complete arbitrary-word converse.
 | Exact diagonal two-channel bridges pay two additional states | `exactDiagonalTwoChannel_card_lower_bound` |
 | A split finite-rank binary pair is mortal exactly when one return product vanishes | `ReturnFamily.pairGenerator_isMortal_iff` |
 | Finite return block-Hankel sections factor through every exact ambient realization | `ReturnFamily.finiteReturnHankel_factor`, `ReturnFamily.returnHankel_card_le` |
+| A pure-cubic split pair is mortal exactly when its three residue returns are mortal | `CubicReturn.pairGenerator_isMortal_iff_residue` |
+| Both reverse-compiler scalars of the pure one-singular cubic normal form equal `μ⁻¹` | `CubicReturn.pureOneSingular_reverseEdgeScalars` |
+| One non-pure rank-two physical family aligns the actual singular endpoints through selected wait one | `CubicReturn.NonPure.terminalCut_rank`, `CubicReturn.NonPure.terminal_zero` |
+| A second non-pure family avoids the kernel on every selected word but has an exact zero made only from strictly unselected positive waits | `CubicReturn.NonPure.falseWaitCut_rank`, `CubicReturn.NonPure.selected_lower_ne_zero`, `CubicReturn.NonPure.falseWaitWord_strictly_unselected`, `CubicReturn.NonPure.falseWait_zero` |
 | A split finite-rank family is mortal exactly when one constrained edge path vanishes | `EdgeCompression.isMortal_iff_exists_edgeProduct_eq_zero` |
 | Every compatible two-plane edge square is realized by two rank-two generators | `TwoPlaneEdges.output_mul_input`, `TwoPlaneEdges.generator_rank` |
 | Generic projective incidence compiles to two rank-two `3 × 3` generators | `ReverseEdge.isMortal_adaptedGenerator_iff`, `ReverseEdge.adaptedGenerator_rank` |
+| Genericity is avoidance of two exact source rays | `ProjectiveIncidence.generic_iff_sourcePoint_not_mem_badSources` |
+| At most two source rays are bad in both orientations, and their two transitions exit together | `ProjectiveIncidence.commonBadSources_card_le_two`, `ProjectiveIncidence.commonBadSources_two_transition_iff` |
+| Every generic PI₂ instance scales to `α=β=1` without changing its word-zero language | `ProjectiveIncidence.exists_unitNormalized` |
+| The inverse predecessor language is exactly shortcut-Collatz reachability | `ProjectiveCollatz.reachesOne_iff_shortcutCollatz` |
+| Every malformed Collatz predecessor word remains nonintegral by negative 3-adic valuation | `ProjectiveCollatz.predecessorState_reaches_or_negative` |
+| Every nonzero shortcut-Collatz target reduces exactly to normalized GPI₂ | `ProjectiveCollatz.normalizedScalars`, `ProjectiveCollatz.exists_normalizedIncidence_zero_iff` |
+| A compatible one-loop edge square is mortal exactly at loop nilpotence or intrinsic generic incidence | `RankTwoPunctuation.exists_pathProduct_eq_zero_iff_selfBridge_or_incidence` |
 | ReturnSquare physical mortality is exactly positive-return scalar bridge zero | `ReturnSquare.physical_isMortal_iff_positiveBridge` |
 | Every nonresonant ReturnSquare zero uses at least three positive returns | `ReturnSquare.positiveBridge_zero_shape` |
 | Nonnegative and outer-negative ReturnSquare parameters are immortal | `ReturnSquare.not_physical_isMortal_of_nonneg`, `ReturnSquare.not_physical_isMortal_of_beyond_negative_wall` |
@@ -671,15 +991,29 @@ with a complete arbitrary-word converse.
 | A cyclotomic factor is swallowed exactly when the source pair is terminal-congruent modulo it | `ReturnGuard.integralStep_cyclotomic_cancel_iff_terminalCongruent` |
 | Outside the fixed parameter support, cancellation is exactly cyclotomic terminal congruence | `ReturnGuard.integralStep_novel_cancel_iff_cyclotomic_terminalCongruent` |
 | Primitive endpoint normalization collapses into one deterministic cumulative recurrence | `ReturnGuard.primitiveIntegralStep_cumulativeEndpointStep`, `ReturnGuard.CumulativeEndpointStep.target_unique`, `ReturnGuard.cumulativeNumerator_recurrence` |
+| Every common divisor of a terminal scalar and angular coefficient lies in the determinant support before the final branch | `ReturnGuard.endpointTransfer_casoratian`, `ReturnGuard.terminalCommonDivisor_dvd_previousDet` |
+| Every primitive endpoint reduction projectivizes to the corresponding rational guard step | `ReturnGuard.PrimitiveEndpointReduction.guardedStep_endpointState` |
 | Primitive content is exactly the gcd of the drift source and the unreduced quotient; reverse content satisfies a wait-free terminal divisor law | `ReturnGuard.PrimitiveEndpointReduction.content_natAbs_eq_gcd_driftSource_prequotient`, `ReturnGuard.PrimitiveEndpointReduction.resetDefect_eq_complement_mul`, `ReturnGuard.PrimitiveEndpointReduction.complement_dvd_terminalBoundary` |
+| A reverse-content divisor recurring in the next boundary outside fixed scale-reset support remains wholly reverse | `ReturnGuard.PrimitiveEndpointReduction.recurrentBoundaryDivisor_persists` |
+| Outside fixed `pDL` support, a divisor enters forward content exactly at simultaneous endpoint and branch-boundary divisibility | `ReturnGuard.PrimitiveEndpointReduction.divisor_dvd_content_iff` |
 | Every positive wait has an exact terminal predecessor, so backward terminal search has no wait bound | `ReturnGuard.terminalPredecessorPair_step` |
 | Cumulative endpoints form a generalized continued fraction with one fixed forbidden cusp | `ReturnGuard.cumulativeCompleteQuotient_recurrence`, `ReturnGuard.cumulativeCompleteQuotient_sub_forbiddenCusp`, `ReturnGuard.cumulativeWaitForm_hasValue` |
 | At critical depth two, every nondecreasing pair of waits pays an exact two-step content budget | `ReturnGuard.PrimitiveEndpointReduction.twoStep_elimination`, `ReturnGuard.PrimitiveEndpointReduction.twoStep_contentBudget` |
+| Consecutive primitive reductions carry a primitive prequotient coordinate through one exact integral generalized-continuant block at every depth | `ReturnGuard.PrimitiveEndpointReduction.prequotient_coprime_denominator`, `ReturnGuard.PrimitiveEndpointReduction.twoStep_prequotient_transport` |
+| Consecutive primitive reductions obey the exact generalized Jacobi shell law, whose backward map has an explicit reciprocal difference factor | `ReturnGuard.PrimitiveEndpointReduction.jacobiTail_transition`, `ReturnGuard.jacobiBackward_sub` |
 | Every functional primitive endpoint stream of depth at least two with bounded positive denominators is eventually periodic | `ReturnGuard.PrimitiveEndpointReduction.nonDecreasing_waits_le`, `ReturnGuard.BoundedPrimitiveEndpointStream.wait_le`, `ReturnGuard.BoundedPrimitiveEndpointStream.eventually_periodic` |
 | The critical decoder is an order-three core followed by a wait-dependent shear | `ReturnGuard.criticalDecoder_factor`, `ReturnGuard.criticalDecoderCore_cube` |
+| The Smith decoder is a positive shear followed by one Gauss continuant generator | `ReturnGuard.smithRubanDecoder_continuant_cut` |
+| Positive Smith decoding preserves primitivity and strictly raises primitive-pair height | `ReturnGuard.smithRubanQuotient_isCoprime`, `ReturnGuard.smithRubanQuotient_height_gain_of_pos` |
+| One fixed rational basis diagonalizes every variable-wait frame gauge | `ReturnGuard.returnWaitFrameChange_diagonal` |
 | Every base-coprime cancellation depth is the minimum of the terminal-defect and displacement depths | `ReturnGuard.integralStep_cancel_iff_terminalDefect_and_displacement`, `ReturnGuard.integralStep_commonFactor_padicValInt` |
 | Legal waits are logarithmic in primitive height and reduced height is uniformly Lipschitz | `ReturnGuard.integralStep_wait_le_log_height`, `ReturnGuard.integralStep_reduced_height_le` |
 | A large primitive cyclotomic radical forces terminality or a surviving exact-order reset | `ReturnGuard.terminalDefect_zero_or_exists_primitive_reset`, `ReturnGuard.primitiveCyclotomicRadical_le_height_of_no_reset` |
+| Absent every primitive reset, the full primitive cyclotomic part divides the common reduction with all multiplicities | `ReturnGuard.primitiveCyclotomicPart_dvd_common_of_no_reset`, `ReturnGuard.primitiveCyclotomicPart_le_height_of_no_reset` |
+| The swallowed primitive part pays the distinguished wait scale in the same height budget | `ReturnGuard.primitiveCyclotomicPart_mul_wait_le_height_of_no_reset` |
+| Above exponent two, every index prime occurring in the cyclotomic value has valuation one | `cyclotomicValue_factorization_eq_one_of_odd_nonprimitive`, `cyclotomicValue_factorization_eq_one_of_two_nonprimitive` |
+| The cyclotomic value divides the exponent times its full primitive part, which inherits the elementary totient lower bound | `ReturnGuard.cyclotomicValue_dvd_exponent_mul_primitiveCyclotomicPart`, `ReturnGuard.sub_one_pow_totient_le_exponent_mul_primitiveCyclotomicPart` |
+| No-reset branches pay cyclotomic growth and the distinguished wait scale in one formal inequality | `ReturnGuard.strongPrimitivePressure_le_height_of_no_reset` |
 | Exact-order quotient dynamics is periodic in the wait, and its annihilation state is exactly swallowed primitive reduction | `ReturnGuard.quotientTransfer_mod_of_primitive`, `ReturnGuard.quotientTransition_integralStep_eq_cancelled_iff` |
 | A finite quotient invariant excluding annihilation and the target excludes every primitive integral execution | `ReturnGuard.no_primitiveExecution_of_quotientInvariant` |
 | A primitive divisor of the drift gives a reset-automaton no-certificate whenever the center ratio avoids the base subgroup | `ReturnGuard.no_primitiveExecution_of_drift_divisor` |
@@ -692,6 +1026,9 @@ with a complete arbitrary-word converse.
 | Every cancellation-free synchronized two-prime invariant projects to both single-factor certificates | `ReturnGuard.hasSynchronizedCancellationFreeInvariant_imp_components`, `ReturnGuard.hasSynchronizedCancellationFreeInvariant_imp_quotientCertificates` |
 | Terminal coordinates are a fixed gauge of the primitive residual transfer, not an independent state | `ReturnGuard.endpointTransfer_mul_endpointGauge`, `ReturnGuard.terminalCoordinate_residualStep` |
 | A complete endpoint word factors its determinant into base powers and full cyclotomic factors | `ReturnGuard.endpointProduct_det` |
+| Every positive endpoint product modulo the distinguished prime is a scalar multiple of one fixed rank-one flag; in a normalized presentation its determinant valuation is the full schedule weight | `ReturnGuard.endpointProduct_mod_prime`, `ReturnGuard.endpointProduct_det_hasValue` |
+| At the complete prime-power weight of every nonempty positive cumulative prefix from reset, the endpoint-product kernel is exactly the scalar reset line | `ReturnGuard.CumulativeEndpointExecution.endpointKernel_eq_resetLine` |
+| A positive endpoint word is terminal exactly when its inverse address is reset; physical mortality is exactly existence of such a nonempty word and the terminal language is singleton-or-empty | `ReturnGuard.endpointTerminalWord_iff_inverseAddress_eq_one`, `ReturnGuard.physical_isMortal_iff_endpointTerminalWord`, `ReturnGuard.endpointTerminalWord_unique` |
 | Forward and reverse primitive contents are complementary, and the whole terminal coefficient is their signed reverse-content product | `ReturnGuard.endpointAdjugate_mulVec_of_complementaryContent`, `ReturnGuard.endpointProduct_first_eq_complementProduct` |
 | A prime dividing `A−L` but neither drift nor base excludes every endpoint terminal word | `ReturnGuard.not_endpointTerminalWord_of_prime_dvd_centerDifference` |
 | Primitive content and wait depth share one exact Archimedean height budget | `ReturnGuard.integralStep_content_mul_height_le`, `ReturnGuard.integralStep_wait_content_le` |
@@ -699,6 +1036,12 @@ with a complete arbitrary-word converse.
 | Two reduced trajectories through one branch obey an exact exterior-product conservation law | `ReturnGuard.primitiveSteps_projectivePairCross` |
 | Any repeated legal factor at two checkpoints is either an exact cycle or bounded by their rational height envelopes | `ReturnGuard.sharedSchedule_exact_or_power_le_heightEnvelope` |
 | Terminal-reaching guards can require two steps and their waits can either decrease or increase | `ReturnGuard.Examples.decreasingMortal_reachable`, `ReturnGuard.Examples.increasingMortal_reachable` |
+| A lawful first-hit terminal word has primitive angular primes outside every coefficient and branch-cyclotomic factor | `ReturnGuard.Examples.decreasingMortal_emergentAngularPrimes` |
+| One lawful guard has exactly one positive terminal word, the three-return schedule `[1,1,1]` | `ReturnGuard.Examples.threeReturn_endpointTerminalWord_iff`, `ReturnGuard.Examples.threeReturn_physical_isMortal` |
+| One fixed guard has arbitrarily long off-reset legal corridors with `v=2`, exact content `−4`, and arbitrarily long rising carried and primitive Smith coordinate runs | `ReturnGuard.Examples.periodicShadow_obstruction` |
+| The proposed order-breaking counterorbit has forced waits `[4,1,1,1,1]` and then enters the nonterminal trap | `ReturnGuard.Examples.orderBreaker_candidate_enters_trap` |
+| Repeating the lawful period-three cycle fixes reset while accumulating an exact 13-power on a transverse rational eigenline | `ReturnGuard.Examples.cycle_endpointReductions`, `ReturnGuard.Examples.cycle_transverseReservoir` |
+| Same-address reset companions do not contract stepwise, even on nonmaximal first-hit terminal steps | `ReturnGuard.Examples.resetCompanion_counterfamily` |
 | The former collision ladder and period-three survivor are excluded from terminality by one-prime endpoint coefficients | `ReturnGuard.Examples.collisionLadder_no_endpointTerminalWord`, `ReturnGuard.Examples.cycle_no_endpointTerminalWord` |
 | At a primitive drift divisor, a safe quotient certificate exists exactly when the center avoids the scaled base-power orbit | `ReturnGuard.hasQuotientCertificate_iff_centerPowerOrbit_avoids` |
 | For nonzero center and scale, the excluded orbit is exactly the cyclic subgroup generated by the base | `ReturnGuard.mem_centerPowerOrbit_iff_centerRatio_mem_zpowers` |

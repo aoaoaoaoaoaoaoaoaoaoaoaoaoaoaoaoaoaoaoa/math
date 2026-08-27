@@ -22,7 +22,7 @@
     <section class="abstract" aria-label="Abstract">
       <strong>For the unresolved two-generator 3 × 3 matrix-mortality cell M<sub>3</sub>(2), mortality in the three-mode family below is equivalent to one deterministic p-adic orbit reaching one.</strong>
       <p>The construction fits a rank-one separator, exact legal-wait verifier, permanent illegal-wait trap, and unbounded rational payload into two 3 × 3 matrices. Its return series has exact linear dimension three.</p>
-      <p>Parity excludes every odd reset resultant and proves that maximal Smith cancellation cannot terminate or repeat consecutively. M<sub>3</sub>(2) remains unresolved in the even-resultant, unbounded-denominator channel.</p>
+      <p>Parity excludes every odd reset resultant, maximal Smith cancellation cannot terminate or repeat consecutively, and a prime-adic reset ball excludes every coefficient law below an explicit universal-boundary wall. A ready exact-order bridge proves that its first order-breaking step has no uniform local charge. M<sub>3</sub>(2) remains unresolved in the surviving unbounded-denominator channel.</p>
     </section>
 
     <nav class="contents" aria-label="Contents">
@@ -82,10 +82,12 @@
             <li><a href="#arbitrary-words">Arbitrary physical words</a></li>
             <li><a href="#examples">Concrete pairs</a></li>
             <li>
-              <a href="#parity-smith">Parity and maximal isolation</a>
+              <a href="#parity-smith">Parity, Smith, and universal boundary</a>
               <ol>
                 <li><a href="#odd-resultant">Odd-resultant immortality</a></li>
                 <li><a href="#maximal-isolation">Maximal steps are isolated</a></li>
+                <li><a href="#universal-boundary">Universal-boundary wall</a></li>
+                <li><a href="#order-breaking-bridge">Order-breaking bridge obstruction</a></li>
               </ol>
             </li>
             <li><a href="#open-core">The open arithmetic core</a></li>
@@ -528,7 +530,7 @@
           </div>
           <p>The guard does not force termination. At <var>p</var> = 5, <var>s</var> = 2, <var>ρ</var> = 5/6, and <var>α</var> = 2, the ready reset is a nonterminal fixed point.</p>
 
-          <h3 id="parity-smith">Parity and maximal isolation<a class="fragment-link" href="#parity-smith" aria-label="Link to this section">#</a></h3>
+          <h3 id="parity-smith">Parity, Smith, and universal boundary<a class="fragment-link" href="#parity-smith" aria-label="Link to this section">#</a></h3>
 
           <h4 id="odd-resultant">Odd-resultant immortality<a class="fragment-link" href="#odd-resultant" aria-label="Link to this section">#</a></h4>
           <p>Choose integral coefficients <var>A</var>, <var>D</var>, and <var>L</var> with <var>L</var> ≠ 0 so that <var>α</var> = <var>A</var>/<var>L</var> and the drift <var>δ</var> = <var>D</var>/<var>L</var>. Put</p>
@@ -583,6 +585,116 @@
           </div>
           <p>Here <var>t</var> and <var>θ</var> are odd, while the second coefficient is even. Thus <var>r</var>′ is odd and the maximal step cannot terminate. If another primitive step follows, its Smith coordinate <var>v</var> is even and therefore lies on the <var>v</var> ≥ 2 side. Maximal steps cannot occur consecutively.</p>
 
+          <h4 id="universal-boundary">Universal-boundary wall<a class="fragment-link" href="#universal-boundary" aria-label="Link to this section">#</a></h4>
+          <p>At depth two, put <var>q</var> = <var>p</var><sup><var>a</var></sup>. The endpoint map obeys the exact reset-defect factorization</p>
+          <div class="formula">
+            <math display="block">
+              <mrow>
+                <mo>(</mo><msub><mi>F</mi><mi>q</mi></msub><mo>(</mo><mi>z</mi><mo>)</mo><mo>−</mo><mi>R</mi><mo>)</mo>
+                <mo>(</mo><mi>z</mi><mo>−</mo><mi>L</mi><mo>(</mo><mi>q</mi><mo>−</mo><mn>1</mn><mo>)</mo><mo>)</mo>
+                <mo>=</mo>
+                <mi>D</mi><mo>(</mo><mi>q</mi><mo>−</mo><mn>1</mn><mo>)</mo>
+                <mo>(</mo><mo>(</mo><mi>q</mi><mo>+</mo><mn>1</mn><mo>)</mo><mi>z</mi><mo>+</mo><mi>L</mi><mo>)</mo><mo>.</mo>
+              </mrow>
+            </math>
+          </div>
+          <p>For any auxiliary prime <var>ℓ</var>, write</p>
+          <div class="formula plain">
+            <math display="block">
+              <mtable columnalign="right center left">
+                <mtr>
+                  <mtd><msub><mi>λ</mi><mi>L</mi></msub></mtd><mtd><mo>=</mo></mtd><mtd><msub><mi>ν</mi><mi>ℓ</mi></msub><mo>(</mo><mi>L</mi><mo>)</mo><mo>,</mo></mtd>
+                  <mtd><msub><mi>λ</mi><mi>R</mi></msub></mtd><mtd><mo>=</mo></mtd><mtd><msub><mi>ν</mi><mi>ℓ</mi></msub><mo>(</mo><mi>R</mi><mo>)</mo><mo>,</mo></mtd>
+                  <mtd><msub><mi>λ</mi><mi>D</mi></msub></mtd><mtd><mo>=</mo></mtd><mtd><msub><mi>ν</mi><mi>ℓ</mi></msub><mo>(</mo><mi>D</mi><mo>)</mo><mo>,</mo></mtd>
+                </mtr>
+                <mtr>
+                  <mtd><mi>e</mi></mtd><mtd><mo>=</mo></mtd><mtd><msub><mi>ν</mi><mi>ℓ</mi></msub><mo>(</mo><mi>p</mi><mo>−</mo><mn>1</mn><mo>)</mo><mo>,</mo></mtd>
+                  <mtd><mi>ε</mi></mtd><mtd><mo>=</mo></mtd><mtd><msub><mi>ν</mi><mi>ℓ</mi></msub><mo>(</mo><mn>2</mn><mo>)</mo><mo>.</mo></mtd>
+                </mtr>
+              </mtable>
+            </math>
+          </div>
+          <p>If <var>R</var> ≠ 0 and</p>
+          <div class="formula plain">
+            <math display="block">
+              <mtable columnalign="right center left">
+                <mtr>
+                  <mtd><msub><mi>λ</mi><mi>R</mi></msub></mtd>
+                  <mtd><mo>&lt;</mo></mtd>
+                  <mtd><msub><mi>λ</mi><mi>L</mi></msub><mo>+</mo><mi>e</mi><mo>,</mo></mtd>
+                </mtr>
+                <mtr>
+                  <mtd><mn>2</mn><msub><mi>λ</mi><mi>R</mi></msub></mtd>
+                  <mtd><mo>&lt;</mo></mtd>
+                  <mtd><msub><mi>λ</mi><mi>D</mi></msub><mo>+</mo><mi>e</mi><mo>+</mo><mi>min</mi><mo>{</mo><msub><mi>λ</mi><mi>L</mi></msub><mo>,</mo><msub><mi>λ</mi><mi>R</mi></msub><mo>+</mo><mi>ε</mi><mo>}</mo><mo>,</mo></mtd>
+                </mtr>
+              </mtable>
+            </math>
+          </div>
+          <p>then every positive branch preserves the strict <var>ℓ</var>-adic ball around reset:</p>
+          <div class="formula plain">
+            <math display="block">
+              <mrow>
+                <msub><mi>B</mi><mi>ℓ</mi></msub>
+                <mo>=</mo><mo>{</mo><mi>R</mi><mo>}</mo><mo>∪</mo>
+                <mo>{</mo><mi>z</mi><mo>:</mo><mi>z</mi><mo>≠</mo><mi>R</mi><mo>,</mo>
+                <msub><mi>λ</mi><mi>R</mi></msub><mo>&lt;</mo><msub><mi>ν</mi><mi>ℓ</mi></msub><mo>(</mo><mi>z</mi><mo>−</mo><mi>R</mi><mo>)</mo><mo>}</mo><mo>.</mo>
+              </mrow>
+            </math>
+          </div>
+          <p>Reset lies inside and terminal zero lies outside. If the final numerator blade in the factorization vanishes, the branch returns exactly to reset; the formal proof isolates this case before taking finite valuations. The arbitrary-word equivalence therefore makes the two inequalities a physical immortality certificate.</p>
+          <p>In particular, every prime dividing the universal boundary <var>p</var>−1 must divide the reset resultant of a mortal law:</p>
+          <div class="formula plain">
+            <math display="block">
+              <mrow>
+                <mi>ℓ</mi><mo>∣</mo><mi>p</mi><mo>−</mo><mn>1</mn>
+                <mo>⇒</mo><mi>ℓ</mi><mo>∣</mo><mi>R</mi><mo>,</mo>
+                <mspace width="1em"></mspace>
+                <mi>rad</mi><mo>(</mo><mi>p</mi><mo>−</mo><mn>1</mn><mo>)</mo><mo>∣</mo><mi>R</mi><mo>.</mo>
+              </mrow>
+            </math>
+          </div>
+          <p>The full valuation wall is stronger than this squarefree sieve. It can still exclude a law after every boundary prime has entered <var>R</var>.</p>
+
+          <h4 id="order-breaking-bridge">Order-breaking bridge obstruction<a class="fragment-link" href="#order-breaking-bridge" aria-label="Link to this section">#</a></h4>
+          <p>Reset incidence at an exact-order prime does not yield a local monotone law after the first wait outside that order. At depth two, take</p>
+          <div class="formula plain">
+            <math display="block">
+              <mrow>
+                <mi>p</mi><mo>=</mo><mn>3</mn><mo>,</mo>
+                <mspace width="0.8em"></mspace>
+                <mi>A</mi><mo>=</mo><mi>R</mi><mo>=</mo><mn>249398</mn><mo>,</mo>
+                <mspace width="0.8em"></mspace>
+                <mi>D</mi><mo>=</mo><mi>L</mi><mo>=</mo><mn>1</mn><mo>.</mo>
+              </mrow>
+            </math>
+          </div>
+          <p>The checked ready prefix is</p>
+          <div class="formula plain">
+            <math display="block">
+              <mrow>
+                <mn>249399</mn>
+                <mover><mo>→</mo><mn>4</mn></mover>
+                <mfrac><mn>4863261</mn><mn>19</mn></mfrac>
+                <mover><mo>→</mo><mn>1</mn></mover>
+                <mfrac><mn>67384284465</mn><mn>270178</mn></mfrac><mo>.</mo>
+              </mrow>
+            </math>
+          </div>
+          <p>The final target is itself ready at wait one. The prime 5 is a primitive divisor of 3⁴−1, so the second step breaks exact order four. In endpoint coordinates, it ejects the strict reset ball:</p>
+          <div class="formula plain">
+            <math display="block">
+              <mrow>
+                <msub><mi>ν</mi><mn>5</mn></msub><mo>(</mo><mi>R</mi><mo>)</mo><mo>=</mo><mn>0</mn><mo>,</mo>
+                <mspace width="0.8em"></mspace>
+                <msub><mi>ν</mi><mn>5</mn></msub><mo>(</mo><msub><mi>z</mi><mn>1</mn></msub><mo>−</mo><mi>R</mi><mo>)</mo><mo>=</mo><mn>1</mn><mo>,</mo>
+                <mspace width="0.8em"></mspace>
+                <msub><mi>ν</mi><mn>5</mn></msub><mo>(</mo><msub><mi>z</mi><mn>2</mn></msub><mo>−</mo><mi>R</mi><mo>)</mo><mo>=</mo><mn>0</mn><mo>.</mo>
+              </mrow>
+            </math>
+          </div>
+          <p>The bridge's raw endpoint pair has gcd 18, coprime to 5. No auxiliary-prime content is swallowed, and the primitive denominator grows from 19 to 270178. Thus ball invariance, auxiliary-content loss, repetition, and denominator descent all fail as uniform first-bridge charges under continued readiness. Exact-order factors can contribute only inside a global amortization theorem.</p>
+
           <h3 id="open-core">The open arithmetic core<a class="fragment-link" href="#open-core" aria-label="Link to this section">#</a></h3>
           <p>Define a deterministic partial map on rational projective points. At a ready positive-valuation point, choose the only legal wait; send every illegal state to a rejecting sink:</p>
           <div class="formula">
@@ -599,9 +711,9 @@
               </mrow>
             </math>
           </div>
-          <p>The remaining problem is whether an even-resultant orbit of this form reaches 1. Bounded primitive denominators already force eventual periodicity. Along every unbounded execution, each maximal Smith step is followed by a locally contracting <var>v</var> ≥ 2 step, but the contraction is measured in a wait-dependent frame and inherited rational height may repay it.</p>
-          <p>The live obstruction is global amortization: either prove that infinitely many mandatory nonmaximal losses force repetition or a finite certificate, or construct a coefficient-aligned unbounded-denominator orbit that survives them. Exact-order cyclotomic reset-or-cancel laws are available, but no theorem yet extracts enough pairwise-coprime core mass from every such schedule.</p>
-          <p>No generator-count, rank, punctuation, malformed-word, or illegal-choice problem remains in this architecture. The enemy is the even-resultant unbounded-denominator recurrence, not another supporting coordinate system.</p>
+          <p>The remaining problem is whether an even-resultant orbit which passes every universal-boundary valuation wall reaches 1. Bounded primitive denominators already force eventual periodicity. Along every unbounded execution, each maximal Smith step is followed by a locally contracting <var>v</var> ≥ 2 step, but the contraction is measured in a wait-dependent frame and inherited rational height may repay it.</p>
+          <p>The live obstruction is global amortization: either prove that infinitely many mandatory nonmaximal losses force repetition or a finite certificate, or construct a coefficient-aligned unbounded-denominator orbit that survives them. Exact-order cyclotomic reset-or-cancel laws remain available inside such a proof, but the checked ready bridge above excludes their first order-breaking step as an independent local consumer.</p>
+          <p>No generator-count, rank, punctuation, malformed-word, or illegal-choice problem remains in this architecture. The enemy is the universal-boundary-divisible, unbounded-denominator recurrence, not another supporting coordinate system.</p>
         </details>
 
         <details class="major-section">
@@ -610,55 +722,69 @@
           <h3 id="verification">Verification and provenance<a class="fragment-link" href="#verification" aria-label="Link to this section">#</a></h3>
           <div class="status-grid">
             <div>
-              <b><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/250193c/MatrixMortality/ReturnFamily.lean">Return compiler</a></b>
+              <b><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/f8770b4/MatrixMortality/ReturnFamily.lean">Return compiler</a></b>
               <p>Lean checks the split finite-rank return normal form and the complete mortality equivalence for a rank-one zero return with invertible positive returns.</p>
             </div>
             <div>
-              <b><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/250193c/MatrixMortality/ReturnGuard.lean">Three-mode algebra</a></b>
+              <b><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/f8770b4/MatrixMortality/ReturnGuard.lean">Three-mode algebra</a></b>
               <p>Lean checks the explicit matrices, return formula, ranks, determinants, projective defect identity, separator, and exact three-state Hankel lower bound.</p>
             </div>
             <div>
-              <b><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/250193c/MatrixMortality/ReturnGuardDynamics.lean">Guarded dynamics</a></b>
+              <b><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/f8770b4/MatrixMortality/ReturnGuardDynamics.lean">Guarded dynamics</a></b>
               <p>Lean checks the total projective action, p-adic trap, wait and carry-depth forcing, ready-tail grammar, functional reachability relation, and arbitrary-word converse.</p>
             </div>
             <div>
-              <b><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/250193c/MatrixMortality/ReturnGuardCumulative.lean">Parity obstruction</a></b>
+              <b><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/f8770b4/MatrixMortality/ReturnGuardCumulative.lean">Parity obstruction</a></b>
               <p>Lean checks that adjacent units force an odd prime and that an odd reset resultant excludes physical mortality through the decoded-to-primitive execution lift.</p>
             </div>
             <div>
-              <b><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/250193c/MatrixMortality/ReturnGuardSmith.lean">Smith isolation</a></b>
+              <b><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/f8770b4/MatrixMortality/ReturnGuardSmith.lean">Smith isolation</a></b>
               <p>Lean checks the exact maximal-cancellation identity, its odd target numerator, and the even Smith coordinate forced on every following step.</p>
             </div>
             <div>
-              <b><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/250193c/MatrixMortality/ReturnGuardExamples.lean">Exact examples</a></b>
-              <p>Lean checks the rational parameters, denominator-cleared integer zero product, and ready nonterminal fixed point.</p>
+              <b><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/f8770b4/MatrixMortality/ReturnGuardBoundary.lean">Universal-boundary wall</a></b>
+              <p>Lean checks the depth-two reset-defect factorization, prime-adic ball invariance, physical immortality below the valuation wall, and primewise reset-resultant necessity.</p>
             </div>
             <div>
-              <b><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/250193c/verification/axioms.txt">Transitive axioms</a></b>
+              <b><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/f8770b4/MatrixMortality/ReturnGuardExamples.lean">Exact examples</a></b>
+              <p>Lean checks the rational parameters, denominator-cleared integer zero product, ready nonterminal fixed point, and ready order-breaking reset-ball ejection.</p>
+            </div>
+            <div>
+              <b><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/f8770b4/verification/axioms.txt">Transitive axioms</a></b>
               <p>Publication-facing declarations use only <code>propext</code>, <code>Classical.choice</code>, and <code>Quot.sound</code>. The project contains no admitted proof or project axiom.</p>
             </div>
             <div>
-              <b><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/250193c/audits/m32-valuation-guard-2026-07-29.md">Foundational audit</a></b>
+              <b><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/f8770b4/audits/m32-valuation-guard-2026-07-29.md">Foundational audit</a></b>
               <p>The audit reconstructs the multiplication order, affine poles, trap cases, inverse grammar, concrete certificates, and exact unresolved boundary.</p>
             </div>
             <div>
-              <b><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/250193c/audits/m32-parity-maximal-isolation-2026-08-04.md">Parity audit</a></b>
+              <b><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/f8770b4/audits/m32-parity-maximal-isolation-2026-08-04.md">Parity audit</a></b>
               <p>The audit reconstructs the submitted attack, rejects its antichain overclaim, and records the checked master-level wound.</p>
+            </div>
+            <div>
+              <b><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/f8770b4/audits/m32-universal-boundary-2026-08-05.md">Universal-boundary audit</a></b>
+              <p>The audit repairs the zero-blade proof branch, rejects unconditional tail trapping, validates the coefficient sieve, and records the surviving global obstruction.</p>
+            </div>
+            <div>
+              <b><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/f8770b4/audits/m32-order-breaking-bridge-2026-08-05.md">Order-breaking bridge audit</a></b>
+              <p>The audit catches the submitted trap-target gap, replaces it with a ready-target witness, and retires uniform first-bridge closure.</p>
             </div>
           </div>
 
           <h3 id="formal-scope">Formal scope<a class="fragment-link" href="#formal-scope" aria-label="Link to this section">#</a></h3>
           <p>The matrix identities, rank statements, complete physical mortality equivalence, total projective semantics, p-adic forcing theorems, tail grammar, concrete examples, and exact state lower bound are machine-checked over ℚ. Independent nonzero scaling clears the two physical generators to integer matrices without changing zero products.</p>
-          <p>The formal result does not prove M<sub>3</sub>(2) decidable or undecidable. It proves an exact equivalence for the displayed parametric family, physical immortality for every odd reset resultant, and maximal-step isolation at depth two in the remaining even stratum. No universal source computation has been compiled into the deterministic orbit, and no decision procedure for that orbit is claimed.</p>
+          <p>The formal result does not prove M<sub>3</sub>(2) decidable or undecidable. It proves an exact equivalence for the displayed parametric family, physical immortality for every odd reset resultant, maximal-step isolation at depth two, physical immortality below the universal-boundary valuation wall, and failure of every uniform first order-breaking bridge charge listed above. In particular, every prime divisor of <var>p</var>−1 divides the reset resultant of a mortal depth-two guard. No universal source computation has been compiled into the deterministic orbit, and no decision procedure for that orbit is claimed.</p>
           <p>The hypotheses are stated at their exact formal strength. The prime need not be separately assumed odd; requiring both <var>α</var> and <var>α</var>−1 to be p-adic units formally excludes residue characteristic two.</p>
 
           <h3 id="priority">Priority<a class="fragment-link" href="#priority" aria-label="Link to this section">#</a></h3>
           <p>To our knowledge, after searches through 28 July 2026, the nearest published framework is recurrence-controlled matrix reachability <a href="#ref-hkpy-2024">[Hirvensalo et al. 2024]</a>. No located source gives this three-mode return family, its internal separator, the exact valuation trap, or the mortality-to-functional-orbit equivalence. The foundational low-dimensional mortality decomposition and bounded mortality notation are prior art <a href="#ref-bournez-branicky-2002">[Bournez–Branicky 2002]</a> <a href="#ref-chhn-2014">[Cassaigne et al. 2014]</a>. “No located source” is limited to publicly discoverable work.</p>
 
           <ul class="artifact-list" aria-label="Proof artifacts">
-            <li><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/tree/250193c"><b>Checked source snapshot</b>Lean development, strict verification gate, local bibliography, and campaign ledgers</a></li>
-            <li><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/250193c/audits/m32-rank-return-2026-07-28.md"><b>Rank-return audit</b>Rank-profile reduction, return-recurrence boundary, decidable strata, and no-go theorems</a></li>
-            <li><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/250193c/audits/m32-parity-maximal-isolation-2026-08-04.md"><b>Parity and Smith audit</b>Odd-resultant immortality, maximal isolation, rejected antichain claim, and exact remaining obstruction</a></li>
+            <li><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/tree/f8770b4"><b>Checked source snapshot</b>Lean development, strict verification gate, local bibliography, and campaign ledgers</a></li>
+            <li><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/f8770b4/audits/m32-rank-return-2026-07-28.md"><b>Rank-return audit</b>Rank-profile reduction, return-recurrence boundary, decidable strata, and no-go theorems</a></li>
+            <li><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/f8770b4/audits/m32-parity-maximal-isolation-2026-08-04.md"><b>Parity and Smith audit</b>Odd-resultant immortality, maximal isolation, rejected antichain claim, and exact remaining obstruction</a></li>
+            <li><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/f8770b4/audits/m32-universal-boundary-2026-08-05.md"><b>Universal-boundary audit</b>Reset-ball invariance, coefficient sieve, repaired zero branch, and qualified common-period lane</a></li>
+            <li><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/f8770b4/audits/m32-order-breaking-bridge-2026-08-05.md"><b>Order-breaking bridge audit</b>Ready-target ejection, exact primitive normalization, and the surviving global obstruction</a></li>
             <li><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/12"><b>Open arithmetic frontier</b>Durable progress ledger and acceptance boundary for the deterministic guarded recurrence</a></li>
           </ul>
 
@@ -675,7 +801,7 @@
 
   <footer>
     <div>
-      <p>GPT-5.6 Sol · elicited by @eternalism_4eva · 4 August 2026</p>
+      <p>GPT-5.6 Sol · elicited by @eternalism_4eva · 5 August 2026</p>
     </div>
   </footer>
 </body>

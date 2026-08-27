@@ -114,6 +114,21 @@ theorem smithRubanDecoder_det
     _ = (q + 1) * (q - 1) - q ^ 2 := by rw [← split.shift_eq]
     _ = -1 := by ring
 
+/-- The Smith decoder is exactly a positive shear followed by one Gauss continuant generator.
+This exposes its two Smith coordinates as continued-fraction data without adding state. -/
+theorem smithRubanDecoder_continuant_cut
+    {R : Type*} [CommRing R] {q u v : R}
+    (shift_eq : q - 1 = u * v) :
+    smithRubanDecoder q u v =
+      !![1, v; 0, 1] * !![0, 1; 1, (q + 1) * u] := by
+  ext i j
+  fin_cases i <;> fin_cases j <;>
+    simp [smithRubanDecoder, Matrix.mul_apply, Fin.sum_univ_succ]
+  calc
+    q ^ 2 = 1 + (q + 1) * (q - 1) := by ring
+    _ = 1 + (q + 1) * (u * v) := by rw [shift_eq]
+    _ = 1 + v * ((q + 1) * u) := by ring
+
 theorem smithRubanDecoder_mulVec
     (q scale u v eta sourceDenominator targetDenominator : ℤ) :
     smithRubanDecoder q u v *ᵥ
@@ -216,6 +231,63 @@ theorem smithRubanQuotient_inverse
           (scale * sourceDenominator + (q + 1) * u * eta * targetDenominator) -
         (q + 1) * u *
           (scale * v * sourceDenominator + q ^ 2 * eta * targetDenominator) := by ring
+
+/-- The unimodular Smith quotient preserves primitivity. -/
+theorem smithRubanQuotient_isCoprime
+    {q u v left right : ℤ} (shift_eq : q - 1 = u * v)
+    (primitive : IsCoprime left right) :
+    IsCoprime
+      (smithRubanQuotient q 1 u v 1 left right 0)
+      (smithRubanQuotient q 1 u v 1 left right 1) := by
+  obtain ⟨leftCoefficient, rightCoefficient, bezout⟩ := primitive
+  refine ⟨rightCoefficient - leftCoefficient * ((q + 1) * u),
+    leftCoefficient * q ^ 2 - rightCoefficient * v, ?_⟩
+  have inverse := smithRubanQuotient_inverse shift_eq 1 1 left right
+  calc
+    (rightCoefficient - leftCoefficient * ((q + 1) * u)) *
+          smithRubanQuotient q 1 u v 1 left right 0 +
+        (leftCoefficient * q ^ 2 - rightCoefficient * v) *
+          smithRubanQuotient q 1 u v 1 left right 1 =
+      leftCoefficient *
+          (q ^ 2 * smithRubanQuotient q 1 u v 1 left right 1 -
+            (q + 1) * u * smithRubanQuotient q 1 u v 1 left right 0) +
+        rightCoefficient *
+          (smithRubanQuotient q 1 u v 1 left right 0 -
+            v * smithRubanQuotient q 1 u v 1 left right 1) := by ring
+    _ = leftCoefficient * left + rightCoefficient * right := by
+      rw [← inverse.2, ← inverse.1]
+      simp
+    _ = 1 := bezout
+
+/-- On the positive rational cone, the Smith decoder strictly raises primitive-pair height.
+This is the rational positive-matrix descent criterion in the reverse orientation. -/
+theorem smithRubanQuotient_height_gain_of_pos
+    {q u v left right : ℤ}
+    (q_positive : 0 < q) (v_positive : 0 < v)
+    (left_positive : 0 < left) (right_positive : 0 < right) :
+    integralPairHeight left right <
+      integralPairHeight
+        (smithRubanQuotient q 1 u v 1 left right 0)
+        (smithRubanQuotient q 1 u v 1 left right 1) := by
+  let first := smithRubanQuotient q 1 u v 1 left right 0
+  have q_square_positive : 0 < q ^ 2 := sq_pos_of_pos q_positive
+  have first_eq : first = v * left + q ^ 2 * right := by
+    simp [first, smithRubanQuotient]
+  have left_lt_first : left < first := by
+    rw [first_eq]
+    nlinarith [mul_pos v_positive left_positive,
+      mul_pos q_square_positive right_positive]
+  have right_lt_first : right < first := by
+    rw [first_eq]
+    nlinarith [mul_pos v_positive left_positive,
+      mul_pos q_square_positive right_positive]
+  rw [integralPairHeight, integralPairHeight]
+  have left_abs_lt : left.natAbs < first.natAbs :=
+    Int.natAbs_lt_natAbs_of_nonneg_of_lt left_positive.le left_lt_first
+  have right_abs_lt : right.natAbs < first.natAbs :=
+    Int.natAbs_lt_natAbs_of_nonneg_of_lt right_positive.le right_lt_first
+  apply lt_of_lt_of_le (max_lt_iff.mpr ⟨left_abs_lt, right_abs_lt⟩)
+  exact le_max_left _ _
 
 theorem smithRubanQuotient_commonDivisor_iff
     {q u v : ℤ} (shift_eq : q - 1 = u * v)
@@ -651,6 +723,16 @@ theorem returnWaitFrameChange_mulVec
       dotProduct, Fin.sum_univ_succ]
   field_simp [q_ne]
   ring
+
+/-- One fixed integral basis diagonalizes every wait-frame gauge.  The moving factor is the
+pure base-prime dilation `nextQ² / q²`, not an independent shear. -/
+theorem returnWaitFrameChange_diagonal
+    (q nextQ : ℚ) :
+    !![1, 0; 1, 1] * returnWaitFrameChange q nextQ * !![1, 0; -1, 1] =
+      !![1, 0; 0, nextQ ^ 2 / q ^ 2] := by
+  ext i j
+  fin_cases i <;> fin_cases j <;>
+    simp [returnWaitFrameChange, Matrix.mul_apply, Fin.sum_univ_succ]
 
 /-- The honest variable-wait cocycle is the lagged transfer followed by an explicit frame
 gauge.  Omitting this factor silently identifies two different target frames. -/

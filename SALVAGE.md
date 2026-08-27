@@ -111,12 +111,23 @@ file owns the mathematical stock.
 | [`R32-S06`](#r32-s06-resonance-localization) | structure theorem | every nonresonant continuation descends and every infinite ready chain resonates arbitrarily late | formalized | active |
 | [`R32-O06`](#r32-o06-rational-affine-wait-rail-rigidity) | obstruction | no reduced rational chart supports a nontrivial affine wait rail at infinitely many prime powers | formalized | graduated |
 | [`R32-O07`](#r32-o07-parity-immortality-and-maximal-isolation) | obstruction | odd reset resultants are immortal, while maximal Smith steps in the even stratum are isolated | formalized | graduated |
+| [`R32-O08`](#r32-o08-recurrent-boundary-divisors-stay-reverse) | obstruction | outside fixed scale-reset support, a reverse-content divisor recurring in the next boundary remains wholly reverse | formalized | graduated |
+| [`R32-O09`](#r32-o09-universal-boundary-reset-ball) | obstruction | a coefficient-prime reset ball excludes every depth-two guard below its explicit valuation wall | formalized | graduated |
+| [`R32-O10`](#r32-o10-ready-order-breaking-bridge-ejection) | obstruction | a ready order-breaking bridge can eject a strict reset ball without auxiliary cancellation while amplifying denominator height | formalized | graduated |
+| [`R32-O11`](#r32-o11-terminal-only-pole-contraction-is-a-decision-oracle) | obstruction | terminal-only contraction constants are pointwise vacuous; uniform effectivity is already a terminal bound | audited | graduated |
+| [`R32-O12`](#r32-o12-periodic-shadow-obstruction) | obstruction | one fixed guard has arbitrarily long off-reset primitive corridors with nonmaximal Smith allocation and rising carried and Smith coordinate runs | formalized | graduated |
+| [`R32-O13`](#r32-o13-renewal-graph-collapse-and-reset-pullback) | obstruction | every aligned macro consumes shadow depth, local bounded depth does not bound height, and reset ancestry is one exact pulled-back determinant | formalized | graduated |
+| [`R32-O14`](#r32-o14-fixed-reset-geodesic-and-complete-endpoint-language) | structure theorem and obstruction | endpoint terminality is exact and every actual reset prefix has the same distinguished-prime kernel direction | formalized | graduated |
+| [`R32-O15`](#r32-o15-fixed-support-toric-compiler-obstruction) | obstruction | rational fixed-prime counter charts with affine waits admit neither a nontrivial monomial instruction nor a repeatable control cycle | audited | graduated |
+| [`R32-O16`](#r32-o16-irreducible-cubic-punctuation-collapse) | structure theorem and obstruction | cubic returns have an arbitrary-twist trace form; the pure fork is GPI₂ while non-pure unit bridges can be free | formalized core; audited strengthening | graduated |
+| [`R32-O17`](#r32-o17-angular-emergent-primes-and-endpoint-compactness-no-go) | obstruction | terminal angular poles create primes outside determinant support and the wait gauge has nontrivial directional adelic height | formalized | graduated |
+| [`R32-O18`](#r32-o18-finite-rational-radial-atlas-obstruction) | obstruction | every finite rational carry-mode atlas with fixed additive wait shifts is eventually periodic | audited | graduated |
 | [`R32-S07`](#r32-s07-decoded-residual-address-normal-form) | structure theorem | mortality is finite inverse-address membership in disjoint rational p-adic branch spheres | formalized | active |
 | [`R32-M05`](#r32-m05-cyclotomic-reset-or-cancellation-sieve) | partial mechanism | every primitive reduction either resets modulo a cyclotomic prime or swallows it in the common cancellation | formalized | active |
 | [`R32-S08`](#r32-s08-cumulative-endpoint-recurrence) | structure theorem | cumulative endpoint pairs absorb every normalization scalar into one deterministic exact-division recurrence | formalized | active |
 | [`R32-S09`](#r32-s09-complete-cancellation-law) | structure theorem | every base-coprime cancellation depth is the minimum of the terminal-defect and displacement depths | formalized | active |
 | [`R32-S10`](#r32-s10-logarithmic-wait-and-height-envelope) | structure theorem | legal waits are logarithmic in primitive height and every reduced step is uniformly height-Lipschitz | formalized | active |
-| [`R32-S11`](#r32-s11-primitive-factor-terminal-gate) | structure theorem | a large primitive cyclotomic radical forces terminality or a surviving finite-quotient reset | formalized | active |
+| [`R32-S11`](#r32-s11-primitive-factor-terminal-gate) | structure theorem | primitive cyclotomic factors either survive as reset witnesses or are swallowed with full multiplicity and charged to height | formalized | active |
 | [`R32-S12`](#r32-s12-exact-order-projective-automata) | structure theorem | primitive divisors induce finite projective automata with exact swallowed-factor semantics | formalized | active |
 | [`R32-S13`](#r32-s13-canonical-decoded-integral-lift) | structure theorem | every decoded rational path lifts canonically to primitive integral execution | formalized | active |
 | [`R32-S14`](#r32-s14-drift-divisor-certificate-classification) | decidable stratum | drift-divisor certificates are exactly finite cyclic-orbit avoidance | formalized | active |
@@ -124,9 +135,22 @@ file owns the mathematical stock.
 | [`R32-S26`](#r32-s26-evaluation-frame-gauge-closure) | structure theorem and closure | the parameter-jet transition is an exact frame coboundary, and deep frame defect localizes to the reset shell | formalized | graduated |
 | [`R32-S27`](#r32-s27-rational-gap-macro-pumping) | structure theorem and obstruction | exact branch similarity and rational height separation bound every noncyclic repetition of one fixed macro | formalized | active |
 | [`R32-S28`](#r32-s28-terminal-endpoint-and-complementary-content) | structure theorem and obstruction | a terminal gauge exposes complementary forward/reverse contents and coefficient-prime immortality certificates | formalized | active |
-| [`R32-S29`](#r32-s29-adelic-content-and-repeated-factor-budget) | structure theorem and obstruction | content-weighted height, full cyclotomic complement, exterior conservation, and arbitrary repeated-factor pumping share one calculus | formalized | active |
-| [`R32-S30`](#r32-s30-fixed-cusp-and-record-ascent-calculus) | structure theorem and obstruction | cumulative endpoints form a fixed-cusp continued fraction whose critical record ascents pay an exact two-step content budget | formalized | active |
-| [`R32-S31`](#r32-s31-smith-decoder-and-maximal-cancellation-throat) | structure theorem and obstruction | a unimodular content decoder contracts every nonmaximal branch and isolates one exact maximal-cancellation recurrence | formalized | active |
+| [`R32-S29`](#r32-s29-adelic-content-and-repeated-factor-budget) | structure theorem and obstruction | content-weighted height, full cyclotomic complement, exterior conservation, and arbitrary repeated-factor pumping share one calculus | formalized core; audited corollaries | active |
+| [`R32-S30`](#r32-s30-fixed-cusp-and-record-ascent-calculus) | structure theorem and obstruction | cumulative endpoints form a fixed-cusp continued fraction; one primitive prequotient coordinate is carried by an exact generalized-continuant block | formalized | active |
+| [`R32-S31`](#r32-s31-smith-decoder-and-maximal-cancellation-throat) | structure theorem and obstruction | a positive unimodular content decoder contracts nonmaximal branches, while one fixed basis makes every wait gauge a pure base-prime dilation | formalized | active |
+| [`R32-S32`](#r32-s32-rank-two-punctuation-and-graph-removal) | structure theorem and reduction | compatible one-loop rank-two edge squares are intrinsic generic projective incidence; every other edge-rank pattern is decidable | audited | graduated |
+| [`R32-S33`](#r32-s33-terminal-casoratian-and-two-sided-order-allocation) | structure theorem and decidable stratum | terminal normalization comes only from earlier branches, and exact orders persisting to either boundary have forced content orientation | formalized | active |
+| [`R32-S34`](#r32-s34-exact-moving-prime-ledger) | structure theorem | outside fixed support, a divisor enters forward content exactly at simultaneous endpoint and branch-boundary divisibility | formalized | active |
+| [`R32-S35`](#r32-s35-positive-projective-incidence-genericization) | reduction and normalization | arbitrary PI₂ is a bounded positive-prefix disjunction of GPI₂ instances, and every generic instance has `α=β=1` | formalized | active |
+| [`R32-S36`](#r32-s36-guarded-affine-projective-incidence) | compiler | p-adic denominator poisoning gives an all-word guarded affine compiler into normalized GPI₂ | audited | active |
+| [`R32-S37`](#r32-s37-normalized-shortcut-collatz-incidence) | reduction and arithmetic benchmark | fixed projectivities encode pointwise shortcut-Collatz reaches-one exactly inside normalized GPI₂ | formalized | active |
+| [`R32-S38`](#r32-s38-jacobi-schedule-incidence) | structure theorem and obstruction | every wait schedule has one p-adic Jacobi tail, while reset realization is one rational continued-fraction incidence requiring unbounded history-dependent handoffs | formalized core; audited strengthening | active |
+| [`R32-S39`](#r32-s39-reset-companion-and-bilateral-shadow) | structure theorem and obstruction | every first-hit terminal address has a canonical reset companion transmuting reverse content, but its bilateral shadow need not contract even once | formalized core; audited strengthening | active |
+| [`R32-S40`](#r32-s40-binary-affine-syracuse-collapse) | structure theorem and obstruction | parity-selected affine reachability is decidable outside one mixed-slope signed Syracuse family, where only nonhomomorphic carry dynamics remains | audited | active |
+| [`R32-S41`](#r32-s41-parabolic-rational-subset-normal-form) | reduction and obstruction | PI₂ is a parabolic rational-subset problem, already containing fixed-subset shortcut Collatz inside the rank-two affine cusp `ℤ[1/6]⋊ℤ²` | audited | active |
+| [`R32-S42`](#r32-s42-non-pure-cubic-endpoints-and-false-waits) | structure theorem and obstruction | actual singular endpoints support free selected dynamics, but a clean one-singular family has an exact zero made solely from unselected unit waits | formalized core; audited strengthening | active |
+| [`R32-O19`](#r32-o19-projective-queue-centralizer-obstruction) | obstruction | an injective homomorphic projective word store with finite controller cannot recurrently delete and append queue data | audited | graduated |
+| [`R32-O20`](#r32-o20-transverse-reverse-reservoir) | obstruction | a lawful fixed projective cycle accumulates unbounded reverse 13-adic mass on its transverse eigenline | formalized | graduated |
 | [`R32-D03`](#r32-d03-bounded-denominator-periodicity) | decidable stratum | every infinite legal rational guard orbit with bounded reduced denominators is eventually periodic | formalized | graduated |
 | [`M4-C01`](#m4-c01-two-state-pushout-compiler) | compiler | binary deterministic two-state scalar control compiles to three `4 × 4` matrices | formalized | graduated |
 | [`M4-O01`](#m4-o01-exact-toggle-fusion-leaves-an-immortal-core) | obstruction | exact local toggle fusion preserves a nonzero common anchor | formalized | graduated |
@@ -2699,20 +2723,20 @@ nonempty bridge erases its invisible plane changes to `WH`, where `W∈{G,H}*`; 
 exterior blocks remain nonzero products of units. Thus a constrained path vanishes exactly when
 one original incidence coefficient vanishes.
 
-**Scope:** the theorem assumes `αβ≠0`. The two exceptional projective positions remain a
-many-one preprocessing problem: a finite Turing disjunction appears straightforward, but no
-single three-dimensional emitted OR gadget is checked. This record does not assert a full
-many-one equivalence between `M₂(3)` and the rank-`(2,2)` profile.
+**Scope:** the theorem assumes `αβ≠0`. [`R32-S32`](#r32-s32-rank-two-punctuation-and-graph-removal)
+proves that every rank-(2,2) pair reduces to one such generic instance after decidable edge
+strata are discharged. [`R32-S35`](#r32-s35-positive-projective-incidence-genericization) now
+reduces arbitrary PI₂ to at most two generic instances. This identifies their decidability
+status but is not a many-one equivalence with unrestricted PI₂.
 
 **Artifact:** `ReverseEdge.isMortal_adaptedGenerator_iff` and
 `adaptedGenerator_rank` in [`ReverseEdge.lean`](MatrixMortality/ReverseEdge.lean).
 
-**Use:** treat the generic rank-`(2,2)` stratum as inheriting the dimension-two projective hard
-core. Work now belongs on exceptional-point genericization or on the flat constrained edge
-languages not fractured by a rank-one loop.
+**Use:** compile generic PI₂ into rank-(2,2); use `R32-S32` in the forward direction. Work now
+belongs on normalized GPI₂ itself, not on exceptional-scalar transport or the two-vertex edge
+language.
 
-**Next:** replace the exceptional finite disjunction by one computable emitted instance, or
-state and use its exact oracle strength.
+**Next:** decide or prove undecidable normalized GPI₂.
 Tracked in
 [#11](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/11).
 
@@ -3407,7 +3431,8 @@ T=0
 Thus a family whose squarefree product is larger than the terminal defect cannot disappear
 silently. Either the source is already the true terminal projective point, or one factor
 survives primitive reduction and resets the reduced state to one in a finite projective
-quotient.
+quotient. This squarefree interface is deliberately strong: the witness prime is known not to
+divide `g` and therefore survives as a quotient transition.
 
 The canonical family consists of the prime factors of `Φ_a(p)` which do not divide `a`. Every
 such factor is formally proved to be a primitive prime divisor of `pᵃ−1`. Writing
@@ -3435,33 +3460,81 @@ radₚᵣᵢₘ(Φ_a(p))
   ≤ (|A−L|+|D|)H(m,n).
 ```
 
+The complementary interface now retains multiplicity. Define
+
+```text
+Pₐ(p)=∏ ℓ^vℓ(Φₐ(p)),
+```
+
+over the prime factors `ℓ` of `Φₐ(p)` which do not divide `a`. If no such prime resets the
+reduced target, the whole prime power is swallowed:
+
+```text
+Pₐ(p) ∣ g.
+```
+
+Consequently a nonterminal, nonzero step at depth `s` satisfies both
+
+```text
+Pₐ(p) ≤ (|A−L|+|D|)H,
+p^((s−1)a)Pₐ(p) ≤ (|A|+|D|+|L|)H.
+```
+
+The first inequality charges the full part to the terminal defect. The second charges it to the
+same content budget as the distinguished p-adic wait scale. Unlike the squarefree theorem, this
+does not assert that a reset prime survives reduction: it says that absent every reset, no
+primitive multiplicity can disappear without being paid by `g`.
+
+Glasby-Lübeck-Niemeyer-Praeger identify the corresponding strong primitive part as `Φₐ(p)` or
+`Φₐ(p)/r` for `a>2`, where `r` is the largest prime divisor of `a`. Lean now reconstructs the
+weaker exact interface needed for growth,
+
+```text
+Φₐ(p) ∣ aPₐ(p),
+(p−1)^φ(a) ≤ aPₐ(p),
+```
+
+and hence proves
+
+```text
+p^a(p−1)^φ(a) ≤ a(|A|+|D|+|L|)H
+```
+
+at depth two on every no-reset branch.
+
 This is the precise local-global gate sought by [`R32-M05`](#r32-m05-cyclotomic-reset-or-cancellation-sieve).
-It replaces the vague requirement that “cyclotomic growth beat height” by a squarefree radical
-inequality and exposes exactly where pure size arguments stop.
+It removes repeated prime powers as an uncontrolled escape and splits the arithmetic into a
+surviving finite quotient or full strong-primitive absorption.
 
-**Scope:** no unconditional lower bound strong enough for the primitive cyclotomic radical is
-proved. Cyclotomic values grow like `p^φ(a)`, but repeated prime powers can make their
-squarefree radical much smaller; controlling that loss uniformly is a genuinely number-theoretic
-obligation. Nor does a surviving reset automatically reject the terminal residue: it supplies a
-finite exact-order quotient whose future reachability must still be analyzed.
+**Scope:** inherited height can still pay the full factor; the inequality is local and must be
+combined with global adelic amortization. The exact equality with the published `Φ⁎ₐ(p)` is not
+formalized, but is no longer needed for the displayed growth bound. A surviving reset likewise
+supplies a finite exact-order transition, not automatic rejection of the terminal residue.
 
-**Artifact:** `primitiveCyclotomicPrimes`,
+**Artifact:** `primitiveCyclotomicPrimes`, `primitiveCyclotomicRadical`,
+`primitiveCyclotomicPart`, `primitiveCyclotomicPart_pos`,
+`cyclotomicValue_dvd_exponent_mul_primitiveCyclotomicPart`,
+`sub_one_pow_totient_le_exponent_mul_primitiveCyclotomicPart`,
 `primitivePrimeDivisor_of_mem_primitiveCyclotomicPrimes`,
-`terminal_or_exists_cyclotomic_reset`,
-`cyclotomicProduct_le_terminalDefect_of_no_reset`,
-`terminalDefect_zero_or_exists_primitive_reset`, and
-`primitiveCyclotomicRadical_le_height_of_no_reset` in
-[`ReturnGuardTerminalGate.lean`](MatrixMortality/ReturnGuardTerminalGate.lean).
+`terminal_or_exists_cyclotomic_reset`, `cyclotomicProduct_le_terminalDefect_of_no_reset`,
+`terminalDefect_zero_or_exists_primitive_reset`,
+`primitiveCyclotomicRadical_le_height_of_no_reset`,
+`primitiveCyclotomicPart_dvd_common_of_no_reset`, and
+`primitiveCyclotomicPart_le_height_of_no_reset` in
+[`ReturnGuardTerminalGate.lean`](MatrixMortality/ReturnGuardTerminalGate.lean), together with
+`primitiveCyclotomicPart_mul_wait_le_height_of_no_reset` and
+`strongPrimitivePressure_le_height_of_no_reset` in
+[`ReturnGuardAdelic.lean`](MatrixMortality/ReturnGuardAdelic.lean). Independent synthesis:
+[`m32-number-theory-triangulation-2026-08-06.md`](audits/m32-number-theory-triangulation-2026-08-06.md).
 
 **Use:** split the remaining decision attack cleanly. A surviving primitive factor enters a
-finite projective graph of exact multiplicative order `a`; if every such graph is inconclusive,
-the primitive radical is charged to one explicit terminal defect and bounded by primitive
-height.
+finite projective graph of exact multiplicative order `a`; if every primitive reset is absent,
+the entire strong primitive part is charged to one explicit content and height budget.
 
-**Next:** prove either that enough primitive factors survive to yield a complete finite-quotient
-certificate, or that repeated failure forces a radical-divisibility history belonging to a
-known hard Diophantine class. A bare lower bound for `Φ_a(p)` is insufficient; the needed object
-is its primitive squarefree part.
+**Next:** combine the checked strong primitive pressure with either a positive Smith-block
+height descent or the exact gauged Smith cocycle in an adelic continued-fraction inequality.
+Do not return to a squarefree-radical lower-bound problem unless a surviving quotient witness
+is specifically required.
 
 ### R32-S12: Exact-order projective automata
 
@@ -3899,7 +3972,7 @@ subgroup tests, then combine all three coefficient boundaries with denominator g
 ### R32-S29: Adelic content and repeated-factor budget
 
 **Kind:** structure theorem and obstruction
-**Evidence:** formalized
+**Evidence:** formalized core; audited corollaries
 **Disposition:** active
 
 If one integral step reduces as `(M,N)=h(m′,n′)`, primitive height satisfies
@@ -3931,6 +4004,35 @@ product of their projective heights.
 to occur in an arbitrary wait word and do not bound a schedule whose reduced denominators grow
 without bound.
 
+In the endpoint-adapted norm
+
+```text
+Ψ(r,t)=max(|D||t|,|r−(A−L)t|),       Γ=|A|+|D|+|L|,
+```
+
+the same one-step calculus gives `|h|Ψ⁺≤ΓΨ` and `pᵃ|D||h|≤ΓΨ` at depth two. Iteration from
+reset yields
+
+```text
+(∏_{n<N}|hₙ|)Ψ_N ≤ |D|Γᴺ,
+Q_N∏_{n<N}|hₙ| ≤ |L|Γᴺ,
+p^aⁿ∏_{j≤n}|hⱼ| ≤ Γⁿ⁺¹.
+```
+
+Consequently distinct activated fresh primes occur only `O(N/log N)` times before return `N`;
+on an aperiodic orbit every activated packet `d_i` satisfies `d_i=o(Ψ_{n_i})`, and regaining its
+pre-activation height takes at least `⌈log_Γ d_i⌉` returns. Two consecutive steps which swallow
+their entire source numerators also have a coefficient-effective second-wait bound. These are
+audited corollaries, not a second formal recurrence API. They still permit a sparse microscopic
+doubly order-broken genealogy.
+
+For reset defect `Δ=r−(A+D−L)t`, one also has `pᵃ−1∣hΔ⁺`. A reset-avoiding prefix therefore
+has a coefficient-effective quadratic bound on total wait mass, and a first-hit terminal word
+has an exponential bound on its complete forward-content product and terminal
+scalar/coefficient gcd. These remain bounds in the unknown length. `R32-O20` proves that the
+unreactivated reverse product cannot be bounded from the projective endpoints: a fixed lawful
+cycle hides an arbitrary 13-power on its transverse eigenline.
+
 **Artifact:** `ReturnGuard.integralStep_content_mul_height_le`,
 `integralStep_wait_content_le`, `cyclotomicComplement_dvd_targetDifference`, and
 `primitiveSteps_projectivePairCross` in
@@ -3938,14 +4040,14 @@ without bound.
 `sharedSchedule_exact_or_power_le_pairHeights` and
 `sharedSchedule_exact_or_power_le_heightEnvelope` in
 [`ReturnGuardPumping.lean`](MatrixMortality/ReturnGuardPumping.lean). Independent synthesis is
-recorded in
-[`m32-endpoint-content-2026-07-30.md`](audits/m32-endpoint-content-2026-07-30.md).
+recorded in [`m32-endpoint-content-2026-07-30.md`](audits/m32-endpoint-content-2026-07-30.md) and
+[`m32-sparse-genealogy-budget-2026-08-10.md`](audits/m32-sparse-genealogy-budget-2026-08-10.md).
 
 **Use:** charge every swallowed factor immediately and apply pumping to repeated factors
 wherever they occur, not only to powers from reset.
 
-**Next:** extract a sufficiently heavy repeated factor from an unbounded-denominator schedule,
-or construct a coefficient-aligned orbit whose growth evades every such extraction.
+**Next:** prove a reset-anchored recurrence-or-escape certificate for the sparse microscopic
+two-sided-order-break residue, or construct an exact orbit which realizes that residue.
 
 ### R32-S30: Fixed-cusp and record-ascent calculus
 
@@ -3997,6 +4099,19 @@ wait itself is the approximation depth to one fixed rational ray:
 vₚ(A Rᵢ − DL Rᵢ₋₁) = aᵢ.
 ```
 
+There is also a primitive coordinate carried through consecutive reductions without choosing a
+reverse content. Put `q=p^a`, `Q=p^b`, `sᵢ=hᵢtᵢ₊₁`, and `Xᵢ=(tᵢ,sᵢ)ᵀ`. Existing
+prequotient coprimality gives `gcd(Xᵢ)=1`, while Lean now proves at every depth `s`
+
+```text
+Q^s hᵢ Xᵢ₊₁ =
+  [[0,Q^s],[DL(q−1),A+Dq^s−LQ]] Xᵢ.
+```
+
+Thus the global projective transfer is a generalized continuant with no complementary-content
+or tangent state. The coordinate is attached to an outgoing edge and its second entry has the
+sign of `hᵢ`; a local floor selector and a common positive cone are not yet proved.
+
 At the critical depth `s=2`, two consecutive primitive steps with nondecreasing waits `a≤b`
 satisfy the exact local mountain budget
 
@@ -4013,26 +4128,30 @@ C(p⁻ᵃ) = J · [[1,0],[-p⁻ᵃ,1]],
 J³ = −I.
 ```
 
-**Scope:** this is an absolute two-step budget at the start of a local record ascent. It does
-not yet compare the charged power with height accumulated before that ascent. The reported
-full “fresh cyclotomic core” lower bound was not promoted: two versions of the report use
-incompatible loss exponents, and neither supplies the missing valuation bookkeeping.
+**Scope:** the carried coordinate removes a state-transport obstruction but supplies no global
+height descent. The record estimate remains an absolute two-step budget at the start of a local
+ascent and does not compare the charged power with inherited height. The reported full “fresh
+cyclotomic core” lower bound was not promoted: two versions use incompatible loss exponents,
+and neither supplies the missing valuation bookkeeping.
 
 **Artifact:** `PrimitiveEndpointReduction.content_natAbs_eq_gcd_driftSource_prequotient`,
 `PrimitiveEndpointReduction.resetDefect_eq_complement_mul`,
 `PrimitiveEndpointReduction.complement_dvd_terminalBoundary`, `terminalPredecessorPair_step`,
 `cumulativeCompleteQuotient_recurrence`, `cumulativeCompleteQuotient_sub_forbiddenCusp`,
-`cumulativeWaitForm_hasValue`, `PrimitiveEndpointReduction.twoStep_contentBudget`,
+`cumulativeWaitForm_hasValue`, `PrimitiveEndpointReduction.twoStep_prequotient_transport`,
+`PrimitiveEndpointReduction.twoStep_contentBudget`,
 `criticalDecoder_factor`, and `criticalDecoderCore_cube` in
 [`ReturnGuardContinued.lean`](MatrixMortality/ReturnGuardContinued.lean). Independent audit:
-[`m32-fixed-cusp-record-ascent-2026-08-01.md`](audits/m32-fixed-cusp-record-ascent-2026-08-01.md).
+[`m32-fixed-cusp-record-ascent-2026-08-01.md`](audits/m32-fixed-cusp-record-ascent-2026-08-01.md)
+and [`m32-prequotient-adelic-2026-08-06.md`](audits/m32-prequotient-adelic-2026-08-06.md).
 
-**Use:** state the residual arithmetic in the fixed-cusp quotient and charge every
-nondecreasing pair locally before importing any primitive-divisor estimate.
+**Use:** carry terminal corridors in the primitive prequotient coordinate; use the fixed-cusp
+quotient for wait selection and charge every nondecreasing pair before importing a
+primitive-divisor estimate.
 
-**Next:** prove a global shear or active-core amortization theorem comparing a record ascent's
-fresh `p^(a+b)` charge with the height inherited at its moving checkpoint. A merely absolute
-height estimate repeats the local theorem and cannot close the orbit.
+**Next:** prove a coefficient-effective positive or adelic block theorem for the displayed
+generalized continuant. It must control the edge-coordinate sign and removed scalar and compare
+each record charge with inherited height; another absolute estimate cannot close the orbit.
 
 ### R32-S31: Smith decoder and maximal-cancellation throat
 
@@ -4053,7 +4172,15 @@ The corresponding endpoint decoder
 C(q,u,v) = [[v,q²],[1,(q+1)u]]
 ```
 
-has determinant `−1`. Its inverse proves that every common reduction factor in the decoded
+has determinant `−1` and the exact continuant cut
+
+```text
+C(q,u,v) = [[1,v],[0,1]] [[0,1],[1,(q+1)u]].
+```
+
+Thus the moving Smith factors are a positive shear and one Gauss digit, not an opaque matrix
+norm. On positive coprime input, Lean verifies that the decoded pair remains coprime and its
+primitive max-height strictly increases. The inverse proves that every common reduction factor in the decoded
 pair divides the fixed coefficient `Lη`. More generally, for every `core∣q−1`, the part
 
 ```text
@@ -4081,28 +4208,41 @@ r=(q−1)m,
 The submitted variable-wait cocycle required correction. In the frame
 `F_q(m,n)=(n,q²m−n)`, one step maps `F_q` to the same lagged frame `F_q`; changing the target
 to `F_Q` requires an explicit rational gauge `J(q,Q)`. Lean checks the lagged identity, the
-gauge, and their composition. The ungauged concatenating identity and all global tropical
-estimates derived from it are false in general and were rejected.
+gauge, and their composition. One fixed basis now sharpens the gauge exactly:
 
-**Scope:** contraction is local after natural `q²` rescaling. This record does not bound an
-arbitrary gauged product. The formerly open infinite chain of `v=1` steps is excluded by
+```text
+[[1,0],[1,1]] J(q,Q) [[1,0],[−1,1]] = diag(1,Q²/q²).
+```
+
+The moving frame defect is therefore a pure base-prime dilation, not an irreducible shear. The
+ungauged concatenating identity and all global tropical estimates derived from it are false in
+general and were rejected.
+
+**Scope:** contraction is local after natural `q²` rescaling. Diagonalizing the gauge does not
+diagonalize the intervening Smith cocycles or bound their product. The formerly open infinite
+chain of `v=1` steps is excluded by
 [`R32-O07`](#r32-o07-parity-immortality-and-maximal-isolation).
 
 **Artifact:** `exists_smithRubanSplit`, `smithRubanDecoder_det`,
+`smithRubanDecoder_continuant_cut`,
+`smithRubanQuotient_isCoprime`, `smithRubanQuotient_height_gain_of_pos`,
 `smithRubanDecoder_weight_contraction`,
 `PrimitiveEndpointReduction.coreQuotient_dvd_complement`,
 `PrimitiveEndpointReduction.smithRuban_resetDefect`,
 `PrimitiveEndpointReduction.maximalCancellation`, `integralStep_laggedReturnCocycle`, and
-`gaugedReturnCocycle_mulVec` in
+`returnWaitFrameChange_diagonal`, `gaugedReturnCocycle_mulVec` in
 [`ReturnGuardSmith.lean`](MatrixMortality/ReturnGuardSmith.lean). Independent reconstruction:
-[`m32-smith-ruban-2026-08-02.md`](audits/m32-smith-ruban-2026-08-02.md).
+[`m32-smith-ruban-2026-08-02.md`](audits/m32-smith-ruban-2026-08-02.md) and
+[`m32-prequotient-adelic-2026-08-06.md`](audits/m32-prequotient-adelic-2026-08-06.md).
 
 **Use:** split every large cyclotomic factor into a contracting branch or the exact maximal
 throat before applying height or primitive-divisor arguments. Never concatenate lagged frames
 without the intervening gauge.
 
-**Next:** prove a global arithmetic or continued-fraction estimate amortizing the nonmaximal
-steps that occur at least after every maximal step. A moving-frame norm alone is insufficient.
+**Next:** orient the carried prequotient coordinate through the signed Smith charts as an inverse
+positive macro, or calculate the full adelic factor of its exact generalized continuant. The
+missing theorem must control cone entry, the moving chart diagonal, and primitive reduction;
+positivity of an abstract two-decoder product is not enough.
 
 ### R32-O07: Parity immortality and maximal isolation
 
@@ -4152,6 +4292,1265 @@ globalize the local contraction on `v≥2` branches.
 **Use:** discard residue characteristic two, the entire odd-resultant mortality stratum, and
 every eventually maximal schedule. Any surviving undecidability construction or decision
 argument must live in even `R` and traverse a `v≥2` branch after each maximal step.
+
+### R32-O08: Recurrent boundary divisors stay reverse
+
+**Kind:** obstruction
+**Evidence:** formalized
+**Disposition:** graduated
+
+Consider consecutive primitive endpoint reductions with signed forward and reverse contents
+
+```text
+h k   = DL(pᵃ−1),
+h′ k′ = DL(pᵇ−1),
+R     = A+D−L.
+```
+
+For every signed divisor `d`, Lean proves
+
+```text
+d∣k,  d∣L(pᵇ−1),  gcd(d,LR)=1
+  ⇒ gcd(d,h′)=1 ∧ d∣k′.
+```
+
+The result retains multiplicity and assumes neither that `d` is prime nor that the carry depth
+is two. It reverses the proposed prime-handoff rule: a recurring boundary factor already on the
+reverse side cannot switch to forward cancellation outside the fixed scale-reset support.
+
+**Scope:** the theorem concerns consecutive reductions for which the divisor occurs in the
+next boundary. A primitive divisor of a maximal wait is absent from every intervening smaller
+wait, so an intervening invertible projective bridge can still change the incidence at its next
+occurrence. The theorem supplies no global allocation law across such a bridge.
+
+**Artifact:** `PrimitiveEndpointReduction.recurrentBoundaryDivisor_persists` in
+[`ReturnGuardContinued.lean`](MatrixMortality/ReturnGuardContinued.lean). Independent audit:
+[`m32-jacobi-handoff-2026-08-05.md`](audits/m32-jacobi-handoff-2026-08-05.md).
+
+**Use:** do not model repeated primitive factors as alternating tokens. At an immediate repeated
+boundary they persist on the reverse side; across a smaller-wait bridge, use the existing
+exact-order projective automaton and prove the required incidence or valuation statement.
+
+### R32-O09: Universal-boundary reset ball
+
+**Kind:** obstruction
+**Evidence:** formalized
+**Disposition:** graduated
+
+At depth two, choose an integral coefficient presentation
+
+```text
+center=A/L,    drift=D/L,    R=A+D−L.
+```
+
+For any prime `ℓ`, put
+
+```text
+λL=vℓ(L),   λR=vℓ(R),   λD=vℓ(D),
+e=vℓ(p−1), ε=vℓ(2).
+```
+
+If `R≠0` and
+
+```text
+λR < λL+e,
+2λR < λD+e+min(λL,λR+ε),
+```
+
+then the open `ℓ`-adic ball of depth `λR` around reset is invariant under every positive
+decoded branch. The exact mechanism is
+
+```text
+(F_q(z)−R)(z−L(q−1)) = D(q−1)((q+1)z+L),    q=pᵃ.
+```
+
+Reset belongs to the ball and terminal `0` does not, so the physical guard is immortal. If the
+last blade vanishes, the branch returns exactly to reset; this case must be separated before
+using finite valuations.
+
+Every prime `ℓ∣p−1` of a mortal guard consequently divides `R`; hence `rad(p−1)∣R`. The full
+valuation wall is stronger than this squarefree sieve and is unchanged by common rescaling of
+`A,D,L`.
+
+**Scope:** the invariant begins at reset. A tail whose waits are all multiples of `m` inherits
+the analogous `pᵐ−1` wall only if its entry endpoint is already in the corresponding ball. The
+theorem neither proves that entry nor amortizes a later wait outside `mℕ`.
+
+**Artifact:** `ReturnGuard.not_physical_isMortal_of_resetBall` and
+`ReturnGuard.universalBoundary_dvd_resetResultant_of_physical_isMortal` in
+[`ReturnGuardBoundary.lean`](MatrixMortality/ReturnGuardBoundary.lean). Independent audit:
+[`m32-universal-boundary-2026-08-05.md`](audits/m32-universal-boundary-2026-08-05.md).
+
+**Use:** reject depth-two coefficient laws below the wall before any orbit analysis. Do not infer
+trapping from a common-period tail alone; [`R32-O10`](#r32-o10-ready-order-breaking-bridge-ejection)
+also excludes a uniform charge on its first order-breaking bridge.
+
+### R32-O10: Ready order-breaking bridge ejection
+
+**Kind:** obstruction
+**Evidence:** formalized
+**Disposition:** graduated
+
+At depth two, the coefficient law
+
+```text
+p=3,   A=R=249398,   D=L=1
+```
+
+has the ready prefix
+
+```text
+249399 ─4→ 4863261/19 ─1→ 67384284465/270178,
+```
+
+and the final target is itself ready at wait one. The auxiliary prime `5` is a primitive divisor
+of `3⁴−1`. In endpoint coordinates, wait four moves from reset into its strict `5`-adic
+ball, while the order-breaking wait one returns to the boundary:
+
+```text
+v₅(R)=0,   v₅(z₁−R)=1,   v₅(z₂−R)=0.
+```
+
+The bridge's raw endpoint pair has gcd `18`, coprime to `5`; no auxiliary content is swallowed.
+Its primitive denominator grows from `19` to `270178`. The reset resultant is even and the law
+passes every universal-boundary wall.
+
+**Scope:** this is a continuing legal prefix, not an infinite orbit. It refutes every uniform
+first-bridge invariant-ball, auxiliary-content, repetition, or denominator-descent charge, even
+when the target remains ready. It does not refute a global amortization theorem over complete
+surviving executions.
+
+**Artifact:** `ReturnGuard.Examples.orderBreaker_shatters_resetBall` in
+[`ReturnGuardExamples.lean`](MatrixMortality/ReturnGuardExamples.lean). Independent audit:
+[`m32-order-breaking-bridge-2026-08-05.md`](audits/m32-order-breaking-bridge-2026-08-05.md).
+
+**Use:** retire the first order-breaking bridge as an independent local consumer. Any exact-order
+proof must amortize an unbounded bridge sequence in one global invariant and is therefore part of
+the existing nonmaximal-amortization problem.
+
+### R32-O11: Terminal-only pole contraction is a decision oracle
+
+**Kind:** obstruction
+**Evidence:** audited
+**Disposition:** graduated
+
+For a legal terminal execution, write `T=2∑aᵢ`, let `m` count its nonmaximal Smith steps, and
+let `π` be the pole of the complete endpoint product. The proposed fixed-frame contraction was
+
+```text
+H(π) ≤ C p^T ρ^m,    C>0, 0<ρ<1,
+```
+
+with constants depending on the fixed coefficient law. The guard is deterministic, so a fixed
+law has at most one first-hit terminal execution. Pointwise existence is therefore automatic:
+take `ρ=1/2`; in the immortal case any positive `C` works, while after a terminal word is known
+one may take
+
+```text
+C=max(1,H(π)2^m/p^T).
+```
+
+Calling each resulting rational number computable does not make the dependence on the
+coefficients effective. The missing datum is a single total algorithm which receives
+`(p,A,D,L)` and returns valid rational `C,ρ` without first solving terminal reachability.
+
+Such an algorithm is already a guard decider. The audited pole lower bound and checked
+maximal-step isolation give
+
+```text
+p^T/(1+|R|) ≤ H(π) ≤ C p^T ρ^m,    N≤2m.
+```
+
+Successive powers of rational `ρ` then compute a terminal-length bound. Conversely, a guard
+decider computes valid constants: output arbitrary constants in the immortal case, or simulate
+to the first terminal hit and use the displayed formula. Thus uniform terminal-only pole
+contraction is equivalent in effective content to the desired guard decision, not a smaller
+arithmetic lemma.
+
+The report's fixed-frame algebra is correct but does not escape this quantifier wall. For a
+terminal product the checked endpoint transport already forces
+
+```text
+M=[[εK,−εRK],[c,S−Rc]],    π=R−S/c.
+```
+
+Orbit-adapted triangularization rewrites `−c/S` as a mixed-radix extension sum. The Smith
+reconstruction identity
+
+```text
+[[R,−(A−L)v],[1,−v]] C(q,u,v)
+  = [[Dv,A−L+Dq²],[0,1]]
+```
+
+identifies `c` as the channel through which inherited height can repay local contraction, but
+supplies no bound on that channel. The prefix congruence gives exact approximation depth and
+only the natural height corridor
+
+```text
+p^T/(1+|R|) ≤ H(π) ≤ C_E^N p^T.
+```
+
+This excludes closure by bare rational approximation at the natural exponent. It does not
+exclude a semigroup-specific estimate.
+
+**Scope:** this record rejects the pointwise terminal formulation as frontier movement. It does
+not refute an explicit coefficient formula proved from the recurrence, a uniform inequality on
+a nonterminal class broad enough to have independent content, or a constructive infinite
+orbit. The elementary dual, triangular, and reconstruction identities were culled rather than
+installed as an unconsumed Lean API.
+
+**Artifact:** independent reconstruction in
+[`m32-fixed-frame-pole-2026-08-06.md`](audits/m32-fixed-frame-pole-2026-08-06.md).
+
+**Use:** require the next decision attack to output an explicit coefficient algorithm or
+terminal-length function and prove its estimate without invoking the terminal time. Do not
+accept existential constants chosen after the unique execution is known.
+
+### R32-O12: Periodic-shadow obstruction
+
+**Kind:** obstruction
+**Evidence:** formalized
+**Disposition:** graduated
+
+The fixed depth-two guard
+
+```text
+p=3,   A=17,   D=−5,   L=16,   reset=3/4
+```
+
+has ready wait one at reset and maps reset back to itself. Nevertheless, for every `B` it has a
+legal corridor of length greater than `B` all of whose states lie off reset. The family is
+indexed by an odd shadow depth `K≥3`:
+
+```text
+t(K,n)=4−9^(K+1)+10^n9^(K+1−n),
+E(K,n)=(32t(K,n)−36t(K,n+1),t(K,n)).
+```
+
+Every internal edge is the actual wait-one guard step induced by the exact primitive endpoint
+reduction
+
+```text
+E(K,n) --h=−4--> E(K,n+1).
+```
+
+Its carried pair `(t(K,n),−4t(K,n+1))` is primitive. The fixed Smith split is
+
+```text
+(u,η,θ,v)=(1,−4,20,2),
+```
+
+and the raw Smith decoder output is exactly four times the primitive pair
+
+```text
+(8t(K,n)−9t(K,n+1), 4(t(K,n)−t(K,n+1))).
+```
+
+Both primitive-pair heights rise strictly along arbitrarily long runs of consecutive edge
+coordinates. The audit identifies the mechanism as a `3`-adic shadow of the fixed carried ray
+`x=−4`: each wait-one step removes exactly two units from `v₃(x+4)`. Hence no bound depending
+only on the coefficients can ensure a descending carried or Smith-height block inside every
+legal corridor, even when every edge has `v=2` and the wait gauge is constant.
+
+**Scope:** these are finite off-reset corridors. The reset orbit of this guard is fixed; the
+theorem neither reaches terminal nor constructs an infinite unbounded-denominator orbit. It
+does not refute an estimate anchored at reset, conditioned on first-hit terminality, or run in
+reverse from the terminal boundary.
+
+**Artifact:** `ReturnGuard.PrimitiveEndpointReduction.guardedStep_endpointState` in
+[`ReturnGuardCumulative.lean`](MatrixMortality/ReturnGuardCumulative.lean) and
+`ReturnGuard.Examples.periodicShadow_obstruction` in
+[`ReturnGuardPeriodicShadow.lean`](MatrixMortality/ReturnGuardPeriodicShadow.lean). Independent
+audit: [`m32-periodic-shadow-2026-08-06.md`](audits/m32-periodic-shadow-2026-08-06.md).
+
+**Use:** retire coefficient-uniform descent quantified over all legal corridors. A surviving
+decision proof must use reset or terminal history and retain the unbounded arithmetic depth of a
+near-periodic shadow; the opposing construction must make one fixed reset orbit concatenate such
+episodes rather than merely exhibit them off orbit.
+
+### R32-O13: Renewal-graph collapse and reset pullback
+
+**Kind:** obstruction
+**Evidence:** formalized
+**Disposition:** graduated
+
+The proposed episode-local renewal dichotomy has no surviving arm. Its reset-anchored bounded-
+depth arm could survive only by using full ancestry absent from a local renewal graph. For every
+legal wait word `w`, the already-checked exact similarity gives
+
+```text
+vₚ(F_w(x)−F_w(y))=vₚ(x−y)−s∑w.
+```
+
+Every honest aligned renewal edge therefore has negative depth weight, and every finite aligned
+cycle has strictly negative total weight. A misaligned ray switch caps sufficiently deep inputs
+at the fixed separation of the transported and target rays; extra depth occurs only on one
+threshold shell through leading-residue cancellation and is not an iterable macro weight.
+
+The opposite implication also fails locally. In the fixed guard of
+[`R32-O12`](#r32-o12-periodic-shadow-obstruction), for every bound there is a legal off-reset
+wait-one edge with content `−4`, Smith coordinate `v=2`, primitive carried pair `X`, and
+
+```text
+v₃(X₂/X₁+4)=2
+```
+
+whose endpoint and carried heights both exceed the bound. Thus bounded shadow depth plus every
+finite local label does not yield a finite endpoint box.
+
+Reset history is retained exactly by the new cumulative pullback law. If
+
+```text
+M_uP₀=p^(s∑u)Pᶜ_u,
+```
+
+then for every integral reference ray `V`,
+
+```text
+Δ(P₀,adj(M_u)V)=p^(s∑u)Δ(Pᶜ_u,V).
+```
+
+When `Pᶜ_u=H_uP_u`, this is the primitive-content form with the additional factor `H_u`. A deep
+shadow reached from reset is therefore one high-power divisibility condition on a moving
+pulled-back ray, not a finite renewal-state label.
+
+**Scope:** no compactness extraction has been proved. An infinite orbit may have unbounded
+height while remaining at bounded depth from every fixed rational periodic ray, or may visit
+infinitely many rays and threshold residues. Varying factors `p^a−1` prevent a fixed-support
+`S`-unit conclusion from the pullback identity alone.
+
+**Artifact:** `CumulativeEndpointExecution.pullback_projectivePairCross` in
+[`ReturnGuardCumulative.lean`](MatrixMortality/ReturnGuardCumulative.lean),
+`Examples.periodicShadow_shatters_localCompactness` in
+[`ReturnGuardPeriodicShadow.lean`](MatrixMortality/ReturnGuardPeriodicShadow.lean), and
+[`m32-renewal-collapse-2026-08-07.md`](audits/m32-renewal-collapse-2026-08-07.md).
+
+**Use:** retire fixed positive-depth renewal cycles and episode-local finite-box arguments.
+[`R32-O14`](#r32-o14-fixed-reset-geodesic-and-complete-endpoint-language) subsequently proves
+that radial reset ancestry is already fixed. The surviving use of this record is therefore the
+threshold-cancellation obstruction: a decision proof must bound the global angular determinant
+or carry, while an opposing construction must vary waits or auxiliary allocation essentially
+aperiodically. Repeating one finite shadow gadget cannot work.
+
+### R32-O14: Fixed reset geodesic and complete endpoint language
+
+**Kind:** structure theorem and obstruction
+**Evidence:** formalized
+**Disposition:** graduated
+
+For every positive wait word `w`, the endpoint terminal equation is complete:
+
+```text
+EndpointTerminalWord(w) ↔ inverseAddress(w,terminalResidual)=1.
+```
+
+The inverse branches recover a lawful decoded execution, and their disjoint positive branch
+spheres make the terminal word unique. Thus the positive endpoint zero language is singleton-
+or-empty, and physical guard mortality is exactly the existence of a nonempty word in that
+language. Endpoint algebra creates no witnesses through a pole, an incorrect wait, or a
+malformed intermediate state.
+
+Modulo the distinguished prime, every nonempty positive endpoint product is
+
+```text
+A^(|w|−1) · [[A−L,(A−L)L],[1,L]].
+```
+
+In the normalized presentation, `A` is a p-unit, so this is one fixed nonzero rank-one flag.
+If `D` and `L` are p-units, the determinant valuation is exactly the full schedule weight
+`Ω=s∑w`. More strongly, every cumulative execution from the reset pair satisfies
+
+```text
+ker(M_w mod p^Ω) = (ℤ/p^Ωℤ) · (A+D−L,1).
+```
+
+The reset direction is therefore fixed at every depth. The moving determinant in
+[`R32-O13`](#r32-o13-renewal-graph-collapse-and-reset-pullback) varies only through its angular
+reference, not through a radial ancestral ray at `p`. A primitive positive-depth pullback also
+retains its full `p^(Ω+δ)` factor: its transverse coordinate is a p-unit, so primitive
+normalization removes no distinguished-prime power. This last consequence was audited from the
+checked pullback identity and not installed as a duplicate API.
+
+The lawful coefficients
+
+```text
+(p,s,A,D,L)=(3,2,122753,−17,39232)
+```
+
+have exactly one positive terminal word, `[1,1,1]`. Lean checks both the product and uniqueness,
+and derives mortality of the associated rational rank-`(3,2)` pair. This refutes every universal
+one- or two-return terminal bound.
+
+**Scope:** neither endpoint uniqueness nor the fixed reset geodesic bounds terminal length. The
+unresolved data are angular: factors of `p^a−1` split between forward and reverse contents and
+can finance an unbounded mixed-radix carry across auxiliary places. No effective carry bound and
+no aperiodic unbounded-denominator reset orbit has been obtained. Deciding this guard would still
+leave generic PI₂ before full `M₃(2)`.
+
+**Artifact:** `ReturnGuard.endpointProduct_mod_prime`,
+`ReturnGuard.endpointProduct_det_hasValue`,
+`ReturnGuard.CumulativeEndpointExecution.endpointKernel_eq_resetLine`,
+`ReturnGuard.endpointTerminalWord_iff_inverseAddress_eq_one`,
+`ReturnGuard.endpointTerminalWord_unique`, and
+`ReturnGuard.physical_isMortal_iff_endpointTerminalWord` in
+[`ReturnGuardEndpointCompleteness.lean`](MatrixMortality/ReturnGuardEndpointCompleteness.lean);
+`ReturnGuard.Examples.threeReturn_endpointTerminalWord_iff` and
+`ReturnGuard.Examples.threeReturn_physical_isMortal` in
+[`ReturnGuardExamples.lean`](MatrixMortality/ReturnGuardExamples.lean). Independent audit:
+[`m32-fixed-geodesic-endpoint-completeness-2026-08-07.md`](audits/m32-fixed-geodesic-endpoint-completeness-2026-08-07.md).
+
+**Use:** retire malformed endpoint witnesses, moving radial reset ancestry, hidden positive-depth
+primitive-normalization savings at `p`, and a universal two-return bound. Analyze the remaining
+one-dimensional angular carry globally across its moving auxiliary prime support, or construct
+an exact aperiodic reset-started orbit that uses it to sustain unbounded denominators.
+
+### R32-O15: Fixed-support toric compiler obstruction
+
+**Kind:** obstruction
+**Evidence:** audited
+**Disposition:** graduated
+
+Write a ready state as
+
+```text
+R_a(t)=p^a+p^(sa)/t.
+```
+
+Suppose finitely many control charts store counters in a fixed set of auxiliary-prime powers,
+their canonical tails are rational functions of those powers, their waits are affine in the
+counter exponents, and every instruction translates the counter vector by a fixed amount on a
+cofinal orthant. Zariski density of the paired prime-power grid and Laurent-support comparison
+force both endpoint wait slopes of every instruction to vanish. If the charts are Laurent
+monomials, the p-unit constant term in the exact tail transition then forbids every nonconstant
+instruction; one affine monomial ray can meet its instruction equation at no more than five
+counter values.
+
+Arbitrary rational charts cannot restore iteration. Every fixed-wait tail matrix has one common
+rank-one reduction modulo `p`. A nonempty control-cycle product has unit trace and positive
+determinant valuation, hence a projective eigenvalue quotient of nonzero p-adic valuation. A
+toric chart shift scales every variable by a p-unit and preserves the Gauss valuation, which
+contradicts that quotient.
+
+**Scope:** this excludes separated rational charts over fixed auxiliary-prime support with
+affine wait dependence. It does not exclude an input-specific history with non-affine waits,
+continually changing factors of `p^a−1`, or angular state not rationally determined by a fixed
+torus.
+
+**Artifact:** independent reconstruction in
+[`m32-fixed-support-toric-obstruction-2026-08-08.md`](audits/m32-fixed-support-toric-obstruction-2026-08-08.md).
+The existing single-chart formal obstruction remains
+`ReturnGuard.Rail.no_infinite_primePower_affineWait_rail`; no parallel multivariate API was
+retained.
+
+**Use:** retire orthodox fixed-prime FRACTRAN and Minsky encodings in the guard. Any aperiodic
+counter-orbit must use genuinely moving cyclotomic support and unbounded history rather than a
+stationary prime-exponent register.
+
+### R32-O16: Irreducible-cubic punctuation collapse
+
+**Kind:** structure theorem and obstruction
+**Evidence:** formalized core; audited strengthening
+**Disposition:** graduated
+
+Let `A ∈ GL₃(ℚ)` have irreducible cubic characteristic polynomial and put `Mₙ=VAⁿU`
+for rank-two interfaces `U,V`. The cubic-field sandwich map `z ↦ Vm_zU` is injective. Thus no
+return is zero, every singular return has rank one, every nonzero scalar observation has exact
+recurrence order three, and `det Mₙ` has exact irreducible order three under `∧²A`.
+
+Root-of-unity degeneracy occurs exactly for the pure cubic `χ_A=X³−N`, equivalently
+`A³=NI`. Otherwise the singular waits form a finite effectively enumerable set, and distinct
+waits give distinct projective returns. In the pure case Lean proves, for arbitrary words,
+
+```text
+M_(3q+r)=N^q M_r,
+mortality of {Mₙ : n≥0} ↔ mortality of {M₀,M₁,M₂}.
+```
+
+Every irreducible-cubic return family has a computable common-left reflection form
+`Mₙ=QJₙ`, where each `Jₙ` is traceless. Unit indices are projective involutions and singular
+indices are square-zero rank-one maps. The non-pure residue is therefore exact reachability
+between finitely many forced endpoint lines under an order-three recurrence of reflections.
+
+This reflection form has a canonical trace model. If `K₀` is the trace-zero plane of the cubic
+field and `Tₓ(u)=π(xu)` is projected multiplication, then, after interface conjugation,
+
+```text
+Mₙ=F T_(γθⁿ).
+```
+
+The twist `F∈GL₂(ℚ)` is arbitrary: every such tuple has a rank-two physical realization. The
+singular conic is parametrized by inversion, `Tₓ` is singular exactly when `x⁻¹∈K₀`, and its
+kernel is `⟨x⁻¹⟩`. Clifford normalization turns the remaining bridge equation into reachability
+on that rational null conic under the adjoint twist of an arbitrary `Q` interleaved with the recurrence
+reflections.
+
+No algebraic finite-state collapse follows. The explicit non-pure family
+
+```text
+A=[[0,0,1],[1,0,1],[0,1,0]],
+U=[[0,−2/3],[1,0],[0,1]],
+V=[[0,0,31],[1,0,0]]
+```
+
+has `χ_A=X³−X−1`, a singular return `M₀`, and unit returns
+
+```text
+M₁=F=diag(31,1),    M₄=FR,
+R=[[1,1/3],[1,1]].
+```
+
+Real ping-pong proves that `F,R` generate their free product. Hence `M₁,M₄` generate a free
+binary submonoid with an injective rational-line orbit. This kills bounded bridge length or a
+finite set of projective bridge states as consequences of cubic recurrence and involutivity
+alone; it does not decide reachability between the actual singular endpoint lines.
+
+The pure residue triple is still more rigid. Three determinant-polarization equations give the
+normal form
+
+```text
+(P R, P, P Jμ),
+R=[[1,1],[0,0]],   Jμ=[[0,μ],[1,0]],   μ∈ℚ× ∖ ℚ×³.
+```
+
+Zero singular residues give immortality and two singular residues reduce to four
+order-at-most-two recurrence tests. In the unique one-singular stratum, Lean proves that both
+exceptional scalars of the existing reverse-edge compiler are exactly `μ⁻¹`. Hence this entire
+pure fork is already one GPI₂ instance, not an independent involutive-ratio problem.
+
+**Scope:** Lean checks the pure-cubic arbitrary-word collapse and the exact genericity scalars of
+the one-singular normal form. Field faithfulness, singular-time classification, canonical trace
+and null-conic forms, arbitrary twist, and the free physical bridge are independently audited.
+The free witness in this record did not use a singular endpoint. `R32-S42` subsequently closes
+that placement seam and isolates arbitrary unselected waits as the surviving obstruction.
+GPI₂ itself remains open.
+
+**Artifact:** `CubicReturn.returnProduct_eq_smul_residues`,
+`CubicReturn.pairGenerator_isMortal_iff_residue`, and
+`CubicReturn.pureOneSingular_reverseEdgeScalars` in
+[`CubicReturn.lean`](MatrixMortality/CubicReturn.lean), with the reconstructions in
+[`m32-cubic-punctuation-collapse-2026-08-08.md`](audits/m32-cubic-punctuation-collapse-2026-08-08.md)
+and
+[`m32-cubic-reflection-generic-bridge-2026-08-09.md`](audits/m32-cubic-reflection-generic-bridge-2026-08-09.md).
+The arbitrary-twist, null-conic, and free-bridge strengthening is reconstructed in
+[`m32-cubic-null-conic-orbit-2026-08-10.md`](audits/m32-cubic-null-conic-orbit-2026-08-10.md).
+
+**Use:** retire cubic singular timing as an unbounded store and merge the pure one-singular fork
+into GPI₂. Do not seek a finite bridge-state collapse from recurrence order or involutivity.
+
+**Next:** superseded by `R32-S42`: decide the endpoint-faithful all-waits recurrence, or compile
+universality while making every unselected recurrence index harmless.
+
+### R32-S32: Rank-two punctuation and graph removal
+
+**Kind:** structure theorem and reduction
+**Evidence:** audited
+**Disposition:** graduated
+
+For a rank-(2,2) pair, all four compressed `2 × 2` edges are nonzero. Split every constrained
+path at its rank-one punctuation edges. The unit-only outer factors preserve nonzero rows and
+columns, so the path vanishes exactly when one bridge between consecutive punctuation edges has
+zero scalar incidence.
+
+This fractures the complete edge-rank census. With no punctuation every path is a unit. With at
+least two punctuation edges the remaining unit graph has at most two edges, so its bridge
+languages are finite unions of unary loops and are decidable by order-at-most-two recurrences.
+One rank-one cross-edge gives equality of two positive cyclic `PGL₂(ℚ)` orbits; an audited
+effective algorithm handles the parabolic cases elementarily and the semisimple cases by
+effective `S`-unit enumeration.
+
+The unique hard stratum has one rank-one loop `qr` and three unit edges. Lean transports every
+compatible square in this stratum exactly to the existing raw reverse compiler. The intrinsic
+instance has controls `A` and `BU`, row `rU`, column `Bq`, and exceptional scalars
+
+```text
+α=rq,   β=1.
+```
+
+Thus the square is mortal exactly when `rq=0`, giving immediate loop nilpotence, or the one
+intrinsic generic incidence instance has a zero word. Combining the checked reverse compiler
+with the audited decidable strata yields
+
+```text
+Mort₃^(2,2) ≡ₘ GPI₂.
+```
+
+**Scope:** the one-loop transport, forced `β=1`, and complete path equivalence are formalized.
+The forward reduction's cyclic-orbit branch imports effective unit equations and is audited,
+with source [`EG13`](references/evertse-gyory-2013-effective-unit-equations.md). `R32-S35`
+separately removes arbitrary nongeneric PI₂ as a decidability seam; neither result decides GPI₂.
+
+**Artifact:** `RankTwoPunctuation.transport_eq_rawEdge` and
+`RankTwoPunctuation.exists_pathProduct_eq_zero_iff_selfBridge_or_incidence` in
+[`RankTwoPunctuation.lean`](MatrixMortality/RankTwoPunctuation.lean), with the full rank census
+in [`m32-rank-two-punctuation-2026-08-08.md`](audits/m32-rank-two-punctuation-2026-08-08.md).
+
+**Use:** replace every rank-(2,2) graph attack by generic PI₂. The graph supplies neither a
+controller bit nor a distinct universality mechanism; the remaining seam is the projective
+incidence problem itself.
+
+### R32-O17: Angular emergent primes and endpoint compactness no-go
+
+**Kind:** obstruction
+**Evidence:** formalized
+**Disposition:** graduated
+
+In endpoint-adapted bases, a terminal product is triangular with diagonal factors
+
+```text
+X=p^Ω∏h_i,   Y=(−1)^n∏k_i
+```
+
+and shear `β`. Changing complements alters `β` by `Xm₀−Ym_n`, so only its residue modulo
+`gcd(X,Y)` is intrinsic. In the physical basis the complete terminal boundary is
+
+```text
+M_w=[[Y,−RY],[c,X−Rc]],
+```
+
+where terminality leaves `c` free. The full fixed `p^Ω` kernel fixes one p-adic residue but
+does not bound the primitive pole `((Rc−X)/g,c/g)`, `g=gcd(X,c)`. Even all diagonal factors,
+Smith labels, valuations, and finitely many congruence labels permit unbounded abstract shear
+unless the actual off-diagonal recurrence is retained.
+
+The obstruction occurs in a genuine first-hit word. For
+
+```text
+(p,s,A,D,L)=(3,2,467,−35,124),   w=[3,1],
+```
+
+Lean checks the exact terminal product and primitive pole `(494,−41)`. The new pole primes
+`19` and `41` divide neither the coefficient/reset data nor either cyclotomic branch factor
+`3³−1`, `3¹−1`. Hence determinant allocation does not control angular support.
+
+Separately, the depth-two wait gauge is conjugate to `diag(1,p^(2(b−a)))`, whose projective
+adelic height is `p^(2|b−a|)`, not one. The product formula cancels common scalar size, not
+directional eigenvalue ratio.
+
+**Scope:** the exact emergent-prime certificate is formalized. The complement calculus,
+boundary-freedom theorem, and adelic gauge-height calculation are independently audited. They
+exclude arguments that discard the actual off-diagonal guard recurrence, not a bound exploiting
+that recurrence.
+
+**Artifact:** `ReturnGuard.Examples.decreasingMortal_emergentAngularPrimes` in
+[`ReturnGuardExamples.lean`](MatrixMortality/ReturnGuardExamples.lean), with reconstruction in
+[`m32-angular-emergent-primes-2026-08-08.md`](audits/m32-angular-emergent-primes-2026-08-08.md).
+The surviving additive continuant is already owned by the cumulative endpoint recurrence; no
+duplicate API was added.
+
+**Use:** abandon fixed-support `S`-unit bounds and direction-free product-formula compactness.
+Attack `gcd(X_n,c_n)` or the primitive additive continuant along actual legal terminal histories.
+
+### R32-O18: Finite rational radial-atlas obstruction
+
+**Kind:** obstruction
+**Evidence:** audited
+**Disposition:** graduated
+
+Suppose finitely many modes express the ready tail as a reduced rational function
+
+```text
+t=T_v(p^a),
+```
+
+and every transition `e:v→w` changes the wait by one fixed integer `d_e`. Clearing the exact
+tail-transition identity forces `P_w(p^(d_e)X)` to divide the source denominator. The quotient
+divides `X−1`. Degree transport around a directed cycle then forces every quotient to be
+constant and all chart numerator and denominator degrees to agree.
+
+Comparing constant terms and the leading terms that must cancel yields
+
+```text
+C^ℓ=(∏_e p^(d_e))^(s+N).
+```
+
+Since `C` is a p-unit and `s+N>0`, every directed cycle has total shift `Σd_e=0`.
+For an actual nonperiodic orbit, every recurrent edge is sampled at infinitely many distinct
+prime powers and therefore satisfies the rational identity. Zero cycle weights make the
+recurrent shifts a graph coboundary, bounding all waits. Finitely many chart states remain, so
+determinism forces exact eventual periodicity and bounded reduced denominators.
+
+**Scope:** this excludes finite rational charts with a finite transition alphabet of fixed
+additive wait shifts. It does not exclude infinitely many charts or shifts, or angular state not
+rationally determined by the current `p^a` and one finite mode.
+
+**Artifact:** independent reconstruction in
+[`m32-finite-radial-atlas-2026-08-08.md`](audits/m32-finite-radial-atlas-2026-08-08.md).
+The checked one-chart rail and bounded-denominator orbit theorem remain the executable owners;
+no duplicate rational-atlas API was retained.
+
+**Use:** retire finite carry-mode counter machines even when no single global rail exists. A
+counter-orbit must retain genuinely unbounded angular history or an unbounded wait-difference
+alphabet.
+
+### R32-S33: Terminal Casoratian and two-sided order allocation
+
+**Kind:** structure theorem and decidable stratum
+**Evidence:** formalized
+**Disposition:** active
+
+Let `P` be the endpoint product before the final branch, `c⁻=P₂₁`, and suppose the final
+product sends reset to terminal with scalar `X` and lower-left coefficient `c`. The lower row of
+the final transfer gives
+
+```text
+z c − X c⁻ = det P,
+```
+
+where `z` is the preceding cumulative denominator. Hence every common divisor of `X` and `c`
+already divides the determinant support before the final branch. Since the fixed mod-`p` flag
+makes `c` a p-unit,
+
+```text
+gcd(X,c) ∣ (DL)^(n−1) ∏_(i<n−1)(p^aᵢ−1).
+```
+
+No factor born at the terminal boundary can enter primitive pole normalization.
+
+For a terminal schedule define prefix and suffix wait gcds `eᵢ` and `dᵢ`. After deleting
+the fixed support of `DLR`, the full primitive cyclotomic part of exact order `dᵢ` divides
+forward content `hᵢ`, while that of exact order `eᵢ` divides reverse content `kᵢ`. Thus only
+mass whose order is broken on both chronological sides remains freely allocable. Primitive-part
+growth makes the gcd of all waits effectively finite and yields an explicit decider for the
+stratum `a₀∣a₁∣⋯∣aₙ₋₁`.
+
+**Scope:** the Casoratian is Lean-checked. The global content induction, effective threshold,
+and divisibility-chain algorithm are independently audited from checked local theorems. An
+arbitrary sequence of order-breaking bridges can replenish earlier determinant support; no
+global amortization or counter-orbit follows.
+
+**Artifact:** `ReturnGuard.endpointProduct_append`,
+`ReturnGuard.endpointTransfer_casoratian`, and
+`ReturnGuard.terminalCommonDivisor_dvd_previousDet` in
+[`ReturnGuardCumulative.lean`](MatrixMortality/ReturnGuardCumulative.lean), with the global proof in
+[`m32-casoratian-order-allocation-2026-08-09.md`](audits/m32-casoratian-order-allocation-2026-08-09.md).
+
+**Use:** replace the undifferentiated `gcd(Xₙ,cₙ)` obstruction by the doubly order-broken
+core. A decision proof must amortize bridges which destroy exact order on both sides; an
+undecidability construction must realize such recycled support along one exact reset orbit.
+
+### R32-S34: Exact moving-prime ledger
+
+**Kind:** structure theorem
+**Evidence:** formalized
+**Disposition:** active
+
+For a primitive endpoint reduction with source numerator `r`, forward content `h`, wait `a`,
+and any divisor `d` coprime to `pDL`, Lean proves
+
+```text
+d∣h ⇔ d∣r ∧ d∣(pᵃ−1).
+```
+
+This is prime-power exact and applies to composite divisors. Equivalently, for every prime
+`ℓ∤pDL`, forward content receives exactly the minimum of the multiplicities in `r` and
+`pᵃ−1`; the excess remains reverse. There is no hidden auxiliary-prime register outside the
+current endpoint numerator and branch boundary.
+
+Combined with `R32-S33`, an angularly emergent prime is inert when created. It can participate
+in later primitive cancellation only after a wait divisible by `ord_ℓ(p)` and simultaneous
+reappearance in the endpoint numerator. An aperiodic counter-orbit therefore needs an explicit
+infinite genealogy of synchronized births, not merely continual additive prime creation.
+
+**Scope:** this is a local allocation theorem. It supplies neither a global lower bound on
+content nor an infinite orbit. The reciprocal Euclidean coordinates and angular Wronskian are
+culled as restatements of the cumulative endpoint recurrence and `R32-S33`. Rational Mahler
+rails of degree at least two were already excluded by the stronger checked rail-degree theorem.
+
+**Artifact:** `ReturnGuard.PrimitiveEndpointReduction.divisor_dvd_content_iff` in
+[`ReturnGuardContinued.lean`](MatrixMortality/ReturnGuardContinued.lean), with synthesis in
+[`m32-moving-prime-ledger-2026-08-09.md`](audits/m32-moving-prime-ledger-2026-08-09.md).
+
+**Use:** on the constructive side, require every proposed auxiliary prime to satisfy both exact
+ledger conditions at each activation. On the decision side, combine those synchronization
+events with the two-sided order budget rather than bounding a fictitious hidden register.
+
+### R32-S35: Positive projective-incidence genericization
+
+**Kind:** reduction and normalization
+**Evidence:** formalized
+**Disposition:** active
+
+For nonzero row and column and unit controls `G,H`, the two exceptional source rays of the
+ordered reverse compiler are exactly
+
+```text
+H ker(r),
+H G⁻¹ H ker(r).
+```
+
+Lean proves that `αβ≠0` is equivalent to the source avoiding these two rays. Intersecting this
+set with the exceptional set after swapping `G,H` leaves at most two sources. If that common set
+has two points, Lean proves that the relative projectivity permutes it, so the two labelled
+successors are simultaneously internal or external. Positive first exit therefore reduces
+unrestricted PI₂ nonadaptively to at most two GPI₂ queries, each reached by a positive prefix of
+length at most two.
+
+Every generic instance also admits independent nonzero generator scalings
+
+```text
+H' = αH,      G' = (α²/β)G
+```
+
+for which `α'=β'=1`. Lean proves both identities and preserves the zero coefficient of every
+word, including the empty word.
+
+**Scope:** the exact exceptional locus, common-set cardinality, two-point transition mechanism,
+and unit normalization are formalized. The finite first-exit synthesis is independently audited.
+This is a bounded truth-table reduction, not a many-one reduction to one generic instance, and
+it does not decide GPI₂. The residual fixed-ray and order-three one-query forms are culled from
+the master frontier because closing them would not decide any additional master stratum.
+
+**Artifact:** `ProjectiveIncidence.generic_iff_sourcePoint_not_mem_badSources`,
+`ProjectiveIncidence.commonBadSources_two_transition_iff`, and
+`ProjectiveIncidence.exists_unitNormalized` in
+[`ProjectiveIncidence.lean`](MatrixMortality/ProjectiveIncidence.lean), with reconstruction in
+[`m32-three-query-genericization-2026-08-09.md`](audits/m32-three-query-genericization-2026-08-09.md)
+and
+[`m32-two-query-genericization-2026-08-09.md`](audits/m32-two-query-genericization-2026-08-09.md).
+
+**Use:** identify PI₂ and GPI₂ at the level of decidability and normalize all further attacks to
+`α=β=1`. The live rank-(2,2) enemy is GPI₂ itself; exceptional-scalar plumbing is retired.
+
+### R32-S36: Guarded affine projective incidence
+
+**Kind:** compiler
+**Evidence:** audited
+**Disposition:** active
+
+For a prime `p`, two branches
+
+```text
+Fᵢ(z)=(aᵢz+bᵢ)/p,       p∤aᵢ,
+```
+
+with distinct legal residues compile to two upper-triangular projective matrices. The first
+illegal branch from a p-integral state creates valuation `−1`; every subsequent branch lowers
+that valuation. Hence a word reaches a p-integral target if and only if every letter was legal.
+At `p=2`, the residues exhaust parity and the resulting source dynamics is deterministic.
+
+Two explicit predecessor nonincidences are exactly the genericity conditions. When they hold,
+the existing scalar normalization makes `α=β=1` without changing any word zero.
+
+**Scope:** this proves a compiler and a complete malformed-word converse, not universality or
+decidability of binary guarded affine reachability.
+
+**Artifact:** [`audits/m32-projective-arithmetic-guard-2026-08-10.md`](audits/m32-projective-arithmetic-guard-2026-08-10.md).
+
+**Use:** search for intrinsic arithmetic universality inside normalized GPI₂ rather than a
+separate finite word controller. Any decision theorem must consume the parity-selected family.
+
+**Next:** decide reachability for two-branch parity-selected affine maps, or reduce a known
+undecidable arithmetic system to that exact family while preserving the two genericity
+nonincidences.
+
+### R32-S37: Normalized shortcut-Collatz incidence
+
+**Kind:** reduction and arithmetic benchmark
+**Evidence:** formalized
+**Disposition:** active
+
+The fixed projective inverse branches
+
+```text
+A(z)=2z,       B(z)=(2z−1)/3
+```
+
+carry the pointwise shortcut-Collatz reaches-one set exactly. Starting at `1`, every binary word
+either stays on integral legal predecessors or acquires negative 3-adic valuation at its first
+illegal `B`; later letters cannot restore integrality. For every nonzero integer target `n`, the
+row `(1,−n)`, column `(1,1)ᵀ`, and scalar representatives
+
+```text
+Hₙ=(1/2−n)A,       Gₙ=((1/2−n)²/(−3n))B
+```
+
+have `α=β=1` and the same complete word-zero language. Lean proves
+
+```text
+∃w, incidence(Gₙ,Hₙ,(1,−n),(1,1)ᵀ,w)=0
+  ↔ n reaches 1 under shortcut Collatz.
+```
+
+**Scope:** this is a pointwise reduction, not a proof of the universal Collatz conjecture and
+not an undecidability theorem. The normalized matrix representatives vary by central scalar,
+but their two projective transformations are fixed.
+
+**Artifact:** `ProjectiveCollatz.reachesOne_iff_shortcutCollatz`,
+`ProjectiveCollatz.predecessorState_reaches_or_negative`,
+`ProjectiveCollatz.normalizedScalars`, and
+`ProjectiveCollatz.exists_normalizedIncidence_zero_iff` in
+[`ProjectiveCollatz.lean`](MatrixMortality/ProjectiveCollatz.lean), with reconstruction in
+[`m32-collatz-incidence-2026-08-10.md`](audits/m32-collatz-incidence-2026-08-10.md).
+
+**Use:** every normalized GPI₂ decision proof must consume this intrinsic arithmetic family.
+Do not replace it with an intended-language simulation or a finite malformed-word controller.
+
+**Next:** decide the fixed-projectivity predecessor family by an exact symbolic arithmetic
+invariant, or embed a known universal guarded-affine system through the same all-word p-adic gate.
+
+### R32-S38: Jacobi schedule incidence
+
+**Kind:** structure theorem and obstruction
+**Evidence:** formalized core; audited strengthening
+**Disposition:** active
+
+For consecutive primitive endpoint reductions, the native edge quotient
+
+```text
+τᵢ=L tᵢ/(hᵢtᵢ₊₁)
+```
+
+obeys the exact generalized Jacobi transition
+
+```text
+qᵢ₊₁+qᵢ₊₁ˢ/τᵢ₊₁
+  = A/L+(D/L)(qᵢˢ+(qᵢ−1)τᵢ).
+```
+
+Lean proves this directly from two primitive endpoint reductions. With
+`βᵢ=(qᵢ−1)τᵢ`, the backward update is fractional-linear in `βᵢ₊₁`; Lean also proves its exact
+difference factor. Iterating that factor shows that every prescribed positive wait schedule has
+one compatible p-adic unit tail. It comes from the rational reset exactly when one explicit
+p-adic continued fraction equals
+
+```text
+Lq₀ˢ(q₀−1)/(A+D−Lq₀).
+```
+
+Every adjacent handoff `αᵢ=βᵢ/(qᵢ₊₁−1)` approximates `A/D` to depth
+`min(aᵢ₊₁,saᵢ)` and pays the corresponding Archimedean rational height. A finite handoff alphabet
+therefore has bounded waits and is eventually periodic. If all states lie on one fixed rational
+ready-tail chart, target readiness itself forces an affine monomial wait rail; the checked rail
+theorem excludes it without assuming the successor schedule in advance.
+
+**Scope:** no aperiodic rational schedule, fixed coefficient tuple, or undecidability reduction
+is constructed. The p-adic completion, reset equivalence, handoff-height consequence, and
+automatic one-chart reduction are audited; only the finite Jacobi identities are kernel checked.
+The packet-allocation table is already owned by `R32-S34` and is not duplicated.
+
+**Artifact:** `jacobiTail`, `jacobiBackward_sub`, and
+`PrimitiveEndpointReduction.jacobiTail_transition` in
+[`ReturnGuardContinued.lean`](MatrixMortality/ReturnGuardContinued.lean), with reconstruction in
+[`m32-jacobi-schedule-incidence-2026-08-11.md`](audits/m32-jacobi-schedule-incidence-2026-08-11.md).
+
+**Use:** reject schedule-first counterexamples. A genuine split counterorbit must solve the
+rational reset incidence through an infinite unbounded-height handoff alphabet whose chart
+depends on accumulated history.
+
+**Next:** construct such a reset incidence, or prove that its moving Jacobi tail cannot coexist
+with first-hit terminality and the global content budget.
+
+### R32-S39: Reset companion and bilateral shadow
+
+**Kind:** structure theorem and obstruction
+**Evidence:** formalized core; audited strengthening
+**Disposition:** active
+
+Every reset-started first-hit terminal address canonically pulls the reset backward through the
+same inverse branches. The resulting primitive companion follows the same waits and ends at
+reset. If `Wᵢ` is the projective cross of the actual and companion states, their forward
+contents are `hᵢ,ĥᵢ`, and the actual complementary content is `kᵢ`, then
+
+```text
+p^(saᵢ) ĥᵢ Wᵢ₊₁ = −kᵢ Wᵢ.
+```
+
+After removing the forced suffix power, the crosses are nonzero p-unit integers `δᵢ` with
+terminal value `±R`. For the four content products this gives
+
+```text
+δ₀=(±1)RĤ/K=(±1)RH/K̂.
+```
+
+Thus actual reverse mass outside reset support reappears as companion forward mass. The endpoint
+product compresses the uncancelled residue to one angular gcd deficit
+
+```text
+|δ₀|=|RH|/|K̂|.
+```
+
+Primewise differences of consecutive `δᵢ` are the exact bilateral packet ledger. Existing
+boundary theorems force every moving layer surviving in `H/K̂` to be order-broken on both
+chronological sides.
+
+Monotone descent is nevertheless false. The checked positive family indexed by `n` has
+
+```text
+c=24n+1,  R=24n+2,
+(R,1) --h=−cR--> (0,1),
+((12n+1)(108n+5),−2) --ĥ=(12n+1)(108n+5)--> (R,1),
+K̂=4c,
+|H|/|K̂|=R/4=(12n+1)/2.
+```
+
+The expansion is unbounded, even though the actual step is nonmaximal. It is supported on the
+fixed tuple through `2R`, so it refutes per-step or coefficient-uniform contraction but not a
+coefficient-effective global amortization.
+
+**Scope:** companion existence and the bilateral identities are audited compositions of the
+checked inverse-address, integral-lift, exterior-product, and complementary-content theorems.
+Lean checks the complete parametric counterfamily. No terminal bound or amortization constant is
+claimed.
+
+**Artifact:** `ReturnGuard.Examples.resetCompanion_counterfamily` in
+[`ReturnGuardExamples.lean`](MatrixMortality/ReturnGuardExamples.lean), with reconstruction in
+[`m32-reset-companion-2026-08-11.md`](audits/m32-reset-companion-2026-08-11.md).
+
+**Use:** replace endpoint-only reverse charging by the canonical first-hit companion. Reject
+monotone shadow descent and any proof multiplying local Smith savings without charging bilateral
+packet overlap.
+
+**Next:** prove coefficient-effective bilateral shadow amortization
+`|Hₓ|/|K̂ₓ|≤Cρ^m(w)` for first-hit terminal words, or construct a rational reset-incidence
+orbit whose doubly broken packet intervals repay every Smith loss aperiodically.
+
+### R32-S40: Binary affine Syracuse collapse
+
+**Kind:** structure theorem and obstruction
+**Evidence:** audited
+**Disposition:** active
+
+At denominator two, the guarded-affine GPI₂ compiler is exactly an integer least-significant-bit
+map
+
+```text
+T(2m)=a₀m+c₀,       T(2m+1)=a₁m+c₁,
+```
+
+with odd slopes. A common odd denominator merely conjugates the rational 2-integral orbit to
+the numerator orbit and supplies no extra register. If both slope magnitudes are one, every
+orbit enters an explicit invariant interval. If both are at least three, absolute value escapes
+monotonically outside an explicit interval. Both strata are decidable by exact finite-box
+simulation.
+
+Only the mixed stratum survives. Affine conjugacy and acceleration through the unit branch put
+it in one of the two forms
+
+```text
+S₊(n)=(an+B)/2^v₂(an+B),
+S₋(n)=(−1)^(v₂(an+B)−1)(an+B)/2^v₂(an+B),
+```
+
+for fixed odd `a,B`. Every length-`N` macro has linear multiplier with odd numerator
+`a₀^N₀a₁^N₁` and denominator `2ⁿ`. This excludes direct radix-tag append, direct
+FRACTRAN valuation decrement, and finite affine-chart microcoding: the last chart factors
+always telescope on controller cycles. It does not exclude computation by carries. Writing
+`η=−B/a∈ℤ₂`, the positive map deletes the maximal common binary prefix of `n` and the
+fixed eventually periodic word `η`, then multiplies the odd tail by `a`. That nonhomomorphic
+carry transducer is the sole surviving universality seam inside this compiler.
+
+The genericity exceptions are bounded preprocessing, not a second obstruction. Follow the
+deterministic orbit through the at-most-two common bad source rays until target, repetition, or
+first exit; after exit one ordering is generic, and the checked scalar normalization and
+two-plane pushout complete the reduction.
+
+**Scope:** no invariant universal configuration code, halting converse, undecidability theorem,
+or decision theorem for the mixed Syracuse family is obtained. The literature-exhaustion claims
+are not promoted. The arithmetic conjugacies, finite-box arguments, and scoped multiplier
+obstructions are independently audited; no narrow duplicate Lean orbit API was added.
+
+**Artifact:**
+[`m32-binary-affine-syracuse-2026-08-11.md`](audits/m32-binary-affine-syracuse-2026-08-11.md).
+
+**Use:** restrict further guarded-affine universality attacks to the mixed signed Syracuse
+family. Do not spend the all-word compiler on direct radix, tag, FRACTRAN, denominator-register,
+or finite affine-controller encodings.
+
+**Next:** exhibit an invariant configuration-code family driven by multiplication carries in
+the fixed `ax+B` map, prove that family's reachability decidable, or leave the guarded-affine
+lane for a genuinely projective mechanism.
+
+### R32-S41: Parabolic rational-subset normal form
+
+**Kind:** reduction and obstruction
+**Evidence:** audited
+**Disposition:** active
+
+For arbitrary `G,H∈GL₂(ℚ)` and nonzero incidence row and column, choose rational bases `C,D`
+whose first columns are the source and a target-kernel vector. After localizing at the finite set
+of coefficient and determinant primes,
+
+```text
+∃p∈{G,H}*, rpc=0
+⇔ I ∈ {G,H}*^⁻¹ D Bₛ C⁻¹,
+```
+
+where `Bₛ` is the explicitly finitely generated upper-triangular subgroup of
+`GL₂(ℤ[S⁻¹])`. Thus arbitrary PI₂, and hence normalized GPI₂, is one effective
+identity-membership question for a rational subset of an `S`-arithmetic matrix group. Uniform
+decidability of that problem, here named SARSM₂, would decide the rank-(2,2) profile; no such
+theorem is imported or claimed.
+
+The fixed shortcut-Collatz projectivities already generate
+
+```text
+Γ₆=ℤ[1/6]⋊ℤ².
+```
+
+Let `P` be their positive monoid, `K` the stabilizer of one, `R=PK`, and
+`τₙ(z)=z+N−1`. Then
+
+```text
+τₙ∈R ⇔ ∃p∈P, p(1)=N
+     ⇔ N reaches 1 under shortcut Collatz.
+```
+
+The final equivalence is the checked all-word predecessor theorem. Hence only the queried
+translation varies: one fixed rational subset of one fixed metabelian group already contains
+the arithmetic benchmark.
+
+The positive monoid is free by an explicit affine normal form, so relations are not the
+obstruction. Nor does the Tits alternative close the decision lane. Every finite-index subgroup
+of `Γ₆` retains rank-two multiplier image and cannot reduce to a one-dilation affine group;
+adjoining non-elementary generators does not stop an automaton from remaining inside this
+exponentially distorted cusp. Fixed-arity `S`-unit equations do not control its unbounded ordered
+translation sums.
+
+**Scope:** the parabolic reduction, cusp computation, fixed-subset equivalence, and freeness
+argument are independently audited. Claims about the current literature remain reported, not
+theorem evidence. Neither SARSM₂, Collatz decidability, nor an undecidability reduction is supplied.
+No broad rational-subset infrastructure was added to Lean; the existing formal predecessor and
+GPI₂ compilers are the kernel-checked consumers.
+
+**Artifact:**
+[`m32-parabolic-rational-subset-2026-08-11.md`](audits/m32-parabolic-rational-subset-2026-08-11.md).
+
+**Use:** abandon a Tits-alternative split that treats the solvable branch as routine. Any GPI₂
+decision theorem must control automaton membership in the rank-two affine cusp; any
+undecidability theorem must cross the fixed two-branch Collatz boundary without assuming it.
+
+**Next:** decide rational-subset membership for `ℤ[1/6]⋊ℤ²` or the narrower fixed subset
+`R`, find a sound reduction into that fixed pair, or identify additional normalization structure
+that makes GPI₂ smaller than ambient SARSM₂.
+
+### R32-S42: Non-pure cubic endpoints and false waits
+
+**Kind:** structure theorem and obstruction
+**Evidence:** formalized core; audited strengthening
+**Disposition:** active
+
+For the non-pure companion ambient with polynomial `X³+X²−1`, Lean checks
+
+```text
+A³+A²=I,       det A=1,       A³≠λI,
+M_(n+3)=M_n−M_(n+2).
+```
+
+Its positive returns are units and wait zero is the unique singular return. The arbitrary
+physical twist has enough freedom to align the actual singular image and kernel while retaining
+a free selected binary semigroup. In one explicit rank-two physical family,
+
+```text
+M₀M₁M₀=0,
+```
+
+and exact interval ping-pong for selected waits one and five proves freeness. Endpoint placement
+is therefore not the non-pure obstruction.
+
+A second physical twist isolates the true failure. Its selected returns are upper triangular
+with nonzero lower diagonal, and Lean proves that every word over waits `{1,5}` sends the actual
+singular image `[79:90]` to a ray with nonzero lower coordinate. The selected endpoint orbit is
+also injective by audited disjoint-interval ping-pong. Nevertheless every letter of
+
+```text
+[12,12,8,12,12,15,8]
+```
+
+is positive and strictly unselected, while Lean proves
+
+```text
+M₀ M₁₂ M₁₂ M₈ M₁₂ M₁₂ M₁₅ M₈ M₀=0.
+```
+
+Thus selected freeness, actual endpoint faithfulness, and selected immortality give no
+arbitrary-word converse. After normalization, the complete remaining predicate is one endpoint
+coefficient for an arbitrary common left factor `P` and the fixed relative recurrence
+
+```text
+H₁=I,       H₅∼diag(2/5,1),       H_(n+3)=H_n−H_(n+2).
+```
+
+**Scope:** Lean checks the ambient and return recurrence, unit ambient, non-pure relation,
+rank-two cuts, terminal-aligned zero, strict unselected word, its exact false zero, and avoidance
+of the kernel by every selected word. Irreducibility, the unique singular-index calculation,
+and both ping-pong arguments are independently audited. No all-waits decision or sound universal
+subalphabet is claimed.
+
+**Artifact:** `CubicReturn.NonPure.terminal_zero`,
+`CubicReturn.NonPure.falseWait_zero`, and
+`CubicReturn.NonPure.selected_lower_ne_zero` in
+[`CubicReturnNonPure.lean`](MatrixMortality/CubicReturnNonPure.lean), with reconstruction in
+[`m32-cubic-endpoint-false-waits-2026-08-11.md`](audits/m32-cubic-endpoint-false-waits-2026-08-11.md).
+
+**Use:** retire endpoint-alignment no-go arguments and selected ping-pong as a syntax guard. A
+cubic universality proof must first exclude every false hit from the full positive-wait
+recurrence; a decision proof may attack that exact recurrence directly.
+
+**Next:** decide endpoint reachability for the fixed `H_n` recurrence, or find an arithmetic
+normalization proving every first hit has a selected-word representative. Finite congruence
+filters alone cannot isolate `{1,5}` because ambient powers are periodic modulo every modulus.
+
+### R32-O19: Projective queue centralizer obstruction
+
+**Kind:** obstruction
+**Evidence:** audited
+**Disposition:** graduated
+
+Let `ρ:Σ*→PGL₂(ℚ)` be a homomorphic word store with an orbit containing at least three points.
+Every projectivity implementing the tail-uniform update `(q,uv)↦(q′,vp)` has the necessary form
+
+```text
+S_q′ Z ρ(u)⁻¹ S_q⁻¹,
+```
+
+where `Z` centralizes every store letter and maps `x_q` to `ρ(p)x_q′`. If the store is injective
+on a binary free monoid, its common centralizer is trivial: otherwise the generated group lies
+in a virtually abelian Möbius centralizer, contradicting exponential positive-word growth.
+Every finite-controller cycle therefore has empty appendants, so total storage growth is
+bounded.
+
+**Scope:** the theorem concerns injective homomorphic projective stores and tail-uniform fixed
+prefix/suffix rules. It does not exclude nonhomomorphic arithmetic encodings such as
+[`R32-S36`](#r32-s36-guarded-affine-projective-incidence).
+
+**Artifact:** [`audits/m32-projective-arithmetic-guard-2026-08-10.md`](audits/m32-projective-arithmetic-guard-2026-08-10.md).
+
+**Use:** do not reopen free Möbius, continued-fraction, radix, tag, or queue stores with a finite
+projective controller. A rank-(2,2) universality proof must obtain its memory from intrinsic
+arithmetic dynamics.
+
+### R32-O20: Transverse reverse reservoir
+
+**Kind:** obstruction
+**Evidence:** formalized
+**Disposition:** graduated
+
+The lawful period-three guard `(p,s,A,D,L)=(3,2,−953,473,2240)` has primitive endpoint contents
+
+```text
+h=(−160,−1204,−80),    k=(−13244,−7040,−344344),
+hᵢkᵢ=DL(3^aⁱ−1).
+```
+
+Its endpoint macro fixes the reset ray with eigenvalue `3¹²∏hᵢ`, while its second rational
+eigenline has eigenvalue `(−1)³∏kᵢ`. The former is coprime to thirteen and the latter has exact
+13-adic valuation one. Repeating the legal cycle `N` times fixes the rational reset orbit but
+raises those eigenvalues to the `N`th powers. Arbitrary reverse 13-mass is therefore invisible
+to the projective endpoints.
+
+**Scope:** this is an immortal periodic orbit. It kills path-independent or endpoint-coercive
+charging of every reverse packet, not a bound exploiting first-hit terminality, reset anchoring,
+and aperiodicity.
+
+**Artifact:** `ReturnGuard.Examples.cycle_endpointReductions` and
+`cycle_transverseReservoir` in
+[`ReturnGuardTransverseReservoir.lean`](MatrixMortality/ReturnGuardTransverseReservoir.lean),
+with reconstruction in
+[`m32-transverse-reverse-reservoir-2026-08-10.md`](audits/m32-transverse-reverse-reservoir-2026-08-10.md).
+
+**Use:** exclude endpoint-only reverse-mass potentials from the split decision lane. Any
+surviving certificate must use the reset-started first-hit orbit and distinguish aperiodic
+escape from periodic transverse storage.
 
 ### R32-D03: Bounded-denominator periodicity
 

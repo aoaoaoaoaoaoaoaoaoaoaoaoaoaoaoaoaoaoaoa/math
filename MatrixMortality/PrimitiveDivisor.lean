@@ -178,6 +178,31 @@ theorem cyclotomicValue_isPrimePow_of_no_primitive
       other_spec prime_spec (by omega) other_value prime_exponent (Ne.symm other_ne)
   omega
 
+/-- A cyclotomic value divides the corresponding power difference. -/
+theorem cyclotomicValue_dvd_pow_sub_one
+    {base exponent : Nat} (base_gt_one : 1 < base) :
+    cyclotomicValue base exponent ∣ base ^ exponent - 1 := by
+  obtain ⟨quotient, quotient_eq⟩ := cyclotomic.dvd_X_pow_sub_one exponent ℤ
+  apply_fun eval (base : ℤ) at quotient_eq
+  have base_positive : 0 < base := by omega
+  have eval_positive :
+      0 < eval (base : ℤ) (cyclotomic exponent ℤ) :=
+    Polynomial.cyclotomic_pos' exponent (by exact_mod_cast base_gt_one)
+  have eval_eq :
+      eval (base : ℤ) (cyclotomic exponent ℤ) =
+        (cyclotomicValue base exponent : ℤ) := by
+    dsimp [cyclotomicValue]
+    rw [Int.natCast_natAbs, abs_of_pos eval_positive]
+  have power_one : 1 ≤ base ^ exponent :=
+    Nat.one_le_pow exponent base base_positive
+  have integer_dvd :
+      (cyclotomicValue base exponent : ℤ) ∣
+        ((base ^ exponent - 1 : Nat) : ℤ) := by
+    use eval (base : ℤ) quotient
+    rw [Nat.cast_sub power_one, Nat.cast_pow, Nat.cast_one, ← eval_eq]
+    simpa [eval_mul, eval_sub, eval_pow] using quotient_eq
+  exact_mod_cast integer_dvd
+
 /-- A cyclotomic value, multiplied by any earlier divisor difference, divides the full power
 difference. This is the arithmetic bridge from polynomial factorization to valuations. -/
 theorem pow_sub_one_mul_cyclotomicValue_dvd
@@ -374,15 +399,16 @@ theorem prime_dvd_pow_div_sub_one
   exact (ZMod.natCast_eq_natCast_iff (base ^ (exponent / prime)) 1 prime).mp
     (by simpa only [Nat.cast_pow, Nat.cast_one] using power_eq)
 
-/-- An odd nonprimitive prime occurs to the first power in a cyclotomic value. This is the
-cyclotomic form of lifting the exponent. -/
-theorem cyclotomicValue_primePower_exponent_one_of_odd
-    {prime k base exponent : Nat} (prime_spec : prime.Prime) (prime_odd : Odd prime)
+/-- An odd prime dividing both the index and its cyclotomic value occurs in that value exactly
+once. This is the cyclotomic form of lifting the exponent. -/
+theorem cyclotomicValue_factorization_eq_one_of_odd_nonprimitive
+    {prime base exponent : Nat} (prime_spec : prime.Prime) (prime_odd : Odd prime)
     (base_gt_one : 1 < base) (exponent_gt_one : 1 < exponent)
-    (prime_dvd_exponent : prime ∣ exponent) (k_positive : 0 < k)
-    (value_eq : cyclotomicValue base exponent = prime ^ k) :
-    k = 1 := by
+    (prime_dvd_exponent : prime ∣ exponent)
+    (prime_dvd_value : prime ∣ cyclotomicValue base exponent) :
+    (cyclotomicValue base exponent).factorization prime = 1 := by
   let divisor := exponent / prime
+  let k := (cyclotomicValue base exponent).factorization prime
   have exponent_positive : 0 < exponent := by omega
   have prime_le_exponent : prime ≤ exponent :=
     Nat.le_of_dvd exponent_positive prime_dvd_exponent
@@ -396,10 +422,19 @@ theorem cyclotomicValue_primePower_exponent_one_of_odd
     nlinarith [prime_spec.two_le]
   have divisor_proper : divisor ∈ exponent.properDivisors :=
     Nat.mem_properDivisors.mpr ⟨divisor_dvd_exponent, divisor_lt_exponent⟩
+  have value_positive : 0 < cyclotomicValue base exponent := by
+    rw [cyclotomicValue]
+    exact Int.natAbs_pos.mpr <|
+      ne_of_gt (Polynomial.cyclotomic_pos' exponent (by exact_mod_cast base_gt_one))
+  have k_positive : 0 < k :=
+    prime_spec.factorization_pos_of_dvd value_positive.ne' prime_dvd_value
+  have power_dvd_value : prime ^ k ∣ cyclotomicValue base exponent :=
+    (prime_spec.pow_dvd_iff_le_factorization value_positive.ne').mpr le_rfl
   have product_dvd :
       (base ^ divisor - 1) * prime ^ k ∣ base ^ exponent - 1 := by
-    rw [← value_eq]
-    exact pow_sub_one_mul_cyclotomicValue_dvd base_gt_one divisor_proper
+    exact
+      (Nat.mul_dvd_mul_left (base ^ divisor - 1) power_dvd_value).trans
+        (pow_sub_one_mul_cyclotomicValue_dvd base_gt_one divisor_proper)
   have base_power_gt_one : 1 < base ^ divisor :=
     Nat.one_lt_pow divisor_positive.ne' base_gt_one
   have base_power_sub_ne : base ^ divisor - 1 ≠ 0 :=
@@ -412,9 +447,6 @@ theorem cyclotomicValue_primePower_exponent_one_of_odd
     (Nat.factorization_le_iff_dvd
       (mul_ne_zero base_power_sub_ne (pow_ne_zero k prime_spec.ne_zero))
       full_sub_ne).mpr product_dvd prime
-  have prime_dvd_value : prime ∣ cyclotomicValue base exponent := by
-    rw [value_eq]
-    exact dvd_pow_self prime k_positive.ne'
   have base_not_dvd : ¬prime ∣ base ^ divisor := by
     have base_coprime : base.Coprime prime :=
       coprime_of_prime_dvd_cyclotomicValue
@@ -432,6 +464,22 @@ theorem cyclotomicValue_primePower_exponent_one_of_odd
   rw [Nat.factorization_def _ prime_spec, Nat.factorization_def _ prime_spec] at factor_le
   rw [lte, padicValNat_self] at factor_le
   omega
+
+/-- Prime-power specialization of the odd nonprimitive valuation theorem. -/
+theorem cyclotomicValue_primePower_exponent_one_of_odd
+    {prime k base exponent : Nat} (prime_spec : prime.Prime) (prime_odd : Odd prime)
+    (base_gt_one : 1 < base) (exponent_gt_one : 1 < exponent)
+    (prime_dvd_exponent : prime ∣ exponent) (k_positive : 0 < k)
+    (value_eq : cyclotomicValue base exponent = prime ^ k) :
+    k = 1 := by
+  have prime_dvd_value : prime ∣ cyclotomicValue base exponent := by
+    rw [value_eq]
+    exact dvd_pow_self prime k_positive.ne'
+  have factorization_eq :=
+    cyclotomicValue_factorization_eq_one_of_odd_nonprimitive prime_spec prime_odd
+      base_gt_one exponent_gt_one prime_dvd_exponent prime_dvd_value
+  rw [value_eq, prime_spec.factorization_pow, Finsupp.single_eq_same] at factorization_eq
+  exact factorization_eq
 
 /-- If an exponent has no primitive divisor, its cyclotomic value is a power of the unique
 largest prime shared by the value and the exponent. -/
@@ -492,18 +540,22 @@ theorem cyclotomicValue_two_pow_succ (base power : Nat) :
     (base ^ (2 ^ power) + 1 : Nat) by norm_cast,
     Int.natAbs_natCast]
 
-/-- The prime `2` also occurs only once in a nonprimitive cyclotomic value above exponent
-two. -/
-theorem cyclotomicValue_primePower_exponent_one_of_two
-    {k base exponent : Nat} (exponent_gt_two : 2 < exponent)
-    (two_dvd_exponent : 2 ∣ exponent) (k_positive : 0 < k)
-    (value_eq : cyclotomicValue base exponent = 2 ^ k)
-    (other_lt : ∀ other : Nat, other.Prime → other ∣ exponent → other ≠ 2 → other < 2) :
-    k = 1 := by
+/-- Above exponent two, the prime `2` also occurs exactly once when it divides both the index
+and its cyclotomic value. -/
+theorem cyclotomicValue_factorization_eq_one_of_two_nonprimitive
+    {base exponent : Nat} (exponent_gt_two : 2 < exponent)
+    (two_dvd_exponent : 2 ∣ exponent)
+    (two_dvd_value : 2 ∣ cyclotomicValue base exponent) :
+    (cyclotomicValue base exponent).factorization 2 = 1 := by
+  have other_lt :
+      ∀ other : Nat, other.Prime → other ∣ exponent → other ≠ 2 → other < 2 := by
+    intro other other_spec other_dvd other_ne
+    exact other_prime_lt_of_dvd_cyclotomicValue Nat.prime_two other_spec
+      (by omega) two_dvd_value other_dvd other_ne
   obtain ⟨power, power_positive, exponent_eq⟩ :=
     eq_two_pow_of_unique_two two_dvd_exponent other_lt
   obtain ⟨halfPower, rfl⟩ := Nat.exists_eq_succ_of_ne_zero power_positive.ne'
-  rw [exponent_eq, cyclotomicValue_two_pow_succ] at value_eq
+  rw [exponent_eq, cyclotomicValue_two_pow_succ] at two_dvd_value ⊢
   rw [exponent_eq] at exponent_gt_two
   have halfPower_positive : 0 < halfPower := by
     by_contra halfPower_zero
@@ -511,9 +563,6 @@ theorem cyclotomicValue_primePower_exponent_one_of_two
     subst halfPower
     norm_num at exponent_gt_two
   have base_odd : Odd base := by
-    have two_dvd_value : 2 ∣ base ^ (2 ^ halfPower) + 1 := by
-      rw [value_eq]
-      exact dvd_pow_self 2 k_positive.ne'
     have power_odd : Odd (base ^ (2 ^ halfPower)) := by
       exact Nat.not_even_iff_odd.mp fun base_power_even => by
         have sum_odd : Odd (base ^ (2 ^ halfPower) + 1) :=
@@ -535,16 +584,38 @@ theorem cyclotomicValue_primePower_exponent_one_of_two
         _ = (2 * j + 1) ^ 2 := by rw [odd_eq]
     rw [power_eq, show (2 * j + 1) ^ 2 = 4 * (j ^ 2 + j) + 1 by ring]
     simp [Nat.add_mod]
-  have value_mod_four : (2 ^ k) % 4 = 2 := by
-    rw [← value_eq]
+  let value := base ^ (2 ^ halfPower) + 1
+  have value_mod_four : value % 4 = 2 := by
+    dsimp [value]
     omega
-  have k_le_one : k ≤ 1 := by
-    by_contra k_gt
-    have two_le_k : 2 ≤ k := by omega
-    obtain ⟨j, k_eq⟩ := Nat.exists_eq_add_of_le two_le_k
-    rw [k_eq, pow_add] at value_mod_four
-    norm_num at value_mod_four
+  have value_positive : 0 < value := by positivity
+  have factor_positive : 0 < value.factorization 2 :=
+    Nat.prime_two.factorization_pos_of_dvd value_positive.ne' two_dvd_value
+  have factor_le_one : value.factorization 2 ≤ 1 := by
+    by_contra not_le
+    have four_dvd : 4 ∣ value := by
+      have := (Nat.prime_two.pow_dvd_iff_le_factorization value_positive.ne').mpr
+        (show 2 ≤ value.factorization 2 by omega)
+      simpa using this
+    have mod_ne : value % 4 ≠ 0 := by omega
+    exact mod_ne (Nat.mod_eq_zero_of_dvd four_dvd)
+  change value.factorization 2 = 1
   omega
+
+/-- Prime-power specialization of the two-adic nonprimitive valuation theorem. -/
+theorem cyclotomicValue_primePower_exponent_one_of_two
+    {k base exponent : Nat} (exponent_gt_two : 2 < exponent)
+    (two_dvd_exponent : 2 ∣ exponent) (k_positive : 0 < k)
+    (value_eq : cyclotomicValue base exponent = 2 ^ k) :
+    k = 1 := by
+  have two_dvd_value : 2 ∣ cyclotomicValue base exponent := by
+    rw [value_eq]
+    exact dvd_pow_self 2 k_positive.ne'
+  have factorization_eq :=
+    cyclotomicValue_factorization_eq_one_of_two_nonprimitive exponent_gt_two
+      two_dvd_exponent two_dvd_value
+  rw [value_eq, Nat.prime_two.factorization_pow, Finsupp.single_eq_same] at factorization_eq
+  exact factorization_eq
 
 /-- Above exponent two, absence of a primitive divisor forces the cyclotomic value to equal
 one prime divisor of the exponent. -/
@@ -560,7 +631,7 @@ theorem cyclotomicValue_eq_prime_of_no_primitive
     by_cases prime_two : prime = 2
     · subst prime
       exact cyclotomicValue_primePower_exponent_one_of_two exponent_gt_two
-        prime_dvd_exponent k_positive value_eq other_lt
+        prime_dvd_exponent k_positive value_eq
     · exact cyclotomicValue_primePower_exponent_one_of_odd prime_spec
         (prime_spec.odd_of_ne_two prime_two) base_gt_one (by omega) prime_dvd_exponent
         k_positive value_eq

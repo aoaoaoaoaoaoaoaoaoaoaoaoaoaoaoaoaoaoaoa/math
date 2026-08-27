@@ -9,9 +9,14 @@ import MatrixMortality.BoundaryTax
 /- Finite-rank repair. -/
 import MatrixMortality.InternalSandwich
 import MatrixMortality.ReturnFamily
+import MatrixMortality.CubicReturn
+import MatrixMortality.CubicReturnNonPure
 import MatrixMortality.EdgeCompression
 import MatrixMortality.TwoPlaneEdges
 import MatrixMortality.ReverseEdge
+import MatrixMortality.ProjectiveIncidence
+import MatrixMortality.ProjectiveCollatz
+import MatrixMortality.RankTwoPunctuation
 import MatrixMortality.ReturnSquare
 import MatrixMortality.ReturnSquareDynamics
 import MatrixMortality.ReturnSquareNoGo
@@ -36,16 +41,21 @@ import MatrixMortality.ReturnGuardDriftCertificate
 import MatrixMortality.ReturnGuardFrame
 import MatrixMortality.ReturnGuardGap
 import MatrixMortality.ReturnGuardEndpoint
+import MatrixMortality.ReturnGuardEndpointCompleteness
 import MatrixMortality.ReturnGuardAdelic
 import MatrixMortality.ReturnGuardPumping
 import MatrixMortality.ReturnGuardResonance
 import MatrixMortality.ReturnGuardCumulative
 import MatrixMortality.ReturnGuardContinued
+import MatrixMortality.ReturnGuardBoundary
 import MatrixMortality.ReturnGuardSmith
 import MatrixMortality.ReturnGuardPeriodicity
 import MatrixMortality.ReturnGuardFiniteOrbit
 import MatrixMortality.ReturnGuardRail
 import MatrixMortality.ReturnGuardExamples
+import MatrixMortality.ReturnGuardCounterorbit
+import MatrixMortality.ReturnGuardTransverseReservoir
+import MatrixMortality.ReturnGuardPeriodicShadow
 import MatrixMortality.ReturnGuardQuotientExamples
 
 /- Finite-controller amalgamation. -/

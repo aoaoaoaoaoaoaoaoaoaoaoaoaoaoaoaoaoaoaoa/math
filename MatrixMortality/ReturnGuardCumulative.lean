@@ -6,7 +6,8 @@ import MatrixMortality.ReturnGuardEndpoint
 Primitive normalization is not dynamical state.  Retaining every removed scalar turns the
 terminal endpoint orbit into one integral pair recurrence with exact division by the forced
 base power.  The reduced denominators and their signed contents are recovered from that pair;
-they are not carried independently.
+they are not carried independently. Pulling a moving reference ray backward through a complete
+endpoint word exposes reset ancestry as one exact prime-power-divisible determinant.
 -/
 
 namespace MatrixMortality.ReturnGuard
@@ -16,9 +17,83 @@ open scoped Matrix
 
 noncomputable section
 
+/-- Chronological concatenation reverses the endpoint matrix-product order. -/
+theorem endpointProduct_append
+    {R : Type*} [CommRing R] (prime : R) (depth : Nat)
+    (centerNumerator driftNumerator scale : R) (left right : List Nat) :
+    endpointProduct prime depth centerNumerator driftNumerator scale (left ++ right) =
+      endpointProduct prime depth centerNumerator driftNumerator scale right *
+        endpointProduct prime depth centerNumerator driftNumerator scale left := by
+  induction left with
+  | nil => simp
+  | cons wait waits induction =>
+      simp only [List.cons_append, endpointProduct_cons, induction]
+      rw [Matrix.mul_assoc]
+
+/-- The lower row of one endpoint transfer gives an exact Casoratian with every incoming
+matrix. The identity is independent of terminality and retains the determinant of the complete
+preceding word. -/
+theorem endpointTransfer_casoratian
+    {R : Type*} [CommRing R] (prime : R) (depth : Nat)
+    (centerNumerator driftNumerator scale : R) (wait : Nat)
+    (matrix : Square (Fin 2) R) (source : R) :
+    (matrix *ᵥ ![source, 1]) 1 *
+          (endpointTransfer prime depth centerNumerator driftNumerator scale wait *
+            matrix) 1 0 -
+        ((endpointTransfer prime depth centerNumerator driftNumerator scale wait *
+            matrix) *ᵥ ![source, 1]) 1 * matrix 1 0 =
+      matrix.det := by
+  simp [endpointTransfer, Matrix.mul_apply, Matrix.mulVec, Matrix.dotProduct,
+    Matrix.det_fin_two, Fin.sum_univ_succ]
+  ring
+
+/-- Every common divisor of a terminal image scalar and the terminal product's lower-left
+coefficient already divides the determinant support before the final branch. -/
+theorem terminalCommonDivisor_dvd_previousDet
+    (prime depth : Nat) (centerNumerator driftNumerator scale : ℤ)
+    (initial : List Nat) (last : Nat) (source scalar divisor : ℤ)
+    (terminal :
+      endpointProduct (prime : ℤ) depth centerNumerator driftNumerator scale
+            (initial ++ [last]) *ᵥ ![source, 1] =
+        scalar • ![0, 1])
+    (divides_scalar : divisor ∣ scalar)
+    (divides_bottom :
+      divisor ∣
+        endpointProduct (prime : ℤ) depth centerNumerator driftNumerator scale
+          (initial ++ [last]) 1 0) :
+    divisor ∣
+      (endpointProduct (prime : ℤ) depth centerNumerator driftNumerator scale initial).det := by
+  let previous :=
+    endpointProduct (prime : ℤ) depth centerNumerator driftNumerator scale initial
+  let transfer :=
+    endpointTransfer (prime : ℤ) depth centerNumerator driftNumerator scale last
+  have product_eq :
+      endpointProduct (prime : ℤ) depth centerNumerator driftNumerator scale
+          (initial ++ [last]) = transfer * previous := by
+    simp [transfer, previous, endpointProduct_append]
+  have scalar_eq : ((transfer * previous) *ᵥ ![source, 1]) 1 = scalar := by
+    rw [← product_eq, terminal]
+    simp [smul_eq_mul]
+  have bottom_eq :
+      (transfer * previous) 1 0 =
+        endpointProduct (prime : ℤ) depth centerNumerator driftNumerator scale
+          (initial ++ [last]) 1 0 := by
+    rw [product_eq]
+  have casoratian :=
+    endpointTransfer_casoratian (prime : ℤ) depth centerNumerator driftNumerator scale
+      last previous source
+  rw [scalar_eq, bottom_eq] at casoratian
+  rw [← casoratian]
+  exact dvd_sub (divides_bottom.mul_left ((previous *ᵥ ![source, 1]) 1))
+    (divides_scalar.mul_right (previous 1 0))
+
 /-- Column represented by one integral projective pair. -/
 def pairVector (pair : ℤ × ℤ) : Fin 2 → ℤ :=
   ![pair.1, pair.2]
+
+/-- Guard state represented by one primitive terminal-endpoint pair. -/
+def endpointState (scale : ℤ) (pair : ℤ × ℤ) : ℚ :=
+  1 + pair.1 / (scale * pair.2)
 
 /-- Terminal endpoint pair canonically induced by one integral residual pair. -/
 def endpointPair
@@ -101,6 +176,81 @@ structure PrimitiveEndpointReduction
   step :
     CumulativeEndpointStep prime depth centerNumerator driftNumerator scale
       wait source (content * target.1, content * target.2)
+
+/-- A primitive endpoint reduction is the corresponding rational guard step. -/
+theorem PrimitiveEndpointReduction.guardedStep_endpointState
+    (parameters : Parameters)
+    {centerNumerator driftNumerator scale : ℤ}
+    {wait : Nat} {source target : ℤ × ℤ} {content : ℤ}
+    (reduction : PrimitiveEndpointReduction parameters.prime parameters.depth
+      centerNumerator driftNumerator scale wait source target content)
+    (center_eq : parameters.center = (centerNumerator : ℚ) / scale)
+    (drift_eq : drift parameters.center parameters.reset = (driftNumerator : ℚ) / scale)
+    (scale_ne : scale ≠ 0) (source_denominator_ne : source.2 ≠ 0)
+    (target_denominator_ne : target.2 ≠ 0) :
+    guardedStep parameters wait (some (endpointState scale source)) =
+      some (endpointState scale target) := by
+  have scale_ne_rat : (scale : ℚ) ≠ 0 := by exact_mod_cast scale_ne
+  have source_denominator_ne_rat : (source.2 : ℚ) ≠ 0 := by
+    exact_mod_cast source_denominator_ne
+  have target_denominator_ne_rat : (target.2 : ℚ) ≠ 0 := by
+    exact_mod_cast target_denominator_ne
+  have content_ne_rat : (content : ℚ) ≠ 0 := by
+    exact_mod_cast reduction.content_ne
+  have prime_power_ne :
+      (parameters.prime : ℚ) ^ (parameters.depth * wait) ≠ 0 :=
+    pow_ne_zero _ parameters.prime_ne_zero
+  have denominator_eq :
+      endpointState scale source - parameters.prime ^ wait =
+        parameters.prime ^ (parameters.depth * wait) * content * target.2 /
+          (scale * source.2) := by
+    have integer_eq := reduction.step.denominator
+    have rational_eq :
+        (parameters.prime : ℚ) ^ (parameters.depth * wait) *
+            (content * target.2) =
+          source.1 - scale * ((parameters.prime : ℚ) ^ wait - 1) * source.2 := by
+      exact_mod_cast integer_eq
+    rw [endpointState]
+    field_simp [scale_ne_rat, source_denominator_ne_rat]
+    rw [Nat.mul_comm parameters.depth wait] at rational_eq
+    linear_combination -rational_eq
+  have not_pole : endpointState scale source ≠ parameters.prime ^ wait := by
+    apply sub_ne_zero.mp
+    rw [denominator_eq]
+    exact div_ne_zero
+      (mul_ne_zero (mul_ne_zero prime_power_ne content_ne_rat)
+        target_denominator_ne_rat)
+      (mul_ne_zero scale_ne_rat source_denominator_ne_rat)
+  rw [guardedStep_some parameters wait _ not_pole]
+  congr 1
+  have defect_eq :
+      guardDefect parameters wait (endpointState scale source) =
+        driftNumerator * source.1 / (scale * content * target.2) := by
+    rw [guardDefect, drift_eq, denominator_eq, endpointState]
+    field_simp [scale_ne_rat, source_denominator_ne_rat, content_ne_rat,
+      target_denominator_ne_rat, prime_power_ne]
+    ring
+  rw [defect_eq, endpointState, center_eq]
+  have integer_eq := reduction.step.numerator
+  have rational_eq :
+      (content : ℚ) * target.1 =
+        driftNumerator * source.1 +
+          (centerNumerator - scale) * (content * target.2) := by
+    exact_mod_cast integer_eq
+  calc
+    (centerNumerator : ℚ) / scale +
+          driftNumerator * source.1 / (scale * content * target.2) =
+        (centerNumerator * content * target.2 + driftNumerator * source.1) /
+          (scale * content * target.2) := by
+      field_simp [scale_ne_rat, content_ne_rat, target_denominator_ne_rat]
+      ring
+    _ = (scale * content * target.2 + content * target.1) /
+          (scale * content * target.2) := by
+      congr 1
+      linear_combination -rational_eq
+    _ = 1 + (target.1 : ℚ) / (scale * target.2) := by
+      field_simp [scale_ne_rat, content_ne_rat, target_denominator_ne_rat]
+      ring
 
 /-- Primitive reduction of the residual recurrence induces the content-free endpoint step.
 The removed content scales the target pair but never becomes an independent state variable. -/
@@ -287,6 +437,33 @@ theorem CumulativeEndpointExecution.transfer
       rw [endpointProduct_cons, ← Matrix.mulVec_mulVec, step.transfer,
         Matrix.mulVec_smul, induction, smul_smul]
       rw [List.sum_cons, Nat.mul_add, pow_add]
+
+/-- Pulling an integral reference ray through a cumulative endpoint word exposes the full
+reset-ancestry prime power in one exact projective determinant. -/
+theorem CumulativeEndpointExecution.pullback_projectivePairCross
+    {prime depth : Nat} {centerNumerator driftNumerator scale : ℤ}
+    {waits : List Nat} {source target : ℤ × ℤ}
+    (execution :
+      CumulativeEndpointExecution prime depth centerNumerator driftNumerator scale
+        waits source target)
+    (reference : ℤ × ℤ) :
+    projectivePairCross source
+        ((((endpointProduct (prime : ℤ) depth centerNumerator driftNumerator scale
+              waits).adjugate *ᵥ pairVector reference) 0),
+          (((endpointProduct (prime : ℤ) depth centerNumerator driftNumerator scale
+              waits).adjugate *ᵥ pairVector reference) 1)) =
+      (prime : ℤ) ^ (depth * waits.sum) *
+        projectivePairCross target reference := by
+  let matrix :=
+    endpointProduct (prime : ℤ) depth centerNumerator driftNumerator scale waits
+  have transported := execution.transfer
+  have first := congrFun transported 0
+  have second := congrFun transported 1
+  change matrix *ᵥ pairVector source =
+    (prime : ℤ) ^ (depth * waits.sum) • pairVector target at transported
+  simp [matrix, Matrix.adjugate_fin_two, projectivePairCross, Matrix.mulVec,
+    Matrix.dotProduct, Fin.sum_univ_succ, pairVector, smul_eq_mul] at first second ⊢
+  linear_combination reference.2 * first - reference.1 * second
 
 /-- The signed primitive content is exactly the gcd of the endpoint prequotient and the full
 cyclotomic determinant support. -/

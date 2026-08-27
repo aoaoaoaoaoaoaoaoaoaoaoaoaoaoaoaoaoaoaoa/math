@@ -6,7 +6,8 @@ import MatrixMortality.ReturnGuardCumulative
 
 The cumulative endpoint recurrence admits one canonical Euclidean quotient and one fixed
 forbidden cusp.  This file records those laws without introducing another dynamical state.
-It also exposes the exact two-step identity behind record-wait height bounds.
+It also exposes reverse-content persistence and the exact two-step identity behind record-wait
+height bounds.
 -/
 
 namespace MatrixMortality.ReturnGuard
@@ -77,6 +78,77 @@ theorem PrimitiveEndpointReduction.content_natAbs_eq_gcd_driftSource_prequotient
           reduction.target_coprime.symm).mpr
       exact ⟨common_dvd_prequotient, common_dvd_rawNumerator⟩
     exact Int.natAbs_dvd_natAbs.mpr common_dvd_content
+
+/-- Away from the fixed base, drift, and scale support, a divisor enters forward content
+exactly when it occurs simultaneously in the current endpoint numerator and branch boundary.
+The equivalence retains arbitrary prime-power multiplicity. -/
+theorem PrimitiveEndpointReduction.divisor_dvd_content_iff
+    {prime depth : Nat} {centerNumerator driftNumerator scale : ℤ}
+    {wait : Nat} {source target : ℤ × ℤ} {content divisor : ℤ}
+    (reduction :
+      PrimitiveEndpointReduction prime depth centerNumerator driftNumerator scale
+        wait source target content)
+    (divisor_coprime :
+      IsCoprime divisor ((prime : ℤ) * driftNumerator * scale)) :
+    divisor ∣ content ↔
+      divisor ∣ source.1 ∧ divisor ∣ (prime : ℤ) ^ wait - 1 := by
+  have coprime_prime : IsCoprime divisor (prime : ℤ) :=
+    IsCoprime.of_isCoprime_of_dvd_right divisor_coprime
+      ⟨driftNumerator * scale, by ring⟩
+  have coprime_drift : IsCoprime divisor driftNumerator :=
+    IsCoprime.of_isCoprime_of_dvd_right divisor_coprime
+      ⟨(prime : ℤ) * scale, by ring⟩
+  have coprime_scale : IsCoprime divisor scale :=
+    IsCoprime.of_isCoprime_of_dvd_right divisor_coprime
+      ⟨(prime : ℤ) * driftNumerator, by ring⟩
+  constructor
+  · intro divisor_dvd_content
+    have content_dvd_driftSource : content ∣ driftNumerator * source.1 := by
+      refine ⟨target.1 - (centerNumerator - scale) * target.2, ?_⟩
+      have numerator := reduction.step.numerator
+      simp only [Prod.fst, Prod.snd] at numerator
+      calc
+        driftNumerator * source.1 =
+            content * target.1 -
+              (centerNumerator - scale) * (content * target.2) := by
+          linarith
+        _ = content *
+            (target.1 - (centerNumerator - scale) * target.2) := by ring
+    have divisor_dvd_source : divisor ∣ source.1 :=
+      coprime_drift.dvd_of_dvd_mul_left
+        (divisor_dvd_content.trans content_dvd_driftSource)
+    have content_dvd_support :
+        content ∣ driftNumerator * scale * ((prime : ℤ) ^ wait - 1) := by
+      apply Int.natAbs_dvd_natAbs.mp
+      rw [reduction.content_natAbs_eq_gcd_support]
+      exact Nat.gcd_dvd_right _ _
+    have divisor_dvd_support :
+        divisor ∣ driftNumerator * scale * ((prime : ℤ) ^ wait - 1) :=
+      divisor_dvd_content.trans content_dvd_support
+    have coprime_fixed :
+        IsCoprime divisor (driftNumerator * scale) :=
+      coprime_drift.mul_right coprime_scale
+    exact ⟨divisor_dvd_source,
+      coprime_fixed.dvd_of_dvd_mul_left divisor_dvd_support⟩
+  · rintro ⟨divisor_dvd_source, divisor_dvd_boundary⟩
+    have divisor_dvd_prequotient : divisor ∣ content * target.2 := by
+      apply
+        (coprime_prime.pow_right (n := depth * wait)).dvd_of_dvd_mul_left
+      rw [reduction.step.denominator]
+      exact dvd_sub divisor_dvd_source
+        ((divisor_dvd_boundary.mul_left scale).mul_right source.2)
+    have divisor_dvd_rawNumerator : divisor ∣ content * target.1 := by
+      have numerator := reduction.step.numerator
+      simp only [Prod.fst, Prod.snd] at numerator
+      rw [numerator]
+      exact dvd_add (divisor_dvd_source.mul_left driftNumerator)
+        (divisor_dvd_prequotient.mul_left (centerNumerator - scale))
+    apply
+      (divisor_dvd_commonFactor_iff
+        (left := content * target.2) (right := content * target.1)
+        (common := content) (reducedLeft := target.2)
+        (reducedRight := target.1) rfl rfl reduction.target_coprime.symm).mpr
+    exact ⟨divisor_dvd_prequotient, divisor_dvd_rawNumerator⟩
 
 /-- Exact quotient before primitive content is removed. -/
 def endpointPrequotient (content : ℤ) (target : ℤ × ℤ) : ℤ :=
@@ -194,6 +266,74 @@ theorem PrimitiveEndpointReduction.complement_dvd_resetDefect
           (centerNumerator + driftNumerator - scale) * target.2) := by
   rw [reduction.resetDefect_eq_complement_mul complementary]
   exact dvd_mul_right _ _
+
+/-- A boundary divisor outside the fixed scale-reset support cannot pass from reverse content
+to forward content at the next occurrence.  It remains, with multiplicity, in the next reverse
+content. -/
+theorem PrimitiveEndpointReduction.recurrentBoundaryDivisor_persists
+    {prime depth : Nat} {centerNumerator driftNumerator scale : ℤ}
+    {wait nextWait : Nat} {source middle target : ℤ × ℤ}
+    {content complement nextContent nextComplement divisor : ℤ}
+    (first : PrimitiveEndpointReduction prime depth centerNumerator
+      driftNumerator scale wait source middle content)
+    (second : PrimitiveEndpointReduction prime depth centerNumerator
+      driftNumerator scale nextWait middle target nextContent)
+    (firstComplementary : content * complement =
+      driftNumerator * scale * ((prime : ℤ) ^ wait - 1))
+    (nextComplementary : nextContent * nextComplement =
+      driftNumerator * scale * ((prime : ℤ) ^ nextWait - 1))
+    (divisor_dvd_complement : divisor ∣ complement)
+    (divisor_dvd_nextBoundary :
+      divisor ∣ scale * ((prime : ℤ) ^ nextWait - 1))
+    (divisor_coprime_fixed : IsCoprime divisor
+      (scale * (centerNumerator + driftNumerator - scale))) :
+    IsCoprime divisor nextContent ∧ divisor ∣ nextComplement := by
+  have divisor_coprime_scale : IsCoprime divisor scale :=
+    divisor_coprime_fixed.of_mul_right_left
+  have divisor_coprime_reset :
+      IsCoprime divisor (centerNumerator + driftNumerator - scale) :=
+    divisor_coprime_fixed.of_mul_right_right
+  have middle_coprime_divisor : IsCoprime middle.2 divisor :=
+    IsCoprime.of_isCoprime_of_dvd_right
+      (first.denominator_coprime_complement firstComplementary)
+      divisor_dvd_complement
+  have divisor_coprime_resetMiddle :
+      IsCoprime divisor
+        ((centerNumerator + driftNumerator - scale) * middle.2) :=
+    divisor_coprime_reset.mul_right middle_coprime_divisor.symm
+  have divisor_dvd_resetDefect :
+      divisor ∣
+        middle.1 -
+          (centerNumerator + driftNumerator - scale) * middle.2 := by
+    apply divisor_coprime_scale.dvd_of_dvd_mul_right
+    rw [mul_comm]
+    rw [first.resetDefect_eq_complement_mul firstComplementary]
+    exact divisor_dvd_complement.mul_right _
+  have divisor_dvd_raw_sub_reset :
+      divisor ∣
+        (prime : ℤ) ^ (depth * nextWait) *
+            (nextContent * target.2) -
+          (centerNumerator + driftNumerator - scale) * middle.2 := by
+    rw [second.step.denominator]
+    convert dvd_sub divisor_dvd_resetDefect
+      (divisor_dvd_nextBoundary.mul_right middle.2) using 1
+    all_goals ring
+  have divisor_coprime_raw :
+      IsCoprime divisor
+        ((prime : ℤ) ^ (depth * nextWait) *
+          (nextContent * target.2)) := by
+    obtain ⟨differenceFactor, difference_eq⟩ := divisor_dvd_raw_sub_reset
+    obtain ⟨left, right, bezout⟩ := divisor_coprime_resetMiddle
+    refine ⟨left - right * differenceFactor, right, ?_⟩
+    linear_combination bezout + right * difference_eq
+  have divisor_coprime_nextContent : IsCoprime divisor nextContent :=
+    IsCoprime.of_isCoprime_of_dvd_right divisor_coprime_raw
+      ⟨(prime : ℤ) ^ (depth * nextWait) * target.2, by ring⟩
+  refine ⟨divisor_coprime_nextContent, ?_⟩
+  apply divisor_coprime_nextContent.dvd_of_dvd_mul_left
+  rw [nextComplementary]
+  simpa only [mul_assoc] using
+    divisor_dvd_nextBoundary.mul_left driftNumerator
 
 /-- At a primitive terminal target, the reverse content divides the smaller fixed boundary
 resultant; the factor `centerNumerator - scale` is absent. -/
@@ -348,6 +488,40 @@ theorem PrimitiveEndpointReduction.twoStep_elimination
   have second_denominator := second.step.denominator
   simp only at first_numerator second_denominator ⊢
   linear_combination content * second_denominator + first_numerator
+
+/-- The primitive pair formed by a source denominator and its endpoint prequotient is carried
+through consecutive reductions by one integral generalized-continuant block.  The statement
+holds at every depth; no complementary-content split or moving auxiliary state is required. -/
+theorem PrimitiveEndpointReduction.twoStep_prequotient_transport
+    {prime depth : Nat} {centerNumerator driftNumerator scale : ℤ}
+    {wait nextWait : Nat} {source middle target : ℤ × ℤ}
+    {content nextContent : ℤ}
+    (first :
+      PrimitiveEndpointReduction prime depth centerNumerator driftNumerator scale
+        wait source middle content)
+    (second :
+      PrimitiveEndpointReduction prime depth centerNumerator driftNumerator scale
+        nextWait middle target nextContent) :
+    ((prime : ℤ) ^ (depth * nextWait) * content) •
+        ![middle.2, endpointPrequotient nextContent target] =
+      !![
+          0, (prime : ℤ) ^ (depth * nextWait);
+          driftNumerator * scale * ((prime : ℤ) ^ wait - 1),
+            centerNumerator +
+              driftNumerator * (prime : ℤ) ^ (depth * wait) -
+              scale * (prime : ℤ) ^ nextWait] *ᵥ
+        ![source.2, endpointPrequotient content middle] := by
+  ext i
+  fin_cases i
+  · simp [endpointPrequotient, Matrix.mulVec, Matrix.dotProduct,
+      Fin.sum_univ_succ, smul_eq_mul]
+    ring
+  · simp [Matrix.mulVec, Matrix.dotProduct, Fin.sum_univ_succ,
+      smul_eq_mul]
+    have eliminated := first.twoStep_elimination second
+    rw [first.source_eq_power_mul_prequotient] at eliminated
+    dsimp [endpointPrequotient] at eliminated ⊢
+    linear_combination eliminated
 
 /-- Parameter coefficient in the depth-two record-ascent budget. -/
 def twoStepContentCoefficient
@@ -553,6 +727,120 @@ theorem PrimitiveEndpointReduction.twoStep_contentBudget
             (content * middle.2).natAbs) :=
       Nat.mul_le_mul_left x second_right_le
     _ ≤ y * (coefficient * height) := scaled_right_le
+
+/-! ## Jacobi tail -/
+
+/-- Rational edge quotient exposing the generalized Jacobi recurrence. It is a coordinate of
+two adjacent primitive endpoint pairs, not an additional dynamical register. -/
+def jacobiTail (scale content sourceDenominator targetDenominator : ℤ) : ℚ :=
+  scale * sourceDenominator / (content * targetDenominator)
+
+/-- Backward Jacobi update for the cyclotomic-normalized ready tail. -/
+def jacobiBackward
+    (depth : Nat) (center drift scale q nextQ tail : ℚ) : ℚ :=
+  -center / drift - q ^ depth + scale / drift * nextQ +
+    scale / drift * (nextQ ^ depth * (nextQ - 1) / tail)
+
+/-- The backward Jacobi update contracts differences by its explicit reciprocal factor. -/
+theorem jacobiBackward_sub
+    (depth : Nat) (center drift scale q nextQ left right : ℚ)
+    (drift_ne : drift ≠ 0) (left_ne : left ≠ 0) (right_ne : right ≠ 0) :
+    jacobiBackward depth center drift scale q nextQ left -
+        jacobiBackward depth center drift scale q nextQ right =
+      -(scale / drift * nextQ ^ depth * (nextQ - 1)) *
+        (left - right) / (left * right) := by
+  simp only [jacobiBackward]
+  field_simp
+  ring
+
+/-- Consecutive primitive endpoint reductions obey one exact generalized Jacobi shell law. -/
+theorem PrimitiveEndpointReduction.jacobiTail_transition
+    {prime depth : Nat} {centerNumerator driftNumerator scale : ℤ}
+    {wait nextWait : Nat} {source middle target : ℤ × ℤ}
+    {content nextContent : ℤ}
+    (first : PrimitiveEndpointReduction prime depth centerNumerator
+      driftNumerator scale wait source middle content)
+    (second : PrimitiveEndpointReduction prime depth centerNumerator
+      driftNumerator scale nextWait middle target nextContent)
+    (scale_ne : scale ≠ 0) (middleDenominator_ne : middle.2 ≠ 0) :
+    (prime : ℚ) ^ nextWait +
+        (prime : ℚ) ^ (depth * nextWait) /
+          jacobiTail scale nextContent middle.2 target.2 =
+      (centerNumerator : ℚ) / scale +
+        (driftNumerator : ℚ) / scale *
+          ((prime : ℚ) ^ (depth * wait) +
+            ((prime : ℚ) ^ wait - 1) *
+              jacobiTail scale content source.2 middle.2) := by
+  have content_ne : (content : ℚ) ≠ 0 := by exact_mod_cast first.content_ne
+  have scale_ne' : (scale : ℚ) ≠ 0 := by exact_mod_cast scale_ne
+  have middleDenominator_ne' : (middle.2 : ℚ) ≠ 0 := by
+    exact_mod_cast middleDenominator_ne
+  have first_source :
+      (source.1 : ℚ) =
+        (prime : ℚ) ^ (depth * wait) * (content * middle.2) +
+          scale * ((prime : ℚ) ^ wait - 1) * source.2 := by
+    exact_mod_cast first.source_eq_power_mul_prequotient
+  have first_target :
+      (content * middle.1 : ℤ) =
+        driftNumerator * source.1 +
+          (centerNumerator - scale) * (content * middle.2) := by
+    simpa only [endpointPrequotient] using first.target_eq_drift_add_prequotient
+  have first_target' :
+      (content : ℚ) * middle.1 =
+        driftNumerator * source.1 +
+          (centerNumerator - scale) * (content * middle.2) := by
+    exact_mod_cast first_target
+  have second_source :
+      (middle.1 : ℚ) =
+        (prime : ℚ) ^ (depth * nextWait) * (nextContent * target.2) +
+          scale * ((prime : ℚ) ^ nextWait - 1) * middle.2 := by
+    exact_mod_cast second.source_eq_power_mul_prequotient
+  have source_ratio :
+      (source.1 : ℚ) / (content * middle.2) =
+        (prime : ℚ) ^ (depth * wait) +
+          scale * ((prime : ℚ) ^ wait - 1) * source.2 /
+            (content * middle.2) := by
+    rw [first_source]
+    field_simp [content_ne, middleDenominator_ne']
+  have middle_ratio :
+      (middle.1 : ℚ) / middle.2 =
+        driftNumerator * (source.1 / (content * middle.2)) +
+          (centerNumerator - scale) := by
+    calc
+      (middle.1 : ℚ) / middle.2 =
+          (content * middle.1) / (content * middle.2) := by
+        field_simp [content_ne, middleDenominator_ne']
+        ring
+      _ =
+          (driftNumerator * source.1 +
+            (centerNumerator - scale) * (content * middle.2)) /
+              (content * middle.2) := by rw [first_target']
+      _ =
+          driftNumerator * (source.1 / (content * middle.2)) +
+            (centerNumerator - scale) := by
+        field_simp [content_ne, middleDenominator_ne']
+  dsimp [jacobiTail]
+  calc
+    (prime : ℚ) ^ nextWait +
+          (prime : ℚ) ^ (depth * nextWait) /
+            (scale * middle.2 / (nextContent * target.2)) =
+        1 + middle.1 / (scale * middle.2) := by
+      rw [second_source]
+      field_simp [scale_ne', middleDenominator_ne']
+      ring
+    _ =
+        (centerNumerator : ℚ) / scale +
+          (driftNumerator : ℚ) / scale *
+            ((prime : ℚ) ^ (depth * wait) +
+              ((prime : ℚ) ^ wait - 1) *
+                (scale * source.2 / (content * middle.2))) := by
+      rw [show
+        (middle.1 : ℚ) / (scale * middle.2) =
+          (middle.1 / middle.2) / scale by
+            rw [div_div, mul_comm (scale : ℚ) middle.2]]
+      rw [middle_ratio, source_ratio]
+      field_simp [content_ne, scale_ne', middleDenominator_ne']
+      ring
 
 /-- Critical depth-two decoder. -/
 def criticalDecoder (q : ℚ) : Matrix (Fin 2) (Fin 2) ℚ :=
