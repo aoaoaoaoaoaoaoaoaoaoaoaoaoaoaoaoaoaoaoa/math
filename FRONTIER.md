@@ -366,6 +366,12 @@ needs at least three copies, and contracts every arbitrary exceptional chain exa
 of `2 × 2` bridges. [`M4-O08`](SALVAGE.md#m4-o08-residue-two-necessary-wall) proves that every
 zero contains a residue-two gap.
 
+Within the regular residue-zero stratum,
+[`M4-S02`](SALVAGE.md#m4-s02-residue-zero-safe-bridge-cone) gives the complementary exact
+compression: every nonempty bridge stays in a strict Archimedean cone and has negative
+determinant. Any safe bridge zero must therefore use a residue-one atom; this is a local
+compression, not a complete safe-return theorem.
+
 The complete safe exterior state is now controlled. The arbitrary-switching flag
 [`M4-S04`](SALVAGE.md#m4-s04-arbitrary-switching-three-adic-exterior-flag) proves that every
 regular safe word remains in a normalized two-sector `3`-adic flag. The leftmost residue selects
@@ -807,10 +813,12 @@ denominator-generating arithmetic, or a singular ideal without effective affine 
 incidence from dynamics. Lean constructs one rational conic factorization of the complete paired
 prefix-suffix zero support, so every finite support submatrix has rank at most three. No
 support/minrank certificate can prove a four-state same-zero lower bound; common shift maps must
-carry the contradiction. Conversely, if a two-coordinate construction extends the upper and
-lower word sides to independent inverse actions and preserves the target law on every formal
-inverse state, its role group contains a freely acting `F₂×F₂`. Such a saturated projective
-recurrence needs at least four vector dimensions. The surviving projective route must therefore
+carry the contradiction. The governing representation principle is
+[`G3-S01`](SALVAGE.md#g3-s01-shift-equivariant-zero-incidence): same-zero dimension is
+shift-equivariant projective incidence dimension. Conversely, if a two-coordinate construction
+extends the upper and lower word sides to independent inverse actions and preserves the target
+law on every formal inverse state, its role group contains a freely acting `F₂×F₂`. Such a
+saturated projective recurrence needs at least four vector dimensions. The surviving projective route must therefore
 be intrinsically one-way: inverse states or their target law must fail, or a singular map must
 destroy the cancellative orbit.
 
@@ -1246,7 +1254,8 @@ every constrained path at consecutive singular edges. All edge-rank patterns are
 except one compatible rank-one loop with three units; Lean transports that stratum to one
 intrinsic generic PI₂ instance and proves compatibility forces `β=1`. An audited effective
 cyclic-orbit algorithm, backed by effective `S`-unit enumeration, discharges the sole
-two-parameter cross-edge stratum. Together with the checked reverse compiler this gives
+two-parameter cross-edge stratum. Together with the checked reverse compiler
+[`R32-M01`](SALVAGE.md#r32-m01-generic-reverse-edge-compiler) this gives
 
 ```text
 Mort₃^(2,2) ≡ₘ GPI₂.
@@ -1438,7 +1447,9 @@ The first global arithmetic sieve is also exact.
 [`R32-M05`](SALVAGE.md#r32-m05-cyclotomic-reset-or-cancellation-sieve) projectivizes the
 primitive integer-pair recurrence and proves that every prime divisor of `pᵃ−1` either resets
 the reduced point to one or is swallowed by the common reduction factor. The latter event is
-not an untyped failure of a finite quotient: for every divisor `d ∣ pᵃ−1`, primitive reduction
+not an untyped failure of a finite quotient. The general one-sided certificate owner is
+[`R32-M02`](SALVAGE.md#r32-m02-finite-quotient-sieve); here the quotient semantics are exact:
+for every divisor `d ∣ pᵃ−1`, primitive reduction
 swallows `d` exactly when the source residual is congruent to the terminal residual modulo `d`.
 The remaining local-global escape is therefore repeated terminal shadowing at unbounded
 cyclotomic orders.

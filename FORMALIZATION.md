@@ -427,7 +427,8 @@ The arithmetic classification is now complete whenever `q` is a prime power. The
 bridge polynomial has constant coefficient `T` and leading coefficient `±T²`. Rational-root
 support confines every positive root to one prime. The corpus proves the required
 Bang–Zsigmondy theorem for every base greater than one above exponent two, handles its
-`(2,6)` exception explicitly, and uses fixed- or two-ray finite quotient certificates to
+`(2,6)` exception explicitly, and uses fixed- or two-ray finite quotient certificates under the
+general sieve [`R32-M02`](SALVAGE.md#r32-m02-finite-quotient-sieve) to
 exclude every nonresonant reciprocal. Thus prime-power ReturnSquare is mortal exactly at
 `c=−q⁻ᵐ`.
 
@@ -720,10 +721,11 @@ system. See `R32-S42` and
 
 The rank-(2,2) graph is no longer an independent residue. `RankTwoPunctuation` proves that every
 compatible square with one rank-one loop and three units transports exactly to the existing raw
-reverse compiler. Its intrinsic first scalar is the loop self-bridge and compatibility forces
-the second scalar to one; mortality is exactly immediate loop nilpotence or one generic PI₂
-instance. The remaining edge-rank patterns and the effective cyclic-orbit discharge of the
-cross-edge case are audited as `R32-S32`, using the locally recorded Evertse–Győry unit-equation
+reverse compiler [`R32-M01`](SALVAGE.md#r32-m01-generic-reverse-edge-compiler). Its intrinsic
+first scalar is the loop self-bridge and compatibility forces the second scalar to one; mortality
+is exactly immediate loop nilpotence or one generic PI₂ instance. The remaining edge-rank
+patterns and the effective cyclic-orbit discharge of the cross-edge case are audited as
+`R32-S32`, using the locally recorded Evertse–Győry unit-equation
 theorem. The full audited rank-(2,2) boundary is `Mort₃^(2,2) ≡ₘ GPI₂`; `R32-S35` separately
 reduces arbitrary PI₂ to at most two GPI₂ queries. See
 [`audits/m32-rank-two-punctuation-2026-08-08.md`](audits/m32-rank-two-punctuation-2026-08-08.md).
@@ -820,6 +822,11 @@ cancellation histories. Their boundary is recorded in
 [#12](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/12).
 
 ## Audited But Unformalized
+
+[`G3-S01`](SALVAGE.md#g3-s01-shift-equivariant-zero-incidence) identifies same-zero dimension
+with shift-equivariant row-column incidence dimension. Its static factorization is elementary;
+the decisive burden is compatibility with common letter maps, which is why the support-only
+rank arguments below do not settle the three-state wall.
 
 The static half of [`G3-O05`](SALVAGE.md#g3-o05-cancellative-projective-state-tax) is fully
 formalized: phase-aware prefix decomposition, free-group residual equality, one global rational
@@ -1199,6 +1206,11 @@ two protected rays with nonzero weight. Lean therefore proves
 closed-phase theorem. The audit is
 [`audits/m43-residue-two-wall-2026-08-05.md`](audits/m43-residue-two-wall-2026-08-05.md).
 
+The residue-zero cone [`M4-S02`](SALVAGE.md#m4-s02-residue-zero-safe-bridge-cone) is audited
+against the same transition formulas. It proves strict cone preservation and negative
+determinant for every nonempty regular residue-zero bridge; the unformalized boundary is
+arbitrary residue-one alternation, not the residue-zero compression.
+
 The one-defect phase cut [`M4-S03`](SALVAGE.md#m4-s03-one-defect-phase-cut) is formalized in the
 same module. `ParabolicBlade.oneDefect_wordProduct_ne_zero_of_same_residue` proves that arbitrary
 safe contexts around one residue-two atom cannot vanish when their adjacent residues agree.
@@ -1421,6 +1433,9 @@ fixed-rank decision problem.
 | `PhaseRigidity.lean` | checked local role algebra, discrepancy commutators, and invariant-pencil rigidity |
 | `HistoryFracture.lean` | null-history counterexample, minimum-body base-five encoder, and integral mortality lift |
 | `TransverseHistory.lean` | injective mixed-radix history code, transverse rank-two controls, and exact minimum-body zero language |
+| `BranchingHistory.lean` | fixed `bcbc` terminal forks and affine positional lower bounds |
+| `AffineRecognizer.lean` | generic singular three-state guard-and-carry representation calculus |
+| `BranchingRecognizer.lean` | complete `bcbc` residual grammar and rational three-state recognizer |
 | `MixedBranchingHistory.lean` | equal-length mixed terminal grammar and exact raw-toggle normal form |
 | `MixedBranchingRecognizer.lean` | complete inverse carry graph and integral three-state same-zero recognizer |
 | `ExpandingHistoryNoGo.lean` | reset-affine orbit, finite reverse automaton, regularity, and universal computability obstruction |

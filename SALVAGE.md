@@ -81,7 +81,7 @@ file owns the mathematical stock.
 | [`MM-O12`](#mm-o12-boundary-calibrated-setter-shear-is-gauge) | obstruction | boundary calibration erases the setter's side-basis shear from its separator and transfer | formalized | graduated |
 | [`MM-M01`](#mm-m01-off-diagonal-companion-interface) | partial mechanism | off-diagonal rank-two bridge has a complete fracture grammar | audited | stock |
 | [`MM-M02`](#mm-m02-bordered-toggle) | partial mechanism | one lifted toggle has a stable rank-two third power | audited | parked |
-| [`MM-M03`](#mm-m03-five-state-setter-punctuation) | partial mechanism | a mixed delimiter word is an exact internal rank-one separator | audited | active |
+| [`MM-M03`](#mm-m03-five-state-setter-punctuation) | partial mechanism | a mixed delimiter word is an exact internal rank-one separator | audited | closed |
 | [`MM-M04`](#mm-m04-swapped-digit-setter) | partial mechanism | reversing the nonzero ternary digits preserves the setter and makes every transfer orientation preserving | audited | active |
 | [`MM-S01`](#mm-s01-square-run-projective-normal-form) | structure theorem | malformed square runs reduce to rational projective pole avoidance | audited | active |
 | [`MM-S02`](#mm-s02-reset-zero-projective-peeling) | structure theorem | the ordinary reset cannot reach a false pole after one transfer | audited | active |
@@ -211,7 +211,7 @@ file owns the mathematical stock.
 | [`G3-C04`](#g3-c04-head-separated-endpoint-debt) | compiler criterion | a fresh output head makes every endpoint witness causally lawful | formalized | active |
 | [`G3-O06`](#g3-o06-periodic-ray-completion-and-branching-fracture) | compiler and obstruction | `bcbb` has an exact three-state periodic compiler, while `bcbc` defeats every single affine positional section | formalized | graduated |
 | [`G3-O07`](#g3-o07-near-fork-carry-collision) | obstruction | a terminal and nonterminal `bcbc` near-fork collide under the entire one-coordinate phase-line carry family | formalized | graduated |
-| [`G3-C02`](#g3-c02-fixed-bcbc-singular-recognizer) | fixed-instance compiler | a transient guard over one affine carry recognizes the complete `bcbc` language | audited | graduated |
+| [`G3-C02`](#g3-c02-fixed-bcbc-singular-recognizer) | fixed-instance compiler | a transient guard over one affine carry recognizes the complete `bcbc` language | audited, with formalized core | graduated |
 | [`G3-C05`](#g3-c05-equal-length-mixed-branching-recognizer) | fixed-instance compiler | three singular controls recognize the complete `bcbcbb` paired zero language | formalized | graduated |
 | [`G3-M02`](#g3-m02-square-root-punctuation-fracture) | partial mechanism | a rank-two square root gives an exact `SS`-free mortality grammar | formalized | closed |
 | [`G3-O10`](#g3-o10-square-root-boundary-saturation) | obstruction | every nondegenerate rank-one square root preserves boundary coefficient zeros | formalized | graduated |
@@ -1717,14 +1717,11 @@ zero word over the three five-state generators `{A_b,A_c,S}`.
 halting-to-mortality implication. It does not prove the converse: arbitrary
 words may contain maximal delimiter runs of length two.
 
-**Use:** this is the concrete mixed-word successor to the parked bordered
-toggle. Combine it with [`MM-S01`](#mm-s01-square-run-projective-normal-form);
-do not claim `M₅(3)` until projective avoidance is proved.
+**Use:** retain this as the first exact setter punctuation mechanism. The
+swapped-digit setter [`MM-M04`](#mm-m04-swapped-digit-setter) preserves it while
+removing the orientation-reversing transfer, so the unswapped route is closed.
 
 **Artifact:** [`audits/m53-setter-projective-2026-07-24.md`](audits/m53-setter-projective-2026-07-24.md#side-normal-data).
-
-**Next:** formalize the displayed matrices, regular decoder, power identities,
-and separator identity.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
@@ -2607,7 +2604,7 @@ a fixed rational input, not writable storage.
 **Use:** test arithmetic walls and same-zero modifications on a fully normalized rank-`(3,2)`
 laboratory without reopening the physical-word grammar.
 
-**Continuation:** [#12](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/12).
+**Next:** [#12](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/12).
 
 ### R32-O02: Two-return square cage
 
@@ -2988,7 +2985,7 @@ Tracked in
 
 ### R32-S04: Guarded return normal form
 
-**Kind:** structural normal form
+**Kind:** structure theorem
 **Evidence:** formalized
 **Disposition:** active
 
@@ -3036,7 +3033,7 @@ finite-height, p-adic contraction, or continued-fraction invariant deciding it.
 
 ### R32-S05: Prefix shift and affine residual
 
-**Kind:** structural normal form
+**Kind:** structure theorem
 **Evidence:** formalized
 **Disposition:** active
 
@@ -3088,7 +3085,7 @@ simulation must still evade the closed-substitution collapse.
 
 ### R32-S06: Resonance localization
 
-**Kind:** structural normal form
+**Kind:** structure theorem
 **Evidence:** formalized
 **Disposition:** active
 
@@ -3186,7 +3183,7 @@ theorem, or construct a rational nonperiodic resonance stack.
 
 ### R32-S07: Decoded residual address normal form
 
-**Kind:** structural normal form
+**Kind:** structure theorem
 **Evidence:** formalized
 **Disposition:** active
 
@@ -5135,6 +5132,9 @@ global amortization or counter-orbit follows.
 core. A decision proof must amortize bridges which destroy exact order on both sides; an
 undecidability construction must realize such recycled support along one exact reset orbit.
 
+**Next:** prove global amortization of doubly order-broken bridges or exhibit a synchronized
+support-recycling counter-orbit.
+
 ### R32-S34: Exact moving-prime ledger
 
 **Kind:** structure theorem
@@ -5170,6 +5170,9 @@ rails of degree at least two were already excluded by the stronger checked rail-
 **Use:** on the constructive side, require every proposed auxiliary prime to satisfy both exact
 ledger conditions at each activation. On the decision side, combine those synchronization
 events with the two-sided order budget rather than bounding a fictitious hidden register.
+
+**Next:** decide whether synchronized moving-prime activations admit an effective global bound
+or an infinite exact genealogy.
 
 ### R32-S35: Positive projective-incidence genericization
 
@@ -5217,6 +5220,8 @@ and
 
 **Use:** identify PI₂ and GPI₂ at the level of decidability and normalize all further attacks to
 `α=β=1`. The live rank-(2,2) enemy is GPI₂ itself; exceptional-scalar plumbing is retired.
+
+**Next:** decide normalized GPI₂; do not reopen exceptional-scalar plumbing.
 
 ### R32-S36: Guarded affine projective incidence
 
@@ -6616,7 +6621,7 @@ residue-two atoms.
 
 ### M4-S02: Residue-zero safe-bridge cone
 
-**Kind:** arbitrary-length bridge invariant
+**Kind:** structure theorem
 
 **Evidence:** audited
 
@@ -6654,7 +6659,7 @@ families are excluded by [`M4-O10`](#m4-o10-irrational-rotation-cone-fracture).
 
 ### M4-S03: One-defect phase cut
 
-**Kind:** arbitrary-context structure theorem
+**Kind:** structure theorem
 
 **Evidence:** formalized
 
@@ -6885,7 +6890,7 @@ semilinear reachability description.
 
 ### M4-S04: Arbitrary-switching three-adic exterior flag
 
-**Kind:** arbitrary-length semigroup invariant
+**Kind:** structure theorem
 
 **Evidence:** formalized
 
@@ -6986,7 +6991,7 @@ machines outside this normal form.
 
 ### M4-S06: Arbitrary defect bridge grammar
 
-**Kind:** arbitrary-length structure theorem
+**Kind:** structure theorem
 
 **Evidence:** formalized
 
@@ -8440,7 +8445,7 @@ terminal section, rather than count branches or exhibit finitely many return cyc
 
 **Evidence:** formalized
 
-**Disposition:** active
+**Disposition:** closed
 
 Let `S` be one distinguished matrix among three ordinary controls and suppose
 
@@ -8783,6 +8788,8 @@ without selecting a normal spelling.
 **Kind:** obstruction
 
 **Evidence:** formalized
+
+**Disposition:** graduated
 
 Let `N` contain exactly the positive words avoiding `xyz`, `yzx`, and `zxy`. The coefficient table
 on prefixes and suffixes `x,y,z,xy,yz,zx` has six private nonzero entries. Columns `x,y,z` isolate

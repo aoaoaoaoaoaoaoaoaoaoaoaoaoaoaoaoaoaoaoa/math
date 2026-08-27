@@ -1,4 +1,6 @@
+import MatrixMortality.MatrixSemigroup
 import MatrixMortality.TerminalSource
+import MatrixMortality.WordDiscrepancy
 
 /-!
 # A synchronizing terminal tile
@@ -28,12 +30,15 @@ theorem suture_prefix_iff {α : Type*} (x y : List α) : suture x <+: suture y �
       | nil => simp
       | cons b y => simp [ih]
 
-/-- Two words are prefix-comparable. -/
-def PrefixComparable {α : Type*} (x y : List α) : Prop := x <+: y ∨ y <+: x
-
 theorem suture_prefixComparable_iff {α : Type*} (x y : List α) :
-    PrefixComparable (suture x) (suture y) ↔ x = y := by
-  simp [PrefixComparable, suture_prefix_iff, eq_comm]
+    WordDiscrepancy.PrefixComparable (suture x) (suture y) ↔ x = y := by
+  rw [WordDiscrepancy.PrefixComparable]
+  constructor
+  · rintro (⟨residual, equality⟩ | ⟨residual, equality⟩)
+    · exact (suture_prefix_iff x y).mp ⟨residual, equality.symm⟩
+    · exact ((suture_prefix_iff y x).mp ⟨residual, equality.symm⟩).symm
+  · rintro rfl
+    exact Or.inl ⟨[], by simp⟩
 
 /-- Lift ordinary PCP words into the marked alphabet and use `suture terminal` for the
 distinguished tile. -/
@@ -60,18 +65,6 @@ theorem exists_first_none {ι : Type*} {word : List (Option ι)} (h : none ∈ w
           obtain ⟨interior, suffix, rfl⟩ := ih htail
           exact ⟨i :: interior, suffix, by simp⟩
 
-theorem exists_eq_map_some_of_none_not_mem {ι : Type*} {word : List (Option ι)}
-    (h : none ∉ word) : ∃ interior : List ι, word = interior.map some := by
-  induction word with
-  | nil => exact ⟨[], rfl⟩
-  | cons head word ih =>
-      cases head with
-      | none => simp at h
-      | some i =>
-          have htail : none ∉ word := by simpa using h
-          obtain ⟨interior, rfl⟩ := ih htail
-          exact ⟨i :: interior, by simp⟩
-
 theorem spell_marked_ordinary {ι α : Type*} (side : ι → List α)
     (terminal : List α) (word : List ι) :
     spell (markedSide side terminal) (word.map some) = (spell side word).map some := by
@@ -87,7 +80,7 @@ theorem marked_solution_uses_terminal {ι α : Type*} (u v : ι → List α)
       IsPCPSolution (markedSide u terminal) (markedSide v []) word → none ∈ word := by
   intro word hword
   by_contra hnone
-  obtain ⟨interior, rfl⟩ := exists_eq_map_some_of_none_not_mem hnone
+  obtain ⟨interior, rfl⟩ := exists_eq_map_some_of_none_not_mem word hnone
   apply hordinary
   refine ⟨interior, ?_, ?_⟩
   · simpa using hword.1
@@ -113,14 +106,18 @@ theorem no_ordinary_solution_of_final_mismatch {ι α : Type*} (u v : ι → Lis
 
 theorem spelled_prefixes_comparable {ι α : Type*} {u v : ι → List α}
     {front tail : List ι} (hsolution : spell u (front ++ tail) = spell v (front ++ tail)) :
-    PrefixComparable (spell u front) (spell v front) := by
+    WordDiscrepancy.PrefixComparable (spell u front) (spell v front) := by
   have hu : spell u front <+: spell u (front ++ tail) := by
     rw [spell_append]
     exact List.prefix_append _ _
   have hv : spell v front <+: spell u (front ++ tail) := by
     rw [hsolution, spell_append]
     exact List.prefix_append _ _
-  exact List.prefix_or_prefix_of_prefix hu hv
+  rcases List.prefix_or_prefix_of_prefix hu hv with leftPrefix | rightPrefix
+  · obtain ⟨residual, equality⟩ := leftPrefix
+    exact Or.inl ⟨residual, equality.symm⟩
+  · obtain ⟨residual, equality⟩ := rightPrefix
+    exact Or.inr ⟨residual, equality.symm⟩
 
 /-- A fresh terminal marker discharges the primitive-terminal source hypothesis. The sole
 instance-specific premise is that every solution uses the distinguished tile at least once. -/
@@ -135,7 +132,7 @@ theorem marked_primitive_terminal {ι α : Type*} (u v : ι → List α) (termin
   let front : List (Option ι) := interior.map some ++ [none]
   have hdecompose : word = front ++ suffix := by
     simpa [front] using hword
-  have hcomparable : PrefixComparable
+  have hcomparable : WordDiscrepancy.PrefixComparable
       (spell (markedSide u terminal) front) (spell (markedSide v []) front) := by
     apply spelled_prefixes_comparable
     simpa [hdecompose] using hprimitive.1.2

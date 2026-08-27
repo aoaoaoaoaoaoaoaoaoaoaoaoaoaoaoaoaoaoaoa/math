@@ -84,6 +84,7 @@ import MatrixMortality.PeriodicHistory
 import MatrixMortality.TransverseHistory
 import MatrixMortality.BranchingHistory
 import MatrixMortality.PrefixResidual
+import MatrixMortality.AffineRecognizer
 import MatrixMortality.BranchingRecognizer
 import MatrixMortality.MixedBranchingRecognizer
 import MatrixMortality.SquareRootPunctuation

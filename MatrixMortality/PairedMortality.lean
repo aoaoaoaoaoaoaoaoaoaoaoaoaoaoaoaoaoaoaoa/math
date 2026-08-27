@@ -70,28 +70,21 @@ theorem paired_zero_rat_iff_terminal_match (β : Nat) (body : List TagLetter) :
     WordSeries.HasNonemptyZero (pairedCoefficient ℚ β body) ↔
       ∃ word : List NearyTile,
         spell (nearyUpper β) word ++ nearyMarker β = spell (nearyLower β body) word := by
+  rw [← paired_zero_iff_terminal_match]
   constructor
-  · rintro ⟨control, _, coefficient_zero⟩
-    refine ⟨decodePairedWord control, ?_⟩
-    exact (sideCoefficient_eq_zero_iff_terminal_match_rat β body _).mp
-      (by simpa [pairedCoefficient_eq_sideCoefficient] using coefficient_zero)
-  · rintro ⟨word, terminal_match⟩
-    obtain ⟨control, decoded⟩ := decodePairedWord_surjective word
-    have word_nonempty : word ≠ [] := by
-      intro word_empty
-      have marker_empty : nearyMarker β = [] := by
-        simpa [word_empty, spell] using terminal_match
-      simp [nearyMarker] at marker_empty
-    have control_nonempty : control ≠ [] := by
-      intro control_empty
-      apply word_nonempty
-      calc
-        word = decodePairedWord control := decoded.symm
-        _ = decodePairedWord [] := by rw [control_empty]
-        _ = [] := rfl
-    refine ⟨control, control_nonempty, ?_⟩
-    rw [pairedCoefficient_eq_sideCoefficient, decoded]
-    exact (sideCoefficient_eq_zero_iff_terminal_match_rat β body word).mpr terminal_match
+  · rintro ⟨word, word_nonempty, coefficient_zero⟩
+    refine ⟨word, word_nonempty, ?_⟩
+    apply (Int.cast_injective :
+      Function.Injective (fun integer : ℤ => (integer : ℚ)))
+    change (Int.castRingHom ℚ) (pairedCoefficient ℤ β body word) =
+      (Int.castRingHom ℚ) 0
+    rw [pairedCoefficient_map (Int.castRingHom ℚ)]
+    simpa using coefficient_zero
+  · rintro ⟨word, word_nonempty, coefficient_zero⟩
+    refine ⟨word, word_nonempty, ?_⟩
+    have mapped := congrArg (Int.castRingHom ℚ) coefficient_zero
+    rw [pairedCoefficient_map (Int.castRingHom ℚ)] at mapped
+    simpa using mapped
 
 theorem pairedMortalityFamily_rat_mortal_iff_paired_zero (β : Nat)
     (body : List TagLetter) :

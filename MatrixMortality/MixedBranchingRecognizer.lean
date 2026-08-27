@@ -1,3 +1,4 @@
+import MatrixMortality.AffineRecognizer
 import MatrixMortality.MixedBranchingHistory
 
 /-!
@@ -19,121 +20,73 @@ private def carryC : ℤ := 5236172
 private def toggleCentre : ℤ := 21436039
 private def acceptingCarry : ℤ := 216186449
 
+private abbrev recognizerParameters : AffineRecognizer.Parameters ℤ ℤ where
+  cast := Int.castRingHom ℤ
+  carryScale
+    | .b => 5
+    | .c => 7
+  carryShift
+    | .b => carryB
+    | .c => carryC
+  guardScale _ := 2
+  guardShift
+    | .b => 1
+    | .c => -(2 * acceptingCarry)
+  toggleCenter := toggleCentre
+
 /-- Singular integral data generators. Their first coordinate is a transient guard and their
 second coordinate is the persistent affine carry. -/
-def recognizerData : TagLetter → Matrix (Fin 3) (Fin 3) ℤ
-  | .b =>
-      !![0, 2, 1;
-         0, 5, carryB;
-         0, 0, 1]
-  | .c =>
-      !![0, 2, -432372898;
-         0, 7, carryC;
-         0, 0, 1]
+def recognizerData : TagLetter → Matrix (Fin 3) (Fin 3) ℤ :=
+  recognizerParameters.data
 
 /-- The two singular data generators and the integral affine involution. -/
-def recognizerGenerator : PairedControl → Matrix (Fin 3) (Fin 3) ℤ
-  | .data letter => recognizerData letter
-  | .toggle =>
-      !![1, 0, 0;
-         0, -1, toggleCentre;
-         0, 0, 1]
+def recognizerGenerator : PairedControl → Matrix (Fin 3) (Fin 3) ℤ :=
+  recognizerParameters.generator
 
 /-- Boundary row selecting the refreshed guard. -/
-def recognizerRow : Fin 3 → ℤ := ![1, 0, 0]
+def recognizerRow : Fin 3 → ℤ := AffineRecognizer.row
 
 /-- Homogeneous state before the boundary toggle. -/
-def recognizerDelta : Fin 3 → ℤ := ![1, 0, 1]
+def recognizerDelta : Fin 3 → ℤ := AffineRecognizer.delta
 
 /-- Boundary column obtained by toggling `recognizerDelta`. -/
-def recognizerColumn : Fin 3 → ℤ := ![1, toggleCentre, 1]
+def recognizerColumn : Fin 3 → ℤ := recognizerParameters.column
 
 /-- Persistent integer carry driven from the right end of a raw control word. -/
-def recognizerCarry : List PairedControl → ℤ
-  | [] => 0
-  | .data .b :: word => 5 * recognizerCarry word + carryB
-  | .data .c :: word => 7 * recognizerCarry word + carryC
-  | .toggle :: word => toggleCentre - recognizerCarry word
+def recognizerCarry : List PairedControl → ℤ := recognizerParameters.carry
 
 /-- Transient guard refreshed by every data control. -/
-def recognizerGuard : List PairedControl → ℤ
-  | [] => 1
-  | .data .b :: word => 2 * recognizerCarry word + 1
-  | .data .c :: word => 2 * (recognizerCarry word - acceptingCarry)
-  | .toggle :: word => recognizerGuard word
+def recognizerGuard : List PairedControl → ℤ := recognizerParameters.guard
 
 /-- Exact affine state of every raw control word. -/
 theorem recognizerProduct_mulVec_delta (word : List PairedControl) :
     wordProduct recognizerGenerator word *ᵥ recognizerDelta =
-      ![recognizerGuard word, recognizerCarry word, 1] := by
-  induction word with
-  | nil =>
-      ext coordinate
-      fin_cases coordinate <;>
-        simp [wordProduct, recognizerDelta, recognizerGuard, recognizerCarry]
-  | cons control word induction =>
-      rw [wordProduct_cons, ← Matrix.mulVec_mulVec, induction]
-      cases control with
-      | toggle =>
-          ext coordinate
-          fin_cases coordinate <;>
-            simp [recognizerGenerator, recognizerGuard, recognizerCarry, Matrix.mulVec,
-              dotProduct, Fin.sum_univ_succ, toggleCentre]
-          ring
-      | data letter =>
-          cases letter <;> ext coordinate <;> fin_cases coordinate
-          all_goals simp [recognizerGenerator, recognizerData, recognizerGuard,
-            recognizerCarry, Matrix.mulVec, dotProduct, Fin.sum_univ_succ,
-            carryB, carryC, acceptingCarry]
-          all_goals ring
+      ![recognizerGuard word, recognizerCarry word, 1] :=
+  recognizerParameters.wordProduct_mulVec_delta word
 
 theorem recognizerColumn_eq_toggle_delta :
-    recognizerColumn = recognizerGenerator .toggle *ᵥ recognizerDelta := by
-  ext coordinate
-  fin_cases coordinate <;>
-    norm_num [recognizerColumn, recognizerGenerator, recognizerDelta, Matrix.mulVec,
-      dotProduct, Fin.sum_univ_succ, toggleCentre]
+    recognizerColumn = recognizerGenerator .toggle *ᵥ recognizerDelta :=
+  recognizerParameters.column_eq_toggle_delta
 
 /-- Scalar coefficient of the explicit integral representation. -/
 def recognizerCoefficient (word : List PairedControl) : ℤ :=
-  linearCoefficient recognizerGenerator recognizerRow recognizerColumn word
+  recognizerParameters.coefficient word
 
 theorem recognizerCoefficient_eq_guard (word : List PairedControl) :
-    recognizerCoefficient word = recognizerGuard (word ++ [.toggle]) := by
-  have state : wordProduct recognizerGenerator word *ᵥ recognizerColumn =
-      ![recognizerGuard (word ++ [.toggle]),
-        recognizerCarry (word ++ [.toggle]), 1] := by
-    calc
-      wordProduct recognizerGenerator word *ᵥ recognizerColumn =
-          wordProduct recognizerGenerator word *ᵥ
-            (recognizerGenerator .toggle *ᵥ recognizerDelta) := by
-              rw [← recognizerColumn_eq_toggle_delta]
-      _ = (wordProduct recognizerGenerator word * recognizerGenerator .toggle) *ᵥ
-          recognizerDelta := by rw [Matrix.mulVec_mulVec]
-      _ = wordProduct recognizerGenerator (word ++ [.toggle]) *ᵥ recognizerDelta := by
-        rw [wordProduct_append]
-        simp [wordProduct]
-      _ = _ := recognizerProduct_mulVec_delta (word ++ [.toggle])
-  rw [recognizerCoefficient, linearCoefficient, state]
-  simp [recognizerRow, dotProduct, Fin.sum_univ_succ]
+    recognizerCoefficient word = recognizerGuard (word ++ [.toggle]) :=
+  recognizerParameters.coefficient_eq_guard word
 
 @[simp] theorem recognizerData_det (letter : TagLetter) :
-    (recognizerData letter).det = 0 := by
-  cases letter <;>
-    norm_num [recognizerData, Matrix.det_fin_three, Matrix.cons_val_two,
-      Matrix.vecHead, Matrix.vecTail, carryB, carryC]
+    (recognizerData letter).det = 0 :=
+  recognizerParameters.data_det letter
 
 @[simp] theorem recognizerToggle_det :
-    (recognizerGenerator .toggle).det = -1 := by
-  norm_num [recognizerGenerator, Matrix.det_fin_three, Matrix.cons_val_two,
-    Matrix.vecHead, Matrix.vecTail, toggleCentre]
+    (recognizerGenerator .toggle).det = -1 :=
+  recognizerParameters.toggle_det
 
 theorem recognizerToggle_involutive :
-    recognizerGenerator .toggle * recognizerGenerator .toggle = 1 := by
-  ext row column
-  fin_cases row <;> fin_cases column <;>
-    norm_num [recognizerGenerator, Matrix.mul_apply, Matrix.one_apply, Fin.sum_univ_succ,
-      toggleCentre]
+    recognizerGenerator .toggle * recognizerGenerator .toggle = 1 :=
+  recognizerParameters.toggle_involutive
 
 /-! ## Centred macro dynamics -/
 
@@ -756,9 +709,9 @@ private theorem guard_terminalControl_zero (bits : List Bool) :
       ((expandMacros (prefixMacros ++ returnMacros bits) ++ [.toggle]) ++ [.toggle]) =
       acceptingCarry := by
     simpa [terminalToggle] using carry
-  change 2 * (recognizerCarry
-    ((expandMacros (prefixMacros ++ returnMacros bits) ++ [.toggle]) ++ [.toggle]) -
-      acceptingCarry) = 0
+  change 2 * recognizerCarry
+    ((expandMacros (prefixMacros ++ returnMacros bits) ++ [.toggle]) ++ [.toggle]) +
+      -(2 * acceptingCarry) = 0
   rw [carry']
   ring
 
@@ -809,11 +762,11 @@ private theorem guard_boundary_zero_of_normal {word : List PairedControl}
                 ((expandMacros tokens ++ terminalToggle trailing) ++ [.toggle]) =
                 acceptingCarry := by
               have guardEquality :
-                  2 * (recognizerCarry
-                    ((expandMacros tokens ++ terminalToggle trailing) ++ [.toggle]) -
-                      acceptingCarry) = 0 := by
+                  2 * recognizerCarry
+                    ((expandMacros tokens ++ terminalToggle trailing) ++ [.toggle]) +
+                      -(2 * acceptingCarry) = 0 := by
                 simpa [expandMacros, CarryMacro.controls, recognizerGuard,
-                  List.append_assoc] using zero
+                  recognizerCarry, List.append_assoc] using zero
               omega
             obtain ⟨rfl, bits, rfl⟩ := carry_iff.mp carry
             exact ⟨bits, Or.inl (terminalControl_eq_macro_expansion bits).symm⟩
@@ -830,11 +783,11 @@ private theorem guard_boundary_zero_of_normal {word : List PairedControl}
                 ((expandMacros tokens ++ terminalToggle trailing) ++ [.toggle]) =
                 acceptingCarry := by
               have guardEquality :
-                  2 * (recognizerCarry
-                    ((expandMacros tokens ++ terminalToggle trailing) ++ [.toggle]) -
-                      acceptingCarry) = 0 := by
+                  2 * recognizerCarry
+                    ((expandMacros tokens ++ terminalToggle trailing) ++ [.toggle]) +
+                      -(2 * acceptingCarry) = 0 := by
                 simpa [expandMacros, CarryMacro.controls, recognizerGuard,
-                  List.append_assoc] using zero
+                  recognizerCarry, List.append_assoc] using zero
               omega
             obtain ⟨rfl, bits, rfl⟩ := carry_iff.mp carry
             exact ⟨bits, Or.inr (toggle_terminalControl_eq_macro_expansion bits).symm⟩
@@ -907,7 +860,11 @@ private theorem recognizerProduct_scourToggles (word : List PairedControl) :
 
 theorem recognizerCoefficient_scourToggles (word : List PairedControl) :
     recognizerCoefficient (scourToggles word) = recognizerCoefficient word := by
-  simp [recognizerCoefficient, linearCoefficient, recognizerProduct_scourToggles]
+  change linearCoefficient recognizerGenerator recognizerRow recognizerColumn
+      (scourToggles word) =
+    linearCoefficient recognizerGenerator recognizerRow recognizerColumn word
+  unfold linearCoefficient
+  rw [recognizerProduct_scourToggles]
 
 /-- Complete zero language of the integral three-state recognizer, on every raw control word. -/
 theorem recognizerCoefficient_eq_zero_iff (word : List PairedControl) :
@@ -950,13 +907,13 @@ theorem recognizerData_mulVec_eq_zero_iff (letter : TagLetter) (vector : Fin 3 �
     have second := congrFun killed (1 : Fin 3)
     have third := congrFun killed (2 : Fin 3)
     cases letter <;>
-      simp [recognizerData, Matrix.mulVec, dotProduct, Fin.sum_univ_succ,
-        carryB, carryC] at second third <;>
+      simp [recognizerData, AffineRecognizer.Parameters.data,
+        Matrix.mulVec, dotProduct, Fin.sum_univ_succ, carryB, carryC] at second third <;>
       omega
   · rintro ⟨second, third⟩
     cases letter <;> ext coordinate <;> fin_cases coordinate <;>
-      simp [recognizerData, Matrix.mulVec, dotProduct, Fin.sum_univ_succ,
-        carryB, carryC, second, third]
+      simp [recognizerData, AffineRecognizer.Parameters.data,
+        Matrix.mulVec, dotProduct, Fin.sum_univ_succ, carryB, carryC, second, third]
 
 /-- The common data kernel is nontrivial. -/
 theorem recognizerData_kills_guardAxis (letter : TagLetter) :
@@ -987,9 +944,9 @@ theorem recognizerBoundaries_ne_zero :
     recognizerRow ≠ 0 ∧ recognizerColumn ≠ 0 := by
   constructor <;> intro zeroBoundary
   · have first := congrFun zeroBoundary (0 : Fin 3)
-    simp [recognizerRow] at first
+    simp [recognizerRow, AffineRecognizer.row] at first
   · have last := congrFun zeroBoundary (2 : Fin 3)
-    simp [recognizerColumn] at last
+    simp [recognizerColumn, AffineRecognizer.Parameters.column] at last
 
 end MixedBranchingRecognizer
 end MatrixMortality

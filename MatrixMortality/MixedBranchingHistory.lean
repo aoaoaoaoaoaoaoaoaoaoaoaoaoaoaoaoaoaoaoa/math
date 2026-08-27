@@ -61,7 +61,7 @@ private def wideResidual : Residual := .right .b [.b, .b]
 private def outputBlock (stroke : Stroke TagLetter 3) : List TagLetter :=
   tagOutput mixedBody stroke.head
 
-private def ResidualStep (before : Residual) (stroke : Stroke TagLetter 3)
+private abbrev ResidualStep (before : Residual) (stroke : Stroke TagLetter 3)
     (after : Residual) : Prop :=
   before.leftWord ++ stroke.letters ++ after.rightWord =
     before.rightWord ++ outputBlock stroke ++ after.leftWord
@@ -69,42 +69,6 @@ private def ResidualStep (before : Residual) (stroke : Stroke TagLetter 3)
 private abbrev ResidualPath (initial : Residual) :
     List (Stroke TagLetter 3) → Residual → Prop :=
   PrefixResidual.Path (tagOutput mixedBody) initial
-
-private theorem ResidualPath.nil {initial : Residual} :
-    ResidualPath initial [] initial := PrefixResidual.Path.nil
-
-private theorem ResidualPath.snoc {initial before after : Residual}
-    {stroke : Stroke TagLetter 3} {history : List (Stroke TagLetter 3)}
-    (path : ResidualPath initial history before) (step : ResidualStep before stroke after) :
-    ResidualPath initial (history ++ [stroke]) after := PrefixResidual.Path.snoc path step
-
-private theorem ResidualPath.cons {initial before after : Residual}
-    {stroke : Stroke TagLetter 3} {history : List (Stroke TagLetter 3)}
-    (step : ResidualStep initial stroke before)
-    (path : ResidualPath before history after) :
-    ResidualPath initial (stroke :: history) after := PrefixResidual.Path.cons step path
-
-private theorem ResidualPath.append {initial middle final : Residual}
-    {left right : List (Stroke TagLetter 3)}
-    (leftPath : ResidualPath initial left middle)
-    (rightPath : ResidualPath middle right final) :
-    ResidualPath initial (left ++ right) final := PrefixResidual.Path.append leftPath rightPath
-
-private theorem ResidualPath.snoc_of_ne_nil {initial final : Residual}
-    {history : List (Stroke TagLetter 3)} (path : ResidualPath initial history final)
-    (nonempty : history ≠ []) :
-    ∃ priorHistory before stroke,
-      history = priorHistory ++ [stroke] ∧
-        ResidualPath initial priorHistory before ∧ ResidualStep before stroke final :=
-  PrefixResidual.Path.snoc_of_ne_nil path nonempty
-
-private theorem ResidualPath.realizes {initial final : Residual}
-    {history : List (Stroke TagLetter 3)} {left right : List TagLetter}
-    (path : ResidualPath initial history final)
-    (realizes : Residual.Realizes initial left right) :
-    Residual.Realizes final (left ++ consumed history)
-      (right ++ produced (tagOutput mixedBody) history) :=
-  PrefixResidual.Path.realizes path realizes
 
 private theorem mixedNull_iff_path (history : List (Stroke TagLetter 3)) :
     mixedNull history ↔ ResidualPath startResidual history startResidual := by
@@ -114,7 +78,7 @@ private theorem mixedNull_iff_path (history : List (Stroke TagLetter 3)) :
     · rfl
     · simpa [mixedNull] using null
   · intro path
-    have realized := ResidualPath.realizes path (left := []) (right := [.b]) (by rfl)
+    have realized := PrefixResidual.Path.realizes path (left := []) (right := [.b]) (by rfl)
     simpa [mixedNull, Residual.Realizes, startResidual, Residual.leftWord,
       Residual.rightWord] using realized
 
@@ -183,7 +147,7 @@ private theorem rightRigid_step {before after : Residual}
                 norm_num at suffixFormula
                 simpa [rightRigid] using suffixFormula
 
-private theorem ResidualPath.preserves_rightRigid {initial final : Residual}
+private theorem preserves_rightRigid {initial final : Residual}
     {history : List (Stroke TagLetter 3)} (path : ResidualPath initial history final)
     (rigid : rightRigid initial) : rightRigid final := by
   induction path with
@@ -344,37 +308,37 @@ private theorem enters_wide {before : Residual} {stroke : Stroke TagLetter 3}
               wideResidual, outputBlock, strokeCBC, stroke₃, Stroke.letters, mixedBody,
               tagOutput, nearyBody]
 
-@[simp] private theorem step_start_left :
+private theorem step_start_left :
     ResidualStep startResidual strokeBBB leftResidual := by rfl
 
-@[simp] private theorem step_left_deep :
+private theorem step_left_deep :
     ResidualStep leftResidual strokeBCB deepResidual := by rfl
 
-@[simp] private theorem step_deep_start :
+private theorem step_deep_start :
     ResidualStep deepResidual strokeCBB startResidual := by rfl
 
-@[simp] private theorem step_left_wide :
+private theorem step_left_wide :
     ResidualStep leftResidual strokeCBC wideResidual := by rfl
 
-@[simp] private theorem step_wide_start :
+private theorem step_wide_start :
     ResidualStep wideResidual strokeBBB startResidual := by rfl
 
 private theorem nullBlock_path (bit : Bool) :
     ResidualPath startResidual (nullBlock bit) startResidual := by
   cases bit
-  · exact ResidualPath.cons step_start_left
-      (ResidualPath.cons step_left_deep
-        (ResidualPath.snoc ResidualPath.nil step_deep_start))
-  · exact ResidualPath.cons step_start_left
-      (ResidualPath.cons step_left_wide
-        (ResidualPath.snoc ResidualPath.nil step_wide_start))
+  · exact PrefixResidual.Path.cons step_start_left
+      (PrefixResidual.Path.cons step_left_deep
+        (PrefixResidual.Path.snoc PrefixResidual.Path.nil step_deep_start))
+  · exact PrefixResidual.Path.cons step_start_left
+      (PrefixResidual.Path.cons step_left_wide
+        (PrefixResidual.Path.snoc PrefixResidual.Path.nil step_wide_start))
 
 private theorem nullHistory_path (bits : List Bool) :
     ResidualPath startResidual (nullHistory bits) startResidual := by
   induction bits with
-  | nil => exact ResidualPath.nil
+  | nil => exact PrefixResidual.Path.nil
   | cons bit bits induction =>
-      exact ResidualPath.append (nullBlock_path bit) induction
+      exact PrefixResidual.Path.append (nullBlock_path bit) induction
 
 private theorem path_classify {history : List (Stroke TagLetter 3)}
     (path : ResidualPath startResidual history startResidual) :
@@ -383,7 +347,7 @@ private theorem path_classify {history : List (Stroke TagLetter 3)}
   · exact ⟨[], by simp [empty, nullHistory]⟩
   · obtain ⟨prior₂, before₂, last, historyEquality, path₂, lastStep⟩ :=
       path.snoc_of_ne_nil empty
-    have rigid₂ := path₂.preserves_rightRigid start_rightRigid
+    have rigid₂ := preserves_rightRigid path₂ start_rightRigid
     rcases enters_start rigid₂ lastStep with deepEntrance | wideEntrance
     · obtain ⟨rfl, rfl⟩ := deepEntrance
       obtain ⟨prior₁, before₁, middle, prior₂Equality, path₁, middleStep⟩ :=
@@ -393,7 +357,7 @@ private theorem path_classify {history : List (Stroke TagLetter 3)}
           have realized := path₂.realizes (left := []) (right := [.b]) (by rfl)
           simp [Residual.Realizes, deepResidual, Residual.leftWord,
             Residual.rightWord] at realized)
-      have rigid₁ := path₁.preserves_rightRigid start_rightRigid
+      have rigid₁ := preserves_rightRigid path₁ start_rightRigid
       obtain ⟨rfl, rfl⟩ := enters_deep rigid₁ middleStep
       obtain ⟨prior₀, before₀, first, prior₁Equality, path₀, firstStep⟩ :=
         path₁.snoc_of_ne_nil (by
@@ -402,7 +366,7 @@ private theorem path_classify {history : List (Stroke TagLetter 3)}
           have realized := path₁.realizes (left := []) (right := [.b]) (by rfl)
           simp [Residual.Realizes, leftResidual, Residual.leftWord,
             Residual.rightWord] at realized)
-      have rigid₀ := path₀.preserves_rightRigid start_rightRigid
+      have rigid₀ := preserves_rightRigid path₀ start_rightRigid
       obtain ⟨rfl, rfl⟩ := enters_left rigid₀ firstStep
       obtain ⟨bits, priorEquality⟩ := path_classify path₀
       refine ⟨bits ++ [false], ?_⟩
@@ -416,7 +380,7 @@ private theorem path_classify {history : List (Stroke TagLetter 3)}
           have realized := path₂.realizes (left := []) (right := [.b]) (by rfl)
           simp [Residual.Realizes, wideResidual, Residual.leftWord,
             Residual.rightWord] at realized)
-      have rigid₁ := path₁.preserves_rightRigid start_rightRigid
+      have rigid₁ := preserves_rightRigid path₁ start_rightRigid
       obtain ⟨rfl, rfl⟩ := enters_wide rigid₁ middleStep
       obtain ⟨prior₀, before₀, first, prior₁Equality, path₀, firstStep⟩ :=
         path₁.snoc_of_ne_nil (by
@@ -425,7 +389,7 @@ private theorem path_classify {history : List (Stroke TagLetter 3)}
           have realized := path₁.realizes (left := []) (right := [.b]) (by rfl)
           simp [Residual.Realizes, leftResidual, Residual.leftWord,
             Residual.rightWord] at realized)
-      have rigid₀ := path₀.preserves_rightRigid start_rightRigid
+      have rigid₀ := preserves_rightRigid path₀ start_rightRigid
       obtain ⟨rfl, rfl⟩ := enters_left rigid₀ firstStep
       obtain ⟨bits, priorEquality⟩ := path_classify path₀
       refine ⟨bits ++ [true], ?_⟩

@@ -1,3 +1,4 @@
+import MatrixMortality.AffineRecognizer
 import MatrixMortality.BranchingHistory
 import MatrixMortality.PrefixResidual
 
@@ -36,7 +37,7 @@ private def deepResidual : Residual := .left .b [.c, .b]
 private def outputBlock (stroke : Stroke TagLetter 3) : List TagLetter :=
   tagOutput bcbcBody stroke.head
 
-private def ResidualStep (before : Residual) (stroke : Stroke TagLetter 3)
+private abbrev ResidualStep (before : Residual) (stroke : Stroke TagLetter 3)
     (after : Residual) : Prop :=
   before.leftWord ++ stroke.letters ++ after.rightWord =
     before.rightWord ++ outputBlock stroke ++ after.leftWord
@@ -44,42 +45,6 @@ private def ResidualStep (before : Residual) (stroke : Stroke TagLetter 3)
 private abbrev ResidualPath (initial : Residual) :
     List (Stroke TagLetter 3) → Residual → Prop :=
   PrefixResidual.Path (tagOutput bcbcBody) initial
-
-private theorem ResidualPath.nil {initial : Residual} :
-    ResidualPath initial [] initial := PrefixResidual.Path.nil
-
-private theorem ResidualPath.snoc {initial before after : Residual}
-    {stroke : Stroke TagLetter 3} {history : List (Stroke TagLetter 3)}
-    (path : ResidualPath initial history before) (step : ResidualStep before stroke after) :
-    ResidualPath initial (history ++ [stroke]) after := PrefixResidual.Path.snoc path step
-
-private theorem ResidualPath.cons {initial before after : Residual}
-    {stroke : Stroke TagLetter 3} {history : List (Stroke TagLetter 3)}
-    (step : ResidualStep initial stroke before)
-    (path : ResidualPath before history after) :
-    ResidualPath initial (stroke :: history) after := PrefixResidual.Path.cons step path
-
-private theorem ResidualPath.append {initial middle final : Residual}
-    {left right : List (Stroke TagLetter 3)}
-    (leftPath : ResidualPath initial left middle)
-    (rightPath : ResidualPath middle right final) :
-    ResidualPath initial (left ++ right) final := PrefixResidual.Path.append leftPath rightPath
-
-private theorem ResidualPath.snoc_of_ne_nil {initial final : Residual}
-    {history : List (Stroke TagLetter 3)} (path : ResidualPath initial history final)
-    (nonempty : history ≠ []) :
-    ∃ priorHistory before stroke,
-      history = priorHistory ++ [stroke] ∧
-        ResidualPath initial priorHistory before ∧ ResidualStep before stroke final :=
-  PrefixResidual.Path.snoc_of_ne_nil path nonempty
-
-private theorem ResidualPath.realizes {initial final : Residual}
-    {history : List (Stroke TagLetter 3)} {left right : List TagLetter}
-    (path : ResidualPath initial history final)
-    (realizes : Residual.Realizes initial left right) :
-    Residual.Realizes final (left ++ consumed history)
-      (right ++ produced (tagOutput bcbcBody) history) :=
-  PrefixResidual.Path.realizes path realizes
 
 private theorem bcbcNull_iff_path (history : List (Stroke TagLetter 3)) :
     bcbcNull history ↔ ResidualPath startResidual history startResidual := by
@@ -89,7 +54,7 @@ private theorem bcbcNull_iff_path (history : List (Stroke TagLetter 3)) :
     · rfl
     · simpa [bcbcNull] using null
   · intro path
-    have realized := ResidualPath.realizes path (left := []) (right := [.b]) (by rfl)
+    have realized := PrefixResidual.Path.realizes path (left := []) (right := [.b]) (by rfl)
     simpa [bcbcNull, Residual.Realizes, startResidual, Residual.leftWord,
       Residual.rightWord] using realized
 
@@ -139,7 +104,7 @@ private theorem rightRigid_step {before after : Residual}
                 Stroke.letters, bcbcBody, tagOutput, nearyBody] at step
               simpa [rightRigid] using step.2.2.2
 
-private theorem ResidualPath.preserves_rightRigid {initial final : Residual}
+private theorem preserves_rightRigid {initial final : Residual}
     {history : List (Stroke TagLetter 3)} (path : ResidualPath initial history final)
     (rigid : rightRigid initial) : rightRigid final := by
   induction path with
@@ -258,16 +223,16 @@ private theorem enters_deep {before : Residual} {stroke : Stroke TagLetter 3}
           have strokeEquality := List.append_inj_right rawEquality prefixLength
           simp at strokeEquality
 
-@[simp] private theorem step_start_left :
+private theorem step_start_left :
     ResidualStep startResidual strokeBBB leftResidual := by rfl
 
-@[simp] private theorem step_left_deep :
+private theorem step_left_deep :
     ResidualStep leftResidual strokeBCB deepResidual := by rfl
 
-@[simp] private theorem step_deep_left :
+private theorem step_deep_left :
     ResidualStep deepResidual strokeCBB leftResidual := by rfl
 
-@[simp] private theorem step_left_start :
+private theorem step_left_start :
     ResidualStep leftResidual strokeCBC startResidual := by rfl
 
 /-- The internal word `(D Z)ⁿ` of a nested null excursion. -/
@@ -293,24 +258,24 @@ def nullHistory : List Nat → List (Stroke TagLetter 3)
 private theorem nestedCore_path (depth : Nat) :
     ResidualPath leftResidual (nestedCore depth) leftResidual := by
   induction depth with
-  | zero => exact ResidualPath.nil
+  | zero => exact PrefixResidual.Path.nil
   | succ depth induction =>
-      exact ResidualPath.append induction
-        (ResidualPath.cons step_left_deep
-          (ResidualPath.snoc ResidualPath.nil step_deep_left))
+      exact PrefixResidual.Path.append induction
+        (PrefixResidual.Path.cons step_left_deep
+          (PrefixResidual.Path.snoc PrefixResidual.Path.nil step_deep_left))
 
 private theorem nullExcursion_path (depth : Nat) :
     ResidualPath startResidual (nullExcursion depth) startResidual := by
-  apply ResidualPath.cons step_start_left
-  exact ResidualPath.append (nestedCore_path depth)
-    (ResidualPath.snoc ResidualPath.nil step_left_start)
+  apply PrefixResidual.Path.cons step_start_left
+  exact PrefixResidual.Path.append (nestedCore_path depth)
+    (PrefixResidual.Path.snoc PrefixResidual.Path.nil step_left_start)
 
 private theorem nullHistory_path (depths : List Nat) :
     ResidualPath startResidual (nullHistory depths) startResidual := by
   induction depths with
-  | nil => exact ResidualPath.nil
+  | nil => exact PrefixResidual.Path.nil
   | cons depth depths induction =>
-      exact ResidualPath.append (nullExcursion_path depth) induction
+      exact PrefixResidual.Path.append (nullExcursion_path depth) induction
 
 private theorem path_to_left_split {history : List (Stroke TagLetter 3)}
     (path : ResidualPath startResidual history leftResidual) :
@@ -320,13 +285,13 @@ private theorem path_to_left_split {history : List (Stroke TagLetter 3)}
   have nonempty : history ≠ [] := by
     intro empty
     subst history
-    have realized := ResidualPath.realizes path
+    have realized := PrefixResidual.Path.realizes path
       (left := []) (right := [.b]) (by rfl)
     simp [Residual.Realizes, leftResidual, Residual.leftWord,
       Residual.rightWord] at realized
   obtain ⟨priorHistory, before, stroke, history_eq, priorPath, finalStep⟩ :=
     path.snoc_of_ne_nil nonempty
-  have beforeRigid := priorPath.preserves_rightRigid start_rightRigid
+  have beforeRigid := preserves_rightRigid priorPath start_rightRigid
   rcases enters_left beforeRigid finalStep with entrance | entrance
   · rcases entrance with ⟨rfl, rfl⟩
     exact ⟨priorHistory, 0, priorPath, by simpa [nestedCore] using history_eq⟩
@@ -334,13 +299,13 @@ private theorem path_to_left_split {history : List (Stroke TagLetter 3)}
     have priorNonempty : priorHistory ≠ [] := by
       intro empty
       subst priorHistory
-      have realized := ResidualPath.realizes priorPath
+      have realized := PrefixResidual.Path.realizes priorPath
         (left := []) (right := [.b]) (by rfl)
       simp [Residual.Realizes, deepResidual, Residual.leftWord,
         Residual.rightWord] at realized
     obtain ⟨earlier, before', stroke', prior_eq, earlierPath, deepStep⟩ :=
       priorPath.snoc_of_ne_nil priorNonempty
-    have beforeRigid' := earlierPath.preserves_rightRigid start_rightRigid
+    have beforeRigid' := preserves_rightRigid earlierPath start_rightRigid
     obtain ⟨rfl, rfl⟩ := enters_deep beforeRigid' deepStep
     obtain ⟨base, depth, basePath, equality⟩ := path_to_left_split earlierPath
     refine ⟨base, depth + 1, basePath, ?_⟩
@@ -357,7 +322,7 @@ private theorem path_classify {history : List (Stroke TagLetter 3)}
   · exact ⟨[], by simp [empty, nullHistory]⟩
   · obtain ⟨priorHistory, before, stroke, history_eq, priorPath, finalStep⟩ :=
       path.snoc_of_ne_nil empty
-    have beforeRigid := priorPath.preserves_rightRigid start_rightRigid
+    have beforeRigid := preserves_rightRigid priorPath start_rightRigid
     obtain ⟨rfl, rfl⟩ := enters_start beforeRigid finalStep
     obtain ⟨base, depth, basePath, prior_eq⟩ := path_to_left_split priorPath
     obtain ⟨depths, base_eq⟩ := path_classify basePath
@@ -435,113 +400,70 @@ theorem bcbc_terminal_match_iff (word : List NearyTile) :
 
 /-! ## The singular affine recognizer reported for the fixed language -/
 
+private abbrev recognizerParameters : AffineRecognizer.Parameters ℤ ℚ where
+  cast := Int.castRingHom ℚ
+  carryScale
+    | .b => 5
+    | .c => 7
+  carryShift
+    | .b => 385
+    | .c => 534
+  guardScale
+    | .b => 1
+    | .c => 1 / 6125
+  guardShift
+    | .b => 1 / 2
+    | .c => -(29503 / 6125)
+  toggleCenter := 2983
+
 /-- Singular data matrices carrying one integer history coordinate and one transient guard. -/
-def recognizerData : TagLetter → Matrix (Fin 3) (Fin 3) ℚ
-  | .b =>
-      !![0, 1, 1 / 2;
-         0, 5, 385;
-         0, 0, 1]
-  | .c =>
-      !![0, 1 / 6125, -(29503 / 6125);
-         0, 7, 534;
-         0, 0, 1]
+def recognizerData : TagLetter → Matrix (Fin 3) (Fin 3) ℚ :=
+  recognizerParameters.data
 
 /-- The two data matrices and affine involution. -/
-def recognizerGenerator : PairedControl → Matrix (Fin 3) (Fin 3) ℚ
-  | .data letter => recognizerData letter
-  | .toggle =>
-      !![1, 0, 0;
-         0, -1, 2983;
-         0, 0, 1]
+def recognizerGenerator : PairedControl → Matrix (Fin 3) (Fin 3) ℚ :=
+  recognizerParameters.generator
 
 /-- Boundary row selecting the transient guard. -/
-def recognizerRow : Fin 3 → ℚ := ![1, 0, 0]
+def recognizerRow : Fin 3 → ℚ := AffineRecognizer.row
 
 /-- Homogeneous state before the final boundary toggle. -/
-def recognizerDelta : Fin 3 → ℚ := ![1, 0, 1]
+def recognizerDelta : Fin 3 → ℚ := AffineRecognizer.delta
 
 /-- Boundary column used by the reported same-zero representation. -/
-def recognizerColumn : Fin 3 → ℚ := ![1, 2983, 1]
+def recognizerColumn : Fin 3 → ℚ := recognizerParameters.column
 
 /-- Integer carry driven right-to-left by a raw paired-control word. -/
-def recognizerCarry : List PairedControl → ℤ
-  | [] => 0
-  | .data .b :: word => 5 * recognizerCarry word + 385
-  | .data .c :: word => 7 * recognizerCarry word + 534
-  | .toggle :: word => 2983 - recognizerCarry word
+def recognizerCarry : List PairedControl → ℤ := recognizerParameters.carry
 
 /-- First-coordinate guard driven by the same suffix carry. -/
-def recognizerGuard : List PairedControl → ℚ
-  | [] => 1
-  | .data .b :: word => recognizerCarry word + 1 / 2
-  | .data .c :: word => (recognizerCarry word - 29503) / 6125
-  | .toggle :: word => recognizerGuard word
+def recognizerGuard : List PairedControl → ℚ := recognizerParameters.guard
 
 /-- Exact affine state of every raw control word from `δ`. -/
 theorem recognizerProduct_mulVec_delta (word : List PairedControl) :
     wordProduct recognizerGenerator word *ᵥ recognizerDelta =
-      ![recognizerGuard word, recognizerCarry word, 1] := by
-  induction word with
-  | nil =>
-      ext coordinate
-      fin_cases coordinate <;>
-        simp [wordProduct, recognizerDelta, recognizerGuard, recognizerCarry]
-  | cons control word induction =>
-      rw [wordProduct_cons, ← Matrix.mulVec_mulVec, induction]
-      cases control with
-      | toggle =>
-          ext coordinate
-          fin_cases coordinate
-          all_goals simp [recognizerGenerator, recognizerGuard, recognizerCarry, Matrix.mulVec,
-            dotProduct, Fin.sum_univ_succ]
-          all_goals ring
-      | data letter =>
-          cases letter <;> ext coordinate <;> fin_cases coordinate
-          all_goals simp [recognizerGenerator, recognizerData, recognizerGuard, recognizerCarry,
-            Matrix.mulVec, dotProduct, Fin.sum_univ_succ]
-          all_goals norm_num
-          all_goals ring
+      ![recognizerGuard word, recognizerCarry word, 1] :=
+  recognizerParameters.wordProduct_mulVec_delta word
 
 theorem recognizerColumn_eq_toggle_delta :
-    recognizerColumn = recognizerGenerator .toggle *ᵥ recognizerDelta := by
-  ext coordinate
-  fin_cases coordinate <;>
-    norm_num [recognizerColumn, recognizerGenerator, recognizerDelta, Matrix.mulVec,
-      dotProduct, Fin.sum_univ_succ]
+    recognizerColumn = recognizerGenerator .toggle *ᵥ recognizerDelta :=
+  recognizerParameters.column_eq_toggle_delta
 
 /-- Scalar coefficient of the explicit rational matrices. -/
 def recognizerCoefficient (word : List PairedControl) : ℚ :=
-  linearCoefficient recognizerGenerator recognizerRow recognizerColumn word
+  recognizerParameters.coefficient word
 
 theorem recognizerCoefficient_eq_guard (word : List PairedControl) :
-    recognizerCoefficient word = recognizerGuard (word ++ [.toggle]) := by
-  have state : wordProduct recognizerGenerator word *ᵥ recognizerColumn =
-      ![recognizerGuard (word ++ [.toggle]),
-        recognizerCarry (word ++ [.toggle]), 1] := by
-    calc
-      wordProduct recognizerGenerator word *ᵥ recognizerColumn =
-          wordProduct recognizerGenerator word *ᵥ
-            (recognizerGenerator .toggle *ᵥ recognizerDelta) := by
-              rw [← recognizerColumn_eq_toggle_delta]
-      _ = (wordProduct recognizerGenerator word * recognizerGenerator .toggle) *ᵥ
-          recognizerDelta := by rw [Matrix.mulVec_mulVec]
-      _ = wordProduct recognizerGenerator (word ++ [.toggle]) *ᵥ recognizerDelta := by
-        rw [wordProduct_append]
-        simp [wordProduct]
-      _ = _ := recognizerProduct_mulVec_delta (word ++ [.toggle])
-  rw [recognizerCoefficient, linearCoefficient, state]
-  simp [recognizerRow, dotProduct, Fin.sum_univ_succ]
+    recognizerCoefficient word = recognizerGuard (word ++ [.toggle]) :=
+  recognizerParameters.coefficient_eq_guard word
 
 @[simp] theorem recognizerData_det (letter : TagLetter) :
-    (recognizerData letter).det = 0 := by
-  cases letter <;>
-    norm_num [recognizerData, Matrix.det_fin_three, Matrix.cons_val_two,
-      Matrix.vecHead, Matrix.vecTail]
+    (recognizerData letter).det = 0 :=
+  recognizerParameters.data_det letter
 
 @[simp] theorem recognizerToggle_det :
-    (recognizerGenerator .toggle).det = -1 := by
-  norm_num [recognizerGenerator, Matrix.det_fin_three, Matrix.cons_val_two,
-    Matrix.vecHead, Matrix.vecTail]
+    (recognizerGenerator .toggle).det = -1 :=
+  recognizerParameters.toggle_det
 
 /-! ## Canonical terminal controls -/
 
