@@ -75,4 +75,5 @@ import MatrixMortality.PairedBoundaryTax
 import MatrixMortality.PairedBinaryFullAlgebra
 import MatrixMortality.PrefixFullAlgebra
 import MatrixMortality.ScheduledBinaryRank
+import MatrixMortality.SetterShear
 import MatrixMortality.TwoStateObstructions

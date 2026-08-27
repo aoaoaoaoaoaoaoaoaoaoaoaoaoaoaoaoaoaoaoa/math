@@ -106,6 +106,10 @@ open MatrixMortality
 #print axioms scheduledWidthThree_exact_state_lower_bound
 #print axioms scheduledWidthThree_native_state_card
 #print axioms scheduledWidthThree_native_represents
+#print axioms SetterShear.sideBasis_det
+#print axioms SetterShear.delimiter_cube
+#print axioms SetterShear.delimiter_square_distinguishedColumn
+#print axioms SetterShear.transfer_tail
 #print axioms Undecidability.nearyScalarZero62_hasZero_iff_hasZeroStar
 #print axioms Undecidability.nearyScalarZero62_hasZero_iff_tagHaltsFrom
 #print axioms Undecidability.nearyScalarZero62_hasZeroStar_iff_tagHaltsFrom
