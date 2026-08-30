@@ -1131,6 +1131,13 @@ they prove that the side-basis shear changes coordinates but, after physical cal
 changes neither the internal rank-one separator nor the transfer tail. It therefore cannot
 repair the missing arbitrary-depth projective-avoidance theorem.
 
+The decimal hyperbolicity route now has a formal closure boundary. Record
+[`MM-O14`](SALVAGE.md#mm-o14-decimal-setter-elliptic-product) proves exact coefficient boxes
+for a defect-`11` leading-`b` block and `D_c`; both J-fraction matrices are strictly hyperbolic,
+but their product is elliptic. The public declaration is
+`SetterJFraction.leadingB_elliptic_pair`. It closes real-cone deductions from individual
+hyperbolicity without claiming a false pole orbit.
+
 The dimension-two affine ledger has six independently checked records:
 
 | Record | Formalization obligation |
@@ -1513,6 +1520,7 @@ fixed-rank decision problem.
 | `ParabolicRetunedBoundary.lean` | complete-gap semantics, literal physical contexts, fixed terminal minor and row, and complete-gap annihilator obstruction |
 | `ParabolicRetunedObstruction.lean` | explicit malformed terminal no-instance defeating the retuned fixed-row and original endpoint closures |
 | `SetterShear.lean` | boundary-calibrated side-basis shear, internal separator invariance, and transfer-tail gauge obstruction |
+| `SetterJFraction.lean` | exact decimal coefficient boxes and the hyperbolic-block/elliptic-product obstruction |
 | `PairedMortality.lean` | common-column mortality converse and exact integer `4 × 4` family |
 | `PhaseFracture.lean` | phase normalization and dimension-free projective-identification contradiction |
 | `PhaseRigidity.lean` | checked local role algebra, discrepancy commutators, and invariant-pencil rigidity |

@@ -615,7 +615,7 @@ Three live routes remain.
    exact states are necessary at that width; it does not obstruct a same-zero clock
    compression or delimiter fusion.
 
-The swapped setter is now the sharpest constructive route. Its next experiment is not another
+The setter is now the sharpest constructive route. Its next experiment is not another
 five-dimensional word search: enumerate side products by `(U,V,A,B)`, propagate the
 one-dimensional projective state exactly, and seek a finite invariant separating every
 nonterminal orbit from every pole. Congruence quotients, `3`-adic valuation with pulse phase,
@@ -664,7 +664,16 @@ also excludes the unavoidable all-`D_c` valuation-one residue at every
 compiler-emitted width.
 [`MM-S10`](SALVAGE.md#mm-s10-swapped-target-suffix-sieve) fixes the last
 `β+2` digits of every pole-compatible lower word and excludes the recurrent
-nonhalting residue `Δ=ρ−1`. The immediate question is which other positive
+nonhalting residue `Δ=ρ−1`.
+The decimal specialization [`MM-M05`](SALVAGE.md#mm-m05-decimal-swapped-setter) removes the
+ternary balanced corridor: [`MM-S11`](SALVAGE.md#mm-s11-decimal-setter-hyperbolicity) proves
+every individual transfer strictly hyperbolic. Real dynamics stops there.
+[`MM-O13`](SALVAGE.md#mm-o13-finite-positive-ray-setter-obstruction) excludes every finite
+family of positive invariant rays, and
+[`MM-O14`](SALVAGE.md#mm-o14-decimal-setter-elliptic-product) gives two individually
+hyperbolic emitted-body blocks with an elliptic product. The decimal branch must therefore use
+its exact joint `2`/`5`-adic carry, while the ternary branch retains the mature suffix sieve.
+The immediate ternary question is which other positive
 valuation-one discrepancies survive this suffix sieve without already
 certifying source halting. Exact bidirectional diagnostics at `β=3`, body `bbcc`, exclude every
 false-pole word of at most six projective blocks when each regular block has

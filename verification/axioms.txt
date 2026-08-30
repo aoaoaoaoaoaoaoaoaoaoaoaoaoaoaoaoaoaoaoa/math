@@ -769,6 +769,7 @@
  Classical.choice,
  Quot.sound]
 'MatrixMortality.SetterShear.transfer_tail' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.SetterJFraction.leadingB_elliptic_pair' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.Undecidability.nearyScalarZero62_hasZero_iff_hasZeroStar' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]

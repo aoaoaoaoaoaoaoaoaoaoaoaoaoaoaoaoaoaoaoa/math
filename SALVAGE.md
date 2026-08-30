@@ -80,6 +80,7 @@ file owns the mathematical stock.
 | [`MM-O11`](#mm-o11-full-algebra-paired-binary-family) | obstruction | the paired-binary mortality family spans the full six-state algebra | formalized | graduated |
 | [`MM-O12`](#mm-o12-boundary-calibrated-setter-shear-is-gauge) | obstruction | boundary calibration erases the setter's side-basis shear from its separator and transfer | formalized | graduated |
 | [`MM-O13`](#mm-o13-finite-positive-ray-setter-obstruction) | obstruction | arbitrary low/high setter blocks defeat every finite family of positive invariant rays | audited | graduated |
+| [`MM-O14`](#mm-o14-decimal-setter-elliptic-product) | obstruction | two strictly hyperbolic decimal setter blocks have an elliptic product | formalized | graduated |
 | [`MM-M01`](#mm-m01-off-diagonal-companion-interface) | partial mechanism | off-diagonal rank-two bridge has a complete fracture grammar | audited | stock |
 | [`MM-M02`](#mm-m02-bordered-toggle) | partial mechanism | one lifted toggle has a stable rank-two third power | audited | parked |
 | [`MM-M03`](#mm-m03-five-state-setter-punctuation) | partial mechanism | a mixed delimiter word is an exact internal rank-one separator | audited | closed |
@@ -1647,6 +1648,47 @@ The next certificate must retain sign cycles or exact radix carry.
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
 
+### MM-O14: Decimal setter elliptic product
+
+**Kind:** obstruction
+**Evidence:** formalized
+**Disposition:** graduated
+
+For the decimal setter [`MM-M05`](#mm-m05-decimal-swapped-setter), write
+
+```text
+J_z=[[u_z+v_z,−v_z],[1,0]].
+```
+
+At `β=10`, any defect-`11` block whose upper word is `cbⁿ` and whose lower spelling begins with
+an encoded `b` has normalized lower decimal prefix `55 7¹⁰ 5`. Pair it with the single `c`
+erasure. Exact rational intervals give
+
+```text
+disc(J_high)>0,       disc(J_low)>0,
+disc(J_low J_high)<0.
+```
+
+The two checked compiler checkpoints realize the high block as
+`R_cR_b¹⁰D_b⁸²⁸⁶` and `R_cR_b¹⁰D_b⁸⁸⁷¹`. The short body `bcbbbbbbc` already gives the
+length-nine witness `(R_cD_b⁷,D_c)`.
+
+**Scope:** this proves an elliptic product, not a pole collision. It excludes semigroup uniform
+hyperbolicity and every common proper convex-cone proof derived from individual block
+hyperbolicity. Arithmetic or suffix information may still prove exact pole avoidance.
+
+**Use:** do not refine the real hyperbolic chambers. Move directly to the joint decimal
+`2`/`5`-adic carry.
+
+**Formalization:** `SetterJFraction.leadingB_elliptic_pair` in
+[`MatrixMortality/SetterJFraction.lean`](MatrixMortality/SetterJFraction.lean).
+
+**Artifact:**
+[`audits/m53-decimal-setter-elliptic-product-2026-08-30.md`](audits/m53-decimal-setter-elliptic-product-2026-08-30.md).
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
 ### MM-M01: Off-diagonal companion interface
 
 **Kind:** partial mechanism  
@@ -1884,9 +1926,10 @@ separation matters.
 **Artifact:**
 [`audits/m53-decimal-setter-hyperbolicity-2026-08-30.md`](audits/m53-decimal-setter-hyperbolicity-2026-08-30.md).
 
-**Next:** combine the two-shell real split with an exact decimal suffix or `2`/`5`-adic carry
-invariant. Finite positive-ray labels are excluded by
-[`MM-O13`](#mm-o13-finite-positive-ray-setter-obstruction).
+**Next:** prove an exact decimal suffix or joint `2`/`5`-adic carry invariant. Finite positive
+rays are excluded by [`MM-O13`](#mm-o13-finite-positive-ray-setter-obstruction), and
+[`MM-O14`](#mm-o14-decimal-setter-elliptic-product) closes every argument from blockwise real
+hyperbolicity alone.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
@@ -2609,8 +2652,9 @@ Exact endpoint evaluation gives a positive discriminant in both regimes for `ρ�
 every nonempty square-run transfer is strictly hyperbolic; there are no parabolic endpoints and
 no balanced elliptic corridor.
 
-**Scope:** individual real hyperbolicity is not uniform projective avoidance. Products may cross
-fixed-point chambers, and rational pole equality remains possible.
+**Scope:** individual real hyperbolicity is not uniform projective avoidance. Products may be
+elliptic by [`MM-O14`](#mm-o14-decimal-setter-elliptic-product), and rational pole equality
+remains possible.
 
 **Use:** replace the ternary balanced-corridor problem by a clean low/high decimal length split.
 Do not mistake this for the missing arbitrary-depth theorem; finite positive rays are already
@@ -2619,8 +2663,8 @@ excluded by [`MM-O13`](#mm-o13-finite-positive-ray-setter-obstruction).
 **Artifact:**
 [`audits/m53-decimal-setter-hyperbolicity-2026-08-30.md`](audits/m53-decimal-setter-hyperbolicity-2026-08-30.md#length-shell-theorem).
 
-**Next:** seek a two-sided sign cycle or an exact decimal suffix/carry invariant across the two
-length regimes.
+**Next:** seek an exact decimal suffix or joint `2`/`5`-adic carry invariant across the two
+length regimes. Real cone refinements are closed.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).

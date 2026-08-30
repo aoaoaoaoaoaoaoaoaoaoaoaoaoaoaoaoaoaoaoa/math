@@ -424,6 +424,7 @@ open MatrixMortality
 #print axioms SetterShear.delimiter_cube
 #print axioms SetterShear.delimiter_square_distinguishedColumn
 #print axioms SetterShear.transfer_tail
+#print axioms SetterJFraction.leadingB_elliptic_pair
 #print axioms Undecidability.nearyScalarZero62_hasZero_iff_hasZeroStar
 #print axioms Undecidability.nearyScalarZero62_hasZero_iff_tagHaltsFrom
 #print axioms Undecidability.nearyScalarZero62_hasZeroStar_iff_tagHaltsFrom
