@@ -105,6 +105,7 @@ above the formal target; that exact real wall is not a Lean theorem.
 | [MS05](matiyasevich-senizergues-2005-few-rule-semi-thue.md) | peer-reviewed TCS 2005; metadata only | Three-rule accessibility undecidability; Nicolas's source for the `GPCP(5)` lower bound |
 | [Carvalho26](carvalho-2026-free-group-pcp.md) | arXiv v2 preprint | Inverse-transducer queue deletion, all-path converse, and the derived globally shared exponent character and exponent-one equalizer slice |
 | [GCL25](guttenberg-czerwinski-lasota-2025-vass-nested-zero-tests.md) | peer-reviewed LICS 2025; metadata only | Ackermannian reachability and related decision procedures for vector addition systems with nested initial-segment zero tests |
+| [BC25](biziere-czerwinski-2025-one-dimensional-pvas.md) | peer-reviewed STOC 2025; retained arXiv v1, CC BY | Decidability of reachability for one-dimensional grammar and pushdown vector addition systems |
 | [CL20](ciobanu-logan-2020-pcp-equalisers.md) | peer-reviewed ICALP 2020; CC-BY | Decidable equalizers for marked monoid morphisms and free-group immersions |
 | [CL21](ciobanu-logan-2021-free-group-pcp-variations.md) | peer-reviewed DLT 2021; author manuscript | Relations among free-group PCP, fixed-boundary GPCP, rational constraints, and rank/basis computation, with exact source-rank overheads |
 | [Logan22](logan-2022-equalizer-rank-two.md) | peer-reviewed QJM 2022; CC-BY | Equalizers from `F₂` have rank at most two when an input map is injective; basis computation is proved only under retract-image hypotheses |

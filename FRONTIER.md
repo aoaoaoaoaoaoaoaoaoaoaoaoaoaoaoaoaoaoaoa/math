@@ -1082,6 +1082,14 @@ Arbitrary balanced payload and an open word residue do not help. The sharp survi
 two competing forward schemas `P→Q` and one return `Q→P`, with the two cycle products straddling
 one. Empty-consume pumping and genuinely phase-splitting transport are separate boundaries.
 
+[`G3-D07`](SALVAGE.md#g3-d07-pure-phase-fork-closure) closes that fork whenever every completed
+return erases the boundary to one fixed-word power. Complete cycles form an effective semilinear
+additive relation `R⊆ℕ²`. One-sided drift gives finite search; mixed drift gives a positive
+diagonal, a finite residue quotient, and an exact one-dimensional GVAS grammar. Published
+one-dimensional GVAS reachability decides `R*`. This kills the canonical `pp/p/q` fork and every
+finite pure two-chamber refinement on pure endpoints. A live fork must retain an unbounded mixed
+or neutral word across the return, use an empty consume, or split recurrent output.
+
 #### Research lanes
 
 | Lane | Available leverage | Decisive obstruction or obligation |
@@ -1090,7 +1098,7 @@ one. Empty-consume pumping and genuinely phase-splitting transport are separate 
 | Transverse-kernel terminal dynamics | Fixed integral transverse controls encode every history and exactly recognize all minimum bodies | Replace the singleton target row by an infinite, source-computable terminal section for unrestricted bodies |
 | Positive projective transition lower bound | Same-zero dimension three is point-line incidence in `P²`, and actual one-sided shifts retain finite rank/kernel/image data | Derive a uniform nonstationary or noncommuting shift incompatibility from an unbounded terminal section; static support rank, formal inverse completion, fixed equal-length return flowers, and unary consecutive-repeat escape are forbidden |
 | Global word-residual recoding | Longer noncommutative atoms can retain order while discarding the four additive role channels | Escape `G3-D05`: fixed-priority affine counters and all one-way reset/transfer/fanout cascades are decidable |
-| Head-separated three-schema source | `G3-C04` discharges every arbitrary-trace forcing obligation locally | Make the `G3-D06` forked two-cycle, an empty pump, or nonfunctional splitting carry an undecidable open word residue |
+| Head-separated three-schema source | `G3-C04` discharges every arbitrary-trace forcing obligation locally | Preserve an undecidable mixed or neutral word across returns; complete pure forks are decidable by `G3-D07` |
 | Spelling-sensitive Carvalho carrier | `G3-M03` gives an exact three-positive affine cover with harmless identity padding | Jointly detect actual equality and weight through graph-only, nonalgebraic, or spelling-sensitive dynamics; algebraic compression of the actual graph is closed by `G3-O21` |
 
 These six lanes form three trunks. The first three race a direct paired construction against its
@@ -1100,8 +1108,8 @@ three-positive language; `G3-O21` closes its former algebraic competitor.
 
 #### Raceable leaves
 
-After `G3-O21` closes actual program-graph geometry, the net tree has six independent raceable
-leaves:
+After `G3-O21`, `G3-O22`, and `G3-D07` close their respective geometric and pure-source lanes,
+the net tree has six independent raceable leaves:
 
 1. **Common-kernel shuttle constructor.** Give one computable three-state paired recognizer in
    which the toggle moves a freshly minted common-kernel guard back into visible quotient data.
@@ -1122,11 +1130,11 @@ leaves:
    must use feedback or backward transfer, source-preserving copy, recurring priority cycles,
    counter products, changing/incomparable tests, or genuine unbounded word order outside
    `G3-D05`.
-5. **Forked head-separated native source.** Build an undecidable family of exactly three
-   prefix-normal productions satisfying `G3-C04` around two competing `P→Q` schemas and one
-   `Q→P` return, with cycle products strictly on opposite sides of one and an unbounded
-   word-valued residual. The empty-pump and genuinely splitting variants remain secondary
-   constructions. Functional private-head routing is closed by `G3-D06`.
+5. **Persistent-word head-separated native source.** Build an undecidable family of exactly
+   three prefix-normal productions satisfying `G3-C04`, with an unbounded mixed or neutral word
+   surviving every return. `G3-D06` closes functional private-head routing and `G3-D07` closes
+   every complete pure two-chamber fork, including arbitrary finite forward branching. The
+   empty-pump and genuinely splitting variants remain secondary constructions.
 6. **Spelling-sensitive Carvalho carrier.** Starting from the exact `G3-M03` positive cover,
    compile transported equality plus weight `d` into ordinary `GPCP(3)` or a three-state
    scalar-zero family by graph-only, nonalgebraic, or spelling-sensitive dynamics. Prove the
@@ -1226,8 +1234,10 @@ both positive and negative drift feasibility from
 [`G3-D03`](SALVAGE.md#g3-d03-one-sided-corrected-drift). Recasting the known arbitrary-substring
 three-rule system without transporting redex contexts is underflow, not a compiler. A pure
 private-head cycle is now equally dead: `G3-D06` gives it a positive one-sided weighting even
-with unbounded balanced payload. The primary source shape is the checked forked two-cycle; its
-mixed drift is necessary evidence, not yet a computational construction.
+with unbounded balanced payload. Competing forward edges do not suffice: `G3-D07` decides the
+entire pure-phase fork on pure endpoints, including the canonical mixed-drift example. The live
+source must preserve an unbounded mixed or neutral word across returns, or use an empty consume
+or split recurrent output.
 
 No further local punctuation fusion of the four displayed pairs should be attempted. The audited
 boundary-aligned additive family is immortal, and `G3-O10` closes the nondegenerate square-root

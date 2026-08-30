@@ -212,6 +212,7 @@ file owns the mathematical stock.
 | [`G3-D04`](#g3-d04-priority-affine-residual-atlas) | decidable stratum | finite-dimensional proper affine residuals with nested priority guards reduce to VASSnz | audited; formalized core | graduated |
 | [`G3-D05`](#g3-d05-priority-triangular-transfer-atlas) | decidable stratum | fixed-priority destructive transfer and fanout reduce to VASSnz drain stages | audited; formalized core | graduated |
 | [`G3-D06`](#g3-d06-functional-phase-transfer-guillotine) | decidable stratum | three functional positive phase transfers always admit one-sided drift | audited; formalized core | graduated |
+| [`G3-D07`](#g3-d07-pure-phase-fork-closure) | decidable stratum | complete pure-phase forks reduce to closure reachability for an additive semilinear relation | audited; formalized arithmetic core | graduated |
 | [`G3-C03`](#g3-c03-endpoint-prefix-compiler) | compiler | endpoint-forcing three-production normal systems compile directly to `GPCP(3)` | formalized | active |
 | [`G3-C04`](#g3-c04-head-separated-endpoint-debt) | compiler criterion | a fresh output head makes every endpoint witness causally lawful | formalized | active |
 | [`G3-O06`](#g3-o06-periodic-ray-completion-and-branching-fracture) | compiler and obstruction | `bcbb` has an exact three-state periodic compiler, while `bcbc` defeats every single affine positional section | formalized | graduated |
@@ -224,6 +225,7 @@ file owns the mathematical stock.
 | [`G3-M03`](#g3-m03-three-positive-affine-exponent-cover) | partial mechanism | three positive letters cover every affine first-exponent slice exactly | formalized | active |
 | [`G3-O19`](#g3-o19-correlated-affine-slice-density) | obstruction | the coarse Carvalho promises permit a correlated graph whose every exponent slice is Zariski dense | audited | graduated |
 | [`G3-O21`](#g3-o21-actual-carvalho-slice-density) | obstruction | every fixed-character slice of Carvalho's actual program graph is Zariski dense in `PSL₂²` | audited | graduated |
+| [`G3-O22`](#g3-o22-invertible-fibre-span-rigidity) | structural reduction | invertible spelling fibres form computable line or plane group orbits | formalized core | graduated |
 | [`G3-O20`](#g3-o20-consecutive-repeat-tail-closure) | obstruction | two consecutive solutions of a fixed-boundary one-block pump force every later exponent | formalized | graduated |
 | [`G3-O09`](#g3-o09-quotient-blind-positive-boundary-collapse) | obstruction | all-loop-complete group-factorizing boundaries accept a nonempty identity spelling | formalized core | graduated |
 | [`G3-O14`](#g3-o14-positive-cancellation-spelling-dichotomy) | obstruction | finite reversible spelling pumps, while singular one-coordinate spelling absorbs identity factors | formalized | graduated |
@@ -8345,8 +8347,65 @@ nonfunctional phase splitting.
 **Artifact:** [`FunctionalPhaseNoGo.lean`](MatrixMortality/FunctionalPhaseNoGo.lean) and
 [`m34-functional-phase-transfer-2026-08-11.md`](audits/m34-functional-phase-transfer-2026-08-11.md).
 
-**Next:** make the forked two-cycle transport an unbounded word-valued computational residue, or
-prove a decision theorem that survives competing forward edges.
+**Next:** make the forked two-cycle preserve an unbounded mixed or neutral word across every
+return. Competing pure-phase forward edges alone are closed by `G3-D07`.
+
+### G3-D07: Pure-phase fork closure
+
+**Kind:** decidable stratum
+
+**Evidence:** audited; formalized arithmetic core
+
+**Disposition:** graduated
+
+Let `P,Q` be disjoint finite alphabets, permit any finite family of forward productions and one
+return,
+
+```text
+αᵢX⟶Xβᵢ,    αᵢ∈P⁺, βᵢ∈Q⁺,
+cX⟶Xd,       c∈Q⁺, d∈P⁺.
+```
+
+Reachability between arbitrary `P`-only endpoints is decidable. At every complete boundary,
+forward steps first exhaust a `P` prefix and build a `Q` suffix; returns then exhaust that suffix
+and build one power of `d`. Thus `dⁿ⟶*dᵐ` is the transitive closure of
+
+```text
+R(n,m) ↔ ∃u, α(u)=dⁿ and β(u)=cᵐ.
+```
+
+The valid trace language `α⁻¹(d*)∩β⁻¹(c*)` is effectively regular. Its effective Parikh image
+and the two length equations make `R⊆ℕ²` effectively semilinear. Trace concatenation makes `R`
+additive.
+
+Every effective semilinear additive relation has decidable closure reachability. With one drift
+sign, paths lie in a finite endpoint interval. With both signs, additivity produces a positive
+diagonal `(h,h)∈R`. Quotienting by residues modulo `h` gives finitely many effective semilinear,
+diagonally upward-closed edge relations. Each linear component compiles exactly to a nested
+decrement-then-increment grammar macro; finite residue-path nonterminals compose the macros.
+The result is literally a one-dimensional GVAS, whose reachability is decidable by Bizière and
+Czerwiński's STOC 2025 Theorem 1.
+
+Lean proves the reusable arithmetic throat: opposite drifts in an additive relation force a
+positive diagonal. It also proves the exact two-variable linear equations, factor-two bounds,
+modulo-three law, additivity, symmetry, and descent steps for the canonical
+`pp→q, p→qq, q→p` fork. The general semilinear, grammar, and normal-system decision reductions
+remain audited.
+
+**Scope:** consumes and outputs are nonempty and phase-pure, and the sole return collapses every
+complete boundary to one power `dⁿ`. The theorem allows arbitrary finite forward branching and
+multi-letter words inside either phase. It does not cover a neutral word surviving a return,
+mixed-phase boundary words, empty consumes, or genuinely split recurrent output.
+
+**Use:** remove the canonical fork and every complete pure two-chamber refinement from the native
+three-schema race. A surviving head-separated source must preserve an unbounded mixed or neutral
+word across cycles, use an empty consume, or split recurrent transport.
+
+**Source:**
+[`biziere-czerwinski-2025-one-dimensional-pvas.md`](references/biziere-czerwinski-2025-one-dimensional-pvas.md).
+
+**Artifact:** [`FunctionalPhaseNoGo.lean`](MatrixMortality/FunctionalPhaseNoGo.lean) and
+[`m34-pure-phase-fork-closure-2026-08-30.md`](audits/m34-pure-phase-fork-closure-2026-08-30.md).
 
 ### G3-C03: Endpoint-prefix compiler
 

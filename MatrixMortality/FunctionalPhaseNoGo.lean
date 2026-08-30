@@ -432,6 +432,122 @@ theorem forkDrift_not_oneSided (pWeight qWeight : ℚ)
   · exact (not_le_of_gt negative) (nonnegative negativeRule)
   · exact (not_le_of_gt positive) (nonpositive positiveRule)
 
+/-! ## Complete pure-fork sweeps -/
+
+/-- A binary relation on natural numbers which contains zero and is closed under coordinatewise
+addition. -/
+def IsAdditiveRelation (relation : Nat → Nat → Prop) : Prop :=
+  relation 0 0 ∧
+    ∀ {source₁ target₁ source₂ target₂},
+      relation source₁ target₁ → relation source₂ target₂ →
+        relation (source₁ + source₂) (target₁ + target₂)
+
+/-- An additive relation contains every coordinatewise natural multiple of each edge. -/
+theorem IsAdditiveRelation.nsmul
+    {relation : Nat → Nat → Prop} (additive : IsAdditiveRelation relation)
+    {source target : Nat} (edge : relation source target) (multiplicity : Nat) :
+    relation (multiplicity * source) (multiplicity * target) := by
+  induction multiplicity with
+  | zero => simpa using additive.1
+  | succ multiplicity induction =>
+      simpa only [Nat.succ_mul] using additive.2 induction edge
+
+/-- Opposite strict drifts in an additive relation force a positive diagonal edge. -/
+theorem IsAdditiveRelation.exists_positive_diagonal_of_mixed
+    {relation : Nat → Nat → Prop} (additive : IsAdditiveRelation relation)
+    {sourceUp targetUp sourceDown targetDown : Nat}
+    (up : relation sourceUp targetUp) (up_strict : sourceUp < targetUp)
+    (down : relation sourceDown targetDown) (down_strict : targetDown < sourceDown) :
+    ∃ diagonal : Nat, 0 < diagonal ∧ relation diagonal diagonal := by
+  let upwardDrift := targetUp - sourceUp
+  let downwardDrift := sourceDown - targetDown
+  have upwardDrift_pos : 0 < upwardDrift := Nat.sub_pos_of_lt up_strict
+  have downwardDrift_pos : 0 < downwardDrift := Nat.sub_pos_of_lt down_strict
+  have up_multiple := additive.nsmul up downwardDrift
+  have down_multiple := additive.nsmul down upwardDrift
+  have combined := additive.2 up_multiple down_multiple
+  let diagonal := downwardDrift * sourceUp + upwardDrift * sourceDown
+  have sourceDown_pos : 0 < sourceDown := Nat.zero_lt_of_lt down_strict
+  have diagonal_pos : 0 < diagonal := by
+    apply Nat.add_pos_right
+    exact Nat.mul_pos upwardDrift_pos sourceDown_pos
+  have targetUp_eq : targetUp = sourceUp + upwardDrift := by
+    dsimp only [upwardDrift]
+    omega
+  have sourceDown_eq : sourceDown = targetDown + downwardDrift := by
+    dsimp only [downwardDrift]
+    omega
+  have coordinates_eq :
+      downwardDrift * sourceUp + upwardDrift * sourceDown =
+        downwardDrift * targetUp + upwardDrift * targetDown := by
+    rw [targetUp_eq, sourceDown_eq]
+    ring
+  refine ⟨diagonal, diagonal_pos, ?_⟩
+  change relation
+    (downwardDrift * sourceUp + upwardDrift * sourceDown)
+    (downwardDrift * sourceUp + upwardDrift * sourceDown)
+  rw [coordinates_eq]
+  rw [coordinates_eq] at combined
+  exact combined
+
+/-- One complete sweep of the canonical fork `pp→q`, `p→qq`, `q→p`, recorded only at pure
+`p`-power boundaries. -/
+def ForkSweep (source target : Nat) : Prop :=
+  ∃ contractions expansions : Nat,
+    source = 2 * contractions + expansions ∧
+      target = contractions + 2 * expansions
+
+/-- Exact linear-equation description of one canonical complete fork sweep. -/
+theorem forkSweep_iff_linear (source target : Nat) :
+    ForkSweep source target ↔
+      ∃ contractions expansions : Nat,
+        2 * source = target + 3 * contractions ∧
+          2 * target = source + 3 * expansions := by
+  constructor
+  · rintro ⟨contractions, expansions, source_eq, target_eq⟩
+    exact ⟨contractions, expansions, by omega, by omega⟩
+  · rintro ⟨contractions, expansions, first, second⟩
+    exact ⟨contractions, expansions, by omega, by omega⟩
+
+/-- Every canonical complete fork sweep obeys the sharp factor-two bounds and residue law. -/
+theorem forkSweep_bounds_mod {source target : Nat} (sweep : ForkSweep source target) :
+    source ≤ 2 * target ∧ target ≤ 2 * source ∧ target % 3 = (2 * source) % 3 := by
+  rcases sweep with ⟨contractions, expansions, source_eq, target_eq⟩
+  omega
+
+/-- The canonical complete-sweep relation is additive. -/
+theorem forkSweep_additive : IsAdditiveRelation ForkSweep := by
+  constructor
+  · exact ⟨0, 0, by omega, by omega⟩
+  · rintro source₁ target₁ source₂ target₂
+      ⟨contractions₁, expansions₁, source₁_eq, target₁_eq⟩
+      ⟨contractions₂, expansions₂, source₂_eq, target₂_eq⟩
+    refine ⟨contractions₁ + contractions₂, expansions₁ + expansions₂, ?_, ?_⟩
+    · omega
+    · omega
+
+/-- Every complete canonical fork sweep preserves divisibility of the exponent by three. -/
+theorem forkSweep_three_dvd_iff {source target : Nat} (sweep : ForkSweep source target) :
+    3 ∣ source ↔ 3 ∣ target := by
+  rcases sweep with ⟨contractions, expansions, source_eq, target_eq⟩
+  omega
+
+/-- One canonical complete fork sweep is reversible after exchanging contraction and expansion
+counts. -/
+theorem forkSweep_symm {source target : Nat} (sweep : ForkSweep source target) :
+    ForkSweep target source := by
+  rcases sweep with ⟨contractions, expansions, source_eq, target_eq⟩
+  exact ⟨expansions, contractions, by omega, by omega⟩
+
+/-- Every even positive exponent contracts to its half in one complete canonical sweep. -/
+theorem forkSweep_double_to_self (exponent : Nat) : ForkSweep (2 * exponent) exponent := by
+  exact ⟨exponent, 0, by omega, by omega⟩
+
+/-- Every odd exponent in the form `2k+1` has the strict descent used outside the exceptional
+exponents one and three. -/
+theorem forkSweep_odd_descent (half : Nat) : ForkSweep (2 * half + 1) (half + 2) := by
+  exact ⟨half, 1, by omega, by omega⟩
+
 /-- An empty-consume transfer is strictly expanding under every positive phase weighting. -/
 theorem emptyConsume_drift_pos (produce sourceWeight targetWeight : ℚ)
     (produce_positive : 0 < produce) (targetWeight_positive : 0 < targetWeight) :

@@ -1000,6 +1000,15 @@ sharp forked two-cycle whose three Parikh drifts remain mixed under every positi
 bounded-word reachability enumeration induced by the one-sided weight is audited rather than
 implemented as a second decision procedure.
 
+[`G3-D07`](SALVAGE.md#g3-d07-pure-phase-fork-closure) closes complete pure two-chamber forks,
+including the mixed-drift canonical example. Lean proves that opposite drifts in an additive
+relation force a positive diagonal and checks the canonical fork's exact linear equations,
+factor-two bounds, residue law, additivity, symmetry, and descent steps. The effective regular
+trace reduction to a semilinear additive relation, the finite residue grammar, and the final
+decision step are audited. The imported theorem is Bizière and Czerwiński's peer-reviewed
+decidability of one-dimensional GVAS reachability. No declaration claims decidability when a
+mixed or neutral word survives the return, a consume is empty, or recurrent output splits.
+
 [`G3-C03`](SALVAGE.md#g3-c03-endpoint-prefix-compiler) supplies the exact direct compiler for a
 three-production prefix normal system. Lean defines traced execution, proves that every lawful
 trace telescopes to its endpoint equation, and proves the converse under endpoint prefix forcing
@@ -1592,6 +1601,8 @@ fixed-rank decision problem.
 | Every positive functional three-phase quotient induces a strictly positive one-sided symbol drift | `FunctionalPhaseNoGo.exists_positive_symbolWeight_oneSided` |
 | Local positive transfers force the corresponding two- and three-cycle product inequalities | `FunctionalPhaseNoGo.twoCycle_product_le`, `FunctionalPhaseNoGo.twoCycle_product_ge`, `FunctionalPhaseNoGo.threeCycle_product_le`, `FunctionalPhaseNoGo.threeCycle_product_ge` |
 | The forked two-cycle has both strict drift signs under every positive weighting | `FunctionalPhaseNoGo.forkDrift_mixed`, `FunctionalPhaseNoGo.forkDrift_not_oneSided` |
+| Opposite drifts in an additive exponent relation force a positive diagonal edge | `FunctionalPhaseNoGo.IsAdditiveRelation.exists_positive_diagonal_of_mixed` |
+| The canonical complete fork sweep obeys its exact linear equations, bounds, residue law, symmetry, and descent | `FunctionalPhaseNoGo.forkSweep_iff_linear`, `FunctionalPhaseNoGo.forkSweep_bounds_mod`, `FunctionalPhaseNoGo.forkSweep_three_dvd_iff`, `FunctionalPhaseNoGo.forkSweep_symm`, `FunctionalPhaseNoGo.forkSweep_double_to_self`, `FunctionalPhaseNoGo.forkSweep_odd_descent` |
 | Endpoint prefix forcing makes the aggregate boundary equation equivalent to lawful traced execution | `EndpointPrefixCompiler.endpointEquation_iff_derivesAlong` |
 | A locally head-separated output makes every endpoint witness a lawful trace | `EndpointPrefixCompiler.endpointEquation_iff_derivesAlong_of_headSeparated`, `EndpointPrefixCompiler.endpointPrefixForcing_of_headSeparated` |
 | The unrestricted endpoint telescope has an explicit false underflow witness | `EndpointPrefixCompiler.underflow_endpointEquation`, `EndpointPrefixCompiler.underflow_not_derivesAlong` |
@@ -1943,8 +1954,15 @@ incomparable tests, or changing priority.
 
 The functional phase-transfer theorem `G3-D06` is kernel-checked through construction of the
 positive symbol weight. The last step, enumeration of the finite bounded word graph for fixed
-endpoints, is audited. No Lean declaration claims that the forked two-cycle, an empty-consume
-pump, or a nonfunctional splitting quotient is decidable or universal.
+endpoints, is audited. No Lean declaration claims that a fork retaining mixed word memory, an
+empty-consume pump, or a nonfunctional splitting quotient is decidable or universal.
+
+The pure-phase fork theorem `G3-D07` is kernel-checked at its additive diagonal and canonical-fork
+arithmetic core. The regular trace-language construction, effective Parikh projection, residue
+grammar, and reduction to one-dimensional GVAS reachability are audited. Bizière and Czerwiński's
+Theorem 1 supplies the external decision procedure. The claim is confined to nonempty phase-pure
+consumes and outputs with one return word; mixed persistent words, empty consumes, and split
+recurrent transport remain outside.
 
 For `G3-O03`, Lean checks the null-history counterexample, minimum-body uniqueness, base-five
 encoder, exact same-zero theorem, and integral mortality lift. The statement that both phase graph
