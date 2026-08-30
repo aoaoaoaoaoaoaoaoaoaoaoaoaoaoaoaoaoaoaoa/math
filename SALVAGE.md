@@ -189,6 +189,7 @@ file owns the mathematical stock.
 | [`M4-S08`](#m4-s08-safe-wall-transport-chamber) | structure theorem | incidence with a safe right wall forces the transported kernel into one strict phase-selected `3`-adic chamber | formalized | active |
 | [`M4-S09`](#m4-s09-minimal-all-b-bad-run-exclusion) | obstruction | neither orientation of the shortest bad defect run can close when all three atoms are `b` | formalized | active |
 | [`M4-S10`](#m4-s10-phase-zero-c-defect-exclusion) | obstruction | the `0|2|1` shortest bad run cannot close with a `c` defect and `b` endpoints | formalized | active |
+| [`M4-S12`](#m4-s12-residue-zero-c-endpoint-exclusion) | obstruction | a shortest bad run with a `b` defect cannot close when its residue-zero endpoint is `c` | formalized | active |
 | [`M4-C03`](#m4-c03-zero-framed-binary-two-lag-compiler) | compiler | the principal scanner is literally binary context-2 Lag and compiles to `M₄(3)` | formalized | graduated |
 | [`M4-D01`](#m4-d01-zero-framed-binary-two-lag-decision) | decidable stratum | the entire zero-framed binary context-2 Lag kernel has an exact syntactic classification | formalized | graduated |
 | [`M4-D02`](#m4-d02-zero-framed-reset-scanner-decision) | decidable stratum | zero-run reduction contracts the reset scanner to a regular two-token quotient | audited | graduated |
@@ -7688,6 +7689,50 @@ endpoint comparisons and one integer-avoidance band.
 **Artifact:**
 [`MatrixMortality/ParabolicDefect.lean`](MatrixMortality/ParabolicDefect.lean) and
 [`audits/m43-phase-zero-c-defect-2026-08-30.md`](audits/m43-phase-zero-c-defect-2026-08-30.md).
+
+### M4-S12: Residue-zero c-endpoint exclusion
+
+**Kind:** obstruction
+
+**Evidence:** formalized
+
+**Disposition:** active
+
+At deletion width three, replace the residue-zero safe endpoint of either shortest all-`b` bad
+run by the body-dependent `c` atom:
+
+```text
+c(3z) b(3x+2) b(3y+1),
+b(3z+1) b(3x+2) c(3y).
+```
+
+Both exact bridge determinants factor as the regular residue-one `b` wait, times a polynomial
+whose four wait-monomial coefficients are strictly positive. The native nonempty-code inequality
+
+```text
+0 < 11L−9M−32 < 16(M−3)
+```
+
+proves every body-dependent coefficient positive without a body split. Hence neither orientation
+can close for any nonempty body and nonnegative remaining waits.
+
+**Scope:** deletion width `β=3`, exactly three atoms, a `b` defect, exactly one `c` endpoint, and
+that endpoint in residue-zero phase. The residue-one `c` endpoint, a `c` defect together with a
+`c` endpoint, longer defect runs, and nontrivial safe endpoint contexts remain open. Regularity
+requires `y>0` in the first orientation and `z>0` in the second; the excluded zero wait is the
+exceptional singular `b(1)` endpoint.
+
+**Use:** body dependence at a residue-zero endpoint does not create a new shortest-run wall. For
+a `b` defect and exactly one `c` endpoint, only the two placements of `c` in residue-one phase
+remain.
+
+**Next:** settle the two residue-one `c` endpoint determinants, then allow a `c` defect at the
+same time as a `c` endpoint. Lift run length one to `1+4k` only after the three-atom endpoint
+alphabet is closed.
+
+**Artifact:**
+[`MatrixMortality/ParabolicDefect.lean`](MatrixMortality/ParabolicDefect.lean) and
+[`audits/m43-residue-zero-c-endpoints-2026-08-30.md`](audits/m43-residue-zero-c-endpoints-2026-08-30.md).
 
 ### M4-C03: Zero-framed binary two-Lag compiler
 

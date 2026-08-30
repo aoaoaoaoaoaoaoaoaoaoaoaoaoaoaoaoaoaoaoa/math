@@ -500,9 +500,15 @@ moves through one body-dependent interval of fixed width `1059/7264<1`. The rema
 five-cylinder integer-avoidance theorem for the leading `c`-run of the body code; do not return to
 the expanded determinant.
 
+The endpoint alphabet has also contracted. The coefficientwise sign theorem
+[`M4-S12`](SALVAGE.md#m4-s12-residue-zero-c-endpoint-exclusion) excludes both shortest bad-run
+orientations with a `b` defect when the residue-zero safe endpoint is `c`. Thus a shortest
+one-`c` endpoint survivor must place that `c` in residue-one phase. Those two determinants, not
+the already-positive residue-zero placements, are the next endpoint target.
+
 Two original-family nodes survive, and they must not be conflated.
 
-1. **Exterior collision avoidance.** Use `M4-S06`--`M4-S10` to classify the transported kernel
+1. **Exterior collision avoidance.** Use `M4-S06`--`M4-S12` to classify the transported kernel
    across the two bad defect-run classes. A safe right endpoint can close only after the
    transport enters its leftmost-phase chamber. Uniform avoidance proves this family immortal;
    one hit gives an exact physical zero word. Do not rebuild a grammar for the right walls.

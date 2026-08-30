@@ -690,6 +690,110 @@ theorem bOne_cTwo_bZero_coefficient_gap (L M : ℚ) :
       8 * (164500347 * L - 55585393 * M - 2843496) + 1982448 * (M - 3) := by
   ring
 
+/-! ## Residue-zero `c` endpoints -/
+
+/-- Exact width-three determinant when the residue-zero endpoint is `c` in the `0 | 2 | 1`
+orientation. -/
+theorem bridge_cZero_bTwo_bOne_det
+    (body : List TagLetter) (x y z : Nat) :
+    (bridge 27
+      (cAtom 27 (nearySideLowerC 3 body) (nearySideLowerCScale 3 body) (3 * z) *
+        bAtom 27 (3 * x + 2) * bAtom 27 (3 * y + 1))).det =
+      729 * y / 2 *
+        ((126321120 * nearySideLowerC 3 body +
+            13935744 * nearySideLowerCScale 3 body - 168128352) * x * z +
+          294449472 * x +
+          (4989792861 * nearySideLowerC 3 body +
+            507644678 * nearySideLowerCScale 3 body - 6512726895) * z +
+          11485615704) := by
+  rw [cAtom_three_mul_matrix, bAtom_three_mul_add_two_matrix,
+    bAtom_three_mul_add_one_matrix, Matrix.det_fin_two]
+  norm_num [bridge, coreInput, coreOutput, Matrix.mul_apply, Fin.sum_univ_succ]
+  ring
+
+/-- No regular shortest bad run closes when its residue-zero left endpoint is `c`. -/
+theorem bridge_cZero_bTwo_bOne_det_ne_zero
+    (body : List TagLetter) (body_nonempty : body ≠ [])
+    (x y z : Nat) (y_positive : 0 < y) :
+    (bridge 27
+      (cAtom 27 (nearySideLowerC 3 body) (nearySideLowerCScale 3 body) (3 * z) *
+        bAtom 27 (3 * x + 2) * bAtom 27 (3 * y + 1))).det ≠ 0 := by
+  rw [bridge_cZero_bTwo_bOne_det]
+  let L : ℚ := nearySideLowerC 3 body
+  let M : ℚ := nearySideLowerCScale 3 body
+  obtain ⟨code_positive, code_small⟩ :=
+    neary_rule_c_residue_one_bounds 3 body body_nonempty
+  change 0 < 11 * L - 9 * M - 32 at code_positive
+  change 11 * L - 9 * M - 32 < 16 * (M - 3) at code_small
+  have scale_positive : 0 < M - 3 := by nlinarith
+  have xz_coefficient_positive :
+      0 < 126321120 * L + 13935744 * M - 168128352 := by
+    nlinarith
+  have z_coefficient_positive :
+      0 < 4989792861 * L + 507644678 * M - 6512726895 := by
+    nlinarith
+  change 729 * y / 2 *
+    ((126321120 * L + 13935744 * M - 168128352) * x * z +
+      294449472 * x +
+      (4989792861 * L + 507644678 * M - 6512726895) * z +
+      11485615704) ≠ 0
+  have bracket_positive :
+      0 < (126321120 * L + 13935744 * M - 168128352) * x * z +
+          294449472 * x +
+          (4989792861 * L + 507644678 * M - 6512726895) * z +
+          11485615704 := by
+    positivity
+  positivity
+
+/-- Exact width-three determinant when the residue-zero endpoint is `c` in the `1 | 2 | 0`
+orientation. -/
+theorem bridge_bOne_bTwo_cZero_det
+    (body : List TagLetter) (x y z : Nat) :
+    (bridge 27
+      (bAtom 27 (3 * z + 1) * bAtom 27 (3 * x + 2) *
+        cAtom 27 (nearySideLowerC 3 body) (nearySideLowerCScale 3 body) (3 * y))).det =
+      -312741 * z *
+        (104016 * (nearySideLowerCScale 3 body - 3) * x * y +
+          312048 * x +
+          (2857811 * nearySideLowerC 3 body -
+            68818 * nearySideLowerCScale 3 body - 2651357) * y +
+          4989566) := by
+  rw [bAtom_three_mul_add_one_matrix, bAtom_three_mul_add_two_matrix,
+    cAtom_three_mul_matrix, Matrix.det_fin_two]
+  norm_num [bridge, coreInput, coreOutput, Matrix.mul_apply, Fin.sum_univ_succ]
+  ring
+
+/-- No regular shortest bad run closes when its residue-zero right endpoint is `c`. -/
+theorem bridge_bOne_bTwo_cZero_det_ne_zero
+    (body : List TagLetter) (body_nonempty : body ≠ [])
+    (x y z : Nat) (z_positive : 0 < z) :
+    (bridge 27
+      (bAtom 27 (3 * z + 1) * bAtom 27 (3 * x + 2) *
+        cAtom 27 (nearySideLowerC 3 body) (nearySideLowerCScale 3 body) (3 * y))).det ≠ 0 := by
+  rw [bridge_bOne_bTwo_cZero_det]
+  let L : ℚ := nearySideLowerC 3 body
+  let M : ℚ := nearySideLowerCScale 3 body
+  obtain ⟨code_positive, code_small⟩ :=
+    neary_rule_c_residue_one_bounds 3 body body_nonempty
+  change 0 < 11 * L - 9 * M - 32 at code_positive
+  change 11 * L - 9 * M - 32 < 16 * (M - 3) at code_small
+  have scale_positive : 0 < M - 3 := by nlinarith
+  have y_coefficient_positive :
+      0 < 2857811 * L - 68818 * M - 2651357 := by
+    nlinarith
+  change -312741 * z *
+    (104016 * (M - 3) * x * y +
+      312048 * x +
+      (2857811 * L - 68818 * M - 2651357) * y +
+      4989566) ≠ 0
+  have bracket_positive :
+      0 < 104016 * (M - 3) * x * y +
+          312048 * x +
+          (2857811 * L - 68818 * M - 2651357) * y +
+          4989566 := by
+    positivity
+  positivity
+
 /-! ## Exact reset of a pure defect block -/
 
 private def clearedExteriorChange : Matrix (Fin 3) (Fin 3) ℤ :=

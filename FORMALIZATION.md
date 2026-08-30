@@ -1410,6 +1410,15 @@ affine wait incidence, and `ParabolicBlade.bOne_cTwo_bZero_coefficient_gap` prov
 endpoint-coefficient difference that fixes the root-interval width. See
 [`audits/m43-phase-zero-c-defect-2026-08-30.md`](audits/m43-phase-zero-c-defect-2026-08-30.md).
 
+The residue-zero `c`-endpoint exclusion
+[`M4-S12`](SALVAGE.md#m4-s12-residue-zero-c-endpoint-exclusion) is checked in the same module.
+`ParabolicBlade.bridge_cZero_bTwo_bOne_det` and
+`ParabolicBlade.bridge_bOne_bTwo_cZero_det` compute the two exact width-three determinants with a
+`b` defect and a body-dependent `c` atom at the residue-zero safe endpoint. Their nonzero
+corollaries derive positivity of all remaining coefficients from the native nonempty-code
+interval. The exact boundary is
+[`audits/m43-residue-zero-c-endpoints-2026-08-30.md`](audits/m43-residue-zero-c-endpoints-2026-08-30.md).
+
 The original fixed-ray semantic route is obstructed by
 [`M4-O14`](SALVAGE.md#m4-o14-original-semantic-endpoint-obstruction), formalized in
 [`MatrixMortality/ParabolicSemanticObstruction.lean`](MatrixMortality/ParabolicSemanticObstruction.lean).
@@ -1578,7 +1587,7 @@ fixed-rank decision problem.
 | `ParabolicExterior.lean` | complete adjugate exterior state, bridge-wall coordinate, and four normalized safe actions |
 | `ParabolicFlag.lean` | valuation relations and the four arbitrary-cancellation atom invariants |
 | `ParabolicSafeFlag.lean` | arbitrary safe-word flag, wall orientation, and exact residue-one `b` wound |
-| `ParabolicDefect.lean` | complete defect-run residue grammar, exact minimal all-`b` and phase-zero `c`-defect exclusions, pure-defect bridge reset, and consecutive-wall projective fracture |
+| `ParabolicDefect.lean` | complete defect-run residue grammar, exact minimal all-`b`, phase-zero `c`-defect, and residue-zero `c`-endpoint exclusions, pure-defect bridge reset, and consecutive-wall projective fracture |
 | `ParabolicSemanticObstruction.lean` | complete-block determinant wall and fixed-ray formal terminal-plane obstruction |
 | `ParabolicIncidence.lean` | canonical nonzero right kernel of every regular wall bridge |
 | `ParabolicRetuned.lean` | retuned open root, sparse ternary code, determinant pencils, and unique gap-two singular atom |
