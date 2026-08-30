@@ -1018,6 +1018,15 @@ dimension-four carrier bound then uses the characteristic-zero representations o
 `1,197,990`. None of these claims is promoted to the actual Carvalho program graph or to a
 same-zero language lower bound.
 
+[`G3-O21`](SALVAGE.md#g3-o21-actual-carvalho-slice-density) is also audited rather than a Lean
+dependency. For the actual numbered-state transducer, explicit kernel-character loops give dense
+projections; algebraic Goursat and the fixed noncommuting marker subgroup reduce the graph case to
+conjugation by the initial discrepancy; `ψ(0ᵐ)=Hᵐ` contradicts that case. Thus every
+fixed-character slice of the actual correlated graph is dense under a faithful Schottky
+embedding. The representation-theoretic dimension-four conclusion applies only to
+algebraically extendable carriers using both coordinates, not to same-zero language rank or
+spelling-sensitive/nonalgebraic dynamics.
+
 Lean checks the internal algebra at the positive boundary: three positive letters surject onto
 the binary free group; quotient-blind boundaries accepting `g` and `g²` admit a nonempty identity
 witness; every injective transition on a finite invariant semantic fibre pumps an identity loop;

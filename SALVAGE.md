@@ -218,6 +218,7 @@ file owns the mathematical stock.
 | [`G3-M01`](#g3-m01-free-group-discrepancy-engine) | partial mechanism | Carvalho's transducer gives an all-word marker-tail equation and a cyclic exponent-one equalizer | audited | active |
 | [`G3-M03`](#g3-m03-three-positive-affine-exponent-cover) | partial mechanism | three positive letters cover every affine first-exponent slice exactly | formalized | active |
 | [`G3-O19`](#g3-o19-correlated-affine-slice-density) | obstruction | the coarse Carvalho promises permit a correlated graph whose every exponent slice is Zariski dense | audited | graduated |
+| [`G3-O21`](#g3-o21-actual-carvalho-slice-density) | obstruction | every fixed-character slice of Carvalho's actual program graph is Zariski dense in `PSL₂²` | audited | graduated |
 | [`G3-O20`](#g3-o20-consecutive-repeat-tail-closure) | obstruction | two consecutive solutions of a fixed-boundary one-block pump force every later exponent | formalized | graduated |
 | [`G3-O09`](#g3-o09-quotient-blind-positive-boundary-collapse) | obstruction | all-loop-complete group-factorizing boundaries accept a nonempty identity spelling | formalized core | graduated |
 | [`G3-O14`](#g3-o14-positive-cancellation-spelling-dichotomy) | obstruction | finite reversible spelling pumps, while singular one-coordinate spelling absorbs identity factors | formalized | graduated |
@@ -8700,14 +8701,57 @@ visibly `π(w)=a` and itself has a two-state same-zero detector, so the result i
 same-zero or language-rank lower bound.
 
 **Use:** reject every proposed dimension-three theorem derived only from the coarse source
-promises or from conditioning on the shared affine character. A viable algebraic attack must use
-additional structure of the actual program graph; otherwise it must become spelling-sensitive,
-nonalgebraic, or infinite-dimensional before scalarization.
+promises or from conditioning on the shared affine character. `G3-O21` subsequently uses the
+explicit numbered-state transitions to prove the actual graph dense as well; only
+spelling-sensitive, nonalgebraic, or infinite-dimensional scalarization remains.
 
 **Source:** [`carvalho-2026-free-group-pcp.md`](references/carvalho-2026-free-group-pcp.md).
 
 **Artifact:**
 [`m34-correlated-affine-slice-density-2026-08-11.md`](audits/m34-correlated-affine-slice-density-2026-08-11.md).
+
+### G3-O21: Actual Carvalho slice density
+
+**Kind:** obstruction
+
+**Evidence:** audited
+
+**Disposition:** graduated
+
+Let `R_C` be Carvalho's complete numbered-state transducer for a cyclic tag system of positive
+period `m`. Write `S` for its loop subgroup at state zero, `ψ:S→F(0,1,H,p)` for its output
+homomorphism, `d₀=w₀p`, `θ(x)=d₀ψ(x)d₀⁻¹`, and `χ=exp_p`. For every faithful Schottky embedding
+`ρ:F(0,1,H,p)→SL₂(ℂ)` and every `t∈ℤ`,
+
+```text
+{([ρ(θ(x))],[ρ(x)]) : x∈S, χ(x)=t}
+```
+
+is Zariski dense in `PSL₂×PSL₂`.
+
+For `K=S∩ker χ`, the second projection contains the noncommuting words `H,pHp⁻¹`; the first,
+before conjugation by `d₀`, contains `H,pHᵐp⁻¹`, since `ψ(p0ᵐp⁻¹)=pHᵐp⁻¹`. Both projections
+are therefore dense. Algebraic Goursat leaves the full product or an automorphism graph. On
+`⟨H,pHp⁻¹⟩≤K`, `ψ` is the identity, so that automorphism must be conjugation by `ρ(d₀)`. But
+`0ᵐ∈K` and `ψ(0ᵐ)=Hᵐ≠0ᵐ`, excluding the graph case. Finally, `pᵗ∈S` makes every `χ=t` slice a
+translate of the dense kernel graph. The partial-transducer maps `g,h` differ from this graph
+only by coordinatewise conjugation by the `#` boundary.
+
+**Scope:** the theorem uses the explicit numbered-state transitions, positive period, and a
+faithful Schottky embedding. It excludes algebraically extendable carriers which retain both
+group coordinates in dimension three. It is not a same-zero language lower bound and does not
+exclude spelling-sensitive, graph-only nonalgebraic, singular nonsemantic, or infinite-state
+constructions.
+
+**Use:** close the actual program-graph geometry leaf. Carvalho's surviving route is now solely
+the direct three-positive spelling-sensitive/nonalgebraic carrier of `G3-M03`; searching this
+actual graph for a proper algebraic three-dimensional quotient is finished.
+
+**Source:** [`carvalho-2026-free-group-pcp.md`](references/carvalho-2026-free-group-pcp.md),
+Theorem 4.1 and the explicit transducers in Sections 3 and 5.
+
+**Artifact:**
+[`m34-actual-carvalho-slice-density-2026-08-30.md`](audits/m34-actual-carvalho-slice-density-2026-08-30.md).
 
 ### G3-O20: Consecutive-repeat tail closure
 
