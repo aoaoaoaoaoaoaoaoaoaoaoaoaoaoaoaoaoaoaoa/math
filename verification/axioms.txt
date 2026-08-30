@@ -632,6 +632,10 @@
 'MatrixMortality.ParabolicBlade.bridge_bZero_cTwo_bOne_det_ne_zero' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.ParabolicBlade.bridge_bOne_cTwo_bZero_det' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ParabolicBlade.bOne_cTwo_bZero_coefficient_gap' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.ParabolicBlade.pureDefect_bridge_det_ne_zero' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]

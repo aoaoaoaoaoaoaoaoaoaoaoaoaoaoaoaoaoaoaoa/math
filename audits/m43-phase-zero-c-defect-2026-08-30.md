@@ -54,12 +54,30 @@ The opposite pattern `1|2|0` remains open. Its exact determinant has mixed coeff
 reduces to a linear Diophantine relation in the body code and waits, so the present positivity
 proof cannot be mirrored.
 
+The reduction itself is now kernel-checked. Put
+
+```text
+B_y=1316002776L−442700696M−28695312,
+B₀ =164500347L−55585393M−2843496.
+```
+
+Then
+
+```text
+det K₂₁₀ = −4374z(1699776(M−3)(8y+1)x−B_y y−B₀),
+B_y−8B₀ = 1982448(M−3).
+```
+
+The second identity fixes the width of the corresponding rational `x` interval at
+`1982448/(8·1699776)=1059/7264<1`, independently of the body. Exclusion of its sole possible
+integer is the remaining digit-cylinder obligation; it is not claimed here.
+
 Endpoint `c` atoms and runs of length `1+4k` remain subsequent generalizations.
 
 ## Validation
 
 The target `MatrixMortality.ParabolicDefect` builds without warnings under Lean `4.33.1`. The
-two public theorems have axiom set exactly `[propext, Classical.choice, Quot.sound]`. No proof
+four public theorems have axiom set exactly `[propext, Classical.choice, Quot.sound]`. No proof
 aperture, external declaration, or linter suppression was added.
 
 ## Artifact

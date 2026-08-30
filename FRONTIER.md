@@ -489,6 +489,17 @@ One of those two `c`-defect orientations is now dead. The exact width-three sign
 with `b` endpoints is therefore the opposite `1|2|0` orientation. Its mixed-sign determinant,
 not the already-positive phase-zero polynomial, is the immediate arithmetic target.
 
+The mixed sign has now been compressed exactly. The surviving determinant is `−4374z` times
+
+```text
+1699776(M−3)(8y+1)x − B_y y − B₀,
+```
+
+with `B_y−8B₀=1982448(M−3)`. Hence its rational root in `x`, as `y` ranges from zero to infinity,
+moves through one body-dependent interval of fixed width `1059/7264<1`. The remaining proof is a
+five-cylinder integer-avoidance theorem for the leading `c`-run of the body code; do not return to
+the expanded determinant.
+
 Two original-family nodes survive, and they must not be conflated.
 
 1. **Exterior collision avoidance.** Use `M4-S06`--`M4-S10` to classify the transported kernel

@@ -664,6 +664,32 @@ theorem bridge_bZero_cTwo_bOne_det_ne_zero
     positivity
   positivity
 
+/-- At deletion width three, the opposite `1 | 2 | 0` bridge with a `c` defect is one affine
+wait incidence. -/
+theorem bridge_bOne_cTwo_bZero_det
+    (body : List TagLetter) (x y z : Nat) :
+    (bridge 27
+      (bAtom 27 (3 * z + 1) *
+        cAtom 27 (nearySideLowerC 3 body) (nearySideLowerCScale 3 body) (3 * x + 2) *
+        bAtom 27 (3 * y))).det =
+      -4374 * z *
+        (1699776 * (nearySideLowerCScale 3 body - 3) * (8 * y + 1) * x -
+          (1316002776 * nearySideLowerC 3 body -
+            442700696 * nearySideLowerCScale 3 body - 28695312) * y -
+          (164500347 * nearySideLowerC 3 body -
+            55585393 * nearySideLowerCScale 3 body - 2843496)) := by
+  rw [bAtom_three_mul_add_one_matrix, cAtom_three_mul_add_two_matrix,
+    bAtom_three_mul_matrix, Matrix.det_fin_two]
+  norm_num [bridge, coreInput, coreOutput, Matrix.mul_apply, Fin.sum_univ_succ]
+  ring
+
+/-- The two endpoint coefficients in the opposite `c`-defect incidence differ by one uniform
+multiple of the native scale gap. -/
+theorem bOne_cTwo_bZero_coefficient_gap (L M : ℚ) :
+    1316002776 * L - 442700696 * M - 28695312 =
+      8 * (164500347 * L - 55585393 * M - 2843496) + 1982448 * (M - 3) := by
+  ring
+
 /-! ## Exact reset of a pure defect block -/
 
 private def clearedExteriorChange : Matrix (Fin 3) (Fin 3) ℤ :=

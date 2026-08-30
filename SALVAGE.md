@@ -7446,13 +7446,31 @@ a `c` defect, and orientation `0|2|1`. The opposite orientation `1|2|0` remains 
 determinant is linear in the defect and right waits but has mixed sign, so this coefficientwise
 argument does not transpose.
 
+That opposite determinant is nevertheless formalized at its compressed endpoint. With
+`L=nearySideLowerC 3 body`, `M=nearySideLowerCScale 3 body`, it is `−4374z` times
+
+```text
+1699776(M−3)(8y+1)x − B_y y − B₀,
+```
+
+where
+
+```text
+B_y = 1316002776L−442700696M−28695312,
+B₀  = 164500347L−55585393M−2843496,
+B_y−8B₀ = 1982448(M−3).
+```
+
+Thus the surviving phase is one exact two-endpoint interval problem, not an uncontrolled mixed
+polynomial.
+
 **Use:** with `b` endpoints, the shortest bad run can now survive only as `b(3z+1)c(3x+2)b(3y)`.
 This isolates one exact arithmetic throat before endpoint letters or longer defect runs are
 introduced.
 
-**Next:** settle the opposite `c`-defect orientation. Its determinant identity reduces zero to a
-linear Diophantine relation in the ternary body code and the two waits; exploit the code's
-restricted base-three suffix rather than discard its mixed signs.
+**Next:** settle the opposite `c`-defect orientation by the five leading-letter cylinders of the
+ternary body code. After clearing the positive factor `M−3`, each cylinder gives two rational
+endpoint comparisons and one integer-avoidance band.
 
 **Artifact:**
 [`MatrixMortality/ParabolicDefect.lean`](MatrixMortality/ParabolicDefect.lean) and

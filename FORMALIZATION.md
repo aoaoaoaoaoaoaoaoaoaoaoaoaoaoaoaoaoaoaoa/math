@@ -1366,7 +1366,9 @@ The phase-zero `c`-defect exclusion
 `ParabolicBlade.bridge_bZero_cTwo_bOne_det` computes the exact width-three determinant for
 `b(3z)c(3x+2)b(3y+1)`. Its nonzero corollary proves all four wait-monomial coefficients positive
 from the native code bounds for every nonempty body. The opposite phase remains outside the
-claim. See
+nonzero claim, but `ParabolicBlade.bridge_bOne_cTwo_bZero_det` compresses its determinant to one
+affine wait incidence, and `ParabolicBlade.bOne_cTwo_bZero_coefficient_gap` proves the uniform
+endpoint-coefficient difference that fixes the root-interval width. See
 [`audits/m43-phase-zero-c-defect-2026-08-30.md`](audits/m43-phase-zero-c-defect-2026-08-30.md).
 
 The original fixed-ray semantic route is obstructed by
