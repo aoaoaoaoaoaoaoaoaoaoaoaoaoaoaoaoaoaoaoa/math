@@ -247,7 +247,7 @@ file owns the mathematical stock.
 | [`D2-D07`](#d2-d07-bounded-valuation-orthants) | decidable stratum | bounded cooriented affine families have finite successful state spaces | audited | stock |
 | [`D2-M01`](#d2-m01-benchmark-critical-shell) | partial mechanism | the mixed-prime benchmark reduces generically to one guarded `5`-adic shell | audited | active |
 | [`D2-O01`](#d2-o01-canonical-collatz-reachability-is-not-automatic) | obstruction | full generalized-Collatz reachability is not synchronously recognizable in its canonical base | external theorem | active |
-| [`D2-O02`](#d2-o02-critical-shell-periodic-saturation) | obstruction and rewrite seed | every nonempty finite wait schedule has a rational all-unit cycle, and a published length-thirteen relation gives a checked guarded collision | formalized core; audited strengthening | active |
+| [`D2-O02`](#d2-o02-critical-shell-periodic-saturation) | obstruction and rewrite seed | every nonempty finite wait schedule has a rational all-unit cycle; five checked raw relations give a terminating nonconfluent kernel basis complete only through length 30 | formalized core; audited strengthening | active |
 
 ## Frankl Conjecture
 
@@ -9951,11 +9951,19 @@ common periodic source. More strongly, all phases of any shell schedule are unit
 its output is a unit. Since the two sides have the same output, substitution preserves every
 intermediate shell guard in every word context. Lean checks this contextual law.
 
-Orient the left schedule toward the right. Each rewrite deletes the left side's sole symbol
-`10`, because the right side contains none, so termination is immediate. Redexes cannot overlap:
-each begins at `10`, and the left side contains no second `10`. Disjoint replacements commute.
-The single rule is therefore a finite complete rewriting system for the congruence it generates.
-It is not known whether this congruence equals the full kernel of the affine schedule action.
+The raw alphabet is the canonical rewrite owner. Lean factors every boundary-shifted schedule
+pair as the single raw context `T D^last _ D^first` and checks the `z=5u` conjugacy between raw
+words and shell schedules. With `D<T`, orient every equal-length balanced raw relation from its
+lexicographically larger side to its smaller side. This proves termination, but not confluence:
+the published rule has two nonjoinable self-overlap critical pairs. The checked basis now consists
+of the published length-27 relation, one independent length-29 relation, and three independent
+length-30 relations. It has 45 proper critical overlaps, all nonjoinable, although no critical
+overlap occurs below length 52.
+
+Exact enumeration of all `2^n` raw words finds no relation outside this basis through length 30.
+At length 31 it finds seven independent normal-form collisions. Those seven remain computational
+evidence, not theorem claims. The checked finite basis is therefore a reduction accelerator, not
+a complete presentation of the affine kernel.
 
 Rationality does not restore rigidity. From every admissible rational source, apply the `k=1`
 transition theorem recursively with a chosen next residue. Each legal wait class is modulo ten,
@@ -9964,28 +9972,33 @@ representatives gives an aperiodic wait schedule whose entire orbit remains rati
 unit shell; representatives can also be chosen to avoid every earlier state.
 
 **Scope:** Lean checks the finite rational all-phases cycle, the distinct published schedules,
-their affine equality in arbitrary contexts, their common guarded periodic source, and contextual
-guard preservation. Infinite-schedule completion, finite-precision completeness, the rational
-aperiodic construction, density, and the period-one single-wait transition classification are
-audited. The result does not decide exact target or accepting-exit reachability from a specified
-source or prove that the relation generates every affine equality. Point collisions from a fixed
+their affine equality in arbitrary contexts, their common guarded periodic source, contextual
+guard preservation, the raw/shell conjugacy, the contextual boundary factorization, and five raw
+kernel relations through length 30. Infinite-schedule completion, finite-precision completeness,
+the rational aperiodic construction, density, period-one single-wait rigidity, Knuth–Bendix
+critical-pair census, and exhaustive raw-word census are audited. The result does not decide exact
+target or accepting-exit reachability from a specified source. Point collisions from a fixed
 rational source may also identify distinct affine maps.
 
-**Artifact:** `PeriodicShell.shellPeriodicCycle`, `PeriodicShell.shellPrefixesUnit_iff`,
-`PeriodicShell.shellRun_benchmarkRelationContext`,
+**Artifact:** `MixedPrimeKernel.wordAction_cassaigne`,
+`MixedPrimeKernel.wordAction_kernel29`, the three `wordAction_kernel30*` theorems,
+`PeriodicShell.shellPeriodicCycle`, `PeriodicShell.shellPrefixesUnit_iff`,
+`PeriodicShell.shellRun_eq_wordAction`, `PeriodicShell.shellRun_benchmarkRelationShift`,
 `PeriodicShell.benchmarkRelationContextGuard`, and `PeriodicShell.benchmarkRelationCycle` in
+[`MixedPrimeKernel.lean`](MatrixMortality/MixedPrimeKernel.lean) and
 [`PeriodicShell.lean`](MatrixMortality/PeriodicShell.lean), with the source record in
 [`cassaigne-nicolas-2012-semigroup-freeness.md`](references/cassaigne-nicolas-2012-semigroup-freeness.md)
-and the full arithmetic audit in
+and the exact census/critical-pair certificate in
+[`audit_mixed_prime_kernel.rs`](tools/audit_mixed_prime_kernel.rs). The full arithmetic audit is
 [`m32-gpi2-residue-blindness-2026-08-30.md`](audits/m32-gpi2-residue-blindness-2026-08-30.md).
 
 **Use:** reject state-independent finite forbidden wait blocks, residue-only bounded `5`-adic
 exclusion, eventual shell exit or periodicity, universal strict state-height drift, and a
 compiler whose period-one configurations must remain in that set after every single wait. The
-live information is exact fixed-source endpoint equality across the ordered schedule and whether
-the known finite convergent guarded system presents the full affine kernel.
+live information is exact fixed-source endpoint equality across the ordered schedule and a
+parametric description of the proliferating affine kernel.
 
-**Next:** normalize a fixed-source collision and exit-fibre census by the known rule. Search for
-affine-map collisions among distinct irreducible normal forms separately from point collisions at
-the specified rational source. Either find an independent relation or prove that the known rule
-generates the affine kernel; then attack the residual point stabilizers and accepting exits.
+**Next:** classify the checked length-29/30 relations and seven computational length-31 relations
+as one parametric kernel family, if possible. Run fixed-source point-collision and exit-fibre
+censuses separately from affine-map equality; then attack residual stabilizers and accepting
+exits without assuming a canonical rewrite normal form.

@@ -50,11 +50,11 @@ The repository pins Lean and mathlib to `v4.33.1`. Run:
 ./scripts/check.sh
 ```
 
-Required host commands are `lake`, `uv`/`uvx`, `tectonic`, `xmllint`, `rg`, `diff`, and GNU
-`sha256sum`. The script checks the reference corpus; builds and lints Lean; compares the exact
-transitive-axiom snapshot; rejects proof escapes and linter suppressions; runs the independent
-finite falsifier; validates the HTML expositions; and reproduces the committed PDF
-byte-for-byte. PDF reproduction requires Tectonic 0.17.0, bundle v33, and
+Required host commands are `lake`, `uv`/`uvx`, `rustc`, `rustfmt`, `tectonic`, `xmllint`, `rg`,
+`diff`, and GNU `sha256sum`. The script checks the reference corpus; builds and lints Lean;
+compares the exact transitive-axiom snapshot; rejects proof escapes and linter suppressions; runs
+the independent finite certificates; validates the HTML expositions; and reproduces the
+committed PDF byte-for-byte. PDF reproduction requires Tectonic 0.17.0, bundle v33, and
 `SOURCE_DATE_EPOCH=1784606400`; the script fixes the latter two and rejects another Tectonic
 version.
 

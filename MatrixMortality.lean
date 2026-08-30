@@ -17,6 +17,7 @@ import MatrixMortality.TwoPlaneEdges
 import MatrixMortality.ReverseEdge
 import MatrixMortality.ProjectiveIncidence
 import MatrixMortality.ProjectiveCollatz
+import MatrixMortality.MixedPrimeKernel
 import MatrixMortality.PeriodicShell
 import MatrixMortality.RankTwoPunctuation
 import MatrixMortality.ReturnSquare

@@ -1010,15 +1010,38 @@
 'MatrixMortality.FinitePositiveImage.mclosure_eq_top_of_group_closure_eq_top' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.MixedPrimeKernel.wordAction_context' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.MixedPrimeKernel.cassaigne_ne' does not depend on any axioms
+'MatrixMortality.MixedPrimeKernel.wordAction_cassaigne' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.MixedPrimeKernel.kernel29_ne' does not depend on any axioms
+'MatrixMortality.MixedPrimeKernel.wordAction_kernel29' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.MixedPrimeKernel.kernel30_ne' does not depend on any axioms
+'MatrixMortality.MixedPrimeKernel.wordAction_kernel30a' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.MixedPrimeKernel.wordAction_kernel30b' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.MixedPrimeKernel.wordAction_kernel30c' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.PeriodicShell.shellPrefixesUnit_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.PeriodicShell.shellPeriodicCycle' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.PeriodicShell.shellRun_eq_wordAction' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.PeriodicShell.benchmarkRelation_ne' does not depend on any axioms
 'MatrixMortality.PeriodicShell.shellRun_benchmarkRelation' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.PeriodicShell.benchmarkRelationShift_ne' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.PeriodicShell.shellRawWord_benchmarkRelationShiftLeft' depends on axioms: [propext]
+'MatrixMortality.PeriodicShell.shellRawWord_benchmarkRelationShiftRight' depends on axioms: [propext]
+'MatrixMortality.PeriodicShell.shellRun_benchmarkRelationShift' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.PeriodicShell.shellRun_benchmarkRelationContext' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.PeriodicShell.shellRun_benchmarkRelationShiftContext' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.PeriodicShell.benchmarkRelationContextGuard' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.PeriodicShell.benchmarkRelationShiftContextGuard' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.PeriodicShell.benchmarkRelationCycle' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.PeriodicShell.benchmarkRelationShiftCycle' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.RankTwoPunctuation.exists_pathProduct_eq_zero_iff_selfBridge_or_incidence' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]

@@ -1,4 +1,5 @@
 import Mathlib.Tactic
+import MatrixMortality.MixedPrimeKernel
 import MatrixMortality.PadicValuation
 
 /-!
@@ -11,6 +12,7 @@ orbit wholly inside the 5-adic unit shell.
 namespace MatrixMortality.PeriodicShell
 
 open PadicValuation
+open MixedPrimeKernel
 
 private local instance : Fact (Nat.Prime 5) := ⟨by norm_num⟩
 
@@ -168,6 +170,46 @@ def shellScale (wait : ℕ) : ℚ :=
 def shellRun (waits : List ℕ) (state : ℚ) : ℚ :=
   run (waits.map shellScale) state
 
+/-- Raw matrix-product block corresponding to one shell wait. -/
+def shellRawBlock (wait : ℕ) : List Letter :=
+  [.translate] ++ List.replicate wait .dilate
+
+/-- Raw matrix-product word corresponding to a chronological shell schedule. -/
+def shellRawWord : List ℕ → List Letter
+  | [] => []
+  | wait :: waits => shellRawWord waits ++ shellRawBlock wait
+
+private theorem wordAction_replicate_dilate (wait : ℕ) (state : ℚ) :
+    wordAction (List.replicate wait .dilate) state = (2 / 3 : ℚ) ^ wait * state := by
+  induction wait with
+  | zero => simp [wordAction]
+  | succ wait induction =>
+      rw [List.replicate_succ, wordAction, action, induction, pow_succ]
+      ring
+
+private theorem wordAction_shellRawBlock (wait : ℕ) (state : ℚ) :
+    wordAction (shellRawBlock wait) (5 * state) / 5 =
+      (shellScale wait * state + 1) / 5 := by
+  rw [shellRawBlock, wordAction_append]
+  simp only [wordAction, action]
+  rw [wordAction_replicate_dilate]
+  simp only [shellScale]
+  ring
+
+/-- Shell execution is the raw `D,T` word action conjugated by `state ↦ 5 * state`. -/
+theorem shellRun_eq_wordAction (waits : List ℕ) (state : ℚ) :
+    shellRun waits state = wordAction (shellRawWord waits) (5 * state) / 5 := by
+  induction waits generalizing state with
+  | nil =>
+      change state = 5 * state / 5
+      ring
+  | cons wait waits induction =>
+      change shellRun waits ((shellScale wait * state + 1) / 5) = _
+      rw [induction, shellRawWord, wordAction_append]
+      have block := wordAction_shellRawBlock wait state
+      rw [show wordAction (shellRawBlock wait) (5 * state) =
+        5 * ((shellScale wait * state + 1) / 5) by linarith]
+
 /-- Schedule concatenation acts by successive shell execution. -/
 theorem shellRun_append (left right : List ℕ) (state : ℚ) :
     shellRun (left ++ right) state = shellRun right (shellRun left state) := by
@@ -244,6 +286,51 @@ theorem shellRun_benchmarkRelation (state : ℚ) :
   norm_num [shellRun, benchmarkRelationLeft, benchmarkRelationRight, run, step, shellScale]
   ring
 
+/-- Two-parameter boundary shift of the published relation's left schedule. -/
+def benchmarkRelationShiftLeft (first last : ℕ) : List ℕ :=
+  [10 + first, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 + last]
+
+/-- Two-parameter boundary shift of the published relation's right schedule. -/
+def benchmarkRelationShiftRight (first last : ℕ) : List ℕ :=
+  [first, 0, 1, 2, 0, 2, 1, 1, 2, 0, 6, 0, last]
+
+/-- Every boundary-shifted pair consists of distinct schedules. -/
+theorem benchmarkRelationShift_ne (first last : ℕ) :
+    benchmarkRelationShiftLeft first last ≠ benchmarkRelationShiftRight first last := by
+  simp [benchmarkRelationShiftLeft, benchmarkRelationShiftRight]
+
+/-- The shifted left schedule is the published raw rule in a `D^last _ D^first`
+context, after the common shell-prefix `T`. -/
+theorem shellRawWord_benchmarkRelationShiftLeft (first last : ℕ) :
+    shellRawWord (benchmarkRelationShiftLeft first last) =
+      [.translate] ++ List.replicate last .dilate ++ cassaigneLeft ++
+        List.replicate first .dilate := by
+  have last_wait :
+      List.replicate (1 + last) Letter.dilate =
+        List.replicate last .dilate ++ [.dilate] := by
+    rw [Nat.add_comm, List.replicate_succ']
+  have first_wait :
+      List.replicate (10 + first) Letter.dilate =
+        List.replicate 10 .dilate ++ List.replicate first .dilate := by
+    rw [List.replicate_add]
+  simp [shellRawWord, shellRawBlock, benchmarkRelationShiftLeft, cassaigneLeft,
+    last_wait, first_wait]
+
+/-- The shifted right schedule is the other side of the same contextual raw rule. -/
+theorem shellRawWord_benchmarkRelationShiftRight (first last : ℕ) :
+    shellRawWord (benchmarkRelationShiftRight first last) =
+      [.translate] ++ List.replicate last .dilate ++ cassaigneRight ++
+        List.replicate first .dilate := by
+  simp [shellRawWord, shellRawBlock, benchmarkRelationShiftRight, cassaigneRight]
+
+/-- Every boundary shift is one two-sided raw context of the published relation. -/
+theorem shellRun_benchmarkRelationShift (first last : ℕ) (state : ℚ) :
+    shellRun (benchmarkRelationShiftLeft first last) state =
+      shellRun (benchmarkRelationShiftRight first last) state := by
+  rw [shellRun_eq_wordAction, shellRun_eq_wordAction,
+    shellRawWord_benchmarkRelationShiftLeft, shellRawWord_benchmarkRelationShiftRight]
+  rw [wordAction_context wordAction_cassaigne]
+
 /-- The benchmark relation remains an affine equality inside every schedule context. -/
 theorem shellRun_benchmarkRelationContext
     (before after : List ℕ) (state : ℚ) :
@@ -251,6 +338,14 @@ theorem shellRun_benchmarkRelationContext
       shellRun (before ++ benchmarkRelationRight ++ after) state := by
   simp only [shellRun_append]
   rw [shellRun_benchmarkRelation]
+
+/-- Every boundary-shifted relation remains an affine equality inside every schedule context. -/
+theorem shellRun_benchmarkRelationShiftContext
+    (first last : ℕ) (before after : List ℕ) (state : ℚ) :
+    shellRun (before ++ benchmarkRelationShiftLeft first last ++ after) state =
+      shellRun (before ++ benchmarkRelationShiftRight first last ++ after) state := by
+  simp only [shellRun_append]
+  rw [shellRun_benchmarkRelationShift]
 
 /-- Contextual substitution of the benchmark relation preserves every intermediate shell
 guard. -/
@@ -262,6 +357,18 @@ theorem benchmarkRelationContextGuard
         IsUnit 5 (shellRun front state) := by
   rw [shellPrefixesUnit_iff, shellPrefixesUnit_iff,
     shellRun_benchmarkRelationContext]
+
+/-- Contextual substitution of every boundary-shifted relation preserves every shell guard. -/
+theorem benchmarkRelationShiftContextGuard
+    (first last : ℕ) (before after : List ℕ) (state : ℚ) :
+    (∀ front back,
+      before ++ benchmarkRelationShiftLeft first last ++ after = front ++ back →
+        IsUnit 5 (shellRun front state)) ↔
+      ∀ front back,
+        before ++ benchmarkRelationShiftRight first last ++ after = front ++ back →
+          IsUnit 5 (shellRun front state) := by
+  rw [shellPrefixesUnit_iff, shellPrefixesUnit_iff,
+    shellRun_benchmarkRelationShiftContext]
 
 /-- The benchmark relation is realized by two all-unit cycles from one rational source. -/
 theorem benchmarkRelationCycle :
@@ -287,5 +394,27 @@ theorem benchmarkRelationCycle :
   refine ⟨left_cycle.1, source_eq, left_cycle.2.1, ?_, left_cycle.2.2, ?_⟩
   · simpa only [source_eq] using right_cycle.2.1
   simpa only [source_eq] using right_cycle.2.2
+
+/-- Every boundary-shifted relation has a common rational all-unit cycle. -/
+theorem benchmarkRelationShiftCycle (first last : ℕ) :
+    let left := benchmarkRelationShiftLeft first last
+    let right := benchmarkRelationShiftRight first last
+    let source := shellPeriodicPoint left
+    IsUnit 5 source ∧
+      shellRun left source = source ∧
+      shellRun right source = source ∧
+      (∀ front back, left = front ++ back → IsUnit 5 (shellRun front source)) ∧
+      ∀ front back, right = front ++ back → IsUnit 5 (shellRun front source) := by
+  have left_ne : benchmarkRelationShiftLeft first last ≠ [] := by
+    simp [benchmarkRelationShiftLeft]
+  have left_cycle := shellPeriodicCycle left_ne
+  have right_phases :=
+    (benchmarkRelationShiftContextGuard first last [] []
+      (shellPeriodicPoint (benchmarkRelationShiftLeft first last))).mp left_cycle.2.2
+  dsimp only
+  refine ⟨left_cycle.1, left_cycle.2.1, ?_, left_cycle.2.2, ?_⟩
+  · rw [← shellRun_benchmarkRelationShift]
+    exact left_cycle.2.1
+  simpa only [List.nil_append, List.append_nil] using right_phases
 
 end MatrixMortality.PeriodicShell

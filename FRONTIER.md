@@ -2288,12 +2288,14 @@ Yet the single-wait graph on period-one nodes has only its loops and the excepti
 `T₂(x₀)=x₁`. Higher depth is not free: a published length-thirteen relation yields two distinct
 schedules with the same affine map and a common Lean-checked guarded periodic source. This is an
 exact rewrite seed. Lean also proves that it preserves all intermediate shell guards in every
-word context. Oriented toward the side without `10`, the rule terminates and has no overlapping
-redexes, hence is confluent for the congruence it generates. Whether that congruence is the full
-affine kernel is open. Thus state-independent unlabeled bounded-residue nonexistence pruning,
-eventual exit or periodicity, shell-wide strict drift, and a single-wait period-one compiler are
-closed. The surviving issue is exact target and accepting-exit reachability from a specified
-rational source. See
+word context. Lean now factors every boundary-shifted schedule equality as one raw `D,T` context
+and checks five distinct raw kernel relations through length 30. Lexical orientation terminates,
+but the five-rule basis has 45 nonjoinable critical overlaps. Exhaustive affine census proves
+bounded completeness through raw length 30 and finds seven independent collisions at length 31.
+There is no complete-presentation claim. Thus state-independent unlabeled bounded-residue
+nonexistence pruning, eventual exit or periodicity, shell-wide strict drift, and a single-wait
+period-one compiler are closed. The surviving issue is exact target and accepting-exit
+reachability from a specified rational source. See
 [`D2-O02`](SALVAGE.md#d2-o02-critical-shell-periodic-saturation).
 
 The exact scope and the remaining infinite-exit seam are
@@ -2315,6 +2317,17 @@ with a rational parabolic coset carrying the source point to the target.
 
 These two residues should be attacked separately. A theorem for the affine class need not
 touch the non-elementary case.
+
+The singular-triangle `M₃(4)` stream lands on an adjacent group-orbit shell, not on normalized
+two-positive GPI₂. `PositiveFreeCancellation.triangleCarrier_dichotomy_rat` compresses every
+singular saturated triangle carrier to invertible projective action on a rational plane. Its
+three positive controls satisfy `[C]=[B]⁻¹[A]⁻¹`, so they generate the two-generator group
+`Γ=⟨[A],[B]⟩` as a positive monoid. The exact promise is `|Γ∩g₀B_p|≤1`; conditional on a hit, the
+stabilizer is trivial and the orbit is free. Eliminating `C` would require replacing an inverse by
+a positive `{A,B}` word and is not generally lawful. This is the positive-vs-inverse seam between
+[`G3-O23`](SALVAGE.md#g3-o23-singular-triangle-carrier-collapse) and the present two-positive
+artery; see
+[`m34-singular-triangle-collapse-2026-08-30.md`](audits/m34-singular-triangle-collapse-2026-08-30.md).
 
 ### False shortcuts
 
@@ -2401,16 +2414,17 @@ For the affine benchmark, the first target is narrower: decide whether the guard
 T_m(u)=(1+3u(2/3)^m)/5
 ```
 
-have a finite redundant representation coupling the base-`5` carry to the `2`- and
-`3`-exponents while recognizing accepting shell exits. `D2-O02` proves that an unlabeled bounded
-residue-transition graph is maximally nondiscriminating. The first experiment is kernel
-completeness for the known finite convergent guarded rule: normalize an exact affine-map
-collision census and search for independent relations between irreducible normal forms. Run
-fixed-source point collisions, exit-fibre, and carry-state growth with total `2`- and
-`3`-exponents in parallel. For the non-elementary residue, compare reachable carry-state growth
-for ordinary continued fractions, slow continued fractions, Stern–Brocot paths, and redundant
-multi-prime expansions. Any claimed finite nucleus must state the annotation or restriction that
-prevents it from recognizing the canonical relation excluded by `D2-O01`.
+have a finite synchronized representation that couples the base-`5` carry to the `2`- and
+`3`-exponents and recognizes accepting shell exits. `D2-O02` proves that a bounded
+unlabeled residue-transition graph alone is maximally nondiscriminating. The first experiment is
+to derive one parametric kernel family from the checked length-27, length-29, and length-30
+relations and the seven computational length-31 collisions. The current finite Knuth–Bendix basis
+terminates but is nonconfluent and already incomplete at the next length. Run fixed-source point
+collisions, exit-fibre, and carry-state growth with total `2`- and `3`-exponents in parallel. For
+the non-elementary residue, compare reachable carry-state growth for ordinary continued
+fractions, slow continued fractions, Stern–Brocot paths, and redundant multi-prime expansions.
+Any claimed finite nucleus must state the annotation or restriction that avoids the full
+canonical reachability relation proved nonautomatic by `D2-O01`.
 
 #### 3. Characteristic-zero affine modules
 
@@ -2541,8 +2555,8 @@ universal computation.
    conflate group inverses with positive `M₂(3)` controls.
 6. Formalize `D2-S02` and `D2-D05`–`D2-D07`, then attack fixed-source exact prefix and
    accepting-exit reachability in the guarded `5`-adic schedule with a synchronized `2`/`3`/`5`
-   representation, affine-kernel completeness for the known finite convergent guarded rule, and
-   normalized collision/exit-fibre census. Do not reopen unlabeled residue-only finite nuclei.
+   representation, a parametric affine-kernel description beyond the checked length-30 basis,
+   and normalized collision/exit-fibre census. Do not reopen unlabeled residue-only finite nuclei.
    Keep the non-elementary lanes independent: adelic cone types, parabolic rational subsets,
    trace/height descent, finite-obstruction saturation, and valuation universality.
 7. Synthesize the returned attacks by the discriminating signals above; do not average

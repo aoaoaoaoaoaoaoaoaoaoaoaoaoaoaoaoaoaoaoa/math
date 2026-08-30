@@ -120,6 +120,11 @@ uv run --script tools/certify_frankl.py
 uv run --script tools/explore_setter_projective.py --audit --primes 3
 uv run --script tools/scour_source.py
 
+rustfmt --edition 2021 --check tools/audit_mixed_prime_kernel.rs
+rustc --crate-name mixed_prime_kernel_audit --edition 2021 -D warnings -C opt-level=2 \
+  tools/audit_mixed_prime_kernel.rs -o "$SCRATCH/audit_mixed_prime_kernel"
+"$SCRATCH/audit_mixed_prime_kernel" self-check
+
 assert_manifest_route() {
   local href="$1"
   local path="${href%%#*}"
