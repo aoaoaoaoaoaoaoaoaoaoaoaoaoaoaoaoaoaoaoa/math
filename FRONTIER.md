@@ -622,7 +622,12 @@ Three live routes remain.
    Reversing the two nonzero ternary digits is lawful and strictly sharper:
    [`MM-M04`](SALVAGE.md#mm-m04-swapped-digit-setter) preserves the regular decoder and mixed
    separator while moving the common projective center below zero and making every transfer
-   orientation preserving.
+   orientation preserving. The radix-ten specialization
+   [`MM-M05`](SALVAGE.md#mm-m05-decimal-swapped-setter) preserves the compiler and removes the
+   remaining real elliptic corridor:
+   [`MM-S11`](SALVAGE.md#mm-s11-decimal-setter-hyperbolicity) proves every transfer strictly
+   hyperbolic. This does not imply a common invariant cone; finite positive-ray systems are
+   excluded by [`MM-O13`](SALVAGE.md#mm-o13-finite-positive-ray-setter-obstruction).
 3. Use the scheduled compiler [`MM-C03`](SALVAGE.md#mm-c03-scheduled-binary-compiler).
    A fixed binary deletion-width-three universality theorem would finish the reduction
    immediately. None was located. The constructive alternative is to replace the variable
@@ -632,12 +637,13 @@ Three live routes remain.
    exact states are necessary at that width; it does not obstruct a same-zero clock
    compression or delimiter fusion.
 
-The setter is now the sharpest constructive route. Its next experiment is not another
-five-dimensional word search: enumerate side products by `(U,V,A,B)`, propagate the
-one-dimensional projective state exactly, and seek a finite invariant separating every
-nonterminal orbit from every pole. Congruence quotients, `3`-adic valuation with pulse phase,
-signed interval partitions, and self-synchronizing suffix states are the first candidates.
-A first peeling theorem
+The decimal setter is now the sharpest constructive route. The ternary swap remains useful
+because its suffix and divisor-ray theory is mature; the decimal instance has stronger real
+length separation and an exact two-prime carry. Its next experiment is not another
+five-dimensional word search: propagate the one-dimensional projective state exactly and seek
+a finite invariant separating every nonterminal orbit from every pole. Congruence quotients,
+valuations with pulse phase, signed interval partitions, and self-synchronizing suffix states
+are the first candidates. A first peeling theorem for the ternary instance
 [`MM-S02`](SALVAGE.md#mm-s02-reset-zero-projective-peeling) now excludes every false pole
 after one transfer from the ordinary reset. It also shows why valuation alone is insufficient:
 all poles occupy two `3`-adic shells, while bounded malformed orbits rapidly saturate their
@@ -690,9 +696,30 @@ family of positive invariant rays, and
 [`MM-O14`](SALVAGE.md#mm-o14-decimal-setter-elliptic-product) gives two individually
 hyperbolic emitted-body blocks with an elliptic product. The decimal branch must therefore use
 its exact joint `2`/`5`-adic carry, while the ternary branch retains the mature suffix sieve.
-The immediate ternary question is which other positive
-valuation-one discrepancies survive this suffix sieve without already
-certifying source halting. Exact bidirectional diagnostics at `β=3`, body `bbcc`, exclude every
+
+For the decimal instance,
+[`MM-S12`](SALVAGE.md#mm-s12-decimal-two-prime-carry) gives the exact charts
+
+```text
+Z′=(G/E)(μ10^m−P+VZ)/(P−VZ),
+W′=EGμ10^m/(T−VW),       T=EP+GV.
+```
+
+Every iterated block ends in an erasure. Multi-role targets have joint shell `(1,1)`; either
+singleton erasure has shell `(β+1,β)`. A prospective next pole forces
+
+```text
+ν_p(T_target)+ν_p(X′)=m+ν_p(X),       p∈{2,5}.
+```
+
+The `(1,1)` shell preserves the cross-prime gap and shares normalized first unit `3` with the
+distinguished reset. Gap pairs and one decimal unit therefore cannot separate it. The immediate
+question is whether the complete normalized suffix of `T−VW` admits a backward finite quotient,
+or whether it contains an explicit false pole.
+
+The immediate ternary question is which other positive valuation-one discrepancies survive its
+suffix sieve without already certifying source halting. Exact bidirectional diagnostics at
+`β=3`, body `bbcc`, exclude every
 false-pole word of at most six projective blocks when each regular block has
 role length at most three; this is computational evidence only.
 A single explicit nonterminal pole orbit kills this family; a closed invariant proves

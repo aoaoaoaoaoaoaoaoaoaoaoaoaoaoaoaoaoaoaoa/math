@@ -97,6 +97,7 @@ file owns the mathematical stock.
 | [`MM-S09`](#mm-s09-canonical-swapped-residue-cannot-hit-a-pole) | obstruction | the unavoidable all-erasure residue cannot meet a valuation-one pole at emitted widths | audited | active |
 | [`MM-S10`](#mm-s10-swapped-target-suffix-sieve) | structure theorem | pole compatibility fixes `β+2` lower digits and excludes the residue `Δ=ρ−1` | audited | active |
 | [`MM-S11`](#mm-s11-decimal-setter-hyperbolicity) | structure theorem | every decimal setter transfer is strictly hyperbolic | audited | active |
+| [`MM-S12`](#mm-s12-decimal-two-prime-carry) | structure theorem | decimal setter poles obey an exact centered recurrence and coupled `2`/`5` trace balance | formalized | active |
 | [`R32-S01`](#r32-s01-split-return-normal-form) | structure theorem | rank-two cuts reduce one-unit binary mortality to a `2 × 2` return recurrence | formalized | graduated |
 | [`R32-S02`](#r32-s02-two-plane-edge-square) | structure theorem | two rank-two generators are a two-vertex square of `2 × 2` edges | formalized | graduated |
 | [`R32-O01`](#r32-o01-rank-one-profile-collapse) | obstruction | a rank-one generator reduces mortality to order-at-most-three scalar recurrence zeros | audited | stock |
@@ -1928,9 +1929,10 @@ separation matters.
 **Artifact:**
 [`audits/m53-decimal-setter-hyperbolicity-2026-08-30.md`](audits/m53-decimal-setter-hyperbolicity-2026-08-30.md).
 
-**Next:** prove an exact decimal suffix or joint `2`/`5`-adic carry invariant. Finite positive
-rays are excluded by [`MM-O13`](#mm-o13-finite-positive-ray-setter-obstruction), and
-[`MM-O14`](#mm-o14-decimal-setter-elliptic-product) closes every argument from blockwise real
+**Next:** apply the exact two-prime recurrence
+[`MM-S12`](#mm-s12-decimal-two-prime-carry) to the surviving normalized suffix. Finite
+positive-ray labels are excluded by [`MM-O13`](#mm-o13-finite-positive-ray-setter-obstruction),
+and [`MM-O14`](#mm-o14-decimal-setter-elliptic-product) closes every argument from blockwise real
 hyperbolicity alone.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
@@ -2665,8 +2667,92 @@ excluded by [`MM-O13`](#mm-o13-finite-positive-ray-setter-obstruction).
 **Artifact:**
 [`audits/m53-decimal-setter-hyperbolicity-2026-08-30.md`](audits/m53-decimal-setter-hyperbolicity-2026-08-30.md#length-shell-theorem).
 
-**Next:** seek an exact decimal suffix or joint `2`/`5`-adic carry invariant across the two
-length regimes. Real cone refinements are closed.
+**Next:** combine the real shells with the reciprocal two-prime carry
+[`MM-S12`](#mm-s12-decimal-two-prime-carry); the remaining state is the normalized suffix on
+the multi-role `(1,1)` resonance. Real cone refinements are closed.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S12: Decimal two-prime carry
+
+**Kind:** structure theorem
+**Evidence:** formalized
+**Disposition:** active
+
+For the decimal setter [`MM-M05`](#mm-m05-decimal-swapped-setter), put
+
+```text
+E=9(2ρ−7),       G=502ρ−7,       T=EP+GV.
+```
+
+The homogeneous J-fraction state `t=X/Y` has the exact lift
+
+```text
+X′=TX−GVY,       Y′=Eμ10^mX.
+```
+
+With `Δ=Y−X` and `Z=(G/E)Δ/X`, this becomes
+
+```text
+X′=EPX−GVΔ,
+Δ′=E(μ10^m−P)X+GVΔ,
+Z′=(G/E)(μ10^m−P+VZ)/(P−VZ).
+```
+
+The resets are `Z=0,1`; at `Z=1`, a pole is exactly the genuine equality `P=V`. The
+reciprocal chart `W=GY/X=EZ+G` contracts the same law to
+
+```text
+W′=EGμ10^m/(T−VW),       pole ⇔ W=T/V.
+```
+
+Admissible transfer blocks end in an erasure. Their trace shells are exactly
+
+```text
+multi-role:       (ν₂(T),ν₅(T))=(1,1),
+single erasure:   (ν₂(T),ν₅(T))=(β+1,β).
+```
+
+The multi-role proof needs only `P≡V≡77 (mod 100)`, not the false stronger claim
+`V≡177 (mod 200)`. The two singleton traces factor as
+
+```text
+T_Dc=2ρ(502ρ−7),
+T_Db=2ρ(5200ρ²−18398ρ+2443).
+```
+
+If the output of a length-`m` block is the next block's pole, then
+
+```text
+T_target X′=EGμV_target10^mX.
+```
+
+Thus each prime satisfies
+
+```text
+ν_p(T_target)+ν_p(X′)=m+ν_p(X),       p∈{2,5}.
+```
+
+The multi-role shell preserves `ν₅(X)−ν₂(X)`; a singleton shell raises it by one.
+
+**Scope:** this classifies the exact arithmetic required by a pole but does not exclude it.
+The multi-role shell also shares normalized first decimal unit `3` with the distinguished reset,
+so valuations and one unit digit cannot close arbitrary depth. Rule-ending fragments are not
+admissible carry transitions.
+
+**Use:** replace separate real, `2`-adic, and `5`-adic tests by the reciprocal recurrence. Any
+complete proof must decide the normalized suffix of `T−VW` on repeated multi-role resonances.
+
+**Formalization:** [`MatrixMortality/DecimalSetterArithmetic.lean`](MatrixMortality/DecimalSetterArithmetic.lean),
+through `centeredCoordinate_step`, `reciprocalCoordinate_step`,
+`successive_pole_shellBalance`, `multiErasure_trace_hasDecimalShell`, and the two
+`single*Erasure_trace_hasDecimalShell` theorems.
+
+**Artifact:**
+[`audits/m53-decimal-setter-arithmetic-2026-08-30.md`](audits/m53-decimal-setter-arithmetic-2026-08-30.md).
+
+**Next:** construct or refute a backward normalized-suffix automaton on the `(1,1)` shell.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).

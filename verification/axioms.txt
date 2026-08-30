@@ -815,6 +815,25 @@
  Quot.sound]
 'MatrixMortality.SetterShear.transfer_tail' depends on axioms: [propext, Quot.sound]
 'MatrixMortality.SetterJFraction.leadingB_elliptic_pair' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.DecimalSetterArithmetic.distinguished_pole_iff' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.DecimalSetterArithmetic.centeredCoordinate_step' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterArithmetic.reciprocalCoordinate_step' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterArithmetic.successive_pole_shellBalance' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterArithmetic.multiErasure_trace_hasDecimalShell' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterArithmetic.singleCErasure_trace_hasDecimalShell' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterArithmetic.singleBErasure_trace_hasDecimalShell' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.Undecidability.nearyScalarZero62_hasZero_iff_hasZeroStar' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]

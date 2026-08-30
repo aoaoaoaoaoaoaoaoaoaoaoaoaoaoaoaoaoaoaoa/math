@@ -1166,6 +1166,15 @@ but their product is elliptic. The public declaration is
 `SetterJFraction.leadingB_elliptic_pair`. It closes real-cone deductions from individual
 hyperbolicity without claiming a false pole orbit.
 
+The decimal arithmetic seam is now kernel-checked. Record
+[`MM-S12`](SALVAGE.md#mm-s12-decimal-two-prime-carry) comprises
+`DecimalSetterArithmetic.centeredCoordinate_step`, `reciprocalCoordinate_step`,
+`successive_pole_shellBalance`, `multiErasure_trace_hasDecimalShell`, and the two singleton
+erasure shell theorems. Together they prove the centered and reciprocal carry recurrences, the
+exact `(1,1)` and `(β+1,β)` target shells, and the simultaneous valuation balance forced by a
+prospective pole. They do not decide the normalized decimal suffix on the surviving `(1,1)`
+corridor and therefore do not prove projective avoidance.
+
 The dimension-two affine ledger has six independently checked records:
 
 | Record | Formalization obligation |
@@ -1560,6 +1569,7 @@ fixed-rank decision problem.
 | `ParabolicRetunedObstruction.lean` | explicit malformed terminal no-instance defeating the retuned fixed-row and original endpoint closures |
 | `SetterShear.lean` | boundary-calibrated side-basis shear, internal separator invariance, and transfer-tail gauge obstruction |
 | `SetterJFraction.lean` | exact decimal coefficient boxes and the hyperbolic-block/elliptic-product obstruction |
+| `DecimalSetterArithmetic.lean` | decimal setter centered carry, reciprocal recurrence, coupled `2`/`5` target shells, and successive-pole valuation balance |
 | `PairedMortality.lean` | common-column mortality converse and exact integer `4 × 4` family |
 | `PhaseFracture.lean` | phase normalization and dimension-free projective-identification contradiction |
 | `PhaseRigidity.lean` | checked local role algebra, discrepancy commutators, and invariant-pencil rigidity |
