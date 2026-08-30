@@ -574,6 +574,96 @@ theorem bridge_bOne_bTwo_bZero_det_ne_zero
     positivity
   positivity
 
+/-- At deletion width three, the exact bridge determinant for the residue pattern `0 | 2 | 1`
+with a `c` defect and `b` endpoints. -/
+theorem bridge_bZero_cTwo_bOne_det
+    (body : List TagLetter) (x y z : Nat) :
+    (bridge 27
+      (bAtom 27 (3 * z) *
+        cAtom 27 (nearySideLowerC 3 body) (nearySideLowerCScale 3 body) (3 * x + 2) *
+        bAtom 27 (3 * y + 1))).det =
+      729 * y / 16 *
+        (1338308352 * (nearySideLowerCScale 3 body - 3) * x * z +
+          864 * (48735 * nearySideLowerC 3 body +
+            96151 * nearySideLowerCScale 3 body - 337188) * x +
+          8 * (-40006914 * nearySideLowerC 3 body +
+            6584307989 * nearySideLowerCScale 3 body - 19211051421) * z +
+          1617993993 * nearySideLowerC 3 body +
+            3268306175 * nearySideLowerCScale 3 body - 11182600422) := by
+  rw [bAtom_three_mul_matrix, cAtom_three_mul_add_two_matrix,
+    bAtom_three_mul_add_one_matrix, Matrix.det_fin_two]
+  norm_num [bridge, coreInput, coreOutput, Matrix.mul_apply, Fin.sum_univ_succ]
+  ring
+
+/-- No regular shortest bad run of orientation `0 | 2 | 1` with a `c` defect and `b` endpoints
+closes the bridge at deletion width three. -/
+theorem bridge_bZero_cTwo_bOne_det_ne_zero
+    (body : List TagLetter) (body_nonempty : body ≠ [])
+    (x y z : Nat) (y_positive : 0 < y) :
+    (bridge 27
+      (bAtom 27 (3 * z) *
+        cAtom 27 (nearySideLowerC 3 body) (nearySideLowerCScale 3 body) (3 * x + 2) *
+        bAtom 27 (3 * y + 1))).det ≠ 0 := by
+  rw [bridge_bZero_cTwo_bOne_det]
+  let L : ℚ := nearySideLowerC 3 body
+  let M : ℚ := nearySideLowerCScale 3 body
+  have encoded_nonempty : tagEncode 3 body ≠ [] :=
+    (tagEncode_eq_nil_iff 3 body).not.mpr body_nonempty
+  have M_gt : 27 < M := by
+    have four_le : 4 ≤ (nearyLower 3 body (.rule .c)).length := by
+      simp only [nearyLower, List.length_append, List.length_cons, List.length_nil]
+      have encoded_length := List.length_pos_of_ne_nil encoded_nonempty
+      omega
+    have power_lt : 27 < 3 ^ (nearyLower 3 body (.rule .c)).length := by
+      have := Nat.pow_le_pow_right (by norm_num : 0 < 3) four_le
+      norm_num at this ⊢
+      omega
+    dsimp [M]
+    simp only [nearySideLowerCScale]
+    exact_mod_cast power_lt
+  have L_nonnegative : 0 ≤ L := by
+    dsimp [L, nearySideLowerC]
+    positivity
+  have L_lt_M : L < M := by
+    dsimp [L, M]
+    simp only [nearySideLowerC, nearySideLowerCScale]
+    exact_mod_cast ternaryCode_lt_pow_length (nearyLower 3 body (.rule .c))
+  let xzCoefficient : ℚ := 1338308352 * (M - 3)
+  let xCoefficient : ℚ := 864 * (48735 * L + 96151 * M - 337188)
+  let zCoefficient : ℚ :=
+    8 * (-40006914 * L + 6584307989 * M - 19211051421)
+  let constant : ℚ := 1617993993 * L + 3268306175 * M - 11182600422
+  have xz_positive : 0 < xzCoefficient := by
+    dsimp [xzCoefficient]
+    nlinarith
+  have x_positive : 0 < xCoefficient := by
+    dsimp [xCoefficient]
+    nlinarith
+  have z_positive : 0 < zCoefficient := by
+    dsimp [zCoefficient]
+    nlinarith
+  have constant_positive : 0 < constant := by
+    dsimp [constant]
+    nlinarith
+  change 729 * y / 16 *
+    (1338308352 * (M - 3) * x * z +
+      864 * (48735 * L + 96151 * M - 337188) * x +
+      8 * (-40006914 * L + 6584307989 * M - 19211051421) * z +
+      1617993993 * L + 3268306175 * M - 11182600422) ≠ 0
+  have decomposition :
+      1338308352 * (M - 3) * x * z +
+          864 * (48735 * L + 96151 * M - 337188) * x +
+          8 * (-40006914 * L + 6584307989 * M - 19211051421) * z +
+          1617993993 * L + 3268306175 * M - 11182600422 =
+        xzCoefficient * x * z + xCoefficient * x + zCoefficient * z + constant := by
+    dsimp [xzCoefficient, xCoefficient, zCoefficient, constant]
+    ring
+  rw [decomposition]
+  have polynomial_positive :
+      0 < xzCoefficient * x * z + xCoefficient * x + zCoefficient * z + constant := by
+    positivity
+  positivity
+
 /-! ## Exact reset of a pure defect block -/
 
 private def clearedExteriorChange : Matrix (Fin 3) (Fin 3) ℤ :=

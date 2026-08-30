@@ -483,9 +483,15 @@ exceptional wait, its determinant has a fixed nonzero sign. The next atom-level 
 same skeleton with a `c` defect, followed by one `c` endpoint. Only then should the run be lifted
 from length one to `1+4k` by a uniform four-cycle factor.
 
+One of those two `c`-defect orientations is now dead. The exact width-three sign theorem
+[`M4-S10`](SALVAGE.md#m4-s10-phase-zero-c-defect-exclusion) excludes
+`b(3z)c(3x+2)b(3y+1)` for every nonempty body and all regular waits. The sole three-atom survivor
+with `b` endpoints is therefore the opposite `1|2|0` orientation. Its mixed-sign determinant,
+not the already-positive phase-zero polynomial, is the immediate arithmetic target.
+
 Two original-family nodes survive, and they must not be conflated.
 
-1. **Exterior collision avoidance.** Use `M4-S06`--`M4-S09` to classify the transported kernel
+1. **Exterior collision avoidance.** Use `M4-S06`--`M4-S10` to classify the transported kernel
    across the two bad defect-run classes. A safe right endpoint can close only after the
    transport enters its leftmost-phase chamber. Uniform avoidance proves this family immortal;
    one hit gives an exact physical zero word. Do not rebuild a grammar for the right walls.

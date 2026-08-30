@@ -77,18 +77,6 @@ theorem bridge_det_eq_exteriorState_first (ρ : ℚ)
     Matrix.vecHead, Matrix.vecTail, Matrix.mulVec, dotProduct, Fin.sum_univ_succ]
   ring
 
-private theorem cAtom_three_mul_matrix (ρ L M : ℚ) (j : Nat) :
-    cAtom ρ L M (3 * j) =
-      !![1, 2, 2 * j * (L - 1) + 2;
-         0, 3, 0;
-         0, 0, j * (M - 3) + 3] := by
-  rw [cAtom, normalRoot_pow_three_mul]
-  ext i k
-  fin_cases i <;> fin_cases k <;>
-    norm_num [cFlank, flank, drift, injection, Matrix.cons_val_two, Matrix.vecHead, Matrix.vecTail,
-      Matrix.mul_apply, Fin.sum_univ_succ] <;>
-    ring
-
 /-- Closed formula for the triangle-coordinate transport of an arbitrary three-by-three atom. -/
 private theorem exteriorTransition_matrix
     (a b c d e f g h i : ℚ) :

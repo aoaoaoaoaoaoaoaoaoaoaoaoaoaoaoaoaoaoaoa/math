@@ -185,6 +185,7 @@ file owns the mathematical stock.
 | [`M4-S07`](#m4-s07-one-sided-wall-orbit-normal-form) | structure theorem | every consecutive wall incidence is one explicit exterior point-to-ray reachability problem | audited | active |
 | [`M4-S08`](#m4-s08-safe-wall-transport-chamber) | structure theorem | incidence with a safe right wall forces the transported kernel into one strict phase-selected `3`-adic chamber | formalized | active |
 | [`M4-S09`](#m4-s09-minimal-all-b-bad-run-exclusion) | obstruction | neither orientation of the shortest bad defect run can close when all three atoms are `b` | formalized | active |
+| [`M4-S10`](#m4-s10-phase-zero-c-defect-exclusion) | obstruction | the `0|2|1` shortest bad run cannot close with a `c` defect and `b` endpoints | formalized | active |
 | [`M4-C03`](#m4-c03-zero-framed-binary-two-lag-compiler) | compiler | the principal scanner is literally binary context-2 Lag and compiles to `M₄(3)` | formalized | graduated |
 | [`M4-D01`](#m4-d01-zero-framed-binary-two-lag-decision) | decidable stratum | the entire zero-framed binary context-2 Lag kernel has an exact syntactic classification | formalized | graduated |
 | [`M4-D02`](#m4-d02-zero-framed-reset-scanner-decision) | decidable stratum | zero-run reduction contracts the reset scanner to a regular two-token quotient | audited | graduated |
@@ -7412,6 +7413,49 @@ residue-two four-cycle to treat every run length `1+4k` without enumeration.
 **Artifact:**
 [`MatrixMortality/ParabolicDefect.lean`](MatrixMortality/ParabolicDefect.lean) and
 [`audits/m43-minimal-all-b-bad-run-2026-08-30.md`](audits/m43-minimal-all-b-bad-run-2026-08-30.md).
+
+### M4-S10: Phase-zero c-defect exclusion
+
+**Kind:** obstruction
+
+**Evidence:** formalized
+
+**Disposition:** active
+
+Replace the middle atom in the shortest `0|2|1` bad run by the body-dependent `c` atom while
+retaining `b` endpoints:
+
+```text
+b(3z) c(3x+2) b(3y+1).
+```
+
+At deletion width three, Lean computes the exact bridge determinant as `729y/16` times a
+polynomial in `x,z` with monomials `xz,x,z,1`. Every coefficient is strictly positive for every
+nonempty body. The proof uses only the native code bounds
+
+```text
+27 < L_c^{scale},    0 ≤ L_c < L_c^{scale},
+```
+
+then checks the four exact coefficients. Regularity forces `y>0`, so the determinant is positive
+for every pair of nonnegative waits `x,z`.
+
+**Scope:** deletion width `β=3`, arbitrary nonempty body, exactly three atoms, `b` safe endpoints,
+a `c` defect, and orientation `0|2|1`. The opposite orientation `1|2|0` remains open; its exact
+determinant is linear in the defect and right waits but has mixed sign, so this coefficientwise
+argument does not transpose.
+
+**Use:** with `b` endpoints, the shortest bad run can now survive only as `b(3z+1)c(3x+2)b(3y)`.
+This isolates one exact arithmetic throat before endpoint letters or longer defect runs are
+introduced.
+
+**Next:** settle the opposite `c`-defect orientation. Its determinant identity reduces zero to a
+linear Diophantine relation in the ternary body code and the two waits; exploit the code's
+restricted base-three suffix rather than discard its mixed signs.
+
+**Artifact:**
+[`MatrixMortality/ParabolicDefect.lean`](MatrixMortality/ParabolicDefect.lean) and
+[`audits/m43-phase-zero-c-defect-2026-08-30.md`](audits/m43-phase-zero-c-defect-2026-08-30.md).
 
 ### M4-C03: Zero-framed binary two-Lag compiler
 

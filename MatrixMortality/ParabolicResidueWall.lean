@@ -105,7 +105,20 @@ def safeNumerator (β : Nat) (body : List TagLetter) :
           liftResidue (-342 * P * ρ + 99 * P + 38 * ρ - 11) 0,
           liftResidue (576 * P * j + 192 * P - 64 * j + 42) 2]
 
-/-- Explicit residue-one `c` atom before integral clearing or exterior transport. -/
+/-- Exact residue-zero `c` atom before integral clearing or exterior transport. -/
+theorem cAtom_three_mul_matrix (ρ L M : ℚ) (j : Nat) :
+    cAtom ρ L M (3 * j) =
+      !![1, 2, 2 * j * (L - 1) + 2;
+         0, 3, 0;
+         0, 0, j * (M - 3) + 3] := by
+  rw [cAtom, normalRoot_pow_three_mul]
+  ext i k
+  fin_cases i <;> fin_cases k <;>
+    norm_num [cFlank, flank, drift, injection, Matrix.mul_apply,
+      Fin.sum_univ_succ] <;>
+    ring
+
+/-- Exact residue-one `c` atom before integral clearing or exterior transport. -/
 theorem cAtom_three_mul_add_one_matrix (ρ L M : ℚ) (j : Nat) :
     cAtom ρ L M (3 * j + 1) =
       !![2 + (L - 1) * (114 * ρ - 11) / 96,
@@ -123,7 +136,8 @@ theorem cAtom_three_mul_add_one_matrix (ρ L M : ℚ) (j : Nat) :
       Fin.sum_univ_succ] <;>
     ring
 
-private theorem cAtom_three_mul_add_two (ρ L M : ℚ) (j : Nat) :
+/-- Exact residue-two `c` atom before integral clearing or exterior transport. -/
+theorem cAtom_three_mul_add_two_matrix (ρ L M : ℚ) (j : Nat) :
     cAtom ρ L M (3 * j + 2) =
       !![(11 * L - 155) / 48,
           -(114 * L * ρ - 11 * L - 114 * ρ - 85) / 96,
@@ -273,7 +287,7 @@ private theorem cast_defectNumerator_c
   rw [show atom β body .c (3 * j + 2) =
       cAtom ((3 : ℚ) ^ β) (nearySideLowerC β body)
         (nearySideLowerCScale β body) (3 * j + 2) by rfl,
-    cAtom_three_mul_add_two,
+    cAtom_three_mul_add_two_matrix,
     nearySideLowerC_eq_nine_mul_add_seven]
   rw [show nearySideLowerCScale β body =
       27 * (3 : ℚ) ^ (tagEncode β body).length by

@@ -1347,6 +1347,14 @@ factors for `ρ≥1` and `ρ≥9`, respectively, and discharge every regular all
 universal scale. The exact scope and next generalization are recorded in
 [`audits/m43-minimal-all-b-bad-run-2026-08-30.md`](audits/m43-minimal-all-b-bad-run-2026-08-30.md).
 
+The phase-zero `c`-defect exclusion
+[`M4-S10`](SALVAGE.md#m4-s10-phase-zero-c-defect-exclusion) is checked in the same module.
+`ParabolicBlade.bridge_bZero_cTwo_bOne_det` computes the exact width-three determinant for
+`b(3z)c(3x+2)b(3y+1)`. Its nonzero corollary proves all four wait-monomial coefficients positive
+from the native code bounds for every nonempty body. The opposite phase remains outside the
+claim. See
+[`audits/m43-phase-zero-c-defect-2026-08-30.md`](audits/m43-phase-zero-c-defect-2026-08-30.md).
+
 The original fixed-ray semantic route is obstructed by
 [`M4-O14`](SALVAGE.md#m4-o14-original-semantic-endpoint-obstruction), formalized in
 [`MatrixMortality/ParabolicSemanticObstruction.lean`](MatrixMortality/ParabolicSemanticObstruction.lean).
@@ -1513,7 +1521,7 @@ fixed-rank decision problem.
 | `ParabolicExterior.lean` | complete adjugate exterior state, bridge-wall coordinate, and four normalized safe actions |
 | `ParabolicFlag.lean` | valuation relations and the four arbitrary-cancellation atom invariants |
 | `ParabolicSafeFlag.lean` | arbitrary safe-word flag, wall orientation, and exact residue-one `b` wound |
-| `ParabolicDefect.lean` | complete defect-run residue grammar, exact minimal all-`b` bad-run exclusion, pure-defect bridge reset, and consecutive-wall projective fracture |
+| `ParabolicDefect.lean` | complete defect-run residue grammar, exact minimal all-`b` and phase-zero `c`-defect exclusions, pure-defect bridge reset, and consecutive-wall projective fracture |
 | `ParabolicSemanticObstruction.lean` | complete-block determinant wall and fixed-ray formal terminal-plane obstruction |
 | `ParabolicIncidence.lean` | canonical nonzero right kernel of every regular wall bridge |
 | `ParabolicRetuned.lean` | retuned open root, sparse ternary code, determinant pencils, and unique gap-two singular atom |
@@ -1843,6 +1851,7 @@ fixed-rank decision problem.
 | Every regular safe word preserves the oriented `3`-adic exterior flag | `ParabolicBlade.exteriorState_safe_word_flag`, `ParabolicBlade.exteriorState_safe_word_wall_orientation` |
 | Every concrete defect skeleton without a bad four-periodic run is nonzero | `ParabolicBlade.defectSkeletonProduct_ne_zero_of_not_bad` |
 | Neither shortest opposite-phase bad run closes when all three atoms are `b` | `ParabolicBlade.bridge_bZero_bTwo_bOne_det_ne_zero`, `ParabolicBlade.bridge_bOne_bTwo_bZero_det_ne_zero` |
+| The shortest `0|2|1` bad run does not close with a `c` defect and `b` endpoints | `ParabolicBlade.bridge_bZero_cTwo_bOne_det_ne_zero` |
 | Every nonempty pure-defect block has an invertible bridge | `ParabolicBlade.pureDefect_bridge_det_ne_zero` |
 | A varying wall chain vanishes exactly at one consecutive projective incidence | `ParabolicBlade.bridgeFractureChain_eq_zero_iff` |
 | A regular wall bridge has the explicit nonzero annihilating cokernel `(v,-4w)` | `ParabolicBlade.bridgeCokernel_eq_exteriorTail`, `ParabolicBlade.bridgeCokernel_regular_word_ne_zero`, `ParabolicBlade.bridgeCokernel_vecMul_bridge_of_wall` |
