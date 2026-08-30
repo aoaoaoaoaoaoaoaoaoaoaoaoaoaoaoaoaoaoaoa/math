@@ -1002,6 +1002,16 @@ graph. Hence every fixed-character slice of the actual program graph is Zariski 
 dimension-three compression for the actual source, but remains neither a language-rank lower
 bound nor an obstruction to spelling-sensitive or nonalgebraic dynamics.
 
+[`G3-O22`](SALVAGE.md#g3-o22-invertible-fibre-span-rigidity) now resolves the internal geometry
+of every everywhere-invertible scalar carrier on the positive cover. For each group element
+`q`, the span `C_q` of states reached by all positive spellings has one common positive dimension,
+and every transition maps it exactly onto the group-translated fibre. A nonzero scalar boundary
+vanishing on one fibre in dimension three forces `dim C_q∈{1,2}`. The identity fibre is the seed
+orbit of a computable finite operator algebra. Thus the invertible branch is a line or plane
+group-orbit incidence problem, rather than an arbitrary infinite spelling memory. This does not
+yield positive `M₃(2)`: the reverse orbit edges use inverse linear maps which need not be positive
+controls. Singular spelling-sensitive carriers remain separate.
+
 The ordinary mortality lift is likewise no longer part of the paired obstruction. For arbitrary
 controls `H_a`, column `γ`, and row `λ` over a field, adjoining `γλ` gives mortality exactly when some
 `λH_yγ` vanishes. A zero product without the separator is already a scalar-zero witness; after
@@ -1121,7 +1131,9 @@ leaves:
    compile transported equality plus weight `d` into ordinary `GPCP(3)` or a three-state
    scalar-zero family by graph-only, nonalgebraic, or spelling-sensitive dynamics. Prove the
    complete arbitrary-positive-word converse and preserve identity padding. The carrier need not
-   extend to the correlated graph's Zariski closure.
+   extend to the correlated graph's Zariski closure. In the everywhere-invertible branch,
+   `G3-O22` reduces the target to rank-one or rank-two group-orbit incidence; otherwise the
+   construction must exploit singular transitions.
 
 The Carvalho split exposed a real semantic seam: algebraic information about the correlated
 group and nonalgebraic information about positive spellings are distinct. `G3-O21` closes the
@@ -1202,8 +1214,10 @@ dense and closes its algebraic lane. The remaining constructive lane must detect
 weight through spelling-sensitive, graph-only nonalgebraic dynamics. Extending first to
 independent `F×F×ℤ` data is four-dimensional by `G3-O16`; a singular third coordinate over a
 persistent invertible quotient is closed by `G3-O14`; a standalone syntax series requires six
-states by `G3-O15`. Neither actual slice density nor a rank-four semantic coefficient is a
-same-zero language lower bound.
+states by `G3-O15`. `G3-O22` further forces any everywhere-invertible three-state scalar carrier
+into a computable line or plane group orbit, but supplies inverse edges only in the group action,
+not as positive matrix controls. Neither actual slice density nor a rank-four semantic
+coefficient is a same-zero language lower bound.
 
 The native source race now has a local sufficient acceptance test. Supply three head-separated
 productions `αₓX⟶Xβₓ`; `G3-C04` then proves that `sβ(w)=α(w)t` forces every cumulative `α` prefix

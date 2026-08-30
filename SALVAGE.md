@@ -8984,6 +8984,55 @@ Theorem 4.1 and the explicit transducers in Sections 3 and 5.
 **Artifact:**
 [`m34-actual-carvalho-slice-density-2026-08-30.md`](audits/m34-actual-carvalho-slice-density-2026-08-30.md).
 
+### G3-O22: Invertible fibre-span rigidity
+
+**Kind:** structural reduction
+
+**Evidence:** formalized core
+
+**Disposition:** graduated
+
+Let a positive evaluation `π:S*→G` surject onto a group, let every control act invertibly on a
+finite-dimensional vector space, and fix a seed `γ`. For
+
+```text
+C_q = span { M_w γ : π(w)=q },
+```
+
+Lean proves `M_u C_q=C_{π(u)q}` for every positive word `u`. The forward inclusion is literal
+prefixing. A positive spelling of `π(u)⁻¹` gives the reverse dimension inequality, and
+invertibility preserves dimension. Consequently all fibres have one common positive dimension
+when `γ≠0`.
+
+For a nonzero scalar boundary `λ` in dimension three, vanishing on every spelling of one fibre
+is exactly `C_q≤ker λ`, so `dim C_q∈{1,2}`. Rank one is a projective point-to-hyperplane orbit
+incidence. In rank two, `C_q=ker λ`; the dual point follows a group orbit. On the triangle cover,
+the `x,y` transitions and their linear inverses implement the two-generator group action on the
+family of fibre subspaces.
+
+The identity fibre has an intrinsic finite algebra. Lean defines the unital subalgebra
+
+```text
+A = span { M_w : π(w)=1 } ≤ End(V)
+```
+
+and proves `C_1=Aγ`. For the triangle cover over an effective field, `A` is computable by finite
+subspace saturation of an effective context-free grammar for `π⁻¹(1)`; the grammar algorithm is
+audited rather than formalized.
+
+**Scope:** all transitions must be linear equivalences, positive evaluation must be surjective,
+and the rank dichotomy uses nonzero seed and boundary. The resulting orbit uses inverse linear
+maps. It is a group/Grassmannian reduction, not a positive-semigroup reduction to `M₃(2)`, and it
+does not cover singular spelling carriers.
+
+**Use:** split the spelling-sensitive Carvalho leaf cleanly. The everywhere-invertible branch is
+now a computable rank-one or rank-two group-orbit incidence problem. Search singular carriers
+separately; do not treat arbitrary infinite fibres as unstructured state.
+
+**Artifact:** [`PositiveFreeCancellation.lean`](MatrixMortality/PositiveFreeCancellation.lean)
+and
+[`m34-invertible-fibre-span-2026-08-30.md`](audits/m34-invertible-fibre-span-2026-08-30.md).
+
 ### G3-O20: Consecutive-repeat tail closure
 
 **Kind:** obstruction

@@ -1057,6 +1057,16 @@ embedding. The representation-theoretic dimension-four conclusion applies only t
 algebraically extendable carriers using both coordinates, not to same-zero language rank or
 spelling-sensitive/nonalgebraic dynamics.
 
+[`G3-O22`](SALVAGE.md#g3-o22-invertible-fibre-span-rigidity) is formalized at its linear-algebra
+core. Lean proves exact transport of positive spelling-fibre spans under every invertible word
+transition, transport back under the inverse equivalence, common positive fibre rank, the
+rank-one/rank-two dichotomy under a nonzero scalar boundary in dimension three, and equality with
+the boundary kernel in the rank-two branch. It also constructs the unital identity-word operator
+algebra and identifies its seed orbit with the identity fibre. The finite context-free subspace
+saturation algorithm computing that algebra for the triangle cover is audited, not formalized.
+No Lean declaration identifies inverse orbit edges with positive generators or claims a positive
+`M₃(2)` reduction.
+
 Lean checks the internal algebra at the positive boundary: three positive letters surject onto
 the binary free group; quotient-blind boundaries accepting `g` and `g²` admit a nonempty identity
 witness; every injective transition on a finite invariant semantic fibre pumps an identity loop;
@@ -1783,6 +1793,10 @@ fixed-rank decision problem.
 | Three positive letters cover every prescribed first-exponent slice exactly | `PositiveFreeCancellation.firstExponent_triangleEvaluate`, `PositiveFreeCancellation.triangleSliceEvaluate_surjective` |
 | Positive identity-triangle padding preserves both value and affine weight | `PositiveFreeCancellation.triangle_identity_padding` |
 | Quotient-blind boundaries accepting an element and its square admit a nonempty identity witness | `PositiveFreeCancellation.exists_nonempty_identity_witness` |
+| Invertible positive transitions carry each spelling-fibre span exactly along the group orbit | `PositiveFreeCancellation.positiveFibreSpan_word_map_eq`, `PositiveFreeCancellation.positiveFibreSpan_word_symm_map_eq` |
+| Every nonzero vanished three-dimensional fibre has rank one or two | `PositiveFreeCancellation.positiveFibreSpan_finrank_one_or_two`, `PositiveFreeCancellation.positiveFibreSpan_eq_ker_of_finrank_two` |
+| The identity fibre is the seed orbit of its unital identity-word operator algebra | `PositiveFreeCancellation.positiveIdentityAlgebra_map_apply_eq_fibre` |
+| Triangle letters and their linear inverses give the exact group-orbit edges on fibre spans | `PositiveFreeCancellation.triangleFibreSpan_letter_map_eq`, `PositiveFreeCancellation.triangleFibreSpan_letter_symm_map_eq` |
 | Every injective transition on a finite invariant semantic fibre pumps a positive period | `PositiveFreeCancellation.finiteFibre_identity_pumps` |
 | A singular one-coordinate lift has the quotient kernel and absorbs every quotient identity | `PositiveFreeCancellation.singularLift_kernel_eq_quotientKernel`, `PositiveFreeCancellation.singularLift_absorbs_quotientIdentity` |
 | The triangle-irreducible Hankel support has six independent rows over every field | `PositiveFreeCancellation.forbiddenTripleSupport_rows_linearIndependent` |
@@ -1953,6 +1967,13 @@ left and right pump blocks holds at exponents `N` and `N+1`, it holds at every e
 The proof uses only prefix comparability and left/right cancellation. This closes a unary
 consecutive-zero Cayley-Hamilton shortcut, not the noncommuting positive-transition lower-bound
 lane.
+
+For `G3-O22`, Lean proves the fibre-span transport, inverse group-orbit edge, common-rank,
+dimension dichotomy, rank-two kernel equality, and identity-orbit algebra over arbitrary fields.
+The group-orbit conclusion is deliberately weaker than a positive-semigroup reduction: the
+inverse linear equivalences used for reverse edges need not occur among the positive controls.
+The context-free fixed-point algorithm for computing the triangle identity algebra is audited
+outside Lean.
 
 The scheduled compiler introduces a separate source-width seam. Neary's published construction
 sets `β = 10p`, where `p` is the simulated cyclic-tag program period. The fixed-width audit found

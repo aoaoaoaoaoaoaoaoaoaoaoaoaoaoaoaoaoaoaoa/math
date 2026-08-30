@@ -196,6 +196,380 @@ theorem positiveEvaluate_append {S G : Type*} [Monoid G] (generator : S → G)
       positiveEvaluate generator left * positiveEvaluate generator right := by
   simp [positiveEvaluate]
 
+/-! ## Invertible positive fibre spans -/
+
+/-- Linear span of all states reached by positive spellings of one group element. -/
+def positiveFibreSpan
+    {K S G V : Type*} [Field K] [Group G] [AddCommGroup V] [Module K V]
+    (generator : S → G) (transition : S → V ≃ₗ[K] V) (seed : V) (value : G) :
+    Submodule K V :=
+  Submodule.span K {point | ∃ word : List S,
+    positiveEvaluate generator word = value ∧
+      positiveEvaluate transition word seed = point}
+
+/-- Prefixing positive spellings maps a fibre span into the correspondingly translated fibre
+span. -/
+theorem positiveFibreSpan_word_map_le
+    {K S G V : Type*} [Field K] [Group G] [AddCommGroup V] [Module K V]
+    (generator : S → G) (transition : S → V ≃ₗ[K] V) (seed : V)
+    (prefixWord : List S) (value : G) :
+    (positiveFibreSpan generator transition seed value).map
+        (positiveEvaluate transition prefixWord).toLinearMap ≤
+      positiveFibreSpan generator transition seed
+        (positiveEvaluate generator prefixWord * value) := by
+  rw [Submodule.map_le_iff_le_comap]
+  refine Submodule.span_le.mpr ?_
+  rintro point ⟨word, word_value, point_eq⟩
+  change positiveEvaluate transition prefixWord point ∈
+    positiveFibreSpan generator transition seed
+      (positiveEvaluate generator prefixWord * value)
+  apply Submodule.subset_span
+  refine ⟨prefixWord ++ word, ?_, ?_⟩
+  · simp only [positiveEvaluate_append, word_value]
+  · simp only [positiveEvaluate_append]
+    change positiveEvaluate transition prefixWord
+      (positiveEvaluate transition word seed) = positiveEvaluate transition prefixWord point
+    rw [point_eq]
+
+/-- When positive evaluation surjects onto a group and every transition is invertible, prefixing
+maps each fibre span exactly onto the translated fibre span. The reverse inclusion uses a
+positive spelling of the semantic inverse and finite-dimensional rank. -/
+theorem positiveFibreSpan_word_map_eq
+    {K S G V : Type*} [Field K] [Group G] [AddCommGroup V] [Module K V]
+    [FiniteDimensional K V]
+    (generator : S → G) (transition : S → V ≃ₗ[K] V) (seed : V)
+    (surjective : Function.Surjective (positiveEvaluate generator))
+    (prefixWord : List S) (value : G) :
+    (positiveFibreSpan generator transition seed value).map
+        (positiveEvaluate transition prefixWord).toLinearMap =
+      positiveFibreSpan generator transition seed
+        (positiveEvaluate generator prefixWord * value) := by
+  let source := positiveFibreSpan generator transition seed value
+  let target := positiveFibreSpan generator transition seed
+    (positiveEvaluate generator prefixWord * value)
+  have forward :
+      source.map (positiveEvaluate transition prefixWord).toLinearMap ≤ target :=
+    positiveFibreSpan_word_map_le generator transition seed prefixWord value
+  obtain ⟨inverseWord, inverseWord_value⟩ :=
+    surjective (positiveEvaluate generator prefixWord)⁻¹
+  have reverse :
+      target.map (positiveEvaluate transition inverseWord).toLinearMap ≤ source := by
+    simpa only [target, source, inverseWord_value, inv_mul_cancel_left] using
+      positiveFibreSpan_word_map_le generator transition seed inverseWord
+        (positiveEvaluate generator prefixWord * value)
+  apply Submodule.eq_of_le_of_finrank_le forward
+  calc
+    Module.finrank K target =
+        Module.finrank K
+          (target.map (positiveEvaluate transition inverseWord).toLinearMap) :=
+      (LinearEquiv.finrank_map_eq (positiveEvaluate transition inverseWord) target).symm
+    _ ≤ Module.finrank K source := Submodule.finrank_mono reverse
+    _ = Module.finrank K
+        (source.map (positiveEvaluate transition prefixWord).toLinearMap) :=
+      (LinearEquiv.finrank_map_eq (positiveEvaluate transition prefixWord) source).symm
+
+/-- The inverse linear transition maps a translated fibre span back to its source. This is a
+group-orbit statement about subspaces; it does not assert that an inverse transition is a
+positive generator. -/
+theorem positiveFibreSpan_word_symm_map_eq
+    {K S G V : Type*} [Field K] [Group G] [AddCommGroup V] [Module K V]
+    [FiniteDimensional K V]
+    (generator : S → G) (transition : S → V ≃ₗ[K] V) (seed : V)
+    (surjective : Function.Surjective (positiveEvaluate generator))
+    (word : List S) (value : G) :
+    (positiveFibreSpan generator transition seed
+        (positiveEvaluate generator word * value)).map
+        (positiveEvaluate transition word).symm.toLinearMap =
+      positiveFibreSpan generator transition seed value := by
+  apply (Submodule.map_symm_eq_iff (positiveEvaluate transition word)).mpr
+  exact positiveFibreSpan_word_map_eq generator transition seed surjective word value
+
+/-- A positive spelling identifies its fibre span with the image of the identity-fibre span. -/
+theorem positiveFibreSpan_eq_word_map_identity
+    {K S G V : Type*} [Field K] [Group G] [AddCommGroup V] [Module K V]
+    [FiniteDimensional K V]
+    (generator : S → G) (transition : S → V ≃ₗ[K] V) (seed : V)
+    (surjective : Function.Surjective (positiveEvaluate generator))
+    (word : List S) (value : G) (word_value : positiveEvaluate generator word = value) :
+    positiveFibreSpan generator transition seed value =
+      (positiveFibreSpan generator transition seed 1).map
+        (positiveEvaluate transition word).toLinearMap := by
+  symm
+  simpa only [word_value, mul_one] using
+    positiveFibreSpan_word_map_eq generator transition seed surjective word 1
+
+/-- All semantic fibres have the same linear dimension. -/
+theorem positiveFibreSpan_finrank_eq_identity
+    {K S G V : Type*} [Field K] [Group G] [AddCommGroup V] [Module K V]
+    [FiniteDimensional K V]
+    (generator : S → G) (transition : S → V ≃ₗ[K] V) (seed : V)
+    (surjective : Function.Surjective (positiveEvaluate generator)) (value : G) :
+    Module.finrank K (positiveFibreSpan generator transition seed value) =
+      Module.finrank K (positiveFibreSpan generator transition seed 1) := by
+  obtain ⟨word, word_value⟩ := surjective value
+  rw [positiveFibreSpan_eq_word_map_identity generator transition seed surjective word value
+    word_value]
+  exact LinearEquiv.finrank_map_eq (positiveEvaluate transition word)
+    (positiveFibreSpan generator transition seed 1)
+
+/-- A nonzero seed makes every fibre span nonzero. -/
+theorem positiveFibreSpan_ne_bot
+    {K S G V : Type*} [Field K] [Group G] [AddCommGroup V] [Module K V]
+    (generator : S → G) (transition : S → V ≃ₗ[K] V) (seed : V)
+    (surjective : Function.Surjective (positiveEvaluate generator)) (seed_ne : seed ≠ 0)
+    (value : G) :
+    positiveFibreSpan generator transition seed value ≠ ⊥ := by
+  obtain ⟨word, word_value⟩ := surjective value
+  have reached_mem :
+      positiveEvaluate transition word seed ∈
+        positiveFibreSpan generator transition seed value := by
+    apply Submodule.subset_span
+    exact ⟨word, word_value, rfl⟩
+  intro fibre_bot
+  rw [fibre_bot] at reached_mem
+  exact seed_ne ((positiveEvaluate transition word).injective (by simpa using reached_mem))
+
+/-- A boundary vanishes on every spelling of one semantic fibre exactly when its fibre span lies
+in the boundary kernel. -/
+theorem positiveFibre_vanishes_iff_span_le_ker
+    {K S G V : Type*} [Field K] [Group G] [AddCommGroup V] [Module K V]
+    (generator : S → G) (transition : S → V ≃ₗ[K] V) (seed : V)
+    (boundary : V →ₗ[K] K) (value : G) :
+    (∀ word : List S, positiveEvaluate generator word = value →
+        boundary (positiveEvaluate transition word seed) = 0) ↔
+      positiveFibreSpan generator transition seed value ≤ LinearMap.ker boundary := by
+  constructor
+  · intro vanishes
+    refine Submodule.span_le.mpr ?_
+    rintro point ⟨word, word_value, point_eq⟩
+    apply LinearMap.mem_ker.mpr
+    rw [← point_eq]
+    exact vanishes word word_value
+  · intro span_le word word_value
+    apply LinearMap.mem_ker.mp
+    apply span_le
+    apply Submodule.subset_span
+    exact ⟨word, word_value, rfl⟩
+
+/-- In dimension three, a nonzero fibre annihilated by a nonzero scalar boundary has dimension
+one or two. -/
+theorem positiveFibreSpan_finrank_one_or_two
+    {K S G V : Type*} [Field K] [Group G] [AddCommGroup V] [Module K V]
+    [FiniteDimensional K V]
+    (generator : S → G) (transition : S → V ≃ₗ[K] V) (seed : V)
+    (boundary : V →ₗ[K] K) (surjective : Function.Surjective (positiveEvaluate generator))
+    (seed_ne : seed ≠ 0) (boundary_ne : boundary ≠ 0)
+    (dimension_three : Module.finrank K V = 3) (value : G)
+    (vanishes : ∀ word : List S, positiveEvaluate generator word = value →
+      boundary (positiveEvaluate transition word seed) = 0) :
+    Module.finrank K (positiveFibreSpan generator transition seed value) = 1 ∨
+      Module.finrank K (positiveFibreSpan generator transition seed value) = 2 := by
+  let fibre := positiveFibreSpan generator transition seed value
+  have fibre_ne_bot : fibre ≠ ⊥ :=
+    positiveFibreSpan_ne_bot generator transition seed surjective seed_ne value
+  have fibre_le_ker : fibre ≤ LinearMap.ker boundary :=
+    (positiveFibre_vanishes_iff_span_le_ker generator transition seed boundary value).mp vanishes
+  have fibre_ne_top : fibre ≠ ⊤ := by
+    intro fibre_top
+    have kernel_top : LinearMap.ker boundary = ⊤ := by
+      apply top_unique
+      simpa only [fibre_top] using fibre_le_ker
+    exact boundary_ne (LinearMap.ker_eq_top.mp kernel_top)
+  have positive_rank : 1 ≤ Module.finrank K fibre :=
+    Submodule.one_le_finrank_iff.mpr fibre_ne_bot
+  have rank_lt_three : Module.finrank K fibre < 3 := by
+    simpa only [dimension_three] using Submodule.finrank_lt fibre_ne_top
+  obtain ⟨offset, rank_eq⟩ := Nat.exists_eq_add_of_le positive_rank
+  have offset_le_one : offset ≤ 1 := by omega
+  rcases Nat.le_one_iff_eq_zero_or_eq_one.mp offset_le_one with offset_zero | offset_one
+  · left
+    simpa only [offset_zero, add_zero] using rank_eq
+  · right
+    simpa only [offset_one] using rank_eq
+
+/-- A nonzero scalar boundary on a three-dimensional space has a two-dimensional kernel. -/
+theorem linearFunctional_ker_finrank_eq_two
+    {K V : Type*} [Field K] [AddCommGroup V] [Module K V] [FiniteDimensional K V]
+    (boundary : V →ₗ[K] K) (boundary_ne : boundary ≠ 0)
+    (dimension_three : Module.finrank K V = 3) :
+    Module.finrank K (LinearMap.ker boundary) = 2 := by
+  have exists_visible : ∃ point : V, boundary point ≠ 0 := by
+    by_contra no_visible
+    have all_zero : ∀ point : V, boundary point = 0 := by
+      intro point
+      by_contra point_ne
+      exact no_visible ⟨point, point_ne⟩
+    apply boundary_ne
+    ext point
+    exact all_zero point
+  obtain ⟨visible, visible_ne⟩ := exists_visible
+  have boundary_surjective : Function.Surjective boundary := by
+    intro scalar
+    refine ⟨(scalar / boundary visible) • visible, ?_⟩
+    simp only [LinearMap.map_smul_of_tower, smul_eq_mul]
+    exact div_mul_cancel₀ scalar visible_ne
+  have rank_nullity := boundary.finrank_range_add_finrank_ker
+  rw [LinearMap.range_eq_top_of_surjective boundary boundary_surjective,
+    finrank_top, Module.finrank_self, dimension_three] at rank_nullity
+  omega
+
+/-- In the rank-two branch, fibrewise vanishing identifies the fibre span with a rank-two
+boundary kernel. -/
+theorem positiveFibreSpan_eq_ker_of_finrank_two
+    {K S G V : Type*} [Field K] [Group G] [AddCommGroup V] [Module K V]
+    [FiniteDimensional K V]
+    (generator : S → G) (transition : S → V ≃ₗ[K] V) (seed : V)
+    (boundary : V →ₗ[K] K) (value : G)
+    (boundary_ne : boundary ≠ 0) (dimension_three : Module.finrank K V = 3)
+    (fibre_two : Module.finrank K (positiveFibreSpan generator transition seed value) = 2)
+    (vanishes : ∀ word : List S, positiveEvaluate generator word = value →
+      boundary (positiveEvaluate transition word seed) = 0) :
+    positiveFibreSpan generator transition seed value = LinearMap.ker boundary := by
+  apply Submodule.eq_of_le_of_finrank_le
+    ((positiveFibre_vanishes_iff_span_le_ker generator transition seed boundary value).mp
+      vanishes)
+  rw [fibre_two, linearFunctional_ker_finrank_eq_two boundary boundary_ne dimension_three]
+
+/-! ## Identity-word orbit algebra -/
+
+/-- Linear span of the transition operators carried by positive semantic identity words. -/
+def positiveIdentityOperatorSpan
+    {K S G V : Type*} [Field K] [Group G] [AddCommGroup V] [Module K V]
+    (generator : S → G) (transition : S → V ≃ₗ[K] V) :
+    Submodule K (Module.End K V) :=
+  Submodule.span K {operator | ∃ word : List S,
+    positiveEvaluate generator word = 1 ∧
+      (positiveEvaluate transition word).toLinearMap = operator}
+
+/-- Each positive identity-word transition belongs to the identity-operator span. -/
+theorem positiveIdentityOperatorSpan_transition_mem
+    {K S G V : Type*} [Field K] [Group G] [AddCommGroup V] [Module K V]
+    (generator : S → G) (transition : S → V ≃ₗ[K] V) (word : List S)
+    (word_identity : positiveEvaluate generator word = 1) :
+    (positiveEvaluate transition word).toLinearMap ∈
+      positiveIdentityOperatorSpan generator transition := by
+  apply Submodule.subset_span
+  exact ⟨word, word_identity, rfl⟩
+
+/-- The identity endomorphism belongs to the identity-operator span. -/
+theorem positiveIdentityOperatorSpan_one_mem
+    {K S G V : Type*} [Field K] [Group G] [AddCommGroup V] [Module K V]
+    (generator : S → G) (transition : S → V ≃ₗ[K] V) :
+    (1 : Module.End K V) ∈ positiveIdentityOperatorSpan generator transition := by
+  have identity_mem := positiveIdentityOperatorSpan_transition_mem generator transition []
+    (positiveEvaluate_nil generator)
+  convert identity_mem using 1
+  ext point
+  change point = point
+  rfl
+
+/-- The identity-operator span is closed under operator composition. -/
+theorem positiveIdentityOperatorSpan_mul_mem
+    {K S G V : Type*} [Field K] [Group G] [AddCommGroup V] [Module K V]
+    (generator : S → G) (transition : S → V ≃ₗ[K] V)
+    {left right : Module.End K V}
+    (left_mem : left ∈ positiveIdentityOperatorSpan generator transition)
+    (right_mem : right ∈ positiveIdentityOperatorSpan generator transition) :
+    left * right ∈ positiveIdentityOperatorSpan generator transition := by
+  induction left_mem using Submodule.span_induction with
+  | mem leftOperator left_generator =>
+      rcases left_generator with ⟨leftWord, left_identity, rfl⟩
+      induction right_mem using Submodule.span_induction with
+      | mem rightOperator right_generator =>
+          rcases right_generator with ⟨rightWord, right_identity, rfl⟩
+          apply Submodule.subset_span
+          refine ⟨leftWord ++ rightWord, ?_, ?_⟩
+          · simp only [positiveEvaluate_append, left_identity, right_identity, mul_one]
+          · rw [positiveEvaluate_append]
+            rfl
+      | zero => simp
+      | add first second _ _ first_mem second_mem =>
+          rw [mul_add]
+          exact Submodule.add_mem _ first_mem second_mem
+      | smul scalar operator _ operator_mem =>
+          rw [mul_smul_comm]
+          exact Submodule.smul_mem _ scalar operator_mem
+  | zero => simp
+  | add first second _ _ first_mem second_mem =>
+      rw [add_mul]
+      exact Submodule.add_mem _ first_mem second_mem
+  | smul scalar operator _ operator_mem =>
+      rw [smul_mul_assoc]
+      exact Submodule.smul_mem _ scalar operator_mem
+
+/-- Unital operator algebra generated linearly by positive semantic identity words. -/
+def positiveIdentityAlgebra
+    {K S G V : Type*} [Field K] [Group G] [AddCommGroup V] [Module K V]
+    (generator : S → G) (transition : S → V ≃ₗ[K] V) :
+    Subalgebra K (Module.End K V) where
+  carrier := positiveIdentityOperatorSpan generator transition
+  mul_mem' := positiveIdentityOperatorSpan_mul_mem generator transition
+  one_mem' := positiveIdentityOperatorSpan_one_mem generator transition
+  add_mem' := (positiveIdentityOperatorSpan generator transition).add_mem
+  zero_mem' := (positiveIdentityOperatorSpan generator transition).zero_mem
+  algebraMap_mem' := fun scalar => by
+    rw [Algebra.algebraMap_eq_smul_one]
+    exact (positiveIdentityOperatorSpan generator transition).smul_mem scalar
+      (positiveIdentityOperatorSpan_one_mem generator transition)
+
+/-- The identity fibre is exactly the orbit of the seed under the identity-word operator
+algebra. -/
+theorem positiveIdentityAlgebra_map_apply_eq_fibre
+    {K S G V : Type*} [Field K] [Group G] [AddCommGroup V] [Module K V]
+    (generator : S → G) (transition : S → V ≃ₗ[K] V) (seed : V) :
+    (positiveIdentityAlgebra generator transition).toSubmodule.map (LinearMap.applyₗ seed) =
+      positiveFibreSpan generator transition seed 1 := by
+  apply le_antisymm
+  · rw [Submodule.map_le_iff_le_comap]
+    intro operator operator_mem
+    change operator seed ∈ positiveFibreSpan generator transition seed 1
+    change operator ∈ positiveIdentityOperatorSpan generator transition at operator_mem
+    induction operator_mem using Submodule.span_induction with
+    | mem identityOperator identity_generator =>
+        rcases identity_generator with ⟨word, word_identity, rfl⟩
+        apply Submodule.subset_span
+        exact ⟨word, word_identity, rfl⟩
+    | zero => simp
+    | add first second _ _ first_mem second_mem =>
+        simpa only [LinearMap.add_apply] using Submodule.add_mem _ first_mem second_mem
+    | smul scalar operator _ operator_mem =>
+        simpa only [LinearMap.smul_apply] using Submodule.smul_mem _ scalar operator_mem
+  · refine Submodule.span_le.mpr ?_
+    rintro point ⟨word, word_identity, rfl⟩
+    refine ⟨(positiveEvaluate transition word).toLinearMap, ?_, ?_⟩
+    · change (positiveEvaluate transition word).toLinearMap ∈
+        positiveIdentityOperatorSpan generator transition
+      exact positiveIdentityOperatorSpan_transition_mem generator transition word word_identity
+    · rfl
+
+/-! ## Triangle-cover Grassmannian orbit -/
+
+/-- Each triangle transition maps one semantic fibre span exactly onto the left-translated
+fibre span. -/
+theorem triangleFibreSpan_letter_map_eq
+    {K V : Type*} [Field K] [AddCommGroup V] [Module K V] [FiniteDimensional K V]
+    (transition : TriangleLetter → V ≃ₗ[K] V) (seed : V)
+    (letter : TriangleLetter) (value : FreeGroup Bool) :
+    (positiveFibreSpan triangleGenerator transition seed value).map
+        (transition letter).toLinearMap =
+      positiveFibreSpan triangleGenerator transition seed (triangleGenerator letter * value) := by
+  simpa only [positiveEvaluate_cons, positiveEvaluate_nil, mul_one] using
+    positiveFibreSpan_word_map_eq triangleGenerator transition seed
+      triangleEvaluate_surjective [letter] value
+
+/-- The inverse of each triangle transition gives the reverse group-orbit edge on fibre spans.
+This inverse edge is not asserted to be a positive matrix generator. -/
+theorem triangleFibreSpan_letter_symm_map_eq
+    {K V : Type*} [Field K] [AddCommGroup V] [Module K V] [FiniteDimensional K V]
+    (transition : TriangleLetter → V ≃ₗ[K] V) (seed : V)
+    (letter : TriangleLetter) (value : FreeGroup Bool) :
+    (positiveFibreSpan triangleGenerator transition seed
+        (triangleGenerator letter * value)).map (transition letter).symm.toLinearMap =
+      positiveFibreSpan triangleGenerator transition seed value := by
+  simpa only [positiveEvaluate_cons, positiveEvaluate_nil, mul_one] using
+    positiveFibreSpan_word_symm_map_eq triangleGenerator transition seed
+      triangleEvaluate_surjective [letter] value
+
 /-- A nonempty positive alphabet surjecting onto a group has a nonempty identity spelling. -/
 theorem exists_nonempty_positive_identity {S G : Type*} [Nonempty S] [Group G]
     (generator : S → G) (surjective : Function.Surjective (positiveEvaluate generator)) :
