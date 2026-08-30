@@ -1404,11 +1404,20 @@ The phase-zero `c`-defect exclusion
 [`M4-S10`](SALVAGE.md#m4-s10-phase-zero-c-defect-exclusion) is checked in the same module.
 `ParabolicBlade.bridge_bZero_cTwo_bOne_det` computes the exact width-three determinant for
 `b(3z)c(3x+2)b(3y+1)`. Its nonzero corollary proves all four wait-monomial coefficients positive
-from the native code bounds for every nonempty body. The opposite phase remains outside the
-nonzero claim, but `ParabolicBlade.bridge_bOne_cTwo_bZero_det` compresses its determinant to one
-affine wait incidence, and `ParabolicBlade.bOne_cTwo_bZero_coefficient_gap` proves the uniform
-endpoint-coefficient difference that fixes the root-interval width. See
+from the native code bounds for every nonempty body. The same module compresses the opposite
+phase to one affine wait incidence and proves the uniform endpoint-coefficient difference that
+fixes its root-interval width. See
 [`audits/m43-phase-zero-c-defect-2026-08-30.md`](audits/m43-phase-zero-c-defect-2026-08-30.md).
+
+The opposite `c`-defect cylinder exclusion
+[`M4-S11`](SALVAGE.md#m4-s11-opposite-c-defect-cylinder-exclusion) is formalized in
+[`MatrixMortality/ParabolicDefectCylinder.lean`](MatrixMortality/ParabolicDefectCylinder.lean).
+`ParabolicBlade.bridge_bOne_cTwo_bZero_det_ne_zero` partitions every nonempty body into an all-`c`
+word or a leading `c`-run followed by `b`, derives the exact ternary-code interval in each case,
+and excludes every natural root of the compressed determinant. The two cylinders which meet one
+integer force the remaining wait below one and then contradict their strict endpoint bounds. The
+exact boundary is
+[`audits/m43-opposite-c-defect-cylinder-2026-08-30.md`](audits/m43-opposite-c-defect-cylinder-2026-08-30.md).
 
 The residue-zero `c`-endpoint exclusion
 [`M4-S12`](SALVAGE.md#m4-s12-residue-zero-c-endpoint-exclusion) is checked in the same module.

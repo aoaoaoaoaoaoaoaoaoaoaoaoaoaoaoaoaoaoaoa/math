@@ -189,6 +189,7 @@ file owns the mathematical stock.
 | [`M4-S08`](#m4-s08-safe-wall-transport-chamber) | structure theorem | incidence with a safe right wall forces the transported kernel into one strict phase-selected `3`-adic chamber | formalized | active |
 | [`M4-S09`](#m4-s09-minimal-all-b-bad-run-exclusion) | obstruction | neither orientation of the shortest bad defect run can close when all three atoms are `b` | formalized | active |
 | [`M4-S10`](#m4-s10-phase-zero-c-defect-exclusion) | obstruction | the `0|2|1` shortest bad run cannot close with a `c` defect and `b` endpoints | formalized | active |
+| [`M4-S11`](#m4-s11-opposite-c-defect-cylinder-exclusion) | obstruction | the `1|2|0` shortest bad run cannot close with a `c` defect and `b` endpoints | formalized | active |
 | [`M4-S12`](#m4-s12-residue-zero-c-endpoint-exclusion) | obstruction | a shortest bad run with a `b` defect cannot close when its residue-zero endpoint is `c` | formalized | active |
 | [`M4-S13`](#m4-s13-residue-one-left-c-endpoint-exclusion) | obstruction | the `1|2|0` shortest bad run with a `b` defect cannot close when its left endpoint is `c` | formalized | active |
 | [`M4-C03`](#m4-c03-zero-framed-binary-two-lag-compiler) | compiler | the principal scanner is literally binary context-2 Lag and compiles to `M₄(3)` | formalized | graduated |
@@ -7657,9 +7658,8 @@ then checks the four exact coefficients. Regularity forces `y>0`, so the determi
 for every pair of nonnegative waits `x,z`.
 
 **Scope:** deletion width `β=3`, arbitrary nonempty body, exactly three atoms, `b` safe endpoints,
-a `c` defect, and orientation `0|2|1`. The opposite orientation `1|2|0` remains open; its exact
-determinant is linear in the defect and right waits but has mixed sign, so this coefficientwise
-argument does not transpose.
+a `c` defect, and orientation `0|2|1`. The coefficientwise argument does not transpose to the
+mixed-sign `1|2|0` determinant; `M4-S11` excludes that orientation by a separate cylinder proof.
 
 That opposite determinant is nevertheless formalized at its compressed endpoint. With
 `L=nearySideLowerC 3 body`, `M=nearySideLowerCScale 3 body`, it is `−4374z` times
@@ -7679,17 +7679,67 @@ B_y−8B₀ = 1982448(M−3).
 Thus the surviving phase is one exact two-endpoint interval problem, not an uncontrolled mixed
 polynomial.
 
-**Use:** with `b` endpoints, the shortest bad run can now survive only as `b(3z+1)c(3x+2)b(3y)`.
-This isolates one exact arithmetic throat before endpoint letters or longer defect runs are
-introduced.
+**Use:** together with `M4-S11`, no shortest bad run with `b` endpoints survives when the defect
+is `c`.
 
-**Next:** settle the opposite `c`-defect orientation by the five leading-letter cylinders of the
-ternary body code. After clearing the positive factor `M−3`, each cylinder gives two rational
-endpoint comparisons and one integer-avoidance band.
+**Next:** allow a `c` endpoint or lift the defect run from length one to its four-periodic longer
+classes.
 
 **Artifact:**
 [`MatrixMortality/ParabolicDefect.lean`](MatrixMortality/ParabolicDefect.lean) and
 [`audits/m43-phase-zero-c-defect-2026-08-30.md`](audits/m43-phase-zero-c-defect-2026-08-30.md).
+
+### M4-S11: Opposite c-defect cylinder exclusion
+
+**Kind:** obstruction
+
+**Evidence:** formalized
+
+**Disposition:** active
+
+The opposite shortest bad run with `b` endpoints is
+
+```text
+b(3z+1) c(3x+2) b(3y).
+```
+
+Put `L=nearySideLowerC 3 body`, `M=nearySideLowerCScale 3 body`,
+
+```text
+A  = 1699776(M−3),
+B₀ = 164500347L−55585393M−2843496,
+B₁ = B₀+247806(M−3).
+```
+
+After removing the regular factor `−4374z`, the determinant is
+
+```text
+A(8y+1)x − 8B₁y − B₀.
+```
+
+A zero would make `x` the weighted average of `B₀/A` and `B₁/A`. Their separation is the
+body-independent width `1059/7264<1`. Every nonempty body is either all `c` or has the form
+`c^k b tail`. Exact ternary-code bounds place both roots between consecutive integers for
+`k=1`, `k=2`, `k≥4`, and the all-`c` case. For `k=0` and `k=3`, only `x=59` and `x=64`
+respectively remain; the same cleared inequalities force `y<1`, and `y=0` contradicts the
+strict lower root bound. Hence the determinant never vanishes.
+
+**Scope:** deletion width `β=3`, arbitrary nonempty body, exactly three atoms, `b` safe
+endpoints, a `c` defect, and orientation `1|2|0`. The theorem does not cover a `c` endpoint,
+longer defect runs, or nontrivial safe endpoint contexts. Regularity requires `z>0`; `z=0` is the
+exceptional singular `b(1)` endpoint.
+
+**Use:** `M4-S10` and `M4-S11` eliminate both shortest bad-run orientations with a `c` defect and
+`b` endpoints. A surviving shortest run must therefore put body dependence at an endpoint or in
+more than one atom.
+
+**Next:** finish the sole one-`c`-endpoint survivor with a `b` defect, then treat multiple `c`
+atoms and lift run length one through the residue-two four-cycle.
+
+**Artifact:**
+[`MatrixMortality/ParabolicDefectCylinder.lean`](MatrixMortality/ParabolicDefectCylinder.lean)
+and
+[`audits/m43-opposite-c-defect-cylinder-2026-08-30.md`](audits/m43-opposite-c-defect-cylinder-2026-08-30.md).
 
 ### M4-S12: Residue-zero c-endpoint exclusion
 

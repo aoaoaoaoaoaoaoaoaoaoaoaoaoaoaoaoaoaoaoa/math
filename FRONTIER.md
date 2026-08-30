@@ -483,11 +483,12 @@ exceptional wait, its determinant has a fixed nonzero sign. The next atom-level 
 same skeleton with a `c` defect, followed by one `c` endpoint. Only then should the run be lifted
 from length one to `1+4k` by a uniform four-cycle factor.
 
-One of those two `c`-defect orientations is now dead. The exact width-three sign theorem
+Both `c`-defect orientations with `b` endpoints are now dead. The exact width-three sign theorem
 [`M4-S10`](SALVAGE.md#m4-s10-phase-zero-c-defect-exclusion) excludes
-`b(3z)c(3x+2)b(3y+1)` for every nonempty body and all regular waits. The sole three-atom survivor
-with `b` endpoints is therefore the opposite `1|2|0` orientation. Its mixed-sign determinant,
-not the already-positive phase-zero polynomial, is the immediate arithmetic target.
+`b(3z)c(3x+2)b(3y+1)` for every nonempty body and all regular waits. The opposite orientation is
+not coefficientwise signed, but
+[`M4-S11`](SALVAGE.md#m4-s11-opposite-c-defect-cylinder-exclusion) excludes it by exact ternary
+prefix cylinders.
 
 The mixed sign has now been compressed exactly. The surviving determinant is `−4374z` times
 
@@ -496,9 +497,9 @@ The mixed sign has now been compressed exactly. The surviving determinant is `�
 ```
 
 with `B_y−8B₀=1982448(M−3)`. Hence its rational root in `x`, as `y` ranges from zero to infinity,
-moves through one body-dependent interval of fixed width `1059/7264<1`. The remaining proof is a
-five-cylinder integer-avoidance theorem for the leading `c`-run of the body code; do not return to
-the expanded determinant.
+moves through one body-dependent interval of fixed width `1059/7264<1`. The all-`c` body and the
+five leading-`c`-run cylinders miss every natural root. A shortest bad run with `b` endpoints
+must therefore have a `b` defect.
 
 The endpoint alphabet has also contracted. The coefficientwise sign theorem
 [`M4-S12`](SALVAGE.md#m4-s12-residue-zero-c-endpoint-exclusion) excludes both shortest bad-run
