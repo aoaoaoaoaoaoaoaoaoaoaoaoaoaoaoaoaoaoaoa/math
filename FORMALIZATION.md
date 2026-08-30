@@ -403,6 +403,13 @@ a group-generating set has full positive monoid closure. Applied to the Collatz 
 audited `R32-O21`: every finite ambient image sends `P={A,B}*` onto the whole image of `Γ₆`, so
 `R=PK` fills that image and cannot exclude any target translation.
 
+This failure is not peculiar to positive-coset saturation. `R32-O22` gives explicit shears
+`A=U(3)`, `B=L(3)` and rays `p=[1:1]`, `q=[10:13]`. Lean proves by ping-pong that their
+representation is free, `Stab(p)=1`, and `q` is outside the rational orbit. The checked
+five-factor bridge and idempotent interpolation send `p` projectively to `q` in every CRT
+component; the elementary modular inverse and CRT existence are audited. Thus one generic free
+orbit no-instance survives every ordinary modulus.
+
 The affine critical shell has a complementary checked obstruction. `PeriodicShell` composes an
 arbitrary nonempty list of rational `5`-unit affine scales, constructs its explicit rational
 fixed point, proves that point is a `5`-adic unit, and propagates unit membership backward to
@@ -1507,6 +1514,7 @@ fixed-rank decision problem.
 | `ReturnJordan.lean` | parity-Jordan rail rigidity and modular immortality certificate |
 | `ReturnConvert.lean` | minimal two-scale return pencil and nonresonant multi-return zero |
 | `ProjectiveLine.lean` | total affine-chart presentation of `ℙ¹` and exact unit-word ray action |
+| `CongruenceBlindOrbit.lean` | free rational shear orbit, trivial source stabilizer, explicit five-factor CRT bridge, and congruence-blind target |
 | `PadicValuation.lean` | nonzero rational p-adic shells, unequal-valuation calculus, and the adjacent-unit odd-prime obstruction |
 | `PeriodicShell.lean` | exact affine schedule composition, rational all-unit periodic cycles, and the published nonfree benchmark relation |
 | `MixedPrimeKernel.lean` | raw mixed-prime affine action, contextual composition, an infinite odd-length kernel family from length 29, and three independent length-30 relations |
@@ -1702,6 +1710,7 @@ fixed-rank decision problem.
 | Every malformed Collatz predecessor word remains nonintegral by negative 3-adic valuation | `ProjectiveCollatz.predecessorState_reaches_or_negative` |
 | Every nonzero shortcut-Collatz target reduces exactly to normalized GPI₂ | `ProjectiveCollatz.normalizedScalars`, `ProjectiveCollatz.exists_normalizedIncidence_zero_iff` |
 | In a finite group, positive monoid closure of a group-generating set is the whole group | `FinitePositiveImage.Submonoid.inv_mem_of_finite`, `FinitePositiveImage.mclosure_eq_top_of_group_closure_eq_top` |
+| A free rational shear orbit with trivial source stabilizer misses `[10:13]`, while one idempotent five-factor bridge reaches it projectively in every CRT component | `CongruenceBlindOrbit.shearRepresentation_injective`, `CongruenceBlindOrbit.sourcePoint_stabilizer_trivial`, `CongruenceBlindOrbit.targetPoint_not_reachable`, `CongruenceBlindOrbit.bridgeMatrix_idempotent_projective_target`, `CongruenceBlindOrbit.shearRepresentation_bridgeWord` |
 | The raw mixed-prime affine action has a published relation at length 27, an infinite distinct equal-map family at every odd length from 29, and three independent relations at length 30 | `MixedPrimeKernel.cassaigne_ne`, `MixedPrimeKernel.wordAction_cassaigne`, `MixedPrimeKernel.kernelOddFamily_length`, `MixedPrimeKernel.kernelOddFamily_ne`, `MixedPrimeKernel.wordAction_kernelOddFamily`, `MixedPrimeKernel.kernel30_ne`, `MixedPrimeKernel.wordAction_kernel30a`, `MixedPrimeKernel.wordAction_kernel30b`, `MixedPrimeKernel.wordAction_kernel30c` |
 | Every nonempty critical-shell wait schedule has a rational periodic `5`-unit at every cyclic phase | `PeriodicShell.shellPeriodicCycle` |
 | Shell phases are all units exactly when the final output is a unit | `PeriodicShell.shellPrefixesUnit_iff` |

@@ -834,9 +834,7 @@
 'MatrixMortality.DecimalSetterArithmetic.singleBErasure_trace_hasDecimalShell' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-'MatrixMortality.DecimalSetterCarry.resetZero_successivePole_identity' depends on axioms: [propext,
- Classical.choice,
- Quot.sound]
+'MatrixMortality.DecimalSetterCarry.resetZero_successivePole_identity' depends on axioms: [propext, Quot.sound]
 'MatrixMortality.DecimalSetterCarry.resetOne_successivePole_identity' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
@@ -1062,6 +1060,33 @@
  Classical.choice,
  Quot.sound]
 'MatrixMortality.FinitePositiveImage.mclosure_eq_top_of_group_closure_eq_top' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CongruenceBlindOrbit.bridgeMatrix_one_mulVec_source' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CongruenceBlindOrbit.bridgeMatrix_zero_mulVec_source' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CongruenceBlindOrbit.bridgeMatrix_idempotent_mulVec_source' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CongruenceBlindOrbit.bridgeMatrix_idempotent_projective_target' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CongruenceBlindOrbit.shearRepresentation_bridgeWord' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CongruenceBlindOrbit.source_target_outside_chambers' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CongruenceBlindOrbit.targetPoint_not_reachable' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CongruenceBlindOrbit.sourcePoint_stabilizer_trivial' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CongruenceBlindOrbit.shearRepresentation_injective' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
 'MatrixMortality.MixedPrimeKernel.wordAction_context' depends on axioms: [propext, Classical.choice, Quot.sound]

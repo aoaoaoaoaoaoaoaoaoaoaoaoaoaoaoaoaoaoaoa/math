@@ -1458,6 +1458,12 @@ positive monoid `P={A,B}*` is already the whole generated group, so the fixed ra
 separate a translation from `R`; a viable finite abstraction must retain positive spelling.
 This is [`R32-O21`](SALVAGE.md#r32-o21-finite-image-positivity-collapse).
 
+Even a free orbit with trivial stabilizer defeats congruence separation. For `A=U(3)`,
+`B=L(3)`, `p=[1:1]`, and `q=[10:13]`, ping-pong proves `q∉⟨A,B⟩p` over the rationals, while
+an explicit five-factor word sends `p` projectively to `q` modulo every positive integer. This
+is [`R32-O22`](SALVAGE.md#r32-o22-congruence-blind-free-orbit). The decision route must use
+more than the full tower of ordinary integral residues.
+
 The rank-`(3,2)` profile is the genuinely new artery. If `B=UV`, every binary word containing
 `B` is governed exactly by
 

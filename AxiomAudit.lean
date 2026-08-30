@@ -551,6 +551,15 @@ open MatrixMortality
 #print axioms ProjectiveCollatz.exists_normalizedIncidence_zero_iff
 #print axioms FinitePositiveImage.Submonoid.inv_mem_of_finite
 #print axioms FinitePositiveImage.mclosure_eq_top_of_group_closure_eq_top
+#print axioms CongruenceBlindOrbit.bridgeMatrix_one_mulVec_source
+#print axioms CongruenceBlindOrbit.bridgeMatrix_zero_mulVec_source
+#print axioms CongruenceBlindOrbit.bridgeMatrix_idempotent_mulVec_source
+#print axioms CongruenceBlindOrbit.bridgeMatrix_idempotent_projective_target
+#print axioms CongruenceBlindOrbit.shearRepresentation_bridgeWord
+#print axioms CongruenceBlindOrbit.source_target_outside_chambers
+#print axioms CongruenceBlindOrbit.targetPoint_not_reachable
+#print axioms CongruenceBlindOrbit.sourcePoint_stabilizer_trivial
+#print axioms CongruenceBlindOrbit.shearRepresentation_injective
 #print axioms MixedPrimeKernel.wordAction_context
 #print axioms MixedPrimeKernel.pumpWord_length
 #print axioms MixedPrimeKernel.wordAction_pumpWord

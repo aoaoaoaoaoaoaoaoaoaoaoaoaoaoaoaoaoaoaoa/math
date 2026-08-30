@@ -159,6 +159,7 @@ file owns the mathematical stock.
 | [`R32-O19`](#r32-o19-projective-queue-centralizer-obstruction) | obstruction | an injective homomorphic projective word store with finite controller cannot recurrently delete and append queue data | audited | graduated |
 | [`R32-O20`](#r32-o20-transverse-reverse-reservoir) | obstruction | a lawful fixed projective cycle accumulates unbounded reverse 13-adic mass on its transverse eigenline | formalized | graduated |
 | [`R32-O21`](#r32-o21-finite-image-positivity-collapse) | obstruction | every finite ambient image identifies the positive Collatz monoid with the whole generated group | formalized core; audited application | graduated |
+| [`R32-O22`](#r32-o22-congruence-blind-free-orbit) | obstruction | one free trivial-stabilizer rational orbit misses a target that lies in its projective orbit modulo every integer | formalized core; audited CRT assembly | graduated |
 | [`R32-D03`](#r32-d03-bounded-denominator-periodicity) | decidable stratum | every infinite legal rational guard orbit with bounded reduced denominators is eventually periodic | formalized | graduated |
 | [`M4-C01`](#m4-c01-two-state-pushout-compiler) | compiler | binary deterministic two-state scalar control compiles to three `4 × 4` matrices | formalized | graduated |
 | [`M4-O01`](#m4-o01-exact-toggle-fusion-leaves-an-immortal-core) | obstruction | exact local toggle fusion preserves a nonzero common anchor | formalized | graduated |
@@ -6061,6 +6062,61 @@ application in
 
 **Use:** retire ambient congruence saturation on the fixed Collatz rational subset. Any finite
 decision abstraction must preserve positive-word syntax rather than factor only through `Γ₆`.
+
+### R32-O22: Congruence-blind free orbit
+
+**Kind:** obstruction
+**Evidence:** formalized core; audited CRT assembly
+**Disposition:** graduated
+
+Let
+
+```text
+A=[[1,3],[0,1]],       B=[[1,0],[3,1]],
+p=[1:1],               q=[10:13].
+```
+
+Ping-pong on the disjoint chambers `|t|>1` and `|t|<2/3` proves
+
+```text
+⟨A,B⟩≅F₂,       Stab(p)=1,       q∉⟨A,B⟩p.
+```
+
+Nevertheless, for every `N≥1` there is an explicit word `w_N` and a unit `u_N` modulo `N` with
+
+```text
+w_N p=u_Nq (mod N).
+```
+
+Writing `N=3^k m`, choose a CRT selector `x` equal to one modulo `m` and zero modulo `3^k`.
+Choose `n` so that `13(1+3n)=10 modulo 3^k`. The five-factor bridge
+
+```text
+H(x,n)=L(x)U(3x)L(2x)U(−3xn)U(3n)
+```
+
+sends `p` exactly to `q` on the first component and to `[1+3n:1]=q` projectively on the second.
+Because `x` is a multiple of three, this is a word in `A` and `B`.
+
+**Scope:** the witnessing word depends on `N`. This places one target in the congruence closure
+of one orbit; it does not make the whole orbit `p`-adically dense and does not decide generic
+projective incidence. Lean checks the rational ping-pong no-instance, trivial stabilizer, free
+representation, literal five-factor spelling, idempotent CRT interpolation, and projective
+glue. The elementary existence of the modular inverses and CRT selector remains an audited
+assembly rather than one quantified `ZMod N` declaration.
+
+**Use:** reject eventual separation of every `GPI₂` no-instance by reductions modulo integers,
+even under freeness and trivial source stabilizer. A surviving decision invariant must retain
+Archimedean, height, syntax, or unbounded carry information.
+
+**Formalization:**
+[`MatrixMortality/CongruenceBlindOrbit.lean`](MatrixMortality/CongruenceBlindOrbit.lean), through
+`bridgeMatrix_idempotent_projective_target`, `shearRepresentation_bridgeWord`,
+`targetPoint_not_reachable`, `sourcePoint_stabilizer_trivial`, and
+`shearRepresentation_injective`.
+
+**Artifact:**
+[`audits/m32-congruence-blind-free-orbit-2026-08-30.md`](audits/m32-congruence-blind-free-orbit-2026-08-30.md).
 
 ### R32-D03: Bounded-denominator periodicity
 
