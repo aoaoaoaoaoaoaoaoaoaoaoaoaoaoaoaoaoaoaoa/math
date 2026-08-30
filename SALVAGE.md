@@ -183,6 +183,7 @@ file owns the mathematical stock.
 | [`M4-S06`](#m4-s06-arbitrary-defect-bridge-grammar) | structure theorem | arbitrary defect skeletons and bridge walls reduce to one consecutive projective incidence | formalized | active |
 | [`M4-S07`](#m4-s07-one-sided-wall-orbit-normal-form) | structure theorem | every consecutive wall incidence is one explicit exterior point-to-ray reachability problem | audited | active |
 | [`M4-S08`](#m4-s08-safe-wall-transport-chamber) | structure theorem | incidence with a safe right wall forces the transported kernel into one strict phase-selected `3`-adic chamber | formalized | active |
+| [`M4-S09`](#m4-s09-minimal-all-b-bad-run-exclusion) | obstruction | neither orientation of the shortest bad defect run can close when all three atoms are `b` | formalized | active |
 | [`M4-C03`](#m4-c03-zero-framed-binary-two-lag-compiler) | compiler | the principal scanner is literally binary context-2 Lag and compiles to `M₄(3)` | formalized | graduated |
 | [`M4-D01`](#m4-d01-zero-framed-binary-two-lag-decision) | decidable stratum | the entire zero-framed binary context-2 Lag kernel has an exact syntactic classification | formalized | graduated |
 | [`M4-D02`](#m4-d02-zero-framed-reset-scanner-decision) | decidable stratum | zero-run reduction contracts the reset scanner to a regular two-token quotient | audited | graduated |
@@ -7319,6 +7320,54 @@ hit.
 **Artifact:**
 [`MatrixMortality/ParabolicIncidence.lean`](MatrixMortality/ParabolicIncidence.lean) and
 [`audits/m43-safe-wall-transport-2026-08-30.md`](audits/m43-safe-wall-transport-2026-08-30.md).
+
+### M4-S09: Minimal all-b bad-run exclusion
+
+**Kind:** obstruction
+
+**Evidence:** formalized
+
+**Disposition:** active
+
+The shortest bad skeleton left by `M4-S06` is one residue-two atom between opposite safe phases.
+For all-`b` atoms its two orientations are
+
+```text
+b(3z) b(3x+2) b(3y+1),    b(3z+1) b(3x+2) b(3y).
+```
+
+Lean computes their bridge determinants exactly. The first is
+
+```text
+(81/2) ρ y P₀(ρ,x,z),
+```
+
+where `P₀` is strictly positive for `ρ≥1` and nonnegative waits. The second is
+
+```text
+−243 ρ z P₁(ρ,x,y),
+```
+
+where `P₁` is strictly positive for `ρ≥9`. Regularity forces `y>0` in the first orientation and
+`z>0` in the second, because the excluded zero wait would be the exceptional singular atom.
+Thus neither orientation can be a wall at the universal-source scale `ρ=3^β`, `β≥2`, in
+particular at `β=3`.
+
+**Scope:** exactly three atoms, one residue-two atom, both safe phases, and letter `b` at both
+endpoints and at the defect. This excludes a physical lift of the smallest bad residue skeleton;
+it does not yet allow a `c` defect, a `c` endpoint, a longer run `1+4k`, or additional safe atoms
+inside either endpoint wall.
+
+**Use:** the smallest bad skeleton is no longer merely a modulo-three survivor. Any minimal
+one-defect wall must use the body-dependent `c` atom or a nontrivial safe context. The positive
+factorization also supplies the characteristic-zero sign template for the longer-run attack.
+
+**Next:** replace the middle defect by `c`, then allow one `c` endpoint, then factor the
+residue-two four-cycle to treat every run length `1+4k` without enumeration.
+
+**Artifact:**
+[`MatrixMortality/ParabolicDefect.lean`](MatrixMortality/ParabolicDefect.lean) and
+[`audits/m43-minimal-all-b-bad-run-2026-08-30.md`](audits/m43-minimal-all-b-bad-run-2026-08-30.md).
 
 ### M4-C03: Zero-framed binary two-Lag compiler
 

@@ -476,9 +476,16 @@ safe flag. If the right wall begins in residue zero, its transported kernel must
 valuation is therefore an exact avoidance certificate. This leaves the bad defect skeletons,
 not arbitrary safe right-wall reachability, as the next transport classification.
 
+The first bad skeleton has now been cut in characteristic zero. The exact factorization
+[`M4-S09`](SALVAGE.md#m4-s09-minimal-all-b-bad-run-exclusion) proves that neither three-atom
+orientation `0|2|1` or `1|2|0` can close when all atoms are `b`; after removing the one forbidden
+exceptional wait, its determinant has a fixed nonzero sign. The next atom-level target is the
+same skeleton with a `c` defect, followed by one `c` endpoint. Only then should the run be lifted
+from length one to `1+4k` by a uniform four-cycle factor.
+
 Two original-family nodes survive, and they must not be conflated.
 
-1. **Exterior collision avoidance.** Use `M4-S06`--`M4-S08` to classify the transported kernel
+1. **Exterior collision avoidance.** Use `M4-S06`--`M4-S09` to classify the transported kernel
    across the two bad defect-run classes. A safe right endpoint can close only after the
    transport enters its leftmost-phase chamber. Uniform avoidance proves this family immortal;
    one hit gives an exact physical zero word. Do not rebuild a grammar for the right walls.

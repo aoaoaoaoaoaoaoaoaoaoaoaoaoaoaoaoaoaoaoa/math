@@ -30,6 +30,46 @@ def residueTwoWallGenerator (β : Nat) (body : List TagLetter) :
   | (letter, j, false) => atom β body letter (3 * j)
   | (letter, j, true) => atom β body letter (3 * j + 1)
 
+/-- Exact residue-zero `b` atom. -/
+theorem bAtom_three_mul_matrix (ρ : ℚ) (j : Nat) :
+    bAtom ρ (3 * j) =
+      !![1, (15 * ρ + 1) / 2, 48 * j + 2;
+         0, 9 * ρ, 0;
+         0, 0, 24 * j + 3] := by
+  rw [bAtom, normalRoot_pow_three_mul]
+  ext i k
+  fin_cases i <;> fin_cases k <;>
+    norm_num [bFlank, flank, drift, injection, Matrix.mul_apply,
+      Fin.sum_univ_succ] <;>
+    ring
+
+/-- Exact residue-one `b` atom. -/
+theorem bAtom_three_mul_add_one_matrix (ρ : ℚ) (j : Nat) :
+    bAtom ρ (3 * j + 1) =
+      !![36 * ρ - 9 / 4, 27 / 4 - 36 * ρ, 48 * j + 18;
+         9 * ρ, -9 * ρ, 0;
+         57 * ρ / 4 - 11 / 8, 33 / 8 - 57 * ρ / 4, 24 * j + 11] := by
+  rw [bAtom, pow_add, normalRoot_pow_three_mul]
+  simp only [pow_one]
+  ext i k
+  fin_cases i <;> fin_cases k <;>
+    norm_num [bFlank, flank, drift, normalRoot, injection, Matrix.mul_apply,
+      Fin.sum_univ_succ] <;>
+    ring
+
+/-- Exact residue-two `b` atom. -/
+theorem bAtom_three_mul_add_two_matrix (ρ : ℚ) (j : Nat) :
+    bAtom ρ (3 * j + 2) =
+      !![4 - 15 * ρ / 2, 15 / 4 - 57 * ρ / 2, 48 * j + 34;
+         -9 * ρ, 0, 0;
+         11 / 4, 11 / 8 - 57 * ρ / 4, 24 * j + 19] := by
+  rw [bAtom, pow_add, normalRoot_pow_three_mul]
+  ext i k
+  fin_cases i <;> fin_cases k <;>
+    norm_num [bFlank, flank, drift, normalRoot, injection, pow_succ,
+      Matrix.mul_apply, Fin.sum_univ_succ] <;>
+    ring
+
 /-- Sixty-four times each residue-zero or residue-one atom, represented integrally. -/
 def safeNumerator (β : Nat) (body : List TagLetter) :
     TagLetter × Nat × Bool → Matrix (Fin 3) (Fin 3) ℤ

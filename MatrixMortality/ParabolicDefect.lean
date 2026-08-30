@@ -414,6 +414,166 @@ theorem defectSkeletonProduct_ne_zero_of_not_bad
     simp
   exact good ((residueSkeletonChain_eq_zero_iff _ _).mp residue_zero)
 
+/-! ## Exact lift of the smallest bad run -/
+
+/-- Exact bridge determinant for the residue pattern `0 | 2 | 1` when all three atoms are
+`b`.  The final factor is strictly positive for every `ρ ≥ 1` and nonnegative waits. -/
+theorem bridge_bZero_bTwo_bOne_det
+    (ρ : ℚ) (x y z : Nat) :
+    (bridge ρ
+      (bAtom ρ (3 * z) * bAtom ρ (3 * x + 2) * bAtom ρ (3 * y + 1))).det =
+      81 * ρ * y / 2 *
+        (7978176 * ρ ^ 4 * z + 747954 * ρ ^ 4 +
+          5598720 * ρ ^ 3 * x * z + 524880 * ρ ^ 3 * x +
+          1889568 * ρ ^ 3 * z + 98415 * ρ ^ 3 -
+          2695680 * ρ ^ 2 * x * z - 291600 * ρ ^ 2 * x -
+          2480112 * ρ ^ 2 * z - 270324 * ρ ^ 2 +
+          291456 * ρ * x * z + 36432 * ρ * x + 356664 * ρ * z +
+          44583 * ρ + 40320 * x * z + 5040 * x + 19600 * z + 2450) := by
+  rw [bAtom_three_mul_matrix, bAtom_three_mul_add_two_matrix,
+    bAtom_three_mul_add_one_matrix, Matrix.det_fin_two]
+  norm_num [bridge, coreInput, coreOutput, Matrix.mul_apply, Fin.sum_univ_succ]
+  ring
+
+/-- Exact bridge determinant for the residue pattern `1 | 2 | 0` when all three atoms are
+`b`.  At `ρ ≥ 9`, the final factor is strictly positive for nonnegative waits. -/
+theorem bridge_bOne_bTwo_bZero_det
+    (ρ : ℚ) (x y z : Nat) :
+    (bridge ρ
+      (bAtom ρ (3 * z + 1) * bAtom ρ (3 * x + 2) * bAtom ρ (3 * y))).det =
+      -243 * ρ * z *
+        (541728 * ρ ^ 4 * y + 41040 * ρ ^ 4 +
+          380160 * ρ ^ 3 * x * y + 47520 * ρ ^ 3 * x -
+          1602216 * ρ ^ 3 * y - 142128 * ρ ^ 3 -
+          391104 * ρ ^ 2 * x * y - 48888 * ρ ^ 2 * x +
+          160164 * ρ ^ 2 * y + 9003 * ρ ^ 2 -
+          195264 * ρ * x * y - 24408 * ρ * x -
+          150668 * ρ * y - 18333 * ρ +
+          8064 * x * y + 1008 * x + 3920 * y + 490) := by
+  rw [bAtom_three_mul_add_one_matrix, bAtom_three_mul_add_two_matrix,
+    bAtom_three_mul_matrix, Matrix.det_fin_two]
+  norm_num [bridge, coreInput, coreOutput, Matrix.mul_apply, Fin.sum_univ_succ]
+  ring
+
+/-- No regular all-`b` minimal bad run with residue pattern `0 | 2 | 1` closes the bridge. -/
+theorem bridge_bZero_bTwo_bOne_det_ne_zero
+    (β x y z : Nat) (y_positive : 0 < y) :
+    (bridge ((3 : ℚ) ^ β)
+      (bAtom ((3 : ℚ) ^ β) (3 * z) *
+        bAtom ((3 : ℚ) ^ β) (3 * x + 2) *
+        bAtom ((3 : ℚ) ^ β) (3 * y + 1))).det ≠ 0 := by
+  rw [bridge_bZero_bTwo_bOne_det]
+  let ρ : ℚ := 3 ^ β
+  have ρ_positive : 0 < ρ := by positivity
+  have ρ_ge : 1 ≤ ρ := by
+    exact one_le_pow₀ (by norm_num : (1 : ℚ) ≤ 3)
+  have ρ_two_ge : ρ ≤ ρ ^ 2 := by
+    nlinarith [mul_nonneg (sub_nonneg.mpr ρ_ge) ρ_positive.le]
+  have ρ_three_ge : ρ ^ 2 ≤ ρ ^ 3 := by
+    nlinarith [mul_nonneg (sub_nonneg.mpr ρ_ge) (sq_nonneg ρ)]
+  have ρ_four_ge : ρ ^ 3 ≤ ρ ^ 4 := by
+    have cube_nonnegative : 0 ≤ ρ ^ 3 := by positivity
+    nlinarith [mul_nonneg (sub_nonneg.mpr ρ_ge) cube_nonnegative]
+  let xzCoefficient : ℚ :=
+    5598720 * ρ ^ 3 - 2695680 * ρ ^ 2 + 291456 * ρ + 40320
+  let xCoefficient : ℚ :=
+    524880 * ρ ^ 3 - 291600 * ρ ^ 2 + 36432 * ρ + 5040
+  let zCoefficient : ℚ :=
+    7978176 * ρ ^ 4 + 1889568 * ρ ^ 3 - 2480112 * ρ ^ 2 + 356664 * ρ + 19600
+  let constant : ℚ :=
+    747954 * ρ ^ 4 + 98415 * ρ ^ 3 - 270324 * ρ ^ 2 + 44583 * ρ + 2450
+  have xz_positive : 0 < xzCoefficient := by
+    dsimp [xzCoefficient]
+    nlinarith
+  have x_positive : 0 < xCoefficient := by
+    dsimp [xCoefficient]
+    nlinarith
+  have z_positive : 0 < zCoefficient := by
+    dsimp [zCoefficient]
+    nlinarith
+  have constant_positive : 0 < constant := by
+    dsimp [constant]
+    nlinarith
+  have decomposition :
+      7978176 * ρ ^ 4 * z + 747954 * ρ ^ 4 +
+          5598720 * ρ ^ 3 * x * z + 524880 * ρ ^ 3 * x +
+          1889568 * ρ ^ 3 * z + 98415 * ρ ^ 3 -
+          2695680 * ρ ^ 2 * x * z - 291600 * ρ ^ 2 * x -
+          2480112 * ρ ^ 2 * z - 270324 * ρ ^ 2 +
+          291456 * ρ * x * z + 36432 * ρ * x + 356664 * ρ * z +
+          44583 * ρ + 40320 * x * z + 5040 * x + 19600 * z + 2450 =
+        xzCoefficient * x * z + xCoefficient * x + zCoefficient * z + constant := by
+    dsimp [xzCoefficient, xCoefficient, zCoefficient, constant]
+    ring
+  change 81 * ρ * y / 2 * _ ≠ 0
+  rw [decomposition]
+  have polynomial_positive :
+      0 < xzCoefficient * x * z + xCoefficient * x + zCoefficient * z + constant := by
+    positivity
+  positivity
+
+/-- No regular all-`b` minimal bad run with residue pattern `1 | 2 | 0` closes the bridge at
+the universal-source scale `β ≥ 2`. -/
+theorem bridge_bOne_bTwo_bZero_det_ne_zero
+    (β x y z : Nat) (β_at_least_two : 2 ≤ β) (z_positive : 0 < z) :
+    (bridge ((3 : ℚ) ^ β)
+      (bAtom ((3 : ℚ) ^ β) (3 * z + 1) *
+        bAtom ((3 : ℚ) ^ β) (3 * x + 2) *
+        bAtom ((3 : ℚ) ^ β) (3 * y))).det ≠ 0 := by
+  rw [bridge_bOne_bTwo_bZero_det]
+  let ρ : ℚ := 3 ^ β
+  have ρ_positive : 0 < ρ := by positivity
+  have ρ_ge : 9 ≤ ρ := by
+    dsimp [ρ]
+    rw [show β = 2 + (β - 2) by omega, pow_add]
+    norm_num
+    exact one_le_pow₀ (by norm_num : (1 : ℚ) ≤ 3)
+  have ρ_two_ge : 9 * ρ ≤ ρ ^ 2 := by
+    nlinarith [mul_nonneg (sub_nonneg.mpr ρ_ge) ρ_positive.le]
+  have ρ_three_ge : 9 * ρ ^ 2 ≤ ρ ^ 3 := by
+    nlinarith [mul_nonneg (sub_nonneg.mpr ρ_ge) (sq_nonneg ρ)]
+  have ρ_four_ge : 9 * ρ ^ 3 ≤ ρ ^ 4 := by
+    have cube_nonnegative : 0 ≤ ρ ^ 3 := by positivity
+    nlinarith [mul_nonneg (sub_nonneg.mpr ρ_ge) cube_nonnegative]
+  let xyCoefficient : ℚ :=
+    380160 * ρ ^ 3 - 391104 * ρ ^ 2 - 195264 * ρ + 8064
+  let xCoefficient : ℚ :=
+    47520 * ρ ^ 3 - 48888 * ρ ^ 2 - 24408 * ρ + 1008
+  let yCoefficient : ℚ :=
+    541728 * ρ ^ 4 - 1602216 * ρ ^ 3 + 160164 * ρ ^ 2 - 150668 * ρ + 3920
+  let constant : ℚ :=
+    41040 * ρ ^ 4 - 142128 * ρ ^ 3 + 9003 * ρ ^ 2 - 18333 * ρ + 490
+  have xy_positive : 0 < xyCoefficient := by
+    dsimp [xyCoefficient]
+    nlinarith
+  have x_positive : 0 < xCoefficient := by
+    dsimp [xCoefficient]
+    nlinarith
+  have y_positive : 0 < yCoefficient := by
+    dsimp [yCoefficient]
+    nlinarith
+  have constant_positive : 0 < constant := by
+    dsimp [constant]
+    nlinarith
+  have decomposition :
+      541728 * ρ ^ 4 * y + 41040 * ρ ^ 4 +
+          380160 * ρ ^ 3 * x * y + 47520 * ρ ^ 3 * x -
+          1602216 * ρ ^ 3 * y - 142128 * ρ ^ 3 -
+          391104 * ρ ^ 2 * x * y - 48888 * ρ ^ 2 * x +
+          160164 * ρ ^ 2 * y + 9003 * ρ ^ 2 -
+          195264 * ρ * x * y - 24408 * ρ * x -
+          150668 * ρ * y - 18333 * ρ +
+          8064 * x * y + 1008 * x + 3920 * y + 490 =
+        xyCoefficient * x * y + xCoefficient * x + yCoefficient * y + constant := by
+    dsimp [xyCoefficient, xCoefficient, yCoefficient, constant]
+    ring
+  change -243 * ρ * z * _ ≠ 0
+  rw [decomposition]
+  have polynomial_positive :
+      0 < xyCoefficient * x * y + xCoefficient * x + yCoefficient * y + constant := by
+    positivity
+  positivity
+
 /-! ## Exact reset of a pure defect block -/
 
 private def clearedExteriorChange : Matrix (Fin 3) (Fin 3) ℤ :=

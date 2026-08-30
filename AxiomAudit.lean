@@ -340,6 +340,10 @@ open MatrixMortality
 #print axioms ParabolicBlade.exteriorState_safe_word_wall_orientation
 #print axioms ParabolicBlade.exteriorTransition_b_one_first_eq_zero_iff
 #print axioms ParabolicBlade.defectSkeletonProduct_ne_zero_of_not_bad
+#print axioms ParabolicBlade.bridge_bZero_bTwo_bOne_det
+#print axioms ParabolicBlade.bridge_bOne_bTwo_bZero_det
+#print axioms ParabolicBlade.bridge_bZero_bTwo_bOne_det_ne_zero
+#print axioms ParabolicBlade.bridge_bOne_bTwo_bZero_det_ne_zero
 #print axioms ParabolicBlade.pureDefect_bridge_det_ne_zero
 #print axioms ParabolicBlade.bridgeFractureChain_eq_zero_iff
 #print axioms ParabolicBlade.bridgeCokernel_regular_word_ne_zero

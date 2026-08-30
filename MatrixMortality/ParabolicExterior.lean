@@ -77,18 +77,6 @@ theorem bridge_det_eq_exteriorState_first (ρ : ℚ)
     Matrix.vecHead, Matrix.vecTail, Matrix.mulVec, dotProduct, Fin.sum_univ_succ]
   ring
 
-private theorem bAtom_three_mul_matrix (ρ : ℚ) (j : Nat) :
-    bAtom ρ (3 * j) =
-      !![1, (15 * ρ + 1) / 2, 48 * j + 2;
-         0, 9 * ρ, 0;
-         0, 0, 24 * j + 3] := by
-  rw [bAtom, normalRoot_pow_three_mul]
-  ext i k
-  fin_cases i <;> fin_cases k <;>
-    norm_num [bFlank, flank, drift, injection, Matrix.cons_val_two, Matrix.vecHead, Matrix.vecTail,
-      Matrix.mul_apply, Fin.sum_univ_succ] <;>
-    ring
-
 private theorem cAtom_three_mul_matrix (ρ L M : ℚ) (j : Nat) :
     cAtom ρ L M (3 * j) =
       !![1, 2, 2 * j * (L - 1) + 2;
