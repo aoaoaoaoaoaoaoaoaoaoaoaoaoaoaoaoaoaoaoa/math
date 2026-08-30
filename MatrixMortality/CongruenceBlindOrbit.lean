@@ -14,6 +14,7 @@ namespace MatrixMortality.CongruenceBlindOrbit
 
 open scoped Matrix Pointwise
 
+/-- Two-by-two square matrices. -/
 abbrev Square₂ (R : Type*) := Matrix (Fin 2) (Fin 2) R
 
 /-! ## Shear algebra -/
@@ -27,7 +28,7 @@ def lowerShear {R : Type*} [Zero R] [One R] (shift : R) : Square₂ R :=
   !![1, 0; shift, 1]
 
 /-- The homogeneous source ray `[1:1]`. -/
-def sourceRay (R : Type*) [Zero R] [One R] : Fin 2 → R := ![1, 1]
+def sourceRay (R : Type*) [One R] : Fin 2 → R := ![1, 1]
 
 /-- The homogeneous target ray `[10:13]`. -/
 def targetRay (R : Type*) [OfNat R 10] [OfNat R 13] : Fin 2 → R := ![10, 13]
@@ -121,6 +122,7 @@ theorem bridgeMatrix_idempotent_projective_target
 
 /-! ## Rational ping-pong -/
 
+/-- The rational projective line. -/
 abbrev RationalPoint := ProjectiveLine.Point ℚ
 
 /-- Projective points outside the closed unit interval, together with infinity. -/
@@ -203,6 +205,7 @@ def factor : (index : Bool) → Multiplicative ℤ →*
   | false => upperFactor
   | true => lowerFactor
 
+/-- The canonical rational projective action of invertible matrices. -/
 noncomputable local instance :
     MulAction (Matrix.GeneralLinearGroup (Fin 2) ℚ) RationalPoint where
   smul matrix point := ProjectiveLine.act matrix point
