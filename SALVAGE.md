@@ -79,10 +79,12 @@ file owns the mathematical stock.
 | [`MM-O10`](#mm-o10-additive-toggle-fusion-cycle) | obstruction | the normalized toggle-minus-separator ansatz has rank three at every power | audited | stock |
 | [`MM-O11`](#mm-o11-full-algebra-paired-binary-family) | obstruction | the paired-binary mortality family spans the full six-state algebra | formalized | graduated |
 | [`MM-O12`](#mm-o12-boundary-calibrated-setter-shear-is-gauge) | obstruction | boundary calibration erases the setter's side-basis shear from its separator and transfer | formalized | graduated |
+| [`MM-O13`](#mm-o13-finite-positive-ray-setter-obstruction) | obstruction | arbitrary low/high setter blocks defeat every finite family of positive invariant rays | audited | graduated |
 | [`MM-M01`](#mm-m01-off-diagonal-companion-interface) | partial mechanism | off-diagonal rank-two bridge has a complete fracture grammar | audited | stock |
 | [`MM-M02`](#mm-m02-bordered-toggle) | partial mechanism | one lifted toggle has a stable rank-two third power | audited | parked |
 | [`MM-M03`](#mm-m03-five-state-setter-punctuation) | partial mechanism | a mixed delimiter word is an exact internal rank-one separator | audited | closed |
 | [`MM-M04`](#mm-m04-swapped-digit-setter) | partial mechanism | reversing the nonzero ternary digits preserves the setter and makes every transfer orientation preserving | audited | active |
+| [`MM-M05`](#mm-m05-decimal-swapped-setter) | partial mechanism | radix ten with digits `0 ↦ 7`, `1 ↦ 5` preserves the setter and separates every real length shell | audited | active |
 | [`MM-S01`](#mm-s01-square-run-projective-normal-form) | structure theorem | malformed square runs reduce to rational projective pole avoidance | audited | active |
 | [`MM-S02`](#mm-s02-reset-zero-projective-peeling) | structure theorem | the ordinary reset cannot reach a false pole after one transfer | audited | active |
 | [`MM-S03`](#mm-s03-centered-setter-carry) | structure theorem | setter orbits obey an integer valuation-and-suffix carry recurrence | audited | active |
@@ -93,6 +95,7 @@ file owns the mathematical stock.
 | [`MM-S08`](#mm-s08-swapped-distinguished-boundary-beta-shell) | obstruction | the swapped distinguished boundary cannot reach either single-erasure pole | audited | active |
 | [`MM-S09`](#mm-s09-canonical-swapped-residue-cannot-hit-a-pole) | obstruction | the unavoidable all-erasure residue cannot meet a valuation-one pole at emitted widths | audited | active |
 | [`MM-S10`](#mm-s10-swapped-target-suffix-sieve) | structure theorem | pole compatibility fixes `β+2` lower digits and excludes the residue `Δ=ρ−1` | audited | active |
+| [`MM-S11`](#mm-s11-decimal-setter-hyperbolicity) | structure theorem | every decimal setter transfer is strictly hyperbolic | audited | active |
 | [`R32-S01`](#r32-s01-split-return-normal-form) | structure theorem | rank-two cuts reduce one-unit binary mortality to a `2 × 2` return recurrence | formalized | graduated |
 | [`R32-S02`](#r32-s02-two-plane-edge-square) | structure theorem | two rank-two generators are a two-vertex square of `2 × 2` edges | formalized | graduated |
 | [`R32-O01`](#r32-o01-rank-one-profile-collapse) | obstruction | a rank-one generator reduces mortality to order-at-most-three scalar recurrence zeros | audited | stock |
@@ -1601,6 +1604,46 @@ projective transfer obstruction.
 through `sideBasis_det`, `delimiter_cube`, `delimiter_square_distinguishedColumn`, and
 `transfer_tail`.
 
+### MM-O13: Finite positive-ray setter obstruction
+
+**Kind:** obstruction
+**Evidence:** audited
+**Disposition:** graduated
+
+In the decimal setter of [`MM-M05`](#mm-m05-decimal-swapped-setter), write every J-fraction
+step as
+
+```text
+F_z(t)=u_z+v_z−v_z/t,       u_z,v_z>0.
+```
+
+The poles of blocks containing an unbounded number of `c` rules approach `1` from below.
+Because any square-run block may follow any prior block, every source threshold in a finite
+labelled positive-ray invariant `[r_i,∞]` must therefore satisfy `r_i≥1`.
+
+The single `c` erasure has `a_c=u_c+v_c<1` throughout the compiler-emitted range. Hence, for
+every `t≥1`,
+
+```text
+F_Dc(t)=a_c−v_c/t<a_c<1.
+```
+
+It cannot land in any of the required rays. Splitting labels by first role, last role, or the
+low/high length shell does not alter the all-to-all transition law, so no finite family of such
+rays can certify arbitrary-depth avoidance.
+
+**Scope:** positive rays only. Two-sided domains, unbounded length rescaling, and arithmetic
+invariants are not excluded.
+
+**Use:** do not subdivide the decimal length shells into another finite last-block ray system.
+The next certificate must retain sign cycles or exact radix carry.
+
+**Artifact:**
+[`audits/m53-decimal-setter-hyperbolicity-2026-08-30.md`](audits/m53-decimal-setter-hyperbolicity-2026-08-30.md#finite-ray-obstruction).
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
 ### MM-M01: Off-diagonal companion interface
 
 **Kind:** partial mechanism  
@@ -1793,6 +1836,54 @@ coefficient and the finite-slope theorem
 
 **Next:** formalize the parametric digit-order construction and decide the
 finite nonterminal slopes exposed by `MM-S07`.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-M05: Decimal swapped setter
+
+**Kind:** partial mechanism
+**Evidence:** audited
+**Disposition:** active
+
+Evaluate binary words in radix ten with nonzero digits
+
+```text
+0↦7,       1↦5.
+```
+
+The setter basis admits the radix-parametric form
+
+```text
+f=(1,0,r)ᵀ,
+p=(0,−1,0)ᵀ,
+q=(0,0,r(B−1−rd₁))ᵀ.
+```
+
+Its determinant is nonzero for the displayed decimal parameters, and
+`R_cf=D_cf=(1+rd₁)f+q`. The regular decoder, delimiter powers, and mixed separator therefore
+survive exactly. In the coordinate `t=L/(y+L)`, every square-run transfer is
+
+```text
+F_z(t)=u_z+v_z−v_z/t,       u_z,v_z>0.
+```
+
+The decimal length shells make every such transfer strictly hyperbolic by
+[`MM-S11`](#mm-s11-decimal-setter-hyperbolicity).
+
+**Scope:** this preserves the five-state forward reduction but does not prove its arbitrary-word
+converse. Hyperbolicity alone does not prevent a rational orbit from meeting a pole.
+
+**Use:** retain this as the sharpest Archimedean setter variant. Keep the ternary swapped setter
+for its mature suffix and `3`-adic lemmas; use the decimal variant when real length-shell
+separation matters.
+
+**Artifact:**
+[`audits/m53-decimal-setter-hyperbolicity-2026-08-30.md`](audits/m53-decimal-setter-hyperbolicity-2026-08-30.md).
+
+**Next:** combine the two-shell real split with an exact decimal suffix or `2`/`5`-adic carry
+invariant. Finite positive-ray labels are excluded by
+[`MM-O13`](#mm-o13-finite-positive-ray-setter-obstruction).
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
@@ -2477,6 +2568,56 @@ many other candidate values into immediate digit contradictions.
 **Next:** classify the boundary values whose `σ_Δ` is a legal lower suffix;
 the surviving nonterminal values must then be intersected with the reverse
 Neary discrepancy.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S11: Decimal setter hyperbolicity
+
+**Kind:** structure theorem
+**Evidence:** audited
+**Disposition:** active
+
+For the decimal setter [`MM-M05`](#mm-m05-decimal-swapped-setter), put `ρ=10^β`. In the
+negative-J-fraction coordinate, every block has
+
+```text
+F_z(t)=u+v−v/t,       disc(F_z)=(u+v)²−4v.
+```
+
+A `b`-leading block has `u>1` and is automatically strictly hyperbolic. A `c`-leading block
+has
+
+```text
+u≥45ρ/(52ρ−7).
+```
+
+Every lower `5/7` code lies between one half and seven ninths of its radix scale. Hence the
+length defect `δ=|lower|−|upper|` places `v` in one of two disjoint regimes:
+
+```text
+δ≤β−1  ⇒  v≤7ρC/90,
+δ≥β    ⇒  v≥ρC/2,
+
+C=(502ρ−7)/((2ρ−7)(52ρ−7)).
+```
+
+Exact endpoint evaluation gives a positive discriminant in both regimes for `ρ≥100`. Thus
+every nonempty square-run transfer is strictly hyperbolic; there are no parabolic endpoints and
+no balanced elliptic corridor.
+
+**Scope:** individual real hyperbolicity is not uniform projective avoidance. Products may cross
+fixed-point chambers, and rational pole equality remains possible.
+
+**Use:** replace the ternary balanced-corridor problem by a clean low/high decimal length split.
+Do not mistake this for the missing arbitrary-depth theorem; finite positive rays are already
+excluded by [`MM-O13`](#mm-o13-finite-positive-ray-setter-obstruction).
+
+**Artifact:**
+[`audits/m53-decimal-setter-hyperbolicity-2026-08-30.md`](audits/m53-decimal-setter-hyperbolicity-2026-08-30.md#length-shell-theorem).
+
+**Next:** seek a two-sided sign cycle or an exact decimal suffix/carry invariant across the two
+length regimes.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
