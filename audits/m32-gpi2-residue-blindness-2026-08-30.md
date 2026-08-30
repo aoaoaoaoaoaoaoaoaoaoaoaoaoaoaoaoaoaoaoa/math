@@ -284,8 +284,8 @@ DTTTTTTTTTTDDTDDTDDDDDDDDDDDDDDDDTTDDTDTDTDDTTDDTDTT
 TTDDDDDDTTDDTDTDTDDTTDDTDDTTTTTTTTTTDDTDDTDDDDDDDDDD
 ```
 
-Adding the independently discovered and
-Lean-checked length-29 rule still leaves all eight old/new critical overlaps nonjoinable. The
+Adding the independently discovered and Lean-checked length-29 rule still leaves all eight
+old/new critical overlaps nonjoinable. The
 five-rule basis consisting of (9), the length-29 rule, and three Lean-checked length-30 rules has
 no inclusions, has 45 proper critical overlaps, and all 45 are nonjoinable. Since the shortest
 critical overlap has length 52, this basis is locally confluent on words of length at most 51,
@@ -323,10 +323,33 @@ DTTTTTTTTTTDDTDDTDDDDDDDDDTDD
 
 It has contents `(d,t)=(16,13)` and exact numerator `B=87168862542604680`. This is not the
 schedule-weight-29 boundary fusion: that earlier apparent collision is already a context of (9).
-Prefixing (12) by `T` gives a new guarded shell relation at schedule weight 30. Lean checks (12)
-and the three independent length-30 relations in `MixedPrimeKernel`.
+Prefixing (12) by `T` gives a new guarded shell relation at schedule weight 30. It is also the
+base of an infinite raw-kernel family. Put
 
-The seven length-31 relations remain computational frontier rather than theorem claims:
+```text
+P=D T^10 D^2 T D^2 T,
+Q=T^2 D^6 T^2 D^2 T D T D T D^2 T^2 D^2 T.
+```
+
+For every `k≥0`, the distinct words
+
+```text
+P D^9 T (D T)^k D^2
+= Q T (D T)^k D^2 T^2                                      (13)
+```
+
+have common length `29+2k` and induce the same affine map. Lean proves the pump formula
+
+```text
+(D T)^k(z)=(2/5)^k z+(10/9)(1−(2/5)^k)
+```
+
+and substitutes it into both fixed contexts. Equation (12) is `k=0`; the `k=1` member is one of
+the seven length-31 collisions below. Thus the kernel already contains a relation at every odd
+length from 29. Lean also checks the three independent length-30 relations in
+`MixedPrimeKernel`.
+
+The five-rule census found seven length-31 relations:
 
 ```text
 DTTTTTTDTTTTDTDDDTTTDDTDDDDDDDD = TTDDDDDDDTDTDTTDTTDTDDTDTTDTTDT
@@ -338,10 +361,11 @@ DTTTTTTDDTDDDDTDDDTDDTDDDDDDDDT = TTDDDDDDDDDDDDTDTDTTDDTTDTTDTDD
 DTTTTTTDDTDDDDTTTDDDDDDDDDDDTDD = TTDDDDDDDDDDDTDDTDTDDTTDTDDTDTT
 ```
 
-The source establishes only that (9) is shortest. The census proves bounded affine-kernel
-completeness through length 30 for the five checked rules and refutes it at length 31. Even a
-complete affine presentation would not classify distinct maps that agree at one specified
-rational source.
+One listed relation is the formal `k=1` case of (13); the other six remain computational
+frontier rather than theorem claims. The source establishes only that (9) is shortest. The
+census proves bounded affine-kernel completeness through length 30 for the five checked rules
+and refutes that finite basis at length 31. Even a complete affine presentation would not
+classify distinct maps that agree at one specified rational source.
 
 ### Reproduction Certificate
 
@@ -425,7 +449,7 @@ a description already proliferates and does not approach confluence.
 | one-wait transitions on period-one cycles form a universal state graph | rejected | exact transition classification (7) |
 | rational shell addresses are eventually periodic | rejected | strictly increasing-wait construction above |
 | the benchmark schedule action is free | rejected | published relation (9), affine equality and shared guarded cycle checked in Lean |
-| the published relation presents the affine kernel | rejected | independent checked relations at raw lengths 29 and 30; seven further computational relations at length 31 |
+| the published relation presents the affine kernel | rejected | an infinite checked family at every odd length from 29, three independent checked relations at length 30, and six residual computational classes at length 31 |
 | finite ambient quotients can separate `τ_N` from `PK` | rejected | positivity collapses in every finite image |
 | a finite syntax-sensitive or multi-place representation is impossible | open | outside both obstruction theorems |
 | normalized GPI₂ is decidable or undecidable | open | the rational global incidence remains |
@@ -436,5 +460,5 @@ a description already proliferates and does not approach confluence.
 MASTER VERDICT: normalized GPI₂, M₂(3), and the rank-(2,2) profile of M₃(2) remain open
 REMOVED: ambient finite-quotient separation; state-independent unlabeled bounded-residue nonexistence pruning; eventual shell exit or periodicity; universal strict drift; one-wait period-one compiler
 EXACT DECISION THROAT: fixed-source exact prefix and accepting-exit reachability across an infinite ordered schedule tree
-NEW REWRITE FRONTIER: five Lean-checked raw kernel rules are complete through length 30, fail at length 31, and have 45 nonjoinable critical overlaps
+NEW REWRITE FRONTIER: an infinite Lean-checked odd-length family grows from the length-29 rule; the five-rule basis is complete through length 30, leaves six unexplained classes at 31, and has 45 nonjoinable critical overlaps
 ```

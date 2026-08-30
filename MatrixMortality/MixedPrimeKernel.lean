@@ -43,6 +43,70 @@ theorem wordAction_context
   simp only [wordAction_append]
   rw [relation]
 
+/-- Repeated mixed-prime pump appearing in the odd-length kernel family. -/
+def pumpWord : ℕ → List Letter
+  | 0 => []
+  | pump + 1 => [.dilate, .translate] ++ pumpWord pump
+
+@[simp]
+theorem pumpWord_length (pump : ℕ) : (pumpWord pump).length = 2 * pump := by
+  induction pump with
+  | zero => rfl
+  | succ pump induction =>
+      simp [pumpWord, induction]
+      omega
+
+/-- Closed affine action of the repeated `D T` pump. -/
+theorem wordAction_pumpWord (pump : ℕ) (state : ℚ) :
+    wordAction (pumpWord pump) state =
+      (2 / 5 : ℚ) ^ pump * state + 10 / 9 * (1 - (2 / 5 : ℚ) ^ pump) := by
+  induction pump with
+  | zero => simp [pumpWord, wordAction]
+  | succ pump induction =>
+      rw [pumpWord, wordAction_append, induction]
+      simp only [wordAction, action, pow_succ]
+      ring
+
+/-- Smaller side of the infinite odd-length raw kernel family. -/
+def kernelOddFamilyLeft (pump : ℕ) : List Letter :=
+  [.dilate] ++ List.replicate 10 .translate ++ List.replicate 2 .dilate ++
+    [.translate] ++ List.replicate 2 .dilate ++ [.translate] ++
+    List.replicate 9 .dilate ++ [.translate] ++ pumpWord pump ++
+    List.replicate 2 .dilate
+
+/-- Larger side of the infinite odd-length raw kernel family. -/
+def kernelOddFamilyRight (pump : ℕ) : List Letter :=
+  List.replicate 2 .translate ++ List.replicate 6 .dilate ++
+    List.replicate 2 .translate ++ List.replicate 2 .dilate ++
+    [.translate, .dilate, .translate, .dilate, .translate] ++
+    List.replicate 2 .dilate ++ List.replicate 2 .translate ++
+    List.replicate 2 .dilate ++ List.replicate 2 .translate ++ pumpWord pump ++
+    List.replicate 2 .dilate ++ List.replicate 2 .translate
+
+/-- Both sides at pump depth `k` have raw length `29 + 2k`. -/
+theorem kernelOddFamily_length (pump : ℕ) :
+    (kernelOddFamilyLeft pump).length = 29 + 2 * pump ∧
+      (kernelOddFamilyRight pump).length = 29 + 2 * pump := by
+  constructor
+  · simp [kernelOddFamilyLeft]
+    omega
+  · simp [kernelOddFamilyRight]
+    omega
+
+/-- Every member of the odd-length family is a genuine pair of distinct raw words. -/
+theorem kernelOddFamily_ne (pump : ℕ) :
+    kernelOddFamilyLeft pump ≠ kernelOddFamilyRight pump := by
+  simp [kernelOddFamilyLeft, kernelOddFamilyRight]
+
+/-- The infinite odd-length family lies in the mixed-prime affine kernel. -/
+theorem wordAction_kernelOddFamily (pump : ℕ) (state : ℚ) :
+    wordAction (kernelOddFamilyLeft pump) state =
+      wordAction (kernelOddFamilyRight pump) state := by
+  simp only [kernelOddFamilyLeft, kernelOddFamilyRight, wordAction_append]
+  rw [wordAction_pumpWord, wordAction_pumpWord]
+  norm_num [wordAction, action, List.replicate_succ]
+  ring
+
 /-- Left side of the shortest relation reported by Cassaigne and Nicolas. -/
 def cassaigneLeft : List Letter :=
   [.dilate] ++ List.replicate 10 .translate ++ List.replicate 2 .dilate ++
@@ -68,30 +132,22 @@ theorem wordAction_cassaigne (state : ℚ) :
   norm_num [wordAction, action, cassaigneLeft, cassaigneRight, List.replicate_succ]
   ring
 
-/-- Smaller side of the independent length-29 kernel relation. -/
+/-- Smaller side of the length-29 base instance of the odd kernel family. -/
 def kernel29Left : List Letter :=
-  [.dilate] ++ List.replicate 10 .translate ++ List.replicate 2 .dilate ++
-    [.translate] ++ List.replicate 2 .dilate ++ [.translate] ++
-    List.replicate 9 .dilate ++ [.translate] ++ List.replicate 2 .dilate
+  kernelOddFamilyLeft 0
 
-/-- Larger side of the independent length-29 kernel relation. -/
+/-- Larger side of the length-29 base instance of the odd kernel family. -/
 def kernel29Right : List Letter :=
-  List.replicate 2 .translate ++ List.replicate 6 .dilate ++
-    List.replicate 2 .translate ++ List.replicate 2 .dilate ++
-    [.translate, .dilate, .translate, .dilate, .translate] ++
-    List.replicate 2 .dilate ++ List.replicate 2 .translate ++
-    List.replicate 2 .dilate ++ List.replicate 2 .translate ++
-    List.replicate 2 .dilate ++ List.replicate 2 .translate
+  kernelOddFamilyRight 0
 
 /-- The length-29 kernel relation has distinct sides. -/
 theorem kernel29_ne : kernel29Left ≠ kernel29Right := by
   decide
 
-/-- The independent length-29 raw words induce the same affine map. -/
+/-- The length-29 base instance induces one affine map. -/
 theorem wordAction_kernel29 (state : ℚ) :
     wordAction kernel29Left state = wordAction kernel29Right state := by
-  norm_num [wordAction, action, kernel29Left, kernel29Right, List.replicate_succ]
-  ring
+  exact wordAction_kernelOddFamily 0 state
 
 /-- Smaller side of the first independent length-30 kernel relation. -/
 def kernel30aLeft : List Letter :=

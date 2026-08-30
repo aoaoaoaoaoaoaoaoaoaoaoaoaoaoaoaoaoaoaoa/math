@@ -248,7 +248,7 @@ file owns the mathematical stock.
 | [`D2-D07`](#d2-d07-bounded-valuation-orthants) | decidable stratum | bounded cooriented affine families have finite successful state spaces | audited | stock |
 | [`D2-M01`](#d2-m01-benchmark-critical-shell) | partial mechanism | the mixed-prime benchmark reduces generically to one guarded `5`-adic shell | audited | active |
 | [`D2-O01`](#d2-o01-canonical-collatz-reachability-is-not-automatic) | obstruction | full generalized-Collatz reachability is not synchronously recognizable in its canonical base | external theorem | active |
-| [`D2-O02`](#d2-o02-critical-shell-periodic-saturation) | obstruction and rewrite seed | every nonempty finite wait schedule has a rational all-unit cycle; five checked raw relations give a terminating nonconfluent kernel basis complete only through length 30 | formalized core; audited strengthening | active |
+| [`D2-O02`](#d2-o02-critical-shell-periodic-saturation) | obstruction and rewrite seed | every nonempty finite wait schedule has a rational all-unit cycle; the raw kernel contains a checked relation at every odd length from 29, while a finite terminating basis is complete only through length 30 | formalized core; audited strengthening | active |
 
 ## Frankl Conjecture
 
@@ -10041,15 +10041,34 @@ The raw alphabet is the canonical rewrite owner. Lean factors every boundary-shi
 pair as the single raw context `T D^last _ D^first` and checks the `z=5u` conjugacy between raw
 words and shell schedules. With `D<T`, orient every equal-length balanced raw relation from its
 lexicographically larger side to its smaller side. This proves termination, but not confluence:
-the published rule has two nonjoinable self-overlap critical pairs. The checked basis now consists
-of the published length-27 relation, one independent length-29 relation, and three independent
-length-30 relations. It has 45 proper critical overlaps, all nonjoinable, although no critical
-overlap occurs below length 52.
+the published rule has two nonjoinable self-overlap critical pairs. The checked finite basis
+consists of the published length-27 relation, the length-29 base member of an infinite family,
+and three independent length-30 relations. It has 45 proper critical overlaps, all nonjoinable,
+although no critical overlap occurs below length 52.
+
+The length-29 rule proliferates. Put
+
+```text
+P=D T^10 D^2 T D^2 T,
+Q=T^2 D^6 T^2 D^2 T D T D T D^2 T^2 D^2 T.
+```
+
+For every `k≥0`, Lean proves that the two distinct words
+
+```text
+P D^9 T (D T)^k D^2,
+Q T (D T)^k D^2 T^2
+```
+
+have the same affine action and common length `29+2k`. The proof computes the entire pump as
+`(DT)^k(z)=(2/5)^k z+(10/9)(1−(2/5)^k)`. The `k=0` member is the finite-basis rule; `k=1`
+is one of the seven length-31 normal-form collisions found by census.
 
 Exact enumeration of all `2^n` raw words finds no relation outside this basis through length 30.
-At length 31 it finds seven independent normal-form collisions. Those seven remain computational
-evidence, not theorem claims. The checked finite basis is therefore a reduction accelerator, not
-a complete presentation of the affine kernel.
+At length 31 the five-rule census finds seven independent normal-form collisions. One is now the
+formal `k=1` family member; the remaining six are computational evidence, not theorem claims.
+The checked finite basis is therefore a reduction accelerator, not a complete presentation of
+the affine kernel.
 
 Rationality does not restore rigidity. From every admissible rational source, apply the `k=1`
 transition theorem recursively with a chosen next residue. Each legal wait class is modulo ten,
@@ -10059,15 +10078,17 @@ unit shell; representatives can also be chosen to avoid every earlier state.
 
 **Scope:** Lean checks the finite rational all-phases cycle, the distinct published schedules,
 their affine equality in arbitrary contexts, their common guarded periodic source, contextual
-guard preservation, the raw/shell conjugacy, the contextual boundary factorization, and five raw
-kernel relations through length 30. Infinite-schedule completion, finite-precision completeness,
+guard preservation, the raw/shell conjugacy, the contextual boundary factorization, the infinite
+odd-length raw kernel family, and three independent length-30 relations. Infinite-schedule
+completion, finite-precision completeness,
 the rational aperiodic construction, density, period-one single-wait rigidity, Knuth–Bendix
 critical-pair census, and exhaustive raw-word census are audited. The result does not decide exact
 target or accepting-exit reachability from a specified source. Point collisions from a fixed
 rational source may also identify distinct affine maps.
 
 **Artifact:** `MixedPrimeKernel.wordAction_cassaigne`,
-`MixedPrimeKernel.wordAction_kernel29`, the three `wordAction_kernel30*` theorems,
+`MixedPrimeKernel.wordAction_kernelOddFamily`, `MixedPrimeKernel.kernelOddFamily_ne`, the three
+`wordAction_kernel30*` theorems,
 `PeriodicShell.shellPeriodicCycle`, `PeriodicShell.shellPrefixesUnit_iff`,
 `PeriodicShell.shellRun_eq_wordAction`, `PeriodicShell.shellRun_benchmarkRelationShift`,
 `PeriodicShell.benchmarkRelationContextGuard`, and `PeriodicShell.benchmarkRelationCycle` in
@@ -10084,7 +10105,7 @@ compiler whose period-one configurations must remain in that set after every sin
 live information is exact fixed-source endpoint equality across the ordered schedule and a
 parametric description of the proliferating affine kernel.
 
-**Next:** classify the checked length-29/30 relations and seven computational length-31 relations
-as one parametric kernel family, if possible. Run fixed-source point-collision and exit-fibre
-censuses separately from affine-map equality; then attack residual stabilizers and accepting
-exits without assuming a canonical rewrite normal form.
+**Next:** classify the three length-30 relations and six residual computational length-31
+relations into even-length or further parametric families. Run fixed-source point-collision and
+exit-fibre censuses separately from affine-map equality; then attack residual stabilizers and
+accepting exits without assuming a canonical rewrite normal form.

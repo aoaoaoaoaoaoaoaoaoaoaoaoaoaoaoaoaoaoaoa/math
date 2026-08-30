@@ -539,6 +539,11 @@ open MatrixMortality
 #print axioms FinitePositiveImage.Submonoid.inv_mem_of_finite
 #print axioms FinitePositiveImage.mclosure_eq_top_of_group_closure_eq_top
 #print axioms MixedPrimeKernel.wordAction_context
+#print axioms MixedPrimeKernel.pumpWord_length
+#print axioms MixedPrimeKernel.wordAction_pumpWord
+#print axioms MixedPrimeKernel.kernelOddFamily_length
+#print axioms MixedPrimeKernel.kernelOddFamily_ne
+#print axioms MixedPrimeKernel.wordAction_kernelOddFamily
 #print axioms MixedPrimeKernel.cassaigne_ne
 #print axioms MixedPrimeKernel.wordAction_cassaigne
 #print axioms MixedPrimeKernel.kernel29_ne

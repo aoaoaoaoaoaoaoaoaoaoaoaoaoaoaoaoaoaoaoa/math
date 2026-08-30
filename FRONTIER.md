@@ -2316,10 +2316,12 @@ Yet the single-wait graph on period-one nodes has only its loops and the excepti
 schedules with the same affine map and a common Lean-checked guarded periodic source. This is an
 exact rewrite seed. Lean also proves that it preserves all intermediate shell guards in every
 word context. Lean now factors every boundary-shifted schedule equality as one raw `D,T` context
-and checks five distinct raw kernel relations through length 30. Lexical orientation terminates,
-but the five-rule basis has 45 nonjoinable critical overlaps. Exhaustive affine census proves
-bounded completeness through raw length 30 and finds seven independent collisions at length 31.
-There is no complete-presentation claim. Thus state-independent unlabeled bounded-residue
+and checks the published length-27 relation, an infinite family at every odd length `29+2k`, and
+three independent length-30 relations. Lexical orientation of the original five-rule basis
+terminates, but has 45 nonjoinable critical overlaps. Exhaustive affine census proves bounded
+completeness through raw length 30 and finds seven independent collisions at length 31; one is
+now the formal `k=1` family member and six remain computational. There is no
+complete-presentation claim. Thus state-independent unlabeled bounded-residue
 nonexistence pruning, eventual exit or periodicity, shell-wide strict drift, and a single-wait
 period-one compiler are closed. The surviving issue is exact target and accepting-exit
 reachability from a specified rational source. See
@@ -2443,11 +2445,12 @@ T_m(u)=(1+3u(2/3)^m)/5
 
 have a finite synchronized representation that couples the base-`5` carry to the `2`- and
 `3`-exponents and recognizes accepting shell exits. `D2-O02` proves that a bounded
-unlabeled residue-transition graph alone is maximally nondiscriminating. The first experiment is
-to derive one parametric kernel family from the checked length-27, length-29, and length-30
-relations and the seven computational length-31 collisions. The current finite Knuth–Bendix basis
-terminates but is nonconfluent and already incomplete at the next length. Run fixed-source point
-collisions, exit-fibre, and carry-state growth with total `2`- and `3`-exponents in parallel. For
+unlabeled residue-transition graph alone is maximally nondiscriminating. The odd-length family is
+now exact; the next algebraic experiment is to derive even-length families from the three checked
+length-30 relations and the six residual computational length-31 classes. The current finite
+Knuth–Bendix basis terminates but is nonconfluent and already incomplete at the next length. Run
+fixed-source point collisions, exit-fibre, and carry-state growth with total `2`- and
+`3`-exponents in parallel. For
 the non-elementary residue, compare reachable carry-state growth for ordinary continued
 fractions, slow continued fractions, Stern–Brocot paths, and redundant multi-prime expansions.
 Any claimed finite nucleus must state the annotation or restriction that avoids the full

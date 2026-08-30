@@ -1030,6 +1030,11 @@
  Classical.choice,
  Quot.sound]
 'MatrixMortality.MixedPrimeKernel.wordAction_context' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.MixedPrimeKernel.pumpWord_length' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.MixedPrimeKernel.wordAction_pumpWord' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.MixedPrimeKernel.kernelOddFamily_length' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.MixedPrimeKernel.kernelOddFamily_ne' depends on axioms: [propext]
+'MatrixMortality.MixedPrimeKernel.wordAction_kernelOddFamily' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.MixedPrimeKernel.cassaigne_ne' does not depend on any axioms
 'MatrixMortality.MixedPrimeKernel.wordAction_cassaigne' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.MixedPrimeKernel.kernel29_ne' does not depend on any axioms

@@ -414,7 +414,9 @@ unproved Lean dependency. Exact target and accepting-exit reachability from a sp
 source, rather than rational realization of shell paths, remains the benchmark seam.
 
 `MixedPrimeKernel` now owns the raw `D,T` affine kernel. It checks the published shortest
-length-27 relation, an independent length-29 relation, and three independent length-30 relations.
+length-27 relation, an infinite family of distinct equal-map pairs at every odd length
+`29+2k`, and three independent length-30 relations. The former isolated length-29 relation is
+the `k=0` member; `k=1` captures one of the seven relations found by the length-31 census.
 `PeriodicShell.shellRun_eq_wordAction` proves the exact `z=5u` conjugacy from raw words to shell
 schedules. The two schedule boundaries of the published relation are then factored in Lean as the
 single raw context `T D^last _ D^first`; the apparent two-parameter schedule family is not a
@@ -1184,7 +1186,7 @@ The dimension-two affine ledger has six independently checked records:
 | [`D2-D06`](SALVAGE.md#d2-d06-private-prime-peeling) | unique-minimum valuation calculation, zero endpoints, fixed-count reduction, reversed language, and positive private valuation |
 | [`D2-D07`](SALVAGE.md#d2-d07-bounded-valuation-orthants) | localization support, denominator bounds in both orthants, invariant-interval recognition, finite graph, and regular-control product |
 | [`D2-M01`](SALVAGE.md#d2-m01-benchmark-critical-shell) | benchmark conjugacies, endpoint-shell translation, guarded `5`-adic transition, parity guard, and no-return-after-exit theorem |
-| [`D2-O02`](SALVAGE.md#d2-o02-critical-shell-periodic-saturation) | complete: rational periodic cycles for every nonempty finite wait schedule, raw/shell conjugacy, contextual boundary factorization, and five raw kernel relations through length 30; audited strengthening: terminating but nonconfluent critical-pair census, bounded kernel completeness through length 30 and failure at 31, infinite completion, finite-precision completeness, rational aperiodic addresses, density, and period-one single-wait transition rigidity |
+| [`D2-O02`](SALVAGE.md#d2-o02-critical-shell-periodic-saturation) | complete: rational periodic cycles for every nonempty finite wait schedule, raw/shell conjugacy, contextual boundary factorization, an infinite odd-length raw kernel family, and three independent length-30 relations; audited strengthening: terminating but nonconfluent critical-pair census, bounded five-rule kernel completeness through length 30 and six unexplained classes at 31 after adjoining the family member, infinite completion, finite-precision completeness, rational aperiodic addresses, density, and period-one single-wait transition rigidity |
 
 The shell record does not decide the benchmark. Every fixed exit has a decidable suffix, but an
 arbitrary critical prefix can produce infinitely many exits. A formal benchmark theorem must
@@ -1500,7 +1502,7 @@ fixed-rank decision problem.
 | `ProjectiveLine.lean` | total affine-chart presentation of `ℙ¹` and exact unit-word ray action |
 | `PadicValuation.lean` | nonzero rational p-adic shells, unequal-valuation calculus, and the adjacent-unit odd-prime obstruction |
 | `PeriodicShell.lean` | exact affine schedule composition, rational all-unit periodic cycles, and the published nonfree benchmark relation |
-| `MixedPrimeKernel.lean` | raw mixed-prime affine action, contextual composition, and five checked kernel relations through length 30 |
+| `MixedPrimeKernel.lean` | raw mixed-prime affine action, contextual composition, an infinite odd-length kernel family from length 29, and three independent length-30 relations |
 | `ReturnGuard.lean` | three-mode amalgamated return algebra, split mortality compiler, and exact state lower bound |
 | `ReturnGuardDynamics.lean` | permanent trap, ready-tail grammar, and deterministic physical mortality equivalence |
 | `ReturnGuardShift.lean` | shifted prefix decoder and affine reciprocal-residual transport |
@@ -1692,7 +1694,7 @@ fixed-rank decision problem.
 | Every malformed Collatz predecessor word remains nonintegral by negative 3-adic valuation | `ProjectiveCollatz.predecessorState_reaches_or_negative` |
 | Every nonzero shortcut-Collatz target reduces exactly to normalized GPI₂ | `ProjectiveCollatz.normalizedScalars`, `ProjectiveCollatz.exists_normalizedIncidence_zero_iff` |
 | In a finite group, positive monoid closure of a group-generating set is the whole group | `FinitePositiveImage.Submonoid.inv_mem_of_finite`, `FinitePositiveImage.mclosure_eq_top_of_group_closure_eq_top` |
-| The raw mixed-prime affine action has distinct equal-map relations at lengths 27, 29, and 30 | `MixedPrimeKernel.cassaigne_ne`, `MixedPrimeKernel.wordAction_cassaigne`, `MixedPrimeKernel.kernel29_ne`, `MixedPrimeKernel.wordAction_kernel29`, `MixedPrimeKernel.kernel30_ne`, `MixedPrimeKernel.wordAction_kernel30a`, `MixedPrimeKernel.wordAction_kernel30b`, `MixedPrimeKernel.wordAction_kernel30c` |
+| The raw mixed-prime affine action has a published relation at length 27, an infinite distinct equal-map family at every odd length from 29, and three independent relations at length 30 | `MixedPrimeKernel.cassaigne_ne`, `MixedPrimeKernel.wordAction_cassaigne`, `MixedPrimeKernel.kernelOddFamily_length`, `MixedPrimeKernel.kernelOddFamily_ne`, `MixedPrimeKernel.wordAction_kernelOddFamily`, `MixedPrimeKernel.kernel30_ne`, `MixedPrimeKernel.wordAction_kernel30a`, `MixedPrimeKernel.wordAction_kernel30b`, `MixedPrimeKernel.wordAction_kernel30c` |
 | Every nonempty critical-shell wait schedule has a rational periodic `5`-unit at every cyclic phase | `PeriodicShell.shellPeriodicCycle` |
 | Shell phases are all units exactly when the final output is a unit | `PeriodicShell.shellPrefixesUnit_iff` |
 | Raw words and shell schedules are conjugate, and every boundary-shifted benchmark schedule is one contextual raw rule | `PeriodicShell.shellRun_eq_wordAction`, `PeriodicShell.shellRawWord_benchmarkRelationShiftLeft`, `PeriodicShell.shellRawWord_benchmarkRelationShiftRight`, `PeriodicShell.shellRun_benchmarkRelationShift` |
