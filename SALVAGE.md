@@ -190,6 +190,7 @@ file owns the mathematical stock.
 | [`M4-S09`](#m4-s09-minimal-all-b-bad-run-exclusion) | obstruction | neither orientation of the shortest bad defect run can close when all three atoms are `b` | formalized | active |
 | [`M4-S10`](#m4-s10-phase-zero-c-defect-exclusion) | obstruction | the `0|2|1` shortest bad run cannot close with a `c` defect and `b` endpoints | formalized | active |
 | [`M4-S12`](#m4-s12-residue-zero-c-endpoint-exclusion) | obstruction | a shortest bad run with a `b` defect cannot close when its residue-zero endpoint is `c` | formalized | active |
+| [`M4-S13`](#m4-s13-residue-one-left-c-endpoint-exclusion) | obstruction | the `1|2|0` shortest bad run with a `b` defect cannot close when its left endpoint is `c` | formalized | active |
 | [`M4-C03`](#m4-c03-zero-framed-binary-two-lag-compiler) | compiler | the principal scanner is literally binary context-2 Lag and compiles to `M₄(3)` | formalized | graduated |
 | [`M4-D01`](#m4-d01-zero-framed-binary-two-lag-decision) | decidable stratum | the entire zero-framed binary context-2 Lag kernel has an exact syntactic classification | formalized | graduated |
 | [`M4-D02`](#m4-d02-zero-framed-reset-scanner-decision) | decidable stratum | zero-run reduction contracts the reset scanner to a regular two-token quotient | audited | graduated |
@@ -7733,6 +7734,41 @@ alphabet is closed.
 **Artifact:**
 [`MatrixMortality/ParabolicDefect.lean`](MatrixMortality/ParabolicDefect.lean) and
 [`audits/m43-residue-zero-c-endpoints-2026-08-30.md`](audits/m43-residue-zero-c-endpoints-2026-08-30.md).
+
+### M4-S13: Residue-one left c-endpoint exclusion
+
+**Kind:** obstruction
+
+**Evidence:** formalized
+
+**Disposition:** active
+
+At deletion width three, the shortest `1|2|0` bad run with a `c` left endpoint and `b` defect is
+
+```text
+c(3z+1) b(3x+2) b(3y).
+```
+
+Its exact bridge determinant is a polynomial in the eight monomials
+`xyz,xy,xz,x,yz,y,z,1`. Every coefficient is strictly positive for an arbitrary nonempty body;
+the proof needs only `27<M` and `0≤L<M`. Hence the determinant is positive for all nonnegative
+waits, without an exceptional endpoint case.
+
+**Scope:** deletion width `β=3`, exactly three atoms, a `b` defect, a residue-one `c` left
+endpoint, and a residue-zero `b` right endpoint. It does not cover the transposed
+`b(3z)b(3x+2)c(3y+1)` placement, a `c` defect together with a `c` endpoint, a longer defect run,
+or a nontrivial safe context.
+
+**Use:** together with `M4-S12`, three of the four placements with a `b` defect and exactly one
+`c` endpoint are excluded. Only the residue-one right endpoint in the `0|2|1` orientation
+survives.
+
+**Next:** compress the remaining `b(3z)b(3x+2)c(3y+1)` mixed-sign determinant before introducing
+a second body-dependent atom.
+
+**Artifact:**
+[`MatrixMortality/ParabolicDefect.lean`](MatrixMortality/ParabolicDefect.lean) and
+[`audits/m43-residue-one-left-c-endpoint-2026-08-30.md`](audits/m43-residue-one-left-c-endpoint-2026-08-30.md).
 
 ### M4-C03: Zero-framed binary two-Lag compiler
 

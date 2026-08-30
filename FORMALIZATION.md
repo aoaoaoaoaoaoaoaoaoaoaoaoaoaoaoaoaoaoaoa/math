@@ -1419,6 +1419,14 @@ corollaries derive positivity of all remaining coefficients from the native none
 interval. The exact boundary is
 [`audits/m43-residue-zero-c-endpoints-2026-08-30.md`](audits/m43-residue-zero-c-endpoints-2026-08-30.md).
 
+The residue-one left `c`-endpoint exclusion
+[`M4-S13`](SALVAGE.md#m4-s13-residue-one-left-c-endpoint-exclusion) is also checked there.
+`ParabolicBlade.bridge_cOne_bTwo_bZero_det` collects the exact determinant of
+`c(3z+1)b(3x+2)b(3y)` into eight wait monomials.
+`ParabolicBlade.bridge_cOne_bTwo_bZero_det_ne_zero` proves every coefficient positive from the
+coarse native code interval. The exact boundary is
+[`audits/m43-residue-one-left-c-endpoint-2026-08-30.md`](audits/m43-residue-one-left-c-endpoint-2026-08-30.md).
+
 The original fixed-ray semantic route is obstructed by
 [`M4-O14`](SALVAGE.md#m4-o14-original-semantic-endpoint-obstruction), formalized in
 [`MatrixMortality/ParabolicSemanticObstruction.lean`](MatrixMortality/ParabolicSemanticObstruction.lean).
@@ -1587,7 +1595,7 @@ fixed-rank decision problem.
 | `ParabolicExterior.lean` | complete adjugate exterior state, bridge-wall coordinate, and four normalized safe actions |
 | `ParabolicFlag.lean` | valuation relations and the four arbitrary-cancellation atom invariants |
 | `ParabolicSafeFlag.lean` | arbitrary safe-word flag, wall orientation, and exact residue-one `b` wound |
-| `ParabolicDefect.lean` | complete defect-run residue grammar, exact minimal all-`b`, phase-zero `c`-defect, and residue-zero `c`-endpoint exclusions, pure-defect bridge reset, and consecutive-wall projective fracture |
+| `ParabolicDefect.lean` | complete defect-run residue grammar, exact minimal all-`b`, phase-zero `c`-defect, and three one-`c` endpoint exclusions, pure-defect bridge reset, and consecutive-wall projective fracture |
 | `ParabolicSemanticObstruction.lean` | complete-block determinant wall and fixed-ray formal terminal-plane obstruction |
 | `ParabolicIncidence.lean` | canonical nonzero right kernel of every regular wall bridge |
 | `ParabolicRetuned.lean` | retuned open root, sparse ternary code, determinant pencils, and unique gap-two singular atom |
