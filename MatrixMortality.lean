@@ -113,6 +113,7 @@ import MatrixMortality.ScheduledBinaryRank
 import MatrixMortality.SetterShear
 import MatrixMortality.SetterJFraction
 import MatrixMortality.DecimalSetterArithmetic
+import MatrixMortality.DecimalSetterCarry
 import MatrixMortality.SchottkyPunctuation
 import MatrixMortality.TwoStateObstructions
 import MatrixMortality.OverlapQueue

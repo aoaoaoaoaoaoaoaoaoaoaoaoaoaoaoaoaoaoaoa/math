@@ -834,6 +834,41 @@
 'MatrixMortality.DecimalSetterArithmetic.singleBErasure_trace_hasDecimalShell' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.DecimalSetterCarry.resetZero_successivePole_identity' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterCarry.resetOne_successivePole_identity' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterCarry.poleEquation_shellBalance' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterCarry.resetZero_multiTarget_length' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterCarry.resetZero_singleTarget_impossible' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterCarry.resetOne_multiTarget_equalDepth' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterCarry.resetOne_singleTarget_depthGap' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterCarry.code_injective' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.DecimalSetterCarry.suffix_exhaustion' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.DecimalSetterCarry.suffix_exhaustion_factorization' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterCarry.forcedPole_terminalPrefix' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterCarry.forcedPole_ne_prefixTarget' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterCarry.forcedPole_ne_singletonTarget' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.Undecidability.nearyScalarZero62_hasZero_iff_hasZeroStar' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]

@@ -714,8 +714,13 @@ singleton erasure has shell `(β+1,β)`. A prospective next pole forces
 
 The `(1,1)` shell preserves the cross-prime gap and shares normalized first unit `3` with the
 distinguished reset. Gap pairs and one decimal unit therefore cannot separate it. The immediate
-question is whether the complete normalized suffix of `T−VW` admits a backward finite quotient,
-or whether it contains an explicit false pole.
+depth-one question is nevertheless closed:
+[`MM-S13`](SALVAGE.md#mm-s13-decimal-first-transfer-extinction) proves that neither reset reaches
+a false pole after one completed transfer. Exact two-depth exhausts the lower decimal code as a
+complete suffix; the remaining prefix is either terminal or lies in a rational interval disjoint
+from every target. The immediate question is whether an equally rigid normalized suffix survives
+the second and later reciprocal steps, or whether depth at least two contains an explicit false
+pole.
 
 The immediate ternary question is which other positive valuation-one discrepancies survive its
 suffix sieve without already certifying source halting. Exact bidirectional diagnostics at

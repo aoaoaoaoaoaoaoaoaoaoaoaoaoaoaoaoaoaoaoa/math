@@ -1177,6 +1177,13 @@ exact `(1,1)` and `(β+1,β)` target shells, and the simultaneous valuation bala
 prospective pole. They do not decide the normalized decimal suffix on the surviving `(1,1)`
 corridor and therefore do not prove projective avoidance.
 
+Record [`MM-S13`](SALVAGE.md#mm-s13-decimal-first-transfer-extinction) now extinguishes the
+entire first-transfer boundary from both centered resets. `DecimalSetterCarry` proves the two
+successive-pole identities, simultaneous shell balances, incompatible ordinary-reset singleton
+depths, exact `5/7` suffix exhaustion, and the strict prefix intervals separating every false
+target. The finite Neary prefix trichotomy joining those declarations remains audited rather
+than a single end-to-end Lean theorem. Arbitrary depth begins only after two completed transfers.
+
 The dimension-two affine ledger has six independently checked records:
 
 | Record | Formalization obligation |
@@ -1572,6 +1579,7 @@ fixed-rank decision problem.
 | `SetterShear.lean` | boundary-calibrated side-basis shear, internal separator invariance, and transfer-tail gauge obstruction |
 | `SetterJFraction.lean` | exact decimal coefficient boxes and the hyperbolic-block/elliptic-product obstruction |
 | `DecimalSetterArithmetic.lean` | decimal setter centered carry, reciprocal recurrence, coupled `2`/`5` target shells, and successive-pole valuation balance |
+| `DecimalSetterCarry.lean` | two-reset successive-pole identities, joint depth constraints, exact decimal suffix exhaustion, and first-transfer prefix separation |
 | `PairedMortality.lean` | common-column mortality converse and exact integer `4 × 4` family |
 | `PhaseFracture.lean` | phase normalization and dimension-free projective-identification contradiction |
 | `PhaseRigidity.lean` | checked local role algebra, discrepancy commutators, and invariant-pencil rigidity |

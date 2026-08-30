@@ -98,6 +98,7 @@ file owns the mathematical stock.
 | [`MM-S10`](#mm-s10-swapped-target-suffix-sieve) | structure theorem | pole compatibility fixes `β+2` lower digits and excludes the residue `Δ=ρ−1` | audited | active |
 | [`MM-S11`](#mm-s11-decimal-setter-hyperbolicity) | structure theorem | every decimal setter transfer is strictly hyperbolic | audited | active |
 | [`MM-S12`](#mm-s12-decimal-two-prime-carry) | structure theorem | decimal setter poles obey an exact centered recurrence and coupled `2`/`5` trace balance | formalized | active |
+| [`MM-S13`](#mm-s13-decimal-first-transfer-extinction) | obstruction | neither decimal centered reset reaches a false pole after one completed transfer | formalized core; audited assembly | active |
 | [`R32-S01`](#r32-s01-split-return-normal-form) | structure theorem | rank-two cuts reduce one-unit binary mortality to a `2 × 2` return recurrence | formalized | graduated |
 | [`R32-S02`](#r32-s02-two-plane-edge-square) | structure theorem | two rank-two generators are a two-vertex square of `2 × 2` edges | formalized | graduated |
 | [`R32-O01`](#r32-o01-rank-one-profile-collapse) | obstruction | a rank-one generator reduces mortality to order-at-most-three scalar recurrence zeros | audited | stock |
@@ -2753,6 +2754,76 @@ through `centeredCoordinate_step`, `reciprocalCoordinate_step`,
 [`audits/m53-decimal-setter-arithmetic-2026-08-30.md`](audits/m53-decimal-setter-arithmetic-2026-08-30.md).
 
 **Next:** construct or refute a backward normalized-suffix automaton on the `(1,1)` shell.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S13: Decimal first-transfer extinction
+
+**Kind:** obstruction
+**Evidence:** formalized core; audited assembly
+**Disposition:** active
+
+For a length-`m` source block `u` followed by a prospective pole block `z`, the two decimal
+resets give exact equations
+
+```text
+Z=0:   P_u T_z=Gμ10^mV_z,
+Z=1:   (P_u−V_u)T_z=Gμ10^mV_z.
+```
+
+At `Z=0`, the multi-role trace shell `(1,1)` forces `m=1`; admissibility leaves the single
+`c` erasure, whose image is exactly `Z=1`, so the next pole is the genuine terminal equality
+`P_z=V_z`. The singleton shell `(β+1,β)` would force both `m=β+1` and `m=β` and is impossible.
+
+At `Z=1`, put `D_u=P_u−V_u`. A multi-role target forces
+
+```text
+ν₂(D_u)=ν₅(D_u)=m−1.
+```
+
+Exact two-depth exhausts the lower code as the complete common decimal suffix. The remaining
+`β+2`-digit upper prefix `H` satisfies
+
+```text
+P_z/V_z=G(10μ−H)/(EH).
+```
+
+A leading `b` makes the right side negative. A leading `c` followed by `b` or by the marker
+gives the genuine pole one. Two leading `c` letters force the right side above `58/55`, while
+the target's `5/7` prefixes force it below `58/55`.
+
+For a singleton target,
+
+```text
+ν₅(D_u)=ν₂(D_u)+1,
+ν₂(D_u)=m−β−1.
+```
+
+Suffix exhaustion now leaves `2β+2` digits. After division by `ρ`, the induced pole is below
+six, while either singleton target is above six. Thus neither reset reaches a false pole after
+one completed transfer.
+
+**Scope:** the theorem removes the entire depth-one boundary, not arbitrary depth. After two
+transfers the live numerator is no longer a raw difference of punctuated `5/7` codes, so suffix
+exhaustion does not iterate for free. Lean checks the successive-pole identities, joint shell
+balances, suffix exhaustion and factorization, and every rational interval comparison. The
+finite Neary prefix trichotomy and first-two-digit assembly remain audited rather than one
+end-to-end declaration.
+
+**Use:** start every remaining decimal attack at depth two and preserve normalized suffix
+content, not only the valuation pair or its first unit digit.
+
+**Formalization:** [`MatrixMortality/DecimalSetterCarry.lean`](MatrixMortality/DecimalSetterCarry.lean),
+through `resetZero_successivePole_identity`, `resetOne_successivePole_identity`,
+`poleEquation_shellBalance`, `suffix_exhaustion_factorization`,
+`forcedPole_ne_prefixTarget`, and `forcedPole_ne_singletonTarget`.
+
+**Artifact:**
+[`audits/m53-decimal-setter-first-transfer-2026-08-30.md`](audits/m53-decimal-setter-first-transfer-2026-08-30.md).
+
+**Next:** construct an iterated normalized-suffix state for the reciprocal carry, or exhibit the
+first false pole at depth at least two.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
