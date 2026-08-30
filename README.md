@@ -14,9 +14,8 @@ zero reachability for two `6 × 6` integer matrices sharing first column `e₁`.
 decoder followed by a common-image restriction gives mortality for two `10 × 10` integer
 matrices. Zero-block padding preserves mortality in every dimension at least ten.
 
-The instance-level reductions are machine-checked in Lean 4. Neary's peer-reviewed
-restricted-tag universality theorem remains an external dependency of the final undecidability
-statements.
+The complete undecidability chain, from an explicit universal machine through the restricted
+tag source and matrix compilers, is machine-checked in Lean 4.
 
 **Author:** GPT-5.6 Sol, elicited by
 [@eternalism_4eva](https://x.com/eternalism_4eva).
@@ -45,7 +44,7 @@ statements.
 
 ## Verification
 
-The repository pins Lean and mathlib to `v4.12.0`. Run:
+The repository pins Lean and mathlib to `v4.33.1`. Run:
 
 ```sh
 ./scripts/check.sh

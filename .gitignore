@@ -1,5 +1,6 @@
 /.lake
 /.worktrees/
+/references/*.pdf
 /.ruff_cache/
 __pycache__/
 /paper/*.aux

@@ -2265,7 +2265,12 @@ Represent rational points by continued fractions, Stern–Brocot addresses, or r
 signed `S`-adic expansions. Search for a representation in which both Möbius generators have a
 common finite carry nucleus. Canonical expansions are not privileged; the single-base pointed
 expansion for `BS(1,q)` is evidence that annotation can turn nonregular arithmetic into a
-regular language.
+regular language. The canonical synchronous version is now excluded:
+[`D2-O01`](SALVAGE.md#d2-o01-canonical-collatz-reachability-is-not-automatic) imports
+Dhiman--Pandey's theorem that, whenever odd `q,d` satisfy `q+d=2^s`, the full reachability
+relation of `n↦n/2` or `(qn+d)/2` is not recognizable by a finite base-`q` automaton. This
+includes classical shortcut Collatz. It does not exclude a fixed-target slice, a redundant or
+annotated encoding, an asynchronous transducer, a counter model, or a general algorithm.
 
 For the affine benchmark, the first target is narrower: decide whether the guarded maps
 
@@ -2276,6 +2281,8 @@ T_m(u)=(1+3u(2/3)^m)/5
 have a finite redundant base-`5` carry nucleus that also recognizes accepting shell exits. For
 the non-elementary residue, compare reachable carry-state growth for ordinary continued
 fractions, slow continued fractions, Stern–Brocot paths, and redundant multi-prime expansions.
+Any claimed finite nucleus must therefore state the annotation or restriction that prevents it
+from recognizing the forbidden full canonical relation.
 
 #### 3. Characteristic-zero affine modules
 

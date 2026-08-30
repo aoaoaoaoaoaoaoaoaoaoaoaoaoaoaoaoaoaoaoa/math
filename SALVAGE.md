@@ -9220,3 +9220,49 @@ finite synchronized representation across all carry depths.
 
 **Issue:** [#7, Formalize affine peeling and decide the `M₂(3)` benchmark
 shell](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/7).
+
+### D2-O01: Canonical Collatz reachability is not automatic
+
+**Kind:** obstruction
+**Evidence:** external theorem
+**Disposition:** active
+
+For odd integers `q≥3` and `d≥1`, let
+
+```text
+T_{q,d}(n)=n/2          when n is even,
+T_{q,d}(n)=(qn+d)/2     when n is odd,
+```
+
+and let `R(x,z)` mean that `z` is some iterate of `x`. Dhiman--Pandey prove
+that, for every odd pair satisfying
+
+```text
+q+d=2^s,
+```
+
+the full binary relation `R` is not first-order definable in Büchi arithmetic
+`⟨ℕ,+,V_q⟩`. Equivalently, no finite automaton recognizes the standard
+synchronous base-`q` encoding of `R`. The theorem includes `T_{3,1}`.
+
+The proof extracts the powers of two from a hypothetical definition of `R`
+using reachable orbit floors, then contradicts Cobham's theorem. It neither
+embeds universal computation nor assumes the Collatz conjecture.
+
+**Scope:** this is an automaticity obstruction, not an undecidability theorem.
+It does not exclude fixed-target unary slices, annotated or redundant
+encodings without a finite-state projection to the canonical one,
+asynchronous transducers, pushdown or counter machines, or arbitrary decision
+algorithms. The source does not cover parameters outside `q+d=2^s`.
+
+**Use:** retire any proposal that represents the full two-variable Collatz
+reachability relation by an ordinary synchronous finite automaton in its
+canonical base. A finite-nucleus decision attack must use a genuinely richer
+annotation, a restricted slice, or a stronger machine model.
+
+**Source:**
+[`dhiman-pandey-2026-collatz-reachability-nondefinability.md`](references/dhiman-pandey-2026-collatz-reachability-nondefinability.md).
+
+**Next:** test whether the fixed-target GPI₂ slice remains nonautomatic, and
+whether a finite annotated representation would project back to the forbidden
+full relation.
