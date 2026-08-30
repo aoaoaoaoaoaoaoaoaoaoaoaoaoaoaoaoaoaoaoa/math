@@ -229,6 +229,7 @@ file owns the mathematical stock.
 | [`G3-O19`](#g3-o19-correlated-affine-slice-density) | obstruction | the coarse Carvalho promises permit a correlated graph whose every exponent slice is Zariski dense | audited | graduated |
 | [`G3-O21`](#g3-o21-actual-carvalho-slice-density) | obstruction | every fixed-character slice of Carvalho's actual program graph is Zariski dense in `PSL₂²` | audited | graduated |
 | [`G3-O22`](#g3-o22-invertible-fibre-span-rigidity) | structural reduction | invertible spelling fibres form computable line or plane group orbits | formalized core | graduated |
+| [`G3-O23`](#g3-o23-singular-triangle-carrier-collapse) | structural reduction | every singular saturated three-state triangle carrier collapses effectively to an invertible two-state carrier | formalized core | graduated |
 | [`G3-O20`](#g3-o20-consecutive-repeat-tail-closure) | obstruction | two consecutive solutions of a fixed-boundary one-block pump force every later exponent | formalized | graduated |
 | [`G3-O09`](#g3-o09-quotient-blind-positive-boundary-collapse) | obstruction | all-loop-complete group-factorizing boundaries accept a nonempty identity spelling | formalized core | graduated |
 | [`G3-O14`](#g3-o14-positive-cancellation-spelling-dichotomy) | obstruction | finite reversible spelling pumps, while singular one-coordinate spelling absorbs identity factors | formalized | graduated |
@@ -9170,9 +9171,9 @@ group coordinates in dimension three. It is not a same-zero language lower bound
 exclude spelling-sensitive, graph-only nonalgebraic, singular nonsemantic, or infinite-state
 constructions.
 
-**Use:** close the actual program-graph geometry leaf. Carvalho's surviving route is now solely
-the direct three-positive spelling-sensitive/nonalgebraic carrier of `G3-M03`; searching this
-actual graph for a proper algebraic three-dimensional quotient is finished.
+**Use:** close the actual program-graph geometry leaf. Searching this graph for a proper
+algebraic three-dimensional quotient is finished. `G3-O22` and `G3-O23` subsequently reduce the
+remaining scalar-language route to invertible projective group orbits.
 
 **Source:** [`carvalho-2026-free-group-pcp.md`](references/carvalho-2026-free-group-pcp.md),
 Theorem 4.1 and the explicit transducers in Sections 3 and 5.
@@ -9221,13 +9222,62 @@ and the rank dichotomy uses nonzero seed and boundary. The resulting orbit uses 
 maps. It is a group/Grassmannian reduction, not a positive-semigroup reduction to `M₃(2)`, and it
 does not cover singular spelling carriers.
 
-**Use:** split the spelling-sensitive Carvalho leaf cleanly. The everywhere-invertible branch is
-now a computable rank-one or rank-two group-orbit incidence problem. Search singular carriers
-separately; do not treat arbitrary infinite fibres as unstructured state.
+**Use:** reduce the everywhere-invertible Carvalho branch to a computable rank-one or rank-two
+group-orbit incidence problem. `G3-O23` subsequently collapses the singular saturated branch to
+an invertible two-state carrier; do not treat arbitrary infinite fibres as unstructured state.
 
 **Artifact:** [`PositiveFreeCancellation.lean`](MatrixMortality/PositiveFreeCancellation.lean)
 and
 [`m34-invertible-fibre-span-2026-08-30.md`](audits/m34-invertible-fibre-span-2026-08-30.md).
+
+### G3-O23: Singular triangle-carrier collapse
+
+**Kind:** structural reduction
+
+**Evidence:** formalized core
+
+**Disposition:** graduated
+
+Let `π:S*→G` surject positively onto a group, and suppose a rational three-dimensional scalar
+series recognizes a saturated language `L⊆G` and rejects at least one known group element. If a
+positive semantic-identity word `r` acts singularly, then the same zero language has an exact
+two-dimensional realization in which every control is invertible.
+
+The formal proof uses positive spellings of inverse semantic letters. It is algorithmic when
+those spellings are effectively supplied, automatically for the triangle cover. An identity
+operator of rank at most one factors as `vφ`; inserting it between arbitrary left and right
+spellings makes the zero language rectangular, hence universal or empty. A nontrivial singular
+identity operator `P` therefore has rank two. On
+`U=im P`, every sandwich `u↦PM_su` is invertible: a singular sandwich and a positive spelling of
+the inverse semantic letter would create another rank-at-most-one identity loop. Interleaving
+`r` before each letter and after the word proves exact recognition on `U`, including the empty
+word. Over `ℚ`, Gaussian elimination chooses a rational basis of `U` and produces literal
+invertible `2×2` transitions. The empty-language branch has a fixed invertible two-state model.
+
+For the triangle cover, `xyz` is a semantic identity and is singular whenever any of `X,Y,Z` is
+singular. Lean therefore proves the dichotomy: either all three original `3×3` transitions are
+invertible, or an equivalent everywhere-invertible `2×2` three-control carrier exists.
+
+For a singleton saturated language on the triangle semantic group `F₂`, `G3-O22` sharpens the
+reduced carrier to a faithful `PGL₂(ℚ)` action with a free orbit and
+
+```text
+[T_z]=[T_y]⁻¹[T_x]⁻¹.
+```
+
+**Scope:** saturation through the positively surjective group evaluation and one rejected group
+element are essential. Abstract surjectivity is non-effective unless positive inverse spellings
+can be computed. The output has three positive controls. The displayed relation is in the two-
+generator group action; it does not turn the inverse edges into positive words in `T_x,T_y` and
+is not a positive `M₂(3)` or `M₃(2)` reduction.
+
+**Use:** remove singular spelling memory as a separate Carvalho escape. Any singular saturated
+three-state construction would simultaneously construct an effective invertible two-state
+projective group-orbit instance. Treat this as a joint `M₃(4)`/dimension-two research seam.
+
+**Artifact:** [`PositiveFreeCancellation.lean`](MatrixMortality/PositiveFreeCancellation.lean)
+and
+[`m34-singular-triangle-collapse-2026-08-30.md`](audits/m34-singular-triangle-collapse-2026-08-30.md).
 
 ### G3-O20: Consecutive-repeat tail closure
 

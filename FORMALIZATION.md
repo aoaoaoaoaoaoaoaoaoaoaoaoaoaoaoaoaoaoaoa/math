@@ -1076,6 +1076,20 @@ saturation algorithm computing that algebra for the triangle cover is audited, n
 No Lean declaration identifies inverse orbit edges with positive generators or claims a positive
 `M₃(2)` reduction.
 
+[`G3-O23`](SALVAGE.md#g3-o23-singular-triangle-carrier-collapse) is formalized through literal
+two-state rational coordinates. Lean proves that a rank-at-most-one semantic identity loop makes
+every group-saturated scalar zero language universal or empty. In dimension three, a nontrivial
+singular identity loop therefore has rank two; every letter sandwiched through its image is
+invertible, since a singular sandwich and a positive inverse spelling would create another
+rank-at-most-one identity loop. Interleaving the identity word gives exact zero equivalence for
+all words, including the empty word. Lean chooses a basis of the image, conjugates the carrier to
+`Fin 2→ℚ`, supplies a fixed invertible model for the empty language, and specializes the result
+to the triangle dichotomy: either all original transitions are invertible or an equivalent
+everywhere-invertible two-state carrier exists. Rational Gaussian-elimination effectivity requires
+an effective positive inverse-spelling section, fixed explicitly for the triangle cover. The
+`F₂` singleton-fibre `PGL₂`/at-most-one Borel-coset sharpening is also audited outside Lean. No
+declaration converts group inverses into positive controls or claims `M₂(3)`.
+
 Lean checks the internal algebra at the positive boundary: three positive letters surject onto
 the binary free group; quotient-blind boundaries accepting `g` and `g²` admit a nonempty identity
 witness; every injective transition on a finite invariant semantic fibre pumps an identity loop;
@@ -2020,6 +2034,13 @@ The group-orbit conclusion is deliberately weaker than a positive-semigroup redu
 inverse linear equivalences used for reverse edges need not occur among the positive controls.
 The context-free fixed-point algorithm for computing the triangle identity algebra is audited
 outside Lean.
+
+For `G3-O23`, Lean proves rank-one factorization, rectangular saturated-language collapse,
+rank-two image compression, invertibility of every image sandwich, exact identity interleaving,
+rational two-coordinate transport, the empty-language carrier, and the triangle carrier
+dichotomy. The triangle's effective rank sieve and its at-most-one rational Borel-coset
+formulation for the promised empty-or-singleton fibre are audited consequences, not Lean
+declarations.
 
 The scheduled compiler introduces a separate source-width seam. Neary's published construction
 sets `β = 10p`, where `p` is the simulated cyclic-tag program period. The fixed-width audit found

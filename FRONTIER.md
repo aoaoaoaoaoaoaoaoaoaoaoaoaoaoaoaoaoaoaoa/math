@@ -1032,7 +1032,21 @@ vanishing on one fibre in dimension three forces `dim C_q∈{1,2}`. The identity
 orbit of a computable finite operator algebra. Thus the invertible branch is a line or plane
 group-orbit incidence problem, rather than an arbitrary infinite spelling memory. This does not
 yield positive `M₃(2)`: the reverse orbit edges use inverse linear maps which need not be positive
-controls. Singular spelling-sensitive carriers remain separate.
+controls.
+
+[`G3-O23`](SALVAGE.md#g3-o23-singular-triangle-carrier-collapse) removes the formerly separate
+singular branch. A rank-at-most-one semantic identity loop makes every saturated scalar zero
+language rectangular and therefore trivial. Hence a singular triangle identity in a nontrivial
+three-state recognizer has rank two, and sandwiching every letter through its image gives three
+invertible two-state transitions recognizing exactly the same language. The rational image basis
+and every empty-word boundary case are effective. Thus every saturated three-state triangle
+carrier is either everywhere invertible in dimension three or equivalent to an everywhere-
+invertible dimension-two carrier. For Carvalho's singleton yes-language, the latter is a faithful
+`PGL₂(ℚ)` group orbit with `[T_z]=[T_y]⁻¹[T_x]⁻¹`. It is not positive `M₂(3)`: the inverse
+edges remain group operations rather than positive controls. Exact rational rank tests decide
+every preliminary obstruction; the sole survivor is intersection of the two-generated
+projective group `Γ` with one rational Borel coset `g₀B`, promised to contain at most one
+element. Conditional on a hit, the singleton semantics force `Γ∩B={1}` and faithfulness.
 
 The ordinary mortality lift is likewise no longer part of the paired obstruction. For arbitrary
 controls `H_a`, column `γ`, and row `λ` over a field, adjoining `γλ` gives mortality exactly when some
@@ -1121,16 +1135,17 @@ or neutral word across the return, use an empty consume, or split recurrent outp
 | Positive projective transition lower bound | Same-zero dimension three is point-line incidence in `P²`, and actual one-sided shifts retain finite rank/kernel/image data | Derive a uniform nonstationary or noncommuting shift incompatibility from an unbounded terminal section; static support rank, formal inverse completion, fixed equal-length return flowers, and unary consecutive-repeat escape are forbidden |
 | Global word-residual recoding | Longer noncommutative atoms can retain order while discarding the four additive role channels | Escape `G3-D05`: fixed-priority affine counters and all one-way reset/transfer/fanout cascades are decidable |
 | Head-separated three-schema source | `G3-C04` discharges every arbitrary-trace forcing obligation locally | Preserve an undecidable mixed or neutral word across returns; complete pure forks are decidable by `G3-D07` |
-| Spelling-sensitive Carvalho carrier | `G3-M03` gives an exact three-positive affine cover with harmless identity padding | Jointly detect actual equality and weight through graph-only, nonalgebraic, or spelling-sensitive dynamics; algebraic compression of the actual graph is closed by `G3-O21` |
+| Carvalho projective group-orbit separator | `G3-M03` gives the exact saturated three-positive cover; `G3-O23` collapses every singular carrier to invertible dimension two | Universalize or decide the promised at-most-one rational Borel-coset intersection; a hit forces a faithful free orbit. Otherwise construct the invertible three-state line/plane orbit left by `G3-O22` |
 
 These six lanes form three trunks. The first three race a direct paired construction against its
 one-sided projective lower bound. The next two seek genuine `GPCP(3)` through either global
-recoding or a native source. The last seeks a direct nonalgebraic carrier for Carvalho's
-three-positive language; `G3-O21` closes its former algebraic competitor.
+recoding or a native source. The last is now a projective group-orbit attack shared with the
+dimension-two campaign: `G3-O21` closes its algebraic semantic carrier, and `G3-O23` removes
+singular spelling memory.
 
 #### Raceable leaves
 
-After `G3-O21`, `G3-O22`, and `G3-D07` close their respective geometric and pure-source lanes,
+After `G3-O21`–`G3-O23` and `G3-D07` close their respective carrier and pure-source lanes,
 the net tree has six independent raceable leaves:
 
 1. **Common-kernel shuttle constructor.** Give one computable three-state paired recognizer in
@@ -1157,18 +1172,20 @@ the net tree has six independent raceable leaves:
    surviving every return. `G3-D06` closes functional private-head routing and `G3-D07` closes
    every complete pure two-chamber fork, including arbitrary finite forward branching. The
    empty-pump and genuinely splitting variants remain secondary constructions.
-6. **Spelling-sensitive Carvalho carrier.** Starting from the exact `G3-M03` positive cover,
-   compile transported equality plus weight `d` into ordinary `GPCP(3)` or a three-state
-   scalar-zero family by graph-only, nonalgebraic, or spelling-sensitive dynamics. Prove the
-   complete arbitrary-positive-word converse and preserve identity padding. The carrier need not
-   extend to the correlated graph's Zariski closure. In the everywhere-invertible branch,
-   `G3-O22` reduces the target to rank-one or rank-two group-orbit incidence; otherwise the
-   construction must exploit singular transitions.
+6. **Carvalho projective group-orbit separator.** Starting from the exact `G3-M03` saturated
+   cover, realize its singleton exponent-one fibre by an effective projective orbit separator.
+   In dimension three, `G3-O22` forces an invertible line/plane group orbit. If any transition is
+   singular, `G3-O23` produces instead an equivalent invertible two-state carrier. In the
+   nonempty branch its faithful projective action satisfies `[T_z]=[T_y]⁻¹[T_x]⁻¹`; uniformly,
+   the target Borel coset has at most one group element. Decide or universalize this two-generator
+   **group** orbit, or construct the invertible three-state branch. A positive-semigroup
+   `M₂(3)` claim must separately eliminate the inverse edges; none is presently known.
 
 The Carvalho split exposed a real semantic seam: algebraic information about the correlated
-group and nonalgebraic information about positive spellings are distinct. `G3-O21` closes the
-former by proving actual slice density; the latter remains. Empty-consume pumping and
-nonfunctional splitting remain boundaries inside leaf 5 until they supply a concrete
+group and the orbit language selected by a scalar boundary are distinct. `G3-O21` closes the
+former by proving actual slice density; `G3-O23` proves that singular positive spelling dynamics
+cannot create a third kind of memory. The projective group-orbit separator remains. Empty-consume
+pumping and nonfunctional splitting remain boundaries inside leaf 5 until they supply a concrete
 computational mechanism. Generic stochastic, Rees/Brandt, affine, and singular-reset ideas are
 implementation vocabularies inside leaves 1–3 until they furnish an exact source interface and
 all-word theorem. Another fixed-body fit, fixed macro, punctuation placement, affine atlas, or
@@ -1246,8 +1263,10 @@ independent `F×F×ℤ` data is four-dimensional by `G3-O16`; a singular third c
 persistent invertible quotient is closed by `G3-O14`; a standalone syntax series requires six
 states by `G3-O15`. `G3-O22` further forces any everywhere-invertible three-state scalar carrier
 into a computable line or plane group orbit, but supplies inverse edges only in the group action,
-not as positive matrix controls. Neither actual slice density nor a rank-four semantic
-coefficient is a same-zero language lower bound.
+not as positive matrix controls. `G3-O23` collapses every remaining singular saturated carrier
+to an invertible two-state group orbit, so spelling sensitivity no longer evades this orbit
+classification. Neither actual slice density nor a rank-four semantic coefficient is a same-zero
+language lower bound, and no positive-semigroup reduction follows from the inverse edges.
 
 The native source race now has a local sufficient acceptance test. Supply three head-separated
 productions `αₓX⟶Xβₓ`; `G3-C04` then proves that `sβ(w)=α(w)t` forces every cumulative `α` prefix
@@ -1279,6 +1298,17 @@ decision-theoretic chain is
 ```text
 Mort₃^(2,2) ≡ₘ GPI₂ ≤ₘ M₂(3) ≤₂-query GPI₂.
 ```
+
+[`G3-O23`](SALVAGE.md#g3-o23-singular-triangle-carrier-collapse) adds a second, adjacent artery
+from `M₃(4)`. A singular saturated triangle carrier becomes point-to-hyperplane reachability on
+`P¹(ℚ)` for the group generated by two projectivities: the third positive triangle control is
+projectively `[B]⁻¹[A]⁻¹`. Call this residue `group-PI₂`. It is not ordinary positive `PI₂`
+or `GPI₂`, because arbitrary inverses are available and cannot in general be compiled into the
+positive monoid on `A,B`. Carvalho supplies the additional promise that the target Borel coset
+contains at most one group element; a hit forces a faithful free orbit. The projectively integral stratum is decidable by the existing
+`SL₂(ℤ)` orbit machinery; the arbitrary rational group orbit is not covered by the audited flat
+rational-subset or integral reachability theorems. It should be attacked jointly with `M₂(3)`,
+while its distinct word language remains explicit.
 
 Work on projective incidence should therefore be treated as a joint `M₃(2)`/`M₂(3)` campaign.
 A `GPI₂` algorithm decides all of `M₂(3)` and the rank-`(2,2)` artery of `M₃(2)`; a universal
@@ -2493,10 +2523,11 @@ universal computation.
 4. Treat `MM-O08` and `MM-O11` as formally closed exact-family obstructions. Search for
    `M₉(2)` only through a changed physical pair, changed nonzero behavior, or a nonlinear
    compiler.
-5. Run the `M₃(4)` program on distinct tracks: history-sensitive singular point-line synthesis,
-   paired residual saturation, exponent-one positive cancellation, global word-residual
-   recoding, and native three-schema rewriting. Do not collapse their proof obligations into one
-   prompt.
+5. Run the `M₃(4)` program on distinct tracks: history-sensitive paired point-line synthesis,
+   projective group-orbit separation for the exponent-one singleton, global word-residual
+   recoding, and native three-schema rewriting. `G3-O23` has absorbed the singular saturated
+   Carvalho branch into dimension two; do not revive it as independent spelling memory or
+   conflate group inverses with positive `M₂(3)` controls.
 6. Formalize `D2-S02` and `D2-D05`–`D2-D07`, then attack fixed-source exact prefix and
    accepting-exit reachability in the guarded `5`-adic schedule with a synchronized `2`/`3`/`5`
    representation, affine-kernel completeness for the known finite convergent guarded rule, and

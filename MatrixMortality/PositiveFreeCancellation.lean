@@ -570,6 +570,558 @@ theorem triangleFibreSpan_letter_symm_map_eq
     positiveFibreSpan_word_symm_map_eq triangleGenerator transition seed
       triangleEvaluate_surjective [letter] value
 
+/-! ## Rank-one semantic identity collapse -/
+
+/-- Insert one fixed word before every letter and once after the final letter. -/
+def identityInterleave {S : Type*} (identityWord : List S) : List S → List S
+  | [] => identityWord
+  | letter :: word => identityWord ++ letter :: identityInterleave identityWord word
+
+/-- Interleaving a semantic identity word does not change positive group evaluation. -/
+theorem positiveEvaluate_identityInterleave
+    {S G : Type*} [Group G] (generator : S → G) (identityWord word : List S)
+    (identity_semantic : positiveEvaluate generator identityWord = 1) :
+    positiveEvaluate generator (identityInterleave identityWord word) =
+      positiveEvaluate generator word := by
+  induction word with
+  | nil => simpa [identityInterleave] using identity_semantic
+  | cons letter word induction =>
+      simp only [identityInterleave, positiveEvaluate_append, positiveEvaluate_cons,
+        identity_semantic, one_mul, induction]
+
+/-- A group language whose product predicate separates as a disjunction of arbitrary predicates
+on positive left and right spellings is either universal or empty. The spelling predicates need
+not themselves factor through the group. -/
+theorem surjective_positive_rectangular_language_trivial
+    {S G : Type*} [Group G]
+    (generator : S → G) (surjective : Function.Surjective (positiveEvaluate generator))
+    (language : G → Prop) (leftZero rightZero : List S → Prop)
+    (rectangle : ∀ left right : List S,
+      language (positiveEvaluate generator left * positiveEvaluate generator right) ↔
+        leftZero left ∨ rightZero right) :
+    (∀ value : G, language value) ∨ ∀ value : G, ¬language value := by
+  classical
+  by_cases universal : ∀ value : G, language value
+  · exact Or.inl universal
+  · right
+    obtain ⟨outside, outside_not⟩ := not_forall.mp universal
+    have left_false : ∀ word : List S, ¬leftZero word := by
+      intro word word_leftZero
+      obtain ⟨suffix, suffix_value⟩ :=
+        surjective ((positiveEvaluate generator word)⁻¹ * outside)
+      apply outside_not
+      have accepted := (rectangle word suffix).mpr (Or.inl word_leftZero)
+      simpa only [suffix_value, mul_inv_cancel_left] using accepted
+    have right_false : ∀ word : List S, ¬rightZero word := by
+      intro word word_rightZero
+      obtain ⟨prefixWord, prefixValue⟩ :=
+        surjective (outside * (positiveEvaluate generator word)⁻¹)
+      apply outside_not
+      have accepted := (rectangle prefixWord word).mpr (Or.inr word_rightZero)
+      convert accepted using 1
+      rw [prefixValue]
+      group
+    intro value value_mem
+    obtain ⟨word, word_value⟩ := surjective value
+    have separated := (rectangle word []).mp (by
+      simpa only [positiveEvaluate_nil, mul_one, word_value] using value_mem)
+    exact separated.elim (left_false word) (right_false [])
+
+/-- Every finite-dimensional endomorphism with range dimension at most one factors as one linear
+functional followed by scalar multiplication of one vector. -/
+theorem exists_smulRight_factor_of_finrank_range_le_one
+    {K V : Type*} [Field K] [AddCommGroup V] [Module K V] [FiniteDimensional K V]
+    (operator : Module.End K V) (range_le_one : Module.finrank K operator.range ≤ 1) :
+    ∃ functional : V →ₗ[K] K, ∃ vector : V, operator = functional.smulRight vector := by
+  by_cases operator_zero : operator = 0
+  · exact ⟨0, 0, by ext point; simp [operator_zero]⟩
+  · have range_ne_bot : operator.range ≠ ⊥ := by
+      intro range_bot
+      exact operator_zero (LinearMap.range_eq_bot.mp range_bot)
+    have range_one : Module.finrank K operator.range = 1 :=
+      range_le_one.antisymm (Submodule.one_le_finrank_iff.mpr range_ne_bot)
+    obtain ⟨vector, vector_mem, vector_ne⟩ :=
+      Submodule.exists_mem_ne_zero_of_ne_bot range_ne_bot
+    let rangeVector : operator.range := ⟨vector, vector_mem⟩
+    have rangeVector_ne : rangeVector ≠ 0 := by
+      intro rangeVector_zero
+      exact vector_ne (congrArg Subtype.val rangeVector_zero)
+    let singleton : K →ₗ[K] operator.range :=
+      LinearMap.toSpanSingleton K operator.range rangeVector
+    have singleton_injective : Function.Injective singleton :=
+      LinearMap.ker_eq_bot.mp (LinearMap.ker_toSpanSingleton K rangeVector_ne)
+    have singleton_ne : singleton ≠ 0 := by
+      intro singleton_zero
+      have one_eq_zero : (1 : K) = 0 := singleton_injective (by
+        rw [singleton_zero]
+        simp)
+      exact one_ne_zero one_eq_zero
+    have singleton_surjective : Function.Surjective singleton :=
+      surjective_of_nonzero_of_finrank_eq_one range_one singleton_ne
+    let rangeEquiv : K ≃ₗ[K] operator.range :=
+      LinearEquiv.ofBijective singleton ⟨singleton_injective, singleton_surjective⟩
+    let functional : V →ₗ[K] K :=
+      rangeEquiv.symm.toLinearMap.comp operator.rangeRestrict
+    refine ⟨functional, vector, ?_⟩
+    ext point
+    have recovered := rangeEquiv.apply_symm_apply (operator.rangeRestrict point)
+    change singleton (functional point) = operator.rangeRestrict point at recovered
+    change operator point = functional point • vector
+    symm
+    have recovered_val := congrArg Subtype.val recovered
+    change functional point • vector = operator point at recovered_val
+    exact recovered_val
+
+/-- If one positive semantic identity word acts as an explicit rank-one operator, any scalar zero
+language which depends only on the evaluated group element is universal or empty. -/
+theorem rankOneIdentityLoop_groupLanguage_trivial
+    {K S G V : Type*} [Field K] [Group G] [AddCommGroup V] [Module K V]
+    (generator : S → G) (surjective : Function.Surjective (positiveEvaluate generator))
+    (transition : S → Module.End K V) (seed : V) (boundary : V →ₗ[K] K)
+    (language : G → Prop)
+    (recognizes : ∀ word : List S,
+      boundary (positiveEvaluate transition word seed) = 0 ↔
+        language (positiveEvaluate generator word))
+    (identityWord : List S) (identity_semantic : positiveEvaluate generator identityWord = 1)
+    (factorFunctional : V →ₗ[K] K) (factorVector : V)
+    (identity_factor : positiveEvaluate transition identityWord =
+      factorFunctional.smulRight factorVector) :
+    (∀ value : G, language value) ∨ ∀ value : G, ¬language value := by
+  let leftZero : List S → Prop := fun word =>
+    boundary (positiveEvaluate transition word factorVector) = 0
+  let rightZero : List S → Prop := fun word =>
+    factorFunctional (positiveEvaluate transition word seed) = 0
+  apply surjective_positive_rectangular_language_trivial generator surjective language
+    leftZero rightZero
+  intro left right
+  have semantic_eq :
+      positiveEvaluate generator (left ++ identityWord ++ right) =
+        positiveEvaluate generator left * positiveEvaluate generator right := by
+    simp only [positiveEvaluate_append, identity_semantic, mul_one]
+  rw [← semantic_eq]
+  rw [← recognizes (left ++ identityWord ++ right)]
+  simp only [positiveEvaluate_append]
+  rw [identity_factor]
+  change
+    boundary (positiveEvaluate transition left
+      (factorFunctional (positiveEvaluate transition right seed) • factorVector)) = 0 ↔
+        leftZero left ∨ rightZero right
+  rw [LinearMap.map_smul_of_tower, LinearMap.map_smul_of_tower]
+  change
+    factorFunctional (positiveEvaluate transition right seed) *
+        boundary (positiveEvaluate transition left factorVector) = 0 ↔
+      leftZero left ∨ rightZero right
+  rw [mul_eq_zero, or_comm]
+
+/-- A semantic identity loop of linear rank at most one forces a group-saturated scalar zero
+language to be universal or empty. -/
+theorem lowRankIdentityLoop_groupLanguage_trivial
+    {K S G V : Type*} [Field K] [Group G] [AddCommGroup V] [Module K V]
+    [FiniteDimensional K V]
+    (generator : S → G) (surjective : Function.Surjective (positiveEvaluate generator))
+    (transition : S → Module.End K V) (seed : V) (boundary : V →ₗ[K] K)
+    (language : G → Prop)
+    (recognizes : ∀ word : List S,
+      boundary (positiveEvaluate transition word seed) = 0 ↔
+        language (positiveEvaluate generator word))
+    (identityWord : List S) (identity_semantic : positiveEvaluate generator identityWord = 1)
+    (rank_le_one :
+      Module.finrank K (LinearMap.range (positiveEvaluate transition identityWord)) ≤ 1) :
+    (∀ value : G, language value) ∨ ∀ value : G, ¬language value := by
+  obtain ⟨factorFunctional, factorVector, identity_factor⟩ :=
+    exists_smulRight_factor_of_finrank_range_le_one
+      (positiveEvaluate transition identityWord) rank_le_one
+  exact rankOneIdentityLoop_groupLanguage_trivial generator surjective transition seed boundary
+    language recognizes identityWord identity_semantic factorFunctional factorVector
+      identity_factor
+
+/-- Every semantic identity loop in a nontrivial group-saturated scalar zero language has linear
+rank at least two. -/
+theorem two_le_finrank_identityLoop_of_nontrivial_language
+    {K S G V : Type*} [Field K] [Group G] [AddCommGroup V] [Module K V]
+    [FiniteDimensional K V]
+    (generator : S → G) (surjective : Function.Surjective (positiveEvaluate generator))
+    (transition : S → Module.End K V) (seed : V) (boundary : V →ₗ[K] K)
+    (language : G → Prop)
+    (recognizes : ∀ word : List S,
+      boundary (positiveEvaluate transition word seed) = 0 ↔
+        language (positiveEvaluate generator word))
+    (accepted rejected : G) (accepted_mem : language accepted)
+    (rejected_not_mem : ¬language rejected)
+    (identityWord : List S) (identity_semantic : positiveEvaluate generator identityWord = 1) :
+    2 ≤ Module.finrank K (LinearMap.range (positiveEvaluate transition identityWord)) := by
+  by_contra rank_not_two
+  have rank_le_one :
+      Module.finrank K (LinearMap.range (positiveEvaluate transition identityWord)) ≤ 1 := by
+    omega
+  rcases lowRankIdentityLoop_groupLanguage_trivial generator surjective transition seed boundary
+      language recognizes identityWord identity_semantic rank_le_one with universal | empty
+  · exact rejected_not_mem (universal rejected)
+  · exact empty accepted accepted_mem
+
+/-- A singular semantic identity loop in dimension three forces an exact two-dimensional
+everywhere-invertible realization of the same group-saturated scalar zero language. The reduced
+word inserts the identity loop before every letter and after the last letter. -/
+theorem exists_twoDimensional_invertible_interleaving
+    {K S G V : Type*} [Field K] [Group G] [AddCommGroup V] [Module K V]
+    [FiniteDimensional K V]
+    (generator : S → G) (surjective : Function.Surjective (positiveEvaluate generator))
+    (transition : S → Module.End K V) (seed : V) (boundary : V →ₗ[K] K)
+    (language : G → Prop)
+    (recognizes : ∀ word : List S,
+      boundary (positiveEvaluate transition word seed) = 0 ↔
+        language (positiveEvaluate generator word))
+    (accepted rejected : G) (accepted_mem : language accepted)
+    (rejected_not_mem : ¬language rejected)
+    (dimension_three : Module.finrank K V = 3)
+    (identityWord : List S) (identity_semantic : positiveEvaluate generator identityWord = 1)
+    (identity_singular : ¬Function.Injective ⇑(positiveEvaluate transition identityWord)) :
+    ∃ carrier : Submodule K V,
+      Module.finrank K carrier = 2 ∧
+        ∃ reducedTransition : S → carrier ≃ₗ[K] carrier,
+          ∃ reducedSeed : carrier,
+            ∃ reducedBoundary : carrier →ₗ[K] K,
+              ∀ word : List S,
+                reducedBoundary (positiveEvaluate reducedTransition word reducedSeed) = 0 ↔
+                  language (positiveEvaluate generator word) := by
+  let projector := positiveEvaluate transition identityWord
+  let carrier := LinearMap.range projector
+  have carrier_lower : 2 ≤ Module.finrank K carrier :=
+    two_le_finrank_identityLoop_of_nontrivial_language generator surjective transition seed
+      boundary language recognizes accepted rejected accepted_mem rejected_not_mem identityWord
+        identity_semantic
+  have projector_kernel_ne_bot : LinearMap.ker projector ≠ ⊥ := by
+    intro kernel_bot
+    exact identity_singular (LinearMap.ker_eq_bot.mp kernel_bot)
+  have kernel_positive : 1 ≤ Module.finrank K (LinearMap.ker projector) :=
+    Submodule.one_le_finrank_iff.mpr projector_kernel_ne_bot
+  have rank_nullity := projector.finrank_range_add_finrank_ker
+  have carrier_upper : Module.finrank K carrier ≤ 2 := by
+    dsimp only [carrier] at carrier_lower ⊢
+    rw [dimension_three] at rank_nullity
+    omega
+  have carrier_two : Module.finrank K carrier = 2 :=
+    carrier_upper.antisymm carrier_lower
+  let reducedLinear (letter : S) : carrier →ₗ[K] carrier :=
+    projector.rangeRestrict.comp ((transition letter).comp carrier.subtype)
+  have reducedLinear_injective : ∀ letter : S, Function.Injective (reducedLinear letter) := by
+    intro letter
+    by_contra letter_not_injective
+    have letter_kernel_ne_bot : LinearMap.ker (reducedLinear letter) ≠ ⊥ := by
+      intro kernel_bot
+      exact letter_not_injective (LinearMap.ker_eq_bot.mp kernel_bot)
+    have letter_kernel_positive :
+        1 ≤ Module.finrank K (LinearMap.ker (reducedLinear letter)) :=
+      Submodule.one_le_finrank_iff.mpr letter_kernel_ne_bot
+    have letter_rank_nullity := (reducedLinear letter).finrank_range_add_finrank_ker
+    have letter_range_le_one :
+        Module.finrank K (LinearMap.range (reducedLinear letter)) ≤ 1 := by
+      rw [carrier_two] at letter_rank_nullity
+      omega
+    obtain ⟨factorFunctional, factorVector, letter_factor⟩ :=
+      exists_smulRight_factor_of_finrank_range_le_one (reducedLinear letter)
+        letter_range_le_one
+    obtain ⟨inverseWord, inverse_semantic⟩ := surjective (generator letter)⁻¹
+    let tailMap : V →ₗ[K] carrier :=
+      projector.rangeRestrict.comp
+        ((positiveEvaluate transition inverseWord).comp projector)
+    let loopWord :=
+      identityWord ++ [letter] ++ identityWord ++ inverseWord ++ identityWord
+    have loop_semantic : positiveEvaluate generator loopWord = 1 := by
+      simp only [loopWord, positiveEvaluate_append, positiveEvaluate_cons,
+        positiveEvaluate_nil, identity_semantic, one_mul, mul_one, inverse_semantic,
+        mul_inv_cancel]
+    have loop_factor :
+        positiveEvaluate transition loopWord =
+          (factorFunctional.comp tailMap).smulRight factorVector.1 := by
+      ext point
+      have letter_factor_point := LinearMap.congr_fun letter_factor (tailMap point)
+      have letter_factor_value := congrArg Subtype.val letter_factor_point
+      simp only [loopWord, positiveEvaluate_append, positiveEvaluate_cons,
+        positiveEvaluate_nil, mul_one]
+      change
+        projector (transition letter
+          (projector (positiveEvaluate transition inverseWord (projector point)))) =
+            factorFunctional (tailMap point) • factorVector.1
+      change
+        (reducedLinear letter (tailMap point)).1 =
+          factorFunctional (tailMap point) • factorVector.1
+      exact letter_factor_value
+    rcases rankOneIdentityLoop_groupLanguage_trivial generator surjective transition seed boundary
+        language recognizes loopWord loop_semantic (factorFunctional.comp tailMap) factorVector.1
+          loop_factor with universal | empty
+    · exact rejected_not_mem (universal rejected)
+    · exact empty accepted accepted_mem
+  have reducedLinear_surjective : ∀ letter : S, Function.Surjective (reducedLinear letter) := by
+    intro letter
+    exact (LinearMap.injective_iff_surjective_of_finrank_eq_finrank rfl).mp
+      (reducedLinear_injective letter)
+  let reducedTransition : S → carrier ≃ₗ[K] carrier := fun letter =>
+    LinearEquiv.ofBijective (reducedLinear letter)
+      ⟨reducedLinear_injective letter, reducedLinear_surjective letter⟩
+  let reducedSeed : carrier := projector.rangeRestrict seed
+  let reducedBoundary : carrier →ₗ[K] K := boundary.comp carrier.subtype
+  have reduced_state (word : List S) :
+      (positiveEvaluate reducedTransition word reducedSeed).1 =
+        positiveEvaluate transition (identityInterleave identityWord word) seed := by
+    induction word with
+    | nil =>
+        change (projector.rangeRestrict seed).1 = positiveEvaluate transition identityWord seed
+        rfl
+    | cons letter word induction =>
+        simp only [identityInterleave, positiveEvaluate_append, positiveEvaluate_cons]
+        change
+          (reducedLinear letter (positiveEvaluate reducedTransition word reducedSeed)).1 =
+            positiveEvaluate transition identityWord
+              (transition letter
+                (positiveEvaluate transition (identityInterleave identityWord word) seed))
+        change
+          projector (transition letter
+            (positiveEvaluate reducedTransition word reducedSeed).1) =
+              projector (transition letter
+                (positiveEvaluate transition (identityInterleave identityWord word) seed))
+        rw [induction]
+  refine ⟨carrier, carrier_two, reducedTransition, reducedSeed, reducedBoundary, ?_⟩
+  intro word
+  change
+    boundary (positiveEvaluate reducedTransition word reducedSeed).1 = 0 ↔
+      language (positiveEvaluate generator word)
+  rw [reduced_state word, recognizes (identityInterleave identityWord word),
+    positiveEvaluate_identityInterleave generator identityWord word identity_semantic]
+
+/-- With one known rejected group element, the singular identity-loop branch is either the empty
+language or has the exact two-dimensional invertible realization above. -/
+theorem empty_or_exists_twoDimensional_invertible_interleaving
+    {K S G V : Type*} [Field K] [Group G] [AddCommGroup V] [Module K V]
+    [FiniteDimensional K V]
+    (generator : S → G) (surjective : Function.Surjective (positiveEvaluate generator))
+    (transition : S → Module.End K V) (seed : V) (boundary : V →ₗ[K] K)
+    (language : G → Prop)
+    (recognizes : ∀ word : List S,
+      boundary (positiveEvaluate transition word seed) = 0 ↔
+        language (positiveEvaluate generator word))
+    (rejected : G) (rejected_not_mem : ¬language rejected)
+    (dimension_three : Module.finrank K V = 3)
+    (identityWord : List S) (identity_semantic : positiveEvaluate generator identityWord = 1)
+    (identity_singular : ¬Function.Injective ⇑(positiveEvaluate transition identityWord)) :
+    (∀ value : G, ¬language value) ∨
+      ∃ carrier : Submodule K V,
+        Module.finrank K carrier = 2 ∧
+          ∃ reducedTransition : S → carrier ≃ₗ[K] carrier,
+            ∃ reducedSeed : carrier,
+              ∃ reducedBoundary : carrier →ₗ[K] K,
+                ∀ word : List S,
+                  reducedBoundary (positiveEvaluate reducedTransition word reducedSeed) = 0 ↔
+                    language (positiveEvaluate generator word) := by
+  classical
+  by_cases language_empty : ∀ value : G, ¬language value
+  · exact Or.inl language_empty
+  · right
+    push Not at language_empty
+    obtain ⟨accepted, accepted_mem⟩ := language_empty
+    exact exists_twoDimensional_invertible_interleaving generator surjective transition seed
+      boundary language recognizes accepted rejected accepted_mem rejected_not_mem dimension_three
+        identityWord identity_semantic identity_singular
+
+/-- Over the rationals, the abstract two-dimensional range carrier admits an exact coordinate
+realization on two states. A rational basis of the range conjugates every reduced transition to
+an invertible two-by-two linear operator; the empty word is included in the equivalence. -/
+theorem empty_or_exists_finTwo_invertible_interleaving_rat
+    {S G V : Type*} [Group G] [AddCommGroup V] [Module ℚ V] [FiniteDimensional ℚ V]
+    (generator : S → G) (surjective : Function.Surjective (positiveEvaluate generator))
+    (transition : S → Module.End ℚ V) (seed : V) (boundary : V →ₗ[ℚ] ℚ)
+    (language : G → Prop)
+    (recognizes : ∀ word : List S,
+      boundary (positiveEvaluate transition word seed) = 0 ↔
+        language (positiveEvaluate generator word))
+    (rejected : G) (rejected_not_mem : ¬language rejected)
+    (dimension_three : Module.finrank ℚ V = 3)
+    (identityWord : List S) (identity_semantic : positiveEvaluate generator identityWord = 1)
+    (identity_singular : ¬Function.Injective ⇑(positiveEvaluate transition identityWord)) :
+    (∀ value : G, ¬language value) ∨
+      ∃ coordinateTransition : S → (Fin 2 → ℚ) ≃ₗ[ℚ] (Fin 2 → ℚ),
+        ∃ coordinateSeed : Fin 2 → ℚ,
+          ∃ coordinateBoundary : (Fin 2 → ℚ) →ₗ[ℚ] ℚ,
+            ∀ word : List S,
+              coordinateBoundary
+                    (positiveEvaluate coordinateTransition word coordinateSeed) = 0 ↔
+                language (positiveEvaluate generator word) := by
+  rcases empty_or_exists_twoDimensional_invertible_interleaving generator surjective transition
+      seed boundary language recognizes rejected rejected_not_mem dimension_three identityWord
+        identity_semantic identity_singular with empty | reduced
+  · exact Or.inl empty
+  · right
+    obtain ⟨carrier, carrier_two, reducedTransition, reducedSeed, reducedBoundary,
+      reduced_exact⟩ := reduced
+    let coordinates : carrier ≃ₗ[ℚ] (Fin 2 → ℚ) :=
+      LinearEquiv.ofFinrankEq carrier (Fin 2 → ℚ) (by
+        simpa only [Module.finrank_fin_fun] using carrier_two)
+    let coordinateTransition : S → (Fin 2 → ℚ) ≃ₗ[ℚ] (Fin 2 → ℚ) :=
+      fun letter => coordinates.symm.trans ((reducedTransition letter).trans coordinates)
+    let coordinateSeed : Fin 2 → ℚ := coordinates reducedSeed
+    let coordinateBoundary : (Fin 2 → ℚ) →ₗ[ℚ] ℚ :=
+      reducedBoundary.comp coordinates.symm.toLinearMap
+    have coordinate_state (word : List S) :
+        positiveEvaluate coordinateTransition word coordinateSeed =
+          coordinates (positiveEvaluate reducedTransition word reducedSeed) := by
+      induction word with
+      | nil => rfl
+      | cons letter word induction =>
+          simp only [positiveEvaluate_cons]
+          change
+            coordinates (reducedTransition letter
+              (coordinates.symm
+                (positiveEvaluate coordinateTransition word coordinateSeed))) =
+              coordinates (reducedTransition letter
+                (positiveEvaluate reducedTransition word reducedSeed))
+          rw [induction, coordinates.symm_apply_apply]
+    refine ⟨coordinateTransition, coordinateSeed, coordinateBoundary, ?_⟩
+    intro word
+    change
+      reducedBoundary
+          (coordinates.symm
+            (positiveEvaluate coordinateTransition word coordinateSeed)) = 0 ↔
+        language (positiveEvaluate generator word)
+    rw [coordinate_state word, coordinates.symm_apply_apply]
+    exact reduced_exact word
+
+/-- The empty-language branch also has a fixed two-state invertible realization. Hence every
+singular semantic identity loop over a rational three-state carrier collapses unconditionally to
+an equivalent two-state carrier with invertible controls. -/
+theorem exists_finTwo_invertible_interleaving_rat
+    {S G V : Type*} [Group G] [AddCommGroup V] [Module ℚ V] [FiniteDimensional ℚ V]
+    (generator : S → G) (surjective : Function.Surjective (positiveEvaluate generator))
+    (transition : S → Module.End ℚ V) (seed : V) (boundary : V →ₗ[ℚ] ℚ)
+    (language : G → Prop)
+    (recognizes : ∀ word : List S,
+      boundary (positiveEvaluate transition word seed) = 0 ↔
+        language (positiveEvaluate generator word))
+    (rejected : G) (rejected_not_mem : ¬language rejected)
+    (dimension_three : Module.finrank ℚ V = 3)
+    (identityWord : List S) (identity_semantic : positiveEvaluate generator identityWord = 1)
+    (identity_singular : ¬Function.Injective ⇑(positiveEvaluate transition identityWord)) :
+    ∃ coordinateTransition : S → (Fin 2 → ℚ) ≃ₗ[ℚ] (Fin 2 → ℚ),
+      ∃ coordinateSeed : Fin 2 → ℚ,
+        ∃ coordinateBoundary : (Fin 2 → ℚ) →ₗ[ℚ] ℚ,
+          ∀ word : List S,
+            coordinateBoundary (positiveEvaluate coordinateTransition word coordinateSeed) = 0 ↔
+              language (positiveEvaluate generator word) := by
+  rcases empty_or_exists_finTwo_invertible_interleaving_rat generator surjective transition seed
+      boundary language recognizes rejected rejected_not_mem dimension_three identityWord
+        identity_semantic identity_singular with empty | reduced
+  · let emptyTransition : S → (Fin 2 → ℚ) ≃ₗ[ℚ] (Fin 2 → ℚ) :=
+      fun _ => LinearEquiv.refl ℚ (Fin 2 → ℚ)
+    let emptySeed : Fin 2 → ℚ := fun _ => 1
+    let emptyBoundary : (Fin 2 → ℚ) →ₗ[ℚ] ℚ := LinearMap.proj 0
+    refine ⟨emptyTransition, emptySeed, emptyBoundary, ?_⟩
+    have empty_state (word : List S) :
+        positiveEvaluate emptyTransition word emptySeed = emptySeed := by
+      induction word with
+      | nil => rfl
+      | cons letter word induction =>
+          simp only [positiveEvaluate_cons]
+          change (LinearEquiv.refl ℚ (Fin 2 → ℚ))
+              (positiveEvaluate emptyTransition word emptySeed) = emptySeed
+          simpa only [LinearEquiv.refl_apply] using induction
+    intro word
+    rw [empty_state word]
+    change (1 : ℚ) = 0 ↔ language (positiveEvaluate generator word)
+    exact ⟨fun one_zero => (one_ne_zero one_zero).elim,
+      fun word_mem => (empty (positiveEvaluate generator word) word_mem).elim⟩
+  · exact reduced
+
+/-- A product of finite-dimensional endomorphisms is injective exactly when both factors are
+injective. -/
+theorem end_mul_injective_iff
+    {K V : Type*} [Field K] [AddCommGroup V] [Module K V] [FiniteDimensional K V]
+    (left right : Module.End K V) :
+    Function.Injective ⇑(left * right) ↔
+      Function.Injective left ∧ Function.Injective right := by
+  constructor
+  · intro product_injective
+    have right_injective : Function.Injective right := by
+      intro first second equality
+      apply product_injective
+      change left (right first) = left (right second)
+      rw [equality]
+    have right_surjective : Function.Surjective right :=
+      (LinearMap.injective_iff_surjective_of_finrank_eq_finrank rfl).mp right_injective
+    have left_injective : Function.Injective left := by
+      intro first second equality
+      obtain ⟨firstPreimage, firstPreimage_eq⟩ := right_surjective first
+      obtain ⟨secondPreimage, secondPreimage_eq⟩ := right_surjective second
+      rw [← firstPreimage_eq, ← secondPreimage_eq] at equality ⊢
+      exact congrArg right (product_injective equality)
+    exact ⟨left_injective, right_injective⟩
+  · rintro ⟨left_injective, right_injective⟩
+    exact left_injective.comp right_injective
+
+/-- If any triangle control is singular, the positive identity triple `xyz` is singular. -/
+theorem triangleIdentity_singular_of_letter_singular
+    {K V : Type*} [Field K] [AddCommGroup V] [Module K V] [FiniteDimensional K V]
+    (transition : TriangleLetter → Module.End K V)
+    (letter_singular : ∃ letter : TriangleLetter, ¬Function.Injective (transition letter)) :
+    ¬Function.Injective ⇑(positiveEvaluate transition [.x, .y, .z]) := by
+  intro identity_injective
+  have all_injective :
+      Function.Injective (transition .x) ∧
+        Function.Injective (transition .y) ∧ Function.Injective (transition .z) := by
+    simpa only [positiveEvaluate_cons, positiveEvaluate_nil, mul_one,
+      end_mul_injective_iff] using identity_injective
+  obtain ⟨letter, letter_not_injective⟩ := letter_singular
+  cases letter with
+  | x => exact letter_not_injective all_injective.1
+  | y => exact letter_not_injective all_injective.2.1
+  | z => exact letter_not_injective all_injective.2.2
+
+/-- A rational three-state recognizer over the triangle cover has only two carrier branches.
+Either all three original transitions are invertible, or the recognized saturated language is
+realized exactly on two states by three invertible transitions. -/
+theorem triangleCarrier_dichotomy_rat
+    {V : Type*} [AddCommGroup V] [Module ℚ V] [FiniteDimensional ℚ V]
+    (transition : TriangleLetter → Module.End ℚ V) (seed : V) (boundary : V →ₗ[ℚ] ℚ)
+    (language : FreeGroup Bool → Prop)
+    (recognizes : ∀ word : List TriangleLetter,
+      boundary (positiveEvaluate transition word seed) = 0 ↔
+        language (positiveEvaluate triangleGenerator word))
+    (rejected : FreeGroup Bool) (rejected_not_mem : ¬language rejected)
+    (dimension_three : Module.finrank ℚ V = 3) :
+    (∃ invertibleTransition : TriangleLetter → V ≃ₗ[ℚ] V,
+      ∀ letter : TriangleLetter,
+        (invertibleTransition letter).toLinearMap = transition letter) ∨
+      ∃ reducedTransition : TriangleLetter → (Fin 2 → ℚ) ≃ₗ[ℚ] (Fin 2 → ℚ),
+        ∃ reducedSeed : Fin 2 → ℚ,
+          ∃ reducedBoundary : (Fin 2 → ℚ) →ₗ[ℚ] ℚ,
+            ∀ word : List TriangleLetter,
+              reducedBoundary (positiveEvaluate reducedTransition word reducedSeed) = 0 ↔
+                language (positiveEvaluate triangleGenerator word) := by
+  by_cases all_injective : ∀ letter : TriangleLetter, Function.Injective (transition letter)
+  · left
+    have all_surjective :
+        ∀ letter : TriangleLetter, Function.Surjective (transition letter) := by
+      intro letter
+      exact (LinearMap.injective_iff_surjective_of_finrank_eq_finrank rfl).mp
+        (all_injective letter)
+    let invertibleTransition : TriangleLetter → V ≃ₗ[ℚ] V := fun letter =>
+      LinearEquiv.ofBijective (transition letter)
+        ⟨all_injective letter, all_surjective letter⟩
+    exact ⟨invertibleTransition, fun _ => rfl⟩
+  · right
+    have letter_singular :
+        ∃ letter : TriangleLetter, ¬Function.Injective (transition letter) := by
+      push Not at all_injective
+      exact all_injective
+    have cover_surjective :
+        Function.Surjective (positiveEvaluate triangleGenerator) := by
+      exact triangleEvaluate_surjective
+    have identity_semantic :
+        positiveEvaluate triangleGenerator [.x, .y, .z] = 1 := by
+      simpa only [positiveEvaluate, triangleEvaluate] using triangle_relations.1
+    exact exists_finTwo_invertible_interleaving_rat triangleGenerator cover_surjective
+      transition seed boundary language recognizes rejected rejected_not_mem dimension_three
+        [.x, .y, .z] identity_semantic
+          (triangleIdentity_singular_of_letter_singular transition letter_singular)
+
 /-- A nonempty positive alphabet surjecting onto a group has a nonempty identity spelling. -/
 theorem exists_nonempty_positive_identity {S G : Type*} [Nonempty S] [Group G]
     (generator : S → G) (surjective : Function.Surjective (positiveEvaluate generator)) :
