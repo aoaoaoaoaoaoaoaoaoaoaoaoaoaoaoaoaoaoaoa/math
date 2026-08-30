@@ -1337,6 +1337,7 @@ fixed-rank decision problem.
 | File | Responsibility |
 | --- | --- |
 | `Computability.lean` | primitive-recursive closure lemmas used by the explicit compilers |
+| `WordMorphism.lean` | free-monoid morphism laws and consecutive-repeat closure of fixed-boundary equations |
 | `MatrixSemigroup.lean` | shared word semantics, mortality transports, common-image restriction, transposition, and zero padding |
 | `LinearRepresentation.lean` | finite Hankel sections and exact-realization state lower bounds |
 | `BoundaryTax.lean` | generic finite-witness two-channel boundary tax |
@@ -1886,6 +1887,12 @@ under fixed integral transverse-kernel controls on every raw word, the scalar eq
 prescribed code, both coordinate kernels, and the complete minimum-body paired equivalence. The
 projective blow-up description is not a formal dependency: every actual orbit stays in the
 affine chart with homogeneous coordinate one.
+
+For `G3-O20`, Lean proves the free-monoid tail law: if one fixed-boundary equation with stationary
+left and right pump blocks holds at exponents `N` and `N+1`, it holds at every exponent `N+k`.
+The proof uses only prefix comparability and left/right cancellation. This closes a unary
+consecutive-zero Cayley-Hamilton shortcut, not the noncommuting positive-transition lower-bound
+lane.
 
 The scheduled compiler introduces a separate source-width seam. Neary's published construction
 sets `β = 10p`, where `p` is the simulated cyclic-tag program period. The fixed-width audit found

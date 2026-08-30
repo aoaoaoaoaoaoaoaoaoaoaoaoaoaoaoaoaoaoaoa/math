@@ -218,6 +218,7 @@ file owns the mathematical stock.
 | [`G3-M01`](#g3-m01-free-group-discrepancy-engine) | partial mechanism | Carvalho's transducer gives an all-word marker-tail equation and a cyclic exponent-one equalizer | audited | active |
 | [`G3-M03`](#g3-m03-three-positive-affine-exponent-cover) | partial mechanism | three positive letters cover every affine first-exponent slice exactly | formalized | active |
 | [`G3-O19`](#g3-o19-correlated-affine-slice-density) | obstruction | the coarse Carvalho promises permit a correlated graph whose every exponent slice is Zariski dense | audited | graduated |
+| [`G3-O20`](#g3-o20-consecutive-repeat-tail-closure) | obstruction | two consecutive solutions of a fixed-boundary one-block pump force every later exponent | formalized | graduated |
 | [`G3-O09`](#g3-o09-quotient-blind-positive-boundary-collapse) | obstruction | all-loop-complete group-factorizing boundaries accept a nonempty identity spelling | formalized core | graduated |
 | [`G3-O14`](#g3-o14-positive-cancellation-spelling-dichotomy) | obstruction | finite reversible spelling pumps, while singular one-coordinate spelling absorbs identity factors | formalized | graduated |
 | [`G3-O15`](#g3-o15-triangle-normal-form-rank-six) | obstruction | a standalone same-zero guard for triangle-irreducible spellings needs six states | formalized | graduated |
@@ -8707,6 +8708,37 @@ nonalgebraic, or infinite-dimensional before scalarization.
 
 **Artifact:**
 [`m34-correlated-affine-slice-density-2026-08-11.md`](audits/m34-correlated-affine-slice-density-2026-08-11.md).
+
+### G3-O20: Consecutive-repeat tail closure
+
+**Kind:** obstruction
+
+**Evidence:** formalized
+
+**Disposition:** graduated
+
+For arbitrary free-monoid words `A,B,C,D,E,F` and `N`, suppose
+
+```text
+A Bᴺ C = D Eᴺ F,       A Bᴺ⁺¹ C = D Eᴺ⁺¹ F.
+```
+
+Then `A Bᴺ⁺ᵏ C = D Eᴺ⁺ᵏ F` for every `k≥0`. After absorbing the first `N` copies into
+`A,D`, prefix comparability leaves two cases. If `D=AG`, cancellation gives `C=GF` and
+`BG=GE`; if `A=DG`, it gives `F=GC` and `GB=EG`. Either conjugacy equation iterates and proves
+the entire tail.
+
+**Scope:** the theorem requires one stationary pump block on each side and fixed boundaries. It
+does not constrain two interacting pump directions, changing blocks, nonliteral matrix zero
+languages, or histories whose terminal section changes with the exponent.
+
+**Use:** delete the unary Cayley-Hamilton lower-bound shortcut for fixed-boundary word equality.
+A three-state unary coefficient would be refuted by three consecutive zeros followed by a
+nonzero escape, but literal equality already forces the tail from the first two zeros. Any live
+positive-transition lower bound must use noncommuting or nonstationary shifts.
+
+**Artifact:** [`WordMorphism.lean`](MatrixMortality/WordMorphism.lean) and
+[`m34-consecutive-repeat-tail-2026-08-30.md`](audits/m34-consecutive-repeat-tail-2026-08-30.md).
 
 ### G3-O09: Quotient-blind positive boundary collapse
 

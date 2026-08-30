@@ -1062,7 +1062,7 @@ one. Empty-consume pumping and genuinely phase-splitting transport are separate 
 | --- | --- | --- |
 | Common-kernel shuttle | The exact `bcbb` compiler moves its common data kernel out through the toggle and recovers it at the next data action | Uniformize this non-invariant shuttle in `(β,body)`; every toggle-invariant guard factors through the two-dimensional quotient |
 | Transverse-kernel terminal dynamics | Fixed integral transverse controls encode every history and exactly recognize all minimum bodies | Replace the singleton target row by an infinite, source-computable terminal section for unrestricted bodies |
-| Positive projective transition lower bound | Same-zero dimension three is point-line incidence in `P²`, and actual one-sided shifts retain finite rank/kernel/image data | Derive a uniform shift incompatibility from an unbounded terminal section; static support rank, formal inverse completion, and fixed equal-length return flowers are forbidden |
+| Positive projective transition lower bound | Same-zero dimension three is point-line incidence in `P²`, and actual one-sided shifts retain finite rank/kernel/image data | Derive a uniform nonstationary or noncommuting shift incompatibility from an unbounded terminal section; static support rank, formal inverse completion, fixed equal-length return flowers, and unary consecutive-repeat escape are forbidden |
 | Global word-residual recoding | Longer noncommutative atoms can retain order while discarding the four additive role channels | Escape `G3-D05`: fixed-priority affine counters and all one-way reset/transfer/fanout cascades are decidable |
 | Head-separated three-schema source | `G3-C04` discharges every arbitrary-trace forcing obligation locally | Make the `G3-D06` forked two-cycle, an empty pump, or nonfunctional splitting carry an undecidable open word residue |
 | Actual Carvalho program-graph geometry | The actual maps share the character globally, so every required affine slice is a coset of one correlated kernel graph | Determine the actual graph's Zariski closure; exploit a proper three-dimensional quotient or prove density and close algebraic compression for this source |
@@ -1088,7 +1088,9 @@ After the six-report `68b831a` wave, the net tree has seven independent raceable
    section a finite shift incompatibility which no three-dimensional rational same-zero
    representation can realize for any combination of generator ranks and kernels. It must use
    uniform shifts: the conic realizes every static incidence table, `G3-O17` forbids inverse
-   saturation, and `G3-C05` realizes the strongest fixed equal-length flower yet isolated.
+   saturation, `G3-C05` realizes the strongest fixed equal-length flower yet isolated, and
+   `G3-O20` proves that two consecutive solutions on one stationary fixed-boundary pump force
+   its entire tail.
 4. **Global non-priority word-residual recoding.** Give a computable three-pair reduction with
    both witness directions and a complete arbitrary-new-word converse. Its searchable witnesses
    must use feedback or backward transfer, source-preserving copy, recurring priority cycles,
