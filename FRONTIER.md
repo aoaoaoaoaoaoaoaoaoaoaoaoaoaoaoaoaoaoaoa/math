@@ -1333,6 +1333,12 @@ not relations or non-elementary geometry. See
 [`R32-S41`](SALVAGE.md#r32-s41-parabolic-rational-subset-normal-form) and
 [`m32-parabolic-rational-subset-2026-08-11.md`](audits/m32-parabolic-rational-subset-2026-08-11.md).
 
+Finite ambient quotients cannot see that order. In every finite image of `Γ₆`, the image of the
+positive monoid `P={A,B}*` is already the whole generated group, so the fixed rational subset
+`R=PK` also fills the image. No congruence or profinite saturation of the ambient group can
+separate a translation from `R`; a viable finite abstraction must retain positive spelling.
+This is [`R32-O21`](SALVAGE.md#r32-o21-finite-image-positivity-collapse).
+
 The rank-`(3,2)` profile is the genuinely new artery. If `B=UV`, every binary word containing
 `B` is governed exactly by
 
@@ -2186,6 +2192,23 @@ T_m(u)=(1+3u(2/3)^m)/5,
 v₅(u)=v₅(T_m(u))=0.
 ```
 
+The local shell is now known to be maximally recurrent. Every nonempty finite wait schedule has
+an exact rational periodic orbit entirely in the unit shell; period-one rational fixed points
+are dense in both admissible `5`-adic cylinders. Every admissible source and unit target at
+finite `5`-adic precision are joined by one wait residue. Recursively lifting those residues
+gives every admissible rational source aperiodic all-unit addresses with arbitrarily large waits.
+Yet the single-wait graph on period-one nodes has only its loops and the exceptional edge
+`T₂(x₀)=x₁`. Higher depth is not free: a published length-thirteen relation yields two distinct
+schedules with the same affine map and a common Lean-checked guarded periodic source. This is an
+exact rewrite seed. Lean also proves that it preserves all intermediate shell guards in every
+word context. Oriented toward the side without `10`, the rule terminates and has no overlapping
+redexes, hence is confluent for the congruence it generates. Whether that congruence is the full
+affine kernel is open. Thus state-independent unlabeled bounded-residue nonexistence pruning,
+eventual exit or periodicity, shell-wide strict drift, and a single-wait period-one compiler are
+closed. The surviving issue is exact target and accepting-exit reachability from a specified
+rational source. See
+[`D2-O02`](SALVAGE.md#d2-o02-critical-shell-periodic-saturation).
+
 The exact scope and the remaining infinite-exit seam are
 [`D2-M01`](SALVAGE.md#d2-m01-benchmark-critical-shell). The general affine residue still
 includes pairs with no private prime, no bounded invariant interval, and incompatible valuation
@@ -2218,6 +2241,8 @@ touch the non-elementary case.
 | Import the standard PCP encoding | two independent free-word tapes do not embed in `2×2` complex matrices |
 | Track only determinant or Smith form | equal arithmetic invariants can have different projective orbits |
 | Assume projective height descends | determinant-growing words may act projectively as the identity |
+| Separate the Collatz cusp by finite ambient quotients | every finite image identifies the positive monoid with the whole generated group |
+| Assume the mixed-prime schedule action is free | a published length-thirteen relation is a checked guarded collision |
 | Invoke a general module `S`-unit algorithm | the arbitrary three-prime case leads to open linear-exponential systems, and forgetting the monotone path destroys useful structure |
 
 These are exclusion tests for future proposals. Any attack relying on one of them must identify
@@ -2243,7 +2268,7 @@ Pr(undecidable | imported resolution) ≈ 0.20.
 | `SL₂` trace algebras, character varieties, Markoff descent | 9% | 8% decidable, 1% undecidable |
 | Arithmetic dynamics, height gaps, Subspace-Theorem methods | 8% | 7% decidable, 1% undecidable |
 | Verification, well-structured systems, affine-loop acceleration | 6% | 5% decidable, 1% undecidable |
-| Profinite topology, congruence separation, automatic structures | 5% | 5% decidable |
+| Syntax-sensitive automatic structures and positive rational languages | 5% | 5% decidable |
 | FRACTRAN, Collatz systems, automaton-semigroup universality | 6% | 6% undecidable |
 | Other structural sources | 1% | predominantly undecidable |
 
@@ -2289,11 +2314,16 @@ For the affine benchmark, the first target is narrower: decide whether the guard
 T_m(u)=(1+3u(2/3)^m)/5
 ```
 
-have a finite redundant base-`5` carry nucleus that also recognizes accepting shell exits. For
-the non-elementary residue, compare reachable carry-state growth for ordinary continued
-fractions, slow continued fractions, Stern–Brocot paths, and redundant multi-prime expansions.
-Any claimed finite nucleus must therefore state the annotation or restriction that prevents it
-from recognizing the forbidden full canonical relation.
+have a finite redundant representation coupling the base-`5` carry to the `2`- and
+`3`-exponents while recognizing accepting shell exits. `D2-O02` proves that an unlabeled bounded
+residue-transition graph is maximally nondiscriminating. The first experiment is kernel
+completeness for the known finite convergent guarded rule: normalize an exact affine-map
+collision census and search for independent relations between irreducible normal forms. Run
+fixed-source point collisions, exit-fibre, and carry-state growth with total `2`- and
+`3`-exponents in parallel. For the non-elementary residue, compare reachable carry-state growth
+for ordinary continued fractions, slow continued fractions, Stern–Brocot paths, and redundant
+multi-prime expansions. Any claimed finite nucleus must state the annotation or restriction that
+prevents it from recognizing the canonical relation excluded by `D2-O01`.
 
 #### 3. Characteristic-zero affine modules
 
@@ -2421,9 +2451,11 @@ universal computation.
    paired residual saturation, exponent-one positive cancellation, global word-residual
    recoding, and native three-schema rewriting. Do not collapse their proof obligations into one
    prompt.
-6. Formalize `D2-S02` and `D2-D05`–`D2-D07`, then attack the guarded `5`-adic critical shell
-   with a finite carry nucleus and a counter-simulation falsifier in parallel. Keep the
-   non-elementary lanes independent: adelic cone types, parabolic rational subsets,
+6. Formalize `D2-S02` and `D2-D05`–`D2-D07`, then attack fixed-source exact prefix and
+   accepting-exit reachability in the guarded `5`-adic schedule with a synchronized `2`/`3`/`5`
+   representation, affine-kernel completeness for the known finite convergent guarded rule, and
+   normalized collision/exit-fibre census. Do not reopen unlabeled residue-only finite nuclei.
+   Keep the non-elementary lanes independent: adelic cone types, parabolic rational subsets,
    trace/height descent, finite-obstruction saturation, and valuation universality.
 7. Synthesize the returned attacks by the discriminating signals above; do not average
    incompatible hypotheses into one generic mortality prompt.

@@ -152,6 +152,7 @@ file owns the mathematical stock.
 | [`R32-S42`](#r32-s42-non-pure-cubic-endpoints-and-false-waits) | structure theorem and obstruction | actual singular endpoints support free selected dynamics, but a clean one-singular family has an exact zero made solely from unselected unit waits | formalized core; audited strengthening | active |
 | [`R32-O19`](#r32-o19-projective-queue-centralizer-obstruction) | obstruction | an injective homomorphic projective word store with finite controller cannot recurrently delete and append queue data | audited | graduated |
 | [`R32-O20`](#r32-o20-transverse-reverse-reservoir) | obstruction | a lawful fixed projective cycle accumulates unbounded reverse 13-adic mass on its transverse eigenline | formalized | graduated |
+| [`R32-O21`](#r32-o21-finite-image-positivity-collapse) | obstruction | every finite ambient image identifies the positive Collatz monoid with the whole generated group | formalized core; audited application | graduated |
 | [`R32-D03`](#r32-d03-bounded-denominator-periodicity) | decidable stratum | every infinite legal rational guard orbit with bounded reduced denominators is eventually periodic | formalized | graduated |
 | [`M4-C01`](#m4-c01-two-state-pushout-compiler) | compiler | binary deterministic two-state scalar control compiles to three `4 × 4` matrices | formalized | graduated |
 | [`M4-O01`](#m4-o01-exact-toggle-fusion-leaves-an-immortal-core) | obstruction | exact local toggle fusion preserves a nonzero common anchor | formalized | graduated |
@@ -236,6 +237,8 @@ file owns the mathematical stock.
 | [`D2-D06`](#d2-d06-private-prime-peeling) | decidable stratum | a private multiplier prime decides every noncritical endpoint shell | audited | stock |
 | [`D2-D07`](#d2-d07-bounded-valuation-orthants) | decidable stratum | bounded cooriented affine families have finite successful state spaces | audited | stock |
 | [`D2-M01`](#d2-m01-benchmark-critical-shell) | partial mechanism | the mixed-prime benchmark reduces generically to one guarded `5`-adic shell | audited | active |
+| [`D2-O01`](#d2-o01-canonical-collatz-reachability-is-not-automatic) | obstruction | full generalized-Collatz reachability is not synchronously recognizable in its canonical base | external theorem | active |
+| [`D2-O02`](#d2-o02-critical-shell-periodic-saturation) | obstruction and rewrite seed | every nonempty finite wait schedule has a rational all-unit cycle, and a published length-thirteen relation gives a checked guarded collision | formalized core; audited strengthening | active |
 
 ## Frankl Conjecture
 
@@ -2859,14 +2862,19 @@ original family. This includes reduction of integral candidates modulo primes an
 projective-state quotients.
 
 **Scope:** the theorem is one-sided. Survival modulo every tested modulus is evidence only and
-does not imply rational mortality. No local-global completeness theorem is claimed.
+does not imply rational mortality. No local-global completeness theorem is claimed. Moreover,
+[`R32-O21`](#r32-o21-finite-image-positivity-collapse) proves that every finite ambient image is
+automatically useless for the fixed Collatz positive-coset benchmark: there the image of the
+positive monoid is already the whole generated group.
 
 **Artifact:** `MatrixMortality.isMortal_map` and
 `not_isMortal_of_map_not_isMortal` in
 [`MatrixSemigroup.lean`](MatrixMortality/MatrixSemigroup.lean).
 
 **Use:** use exact finite quotients to kill candidate return pencils before symbolic work, and
-record any persistent residue automata as conjectural invariants rather than proofs.
+record any persistent residue automata as conjectural invariants rather than proofs. For
+positive-coset membership, retain the spelling in a syntax-sensitive automaton; do not quotient
+only the ambient group.
 
 **Next:** build a typed finite-quotient census for irreducible cubic and two-prime return
 families; promote only invariants that admit an unbounded lifting theorem.
@@ -5666,6 +5674,46 @@ with reconstruction in
 **Use:** exclude endpoint-only reverse-mass potentials from the split decision lane. Any
 surviving certificate must use the reset-started first-hit orbit and distinguish aperiodic
 escape from periodic transverse storage.
+
+### R32-O21: Finite-image positivity collapse
+
+**Kind:** obstruction
+**Evidence:** formalized core; audited application
+**Disposition:** graduated
+
+Let a set `S` generate a group `Γ`, and let `P=S*` be its positive monoid. In every finite
+homomorphic image `φ(Γ)`, the submonoid `φ(P)` is a subgroup: each element has a positive power
+equal to one, so its inverse is another positive power. Since `φ(P)` contains the group
+generators, it equals `φ(Γ)`.
+
+For the fixed Collatz cusp
+
+```text
+Γ₆=ℤ[1/6]⋊ℤ²,   P={A,B}*,   K=Stab_Γ₆(1),   R=PK,
+```
+
+every finite ambient image therefore satisfies
+
+```text
+φ(R)=φ(Γ₆).
+```
+
+No translation `τ_N` can be separated from `R` by any finite monoid or group quotient of
+`Γ₆`, regardless of whether `τ_N∈R`.
+
+**Scope:** this concerns homomorphisms of the ambient group. It does not exclude an automaton
+that retains positive spellings, or a nonhomomorphic abstraction carrying syntax or arithmetic
+outside the group image. It does not weaken finite-quotient certificates for matrix families
+outside this positive-coset form.
+
+**Artifact:** `FinitePositiveImage.Submonoid.inv_mem_of_finite` and
+`FinitePositiveImage.mclosure_eq_top_of_group_closure_eq_top` in
+[`FinitePositiveImage.lean`](MatrixMortality/FinitePositiveImage.lean), with the `Γ₆`
+application in
+[`m32-gpi2-residue-blindness-2026-08-30.md`](audits/m32-gpi2-residue-blindness-2026-08-30.md).
+
+**Use:** retire ambient congruence saturation on the fixed Collatz rational subset. Any finite
+decision abstraction must preserve positive-word syntax rather than factor only through `Γ₆`.
 
 ### R32-D03: Bounded-denominator periodicity
 
@@ -9327,14 +9375,15 @@ stronger claim that the benchmark had been reduced to a self-contained shell
 reachability problem.
 
 **Use:** concentrate the benchmark attack on an effective representation of
-reachable critical states together with accepting exits. The main alternatives
-are a finite redundant base-`5` carry nucleus or an unbounded-counter
-simulation through growing exponent congruences.
+reachable critical states together with accepting exits. [`D2-O02`](#d2-o02-critical-shell-periodic-saturation)
+rules out residue-only exclusion: a decision representation must synchronize the `5`-adic
+carry with the `2`- and `3`-exponents or rational height.
 
 **Artifact:** [`audits/dimension-two-affine-peeling-2026-07-25.md`](audits/dimension-two-affine-peeling-2026-07-25.md#critical-shell-dynamics).
 
-**Next:** decide whether the exponent residues required modulo `5^k` admit a
-finite synchronized representation across all carry depths.
+**Next:** represent the exact shell-prefix and accepting-exit relation from a specified rational
+source, or construct a higher-period rational rewrite family with an all-other-waits exclusion
+theorem.
 
 **Issue:** [#7, Formalize affine peeling and decide the `M₂(3)` benchmark
 shell](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/7).
@@ -9384,3 +9433,105 @@ annotation, a restricted slice, or a stronger machine model.
 **Next:** test whether the fixed-target GPI₂ slice remains nonautomatic, and
 whether a finite annotated representation would project back to the forbidden
 full relation.
+
+### D2-O02: Critical-shell periodic saturation
+
+**Kind:** obstruction and rewrite seed
+**Evidence:** formalized core; audited strengthening
+**Disposition:** active
+
+For
+
+```text
+q_m=3(2/3)^m,      T_m(u)=(q_m u+1)/5,
+```
+
+every nonempty finite wait schedule `w=(m₀,…,m_(n−1))` has a rational periodic orbit wholly
+inside the `5`-adic unit shell. If
+
+```text
+T_w(u)=(Q_n u+C_n)/5^n,
+Q₀=1, C₀=0,
+Q_(j+1)=q_(m_j)Q_j,
+C_(j+1)=5^j+q_(m_j)C_j,
+```
+
+then `Q_n`, `C_n`, and `5^n−Q_n` are `5`-adic units, and
+
+```text
+u_w=C_n/(5^n−Q_n)
+```
+
+is the required fixed point. Backward inversion
+`u_j=q_(m_j)^−1(5u_(j+1)−1)` proves that every cyclic phase is a unit. Lean proves this for an
+arbitrary finite list of rational `5`-unit scales before specializing to the benchmark.
+
+Every fixed infinite schedule has a unique orbit in `ℤ₅×` because the inverse branches contract
+by `1/5`; a periodic schedule's coded orbit is rational by the displayed formula. At every
+finite precision, the transition relation is maximal: for `k≥1`, each admissible source modulo
+`5^(k+1)` and each unit target modulo `5^k` determine one wait modulo `2·5^k`. The rational
+one-step fixed points
+
+```text
+x_m=(5−q_m)^−1
+```
+
+are dense in the two admissible cylinders `u mod 5∈{2,3}`. Their internal transition graph is
+nevertheless rigid:
+
+```text
+T_k(x_m)=x_n  ↔  k=m=n  or  (m,n,k)=(0,1,2).
+```
+
+The benchmark action is nevertheless nonfree at higher depth. A published affine identity gives
+the distinct schedules
+
+```text
+w=[10,2,2,0,0,0,0,0,0,0,0,0,1],
+v=[0,0,1,2,0,2,1,1,2,0,6,0,0]
+```
+
+with `T_w=T_v` globally. Lean checks the affine equality, equality of their rational periodic
+points, and unit membership at every phase of both cycles. This is a guarded relation at the
+common periodic source. More strongly, all phases of any shell schedule are units exactly when
+its output is a unit. Since the two sides have the same output, substitution preserves every
+intermediate shell guard in every word context. Lean checks this contextual law.
+
+Orient the left schedule toward the right. Each rewrite deletes the left side's sole symbol
+`10`, because the right side contains none, so termination is immediate. Redexes cannot overlap:
+each begins at `10`, and the left side contains no second `10`. Disjoint replacements commute.
+The single rule is therefore a finite complete rewriting system for the congruence it generates.
+It is not known whether this congruence equals the full kernel of the affine schedule action.
+
+Rationality does not restore rigidity. From every admissible rational source, apply the `k=1`
+transition theorem recursively with a chosen next residue. Each legal wait class is modulo ten,
+so it has representatives beyond any prescribed bound. Choosing strictly increasing
+representatives gives an aperiodic wait schedule whose entire orbit remains rational and in the
+unit shell; representatives can also be chosen to avoid every earlier state.
+
+**Scope:** Lean checks the finite rational all-phases cycle, the distinct published schedules,
+their affine equality in arbitrary contexts, their common guarded periodic source, and contextual
+guard preservation. Infinite-schedule completion, finite-precision completeness, the rational
+aperiodic construction, density, and the period-one single-wait transition classification are
+audited. The result does not decide exact target or accepting-exit reachability from a specified
+source or prove that the relation generates every affine equality. Point collisions from a fixed
+rational source may also identify distinct affine maps.
+
+**Artifact:** `PeriodicShell.shellPeriodicCycle`, `PeriodicShell.shellPrefixesUnit_iff`,
+`PeriodicShell.shellRun_benchmarkRelationContext`,
+`PeriodicShell.benchmarkRelationContextGuard`, and `PeriodicShell.benchmarkRelationCycle` in
+[`PeriodicShell.lean`](MatrixMortality/PeriodicShell.lean), with the source record in
+[`cassaigne-nicolas-2012-semigroup-freeness.md`](references/cassaigne-nicolas-2012-semigroup-freeness.md)
+and the full arithmetic audit in
+[`m32-gpi2-residue-blindness-2026-08-30.md`](audits/m32-gpi2-residue-blindness-2026-08-30.md).
+
+**Use:** reject state-independent finite forbidden wait blocks, residue-only bounded `5`-adic
+exclusion, eventual shell exit or periodicity, universal strict state-height drift, and a
+compiler whose period-one configurations must remain in that set after every single wait. The
+live information is exact fixed-source endpoint equality across the ordered schedule and whether
+the known finite convergent guarded system presents the full affine kernel.
+
+**Next:** normalize a fixed-source collision and exit-fibre census by the known rule. Search for
+affine-map collisions among distinct irreducible normal forms separately from point collisions at
+the specified rational source. Either find an independent relation or prove that the known rule
+generates the affine kernel; then attack the residual point stabilizers and accepting exits.

@@ -5,6 +5,7 @@ import MatrixMortality.WordMorphism
 import MatrixMortality.ExactBehavior
 import MatrixMortality.LinearRepresentation
 import MatrixMortality.BoundaryTax
+import MatrixMortality.FinitePositiveImage
 
 /- Finite-rank repair. -/
 import MatrixMortality.InternalSandwich
@@ -16,6 +17,7 @@ import MatrixMortality.TwoPlaneEdges
 import MatrixMortality.ReverseEdge
 import MatrixMortality.ProjectiveIncidence
 import MatrixMortality.ProjectiveCollatz
+import MatrixMortality.PeriodicShell
 import MatrixMortality.RankTwoPunctuation
 import MatrixMortality.ReturnSquare
 import MatrixMortality.ReturnSquareDynamics

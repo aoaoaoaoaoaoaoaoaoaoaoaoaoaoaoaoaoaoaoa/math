@@ -397,6 +397,36 @@ retained as audited `R32-S41`; no general rational-subset library or unproved de
 added to Lean. See
 [`audits/m32-parabolic-rational-subset-2026-08-11.md`](audits/m32-parabolic-rational-subset-2026-08-11.md).
 
+The finite-shadow attacks on this artery are now closed at their exact scopes. The generic Lean
+module `FinitePositiveImage` proves that a submonoid of a finite group contains inverses and that
+a group-generating set has full positive monoid closure. Applied to the Collatz cusp, this is
+audited `R32-O21`: every finite ambient image sends `P={A,B}*` onto the whole image of `Γ₆`, so
+`R=PK` fills that image and cannot exclude any target translation.
+
+The affine critical shell has a complementary checked obstruction. `PeriodicShell` composes an
+arbitrary nonempty list of rational `5`-unit affine scales, constructs its explicit rational
+fixed point, proves that point is a `5`-adic unit, and propagates unit membership backward to
+every phase. `shellPeriodicCycle` specializes this to every nonempty finite wait schedule of
+`T_m(u)=(1+3u(2/3)^m)/5`. The infinite-completion theorem, exact finite-precision transition
+calculation, rational-source aperiodic forward construction, and density and single-wait
+rigidity of period-one points remain audited strengthening under `D2-O02`; they introduce no
+unproved Lean dependency. Exact target and accepting-exit reachability from a specified rational
+source, rather than rational realization of shell paths, remains the benchmark seam.
+
+The same module checks the published length-thirteen relation for the benchmark action.
+`shellRun_benchmarkRelation` proves global affine equality of the two distinct schedules;
+`benchmarkRelationCycle` proves that their explicit periodic points coincide and every phase of
+both cycles is a `5`-adic unit. The generic `shellPrefixesUnit_iff` identifies all-phase legality
+with final-output unit membership; `benchmarkRelationContextGuard` therefore proves that the
+relation preserves every intermediate shell guard in every word context. The source and
+block-order translation are recorded in
+[`cassaigne-nicolas-2012-semigroup-freeness.md`](references/cassaigne-nicolas-2012-semigroup-freeness.md).
+Orienting the relation toward its side without `10` gives an audited finite convergent system for
+the congruence it generates: each step deletes one `10`, and redexes cannot overlap. Whether this
+congruence is the full affine kernel remains open, as does the extra fixed-source point-collision
+problem. See
+[`audits/m32-gpi2-residue-blindness-2026-08-30.md`](audits/m32-gpi2-residue-blindness-2026-08-30.md).
+
 ReturnSquare instantiates the rank-`(3,2)` reduction. Lean proves the closed return matrix,
 split interfaces, exact cut rank, internal rank-one zero-wait return, unit positive returns,
 complete physical mortality equivalence, reachable and observable determinants, and the
@@ -1082,7 +1112,7 @@ they prove that the side-basis shear changes coordinates but, after physical cal
 changes neither the internal rank-one separator nor the transfer tail. It therefore cannot
 repair the missing arbitrary-depth projective-avoidance theorem.
 
-The dimension-two affine audit produced five independently checked records:
+The dimension-two affine ledger has six independently checked records:
 
 | Record | Formalization obligation |
 | --- | --- |
@@ -1091,11 +1121,14 @@ The dimension-two affine audit produced five independently checked records:
 | [`D2-D06`](SALVAGE.md#d2-d06-private-prime-peeling) | unique-minimum valuation calculation, zero endpoints, fixed-count reduction, reversed language, and positive private valuation |
 | [`D2-D07`](SALVAGE.md#d2-d07-bounded-valuation-orthants) | localization support, denominator bounds in both orthants, invariant-interval recognition, finite graph, and regular-control product |
 | [`D2-M01`](SALVAGE.md#d2-m01-benchmark-critical-shell) | benchmark conjugacies, endpoint-shell translation, guarded `5`-adic transition, parity guard, and no-return-after-exit theorem |
+| [`D2-O02`](SALVAGE.md#d2-o02-critical-shell-periodic-saturation) | complete: rational periodic cycles for every nonempty finite wait schedule and a contextually guard-preserving length-thirteen relation; audited strengthening: finite convergence for its generated congruence, infinite completion, finite-precision completeness, rational aperiodic addresses, density, and period-one single-wait transition rigidity |
 
 The shell record does not decide the benchmark. Every fixed exit has a decidable suffix, but an
 arbitrary critical prefix can produce infinitely many exits. A formal benchmark theorem must
 represent that union effectively rather than hide it behind pointwise decidability. The audit is
 [`audits/dimension-two-affine-peeling-2026-07-25.md`](audits/dimension-two-affine-peeling-2026-07-25.md);
+the periodic saturation theorem and its remaining arithmetic boundary are reconstructed in
+[`audits/m32-gpi2-residue-blindness-2026-08-30.md`](audits/m32-gpi2-residue-blindness-2026-08-30.md);
 formalization and the shell attack are tracked in
 [#7](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/7).
 
@@ -1358,6 +1391,7 @@ fixed-rank decision problem.
 | --- | --- |
 | `Computability.lean` | primitive-recursive closure lemmas used by the explicit compilers |
 | `WordMorphism.lean` | free-monoid morphism laws and consecutive-repeat closure of fixed-boundary equations |
+| `FinitePositiveImage.lean` | inverse closure of submonoids in finite groups and collapse of positive closure to group closure |
 | `MatrixSemigroup.lean` | shared word semantics, mortality transports, common-image restriction, transposition, and zero padding |
 | `LinearRepresentation.lean` | finite Hankel sections and exact-realization state lower bounds |
 | `BoundaryTax.lean` | generic finite-witness two-channel boundary tax |
@@ -1382,6 +1416,7 @@ fixed-rank decision problem.
 | `ReturnConvert.lean` | minimal two-scale return pencil and nonresonant multi-return zero |
 | `ProjectiveLine.lean` | total affine-chart presentation of `ℙ¹` and exact unit-word ray action |
 | `PadicValuation.lean` | nonzero rational p-adic shells, unequal-valuation calculus, and the adjacent-unit odd-prime obstruction |
+| `PeriodicShell.lean` | exact affine schedule composition, rational all-unit periodic cycles, and the published nonfree benchmark relation |
 | `ReturnGuard.lean` | three-mode amalgamated return algebra, split mortality compiler, and exact state lower bound |
 | `ReturnGuardDynamics.lean` | permanent trap, ready-tail grammar, and deterministic physical mortality equivalence |
 | `ReturnGuardShift.lean` | shifted prefix decoder and affine reciprocal-residual transport |
@@ -1568,6 +1603,10 @@ fixed-rank decision problem.
 | The inverse predecessor language is exactly shortcut-Collatz reachability | `ProjectiveCollatz.reachesOne_iff_shortcutCollatz` |
 | Every malformed Collatz predecessor word remains nonintegral by negative 3-adic valuation | `ProjectiveCollatz.predecessorState_reaches_or_negative` |
 | Every nonzero shortcut-Collatz target reduces exactly to normalized GPI₂ | `ProjectiveCollatz.normalizedScalars`, `ProjectiveCollatz.exists_normalizedIncidence_zero_iff` |
+| In a finite group, positive monoid closure of a group-generating set is the whole group | `FinitePositiveImage.Submonoid.inv_mem_of_finite`, `FinitePositiveImage.mclosure_eq_top_of_group_closure_eq_top` |
+| Every nonempty critical-shell wait schedule has a rational periodic `5`-unit at every cyclic phase | `PeriodicShell.shellPeriodicCycle` |
+| Shell phases are all units exactly when the final output is a unit | `PeriodicShell.shellPrefixesUnit_iff` |
+| Two distinct length-thirteen benchmark schedules induce the same affine map, preserve all guards in every context, and share a rational all-unit cycle | `PeriodicShell.benchmarkRelation_ne`, `PeriodicShell.shellRun_benchmarkRelationContext`, `PeriodicShell.benchmarkRelationContextGuard`, `PeriodicShell.benchmarkRelationCycle` |
 | A compatible one-loop edge square is mortal exactly at loop nilpotence or intrinsic generic incidence | `RankTwoPunctuation.exists_pathProduct_eq_zero_iff_selfBridge_or_incidence` |
 | ReturnSquare physical mortality is exactly positive-return scalar bridge zero | `ReturnSquare.physical_isMortal_iff_positiveBridge` |
 | Every nonresonant ReturnSquare zero uses at least three positive returns | `ReturnSquare.positiveBridge_zero_shape` |

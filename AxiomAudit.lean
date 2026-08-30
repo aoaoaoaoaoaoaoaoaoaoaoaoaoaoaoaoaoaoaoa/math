@@ -507,6 +507,15 @@ open MatrixMortality
 #print axioms ProjectiveCollatz.predecessorState_reaches_or_negative
 #print axioms ProjectiveCollatz.normalizedScalars
 #print axioms ProjectiveCollatz.exists_normalizedIncidence_zero_iff
+#print axioms FinitePositiveImage.Submonoid.inv_mem_of_finite
+#print axioms FinitePositiveImage.mclosure_eq_top_of_group_closure_eq_top
+#print axioms PeriodicShell.shellPrefixesUnit_iff
+#print axioms PeriodicShell.shellPeriodicCycle
+#print axioms PeriodicShell.benchmarkRelation_ne
+#print axioms PeriodicShell.shellRun_benchmarkRelation
+#print axioms PeriodicShell.shellRun_benchmarkRelationContext
+#print axioms PeriodicShell.benchmarkRelationContextGuard
+#print axioms PeriodicShell.benchmarkRelationCycle
 #print axioms RankTwoPunctuation.exists_pathProduct_eq_zero_iff_selfBridge_or_incidence
 #print axioms ReturnSquare.twoReturnDiscriminant_not_isSquare
 #print axioms ReturnSquare.positiveBridge_pair_ne_zero
