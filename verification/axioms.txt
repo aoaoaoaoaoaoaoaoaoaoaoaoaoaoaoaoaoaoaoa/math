@@ -595,6 +595,18 @@
 'MatrixMortality.ParabolicBlade.bridgeCokernel_vecMul_bridge_of_wall' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.ParabolicBlade.bridgeKernel_regular_word_ne_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.bridge_mulVec_bridgeKernel_of_wall' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.safeWall_incidence_orients_transport' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.safeWall_rejects_balanced_transport' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.ParabolicBlade.completeTileAtom_eq_semanticWordMiddle' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]

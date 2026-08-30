@@ -112,4 +112,142 @@ theorem bridgeKernel_regular_word_ne_zero
     (atom_isUnit_iff β body body_nonempty label.1 label.2).mpr
       (regular label member))
 
+/-! ## Phase chamber forced by a safe right wall -/
+
+open MatrixMortality.PadicValuation
+
+private theorem valLt_left_of_oriented_incidence
+    {high low first second unit : ℚ}
+    (orientation : ValLt low high)
+    (unit_shell : IsUnit 3 unit)
+    (pair_ne : ![first, second] ≠ (0 : Fin 2 → ℚ))
+    (incidence : high * first = unit * low * second) :
+    ValLt first second := by
+  rcases orientation with ⟨low_ne, high_zero | low_lt_high⟩
+  · have second_zero : second = 0 := by
+      have : unit * low * second = 0 := by simpa [high_zero] using incidence.symm
+      exact (mul_eq_zero.mp this).resolve_left (mul_ne_zero unit_shell.1 low_ne)
+    refine ⟨?_, Or.inl second_zero⟩
+    intro first_zero
+    apply pair_ne
+    funext i
+    fin_cases i <;> simp [first_zero, second_zero]
+  · by_cases high_ne : high = 0
+    · have second_zero : second = 0 := by
+        have : unit * low * second = 0 := by simpa [high_ne] using incidence.symm
+        exact (mul_eq_zero.mp this).resolve_left (mul_ne_zero unit_shell.1 low_ne)
+      refine ⟨?_, Or.inl second_zero⟩
+      intro first_zero
+      apply pair_ne
+      funext i
+      fin_cases i <;> simp [first_zero, second_zero]
+    · have first_ne : first ≠ 0 := by
+        intro first_zero
+        have : unit * low * second = 0 := by simpa [first_zero] using incidence.symm
+        have second_zero : second = 0 :=
+          (mul_eq_zero.mp this).resolve_left (mul_ne_zero unit_shell.1 low_ne)
+        apply pair_ne
+        funext i
+        fin_cases i <;> simp [first_zero, second_zero]
+      have second_ne : second ≠ 0 := by
+        intro second_zero
+        have : high * first = 0 := by simpa [second_zero] using incidence
+        exact first_ne ((mul_eq_zero.mp this).resolve_left high_ne)
+      refine ⟨first_ne, Or.inr ?_⟩
+      have valuation_eq :
+          padicValRat 3 high + padicValRat 3 first =
+            padicValRat 3 low + padicValRat 3 second := by
+        have := congrArg (padicValRat 3) incidence
+        simpa [padicValRat.mul high_ne first_ne,
+          padicValRat.mul unit_shell.1 low_ne,
+          padicValRat.mul (mul_ne_zero unit_shell.1 low_ne) second_ne,
+          unit_shell.2, add_assoc] using this
+      omega
+
+/-- Incidence with a nonempty safe wall forces the transported kernel into the strict
+valuation chamber opposite the wall's leftmost residue. -/
+theorem safeWall_incidence_orients_transport
+    (β : Nat) (body : List TagLetter) (body_nonempty : body ≠ [])
+    (head : TagLetter × Nat × Bool) (tail : List (TagLetter × Nat × Bool))
+    (regular : ∀ label ∈ head :: tail, RegularSafeLabel label)
+    (wall : exteriorState
+      (wordProduct (residueTwoWallGenerator β body) (head :: tail)) 0 = 0)
+    (transported : Fin 2 → ℚ) (transported_ne : transported ≠ 0)
+    (incidence :
+      bridgeCokernel
+          (wordProduct (residueTwoWallGenerator β body) (head :: tail)) ⬝ᵥ
+        transported = 0) :
+    if head.2.2 then
+      ValLt (transported 1) (transported 0)
+    else
+      ValLt (transported 0) (transported 1) := by
+  let middle := wordProduct (residueTwoWallGenerator β body) (head :: tail)
+  change exteriorState middle 0 = 0 at wall
+  change bridgeCokernel middle ⬝ᵥ transported = 0 at incidence
+  have orientation := exteriorState_safe_word_wall_orientation
+    β body body_nonempty head tail regular wall
+  have equation : exteriorState middle 1 * transported 0 =
+      4 * exteriorState middle 2 * transported 1 := by
+    rw [bridgeCokernel_eq_exteriorTail] at incidence
+    norm_num [dotProduct, Fin.sum_univ_succ] at incidence
+    linear_combination incidence
+  have pair_ne : ![transported 0, transported 1] ≠ (0 : Fin 2 → ℚ) := by
+    intro pair_zero
+    apply transported_ne
+    funext i
+    fin_cases i
+    · simpa using congr_fun pair_zero 0
+    · simpa using congr_fun pair_zero 1
+  have swapped_ne : ![transported 1, transported 0] ≠ (0 : Fin 2 → ℚ) := by
+    intro pair_zero
+    apply transported_ne
+    funext i
+    fin_cases i
+    · simpa using congr_fun pair_zero 1
+    · simpa using congr_fun pair_zero 0
+  by_cases phase : head.2.2
+  · simp only [phase, if_true] at orientation ⊢
+    have quarter_unit : IsUnit 3 (1 / 4 : ℚ) :=
+      div_hasValue
+        (intCast_isUnit_of_not_dvd (by norm_num : ¬(3 : ℤ) ∣ 1))
+        (intCast_isUnit_of_not_dvd (by norm_num : ¬(3 : ℤ) ∣ 4))
+    apply valLt_left_of_oriented_incidence
+      (first := transported 1) (second := transported 0)
+      orientation quarter_unit swapped_ne
+    linear_combination (1 / 4 : ℚ) * equation.symm
+  · simp only [phase] at orientation ⊢
+    have four_unit : IsUnit 3 (4 : ℚ) :=
+      intCast_isUnit_of_not_dvd (by norm_num : ¬(3 : ℤ) ∣ 4)
+    exact valLt_left_of_oriented_incidence
+      (first := transported 0) (second := transported 1)
+      orientation four_unit pair_ne equation
+
+/-- A transported kernel with two nonzero coordinates of equal valuation cannot close against
+a nonempty safe wall. -/
+theorem safeWall_rejects_balanced_transport
+    (β : Nat) (body : List TagLetter) (body_nonempty : body ≠ [])
+    (head : TagLetter × Nat × Bool) (tail : List (TagLetter × Nat × Bool))
+    (regular : ∀ label ∈ head :: tail, RegularSafeLabel label)
+    (wall : exteriorState
+      (wordProduct (residueTwoWallGenerator β body) (head :: tail)) 0 = 0)
+    (transported : Fin 2 → ℚ)
+    (first_ne : transported 0 ≠ 0) (second_ne : transported 1 ≠ 0)
+    (balanced : padicValRat 3 (transported 0) = padicValRat 3 (transported 1)) :
+    bridgeCokernel
+        (wordProduct (residueTwoWallGenerator β body) (head :: tail)) ⬝ᵥ
+      transported ≠ 0 := by
+  intro incidence
+  have transported_ne : transported ≠ 0 := by
+    intro transported_zero
+    exact first_ne (congr_fun transported_zero 0)
+  have orientation := safeWall_incidence_orients_transport
+    β body body_nonempty head tail regular wall transported transported_ne incidence
+  split at orientation
+  · rcases orientation with ⟨_, first_zero | second_lt_first⟩
+    · exact first_ne first_zero
+    · omega
+  · rcases orientation with ⟨_, second_zero | first_lt_second⟩
+    · exact second_ne second_zero
+    · omega
+
 end MatrixMortality.ParabolicBlade

@@ -178,6 +178,7 @@ file owns the mathematical stock.
 | [`M4-S05`](#m4-s05-deletion-scanner-normal-form) | structure theorem | promised overlap queues contract to three exact deletion scanners | audited | graduated |
 | [`M4-S06`](#m4-s06-arbitrary-defect-bridge-grammar) | structure theorem | arbitrary defect skeletons and bridge walls reduce to one consecutive projective incidence | formalized | active |
 | [`M4-S07`](#m4-s07-one-sided-wall-orbit-normal-form) | structure theorem | every consecutive wall incidence is one explicit exterior point-to-ray reachability problem | audited | active |
+| [`M4-S08`](#m4-s08-safe-wall-transport-chamber) | structure theorem | incidence with a safe right wall forces the transported kernel into one strict phase-selected `3`-adic chamber | formalized | active |
 | [`M4-C03`](#m4-c03-zero-framed-binary-two-lag-compiler) | compiler | the principal scanner is literally binary context-2 Lag and compiles to `M₄(3)` | formalized | graduated |
 | [`M4-D01`](#m4-d01-zero-framed-binary-two-lag-decision) | decidable stratum | the entire zero-framed binary context-2 Lag kernel has an exact syntactic classification | formalized | graduated |
 | [`M4-D02`](#m4-d02-zero-framed-reset-scanner-decision) | decidable stratum | zero-run reduction contracts the reset scanner to a regular two-token quotient | audited | graduated |
@@ -7086,6 +7087,47 @@ one exact orbit hit and expand it to a physical zero word.
 **Artifact:**
 [`MatrixMortality/ParabolicIncidence.lean`](MatrixMortality/ParabolicIncidence.lean) and
 [`audits/m43-one-sided-wall-orbit-2026-08-11.md`](audits/m43-one-sided-wall-orbit-2026-08-11.md).
+
+### M4-S08: Safe-wall transport chamber
+
+**Kind:** structure theorem
+
+**Evidence:** formalized
+
+**Disposition:** active
+
+Let a nonempty regular safe right wall have exterior state `(0,v,w)`, let the nonzero
+transported left kernel be `ξ=(a,b)`, and suppose their consecutive incidence vanishes. Since
+the wall cokernel is `(v,-4w)`, the incidence is
+
+```text
+v a = 4 w b.
+```
+
+The safe flag now constrains the transported kernel, not merely the wall. If the wall's
+leftmost gap has residue zero, then `ν₃(w)<ν₃(v)` and the equation forces
+`ν₃(a)<ν₃(b)`. If it has residue one, then `ν₃(v)<ν₃(w)` and the equation forces
+`ν₃(b)<ν₃(a)`. The theorem includes the cases where the higher-valuation coordinate is zero.
+Consequently a transported kernel whose two coordinates are nonzero and have equal valuation
+cannot close against any nonempty safe wall.
+
+**Scope:** every natural `β`, every nonempty body, every nonempty regular safe right-wall word,
+and every nonzero rational transport vector. The theorem does not assert that safe walls exist,
+constrain right walls containing residue-two defects, or classify which bridge transports
+produce the required strict chamber.
+
+**Use:** replace an unstructured scalar incidence against a safe right wall by a strict,
+phase-indexed transport obligation. Balanced transport is excluded immediately. The surviving
+parabolic search should classify transported kernels only across the bad defect skeletons from
+`M4-S06` and test whether they can enter the chamber selected here.
+
+**Next:** derive the adjugate transport action on the two bad run classes
+`m≡1 (mod 4), i≠k` and `m≡3 (mod 4), i=k`; prove chamber avoidance or extract an exact orbit
+hit.
+
+**Artifact:**
+[`MatrixMortality/ParabolicIncidence.lean`](MatrixMortality/ParabolicIncidence.lean) and
+[`audits/m43-safe-wall-transport-2026-08-30.md`](audits/m43-safe-wall-transport-2026-08-30.md).
 
 ### M4-C03: Zero-framed binary two-Lag compiler
 

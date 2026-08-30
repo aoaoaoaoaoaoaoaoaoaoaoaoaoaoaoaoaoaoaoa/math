@@ -1267,6 +1267,17 @@ two-wall identity and its one-sided exterior target are independently audited ra
 claimed as formalized. The evidence boundary is
 [`audits/m43-one-sided-wall-orbit-2026-08-11.md`](audits/m43-one-sided-wall-orbit-2026-08-11.md).
 
+The safe-wall transport chamber
+[`M4-S08`](SALVAGE.md#m4-s08-safe-wall-transport-chamber) is formalized in the same module.
+`ParabolicBlade.safeWall_incidence_orients_transport` composes the checked wall orientation and
+cokernel formula: a zero incidence with a nonempty safe right wall forces the nonzero transported
+kernel into the strict valuation chamber selected by the wall's leftmost residue. The proof
+handles a zero higher coordinate explicitly and otherwise transfers the strict inequality across
+`v a=4 w b`, using that four is a `3`-adic unit.
+`ParabolicBlade.safeWall_rejects_balanced_transport` then excludes every transported kernel with
+two nonzero coordinates of equal `3`-adic valuation. The exact evidence boundary is
+[`audits/m43-safe-wall-transport-2026-08-30.md`](audits/m43-safe-wall-transport-2026-08-30.md).
+
 The original fixed-ray semantic route is obstructed by
 [`M4-O14`](SALVAGE.md#m4-o14-original-semantic-endpoint-obstruction), formalized in
 [`MatrixMortality/ParabolicSemanticObstruction.lean`](MatrixMortality/ParabolicSemanticObstruction.lean).
@@ -1753,6 +1764,7 @@ fixed-rank decision problem.
 | A varying wall chain vanishes exactly at one consecutive projective incidence | `ParabolicBlade.bridgeFractureChain_eq_zero_iff` |
 | A regular wall bridge has the explicit nonzero annihilating cokernel `(v,-4w)` | `ParabolicBlade.bridgeCokernel_eq_exteriorTail`, `ParabolicBlade.bridgeCokernel_regular_word_ne_zero`, `ParabolicBlade.bridgeCokernel_vecMul_bridge_of_wall` |
 | A regular wall bridge has a canonical nonzero right kernel | `ParabolicBlade.bridgeKernel_regular_word_ne_zero`, `ParabolicBlade.bridge_mulVec_bridgeKernel_of_wall` |
+| Incidence with a safe right wall forces a strict phase-selected transport chamber | `ParabolicBlade.safeWall_incidence_orients_transport`, `ParabolicBlade.safeWall_rejects_balanced_transport` |
 | Every nonempty complete semantic block has a negative original bridge determinant | `ParabolicBlade.bridge_semanticWordMiddle_det_neg` |
 | Every nonempty complete original Neary word has a negative bridge determinant | `ParabolicBlade.completeTileProduct_eq_semanticWordMiddle`, `ParabolicBlade.bridge_completeTileProduct_det_neg` |
 | A fixed original incidence vanishing on the formal terminal plane vanishes on the whole length plane | `ParabolicBlade.semanticIncidence_terminal_forces_length`, `ParabolicBlade.no_fixed_semanticIncidence_terminal_zero_set` |
