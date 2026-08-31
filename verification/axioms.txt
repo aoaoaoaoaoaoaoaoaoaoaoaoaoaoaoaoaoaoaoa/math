@@ -593,6 +593,17 @@
 'MatrixMortality.paired_exact_diagonal_twoChannel_state_lower_bound' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.forcedRuleCCoefficient_eq_sideCoefficient' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.forcedRuleCInsertedHankelRat_det_ne_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.forcedRuleC_exact_state_lower_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.forcedRuleCCompanion_probe_factor' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.exactForcedRuleCCompanion_toggle_det_ne_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.exactForcedRuleCCompanion_not_rankTwoCube' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.exactForcedRuleCOffDiagonalCompanion_not_rankTwoCube' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.ruleScale_eq_of_deletionFirst_fibre' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.nearySideLowerCScale_gt_twentySeven' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.no_neary_deletionFirst_fibre' depends on axioms: [propext, Classical.choice, Quot.sound]
