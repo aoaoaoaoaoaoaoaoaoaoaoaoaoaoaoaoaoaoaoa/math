@@ -943,6 +943,52 @@ theorem fixedSourceAdjacentFamily_target_injective : Function.Injective
     linarith
   exact pow_right_injective₀ (a := (2 / 3 : ℚ)) (by norm_num) (by norm_num) power_eq
 
+/-- Every target in the fixed-source family meets the complementary two-adic endpoint pole. In
+the normalized critical-shell coordinate this pole is `v₂(1-2u)=0`. -/
+theorem fixedSourceAdjacentFamily_targetPole (wait : ℕ) :
+    IsUnit 2 (1 - 2 * ((11 * (2 / 3 : ℚ) ^ wait + 9) / 45)) := by
+  have two_value : HasValue 2 (2 : ℚ) 1 := by
+    simpa using (primePower_hasValue (prime := 2) 1)
+  have eleven_unit : IsUnit 2 (11 : ℚ) := intCast_isUnit_of_not_dvd (by norm_num)
+  have twenty_two_value : HasValue 2 (22 : ℚ) 1 := by
+    convert mul_hasValue two_value eleven_unit using 1 <;> norm_num
+  have three_unit : IsUnit 2 (3 : ℚ) := intCast_isUnit_of_not_dvd (by norm_num)
+  have ratio_value : HasValue 2 (2 / 3 : ℚ) 1 := div_hasValue two_value three_unit
+  have scaled_value :
+      HasValue 2 (22 * (2 / 3 : ℚ) ^ wait) (1 + wait) := by
+    simpa [add_comm] using mul_hasValue twenty_two_value (hasValue_pow ratio_value wait)
+  have scaled_positive : IsPositive 2 (22 * (2 / 3 : ℚ) ^ wait) :=
+    ⟨scaled_value.1, by rw [scaled_value.2]; omega⟩
+  have twenty_seven_unit : IsUnit 2 (27 : ℚ) := intCast_isUnit_of_not_dvd (by norm_num)
+  have numerator_unit := unit_sub_positive twenty_seven_unit scaled_positive
+  have forty_five_unit : IsUnit 2 (45 : ℚ) := intCast_isUnit_of_not_dvd (by norm_num)
+  have quotient_unit := div_hasValue numerator_unit forty_five_unit
+  convert quotient_unit using 1 <;> ring
+
+/-- The sole possible terminal wait for a prescribed target on the fixed-source ray. -/
+def fixedSourceAdjacentWaitCandidate (target : ℚ) : ℕ :=
+  Int.toNat (padicValRat 2 ((45 * target - 9) / 11))
+
+/-- Fixed-target intersection with the parametric ray is one explicit rational equality test. -/
+theorem fixedSourceAdjacentFamily_target_exists_iff (target : ℚ) :
+    (∃ wait : ℕ, (11 * (2 / 3 : ℚ) ^ wait + 9) / 45 = target) ↔
+      (11 * (2 / 3 : ℚ) ^ fixedSourceAdjacentWaitCandidate target + 9) / 45 = target := by
+  constructor
+  · rintro ⟨wait, target_eq⟩
+    have power_eq : (45 * target - 9) / 11 = (2 / 3 : ℚ) ^ wait := by
+      rw [← target_eq]
+      ring
+    have two_value : HasValue 2 (2 : ℚ) 1 := by
+      simpa using (primePower_hasValue (prime := 2) 1)
+    have three_unit : IsUnit 2 (3 : ℚ) := intCast_isUnit_of_not_dvd (by norm_num)
+    have ratio_value : HasValue 2 (2 / 3 : ℚ) 1 := div_hasValue two_value three_unit
+    have candidate_eq : fixedSourceAdjacentWaitCandidate target = wait := by
+      rw [fixedSourceAdjacentWaitCandidate, power_eq, padicValRat.pow, ratio_value.2]
+      simp
+    simpa [candidate_eq] using target_eq
+  · intro candidate_hits
+    exact ⟨fixedSourceAdjacentWaitCandidate target, candidate_hits⟩
+
 /-- The period-ten cleared target numerator has one explicit residue modulo twenty-five. -/
 theorem fixedSourceAdjacentFamily_ten_mul_numerator_mod (period : ℕ) :
     11 * 2 ^ (10 * period) + 9 * 3 ^ (10 * period) ≡

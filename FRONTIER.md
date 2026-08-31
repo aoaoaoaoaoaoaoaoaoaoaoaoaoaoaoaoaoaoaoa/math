@@ -2641,7 +2641,10 @@ Conversely, fixed-source equality itself has an exact infinite saturation family
 `m≥0`, `[1,m+2]` and `[3,1,m]` are adjacent debt bridges from depth one to `m+2` and collide from
 `43/24`; every `m=10k` member is accepted. Their targets are pairwise distinct, so this kills a
 fixed-source wait bound but cannot pump one target and does not settle the fixed-target
-quantifier. This is [`D2-O03`](SALVAGE.md#d2-o03-fixed-source-adjacent-saturation).
+quantifier. Every target nevertheless lies on the complementary endpoint pole
+`v₂(1−2u)=0`. Within this ray the fixed-target query is decidable by testing the sole candidate
+`m=max(0,v₂((45y−9)/11))`; the unresolved quantifier is intersection of the full reachable set,
+not this family. This is [`D2-O03`](SALVAGE.md#d2-o03-fixed-source-adjacent-saturation).
 Higher depth is not free: a published length-thirteen relation yields two distinct
 schedules with the same affine map and a common Lean-checked guarded periodic source. This is an
 exact rewrite seed. Lean also proves that it preserves all intermediate shell guards in every

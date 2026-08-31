@@ -283,7 +283,7 @@ file owns the mathematical stock.
 | [`D2-M01`](#d2-m01-benchmark-critical-shell) | partial mechanism | the mixed-prime benchmark reduces generically to one guarded `5`-adic shell | audited | active |
 | [`D2-O01`](#d2-o01-canonical-collatz-reachability-is-not-automatic) | obstruction | full generalized-Collatz reachability is not synchronously recognizable in its canonical base | external theorem | active |
 | [`D2-O02`](#d2-o02-critical-shell-periodic-saturation) | obstruction and rewrite seed | every nonempty finite wait schedule has a rational all-unit cycle; normalized nonfreeness persists under every generator scaling, while its odd family is a two-seed cancellative pump and the positive finite basis is complete only through length 30 | formalized core; audited strengthening | active |
-| [`D2-O03`](#d2-o03-fixed-source-adjacent-saturation) | obstruction and fixed-source family | the source `43/24` supports infinitely many accepted chamber-contained adjacent collisions with unbounded waits and pairwise-distinct targets | formalized | active |
+| [`D2-O03`](#d2-o03-fixed-source-adjacent-saturation) | obstruction and fixed-source family | the source `43/24` supports infinitely many accepted chamber-contained adjacent collisions on the complementary target pole; the targets are distinct and membership in their ray is decidable | formalized | active |
 
 ## Frankl Conjecture
 
@@ -12143,14 +12143,47 @@ The targets are pairwise distinct. The base `2/3` is positive and not one, hence
 powers are injective; the affine target formula preserves that injectivity. Thus this family
 cannot cycle or pump one fixed target.
 
+The family also survives the complementary endpoint shell from private-prime peeling. If `u_m`
+is its normalized target, Lean proves
+
+```text
+v₂(1−2u_m)=0.
+```
+
+Under `u=3−y_original`, this is exactly `v₂(6y_original−15)=0`. The proof writes
+`1−2u_m=(27−22(2/3)^m)/45`: the second numerator term has positive `2`-adic valuation, while
+`27` and `45` are units. Hence the entire collision ray, not only the accepted `m=10k`
+subfamily, lies on the two-adic target pole.
+
+Fixed-target intersection with this ray is decidable without search. For a prescribed rational
+target `y`, define
+
+```text
+m_y=max(0,v₂((45y−9)/11)).
+```
+
+Lean proves
+
+```text
+∃m, (11(2/3)^m+9)/45=y
+↔ (11(2/3)^m_y+9)/45=y.
+```
+
+If a witness exists, the displayed transformed target equals `(2/3)^m`, whose `2`-adic
+valuation recovers `m`; the converse uses `m_y` directly. Thus no infinite fixed-target
+subfamily survives, and this one parametric-ray intersection is completely effective.
+
 **Scope:** the theorem gives one fixed source, infinitely many accepted chamber-contained
 cross-length collisions, and unbounded terminal waits and raw-word lengths. The shell schedule
 lengths remain two and three. The target varies injectively with `m`, so this does not decide
-fixed-target reachability, accepting-exit reachability, or `M₂(3)`. It does not classify all
-adjacent bridges or all accepted residue classes.
+fixed-target reachability outside the ray, accepting-exit reachability, or `M₂(3)`. It does not
+classify all adjacent bridges or all accepted residue classes. Meeting the endpoint pole is only
+a necessary hard-shell condition, not a mortality witness.
 
 **Artifact:** `MixedPrimeDebt.fixedSourceAdjacentFamily`,
 `MixedPrimeDebt.fixedSourceAdjacentFamily_target_injective`,
+`MixedPrimeDebt.fixedSourceAdjacentFamily_targetPole`,
+`MixedPrimeDebt.fixedSourceAdjacentFamily_target_exists_iff`,
 `MixedPrimeDebt.fixedSourceAdjacentFamily_ten_mul_numerator_mod`,
 `MixedPrimeDebt.fixedSourceAdjacentFamily_ten_mul_numerator`, and
 `MixedPrimeDebt.fixedSourceAdjacentFamily_ten_mul_accepted` in
@@ -12161,7 +12194,7 @@ the fixed rational source and continued residence in one negative-depth chamber.
 equality and target acceptance are both saturated; a decision argument must retain the specified
 target or an accepting exit condition.
 
-**Next:** solve the fixed-target intersection with the parametric ray. Injectivity gives at most
-one `m`; decide effectively whether a prescribed rational target equals
-`(11(2/3)^m+9)/45`, and test whether the benchmark's target-pole or accepting-exit families meet
-this ray. Then seek other adjacent collision rays not conjugate to this one.
+**Next:** the target-pole intersection and the ray's own fixed-target query are closed. Test
+whether any nontrivial accepting-exit suffix family begins on this ray, and whether the prescribed
+benchmark target lies in a controlled extension rather than the ray itself. Then seek other
+adjacent collision rays not conjugate to this one.
