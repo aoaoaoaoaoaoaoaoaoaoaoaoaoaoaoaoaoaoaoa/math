@@ -3505,6 +3505,7 @@ local depths; excluding those assignments, or constructing one, is the remaining
 arbitrary-composite ReturnSquare problem.
 
 **Artifact:** `ReturnSquare.rational_root_num_den_dvd_scale_product`,
+`arbitraryScales_seven_eighths_zero`,
 `positiveBridge_zero_num_den_dvd_base`,
 `positiveBridge_zero_positive_valuation_eq_tail`, and
 `positiveBridge_zero_positive_valuations_cross_mul` in
