@@ -391,6 +391,51 @@ theorem bZeroBDefectCOneCodeCore_thin_decomposition {R : Type*} [CommRing R]
   unfold bZeroBDefectCOneWaitFactor bZeroBDefectCOneRootPencil
   ring
 
+/-- A complement at least `1 / 585` of the nontrivial code scale makes the zero middle wait
+strictly positive. -/
+theorem bZeroBDefectCOneCodeCore_pos_of_zero_wait_large_complement
+    (S D : ℚ) (scale_large : 1 < S) (complement_positive : 0 < D)
+    (complement_large : S - 1 ≤ 585 * D) (x z : Nat) :
+    0 < bZeroBDefectCOneCodeCore S (S - 1 - D) x 0 z := by
+  let A : ℚ := 119911680 * z + 11209824
+  let B : ℚ := 25766986436 * z + 2408152393
+  let Jx : ℚ := 631601581536 * z + 59048086536
+  let J₀ : ℚ := 422435605080 * z + 37838186340
+  have core_eq :
+      bZeroBDefectCOneCodeCore S (S - 1 - D) x 0 z =
+        x * (D * Jx - 9 * (S - 1) * A) + 9 * (S - 1) * B + D * J₀ := by
+    rw [bZeroBDefectCOneCodeCore_thin_decomposition]
+    unfold bZeroBDefectCOneWaitFactor bZeroBDefectCOneRootPencil
+      bZeroBDefectCOneComplementCore
+    dsimp [A, B, Jx, J₀]
+    ring
+  have A_positive : 0 < A := by dsimp [A]; positivity
+  have B_positive : 0 < B := by dsimp [B]; positivity
+  have J₀_positive : 0 < J₀ := by dsimp [J₀]; positivity
+  have slope_gap : 585 * 9 * A < Jx := by
+    have gap_eq : Jx - 585 * 9 * A = 266586336 * z + 28363176 := by
+      dsimp [A, Jx]
+      ring
+    apply sub_pos.mp
+    rw [gap_eq]
+    positivity
+  have scale_product_bound :
+      9 * (S - 1) * A ≤ D * (585 * 9 * A) := by
+    have multiplier_nonnegative : (0 : ℚ) ≤ 9 * A :=
+      mul_nonneg (by norm_num) A_positive.le
+    have scaled := mul_le_mul_of_nonneg_right complement_large multiplier_nonnegative
+    calc
+      9 * (S - 1) * A = (S - 1) * (9 * A) := by ring
+      _ ≤ (585 * D) * (9 * A) := scaled
+      _ = D * (585 * 9 * A) := by ring
+  have complement_product_bound : D * (585 * 9 * A) < D * Jx :=
+    mul_lt_mul_of_pos_left slope_gap complement_positive
+  have slope_positive : 0 < D * Jx - 9 * (S - 1) * A := by
+    exact sub_pos.mpr (scale_product_bound.trans_lt complement_product_bound)
+  rw [core_eq]
+  have scale_difference_positive : 0 < S - 1 := sub_pos.mpr scale_large
+  positivity
+
 private theorem affine_nat_ne_zero_of_negative_positive
     (a b : ℚ) (n x : Nat) (lower_negative : a * n + b < 0)
     (upper_positive : 0 < a * (n + 1) + b) : a * x + b ≠ 0 := by

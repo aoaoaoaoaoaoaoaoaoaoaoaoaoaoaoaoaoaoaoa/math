@@ -1686,6 +1686,12 @@ module. `ParabolicBlade.tagComplementCode_append` proves the affine concatenatio
 complement bound. The exact boundary is
 [`audits/m43-phase-zero-right-c-first-b-density-2026-08-31.md`](audits/m43-phase-zero-right-c-first-b-density-2026-08-31.md).
 
+The phase-zero right-`c` zero-wait complement cone
+[`M4-S30`](SALVAGE.md#m4-s30-phase-zero-right-c-zero-wait-complement-cone) is checked in the same
+module. `ParabolicBlade.bZeroBDefectCOneCodeCore_pos_of_zero_wait_large_complement` collects the
+zero-wait core and proves positivity from one exact coefficient gap. The exact boundary is
+[`audits/m43-phase-zero-right-c-zero-wait-cone-2026-08-31.md`](audits/m43-phase-zero-right-c-zero-wait-cone-2026-08-31.md).
+
 The residue-zero `c`-endpoint exclusion
 [`M4-S12`](SALVAGE.md#m4-s12-residue-zero-c-endpoint-exclusion) is checked in the same module.
 `ParabolicBlade.bridge_cZero_bTwo_bOne_det` and
