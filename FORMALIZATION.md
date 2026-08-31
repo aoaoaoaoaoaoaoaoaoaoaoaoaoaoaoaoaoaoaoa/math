@@ -749,7 +749,7 @@ valuation `a−min(2b,a)` for `a=vₚ(B)` and `b=vₚ(t)`, except at the sole cr
 `a=2b`; at equality, its valuation is still nonpositive whenever the affine predecessor is
 defined. For `t=q^(w+1)`, this is the exact word-visible tax `2(w+1)vₚ(q)`. Positive denominator
 depth survives one terminal pullback only above that tax. Later shell re-entry and cross-prime
-common content remain unclassified. `R32-S44`, `R32-S45`, and `R32-S46` are strict
+common content remain unclassified. `R32-S44` through `R32-S47` are strict
 obstructions, not the arbitrary-composite classification. The two-coordinate interface does
 not reduce to finite-alphabet `M₂(3)` because every scale `qⁿ` remains a distinct return letter.
 
@@ -765,7 +765,14 @@ that the predecessor returns to depth `a`. If `x+b>0` and the three valuations `
 `a` are pairwise distinct, its depth is exactly `a−min(x+b,2b,a)`. Hence the only local
 valuation ties are `x=−b`, `x=b`, `x=a−b`, and `a=2b`. The surviving denominator problem is
 the residue and common-content dynamics on those four moving walls, not an arbitrary valuation
-assignment.
+assignment. Each wall now has an exact normalized residue law. At `x=−b`, the denominator is a
+unit and the predecessor depth is `a+vₚ(st−A)`. At `x=b` and `x=a−b`, removing the common `B`
+leaves one displayed residual denominator whose valuation is the negative of the predecessor
+depth. At `a=2b`, the normalized critical residue has nonnegative valuation and the only further
+tie is one explicit sum. Lean also checks a nonresonant five-return zero at `d=3/4` using only
+even scales; its inverse orbit crosses both `x=−b` and the critical wall. Together with the
+earlier arbitrary-scale fractures, this shows that none of the four walls, nor common prime
+content alone, forces resonance. Common powers of one base remain unclassified.
 
 The common-geometric-base hypothesis cannot be weakened to total divisibility of an arbitrary
 scale alphabet. Lean checks that `[3,15,3,3,15,3,3,3]` is pairwise totally ordered under
@@ -2347,6 +2354,7 @@ fixed-rank decision problem.
 | `ReturnSquarePrimePower.lean` | bridge-polynomial root support and finite quotient walls |
 | `ReturnSquareClassification.lean` | complete prime-power ReturnSquare parameter classification |
 | `ReturnSquareComposite.lean` | arbitrary-base root support, positive-valuation synchronization, and the divisibility-chain fracture |
+| `ReturnSquareFractionPullback.lean` | full fraction pullback, denominator-prime shell grammar, and exact four-wall residue laws |
 | `ReturnSquareTax.lean` | exact four-state lower bound for literal reversible-stack returns |
 | `ReturnSquareNoGo.lean` | quadratic-pencil reversible-squaring obstruction and blind-scaling collapse |
 | `ReturnJordan.lean` | parity-Jordan rail rigidity and modular immortality certificate |
@@ -2645,6 +2653,7 @@ fixed-rank decision problem.
 | Bang–Zsigmondy holds above exponent two, except for `2⁶−1` | `exists_primitivePrimeDivisor` |
 | Prime-power ReturnSquare is mortal exactly at one-return resonances | `ReturnSquare.physical_isMortal_primePower_iff` |
 | Every positive valuation of a composite-base ReturnSquare bridge zero equals the corresponding base valuation times one common proper-tail exponent | `ReturnSquare.positiveBridge_zero_positive_valuation_eq_tail`, `ReturnSquare.positiveBridge_zero_positive_valuations_cross_mul` |
+| Every denominator-prime valuation wall has one exact normalized residue transition; arbitrary even scales realize the numerator and critical walls in one nonresonant zero | `ReturnSquare.fractionPredecessor_hasValue_of_numerator_wall`, `ReturnSquare.fractionPredecessor_hasValue_of_equalScale_residue`, `ReturnSquare.fractionPredecessor_hasValue_of_denominatorScale_residue`, `ReturnSquare.fractionPredecessor_hasValue_of_critical_scale_wall`, `ReturnSquare.evenScales_threeFourths_wall_fracture` |
 | Total divisibility of an arbitrary scale alphabet does not force ReturnSquare resonance-only roots | `ReturnSquare.divisibilityChain_twentyFive_twentySeven_zero` |
 | Literal reversible-stack returns require at least four exact states | `ReturnSquareTax.reversibleStack_card_lower_bound` |
 | Three singular quadratic modes cannot exchange `t` with `κt²` | `ReturnSquareNoGo.threeMode_swap_eq_zero` |

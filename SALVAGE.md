@@ -157,6 +157,7 @@ file owns the mathematical stock.
 | [`R32-S44`](#r32-s44-composite-returnsquare-tail-synchronization) | structure theorem and obstruction | every numerator-prime valuation of a composite-base bridge zero is fixed by one common proper-tail exponent | formalized | active |
 | [`R32-S45`](#r32-s45-fraction-pullback-and-terminal-denominator-shell) | structure theorem and obstruction | every rational ReturnSquare bridge is one reversed two-coordinate incidence, whose final denominator-prime predecessor has an exact clipped valuation outside one critical shell | formalized | active |
 | [`R32-S46`](#r32-s46-denominator-predecessor-shell-grammar) | structure theorem and obstruction | every inverse denominator-prime step outside four explicit valuation ties follows one exact tropical minimum | formalized | active |
+| [`R32-S47`](#r32-s47-exact-four-wall-residue-laws) | structure theorem and obstruction | all four denominator-prime ties have exact normalized residue transitions, and none alone forces resonance outside the common-geometric alphabet | formalized | active |
 | [`R32-M01`](#r32-m01-generic-reverse-edge-compiler) | partial mechanism | projective incidence generically embeds into a compatible two-plane edge square | formalized | active |
 | [`R32-M02`](#r32-m02-finite-quotient-sieve) | partial mechanism | finite monoid quotients give complete modular no-certificates for fixed candidates | formalized | active |
 | [`R32-M03`](#r32-m03-two-scale-return-conversion) | partial mechanism | a minimal two-scale return pencil has nonresonant multi-return zeros | formalized | active |
@@ -5848,6 +5849,115 @@ audit
 branch only on the four equalities (4). A closure must prove that residue choices on those walls
 cannot assemble a full backward path from `B` to the boundary coordinate `At_head`, or exhibit
 such a path and lift it to an exact rational root.
+
+### R32-S47: Exact four-wall residue laws
+
+**Kind:** structure theorem and obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+The four ties in `R32-S46` admit complete normalized coordinates. Fix a denominator prime and
+write `a=vₚ(B)>0`, `b=vₚ(t)>0`, and `x=vₚ(s)`.
+
+On `x=−b`, `st` is a unit. The denominator of the inverse branch remains a unit, so
+
+```text
+vₚ(F_t⁻¹(s)) = a + vₚ(st−A),
+F_t⁻¹(s)=0  ↔  st=A.                                        (1)
+```
+
+On `x=b`, write `s=tu` with `u` a unit and define
+
+```text
+η = t²(u+B−A)/B − 1.
+```
+
+Then
+
+```text
+F_t⁻¹(tu) = (t²u−A)/η,       vₚ(F_t⁻¹(tu))=−vₚ(η).          (2)
+```
+
+The numerator in (2) is a unit. Before dividing by `B`, the first residue is `u+B−A`; when its
+valuation does not produce a second tie with `a`, Lean recovers the corresponding exact tropical
+minimum. If `u+B−A=0`, the inverse is the unit expression `A−t²u`.
+
+On `x=a−b`, write `st=Bu` with `u` a unit and define
+
+```text
+θ = u−1 + (B−A)t²/B.
+```
+
+Then
+
+```text
+F_t⁻¹(s) = (Bu−A)/θ,         vₚ(F_t⁻¹(s))=−vₚ(θ).           (3)
+```
+
+At the exact center `u=1`, cancellation is monomial:
+
+```text
+st=B  ⇒  F_t⁻¹(s)=B/t².                                    (4)
+```
+
+On `a=2b`, define the critical residue
+
+```text
+κ = (B−A)t²/B − 1.
+```
+
+Every nonzero `κ` has nonnegative valuation, and
+
+```text
+F_t⁻¹(s) = (st−A)/(st/B+κ).                                 (5)
+```
+
+If `y=vₚ(st)>0`, the numerator in (5) is a unit. Away from the sole secondary equality
+`y−a=vₚ(κ)`, Lean proves
+
+```text
+vₚ(F_t⁻¹(s)) = −min(y−a,vₚ(κ)).                             (6)
+```
+
+Equations (1)–(6) retain the complete common factor instead of primitive-normalizing it. The
+remaining local freedom is the valuation of one displayed rational residue or residue sum.
+
+No wall alone forces one-return resonance outside the common-geometric alphabet. Lean checks the
+nonresonant even-scale word
+
+```text
+d=3/4,       [44,2,6,10,6],
+```
+
+whose reverse inverse orbit is
+
+```text
+4 → 3/2 → 16/37 → −3/64 → 132=3·44.
+```
+
+At the prime two, the first transition is critical and the second has `x=−b`; every scale is
+even. The earlier `d=7/8` and `d=25/27` fractures traverse `x=b` and `x=a−b`. Thus all four
+walls support genuine multi-return zeros in arbitrary-scale systems, even under a shared
+denominator prime.
+
+**Scope:** none of these words consists of powers of one common base. The open ReturnSquare
+problem is now exact: prove that common geometric powers cannot concatenate the normalized
+residues (1)–(6) from terminal coordinate `B` to boundary coordinate `At_head`, or exhibit such
+a concatenation.
+
+**Artifact:** `ReturnSquare.fractionPredecessor_hasValue_of_numerator_wall`,
+`fractionPredecessor_hasValue_of_equalScale_residue`,
+`fractionPredecessor_hasValue_of_denominatorScale_residue`,
+`fractionPredecessor_hasValue_of_critical_scale_wall`,
+`evenScales_threeFourths_wall_fracture`, and
+`evenScales_threeFourths_wall_values` in
+[`ReturnSquareFractionPullback.lean`](MatrixMortality/ReturnSquareFractionPullback.lean), with
+audit
+[`m32-returnsquare-four-wall-residues-2026-08-31.md`](audits/m32-returnsquare-four-wall-residues-2026-08-31.md).
+
+**Use:** branch on exact normalized residues, not unspecified cancellation. A closure must use
+the common-power relation among successive scales; valuation walls and a shared scale prime are
+insufficient.
 
 ### R32-M01: Generic reverse edge compiler
 

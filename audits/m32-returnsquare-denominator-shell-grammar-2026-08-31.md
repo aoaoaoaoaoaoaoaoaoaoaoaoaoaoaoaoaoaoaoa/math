@@ -91,6 +91,12 @@ NEW WOUND: all denominator-prime inverse dynamics outside four explicit moving w
 
 EXACT THROAT: classify residue and common-content transitions on `x=−b`, `x=b`, `x=a−b`, and `a=2b`, then enforce the boundary path from `B` to `At_head`
 
+## Subsequent Disposition
+
+[`R32-S47`](../SALVAGE.md#r32-s47-exact-four-wall-residue-laws) supplies exact normalized
+coordinates for all four walls and rejects every wall as a standalone resonance obstruction.
+The surviving throat is global compatibility under scales that are powers of one common base.
+
 ## Evidence
 
 The formal owner is
