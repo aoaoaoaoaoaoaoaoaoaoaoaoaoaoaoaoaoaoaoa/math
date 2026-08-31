@@ -3,9 +3,10 @@ import MatrixMortality.DecimalSetterAncestry
 /-!
 # Positioned `D_b` decimal entry obstructions
 
-A one-`D_b` all-erasure block preserves the all-zero lower word. Its punctuated upper code
-differs from the all-`D_c` code only above an exact suffix. The suffix depth excludes every
-`D_b` among the first `β+1` roles at the distinguished two-`c` raw head.
+An all-erasure block preserves the all-zero lower word. Factoring at its rightmost `D_b`
+absorbs every earlier marker into one coefficient congruent to `2` modulo `5`. This exact
+suffix factorization excludes every nonempty-marker erasure word at the distinguished two-`c`
+raw head.
 -/
 
 namespace MatrixMortality.DecimalSetterAncestry
@@ -123,15 +124,10 @@ private theorem five_dvd_replicateTrue_code (width : Nat) :
       push_cast
       exact dvd_add (dvd_mul_right 5 _) induction
 
-/-- The coefficient of every positioned one-`D_b` upper perturbation is congruent to `2`
-modulo `5`; the displayed common suffix is therefore its exact five-adic depth. -/
-theorem positionedBUpperCoefficient_sub_two_dvd_five
-    {β : Nat} (β_positive : 0 < β) (prefixWidth : Nat) :
-    (5 : ℤ) ∣ positionedBUpperCoefficient β prefixWidth - 2 := by
-  let prefixCode : ℤ := code (List.replicate prefixWidth true)
+private theorem markerWord_code_sub_two_dvd_five
+    {β : Nat} (β_positive : 0 < β) :
+    (5 : ℤ) ∣ (code (markerWord β) : ℤ) - 2 := by
   let markerCode : ℤ := code (markerWord β)
-  have prefix_dvd : (5 : ℤ) ∣ prefixCode := by
-    exact five_dvd_replicateTrue_code prefixWidth
   have marker_identity : 9 * markerCode + 7 = 52 * 10 ^ β := by
     dsimp only [markerCode]
     exact_mod_cast markerWord_code_identity β
@@ -142,8 +138,19 @@ theorem positionedBUpperCoefficient_sub_two_dvd_five
       (pow_dvd_pow (5 : ℤ) β_positive).trans
         (pow_dvd_pow_of_dvd (by norm_num : (5 : ℤ) ∣ 10) β)
     exact dvd_sub (five_dvd_ten.mul_left 52) (by norm_num)
+  exact (by norm_num : IsCoprime (5 : ℤ) 9).dvd_of_dvd_mul_left marker_scaled_dvd
+
+/-- The coefficient of every positioned one-`D_b` upper perturbation is congruent to `2`
+modulo `5`; the displayed common suffix is therefore its exact five-adic depth. -/
+theorem positionedBUpperCoefficient_sub_two_dvd_five
+    {β : Nat} (β_positive : 0 < β) (prefixWidth : Nat) :
+    (5 : ℤ) ∣ positionedBUpperCoefficient β prefixWidth - 2 := by
+  let prefixCode : ℤ := code (List.replicate prefixWidth true)
+  let markerCode : ℤ := code (markerWord β)
+  have prefix_dvd : (5 : ℤ) ∣ prefixCode := by
+    exact five_dvd_replicateTrue_code prefixWidth
   have marker_sub_two_dvd : (5 : ℤ) ∣ markerCode - 2 :=
-    (by norm_num : IsCoprime (5 : ℤ) 9).dvd_of_dvd_mul_left marker_scaled_dvd
+    markerWord_code_sub_two_dvd_five β_positive
   have coefficient_eq : positionedBUpperCoefficient β prefixWidth =
       prefixCode * 10 ^ (β + 1) + markerCode - prefixCode := by
     dsimp only [positionedBUpperCoefficient, prefixCode, markerCode]
@@ -154,6 +161,114 @@ theorem positionedBUpperCoefficient_sub_two_dvd_five
   rw [show prefixCode * 10 ^ (β + 1) + markerCode - prefixCode - 2 =
     prefixCode * 10 ^ (β + 1) + (markerCode - 2) - prefixCode by ring]
   exact dvd_sub (dvd_add (prefix_dvd.mul_right _) marker_sub_two_dvd) prefix_dvd
+
+/-- Coefficient of the entire upper perturbation when `D_b` is the rightmost marker and its
+prefix may contain earlier markers. -/
+def rightmostBUpperCoefficient (β : Nat) (front : List TagLetter) : ℤ :=
+  code (tagEncode β front ++ markerWord β) -
+    code (List.replicate front.length true)
+
+private theorem rightmostB_punctuatedUpper_eq_append
+    (β : Nat) (front : List TagLetter) (tailWidth : Nat) :
+    punctuatedUpper β (front ++ .b :: List.replicate tailWidth .c) =
+      (tagEncode β front ++ markerWord β) ++
+        (List.replicate (tailWidth + 1) true ++ markerWord β) := by
+  simp [punctuatedUpper, tagEncode_append, tagEncode_cons, tagCode, markerWord,
+    List.replicate_succ, List.append_assoc]
+
+/-- Factoring at the rightmost `D_b` absorbs every earlier marker into one coefficient and
+leaves the same common suffix as the single-marker word. -/
+theorem rightmostB_punctuatedUpper_code_sub_eq
+    (β : Nat) (front : List TagLetter) (tailWidth : Nat) :
+    (code (punctuatedUpper β
+        (front ++ .b :: List.replicate tailWidth .c)) : ℤ) -
+      code (punctuatedUpper β
+        (List.replicate (front.length + tailWidth + 1) .c)) =
+      rightmostBUpperCoefficient β front * 10 ^ (tailWidth + β + 2) := by
+  let suffix := List.replicate (tailWidth + 1) true ++ markerWord β
+  have suffix_length : suffix.length = tailWidth + β + 2 := by
+    simp [suffix, markerWord]
+    omega
+  rw [rightmostB_punctuatedUpper_eq_append,
+    sameWidthAllC_positioned_punctuatedUpper_eq_append]
+  change (code ((tagEncode β front ++ markerWord β) ++ suffix) : ℤ) -
+      code (List.replicate front.length true ++ suffix) = _
+  have marked_code := code_append (tagEncode β front ++ markerWord β) suffix
+  have allC_code := code_append (List.replicate front.length true) suffix
+  rw [marked_code, allC_code]
+  push_cast
+  rw [suffix_length]
+  dsimp only [rightmostBUpperCoefficient]
+  ring
+
+/-- Earlier `D_b` markers cannot change the leading coefficient at the unique rightmost
+marker: it remains congruent to `2` modulo `5`. -/
+theorem rightmostBUpperCoefficient_sub_two_dvd_five
+    {β : Nat} (β_positive : 0 < β) (front : List TagLetter) :
+    (5 : ℤ) ∣ rightmostBUpperCoefficient β front - 2 := by
+  let encodedPrefix : ℤ := code (tagEncode β front)
+  let allCPrefix : ℤ := code (List.replicate front.length true)
+  let markerCode : ℤ := code (markerWord β)
+  have allC_prefix_dvd : (5 : ℤ) ∣ allCPrefix :=
+    five_dvd_replicateTrue_code front.length
+  have marker_sub_two_dvd : (5 : ℤ) ∣ markerCode - 2 :=
+    markerWord_code_sub_two_dvd_five β_positive
+  have ten_dvd : (5 : ℤ) ∣ 10 ^ (β + 1) :=
+    (pow_dvd_pow (5 : ℤ) (show 1 ≤ β + 1 by omega)).trans
+      (pow_dvd_pow_of_dvd (by norm_num : (5 : ℤ) ∣ 10) (β + 1))
+  have coefficient_eq : rightmostBUpperCoefficient β front =
+      encodedPrefix * 10 ^ (β + 1) + markerCode - allCPrefix := by
+    dsimp only [rightmostBUpperCoefficient, encodedPrefix, allCPrefix, markerCode]
+    rw [code_append]
+    push_cast
+    simp only [markerWord, List.length_cons, List.length_replicate]
+  rw [coefficient_eq]
+  rw [show encodedPrefix * 10 ^ (β + 1) + markerCode - allCPrefix - 2 =
+    encodedPrefix * 10 ^ (β + 1) + (markerCode - 2) - allCPrefix by ring]
+  exact dvd_sub
+    (dvd_add (ten_dvd.mul_left encodedPrefix) marker_sub_two_dvd) allC_prefix_dvd
+
+/-- Exact physical upper length: every `b` role contributes `β+1` digits beyond the one digit
+contributed by every role. -/
+theorem tagEncode_length_eq_roleLength_add_markerCount
+    (β : Nat) (letters : List TagLetter) :
+    (tagEncode β letters).length =
+      letters.length + letters.count .b * (β + 1) := by
+  induction letters with
+  | nil =>
+      rw [tagEncode_nil]
+      simp
+  | cons letter letters induction =>
+      rw [tagEncode_cons, List.length_append, induction]
+      cases letter <;> simp [tagCode, Nat.add_mul] <;> omega
+
+/-- Erase each letter of an arbitrary binary tag word. -/
+def letterEraseBlock (letters : List TagLetter) : List NearyTile :=
+  letters.map .erase
+
+/-- Every arbitrary all-erasure block emits the all-zero lower word. -/
+@[simp] theorem spell_letterEraseBlock_lower
+    (β : Nat) (body letters : List TagLetter) :
+    spell (nearyLower β body) (letterEraseBlock letters) =
+      List.replicate letters.length false := by
+  induction letters with
+  | nil => rfl
+  | cons letter letters induction =>
+      change false :: spell (nearyLower β body) (letterEraseBlock letters) =
+        false :: List.replicate letters.length false
+      exact congrArg (false :: ·) induction
+
+/-- Decimal lower code emitted by an arbitrary all-erasure tag word. -/
+def letterEraseLowerCode
+    (β : Nat) (body letters : List TagLetter) : ℤ :=
+  code (spell (nearyLower β body) (letterEraseBlock letters))
+
+theorem letterEraseLowerCode_eq_allEraseLowerCode
+    (β : Nat) (body letters : List TagLetter) :
+    letterEraseLowerCode β body letters =
+      allEraseLowerCode β body letters.length := by
+  simp only [letterEraseLowerCode, allEraseLowerCode,
+    spell_letterEraseBlock_lower, spell_allEraseBlock]
 
 /-- Decimal lower code emitted by a one-`D_b` erasure block. -/
 def positionedBEraseLowerCode
@@ -398,6 +513,175 @@ theorem positionedBErase_rawHead_shell_impossible_allPositions
     body headTail β_large head_unit mu_eq gap_eq lift_eq shell
   exact positionedBErase_exceptionalRawHead_shell_impossible
     body β_large prefix_late head_eq mu_eq gap_eq lift_eq shell
+
+/-- An arbitrary all-erasure word whose rightmost `D_b` has only `D_c` roles after it cannot
+carry a lawful two-`c` raw head into another multi-role pole. Earlier `D_b` roles are allowed,
+and the prospective pole lies at the exact encoded-word depth. -/
+theorem rightmostBErase_rawHead_shell_impossible
+    {β tailWidth : Nat} (body headTail front : List TagLetter) {μ E G : ℤ}
+    (β_large : 2 ≤ β)
+    (head_unit :
+      HasDecimalShell (code (peeledHeadWord β (.c :: .c :: headTail)) : ℚ) 0 0)
+    (mu_eq : 9 * μ = 52 * 10 ^ β - 7)
+    (gap_eq : E = 18 * 10 ^ β - 63)
+    (lift_eq : G = 502 * 10 ^ β - 7)
+    (shell :
+      HasDecimalShell
+        (((code (peeledHeadWord β (.c :: .c :: headTail)) : ℤ) *
+          (E * code (punctuatedUpper β
+              (front ++ .b :: List.replicate tailWidth .c)) +
+            G * letterEraseLowerCode β body
+              (front ++ .b :: List.replicate tailWidth .c)) -
+          10 * μ * G * letterEraseLowerCode β body
+            (front ++ .b :: List.replicate tailWidth .c) : ℤ) : ℚ)
+        ((((tagEncode β (front ++ .b :: List.replicate tailWidth .c)).length - 1 : Nat) : ℤ))
+        ((((tagEncode β (front ++ .b :: List.replicate tailWidth .c)).length - 1 : Nat) : ℤ))) :
+    False := by
+  let n := front.length + tailWidth + 1
+  let H : ℤ := code (peeledHeadWord β (.c :: .c :: headTail))
+  let PAll : ℤ := code (punctuatedUpper β (List.replicate n .c))
+  let P : ℤ := code (punctuatedUpper β
+    (front ++ .b :: List.replicate tailWidth .c))
+  let V := letterEraseLowerCode β body
+    (front ++ .b :: List.replicate tailWidth .c)
+  let RAll := H * (E * PAll + G * V) - 10 * μ * G * V
+  let R := H * (E * P + G * V) - 10 * μ * G * V
+  let D := rightmostBUpperCoefficient β front
+  let targetDepth :=
+    (tagEncode β (front ++ .b :: List.replicate tailWidth .c)).length - 1
+  have n_positive : 1 ≤ n := by
+    dsimp only [n]
+    omega
+  have allC_upper_eq : 9 * PAll =
+      50 * 10 ^ β * 10 ^ n + 2 * 10 ^ β - 7 := by
+    exact allC_punctuatedUpper_code_identity β n
+  have V_eq : V = allEraseLowerCode β body n := by
+    dsimp only [V, n]
+    rw [letterEraseLowerCode_eq_allEraseLowerCode]
+    congr 1
+    simp only [List.length_append, List.length_cons, List.length_replicate]
+    omega
+  have lower_eq : 9 * V = 7 * 10 ^ n - 7 := by
+    have identity := allEraseLowerCode_identity β body n
+    rw [V_eq]
+    linear_combination identity
+  have upper_difference_eq :
+      P - PAll = D * 10 ^ (tailWidth + β + 2) := by
+    dsimp only [P, PAll, D, n]
+    exact rightmostB_punctuatedUpper_code_sub_eq β front tailWidth
+  have allC_residual_eq : RAll = H * (E * PAll + G * V) - 10 * μ * G * V := rfl
+  have residual_eq : R = H * (E * P + G * V) - 10 * μ * G * V := rfl
+  have front_encoded_long : front.length ≤ (tagEncode β front).length :=
+    length_le_tagEncode β front
+  have targetDepth_eq :
+      targetDepth = (tagEncode β front).length + tailWidth + β + 1 := by
+    dsimp only [targetDepth]
+    simp only [tagEncode_append, tagEncode_cons, tagCode, tagEncode_replicate_c,
+      List.length_append, List.length_cons, List.length_replicate, List.length_nil,
+      Nat.zero_add]
+    omega
+  have threshold_le : n + β ≤ targetDepth := by
+    rw [targetDepth_eq]
+    dsimp only [n]
+    omega
+  have physical_shell : HasDecimalShell (R : ℚ) targetDepth targetDepth := by
+    simpa only [targetDepth, H, P, V, R] using shell
+  have physical_deep : (5 : ℤ) ^ targetDepth ∣ R :=
+    fivePower_dvd_int_of_hasDecimalShell physical_shell
+  have threshold_deep : (5 : ℤ) ^ (n + β) ∣ R :=
+    (pow_dvd_pow (5 : ℤ) threshold_le).trans physical_deep
+  have width_deep : (5 : ℤ) ^ (n + 1) ∣ R :=
+    (pow_dvd_pow (5 : ℤ) (by omega)).trans threshold_deep
+  have beta_deep : (5 : ℤ) ^ β ∣ R :=
+    (pow_dvd_pow (5 : ℤ) (by omega)).trans threshold_deep
+  by_cases front_early : front.length ≤ β
+  · refine aboveWidthUpperPerturbation_peeledDoubleCHead_of_fivePower_dvd
+      (PAll := PAll) (P := P) (V := V) (RAll := RAll) (R := R)
+        headTail β_large n_positive head_unit mu_eq gap_eq lift_eq allC_upper_eq lower_eq
+        allC_residual_eq ?_ residual_eq width_deep
+    · rw [upper_difference_eq]
+      have five_to_ten : (5 : ℤ) ^ (n + 1) ∣ 10 ^ (tailWidth + β + 2) :=
+        (pow_dvd_pow (5 : ℤ) (by
+          dsimp only [n]
+          omega)).trans
+          (pow_dvd_pow_of_dvd (by norm_num : (5 : ℤ) ∣ 10) (tailWidth + β + 2))
+      exact five_to_ten.mul_left D
+  · have front_late : β < front.length := Nat.lt_of_not_ge front_early
+    obtain ⟨suffix, suffix_positive, suffix_le, _, head_eq⟩ :=
+      peeledDoubleCHead_unit_shape headTail (by omega) head_unit
+    rcases lt_or_eq_of_le suffix_le with suffix_regular | suffix_exceptional
+    · refine betaDeepUpperPerturbation_regularRawHead_of_fivePower_dvd
+        (PAll := PAll) (P := P) (V := V) (RAll := RAll) (R := R)
+          suffix_positive (by omega) n_positive head_eq mu_eq gap_eq lift_eq
+          allC_upper_eq lower_eq allC_residual_eq ?_ residual_eq beta_deep
+      · rw [upper_difference_eq]
+        have five_to_ten : (5 : ℤ) ^ β ∣ 10 ^ (tailWidth + β + 2) :=
+          (pow_dvd_pow (5 : ℤ) (by omega)).trans
+            (pow_dvd_pow_of_dvd (by norm_num : (5 : ℤ) ∣ 10) (tailWidth + β + 2))
+        exact five_to_ten.mul_left D
+    · rw [suffix_exceptional] at head_eq
+      exact exceptionalRawHead_lateUpperPerturbation_of_fivePower_dvd
+        (PAll := PAll) (P := P) (V := V) (RAll := RAll) (R := R) (D := D)
+          β_large front_late head_eq mu_eq gap_eq lift_eq
+          (by simpa only [n] using allC_upper_eq)
+          (by simpa only [n] using lower_eq) allC_residual_eq upper_difference_eq
+          (rightmostBUpperCoefficient_sub_two_dvd_five (by omega) front)
+          residual_eq (by simpa only [n] using threshold_deep)
+
+private theorem allC_or_exists_rightmostB (letters : List TagLetter) :
+    letters = List.replicate letters.length .c ∨
+      ∃ front tailWidth,
+        letters = front ++ .b :: List.replicate tailWidth .c := by
+  induction letters with
+  | nil => exact Or.inl rfl
+  | cons letter letters induction =>
+      rcases induction with allC | ⟨front, tailWidth, rightmost⟩
+      · cases letter with
+        | b =>
+            right
+            refine ⟨[], letters.length, ?_⟩
+            rw [List.nil_append]
+            exact congrArg (.b :: ·) allC
+        | c =>
+            left
+            rw [allC]
+            rw [List.length_cons, List.length_replicate, List.replicate_succ]
+      · exact Or.inr ⟨letter :: front, tailWidth, by rw [rightmost]; rfl⟩
+
+private theorem exists_rightmostB_of_mem
+    {letters : List TagLetter} (marker_mem : .b ∈ letters) :
+    ∃ front tailWidth,
+      letters = front ++ .b :: List.replicate tailWidth .c := by
+  rcases allC_or_exists_rightmostB letters with allC | rightmost
+  · rw [allC] at marker_mem
+    simp at marker_mem
+  · exact rightmost
+
+/-- Every nonempty-marker all-erasure word over `{D_b,D_c}` misses the next multi-role pole at
+the exact physical depth `|letters| + count_b(letters) * (β+1) - 1`. The number and positions
+of `D_b` roles are unrestricted. -/
+theorem letterErase_rawHead_shell_impossible_of_b_mem
+    {β : Nat} (body headTail letters : List TagLetter) {μ E G : ℤ}
+    (β_large : 2 ≤ β) (marker_mem : .b ∈ letters)
+    (head_unit :
+      HasDecimalShell (code (peeledHeadWord β (.c :: .c :: headTail)) : ℚ) 0 0)
+    (mu_eq : 9 * μ = 52 * 10 ^ β - 7)
+    (gap_eq : E = 18 * 10 ^ β - 63)
+    (lift_eq : G = 502 * 10 ^ β - 7)
+    (shell :
+      HasDecimalShell
+        (((code (peeledHeadWord β (.c :: .c :: headTail)) : ℤ) *
+          (E * code (punctuatedUpper β letters) +
+            G * letterEraseLowerCode β body letters) -
+          10 * μ * G * letterEraseLowerCode β body letters : ℤ) : ℚ)
+        (((letters.length + letters.count .b * (β + 1) - 1 : Nat) : ℤ))
+        (((letters.length + letters.count .b * (β + 1) - 1 : Nat) : ℤ))) :
+    False := by
+  obtain ⟨front, tailWidth, letters_eq⟩ := exists_rightmostB_of_mem marker_mem
+  subst letters
+  apply rightmostBErase_rawHead_shell_impossible body headTail front
+    β_large head_unit mu_eq gap_eq lift_eq
+  simpa only [tagEncode_length_eq_roleLength_add_markerCount] using shell
 
 /-- An all-erasure word whose second tile is `D_b`. -/
 def secondBEraseBlock (tailWidth : Nat) : List NearyTile :=

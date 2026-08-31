@@ -1825,6 +1825,16 @@ including both resonance arms and their corner. The physical specialization and
 `positionedBErase_rawHead_shell_impossible_allPositions` exclude a sole `D_b` in every
 all-erasure position.
 
+Record [`MM-S49`](SALVAGE.md#mm-s49-nonempty-marker-all-erasure-extinction) absorbs arbitrary
+marker superpositions into the unique rightmost `D_b`. For `w=u·b·c^t`,
+`rightmostB_punctuatedUpper_code_sub_eq` factors the entire upper difference at depth
+`t+β+2`, and `rightmostBUpperCoefficient_sub_two_dvd_five` proves its coefficient is always
+`2` modulo `5`, independent of earlier markers in `u`. The identity
+`|tagEncode_β(w)|=|w|+#_b(w)(β+1)` fixes the prospective pole at physical depth
+`|tagEncode_β(w)|-1`; its divisibility descends to the three obstruction thresholds. The
+theorem `letterErase_rawHead_shell_impossible_of_b_mem` combines the early, regular-head, and
+exceptional-head cuts and excludes every all-erasure word with nonempty `D_b` support.
+
 Record [`MM-S37`](SALVAGE.md#mm-s37-decimal-three-shape-frontier-extinction) separates the
 ternary and decimal first-multi-transfer fronts. The single theorem
 `DecimalSetterDepth.firstMultiTransfer_threeShapeFrontier_impossible` consumes the three role
@@ -2535,7 +2545,7 @@ fixed-rank decision problem.
 | `DecimalSetterSuffix.lean` | bounded-suffix Hensel cycles, exact inverse-cylinder contraction, first-cylinder collision, forward decoding, and arbitrary two-prime depth transport |
 | `DecimalSetterBranchSeparation.lean` | complete hidden-branch separation and the exact asymmetric later-tail shell forced by a branch-switch collision |
 | `DecimalSetterMultitransfer.lean` | extinction of all three swapped-ternary frontier shapes under the analogous decimal carrier shells |
-| `DecimalSetterPositioned.lean` | exact positioned one-`D_b` suffix calculus and coefficient; global all-erasure raw-head-to-multi extinction |
+| `DecimalSetterPositioned.lean` | rightmost-marker suffix calculus; exact unit coefficient under arbitrary earlier markers; global nonempty-`D_b` all-erasure raw-head-to-multi extinction |
 | `PairedMortality.lean` | common-column mortality converse and exact integer `4 × 4` family |
 | `PhaseFracture.lean` | phase normalization and dimension-free projective-identification contradiction |
 | `PhaseRigidity.lean` | checked local role algebra, discrepancy commutators, and invariant-pencil rigidity |

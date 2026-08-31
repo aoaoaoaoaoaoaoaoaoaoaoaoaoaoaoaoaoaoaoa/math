@@ -1089,6 +1089,16 @@ Consequently no one-`D_b` all-erasure word carries the initial two-`c` raw head 
 multi-role pole, in any position. The live erasure frontier begins with at least two `D_b`
 roles; rule-bearing first blocks and later generalized carriers also remain.
 
+[`MM-S49`](SALVAGE.md#mm-s49-nonempty-marker-all-erasure-extinction) removes that apparent
+multi-marker frontier entirely. Every nonempty marker word has a unique rightmost `D_b`; after
+factoring its common suffix, all earlier markers lie inside one coefficient that remains `2`
+modulo `5`. A word `w` with `k≥1` markers has exact physical shell depth
+`|tagEncode_β(w)|-1=|w|+k(β+1)-1`; this shell supplies every shallower divisor used by the
+S47 analysis. Hence every all-erasure word containing at least one `D_b` misses the next
+multi-role pole. Pure all-`D_c` words belong to the earlier length cuts. The decimal first-entry
+search is now confined to rule-bearing blocks and later generalized carriers; no ternary
+cylinder classification is being imported.
+
 The ternary and decimal branches now separate at their first multi-transfer front.
 [`MM-S37`](SALVAGE.md#mm-s37-decimal-three-shape-frontier-extinction) substitutes each of the
 three role shapes left by the swapped ternary gate into the decimal carrier equation. All are

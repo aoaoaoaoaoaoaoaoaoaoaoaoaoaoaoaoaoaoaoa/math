@@ -144,7 +144,8 @@ file owns the mathematical stock.
 | [`MM-S42`](#mm-s42-swapped-positive-depth-one-extinction) | structure theorem and obstruction | every regular positive-depth-one one-transfer pole either is an impossible Neary residual or certifies source halting | formalized | active |
 | [`MM-S44`](#mm-s44-compiler-envelope-rule-bearing-extinction) | obstruction | compiler-emitted bodies exclude every rule-bearing phase of the two surviving all-`c` first multi-transfer shapes | formalized | active |
 | [`MM-S45`](#mm-s45-exceptional-late-one-d_b-boundary) | structure theorem and obstruction | any one-`D_b` all-erasure raw-head survivor must combine the exceptional terminal run with a `D_b` after position `β+1` | formalized | graduated |
-| [`MM-S47`](#mm-s47-global-one-d_b-raw-head-extinction) | obstruction | no one-`D_b` all-erasure block carries a lawful two-`c` raw head into another multi-role pole, in any position | formalized | active |
+| [`MM-S47`](#mm-s47-global-one-d_b-raw-head-extinction) | obstruction | no one-`D_b` all-erasure block carries a lawful two-`c` raw head into another multi-role pole, in any position | formalized | graduated |
+| [`MM-S49`](#mm-s49-nonempty-marker-all-erasure-extinction) | obstruction | every all-erasure word containing at least one `D_b` misses the next multi-role pole from a lawful two-`c` raw head | formalized | active |
 | [`MM-S50`](#mm-s50-long-all-erasure-singleton-extinction) | obstruction | the long literal `D_c^(β+1)` middle has discrepancy above twelve, beyond both singleton pole values | formalized | active |
 | [`R32-S01`](#r32-s01-split-return-normal-form) | structure theorem | rank-two cuts reduce one-unit binary mortality to a `2 × 2` return recurrence | formalized | graduated |
 | [`R32-S02`](#r32-s02-two-plane-edge-square) | structure theorem | two rank-two generators are a two-vertex square of `2 × 2` edges | formalized | graduated |
@@ -5386,7 +5387,7 @@ avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issue
 
 **Kind:** obstruction
 **Evidence:** formalized
-**Disposition:** active
+**Disposition:** graduated
 
 Write `a` and `t` for the counts of `D_c` roles before and after the sole `D_b`, and
 `n=a+t+1`. Exact common-suffix factorization gives
@@ -5434,8 +5435,73 @@ proves (1), specializes the obstruction to physical words, and exposes
 **Artifact:**
 [`audits/m53-global-one-b-extinction-2026-08-31.md`](audits/m53-global-one-b-extinction-2026-08-31.md).
 
-**Next:** analyze the superposition law for two or more `D_b` perturbations, beginning with the
-two shallowest suffix depths.
+**Next:** graduated into `MM-S49`.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S49: Nonempty-marker all-erasure extinction
+
+**Kind:** obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+Every tag word containing `b` has a unique rightmost occurrence and therefore a decomposition
+
+```text
+w = u · b · c^t.                                             (1)
+```
+
+The prefix `u` may contain arbitrarily many earlier `b` markers. Direct comparison with the
+same-width all-`c` word factors the complete upper difference as
+
+```text
+P(w) − P(c^|w|) = D(u)·10^(t+β+2),                           (2)
+D(u) = code(tagEncode(u)·markerWord(β)) − code(1^|u|)
+     ≡ 2 (mod 5).                                            (3)
+```
+
+Equation (3) is independent of the contents of `u`: the encoded-prefix contribution is shifted
+by `β+1` decimal places, the all-`c` prefix code is divisible by `5`, and the terminal marker
+code is `2` modulo `5`. Thus earlier markers do not create competing shallow perturbations or
+new resonance loci. They are absorbed into the same unit coefficient at the rightmost marker.
+
+If `k=#_b(w)≥1`, then the exact prospective-pole depth is
+
+```text
+m(w) = |tagEncode_β(w)|−1 = |w|+k(β+1)−1.                  (4)
+```
+
+The shell divisor at (4) descends to `5^(|w|+β)`, hence also to the width and beta-level
+divisors consumed below. This descent is essential when `u` contains earlier markers: their
+extra encoded digits deepen the physical shell rather than changing the rightmost perturbation
+depth in (2).
+
+For `|u|≤β`, the suffix depth in (2) reaches the width obstruction of `MM-S40`. At a regular
+raw head it reaches the uniform `5^β` obstruction of `MM-S45`. At an exceptional head with
+`|u|>β`, equations (2)–(4) meet the divisibility and exact-coefficient hypotheses of `MM-S47`,
+including both resonance arms and their corner. These cases exhaust (1).
+
+**Scope:** the theorem covers every nonempty all-erasure word over `{D_b,D_c}` whose tag word
+contains at least one `b`, the lawful two-`c` raw head, and a following multi-role pole. Pure
+all-`D_c` words, any block containing a rule tile, singleton targets, and later generalized
+carriers are outside this statement.
+
+**Use:** delete arbitrary finite superpositions of `D_b` markers from the first-entry erasure
+search. There is no two-marker resonance family: the apparent superposition tree contracts to
+the unique rightmost-marker coefficient.
+
+**Formalization:**
+[`MatrixMortality/DecimalSetterPositioned.lean`](MatrixMortality/DecimalSetterPositioned.lean)
+proves the rightmost-marker decomposition, exact common-suffix factor, coefficient residue,
+all-zero lower word, physical obstruction, and
+`letterErase_rawHead_shell_impossible_of_b_mem`.
+
+**Artifact:**
+[`audits/m53-nonempty-marker-erasure-extinction-2026-08-31.md`](audits/m53-nonempty-marker-erasure-extinction-2026-08-31.md).
+
+**Next:** assemble this branch with the pure all-`D_c` cuts and classify the remaining decimal
+rule-bearing and generalized-carrier first-entry constructors.
 
 ### MM-S42: Swapped positive depth-one extinction
 
