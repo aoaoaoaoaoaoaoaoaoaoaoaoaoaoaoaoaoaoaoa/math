@@ -9340,13 +9340,69 @@ defect runs, or nontrivial safe contexts.
 **Use:** six shortest families remain. The `1|2|0` list contracts to `c|c|b` and `c|c|c`; every
 survivor in that orientation now begins with `c`.
 
-**Next:** test whether the same two-root cylinder survives the `0|2|1` `b|c|c` determinant, then
-seek a joint cone for the four surviving `c`-defect families.
+**Next:** continue the `0|2|1` `b|c|c` determinant beyond the parity cylinder `M4-S18`, then seek
+a joint cone for the four surviving `c`-defect families.
 
 **Artifact:**
 [`MatrixMortality/ParabolicDefectCylinder.lean`](MatrixMortality/ParabolicDefectCylinder.lean)
 and
 [`audits/m43-opposite-right-c-defect-cylinder-2026-08-31.md`](audits/m43-opposite-right-c-defect-cylinder-2026-08-31.md).
+
+### M4-S18: Phase-zero double-c parity cylinder
+
+**Kind:** obstruction
+
+**Evidence:** formalized
+
+**Disposition:** active
+
+For the opposite placement of the same letters,
+
+```text
+b(3z) c(3x+2) c(3y+1),
+```
+
+write
+
+```text
+S = 3^length(tagEncode₃(body)),
+C = ternaryCode(tagEncode₃(body)).
+```
+
+Lean computes the determinant as `2187/1024` times a primitive integral trilinear core
+`G(S,C,x,y,z)`. Every body letter has odd tag length, the `b` tag has odd ternary code, and the
+`c` tag has even ternary code. Consequently
+
+```text
+length(tagEncode₃(body)) ≡ length(body)       (mod 2),
+C ≡ number of b letters in body              (mod 2).
+```
+
+If both quantities on the right are odd, then `S=4s+3` and `C=2c+1`. The checked polynomial
+identity is
+
+```text
+G(4s+3,2c+1,x,y,z) = 4Q(s,c,x,y,z)+2.
+```
+
+The core and determinant are therefore nonzero for all waits. Equivalently, any zero in this
+family must have even body length or an even number of `b` letters.
+
+**Scope:** deletion width three, exactly three atoms, orientation `0|2|1`, letters `b|c|c`, and
+the body cylinder with odd length and odd `b` count. The complementary parity cylinders, other
+letter placements, longer defect runs, and nontrivial safe contexts remain open.
+
+**Use:** the odd-length, odd-`b` parity class of the `0|2|1` `b|c|c` survivor is excluded
+uniformly, without a wait bound or leading-prefix split. Every surviving body has even length or
+even `b` count, so later archimedean cylinder analysis starts with a finite parity invariant.
+
+**Next:** combine the parity invariant with the leading-`c` cylinders, or lift it to one
+modulo-four exterior transition law covering the remaining `c`-defect placements.
+
+**Artifact:**
+[`MatrixMortality/ParabolicDefectCylinder.lean`](MatrixMortality/ParabolicDefectCylinder.lean)
+and
+[`audits/m43-phase-zero-double-c-parity-cylinder-2026-08-31.md`](audits/m43-phase-zero-double-c-parity-cylinder-2026-08-31.md).
 
 ### M4-C03: Zero-framed binary two-Lag compiler
 

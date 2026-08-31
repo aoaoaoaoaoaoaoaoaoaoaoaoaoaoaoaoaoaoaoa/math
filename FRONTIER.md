@@ -540,6 +540,13 @@ On the all-`c` code ray `L=M−2`, it factors into two linear wait pencils and n
 at natural waits. Its non-all-`c` digit cylinders remain open. Of the six survivors, four have a
 `c` defect; the two `b`-defect survivors are `b|b|c` and this `c|b|c` family.
 
+The phase-zero `b|c|c` survivor now carries an exact parity obstruction
+[`M4-S18`](SALVAGE.md#m4-s18-phase-zero-double-c-parity-cylinder). If both the body length and
+its number of `b` letters are odd, the primitive determinant core is `2` modulo four for every
+triple of waits. Hence any zero in this family must lie in the union of two complementary body
+cylinders: even body length or even `b` count. This narrows one survivor but does not remove it
+from the six-family list.
+
 Two original-family nodes survive, and they must not be conflated.
 
 1. **Exterior collision avoidance.** Use `M4-S06`--`M4-S15` to classify the transported kernel
