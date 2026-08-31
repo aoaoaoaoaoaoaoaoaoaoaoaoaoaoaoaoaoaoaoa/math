@@ -517,6 +517,14 @@ open MatrixMortality
 #print axioms DecimalSetterAncestry.gapFactor_not_dvd_twoCHead
 #print axioms DecimalSetterAncestry.gapFactorDivisor_coprime_nine
 #print axioms DecimalSetterAncestry.rawHead_factor_iff
+#print axioms DecimalSetterAncestry.rawHeadBoundary_factor_iff
+#print axioms DecimalSetterAncestry.rawHead_factor_iff_reciprocal
+#print axioms DecimalSetterAncestry.reciprocalSupport_dvd_shift_iff
+#print axioms DecimalSetterAncestry.gapFactor_dvd_shift_iff
+#print axioms DecimalSetterAncestry.fortyThree_period_iff
+#print axioms DecimalSetterAncestry.fortyThree_dvd_widthFive_rawHead
+#print axioms DecimalSetterAncestry.fortyThree_support_shift_iff
+#print axioms DecimalSetterAncestry.fortyThree_support_periodic
 #print axioms DecimalSetterAncestry.carrierFactor_dvd_next_iff
 #print axioms DecimalSetterAncestry.primeFactor_dvd_next_iff
 #print axioms DecimalSetterAncestry.carrierFactor_multiToSingleton_quotientGate
