@@ -51,6 +51,19 @@ theorem arbitraryScales_seven_eighths_zero :
   · norm_num [wordProduct, normalizedTransfer_eq, Matrix.mul_apply, Fin.sum_univ_succ]
   · norm_num [List.mem_cons]
 
+/-- Total divisibility order of the scales still does not imply rational-root rigidity. The word
+uses only `3` and `15`, yet has the nonresonant normalized root `d=25/27`. -/
+theorem divisibilityChain_twentyFive_twentySeven_zero :
+    List.Pairwise (fun left right : Nat => left ∣ right ∨ right ∣ left)
+        [3, 15, 3, 3, 15, 3, 3, 3] ∧
+      (wordProduct (normalizedTransfer (25 / 27 : ℚ))
+        [3, 15, 3, 3, 15, 3, 3, 3]) 0 0 = 0 ∧
+      ∀ t ∈ ([3, 15, 3, 3, 15, 3, 3, 3] : List ℚ),
+        (25 / 27 : ℚ) ≠ t⁻¹ := by
+  refine ⟨by norm_num [List.pairwise_cons], ?_, ?_⟩
+  · norm_num [wordProduct, normalizedTransfer_eq, Matrix.mul_apply, Fin.sum_univ_succ]
+  · norm_num [List.mem_cons]
+
 private theorem normalizedWord_cons_entry_zero
     {α : Type*} (d : ℚ) (scale : α → ℚ) (head : α) (tail : List α) :
     (wordProduct (fun letter => normalizedTransfer d (scale letter)) (head :: tail)) 0 0 =

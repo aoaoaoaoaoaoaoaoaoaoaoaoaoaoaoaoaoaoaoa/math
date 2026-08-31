@@ -1411,6 +1411,9 @@
 'MatrixMortality.ReturnSquare.arbitraryScales_seven_eighths_zero' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.ReturnSquare.divisibilityChain_twentyFive_twentySeven_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.ReturnSquare.normalizedWord_zero_positive_valuation_eq_tail' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]

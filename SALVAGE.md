@@ -170,6 +170,7 @@ file owns the mathematical stock.
 | [`R32-O22`](#r32-o22-congruence-blind-free-orbit) | obstruction | one free trivial-stabilizer rational orbit misses a target that lies in its projective orbit modulo every integer | formalized | graduated |
 | [`R32-O23`](#r32-o23-cubic-continuant-fracture) | structure theorem and obstruction | the non-pure return family has an exact recurrence-digit continuant form, and nontriangular cancellation begins in two ternary blocks with no triangular adjacent pair | formalized | active |
 | [`R32-O24`](#r32-o24-unbounded-prime-continuants) | structure theorem and obstruction | a four-ray cycle pumps upper-triangular return words of unbounded length with no nontrivial upper-triangular concatenation split | formalized | active |
+| [`R32-O25`](#r32-o25-divisibility-chain-returnsquare-fracture) | obstruction | a two-scale divisibility chain admits an exact nonresonant normalized ReturnSquare bridge zero | formalized | graduated |
 | [`R32-D03`](#r32-d03-bounded-denominator-periodicity) | decidable stratum | every infinite legal rational guard orbit with bounded reduced denominators is eventually periodic | formalized | graduated |
 | [`M4-C01`](#m4-c01-two-state-pushout-compiler) | compiler | binary deterministic two-state scalar control compiles to three `4 × 4` matrices | formalized | graduated |
 | [`M4-O01`](#m4-o01-exact-toggle-fusion-leaves-an-immortal-core) | obstruction | exact local toggle fusion preserves a nonzero common anchor | formalized | graduated |
@@ -6654,6 +6655,40 @@ grammar whose states do not require accepted-factor boundaries.
 **Next:** seek a global arithmetic descent or finite-nucleus theorem for the full recurrence-digit
 action, with the four-ray cycle treated as an explicit recurrent component rather than a macro to
 be enumerated away.
+
+### R32-O25: Divisibility-chain ReturnSquare fracture
+
+**Kind:** obstruction
+**Evidence:** formalized
+**Disposition:** graduated
+
+The scale word
+
+```text
+s = [3,15,3,3,15,3,3,3]
+```
+
+is pairwise totally ordered by divisibility: for every two entries `u,v`, either `u∣v` or
+`v∣u`. Nevertheless its normalized ReturnSquare bridge has the exact rational root
+
+```text
+d = 25/27,                 (wordProduct (normalizedTransfer d) s)₀₀ = 0.
+```
+
+This root is nonresonant: `d≠t⁻¹` for both scales `t∈{3,15}`. Thus total divisibility of a
+multi-scale alphabet does not extend prime-power ReturnSquare rigidity.
+
+**Scope:** this refutes only the proposed arbitrary-scale divisibility-chain generalization.
+The scales `3` and `15` are not powers of one integral base, so the certificate is not a
+counterexample to arbitrary-composite ReturnSquare. In particular, it does not resolve the
+negative-valuation branch left by [`R32-S44`](#r32-s44-composite-returnsquare-tail-synchronization).
+
+**Artifact:** `ReturnSquare.divisibilityChain_twentyFive_twentySeven_zero` in
+[`ReturnSquareComposite.lean`](MatrixMortality/ReturnSquareComposite.lean), with audit
+[`m32-returnsquare-divisibility-chain-fracture-2026-08-31.md`](audits/m32-returnsquare-divisibility-chain-fracture-2026-08-31.md).
+
+**Use:** retain the common-geometric-base hypothesis in every primewise intersection argument.
+Divisibility comparability alone cannot support a resonance-only rational-root theorem.
 
 ### R32-D03: Bounded-denominator periodicity
 
