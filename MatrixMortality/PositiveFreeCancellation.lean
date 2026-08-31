@@ -124,6 +124,44 @@ theorem firstExponent_of (bit : Bool) :
     firstExponent (FreeGroup.of bit) = if bit then 0 else 1 := by
   simp [firstExponent, firstExponentHom]
 
+/-! ## The irreducible third positive control -/
+
+/-- A positive word in the two free generators has nonnegative first-generator exponent. -/
+theorem firstExponent_positiveEvaluate_nonneg (word : List Bool) :
+    0 ≤ firstExponent ((word.map FreeGroup.of).prod) := by
+  induction word with
+  | nil => simp [firstExponent]
+  | cons letter word induction =>
+      cases letter <;>
+        simp only [List.map_cons, List.prod_cons, firstExponent_mul, firstExponent_of,
+          ↓reduceIte]
+      all_goals omega
+
+/-- The inverse-composite triangle control is not a positive word in the first two controls. -/
+theorem triangleGenerator_z_not_positive (word : List Bool) :
+    (word.map FreeGroup.of).prod ≠ triangleGenerator .z := by
+  intro equality
+  have nonnegative := firstExponent_positiveEvaluate_nonneg word
+  rw [equality] at nonnegative
+  simp [triangleGenerator] at nonnegative
+
+/-- Faithful group representations cannot eliminate the third triangle control by a positive
+word in the first two represented generators. -/
+theorem triangleGenerator_z_not_positive_of_injective
+    {G : Type*} [Group G] (representation : FreeGroup Bool →* G)
+    (injective : Function.Injective representation) (word : List Bool) :
+    (word.map (representation ∘ FreeGroup.of)).prod ≠
+      representation (triangleGenerator .z) := by
+  intro equality
+  apply triangleGenerator_z_not_positive word
+  apply injective
+  calc
+    representation ((word.map FreeGroup.of).prod) =
+        (word.map (representation ∘ FreeGroup.of)).prod := by
+      simpa [Function.comp_def] using
+        (List.prod_map_hom word FreeGroup.of representation).symm
+    _ = representation (triangleGenerator .z) := equality
+
 /-- Positive triangle evaluation transports the signed word weight exactly to the affine group
 exponent. -/
 theorem firstExponent_triangleEvaluate (word : List TriangleLetter) :
