@@ -349,6 +349,17 @@ nonzero by the sharper congruences `P(3^β)≡8 mod 9` and
 `M₁₀(ℚ)`. This is [`MM-O08`](SALVAGE.md#mm-o08-full-algebra-prefix-pair), formalized by
 `prefixAlgebra_wordProductSpan_eq_top`.
 
+The changed-pair exact frontier is also narrower. For
+[`MM-O17`](SALVAGE.md#mm-o17-factorized-binary-cross-ratio-wall), Lean proves that a
+scalar-weighted factorization of four unit payloads through one binary face forces proportional
+right quotients. It rejects all three pairings of the four ordinary Neary roles whenever the tag
+body is nonempty; the body-dependent lower scale is strictly greater than `27`. A separate
+three-phase module factors the four lawful word pairs positionally and checks the total cube's
+failure: on the certified nonhalting source `(3,bbcc)`, six malformed vertices satisfy the
+terminal equation. The complete prefix-tree rank classification and the singular-face reduction
+from an exact cyclic separator are audited in
+[`m92-factorized-cross-ratio-2026-08-30.md`](audits/m92-factorized-cross-ratio-2026-08-30.md).
+
 The rank-three binary campaign now has a checked structural core. A split finite-rank cut beside
 a unit fractures every arbitrary binary word into its `VAⁿU` return product; a finite
 block-Hankel section lower-bounds every exact realization of that matrix-valued sequence. For
@@ -1790,6 +1801,8 @@ fixed-rank decision problem.
 | `PrefixContextsClosed.lean` | Krylov-adapted reachable and observable context matrices |
 | `PrefixContextsNonsingular.lean` | polynomial and congruence certificates for both context matrices |
 | `PrefixFullAlgebra.lean` | full `M₁₀(ℚ)` product span and exact internal-sandwich lower bound |
+| `NearyCrossRatioNoGo.lean` | scalar-weighted binary-face quotient law and all three Neary cross-ratio failures |
+| `ThreePhaseBinaryNoGo.lean` | exact positional four-role cube factorization and a certified malformed false witness |
 | `LintAudit.lean` | package-wide default mathlib environment lint |
 | `AxiomAudit.lean` | transitive axioms of publication-facing declarations |
 | `Undecidability/UniversalMachine.lean` | verified two-tape interpreter for mathlib code halting |
@@ -1847,6 +1860,10 @@ fixed-rank decision problem.
 | Stationary closed-block residuals obey the two discrete case splits | `TernaryClosedBlockNoGo.commonLowerDeletion_cases`, `TernaryClosedBlockNoGo.upperResidualShift_cases` |
 | Exact stroke terminal matching is equivalent to `consumed·b=c·produced` | `TernaryClosedBlockNoGo.tileHistory_terminal_match_iff_block_semantics` |
 | A positive morphism cannot contribute one lower letter per block across a width-at-least-two upper pulse | `TernaryClosedBlockNoGo.no_fractional_lower_contribution` |
+| Scalar-weighted binary-face factorizations have proportional right quotients | `NearyCrossRatioNoGo.factorizedFace_has_proportional_rightQuotients` |
+| None of the three pairings of the ordinary Neary roles has proportional right quotients | `NearyCrossRatioNoGo.ruleErase_rightQuotients_not_proportional`, `NearyCrossRatioNoGo.rulesErasers_rightQuotients_not_proportional`, `NearyCrossRatioNoGo.crossed_rightQuotients_not_proportional` |
+| The positional three-phase cube exactly realizes all four ordinary roles | `ThreePhaseBinaryNoGo.blockMatrix_ruleB`, `ThreePhaseBinaryNoGo.blockMatrix_ruleC`, `ThreePhaseBinaryNoGo.blockMatrix_eraseB`, `ThreePhaseBinaryNoGo.blockMatrix_eraseC` |
+| The expanded three-phase cube has a false terminal witness on a certified nonhalting source | `ThreePhaseBinaryNoGo.poison_false_positive` |
 | Equality after arbitrary continuations forces prefix comparability | `WordDiscrepancy.prefixComparable_of_append_eq` |
 | An internal free-monoid mismatch cannot be repaired by continuations | `WordDiscrepancy.mismatch_persists` |
 | Signed prefix discrepancies obey the exact four transition laws and two terminal tests | `WordDiscrepancy.positive_positive_transition`, `WordDiscrepancy.positive_negative_transition`, `WordDiscrepancy.negative_negative_transition`, `WordDiscrepancy.negative_positive_transition`, `WordDiscrepancy.positive_terminal`, `WordDiscrepancy.negative_terminal` |

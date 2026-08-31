@@ -96,6 +96,7 @@ import MatrixMortality.BranchingRecognizer
 import MatrixMortality.MixedBranchingRecognizer
 import MatrixMortality.SquareRootPunctuation
 import MatrixMortality.TernaryClosedBlockNoGo
+import MatrixMortality.ThreePhaseBinaryNoGo
 import MatrixMortality.WordDiscrepancy
 import MatrixMortality.PriorityAffineResidual
 import MatrixMortality.PriorityTriangularResidual
@@ -112,6 +113,7 @@ import MatrixMortality.StableConeCompression
 import MatrixMortality.DirectedCancellationCountermodel
 import MatrixMortality.NearyBinaryDefect
 import MatrixMortality.NearyPhaseSignature
+import MatrixMortality.NearyCrossRatioNoGo
 import MatrixMortality.CHHNPackingRank
 import MatrixMortality.PairedBoundaryTax
 import MatrixMortality.DeletionFirstFracture

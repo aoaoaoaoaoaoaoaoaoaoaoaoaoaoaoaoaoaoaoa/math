@@ -1042,6 +1042,26 @@
 'MatrixMortality.restrictedPrefixGenerator_mortal_iff_tagHaltsFrom' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.NearyCrossRatioNoGo.factorizedFace_has_proportional_rightQuotients' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.NearyCrossRatioNoGo.twentySeven_lt_lowerCScale' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.NearyCrossRatioNoGo.ruleErase_rightQuotients_not_proportional' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.NearyCrossRatioNoGo.rulesErasers_rightQuotients_not_proportional' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.NearyCrossRatioNoGo.crossed_rightQuotients_not_proportional' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ThreePhaseBinaryNoGo.blockMatrix_eq_sidePcpMatrix' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ThreePhaseBinaryNoGo.blockMatrix_ruleC' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ThreePhaseBinaryNoGo.poison_false_positive' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.prefixAlgebra_zero_cube' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.prefixAlgebraReachable_isUnit' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.prefixAlgebraObservable_isUnit' depends on axioms: [propext, Classical.choice, Quot.sound]

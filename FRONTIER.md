@@ -813,7 +813,21 @@ The surviving route must change the physical pair, change its nonzero values whi
 zeros, or use a nonlinear compiler. A literal binary prefix tree for five source symbols has
 four internal states, while a literal two-state ternary tree cannot obtain a five-state
 common-image restriction ([`MM-O09`](SALVAGE.md#mm-o09-two-state-ternary-prefix-image)).
-Neither statement excludes a state-dependent gauge or same-zero transducer.
+The stronger factorized cross-ratio wall
+([`MM-O17`](SALVAGE.md#mm-o17-factorized-binary-cross-ratio-wall)) now closes both natural exact
+nine-state escapes. Arbitrary invertible edge factors, state-fibre gauges, and independent
+nonzero source scalings cannot compress any five-leaf binary prefix transducer to a
+nine-dimensional common image: dimension nine forces the four ordinary roles onto one
+factorized rectangle, but all three Neary cross-ratios fail. A native three-phase `3×3` cyclic
+cube fails for the same reason. Its rank-one separator forces the four invertible roles onto the
+opposite cube face. Pure width-three comma-free coding carries at most two symbols, and the one
+exact positional four-role cube admits a checked false terminal witness on the nonhalting source
+`(3,bbcc)`.
+
+Thus neither another exact prefix layout nor an exact three-phase block factorization remains
+live. The direct frontier is a genuinely changed zero series, a nonfactorial state-dependent
+decoder, another invariant quotient not induced by the generators' common image, or a nonlinear
+reduction. `GPCP(3)` remains the independent stronger ancestor.
 
 ### 4. Three-letter correspondence and direct mortality: `M₃(4)`
 
