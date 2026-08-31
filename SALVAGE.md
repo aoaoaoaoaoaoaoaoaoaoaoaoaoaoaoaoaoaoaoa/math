@@ -163,6 +163,7 @@ file owns the mathematical stock.
 | [`R32-S46`](#r32-s46-denominator-predecessor-shell-grammar) | structure theorem and obstruction | every inverse denominator-prime step outside four explicit valuation ties follows one exact tropical minimum | formalized | active |
 | [`R32-S47`](#r32-s47-exact-four-wall-residue-laws) | structure theorem and obstruction | all four denominator-prime ties have exact normalized residue transitions, and none alone forces resonance outside the common-geometric alphabet | formalized | active |
 | [`R32-S48`](#r32-s48-fractional-cyclotomic-finite-walls) | structure theorem and obstruction | every mortal fraction reduces to `1` when the base does and to `±1` when the base reduces to `−1` | formalized | active |
+| [`R32-S49`](#r32-s49-geometric-center-chain-extinction) | structure theorem and obstruction | exact denominator-center chains double their exponent into a one-return resonance, while fixed-ray quotients exclude the zero critical residue | formalized | active |
 | [`R32-M01`](#r32-m01-generic-reverse-edge-compiler) | partial mechanism | projective incidence generically embeds into a compatible two-plane edge square | formalized | active |
 | [`R32-M02`](#r32-m02-finite-quotient-sieve) | partial mechanism | finite monoid quotients give complete modular no-certificates for fixed candidates | formalized | active |
 | [`R32-M03`](#r32-m03-two-scale-return-conversion) | partial mechanism | a minimal two-scale return pencil has nonresonant multi-return zeros | formalized | active |
@@ -6290,6 +6291,62 @@ with audit
 **Use:** apply (2)–(3) before residue search. Any surviving nonresonant denominator assignment
 must lie in the simultaneous multiplicative relation lattice of the prime factors of `q` modulo
 every prime factor of `q−1` and `q+1`.
+
+### R32-S49: Geometric center-chain extinction
+
+**Kind:** structure theorem and obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+The exact center `st=B` of the denominator-scale wall obeys
+
+```text
+P_t(s)=B/t².                                                (1)
+```
+
+For common-geometric scales, a center state `s=B/qⁿ` therefore forces scale `qⁿ` and maps to
+`B/q²ⁿ`. Requiring another center forces the next scale to be `q²ⁿ`; induction gives
+
+```text
+scales: qⁿ,q²ⁿ,q⁴ⁿ,…,q^(2^(k−1)n),
+state after k centers: B/q^(2ᵏn).                           (2)
+```
+
+The physical reverse endpoint is `Aqʰ`. If (2) reaches it, then
+
+```text
+B=Aq^(h+2ᵏn),              A/B=q^(−h−2ᵏn).                 (3)
+```
+
+Thus every consecutive exact denominator-center suffix terminates only at a one-return
+resonance.
+
+The critical wall has normalized residue
+
+```text
+κ=(B−A)q²ⁿ/B−1.                                            (4)
+```
+
+Modulo any prime `ℓ` with `q≡1`, `κ=0` forces `A≡0`. Mortality simultaneously forces `B≡A`
+by `R32-S48`; hence `A≡B≡0`. Lean therefore excludes `κ=0` whenever the fraction is reduced
+modulo `ℓ`. A canonical coprime numerator-denominator pair satisfies this hypothesis at every
+prime.
+
+**Scope:** this kills consecutive exact denominator centers and the zero critical residue. It
+does not classify nonzero critical residues, the equal-scale residue, or paths that leave and
+later re-enter the denominator center.
+
+**Artifact:** `ReturnSquare.fractionPredecessorChain_centerScales`,
+`fractionPredecessorChain_centerScales_terminal_ratio`,
+`fractionCriticalIntegralResidue_ne_zero_of_mortal`, and
+`fractionCriticalResidue_geometric_ne_zero_of_mortal` in
+[`ReturnSquareGeometricCenter.lean`](MatrixMortality/ReturnSquareGeometricCenter.lean), with
+audit
+[`m32-returnsquare-geometric-centers-2026-08-31.md`](audits/m32-returnsquare-geometric-centers-2026-08-31.md).
+
+**Use:** prune every all-center suffix before unit search and remove the exact zero branch of
+the critical residue. Any nonresonant common-base zero must make a nonzero unit transition
+between denominator-center hits.
 
 ### R32-M01: Generic reverse edge compiler
 

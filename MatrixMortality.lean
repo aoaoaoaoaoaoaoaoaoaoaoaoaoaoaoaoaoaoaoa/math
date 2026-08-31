@@ -40,6 +40,7 @@ import MatrixMortality.ReturnSquareClassification
 import MatrixMortality.ReturnSquareComposite
 import MatrixMortality.ReturnSquareFractionPullback
 import MatrixMortality.ReturnSquareFractionFiniteWall
+import MatrixMortality.ReturnSquareGeometricCenter
 import MatrixMortality.ReturnSquareTax
 import MatrixMortality.ReturnJordan
 import MatrixMortality.ReturnConvert
