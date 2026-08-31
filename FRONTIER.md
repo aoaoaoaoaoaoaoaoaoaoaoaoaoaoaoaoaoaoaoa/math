@@ -1673,10 +1673,16 @@ The family is now sharply fenced:
   [`R32-O04`](SALVAGE.md#r32-o04-quadratic-pencil-verification-collapse).
 - if `q` is a prime power, mortality occurs exactly at the one-return resonances, by
   [`R32-D02`](SALVAGE.md#r32-d02-prime-power-returnsquare-classification).
+- at an arbitrary integral base, every rational bridge root is supported on the primes of `q`;
+  every positive p-adic valuation is the base valuation times one common proper-tail exponent,
+  by [`R32-S44`](SALVAGE.md#r32-s44-composite-returnsquare-tail-synchronization).
 
 Thus every unclassified ReturnSquare instance has a base divisible by at least two distinct
-primes; every nonresonant zero must use at least three positive returns in the bounded middle
-negative strip. The one-base prime-power architecture is closed.
+primes and at least three positive returns in the bounded middle negative strip. Its canonical
+numerator and denominator are q-smooth. The numerator-prime exponents, when present, are already
+synchronized by the complete proper tail. The surviving obstruction is the negative-valuation
+branch: denominator primes may still carry unequal local depths, and neither their equality nor
+a counterexample is proved. The one-base prime-power architecture remains closed.
 
 The obvious nonsemisimple escape is closed as well. A `1⊕J₋₁` ambient mode can realize the
 exact parity-Collatz rails, but the rank-compatible branch is unique up to scalar and preserves
