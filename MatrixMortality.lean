@@ -39,6 +39,7 @@ import MatrixMortality.ProjectiveLine
 import MatrixMortality.CongruenceBlindOrbit
 import MatrixMortality.ShearEuclidean
 import MatrixMortality.TransverseDilationOrbit
+import MatrixMortality.InverseOrbitRecurrence
 import MatrixMortality.AffineGroupOrbit
 import MatrixMortality.PadicValuation
 import MatrixMortality.ReturnGuard
