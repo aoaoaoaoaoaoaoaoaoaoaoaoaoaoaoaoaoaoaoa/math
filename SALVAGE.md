@@ -256,6 +256,7 @@ file owns the mathematical stock.
 | [`M4-S24`](#m4-s24-phase-zero-right-c-all-b-ray-exclusion) | obstruction | no nonempty all-`b` body closes the `0|2|1` `b|b|c` bridge for any waits | formalized | active |
 | [`M4-S25`](#m4-s25-phase-zero-right-c-complement-blade) | obstruction and structure theorem | the complement coordinate obeys a two-case modulo-sixteen guillotine on mixed even/even bodies | formalized | active |
 | [`M4-S26`](#m4-s26-phase-zero-right-c-complement-sfft) | structure theorem | the mixed complement core has an exact three-factor SFFT discriminant and finite divisor reduction | formalized | active |
+| [`M4-S27`](#m4-s27-phase-zero-right-c-thin-complement-cone) | obstruction | no positive complement thinner than `1/2160000` of its code scale can close the right-`c` bridge | formalized | active |
 | [`M4-C03`](#m4-c03-zero-framed-binary-two-lag-compiler) | compiler | the principal scanner is literally binary context-2 Lag and compiles to `M₄(3)` | formalized | graduated |
 | [`M4-D01`](#m4-d01-zero-framed-binary-two-lag-decision) | decidable stratum | the entire zero-framed binary context-2 Lag kernel has an exact syntactic classification | formalized | graduated |
 | [`M4-D02`](#m4-d02-zero-framed-reset-scanner-decision) | decidable stratum | zero-run reduction contracts the reset scanner to a regular two-token quotient | audited | graduated |
@@ -11337,6 +11338,54 @@ it with the trailing-`c` 3-adic blade.
 **Artifact:**
 [`MatrixMortality/ParabolicEvenBody.lean`](MatrixMortality/ParabolicEvenBody.lean) and
 [`audits/m43-phase-zero-right-c-complement-sfft-2026-08-31.md`](audits/m43-phase-zero-right-c-complement-sfft-2026-08-31.md).
+
+### M4-S27: Phase-zero right-c thin-complement cone
+
+**Kind:** obstruction
+
+**Evidence:** formalized
+
+**Disposition:** active
+
+At `C=S−1−D`, the primitive core has the exact decomposition
+
+```text
+H = (72Sy−9S−8y+9)P(x,z) + D J(x,y,z),
+```
+
+where `J` is coefficient-positive and
+
+```text
+P(214,z) = −105886916z−9250057,
+P(215,z) =   14024764z+1959767.
+```
+
+If `D>0` and `2160000D≤S−1`, then `H` cannot vanish at natural waits. For `y>0`, the
+core is negative at `x=214` and positive at `x=215`; the needed comparison already follows
+from the weaker `22000D<S`. For `y=0`, the endpoint signs reverse, and the comparison at
+`x=215` follows from `1080000D<S−1`. Since the core is affine in `x`, a rational zero lies
+strictly between the consecutive integers 214 and 215 in either case.
+
+For a physical body this gives the direct criterion
+
+```text
+D>0  and  2160000D<S  ⇒  determinant ≠0.
+```
+
+**Scope:** deletion width three, exactly three atoms, orientation `0|2|1`, letters `b|b|c`,
+arbitrary natural waits, and every physical body satisfying the displayed thin-complement
+criterion. Bodies outside that cone remain open.
+
+**Use:** any hypothetical mixed survivor has complement density at least `1/2160000`. Long
+initial `c` cylinders contract the density geometrically, so this converts an infinite prefix
+direction into a finite-cylinder problem.
+
+**Next:** combine the exact first-`b` cylinder ratios with this cone, then intersect the
+surviving prefix cylinders with the trailing-`c` 3-adic blade.
+
+**Artifact:**
+[`MatrixMortality/ParabolicEvenBody.lean`](MatrixMortality/ParabolicEvenBody.lean) and
+[`audits/m43-phase-zero-right-c-thin-complement-2026-08-31.md`](audits/m43-phase-zero-right-c-thin-complement-2026-08-31.md).
 
 ### M4-C03: Zero-framed binary two-Lag compiler
 

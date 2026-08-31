@@ -242,6 +242,222 @@ theorem bZeroBDefectCOneComplement_sfft (S D x y z : ℤ) :
   rw [bZeroBDefectCOneCodeCore_complement_collect]
   linear_combination bZeroBDefectCOneComplement_discriminant S D x
 
+/-- Wait factor inherited from the all-`c` ray. -/
+def bZeroBDefectCOneWaitFactor {R : Type*} [CommRing R] (S y : R) : R :=
+  72 * S * y - 9 * S - 8 * y + 9
+
+/-- Affine `x` pencil inherited from the all-`c` ray. -/
+def bZeroBDefectCOneRootPencil {R : Type*} [CommRing R] (x z : R) : R :=
+  119911680 * x * z + 11209824 * x - 25766986436 * z - 2408152393
+
+/-- Complement-coordinate decomposition into the all-`c` pencil and the positive correction. -/
+theorem bZeroBDefectCOneCodeCore_thin_decomposition {R : Type*} [CommRing R]
+    (S D x y z : R) :
+    bZeroBDefectCOneCodeCore S (S - 1 - D) x y z =
+      bZeroBDefectCOneWaitFactor S y * bZeroBDefectCOneRootPencil x z +
+        D * bZeroBDefectCOneComplementCore x y z := by
+  rw [bZeroBDefectCOneCodeCore_complement_factor]
+  unfold bZeroBDefectCOneWaitFactor bZeroBDefectCOneRootPencil
+  ring
+
+private theorem affine_nat_ne_zero_of_negative_positive
+    (a b : ℚ) (n x : Nat) (lower_negative : a * n + b < 0)
+    (upper_positive : 0 < a * (n + 1) + b) : a * x + b ≠ 0 := by
+  intro zero
+  have slope_positive : 0 < a := by nlinarith
+  have x_lower : (n : ℚ) < x := by nlinarith
+  have x_upper : (x : ℚ) < n + 1 := by nlinarith
+  have x_lower_nat : n < x := by exact_mod_cast x_lower
+  have x_upper_nat : x < n + 1 := by exact_mod_cast x_upper
+  omega
+
+private theorem affine_nat_ne_zero_of_positive_negative
+    (a b : ℚ) (n x : Nat) (lower_positive : 0 < a * n + b)
+    (upper_negative : a * (n + 1) + b < 0) : a * x + b ≠ 0 := by
+  intro zero
+  have slope_negative : a < 0 := by nlinarith
+  have x_lower : (n : ℚ) < x := by nlinarith
+  have x_upper : (x : ℚ) < n + 1 := by nlinarith
+  have x_lower_nat : n < x := by exact_mod_cast x_lower
+  have x_upper_nat : x < n + 1 := by exact_mod_cast x_upper
+  omega
+
+/-- A sufficiently thin positive complement cannot close the `b | b | c` core. -/
+theorem bZeroBDefectCOneCodeCore_ne_zero_of_thin_complement
+    (S D : ℚ) (D_positive : 0 < D) (thin : 2160000 * D ≤ S - 1)
+    (x y z : Nat) :
+    bZeroBDefectCOneCodeCore S (S - 1 - D) x y z ≠ 0 := by
+  let F : ℚ := bZeroBDefectCOneWaitFactor S y
+  let slope : ℚ :=
+    F * (119911680 * z + 11209824) +
+      D * (631601581536 * z + 59048086536)
+  let intercept : ℚ :=
+    F * (-25766986436 * z - 2408152393) +
+      D * (620717828832 * y * z + 58005064872 * y +
+        422435605080 * z + 37838186340)
+  have core_eq :
+      bZeroBDefectCOneCodeCore S (S - 1 - D) x y z = slope * x + intercept := by
+    rw [bZeroBDefectCOneCodeCore_thin_decomposition]
+    unfold bZeroBDefectCOneRootPencil bZeroBDefectCOneComplementCore
+    dsimp [F, slope, intercept]
+    ring
+  rw [core_eq]
+  by_cases y_zero : y = 0
+  · subst y
+    have scale_greater_one : 1 < S := by nlinarith
+    have F_eq : F = -9 * (S - 1) := by
+      dsimp [F, bZeroBDefectCOneWaitFactor]
+      ring
+    have complement_small : 1080000 * D < S - 1 := by nlinarith
+    have lower_positive : 0 < slope * 214 + intercept := by
+      have delta_positive : (0 : ℚ) < 105886916 * z + 9250057 := by positivity
+      have pencil_eq :
+          bZeroBDefectCOneRootPencil (214 : ℚ) z =
+            -(105886916 * z + 9250057) := by
+        unfold bZeroBDefectCOneRootPencil
+        ring
+      have complement_positive :
+          0 < bZeroBDefectCOneComplementCore (214 : ℚ) 0 z := by
+        unfold bZeroBDefectCOneComplementCore
+        positivity
+      have endpoint_eq : slope * 214 + intercept =
+          F * bZeroBDefectCOneRootPencil (214 : ℚ) z +
+            D * bZeroBDefectCOneComplementCore (214 : ℚ) 0 z := by
+        unfold bZeroBDefectCOneRootPencil bZeroBDefectCOneComplementCore
+        dsimp [slope, intercept]
+        ring
+      rw [endpoint_eq, F_eq, pencil_eq]
+      have first_positive :
+          0 < (-9 * (S - 1)) * (-(105886916 * z + 9250057)) := by
+        have left_negative : -9 * (S - 1) < 0 := by nlinarith
+        have right_negative : (-(105886916 * (z : ℚ) + 9250057) : ℚ) < 0 := by
+          nlinarith
+        exact mul_pos_of_neg_of_neg left_negative right_negative
+      have second_positive :
+          0 < D * bZeroBDefectCOneComplementCore (214 : ℚ) 0 z :=
+        mul_pos D_positive complement_positive
+      nlinarith
+    have upper_negative : slope * (214 + 1) + intercept < 0 := by
+      have epsilon_positive : (0 : ℚ) < 14024764 * z + 1959767 := by positivity
+      have pencil_eq :
+          bZeroBDefectCOneRootPencil (215 : ℚ) z =
+            14024764 * z + 1959767 := by
+        unfold bZeroBDefectCOneRootPencil
+        ring
+      have complement_eq :
+          bZeroBDefectCOneComplementCore (215 : ℚ) 0 z =
+            136216775635320 * z + 12733176791580 := by
+        unfold bZeroBDefectCOneComplementCore
+        ring
+      have complement_bound :
+          bZeroBDefectCOneComplementCore (215 : ℚ) 0 z <
+            9 * 1080000 * (14024764 * z + 1959767) := by
+        rw [complement_eq]
+        have difference_positive :
+            (0 : ℚ) < 103930444680 * z + 6315758448420 := by positivity
+        nlinarith
+      have endpoint_eq : slope * (214 + 1) + intercept =
+          F * bZeroBDefectCOneRootPencil (215 : ℚ) z +
+            D * bZeroBDefectCOneComplementCore (215 : ℚ) 0 z := by
+        norm_num only [Nat.cast_ofNat, Nat.reduceAdd]
+        unfold bZeroBDefectCOneRootPencil bZeroBDefectCOneComplementCore
+        dsimp [slope, intercept]
+        ring
+      rw [endpoint_eq, F_eq, pencil_eq]
+      have scaled_bound :
+          D * bZeroBDefectCOneComplementCore (215 : ℚ) 0 z <
+            9 * (S - 1) * (14024764 * z + 1959767) := by
+        have scaled_complement_bound :=
+          mul_lt_mul_of_pos_left complement_bound D_positive
+        nlinarith [scaled_complement_bound, mul_pos D_positive epsilon_positive]
+      nlinarith
+    exact affine_nat_ne_zero_of_positive_negative slope intercept 214 x
+      lower_positive upper_negative
+  · have y_positive_nat : 1 ≤ y := Nat.one_le_iff_ne_zero.mpr y_zero
+    have y_positive : (0 : ℚ) < y := by exact_mod_cast y_positive_nat
+    have y_one : (1 : ℚ) ≤ y := by exact_mod_cast y_positive_nat
+    have y_minus_nonnegative : (0 : ℚ) ≤ y - 1 := sub_nonneg.mpr y_one
+    have scale_positive : 0 < S := by nlinarith
+    have complement_small : 22000 * D < S := by nlinarith
+    have F_lower : 63 * S * y < F := by
+      dsimp [F, bZeroBDefectCOneWaitFactor]
+      have scale_term_nonnegative : 0 ≤ 9 * S * (y - 1) := by positivity
+      nlinarith
+    have F_positive : 0 < F :=
+      lt_of_le_of_lt (mul_nonneg (by positivity) y_positive.le) F_lower
+    have lower_negative : slope * 214 + intercept < 0 := by
+      let δ : ℚ := 105886916 * z + 9250057
+      let J : ℚ := bZeroBDefectCOneComplementCore (214 : ℚ) y z
+      let B : ℚ :=
+        (620717828832 + 135585174053784) * z +
+          (58005064872 + 12674128705044)
+      have delta_positive : 0 < δ := by dsimp [δ]; positivity
+      have J_positive : 0 < J := by
+        dsimp [J]
+        unfold bZeroBDefectCOneComplementCore
+        positivity
+      have J_eq : J =
+          y * (620717828832 * z + 58005064872) +
+            135585174053784 * z + 12674128705044 := by
+        dsimp [J]
+        unfold bZeroBDefectCOneComplementCore
+        ring
+      have J_le : J ≤ y * B := by
+        rw [J_eq]
+        dsimp [B]
+        have base_nonnegative :
+            0 ≤ ((y : ℚ) - 1) *
+              (135585174053784 * z + 12674128705044) :=
+          mul_nonneg y_minus_nonnegative (by positivity)
+        nlinarith
+      have B_bound : B < 63 * 22000 * δ := by
+        dsimp [B, δ]
+        have difference_positive :
+            (0 : ℚ) < 10553373693384 * z + 88445232084 := by positivity
+        nlinarith
+      have DJ_lt : D * J < F * δ := by
+        have J_bound : J < y * (63 * 22000 * δ) :=
+          lt_of_le_of_lt J_le (mul_lt_mul_of_pos_left B_bound y_positive)
+        have complement_product_bound := mul_lt_mul_of_pos_left J_bound D_positive
+        have scale_product_bound : 63 * (22000 * D) * y * δ < 63 * S * y * δ := by
+          nlinarith [mul_pos y_positive delta_positive]
+        have wait_product_bound := mul_lt_mul_of_pos_right F_lower delta_positive
+        nlinarith [complement_product_bound, scale_product_bound, wait_product_bound]
+      have endpoint_eq : slope * 214 + intercept = -F * δ + D * J := by
+        dsimp [δ, J]
+        unfold bZeroBDefectCOneComplementCore
+        dsimp [slope, intercept]
+        ring
+      rw [endpoint_eq]
+      nlinarith
+    have upper_positive : 0 < slope * (214 + 1) + intercept := by
+      have pencil_positive :
+          (0 : ℚ) < bZeroBDefectCOneRootPencil (215 : ℚ) z := by
+        rw [show bZeroBDefectCOneRootPencil (215 : ℚ) z =
+          14024764 * z + 1959767 by
+            unfold bZeroBDefectCOneRootPencil
+            ring]
+        positivity
+      have complement_positive :
+          0 < bZeroBDefectCOneComplementCore (215 : ℚ) y z := by
+        rw [show bZeroBDefectCOneComplementCore (215 : ℚ) y z =
+          y * (620717828832 * z + 58005064872) +
+            136216775635320 * z + 12733176791580 by
+              unfold bZeroBDefectCOneComplementCore
+              ring]
+        positivity
+      have endpoint_eq : slope * (214 + 1) + intercept =
+          F * bZeroBDefectCOneRootPencil (215 : ℚ) z +
+            D * bZeroBDefectCOneComplementCore (215 : ℚ) y z := by
+        norm_num only [Nat.cast_ofNat, Nat.reduceAdd]
+        unfold bZeroBDefectCOneRootPencil bZeroBDefectCOneComplementCore
+        dsimp [slope, intercept]
+        ring
+      rw [endpoint_eq]
+      positivity
+    exact affine_nat_ne_zero_of_negative_positive slope intercept 214 x
+      lower_negative upper_positive
+
 private theorem three_pow_mod_sixteen_of_mod_four_zero
     (n : Nat) (residue : n % 4 = 0) : 3 ^ n % 16 = 1 := by
   obtain ⟨k, rfl⟩ : ∃ k, n = 4 * k := ⟨n / 4, by omega⟩
@@ -788,4 +1004,56 @@ theorem bridge_bZero_bTwo_cOne_det_ne_zero_of_complement_residue
           (nearySideLowerCScale 3 body) (3 * y + 1))).det ≠ 0 :=
   bridge_bZero_bTwo_cOne_det_ne_zero_of_integer_core body x y z
     (bZeroBDefectCOneCodeCore_ne_zero_of_complement_residue body x y z residue)
+
+/-- A positive complement thinner than `1 / 2160000` of the code scale cannot close the
+shortest `0 | 2 | 1` bridge with letters `b | b | c`. -/
+theorem bridge_bZero_bTwo_cOne_det_ne_zero_of_thin_complement
+    (body : List TagLetter)
+    (complement_positive : 0 < tagComplementCode body)
+    (thin : 2160000 * tagComplementCode body <
+      3 ^ (tagEncode 3 body).length)
+    (x y z : Nat) :
+    (bridge 27
+      (bAtom 27 (3 * z) * bAtom 27 (3 * x + 2) *
+        cAtom 27 (nearySideLowerC 3 body)
+          (nearySideLowerCScale 3 body) (3 * y + 1))).det ≠ 0 := by
+  let S : Nat := 3 ^ (tagEncode 3 body).length
+  let C : Nat := ternaryCode (tagEncode 3 body)
+  let D : Nat := tagComplementCode body
+  have thin_closed : 2160000 * D ≤ S - 1 := by
+    dsimp [S, D]
+    omega
+  have complement_positive_rat : (0 : ℚ) < D := by
+    exact_mod_cast complement_positive
+  have scale_positive : 1 ≤ S := by
+    dsimp [S]
+    exact one_le_pow₀ (by norm_num)
+  have thin_rat_aux : (2160000 : ℚ) * D ≤ ((S - 1 : Nat) : ℚ) := by
+    exact_mod_cast thin_closed
+  have scale_sub_cast : ((S - 1 : Nat) : ℚ) = (S : ℚ) - 1 := by
+    rw [Nat.cast_sub scale_positive]
+    norm_num
+  have thin_rat : (2160000 : ℚ) * D ≤ S - 1 := by
+    rw [← scale_sub_cast]
+    exact thin_rat_aux
+  have code_eq : (C : ℚ) = (S : ℚ) - 1 - D := by
+    have complement_eq_int : (D : ℤ) = (S : ℤ) - C - 1 := by
+      simpa [S, C, D] using tagComplementCode_cast body
+    have complement_eq := congrArg (fun value : ℤ ↦ (value : ℚ)) complement_eq_int
+    push_cast at complement_eq
+    linarith
+  have rational_core_ne :
+      bZeroBDefectCOneCodeCore (S : ℚ) (C : ℚ) x y z ≠ 0 := by
+    rw [code_eq]
+    exact bZeroBDefectCOneCodeCore_ne_zero_of_thin_complement
+      S D complement_positive_rat thin_rat x y z
+  apply bridge_bZero_bTwo_cOne_det_ne_zero_of_integer_core body x y z
+  intro integer_core_zero
+  apply rational_core_ne
+  have cast_integer_core :
+      ((bZeroBDefectCOneCodeCore (S : ℤ) (C : ℤ) x y z : ℤ) : ℚ) =
+        bZeroBDefectCOneCodeCore (S : ℚ) (C : ℚ) x y z := by
+    norm_num [bZeroBDefectCOneCodeCore]
+  rw [← cast_integer_core]
+  exact_mod_cast integer_core_zero
 end MatrixMortality.ParabolicBlade
