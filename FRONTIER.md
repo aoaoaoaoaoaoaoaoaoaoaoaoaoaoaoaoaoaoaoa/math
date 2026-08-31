@@ -794,7 +794,12 @@ block of upper length at least three by an exact mixed-prime suffix split. Combi
 `MM-S18`, no all-`D_c` block remains at any admissible non-singleton length. The live initial
 grammar consists of rule-bearing phase words and all-erasure words containing `D_b`; after any
 surviving entry, the invariant must recognize a higher suffix language native to generalized
-residuals. Singleton targets remain separate.
+residuals. Singleton targets remain separate. A fixed bounded suffix quotient cannot supply a
+global descent: [`MM-S21`](SALVAGE.md#mm-s21-bounded-decimal-suffix-cycles) proves that every
+emitted multi-role block has a compatible projective carrier self-loop modulo `10^k` for every
+fixed `k`. These are not exact rational cycles and need not be reachable from the distinguished
+entry. The live cut is therefore the intersection of the encoded-entry orbit with an unbounded
+inverse-limit suffix language, rather than acyclicity of another finite congruence graph.
 
 The immediate ternary question is which other positive valuation-one discrepancies survive its
 suffix sieve without already certifying source halting.

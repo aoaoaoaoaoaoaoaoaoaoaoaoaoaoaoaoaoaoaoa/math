@@ -127,6 +127,7 @@ import MatrixMortality.DecimalSetterCarry
 import MatrixMortality.DecimalSetterChamber
 import MatrixMortality.DecimalSetterResonance
 import MatrixMortality.DecimalSetterDepth
+import MatrixMortality.DecimalSetterSuffix
 import MatrixMortality.SchottkyPunctuation
 import MatrixMortality.TwoStateObstructions
 import MatrixMortality.OverlapQueue
