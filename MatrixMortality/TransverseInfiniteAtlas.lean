@@ -149,6 +149,13 @@ def witness (power : Nat) : State :=
 /-- Input column which produces the distinguished carrier vector. -/
 def witnessInput : State := ![1, 0, 0]
 
+/-- The second spanning vector of the source-parameter carrier. -/
+def sourceWitness (source : ℚ) (power : Nat) : State :=
+  ![source, 0, -(3 : ℚ) ^ power]
+
+/-- Input column which produces `sourceWitness`. -/
+def sourceWitnessInput : State := ![0, 1, 0]
+
 theorem carrierMatrix_mulVec (source : ℚ) (power : Nat) (state : State) :
     carrierMatrix source power *ᵥ state =
       ![state 0 + source * state 1,
@@ -165,6 +172,12 @@ theorem carrierMatrix_mulVec_witnessInput (source : ℚ) (power : Nat) :
   rw [carrierMatrix_mulVec]
   ext i
   fin_cases i <;> simp [witnessInput, witness]
+
+theorem carrierMatrix_mulVec_sourceWitnessInput (source : ℚ) (power : Nat) :
+    carrierMatrix source power *ᵥ sourceWitnessInput = sourceWitness source power := by
+  rw [carrierMatrix_mulVec]
+  ext i
+  fin_cases i <;> simp [sourceWitnessInput, sourceWitness]
 
 /-- Every vector in the `power`-th carrier is annihilated by its displayed normal. -/
 theorem normal_dotProduct_carrierMatrix_mulVec
@@ -186,6 +199,11 @@ theorem witness_mem_carrier (source : ℚ) (power : Nat) :
     witness power ∈ carrier source power := by
   refine ⟨witnessInput, ?_⟩
   exact carrierMatrix_mulVec_witnessInput source power
+
+theorem sourceWitness_mem_carrier (source : ℚ) (power : Nat) :
+    sourceWitness source power ∈ carrier source power := by
+  refine ⟨sourceWitnessInput, ?_⟩
+  exact carrierMatrix_mulVec_sourceWitnessInput source power
 
 theorem normal_dotProduct_eq_zero_of_mem_carrier
     (source : ℚ) (power : Nat) {state : State}
@@ -236,6 +254,74 @@ theorem carrier_injective (source : ℚ) : Function.Injective (carrier source) :
   · exact False.elim ((carrier_ne_of_lt source before) carriersEqual)
   · exact equal
   · exact False.elim ((carrier_ne_of_lt source after) carriersEqual.symm)
+
+/-- A row vanishes on one whole carrier plane. -/
+def AnnihilatesCarrier (row : State) (source : ℚ) (power : Nat) : Prop :=
+  ∀ state ∈ carrier source power, row ⬝ᵥ state = 0
+
+/-- Whole-plane vanishing at two distinct depths forces the terminal row to be zero. -/
+theorem row_eq_zero_of_annihilates_two
+    (row : State) (source : ℚ) {earlier later : Nat} (before : earlier < later)
+    (annihilatesEarlier : AnnihilatesCarrier row source earlier)
+    (annihilatesLater : AnnihilatesCarrier row source later) :
+    row = 0 := by
+  have earlierFirst :=
+    annihilatesEarlier (witness earlier) (witness_mem_carrier source earlier)
+  have laterFirst :=
+    annihilatesLater (witness later) (witness_mem_carrier source later)
+  have earlierSecond :=
+    annihilatesEarlier (sourceWitness source earlier)
+      (sourceWitness_mem_carrier source earlier)
+  simp [witness, dotProduct, Fin.sum_univ_succ] at earlierFirst laterFirst
+  simp [sourceWitness, dotProduct, Fin.sum_univ_succ] at earlierSecond
+  have firstEquation : row 0 = row 1 * (2 : ℚ) ^ earlier := by
+    linarith
+  have laterEquation : row 0 = row 1 * (2 : ℚ) ^ later := by
+    linarith
+  have scaledPowersEqual :
+      row 1 * (2 : ℚ) ^ earlier = row 1 * (2 : ℚ) ^ later :=
+    firstEquation.symm.trans laterEquation
+  have factoredDifference :
+      row 1 * ((2 : ℚ) ^ earlier - (2 : ℚ) ^ later) = 0 := by
+    calc
+      row 1 * ((2 : ℚ) ^ earlier - (2 : ℚ) ^ later) =
+          row 1 * (2 : ℚ) ^ earlier - row 1 * (2 : ℚ) ^ later := by ring
+      _ = 0 := sub_eq_zero.mpr scaledPowersEqual
+  have powersDistinct : (2 : ℚ) ^ earlier - (2 : ℚ) ^ later ≠ 0 := by
+    apply sub_ne_zero.mpr
+    exact ne_of_lt (pow_lt_pow_right₀ (a := (2 : ℚ)) (by norm_num) before)
+  have rowOneZero : row 1 = 0 :=
+    (mul_eq_zero.mp factoredDifference).resolve_right powersDistinct
+  have rowZeroZero : row 0 = 0 := by rw [firstEquation, rowOneZero, zero_mul]
+  have rowTwoTimesPower : row 2 * (3 : ℚ) ^ earlier = 0 := by
+    rw [rowZeroZero] at earlierSecond
+    linarith
+  have rowTwoZero : row 2 = 0 :=
+    (mul_eq_zero.mp rowTwoTimesPower).resolve_right (pow_ne_zero _ (by norm_num))
+  funext coordinate
+  fin_cases coordinate
+  · exact rowZeroZero
+  · exact rowOneZero
+  · exact rowTwoZero
+
+/-- A nonzero terminal row can contain at most one whole carrier plane. -/
+theorem annihilatesCarrier_at_most_one
+    (row : State) (source : ℚ) (row_ne : row ≠ 0) {first second : Nat}
+    (annihilatesFirst : AnnihilatesCarrier row source first)
+    (annihilatesSecond : AnnihilatesCarrier row source second) :
+    first = second := by
+  rcases lt_trichotomy first second with before | equal | after
+  · exact False.elim (row_ne
+      (row_eq_zero_of_annihilates_two row source before annihilatesFirst annihilatesSecond))
+  · exact equal
+  · exact False.elim (row_ne
+      (row_eq_zero_of_annihilates_two row source after annihilatesSecond annihilatesFirst))
+
+/-- The set of whole-carrier depths of a nonzero row is a subsingleton. -/
+theorem wholeCarrierDepths_subsingleton (row : State) (source : ℚ) (row_ne : row ≠ 0) :
+    Set.Subsingleton {power | AnnihilatesCarrier row source power} := by
+  intro first first_mem second second_mem
+  exact annihilatesCarrier_at_most_one row source row_ne first_mem second_mem
 
 /-- Literal raw prefix spelling of the `power`-th carrier matrix. -/
 def carrierWord (power : Nat) : List PairedControl :=

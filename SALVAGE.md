@@ -225,6 +225,7 @@ file owns the mathematical stock.
 | [`G3-O27`](#g3-o27-projective-toggle-line-atlas) | obstruction | singular data and a projectively involutive toggle confine every raw orbit to six fixed rank-at-most-two carriers | formalized | graduated |
 | [`G3-O29`](#g3-o29-one-chart-projective-hard-core) | hardness embedding | one invariant plane with identity toggle already contains exact two-generator rational projective incidence | formalized | graduated |
 | [`G3-O30`](#g3-o30-nonprojective-infinite-carrier-orbit) | counterexample | a diagonal toggle with eigenvalues `1,2,3` sends one rank-two data image through infinitely many distinct rational planes | formalized | graduated |
+| [`G3-O31`](#g3-o31-whole-carrier-terminal-row-obstruction) | obstruction | a nonzero row contains at most one plane in the explicit infinite nonprojective carrier orbit | formalized | graduated |
 | [`G3-O02`](#g3-o02-rational-phase-fracture) | obstruction | a mortal paired instance has no rational phase-state same-zero compression | audited | stock |
 | [`G3-O03`](#g3-o03-history-sensitive-minimal-body-fracture) | obstruction | minimal bodies admit an exact history-sensitive three-state same-zero compiler | formalized | graduated |
 | [`G3-O04`](#g3-o04-expanding-affine-history-no-go) | obstruction | finite-mode expanding one-coordinate history has decidable target reachability | audited | graduated |
@@ -9477,9 +9478,59 @@ controlling the initial plane.
 **Artifact:** [`TransverseInfiniteAtlas.lean`](MatrixMortality/TransverseInfiniteAtlas.lean) and
 [`m34-nonprojective-infinite-carrier-2026-08-31.md`](audits/m34-nonprojective-infinite-carrier-2026-08-31.md).
 
-**Next:** classify when a rational diagonal toggle has finite subspace orbit, then determine
-whether one terminal row can exploit the infinite `TⁿD_s` family uniformly over unrestricted
-paired sources.
+**Next:** [`G3-O31`](#g3-o31-whole-carrier-terminal-row-obstruction) excludes accepting more than
+one depth by whole-plane vanishing. Classify the proper line sections left to a nonzero row.
+
+### G3-O31: Whole-carrier terminal-row obstruction
+
+**Kind:** obstruction
+
+**Evidence:** formalized
+
+**Disposition:** graduated
+
+Let `C_n(s)=im(TⁿD_s)` be the infinite carrier family of `G3-O30`, and let
+`λ=(a,b,c)∈(ℚ³)*`. Suppose `λ` annihilates the whole planes `C_n(s)` and `C_m(s)` with `n<m`.
+The first spanning vectors give
+
+```text
+a = b·2ⁿ,             a = b·2ᵐ.
+```
+
+Strict growth of rational powers of two forces `b=0`, hence `a=0`. The second spanning vector at
+depth `n` then gives
+
+```text
+a·s = c·3ⁿ,
+```
+
+so `c=0`. Therefore `λ=0`, uniformly in the source parameter `s`.
+
+Lean packages the exact conclusion as
+
+```text
+λ ≠ 0  ⇒  {n | C_n(s) ≤ ker λ} is a subsingleton.
+```
+
+The theorem quantifies over arbitrary rational rows and source parameters and uses the actual
+rank-two carrier submodules, not only their displayed normal formulas.
+
+**Scope:** only whole-plane terminal sections are excluded at multiple depths. For every other
+depth a nonzero row intersects `C_n(s)` in a proper vector line, and those line intersections may
+still carry unbounded arithmetic. The result is not a no-go for the nonprojective architecture,
+not a paired same-zero theorem, and not a claim that a source-dependent row family is impossible.
+
+**Use:** delete the simplest use of `G3-O30`: one fixed row cannot mark an unbounded set of toggle
+depths by annihilating their entire carriers. A surviving constructor must encode terminality in
+the moving line `C_n(s)∩ker λ` and prove an exact arbitrary-word converse, or vary more than the
+row.
+
+**Artifact:** [`TransverseInfiniteAtlas.lean`](MatrixMortality/TransverseInfiniteAtlas.lean) and
+[`m34-whole-carrier-row-obstruction-2026-08-31.md`](audits/m34-whole-carrier-row-obstruction-2026-08-31.md).
+
+**Next:** compute the moving intersection line explicitly and test whether its projective
+coordinate reduces to a decidable exponential equation or supports source-uniform terminal
+arithmetic.
 
 ### G3-O13: Rational serializer pumping
 

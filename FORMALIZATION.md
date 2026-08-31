@@ -2059,6 +2059,8 @@ fixed-rank decision problem.
 | Every source-parameter data map and every toggled carrier matrix has rank exactly two | `TransverseInfiniteAtlas.data_rank_eq_two`, `TransverseInfiniteAtlas.data_det`, `TransverseInfiniteAtlas.carrierMatrix_rank_eq_two` |
 | The displayed plane normal annihilates each carrier, while an earlier witness survives every later normal | `TransverseInfiniteAtlas.normal_dotProduct_carrierMatrix_mulVec`, `TransverseInfiniteAtlas.normal_dotProduct_witness_ne_zero` |
 | Literal raw prefixes `tⁿb` realize an injectively infinite family of carrier planes | `TransverseInfiniteAtlas.wordProduct_carrierWord`, `TransverseInfiniteAtlas.carrier_ne_of_lt`, `TransverseInfiniteAtlas.carrier_injective` |
+| A row annihilating two distinct planes in the infinite carrier orbit is zero | `TransverseInfiniteAtlas.sourceWitness_mem_carrier`, `TransverseInfiniteAtlas.row_eq_zero_of_annihilates_two` |
+| A nonzero row has at most one whole-carrier toggle depth | `TransverseInfiniteAtlas.annihilatesCarrier_at_most_one`, `TransverseInfiniteAtlas.wholeCarrierDepths_subsingleton` |
 | The `bcbb` null histories and complete terminal language are one exact periodic ray | `PeriodicHistory.bcbbNull_iff`, `PeriodicHistory.bcbb_terminal_match_iff` |
 | The singular positional decoder obeys its all-control affine state equation | `PeriodicHistory.periodicProduct_mulVec_column`, `PeriodicHistory.periodicCoefficient_eq` |
 | The `bcbb` affine section has no false zero and matches the paired zero language | `PeriodicHistory.bcbbAffine_zero_iff`, `PeriodicHistory.bcbb_periodicCoefficient_zero_iff_paired_zero` |
@@ -2348,6 +2350,14 @@ annihilated by `(6ⁿ,3ⁿ,s·2ⁿ)` and contains `(1,−2ⁿ,0)`. For `n<m`, th
 that earlier vector as `3^m(2^m−2^n)`, which is nonzero. Lean therefore proves injectivity of
 `n↦im(TⁿD_s)` uniformly in `s`. This is an infinite-carrier counterexample to extending G3-O27
 beyond projective involution, not a terminal-row construction or paired same-zero theorem.
+
+For `G3-O31`, Lean takes an arbitrary row and the actual carrier submodules from `G3-O30`. Whole-
+plane vanishing at depths `n<m` evaluates the first spanning vectors as
+`a=b2ⁿ=b2ᵐ`; strict growth forces `a=b=0`. Evaluation of the second spanning vector then gives
+`c3ⁿ=0`, hence `c=0`. The formal theorem is uniform in the source parameter and derives the row
+equality extensionally. Its public corollary states that the set of whole-carrier depths of every
+nonzero row is a subsingleton. Proper line intersections at all remaining depths are expressly
+outside the result.
 
 For `G3-O20`, Lean proves the free-monoid tail law: if one fixed-boundary equation with stationary
 left and right pump blocks holds at exponents `N` and `N+1`, it holds at every exponent `N+k`.
