@@ -1236,6 +1236,22 @@ now supplies the sharp countercase: Lean computes its exact common data kernel, 
 toggle leaves that kernel, and proves nonzero recovery by either next data action. Hence only the
 toggle-invariant common-kernel subcase factors away.
 
+[`G3-S04`](SALVAGE.md#g3-s04-symmetric-square-collision-and-fork-obstruction) is fully
+formalized in `SymmetricSquareCollision`. Over an arbitrary commutative ring, Lean checks the
+covariant Sym² matrix, its multiplication law, Veronese equivariance, determinant cube, tangent
+determinant-square identity, and simultaneous-action scaling. Over `ℤ`, it proves exact zero iff
+cross-determinant collision and the discrete nonzero lower bound `1`. It also proves
+
+```text
+det[ν(u) ν(v) ν(w)] = Δ(u,v)Δ(u,w)Δ(v,w),
+```
+
+and the resulting two-ray theorem for a singular Veronese carrier. For a nonsingular binary
+matrix the checked symmetric square has rank exactly three. Composed with the independently
+formalized carrier bound `G3-S03`, this excludes a direct non-elementary Sym² realization of the
+complete `bcbc` fork. No declaration claims a syntax guard, directional pruning, positive
+compiler, or minimality among arbitrary collision detectors.
+
 The semantic core of [`G3-O04`](SALVAGE.md#g3-o04-expanding-affine-history-no-go) is formalized:
 the reset-affine orbit, finite reverse box, exact caged DFA, regularity, and universal
 noncomputability contradiction are kernel-checked. The remaining mechanization seam is uniform
@@ -1507,6 +1523,12 @@ integral determinant-one transporter makes this a promised-empty `UCB₂({5})` c
 inverse search still contains the distinct pure-dilation prefixes `D⁻ⁿ`, represented by primitive
 pairs `(11,5^(n+2))` of exact height `5^(n+2)→∞`. The false ray is rejected only by directional
 chamber information, not by height properness.
+
+The adjacent `G3-S04` Sym² formalization embeds this binary projective incidence in exactly three
+coordinates and turns collision into one gapped scalar zero. Its multiplication and rank
+theorems make the connection exact, but the squared scalar forgets orientation and consumes the
+entire three-state budget. It therefore links the `M₂(3)` incidence core to the `M₃(4)` carrier
+geometry without deciding either positive reachability or the inverse-path direction problem.
 
 Lean checks the internal algebra at the positive boundary: three positive letters surject onto
 the binary free group; quotient-blind boundaries accepting `g` and `g²` admit a nonempty identity
@@ -2330,6 +2352,7 @@ fixed-rank decision problem.
 | `ReturnJordan.lean` | parity-Jordan rail rigidity and modular immortality certificate |
 | `ReturnConvert.lean` | minimal two-scale return pencil and nonresonant multi-return zero |
 | `ProjectiveLine.lean` | total affine-chart presentation of `ℙ¹` and exact unit-word ray action |
+| `SymmetricSquareCollision.lean` | covariant Sym² representation, gapped tangent collision test, full-rank cost, and the two-ray Veronese-plane obstruction |
 | `CongruenceBlindOrbit.lean` | free rational shear orbit, trivial source stabilizer, projective all-modulus CRT closure, and a whole-matrix congruence ghost away from nineteen |
 | `ShearEuclidean.lean` | Euclidean chamber growth, determinant-one coprimality, and finite projective syntax bounds for the fixed step-three shear orbit |
 | `TransverseDilationOrbit.lean` | free diagonal--parabolic ping-pong, bounded stabilizer recurrence, and a promised-empty trivial-stabilizer false inverse ray of proper height |

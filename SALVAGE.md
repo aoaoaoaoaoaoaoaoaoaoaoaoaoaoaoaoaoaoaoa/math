@@ -278,6 +278,7 @@ file owns the mathematical stock.
 | [`G3-O08`](#g3-o08-erasing-and-stationary-closed-block-obstruction) | obstruction | paired Parikh rank kills erasing exact macros and stationary closed-return block encoders | audited; formalized core | graduated |
 | [`G3-S01`](#g3-s01-shift-equivariant-zero-incidence) | structure theorem | same-zero state dimension is equivariant projective incidence dimension | audited | active |
 | [`G3-S02`](#g3-s02-rank-two-kernel-bifurcation) | structure theorem | common kernels erase route differences; transverse fibres retain one bilinear survivor | formalized | active |
+| [`G3-S04`](#g3-s04-symmetric-square-collision-and-fork-obstruction) | structure theorem and obstruction | symmetric square turns projective collision into a gapped scalar zero, while a two-plane Veronese carrier contains at most two projective rays | formalized | graduated |
 | [`G3-O18`](#g3-o18-transverse-minimum-body-countermodel) | fixed-subclass compiler | distinct rank-two kernels encode every paired history and exactly recognize all minimum bodies | formalized | graduated |
 | [`G3-O26`](#g3-o26-transverse-terminal-row-obstruction) | obstruction | two `bcbc` terminal histories force every exact row on the fixed transverse orbit to vanish | formalized | graduated |
 | [`G3-O27`](#g3-o27-projective-toggle-line-atlas) | obstruction | singular data and a projectively involutive toggle confine every raw orbit to six fixed rank-at-most-two carriers | formalized | graduated |
@@ -12269,6 +12270,82 @@ and [`m34-common-kernel-shuttle-2026-08-11.md`](audits/m34-common-kernel-shuttle
 **Next:** construct a source-computable invariant surface in `P¹×P¹` closed under both prepend
 maps and the bilinear reset, or prove that no linear terminal section can be exact on every
 control word.
+
+### G3-S04: Symmetric-square collision and fork obstruction
+
+**Kind:** structure theorem and obstruction
+
+**Evidence:** formalized
+
+**Disposition:** graduated
+
+For a homogeneous pair `v=(x,y)`, put
+
+```text
+ν(v)=(x²,xy,y²).
+```
+
+The covariant symmetric-square representation is
+
+```text
+Sym² [[a,b],[c,d]] =
+  [[a², 2ab,    b²],
+   [ac, ad+bc,  bd],
+   [c², 2cd,    d²]].
+```
+
+Lean proves, over every commutative ring,
+
+```text
+Sym²(AB)=Sym²(A)Sym²(B),
+Sym²(A)ν(v)=ν(Av),
+det(Sym²(A))=det(A)³.
+```
+
+Thus a nonsingular binary matrix gives a rank-three action on exactly three coordinates. For
+`u=(p,q)`, the tangent row
+
+```text
+τᵤ=(q²,−2pq,p²)
+```
+
+satisfies
+
+```text
+τᵤν(v)=Δ(u,v)²,
+Δ(Au,Av)=det(A)Δ(u,v).
+```
+
+On the integer lattice this scalar is zero exactly when `Δ(u,v)=0`, and otherwise is at least
+one. Hence the construction is an exact discrete projective-collision detector, not merely a
+nonnegative real surrogate.
+
+There is also an exact three-ray factorization:
+
+```text
+det[ν(u) ν(v) ν(w)] = Δ(u,v)Δ(u,w)Δ(v,w).
+```
+
+Therefore any three Veronese columns in a common two-plane contain a projectively colliding
+pair. Once two rays are distinct, every further ray in that plane repeats one of them. Combined
+with `G3-S03`, this closes direct non-elementary Sym² use for a complete `bcbc` terminal fork:
+its accepted fork orbit spans at most a plane, so a covariant Sym² realization can carry at most
+two projective rays. With invertible fork blocks, only invariant-point or invariant-pair
+elementary dynamics remain.
+
+**Scope:** zero cross determinant is the formal projective-collision relation; callers must
+exclude the zero pair when interpreting it as equality in `P¹`. The representation uses all
+three states. Squaring canonicalizes and gaps one incidence test, but supplies neither syntax
+guard space, a positive-monoid compiler, nor a sign or chamber telling an inverse search which
+branch is lawful. A fixed leakage insertion around Sym² remains a separate construction problem.
+
+**Use:** replace ad hoc quadratic collision formulas by the checked monoid representation and
+tangent row. Reject a direct irreducible Sym² realization of a complete fork whose exact
+three-state carrier is forced into a line or plane. Do not infer directional pruning from
+nonnegativity of the square.
+
+**Artifact:** [`SymmetricSquareCollision.lean`](MatrixMortality/SymmetricSquareCollision.lean) and
+[`m34-symmetric-square-collision-2026-08-31.md`](audits/m34-symmetric-square-collision-2026-08-31.md).
 
 ### G3-O18: Transverse minimum-body countermodel
 

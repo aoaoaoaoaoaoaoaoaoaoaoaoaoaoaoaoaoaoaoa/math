@@ -2171,6 +2171,56 @@
 'MatrixMortality.ShearEuclidean.finite_search_bounds_of_matrix_hit' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.SymmetricSquareCollision.symmetricSquare_mulVec_veronese' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SymmetricSquareCollision.symmetricSquare_mul' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SymmetricSquareCollision.symmetricSquare_one' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SymmetricSquareCollision.wordProduct_symmetricSquare' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SymmetricSquareCollision.symmetricSquare_det' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SymmetricSquareCollision.symmetricSquare_det_ne_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SymmetricSquareCollision.symmetricSquare_rank_eq_three' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SymmetricSquareCollision.tangentValue_eq_crossDet_sq' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SymmetricSquareCollision.tangentValue_self' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.SymmetricSquareCollision.crossDet_mulVec' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.SymmetricSquareCollision.tangentValue_mulVec' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SymmetricSquareCollision.wordTangentValue_eq_crossDet_sq' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SymmetricSquareCollision.tangentValue_int_eq_zero_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SymmetricSquareCollision.wordTangentValue_int_eq_zero_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SymmetricSquareCollision.one_le_tangentValue_int_of_crossDet_ne_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SymmetricSquareCollision.veroneseColumns_det' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SymmetricSquareCollision.exists_pairwise_crossDet_eq_zero_of_veroneseColumns_det_eq_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SymmetricSquareCollision.crossDet_first_third_eq_zero_or_second_third_eq_zero_of_det_eq_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.TransverseDilationOrbit.dilationGenerator_det' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
