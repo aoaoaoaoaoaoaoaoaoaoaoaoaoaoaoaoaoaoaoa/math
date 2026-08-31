@@ -122,6 +122,7 @@ file owns the mathematical stock.
 | [`R32-S48`](#r32-s48-fractional-cyclotomic-finite-walls) | structure theorem and obstruction | every mortal fraction reduces to `1` when the base does and to `±1` when the base reduces to `−1` | formalized | active |
 | [`R32-S49`](#r32-s49-geometric-center-chain-extinction) | structure theorem and obstruction | exact denominator-center chains double their exponent into a one-return resonance, while fixed-ray quotients exclude the zero critical residue | formalized | active |
 | [`R32-S50`](#r32-s50-odd-signed-re-entry-extinction) | structure theorem and obstruction | a zero equal-scale residue cannot enter a denominator center at an odd exponent in any reduced odd signed-ray quotient | formalized | active |
+| [`R32-S51`](#r32-s51-weighted-tail-adjugate-certificate) | structure theorem | every positive-valuation bridge zero has one fixed-weight adjugate tail followed by a single geometric-ray incidence | formalized | active |
 | [`R32-M01`](#r32-m01-generic-reverse-edge-compiler) | partial mechanism | projective incidence generically embeds into a compatible two-plane edge square | formalized | active |
 | [`R32-M02`](#r32-m02-finite-quotient-sieve) | partial mechanism | finite monoid quotients give complete modular no-certificates for fixed candidates | formalized | active |
 | [`R32-M03`](#r32-m03-two-scale-return-conversion) | partial mechanism | a minimal two-scale return pencil has nonresonant multi-return zeros | formalized | active |
@@ -3905,6 +3906,74 @@ audit
 **Use:** after a zero equal-scale residue, discard every immediate odd center exponent whenever
 `q+1` has an odd prime. The surviving re-entry exponent is even or passes through a nonzero
 residue.
+
+### R32-S51: Weighted-tail adjugate certificate
+
+**Kind:** structure theorem
+**Evidence:** formalized
+**Disposition:** active
+
+The fraction pullback
+
+```text
+H_t = [(B−A)t²−B   AB]
+      [−t            Bt]
+```
+
+has the explicit adjugate action
+
+```text
+J_t = [Bt   −AB]
+      [t    (B−A)t²−B].                                    (1)
+```
+
+For the alternating form `x∧y=x₀y₁−x₁y₀`, Lean proves
+
+```text
+(H_t x)∧y = x∧(J_t y),                                     (2)
+```
+
+and its exact word iteration. Separate a bridge word as `[head] ++ tail`, and put
+
+```text
+(R,S) = (product of J_(q^(w+1)) over tail) · (B,1).         (3)
+```
+
+Then the bridge vanishes exactly when
+
+```text
+R = A q^(head+1) S.                                        (4)
+```
+
+There is no affine division in (3)–(4), so poles and common content remain visible. If a base
+prime has positive parameter valuation
+
+```text
+vₚ(A/B)=k vₚ(q)>0,
+```
+
+`R32-S44` and Lean's combined certificate force
+
+```text
+tail≠[],                 waitExponent(tail)=k.              (5)
+```
+
+Thus every positive-valuation branch has finitely many candidate tails: the unbounded head is
+only the exact power-ray membership test (4).
+
+**Scope:** this is a finite weighted-tail normal form, not yet a project-wide decidability
+instance. It requires a positive base-prime valuation and does not bound pure-denominator
+parameters `A=1`. The tail alphabet remains the two-dimensional adjugate return action.
+
+**Artifact:** `ReturnSquare.fractionRayCross_pullbackWord`,
+`positiveBridge_fraction_cons_zero_iff_tailAdjugate`, and
+`positiveBridge_fraction_zero_positive_valuation_tail_certificate` in
+[`ReturnSquareTailAdjugate.lean`](MatrixMortality/ReturnSquareTailAdjugate.lean), with audit
+[`m32-returnsquare-weighted-tail-adjugate-2026-08-31.md`](audits/m32-returnsquare-weighted-tail-adjugate-2026-08-31.md).
+
+**Use:** enumerate compositions of the fixed positive valuation rather than bounding arbitrary
+word length or head waits. This is the lawful `M₃(2)` to `M₂` bridge in the positive-numerator
+stratum: one finite family of two-coordinate tail products and one cyclic-ray membership test.
 
 ### R32-M01: Generic reverse edge compiler
 
