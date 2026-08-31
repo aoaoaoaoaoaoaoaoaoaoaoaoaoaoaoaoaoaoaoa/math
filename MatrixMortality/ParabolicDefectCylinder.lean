@@ -1071,6 +1071,85 @@ theorem bZeroBDefectCOneCodeCore_bbcc_factor (x y z : ℤ) :
   norm_num [bZeroBDefectCOneCodeCore]
   ring
 
+/-- On the all-`c` code ray `C=S-1`, the primitive `b | b | c` core splits into two
+independent wait pencils. -/
+theorem bZeroBDefectCOneCodeCore_all_c_factor {R : Type*} [CommRing R]
+    (S x y z : R) :
+    bZeroBDefectCOneCodeCore S (S - 1) x y z =
+      (72 * S * y - 9 * S - 8 * y + 9) *
+        (119911680 * x * z + 11209824 * x - 25766986436 * z - 2408152393) := by
+  unfold bZeroBDefectCOneCodeCore
+  ring
+
+private theorem bZeroBDefectCOneCodeCore_ne_zero_of_all_c_coordinates
+    (S : ℚ) (x y z : Nat) (scale_large : 1 < S) :
+    bZeroBDefectCOneCodeCore S (S - 1) x y z ≠ 0 := by
+  rw [bZeroBDefectCOneCodeCore_all_c_factor]
+  refine mul_ne_zero ?_ ?_
+  · by_cases wait_zero : y = 0
+    · subst y
+      norm_num
+      nlinarith
+    · have wait_pos : (1 : ℚ) ≤ y := by
+        exact_mod_cast Nat.one_le_iff_ne_zero.mpr wait_zero
+      have slope_nonnegative : (0 : ℚ) ≤ 72 * S - 8 := by nlinarith
+      have wait_offset_nonnegative : (0 : ℚ) ≤ y - 1 := by positivity
+      have product_nonnegative :
+          (0 : ℚ) ≤ (72 * S - 8) * (y - 1) :=
+        mul_nonneg slope_nonnegative wait_offset_nonnegative
+      nlinarith
+  · intro pencil_zero
+    let A : ℚ := 119911680 * z + 11209824
+    let B : ℚ := 25766986436 * z + 2408152393
+    have denominator_positive : (0 : ℚ) < A := by
+      dsimp [A]
+      positivity
+    have lower_endpoint : 214 * A < B := by
+      calc
+        214 * A < 214 * A + (105886916 * z + 9250057) :=
+          lt_add_of_pos_right _ (by positivity)
+        _ = B := by dsimp [A, B]; ring
+    have upper_endpoint : B < 215 * A := by
+      calc
+        B < B + (14024764 * z + 1959767) :=
+          lt_add_of_pos_right _ (by positivity)
+        _ = 215 * A := by dsimp [A, B]; ring
+    have pencil_eq : (x : ℚ) * A = B := by
+      dsimp [A, B]
+      linarith
+    have scaled_lower : (214 : ℚ) * A < x * A := by
+      rw [pencil_eq]
+      exact lower_endpoint
+    have scaled_upper : (x : ℚ) * A < 215 * A := by
+      rw [pencil_eq]
+      exact upper_endpoint
+    have x_large : (214 : ℚ) < x :=
+      lt_of_mul_lt_mul_right scaled_lower denominator_positive.le
+    have x_small : (x : ℚ) < 215 :=
+      lt_of_mul_lt_mul_right scaled_upper denominator_positive.le
+    have x_large_nat : 214 < x := by exact_mod_cast x_large
+    have x_small_nat : x < 215 := by exact_mod_cast x_small
+    omega
+
+/-- No nonempty all-`c` body closes the shortest `0 | 2 | 1` bridge with letters
+`b | b | c`, independently of all waits. -/
+theorem bridge_bZero_bTwo_cOne_det_ne_zero_of_c_run
+    (k : Nat) (k_pos : 0 < k) (x y z : Nat) :
+    (bridge 27
+      (bAtom 27 (3 * z) * bAtom 27 (3 * x + 2) *
+        cAtom 27 (nearySideLowerC 3 (List.replicate k .c))
+          (nearySideLowerCScale 3 (List.replicate k .c)) (3 * y + 1))).det ≠ 0 := by
+  rw [bridge_bZero_bTwo_cOne_det]
+  refine mul_ne_zero (by norm_num) ?_
+  rw [tagEncode_c_run, List.length_replicate, ternaryCode_true_run]
+  have power_large_nat : 1 < 3 ^ k :=
+    one_lt_pow₀ (by norm_num) (Nat.ne_of_gt k_pos)
+  have power_one_le : 1 ≤ 3 ^ k := power_large_nat.le
+  rw [Nat.cast_sub power_one_le]
+  norm_num
+  exact bZeroBDefectCOneCodeCore_ne_zero_of_all_c_coordinates
+    ((3 : ℚ) ^ k) x y z (by exact_mod_cast power_large_nat)
+
 /-! ## Phase-zero triple-`c` parity cylinder -/
 
 /-- Primitive code-coordinate determinant core for the shortest `0 | 2 | 1` bridge with three

@@ -1620,6 +1620,15 @@ cannot eliminate that rectangle: after removing the core's factor `32`, its `x=y
 has an odd coefficient in `z`. The exact boundary is
 [`audits/m43-phase-zero-right-c-parity-rectangle-2026-08-31.md`](audits/m43-phase-zero-right-c-parity-rectangle-2026-08-31.md).
 
+The phase-zero right-`c` all-`c` ray exclusion
+[`M4-S22`](SALVAGE.md#m4-s22-phase-zero-right-c-all-c-ray-exclusion) is checked in the same
+module. `ParabolicBlade.bZeroBDefectCOneCodeCore_all_c_factor` splits the primitive core at
+`C=S−1` into two wait pencils. The theorem
+`ParabolicBlade.bridge_bZero_bTwo_cOne_det_ne_zero_of_c_run` proves that the scale pencil never
+vanishes for a nonempty body and that the other pencil would force `214<x<215`. The exact
+boundary is
+[`audits/m43-phase-zero-right-c-all-c-ray-2026-08-31.md`](audits/m43-phase-zero-right-c-all-c-ray-2026-08-31.md).
+
 The residue-zero `c`-endpoint exclusion
 [`M4-S12`](SALVAGE.md#m4-s12-residue-zero-c-endpoint-exclusion) is checked in the same module.
 `ParabolicBlade.bridge_cZero_bTwo_bOne_det` and
