@@ -13,6 +13,8 @@ integer cube sharpens this to a finite escape horizon: among
 `(2 * H + 1) ^ 2 + 1` distinct prefixes, either some state has height above
 `H` or two states expose a nontrivial target stabilizer.  When the source
 stabilizer is trivial, the latter is a finite nonreachability certificate.
+More generally, `N` distinct prefixes at a trivial-stabilizer target whose
+states have height at most `H` satisfy `N ≤ (2 * H + 1) ^ 2`.
 -/
 
 set_option autoImplicit false
@@ -117,6 +119,32 @@ theorem exists_nontrivial_stabilizer_of_orbit_collision
       _ = right := by rw [quotient_one]; simp
   · rw [mul_smul, collision, inv_smul_smul]
 
+/-- Reachability transports triviality of the source stabilizer to the target
+stabilizer. -/
+theorem target_stabilizer_trivial_of_reachable_from_trivial_source
+    {G X : Type*} [Group G] [MulAction G X]
+    (source target : X)
+    (source_stabilizer_trivial :
+      ∀ element : G, element • source = source → element = 1)
+    (transporter : G) (reaches : transporter • source = target) :
+    ∀ element : G, element • target = target → element = 1 := by
+  intro element target_fixed
+  have conjugate_fixed :
+      (transporter⁻¹ * element * transporter) • source = source := by
+    calc
+      (transporter⁻¹ * element * transporter) • source =
+          transporter⁻¹ • element • transporter • source := by
+            simp only [mul_smul]
+      _ = transporter⁻¹ • element • target := by rw [reaches]
+      _ = transporter⁻¹ • target := by rw [target_fixed]
+      _ = source := by rw [← reaches, inv_smul_smul]
+  have conjugate_one : transporter⁻¹ * element * transporter = 1 :=
+    source_stabilizer_trivial _ conjugate_fixed
+  calc
+    element = transporter * (transporter⁻¹ * element * transporter) *
+        transporter⁻¹ := by group
+    _ = 1 := by rw [conjugate_one]; simp
+
 /-- A nonidentity target stabilizer forbids every source-to-target transporter
 when the source stabilizer is trivial. -/
 theorem target_unreachable_of_source_stabilizer_trivial
@@ -128,22 +156,9 @@ theorem target_unreachable_of_source_stabilizer_trivial
     (target_fixed : targetStabilizer • target = target) :
     ∀ transporter : G, transporter • source ≠ target := by
   intro transporter reaches
-  have conjugate_fixed :
-      (transporter⁻¹ * targetStabilizer * transporter) • source = source := by
-    calc
-      (transporter⁻¹ * targetStabilizer * transporter) • source =
-          transporter⁻¹ • targetStabilizer • transporter • source := by
-            simp only [mul_smul]
-      _ = transporter⁻¹ • targetStabilizer • target := by rw [reaches]
-      _ = transporter⁻¹ • target := by rw [target_fixed]
-      _ = source := by rw [← reaches, inv_smul_smul]
-  have conjugate_one : transporter⁻¹ * targetStabilizer * transporter = 1 :=
-    source_stabilizer_trivial _ conjugate_fixed
-  have targetStabilizer_one : targetStabilizer = 1 := by
-    calc
-      targetStabilizer = transporter *
-          (transporter⁻¹ * targetStabilizer * transporter) * transporter⁻¹ := by group
-      _ = 1 := by rw [conjugate_one]; simp
+  have targetStabilizer_one :=
+    target_stabilizer_trivial_of_reachable_from_trivial_source source target
+      source_stabilizer_trivial transporter reaches targetStabilizer target_fixed
   exact targetStabilizer_ne targetStabilizer_one
 
 /-- Infinitely many distinct orbit prefixes represented inside one bounded
@@ -238,6 +253,65 @@ theorem bounded_prefix_window_escape_of_stabilizer_trivial
     exists_nontrivial_stabilizer_of_bounded_prefix_window target bound orbitPrefix
       orbitPrefix_injective state realizes no_escape
   exact stabilizer_ne (stabilizer_trivial stabilizer fixed)
+
+/-- A finite family of distinct prefixes at a trivial-stabilizer target cannot
+fit inside a height-`bound` cube unless its cardinality is at most
+`(2 * bound + 1)²`. -/
+theorem prefix_count_le_height_square_of_stabilizer_trivial
+    {G ι : Type*} [Group G] [Fintype ι]
+    [MulAction G (ProjectiveLine.Point ℚ)]
+    (target : ProjectiveLine.Point ℚ)
+    (orbitPrefix : ι → G) (orbitPrefix_injective : Function.Injective orbitPrefix)
+    (state : ι → PrimitivePair)
+    (realizes : ∀ index, orbitPrefix index • target = primitivePoint (state index))
+    (bound : ℕ) (bounded : ∀ index, primitiveHeight (state index) ≤ bound)
+    (target_stabilizer_trivial :
+      ∀ element : G, element • target = target → element = 1) :
+    Fintype.card ι ≤ (2 * bound + 1) ^ 2 := by
+  let cubeState : ι → {pair // pair ∈ integralPairCube bound} := fun index ↦
+    ⟨(state index).1, mem_integralPairCube_of_pairHeight_le (bounded index)⟩
+  have cubeState_injective : Function.Injective cubeState := by
+    intro left right states_eq
+    have pair_eq : (state left).1 = (state right).1 :=
+      congrArg (fun member : {pair // pair ∈ integralPairCube bound} ↦ member.1)
+        states_eq
+    have primitive_eq : state left = state right := Subtype.ext pair_eq
+    have collision : orbitPrefix left • target = orbitPrefix right • target := by
+      calc
+        orbitPrefix left • target = primitivePoint (state left) := realizes left
+        _ = primitivePoint (state right) := by rw [primitive_eq]
+        _ = orbitPrefix right • target := (realizes right).symm
+    by_contra indices_ne
+    have prefixes_ne : orbitPrefix left ≠ orbitPrefix right :=
+      orbitPrefix_injective.ne indices_ne
+    obtain ⟨stabilizer, stabilizer_ne, fixed⟩ :=
+      exists_nontrivial_stabilizer_of_orbit_collision prefixes_ne collision
+    exact stabilizer_ne (target_stabilizer_trivial stabilizer fixed)
+  have cardinal_bound :
+      Fintype.card ι ≤ Fintype.card {pair // pair ∈ integralPairCube bound} :=
+    Fintype.card_le_of_injective cubeState cubeState_injective
+  simpa [integralPairCube_card] using cardinal_bound
+
+/-- Exact inverse form of the finite-family bound: whenever
+`(2 * bound + 1)²` is smaller than the number of distinct prefixes, at least
+one represented target-orbit state has height strictly above `bound`. -/
+theorem exists_height_gt_of_square_lt_prefix_count
+    {G ι : Type*} [Group G] [Fintype ι]
+    [MulAction G (ProjectiveLine.Point ℚ)]
+    (target : ProjectiveLine.Point ℚ)
+    (orbitPrefix : ι → G) (orbitPrefix_injective : Function.Injective orbitPrefix)
+    (state : ι → PrimitivePair)
+    (realizes : ∀ index, orbitPrefix index • target = primitivePoint (state index))
+    (target_stabilizer_trivial :
+      ∀ element : G, element • target = target → element = 1)
+    (bound : ℕ) (prefix_count_large : (2 * bound + 1) ^ 2 < Fintype.card ι) :
+    ∃ index, bound < primitiveHeight (state index) := by
+  by_contra no_escape
+  push Not at no_escape
+  have prefix_count_bounded :=
+    prefix_count_le_height_square_of_stabilizer_trivial target orbitPrefix
+      orbitPrefix_injective state realizes bound no_escape target_stabilizer_trivial
+  exact (Nat.not_lt_of_ge prefix_count_bounded) prefix_count_large
 
 /-- With trivial source stabilizer, a bounded finite prefix window is already
 a certificate that the target is unreachable from the source. -/

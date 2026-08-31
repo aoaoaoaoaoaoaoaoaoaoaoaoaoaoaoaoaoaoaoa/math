@@ -331,6 +331,7 @@ file owns the mathematical stock.
 | [`D2-O06`](#d2-o06-bounded-inverse-recurrence-forces-a-stabilizer) | structural obstruction | every infinite injective-prefix rational inverse orbit with bounded primitive height contains a nontrivial target-stabilizer segment | formalized | graduated |
 | [`D2-O10`](#d2-o10-finite-bounded-prefix-horizon) | quantitative structural reduction | `(2H+1)²+1` distinct prefixes bounded by primitive height `H` already expose a nontrivial target stabilizer | formalized | graduated |
 | [`D2-O11`](#d2-o11-bounded-branch-nonreachability-certificate) | finite nonreachability certificate | under trivial source stabilizer, a bounded prefix window exposes a target stabilizer and certifies that no transporter exists | formalized | graduated |
+| [`D2-O12`](#d2-o12-exact-prefix-height-rate) | quantitative escape bound | `N` distinct prefixes at a trivial-stabilizer target bounded by height `H` satisfy `N≤(2H+1)²`, with an exact threshold contrapositive | formalized | graduated |
 | [`D2-M01`](#d2-m01-benchmark-critical-shell) | partial mechanism | the mixed-prime benchmark reduces generically to one guarded `5`-adic shell | audited | active |
 | [`D2-O01`](#d2-o01-canonical-collatz-reachability-is-not-automatic) | obstruction | full generalized-Collatz reachability is not synchronously recognizable in its canonical base | external theorem | active |
 | [`D2-O02`](#d2-o02-critical-shell-periodic-saturation) | obstruction and rewrite seed | every nonempty finite wait schedule has a rational all-unit cycle; normalized nonfreeness persists under every generator scaling, while its odd family is a two-seed cancellative pump and the positive finite basis is complete only through length 30 | formalized core; audited strengthening | active |
@@ -14218,6 +14219,55 @@ branch by a secondary Archimedean or `S`-adic invariant.
 [`InverseOrbitRecurrence.lean`](MatrixMortality/InverseOrbitRecurrence.lean)
 and
 [`m34-bounded-branch-certificate-2026-08-31.md`](audits/m34-bounded-branch-certificate-2026-08-31.md).
+
+### D2-O12: Exact prefix-height rate
+
+**Kind:** quantitative escape bound
+
+**Evidence:** formalized
+
+**Disposition:** graduated
+
+Let `N` pairwise distinct group prefixes act on a rational projective target
+with trivial stabilizer. Supply a primitive integral representative for each
+target-orbit state. If every representative has height at most `H`, equality
+of two representatives would give a target-orbit collision and hence a
+nonidentity target stabilizer. The representatives are therefore distinct
+elements of `[-H,H]²`, so
+
+```text
+N ≤ (2H+1)².
+```
+
+The exact inverse threshold is also formalized:
+
+```text
+(2H+1)² < N  ⇒  some represented state has height > H.
+```
+
+Reachability from a trivial-stabilizer source transports stabilizer triviality
+to the target by conjugation, so every promised yes-instance inherits the
+hypothesis.
+
+**Scope:** the inequality controls the maximum height among a finite family.
+It does not assert that heights increase monotonically with prefix index, that
+an escape is permanent, or that a later state cannot return to a smaller
+height. The square counts nonprimitive and both-sign pairs and is not claimed
+minimal. General `UCB₂(S)` remains open.
+
+**Use:** the unbounded branch now has an exact density constraint: no more than
+`(2H+1)²` distinct prefixes can remain below height `H`. Any proposed normal
+form, pumping scheme, or counterexample must respect this finite-family rate;
+the remaining problem is to turn recurrent height escapes into a terminating
+or separating invariant.
+
+**Next promotion:** combine the rate with a place-sensitive return bound that
+limits how often an inverse path can re-enter a smaller height cube.
+
+**Artifacts:**
+[`InverseOrbitRecurrence.lean`](MatrixMortality/InverseOrbitRecurrence.lean)
+and
+[`m34-prefix-height-rate-2026-08-31.md`](audits/m34-prefix-height-rate-2026-08-31.md).
 
 ### D2-M01: Benchmark critical shell
 

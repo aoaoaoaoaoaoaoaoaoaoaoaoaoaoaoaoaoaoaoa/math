@@ -1647,6 +1647,13 @@ stabilizer, any nonidentity target stabilizer forbids a source-to-target transpo
 conjugation. Thus every explicit prefix window either escapes above `H` or certifies that the
 target is unreachable; target-stabilizer recognition is unnecessary on the bounded branch.
 
+[`D2-O12`](SALVAGE.md#d2-o12-exact-prefix-height-rate) quantifies the survivor. At a
+trivial-stabilizer target, `N` distinct prefixes whose primitive states have height at most `H`
+satisfy `N≤(2H+1)²`; equivalently, `(2H+1)²<N` forces a state above `H`. Reachability from the
+promised trivial-stabilizer source transfers triviality to the target. This constrains the maximum
+height in every finite prefix family but does not make the height sequence monotone or prevent
+later returns.
+
 The ordinary mortality lift is likewise no longer part of the paired obstruction. For arbitrary
 controls `H_a`, column `γ`, and row `λ` over a field, adjoining `γλ` gives mortality exactly when some
 `λH_yγ` vanishes. A zero product without the separator is already a scalar-zero witness; after
@@ -2000,7 +2007,8 @@ shows that every bounded-height injective-prefix recurrence forces a nontrivial 
 finite horizon `(2H+1)²+1`. Hence the next hard no-instance cannot combine trivial target
 stabilizer with bounded recurrence. `D2-O11` further decides any supplied bounded window under
 trivial source stabilizer by conjugating its collision witness. Unbounded-height paths remain
-undecided.
+undecided, although `D2-O12` now forces the exact finite-family rate
+`N≤(2H+1)²` below every height ceiling `H`.
 
 Work on projective incidence should therefore be treated as a joint `M₃(2)`/`M₂(3)` campaign.
 A `GPI₂` algorithm decides all of `M₂(3)` and the rank-`(2,2)` artery of `M₃(2)`; a universal
