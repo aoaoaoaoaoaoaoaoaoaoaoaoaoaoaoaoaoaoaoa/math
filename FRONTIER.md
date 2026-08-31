@@ -553,6 +553,12 @@ The sole surviving one-`c` endpoint, `b`-defect family has a stronger parity cut
 four, with no condition on the body code or waits. Hence every zero in the `0|2|1` `b|b|c`
 family must have even body length. The family remains in the six-family list.
 
+The same body-parity obstruction now reaches the other phase-zero `c`-defect survivor
+[`M4-S20`](SALVAGE.md#m4-s20-phase-zero-triple-c-parity-cylinder). For
+`c(3z)c(3x+2)c(3y+1)`, odd body length and odd `b` count again make the primitive determinant
+core `2` modulo four for all waits. Thus `M4-S18` and `M4-S20` remove that parity class from both
+phase-zero `c`-defect families, while the six-family count remains unchanged.
+
 Two original-family nodes survive, and they must not be conflated.
 
 1. **Exterior collision avoidance.** Use `M4-S06`--`M4-S15` to classify the transported kernel

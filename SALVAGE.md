@@ -223,6 +223,7 @@ file owns the mathematical stock.
 | [`M4-S17`](#m4-s17-opposite-right-c-defect-cylinder-exclusion) | obstruction | the `1|2|0` shortest bad run with a `c` defect and residue-zero endpoint cannot close against a `b` residue-one endpoint | formalized | active |
 | [`M4-S18`](#m4-s18-phase-zero-double-c-parity-cylinder) | obstruction | odd body length and odd `b` count exclude the `0|2|1` `b|c|c` family for all waits | formalized | active |
 | [`M4-S19`](#m4-s19-phase-zero-right-c-odd-length-cylinder) | obstruction | odd body length excludes the `0|2|1` `b|b|c` family for all waits | formalized | active |
+| [`M4-S20`](#m4-s20-phase-zero-triple-c-parity-cylinder) | obstruction | odd body length and odd `b` count exclude the `0|2|1` `c|c|c` family for all waits | formalized | active |
 | [`M4-C03`](#m4-c03-zero-framed-binary-two-lag-compiler) | compiler | the principal scanner is literally binary context-2 Lag and compiles to `M₄(3)` | formalized | graduated |
 | [`M4-D01`](#m4-d01-zero-framed-binary-two-lag-decision) | decidable stratum | the entire zero-framed binary context-2 Lag kernel has an exact syntactic classification | formalized | graduated |
 | [`M4-D02`](#m4-d02-zero-framed-reset-scanner-decision) | decidable stratum | zero-run reduction contracts the reset scanner to a regular two-token quotient | audited | graduated |
@@ -9555,6 +9556,48 @@ then return to the complementary even-length cylinder of this family.
 [`MatrixMortality/ParabolicDefectCylinder.lean`](MatrixMortality/ParabolicDefectCylinder.lean)
 and
 [`audits/m43-phase-zero-right-c-odd-length-cylinder-2026-08-31.md`](audits/m43-phase-zero-right-c-odd-length-cylinder-2026-08-31.md).
+
+### M4-S20: Phase-zero triple-c parity cylinder
+
+**Kind:** obstruction
+
+**Evidence:** formalized
+
+**Disposition:** active
+
+For the all-`c` atom placement
+
+```text
+c(3z) c(3x+2) c(3y+1),
+```
+
+write `S=3^length(tagEncode₃(body))` and `C=ternaryCode(tagEncode₃(body))`. Lean computes the
+determinant as `2187/1024` times a primitive integral trilinear core `J(S,C,x,y,z)`. Its checked
+parity identity is
+
+```text
+J(4s+3,2c+1,x,y,z) = 4T(s,c,x,y,z)+2.
+```
+
+The tag encoding sends odd body length to `S≡3 (mod 4)` and odd `b` count to `C≡1 (mod 2)`.
+The determinant is therefore nonzero for every wait triple in that body-parity class. Any zero
+in this family must have even body length or even `b` count.
+
+**Scope:** deletion width three, exactly three atoms, orientation `0|2|1`, letters `c|c|c`, and
+the body class with odd length and odd `b` count. Complementary body parities, the opposite
+orientation, longer defect runs, and nontrivial safe contexts remain open.
+
+**Use:** `M4-S18` and `M4-S20` jointly exclude the same infinite body-parity class from both
+phase-zero survivors with a `c` defect and a residue-one `c` endpoint, regardless of whether the
+residue-zero endpoint is `b` or `c`.
+
+**Next:** transport the same parity class to the opposite `c|c|b` survivor, then determine
+whether the phase-zero pair admits one endpoint-independent mod-four proof.
+
+**Artifact:**
+[`MatrixMortality/ParabolicDefectCylinder.lean`](MatrixMortality/ParabolicDefectCylinder.lean)
+and
+[`audits/m43-phase-zero-triple-c-parity-cylinder-2026-08-31.md`](audits/m43-phase-zero-triple-c-parity-cylinder-2026-08-31.md).
 
 ### M4-C03: Zero-framed binary two-Lag compiler
 

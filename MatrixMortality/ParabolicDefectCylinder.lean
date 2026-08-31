@@ -970,4 +970,134 @@ theorem bridge_bZero_bTwo_cOne_det_ne_zero_of_odd_body
     (3 ^ (tagEncode 3 body).length) (ternaryCode (tagEncode 3 body)) x y z
       scale_mod_four) integer_core_zero
 
+/-! ## Phase-zero triple-`c` parity cylinder -/
+
+/-- Primitive code-coordinate determinant core for the shortest `0 | 2 | 1` bridge with three
+`c` atoms. -/
+def cZeroCDefectCOneCodeCore {R : Type*} [CommRing R] (S C x y z : R) : R :=
+  C * (C * (x * (18200376 - 54601128 * z) + y * (17886744 - 53660232 * z) +
+      16566066 * z + 18239580) +
+    x * (y * (27648 - 82944 * z) - 90908568 * z + 24236064) +
+    y * (29751624 - 83427984 * z) + 19955298 * z + 29384799) +
+  S * (C * (C * (491410152 * x * z + 482942088 * y * z + 342315558 * z) +
+      x * (y * (1492992 * z - 248832) + 763482672 * z + 72832608) +
+      y * (643886496 * z + 17863416) + 670243788 * z + 46301409) +
+    S * (C * (x * (-6718464 * y * z + 492249960 * z) +
+        962688240 * y * z + 207270738 * z) +
+      S * (x * (16796160 * y * z - 984919824 * z) +
+        980674128 * y * z - 852874353 * z) +
+      x * (y * (2115072 - 11570688 * z) + 767728368 * z - 91266264) +
+      y * (530697744 * z + 73356192) + 575637435 * z - 78179283) +
+    x * (y * (1949184 * z - 691200) + 253483344 * z + 85256496) +
+    y * (226666224 * z - 284544) + 270118941 * z + 68539926) +
+  x * (y * (50688 - 96768 * z) - 36291888 * z + 6009768) +
+  y * (13203424 - 33082192 * z) + 7117977 * z + 9639357
+
+/-- Exact code-coordinate determinant of the shortest `0 | 2 | 1` bridge with letters
+`c | c | c`. -/
+theorem bridge_cZero_cTwo_cOne_det (body : List TagLetter) (x y z : Nat) :
+    (bridge 27
+      (cAtom 27 (nearySideLowerC 3 body) (nearySideLowerCScale 3 body) (3 * z) *
+        cAtom 27 (nearySideLowerC 3 body) (nearySideLowerCScale 3 body) (3 * x + 2) *
+        cAtom 27 (nearySideLowerC 3 body) (nearySideLowerCScale 3 body)
+          (3 * y + 1))).det =
+      2187 / 1024 *
+        cZeroCDefectCOneCodeCore
+          ((3 : ℚ) ^ (tagEncode 3 body).length)
+          (ternaryCode (tagEncode 3 body)) x y z := by
+  rcases side_coordinates body with ⟨lower_eq, scale_eq⟩
+  rw [cAtom_three_mul_matrix, cAtom_three_mul_add_two_matrix,
+    cAtom_three_mul_add_one_matrix, Matrix.det_fin_two, lower_eq, scale_eq]
+  norm_num [bridge, coreInput, coreOutput, Matrix.mul_apply, Fin.sum_univ_succ,
+    cZeroCDefectCOneCodeCore]
+  ring
+
+private def cZeroCDefectCOneParityQuotient (s c x y z : ℤ) : ℤ :=
+  s * (s * (s * (x * (268738560 * y * z - 15758717184 * z) +
+        15690786048 * y * z - 13645989648 * z) +
+      c * (x * (-53747712 * y * z + 3937999680 * z) +
+        7701505920 * y * z + 1658165904 * z) +
+      x * (y * (531505152 * z + 8460288) - 30417200352 * z - 365065056) +
+      y * (41277812544 * z + 293424768) - 27571844016 * z - 312717132) +
+    c * (c * (1965640608 * x * z + 1931768352 * y * z + 1369262232 * z) +
+      x * (y * (-77635584 * z - 497664) + 9399605472 * z + 145665216) +
+      y * (14771800224 * z + 35726832) + 5196998664 * z + 92602818) +
+    x * (y * (347203584 * z + 11750400) - 17524589112 * z - 389508480) +
+    y * (36792012168 * z + 457716024) - 17047480206 * z - 354234363) +
+  c * (c * (x * (1419629328 * z + 18200376) +
+      y * (1395166032 * z + 17886744) + 1043512740 * z + 18239580) +
+    x * (y * (-28035072 * z - 359424) + 4734523872 * z + 139567320) +
+    y * (6651378864 * z + 59557680) + 2991574392 * z + 102384093) +
+  x * (y * (74760192 * z + 4073472) - 2727425844 * z - 74670714) +
+  y * (10952247332 * z + 193446034) - 3022439943 * z - 75456452
+
+private theorem cZeroCDefectCOneCodeCore_parity_factor
+    (s c x y z : ℤ) :
+    cZeroCDefectCOneCodeCore (4 * s + 3) (2 * c + 1) x y z =
+      4 * cZeroCDefectCOneParityQuotient s c x y z + 2 := by
+  unfold cZeroCDefectCOneCodeCore cZeroCDefectCOneParityQuotient
+  ring
+
+private theorem cZeroCDefectCOneCodeCore_ne_zero_of_odd_coordinates
+    (S C x y z : Nat) (S_mod_four : S % 4 = 3) (C_odd : C % 2 = 1) :
+    cZeroCDefectCOneCodeCore (S : ℤ) C x y z ≠ 0 := by
+  intro core_zero
+  obtain ⟨s, S_eq⟩ : ∃ s, S = 4 * s + 3 := by
+    refine ⟨S / 4, ?_⟩
+    omega
+  obtain ⟨c, C_eq⟩ : ∃ c, C = 2 * c + 1 := by
+    refine ⟨C / 2, ?_⟩
+    omega
+  rw [S_eq, C_eq] at core_zero
+  push_cast at core_zero
+  rw [cZeroCDefectCOneCodeCore_parity_factor] at core_zero
+  omega
+
+/-- Odd body length and an odd number of `b` letters exclude the shortest `0 | 2 | 1` bridge
+with three `c` atoms, independently of all waits. -/
+theorem bridge_cZero_cTwo_cOne_det_ne_zero_of_odd_body
+    (body : List TagLetter) (body_length_odd : body.length % 2 = 1)
+    (b_count_odd : body.count .b % 2 = 1) (x y z : Nat) :
+    (bridge 27
+      (cAtom 27 (nearySideLowerC 3 body) (nearySideLowerCScale 3 body) (3 * z) *
+        cAtom 27 (nearySideLowerC 3 body) (nearySideLowerCScale 3 body) (3 * x + 2) *
+        cAtom 27 (nearySideLowerC 3 body) (nearySideLowerCScale 3 body)
+          (3 * y + 1))).det ≠ 0 := by
+  rw [bridge_cZero_cTwo_cOne_det]
+  apply mul_ne_zero (by norm_num)
+  have encoded_length_odd : (tagEncode 3 body).length % 2 = 1 := by
+    rw [tagEncode_length_mod_two]
+    exact body_length_odd
+  have encoded_code_odd : ternaryCode (tagEncode 3 body) % 2 = 1 := by
+    rw [tagEncode_code_mod_two]
+    exact b_count_odd
+  have scale_mod_four : 3 ^ (tagEncode 3 body).length % 4 = 3 :=
+    three_pow_mod_four_of_odd_exponent (tagEncode 3 body).length encoded_length_odd
+  intro core_zero
+  have power_cast :
+      ((3 ^ (tagEncode 3 body).length : Nat) : ℚ) =
+        (3 : ℚ) ^ (tagEncode 3 body).length := by norm_num
+  rw [← power_cast] at core_zero
+  have cast_integer_core :
+      ((cZeroCDefectCOneCodeCore
+        ((3 ^ (tagEncode 3 body).length : Nat) : ℤ)
+        (ternaryCode (tagEncode 3 body)) x y z : ℤ) : ℚ) =
+        cZeroCDefectCOneCodeCore
+          ((3 ^ (tagEncode 3 body).length : Nat) : ℚ)
+          (ternaryCode (tagEncode 3 body)) x y z := by
+    norm_num [cZeroCDefectCOneCodeCore]
+  have integer_core_zero :
+      cZeroCDefectCOneCodeCore
+        ((3 ^ (tagEncode 3 body).length : Nat) : ℤ)
+        (ternaryCode (tagEncode 3 body)) x y z = 0 := by
+    have cast_zero :
+        ((cZeroCDefectCOneCodeCore
+          ((3 ^ (tagEncode 3 body).length : Nat) : ℤ)
+          (ternaryCode (tagEncode 3 body)) x y z : ℤ) : ℚ) = 0 := by
+      exact cast_integer_core.trans core_zero
+    exact_mod_cast cast_zero
+  exact (cZeroCDefectCOneCodeCore_ne_zero_of_odd_coordinates
+    (3 ^ (tagEncode 3 body).length) (ternaryCode (tagEncode 3 body)) x y z
+      scale_mod_four encoded_code_odd) integer_core_zero
+
 end MatrixMortality.ParabolicBlade
