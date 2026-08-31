@@ -624,6 +624,13 @@ The zero middle-wait face is now cut by a second density cone
 `S−1≤585D` makes the core strictly positive. The finite first-`b` classification may therefore
 assume `y>0` throughout every sufficiently dense prefix cylinder.
 
+The corrected trailing engine is now exact
+[`M4-S31`](SALVAGE.md#m4-s31-phase-zero-right-c-trailing-arithmetic). A last `b` followed by
+`c^h` gives `v₃(D)=h+1`; the two primitive `z` pencils have a `2·3^12` factored
+cross-resultant; and the core isolates the sole unscaled wait term. Use this representation for
+the bounded `3^13` classifier. The earlier lower bound obtained from an unreduced congruence
+representative remains invalid and must not reappear.
+
 Two original-family nodes survive, and they must not be conflated.
 
 1. **Exterior collision avoidance.** Use `M4-S06`--`M4-S15` to classify the transported kernel

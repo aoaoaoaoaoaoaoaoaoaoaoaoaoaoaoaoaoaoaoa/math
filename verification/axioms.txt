@@ -1986,3 +1986,11 @@
 'MatrixMortality.ParabolicBlade.bZeroBDefectCOneCodeCore_pos_of_zero_wait_large_complement' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.ParabolicBlade.tagComplementCode_append_b_c_run' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.tagComplementCode_b_cofactor_mod_three' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.ParabolicBlade.bZeroBDefectCOneComplementCore_eq_twelve_pencil' depends on axioms: [propext]
+'MatrixMortality.ParabolicBlade.bZeroBDefectCOneTrailing_resultant' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.ParabolicBlade.bZeroBDefectCOneCodeCore_trailing_decomposition' depends on axioms: [propext,
+ Quot.sound]

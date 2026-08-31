@@ -140,6 +140,7 @@ import MatrixMortality.ParabolicSafeFlag
 import MatrixMortality.ParabolicDefect
 import MatrixMortality.ParabolicDefectCylinder
 import MatrixMortality.ParabolicEvenBody
+import MatrixMortality.ParabolicTrailing
 import MatrixMortality.ParabolicLongDefect
 import MatrixMortality.ParabolicMixedEndpoint
 import MatrixMortality.ParabolicSemanticObstruction
