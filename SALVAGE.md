@@ -315,6 +315,7 @@ file owns the mathematical stock.
 | [`D2-S04`](#d2-s04-real-trap-ternary-predecessor-nucleus) | structure theorem | real-trap positivity cuts every one-step reverse shell fan to a sharp computable window of three waits | formalized | active |
 | [`D2-S05`](#d2-s05-fixed-source-real-trap-rays) | structure theorem | every real-trap source has a one-step orbit on one computable normalized-mantissa ray | formalized | active |
 | [`D2-S06`](#d2-s06-spectator-prime-denominator-skeleton) | structure theorem | every denominator exponent away from `2`, `3`, and `5` is invariant through shell prefixes and first exits | formalized | active |
+| [`D2-S07`](#d2-s07-period-ten-shell-guard) | structure theorem | one-step shell acceptance from every fixed unit source depends only on the wait modulo ten | formalized | active |
 | [`D2-D01`](#d2-d01-projectively-unimodular-stratum) | decidable stratum | projectively unimodular hard-core instances are decidable | audited | stock |
 | [`D2-D02`](#d2-d02-invariant-pair-stratum) | decidable stratum | invariant projective pairs reduce to effective multiplicative-subgroup membership | audited | graduated |
 | [`D2-D03`](#d2-d03-common-multiplier-stratum) | decidable stratum | rational affine maps with one multiplier are decidable under regular control | reported | active |
@@ -15056,6 +15057,50 @@ numerator carry.
 **Next:** combine the invariant spectator skeleton with
 [`D2-S05`](#d2-s05-fixed-source-real-trap-rays) and seek an exact classifier for the remaining
 active-prime depth/mantissa system.
+
+### D2-S07: Period-ten shell guard
+
+**Kind:** structure theorem
+**Evidence:** formalized
+**Disposition:** active
+
+For every `5`-adic unit source `x`, the one-step shell guard is exactly periodic in the wait:
+
+```text
+v₅(T_(m+10)(x))=0  ↔  v₅(T_m(x))=0.
+```
+
+The proof uses the exact valuation
+
+```text
+v₅((2/3)^10−1)=2.
+```
+
+Consequently `T_(m+10)(x)−T_m(x)` has valuation one. Adding or subtracting this positive-shell
+perturbation preserves a unit output. Iteration gives period `10k`, and Euclidean division gives
+the finite classifier
+
+```text
+v₅(T_m(x))=0  ↔  v₅(T_(m mod 10)(x))=0.
+```
+
+Combined with [`D2-S05`](#d2-s05-fixed-source-real-trap-rays), every guarded one-step orbit is a
+single normalized-mantissa ray whose admitted depths are determined by ten residue tests.
+
+**Scope:** the ten-state classifier is local to one fixed source. The source changes after every
+accepted block, so this does not make the full prefix language regular or decide fixed-target
+reachability.
+
+**Artifact:** `MixedPrimeDebt.shellStep_fiveUnit_add_ten_iff`,
+`MixedPrimeDebt.shellStep_fiveUnit_add_ten_mul_iff`, and
+`MixedPrimeDebt.shellStep_fiveUnit_iff_mod_ten` in
+[`MixedPrimeFiveCarry.lean`](MatrixMortality/MixedPrimeFiveCarry.lean).
+
+**Use:** replace every unbounded outgoing guarded-wait test by ten exact residue tests, while
+retaining the rational successor state rather than collapsing its carry.
+
+**Next:** compute how the ten admitted depth classes transport the source residue and normalized
+mantissa; test whether the resulting annotated ray system has a finite congruence quotient.
 
 ### D2-O09: Guarded real-pole reset
 

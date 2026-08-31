@@ -3112,6 +3112,10 @@ denominator exponent away from `2`, `3`, and `5` is invariant through all shell 
 including first exits. Endpoint pairs with different prime-to-30 denominator skeletons are
 therefore excluded before the active-prime search. This is
 [`D2-S06`](SALVAGE.md#d2-s06-spectator-prime-denominator-skeleton).
+The remaining local `5`-adic guard is finite: from any fixed unit source, one-step acceptance
+depends only on the wait modulo ten. Together with `D2-S05`, every guarded one-step orbit is one
+mantissa ray with ten tested depth classes. This is
+[`D2-S07`](SALVAGE.md#d2-s07-period-ten-shell-guard).
 The deepest of those three branches is itself a full depth reset. In normalized band coordinates
 `U(d,μ)=1/5+(3/10)(2/3)^dμ`, every target band `d≥2` contains a point whose `d−2` predecessor has
 any prescribed band `n≥7` and mantissa in `(2/3,1]`. An explicit guarded subfamily fixes target

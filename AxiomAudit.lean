@@ -1146,6 +1146,9 @@ open MatrixMortality
 #print axioms MixedPrimeDebt.shellRun_spectatorDenominator
 #print axioms MixedPrimeDebt.shellRun_spectatorDenominator_of_ne_active
 #print axioms MixedPrimeDebt.shellRun_ne_of_spectatorDenominator_ne
+#print axioms MixedPrimeDebt.shellStep_fiveUnit_add_ten_iff
+#print axioms MixedPrimeDebt.shellStep_fiveUnit_add_ten_mul_iff
+#print axioms MixedPrimeDebt.shellStep_fiveUnit_iff_mod_ten
 #print axioms MixedPrimeDebt.exists_shellStep_realTrap_predecessor
 #print axioms MixedPrimeDebt.exists_shellStep_realTrap_unit_predecessor
 #print axioms MixedPrimeDebt.exists_shellRun_realTrap_unit_predecessor_of_length
