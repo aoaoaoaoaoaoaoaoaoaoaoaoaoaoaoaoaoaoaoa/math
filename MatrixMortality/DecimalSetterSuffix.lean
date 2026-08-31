@@ -59,6 +59,41 @@ theorem cycleDefect_lift
   rw [coefficient_eq, tau_split] at root_scaled
   linear_combination root_scaled
 
+/-- The stationary suffix root is unique at each decimal precision. The quotient of the
+difference of two defects is congruent to `-1` modulo ten, hence is coprime to every power of
+ten. -/
+theorem cycleDefect_roots_congruent
+    {shift depth : Nat} {E τ C x y : ℤ}
+    (shift_pos : 1 ≤ shift)
+    (tau_unit : (10 : ℤ) ∣ τ - 1)
+    (x_root : (10 : ℤ) ^ depth ∣ cycleDefect shift E τ C x)
+    (y_root : (10 : ℤ) ^ depth ∣ cycleDefect shift E τ C y) :
+    (10 : ℤ) ^ depth ∣ x - y := by
+  obtain ⟨coefficient, coefficient_eq⟩ := ten_dvd_ten_pow_mul shift_pos E
+  obtain ⟨tauCarry, tau_eq⟩ := tau_unit
+  let unit : ℤ := 10 ^ shift * E * (x + y) - τ
+  have tau_split : τ = 1 + 10 * tauCarry := by omega
+  have unit_eq : unit = 10 * (coefficient * (x + y) - tauCarry) - 1 := by
+    dsimp only [unit]
+    rw [coefficient_eq, tau_split]
+    ring
+  have unit_coprime : IsCoprime ((10 : ℤ) ^ depth) unit := by
+    have ten_coprime : IsCoprime (10 : ℤ) unit := by
+      refine ⟨coefficient * (x + y) - tauCarry, -1, ?_⟩
+      rw [unit_eq]
+      ring
+    exact (ten_coprime.pow_left : IsCoprime ((10 : ℤ) ^ depth) unit)
+  have product_dvd : (10 : ℤ) ^ depth ∣ (x - y) * unit := by
+    have defect_factor :
+        cycleDefect shift E τ C x - cycleDefect shift E τ C y =
+          (x - y) * unit := by
+      dsimp only [unit]
+      unfold cycleDefect
+      ring
+    rw [← defect_factor]
+    exact dvd_sub x_root y_root
+  exact unit_coprime.dvd_of_dvd_mul_right product_dvd
+
 private theorem cycleDefect_seven
     {shift : Nat} {E τ C : ℤ}
     (shift_pos : 1 ≤ shift)

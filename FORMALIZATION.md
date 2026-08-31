@@ -1376,7 +1376,9 @@ carrier remains open.
 Record [`MM-S21`](SALVAGE.md#mm-s21-bounded-decimal-suffix-cycles) closes the fixed-precision
 suffix-descent lane. `DecimalSetterSuffix.cycleDefect_lift` gives an explicit one-digit lift for
 the stationary carrier defect `10^hEx²−τx+μGV`, whose derivative is `−1` modulo ten.
-`exists_cycleDefect_root` constructs coherent roots through every power of ten, and
+`cycleDefect_roots_congruent` proves that each precision has one residue root.
+`exists_cycleDefect_root` constructs the resulting coherent address through every power of ten,
+and
 `peeledNumerator_factor` restores the literal generalized residual consumed by the recursive
 carrier. `emittedBlock_exists_approximate_cycle` then composes them in the exact normalized
 recurrence. For each emitted multi-role block and every `k`, it produces an exact factorization
