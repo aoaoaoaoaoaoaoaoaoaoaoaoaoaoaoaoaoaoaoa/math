@@ -566,6 +566,16 @@ The same body-parity obstruction now reaches the other phase-zero `c`-defect sur
 core `2` modulo four for all waits. Thus `M4-S18` and `M4-S20` remove that parity class from both
 phase-zero `c`-defect families, while the six-family count remains unchanged.
 
+The `b|b|c` cut now fills a three-class parity rectangle
+[`M4-S21`](SALVAGE.md#m4-s21-phase-zero-right-c-parity-rectangle). Even body length together
+with odd `b` count makes its primitive core `4` modulo eight; `M4-S19` already removes both
+odd-length classes. Thus a zero requires even body length and even `b` count. A checked exact
+factorization on the residual body `bbcc` also shows that, after its content `32` is removed,
+the specialization `x=y=0` is affine in `z` with odd leading coefficient. It consequently has
+a root modulo every power of two. Higher fixed 2-power congruences cannot remove the residual
+rectangle; the live attacks are the fixed-`y` divisor factorization and an archimedean
+root-straddling bound.
+
 Two original-family nodes survive, and they must not be conflated.
 
 1. **Exterior collision avoidance.** Use `M4-S06`--`M4-S15` to classify the transported kernel

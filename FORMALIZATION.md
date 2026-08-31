@@ -1884,6 +1884,16 @@ The phase-zero triple-`c` parity cylinder
 modulo four whenever the body length and its `b` count are odd. The exact boundary is
 [`audits/m43-phase-zero-triple-c-parity-cylinder-2026-08-31.md`](audits/m43-phase-zero-triple-c-parity-cylinder-2026-08-31.md).
 
+The phase-zero right-`c` parity rectangle
+[`M4-S21`](SALVAGE.md#m4-s21-phase-zero-right-c-parity-rectangle) is checked in the same module.
+`ParabolicBlade.bridge_bZero_bTwo_cOne_det_ne_zero_of_even_body_odd_b_count` proves nonvanishing
+for every even-length body with odd `b` count. Together with `M4-S19`, this leaves only bodies
+with even length and even `b` count. The exact theorem
+`ParabolicBlade.bZeroBDefectCOneCodeCore_bbcc_factor` certifies why fixed 2-power congruences
+cannot eliminate that rectangle: after removing the core's factor `32`, its `x=y=0` specialization
+has an odd coefficient in `z`. The exact boundary is
+[`audits/m43-phase-zero-right-c-parity-rectangle-2026-08-31.md`](audits/m43-phase-zero-right-c-parity-rectangle-2026-08-31.md).
+
 The residue-zero `c`-endpoint exclusion
 [`M4-S12`](SALVAGE.md#m4-s12-residue-zero-c-endpoint-exclusion) is checked in the same module.
 `ParabolicBlade.bridge_cZero_bTwo_bOne_det` and

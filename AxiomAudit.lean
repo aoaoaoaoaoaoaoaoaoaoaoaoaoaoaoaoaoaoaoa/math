@@ -528,6 +528,8 @@ open MatrixMortality
 #print axioms ParabolicBlade.bridge_bZero_cTwo_cOne_det_ne_zero_of_odd_body
 #print axioms ParabolicBlade.bridge_bZero_bTwo_cOne_det
 #print axioms ParabolicBlade.bridge_bZero_bTwo_cOne_det_ne_zero_of_odd_body
+#print axioms ParabolicBlade.bridge_bZero_bTwo_cOne_det_ne_zero_of_even_body_odd_b_count
+#print axioms ParabolicBlade.bZeroBDefectCOneCodeCore_bbcc_factor
 #print axioms ParabolicBlade.bridge_cZero_cTwo_cOne_det
 #print axioms ParabolicBlade.bridge_cZero_cTwo_cOne_det_ne_zero_of_odd_body
 #print axioms ParabolicBlade.bridge_cZero_bTwo_bOne_det
