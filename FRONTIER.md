@@ -1049,6 +1049,17 @@ is therefore a non-invariant shuttle, not persistent refresh. With transverse da
 two quotient fibres meet in the exact bilinear ray `[rv:us:vs]`. Neither architecture is yet a
 source-uniform recognizer.
 
+[`G3-S04`](SALVAGE.md#g3-s04-symmetric-square-collision-and-fork-obstruction) identifies the
+canonical irreducible three-coordinate alternative and then cuts its direct fork use. The
+covariant `Sym²` action carries `(x,y)` to `(x²,xy,y²)` and turns one projective incidence into
+the integral scalar `Δ(u,v)²`, with zero exactly at collision and a gap of at least one otherwise.
+But three Veronese columns have determinant
+`Δ(u,v)Δ(u,w)Δ(v,w)`. In conjunction with `G3-S03`, every complete-fork Sym² orbit in the forced
+line or plane contains at most two projective rays. Hence a direct non-elementary Sym² fork is
+impossible; only the already elementary invariant-point or invariant-pair dynamics survive.
+Sym² consumes all three states and provides no malformed-word guard or directional inverse law,
+so a fixed leakage insertion remains open rather than implicit.
+
 [`G3-O18`](SALVAGE.md#g3-o18-transverse-minimum-body-countermodel) proves that transverse
 geometry itself is no obstruction. A variable-radix code with four distinct residues is carried
 by fixed integral rank-two data controls with kernels `ℚe₁` and `ℚe₂`. Lean checks the exact
@@ -1358,7 +1369,7 @@ or neutral word across the return, use an empty consume, or split recurrent outp
 | --- | --- | --- |
 | Common-kernel shuttle | The exact `bcbb` compiler moves its common data kernel out through the toggle and recovers it at the next data action | Uniformize this non-invariant shuttle in `(β,body)`; every toggle-invariant guard factors through the two-dimensional quotient |
 | Transverse-kernel terminal dynamics | Fixed integral transverse controls encode every history and exactly recognize all minimum bodies | Replace the singleton target row by an infinite, source-computable terminal section for unrestricted bodies |
-| Positive projective transition lower bound | Same-zero dimension three is point-line incidence in `P²`, and actual one-sided shifts retain finite rank/kernel/image data | Derive a uniform nonstationary or noncommuting shift incompatibility from an unbounded terminal section; static support rank, formal inverse completion, fixed equal-length return flowers, and unary consecutive-repeat escape are forbidden |
+| Positive projective transition lower bound | Same-zero dimension three is point-line incidence in `P²`, and actual one-sided shifts retain finite rank/kernel/image data | Derive a uniform nonstationary or noncommuting shift incompatibility from an unbounded terminal section; direct non-elementary Sym² forks, static support rank, formal inverse completion, fixed equal-length return flowers, and unary consecutive-repeat escape are forbidden |
 | Global word-residual recoding | Longer noncommutative atoms can retain order while discarding the four additive role channels | Escape `G3-D05`: fixed-priority affine counters and all one-way reset/transfer/fanout cascades are decidable |
 | Head-separated three-schema source | `G3-C04` discharges every arbitrary-trace forcing obligation locally; `G3-O24` isolates the directed stable-cone alternative | Preserve an undecidable mixed or neutral word across returns, or realize zero-sensitive S5 GLB decoding after the `G3-O25` separator-rank fork; complete pure forks are decidable by `G3-D07` |
 | Carvalho projective group-orbit separator | `G3-M03` gives the exact saturated three-positive cover; `G3-O23` collapses every singular carrier to invertible dimension two; `D2-D02/D08` decide all elementary group actions; `D2-D09` decides the profinite-blind step-three shear family by height | Add chamber/place direction to the proper height escape forced by `D2-O13`, since `D2-O14` realizes an irrelevant proper ray under unguided search, or construct the invertible three-state line/plane orbit left by `G3-O22`; finite ambient quotients are forbidden by `G3-O28`, primitive-height-only descent by `D2-O05`, and bounded trivial-stabilizer recurrence by `D2-O06/O11` |
@@ -1555,6 +1566,15 @@ elementary rational group: the generated group must be genuinely non-elementary.
 `UCB₂(S)` subgroup-Borel-coset intersection is not covered by the audited flat-rational-subset or
 integral reachability theorems. It should be attacked jointly with `M₂(3)`, while its distinct
 word language remains explicit.
+
+[`G3-S04`](SALVAGE.md#g3-s04-symmetric-square-collision-and-fork-obstruction) makes one exact
+algebraic bridge across that joint artery. `Sym²` embeds a binary projective orbit in three
+coordinates, preserves multiplication, and converts source-target collision into the scalar
+square `Δ²`. Nonsingular binary generators remain rank three. This is a detector, not an
+interreduction: it uses all three coordinates, adds no positive syntax guard, and the square has
+no orientation. Its three-ray determinant factorization also shows that a Sym² orbit confined to
+the line/plane carrier forced by `G3-S03` has at most two projective rays, so it falls back into
+the invariant-point/pair strata already removed by `D2-D02`.
 
 [`R32-O22`](SALVAGE.md#r32-o22-congruence-blind-free-orbit) shows that even the promised faithful
 free-orbit case has no congruence-separation theorem: one rational target outside the orbit is in

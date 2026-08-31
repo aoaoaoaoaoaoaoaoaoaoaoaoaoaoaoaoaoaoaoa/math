@@ -30,6 +30,7 @@ import MatrixMortality.ReturnSquareTax
 import MatrixMortality.ReturnJordan
 import MatrixMortality.ReturnConvert
 import MatrixMortality.ProjectiveLine
+import MatrixMortality.SymmetricSquareCollision
 import MatrixMortality.CongruenceBlindOrbit
 import MatrixMortality.ShearEuclidean
 import MatrixMortality.TransverseDilationOrbit

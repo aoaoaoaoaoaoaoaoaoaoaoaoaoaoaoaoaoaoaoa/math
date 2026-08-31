@@ -1335,6 +1335,56 @@
 'MatrixMortality.ShearEuclidean.finite_search_bounds_of_matrix_hit' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.SymmetricSquareCollision.symmetricSquare_mulVec_veronese' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SymmetricSquareCollision.symmetricSquare_mul' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SymmetricSquareCollision.symmetricSquare_one' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SymmetricSquareCollision.wordProduct_symmetricSquare' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SymmetricSquareCollision.symmetricSquare_det' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SymmetricSquareCollision.symmetricSquare_det_ne_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SymmetricSquareCollision.symmetricSquare_rank_eq_three' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SymmetricSquareCollision.tangentValue_eq_crossDet_sq' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SymmetricSquareCollision.tangentValue_self' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.SymmetricSquareCollision.crossDet_mulVec' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.SymmetricSquareCollision.tangentValue_mulVec' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SymmetricSquareCollision.wordTangentValue_eq_crossDet_sq' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SymmetricSquareCollision.tangentValue_int_eq_zero_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SymmetricSquareCollision.wordTangentValue_int_eq_zero_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SymmetricSquareCollision.one_le_tangentValue_int_of_crossDet_ne_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SymmetricSquareCollision.veroneseColumns_det' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SymmetricSquareCollision.exists_pairwise_crossDet_eq_zero_of_veroneseColumns_det_eq_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SymmetricSquareCollision.crossDet_first_third_eq_zero_or_second_third_eq_zero_of_det_eq_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.TransverseDilationOrbit.dilationGenerator_det' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
@@ -1414,6 +1464,61 @@
 'MatrixMortality.TransverseDilationOrbit.inverseReduction_height_cycle' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.TransverseDilationOrbit.nontrivial_maps_base_into_chamber' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseDilationOrbit.base_stabilizer_trivial' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseDilationOrbit.falseRayTargetMatrix_det' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseDilationOrbit.falseRayAnchor_outside_chambers' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseDilationOrbit.falseRayAnchor_stabilizer_trivial' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseDilationOrbit.falseRayAnchor_not_reachable' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseDilationOrbit.representation_pureDilationWord' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseDilationOrbit.inverseDilation_anchor' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseDilationOrbit.forwardDilation_target' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseDilationOrbit.falseRayTarget_not_reachable' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseDilationOrbit.falseRayTargetUnit_smul_source' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseDilationOrbit.representation_ne_falseRayTarget_mul_stabilizer' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseDilationOrbit.falseRayTarget_stabilizer_trivial' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseDilationOrbit.falseRayPrefix_realizes' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseDilationOrbit.falseRayPrefix_injective' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseDilationOrbit.falseRayPair_projectivizes' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseDilationOrbit.falseRayPrefix_realizes_primitive' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseDilationOrbit.falseRayPair_height' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.TransverseDilationOrbit.falseRayPair_height_tendsto_atTop' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.InverseOrbitRecurrence.integralPairBox_finite' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
@@ -1421,10 +1526,45 @@
  Classical.choice,
  Quot.sound]
 'MatrixMortality.InverseOrbitRecurrence.exists_nontrivial_stabilizer_of_orbit_collision' depends on axioms: [propext]
+'MatrixMortality.InverseOrbitRecurrence.target_stabilizer_trivial_of_reachable_from_trivial_source' depends on axioms: [propext]
+'MatrixMortality.InverseOrbitRecurrence.target_unreachable_of_source_stabilizer_trivial' depends on axioms: [propext]
 'MatrixMortality.InverseOrbitRecurrence.exists_nontrivial_stabilizer_of_bounded_primitive_orbit' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
 'MatrixMortality.InverseOrbitRecurrence.primitiveHeight_unbounded_of_stabilizer_trivial' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.InverseOrbitRecurrence.integralPairCube_card' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.InverseOrbitRecurrence.mem_integralPairCube_of_pairHeight_le' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.InverseOrbitRecurrence.exists_nontrivial_stabilizer_of_bounded_prefix_window' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.InverseOrbitRecurrence.bounded_prefix_window_escape_of_stabilizer_trivial' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.InverseOrbitRecurrence.primitiveState_injective_of_stabilizer_trivial' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.InverseOrbitRecurrence.prefix_count_le_height_square_of_stabilizer_trivial' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.InverseOrbitRecurrence.exists_height_gt_of_square_lt_prefix_count' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.InverseOrbitRecurrence.lowHeightIndices_finite_of_stabilizer_trivial' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.InverseOrbitRecurrence.primitiveHeight_tendsto_atTop_of_stabilizer_trivial' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.InverseOrbitRecurrence.target_unreachable_of_bounded_prefix_window' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.InverseOrbitRecurrence.height_escape_or_target_unreachable' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
 'MatrixMortality.AffineGroupOrbit.multiplier_mul_mem_translationKernel' depends on axioms: [propext,
