@@ -2884,9 +2884,15 @@ two-parameter exit surface has displacement
 two valuation-derived equality tests. Thus neither the ray nor its first exit block has an
 infinite fixed-target fibre. Target valuation also fixes the length of every later suffix. The
 resulting full schedules have one fixed translated-letter count and regular wait control, so
-`D2-D05` decides the entire continuation cone. The remaining seam is an exit from a different
-reachable shell state or a finite-cone normal form for all accepting exits. This is
+`D2-D05` decides the entire continuation cone. This is
 [`D2-O04`](SALVAGE.md#d2-o04-forced-exit-surface).
+The suffix collapse is universal. Any step leaving a `5`-adic unit is zero, has valuation `−1`,
+or has positive valuation. Zero and positive exits enter valuation `−1` after one further block;
+negative valuations then fall once per block. A nonempty suffix to a fixed target therefore has
+one of two consecutive target-derived lengths. By `D2-D05`, every fixed exit has a decidable
+suffix. The sole infinite seam is the fixed-source set of shell-preserving prefixes and their
+first-exit images, not the schedule after an exit. This is
+[`D2-O05`](SALVAGE.md#d2-o05-universal-exit-suffix-collapse).
 Higher depth is not free: a published length-thirteen relation yields two distinct
 schedules with the same affine map and a common Lean-checked guarded periodic source. This is an
 exact rewrite seed. Lean also proves that it preserves all intermediate shell guards in every
