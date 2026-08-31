@@ -1639,6 +1639,7 @@ The setter-projective audit now also exposes a kernel-friendly carry theorem:
 | [`MM-S42`](SALVAGE.md#mm-s42-swapped-positive-depth-one-extinction) | exact positive-depth-one witness, complete four-fringe classification, `Δ₁`/`Δ₃` residual exclusion, terminal-discrepancy collapse, and compiler-width specialization |
 | [`MM-S44`](SALVAGE.md#mm-s44-compiler-envelope-rule-bearing-extinction) | first-role mismatch cylinder, compiler-body lower-code bound, target-pole discrepancy interval, and exact all-erasure survivor theorem |
 | [`MM-S50`](SALVAGE.md#mm-s50-long-all-erasure-singleton-extinction) | exact long all-erasure codes and discrepancy, uniform lower bound above twelve, both singleton target bounds, and double-deletion-only frontier theorem |
+| [`MM-S52`](SALVAGE.md#mm-s52-double-deletion-raw-ancestry-obstruction) | exact post-`D_c²` normalization, punctuated-code integrality gate, repeated-`D_c²` nonintegrality, and rational/integral carrier-pole equivalence |
 
 `MM-S08` is now discharged in
 [`SwappedSetterSingletonShell.lean`](MatrixMortality/SwappedSetterSingletonShell.lean).
@@ -1661,6 +1662,8 @@ the depth-one closure is audited in
 [`audits/m53-swapped-positive-depth-one-extinction-2026-08-31.md`](audits/m53-swapped-positive-depth-one-extinction-2026-08-31.md);
 the singleton-shell promotion is audited in
 [`audits/m53-swapped-singleton-shell-formalization-2026-08-31.md`](audits/m53-swapped-singleton-shell-formalization-2026-08-31.md);
+the failed unconditional carrier splice is audited in
+[`audits/m53-swapped-depth-one-ancestry-2026-08-31.md`](audits/m53-swapped-depth-one-ancestry-2026-08-31.md);
 the remaining arbitrary-depth work stays in
 [#6](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
 
@@ -1900,6 +1903,20 @@ branch. `allDeletionC_long_transferDiscrepancy` computes `V_m=3ρ−1`,
 force respectively `Δ=6μ/ρ<12` and `Δ=6Hμ/(ρB)<12`, contradictions. The composed theorem
 `firstMultiTransfer_pole_forces_doubleDeletion` leaves only literal `D_c²` before a depth-one
 target. Its exact reachability and rational carrier-to-fringe ancestry remain open.
+
+Record [`MM-S52`](SALVAGE.md#mm-s52-double-deletion-raw-ancestry-obstruction) proves that the
+shell does not supply that ancestry. If the first block has upper length `m` and punctuated code
+`P`, `afterDoubleCDiscrepancy_eq` computes the exact post-`D_c²` normalization. Integrality
+forces `P∣8Hμ·3^m`; `swappedUpperCode_mod_three` cancels the upper power and leaves
+`P∣8Hμ`. For the locally physical repeated block `first=D_c²`, one has `P=14ρ−1`, and an exact
+remainder identity forces this number to divide `864`, which is impossible for every `β≥3`.
+Thus that state is neither integral nor a difference of raw swapped codes. The theorem does not
+claim that this repeated state is reachable from the distinguished entry, so it refutes only an
+unconditional local adapter. `carrierPole_iff_rationalDepthOnePole` supplies the maximal
+algebraic bridge under a nonzero normalization denominator, and
+`carrierPole_iff_positiveDepthOnePole` proves that an integral specialization is exactly the
+`MM-S42` pole equation. Raw factorization and suffix ancestry remain separate witness fields;
+the actual `D_c²` pole is attacked directly in `MM-S51`.
 
 Record [`MM-S21`](SALVAGE.md#mm-s21-bounded-decimal-suffix-cycles) closes the fixed-precision
 suffix-descent lane. `DecimalSetterSuffix.cycleDefect_lift` gives an explicit one-digit lift for

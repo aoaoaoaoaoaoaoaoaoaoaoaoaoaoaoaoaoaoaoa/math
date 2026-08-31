@@ -148,6 +148,7 @@ file owns the mathematical stock.
 | [`MM-S47`](#mm-s47-global-one-d_b-raw-head-extinction) | obstruction | no one-`D_b` all-erasure block carries a lawful two-`c` raw head into another multi-role pole, in any position | formalized | graduated |
 | [`MM-S49`](#mm-s49-nonempty-marker-all-erasure-extinction) | obstruction | every all-erasure word containing at least one `D_b` misses the next multi-role pole from a lawful two-`c` raw head | formalized | active |
 | [`MM-S50`](#mm-s50-long-all-erasure-singleton-extinction) | obstruction | the long literal `D_c^(β+1)` middle has discrepancy above twelve, beyond both singleton pole values | formalized | active |
+| [`MM-S52`](#mm-s52-double-deletion-raw-ancestry-obstruction) | structure theorem and obstruction | an integral post-`D_c²` normalization forces a fixed divisibility, while the locally physical repeated-`D_c²` recurrence violates it | formalized | active |
 | [`R32-S01`](#r32-s01-split-return-normal-form) | structure theorem | rank-two cuts reduce one-unit binary mortality to a `2 × 2` return recurrence | formalized | graduated |
 | [`R32-S02`](#r32-s02-two-plane-edge-square) | structure theorem | two rank-two generators are a two-vertex square of `2 × 2` edges | formalized | graduated |
 | [`R32-O01`](#r32-o01-rank-one-profile-collapse) | obstruction | a rank-one generator reduces mortality to order-at-most-three scalar recurrence zeros | audited | stock |
@@ -4848,8 +4849,8 @@ used by `MM-S35`. Equation (4) is necessary, not a reachable witness. It neither
 decimal setter nor decides later carrier histories.
 
 **Use:** remove the singleton-target fork from the first multi-transfer search. The sole live
-branch is `D_c²→multi`, whose normalized discrepancy is generally rational; importing the
-integral raw-fringe classifier requires a new carrier-to-fringe ancestry theorem.
+branch is `D_c²→multi`, whose normalized discrepancy is generally rational. `MM-S52` proves
+that no unconditional local carrier-to-fringe adapter can make it integral.
 
 **Formalization:**
 [`MatrixMortality/SwappedSetterAllErasure.lean`](MatrixMortality/SwappedSetterAllErasure.lean),
@@ -4861,7 +4862,82 @@ through `allDeletionC_long_transferDiscrepancy`, `longDeletion_avoids_singleton_
 
 **Next:** decide `D_c²→multi` by retaining the preceding carrier's exact rational cylinder and
 the target block's full upper/lower ratio; do not apply the integral raw-fringe classifier
-without proving the missing ancestry interface.
+without an orbit-specific ancestry theorem.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S52: Double-deletion raw-ancestry obstruction
+
+**Kind:** structure theorem and obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+Put `ρ=3^β`, `μ=2ρ−1`, `H=5ρ−1`, and `R=2−ρ`. Let a physical first role block have
+upper length `m` and punctuated upper code `P`. After the literal middle block `D_c²`, whose
+lower code is eight and whose block coefficient is
+
+```text
+C₂=R(14ρ−1)−8H,
+```
+
+the exact normalized depth-one discrepancy is
+
+```text
+δ=(C₂P+8Hμ·3^m)/(3RP).                                 (1)
+```
+
+If `δ=z∈ℤ`, cross multiplication first forces `P∣8Hμ·3^m`. Every punctuated physical upper
+code satisfies `P≡2 (mod 3)`, so the entire upper power cancels and
+
+```text
+P∣8Hμ.                                                  (2)
+```
+
+This gate fails inside the literal role-block recurrence. Take the first block itself to be
+`D_c²`. Then `m=2` and `P=14ρ−1`. For `β≥4`, the identity
+
+```text
+196·8Hμ − (1120ρ−704)(14ρ−1)=864
+```
+
+would make the positive number `14ρ−1>864` divide `864`; `β=3` fails by direct exact
+calculation. Therefore the repeated-`D_c²` normalization is not an integer and cannot equal the
+difference of any two raw swapped ternary codes.
+
+The coordinate boundary is exact. For every rational carrier with `(ρ−2)X≠0`, if
+
+```text
+−3Y/((ρ−2)X)=z∈ℤ,
+```
+
+then the physical next-block pole equation is equivalent to
+`PositiveDepthOnePole β body z targetWord`. Thus integrality is the sole algebraic coordinate
+condition; constructing a `PositiveDepthOnePoleWitness` still requires the raw prefix
+factorizations and suffix grammar.
+
+**Scope:** the repeated-`D_c²` state is a locally physical role-block recurrence state, not a
+proved orbit from the distinguished compiler entry and not a pole witness. The theorem refutes
+an unconditional adapter based only on the `D_c²→depth-one` carrier shape. It does not decide
+the actual first multi-transfer survivor or duplicate the direct ratio-cylinder cut assigned to
+`MM-S51`.
+
+**Use:** do not feed the remaining rational carrier into `MM-S42` from its shell label alone.
+Any valid splice must derive (2), integrality, and the raw witness grammar from stronger global
+orbit ancestry; a direct rational pole exclusion avoids this false seam.
+
+**Formalization:**
+[`MatrixMortality/SwappedSetterDepthOneAncestry.lean`](MatrixMortality/SwappedSetterDepthOneAncestry.lean),
+through `afterDoubleCDiscrepancy_eq`, `afterDoubleCDiscrepancy_integer_dvd_terminal`,
+`repeatedDoubleCDiscrepancy_not_integer`,
+`repeatedDoubleCDiscrepancy_ne_rawCodeDifference`, and
+`carrierPole_iff_rationalDepthOnePole` and `carrierPole_iff_positiveDepthOnePole`.
+
+**Artifact:**
+[`audits/m53-swapped-depth-one-ancestry-2026-08-31.md`](audits/m53-swapped-depth-one-ancestry-2026-08-31.md).
+
+**Next:** retain the exact incoming punctuated-code cylinder and kill the actual `D_c²` pole
+over `ℚ`; invoke `MM-S42` only if an orbit-specific proof supplies an integral raw witness.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
