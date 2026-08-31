@@ -48,7 +48,7 @@ rule-bearing phase words, singleton targets, or generalized product residuals.
 ## Verification
 
 `MatrixMortality/DecimalSetterFiveDepth.lean` checks (1) with separate regular and exceptional
-theorems. `MatrixMortality/DecimalSetterAncestry.lean` checks (2), the lower identity, the
+theorems. `MatrixMortality/DecimalSetterPositioned.lean` checks (2), the lower identity, the
 full-gap specialization, and `positionedBErase_rawHead_shell_impossible`. Narrow builds, Lean
 language-server diagnostics, namespace lint, and selected transitive axiom snapshots pass
 without warnings, suppressions, or proof apertures.
@@ -56,5 +56,5 @@ without warnings, suppressions, or proof apertures.
 ## Artifacts
 
 - [`DecimalSetterFiveDepth.lean`](../MatrixMortality/DecimalSetterFiveDepth.lean)
-- [`DecimalSetterAncestry.lean`](../MatrixMortality/DecimalSetterAncestry.lean)
+- [`DecimalSetterPositioned.lean`](../MatrixMortality/DecimalSetterPositioned.lean)
 - [`SALVAGE.md`](../SALVAGE.md#mm-s40-first-beta-plus-one-position-d_b-extinction)

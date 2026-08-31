@@ -1715,6 +1715,15 @@ one-`D_b` change through its exact suffix of length `t+β+2`, while
 `gapFactor_dvd_positionedBEraseLowerCode_of_width_eq_entry` preserves full-gap support at the
 entry width.
 
+Record [`MM-S45`](SALVAGE.md#mm-s45-exceptional-late-one-d_b-boundary) closes all positions at a
+regular raw head. `DecimalSetterDepth.allCDeletion_regularRawHead_not_fiveAtBeta` strengthens
+the baseline to `5^β∤R_c`, and `betaDeepUpperPerturbation_regularRawHead_shell_impossible`
+transfers that cut through any one-`D_b` upper perturbation.
+`DecimalSetterAncestry.positionedBErase_regularRawHead_shell_impossible` consumes the exact
+physical suffix factorization. Finally, `positionedBErase_shell_forces_exceptionalLate`
+combines it with `MM-S40` and proves that every surviving shell has `prefixWidth>β` and the
+exceptional terminal-run-`β−1` raw-head identity.
+
 Record [`MM-S37`](SALVAGE.md#mm-s37-decimal-three-shape-frontier-extinction) separates the
 ternary and decimal first-multi-transfer fronts. The single theorem
 `DecimalSetterDepth.firstMultiTransfer_threeShapeFrontier_impossible` consumes the three role
@@ -2355,10 +2364,11 @@ fixed-rank decision problem.
 | `DecimalSetterChamber.lean` | exact decimal pole chambers, both ordinary A-to-A length-two extinctions, and the emitted-body grammar certificate |
 | `DecimalSetterResonance.lean` | complete ordinary depth-two A-to-B and B-to-A extinction, phase-word exhaustion, and compiler-envelope specialization |
 | `DecimalSetterDepth.lean` | recursive two-unit carrier; length-two and singleton-current extinction; exact all-`D_c` raw-head extinction; sharp `m≥β+3` abstract multi-to-singleton classification; initial raw-head exclusion; compatible last-digit two-cycle obstruction |
-| `DecimalSetterAncestry.lean` | primitive gap factor; exact reciprocal and periodic raw two-`c` prime support; arbitrary-history prime-support propagation and radical saturation; physical all-erasure full-gap lower codes and first-`β+1`-position one-`D_b` entry extinction; denominator-ancestry reduction; full-gap, factorwise, and gcd-saturated quotient gates for a singleton target |
+| `DecimalSetterAncestry.lean` | primitive gap factor; exact reciprocal and periodic raw two-`c` prime support; arbitrary-history prime-support propagation and radical saturation; physical all-erasure full-gap lower codes; denominator-ancestry reduction; full-gap, factorwise, and gcd-saturated quotient gates for a singleton target |
 | `DecimalSetterSuffix.lean` | bounded-suffix Hensel cycles, exact inverse-cylinder contraction, first-cylinder collision, forward decoding, and arbitrary two-prime depth transport |
 | `DecimalSetterBranchSeparation.lean` | complete hidden-branch separation and the exact asymmetric later-tail shell forced by a branch-switch collision |
 | `DecimalSetterMultitransfer.lean` | extinction of all three swapped-ternary frontier shapes under the analogous decimal carrier shells |
+| `DecimalSetterPositioned.lean` | positioned one-`D_b` suffix calculus; first-`β+1`-position and all-position regular-head extinction; exceptional-late survivor boundary |
 | `PairedMortality.lean` | common-column mortality converse and exact integer `4 × 4` family |
 | `PhaseFracture.lean` | phase normalization and dimension-free projective-identification contradiction |
 | `PhaseRigidity.lean` | checked local role algebra, discrepancy commutators, and invariant-pencil rigidity |

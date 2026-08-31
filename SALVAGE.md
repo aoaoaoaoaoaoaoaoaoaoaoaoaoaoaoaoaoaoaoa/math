@@ -139,8 +139,9 @@ file owns the mathematical stock.
 | [`MM-S35`](#mm-s35-first-multi-transfer-trichotomy) | structure theorem and obstruction | every first swapped-ternary multi-transfer pole in the expected shells passes through one of three exact all-`c`/singleton shapes | formalized | active |
 | [`MM-S38`](#mm-s38-two-c-singleton-b-extinction) | obstruction | the two-`c`, singleton-`D_b`, singleton-target branch of the swapped-ternary first multi-transfer gate is empty | formalized | active |
 | [`MM-S39`](#mm-s39-second-position-d_b-raw-head-extinction) | obstruction | no all-erasure word with `D_b` in its second position carries a lawful two-`c` raw head into another multi-role pole | formalized | graduated |
-| [`MM-S40`](#mm-s40-first-beta-plus-one-position-d_b-extinction) | obstruction | a sole `D_b` in any of the first `β+1` all-erasure positions cannot carry a lawful two-`c` raw head into another multi-role pole | formalized | active |
+| [`MM-S40`](#mm-s40-first-beta-plus-one-position-d_b-extinction) | obstruction | a sole `D_b` in any of the first `β+1` all-erasure positions cannot carry a lawful two-`c` raw head into another multi-role pole | formalized | graduated |
 | [`MM-S42`](#mm-s42-swapped-positive-depth-one-extinction) | structure theorem and obstruction | every regular positive-depth-one one-transfer pole either is an impossible Neary residual or certifies source halting | formalized | active |
+| [`MM-S45`](#mm-s45-exceptional-late-one-d_b-boundary) | structure theorem and obstruction | any one-`D_b` all-erasure raw-head survivor must combine the exceptional terminal run with a `D_b` after position `β+1` | formalized | active |
 | [`R32-S01`](#r32-s01-split-return-normal-form) | structure theorem | rank-two cuts reduce one-unit binary mortality to a `2 × 2` return recurrence | formalized | graduated |
 | [`R32-S02`](#r32-s02-two-plane-edge-square) | structure theorem | two rank-two generators are a two-vertex square of `2 × 2` edges | formalized | graduated |
 | [`R32-O01`](#r32-o01-rank-one-profile-collapse) | obstruction | a rank-one generator reduces mortality to order-at-most-three scalar recurrence zeros | audited | stock |
@@ -5043,7 +5044,7 @@ contains another `D_b` whose shallower perturbation must be analyzed rather than
 **Formalization:**
 [`MatrixMortality/DecimalSetterFiveDepth.lean`](MatrixMortality/DecimalSetterFiveDepth.lean)
 extracts the general five-deep upper-perturbation theorem.
-[`MatrixMortality/DecimalSetterAncestry.lean`](MatrixMortality/DecimalSetterAncestry.lean)
+[`MatrixMortality/DecimalSetterPositioned.lean`](MatrixMortality/DecimalSetterPositioned.lean)
 proves the exact common-suffix factorization, unchanged lower code, full-gap entry support, and
 raw-head extinction through `secondBErase_rawHead_shell_impossible`.
 
@@ -5101,15 +5102,71 @@ the first eleven possible `D_b` positions are therefore dead uniformly in the bo
 [`MatrixMortality/DecimalSetterFiveDepth.lean`](MatrixMortality/DecimalSetterFiveDepth.lean)
 proves the separate regular and exceptional forms of (1) and the combined above-width
 perturbation theorem.
-[`MatrixMortality/DecimalSetterAncestry.lean`](MatrixMortality/DecimalSetterAncestry.lean)
+[`MatrixMortality/DecimalSetterPositioned.lean`](MatrixMortality/DecimalSetterPositioned.lean)
 proves (2), the unchanged lower code, conditional full-gap support, and
 `positionedBErase_rawHead_shell_impossible`.
 
 **Artifact:**
 [`audits/m53-first-beta-plus-one-b-extinction-2026-08-31.md`](audits/m53-first-beta-plus-one-b-extinction-2026-08-31.md).
 
-**Next:** decide late one-`D_b` positions `a>β`, then control superposed perturbations from
-several `D_b` roles.
+**Next:** graduated into `MM-S45`.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S45: Exceptional-late one-`D_b` boundary
+
+**Kind:** structure theorem and obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+The regular raw-head branch is shallower than `MM-S40` needed. If its terminal zero run is
+`1≤s≤β−2`, then for every all-`D_c` width `n≥1`,
+
+```text
+5^β ∤ R_c.                                    (1)
+```
+
+When `n<β`, equation (1) follows from the uniform `5^(n+1)` cut. When `β≤n`, the regular
+three-term decomposition leaves the term `10^(s+1)K`, with `K≡3 (mod 5)`, strictly below depth
+`β`; the other two terms are already divisible by `5^β`.
+
+Every one-`D_b` all-erasure upper perturbation is divisible by at least `10^(β+2)`, even when
+`D_b` is the final role. It is therefore invisible modulo `5^β`, and (1) excludes every
+possible `D_b` position at a regular raw head. Combining this with
+[`MM-S40`](#mm-s40-first-beta-plus-one-position-d_b-extinction) gives the exact necessary
+boundary for any remaining one-`D_b` raw-head shell:
+
+```text
+prefixWidth > β,
+9H = 5·10^(β+2) + 2·10^(β−1) − 7.             (2)
+```
+
+Thus the only survivor simultaneously uses a late `D_b`, in one-indexed position at least
+`β+2`, and the exceptional raw head with terminal run `s=β−1`.
+
+**Scope:** equations (1)–(2) are necessary conditions for a one-`D_b`, all-erasure transition
+from the distinguished two-`c` raw head to another multi-role pole. They do not construct such
+a survivor or cover multiple `D_b` roles, rule phases, singleton targets, or later generalized
+carriers. The exceptional branch remains open precisely because late perturbations can reach
+the decisive valuation of its two-term decomposition.
+
+**Use:** delete every regular-head one-`D_b` word and every early exceptional-head placement.
+The remaining single-marker search is the two-parameter exceptional-late tail, with no body
+dependence in its lower word.
+
+**Formalization:**
+[`MatrixMortality/DecimalSetterFiveDepth.lean`](MatrixMortality/DecimalSetterFiveDepth.lean)
+proves `allCDeletion_regularRawHead_not_fiveAtBeta` and the beta-deep perturbation transfer.
+[`MatrixMortality/DecimalSetterPositioned.lean`](MatrixMortality/DecimalSetterPositioned.lean)
+proves all-position regular extinction and
+`positionedBErase_shell_forces_exceptionalLate`.
+
+**Artifact:**
+[`audits/m53-exceptional-late-one-b-boundary-2026-08-31.md`](audits/m53-exceptional-late-one-b-boundary-2026-08-31.md).
+
+**Next:** decide the exceptional-late one-`D_b` family by its exact two-term coefficient, then
+control superposed perturbations from several `D_b` roles.
 
 ### MM-S42: Swapped positive depth-one extinction
 
