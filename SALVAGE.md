@@ -133,6 +133,7 @@ file owns the mathematical stock.
 | [`MM-S32`](#mm-s32-entry-support-saturator-extinction) | obstruction | the universal all-`D_c` support saturator cannot be the first transition from a lawful two-`c` raw head to another multi-role pole | formalized | active |
 | [`MM-S33`](#mm-s33-leading-d_b-support-saturator-extinction) | obstruction | the full-gap-saturating leading-`D_b` erasure family cannot be the first transition from a lawful two-`c` raw head to another multi-role pole | formalized | active |
 | [`MM-S36`](#mm-s36-complete-hidden-branch-separation) | structure theorem | the first-cylinder collision pair separates on complete same-tail addresses, while any cross-tail collision forces one exact asymmetric shell | formalized | active |
+| [`MM-S37`](#mm-s37-decimal-three-shape-frontier-extinction) | obstruction | all three role shapes in the swapped ternary first-multi-transfer frontier are empty in the decimal carrier | formalized | active |
 | [`R32-S01`](#r32-s01-split-return-normal-form) | structure theorem | rank-two cuts reduce one-unit binary mortality to a `2 × 2` return recurrence | formalized | graduated |
 | [`R32-S02`](#r32-s02-two-plane-edge-square) | structure theorem | two rank-two generators are a two-vertex square of `2 × 2` edges | formalized | graduated |
 | [`R32-O01`](#r32-o01-rank-one-profile-collapse) | obstruction | a rank-one generator reduces mortality to order-at-most-three scalar recurrence zeros | audited | stock |
@@ -4690,6 +4691,52 @@ through `emittedHiddenInverseBranches_pullbackWord_sub_hasDecimalShell` and
 **Next:** intersect the forced shell (2) with pairs of reachable suffix carriers from the encoded
 entry. Either prove that no lawful suffix pair has this first unequal cross-prime depth, or
 construct the first exact branch-switch cascade.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S37: Decimal three-shape frontier extinction
+
+**Kind:** obstruction and candidate separation
+**Evidence:** formalized
+**Disposition:** active
+
+The swapped ternary first-multi-transfer gate leaves three physical role shapes: a two-`c`
+multi-to-multi step, a `(β+1)`-`c` multi-to-singleton step, and a two-`c` step followed by a
+singleton `D_b` and then another singleton. Suppose the analogous decimal carrier has units
+`N,D,E,G,μ,V₂,V₃`, current and target traces `T₂,T₃`, current upper length `m`, and pole equation
+
+```text
+(NT₂−10μGV₂D)T₃=EμG10^mNV₃.                 (1)
+```
+
+Every one of those shapes contradicts the checked joint `2`/`5`-adic carrier theory.
+
+- At `m=2` with two multi-role shells, [`MM-S18`](#mm-s18-length-two-carrier-extinction)
+  forbids (1).
+- At `m=β+1` with a multi-role current shell and singleton target shell,
+  [`MM-S20`](#mm-s20-singleton-carrier-classification) forces `m≥β+3`.
+- With current block `D_b` and a singleton target, `MM-S20` forbids (1) from every decimal-unit
+  carrier. The preceding two-`c` hypothesis is unnecessary.
+
+**Scope:** this theorem does not transport the ternary three-shape classification into the
+decimal recurrence. It proves that its three surviving role words cannot be recycled as decimal
+survivors. Longer decimal generalized-carrier transitions, including multi-to-multi blocks with
+`m≥3` and multi-to-singleton blocks with `m≥β+3`, remain open.
+
+**Use:** separate the two setter candidates at the first multi-transfer boundary. The ternary
+branch must decide its three shapes by ternary suffix arithmetic; the decimal branch must attack
+the longer encoded-carrier reachability problem rather than duplicate that search.
+
+**Formalization:**
+[`MatrixMortality/DecimalSetterMultitransfer.lean`](MatrixMortality/DecimalSetterMultitransfer.lean),
+through `DecimalSetterDepth.firstMultiTransfer_threeShapeFrontier_impossible`.
+
+**Artifact:**
+[`audits/m53-decimal-three-shape-frontier-extinction-2026-08-31.md`](audits/m53-decimal-three-shape-frontier-extinction-2026-08-31.md).
+
+**Next:** decide the first rule-bearing or nonleading-`D_b` raw-head transition, then propagate
+the resulting cut to reachable generalized product residuals.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).

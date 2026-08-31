@@ -1623,6 +1623,15 @@ literal lower word. At `n=entrySaturationWidth β`, the lower code contains the 
 does not cover a nonleading `D_b`, a rule-bearing block, a singleton target, or a later
 generalized carrier.
 
+Record [`MM-S37`](SALVAGE.md#mm-s37-decimal-three-shape-frontier-extinction) separates the
+ternary and decimal first-multi-transfer fronts. The single theorem
+`DecimalSetterDepth.firstMultiTransfer_threeShapeFrontier_impossible` consumes the three role
+shapes left by the swapped ternary gate. `peeledMultiPole_length_ne_two` kills the two-`c`
+multi-to-multi case. `peeledMultiToSingleton_beta_add_three_le` kills the `(β+1)`-`c`
+multi-to-singleton case. `peeledSingletonToSingleton_impossible` kills the `D_b`-to-singleton
+case without its preceding two-`c` hypothesis. The theorem does not assert that the ternary
+trichotomy classifies decimal orbits; longer generalized decimal carriers remain open.
+
 Record [`MM-S21`](SALVAGE.md#mm-s21-bounded-decimal-suffix-cycles) closes the fixed-precision
 suffix-descent lane. `DecimalSetterSuffix.cycleDefect_lift` gives an explicit one-digit lift for
 the stationary carrier defect `10^hEx²−τx+μGV`, whose derivative is `−1` modulo ten.
@@ -2209,6 +2218,7 @@ fixed-rank decision problem.
 | `DecimalSetterAncestry.lean` | primitive gap factor; exact reciprocal and periodic raw two-`c` prime support; arbitrary-history prime-support propagation and radical saturation; physical all-erasure full-gap lower code and first-entry extinction; denominator-ancestry reduction; full-gap, factorwise, and gcd-saturated quotient gates for a singleton target |
 | `DecimalSetterSuffix.lean` | bounded-suffix Hensel cycles, exact inverse-cylinder contraction, first-cylinder collision, forward decoding, and arbitrary two-prime depth transport |
 | `DecimalSetterBranchSeparation.lean` | complete hidden-branch separation and the exact asymmetric later-tail shell forced by a branch-switch collision |
+| `DecimalSetterMultitransfer.lean` | extinction of all three swapped-ternary frontier shapes under the analogous decimal carrier shells |
 | `PairedMortality.lean` | common-column mortality converse and exact integer `4 × 4` family |
 | `PhaseFracture.lean` | phase normalization and dimension-free projective-identification contradiction |
 | `PhaseRigidity.lean` | checked local role algebra, discrepancy commutators, and invariant-pencil rigidity |
