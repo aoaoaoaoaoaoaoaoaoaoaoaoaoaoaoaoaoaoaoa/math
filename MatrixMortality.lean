@@ -13,6 +13,7 @@ import MatrixMortality.ReturnFamily
 import MatrixMortality.CubicReturn
 import MatrixMortality.CubicReturnNonPure
 import MatrixMortality.CyclicBinaryBoundary
+import MatrixMortality.ExtendableBinaryBoundary
 import MatrixMortality.EdgeCompression
 import MatrixMortality.TwoPlaneEdges
 import MatrixMortality.ReverseEdge
@@ -21,6 +22,7 @@ import MatrixMortality.ProjectiveCollatz
 import MatrixMortality.MixedPrimeKernel
 import MatrixMortality.MixedPrimeNormalization
 import MatrixMortality.PeriodicShell
+import MatrixMortality.MixedPrimeDebt
 import MatrixMortality.RankTwoPunctuation
 import MatrixMortality.ReturnSquare
 import MatrixMortality.ReturnSquareDynamics
@@ -89,6 +91,9 @@ import MatrixMortality.PhaseRigidity
 import MatrixMortality.HistoryFracture
 import MatrixMortality.PeriodicHistory
 import MatrixMortality.TransverseHistory
+import MatrixMortality.TransverseLineAtlas
+import MatrixMortality.TransverseLineHardCore
+import MatrixMortality.TransverseInfiniteAtlas
 import MatrixMortality.BranchingHistory
 import MatrixMortality.PrefixResidual
 import MatrixMortality.AffineRecognizer
@@ -117,9 +122,12 @@ import MatrixMortality.NearyCrossRatioNoGo
 import MatrixMortality.CHHNPackingRank
 import MatrixMortality.PairedBoundaryTax
 import MatrixMortality.DeletionFirstFracture
+import MatrixMortality.PairedBinaryPrefixTax
 import MatrixMortality.PairedBinaryFullAlgebra
 import MatrixMortality.PrefixFullAlgebra
 import MatrixMortality.ScheduledBinaryRank
+import MatrixMortality.WidthThreeSparseBody
+import MatrixMortality.WidthThreeAdjacentBody
 import MatrixMortality.SetterShear
 import MatrixMortality.SetterJFraction
 import MatrixMortality.DecimalSetterArithmetic
@@ -127,6 +135,8 @@ import MatrixMortality.DecimalSetterCarry
 import MatrixMortality.DecimalSetterChamber
 import MatrixMortality.DecimalSetterResonance
 import MatrixMortality.DecimalSetterDepth
+import MatrixMortality.DecimalSetterSuffix
+import MatrixMortality.DecimalSetterAncestry
 import MatrixMortality.SchottkyPunctuation
 import MatrixMortality.TwoStateObstructions
 import MatrixMortality.ForcedRuleCCompanion

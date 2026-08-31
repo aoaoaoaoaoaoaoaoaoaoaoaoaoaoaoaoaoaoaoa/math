@@ -67,6 +67,18 @@ exact empty-data halting after one additional empty halt-appendant step, but its
 remains phase-dependent. Eliminating that phase is precisely the missing width-three
 compilation; the existing Table 2 construction does so only at deletion width `10p`.
 
+The sparse source stratum is now decided formally. Every coupled body containing at most one
+`c` halts, at every body length. Hence any family satisfying the displayed equivalence must map
+some rejecting code to a body containing at least two `c` letters. This is only a necessary
+condition: it does not make the remaining two-`c` stratum universal. See
+[`m53-width-three-sparse-source-2026-08-30.md`](m53-width-three-sparse-source-2026-08-30.md).
+The one-`c` shrinking-defect mechanism is sharp for unrestricted queue dynamics: every
+nontrivial even body `b^p c c b^s` has two explicit periodic queues. Nevertheless, its coupled
+initial orbit either halts or enters the lower cycle, giving a constructive decision throughout
+the adjacent-two-`c` subfamily. The next source boundary is two separated `c` letters or at
+least three `c` letters. See
+[`m53-width-three-adjacent-cycles-2026-08-31.md`](m53-width-three-adjacent-cycles-2026-08-31.md).
+
 ## Search
 
 The search covered exact phrases and notation variants for binary tag systems,
@@ -102,4 +114,5 @@ either:
 3. a constant-state delimiter or punctuation mechanism whose malformed
    placements are rejected by the terminal-match normal form.
 
-The third route is the bounded expert-review target.
+Any direct source construction must cross the formal two-`c` lower boundary. The third route is
+the bounded compiler target.

@@ -302,6 +302,17 @@ embedding and retraction matrices prove the exact restriction and its converse, 
 new zero created by restriction. A generic zero-block theorem then preserves nonempty-word
 mortality in every dimension `10+n`.
 
+The changed-source `M₉(2)` audit has a separate checked boundary. The paired toggle is an
+involution, so appending two toggles preserves the coefficient on every word. Absorbing one
+toggle into the terminal column therefore preserves existential nonempty zero reachability in
+both directions, without a terminal-grammar or invertibility premise. Lean also checks that the
+shifted column and every data image have zero private rule coordinate, while the toggle and data
+roles have ranks four and three respectively. Generic rank-product inequalities then prove that
+an exact comb with a rank-four short leaf and rank-three depth-three leaf needs at least ten
+states; the corresponding balanced layout needs at least eleven. This is a theorem about
+direct-sum exact path products, not a lower bound for history-sensitive same-zero compilers. See
+[`m92-trailing-toggle-prefix-tax-2026-08-30.md`](audits/m92-trailing-toggle-prefix-tax-2026-08-30.md).
+
 Lean also constructs the canonical reachable-observable quotient around any internal physical
 word whose product factors as `UW`. Its generators act on
 
@@ -467,6 +478,77 @@ simultaneous `2`/`3`-unit output therefore confines `m` to
 `−v₂(u)≤m≤v₃(u)+1`. When both transported valuations are negative, their sum rises by exactly
 one independently of `m`. These are one-step restrictions, not a finite-state decision theorem:
 mixed-sign histories and equality-wall cancellation remain live.
+
+`MixedPrimeDebt` resolves the valuation topology of genuinely varying schedules inside the
+negative `3`-adic chamber. For a rational carrier `c` with `v₃(c)=0`, write `u=c/3^d`. Every
+step which remains at positive depth has the exact recurrence
+
+```text
+d' = d+m−1,      c' = (2^m c+3^d')/5.
+```
+
+The only chamber exit is `d=1,m=0`. Conversely, a target `c'/3^d'` has one distinct debt
+predecessor for every wait `m=0,…,d'`, with depth `d'+1−m` and carrier
+`(5c'−3^d')/2^m`. If the target carrier is additionally a `5`-adic unit, every predecessor
+carrier is a `5`-adic unit, so the whole fan is legal in the critical shell. Arbitrary
+debt-safe schedules satisfy the checked Łukasiewicz balance
+`d_end+length=d_start+sum(waits)`. Their slope is fixed by the two depths and the length; two
+same-length bridges between the same depths which collide at one source are already the same
+affine map globally. This moves all within-length point collisions back to the affine-kernel
+problem. It does not bound the reverse tree: its exact fan has width `d'+1`, and cross-length
+carrier equality remains open.
+
+The cross-length collision itself now has a checked normal form. Every nonempty schedule has
+both slope and intercept of `5`-adic valuation `−length`. Two unequal lengths therefore have
+different slopes and collide at exactly
+
+```text
+u=(b_right−b_left)/(a_left−a_right).
+```
+
+Unequal valuations force both numerator and denominator to the negative larger length, so this
+unique collision source is automatically a `5`-adic unit. Source-shell exclusion cannot prune
+cross-length collisions. The common target is exactly
+
+```text
+y=(a_left b_right−a_right b_left)/(a_left−a_right),
+```
+
+and it is a `5`-adic unit exactly when the numerator determinant has valuation
+`−max(left.length,right.length)`. Since its two terms begin at valuation
+`−left.length−right.length`, this is an exact cancellation demand of the shorter length. For
+debt-safe bridges between common endpoint depths with lengths `n` and `n+1`, the slope ratio
+is forced to `2/5`. Writing the cleared rational offset as `C_w=5^|w|b_w`, Lean proves
+
+```text
+C_(m::w)=3^|w|(2/3)^sum(w)+5C_w,
+y=(C_long−2C_short)/(3·5^n),
+y is a 5-unit  ↔  v₅(C_long−2C_short)=n.
+```
+
+This is an exact adjacent-bridge carry law, not a decision procedure: the offset recurrence still
+has unbounded length and varying exponents. Acceptance is not automatic. The debt-safe pair
+`[4]` and `[0,5]` runs from depth two to depth five and collides at `2/9↦55/243`, whose target has
+`5`-adic valuation one. Fixed-source equality is nevertheless saturated by an exact parametric
+family. For every `m≥0`, the bridges
+
+```text
+[1,m+2]  and  [3,1,m]
+```
+
+run from depth one to depth `m+2` and both send `43/24` to
+`(11(2/3)^m+9)/45`. For `m=10k`, Lean proves the cleared numerator
+`11·2^(10k)+9·3^(10k)` has `5`-adic valuation exactly one, so the target is a unit. One rational
+source therefore supports infinitely many accepted chamber-contained cross-length collisions
+with unbounded waits. The target formula is injective in `m`; no fixed target occurs twice, and
+fixed-target intersection with this ray reduces to testing its sole valuation-derived candidate
+`m=max(0,v₂((45y−9)/11))`. Every target on the ray also satisfies the complementary endpoint
+pole `v₂(1−2y)=0`, which is the normalized form of `v₂(6y_original−15)=0`. Thus the family lies
+inside both unresolved endpoint shells, although it does not decide reachability outside this
+one ray. Exact accepted examples also show that the debt chamber's one-bit carrier residue is
+saturated: `[1]` and `[1,1]` collide at `1/3↦1/3`,
+while `[1]` and `[1,2,0]` collide at `19/42↦8/21`; their carrier orientations modulo three are
+opposite, and both sources and both targets are `5`-adic units.
 
 `MixedPrimeKernel` now owns the raw `D,T` affine kernel. It checks the published shortest
 length-27 relation, an infinite family of distinct equal-map pairs at every odd length
@@ -842,6 +924,16 @@ consecutive triples and reduces every triangular wait to the fixed Thue equation
 the former safe alphabet. The Delone–Nagell classification and an audited exclusion of its fifth,
 negative-index orbit point prove that these are all the natural zeros. See `R32-S43` and
 [`audits/m32-cubic-defect-thue-2026-08-30.md`](audits/m32-cubic-defect-thue-2026-08-30.md).
+
+The complete false-wait return is now one linear projection of the same recurrence window. Lean
+checks its determinant and two ternary cancellations in which every factor and adjacent pair is
+nontriangular. The recurrence-digit continuant also contains an exact four-ray projective cycle.
+Entry, any number of cycles, and exit give the upper-triangular words
+`[19,15][7,8,21,15]ᵏ[7,8,2]` of length `5+4k`. A uniform induction checks that every nonempty
+proper suffix is nontriangular, so these words are concatenation-prime inside the triangular
+language. This excludes bounded triangular-macro factorization, but proves neither nonregularity
+nor decidability of the complete language. See `R32-O23`, `R32-O24`, and
+[`audits/m32-unbounded-prime-continuants-2026-08-31.md`](audits/m32-unbounded-prime-continuants-2026-08-31.md).
 
 The rank-(2,2) graph is no longer an independent residue. `RankTwoPunctuation` proves that every
 compatible square with one rank-one loop and three units transports exactly to the existing raw
@@ -1338,7 +1430,66 @@ generalized carrier's unit residues form a compatible period-two cycle. Record
 transition: `peeledNumerator_twoAdic_deepens` proves that the difference of the two normalized
 `2`-adic units cannot remain a unit, and `peeledMultiPole_three_le_length` therefore forces
 every non-singleton consecutive multi-pole block to have upper length at least three. The module
-does not identify later product residuals with raw encoded heads or decide singleton targets.
+then records [`MM-S19`](SALVAGE.md#mm-s19-all-deletion-raw-head-extinction).
+`peeledDoubleCHead_unit_shape` classifies every decimal-unit two-`c` raw head as
+`1^(β+2−s)0^s`, with `1≤s≤β−1` and its exact integer code identity.
+`allCDeletion_peeledDoubleCHead_shell_impossible` composes that grammar with two exhaustive
+mixed-prime cuts and excludes every all-`D_c` block of length at least three from reaching a
+later multi-role pole. Together with `MM-S18`, this removes the complete all-deletion family
+at admissible non-singleton lengths from the initial raw-head grammar. The module does not
+identify later product residuals with raw encoded heads or exclude rule-bearing or
+`D_b`-containing first blocks. Record
+[`MM-S20`](SALVAGE.md#mm-s20-singleton-carrier-classification) closes its local singleton
+classification: `peeledSingletonToMulti_impossible` and
+`peeledSingletonToSingleton_impossible` eliminate both physical singleton-current branches,
+while `exists_decimalUnitCarrier_multiToSingleton_iff` proves that an unrestricted rational
+decimal-unit carrier reaches a singleton target exactly when `m≥β+3`. The latter construction
+is an abstraction barrier, not a setter counterexample: encoded reachability of the constructed
+carrier remains open. Record [`MM-S22`](SALVAGE.md#mm-s22-gap-factor-quotient-gate) intersects
+that abstract branch with the physical recursive ancestry. For `q=2·10^β−7`,
+`DecimalSetterAncestry.gapClean_multiToSingleton_quotientGate` proves that a primitive integral
+carrier with `gcd(q,N)=1` can reach a singleton only if `V₂=qW` and
+`P₂+(G/9)W≡μ10^m (mod q)`. The fixed coefficient and singleton digit are discharged inside the
+theorem by exact coprimality proofs; shared-factor carrier numerators and the emitted-code
+quotient language remain open. Record [`MM-S24`](SALVAGE.md#mm-s24-factorwise-gap-ancestry)
+removes the false dichotomy hidden in that wording: `q` may be composite. For every `r∣q`,
+`carrierFactor_dvd_next_iff` proves `r∣N' ↔ r∣NV`, and `primeFactor_dvd_next_iff` identifies
+lower codes as the only first-entry channel for gap primes. The initial two-`c` head is not
+divisible by the full gap. If `q=rs` and `gcd(r,N)=1`,
+`carrierFactor_multiToSingleton_quotientGate` forces `V₂=rW` and
+`s(P₂−μ10^m)+gW≡0 (mod r)`. Proper factors already present in `N` therefore remove only their
+own gate, not every gap-factor constraint. Record
+[`MM-S26`](SALVAGE.md#mm-s26-exact-raw-head-prime-support) makes the initial support exact.
+For a unit two-`c` raw head `H` with terminal run length `s`,
+`DecimalSetterAncestry.gapFactorDivisor_coprime_nine` proves that every `r∣q` is coprime to
+nine, and `rawHead_factor_iff` then proves `r∣H ↔ r∣2·10^s+1743`. The initial contamination
+question is therefore a one-parameter exponential divisibility problem; later lower-code entry
+remains open.
+
+Record [`MM-S21`](SALVAGE.md#mm-s21-bounded-decimal-suffix-cycles) closes the fixed-precision
+suffix-descent lane. `DecimalSetterSuffix.cycleDefect_lift` gives an explicit one-digit lift for
+the stationary carrier defect `10^hEx²−τx+μGV`, whose derivative is `−1` modulo ten.
+`cycleDefect_roots_congruent` proves that each precision has one residue root.
+`exists_cycleDefect_root` constructs the resulting coherent address through every power of ten,
+and
+`peeledNumerator_factor` restores the literal generalized residual consumed by the recursive
+carrier. `emittedBlock_exists_approximate_cycle` then composes them in the exact normalized
+recurrence. For each emitted multi-role block and every `k`, it produces an exact factorization
+whose next carrier ratio equals the current ratio modulo `10^k`. The theorem asserts bounded
+residue self-loops only; it proves neither an exact rational cycle nor reachability from the
+distinguished entry.
+
+Record [`MM-O20`](SALVAGE.md#mm-o20-decimal-first-cylinder-collision) formalizes the first
+unbounded suffix interface and its failure of physical decoding. `inverseCarrier_sub_hasDecimalShell`
+proves exact one-step contraction; `BackwardBlock.pullbackWord_sub_hasDecimalShell` sums the
+depth gains over an arbitrary backward word. `inverseCarrier_mem_carrierCylinder` and
+`existsUnique_inverseCarrier_unit_iff_carrierCylinder` identify the local image, with its unique
+tail, with one exact joint `2`/`5` cylinder.
+`physicalCarrierCenter_sameUpper_sub_hasDecimalShell` reduces center separation to a lower-code
+discrepancy. Finally, `emittedHiddenBlocks_firstCylinder_collision` proves that the lawful blocks
+`R_bR_cD_b` and `D_bR_cD_b` have the same first cylinder under the actual decimal calibration
+and compiler body bounds. This kills first-cylinder itinerary decoding but does not identify
+their complete inverse branches.
 
 The dimension-two affine ledger has seven independently checked records:
 
@@ -1595,6 +1746,23 @@ integer force the remaining wait below one and then contradict their strict endp
 exact boundary is
 [`audits/m43-opposite-c-defect-cylinder-2026-08-30.md`](audits/m43-opposite-c-defect-cylinder-2026-08-30.md).
 
+The opposite right-`c` defect cylinder exclusion
+[`M4-S17`](SALVAGE.md#m4-s17-opposite-right-c-defect-cylinder-exclusion) is formalized in the
+same module. `ParabolicBlade.bridge_bOne_cTwo_cZero_det` compresses the exact determinant of
+`b(3z+1)c(3x+2)c(3y)` to a weighted average of two rational roots.
+`ParabolicBlade.bridge_bOne_cTwo_cZero_det_ne_zero` partitions the native body into its leading
+`c`-run cylinders and places both roots in one open interval between consecutive natural
+numbers. The exact boundary is
+[`audits/m43-opposite-right-c-defect-cylinder-2026-08-31.md`](audits/m43-opposite-right-c-defect-cylinder-2026-08-31.md).
+
+The phase-zero double-`c` parity cylinder
+[`M4-S18`](SALVAGE.md#m4-s18-phase-zero-double-c-parity-cylinder) is checked in the same module.
+`ParabolicBlade.bridge_bZero_cTwo_cOne_det` gives the primitive integral code-coordinate core of
+`b(3z)c(3x+2)c(3y+1)`. The theorem
+`ParabolicBlade.bridge_bZero_cTwo_cOne_det_ne_zero_of_odd_body` proves that it is `2` modulo four
+whenever the body length and its number of `b` letters are both odd. The exact boundary is
+[`audits/m43-phase-zero-double-c-parity-cylinder-2026-08-31.md`](audits/m43-phase-zero-double-c-parity-cylinder-2026-08-31.md).
+
 The residue-zero `c`-endpoint exclusion
 [`M4-S12`](SALVAGE.md#m4-s12-residue-zero-c-endpoint-exclusion) is checked in the same module.
 `ParabolicBlade.bridge_cZero_bTwo_bOne_det` and
@@ -1679,6 +1847,16 @@ equivalent to a zero scalar on one bounded interior word, with a converse over e
 and number of separators. No source compiler from Carvalho's four-letter marker-tail equation to
 positive binary fixed-boundary equality is claimed.
 
+[`MatrixMortality/ExtendableBinaryBoundary.lean`](MatrixMortality/ExtendableBinaryBoundary.lean)
+closes the endomorphism-extendable part of that source problem. If one positive morphism is the
+other followed by an ambient endomorphism, `boundaryEquation_iff_endoTwistedConjugator` turns
+the four-boundary equality into one endomorphism-twisted conjugacy equation on the lower positive
+trace. `endoTwistedConjugator_iff_stabilizer_mul` identifies all group solutions as one twisted-
+stabilizer coset, and
+`exists_boundaryEquation_iff_trace_inter_endoTwisted_nonempty` retains the exact positive-word
+constraint. The free-group decision layer and effective extension test are audited in
+[`m43-endomorphism-extendable-boundary-2026-08-30.md`](audits/m43-endomorphism-extendable-boundary-2026-08-30.md).
+
 No `M₄(3)` undecidability theorem follows from the present corpus. The exhaustive promised
 positive overlap-queue source class, the retuned fixed-row closure, the original fixed-ray
 formal-plane compiler, and the four-parameter `M4-C04` endpoint architecture are closed. The
@@ -1698,7 +1876,7 @@ fixed-rank decision problem.
 | `BoundaryTax.lean` | generic finite-witness two-channel boundary tax |
 | `ReturnFamily.lean` | split finite-rank return normal form and matrix-valued block-Hankel witnesses |
 | `CubicReturn.lean` | pure-cubic arbitrary-word collapse and automatic genericity of the one-singular normal form |
-| `CubicReturnNonPure.lean` | non-pure physical endpoint alignment, fixed return recurrence, and exact unselected-wait obstruction |
+| `CubicReturnNonPure.lean` | non-pure physical endpoints, fixed return recurrence, scalar-defect norm, continuant state projection, and exact unselected-wait obstructions |
 | `EdgeCompression.lean` | exact adjacent-edge compression for split finite-rank families |
 | `TwoPlaneEdges.lean` | compatible two-plane realization of a `2 × 2` edge square and exact rank-two certificates |
 | `ReverseEdge.lean` | generic projective-incidence reverse compiler, basis adaptation, and all-path converse |
@@ -1716,10 +1894,11 @@ fixed-rank decision problem.
 | `ReturnJordan.lean` | parity-Jordan rail rigidity and modular immortality certificate |
 | `ReturnConvert.lean` | minimal two-scale return pencil and nonresonant multi-return zero |
 | `ProjectiveLine.lean` | total affine-chart presentation of `ℙ¹` and exact unit-word ray action |
-| `CongruenceBlindOrbit.lean` | free rational shear orbit, trivial source stabilizer, explicit five-factor bridge, and positive all-modulus CRT closure |
+| `CongruenceBlindOrbit.lean` | free rational shear orbit, trivial source stabilizer, projective all-modulus CRT closure, and a whole-matrix congruence ghost away from nineteen |
 | `AffineGroupOrbit.lean` | translation-kernel quotient and trivial-kernel fixed-point structure for rational affine groups |
 | `PadicValuation.lean` | nonzero rational p-adic shells, unequal-valuation calculus, and the adjacent-unit odd-prime obstruction |
 | `PeriodicShell.lean` | exact affine schedule composition, rational all-unit periodic cycles, and the published nonfree benchmark relation |
+| `MixedPrimeDebt.lean` | exact two- and three-adic wait walls, complete negative-depth predecessor fans, arbitrary debt-safe recurrence, and fixed-length collision rigidity |
 | `MixedPrimeKernel.lean` | raw mixed-prime affine action, contextual composition, an infinite odd-length kernel family from length 29, and three independent length-30 relations |
 | `MixedPrimeNormalization.lean` | exact homogeneous odd-family relations, persistence under independent normalization scaling, and the two-seed cancellative pump |
 | `ReturnGuard.lean` | three-mode amalgamated return algebra, split mortality compiler, and exact state lower bound |
@@ -1775,9 +1954,11 @@ fixed-rank decision problem.
 | `TerminalTile.lean` | arbitrary rank-one chains, fracture at every separator, and fixed-boundary folding into separator rays |
 | `SchottkyPunctuation.lean` | four-dimensional integral left--right action and homogeneous first-column incidence coefficient |
 | `CyclicBinaryBoundary.lean` | cyclic-side fixed-boundary equality as a weighted trace/corridor intersection in `G × ℤ` |
+| `ExtendableBinaryBoundary.lean` | ambient-endomorphism reduction, twisted-stabilizer coset, and exact positive-trace intersection |
 | `TerminalReduction.lean` | rational and integer fixed-boundary mortality compiler |
 | `TerminalSource.lean` | generic primitive extraction and GPCP bridge |
 | `PairedCompression.lean` | reset/toggle specialization, explicit coordinate certificates, and arbitrary-word decoding |
+| `PairedBinaryPrefixTax.lean` | trailing-toggle zero-language equivalence, common-plane boundary absorption, and exact variable-fibre prefix rank taxes |
 | `ParabolicBlade.lean` | open cube root, nonzero mixed blade, complete atom grammar, annihilator guards, and exact `2 × 2` exceptional-chain contraction |
 | `ParabolicResidueWall.lean` | integral residue-{0,1} atom numerators, modulo-three two-ray action, and the necessity of residue two |
 | `ParabolicExterior.lean` | complete adjugate exterior state, bridge-wall coordinate, and four normalized safe actions |
@@ -1795,12 +1976,16 @@ fixed-rank decision problem.
 | `DecimalSetterCarry.lean` | two-reset successive-pole identities, joint depth constraints, exact decimal suffix exhaustion, first-transfer prefix separation, and the ordinary depth-two A/B shell forest |
 | `DecimalSetterChamber.lean` | exact decimal pole chambers, both ordinary A-to-A length-two extinctions, and the emitted-body grammar certificate |
 | `DecimalSetterResonance.lean` | complete ordinary depth-two A-to-B and B-to-A extinction, phase-word exhaustion, and compiler-envelope specialization |
-| `DecimalSetterDepth.lean` | recursive two-unit A-shell carrier, length-two extinction, initial raw-head exclusion, and the exact last-digit two-cycle obstruction |
+| `DecimalSetterDepth.lean` | recursive two-unit carrier; length-two and singleton-current extinction; exact all-`D_c` raw-head extinction; sharp `m≥β+3` abstract multi-to-singleton classification; initial raw-head exclusion; compatible last-digit two-cycle obstruction |
+| `DecimalSetterAncestry.lean` | primitive gap factor; exact raw two-`c` prime support; exact factor and prime-support propagation; denominator-ancestry reduction; full-gap and factorwise quotient gates for a singleton target |
 | `PairedMortality.lean` | common-column mortality converse and exact integer `4 × 4` family |
 | `PhaseFracture.lean` | phase normalization and dimension-free projective-identification contradiction |
 | `PhaseRigidity.lean` | checked local role algebra, discrepancy commutators, and invariant-pencil rigidity |
 | `HistoryFracture.lean` | null-history counterexample, minimum-body base-five encoder, and integral mortality lift |
-| `TransverseHistory.lean` | injective mixed-radix history code, transverse rank-two controls, and exact minimum-body zero language |
+| `TransverseHistory.lean` | injective mixed-radix transverse orbit, exact minimum-body zero language, and uniform terminal-row obstruction |
+| `TransverseLineAtlas.lean` | six-carrier normal form for singular data with a projectively involutive toggle and terminal-section dimension bound |
+| `TransverseLineHardCore.lean` | exact one-plane embedding of two-generator projective incidence into the identity-toggle transverse atlas |
+| `TransverseInfiniteAtlas.lean` | exact rank-two data family with an injectively infinite carrier-plane orbit under a nonprojective diagonal toggle |
 | `BranchingHistory.lean` | fixed `bcbc` terminal forks and affine positional lower bounds |
 | `AffineRecognizer.lean` | generic singular three-state guard-and-carry representation calculus |
 | `BranchingRecognizer.lean` | complete `bcbc` residual grammar and rational three-state recognizer |
@@ -1822,6 +2007,8 @@ fixed-rank decision problem.
 | `PairedBinaryFullAlgebra.lean` | canonical mortality alphabet and the full `M₆(ℚ)` physical-product span theorem |
 | `ScheduledBinary.lean` | cyclic-controller specialization, source semantics, and malformed-word converse |
 | `ScheduledBinaryRank.lean` | exact width-three rank-five certificate and universal exact-state lower bound |
+| `WidthThreeSparseBody.lean` | termination of every coupled width-three body with at most one `c` |
+| `WidthThreeAdjacentBody.lean` | exact adjacent-two-`c` cycles and constructive coupled-orbit decision |
 | `WeightedTransducer.lean` | deterministic matrix transducers and the arbitrary-word block-row theorem |
 | `PrefixMortality.lean` | complete prefix decoder, twelve-state realization, and ten-state common-image restriction |
 | `PrefixContexts.lean` | closed ten-state generators, internal rank-one word, and physical contexts |
@@ -1928,6 +2115,7 @@ fixed-rank decision problem.
 | Every nonzero shortcut-Collatz target reduces exactly to normalized GPI₂ | `ProjectiveCollatz.normalizedScalars`, `ProjectiveCollatz.exists_normalizedIncidence_zero_iff` |
 | In a finite group, positive monoid closure of a group-generating set is the whole group | `FinitePositiveImage.Submonoid.inv_mem_of_finite`, `FinitePositiveImage.mclosure_eq_top_of_group_closure_eq_top` |
 | A free rational shear orbit with trivial source stabilizer misses `[10:13]`, while a positive shear word reaches it projectively modulo every positive integer | `CongruenceBlindOrbit.shearRepresentation_injective`, `CongruenceBlindOrbit.sourcePoint_stabilizer_trivial`, `CongruenceBlindOrbit.targetPoint_not_reachable`, `CongruenceBlindOrbit.exists_positiveBridgeWord_modular_hit` |
+| The same free orbit is disjoint from the complete target-matrix coset of the source stabilizer, while modulo every integer prime to nineteen a positive shear word equals that determinant-one target matrix carrying `[1:1]` to `[7:10]` | `CongruenceBlindOrbit.shearRepresentation_ne_profiniteTarget_mul_stabilizer`, `CongruenceBlindOrbit.profiniteTargetPoint_not_reachable`, `CongruenceBlindOrbit.exists_positiveProfiniteBridgeWord_modular_eq`, `CongruenceBlindOrbit.profiniteTargetMatrix_det`, `CongruenceBlindOrbit.profiniteTargetMatrix_mulVec_source` |
 | Rational affine group hits are exact modulo the translation kernel; a trivial kernel forces one common fixed point | `AffineGroupOrbit.exists_exact_hit_iff_exists_hit_mod_translationKernel`, `AffineGroupOrbit.commute_of_translationKernel_eq_bot`, `AffineGroupOrbit.act_fixedPoint_of_translationKernel_eq_bot` |
 | The raw mixed-prime affine action has a published relation at length 27, an infinite distinct equal-map family at every odd length from 29, and three independent relations at length 30 | `MixedPrimeKernel.cassaigne_ne`, `MixedPrimeKernel.wordAction_cassaigne`, `MixedPrimeKernel.kernelOddFamily_length`, `MixedPrimeKernel.kernelOddFamily_ne`, `MixedPrimeKernel.wordAction_kernelOddFamily`, `MixedPrimeKernel.kernel30_ne`, `MixedPrimeKernel.wordAction_kernel30a`, `MixedPrimeKernel.wordAction_kernel30b`, `MixedPrimeKernel.wordAction_kernel30c` |
 | Every odd-family relation is an exact homogeneous matrix relation preserved by arbitrary independent generator scaling, so nonzero unit normalization cannot restore freeness | `MixedPrimeNormalization.kernelOddFamily_count`, `MixedPrimeNormalization.kernelOddFamily_perm`, `MixedPrimeNormalization.scaledAffineGenerator_isUnit`, `MixedPrimeNormalization.wordProduct_scaledAffineGenerator_kernelOddFamily`, `MixedPrimeNormalization.scaledAffineGenerator_not_injective` |
@@ -1935,6 +2123,13 @@ fixed-rank decision problem.
 | Every nonempty critical-shell wait schedule has a rational periodic `5`-unit at every cyclic phase | `PeriodicShell.shellPeriodicCycle` |
 | Repeating a fixed shell schedule subtracts its length from the `5`-adic displacement valuation each period, bounding legal repetition away from its unique periodic point | `PeriodicShell.shellRun_repeat_sub_periodicPoint_value`, `PeriodicShell.shellRun_repeat_unit_bound` |
 | A critical-shell step obeys exact `2`/`3` cancellation walls; simultaneous-unit output bounds the wait, and simultaneous negative debt rises by one | `PeriodicShell.shellStep_hasValue_two_of_negative`, `PeriodicShell.shellStep_unit_two_of_positive`, `PeriodicShell.shellStep_hasValue_three_of_negative`, `PeriodicShell.shellStep_unit_three_of_positive`, `PeriodicShell.shellStep_two_three_sum_of_both_negative`, `PeriodicShell.wait_mem_two_three_unit_interval` |
+| Every shell wait has exact two- and three-adic walls; away from equality, the lower valuation survives and the upper valuation resets to zero | `MixedPrimeDebt.shellStep_two_belowWall`, `MixedPrimeDebt.shellStep_two_aboveWall`, `MixedPrimeDebt.shellStep_three_belowWall`, `MixedPrimeDebt.shellStep_three_aboveWall` |
+| Every negative-depth target has a complete pairwise-distinct predecessor fan indexed by `0,…,d`; a `5`-unit target carrier makes every predecessor state a `5`-unit | `MixedPrimeDebt.shellStep_debtState_eq_iff`, `MixedPrimeDebt.debtState_fiveUnit`, `MixedPrimeDebt.debtPredecessor_fan`, `MixedPrimeDebt.debtPredecessor_state_injective` |
+| Arbitrary uninterrupted debt schedules obey their exact carrier recurrence and Łukasiewicz depth balance | `MixedPrimeDebt.shellRun_debtSafe`, `MixedPrimeDebt.debtRunDepth_balance` |
+| Same-length debt bridges with common endpoint depths have one slope, so a collision at one source is a global affine relation | `MixedPrimeDebt.debtSafe_sameLength_collision_global` |
+| Unequal nonempty shell schedules have one explicit collision source, which is automatically a `5`-adic unit; target acceptance is exactly a determinant-valuation condition; both three-adic carrier orientations occur at shell-legal cross-length collisions | `MixedPrimeDebt.collisionSource_eq_of_shellRun_eq`, `MixedPrimeDebt.collisionSource_fiveUnit`, `MixedPrimeDebt.collisionTarget_fiveUnit_iff`, `MixedPrimeDebt.positiveOrientation_crossLengthCollision`, `MixedPrimeDebt.negativeOrientation_crossLengthCollision` |
+| Adjacent-length debt bridges between common depths have slope ratio `2/5`; target acceptance is exactly cancellation of their cleared offsets to the shorter length and is not automatic | `MixedPrimeDebt.shellOffset_cons`, `MixedPrimeDebt.adjacentDebtBridge_slope`, `MixedPrimeDebt.adjacentDebtBridge_collisionTarget_fiveUnit_iff`, `MixedPrimeDebt.adjacentDebtBridge_targetOvercancellation` |
+| The fixed source `43/24` supports an exact adjacent-length collision family at every terminal wait; its targets lie on the complementary two-adic pole, are pairwise distinct, admit an explicit fixed-target membership test, and are accepted whenever the wait is divisible by ten | `MixedPrimeDebt.fixedSourceAdjacentFamily`, `MixedPrimeDebt.fixedSourceAdjacentFamily_target_injective`, `MixedPrimeDebt.fixedSourceAdjacentFamily_targetPole`, `MixedPrimeDebt.fixedSourceAdjacentFamily_target_exists_iff`, `MixedPrimeDebt.fixedSourceAdjacentFamily_ten_mul_numerator_mod`, `MixedPrimeDebt.fixedSourceAdjacentFamily_ten_mul_numerator`, `MixedPrimeDebt.fixedSourceAdjacentFamily_ten_mul_accepted` |
 | Shell phases are all units exactly when the final output is a unit | `PeriodicShell.shellPrefixesUnit_iff` |
 | Raw words and shell schedules are conjugate, and every boundary-shifted benchmark schedule is one contextual raw rule | `PeriodicShell.shellRun_eq_wordAction`, `PeriodicShell.shellRawWord_benchmarkRelationShiftLeft`, `PeriodicShell.shellRawWord_benchmarkRelationShiftRight`, `PeriodicShell.shellRun_benchmarkRelationShift` |
 | Two distinct length-thirteen benchmark schedules induce the same affine map, preserve all guards in every context, and share a rational all-unit cycle | `PeriodicShell.benchmarkRelation_ne`, `PeriodicShell.shellRun_benchmarkRelationContext`, `PeriodicShell.benchmarkRelationContextGuard`, `PeriodicShell.benchmarkRelationCycle` |
@@ -2029,6 +2224,11 @@ fixed-rank decision problem.
 | The non-pure cubic false-wait lower-left coefficient is an integral order-three recurrence | `CubicReturn.NonPure.falseWaitReturn_lowerLeft`, `CubicReturn.NonPure.cubicDefect_recurrence` |
 | Consecutive cubic defect windows have norm one, and every zero solves `x³−xy²+y³=1` | `CubicReturn.NonPure.cubicDefectNorm_state`, `CubicReturn.NonPure.cubicDefect_zero_forces_exceptionalThue` |
 | The cubic defect vanishes at waits zero, one, five, and fourteen | `CubicReturn.NonPure.cubicDefect_known_zeros` |
+| One cubic defect window determines the complete false-wait return and its determinant | `CubicReturn.NonPure.falseWaitReturn_eq_state`, `CubicReturn.NonPure.falseWaitReturn_det` |
+| Two exact ternary words have nontriangular factors and adjacent pairs but upper-triangular products | `CubicReturn.NonPure.nontriangular_triple_fifteen_eight_twentySix`, `CubicReturn.NonPure.nontriangular_triple_twelve_eight_thirtyThree` |
+| Six exact return actions form an entry, a four-ray projective cycle, and an exit | `CubicReturn.NonPure.continuant_ray_steps`, `CubicReturn.NonPure.continuantCycleWord_mulVec` |
+| Pumped continuant words are upper triangular, have length `5+4k`, and every nonempty proper suffix is nontriangular | `CubicReturn.NonPure.continuantPumpWord_lowerLeft`, `CubicReturn.NonPure.continuantPumpWord_length`, `CubicReturn.NonPure.continuantPumpWord_properSuffix_lowerLeft` |
+| Upper-triangular recurrence words contain concatenation-prime members beyond every length bound | `CubicReturn.NonPure.continuantPumpWord_unbounded_concat_prime` |
 | Rule and erasure matrices agree on the upper-side plane | `rule_erase_agree_on_upperSide` |
 | Every finite-controller letter routes its selected private channel exactly | `controllerMatrix_mulVec_controllerVector` |
 | Every suffix-controlled word obeys the generic total decoder | `controllerProduct_mulVec_controllerVector` |
@@ -2060,6 +2260,21 @@ fixed-rank decision problem.
 | The mixed-radix paired-history code is injective | `TransverseHistory.code_injective` |
 | Fixed transverse-kernel controls maintain that code on every raw control word | `TransverseHistory.product_mulVec_column`, `TransverseHistory.data_mulVec_eq_zero_iff` |
 | The transverse controls have exactly the paired zeros on every minimum body | `TransverseHistory.coefficient_zero_iff_decode_eq`, `TransverseHistory.minimalBody_zero_iff_paired_zero` |
+| No source-dependent terminal-row family extends the fixed transverse orbit to all admissible bodies | `TransverseHistory.rowCoefficient_eq`, `TransverseHistory.no_bcbc_terminal_row_section`, `TransverseHistory.no_sourceUniform_terminal_row_section` |
+| A projectively involutive toggle confines every raw control orbit to six fixed linear carriers | `TransverseLineAtlas.chart_count`, `TransverseLineAtlas.reachable_mem_carrier`, `TransverseLineAtlas.reachable_mem_carrier_of_involutive` |
+| Leading-toggle parity and the first data control select a canonical carrier for every raw word | `TransverseLineAtlas.wordChart`, `TransverseLineAtlas.wordProduct_mulVec_mem_wordChart` |
+| Singular three-dimensional data images and all six carriers have vector dimension at most two, while boundary carriers have dimension at most one | `TransverseLineAtlas.range_finrank_le_two_of_det_zero`, `TransverseLineAtlas.boundary_carrier_finrank_le_one`, `TransverseLineAtlas.carrier_finrank_le_two` |
+| A terminal row cuts each carrier in the whole carrier or a subspace of vector dimension at most one | `TransverseLineAtlas.zeroSection_eq_carrier_or_finrank_le_one`, `TransverseLineAtlas.chart_zeroSection_classification` |
+| Every exact singular/projectively-involutive paired recognizer has its complete raw-control zero language on those six sections | `TransverseLineAtlas.pairedZero_iff_mem_six_zeroSections`, `TransverseLineAtlas.pairedZero_singular_sixLineAtlas` |
+| Every two-state generator embeds as a singular three-state map with one common invariant plane | `TransverseLineHardCore.liftMatrix_det`, `TransverseLineHardCore.liftMatrix_mulVec_mem_plane`, `TransverseLineHardCore.liftMatrix_range_eq_plane`, `TransverseLineHardCore.data_carrier_eq_plane` |
+| The plane inclusion and row extension preserve nonzero projective endpoints | `TransverseLineHardCore.liftColumn_eq_zero_iff`, `TransverseLineHardCore.liftRow_eq_zero_iff` |
+| Invertible two-state generators lift to exact rank-two data maps and the identity toggle is involutive | `TransverseLineHardCore.liftMatrix_rank_eq_two`, `TransverseLineHardCore.data_rank_eq_two`, `TransverseLineHardCore.toggle_involutive` |
+| Toggle erasure preserves the complete raw-word scalar coefficient in multiplication order | `TransverseLineHardCore.eraseToggles_dataWord`, `TransverseLineHardCore.wordProduct_mulVec_liftColumn`, `TransverseLineHardCore.linearCoefficient_eq` |
+| Zero existence in the one-chart transverse subfamily is exactly two-generator rational incidence | `TransverseLineHardCore.coefficient_zero_iff`, `TransverseLineHardCore.exists_zero_iff` |
+| The diagonal toggle has powers `diag(1,2ⁿ,3ⁿ)`, determinant six, and non-scalar square | `TransverseInfiniteAtlas.toggle_pow`, `TransverseInfiniteAtlas.toggle_det`, `TransverseInfiniteAtlas.toggle_sq_ne_smul_one` |
+| Every source-parameter data map and every toggled carrier matrix has rank exactly two | `TransverseInfiniteAtlas.data_rank_eq_two`, `TransverseInfiniteAtlas.data_det`, `TransverseInfiniteAtlas.carrierMatrix_rank_eq_two` |
+| The displayed plane normal annihilates each carrier, while an earlier witness survives every later normal | `TransverseInfiniteAtlas.normal_dotProduct_carrierMatrix_mulVec`, `TransverseInfiniteAtlas.normal_dotProduct_witness_ne_zero` |
+| Literal raw prefixes `tⁿb` realize an injectively infinite family of carrier planes | `TransverseInfiniteAtlas.wordProduct_carrierWord`, `TransverseInfiniteAtlas.carrier_ne_of_lt`, `TransverseInfiniteAtlas.carrier_injective` |
 | The `bcbb` null histories and complete terminal language are one exact periodic ray | `PeriodicHistory.bcbbNull_iff`, `PeriodicHistory.bcbb_terminal_match_iff` |
 | The singular positional decoder obeys its all-control affine state equation | `PeriodicHistory.periodicProduct_mulVec_column`, `PeriodicHistory.periodicCoefficient_eq` |
 | The `bcbb` affine section has no false zero and matches the paired zero language | `PeriodicHistory.bcbbAffine_zero_iff`, `PeriodicHistory.bcbb_periodicCoefficient_zero_iff_paired_zero` |
@@ -2120,6 +2335,9 @@ fixed-rank decision problem.
 | Quotient-blind boundaries accepting an element and its square admit a nonempty identity witness | `PositiveFreeCancellation.exists_nonempty_identity_witness` |
 | A positive cyclic morphism evaluates as one power with its additive word weight | `CyclicBinaryBoundary.positiveEvaluate_cyclic` |
 | Cyclic-side fixed-boundary equality is exactly weighted-trace/cyclic-corridor intersection | `CyclicBinaryBoundary.exists_boundaryEquation_iff_trace_inter_corridor_nonempty` |
+| An ambient endomorphism extension turns fixed-boundary equality into endomorphism-twisted conjugacy | `ExtendableBinaryBoundary.boundaryEquation_iff_endoTwistedConjugator` |
+| All endomorphism-twisted conjugators form one twisted-stabilizer right coset | `ExtendableBinaryBoundary.endoTwistedConjugator_iff_stabilizer_mul` |
+| Extendable fixed-boundary existence is exactly positive-trace/twisted-class intersection | `ExtendableBinaryBoundary.exists_boundaryEquation_iff_trace_inter_endoTwisted_nonempty` |
 | Invertible positive transitions carry each spelling-fibre span exactly along the group orbit | `PositiveFreeCancellation.positiveFibreSpan_word_map_eq`, `PositiveFreeCancellation.positiveFibreSpan_word_symm_map_eq` |
 | Every nonzero vanished three-dimensional fibre has rank one or two | `PositiveFreeCancellation.positiveFibreSpan_finrank_one_or_two`, `PositiveFreeCancellation.positiveFibreSpan_eq_ker_of_finrank_two` |
 | The identity fibre is the seed orbit of its unital identity-word operator algebra | `PositiveFreeCancellation.positiveIdentityAlgebra_map_apply_eq_fibre` |
@@ -2184,12 +2402,20 @@ fixed-rank decision problem.
 | Scheduled scalar zero iff the terminal equation and tag halting | `scheduledBinary_zero_iff_terminal_match`, `scheduledBinary_zero_iff_tagHaltsFrom` |
 | Width-three scheduled series has a nonsingular `5 × 5` Hankel minor | `scheduledWidthThreeHankel_det_ne_zero` |
 | Every exact width-three rational realization needs five states | `scheduledWidthThree_exact_state_lower_bound`, `scheduledWidthThree_native_state_card`, `scheduledWidthThree_native_represents` |
+| Every coupled width-three body with at most one `c` halts | `coupled_halts_of_count_c_le_one` |
+| Every exact code-halting source family emits a body with at least two `c` letters | `exact_source_has_body_with_two_c` |
+| Every nontrivial even adjacent-two-`c` coupled queue halts or enters the lower cycle | `adjacentBody_coupled_normal_form` |
+| Halting of every such coupled queue is constructively decidable | `adjacentBodyCoupledHaltsDecidable` |
+| Every nontrivial even body `b^p c c b^s` has two explicit nonhalting queues | `lowerCycleQueue_not_halts`, `upperCycleQueue_not_halts` |
 | Every binary prefix-machine word has one decoded block per row | `prefixMachine_run`, `WeightedTransducer.wordProduct_apply` |
 | Prefix-machine mortality iff five-matrix mortality | `prefixMachine_mortal_iff_normalized` |
 | Both prefix generators share the ten-dimensional image | `prefixProjection_generator` |
 | Ten-state mortality iff prefix-machine mortality | `restrictedPrefixGenerator_mortal_iff_prefixMachine` |
 | Canonical `M₁₀(2)` instance mortal iff tag halting | `nearyMortality102_mortal_iff_tagHaltsFrom` |
 | Every zero-padded `M₁₀₊ₙ(2)` instance iff tag halting | `nearyMortality10Plus_mortal_iff_tagHaltsFrom` |
+| Appending two paired toggles preserves every coefficient, and absorbing one preserves nonempty zero reachability | `pairedCoefficient_append_toggle_toggle`, `pairedTrailingToggle_hasNonemptyZero_iff` |
+| A rank-four short leaf and rank-three depth-three leaf tax an exact prefix comb by ten states | `VariablePrefixRankTax.ten_le_of_rank_four_short_rank_three_deep` |
+| Opposite rank-four and rank-three branches tax a balanced exact prefix layout by eleven states | `VariablePrefixRankTax.eleven_le_balanced_rank_four_rank_three` |
 | Mathlib code halting has a verified `TM2` interpreter | `exists_universalTM2` |
 | Fixed two-tag halt-label reachability iff code halting | `UniversalTwoTag.reaches_halt_iff` |
 | Emitted restricted-tag halting iff code halting | `UniversalNeary.tagHaltsFrom_iff_codeHalts` |
@@ -2306,6 +2532,50 @@ prescribed code, both coordinate kernels, and the complete minimum-body paired e
 projective blow-up description is not a formal dependency: every actual orbit stays in the
 affine chart with homogeneous coordinate one.
 
+For `G3-O26`, Lean quantifies over an arbitrary rational row on that fixed orbit. Surjectivity of
+the paired decoder and a leading toggle expose both phase evaluations for each terminal history.
+The two distinct `bcbc` terminal forks force the row to zero; the explicit checked near-fork then
+contradicts same-zero exactness. The uniform theorem quantifies over every set-theoretic
+source-dependent row family and requires exactness only on admissible bodies, so no separate
+computability premise is needed. It fixes the `G3-O18` controls and column and makes no claim
+against different two-dimensional transverse dynamics.
+
+For `G3-O27`, Lean no longer fixes the controls, row, or column. It assumes both rational
+three-dimensional data matrices are singular and the toggle satisfies the matrix identity
+`T²=sI` for one nonzero scalar `s`; the exact-involution theorem is the specialization `s=1`.
+Every raw control word then lands in one of six fixed linear subspaces: the two boundary spans and
+the two data images, each before and after one toggle. The boundary spans have vector dimension at
+most one; the data carriers have dimension at most two and become projective lines only at exact
+rank two. Lean proves that any row cuts each carrier in the whole carrier or a subspace of vector
+dimension at most one, and transfers a same-zero hypothesis into an exact canonical-section
+description on the complete free control monoid. The canonical label uses only leading-toggle
+parity and the first data control, so whole-chart acceptance is finite-mode; every non-whole
+section is projectively at most one point. This does not decide point reachability under arbitrary
+rational projective-line transitions. Its connection to `G3-O04` requires that the six charts
+additionally admit the shared finite-mode integral affine normalization and expanding-or-
+stationary law used there. The remaining finite rational `P¹` atlas may share the `M₂(3)` core.
+
+For `G3-O29`, Lean proves the exact shared core. A two-state matrix `A` is lifted as `UAV`, where
+`U : ℚ²→ℚ³` includes the first coordinate plane, `V : ℚ³→ℚ²` projects onto it, and `VU=I₂`.
+Every lift is singular; if `A` is invertible, its lift has rank exactly two and image exactly
+`im U`. Both data generators therefore share one invariant plane, and the toggle is `I₃`. The
+recursive `eraseToggles` function deletes every raw toggle while preserving data-letter order.
+Lean proves equality of the three-state and two-state columns and scalar coefficients for every
+raw word, then proves the existential converse using the toggle-free data-word section. Thus the
+one-chart subfamily is instancewise equivalent to arbitrary two-generator rational scalar
+incidence. Combined with the separately audited `D2-S01` reduction, this makes the full atlas at
+least `M₂(3)`-hard; the Lean theorem itself does not formalize that separate mortality
+equivalence or reduce arbitrary multi-chart atlases to one chart.
+
+For `G3-O30`, Lean fixes the rational diagonal toggle `T=diag(1,2,3)` and a rank-two data family
+`D_s` whose image has normal `(1,1,s)`. It proves `Tⁿ=diag(1,2ⁿ,3ⁿ)`, `det T=6`, and
+`T²≠qI` for every rational scalar `q`. Every `D_s` and `TⁿD_s` has rank exactly two. The literal
+raw word with `n` leading toggles followed by one data control has product `TⁿD_s`. Its image is
+annihilated by `(6ⁿ,3ⁿ,s·2ⁿ)` and contains `(1,−2ⁿ,0)`. For `n<m`, the later normal evaluates
+that earlier vector as `3^m(2^m−2^n)`, which is nonzero. Lean therefore proves injectivity of
+`n↦im(TⁿD_s)` uniformly in `s`. This is an infinite-carrier counterexample to extending G3-O27
+beyond projective involution, not a terminal-row construction or paired same-zero theorem.
+
 For `G3-O20`, Lean proves the free-monoid tail law: if one fixed-boundary equation with stationary
 left and right pump blocks holds at exponents `N` and `N+1`, it holds at every exponent `N+k`.
 The proof uses only prefix comparability and left/right cancellation. This closes a unary
@@ -2358,7 +2628,10 @@ no universality theorem for the required binary deletion-width-three family. Coc
 fix deletion width two only by allowing the alphabet to grow; the adjacent binary width-three
 class remains unresolved in the located literature. The width-three Lean theorem is therefore
 a conditional five-state reduction and an exact-rank result, not an established undecidable
-cell.
+cell. The sparse source stratum is nevertheless closed: Lean proves termination for every
+coupled body containing at most one `c`, and therefore proves that any exact code-halting source
+family must emit at least two `c` letters on some rejecting code. No declaration claims that
+the two-`c` stratum is universal or decidable.
 
 ## Prior Formalizations
 

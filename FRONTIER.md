@@ -185,7 +185,19 @@ This does not add a frontier point. Neary's universality compiler sets `β=10p`,
 cyclic-tag program period. The fixed-width audit found no universality theorem for the required
 binary deletion-width-three family. At width three the construction would imply `Z₅(2)`,
 `M₅(3)`, and `R₆(2)`; at the presently established variable width it gives no fixed matrix
-dimension. See `audits/scheduled-binary-fixed-width-2026-07-24.md`.
+dimension. The sparse source stratum is now closed:
+[`MM-D01`](SALVAGE.md#mm-d01-sparse-width-three-source-decision) proves that every coupled body
+containing at most one `c` halts, so any exact universal family must emit a body with at least
+two `c` letters on some rejecting code. This is a necessary condition, not universality of the
+two-`c` stratum. The one-`c` shrinking-defect mechanism is sharp for unrestricted queue
+dynamics: [`MM-S23`](SALVAGE.md#mm-s23-adjacent-two-c-periodic-pair) constructs two exact
+periodic queues for every nontrivial even adjacent-two-`c` body. However,
+[`MM-D02`](SALVAGE.md#mm-d02-adjacent-two-c-source-decision) proves that every coupled initial
+queue in this adjacent subfamily either halts or enters the lower cycle. The unresolved
+two-`c` source boundary therefore begins with separated `c` letters. See
+`audits/scheduled-binary-fixed-width-2026-07-24.md` and
+`audits/m53-width-three-sparse-source-2026-08-30.md`; the cycle proof is in
+`audits/m53-width-three-adjacent-cycles-2026-08-31.md`.
 
 Full mortality requires coding the four payloads and the rank-one separator. The complete
 prefix code
@@ -223,7 +235,7 @@ The unknown cells immediately below this staircase are:
 | `M₃(4)` | three-active-role fixed-boundary PCP / `GPCP(3)`, or a new same-dimension generator compiler | by CHHN, also `M₉(2)` |
 | `M₄(3)` | an undecidable promised two-state overlap queue with pure deletion, or closure of either parabolic bridge language | by CHHN, also `M₈(2)` |
 | `M₅(3)` | a five-state binary same-zero root, a toggle/separator fusion, or fixed-width-three scheduled universality | supersedes `M₆(3)`; `M₁₀(2)` is already known |
-| `M₉(2)` | a changed physical pair, changed-zero-series compiler, or nonlinear reduction; the present pair spans `M₁₀(ℚ)` | improves the two-generator threshold by one |
+| `M₉(2)` | a history-sensitive same-zero compiler, overlapping parser fibres, or a changed source; canonical and trailing-toggle exact prefix routes stop at ten | improves the two-generator threshold by one |
 | `M₂(k≥3)` | a qualitatively different decidability or undecidability argument | settles the dimension-two wall |
 
 The scalar result `Z₆(2)` gives `M₆(3)` after adjoining a separator; that mortality point was
@@ -513,17 +525,27 @@ The first two-`c` endpoint family is also dead. The coefficient theorem
 [`M4-S15`](SALVAGE.md#m4-s15-opposite-double-c-endpoint-exclusion) excludes
 `c(3z+1)b(3x+2)c(3y)` for every nonempty body and all waits. The simultaneous endpoint-defect
 sign theorem [`M4-S16`](SALVAGE.md#m4-s16-phase-zero-left-c-defect-exclusion) also excludes
-`c(3z)c(3x+2)b(3y+1)`. Seven shortest families remain: the four `0|2|1` forms
+`c(3z)c(3x+2)b(3y+1)`. The cylinder theorem
+[`M4-S17`](SALVAGE.md#m4-s17-opposite-right-c-defect-cylinder-exclusion) further excludes
+`b(3z+1)c(3x+2)c(3y)`: its two rational `x` roots occupy one open unit interval on every
+leading-`c` code cylinder. Six shortest families remain: the four `0|2|1` forms
 
 ```text
 b b c,  c b c,  b c c,  c c c,
 ```
 
-and the three `1|2|0` forms `c c b`, `b c c`, and `c c c`, where the positions record endpoint,
-defect, endpoint letters. The immediate `c b c` target now has a checked integral trilinear core.
+and the two `1|2|0` forms `c c b` and `c c c`, where the positions record endpoint, defect,
+endpoint letters. The immediate `c b c` target now has a checked integral trilinear core.
 On the all-`c` code ray `L=M−2`, it factors into two linear wait pencils and neither can vanish
-at natural waits. Its non-all-`c` digit cylinders remain open. The other five survivors all use a
-`c` defect.
+at natural waits. Its non-all-`c` digit cylinders remain open. Of the six survivors, four have a
+`c` defect; the two `b`-defect survivors are `b|b|c` and this `c|b|c` family.
+
+The phase-zero `b|c|c` survivor now carries an exact parity obstruction
+[`M4-S18`](SALVAGE.md#m4-s18-phase-zero-double-c-parity-cylinder). If both the body length and
+its number of `b` letters are odd, the primitive determinant core is `2` modulo four for every
+triple of waits. Hence any zero in this family must lie in the union of two complementary body
+cylinders: even body length or even `b` count. This narrows one survivor but does not remove it
+from the six-family list.
 
 Two original-family nodes survive, and they must not be conflated.
 
@@ -584,14 +606,26 @@ reduces any instance with one cyclic-image homomorphism to rational-subset membe
 `F(Δ)×ℤ`, which is decidable. A noninjective homomorphism from `F₂` to a free group has cyclic
 image, so every hard binary instance must make both homomorphisms injective.
 
+The endomorphism-extendable stratum is also closed.
+[`M4-D05`](SALVAGE.md#m4-d05-endomorphism-extendable-fixed-boundary-decision) proves that if
+`α=Φ∘β` for an ambient free-group endomorphism, then the boundary equation is ordinary
+endomorphism-twisted conjugacy restricted to the rational positive trace of `β`. Its solution set
+is a computable fixed-subgroup coset, so rational intersection decides the restriction. Extension
+existence is decidable by equations in a free group. Swapping the sides gives the symmetric cut.
+Thus a hard instance must be mutually nonextendable; in its minimal instance subgroup neither
+coordinate image can be a retract or a free factor. Equivalently, the surviving problem is
+positive-basis-constrained partial twisted conjugacy for a nonextendable rank-two partial
+endomorphism.
+
 Two free-cancellation nodes survive and should be raced against each other.
 
 1. **Constructive binary compiler.** Compile the four-letter marker-tail equation into positive
    binary fixed-boundary free-group equality, preserving solvability in both directions over the
    complete binary free monoid, forcing an empty-interior mismatch, and making both maps
-   injective. A solution closes `M₄(3)` immediately through `M4-M05`.
-2. **Injective fixed-rank classification.** Decide the remaining injective/injective binary
-   fixed-boundary problem, or prove a structural obstruction to carrying the Carvalho equation.
+   injective and mutually nonextendable. A solution closes `M₄(3)` immediately through `M4-M05`.
+2. **Nonextendable fixed-rank classification.** Decide the remaining mutually nonextendable
+   injective/injective binary fixed-boundary problem, or prove a structural obstruction to
+   carrying the Carvalho equation.
    [`Logan`](references/logan-2022-equalizer-rank-two.md) bounds injective equalizers from `F₂`
    by rank two but gives no general triviality algorithm;
    [`Ciobanu--Logan`](references/ciobanu-logan-2021-free-group-pcp-variations.md) use hypotheses
@@ -694,7 +728,12 @@ Three live routes remain.
    compression or delimiter fusion. Exact deletion-width-three source substitution remains a
    separate open problem: the theorem needed by `MM-C03` must compute the variable rule body
    and its coupled suffix input from the same source, not merely supply a fixed width-three
-   machine with an arbitrary input.
+   machine with an arbitrary input. [`MM-D01`](SALVAGE.md#mm-d01-sparse-width-three-source-decision)
+   excludes every zero- or one-`c` source image, and
+   [`MM-D02`](SALVAGE.md#mm-d02-adjacent-two-c-source-decision) decides every adjacent-two-`c`
+   coupled image. The next genuine source boundary is two separated `c` letters or at least
+   three `c` letters. [`MM-S23`](SALVAGE.md#mm-s23-adjacent-two-c-periodic-pair) remains the
+   unrestricted-queue warning that a second `c` already permits balanced reproduction.
 
 The decimal setter is now the sharpest constructive route. The ternary swap remains useful
 because its suffix and divisor-ray theory is mature; the decimal instance has stronger real
@@ -804,8 +843,64 @@ forced last digits form a lawful period-two cycle. The apparent `m=2` escape is 
 [`MM-S18`](SALVAGE.md#mm-s18-length-two-carrier-extinction) proves that two equal-depth
 `2`-adic summands cancel beyond depth one, contradicting the shell forced by a following
 multi-role pole. Every surviving non-singleton transition therefore has `m≥3`, and the unit-digit
-law applies without an exceptional branch. The remaining invariant must recognize a higher
-suffix language of these generalized residuals; singleton targets remain separate.
+law applies without an exceptional branch. At the initial raw head only,
+[`MM-S19`](SALVAGE.md#mm-s19-all-deletion-raw-head-extinction) now removes every all-`D_c`
+block of upper length at least three by an exact mixed-prime suffix split. Combined with
+`MM-S18`, no all-`D_c` block remains at any admissible non-singleton length. The live initial
+grammar consists of rule-bearing phase words and all-erasure words containing `D_b`.
+[`MM-S20`](SALVAGE.md#mm-s20-singleton-carrier-classification)
+now resolves the separate singleton seam at the carrier level. A singleton-current block cannot
+reach any later multi-role or singleton pole. A multi-role block can reach a singleton pole only
+at upper length `m≥β+3`, and this bound is sharp for unrestricted decimal-unit rational carriers:
+an explicit carrier exists at every such length. A fixed bounded suffix quotient cannot supply a
+global descent on the surviving generalized multi-shell residuals:
+[`MM-S21`](SALVAGE.md#mm-s21-bounded-decimal-suffix-cycles) proves that every
+emitted multi-role block has a compatible projective carrier self-loop modulo `10^k` for every
+fixed `k`. These are not exact rational cycles and need not be reachable from the distinguished
+entry. The master residual is therefore encoded reachability of the long multi-to-singleton
+carrier together with intersection of the encoded-entry orbit and an unbounded inverse-limit
+suffix language. Local valuations, the abstract two-unit carrier, and acyclicity of a finite
+congruence graph cannot close these questions alone.
+
+[`MM-S22`](SALVAGE.md#mm-s22-gap-factor-quotient-gate) now cuts the long singleton branch with
+the denominator ancestry absent from the unrestricted abstraction. Set `q=2·10^β−7` and
+`G=9g`. For a primitive integral carrier with `D=EN₋` and `gcd(q,N)=1`, a singleton pole forces
+both `V₂=qW` and `P₂+gW≡μ10^m (mod q)`. The fixed lift `G` and singleton lower digit `7` are
+automatically coprime to `q`. Thus the gap-clean branch is an exact compiler-code congruence
+problem; the remaining escape is either a numerator sharing a proper factor with the generally
+composite `q` or an emitted code passing both gates. This does not settle `M₅(3)`.
+
+[`MM-S24`](SALVAGE.md#mm-s24-factorwise-gap-ancestry) resolves that composite-factor seam. For
+every `r∣q`, a recursive multi-shell step satisfies `r∣N' ↔ r∣NV`; prime support can first enter
+the carrier only through a lower code and is then permanent. The initial two-`c` raw numerator
+is not divisible by the full gap. More importantly, writing `q=rs`, every factor with
+`gcd(r,N)=1` retains a localized singleton gate: `V₂=rW` and
+`s(P₂−μ10^m)+gW≡0 (mod r)`. The residual is therefore a prime-support reachability problem,
+not a binary clean/contaminated branch. The gates themselves are not sufficient: a
+computationally certified physical all-`D_c` word at the compiler width `β=10` passes both
+full-gap congruences, so encoded suffix semantics beyond these modular conditions remain
+necessary.
+
+[`MM-S26`](SALVAGE.md#mm-s26-exact-raw-head-prime-support) removes the initial support opacity.
+If the unit two-`c` raw head `H` has terminal run length `s`, then every `r∣q` is automatically
+coprime to nine and
+
+```text
+r∣H  ↔  r∣2·10^s+1743,       1≤s≤β−1.
+```
+
+Thus the initial set of contaminated gap primes is exactly an exponential divisibility set,
+not an arbitrary compiler-code support. The remaining task is to classify that set and the
+support installed later by reachable lower words; this theorem does not close `M₅(3)`.
+
+[`MM-O20`](SALVAGE.md#mm-o20-decimal-first-cylinder-collision) gives the unbounded suffix
+language an exact metric: a backward word gains the sum of its shifts in both decimal valuations,
+and one block maps the unit domain onto one exact suffix cylinder. But first-cylinder decoding is
+not injective. The lawful blocks `R_bR_cD_b` and `D_bR_cD_b` have identical depth-`2β+3`
+cylinders for every compiler-emitted body; their long common lower suffix hides the first phase.
+The live cut is therefore the intersection of the encoded-entry orbit with complete composed
+inverse branches, or a proved reachability-sound quotient of those branches. Neither a fixed
+congruence graph nor the first unbounded cylinder retains enough information.
 
 The immediate ternary question is which other positive valuation-one discrepancies survive its
 suffix sieve without already certifying source halting.
@@ -843,7 +938,28 @@ exact positional four-role cube admits a checked false terminal witness on the n
 Thus neither another exact prefix layout nor an exact three-phase block factorization remains
 live. The direct frontier is a genuinely changed zero series, a nonfactorial state-dependent
 decoder, another invariant quotient not induced by the generators' common image, or a nonlinear
-reduction. `GPCP(3)` remains the independent stronger ancestor.
+reduction. A singular same-zero/history compressor borrowed from the `M₃(4)` lane is now governed
+by [`G3-O27`](SALVAGE.md#g3-o27-projective-toggle-line-atlas): if both data stages are singular
+and the absorbed trailing toggle is projectively involutive, its projective history remains in a
+six-carrier line atlas. Such a nine-state escape must therefore solve the surviving nonexpanding
+point-reachability problem in a finite rational `P¹` atlas, potentially jointly with `M₂(3)`,
+retain non-scalar toggle powers, or use a full-rank data stage. `GPCP(3)` remains the independent
+stronger ancestor.
+
+[`MM-O19`](SALVAGE.md#mm-o19-trailing-toggle-exact-prefix-tax) tests one changed-source seam.
+Because the paired toggle satisfies `T²=I`, moving one toggle into the terminal column preserves
+existence of a nonempty zero for every source body and every control word. The shifted separator
+then shares the data generators' three-dimensional image plane. This reaches an exact
+variable-fibre comb with profile `4+3+3=10`, but the same rank profile is a lower bound for every
+direct-sum exact four-role prefix layout: the rank-four toggle taxes its root path and a
+rank-three deep data leaf taxes both remaining fibres. Balanced layouts cost at least eleven.
+
+This closes code reassignment, variable prefix-fibre dimensions, and exact boundary-orbit
+factorization for the paired four-state source. It does not touch overlapping fibres or
+cross-path sums. The sharp next experiment is therefore a singular, history-sensitive compiler
+which preserves only existential zero reachability; exact internal-role products are already too
+rigid. See
+[`audits/m92-trailing-toggle-prefix-tax-2026-08-30.md`](audits/m92-trailing-toggle-prefix-tax-2026-08-30.md).
 
 ### 4. Three-letter correspondence and direct mortality: `M₃(4)`
 
@@ -1070,8 +1186,40 @@ geometry itself is no obstruction. A variable-radix code with four distinct resi
 by fixed integral rank-two data controls with kernels `ℚe₁` and `ℚe₂`. Lean checks the exact
 state recurrence on every raw control word and an exact paired recognizer for every minimum body.
 Its terminal row selects one computable history code, so it does not handle arbitrary bodies with
-several or infinitely many terminal histories. The live transverse problem is an infinite
-terminal section or genuinely two-dimensional terminal dynamics, not exceptional fibres.
+several or infinitely many terminal histories.
+
+[`G3-O26`](SALVAGE.md#g3-o26-transverse-terminal-row-obstruction) closes the proposed row
+extension of that orbit. The two `bcbc` terminal histories require zeros at both phases of two
+distinct codes, forcing every exact row to vanish; the checked near-fork is then a false zero.
+This holds even for an arbitrary source-dependent row family. The live transverse problem is
+therefore a different orbit, not more parameters in the terminal row.
+
+[`G3-O27`](SALVAGE.md#g3-o27-projective-toggle-line-atlas) sharply restricts that escape. For
+arbitrary source-dependent controls and column, singular data maps together with
+`T²=sI`, `s≠0`, confine the complete raw orbit to two boundary subspaces of vector dimension at
+most one and four data-image subspaces of vector dimension at most two. Every terminal row cuts
+each carrier in the whole carrier or a subspace of vector dimension at most one. Hence this
+branch has only a finite projective-line atlas, not genuinely two-dimensional projective
+dynamics. `G3-O04` decides it only when those charts share its finite-mode expanding affine
+normalization. The exact internal survivor is point reachability in a finite rational `P¹` atlas,
+potentially the joint `M₂(3)` core. A nonprojectively-involutive toggle and a full-rank data map
+remain separate structural escapes.
+
+[`G3-O29`](SALVAGE.md#g3-o29-one-chart-projective-hard-core) proves that “potentially” is already
+an exact hardness statement. Every two-generator rational projective-incidence instance embeds
+in one common invariant plane by `A↦diag(A,0)`, with identity toggle and row/column extended by
+zero. Deleting raw toggles preserves the coefficient word-for-word, and the toggle-free embedding
+is a section. Thus the one-chart atlas subfamily is instancewise equivalent to the `D2-S01` core;
+a general atlas decision algorithm would decide `M₂(3)`. This is not an undecidability result,
+and arbitrary multi-chart instances are not reduced back to one `M₂(3)` instance.
+
+[`G3-O30`](SALVAGE.md#g3-o30-nonprojective-infinite-carrier-orbit) proves that the other
+structural escape is real. The diagonal toggle `diag(1,2,3)` and an exact rank-two data map with
+source-parameter image normal `(1,1,s)` produce the literal raw-prefix carriers
+`im(TⁿD_s)`. Their normals are `(6ⁿ,3ⁿ,s·2ⁿ)`, and `(1,−2ⁿ,0)` separates the `n`th plane from
+every later plane. Thus the carrier orbit is injectively infinite for every `s∈ℚ`. Singularity
+and rational diagonalizability do not recover a finite atlas once the toggle ceases to be
+projectively involutive. No terminal row or paired recognizer follows from the counterexample.
 
 [`G3-M02`](SALVAGE.md#g3-m02-square-root-punctuation-fracture) supplied a complete direct-mortality
 grammar. The source-uniform rational rank-two matrix `S` satisfies
@@ -1209,6 +1357,15 @@ so the modular hit uses an actual positive `{A,B}` word. Hence neither one modul
 nonmembership certificate, and the all-congruence membership criterion is false. This does not
 exclude a global algorithm, prove local density, or settle the Borel-coset intersection.
 
+[`G3-O28`](SALVAGE.md#g3-o28-ambient-profinite-blindness-of-the-unique-coset) strengthens this at
+the exact group-cover boundary. For a second rational gap target, the complete target matrix lies
+in the shear group's congruence closure modulo every integer prime to nineteen. After conjugating
+the source to infinity, the instance lies in `Γ₀(3;ℤ[1/19])`. Serre's exact congruence-subgroup
+theorem upgrades the modular identities to closure in every finite quotient of that ambient
+group. The actual Borel coset remains empty and the source stabilizer remains trivial. Thus even
+noncongruence finite ambient quotients cannot certify every promised no-instance. Syntax, height,
+Archimedean geometry, and infinite normal forms remain available.
+
 The ordinary mortality lift is likewise no longer part of the paired obstruction. For arbitrary
 controls `H_a`, column `γ`, and row `λ` over a field, adjoining `γλ` gives mortality exactly when some
 `λH_yγ` vanishes. A zero product without the separator is already a scalar-zero witness; after
@@ -1310,31 +1467,35 @@ or neutral word across the return, use an empty consume, or split recurrent outp
 | Lane | Available leverage | Decisive obstruction or obligation |
 | --- | --- | --- |
 | Common-kernel shuttle | The exact `bcbb` compiler moves its common data kernel out through the toggle and recovers it at the next data action | Uniformize this non-invariant shuttle in `(β,body)`; every toggle-invariant guard factors through the two-dimensional quotient |
-| Transverse-kernel terminal dynamics | Fixed integral transverse controls encode every history and exactly recognize all minimum bodies | Replace the singleton target row by an infinite, source-computable terminal section for unrestricted bodies |
+| Transverse-kernel terminal dynamics | `G3-O26` kills row retuning; `G3-O27` gives the involutive six-carrier atlas; `G3-O29` embeds `M₂(3)` there; `G3-O30` gives an injectively infinite nonprojective plane orbit | Exploit non-scalar toggle depth with one uniform terminal row, solve the joint dimension-two node, or use a full-rank data map |
 | Positive projective transition lower bound | Same-zero dimension three is point-line incidence in `P²`, and actual one-sided shifts retain finite rank/kernel/image data | Derive a uniform nonstationary or noncommuting shift incompatibility from an unbounded terminal section; static support rank, formal inverse completion, fixed equal-length return flowers, and unary consecutive-repeat escape are forbidden |
 | Global word-residual recoding | Longer noncommutative atoms can retain order while discarding the four additive role channels | Escape `G3-D05`: fixed-priority affine counters and all one-way reset/transfer/fanout cascades are decidable |
 | Head-separated three-schema source | `G3-C04` discharges every arbitrary-trace forcing obligation locally; `G3-O24` isolates the directed stable-cone alternative | Preserve an undecidable mixed or neutral word across returns, or realize zero-sensitive S5 GLB decoding after the `G3-O25` separator-rank fork; complete pure forks are decidable by `G3-D07` |
-| Carvalho projective group-orbit separator | `G3-M03` gives the exact saturated three-positive cover; `G3-O23` collapses every singular carrier to invertible dimension two; `D2-D02/D08` decide all elementary group actions | Universalize or decide non-elementary `UCB₂(S)` through global word structure; `R32-O22` kills even positive finite-level separation. Otherwise construct the invertible three-state line/plane orbit left by `G3-O22` |
+| Carvalho projective group-orbit separator | `G3-M03` gives the exact saturated three-positive cover; `G3-O23` collapses every singular carrier to invertible dimension two; `D2-D02/D08` decide all elementary group actions | Universalize or decide non-elementary `UCB₂(S)` through global word structure; `G3-O28` kills every finite quotient of one natural `S`-arithmetic ambient group. Otherwise construct the invertible three-state line/plane orbit left by `G3-O22` |
 
 These six lanes form three trunks. The first three race a direct paired construction against its
 one-sided projective lower bound. The next two seek genuine `GPCP(3)` through either global
 recoding or a native source. The last is now a projective group-orbit attack shared with the
 dimension-two campaign: `G3-O21` closes its algebraic semantic carrier, `G3-O23` removes
-singular spelling memory, `D2-D02/D08` remove the elementary group branch, and `R32-O22`
-removes even positive congruence separation.
+singular spelling memory, `D2-D02/D08` remove the elementary group branch, and `G3-O28`
+removes all finite ambient-quotient separation on one promised no-instance.
 
 #### Raceable leaves
 
-After `G3-O21`–`G3-O25`, `R32-O22`, and `G3-D07` close their respective carrier, absorption,
-and pure-source lanes, the net tree has six independent raceable leaves:
+After `G3-O21`–`G3-O27`, `R32-O22`, and `G3-D07` close their respective carrier, absorption,
+pure-source, fixed-transverse-orbit, and finite-line-atlas lanes, the net tree has six independent
+raceable leaves:
 
 1. **Common-kernel shuttle constructor.** Give one computable three-state paired recognizer in
    which the toggle moves a freshly minted common-kernel guard back into visible quotient data.
    Prove its state formula and scalar-zero equivalence uniformly in `(β,body)` on the complete
    free control monoid. Toggle-invariant refresh is closed.
-2. **Transverse-kernel terminal constructor.** Extend the checked mixed-radix transverse orbit
-   from one target code to a source-computable infinite terminal section for unrestricted bodies.
-   Pure kernel geometry, exceptional fibres, and minimum-body examples are closed.
+2. **Transverse line-atlas escape.** Build a source-computable arbitrary-body recognizer using
+   the `M₂(3)` projective-incidence core, the explicit `G3-O30` infinite non-scalar toggle orbit,
+   or a full-rank data map.
+   Pure kernel geometry, exceptional fibres, minimum-body examples, terminal-row retuning, and
+   genuinely two-dimensional dynamics under singular data plus projective involution are closed;
+   general one-chart incidence cannot be declared decidable without resolving `M₂(3)`.
 3. **Positive projective transition obstruction.** Derive from a source-unbounded terminal
    section a finite shift incompatibility which no three-dimensional rational same-zero
    representation can realize for any combination of generator ranks and kernels. It must use
@@ -1427,8 +1588,16 @@ Rank-two data maps must now branch at the outset. A common-kernel construction m
 hidden direction out through a non-invariant toggle; if the kernel is toggle-invariant, the next
 data action erases it and only the two-dimensional quotient persists. A transverse-kernel
 construction already realizes the bilinear fibre intersection and every minimum-body history;
-it must now realize an unrestricted, generally infinite terminal section. A lower-bound attack
-must exclude both positive
+`G3-O26` proves that its fixed two-line orbit cannot be extended by any source-dependent row. It
+must now change the orbit itself. `G3-O27` proves that singular data plus a projectively
+involutive toggle still yields only six rank-at-most-two linear carriers, with whole-carrier or
+rank-at-most-one terminal sections. Its exact internal survivor is point reachability in a finite
+rational `P¹` atlas. `G3-O29` embeds the complete `M₂(3)` incidence core already in one common
+identity-toggle chart. `G3-O30` shows that non-scalar toggle powers genuinely generate infinitely
+many exact rank-two carriers even for a rational diagonal toggle; the missing step is one
+source-uniform terminal section and complete arbitrary-word converse. A full-rank data map remains
+the other escape.
+A lower-bound attack must exclude both positive
 architectures through actual transition data. Backward cancellation, inverse cofinality, and
 static incidence cannot do so. Do not spend another attack on separator placement, fixed anchors,
 or control singularity after recognition; `MM-C01` closes them unconditionally.
@@ -1506,7 +1675,10 @@ word language remains explicit.
 free-orbit case has no congruence-separation theorem: one rational target outside the orbit is in
 its orbit modulo every positive integer, now by an actual positive word at each modulus. Thus the shared artery must use rational/global word
 structure or a noncongruence invariant. The example proves no `p`-adic density statement and no
-decision or hardness result.
+decision or hardness result. [`G3-O28`](SALVAGE.md#g3-o28-ambient-profinite-blindness-of-the-unique-coset)
+now replaces “congruence” by “every finite quotient of `Γ₀(3;ℤ[1/19])`” and replaces ray agreement
+by equality of the entire target matrix. The shared artery must therefore use syntax, height,
+Archimedean structure, or another infinite invariant; a finite ambient-group invariant is dead.
 
 Work on projective incidence should therefore be treated as a joint `M₃(2)`/`M₂(3)` campaign.
 A `GPI₂` algorithm decides all of `M₂(3)` and the rank-`(2,2)` artery of `M₃(2)`; a universal
@@ -1677,6 +1849,30 @@ false word proves that this complete scalar classification cannot by itself cont
 among nontriangular letters. See
 [`R32-S43`](SALVAGE.md#r32-s43-cubic-defect-norm-and-thue-throat) and
 [`m32-cubic-defect-thue-2026-08-30.md`](audits/m32-cubic-defect-thue-2026-08-30.md).
+
+The complete matrix residue is now equally explicit. One defect window determines every return
+entry and its determinant, and every nontriangular return acts as one recurrence-digit negative
+continued-fraction letter `z↦xₙ−tₙ/(z+yₙ)`. Cancellation is therefore an exact generalized
+continuant language. It is not locally guarded: `M₁₅M₈M₂₆` and `M₁₂M₈M₃₃` are upper
+triangular even though every factor and both adjacent pairs in each word are nontriangular.
+These are lawful derived affine macro letters, but they neither classify the triangular language
+nor reach the singular endpoint. The remaining fork is descent or decision for the unbounded
+recurrence-digit continuant, or a sound compiler that uses its derived macros while controlling
+every other word. See [`R32-O23`](SALVAGE.md#r32-o23-cubic-continuant-fracture) and
+[`m32-cubic-continuant-fracture-2026-08-31.md`](audits/m32-cubic-continuant-fracture-2026-08-31.md).
+
+Finite triangular-macro completion is now excluded. The exact projective actions contain a
+four-ray cycle with entry and exit, pumping
+`[19,15][7,8,21,15]ᵏ[7,8,2]`. Every such word is upper triangular, its length is `5+4k`, and
+every nonempty proper suffix is nontriangular. These are therefore concatenation-prime
+upper-triangular words of unbounded length. No bounded-length dictionary of triangular macros,
+and no finite such dictionary whose accepted words factor into its members, can generate the
+whole triangular language. This does not establish nonregularity or exclude finite-state
+recognition without accepted-factor boundaries. The live fork is now a global descent or
+finite-nucleus theorem compatible with the recurrent four-ray component, or a recognizer that
+does not factor accepted words into triangular macros. See
+[`R32-O24`](SALVAGE.md#r32-o24-unbounded-prime-continuants) and
+[`m32-unbounded-prime-continuants-2026-08-31.md`](audits/m32-unbounded-prime-continuants-2026-08-31.md).
 
 ### ReturnSquare laboratory
 
@@ -2339,7 +2535,7 @@ all-legal block inequality for the carried generalized continuant. See
 | --- | --- | --- |
 | Split-guard decision | Produce an explicit coefficient recurrence-or-escape bound on a nonterminal class broad enough to contain every first-hit prefix | Terminal-only amortization is goal-equivalent; every residual packet is doubly order-broken and one wait can service nested packets |
 | Split-guard counter | Solve the rational reset incidence for an aperiodic p-adic Jacobi schedule with sparse microscopic doubly order-broken packets | Finite handoff alphabets and fixed rational charts are periodic or impossible; the history-dependent handoff height must be unbounded |
-| Irreducible cubic reflection orbit | Decide all-positive-wait endpoint reachability for the fixed non-pure order-three recurrence | Actual endpoints support free selected dynamics, but an explicit unselected seven-wait word defeats perfect selected ping-pong |
+| Irreducible cubic reflection orbit | Decide the recurrence-digit generalized-continuant endpoint language, or compile through its derived affine macros with an all-word converse | Ternary products can become triangular although every factor and adjacent pair is nontriangular; the endpoint witness still requires an uncontrolled seven-wait word |
 | Generic projective incidence | Decide rational-subset membership in the rank-two affine cusp, or encode universality through its carry dynamics | Fixed-subset shortcut Collatz already occupies `ℤ[1/6]⋊ℤ²`; the Tits split, direct stores, and one-dilation algorithms miss it |
 
 The split-spectrum hot path is an explicit reset-anchored recurrence-or-escape theorem on a
@@ -2409,6 +2605,13 @@ problem and integer mortality are computably interreducible.
 
 The reduction has only one incidence instance. Multiple endpoint pairs arise for larger
 families with several singular generators, not in the hard three-generator case.
+
+[`G3-O29`](SALVAGE.md#g3-o29-one-chart-projective-hard-core) identifies this exact node inside
+the `M₃(4)` transverse campaign. The lifts `A↦diag(A,0)` and `B↦diag(B,0)`, together with identity
+toggle and zero-extended endpoints, preserve every scalar coefficient after toggle erasure. For
+invertible `A,B`, both lifts have rank exactly two and the same invariant image plane. Hence even
+the one-chart projectively involutive line atlas is `M₂(3)`-hard. Multi-chart coherence may make
+the general atlas richer, but it cannot make the full class easier than this subfamily.
 
 ### Established and provisional decidable strata
 
@@ -2505,7 +2708,39 @@ are dense in both admissible `5`-adic cylinders. Every admissible source and uni
 finite `5`-adic precision are joined by one wait residue. Recursively lifting those residues
 gives every admissible rational source aperiodic all-unit addresses with arbitrarily large waits.
 Yet the single-wait graph on period-one nodes has only its loops and the exceptional edge
-`T₂(x₀)=x₁`. Higher depth is not free: a published length-thirteen relation yields two distinct
+`T₂(x₀)=x₁`. The varying-schedule valuation topology inside negative `3`-adic depth is now exact.
+For rational `3`-unit carrier `c`, the state `u=c/3^d` obeys
+
+```text
+d'=d+m−1,      c'=(2^m c+3^d')/5.
+```
+
+The only exit is `d=1,m=0`; a target at depth `d'` has a complete, pairwise-distinct fan of
+`d'+1` debt predecessors. A `5`-unit target carrier makes the whole fan shell-legal. Arbitrary
+uninterrupted schedules are Łukasiewicz bridges with
+`d_end+length=d_start+sum(waits)`. At fixed endpoint depths and length their affine slope is
+fixed, so a point collision is already a global affine-map relation. The remaining
+source-specific collision problem is cross-length, together with chamber exits and reentries.
+That cross-length seam now has an exact normal form: two nonempty unequal-length schedules have
+one collision source, and it is automatically a `5`-adic unit because both slope and intercept
+have valuation `−length`. Thus source-shell exclusion supplies no length bound. The common target
+is a unit exactly when the affine determinant `a_left b_right−a_right b_left` has valuation
+`−max(left.length,right.length)`; this exact shorter-length cancellation remains live. Exact
+adjacent-length bridges sharpen it: common debt endpoints force slope ratio `2/5`, and with
+`C_w=5^|w|b_w`, target acceptance is equivalent to
+`v₅(C_long−2C_short)=|short|`. The suffix recurrence for `C_w` is explicit but still unbounded.
+The debt-safe collision `[4]` versus `[0,5]` at `2/9↦55/243` overcancels and rejects the target,
+so source unitality alone does not imply acceptance. Exact unit-target examples realize both
+possible `3`-adic carrier orientations, killing that one-bit invariant as a global separator.
+Conversely, fixed-source equality itself has an exact infinite saturation family: for every
+`m≥0`, `[1,m+2]` and `[3,1,m]` are adjacent debt bridges from depth one to `m+2` and collide from
+`43/24`; every `m=10k` member is accepted. Their targets are pairwise distinct, so this kills a
+fixed-source wait bound but cannot pump one target and does not settle the fixed-target
+quantifier. Every target nevertheless lies on the complementary endpoint pole
+`v₂(1−2u)=0`. Within this ray the fixed-target query is decidable by testing the sole candidate
+`m=max(0,v₂((45y−9)/11))`; the unresolved quantifier is intersection of the full reachable set,
+not this family. This is [`D2-O03`](SALVAGE.md#d2-o03-fixed-source-adjacent-saturation).
+Higher depth is not free: a published length-thirteen relation yields two distinct
 schedules with the same affine map and a common Lean-checked guarded periodic source. This is an
 exact rewrite seed. Lean also proves that it preserves all intermediate shell guards in every
 word context. Lean now factors every boundary-shifted schedule equality as one raw `D,T` context
@@ -2571,6 +2806,10 @@ artery; see
 | Assume projective height descends | determinant-growing words may act projectively as the identity |
 | Separate the Collatz cusp by finite ambient quotients | every finite image identifies the positive monoid with the whole generated group |
 | Assume the mixed-prime schedule action is free | a published length-thirteen relation is a checked guarded collision |
+| Bound the mixed-prime reverse fan uniformly | a target at negative `3`-depth `d` has exactly `d+1` distinct shell-legal predecessors when its rational carrier is a `3`- and `5`-unit |
+| Prune cross-length shell collisions at their source | every two nonempty unequal-length shell maps have a unique collision source and it is automatically a `5`-adic unit; only fixed-source equality and target acceptance remain discriminating |
+| Infer target acceptance from the automatic cross-length source unit | the adjacent debt-safe bridges `[4]` and `[0,5]` collide from the `5`-unit source `2/9`, but their target `55/243` has `5`-adic valuation one |
+| Bound accepted debt-bridge waits from one fixed source | for every `k≥0`, `[1,10k+2]` and `[3,1,10k]` are accepted adjacent bridges from `43/24`, with terminal waits tending to infinity |
 | Invoke a general module `S`-unit algorithm | the arbitrary three-prime case leads to open linear-exponential systems, and forgetting the monotone path destroys useful structure |
 
 These are exclusion tests for future proposals. Any attack relying on one of them must identify
@@ -2699,10 +2938,10 @@ elements.
 
 Run backward saturation from the target using cones, valuation vectors, residue classes, and
 affine lattices. A successful well-structured formulation must decide exact reachability, not
-only coverability. In parallel, test whether no-instances are separated by a finite congruence
-quotient. Congruence separation would provide enumerable finite certificates for “no.”
-
-Persistent local-global failures modulo every tested modulus would falsify the profinite route.
+only coverability. `G3-O28` closes finite ambient-group separation for `UCB₂(S)`: one promised
+empty coset survives every finite quotient of its natural `S`-arithmetic ambient group. Finite
+residues may remain components of an infinite annotated state, but cannot be the complete
+negative certificate.
 
 #### 7. Valuation universality
 
@@ -2725,7 +2964,8 @@ projective action.
 - Nonelementary complexity with a finite-state core favors building automata, `S`-unit
   equations, or Presburger saturation.
 - Semilinear no-certificates favor affine modules or verification.
-- Finite-modulus no-certificates favor profinite separation.
+- Finite-modulus no-certificates are insufficient on both the positive orbit and unique-coset
+  arteries by `R32-O22/G3-O28`.
 - A computable witness bound favors height, Diophantine, or trace descent.
 - A virtually-solvable/non-elementary dichotomy favors arithmetic dynamics.
 - An undecidability construction with several prime determinants favors valuation storage.
@@ -2774,24 +3014,30 @@ universal computation.
    and bridges without conflating their scope with solvability preservation.
 3. Prove or refute the setter candidate's projective avoidance property, construct a
    five-state same-zero binary root, or find a constant-state scheduled delimiter fusion.
-   Treat fixed-width-three universality as a separate source theorem. Reopen `MM-C04` only for
-   a physically different six-state family.
+   Treat fixed-width-three universality as a separate source theorem and enforce the
+   [`MM-D01`](SALVAGE.md#mm-d01-sparse-width-three-source-decision) one-`c` closure and
+   [`MM-D02`](SALVAGE.md#mm-d02-adjacent-two-c-source-decision) adjacent-two-`c` closure on
+   candidate source families. Reopen `MM-C04` only for a physically different six-state family.
 4. Treat `MM-O08` and `MM-O11` as formally closed exact-family obstructions. Search for
    `M₉(2)` only through a changed physical pair, changed nonzero behavior, or a nonlinear
    compiler.
 5. Run the `M₃(4)` program on distinct tracks: history-sensitive paired point-line synthesis,
    projective group-orbit separation for the exponent-one singleton, global word-residual
    recoding, and native three-schema rewriting. `G3-O23` has absorbed the singular saturated
-   Carvalho branch into dimension two, and `R32-O22` has killed congruence separation there; do
-   not revive singular spelling memory, conflate group inverses with positive `M₂(3)` controls,
-   or retry residue-orbit nonmembership as a complete certificate.
+   Carvalho branch into dimension two, and `G3-O28` has killed every finite quotient of one
+   natural `S`-arithmetic ambient group there; do not revive singular spelling memory, conflate
+   group inverses with positive `M₂(3)` controls, or retry finite ambient-group separation as a
+   complete certificate.
 6. Formalize `D2-S02` and `D2-D05`–`D2-D07`, then attack fixed-source exact prefix and
    accepting-exit reachability in the guarded `5`-adic schedule with a synchronized `2`/`3`/`5`
    representation. Use the checked `D2-S03` walls to isolate mixed-sign debt transfer and
    equality-wall cancellation; a chamber argument that never handles those transitions is
-   incomplete. In parallel, seek a parametric affine-kernel description beyond the checked
-   length-30 basis and run normalized collision/exit-fibre census. Do not reopen unlabeled
-   residue-only finite nuclei.
+   incomplete. Inside uninterrupted negative `3`-depth, restrict
+   source-specific point-collision search to cross-length bridges: fixed-length collisions are
+   already global affine relations by `D2-O02`. Treat chamber exit and reentry as separate seams.
+   In parallel, seek a parametric affine-kernel description beyond the checked length-30 basis
+   and run normalized collision/exit-fibre census.
+   Do not reopen unlabeled residue-only finite nuclei or uniformly bounded reverse fanout.
    Keep the non-elementary lanes independent: adelic cone types, parabolic rational subsets,
    trace/height descent, finite-obstruction saturation, and valuation universality.
 7. Synthesize the returned attacks by the discriminating signals above; do not average
