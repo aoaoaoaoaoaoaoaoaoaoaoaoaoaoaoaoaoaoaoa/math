@@ -162,6 +162,9 @@ open MatrixMortality
 #print axioms TransverseHistory.coefficient_eq
 #print axioms TransverseHistory.coefficient_zero_iff_decode_eq
 #print axioms TransverseHistory.minimalBody_zero_iff_paired_zero
+#print axioms TransverseHistory.rowCoefficient_eq
+#print axioms TransverseHistory.no_bcbc_terminal_row_section
+#print axioms TransverseHistory.no_sourceUniform_terminal_row_section
 #print axioms TransverseHistory.data_mulVec_eq_zero_iff
 #print axioms BranchingHistory.bcbcNull_append
 #print axioms BranchingHistory.bcbcForkRoles_injective

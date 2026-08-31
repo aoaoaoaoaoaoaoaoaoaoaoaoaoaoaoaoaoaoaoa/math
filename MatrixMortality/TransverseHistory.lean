@@ -1,11 +1,13 @@
-import MatrixMortality.HistoryFracture
+import MatrixMortality.BranchingHistory
 
 /-!
 # Transverse-kernel history coding
 
 A mixed-radix code assigns disjoint residues to the four paired roles. Two rank-two data
 controls with distinct kernels update that code on every raw paired-control word. On minimum
-Neary bodies, one terminal row therefore recognizes exactly the paired zero language.
+Neary bodies, one terminal row therefore recognizes exactly the paired zero language. The two
+branching `bcbc` terminal histories prove that no source-dependent row can extend this fixed
+orbit to all admissible bodies.
 -/
 
 namespace MatrixMortality
@@ -208,6 +210,131 @@ theorem minimalBody_zero_iff_paired_zero (β : Nat) (body : List TagLetter)
   · intro terminalMatch
     exact minimalBody_terminal_word_unique β body (by omega) bodyLength
       (decodePairedWord word) terminalMatch
+
+/-! ## Terminal-row obstruction -/
+
+/-- Scalar series obtained by retaining the fixed transverse controls and initial column while
+allowing an arbitrary terminal row. -/
+def rowCoefficient (terminalRow : Fin 3 → ℚ) (word : List PairedControl) : ℚ :=
+  linearCoefficient (generator ℚ) terminalRow (column ℚ) word
+
+theorem rowCoefficient_eq (terminalRow : Fin 3 → ℚ) (word : List PairedControl) :
+    rowCoefficient terminalRow word =
+      terminalRow ⬝ᵥ state ℚ (suffixDecode word) := by
+  rw [rowCoefficient, linearCoefficient, product_mulVec_column]
+
+private theorem terminal_phase_pair
+    (β : Nat) (body : List TagLetter) (terminalRow : Fin 3 → ℚ)
+    (sameZero : ∀ word,
+      rowCoefficient terminalRow word = 0 ↔ pairedCoefficient ℚ β body word = 0)
+    (target : List NearyTile)
+    (terminalMatch :
+      spell (nearyUpper β) target ++ nearyMarker β = spell (nearyLower β body) target) :
+    terminalRow ⬝ᵥ state ℚ (.rule, target) = 0 ∧
+      terminalRow ⬝ᵥ state ℚ (.erase, target) = 0 := by
+  obtain ⟨control, decoded⟩ := decodePairedWord_surjective target
+  have toggledDecoded : decodePairedWord (.toggle :: control) = target := by
+    simpa [decodePairedWord, suffixDecode] using decoded
+  have controlPairedZero : pairedCoefficient ℚ β body control = 0 := by
+    rw [pairedCoefficient_eq_sideCoefficient, decoded]
+    exact (sideCoefficient_eq_zero_iff_terminal_match_rat β body target).mpr terminalMatch
+  have toggledPairedZero : pairedCoefficient ℚ β body (.toggle :: control) = 0 := by
+    rw [pairedCoefficient_eq_sideCoefficient, toggledDecoded]
+    exact (sideCoefficient_eq_zero_iff_terminal_match_rat β body target).mpr terminalMatch
+  have controlZero := (sameZero control).mpr controlPairedZero
+  have toggledZero := (sameZero (.toggle :: control)).mpr toggledPairedZero
+  rw [rowCoefficient_eq] at controlZero toggledZero
+  cases decodedState : suffixDecode control with
+  | mk phase decodedWord =>
+      have decodedWordEquality : decodedWord = target := by
+        simpa [decodePairedWord, decodedState] using decoded
+      subst decodedWord
+      cases phase with
+      | rule =>
+          exact ⟨by simpa [decodedState] using controlZero, by
+            simpa [suffixDecode, decodedState, PairPhase.flip] using toggledZero⟩
+      | erase =>
+          exact ⟨by
+            simpa [suffixDecode, decodedState, PairPhase.flip] using toggledZero,
+            by simpa [decodedState] using controlZero⟩
+
+private theorem row_eq_zero_of_phase_pairs
+    (terminalRow : Fin 3 → ℚ) (first second : List NearyTile)
+    (codesDifferent : code first ≠ code second)
+    (firstRule : terminalRow ⬝ᵥ state ℚ (.rule, first) = 0)
+    (firstErase : terminalRow ⬝ᵥ state ℚ (.erase, first) = 0)
+    (secondRule : terminalRow ⬝ᵥ state ℚ (.rule, second) = 0)
+    (secondErase : terminalRow ⬝ᵥ state ℚ (.erase, second) = 0) :
+    terminalRow = 0 := by
+  simp [state, historyPhaseSign, dotProduct, Fin.sum_univ_succ] at firstRule firstErase
+  simp [state, historyPhaseSign, dotProduct, Fin.sum_univ_succ] at secondRule secondErase
+  have phaseSum : terminalRow 0 + terminalRow 1 = 0 := by
+    linear_combination (1 / 2 : ℚ) * firstErase - (1 / 2 : ℚ) * firstRule
+  have secondPhaseSum : terminalRow 0 + terminalRow 1 = 0 := by
+    linear_combination (1 / 2 : ℚ) * secondErase - (1 / 2 : ℚ) * secondRule
+  have firstCode :
+      4 * (code first : ℚ) * terminalRow 0 + terminalRow 2 = 0 := by
+    linear_combination firstRule - (4 * (code first : ℚ) - 1) * phaseSum
+  have secondCode :
+      4 * (code second : ℚ) * terminalRow 0 + terminalRow 2 = 0 := by
+    linear_combination secondRule - (4 * (code second : ℚ) - 1) * secondPhaseSum
+  have codeCastDifferent : (code first : ℚ) ≠ code second := by
+    exact_mod_cast codesDifferent
+  have codeDifference : (code first : ℚ) - code second ≠ 0 :=
+    sub_ne_zero.mpr codeCastDifferent
+  have firstCoordinateProduct :
+      ((code first : ℚ) - code second) * terminalRow 0 = 0 := by
+    linear_combination (1 / 4 : ℚ) * firstCode - (1 / 4 : ℚ) * secondCode
+  have firstCoordinate : terminalRow 0 = 0 :=
+    (mul_eq_zero.mp firstCoordinateProduct).resolve_left codeDifference
+  funext coordinate
+  fin_cases coordinate
+  · exact firstCoordinate
+  · simpa [firstCoordinate] using phaseSum
+  · simpa [firstCoordinate] using firstCode
+
+/-- No terminal row on the fixed transverse-history orbit recognizes the width-three `bcbc`
+paired zero language. Two distinct terminal histories force the row to vanish on both phase
+lines and hence to be the zero row; the checked near-fork is then a false zero. -/
+theorem no_bcbc_terminal_row_section (terminalRow : Fin 3 → ℚ) :
+    ¬(∀ word,
+      rowCoefficient terminalRow word = 0 ↔
+        pairedCoefficient ℚ 3 BranchingHistory.bcbcBody word = 0) := by
+  intro sameZero
+  let flat := BranchingHistory.bcbcTerminalFork [false]
+  let nested := BranchingHistory.bcbcTerminalFork [true]
+  have wordsDifferent : flat ≠ nested := by
+    intro wordsEqual
+    have bitsEqual := BranchingHistory.bcbcTerminalFork_injective wordsEqual
+    simp at bitsEqual
+  have codesDifferent : code flat ≠ code nested := by
+    intro codesEqual
+    exact wordsDifferent (code_injective codesEqual)
+  have flatPhases := terminal_phase_pair 3 BranchingHistory.bcbcBody terminalRow sameZero flat
+    (BranchingHistory.bcbcTerminalFork_match [false])
+  have nestedPhases := terminal_phase_pair 3 BranchingHistory.bcbcBody terminalRow sameZero nested
+    (BranchingHistory.bcbcTerminalFork_match [true])
+  have rowZero : terminalRow = 0 :=
+    row_eq_zero_of_phase_pairs terminalRow flat nested codesDifferent
+      flatPhases.1 flatPhases.2 nestedPhases.1 nestedPhases.2
+  have falseZero :
+      rowCoefficient terminalRow BranchingHistory.bcbcNearForkControl = 0 := by
+    rw [rowZero]
+    simp [rowCoefficient, linearCoefficient]
+  exact BranchingHistory.bcbc_terminal_nearFork.2
+    ((sameZero BranchingHistory.bcbcNearForkControl).mp falseZero)
+
+/-- Even a source-dependent family of terminal rows cannot uniformize the fixed transverse
+orbit on all admissible Neary bodies. The obstruction is set-theoretic and therefore also
+excludes every computable row family. -/
+theorem no_sourceUniform_terminal_row_section
+    (terminalRow : Nat → List TagLetter → Fin 3 → ℚ) :
+    ¬(∀ β body, 2 < β → β - 1 ≤ body.length → β - 1 ∣ body.length → ∀ word,
+      rowCoefficient (terminalRow β body) word = 0 ↔
+        pairedCoefficient ℚ β body word = 0) := by
+  intro sameZero
+  exact no_bcbc_terminal_row_section (terminalRow 3 BranchingHistory.bcbcBody)
+    (sameZero 3 BranchingHistory.bcbcBody (by decide) (by decide) (by decide))
 
 /-! ## Exact transverse kernels -/
 

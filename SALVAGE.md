@@ -224,6 +224,7 @@ file owns the mathematical stock.
 | [`G3-S01`](#g3-s01-shift-equivariant-zero-incidence) | structure theorem | same-zero state dimension is equivariant projective incidence dimension | audited | active |
 | [`G3-S02`](#g3-s02-rank-two-kernel-bifurcation) | structure theorem | common kernels erase route differences; transverse fibres retain one bilinear survivor | formalized | active |
 | [`G3-O18`](#g3-o18-transverse-minimum-body-countermodel) | fixed-subclass compiler | distinct rank-two kernels encode every paired history and exactly recognize all minimum bodies | formalized | graduated |
+| [`G3-O26`](#g3-o26-transverse-terminal-row-obstruction) | obstruction | two `bcbc` terminal histories force every exact row on the fixed transverse orbit to vanish | formalized | graduated |
 | [`G3-O02`](#g3-o02-rational-phase-fracture) | obstruction | a mortal paired instance has no rational phase-state same-zero compression | audited | stock |
 | [`G3-O03`](#g3-o03-history-sensitive-minimal-body-fracture) | obstruction | minimal bodies admit an exact history-sensitive three-state same-zero compiler | formalized | graduated |
 | [`G3-O04`](#g3-o04-expanding-affine-history-no-go) | obstruction | finite-mode expanding one-coordinate history has decidable target reachability | audited | graduated |
@@ -9428,15 +9429,53 @@ subclass has one known terminal word. It does not recognize unrestricted bodies,
 sets may be infinite. The result kills any lower bound derived from distinct rank-two kernels,
 the bilinear fibre law, or exceptional projective fibres alone.
 
-**Use:** a transverse constructor must now supply an infinite terminal section or genuinely
+**Use:** [`G3-O26`](#g3-o26-transverse-terminal-row-obstruction) closes every terminal-row
+extension of this fixed orbit. A transverse constructor must change the orbit and supply genuinely
 two-dimensional terminal dynamics. A lower bound must exploit unrestricted terminal arithmetic,
 not transverse geometry by itself.
 
 **Artifact:** [`TransverseHistory.lean`](MatrixMortality/TransverseHistory.lean) and
 [`m34-transverse-history-2026-08-11.md`](audits/m34-transverse-history-2026-08-11.md).
 
-**Next:** uniformize the terminal section beyond singleton target codes, or prove that every
-source-computable transverse section with arbitrary-body soundness falls into a decidable class.
+**Next:** replace the two affine phase lines by a genuinely two-dimensional invariant terminal
+surface with arbitrary-body soundness.
+
+### G3-O26: Transverse terminal-row obstruction
+
+**Kind:** obstruction
+
+**Evidence:** formalized
+
+**Disposition:** graduated
+
+The fixed `G3-O18` controls carry every decoded history code `κ` on the two affine phase lines
+
+```text
+P(κ,ε)=(8κ−ε,4κ−ε,1)ᵀ,       ε∈{1,−1}.
+```
+
+For an arbitrary rational row `(a,b,c)`, vanishing at both phases of one code gives `a+b=0` and
+`4κa+c=0`. The admissible width-three body `bcbc` has two distinct terminal histories with
+distinct mixed-radix codes. Exactness on the complete control monoid therefore forces
+`a=b=c=0`. The explicit nonterminal near-fork is then a false zero.
+
+Lean proves the stronger uniform statement: no set-theoretic family of source-dependent rows can
+make the fixed controls and initial column same-zero with the paired coefficient for all
+admissible `(β,body)`. Every computable family is a special case.
+
+**Scope:** the controls and initial column are fixed to the `G3-O18` orbit. The theorem does not
+exclude a different transverse construction, source-dependent controls, or a genuinely
+two-dimensional invariant surface.
+
+**Use:** delete terminal-row retuning as the transverse live leaf. Any surviving transverse
+constructor must alter the orbit itself; fitting more row parameters cannot reach unrestricted
+terminal languages.
+
+**Artifact:** [`TransverseHistory.lean`](MatrixMortality/TransverseHistory.lean) and
+[`m34-transverse-terminal-row-obstruction-2026-08-30.md`](audits/m34-transverse-terminal-row-obstruction-2026-08-30.md).
+
+**Next:** construct genuinely two-dimensional transverse terminal dynamics, or derive from its
+required shift laws the uniform positive-projective incompatibility sought by the opposing lane.
 
 ### G3-O13: Rational serializer pumping
 
