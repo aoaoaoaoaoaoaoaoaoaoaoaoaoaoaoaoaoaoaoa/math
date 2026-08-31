@@ -102,6 +102,21 @@ Lean proves (2), (3), the fixed-point identity, and the all-phases conclusion ge
 every nonempty list of rational `5`-unit scales. `PeriodicShell.shellPeriodicCycle` is the thin
 specialization to `q_m=3(2/3)^m`.
 
+The same affine formula limits repetition from a fixed rational source. If a schedule has length
+`n`, slope `λ_w=Q_n/5^n`, and periodic point `u_w`, then
+
+```text
+T_w^k(u)−u_w = λ_w^k(u−u_w),
+v₅(T_w^k(u)−u_w)=v₅(u−u_w)−kn.
+```
+
+Both `u_w` and any legal terminal state are units, so their nonzero difference has nonnegative
+valuation. For `u≠u_w`, legal repetition therefore forces `kn≤v₅(u−u_w)`. Lean proves the
+displacement identity, exact valuation recurrence, and bound in
+`PeriodicShell.shellRun_repeat_unit_bound`. Fixed-block pumping cannot account for the infinite
+exit union except at its unique periodic source; the surviving obstruction requires varying
+schedules.
+
 ## Infinite Schedules Live In The Completion
 
 The inverse branch
