@@ -125,7 +125,8 @@ file owns the mathematical stock.
 | [`MM-S32`](#mm-s32-entry-support-saturator-extinction) | obstruction | the universal all-`D_c` support saturator cannot be the first transition from a lawful two-`c` raw head to another multi-role pole | formalized | active |
 | [`MM-S33`](#mm-s33-leading-d_b-support-saturator-extinction) | obstruction | the full-gap-saturating leading-`D_b` erasure family cannot be the first transition from a lawful two-`c` raw head to another multi-role pole | formalized | active |
 | [`MM-S37`](#mm-s37-decimal-three-shape-frontier-extinction) | obstruction | all three role shapes in the swapped ternary first-multi-transfer frontier are empty in the decimal carrier | formalized | active |
-| [`MM-S39`](#mm-s39-second-position-d_b-raw-head-extinction) | obstruction | no all-erasure word with `D_b` in its second position carries a lawful two-`c` raw head into another multi-role pole | formalized | active |
+| [`MM-S39`](#mm-s39-second-position-d_b-raw-head-extinction) | obstruction | no all-erasure word with `D_b` in its second position carries a lawful two-`c` raw head into another multi-role pole | formalized | graduated |
+| [`MM-S40`](#mm-s40-first-beta-plus-one-position-d_b-extinction) | obstruction | a sole `D_b` in any of the first `β+1` all-erasure positions cannot carry a lawful two-`c` raw head into another multi-role pole | formalized | active |
 | [`R32-S01`](#r32-s01-split-return-normal-form) | structure theorem | rank-two cuts reduce one-unit binary mortality to a `2 × 2` return recurrence | formalized | graduated |
 | [`R32-S02`](#r32-s02-two-plane-edge-square) | structure theorem | two rank-two generators are a two-vertex square of `2 × 2` edges | formalized | graduated |
 | [`R32-O01`](#r32-o01-rank-one-profile-collapse) | obstruction | a rank-one generator reduces mortality to order-at-most-three scalar recurrence zeros | audited | stock |
@@ -4258,9 +4259,8 @@ gap `q=2·10^β−7`. Thus the explicit support saturator with `D_b` in the seco
 excluded at the distinguished raw-head entry.
 
 **Scope:** this is an initial raw-head theorem. It does not recur for generalized product
-residuals or cover rule-bearing words. The proof is sharp for this suffix method: if `D_b`
-appears in position three or later, the common upper suffix has depth strictly below `n+β`, so
-the perturbation can alter the five-adic obstruction.
+residuals or cover rule-bearing words. [`MM-S40`](#mm-s40-first-beta-plus-one-position-d_b-extinction)
+subsumes the positional conclusion by strengthening the baseline all-`D_c` depth bound.
 
 **Use:** remove both first-position and second-position `D_b` from the all-erasure raw-head
 grammar. Any remaining all-erasure first transition containing `D_b` begins with `D_cD_c`, or
@@ -4276,8 +4276,66 @@ raw-head extinction through `secondBErase_rawHead_shell_impossible`.
 **Artifact:**
 [`audits/m53-second-b-support-saturator-extinction-2026-08-31.md`](audits/m53-second-b-support-saturator-extinction-2026-08-31.md).
 
-**Next:** decide the shallower third-position perturbation, where the old five-adic depth can be
-changed, or switch to the exact mixed-prime leading coefficient of that perturbation.
+**Next:** graduated into `MM-S40`.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S40: First-beta-plus-one-position `D_b` extinction
+
+**Kind:** obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+The all-`D_c` baseline admits a stronger five-adic statement than the target-depth exclusion
+used by `MM-S33` and `MM-S39`. For an all-`D_c` block of width `n≥1`, every lawful decimal-unit
+two-`c` raw head gives a residual `R_c` satisfying
+
+```text
+5^(n+1) ∤ R_c.                                (1)
+```
+
+The proof keeps the two raw-head families separate. At a regular head with terminal run
+`1≤s≤β−2`, the three-term decomposition has exact shallow coefficient selected by the order of
+`n` and `s+1`. At the exceptional head `s=β−1`, the two-term decomposition separately resolves
+`n+1<2β`, `n+1=2β`, and `2β<n+1`. Both yield (1); no regular-head formula is silently applied at
+the exceptional boundary.
+
+Now replace the role after `a` leading copies of `D_c` by `D_b`, leaving `t` trailing copies of
+`D_c`. The total role count is `n=a+t+1`. The new punctuated upper code and the all-`D_c` code
+share a suffix of length `t+β+2`, so
+
+```text
+10^(t+β+2) ∣ P_b−P_c.                         (2)
+```
+
+If `a≤β`, then `n+1≤t+β+2`. Equations (1) and (2) show that the upper perturbation cannot change
+the residual modulo `5^(n+1)`, while a following multi-role pole would require the deeper shell
+`(n+β,n+β)`. Hence a sole `D_b` in any one-indexed position `1,…,β+1` is impossible at the raw
+head. The lower word remains exactly `0^n`; whenever `n=entrySaturationWidth(β)`, it still
+contains the full primitive gap.
+
+**Scope:** this is a one-`D_b`, all-erasure, distinguished-raw-head theorem. It does not cover a
+`D_b` after the first `β+1` roles, several `D_b` insertions whose perturbations interact,
+rule-bearing blocks, singleton targets, or transitions from generalized product residuals.
+
+**Use:** contract the first all-erasure `D_b` search from every position to the late tail
+`a≥β+1`, and retain the exact all-zero lower code. At compiler-emitted widths `β≥10`, at least
+the first eleven possible `D_b` positions are therefore dead uniformly in the body and tail.
+
+**Formalization:**
+[`MatrixMortality/DecimalSetterFiveDepth.lean`](MatrixMortality/DecimalSetterFiveDepth.lean)
+proves the separate regular and exceptional forms of (1) and the combined above-width
+perturbation theorem.
+[`MatrixMortality/DecimalSetterAncestry.lean`](MatrixMortality/DecimalSetterAncestry.lean)
+proves (2), the unchanged lower code, conditional full-gap support, and
+`positionedBErase_rawHead_shell_impossible`.
+
+**Artifact:**
+[`audits/m53-first-beta-plus-one-b-extinction-2026-08-31.md`](audits/m53-first-beta-plus-one-b-extinction-2026-08-31.md).
+
+**Next:** decide late one-`D_b` positions `a>β`, then control superposed perturbations from
+several `D_b` roles.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
