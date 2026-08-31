@@ -162,6 +162,7 @@ import MatrixMortality.DecimalSetterMultitransfer
 import MatrixMortality.DecimalSetterFiveDepth
 import MatrixMortality.DecimalSetterSuffix
 import MatrixMortality.DecimalSetterAncestry
+import MatrixMortality.DecimalSetterPositioned
 import MatrixMortality.SwappedSetterCompiler
 import MatrixMortality.DecimalSetterBranchSeparation
 import MatrixMortality.SwappedSetterMultitransfer
