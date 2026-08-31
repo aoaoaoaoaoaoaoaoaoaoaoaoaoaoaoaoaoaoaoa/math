@@ -1436,6 +1436,15 @@ The residue-one left `c`-endpoint exclusion
 coarse native code interval. The exact boundary is
 [`audits/m43-residue-one-left-c-endpoint-2026-08-30.md`](audits/m43-residue-one-left-c-endpoint-2026-08-30.md).
 
+The minimal triple-`b` defect exclusion
+[`M4-S14`](SALVAGE.md#m4-s14-minimal-triple-b-defect-exclusion) is formalized in
+[`MatrixMortality/ParabolicLongDefect.lean`](MatrixMortality/ParabolicLongDefect.lean).
+`ParabolicBlade.bridge_bZero_bTwo_bTwo_bTwo_bZero_det` and
+`ParabolicBlade.bridge_bOne_bTwo_bTwo_bTwo_bOne_det` compute the two equal-phase shortest
+three-defect determinants. Their nonzero corollaries reduce both to explicit multilinear cores
+with positive integer coefficients. The exact boundary is
+[`audits/m43-minimal-triple-b-defect-2026-08-30.md`](audits/m43-minimal-triple-b-defect-2026-08-30.md).
+
 The original fixed-ray semantic route is obstructed by
 [`M4-O14`](SALVAGE.md#m4-o14-original-semantic-endpoint-obstruction), formalized in
 [`MatrixMortality/ParabolicSemanticObstruction.lean`](MatrixMortality/ParabolicSemanticObstruction.lean).

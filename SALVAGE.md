@@ -192,6 +192,7 @@ file owns the mathematical stock.
 | [`M4-S11`](#m4-s11-opposite-c-defect-cylinder-exclusion) | obstruction | the `1|2|0` shortest bad run cannot close with a `c` defect and `b` endpoints | formalized | active |
 | [`M4-S12`](#m4-s12-residue-zero-c-endpoint-exclusion) | obstruction | a shortest bad run with a `b` defect cannot close when its residue-zero endpoint is `c` | formalized | active |
 | [`M4-S13`](#m4-s13-residue-one-left-c-endpoint-exclusion) | obstruction | the `1|2|0` shortest bad run with a `b` defect cannot close when its left endpoint is `c` | formalized | active |
+| [`M4-S14`](#m4-s14-minimal-triple-b-defect-exclusion) | obstruction | neither equal-phase shortest three-defect run closes when every atom is `b` | formalized | active |
 | [`M4-C03`](#m4-c03-zero-framed-binary-two-lag-compiler) | compiler | the principal scanner is literally binary context-2 Lag and compiles to `M₄(3)` | formalized | graduated |
 | [`M4-D01`](#m4-d01-zero-framed-binary-two-lag-decision) | decidable stratum | the entire zero-framed binary context-2 Lag kernel has an exact syntactic classification | formalized | graduated |
 | [`M4-D02`](#m4-d02-zero-framed-reset-scanner-decision) | decidable stratum | zero-run reduction contracts the reset scanner to a regular two-token quotient | audited | graduated |
@@ -7819,6 +7820,44 @@ a second body-dependent atom.
 **Artifact:**
 [`MatrixMortality/ParabolicDefect.lean`](MatrixMortality/ParabolicDefect.lean) and
 [`audits/m43-residue-one-left-c-endpoint-2026-08-30.md`](audits/m43-residue-one-left-c-endpoint-2026-08-30.md).
+
+### M4-S14: Minimal triple-b defect exclusion
+
+**Kind:** obstruction
+
+**Evidence:** formalized
+
+**Disposition:** active
+
+The second shortest bad residue skeleton has three consecutive residue-two defects between equal
+safe phases. At deletion width three its two all-`b` orientations are
+
+```text
+b(3z)   b(3a+2) b(3b+2) b(3c+2) b(3y),
+b(3z+1) b(3a+2) b(3b+2) b(3c+2) b(3y+1).
+```
+
+Lean expands the phase-zero determinant as `6561/32` times a multilinear polynomial whose 32
+integer coefficients are positive. The phase-one determinant is `−2187yz/4` times an
+eight-coefficient polynomial in `a,b,c`, again with every coefficient positive. The first
+determinant is therefore positive for all nonnegative waits; the second is negative under the
+regularity conditions `y,z>0`.
+
+**Scope:** deletion width `β=3`, exactly three consecutive defects, equal safe phases, and letter
+`b` at all five atoms. The result does not allow a `c` atom, a longer run `3+4k`, or a nontrivial
+safe context. The phase-one boundary assumptions exclude the two exceptional singular `b(1)`
+endpoints.
+
+**Use:** both protected-plane bad residue classes now have characteristic-zero base cases: the
+opposite-phase one-defect class at run length one and the equal-phase three-defect class at run
+length three. Any shortest equal-phase survivor must use body dependence.
+
+**Next:** introduce one `c` atom into the triple-defect skeleton, then determine whether the
+residue-two four-cycle lifts the two base exclusions uniformly to lengths `1+4k` and `3+4k`.
+
+**Artifact:**
+[`MatrixMortality/ParabolicLongDefect.lean`](MatrixMortality/ParabolicLongDefect.lean) and
+[`audits/m43-minimal-triple-b-defect-2026-08-30.md`](audits/m43-minimal-triple-b-defect-2026-08-30.md).
 
 ### M4-C03: Zero-framed binary two-Lag compiler
 
