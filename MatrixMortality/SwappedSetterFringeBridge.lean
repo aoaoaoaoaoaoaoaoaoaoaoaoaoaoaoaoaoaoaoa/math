@@ -350,4 +350,148 @@ theorem targetFringe_of_nontrivial_final_erase_of_getLast?_b
       subst last
       exact targetFringe_of_nontrivial_final_erase β beta_pos front past letter past_ne
 
+private theorem phaseSpelling_last_false {phases : List Bool}
+    (phases_ne : phases ≠ []) :
+    (spell fringeBlock phases).getLast? = some false := by
+  induction phases using List.reverseRecOn with
+  | nil => contradiction
+  | append_singleton phases phase induction =>
+      rw [spell_append]
+      cases phase <;> simp [spell, fringeBlock]
+
+private theorem spelling_normal_of_two_phases {phases : List Bool}
+    (phase_length : 2 ≤ phases.length)
+    (phase_last : phases.getLast? = some false) :
+    (∃ zeros,
+        2 ≤ zeros ∧
+          spell fringeBlock phases = List.replicate zeros false) ∨
+      (∃ front zeros,
+        2 ≤ zeros ∧
+          spell fringeBlock phases =
+            front ++ [true, true] ++ List.replicate zeros false) := by
+  induction phases using List.reverseRecOn with
+  | nil => simp at phase_length
+  | append_singleton initial phase induction =>
+      have phase_eq : phase = false := by simpa using phase_last
+      subst phase
+      have initial_ne : initial ≠ [] := by
+        intro initial_empty
+        subst initial
+        simp at phase_length
+      have initial_last := phaseSpelling_last_false initial_ne
+      have source : SourceFringe (spell fringeBlock initial) := by
+        exact ⟨initial, List.prefix_refl _⟩
+      rcases sourceFringe_lastTrue_normal source initial_last with allZeros | lastTrue
+      · left
+        obtain ⟨zeros, zeros_pos, initial_eq⟩ := allZeros
+        refine ⟨zeros + 1, by omega, ?_⟩
+        rw [spell_append, initial_eq]
+        simp [spell, fringeBlock, List.replicate_succ']
+      · right
+        obtain ⟨front, frontPhases, zeros, zeros_pos, front_eq, initial_eq⟩ := lastTrue
+        refine ⟨front, zeros + 1, by omega, ?_⟩
+        rw [spell_append, initial_eq]
+        simp [spell, fringeBlock, List.replicate_succ']
+
+private theorem rtake_all_false_target {width zeros : Nat}
+    (width_ge : 3 ≤ width) (zeros_ge : 2 ≤ zeros) :
+    TargetFringe width ((List.replicate zeros false).rtake width) := by
+  have min_ge : 2 ≤ min width zeros := by omega
+  refine ⟨?_, Or.inl ⟨min width zeros, min_ge, ?_⟩⟩
+  · simp [List.rtake_eq_reverse_take_reverse]
+  · simp [List.rtake_eq_reverse_take_reverse]
+
+private theorem rtake_pair_target (width : Nat) (front : List Bool) (zeros : Nat)
+    (width_ge : 3 ≤ width) (zeros_ge : 2 ≤ zeros) :
+    TargetFringe width
+      ((front ++ [true, true] ++ List.replicate zeros false).rtake width) := by
+  by_cases window_inside_zeros : width ≤ zeros
+  · have taken :
+        (front ++ [true, true] ++ List.replicate zeros false).rtake width =
+          List.replicate width false := by
+      rw [List.rtake_eq_reverse_take_reverse]
+      simp only [List.reverse_append, List.reverse_replicate, List.reverse_cons,
+        List.reverse_nil]
+      rw [List.take_append_of_le_length (by simpa using window_inside_zeros)]
+      simpa using window_inside_zeros
+    rw [taken]
+    exact ⟨by simp, Or.inl ⟨width, by omega, rfl⟩⟩
+  · have zeros_lt : zeros < width := by omega
+    by_cases pair_inside : zeros + 2 ≤ width
+    · let retainedFront := front.rtake (width - (zeros + 2))
+      have zeros_le : zeros ≤ width := zeros_lt.le
+      have remaining_ge : 2 ≤ width - zeros := by omega
+      have pair_take :
+          List.take (width - zeros) ([true, true] ++ front.reverse) =
+            [true, true] ++ List.take (width - (zeros + 2)) front.reverse := by
+        rw [List.take_append]
+        have first_take : List.take (width - zeros) [true, true] = [true, true] :=
+          List.take_of_length_le (by simpa using remaining_ge)
+        rw [first_take]
+        simp only [List.length_cons, List.length_nil, Nat.reduceAdd]
+        congr 1
+      have taken :
+          (front ++ [true, true] ++ List.replicate zeros false).rtake width =
+            retainedFront ++ [true, true] ++ List.replicate zeros false := by
+        rw [List.rtake_eq_reverse_take_reverse]
+        simp only [List.reverse_append, List.reverse_replicate, List.reverse_cons,
+          List.reverse_nil]
+        rw [List.take_append]
+        simp only [List.length_replicate, List.take_replicate,
+          Nat.min_eq_right zeros_le, List.reverse_append, List.reverse_replicate]
+        have pair_take' :
+            List.take (width - zeros) ([] ++ [true] ++ [true] ++ front.reverse) =
+              [true, true] ++ List.take (width - (zeros + 2)) front.reverse := by
+          simpa using pair_take
+        rw [pair_take']
+        simp [retainedFront, List.rtake_eq_reverse_take_reverse]
+      rw [taken]
+      refine ⟨?_, Or.inr <| Or.inl ⟨retainedFront, zeros, zeros_ge, rfl⟩⟩
+      have retained_le : retainedFront.length ≤ width - (zeros + 2) := by
+        unfold retainedFront
+        rw [List.rtake_eq_reverse_take_reverse, List.length_reverse]
+        exact List.length_take_le (width - (zeros + 2)) front.reverse
+      simp only [List.length_append, List.length_cons, List.length_nil,
+        List.length_replicate]
+      omega
+    · have width_eq : width = zeros + 1 := by omega
+      have taken :
+          (front ++ [true, true] ++ List.replicate zeros false).rtake width =
+            true :: List.replicate zeros false := by
+        rw [List.rtake_eq_reverse_take_reverse]
+        simp only [List.reverse_append, List.reverse_replicate, List.reverse_cons,
+          List.reverse_nil]
+        rw [width_eq, List.take_append]
+        simp
+      rw [taken]
+      refine ⟨by simp; omega, Or.inr <| Or.inr ⟨by simp; omega, ?_⟩⟩
+      rw [show width - 1 = zeros by omega]
+
+/-- A two-phase exact target witness satisfies the broad physical target normal form. -/
+theorem targetFringe_of_blockWitness (width : Nat) (word : List Bool)
+    (width_ge : 3 ≤ width) (phases : List Bool)
+    (phase_length : 2 ≤ phases.length)
+    (phase_last : phases.getLast? = some false)
+    (word_eq : word = (spell fringeBlock phases).rtake width) :
+    TargetFringe width word := by
+  subst word
+  rcases spelling_normal_of_two_phases phase_length phase_last with allZeros | lastTrue
+  · obtain ⟨zeros, zeros_ge, spelling_eq⟩ := allZeros
+    rw [spelling_eq]
+    exact rtake_all_false_target width_ge zeros_ge
+  · obtain ⟨front, zeros, zeros_ge, spelling_eq⟩ := lastTrue
+    rw [spelling_eq]
+    exact rtake_pair_target width front zeros width_ge zeros_ge
+
+/-- The strengthened exact target language embeds in the broad physical target language. -/
+theorem targetFringe_of_nontrivialBlockTarget (width : Nat) (word : List Bool)
+    (width_ge : 3 ≤ width)
+    (target : ∃ phases,
+      2 ≤ phases.length ∧
+        phases.getLast? = some false ∧
+          word = (spell fringeBlock phases).rtake width) :
+    TargetFringe width word := by
+  obtain ⟨phases, phase_length, phase_last, word_eq⟩ := target
+  exact targetFringe_of_blockWitness width word width_ge phases phase_length phase_last word_eq
+
 end MatrixMortality.SwappedSetterFringe
