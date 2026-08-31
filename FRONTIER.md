@@ -3026,6 +3026,13 @@ guarded predecessor schedule of every prescribed block length. The source varies
 length. Thus target position, target unitality, and real contraction cannot bound the remaining
 translated count; only the simultaneous fixed-source/fixed-target arithmetic can discriminate.
 This is [`D2-O08`](SALVAGE.md#d2-o08-real-trap-backward-saturation).
+Real order nevertheless cuts the local reverse fan. For each `y∈(1/5,1/2]`, one computable
+exponent `c(y)` brackets `(10/3)(y−1/5)` between consecutive powers of `2/3`. Every predecessor
+inside the trap has wait `c(y)`, `c(y)−1`, or `c(y)−2`, and fixed-source one-step reachability is
+exactly three rational equality tests. The width is sharp at `y=49/150`. Thus the surviving
+backward graph is an explicit ternary tree: unbounded depth, not unbounded local fanout, is now
+the reverse-search obstruction. This is
+[`D2-S04`](SALVAGE.md#d2-s04-real-trap-ternary-predecessor-nucleus).
 Higher depth is not free: a published length-thirteen relation yields two distinct
 schedules with the same affine map and a common Lean-checked guarded periodic source. This is an
 exact rewrite seed. Lean also proves that it preserves all intermediate shell guards in every
@@ -3092,7 +3099,7 @@ artery; see
 | Assume projective height descends | determinant-growing words may act projectively as the identity |
 | Separate the Collatz cusp by finite ambient quotients | every finite image identifies the positive monoid with the whole generated group |
 | Assume the mixed-prime schedule action is free | a published length-thirteen relation is a checked guarded collision |
-| Bound the mixed-prime reverse fan uniformly | a target at negative `3`-depth `d` has exactly `d+1` distinct shell-legal predecessors when its rational carrier is a `3`- and `5`-unit |
+| Bound the mixed-prime reverse fan by valuations alone | a target at negative `3`-depth `d` has exactly `d+1` distinct shell-legal predecessors when its rational carrier is a `3`- and `5`-unit; `D2-S04` recovers a sharp ternary bound only after intersecting both endpoints with the real trap |
 | Prune cross-length shell collisions at their source | every two nonempty unequal-length shell maps have a unique collision source and it is automatically a `5`-adic unit; only fixed-source equality and target acceptance remain discriminating |
 | Infer target acceptance from the automatic cross-length source unit | the adjacent debt-safe bridges `[4]` and `[0,5]` collide from the `5`-unit source `2/9`, but their target `55/243` has `5`-adic valuation one |
 | Bound accepted debt-bridge waits from one fixed source | for every `k≥0`, `[1,10k+2]` and `[3,1,10k]` are accepted adjacent bridges from `43/24`, with terminal waits tending to infinity |
@@ -3344,8 +3351,10 @@ universal computation.
    infinite seam, so treat chamber exit and reentry as separate pre-exit seams. In parallel, seek
    a parametric affine-kernel description beyond the checked length-30 basis and run normalized
    collision/exit-fibre census. Do not reopen unlabeled residue-only finite nuclei, uniformly
-   bounded reverse fanout, one-sided endpoint bounds, or global real drift inside the invariant
-   trap. `D2-O08` already saturates target-only reverse length there when the source may vary.
+   valuation-only reverse bounds, one-sided endpoint bounds, or global real drift inside the
+   invariant trap. `D2-O08` already saturates target-only reverse length there when the source may
+   vary, while `D2-S04` replaces its local reverse fan by a sharp ternary nucleus. Attack the
+   unbounded depth of that inverse tree through endpoint-coupled height or congruence.
    Keep the non-elementary lanes independent: adelic cone types, parabolic rational subsets,
    trace/height descent, finite-obstruction saturation, and valuation universality.
 7. Synthesize the returned attacks by the discriminating signals above; do not average
