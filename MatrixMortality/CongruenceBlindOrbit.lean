@@ -149,6 +149,65 @@ def modularShearPower {R : Type*} [CommRing R]
     (syllable : Bool × ℤ) : Square₂ R :=
   if syllable.1 then lowerShear (3 * syllable.2) else upperShear (3 * syllable.2)
 
+/-- The two positive step-three shear generators. -/
+def modularShearGenerator {R : Type*} [CommRing R] (letter : Bool) : Square₂ R :=
+  if letter then lowerShear 3 else upperShear 3
+
+/-- Replace one signed shear power by its nonnegative residue modulo the target characteristic. -/
+def positiveModularSyllable (modulus : ℕ) (syllable : Bool × ℤ) : List Bool :=
+  List.replicate (syllable.2 : ZMod modulus).val syllable.1
+
+private theorem upperShear_pow
+    {R : Type*} [CommRing R] (shift : R) (exponent : ℕ) :
+    upperShear shift ^ exponent = upperShear (exponent * shift) := by
+  induction exponent with
+  | zero =>
+      ext i j
+      fin_cases i <;> fin_cases j <;> simp [upperShear]
+  | succ exponent induction =>
+      rw [pow_succ, induction, upperShear_mul]
+      congr 1
+      push_cast
+      ring
+
+private theorem lowerShear_pow
+    {R : Type*} [CommRing R] (shift : R) (exponent : ℕ) :
+    lowerShear shift ^ exponent = lowerShear (exponent * shift) := by
+  induction exponent with
+  | zero =>
+      ext i j
+      fin_cases i <;> fin_cases j <;> simp [lowerShear]
+  | succ exponent induction =>
+      rw [pow_succ, induction, lowerShear_mul]
+      congr 1
+      push_cast
+      ring
+
+/-- A signed shear syllable and its positive modular expansion have the same matrix value. -/
+theorem positiveModularSyllable_product
+    (modulus : ℕ) [NeZero modulus] (syllable : Bool × ℤ) :
+    wordProduct (modularShearGenerator (R := ZMod modulus))
+        (positiveModularSyllable modulus syllable) =
+      modularShearPower syllable := by
+  cases syllable with
+  | mk letter exponent =>
+      cases letter <;>
+        simp [positiveModularSyllable, modularShearGenerator, modularShearPower,
+          wordProduct, List.prod_replicate, upperShear_pow, lowerShear_pow,
+          mul_comm]
+
+/-- Expanding every signed syllable gives the same modular matrix product. -/
+theorem positiveModularWord_product
+    (modulus : ℕ) [NeZero modulus] (word : List (Bool × ℤ)) :
+    wordProduct (modularShearGenerator (R := ZMod modulus))
+        (word.flatMap (positiveModularSyllable modulus)) =
+      wordProduct (modularShearPower (R := ZMod modulus)) word := by
+  induction word with
+  | nil => rfl
+  | cons syllable word induction =>
+      rw [List.flatMap_cons, wordProduct_append, wordProduct_cons,
+        positiveModularSyllable_product, induction]
+
 /-- The literal five-factor bridge spelling, retained over an arbitrary target ring. -/
 def modularBridgeWord (r d n : ℤ) : List (Bool × ℤ) :=
   [(true, r * d), (false, 3 * r * d), (true, 2 * r * d),
@@ -419,6 +478,19 @@ theorem exists_bridgeWord_modular_hit (modulus : ℕ) (modulus_pos : 0 < modulus
       (congruenceTerminalExponent power)
       (congruenceParameter_image power coprimePart three_coprime)
       terminal_relation
+
+/-- Every positive modulus admits a positive word in the two step-three shear generators which
+sends `[1:1]` to `[10:13]` projectively. -/
+theorem exists_positiveBridgeWord_modular_hit (modulus : ℕ) (modulus_pos : 0 < modulus) :
+    ∃ word : List Bool,
+      SameProjectiveRay
+        (wordProduct (modularShearGenerator (R := ZMod modulus)) word *ᵥ sourceRay _)
+        (targetRay _) := by
+  let _ : NeZero modulus := ⟨modulus_pos.ne'⟩
+  obtain ⟨signedWord, signed_hit⟩ := exists_bridgeWord_modular_hit modulus modulus_pos
+  refine ⟨signedWord.flatMap (positiveModularSyllable modulus), ?_⟩
+  rw [positiveModularWord_product]
+  exact signed_hit
 
 /-! ## Rational ping-pong -/
 
