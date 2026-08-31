@@ -96,6 +96,12 @@ open MatrixMortality
 #print axioms VariablePrefixRankTax.shortLeaf_add_two_mul_deepLeaf_le
 #print axioms VariablePrefixRankTax.ten_le_of_rank_four_short_rank_three_deep
 #print axioms VariablePrefixRankTax.eleven_le_balanced_rank_four_rank_three
+#print axioms RunLengthHankel.benchmarkDataB_eq_paired
+#print axioms RunLengthHankel.benchmarkDataC_eq_paired
+#print axioms RunLengthHankel.transferHankel_factor
+#print axioms RunLengthHankel.tbcMinor_mulVec_eq_zero_iff
+#print axioms RunLengthHankel.tbcMinor_det_ne_zero
+#print axioms RunLengthHankel.ten_le_card_of_tbc_transfer_moments
 #print axioms pairedProduct_mulVec_column
 #print axioms pairedCoefficient_eq_sideCoefficient
 #print axioms decodePairedWord_surjective

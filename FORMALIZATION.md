@@ -313,6 +313,23 @@ states; the corresponding balanced layout needs at least eleven. This is a theor
 direct-sum exact path products, not a lower bound for history-sensitive same-zero compilers. See
 [`m92-trailing-toggle-prefix-tax-2026-08-30.md`](audits/m92-trailing-toggle-prefix-tax-2026-08-30.md).
 
+The overlapping run-length architecture has a second checked boundary. For arbitrary ambient
+transition `A`, input `U`, output `V`, interface, and finite time-coordinate selectors, Lean
+factors the block-Hankel section of `VAⁿU` through the ambient state space. At deletion width
+three and body `bb`, it checks the exact paired matrices `T,D_b,D_c` and a sparse `10 × 10`
+minor for the moment sequence
+
+```text
+aT, bD_b, cD_c, P′, P′, … .
+```
+
+The minor has trivial kernel whenever `a,c≠0`, even if `b=0`; its determinant is therefore
+nonzero. Any exact realization of these moments has at least ten states. The companion audit
+reconstructs nonzero exact minors for all six orders of `T,D_b,D_c`. This does not constrain a
+history-sensitive compiler that preserves only the zero set while changing the internal
+moments. See
+[`m92-run-length-transfer-hankel-2026-08-31.md`](audits/m92-run-length-transfer-hankel-2026-08-31.md).
+
 Lean also constructs the canonical reachable-observable quotient around any internal physical
 word whose product factors as `UW`. Its generators act on
 

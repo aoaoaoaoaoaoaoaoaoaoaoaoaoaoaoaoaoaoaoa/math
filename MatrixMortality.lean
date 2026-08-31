@@ -126,6 +126,7 @@ import MatrixMortality.CHHNPackingRank
 import MatrixMortality.PairedBoundaryTax
 import MatrixMortality.DeletionFirstFracture
 import MatrixMortality.PairedBinaryPrefixTax
+import MatrixMortality.RunLengthHankel
 import MatrixMortality.PairedBinaryFullAlgebra
 import MatrixMortality.PrefixFullAlgebra
 import MatrixMortality.ScheduledBinaryRank

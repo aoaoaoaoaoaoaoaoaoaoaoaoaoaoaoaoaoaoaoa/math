@@ -92,6 +92,7 @@ file owns the mathematical stock.
 | [`MM-O20`](#mm-o20-decimal-first-cylinder-collision) | obstruction | two lawful emitted decimal blocks have identical exact first suffix cylinders | formalized | active |
 | [`MM-O21`](#mm-o21-sourcewise-finite-probe-blindness) | obstruction | sourcewise existential equivalence imposes no finite probe-rank shadow, while complete computable probe cutoffs cannot be universal | formalized | graduated |
 | [`MM-O22`](#mm-o22-six-guard-parser-rank-wall) | obstruction | the six-guard existence transform requires at least seven exact states on every source with an original zero | formalized | graduated |
+| [`MM-O23`](#mm-o23-consecutive-transfer-moment-tax) | obstruction | every exact rank-four-cut realization of three consecutive paired roles and a constant safe separator tail needs at least ten states | formalized core; audited six-order certificates | graduated |
 | [`MM-M01`](#mm-m01-off-diagonal-companion-interface) | partial mechanism | off-diagonal rank-two bridge has a complete fracture grammar | audited | stock |
 | [`MM-M02`](#mm-m02-bordered-toggle) | partial mechanism | one lifted toggle has a stable rank-two third power | audited | parked |
 | [`MM-M03`](#mm-m03-five-state-setter-punctuation) | partial mechanism | a mixed delimiter word is an exact internal rank-one separator | audited | closed |
@@ -2185,6 +2186,40 @@ progress states.
 
 **Artifact:**
 [`audits/m53-six-guard-rank-wall-2026-08-31.md`](audits/m53-six-guard-rank-wall-2026-08-31.md).
+
+### MM-O23: Consecutive transfer-moment tax
+
+**Kind:** obstruction
+**Evidence:** formalized core; audited six-order certificates
+**Disposition:** graduated
+
+Let a binary generator factor as `B=UV` through a four-dimensional interface and let `A` be
+the other generator. Consecutive cuts interact through the moments `Mᵣ=VAʳU`; no parser fibre
+is private. Nevertheless every finite block-Hankel section of `(Mᵣ)` factors through the ambient
+state space.
+
+At deletion width three and body `bb`, assign the first three moments to nonzero rescalings of
+the paired toggle and two data roles, in any order, and assign every later moment to the absorbed
+separator. Exact `10 × 10` minors are nonsingular for all six orders. Hence every such transfer
+system has at least ten states. Lean proves the generic factorization, one sparse nonsingularity
+certificate, and the cardinal bound. The other five exact minors are reconstructed by the
+checked audit program.
+
+**Scope:** exact semigroup-valued consecutive moments with a constant separator tail. The
+result permits arbitrary cross-path superposition and arbitrary transition `A`, but does not
+cover changed nonzero values preserving only zeros, nonconsecutive role moments, a nonconstant
+safe tail, or nonlinear boundary semantics.
+
+**Use:** do not pursue nine states by replacing the direct-sum comb with a single rank-four cut
+while retaining the same three consecutive source roles and constant separator gaps. Change the
+internal series or its run-length grammar.
+
+**Formalization:** `transferHankel_factor`, `tbcMinor_det_ne_zero`, and
+`ten_le_card_of_tbc_transfer_moments` in
+[`MatrixMortality/RunLengthHankel.lean`](MatrixMortality/RunLengthHankel.lean).
+
+**Artifact:**
+[`audits/m92-run-length-transfer-hankel-2026-08-31.md`](audits/m92-run-length-transfer-hankel-2026-08-31.md).
 
 ### MM-M01: Off-diagonal companion interface
 
