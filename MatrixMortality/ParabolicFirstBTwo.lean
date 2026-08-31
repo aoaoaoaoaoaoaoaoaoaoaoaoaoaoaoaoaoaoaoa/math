@@ -813,17 +813,13 @@ theorem bZeroBDefectCOneCodeCore_ccbccb_ne_zero (rest : List TagLetter) :
       exact_mod_cast low
     linarith
 
-/-- The exceptional waits do not close the `b | b | c` bridge on any body with prefix
-`ccbccb`. -/
-theorem bridge_bZero_bTwo_cOne_det_ne_zero_of_ccbccb
-    (rest : List TagLetter) :
-    (bridge 27
-      (bAtom 27 (3 * 38) * bAtom 27 (3 * 213 + 2) *
-        cAtom 27 (nearySideLowerC 3 ([.c, .c, .b, .c, .c, .b] ++ rest))
-          (nearySideLowerCScale 3 ([.c, .c, .b, .c, .c, .b] ++ rest))
-          (3 * 465 + 1))).det ≠ 0 := by
-  rw [bridge_bZero_bTwo_cOne_det]
-  apply mul_ne_zero (by norm_num)
+/-- The exceptional second-first-`b` endpoint is nonzero over the rational core used by the
+determinant reduction. -/
+theorem bZeroBDefectCOneCodeCore_ccbccb_ne_zero_rat (rest : List TagLetter) :
+    bZeroBDefectCOneCodeCore
+      ((3 : ℚ) ^ (tagEncode 3 ([.c, .c, .b, .c, .c, .b] ++ rest)).length)
+      (ternaryCode (tagEncode 3 ([.c, .c, .b, .c, .c, .b] ++ rest)))
+      213 465 38 ≠ 0 := by
   intro rational_core_zero
   have power_cast :
       (((3 : Nat) ^ (tagEncode 3 ([.c, .c, .b, .c, .c, .b] ++ rest)).length : Nat) : ℚ) =
@@ -841,19 +837,31 @@ theorem bridge_bZero_bTwo_cOne_det_ne_zero_of_ccbccb
           (ternaryCode (tagEncode 3 ([.c, .c, .b, .c, .c, .b] ++ rest)))
           213 465 38 := by
     norm_num [bZeroBDefectCOneCodeCore]
+  have cast_zero :
+      ((bZeroBDefectCOneCodeCore
+        ((3 : ℤ) ^ (tagEncode 3 ([.c, .c, .b, .c, .c, .b] ++ rest)).length)
+        (ternaryCode (tagEncode 3 ([.c, .c, .b, .c, .c, .b] ++ rest)))
+        213 465 38 : ℤ) : ℚ) = 0 := by
+    rw [cast_integer_core]
+    exact rational_core_zero
   have integer_core_zero :
       bZeroBDefectCOneCodeCore
         ((3 : ℤ) ^ (tagEncode 3 ([.c, .c, .b, .c, .c, .b] ++ rest)).length)
         (ternaryCode (tagEncode 3 ([.c, .c, .b, .c, .c, .b] ++ rest)))
         213 465 38 = 0 := by
-    have cast_zero :
-        ((bZeroBDefectCOneCodeCore
-          ((3 : ℤ) ^ (tagEncode 3 ([.c, .c, .b, .c, .c, .b] ++ rest)).length)
-          (ternaryCode (tagEncode 3 ([.c, .c, .b, .c, .c, .b] ++ rest)))
-          213 465 38 : ℤ) : ℚ) = 0 := by
-      rw [cast_integer_core]
-      exact rational_core_zero
     exact_mod_cast cast_zero
   exact bZeroBDefectCOneCodeCore_ccbccb_ne_zero rest integer_core_zero
+
+/-- The exceptional waits do not close the `b | b | c` bridge on any body with prefix
+`ccbccb`. -/
+theorem bridge_bZero_bTwo_cOne_det_ne_zero_of_ccbccb
+    (rest : List TagLetter) :
+    (bridge 27
+      (bAtom 27 (3 * 38) * bAtom 27 (3 * 213 + 2) *
+        cAtom 27 (nearySideLowerC 3 ([.c, .c, .b, .c, .c, .b] ++ rest))
+          (nearySideLowerCScale 3 ([.c, .c, .b, .c, .c, .b] ++ rest))
+          (3 * 465 + 1))).det ≠ 0 := by
+  rw [bridge_bZero_bTwo_cOne_det]
+  exact mul_ne_zero (by norm_num) (bZeroBDefectCOneCodeCore_ccbccb_ne_zero_rat rest)
 
 end MatrixMortality.ParabolicBlade
