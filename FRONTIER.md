@@ -2488,6 +2488,16 @@ can flip zero to a unit. More strongly, for every `M>0`, congruent waits `m` and
 opposite guard outcomes at a unit zero preimage with tail length `v₅(M)`. Fixed-modulus all-depth
 compression is therefore dead. This is
 [`D2-S07`](SALVAGE.md#d2-s07-period-ten-shell-guard).
+For the fixed-unit-target problem this growing guard precision disappears: final unitality is
+already equivalent to every intermediate shell guard. More importantly, normalized target depth
+collapses. The exact identity
+`T_(m+k)(x)=U(d+k,μ) ↔ T_m(x)=U(d,μ)` lets the final wait absorb every depth shift. For `d≥2`,
+the sharp three-wait window also makes the shift reversible, so the nonempty predecessor set is
+independent of target depth. Unit acceptance has period ten along the ray. Every guarded
+fixed-source query therefore reduces to depths `0`, `1`, or one of `2,…,11`, with the exact
+rational mantissa left untouched. The live reverse tree is an unbounded mantissa address, not an
+unbounded target-depth counter. This is
+[`D2-S08`](SALVAGE.md#d2-s08-twelve-class-target-depth-collapse).
 The deepest of those three branches is itself a full depth reset. In normalized band coordinates
 `U(d,μ)=1/5+(3/10)(2/3)^dμ`, every target band `d≥2` contains a point whose `d−2` predecessor has
 any prescribed band `n≥7` and mantissa in `(2/3,1]`. An explicit guarded subfamily fixes target
