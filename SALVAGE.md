@@ -211,6 +211,7 @@ file owns the mathematical stock.
 | [`M4-O15`](#m4-o15-original-pseudo-terminal-endpoint-obstruction) | obstruction | one regular gap-thirty pseudo-production defeats every instantiation of the original endpoint compiler | formalized | graduated |
 | [`M4-O16`](#m4-o16-one-complement-spectral-checksum-obstruction) | obstruction | every rational one-complement cube root is resonant with affine aliases or yields an immortal family | audited | graduated |
 | [`M4-O17`](#m4-o17-positive-nielsen-basis-obstruction) | obstruction | Carvalho's positive Nielsen basis has trivial positive-monoid intersection with every halting equalizer | audited | graduated |
+| [`M4-D04`](#m4-d04-cyclic-side-binary-fixed-boundary-decision) | decidable stratum | positive binary free-group fixed-boundary equality is decidable when either homomorphism is noninjective | formalized core; audited decision | graduated |
 | [`G3-O01`](#g3-o01-four-role-macro-irreducibility) | obstruction | exact nonerasing macros cannot reduce the four source roles to three letters | formalized | graduated |
 | [`G3-O08`](#g3-o08-erasing-and-stationary-closed-block-obstruction) | obstruction | paired Parikh rank kills erasing exact macros and stationary closed-return block encoders | audited; formalized core | graduated |
 | [`G3-S01`](#g3-s01-shift-equivariant-zero-incidence) | structure theorem | same-zero state dimension is equivariant projective incidence dimension | audited | active |
@@ -7373,6 +7374,44 @@ every nontrivial halting witness even before generator-count compression.
 **Artifact:**
 [`audits/m43-free-group-punctuation-2026-08-11.md`](audits/m43-free-group-punctuation-2026-08-11.md)
 and [`references/carvalho-2026-free-group-pcp.md`](references/carvalho-2026-free-group-pcp.md).
+
+### M4-D04: Cyclic-side binary fixed-boundary decision
+
+**Kind:** decidable stratum
+
+**Evidence:** formalized core; audited decision
+
+**Disposition:** graduated
+
+For positive words over a binary source, suppose one free-group homomorphism has cyclic image,
+with generator values `g^r₀,g^r₁`. Its value on a word is `g^n`, where
+`n=r₀|w|₀+r₁|w|₁`. The four-boundary equation is then exactly the intersection in `F(Δ)×ℤ` of
+
+```text
+⟨(β(0),r₀),(β(1),r₁)⟩⁺
+```
+
+with one two-sided cyclic corridor `{(P g^n Q,n):n∈ℤ}`. Both sets are rational, and their
+intersection is nonempty exactly when the identity belongs to their rational inverse-product.
+Rational-subset membership in `F(Δ)×ℤ` is decidable by the transitive-forest theorem for graph
+groups.
+
+A noninjective homomorphism from `F₂` to a free group has cyclic image: a noncyclic two-generated
+image would have rank two, and Hopficity of `F₂` would make the quotient map injective. Therefore
+every hard positive binary fixed-boundary instance has both homomorphisms injective.
+
+**Scope:** arbitrary four free-group boundaries, every positive binary interior including the
+empty word, and either noninjective side. Lean proves the exact cyclic-corridor reduction over an
+arbitrary group. The Hopfian implication and rational-subset algorithm are audited. The theorem
+does not decide the injective/injective stratum.
+
+**Use:** reject every marker-tail compiler with a noninjective source map. The sole surviving
+free-cancellation source node is a spelling-sound injective/injective binary compiler or a
+decision theorem for that restricted stratum.
+
+**Artifact:**
+[`MatrixMortality/CyclicBinaryBoundary.lean`](MatrixMortality/CyclicBinaryBoundary.lean) and
+[`audits/m43-cyclic-side-fixed-boundary-decision-2026-08-30.md`](audits/m43-cyclic-side-fixed-boundary-decision-2026-08-30.md).
 
 ### M4-O08: Residue-two necessary wall
 
