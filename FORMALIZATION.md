@@ -1421,6 +1421,7 @@ The setter-projective audit now also exposes a kernel-friendly carry theorem:
 | [`MM-S09`](SALVAGE.md#mm-s09-canonical-swapped-residue-cannot-hit-a-pole) | canonical discrepancy formula, pole-ratio equation, modulo-`ρ` suffix extraction, and final-erasure contradiction |
 | [`MM-S10`](SALVAGE.md#mm-s10-swapped-target-suffix-sieve) | `β+2`-digit pole congruence, swapped lower-suffix grammar, and exclusion of `Δ=ρ−1` |
 | [`MM-S35`](SALVAGE.md#mm-s35-first-multi-transfer-trichotomy) | exact upper-length grammar, nonresonant denominator shell, later-pole length balance, resonant singleton unit obstruction, and three-shape first multi-transfer gate |
+| [`MM-S44`](SALVAGE.md#mm-s44-compiler-envelope-rule-bearing-extinction) | first-role mismatch cylinder, compiler-body lower-code bound, target-pole discrepancy interval, and exact all-erasure survivor theorem |
 
 These records narrow the missing arbitrary-depth theorem but do not prove
 projective avoidance. Their reconstruction is
@@ -1585,7 +1586,18 @@ initial two `c` roles enters the branch with the same punctuated upper code `14�
 length two. `twoC_then_singletonB_avoids_singleton_pole` substitutes the literal middle `D_b`
 and factors the two singleton-target equations into one cubic and one quintic. Shifting
 `ρ=t+27` makes every coefficient strictly positive, so both pole expressions are negative.
-Only `cc→multi` and `c^(β+1)→singleton` survive the first swapped-ternary multi-transfer gate.
+Only `cc→multi` and `c^(β+1)→singleton` survive this cut.
+
+Record [`MM-S44`](SALVAGE.md#mm-s44-compiler-envelope-rule-bearing-extinction) removes every
+rule-bearing phase from those two branches. `ruleBearing_allC_avoids_pole` first bounds the
+signed mismatch of the initial punctuated upper code by its leading role letter. The compiler
+body conditions `|body|≥β−1` and `head(body)=b` then force every middle `R_c` lower code above
+`9ρ²·3^(n−1)`. Against the all-`c` upper bound, the normalized discrepancy is at most zero for
+a `c`-leading first block and greater than `3μ` for a `b`-leading first block, while any physical
+target pole requires the open interval `(0,3μ)`. The packaged theorem
+`firstMultiTransfer_pole_forces_all_erasure` composes this cylinder with `MM-S35` and `MM-S38`:
+the only remaining first multi-transfer middles are literal `D_c²` and `D_c^(β+1)`. Their
+reachability and later product residuals remain open.
 
 Record [`MM-S21`](SALVAGE.md#mm-s21-bounded-decimal-suffix-cycles) closes the fixed-precision
 suffix-descent lane. `DecimalSetterSuffix.cycleDefect_lift` gives an explicit one-digit lift for

@@ -993,7 +993,16 @@ before extending the carry to greater depth.
 for both singleton targets. The two pole expressions factor into strictly negative cubic and
 quintic products after the shift `ρ=t+27`; the result is independent of the initial two `c`
 phases and of the compiler body. The first swapped-ternary multi-transfer front now has two
-branches: `cc→multi` and `c^(β+1)→singleton`.
+letter branches: `cc→multi` and `c^(β+1)→singleton`.
+
+[`MM-S44`](SALVAGE.md#mm-s44-compiler-envelope-rule-bearing-extinction) collapses their phase
+grammar. Under the exact compiler envelope `|body|≥β−1`, `head(body)=b`, any middle occurrence
+of `R_c` forces the normalized second-transfer discrepancy outside the target-pole interval:
+`Δ≤0` for a `c`-leading first block and `Δ>3μ` for a `b`-leading one, whereas every physical
+target requires `0<Δ<3μ`. Combined with `MM-S35` and `MM-S38`, the first multi-transfer front
+now consists only of the literal blocks `D_c²→multi` and `D_c^(β+1)→singleton`. Neither is a
+witness; exact ancestry and composed suffix equations must now kill these two all-erasure
+survivors or expose a counterexample.
 
 The immediate ternary question is which other positive valuation-one discrepancies survive its
 suffix sieve without already certifying source halting.
