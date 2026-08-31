@@ -1189,6 +1189,16 @@
 'MatrixMortality.DecimalSetterAncestry.radical_gapFactor_dvd_allEraseLowerCode' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.DecimalSetterAncestry.entrySaturationWidth_three_le' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterAncestry.allEraseLowerCode_identity' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.DecimalSetterAncestry.gapFactor_dvd_entrySaturationLowerCode' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterAncestry.entrySaturator_rawHead_shell_impossible' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.DecimalSetterAncestry.carrierFactor_multiToSingleton_quotientGate' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]

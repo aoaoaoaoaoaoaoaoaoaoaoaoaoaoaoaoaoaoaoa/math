@@ -903,6 +903,14 @@ the full `q`, not merely by `rad(q)`. This does not make that block reachable fr
 distinguished carrier. The live seam is encoded-entry reachability with upper-code and complete
 suffix data retained; support projection alone is exhausted.
 
+[`MM-S32`](SALVAGE.md#mm-s32-entry-support-saturator-extinction) makes the first encoded-entry
+cut. Replace the Euler width by `n=3φ(|q|)`: the all-`D_c` lower code remains divisible by the
+full gap and now has `n≥3`. The raw-head extinction theorem `MM-S19` therefore forbids this
+universal saturator from taking any lawful two-`c` raw head to another multi-role pole. The
+remaining first-step saturation grammar is rule-bearing or contains `D_b`; later all-`D_c`
+saturation from generalized product residuals also remains open. The distinction between source
+language membership and carrier reachability is now formal rather than advisory.
+
 [`MM-O20`](SALVAGE.md#mm-o20-decimal-first-cylinder-collision) gives the unbounded suffix
 language an exact metric: a backward word gains the sum of its shifts in both decimal valuations,
 and one block maps the unit domain onto one exact suffix cylinder. But first-cylinder decoding is
