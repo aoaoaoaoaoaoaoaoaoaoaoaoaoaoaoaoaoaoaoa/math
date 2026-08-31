@@ -259,6 +259,7 @@ file owns the mathematical stock.
 | [`G3-O21`](#g3-o21-actual-carvalho-slice-density) | obstruction | every fixed-character slice of Carvalho's actual program graph is Zariski dense in `PSL₂²` | audited | graduated |
 | [`G3-O22`](#g3-o22-invertible-fibre-span-rigidity) | structural reduction | invertible spelling fibres form computable line or plane group orbits | formalized core | graduated |
 | [`G3-O23`](#g3-o23-singular-triangle-carrier-collapse) | structural reduction | every singular saturated three-state triangle carrier collapses effectively to an invertible two-state carrier | formalized core | graduated |
+| [`G3-O28`](#g3-o28-ambient-profinite-blindness-of-the-unique-coset) | obstruction | one promised-empty non-elementary Borel coset meets the shear group in every finite quotient of its natural `S`-arithmetic ambient group | formalized core; audited import | graduated |
 | [`G3-O24`](#g3-o24-directed-dyck-absorption-collapse) | obstruction | faithful finite-dimensional absorption of one-way Dyck cancellation forces the reverse cancellation | formalized core | graduated |
 | [`G3-O25`](#g3-o25-stable-cone-rank-fork) | structural reduction and countermodel | a singular stable-cone separator compresses to its image, while directed monotonicity alone already fits rank-two three-state matrices | formalized | graduated |
 | [`G3-O20`](#g3-o20-consecutive-repeat-tail-closure) | obstruction | two consecutive solutions of a fixed-boundary one-block pump force every later exponent | formalized | graduated |
@@ -10850,6 +10851,54 @@ projective group-orbit instance. Treat this as a joint `M₃(4)`/dimension-two r
 **Artifact:** [`PositiveFreeCancellation.lean`](MatrixMortality/PositiveFreeCancellation.lean)
 and
 [`m34-singular-triangle-collapse-2026-08-30.md`](audits/m34-singular-triangle-collapse-2026-08-30.md).
+
+### G3-O28: Ambient profinite blindness of the unique coset
+
+**Kind:** obstruction
+
+**Evidence:** formalized core; audited external theorem
+
+**Disposition:** graduated
+
+For the step-three shears and rational boundary data
+
+```text
+A=[[1,3],[0,1]],       B=[[1,0],[3,1]],
+p=[1:1],               q=[7:10],
+g₀=[[19,−12],[27,−17]],
+```
+
+ping-pong proves that `H=⟨A,B⟩` is free, `Stab_H(p)=1`, and `q∉Hp`; equivalently,
+`H∩g₀Stab(p)=∅`. Nevertheless, whenever `19r=1` in a commutative ring,
+
+```text
+B^(9r) A B² A^(−r) B^(−38) A^(−4r)=g₀.                 (1)
+```
+
+Thus the complete matrix `g₀`, not merely its target ray, lies in the congruence closure of `H`
+modulo every integer prime to nineteen. Lean checks the matrix factorization, the signed and
+positive modular spellings, determinant one, the target action, and the rational nonreachability.
+
+Conjugating `p` to infinity places `H`, `g₀`, and the standard upper Borel inside the finite-index
+group `Γ₀(3;ℤ[1/19])`. For a homomorphism from this `Γ₀(3)` to a finite group, its kernel is
+finite-index in `SL₂(ℤ[1/19])`. Serre's exact congruence-subgroup theorem puts some principal
+`Γ(N)` inside that kernel, and (1) then identifies `g₀` with an element of `H`. Pullback through
+`SL₂→PGL₂` gives the same conclusion for projective finite quotients. The empty Borel coset is a
+valid uniqueness-promise instance but survives every finite quotient of its natural
+`S`-arithmetic ambient group.
+
+**Scope:** profinite closure is relative to the displayed ambient `Γ₀(3)`, its projective image,
+and the full `PGL₂` ambient by restriction. The theorem does not assert intrinsic finite-quotient
+blindness for a smaller abstract presentation, local density of the whole orbit, undecidability,
+or failure of syntax-sensitive and Archimedean algorithms.
+
+**Use:** delete finite ambient-group separation, including hypothetical noncongruence quotients,
+from the `UCB₂(S)` decision tree. A surviving algorithm must retain syntax, height, Archimedean
+geometry, or another infinite invariant.
+
+**Artifacts:** [`CongruenceBlindOrbit.lean`](MatrixMortality/CongruenceBlindOrbit.lean),
+[`m34-unique-coset-profinite-blindness-2026-08-30.md`](audits/m34-unique-coset-profinite-blindness-2026-08-30.md),
+and [`serre-1970-congruence-sl2.md`](references/serre-1970-congruence-sl2.md).
 
 ### G3-O24: Directed-Dyck absorption collapse
 

@@ -506,6 +506,115 @@ theorem exists_positiveBridgeWord_modular_hit (modulus : ℕ) (modulus_pos : 0 <
   rw [positiveModularWord_product]
   exact signed_hit
 
+/-! ## Full-matrix congruence ghost -/
+
+/-- An integral determinant-one matrix carrying `[1:1]` to the second rational gap point
+`[7:10]`. Unlike the first bridge target, this whole matrix lies in the congruence closure of
+the step-three shear group away from the prime nineteen. -/
+def profiniteTargetMatrix (R : Type*) [CommRing R] : Square₂ R :=
+  !![19, -12; 27, -17]
+
+/-- Six shear blocks giving the target matrix whenever `inverse` is the inverse of nineteen. -/
+def profiniteBridgeMatrix {R : Type*} [CommRing R] (inverse : R) : Square₂ R :=
+  lowerShear (27 * inverse) * upperShear 3 * lowerShear 6 *
+    upperShear (-3 * inverse) * lowerShear (-114) * upperShear (-12 * inverse)
+
+/-- The six-block bridge becomes the fixed integral target matrix over every ring in which the
+chosen parameter inverts nineteen. -/
+theorem profiniteBridgeMatrix_eq_target
+    {R : Type*} [CommRing R] (inverse : R) (inverse_relation : 19 * inverse = 1) :
+    profiniteBridgeMatrix inverse = profiniteTargetMatrix R := by
+  ext i j
+  fin_cases i
+  · fin_cases j
+    · simp [profiniteBridgeMatrix, profiniteTargetMatrix, upperShear, lowerShear,
+        Matrix.mul_apply, Fin.sum_univ_succ]
+      linear_combination 342 * inverse_relation
+    · simp [profiniteBridgeMatrix, profiniteTargetMatrix, upperShear, lowerShear,
+        Matrix.mul_apply, Fin.sum_univ_succ]
+      linear_combination (-4104 * inverse - 15) * inverse_relation
+  · fin_cases j
+    · simp [profiniteBridgeMatrix, profiniteTargetMatrix, upperShear, lowerShear,
+        Matrix.mul_apply, Fin.sum_univ_succ]
+      linear_combination (9234 * inverse + 135) * inverse_relation
+    · simp [profiniteBridgeMatrix, profiniteTargetMatrix, upperShear, lowerShear,
+        Matrix.mul_apply, Fin.sum_univ_succ]
+      linear_combination (-110808 * inverse ^ 2 - 1701 * inverse - 18) * inverse_relation
+
+/-- Signed step-three shear exponents for the full-matrix bridge. -/
+def profiniteBridgeWord (inverse : ℤ) : List (Bool × ℤ) :=
+  [(true, 9 * inverse), (false, 1), (true, 2),
+    (false, -inverse), (true, -38), (false, -4 * inverse)]
+
+/-- The signed bridge word is the six-factor bridge matrix over every commutative ring. -/
+theorem profiniteBridgeWord_product
+    {R : Type*} [CommRing R] (inverse : ℤ) :
+    wordProduct (modularShearPower (R := R)) (profiniteBridgeWord inverse) =
+      profiniteBridgeMatrix (inverse : R) := by
+  ext i j
+  fin_cases i
+  · fin_cases j
+    · simp [profiniteBridgeWord, profiniteBridgeMatrix, modularShearPower, wordProduct,
+        upperShear, lowerShear, Matrix.mul_apply, Fin.sum_univ_succ]
+      ring
+    · simp [profiniteBridgeWord, profiniteBridgeMatrix, modularShearPower, wordProduct,
+        upperShear, lowerShear, Matrix.mul_apply, Fin.sum_univ_succ]
+      ring
+  · fin_cases j
+    · simp [profiniteBridgeWord, profiniteBridgeMatrix, modularShearPower, wordProduct,
+        upperShear, lowerShear, Matrix.mul_apply, Fin.sum_univ_succ]
+      ring
+    · simp [profiniteBridgeWord, profiniteBridgeMatrix, modularShearPower, wordProduct,
+        upperShear, lowerShear, Matrix.mul_apply, Fin.sum_univ_succ]
+      ring
+
+/-- An integral representative of the inverse of nineteen modulo a coprime modulus. -/
+def profiniteInverse (modulus : ℕ) : ℤ :=
+  (((19 : ZMod modulus)⁻¹).val : ℤ)
+
+/-- The chosen representative is an inverse of nineteen in the residue ring. -/
+theorem profiniteInverse_relation (modulus : ℕ) (coprime : Nat.Coprime 19 modulus) :
+    (19 : ZMod modulus) * profiniteInverse modulus = 1 := by
+  simpa [profiniteInverse] using ZMod.mul_val_inv coprime
+
+/-- Modulo every integer prime to nineteen, an explicit signed word in the two step-three shears
+equals the whole fixed target matrix, not merely its action on one projective ray. -/
+theorem exists_profiniteBridgeWord_modular_eq
+    (modulus : ℕ) (coprime : Nat.Coprime 19 modulus) :
+    ∃ word : List (Bool × ℤ),
+      wordProduct (modularShearPower (R := ZMod modulus)) word =
+        profiniteTargetMatrix (ZMod modulus) := by
+  refine ⟨profiniteBridgeWord (profiniteInverse modulus), ?_⟩
+  rw [profiniteBridgeWord_product]
+  exact profiniteBridgeMatrix_eq_target _ (profiniteInverse_relation modulus coprime)
+
+/-- The full-matrix congruence witness may also be represented by a positive word modulo every
+positive modulus prime to nineteen. -/
+theorem exists_positiveProfiniteBridgeWord_modular_eq
+    (modulus : ℕ) (modulus_pos : 0 < modulus) (coprime : Nat.Coprime 19 modulus) :
+    ∃ word : List Bool,
+      wordProduct (modularShearGenerator (R := ZMod modulus)) word =
+        profiniteTargetMatrix (ZMod modulus) := by
+  let _ : NeZero modulus := ⟨modulus_pos.ne'⟩
+  obtain ⟨signedWord, signed_eq⟩ := exists_profiniteBridgeWord_modular_eq modulus coprime
+  refine ⟨signedWord.flatMap (positiveModularSyllable modulus), ?_⟩
+  rw [positiveModularWord_product, signed_eq]
+
+/-- The full-matrix target has determinant one. -/
+theorem profiniteTargetMatrix_det : (profiniteTargetMatrix ℤ).det = 1 := by
+  norm_num [profiniteTargetMatrix, Matrix.det_fin_two]
+
+/-- The full-matrix target sends the integral source vector exactly to `[7:10]`. -/
+theorem profiniteTargetMatrix_mulVec_source
+    {R : Type*} [CommRing R] :
+    profiniteTargetMatrix R *ᵥ sourceRay R = ![7, 10] := by
+  ext i
+  fin_cases i
+  · simp [profiniteTargetMatrix, sourceRay, Matrix.mulVec, dotProduct, Fin.sum_univ_succ]
+    ring
+  · simp [profiniteTargetMatrix, sourceRay, Matrix.mulVec, dotProduct, Fin.sum_univ_succ]
+    ring
+
 /-! ## Rational ping-pong -/
 
 /-- The rational projective line. -/
@@ -526,6 +635,32 @@ def sourcePoint : RationalPoint := some 1
 
 /-- The rational target point. -/
 def targetPoint : RationalPoint := some (10 / 13)
+
+/-- The rational target point for the full-matrix congruence ghost. -/
+def profiniteTargetPoint : RationalPoint := some (7 / 10)
+
+/-- The determinant-one target matrix as an invertible rational matrix. -/
+def profiniteTargetUnit : Matrix.GeneralLinearGroup (Fin 2) ℚ where
+  val := profiniteTargetMatrix ℚ
+  inv := !![-17, 12; -27, 19]
+  val_inv := by
+    ext i j
+    fin_cases i
+    · fin_cases j
+      · norm_num [profiniteTargetMatrix, Matrix.mul_apply, Fin.sum_univ_succ]
+      · norm_num [profiniteTargetMatrix, Matrix.mul_apply, Fin.sum_univ_succ]
+    · fin_cases j
+      · norm_num [profiniteTargetMatrix, Matrix.mul_apply, Fin.sum_univ_succ]
+      · norm_num [profiniteTargetMatrix, Matrix.mul_apply, Fin.sum_univ_succ]
+  inv_val := by
+    ext i j
+    fin_cases i
+    · fin_cases j
+      · norm_num [profiniteTargetMatrix, Matrix.mul_apply, Fin.sum_univ_succ]
+      · norm_num [profiniteTargetMatrix, Matrix.mul_apply, Fin.sum_univ_succ]
+    · fin_cases j
+      · norm_num [profiniteTargetMatrix, Matrix.mul_apply, Fin.sum_univ_succ]
+      · norm_num [profiniteTargetMatrix, Matrix.mul_apply, Fin.sum_univ_succ]
 
 /-- Integral upper shears as rational invertible matrices. -/
 def upperUnit (exponent : ℤ) : Matrix.GeneralLinearGroup (Fin 2) ℚ where
@@ -855,6 +990,15 @@ theorem source_target_outside_chambers (index : Bool) :
     · change ¬|(10 / 13 : ℚ)| < 2 / 3
       norm_num [abs_of_nonneg]
 
+/-- The full-matrix target lies in the same ping-pong gap as the source. -/
+theorem profiniteTarget_outside_chambers (index : Bool) :
+    profiniteTargetPoint ∉ chamber index := by
+  cases index
+  · change ¬1 < |(7 / 10 : ℚ)|
+    norm_num [abs_of_nonneg]
+  · change ¬|(7 / 10 : ℚ)| < 2 / 3
+    norm_num [abs_of_nonneg]
+
 /-- Every nonidentity free-product word moves the source into the chamber of its first factor. -/
 theorem nontrivial_maps_source_into_chamber
     {word : ShearFreeProduct} (word_ne : word ≠ 1) :
@@ -887,6 +1031,39 @@ theorem targetPoint_not_reachable (word : ShearFreeProduct) :
     intro target_eq
     rw [target_eq] at moved_mem
     exact (source_target_outside_chambers index).2 moved_mem
+
+/-- No word in the two rational shears sends `[1:1]` to `[7:10]`. -/
+theorem profiniteTargetPoint_not_reachable (word : ShearFreeProduct) :
+    shearRepresentation word • sourcePoint ≠ profiniteTargetPoint := by
+  by_cases word_one : word = 1
+  · subst word
+    norm_num [sourcePoint, profiniteTargetPoint]
+  · obtain ⟨index, moved_mem⟩ := nontrivial_maps_source_into_chamber word_one
+    intro target_eq
+    rw [target_eq] at moved_mem
+    exact profiniteTarget_outside_chambers index moved_mem
+
+/-- The full-matrix target carries the source point to the profinite ghost target. -/
+theorem profiniteTargetUnit_smul_source :
+    profiniteTargetUnit • sourcePoint = profiniteTargetPoint := by
+  change ProjectiveLine.act (profiniteTargetMatrix ℚ) (some 1) = some (7 / 10)
+  norm_num [ProjectiveLine.act, ProjectiveLine.numerator, ProjectiveLine.denominator,
+    profiniteTargetMatrix]
+
+/-- No represented shear word lies in the target matrix times the source stabilizer. -/
+theorem shearRepresentation_ne_profiniteTarget_mul_stabilizer
+    (word : ShearFreeProduct)
+    (stabilizer : Matrix.GeneralLinearGroup (Fin 2) ℚ)
+    (fixed : stabilizer • sourcePoint = sourcePoint) :
+    shearRepresentation word ≠ profiniteTargetUnit * stabilizer := by
+  intro representation_eq
+  apply profiniteTargetPoint_not_reachable word
+  calc
+    shearRepresentation word • sourcePoint =
+        (profiniteTargetUnit * stabilizer) • sourcePoint := by rw [representation_eq]
+    _ = profiniteTargetUnit • (stabilizer • sourcePoint) := by rw [mul_smul]
+    _ = profiniteTargetUnit • sourcePoint := by rw [fixed]
+    _ = profiniteTargetPoint := profiniteTargetUnit_smul_source
 
 /-- The source ray has trivial stabilizer in the abstract shear free product. -/
 theorem sourcePoint_stabilizer_trivial

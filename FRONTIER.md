@@ -1276,6 +1276,15 @@ so the modular hit uses an actual positive `{A,B}` word. Hence neither one modul
 nonmembership certificate, and the all-congruence membership criterion is false. This does not
 exclude a global algorithm, prove local density, or settle the Borel-coset intersection.
 
+[`G3-O28`](SALVAGE.md#g3-o28-ambient-profinite-blindness-of-the-unique-coset) strengthens this at
+the exact group-cover boundary. For a second rational gap target, the complete target matrix lies
+in the shear group's congruence closure modulo every integer prime to nineteen. After conjugating
+the source to infinity, the instance lies in `Γ₀(3;ℤ[1/19])`. Serre's exact congruence-subgroup
+theorem upgrades the modular identities to closure in every finite quotient of that ambient
+group. The actual Borel coset remains empty and the source stabilizer remains trivial. Thus even
+noncongruence finite ambient quotients cannot certify every promised no-instance. Syntax, height,
+Archimedean geometry, and infinite normal forms remain available.
+
 The ordinary mortality lift is likewise no longer part of the paired obstruction. For arbitrary
 controls `H_a`, column `γ`, and row `λ` over a field, adjoining `γλ` gives mortality exactly when some
 `λH_yγ` vanishes. A zero product without the separator is already a scalar-zero witness; after
@@ -1381,14 +1390,14 @@ or neutral word across the return, use an empty consume, or split recurrent outp
 | Positive projective transition lower bound | Same-zero dimension three is point-line incidence in `P²`, and actual one-sided shifts retain finite rank/kernel/image data | Derive a uniform nonstationary or noncommuting shift incompatibility from an unbounded terminal section; static support rank, formal inverse completion, fixed equal-length return flowers, and unary consecutive-repeat escape are forbidden |
 | Global word-residual recoding | Longer noncommutative atoms can retain order while discarding the four additive role channels | Escape `G3-D05`: fixed-priority affine counters and all one-way reset/transfer/fanout cascades are decidable |
 | Head-separated three-schema source | `G3-C04` discharges every arbitrary-trace forcing obligation locally; `G3-O24` isolates the directed stable-cone alternative | Preserve an undecidable mixed or neutral word across returns, or realize zero-sensitive S5 GLB decoding after the `G3-O25` separator-rank fork; complete pure forks are decidable by `G3-D07` |
-| Carvalho projective group-orbit separator | `G3-M03` gives the exact saturated three-positive cover; `G3-O23` collapses every singular carrier to invertible dimension two; `D2-D02/D08` decide all elementary group actions | Universalize or decide non-elementary `UCB₂(S)` through global word structure; `R32-O22` kills even positive finite-level separation. Otherwise construct the invertible three-state line/plane orbit left by `G3-O22` |
+| Carvalho projective group-orbit separator | `G3-M03` gives the exact saturated three-positive cover; `G3-O23` collapses every singular carrier to invertible dimension two; `D2-D02/D08` decide all elementary group actions | Universalize or decide non-elementary `UCB₂(S)` through global word structure; `G3-O28` kills every finite quotient of one natural `S`-arithmetic ambient group. Otherwise construct the invertible three-state line/plane orbit left by `G3-O22` |
 
 These six lanes form three trunks. The first three race a direct paired construction against its
 one-sided projective lower bound. The next two seek genuine `GPCP(3)` through either global
 recoding or a native source. The last is now a projective group-orbit attack shared with the
 dimension-two campaign: `G3-O21` closes its algebraic semantic carrier, `G3-O23` removes
-singular spelling memory, `D2-D02/D08` remove the elementary group branch, and `R32-O22`
-removes even positive congruence separation.
+singular spelling memory, `D2-D02/D08` remove the elementary group branch, and `G3-O28`
+removes all finite ambient-quotient separation on one promised no-instance.
 
 #### Raceable leaves
 
@@ -1580,7 +1589,10 @@ word language remains explicit.
 free-orbit case has no congruence-separation theorem: one rational target outside the orbit is in
 its orbit modulo every positive integer, now by an actual positive word at each modulus. Thus the shared artery must use rational/global word
 structure or a noncongruence invariant. The example proves no `p`-adic density statement and no
-decision or hardness result.
+decision or hardness result. [`G3-O28`](SALVAGE.md#g3-o28-ambient-profinite-blindness-of-the-unique-coset)
+now replaces “congruence” by “every finite quotient of `Γ₀(3;ℤ[1/19])`” and replaces ray agreement
+by equality of the entire target matrix. The shared artery must therefore use syntax, height,
+Archimedean structure, or another infinite invariant; a finite ambient-group invariant is dead.
 
 Work on projective incidence should therefore be treated as a joint `M₃(2)`/`M₂(3)` campaign.
 A `GPI₂` algorithm decides all of `M₂(3)` and the rank-`(2,2)` artery of `M₃(2)`; a universal
@@ -2811,10 +2823,10 @@ elements.
 
 Run backward saturation from the target using cones, valuation vectors, residue classes, and
 affine lattices. A successful well-structured formulation must decide exact reachability, not
-only coverability. In parallel, test whether no-instances are separated by a finite congruence
-quotient. Congruence separation would provide enumerable finite certificates for “no.”
-
-Persistent local-global failures modulo every tested modulus would falsify the profinite route.
+only coverability. `G3-O28` closes finite ambient-group separation for `UCB₂(S)`: one promised
+empty coset survives every finite quotient of its natural `S`-arithmetic ambient group. Finite
+residues may remain components of an infinite annotated state, but cannot be the complete
+negative certificate.
 
 #### 7. Valuation universality
 
@@ -2837,7 +2849,8 @@ projective action.
 - Nonelementary complexity with a finite-state core favors building automata, `S`-unit
   equations, or Presburger saturation.
 - Semilinear no-certificates favor affine modules or verification.
-- Finite-modulus no-certificates favor profinite separation.
+- Finite-modulus no-certificates are insufficient on both the positive orbit and unique-coset
+  arteries by `R32-O22/G3-O28`.
 - A computable witness bound favors height, Diophantine, or trace descent.
 - A virtually-solvable/non-elementary dichotomy favors arithmetic dynamics.
 - An undecidability construction with several prime determinants favors valuation storage.
@@ -2895,9 +2908,10 @@ universal computation.
 5. Run the `M₃(4)` program on distinct tracks: history-sensitive paired point-line synthesis,
    projective group-orbit separation for the exponent-one singleton, global word-residual
    recoding, and native three-schema rewriting. `G3-O23` has absorbed the singular saturated
-   Carvalho branch into dimension two, and `R32-O22` has killed congruence separation there; do
-   not revive singular spelling memory, conflate group inverses with positive `M₂(3)` controls,
-   or retry residue-orbit nonmembership as a complete certificate.
+   Carvalho branch into dimension two, and `G3-O28` has killed every finite quotient of one
+   natural `S`-arithmetic ambient group there; do not revive singular spelling memory, conflate
+   group inverses with positive `M₂(3)` controls, or retry finite ambient-group separation as a
+   complete certificate.
 6. Formalize `D2-S02` and `D2-D05`–`D2-D07`, then attack fixed-source exact prefix and
    accepting-exit reachability in the guarded `5`-adic schedule with a synchronized `2`/`3`/`5`
    representation. Use the checked `D2-S03` walls to isolate mixed-sign debt transfer and

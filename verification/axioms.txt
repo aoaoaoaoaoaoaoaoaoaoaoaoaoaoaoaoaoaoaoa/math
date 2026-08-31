@@ -1360,10 +1360,43 @@
 'MatrixMortality.CongruenceBlindOrbit.exists_positiveBridgeWord_modular_hit' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.CongruenceBlindOrbit.profiniteBridgeMatrix_eq_target' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CongruenceBlindOrbit.profiniteBridgeWord_product' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CongruenceBlindOrbit.profiniteInverse_relation' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CongruenceBlindOrbit.exists_profiniteBridgeWord_modular_eq' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CongruenceBlindOrbit.exists_positiveProfiniteBridgeWord_modular_eq' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CongruenceBlindOrbit.profiniteTargetMatrix_det' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CongruenceBlindOrbit.profiniteTargetMatrix_mulVec_source' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.CongruenceBlindOrbit.source_target_outside_chambers' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
 'MatrixMortality.CongruenceBlindOrbit.targetPoint_not_reachable' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CongruenceBlindOrbit.profiniteTarget_outside_chambers' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CongruenceBlindOrbit.profiniteTargetPoint_not_reachable' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CongruenceBlindOrbit.profiniteTargetUnit_smul_source' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CongruenceBlindOrbit.shearRepresentation_ne_profiniteTarget_mul_stabilizer' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
 'MatrixMortality.CongruenceBlindOrbit.sourcePoint_stabilizer_trivial' depends on axioms: [propext,
