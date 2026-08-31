@@ -242,7 +242,7 @@ The unknown cells immediately below this staircase are:
 | `M₃(4)` | three-active-role fixed-boundary PCP / `GPCP(3)`, or a new same-dimension generator compiler | by CHHN, also `M₉(2)` |
 | `M₄(3)` | an undecidable promised two-state overlap queue with pure deletion, or closure of either parabolic bridge language | by CHHN, also `M₈(2)` |
 | `M₅(3)` | a five-state binary same-zero root, a toggle/separator fusion, or fixed-width-three scheduled universality | supersedes `M₆(3)`; `M₁₀(2)` is already known |
-| `M₉(2)` | a history-sensitive same-zero compiler, nonconstant safe transfer tail, or nonlinear boundary; exact prefix and constant-tail transfer routes stop at ten | improves the two-generator threshold by one |
+| `M₉(2)` | a history-sensitive same-zero compiler, sufficiently complex moving transfer tail, or nonlinear boundary; exact prefix and low-tail-complexity transfer routes stop at ten | improves the two-generator threshold by one |
 | `M₂(k≥3)` | a qualitatively different decidability or undecidability argument | settles the dimension-two wall |
 
 The scalar result `Z₆(2)` gives `M₆(3)` after adjoining a separator; that mortality point was
@@ -1057,11 +1057,19 @@ ambient space has dimension at least eleven. Otherwise the positions are exactly
 `MM-O23` gives ten. Thus every distinct placement of the unchanged roles with a constant `P′`
 tail misses nine states.
 
+[`MM-O25`](SALVAGE.md#mm-o25-moving-tail-transfer-tax) charges a nonconstant comparison tail by
+its own exact realization dimension. If two exact series of dimensions `n,h` agree after time
+`m` and their last difference has a rank-three minor, all `m+1` reversed blocks give
+`3(m+1)≤n+h`. Thus a tail with `h≤2` cannot hide a late paired role inside nine ambient states;
+more generally nine states require `h≥3(m+1)−9`.
+
 These theorems are not lower bounds for arbitrary same-zero series. The live seam must change
-the internal moment values, use a nonconstant safe semigroup tail, or make the boundary
+the internal moment values, pay the required dimension in a moving exact tail, use a moving tail
+at the consecutive positions not covered by the late-block theorem, or make the boundary
 semantics nonlinear. See
-[`audits/m92-run-length-transfer-hankel-2026-08-31.md`](audits/m92-run-length-transfer-hankel-2026-08-31.md) and
-[`audits/m92-sparse-transfer-hankel-2026-08-31.md`](audits/m92-sparse-transfer-hankel-2026-08-31.md).
+[`audits/m92-run-length-transfer-hankel-2026-08-31.md`](audits/m92-run-length-transfer-hankel-2026-08-31.md),
+[`audits/m92-sparse-transfer-hankel-2026-08-31.md`](audits/m92-sparse-transfer-hankel-2026-08-31.md),
+and [`audits/m92-moving-tail-transfer-hankel-2026-08-31.md`](audits/m92-moving-tail-transfer-hankel-2026-08-31.md).
 
 ### 4. Three-letter correspondence and direct mortality: `M₃(4)`
 

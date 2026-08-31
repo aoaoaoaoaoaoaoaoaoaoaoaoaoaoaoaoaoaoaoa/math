@@ -168,6 +168,27 @@
 'MatrixMortality.SparseTransferHankel.permutes_zero_one_two_or_eleven_le_card_of_sparse_benchmark_moments' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.MovingTailHankel.differenceSection_det_ne_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MovingTailHankel.card_le_add_of_difference_det_ne_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MovingTailHankel.three_mul_succ_le_card_add_card_of_late_rank_three_difference' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MovingTailHankel.ten_le_card_of_late_rank_three_difference_of_tail_card_le_two' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MovingTailHankel.ten_le_card_of_late_toggle_against_small_tail' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MovingTailHankel.ten_le_card_of_late_dataB_against_small_tail' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MovingTailHankel.ten_le_card_of_late_dataC_against_small_tail' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.pairedProduct_mulVec_column' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.pairedCoefficient_eq_sideCoefficient' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.decodePairedWord_surjective' depends on axioms: [propext]

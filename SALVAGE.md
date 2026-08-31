@@ -95,6 +95,7 @@ file owns the mathematical stock.
 | [`MM-O22`](#mm-o22-six-guard-parser-rank-wall) | obstruction | the six-guard existence transform requires at least seven exact states on every source with an original zero | formalized | graduated |
 | [`MM-O23`](#mm-o23-consecutive-transfer-moment-tax) | obstruction | every exact rank-four-cut realization of three consecutive paired roles and a constant safe separator tail needs at least ten states | formalized core; audited six-order certificates | graduated |
 | [`MM-O24`](#mm-o24-sparse-transfer-moment-tax) | obstruction | arbitrary distinct placements of the three paired roles with a constant separator tail need at least ten states; nonconsecutive placements need eleven | formalized late branch; audited early assembly | graduated |
+| [`MM-O25`](#mm-o25-moving-tail-transfer-tax) | obstruction | exact series agreeing after time `m`, with a last rank-three difference, have realization dimensions summing to at least `3(m+1)` | formalized | graduated |
 | [`MM-M01`](#mm-m01-off-diagonal-companion-interface) | partial mechanism | off-diagonal rank-two bridge has a complete fracture grammar | audited | stock |
 | [`MM-M02`](#mm-m02-bordered-toggle) | partial mechanism | one lifted toggle has a stable rank-two third power | audited | parked |
 | [`MM-M03`](#mm-m03-five-state-setter-punctuation) | partial mechanism | a mixed delimiter word is an exact internal rank-one separator | audited | closed |
@@ -2267,6 +2268,42 @@ bounds, and `permutes_zero_one_two_or_eleven_le_card_of_sparse_benchmark_moments
 
 **Artifact:**
 [`audits/m92-sparse-transfer-hankel-2026-08-31.md`](audits/m92-sparse-transfer-hankel-2026-08-31.md).
+
+### MM-O25: Moving-tail transfer tax
+
+**Kind:** obstruction
+**Evidence:** formalized
+**Disposition:** graduated
+
+Let exact matrix series `Sᵣ=VAʳU` and `Qᵣ=V_qCʳU_q` have realization dimensions `n` and `h`.
+If they agree after time `m` and `S_m−Q_m` has a nonsingular `3 × 3` minor, all `m+1` reversed
+time blocks form a nonsingular `3(m+1) × 3(m+1)` difference Hankel section. The section factors
+through the direct sum of the two state spaces, so
+
+```text
+3(m+1) ≤ n+h.
+```
+
+For the paired benchmark, if `m≥3`, `h≤2`, and `Q_m=P′`, any nonzero rescaling of the toggle,
+data-`b`, or data-`c` role supplies the required minor. Hence `n≥10`. A nine-state realization
+with a later exception must instead pay `h≥3(m+1)−9` in independently realized tail states.
+
+**Scope:** exact linear moment series and an independently exact finite-dimensional comparison
+tail. The tail may move and have arbitrary pointwise rank. The result does not constrain a
+same-zero tail with changed nonzero values, an infinite-Hankel-rank tail, or nonlinear boundary
+semantics; sufficiently large exact tail dimension also survives.
+
+**Use:** charge moving-tail proposals by their exact realization dimension before searching the
+compiler equations. A tail of dimension at most two cannot hide any paired rank-three exception
+at time at least three inside nine ambient states.
+
+**Formalization:** `three_mul_succ_le_card_add_card_of_late_rank_three_difference`,
+`ten_le_card_of_late_rank_three_difference_of_tail_card_le_two`, and the three benchmark-role
+corollaries in
+[`MatrixMortality/MovingTailHankel.lean`](MatrixMortality/MovingTailHankel.lean).
+
+**Artifact:**
+[`audits/m92-moving-tail-transfer-hankel-2026-08-31.md`](audits/m92-moving-tail-transfer-hankel-2026-08-31.md).
 
 ### MM-M01: Off-diagonal companion interface
 

@@ -341,6 +341,14 @@ certificates give ten states. The assembled conclusion is restricted to unchange
 and a constant absorbed-separator tail. See
 [`m92-sparse-transfer-hankel-2026-08-31.md`](audits/m92-sparse-transfer-hankel-2026-08-31.md).
 
+The moving-tail extension compares two independently exact linear series. If dimensions `n,h`
+realize series which agree after time `m`, and their last difference has a nonsingular
+`3 × 3` minor, Lean builds all `m+1` reversed blocks and proves `3(m+1)≤n+h`. This permits a
+nonconstant, arbitrary-rank tail but charges its exact realization dimension. The paired-role
+corollaries show that `m≥3` and `h≤2` force `n≥10` whenever the comparison tail equals `P′` at
+the exceptional time. See
+[`m92-moving-tail-transfer-hankel-2026-08-31.md`](audits/m92-moving-tail-transfer-hankel-2026-08-31.md).
+
 Lean also constructs the canonical reachable-observable quotient around any internal physical
 word whose product factors as `UW`. Its generators act on
 
