@@ -202,9 +202,14 @@ internal boundary: for every `n>0` with
 `n mod 3≠2`, the coupled body `bb c bⁿ c bⁿ` enters a periodic nonhalting orbit
 ([`MM-S25`](SALVAGE.md#mm-s25-separated-two-c-periodic-orbits)). This infinite separated
 two-`c` obstruction is not a source classification. The same diagonal family halts throughout
-`n≡8 (mod 9)` by [`MM-S30`](SALVAGE.md#mm-s30-separated-residue-eight-drainage), leaving
-residues two and five modulo nine open. See `audits/m53-separated-two-c-orbits-2026-08-31.md`
-and `audits/m53-separated-two-c-residue-eight-2026-08-31.md`.
+`n≡8 (mod 9)` by [`MM-S30`](SALVAGE.md#mm-s30-separated-residue-eight-drainage). The exact
+active-pair quotient in
+[`MM-S34`](SALVAGE.md#mm-s34-separated-residue-five-cantor-drainage) proves halting throughout
+`n≡5 (mod 9)` by conjugating the live defect to an injective inverse-Cantor map on a finite
+interval. Only residue two modulo nine remains open on the diagonal. See
+`audits/m53-separated-two-c-orbits-2026-08-31.md`,
+`audits/m53-separated-two-c-residue-eight-2026-08-31.md`, and
+`audits/m53-separated-two-c-residue-five-2026-08-31.md`.
 
 Full mortality requires coding the four payloads and the rank-one separator. The complete
 prefix code
@@ -775,8 +780,10 @@ Three live routes remain.
    supplies an explicit periodic obstruction for the diagonal separated bodies
    `bb c bⁿ c bⁿ` in residues zero and one modulo three, while
    [`MM-S30`](SALVAGE.md#mm-s30-separated-residue-eight-drainage) proves halting in residue
-   eight modulo nine. The next source-level cut is residue two or five modulo nine, or unequal
-   separated runs, not another adjacent-`c` example.
+   eight modulo nine and
+   [`MM-S34`](SALVAGE.md#mm-s34-separated-residue-five-cantor-drainage) proves halting in residue
+   five by a finite injective defect quotient. The next source-level cut is residue two modulo
+   nine or unequal separated runs, not another adjacent-`c` example.
 
 The decimal setter is now the sharpest constructive route. The ternary swap remains useful
 because its suffix and divisor-ray theory is mature; the decimal instance has stronger real

@@ -1041,6 +1041,9 @@
 'MatrixMortality.SeparatedTwoCResidue.eightResidue_tagHaltsFrom' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.SeparatedTwoCResidue.fiveResidue_tagHaltsFrom' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.SetterShear.sideBasis_det' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.SetterShear.delimiter_cube' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.SetterShear.delimiter_square_distinguishedColumn' depends on axioms: [propext,

@@ -2168,6 +2168,7 @@ fixed-rank decision problem.
 | `SeparatedTwoCResidue.lean` | exact halting certificate for the separated diagonal residue `n≡8 (mod 9)` |
 | `TransverseInfiniteCollision.lean` | exact `bcbc` terminal/nonterminal collision for the letter-blind infinite-carrier generator |
 | `TransverseSeparatedAtlas.lean` | distinct rank-two data escape retaining the infinite carrier section and uniformly separating the first `bcbc` fork |
+| `SeparatedTwoCCantor.lean` | exact active-pair macros, width-three head bisimulation, finite Cantor-defect forcing, and halting for `n≡5 (mod 9)` |
 | `AffineRecognizer.lean` | generic singular three-state guard-and-carry representation calculus |
 | `BranchingRecognizer.lean` | complete `bcbc` residual grammar and rational three-state recognizer |
 | `MixedBranchingHistory.lean` | equal-length mixed terminal grammar and exact raw-toggle normal form |
@@ -2616,6 +2617,7 @@ fixed-rank decision problem.
 | The separated body `bb c bⁿ c bⁿ` has an exact `Cₙ→Dₙ→Cₙ` cycle when `n≡0,1 (mod 3)` | `SeparatedTwoCOrbit.cycleQueue_step`, `SeparatedTwoCOrbit.zeroResidue_cycle`, `SeparatedTwoCOrbit.oneResidue_cycle` |
 | Every positive non-residue-two diagonal separated body has a nonhalting coupled input | `SeparatedTwoCOrbit.separated_not_tagHaltsFrom` |
 | Every diagonal separated body with `n≡8 (mod 9)` has a halting coupled input | `SeparatedTwoCResidue.eightResidue_tagHaltsFrom` |
+| Every diagonal separated body with `n≡5 (mod 9)` has a halting coupled input | `SeparatedTwoCResidue.fiveResidue_tagHaltsFrom` |
 | Every binary prefix-machine word has one decoded block per row | `prefixMachine_run`, `WeightedTransducer.wordProduct_apply` |
 | Prefix-machine mortality iff five-matrix mortality | `prefixMachine_mortal_iff_normalized` |
 | Both prefix generators share the ten-dimensional image | `prefixProjection_generator` |
@@ -2887,8 +2889,9 @@ stratum is constructively decidable. Within the remaining separated seam,
 `SeparatedTwoCOrbit.lean` proves that every body
 `bb c bⁿ c bⁿ` with `n>0` and `n mod 3≠2` has a nonhalting coupled input by an exact periodic
 macro. `SeparatedTwoCResidue.lean` proves that the complementary infinite class
-`n≡8 (mod 9)` halts. No declaration claims that the full two-`c` stratum is universal or
-decidable.
+`n≡8 (mod 9)` halts. `SeparatedTwoCCantor.lean` reduces residue five to an injective finite
+defect map and proves that every `n≡5 (mod 9)` coupled input halts. Residue two modulo nine
+remains open. No declaration claims that the full two-`c` stratum is universal or decidable.
 
 ## Prior Formalizations
 

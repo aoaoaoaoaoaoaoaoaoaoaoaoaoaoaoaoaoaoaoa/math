@@ -4454,13 +4454,14 @@ four `bbc` blocks followed by two `bcb` blocks. Every position divisible by thre
 contains `b`; the general constant-head theorem drains the queue because `b` emits one copy of
 itself while each step deletes three letters.
 
-**Scope:** this decides only the diagonal residue `n≡8 (mod 9)`. Together with `MM-S25`, the
-unresolved diagonal residues are `n≡2,5 (mod 9)`. Unequal separated runs and bodies with at
-least three `c` letters remain open. The theorem supplies no width-three universality claim.
+**Scope:** this decides only the diagonal residue `n≡8 (mod 9)`. Together with `MM-S25` and
+`MM-S34`, the unresolved diagonal residue is `n≡2 (mod 9)`. Unequal separated runs and bodies
+with at least three `c` letters remain open. The theorem supplies no width-three universality
+claim.
 
 **Use:** the separated two-`c` boundary contains both infinite periodic and infinite halting
 subfamilies. Any source compiler confined to the diagonal family must encode its computation
-in the two remaining residue classes or escape the family.
+in the remaining residue class or escape the family.
 
 **Formalization:**
 [`MatrixMortality/SeparatedTwoCResidue.lean`](MatrixMortality/SeparatedTwoCResidue.lean), through
@@ -4469,7 +4470,59 @@ in the two remaining residue classes or escape the family.
 **Artifact:**
 [`audits/m53-separated-two-c-residue-eight-2026-08-31.md`](audits/m53-separated-two-c-residue-eight-2026-08-31.md).
 
-**Next:** formalize the active-event macro and decide residues two and five modulo nine.
+**Next:** combine the active-event macro with the `MM-S34` defect coordinate and decide residue
+two modulo nine.
+
+### MM-S34: Separated residue-five Cantor drainage
+
+**Kind:** halting theorem and finite-dynamics reduction
+**Evidence:** formalized
+**Disposition:** active
+
+For `k≥0`, let `A=3k+2`, `n=3A-1=9k+5`, and
+
+```text
+q = bb c bⁿ c bⁿ.
+```
+
+At a queue boundary with two active `c` letters, write the queue as
+`c b^(3A-1) c bʳ` and define its defect and height by
+
+```text
+E = 15A+3-r,    H = 7A+2.
+```
+
+Exact tag histories give three cases. If `E≡0 (mod 3)`, the next defect is `E/3`; if
+`E≡1 (mod 3)`, it is `(E+2H)/3`; and if `E≡2 (mod 3)`, every remaining `c` lies away from a
+deletion head and the queue drains. Some intermediate queues contain inert off-head `c`
+letters. A width-three head-equivalence bisimulation proves that replacing them by `b` preserves
+halting in both directions, so the macro loses no behavior.
+
+On the finite interval `0<E<H`, the two live branches form an injective partial map and send
+every point into an outer third. The coupled input enters at `E₀=4A+1`, strictly inside the
+middle third. If its orbit never reached residue two, finiteness would give a repeated point;
+injectivity cancels the repeated prefix and puts the initial point on a nontrivial cycle. Its
+predecessor would force `E₀` into an outer third, a contradiction. Hence every coupled input
+with `n≡5 (mod 9)` halts.
+
+**Scope:** this decides one further infinite diagonal class. Together with `MM-S25` and
+`MM-S30`, only `n≡2 (mod 9)` remains open in `bb c bⁿ c bⁿ`. The result does not decide unequal
+outer runs, the full separated two-`c` stratum, or width-three universality.
+
+**Use:** the residue-five dynamics are finite after the correct defect quotient despite
+unbounded raw queues. The same active-pair coordinate and inert-letter bisimulation are the
+principal tools for the last diagonal residue and for testing unequal separated runs.
+
+**Formalization:**
+[`MatrixMortality/SeparatedTwoCCantor.lean`](MatrixMortality/SeparatedTwoCCantor.lean), through
+`SeparatedTwoCResidue.HeadEquivalent`, `SeparatedTwoCResidue.exists_cantorDeath`, and
+`SeparatedTwoCResidue.fiveResidue_tagHaltsFrom`.
+
+**Artifact:**
+[`audits/m53-separated-two-c-residue-five-2026-08-31.md`](audits/m53-separated-two-c-residue-five-2026-08-31.md).
+
+**Next:** derive the residue-two active-pair macro and decide whether its defect system admits
+the same finite injective quotient or an exact nonhalting cycle.
 
 ## Rank-Three Binary Frontier
 

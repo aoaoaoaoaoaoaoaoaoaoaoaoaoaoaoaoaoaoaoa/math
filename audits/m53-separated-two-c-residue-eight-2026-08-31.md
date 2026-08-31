@@ -43,6 +43,7 @@ proves `SeparatedTwoCResidue.eightResidue_tagHaltsFrom` for every `k`. Its proof
 exact list identities, Presburger arithmetic, the verified tag-history semantics, and the
 constant-head drainage theorem.
 
-Together with `MM-S25`, this leaves `n≡2,5 (mod 9)` unresolved in the diagonal family. Bodies
-with unequal outer runs and bodies containing at least three `c` letters also remain open. No
-claim of deletion-width-three universality or full two-`c` decidability is made.
+Together with the subsequent `MM-S34` residue-five theorem, `n≡2 (mod 9)` is the only unresolved
+diagonal class. Bodies with unequal outer runs and bodies containing at least three `c` letters
+also remain open. No claim of deletion-width-three universality or full two-`c` decidability is
+made.
