@@ -1611,6 +1611,17 @@ commutes or anticommutes with `T`, hence preserves or swaps its two algebraic ei
 Thus no genuinely non-elementary binary pair survives this fixed equivariant rank-two seam.
 Rank at most one, dynamically varying leakage, and nonspanning orbits remain open.
 
+[`G3-S09`](SALVAGE.md#g3-s09-fixed-symmetric-square-leakage-taxonomy) closes rank one and
+packages the full fixed taxonomy. Transposing a rank-one intertwiner makes its row line a common
+dual Sym² eigenline. The resulting rational quadratic covector either has one rational root ray
+or a nondegenerate algebraic root pair normalized by every generator. Rank zero is the zero map.
+Hence every singular fixed Sym² intertwiner is zero or elementary. With three distinct source
+rays, pointwise quotient equations become global and a dependent leaked image forces
+singularity, so `G3-S05`, `G3-S07`, and `G3-S09` eliminate every fixed rank. Two rays do not
+determine a three-state map: Lean exhibits the surviving middle-coordinate projector. The live
+escape is therefore nonspanning pointwise behavior without global equivariance, or leakage
+varying with the word/source, not another fixed-rank case.
+
 [`G3-O18`](SALVAGE.md#g3-o18-transverse-minimum-body-countermodel) proves that transverse
 geometry itself is no obstruction. A variable-radix code with four distinct residues is carried
 by fixed integral rank-two data controls with kernels `ℚe₁` and `ℚe₂`. Lean checks the exact
@@ -2326,6 +2337,15 @@ algebraic pair normalized by every generator. Hence a non-elementary UCB₂ acti
 through one fixed rank-two leakage while retaining consistent dynamics on a spanning Sym² orbit.
 Only rank at most one, fewer than three orbit rays, or leakage varying with the word/source
 escapes this cut.
+
+[`G3-S09`](SALVAGE.md#g3-s09-fixed-symmetric-square-leakage-taxonomy) removes rank at most one
+under the same global-equivariance law. A rank-one leakage exposes an invariant quadratic
+covector through the transpose row line; its zero locus is a common rational point or algebraic
+pair. A zero-rank leakage is literally zero. The unified corollary derives global equivariance
+and singularity from three distinct pointwise ray equations and planar image dependence. Thus a
+non-elementary UCB₂ action has no fixed linear Sym² leakage repair on a spanning orbit. The
+formal two-ray counterexample proves why `G3-S03` cannot silently supply the missing hypothesis:
+two Veronese tests leave the middle three-state direction unseen.
 
 [`R32-O22`](SALVAGE.md#r32-o22-congruence-blind-free-orbit) shows that even the promised faithful
 free-orbit case has no congruence-separation theorem: one rational target outside the orbit is in

@@ -2425,6 +2425,74 @@
 'MatrixMortality.SymmetricSquareLeakage.isTensorElementary_of_rankTwo_leakage_on_three_veronese' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.SymmetricSquareLeakage.covectorMatrix_vecMul_symmetricSquare' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SymmetricSquareLeakage.covectorMatrix_smul' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.SymmetricSquareLeakage.covectorMatrix_similitude_of_eigen' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SymmetricSquareLeakage.covectorValue_mulVec' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.SymmetricSquareLeakage.covectorValue_smul' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.SymmetricSquareLeakage.covectorTensor_ne_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SymmetricSquareLeakage.covectorValue_eq_scaled_dot_sq_of_tensor_factor' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SymmetricSquareLeakage.normalKernelRay_ne_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SymmetricSquareLeakage.crossDet_normalKernelRay' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SymmetricSquareLeakage.dotProduct_normalKernelRay' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SymmetricSquareLeakage.exists_fixed_ray_of_degenerate_covector_eigen' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SymmetricSquareLeakage.covectorTwist_sq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.SymmetricSquareLeakage.covectorTwist_trace' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.SymmetricSquareLeakage.mul_alternating_mul_transpose' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SymmetricSquareLeakage.covectorTwist_intertwining_of_similitude' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SymmetricSquareLeakage.covectorEigenScalar_sq_eq_det_sq_of_det_ne_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SymmetricSquareLeakage.exists_quadratic_normalizer_of_nondegenerate_covector_eigen' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SymmetricSquareLeakage.isTensorElementary_of_invariant_covector' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SymmetricSquareLeakage.exists_common_covector_eigen_of_rankOne_leakage' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SymmetricSquareLeakage.isTensorElementary_of_rankOne_leakage' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SymmetricSquareLeakage.matrix_eq_zero_of_rank_eq_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SymmetricSquareLeakage.leakage_eq_zero_or_isTensorElementary_of_rank_le_one' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SymmetricSquareLeakage.rank_le_two_of_det_eq_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SymmetricSquareLeakage.leakage_eq_zero_or_isTensorElementary_of_singular_intertwiner' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SymmetricSquareLeakage.leakage_eq_zero_or_isTensorElementary_of_three_veronese_carrier' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SymmetricSquareLeakage.two_veronese_rays_do_not_detect_matrix_equality' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.TransverseDilationOrbit.dilationGenerator_det' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
