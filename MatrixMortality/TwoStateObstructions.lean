@@ -72,7 +72,7 @@ theorem exactLeftToggleFusion_immortal (R : Type*) [CommRing R] [Nontrivial R]
 /-! ## Exact delimiter-pair obstruction -/
 
 /-- Add one bordered coordinate to a square matrix. -/
-def borderedMatrix {ι K : Type*} [Zero K] (core : Square ι K)
+def borderedMatrix {ι K : Type*} (core : Square ι K)
     (column row : ι → K) (corner : K) : Square (ι ⊕ Unit) K
   | .inl i, .inl j => core i j
   | .inl i, .inr _ => column i

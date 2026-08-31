@@ -65,8 +65,11 @@ def falseWaitReturn (wait : Nat) : Square (Fin 2) ℚ :=
 
 /-- Three consecutive values of the scalar defect in the normalized return recurrence. -/
 structure CubicDefectState where
+  /-- Scalar defect at the first index of the recurrence window. -/
   first : ℤ
+  /-- Scalar defect at the second index of the recurrence window. -/
   second : ℤ
+  /-- Scalar defect at the third index of the recurrence window. -/
   third : ℤ
 
 /-- Shift one scalar-defect window through `u_(n+3)=u_n-u_(n+2)`. -/
