@@ -6,8 +6,10 @@ semi-Thue systems with a few rules,” *Theoretical Computer Science* **330**(1)
 
 - DOI: https://doi.org/10.1016/j.tcs.2004.09.016
 - Conference DOI: https://doi.org/10.1109/LICS.1996.561469
-- Local PDF: none
-- Retrieval audit: 2026-07-24
+- Local PDF: none; the inspected retrieval artifact remains outside the repository
+- Inspected artifact SHA-256:
+  `ea23da231d634b8b4a9c9c522884b7e744cfc5b3369f67bb49ec31482334023d`
+- Retrieval audits: 2026-07-24 metadata; 2026-08-30 full text
 
 ## Results used
 
@@ -20,9 +22,25 @@ This does not approach `GPCP(3)` through the same compiler: that route would req
 undecidable one-rule accessibility source or a new reduction that removes the two transport
 letters.
 
+The final system `S₅` uses `u₁=xx̄`, `u₂=x²x̄²`, and exactly the three rules
+
+```text
+ρ(L)y → ρ(M)y,
+u₂³ ρ(dⁿcdⁿ)y u₁² → u₂³ ρ(bⁿ)y u₂²,
+xx̄ → ε.
+```
+
+They are arbitrary-substring rules. Formal derivations retain both surrounding contexts, and
+the rule name does not determine the redex position. Writing
+`B=⋃_{z∈A₄} Desc_D(ψ(z))`, the stable domain is the directed language
+`Desc_D(Im τ₄)=B*y`, strictly smaller than the complete decoder domain `(yD₁*)*y`; it is not a
+quotient by `xx̄=1`. In Proposition 3.5, one `D` step can move the greatest-lower-bound decoder
+along a nontrivial `S̄₄` path; the cancellation rule therefore carries simulated order state
+rather than inert housekeeping.
+
 ## Access note
 
-No lawfully redistributable author or institutional full text was located during the
-2026-07-24 audit. Publisher and author-uploaded copies were inspected only through their
-public metadata and abstracts. The proof dependency used here is also stated and proved
-through the locally preserved Nicolas paper.
+No repository copy is retained. The 2026-08-30 audit inspected the complete journal article
+through the configured paper-retrieval service and recorded the exact artifact digest above.
+The earlier quantitative dependency is also stated and proved through the locally preserved
+Nicolas paper.

@@ -1178,6 +1178,16 @@ proves every aggregate endpoint equality is then a lawful derivation and dischar
 three head-separated productions while retaining an open unbounded word residue. It is no longer
 a simultaneous source-and-compiler correctness problem.
 
+[`G3-O24`](SALVAGE.md#g3-o24-directed-dyck-absorption-collapse) closes the apparent shortcut
+through the published three-rule Matiyasevich–Sénizergues system. Those rules rewrite arbitrary
+substrings, and the final deletion `xx̄→ε` performs directed decoder work: one deletion can move
+the greatest-lower-bound source state down a nontrivial path. Every faithful finite-dimensional
+absorption `XX̄=I` forces the reverse identity, as do complete scalar-value saturation and
+projectively faithful zero saturation. The surviving possibility is narrower but real: a
+singular, order-sensitive action confined to the directed stable cone may use nonprojective zero
+contexts to distinguish cancellation positions. No source theorem currently realizes that
+action with three states.
+
 [`G3-D03`](SALVAGE.md#g3-d03-one-sided-corrected-drift) closes a broad source class before
 compilation. If some positive target-symbol weighting and finite-state potential make every trim
 transition drift in one direction, terminal equality bounds every accepting residual and exact
@@ -1210,7 +1220,7 @@ or neutral word across the return, use an empty consume, or split recurrent outp
 | Transverse-kernel terminal dynamics | Fixed integral transverse controls encode every history and exactly recognize all minimum bodies | Replace the singleton target row by an infinite, source-computable terminal section for unrestricted bodies |
 | Positive projective transition lower bound | Same-zero dimension three is point-line incidence in `P²`, and actual one-sided shifts retain finite rank/kernel/image data | Derive a uniform nonstationary or noncommuting shift incompatibility from an unbounded terminal section; static support rank, formal inverse completion, fixed equal-length return flowers, and unary consecutive-repeat escape are forbidden |
 | Global word-residual recoding | Longer noncommutative atoms can retain order while discarding the four additive role channels | Escape `G3-D05`: fixed-priority affine counters and all one-way reset/transfer/fanout cascades are decidable |
-| Head-separated three-schema source | `G3-C04` discharges every arbitrary-trace forcing obligation locally | Preserve an undecidable mixed or neutral word across returns; complete pure forks are decidable by `G3-D07` |
+| Head-separated three-schema source | `G3-C04` discharges every arbitrary-trace forcing obligation locally; `G3-O24` isolates the directed stable-cone alternative | Preserve an undecidable mixed or neutral word across returns, or realize the S5 directed decoder order by a nonprojectively blind singular action; complete pure forks are decidable by `G3-D07` |
 | Carvalho projective group-orbit separator | `G3-M03` gives the exact saturated three-positive cover; `G3-O23` collapses every singular carrier to invertible dimension two | Universalize or decide the promised at-most-one rational Borel-coset intersection through global or noncongruence structure; `R32-O22` kills residue-orbit separation. Otherwise construct the invertible three-state line/plane orbit left by `G3-O22` |
 
 These six lanes form three trunks. The first three race a direct paired construction against its
@@ -1221,8 +1231,8 @@ singular spelling memory, and `R32-O22` removes congruence separation.
 
 #### Raceable leaves
 
-After `G3-O21`–`G3-O23`, `R32-O22`, and `G3-D07` close their respective carrier and pure-source lanes,
-the net tree has six independent raceable leaves:
+After `G3-O21`–`G3-O24`, `R32-O22`, and `G3-D07` close their respective carrier, absorption,
+and pure-source lanes, the net tree has six independent raceable leaves:
 
 1. **Common-kernel shuttle constructor.** Give one computable three-state paired recognizer in
    which the toggle moves a freshly minted common-kernel guard back into visible quotient data.
@@ -1247,7 +1257,10 @@ the net tree has six independent raceable leaves:
    three prefix-normal productions satisfying `G3-C04`, with an unbounded mixed or neutral word
    surviving every return. `G3-D06` closes functional private-head routing and `G3-D07` closes
    every complete pure two-chamber fork, including arbitrary finite forward branching. The
-   empty-pump and genuinely splitting variants remain secondary constructions.
+   empty-pump and genuinely splitting variants remain secondary constructions. The published
+   three-rule S5 source is not head-separated: `G3-O24` forbids absorbing its directed deletion
+   faithfully, but leaves the sharper alternative of a rank-two singular stable-cone action
+   whose zero contexts retain redex order.
 6. **Carvalho projective group-orbit separator.** Starting from the exact `G3-M03` saturated
    cover, realize its singleton exponent-one fibre by an effective projective orbit separator.
    In dimension three, `G3-O22` forces an invertible line/plane group orbit. If any transition is

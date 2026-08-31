@@ -239,6 +239,7 @@ file owns the mathematical stock.
 | [`G3-O21`](#g3-o21-actual-carvalho-slice-density) | obstruction | every fixed-character slice of Carvalho's actual program graph is Zariski dense in `PSL₂²` | audited | graduated |
 | [`G3-O22`](#g3-o22-invertible-fibre-span-rigidity) | structural reduction | invertible spelling fibres form computable line or plane group orbits | formalized core | graduated |
 | [`G3-O23`](#g3-o23-singular-triangle-carrier-collapse) | structural reduction | every singular saturated three-state triangle carrier collapses effectively to an invertible two-state carrier | formalized core | graduated |
+| [`G3-O24`](#g3-o24-directed-dyck-absorption-collapse) | obstruction | faithful finite-dimensional absorption of one-way Dyck cancellation forces the reverse cancellation | formalized core | graduated |
 | [`G3-O20`](#g3-o20-consecutive-repeat-tail-closure) | obstruction | two consecutive solutions of a fixed-boundary one-block pump force every later exponent | formalized | graduated |
 | [`G3-O09`](#g3-o09-quotient-blind-positive-boundary-collapse) | obstruction | all-loop-complete group-factorizing boundaries accept a nonempty identity spelling | formalized core | graduated |
 | [`G3-O14`](#g3-o14-positive-cancellation-spelling-dichotomy) | obstruction | finite reversible spelling pumps, while singular one-coordinate spelling absorbs identity factors | formalized | graduated |
@@ -9788,6 +9789,45 @@ projective group-orbit instance. Treat this as a joint `M₃(4)`/dimension-two r
 **Artifact:** [`PositiveFreeCancellation.lean`](MatrixMortality/PositiveFreeCancellation.lean)
 and
 [`m34-singular-triangle-collapse-2026-08-30.md`](audits/m34-singular-triangle-collapse-2026-08-30.md).
+
+### G3-O24: Directed-Dyck absorption collapse
+
+**Kind:** obstruction
+
+**Evidence:** formalized core
+
+**Disposition:** graduated
+
+Every finite-dimensional algebra over a field is directly finite: `PQ=1` implies `QP=1`.
+Consequently, a finite-dimensional scalar carrier which identifies `PQ` with the identity in
+every two-sided value context must also identify `QP` with the identity. The same conclusion
+holds for zero contexts whenever the selected context family separates algebra elements up to a
+nonzero scalar. More sharply, any zero-context family which distinguishes `QP` from the identity
+forces `PQ` away from every nonzero scalar identity and fails global projective separation.
+
+This applies to a tempting but invalid compression of the Matiyasevich–Sénizergues three-rule
+system. Its last rule is the directed deletion `xx̄→ε`, not the congruence `xx̄=1`. The stable
+cone is `K_st=Desc_D(Im τ₄)=B*y`, strictly inside the complete decoder domain
+`(yD₁*)*y`. Proposition 3.5 shows that a deletion can shrink the directed descendant set and
+move the greatest-lower-bound decoder down a nontrivial source path. Rule names omit both redex
+contexts, and no canonical deletion schedule or postponement theorem is supplied.
+
+**Scope:** this kills faithful quotient absorption, complete scalar-value saturation, and
+projectively faithful zero saturation in every finite dimension. It does not kill a singular
+carrier confined to the directed stable cone. Such a carrier may distinguish redex positions
+through nonprojective zero-context blindness and couple the deletion inseparably to the other two
+rules. It also does not turn the arbitrary-substring source into three prefix productions.
+
+**Use:** reject every construction which replaces the directed deletion by an algebra identity.
+A surviving S5 attack must realize its directed decoder order on the unbounded stable cone. Test
+rank-two singular actions directly rather than appealing to the eight-element letter lattice
+alone.
+
+**Source:**
+[`matiyasevich-senizergues-2005-few-rule-semi-thue.md`](references/matiyasevich-senizergues-2005-few-rule-semi-thue.md).
+
+**Artifact:** [`DirectedCancellation.lean`](MatrixMortality/DirectedCancellation.lean) and
+[`m34-directed-dyck-absorption-2026-08-30.md`](audits/m34-directed-dyck-absorption-2026-08-30.md).
 
 ### G3-O20: Consecutive-repeat tail closure
 

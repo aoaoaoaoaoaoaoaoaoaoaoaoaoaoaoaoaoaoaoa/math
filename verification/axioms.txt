@@ -550,6 +550,24 @@
 'MatrixMortality.PositiveFreeCancellation.six_le_card_of_forbiddenTripleSupport' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.DirectedCancellation.mul_eq_one_reverse_of_finiteDimensional' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DirectedCancellation.reverse_value_context_cancellation_of_forward' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DirectedCancellation.reverse_zero_context_cancellation_of_forward' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DirectedCancellation.reverse_zero_context_cancellation_of_smul_one' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DirectedCancellation.asymmetric_zero_context_cancellation_not_smul_one' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DirectedCancellation.asymmetric_zero_context_cancellation_forces_projective_blindness' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.paired_exact_diagonal_twoChannel_state_lower_bound' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]

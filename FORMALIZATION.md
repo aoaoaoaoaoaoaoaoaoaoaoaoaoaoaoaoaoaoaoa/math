@@ -1120,6 +1120,15 @@ an effective positive inverse-spelling section, fixed explicitly for the triangl
 `F₂` singleton-fibre `PGL₂`/at-most-one Borel-coset sharpening is also audited outside Lean. No
 declaration converts group inverses into positive controls or claims `M₂(3)`.
 
+[`G3-O24`](SALVAGE.md#g3-o24-directed-dyck-absorption-collapse) is formalized in the algebra
+which owns the cancellation relation. Lean proves direct finiteness for every finite-dimensional
+algebra over a field, then lifts it to complete scalar-value contexts and to any selected
+zero-context family which separates elements projectively. It also proves the two necessary
+failures for an asymmetric zero carrier: the forward product is not a nonzero scalar identity,
+and the selected contexts are not globally projectively faithful. The application to the
+directed Matiyasevich–Sénizergues stable cone, including its positional redex semantics and
+greatest-lower-bound decoder, is source-audited rather than encoded in Lean.
+
 The adjacent [`R32-O22`](SALVAGE.md#r32-o22-congruence-blind-free-orbit) obstruction applies to
 this residual group-orbit shell: its all-modulus CRT closure is formalized without claiming
 orbit density, decidability, or hardness for rational Borel-coset intersection.
@@ -1669,6 +1678,7 @@ fixed-rank decision problem.
 | `CancellativeProjectiveNoGo.lean` | paired residual conic, finite support-rank closure, cancellative role fractions, and projective commutator rigidity |
 | `PairedInverseChamber.lean` | one-turn residual chambers, protected formal inverse states, and positive forward-cone separation |
 | `PositiveFreeCancellation.lean` | positive `F₂` cover, finite-fibre pumping, singular quotient absorption, and rank-six syntax wall |
+| `DirectedCancellation.lean` | direct finiteness and value/zero-context obstructions to one-way cancellation absorption |
 | `PairedRank.lean` | uniform exact rank-four certificate for the paired scalar series |
 | `PairedBoundaryTax.lean` | exact six-state lower bound for diagonal paired-series bridges |
 | `PairedBinary.lean` | total two-bit decoder and exact six-state scalar representation |
@@ -1967,6 +1977,10 @@ fixed-rank decision problem.
 | A singular one-coordinate lift has the quotient kernel and absorbs every quotient identity | `PositiveFreeCancellation.singularLift_kernel_eq_quotientKernel`, `PositiveFreeCancellation.singularLift_absorbs_quotientIdentity` |
 | The triangle-irreducible Hankel support has six independent rows over every field | `PositiveFreeCancellation.forbiddenTripleSupport_rows_linearIndependent` |
 | Every row-column realization of the triangle-irreducible support needs six states | `PositiveFreeCancellation.six_le_card_of_forbiddenTripleSupport` |
+| A one-sided inverse in a finite-dimensional algebra is two-sided | `DirectedCancellation.mul_eq_one_reverse_of_finiteDimensional` |
+| Complete value-context absorption of one cancellation forces the reverse | `DirectedCancellation.reverse_value_context_cancellation_of_forward` |
+| Projectively separating zero-context absorption forces the reverse | `DirectedCancellation.reverse_zero_context_cancellation_of_forward` |
+| Asymmetric zero cancellation excludes every nonzero scalar identity and global projective separation | `DirectedCancellation.asymmetric_zero_context_cancellation_not_smul_one`, `DirectedCancellation.asymmetric_zero_context_cancellation_forces_projective_blindness` |
 | Every exact diagonal paired-series bridge needs six states | `paired_exact_diagonal_twoChannel_state_lower_bound` |
 | Every literal Neary CHHN placement needs six exact states | `chhnNeary_exactRepresentation_six_le_card` |
 | Every two-state pushout word obeys its suffix decoder | `twoStateProduct_mulVec_phaseVector`, `twoStateCoefficient_eq_controlled` |
@@ -2156,6 +2170,15 @@ rational two-coordinate transport, the empty-language carrier, and the triangle 
 dichotomy. The triangle's effective rank sieve and its at-most-one rational Borel-coset
 formulation for the promised empty-or-singleton fibre are audited consequences, not Lean
 declarations.
+
+For `G3-O24`, Lean proves direct finiteness without choosing a matrix basis: multiplication by a
+left inverse is surjective, finite dimension makes it injective, and cancellation yields the
+reverse identity. Complete two-sided scalar-value contexts therefore cannot retain orientation.
+For an arbitrary selected context set, zero equivalence also collapses when those contexts
+separate elements up to nonzero scalar. Conversely, any context family distinguishing the
+reverse product forces the forward product away from every nonzero scalar identity; an
+asymmetric forward equivalence forces failure of global projective separation. The Lean theorem
+does not assert that the directed S5 stable cone has this separation property.
 
 For `R32-O22`, Lean proves every algebraic claim in the explicit obstruction: signed shear-word
 evaluation, the power-of-three endpoint congruence, the CRT unit over composite moduli, an
