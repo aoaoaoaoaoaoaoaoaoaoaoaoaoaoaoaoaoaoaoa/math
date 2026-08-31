@@ -263,6 +263,7 @@ file owns the mathematical stock.
 | [`M4-S28`](#m4-s28-phase-zero-right-c-long-leading-c-cylinder) | obstruction | any mixed body beginning with at least twelve `c` letters is excluded from the right-`c` bridge | formalized | active |
 | [`M4-S29`](#m4-s29-phase-zero-right-c-first-b-density-cylinder) | structure theorem | the first `b` position traps the complement density in an exact rational cylinder | formalized | active |
 | [`M4-S30`](#m4-s30-phase-zero-right-c-zero-wait-complement-cone) | obstruction | complement density at least `1/585` makes the zero middle-wait core strictly positive | formalized | active |
+| [`M4-S31`](#m4-s31-phase-zero-right-c-trailing-arithmetic) | structure theorem | an exact trailing `c` run exposes the complement valuation, primitive pencils, and factored cross-resultant | formalized | active |
 | [`M4-C03`](#m4-c03-zero-framed-binary-two-lag-compiler) | compiler | the principal scanner is literally binary context-2 Lag and compiles to `M₄(3)` | formalized | graduated |
 | [`M4-D01`](#m4-d01-zero-framed-binary-two-lag-decision) | decidable stratum | the entire zero-framed binary context-2 Lag kernel has an exact syntactic classification | formalized | graduated |
 | [`M4-D02`](#m4-d02-zero-framed-reset-scanner-decision) | decidable stratum | zero-run reduction contracts the reset scanner to a regular two-token quotient | audited | graduated |
@@ -11758,6 +11759,50 @@ extinction.
 **Artifact:**
 [`MatrixMortality/ParabolicEvenBody.lean`](MatrixMortality/ParabolicEvenBody.lean) and
 [`audits/m43-phase-zero-right-c-zero-wait-cone-2026-08-31.md`](audits/m43-phase-zero-right-c-zero-wait-cone-2026-08-31.md).
+
+### M4-S31: Phase-zero right-c trailing arithmetic
+
+**Kind:** structure theorem
+
+**Evidence:** formalized
+
+**Disposition:** active
+
+If a body ends in its last `b` followed by exactly `h` copies of `c`, its complement has the
+exact form
+
+```text
+D = 3^(h+1)(81D₀+13),
+(81D₀+13) mod 3 = 1.
+```
+
+Thus its 3-adic valuation is exactly `h+1`. The coefficient-positive correction is `12K`,
+where `K=Cz+E` is primitive, while the all-`c` pencil is `P=Az+B`. Their cross-resultant is
+
+```text
+AE−CB = 2·3^12(48x−3029)(674088x−4333144y−1095244575).
+```
+
+Finally, scaling a pre-trailing coordinate pair `(S₀,D₀)` by `r` gives
+
+```text
+H = r((72y−9)PS₀+12KD₀) − (8y−9)P.
+```
+
+**Scope:** exact algebra for the primitive phase-zero right-`c` core and physical complements
+ending in a last `b` followed by `c^h`. No numerical wait bounds or trailing-run cutoff is
+asserted here.
+
+**Use:** replace an ambiguous Hensel representative by exact valuation and resultant data. A
+hypothetical long trailing run must satisfy one explicit divisibility equation and the factored
+cross-resultant.
+
+**Next:** combine the bounded wait chamber with the exact `3^13` residue classifier and prove
+that every `h≥9` candidate falls into a first-`b` density gap.
+
+**Artifact:**
+[`MatrixMortality/ParabolicTrailing.lean`](MatrixMortality/ParabolicTrailing.lean) and
+[`audits/m43-phase-zero-right-c-trailing-arithmetic-2026-08-31.md`](audits/m43-phase-zero-right-c-trailing-arithmetic-2026-08-31.md).
 
 ### M4-C03: Zero-framed binary two-Lag compiler
 

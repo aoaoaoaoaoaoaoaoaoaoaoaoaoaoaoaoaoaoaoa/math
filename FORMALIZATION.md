@@ -2242,6 +2242,15 @@ module. `ParabolicBlade.bZeroBDefectCOneCodeCore_pos_of_zero_wait_large_compleme
 zero-wait core and proves positivity from one exact coefficient gap. The exact boundary is
 [`audits/m43-phase-zero-right-c-zero-wait-cone-2026-08-31.md`](audits/m43-phase-zero-right-c-zero-wait-cone-2026-08-31.md).
 
+The phase-zero right-`c` trailing arithmetic
+[`M4-S31`](SALVAGE.md#m4-s31-phase-zero-right-c-trailing-arithmetic) is checked in
+`MatrixMortality/ParabolicTrailing.lean`. `ParabolicBlade.tagComplementCode_append_b_c_run`
+and `tagComplementCode_b_cofactor_mod_three` expose the exact complement valuation;
+`bZeroBDefectCOneTrailing_resultant` factors the primitive cross-resultant; and
+`bZeroBDefectCOneCodeCore_trailing_decomposition` isolates the trailing scale. The exact
+boundary is
+[`audits/m43-phase-zero-right-c-trailing-arithmetic-2026-08-31.md`](audits/m43-phase-zero-right-c-trailing-arithmetic-2026-08-31.md).
+
 The residue-zero `c`-endpoint exclusion
 [`M4-S12`](SALVAGE.md#m4-s12-residue-zero-c-endpoint-exclusion) is checked in the same module.
 `ParabolicBlade.bridge_cZero_bTwo_bOne_det` and

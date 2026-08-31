@@ -1533,3 +1533,8 @@ open MatrixMortality
 #print axioms ParabolicBlade.tagComplementCode_append
 #print axioms ParabolicBlade.tagComplementCode_first_b_density
 #print axioms ParabolicBlade.bZeroBDefectCOneCodeCore_pos_of_zero_wait_large_complement
+#print axioms ParabolicBlade.tagComplementCode_append_b_c_run
+#print axioms ParabolicBlade.tagComplementCode_b_cofactor_mod_three
+#print axioms ParabolicBlade.bZeroBDefectCOneComplementCore_eq_twelve_pencil
+#print axioms ParabolicBlade.bZeroBDefectCOneTrailing_resultant
+#print axioms ParabolicBlade.bZeroBDefectCOneCodeCore_trailing_decomposition
