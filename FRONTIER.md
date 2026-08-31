@@ -576,6 +576,14 @@ a root modulo every power of two. Higher fixed 2-power congruences cannot remove
 rectangle; the live attacks are the fixed-`y` divisor factorization and an archimedean
 root-straddling bound.
 
+The first archimedean cut is complete
+[`M4-S22`](SALVAGE.md#m4-s22-phase-zero-right-c-all-c-ray-exclusion). On an all-`c` body the
+`b|b|c` core factors into a scale-`y` pencil, which cannot vanish for `S>1`, and an `x,z`
+pencil whose rational `x` root lies strictly between 214 and 215 for every `z≥0`. The whole
+nonempty all-`c` ray is dead. Inside the even/even rectangle this removes every `c^(2k)`, so
+`bb` is now its shortest surviving body. The next split is the all-`b` ray versus genuinely
+mixed bodies, using `D=S−C−1` as the complement coordinate.
+
 Two original-family nodes survive, and they must not be conflated.
 
 1. **Exterior collision avoidance.** Use `M4-S06`--`M4-S15` to classify the transported kernel

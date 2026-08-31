@@ -235,6 +235,7 @@ file owns the mathematical stock.
 | [`M4-S19`](#m4-s19-phase-zero-right-c-odd-length-cylinder) | obstruction | odd body length excludes the `0|2|1` `b|b|c` family for all waits | formalized | active |
 | [`M4-S20`](#m4-s20-phase-zero-triple-c-parity-cylinder) | obstruction | odd body length and odd `b` count exclude the `0|2|1` `c|c|c` family for all waits | formalized | active |
 | [`M4-S21`](#m4-s21-phase-zero-right-c-parity-rectangle) | obstruction | a `0|2|1` `b|b|c` zero requires both even body length and even `b` count; fixed 2-power congruences cannot remove the residue | formalized | active |
+| [`M4-S22`](#m4-s22-phase-zero-right-c-all-c-ray-exclusion) | obstruction | no nonempty all-`c` body closes the `0|2|1` `b|b|c` bridge, for any waits | formalized | active |
 | [`M4-C03`](#m4-c03-zero-framed-binary-two-lag-compiler) | compiler | the principal scanner is literally binary context-2 Lag and compiles to `M₄(3)` | formalized | graduated |
 | [`M4-D01`](#m4-d01-zero-framed-binary-two-lag-decision) | decidable stratum | the entire zero-framed binary context-2 Lag kernel has an exact syntactic classification | formalized | graduated |
 | [`M4-D02`](#m4-d02-zero-framed-reset-scanner-decision) | decidable stratum | zero-run reduction contracts the reset scanner to a regular two-token quotient | audited | graduated |
@@ -10150,6 +10151,49 @@ root endpoints either occupy one open unit interval or leave only a finite divis
 [`MatrixMortality/ParabolicDefectCylinder.lean`](MatrixMortality/ParabolicDefectCylinder.lean)
 and
 [`audits/m43-phase-zero-right-c-parity-rectangle-2026-08-31.md`](audits/m43-phase-zero-right-c-parity-rectangle-2026-08-31.md).
+
+### M4-S22: Phase-zero right-c all-c ray exclusion
+
+**Kind:** obstruction
+
+**Evidence:** formalized
+
+**Disposition:** active
+
+On an all-`c` body, the code coordinates satisfy `C=S−1`. The primitive integral core of the
+`0|2|1` `b|b|c` bridge then has the exact factorization
+
+```text
+H(S,S−1,x,y,z)
+  = (72Sy−9S−8y+9)
+    (119911680xz+11209824x−25766986436z−2408152393).
+```
+
+For a nonempty body, `S>1`. The first pencil is negative at `y=0` and positive for every
+`y≥1`. If the second pencil vanished, then
+
+```text
+214 < (25766986436z+2408152393)/(119911680z+11209824) < 215,
+```
+
+so its natural root `x` would satisfy `214<x<215`. Both factors are therefore nonzero for all
+natural waits. No nonempty body `c^k` closes this shortest bridge.
+
+**Scope:** deletion width three, exactly three atoms, orientation `0|2|1`, letters `b|b|c`,
+and the complete nonempty all-`c` body ray. Bodies containing `b`, other shortest families,
+longer defect runs, and nontrivial safe contexts remain open.
+
+**Use:** within the even-length, even-`b` rectangle left by `M4-S21`, every body `c^(2k)` is
+dead. In particular the length-two survivor `cc` is removed, leaving `bb` as the shortest body
+in that rectangle.
+
+**Next:** apply the same factor-and-straddle analysis to the all-`b` ray, then express the mixed
+body residue through the complement coordinate `D=S−C−1` and its sharp tag-cylinder bound.
+
+**Artifact:**
+[`MatrixMortality/ParabolicDefectCylinder.lean`](MatrixMortality/ParabolicDefectCylinder.lean)
+and
+[`audits/m43-phase-zero-right-c-all-c-ray-2026-08-31.md`](audits/m43-phase-zero-right-c-all-c-ray-2026-08-31.md).
 
 ### M4-C03: Zero-framed binary two-Lag compiler
 
