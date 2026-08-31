@@ -100,6 +100,7 @@ file owns the mathematical stock.
 | [`MM-S12`](#mm-s12-decimal-two-prime-carry) | structure theorem | decimal setter poles obey an exact centered recurrence and coupled `2`/`5` trace balance | formalized | active |
 | [`MM-S13`](#mm-s13-decimal-first-transfer-extinction) | obstruction | neither decimal centered reset reaches a false pole after one completed transfer | formalized core; audited assembly | active |
 | [`MM-S14`](#mm-s14-ordinary-depth-two-shell-forest) | structure theorem | the ordinary depth-two decimal carry has only three resonant families and no B-to-B branch | formalized | active |
+| [`MM-S15`](#mm-s15-ordinary-a-to-a-length-two-extinction) | obstruction | both ordinary A-to-A length-two resonances miss every admissible next pole | formalized | active |
 | [`R32-S01`](#r32-s01-split-return-normal-form) | structure theorem | rank-two cuts reduce one-unit binary mortality to a `2 × 2` return recurrence | formalized | graduated |
 | [`R32-S02`](#r32-s02-two-plane-edge-square) | structure theorem | two rank-two generators are a two-vertex square of `2 × 2` edges | formalized | graduated |
 | [`R32-O01`](#r32-o01-rank-one-profile-collapse) | obstruction | a rank-one generator reduces mortality to order-at-most-three scalar recurrence zeros | audited | stock |
@@ -2881,6 +2882,54 @@ through `twoTransferTrace_identity`, `twoTransferTrace_shell_of_nonresonant`,
 
 **Next:** kill the three resonant families by exact Archimedean pole intervals or normalized
 decimal suffixes, then transfer the surviving method to the distinguished reset.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S15: Ordinary A-to-A length-two extinction
+
+**Kind:** obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+Use the negative J-fraction chart
+
+```text
+F(u,v,t)=u+v−v/t,          q(u,v)=v/(u+v),
+u=P/(μA),                  v=LV/(μA).
+```
+
+Every encoded upper spelling begins in digit `5` and satisfies `4/5<u<101/100`. Target lower
+spellings begin in digit `7` or in digits `55`; exact length-shell bounds put every target pole
+below `9/10` or above `963/1000`.
+
+For the length-two block `D_cD_c`, direct rational bounds place the entire image of the source
+window strictly in `(961/1000,963/1000)`, between the two pole chambers. For `R_cD_c`, the
+compiler-emitted body begins in `b` and forces its normalized lower spelling above `55ρ²`.
+The resulting weight exceeds `265ρ`: a `c`-leading source maps below zero and a `b`-leading
+source maps above one, while every positive pole lies in `(0,1)`.
+
+**Scope:** these two phase words exhaust the all-`c` middle block of upper length two. Combined
+with [`MM-S13`](#mm-s13-decimal-one-transfer-extinction) and
+[`MM-S14`](#mm-s14-ordinary-depth-two-shell-forest), this closes the ordinary-reset A-to-A
+depth-two branch. It does not decide A-to-B, B-to-A, the distinguished-reset depth-two branch,
+or arbitrary depth.
+
+**Use:** remove the complete A-to-A family from the ordinary depth-two search. Any surviving
+ordinary false pole must lie in an A-to-B or B-to-A resonant family; the unbounded decimal front
+is the distinguished normalized suffix.
+
+**Formalization:**
+[`MatrixMortality/DecimalSetterChamber.lean`](MatrixMortality/DecimalSetterChamber.lean), through
+`doubleDeletion_step_in_gap`, `doubleDeletion_avoids_falsePrefixPole`,
+`doubleDeletion_avoids_trueTruePrefixPole`, `ruleDeletion_cLeading_avoids_positivePole`,
+`ruleDeletion_bLeading_avoids_positivePole`, and `compiler_ruleDeletionLowerWord_shape`.
+
+**Artifact:**
+[`audits/m53-decimal-length-two-chamber-2026-08-30.md`](audits/m53-decimal-length-two-chamber-2026-08-30.md).
+
+**Next:** close the remaining ordinary A-to-B and B-to-A resonances, then attack the
+distinguished-reset normalized-suffix successor.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).

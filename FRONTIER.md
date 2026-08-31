@@ -737,12 +737,19 @@ from every target. [`MM-S14`](SALVAGE.md#mm-s14-ordinary-depth-two-shell-forest)
 the ordinary depth-two shell forest. A/A survives only at a two-role middle block (apart from the
 already peeled one-digit entry); A/B survives only at all-`c` lengths `β+1` and `β+2`; B/A
 survives only as an all-`c` length-`β` block followed by `D_b`; B/B is impossible. The immediate
-question is whether exact pole intervals or normalized suffixes kill these three resonances and
-the distinguished-reset corridor, or whether one contains an explicit false pole.
+question is whether exact pole intervals or normalized suffixes kill the remaining resonances
+and the distinguished-reset corridor, or whether one contains an explicit false pole.
+
+The A-to-A resonance is now closed. [`MM-S15`](SALVAGE.md#mm-s15-ordinary-a-to-a-length-two-extinction)
+puts `D_cD_c` images in the open gap `(961/1000,963/1000)` between the two target-pole
+chambers. For `R_cD_c`, the compiler-emitted body forces enough lower weight that a `c`-leading
+source maps below zero and a `b`-leading source above one; every positive pole lies between.
+Only the two A-to-B middle lengths and the B-to-A `D_b` family remain at ordinary depth two.
+The distinguished reset remains the unbounded normalized-suffix front.
 
 The immediate ternary question is which other positive valuation-one discrepancies survive its
-suffix sieve without already certifying source halting. Exact bidirectional diagnostics at
-`β=3`, body `bbcc`, exclude every
+suffix sieve without already certifying source halting. Exact bidirectional diagnostics for the
+ternary swap at `β=3`, body `bbcc`, exclude every
 false-pole word of at most six projective blocks when each regular block has
 role length at most three; this is computational evidence only.
 A single explicit nonterminal pole orbit kills this family; a closed invariant proves

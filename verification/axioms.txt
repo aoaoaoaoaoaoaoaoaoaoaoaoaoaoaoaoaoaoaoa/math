@@ -915,6 +915,24 @@
 'MatrixMortality.DecimalSetterCarry.forcedPole_ne_singletonTarget' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.DecimalSetterChamber.doubleDeletion_step_in_gap' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterChamber.doubleDeletion_avoids_falsePrefixPole' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterChamber.doubleDeletion_avoids_trueTruePrefixPole' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterChamber.ruleDeletion_cLeading_avoids_positivePole' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterChamber.ruleDeletion_bLeading_avoids_positivePole' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterChamber.compiler_ruleDeletionLowerWord_shape' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.Undecidability.nearyScalarZero62_hasZero_iff_hasZeroStar' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]

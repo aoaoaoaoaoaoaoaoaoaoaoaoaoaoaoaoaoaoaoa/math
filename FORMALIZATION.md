@@ -1205,6 +1205,16 @@ result leaves only the two-role A/A resonance, the all-`c` A/B resonances of len
 `β+2`, and the all-`c` length-`β` block followed by `D_b` in B/A; B/B is impossible. These gates
 do not yet decide the surviving phase words or the distinguished-reset suffix corridor.
 
+Record [`MM-S15`](SALVAGE.md#mm-s15-ordinary-a-to-a-length-two-extinction) closes the first
+resonant family. `DecimalSetterChamber.encodedJUpper_in_window`, `lowShell_pole_below`, and
+`highShell_pole_above` separate every target pole into two exact rational chambers.
+`doubleDeletion_step_in_gap` puts the `D_cD_c` image strictly between them. For `R_cD_c`,
+`compiler_ruleDeletionLowerWord_shape` derives the emitted lower prefix and length;
+`ruleDeletion_cLeading_avoids_positivePole` and `ruleDeletion_bLeading_avoids_positivePole`
+put the two source-prefix images outside `(0,1)`. Together with the shell gate, these
+declarations extinguish the ordinary A-to-A depth-two branch. They do not decide A-to-B,
+B-to-A, or the distinguished-reset normalized suffix.
+
 The dimension-two affine ledger has six independently checked records:
 
 | Record | Formalization obligation |
@@ -1637,6 +1647,7 @@ fixed-rank decision problem.
 | `SetterJFraction.lean` | exact decimal coefficient boxes and the hyperbolic-block/elliptic-product obstruction |
 | `DecimalSetterArithmetic.lean` | decimal setter centered carry, reciprocal recurrence, coupled `2`/`5` target shells, and successive-pole valuation balance |
 | `DecimalSetterCarry.lean` | two-reset successive-pole identities, joint depth constraints, exact decimal suffix exhaustion, first-transfer prefix separation, and the ordinary depth-two A/B shell forest |
+| `DecimalSetterChamber.lean` | exact decimal pole chambers, both ordinary A-to-A length-two extinctions, and the emitted-body grammar certificate |
 | `PairedMortality.lean` | common-column mortality converse and exact integer `4 × 4` family |
 | `PhaseFracture.lean` | phase normalization and dimension-free projective-identification contradiction |
 | `PhaseRigidity.lean` | checked local role algebra, discrepancy commutators, and invariant-pencil rigidity |
