@@ -920,6 +920,17 @@ leading-`D_b` perturbation is too deep to change that obstruction, so the requir
 depth-`n+β` target shell is impossible. Other `D_b` positions, rule-bearing first blocks,
 singleton targets, and later product-residual carriers remain open.
 
+The ternary and decimal branches now separate at their first multi-transfer front.
+[`MM-S37`](SALVAGE.md#mm-s37-decimal-three-shape-frontier-extinction) substitutes each of the
+three role shapes left by the swapped ternary gate into the decimal carrier equation. All are
+empty: [`MM-S18`](SALVAGE.md#mm-s18-length-two-carrier-extinction) kills the two-`c`
+multi-to-multi step; [`MM-S20`](SALVAGE.md#mm-s20-singleton-carrier-classification) makes a
+`(β+1)`-`c` multi-to-singleton step two digits too short; and its singleton-current theorem
+kills `D_b` followed by any singleton independently of the preceding two-`c` block. This does
+not make the ternary trichotomy a decimal classification. The decimal survivors remain the
+longer generalized-carrier branches `m≥3` and `m≥β+3`, whose encoded reachability is the live
+problem.
+
 [`MM-O20`](SALVAGE.md#mm-o20-decimal-first-cylinder-collision) gives the unbounded suffix
 language an exact metric: a backward word gains the sum of its shifts in both decimal valuations,
 and one block maps the unit domain onto one exact suffix cylinder. But first-cylinder decoding is

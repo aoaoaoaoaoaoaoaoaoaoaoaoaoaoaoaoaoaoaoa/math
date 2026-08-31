@@ -1494,6 +1494,15 @@ literal lower word. At `n=entrySaturationWidth β`, the lower code contains the 
 does not cover a nonleading `D_b`, a rule-bearing block, a singleton target, or a later
 generalized carrier.
 
+Record [`MM-S37`](SALVAGE.md#mm-s37-decimal-three-shape-frontier-extinction) separates the
+ternary and decimal first-multi-transfer fronts. The single theorem
+`DecimalSetterDepth.firstMultiTransfer_threeShapeFrontier_impossible` consumes the three role
+shapes left by the swapped ternary gate. `peeledMultiPole_length_ne_two` kills the two-`c`
+multi-to-multi case. `peeledMultiToSingleton_beta_add_three_le` kills the `(β+1)`-`c`
+multi-to-singleton case. `peeledSingletonToSingleton_impossible` kills the `D_b`-to-singleton
+case without its preceding two-`c` hypothesis. The theorem does not assert that the ternary
+trichotomy classifies decimal orbits; longer generalized decimal carriers remain open.
+
 Record [`MM-S21`](SALVAGE.md#mm-s21-bounded-decimal-suffix-cycles) closes the fixed-precision
 suffix-descent lane. `DecimalSetterSuffix.cycleDefect_lift` gives an explicit one-digit lift for
 the stationary carrier defect `10^hEx²−τx+μGV`, whose derivative is `−1` modulo ten.
@@ -2005,6 +2014,7 @@ fixed-rank decision problem.
 | `DecimalSetterChamber.lean` | exact decimal pole chambers, both ordinary A-to-A length-two extinctions, and the emitted-body grammar certificate |
 | `DecimalSetterResonance.lean` | complete ordinary depth-two A-to-B and B-to-A extinction, phase-word exhaustion, and compiler-envelope specialization |
 | `DecimalSetterDepth.lean` | recursive two-unit carrier; length-two and singleton-current extinction; exact all-`D_c` raw-head extinction; sharp `m≥β+3` abstract multi-to-singleton classification; initial raw-head exclusion; compatible last-digit two-cycle obstruction |
+| `DecimalSetterMultitransfer.lean` | extinction of all three swapped-ternary frontier shapes under the analogous decimal carrier shells |
 | `DecimalSetterAncestry.lean` | primitive gap factor; exact raw two-`c` prime support; arbitrary-history prime-support propagation and radical saturation; physical all-erasure full-gap lower code and first-entry extinction; denominator-ancestry reduction; full-gap and factorwise quotient gates for a singleton target |
 | `PairedMortality.lean` | common-column mortality converse and exact integer `4 × 4` family |
 | `PhaseFracture.lean` | phase normalization and dimension-free projective-identification contradiction |
