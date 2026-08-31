@@ -251,6 +251,7 @@ file owns the mathematical stock.
 | [`G3-O17`](#g3-o17-paired-inverse-chamber) | obstruction | protected two-turn inverse states have no positive future in the actual paired residual chambers | formalized | graduated |
 | [`D2-S01`](#d2-s01-projective-hard-core) | structure theorem | `M₂(3)` is equivalent to two-generator projective incidence | audited | active |
 | [`D2-S02`](#d2-s02-monotone-affine-path-form) | structure theorem | normalized affine words form monotone exponent paths | audited | stock |
+| [`D2-S03`](#d2-s03-two-place-shell-walls) | structure theorem | the benchmark shell has exact `2`/`3` cancellation walls and a finite simultaneous-unit wait interval | formalized | active |
 | [`D2-D01`](#d2-d01-projectively-unimodular-stratum) | decidable stratum | projectively unimodular hard-core instances are decidable | audited | stock |
 | [`D2-D02`](#d2-d02-invariant-pair-stratum) | decidable stratum | invariant projective pairs reduce to abelian-by-`C₂` reachability | reported | active |
 | [`D2-D03`](#d2-d03-common-multiplier-stratum) | decidable stratum | rational affine maps with one multiplier are decidable under regular control | reported | active |
@@ -10254,6 +10255,47 @@ both multipliers are one, reachability is a semilinear translation problem.
 encodings that forget it may replace the problem by a strictly harder one.
 
 **Artifact:** [`audits/dimension-two-affine-peeling-2026-07-25.md`](audits/dimension-two-affine-peeling-2026-07-25.md#affine-normalization-and-path-form).
+
+### D2-S03: Two-place shell walls
+
+**Kind:** structure theorem
+**Evidence:** formalized
+**Disposition:** active
+
+For the benchmark shell transition
+
+```text
+T_m(u)=(1+3u(2/3)^m)/5,
+```
+
+the transported valuations are exactly `v₂(u)+m` and `v₃(u)+1−m` whenever they are negative,
+and the output is a unit at the corresponding prime whenever they are positive. Equality is the
+sole cancellation wall. Hence a nonzero state whose output is a unit at both primes satisfies
+
+```text
+−v₂(u) ≤ m ≤ v₃(u)+1.
+```
+
+When both transported valuations are negative, their output sum is
+`v₂(u)+v₃(u)+1`, independent of `m`.
+
+**Scope:** these are exact one-step laws. They do not force an accepting history to remain in
+the simultaneous-unit or simultaneous-negative chamber; mixed-sign histories can transfer debt,
+and equality-wall cancellation can raise a valuation.
+
+**Use:** any infinite branching in the critical shell must cross mixed-sign chambers or
+cancellation walls. Attack their global transition graph rather than repeating an unlabeled
+`5`-adic residue sieve.
+
+**Artifact:** `PeriodicShell.shellStep_hasValue_two_of_negative`,
+`PeriodicShell.shellStep_hasValue_three_of_negative`,
+`PeriodicShell.shellStep_two_three_sum_of_both_negative`, and
+`PeriodicShell.wait_mem_two_three_unit_interval` in
+[`PeriodicShell.lean`](MatrixMortality/PeriodicShell.lean), audited in
+[`m32-shell-two-place-walls-2026-08-30.md`](audits/m32-shell-two-place-walls-2026-08-30.md).
+
+**Next:** classify mixed-sign chamber crossings under the simultaneous `5`-unit guard, or prove
+that every accepting history returns effectively often to the finite simultaneous-unit interval.
 
 ### D2-D01: Projectively unimodular stratum
 

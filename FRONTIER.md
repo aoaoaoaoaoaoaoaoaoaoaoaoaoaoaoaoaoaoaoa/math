@@ -2395,6 +2395,15 @@ T_m(u)=(1+3u(2/3)^m)/5,
 v₅(u)=v₅(T_m(u))=0.
 ```
 
+The multiplier-prime skeleton is now exact. Below the `2`-adic wall,
+`v₂(T_m(u))=v₂(u)+m`; below the `3`-adic wall,
+`v₃(T_m(u))=v₃(u)+1−m`; above either wall the corresponding output is a unit. Thus any output
+that is a unit at both primes forces the finite interval
+`−v₂(u)≤m≤v₃(u)+1`. If both transported valuations are negative, their sum rises by one
+independently of `m`. This is `D2-S03`. It localizes all unbounded behavior to mixed-sign chamber
+crossings and equality-wall cancellation, but does not yet bound how often a successful history
+can use them.
+
 The local shell is now known to be maximally recurrent. Every nonempty finite wait schedule has
 an exact rational periodic orbit entirely in the unit shell; period-one rational fixed points
 are dense in both admissible `5`-adic cylinders. Every admissible source and unit target at
@@ -2683,8 +2692,11 @@ universal computation.
    or retry residue-orbit nonmembership as a complete certificate.
 6. Formalize `D2-S02` and `D2-D05`–`D2-D07`, then attack fixed-source exact prefix and
    accepting-exit reachability in the guarded `5`-adic schedule with a synchronized `2`/`3`/`5`
-   representation, a parametric affine-kernel description beyond the checked length-30 basis,
-   and normalized collision/exit-fibre census. Do not reopen unlabeled residue-only finite nuclei.
+   representation. Use the checked `D2-S03` walls to isolate mixed-sign debt transfer and
+   equality-wall cancellation; a chamber argument that never handles those transitions is
+   incomplete. In parallel, seek a parametric affine-kernel description beyond the checked
+   length-30 basis and run normalized collision/exit-fibre census. Do not reopen unlabeled
+   residue-only finite nuclei.
    Keep the non-elementary lanes independent: adelic cone types, parabolic rational subsets,
    trace/height descent, finite-obstruction saturation, and valuation universality.
 7. Synthesize the returned attacks by the discriminating signals above; do not average
