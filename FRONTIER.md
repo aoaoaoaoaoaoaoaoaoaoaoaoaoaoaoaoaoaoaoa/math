@@ -733,9 +733,12 @@ depth-one question is nevertheless closed:
 [`MM-S13`](SALVAGE.md#mm-s13-decimal-first-transfer-extinction) proves that neither reset reaches
 a false pole after one completed transfer. Exact two-depth exhausts the lower decimal code as a
 complete suffix; the remaining prefix is either terminal or lies in a rational interval disjoint
-from every target. The immediate question is whether an equally rigid normalized suffix survives
-the second and later reciprocal steps, or whether depth at least two contains an explicit false
-pole.
+from every target. [`MM-S14`](SALVAGE.md#mm-s14-ordinary-depth-two-shell-forest) then classifies
+the ordinary depth-two shell forest. A/A survives only at a two-role middle block (apart from the
+already peeled one-digit entry); A/B survives only at all-`c` lengths `β+1` and `β+2`; B/A
+survives only as an all-`c` length-`β` block followed by `D_b`; B/B is impossible. The immediate
+question is whether exact pole intervals or normalized suffixes kill these three resonances and
+the distinguished-reset corridor, or whether one contains an explicit false pole.
 
 The immediate ternary question is which other positive valuation-one discrepancies survive its
 suffix sieve without already certifying source halting. Exact bidirectional diagnostics at

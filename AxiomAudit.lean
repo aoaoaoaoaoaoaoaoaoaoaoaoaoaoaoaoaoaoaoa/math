@@ -467,6 +467,15 @@ open MatrixMortality
 #print axioms DecimalSetterCarry.resetZero_singleTarget_impossible
 #print axioms DecimalSetterCarry.resetOne_multiTarget_equalDepth
 #print axioms DecimalSetterCarry.resetOne_singleTarget_depthGap
+#print axioms DecimalSetterCarry.twoTransferTrace_identity
+#print axioms DecimalSetterCarry.twoTransferTrace_shell_of_nonresonant
+#print axioms DecimalSetterCarry.twoTransferTrace_multi_shell
+#print axioms DecimalSetterCarry.ordinaryTwo_shellBalance
+#print axioms DecimalSetterCarry.ordinaryTwoMulti_gate
+#print axioms DecimalSetterCarry.ordinaryTwoMultiToSingleton_gate
+#print axioms DecimalSetterCarry.twoTransferTrace_five_shell_of_nonresonant
+#print axioms DecimalSetterCarry.ordinaryTwoSingletonToMulti_gate
+#print axioms DecimalSetterCarry.ordinaryTwoSingletonToSingleton_impossible
 #print axioms DecimalSetterCarry.code_injective
 #print axioms DecimalSetterCarry.suffix_exhaustion
 #print axioms DecimalSetterCarry.suffix_exhaustion_factorization

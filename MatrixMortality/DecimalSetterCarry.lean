@@ -9,12 +9,14 @@ The decimal setter embeds a binary word with digits `1 ↦ 5` and `0 ↦ 7`.
 This file isolates the arithmetic used to peel the first malformed transfer from either
 projective reset.  The decisive fact is joint rather than separately `2`- or `5`-adic: if a
 difference of two encoded words contains exactly `k` factors of two and at least `k` factors
-of five, the shorter word must be the complete common suffix.
+of five, the shorter word must be the complete common suffix. Eliminating one intermediate
+denominator further reduces the ordinary depth-two carry to four exact A/B shell gates.
 -/
 
 namespace MatrixMortality.DecimalSetterCarry
 
 open MatrixMortality.DecimalSetterArithmetic
+open MatrixMortality.PadicValuation
 
 /-! ## Pole-shell balances -/
 
@@ -144,6 +146,308 @@ theorem resetOne_singleTarget_depthGap
     poleEquation_shellBalance difference_shell target_shell E_unit G_unit μ_unit V_unit
       pole_equation
   omega
+
+/-! ## Two-transfer gates -/
+
+private theorem decimalShell_unique
+    {value : ℚ} {leftTwo leftFive rightTwo rightFive : ℤ}
+    (left : HasDecimalShell value leftTwo leftFive)
+    (right : HasDecimalShell value rightTwo rightFive) :
+    leftTwo = rightTwo ∧ leftFive = rightFive :=
+  ⟨left.1.2.symm.trans right.1.2, left.2.2.symm.trans right.2.2⟩
+
+/-- Backward trace left after eliminating the intermediate projective denominator from two
+successive transfers. -/
+def twoTransferTrace {R : Type*} [CommRing R]
+    (E G μ A₂ T₂ T₃ V₃ : R) : R :=
+  T₂ * T₃ - E * μ * G * A₂ * V₃
+
+/-- Exact depth-two elimination. Here `R₁=P₁-V₁Z₀` and
+`R₂=P₂-V₂Z₁`; the second hypothesis says that the third block is the next pole. -/
+theorem twoTransferTrace_identity
+    {R : Type*} [CommRing R]
+    {E G μ A₁ A₂ T₂ T₃ V₂ V₃ R₁ R₂ : R}
+    (transfer_step :
+      E * R₁ * R₂ = T₂ * R₁ - μ * G * V₂ * A₁)
+    (next_pole : T₃ * R₂ = G * μ * V₃ * A₂) :
+    twoTransferTrace E G μ A₂ T₂ T₃ V₃ * R₁ =
+      μ * G * V₂ * A₁ * T₃ := by
+  unfold twoTransferTrace
+  linear_combination -T₃ * transfer_step + E * R₁ * next_pole
+
+/-- Coordinatewise unequal shells survive the subtraction defining the depth-two backward
+trace. -/
+theorem twoTransferTrace_shell_of_nonresonant
+    {E G μ V₃ T₂ T₃ : ℚ} {m : Nat}
+    {T2Two T2Five T3Two T3Five : ℤ}
+    (E_unit : HasDecimalShell E 0 0)
+    (G_unit : HasDecimalShell G 0 0)
+    (mu_unit : HasDecimalShell μ 0 0)
+    (V3_unit : HasDecimalShell V₃ 0 0)
+    (T2_shell : HasDecimalShell T₂ T2Two T2Five)
+    (T3_shell : HasDecimalShell T₃ T3Two T3Five)
+    (two_nonresonant : T2Two + T3Two ≠ (m : ℤ))
+    (five_nonresonant : T2Five + T3Five ≠ (m : ℤ)) :
+    HasDecimalShell
+      (twoTransferTrace E G μ (10 ^ m) T₂ T₃ V₃)
+      (min (T2Two + T3Two) (m : ℤ))
+      (min (T2Five + T3Five) (m : ℤ)) := by
+  have trace_product :
+      HasDecimalShell (T₂ * T₃) (T2Two + T3Two) (T2Five + T3Five) :=
+    T2_shell.mul T3_shell
+  have scale_shell : HasDecimalShell ((10 : ℚ) ^ m) m m := by
+    simpa using ten_hasDecimalShell.pow m
+  have scaled_product :
+      HasDecimalShell (E * μ * G * 10 ^ m * V₃) m m := by
+    simpa using (((E_unit.mul mu_unit).mul G_unit).mul scale_shell).mul V3_unit
+  have two_shell := sub_hasValue_min trace_product.1.1 scaled_product.1.1 (by
+    rw [trace_product.1.2, scaled_product.1.2]
+    exact two_nonresonant)
+  have five_shell := sub_hasValue_min trace_product.2.1 scaled_product.2.1 (by
+    rw [trace_product.2.2, scaled_product.2.2]
+    exact five_nonresonant)
+  rw [trace_product.1.2, scaled_product.1.2] at two_shell
+  rw [trace_product.2.2, scaled_product.2.2] at five_shell
+  exact ⟨by simpa [twoTransferTrace] using two_shell,
+    by simpa [twoTransferTrace] using five_shell⟩
+
+/-- Away from the unique length-two resonance, two consecutive multi-role traces leave a
+joint shell equal to the smaller of depths two and `m`. -/
+theorem twoTransferTrace_multi_shell
+    {E G μ V₃ T₂ T₃ : ℚ} {m : Nat}
+    (E_unit : HasDecimalShell E 0 0)
+    (G_unit : HasDecimalShell G 0 0)
+    (mu_unit : HasDecimalShell μ 0 0)
+    (V3_unit : HasDecimalShell V₃ 0 0)
+    (T2_shell : HasDecimalShell T₂ 1 1)
+    (T3_shell : HasDecimalShell T₃ 1 1)
+    (nonresonant : m ≠ 2) :
+    HasDecimalShell
+      (twoTransferTrace E G μ (10 ^ m) T₂ T₃ V₃)
+      (min 2 (m : ℤ)) (min 2 (m : ℤ)) := by
+  have valuation_ne : (1 : ℤ) + 1 ≠ (m : ℤ) := by
+    exact_mod_cast Ne.symm nonresonant
+  simpa using twoTransferTrace_shell_of_nonresonant E_unit G_unit mu_unit V3_unit
+    T2_shell T3_shell valuation_ne valuation_ne
+
+/-- At the ordinary reset, a known backward-trace shell must equal the source scale plus the
+prospective target shell. -/
+theorem ordinaryTwo_shellBalance
+    {K μ G V₂ T₃ R₁ : ℚ} {m₁ : Nat}
+    {backwardTwo backwardFive targetTwo targetFive : ℤ}
+    (K_shell : HasDecimalShell K backwardTwo backwardFive)
+    (R1_unit : HasDecimalShell R₁ 0 0)
+    (mu_unit : HasDecimalShell μ 0 0)
+    (G_unit : HasDecimalShell G 0 0)
+    (V2_unit : HasDecimalShell V₂ 0 0)
+    (T3_shell : HasDecimalShell T₃ targetTwo targetFive)
+    (depth_two_identity : K * R₁ = μ * G * V₂ * 10 ^ m₁ * T₃) :
+    backwardTwo = (m₁ : ℤ) + targetTwo ∧
+      backwardFive = (m₁ : ℤ) + targetFive := by
+  have left_shell : HasDecimalShell (K * R₁) backwardTwo backwardFive := by
+    simpa using K_shell.mul R1_unit
+  have scale_shell : HasDecimalShell ((10 : ℚ) ^ m₁) m₁ m₁ := by
+    simpa using ten_hasDecimalShell.pow m₁
+  have right_shell :
+      HasDecimalShell (μ * G * V₂ * 10 ^ m₁ * T₃)
+        (m₁ + targetTwo) (m₁ + targetFive) := by
+    simpa [add_assoc] using
+      ((((mu_unit.mul G_unit).mul V2_unit).mul scale_shell).mul T3_shell)
+  have transported :
+      HasDecimalShell (μ * G * V₂ * 10 ^ m₁ * T₃)
+        backwardTwo backwardFive := by
+    simpa only [depth_two_identity] using left_shell
+  exact decimalShell_unique transported right_shell
+
+/-- From the ordinary reset, a two-transfer multi-shell pole either crosses the unique
+length-two resonance in the middle block or begins with the one-digit distinguished block. -/
+theorem ordinaryTwoMulti_gate
+    {E G μ V₂ V₃ T₂ T₃ R₁ : ℚ} {m₁ m₂ : Nat}
+    (E_unit : HasDecimalShell E 0 0)
+    (G_unit : HasDecimalShell G 0 0)
+    (mu_unit : HasDecimalShell μ 0 0)
+    (V2_unit : HasDecimalShell V₂ 0 0)
+    (V3_unit : HasDecimalShell V₃ 0 0)
+    (R1_unit : HasDecimalShell R₁ 0 0)
+    (T2_shell : HasDecimalShell T₂ 1 1)
+    (T3_shell : HasDecimalShell T₃ 1 1)
+    (middle_length : 2 ≤ m₂)
+    (depth_two_identity :
+      twoTransferTrace E G μ (10 ^ m₂) T₂ T₃ V₃ * R₁ =
+        μ * G * V₂ * 10 ^ m₁ * T₃) :
+    m₂ = 2 ∨ m₁ = 1 := by
+  by_cases resonant : m₂ = 2
+  · exact Or.inl resonant
+  · have backward_shell :
+        HasDecimalShell
+          (twoTransferTrace E G μ (10 ^ m₂) T₂ T₃ V₃) 2 2 := by
+      have shell := twoTransferTrace_multi_shell E_unit G_unit mu_unit V3_unit
+        T2_shell T3_shell resonant
+      simpa [min_eq_left (show (2 : ℤ) ≤ m₂ by exact_mod_cast middle_length)] using shell
+    have balance := ordinaryTwo_shellBalance backward_shell R1_unit mu_unit G_unit
+      V2_unit T3_shell depth_two_identity
+    exact Or.inr (by omega)
+
+/-- An ordinary multi-to-singleton depth-two pole is confined to the prior one-digit reset or
+one of the two adjacent singleton-shell resonances. -/
+theorem ordinaryTwoMultiToSingleton_gate
+    {E G μ V₂ V₃ T₂ T₃ R₁ : ℚ} {m₁ m₂ β : Nat}
+    (beta_bound : 3 ≤ β)
+    (first_length : 1 ≤ m₁)
+    (middle_length : 2 ≤ m₂)
+    (E_unit : HasDecimalShell E 0 0)
+    (G_unit : HasDecimalShell G 0 0)
+    (mu_unit : HasDecimalShell μ 0 0)
+    (V2_unit : HasDecimalShell V₂ 0 0)
+    (V3_unit : HasDecimalShell V₃ 0 0)
+    (R1_unit : HasDecimalShell R₁ 0 0)
+    (T2_shell : HasDecimalShell T₂ 1 1)
+    (T3_shell : HasDecimalShell T₃ (β + 1) β)
+    (depth_two_identity :
+      twoTransferTrace E G μ (10 ^ m₂) T₂ T₃ V₃ * R₁ =
+        μ * G * V₂ * 10 ^ m₁ * T₃) :
+    m₁ = 1 ∨ m₂ = β + 1 ∨ m₂ = β + 2 := by
+  have beta_bound_int : (3 : ℤ) ≤ β := by exact_mod_cast beta_bound
+  have middle_length_int : (2 : ℤ) ≤ m₂ := by exact_mod_cast middle_length
+  by_cases five_resonant : m₂ = β + 1
+  · exact Or.inr (Or.inl five_resonant)
+  · by_cases two_resonant : m₂ = β + 2
+    · exact Or.inr (Or.inr two_resonant)
+    · have backward_shell := twoTransferTrace_shell_of_nonresonant (m := m₂) E_unit G_unit
+        mu_unit V3_unit T2_shell T3_shell (by omega) (by omega)
+      have balance := ordinaryTwo_shellBalance backward_shell R1_unit mu_unit G_unit
+        V2_unit T3_shell depth_two_identity
+      rcases (show m₂ ≤ β ∨ β + 3 ≤ m₂ by omega) with small | large
+      · simp [min_eq_right (show (m₂ : ℤ) ≤ 1 + (β + 1) by omega),
+          min_eq_right (show (m₂ : ℤ) ≤ 1 + β by omega)] at balance
+        exact False.elim (by omega)
+      · simp [min_eq_left (show (1 : ℤ) + (β + 1) ≤ m₂ by omega),
+          min_eq_left (show (1 : ℤ) + β ≤ m₂ by omega)] at balance
+        exact Or.inl (by omega)
+
+/-- The `5`-adic component of a backward trace remains exact even when its `2`-adic component
+is resonant. -/
+theorem twoTransferTrace_five_shell_of_nonresonant
+    {E G μ V₃ T₂ T₃ : ℚ} {m : Nat}
+    {T2Two T2Five T3Two T3Five : ℤ}
+    (E_unit : HasDecimalShell E 0 0)
+    (G_unit : HasDecimalShell G 0 0)
+    (mu_unit : HasDecimalShell μ 0 0)
+    (V3_unit : HasDecimalShell V₃ 0 0)
+    (T2_shell : HasDecimalShell T₂ T2Two T2Five)
+    (T3_shell : HasDecimalShell T₃ T3Two T3Five)
+    (five_nonresonant : T2Five + T3Five ≠ (m : ℤ)) :
+    HasValue 5
+      (twoTransferTrace E G μ (10 ^ m) T₂ T₃ V₃)
+      (min (T2Five + T3Five) (m : ℤ)) := by
+  have trace_product : HasValue 5 (T₂ * T₃) (T2Five + T3Five) :=
+    mul_hasValue T2_shell.2 T3_shell.2
+  have scale_shell : HasDecimalShell ((10 : ℚ) ^ m) m m := by
+    simpa using ten_hasDecimalShell.pow m
+  have scaled_product :
+      HasDecimalShell (E * μ * G * 10 ^ m * V₃) m m := by
+    simpa using (((E_unit.mul mu_unit).mul G_unit).mul scale_shell).mul V3_unit
+  have five_shell := sub_hasValue_min trace_product.1 scaled_product.2.1 (by
+    rw [trace_product.2, scaled_product.2.2]
+    exact five_nonresonant)
+  rw [trace_product.2, scaled_product.2.2] at five_shell
+  simpa [twoTransferTrace] using five_shell
+
+/-- If the middle block is a singleton and the target is multi-role, the ordinary branch kills
+`D_c` and forces first length `β` for `D_b`. -/
+theorem ordinaryTwoSingletonToMulti_gate
+    {E G μ V₂ V₃ T₂ T₃ R₁ : ℚ} {m₁ m₂ β : Nat}
+    (beta_bound : 3 ≤ β)
+    (first_length : 1 ≤ m₁)
+    (middle_singleton : m₂ = 1 ∨ m₂ = β + 2)
+    (E_unit : HasDecimalShell E 0 0)
+    (G_unit : HasDecimalShell G 0 0)
+    (mu_unit : HasDecimalShell μ 0 0)
+    (V2_unit : HasDecimalShell V₂ 0 0)
+    (V3_unit : HasDecimalShell V₃ 0 0)
+    (R1_unit : HasDecimalShell R₁ 0 0)
+    (T2_shell : HasDecimalShell T₂ (β + 1) β)
+    (T3_shell : HasDecimalShell T₃ 1 1)
+    (depth_two_identity :
+      twoTransferTrace E G μ (10 ^ m₂) T₂ T₃ V₃ * R₁ =
+        μ * G * V₂ * 10 ^ m₁ * T₃) :
+    m₂ = β + 2 ∧ m₁ = β := by
+  rcases middle_singleton with dc | db
+  · subst m₂
+    have backward_shell :
+        HasDecimalShell (twoTransferTrace E G μ 10 T₂ T₃ V₃) 1 1 := by
+      have shell := twoTransferTrace_shell_of_nonresonant (m := 1) E_unit G_unit mu_unit
+        V3_unit T2_shell T3_shell (by omega) (by omega)
+      simpa [min_eq_right (show (1 : ℤ) ≤ (β + 1) + 1 by omega)] using shell
+    have balance := ordinaryTwo_shellBalance backward_shell R1_unit mu_unit G_unit
+      V2_unit T3_shell depth_two_identity
+    exact False.elim (by omega)
+  · subst m₂
+    have backward_five :
+        HasValue 5
+          (twoTransferTrace E G μ (10 ^ (β + 2)) T₂ T₃ V₃) (β + 1) := by
+      have shell := twoTransferTrace_five_shell_of_nonresonant (m := β + 2)
+        E_unit G_unit mu_unit V3_unit T2_shell T3_shell (by omega)
+      simpa [min_eq_left (show (β + 1 : ℤ) ≤ β + 2 by omega)] using shell
+    have left_five :
+        HasValue 5
+          (twoTransferTrace E G μ (10 ^ (β + 2)) T₂ T₃ V₃ * R₁)
+          (β + 1) := by
+      simpa using mul_hasValue backward_five R1_unit.2
+    have scale_shell : HasDecimalShell ((10 : ℚ) ^ m₁) m₁ m₁ := by
+      simpa using ten_hasDecimalShell.pow m₁
+    have right_five :
+        HasValue 5 (μ * G * V₂ * 10 ^ m₁ * T₃) (m₁ + 1) := by
+      simpa [add_assoc] using
+        ((((mu_unit.mul G_unit).mul V2_unit).mul scale_shell).mul T3_shell).2
+    have transported :
+        HasValue 5 (μ * G * V₂ * 10 ^ m₁ * T₃) (β + 1) := by
+      simpa only [depth_two_identity] using left_five
+    have balance : (β + 1 : ℤ) = m₁ + 1 :=
+      transported.2.symm.trans right_five.2
+    exact ⟨rfl, by omega⟩
+
+/-- Two successive singleton shells cannot form an ordinary depth-two pole. -/
+theorem ordinaryTwoSingletonToSingleton_impossible
+    {E G μ V₂ V₃ T₂ T₃ R₁ : ℚ} {m₁ m₂ β : Nat}
+    (beta_bound : 3 ≤ β)
+    (first_length : 1 ≤ m₁)
+    (middle_singleton : m₂ = 1 ∨ m₂ = β + 2)
+    (E_unit : HasDecimalShell E 0 0)
+    (G_unit : HasDecimalShell G 0 0)
+    (mu_unit : HasDecimalShell μ 0 0)
+    (V2_unit : HasDecimalShell V₂ 0 0)
+    (V3_unit : HasDecimalShell V₃ 0 0)
+    (R1_unit : HasDecimalShell R₁ 0 0)
+    (T2_shell : HasDecimalShell T₂ (β + 1) β)
+    (T3_shell : HasDecimalShell T₃ (β + 1) β)
+    (depth_two_identity :
+      twoTransferTrace E G μ (10 ^ m₂) T₂ T₃ V₃ * R₁ =
+        μ * G * V₂ * 10 ^ m₁ * T₃) :
+    False := by
+  rcases middle_singleton with dc | db
+  · subst m₂
+    have backward_shell :
+        HasDecimalShell (twoTransferTrace E G μ 10 T₂ T₃ V₃) 1 1 := by
+      have shell := twoTransferTrace_shell_of_nonresonant (m := 1) E_unit G_unit mu_unit
+        V3_unit T2_shell T3_shell (by omega) (by omega)
+      simpa [min_eq_right (show (1 : ℤ) ≤ (β + 1) + (β + 1) by omega),
+        min_eq_right (show (1 : ℤ) ≤ β + β by omega)] using shell
+    have balance := ordinaryTwo_shellBalance backward_shell R1_unit mu_unit G_unit
+      V2_unit T3_shell depth_two_identity
+    omega
+  · subst m₂
+    have backward_shell :
+        HasDecimalShell
+          (twoTransferTrace E G μ (10 ^ (β + 2)) T₂ T₃ V₃)
+          (β + 2) (β + 2) := by
+      have shell := twoTransferTrace_shell_of_nonresonant (m := β + 2)
+        E_unit G_unit mu_unit V3_unit T2_shell T3_shell (by omega) (by omega)
+      simpa [min_eq_right (show (β + 2 : ℤ) ≤ (β + 1) + (β + 1) by omega),
+        min_eq_right (show (β + 2 : ℤ) ≤ β + β by omega)] using shell
+    have balance := ordinaryTwo_shellBalance backward_shell R1_unit mu_unit G_unit
+      V2_unit T3_shell depth_two_identity
+    omega
 
 /-- Decimal digit used for the positive radix-ten binary embedding. -/
 def digit : Bool → ℕ

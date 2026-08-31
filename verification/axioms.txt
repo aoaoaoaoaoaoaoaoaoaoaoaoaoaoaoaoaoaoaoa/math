@@ -880,6 +880,27 @@
 'MatrixMortality.DecimalSetterCarry.resetOne_singleTarget_depthGap' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.DecimalSetterCarry.twoTransferTrace_identity' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.DecimalSetterCarry.twoTransferTrace_shell_of_nonresonant' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterCarry.twoTransferTrace_multi_shell' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterCarry.ordinaryTwo_shellBalance' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.DecimalSetterCarry.ordinaryTwoMulti_gate' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.DecimalSetterCarry.ordinaryTwoMultiToSingleton_gate' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterCarry.twoTransferTrace_five_shell_of_nonresonant' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterCarry.ordinaryTwoSingletonToMulti_gate' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterCarry.ordinaryTwoSingletonToSingleton_impossible' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.DecimalSetterCarry.code_injective' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.DecimalSetterCarry.suffix_exhaustion' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.DecimalSetterCarry.suffix_exhaustion_factorization' depends on axioms: [propext,

@@ -1197,6 +1197,14 @@ depths, exact `5/7` suffix exhaustion, and the strict prefix intervals separatin
 target. The finite Neary prefix trichotomy joining those declarations remains audited rather
 than a single end-to-end Lean theorem. Arbitrary depth begins only after two completed transfers.
 
+Record [`MM-S14`](SALVAGE.md#mm-s14-ordinary-depth-two-shell-forest) classifies every ordinary
+depth-two target-shell pair. `DecimalSetterCarry.twoTransferTrace_identity` eliminates the
+intermediate denominator, while `twoTransferTrace_shell_of_nonresonant` and
+`ordinaryTwo_shellBalance` compare its joint `2`/`5` shell with the prospective target. The
+result leaves only the two-role A/A resonance, the all-`c` A/B resonances of lengths `β+1` and
+`β+2`, and the all-`c` length-`β` block followed by `D_b` in B/A; B/B is impossible. These gates
+do not yet decide the surviving phase words or the distinguished-reset suffix corridor.
+
 The dimension-two affine ledger has six independently checked records:
 
 | Record | Formalization obligation |
@@ -1628,7 +1636,7 @@ fixed-rank decision problem.
 | `SetterShear.lean` | boundary-calibrated side-basis shear, internal separator invariance, and transfer-tail gauge obstruction |
 | `SetterJFraction.lean` | exact decimal coefficient boxes and the hyperbolic-block/elliptic-product obstruction |
 | `DecimalSetterArithmetic.lean` | decimal setter centered carry, reciprocal recurrence, coupled `2`/`5` target shells, and successive-pole valuation balance |
-| `DecimalSetterCarry.lean` | two-reset successive-pole identities, joint depth constraints, exact decimal suffix exhaustion, and first-transfer prefix separation |
+| `DecimalSetterCarry.lean` | two-reset successive-pole identities, joint depth constraints, exact decimal suffix exhaustion, first-transfer prefix separation, and the ordinary depth-two A/B shell forest |
 | `PairedMortality.lean` | common-column mortality converse and exact integer `4 × 4` family |
 | `PhaseFracture.lean` | phase normalization and dimension-free projective-identification contradiction |
 | `PhaseRigidity.lean` | checked local role algebra, discrepancy commutators, and invariant-pencil rigidity |

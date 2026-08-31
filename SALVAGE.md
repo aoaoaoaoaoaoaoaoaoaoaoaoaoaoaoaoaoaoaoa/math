@@ -99,6 +99,7 @@ file owns the mathematical stock.
 | [`MM-S11`](#mm-s11-decimal-setter-hyperbolicity) | structure theorem | every decimal setter transfer is strictly hyperbolic | audited | active |
 | [`MM-S12`](#mm-s12-decimal-two-prime-carry) | structure theorem | decimal setter poles obey an exact centered recurrence and coupled `2`/`5` trace balance | formalized | active |
 | [`MM-S13`](#mm-s13-decimal-first-transfer-extinction) | obstruction | neither decimal centered reset reaches a false pole after one completed transfer | formalized core; audited assembly | active |
+| [`MM-S14`](#mm-s14-ordinary-depth-two-shell-forest) | structure theorem | the ordinary depth-two decimal carry has only three resonant families and no B-to-B branch | formalized | active |
 | [`R32-S01`](#r32-s01-split-return-normal-form) | structure theorem | rank-two cuts reduce one-unit binary mortality to a `2 × 2` return recurrence | formalized | graduated |
 | [`R32-S02`](#r32-s02-two-plane-edge-square) | structure theorem | two rank-two generators are a two-vertex square of `2 × 2` edges | formalized | graduated |
 | [`R32-O01`](#r32-o01-rank-one-profile-collapse) | obstruction | a rank-one generator reduces mortality to order-at-most-three scalar recurrence zeros | audited | stock |
@@ -2829,6 +2830,57 @@ through `resetZero_successivePole_identity`, `resetOne_successivePole_identity`,
 
 **Next:** construct an iterated normalized-suffix state for the reciprocal carry, or exhibit the
 first false pole at depth at least two.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S14: Ordinary depth-two shell forest
+
+**Kind:** structure theorem
+**Evidence:** formalized
+**Disposition:** active
+
+For an ordinary-reset pole after two decimal setter transfers, eliminating the intermediate
+denominator gives
+
+```text
+K₂R₁=μGV₂10^(m₁)T₃,
+K₂=T₂T₃−EμG10^(m₂)V₃.
+```
+
+Here `R₁` is a decimal unit. Writing A=`(1,1)` for a multi-role trace shell and
+B=`(β+1,β)` for a singleton-erasure shell, unequal valuations in the two terms of `K₂`
+survive exactly. The complete shell forest is
+
+```text
+A → A:  m₂=2, or m₁=1;
+A → B:  m₂∈{β+1,β+2}, or m₁=1;
+B → A:  middle D_b and m₁=β;
+B → B:  impossible.
+```
+
+The `m₁=1` alternatives enter the distinguished reset and are already peeled by
+[`MM-S13`](#mm-s13-decimal-first-transfer-extinction). Upper-length accounting makes every
+remaining multi-role block in the table all `c`. Thus the ordinary depth-two frontier has only
+the two-role A/A family, the `β+1`- and `β+2`-role A/B families, and the
+`β`-role/`D_b` B/A family.
+
+**Scope:** this is complete for the joint valuation shells at ordinary depth two. It does not
+decide the surviving phase words, the distinguished-reset normalized suffix, or deeper poles.
+
+**Use:** delete every ordinary depth-two word outside the displayed families before symbolic or
+exact search. The B-to-B branch requires no further analysis.
+
+**Formalization:** [`MatrixMortality/DecimalSetterCarry.lean`](MatrixMortality/DecimalSetterCarry.lean),
+through `twoTransferTrace_identity`, `twoTransferTrace_shell_of_nonresonant`,
+`ordinaryTwo_shellBalance`, `ordinaryTwoMultiToSingleton_gate`,
+`ordinaryTwoSingletonToMulti_gate`, and `ordinaryTwoSingletonToSingleton_impossible`.
+
+**Artifact:**
+[`audits/m53-decimal-depth-two-shell-forest-2026-08-30.md`](audits/m53-decimal-depth-two-shell-forest-2026-08-30.md).
+
+**Next:** kill the three resonant families by exact Archimedean pole intervals or normalized
+decimal suffixes, then transfer the surviving method to the distinguished reset.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
