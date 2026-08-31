@@ -642,6 +642,12 @@ open MatrixMortality
 #print axioms PeriodicShell.shellPrefixesUnit_iff
 #print axioms PeriodicShell.shellPeriodicCycle
 #print axioms PeriodicShell.shellRun_eq_wordAction
+#print axioms PeriodicShell.shellStep_hasValue_two_of_negative
+#print axioms PeriodicShell.shellStep_unit_two_of_positive
+#print axioms PeriodicShell.shellStep_hasValue_three_of_negative
+#print axioms PeriodicShell.shellStep_unit_three_of_positive
+#print axioms PeriodicShell.shellStep_two_three_sum_of_both_negative
+#print axioms PeriodicShell.wait_mem_two_three_unit_interval
 #print axioms PeriodicShell.benchmarkRelation_ne
 #print axioms PeriodicShell.shellRun_benchmarkRelation
 #print axioms PeriodicShell.benchmarkRelationShift_ne

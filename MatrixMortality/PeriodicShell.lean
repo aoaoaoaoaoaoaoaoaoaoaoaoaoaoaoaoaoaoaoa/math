@@ -166,9 +166,182 @@ private theorem runFront_unit_of_run_unit
 def shellScale (wait : ℕ) : ℚ :=
   3 * (2 / 3) ^ wait
 
+/-- One normalized critical-shell transition. -/
+def shellStep (wait : ℕ) (state : ℚ) : ℚ :=
+  (shellScale wait * state + 1) / 5
+
 /-- Execute a finite wait schedule on the normalized critical-shell coordinate. -/
 def shellRun (waits : List ℕ) (state : ℚ) : ℚ :=
   run (waits.map shellScale) state
+
+@[simp]
+theorem shellRun_singleton (wait : ℕ) (state : ℚ) :
+    shellRun [wait] state = shellStep wait state := rfl
+
+private theorem pow_hasValue
+    {prime : ℕ} [Fact prime.Prime] {value : ℚ} {valuation : ℤ}
+    (value_hasValue : HasValue prime value valuation) (power : ℕ) :
+    HasValue prime (value ^ power) (power * valuation) := by
+  induction power with
+  | zero => simp [HasValue]
+  | succ power induction =>
+      rw [pow_succ]
+      convert mul_hasValue induction value_hasValue using 1
+      push_cast
+      ring
+
+private theorem shellScale_hasValue_two (wait : ℕ) :
+    HasValue 2 (shellScale wait) wait := by
+  let _ : Fact (Nat.Prime 2) := ⟨by norm_num⟩
+  have two_value : HasValue 2 (2 : ℚ) 1 := by
+    simpa using (primePower_hasValue (prime := 2) 1)
+  have three_unit : IsUnit 2 (3 : ℚ) :=
+    intCast_isUnit_of_not_dvd (by norm_num)
+  have ratio_value : HasValue 2 ((2 : ℚ) / 3) 1 := by
+    simpa using div_hasValue two_value three_unit
+  have power_value := pow_hasValue ratio_value wait
+  simpa [shellScale] using mul_hasValue three_unit power_value
+
+private theorem shellScale_hasValue_three (wait : ℕ) :
+    HasValue 3 (shellScale wait) (1 - wait) := by
+  let _ : Fact (Nat.Prime 3) := ⟨by norm_num⟩
+  have two_unit : IsUnit 3 (2 : ℚ) :=
+    intCast_isUnit_of_not_dvd (by norm_num)
+  have three_value : HasValue 3 (3 : ℚ) 1 := by
+    simpa using (primePower_hasValue (prime := 3) 1)
+  have ratio_value : HasValue 3 ((2 : ℚ) / 3) (-1) := by
+    simpa using div_hasValue two_unit three_value
+  have power_value := pow_hasValue ratio_value wait
+  convert mul_hasValue three_value power_value using 1 <;> simp [shellScale]
+  ring
+
+private theorem five_unit_two : IsUnit 2 (5 : ℚ) := by
+  let _ : Fact (Nat.Prime 2) := ⟨by norm_num⟩
+  exact intCast_isUnit_of_not_dvd (by norm_num)
+
+private theorem five_unit_three : IsUnit 3 (5 : ℚ) := by
+  let _ : Fact (Nat.Prime 3) := ⟨by norm_num⟩
+  exact intCast_isUnit_of_not_dvd (by norm_num)
+
+/-- Below the 2-adic cancellation wall, a shell step transports the valuation exactly. -/
+theorem shellStep_hasValue_two_of_negative
+    {wait : ℕ} {state : ℚ} (state_ne : state ≠ 0)
+    (negative : padicValRat 2 state + wait < 0) :
+    HasValue 2 (shellStep wait state) (padicValRat 2 state + wait) := by
+  let _ : Fact (Nat.Prime 2) := ⟨by norm_num⟩
+  have state_value : HasValue 2 state (padicValRat 2 state) := ⟨state_ne, rfl⟩
+  have product_value :
+      HasValue 2 (shellScale wait * state) (wait + padicValRat 2 state) :=
+    mul_hasValue (shellScale_hasValue_two wait) state_value
+  have numerator_value :
+      HasValue 2 (shellScale wait * state + 1) (wait + padicValRat 2 state) :=
+    add_hasValue_left product_value ⟨one_ne_zero, padicValRat.one⟩ (by omega)
+  simpa [shellStep, add_comm] using div_hasValue numerator_value five_unit_two
+
+/-- Above the 2-adic cancellation wall, a shell step lands in the unit shell. -/
+theorem shellStep_unit_two_of_positive
+    {wait : ℕ} {state : ℚ} (state_ne : state ≠ 0)
+    (positive : 0 < padicValRat 2 state + wait) :
+    IsUnit 2 (shellStep wait state) := by
+  let _ : Fact (Nat.Prime 2) := ⟨by norm_num⟩
+  have state_value : HasValue 2 state (padicValRat 2 state) := ⟨state_ne, rfl⟩
+  have product_value :
+      HasValue 2 (shellScale wait * state) (wait + padicValRat 2 state) :=
+    mul_hasValue (shellScale_hasValue_two wait) state_value
+  have product_positive : IsPositive 2 (shellScale wait * state) :=
+    ⟨product_value.1, by rw [product_value.2]; omega⟩
+  have numerator_unit : IsUnit 2 (shellScale wait * state + 1) := by
+    simpa [add_comm] using
+      unit_add_positive (show IsUnit 2 (1 : ℚ) from ⟨one_ne_zero, padicValRat.one⟩)
+        product_positive
+  simpa [shellStep] using div_hasValue numerator_unit five_unit_two
+
+/-- Below the 3-adic cancellation wall, a shell step transports the valuation exactly. -/
+theorem shellStep_hasValue_three_of_negative
+    {wait : ℕ} {state : ℚ} (state_ne : state ≠ 0)
+    (negative : padicValRat 3 state + 1 - wait < 0) :
+    HasValue 3 (shellStep wait state) (padicValRat 3 state + 1 - wait) := by
+  let _ : Fact (Nat.Prime 3) := ⟨by norm_num⟩
+  have state_value : HasValue 3 state (padicValRat 3 state) := ⟨state_ne, rfl⟩
+  have product_value :
+      HasValue 3 (shellScale wait * state)
+        ((1 - wait) + padicValRat 3 state) :=
+    mul_hasValue (shellScale_hasValue_three wait) state_value
+  have numerator_value :
+      HasValue 3 (shellScale wait * state + 1)
+        ((1 - wait) + padicValRat 3 state) :=
+    add_hasValue_left product_value ⟨one_ne_zero, padicValRat.one⟩ (by omega)
+  convert div_hasValue numerator_value five_unit_three using 1 <;>
+    simp only [shellStep, add_comm, sub_eq_add_neg]
+  ring
+
+/-- Above the 3-adic cancellation wall, a shell step lands in the unit shell. -/
+theorem shellStep_unit_three_of_positive
+    {wait : ℕ} {state : ℚ} (state_ne : state ≠ 0)
+    (positive : 0 < padicValRat 3 state + 1 - wait) :
+    IsUnit 3 (shellStep wait state) := by
+  let _ : Fact (Nat.Prime 3) := ⟨by norm_num⟩
+  have state_value : HasValue 3 state (padicValRat 3 state) := ⟨state_ne, rfl⟩
+  have product_value :
+      HasValue 3 (shellScale wait * state)
+        ((1 - wait) + padicValRat 3 state) :=
+    mul_hasValue (shellScale_hasValue_three wait) state_value
+  have product_positive : IsPositive 3 (shellScale wait * state) :=
+    ⟨product_value.1, by rw [product_value.2]; omega⟩
+  have numerator_unit : IsUnit 3 (shellScale wait * state + 1) := by
+    simpa [add_comm] using
+      unit_add_positive (show IsUnit 3 (1 : ℚ) from ⟨one_ne_zero, padicValRat.one⟩)
+        product_positive
+  simpa [shellStep] using div_hasValue numerator_unit five_unit_three
+
+/-- When both multiplier-prime debts survive a step, their sum rises by exactly one,
+independently of the chosen wait. -/
+theorem shellStep_two_three_sum_of_both_negative
+    {wait : ℕ} {state : ℚ} (state_ne : state ≠ 0)
+    (two_negative : padicValRat 2 state + wait < 0)
+    (three_negative : padicValRat 3 state + 1 - wait < 0) :
+    padicValRat 2 (shellStep wait state) + padicValRat 3 (shellStep wait state) =
+      padicValRat 2 state + padicValRat 3 state + 1 := by
+  have two_value :=
+    shellStep_hasValue_two_of_negative (wait := wait) (state := state) state_ne two_negative
+  have three_value :=
+    shellStep_hasValue_three_of_negative (wait := wait) (state := state) state_ne three_negative
+  rw [two_value.2, three_value.2]
+  omega
+
+/-- A 2-adic unit output forces the wait to reach the 2-adic cancellation wall. -/
+theorem two_wall_le_wait_of_shellStep_unit
+    {wait : ℕ} {state : ℚ} (state_ne : state ≠ 0)
+    (output_unit : IsUnit 2 (shellStep wait state)) :
+    0 ≤ padicValRat 2 state + wait := by
+  by_contra wall_not_reached
+  have output_value :=
+    shellStep_hasValue_two_of_negative (wait := wait) (state := state) state_ne (by omega)
+  have valuation_zero : padicValRat 2 state + wait = 0 :=
+    output_value.2.symm.trans output_unit.2
+  omega
+
+/-- A 3-adic unit output forces the wait not to cross the 3-adic cancellation wall. -/
+theorem wait_le_three_wall_of_shellStep_unit
+    {wait : ℕ} {state : ℚ} (state_ne : state ≠ 0)
+    (output_unit : IsUnit 3 (shellStep wait state)) :
+    wait ≤ padicValRat 3 state + 1 := by
+  by_contra wall_crossed
+  have output_value :=
+    shellStep_hasValue_three_of_negative (wait := wait) (state := state) state_ne (by omega)
+  have valuation_zero : padicValRat 3 state + 1 - wait = 0 :=
+    output_value.2.symm.trans output_unit.2
+  omega
+
+/-- If a shell transition is a unit at both multiplier primes, its wait lies in one explicit
+finite interval.  The two interval endpoints are the only possible cancellation walls. -/
+theorem wait_mem_two_three_unit_interval
+    {wait : ℕ} {state : ℚ} (state_ne : state ≠ 0)
+    (two_unit : IsUnit 2 (shellStep wait state))
+    (three_unit : IsUnit 3 (shellStep wait state)) :
+    0 ≤ padicValRat 2 state + wait ∧ wait ≤ padicValRat 3 state + 1 :=
+  ⟨two_wall_le_wait_of_shellStep_unit state_ne two_unit,
+    wait_le_three_wall_of_shellStep_unit state_ne three_unit⟩
 
 /-- Raw matrix-product block corresponding to one shell wait. -/
 def shellRawBlock (wait : ℕ) : List Letter :=

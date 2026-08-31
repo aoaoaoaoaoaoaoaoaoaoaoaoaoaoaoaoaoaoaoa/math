@@ -425,6 +425,14 @@ only a computably bounded number of times. Exact target and accepting-exit reach
 specified rational source, rather than rational realization or fixed-block pumping of shell
 paths, remains the benchmark seam.
 
+The same module now exposes the complementary `2`- and `3`-adic wall skeleton as checked
+`D2-S03`. For `T_m(u)=(1+3u(2/3)^m)/5`, a negative transported valuation is exactly
+`v₂(u)+m` or `v₃(u)+1−m`, while a positive transported valuation gives a unit output. A
+simultaneous `2`/`3`-unit output therefore confines `m` to
+`−v₂(u)≤m≤v₃(u)+1`. When both transported valuations are negative, their sum rises by exactly
+one independently of `m`. These are one-step restrictions, not a finite-state decision theorem:
+mixed-sign histories and equality-wall cancellation remain live.
+
 `MixedPrimeKernel` now owns the raw `D,T` affine kernel. It checks the published shortest
 length-27 relation, an infinite family of distinct equal-map pairs at every odd length
 `29+2k`, and three independent length-30 relations. The former isolated length-29 relation is
@@ -1265,11 +1273,12 @@ transition: `peeledNumerator_twoAdic_deepens` proves that the difference of the 
 every non-singleton consecutive multi-pole block to have upper length at least three. The module
 does not identify later product residuals with raw encoded heads or decide singleton targets.
 
-The dimension-two affine ledger has six independently checked records:
+The dimension-two affine ledger has seven independently checked records:
 
 | Record | Formalization obligation |
 | --- | --- |
 | [`D2-S02`](SALVAGE.md#d2-s02-monotone-affine-path-form) | affine conjugacy, elementary case split, operational word normal form, and recovery of block lengths |
+| [`D2-S03`](SALVAGE.md#d2-s03-two-place-shell-walls) | exact `2`/`3` multiplier valuations, negative and positive wall branches, finite simultaneous-unit wait interval, and wait-independent simultaneous-debt sum |
 | [`D2-D05`](SALVAGE.md#d2-d05-prescribed-translation-count) | primitive linear-polynomial divisibility, bounded carries in both scan directions, ordered-marker automaton, regular control, and `a=±1` cases |
 | [`D2-D06`](SALVAGE.md#d2-d06-private-prime-peeling) | unique-minimum valuation calculation, zero endpoints, fixed-count reduction, reversed language, and positive private valuation |
 | [`D2-D07`](SALVAGE.md#d2-d07-bounded-valuation-orthants) | localization support, denominator bounds in both orthants, invariant-interval recognition, finite graph, and regular-control product |
@@ -1843,6 +1852,7 @@ fixed-rank decision problem.
 | In any group-valued interpretation, the first two odd-family instances force the whole family by conjugate commutation | `MixedPrimeNormalization.groupPump_eq_of_zero_one`, `MixedPrimeNormalization.wordProduct_kernelOddFamily_of_zero_one` |
 | Every nonempty critical-shell wait schedule has a rational periodic `5`-unit at every cyclic phase | `PeriodicShell.shellPeriodicCycle` |
 | Repeating a fixed shell schedule subtracts its length from the `5`-adic displacement valuation each period, bounding legal repetition away from its unique periodic point | `PeriodicShell.shellRun_repeat_sub_periodicPoint_value`, `PeriodicShell.shellRun_repeat_unit_bound` |
+| A critical-shell step obeys exact `2`/`3` cancellation walls; simultaneous-unit output bounds the wait, and simultaneous negative debt rises by one | `PeriodicShell.shellStep_hasValue_two_of_negative`, `PeriodicShell.shellStep_unit_two_of_positive`, `PeriodicShell.shellStep_hasValue_three_of_negative`, `PeriodicShell.shellStep_unit_three_of_positive`, `PeriodicShell.shellStep_two_three_sum_of_both_negative`, `PeriodicShell.wait_mem_two_three_unit_interval` |
 | Shell phases are all units exactly when the final output is a unit | `PeriodicShell.shellPrefixesUnit_iff` |
 | Raw words and shell schedules are conjugate, and every boundary-shifted benchmark schedule is one contextual raw rule | `PeriodicShell.shellRun_eq_wordAction`, `PeriodicShell.shellRawWord_benchmarkRelationShiftLeft`, `PeriodicShell.shellRawWord_benchmarkRelationShiftRight`, `PeriodicShell.shellRun_benchmarkRelationShift` |
 | Two distinct length-thirteen benchmark schedules induce the same affine map, preserve all guards in every context, and share a rational all-unit cycle | `PeriodicShell.benchmarkRelation_ne`, `PeriodicShell.shellRun_benchmarkRelationContext`, `PeriodicShell.benchmarkRelationContextGuard`, `PeriodicShell.benchmarkRelationCycle` |
