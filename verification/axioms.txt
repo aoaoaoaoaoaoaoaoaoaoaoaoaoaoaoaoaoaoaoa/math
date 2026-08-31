@@ -229,6 +229,16 @@
 'MatrixMortality.ChangedSeparatorTail.nearyTiltedTrailingToggle_hasNonemptyZero_iff' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.ChangedSeparatorRealization.widthScale_pos' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ChangedSeparatorRealization.denominator_lt_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ChangedSeparatorRealization.denominator_ne_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ChangedSeparatorRealization.tailEigenvalue_ne_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.clearRationalFamily_isMortal_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.pairedProduct_mulVec_column' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.pairedCoefficient_eq_sideCoefficient' depends on axioms: [propext, Classical.choice, Quot.sound]
@@ -680,6 +690,31 @@
  Classical.choice,
  Quot.sound]
 'MatrixMortality.MixedBranchingPersistentGuard.data_b_rank_rat' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedTwoStateLift.wordProduct_mulVec_column' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedTwoStateLift.coreState_second_odd_of_rows' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedTwoStateLift.pairedCoefficient_data_b_cons_ne_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedTwoStateLift.coefficient_eq_zero_iff_gateLanguage' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedTwoStateLift.data_b_rank_rat' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.GuardedTwoStateLift.allWords_sameZero_iff_gate_exact' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedTwoStateLift.allWords_sameZero_iff_data_c_gate' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedTwoStateLift.family_sameZero_iff_gate_exact' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedTwoStateLift.family_sameZero_iff_data_c_gate' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
 'MatrixMortality.SquareRootPunctuation.coefficient_append_square' depends on axioms: [propext,
@@ -1492,6 +1527,12 @@
 'MatrixMortality.SwappedSetterMultitransfer.swappedUpperCode_double_c' depends on axioms: [propext, Quot.sound]
 'MatrixMortality.SwappedSetterMultitransfer.upperLength_double_c' depends on axioms: [propext]
 'MatrixMortality.SwappedSetterMultitransfer.twoC_then_singletonB_avoids_singleton_pole' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SwappedSetterMultitransfer.ruleBearing_allC_avoids_pole' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SwappedSetterMultitransfer.firstMultiTransfer_pole_forces_all_erasure' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
 'MatrixMortality.DecimalSetterChamber.doubleDeletion_step_in_gap' depends on axioms: [propext,
@@ -2825,6 +2866,33 @@
  Classical.choice,
  Quot.sound]
 'MatrixMortality.ReturnSquare.fractionPredecessor_hasValue_of_target_above' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnSquare.fractionPredecessor_hasValue_of_numerator_wall' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnSquare.fractionPredecessor_eq_zero_iff_of_numerator_wall' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnSquare.fractionPredecessor_hasValue_of_equalScale_residue' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnSquare.fractionPredecessor_isUnit_of_equalScale_residue_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnSquare.fractionPredecessor_hasValue_of_denominatorScale_residue' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnSquare.fractionPredecessor_eq_of_target_scale_eq_denominator' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnSquare.fractionPredecessor_hasValue_of_critical_scale_wall' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnSquare.evenScales_threeFourths_wall_fracture' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnSquare.evenScales_threeFourths_wall_values' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
 'MatrixMortality.ReturnSquare.fractionTerminalPredecessor_hasValue' depends on axioms: [propext,
