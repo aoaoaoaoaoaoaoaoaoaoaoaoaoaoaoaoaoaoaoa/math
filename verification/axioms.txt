@@ -196,6 +196,18 @@
 'MatrixMortality.GeometricTailHankel.ten_le_card_of_tbc_geometric_transfer_moments' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.ChangedSeparatorTail.tiltedTernaryCode_injective' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ChangedSeparatorTail.nearyTailRatio_lt_neg_three_halves' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ChangedSeparatorTail.nearyTiltedPairedCoefficient_eq_zero_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ChangedSeparatorTail.nearyTiltedTrailingToggle_hasNonemptyZero_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.pairedProduct_mulVec_column' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.pairedCoefficient_eq_sideCoefficient' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.decodePairedWord_surjective' depends on axioms: [propext]

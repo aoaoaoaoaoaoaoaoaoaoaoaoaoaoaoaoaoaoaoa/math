@@ -247,7 +247,7 @@ The unknown cells immediately below this staircase are:
 | `M₃(4)` | three-active-role fixed-boundary PCP / `GPCP(3)`, or a new same-dimension generator compiler | by CHHN, also `M₉(2)` |
 | `M₄(3)` | an undecidable promised two-state overlap queue with pure deletion, or closure of either parabolic bridge language | by CHHN, also `M₈(2)` |
 | `M₅(3)` | a five-state binary same-zero root, a toggle/separator fusion, or fixed-width-three scheduled universality | supersedes `M₆(3)`; `M₁₀(2)` is already known |
-| `M₉(2)` | a history-sensitive same-zero compiler, sufficiently complex moving transfer tail, or nonlinear boundary; exact prefix and low-tail-complexity transfer routes stop at ten | improves the two-generator threshold by one |
+| `M₉(2)` | finish the tilted-separator rank-nine transfer: total basis selection, exterior-run converse, integer emission | improves the two-generator threshold by one |
 | `M₂(k≥3)` | a qualitatively different decidability or undecidability argument | settles the dimension-two wall |
 
 The scalar result `Z₆(2)` gives `M₆(3)` after adjoining a separator; that mortality point was
@@ -1118,14 +1118,24 @@ the consecutive positions. Replacing the constant separator by `τP′,τ²P′,
 multiplies the six `MM-O23` determinant certificates only by nonzero powers of `τ`. Every order
 of `T,D_b,D_c` therefore still needs ten states.
 
-These theorems are not lower bounds for arbitrary same-zero series. The live seam must change
-the internal moment values, pay the required dimension in a moving exact tail, use a moving tail
-with at least two modes at the consecutive positions, or make the boundary semantics nonlinear.
+[`MM-C05`](SALVAGE.md#mm-c05-tilted-separator-rank-nine-transfer) breaches that wall by changing
+the separator row. Explicit rational functions give moments
+`T,D_b,D_c,ux,sux,s²ux,…` with an audited nine-state `3+3+2+1` realization. The row ratio
+`q=(K−3V)/(K−3)` is below `−3/2`; Lean proves that the tilted code
+`ternaryCode(w)+q·3^|w|` remains injective. Hence the changed row preserves the scalar zero set
+for every paired control word and both phases, including trailing-toggle absorption. This is the
+first exact rank-nine same-zero transfer core, not another finite-depth candidate.
+
+The live work is now narrow: make the rational basis choice total on the fixed universal Neary
+image, prove the arbitrary exterior-run converse for the physical pair `(A,UV)`, clear
+denominators, and connect the resulting integer pair to the existing code-halting reduction.
+Until those steps are checked, `M₉(2)` remains open.
 See
 [`audits/m92-run-length-transfer-hankel-2026-08-31.md`](audits/m92-run-length-transfer-hankel-2026-08-31.md),
 [`audits/m92-sparse-transfer-hankel-2026-08-31.md`](audits/m92-sparse-transfer-hankel-2026-08-31.md),
 [`audits/m92-moving-tail-transfer-hankel-2026-08-31.md`](audits/m92-moving-tail-transfer-hankel-2026-08-31.md),
-and [`audits/m92-geometric-tail-transfer-hankel-2026-08-31.md`](audits/m92-geometric-tail-transfer-hankel-2026-08-31.md).
+[`audits/m92-geometric-tail-transfer-hankel-2026-08-31.md`](audits/m92-geometric-tail-transfer-hankel-2026-08-31.md),
+and [`audits/m92-changed-separator-transfer-2026-08-31.md`](audits/m92-changed-separator-transfer-2026-08-31.md).
 
 ### 4. Three-letter correspondence and direct mortality: `M₃(4)`
 

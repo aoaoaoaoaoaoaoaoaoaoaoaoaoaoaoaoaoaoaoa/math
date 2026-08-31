@@ -2350,6 +2350,48 @@ moving tail must have at least two modes or leave exact moment preservation.
 **Artifact:**
 [`audits/m92-geometric-tail-transfer-hankel-2026-08-31.md`](audits/m92-geometric-tail-transfer-hankel-2026-08-31.md).
 
+### MM-C05: Tilted-separator rank-nine transfer
+
+**Kind:** partial construction
+**Evidence:** formalized semantic core; audited symbolic realization
+**Disposition:** active
+
+Let `r=3^β`, and let `V,K` be the code and scale of Neary's lower `c` word. Explicit rational
+functions `a,z,s` give the consecutive transfer moments
+
+```text
+T, D_b, D_c, ux, sux, s²ux, …,     x=(a,z,z,z)
+```
+
+a nine-state `3+3+2+1` linear realization. At `β=3`, body `bb`, its exact Hankel rank is nine.
+The crucial row ratio is
+
+```text
+q=z/a=(K−3V)/(K−3)<−3/2.
+```
+
+Lean proves that `w↦ternaryCode(w)+q·3^|w|` is injective, so replacing the canonical separator
+row by `(1,q,q,q)` preserves the scalar zero set for every paired control word and both phases.
+The same-zero theorem remains exact after trailing-toggle absorption and at the existential
+nonempty-word boundary.
+
+**Scope:** the same-zero boundary theorem is formal and uniform in `β,body`. The nine-state
+realization is an exact symbolic audit on a nondegenerate coordinate chart. A degenerate basis
+branch, exterior transition runs, effective integer emission, and the final universal reduction
+remain open. This record does not yet claim undecidability of `M₉(2)`.
+
+**Use:** pursue the changed separator, not another lower bound. The old ten-state throat is
+breached at exact Hankel dimension nine while retaining the source zero language. Next prove the
+exterior-run converse and make basis selection total on the fixed universal Neary image.
+
+**Formalization:** `tiltedTernaryCode_injective`,
+`nearyTailRatio_lt_neg_three_halves`, `nearyTiltedPairedCoefficient_eq_zero_iff`, and
+`nearyTiltedTrailingToggle_hasNonemptyZero_iff` in
+[`MatrixMortality/ChangedSeparatorTail.lean`](MatrixMortality/ChangedSeparatorTail.lean).
+
+**Artifact:**
+[`audits/m92-changed-separator-transfer-2026-08-31.md`](audits/m92-changed-separator-transfer-2026-08-31.md).
+
 ### MM-M01: Off-diagonal companion interface
 
 **Kind:** partial mechanism  

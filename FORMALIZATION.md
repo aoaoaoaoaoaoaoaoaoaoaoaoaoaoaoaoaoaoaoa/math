@@ -356,6 +356,16 @@ companion audit reconstructs nonzero exact minors for all six role orders and ev
 `τ`. See
 [`m92-geometric-tail-transfer-hankel-2026-08-31.md`](audits/m92-geometric-tail-transfer-hankel-2026-08-31.md).
 
+The changed-separator construction leaves exact role values but changes the rank-one tail row.
+Lean proves that `F_q(w)=ternaryCode(w)+q·3^|w|` is injective for `q<−3/2`, derives that bound
+for the Neary-selected ratio `q=(K−3V)/(K−3)`, and proves pointwise zero equivalence for every
+paired control word in both phases. The result survives trailing-toggle absorption and preserves
+existential nonempty zero reachability. An exact symbolic audit constructs the associated
+`3+3+2+1` nine-state transfer realization on its nondegenerate coordinate chart and verifies
+Hankel rank nine at the `β=3`, body `bb` benchmark. Primitive-recursive basis selection,
+exterior-run safety, and the integer two-generator endpoint are not yet Lean declarations. See
+[`m92-changed-separator-transfer-2026-08-31.md`](audits/m92-changed-separator-transfer-2026-08-31.md).
+
 Lean also constructs the canonical reachable-observable quotient around any internal physical
 word whose product factors as `UW`. Its generators act on
 

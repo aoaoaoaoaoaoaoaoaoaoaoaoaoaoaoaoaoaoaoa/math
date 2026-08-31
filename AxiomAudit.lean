@@ -123,6 +123,10 @@ open MatrixMortality
 #print axioms GeometricTailHankel.tbcMinor_mulVec_eq_zero_iff
 #print axioms GeometricTailHankel.tbcMinor_det_ne_zero
 #print axioms GeometricTailHankel.ten_le_card_of_tbc_geometric_transfer_moments
+#print axioms ChangedSeparatorTail.tiltedTernaryCode_injective
+#print axioms ChangedSeparatorTail.nearyTailRatio_lt_neg_three_halves
+#print axioms ChangedSeparatorTail.nearyTiltedPairedCoefficient_eq_zero_iff
+#print axioms ChangedSeparatorTail.nearyTiltedTrailingToggle_hasNonemptyZero_iff
 #print axioms pairedProduct_mulVec_column
 #print axioms pairedCoefficient_eq_sideCoefficient
 #print axioms decodePairedWord_surjective
