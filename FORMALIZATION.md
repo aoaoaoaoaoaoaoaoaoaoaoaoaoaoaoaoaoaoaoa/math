@@ -366,8 +366,11 @@ body and proves the last chart factor positive whenever the positive-width body 
 every emitted universal body does. The audit verifies the parameter-uniform exterior grammar
 `I/I/D_c/x` on the left and `I/D_b/D_c/u` on the right, plus all 36 short representatives at the
 `β=3`, body `bb` benchmark. Lean also proves that replacing any rational family by its canonical
-integer matrix numerators preserves mortality exactly. The rational pair, its primitive-recursive
-emission, and the final two-generator reduction are not yet Lean declarations. See
+integer matrix numerators preserves mortality exactly. `ChangedSeparatorRealization.lean` now
+declares the exact `3+3+2+1` transition, rational chart, specialized two-generator pair, and its
+canonical integer numerator pair, and proves the chart denominator and tail eigenvalue nonzero.
+The sixteen moment identities, exterior certificates, primitive-recursive emission theorem, and
+final two-generator reduction remain unchecked. See
 [`m92-changed-separator-transfer-2026-08-31.md`](audits/m92-changed-separator-transfer-2026-08-31.md).
 
 Lean also constructs the canonical reachable-observable quotient around any internal physical

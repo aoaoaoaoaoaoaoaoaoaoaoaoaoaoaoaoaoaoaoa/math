@@ -1260,11 +1260,13 @@ R_0=I,      R_1=D_b,  R_2=D_c,  R_q=u (q≥3).
 
 Role fringes extend a source word; `x,u` are the two separator boundaries. Hence the existing
 outer-product theorem reflects every malformed physical zero to a source scalar zero. Canonical
-matrix numerators already clear denominators without changing mortality. The live work
-is now transcriptional but still proof-bearing: define the audited rational matrices in Lean,
-prove the moment and exterior certificates there, prove primitive recursiveness of the integer
-pair, and connect it to the code-halting reduction. Until those steps are checked, `M₉(2)` remains
-open.
+matrix numerators already clear denominators without changing mortality. The exact `3+3+2+1`
+transition, three-parameter input/output chart, specialized rational pair, and canonical integer
+numerator pair are now Lean declarations in `ChangedSeparatorRealization.lean`; their common
+denominator and tail eigenvalue are formally nonzero. No moment identity follows merely from
+declaring those matrices. The live work is to certify the sixteen moment entries and exterior
+classes, prove primitive recursiveness of the integer-pair emission, and connect the result to the
+code-halting reduction. Until those steps are checked, `M₉(2)` remains open.
 See
 [`audits/m92-run-length-transfer-hankel-2026-08-31.md`](audits/m92-run-length-transfer-hankel-2026-08-31.md),
 [`audits/m92-sparse-transfer-hankel-2026-08-31.md`](audits/m92-sparse-transfer-hankel-2026-08-31.md),

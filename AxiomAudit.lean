@@ -134,6 +134,10 @@ open MatrixMortality
 #print axioms ChangedSeparatorTail.lowerCCode_add_two_lt_lowerCScale_of_b_mem
 #print axioms ChangedSeparatorTail.nearyTiltedPairedCoefficient_eq_zero_iff
 #print axioms ChangedSeparatorTail.nearyTiltedTrailingToggle_hasNonemptyZero_iff
+#print axioms ChangedSeparatorRealization.widthScale_pos
+#print axioms ChangedSeparatorRealization.denominator_lt_zero
+#print axioms ChangedSeparatorRealization.denominator_ne_zero
+#print axioms ChangedSeparatorRealization.tailEigenvalue_ne_zero
 #print axioms clearRationalFamily_isMortal_iff
 #print axioms pairedProduct_mulVec_column
 #print axioms pairedCoefficient_eq_sideCoefficient

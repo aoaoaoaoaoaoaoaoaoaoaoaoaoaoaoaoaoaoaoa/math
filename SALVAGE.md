@@ -2431,14 +2431,15 @@ while a boundary `x` or `u` is exactly one side of its outer-product separator. 
 scalar zero.
 
 **Scope:** the same-zero theorem and every chart nonvanishing inequality are formal and uniform.
-The nine-state matrices and exterior-kernel certificates are exact symbolic audit artifacts, not
-yet Lean declarations. Lean's canonical `Matrix.num` construction now clears every rational
-generator independently without changing mortality. Primitive-recursive pair emission and the
-final universal reduction remain open. This record does not yet claim undecidability of `M₉(2)`.
+The exact nine-state transition, input/output chart, specialized rational pair, and canonical
+integer numerator pair are Lean declarations. Their moment and exterior-kernel identities remain
+exact symbolic audit artifacts rather than Lean theorems. Primitive-recursive pair emission and
+the final universal reduction remain open. This record does not yet claim undecidability of
+`M₉(2)`.
 
-**Use:** the exact realization and its malformed-run converse now share one finite grammar. Move
-the audited matrices into Lean, prove primitive recursiveness of their canonical integer
-numerators, and connect that pair to the universal source reduction.
+**Use:** the exact realization and its malformed-run converse now share one finite grammar. Prove
+the chart moment and exterior identities entrywise, prove primitive recursiveness of the canonical
+integer numerators, and connect that pair to the universal source reduction.
 
 **Formalization:** `tiltedTernaryCode_injective`,
 `nearyTailRatio_lt_neg_three_halves`, `transferDenominator_lt_zero`,
@@ -2448,7 +2449,9 @@ numerators, and connect that pair to the universal source reduction.
 `nearyTiltedTrailingToggle_hasNonemptyZero_iff` in
 [`MatrixMortality/ChangedSeparatorTail.lean`](MatrixMortality/ChangedSeparatorTail.lean), and
 `clearRationalFamily_isMortal_iff` in
-[`MatrixMortality/RationalClearing.lean`](MatrixMortality/RationalClearing.lean).
+[`MatrixMortality/RationalClearing.lean`](MatrixMortality/RationalClearing.lean). The exact matrix
+and pair declarations, together with denominator and tail-eigenvalue nonvanishing, are in
+[`MatrixMortality/ChangedSeparatorRealization.lean`](MatrixMortality/ChangedSeparatorRealization.lean).
 
 **Artifact:**
 [`audits/m92-changed-separator-transfer-2026-08-31.md`](audits/m92-changed-separator-transfer-2026-08-31.md).
