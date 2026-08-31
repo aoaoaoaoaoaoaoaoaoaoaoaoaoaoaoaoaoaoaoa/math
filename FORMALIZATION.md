@@ -512,6 +512,12 @@ carrier residue is saturated: `[1]` and
 while `[1]` and `[1,2,0]` collide at `19/42↦8/21`; their carrier orientations modulo three are
 opposite, and both sources and both targets are `5`-adic units.
 
+The real exterior is decidable. Every shell block preserves `[1/5,1/2]`; above `1/2` and below
+`1/5`, the zero-wait block is extremal and contracts distance toward `1/2` by `3/5` per block.
+Lean turns the resulting envelope into an explicit rational-search bound on schedule length.
+The audited prescribed-count algorithm decides every smaller length. Thus real monotonicity leaves
+exactly the closed recurrent target interval `[1/5,1/2]`; it supplies no further bound inside.
+
 `MixedPrimeKernel` now owns the raw `D,T` affine kernel. It checks the published shortest
 length-27 relation, an infinite family of distinct equal-map pairs at every odd length
 `29+2k`, and three independent length-30 relations. The former isolated length-29 relation is
@@ -1352,7 +1358,7 @@ transition: `peeledNumerator_twoAdic_deepens` proves that the difference of the 
 every non-singleton consecutive multi-pole block to have upper length at least three. The module
 does not identify later product residuals with raw encoded heads or decide singleton targets.
 
-The dimension-two affine ledger has nine independently checked records:
+The dimension-two affine ledger has ten independently checked records:
 
 | Record | Formalization obligation |
 | --- | --- |
@@ -1360,15 +1366,17 @@ The dimension-two affine ledger has nine independently checked records:
 | [`D2-D05`](SALVAGE.md#d2-d05-prescribed-translation-count) | primitive linear-polynomial divisibility, bounded carries in both scan directions, ordered-marker automaton, regular control, and `a=±1` cases |
 | [`D2-D06`](SALVAGE.md#d2-d06-private-prime-peeling) | unique-minimum valuation calculation, zero endpoints, fixed-count reduction, reversed language, and positive private valuation |
 | [`D2-D07`](SALVAGE.md#d2-d07-bounded-valuation-orthants) | localization support, denominator bounds in both orthants, invariant-interval recognition, finite graph, and regular-control product |
+| [`D2-D10`](SALVAGE.md#d2-d10-real-trap-exterior) | invariant real trap, extremal zero-wait envelopes on both exterior components, explicit computable schedule-length bounds, and fixed-count reduction |
 | [`D2-M01`](SALVAGE.md#d2-m01-benchmark-critical-shell) | benchmark conjugacies, endpoint-shell translation, guarded `5`-adic transition, parity guard, and no-return-after-exit theorem |
 | [`D2-O02`](SALVAGE.md#d2-o02-critical-shell-periodic-saturation) | complete: rational periodic cycles for every nonempty finite wait schedule, raw/shell conjugacy, contextual boundary factorization, an infinite odd-length raw kernel family with guarded contextual cycles, exact persistence under unit normalization, a two-seed cancellative pump, and three independent length-30 relations; audited strengthening: terminating but nonconfluent critical-pair census, bounded five-rule kernel completeness through length 30 and six unexplained classes at 31 after adjoining the family member, infinite completion, finite-precision completeness, rational aperiodic addresses, density, and period-one single-wait transition rigidity |
 | [`D2-O03`](SALVAGE.md#d2-o03-fixed-source-adjacent-saturation) | accepted fixed-source adjacent collision family, target injectivity, complementary target pole, and sole-candidate ray membership |
 | [`D2-O04`](SALVAGE.md#d2-o04-forced-exit-surface) | exact forced-exit valuation, post-exit valuation descent and target-derived tail length, two-adic surface coordinates, injectivity, two-candidate surface membership, and fixed-count regular-control reduction of the full continuation cone |
 | [`D2-O05`](SALVAGE.md#d2-o05-universal-exit-suffix-collapse) | exhaustive valuation classification of every critical-shell exit and the two-candidate fixed-target length reduction for every nonempty suffix |
 
-The shell record does not decide the benchmark. Every fixed exit has a decidable suffix, but an
-arbitrary critical prefix can produce infinitely many exits. A formal benchmark theorem must
-represent that union effectively rather than hide it behind pointwise decidability. The audit is
+The shell record does not decide the benchmark. Every fixed exit has a decidable suffix and every
+real-exterior target has a computable length bound, but an arbitrary critical prefix inside
+`[1/5,1/2]` can produce infinitely many exits. A formal benchmark theorem must represent that
+union effectively rather than hide it behind pointwise decidability. The audit is
 [`audits/dimension-two-affine-peeling-2026-07-25.md`](audits/dimension-two-affine-peeling-2026-07-25.md);
 the periodic saturation theorem and its remaining arithmetic boundary are reconstructed in
 [`audits/m32-gpi2-residue-blindness-2026-08-30.md`](audits/m32-gpi2-residue-blindness-2026-08-30.md);
@@ -1722,6 +1730,7 @@ fixed-rank decision problem.
 | `MixedPrimeDebt.lean` | exact wait walls, debt recurrence and predecessor fans, cross-length collision arithmetic, the accepted fixed-source ray, and its forced-exit surface |
 | `MixedPrimeDebtBoundary.lean` | same-length collision rigidity and exact saturation of the remaining three-adic carrier orientation |
 | `MixedPrimeExit.lean` | universal critical-shell exit classification, two-candidate post-exit length reduction, and translated-letter count for the full fixed-source continuation cone |
+| `MixedPrimeRealTrap.lean` | invariant real trap, exterior contraction envelopes, and computable exterior schedule-length bounds |
 | `MixedPrimeKernel.lean` | raw mixed-prime affine action, contextual composition, an infinite odd-length kernel family from length 29, and three independent length-30 relations |
 | `MixedPrimeNormalization.lean` | exact homogeneous odd-family relations, persistence under independent normalization scaling, and the two-seed cancellative pump |
 | `ReturnGuard.lean` | three-mode amalgamated return algebra, split mortality compiler, and exact state lower bound |
@@ -1935,6 +1944,7 @@ fixed-rank decision problem.
 | The fixed source `43/24` supports an exact adjacent-length collision family at every terminal wait; its targets lie on the complementary two-adic pole, are pairwise distinct, admit an explicit fixed-target membership test, and are accepted whenever the wait is divisible by ten | `MixedPrimeDebt.fixedSourceAdjacentFamily`, `MixedPrimeDebt.fixedSourceAdjacentFamily_target_injective`, `MixedPrimeDebt.fixedSourceAdjacentFamily_targetPole`, `MixedPrimeDebt.fixedSourceAdjacentFamily_target_exists_iff`, `MixedPrimeDebt.fixedSourceAdjacentFamily_ten_mul_numerator_mod`, `MixedPrimeDebt.fixedSourceAdjacentFamily_ten_mul_numerator`, `MixedPrimeDebt.fixedSourceAdjacentFamily_ten_mul_accepted` |
 | Every next block from the accepted fixed-source collision ray is a forced valuation-minus-one exit; its surface is injective with a two-candidate target test, and target valuation reduces its full continuation cone to one fixed translated-letter count | `MixedPrimeDebt.fixedSourceAdjacentExitTarget_fiveNegative`, `MixedPrimeDebt.fixedSourceAdjacentExitTarget_displacement`, `MixedPrimeDebt.fixedSourceAdjacentExitTarget_displacement_twoValue`, `MixedPrimeDebt.fixedSourceAdjacentExitTarget_tail_fiveNegative`, `MixedPrimeDebt.fixedSourceAdjacentExitTarget_exists_iff`, `MixedPrimeDebt.fixedSourceAdjacentExitTarget_injective`, `MixedPrimeDebt.fixedSourceAdjacentContinuationSchedule_run`, `MixedPrimeDebt.fixedSourceAdjacentExitTarget_tail_length`, `MixedPrimeDebt.fixedSourceAdjacentContinuation_exists_iff_lengthCandidate`, `MixedPrimeDebt.fixedSourceAdjacentContinuation_translate_count` |
 | Every critical-shell exit is zero, valuation-minus-one, or positive; every nonempty suffix to a fixed target has one of two target-derived lengths | `MixedPrimeDebt.shellStep_fiveUnit_exit_cases`, `MixedPrimeDebt.shellRun_fiveUnit_exit_nonempty_tail_value_cases`, `MixedPrimeDebt.shellRun_fiveUnit_exit_nonempty_tail_length_cases` |
+| Every shell schedule preserves `[1/5,1/2]`; an exterior target obeys a zero-wait extremal envelope and has an explicit computable schedule-length bound | `MixedPrimeDebt.shellRun_mem_realTrap`, `MixedPrimeDebt.shellRun_above_half_envelope`, `MixedPrimeDebt.shellRun_above_half_length_lt_bound`, `MixedPrimeDebt.shellRun_below_one_fifth_envelope`, `MixedPrimeDebt.shellRun_below_one_fifth_length_lt_bound` |
 | Shell phases are all units exactly when the final output is a unit | `PeriodicShell.shellPrefixesUnit_iff` |
 | Raw words and shell schedules are conjugate, and every boundary-shifted benchmark schedule is one contextual raw rule | `PeriodicShell.shellRun_eq_wordAction`, `PeriodicShell.shellRawWord_benchmarkRelationShiftLeft`, `PeriodicShell.shellRawWord_benchmarkRelationShiftRight`, `PeriodicShell.shellRun_benchmarkRelationShift` |
 | Two distinct length-thirteen benchmark schedules induce the same affine map, preserve all guards in every context, and share a rational all-unit cycle | `PeriodicShell.benchmarkRelation_ne`, `PeriodicShell.shellRun_benchmarkRelationContext`, `PeriodicShell.benchmarkRelationContextGuard`, `PeriodicShell.benchmarkRelationCycle` |
