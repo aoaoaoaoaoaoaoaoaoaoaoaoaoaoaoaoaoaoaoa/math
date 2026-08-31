@@ -1242,6 +1242,14 @@ injective. The preimage of every finite height cube is therefore finite, and Lea
 conclusion as convergence of primitive height to `Filter.atTop`. Each fixed height ceiling has a
 last visit, although the theorem supplies neither a computable last-return index nor monotonicity.
 
+[`D2-O14`](SALVAGE.md#d2-o14-proper-false-inverse-ray) proves that proper escape alone is not a
+decision invariant. In the same free dilation--parabolic group, the neutral anchor `11/5` and
+target `11/25=D⁻¹(11/5)` both have trivial stabilizer and lie outside the fixed source orbit. An
+integral determinant-one transporter makes this a promised-empty `UCB₂({5})` coset. Unguided
+inverse search still contains the distinct pure-dilation prefixes `D⁻ⁿ`, represented by primitive
+pairs `(11,5^(n+2))` of exact height `5^(n+2)→∞`. The false ray is rejected only by directional
+chamber information, not by height properness.
+
 Lean checks the internal algebra at the positive boundary: three positive letters surject onto
 the binary free group; quotient-blind boundaries accepting `g` and `g²` admit a nonempty identity
 witness; every injective transition on a finite invariant semantic fibre pumps an identity loop;
@@ -1743,7 +1751,7 @@ fixed-rank decision problem.
 | `ProjectiveLine.lean` | total affine-chart presentation of `ℙ¹` and exact unit-word ray action |
 | `CongruenceBlindOrbit.lean` | free rational shear orbit, trivial source stabilizer, projective all-modulus CRT closure, and a whole-matrix congruence ghost away from nineteen |
 | `ShearEuclidean.lean` | Euclidean chamber growth, determinant-one coprimality, and finite projective syntax bounds for the fixed step-three shear orbit |
-| `TransverseDilationOrbit.lean` | free diagonal--parabolic ping-pong, positive target stabilizer, promised-empty coset, and exact primitive-height inverse cycle |
+| `TransverseDilationOrbit.lean` | free diagonal--parabolic ping-pong, bounded stabilizer recurrence, and a promised-empty trivial-stabilizer false inverse ray of proper height |
 | `InverseOrbitRecurrence.lean` | exact integer-box cardinality, finite stabilizer and nonreachability certificates, the prefix-count rate, and proper height escape |
 | `AffineGroupOrbit.lean` | translation-kernel quotient and trivial-kernel fixed-point structure for rational affine groups |
 | `PadicValuation.lean` | nonzero rational p-adic shells, unequal-valuation calculus, and the adjacent-unit odd-prime obstruction |
@@ -1963,6 +1971,7 @@ fixed-rank decision problem.
 | The dilation `D(z)=5z` and transverse parabolic `U(z)=(-2z+3)/(-3z+4)` act by strict ping-pong, making the source `[9:4]` stabilizer trivial and their free-product representation faithful | `TransverseDilationOrbit.source_outside_chambers`, `TransverseDilationOrbit.sourcePoint_stabilizer_trivial`, `TransverseDilationOrbit.representation_injective` |
 | The nonidentity positive word `UD` fixes `[3:5]`, so that target is outside the source orbit and the represented subgroup misses its transporter coset both at `[9:4]` and in standard `Stab(∞)` coordinates | `TransverseDilationOrbit.targetCycleWord_fixes_target`, `TransverseDilationOrbit.targetCycleWord_ne_one`, `TransverseDilationOrbit.targetPoint_not_reachable`, `TransverseDilationOrbit.represented_targetCoset_disjoint`, `TransverseDilationOrbit.infinityRepresentation_ne_target_mul_stabilizer` |
 | Chamber-directed inverse stripping follows the exact projective cycle `[3:5]→3→[3:5]` on coprime pairs of heights `5→3→5` | `TransverseDilationOrbit.targetPoint_mem_transverseChamber`, `TransverseDilationOrbit.inverseReduction_period_two`, `TransverseDilationOrbit.returnPoint_mem_dilationChamber`, `TransverseDilationOrbit.recurrentPairs_coprime`, `TransverseDilationOrbit.inverseReduction_height_cycle` |
+| The promised-empty target `[11:25]` has trivial stabilizer, yet unguided inverse dilation follows distinct primitive pairs `(11,5^(n+2))` whose exact heights tend to infinity | `TransverseDilationOrbit.falseRayTarget_not_reachable`, `TransverseDilationOrbit.representation_ne_falseRayTarget_mul_stabilizer`, `TransverseDilationOrbit.falseRayTarget_stabilizer_trivial`, `TransverseDilationOrbit.falseRayPrefix_injective`, `TransverseDilationOrbit.falseRayPrefix_realizes_primitive`, `TransverseDilationOrbit.falseRayPair_height`, `TransverseDilationOrbit.falseRayPair_height_tendsto_atTop` |
 | Every bounded primitive-height orbit of pairwise distinct group prefixes contains a nonidentity quotient fixing the target; trivial target stabilizer therefore forces unbounded height | `InverseOrbitRecurrence.primitivePairBox_finite`, `InverseOrbitRecurrence.exists_nontrivial_stabilizer_of_orbit_collision`, `InverseOrbitRecurrence.exists_nontrivial_stabilizer_of_bounded_primitive_orbit`, `InverseOrbitRecurrence.primitiveHeight_unbounded_of_stabilizer_trivial` |
 | Among `(2H+1)²+1` distinct prefixes, primitive height at most `H` forces a nonidentity target stabilizer; a trivial stabilizer forces finite-window escape above `H` | `InverseOrbitRecurrence.integralPairCube_card`, `InverseOrbitRecurrence.mem_integralPairCube_of_pairHeight_le`, `InverseOrbitRecurrence.exists_nontrivial_stabilizer_of_bounded_prefix_window`, `InverseOrbitRecurrence.bounded_prefix_window_escape_of_stabilizer_trivial` |
 | Under trivial source stabilizer, a nonidentity target stabilizer forbids every transporter; a finite prefix window either escapes above `H` or certifies target nonreachability | `InverseOrbitRecurrence.target_unreachable_of_source_stabilizer_trivial`, `InverseOrbitRecurrence.target_unreachable_of_bounded_prefix_window`, `InverseOrbitRecurrence.height_escape_or_target_unreachable` |
