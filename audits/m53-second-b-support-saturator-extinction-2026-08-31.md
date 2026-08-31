@@ -37,6 +37,13 @@ required depth `n+β` only for `j≤2`. Thus the present five-adic transfer prov
 two positions. Position three can change the decisive digit and remains open, as do rule-bearing
 words and transitions from later generalized carriers.
 
+## Subsequent Strengthening
+
+[`MM-S40`](../SALVAGE.md#mm-s40-first-beta-plus-one-position-d_b-extinction) replaces the
+target-depth baseline by the stronger bound `5^(n+1)∤R_c`. It subsumes this result and extends
+the same one-`D_b` exclusion through position `β+1`. The boundary above describes only the
+target-depth transfer proved in this audit, not the current net frontier.
+
 ## Verification
 
 `MatrixMortality/DecimalSetterFiveDepth.lean` checks the general deep-perturbation transfer.

@@ -995,14 +995,15 @@ leading-`D_b` perturbation is too deep to change that obstruction, so the requir
 depth-`n+β` target shell is impossible. Other `D_b` positions, rule-bearing first blocks,
 singleton targets, and later product-residual carriers remain open.
 
-[`MM-S39`](SALVAGE.md#mm-s39-second-position-d_b-raw-head-extinction) extends that cut by one
-exact position and every width. The words `D_cD_bD_c^t` and `D_c^(t+2)` share the same lower
-code and the final `t+β+2` digits of their punctuated upper codes. Since this is exactly target
-depth `n+β` for `n=t+2`, the upper perturbation is five-adically invisible and the all-`D_c`
-nondivisibility still contradicts a multi-role pole. At the entry saturation width the lower
-code retains the full gap, so the second-position support saturator is dead as well. The method
-stops sharply there: a `D_b` in position three or later changes the upper code above a common
-suffix shorter than `n+β` and may change the decisive five-adic digit.
+[`MM-S39`](SALVAGE.md#mm-s39-second-position-d_b-raw-head-extinction) first extended that cut to
+the second position. [`MM-S40`](SALVAGE.md#mm-s40-first-beta-plus-one-position-d_b-extinction)
+subsumes it by sharpening the baseline: every all-`D_c` raw residual of width `n` already fails
+divisibility by `5^(n+1)`, with the regular and exceptional raw heads proved separately. A sole
+`D_b` after `a` leading `D_c` roles changes the upper code only above a common suffix of depth
+`t+β+2`; for `a≤β` this is at least `n+1`. Thus every one-`D_b` all-erasure word whose `D_b`
+lies in positions `1,…,β+1` misses the next multi-role pole. Its lower code remains the all-zero
+code and retains full-gap support whenever its total width is the entry saturation width. Late
+positions, multiple `D_b` perturbations, rule-bearing words, and generalized carriers remain.
 
 The ternary and decimal branches now separate at their first multi-transfer front.
 [`MM-S37`](SALVAGE.md#mm-s37-decimal-three-shape-frontier-extinction) substitutes each of the
