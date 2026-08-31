@@ -201,8 +201,10 @@ two-`c` source boundary therefore begins with separated `c` letters. See
 internal boundary: for every `n>0` with
 `n mod 3≠2`, the coupled body `bb c bⁿ c bⁿ` enters a periodic nonhalting orbit
 ([`MM-S25`](SALVAGE.md#mm-s25-separated-two-c-periodic-orbits)). This infinite separated
-two-`c` obstruction is not a source classification. See
-`audits/m53-separated-two-c-orbits-2026-08-31.md`.
+two-`c` obstruction is not a source classification. The same diagonal family halts throughout
+`n≡8 (mod 9)` by [`MM-S30`](SALVAGE.md#mm-s30-separated-residue-eight-drainage), leaving
+residues two and five modulo nine open. See `audits/m53-separated-two-c-orbits-2026-08-31.md`
+and `audits/m53-separated-two-c-residue-eight-2026-08-31.md`.
 
 Full mortality requires coding the four payloads and the rank-one separator. The complete
 prefix code
@@ -753,8 +755,10 @@ Three live routes remain.
    unrestricted-queue warning that a second `c` already permits balanced reproduction.
    [`MM-S25`](SALVAGE.md#mm-s25-separated-two-c-periodic-orbits)
    supplies an explicit periodic obstruction for the diagonal separated bodies
-   `bb c bⁿ c bⁿ` in residues zero and one. The next source-level cut is the residue-two
-   diagonal or unequal separated runs, not another adjacent-`c` example.
+   `bb c bⁿ c bⁿ` in residues zero and one modulo three, while
+   [`MM-S30`](SALVAGE.md#mm-s30-separated-residue-eight-drainage) proves halting in residue
+   eight modulo nine. The next source-level cut is residue two or five modulo nine, or unequal
+   separated runs, not another adjacent-`c` example.
 
 The decimal setter is now the sharpest constructive route. The ternary swap remains useful
 because its suffix and divisor-ray theory is mature; the decimal instance has stronger real

@@ -596,6 +596,10 @@ open MatrixMortality
 #print axioms WidthThreeAdjacentBody.upperCycleQueue_not_halts
 #print axioms WidthThreeAdjacentBody.adjacentBody_coupled_normal_form
 #print axioms WidthThreeAdjacentBody.adjacentBodyCoupledHaltsDecidable
+#print axioms SeparatedTwoCOrbit.zeroResidue_cycle
+#print axioms SeparatedTwoCOrbit.oneResidue_cycle
+#print axioms SeparatedTwoCOrbit.separated_not_tagHaltsFrom
+#print axioms SeparatedTwoCResidue.eightResidue_tagHaltsFrom
 #print axioms SetterShear.sideBasis_det
 #print axioms SetterShear.delimiter_cube
 #print axioms SetterShear.delimiter_square_distinguishedColumn

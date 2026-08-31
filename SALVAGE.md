@@ -70,6 +70,7 @@ file owns the mathematical stock.
 | [`MM-D01`](#mm-d01-sparse-width-three-source-decision) | decidability theorem | every coupled width-three body with at most one `c` halts | formalized | graduated |
 | [`MM-D02`](#mm-d02-adjacent-two-c-source-decision) | decidability theorem | every nontrivial even adjacent-two-`c` coupled queue either halts or enters one fixed cycle | formalized | graduated |
 | [`MM-S23`](#mm-s23-adjacent-two-c-periodic-pair) | dynamical theorem | every nontrivial even adjacent-two-`c` body has two explicit periodic queues | formalized | graduated |
+| [`MM-S30`](#mm-s30-separated-residue-eight-drainage) | halting theorem | the diagonal separated family halts throughout `n≡8 (mod 9)` | formalized | active |
 | [`MM-O01`](#mm-o01-all-placement-packing-rank) | obstruction | literal CHHN packing has exact rank six for every separator placement | formalized | graduated |
 | [`MM-O02`](#mm-o02-one-sided-phase-overlap) | obstruction | standard common-line phase fusion becomes one-sided | reported | parked |
 | [`MM-O03`](#mm-o03-two-channel-boundary-tax) | obstruction | exact diagonal rank-two punctuation costs two states beyond Hankel rank | formalized | graduated |
@@ -4349,6 +4350,42 @@ grammar, then extend the reachability cut from raw heads to generalized product 
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S30: Separated residue-eight drainage
+
+**Kind:** halting theorem
+**Evidence:** formalized
+**Disposition:** active
+
+For `k≥0`, let
+
+```text
+q = bb c b^(9k+8) c b^(9k+8).
+```
+
+Under deletion width three with `b↦b` and `c↦qb`, the coupled queue `q.drop 2 · b` halts. A
+certifying history has four `cbb` strokes, separated by `3k+2`, `3k+3`, and `3k+2` copies of
+`bbb`. Its residual queue is a concatenation of aligned unary runs and six three-letter blocks:
+four `bbc` blocks followed by two `bcb` blocks. Every position divisible by three therefore
+contains `b`; the general constant-head theorem drains the queue because `b` emits one copy of
+itself while each step deletes three letters.
+
+**Scope:** this decides only the diagonal residue `n≡8 (mod 9)`. Together with `MM-S25`, the
+unresolved diagonal residues are `n≡2,5 (mod 9)`. Unequal separated runs and bodies with at
+least three `c` letters remain open. The theorem supplies no width-three universality claim.
+
+**Use:** the separated two-`c` boundary contains both infinite periodic and infinite halting
+subfamilies. Any source compiler confined to the diagonal family must encode its computation
+in the two remaining residue classes or escape the family.
+
+**Formalization:**
+[`MatrixMortality/SeparatedTwoCResidue.lean`](MatrixMortality/SeparatedTwoCResidue.lean), through
+`SeparatedTwoCResidue.eightResidue_tagHaltsFrom`.
+
+**Artifact:**
+[`audits/m53-separated-two-c-residue-eight-2026-08-31.md`](audits/m53-separated-two-c-residue-eight-2026-08-31.md).
+
+**Next:** formalize the active-event macro and decide residues two and five modulo nine.
 
 ## Rank-Three Binary Frontier
 

@@ -973,6 +973,12 @@
 'MatrixMortality.WidthThreeAdjacentBody.adjacentBodyCoupledHaltsDecidable' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.SeparatedTwoCOrbit.zeroResidue_cycle' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.SeparatedTwoCOrbit.oneResidue_cycle' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.SeparatedTwoCOrbit.separated_not_tagHaltsFrom' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.SeparatedTwoCResidue.eightResidue_tagHaltsFrom' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.SetterShear.sideBasis_det' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.SetterShear.delimiter_cube' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.SetterShear.delimiter_square_distinguishedColumn' depends on axioms: [propext,
