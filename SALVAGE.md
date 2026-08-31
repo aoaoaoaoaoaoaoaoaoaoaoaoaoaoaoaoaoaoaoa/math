@@ -253,6 +253,8 @@ file owns the mathematical stock.
 | [`G3-O35`](#g3-o35-distinct-data-terminal-fork-obstruction) | obstruction | the complete `bcbc` fork forces a false zero for the separated infinite-carrier generator at every rational source | formalized | graduated |
 | [`G3-S03`](#g3-s03-terminal-fork-invariant-core) | structure theorem | every exact three-state `bcbc` recognizer contains a nonzero proper flat/nested-fork carrier of dimension one or two | formalized | graduated |
 | [`G3-C07`](#g3-c07-persistent-guard-rank-escape) | fixed-instance compiler | an even persistent guard makes data `b` full-rank while preserving the complete `bcbcbb` zero language | formalized | graduated |
+| [`G3-C08`](#g3-c08-guarded-two-state-lift) | conditional compiler | an odd two-state orbit and one scalar gate compile the complete three-state same-zero obligation | formalized | graduated |
+| [`G3-S06`](#g3-s06-guarded-mixed-prime-endpoint-bridge) | structural reduction and obstruction | every block-coded mixed-prime guard is fixed-endpoint reachability, while `bcbc` forces three distinct core maps and forbids letterwise coding | formalized | active |
 | [`G3-M02`](#g3-m02-square-root-punctuation-fracture) | partial mechanism | a rank-two square root gives an exact `SS`-free mortality grammar | formalized | closed |
 | [`G3-O10`](#g3-o10-square-root-boundary-saturation) | obstruction | every nondegenerate rank-one square root preserves boundary coefficient zeros | formalized | graduated |
 | [`G3-M01`](#g3-m01-free-group-discrepancy-engine) | partial mechanism | Carvalho's transducer gives an all-word marker-tail equation and a cyclic exponent-one equalizer | audited | active |
@@ -10019,6 +10021,77 @@ audited `D2-D01/D05/D06/D07` decision strata and prove that every lawful parity-
 falls into one of them. A direct irreducible `Sym²(GL₂)` fork cannot evade `G3-S03`; any conic
 collision detector must enter through the singular leakage gate rather than replace the fork
 core.
+
+### G3-S06: Guarded mixed-prime endpoint bridge
+
+**Kind:** structural reduction and obstruction
+
+**Evidence:** formalized
+
+**Disposition:** active
+
+Let `D(z)=(2/3)z` and `T(z)=(3/5)z+1`, with homogeneous integral matrices
+
+```text
+D̂ = [2  0] ,    T̂ = [3  5] .
+     [0  3]           [0  5]
+```
+
+For any block code `κ` from the three paired controls to words over `{D,T}`, assign the two-state
+core generator `A_x=M_{κ(x)}`. If the source is `a/b` and the target is `c/d`, take
+`q=(a,b)` and `g=(d,−c)`. Lean proves, for every raw suffix `w`,
+
+```text
+gA_wq=0  ⇔  wordAction(κ*(w),a/b)=c/d.
+```
+
+The lower homogeneous coordinate is exactly `3^#D 5^#T b`; hence odd `b` supplies the complete
+orbit-wide parity premise of `G3-C08` for every code. Composition with the positive-width gate
+theorem gives the exact all-word equivalence
+
+```text
+guardedLift(κ,a/b,c/d) is same-zero exact
+⇔ ∀w, wordAction(κ*(w),a/b)=c/d ↔ pairedCoefficient(beta,body,cw)=0.
+```
+
+Thus this specialization does not simplify the remaining gate into finite control: it is a
+block-coded fixed-endpoint instance of the `M₂(3)` affine hard core. `D2-S08` does not apply to
+this image automatically: it concerns unrestricted guarded shell schedules, while `κ*` supplies
+a regular raw-word sublanguage and the present gate imposes no intermediate `5`-unit guards. A
+candidate must first prove guarded-shell semantics and closure under the target/wait shift. Even
+then `D2-S08` retains the exact normalized mantissa `μ`; its twelve depth classes cannot replace
+the rational endpoint equality above. A successful source-computable family must compute the
+macros and exact mantissa data, or solve that fixed-endpoint query by another invariant.
+
+The fixed `bcbc` source supplies a separate finite obstruction. One accepted suffix and three
+certified rejected suffixes differ so that identifying any pair among `A_b,A_c,A_t` identifies
+the accepted core state with one rejected state. Every exact gate therefore makes the three core
+matrices pairwise distinct. Since a letterwise relabeling has only the two raw matrices `D̂,T̂`,
+no such relabeling can satisfy the `bcbc` gate for any column or row. A mixed-prime route requires
+genuine macros. For endpoint gates, the same four witnesses strengthen the conclusion: the three
+macro words must induce pairwise distinct affine actions, not merely distinct homogeneous
+matrices.
+
+**Scope:** the endpoint equivalence concerns the stated mixed-prime homogeneous specialization;
+it does not prove that a suitable block code exists or that no block code can exist. The generic
+finite `bcbc` obstruction kills equality of two induced core matrices; its endpoint specialization
+kills equality of two induced affine actions. `D2-S08` is used at its exact scope: no decidability
+or finite mantissa quotient is claimed, and no guarded-shell shift theorem is asserted for the
+block-code image. Raw mixed-prime relations also mean distinct macro words need not induce
+distinct maps.
+
+**Use:** evaluate proposed `G3-C08` mixed-prime families as exact source-to-target reachability
+encodings. Reject depth-class-only constructions and all letterwise codes before attacking their
+all-word converse. Coordinate every surviving macro family with the `M₂(3)` normalized-mantissa
+lane.
+
+**Artifact:**
+[`GuardedMixedPrimeBridge.lean`](MatrixMortality/GuardedMixedPrimeBridge.lean) and
+[`m34-guarded-mixed-prime-bridge-2026-08-31.md`](audits/m34-guarded-mixed-prime-bridge-2026-08-31.md).
+
+**Next:** construct source-dependent macros and endpoints whose fixed-endpoint language is the
+paired `c`-suffix language, or prove that no finite block morphism has this preimage. Any search
+must quotient the checked mixed-prime kernel relations and retain the exact normalized mantissa.
 
 ### G3-O13: Rational serializer pumping
 

@@ -1795,6 +1795,8 @@ fixed-rank decision problem.
 | `MixedBranchingHistory.lean` | equal-length mixed terminal grammar and exact raw-toggle normal form |
 | `MixedBranchingRecognizer.lean` | complete inverse carry graph and integral three-state same-zero recognizer |
 | `MixedBranchingPersistentGuard.lean` | even persistent-guard family preserving the complete `bcbcbb` zero language with full-rank data `b` |
+| `GuardedTwoStateLift.lean` | arbitrary odd two-state orbit, singular scalar gate, full-rank persistent lift, and exact source-family same-zero interface |
+| `GuardedMixedPrimeBridge.lean` | homogeneous mixed-prime block-code endpoint semantics, automatic parity, `bcbc` three-map necessity, and letterwise-code obstruction |
 | `ExpandingHistoryNoGo.lean` | reset-affine orbit, finite reverse automaton, regularity, and universal computability obstruction |
 | `CancellativeProjectiveNoGo.lean` | paired residual conic, finite support-rank closure, cancellative role fractions, and projective commutator rigidity |
 | `PairedInverseChamber.lean` | one-turn residual chambers, protected formal inverse states, and positive forward-cone separation |
@@ -2096,6 +2098,9 @@ fixed-rank decision problem.
 | The integral mixed recognizer equals the paired zero language on every raw control word | `MixedBranchingRecognizer.recognizerCoefficient_eq_zero_iff`, `MixedBranchingRecognizer.pairedCoefficient_eq_zero_iff`, `MixedBranchingRecognizer.recognizerCoefficient_eq_zero_iff_paired` |
 | Its data maps have one exact common kernel, its toggle is involutive, and no generator product is zero | `MixedBranchingRecognizer.recognizerData_mulVec_eq_zero_iff`, `MixedBranchingRecognizer.recognizerToggle_involutive`, `MixedBranchingRecognizer.recognizerProduct_ne_zero` |
 | Any even persistent guard memory preserves the exact mixed-branching zero language; nonzero memory makes data `b` full-rank over `ℚ` and removes the common data kernel | `MixedBranchingPersistentGuard.guard_eq_zero_iff_recognizerGuard`, `MixedBranchingPersistentGuard.coefficient_eq_zero_iff_paired`, `MixedBranchingPersistentGuard.data_b_rank_rat`, `MixedBranchingPersistentGuard.data_b_guardAxis_ne_zero` |
+| An odd two-state orbit plus one scalar gate gives an exact three-state all-word compiler iff its `c`-headed incidences equal the paired zeros | `GuardedTwoStateLift.coreState_second_odd_of_rows`, `GuardedTwoStateLift.coefficient_eq_zero_iff_gateLanguage`, `GuardedTwoStateLift.allWords_sameZero_iff_data_c_gate`, `GuardedTwoStateLift.family_sameZero_iff_data_c_gate` |
+| Every block-coded mixed-prime guarded core is exact fixed-endpoint reachability and inherits the odd-coordinate invariant from an odd source denominator, pointwise and for source families | `GuardedMixedPrimeBridge.affineValue_wordProduct`, `GuardedMixedPrimeBridge.benchmarkCore_coreState_second_odd`, `GuardedMixedPrimeBridge.benchmarkCore_gate_eq_zero_iff`, `GuardedMixedPrimeBridge.benchmarkCore_allWords_sameZero_iff_endpoint`, `GuardedMixedPrimeBridge.benchmarkFamily_sameZero_iff_endpoint` |
+| Exact `bcbc` suffix gating forces three pairwise distinct core matrices and, for endpoint gates, three pairwise distinct affine actions; every letterwise relabeling into the two mixed-prime letters is excluded | `GuardedMixedPrimeBridge.bcbc_gate_generators_pairwise_ne`, `GuardedMixedPrimeBridge.bcbc_macro_actions_pairwise_ne`, `GuardedMixedPrimeBridge.no_letterwise_benchmark_bcbc_gate` |
 | A matrix square equal to an outer product gives the complete `SS`-free mortality grammar | `SquareRootPunctuation.isMortal_iff_exists_squareFree_zero` |
 | The explicit source-uniform Neary punctuation matrix has the required square and rank two | `SquareRootPunctuation.nearySquareRoot_sq`, `SquareRootPunctuation.nearySquareRoot_rank` |
 | Exact coefficient preservation on the `R_bR_b`-free subshift forces the `R_b` matrix to be a unit | `SquareRootPunctuation.ruleB_isUnit_of_exact_on_squareFree` |
@@ -2461,6 +2466,22 @@ interface to one equation on `c`-headed words: `gA_wq=0` if and only if the pair
 No theorem asserts that the required source-indexed core exists or that an arbitrary family
 parameter is computable. The generic gate equation is the positive two-state
 projective-incidence node; an affine specialization remains subject to `G3-O04`.
+
+`G3-S06` specializes that interface to the mixed-prime affine benchmark without hiding the
+remaining arithmetic. For any block code from paired controls to raw `D,T` words, Lean proves
+that the homogeneous integral product transports the source ratio by exactly the concatenated
+affine word. An odd source denominator makes the second coordinate odd on the entire orbit, and
+the endpoint row `(d,−c)` vanishes exactly at target `c/d`. The complete `G3-C08` same-zero
+condition is therefore equivalent to fixed-endpoint reachability for every encoded suffix.
+`D2-S08` concerns unrestricted guarded shell schedules, not this regular raw-word image; applying
+its shift additionally requires intermediate-unit semantics and code-image closure. Even under
+those extra obligations it preserves the exact normalized mantissa, so it does not create a
+finite quotient for the gate. For the fixed `bcbc` source, Lean also checks one accepted suffix
+against three nonterminal variants and proves that exactness forces the three induced core
+matrices to be pairwise distinct. For endpoint cores it strengthens
+this to pairwise distinct affine action functions. Consequently no letterwise map from the three
+paired controls to the two raw benchmark letters can work; a surviving route needs genuine
+macros with three distinct induced affine maps.
 
 For `G3-O20`, Lean proves the free-monoid tail law: if one fixed-boundary equation with stationary
 left and right pump blocks holds at exponents `N` and `N+1`, it holds at every exponent `N+k`.

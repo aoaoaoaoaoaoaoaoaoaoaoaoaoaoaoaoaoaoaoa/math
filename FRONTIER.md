@@ -1171,6 +1171,17 @@ are therefore finished; the exact remaining equation is the non-elementary two-s
 scalar-orbit problem shared with `D2-S01`. The `G3-S03` terminal core does not supply this equation:
 its boundary vanishes on the whole fork orbit, so rejection must occur through ambient leakage.
 
+[`G3-S06`](SALVAGE.md#g3-s06-guarded-mixed-prime-endpoint-bridge) crosses this interface with the
+mixed-prime benchmark. Any block code from paired controls to words in `D(z)=2z/3` and
+`T(z)=3z/5+1` gives an integral parity-preserving core automatically, but its scalar gate is
+exactly fixed rational endpoint reachability for the concatenated code word. `D2-S08` does not
+automatically descend from unrestricted guarded shell schedules to this regular raw-word image;
+guard semantics and shift closure are additional obligations. It also retains the exact
+normalized mantissa, so its twelve labels do not close the gate. The `bcbc` fork forces the three
+induced core matrices and endpoint affine actions to be pairwise distinct, killing every
+letterwise three-control-to-two-letter relabeling. The remaining mixed-prime branch needs genuine
+macros and remains the joint `M₂(3)` mantissa problem.
+
 [`G3-M02`](SALVAGE.md#g3-m02-square-root-punctuation-fracture) supplied a complete direct-mortality
 grammar. The source-uniform rational rank-two matrix `S` satisfies
 
@@ -1408,7 +1419,7 @@ or neutral word across the return, use an empty consume, or split recurrent outp
 | Lane | Available leverage | Decisive obstruction or obligation |
 | --- | --- | --- |
 | Common-kernel shuttle | The exact `bcbb` compiler moves its common data kernel out through the toggle and recovers it at the next data action | Uniformize this non-invariant shuttle in `(β,body)`; every toggle-invariant guard factors through the two-dimensional quotient |
-| Transverse-kernel terminal dynamics | `G3-O27/O29` reduce the involutive branch to the `M₂(3)` core; `G3-O30`–`O35` expose and close the first infinite-carrier repair; `G3-S03` forces every exact `bcbc` fork into a 1D/2D invariant core; `G3-C07` preserves an exact fixed language with full-rank data `b`; `G3-C08` compiles the third-state guard to one exact two-state gate equation | Realize the `G3-C08` gate language in a source-dependent non-elementary 2D orbit, or prove every parity-preserving core lies in an audited `D2` decision stratum; generic irreducible `GL₃` forks, common-kernel necessity, and further third-state guard tuning are dead |
+| Transverse-kernel terminal dynamics | `G3-O27/O29` reduce the involutive branch to the `M₂(3)` core; `G3-O30`–`O35` expose and close the first infinite-carrier repair; `G3-S03` forces every exact `bcbc` fork into a 1D/2D invariant core; `G3-C07` preserves an exact fixed language with full-rank data `b`; `G3-C08` compiles the third-state guard to one exact two-state gate equation; `G3-S06` identifies every mixed-prime block specialization with fixed-endpoint reachability and kills letterwise coding | Build genuine source-dependent mixed-prime macros retaining exact normalized mantissa, realize another non-elementary 2D gate, or prove every lawful core lies in an audited `D2` decision stratum; generic irreducible `GL₃` forks, common-kernel necessity, depth-class-only gates, and further third-state guard tuning are dead |
 | Positive projective transition lower bound | Same-zero dimension three is point-line incidence in `P²`, and actual one-sided shifts retain finite rank/kernel/image data | Derive a uniform nonstationary or noncommuting shift incompatibility from an unbounded terminal section; static support rank, formal inverse completion, fixed equal-length return flowers, and unary consecutive-repeat escape are forbidden |
 | Global word-residual recoding | Longer noncommutative atoms can retain order while discarding the four additive role channels | Escape `G3-D05`: fixed-priority affine counters and all one-way reset/transfer/fanout cascades are decidable |
 | Head-separated three-schema source | `G3-C04` discharges every arbitrary-trace forcing obligation locally; `G3-O24` isolates the directed stable-cone alternative | Preserve an undecidable mixed or neutral word across returns, or realize zero-sensitive S5 GLB decoding after the `G3-O25` separator-rank fork; complete pure forks are decidable by `G3-D07` |
@@ -1452,8 +1463,12 @@ raceable leaves:
    can guard a full-rank persistent data action without changing a complete all-word zero
    language. `G3-C08` now compiles that architecture uniformly: all third-state obligations reduce
    exactly to an odd-coordinate invariant and the scalar equation `gA_wq=0` on `c`-headed words
-   in a source-indexed two-state core. The unresolved step is constructing that non-elementary
-   gate language, not another fixed-body rank perturbation or guard recurrence.
+   in a source-indexed two-state core. `G3-S06` shows that the direct mixed-prime specialization
+   is exact fixed-endpoint reachability. The twelve-class comparison first requires guarded-shell
+   semantics and shift closure for the macro image, then still leaves its rational mantissa; the
+   `bcbc` fork forbids every letterwise relabeling and requires three distinct macro maps. The
+   unresolved step is constructing that non-elementary gate language, not another fixed-body rank
+   perturbation, guard recurrence, or finite target-depth label.
 3. **Positive projective transition obstruction.** Derive from a source-unbounded terminal
    section a finite shift incompatibility which no three-dimensional rational same-zero
    representation can realize for any combination of generator ranks and kernels. It must use
@@ -1576,8 +1591,13 @@ source-dependent persistent core, with the two-dimensional branch shared explici
 parity-preserving two-state orbit and its scalar gate. Direct irreducible `Sym²(GL₂)` fork blocks
 cannot replace this core because `G3-S03` forces the accepted fork span to be proper; a conic
 collision detector must be inserted as ambient leakage and still satisfy the complete raw-word
-gate equation. Any lower-bound attack must exclude both positive architectures through actual
-transition data. Backward cancellation, inverse cofinality, and static incidence cannot do so.
+gate equation. `G3-S06` further reduces every mixed-prime block-code candidate to exact rational
+endpoint reachability. Its fixed `bcbc` witnesses force three distinct induced maps and kill all
+letterwise codes. `D2-S08` does not automatically apply to the unguarded macro image and, after
+the missing guard and closure proofs, still leaves the normalized mantissa unbounded. Any
+lower-bound attack must exclude both positive architectures through actual transition data.
+Backward cancellation, inverse cofinality, static incidence, and target-depth classes cannot do
+so.
 Do not spend another attack on separator placement, fixed anchors, or control singularity after
 recognition; `MM-C01` closes them unconditionally.
 
