@@ -1939,3 +1939,25 @@
 'MatrixMortality.ReturnGuard.Examples.cycle_not_physical_isMortal_by_quotient' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.ParabolicBlade.bZeroBDefectCOneCodeCore_complement_factor' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.ParabolicBlade.bZeroBDefectCOneCodeCore_complement_one_factor' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.ParabolicBlade.bZeroBDefectCOneCodeCore_complement_nine_factor' depends on axioms: [propext,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.tagComplementCode_append_b' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ParabolicBlade.tagComplementCode_append_c' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ParabolicBlade.tagEncode_length_mod_four' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.ParabolicBlade.tagComplementCode_mod_two' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ParabolicBlade.tagComplementCode_global_bound' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.bZeroBDefectCOneCodeCore_complement_collect' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.ParabolicBlade.bZeroBDefectCOneComplement_discriminant' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.ParabolicBlade.bZeroBDefectCOneComplement_sfft' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.bridge_bZero_bTwo_cOne_det_ne_zero_of_b_run' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.bridge_bZero_bTwo_cOne_det_ne_zero_of_complement_residue' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]

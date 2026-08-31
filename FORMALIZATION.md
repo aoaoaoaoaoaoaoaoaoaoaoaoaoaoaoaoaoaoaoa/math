@@ -1637,6 +1637,29 @@ tag coordinates of `bb` is `8` modulo `16` for every wait triple, and
 to the rational determinant. The exact boundary is
 [`audits/m43-phase-zero-right-c-bb-body-2026-08-31.md`](audits/m43-phase-zero-right-c-bb-body-2026-08-31.md).
 
+The complete phase-zero right-`c` all-`b` ray exclusion
+[`M4-S24`](SALVAGE.md#m4-s24-phase-zero-right-c-all-b-ray-exclusion) is checked in
+`MatrixMortality/ParabolicEvenBody.lean`. The theorem
+`ParabolicBlade.bridge_bZero_bTwo_cOne_det_ne_zero_of_b_run` combines the odd-length blade,
+six exact small-exponent residues, and a large-scale affine resultant argument to exclude every
+nonempty all-`b` body. The exact boundary is
+[`audits/m43-phase-zero-right-c-all-b-ray-2026-08-31.md`](audits/m43-phase-zero-right-c-all-b-ray-2026-08-31.md).
+
+The phase-zero right-`c` complement blade
+[`M4-S25`](SALVAGE.md#m4-s25-phase-zero-right-c-complement-blade) is checked in the same
+module. `ParabolicBlade.tagComplementCode_append_b` and `tagComplementCode_append_c` give the
+physical complement recurrence; `bridge_bZero_bTwo_cOne_det_ne_zero_of_complement_residue`
+transfers the two exact modulo-sixteen core identities to the determinant. The exact boundary is
+[`audits/m43-phase-zero-right-c-complement-blade-2026-08-31.md`](audits/m43-phase-zero-right-c-complement-blade-2026-08-31.md).
+
+The phase-zero right-`c` complement SFFT
+[`M4-S26`](SALVAGE.md#m4-s26-phase-zero-right-c-complement-sfft) is checked in the same module.
+`ParabolicBlade.bZeroBDefectCOneCodeCore_complement_collect` exposes the bilinear coefficients;
+`bZeroBDefectCOneComplement_discriminant` factors their discriminant; and
+`bZeroBDefectCOneComplement_sfft` gives the resulting finite divisor equation. The physical
+coordinate bound is `ParabolicBlade.tagComplementCode_global_bound`. The exact boundary is
+[`audits/m43-phase-zero-right-c-complement-sfft-2026-08-31.md`](audits/m43-phase-zero-right-c-complement-sfft-2026-08-31.md).
+
 The residue-zero `c`-endpoint exclusion
 [`M4-S12`](SALVAGE.md#m4-s12-residue-zero-c-endpoint-exclusion) is checked in the same module.
 `ParabolicBlade.bridge_cZero_bTwo_bOne_det` and

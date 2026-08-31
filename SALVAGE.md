@@ -212,6 +212,9 @@ file owns the mathematical stock.
 | [`M4-S21`](#m4-s21-phase-zero-right-c-parity-rectangle) | obstruction | a `0|2|1` `b|b|c` zero requires both even body length and even `b` count; fixed 2-power congruences cannot remove the residue | formalized | active |
 | [`M4-S22`](#m4-s22-phase-zero-right-c-all-c-ray-exclusion) | obstruction | no nonempty all-`c` body closes the `0|2|1` `b|b|c` bridge, for any waits | formalized | active |
 | [`M4-S23`](#m4-s23-phase-zero-right-c-bb-body-exclusion) | obstruction | the shortest remaining body `bb` makes the `0|2|1` `b|b|c` core uniformly `8` modulo `16` | formalized | active |
+| [`M4-S24`](#m4-s24-phase-zero-right-c-all-b-ray-exclusion) | obstruction | no nonempty all-`b` body closes the `0|2|1` `b|b|c` bridge for any waits | formalized | active |
+| [`M4-S25`](#m4-s25-phase-zero-right-c-complement-blade) | obstruction and structure theorem | the complement coordinate obeys a two-case modulo-sixteen guillotine on mixed even/even bodies | formalized | active |
+| [`M4-S26`](#m4-s26-phase-zero-right-c-complement-sfft) | structure theorem | the mixed complement core has an exact three-factor SFFT discriminant and finite divisor reduction | formalized | active |
 | [`M4-C03`](#m4-c03-zero-framed-binary-two-lag-compiler) | compiler | the principal scanner is literally binary context-2 Lag and compiles to `M₄(3)` | formalized | graduated |
 | [`M4-D01`](#m4-d01-zero-framed-binary-two-lag-decision) | decidable stratum | the entire zero-framed binary context-2 Lag kernel has an exact syntactic classification | formalized | graduated |
 | [`M4-D02`](#m4-d02-zero-framed-reset-scanner-decision) | decidable stratum | zero-run reduction contracts the reset scanner to a regular two-token quotient | audited | graduated |
@@ -8856,6 +8859,137 @@ both letters or lies farther along the even all-`b` ray.
 [`MatrixMortality/ParabolicDefectCylinder.lean`](MatrixMortality/ParabolicDefectCylinder.lean)
 and
 [`audits/m43-phase-zero-right-c-bb-body-2026-08-31.md`](audits/m43-phase-zero-right-c-bb-body-2026-08-31.md).
+
+### M4-S24: Phase-zero right-c all-b ray exclusion
+
+**Kind:** obstruction
+
+**Evidence:** formalized
+
+**Disposition:** active
+
+Every nonempty all-`b` body is excluded from the `0|2|1` `b|b|c` family. For `body=b^n`, the
+native coordinates satisfy
+
+```text
+length(tagEncode₃(body))=5n,
+242C=203(S−1),
+242(S−C−1)=39(S−1).
+```
+
+Odd `n` falls to `M4-S19`. Six exact residue identities remove even `n<14`. For `n≥14`, a
+zero would force `x≤203` and `1≤y<10000`. Writing the normalized core as
+`(Sa+b)z+Sc+d`, its slope `a` is nonzero and its resultant is
+
+```text
+ad−bc = −1926044220672 y (48x−3029)
+          (674088x−4333144y−1095244575).
+```
+
+On the forced rectangle, the resultant is nonzero and smaller than `10³¹`, while
+`|Sa+b|>10³¹`. An integral zero would make the larger coefficient divide the smaller
+resultant, which is impossible.
+
+**Scope:** deletion width three, exactly three atoms, orientation `0|2|1`, letters `b|b|c`,
+every nonempty all-`b` body, and all natural waits. Mixed bodies and the other shortest
+families remain open.
+
+**Use:** together with `M4-S22`, this removes both unary rays from the even/even rectangle.
+Every remaining body in this family contains both letters.
+
+**Next:** exploit the complement coordinate on genuinely mixed bodies.
+
+**Artifact:**
+[`MatrixMortality/ParabolicEvenBody.lean`](MatrixMortality/ParabolicEvenBody.lean) and
+[`audits/m43-phase-zero-right-c-all-b-ray-2026-08-31.md`](audits/m43-phase-zero-right-c-all-b-ray-2026-08-31.md).
+
+### M4-S25: Phase-zero right-c complement blade
+
+**Kind:** obstruction and structure theorem
+
+**Evidence:** formalized
+
+**Disposition:** active
+
+The complement coordinate `D=S−C−1` is the ternary value of the zero digits in the native
+tag encoding. It obeys
+
+```text
+D(wc)=3D(w),
+D(wb)=243D(w)+39.
+```
+
+Encoded length and body length agree modulo four. Two exact polynomial identities prove that
+the core is `8` modulo `16` in either coordinate state
+
+```text
+S≡1 (mod 16), D≡2 (mod 4),
+S≡9 (mod 16), D≡0 (mod 4).
+```
+
+Thus bodies of length zero modulo four with `D≡2`, and bodies of length two modulo four with
+`D≡0`, cannot close the bridge. Inside the even-length, even-`b` residue left by `M4-S21`,
+the complement is even, so any zero must satisfy `D≡length(body) (mod 4)`. The shortest
+alternating bodies `bcbc` and `cbcb` are dead.
+
+**Scope:** the same `0|2|1` `b|b|c` family, for every body in the two complement residue
+classes and every natural wait triple. The other complement state remains open.
+
+**Use:** replace undifferentiated mixed-body search by a four-state complement automaton. This
+guillotine removes an asymptotic half of the even/even language before any archimedean work.
+
+**Next:** combine the complement decomposition with its SFFT divisor factorization and sharp
+prefix cylinders.
+
+**Artifact:**
+[`MatrixMortality/ParabolicEvenBody.lean`](MatrixMortality/ParabolicEvenBody.lean) and
+[`audits/m43-phase-zero-right-c-complement-blade-2026-08-31.md`](audits/m43-phase-zero-right-c-complement-blade-2026-08-31.md).
+
+### M4-S26: Phase-zero right-c complement SFFT
+
+**Kind:** structure theorem
+
+**Evidence:** formalized
+
+**Disposition:** active
+
+At `C=S−1−D`, collect the core as
+
+```text
+H = ayz + by + cz + d.
+```
+
+Lean checks the exact discriminant factorization
+
+```text
+bc−ad = −306110016 D (48x−3029)
+        (1096376045D + 2022264Sx − 3287358654S − 224696x + 366706454).
+```
+
+Consequently
+
+```text
+(ay+c)(az+b) = aH + (bc−ad).
+```
+
+At a zero, the two affine factors multiply to the explicit three-factor discriminant. This
+turns every fixed complement and `x` cylinder into a finite divisor problem. The independent
+global bound `242D≤39(S−1)` is sharp on the all-`b` ray and supplies the scale control needed
+for archimedean cylinders.
+
+**Scope:** the exact integral core for the `0|2|1` `b|b|c` family, at arbitrary integral
+`S,D,x,y,z`. This theorem does not by itself assert nonvanishing for every mixed body.
+
+**Use:** replace three-dimensional wait search by a bounded `x` split followed by divisor
+enumeration on two affine factors. Retain the factored right side; expanding it destroys the
+prime and size structure.
+
+**Next:** prove a uniform wait bound from the sharp first-`b` complement cylinders, then combine
+it with the trailing-`c` 3-adic blade.
+
+**Artifact:**
+[`MatrixMortality/ParabolicEvenBody.lean`](MatrixMortality/ParabolicEvenBody.lean) and
+[`audits/m43-phase-zero-right-c-complement-sfft-2026-08-31.md`](audits/m43-phase-zero-right-c-complement-sfft-2026-08-31.md).
 
 ### M4-C03: Zero-framed binary two-Lag compiler
 

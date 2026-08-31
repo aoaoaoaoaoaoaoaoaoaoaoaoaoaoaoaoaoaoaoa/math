@@ -571,6 +571,30 @@ coordinates `(S,C)=(59049,49532)`, where the `b|b|c` core is uniformly `8` modul
 waits. Thus no length-two body remains in the even/even rectangle. Any live body there has
 length at least four; it is either farther along the even all-`b` ray or contains both letters.
 
+The complete all-`b` ray is now dead
+[`M4-S24`](SALVAGE.md#m4-s24-phase-zero-right-c-all-b-ray-exclusion). Small even exponents fall
+to exact 2-power residues; from exponent fourteen onward, a bounded `(x,y)` chamber and an
+affine-in-`z` resultant make an integral zero impossible. Together with `M4-S22`, both unary
+rays have left the even/even rectangle. Every remaining body in this family is genuinely mixed.
+
+The mixed residue now carries a native finite-state blade
+[`M4-S25`](SALVAGE.md#m4-s25-phase-zero-right-c-complement-blade). For
+`D=S−C−1`, appending `c` sends `D↦3D` and appending `b` sends `D↦243D+39`. Two exact
+modulo-sixteen factorizations force every residual zero to satisfy
+`D≡length(body) (mod 4)`. This kills the alternating length-four bodies `bcbc` and `cbcb` and
+about half of the even/even complement states. The live attack is no longer a generic body
+search: factor the complement core as a bilinear SFFT divisor equation, then combine its sharp
+prefix cylinders with the remaining complement state.
+
+That divisor equation is now exact
+[`M4-S26`](SALVAGE.md#m4-s26-phase-zero-right-c-complement-sfft). After collecting
+`H=ayz+by+cz+d`, its discriminant `bc−ad` splits into `D`, `48x−3029`, and one further
+linear factor. Hence a zero forces `(ay+c)(az+b)` to equal a completely factored integer, while
+the physical complement always satisfies the sharp bound `242D≤39(S−1)`. Fixed bodies are
+therefore finite divisor problems, not wait boxes. The remaining uniform task is to turn the
+first-`b` complement cylinders into global wait bounds and feed those bounds into the trailing
+3-adic constraints.
+
 Two original-family nodes survive, and they must not be conflated.
 
 1. **Exterior collision avoidance.** Use `M4-S06`--`M4-S15` to classify the transported kernel
