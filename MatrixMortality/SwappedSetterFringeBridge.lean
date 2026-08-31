@@ -137,6 +137,20 @@ theorem sourceFringe_of_lower_prefix (β : Nat) (beta_pos : 0 < β)
   rw [boundedProjection]
   exact List.prefix_iff_eq_take.mp isPrefix
 
+/-- The source projection stated directly from the physical body's checked head endpoint. -/
+theorem sourceFringe_of_lower_prefix_of_head_b (β : Nat) (beta_pos : 0 < β)
+    (body : List TagLetter) (body_head : body.head? = some .b)
+    (word : List NearyTile) (lowerPrefix : List Bool)
+    (isPrefix : lowerPrefix <+: spell (nearyLower β body) word)
+    (prefix_bound : lowerPrefix.length ≤ β + 2) :
+    SourceFringe lowerPrefix := by
+  cases body with
+  | nil => simp at body_head
+  | cons head tail =>
+      have head_eq : head = .b := by simpa using body_head
+      subst head
+      exact sourceFringe_of_lower_prefix β beta_pos tail word lowerPrefix isPrefix prefix_bound
+
 private theorem spell_reverse {Role : Type*} (output : Role → List Bool)
     (roles : List Role) :
     spell (fun role => (output role).reverse) roles.reverse =
@@ -290,6 +304,19 @@ theorem targetFringe_of_final_erase (β : Nat) (beta_pos : 0 < β)
     targetFringePhases_getLast?_erase β past letter, ?_⟩
   exact targetFringe_rtake β beta_pos front (past ++ [.erase letter])
 
+/-- The target projection stated directly from the physical body's checked final endpoint. -/
+theorem targetFringe_of_final_erase_of_getLast?_b (β : Nat) (beta_pos : 0 < β)
+    (body : List TagLetter) (body_last : body.getLast? = some .b)
+    (past : List NearyTile) (letter : TagLetter) :
+    BlockTargetFringe (β + 2)
+      ((spell (nearyLower β body) (past ++ [.erase letter])).rtake (β + 2)) := by
+  induction body using List.reverseRecOn with
+  | nil => simp at body_last
+  | append_singleton front last induction =>
+      have last_eq : last = .b := by simpa using body_last
+      subst last
+      exact targetFringe_of_final_erase β beta_pos front past letter
+
 /-- A target with a tile before its final erasure has an exact block-suffix witness containing
 at least two fringe phases. -/
 theorem targetFringe_of_nontrivial_final_erase (β : Nat) (beta_pos : 0 < β)
@@ -305,5 +332,22 @@ theorem targetFringe_of_nontrivial_final_erase (β : Nat) (beta_pos : 0 < β)
     targetFringePhases_length_ge_two β past letter past_ne,
     targetFringePhases_getLast?_erase β past letter, ?_⟩
   exact targetFringe_rtake β beta_pos front (past ++ [.erase letter])
+
+/-- The nontrivial target projection stated from the physical body's checked final endpoint. -/
+theorem targetFringe_of_nontrivial_final_erase_of_getLast?_b
+    (β : Nat) (beta_pos : 0 < β)
+    (body : List TagLetter) (body_last : body.getLast? = some .b)
+    (past : List NearyTile) (letter : TagLetter) (past_ne : past ≠ []) :
+    ∃ phases,
+      2 ≤ phases.length ∧
+        phases.getLast? = some false ∧
+          (spell (nearyLower β body) (past ++ [.erase letter])).rtake (β + 2) =
+            (spell fringeBlock phases).rtake (β + 2) := by
+  induction body using List.reverseRecOn with
+  | nil => simp at body_last
+  | append_singleton front last induction =>
+      have last_eq : last = .b := by simpa using body_last
+      subst last
+      exact targetFringe_of_nontrivial_final_erase β beta_pos front past letter past_ne
 
 end MatrixMortality.SwappedSetterFringe
