@@ -123,6 +123,7 @@ file owns the mathematical stock.
 | [`R32-S49`](#r32-s49-geometric-center-chain-extinction) | structure theorem and obstruction | exact denominator-center chains double their exponent into a one-return resonance, while fixed-ray quotients exclude the zero critical residue | formalized | active |
 | [`R32-S50`](#r32-s50-odd-signed-re-entry-extinction) | structure theorem and obstruction | a zero equal-scale residue cannot enter a denominator center at an odd exponent in any reduced odd signed-ray quotient | formalized | active |
 | [`R32-S51`](#r32-s51-weighted-tail-adjugate-certificate) | structure theorem | every positive-valuation bridge zero has one fixed-weight adjugate tail followed by a single geometric-ray incidence | formalized | active |
+| [`R32-S52`](#r32-s52-deep-pure-denominator-synchronization) | decidable stratum | a pure-denominator prime deeper than twice the complete tail weight fixes the head and first-tail exponent sum and bounds the remaining tail | formalized | active |
 | [`R32-M01`](#r32-m01-generic-reverse-edge-compiler) | partial mechanism | projective incidence generically embeds into a compatible two-plane edge square | formalized | active |
 | [`R32-M02`](#r32-m02-finite-quotient-sieve) | partial mechanism | finite monoid quotients give complete modular no-certificates for fixed candidates | formalized | active |
 | [`R32-M03`](#r32-m03-two-scale-return-conversion) | partial mechanism | a minimal two-scale return pencil has nonresonant multi-return zeros | formalized | active |
@@ -3974,6 +3975,69 @@ parameters `A=1`. The tail alphabet remains the two-dimensional adjugate return 
 **Use:** enumerate compositions of the fixed positive valuation rather than bounding arbitrary
 word length or head waits. This is the lawful `M₃(2)` to `M₂` bridge in the positive-numerator
 stratum: one finite family of two-coordinate tail products and one cyclic-ray membership test.
+
+### R32-S52: Deep pure-denominator synchronization
+
+**Kind:** decidable stratum
+**Evidence:** formalized
+**Disposition:** active
+
+Set `A=1`, write a nonempty adjugate tail as `first :: rest`, and put
+
+```text
+(R,S) = J_tail · (B,1),
+e = first+1,          E′ = waitExponent(rest),          E=e+E′.
+```
+
+The integral recurrence has exact leading terms
+
+```text
+S   = (−1)^|tail| q^(2E)  + B u,
+R/B = (−1)^|tail| q^(2E′) + B v                         (1)
+```
+
+for integers `u,v`. Let `r=vₚ(q)>0` and `a=vₚ(B)`. If the denominator prime is deeper than the
+complete tail,
+
+```text
+2Er < a,                                                   (2)
+```
+
+then the two displayed terms in (1) strictly dominate their `B`-multiples. Hence
+`vₚ(S)=2Er` and `vₚ(R/B)=2E′r`. Any source-ray incidence `R=qʰS` therefore forces
+
+```text
+a=(h+2e)r,                 2E′<h.                         (3)
+```
+
+For the physical bridge, `h=head+1`. Thus fixed `q,B` admit only finitely many deep-tail
+candidates: (3) fixes finitely many pairs `(head,first)` and bounds the total weight of `rest`,
+whose positive parts have only finitely many compositions. If two denominator primes are both
+deep along one bridge, (3) also forces their normalized depths to agree:
+
+```text
+vₚ(B) v_ℓ(q) = v_ℓ(B) vₚ(q).                              (4)
+```
+
+Unequal normalized depths therefore exclude every jointly deep candidate without evaluating
+its adjugate word.
+
+**Scope:** the coefficients `q,B` are integral, the chosen prime has positive base valuation,
+and (2) is strict. The deep hypothesis itself excludes the degenerate physical parameter
+`B=1`. The complementary shallow chamber `a≤2Er`, including its critical equality and residue
+dynamics, remains open.
+
+**Artifact:** `ReturnSquare.fractionIntegralTailPredecessorState_decomposition`,
+`fractionIntegralTail_deep_incidence_synchronizes`, and
+`positiveBridge_pureDenominator_deep_valuation_certificate` and its two-prime synchronization
+corollary in
+[`ReturnSquarePureDenominator.lean`](MatrixMortality/ReturnSquarePureDenominator.lean), with
+audit
+[`m32-returnsquare-pure-denominator-2026-08-31.md`](audits/m32-returnsquare-pure-denominator-2026-08-31.md).
+
+**Use:** enumerate the deep pure-denominator chamber as a finite family of two-coordinate
+adjugate products. The lawful `M₃(2)` to `M₂` bridge is bounded here by denominator depth; an
+unbounded `M₂(3)` alphabet remains only in the simultaneously shallow chamber.
 
 ### R32-M01: Generic reverse edge compiler
 
