@@ -258,6 +258,7 @@ file owns the mathematical stock.
 | [`M4-S26`](#m4-s26-phase-zero-right-c-complement-sfft) | structure theorem | the mixed complement core has an exact three-factor SFFT discriminant and finite divisor reduction | formalized | active |
 | [`M4-S27`](#m4-s27-phase-zero-right-c-thin-complement-cone) | obstruction | no positive complement thinner than `1/2160000` of its code scale can close the right-`c` bridge | formalized | active |
 | [`M4-S28`](#m4-s28-phase-zero-right-c-long-leading-c-cylinder) | obstruction | any mixed body beginning with at least twelve `c` letters is excluded from the right-`c` bridge | formalized | active |
+| [`M4-S29`](#m4-s29-phase-zero-right-c-first-b-density-cylinder) | structure theorem | the first `b` position traps the complement density in an exact rational cylinder | formalized | active |
 | [`M4-C03`](#m4-c03-zero-framed-binary-two-lag-compiler) | compiler | the principal scanner is literally binary context-2 Lag and compiles to `M₄(3)` | formalized | graduated |
 | [`M4-D01`](#m4-d01-zero-framed-binary-two-lag-decision) | decidable stratum | the entire zero-framed binary context-2 Lag kernel has an exact syntactic classification | formalized | graduated |
 | [`M4-D02`](#m4-d02-zero-framed-reset-scanner-decision) | decidable stratum | zero-run reduction contracts the reset scanner to a regular two-token quotient | audited | graduated |
@@ -11434,6 +11435,51 @@ the surviving prefixes with the valid reduced 3-adic residue classes at the trai
 **Artifact:**
 [`MatrixMortality/ParabolicEvenBody.lean`](MatrixMortality/ParabolicEvenBody.lean) and
 [`audits/m43-phase-zero-right-c-long-c-prefix-2026-08-31.md`](audits/m43-phase-zero-right-c-long-c-prefix-2026-08-31.md).
+
+### M4-S29: Phase-zero right-c first-b density cylinder
+
+**Kind:** structure theorem
+
+**Evidence:** formalized
+
+**Disposition:** active
+
+Complement coordinates compose exactly under concatenation:
+
+```text
+D(uv)=D(u)3^length(encode(v))+D(v).
+```
+
+A leading `b` obeys `D(bv)=39S(v)+D(v)`. Consequently, if the first `b` of a body follows
+exactly `j` leading `c` letters, its scale `S` and complement `D` satisfy
+
+```text
+13S ≤ 81·3^jD,
+242·3^jD < 39S.
+```
+
+Equivalently,
+
+```text
+13/(81·3^j) ≤ D/S < 39/(242·3^j).
+```
+
+The lower endpoint comes from the fixed `39` contributed by the first `b`; the upper endpoint
+is the sharp global complement bound applied to its suffix.
+
+**Scope:** the physical ternary tag encoding at deletion width three, for every suffix and
+every first-`b` position `j`. This is a coordinate theorem, not by itself a determinant no-go.
+
+**Use:** replace each first-`b` language cylinder by one exact rational interval. Bilinear core
+signs and root locations can now be certified at the interval's four corners rather than over
+arbitrary bodies.
+
+**Next:** formalize the finite corner certificate excluding the `j=3` cylinder, then repeat for
+`j=2,1,0` or intersect those survivors with the reduced trailing 3-adic classes.
+
+**Artifact:**
+[`MatrixMortality/ParabolicEvenBody.lean`](MatrixMortality/ParabolicEvenBody.lean) and
+[`audits/m43-phase-zero-right-c-first-b-density-2026-08-31.md`](audits/m43-phase-zero-right-c-first-b-density-2026-08-31.md).
 
 ### M4-C03: Zero-framed binary two-Lag compiler
 

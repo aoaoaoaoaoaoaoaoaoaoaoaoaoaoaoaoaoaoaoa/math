@@ -642,6 +642,13 @@ among the first twelve body positions. The exact cylinder analysis should now lo
 coarse formal cutoff and meet the three reduced Hensel residue classes in the middle; do not
 infer a trailing-run bound from an unreduced congruence representative.
 
+The exact first-`b` cylinders are now kernel-checked
+[`M4-S29`](SALVAGE.md#m4-s29-phase-zero-right-c-first-b-density-cylinder). A first `b` after
+`j` leading `c` letters forces
+`13/(81·3^j)≤D/S<39/(242·3^j)`. This is the correct compact interface for the finite
+analytic classification: prove monotonicity once, check only rational interval corners, and
+retain reduced congruence representatives before extracting any trailing consequence.
+
 Two original-family nodes survive, and they must not be conflated.
 
 1. **Exterior collision avoidance.** Use `M4-S06`--`M4-S15` to classify the transported kernel

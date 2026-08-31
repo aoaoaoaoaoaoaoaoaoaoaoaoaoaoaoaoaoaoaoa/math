@@ -3279,3 +3279,8 @@
 'MatrixMortality.ParabolicBlade.bridge_bZero_bTwo_cOne_det_ne_zero_of_long_c_prefix' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.ParabolicBlade.tagComplementCode_cons_b' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ParabolicBlade.tagComplementCode_append' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ParabolicBlade.tagComplementCode_first_b_density' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
