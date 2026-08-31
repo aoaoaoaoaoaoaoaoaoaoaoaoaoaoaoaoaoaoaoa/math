@@ -1699,6 +1699,9 @@ The family is now sharply fenced:
   physical endpoint only at a one-return resonance. The exact zero residue of the critical wall
   is incompatible with mortality in every fixed-ray quotient where `A/B` remains reduced, by
   [`R32-S49`](SALVAGE.md#r32-s49-geometric-center-chain-extinction).
+- after the zero equal-scale residue, immediate re-entry into a denominator center at an odd
+  exponent is impossible in every reduced odd signed-ray quotient, by
+  [`R32-S50`](SALVAGE.md#r32-s50-odd-signed-re-entry-extinction).
 - replacing common powers of one base by a scale alphabet totally ordered under divisibility is
   unsound: `[3,15,3,3,15,3,3,3]` has the exact nonresonant root `d=25/27`, by
   [`R32-O25`](SALVAGE.md#r32-o25-divisibility-chain-returnsquare-fracture).
@@ -1719,7 +1722,9 @@ scales share the relevant denominator prime. Neither cross-prime residue synchro
 geometric-scale counterexample is proved. Order-one and order-two cyclotomic quotients now force
 `B/A` onto the signed identity rays, but higher-order quotients require larger projective
 automata. Exact denominator-center chains already collapse to resonance, and a mortal reduced
-fraction cannot take the zero critical-residue branch; mixed nonzero residue transitions remain.
+fraction cannot take the zero critical-residue branch. A zero equal-scale residue can re-enter
+the center only at an even exponent whenever `q+1` has an odd prime; mixed nonzero residue
+transitions remain.
 The one-base geometric architecture is essential: mere divisibility comparability or
 common prime content cannot replace it. The one-base prime-power architecture remains closed.
 The two-coordinate pullback is not a reduction to finite-alphabet `M₂(3)`; every `qⁿ` remains a

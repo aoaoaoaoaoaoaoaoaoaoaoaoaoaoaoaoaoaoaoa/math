@@ -121,6 +121,7 @@ file owns the mathematical stock.
 | [`R32-S47`](#r32-s47-exact-four-wall-residue-laws) | structure theorem and obstruction | all four denominator-prime ties have exact normalized residue transitions, and none alone forces resonance outside the common-geometric alphabet | formalized | active |
 | [`R32-S48`](#r32-s48-fractional-cyclotomic-finite-walls) | structure theorem and obstruction | every mortal fraction reduces to `1` when the base does and to `±1` when the base reduces to `−1` | formalized | active |
 | [`R32-S49`](#r32-s49-geometric-center-chain-extinction) | structure theorem and obstruction | exact denominator-center chains double their exponent into a one-return resonance, while fixed-ray quotients exclude the zero critical residue | formalized | active |
+| [`R32-S50`](#r32-s50-odd-signed-re-entry-extinction) | structure theorem and obstruction | a zero equal-scale residue cannot enter a denominator center at an odd exponent in any reduced odd signed-ray quotient | formalized | active |
 | [`R32-M01`](#r32-m01-generic-reverse-edge-compiler) | partial mechanism | projective incidence generically embeds into a compatible two-plane edge square | formalized | active |
 | [`R32-M02`](#r32-m02-finite-quotient-sieve) | partial mechanism | finite monoid quotients give complete modular no-certificates for fixed candidates | formalized | active |
 | [`R32-M03`](#r32-m03-two-scale-return-conversion) | partial mechanism | a minimal two-scale return pencil has nonresonant multi-return zeros | formalized | active |
@@ -3867,6 +3868,43 @@ audit
 **Use:** prune every all-center suffix before unit search and remove the exact zero branch of
 the critical residue. Any nonresonant common-base zero must make a nonzero unit transition
 between denominator-center hits.
+
+### R32-S50: Odd signed re-entry extinction
+
+**Kind:** structure theorem and obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+The zero first residue on the equal-scale wall has `u=A−B`, hence
+
+```text
+s=t(A−B),              P_t(s)=A−t²(A−B).                   (1)
+```
+
+If the next scale `r` is an exact denominator center, (1) gives the cleared equation
+
+```text
+(rt²−1)B = r(t²−1)A.                                      (2)
+```
+
+Reduce at an odd prime `ℓ` with `q≡−1`. Every common-geometric `t=qᵐ` has `t²=1`. If the center
+scale is `r=qⁿ` with odd `n`, then `r=−1`, so (2) becomes `2B=0` and forces `B=0`. Mortality's
+signed-ray law gives `B=±A`, hence `A=0`, contradicting reducedness modulo `ℓ`.
+
+**Scope:** this excludes only the zero equal-scale residue followed immediately by an
+odd-exponent denominator center, and requires an odd signed-ray prime. Even center exponents,
+nonzero equal-scale residues, and intervening transitions remain open.
+
+**Artifact:** `ReturnSquare.fractionPredecessor_equalScale_zero_then_center_iff`,
+`fractionEqualScaleZeroCenterResidue_ne_zero_of_mortal`, and
+`not_fractionPredecessor_equalScale_zero_then_odd_center_of_mortal` in
+[`ReturnSquareGeometricResidue.lean`](MatrixMortality/ReturnSquareGeometricResidue.lean), with
+audit
+[`m32-returnsquare-geometric-residues-2026-08-31.md`](audits/m32-returnsquare-geometric-residues-2026-08-31.md).
+
+**Use:** after a zero equal-scale residue, discard every immediate odd center exponent whenever
+`q+1` has an odd prime. The surviving re-entry exponent is even or passes through a nonzero
+residue.
 
 ### R32-M01: Generic reverse edge compiler
 
