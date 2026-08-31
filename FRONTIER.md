@@ -1059,8 +1059,13 @@ geometry itself is no obstruction. A variable-radix code with four distinct resi
 by fixed integral rank-two data controls with kernels `ℚe₁` and `ℚe₂`. Lean checks the exact
 state recurrence on every raw control word and an exact paired recognizer for every minimum body.
 Its terminal row selects one computable history code, so it does not handle arbitrary bodies with
-several or infinitely many terminal histories. The live transverse problem is an infinite
-terminal section or genuinely two-dimensional terminal dynamics, not exceptional fibres.
+several or infinitely many terminal histories.
+
+[`G3-O26`](SALVAGE.md#g3-o26-transverse-terminal-row-obstruction) closes the proposed row
+extension of that orbit. The two `bcbc` terminal histories require zeros at both phases of two
+distinct codes, forcing every exact row to vanish; the checked near-fork is then a false zero.
+This holds even for an arbitrary source-dependent row family. The live transverse problem is
+therefore a different, genuinely two-dimensional orbit, not more parameters in the terminal row.
 
 [`G3-M02`](SALVAGE.md#g3-m02-square-root-punctuation-fracture) supplied a complete direct-mortality
 grammar. The source-uniform rational rank-two matrix `S` satisfies
@@ -1299,7 +1304,7 @@ or neutral word across the return, use an empty consume, or split recurrent outp
 | Lane | Available leverage | Decisive obstruction or obligation |
 | --- | --- | --- |
 | Common-kernel shuttle | The exact `bcbb` compiler moves its common data kernel out through the toggle and recovers it at the next data action | Uniformize this non-invariant shuttle in `(β,body)`; every toggle-invariant guard factors through the two-dimensional quotient |
-| Transverse-kernel terminal dynamics | Fixed integral transverse controls encode every history and exactly recognize all minimum bodies | Replace the singleton target row by an infinite, source-computable terminal section for unrestricted bodies |
+| Transverse-kernel terminal dynamics | Fixed integral transverse controls expose the two affine phase lines, and `G3-O26` excludes every source-dependent terminal row on that orbit | Construct different transverse controls or a source-coupled column whose orbit supports a genuinely two-dimensional terminal surface |
 | Positive projective transition lower bound | Same-zero dimension three is point-line incidence in `P²`, and actual one-sided shifts retain finite rank/kernel/image data | Derive a uniform nonstationary or noncommuting shift incompatibility from an unbounded terminal section; static support rank, formal inverse completion, fixed equal-length return flowers, and unary consecutive-repeat escape are forbidden |
 | Global word-residual recoding | Longer noncommutative atoms can retain order while discarding the four additive role channels | Escape `G3-D05`: fixed-priority affine counters and all one-way reset/transfer/fanout cascades are decidable |
 | Head-separated three-schema source | `G3-C04` discharges every arbitrary-trace forcing obligation locally; `G3-O24` isolates the directed stable-cone alternative | Preserve an undecidable mixed or neutral word across returns, or realize zero-sensitive S5 GLB decoding after the `G3-O25` separator-rank fork; complete pure forks are decidable by `G3-D07` |
@@ -1314,16 +1319,17 @@ removes even positive congruence separation.
 
 #### Raceable leaves
 
-After `G3-O21`–`G3-O25`, `R32-O22`, and `G3-D07` close their respective carrier, absorption,
-and pure-source lanes, the net tree has six independent raceable leaves:
+After `G3-O21`–`G3-O26`, `R32-O22`, and `G3-D07` close their respective carrier, absorption,
+pure-source, and fixed-transverse-orbit lanes, the net tree has six independent raceable leaves:
 
 1. **Common-kernel shuttle constructor.** Give one computable three-state paired recognizer in
    which the toggle moves a freshly minted common-kernel guard back into visible quotient data.
    Prove its state formula and scalar-zero equivalence uniformly in `(β,body)` on the complete
    free control monoid. Toggle-invariant refresh is closed.
-2. **Transverse-kernel terminal constructor.** Extend the checked mixed-radix transverse orbit
-   from one target code to a source-computable infinite terminal section for unrestricted bodies.
-   Pure kernel geometry, exceptional fibres, and minimum-body examples are closed.
+2. **Genuinely two-dimensional transverse constructor.** Replace the checked mixed-radix orbit,
+   whose two affine phase lines admit no source-dependent exact row, by transverse dynamics with
+   a source-computable terminal surface for unrestricted bodies. Pure kernel geometry,
+   exceptional fibres, minimum-body examples, and terminal-row retuning are closed.
 3. **Positive projective transition obstruction.** Derive from a source-unbounded terminal
    section a finite shift incompatibility which no three-dimensional rational same-zero
    representation can realize for any combination of generator ranks and kernels. It must use
@@ -1416,8 +1422,9 @@ Rank-two data maps must now branch at the outset. A common-kernel construction m
 hidden direction out through a non-invariant toggle; if the kernel is toggle-invariant, the next
 data action erases it and only the two-dimensional quotient persists. A transverse-kernel
 construction already realizes the bilinear fibre intersection and every minimum-body history;
-it must now realize an unrestricted, generally infinite terminal section. A lower-bound attack
-must exclude both positive
+`G3-O26` proves that its fixed two-line orbit cannot be extended by any source-dependent row. It
+must now change the orbit itself and realize a genuinely two-dimensional, generally infinite
+terminal surface. A lower-bound attack must exclude both positive
 architectures through actual transition data. Backward cancellation, inverse cofinality, and
 static incidence cannot do so. Do not spend another attack on separator placement, fixed anchors,
 or control singularity after recognition; `MM-C01` closes them unconditionally.

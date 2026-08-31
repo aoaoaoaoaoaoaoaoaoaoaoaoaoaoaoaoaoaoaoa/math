@@ -1781,7 +1781,7 @@ fixed-rank decision problem.
 | `PhaseFracture.lean` | phase normalization and dimension-free projective-identification contradiction |
 | `PhaseRigidity.lean` | checked local role algebra, discrepancy commutators, and invariant-pencil rigidity |
 | `HistoryFracture.lean` | null-history counterexample, minimum-body base-five encoder, and integral mortality lift |
-| `TransverseHistory.lean` | injective mixed-radix history code, transverse rank-two controls, and exact minimum-body zero language |
+| `TransverseHistory.lean` | injective mixed-radix transverse orbit, exact minimum-body zero language, and uniform terminal-row obstruction |
 | `BranchingHistory.lean` | fixed `bcbc` terminal forks and affine positional lower bounds |
 | `AffineRecognizer.lean` | generic singular three-state guard-and-carry representation calculus |
 | `BranchingRecognizer.lean` | complete `bcbc` residual grammar and rational three-state recognizer |
@@ -2041,6 +2041,7 @@ fixed-rank decision problem.
 | The mixed-radix paired-history code is injective | `TransverseHistory.code_injective` |
 | Fixed transverse-kernel controls maintain that code on every raw control word | `TransverseHistory.product_mulVec_column`, `TransverseHistory.data_mulVec_eq_zero_iff` |
 | The transverse controls have exactly the paired zeros on every minimum body | `TransverseHistory.coefficient_zero_iff_decode_eq`, `TransverseHistory.minimalBody_zero_iff_paired_zero` |
+| No source-dependent terminal-row family extends the fixed transverse orbit to all admissible bodies | `TransverseHistory.rowCoefficient_eq`, `TransverseHistory.no_bcbc_terminal_row_section`, `TransverseHistory.no_sourceUniform_terminal_row_section` |
 | The `bcbb` null histories and complete terminal language are one exact periodic ray | `PeriodicHistory.bcbbNull_iff`, `PeriodicHistory.bcbb_terminal_match_iff` |
 | The singular positional decoder obeys its all-control affine state equation | `PeriodicHistory.periodicProduct_mulVec_column`, `PeriodicHistory.periodicCoefficient_eq` |
 | The `bcbb` affine section has no false zero and matches the paired zero language | `PeriodicHistory.bcbbAffine_zero_iff`, `PeriodicHistory.bcbb_periodicCoefficient_zero_iff_paired_zero` |
@@ -2286,6 +2287,14 @@ under fixed integral transverse-kernel controls on every raw word, the scalar eq
 prescribed code, both coordinate kernels, and the complete minimum-body paired equivalence. The
 projective blow-up description is not a formal dependency: every actual orbit stays in the
 affine chart with homogeneous coordinate one.
+
+For `G3-O26`, Lean quantifies over an arbitrary rational row on that fixed orbit. Surjectivity of
+the paired decoder and a leading toggle expose both phase evaluations for each terminal history.
+The two distinct `bcbc` terminal forks force the row to zero; the explicit checked near-fork then
+contradicts same-zero exactness. The uniform theorem quantifies over every set-theoretic
+source-dependent row family and requires exactness only on admissible bodies, so no separate
+computability premise is needed. It fixes the `G3-O18` controls and column and makes no claim
+against different two-dimensional transverse dynamics.
 
 For `G3-O20`, Lean proves the free-monoid tail law: if one fixed-boundary equation with stationary
 left and right pump blocks holds at exponents `N` and `N+1`, it holds at every exponent `N+k`.
