@@ -1168,8 +1168,16 @@ nonnegative context with a positive boundary path, noncommuting `u₁,u₂`, and
 A4 covers. The countermodel's zero language is deliberately trivial.
 
 The adjacent [`R32-O22`](SALVAGE.md#r32-o22-congruence-blind-free-orbit) obstruction applies to
-this residual group-orbit shell: its all-modulus CRT closure is formalized without claiming
+this residual group-orbit shell: its all-modulus CRT closure now uses actual positive shear words
+without claiming
 orbit density, decidability, or hardness for rational Borel-coset intersection.
+
+[`D2-D08`](SALVAGE.md#d2-d08-rational-affine-group-orbits) removes the elementary group branch.
+Lean defines the rational affine group, its translation kernel, and its action, then proves
+multiplier stability, exact correction of a quotient hit by a kernel translation, commutativity
+when the translation kernel is trivial, and the resulting common fixed point. The effective
+relation-lattice construction of the kernel, principal fractional-ideal quotient, finite search,
+and invariant-pair extension are audited rather than executable Lean algorithms.
 
 Lean checks the internal algebra at the positive boundary: three positive letters surject onto
 the binary free group; quotient-blind boundaries accepting `g` and `g²` admit a nonempty identity
@@ -1670,7 +1678,8 @@ fixed-rank decision problem.
 | `ReturnJordan.lean` | parity-Jordan rail rigidity and modular immortality certificate |
 | `ReturnConvert.lean` | minimal two-scale return pencil and nonresonant multi-return zero |
 | `ProjectiveLine.lean` | total affine-chart presentation of `ℙ¹` and exact unit-word ray action |
-| `CongruenceBlindOrbit.lean` | free rational shear orbit, trivial source stabilizer, explicit five-factor bridge, and end-to-end all-modulus CRT closure |
+| `CongruenceBlindOrbit.lean` | free rational shear orbit, trivial source stabilizer, explicit five-factor bridge, and positive all-modulus CRT closure |
+| `AffineGroupOrbit.lean` | translation-kernel quotient and trivial-kernel fixed-point structure for rational affine groups |
 | `PadicValuation.lean` | nonzero rational p-adic shells, unequal-valuation calculus, and the adjacent-unit odd-prime obstruction |
 | `PeriodicShell.lean` | exact affine schedule composition, rational all-unit periodic cycles, and the published nonfree benchmark relation |
 | `MixedPrimeKernel.lean` | raw mixed-prime affine action, contextual composition, an infinite odd-length kernel family from length 29, and three independent length-30 relations |
@@ -1874,7 +1883,8 @@ fixed-rank decision problem.
 | Every malformed Collatz predecessor word remains nonintegral by negative 3-adic valuation | `ProjectiveCollatz.predecessorState_reaches_or_negative` |
 | Every nonzero shortcut-Collatz target reduces exactly to normalized GPI₂ | `ProjectiveCollatz.normalizedScalars`, `ProjectiveCollatz.exists_normalizedIncidence_zero_iff` |
 | In a finite group, positive monoid closure of a group-generating set is the whole group | `FinitePositiveImage.Submonoid.inv_mem_of_finite`, `FinitePositiveImage.mclosure_eq_top_of_group_closure_eq_top` |
-| A free rational shear orbit with trivial source stabilizer misses `[10:13]`, while an explicit five-factor word reaches it projectively modulo every positive integer | `CongruenceBlindOrbit.shearRepresentation_injective`, `CongruenceBlindOrbit.sourcePoint_stabilizer_trivial`, `CongruenceBlindOrbit.targetPoint_not_reachable`, `CongruenceBlindOrbit.bridgeMatrix_idempotent_projective_target`, `CongruenceBlindOrbit.shearRepresentation_bridgeWord`, `CongruenceBlindOrbit.exists_bridgeWord_modular_hit` |
+| A free rational shear orbit with trivial source stabilizer misses `[10:13]`, while a positive shear word reaches it projectively modulo every positive integer | `CongruenceBlindOrbit.shearRepresentation_injective`, `CongruenceBlindOrbit.sourcePoint_stabilizer_trivial`, `CongruenceBlindOrbit.targetPoint_not_reachable`, `CongruenceBlindOrbit.exists_positiveBridgeWord_modular_hit` |
+| Rational affine group hits are exact modulo the translation kernel; a trivial kernel forces one common fixed point | `AffineGroupOrbit.exists_exact_hit_iff_exists_hit_mod_translationKernel`, `AffineGroupOrbit.commute_of_translationKernel_eq_bot`, `AffineGroupOrbit.act_fixedPoint_of_translationKernel_eq_bot` |
 | The raw mixed-prime affine action has a published relation at length 27, an infinite distinct equal-map family at every odd length from 29, and three independent relations at length 30 | `MixedPrimeKernel.cassaigne_ne`, `MixedPrimeKernel.wordAction_cassaigne`, `MixedPrimeKernel.kernelOddFamily_length`, `MixedPrimeKernel.kernelOddFamily_ne`, `MixedPrimeKernel.wordAction_kernelOddFamily`, `MixedPrimeKernel.kernel30_ne`, `MixedPrimeKernel.wordAction_kernel30a`, `MixedPrimeKernel.wordAction_kernel30b`, `MixedPrimeKernel.wordAction_kernel30c` |
 | Every odd-family relation is an exact homogeneous matrix relation preserved by arbitrary independent generator scaling, so nonzero unit normalization cannot restore freeness | `MixedPrimeNormalization.kernelOddFamily_count`, `MixedPrimeNormalization.kernelOddFamily_perm`, `MixedPrimeNormalization.scaledAffineGenerator_isUnit`, `MixedPrimeNormalization.wordProduct_scaledAffineGenerator_kernelOddFamily`, `MixedPrimeNormalization.scaledAffineGenerator_not_injective` |
 | In any group-valued interpretation, the first two odd-family instances force the whole family by conjugate commutation | `MixedPrimeNormalization.groupPump_eq_of_zero_one`, `MixedPrimeNormalization.wordProduct_kernelOddFamily_of_zero_one` |
@@ -2060,6 +2070,7 @@ fixed-rank decision problem.
 | Transverse rank-two quotient fibres meet in the bilinear ray `[rv:us:vs]` | `PositiveResetNoGo.sameRay_bilinearFibrePoint` |
 | A homogeneous radix prepend cylinder has determinant `B²(B−1)(d_b−d_c)` | `PositiveResetNoGo.radixCylinder_det`, `PositiveResetNoGo.radixCylinder_det_ne_zero` |
 | Three positive letters evaluate surjectively onto the binary free group | `PositiveFreeCancellation.triangleEvaluate_surjective` |
+| A faithful free-group action cannot eliminate the third triangle control by a positive word in the first two | `PositiveFreeCancellation.triangleGenerator_z_not_positive_of_injective` |
 | Three positive letters cover every prescribed first-exponent slice exactly | `PositiveFreeCancellation.firstExponent_triangleEvaluate`, `PositiveFreeCancellation.triangleSliceEvaluate_surjective` |
 | Positive identity-triangle padding preserves both value and affine weight | `PositiveFreeCancellation.triangle_identity_padding` |
 | Quotient-blind boundaries accepting an element and its square admit a nonempty identity witness | `PositiveFreeCancellation.exists_nonempty_identity_witness` |

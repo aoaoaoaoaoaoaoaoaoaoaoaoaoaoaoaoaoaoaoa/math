@@ -219,10 +219,21 @@ theorem modularBridgeWord_product
     wordProduct (modularShearPower (R := R)) (modularBridgeWord r d n) =
       bridgeMatrix (3 * (r : R) * (d : R)) (n : R) := by
   ext i j
-  fin_cases i <;> fin_cases j <;>
-    simp [modularBridgeWord, modularShearPower, bridgeMatrix, upperShear, lowerShear,
-      wordProduct, Matrix.mul_apply, Fin.sum_univ_succ]
-  all_goals ring
+  fin_cases i
+  · fin_cases j
+    · simp [modularBridgeWord, modularShearPower, bridgeMatrix, upperShear, lowerShear,
+        wordProduct, Matrix.mul_apply, Fin.sum_univ_succ]
+      ring
+    · simp [modularBridgeWord, modularShearPower, bridgeMatrix, upperShear, lowerShear,
+        wordProduct, Matrix.mul_apply, Fin.sum_univ_succ]
+      ring
+  · fin_cases j
+    · simp [modularBridgeWord, modularShearPower, bridgeMatrix, upperShear, lowerShear,
+        wordProduct, Matrix.mul_apply, Fin.sum_univ_succ]
+      ring
+    · simp [modularBridgeWord, modularShearPower, bridgeMatrix, upperShear, lowerShear,
+        wordProduct, Matrix.mul_apply, Fin.sum_univ_succ]
+      ring
 
 /-- Two unimodular homogeneous vectors represent the same projective point when a unit rescales
 the first to the second.  This definition remains valid over composite residue rings. -/
@@ -249,10 +260,13 @@ theorem map_bridgeMatrix_mulVec_source
     (fun index => map ((bridgeMatrix x n *ᵥ sourceRay R) index)) =
       bridgeMatrix (map x) (map n) *ᵥ sourceRay S := by
   ext i
-  fin_cases i <;>
-    simp [bridgeMatrix, upperShear, lowerShear, sourceRay,
+  fin_cases i
+  · simp [bridgeMatrix, upperShear, lowerShear, sourceRay,
       Matrix.mul_apply, Matrix.mulVec, dotProduct, Fin.sum_univ_succ]
-  all_goals simp only [map_ofNat]
+    simp only [map_ofNat]
+  · simp [bridgeMatrix, upperShear, lowerShear, sourceRay,
+      Matrix.mul_apply, Matrix.mulVec, dotProduct, Fin.sum_univ_succ]
+    simp only [map_ofNat]
 
 private def crtScalePair (power coprimePart : ℕ)
     (thirteen_coprime : Nat.Coprime 13 power) :

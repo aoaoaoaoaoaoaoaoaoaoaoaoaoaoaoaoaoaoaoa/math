@@ -287,6 +287,7 @@ open MatrixMortality
 #print axioms PositiveResetNoGo.radixCylinder_det_ne_zero
 #print axioms PositiveFreeCancellation.triangle_relations
 #print axioms PositiveFreeCancellation.triangleEvaluate_surjective
+#print axioms PositiveFreeCancellation.triangleGenerator_z_not_positive_of_injective
 #print axioms PositiveFreeCancellation.firstExponent_triangleEvaluate
 #print axioms PositiveFreeCancellation.triangleSliceEvaluate_surjective
 #print axioms PositiveFreeCancellation.triangle_identity_padding
@@ -620,10 +621,15 @@ open MatrixMortality
 #print axioms CongruenceBlindOrbit.bridgeMatrix_projectively_hits_of_crt
 #print axioms CongruenceBlindOrbit.congruenceTerminalExponent_relation
 #print axioms CongruenceBlindOrbit.exists_bridgeWord_modular_hit
+#print axioms CongruenceBlindOrbit.exists_positiveBridgeWord_modular_hit
 #print axioms CongruenceBlindOrbit.source_target_outside_chambers
 #print axioms CongruenceBlindOrbit.targetPoint_not_reachable
 #print axioms CongruenceBlindOrbit.sourcePoint_stabilizer_trivial
 #print axioms CongruenceBlindOrbit.shearRepresentation_injective
+#print axioms AffineGroupOrbit.multiplier_mul_mem_translationKernel
+#print axioms AffineGroupOrbit.exists_exact_hit_iff_exists_hit_mod_translationKernel
+#print axioms AffineGroupOrbit.commute_of_translationKernel_eq_bot
+#print axioms AffineGroupOrbit.act_fixedPoint_of_translationKernel_eq_bot
 #print axioms MixedPrimeKernel.wordAction_context
 #print axioms MixedPrimeKernel.pumpWord_length
 #print axioms MixedPrimeKernel.wordAction_pumpWord

@@ -132,10 +132,11 @@ theorem firstExponent_positiveEvaluate_nonneg (word : List Bool) :
   induction word with
   | nil => simp [firstExponent]
   | cons letter word induction =>
-      cases letter <;>
-        simp only [List.map_cons, List.prod_cons, firstExponent_mul, firstExponent_of,
-          ↓reduceIte]
-      all_goals omega
+      cases letter
+      · simp only [List.map_cons, List.prod_cons, firstExponent_mul, firstExponent_of]
+        omega
+      · simp only [List.map_cons, List.prod_cons, firstExponent_mul, firstExponent_of]
+        omega
 
 /-- The inverse-composite triangle control is not a positive word in the first two controls. -/
 theorem triangleGenerator_z_not_positive (word : List Bool) :
