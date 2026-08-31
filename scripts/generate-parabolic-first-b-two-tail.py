@@ -4,23 +4,29 @@
 # ///
 """Generate the exact Lean tail certificate for the second-first-``b`` chamber.
 
-The default output is the generated region. ``--write`` replaces only the explicit marker
-region in ``ParabolicFirstBTwoTail.lean``; ``--check`` fails when that region is stale. The
-generator derives every branch sign and integral gap with exact fractions. The emitted Lean
-proofs independently recheck every affine-rectangle corner with ``norm_num``.
+The default output is the three generated certificate modules. ``--write`` replaces those
+modules; ``--check`` fails when any is stale. The generator derives every branch sign and
+integral gap with exact fractions. The emitted Lean proofs independently recheck every
+affine-rectangle corner with ``norm_num``. Sharding keeps every module within the strict
+1,500-line source limit without weakening either style linter.
 """
 
 from __future__ import annotations
 
 import argparse
+import textwrap
 from dataclasses import dataclass
 from fractions import Fraction
 from pathlib import Path
 
 Q = Fraction
-MODULE = Path("MatrixMortality/ParabolicFirstBTwoTail.lean")
+BEFORE_MODULE = Path("MatrixMortality/ParabolicFirstBTwoTailBefore.lean")
+LOWER_MODULE = Path("MatrixMortality/ParabolicFirstBTwoTailLower.lean")
+UPPER_MODULE = Path("MatrixMortality/ParabolicFirstBTwoTailUpper.lean")
 BEGIN = "-- BEGIN GENERATED SECOND-FIRST-B TAIL CERTIFICATE"
 END = "-- END GENERATED SECOND-FIRST-B TAIL CERTIFICATE"
+LEAN_LINE_LIMIT = 100
+LEAN_FILE_LIMIT = 1500
 
 CANDIDATE_RANGES = (
     (183, 8, 8),
@@ -272,23 +278,25 @@ def impossible_call(x: int, y: int) -> str:
     return f"exact (firstBTwoTail_root_{x}_{y} j rest z root_eq).elim"
 
 
-def emit_main_theorem() -> str:
+def emit_before_theorem() -> str:
     lines = [
-        "/-- A candidate tail root is the explicit `(213, 465, 38)` point on the `ccb` cylinder. -/",
-        "theorem firstBTwoTail_root_eq_exception",
-        "    (tail : List TagLetter) (contains_b : .b ∈ tail) (x y z : Nat)",
+        "/-- No canonical candidate before outer wait `213` has an integral tail root. -/",
+        "theorem firstBTwoTail_root_before_213_ne",
+        "    (j : Nat) (rest : List TagLetter) (x y z : Nat)",
         "    (candidate : FirstBTwoRootCandidate x y)",
+        "    (x_lt : x < 213)",
         "    (root_eq :",
-        "      firstBTwoTailZDenominator (firstBTwoTailA tail y) (firstBTwoTailD tail) x y * z =",
-        "        firstBTwoTailZNumerator (firstBTwoTailA tail y) (firstBTwoTailD tail) x y) :",
-        "    x = 213 ∧ y = 465 ∧ z = 38 ∧ ∃ rest, tail = [.c, .c, .b] ++ rest := by",
-        "  obtain ⟨j, rest, tail_eq⟩ := firstBTwoTail_first_b_decomposition tail contains_b",
-        "  subst tail",
+        "      let tail := List.replicate j .c ++ .b :: rest",
+        "      firstBTwoTailZDenominator (firstBTwoTailA tail y)",
+        "          (firstBTwoTailD tail) x y * z =",
+        "        firstBTwoTailZNumerator (firstBTwoTailA tail y)",
+        "          (firstBTwoTailD tail) x y) :",
+        "    False := by",
         "  unfold FirstBTwoRootCandidate at candidate",
         "  rcases candidate with c183 | c186 | c199 | c202 | c204 | c206 |",
         "    c208 | c209 | c210 | c211 | c212 | c213",
     ]
-    for x, lower, upper in CANDIDATE_RANGES:
+    for x, lower, upper in CANDIDATE_RANGES[:-1]:
         candidate_case = (
             f"rcases c{x} with ⟨rfl, rfl⟩"
             if lower == upper
@@ -300,30 +308,129 @@ def emit_main_theorem() -> str:
             continue
         lines.append("    interval_cases y")
         for y in range(lower, upper + 1):
-            if (x, y) == (213, 465):
-                lines.extend(
-                    (
-                        "    · obtain ⟨j_eq, z_eq⟩ := firstBTwoTail_root_213_465 j rest z root_eq",
-                        "      refine ⟨rfl, rfl, z_eq, rest, ?_⟩",
-                        "      simp [j_eq]",
-                    )
-                )
-            else:
-                lines.append("    · " + impossible_call(x, y))
+            lines.append("    · " + impossible_call(x, y))
+    lines.extend(("  · rcases c213 with ⟨rfl, _, _⟩", "    omega"))
     return "\n".join(lines)
 
 
-def generate() -> str:
+def emit_lower_theorem() -> str:
+    lines = [
+        "/-- The lower `x = 213` tail range contains only `(y, z, j) = (465, 38, 2)`. -/",
+        "theorem firstBTwoTail_root_213_lower_exception",
+        "    (j : Nat) (rest : List TagLetter) (y z : Nat)",
+        "    (y_lower : 465 ≤ y) (y_upper : y ≤ 492)",
+        "    (root_eq :",
+        "      let tail := List.replicate j .c ++ .b :: rest",
+        "      firstBTwoTailZDenominator (firstBTwoTailA tail y)",
+        "          (firstBTwoTailD tail) 213 y * z =",
+        "        firstBTwoTailZNumerator (firstBTwoTailA tail y)",
+        "          (firstBTwoTailD tail) 213 y) :",
+        "    j = 2 ∧ y = 465 ∧ z = 38 := by",
+        "  interval_cases y",
+    ]
+    for y in range(465, 493):
+        if y == 465:
+            lines.extend(
+                (
+                    "  · obtain ⟨j_eq, z_eq⟩ := firstBTwoTail_root_213_465 j rest z root_eq",
+                    "    exact ⟨j_eq, rfl, z_eq⟩",
+                )
+            )
+        else:
+            lines.append("  · " + impossible_call(213, y))
+    return "\n".join(lines)
+
+
+def emit_upper_theorem() -> str:
+    lines = [
+        "/-- The upper `x = 213` tail range has no integral tail root. -/",
+        "theorem firstBTwoTail_root_213_upper_ne",
+        "    (j : Nat) (rest : List TagLetter) (y z : Nat)",
+        "    (y_lower : 493 ≤ y) (y_upper : y ≤ 520)",
+        "    (root_eq :",
+        "      let tail := List.replicate j .c ++ .b :: rest",
+        "      firstBTwoTailZDenominator (firstBTwoTailA tail y)",
+        "          (firstBTwoTailD tail) 213 y * z =",
+        "        firstBTwoTailZNumerator (firstBTwoTailA tail y)",
+        "          (firstBTwoTailD tail) 213 y) :",
+        "    False := by",
+        "  interval_cases y",
+    ]
+    lines.extend("  · " + impossible_call(213, y) for y in range(493, 521))
+    return "\n".join(lines)
+
+
+def wrap_lean(source: str) -> str:
+    lines: list[str] = []
+    for line in source.splitlines():
+        if len(line) <= LEAN_LINE_LIMIT:
+            lines.append(line)
+            continue
+        indent = line[: len(line) - len(line.lstrip())]
+        wrapped = textwrap.wrap(
+            line[len(indent) :],
+            width=LEAN_LINE_LIMIT,
+            initial_indent=indent,
+            subsequent_indent=indent + "  ",
+            break_long_words=False,
+            break_on_hyphens=False,
+        )
+        assert wrapped and all(len(part) <= LEAN_LINE_LIMIT for part in wrapped)
+        lines.extend(wrapped)
+    return "\n".join(lines)
+
+
+def generate_module(title: str, declarations: list[str]) -> str:
+    generated = f"{BEGIN}\n\n" + "\n\n".join(declarations) + f"\n\n{END}"
+    source = f"""import MatrixMortality.ParabolicFirstBTwoTailCore
+
+/-!
+# {title}
+
+This exact certificate shard is generated by
+`scripts/generate-parabolic-first-b-two-tail.py`.
+-/
+
+namespace MatrixMortality.ParabolicBlade
+
+{generated}
+
+end MatrixMortality.ParabolicBlade
+"""
+    wrapped = wrap_lean(source)
+    assert len(wrapped.splitlines()) <= LEAN_FILE_LIMIT
+    return wrapped + "\n"
+
+
+def generate() -> dict[Path, str]:
     assert len(CANDIDATES) == 77
-    declarations = [emit_candidate_theorem(x, y) for x, y in CANDIDATES]
-    declarations.append(emit_main_theorem())
-    return f"{BEGIN}\n\n" + "\n\n".join(declarations) + f"\n\n{END}"
-
-
-def replace_generated(source: str, generated: str) -> str:
-    start = source.index(BEGIN)
-    finish = source.index(END, start) + len(END)
-    return source[:start] + generated + source[finish:]
+    before_candidates = [(x, y) for x, y in CANDIDATES if x < 213]
+    lower_candidates = [(213, y) for y in range(465, 493)]
+    upper_candidates = [(213, y) for y in range(493, 521)]
+    assert len(before_candidates) + len(lower_candidates) + len(upper_candidates) == 77
+    return {
+        BEFORE_MODULE: generate_module(
+            "Tail roots before outer wait 213",
+            [
+                *(emit_candidate_theorem(x, y) for x, y in before_candidates),
+                emit_before_theorem(),
+            ],
+        ),
+        LOWER_MODULE: generate_module(
+            "Lower tail roots at outer wait 213",
+            [
+                *(emit_candidate_theorem(x, y) for x, y in lower_candidates),
+                emit_lower_theorem(),
+            ],
+        ),
+        UPPER_MODULE: generate_module(
+            "Upper tail roots at outer wait 213",
+            [
+                *(emit_candidate_theorem(x, y) for x, y in upper_candidates),
+                emit_upper_theorem(),
+            ],
+        ),
+    }
 
 
 def main() -> None:
@@ -331,17 +438,25 @@ def main() -> None:
     parser.add_argument("--write", action="store_true")
     parser.add_argument("--check", action="store_true")
     args = parser.parse_args()
-    generated = generate()
+    modules = generate()
     if not (args.write or args.check):
-        print(generated)
+        for path, source in modules.items():
+            print(f"-- {path}")
+            print(source, end="")
         return
-    source = MODULE.read_text()
-    expected = replace_generated(source, generated)
     if args.check:
-        if source != expected:
-            raise SystemExit("generated tail certificate is stale")
+        stale = [
+            path
+            for path, source in modules.items()
+            if not path.exists() or path.read_text() != source
+        ]
+        if stale:
+            raise SystemExit(
+                "stale generated tail certificates: " + ", ".join(map(str, stale))
+            )
         return
-    MODULE.write_text(expected)
+    for path, source in modules.items():
+        path.write_text(source)
 
 
 if __name__ == "__main__":
