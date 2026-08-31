@@ -67,6 +67,7 @@ file owns the mathematical stock.
 | [`MM-C02`](#mm-c02-common-image-restriction) | compiler | mortality-preserving restriction to a common image | formalized | graduated |
 | [`MM-C03`](#mm-c03-scheduled-binary-compiler) | compiler | fixed-width tag strokes to a total two-letter scalar series | formalized | graduated |
 | [`MM-C04`](#mm-c04-internal-word-sandwich-minimization) | compiler | internal low-rank words repair reachable/observable minimization | formalized | graduated |
+| [`MM-D01`](#mm-d01-sparse-width-three-source-decision) | decidability theorem | every coupled width-three body with at most one `c` halts | formalized | graduated |
 | [`MM-O01`](#mm-o01-all-placement-packing-rank) | obstruction | literal CHHN packing has exact rank six for every separator placement | formalized | graduated |
 | [`MM-O02`](#mm-o02-one-sided-phase-overlap) | obstruction | standard common-line phase fusion becomes one-sided | reported | parked |
 | [`MM-O03`](#mm-o03-two-channel-boundary-tax) | obstruction | exact diagonal rank-two punctuation costs two states beyond Hankel rank | formalized | graduated |
@@ -1150,6 +1151,38 @@ generator scaling is `MatrixMortality.isMortal_smulMatrix_iff` in
 [`MatrixSemigroup.lean`](MatrixMortality/MatrixSemigroup.lean). The independent reconstruction
 and edge-case audit are in
 [`audits/internal-sandwich-prefix-algebra-2026-07-25.md`](audits/internal-sandwich-prefix-algebra-2026-07-25.md).
+
+### MM-D01: Sparse width-three source decision
+
+**Kind:** decidability theorem
+**Evidence:** formalized
+**Disposition:** graduated
+
+For every binary body `q` containing at most one `c`, the coupled width-three restricted tag
+queue
+
+```text
+TagHaltsFrom 3 (b ↦ b, c ↦ qb) (q.drop 2 · b)
+```
+
+halts. For `q=b^p c b^s`, a live one-`c` queue has the form `b^i c b^j`. Leading `b` steps
+preserve `i+3j`; each surviving `c` firing divides a nonzero integral defect by three. The
+coupled initial defect is negative and nonzero, so only finitely many `c` firings can survive.
+All remaining cases reduce to an all-`b` length descent.
+
+**Scope:** this decides only the zero- and one-`c` strata. Two-`c` bodies already contain both
+terminating and periodic examples. The theorem neither decides that stratum nor asserts its
+universality.
+
+**Use:** any exact width-three source family recognizing code halting must emit a body with at
+least two `c` letters for some rejecting source code. Sparse retimings cannot discharge the
+source theorem required by `MM-C03`.
+
+**Artifact:** `MatrixMortality.WidthThreeSparseBody.sparseBody_coupled_halts`,
+`MatrixMortality.WidthThreeSparseBody.coupled_halts_of_count_c_le_one`, and
+`MatrixMortality.WidthThreeSparseBody.exact_source_has_body_with_two_c` in
+[`WidthThreeSparseBody.lean`](MatrixMortality/WidthThreeSparseBody.lean). The proof audit is
+[`audits/m53-width-three-sparse-source-2026-08-30.md`](audits/m53-width-three-sparse-source-2026-08-30.md).
 
 ### MM-O01: All-placement packing rank
 

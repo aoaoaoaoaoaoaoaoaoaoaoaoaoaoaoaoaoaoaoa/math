@@ -185,7 +185,13 @@ This does not add a frontier point. Neary's universality compiler sets `β=10p`,
 cyclic-tag program period. The fixed-width audit found no universality theorem for the required
 binary deletion-width-three family. At width three the construction would imply `Z₅(2)`,
 `M₅(3)`, and `R₆(2)`; at the presently established variable width it gives no fixed matrix
-dimension. See `audits/scheduled-binary-fixed-width-2026-07-24.md`.
+dimension. The sparse source stratum is now closed:
+[`MM-D01`](SALVAGE.md#mm-d01-sparse-width-three-source-decision) proves that every coupled body
+containing at most one `c` halts, so any exact universal family must emit a body with at least
+two `c` letters on some rejecting code. This is a necessary condition, not universality of the
+two-`c` stratum. See
+`audits/scheduled-binary-fixed-width-2026-07-24.md` and
+`audits/m53-width-three-sparse-source-2026-08-30.md`.
 
 Full mortality requires coding the four payloads and the rank-one separator. The complete
 prefix code
@@ -690,7 +696,9 @@ Three live routes remain.
    compression or delimiter fusion. Exact deletion-width-three source substitution remains a
    separate open problem: the theorem needed by `MM-C03` must compute the variable rule body
    and its coupled suffix input from the same source, not merely supply a fixed width-three
-   machine with an arbitrary input.
+   machine with an arbitrary input. [`MM-D01`](SALVAGE.md#mm-d01-sparse-width-three-source-decision)
+   excludes every zero- or one-`c` source image; the next genuine source boundary starts with
+   at least two `c` letters.
 
 The decimal setter is now the sharpest constructive route. The ternary swap remains useful
 because its suffix and divisor-ray theory is mature; the decimal instance has stronger real
@@ -2815,8 +2823,9 @@ universal computation.
    and bridges without conflating their scope with solvability preservation.
 3. Prove or refute the setter candidate's projective avoidance property, construct a
    five-state same-zero binary root, or find a constant-state scheduled delimiter fusion.
-   Treat fixed-width-three universality as a separate source theorem. Reopen `MM-C04` only for
-   a physically different six-state family.
+   Treat fixed-width-three universality as a separate source theorem and enforce the
+   [`MM-D01`](SALVAGE.md#mm-d01-sparse-width-three-source-decision) two-`c` lower boundary on
+   candidate source families. Reopen `MM-C04` only for a physically different six-state family.
 4. Treat `MM-O08` and `MM-O11` as formally closed exact-family obstructions. Search for
    `M₉(2)` only through a changed physical pair, changed nonzero behavior, or a nonlinear
    compiler.

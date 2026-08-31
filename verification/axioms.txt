@@ -879,6 +879,15 @@
 'MatrixMortality.scheduledWidthThree_exact_state_lower_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.scheduledWidthThree_native_state_card' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.scheduledWidthThree_native_represents' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.WidthThreeSparseBody.sparseBody_coupled_halts' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.WidthThreeSparseBody.coupled_halts_of_count_c_le_one' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.WidthThreeSparseBody.exact_source_has_body_with_two_c' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.SetterShear.sideBasis_det' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.SetterShear.delimiter_cube' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.SetterShear.delimiter_square_distinguishedColumn' depends on axioms: [propext,

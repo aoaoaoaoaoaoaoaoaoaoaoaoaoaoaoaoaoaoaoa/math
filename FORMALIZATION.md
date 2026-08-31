@@ -1877,6 +1877,7 @@ fixed-rank decision problem.
 | `PairedBinaryFullAlgebra.lean` | canonical mortality alphabet and the full `M₆(ℚ)` physical-product span theorem |
 | `ScheduledBinary.lean` | cyclic-controller specialization, source semantics, and malformed-word converse |
 | `ScheduledBinaryRank.lean` | exact width-three rank-five certificate and universal exact-state lower bound |
+| `WidthThreeSparseBody.lean` | termination of every coupled width-three body with at most one `c` |
 | `WeightedTransducer.lean` | deterministic matrix transducers and the arbitrary-word block-row theorem |
 | `PrefixMortality.lean` | complete prefix decoder, twelve-state realization, and ten-state common-image restriction |
 | `PrefixContexts.lean` | closed ten-state generators, internal rank-one word, and physical contexts |
@@ -2248,6 +2249,8 @@ fixed-rank decision problem.
 | Scheduled scalar zero iff the terminal equation and tag halting | `scheduledBinary_zero_iff_terminal_match`, `scheduledBinary_zero_iff_tagHaltsFrom` |
 | Width-three scheduled series has a nonsingular `5 × 5` Hankel minor | `scheduledWidthThreeHankel_det_ne_zero` |
 | Every exact width-three rational realization needs five states | `scheduledWidthThree_exact_state_lower_bound`, `scheduledWidthThree_native_state_card`, `scheduledWidthThree_native_represents` |
+| Every coupled width-three body with at most one `c` halts | `coupled_halts_of_count_c_le_one` |
+| Every exact code-halting source family emits a body with at least two `c` letters | `exact_source_has_body_with_two_c` |
 | Every binary prefix-machine word has one decoded block per row | `prefixMachine_run`, `WeightedTransducer.wordProduct_apply` |
 | Prefix-machine mortality iff five-matrix mortality | `prefixMachine_mortal_iff_normalized` |
 | Both prefix generators share the ten-dimensional image | `prefixProjection_generator` |
@@ -2430,7 +2433,10 @@ no universality theorem for the required binary deletion-width-three family. Coc
 fix deletion width two only by allowing the alphabet to grow; the adjacent binary width-three
 class remains unresolved in the located literature. The width-three Lean theorem is therefore
 a conditional five-state reduction and an exact-rank result, not an established undecidable
-cell.
+cell. The sparse source stratum is nevertheless closed: Lean proves termination for every
+coupled body containing at most one `c`, and therefore proves that any exact code-halting source
+family must emit at least two `c` letters on some rejecting code. No declaration claims that
+the two-`c` stratum is universal or decidable.
 
 ## Prior Formalizations
 
