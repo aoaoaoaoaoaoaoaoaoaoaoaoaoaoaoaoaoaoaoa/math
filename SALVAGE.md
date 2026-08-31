@@ -12953,6 +12953,91 @@ enforce the complete arbitrary-word converse.
 without entering the finite-target class of `G3-O04`. The terminal-fork core must remain
 one- or two-dimensional by `G3-S03`.
 
+### G3-C08: Guarded two-state lift
+
+**Kind:** conditional compiler
+
+**Evidence:** formalized
+
+**Disposition:** graduated
+
+Let `A_x∈Mat₂(ℤ)` be arbitrary core matrices for the two data controls and toggle, let
+`q∈ℤ²` be a core column, and let `g∈(ℤ²)*` be a gate row. Adjoin one guard coordinate:
+
+```text
+        [2  2  1]             [0  g₀  g₁]             [1  0  0]
+Â_b  = [0      ] ,   Â_c  = [0       ] ,   Â_t  = [0     ] .
+        [0  A_b ]             [0   A_c ]             [0  A_t]
+```
+
+The boundary row is `(1,0,0)` and the column is `(1,q)`. If
+`h_w=A_wq`, the lifted guard satisfies
+
+```text
+G(ε)=1,
+G(bw)=2G(w)+2h_w(0)+h_w(1),
+G(cw)=g·h_w,
+G(tw)=G(w).
+```
+
+Assume `h_w(1)` is odd for every raw word. Then every `b`-headed guard is odd, while `c`
+refreshes the guard to the scalar core incidence. Lean proves on the complete free monoid that
+the lifted coefficient vanishes exactly for the recursively defined gate language: leading
+toggles are invisible, a leading `b` is rejected, and a leading `c` accepts exactly when
+`gA_wq=0`. The orbit-wide parity hypothesis itself follows from three finite congruence checks:
+`q(1)` and every lower-right generator entry are odd, while every lower-left entry is even.
+
+For every Neary source `(beta,body)`, the three-state lift is same-zero exact if and only if
+
+```text
+gateLanguage(A,q,g,w) ⇔ pairedCoefficient(beta,body,w)=0
+```
+
+for every raw word `w`. This equivalence is also formalized parametrically for a source-indexed
+function `(beta,body)↦(A,q,g)`. For every positive deletion width, Lean uses the native terminal
+converse to remove the remaining syntax cases: a paired zero never begins with data `b`, the
+empty coefficient is nonzero, and a leading toggle preserves the coefficient. Exactness is
+therefore equivalent to the single equation
+
+```text
+gA_wq=0 ⇔ pairedCoefficient(beta,body,cw)=0
+```
+
+for every suffix `w`. A computable definition of the source-indexed core satisfying parity and
+this equation is the entire remaining uniform construction obligation; the theorem does not
+certify computability of an arbitrary function parameter. Moreover
+
+```text
+det Â_b = 2 det A_b,       det Â_c = 0.
+```
+
+Thus an invertible `A_b` gives a full-rank persistent data control while `c` is the sole singular
+syntax gate. `G3-C07` at memory `2` is the affine instance with `q=(21436039,1)`, the lower
+`2×2` blocks of its existing controls, and its accepting-carry row as `g`.
+
+**Scope:** this theorem isolates rather than solves the source-uniform equation. It fixes `c` as
+the gate letter and requires an integral odd-coordinate lattice invariant. The core forced by
+`G3-S03` is a terminal-fork orbit annihilated by its transported boundary; it does not by itself
+supply the suffix-orbit leakage tested here. One-dimensional affine cores remain inside the
+finite-target obstruction `G3-O04`. Common-eigenline or invariant-pair two-state cores reduce to
+the `D2` affine/elementary program, whose audited decision results cover only stated substrata.
+The generic non-elementary scalar-orbit equation is the positive `D2-S01`/`M₂(3)` hard core.
+
+**Use:** stop treating the third state or the singular letter as the unsolved resource. The
+guard, all malformed `b`-headed words, rank escape, and complete arbitrary-word converse are
+compiled once the two-state gate equation is supplied. Future constructors must build that
+source-indexed incidence in a genuinely two-dimensional core, or prove that the paired language
+cannot have this gate form.
+
+**Artifact:** [`GuardedTwoStateLift.lean`](MatrixMortality/GuardedTwoStateLift.lean) and
+[`m34-guarded-two-state-lift-2026-08-31.md`](audits/m34-guarded-two-state-lift-2026-08-31.md).
+
+**Next:** realize the gate equation in a non-elementary two-state orbit, or screen it through the
+audited `D2-D01/D05/D06/D07` decision strata and prove that every lawful parity-preserving core
+falls into one of them. A direct irreducible `Sym²(GL₂)` fork cannot evade `G3-S03`; any conic
+collision detector must enter through the singular leakage gate rather than replace the fork
+core.
+
 ### G3-O13: Rational serializer pumping
 
 **Kind:** obstruction

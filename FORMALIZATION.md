@@ -3149,6 +3149,26 @@ data `c` remains the singular reset. Thus common-kernel and both-data-singular h
 available for a general lower bound. The result remains fixed-body and expanding-affine, so it
 does not supply the source-uniform compiler required for `M₃(4)`.
 
+`G3-C08` removes the fixed carry from the compiler interface. Lean takes arbitrary integral
+`2×2` core matrices for all three raw controls, a core column `q`, and a scalar gate row `g`, and
+adjoins one guard coordinate. It proves the exact block-state recurrence on every raw word. If
+the second core coordinate is always odd, the persistent data-`b` recurrence
+`G(bw)=2G(w)+2h_w(0)+h_w(1)` never vanishes; data `c` refreshes the guard to `gA_wq`, and the
+toggle preserves it. The lifted coefficient therefore vanishes exactly on the defined gate
+language. Lean also derives the orbit-wide parity invariant from a finite mod-`2` certificate:
+an odd initial second coordinate, even lower-left entries, and odd lower-right entries for the
+three core generators. It proves both directions of the remaining interface: for one source, and
+parametrically for a source-indexed family, same-zero correctness is equivalent to equality
+between this gate language and the paired zero language. It also proves `det Â_b=2 det A_b`, full
+rational rank when the core block is nonsingular, and `det Â_c=0`. For positive deletion width,
+the native terminal converse proves that data-`b`-headed words never vanish; empty-word
+rejection and leading-toggle invariance are already formalized. Lean therefore strengthens the
+interface to one equation on `c`-headed words: `gA_wq=0` if and only if the paired coefficient of
+`cw` is zero.
+No theorem asserts that the required source-indexed core exists or that an arbitrary family
+parameter is computable. The generic gate equation is the positive two-state
+projective-incidence node; an affine specialization remains subject to `G3-O04`.
+
 For `G3-O20`, Lean proves the free-monoid tail law: if one fixed-boundary equation with stationary
 left and right pump blocks holds at exponents `N` and `N+1`, it holds at every exponent `N+k`.
 The proof uses only prefix comparability and left/right cancellation. This closes a unary
