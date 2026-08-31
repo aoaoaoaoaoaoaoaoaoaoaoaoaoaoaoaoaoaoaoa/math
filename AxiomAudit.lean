@@ -958,3 +958,6 @@ open MatrixMortality
 #print axioms ParabolicBlade.tagComplementCode_replicate_c_append
 #print axioms ParabolicBlade.tagComplementCode_pos_of_mem_b
 #print axioms ParabolicBlade.bridge_bZero_bTwo_cOne_det_ne_zero_of_long_c_prefix
+#print axioms ParabolicBlade.tagComplementCode_cons_b
+#print axioms ParabolicBlade.tagComplementCode_append
+#print axioms ParabolicBlade.tagComplementCode_first_b_density

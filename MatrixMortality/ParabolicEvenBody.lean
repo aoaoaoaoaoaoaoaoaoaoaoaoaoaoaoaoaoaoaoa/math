@@ -69,6 +69,53 @@ theorem tagComplementCode_cons_c (body : List TagLetter) :
   norm_num only [Nat.reducePow]
   omega
 
+/-- A leading `b` contributes `39` times the suffix scale to the complementary value. -/
+theorem tagComplementCode_cons_b (body : List TagLetter) :
+    tagComplementCode (.b :: body) =
+      39 * 3 ^ (tagEncode 3 body).length + tagComplementCode body := by
+  have code_lt := ternaryCode_lt_pow_length (tagEncode 3 body)
+  unfold tagComplementCode
+  rw [tagEncode_cons, ternaryCode_append, List.length_append]
+  have b_length : (tagCode 3 .b).length = 5 := by decide
+  have b_code : ternaryCode (tagCode 3 .b) = 203 := by decide
+  rw [b_length, b_code, pow_add]
+  norm_num only [Nat.reducePow]
+  omega
+
+/-- Complement values compose affinely under concatenation. -/
+theorem tagComplementCode_append (stem suffix : List TagLetter) :
+    tagComplementCode (stem ++ suffix) =
+      tagComplementCode stem * 3 ^ (tagEncode 3 suffix).length +
+        tagComplementCode suffix := by
+  induction suffix using List.reverseRecOn with
+  | nil => simp [tagComplementCode]
+  | append_singleton suffix letter induction =>
+      cases letter with
+      | b =>
+          have scale_eq :
+              3 ^ (tagEncode 3 (suffix ++ [.b])).length =
+                243 * 3 ^ (tagEncode 3 suffix).length := by
+            rw [tagEncode_append, List.length_append]
+            have b_length : (tagEncode 3 [.b]).length = 5 := by decide
+            rw [b_length, pow_add]
+            norm_num
+            ring
+          rw [← List.append_assoc, tagComplementCode_append_b, induction,
+            tagComplementCode_append_b, scale_eq]
+          ring
+      | c =>
+          have scale_eq :
+              3 ^ (tagEncode 3 (suffix ++ [.c])).length =
+                3 * 3 ^ (tagEncode 3 suffix).length := by
+            rw [tagEncode_append, List.length_append]
+            have c_length : (tagEncode 3 [.c]).length = 1 := by decide
+            rw [c_length, pow_add]
+            norm_num
+            ring
+          rw [← List.append_assoc, tagComplementCode_append_c, induction,
+            tagComplementCode_append_c, scale_eq]
+          ring
+
 /-- A leading run of `c` digits leaves the complementary ternary value unchanged. -/
 theorem tagComplementCode_replicate_c_append (k : Nat) (body : List TagLetter) :
     tagComplementCode (List.replicate k .c ++ body) = tagComplementCode body := by
@@ -155,6 +202,46 @@ theorem tagComplementCode_global_bound (body : List TagLetter) :
         have scale_positive : 1 ≤ 3 ^ (tagEncode 3 body).length :=
           one_le_pow₀ (by norm_num)
         omega
+
+/-- Exact density cylinder determined by the first `b` after `j` leading `c` letters. -/
+theorem tagComplementCode_first_b_density (j : Nat) (tail : List TagLetter) :
+    let body := List.replicate j .c ++ .b :: tail
+    let S := 3 ^ (tagEncode 3 body).length
+    let D := tagComplementCode body
+    13 * S ≤ 81 * 3 ^ j * D ∧ 242 * 3 ^ j * D < 39 * S := by
+  let R : Nat := 3 ^ (tagEncode 3 tail).length
+  let E : Nat := tagComplementCode tail
+  have scale_positive : 1 ≤ R := by
+    dsimp [R]
+    exact one_le_pow₀ (by norm_num)
+  have complement_bound : 242 * E ≤ 39 * (R - 1) := by
+    dsimp [R, E]
+    exact tagComplementCode_global_bound tail
+  have complement_eq :
+      tagComplementCode (List.replicate j .c ++ .b :: tail) = 39 * R + E := by
+    rw [tagComplementCode_replicate_c_append, tagComplementCode_cons_b]
+  have encoded_length :
+      (tagEncode 3 (List.replicate j .c ++ .b :: tail)).length =
+        j + 5 + (tagEncode 3 tail).length := by
+    have b_length : (tagCode 3 .b).length = 5 := by decide
+    rw [tagEncode_append, List.length_append, tagEncode_replicate_c_length,
+      tagEncode_cons, List.length_append, b_length]
+    omega
+  have scale_eq :
+      3 ^ (tagEncode 3 (List.replicate j .c ++ .b :: tail)).length =
+        3 ^ j * 243 * R := by
+    rw [encoded_length, pow_add, pow_add]
+    norm_num only [Nat.reducePow]
+    rfl
+  have lower_base : 13 * 243 * R ≤ 81 * (39 * R + E) := by omega
+  have upper_base : 242 * (39 * R + E) < 39 * 243 * R := by omega
+  have lower_scaled := Nat.mul_le_mul_left (3 ^ j) lower_base
+  have upper_scaled := Nat.mul_lt_mul_of_pos_left upper_base (by positivity : 0 < 3 ^ j)
+  dsimp only
+  rw [scale_eq, complement_eq]
+  constructor
+  · simpa only [mul_assoc, mul_left_comm, mul_comm] using lower_scaled
+  · simpa only [mul_assoc, mul_left_comm, mul_comm] using upper_scaled
 
 private theorem tagComplementCode_cast (body : List TagLetter) :
     (tagComplementCode body : ℤ) =

@@ -1678,6 +1678,14 @@ module. `ParabolicBlade.tagComplementCode_cons_c` and
 with `M4-S27`. The exact boundary is
 [`audits/m43-phase-zero-right-c-long-c-prefix-2026-08-31.md`](audits/m43-phase-zero-right-c-long-c-prefix-2026-08-31.md).
 
+The phase-zero right-`c` first-`b` density cylinder
+[`M4-S29`](SALVAGE.md#m4-s29-phase-zero-right-c-first-b-density-cylinder) is checked in the same
+module. `ParabolicBlade.tagComplementCode_append` proves the affine concatenation law,
+`tagComplementCode_cons_b` isolates the first `b` contribution, and
+`tagComplementCode_first_b_density` proves both exact interval endpoints from the global
+complement bound. The exact boundary is
+[`audits/m43-phase-zero-right-c-first-b-density-2026-08-31.md`](audits/m43-phase-zero-right-c-first-b-density-2026-08-31.md).
+
 The residue-zero `c`-endpoint exclusion
 [`M4-S12`](SALVAGE.md#m4-s12-residue-zero-c-endpoint-exclusion) is checked in the same module.
 `ParabolicBlade.bridge_cZero_bTwo_bOne_det` and
