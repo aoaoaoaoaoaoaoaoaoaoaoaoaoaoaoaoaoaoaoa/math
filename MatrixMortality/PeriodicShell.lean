@@ -538,4 +538,90 @@ theorem benchmarkRelationShiftCycle (first last : ℕ) :
     exact left_cycle.2.1
   simpa only [List.nil_append, List.append_nil] using right_phases
 
+/-- One schedule expands its displacement from its unique periodic point by its exact affine
+slope. -/
+theorem shellRun_sub_periodicPoint
+    {waits : List ℕ} (waits_ne : waits ≠ []) (state : ℚ) :
+    shellRun waits state - shellPeriodicPoint waits =
+      product (waits.map shellScale) / (5 : ℚ) ^ waits.length *
+        (state - shellPeriodicPoint waits) := by
+  have scales_ne : waits.map shellScale ≠ [] := by simpa using waits_ne
+  have fixed := run_periodicPoint scales_ne (shellScales_unit waits)
+  calc
+    shellRun waits state - shellPeriodicPoint waits =
+        run (waits.map shellScale) state -
+          run (waits.map shellScale) (periodicPoint (waits.map shellScale)) := by
+      rw [fixed]
+      rfl
+    _ = product (waits.map shellScale) / (5 : ℚ) ^ waits.length *
+          (state - shellPeriodicPoint waits) := by
+      rw [run_eq, run_eq]
+      simp only [shellPeriodicPoint, List.length_map]
+      ring
+
+/-- Repeating one schedule multiplies displacement from its periodic point by the corresponding
+power of the schedule slope. -/
+theorem shellRun_repeat_sub_periodicPoint
+    {waits : List ℕ} (waits_ne : waits ≠ []) (repetitions : ℕ) (state : ℚ) :
+    shellRun (List.replicate repetitions waits).flatten state - shellPeriodicPoint waits =
+      (product (waits.map shellScale) / (5 : ℚ) ^ waits.length) ^ repetitions *
+        (state - shellPeriodicPoint waits) := by
+  induction repetitions generalizing state with
+  | zero => simp [shellRun, run]
+  | succ repetitions induction =>
+      rw [List.replicate_succ, List.flatten_cons, shellRun_append, induction,
+        shellRun_sub_periodicPoint waits_ne, pow_succ]
+      ring
+
+/-- Away from the unique periodic point, every full repetition consumes exactly the schedule
+length from the 5-adic valuation of the displacement. -/
+theorem shellRun_repeat_sub_periodicPoint_value
+    {waits : List ℕ} (waits_ne : waits ≠ []) (repetitions : ℕ) {state : ℚ}
+    (state_ne : state ≠ shellPeriodicPoint waits) :
+    padicValRat 5
+        (shellRun (List.replicate repetitions waits).flatten state - shellPeriodicPoint waits) =
+      padicValRat 5 (state - shellPeriodicPoint waits) - repetitions * waits.length := by
+  let slope := product (waits.map shellScale) / (5 : ℚ) ^ waits.length
+  have slope_value : HasValue 5 slope (-(waits.length : ℤ)) := by
+    have numerator_unit := product_unit (waits.map shellScale) (shellScales_unit waits)
+    have denominator_value : HasValue 5 ((5 : ℚ) ^ waits.length) waits.length :=
+      primePower_hasValue waits.length
+    simpa [slope] using div_hasValue numerator_unit denominator_value
+  have displacement_ne : state - shellPeriodicPoint waits ≠ 0 := sub_ne_zero.mpr state_ne
+  rw [shellRun_repeat_sub_periodicPoint waits_ne]
+  change padicValRat 5 (slope ^ repetitions * (state - shellPeriodicPoint waits)) = _
+  rw [padicValRat.mul (pow_ne_zero repetitions slope_value.1) displacement_ne,
+    padicValRat.pow, slope_value.2]
+  ring
+
+/-- A rational source distinct from the periodic point can follow a repeated schedule inside the
+unit shell only for the computable number of periods allowed by its initial displacement. -/
+theorem shellRun_repeat_unit_bound
+    {waits : List ℕ} (waits_ne : waits ≠ []) (repetitions : ℕ) {state : ℚ}
+    (state_ne : state ≠ shellPeriodicPoint waits)
+    (output_unit :
+      IsUnit 5 (shellRun (List.replicate repetitions waits).flatten state)) :
+    (repetitions * waits.length : ℤ) ≤
+      padicValRat 5 (state - shellPeriodicPoint waits) := by
+  have periodic_unit := (shellPeriodicCycle waits_ne).1
+  have difference_ne :
+      shellRun (List.replicate repetitions waits).flatten state -
+          shellPeriodicPoint waits ≠ 0 := by
+    rw [shellRun_repeat_sub_periodicPoint waits_ne]
+    exact mul_ne_zero
+      (pow_ne_zero repetitions (div_ne_zero
+        (product_unit (waits.map shellScale) (shellScales_unit waits)).1
+        (pow_ne_zero waits.length (by norm_num))))
+      (sub_ne_zero.mpr state_ne)
+  have difference_nonnegative :
+      0 ≤ padicValRat 5
+        (shellRun (List.replicate repetitions waits).flatten state -
+          shellPeriodicPoint waits) := by
+    have lower := min_le_sub (prime := 5) difference_ne
+    rw [output_unit.2, periodic_unit.2] at lower
+    exact lower
+  rw [shellRun_repeat_sub_periodicPoint_value waits_ne repetitions
+    state_ne] at difference_nonnegative
+  omega
+
 end MatrixMortality.PeriodicShell

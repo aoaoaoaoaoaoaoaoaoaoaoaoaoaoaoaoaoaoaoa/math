@@ -10602,6 +10602,17 @@ is the required fixed point. Backward inversion
 `u_j=q_(m_j)^−1(5u_(j+1)−1)` proves that every cyclic phase is a unit. Lean proves this for an
 arbitrary finite list of rational `5`-unit scales before specializing to the benchmark.
 
+For the same schedule, let `λ_w=Q_n/5^n`. Lean proves
+
+```text
+T_w^k(u)−u_w = λ_w^k(u−u_w),
+v₅(T_w^k(u)−u_w)=v₅(u−u_w)−kn.
+```
+
+Hence a rational source `u≠u_w` can follow repeated copies of `w` inside the unit shell only
+when `kn≤v₅(u−u_w)`. Fixed-block pumping is computably bounded away from the unique periodic
+source, even though varying rational schedules can be aperiodic.
+
 Every fixed infinite schedule has a unique orbit in `ℤ₅×` because the inverse branches contract
 by `1/5`; a periodic schedule's coded orbit is rational by the displayed formula. At every
 finite precision, the transition relation is maximal: for `k≥1`, each admissible source modulo
@@ -10700,8 +10711,9 @@ representatives gives an aperiodic wait schedule whose entire orbit remains rati
 unit shell; representatives can also be chosen to avoid every earlier state.
 
 **Scope:** Lean checks the finite rational all-phases cycle, the distinct published schedules,
-their affine equality in arbitrary contexts, their common guarded periodic source, contextual
-guard preservation, the raw/shell conjugacy, the contextual boundary factorization, the infinite
+their affine equality in arbitrary contexts, their common guarded periodic source, exact
+repeated-block displacement and unit bounds, contextual guard preservation, the raw/shell
+conjugacy, the contextual boundary factorization, the infinite
 odd-length raw kernel family, its guarded contextual cycles, exact homogeneous equality under
 every independent generator scaling, its two-seed group pumping law, and three independent
 length-30 relations. Infinite-schedule
@@ -10720,7 +10732,8 @@ rational source may also identify distinct affine maps.
 `PeriodicShell.shellPeriodicCycle`, `PeriodicShell.shellPrefixesUnit_iff`,
 `PeriodicShell.shellRun_eq_wordAction`, `PeriodicShell.shellRun_benchmarkRelationShift`,
 `PeriodicShell.benchmarkRelationContextGuard`, `PeriodicShell.benchmarkRelationCycle`,
-`PeriodicShell.kernelOddScheduleContextGuard`, and `PeriodicShell.kernelOddScheduleCycle` in
+`PeriodicShell.kernelOddScheduleContextGuard`, `PeriodicShell.kernelOddScheduleCycle`, and
+`PeriodicShell.shellRun_repeat_unit_bound` in
 [`MixedPrimeKernel.lean`](MatrixMortality/MixedPrimeKernel.lean),
 [`MixedPrimeNormalization.lean`](MatrixMortality/MixedPrimeNormalization.lean), and
 [`PeriodicShell.lean`](MatrixMortality/PeriodicShell.lean), with the source record in
@@ -10730,7 +10743,8 @@ and the exact census/critical-pair certificate in
 [`m32-gpi2-residue-blindness-2026-08-30.md`](audits/m32-gpi2-residue-blindness-2026-08-30.md).
 
 **Use:** reject state-independent finite forbidden wait blocks, residue-only bounded `5`-adic
-exclusion, eventual shell exit or periodicity, universal strict state-height drift, and a
+exclusion, eventual shell exit or periodicity, unbounded pumping of one fixed schedule away from
+its periodic point, universal strict state-height drift, and a
 compiler whose period-one configurations must remain in that set after every single wait. Also
 reject the hope that unit normalization restores a free action or that the odd family supplies a
 strict shortening pump. The live information is exact fixed-source endpoint equality across the

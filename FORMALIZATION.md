@@ -418,8 +418,12 @@ every phase. `shellPeriodicCycle` specializes this to every nonempty finite wait
 `T_m(u)=(1+3u(2/3)^m)/5`. The infinite-completion theorem, exact finite-precision transition
 calculation, rational-source aperiodic forward construction, and density and single-wait
 rigidity of period-one points remain audited strengthening under `D2-O02`; they introduce no
-unproved Lean dependency. Exact target and accepting-exit reachability from a specified rational
-source, rather than rational realization of shell paths, remains the benchmark seam.
+unproved Lean dependency. The checked repeated-schedule theorem proves that each repetition
+subtracts the schedule length from the `5`-adic valuation of displacement from its periodic
+point. A distinct rational source can therefore repeat a fixed schedule inside the unit shell
+only a computably bounded number of times. Exact target and accepting-exit reachability from a
+specified rational source, rather than rational realization or fixed-block pumping of shell
+paths, remains the benchmark seam.
 
 `MixedPrimeKernel` now owns the raw `D,T` affine kernel. It checks the published shortest
 length-27 relation, an infinite family of distinct equal-map pairs at every odd length
@@ -1825,6 +1829,7 @@ fixed-rank decision problem.
 | Every odd-family relation is an exact homogeneous matrix relation preserved by arbitrary independent generator scaling, so nonzero unit normalization cannot restore freeness | `MixedPrimeNormalization.kernelOddFamily_count`, `MixedPrimeNormalization.kernelOddFamily_perm`, `MixedPrimeNormalization.scaledAffineGenerator_isUnit`, `MixedPrimeNormalization.wordProduct_scaledAffineGenerator_kernelOddFamily`, `MixedPrimeNormalization.scaledAffineGenerator_not_injective` |
 | In any group-valued interpretation, the first two odd-family instances force the whole family by conjugate commutation | `MixedPrimeNormalization.groupPump_eq_of_zero_one`, `MixedPrimeNormalization.wordProduct_kernelOddFamily_of_zero_one` |
 | Every nonempty critical-shell wait schedule has a rational periodic `5`-unit at every cyclic phase | `PeriodicShell.shellPeriodicCycle` |
+| Repeating a fixed shell schedule subtracts its length from the `5`-adic displacement valuation each period, bounding legal repetition away from its unique periodic point | `PeriodicShell.shellRun_repeat_sub_periodicPoint_value`, `PeriodicShell.shellRun_repeat_unit_bound` |
 | Shell phases are all units exactly when the final output is a unit | `PeriodicShell.shellPrefixesUnit_iff` |
 | Raw words and shell schedules are conjugate, and every boundary-shifted benchmark schedule is one contextual raw rule | `PeriodicShell.shellRun_eq_wordAction`, `PeriodicShell.shellRawWord_benchmarkRelationShiftLeft`, `PeriodicShell.shellRawWord_benchmarkRelationShiftRight`, `PeriodicShell.shellRun_benchmarkRelationShift` |
 | Two distinct length-thirteen benchmark schedules induce the same affine map, preserve all guards in every context, and share a rational all-unit cycle | `PeriodicShell.benchmarkRelation_ne`, `PeriodicShell.shellRun_benchmarkRelationContext`, `PeriodicShell.benchmarkRelationContextGuard`, `PeriodicShell.benchmarkRelationCycle` |

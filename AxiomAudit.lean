@@ -659,6 +659,10 @@ open MatrixMortality
 #print axioms PeriodicShell.shellRun_kernelOddScheduleContext
 #print axioms PeriodicShell.kernelOddScheduleContextGuard
 #print axioms PeriodicShell.kernelOddScheduleCycle
+#print axioms PeriodicShell.shellRun_sub_periodicPoint
+#print axioms PeriodicShell.shellRun_repeat_sub_periodicPoint
+#print axioms PeriodicShell.shellRun_repeat_sub_periodicPoint_value
+#print axioms PeriodicShell.shellRun_repeat_unit_bound
 #print axioms RankTwoPunctuation.exists_pathProduct_eq_zero_iff_selfBridge_or_incidence
 #print axioms ReturnSquare.twoReturnDiscriminant_not_isSquare
 #print axioms ReturnSquare.positiveBridge_pair_ne_zero
