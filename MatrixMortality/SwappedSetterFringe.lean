@@ -1189,6 +1189,265 @@ private theorem allOnes_patternSource_highTail_false
       (by norm_num) (by norm_num [Nat.ModEq]) (by norm_num [Nat.ModEq])
       (by norm_num [Nat.ModEq])
 
+private theorem coprime_sevenTwentyNine_of_modEq_two {value : Nat}
+    (residue : value ≡ 2 [MOD 3]) : Nat.Coprime value 729 := by
+  have not_divisible : ¬3 ∣ value := by
+    intro divisibility
+    have zero := Nat.modEq_zero_iff_dvd.mpr divisibility
+    have impossible := residue.symm.trans zero
+    norm_num [Nat.ModEq] at impossible
+  have coprime := Nat.prime_three.coprime_pow_of_not_dvd (m := 6) not_divisible
+  norm_num at coprime ⊢
+  exact coprime
+
+private theorem targetFactor_eq_power_of_quotient_modEq_one
+    {width power quotient : Nat} {word : List Bool}
+    (target_fringe : TargetFringe width word)
+    (relation : swappedCode word + 1 ≡ 3 ^ power * quotient [MOD 3 ^ (power + 2)])
+    (quotient_unit : ¬3 ∣ quotient) (quotient_one : quotient ≡ 1 [MOD 9]) :
+    swappedCode word + 1 = 3 ^ power := by
+  have value_ne : swappedCode word + 1 ≠ 0 := by omega
+  rcases targetFringe_codeFactor target_fringe with zero_factor | pair_factor | cut_factor
+  · obtain ⟨zeros, _, _, factorization⟩ := zero_factor
+    have normalized_factorization :
+        swappedCode word + 1 = 3 ^ zeros * 1 := by simpa using factorization
+    have unique := powerFactor_of_modEq_twoMore value_ne relation normalized_factorization
+      (by norm_num) quotient_unit
+    rw [factorization, unique.1]
+  · obtain ⟨front, zeros, _, _, factorization⟩ := pair_factor
+    have unique := powerFactor_of_modEq_twoMore value_ne relation factorization
+      (three_not_dvd_nine_mul_add_five (swappedCode front)) quotient_unit
+    have factor_mod_five : 9 * swappedCode front + 5 ≡ 5 [MOD 9] :=
+      Nat.ModEq.modulus_mul_add
+    have impossible := quotient_one.symm.trans (unique.2.symm.trans factor_mod_five)
+    norm_num [Nat.ModEq] at impossible
+  · obtain ⟨_, factorization⟩ := cut_factor
+    have normalized_factorization :
+        swappedCode word + 1 = 3 ^ (width - 1) * 2 := by
+      rw [factorization]
+      ring
+    have unique := powerFactor_of_modEq_twoMore value_ne relation
+      normalized_factorization (by norm_num) quotient_unit
+    have factor_two : (2 : Nat) ≡ 2 [MOD 9] := Nat.ModEq.refl 2
+    have impossible := quotient_one.symm.trans (unique.2.symm.trans factor_two)
+    norm_num [Nat.ModEq] at impossible
+
+private theorem targetFactor_false_of_quotient_two_below_cut
+    {width power : Nat} {word : List Bool} (power_succ_lt_width : power + 1 < width)
+    (target_fringe : TargetFringe width word)
+    (relation : swappedCode word + 1 ≡ 3 ^ power * 2 [MOD 3 ^ (power + 2)]) : False := by
+  have value_ne : swappedCode word + 1 ≠ 0 := by omega
+  rcases targetFringe_codeFactor target_fringe with zero_factor | pair_factor | cut_factor
+  · obtain ⟨zeros, _, _, factorization⟩ := zero_factor
+    have normalized_factorization :
+        swappedCode word + 1 = 3 ^ zeros * 1 := by simpa using factorization
+    have unique := powerFactor_of_modEq_twoMore value_ne relation normalized_factorization
+      (by norm_num) (by norm_num)
+    have impossible := unique.2
+    norm_num [Nat.ModEq] at impossible
+  · obtain ⟨front, zeros, _, _, factorization⟩ := pair_factor
+    have unique := powerFactor_of_modEq_twoMore value_ne relation factorization
+      (three_not_dvd_nine_mul_add_five (swappedCode front)) (by norm_num)
+    have factor_mod_five : 9 * swappedCode front + 5 ≡ 5 [MOD 9] :=
+      Nat.ModEq.modulus_mul_add
+    have impossible := unique.2.symm.trans factor_mod_five
+    norm_num [Nat.ModEq] at impossible
+  · obtain ⟨_, factorization⟩ := cut_factor
+    have normalized_factorization :
+        swappedCode word + 1 = 3 ^ (width - 1) * 2 := by
+      rw [factorization]
+      ring
+    have unique := powerFactor_of_modEq_twoMore value_ne relation
+      normalized_factorization (by norm_num) (by norm_num)
+    omega
+
+private theorem targetFactor_false_of_power_quotient
+    {width power quotient : Nat} {word : List Bool}
+    (target_fringe : TargetFringe width word)
+    (relation : swappedCode word + 1 ≡ 3 ^ power * quotient [MOD 3 ^ (power + 2)])
+    (quotient_unit : ¬3 ∣ quotient)
+    (quotient_ne_one : ¬quotient ≡ 1 [MOD 9])
+    (quotient_ne_five : ¬quotient ≡ 5 [MOD 9])
+    (quotient_ne_two : ¬quotient ≡ 2 [MOD 9]) : False := by
+  have value_ne : swappedCode word + 1 ≠ 0 := by omega
+  rcases targetFringe_codeFactor target_fringe with zero_factor | pair_factor | cut_factor
+  · obtain ⟨zeros, _, _, factorization⟩ := zero_factor
+    have normalized_factorization :
+        swappedCode word + 1 = 3 ^ zeros * 1 := by simpa using factorization
+    have unique := powerFactor_of_modEq_twoMore value_ne relation normalized_factorization
+      (by norm_num) quotient_unit
+    exact quotient_ne_one unique.2.symm
+  · obtain ⟨front, zeros, _, _, factorization⟩ := pair_factor
+    have unique := powerFactor_of_modEq_twoMore value_ne relation factorization
+      (three_not_dvd_nine_mul_add_five (swappedCode front)) quotient_unit
+    have factor_mod_five : 9 * swappedCode front + 5 ≡ 5 [MOD 9] :=
+      Nat.ModEq.modulus_mul_add
+    exact quotient_ne_five (unique.2.symm.trans factor_mod_five)
+  · obtain ⟨_, factorization⟩ := cut_factor
+    have normalized_factorization :
+        swappedCode word + 1 = 3 ^ (width - 1) * 2 := by
+      rw [factorization]
+      ring
+    have unique := powerFactor_of_modEq_twoMore value_ne relation
+      normalized_factorization (by norm_num) quotient_unit
+    have factor_two : (2 : Nat) ≡ 2 [MOD 9] := Nat.ModEq.refl 2
+    exact quotient_ne_two (unique.2.symm.trans factor_two)
+
+private theorem allOnes_patternSource_oneTail_false
+    {β : Nat} (β_large : 10 ≤ β) {upper source target front : List Bool}
+    (front_phases : List Bool) (front_eq : front = spell fringeBlock front_phases)
+    (source_eq : source = front ++ [true, true] ++ List.replicate 1 false)
+    (upper_code : 2 * swappedCode upper + 1 = 9 * 3 ^ β)
+    (target_fringe : TargetFringe (β + 2) target)
+    (pole : PoleCongruence β upper source target) : False := by
+  have source_code_add := swappedCode_pair_zero_tail front 1
+  have source_code : swappedCode source = 27 * swappedCode front + 14 := by
+    rw [source_eq]
+    norm_num at source_code_add ⊢
+    omega
+  have source_lower : 2 ≤ swappedCode source := by omega
+  have base_relation := allOnesPole_relation source_lower upper_code pole
+  have relation :
+      (3 * 3 ^ β + 54 * swappedCode front + 23) * (swappedCode target + 1) ≡
+        3 * (54 * swappedCode front + 27) [MOD 3 ^ β] := by
+    rw [source_code] at base_relation
+    have coefficient_eq :
+        3 * 3 ^ β + 2 * (27 * swappedCode front + 14) - 5 =
+          3 * 3 ^ β + 54 * swappedCode front + 23 := by omega
+    have residue_eq :
+        3 * (2 * (27 * swappedCode front + 14) - 1) =
+          3 * (54 * swappedCode front + 27) := by omega
+    rw [coefficient_eq, residue_eq] at base_relation
+    exact base_relation
+  have sevenTwentyNine_dvd : 729 ∣ 3 ^ β :=
+    Nat.pow_dvd_pow 3 (show 6 ≤ β by omega)
+  have relation_sevenTwentyNine := relation.of_dvd sevenTwentyNine_dvd
+  have three_dvd_rho : 3 ∣ 3 ^ β := Nat.pow_dvd_pow 3 (show 1 ≤ β by omega)
+  obtain ⟨rhoUnit, rho_eq⟩ := three_dvd_rho
+  have factor_mod : 3 * 3 ^ β + 54 * swappedCode front + 23 ≡ 2 [MOD 3] := by
+    rw [rho_eq, show
+        3 * (3 * rhoUnit) + 54 * swappedCode front + 23 =
+          3 * (3 * rhoUnit + 18 * swappedCode front + 7) + 2 by ring]
+    exact Nat.ModEq.modulus_mul_add
+  have candidate :
+      (3 * 3 ^ β + 54 * swappedCode front + 23) *
+          (81 * (4 * swappedCode front + 2)) ≡
+        3 * (54 * swappedCode front + 27) [MOD 729] := by
+    rw [rho_eq, show
+        (3 * (3 * rhoUnit) + 54 * swappedCode front + 23) *
+            (81 * (4 * swappedCode front + 2)) =
+          729 * (rhoUnit * (4 * swappedCode front + 2) +
+            24 * swappedCode front * swappedCode front +
+            22 * swappedCode front + 5) +
+            3 * (54 * swappedCode front + 27) by ring]
+    exact Nat.ModEq.modulus_mul_add
+  have target_relation :
+      swappedCode target + 1 ≡ 81 * (4 * swappedCode front + 2) [MOD 729] := by
+    apply Nat.ModEq.cancel_left_of_coprime
+      (coprime_sevenTwentyNine_of_modEq_two factor_mod).symm.gcd_eq_one
+    exact relation_sevenTwentyNine.trans candidate.symm
+  have front_cases := swappedCode_complete_modNine_cases front_phases
+  rw [← front_eq] at front_cases
+  rcases front_cases with front_zero | front_two | front_five | front_eight
+  · have specialized_target := target_relation
+    rw [front_zero] at specialized_target
+    have normalized_target :
+        swappedCode target + 1 ≡ 3 ^ 4 * 2 [MOD 3 ^ (4 + 2)] := by
+      norm_num at specialized_target ⊢
+      exact specialized_target
+    exact targetFactor_false_of_quotient_two_below_cut (by omega) target_fringe
+      normalized_target
+  · have specialized_target := target_relation
+    rw [front_two] at specialized_target
+    have normalized_target :
+        swappedCode target + 1 ≡ 3 ^ 4 * 10 [MOD 3 ^ (4 + 2)] := by
+      norm_num at specialized_target ⊢
+      exact specialized_target
+    have target_code := targetFactor_eq_power_of_quotient_modEq_one target_fringe
+      normalized_target (by norm_num) (by norm_num [Nat.ModEq])
+    have specialized_relation := relation
+    rw [front_two] at specialized_relation
+    have relation_int :
+        ((3 * 3 ^ β + 131) * (swappedCode target + 1) : ℤ) ≡
+          405 [ZMOD (3 : ℤ) ^ β] := by
+      exact Int.natCast_modEq_iff.mpr specialized_relation
+    have difference_dvd := Int.dvd_neg.mpr relation_int.dvd
+    have target_code_int : (swappedCode target : ℤ) + 1 = 81 := by
+      exact_mod_cast target_code
+    have rho_dvd_whole :
+        ((3 : ℤ) ^ β) ∣ 243 * (3 : ℤ) ^ β + 10206 := by
+      convert difference_dvd using 1
+      rw [target_code_int]
+      norm_num
+      ring
+    have rho_dvd_bulk : ((3 : ℤ) ^ β) ∣ 243 * (3 : ℤ) ^ β := dvd_mul_left _ _
+    have rho_dvd_fixed : ((3 : ℤ) ^ β) ∣ 10206 := by
+      convert Int.dvd_sub rho_dvd_whole rho_dvd_bulk using 1
+      ring
+    have rho_dvd_fixed_nat : 3 ^ β ∣ 10206 := by
+      exact_mod_cast rho_dvd_fixed
+    exact pow_three_not_dvd_10206 (by omega) rho_dvd_fixed_nat
+  · have scaled := front_five.mul_left 4
+    have shifted := scaled.add (Nat.ModEq.refl 2)
+    have quotient_residue : 4 * swappedCode front + 2 ≡ 4 [MOD 9] := by
+      norm_num at shifted ⊢
+      exact shifted
+    have quotient_unit : ¬3 ∣ 4 * swappedCode front + 2 := by
+      intro divisibility
+      have zero := Nat.modEq_zero_iff_dvd.mpr divisibility
+      have residue_mod_three := quotient_residue.of_dvd (by norm_num : 3 ∣ 9)
+      have impossible := residue_mod_three.symm.trans zero
+      norm_num [Nat.ModEq] at impossible
+    have quotient_ne_one : ¬4 * swappedCode front + 2 ≡ 1 [MOD 9] := by
+      intro residue_one
+      have impossible := quotient_residue.symm.trans residue_one
+      norm_num [Nat.ModEq] at impossible
+    have quotient_ne_five : ¬4 * swappedCode front + 2 ≡ 5 [MOD 9] := by
+      intro residue_five
+      have impossible := quotient_residue.symm.trans residue_five
+      norm_num [Nat.ModEq] at impossible
+    have quotient_ne_two : ¬4 * swappedCode front + 2 ≡ 2 [MOD 9] := by
+      intro residue_two
+      have impossible := quotient_residue.symm.trans residue_two
+      norm_num [Nat.ModEq] at impossible
+    have normalized_target :
+        swappedCode target + 1 ≡
+          3 ^ 4 * (4 * swappedCode front + 2) [MOD 3 ^ (4 + 2)] := by
+      norm_num at target_relation ⊢
+      exact target_relation
+    exact targetFactor_false_of_power_quotient target_fringe normalized_target quotient_unit
+      quotient_ne_one quotient_ne_five quotient_ne_two
+  · have scaled := front_eight.mul_left 4
+    have shifted := scaled.add (Nat.ModEq.refl 2)
+    have quotient_residue : 4 * swappedCode front + 2 ≡ 7 [MOD 9] := by
+      norm_num at shifted ⊢
+      exact shifted
+    have quotient_unit : ¬3 ∣ 4 * swappedCode front + 2 := by
+      intro divisibility
+      have zero := Nat.modEq_zero_iff_dvd.mpr divisibility
+      have residue_mod_three := quotient_residue.of_dvd (by norm_num : 3 ∣ 9)
+      have impossible := residue_mod_three.symm.trans zero
+      norm_num [Nat.ModEq] at impossible
+    have quotient_ne_one : ¬4 * swappedCode front + 2 ≡ 1 [MOD 9] := by
+      intro residue_one
+      have impossible := quotient_residue.symm.trans residue_one
+      norm_num [Nat.ModEq] at impossible
+    have quotient_ne_five : ¬4 * swappedCode front + 2 ≡ 5 [MOD 9] := by
+      intro residue_five
+      have impossible := quotient_residue.symm.trans residue_five
+      norm_num [Nat.ModEq] at impossible
+    have quotient_ne_two : ¬4 * swappedCode front + 2 ≡ 2 [MOD 9] := by
+      intro residue_two
+      have impossible := quotient_residue.symm.trans residue_two
+      norm_num [Nat.ModEq] at impossible
+    have normalized_target :
+        swappedCode target + 1 ≡
+          3 ^ 4 * (4 * swappedCode front + 2) [MOD 3 ^ (4 + 2)] := by
+      norm_num at target_relation ⊢
+      exact target_relation
+    exact targetFactor_false_of_power_quotient target_fringe normalized_target quotient_unit
+      quotient_ne_one quotient_ne_five quotient_ne_two
+
 theorem swappedCode_tag_b_add_two (β : Nat) :
     swappedCode (tagCode β .b) + 2 = 6 * 3 ^ β := by
   rw [tagCode]
