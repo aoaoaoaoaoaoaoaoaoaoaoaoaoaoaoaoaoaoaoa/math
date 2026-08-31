@@ -49,6 +49,8 @@ height(state i) < height(state (i+1)),
 nor any weaker eventual monotonicity. A path may escape above `H`, return
 below `H`, and escape again. The theorem only prevents more than `(2H+1)²`
 distinct prefix states from lying inside that cube in total.
+`D2-O13` subsequently packages this finite-return consequence as convergence
+of height to infinity.
 
 The square is a containing count rather than a sharp primitive-ray count. It
 includes zero, noncoprime pairs, and both signs. Sharpening the constant would
@@ -89,7 +91,7 @@ suppression, reference PDF, or external literature premise was added.
 | `(2H+1)²<N` forces some state above `H` | promotion | Lean-checked exact contrapositive |
 | A known hit transports trivial source stabilizer to the target | promotion | Lean-checked conjugation |
 | Prefix height grows monotonically | rejected | only the finite-family maximum is controlled |
-| Height escape is permanent | open | later returns are not bounded |
+| The first height escape is permanent | rejected | later finite returns remain possible |
 | General `UCB₂(S)` is decidable | open | no complete unbounded-path invariant is supplied |
 
 ## Master Delta
