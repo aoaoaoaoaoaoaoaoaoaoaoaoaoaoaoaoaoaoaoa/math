@@ -947,8 +947,18 @@ The live cut is therefore the intersection of the encoded-entry orbit with compl
 inverse branches, or a proved reachability-sound quotient of those branches. Neither a fixed
 congruence graph nor the first unbounded cylinder retains enough information.
 
-The immediate ternary question is which other positive valuation-one discrepancies survive its
-suffix sieve without already certifying source halting.
+The positive depth-one ternary question is now closed at its exact witness interface.
+[`MM-S42`](SALVAGE.md#mm-s42-swapped-positive-depth-one-extinction) reduces every regular
+valuation-one fringe after one positive distinguished-boundary transfer to four pairs. The two
+outer discrepancies are the impossible `Δ₁` and `Δ₃` Neary residuals; both middle discrepancies
+equal `H`, so the exact pole forces equality of the upper and lower swapped codes and hence source
+halting. The compiler width `β=10·period` lies safely above the analytic threshold `β≥6`.
+
+This does not construct a `PositiveDepthOnePoleWitness` from an arbitrary raw orbit. The witness
+retains physical target-suffix provenance, while the terminal proof consumes only its target
+grammar, pole congruence, exact factorizations, and exact pole. The surviving ternary questions
+therefore begin at genuinely multi-transfer carriers and at the separate singleton `β`-shell,
+not at another refinement of the four one-transfer fringe candidates.
 Exact bidirectional diagnostics for the ternary swap at `β=3`, body `bbcc`, exclude every
 false-pole word of at most six projective blocks when each regular block has
 role length at most three; this is computational evidence only.

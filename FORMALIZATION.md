@@ -1382,12 +1382,18 @@ The setter-projective audit now also exposes a kernel-friendly carry theorem:
 | [`MM-S08`](SALVAGE.md#mm-s08-swapped-distinguished-boundary-beta-shell) | swapped carry classification, bounded upper-prefix normal form, and complete exclusion of both distinguished-boundary single-erasure poles |
 | [`MM-S09`](SALVAGE.md#mm-s09-canonical-swapped-residue-cannot-hit-a-pole) | canonical discrepancy formula, pole-ratio equation, modulo-`ρ` suffix extraction, and final-erasure contradiction |
 | [`MM-S10`](SALVAGE.md#mm-s10-swapped-target-suffix-sieve) | `β+2`-digit pole congruence, swapped lower-suffix grammar, and exclusion of `Δ=ρ−1` |
+| [`MM-S42`](SALVAGE.md#mm-s42-swapped-positive-depth-one-extinction) | exact positive-depth-one witness, complete four-fringe classification, `Δ₁`/`Δ₃` residual exclusion, terminal-discrepancy collapse, and compiler-width specialization |
 
-These records narrow the missing arbitrary-depth theorem but do not prove
-projective avoidance. Their reconstruction is
+`MM-S42` closes the positive valuation-one one-transfer branch only after a
+`PositiveDepthOnePoleWitness` has been assembled. It does not construct that witness from a raw
+projective orbit; its suffix equality records physical provenance but is no longer needed after
+the target grammar and pole congruence enter the proof. These records therefore narrow the
+missing arbitrary-depth theorem but do not prove projective avoidance. Their reconstruction is
 [`audits/setter-projective-peeling-2026-07-25.md`](audits/setter-projective-peeling-2026-07-25.md#centered-integer-carry);
 the swapped construction is reconstructed in
 [`audits/m53-swapped-setter-2026-07-25.md`](audits/m53-swapped-setter-2026-07-25.md);
+the depth-one closure is audited in
+[`audits/m53-swapped-positive-depth-one-extinction-2026-08-31.md`](audits/m53-swapped-positive-depth-one-extinction-2026-08-31.md);
 promotion remains in
 [#6](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
 

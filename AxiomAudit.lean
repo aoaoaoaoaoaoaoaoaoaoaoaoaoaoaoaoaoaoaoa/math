@@ -77,6 +77,9 @@ open MatrixMortality
 #print axioms nearyMortality_ordinary_upperTriangular
 #print axioms nearyMortality_terminal_ne_zero
 #print axioms nearyMortality_terminal_rank_eq_one
+#print axioms SwappedSetterFringe.poleCongruence_four_fringe_pairs
+#print axioms SwappedSetterFringe.positiveDepthOnePoleWitness_halts
+#print axioms SwappedSetterFringe.compilerPositiveDepthOnePoleWitness_halts
 #print axioms sidePcpMatrix_eq_conjugate
 #print axioms rule_erase_agree_on_upperSide
 #print axioms controllerMatrix_mulVec_controllerVector
