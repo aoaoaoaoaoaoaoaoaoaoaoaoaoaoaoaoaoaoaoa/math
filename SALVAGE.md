@@ -134,6 +134,7 @@ file owns the mathematical stock.
 | [`MM-S33`](#mm-s33-leading-d_b-support-saturator-extinction) | obstruction | the full-gap-saturating leading-`D_b` erasure family cannot be the first transition from a lawful two-`c` raw head to another multi-role pole | formalized | active |
 | [`MM-S36`](#mm-s36-complete-hidden-branch-separation) | structure theorem | the first-cylinder collision pair separates on complete same-tail addresses, while any cross-tail collision forces one exact asymmetric shell | formalized | active |
 | [`MM-S37`](#mm-s37-decimal-three-shape-frontier-extinction) | obstruction | all three role shapes in the swapped ternary first-multi-transfer frontier are empty in the decimal carrier | formalized | active |
+| [`MM-S35`](#mm-s35-first-multi-transfer-trichotomy) | structure theorem and obstruction | every first swapped-ternary multi-transfer pole in the expected shells passes through one of three exact all-`c`/singleton shapes | formalized | active |
 | [`R32-S01`](#r32-s01-split-return-normal-form) | structure theorem | rank-two cuts reduce one-unit binary mortality to a `2 × 2` return recurrence | formalized | graduated |
 | [`R32-S02`](#r32-s02-two-plane-edge-square) | structure theorem | two rank-two generators are a two-vertex square of `2 × 2` edges | formalized | graduated |
 | [`R32-O01`](#r32-o01-rank-one-profile-collapse) | obstruction | a rank-one generator reduces mortality to order-at-most-three scalar recurrence zeros | audited | stock |
@@ -4514,6 +4515,73 @@ through `entrySaturationWidth_three_le`, `gapFactor_dvd_entrySaturationLowerCode
 
 **Next:** decide support saturation in the remaining rule-bearing or `D_b`-containing first
 grammar, then extend the reachability cut from raw heads to generalized product residuals.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S35: First multi-transfer trichotomy
+
+**Kind:** structure theorem and obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+For the swapped ternary setter, let `m(z)` be the upper spelling length of one role block. A
+singleton erasure has pole depth `β`; every multi-role block has pole depth one. The exact upper
+grammar is
+
+```text
+m(z)=|z|+(β+1)·(number of b roles in z).                 (1)
+```
+
+Consequently every role block with `m(z)<β+2` consists entirely of `c` roles and has
+`|z|=m(z)`.
+
+The centered transfer is
+
+```text
+X'=3^mY,       Y'=CY+KVX.                                 (2)
+```
+
+Away from equal depths, the two summands in `Y'` have distinct `3`-adic valuations, so a later
+pole forces the exact length balance
+
+```text
+m(middle)=depth(target)+min(depth(middle),depth(first)).   (3)
+```
+
+The only equal-depth case permitted by the pole shells is a singleton middle block at depth
+`β`. Its normalized denominator factors as `3^β` times a unit congruent to two modulo three;
+neither singleton upper length can satisfy the next pole balance. Thus (3) is exhaustive.
+
+For `β≥3` and a nontrivial first depth, every first multi-transfer pole therefore has one of
+exactly three necessary shapes:
+
+```text
+middle letters = cc,          target multi-role;
+middle letters = c^(β+1),     target singleton;
+first letters = cc, middle = D_b, target singleton.       (4)
+```
+
+**Scope:** (4) is a necessary trichotomy under the already proved physical coefficient, lower-
+code unit, and expected-shell hypotheses. It neither proves that any listed shape is reachable
+nor excludes later poles after a listed transition. It belongs to the swapped ternary candidate
+`MM-M04`; the decimal two-prime carrier has separate, stronger extinction theorems. No full
+`M₅(3)` conclusion follows.
+
+**Use:** replace unrestricted first multi-transfer search in `MM-M04` by the three shapes in
+(4). The first attack should compose their literal codes with the suffix classifier and the
+distinguished-boundary terminal-match theorem.
+
+**Formalization:**
+[`MatrixMortality/SwappedSetterMultitransfer.lean`](MatrixMortality/SwappedSetterMultitransfer.lean),
+through `firstMultiTransfer_trichotomy_of_pole`; the nonresonant and resonant components are
+`firstMultiTransfer_trichotomy_of_nonresonant_pole` and `resonantSingleton_pole_false`.
+
+**Artifact:**
+[`audits/m53-first-multitransfer-trichotomy-2026-08-31.md`](audits/m53-first-multitransfer-trichotomy-2026-08-31.md).
+
+**Next:** decide the three literal shapes in (4), retaining complete suffix information rather
+than only the `3`-adic shell.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).

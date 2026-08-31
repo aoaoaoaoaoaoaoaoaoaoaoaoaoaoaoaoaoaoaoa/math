@@ -1031,6 +1031,14 @@ positive-depth cross-prime gap. The live cut is the intersection of this exact s
 of suffix carriers reachable from the encoded entry, or an explicit branch-switch cascade
 realizing it.
 
+The swapped ternary first multi-transfer branch is no longer unrestricted.
+[`MM-S35`](SALVAGE.md#mm-s35-first-multi-transfer-trichotomy) proves that every expected-shell
+pole after the first transfer passes through one of three exact role shapes: `cc` into a
+multi-role target, `c^(β+1)` into a singleton, or `cc` then the literal singleton `D_b` into a
+singleton. The only equal-depth singleton branch is impossible by an exact normalized-unit
+calculation. These are necessary shapes, not witnesses; attack their complete suffix equations
+before extending the carry to greater depth.
+
 The immediate ternary question is which other positive valuation-one discrepancies survive its
 suffix sieve without already certifying source halting.
 Exact bidirectional diagnostics for the ternary swap at `β=3`, body `bbcc`, exclude every

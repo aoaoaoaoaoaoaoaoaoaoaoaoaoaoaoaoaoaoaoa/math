@@ -1476,6 +1476,7 @@ The setter-projective audit now also exposes a kernel-friendly carry theorem:
 | [`MM-S08`](SALVAGE.md#mm-s08-swapped-distinguished-boundary-beta-shell) | swapped carry classification, bounded upper-prefix normal form, and complete exclusion of both distinguished-boundary single-erasure poles |
 | [`MM-S09`](SALVAGE.md#mm-s09-canonical-swapped-residue-cannot-hit-a-pole) | canonical discrepancy formula, pole-ratio equation, modulo-`ρ` suffix extraction, and final-erasure contradiction |
 | [`MM-S10`](SALVAGE.md#mm-s10-swapped-target-suffix-sieve) | `β+2`-digit pole congruence, swapped lower-suffix grammar, and exclusion of `Δ=ρ−1` |
+| [`MM-S35`](SALVAGE.md#mm-s35-first-multi-transfer-trichotomy) | exact upper-length grammar, nonresonant denominator shell, later-pole length balance, resonant singleton unit obstruction, and three-shape first multi-transfer gate |
 
 These records narrow the missing arbitrary-depth theorem but do not prove
 projective avoidance. Their reconstruction is
@@ -1641,6 +1642,17 @@ multi-to-multi case. `peeledMultiToSingleton_beta_add_three_le` kills the `(β+1
 multi-to-singleton case. `peeledSingletonToSingleton_impossible` kills the `D_b`-to-singleton
 case without its preceding two-`c` hypothesis. The theorem does not assert that the ternary
 trichotomy classifies decimal orbits; longer generalized decimal carriers remain open.
+
+Record [`MM-S35`](SALVAGE.md#mm-s35-first-multi-transfer-trichotomy) returns to the swapped
+ternary candidate and formalizes the first genuinely multi-transfer cut. `upperLength_eq` counts
+one symbol per role and one extra block of `β+1` symbols per `b` role. Together with the two pole
+shells, `pole_length_balance` reduces every nonresonant later pole to one of three shapes:
+`cc` before a multi-role target, `c^(β+1)` before a singleton, or `cc` followed by the literal
+singleton `D_b` before a singleton. `resonantSingleton_nextY_hasValue` proves that the only
+equal-depth branch creates no additional carry, and `resonantSingleton_pole_false` excludes its
+later pole. `firstMultiTransfer_trichotomy_of_pole` packages both branches for physical swapped
+codes. The three surviving shapes remain reachability problems; the theorem does not settle
+`M₅(3)`.
 
 Record [`MM-S21`](SALVAGE.md#mm-s21-bounded-decimal-suffix-cycles) closes the fixed-precision
 suffix-descent lane. `DecimalSetterSuffix.cycleDefect_lift` gives an explicit one-digit lift for
