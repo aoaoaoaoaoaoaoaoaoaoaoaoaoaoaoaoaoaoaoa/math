@@ -258,12 +258,13 @@ file owns the mathematical stock.
 | [`D2-S02`](#d2-s02-monotone-affine-path-form) | structure theorem | normalized affine words form monotone exponent paths | audited | stock |
 | [`D2-S03`](#d2-s03-two-place-shell-walls) | structure theorem | the benchmark shell has exact `2`/`3` cancellation walls and a finite simultaneous-unit wait interval | formalized | active |
 | [`D2-D01`](#d2-d01-projectively-unimodular-stratum) | decidable stratum | projectively unimodular hard-core instances are decidable | audited | stock |
-| [`D2-D02`](#d2-d02-invariant-pair-stratum) | decidable stratum | invariant projective pairs reduce to abelian-by-`C₂` reachability | reported | active |
+| [`D2-D02`](#d2-d02-invariant-pair-stratum) | decidable stratum | invariant projective pairs reduce to effective multiplicative-subgroup membership | audited | graduated |
 | [`D2-D03`](#d2-d03-common-multiplier-stratum) | decidable stratum | rational affine maps with one multiplier are decidable under regular control | reported | active |
 | [`D2-D04`](#d2-d04-single-base-affine-stratum) | decidable stratum | rational-subset incidence in `G_q^±` is decidable | reported | active |
 | [`D2-D05`](#d2-d05-prescribed-translation-count) | decidable stratum | prescribed translated-letter count is decidable by rational-base carries | audited | stock |
 | [`D2-D06`](#d2-d06-private-prime-peeling) | decidable stratum | a private multiplier prime decides every noncritical endpoint shell | audited | stock |
 | [`D2-D07`](#d2-d07-bounded-valuation-orthants) | decidable stratum | bounded cooriented affine families have finite successful state spaces | audited | stock |
+| [`D2-D08`](#d2-d08-rational-affine-group-orbits) | decidable stratum | every finitely generated rational affine group orbit reduces to a finite translation quotient or multiplier membership | audited; formalized core | graduated |
 | [`D2-M01`](#d2-m01-benchmark-critical-shell) | partial mechanism | the mixed-prime benchmark reduces generically to one guarded `5`-adic shell | audited | active |
 | [`D2-O01`](#d2-o01-canonical-collatz-reachability-is-not-automatic) | obstruction | full generalized-Collatz reachability is not synchronously recognizable in its canonical base | external theorem | active |
 | [`D2-O02`](#d2-o02-critical-shell-periodic-saturation) | obstruction and rewrite seed | every nonempty finite wait schedule has a rational all-unit cycle; normalized nonfreeness persists under every generator scaling, while its odd family is a two-seed cancellative pump and the positive finite basis is complete only through length 30 | formalized core; audited strengthening | active |
@@ -1748,7 +1749,7 @@ across the letter boundary.
 ### MM-M01: Off-diagonal companion interface
 
 **Kind:** partial mechanism  
-**Evidence:** audited  
+**Evidence:** audited
 **Disposition:** stock
 
 For `g(w)=λB_wd`, invertible `B_a`, and `α=λd≠0`, define
@@ -10592,23 +10593,28 @@ This includes rational scalar multiples of unimodular matrices.
 
 ### D2-D02: Invariant-pair stratum
 
-**Kind:** decidable stratum  
-**Evidence:** reported  
-**Disposition:** active
+**Kind:** decidable stratum
+
+**Evidence:** audited
+
+**Disposition:** graduated
 
 If the generated projective group preserves an unordered pair of distinct algebraic points,
 conjugation reduces it to multiplication and inversion in a finitely generated subgroup of a
-number field of degree at most two. The report reduces rational point reachability to effective
-semilinear membership in an abelian-by-`C₂` group.
+number field of degree at most two. In the coordinate `θ(z)=(z-α)/(z-β)`, every generator acts
+as `θ↦χθ` or `θ↦χ/θ`. Splitting swap parity reduces reachability to membership in a finitely
+generated multiplicative subgroup. Rational sign and prime valuations decide the split case;
+principal-ideal valuations and the rank-at-most-one quadratic unit group decide the nonsplit
+case.
 
-**Scope:** the recognition algorithm and effective semilinearity require independent checking.
-The claim does not cover a group with only one common fixed point.
+**Scope:** this is a group-orbit theorem and uses inverses. It does not decide positive-semigroup
+reachability. Common-fixed-point groups are covered separately by [`D2-D08`](#d2-d08-rational-affine-group-orbits).
 
 **Use:** separate elementary projective groups from the non-elementary residue before invoking
 height growth or valuation universality.
 
-**Next:** audit the invariant-pair recognition cases and the positive-semigroup reachability
-step.
+**Artifact:**
+[`rational-elementary-group-orbits-2026-08-30.md`](audits/rational-elementary-group-orbits-2026-08-30.md).
 
 ### D2-D03: Common-multiplier stratum
 
@@ -10785,6 +10791,41 @@ common-multiplier and single-base records.
 [`bournez-kurganskyy-potapov-2018-piecewise-affine-reachability.md`](references/bournez-kurganskyy-potapov-2018-piecewise-affine-reachability.md).
 The nondeterministic regular-control theorem is proved in
 [`audits/dimension-two-affine-peeling-2026-07-25.md`](audits/dimension-two-affine-peeling-2026-07-25.md#bounded-valuation-orthants).
+
+### D2-D08: Rational affine group orbits
+
+**Kind:** decidable stratum
+
+**Evidence:** audited; formalized core
+
+**Disposition:** graduated
+
+For generators `fᵢ(z)=aᵢz+bᵢ`, put `R=ℤ[aᵢ±¹]=ℤ[S⁻¹]`. A basis of the multiplier-relation
+lattice, together with the pair commutators, gives finitely many pure translations whose
+`R`-span is exactly
+
+```text
+N={t∈ℚ : (z↦z+t)∈⟨fᵢ⟩}=nR.
+```
+
+For `T=R-span{p,q,bᵢ}=tR`, if `N≠0` then `T/N` is an explicit finite cyclic quotient after
+removing the `S`-unit part of `n/t`. A finite orbit search there is exact: a residue hit differs
+from `q` by a literal translation in the group. If `N=0`, the multiplier projection is
+injective, the group is abelian, and every nonidentity element shares one rational fixed point;
+reachability away from it is membership in `⟨aᵢ⟩≤ℚ×`, decided by sign and valuation lattices.
+Lean proves multiplier stability of `N`, exact quotient-hit correction, commutativity for
+`N=0`, and the common-fixed-point theorem.
+
+**Scope:** arbitrary positive products do not contain the inverse conjugates used to generate
+`N`. This theorem therefore decides rational affine **group** orbits, not affine-semigroup
+reachability. Together with `D2-D02`, it removes every elementary branch of group-`PI₂`.
+
+**Use:** restrict the `G3-O23` group-cover survivor to a genuinely non-elementary subgroup of
+`PGL₂(ℚ)`. For the mixed-prime pair `D(z)=2z/3`, `T(z)=3z/5+1`, the commutator translates by
+`-1/3`, so `N=ℤ[1/30]` and the group quotient is vacuous.
+
+**Artifacts:** [`AffineGroupOrbit.lean`](MatrixMortality/AffineGroupOrbit.lean) and
+[`rational-elementary-group-orbits-2026-08-30.md`](audits/rational-elementary-group-orbits-2026-08-30.md).
 
 ### D2-M01: Benchmark critical shell
 
