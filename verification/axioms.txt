@@ -1633,6 +1633,39 @@
  Classical.choice,
  Quot.sound]
 'MatrixMortality.MixedPrimeDebt.lowerFixedWallPair_next_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.MixedPrimeDebt.realTrapBandPoint_upperNormalizedMantissa' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.realTrapBandPoint_middleNormalizedMantissa' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.upperCenteredNumerator_twoValue_of_four_dvd_denominator' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.middleCenteredNumerator_twoValue_of_four_dvd_denominator' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.upperNormalizedMantissa_twoValue_of_four_dvd_denominator' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.middleNormalizedMantissa_twoValue_of_four_dvd_denominator' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.lowerNormalizedMantissa_twoValue_of_four_dvd_denominator' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.upperNormalizedMantissa_four_dvd_successorDenominator' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.middleNormalizedMantissa_four_dvd_successorDenominator' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.lowerNormalizedMantissa_four_dvd_successorDenominator' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.lowerWall_outgoing_twoAdic_trichotomy' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.MixedPrimeDebt.exists_shellStep_realTrap_predecessor' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]

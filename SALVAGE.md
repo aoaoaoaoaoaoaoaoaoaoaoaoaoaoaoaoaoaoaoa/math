@@ -259,6 +259,7 @@ file owns the mathematical stock.
 | [`D2-S08`](#d2-s08-twelve-class-target-depth-collapse) | structure theorem | guarded nonempty real-trap reachability reduces to twelve canonical target-depth classes while preserving the exact mantissa | formalized | active |
 | [`D2-S09`](#d2-s09-centered-lower-mantissa-recurrence) | structure theorem | the exact reverse mantissa address has one centered lower branch whose sole secondary cancellation wall is `v₂(b)=1` | formalized | active |
 | [`D2-S10`](#d2-s10-finite-secondary-wall-nucleus) | structure theorem | every consecutive unit secondary-wall orbit lies in a target-dependent finite rectangle and is eventually periodic | formalized | active |
+| [`D2-S11`](#d2-s11-absorbing-four-divisible-cone) | structure theorem | reduced mantissas with denominator divisible by four remain in that cone under every normalized reverse branch | formalized | active |
 | [`D2-D01`](#d2-d01-projectively-unimodular-stratum) | decidable stratum | projectively unimodular hard-core instances are decidable | audited | stock |
 | [`D2-D02`](#d2-d02-invariant-pair-stratum) | decidable stratum | invariant projective pairs reduce to abelian-by-`C₂` reachability | reported | active |
 | [`D2-D03`](#d2-d03-common-multiplier-stratum) | decidable stratum | rational affine maps with one multiplier are decidable under regular control | reported | active |
@@ -11805,6 +11806,74 @@ secondary wall.
 **Next:** classify exits from the wall through the rigid two-adic strata and their possible
 returns, then combine those excursion types with the three exact predecessor branches and the
 twelve canonical depth classes.
+
+### D2-S11: Absorbing four-divisible cone
+
+**Kind:** structure theorem and no-return stratum
+**Evidence:** formalized
+**Disposition:** active
+
+The upper and middle predecessors have exact displayed-depth mantissas
+
+```text
+U_n(a/b) = 3^n(5a−2b)/(3·2^n b),
+M_n(a/b) = 2·3^n(5a−3b)/(9·2^n b).
+```
+
+Lean verifies `realTrapBandPoint n (U_n(a/b))=a/(2b)` and
+`realTrapBandPoint n (M_n(a/b))=a/(3b)`. Together with the lower coordinate of
+[`D2-S09`](#d2-s09-centered-lower-mantissa-recurrence), these give exact coordinates for all
+three reverse branches.
+
+Suppose `gcd(a,b)=1` and `4∣b`. Then `a` is odd, so
+
+```text
+v₂(5a−2b)=0,   v₂(5a−3b)=0,   v₂(10a−9b)=1.
+```
+
+Consequently the three outgoing normalized mantissas have exact values
+
+```text
+upper:   −n−v₂(b),
+middle:   1−n−v₂(b),
+lower:    1−(n−1)−v₂(b).
+```
+
+At an actual upper, middle, or lower depth these values are at most `−2`. Lean proves the
+representation-independent consequence: if any outgoing mantissa is written as `a'/b'` with
+`b'≠0`, then `4∣b'`. Thus the rational cone `v₂≤−2`, equivalently reduced denominator divisible
+by four, is absorbing under every reverse branch and cannot return to the secondary wall.
+
+For a wall source `a/(2c)`, the lower output splits exactly according to
+`r=v₂(5a−9c)`:
+
+```text
+r<n−2  ⇒ output value ≤−2,
+r=n−2  ⇒ output value =−1,
+r>n−2  ⇒ output value ≥0.
+```
+
+The first case enters the absorbing cone; the second is the finite nucleus of
+[`D2-S10`](#d2-s10-finite-secondary-wall-nucleus). Only the over-cancellation case can leave to
+an odd reduced denominator and later return.
+
+**Scope:** the theorem decides every excursion once it enters the four-divisible cone. It does
+not classify upper steps that remain on the wall or the over-cancellation transition into an odd
+denominator.
+
+**Artifact:** `MixedPrimeDebt.realTrapBandPoint_upperNormalizedMantissa`,
+`MixedPrimeDebt.realTrapBandPoint_middleNormalizedMantissa`, the three
+`*NormalizedMantissa_twoValue_of_four_dvd_denominator` theorems, the three
+`*NormalizedMantissa_four_dvd_successorDenominator` theorems, and
+`MixedPrimeDebt.lowerWall_outgoing_twoAdic_trichotomy` in
+[`MixedPrimeRealTrapExcursion.lean`](MatrixMortality/MixedPrimeRealTrapExcursion.lean).
+
+**Use:** terminate every reverse branch after its reduced denominator acquires a second factor
+of two. Any recurrent component meeting the secondary wall must remain on the wall or alternate
+through the nonnegative two-adic cone.
+
+**Next:** classify wall-preserving upper runs and odd-denominator returns; an effective global
+quotient must control both rather than revisit the absorbing cone.
 
 ### D2-O09: Guarded real-pole reset
 
