@@ -5015,6 +5015,63 @@ raw-head extinction through `secondBErase_rawHead_shell_impossible`.
 **Next:** decide the shallower third-position perturbation, where the old five-adic depth can be
 changed, or switch to the exact mixed-prime leading coefficient of that perturbation.
 
+### MM-S42: Swapped positive depth-one extinction
+
+**Kind:** structure theorem and obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+At a swapped ternary valuation-one target pole, put
+
+```text
+ρ=3^β,       μ=2ρ−1,       D=ρ−2,       H=5ρ−1.
+```
+
+After one positive distinguished-boundary transfer, the exact pole equation for preceding
+fringe discrepancy `Δ` and prospective upper and lower codes `P,V` is
+
+```text
+ΔDP=H(3μ−Δ)V.
+```
+
+For `β≥6`, the regular upper, source, and target fringe languages and the pole congruence leave
+exactly four preceding fringe pairs:
+
+```text
+(111·0^(β−1), ε),       Δ=14·3^(β−1)−1,
+(11·0^β, ε),            Δ=H,
+(tag_b, 0^β),           Δ=H,
+(tag_b, 0^(β−1)),       Δ=17·3^(β−1)−1.
+```
+
+The first and fourth candidates are the stable `Δ₁` and `Δ₃` Neary residuals; body-length
+divisibility excludes both. In either middle candidate, `D+H=3μ`, so the exact pole reduces to
+`DHP=DHV`. Nonzero cancellation gives `P=V`; injectivity of the swapped ternary code then gives
+a genuine terminal match and `TagHaltsFrom`. Neary's emitted width is `β=10·period`, so every
+positive-period compiler instance lies strictly inside the analytic range.
+
+**Scope:** the compiler theorem consumes a fully assembled `PositiveDepthOnePoleWitness`; it
+does not derive that structure from an arbitrary raw projective orbit. Its `targetSuffix_eq`
+field records physical suffix provenance, but the extinction proof no longer uses that equality
+after `targetFringe` and `poleCongruence` are supplied. The theorem closes the valuation-one pole
+immediately after one positive distinguished-boundary transfer. It does not classify singleton
+`β`-shell targets or identify a later multi-transfer carrier with this raw fringe witness, and
+therefore does not settle `M₅(3)`.
+
+**Use:** delete the complete positive one-transfer valuation-one branch. Future swapped-ternary
+attacks must start from a genuinely multi-transfer carrier or prove the missing carrier-to-witness
+assembly; repeating the four-candidate fringe census cannot improve the master frontier.
+
+**Formalization:** [`MatrixMortality/SwappedSetterPositiveDepthOne.lean`](MatrixMortality/SwappedSetterPositiveDepthOne.lean),
+through `poleCongruence_four_fringe_pairs`, `positiveDepthOnePoleWitness_halts`, and
+`compilerPositiveDepthOnePoleWitness_halts`.
+
+**Artifact:**
+[`audits/m53-swapped-positive-depth-one-extinction-2026-08-31.md`](audits/m53-swapped-positive-depth-one-extinction-2026-08-31.md).
+
+**Next:** assemble the analogous witness from the first surviving multi-transfer carriers and
+classify the separate singleton-shell targets.
+
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
 

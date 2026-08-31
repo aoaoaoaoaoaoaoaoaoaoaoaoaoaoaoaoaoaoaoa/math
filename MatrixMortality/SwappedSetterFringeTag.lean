@@ -1,4 +1,4 @@
-import MatrixMortality.SwappedSetterFringe
+import MatrixMortality.SwappedSetterFringeTerminal
 import Mathlib.NumberTheory.Padics.PadicVal.Basic
 
 /-!

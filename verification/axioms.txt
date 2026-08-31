@@ -102,6 +102,15 @@
 'MatrixMortality.nearyMortality_ordinary_upperTriangular' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.nearyMortality_terminal_ne_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.nearyMortality_terminal_rank_eq_one' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.SwappedSetterFringe.poleCongruence_four_fringe_pairs' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SwappedSetterFringe.positiveDepthOnePoleWitness_halts' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SwappedSetterFringe.compilerPositiveDepthOnePoleWitness_halts' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.sidePcpMatrix_eq_conjugate' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.rule_erase_agree_on_upperSide' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.controllerMatrix_mulVec_controllerVector' depends on axioms: [propext, Classical.choice, Quot.sound]
