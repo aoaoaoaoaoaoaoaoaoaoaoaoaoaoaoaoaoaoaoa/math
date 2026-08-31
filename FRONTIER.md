@@ -1011,6 +1011,15 @@ singleton gate disappears only after the complete gap divides the carrier numera
 front is now whether reachable lower codes can install that full gap, or otherwise pass the
 canonical quotient congruence together with the remaining suffix semantics.
 
+[`MM-S36`](SALVAGE.md#mm-s36-complete-hidden-branch-separation) sharpens the first-cylinder
+collision. The complete `R_bR_cD_b` and `D_bR_cD_b` inverse branches cannot collide at a common
+tail: their difference has exact shell `(ℓ+4,ℓ+5)`, and every common outer word shifts both
+depths equally. Equality with different later tails forces their difference into the unique shell
+`(ℓ−2β+1,ℓ−2β+2)`. Emitted bodies have `ℓ≥2β`, so every hidden-phase switch injects a
+positive-depth cross-prime gap. The live cut is the intersection of this exact shell with pairs
+of suffix carriers reachable from the encoded entry, or an explicit branch-switch cascade
+realizing it.
+
 The immediate ternary question is which other positive valuation-one discrepancies survive its
 suffix sieve without already certifying source halting.
 Exact bidirectional diagnostics for the ternary swap at `β=3`, body `bbcc`, exclude every

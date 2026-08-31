@@ -155,6 +155,7 @@ import MatrixMortality.DecimalSetterFiveDepth
 import MatrixMortality.DecimalSetterSuffix
 import MatrixMortality.DecimalSetterAncestry
 import MatrixMortality.SwappedSetterCompiler
+import MatrixMortality.DecimalSetterBranchSeparation
 import MatrixMortality.SchottkyPunctuation
 import MatrixMortality.TwoStateObstructions
 import MatrixMortality.ForcedRuleCCompanion
