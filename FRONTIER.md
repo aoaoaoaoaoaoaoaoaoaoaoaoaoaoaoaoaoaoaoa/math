@@ -1021,10 +1021,19 @@ leading swapped prefixes exclude each case, with exact induction through an init
 Thus `firstMultiTransfer_pole_false` empties the expected-shell first multi-transfer interface
 for `β≥6`.
 
-The remaining ternary obligation is the **global earliest-pole reduction**: prove that every
-arbitrary surviving swapped product not already removed by the distinguished-boundary theorems
-enters this expected-shell first-multi interface, or classify the missing initial/shell
-constructor. `MM-S51` does not by itself prove projective avoidance.
+[`MM-S55`](SALVAGE.md#mm-s55-physical-role-block-shell-completion) proves that the shell
+hypotheses are automatic. Every physical role block supplies its expected depth, exact
+coefficient valuation, and lower-code unit; every first role block except literal `D_c` has
+upper length greater than one. Consequently `physicalFirstMultiTransfer_pole_false` needs only
+three physical role blocks, the compiler envelope, and the exact centered two-step pole
+equation.
+
+The remaining ternary obligation is the **global earliest-pole reduction**. A later earliest
+pole begins from a general centered fold state, not the special first-transfer state consumed by
+`MM-S55`; there is no lawful sliding-window reinitialization. Prove that every arbitrary
+surviving fold either reaches the distinguished state and terminal equality or enters a
+forbidden physical interface, or isolate the missing history constructor. None of
+`MM-S51`-`MM-S55` alone proves projective avoidance.
 Exact bidirectional diagnostics for the ternary swap at `β=3`, body `bbcc`, exclude every
 false-pole word of at most six projective blocks when each regular block has
 role length at most three; this is computational evidence only.

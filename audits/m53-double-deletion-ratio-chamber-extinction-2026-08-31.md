@@ -88,7 +88,9 @@ remains. Thus no physical role block occupies (5).
 `firstMultiTransfer_pole_false` then consumes
 `firstMultiTransfer_pole_forces_doubleDeletion` from `MM-S50`. Under the compiler body envelope,
 expected coefficient shells and lower-code units, and the centered first-transfer hypotheses of
-`MM-S35`, no first multi-transfer pole exists.
+`MM-S35`, no first multi-transfer pole exists. The later
+[`MM-S55`](../SALVAGE.md#mm-s55-physical-role-block-shell-completion) theorem proves that every
+physical role block supplies those shells and lower units automatically.
 
 This closes that interface, not projective avoidance. The remaining master obligation is the
 global earliest-pole reduction: prove every arbitrary swapped product not already killed by the

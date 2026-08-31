@@ -153,6 +153,7 @@ import MatrixMortality.SwappedSetterMultitransfer
 import MatrixMortality.SwappedSetterCylinder
 import MatrixMortality.SwappedSetterAllErasure
 import MatrixMortality.SwappedSetterDoubleDeletion
+import MatrixMortality.SwappedSetterPhysicalShell
 import MatrixMortality.SchottkyPunctuation
 import MatrixMortality.TwoStateObstructions
 import MatrixMortality.ForcedRuleCCompanion
