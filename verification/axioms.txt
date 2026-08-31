@@ -1367,6 +1367,10 @@
 'MatrixMortality.SeparatedTwoCResidue.twentyModuloTwentySeven_tagHaltsFrom' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.SeparatedTwoCResidue.fourCQueue_reaches_final' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.SeparatedTwoCResidue.elevenModuloEightyOne_tagHaltsFrom' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.SetterShear.sideBasis_det' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.SetterShear.delimiter_cube' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.SetterShear.delimiter_square_distinguishedColumn' depends on axioms: [propext,
@@ -1729,6 +1733,9 @@
 'MatrixMortality.DecimalSetterDepth.allCDeletion_regularRawHead_not_fiveAboveWidth' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.DecimalSetterDepth.allCDeletion_regularRawHead_not_fiveAtBeta' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.DecimalSetterDepth.allCDeletion_firstRawHead_not_fiveAboveWidth' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
@@ -1768,6 +1775,15 @@
  Classical.choice,
  Quot.sound]
 'MatrixMortality.DecimalSetterAncestry.positionedBErase_rawHead_shell_impossible' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterDepth.betaDeepUpperPerturbation_regularRawHead_shell_impossible' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterAncestry.positionedBErase_regularRawHead_shell_impossible' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterAncestry.positionedBErase_shell_forces_exceptionalLate' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
 'MatrixMortality.DecimalSetterAncestry.carrierFactor_multiToSingleton_quotientGate' depends on axioms: [propext,
@@ -2580,6 +2596,7 @@
 'MatrixMortality.MixedPrimeDebt.shellRun_tail_precisionPeriod_sharp' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.MixedPrimeDebt.shellRun_fixedModulus_sharp' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.MixedPrimeDebt.exists_shellStep_realTrap_predecessor' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
@@ -2656,6 +2673,18 @@
  Classical.choice,
  Quot.sound]
 'MatrixMortality.ReturnSquare.fractionPullback_terminal_incidence_iff_eq_predecessor' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnSquare.fractionPullback_mulVec_predecessor' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnSquare.fractionPullback_incidence_iff_eq_predecessor' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnSquare.fractionPredecessor_hasValue_of_target_below' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnSquare.fractionPredecessor_hasValue_of_target_above' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
 'MatrixMortality.ReturnSquare.fractionTerminalPredecessor_hasValue' depends on axioms: [propext,
