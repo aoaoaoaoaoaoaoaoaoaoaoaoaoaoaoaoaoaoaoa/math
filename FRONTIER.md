@@ -1159,6 +1159,18 @@ Lean proves the complete arbitrary-word zero equivalence. The live architecture 
 singular syntax gate feeding a persistent full-rank action, not a common-kernel pair. This remains
 fixed-body and does not evade the uniform finite-target cut `G3-O04`.
 
+[`G3-C08`](SALVAGE.md#g3-c08-guarded-two-state-lift) extracts the complete compiler interface.
+For arbitrary integral two-state core matrices, a core column `q`, and gate row `g`, one guard
+coordinate makes every `b`-headed word nonzero under an odd-coordinate invariant and makes every
+`c`-headed zero exactly an incidence `gA_wq=0`. The persistent `b` control has determinant twice
+the core determinant; `c` is the sole singular gate. Lean proves that a source-indexed family of
+these lifts is same-zero exact if and only if `gA_wq=0` agrees with the paired coefficient on the
+single family of `c`-headed words. Width positivity discharges the empty, toggle, and `b`-headed
+cases from the native terminal converse. The third state, rank escape, and malformed-word guard
+are therefore finished; the exact remaining equation is the non-elementary two-state
+scalar-orbit problem shared with `D2-S01`. The `G3-S03` terminal core does not supply this equation:
+its boundary vanishes on the whole fork orbit, so rejection must occur through ambient leakage.
+
 [`G3-M02`](SALVAGE.md#g3-m02-square-root-punctuation-fracture) supplied a complete direct-mortality
 grammar. The source-uniform rational rank-two matrix `S` satisfies
 
@@ -1396,7 +1408,7 @@ or neutral word across the return, use an empty consume, or split recurrent outp
 | Lane | Available leverage | Decisive obstruction or obligation |
 | --- | --- | --- |
 | Common-kernel shuttle | The exact `bcbb` compiler moves its common data kernel out through the toggle and recovers it at the next data action | Uniformize this non-invariant shuttle in `(β,body)`; every toggle-invariant guard factors through the two-dimensional quotient |
-| Transverse-kernel terminal dynamics | `G3-O27/O29` reduce the involutive branch to the `M₂(3)` core; `G3-O30`–`O35` expose and close the first infinite-carrier repair; `G3-S03` forces every exact `bcbc` fork into a 1D/2D invariant core; `G3-C07` preserves an exact fixed language with full-rank data `b` and singular data `c` | Uniformize a singular all-word gate feeding a source-dependent 1D/2D terminal core, or solve the joint positive dimension-two node; generic irreducible `GL₃` forks and common-kernel necessity are dead |
+| Transverse-kernel terminal dynamics | `G3-O27/O29` reduce the involutive branch to the `M₂(3)` core; `G3-O30`–`O35` expose and close the first infinite-carrier repair; `G3-S03` forces every exact `bcbc` fork into a 1D/2D invariant core; `G3-C07` preserves an exact fixed language with full-rank data `b`; `G3-C08` compiles the third-state guard to one exact two-state gate equation | Realize the `G3-C08` gate language in a source-dependent non-elementary 2D orbit, or prove every parity-preserving core lies in an audited `D2` decision stratum; generic irreducible `GL₃` forks, common-kernel necessity, and further third-state guard tuning are dead |
 | Positive projective transition lower bound | Same-zero dimension three is point-line incidence in `P²`, and actual one-sided shifts retain finite rank/kernel/image data | Derive a uniform nonstationary or noncommuting shift incompatibility from an unbounded terminal section; static support rank, formal inverse completion, fixed equal-length return flowers, and unary consecutive-repeat escape are forbidden |
 | Global word-residual recoding | Longer noncommutative atoms can retain order while discarding the four additive role channels | Escape `G3-D05`: fixed-priority affine counters and all one-way reset/transfer/fanout cascades are decidable |
 | Head-separated three-schema source | `G3-C04` discharges every arbitrary-trace forcing obligation locally; `G3-O24` isolates the directed stable-cone alternative | Preserve an undecidable mixed or neutral word across returns, or realize zero-sensitive S5 GLB decoding after the `G3-O25` separator-rank fork; complete pure forks are decidable by `G3-D07` |
@@ -1438,8 +1450,10 @@ raceable leaves:
    forces its complete fork orbit into a one- or two-dimensional invariant core for every exact
    three-state recognizer. `G3-C07` supplies the nearest lawful positive model: one singular reset
    can guard a full-rank persistent data action without changing a complete all-word zero
-   language. The unresolved step is source-uniform terminal geometry in that core, not another
-   fixed-body rank perturbation.
+   language. `G3-C08` now compiles that architecture uniformly: all third-state obligations reduce
+   exactly to an odd-coordinate invariant and the scalar equation `gA_wq=0` on `c`-headed words
+   in a source-indexed two-state core. The unresolved step is constructing that non-elementary
+   gate language, not another fixed-body rank perturbation or guard recurrence.
 3. **Positive projective transition obstruction.** Derive from a source-unbounded terminal
    section a finite shift incompatibility which no three-dimensional rational same-zero
    representation can realize for any combination of generator ranks and kernels. It must use
@@ -1558,11 +1572,14 @@ one- or two-dimensional invariant core. `G3-C07` proves that one raw data letter
 be full-rank: an even persistent guard preserves the complete `bcbcbb` language while singular
 data `c` performs the syntax reset. The live template is a singular all-word gate plus a
 source-dependent persistent core, with the two-dimensional branch shared explicitly with
-`M₂(3)`.
-A lower-bound attack must exclude both positive
-architectures through actual transition data. Backward cancellation, inverse cofinality, and
-static incidence cannot do so. Do not spend another attack on separator placement, fixed anchors,
-or control singularity after recognition; `MM-C01` closes them unconditionally.
+`M₂(3)`. A lower-bound attack may use the exact `G3-C08` interface: the only live data are a
+parity-preserving two-state orbit and its scalar gate. Direct irreducible `Sym²(GL₂)` fork blocks
+cannot replace this core because `G3-S03` forces the accepted fork span to be proper; a conic
+collision detector must be inserted as ambient leakage and still satisfy the complete raw-word
+gate equation. Any lower-bound attack must exclude both positive architectures through actual
+transition data. Backward cancellation, inverse cofinality, and static incidence cannot do so.
+Do not spend another attack on separator placement, fixed anchors, or control singularity after
+recognition; `MM-C01` closes them unconditionally.
 
 The global recoding lane must now state its non-priority mechanism before algebra begins.
 Adding finitely many affine factors, sign modes, counter reversals, and recurrent nested tests is
