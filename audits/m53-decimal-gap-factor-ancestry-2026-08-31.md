@@ -191,6 +191,38 @@ the multiplicative order of ten modulo `43` is exactly `21`, so the exact shift 
 Thus terminal-run-one support occurs exactly at widths congruent to five modulo `21`. This is
 an infinite arithmetic family of support entries, not a false pole.
 
+## Gcd-Saturated Gate
+
+The factorwise gate can be made canonical without any coprimality branch. Put
+
+```text
+c=gcd(q,N),       r=q/c,       N₀=N/c.
+```
+
+Because `q≠0`, the gcd is nonzero, and exact Euclidean division gives
+
+```text
+q=rc,       N=cN₀,       gcd(r,N₀)=1.             (18)
+```
+
+The first pole reduction now says
+
+```text
+cr ∣ cN₀G²V₂·7.
+```
+
+Cancel `c`, then cancel `N₀G²·7`, which is coprime to `r`. Thus `V₂=rW`. Substitution into
+the exact pole equation exposes a common factor `81cr`; cancelling it and reducing modulo `r`
+gives
+
+```text
+r ∣ c(P₂−μ10^m)+gW.                               (19)
+```
+
+Equations (18)--(19) leave no gcd or coprimality side condition. Partial prime-power support is
+accounted for by the quotient `q/gcd(q,N)`. The modulus is a unit only when the complete gap
+already divides the carrier numerator.
+
 ## Gate Saturation
 
 The factor gates are necessary, not sufficient. They already admit an all-`D_c` word at the
@@ -237,14 +269,15 @@ semantics beyond them.
 The theorem removes every gap-clean carrier/current-code pair that fails either (6) or (8), at
 every sign and length. It covers both singleton targets because their lower code is the same.
 Equations (12)--(15) exactly classify support in the initial unit raw head and its width shifts;
-(16)--(17) show that proper support occurs infinitely often. They do not enumerate every
-initial congruence class, classify support installed by later lower codes, or exclude
-compiler-emitted pairs satisfying the quotient congruence.
+(16)--(17) show that proper support occurs infinitely often. Equation (19) retains the strongest
+quotient gate for every partial contamination pattern. These results do not classify support
+installed by later lower codes, prevent full-gap contamination, or exclude compiler-emitted
+pairs satisfying the canonical quotient congruence.
 
 The remaining physical multi-to-singleton seam is therefore the disjunction:
 
-1. earlier lower words install some prime support of `q` into `N`; and
-2. the current block passes (10) for every remaining numerator-coprime factor.
+1. earlier lower words install the complete gap `q` into `N`; or
+2. the current block passes (19) modulo the canonical quotient `q/gcd(q,N)`.
 
 This is a strict reduction of the `m≥β+3` abstract carrier branch, not a proof of mortality
 avoidance and not a false pole.
@@ -252,11 +285,11 @@ avoidance and not a false pole.
 ## Verification
 
 `DecimalSetterAncestry.lean` proves the fixed coprimalities, exact raw-head support, factor and
-prime propagation laws, exact modular product reduction, factor cancellation, and both
-quotient gates. The module is warning-free and uses no proof apertures. Its publication-facing
-theorems are included in `AxiomAudit.lean`; the reviewed transitive axiom sets are recorded in
-`verification/axioms.txt`. The all-`D_c` gate witness is computational evidence, not a Lean
-theorem and not a reachability claim.
+prime propagation laws, exact modular product reduction, common-factor cancellation, and the
+factorwise and gcd-saturated quotient gates. The module is warning-free and uses no proof
+apertures. Its publication-facing theorems are included in `AxiomAudit.lean`; the reviewed
+transitive axiom sets are recorded in `verification/axioms.txt`. The all-`D_c` gate witness is
+computational evidence, not a Lean theorem and not a reachability claim.
 
 ## Artifacts
 
@@ -266,5 +299,6 @@ theorem and not a reachability claim.
 - [`MM-S24`](../SALVAGE.md#mm-s24-factorwise-gap-ancestry)
 - [`MM-S26`](../SALVAGE.md#mm-s26-exact-raw-head-prime-support)
 - [`MM-S27`](../SALVAGE.md#mm-s27-reciprocal-raw-head-support)
+- [`MM-S31`](../SALVAGE.md#mm-s31-gcd-saturated-singleton-gate)
 - [`FRONTIER.md`](../FRONTIER.md)
 - [`FORMALIZATION.md`](../FORMALIZATION.md)

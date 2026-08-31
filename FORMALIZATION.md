@@ -1504,7 +1504,12 @@ same exact shift condition `r∣10^k−1`. This is a classification, not an excl
 `q=199993` share the proper factor `43`. Theorems `fortyThree_period_iff` and
 `fortyThree_support_shift_iff` prove that terminal-run-one support occurs exactly at widths
 congruent to five modulo `21`; `fortyThree_support_periodic` records the resulting infinite
-family.
+family. Record [`MM-S31`](SALVAGE.md#mm-s31-gcd-saturated-singleton-gate) removes the remaining
+coprimality branch from the singleton gate. For `c=gcd(q,N)`, `r=q/c`, and `N₀=N/c`,
+`carrierGcdQuotient_multiToSingleton_quotientGate` derives the canonical factorization and
+coprimality internally, then forces `V₂=rW` and
+`c(P₂−μ10^m)+gW≡0 (mod r)`. Partial gap-prime or prime-power contamination therefore weakens
+the modulus exactly to `q/gcd(q,N)`; it does not erase the gate.
 
 Record [`MM-S28`](SALVAGE.md#mm-s28-arbitrary-history-gap-support-saturation) removes the
 remaining support bookkeeping. `GapCarrierHistory.prime_dvd_final_iff` iterates the exact
@@ -2048,7 +2053,7 @@ fixed-rank decision problem.
 | `DecimalSetterChamber.lean` | exact decimal pole chambers, both ordinary A-to-A length-two extinctions, and the emitted-body grammar certificate |
 | `DecimalSetterResonance.lean` | complete ordinary depth-two A-to-B and B-to-A extinction, phase-word exhaustion, and compiler-envelope specialization |
 | `DecimalSetterDepth.lean` | recursive two-unit carrier; length-two and singleton-current extinction; exact all-`D_c` raw-head extinction; sharp `m≥β+3` abstract multi-to-singleton classification; initial raw-head exclusion; compatible last-digit two-cycle obstruction |
-| `DecimalSetterAncestry.lean` | primitive gap factor; exact reciprocal and periodic raw two-`c` prime support; arbitrary-history prime-support propagation and radical saturation; physical all-erasure full-gap lower code; denominator-ancestry reduction; full-gap and factorwise quotient gates for a singleton target |
+| `DecimalSetterAncestry.lean` | primitive gap factor; exact reciprocal and periodic raw two-`c` prime support; arbitrary-history prime-support propagation and radical saturation; physical all-erasure full-gap lower code; denominator-ancestry reduction; full-gap, factorwise, and gcd-saturated quotient gates for a singleton target |
 | `PairedMortality.lean` | common-column mortality converse and exact integer `4 × 4` family |
 | `PhaseFracture.lean` | phase normalization and dimension-free projective-identification contradiction |
 | `PhaseRigidity.lean` | checked local role algebra, discrepancy commutators, and invariant-pencil rigidity |

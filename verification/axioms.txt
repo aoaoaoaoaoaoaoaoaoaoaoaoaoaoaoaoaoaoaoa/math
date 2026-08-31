@@ -1223,6 +1223,12 @@
 'MatrixMortality.DecimalSetterAncestry.radical_gapFactor_dvd_allEraseLowerCode' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.DecimalSetterAncestry.carrierCoprimeQuotient_multiToSingleton_quotientGate' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterAncestry.carrierGcdQuotient_multiToSingleton_quotientGate' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.DecimalSetterAncestry.carrierFactor_multiToSingleton_quotientGate' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]

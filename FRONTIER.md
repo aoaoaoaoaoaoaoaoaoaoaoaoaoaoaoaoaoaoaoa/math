@@ -947,6 +947,18 @@ The live cut is therefore the intersection of the encoded-entry orbit with compl
 inverse branches, or a proved reachability-sound quotient of those branches. Neither a fixed
 congruence graph nor the first unbounded cylinder retains enough information.
 
+[`MM-S31`](SALVAGE.md#mm-s31-gcd-saturated-singleton-gate) removes the artificial choice of a
+numerator-coprime factor. Set `c=gcd(q,N)` and `r=q/c`. Exact common-factor cancellation proves
+
+```text
+V₂=rW,       c(P₂−μ10^m)+gW≡0 (mod r).
+```
+
+Thus every partial contamination pattern retains one canonical strongest modulus. The
+singleton gate disappears only after the complete gap divides the carrier numerator. The live
+front is now whether reachable lower codes can install that full gap, or otherwise pass the
+canonical quotient congruence together with the remaining suffix semantics.
+
 The immediate ternary question is which other positive valuation-one discrepancies survive its
 suffix sieve without already certifying source halting.
 Exact bidirectional diagnostics for the ternary swap at `β=3`, body `bbcc`, exclude every
