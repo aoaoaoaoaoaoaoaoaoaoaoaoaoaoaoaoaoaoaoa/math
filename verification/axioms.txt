@@ -999,6 +999,18 @@
 'MatrixMortality.DecimalSetterDepth.peeledLastDigit_advances' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.DecimalSetterDepth.peeledLastDigit_twoStep' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.DecimalSetterDepth.peeledHead_trichotomy' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.DecimalSetterAncestry.gapFactor_not_dvd_twoCHead' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterAncestry.carrierFactor_dvd_next_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterAncestry.primeFactor_dvd_next_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterAncestry.carrierFactor_multiToSingleton_quotientGate' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.DecimalSetterAncestry.gapClean_multiToSingleton_quotientGate' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]

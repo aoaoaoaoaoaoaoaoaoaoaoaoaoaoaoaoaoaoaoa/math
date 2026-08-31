@@ -1275,8 +1275,15 @@ that abstract branch with the physical recursive ancestry. For `q=2·10^β−7`,
 `DecimalSetterAncestry.gapClean_multiToSingleton_quotientGate` proves that a primitive integral
 carrier with `gcd(q,N)=1` can reach a singleton only if `V₂=qW` and
 `P₂+(G/9)W≡μ10^m (mod q)`. The fixed coefficient and singleton digit are discharged inside the
-theorem by exact coprimality proofs; gap-contaminated carrier numerators and the emitted-code
-quotient language remain open.
+theorem by exact coprimality proofs; shared-factor carrier numerators and the emitted-code
+quotient language remain open. Record [`MM-S24`](SALVAGE.md#mm-s24-factorwise-gap-ancestry)
+removes the false dichotomy hidden in that wording: `q` may be composite. For every `r∣q`,
+`carrierFactor_dvd_next_iff` proves `r∣N' ↔ r∣NV`, and `primeFactor_dvd_next_iff` identifies
+lower codes as the only first-entry channel for gap primes. The initial two-`c` head is not
+divisible by the full gap. If `q=rs` and `gcd(r,N)=1`,
+`carrierFactor_multiToSingleton_quotientGate` forces `V₂=rW` and
+`s(P₂−μ10^m)+gW≡0 (mod r)`. Proper factors already present in `N` therefore remove only their
+own gate, not every gap-factor constraint.
 
 The dimension-two affine ledger has six independently checked records:
 
@@ -1717,7 +1724,7 @@ fixed-rank decision problem.
 | `DecimalSetterChamber.lean` | exact decimal pole chambers, both ordinary A-to-A length-two extinctions, and the emitted-body grammar certificate |
 | `DecimalSetterResonance.lean` | complete ordinary depth-two A-to-B and B-to-A extinction, phase-word exhaustion, and compiler-envelope specialization |
 | `DecimalSetterDepth.lean` | recursive two-unit carrier; length-two and singleton-current extinction; sharp `m≥β+3` abstract multi-to-singleton classification; initial raw-head exclusion; exact last-digit two-cycle obstruction |
-| `DecimalSetterAncestry.lean` | primitive gap factor; fixed-coefficient coprimality; denominator-ancestry reduction; exact lower-code and quotient congruence gates for a singleton target |
+| `DecimalSetterAncestry.lean` | primitive gap factor; raw two-`c` exclusion; exact factor and prime-support propagation; denominator-ancestry reduction; full-gap and factorwise quotient gates for a singleton target |
 | `PairedMortality.lean` | common-column mortality converse and exact integer `4 × 4` family |
 | `PhaseFracture.lean` | phase normalization and dimension-free projective-identification contradiction |
 | `PhaseRigidity.lean` | checked local role algebra, discrepancy commutators, and invariant-pencil rigidity |

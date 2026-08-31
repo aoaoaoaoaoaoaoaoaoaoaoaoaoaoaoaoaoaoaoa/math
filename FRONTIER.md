@@ -781,8 +781,19 @@ the denominator ancestry absent from the unrestricted abstraction. Set `q=2·10^
 `G=9g`. For a primitive integral carrier with `D=EN₋` and `gcd(q,N)=1`, a singleton pole forces
 both `V₂=qW` and `P₂+gW≡μ10^m (mod q)`. The fixed lift `G` and singleton lower digit `7` are
 automatically coprime to `q`. Thus the gap-clean branch is an exact compiler-code congruence
-problem; the remaining escape is either a gap-contaminated carrier numerator or an emitted code
-passing both gates. This does not settle `M₅(3)`.
+problem; the remaining escape is either a numerator sharing a proper factor with the generally
+composite `q` or an emitted code passing both gates. This does not settle `M₅(3)`.
+
+[`MM-S24`](SALVAGE.md#mm-s24-factorwise-gap-ancestry) resolves that composite-factor seam. For
+every `r∣q`, a recursive multi-shell step satisfies `r∣N' ↔ r∣NV`; prime support can first enter
+the carrier only through a lower code and is then permanent. The initial two-`c` raw numerator
+is not divisible by the full gap. More importantly, writing `q=rs`, every factor with
+`gcd(r,N)=1` retains a localized singleton gate: `V₂=rW` and
+`s(P₂−μ10^m)+gW≡0 (mod r)`. The residual is therefore a prime-support reachability problem,
+not a binary clean/contaminated branch. The gates themselves are not sufficient: a
+computationally certified physical all-`D_c` word at the compiler width `β=10` passes both
+full-gap congruences, so encoded suffix semantics beyond these modular conditions remain
+necessary.
 
 The immediate ternary question is which other positive valuation-one discrepancies survive its
 suffix sieve without already certifying source halting.
