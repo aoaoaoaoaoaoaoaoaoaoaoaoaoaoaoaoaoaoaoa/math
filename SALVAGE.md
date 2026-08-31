@@ -321,7 +321,7 @@ file owns the mathematical stock.
 | [`D2-O02`](#d2-o02-critical-shell-periodic-saturation) | obstruction and rewrite seed | every nonempty finite wait schedule has a rational all-unit cycle; normalized nonfreeness persists under every generator scaling, while its odd family is a two-seed cancellative pump and the positive finite basis is complete only through length 30 | formalized core; audited strengthening | active |
 | [`D2-O03`](#d2-o03-fixed-source-adjacent-saturation) | obstruction and fixed-source family | the source `43/24` supports infinitely many accepted chamber-contained adjacent collisions on the complementary target pole; the targets are distinct and membership in their ray is decidable | formalized | active |
 | [`D2-O04`](#d2-o04-forced-exit-surface) | obstruction and decidable continuation cone | every next block leaves the accepted `43/24` collision ray at valuation minus one; target valuation fixes every post-exit length, making the whole controlled cone decidable | formalized reduction; audited decision corollary | active |
-| [`D2-O05`](#d2-o05-universal-exit-suffix-collapse) | structure theorem and decidable suffix reduction | after any critical-shell exit, a fixed target permits at most two nonempty suffix lengths; the remaining master obstruction lies before or at the exit | formalized reduction; audited decision corollary | active |
+| [`D2-O07`](#d2-o07-universal-exit-suffix-collapse) | structure theorem and decidable suffix reduction | after any critical-shell exit, a fixed target permits at most two nonempty suffix lengths; the remaining master obstruction lies before or at the exit | formalized reduction; audited decision corollary | active |
 
 ## Frankl Conjecture
 
@@ -13581,7 +13581,7 @@ T_m(u)=(1+3u(2/3)^m)/5
 
 is a `5`-adic unit. Its first guard digit forces odd `m` when `u≡2 mod 5`,
 even `m` when `u≡3 mod 5`, and forbids continuation for residues `1,4`.
-Once a path leaves the shell, it cannot return. [`D2-O05`](#d2-o05-universal-exit-suffix-collapse)
+Once a path leaves the shell, it cannot return. [`D2-O07`](#d2-o07-universal-exit-suffix-collapse)
 sharpens private-prime peeling: every fixed target permits at most two nonempty suffix lengths
 after any exit, and [`D2-D05`](#d2-d05-prescribed-translation-count) decides both.
 
@@ -14167,10 +14167,10 @@ No mortality or full `M₂(3)` decision theorem follows.
 fibre by an uncontrolled exit or post-exit tail. The entire continuation cone is reduced to one
 fixed-count regular-control query; the remaining infinite seam starts with other pre-exit states.
 
-**Next:** [`D2-O05`](#d2-o05-universal-exit-suffix-collapse) removes arbitrary post-exit tails
+**Next:** [`D2-O07`](#d2-o07-universal-exit-suffix-collapse) removes arbitrary post-exit tails
 from every exit, not only this cone. Classify the reachable pre-exit states and their exit images.
 
-### D2-O05: Universal exit-suffix collapse
+### D2-O07: Universal exit-suffix collapse
 
 **Kind:** structure theorem and decidable suffix reduction
 **Evidence:** formalized reduction; audited decision corollary

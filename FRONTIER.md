@@ -2983,7 +2983,7 @@ negative valuations then fall once per block. A nonempty suffix to a fixed targe
 one of two consecutive target-derived lengths. By `D2-D05`, every fixed exit has a decidable
 suffix. The sole infinite seam is the fixed-source set of shell-preserving prefixes and their
 first-exit images, not the schedule after an exit. This is
-[`D2-O05`](SALVAGE.md#d2-o05-universal-exit-suffix-collapse).
+[`D2-O07`](SALVAGE.md#d2-o07-universal-exit-suffix-collapse).
 Real order removes both exterior target components. Every shell block preserves
 `[1/5,1/2]`; a trajectory ending above `1/2` or below `1/5` is dominated by the all-zero-wait
 trajectory, whose distance from `1/2` contracts by `(3/5)^n`. Lean converts this into an explicit
