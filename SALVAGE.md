@@ -81,6 +81,7 @@ file owns the mathematical stock.
 | [`MM-O12`](#mm-o12-boundary-calibrated-setter-shear-is-gauge) | obstruction | boundary calibration erases the setter's side-basis shear from its separator and transfer | formalized | graduated |
 | [`MM-O13`](#mm-o13-finite-positive-ray-setter-obstruction) | obstruction | arbitrary low/high setter blocks defeat every finite family of positive invariant rays | audited | graduated |
 | [`MM-O14`](#mm-o14-decimal-setter-elliptic-product) | obstruction | two strictly hyperbolic decimal setter blocks have an elliptic product | formalized | graduated |
+| [`MM-O15`](#mm-o15-deletion-first-fibre-fracture) | obstruction | exact early deletion scheduling forces the two unequal Neary rule scales to coincide | formalized | graduated |
 | [`MM-M01`](#mm-m01-off-diagonal-companion-interface) | partial mechanism | off-diagonal rank-two bridge has a complete fracture grammar | audited | stock |
 | [`MM-M02`](#mm-m02-bordered-toggle) | partial mechanism | one lifted toggle has a stable rank-two third power | audited | parked |
 | [`MM-M03`](#mm-m03-five-state-setter-punctuation) | partial mechanism | a mixed delimiter word is an exact internal rank-one separator | audited | closed |
@@ -1707,6 +1708,41 @@ hyperbolicity. Arithmetic or suffix information may still prove exact pole avoid
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-O15: Deletion-first fibre fracture
+
+**Kind:** obstruction
+**Evidence:** formalized
+**Disposition:** graduated
+
+An exact phase-first binary scheduler may try to exploit the common deletion channel by updating
+it before the letter bit and merging the pending rule and deletion values in one lower fibre.
+For bit operators `A,C`, boundary value `b≠0`, rule value `r`, and deletion value `d`, the exact
+return equations are
+
+```text
+A r = 27b,       A d = 3b,
+C r = ρ_cb,      C d = 3b.
+```
+
+Injectivity of `A` on this carrier gives `27d=3r`; applying `C` forces `ρ_c=27`. Every nonempty
+Neary body instead has `ρ_c=nearySideLowerCScale β body>27`.
+
+**Scope:** exact native lower-channel transport through the shared fibre. Different same-zero
+coefficients, nonlinear recurrences, history-sensitive state, and existence-only compilers remain
+open. The outer-product mortality theorem does not require nonsingular binary controls or
+unconditional odd-word rejection.
+
+**Use:** reject early scheduling of the unchanged common deletion channel. Any five-state binary
+root must change the nonzero series or the semantic state rather than merely move that update
+across the letter boundary.
+
+**Formalization:** `ruleScale_eq_of_deletionFirst_fibre`,
+`nearySideLowerCScale_gt_twentySeven`, and `no_neary_deletionFirst_fibre` in
+[`MatrixMortality/DeletionFirstFracture.lean`](MatrixMortality/DeletionFirstFracture.lean).
+
+**Artifact:**
+[`audits/m53-deletion-first-fracture-2026-08-30.md`](audits/m53-deletion-first-fracture-2026-08-30.md).
 
 ### MM-M01: Off-diagonal companion interface
 

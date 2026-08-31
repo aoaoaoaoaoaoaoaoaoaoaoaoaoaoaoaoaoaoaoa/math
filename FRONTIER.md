@@ -613,7 +613,7 @@ This closes exact minimization of that packing in five states.
 The paired four-state scalar system closes a second exact route. Lean certifies a uniform
 nonsingular four-by-four Hankel section
 ([`MM-O04`](SALVAGE.md#mm-o04-uniform-rank-four-paired-series)), while the two-channel boundary
-exact diagonal bridge. Their composed theorem
+tax costs two additional states in every exact diagonal bridge. Their composed theorem
 `paired_exact_diagonal_twoChannel_state_lower_bound` therefore requires at least six states.
 Both conclusions concern exact series; neither constrains another series with the same zero set.
 
@@ -628,11 +628,15 @@ six-state family.
 
 Three live routes remain.
 
-1. Construct a five-state binary series with nonsingular letter matrices, the source zero set
-   on complete two-bit blocks, and nonzero values on odd words; then adjoin the ordinary
-   rank-one separator. The unused identity `(V_b^D,B_b^D)=(V_c^D,B_c^D)` suggests processing
-   the common deletion channel before the symbol bit is known. A four-state root would prove
-   the stronger `M₄(3)` result.
+1. Construct a five-state two-letter scalar series whose nonempty zero existence is equivalent
+   to a source terminal match, then adjoin the ordinary rank-one separator. The letter matrices
+   may be singular, and odd words need only avoid zeros on source no-instances. The stronger
+   wordwise same-zero interface remains sufficient. Processing the common deletion channel
+   `(V_b^D,B_b^D)=(V_c^D,B_c^D)` before the symbol bit cannot merge the unchanged exact lower
+   fibres: [`MM-O15`](SALVAGE.md#mm-o15-deletion-first-fibre-fracture) forces the unequal rule
+   scales to coincide. A survivor must change the nonzero series, use nonlinear or
+   history-sensitive state, or weaken to the existence-only interface. A four-state root would
+   prove the stronger `M₄(3)` result.
 2. Fuse the paired toggle and separator inside one five-dimensional generator. The
    off-diagonal companion interface
    [`MM-M01`](SALVAGE.md#mm-m01-off-diagonal-companion-interface) supplies a complete bridge

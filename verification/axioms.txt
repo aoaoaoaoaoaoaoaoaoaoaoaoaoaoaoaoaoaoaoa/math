@@ -571,6 +571,9 @@
 'MatrixMortality.paired_exact_diagonal_twoChannel_state_lower_bound' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.ruleScale_eq_of_deletionFirst_fibre' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.nearySideLowerCScale_gt_twentySeven' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.no_neary_deletionFirst_fibre' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.chhnNeary_exactRepresentation_six_le_card' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.twoStateProduct_mulVec_phaseVector' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.controllerRoleProduct_eq_sidePcpMatrix' depends on axioms: [propext, Classical.choice, Quot.sound]

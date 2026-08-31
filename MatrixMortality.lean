@@ -111,6 +111,7 @@ import MatrixMortality.NearyBinaryDefect
 import MatrixMortality.NearyPhaseSignature
 import MatrixMortality.CHHNPackingRank
 import MatrixMortality.PairedBoundaryTax
+import MatrixMortality.DeletionFirstFracture
 import MatrixMortality.PairedBinaryFullAlgebra
 import MatrixMortality.PrefixFullAlgebra
 import MatrixMortality.ScheduledBinaryRank
