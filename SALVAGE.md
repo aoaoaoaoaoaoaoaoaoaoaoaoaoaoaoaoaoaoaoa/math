@@ -108,6 +108,7 @@ file owns the mathematical stock.
 | [`MM-S17`](#mm-s17-recursive-decimal-carrier) | structure theorem and obstruction | repeated A-shell resonances have an exact two-unit carrier whose last digits form a compatible period-two cycle | formalized | active |
 | [`MM-S18`](#mm-s18-length-two-carrier-extinction) | obstruction | every consecutive multi-shell carrier transition has upper length at least three | formalized | active |
 | [`MM-S19`](#mm-s19-all-deletion-raw-head-extinction) | obstruction | no all-`D_c` block of length at least three carries a lawful initial two-`c` raw head into another multi-role pole | formalized | active |
+| [`MM-S20`](#mm-s20-singleton-carrier-classification) | structure theorem and obstruction | singleton-current carrier transitions are empty, while abstract multi-to-singleton carriers exist exactly at length `m≥β+3` | formalized | active |
 | [`R32-S01`](#r32-s01-split-return-normal-form) | structure theorem | rank-two cuts reduce one-unit binary mortality to a `2 × 2` return recurrence | formalized | graduated |
 | [`R32-S02`](#r32-s02-two-plane-edge-square) | structure theorem | two rank-two generators are a two-vertex square of `2 × 2` edges | formalized | graduated |
 | [`R32-O01`](#r32-o01-rank-one-profile-collapse) | obstruction | a rank-one generator reduces mortality to order-at-most-three scalar recurrence zeros | audited | stock |
@@ -3216,6 +3217,8 @@ condition. Thus no normalization step reopens the excluded transition.
 **Scope:** this removes the exceptional length-two transition from every consecutive
 multi-shell carrier orbit. It does not recognize the higher suffix of the remaining generalized
 residuals, decide a transition into a singleton target, or prove projective avoidance.
+[`MM-S20`](#mm-s20-singleton-carrier-classification) subsequently classifies that singleton
+transition at the unrestricted unit-carrier level.
 
 **Use:** every surviving multi-shell transition satisfies the modulo-`100` premise of
 `peeledNumerator_forces_lastDigit`. Higher-suffix attacks may start at upper length three.
@@ -3288,6 +3291,68 @@ constructing the generalized-carrier transition language.
 
 **Next:** classify rule-bearing and `D_b`-containing first blocks, then find a suffix invariant
 native to generalized residual carriers.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S20: Singleton carrier classification
+
+**Kind:** structure theorem and obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+Let `(N,D)` be a decimal-unit carrier and
+
+```text
+R=NT₂−10μGV₂D.
+```
+
+If the current trace has singleton shell `(β+1,β)`, then `R` has shell `(1,1)` for every
+`β≥3`. A following multi-role target would force the current upper length to be two, whereas
+the physical singleton erasures `D_c` and `D_b` have lengths one and `β+2`. A following
+singleton target gives incompatible two- and five-adic balances. Hence no singleton-current
+carrier transition reaches a later pole.
+
+For a multi-role current trace and singleton target, a pole forces
+
+```text
+(ν₂(R),ν₅(R))=(m−β−1,m−β).
+```
+
+The built-in decimal factor gives `m≥β+2`; the two-adic cancellation theorem from
+[`MM-S18`](#mm-s18-length-two-carrier-extinction) excludes equality. Thus `m≥β+3` is
+necessary. It is also sufficient at the abstract decimal-unit level. For
+
+```text
+K=T₂T₃−EμG10^mV₃,
+N=10μGV₂T₃/K,
+D=1,
+```
+
+both the numerator and `K` have shell `(β+2,β+1)`, so `N` is a decimal unit and the pole
+equation holds identically.
+
+**Scope:** this classifies the complete singleton seam of the recursive unit-carrier
+abstraction, uniformly over rational signs, denominators, both singleton letters, and every
+emitted body hidden in the unit coefficients. The two centered resets already miss a first
+singleton pole by [`MM-S13`](#mm-s13-decimal-first-transfer-extinction). The theorem does not
+show that its constructed carrier is reachable from an encoded distinguished-reset suffix.
+
+**Use:** delete singleton-current branches from the master residual. Do not pursue another
+valuation-only or unrestricted rational-carrier contradiction for multi-to-singleton
+transitions: the exact abstract solution exists for every `m≥β+3`. A closure must recognize
+encoded carrier reachability or stronger suffix semantics.
+
+**Formalization:**
+[`MatrixMortality/DecimalSetterDepth.lean`](MatrixMortality/DecimalSetterDepth.lean), through
+`peeledSingletonToMulti_impossible`, `peeledSingletonToSingleton_impossible`, and
+`exists_decimalUnitCarrier_multiToSingleton_iff`.
+
+**Artifact:**
+[`audits/m53-decimal-singleton-carrier-2026-08-30.md`](audits/m53-decimal-singleton-carrier-2026-08-30.md).
+
+**Next:** characterize which decimal-unit carriers are reachable from the initial two-`c`
+distinguished suffix, then exclude or exhibit the remaining `m≥β+3` multi-to-singleton pole.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).

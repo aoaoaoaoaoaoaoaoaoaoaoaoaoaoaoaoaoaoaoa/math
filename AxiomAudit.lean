@@ -515,6 +515,9 @@ open MatrixMortality
 #print axioms DecimalSetterDepth.peeledNumerator_multi_shell
 #print axioms DecimalSetterDepth.peeledNumerator_twoAdic_deepens
 #print axioms DecimalSetterDepth.peeledMultiPole_three_le_length
+#print axioms DecimalSetterDepth.peeledSingletonToMulti_impossible
+#print axioms DecimalSetterDepth.peeledSingletonToSingleton_impossible
+#print axioms DecimalSetterDepth.exists_decimalUnitCarrier_multiToSingleton_iff
 #print axioms DecimalSetterDepth.peeledStep_factor
 #print axioms DecimalSetterDepth.depthTwo_suffix_to_peeled
 #print axioms DecimalSetterDepth.bTag_cannot_head_equalDepth

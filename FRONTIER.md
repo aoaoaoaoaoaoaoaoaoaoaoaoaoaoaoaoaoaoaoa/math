@@ -792,9 +792,15 @@ law applies without an exceptional branch. At the initial raw head only,
 [`MM-S19`](SALVAGE.md#mm-s19-all-deletion-raw-head-extinction) now removes every all-`D_c`
 block of upper length at least three by an exact mixed-prime suffix split. Combined with
 `MM-S18`, no all-`D_c` block remains at any admissible non-singleton length. The live initial
-grammar consists of rule-bearing phase words and all-erasure words containing `D_b`; after any
-surviving entry, the invariant must recognize a higher suffix language native to generalized
-residuals. Singleton targets remain separate.
+grammar consists of rule-bearing phase words and all-erasure words containing `D_b`.
+[`MM-S20`](SALVAGE.md#mm-s20-singleton-carrier-classification)
+now resolves the separate singleton seam at the carrier level. A singleton-current block cannot
+reach any later multi-role or singleton pole. A multi-role block can reach a singleton pole only
+at upper length `m≥β+3`, and this bound is sharp for unrestricted decimal-unit rational carriers:
+an explicit carrier exists at every such length. The master residual is therefore the encoded
+reachability of that long multi-to-singleton carrier together with the higher suffix language of
+the surviving generalized multi-shell residuals. Local valuations and the abstract two-unit
+carrier cannot close either reachability question alone.
 
 The immediate ternary question is which other positive valuation-one discrepancies survive its
 suffix sieve without already certifying source halting.

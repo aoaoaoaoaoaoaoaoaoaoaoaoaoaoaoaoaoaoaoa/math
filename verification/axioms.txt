@@ -1001,6 +1001,15 @@
 'MatrixMortality.DecimalSetterDepth.peeledMultiPole_three_le_length' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.DecimalSetterDepth.peeledSingletonToMulti_impossible' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterDepth.peeledSingletonToSingleton_impossible' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterDepth.exists_decimalUnitCarrier_multiToSingleton_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.DecimalSetterDepth.peeledStep_factor' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.DecimalSetterDepth.depthTwo_suffix_to_peeled' depends on axioms: [propext,
  Classical.choice,

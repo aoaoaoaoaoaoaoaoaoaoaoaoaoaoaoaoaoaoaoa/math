@@ -63,8 +63,9 @@ reset nor any normalization can therefore enter an excluded nonunit case.
 Every surviving consecutive multi-shell transition now meets the `m≥3` premise used by
 `peeledNumerator_forces_lastDigit`. The modulo-`100` carrier law has no exceptional branch.
 The compatible period-two unit cycle still survives, however. Closure still requires a higher
-decimal suffix invariant for generalized residuals and a separate analysis of singleton
-targets.
+decimal suffix invariant for generalized residuals. [`MM-S20`](../SALVAGE.md#mm-s20-singleton-carrier-classification)
+subsequently classifies singleton-current transitions and proves the long multi-to-singleton
+branch sharp for unrestricted decimal-unit carriers; encoded reachability remains open.
 
 ## Verification
 

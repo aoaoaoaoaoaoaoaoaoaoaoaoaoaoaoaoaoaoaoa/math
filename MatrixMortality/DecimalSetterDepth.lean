@@ -10,9 +10,12 @@ and five in that residual. Removing them gives the next carrier `(N', EN)`.
 
 The initial carrier comes from a raw encoded-word suffix peel and has a three-way head grammar.
 Later numerators are generalized product residuals, not raw encoded heads. A `2`-adic resonance
-law excludes upper length two, so every surviving transition enters the compatible final-digit
-two-cycle. At the initial raw two-`c` head, an exact mixed-prime suffix split excludes every
-all-`D_c` block of upper length at least three; this cut does not recur for generalized carriers.
+law excludes upper length two, so every surviving multi-shell transition enters the compatible
+final-digit two-cycle. At the initial raw two-`c` head, an exact mixed-prime suffix split excludes
+every all-`D_c` block of upper length at least three; this cut does not recur for generalized
+carriers. Singleton-current transitions are impossible. A transition into a singleton target
+exists at the abstract decimal-unit carrier level exactly when its upper length is at least
+`β+3`; closing that branch requires encoded reachability beyond local shell algebra.
 -/
 
 namespace MatrixMortality.DecimalSetterDepth
@@ -48,19 +51,20 @@ theorem peeled_pole_iff
   · exact mul_ne_zero (mul_ne_zero (by norm_num) mu_ne) D_ne
   · exact T_ne
 
-theorem peeledNumerator_multi_shell
+theorem peeledNumerator_target_shell
     {E G μ N D T₂ T₃ V₂ V₃ : ℚ} {m : Nat}
+    {targetTwo targetFive : ℤ}
     (E_unit : HasDecimalShell E 0 0)
     (G_unit : HasDecimalShell G 0 0)
     (mu_unit : HasDecimalShell μ 0 0)
     (N_unit : HasDecimalShell N 0 0)
     (V3_unit : HasDecimalShell V₃ 0 0)
-    (T3_shell : HasDecimalShell T₃ 1 1)
+    (T3_shell : HasDecimalShell T₃ targetTwo targetFive)
     (next_pole :
       peeledNumerator N D μ G T₂ V₂ * T₃ =
         E * μ * G * 10 ^ m * N * V₃) :
     HasDecimalShell (peeledNumerator N D μ G T₂ V₂)
-      ((m : ℤ) - 1) ((m : ℤ) - 1) := by
+      ((m : ℤ) - targetTwo) ((m : ℤ) - targetFive) := by
   have residual_ne : peeledNumerator N D μ G T₂ V₂ ≠ 0 := by
     intro residual_zero
     have right_zero : E * μ * G * 10 ^ m * N * V₃ = 0 := by
@@ -81,10 +85,42 @@ theorem peeledNumerator_multi_shell
   have balances := poleEquation_shellBalance residual_shell T3_shell
     E_unit G_unit mu_unit (N_unit.mul V3_unit) (by
       simpa [mul_assoc, mul_left_comm, mul_comm] using next_pole)
-  have two_depth : rTwo = (m : ℤ) - 1 := by omega
-  have five_depth : rFive = (m : ℤ) - 1 := by omega
+  have two_depth : rTwo = (m : ℤ) - targetTwo := by omega
+  have five_depth : rFive = (m : ℤ) - targetFive := by omega
   rw [two_depth, five_depth] at residual_shell
   exact residual_shell
+
+/-- A following multi-role pole gives the equal-depth residual used by the recursive carrier. -/
+theorem peeledNumerator_multi_shell
+    {E G μ N D T₂ T₃ V₂ V₃ : ℚ} {m : Nat}
+    (E_unit : HasDecimalShell E 0 0)
+    (G_unit : HasDecimalShell G 0 0)
+    (mu_unit : HasDecimalShell μ 0 0)
+    (N_unit : HasDecimalShell N 0 0)
+    (V3_unit : HasDecimalShell V₃ 0 0)
+    (T3_shell : HasDecimalShell T₃ 1 1)
+    (next_pole :
+      peeledNumerator N D μ G T₂ V₂ * T₃ =
+        E * μ * G * 10 ^ m * N * V₃) :
+    HasDecimalShell (peeledNumerator N D μ G T₂ V₂)
+      ((m : ℤ) - 1) ((m : ℤ) - 1) :=
+  peeledNumerator_target_shell E_unit G_unit mu_unit N_unit V3_unit T3_shell next_pole
+
+/-- A following singleton-erasure pole forces a one-step cross-prime gap in the residual. -/
+theorem peeledNumerator_singleton_shell
+    {E G μ N D T₂ T₃ V₂ V₃ : ℚ} {m β : Nat}
+    (E_unit : HasDecimalShell E 0 0)
+    (G_unit : HasDecimalShell G 0 0)
+    (mu_unit : HasDecimalShell μ 0 0)
+    (N_unit : HasDecimalShell N 0 0)
+    (V3_unit : HasDecimalShell V₃ 0 0)
+    (T3_shell : HasDecimalShell T₃ (β + 1) β)
+    (next_pole :
+      peeledNumerator N D μ G T₂ V₂ * T₃ =
+        E * μ * G * 10 ^ m * N * V₃) :
+    HasDecimalShell (peeledNumerator N D μ G T₂ V₂)
+      ((m : ℤ) - (β + 1)) ((m : ℤ) - β) :=
+  peeledNumerator_target_shell E_unit G_unit mu_unit N_unit V3_unit T3_shell next_pole
 
 theorem peeledDenominator_decimalUnit {E N : ℚ}
     (E_unit : HasDecimalShell E 0 0)
@@ -140,6 +176,233 @@ theorem peeledNumerator_twoAdic_deepens
       ring] at quotient_unit
     exact quotient_unit
   exact two_unit_sub_unit_not_unit left_unit right_unit normalized_residual_unit
+
+/-- A singleton-erasure current block leaves shell `(1,1)` from every decimal-unit carrier.
+Its trace term is strictly deeper than the built-in decimal term at both primes, so signs and
+rational denominators cannot create a resonance. -/
+theorem peeledNumerator_of_singleton_hasDecimalShell
+    {N D μ G T V : ℚ} {β : Nat}
+    (beta_large : 3 ≤ β)
+    (N_unit : HasDecimalShell N 0 0)
+    (D_unit : HasDecimalShell D 0 0)
+    (mu_unit : HasDecimalShell μ 0 0)
+    (G_unit : HasDecimalShell G 0 0)
+    (T_shell : HasDecimalShell T (β + 1) β)
+    (V_unit : HasDecimalShell V 0 0) :
+    HasDecimalShell (peeledNumerator N D μ G T V) 1 1 := by
+  have trace_term : HasDecimalShell (N * T) (β + 1) β := by
+    simpa only [zero_add] using N_unit.mul T_shell
+  have decimal_term : HasDecimalShell (10 * μ * G * V * D) 1 1 := by
+    simpa only [zero_add, add_zero] using
+      ((((ten_hasDecimalShell.mul mu_unit).mul G_unit).mul V_unit).mul D_unit)
+  have two_shell := sub_hasValue_min trace_term.1.1 decimal_term.1.1 (by
+    rw [trace_term.1.2, decimal_term.1.2]
+    omega)
+  have five_shell := sub_hasValue_min trace_term.2.1 decimal_term.2.1 (by
+    rw [trace_term.2.2, decimal_term.2.2]
+    omega)
+  rw [trace_term.1.2, decimal_term.1.2] at two_shell
+  rw [trace_term.2.2, decimal_term.2.2] at five_shell
+  have one_le_beta : (1 : ℤ) ≤ β := by omega
+  exact ⟨by simpa [peeledNumerator] using two_shell,
+    by simpa [peeledNumerator, min_eq_right one_le_beta] using five_shell⟩
+
+/-- A singleton-erasure current block followed by a multi-role pole would have upper length
+exactly two. -/
+theorem peeledSingletonToMulti_length_eq_two
+    {E G μ N D T₂ T₃ V₂ V₃ : ℚ} {m β : Nat}
+    (beta_large : 3 ≤ β)
+    (E_unit : HasDecimalShell E 0 0)
+    (G_unit : HasDecimalShell G 0 0)
+    (mu_unit : HasDecimalShell μ 0 0)
+    (N_unit : HasDecimalShell N 0 0)
+    (D_unit : HasDecimalShell D 0 0)
+    (V2_unit : HasDecimalShell V₂ 0 0)
+    (V3_unit : HasDecimalShell V₃ 0 0)
+    (T2_shell : HasDecimalShell T₂ (β + 1) β)
+    (T3_shell : HasDecimalShell T₃ 1 1)
+    (next_pole :
+      peeledNumerator N D μ G T₂ V₂ * T₃ =
+        E * μ * G * 10 ^ m * N * V₃) :
+    m = 2 := by
+  have residual_shell := peeledNumerator_of_singleton_hasDecimalShell beta_large N_unit D_unit
+    mu_unit G_unit T2_shell V2_unit
+  have balances := poleEquation_shellBalance residual_shell T3_shell E_unit G_unit mu_unit
+    (N_unit.mul V3_unit) (by
+      simpa [mul_assoc, mul_left_comm, mul_comm] using next_pole)
+  omega
+
+/-- Neither physical singleton erasure can hit a later multi-role pole: `D_c` has upper length
+one and `D_b` has upper length `β+2`, whereas the pole equation requires length two. -/
+theorem peeledSingletonToMulti_impossible
+    {E G μ N D T₂ T₃ V₂ V₃ : ℚ} {β : Nat} (letter : TagLetter)
+    (beta_large : 3 ≤ β)
+    (E_unit : HasDecimalShell E 0 0)
+    (G_unit : HasDecimalShell G 0 0)
+    (mu_unit : HasDecimalShell μ 0 0)
+    (N_unit : HasDecimalShell N 0 0)
+    (D_unit : HasDecimalShell D 0 0)
+    (V2_unit : HasDecimalShell V₂ 0 0)
+    (V3_unit : HasDecimalShell V₃ 0 0)
+    (T2_shell : HasDecimalShell T₂ (β + 1) β)
+    (T3_shell : HasDecimalShell T₃ 1 1)
+    (next_pole :
+      peeledNumerator N D μ G T₂ V₂ * T₃ =
+        E * μ * G * 10 ^ (nearyUpper β (.erase letter)).length * N * V₃) :
+    False := by
+  have length_two := peeledSingletonToMulti_length_eq_two beta_large E_unit G_unit mu_unit
+    N_unit D_unit V2_unit V3_unit T2_shell T3_shell next_pole
+  cases letter with
+  | b =>
+      simp [nearyUpper, tagCode] at length_two
+      omega
+  | c =>
+      simp [nearyUpper, tagCode] at length_two
+
+/-- A singleton-erasure current block cannot hit another singleton-erasure pole: the residual
+has equal shell `(1,1)`, whereas the target contributes a one-step cross-prime gap. -/
+theorem peeledSingletonToSingleton_impossible
+    {E G μ N D T₂ T₃ V₂ V₃ : ℚ} {β : Nat} (letter : TagLetter)
+    (beta_large : 3 ≤ β)
+    (E_unit : HasDecimalShell E 0 0)
+    (G_unit : HasDecimalShell G 0 0)
+    (mu_unit : HasDecimalShell μ 0 0)
+    (N_unit : HasDecimalShell N 0 0)
+    (D_unit : HasDecimalShell D 0 0)
+    (V2_unit : HasDecimalShell V₂ 0 0)
+    (V3_unit : HasDecimalShell V₃ 0 0)
+    (T2_shell : HasDecimalShell T₂ (β + 1) β)
+    (T3_shell : HasDecimalShell T₃ (β + 1) β)
+    (next_pole :
+      peeledNumerator N D μ G T₂ V₂ * T₃ =
+        E * μ * G * 10 ^ (nearyUpper β (.erase letter)).length * N * V₃) :
+    False := by
+  have residual_shell := peeledNumerator_of_singleton_hasDecimalShell beta_large N_unit D_unit
+    mu_unit G_unit T2_shell V2_unit
+  have balances := poleEquation_shellBalance residual_shell T3_shell E_unit G_unit mu_unit
+    (N_unit.mul V3_unit) (by
+      simpa [mul_assoc, mul_left_comm, mul_comm] using next_pole)
+  omega
+
+/-- A multi-role current block can hit a singleton-erasure pole only after at least `β+3`
+upper digits. The built-in decimal factor excludes shorter lengths, and the remaining boundary
+`m=β+2` is exactly the two-adic cancellation forbidden by the length-two carrier theorem. -/
+theorem peeledMultiToSingleton_beta_add_three_le
+    {E G μ N D T₂ T₃ V₂ V₃ : ℚ} {m β : Nat}
+    (E_unit : HasDecimalShell E 0 0)
+    (G_unit : HasDecimalShell G 0 0)
+    (mu_unit : HasDecimalShell μ 0 0)
+    (N_unit : HasDecimalShell N 0 0)
+    (D_unit : HasDecimalShell D 0 0)
+    (V2_unit : HasDecimalShell V₂ 0 0)
+    (V3_unit : HasDecimalShell V₃ 0 0)
+    (T2_shell : HasDecimalShell T₂ 1 1)
+    (T3_shell : HasDecimalShell T₃ (β + 1) β)
+    (next_pole :
+      peeledNumerator N D μ G T₂ V₂ * T₃ =
+        E * μ * G * 10 ^ m * N * V₃) :
+    β + 3 ≤ m := by
+  have residual_shell := peeledNumerator_singleton_shell E_unit G_unit mu_unit N_unit V3_unit
+    T3_shell next_pole
+  have trace_term : HasDecimalShell (N * T₂) 1 1 := by
+    simpa only [zero_add] using N_unit.mul T2_shell
+  have decimal_term : HasDecimalShell (10 * μ * G * V₂ * D) 1 1 := by
+    simpa only [zero_add, add_zero] using
+      ((((ten_hasDecimalShell.mul mu_unit).mul G_unit).mul V2_unit).mul D_unit)
+  have two_lower := min_le_sub (prime := 2) residual_shell.1.1
+  rw [trace_term.1.2, decimal_term.1.2] at two_lower
+  have two_lower' : 1 ≤ padicValRat 2 (peeledNumerator N D μ G T₂ V₂) := by
+    simpa [peeledNumerator] using two_lower
+  rw [residual_shell.1.2] at two_lower'
+  have beta_add_two_le : β + 2 ≤ m := by omega
+  have boundary_ne : m ≠ β + 2 := by
+    intro boundary
+    have residual_depth : (m : ℤ) - (β + 1) = 1 := by omega
+    have residual_depth_one :
+        HasValue 2 (peeledNumerator N D μ G T₂ V₂) 1 := by
+      rw [residual_depth] at residual_shell
+      exact residual_shell.1
+    exact peeledNumerator_twoAdic_deepens N_unit.1 D_unit.1 mu_unit.1 G_unit.1 T2_shell.1
+      V2_unit.1 residual_depth_one
+  omega
+
+/-- The long multi-to-singleton branch is realized by a decimal-unit rational carrier for every
+choice of unit coefficients and traces. Thus unit-shell information alone cannot extinguish the
+remaining `m≥β+3` branch. -/
+theorem exists_decimalUnitCarrier_multiToSingleton
+    {E G μ T₂ T₃ V₂ V₃ : ℚ} {m β : Nat}
+    (length_large : β + 3 ≤ m)
+    (E_unit : HasDecimalShell E 0 0)
+    (G_unit : HasDecimalShell G 0 0)
+    (mu_unit : HasDecimalShell μ 0 0)
+    (V2_unit : HasDecimalShell V₂ 0 0)
+    (V3_unit : HasDecimalShell V₃ 0 0)
+    (T2_shell : HasDecimalShell T₂ 1 1)
+    (T3_shell : HasDecimalShell T₃ (β + 1) β) :
+    ∃ N : ℚ, HasDecimalShell N 0 0 ∧
+      peeledNumerator N 1 μ G T₂ V₂ * T₃ =
+        E * μ * G * 10 ^ m * N * V₃ := by
+  let K := twoTransferTrace E G μ (10 ^ m) T₂ T₃ V₃
+  have K_shell : HasDecimalShell K (β + 2) (β + 1) := by
+    have shell := twoTransferTrace_shell_of_nonresonant (m := m) E_unit G_unit mu_unit V3_unit
+      T2_shell T3_shell (by omega) (by omega)
+    rw [min_eq_left (by omega), min_eq_left (by omega)] at shell
+    change HasDecimalShell
+      (twoTransferTrace E G μ (10 ^ m) T₂ T₃ V₃) (β + 2) (β + 1)
+    convert shell using 1 <;> omega
+  have numerator_shell :
+      HasDecimalShell (10 * μ * G * V₂ * T₃) (β + 2) (β + 1) := by
+    simpa [add_assoc, add_comm, add_left_comm] using
+      ((((ten_hasDecimalShell.mul mu_unit).mul G_unit).mul V2_unit).mul T3_shell)
+  let N := 10 * μ * G * V₂ * T₃ / K
+  have N_unit : HasDecimalShell N 0 0 := by
+    constructor
+    · simpa [N] using div_hasValue numerator_shell.1 K_shell.1
+    · simpa [N] using div_hasValue numerator_shell.2 K_shell.2
+  have numerator_factor : N * K = 10 * μ * G * V₂ * T₃ := by
+    dsimp [N]
+    exact div_mul_cancel₀ _ K_shell.1.1
+  have backward_identity :
+      T₂ * T₃ = K + E * μ * G * 10 ^ m * V₃ := by
+    dsimp [K, twoTransferTrace]
+    ring
+  refine ⟨N, N_unit, ?_⟩
+  unfold peeledNumerator
+  calc
+    (N * T₂ - 10 * μ * G * V₂ * 1) * T₃ =
+        N * (T₂ * T₃) - 10 * μ * G * V₂ * T₃ := by ring
+    _ = N * K + E * μ * G * 10 ^ m * N * V₃ - 10 * μ * G * V₂ * T₃ := by
+      rw [backward_identity]
+      ring
+    _ = E * μ * G * 10 ^ m * N * V₃ := by rw [numerator_factor]; ring
+
+/-- Complete unit-carrier classification of the multi-to-singleton seam: such a rational
+carrier exists exactly for upper length at least `β+3`. Reachability from the encoded reset,
+not local shell algebra, is the residual obstruction. -/
+theorem exists_decimalUnitCarrier_multiToSingleton_iff
+    {E G μ T₂ T₃ V₂ V₃ : ℚ} {m β : Nat}
+    (_beta_large : 3 ≤ β)
+    (E_unit : HasDecimalShell E 0 0)
+    (G_unit : HasDecimalShell G 0 0)
+    (mu_unit : HasDecimalShell μ 0 0)
+    (V2_unit : HasDecimalShell V₂ 0 0)
+    (V3_unit : HasDecimalShell V₃ 0 0)
+    (T2_shell : HasDecimalShell T₂ 1 1)
+    (T3_shell : HasDecimalShell T₃ (β + 1) β) :
+    (∃ N D : ℚ, HasDecimalShell N 0 0 ∧ HasDecimalShell D 0 0 ∧
+        peeledNumerator N D μ G T₂ V₂ * T₃ =
+          E * μ * G * 10 ^ m * N * V₃) ↔
+      β + 3 ≤ m := by
+  constructor
+  · rintro ⟨N, D, N_unit, D_unit, next_pole⟩
+    exact peeledMultiToSingleton_beta_add_three_le E_unit G_unit mu_unit N_unit D_unit V2_unit
+      V3_unit T2_shell T3_shell next_pole
+  · intro length_large
+    obtain ⟨N, N_unit, next_pole⟩ := exists_decimalUnitCarrier_multiToSingleton length_large
+      E_unit G_unit mu_unit V2_unit V3_unit T2_shell T3_shell
+    have one_unit : HasDecimalShell (1 : ℚ) 0 0 :=
+      ⟨⟨one_ne_zero, padicValRat.one⟩, ⟨one_ne_zero, padicValRat.one⟩⟩
+    exact ⟨N, 1, N_unit, one_unit, next_pole⟩
 
 /-- A consecutive multi-role pole transition from a decimal-unit carrier cannot use an upper
 block of length two. The prospective pole forces residual depth `m-1`, while at `m=2` the two

@@ -150,6 +150,11 @@ closure must do at least one of the following:
 2. construct a higher-digit invariant that breaks the period-two unit cycle;
 3. recognize every surviving transition at upper length at least three.
 
+[`MM-S20`](../SALVAGE.md#mm-s20-singleton-carrier-classification) subsequently removes every
+singleton-current transition and proves that an unrestricted decimal-unit multi-to-singleton
+carrier exists exactly for `m≥β+3`. The remaining singleton question is encoded reachability,
+not local shell compatibility.
+
 Treating every `N'` as another encoded head is invalid. Treating the ordinary length-two
 chamber as a generalized-carrier theorem is also invalid.
 

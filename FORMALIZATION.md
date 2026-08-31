@@ -1340,8 +1340,15 @@ then records [`MM-S19`](SALVAGE.md#mm-s19-all-deletion-raw-head-extinction).
 mixed-prime cuts and excludes every all-`D_c` block of length at least three from reaching a
 later multi-role pole. Together with `MM-S18`, this removes the complete all-deletion family
 at admissible non-singleton lengths from the initial raw-head grammar. The module does not
-identify later product residuals with raw encoded heads, exclude rule-bearing or
-`D_b`-containing first blocks, or decide singleton targets.
+identify later product residuals with raw encoded heads or exclude rule-bearing or
+`D_b`-containing first blocks. Record
+[`MM-S20`](SALVAGE.md#mm-s20-singleton-carrier-classification) closes its local singleton
+classification: `peeledSingletonToMulti_impossible` and
+`peeledSingletonToSingleton_impossible` eliminate both physical singleton-current branches,
+while `exists_decimalUnitCarrier_multiToSingleton_iff` proves that an unrestricted rational
+decimal-unit carrier reaches a singleton target exactly when `m≥β+3`. The latter construction
+is an abstraction barrier, not a setter counterexample: encoded reachability of the constructed
+carrier remains open.
 
 The dimension-two affine ledger has seven independently checked records:
 
@@ -1796,7 +1803,7 @@ fixed-rank decision problem.
 | `DecimalSetterCarry.lean` | two-reset successive-pole identities, joint depth constraints, exact decimal suffix exhaustion, first-transfer prefix separation, and the ordinary depth-two A/B shell forest |
 | `DecimalSetterChamber.lean` | exact decimal pole chambers, both ordinary A-to-A length-two extinctions, and the emitted-body grammar certificate |
 | `DecimalSetterResonance.lean` | complete ordinary depth-two A-to-B and B-to-A extinction, phase-word exhaustion, and compiler-envelope specialization |
-| `DecimalSetterDepth.lean` | recursive two-unit A-shell carrier, length-two extinction, exact all-`D_c` raw-head extinction, and the compatible last-digit two-cycle |
+| `DecimalSetterDepth.lean` | recursive two-unit carrier; length-two and singleton-current extinction; exact all-`D_c` raw-head extinction; sharp `m≥β+3` abstract multi-to-singleton classification; compatible last-digit two-cycle |
 | `PairedMortality.lean` | common-column mortality converse and exact integer `4 × 4` family |
 | `PhaseFracture.lean` | phase normalization and dimension-free projective-identification contradiction |
 | `PhaseRigidity.lean` | checked local role algebra, discrepancy commutators, and invariant-pencil rigidity |
