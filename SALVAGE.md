@@ -103,6 +103,7 @@ file owns the mathematical stock.
 | [`MM-S15`](#mm-s15-ordinary-a-to-a-length-two-extinction) | obstruction | both ordinary A-to-A length-two resonances miss every admissible next pole | formalized | active |
 | [`MM-S16`](#mm-s16-complete-ordinary-depth-two-extinction) | obstruction | no ordinary-reset orbit reaches a false pole after two completed transfers | formalized core; audited assembly | active |
 | [`MM-S17`](#mm-s17-recursive-decimal-carrier) | structure theorem and obstruction | repeated A-shell resonances have an exact two-unit carrier whose last digits form a compatible period-two cycle | formalized | active |
+| [`MM-S18`](#mm-s18-length-two-carrier-extinction) | obstruction | every consecutive multi-shell carrier transition has upper length at least three | formalized | active |
 | [`R32-S01`](#r32-s01-split-return-normal-form) | structure theorem | rank-two cuts reduce one-unit binary mortality to a `2 × 2` return recurrence | formalized | graduated |
 | [`R32-S02`](#r32-s02-two-plane-edge-square) | structure theorem | two rank-two generators are a two-vertex square of `2 × 2` edges | formalized | graduated |
 | [`R32-O01`](#r32-o01-rank-one-profile-collapse) | obstruction | a rank-one generator reduces mortality to order-at-most-three scalar recurrence zeros | audited | stock |
@@ -3017,15 +3018,16 @@ For every later block of upper length at least three, the carrier forces `N≡7D
 The update `D'=EN` advances the pair to `D'≡9D`, `N'≡3D`; a second update returns to
 `D''≡D`, `N''≡7D`. The final digit is therefore a compatible period-two cycle, not a
 contradiction. Later numerators are generalized product residuals and need not be encoded-word
-heads. Upper length two forces only one decimal factor and lies outside the modulo-`100` law.
+heads. [`MM-S18`](#mm-s18-length-two-carrier-extinction) subsequently excludes upper length
+two, so the modulo-`100` premise holds on every surviving non-singleton transition.
 
 **Scope:** this is an all-depth normal form for consecutive multi-shell resonances and a complete
-unit-digit audit. It does not bridge generalized residuals back to raw heads, kill the
-generalized length-two transition, decide singleton targets, or prove projective avoidance.
+unit-digit audit. It does not bridge generalized residuals back to raw heads, decide singleton
+targets, or prove projective avoidance.
 
 **Use:** carry `(N,D)` as the canonical state in every deeper decimal attack. Reject any proof
 that reapplies the raw head trichotomy to `N'` without a structural bridge, or claims that the
-last decimal digit descends. Split upper length two before using the unit congruence.
+last decimal digit descends.
 
 **Formalization:**
 [`MatrixMortality/DecimalSetterDepth.lean`](MatrixMortality/DecimalSetterDepth.lean), through
@@ -3036,8 +3038,59 @@ last decimal digit descends. Split upper length two before using the unit congru
 **Artifact:**
 [`audits/m53-decimal-recursive-carrier-2026-08-30.md`](audits/m53-decimal-recursive-carrier-2026-08-30.md).
 
-**Next:** attach a higher decimal suffix language to generalized residuals and decide the
-upper-length-two carrier transition separately.
+**Next:** after `MM-S18`, attach a higher decimal suffix language to generalized residuals of
+upper length at least three.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S18: Length-two carrier extinction
+
+**Kind:** obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+Let `(N,D)` be a decimal-unit carrier and let the current and prospective target blocks both
+have multi-role trace shell `(1,1)`. If the current block has upper length `m`, its residual is
+
+```text
+R=NT₂−10μGV₂D.
+```
+
+A following multi-role pole forces `R` to have exact shell `(m−1,m−1)`. At `m=2`, this would
+make `R/10` a `2`-adic unit. But
+
+```text
+R/10=N(T₂/10)−μGV₂D,
+```
+
+and both terms on the right are `2`-adic units. Their difference cannot be a `2`-adic unit:
+after division by the second term, that would make a rational number and its predecessor both
+units at two, which would force the prime two to be odd. Hence `m≠2`; every non-singleton
+transition has `m≥3`.
+
+The proof is rational and insensitive to signs, integrality, or the choice of reset. The initial
+peeled carrier has decimal-unit coordinates; `peeledDenominator_decimalUnit` preserves the
+denominator condition, and factoring the forced residual shell preserves the numerator
+condition. Thus no normalization step reopens the excluded transition.
+
+**Scope:** this removes the exceptional length-two transition from every consecutive
+multi-shell carrier orbit. It does not recognize the higher suffix of the remaining generalized
+residuals, decide a transition into a singleton target, or prove projective avoidance.
+
+**Use:** every surviving multi-shell transition satisfies the modulo-`100` premise of
+`peeledNumerator_forces_lastDigit`. Higher-suffix attacks may start at upper length three.
+
+**Formalization:**
+[`MatrixMortality/DecimalSetterDepth.lean`](MatrixMortality/DecimalSetterDepth.lean), through
+`peeledNumerator_twoAdic_deepens`, `peeledMultiPole_length_ne_two`, and
+`peeledMultiPole_three_le_length`.
+
+**Artifact:**
+[`audits/m53-decimal-length-two-carrier-extinction-2026-08-30.md`](audits/m53-decimal-length-two-carrier-extinction-2026-08-30.md).
+
+**Next:** classify the higher decimal suffix of the generalized residual on the now-uniform
+`m≥3` corridor.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).

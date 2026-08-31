@@ -9,9 +9,9 @@ numerator by `NT−10μGVD`; a following multi-role pole forces exactly `m−1` 
 and five in that residual. Removing them gives the next carrier `(N', EN)`.
 
 The initial carrier comes from a raw encoded-word suffix peel and has a three-way head grammar.
-Later numerators are generalized product residuals, not raw encoded heads. The final-digit law
-therefore enters a compatible two-cycle rather than closing the induction. The exceptional
-upper length two forces only one decimal factor and lies outside that law.
+Later numerators are generalized product residuals, not raw encoded heads. A `2`-adic resonance
+law excludes upper length two, so every surviving transition enters the compatible final-digit
+two-cycle.
 -/
 
 namespace MatrixMortality.DecimalSetterDepth
@@ -90,6 +90,105 @@ theorem peeledDenominator_decimalUnit {E N : ℚ}
     (N_unit : HasDecimalShell N 0 0) :
     HasDecimalShell (E * N) 0 0 := by
   simpa only [zero_add] using E_unit.mul N_unit
+
+private theorem two_unit_sub_unit_not_unit
+    {left right : ℚ}
+    (left_unit : HasValue 2 left 0)
+    (right_unit : HasValue 2 right 0) :
+    ¬HasValue 2 (left - right) 0 := by
+  intro difference_unit
+  have ratio_unit : HasValue 2 (left / right) 0 := by
+    simpa using div_hasValue left_unit right_unit
+  have predecessor_unit : HasValue 2 (left / right - 1) 0 := by
+    have divided_difference : HasValue 2 ((left - right) / right) 0 := by
+      simpa using div_hasValue difference_unit right_unit
+    rw [show left / right - 1 = (left - right) / right by
+      field_simp [right_unit.1]]
+    exact divided_difference
+  have two_odd := odd_prime_of_adjacent_units ratio_unit predecessor_unit
+  norm_num at two_odd
+
+/-- Two summands in the same `2`-adic shell of depth one cancel more deeply. In particular,
+the residual of a multi-role trace cannot itself remain at depth one when the carrier and all
+coefficients are decimal units. -/
+theorem peeledNumerator_twoAdic_deepens
+    {N D μ G T V : ℚ}
+    (N_unit : HasValue 2 N 0)
+    (D_unit : HasValue 2 D 0)
+    (mu_unit : HasValue 2 μ 0)
+    (G_unit : HasValue 2 G 0)
+    (T_shell : HasValue 2 T 1)
+    (V_unit : HasValue 2 V 0) :
+    ¬HasValue 2 (peeledNumerator N D μ G T V) 1 := by
+  intro residual_shell
+  have ten_shell : HasValue 2 (10 : ℚ) 1 := ten_hasDecimalShell.1
+  have trace_quotient_unit : HasValue 2 (T / 10) 0 := by
+    simpa using div_hasValue T_shell ten_shell
+  have left_unit : HasValue 2 (N * (T / 10)) 0 := by
+    simpa using mul_hasValue N_unit trace_quotient_unit
+  have right_unit : HasValue 2 (μ * G * V * D) 0 := by
+    simpa using
+      mul_hasValue (mul_hasValue (mul_hasValue mu_unit G_unit) V_unit) D_unit
+  have normalized_residual_unit :
+      HasValue 2 (N * (T / 10) - μ * G * V * D) 0 := by
+    have quotient_unit : HasValue 2 (peeledNumerator N D μ G T V / 10) 0 := by
+      simpa using div_hasValue residual_shell ten_shell
+    rw [show peeledNumerator N D μ G T V / 10 =
+        N * (T / 10) - μ * G * V * D by
+      unfold peeledNumerator
+      ring] at quotient_unit
+    exact quotient_unit
+  exact two_unit_sub_unit_not_unit left_unit right_unit normalized_residual_unit
+
+/-- A consecutive multi-role pole transition from a decimal-unit carrier cannot use an upper
+block of length two. The prospective pole forces residual depth `m-1`, while at `m=2` the two
+depth-one summands cancel more deeply at two. -/
+theorem peeledMultiPole_length_ne_two
+    {E G μ N D T₂ T₃ V₂ V₃ : ℚ} {m : Nat}
+    (E_unit : HasDecimalShell E 0 0)
+    (G_unit : HasDecimalShell G 0 0)
+    (mu_unit : HasDecimalShell μ 0 0)
+    (N_unit : HasDecimalShell N 0 0)
+    (D_unit : HasDecimalShell D 0 0)
+    (V2_unit : HasDecimalShell V₂ 0 0)
+    (V3_unit : HasDecimalShell V₃ 0 0)
+    (T2_shell : HasDecimalShell T₂ 1 1)
+    (T3_shell : HasDecimalShell T₃ 1 1)
+    (next_pole :
+      peeledNumerator N D μ G T₂ V₂ * T₃ =
+        E * μ * G * 10 ^ m * N * V₃) :
+    m ≠ 2 := by
+  intro length_two
+  subst m
+  have residual_shell := peeledNumerator_multi_shell E_unit G_unit mu_unit N_unit V3_unit
+    T3_shell next_pole
+  have residual_two_shell : HasValue 2 (peeledNumerator N D μ G T₂ V₂) 1 := by
+    norm_num at residual_shell ⊢
+    exact residual_shell.1
+  exact peeledNumerator_twoAdic_deepens N_unit.1 D_unit.1 mu_unit.1 G_unit.1 T2_shell.1
+    V2_unit.1 residual_two_shell
+
+/-- Every non-singleton consecutive multi-role transition from the recursive carrier has upper
+length at least three. Thus all surviving transitions lie inside the higher-suffix regime. -/
+theorem peeledMultiPole_three_le_length
+    {E G μ N D T₂ T₃ V₂ V₃ : ℚ} {m : Nat}
+    (length_two_le : 2 ≤ m)
+    (E_unit : HasDecimalShell E 0 0)
+    (G_unit : HasDecimalShell G 0 0)
+    (mu_unit : HasDecimalShell μ 0 0)
+    (N_unit : HasDecimalShell N 0 0)
+    (D_unit : HasDecimalShell D 0 0)
+    (V2_unit : HasDecimalShell V₂ 0 0)
+    (V3_unit : HasDecimalShell V₃ 0 0)
+    (T2_shell : HasDecimalShell T₂ 1 1)
+    (T3_shell : HasDecimalShell T₃ 1 1)
+    (next_pole :
+      peeledNumerator N D μ G T₂ V₂ * T₃ =
+        E * μ * G * 10 ^ m * N * V₃) :
+    3 ≤ m := by
+  have length_ne := peeledMultiPole_length_ne_two E_unit G_unit mu_unit N_unit D_unit V2_unit
+    V3_unit T2_shell T3_shell next_pole
+  omega
 
 theorem peeledStep_factor
     {E G μ P V N D N' : ℚ} {depth : Nat}
