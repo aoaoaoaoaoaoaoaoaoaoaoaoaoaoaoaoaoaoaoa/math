@@ -47,7 +47,7 @@ target-depth transfer proved in this audit, not the current net frontier.
 ## Verification
 
 `MatrixMortality/DecimalSetterFiveDepth.lean` checks the general deep-perturbation transfer.
-`MatrixMortality/DecimalSetterAncestry.lean` checks (1), the lower-word identity, full-gap
+`MatrixMortality/DecimalSetterPositioned.lean` checks (1), the lower-word identity, full-gap
 support, and the composed raw-head obstruction. Narrow module builds, Lean language-server
 diagnostics, namespace lint, and selected transitive axiom snapshots pass without warnings,
 suppressions, or proof apertures.
@@ -55,5 +55,5 @@ suppressions, or proof apertures.
 ## Artifacts
 
 - [`DecimalSetterFiveDepth.lean`](../MatrixMortality/DecimalSetterFiveDepth.lean)
-- [`DecimalSetterAncestry.lean`](../MatrixMortality/DecimalSetterAncestry.lean)
+- [`DecimalSetterPositioned.lean`](../MatrixMortality/DecimalSetterPositioned.lean)
 - [`SALVAGE.md`](../SALVAGE.md#mm-s39-second-position-d_b-raw-head-extinction)

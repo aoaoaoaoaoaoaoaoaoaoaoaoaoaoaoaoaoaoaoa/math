@@ -930,6 +930,13 @@ lies in positions `1,…,β+1` misses the next multi-role pole. Its lower code r
 code and retains full-gap support whenever its total width is the entry saturation width. Late
 positions, multiple `D_b` perturbations, rule-bearing words, and generalized carriers remain.
 
+[`MM-S45`](SALVAGE.md#mm-s45-exceptional-late-one-d_b-boundary) closes every remaining regular
+raw head. Its all-`D_c` residual already fails divisibility by `5^β` at every width, while even
+a final-position `D_b` changes the upper code only at depth at least `β+2`. Hence a one-`D_b`
+all-erasure survivor must satisfy both `prefixWidth>β` and the exceptional raw-head identity
+with terminal run `s=β−1`. The entire one-marker branch is now the exceptional-late tail; the
+theorem neither proves that tail nonempty nor controls multiple `D_b` or rule-bearing words.
+
 The ternary and decimal branches now separate at their first multi-transfer front.
 [`MM-S37`](SALVAGE.md#mm-s37-decimal-three-shape-frontier-extinction) substitutes each of the
 three role shapes left by the swapped ternary gate into the decimal carrier equation. All are

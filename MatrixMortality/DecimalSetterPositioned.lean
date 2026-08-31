@@ -175,6 +175,96 @@ theorem positionedBErase_rawHead_shell_impossible
   · rfl
   · simpa only [n, H, P, V, R, Nat.cast_add] using shell
 
+/-- At a regular raw head, a sole `D_b` is impossible in every all-erasure position. -/
+theorem positionedBErase_regularRawHead_shell_impossible
+    {β s prefixWidth tailWidth : Nat} (body : List TagLetter) {H μ E G : ℤ}
+    (s_positive : 1 ≤ s) (suffix_below : s + 2 ≤ β)
+    (head_eq : 9 * H = 5 * 10 ^ (β + 2) + 2 * 10 ^ s - 7)
+    (mu_eq : 9 * μ = 52 * 10 ^ β - 7)
+    (gap_eq : E = 18 * 10 ^ β - 63)
+    (lift_eq : G = 502 * 10 ^ β - 7)
+    (shell :
+      HasDecimalShell
+        ((H *
+          (E * code (punctuatedUpper β
+              (List.replicate prefixWidth .c ++
+                .b :: List.replicate tailWidth .c)) +
+            G * positionedBEraseLowerCode β body prefixWidth tailWidth) -
+          10 * μ * G * positionedBEraseLowerCode β body prefixWidth tailWidth : ℤ) : ℚ)
+        ((prefixWidth + tailWidth + 1 + β : Nat) : ℤ)
+        ((prefixWidth + tailWidth + 1 + β : Nat) : ℤ)) :
+    False := by
+  let n := prefixWidth + tailWidth + 1
+  let PAll : ℤ := code (punctuatedUpper β (List.replicate n .c))
+  let P : ℤ := code (punctuatedUpper β
+    (List.replicate prefixWidth .c ++ .b :: List.replicate tailWidth .c))
+  let V := positionedBEraseLowerCode β body prefixWidth tailWidth
+  let RAll := H * (E * PAll + G * V) - 10 * μ * G * V
+  let R := H * (E * P + G * V) - 10 * μ * G * V
+  have n_positive : 1 ≤ n := by omega
+  have allC_upper_eq : 9 * PAll =
+      50 * 10 ^ β * 10 ^ n + 2 * 10 ^ β - 7 := by
+    exact allC_punctuatedUpper_code_identity β n
+  have V_eq : V = allEraseLowerCode β body n := by
+    dsimp only [V, n]
+    exact positionedBEraseLowerCode_eq_allEraseLowerCode
+      β body prefixWidth tailWidth
+  have lower_eq : 9 * V = 7 * 10 ^ n - 7 := by
+    have identity := allEraseLowerCode_identity β body n
+    rw [V_eq]
+    linear_combination identity
+  refine betaDeepUpperPerturbation_regularRawHead_shell_impossible
+    (PAll := PAll) (P := P) (RAll := RAll) (R := R) s_positive suffix_below n_positive
+      head_eq mu_eq gap_eq lift_eq allC_upper_eq lower_eq ?_ ?_ ?_ ?_
+  · rfl
+  · dsimp only [P, PAll]
+    have five_to_ten : (5 : ℤ) ^ β ∣ 10 ^ (tailWidth + β + 2) := by
+      exact (pow_dvd_pow (5 : ℤ) (by omega)).trans
+        (pow_dvd_pow_of_dvd (by norm_num : (5 : ℤ) ∣ 10) _)
+    exact five_to_ten.trans
+      (tenPower_dvd_positionedB_punctuatedUpper_code_sub β prefixWidth tailWidth)
+  · rfl
+  · simpa only [n, P, V, R, Nat.cast_add] using shell
+
+/-- Any one-`D_b` all-erasure raw-head shell must use both exceptional features left by the
+previous obstructions: the `D_b` lies after position `β+1`, and the raw head has terminal run
+`β-1`. -/
+theorem positionedBErase_shell_forces_exceptionalLate
+    {β prefixWidth tailWidth : Nat} (body headTail : List TagLetter) {μ E G : ℤ}
+    (β_large : 2 ≤ β)
+    (head_unit :
+      HasDecimalShell (code (peeledHeadWord β (.c :: .c :: headTail)) : ℚ) 0 0)
+    (mu_eq : 9 * μ = 52 * 10 ^ β - 7)
+    (gap_eq : E = 18 * 10 ^ β - 63)
+    (lift_eq : G = 502 * 10 ^ β - 7)
+    (shell :
+      HasDecimalShell
+        (((code (peeledHeadWord β (.c :: .c :: headTail)) : ℤ) *
+          (E * code (punctuatedUpper β
+              (List.replicate prefixWidth .c ++
+                .b :: List.replicate tailWidth .c)) +
+            G * positionedBEraseLowerCode β body prefixWidth tailWidth) -
+          10 * μ * G * positionedBEraseLowerCode β body prefixWidth tailWidth : ℤ) : ℚ)
+        ((prefixWidth + tailWidth + 1 + β : Nat) : ℤ)
+        ((prefixWidth + tailWidth + 1 + β : Nat) : ℤ)) :
+    β < prefixWidth ∧
+      9 * (code (peeledHeadWord β (.c :: .c :: headTail)) : ℤ) =
+        5 * 10 ^ (β + 2) + 2 * 10 ^ (β - 1) - 7 := by
+  obtain ⟨suffix, suffix_positive, suffix_le, _, head_eq⟩ :=
+    peeledDoubleCHead_unit_shape headTail (by omega) head_unit
+  have prefix_late : β < prefixWidth := by
+    by_contra prefix_not_late
+    exact positionedBErase_rawHead_shell_impossible body headTail β_large
+      (Nat.le_of_not_gt prefix_not_late) head_unit mu_eq gap_eq lift_eq shell
+  have suffix_eq : suffix = β - 1 := by
+    by_contra suffix_ne
+    have suffix_below : suffix + 2 ≤ β := by omega
+    exact positionedBErase_regularRawHead_shell_impossible body suffix_positive suffix_below
+      head_eq mu_eq gap_eq lift_eq shell
+  constructor
+  · exact prefix_late
+  · simpa only [suffix_eq] using head_eq
+
 /-- An all-erasure word whose second tile is `D_b`. -/
 def secondBEraseBlock (tailWidth : Nat) : List NearyTile :=
   positionedBEraseBlock 1 tailWidth
