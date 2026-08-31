@@ -3,7 +3,7 @@ import MatrixMortality.MixedPrimeRealTrapWall
 /-!
 # Two-adic absorption outside the mixed-prime secondary wall
 
-The three reverse branches admit exact normalized mantissa coordinates. If a reduced source
+The three reverse branches have exact normalized mantissa coordinates. If a reduced source
 mantissa has denominator divisible by four, every branch remains at rational two-adic value at
 most minus two. This cone is therefore absorbing: a lower-wall under-cancellation or a middle
 exit can never return to the secondary wall. Lower-wall exits split exactly into the absorbing
