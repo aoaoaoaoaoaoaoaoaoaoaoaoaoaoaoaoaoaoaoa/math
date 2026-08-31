@@ -1484,6 +1484,14 @@ Finite enumeration therefore decides the orbit, including the profinite-blind ta
 survives as a sharp obstruction to finite certificates, but its displayed family is not a hard
 `UCB₂(S)` instance.
 
+[`D2-O05`](SALVAGE.md#d2-o05-promised-empty-free-orbit-inverse-cycle) blocks the direct extension
+of that primitive-height proof. For `D(z)=5z` and one transverse parabolic, strict ping-pong makes
+the source orbit free, while the nonidentity positive word `UD` fixes a primitive target outside
+that orbit. Chamber-directed inverse stripping then repeats the exact height cycle `5→3→5`.
+The instance is itself easy to reject from the target stabilizer; the obstruction is to greedy
+well-founded descent. Any general normal form must quotient recurrent target stabilizers, retain
+richer cycle state, or replace primitive Archimedean height.
+
 The ordinary mortality lift is likewise no longer part of the paired obstruction. For arbitrary
 controls `H_a`, column `γ`, and row `λ` over a field, adjoining `γλ` gives mortality exactly when some
 `λH_yγ` vanishes. A zero product without the separator is already a scalar-zero witness; after
@@ -1589,7 +1597,7 @@ or neutral word across the return, use an empty consume, or split recurrent outp
 | Positive projective transition lower bound | Same-zero dimension three is point-line incidence in `P²`, and actual one-sided shifts retain finite rank/kernel/image data | Derive a uniform nonstationary or noncommuting shift incompatibility from an unbounded terminal section; static support rank, formal inverse completion, fixed equal-length return flowers, and unary consecutive-repeat escape are forbidden |
 | Global word-residual recoding | Longer noncommutative atoms can retain order while discarding the four additive role channels | Escape `G3-D05`: fixed-priority affine counters and all one-way reset/transfer/fanout cascades are decidable |
 | Head-separated three-schema source | `G3-C04` discharges every arbitrary-trace forcing obligation locally; `G3-O24` isolates the directed stable-cone alternative | Preserve an undecidable mixed or neutral word across returns, or realize zero-sensitive S5 GLB decoding after the `G3-O25` separator-rank fork; complete pure forks are decidable by `G3-D07` |
-| Carvalho projective group-orbit separator | `G3-M03` gives the exact saturated three-positive cover; `G3-O23` collapses every singular carrier to invertible dimension two; `D2-D02/D08` decide all elementary group actions; `D2-D09` decides the profinite-blind step-three shear family by height | Universalize the height/continued-fraction normal form to arbitrary non-elementary `UCB₂(S)`, or construct the invertible three-state line/plane orbit left by `G3-O22`; finite ambient quotients are forbidden by `G3-O28` |
+| Carvalho projective group-orbit separator | `G3-M03` gives the exact saturated three-positive cover; `G3-O23` collapses every singular carrier to invertible dimension two; `D2-D02/D08` decide all elementary group actions; `D2-D09` decides the profinite-blind step-three shear family by height | Build a recurrent-cycle-aware normal form for arbitrary non-elementary `UCB₂(S)`, or construct the invertible three-state line/plane orbit left by `G3-O22`; finite ambient quotients are forbidden by `G3-O28`, and primitive-height-only descent by `D2-O05` |
 
 These six lanes form three trunks. The first three race a direct paired construction against its
 one-sided projective lower bound. The next two seek genuine `GPCP(3)` through either global
@@ -1597,7 +1605,9 @@ recoding or a native source. The last is now a projective group-orbit attack sha
 dimension-two campaign: `G3-O21` closes its algebraic semantic carrier, `G3-O23` removes
 singular spelling memory, `D2-D02/D08` remove the elementary group branch, and `G3-O28`
 removes all finite ambient-quotient separation on one promised no-instance. `D2-D09` then decides
-that no-instance's complete fixed-source family by Archimedean height.
+that no-instance's complete fixed-source family by Archimedean height. `D2-O05` shows why the
+same height cannot simply be carried to a dilation--parabolic free product: a positive target
+stabilizer creates an exact inverse cycle even in a promised-empty coset.
 
 #### Raceable leaves
 
@@ -1815,7 +1825,10 @@ by equality of the entire target matrix. The shared artery must therefore use sy
 Archimedean structure, or another infinite invariant; a finite ambient-group invariant is dead.
 [`D2-D09`](SALVAGE.md#d2-d09-step-three-shear-height-decision) proves this distinction is real:
 height decides the fixed step-three family despite its profinite blindness. The remaining question
-is whether comparable descent survives for arbitrary non-elementary rational generators.
+is whether an effective descent survives after recurrent target stabilizers are quotiented.
+[`D2-O05`](SALVAGE.md#d2-o05-promised-empty-free-orbit-inverse-cycle) rules out the raw primitive
+height as that descent: one free dilation--parabolic orbit has a positive target cycle and forced
+inverse heights `5→3→5`. It neither decides nor proves hard the general coset problem.
 
 Work on projective incidence should therefore be treated as a joint `M₃(2)`/`M₂(3)` campaign.
 A `GPI₂` algorithm decides all of `M₂(3)` and the rank-`(2,2)` artery of `M₃(2)`; a universal
@@ -3093,9 +3106,11 @@ normal-form length.
 [`D2-D09`](SALVAGE.md#d2-d09-step-three-shear-height-decision) is the exact positive seed. For
 the fixed step-three shear orbit of `[1:1]`, alternating coordinate dominance makes every reduced
 syllable double primitive pair height and bounds every exponent by the target height. Generalize
-the chamber/height pair to arbitrary nonelementary generators, or isolate the algebraic feature
-which prevents it. Raw word length alone is not a lawful height: relations can make long words
-represent short group elements.
+the chamber/height pair only after handling [`D2-O05`](SALVAGE.md#d2-o05-promised-empty-free-orbit-inverse-cycle):
+a diagonal `S`-unit and transverse parabolic admit a positive target stabilizer whose deterministic
+inverse stripping cycles through primitive heights `5→3→5`. A viable state must detect and
+quotient such cycles or add a secondary well-founded invariant. Raw word length alone is not a
+lawful height: relations can make long words represent short group elements.
 
 #### 6. Exact symbolic saturation and finite obstructions
 
@@ -3105,7 +3120,10 @@ only coverability. `G3-O28` closes finite ambient-group separation for `UCB₂(S
 empty coset survives every finite quotient of its natural `S`-arithmetic ambient group. Finite
 residues may remain components of an infinite annotated state, but cannot be the complete
 negative certificate. `D2-D09` decides that explicit family by an unbounded Archimedean height;
-it is the model for the annotation that finite saturation was missing.
+it is the model for the annotation that finite saturation was missing. `D2-O05` adds the first
+required transition type for any general saturation: a chamber-directed inverse component may
+be periodic even when the target coset is empty, so recurrent stabilizer components must be
+recognized rather than mistaken for failed descent.
 
 #### 7. Valuation universality
 
@@ -3190,7 +3208,8 @@ universal computation.
    recoding, and native three-schema rewriting. `G3-O23` has absorbed the singular saturated
    Carvalho branch into dimension two, and `G3-O28` has killed every finite quotient of one
    natural `S`-arithmetic ambient group there. `D2-D09` decides that fixed shear family by height;
-   universalize the infinite descent rather than retaining the example as a hardness candidate.
+   `D2-O05` forbids universalizing primitive height without recurrent-cycle state. Seek a
+   cycle-quotiented infinite descent rather than retaining either example as a hardness candidate.
    Do not revive singular spelling memory, conflate group inverses with positive `M₂(3)` controls,
    or retry finite ambient-group separation as a complete certificate.
 6. Formalize `D2-S02` and `D2-D05`–`D2-D07`, then attack fixed-source exact prefix and

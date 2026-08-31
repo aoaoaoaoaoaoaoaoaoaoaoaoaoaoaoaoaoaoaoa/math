@@ -1614,6 +1614,85 @@
 'MatrixMortality.ShearEuclidean.finite_search_bounds_of_matrix_hit' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.TransverseDilationOrbit.dilationGenerator_det' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseDilationOrbit.transverseGenerator_det' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseDilationOrbit.targetMatrix_det' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.TransverseDilationOrbit.sourceConjugatorMatrix_det' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseDilationOrbit.source_outside_chambers' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseDilationOrbit.sourcePoint_stabilizer_trivial' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseDilationOrbit.representation_injective' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseDilationOrbit.targetCycleWord_fixes_target' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseDilationOrbit.representation_targetCycleWord_det' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseDilationOrbit.targetCycleWord_ne_one' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseDilationOrbit.targetCycleWord_pow_fixes_target' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseDilationOrbit.targetPoint_not_reachable' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseDilationOrbit.targetUnit_smul_source' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseDilationOrbit.sourceConjugatorUnit_smul_none' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseDilationOrbit.representation_ne_target_mul_stabilizer' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseDilationOrbit.represented_targetCoset_disjoint' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseDilationOrbit.infinityRepresentation_apply' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseDilationOrbit.infinityRepresentation_ne_target_mul_stabilizer' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseDilationOrbit.inverse_transverse_target' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseDilationOrbit.targetPoint_mem_transverseChamber' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseDilationOrbit.inverse_dilation_return' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseDilationOrbit.returnPoint_mem_dilationChamber' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseDilationOrbit.inverseReduction_period_two' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseDilationOrbit.recurrentPairs_coprime' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseDilationOrbit.targetPair_projectivizes' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseDilationOrbit.returnPair_projectivizes' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseDilationOrbit.inverseReduction_height_cycle' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.AffineGroupOrbit.multiplier_mul_mem_translationKernel' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
