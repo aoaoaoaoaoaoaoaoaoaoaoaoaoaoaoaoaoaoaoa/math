@@ -460,7 +460,8 @@ theorem allCDeletion_peeledDoubleCHead_not_fiveAboveWidth
     exact allCDeletion_firstRawHead_not_fiveAboveWidth β_large head_eq
       mu_eq gap_eq lift_eq upper_eq lower_eq trace_eq residual_eq
 
-private theorem fivePower_dvd_int_of_hasDecimalShell
+/-- An integral decimal shell supplies the corresponding exact five-power divisor. -/
+theorem fivePower_dvd_int_of_hasDecimalShell
     {value : ℤ} {depth : Nat}
     (shell : HasDecimalShell (value : ℚ) depth depth) :
     (5 : ℤ) ^ depth ∣ value := by
@@ -472,7 +473,7 @@ private theorem fivePower_dvd_int_of_hasDecimalShell
 
 /-- A late upper perturbation with unit coefficient cannot repair the exceptional raw-head
 residual. The two strict depth orders and all three resonance patterns are excluded. -/
-theorem exceptionalRawHead_lateUpperPerturbation_shell_impossible
+theorem exceptionalRawHead_lateUpperPerturbation_of_fivePower_dvd
     {β prefixWidth tailWidth : Nat} {H μ E G PAll P V RAll R D : ℤ}
     (β_large : 2 ≤ β) (prefix_late : β < prefixWidth)
     (head_eq : 9 * H = 5 * 10 ^ (β + 2) + 2 * 10 ^ (β - 1) - 7)
@@ -489,10 +490,8 @@ theorem exceptionalRawHead_lateUpperPerturbation_shell_impossible
       P - PAll = D * 10 ^ (tailWidth + β + 2))
     (coefficient_sub_two_dvd : (5 : ℤ) ∣ D - 2)
     (residual_eq : R = H * (E * P + G * V) - 10 * μ * G * V)
-    (shell :
-      HasDecimalShell (R : ℚ)
-        (prefixWidth + tailWidth + 1 + β)
-        (prefixWidth + tailWidth + 1 + β)) :
+    (target_deep :
+      (5 : ℤ) ^ (prefixWidth + tailWidth + 1 + β) ∣ R) :
     False := by
   let n := prefixWidth + tailWidth + 1
   let d := tailWidth + β + 2
@@ -574,10 +573,8 @@ theorem exceptionalRawHead_lateUpperPerturbation_shell_impossible
         rw [allC_decomposition, residual_difference]
         dsimp only [Q]
         ring
-  have target_deep : (5 : ℤ) ^ (n + β) ∣ R := by
-    simpa only [n] using fivePower_dvd_int_of_hasDecimalShell shell
   have product_deep : (5 : ℤ) ^ (n + β + 1) ∣ 45 * R :=
-    fivePower_succ_dvd_fortyFive_mul target_deep
+    fivePower_succ_dvd_fortyFive_mul (by simpa only [n] using target_deep)
   by_cases first_late : prefixWidth = β + 1
   · have n_eq_d : n = d := by
       dsimp only [n, d]
@@ -694,8 +691,76 @@ theorem exceptionalRawHead_lateUpperPerturbation_shell_impossible
         at isolated
       exact B_five_unit (five_dvd_of_pow_succ_dvd_ten_pow_mul isolated)
 
+/-- A shell at the one-marker physical depth supplies the divisibility consumed by the exact
+exceptional-head perturbation obstruction. -/
+theorem exceptionalRawHead_lateUpperPerturbation_shell_impossible
+    {β prefixWidth tailWidth : Nat} {H μ E G PAll P V RAll R D : ℤ}
+    (β_large : 2 ≤ β) (prefix_late : β < prefixWidth)
+    (head_eq : 9 * H = 5 * 10 ^ (β + 2) + 2 * 10 ^ (β - 1) - 7)
+    (mu_eq : 9 * μ = 52 * 10 ^ β - 7)
+    (gap_eq : E = 18 * 10 ^ β - 63)
+    (lift_eq : G = 502 * 10 ^ β - 7)
+    (allC_upper_eq :
+      9 * PAll = 50 * 10 ^ β * 10 ^ (prefixWidth + tailWidth + 1) +
+        2 * 10 ^ β - 7)
+    (lower_eq : 9 * V = 7 * 10 ^ (prefixWidth + tailWidth + 1) - 7)
+    (allC_residual_eq :
+      RAll = H * (E * PAll + G * V) - 10 * μ * G * V)
+    (upper_difference_eq :
+      P - PAll = D * 10 ^ (tailWidth + β + 2))
+    (coefficient_sub_two_dvd : (5 : ℤ) ∣ D - 2)
+    (residual_eq : R = H * (E * P + G * V) - 10 * μ * G * V)
+    (shell :
+      HasDecimalShell (R : ℚ)
+        (prefixWidth + tailWidth + 1 + β)
+        (prefixWidth + tailWidth + 1 + β)) :
+    False := by
+  refine exceptionalRawHead_lateUpperPerturbation_of_fivePower_dvd
+    β_large prefix_late head_eq mu_eq gap_eq lift_eq allC_upper_eq lower_eq
+      allC_residual_eq upper_difference_eq coefficient_sub_two_dvd residual_eq ?_
+  exact fivePower_dvd_int_of_hasDecimalShell shell
+
 /-- Changing an all-`D_c` punctuated upper code only above five-adic width `n` cannot create
 the deeper multi-role shell missing from the all-`D_c` raw residual. -/
+theorem aboveWidthUpperPerturbation_peeledDoubleCHead_of_fivePower_dvd
+    {β n : Nat} (tail : List TagLetter) {μ E G PAll P V RAll R : ℤ}
+    (β_large : 2 ≤ β) (n_positive : 1 ≤ n)
+    (head_unit :
+      HasDecimalShell (code (peeledHeadWord β (.c :: .c :: tail)) : ℚ) 0 0)
+    (mu_eq : 9 * μ = 52 * 10 ^ β - 7)
+    (gap_eq : E = 18 * 10 ^ β - 63)
+    (lift_eq : G = 502 * 10 ^ β - 7)
+    (allC_upper_eq : 9 * PAll = 50 * 10 ^ β * 10 ^ n + 2 * 10 ^ β - 7)
+    (lower_eq : 9 * V = 7 * 10 ^ n - 7)
+    (allC_residual_eq :
+      RAll = (code (peeledHeadWord β (.c :: .c :: tail)) : ℤ) *
+          (E * PAll + G * V) - 10 * μ * G * V)
+    (upper_difference_deep : (5 : ℤ) ^ (n + 1) ∣ P - PAll)
+    (residual_eq :
+      R = (code (peeledHeadWord β (.c :: .c :: tail)) : ℤ) *
+          (E * P + G * V) - 10 * μ * G * V)
+    (residual_deep : (5 : ℤ) ^ (n + 1) ∣ R) :
+    False := by
+  let H : ℤ := code (peeledHeadWord β (.c :: .c :: tail))
+  have allC_not_deep : ¬(5 : ℤ) ^ (n + 1) ∣ RAll := by
+    refine allCDeletion_peeledDoubleCHead_not_fiveAboveWidth
+      (T := E * PAll + G * V) (R := RAll) tail β_large n_positive
+        head_unit mu_eq gap_eq lift_eq allC_upper_eq lower_eq ?_ ?_
+    · rfl
+    · simpa only [H] using allC_residual_eq
+  have residual_difference : R - RAll = H * E * (P - PAll) := by
+    rw [residual_eq, allC_residual_eq]
+    dsimp only [H]
+    ring
+  have perturbation_deep : (5 : ℤ) ^ (n + 1) ∣ R - RAll := by
+    rw [residual_difference]
+    exact upper_difference_deep.mul_left (H * E)
+  have allC_deep : (5 : ℤ) ^ (n + 1) ∣ RAll := by
+    have isolated := dvd_sub residual_deep perturbation_deep
+    simpa only [sub_sub_cancel] using isolated
+  exact allC_not_deep allC_deep
+
+/-- The physical one-marker shell is deeper than the width-level divisibility obstruction. -/
 theorem aboveWidthUpperPerturbation_peeledDoubleCHead_shell_impossible
     {β n : Nat} (tail : List TagLetter) {μ E G PAll P V RAll R : ℤ}
     (β_large : 2 ≤ β) (n_positive : 1 ≤ n)
@@ -715,31 +780,46 @@ theorem aboveWidthUpperPerturbation_peeledDoubleCHead_shell_impossible
           (E * P + G * V) - 10 * μ * G * V)
     (shell : HasDecimalShell (R : ℚ) (n + β) (n + β)) :
     False := by
-  let H : ℤ := code (peeledHeadWord β (.c :: .c :: tail))
-  have allC_not_deep : ¬(5 : ℤ) ^ (n + 1) ∣ RAll := by
-    refine allCDeletion_peeledDoubleCHead_not_fiveAboveWidth
-      (T := E * PAll + G * V) (R := RAll) tail β_large n_positive
-        head_unit mu_eq gap_eq lift_eq allC_upper_eq lower_eq ?_ ?_
-    · rfl
-    · simpa only [H] using allC_residual_eq
-  have residual_difference : R - RAll = H * E * (P - PAll) := by
-    rw [residual_eq, allC_residual_eq]
-    dsimp only [H]
-    ring
-  have perturbation_deep : (5 : ℤ) ^ (n + 1) ∣ R - RAll := by
-    rw [residual_difference]
-    exact upper_difference_deep.mul_left (H * E)
+  refine aboveWidthUpperPerturbation_peeledDoubleCHead_of_fivePower_dvd
+    tail β_large n_positive head_unit mu_eq gap_eq lift_eq allC_upper_eq lower_eq
+      allC_residual_eq upper_difference_deep residual_eq ?_
   have target_deep : (5 : ℤ) ^ (n + β) ∣ R :=
     fivePower_dvd_int_of_hasDecimalShell shell
-  have residual_deep : (5 : ℤ) ^ (n + 1) ∣ R :=
-    (pow_dvd_pow (5 : ℤ) (by omega)).trans target_deep
-  have allC_deep : (5 : ℤ) ^ (n + 1) ∣ RAll := by
+  exact (pow_dvd_pow (5 : ℤ) (by omega)).trans target_deep
+
+/-- At a regular raw head, any upper-code perturbation invisible modulo `5^β` preserves the
+all-`D_c` obstruction, independently of its position in the role word. -/
+theorem betaDeepUpperPerturbation_regularRawHead_of_fivePower_dvd
+    {β s n : Nat} {H μ E G PAll P V RAll R : ℤ}
+    (s_positive : 1 ≤ s) (suffix_below : s + 2 ≤ β) (n_positive : 1 ≤ n)
+    (head_eq : 9 * H = 5 * 10 ^ (β + 2) + 2 * 10 ^ s - 7)
+    (mu_eq : 9 * μ = 52 * 10 ^ β - 7)
+    (gap_eq : E = 18 * 10 ^ β - 63)
+    (lift_eq : G = 502 * 10 ^ β - 7)
+    (allC_upper_eq : 9 * PAll = 50 * 10 ^ β * 10 ^ n + 2 * 10 ^ β - 7)
+    (lower_eq : 9 * V = 7 * 10 ^ n - 7)
+    (allC_residual_eq : RAll = H * (E * PAll + G * V) - 10 * μ * G * V)
+    (upper_difference_deep : (5 : ℤ) ^ β ∣ P - PAll)
+    (residual_eq : R = H * (E * P + G * V) - 10 * μ * G * V)
+    (residual_deep : (5 : ℤ) ^ β ∣ R) :
+    False := by
+  have allC_not_deep : ¬(5 : ℤ) ^ β ∣ RAll := by
+    refine allCDeletion_regularRawHead_not_fiveAtBeta s_positive suffix_below n_positive
+      head_eq mu_eq gap_eq lift_eq allC_upper_eq lower_eq ?_ allC_residual_eq
+    rfl
+  have residual_difference : R - RAll = H * E * (P - PAll) := by
+    rw [residual_eq, allC_residual_eq]
+    ring
+  have perturbation_deep : (5 : ℤ) ^ β ∣ R - RAll := by
+    rw [residual_difference]
+    exact upper_difference_deep.mul_left (H * E)
+  have allC_deep : (5 : ℤ) ^ β ∣ RAll := by
     have isolated := dvd_sub residual_deep perturbation_deep
     simpa only [sub_sub_cancel] using isolated
   exact allC_not_deep allC_deep
 
-/-- At a regular raw head, any upper-code perturbation invisible modulo `5^β` preserves the
-all-`D_c` obstruction, independently of its position in the role word. -/
+/-- The physical one-marker shell supplies the beta-deep divisibility used at a regular raw
+head. -/
 theorem betaDeepUpperPerturbation_regularRawHead_shell_impossible
     {β s n : Nat} {H μ E G PAll P V RAll R : ℤ}
     (s_positive : 1 ≤ s) (suffix_below : s + 2 ≤ β) (n_positive : 1 ≤ n)
@@ -754,24 +834,12 @@ theorem betaDeepUpperPerturbation_regularRawHead_shell_impossible
     (residual_eq : R = H * (E * P + G * V) - 10 * μ * G * V)
     (shell : HasDecimalShell (R : ℚ) (n + β) (n + β)) :
     False := by
-  have allC_not_deep : ¬(5 : ℤ) ^ β ∣ RAll := by
-    refine allCDeletion_regularRawHead_not_fiveAtBeta s_positive suffix_below n_positive
-      head_eq mu_eq gap_eq lift_eq allC_upper_eq lower_eq ?_ allC_residual_eq
-    rfl
-  have residual_difference : R - RAll = H * E * (P - PAll) := by
-    rw [residual_eq, allC_residual_eq]
-    ring
-  have perturbation_deep : (5 : ℤ) ^ β ∣ R - RAll := by
-    rw [residual_difference]
-    exact upper_difference_deep.mul_left (H * E)
+  refine betaDeepUpperPerturbation_regularRawHead_of_fivePower_dvd
+    s_positive suffix_below n_positive head_eq mu_eq gap_eq lift_eq allC_upper_eq lower_eq
+      allC_residual_eq upper_difference_deep residual_eq ?_
   have target_deep : (5 : ℤ) ^ (n + β) ∣ R :=
     fivePower_dvd_int_of_hasDecimalShell shell
-  have residual_deep : (5 : ℤ) ^ β ∣ R :=
-    (pow_dvd_pow (5 : ℤ) (by omega)).trans target_deep
-  have allC_deep : (5 : ℤ) ^ β ∣ RAll := by
-    have isolated := dvd_sub residual_deep perturbation_deep
-    simpa only [sub_sub_cancel] using isolated
-  exact allC_not_deep allC_deep
+  exact (pow_dvd_pow (5 : ℤ) (by omega)).trans target_deep
 
 /-- Prefixing an all-`D_c` upper word by the marker-scale `D_b` perturbation cannot create the
 deeper multi-role shell. The conclusion holds at every positive erasure width. -/
