@@ -2638,6 +2638,10 @@ The family is now sharply fenced:
 - after the zero equal-scale residue, immediate re-entry into a denominator center at an odd
   exponent is impossible in every reduced odd signed-ray quotient, by
   [`R32-S50`](SALVAGE.md#r32-s50-odd-signed-re-entry-extinction).
+- separating the head wait and moving the tail through explicit adjugates gives one exact
+  two-coordinate power-ray incidence. Any positive base-prime valuation fixes the complete tail
+  exponent, leaving finitely many weighted tails and no head enumeration, by
+  [`R32-S51`](SALVAGE.md#r32-s51-weighted-tail-adjugate-certificate).
 - replacing common powers of one base by a scale alphabet totally ordered under divisibility is
   unsound: `[3,15,3,3,15,3,3,3]` has the exact nonresonant root `d=25/27`, by
   [`R32-O25`](SALVAGE.md#r32-o25-divisibility-chain-returnsquare-fracture).
@@ -2660,7 +2664,8 @@ geometric-scale counterexample is proved. Order-one and order-two cyclotomic quo
 automata. Exact denominator-center chains already collapse to resonance, and a mortal reduced
 fraction cannot take the zero critical-residue branch. A zero equal-scale residue can re-enter
 the center only at an even exponent whenever `q+1` has an odd prime; mixed nonzero residue
-transitions remain.
+transitions remain. Positive-numerator branches now have a finite weighted-tail certificate;
+the unrestricted arithmetic throat is the pure-denominator branch.
 The one-base geometric architecture is essential: mere divisibility comparability or
 common prime content cannot replace it. The one-base prime-power architecture remains closed.
 The two-coordinate pullback is not a reduction to finite-alphabet `M₂(3)`; every `qⁿ` remains a

@@ -767,7 +767,7 @@ valuation `a−min(2b,a)` for `a=vₚ(B)` and `b=vₚ(t)`, except at the sole cr
 `a=2b`; at equality, its valuation is still nonpositive whenever the affine predecessor is
 defined. For `t=q^(w+1)`, this is the exact word-visible tax `2(w+1)vₚ(q)`. Positive denominator
 depth survives one terminal pullback only above that tax. Later shell re-entry and cross-prime
-common content remain unclassified. `R32-S44` through `R32-S50` are strict
+common content remain unclassified. `R32-S44` through `R32-S51` are strict
 obstructions, not the arbitrary-composite classification. The two-coordinate interface does
 not reduce to finite-alphabet `M₂(3)` because every scale `qⁿ` remains a distinct return letter.
 
@@ -811,6 +811,14 @@ The first center re-entry parity is also checked. A zero equal-scale residue map
 `(rt²−1)B=r(t²−1)A`. In an odd prime quotient with `q=−1`, `t²=1`; if the exponent of `r` is
 odd, the equation forces `B=0`, and the signed mortality law then forces `A=0`. Thus a reduced
 mortal fraction can take this immediate re-entry only at an even exponent.
+
+The head wait now separates without affine normalization. The explicit adjugate of each
+fraction pullback moves across the alternating form, so a tail word determines one homogeneous
+state `(R,S)` and the full bridge is zero exactly when `R=Aq^(head+1)S`. If
+`vₚ(A/B)=k vₚ(q)>0`, the positive-valuation synchronization theorem forces the tail's complete
+wait exponent to equal `k`. Hence positive-numerator branches reduce to finitely many weighted
+two-coordinate tails followed by one exact base-power membership test. Pure-denominator
+parameters remain unbounded.
 
 The common-geometric-base hypothesis cannot be weakened to total divisibility of an arbitrary
 scale alphabet. Lean checks that `[3,15,3,3,15,3,3,3]` is pairwise totally ordered under
@@ -2549,6 +2557,7 @@ fixed-rank decision problem.
 | `ReturnSquareFractionFiniteWall.lean` | denominator-cleared fractional cuts and fixed/signed cyclotomic finite walls |
 | `ReturnSquareGeometricCenter.lean` | exact geometric center-chain exponents and critical zero-residue exclusion |
 | `ReturnSquareGeometricResidue.lean` | equal-scale zero-residue transition and odd signed-center exclusion |
+| `ReturnSquareTailAdjugate.lean` | head-separated adjugate tail incidence and fixed positive-valuation tail weight |
 | `ReturnSquareTax.lean` | exact four-state lower bound for literal reversible-stack returns |
 | `ReturnSquareNoGo.lean` | quadratic-pencil reversible-squaring obstruction and blind-scaling collapse |
 | `ReturnJordan.lean` | parity-Jordan rail rigidity and modular immortality certificate |
@@ -2861,6 +2870,7 @@ fixed-rank decision problem.
 | Every mortal fraction reduces to `1` where the base reduces to `1`, and to `±1` where the base reduces to `−1` | `ReturnSquare.isMortal_forces_fraction_modEq_one`, `ReturnSquare.isMortal_forces_fraction_modEq_neg_one` |
 | Consecutive exact geometric denominator centers double their exponent into a one-return resonance; a reduced fixed-ray quotient excludes the zero critical residue | `ReturnSquare.fractionPredecessorChain_centerScales_terminal_ratio`, `ReturnSquare.fractionCriticalResidue_geometric_ne_zero_of_mortal` |
 | A zero equal-scale residue cannot enter a denominator center at an odd exponent in a reduced odd signed-ray quotient | `ReturnSquare.not_fractionPredecessor_equalScale_zero_then_odd_center_of_mortal` |
+| A positive base-prime valuation fixes a finite weighted adjugate tail before one exact geometric-ray incidence | `ReturnSquare.positiveBridge_fraction_cons_zero_iff_tailAdjugate`, `ReturnSquare.positiveBridge_fraction_zero_positive_valuation_tail_certificate` |
 | Total divisibility of an arbitrary scale alphabet does not force ReturnSquare resonance-only roots | `ReturnSquare.divisibilityChain_twentyFive_twentySeven_zero` |
 | Literal reversible-stack returns require at least four exact states | `ReturnSquareTax.reversibleStack_card_lower_bound` |
 | Three singular quadratic modes cannot exchange `t` with `κt²` | `ReturnSquareNoGo.threeMode_swap_eq_zero` |

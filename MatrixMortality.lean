@@ -42,6 +42,7 @@ import MatrixMortality.ReturnSquareFractionPullback
 import MatrixMortality.ReturnSquareFractionFiniteWall
 import MatrixMortality.ReturnSquareGeometricCenter
 import MatrixMortality.ReturnSquareGeometricResidue
+import MatrixMortality.ReturnSquareTailAdjugate
 import MatrixMortality.ReturnSquareTax
 import MatrixMortality.ReturnJordan
 import MatrixMortality.ReturnConvert
