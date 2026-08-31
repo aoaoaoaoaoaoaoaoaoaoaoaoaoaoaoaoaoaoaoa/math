@@ -89,22 +89,15 @@ through the four-dimensional paired carrier and therefore has block-Hankel rank 
 This contradiction excludes pure cubic punctuation and every fixed cubic context realizing
 `MM-M01` for the full paired series.
 
-## Surviving Leaf
+## Former Surviving Leaf
 
-Every terminal match begins with `R_c`. Absorbing that forced role replaces `g` by a left
-derivative of rank at most three, so the companion rank can fall to four and the preceding
-Hankel contradiction no longer applies. The original zero-fifth-coordinate data lifts still
-cannot realize a minimal companion: every compositional block containing data has rank at most
-three, while the companion transitions must preserve its nonzero auxiliary channel.
+This audit originally conjectured that absorbing the forced initial `R_c` lowered the paired
+tail derivative to rank at most three. That conjecture was false.
+[`MM-O18`](../SALVAGE.md#mm-o18-forced-rule-companion-toggle-wall) exhibits a nonsingular
+`4×4` Hankel section on isolated-toggle words, then adjoins the compulsory constant channel to
+force any exact five-state companion toggle to be invertible. Its cube therefore cannot have
+rank two. The proof permits arbitrary fifth-coordinate data couplings and closes the exact
+bordered-companion leaf before a square/cube fracture grammar enters.
 
-A surviving bordered-toggle construction must therefore provide all of the following:
-
-1. nonzero fifth-coordinate couplings in both data matrices;
-2. a distinguished-`c` macro realizing the rank-two companion for the forced-`R_c` derivative;
-3. identities for every `S²`, `S³`, and overlapping macro placement;
-4. a fracture theorem reducing every zero product to one companion bridge;
-5. terminal-normal-form reflection for that bridge;
-6. rational denominator clearing and the complete integer mortality reduction.
-
-The first item leaves the exact paired lift. The third prevents treating malformed delimiter
-runs as syntax outside the free monoid. No present candidate satisfies this list.
+Setter/projective, same-zero, existence-only, and scheduled source compilers remain outside both
+obstructions.

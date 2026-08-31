@@ -664,9 +664,13 @@ Three live routes remain.
    compiler make every delimiter pair contextually invisible:
    [`MM-O16`](SALVAGE.md#mm-o16-exact-delimiter-pair-obstruction) proves that exact parity-pair
    cancellation forces immortality. Its cubic companion calculation also excludes pure and
-   fixed-context cubic projections for the full paired series. The sole bordered-companion
-   residue must absorb the forced initial `R_c`, couple both data matrices to the fifth
-   coordinate, and give square runs genuine semantics. The setter candidate
+   fixed-context cubic projections for the full paired series. Absorbing the forced initial
+   `R_c` does not reopen that exact route: [`MM-O18`](SALVAGE.md#mm-o18-forced-rule-companion-toggle-wall)
+   proves that the derivative still has rank four on isolated-toggle words, and its compulsory
+   constant companion channel forces the physical toggle to be invertible. This contradicts
+   the required rank-two cube regardless of fifth-coordinate data couplings. The exact
+   bordered-companion branch is therefore closed before any `S²/S³` fracture grammar can help.
+   The setter candidate
    [`MM-M03`](SALVAGE.md#mm-m03-five-state-setter-punctuation) instead uses the mixed word
    `S²A_cS³=λC̃L̃`. It proves the regular decoder and halting-to-mortality implication.
    Its entire malformed-word converse is the projective avoidance problem

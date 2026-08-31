@@ -336,6 +336,13 @@ open MatrixMortality
 #print axioms DirectedCancellationCountermodel.blocks_do_not_commute
 #print axioms DirectedCancellationCountermodel.code_scores_strict_on_covers
 #print axioms paired_exact_diagonal_twoChannel_state_lower_bound
+#print axioms forcedRuleCCoefficient_eq_sideCoefficient
+#print axioms forcedRuleCInsertedHankelRat_det_ne_zero
+#print axioms forcedRuleC_exact_state_lower_bound
+#print axioms forcedRuleCCompanion_probe_factor
+#print axioms exactForcedRuleCCompanion_toggle_det_ne_zero
+#print axioms exactForcedRuleCCompanion_not_rankTwoCube
+#print axioms exactForcedRuleCOffDiagonalCompanion_not_rankTwoCube
 #print axioms ruleScale_eq_of_deletionFirst_fibre
 #print axioms nearySideLowerCScale_gt_twentySeven
 #print axioms no_neary_deletionFirst_fibre

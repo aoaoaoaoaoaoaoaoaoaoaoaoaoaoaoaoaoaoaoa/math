@@ -360,6 +360,15 @@ terminal equation. The complete prefix-tree rank classification and the singular
 from an exact cyclic separator are audited in
 [`m92-factorized-cross-ratio-2026-08-30.md`](audits/m92-factorized-cross-ratio-2026-08-30.md).
 
+The forced-rule bordered-companion residue is now closed by
+[`MM-O18`](SALVAGE.md#mm-o18-forced-rule-companion-toggle-wall). Lean identifies the semantic
+left derivative after the compulsory initial `R_c`, proves nonsingular reachable and observable
+factors on four isolated-toggle probes, and certifies the resulting inserted-toggle Hankel
+determinant. Adding the exact constant companion channel yields a `5×5` factorization through
+the physical toggle. Its nonzero determinant makes that toggle invertible, so its cube has rank
+five rather than two. The result allows arbitrary fifth-coordinate data couplings; it does not
+address same-zero, setter, or scheduled compilers.
+
 The rank-three binary campaign now has a checked structural core. A split finite-rank cut beside
 a unit fractures every arbitrary binary word into its `VAⁿU` return product; a finite
 block-Hankel section lower-bounds every exact realization of that matrix-valued sequence. For
@@ -1420,7 +1429,7 @@ the periodic saturation theorem and its remaining arithmetic boundary are recons
 formalization and the shell attack are tracked in
 [#7](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/7).
 
-The `M₅(3)` delimiter attack has six durable records:
+The `M₅(3)` delimiter attack has seven durable records:
 
 | Record | Formalization obligation |
 | --- | --- |
@@ -1430,6 +1439,7 @@ The `M₅(3)` delimiter attack has six durable records:
 | [`MM-S01`](SALVAGE.md#mm-s01-square-run-projective-normal-form) | invariant square-run plane, invertible `2 × 2` transfer, Möbius normalization, rank-one fracture grammar, and equivalence with pole avoidance |
 | [`MM-S02`](SALVAGE.md#mm-s02-reset-zero-projective-peeling) | scaled transfer identity, exact two-shell classification of all poles, and reset-zero one-transfer avoidance |
 | [`MM-O16`](SALVAGE.md#mm-o16-exact-delimiter-pair-obstruction) | generic ignored-pair immortality is formalized; paired common-kernel and cubic companion specializations are audited |
+| [`MM-O18`](SALVAGE.md#mm-o18-forced-rule-companion-toggle-wall) | forced-rule semantic derivative, isolated-toggle Hankel determinant, five-channel factorization, toggle invertibility, and contradiction with a rank-two cube |
 
 The candidate proves only the halting-to-mortality direction. Its converse requires a theorem
 that every nonterminal projective orbit avoids every pole. No such theorem is formalized or

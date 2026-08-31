@@ -85,6 +85,7 @@ file owns the mathematical stock.
 | [`MM-O15`](#mm-o15-deletion-first-fibre-fracture) | obstruction | exact early deletion scheduling forces the two unequal Neary rule scales to coincide | formalized | graduated |
 | [`MM-O16`](#mm-o16-exact-delimiter-pair-obstruction) | obstruction | exact ignored delimiter pairs force a bordered paired family to be immortal | formalized core; audited specialization | graduated |
 | [`MM-O17`](#mm-o17-factorized-binary-cross-ratio-wall) | obstruction | exact prefix and cyclic-cube nine-state compilers force a Neary cross-ratio that fails in every pairing | formalized core; audited assembly | graduated |
+| [`MM-O18`](#mm-o18-forced-rule-companion-toggle-wall) | obstruction | the forced-rule derivative and constant channel force an exact five-state companion toggle to be invertible | formalized | graduated |
 | [`MM-M01`](#mm-m01-off-diagonal-companion-interface) | partial mechanism | off-diagonal rank-two bridge has a complete fracture grammar | audited | stock |
 | [`MM-M02`](#mm-m02-bordered-toggle) | partial mechanism | one lifted toggle has a stable rank-two third power | audited | parked |
 | [`MM-M03`](#mm-m03-five-state-setter-punctuation) | partial mechanism | a mixed delimiter word is an exact internal rank-one separator | audited | closed |
@@ -1818,13 +1819,15 @@ The square run must have genuine semantics, as it does in the setter's projectiv
 The bordered toggle's cubic projection cannot supply [`MM-M01`](#mm-m01-off-diagonal-companion-interface)
 for the full paired series either. A fixed-context companion would represent
 `diag(g(w)/α,1)`, whose block-Hankel rank is `rank(g)+1=5`, through the four-state paired
-carrier. Absorbing the forced initial `R_c` can lower the derivative rank and is the sole
-remaining bordered-companion seam.
+carrier. The formerly open forced-initial-`R_c` derivative is closed by
+[`MM-O18`](#mm-o18-forced-rule-companion-toggle-wall): its isolated-toggle Hankel rank is still
+four, so adjoining the compulsory constant channel forces the physical toggle to be invertible.
 
 **Scope:** the Lean theorem is generic but assumes exact contextual cancellation of every
 delimiter pair. The paired common-kernel calculation and fixed-context block-Hankel argument
 are audited. Nonzero fifth-coordinate data couplings, a distinguished-`c` macro, and a genuine
-square-run grammar remain outside the obstruction.
+square-run grammar remain outside this theorem; `MM-O18` separately closes their exact-companion
+use on the forced-rule probe language.
 
 **Use:** do not treat `S²` as syntactically ignorable or use a pure/fixed-context cubic
 projection for the full paired series. Any bordered-toggle successor must change the data lift,
@@ -1881,6 +1884,58 @@ fits. Any direct `M₉(2)` attack must change the zero series or abandon these t
 and [`MatrixMortality/ThreePhaseBinaryNoGo.lean`](MatrixMortality/ThreePhaseBinaryNoGo.lean),
 through `factorizedFace_has_proportional_rightQuotients`, the three
 `*_rightQuotients_not_proportional` theorems, and `poison_false_positive`.
+
+### MM-O18: Forced-rule companion toggle wall
+
+**Kind:** obstruction
+
+**Evidence:** formalized
+
+**Disposition:** graduated
+
+Let `h(w)` be the paired-tail coefficient obtained after semantically prefixing the forced
+initial rule-`c` role. The four prefixes `ε,b,bb,btb` and suffixes `ε,b,bb,bt` expose
+invertible reachable and observable factors. Writing `x≥0` for the forced lower code, `s=3^β`,
+`p=3s`, `a=9s`, and `u=3m+2`, their determinants are
+
+```text
+det R = 576a(x+1)(x+2)(2a+u−2),
+det O = 76ap(p−9).
+```
+
+They are nonzero for `β≥3`. Inserting one toggle between every prefix and suffix multiplies the
+Hankel section by the paired toggle, whose determinant is `−1`, so the resulting `4×4` section
+is nonsingular. Every one of these sixteen words has only isolated toggles.
+
+Suppose an arbitrary five-state physical family exactly realizes, on those probes, the two
+channels `diag(λh(w),1)` with `λ≠0`. Five selected reach and observe channels give the exact
+factorization
+
+```text
+R₅ S O₅ = diag(λH_t,1).
+```
+
+The right side has nonzero determinant, hence the physical toggle `S` is invertible. Therefore
+`S³` has rank five, contradicting the rank-two cubic delimiter required by the bordered
+companion. Right multiplication by the channel swap converts the off-diagonal companion
+`J(λh)` into this diagonal form, so the result covers [`MM-M01`](#mm-m01-off-diagonal-companion-interface).
+
+**Scope:** exact joint companion realization on the displayed isolated-toggle probes, a nonzero
+scale, and `β≥3`. The physical generators and all fifth-coordinate data couplings are otherwise
+arbitrary. The theorem does not constrain existence-only zero equivalence, a changed scalar
+series, the setter's projective grammar, or a scheduled source compiler.
+
+**Use:** the last exact bordered-toggle residue from `MM-O16` is closed. Absorbing the forced
+initial role and coupling both data matrices to the fifth coordinate cannot make a rank-two
+cubic delimiter realize the exact companion. Pursue the setter/same-zero and scheduled routes.
+
+**Formalization:** `forcedRuleCCoefficient_eq_sideCoefficient`,
+`forcedRuleCInsertedHankelRat_det_ne_zero`, `forcedRuleCCompanion_probe_factor`, and
+`exactForcedRuleCOffDiagonalCompanion_not_rankTwoCube` in
+[`MatrixMortality/ForcedRuleCCompanion.lean`](MatrixMortality/ForcedRuleCCompanion.lean).
+
+**Artifact:**
+[`audits/m53-forced-rule-c-companion-2026-08-31.md`](audits/m53-forced-rule-c-companion-2026-08-31.md).
 
 ### MM-M01: Off-diagonal companion interface
 
