@@ -1,4 +1,6 @@
 import MatrixMortality.DecimalSetterDepth
+import Mathlib.NumberTheory.PowModTotient
+import Mathlib.RingTheory.Radical.Basic
 import Mathlib.Tactic
 
 /-!
@@ -21,6 +23,13 @@ open MatrixMortality.DecimalSetterDepth
 /-- The primitive factor left after removing the fixed factor nine from the decimal gap. -/
 def gapFactor (β : Nat) : ℤ :=
   2 * 10 ^ β - 7
+
+/-- The primitive gap is positive at every physical deletion width. -/
+theorem gapFactor_pos {β : Nat} (β_positive : 0 < β) : 0 < gapFactor β := by
+  obtain ⟨k, rfl⟩ := Nat.exists_eq_succ_of_ne_zero (Nat.ne_of_gt β_positive)
+  have power_pos : (0 : ℤ) < 10 ^ k := pow_pos (by norm_num) k
+  simp only [gapFactor, pow_succ]
+  nlinarith
 
 /-- The full primitive gap cannot already divide the distinguished two-`c` raw head. Its code
 lies strictly between the consecutive multiples `27q` and `28q`. -/
@@ -89,6 +98,12 @@ private theorem gapFactor_coprime_five {β : Nat} (β_positive : 0 < β) :
   rw [show gapFactor (k + 1) = 3 + 5 * (4 * (10 : ℤ) ^ k - 2) by
     simp [gapFactor, pow_succ]; ring]
   exact shifted
+
+/-- The primitive gap is coprime to the decimal radix. -/
+theorem gapFactor_coprime_ten {β : Nat} (β_positive : 0 < β) :
+    IsCoprime (gapFactor β) (10 : ℤ) := by
+  simpa using (gapFactor_coprime_two β).mul_right
+    (gapFactor_coprime_five β_positive)
 
 private theorem gapFactor_coprime_1750 {β : Nat} (β_positive : 0 < β) :
     IsCoprime (gapFactor β) (1750 : ℤ) := by
@@ -184,8 +199,7 @@ theorem carrierFactor_dvd_next_iff
   have rG_coprime : IsCoprime r G :=
     IsCoprime.of_isCoprime_of_dvd_left qG_coprime r_dvd_q
   have q10_coprime : IsCoprime (gapFactor β) (10 : ℤ) := by
-    simpa using (gapFactor_coprime_two β).mul_right
-      (gapFactor_coprime_five β_positive)
+    exact gapFactor_coprime_ten β_positive
   have r10_coprime : IsCoprime r (10 : ℤ) :=
     IsCoprime.of_isCoprime_of_dvd_left q10_coprime r_dvd_q
   have r10pow_coprime : IsCoprime r ((10 : ℤ) ^ depth) :=
@@ -244,6 +258,211 @@ theorem primeFactor_dvd_next_iff
       peeledNumerator N D μ (decimalLift (10 ^ β)) T V = 10 ^ depth * Nnext) :
     p ∣ Nnext ↔ p ∣ N ∨ p ∣ V :=
   (carrierFactor_dvd_next_iff β_positive p_dvd_q D_eq T_eq factor).trans p_prime.dvd_mul
+
+/-- One exact recursive carrier transition, retaining precisely the denominator ancestry and
+trace equations needed by the gap-support law. -/
+def GapCarrierStep (β : Nat) (source lower target : ℤ) : Prop :=
+  ∃ depth : Nat, ∃ μ D previous upper trace : ℤ,
+    D = decimalGap (10 ^ β) * previous ∧
+      trace = decimalGap (10 ^ β) * upper + decimalLift (10 ^ β) * lower ∧
+        peeledNumerator source D μ (decimalLift (10 ^ β)) trace lower =
+          10 ^ depth * target
+
+/-- A finite exact carrier history indexed by its emitted lower codes. -/
+inductive GapCarrierHistory (β : Nat) : ℤ → List ℤ → ℤ → Prop
+  | nil (carrier : ℤ) : GapCarrierHistory β carrier [] carrier
+  | cons {source lower next final : ℤ} {tail : List ℤ}
+      (step : GapCarrierStep β source lower next)
+      (history : GapCarrierHistory β next tail final) :
+      GapCarrierHistory β source (lower :: tail) final
+
+/-- A certified carrier step has the same exact prime-support transition as its expanded
+arithmetic witness. -/
+theorem GapCarrierStep.prime_dvd_target_iff
+    {β : Nat} {p source lower target : ℤ}
+    (step : GapCarrierStep β source lower target)
+    (β_positive : 0 < β)
+    (p_prime : Prime p)
+    (p_dvd_q : p ∣ gapFactor β) :
+    p ∣ target ↔ p ∣ source ∨ p ∣ lower := by
+  obtain ⟨depth, μ, D, previous, upper, trace, D_eq, trace_eq, factor⟩ := step
+  exact primeFactor_dvd_next_iff β_positive p_prime p_dvd_q D_eq trace_eq factor
+
+/-- Across an arbitrary exact carrier history, a gap prime divides the final numerator exactly
+when it divided the initial numerator or one of the emitted lower codes. -/
+theorem GapCarrierHistory.prime_dvd_final_iff
+    {β : Nat} {p source final : ℤ} {lowerCodes : List ℤ}
+    (history : GapCarrierHistory β source lowerCodes final)
+    (β_positive : 0 < β)
+    (p_prime : Prime p)
+    (p_dvd_q : p ∣ gapFactor β) :
+    p ∣ final ↔ p ∣ source ∨ ∃ lower ∈ lowerCodes, p ∣ lower := by
+  induction history with
+  | nil => simp
+  | @cons source lower next final tail step history induction =>
+      rw [induction, step.prime_dvd_target_iff β_positive p_prime p_dvd_q]
+      simp only [List.mem_cons]
+      constructor
+      · rintro ((source_dvd | lower_dvd) | ⟨candidate, candidate_mem, candidate_dvd⟩)
+        · exact Or.inl source_dvd
+        · exact Or.inr ⟨lower, Or.inl rfl, lower_dvd⟩
+        · exact Or.inr ⟨candidate, Or.inr candidate_mem, candidate_dvd⟩
+      · rintro (source_dvd | ⟨candidate, (rfl | candidate_mem), candidate_dvd⟩)
+        · exact Or.inl (Or.inl source_dvd)
+        · exact Or.inl (Or.inr candidate_dvd)
+        · exact Or.inr ⟨candidate, candidate_mem, candidate_dvd⟩
+
+/-- If a gap prime was absent initially, it enters an exact carrier history if and only if it
+divides one of that history's emitted lower codes. -/
+theorem GapCarrierHistory.absent_prime_dvd_final_iff_lowerCode
+    {β : Nat} {p source final : ℤ} {lowerCodes : List ℤ}
+    (history : GapCarrierHistory β source lowerCodes final)
+    (β_positive : 0 < β)
+    (p_prime : Prime p)
+    (p_dvd_q : p ∣ gapFactor β)
+    (p_absent : ¬p ∣ source) :
+    p ∣ final ↔ ∃ lower ∈ lowerCodes, p ∣ lower := by
+  rw [history.prime_dvd_final_iff β_positive p_prime p_dvd_q]
+  simp only [p_absent, false_or]
+
+/-- Saturation of the gap support means divisibility by the squarefree radical of the primitive
+gap, rather than by the generally non-squarefree gap itself. -/
+def gapSupportSaturated (β : Nat) (carrier : ℤ) : Prop :=
+  UniqueFactorizationMonoid.radical (gapFactor β) ∣ carrier
+
+/-- Radical saturation is equivalent to divisibility by every prime factor of the primitive
+gap. -/
+theorem gapSupportSaturated_iff
+    {β : Nat} (β_positive : 0 < β) (carrier : ℤ) :
+    gapSupportSaturated β carrier ↔
+      ∀ p : ℤ, Prime p → p ∣ gapFactor β → p ∣ carrier := by
+  constructor
+  · intro saturated p p_prime p_dvd_q
+    have p_dvd_radical : p ∣ UniqueFactorizationMonoid.radical (gapFactor β) :=
+      (UniqueFactorizationMonoid.dvd_radical_iff_of_irreducible
+        p_prime.irreducible (gapFactor_pos β_positive).ne').mpr p_dvd_q
+    exact p_dvd_radical.trans saturated
+  · intro support
+    by_cases carrier_zero : carrier = 0
+    · rw [carrier_zero]
+      exact dvd_zero _
+    · rw [gapSupportSaturated,
+        UniqueFactorizationMonoid.radical_dvd_iff_primeFactors_subset carrier_zero]
+      intro p p_mem_q
+      rw [UniqueFactorizationMonoid.mem_primeFactors] at p_mem_q ⊢
+      rw [UniqueFactorizationMonoid.mem_normalizedFactors_iff'
+        (gapFactor_pos β_positive).ne'] at p_mem_q
+      rw [UniqueFactorizationMonoid.mem_normalizedFactors_iff' carrier_zero]
+      exact ⟨p_mem_q.1, p_mem_q.2.1,
+        support p p_mem_q.1.prime p_mem_q.2.2⟩
+
+/-- A finite carrier history ends with saturated gap support exactly when every gap prime was
+present initially or entered through one of its emitted lower codes. -/
+theorem GapCarrierHistory.gapSupportSaturated_iff
+    {β : Nat} {source final : ℤ} {lowerCodes : List ℤ}
+    (history : GapCarrierHistory β source lowerCodes final)
+    (β_positive : 0 < β) :
+    gapSupportSaturated β final ↔
+      ∀ p : ℤ, Prime p → p ∣ gapFactor β →
+        p ∣ source ∨ ∃ lower ∈ lowerCodes, p ∣ lower := by
+  rw [MatrixMortality.DecimalSetterAncestry.gapSupportSaturated_iff β_positive]
+  constructor
+  · intro final_support p p_prime p_dvd_q
+    exact (history.prime_dvd_final_iff β_positive p_prime p_dvd_q).mp
+      (final_support p p_prime p_dvd_q)
+  · intro installed p p_prime p_dvd_q
+    exact (history.prime_dvd_final_iff β_positive p_prime p_dvd_q).mpr
+      (installed p p_prime p_dvd_q)
+
+/-- Radical saturation at the end of a history requires every initially absent gap prime to
+have entered through an emitted lower code. -/
+theorem GapCarrierHistory.lowerCode_of_gapSupportSaturated
+    {β : Nat} {p source final : ℤ} {lowerCodes : List ℤ}
+    (history : GapCarrierHistory β source lowerCodes final)
+    (β_positive : 0 < β)
+    (saturated : gapSupportSaturated β final)
+    (p_prime : Prime p)
+    (p_dvd_q : p ∣ gapFactor β)
+    (p_absent : ¬p ∣ source) :
+    ∃ lower ∈ lowerCodes, p ∣ lower := by
+  have p_dvd_radical : p ∣ UniqueFactorizationMonoid.radical (gapFactor β) :=
+    (UniqueFactorizationMonoid.dvd_radical_iff_of_irreducible
+      p_prime.irreducible (gapFactor_pos β_positive).ne').mpr p_dvd_q
+  have p_dvd_final : p ∣ final := p_dvd_radical.trans saturated
+  exact (history.absent_prime_dvd_final_iff_lowerCode
+    β_positive p_prime p_dvd_q p_absent).mp p_dvd_final
+
+/-- A physical block of erasure tiles whose lower side is a pure zero word. -/
+def allEraseBlock (width : Nat) : List NearyTile :=
+  List.replicate width (.erase .c)
+
+/-- Decimal lower code emitted by a physical all-erasure block. -/
+def allEraseLowerCode (β : Nat) (body : List TagLetter) (width : Nat) : ℤ :=
+  code (spell (nearyLower β body) (allEraseBlock width))
+
+@[simp] theorem spell_allEraseBlock (β : Nat) (body : List TagLetter) (width : Nat) :
+    spell (nearyLower β body) (allEraseBlock width) = List.replicate width false := by
+  induction width with
+  | zero => rfl
+  | succ width induction =>
+      change false :: spell (nearyLower β body) (List.replicate width (.erase .c)) =
+        false :: List.replicate width false
+      exact congrArg (false :: ·) (by simpa only [allEraseBlock] using induction)
+
+/-- The Euler-totient saturation block is nonempty at every physical width. -/
+theorem allEraseSaturationWidth_pos {β : Nat} (β_positive : 0 < β) :
+    0 < Nat.totient (gapFactor β).natAbs := by
+  rw [Nat.totient_pos, Int.natAbs_pos]
+  exact (gapFactor_pos β_positive).ne'
+
+/-- At Euler's totient width, the physical all-erasure lower code contains the entire primitive
+gap. Thus no prime factor of the gap is permanently absent from the emitted lower-code
+language. -/
+theorem gapFactor_dvd_allEraseLowerCode
+    {β : Nat} (β_positive : 0 < β) (body : List TagLetter) :
+    gapFactor β ∣
+      allEraseLowerCode β body (Nat.totient (gapFactor β).natAbs) := by
+  let q := gapFactor β
+  let width := Nat.totient q.natAbs
+  have q_pos : 0 < q := by simpa only [q] using gapFactor_pos β_positive
+  have ten_coprime_q : Nat.Coprime 10 q.natAbs := by
+    have int_coprime : IsCoprime q (10 : ℤ) := by
+      simpa only [q] using gapFactor_coprime_ten β_positive
+    have abs_coprime : Nat.Coprime q.natAbs (10 : ℤ).natAbs :=
+      Int.isCoprime_iff_nat_coprime.mp int_coprime
+    simpa using abs_coprime.symm
+  have euler : 10 ^ width ≡ 1 [MOD q.natAbs] := by
+    simpa only [width] using Nat.ModEq.pow_totient ten_coprime_q
+  have q_dvd_one_sub : q ∣ (1 : ℤ) - (10 : ℤ) ^ width := by
+    have euler_dvd := euler.dvd
+    norm_num at euler_dvd
+    exact euler_dvd
+  have q_dvd_pow_sub_one : q ∣ (10 : ℤ) ^ width - 1 := by
+    simpa only [neg_sub] using dvd_neg.mpr q_dvd_one_sub
+  have code_identity := replicateFalse_code_identity width
+  have code_identity_int :
+      9 * (code (List.replicate width false) : ℤ) =
+        7 * ((10 : ℤ) ^ width - 1) := by
+    have cast_identity := congrArg (fun value : Nat => (value : ℤ)) code_identity
+    norm_num at cast_identity
+    nlinarith
+  have q_dvd_scaled_code : q ∣ 9 * (code (List.replicate width false) : ℤ) := by
+    rw [code_identity_int]
+    exact q_dvd_pow_sub_one.mul_left 7
+  have q_coprime_nine : IsCoprime q (9 : ℤ) := by
+    apply gapFactorDivisor_coprime_nine β_positive
+    exact dvd_rfl
+  have q_dvd_code : q ∣ (code (List.replicate width false) : ℤ) :=
+    q_coprime_nine.dvd_of_dvd_mul_left q_dvd_scaled_code
+  simpa only [q, width, allEraseLowerCode, spell_allEraseBlock] using q_dvd_code
+
+/-- The same exact all-erasure lower code contains the radical of the primitive gap. -/
+theorem radical_gapFactor_dvd_allEraseLowerCode
+    {β : Nat} (β_positive : 0 < β) (body : List TagLetter) :
+    UniqueFactorizationMonoid.radical (gapFactor β) ∣
+      allEraseLowerCode β body (Nat.totient (gapFactor β).natAbs) :=
+  UniqueFactorizationMonoid.radical_dvd_self.trans
+    (gapFactor_dvd_allEraseLowerCode β_positive body)
 
 private theorem gapFactor_dvd_carrierProduct
     {q E G μ N D Nprev P₂ P₃ V₂ V₃ T₂ T₃ : ℤ} {m : Nat}
@@ -351,9 +570,7 @@ theorem carrierFactor_multiToSingleton_quotientGate
   let q := gapFactor β
   let G := decimalLift (10 ^ β)
   have q_ne : q ≠ 0 := by
-    simp only [q, gapFactor]
-    have ten_pos : (0 : ℤ) < 10 ^ β := pow_pos (by norm_num) β
-    omega
+    exact (gapFactor_pos β_positive).ne'
   have q_eq : q = r * s := by simpa only [q] using q_factor
   have r_ne : r ≠ 0 := by
     intro r_zero
