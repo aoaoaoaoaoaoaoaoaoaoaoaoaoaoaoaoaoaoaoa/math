@@ -104,6 +104,7 @@ file owns the mathematical stock.
 | [`MM-S15`](#mm-s15-ordinary-a-to-a-length-two-extinction) | obstruction | both ordinary A-to-A length-two resonances miss every admissible next pole | formalized | active |
 | [`MM-S16`](#mm-s16-complete-ordinary-depth-two-extinction) | obstruction | no ordinary-reset orbit reaches a false pole after two completed transfers | formalized core; audited assembly | active |
 | [`MM-S17`](#mm-s17-recursive-decimal-carrier) | structure theorem and obstruction | repeated A-shell resonances have an exact two-unit carrier whose last digits form a compatible period-two cycle | formalized | active |
+| [`MM-S25`](#mm-s25-separated-two-c-periodic-orbits) | structure theorem and obstruction | an infinite separated two-`c` width-three family has explicit nonhalting coupled orbits | formalized | active |
 | [`R32-S01`](#r32-s01-split-return-normal-form) | structure theorem | rank-two cuts reduce one-unit binary mortality to a `2 × 2` return recurrence | formalized | graduated |
 | [`R32-S02`](#r32-s02-two-plane-edge-square) | structure theorem | two rank-two generators are a two-vertex square of `2 × 2` edges | formalized | graduated |
 | [`R32-O01`](#r32-o01-rank-one-profile-collapse) | obstruction | a rank-one generator reduces mortality to order-at-most-three scalar recurrence zeros | audited | stock |
@@ -3091,6 +3092,59 @@ upper-length-two carrier transition separately.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S25: Separated two-c periodic orbits
+
+**Kind:** structure theorem and obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+For `n>0`, let
+
+```text
+qₙ = bb c bⁿ c bⁿ,
+Iₙ = qₙ.drop 2 · b,
+Cₙ = c b^(2n+2),
+Dₙ = b^(2n+2) c bⁿ c b^(n+1).
+```
+
+Use deletion width three with productions `b↦b` and `c↦qₙb`. If `n≡0` or `1 (mod 3)`,
+the coupled input `Iₙ` reaches `Cₙ`. The leading `c` then gives one exact step `Cₙ→Dₙ`.
+For `n=3(k+1)`, the return history is
+
+```text
+(bbb)^(2k+2), bbc, (bbb)^(k+1),
+```
+
+while for `n=3k+1` it is
+
+```text
+(bbb)^(2k+1), bcb, (bbb)^k.
+```
+
+Every return stroke has head `b`. The histories therefore emit respectively `3k+4` and
+`3k+2` copies of `b`, exactly restoring `Cₙ`. Thus `Cₙ→Dₙ→Cₙ` has exact length `n+2`, and
+the coupled source does not halt. The case `n=1` has a separate one-step entry because its
+first wake is `bc`; the same return formula already covers its cycle.
+
+**Scope:** this proves an infinite nonhalting family of admissible separated two-`c` bodies.
+It does not classify the residue-two diagonal, bodies with unequal outer runs, or arbitrary
+`bᵖ c bʳ c bˢ`; it supplies no width-three universality theorem.
+
+**Use:** any width-three source construction must escape these exact periodic rays. Treat the
+middle separation `r>0` as genuine dynamics rather than an automatic halting condition.
+
+**Formalization:**
+[`MatrixMortality/SeparatedTwoCOrbit.lean`](MatrixMortality/SeparatedTwoCOrbit.lean), through
+`cycleQueue_step`, `zeroResidue_expanded_reaches_cycle`,
+`oneResidue_expanded_reaches_cycle`, `zeroResidue_cycle`, `oneResidue_cycle`, and
+`separated_not_tagHaltsFrom`.
+
+**Artifact:**
+[`audits/m53-separated-two-c-orbits-2026-08-31.md`](audits/m53-separated-two-c-orbits-2026-08-31.md).
+
+**Next:** decide the residue-two diagonal and then test whether unequal outer runs admit a
+finite arithmetic macro system or unbounded queue growth.
 
 ## Rank-Three Binary Frontier
 

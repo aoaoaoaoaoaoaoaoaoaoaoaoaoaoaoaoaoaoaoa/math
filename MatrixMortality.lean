@@ -88,6 +88,7 @@ import MatrixMortality.HistoryFracture
 import MatrixMortality.PeriodicHistory
 import MatrixMortality.TransverseHistory
 import MatrixMortality.BranchingHistory
+import MatrixMortality.SeparatedTwoCOrbit
 import MatrixMortality.PrefixResidual
 import MatrixMortality.AffineRecognizer
 import MatrixMortality.BranchingRecognizer

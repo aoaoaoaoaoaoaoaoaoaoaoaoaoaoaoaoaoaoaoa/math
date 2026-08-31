@@ -1704,6 +1704,7 @@ fixed-rank decision problem.
 | `HistoryFracture.lean` | null-history counterexample, minimum-body base-five encoder, and integral mortality lift |
 | `TransverseHistory.lean` | injective mixed-radix history code, transverse rank-two controls, and exact minimum-body zero language |
 | `BranchingHistory.lean` | fixed `bcbc` terminal forks and affine positional lower bounds |
+| `SeparatedTwoCOrbit.lean` | exact coupled entry and periodic nonhalting orbits for an infinite separated two-`c` width-three family |
 | `AffineRecognizer.lean` | generic singular three-state guard-and-carry representation calculus |
 | `BranchingRecognizer.lean` | complete `bcbc` residual grammar and rational three-state recognizer |
 | `MixedBranchingHistory.lean` | equal-length mixed terminal grammar and exact raw-toggle normal form |
@@ -2065,6 +2066,8 @@ fixed-rank decision problem.
 | Scheduled scalar zero iff the terminal equation and tag halting | `scheduledBinary_zero_iff_terminal_match`, `scheduledBinary_zero_iff_tagHaltsFrom` |
 | Width-three scheduled series has a nonsingular `5 × 5` Hankel minor | `scheduledWidthThreeHankel_det_ne_zero` |
 | Every exact width-three rational realization needs five states | `scheduledWidthThree_exact_state_lower_bound`, `scheduledWidthThree_native_state_card`, `scheduledWidthThree_native_represents` |
+| The separated body `bb c bⁿ c bⁿ` has an exact `Cₙ→Dₙ→Cₙ` cycle when `n≡0,1 (mod 3)` | `SeparatedTwoCOrbit.cycleQueue_step`, `SeparatedTwoCOrbit.zeroResidue_cycle`, `SeparatedTwoCOrbit.oneResidue_cycle` |
+| Every positive non-residue-two diagonal separated body has a nonhalting coupled input | `SeparatedTwoCOrbit.separated_not_tagHaltsFrom` |
 | Every binary prefix-machine word has one decoded block per row | `prefixMachine_run`, `WeightedTransducer.wordProduct_apply` |
 | Prefix-machine mortality iff five-matrix mortality | `prefixMachine_mortal_iff_normalized` |
 | Both prefix generators share the ten-dimensional image | `prefixProjection_generator` |
@@ -2230,7 +2233,9 @@ no universality theorem for the required binary deletion-width-three family. Coc
 fix deletion width two only by allowing the alphabet to grow; the adjacent binary width-three
 class remains unresolved in the located literature. The width-three Lean theorem is therefore
 a conditional five-state reduction and an exact-rank result, not an established undecidable
-cell.
+cell. Within that seam, `SeparatedTwoCOrbit.lean` proves that every body
+`bb c bⁿ c bⁿ` with `n>0` and `n mod 3≠2` has a nonhalting coupled input by an exact periodic
+macro. This is an infinite obstruction stratum, not a classification or a universality theorem.
 
 ## Prior Formalizations
 
