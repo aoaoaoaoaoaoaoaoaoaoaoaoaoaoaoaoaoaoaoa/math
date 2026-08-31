@@ -47,6 +47,67 @@ private theorem adjacent_residues_false {β offset : Nat} (β_large : 2 < β)
   have beta_minus_one_eq : β - 1 = 1 := Nat.eq_one_of_dvd_one divides_one
   omega
 
+private theorem swappedCode_replicate_false (length : Nat) :
+    ternaryCode ((List.replicate length false).map not) = 3 ^ length - 1 := by
+  induction length with
+  | zero => simp
+  | succ length induction =>
+      rw [List.replicate_succ, List.map_cons, ternaryCode_cons, List.length_map,
+        List.length_replicate, induction, pow_succ]
+      simp only [Bool.not_false, ternaryDigit]
+      have power_pos : 0 < 3 ^ length := pow_pos (by omega) length
+      omega
+
+/-- Swapped ternary value of the first nonterminal fringe `111·0^(β-1)`. -/
+theorem swappedCode_deltaOneUpper (β : Nat) :
+    ternaryCode ((SwappedSetterResidual.deltaOneUpper β).map not) =
+      14 * 3 ^ (β - 1) - 1 := by
+  rw [SwappedSetterResidual.deltaOneUpper, List.map_append, ternaryCode_append,
+    List.length_map, List.length_replicate, swappedCode_replicate_false]
+  norm_num [ternaryCode, ternaryDigit, Nat.ofDigits]
+  have power_pos : 0 < 3 ^ (β - 1) := pow_pos (by omega) (β - 1)
+  omega
+
+/-- Swapped ternary value of Neary's `b` code. -/
+theorem swappedCode_tagCode_b (β : Nat) :
+    ternaryCode ((tagCode β .b).map not) = 6 * 3 ^ β - 2 := by
+  simp only [tagCode, List.map_append, List.map_cons, List.map_nil, Bool.not_true]
+  rw [ternaryCode_append, ternaryCode_append, List.length_singleton,
+    List.length_map, List.length_replicate, swappedCode_replicate_false]
+  norm_num [ternaryCode, ternaryDigit, pow_succ]
+  have power_pos : 0 < 3 ^ β := pow_pos (by omega) β
+  omega
+
+/-- Both terminal fringe pairs have discrepancy `5·3^β-1`. -/
+theorem swappedCode_terminalFringes (β : Nat) :
+    ternaryCode
+          (([true, true] ++ List.replicate β false).map not) =
+        5 * 3 ^ β - 1 ∧
+      ternaryCode ((tagCode β .b).map not) -
+          ternaryCode ((List.replicate β false).map not) =
+        5 * 3 ^ β - 1 := by
+  constructor
+  · rw [List.map_append, ternaryCode_append, List.length_map,
+      List.length_replicate, swappedCode_replicate_false]
+    norm_num [ternaryCode, ternaryDigit, Nat.ofDigits]
+    have power_pos : 0 < 3 ^ β := pow_pos (by omega) β
+    omega
+  · rw [swappedCode_tagCode_b, swappedCode_replicate_false]
+    have power_pos : 0 < 3 ^ β := pow_pos (by omega) β
+    omega
+
+/-- The second nonterminal fringe has discrepancy `17·3^(β-1)-1`. -/
+theorem swappedCode_deltaThree {β : Nat} (β_pos : 0 < β) :
+    ternaryCode ((tagCode β .b).map not) -
+        ternaryCode ((List.replicate (β - 1) false).map not) =
+      17 * 3 ^ (β - 1) - 1 := by
+  rw [swappedCode_tagCode_b, swappedCode_replicate_false]
+  obtain ⟨offset, rfl⟩ := Nat.exists_eq_succ_of_ne_zero (Nat.ne_of_gt β_pos)
+  simp only [Nat.succ_sub_one]
+  rw [pow_succ]
+  have power_pos : 0 < 3 ^ offset := pow_pos (by omega) offset
+  omega
+
 /-- Decode the first stable residual after its forced `D_c,R_c` prefix. -/
 theorem swappedDeltaOne_history_of_residual (β : Nat) (body : List TagLetter)
     (β_pos : 0 < β) (rest : List NearyTile)
