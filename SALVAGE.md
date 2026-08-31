@@ -204,6 +204,10 @@ file owns the mathematical stock.
 | [`M4-S13`](#m4-s13-residue-one-left-c-endpoint-exclusion) | obstruction | the `1|2|0` shortest bad run with a `b` defect cannot close when its left endpoint is `c` | formalized | active |
 | [`M4-S14`](#m4-s14-uniform-all-b-defect-run-exclusion) | structure theorem and obstruction | every regular all-`b` safe/defect/safe bridge is nonsingular for an arbitrary residue-two run | formalized | active |
 | [`M4-S15`](#m4-s15-opposite-double-c-endpoint-exclusion) | obstruction | the `1|2|0` shortest bad run with a `b` defect cannot close when both endpoints are `c` | formalized | active |
+| [`M4-S16`](#m4-s16-phase-zero-left-c-defect-exclusion) | obstruction | the `0|2|1` shortest bad run with a `c` residue-zero endpoint and defect cannot close against a `b` residue-one endpoint | formalized | active |
+| [`M4-S17`](#m4-s17-opposite-right-c-defect-cylinder-exclusion) | obstruction | the `1|2|0` shortest bad run with a `c` defect and residue-zero endpoint cannot close against a `b` residue-one endpoint | formalized | active |
+| [`M4-S18`](#m4-s18-phase-zero-double-c-parity-cylinder) | obstruction | odd body length and odd `b` count exclude the `0|2|1` `b|c|c` family for all waits | formalized | active |
+| [`M4-S19`](#m4-s19-phase-zero-right-c-odd-length-cylinder) | obstruction | odd body length excludes the `0|2|1` `b|b|c` family for all waits | formalized | active |
 | [`M4-C03`](#m4-c03-zero-framed-binary-two-lag-compiler) | compiler | the principal scanner is literally binary context-2 Lag and compiles to `M₄(3)` | formalized | graduated |
 | [`M4-D01`](#m4-d01-zero-framed-binary-two-lag-decision) | decidable stratum | the entire zero-framed binary context-2 Lag kernel has an exact syntactic classification | formalized | graduated |
 | [`M4-D02`](#m4-d02-zero-framed-reset-scanner-decision) | decidable stratum | zero-run reduction contracts the reset scanner to a regular two-token quotient | audited | graduated |
@@ -8619,6 +8623,54 @@ modulo-four exterior transition law covering the remaining `c`-defect placements
 [`MatrixMortality/ParabolicDefectCylinder.lean`](MatrixMortality/ParabolicDefectCylinder.lean)
 and
 [`audits/m43-phase-zero-double-c-parity-cylinder-2026-08-31.md`](audits/m43-phase-zero-double-c-parity-cylinder-2026-08-31.md).
+
+### M4-S19: Phase-zero right-c odd-length cylinder
+
+**Kind:** obstruction
+
+**Evidence:** formalized
+
+**Disposition:** active
+
+For the remaining `b`-defect placement
+
+```text
+b(3z) b(3x+2) c(3y+1),
+```
+
+write
+
+```text
+S = 3^length(tagEncode₃(body)),
+C = ternaryCode(tagEncode₃(body)).
+```
+
+Lean computes the determinant as `−2187/64` times a primitive integral trilinear core
+`H(S,C,x,y,z)`. When `S=4s+3`, its checked polynomial identity is
+
+```text
+H(4s+3,C,x,y,z) = 4R(s,C,x,y,z)+2.
+```
+
+Every encoded body letter has odd length. An odd body length therefore gives `S≡3 (mod 4)`, so
+the core and determinant are nonzero independently of the body code and all three waits.
+Equivalently, every zero in this family must have even body length.
+
+**Scope:** deletion width three, exactly three atoms, orientation `0|2|1`, letters `b|b|c`, and
+odd body length. Even-length bodies, other letter placements, longer defect runs, and nontrivial
+safe contexts remain open.
+
+**Use:** one entire body-parity class of the sole surviving one-`c` endpoint, `b`-defect family
+is excluded without a wait bound or code-digit split. Combined with `M4-S18`, both phase-zero
+survivors beginning with `b` now carry exact mod-four restrictions.
+
+**Next:** derive the corresponding odd-length, odd-`b` cuts for `c|c|c` in both orientations,
+then return to the complementary even-length cylinder of this family.
+
+**Artifact:**
+[`MatrixMortality/ParabolicDefectCylinder.lean`](MatrixMortality/ParabolicDefectCylinder.lean)
+and
+[`audits/m43-phase-zero-right-c-odd-length-cylinder-2026-08-31.md`](audits/m43-phase-zero-right-c-odd-length-cylinder-2026-08-31.md).
 
 ### M4-C03: Zero-framed binary two-Lag compiler
 

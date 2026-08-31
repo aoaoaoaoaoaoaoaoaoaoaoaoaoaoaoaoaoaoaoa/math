@@ -384,6 +384,8 @@ open MatrixMortality
 #print axioms ParabolicBlade.bridge_bOne_cTwo_cZero_det_ne_zero
 #print axioms ParabolicBlade.bridge_bZero_cTwo_cOne_det
 #print axioms ParabolicBlade.bridge_bZero_cTwo_cOne_det_ne_zero_of_odd_body
+#print axioms ParabolicBlade.bridge_bZero_bTwo_cOne_det
+#print axioms ParabolicBlade.bridge_bZero_bTwo_cOne_det_ne_zero_of_odd_body
 #print axioms ParabolicBlade.bridge_cZero_bTwo_bOne_det
 #print axioms ParabolicBlade.bridge_cZero_bTwo_bOne_det_ne_zero
 #print axioms ParabolicBlade.bridge_bOne_bTwo_cZero_det
