@@ -77,13 +77,12 @@ theorem peeledNumerator_multi_shell
   have residual_shell :
       HasDecimalShell (peeledNumerator N D μ G T₂ V₂) rTwo rFive :=
     ⟨⟨residual_ne, rfl⟩, ⟨residual_ne, rfl⟩⟩
-  have coefficient_unit :
-      HasDecimalShell (E * μ * N) 0 0 := by
-    simpa only [zero_add] using (E_unit.mul mu_unit).mul N_unit
-  have depths := distinguishedMulti_forces_equal_depth residual_shell coefficient_unit
-    G_unit V3_unit T3_shell (by
+  have balances := poleEquation_shellBalance residual_shell T3_shell
+    E_unit G_unit mu_unit (N_unit.mul V3_unit) (by
       simpa [mul_assoc, mul_left_comm, mul_comm] using next_pole)
-  rw [depths.1, depths.2] at residual_shell
+  have two_depth : rTwo = (m : ℤ) - 1 := by omega
+  have five_depth : rFive = (m : ℤ) - 1 := by omega
+  rw [two_depth, five_depth] at residual_shell
   exact residual_shell
 
 theorem peeledDenominator_decimalUnit {E N : ℚ}
