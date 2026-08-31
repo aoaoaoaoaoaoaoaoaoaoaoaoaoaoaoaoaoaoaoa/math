@@ -58,6 +58,53 @@ private theorem swappedCode_replicate_false (length : Nat) :
       have power_pos : 0 < 3 ^ length := pow_pos (by omega) length
       omega
 
+/-- Swapping the two binary letters preserves injectivity of the nonzero ternary word code. -/
+theorem swappedTernaryCode_injective :
+    Function.Injective fun word : List Bool => ternaryCode (word.map not) := by
+  intro left right code_eq
+  apply List.map_injective_iff.mpr Bool.not_injective
+  exact ternaryCode_injective code_eq
+
+/-- At the calibrated terminal discrepancy, the pole equation is exactly equality of the two
+target codes. -/
+theorem terminalDiscrepancy_pole_iff
+    {R : Type*} [CommRing R] [NoZeroDivisors R]
+    {D H μ P V : R} (D_ne : D ≠ 0) (H_ne : H ≠ 0)
+    (calibration : D + H = 3 * μ) :
+    (D * P + H * V) * H = 3 * H * μ * V ↔ P = V := by
+  constructor
+  · intro pole
+    have factored : D * H * (P - V) = 0 := by
+      calc
+        D * H * (P - V) = (D * P + H * V) * H - H * (D + H) * V := by ring
+        _ = (D * P + H * V) * H - 3 * H * μ * V := by
+          rw [calibration]
+          ring
+        _ = 0 := sub_eq_zero.mpr pole
+    have difference_zero : P - V = 0 := by
+      exact (mul_eq_zero.mp factored).resolve_left (mul_ne_zero D_ne H_ne)
+    exact sub_eq_zero.mp difference_zero
+  · rintro rfl
+    calc
+      (D * P + H * P) * H = H * (D + H) * P := by ring
+      _ = 3 * H * μ * P := by rw [calibration]; ring
+
+/-- Equality of the swapped target codes is already a genuine Neary terminal match, hence a
+halting source computation. -/
+theorem tagHaltsFrom_of_swappedTernaryCode_eq
+    (β : Nat) (body : List TagLetter) (β_large : 1 < β)
+    (body_long : β - 1 ≤ body.length) (word : List NearyTile)
+    (code_eq :
+      ternaryCode
+          ((spell (nearyUpper β) word ++ nearyMarker β).map not) =
+        ternaryCode ((spell (nearyLower β body) word).map not)) :
+    TagHaltsFrom β (tagOutput body) (body.drop (β - 1) ++ [.b]) := by
+  have terminal_match :
+      spell (nearyUpper β) word ++ nearyMarker β =
+        spell (nearyLower β body) word :=
+    swappedTernaryCode_injective code_eq
+  exact tagHaltsFrom_of_terminal_match β body β_large body_long word terminal_match
+
 /-- Swapped ternary value of the first nonterminal fringe `111·0^(β-1)`. -/
 theorem swappedCode_deltaOneUpper (β : Nat) :
     ternaryCode ((SwappedSetterResidual.deltaOneUpper β).map not) =
