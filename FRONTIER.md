@@ -684,6 +684,14 @@ which lies in a certified grammar gap. The final theorem excludes every even-`b`
 first-`b` positions are `0`, `1`, and `3` through `11`. Reuse the root-window and exact-corner
 certificate architecture rather than returning to raw bounded word enumeration.
 
+The density grammar now has one uniform separator
+[`M4-S35`](SALVAGE.md#m4-s35-phase-zero-right-c-first-b-position-gap). At every threshold
+`k`, a physical body lies on one side of
+`13S≤81·3^kD` or `242·3^(k+1)D<39S`. Any finite classifier that forces `D/S` into the open
+gap between consecutive first-`b` cylinders should terminate through this theorem, not a new
+prefix case split. In particular, the two density gaps left by the `x=211` terminal candidates
+are its `k=0` and `k=1` instances.
+
 Two original-family nodes survive, and they must not be conflated.
 
 1. **Exterior collision avoidance.** Use `M4-S06`--`M4-S15` to classify the transported kernel

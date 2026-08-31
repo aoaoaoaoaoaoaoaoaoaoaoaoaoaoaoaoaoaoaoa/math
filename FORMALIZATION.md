@@ -2490,6 +2490,15 @@ signs and gaps, while the emitted Lean terms independently recheck every corner 
 boundary is
 [`audits/m43-phase-zero-right-c-second-first-b-extinction-2026-08-31.md`](audits/m43-phase-zero-right-c-second-first-b-extinction-2026-08-31.md).
 
+The generic first-`b` position gap
+[`M4-S35`](SALVAGE.md#m4-s35-phase-zero-right-c-first-b-position-gap) is checked in
+`MatrixMortality/ParabolicEvenBody.lean`.
+`ParabolicBlade.tagComplementCode_first_b_position_gap` proves, for every threshold `k`, the
+exact weak/strict dichotomy separating first-`b` positions at most `k` from all later positions.
+The proof is a structural induction on the threshold and tag word; it uses the exact first-`b`
+cylinder and global complement bound, with no search. The exact boundary is
+[`audits/m43-phase-zero-right-c-first-b-position-gap-2026-08-31.md`](audits/m43-phase-zero-right-c-first-b-position-gap-2026-08-31.md).
+
 The residue-zero `c`-endpoint exclusion
 [`M4-S12`](SALVAGE.md#m4-s12-residue-zero-c-endpoint-exclusion) is checked in the same module.
 `ParabolicBlade.bridge_cZero_bTwo_bOne_det` and

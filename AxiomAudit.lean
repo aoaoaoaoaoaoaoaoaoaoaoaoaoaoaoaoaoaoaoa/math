@@ -1792,3 +1792,4 @@ open MatrixMortality
 #print axioms ParabolicBlade.bZeroBDefectCOneCodeCore_ccb_ne_zero_of_even_b_count
 #print axioms ParabolicBlade.bridge_bZero_bTwo_cOne_det_ne_zero_of_ccb_mem_b
 #print axioms ParabolicBlade.bridge_bZero_bTwo_cOne_det_ne_zero_of_ccb_even_b_count
+#print axioms ParabolicBlade.tagComplementCode_first_b_position_gap
