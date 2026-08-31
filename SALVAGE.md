@@ -109,6 +109,7 @@ file owns the mathematical stock.
 | [`MM-S24`](#mm-s24-factorwise-gap-ancestry) | structure theorem and obstruction | every gap factor has an exact lower-code propagation law and imposes its own singleton quotient gate while it remains numerator-coprime | formalized | active |
 | [`MM-S26`](#mm-s26-exact-raw-head-prime-support) | structure theorem | the prime support shared by the primitive gap and the initial unit two-`c` carrier is exactly the support of one explicit run-length exponential | formalized | active |
 | [`MM-S27`](#mm-s27-reciprocal-raw-head-support) | structure theorem and obstruction | raw-head gap support has an exact complementary-exponent form and periodic width law; proper-factor contamination already occurs physically at width five | formalized | active |
+| [`MM-S31`](#mm-s31-gcd-saturated-singleton-gate) | structure theorem and obstruction | exact gcd cancellation leaves a canonical gap quotient whose two singleton gates survive every partial numerator contamination | formalized | active |
 | [`R32-S01`](#r32-s01-split-return-normal-form) | structure theorem | rank-two cuts reduce one-unit binary mortality to a `2 × 2` return recurrence | formalized | graduated |
 | [`R32-S02`](#r32-s02-two-plane-edge-square) | structure theorem | two rank-two generators are a two-vertex square of `2 × 2` edges | formalized | graduated |
 | [`R32-O01`](#r32-o01-rank-one-profile-collapse) | obstruction | a rank-one generator reduces mortality to order-at-most-three scalar recurrence zeros | audited | stock |
@@ -3411,6 +3412,62 @@ through `rawHeadBoundary_factor_iff`, `rawHead_factor_iff_reciprocal`,
 
 **Next:** intersect the periodic initial-support classes with the lower-code support-entry
 semigroup and the surviving factorwise singleton quotient gates.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S31: Gcd-saturated singleton gate
+
+**Kind:** structure theorem and obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+For a denominator-descended carrier numerator `N`, put
+
+```text
+q=2·10^β−7,       c=gcd(q,N),       r=q/c,       N₀=N/c.
+```
+
+Since `β>0`, `q` and `c` are nonzero. The canonical factorization satisfies
+
+```text
+q=rc,       N=cN₀,       gcd(r,N₀)=1.             (1)
+```
+
+No coprimality hypothesis remains. If the carrier reaches either singleton target, exact
+cancellation of the common factor `81cr` from the pole equation forces integers `g,W` with
+
+```text
+G=9g,
+V₂=rW,
+r ∣ c(P₂−μ10^m)+gW.                               (2)
+```
+
+The first divisibility in (2) follows by cancelling `c` from `cr∣cN₀G²V₂·7`, then cancelling
+the automatically coprime coefficient `N₀G²·7`. Substitution into the pole equation gives the
+second line after the exact `81cr` cancellation.
+
+**Scope:** equation (2) holds for every `β>0`, every sign and upper length, both singleton
+erasures, and every integral carrier satisfying the recursive denominator and physical trace
+forms. It does not assume that any divisor of `q` is coprime to `N`. The quotient `r` becomes a
+unit only when the full gap has entered `N`; partial prime or prime-power contamination cannot
+erase the entire gate.
+
+**Use:** replace the family of optional clean-factor gates in
+[`MM-S24`](#mm-s24-factorwise-gap-ancestry) by the single strongest surviving quotient
+`q/gcd(q,N)`. Every proposed singleton pole must either have full-gap numerator contamination
+or pass both code gates modulo this canonical quotient.
+
+**Formalization:**
+[`MatrixMortality/DecimalSetterAncestry.lean`](MatrixMortality/DecimalSetterAncestry.lean),
+through `carrierCoprimeQuotient_multiToSingleton_quotientGate` and
+`carrierGcdQuotient_multiToSingleton_quotientGate`.
+
+**Artifact:**
+[`audits/m53-decimal-gap-factor-ancestry-2026-08-31.md`](audits/m53-decimal-gap-factor-ancestry-2026-08-31.md).
+
+**Next:** classify whether reachable lower-code ancestry can make `q∣N`; otherwise intersect
+the canonical quotient gates with the compiler suffix language.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).

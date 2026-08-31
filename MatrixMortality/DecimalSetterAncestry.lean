@@ -6,9 +6,9 @@ import Mathlib.Tactic
 
 The recursive carrier denominator retains the preceding numerator through `D=EN₋`. Reducing
 the recurrence by factors of the primitive gap `q=2·10^β−7` shows exactly how prime support
-enters and persists. Every factor coprime to the current numerator also imposes two successive
-code congruences on a transition into a singleton. This factorwise law remains informative when
-`q` is composite and the numerator is not coprime to the full gap.
+enters and persists. Exact cancellation by the gap/numerator gcd leaves a canonical coprime
+quotient, which imposes two successive code congruences on a transition into a singleton. This
+law remains informative until the numerator contains the full primitive gap.
 -/
 
 namespace MatrixMortality.DecimalSetterAncestry
@@ -21,6 +21,11 @@ open MatrixMortality.DecimalSetterDepth
 /-- The primitive factor left after removing the fixed factor nine from the decimal gap. -/
 def gapFactor (β : Nat) : ℤ :=
   2 * 10 ^ β - 7
+
+private theorem gapFactor_ne_zero (β : Nat) : gapFactor β ≠ 0 := by
+  simp only [gapFactor]
+  have ten_pos : (0 : ℤ) < 10 ^ β := pow_pos (by norm_num) β
+  omega
 
 /-- The full primitive gap cannot already divide the distinguished two-`c` raw head. Its code
 lies strictly between the consecutive multiples `27q` and `28q`. -/
@@ -502,6 +507,193 @@ private theorem carrierFactor_quotientCongruence
     linear_combination cancelled
   exact coprime.dvd_of_dvd_mul_left product_dvd
 
+private theorem carrierCoprimeQuotient_quotientCongruence
+    {c r q g E G μ N N₀ D Nprev P₂ P₃ V₂ V₃ T₂ T₃ W : ℤ} {m : Nat}
+    (c_ne : c ≠ 0)
+    (r_ne : r ≠ 0)
+    (q_eq : q = r * c)
+    (N_eq : N = c * N₀)
+    (E_eq : E = 9 * q)
+    (G_eq : G = 9 * g)
+    (D_eq : D = E * Nprev)
+    (T2_eq : T₂ = E * P₂ + G * V₂)
+    (T3_eq : T₃ = E * P₃ + G * V₃)
+    (V2_eq : V₂ = r * W)
+    (coprime : IsCoprime r (N₀ * g * V₃))
+    (next_pole :
+      peeledNumerator N D μ G T₂ V₂ * T₃ =
+        E * μ * G * 10 ^ m * N * V₃) :
+    r ∣ c * (P₂ - μ * 10 ^ m) + g * W := by
+  have factored :
+      (81 * c * r) *
+          ((N₀ * (c * P₂ + g * W) - 90 * μ * g * r * W * Nprev) *
+            (r * c * P₃ + g * V₃)) =
+        (81 * c * r) * (c * μ * g * 10 ^ m * N₀ * V₃) := by
+    rw [E_eq] at D_eq
+    rw [E_eq, G_eq] at T2_eq T3_eq next_pole
+    rw [q_eq] at D_eq T2_eq T3_eq next_pole
+    rw [N_eq] at next_pole
+    rw [D_eq, T2_eq, T3_eq, V2_eq] at next_pole
+    unfold peeledNumerator at next_pole
+    linear_combination next_pole
+  have coefficient_ne : 81 * c * r ≠ 0 :=
+    mul_ne_zero (mul_ne_zero (by norm_num) c_ne) r_ne
+  have cancelled :
+      (N₀ * (c * P₂ + g * W) - 90 * μ * g * r * W * Nprev) *
+          (r * c * P₃ + g * V₃) =
+        c * μ * g * 10 ^ m * N₀ * V₃ :=
+    mul_left_cancel₀ coefficient_ne factored
+  have first_mod :
+      N₀ * (c * P₂ + g * W) - 90 * μ * g * r * W * Nprev ≡
+        N₀ * (c * P₂ + g * W) [ZMOD r] := by
+    rw [Int.modEq_iff_dvd]
+    refine ⟨90 * μ * g * W * Nprev, by ring⟩
+  have second_mod : r * c * P₃ + g * V₃ ≡ g * V₃ [ZMOD r] := by
+    rw [Int.modEq_iff_dvd]
+    refine ⟨-(c * P₃), by ring⟩
+  have cancelled_mod :
+      N₀ * (c * P₂ + g * W) * (g * V₃) ≡
+        c * μ * g * 10 ^ m * N₀ * V₃ [ZMOD r] := by
+    calc
+      N₀ * (c * P₂ + g * W) * (g * V₃) ≡
+          (N₀ * (c * P₂ + g * W) - 90 * μ * g * r * W * Nprev) *
+            (r * c * P₃ + g * V₃) [ZMOD r] :=
+        (first_mod.mul second_mod).symm
+      _ = c * μ * g * 10 ^ m * N₀ * V₃ := cancelled
+  have gate_mod :
+      N₀ * g * V₃ * (c * (P₂ - μ * 10 ^ m) + g * W) ≡ 0 [ZMOD r] := by
+    calc
+      N₀ * g * V₃ * (c * (P₂ - μ * 10 ^ m) + g * W) =
+          N₀ * (c * P₂ + g * W) * (g * V₃) -
+            c * μ * g * 10 ^ m * N₀ * V₃ := by ring
+      _ ≡ c * μ * g * 10 ^ m * N₀ * V₃ -
+          c * μ * g * 10 ^ m * N₀ * V₃ [ZMOD r] :=
+        cancelled_mod.sub (Int.ModEq.refl _)
+      _ = 0 := by ring
+  have product_dvd :
+      r ∣ N₀ * g * V₃ * (c * (P₂ - μ * 10 ^ m) + g * W) :=
+    Int.modEq_zero_iff_dvd.mp gate_mod
+  exact coprime.dvd_of_dvd_mul_left product_dvd
+
+/-- Cancelling an exact common gap/carrier factor leaves a coprime quotient. That entire
+quotient, rather than only an arbitrarily chosen clean factor, imposes the singleton code
+gate. -/
+theorem carrierCoprimeQuotient_multiToSingleton_quotientGate
+    {β m : Nat} {c r μ N N₀ D Nprev P₂ P₃ V₂ T₂ T₃ : ℤ}
+    (β_positive : 0 < β)
+    (q_factor : gapFactor β = r * c)
+    (N_factor : N = c * N₀)
+    (reduced_coprime : IsCoprime r N₀)
+    (D_eq : D = decimalGap (10 ^ β) * Nprev)
+    (T2_eq : T₂ = decimalGap (10 ^ β) * P₂ + decimalLift (10 ^ β) * V₂)
+    (T3_eq : T₃ = decimalGap (10 ^ β) * P₃ + decimalLift (10 ^ β) * 7)
+    (next_pole :
+      peeledNumerator N D μ (decimalLift (10 ^ β)) T₂ V₂ * T₃ =
+        decimalGap (10 ^ β) * μ * decimalLift (10 ^ β) * 10 ^ m * N * 7) :
+    ∃ g W : ℤ,
+      decimalLift (10 ^ β) = 9 * g ∧
+        V₂ = r * W ∧
+          r ∣ c * (P₂ - μ * 10 ^ m) + g * W := by
+  let q := gapFactor β
+  let G := decimalLift (10 ^ β)
+  have q_ne : q ≠ 0 := by simpa only [q] using gapFactor_ne_zero β
+  have q_eq : q = r * c := by simpa only [q] using q_factor
+  have c_ne : c ≠ 0 := by
+    intro c_zero
+    rw [c_zero, mul_zero] at q_eq
+    exact q_ne q_eq
+  have r_ne : r ≠ 0 := by
+    intro r_zero
+    rw [r_zero, zero_mul] at q_eq
+    exact q_ne q_eq
+  have E_eq : decimalGap (10 ^ β) = 9 * q := by
+    simp [decimalGap, q, gapFactor]
+  obtain ⟨g, G_eq⟩ := nine_dvd_decimalLift_ten_pow β
+  have qG_coprime : IsCoprime q G := by
+    simpa [q, G] using gapFactor_coprime_decimalLift β_positive
+  have q7_coprime : IsCoprime q (7 : ℤ) := by
+    simpa [q] using gapFactor_coprime_seven β
+  have r_dvd_q : r ∣ q := ⟨c, q_eq⟩
+  have rG_coprime : IsCoprime r G :=
+    IsCoprime.of_isCoprime_of_dvd_left qG_coprime r_dvd_q
+  have r7_coprime : IsCoprime r (7 : ℤ) :=
+    IsCoprime.of_isCoprime_of_dvd_left q7_coprime r_dvd_q
+  have q_dvd_E : q ∣ decimalGap (10 ^ β) := by
+    refine ⟨9, ?_⟩
+    rw [E_eq]
+    ring
+  have product_dvd : q ∣ N * G ^ 2 * V₂ * 7 := by
+    apply gapFactor_dvd_carrierProduct q_dvd_E D_eq T2_eq T3_eq
+    simpa only [G] using next_pole
+  have common_product_dvd :
+      c * r ∣ c * (N₀ * G ^ 2 * V₂ * 7) := by
+    simpa [q_eq, N_factor, mul_assoc, mul_left_comm, mul_comm] using product_dvd
+  have quotient_product_dvd : r ∣ N₀ * G ^ 2 * V₂ * 7 :=
+    (mul_dvd_mul_iff_left c_ne).mp common_product_dvd
+  have coefficient_coprime : IsCoprime r (N₀ * G ^ 2 * 7) := by
+    simpa [pow_two, mul_assoc] using
+      ((reduced_coprime.mul_right rG_coprime).mul_right rG_coprime).mul_right r7_coprime
+  have V2_dvd : r ∣ V₂ := by
+    apply coefficient_coprime.dvd_of_dvd_mul_left
+    simpa [mul_assoc, mul_left_comm, mul_comm] using quotient_product_dvd
+  obtain ⟨W, V2_eq⟩ := V2_dvd
+  have g_dvd_G : g ∣ G := by
+    refine ⟨9, ?_⟩
+    dsimp [G]
+    rw [G_eq]
+    ring
+  have rg_coprime : IsCoprime r g :=
+    IsCoprime.of_isCoprime_of_dvd_right rG_coprime g_dvd_G
+  have quotient_coprime : IsCoprime r (N₀ * g * 7) :=
+    (reduced_coprime.mul_right rg_coprime).mul_right r7_coprime
+  refine ⟨g, W, G_eq, V2_eq, ?_⟩
+  apply carrierCoprimeQuotient_quotientCongruence c_ne r_ne q_eq N_factor E_eq G_eq
+    D_eq T2_eq T3_eq V2_eq quotient_coprime
+  simpa only [G] using next_pole
+
+/-- The canonical residual singleton gate has no coprimality branch. Divide both the primitive
+gap and carrier numerator by their gcd; the remaining gap quotient must divide the current
+lower code and imposes the displayed quotient congruence. -/
+theorem carrierGcdQuotient_multiToSingleton_quotientGate
+    {β m : Nat} {μ N D Nprev P₂ P₃ V₂ T₂ T₃ : ℤ}
+    (β_positive : 0 < β)
+    (D_eq : D = decimalGap (10 ^ β) * Nprev)
+    (T2_eq : T₂ = decimalGap (10 ^ β) * P₂ + decimalLift (10 ^ β) * V₂)
+    (T3_eq : T₃ = decimalGap (10 ^ β) * P₃ + decimalLift (10 ^ β) * 7)
+    (next_pole :
+      peeledNumerator N D μ (decimalLift (10 ^ β)) T₂ V₂ * T₃ =
+        decimalGap (10 ^ β) * μ * decimalLift (10 ^ β) * 10 ^ m * N * 7) :
+    ∃ g W : ℤ,
+      decimalLift (10 ^ β) = 9 * g ∧
+        V₂ = (gapFactor β / gcd (gapFactor β) N) * W ∧
+          gapFactor β / gcd (gapFactor β) N ∣
+            gcd (gapFactor β) N * (P₂ - μ * 10 ^ m) + g * W := by
+  let q := gapFactor β
+  let c : ℤ := gcd q N
+  let r := q / c
+  let N₀ := N / c
+  have q_ne : q ≠ 0 := by simpa only [q] using gapFactor_ne_zero β
+  have c_ne : c ≠ 0 := by
+    dsimp only [c]
+    exact gcd_ne_zero_of_left q_ne
+  have q_eq : q = r * c := by
+    dsimp only [r]
+    rw [mul_comm]
+    exact (EuclideanDomain.mul_div_cancel' c_ne (gcd_dvd_left q N)).symm
+  have N_eq : N = c * N₀ := by
+    dsimp only [N₀]
+    exact (EuclideanDomain.mul_div_cancel' c_ne (gcd_dvd_right q N)).symm
+  have reduced_coprime : IsCoprime r N₀ := by
+    dsimp only [r, N₀, c]
+    exact isCoprime_div_gcd_div_gcd_of_gcd_ne_zero (gcd_ne_zero_of_left q_ne)
+  obtain ⟨g, W, G_eq, V2_eq, gate⟩ :=
+    carrierCoprimeQuotient_multiToSingleton_quotientGate
+      (c := c) (r := r) (N₀ := N₀) β_positive (by simpa only [q] using q_eq)
+      N_eq reduced_coprime D_eq T2_eq T3_eq next_pole
+  refine ⟨g, W, G_eq, ?_, ?_⟩
+  · simpa only [q, c, r] using V2_eq
+  · simpa only [q, c, r] using gate
+
 /-- Every factor of the primitive gap that is coprime to the carrier numerator imposes its own
 two-stage code gate. This remains informative when the full gap and numerator share factors. -/
 theorem carrierFactor_multiToSingleton_quotientGate
@@ -521,10 +713,7 @@ theorem carrierFactor_multiToSingleton_quotientGate
           r ∣ s * (P₂ - μ * 10 ^ m) + g * W := by
   let q := gapFactor β
   let G := decimalLift (10 ^ β)
-  have q_ne : q ≠ 0 := by
-    simp only [q, gapFactor]
-    have ten_pos : (0 : ℤ) < 10 ^ β := pow_pos (by norm_num) β
-    omega
+  have q_ne : q ≠ 0 := by simpa only [q] using gapFactor_ne_zero β
   have q_eq : q = r * s := by simpa only [q] using q_factor
   have r_ne : r ≠ 0 := by
     intro r_zero
