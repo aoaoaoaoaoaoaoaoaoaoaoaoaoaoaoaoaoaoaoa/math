@@ -124,6 +124,7 @@ file owns the mathematical stock.
 | [`MM-S25`](#mm-s25-separated-two-c-periodic-orbits) | structure theorem and obstruction | an infinite separated two-`c` width-three family has explicit nonhalting coupled orbits | formalized | active |
 | [`MM-S26`](#mm-s26-exact-raw-head-prime-support) | structure theorem | the prime support shared by the primitive gap and the initial unit two-`c` carrier is exactly the support of one explicit run-length exponential | formalized | active |
 | [`MM-S27`](#mm-s27-reciprocal-raw-head-support) | structure theorem and obstruction | raw-head gap support has an exact complementary-exponent form and periodic width law; proper-factor contamination already occurs physically at width five | formalized | active |
+| [`MM-S28`](#mm-s28-arbitrary-history-gap-support-saturation) | structure theorem and obstruction | gap-prime support over an arbitrary carrier history is exactly initial support plus emitted lower-code support, while one physical all-erasure lower code contains the full gap | formalized | active |
 | [`R32-S01`](#r32-s01-split-return-normal-form) | structure theorem | rank-two cuts reduce one-unit binary mortality to a `2 × 2` return recurrence | formalized | graduated |
 | [`R32-S02`](#r32-s02-two-plane-edge-square) | structure theorem | two rank-two generators are a two-vertex square of `2 × 2` edges | formalized | graduated |
 | [`R32-O01`](#r32-o01-rank-one-profile-collapse) | obstruction | a rank-one generator reduces mortality to order-at-most-three scalar recurrence zeros | audited | stock |
@@ -4187,6 +4188,60 @@ through `rawHeadBoundary_factor_iff`, `rawHead_factor_iff_reciprocal`,
 
 **Next:** intersect the periodic initial-support classes with the lower-code support-entry
 semigroup and the surviving factorwise singleton quotient gates.
+
+### MM-S28: Arbitrary-history gap-support saturation
+
+**Kind:** structure theorem and obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+Let `q=2·10^β−7`. An exact recursive carrier history records its initial numerator `N₀`,
+emitted lower codes `V₁,…,Vₖ`, and final numerator `Nₖ`. Iterating the one-step law from
+[`MM-S24`](#mm-s24-factorwise-gap-ancestry) gives, for every prime `p∣q`,
+
+```text
+p∣Nₖ  ↔  p∣N₀ or p∣Vᵢ for some 1≤i≤k.           (1)
+```
+
+Consequently `rad(q)∣Nₖ` exactly when every gap prime is initially present or divides an
+emitted lower code in the history. If `p∤N₀`, equation (1) identifies lower-code entry as both
+necessary and sufficient, without a bounded-history assumption.
+
+No gap prime is permanently absent from the physical lower-code language. Set
+`n=φ(|q|)`. Since `gcd(q,10)=1`, Euler's theorem gives `q∣10ⁿ−1`. The all-erasure block
+`D_cⁿ` has lower spelling `0ⁿ` and decimal code `Cₙ` satisfying
+
+```text
+9Cₙ=7(10ⁿ−1).
+```
+
+The gap is coprime to nine, so `q∣Cₙ`; in particular `rad(q)∣Cₙ`. This block is physical and
+its lower code is independent of the compiler body.
+
+**Scope:** equation (1) covers every finite history whose steps satisfy the exact recursive
+denominator and trace equations. The all-erasure theorem proves membership in the emitted
+lower-code language only. It does not show that `D_cⁿ` occurs after a carrier reachable from
+the distinguished entry, nor that applying it completes a pole transition. It therefore kills
+every invariant based on a permanently absent gap prime, but does not establish carrier-support
+saturation or settle `M₅(3)`.
+
+**Use:** replace static prime-support exclusion with encoded-entry reachability. A viable
+obstruction must couple the reached carrier to the upper code, quotient gate, or complete suffix
+address; lower-code language support alone has no missing gap factor.
+
+**Formalization:**
+[`MatrixMortality/DecimalSetterAncestry.lean`](MatrixMortality/DecimalSetterAncestry.lean),
+through `GapCarrierHistory.prime_dvd_final_iff`,
+`GapCarrierHistory.absent_prime_dvd_final_iff_lowerCode`,
+`GapCarrierHistory.gapSupportSaturated_iff`, `gapFactor_dvd_allEraseLowerCode`, and
+`radical_gapFactor_dvd_allEraseLowerCode`.
+
+**Artifact:**
+[`audits/m53-decimal-prime-support-saturation-2026-08-31.md`](audits/m53-decimal-prime-support-saturation-2026-08-31.md).
+
+**Next:** determine whether the distinguished carrier orbit can enter a state from which a
+support-saturating all-erasure block, or any equivalent lower code, is an exact recursive
+transition; retain the upper code and complete inverse address in that reachability test.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).

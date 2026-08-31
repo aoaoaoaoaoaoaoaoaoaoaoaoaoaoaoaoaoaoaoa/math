@@ -1196,6 +1196,33 @@
 'MatrixMortality.DecimalSetterAncestry.primeFactor_dvd_next_iff' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.DecimalSetterAncestry.GapCarrierStep.prime_dvd_target_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterAncestry.GapCarrierHistory.prime_dvd_final_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterAncestry.GapCarrierHistory.absent_prime_dvd_final_iff_lowerCode' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterAncestry.gapSupportSaturated_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterAncestry.GapCarrierHistory.gapSupportSaturated_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterAncestry.GapCarrierHistory.lowerCode_of_gapSupportSaturated' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterAncestry.allEraseSaturationWidth_pos' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterAncestry.gapFactor_dvd_allEraseLowerCode' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterAncestry.radical_gapFactor_dvd_allEraseLowerCode' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.DecimalSetterAncestry.carrierFactor_multiToSingleton_quotientGate' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]

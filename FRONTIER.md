@@ -928,6 +928,16 @@ terminal-run-one support occurs exactly at widths congruent to five modulo `21`.
 gap-clean shortcut is therefore false; a closure must track this periodic support through the
 lower-code ancestry and singleton gates.
 
+[`MM-S28`](SALVAGE.md#mm-s28-arbitrary-history-gap-support-saturation) closes the support
+bookkeeping and kills static missing-prime invariants. Along any exact recursive carrier
+history, a prime `p∣q` divides the final numerator exactly when it divides the initial numerator
+or one emitted lower code. Hence final support is saturated precisely when every gap prime is
+initial or installed somewhere in the history. But the physical lower-code language itself has
+no permanently missing gap prime: for `n=φ(|q|)`, the block `D_cⁿ` has lower code divisible by
+the full `q`, not merely by `rad(q)`. This does not make that block reachable from the
+distinguished carrier. The live seam is encoded-entry reachability with upper-code and complete
+suffix data retained; support projection alone is exhausted.
+
 [`MM-O20`](SALVAGE.md#mm-o20-decimal-first-cylinder-collision) gives the unbounded suffix
 language an exact metric: a backward word gains the sum of its shifts in both decimal valuations,
 and one block maps the unit domain onto one exact suffix cylinder. But first-cylinder decoding is
