@@ -135,6 +135,7 @@ file owns the mathematical stock.
 | [`MM-S36`](#mm-s36-complete-hidden-branch-separation) | structure theorem | the first-cylinder collision pair separates on complete same-tail addresses, while any cross-tail collision forces one exact asymmetric shell | formalized | active |
 | [`MM-S37`](#mm-s37-decimal-three-shape-frontier-extinction) | obstruction | all three role shapes in the swapped ternary first-multi-transfer frontier are empty in the decimal carrier | formalized | active |
 | [`MM-S35`](#mm-s35-first-multi-transfer-trichotomy) | structure theorem and obstruction | every first swapped-ternary multi-transfer pole in the expected shells passes through one of three exact all-`c`/singleton shapes | formalized | active |
+| [`MM-S39`](#mm-s39-second-position-d_b-raw-head-extinction) | obstruction | no all-erasure word with `D_b` in its second position carries a lawful two-`c` raw head into another multi-role pole | formalized | active |
 | [`R32-S01`](#r32-s01-split-return-normal-form) | structure theorem | rank-two cuts reduce one-unit binary mortality to a `2 × 2` return recurrence | formalized | graduated |
 | [`R32-S02`](#r32-s02-two-plane-edge-square) | structure theorem | two rank-two generators are a two-vertex square of `2 × 2` edges | formalized | graduated |
 | [`R32-O01`](#r32-o01-rank-one-profile-collapse) | obstruction | a rank-one generator reduces mortality to order-at-most-three scalar recurrence zeros | audited | stock |
@@ -4847,6 +4848,55 @@ through `DecimalSetterDepth.firstMultiTransfer_threeShapeFrontier_impossible`.
 
 **Next:** decide the first rule-bearing or nonleading-`D_b` raw-head transition, then propagate
 the resulting cut to reachable generalized product residuals.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S39: Second-position `D_b` raw-head extinction
+
+**Kind:** obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+Let a lawful decimal-unit two-`c` raw head be followed by the all-erasure role word
+
+```text
+D_c D_b D_c^t.
+```
+
+Its lower spelling is the same `0^(t+2)` word as the all-`D_c` block of width `n=t+2`. The two
+punctuated upper words share their final `t+β+2=n+β` decimal digits. Their code difference is
+therefore divisible by `10^(n+β)`, hence by `5^(n+β)`. The resulting carrier residual differs
+from the all-`D_c` residual by the same five-deep factor multiplied by the fixed head and gap.
+But [`MM-S33`](#mm-s33-leading-d_b-support-saturator-extinction) strengthened the underlying
+all-`D_c` theorem to show that its residual is never divisible by `5^(n+β)`. A multi-role target
+would require exactly that depth, giving a contradiction for every `t≥0`.
+
+At `t=entrySaturationWidth(β)−2`, the unchanged lower code is divisible by the full primitive
+gap `q=2·10^β−7`. Thus the explicit support saturator with `D_b` in the second position is also
+excluded at the distinguished raw-head entry.
+
+**Scope:** this is an initial raw-head theorem. It does not recur for generalized product
+residuals or cover rule-bearing words. The proof is sharp for this suffix method: if `D_b`
+appears in position three or later, the common upper suffix has depth strictly below `n+β`, so
+the perturbation can alter the five-adic obstruction.
+
+**Use:** remove both first-position and second-position `D_b` from the all-erasure raw-head
+grammar. Any remaining all-erasure first transition containing `D_b` begins with `D_cD_c`, or
+contains another `D_b` whose shallower perturbation must be analyzed rather than discarded.
+
+**Formalization:**
+[`MatrixMortality/DecimalSetterFiveDepth.lean`](MatrixMortality/DecimalSetterFiveDepth.lean)
+extracts the general five-deep upper-perturbation theorem.
+[`MatrixMortality/DecimalSetterAncestry.lean`](MatrixMortality/DecimalSetterAncestry.lean)
+proves the exact common-suffix factorization, unchanged lower code, full-gap entry support, and
+raw-head extinction through `secondBErase_rawHead_shell_impossible`.
+
+**Artifact:**
+[`audits/m53-second-b-support-saturator-extinction-2026-08-31.md`](audits/m53-second-b-support-saturator-extinction-2026-08-31.md).
+
+**Next:** decide the shallower third-position perturbation, where the old five-adic depth can be
+changed, or switch to the exact mixed-prime leading coefficient of that perturbation.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).

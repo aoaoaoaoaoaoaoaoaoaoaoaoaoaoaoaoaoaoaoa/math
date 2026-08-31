@@ -10,7 +10,9 @@ The recursive carrier denominator retains the preceding numerator through `D=EN�
 the recurrence by factors of the primitive gap `q=2·10^β−7` shows exactly how prime support
 enters and persists. Exact cancellation by the gap/numerator gcd leaves a canonical coprime
 quotient, which imposes two successive code congruences on a transition into a singleton. This
-law remains informative until the numerator contains the full primitive gap.
+law subsumes the factorwise gates and remains informative until the numerator contains the full
+primitive gap. Exact upper-suffix depth
+excludes full-gap all-erasure entry blocks whose first or second role is `D_b`.
 -/
 
 namespace MatrixMortality.DecimalSetterAncestry
@@ -907,6 +909,143 @@ theorem entryLeadingBErase_rawHead_shell_impossible
   · rfl
   · rfl
   · simpa only [n, H, PB, V, RB, Nat.cast_add] using shell
+
+/-- An all-erasure word whose second tile is `D_b`. -/
+def secondBEraseBlock (tailWidth : Nat) : List NearyTile :=
+  .erase .c :: .erase .b :: List.replicate tailWidth (.erase .c)
+
+/-- Every lower side in a second-position `D_b` erasure block is the one-digit zero word. -/
+@[simp] theorem spell_secondBEraseBlock_lower
+    (β : Nat) (body : List TagLetter) (tailWidth : Nat) :
+    spell (nearyLower β body) (secondBEraseBlock tailWidth) =
+      List.replicate (tailWidth + 2) false := by
+  change false :: false ::
+      spell (nearyLower β body) (List.replicate tailWidth (.erase .c)) =
+    false :: false :: List.replicate tailWidth false
+  exact congrArg (false :: false :: ·) (by
+    simpa only [allEraseBlock] using spell_allEraseBlock β body tailWidth)
+
+private theorem secondB_punctuatedUpper_eq_append (β tailWidth : Nat) :
+    punctuatedUpper β (.c :: .b :: List.replicate tailWidth .c) =
+      ([true] ++ markerWord β) ++
+        (List.replicate (tailWidth + 1) true ++ markerWord β) := by
+  simp [punctuatedUpper, tagEncode_cons, tagCode, markerWord, List.replicate_succ,
+    List.append_assoc]
+
+private theorem sameWidthAllC_punctuatedUpper_eq_append (β tailWidth : Nat) :
+  punctuatedUpper β (List.replicate (tailWidth + 2) .c) =
+      [true] ++ (List.replicate (tailWidth + 1) true ++ markerWord β) := by
+  simp [punctuatedUpper, tagEncode_cons, tagCode, markerWord, List.replicate_succ]
+
+/-- Replacing the second `D_c` by `D_b` changes the punctuated upper code only above the
+common suffix of decimal length `tailWidth+β+2`. -/
+theorem tenPower_dvd_secondB_punctuatedUpper_code_sub (β tailWidth : Nat) :
+    (10 : ℤ) ^ (tailWidth + β + 2) ∣
+      (code (punctuatedUpper β (.c :: .b :: List.replicate tailWidth .c)) : ℤ) -
+        code (punctuatedUpper β (List.replicate (tailWidth + 2) .c)) := by
+  let suffix := List.replicate (tailWidth + 1) true ++ markerWord β
+  have suffix_length : suffix.length = tailWidth + β + 2 := by
+    simp [suffix, markerWord]
+    omega
+  rw [secondB_punctuatedUpper_eq_append,
+    sameWidthAllC_punctuatedUpper_eq_append]
+  change (10 : ℤ) ^ (tailWidth + β + 2) ∣
+    (code (([true] ++ markerWord β) ++ suffix) : ℤ) -
+      code ([true] ++ suffix)
+  have secondB_code := code_append ([true] ++ markerWord β) suffix
+  have allC_code := code_append [true] suffix
+  rw [secondB_code, allC_code]
+  push_cast
+  rw [suffix_length]
+  refine ⟨(code ([true] ++ markerWord β) : ℤ) - code [true], ?_⟩
+  ring
+
+/-- The second-position upper perturbation is five-adically invisible at exactly the full
+multi-role target depth. -/
+theorem fivePower_dvd_secondB_punctuatedUpper_code_sub (β tailWidth : Nat) :
+    (5 : ℤ) ^ (tailWidth + 2 + β) ∣
+      (code (punctuatedUpper β (.c :: .b :: List.replicate tailWidth .c)) : ℤ) -
+        code (punctuatedUpper β (List.replicate (tailWidth + 2) .c)) := by
+  have five_dvd_ten : (5 : ℤ) ∣ 10 := by norm_num
+  have power_dvd : (5 : ℤ) ^ (tailWidth + 2 + β) ∣
+      10 ^ (tailWidth + 2 + β) := pow_dvd_pow_of_dvd five_dvd_ten _
+  have code_dvd := tenPower_dvd_secondB_punctuatedUpper_code_sub β tailWidth
+  have code_dvd' : (10 : ℤ) ^ (tailWidth + 2 + β) ∣
+      (code (punctuatedUpper β (.c :: .b :: List.replicate tailWidth .c)) : ℤ) -
+        code (punctuatedUpper β (List.replicate (tailWidth + 2) .c)) := by
+    simpa only [show tailWidth + 2 + β = tailWidth + β + 2 by omega] using code_dvd
+  exact power_dvd.trans code_dvd'
+
+/-- Decimal lower code emitted by a second-position `D_b` erasure block. -/
+def secondBEraseLowerCode
+    (β : Nat) (body : List TagLetter) (tailWidth : Nat) : ℤ :=
+  code (spell (nearyLower β body) (secondBEraseBlock tailWidth))
+
+/-- A second-position `D_b` erasure block has the same lower code as the same-width all-`D_c`
+block. -/
+theorem secondBEraseLowerCode_eq_allEraseLowerCode
+    (β : Nat) (body : List TagLetter) (tailWidth : Nat) :
+    secondBEraseLowerCode β body tailWidth =
+      allEraseLowerCode β body (tailWidth + 2) := by
+  simp only [secondBEraseLowerCode, allEraseLowerCode,
+    spell_secondBEraseBlock_lower, spell_allEraseBlock]
+
+/-- At the entry saturation width, the physical second-position `D_b` erasure lower code
+contains the full primitive gap. -/
+theorem gapFactor_dvd_entrySecondBEraseLowerCode
+    {β : Nat} (β_positive : 0 < β) (body : List TagLetter) :
+    gapFactor β ∣ secondBEraseLowerCode β body (entrySaturationWidth β - 2) := by
+  rw [secondBEraseLowerCode_eq_allEraseLowerCode,
+    Nat.sub_add_cancel (show 2 ≤ entrySaturationWidth β by
+      exact (entrySaturationWidth_three_le β_positive).trans' (by norm_num))]
+  exact gapFactor_dvd_entrySaturationLowerCode β_positive body
+
+/-- No second-position `D_b` all-erasure block can be the first transition from a lawful
+two-`c` raw head to another multi-role pole. -/
+theorem secondBErase_rawHead_shell_impossible
+    {β tailWidth : Nat} (body headTail : List TagLetter) {μ E G : ℤ}
+    (β_large : 2 ≤ β)
+    (head_unit :
+      HasDecimalShell (code (peeledHeadWord β (.c :: .c :: headTail)) : ℚ) 0 0)
+    (mu_eq : 9 * μ = 52 * 10 ^ β - 7)
+    (gap_eq : E = 18 * 10 ^ β - 63)
+    (lift_eq : G = 502 * 10 ^ β - 7)
+    (shell :
+      HasDecimalShell
+        (((code (peeledHeadWord β (.c :: .c :: headTail)) : ℤ) *
+          (E * code (punctuatedUpper β
+              (.c :: .b :: List.replicate tailWidth .c)) +
+            G * secondBEraseLowerCode β body tailWidth) -
+          10 * μ * G * secondBEraseLowerCode β body tailWidth : ℤ) : ℚ)
+        ((tailWidth + 2 + β : Nat) : ℤ)
+        ((tailWidth + 2 + β : Nat) : ℤ)) :
+    False := by
+  let n := tailWidth + 2
+  let H : ℤ := code (peeledHeadWord β (.c :: .c :: headTail))
+  let PAll : ℤ := code (punctuatedUpper β (List.replicate n .c))
+  let P : ℤ := code (punctuatedUpper β (.c :: .b :: List.replicate tailWidth .c))
+  let V := secondBEraseLowerCode β body tailWidth
+  let RAll := H * (E * PAll + G * V) - 10 * μ * G * V
+  let R := H * (E * P + G * V) - 10 * μ * G * V
+  have n_positive : 1 ≤ n := by omega
+  have allC_upper_eq : 9 * PAll =
+      50 * 10 ^ β * 10 ^ n + 2 * 10 ^ β - 7 := by
+    exact allC_punctuatedUpper_code_identity β n
+  have V_eq : V = allEraseLowerCode β body n := by
+    dsimp only [V, n]
+    exact secondBEraseLowerCode_eq_allEraseLowerCode β body tailWidth
+  have lower_eq : 9 * V = 7 * 10 ^ n - 7 := by
+    have identity := allEraseLowerCode_identity β body n
+    rw [V_eq]
+    linear_combination identity
+  refine fiveDeepUpperPerturbation_peeledDoubleCHead_shell_impossible
+    (PAll := PAll) (P := P) (RAll := RAll) (R := R) headTail β_large n_positive
+      head_unit mu_eq gap_eq lift_eq allC_upper_eq lower_eq ?_ ?_ ?_ ?_
+  · rfl
+  · dsimp only [P, PAll, n]
+    exact fivePower_dvd_secondB_punctuatedUpper_code_sub β tailWidth
+  · rfl
+  · simpa only [n, H, P, V, R, Nat.cast_add] using shell
 
 private theorem gapFactor_dvd_carrierProduct
     {q E G μ N D Nprev P₂ P₃ V₂ V₃ T₂ T₃ : ℤ} {m : Nat}

@@ -5,8 +5,8 @@ import Mathlib.Tactic
 # Deep five-adic obstruction for the decimal setter
 
 The all-`D_c` raw residual falls short of five-adic depth `n+β` at every positive width.
-Consequently, prefixing its upper code by the exact `D_b` marker perturbation cannot create
-the deeper multi-role shell required by the mixed erasure word.
+Any upper-code perturbation at that depth preserves the obstruction. This excludes the exact
+leading-`D_b` marker perturbation and supplies the reusable cut for a second-position `D_b`.
 -/
 
 namespace MatrixMortality.DecimalSetterDepth
@@ -370,6 +370,48 @@ private theorem fivePower_dvd_int_of_hasDecimalShell
     exact_mod_cast valuation_rat
   exact (padicValInt_dvd_iff depth value).mpr (Or.inr (by rw [valuation_eq]))
 
+/-- Changing an all-`D_c` punctuated upper code only at five-adic depth `n+β` cannot create
+the multi-role shell missing from the all-`D_c` raw residual. -/
+theorem fiveDeepUpperPerturbation_peeledDoubleCHead_shell_impossible
+    {β n : Nat} (tail : List TagLetter) {μ E G PAll P V RAll R : ℤ}
+    (β_large : 2 ≤ β) (n_positive : 1 ≤ n)
+    (head_unit :
+      HasDecimalShell (code (peeledHeadWord β (.c :: .c :: tail)) : ℚ) 0 0)
+    (mu_eq : 9 * μ = 52 * 10 ^ β - 7)
+    (gap_eq : E = 18 * 10 ^ β - 63)
+    (lift_eq : G = 502 * 10 ^ β - 7)
+    (allC_upper_eq : 9 * PAll = 50 * 10 ^ β * 10 ^ n + 2 * 10 ^ β - 7)
+    (lower_eq : 9 * V = 7 * 10 ^ n - 7)
+    (allC_residual_eq :
+      RAll = (code (peeledHeadWord β (.c :: .c :: tail)) : ℤ) *
+          (E * PAll + G * V) - 10 * μ * G * V)
+    (upper_difference_deep : (5 : ℤ) ^ (n + β) ∣ P - PAll)
+    (residual_eq :
+      R = (code (peeledHeadWord β (.c :: .c :: tail)) : ℤ) *
+          (E * P + G * V) - 10 * μ * G * V)
+    (shell : HasDecimalShell (R : ℚ) (n + β) (n + β)) :
+    False := by
+  let H : ℤ := code (peeledHeadWord β (.c :: .c :: tail))
+  have allC_not_deep : ¬(5 : ℤ) ^ (n + β) ∣ RAll := by
+    refine allCDeletion_peeledDoubleCHead_not_fiveDeep
+      (T := E * PAll + G * V) (R := RAll) tail β_large n_positive
+        head_unit mu_eq gap_eq lift_eq allC_upper_eq lower_eq ?_ ?_
+    · rfl
+    · simpa only [H] using allC_residual_eq
+  have residual_difference : R - RAll = H * E * (P - PAll) := by
+    rw [residual_eq, allC_residual_eq]
+    dsimp only [H]
+    ring
+  have perturbation_deep : (5 : ℤ) ^ (n + β) ∣ R - RAll := by
+    rw [residual_difference]
+    exact upper_difference_deep.mul_left (H * E)
+  have residual_deep : (5 : ℤ) ^ (n + β) ∣ R :=
+    fivePower_dvd_int_of_hasDecimalShell shell
+  have allC_deep : (5 : ℤ) ^ (n + β) ∣ RAll := by
+    have isolated := dvd_sub residual_deep perturbation_deep
+    simpa only [sub_sub_cancel] using isolated
+  exact allC_not_deep allC_deep
+
 /-- Prefixing an all-`D_c` upper word by the marker-scale `D_b` perturbation cannot create the
 deeper multi-role shell. The conclusion holds at every positive erasure width. -/
 theorem leadingBDeletion_peeledDoubleCHead_shell_impossible
@@ -391,27 +433,14 @@ theorem leadingBDeletion_peeledDoubleCHead_shell_impossible
           (E * PB + G * V) - 10 * μ * G * V)
     (shell : HasDecimalShell (RB : ℚ) (n + β) (n + β)) :
     False := by
-  let H : ℤ := code (peeledHeadWord β (.c :: .c :: tail))
-  have allC_not_deep : ¬(5 : ℤ) ^ (n + β) ∣ RAll := by
-    refine allCDeletion_peeledDoubleCHead_not_fiveDeep
-      (T := E * PAll + G * V) (R := RAll) tail β_large n_positive
-        head_unit mu_eq gap_eq lift_eq allC_upper_eq lower_eq ?_ ?_
-    · rfl
-    · simpa only [H] using allC_residual_eq
-  have difference : RB = RAll + H * E * μ * 10 ^ (n + β + 1) := by
-    rw [leadingB_residual_eq, allC_residual_eq, leadingB_upper_eq]
-    dsimp only [H]
-    ring
-  have leading_deep : (5 : ℤ) ^ (n + β) ∣ RB :=
-    fivePower_dvd_int_of_hasDecimalShell shell
-  have perturbation_deep :
-      (5 : ℤ) ^ (n + β) ∣ H * E * μ * 10 ^ (n + β + 1) := by
-    exact dvd_mul_of_dvd_right
-      (fivePower_dvd_tenPower (show n + β ≤ n + β + 1 by omega)) (H * E * μ)
-  have allC_deep : (5 : ℤ) ^ (n + β) ∣ RAll := by
-    rw [difference] at leading_deep
-    have isolated := dvd_sub leading_deep perturbation_deep
-    simpa using isolated
-  exact allC_not_deep allC_deep
+  apply fiveDeepUpperPerturbation_peeledDoubleCHead_shell_impossible
+    (PAll := PAll) (P := PB) (RAll := RAll) (R := RB) tail β_large n_positive
+      head_unit mu_eq gap_eq lift_eq allC_upper_eq lower_eq allC_residual_eq
+  · rw [leadingB_upper_eq]
+    have power_dvd : (5 : ℤ) ^ (n + β) ∣ 10 ^ (n + β + 1) :=
+      fivePower_dvd_tenPower (by omega)
+    simpa using power_dvd.mul_left μ
+  · exact leadingB_residual_eq
+  · exact shell
 
 end MatrixMortality.DecimalSetterDepth
