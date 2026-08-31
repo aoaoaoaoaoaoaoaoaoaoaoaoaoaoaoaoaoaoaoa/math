@@ -142,7 +142,8 @@ file owns the mathematical stock.
 | [`MM-S39`](#mm-s39-second-position-d_b-raw-head-extinction) | obstruction | no all-erasure word with `D_b` in its second position carries a lawful two-`c` raw head into another multi-role pole | formalized | graduated |
 | [`MM-S40`](#mm-s40-first-beta-plus-one-position-d_b-extinction) | obstruction | a sole `D_b` in any of the first `β+1` all-erasure positions cannot carry a lawful two-`c` raw head into another multi-role pole | formalized | graduated |
 | [`MM-S42`](#mm-s42-swapped-positive-depth-one-extinction) | structure theorem and obstruction | every regular positive-depth-one one-transfer pole either is an impossible Neary residual or certifies source halting | formalized | active |
-| [`MM-S45`](#mm-s45-exceptional-late-one-d_b-boundary) | structure theorem and obstruction | any one-`D_b` all-erasure raw-head survivor must combine the exceptional terminal run with a `D_b` after position `β+1` | formalized | active |
+| [`MM-S45`](#mm-s45-exceptional-late-one-d_b-boundary) | structure theorem and obstruction | any one-`D_b` all-erasure raw-head survivor must combine the exceptional terminal run with a `D_b` after position `β+1` | formalized | graduated |
+| [`MM-S47`](#mm-s47-global-one-d_b-raw-head-extinction) | obstruction | no one-`D_b` all-erasure block carries a lawful two-`c` raw head into another multi-role pole, in any position | formalized | active |
 | [`R32-S01`](#r32-s01-split-return-normal-form) | structure theorem | rank-two cuts reduce one-unit binary mortality to a `2 × 2` return recurrence | formalized | graduated |
 | [`R32-S02`](#r32-s02-two-plane-edge-square) | structure theorem | two rank-two generators are a two-vertex square of `2 × 2` edges | formalized | graduated |
 | [`R32-O01`](#r32-o01-rank-one-profile-collapse) | obstruction | a rank-one generator reduces mortality to order-at-most-three scalar recurrence zeros | audited | stock |
@@ -3733,7 +3734,7 @@ avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issue
 
 **Kind:** structure theorem and obstruction
 **Evidence:** formalized
-**Disposition:** active
+**Disposition:** graduated
 
 Represent an A-shell state by decimal units `(N,D)` through `t=N/(10μD)`. A block with trace
 `T`, lower code `V`, and upper length `m` leaves the residual
@@ -5221,8 +5222,65 @@ proves all-position regular extinction and
 **Artifact:**
 [`audits/m53-exceptional-late-one-b-boundary-2026-08-31.md`](audits/m53-exceptional-late-one-b-boundary-2026-08-31.md).
 
-**Next:** decide the exceptional-late one-`D_b` family by its exact two-term coefficient, then
-control superposed perturbations from several `D_b` roles.
+**Next:** graduated into `MM-S47`.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S47: Global one-`D_b` raw-head extinction
+
+**Kind:** obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+Write `a` and `t` for the counts of `D_c` roles before and after the sole `D_b`, and
+`n=a+t+1`. Exact common-suffix factorization gives
+
+```text
+P_b − P_c = D(a)·10^(t+β+2),       D(a) ≡ 2 (mod 5).       (1)
+```
+
+At the exceptional raw head, the all-`D_c` residual has the coefficient normal form
+
+```text
+45R_c = 10^n·5C + 10^(2β)B,        C ≡ 2, B ≡ 1 (mod 5).  (2)
+```
+
+The head and gap coefficients both equal `2` modulo `5`. Therefore the perturbation in
+`45R_b` is `10^(t+β+2)·5Q`, with `Q=9HED(a)≡2 (mod 5)`. The three candidate depths are
+
+```text
+n+1,  2β,  t+β+3.                                           (3)
+```
+
+After `MM-S45`, `a>β`. If `a=β+1`, the first and third depths coincide; otherwise the third
+is strictly smaller than the first. Comparing `t+3` with `β` then gives every strict order and
+the two resonance arms. At the first/third collision the coefficient is `C+Q≡4`; at the
+second/third collision it is `2B+Q≡4`; at their common corner it is
+`C+2B+Q≡1`. No leading coefficient vanishes modulo `5`. Thus no exceptional-late shell exists,
+and the regular and early branches already deleted by `MM-S45` and `MM-S40` complete the
+all-position theorem.
+
+**Scope:** the theorem covers exactly one `D_b`, otherwise `D_c`, no rule roles, the lawful
+two-`c` raw head, and a following multi-role pole. It does not cover several `D_b` roles,
+rule-bearing blocks, singleton targets, or later generalized carriers.
+
+**Use:** delete the entire one-marker all-erasure branch from the first multi-transfer search.
+The next live erasure family contains at least two `D_b` roles, whose perturbations can interact
+at different suffix depths.
+
+**Formalization:**
+[`MatrixMortality/DecimalSetterFiveDepth.lean`](MatrixMortality/DecimalSetterFiveDepth.lean)
+proves the residue normal form and the six-branch exact-depth obstruction.
+[`MatrixMortality/DecimalSetterPositioned.lean`](MatrixMortality/DecimalSetterPositioned.lean)
+proves (1), specializes the obstruction to physical words, and exposes
+`positionedBErase_rawHead_shell_impossible_allPositions`.
+
+**Artifact:**
+[`audits/m53-global-one-b-extinction-2026-08-31.md`](audits/m53-global-one-b-extinction-2026-08-31.md).
+
+**Next:** analyze the superposition law for two or more `D_b` perturbations, beginning with the
+two shallowest suffix depths.
 
 ### MM-S42: Swapped positive depth-one extinction
 
