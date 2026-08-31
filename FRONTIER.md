@@ -191,8 +191,10 @@ containing at most one `c` halts, so any exact universal family must emit a body
 two `c` letters on some rejecting code. This is a necessary condition, not universality of the
 two-`c` stratum. The one-`c` shrinking-defect mechanism is sharp for unrestricted queue
 dynamics: [`MM-S23`](SALVAGE.md#mm-s23-adjacent-two-c-periodic-pair) constructs two exact
-periodic queues for every nontrivial even adjacent-two-`c` body. The coupled two-`c` source
-boundary remains open. See
+periodic queues for every nontrivial even adjacent-two-`c` body. However,
+[`MM-D02`](SALVAGE.md#mm-d02-adjacent-two-c-source-decision) proves that every coupled initial
+queue in this adjacent subfamily either halts or enters the lower cycle. The unresolved
+two-`c` source boundary therefore begins with separated `c` letters. See
 `audits/scheduled-binary-fixed-width-2026-07-24.md` and
 `audits/m53-width-three-sparse-source-2026-08-30.md`; the cycle proof is in
 `audits/m53-width-three-adjacent-cycles-2026-08-31.md`.
@@ -714,10 +716,11 @@ Three live routes remain.
    separate open problem: the theorem needed by `MM-C03` must compute the variable rule body
    and its coupled suffix input from the same source, not merely supply a fixed width-three
    machine with an arbitrary input. [`MM-D01`](SALVAGE.md#mm-d01-sparse-width-three-source-decision)
-   excludes every zero- or one-`c` source image; the next genuine source boundary starts with
-   at least two `c` letters. [`MM-S23`](SALVAGE.md#mm-s23-adjacent-two-c-periodic-pair) shows
-   balanced reproduction throughout the adjacent-two-`c` subfamily; its coupled initial-orbit
-   classification is the next finite-normal-form target.
+   excludes every zero- or one-`c` source image, and
+   [`MM-D02`](SALVAGE.md#mm-d02-adjacent-two-c-source-decision) decides every adjacent-two-`c`
+   coupled image. The next genuine source boundary is two separated `c` letters or at least
+   three `c` letters. [`MM-S23`](SALVAGE.md#mm-s23-adjacent-two-c-periodic-pair) remains the
+   unrestricted-queue warning that a second `c` already permits balanced reproduction.
 
 The decimal setter is now the sharpest constructive route. The ternary swap remains useful
 because its suffix and divisor-ray theory is mature; the decimal instance has stronger real
@@ -2956,7 +2959,8 @@ universal computation.
 3. Prove or refute the setter candidate's projective avoidance property, construct a
    five-state same-zero binary root, or find a constant-state scheduled delimiter fusion.
    Treat fixed-width-three universality as a separate source theorem and enforce the
-   [`MM-D01`](SALVAGE.md#mm-d01-sparse-width-three-source-decision) two-`c` lower boundary on
+   [`MM-D01`](SALVAGE.md#mm-d01-sparse-width-three-source-decision) one-`c` closure and
+   [`MM-D02`](SALVAGE.md#mm-d02-adjacent-two-c-source-decision) adjacent-two-`c` closure on
    candidate source families. Reopen `MM-C04` only for a physically different six-state family.
 4. Treat `MM-O08` and `MM-O11` as formally closed exact-family obstructions. Search for
    `M₉(2)` only through a changed physical pair, changed nonzero behavior, or a nonlinear

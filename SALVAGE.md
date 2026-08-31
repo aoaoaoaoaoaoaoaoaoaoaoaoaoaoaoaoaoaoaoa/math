@@ -68,7 +68,8 @@ file owns the mathematical stock.
 | [`MM-C03`](#mm-c03-scheduled-binary-compiler) | compiler | fixed-width tag strokes to a total two-letter scalar series | formalized | graduated |
 | [`MM-C04`](#mm-c04-internal-word-sandwich-minimization) | compiler | internal low-rank words repair reachable/observable minimization | formalized | graduated |
 | [`MM-D01`](#mm-d01-sparse-width-three-source-decision) | decidability theorem | every coupled width-three body with at most one `c` halts | formalized | graduated |
-| [`MM-S23`](#mm-s23-adjacent-two-c-periodic-pair) | dynamical theorem | every nontrivial even adjacent-two-`c` body has two explicit periodic queues | formalized | active |
+| [`MM-D02`](#mm-d02-adjacent-two-c-source-decision) | decidability theorem | every nontrivial even adjacent-two-`c` coupled queue either halts or enters one fixed cycle | formalized | graduated |
+| [`MM-S23`](#mm-s23-adjacent-two-c-periodic-pair) | dynamical theorem | every nontrivial even adjacent-two-`c` body has two explicit periodic queues | formalized | graduated |
 | [`MM-O01`](#mm-o01-all-placement-packing-rank) | obstruction | literal CHHN packing has exact rank six for every separator placement | formalized | graduated |
 | [`MM-O02`](#mm-o02-one-sided-phase-overlap) | obstruction | standard common-line phase fusion becomes one-sided | reported | parked |
 | [`MM-O03`](#mm-o03-two-channel-boundary-tax) | obstruction | exact diagonal rank-two punctuation costs two states beyond Hankel rank | formalized | graduated |
@@ -1195,11 +1196,53 @@ source theorem required by `MM-C03`.
 [`WidthThreeSparseBody.lean`](MatrixMortality/WidthThreeSparseBody.lean). The proof audit is
 [`audits/m53-width-three-sparse-source-2026-08-30.md`](audits/m53-width-three-sparse-source-2026-08-30.md).
 
+### MM-D02: Adjacent two-`c` source decision
+
+**Kind:** decidability theorem
+**Evidence:** formalized
+**Disposition:** graduated
+
+Let `q=b^p c c b^s`, where `p+s=2k` and `k>0`. The production-coupled width-three initial
+queue `q.drop 2 · b` either halts or reaches
+
+```text
+b^(3k-1) c c b^(s+1),
+```
+
+which is periodic with exact return time `k+1`. Hence halting of the coupled initial queue is
+constructively decidable throughout this adjacent-two-`c` family. The omitted degenerate body
+`q=cc` drops directly to the one-letter halting queue `b`.
+
+After the coupled prefix is normalized, every live two-`c` queue has the form
+`D(i)=b^i c c b^(s+1)`. If `i≡1 mod 3`, its next macro traversal produces a unary queue and
+halts. For residues zero and two, the traversal sends
+
+```text
+i ↦ 2k + floor(i/3).
+```
+
+Every coupled start satisfies `i≤2k-1`. Below `3k-1`, the map strictly increases `i` without
+crossing `3k-1`, so recursion on `3k-1-i` terminates at either a residue-one drain or the lower
+cycle.
+
+**Scope:** this decides only bodies whose two `c` letters are adjacent. Two separated `c`
+letters and bodies with at least three `c` letters remain open. The upper periodic queue from
+`MM-S23` is an arbitrary-queue orbit; it is not needed in the coupled normal form.
+
+**Use:** an exact deletion-width-three source cannot obtain undecidable coupled dynamics while
+remaining in the adjacent-two-`c` family. The next source boundary is two separated `c` letters
+or at least three `c` letters.
+
+**Artifact:** `MatrixMortality.WidthThreeAdjacentBody.adjacentBody_coupled_normal_form` and
+`MatrixMortality.WidthThreeAdjacentBody.adjacentBodyCoupledHaltsDecidable` in
+[`WidthThreeAdjacentBody.lean`](MatrixMortality/WidthThreeAdjacentBody.lean). The proof audit is
+[`audits/m53-width-three-adjacent-cycles-2026-08-31.md`](audits/m53-width-three-adjacent-cycles-2026-08-31.md).
+
 ### MM-S23: Adjacent two-`c` periodic pair
 
 **Kind:** dynamical theorem
 **Evidence:** formalized
-**Disposition:** active
+**Disposition:** graduated
 
 For `q=b^p c c b^s` with `p+s=2k` and `k>0`, the width-three restricted tag system has two
 explicit periodic queues:
@@ -1212,13 +1255,14 @@ Both return after exactly `k+1` tag steps. The first traversal removes the first
 leading `b` step and fires the second; the other fires the adjacent pair directly. Exact
 reproduction uses only `p+s=2k`.
 
-**Scope:** these are periodic queues for the body, not yet a classification of its coupled
-initial queue. They prove neither universality nor undecidability of the two-`c` stratum.
+**Scope:** these are arbitrary queues for the body and do not by themselves classify its
+coupled initial queue. `MM-D02` supplies that classification and uses only the lower cycle.
+They prove neither universality nor undecidability of the remaining two-`c` stratum.
 
-**Use:** the one-`c` shrinking defect cannot extend across the two-`c` boundary without a new
-case: balanced reproduction already occurs for every nontrivial even adjacent body. The live
-normal-form target is to prove that each coupled adjacent-body orbit halts or reaches one of
-these cycles.
+**Use:** the one-`c` shrinking defect cannot extend across the two-`c` boundary unchanged:
+balanced reproduction already occurs for every nontrivial even adjacent body. The lower cycle
+is the unique periodic endpoint required by the coupled normal form in `MM-D02`; the upper
+cycle records additional unrestricted queue dynamics.
 
 **Artifact:** `MatrixMortality.WidthThreeAdjacentBody.lowerCycleQueue_reachesIn`,
 `MatrixMortality.WidthThreeAdjacentBody.upperCycleQueue_reachesIn`,

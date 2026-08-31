@@ -1966,7 +1966,7 @@ fixed-rank decision problem.
 | `ScheduledBinary.lean` | cyclic-controller specialization, source semantics, and malformed-word converse |
 | `ScheduledBinaryRank.lean` | exact width-three rank-five certificate and universal exact-state lower bound |
 | `WidthThreeSparseBody.lean` | termination of every coupled width-three body with at most one `c` |
-| `WidthThreeAdjacentBody.lean` | two exact periodic queues for every even adjacent-two-`c` body |
+| `WidthThreeAdjacentBody.lean` | exact adjacent-two-`c` cycles and constructive coupled-orbit decision |
 | `WeightedTransducer.lean` | deterministic matrix transducers and the arbitrary-word block-row theorem |
 | `PrefixMortality.lean` | complete prefix decoder, twelve-state realization, and ten-state common-image restriction |
 | `PrefixContexts.lean` | closed ten-state generators, internal rank-one word, and physical contexts |
@@ -2358,6 +2358,8 @@ fixed-rank decision problem.
 | Every exact width-three rational realization needs five states | `scheduledWidthThree_exact_state_lower_bound`, `scheduledWidthThree_native_state_card`, `scheduledWidthThree_native_represents` |
 | Every coupled width-three body with at most one `c` halts | `coupled_halts_of_count_c_le_one` |
 | Every exact code-halting source family emits a body with at least two `c` letters | `exact_source_has_body_with_two_c` |
+| Every nontrivial even adjacent-two-`c` coupled queue halts or enters the lower cycle | `adjacentBody_coupled_normal_form` |
+| Halting of every such coupled queue is constructively decidable | `adjacentBodyCoupledHaltsDecidable` |
 | Every nontrivial even body `b^p c c b^s` has two explicit nonhalting queues | `lowerCycleQueue_not_halts`, `upperCycleQueue_not_halts` |
 | Every binary prefix-machine word has one decoded block per row | `prefixMachine_run`, `WeightedTransducer.wordProduct_apply` |
 | Prefix-machine mortality iff five-matrix mortality | `prefixMachine_mortal_iff_normalized` |

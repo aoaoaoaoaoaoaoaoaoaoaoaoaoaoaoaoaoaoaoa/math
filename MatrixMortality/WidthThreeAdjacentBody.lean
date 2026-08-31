@@ -4,9 +4,10 @@ import MatrixMortality.WidthThreeSparseBody
 /-!
 # Adjacent two-`c` width-three bodies
 
-Every even body `b^p c c b^s` has two explicit periodic queues. This is the first source
-stratum in which the one-`c` shrinking-defect argument can fail: the two `c` letters reproduce
-exactly after one macro traversal.
+For `p+s=2k`, the body `b^p c c b^s` has two explicit periodic queues. When `k>0`, its
+coupled initial queue either halts or enters the lower cycle. The decision follows from the
+canonical macro map on `b^i c c b^(s+1)`: residue one modulo three drains to a unary queue,
+while residues zero and two send `i` to `2k+⌊i/3⌋`.
 -/
 
 namespace MatrixMortality
@@ -60,6 +61,13 @@ private theorem doubleQueue_step_zero (bodyLeft bodyRight tail : Nat) :
     rw [bRun_add, bRun_snoc]
     simp [List.append_assoc]
 
+private theorem doubleQueue_step_one (body : List TagLetter) (right : Nat) :
+    TagStep 3 (tagOutput body) (doubleQueue 1 right) (bRun (right + 1)) := by
+  refine ⟨⟨.b, [.c, .c], rfl⟩, bRun right, ?_, ?_⟩
+  · simp [doubleQueue, bRun, Stroke.letters]
+  · change bRun (right + 1) = bRun right ++ [.b]
+    exact bRun_snoc right
+
 private theorem doubleQueue_step_two (body : List TagLetter) (right : Nat) :
     TagStep 3 (tagOutput body) (doubleQueue 2 right) (singleQueue 0 (right + 1)) := by
   refine ⟨⟨.b, [.b, .c], rfl⟩, .c :: bRun right, ?_, ?_⟩
@@ -99,6 +107,66 @@ private theorem doubleQueue_leading_reachesIn (body : List TagLetter)
           rw [target_eq] at later
           exact later
 
+private theorem doubleQueue_macro_zero (bodyLeft bodyRight left : Nat)
+    (mod_zero : left % 3 = 0) :
+    TagReaches 3 (tagOutput (adjacentBody bodyLeft bodyRight))
+      (doubleQueue left (bodyRight + 1))
+      (doubleQueue (bodyLeft + bodyRight + left / 3) (bodyRight + 1)) := by
+  have division := Nat.mod_add_div left 3
+  have left_eq : 0 + 3 * (left / 3) = left := by omega
+  have leading := doubleQueue_leading_reachesIn (adjacentBody bodyLeft bodyRight)
+    (left / 3) 0 (bodyRight + 1)
+  have middle_eq : bodyRight + 1 + left / 3 = bodyRight + left / 3 + 1 := by omega
+  rw [left_eq, middle_eq] at leading
+  have after := leading.tail <|
+    doubleQueue_step_zero bodyLeft bodyRight (bodyRight + left / 3)
+  have endpoint_eq : bodyRight + left / 3 + bodyLeft =
+      bodyLeft + bodyRight + left / 3 := by omega
+  rw [endpoint_eq] at after
+  exact after.toReaches
+
+private theorem doubleQueue_macro_two (bodyLeft bodyRight left : Nat)
+    (mod_two : left % 3 = 2) :
+    TagReaches 3 (tagOutput (adjacentBody bodyLeft bodyRight))
+      (doubleQueue left (bodyRight + 1))
+      (doubleQueue (bodyLeft + bodyRight + left / 3) (bodyRight + 1)) := by
+  have division := Nat.mod_add_div left 3
+  have left_eq : 2 + 3 * (left / 3) = left := by omega
+  have leading := doubleQueue_leading_reachesIn (adjacentBody bodyLeft bodyRight)
+    (left / 3) 2 (bodyRight + 1)
+  rw [left_eq] at leading
+  have after_first := leading.tail <|
+    doubleQueue_step_two (adjacentBody bodyLeft bodyRight)
+      (bodyRight + 1 + left / 3)
+  have second := singleQueue_step_zero bodyLeft bodyRight (bodyRight + left / 3)
+  have second_source : bodyRight + left / 3 + 2 =
+      bodyRight + 1 + left / 3 + 1 := by omega
+  rw [second_source] at second
+  have after_second := after_first.tail second
+  have endpoint_eq : bodyRight + left / 3 + bodyLeft =
+      bodyLeft + bodyRight + left / 3 := by omega
+  rw [endpoint_eq] at after_second
+  exact after_second.toReaches
+
+private theorem doubleQueue_halts_of_mod_one (bodyLeft bodyRight left : Nat)
+    (mod_one : left % 3 = 1) :
+    TagHaltsFrom 3 (tagOutput (adjacentBody bodyLeft bodyRight))
+      (doubleQueue left (bodyRight + 1)) := by
+  have division := Nat.mod_add_div left 3
+  have left_eq : 1 + 3 * (left / 3) = left := by omega
+  have leading := doubleQueue_leading_reachesIn (adjacentBody bodyLeft bodyRight)
+    (left / 3) 1 (bodyRight + 1)
+  rw [left_eq] at leading
+  have after := leading.tail <|
+    doubleQueue_step_one (adjacentBody bodyLeft bodyRight)
+      (bodyRight + 1 + left / 3)
+  have pure_halts :
+      TagHaltsFrom 3 (tagOutput (adjacentBody bodyLeft bodyRight))
+        (bRun (bodyRight + 1 + left / 3 + 1)) :=
+    Undecidability.tagHaltsFrom_replicate_fixed 3 (by omega)
+      (tagOutput (adjacentBody bodyLeft bodyRight)) .b rfl _
+  exact TagHaltsFrom.before pure_halts after.toReaches
+
 /-- The lower adjacent-`c` periodic queue. -/
 def lowerCycleQueue (halfTail right : Nat) : List TagLetter :=
   doubleQueue (3 * halfTail - 1) (right + 1)
@@ -106,6 +174,131 @@ def lowerCycleQueue (halfTail right : Nat) : List TagLetter :=
 /-- The upper adjacent-`c` periodic queue. -/
 def upperCycleQueue (halfTail right : Nat) : List TagLetter :=
   doubleQueue (3 * halfTail) (right + 1)
+
+private inductive OrbitClassification (halts reaches : Prop) : Type
+  | halts (proof : halts)
+  | reaches (proof : reaches)
+
+private def classifyDoubleQueueBelow (bodyLeft bodyRight halfTail left : Nat)
+    (halfTail_pos : 0 < halfTail) (body_sum : bodyLeft + bodyRight = 2 * halfTail)
+    (below : left ≤ 3 * halfTail - 1) :
+    OrbitClassification
+      (TagHaltsFrom 3 (tagOutput (adjacentBody bodyLeft bodyRight))
+        (doubleQueue left (bodyRight + 1)))
+      (TagReaches 3 (tagOutput (adjacentBody bodyLeft bodyRight))
+        (doubleQueue left (bodyRight + 1)) (lowerCycleQueue halfTail bodyRight)) := by
+  by_cases at_cycle : left = 3 * halfTail - 1
+  · subst left
+    exact .reaches Relation.ReflTransGen.refl
+  · have strict_below : left < 3 * halfTail - 1 := by omega
+    by_cases mod_one : left % 3 = 1
+    · exact .halts (doubleQueue_halts_of_mod_one bodyLeft bodyRight left mod_one)
+    · have mod_lt : left % 3 < 3 := Nat.mod_lt left (by omega)
+      have mod_cases : left % 3 = 0 ∨ left % 3 = 2 := by omega
+      let nextLeft := 2 * halfTail + left / 3
+      have next_eq : bodyLeft + bodyRight + left / 3 = nextLeft := by
+        dsimp only [nextLeft]
+        omega
+      have macroReach :
+          TagReaches 3 (tagOutput (adjacentBody bodyLeft bodyRight))
+            (doubleQueue left (bodyRight + 1))
+            (doubleQueue nextLeft (bodyRight + 1)) := by
+        rw [← next_eq]
+        rcases mod_cases with mod_zero | mod_two
+        · exact doubleQueue_macro_zero bodyLeft bodyRight left mod_zero
+        · exact doubleQueue_macro_two bodyLeft bodyRight left mod_two
+      have division := Nat.mod_add_div left 3
+      have next_greater : left < nextLeft := by
+        dsimp only [nextLeft]
+        omega
+      have next_below : nextLeft ≤ 3 * halfTail - 1 := by
+        dsimp only [nextLeft]
+        omega
+      have classified := classifyDoubleQueueBelow bodyLeft bodyRight halfTail nextLeft
+        halfTail_pos body_sum next_below
+      cases classified with
+      | halts halts => exact .halts (TagHaltsFrom.before halts macroReach)
+      | reaches reaches =>
+          exact .reaches (Relation.ReflTransGen.trans macroReach reaches)
+termination_by 3 * halfTail - 1 - left
+decreasing_by omega
+
+private def classifyCoupledAdjacentBody (bodyLeft bodyRight halfTail : Nat)
+    (halfTail_pos : 0 < halfTail) (body_sum : bodyLeft + bodyRight = 2 * halfTail) :
+    OrbitClassification
+      (TagHaltsFrom 3 (tagOutput (adjacentBody bodyLeft bodyRight))
+        ((adjacentBody bodyLeft bodyRight).drop 2 ++ [.b]))
+      (TagReaches 3 (tagOutput (adjacentBody bodyLeft bodyRight))
+        ((adjacentBody bodyLeft bodyRight).drop 2 ++ [.b])
+        (lowerCycleQueue halfTail bodyRight)) := by
+  by_cases bodyLeft_small : bodyLeft < 2
+  · interval_cases bodyLeft
+    · have initial_eq :
+          (adjacentBody 0 bodyRight).drop 2 ++ [.b] = bRun (bodyRight + 1) := by
+        change ([TagLetter.c, TagLetter.c] ++ bRun bodyRight).drop 2 ++ [.b] =
+          bRun (bodyRight + 1)
+        rw [bRun_snoc]
+        rfl
+      apply OrbitClassification.halts
+      rw [initial_eq]
+      exact Undecidability.tagHaltsFrom_replicate_fixed 3 (by omega)
+        (tagOutput (adjacentBody 0 bodyRight)) .b rfl _
+    · have bodyRight_pos : 0 < bodyRight := by omega
+      have initial_eq :
+          (adjacentBody 1 bodyRight).drop 2 ++ [.b] =
+            singleQueue 0 (bodyRight + 1) := by
+        change ([TagLetter.b, TagLetter.c, TagLetter.c] ++ bRun bodyRight).drop 2 ++ [.b] =
+          [.c] ++ bRun (bodyRight + 1)
+        rw [bRun_snoc]
+        rfl
+      have first := singleQueue_step_zero 1 bodyRight (bodyRight - 1)
+      have source_eq : bodyRight - 1 + 2 = bodyRight + 1 := by omega
+      have endpoint_eq : bodyRight - 1 + 1 = bodyRight := by omega
+      rw [source_eq, endpoint_eq] at first
+      have below : bodyRight ≤ 3 * halfTail - 1 := by omega
+      have classified := classifyDoubleQueueBelow 1 bodyRight halfTail bodyRight
+        halfTail_pos body_sum below
+      cases classified with
+      | halts halts =>
+          apply OrbitClassification.halts
+          rw [initial_eq]
+          exact .step first halts
+      | reaches reaches =>
+          apply OrbitClassification.reaches
+          rw [initial_eq]
+          exact Relation.ReflTransGen.trans (Relation.ReflTransGen.single first) reaches
+  · have two_le : 2 ≤ bodyLeft := Nat.le_of_not_gt bodyLeft_small
+    let initialLeft := bodyLeft - 2
+    have bodyLeft_eq : bodyLeft = initialLeft + 2 := by
+      dsimp only [initialLeft]
+      omega
+    rw [bodyLeft_eq] at body_sum ⊢
+    have initial_eq :
+        (adjacentBody (initialLeft + 2) bodyRight).drop 2 ++ [.b] =
+          doubleQueue initialLeft (bodyRight + 1) := by
+      change (bRun (initialLeft + 2) ++ [TagLetter.c, TagLetter.c] ++
+          bRun bodyRight).drop 2 ++ [.b] =
+        bRun initialLeft ++ [TagLetter.c, TagLetter.c] ++ bRun (bodyRight + 1)
+      rw [show initialLeft + 2 = 2 + initialLeft by omega, bRun_add,
+        bRun_snoc bodyRight]
+      simp [List.append_assoc]
+    have below : initialLeft ≤ 3 * halfTail - 1 := by omega
+    rw [initial_eq]
+    exact classifyDoubleQueueBelow (initialLeft + 2) bodyRight halfTail initialLeft
+      halfTail_pos body_sum below
+
+/-- The coupled initial queue of every nontrivial even adjacent-two-`c` body either halts or
+enters the lower periodic orbit. -/
+theorem adjacentBody_coupled_normal_form (bodyLeft bodyRight halfTail : Nat)
+    (halfTail_pos : 0 < halfTail) (body_sum : bodyLeft + bodyRight = 2 * halfTail) :
+    TagHaltsFrom 3 (tagOutput (adjacentBody bodyLeft bodyRight))
+        ((adjacentBody bodyLeft bodyRight).drop 2 ++ [.b]) ∨
+      TagReaches 3 (tagOutput (adjacentBody bodyLeft bodyRight))
+        ((adjacentBody bodyLeft bodyRight).drop 2 ++ [.b])
+        (lowerCycleQueue halfTail bodyRight) := by
+  cases classifyCoupledAdjacentBody bodyLeft bodyRight halfTail halfTail_pos body_sum with
+  | halts halts => exact Or.inl halts
+  | reaches reaches => exact Or.inr reaches
 
 /-- The lower periodic queue returns after exactly `halfTail + 1` tag steps. -/
 theorem lowerCycleQueue_reachesIn (bodyLeft bodyRight halfTail : Nat)
@@ -175,6 +368,19 @@ theorem upperCycleQueue_not_halts (bodyLeft bodyRight halfTail : Nat)
   · rintro queue rfl
     exact ⟨cycle, rfl, progress⟩
   · rfl
+
+/-- Halting of the coupled initial queue is decidable for every nontrivial even
+adjacent-two-`c` body. -/
+def adjacentBodyCoupledHaltsDecidable (bodyLeft bodyRight halfTail : Nat)
+    (halfTail_pos : 0 < halfTail) (body_sum : bodyLeft + bodyRight = 2 * halfTail) :
+    Decidable <|
+      TagHaltsFrom 3 (tagOutput (adjacentBody bodyLeft bodyRight))
+        ((adjacentBody bodyLeft bodyRight).drop 2 ++ [.b]) :=
+  match classifyCoupledAdjacentBody bodyLeft bodyRight halfTail halfTail_pos body_sum with
+  | .halts halts => isTrue halts
+  | .reaches reaches => isFalse fun halts =>
+      lowerCycleQueue_not_halts bodyLeft bodyRight halfTail halfTail_pos body_sum <|
+        Undecidability.tagHaltsFrom_after_reaches reaches halts
 
 end WidthThreeAdjacentBody
 end MatrixMortality
