@@ -511,16 +511,19 @@ therefore `b(3z)b(3x+2)c(3y+1)`; its mixed-sign determinant is the next endpoint
 
 The first two-`c` endpoint family is also dead. The coefficient theorem
 [`M4-S15`](SALVAGE.md#m4-s15-opposite-double-c-endpoint-exclusion) excludes
-`c(3z+1)b(3x+2)c(3y)` for every nonempty body and all waits. Eight shortest families remain:
-the five `0|2|1` forms
+`c(3z+1)b(3x+2)c(3y)` for every nonempty body and all waits. The simultaneous endpoint-defect
+sign theorem [`M4-S16`](SALVAGE.md#m4-s16-phase-zero-left-c-defect-exclusion) also excludes
+`c(3z)c(3x+2)b(3y+1)`. Seven shortest families remain: the four `0|2|1` forms
 
 ```text
-b b c,  c b c,  c c b,  b c c,  c c c,
+b b c,  c b c,  b c c,  c c c,
 ```
 
 and the three `1|2|0` forms `c c b`, `b c c`, and `c c c`, where the positions record endpoint,
-defect, endpoint letters. The immediate target is the transposed `c b c` family in phase
-`0|2|1`; the other six survivors all use a `c` defect.
+defect, endpoint letters. The immediate `c b c` target now has a checked integral trilinear core.
+On the all-`c` code ray `L=M−2`, it factors into two linear wait pencils and neither can vanish
+at natural waits. Its non-all-`c` digit cylinders remain open. The other five survivors all use a
+`c` defect.
 
 Two original-family nodes survive, and they must not be conflated.
 
