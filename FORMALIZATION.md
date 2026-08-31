@@ -667,6 +667,16 @@ uniform strict height, odd-part, or centered-valuation descent can cross all low
 family is the exact secondary-wall coordinate of the singleton cycles previously known from
 `PeriodicShell.shellPeriodicCycle`, not a new periodicity phenomenon.
 
+Consecutive recurrence on that wall is finite. For a reduced unit transition
+`a/(2c)→a'/(2c')`, exact cancellation gives `c=3^k c'` for some bounded `k`; every successor
+therefore lies in the explicit rectangle `a'≤2c`, `c'≤c`. Lean proves that the lower-wall
+transition witness has the computable depth `v₂(5a−9c)+2`; the relation is functional, and every
+infinite wall-only orbit is eventually periodic. Lean also identifies the preceding fixed family
+as terminal singleton components, preserves the five-adic state guard, and pairs every successor
+with its canonical depth in the twelve-class product.
+Thus an unbounded nonperiodic component cannot remain inside the secondary wall; only exits and
+returns through the other reverse strata survive.
+
 `MixedPrimeKernel` now owns the raw `D,T` affine kernel. It checks the published shortest
 length-27 relation, an infinite family of distinct equal-map pairs at every odd length
 `29+2k`, and three independent length-30 relations. The former isolated length-29 relation is
@@ -2046,7 +2056,7 @@ outer word by injectivity and proves that any cross-tail collision requires shel
 `(ℓ−2β+1,ℓ−2β+2)` between the later tails. This classifies the synchronization debt but does
 not yet exclude it from the encoded-entry orbit.
 
-The dimension-two affine ledger has eighteen independently checked records:
+The dimension-two affine ledger has nineteen independently checked records:
 
 | Record | Formalization obligation |
 | --- | --- |
@@ -2058,6 +2068,7 @@ The dimension-two affine ledger has eighteen independently checked records:
 | [`D2-S07`](SALVAGE.md#d2-s07-period-ten-shell-guard) | exact period-ten acceptance, the tail-dependent period `2·5^(ℓ+1)`, finite residue reduction, sharpness by unit zero preimages, and failure of every fixed wait modulus |
 | [`D2-S08`](SALVAGE.md#d2-s08-twelve-class-target-depth-collapse) | exact target/wait shift conjugacy, equality of every deep nonempty predecessor set, depth-periodic unitality, and guarded reduction to twelve canonical target-depth classes |
 | [`D2-S09`](SALVAGE.md#d2-s09-centered-lower-mantissa-recurrence) | complete three-branch reverse address, centered lower numerator, exact gcd cancellation and valuation transition, isolation of the sole secondary wall, and an infinite guarded fixed family with unbounded centered cancellation |
+| [`D2-S10`](SALVAGE.md#d2-s10-finite-secondary-wall-nucleus) | exact wall cancellation, computable return depth, bounded three-power denominator loss, target-dependent finite successor rectangle, functional transition, eventual periodicity, fixed-component recognition, and twelve-class depth product |
 | [`D2-D05`](SALVAGE.md#d2-d05-prescribed-translation-count) | primitive linear-polynomial divisibility, bounded carries in both scan directions, ordered-marker automaton, regular control, and `a=±1` cases |
 | [`D2-D06`](SALVAGE.md#d2-d06-private-prime-peeling) | unique-minimum valuation calculation, zero endpoints, fixed-count reduction, reversed language, and positive private valuation |
 | [`D2-D07`](SALVAGE.md#d2-d07-bounded-valuation-orthants) | localization support, denominator bounds in both orthants, invariant-interval recognition, finite graph, and regular-control product |
@@ -2597,6 +2608,7 @@ fixed-rank decision problem.
 | `MixedPrimeFiveCarry.lean` | exact one-step and tail-dependent shell-guard periods, finite residue classifiers, and sharp precision loss through unit zero preimages |
 | `MixedPrimeRealTrapDepth.lean` | exact deep target/wait shift, nonempty predecessor-set collapse, and twelve-class guarded target-depth normalization |
 | `MixedPrimeRealTrapMantissa.lean` | complete reverse mantissa address, centered lower-branch gcd, exact two-/three-adic cancellation recurrence, and guarded secondary-wall fixed points at every depth at least seven |
+| `MixedPrimeRealTrapWall.lean` | finite reduced unit secondary-wall graph, bounded three-adic denominator loss, eventual periodicity, fixed-component recognition, and canonical depth labels |
 | `MixedPrimeKernel.lean` | raw mixed-prime affine action, contextual composition, an infinite odd-length kernel family from length 29, and three independent length-30 relations |
 | `MixedPrimeNormalization.lean` | exact homogeneous odd-family relations, persistence under independent normalization scaling, and the two-seed cancellative pump |
 | `ReturnGuard.lean` | three-mode amalgamated return algebra, split mortality compiler, and exact state lower bound |

@@ -361,6 +361,7 @@ file owns the mathematical stock.
 | [`D2-S07`](#d2-s07-period-ten-shell-guard) | structure theorem | the one-step shell guard has period ten, while a length-`ℓ` tail has sharp uniform precision exponent `ℓ+1` | formalized | active |
 | [`D2-S08`](#d2-s08-twelve-class-target-depth-collapse) | structure theorem | guarded nonempty real-trap reachability reduces to twelve canonical target-depth classes while preserving the exact mantissa | formalized | active |
 | [`D2-S09`](#d2-s09-centered-lower-mantissa-recurrence) | structure theorem | the exact reverse mantissa address has one centered lower branch whose sole secondary cancellation wall is `v₂(b)=1` | formalized | active |
+| [`D2-S10`](#d2-s10-finite-secondary-wall-nucleus) | structure theorem | every consecutive unit secondary-wall orbit lies in a target-dependent finite rectangle and is eventually periodic | formalized | active |
 | [`D2-D01`](#d2-d01-projectively-unimodular-stratum) | decidable stratum | projectively unimodular hard-core instances are decidable | audited | stock |
 | [`D2-D02`](#d2-d02-invariant-pair-stratum) | decidable stratum | invariant projective pairs reduce to effective multiplicative-subgroup membership | audited | graduated |
 | [`D2-D03`](#d2-d03-common-multiplier-stratum) | decidable stratum | rational affine maps with one multiplier are decidable under regular control | reported | active |
@@ -17955,9 +17956,10 @@ singleton periodic cycles already guaranteed abstractly by
 [`D2-O02`](#d2-o02-critical-shell-periodic-saturation); the new content is their exact reduced
 coordinate on the unique [`D2-S09`](#d2-s09-centered-lower-mantissa-recurrence) cancellation wall.
 
-**Scope:** the record gives an exact address and valuation recurrence, not a finite orbit
-classifier. The fixed family is recognizable and does not itself create a hard fixed-endpoint
-fibre. The upper and middle branches and nonperiodic transitions through the lower wall remain
+**Scope:** the record gives an exact address and valuation recurrence, not by itself a finite
+orbit classifier. The fixed family is recognizable and does not create a hard fixed-endpoint
+fibre. [`D2-S10`](#d2-s10-finite-secondary-wall-nucleus) subsequently classifies consecutive
+unit-wall recurrence; upper and middle branches, exits from the wall, and later returns remain
 unbounded exact rational dynamics. The formulas assume a reduced five-adic-unit mantissa when
 invoking the gcd statement.
 
@@ -17974,8 +17976,85 @@ invoking the gcd statement.
 middle case merits a centered-cancellation search; all other lower-branch valuation updates are
 rigid. Recognize and quotient the explicit fixed loops rather than attempting a global descent.
 
-**Next:** classify nonperiodic transitions on the secondary wall, or construct a target-dependent
-finite quotient that treats the explicit fixed loops as terminal strongly connected components.
+**Next:** apply [`D2-S10`](#d2-s10-finite-secondary-wall-nucleus) to quotient every consecutive
+unit lower-wall segment, then classify excursions through the rigid two-adic strata.
+
+### D2-S10: Finite secondary-wall nucleus
+
+**Kind:** structure theorem and finite deterministic subdynamics
+**Evidence:** formalized
+**Disposition:** active
+
+Write a reduced five-adic-unit mantissa on the secondary wall as
+
+```text
+μ=a/(2c),   c odd,   9/10<μ≤1.
+```
+
+Suppose its lower predecessor normalizes at depth `n≥3` to another reduced unit wall
+coordinate `ν=a'/(2c')`. Exact two-adic valuation forces
+
+```text
+v₂(5a−9c)=n−2.
+```
+
+Put `r=(5a−9c)/2^(n−2)`. The cancelled transition is
+
+```text
+ν = 3^(n−3)r/(2c).
+```
+
+The inherited hypotheses imply `gcd(r,c)=1`. Reducedness of `a'/(2c')` therefore permits only
+three-adic denominator loss:
+
+```text
+c = 3^k c'   for some 0≤k≤n−3.
+```
+
+In particular `c'∣c`. Normalization also gives `a'≤2c'≤2c`, so every successor pair belongs
+to the explicit finite rectangle
+
+```text
+0≤a'≤2c,   0≤c'≤c.
+```
+
+Lean packages the lawful transitions as `LowerWallTransition`. Every witness depth equals the
+computable source value `v₂(5a−9c)+2`, reducing the existential relation to one exact check. The
+relation is functional: normalized band depth is unique, and two reduced half-denominator
+representations of the same rational are equal. Every infinite consecutive lower-wall orbit from
+initial half-denominator `c₀` remains in `lowerWallCandidatePairs c₀` and is eventually periodic.
+The explicit fixed family of [`D2-S09`](#d2-s09-centered-lower-mantissa-recurrence) is formally
+identified as terminal singleton components of this graph. Every successor real-trap state
+remains a five-adic unit.
+
+The finite coordinate rectangle also composes with [`D2-S08`](#d2-s08-twelve-class-target-depth-collapse):
+each transition's canonical depth representative lies in `0,…,11`, so the pair belongs to the
+finite product `lowerWallDepthCandidates c`. This records the checked depth interface without
+identifying states whose mantissas differ.
+
+**Scope:** the theorem classifies consecutive lower branches that remain on the reduced unit
+wall. It does not classify a path after it takes an upper or middle predecessor, leaves
+`v₂(b)=1`, or later returns to the wall. The twelve-class product labels each transition; it is
+not a global finite quotient of the exact mantissa orbit.
+
+**Artifact:** `MixedPrimeDebt.lowerNormalizedMantissa_eq_secondaryWallResidual`,
+`MixedPrimeDebt.lowerWall_to_lowerWall_secondaryCenter_twoValue`,
+`MixedPrimeDebt.lowerWall_to_lowerWall_oddDenominator_eq_threePow_mul`,
+`MixedPrimeDebt.LowerWallTransition.next_mem_candidates`,
+`MixedPrimeDebt.lowerWallTransition_iff_canonicalDepth`,
+`MixedPrimeDebt.lowerWallTransition_next_unique`,
+`MixedPrimeDebt.lowerWallOrbit_eventually_periodic`, and
+`MixedPrimeDebt.lowerFixedWallPair_transition`, and
+`MixedPrimeDebt.lowerFixedWallPair_next_eq` in
+[`MixedPrimeRealTrapWall.lean`](MatrixMortality/MixedPrimeRealTrapWall.lean).
+
+**Use:** exhaust the finite wall graph for a fixed target denominator and quotient every periodic
+component. No unbounded nonperiodic recurrent component can live entirely on the hard
+secondary wall.
+
+**Next:** classify exits from the wall through the rigid two-adic strata and their possible
+returns, then combine those excursion types with the three exact predecessor branches and the
+twelve canonical depth classes.
 
 ### D2-O09: Guarded real-pole reset
 

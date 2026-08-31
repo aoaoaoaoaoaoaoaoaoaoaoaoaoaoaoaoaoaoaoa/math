@@ -3581,9 +3581,16 @@ orbits exist. For every `d≥7`, the reduced mantissa
 and gives a guarded fixed state `T_(d−2)(U(d,μ_d))=U(d,μ_d)`. Its centered residual has
 two-adic value `d−2`; arbitrary repetitions remain accepted. Global height, odd-part, and
 centered-valuation descent are therefore dead. This identifies the abstract singleton cycles of
-`D2-O02` exactly on the `D2-S09` secondary wall. The live arithmetic question is whether the
-explicit fixed components can be quotiented while nonperiodic secondary-wall transitions admit
-a finite target-dependent classifier.
+`D2-O02` exactly on the `D2-S09` secondary wall. That wall now has a finite target-dependent
+nucleus. If a reduced unit transition `a/(2c)→a'/(2c')` stays on the wall, Lean proves
+`c=3^k c'` for a bounded exponent. Hence every successor lies in the finite rectangle
+`a'≤2c`, `c'≤c`; its witness depth is the computable value `v₂(5a−9c)+2`, the transition is
+functional, and every infinite consecutive wall orbit is eventually periodic. The explicit fixed
+family is recognized as terminal singleton components. Pairing
+the rectangle with the `D2-S08` representative gives a finite coordinate-by-twelve-depth product.
+This is [`D2-S10`](SALVAGE.md#d2-s10-finite-secondary-wall-nucleus). The live arithmetic
+obstruction is no longer internal wall recurrence, but excursions through upper or middle
+branches or rigid two-adic strata and their later returns.
 The deepest of those three branches is itself a full depth reset. In normalized band coordinates
 `U(d,μ)=1/5+(3/10)(2/3)^dμ`, every target band `d≥2` contains a point whose `d−2` predecessor has
 any prescribed band `n≥7` and mantissa in `(2/3,1]`. An explicit guarded subfamily fixes target
@@ -3925,7 +3932,10 @@ universal computation.
    unbounded depth of that inverse tree through endpoint-coupled height or congruence. `D2-O09`
    localizes every unbounded Archimedean reset to the deepest branch and proves that fixed
    depth/unit modes do not contain it; attack that branch through exact mantissa arithmetic,
-   guarded concatenation, or endpoint-coupled height.
+   guarded concatenation, or endpoint-coupled height. `D2-S10` classifies every consecutive
+   reduced unit-wall segment inside a finite denominator-bounded rectangle and proves eventual
+   periodicity there; the live seam is excursion through another two-adic stratum and later
+   return, not further refinement of the wall-only graph.
    Keep the non-elementary lanes independent: adelic cone types, parabolic rational subsets,
    trace/height descent, finite-obstruction saturation, and valuation universality.
 7. Synthesize the returned attacks by the discriminating signals above; do not average

@@ -3072,6 +3072,52 @@
 'MatrixMortality.MixedPrimeDebt.shellRun_replicate_lowerFixedPoint_guarded' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.MixedPrimeDebt.lowerNormalizedMantissa_eq_secondaryWallResidual' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.lowerWall_to_lowerWall_secondaryCenter_twoValue' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.lowerWall_to_lowerWall_oddDenominator_eq_threePow_mul' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.IsLowerWallMantissa.value_normalized' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.LowerWallTransition.oddDenominator_eq_threePow_mul' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.LowerWallTransition.next_mem_candidates' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.LowerWallTransition.exists_depthRepresentative_mem_candidates' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.LowerWallTransition.nextState_fiveUnit' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.LowerWallTransition.depth_eq_canonical' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.lowerWallTransition_iff_canonicalDepth' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.lowerWallTransition_next_unique' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.lowerWallOrbit_mem_candidates' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.lowerWallOrbit_eventually_periodic' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.lowerFixedWallPair_isLowerWallMantissa' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.lowerFixedWallPair_transition' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.lowerFixedWallPair_next_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.MixedPrimeDebt.exists_shellStep_realTrap_predecessor' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
