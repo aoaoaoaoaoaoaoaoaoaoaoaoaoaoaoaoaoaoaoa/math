@@ -2451,7 +2451,7 @@ negative valuations then fall once per block. A nonempty suffix to a fixed targe
 one of two consecutive target-derived lengths. By `D2-D05`, every fixed exit has a decidable
 suffix. The sole infinite seam is the fixed-source set of shell-preserving prefixes and their
 first-exit images, not the schedule after an exit. This is
-[`D2-O05`](SALVAGE.md#d2-o05-universal-exit-suffix-collapse).
+[`D2-O07`](SALVAGE.md#d2-o07-universal-exit-suffix-collapse).
 Real order removes both exterior target components. Every shell block preserves
 `[1/5,1/2]`; a trajectory ending above `1/2` or below `1/5` is dominated by the all-zero-wait
 trajectory, whose distance from `1/2` contracts by `(3/5)^n`. Lean converts this into an explicit
@@ -2463,7 +2463,7 @@ The guarded part of that interval is backward-saturated. Every rational `5`-adic
 guarded predecessor schedule of every prescribed block length. The source varies with the
 length. Thus target position, target unitality, and real contraction cannot bound the remaining
 translated count; only the simultaneous fixed-source/fixed-target arithmetic can discriminate.
-This is [`D2-O06`](SALVAGE.md#d2-o06-real-trap-backward-saturation).
+This is [`D2-O08`](SALVAGE.md#d2-o08-real-trap-backward-saturation).
 Real order nevertheless cuts the local reverse fan. For each `y∈(1/5,1/2]`, one computable
 exponent `c(y)` brackets `(10/3)(y−1/5)` between consecutive powers of `2/3`. Every predecessor
 inside the trap has wait `c(y)`, `c(y)−1`, or `c(y)−2`, and fixed-source one-step reachability is
@@ -2510,9 +2510,16 @@ orbits exist. For every `d≥7`, the reduced mantissa
 and gives a guarded fixed state `T_(d−2)(U(d,μ_d))=U(d,μ_d)`. Its centered residual has
 two-adic value `d−2`; arbitrary repetitions remain accepted. Global height, odd-part, and
 centered-valuation descent are therefore dead. This identifies the abstract singleton cycles of
-`D2-O02` exactly on the `D2-S09` secondary wall. The live arithmetic question is whether the
-explicit fixed components can be quotiented while nonperiodic secondary-wall transitions admit
-a finite target-dependent classifier.
+`D2-O02` exactly on the `D2-S09` secondary wall. That wall now has a finite target-dependent
+nucleus. If a reduced unit transition `a/(2c)→a'/(2c')` stays on the wall, Lean proves
+`c=3^k c'` for a bounded exponent. Hence every successor lies in the finite rectangle
+`a'≤2c`, `c'≤c`; its witness depth is the computable value `v₂(5a−9c)+2`, the transition is
+functional, and every infinite consecutive wall orbit is eventually periodic. The explicit fixed
+family is recognized as terminal singleton components. Pairing
+the rectangle with the `D2-S08` representative gives a finite coordinate-by-twelve-depth product.
+This is [`D2-S10`](SALVAGE.md#d2-s10-finite-secondary-wall-nucleus). The live arithmetic
+obstruction is no longer internal wall recurrence, but excursions through upper or middle
+branches or rigid two-adic strata and their later returns.
 The deepest of those three branches is itself a full depth reset. In normalized band coordinates
 `U(d,μ)=1/5+(3/10)(2/3)^dμ`, every target band `d≥2` contains a point whose `d−2` predecessor has
 any prescribed band `n≥7` and mantissa in `(2/3,1]`. An explicit guarded subfamily fixes target
@@ -2523,7 +2530,7 @@ real depth plus finitely many valuation modes cannot form an inverse nucleus, bu
 does not create a fixed-target fibre. Moreover `T_(50k+48)(2/9)=U(50k+50,1)`: one fixed unit
 source inside the real trap feeds the ray at unbounded waits, again with distinct targets. Exact
 mantissa arithmetic is indispensable. This is
-[`D2-O07`](SALVAGE.md#d2-o07-guarded-real-pole-reset).
+[`D2-O09`](SALVAGE.md#d2-o09-guarded-real-pole-reset).
 Higher depth is not free: a published length-thirteen relation yields two distinct
 schedules with the same affine map and a common Lean-checked guarded periodic source. This is an
 exact rewrite seed. Lean also proves that it preserves all intermediate shell guards in every
@@ -2816,9 +2823,9 @@ universal computation.
    representation, a parametric affine-kernel description beyond the checked length-30 basis,
    and normalized collision/exit-fibre census. Inside uninterrupted negative `3`-depth, restrict
    source-specific point-collision search to cross-length bridges: fixed-length collisions are
-   already global affine relations by `D2-O02`. `D2-O05` removes the post-exit schedule from the
-   infinite seam, while `D2-O06` saturates target-only reverse length inside the real trap and
-   `D2-S04` replaces its local reverse fan by a sharp ternary nucleus. `D2-O07` then localizes
+   already global affine relations by `D2-O02`. `D2-O07` removes the post-exit schedule from the
+   infinite seam, while `D2-O08` saturates target-only reverse length inside the real trap and
+   `D2-S04` replaces its local reverse fan by a sharp ternary nucleus. `D2-O09` then localizes
    every unbounded Archimedean reset to the deepest branch and proves that fixed depth/unit modes
    do not contain it. Treat chamber exit and reentry as separate pre-exit seams. Do not reopen
    unlabeled residue-only finite nuclei, valuation-only reverse bounds, one-sided endpoint bounds,
