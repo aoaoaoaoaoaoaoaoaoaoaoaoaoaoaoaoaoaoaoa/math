@@ -39,11 +39,12 @@ tag halting; the singleton invariant is closed by each positive self-return.
 
 The one-`c` defect descent does not extend by merely allowing a second `c`. At one `c`, every
 surviving firing divides a nonzero integral defect by three. Adjacent pairs instead admit two
-balanced reproduction cycles at every nontrivial even body length. This proves that the lower
-boundary in `MM-D01` is dynamically sharp.
+balanced reproduction cycles at every nontrivial even body length. Thus the one-`c`
+shrinking-defect mechanism is sharp for unrestricted queue dynamics.
 
 These cycles do not decide the production-coupled initial queue and do not prove that the
-two-`c` stratum is universal. The next question is whether the coupled initial queue for every
+two-`c` stratum is universal. In particular, this does not close the coupled two-`c` source
+boundary left open by `MM-D01`. The next question is whether the coupled initial queue for every
 adjacent body either halts or enters one of these two cycles. That finite normal form remains
 unproved at this ratchet.
 

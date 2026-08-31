@@ -72,8 +72,9 @@ The sparse source stratum is now decided formally. Every coupled body containing
 some rejecting code to a body containing at least two `c` letters. This is only a necessary
 condition: the two-`c` stratum is not known universal or decidable. See
 [`m53-width-three-sparse-source-2026-08-30.md`](m53-width-three-sparse-source-2026-08-30.md).
-The lower boundary is dynamically sharp: every nontrivial even body `b^p c c b^s` has two
-explicit periodic queues, although its coupled initial-orbit classification remains open. See
+The one-`c` shrinking-defect mechanism is sharp for unrestricted queue dynamics: every
+nontrivial even body `b^p c c b^s` has two explicit periodic queues. This does not classify its
+coupled initial orbit, so the coupled two-`c` source boundary remains open. See
 [`m53-width-three-adjacent-cycles-2026-08-31.md`](m53-width-three-adjacent-cycles-2026-08-31.md).
 
 ## Search

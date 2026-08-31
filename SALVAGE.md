@@ -68,7 +68,7 @@ file owns the mathematical stock.
 | [`MM-C03`](#mm-c03-scheduled-binary-compiler) | compiler | fixed-width tag strokes to a total two-letter scalar series | formalized | graduated |
 | [`MM-C04`](#mm-c04-internal-word-sandwich-minimization) | compiler | internal low-rank words repair reachable/observable minimization | formalized | graduated |
 | [`MM-D01`](#mm-d01-sparse-width-three-source-decision) | decidability theorem | every coupled width-three body with at most one `c` halts | formalized | graduated |
-| [`MM-D02`](#mm-d02-adjacent-two-c-periodic-pair) | dynamical theorem | every nontrivial even adjacent-two-`c` body has two explicit periodic queues | formalized | active |
+| [`MM-S23`](#mm-s23-adjacent-two-c-periodic-pair) | dynamical theorem | every nontrivial even adjacent-two-`c` body has two explicit periodic queues | formalized | active |
 | [`MM-O01`](#mm-o01-all-placement-packing-rank) | obstruction | literal CHHN packing has exact rank six for every separator placement | formalized | graduated |
 | [`MM-O02`](#mm-o02-one-sided-phase-overlap) | obstruction | standard common-line phase fusion becomes one-sided | reported | parked |
 | [`MM-O03`](#mm-o03-two-channel-boundary-tax) | obstruction | exact diagonal rank-two punctuation costs two states beyond Hankel rank | formalized | graduated |
@@ -1187,7 +1187,7 @@ source theorem required by `MM-C03`.
 [`WidthThreeSparseBody.lean`](MatrixMortality/WidthThreeSparseBody.lean). The proof audit is
 [`audits/m53-width-three-sparse-source-2026-08-30.md`](audits/m53-width-three-sparse-source-2026-08-30.md).
 
-### MM-D02: Adjacent two-`c` periodic pair
+### MM-S23: Adjacent two-`c` periodic pair
 
 **Kind:** dynamical theorem
 **Evidence:** formalized
