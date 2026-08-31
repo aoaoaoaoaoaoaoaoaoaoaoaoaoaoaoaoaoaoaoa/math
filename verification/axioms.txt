@@ -942,6 +942,27 @@
 'MatrixMortality.DecimalSetterChamber.compiler_ruleDeletionLowerWord_shape' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.DecimalSetterResonance.singleB_after_repeatedC_gt_one' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterResonance.encodedSingleB_after_repeatedC_avoids_encodedPole' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterResonance.allDeletion_avoids_singletonPole' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterResonance.ruleBearing_normalizedLower_huge' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterResonance.allC_cLeading_avoids_singletonPole' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterResonance.allC_bLeading_avoids_singletonPole' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterResonance.compilerBody_resonanceEnvelope' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.Undecidability.nearyScalarZero62_hasZero_iff_hasZeroStar' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]

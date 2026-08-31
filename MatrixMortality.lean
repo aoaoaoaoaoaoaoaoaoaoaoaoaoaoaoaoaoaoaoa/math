@@ -117,6 +117,7 @@ import MatrixMortality.SetterJFraction
 import MatrixMortality.DecimalSetterArithmetic
 import MatrixMortality.DecimalSetterCarry
 import MatrixMortality.DecimalSetterChamber
+import MatrixMortality.DecimalSetterResonance
 import MatrixMortality.SchottkyPunctuation
 import MatrixMortality.TwoStateObstructions
 import MatrixMortality.OverlapQueue

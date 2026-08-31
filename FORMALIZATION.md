@@ -1229,6 +1229,15 @@ put the two source-prefix images outside `(0,1)`. Together with the shell gate, 
 declarations extinguish the ordinary A-to-A depth-two branch. They do not decide A-to-B,
 B-to-A, or the distinguished-reset normalized suffix.
 
+Record [`MM-S16`](SALVAGE.md#mm-s16-complete-ordinary-depth-two-extinction) closes both remaining
+ordinary families. `DecimalSetterResonance.allC_cLeading_avoids_singletonPole` and
+`allC_bLeading_avoids_singletonPole` exhaust every phase word in the two long A/B shells by an
+all-deletion/first-rule split. `encodedSingleB_after_repeatedC_avoids_encodedPole` proves the
+exact B/A image is above one, while every positive target pole is below one.
+`compilerBody_resonanceEnvelope` discharges the body hypotheses for every Neary compiler
+instance. Thus no ordinary-reset false pole exists through two completed transfers; the
+distinguished-reset suffix corridor remains open.
+
 The dimension-two affine ledger has six independently checked records:
 
 | Record | Formalization obligation |
@@ -1664,6 +1673,7 @@ fixed-rank decision problem.
 | `DecimalSetterArithmetic.lean` | decimal setter centered carry, reciprocal recurrence, coupled `2`/`5` target shells, and successive-pole valuation balance |
 | `DecimalSetterCarry.lean` | two-reset successive-pole identities, joint depth constraints, exact decimal suffix exhaustion, first-transfer prefix separation, and the ordinary depth-two A/B shell forest |
 | `DecimalSetterChamber.lean` | exact decimal pole chambers, both ordinary A-to-A length-two extinctions, and the emitted-body grammar certificate |
+| `DecimalSetterResonance.lean` | complete ordinary depth-two A-to-B and B-to-A extinction, phase-word exhaustion, and compiler-envelope specialization |
 | `PairedMortality.lean` | common-column mortality converse and exact integer `4 × 4` family |
 | `PhaseFracture.lean` | phase normalization and dimension-free projective-identification contradiction |
 | `PhaseRigidity.lean` | checked local role algebra, discrepancy commutators, and invariant-pencil rigidity |

@@ -101,6 +101,7 @@ file owns the mathematical stock.
 | [`MM-S13`](#mm-s13-decimal-first-transfer-extinction) | obstruction | neither decimal centered reset reaches a false pole after one completed transfer | formalized core; audited assembly | active |
 | [`MM-S14`](#mm-s14-ordinary-depth-two-shell-forest) | structure theorem | the ordinary depth-two decimal carry has only three resonant families and no B-to-B branch | formalized | active |
 | [`MM-S15`](#mm-s15-ordinary-a-to-a-length-two-extinction) | obstruction | both ordinary A-to-A length-two resonances miss every admissible next pole | formalized | active |
+| [`MM-S16`](#mm-s16-complete-ordinary-depth-two-extinction) | obstruction | no ordinary-reset orbit reaches a false pole after two completed transfers | formalized core; audited assembly | active |
 | [`R32-S01`](#r32-s01-split-return-normal-form) | structure theorem | rank-two cuts reduce one-unit binary mortality to a `2 × 2` return recurrence | formalized | graduated |
 | [`R32-S02`](#r32-s02-two-plane-edge-square) | structure theorem | two rank-two generators are a two-vertex square of `2 × 2` edges | formalized | graduated |
 | [`R32-O01`](#r32-o01-rank-one-profile-collapse) | obstruction | a rank-one generator reduces mortality to order-at-most-three scalar recurrence zeros | audited | stock |
@@ -2881,8 +2882,8 @@ through `twoTransferTrace_identity`, `twoTransferTrace_shell_of_nonresonant`,
 **Artifact:**
 [`audits/m53-decimal-depth-two-shell-forest-2026-08-30.md`](audits/m53-decimal-depth-two-shell-forest-2026-08-30.md).
 
-**Next:** kill the three resonant families by exact Archimedean pole intervals or normalized
-decimal suffixes, then transfer the surviving method to the distinguished reset.
+**Next:** apply the chamber extinctions in `MM-S15` and `MM-S16`, then transfer the surviving
+method to the distinguished reset.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
@@ -2929,8 +2930,55 @@ is the distinguished normalized suffix.
 **Artifact:**
 [`audits/m53-decimal-length-two-chamber-2026-08-30.md`](audits/m53-decimal-length-two-chamber-2026-08-30.md).
 
-**Next:** close the remaining ordinary A-to-B and B-to-A resonances, then attack the
+**Next:** combine with the A-to-B and B-to-A extinction in `MM-S16`, then attack the
 distinguished-reset normalized-suffix successor.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S16: Complete ordinary depth-two extinction
+
+**Kind:** obstruction
+**Evidence:** formalized core; audited assembly
+**Disposition:** active
+
+The two ordinary resonances left by [`MM-S14`](#mm-s14-ordinary-depth-two-shell-forest) after
+[`MM-S15`](#mm-s15-ordinary-a-to-a-length-two-extinction) are both empty.
+
+For A-to-B, encode an all-`c` phase word by `false=D_c` and `true=R_c`. Every nonempty word is
+either all deletion or has the exact form `D_c^i R_c s`. In the all-deletion case, its normalized
+lower code is below `7/9`, its lower J-weight is below `1/200`, and its image is above `3/4`;
+either singleton target pole is below `1/100`. If the word contains `R_c`, the compiler body
+begins in `b` and its encoded length forces normalized lower weight at least `55ρ²`. The J-weight
+then exceeds `265ρ`: a `c`-leading source maps below zero and a `b`-leading source above one.
+This argument covers every positive all-`c` length, hence both `β+1` and `β+2` resonances.
+
+For B-to-A, the first image of `β` all-`c` roles and the following singleton `D_b` satisfy
+
+```text
+t₁=(50ρ²+2ρ−7)/(ρ(52ρ−7)),
+t₂−1=(10ρ−1)(502ρ−7)/(20(52ρ−7)(50ρ²+2ρ−7))>0.
+```
+
+Every encoded target pole lies strictly between zero and one, so this family is impossible.
+
+**Scope:** together, `MM-S13` through `MM-S16` extinguish every false pole through two completed
+transfers from the ordinary reset. They do not decide the distinguished-reset depth-two suffix
+corridor or any orbit after three or more transfers.
+
+**Use:** remove the entire ordinary depth-two tree. The next live decimal front is the
+distinguished normalized-suffix successor, not another ordinary phase or length split.
+
+**Formalization:**
+[`MatrixMortality/DecimalSetterResonance.lean`](MatrixMortality/DecimalSetterResonance.lean),
+through `allC_cLeading_avoids_singletonPole`, `allC_bLeading_avoids_singletonPole`,
+`encodedSingleB_after_repeatedC_avoids_encodedPole`, and `compilerBody_resonanceEnvelope`.
+
+**Artifact:**
+[`audits/m53-decimal-ordinary-depth-two-extinction-2026-08-30.md`](audits/m53-decimal-ordinary-depth-two-extinction-2026-08-30.md).
+
+**Next:** transfer the shell and chamber cuts to the distinguished-reset normalized suffix and
+then derive a depth-uniform recurrence or invariant.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
