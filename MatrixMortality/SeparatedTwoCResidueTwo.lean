@@ -7,15 +7,17 @@ For the coupled width-three diagonal family `qₙ = bb c bⁿ c bⁿ`, this file
 open congruence class. Writing `n = 3A - 1`, the case `A ≡ 1 (mod 3)` begins with six exact
 `c`-headed events. The resulting queue has no `c` at a deletion head unless
 `A ≡ 4 (mod 9)`. Consequently the classes `n ≡ 2, 20 (mod 27)` halt, and only
-`n ≡ 11 (mod 27)` survives this first cut.
+`n ≡ 11 (mod 27)` survives this first cut. Its exact four-`c` reproduction macro then proves
+`n ≡ 11 (mod 81)` halts, leaving only `n ≡ 38, 65 (mod 81)` open on the diagonal.
 -/
 
 namespace MatrixMortality.SeparatedTwoCResidue
 
 open PeriodicHistory SeparatedTwoCOrbit Undecidability
 
-private def residueTwoFinal (A middle : Nat) : List TagLetter :=
-  bRun (4 * A) ++ ([.c] ++
+/-- The exact two-copy expansion emitted by one canonical four-active-`c` block. -/
+def fourCExpansion (A middle front : Nat) : List TagLetter :=
+  bRun front ++ ([.c] ++
     (bRun (3 * A - 1) ++ ([.c] ++
     (bRun (4 * A + 1) ++ ([.c] ++
     (bRun (3 * A - 1) ++ ([.c] ++
@@ -24,6 +26,9 @@ private def residueTwoFinal (A middle : Nat) : List TagLetter :=
     (bRun (4 * A + 1) ++ ([.c] ++
     (bRun (3 * A - 1) ++ ([.c] ++
       bRun (3 * A))))))))))))))))
+
+private def residueTwoFinal (A middle : Nat) : List TagLetter :=
+  fourCExpansion A middle (4 * A)
 
 @[simp] private theorem consumed_replicate_strokeBBB (count : Nat) :
     consumed (List.replicate count strokeBBB) = bRun (3 * count) := by
@@ -70,6 +75,34 @@ private def residueTwoStageFour (A middle : Nat) : List TagLetter :=
 
 private def residueTwoStageFive (A middle : Nat) : List TagLetter :=
   [.c] ++ bRun (4 * A + 2) ++ [.c] ++ bRun (3 * A - 1) ++
+    [.c] ++ bRun (4 * A + 1) ++ [.c] ++ bRun (3 * A - 1) ++
+      [.c] ++ bRun (3 * A + middle + 2) ++ [.c] ++ bRun (3 * A - 1) ++
+        [.c] ++ bRun (4 * A - 1)
+
+/-- The four-active-`c` block exposed by the first residue-two cut. -/
+def fourCBlock (A : Nat) : List TagLetter :=
+  [.c] ++ bRun (3 * A - 1) ++ [.c] ++ bRun (4 * A + 1) ++
+    [.c] ++ bRun (3 * A - 1) ++ [.c]
+
+/-- A canonical four-active-`c` block followed by its unary tail. -/
+def fourCQueue (A tail : Nat) : List TagLetter :=
+  fourCBlock A ++ bRun tail
+
+private def fourCPrelude (A middle : Nat) : List TagLetter :=
+  bRun (4 * A) ++ [.c] ++ bRun (3 * A - 1) ++ [.c] ++ bRun (4 * A + 1) ++
+    [.c] ++ bRun (3 * A - 1) ++ [.c] ++ bRun (3 * A + middle + 2)
+
+private def fourCStageOne (A tail : Nat) : List TagLetter :=
+  [.c] ++ bRun (4 * A + 1) ++ [.c] ++ bRun (3 * A - 1) ++
+    [.c] ++ bRun (tail + 2) ++ [.c] ++ bRun (3 * A - 1) ++ [.c] ++ bRun (4 * A - 1)
+
+private def fourCStageTwo (A middle tail : Nat) : List TagLetter :=
+  [.c] ++ bRun (3 * A - 1) ++ [.c] ++ bRun (tail + 2) ++
+    [.c] ++ bRun (3 * A - 1) ++ [.c] ++ bRun (4 * A + 1) ++
+      [.c] ++ bRun (3 * A - 1) ++ [.c] ++ bRun (3 * A + middle)
+
+private def fourCStageThree (A middle tail : Nat) : List TagLetter :=
+  [.c] ++ bRun (tail + 2) ++ [.c] ++ bRun (3 * A - 1) ++
     [.c] ++ bRun (4 * A + 1) ++ [.c] ++ bRun (3 * A - 1) ++
       [.c] ++ bRun (3 * A + middle + 2) ++ [.c] ++ bRun (3 * A - 1) ++
         [.c] ++ bRun (4 * A - 1)
@@ -144,8 +177,71 @@ private theorem stageFive_step_final (A middle : Nat) (A_pos : 0 < A) :
       List.append_assoc]
   · have bridgeGap : 4 * A - 1 + 1 + 1 = 4 * A + 1 := by omega
     have finalGap : 3 * A - 1 + 1 = 3 * A := by omega
-    simp [residueTwoFinal, separatedBody, strokeCBB, stroke₃, tagOutput, nearyBody,
+    simp [residueTwoFinal, fourCExpansion, separatedBody, strokeCBB, stroke₃, tagOutput, nearyBody,
       bRun, List.append_assoc, bridgeGap, finalGap]
+
+private theorem fourCQueue_reaches_stageOne (A tail : Nat) (A_pos : 0 < A) :
+    TagReaches 3 (tagOutput (separatedBody (3 * A - 1)))
+      (fourCQueue A tail) (fourCStageOne A tail) := by
+  have reach := cbbRun_reaches (separatedBody (3 * A - 1)) (A - 1)
+    ([.c] ++ bRun (4 * A + 1) ++ [.c] ++ bRun (3 * A - 1) ++ [.c] ++ bRun tail)
+  have firstGap : 3 * (A - 1) + 2 = 3 * A - 1 := by omega
+  have bridgeGap : tail + 1 + 1 = tail + 2 := by omega
+  have finalGap : 3 * A - 1 + 1 + (A - 1) = 4 * A - 1 := by omega
+  simpa [fourCQueue, fourCBlock, fourCStageOne, separatedBody, tagOutput, nearyBody,
+    bRun, List.append_assoc, firstGap, bridgeGap, finalGap] using reach
+
+private theorem fourCStageOne_reaches_stageTwo (A middle tail : Nat) (A_pos : 0 < A)
+    (middle_eq : 3 * middle = 4 * A - 1) :
+    TagReaches 3 (tagOutput (separatedBody (3 * A - 1)))
+      (fourCStageOne A tail) (fourCStageTwo A middle tail) := by
+  have reach := cbbRun_reaches (separatedBody (3 * A - 1)) middle
+    ([.c] ++ bRun (3 * A - 1) ++ [.c] ++ bRun (tail + 2) ++
+      [.c] ++ bRun (3 * A - 1) ++ [.c] ++ bRun (4 * A - 1))
+  have firstGap : 3 * middle + 2 = 4 * A + 1 := by omega
+  have bridgeGap : 4 * A - 1 + 1 + 1 = 4 * A + 1 := by omega
+  have finalGap : 3 * A - 1 + 1 + middle = 3 * A + middle := by omega
+  simpa [fourCStageOne, fourCStageTwo, separatedBody, tagOutput, nearyBody,
+    bRun, List.append_assoc, firstGap, bridgeGap, finalGap] using reach
+
+private theorem fourCStageTwo_reaches_stageThree (A middle tail : Nat) (A_pos : 0 < A) :
+    TagReaches 3 (tagOutput (separatedBody (3 * A - 1)))
+      (fourCStageTwo A middle tail) (fourCStageThree A middle tail) := by
+  have reach := cbbRun_reaches (separatedBody (3 * A - 1)) (A - 1)
+    ([.c] ++ bRun (tail + 2) ++ [.c] ++ bRun (3 * A - 1) ++
+      [.c] ++ bRun (4 * A + 1) ++ [.c] ++ bRun (3 * A - 1) ++
+        [.c] ++ bRun (3 * A + middle))
+  have firstGap : 3 * (A - 1) + 2 = 3 * A - 1 := by omega
+  have bridgeGap : 3 * A + middle + 1 + 1 = 3 * A + middle + 2 := by omega
+  have finalGap : 3 * A - 1 + 1 + (A - 1) = 4 * A - 1 := by omega
+  simpa [fourCStageTwo, fourCStageThree, separatedBody, tagOutput, nearyBody,
+    bRun, List.append_assoc, firstGap, bridgeGap, finalGap] using reach
+
+private theorem fourCStageThree_step_final (A middle tail : Nat) (A_pos : 0 < A) :
+    TagStep 3 (tagOutput (separatedBody (3 * A - 1)))
+      (fourCStageThree A middle tail) (fourCExpansion A middle tail) := by
+  refine ⟨strokeCBB,
+    bRun tail ++ [.c] ++ bRun (3 * A - 1) ++ [.c] ++ bRun (4 * A + 1) ++
+      [.c] ++ bRun (3 * A - 1) ++ [.c] ++ bRun (3 * A + middle + 2) ++
+        [.c] ++ bRun (3 * A - 1) ++ [.c] ++ bRun (4 * A - 1), ?_, ?_⟩
+  · simp [fourCStageThree, strokeCBB, stroke₃, Stroke.letters, bRun,
+      List.append_assoc]
+  · have bridgeGap : 4 * A - 1 + 1 + 1 = 4 * A + 1 := by omega
+    have finalGap : 3 * A - 1 + 1 = 3 * A := by omega
+    simp [fourCExpansion, separatedBody, strokeCBB, stroke₃, tagOutput, nearyBody,
+      bRun, List.append_assoc, bridgeGap, finalGap]
+
+/-- One canonical four-`c` block reproduces as two copies separated by the fixed middle run. -/
+theorem fourCQueue_reaches_final (A middle tail : Nat) (A_pos : 0 < A)
+    (middle_eq : 3 * middle = 4 * A - 1) :
+    TagReaches 3 (tagOutput (separatedBody (3 * A - 1)))
+      (fourCQueue A tail) (fourCExpansion A middle tail) := by
+  have stageOne := fourCQueue_reaches_stageOne A tail A_pos
+  have stageTwo := fourCStageOne_reaches_stageTwo A middle tail A_pos middle_eq
+  have stageThree := fourCStageTwo_reaches_stageThree A middle tail A_pos
+  have finalStep := Relation.ReflTransGen.single
+    (fourCStageThree_step_final A middle tail A_pos)
+  exact ((stageOne.trans stageTwo).trans stageThree).trans finalStep
 
 private def ConstantAtOffset (offset : Nat) (word : List TagLetter) : Prop :=
   ∀ (index : Nat) (index_lt : index < word.length), 3 ∣ offset + index →
@@ -190,11 +286,139 @@ private theorem constantAtOffset_bRun_c {offset run : Nat} {tail : List TagLette
   apply ConstantAtOffset.append (constantAtOffset_replicate offset run)
   simpa [bRun, Nat.add_assoc] using constantAtOffset_cons_c inert tail_clean
 
+private theorem sampleHeads_eq_replicate_of_constant (count : Nat) (word : List TagLetter)
+    (enough : count * 3 ≤ word.length) (clean : ConstantAtMultiples 3 TagLetter.b word) :
+    sampleHeads 3 (by omega) count word enough = bRun count := by
+  apply List.ext_getElem
+  · simp [bRun]
+  · intro index sample_lt replicate_lt
+    have index_lt : index < count := by simpa [bRun] using replicate_lt
+    have source_lt : index * 3 < word.length := by
+      exact ((Nat.mul_lt_mul_right (by omega : 0 < 3)).mpr index_lt).trans_le enough
+    simp only [sampleHeads, List.getElem_ofFn, bRun, List.getElem_replicate]
+    exact clean (index * 3) source_lt ⟨index, by omega⟩
+
+@[simp] private theorem spell_tagOutput_bRun (body : List TagLetter) (count : Nat) :
+    spell (tagOutput body) (bRun count) = bRun count := by
+  unfold bRun
+  induction count with
+  | zero => rfl
+  | succ count induction =>
+      rw [List.replicate_succ]
+      change [.b] ++ spell (tagOutput body) (List.replicate count .b) =
+        .b :: List.replicate count .b
+      rw [induction]
+      rfl
+
+private theorem cleanPrefix_reaches (body front tail : List TagLetter) (count : Nat)
+    (front_length : front.length = count * 3)
+    (front_clean : ConstantAtMultiples 3 TagLetter.b front) :
+    TagReaches 3 (tagOutput body) (front ++ tail) (tail ++ bRun count) := by
+  have enough : count * 3 ≤ front.length := front_length.ge
+  have reach := tagReaches_chunks 3 (by omega) (tagOutput body) count front tail enough
+  have sampled := sampleHeads_eq_replicate_of_constant count front enough front_clean
+  rw [sampled] at reach
+  have take_eq : front.take (count * 3) = front := by
+    rw [← front_length]
+    exact List.take_length
+  rw [take_eq, spell_tagOutput_bRun] at reach
+  exact reach
+
+private theorem residueTwoFinal_prelude (A middle : Nat) :
+    residueTwoFinal A middle =
+      fourCPrelude A middle ++ fourCBlock A ++ bRun (3 * A) := by
+  simp [residueTwoFinal, fourCExpansion, fourCPrelude, fourCBlock, List.append_assoc]
+
+private theorem fourCPrelude_eleven_length (k : Nat) :
+    (fourCPrelude (27 * k + 4) (36 * k + 5)).length = (165 * k + 26) * 3 := by
+  simp [fourCPrelude, bRun]
+  omega
+
+private theorem fourCPrelude_eleven_clean (k : Nat) :
+    ConstantAtMultiples 3 TagLetter.b (fourCPrelude (27 * k + 4) (36 * k + 5)) := by
+  have shifted :
+      ConstantAtOffset 0 (fourCPrelude (27 * k + 4) (36 * k + 5)) := by
+    unfold fourCPrelude
+    simp only [List.append_assoc, List.singleton_append]
+    apply constantAtOffset_bRun_c
+    · rw [Nat.dvd_iff_mod_eq_zero]
+      omega
+    · apply constantAtOffset_bRun_c
+      · rw [Nat.dvd_iff_mod_eq_zero]
+        omega
+      · apply constantAtOffset_bRun_c
+        · rw [Nat.dvd_iff_mod_eq_zero]
+          omega
+        · apply constantAtOffset_bRun_c
+          · rw [Nat.dvd_iff_mod_eq_zero]
+            omega
+          · exact constantAtOffset_replicate _ _
+  simpa [ConstantAtOffset, ConstantAtMultiples] using shifted
+
+private theorem residueTwoFinal_eleven_reaches_fourCQueue (k : Nat) :
+    TagReaches 3 (tagOutput (separatedBody (81 * k + 11)))
+      (residueTwoFinal (27 * k + 4) (36 * k + 5))
+      (fourCQueue (27 * k + 4) (246 * k + 38)) := by
+  let A := 27 * k + 4
+  let middle := 36 * k + 5
+  let front := fourCPrelude A middle
+  let tail := fourCBlock A ++ bRun (3 * A)
+  let count := 165 * k + 26
+  have front_length : front.length = count * 3 := by
+    simpa [front, count, A, middle] using fourCPrelude_eleven_length k
+  have front_clean : ConstantAtMultiples 3 TagLetter.b front := by
+    simpa [front, A, middle] using fourCPrelude_eleven_clean k
+  have reach := cleanPrefix_reaches (separatedBody (81 * k + 11)) front tail count
+    front_length front_clean
+  have source_eq : front ++ tail = residueTwoFinal A middle := by
+    simpa [front, tail, List.append_assoc] using (residueTwoFinal_prelude A middle).symm
+  have tail_eq : 3 * A + count = 246 * k + 38 := by
+    dsimp [A, count]
+    omega
+  have target_eq : tail ++ bRun count = fourCQueue A (246 * k + 38) := by
+    simp [tail, fourCQueue, bRun, List.append_assoc, tail_eq]
+  rw [source_eq, target_eq] at reach
+  simpa [A, middle] using reach
+
+private theorem fourCExpansion_eleven_clean (k : Nat) :
+    ConstantAtMultiples 3 TagLetter.b
+      (fourCExpansion (27 * k + 4) (36 * k + 5) (246 * k + 38)) := by
+  have shifted : ConstantAtOffset 0
+      (fourCExpansion (27 * k + 4) (36 * k + 5) (246 * k + 38)) := by
+    unfold fourCExpansion
+    simp only [List.singleton_append]
+    apply constantAtOffset_bRun_c
+    · rw [Nat.dvd_iff_mod_eq_zero]
+      omega
+    · apply constantAtOffset_bRun_c
+      · rw [Nat.dvd_iff_mod_eq_zero]
+        omega
+      · apply constantAtOffset_bRun_c
+        · rw [Nat.dvd_iff_mod_eq_zero]
+          omega
+        · apply constantAtOffset_bRun_c
+          · rw [Nat.dvd_iff_mod_eq_zero]
+            omega
+          · apply constantAtOffset_bRun_c
+            · rw [Nat.dvd_iff_mod_eq_zero]
+              omega
+            · apply constantAtOffset_bRun_c
+              · rw [Nat.dvd_iff_mod_eq_zero]
+                omega
+              · apply constantAtOffset_bRun_c
+                · rw [Nat.dvd_iff_mod_eq_zero]
+                  omega
+                · apply constantAtOffset_bRun_c
+                  · rw [Nat.dvd_iff_mod_eq_zero]
+                    omega
+                  · exact constantAtOffset_replicate _ _
+  simpa [ConstantAtOffset, ConstantAtMultiples] using shifted
+
 private theorem residueTwoFinal_one_clean (k : Nat) :
     ConstantAtMultiples 3 TagLetter.b
       (residueTwoFinal (9 * k + 1) (12 * k + 1)) := by
   have shifted : ConstantAtOffset 0 (residueTwoFinal (9 * k + 1) (12 * k + 1)) := by
-    unfold residueTwoFinal
+    unfold residueTwoFinal fourCExpansion
     simp only [List.singleton_append]
     apply constantAtOffset_bRun_c
     · rw [Nat.dvd_iff_mod_eq_zero]
@@ -227,7 +451,7 @@ private theorem residueTwoFinal_seven_clean (k : Nat) :
     ConstantAtMultiples 3 TagLetter.b
       (residueTwoFinal (9 * k + 7) (12 * k + 9)) := by
   have shifted : ConstantAtOffset 0 (residueTwoFinal (9 * k + 7) (12 * k + 9)) := by
-    unfold residueTwoFinal
+    unfold residueTwoFinal fourCExpansion
     simp only [List.singleton_append]
     apply constantAtOffset_bRun_c
     · rw [Nat.dvd_iff_mod_eq_zero]
@@ -327,6 +551,51 @@ theorem twentyModuloTwentySeven_tagHaltsFrom (k : Nat) :
     dsimp [A]
     omega
   rw [exponent_eq, queue_eq] at root
+  exact root
+
+/-- In the surviving class `n ≡ 11 (mod 27)`, the first subresidue `n ≡ 11 (mod 81)`
+also halts. The six-event cut exposes one canonical four-`c` block; its exact reproduction
+leaves both copies away from every deletion head. -/
+theorem elevenModuloEightyOne_tagHaltsFrom (k : Nat) :
+    TagHaltsFrom 3 (tagOutput (separatedBody (81 * k + 11)))
+      (coupledInitial (81 * k + 11)) := by
+  let A := 27 * k + 4
+  let middle := 36 * k + 5
+  let tail := 246 * k + 38
+  have A_pos : 0 < A := by simp [A]
+  have middle_eq : 3 * middle = 4 * A - 1 := by
+    dsimp [A, middle]
+    omega
+  have exponent_eq : 3 * A - 1 = 81 * k + 11 := by
+    dsimp [A]
+    omega
+  have entry := initialPair_reaches_final A middle A_pos middle_eq
+  have entry' :
+      TagReaches 3 (tagOutput (separatedBody (81 * k + 11)))
+        (pairQueue A (3 * A)) (residueTwoFinal A middle) := by
+    rw [exponent_eq] at entry
+    exact entry
+  have exposure := residueTwoFinal_eleven_reaches_fourCQueue k
+  have reproduction := fourCQueue_reaches_final A middle tail A_pos middle_eq
+  have reproduction' :
+      TagReaches 3 (tagOutput (separatedBody (81 * k + 11)))
+        (fourCQueue A tail) (fourCExpansion A middle tail) := by
+    rw [exponent_eq] at reproduction
+    exact reproduction
+  have final_halts := tagHaltsFrom_of_constantAtMultiples 3 (by omega)
+    (tagOutput (separatedBody (81 * k + 11))) TagLetter.b rfl
+    (fourCExpansion A middle tail) (by
+      simpa [A, middle, tail] using fourCExpansion_eleven_clean k)
+  have reach := (entry'.trans exposure).trans reproduction'
+  have root := tagHaltsFrom_of_reaches reach final_halts
+  have queue_eq : pairQueue A (3 * A) = coupledInitial (81 * k + 11) := by
+    rw [coupledInitial_eq]
+    unfold pairQueue
+    rw [exponent_eq]
+    congr 2
+    dsimp [A]
+    omega
+  rw [queue_eq] at root
   exact root
 
 end MatrixMortality.SeparatedTwoCResidue

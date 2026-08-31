@@ -679,6 +679,8 @@ open MatrixMortality
 #print axioms SeparatedTwoCResidue.fiveResidue_tagHaltsFrom
 #print axioms SeparatedTwoCResidue.twoModuloTwentySeven_tagHaltsFrom
 #print axioms SeparatedTwoCResidue.twentyModuloTwentySeven_tagHaltsFrom
+#print axioms SeparatedTwoCResidue.fourCQueue_reaches_final
+#print axioms SeparatedTwoCResidue.elevenModuloEightyOne_tagHaltsFrom
 #print axioms SetterShear.sideBasis_det
 #print axioms SetterShear.delimiter_cube
 #print axioms SetterShear.delimiter_square_distinguishedColumn

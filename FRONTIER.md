@@ -208,11 +208,14 @@ active-pair quotient in
 `n≡5 (mod 9)` by conjugating the live defect to an injective inverse-Cantor map on a finite
 interval. [`MM-S41`](SALVAGE.md#mm-s41-separated-residue-two-first-cut) resolves two of the
 three subresidues of the last class by an exact six-event macro: `n≡2,20 (mod 27)` halt.
-Only `n≡11 (mod 27)` remains open on the diagonal. See
+[`MM-S43`](SALVAGE.md#mm-s43-four-c-reproduction-cut) identifies the survivor's canonical
+four-`c` reproduction macro and proves `n≡11 (mod 81)` halts. Only `n≡38,65 (mod 81)` remain
+open on the diagonal. See
 `audits/m53-separated-two-c-orbits-2026-08-31.md`,
 `audits/m53-separated-two-c-residue-eight-2026-08-31.md`,
 `audits/m53-separated-two-c-residue-five-2026-08-31.md`, and
-`audits/m53-separated-two-c-residue-two-2026-08-31.md`.
+`audits/m53-separated-two-c-residue-two-2026-08-31.md`; the four-`c` refinement is in
+`audits/m53-separated-two-c-four-c-2026-08-31.md`.
 
 Full mortality requires coding the four payloads and the rank-one separator. The complete
 prefix code
@@ -817,8 +820,10 @@ Three live routes remain.
    [`MM-S34`](SALVAGE.md#mm-s34-separated-residue-five-cantor-drainage) proves halting in residue
    five by a finite injective defect quotient, and
    [`MM-S41`](SALVAGE.md#mm-s41-separated-residue-two-first-cut) proves halting in subresidues
-   two and twenty modulo twenty-seven. The next source-level cut is residue eleven modulo
-   twenty-seven or unequal separated runs, not another adjacent-`c` example.
+   two and twenty modulo twenty-seven.
+   [`MM-S43`](SALVAGE.md#mm-s43-four-c-reproduction-cut) then proves residue eleven modulo
+   eighty-one halts. The next source-level cut is residue thirty-eight or sixty-five modulo
+   eighty-one, or unequal separated runs, not another adjacent-`c` example.
 
 The decimal setter is now the sharpest constructive route. The ternary swap remains useful
 because its suffix and divisor-ray theory is mature; the decimal instance has stronger real

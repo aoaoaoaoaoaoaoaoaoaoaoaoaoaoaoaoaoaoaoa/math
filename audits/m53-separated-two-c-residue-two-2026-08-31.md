@@ -15,7 +15,8 @@ n = 27k+2    and    n = 27k+20
 ```
 
 halt from the queue `c bⁿ c bⁿ⁺¹`. These are two of the three subresidues of the last
-previously open diagonal class `n≡2 (mod 9)`. The sole survivor is `n≡11 (mod 27)`.
+previously open diagonal class `n≡2 (mod 9)`. This cut's sole survivor is `n≡11 (mod 27)`;
+the subsequent `MM-S43` block macro reduces it further to `n≡38,65 (mod 81)`.
 
 ## Six-Event Macro
 
@@ -58,7 +59,8 @@ A=9k+7  ⇒  n=27k+20,
 ```
 
 both stated classes halt. When `A≡4 (mod 9)`, one later `c` returns to block phase zero, so
-this certificate correctly leaves `n≡11 (mod 27)` unresolved.
+this certificate correctly leaves `n≡11 (mod 27)` unresolved at this stage. `MM-S43`
+subsequently proves its `n≡11 (mod 81)` subresidue halts.
 
 ## Checked Boundary
 

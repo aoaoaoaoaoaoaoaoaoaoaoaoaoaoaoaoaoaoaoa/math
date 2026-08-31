@@ -87,6 +87,6 @@ Cantor-defect map, and
 `SeparatedTwoCResidue.fiveResidue_tagHaltsFrom` for every `k`.
 
 Together with `MM-S25` and `MM-S30`, this reduces the diagonal to `n≡2 (mod 9)`; `MM-S41`
-later reduces that class further to `n≡11 (mod 27)`. The theorem does not decide unequal outer
-runs, arbitrary separated two-`c` bodies, or the existence of a universal
-deletion-width-three source family.
+later reduces that class to `n≡11 (mod 27)`, and `MM-S43` further reduces it to
+`n≡38,65 (mod 81)`. The theorem does not decide unequal outer runs, arbitrary separated
+two-`c` bodies, or the existence of a universal deletion-width-three source family.
