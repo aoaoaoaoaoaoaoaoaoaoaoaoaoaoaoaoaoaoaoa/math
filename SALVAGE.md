@@ -152,6 +152,7 @@ file owns the mathematical stock.
 | [`MM-S51`](#mm-s51-double-deletion-ratio-chamber-extinction) | obstruction | the literal `D_c²` middle forces a target code ratio in an open chamber containing no physical swapped role block | formalized | active |
 | [`MM-S53`](#mm-s53-complete-all-erasure-first-entry-extinction) | obstruction | every non-singleton all-erasure first block misses the next multi-role pole from a lawful two-`c` raw head | formalized | active |
 | [`MM-S54`](#mm-s54-rightmost-rule-phase-toggle-trichotomy) | structure theorem and obstruction | the rightmost rule has one of three exact phase-toggle depth profiles, and a leading `R_cD_c⁺` first block is impossible | formalized | active |
+| [`MM-S55`](#mm-s55-physical-role-block-shell-completion) | structure theorem and obstruction | every physical swapped role block supplies its expected pole shell, coefficient depth, and lower unit, yielding a shell-free first-multi extinction theorem | formalized | active |
 | [`R32-S01`](#r32-s01-split-return-normal-form) | structure theorem | rank-two cuts reduce one-unit binary mortality to a `2 × 2` return recurrence | formalized | graduated |
 | [`R32-S02`](#r32-s02-two-plane-edge-square) | structure theorem | two rank-two generators are a two-vertex square of `2 × 2` edges | formalized | graduated |
 | [`R32-O01`](#r32-o01-rank-one-profile-collapse) | obstruction | a rank-one generator reduces mortality to order-at-most-three scalar recurrence zeros | audited | stock |
@@ -4996,8 +4997,9 @@ empty under the compiler envelope.
 **Scope:** this is a swapped-ternary `MM-M04` theorem. The discrepancy chamber requires
 `β≥6`; the physical ratio gap itself needs only `β≥2` and `head(body)=b`. The composed theorem
 retains every expected coefficient shell, lower-code unit, and centered first-transfer
-hypothesis of `MM-S35`. It does not classify arbitrary products outside that interface and does
-not by itself decide `M₅(3)`.
+hypothesis of `MM-S35`; [`MM-S55`](#mm-s55-physical-role-block-shell-completion) subsequently
+proves that the shell and unit hypotheses are automatic. It does not classify arbitrary
+products outside that interface and does not by itself decide `M₅(3)`.
 
 **Use:** delete the last local branch of the first swapped multi-transfer search. The master
 frontier moves to the global earliest-pole reduction: every arbitrary survivor must be shown to
@@ -5011,8 +5013,82 @@ through `allDeletionC_double_transferDiscrepancy`, `doubleDeletion_pole_targetRa
 **Artifact:**
 [`audits/m53-double-deletion-ratio-chamber-extinction-2026-08-31.md`](audits/m53-double-deletion-ratio-chamber-extinction-2026-08-31.md).
 
-**Next:** prove the global earliest-pole reduction from an arbitrary swapped product to the
-distinguished-boundary theorems or the now-empty expected-shell first-multi interface.
+**Next:** [`MM-S55`](#mm-s55-physical-role-block-shell-completion) removes the abstract shell
+bookkeeping; then prove the global earliest-pole reduction for a general centered fold.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S55: Physical role-block shell completion
+
+**Kind:** structure theorem and obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+The first multi-transfer extinction theorem formerly accepted six arithmetic hypotheses for its
+middle and target blocks: two expected shells, two exact coefficient valuations, and two
+lower-code units. They are automatic for every physical role block.
+
+A role block ends in an erasure, whose swapped lower spelling ends in ternary digit two. Hence
+
+```text
+V_z≡2 (mod 3),
+```
+
+so `V_z` is a `3`-adic unit. If the block has at least two roles, its final two lower digits are
+both two. The punctuated upper word also ends in two swapped marker digits. Thus, for `β≥2`,
+
+```text
+P_z≡8 (mod 9),       V_z≡8 (mod 9).                     (1)
+```
+
+Since `R=2−3^β≡2` and `H=5·3^β−1≡8` modulo nine,
+
+```text
+C_z=RP_z−HV_z≡6 (mod 9).                               (2)
+```
+
+Equation (2) gives exact coefficient depth one. A singleton role block must be `D_b` or `D_c`.
+Their closed coefficients are
+
+```text
+C_Db=−3^β(18·3^(2β)−40·3^β+17),
+C_Dc=−3^β(5·3^β−1),                                    (3)
+```
+
+and both parenthesized factors are units modulo three. Their exact depth is therefore `β`.
+`roleBlock_arithmeticShell` packages (1)-(3) as one existential depth with `HasPoleShell`,
+`HasValue`, and `IsUnit` witnesses.
+
+A second physical dichotomy removes the incoming-depth premise. Any role block other than the
+literal singleton `D_c` has upper length greater than one: a multi-role block has at least one
+upper symbol per role, while singleton `D_b` has length `β+2`. Therefore
+`physicalFirstMultiTransfer_pole_false` derives every arithmetic hypothesis of `MM-S51` from
+three `IsRoleBlock` witnesses and excludes the pole using only the compiler envelope, the exact
+centered two-step equation, and `first≠D_c`.
+
+**Scope:** the arithmetic shell theorem requires only `β≥2` and is independent of the compiler
+body. The shell-free extinction theorem uses `β≥6`, `|body|≥β−1`, and `head(body)=b`. It begins
+from the special centered state produced by one completed first block. A later fold state does
+not automatically have this form; the theorem supplies no sliding-window reinitialization and
+does not decide `M₅(3)`.
+
+**Use:** remove shell construction and lower-unit proof obligations from every physical use of
+the first-multi theorem. The master residual is now a history theorem, not local arithmetic:
+classify the earliest zero denominator in the centered fold from the ordinary reset.
+
+**Formalization:**
+[`MatrixMortality/SwappedSetterPhysicalShell.lean`](MatrixMortality/SwappedSetterPhysicalShell.lean),
+through `roleBlock_lower_isUnit`, `roleBlock_multi_coefficient_hasValue`,
+`singleton_coefficient_hasValue`, `roleBlock_arithmeticShell`, and
+`physicalFirstMultiTransfer_pole_false`.
+
+**Artifact:**
+[`audits/m53-physical-role-block-shell-completion-2026-08-31.md`](audits/m53-physical-role-block-shell-completion-2026-08-31.md).
+
+**Next:** formalize `centeredEarliestPole_is_terminal`: every earliest pole in an arbitrary
+centered fold is terminal, or else expose the exact later-history constructor not covered by
+the first-multi interface.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).

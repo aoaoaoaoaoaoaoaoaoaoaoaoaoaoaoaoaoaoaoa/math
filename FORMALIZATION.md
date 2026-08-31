@@ -1641,6 +1641,7 @@ The setter-projective audit now also exposes a kernel-friendly carry theorem:
 | [`MM-S50`](SALVAGE.md#mm-s50-long-all-erasure-singleton-extinction) | exact long all-erasure codes and discrepancy, uniform lower bound above twelve, both singleton target bounds, and double-deletion-only frontier theorem |
 | [`MM-S52`](SALVAGE.md#mm-s52-double-deletion-raw-ancestry-obstruction) | exact post-`D_c²` normalization, punctuated-code integrality gate, repeated-`D_c²` nonintegrality, and rational/integral carrier-pole equivalence |
 | [`MM-S51`](SALVAGE.md#mm-s51-double-deletion-ratio-chamber-extinction) | exact `D_c²` discrepancy chamber, physical role-block ratio gap, and complete expected-shell first multi-transfer extinction |
+| [`MM-S55`](SALVAGE.md#mm-s55-physical-role-block-shell-completion) | automatic physical pole shells, coefficient depths, lower-code units, initial-block dichotomy, and shell-free first-multi extinction |
 
 `MM-S08` is now discharged in
 [`SwappedSetterSingletonShell.lean`](MatrixMortality/SwappedSetterSingletonShell.lean).
@@ -1951,6 +1952,18 @@ algebraic bridge under a nonzero normalization denominator, and
 `carrierPole_iff_positiveDepthOnePole` proves that an integral specialization is exactly the
 `MM-S42` pole equation. Raw factorization and suffix ancestry remain separate witness fields;
 the actual `D_c²` pole is attacked directly in `MM-S51`.
+
+Record [`MM-S55`](SALVAGE.md#mm-s55-physical-role-block-shell-completion) removes the remaining
+abstract arithmetic hypotheses from that interface. Every role block ends in an erasure, so its
+swapped lower code is a `3`-adic unit. For a multi-role block, both physical codes are eight
+modulo nine and its centered coefficient is six modulo nine, hence has exact depth one. A
+singleton role block is necessarily `D_b` or `D_c`; the closed coefficient factorizations give
+exact depth `β`. Thus `roleBlock_arithmeticShell` constructs the shell, coefficient valuation,
+and lower unit from `IsRoleBlock` alone. The only role block of upper length one is literal
+`D_c`; `physicalFirstMultiTransfer_pole_false` excludes every other physical first block using
+only the compiler envelope and exact centered pole equation. The unresolved global problem is
+later history: a general fold state is not known to reinitialize to this special first-transfer
+form.
 
 Record [`MM-S21`](SALVAGE.md#mm-s21-bounded-decimal-suffix-cycles) closes the fixed-precision
 suffix-descent lane. `DecimalSetterSuffix.cycleDefect_lift` gives an explicit one-digit lift for
