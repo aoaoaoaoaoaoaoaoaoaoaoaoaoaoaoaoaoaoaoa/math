@@ -96,6 +96,7 @@ import MatrixMortality.TransverseLineAtlas
 import MatrixMortality.TransverseLineHardCore
 import MatrixMortality.TransverseInfiniteAtlas
 import MatrixMortality.BranchingHistory
+import MatrixMortality.SeparatedTwoCOrbit
 import MatrixMortality.PrefixResidual
 import MatrixMortality.AffineRecognizer
 import MatrixMortality.BranchingRecognizer

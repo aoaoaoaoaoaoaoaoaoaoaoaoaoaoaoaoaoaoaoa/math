@@ -196,8 +196,13 @@ periodic queues for every nontrivial even adjacent-two-`c` body. However,
 queue in this adjacent subfamily either halts or enters the lower cycle. The unresolved
 two-`c` source boundary therefore begins with separated `c` letters. See
 `audits/scheduled-binary-fixed-width-2026-07-24.md` and
-`audits/m53-width-three-sparse-source-2026-08-30.md`; the cycle proof is in
-`audits/m53-width-three-adjacent-cycles-2026-08-31.md`.
+`audits/m53-width-three-sparse-source-2026-08-30.md`; the adjacent-cycle proof is in
+`audits/m53-width-three-adjacent-cycles-2026-08-31.md`. The separated seam now has one exact
+internal boundary: for every `n>0` with
+`n mod 3≠2`, the coupled body `bb c bⁿ c bⁿ` enters a periodic nonhalting orbit
+([`MM-S25`](SALVAGE.md#mm-s25-separated-two-c-periodic-orbits)). This infinite separated
+two-`c` obstruction is not a source classification. See
+`audits/m53-separated-two-c-orbits-2026-08-31.md`.
 
 Full mortality requires coding the four payloads and the rank-one separator. The complete
 prefix code
@@ -746,6 +751,10 @@ Three live routes remain.
    coupled image. The next genuine source boundary is two separated `c` letters or at least
    three `c` letters. [`MM-S23`](SALVAGE.md#mm-s23-adjacent-two-c-periodic-pair) remains the
    unrestricted-queue warning that a second `c` already permits balanced reproduction.
+   [`MM-S25`](SALVAGE.md#mm-s25-separated-two-c-periodic-orbits)
+   supplies an explicit periodic obstruction for the diagonal separated bodies
+   `bb c bⁿ c bⁿ` in residues zero and one. The next source-level cut is the residue-two
+   diagonal or unequal separated runs, not another adjacent-`c` example.
 
 The decimal setter is now the sharpest constructive route. The ternary swap remains useful
 because its suffix and divisor-ray theory is mature; the decimal instance has stronger real

@@ -2013,6 +2013,7 @@ fixed-rank decision problem.
 | `TransverseLineHardCore.lean` | exact one-plane embedding of two-generator projective incidence into the identity-toggle transverse atlas |
 | `TransverseInfiniteAtlas.lean` | exact rank-two data family with an injectively infinite carrier-plane orbit under a nonprojective diagonal toggle |
 | `BranchingHistory.lean` | fixed `bcbc` terminal forks and affine positional lower bounds |
+| `SeparatedTwoCOrbit.lean` | exact coupled entry and periodic nonhalting orbits for an infinite separated two-`c` width-three family |
 | `AffineRecognizer.lean` | generic singular three-state guard-and-carry representation calculus |
 | `BranchingRecognizer.lean` | complete `bcbc` residual grammar and rational three-state recognizer |
 | `MixedBranchingHistory.lean` | equal-length mixed terminal grammar and exact raw-toggle normal form |
@@ -2438,6 +2439,8 @@ fixed-rank decision problem.
 | Every nontrivial even adjacent-two-`c` coupled queue halts or enters the lower cycle | `adjacentBody_coupled_normal_form` |
 | Halting of every such coupled queue is constructively decidable | `adjacentBodyCoupledHaltsDecidable` |
 | Every nontrivial even body `b^p c c b^s` has two explicit nonhalting queues | `lowerCycleQueue_not_halts`, `upperCycleQueue_not_halts` |
+| The separated body `bb c bⁿ c bⁿ` has an exact `Cₙ→Dₙ→Cₙ` cycle when `n≡0,1 (mod 3)` | `SeparatedTwoCOrbit.cycleQueue_step`, `SeparatedTwoCOrbit.zeroResidue_cycle`, `SeparatedTwoCOrbit.oneResidue_cycle` |
+| Every positive non-residue-two diagonal separated body has a nonhalting coupled input | `SeparatedTwoCOrbit.separated_not_tagHaltsFrom` |
 | Every binary prefix-machine word has one decoded block per row | `prefixMachine_run`, `WeightedTransducer.wordProduct_apply` |
 | Prefix-machine mortality iff five-matrix mortality | `prefixMachine_mortal_iff_normalized` |
 | Both prefix generators share the ten-dimensional image | `prefixProjection_generator` |
@@ -2669,8 +2672,10 @@ class remains unresolved in the located literature. The width-three Lean theorem
 a conditional five-state reduction and an exact-rank result, not an established undecidable
 cell. The sparse source stratum is nevertheless closed: Lean proves termination for every
 coupled body containing at most one `c`, and therefore proves that any exact code-halting source
-family must emit at least two `c` letters on some rejecting code. No declaration claims that
-the two-`c` stratum is universal or decidable.
+family must emit at least two `c` letters on some rejecting code. Within that seam,
+`SeparatedTwoCOrbit.lean` proves that every body `bb c bⁿ c bⁿ` with `n>0` and
+`n mod 3≠2` has a nonhalting coupled input by an exact periodic macro. This is an infinite
+obstruction stratum, not a classification or a universality theorem.
 
 ## Prior Formalizations
 

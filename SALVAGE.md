@@ -120,6 +120,7 @@ file owns the mathematical stock.
 | [`MM-S21`](#mm-s21-bounded-decimal-suffix-cycles) | obstruction | every emitted multi-role block has a compatible projective self-loop in every bounded decimal-suffix quotient | formalized core; audited assembly | active |
 | [`MM-S22`](#mm-s22-gap-factor-quotient-gate) | structure theorem and obstruction | every gap-clean denominator-descended carrier hitting a singleton must pass two exact gap-factor code congruences | formalized | active |
 | [`MM-S24`](#mm-s24-factorwise-gap-ancestry) | structure theorem and obstruction | every gap factor has an exact lower-code propagation law and imposes its own singleton quotient gate while it remains numerator-coprime | formalized | active |
+| [`MM-S25`](#mm-s25-separated-two-c-periodic-orbits) | structure theorem and obstruction | an infinite separated two-`c` width-three family has explicit nonhalting coupled orbits | formalized | active |
 | [`MM-S26`](#mm-s26-exact-raw-head-prime-support) | structure theorem | the prime support shared by the primitive gap and the initial unit two-`c` carrier is exactly the support of one explicit run-length exponential | formalized | active |
 | [`R32-S01`](#r32-s01-split-return-normal-form) | structure theorem | rank-two cuts reduce one-unit binary mortality to a `2 × 2` return recurrence | formalized | graduated |
 | [`R32-S02`](#r32-s02-two-plane-edge-square) | structure theorem | two rank-two generators are a two-vertex square of `2 × 2` edges | formalized | graduated |
@@ -4019,6 +4020,59 @@ through `gapFactorDivisor_coprime_nine` and `rawHead_factor_iff`.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S25: Separated two-c periodic orbits
+
+**Kind:** structure theorem and obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+For `n>0`, let
+
+```text
+qₙ = bb c bⁿ c bⁿ,
+Iₙ = qₙ.drop 2 · b,
+Cₙ = c b^(2n+2),
+Dₙ = b^(2n+2) c bⁿ c b^(n+1).
+```
+
+Use deletion width three with productions `b↦b` and `c↦qₙb`. If `n≡0` or `1 (mod 3)`,
+the coupled input `Iₙ` reaches `Cₙ`. The leading `c` then gives one exact step `Cₙ→Dₙ`.
+For `n=3(k+1)`, the return history is
+
+```text
+(bbb)^(2k+2), bbc, (bbb)^(k+1),
+```
+
+while for `n=3k+1` it is
+
+```text
+(bbb)^(2k+1), bcb, (bbb)^k.
+```
+
+Every return stroke has head `b`. The histories therefore emit respectively `3k+4` and
+`3k+2` copies of `b`, exactly restoring `Cₙ`. Thus `Cₙ→Dₙ→Cₙ` has exact length `n+2`, and
+the coupled source does not halt. The case `n=1` has a separate one-step entry because its
+first wake is `bc`; the same return formula already covers its cycle.
+
+**Scope:** this proves an infinite nonhalting family of admissible separated two-`c` bodies.
+It does not classify the residue-two diagonal, bodies with unequal outer runs, or arbitrary
+`bᵖ c bʳ c bˢ`; it supplies no width-three universality theorem.
+
+**Use:** any width-three source construction must escape these exact periodic rays. Treat the
+middle separation `r>0` as genuine dynamics rather than an automatic halting condition.
+
+**Formalization:**
+[`MatrixMortality/SeparatedTwoCOrbit.lean`](MatrixMortality/SeparatedTwoCOrbit.lean), through
+`cycleQueue_step`, `zeroResidue_expanded_reaches_cycle`,
+`oneResidue_expanded_reaches_cycle`, `zeroResidue_cycle`, `oneResidue_cycle`, and
+`separated_not_tagHaltsFrom`.
+
+**Artifact:**
+[`audits/m53-separated-two-c-orbits-2026-08-31.md`](audits/m53-separated-two-c-orbits-2026-08-31.md).
+
+**Next:** decide the residue-two diagonal and then test whether unequal outer runs admit a
+finite arithmetic macro system or unbounded queue growth.
 
 ## Rank-Three Binary Frontier
 
