@@ -96,10 +96,12 @@ import MatrixMortality.BranchingHistory
 import MatrixMortality.TransverseInfiniteCollision
 import MatrixMortality.TransverseSeparatedAtlas
 import MatrixMortality.TransverseSeparatedForkNoGo
+import MatrixMortality.TerminalForkCore
 import MatrixMortality.PrefixResidual
 import MatrixMortality.AffineRecognizer
 import MatrixMortality.BranchingRecognizer
 import MatrixMortality.MixedBranchingRecognizer
+import MatrixMortality.MixedBranchingPersistentGuard
 import MatrixMortality.SquareRootPunctuation
 import MatrixMortality.TernaryClosedBlockNoGo
 import MatrixMortality.ThreePhaseBinaryNoGo

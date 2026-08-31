@@ -249,7 +249,10 @@ file owns the mathematical stock.
 | [`G3-O07`](#g3-o07-near-fork-carry-collision) | obstruction | a terminal and nonterminal `bcbc` near-fork collide under the entire one-coordinate phase-line carry family | formalized | graduated |
 | [`G3-C02`](#g3-c02-fixed-bcbc-singular-recognizer) | fixed-instance compiler | a transient guard over one affine carry recognizes the complete `bcbc` language | audited, with formalized core | graduated |
 | [`G3-C05`](#g3-c05-equal-length-mixed-branching-recognizer) | fixed-instance compiler | three singular controls recognize the complete `bcbcbb` paired zero language | formalized | graduated |
-| [`G3-C06`](#g3-c06-distinct-data-infinite-carrier-candidate) | candidate mechanism | one invertible left multiplier separates the `bcbc` near-fork uniformly while preserving rank-two data, the infinite `tⁿb` carrier orbit, and delayed terminal sections | formalized | active |
+| [`G3-C06`](#g3-c06-distinct-data-infinite-carrier-candidate) | candidate mechanism | one invertible left multiplier separates the `bcbc` near-fork uniformly while preserving rank-two data, the infinite `tⁿb` carrier orbit, and delayed terminal sections | formalized | closed |
+| [`G3-O35`](#g3-o35-distinct-data-terminal-fork-obstruction) | obstruction | the complete `bcbc` fork forces a false zero for the separated infinite-carrier generator at every rational source | formalized | graduated |
+| [`G3-S03`](#g3-s03-terminal-fork-invariant-core) | structure theorem | every exact three-state `bcbc` recognizer contains a nonzero proper flat/nested-fork carrier of dimension one or two | formalized | graduated |
+| [`G3-C07`](#g3-c07-persistent-guard-rank-escape) | fixed-instance compiler | an even persistent guard makes data `b` full-rank while preserving the complete `bcbcbb` zero language | formalized | graduated |
 | [`G3-M02`](#g3-m02-square-root-punctuation-fracture) | partial mechanism | a rank-two square root gives an exact `SS`-free mortality grammar | formalized | closed |
 | [`G3-O10`](#g3-o10-square-root-boundary-saturation) | obstruction | every nondegenerate rank-one square root preserves boundary coefficient zeros | formalized | graduated |
 | [`G3-M01`](#g3-m01-free-group-discrepancy-engine) | partial mechanism | Carvalho's transducer gives an all-word marker-tail equation and a cyclic exponent-one equalizer | audited | active |
@@ -9833,6 +9836,104 @@ section, and complete arbitrary-word converse.
 **Next:** vary the distinct data action so that the flat/nested quotient commutator or the prefix
 rank argument degenerates lawfully without restoring a terminal/nonterminal collision; otherwise
 leave the nonprojective orbit and attack the joint `M₂(3)` core or a full-rank data map.
+
+### G3-S03: Terminal-fork invariant core
+
+**Kind:** structure theorem
+
+**Evidence:** formalized
+
+**Disposition:** graduated
+
+Every rational three-state same-zero recognizer of the fixed `bcbc` paired source contains a
+nonzero proper common invariant subspace for the flat and nested null-block products.
+
+Let `A` be the fixed terminal prefix product, `F₀,F₁` the flat and nested fork-block
+products, `q=Tγ`, and `r=λA`. Lean defines
+
+```text
+W = spanℚ { F_w q | w ∈ {0,1}* }.
+```
+
+The complete terminal fork makes `r` annihilate every generator of `W`; hence `W⊆ker r`.
+Prepending either bit proves `F₀W⊆W` and `F₁W⊆W`. Exact same-zero recognition forces
+`q≠0`, since otherwise the raw toggle is a false zero, and forces `r≠0`, since otherwise the
+unterminated prefix is a false zero. Therefore
+
+```text
+0 < dim W < 3,
+```
+
+so `dim W∈{1,2}`. This extracts the indispensable geometry behind `G3-O35` without its common
+kernel, quotient coordinates, commutator factorization, or source parameter.
+
+**Scope:** the theorem uses the fixed `bcbc` terminal fork and three target states. It constrains
+the two composite fork blocks, not every raw generator. It does not decide the dynamics inside
+`W` or prove that every body supplies such a fork.
+
+**Use:** reject generic irreducible full-rank fork candidates immediately. If both fork blocks
+are invertible, their restrictions to `W` are one- or two-dimensional automorphisms. The
+two-dimensional branch is the exact positive projective-incidence seam shared with `M₂(3)`;
+the third coordinate can only guard entry to or exit from that terminal core.
+
+**Artifact:** [`TerminalForkCore.lean`](MatrixMortality/TerminalForkCore.lean) and
+[`m34-terminal-fork-core-and-persistent-guard-2026-08-31.md`](audits/m34-terminal-fork-core-and-persistent-guard-2026-08-31.md).
+
+**Next:** build a source-uniform singular gate into a non-elementary two-state fork core, or
+derive a positive-semigroup decision theorem for every core that can be reached by the paired
+prefix geometry. A generic `GL₃` fork is no longer a live architecture.
+
+### G3-C07: Persistent-guard rank escape
+
+**Kind:** fixed-instance compiler
+
+**Evidence:** formalized
+
+**Disposition:** graduated
+
+The complete all-word `bcbcbb` recognizer survives a one-sided full-rank deformation. Retain its
+carry, data-`c` reset, toggle, row, and column, but replace data `b` by
+
+```text
+D_b(m) = [m  2        1]
+         [0  5  3703455]
+         [0  0        1]
+```
+
+for any even integer `m`. The new guard recurrence is
+
+```text
+g(bw) = m g(w) + 2k(w) + 1.
+```
+
+It is odd whenever `m` is even, so a `b`-headed word never vanishes. Data `c` still refreshes the
+guard to the original accepting-carry equation. Lean proves, on every raw control word,
+
+```text
+newCoefficient_m(w)=0 ⇔ oldCoefficient(w)=0
+                         ⇔ pairedCoefficient(3,bcbcbb,w)=0.
+```
+
+For `m≠0`, `det D_b(m)=5m` and the rational rank of `D_b(m)` is three. Data `c` remains the
+singular reset, so the two data controls no longer share a kernel.
+
+**Scope:** this is an exact fixed-body compiler, not a source-uniform reduction. Its carry is
+still expanding affine and its data-`c` transition remains singular. It disproves the necessity
+of two singular data controls or a common-kernel shuttle; it does not make the complete raw
+action invertible or settle `M₃(4)`.
+
+**Use:** the nearest lawful positive architecture is now a one-sided singular gate feeding a
+persistent full-rank action. Lower bounds may not assume common data kernels. Constructors should
+place source-dependent complexity in the persistent action while using the singular letter to
+enforce the complete arbitrary-word converse.
+
+**Artifact:**
+[`MixedBranchingPersistentGuard.lean`](MatrixMortality/MixedBranchingPersistentGuard.lean) and
+[`m34-terminal-fork-core-and-persistent-guard-2026-08-31.md`](audits/m34-terminal-fork-core-and-persistent-guard-2026-08-31.md).
+
+**Next:** replace the fixed accepting-carry constant by a source-computable terminal geometry
+without entering the finite-target class of `G3-O04`. The terminal-fork core must remain
+one- or two-dimensional by `G3-S03`.
 
 ### G3-O13: Rational serializer pumping
 

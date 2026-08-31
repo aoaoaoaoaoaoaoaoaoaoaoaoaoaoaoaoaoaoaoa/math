@@ -263,6 +263,9 @@ open MatrixMortality
 #print axioms TransverseSeparatedForkNoGo.terminalForkControl_paired_zero
 #print axioms TransverseSeparatedForkNoGo.zeroSource_wordProduct_collision
 #print axioms TransverseSeparatedForkNoGo.no_bcbc_sameZero
+#print axioms TerminalForkCore.forkTransition_mulVec_mem_carrier
+#print axioms TerminalForkCore.boundaryRow_dot_eq_zero_of_mem
+#print axioms TerminalForkCore.carrier_finrank_one_or_two_of_sameZero
 #print axioms BranchingHistory.bcbcNull_append
 #print axioms BranchingHistory.bcbcForkRoles_injective
 #print axioms BranchingHistory.bcbcTerminalFork_injective
@@ -298,6 +301,10 @@ open MatrixMortality
 #print axioms MixedBranchingRecognizer.recognizerCoefficient_eq_zero_iff_paired
 #print axioms MixedBranchingRecognizer.recognizerData_mulVec_eq_zero_iff
 #print axioms MixedBranchingRecognizer.recognizerProduct_ne_zero
+#print axioms MixedBranchingPersistentGuard.wordProduct_mulVec_delta
+#print axioms MixedBranchingPersistentGuard.guard_eq_zero_iff_recognizerGuard
+#print axioms MixedBranchingPersistentGuard.coefficient_eq_zero_iff_paired
+#print axioms MixedBranchingPersistentGuard.data_b_rank_rat
 #print axioms SquareRootPunctuation.coefficient_append_square
 #print axioms SquareRootPunctuation.exists_squareFree_zero_of_zero
 #print axioms SquareRootPunctuation.isMortal_iff_exists_squareFree_zero
