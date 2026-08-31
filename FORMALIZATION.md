@@ -1369,7 +1369,7 @@ transition: `peeledNumerator_twoAdic_deepens` proves that the difference of the 
 every non-singleton consecutive multi-pole block to have upper length at least three. The module
 does not identify later product residuals with raw encoded heads or decide singleton targets.
 
-The dimension-two affine ledger has fifteen independently checked records:
+The dimension-two affine ledger has sixteen independently checked records:
 
 | Record | Formalization obligation |
 | --- | --- |
@@ -1377,6 +1377,7 @@ The dimension-two affine ledger has fifteen independently checked records:
 | [`D2-S04`](SALVAGE.md#d2-s04-real-trap-ternary-predecessor-nucleus) | computable maximal predecessor wait, sharp three-wait real-trap window, and exact fixed-source one-step reduction |
 | [`D2-S05`](SALVAGE.md#d2-s05-fixed-source-real-trap-rays) | exact source trisection, normalized mantissa rays, target-depth offsets, and one-candidate fixed-source membership |
 | [`D2-S06`](SALVAGE.md#d2-s06-spectator-prime-denominator-skeleton) | preservation of every prime-to-30 denominator exponent through arbitrary shell schedules and first exits |
+| [`D2-S07`](SALVAGE.md#d2-s07-period-ten-shell-guard) | exact period-ten acceptance at every unit source and reduction of every outgoing wait to ten residue tests |
 | [`D2-D05`](SALVAGE.md#d2-d05-prescribed-translation-count) | primitive linear-polynomial divisibility, bounded carries in both scan directions, ordered-marker automaton, regular control, and `a=±1` cases |
 | [`D2-D06`](SALVAGE.md#d2-d06-private-prime-peeling) | unique-minimum valuation calculation, zero endpoints, fixed-count reduction, reversed language, and positive private valuation |
 | [`D2-D07`](SALVAGE.md#d2-d07-bounded-valuation-orthants) | localization support, denominator bounds in both orthants, invariant-interval recognition, finite graph, and regular-control product |
@@ -1750,6 +1751,7 @@ fixed-rank decision problem.
 | `MixedPrimeRealTrapReset.lean` | full normalized pole branch, its unbounded period-fifty guarded depth-reset family, fixed-source feeder, exact two-/three-adic profile, and target injectivity |
 | `MixedPrimeRealTrapAddress.lean` | exact fixed-source trisection into three normalized-mantissa rays and one-candidate membership |
 | `MixedPrimeSpectator.lean` | invariant spectator-prime denominator skeleton for every shell prefix and first exit |
+| `MixedPrimeFiveCarry.lean` | exact period-ten one-step shell guard and finite outgoing-wait classifier |
 | `MixedPrimeKernel.lean` | raw mixed-prime affine action, contextual composition, an infinite odd-length kernel family from length 29, and three independent length-30 relations |
 | `MixedPrimeNormalization.lean` | exact homogeneous odd-family relations, persistence under independent normalization scaling, and the two-seed cancellative pump |
 | `ReturnGuard.lean` | three-mode amalgamated return algebra, split mortality compiler, and exact state lower bound |
@@ -1968,6 +1970,7 @@ fixed-rank decision problem.
 | Every real-trap target has a computable sharp three-wait predecessor window, reducing fixed-source one-step reachability to three equalities | `MixedPrimeDebt.shellStep_realTrap_wait_window`, `MixedPrimeDebt.exists_shellStep_realTrap_iff_three_candidates`, `MixedPrimeDebt.shellStep_realTrap_wait_window_sharp` |
 | Every fixed real-trap source has its complete one-step orbit on one normalized-mantissa ray; target depth leaves one exact candidate | `MixedPrimeDebt.shellStep_realTrap_upperRay`, `MixedPrimeDebt.shellStep_realTrap_middleRay`, `MixedPrimeDebt.shellStep_realTrap_lowerRay`, `MixedPrimeDebt.exists_shellStep_realTrap_upper_iff_candidate`, `MixedPrimeDebt.exists_shellStep_realTrap_middle_iff_candidate`, `MixedPrimeDebt.exists_shellStep_realTrap_lower_iff_candidate` |
 | Every reduced-denominator exponent away from `2`, `3`, and `5` is invariant through arbitrary shell execution, including first exits | `MixedPrimeDebt.shellRun_spectatorDenominator`, `MixedPrimeDebt.shellRun_spectatorDenominator_of_ne_active`, `MixedPrimeDebt.shellRun_ne_of_spectatorDenominator_ne` |
+| At every `5`-adic unit source, one-step shell acceptance depends only on the wait modulo ten | `MixedPrimeDebt.shellStep_fiveUnit_add_ten_iff`, `MixedPrimeDebt.shellStep_fiveUnit_add_ten_mul_iff`, `MixedPrimeDebt.shellStep_fiveUnit_iff_mod_ten` |
 | Every sufficiently deep normalized source band occurs on the deepest real-trap predecessor branch; a period-fifty subfamily preserves both endpoint unit guards at unbounded depth, is fed from the fixed source `2/9`, has exact two-/three-adic values, and has distinct targets | `MixedPrimeDebt.realTrapMaxPredecessorWait_bandPoint`, `MixedPrimeDebt.shellStep_realTrap_poleBranch_full`, `MixedPrimeDebt.shellStep_realTrap_guardedPoleReset`, `MixedPrimeDebt.shellStep_realTrap_guardedPoleFeed`, `MixedPrimeDebt.shellStep_realTrap_guardedPoleFeed_target_injective`, `MixedPrimeDebt.shellStep_realTrap_guardedPoleReset_twoThreeValues`, `MixedPrimeDebt.shellStep_realTrap_guardedPoleReset_target_injective` |
 | Shell phases are all units exactly when the final output is a unit | `PeriodicShell.shellPrefixesUnit_iff` |
 | Raw words and shell schedules are conjugate, and every boundary-shifted benchmark schedule is one contextual raw rule | `PeriodicShell.shellRun_eq_wordAction`, `PeriodicShell.shellRawWord_benchmarkRelationShiftLeft`, `PeriodicShell.shellRawWord_benchmarkRelationShiftRight`, `PeriodicShell.shellRun_benchmarkRelationShift` |
