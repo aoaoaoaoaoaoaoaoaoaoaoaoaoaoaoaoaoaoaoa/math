@@ -1,4 +1,4 @@
-import MatrixMortality.NearyEncoding
+import MatrixMortality.SwappedSetterResidual
 
 /-!
 # Compiler congruence for swapped-setter residuals
@@ -297,5 +297,32 @@ theorem swappedDeltaThree_residual_false (β : Nat) (body wake : List TagLetter)
     swappedDeltaThree_history_of_residual β body wake (by omega) rest residual
   exact swappedDeltaThree_history_false β body wake β_large body_divisible wake_length
     first history semantic_eq
+
+/-- No body of Neary-congruent length realizes the complete first fringe pair. -/
+theorem swappedDeltaOne_fringe_false {β : Nat} (β_large : 2 < β)
+    (body : List TagLetter) (body_divisible : β - 1 ∣ body.length)
+    (word : List NearyTile) (suffix : List Bool)
+    (upper_eq :
+      spell (nearyUpper β) word ++ nearyMarker β =
+        SwappedSetterResidual.deltaOneUpper β ++ suffix)
+    (lower_eq : spell (nearyLower β body) word = suffix) : False := by
+  obtain ⟨rest, _, residual⟩ :=
+    SwappedSetterResidual.deltaOne_residual_decomposition (by omega) body word suffix
+      upper_eq lower_eq
+  exact swappedDeltaOne_residual_false β body β_large body_divisible rest residual
+
+/-- No body of Neary-congruent length realizes the complete second fringe pair. -/
+theorem swappedDeltaThree_fringe_false {β : Nat} (β_large : 2 < β)
+    (body : List TagLetter) (body_divisible : β - 1 ∣ body.length)
+    (word : List NearyTile) (suffix : List Bool)
+    (upper_eq :
+      spell (nearyUpper β) word ++ nearyMarker β = tagCode β .b ++ suffix)
+    (lower_eq :
+      spell (nearyLower β body) word = List.replicate (β - 1) false ++ suffix) : False := by
+  obtain ⟨wake, rest, wake_length, _, residual⟩ :=
+    SwappedSetterResidual.deltaThree_residual_decomposition (by omega) body word suffix
+      upper_eq lower_eq
+  exact swappedDeltaThree_residual_false β body wake β_large body_divisible wake_length rest
+    residual
 
 end MatrixMortality
