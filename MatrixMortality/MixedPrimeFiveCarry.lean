@@ -6,7 +6,8 @@ import Mathlib.NumberTheory.Multiplicity
 
 For every five-adic unit source, one-step shell acceptance is exactly periodic in the wait with
 period ten.  A fixed tail of length `ℓ` raises the sufficient wait period to `2·5^(ℓ+1)`, and
-zero preimages prove that this precision exponent is sharp uniformly.
+zero preimages prove that this precision exponent is sharp uniformly. No positive fixed modulus
+classifies guards through tails of every length.
 -/
 
 namespace MatrixMortality.MixedPrimeDebt
@@ -23,22 +24,26 @@ private theorem unit_pow
   rw [padicValRat.pow, value_unit.2]
   simp
 
-private theorem shellRatio_precisionPeriod_sub_one_hasValue (precision : ℕ) :
-    HasValue 5 ((2 / 3 : ℚ) ^ (2 * 5 ^ precision) - 1) (precision + 1) := by
-  let exponent := 5 ^ precision
-  have exponent_ne : exponent ≠ 0 := by simp [exponent]
+private theorem shellRatio_evenMultiple_sub_one_hasValue
+    (multiplier : ℕ) (multiplier_ne : multiplier ≠ 0) :
+    HasValue 5 ((2 / 3 : ℚ) ^ (2 * multiplier) - 1)
+      ((padicValNat 5 multiplier : ℤ) + 1) := by
+  let exponent := multiplier
+  have exponent_ne : exponent ≠ 0 := multiplier_ne
   have lte :
-      padicValNat 5 (9 ^ exponent - 4 ^ exponent) = precision + 1 := by
+      padicValNat 5 (9 ^ exponent - 4 ^ exponent) =
+        padicValNat 5 multiplier + 1 := by
     have lifted := padicValNat.pow_sub_pow (p := 5) (by norm_num : Odd 5)
       (by norm_num : 4 < 9) (by norm_num : 5 ∣ 9 - 4) (by norm_num : ¬5 ∣ 9)
       exponent_ne
     rw [show 9 - 4 = 5 by norm_num, padicValNat_self,
-      show exponent = 5 ^ precision by rfl, padicValNat.prime_pow] at lifted
+      show exponent = multiplier by rfl] at lifted
     simpa [Nat.add_comm] using lifted
   have numerator_positive : 0 < 9 ^ exponent - 4 ^ exponent :=
     Nat.sub_pos_of_lt (Nat.pow_lt_pow_left (by norm_num) exponent_ne)
   have numerator_value :
-      HasValue 5 ((9 ^ exponent - 4 ^ exponent : ℕ) : ℚ) (precision + 1) := by
+      HasValue 5 ((9 ^ exponent - 4 ^ exponent : ℕ) : ℚ)
+        ((padicValNat 5 multiplier : ℤ) + 1) := by
     refine ⟨by positivity, ?_⟩
     rw [padicValRat.of_nat, lte]
     norm_num
@@ -58,10 +63,18 @@ private theorem shellRatio_precisionPeriod_sub_one_hasValue (precision : ℕ) :
     ring
   · omega
 
-private theorem shellStep_add_precisionPeriod_sub_hasValue
-    (wait precision : ℕ) {state : ℚ} (state_unit : IsUnit 5 state) :
+private theorem shellRatio_precisionPeriod_sub_one_hasValue (precision : ℕ) :
+    HasValue 5 ((2 / 3 : ℚ) ^ (2 * 5 ^ precision) - 1) (precision + 1) := by
+  have general := shellRatio_evenMultiple_sub_one_hasValue (5 ^ precision) (by positivity)
+  rw [padicValNat.prime_pow] at general
+  simpa using general
+
+private theorem shellStep_add_evenMultiple_sub_hasValue
+    (wait multiplier : ℕ) (multiplier_ne : multiplier ≠ 0)
+    {state : ℚ} (state_unit : IsUnit 5 state) :
     HasValue 5
-      (shellStep (wait + 2 * 5 ^ precision) state - shellStep wait state) precision := by
+      (shellStep (wait + 2 * multiplier) state - shellStep wait state)
+      (padicValNat 5 multiplier) := by
   have two_unit : IsUnit 5 (2 : ℚ) := intCast_isUnit_of_not_dvd (by norm_num)
   have three_unit : IsUnit 5 (3 : ℚ) := intCast_isUnit_of_not_dvd (by norm_num)
   have five_value : HasValue 5 (5 : ℚ) 1 := by
@@ -73,19 +86,31 @@ private theorem shellStep_add_precisionPeriod_sub_hasValue
   have numerator_value :
       HasValue 5
         (3 * (2 / 3 : ℚ) ^ wait * state *
-          ((2 / 3 : ℚ) ^ (2 * 5 ^ precision) - 1)) (precision + 1) := by
+          ((2 / 3 : ℚ) ^ (2 * multiplier) - 1))
+        ((padicValNat 5 multiplier : ℤ) + 1) := by
     simpa using
-      mul_hasValue prefix_unit (shellRatio_precisionPeriod_sub_one_hasValue precision)
+      mul_hasValue prefix_unit
+        (shellRatio_evenMultiple_sub_one_hasValue multiplier multiplier_ne)
   have quotient_value := div_hasValue numerator_value five_value
   have quotient_value' :
       HasValue 5
         (3 * (2 / 3 : ℚ) ^ wait * state *
-          ((2 / 3 : ℚ) ^ (2 * 5 ^ precision) - 1) / 5) precision := by
+          ((2 / 3 : ℚ) ^ (2 * multiplier) - 1) / 5)
+        (padicValNat 5 multiplier) := by
     convert quotient_value using 1
     omega
   convert quotient_value' using 1
   simp only [shellStep, pow_add]
   ring
+
+private theorem shellStep_add_precisionPeriod_sub_hasValue
+    (wait precision : ℕ) {state : ℚ} (state_unit : IsUnit 5 state) :
+    HasValue 5
+      (shellStep (wait + 2 * 5 ^ precision) state - shellStep wait state) precision := by
+  have general :=
+    shellStep_add_evenMultiple_sub_hasValue wait (5 ^ precision) (by positivity) state_unit
+  rw [padicValNat.prime_pow] at general
+  simpa using general
 
 /-- At a five-adic unit source, adding ten to a wait preserves one-step shell acceptance. -/
 theorem shellStep_fiveUnit_add_ten_iff
@@ -132,6 +157,22 @@ theorem shellStep_fiveUnit_iff_mod_ten
   rw [wait_decomposition] at periodic
   exact periodic
 
+/-- An even wait perturbation loses one five-adic valuation unit at every later block. -/
+private theorem shellRun_tail_add_evenMultiple_sub_hasValue
+    (wait multiplier : ℕ) (multiplier_ne : multiplier ≠ 0)
+    (tail : List ℕ) {state : ℚ} (state_unit : IsUnit 5 state) :
+    HasValue 5
+      (shellRun tail (shellStep (wait + 2 * multiplier) state) -
+        shellRun tail (shellStep wait state))
+      ((padicValNat 5 multiplier : ℤ) - tail.length) := by
+  have step_difference :=
+    shellStep_add_evenMultiple_sub_hasValue wait multiplier multiplier_ne state_unit
+  have slope_value := shellSlope_hasValue_five tail
+  have transported := mul_hasValue slope_value step_difference
+  rw [shellRun_sub_shellRun]
+  convert transported using 1
+  ring
+
 /-- A wait perturbation of five-adic precision `precision` loses one valuation unit at every
 later block. -/
 private theorem shellRun_tail_add_period_sub_hasValue
@@ -140,13 +181,10 @@ private theorem shellRun_tail_add_period_sub_hasValue
       (shellRun tail (shellStep (wait + 2 * 5 ^ precision) state) -
         shellRun tail (shellStep wait state))
       ((precision : ℤ) - tail.length) := by
-  have step_difference :=
-    shellStep_add_precisionPeriod_sub_hasValue wait precision state_unit
-  have slope_value := shellSlope_hasValue_five tail
-  have transported := mul_hasValue slope_value step_difference
-  rw [shellRun_sub_shellRun]
-  convert transported using 1
-  ring
+  have general := shellRun_tail_add_evenMultiple_sub_hasValue
+    wait (5 ^ precision) (by positivity) tail state_unit
+  rw [padicValNat.prime_pow] at general
+  simpa using general
 
 /-- The guard after a fixed tail sees its incoming wait only modulo
 `2·5^(tail.length+1)`. -/
@@ -260,6 +298,37 @@ theorem shellRun_tail_precisionPeriod_sharp (wait : ℕ) (tail : List ℕ) :
     convert shellRun_tail_add_period_sub_hasValue wait tail.length tail source_unit using 1
     simp
   refine ⟨source_unit, original_zero, ?_⟩
+  simpa only [original_zero, sub_zero] using difference_unit
+
+/-- No positive fixed wait modulus classifies shell guards through tails of all lengths. For
+every modulus, congruent waits flip zero to a unit at an explicit unit source. -/
+theorem shellRun_fixedModulus_sharp
+    (modulus : ℕ) (modulus_ne : modulus ≠ 0) (wait : ℕ) :
+    let tail := List.replicate (padicValNat 5 modulus) 0
+    let source := shellZeroPreimage (wait :: tail)
+    (wait + 2 * modulus) ≡ wait [MOD modulus] ∧
+      IsUnit 5 source ∧
+      shellRun tail (shellStep wait source) = 0 ∧
+      IsUnit 5 (shellRun tail (shellStep (wait + 2 * modulus) source)) := by
+  let tail := List.replicate (padicValNat 5 modulus) 0
+  let source := shellZeroPreimage (wait :: tail)
+  have waits_modEq : (wait + 2 * modulus) ≡ wait [MOD modulus] := by
+    apply Nat.ModEq.symm
+    rw [Nat.modEq_iff_dvd' (by omega)]
+    simp
+  have source_unit : IsUnit 5 source :=
+    shellZeroPreimage_fiveUnit (waits := wait :: tail) (by simp)
+  have original_zero : shellRun tail (shellStep wait source) = 0 := by
+    rw [← shellRun_cons]
+    exact shellRun_shellZeroPreimage (wait :: tail)
+  have difference_unit :
+      IsUnit 5
+        (shellRun tail (shellStep (wait + 2 * modulus) source) -
+          shellRun tail (shellStep wait source)) := by
+    convert shellRun_tail_add_evenMultiple_sub_hasValue
+      wait modulus modulus_ne tail source_unit using 1
+    simp [tail]
+  refine ⟨waits_modEq, source_unit, original_zero, ?_⟩
   simpa only [original_zero, sub_zero] using difference_unit
 
 end MatrixMortality.MixedPrimeDebt

@@ -11517,6 +11517,12 @@ schedule `m::tail`, this source reaches zero, whereas changing `m` by only `2·5
 final output by a `5`-adic unit. Thus no fixed modulus can classify incoming waits through tails
 of all lengths.
 
+The no-go is formal for every positive modulus, not only powers of five. Given `M>0`, take a tail
+of length `v₅(M)` and its unit zero preimage. The waits `m` and `m+2M` are congruent modulo `M`;
+lifting the exponent gives exactly enough initial precision loss that the first schedule still
+outputs zero while the second outputs a unit. Hence every fixed congruence quotient identifies
+opposite guard outcomes at some depth.
+
 **Scope:** the result excludes uniform fixed-modulus compression, not finite automata with richer
 annotations, unbounded counters, or target-dependent arithmetic. It does not decide fixed-target
 reachability.
@@ -11527,7 +11533,8 @@ reachability.
 `shellRun_tail_fiveUnit_*precisionPeriod*` theorems,
 `MixedPrimeDebt.shellRun_shellZeroPreimage`,
 `MixedPrimeDebt.shellZeroPreimage_fiveUnit`, and
-`MixedPrimeDebt.shellRun_tail_precisionPeriod_sharp` in
+`MixedPrimeDebt.shellRun_tail_precisionPeriod_sharp`, and
+`MixedPrimeDebt.shellRun_fixedModulus_sharp` in
 [`MixedPrimeFiveCarry.lean`](MatrixMortality/MixedPrimeFiveCarry.lean).
 
 **Use:** replace every unbounded outgoing guarded-wait test by ten exact residue tests, but reject

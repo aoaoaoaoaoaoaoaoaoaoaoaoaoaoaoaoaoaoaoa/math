@@ -749,6 +749,7 @@ open MatrixMortality
 #print axioms MixedPrimeDebt.shellRun_shellZeroPreimage
 #print axioms MixedPrimeDebt.shellZeroPreimage_fiveUnit
 #print axioms MixedPrimeDebt.shellRun_tail_precisionPeriod_sharp
+#print axioms MixedPrimeDebt.shellRun_fixedModulus_sharp
 #print axioms MixedPrimeDebt.exists_shellStep_realTrap_predecessor
 #print axioms MixedPrimeDebt.exists_shellStep_realTrap_unit_predecessor
 #print axioms MixedPrimeDebt.exists_shellRun_realTrap_unit_predecessor_of_length
