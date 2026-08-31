@@ -11,7 +11,8 @@ phases and leaves only the literal blocks `D_c²` and `D_c^(β+1)`.
 
 namespace MatrixMortality.SwappedSetterMultitransfer
 
-private def upperPower (width : Nat) (block : List NearyTile) : ℤ :=
+/-- Upper power of a punctuated swapped role block. -/
+def upperPower (width : Nat) (block : List NearyTile) : ℤ :=
   3 ^ upperLength width block
 
 private theorem upperLength_cons (width : Nat) (tile : NearyTile)
@@ -83,7 +84,8 @@ private theorem upperPower_cons (width : Nat) (tile : NearyTile)
     ring
   · norm_num [widthScale, pow_add, pow_succ]
 
-private theorem swappedUpperCode_bounds
+/-- Every punctuated swapped upper role code lies in its full first-role cylinder. -/
+theorem swappedUpperCode_cylinder
     {width : Nat} (width_pos : 0 < width) (block : List NearyTile) :
     widthScale width * upperPower width block ≤ swappedUpperCode width block ∧
       swappedUpperCode width block <
@@ -200,7 +202,8 @@ private theorem swappedUpperCode_mod_three
                     (Int.ModEq.refl (upperPower width rest)))
           simpa using leading_zero.add induction
 
-private def firstMismatch (width : Nat) (block : List NearyTile) : ℚ :=
+/-- Relative mismatch between the marker ray and a punctuated swapped upper code. -/
+def firstMismatch (width : Nat) (block : List NearyTile) : ℚ :=
   (setterMarker width * upperPower width block - swappedUpperCode width block) /
     swappedUpperCode width block
 
@@ -223,7 +226,7 @@ private theorem firstMismatch_cons_c_lower
   have power_pos : (0 : ℤ) < upperPower width rest := by
     simp [upperPower]
   obtain ⟨rest_lower, rest_upper⟩ :=
-    swappedUpperCode_bounds width_pos rest
+    swappedUpperCode_cylinder width_pos rest
   have rest_upper_rat :
       (swappedUpperCode width rest : ℚ) <
         2 * widthScale width * upperPower width rest := by
@@ -273,7 +276,7 @@ private theorem firstMismatch_cons_b_upper
   have power_pos : (0 : ℤ) < upperPower width rest := by
     simp [upperPower]
   obtain ⟨rest_lower, rest_upper⟩ :=
-    swappedUpperCode_bounds width_pos rest
+    swappedUpperCode_cylinder width_pos rest
   have rest_lower_rat :
       (widthScale width : ℚ) * upperPower width rest ≤
         swappedUpperCode width rest := by
@@ -424,7 +427,8 @@ private theorem upperLength_of_all_c
   rw [upperLength, spell_nearyUpper, letters]
   simp [tagEncode, spell, tagCode]
 
-private def transferDiscrepancy (width : Nat) (body : List TagLetter)
+/-- Normalized denominator discrepancy after one positive swapped-setter transfer. -/
+def transferDiscrepancy (width : Nat) (body : List TagLetter)
     (first middle : List NearyTile) : ℚ :=
   ((blockCoefficient width body middle : ℚ) * swappedUpperCode width first +
       terminalDiscrepancy width * setterMarker width *
@@ -432,7 +436,8 @@ private def transferDiscrepancy (width : Nat) (body : List TagLetter)
     (centeredCoefficient width * swappedUpperCode width first *
       (3 : ℚ) ^ (upperLength width middle - 1))
 
-private theorem transferDiscrepancy_eq
+/-- Express the normalized transfer discrepancy through the incoming relative mismatch. -/
+theorem transferDiscrepancy_eq
     {width : Nat} (width_large : 3 ≤ width) (body : List TagLetter)
     (first middle : List NearyTile) :
     transferDiscrepancy width body first middle =
@@ -443,7 +448,7 @@ private theorem transferDiscrepancy_eq
           ((widthScale width - 2 : ℤ) *
             (3 : ℚ) ^ (upperLength width middle - 1)) := by
   have width_pos : 0 < width := by omega
-  have first_bounds := swappedUpperCode_bounds width_pos first
+  have first_bounds := swappedUpperCode_cylinder width_pos first
   have first_power_pos : (0 : ℤ) < upperPower width first := by
     simp [upperPower]
   have first_pos_int : (0 : ℤ) < swappedUpperCode width first := by
@@ -494,7 +499,7 @@ private theorem word_length_le_upperLength
 private theorem swappedUpperCode_pos
     {width : Nat} (width_pos : 0 < width) (block : List NearyTile) :
     0 < swappedUpperCode width block := by
-  have bounds := swappedUpperCode_bounds width_pos block
+  have bounds := swappedUpperCode_cylinder width_pos block
   have scale_pos : (0 : ℤ) < widthScale width := by simp [widthScale]
   have power_pos : (0 : ℤ) < upperPower width block := by
     simp [upperPower]
@@ -519,10 +524,11 @@ private theorem swappedLowerCode_pos_of_nonempty
   change (0 : ℤ) < (ternaryCode lowerWord : ℤ)
   exact_mod_cast code_pos
 
-private theorem transferDiscrepancy_pole_interval
+/-- A following pole is exactly the normalized transfer-discrepancy equation. -/
+theorem transferDiscrepancy_pole_equation
     {width : Nat} (width_large : 3 ≤ width) (body : List TagLetter)
     (first : List NearyTile) {middle target : List NearyTile}
-    (middle_nonempty : middle ≠ []) (target_nonempty : target ≠ [])
+    (middle_nonempty : middle ≠ [])
     (pole :
       (blockCoefficient width body target : ℚ) *
           nextY (blockCoefficient width body middle) (centeredCoupling width)
@@ -531,9 +537,10 @@ private theorem transferDiscrepancy_pole_interval
         centeredCoupling width * swappedLowerCode width body target *
           nextX (3 ^ upperLength width middle)
             (centeredCoefficient width * swappedUpperCode width first) = 0) :
-    0 < transferDiscrepancy width body first middle ∧
-      transferDiscrepancy width body first middle <
-        3 * setterMarker width := by
+    (blockCoefficient width body target : ℚ) *
+          transferDiscrepancy width body first middle +
+        3 * terminalDiscrepancy width * setterMarker width *
+          swappedLowerCode width body target = 0 := by
   have width_pos : 0 < width := by omega
   have scale_ge_nat : 3 ^ 3 ≤ 3 ^ width :=
     Nat.pow_le_pow_right (by norm_num) width_large
@@ -544,29 +551,11 @@ private theorem transferDiscrepancy_pole_interval
   have centered_neg_int : centeredCoefficient width < 0 := by
     simp only [centeredCoefficient]
     omega
-  have centered_neg : (centeredCoefficient width : ℚ) < 0 := by
-    exact_mod_cast centered_neg_int
-  have centered_ne : (centeredCoefficient width : ℚ) ≠ 0 := ne_of_lt centered_neg
-  have marker_pos_int : (0 : ℤ) < setterMarker width := by
-    simp only [setterMarker]
-    omega
-  have marker_pos : (0 : ℚ) < setterMarker width := by
-    exact_mod_cast marker_pos_int
-  have terminal_pos_int : (0 : ℤ) < terminalDiscrepancy width := by
-    simp only [terminalDiscrepancy]
-    omega
-  have terminal_pos : (0 : ℚ) < terminalDiscrepancy width := by
-    exact_mod_cast terminal_pos_int
+  have centered_ne : (centeredCoefficient width : ℚ) ≠ 0 := by
+    exact_mod_cast ne_of_lt centered_neg_int
   have first_pos_int := swappedUpperCode_pos width_pos first
   have first_pos : (0 : ℚ) < swappedUpperCode width first := by
     exact_mod_cast first_pos_int
-  have target_upper_pos_int := swappedUpperCode_pos width_pos target
-  have target_upper_pos : (0 : ℚ) < swappedUpperCode width target := by
-    exact_mod_cast target_upper_pos_int
-  have target_lower_pos_int :=
-    swappedLowerCode_pos_of_nonempty (width := width) (body := body) target_nonempty
-  have target_lower_pos : (0 : ℚ) < swappedLowerCode width body target := by
-    exact_mod_cast target_lower_pos_int
   have middle_length_pos : 0 < upperLength width middle :=
     (List.length_pos_of_ne_nil middle_nonempty).trans_le
       (word_length_le_upperLength width middle)
@@ -612,20 +601,63 @@ private theorem transferDiscrepancy_pole_interval
               swappedLowerCode width body target) = 0 := by
     rw [← pole_factor]
     exact pole
-  have normalized_pole :
+  rcases mul_eq_zero.mp factor_zero with leading_zero | normalized_zero
+  · rcases mul_eq_zero.mp leading_zero with centered_zero | denominator_zero
+    · exact False.elim (centered_ne centered_zero)
+    · have denominator_ne :
+          (centeredCoefficient width : ℚ) * swappedUpperCode width first *
+              (3 : ℚ) ^ (upperLength width middle - 1) ≠ 0 := by
+        exact mul_ne_zero (mul_ne_zero centered_ne (ne_of_gt first_pos)) middle_power_ne
+      exact False.elim (denominator_ne denominator_zero)
+  · exact normalized_zero
+
+/-- A following physical role pole forces the transfer discrepancy into `(0,3μ)`. -/
+theorem transferDiscrepancy_pole_interval
+    {width : Nat} (width_large : 3 ≤ width) (body : List TagLetter)
+    (first : List NearyTile) {middle target : List NearyTile}
+    (middle_nonempty : middle ≠ []) (target_nonempty : target ≠ [])
+    (pole :
       (blockCoefficient width body target : ℚ) *
-            transferDiscrepancy width body first middle +
-          3 * terminalDiscrepancy width * setterMarker width *
-            swappedLowerCode width body target = 0 := by
-    rcases mul_eq_zero.mp factor_zero with leading_zero | normalized_zero
-    · rcases mul_eq_zero.mp leading_zero with centered_zero | denominator_zero
-      · exact False.elim (centered_ne centered_zero)
-      · have denominator_ne :
-            (centeredCoefficient width : ℚ) * swappedUpperCode width first *
-                (3 : ℚ) ^ (upperLength width middle - 1) ≠ 0 := by
-          exact mul_ne_zero (mul_ne_zero centered_ne (ne_of_gt first_pos)) middle_power_ne
-        exact False.elim (denominator_ne denominator_zero)
-    · exact normalized_zero
+          nextY (blockCoefficient width body middle) (centeredCoupling width)
+            (swappedLowerCode width body middle) (upperPower width first)
+            (centeredCoefficient width * swappedUpperCode width first) +
+        centeredCoupling width * swappedLowerCode width body target *
+          nextX (3 ^ upperLength width middle)
+            (centeredCoefficient width * swappedUpperCode width first) = 0) :
+    0 < transferDiscrepancy width body first middle ∧
+      transferDiscrepancy width body first middle <
+        3 * setterMarker width := by
+  have width_pos : 0 < width := by omega
+  have scale_ge_nat : 3 ^ 3 ≤ 3 ^ width :=
+    Nat.pow_le_pow_right (by norm_num) width_large
+  have scale_ge_int : (27 : ℤ) ≤ widthScale width := by
+    have casted : ((3 ^ 3 : Nat) : ℤ) ≤ ((3 ^ width : Nat) : ℤ) := by
+      exact_mod_cast scale_ge_nat
+    simpa [widthScale] using casted
+  have centered_neg_int : centeredCoefficient width < 0 := by
+    simp only [centeredCoefficient]
+    omega
+  have centered_neg : (centeredCoefficient width : ℚ) < 0 := by
+    exact_mod_cast centered_neg_int
+  have marker_pos_int : (0 : ℤ) < setterMarker width := by
+    simp only [setterMarker]
+    omega
+  have marker_pos : (0 : ℚ) < setterMarker width := by
+    exact_mod_cast marker_pos_int
+  have terminal_pos_int : (0 : ℤ) < terminalDiscrepancy width := by
+    simp only [terminalDiscrepancy]
+    omega
+  have terminal_pos : (0 : ℚ) < terminalDiscrepancy width := by
+    exact_mod_cast terminal_pos_int
+  have target_upper_pos_int := swappedUpperCode_pos width_pos target
+  have target_upper_pos : (0 : ℚ) < swappedUpperCode width target := by
+    exact_mod_cast target_upper_pos_int
+  have target_lower_pos_int :=
+    swappedLowerCode_pos_of_nonempty (width := width) (body := body) target_nonempty
+  have target_lower_pos : (0 : ℚ) < swappedLowerCode width body target := by
+    exact_mod_cast target_lower_pos_int
+  have normalized_pole :=
+    transferDiscrepancy_pole_equation width_large body first middle_nonempty pole
   have target_coefficient_neg :
       (blockCoefficient width body target : ℚ) < 0 := by
     rw [blockCoefficient]
@@ -725,7 +757,7 @@ private theorem swappedUpperCode_all_c_upper
     (swappedUpperCode width block : ℚ) <
       6 * widthScale width * (3 : ℚ) ^ (count - 1) := by
   have count_eq := upperLength_of_all_c (width := width) letters
-  have bounds := (swappedUpperCode_bounds width_pos block).2
+  have bounds := (swappedUpperCode_cylinder width_pos block).2
   rw [upperPower, count_eq] at bounds
   have power_eq :
       ((3 : ℤ) ^ count : ℤ) =
