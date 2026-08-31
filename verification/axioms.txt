@@ -1352,6 +1352,17 @@
 'MatrixMortality.MixedPrimeDebt.adjacentDebtBridge_targetOvercancellation' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.MixedPrimeDebt.fixedSourceAdjacentFamily' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.MixedPrimeDebt.fixedSourceAdjacentFamily_target_injective' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.fixedSourceAdjacentFamily_ten_mul_numerator_mod' depends on axioms: [propext]
+'MatrixMortality.MixedPrimeDebt.fixedSourceAdjacentFamily_ten_mul_numerator' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.fixedSourceAdjacentFamily_ten_mul_accepted' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.MixedPrimeDebt.negativeOrientation_crossLengthCollision' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]

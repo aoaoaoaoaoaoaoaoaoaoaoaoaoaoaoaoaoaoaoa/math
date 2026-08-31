@@ -262,6 +262,7 @@ file owns the mathematical stock.
 | [`D2-M01`](#d2-m01-benchmark-critical-shell) | partial mechanism | the mixed-prime benchmark reduces generically to one guarded `5`-adic shell | audited | active |
 | [`D2-O01`](#d2-o01-canonical-collatz-reachability-is-not-automatic) | obstruction | full generalized-Collatz reachability is not synchronously recognizable in its canonical base | external theorem | active |
 | [`D2-O02`](#d2-o02-critical-shell-periodic-saturation) | obstruction and rewrite seed | every nonempty finite wait schedule has a rational all-unit cycle; normalized nonfreeness persists under every generator scaling, while its odd family is a two-seed cancellative pump and the positive finite basis is complete only through length 30 | formalized core; audited strengthening | active |
+| [`D2-O03`](#d2-o03-fixed-source-adjacent-saturation) | obstruction and fixed-source family | the source `43/24` supports infinitely many accepted chamber-contained adjacent collisions with unbounded waits and pairwise-distinct targets | formalized | active |
 
 ## Frankl Conjecture
 
@@ -10932,8 +10933,8 @@ exclusion, eventual shell exit or periodicity, unbounded pumping of one fixed sc
 its periodic point, uniformly bounded reverse fanout, source-specific collision mechanisms at
 one fixed debt-bridge length, cross-length source-shell exclusion, the one-bit `3`-adic carrier
 orientation as a global separator, automatic target acceptance from source unitality, universal
-strict state-height drift, and a
-compiler whose period-one configurations must remain in that set after every single wait. Also
+strict state-height drift, and a compiler whose period-one configurations must remain in that set
+after every single wait. Also
 reject the hope that unit normalization restores a free action or that the odd family supplies a
 strict shortening pump. The live information is exact fixed-source endpoint equality across the
 ordered schedule and a parametric description of the positive affine congruence beyond its
@@ -10944,6 +10945,71 @@ relations into even-length or further parametric families, distinguishing new gr
 from positive-congruence phenomena. For debt-safe prefixes, census affine-map equality within
 each length and source-specific collisions only across lengths. Then attack cross-length carrier
 equality against the fixed source. In the adjacent-length slice, decide or saturate the exact
-cleared-offset equation rather than retesting source unitality. Then attack chamber exits and
-reentries, residual stabilizers, and accepting exits without assuming a canonical rewrite normal
-form.
+cleared-offset equation while retaining the target; `D2-O03` shows that source equality and
+acceptance alone are saturated. Then attack chamber exits and reentries, residual stabilizers,
+and accepting exits without assuming a canonical rewrite normal form.
+
+### D2-O03: Fixed-source adjacent saturation
+
+**Kind:** obstruction and fixed-source family
+**Evidence:** formalized
+**Disposition:** active
+
+One rational source supports an exact parametric family of adjacent-length collisions inside the
+negative `3`-adic debt chamber. For every `m≥0`, the distinct schedules
+
+```text
+short_m=[1,m+2],      long_m=[3,1,m]
+```
+
+are debt-safe from depth one to depth `m+2`, have lengths two and three, and satisfy
+
+```text
+collisionSource(short_m,long_m)=43/24,
+T_short_m(43/24)=T_long_m(43/24)=(11(2/3)^m+9)/45.
+```
+
+Every terminal wait `m=10k` is accepted. After clearing the power of three, the target numerator
+is
+
+```text
+N_k=11·2^(10k)+9·3^(10k).
+```
+
+Modulo `25`, both `2^10` and `3^10` equal `24`, so
+
+```text
+N_k ≡ 20·24^k  (mod 25).
+```
+
+Consequently `5∣N_k` and `25∤N_k`; Lean proves the exact statement `v₅(N_k)=1`, including
+`k=0`. Division by the target denominator, whose valuation is also one, leaves a `5`-adic unit.
+Because a unit final phase is equivalent to unit membership at every schedule prefix, both sides
+are accepted shell paths. Their debt depths remain positive by the displayed endpoint theorem.
+
+The targets are pairwise distinct. The base `2/3` is positive and not one, hence its natural
+powers are injective; the affine target formula preserves that injectivity. Thus this family
+cannot cycle or pump one fixed target.
+
+**Scope:** the theorem gives one fixed source, infinitely many accepted chamber-contained
+cross-length collisions, and unbounded terminal waits and raw-word lengths. The shell schedule
+lengths remain two and three. The target varies injectively with `m`, so this does not decide
+fixed-target reachability, accepting-exit reachability, or `M₂(3)`. It does not classify all
+adjacent bridges or all accepted residue classes.
+
+**Artifact:** `MixedPrimeDebt.fixedSourceAdjacentFamily`,
+`MixedPrimeDebt.fixedSourceAdjacentFamily_target_injective`,
+`MixedPrimeDebt.fixedSourceAdjacentFamily_ten_mul_numerator_mod`,
+`MixedPrimeDebt.fixedSourceAdjacentFamily_ten_mul_numerator`, and
+`MixedPrimeDebt.fixedSourceAdjacentFamily_ten_mul_accepted` in
+[`MixedPrimeDebt.lean`](MatrixMortality/MixedPrimeDebt.lean).
+
+**Use:** reject any proposed bound on accepted waits or raw witness length that depends only on
+the fixed rational source and continued residence in one negative-depth chamber. Fixed-source
+equality and target acceptance are both saturated; a decision argument must retain the specified
+target or an accepting exit condition.
+
+**Next:** solve the fixed-target intersection with the parametric ray. Injectivity gives at most
+one `m`; decide effectively whether a prescribed rational target equals
+`(11(2/3)^m+9)/45`, and test whether the benchmark's target-pole or accepting-exit families meet
+this ray. Then seek other adjacent collision rays not conjugate to this one.
