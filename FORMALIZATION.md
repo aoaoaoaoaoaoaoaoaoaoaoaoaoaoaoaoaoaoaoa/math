@@ -851,6 +851,14 @@ outside this certificate are simultaneously shallow: `a≤2Er` at every denomina
 two primes are deep, cross multiplication of their two exact exponent laws forces
 `vₚ(B)v_ℓ(q)=v_ℓ(B)vₚ(q)`; unequal normalized depths exclude the jointly deep branch.
 
+The next shell is finite too. If `E′=waitExponent(rest)` satisfies `2E′r<a`, then either the
+complete tail is deep or the physical head obeys `head+1≤2E′`. For fixed rest state `(U,V)`,
+the first tail scale `t` satisfies `t∣B(q^(head+1)−1)V`; coprimality sharpens this to `t∣BV`.
+The rest state cannot vanish. If `V=0`, the bridge forces the one-return resonance
+`B=q^(head+1)`; otherwise the nonzero divisor `BV` bounds `t`. Hence every bridge with one
+proper-rest-deep prime is decidable by finite enumeration. The remaining chamber has common
+factor `B` in the proper-rest state at every denominator prime.
+
 The common-geometric-base hypothesis cannot be weakened to total divisibility of an arbitrary
 scale alphabet. Lean checks that `[3,15,3,3,15,3,3,3]` is pairwise totally ordered under
 divisibility, yet its normalized bridge vanishes at the nonresonant root `d=25/27`. This is an
@@ -2631,7 +2639,7 @@ fixed-rank decision problem.
 | `ReturnSquareGeometricCenter.lean` | exact geometric center-chain exponents and critical zero-residue exclusion |
 | `ReturnSquareGeometricResidue.lean` | equal-scale zero-residue transition and odd signed-center exclusion |
 | `ReturnSquareTailAdjugate.lean` | head-separated adjugate tail incidence and fixed positive-valuation tail weight |
-| `ReturnSquarePureDenominator.lean` | integral pure-denominator tail expansion and deep-prime finite certificate |
+| `ReturnSquarePureDenominator.lean` | integral pure-denominator tail expansion, deep-prime synchronization, and proper-rest pivot certificate |
 | `ReturnSquareTax.lean` | exact four-state lower bound for literal reversible-stack returns |
 | `ReturnSquareNoGo.lean` | quadratic-pencil reversible-squaring obstruction and blind-scaling collapse |
 | `ReturnJordan.lean` | parity-Jordan rail rigidity and modular immortality certificate |
