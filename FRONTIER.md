@@ -3223,7 +3223,9 @@ The remaining local `5`-adic guard is finite: from any fixed unit source, one-st
 depends only on the wait modulo ten. Together with `D2-S05`, every guarded one-step orbit is one
 mantissa ray with ten tested depth classes. A fixed tail of length `ℓ` raises the sufficient
 period to `2·5^(ℓ+1)`, and unit zero preimages prove the exponent sharp: changing by `2·5^ℓ`
-can flip zero to a unit. Fixed-modulus all-depth compression is therefore dead. This is
+can flip zero to a unit. More strongly, for every `M>0`, congruent waits `m` and `m+2M` have
+opposite guard outcomes at a unit zero preimage with tail length `v₅(M)`. Fixed-modulus all-depth
+compression is therefore dead. This is
 [`D2-S07`](SALVAGE.md#d2-s07-period-ten-shell-guard).
 The deepest of those three branches is itself a full depth reset. In normalized band coordinates
 `U(d,μ)=1/5+(3/10)(2/3)^dμ`, every target band `d≥2` contains a point whose `d−2` predecessor has
