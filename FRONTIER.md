@@ -3037,8 +3037,10 @@ The deepest of those three branches is itself a full depth reset. In normalized 
 `U(d,μ)=1/5+(3/10)(2/3)^dμ`, every target band `d≥2` contains a point whose `d−2` predecessor has
 any prescribed band `n≥7` and mantissa in `(2/3,1]`. An explicit guarded subfamily fixes target
 depth four and wait two while the source depths run through `50k+50`; exact residues modulo 125
-prove that both endpoints remain `5`-adic units. Therefore depth plus the shell bit cannot form a
-finite inverse nucleus. Exact mantissa arithmetic is indispensable. This is
+prove that both endpoints remain `5`-adic units. Both are also `2`-adic units, while their exact
+`3`-adic depths are `50k+49` and `50k+50`. The targets are pairwise distinct. Therefore fixed
+real depth plus finitely many valuation modes cannot form an inverse nucleus, but this ray still
+does not create a fixed-target fibre. Exact mantissa arithmetic is indispensable. This is
 [`D2-O09`](SALVAGE.md#d2-o09-guarded-real-pole-reset).
 Higher depth is not free: a published length-thirteen relation yields two distinct
 schedules with the same affine map and a common Lean-checked guarded periodic source. This is an
