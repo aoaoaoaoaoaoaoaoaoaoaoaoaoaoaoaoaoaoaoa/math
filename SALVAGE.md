@@ -89,6 +89,7 @@ file owns the mathematical stock.
 | [`MM-O17`](#mm-o17-factorized-binary-cross-ratio-wall) | obstruction | exact prefix and cyclic-cube nine-state compilers force a Neary cross-ratio that fails in every pairing | formalized core; audited assembly | graduated |
 | [`MM-O18`](#mm-o18-forced-rule-companion-toggle-wall) | obstruction | the forced-rule derivative and constant channel force an exact five-state companion toggle to be invertible | formalized | graduated |
 | [`MM-O19`](#mm-o19-trailing-toggle-exact-prefix-tax) | obstruction | trailing-toggle absorption preserves zeros; exact comb and balanced rank profiles cost at least ten and eleven states | formalized core; audited assembly | graduated |
+| [`MM-O20`](#mm-o20-decimal-first-cylinder-collision) | obstruction | two lawful emitted decimal blocks have identical exact first suffix cylinders | formalized | active |
 | [`MM-O21`](#mm-o21-sourcewise-finite-probe-blindness) | obstruction | sourcewise existential equivalence imposes no finite probe-rank shadow, while complete computable probe cutoffs cannot be universal | formalized | graduated |
 | [`MM-M01`](#mm-m01-off-diagonal-companion-interface) | partial mechanism | off-diagonal rank-two bridge has a complete fracture grammar | audited | stock |
 | [`MM-M02`](#mm-m02-bordered-toggle) | partial mechanism | one lifted toggle has a stable rank-two third power | audited | parked |
@@ -3827,6 +3828,89 @@ through `gapFactor_not_dvd_twoCHead`, `carrierFactor_dvd_next_iff`,
 **Next:** classify prime support of compiler lower words at symbolic deletion width. The
 factorwise gates are not sufficient by themselves: the audit records a physical all-`D_c`
 word at `β=10` that passes both full-gap gates computationally.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-O20: Decimal first-cylinder collision
+
+**Kind:** obstruction and structure theorem
+**Evidence:** formalized
+**Disposition:** active
+
+For a normalized block with shift `h≥1`, gap `E`, trace `τ`, and constant `C=μGV`, the inverse
+carrier map is
+
+```text
+Ψ(y)=C/(τ−10^hEy).
+```
+
+On decimal units its image is exactly the joint suffix cylinder
+
+```text
+ν₂(x−C/τ)=ν₅(x−C/τ)=h.                         (1)
+```
+
+The converse is exact: every rational decimal unit satisfying (1) has a unique decimal-unit
+tail. Moreover,
+
+```text
+Ψ(y)−Ψ(z)=C10^hE(y−z)/((τ−10^hEy)(τ−10^hEz)),
+```
+
+so a backward word increases both valuations of a tail difference by the sum of its block
+shifts. This is an unbounded suffix metric, not another fixed congruence quotient.
+
+It does not supply unique block decoding. Consider the lawful blocks
+
+```text
+R_b R_c D_b,              D_b R_c D_b.
+```
+
+Their punctuated upper codes are identical. If `L=|H(body)|+4` is the length of their common
+lower suffix, their lower codes satisfy
+
+```text
+V_R−V_D=550·10^L.
+```
+
+For the physical center `z(P,V)=10μGV/(EP+GV)`, the `G` cross-term cancels:
+
+```text
+z(P,V_R)−z(P,V_D)
+ =10μGEP(V_R−V_D)/((EP+GV_R)(EP+GV_D)).          (2)
+```
+
+Both traces have shell `(1,1)`, so (2) has exact shell `(L,L+1)`. The common upper length is
+`2β+5`, hence its cylinder shift is `h=2β+3`. Every compiler-emitted body satisfies
+`|H(body)|≥2β`; therefore `L>h` at both primes. Moving a center by this deeper quantity leaves
+the exact depth-`h` cylinder unchanged. The two distinct physical blocks consequently have
+identical first cylinders.
+
+**Scope:** this refutes decoding from the first forced suffix cylinder. It does not prove that
+the complete inverse branches agree, that longer composed addresses collide, or that the
+distinguished entry reaches either branch. The full inverse word may retain information after
+the first cylinder has forgotten the leading phase.
+
+**Use:** do not infer a physical block itinerary from one inverse-cylinder center and depth.
+Any viable suffix recognizer must retain a refined tail coordinate, compose deeper branch data,
+or quotient phase-hidden blocks only after proving that the quotient preserves reachability.
+
+**Formalization:**
+[`MatrixMortality/DecimalSetterSuffix.lean`](MatrixMortality/DecimalSetterSuffix.lean), through
+`inverseCarrier_mem_carrierCylinder`,
+`exists_inverseCarrier_unit_iff_carrierCylinder`,
+`existsUnique_inverseCarrier_unit_iff_carrierCylinder`,
+`BackwardBlock.pullbackWord_sub_hasDecimalShell`,
+`physicalCarrierCenter_sameUpper_sub_hasDecimalShell`,
+`hiddenBlocks_lowerCode_sub_hasDecimalShell`, and
+`emittedHiddenBlocks_firstCylinder_collision`.
+
+**Artifact:**
+[`audits/m53-decimal-inverse-cylinder-collision-2026-08-31.md`](audits/m53-decimal-inverse-cylinder-collision-2026-08-31.md).
+
+**Next:** determine whether complete composed inverse branches separate the collision pair, or
+whether a phase-blind quotient can be proved reachability-sound.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).

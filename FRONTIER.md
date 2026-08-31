@@ -868,6 +868,15 @@ computationally certified physical all-`D_c` word at the compiler width `β=10` 
 full-gap congruences, so encoded suffix semantics beyond these modular conditions remain
 necessary.
 
+[`MM-O20`](SALVAGE.md#mm-o20-decimal-first-cylinder-collision) gives the unbounded suffix
+language an exact metric: a backward word gains the sum of its shifts in both decimal valuations,
+and one block maps the unit domain onto one exact suffix cylinder. But first-cylinder decoding is
+not injective. The lawful blocks `R_bR_cD_b` and `D_bR_cD_b` have identical depth-`2β+3`
+cylinders for every compiler-emitted body; their long common lower suffix hides the first phase.
+The live cut is therefore the intersection of the encoded-entry orbit with complete composed
+inverse branches, or a proved reachability-sound quotient of those branches. Neither a fixed
+congruence graph nor the first unbounded cylinder retains enough information.
+
 The immediate ternary question is which other positive valuation-one discrepancies survive its
 suffix sieve without already certifying source halting.
 Exact bidirectional diagnostics for the ternary swap at `β=3`, body `bbcc`, exclude every
