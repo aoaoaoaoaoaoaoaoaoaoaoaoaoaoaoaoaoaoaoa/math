@@ -347,6 +347,7 @@ file owns the mathematical stock.
 | [`D2-O11`](#d2-o11-bounded-branch-nonreachability-certificate) | finite nonreachability certificate | under trivial source stabilizer, a bounded prefix window exposes a target stabilizer and certifies that no transporter exists | formalized | graduated |
 | [`D2-O12`](#d2-o12-exact-prefix-height-rate) | quantitative escape bound | `N` distinct prefixes at a trivial-stabilizer target bounded by height `H` satisfy `N≤(2H+1)²`, with an exact threshold contrapositive | formalized | graduated |
 | [`D2-O13`](#d2-o13-proper-height-escape) | asymptotic structure theorem | every bounded-height sublevel of an injective-prefix orbit at a trivial-stabilizer target is finite, so primitive height tends to infinity | formalized | graduated |
+| [`D2-O14`](#d2-o14-proper-false-inverse-ray) | obstruction and sharpness example | one promised-empty free orbit with trivial source and target stabilizers admits an unguided inverse ray of exact height `5^(n+2)` tending to infinity | formalized | graduated |
 | [`D2-M01`](#d2-m01-benchmark-critical-shell) | partial mechanism | the mixed-prime benchmark reduces generically to one guarded `5`-adic shell | audited | active |
 | [`D2-O01`](#d2-o01-canonical-collatz-reachability-is-not-automatic) | obstruction | full generalized-Collatz reachability is not synchronously recognizable in its canonical base | external theorem | active |
 | [`D2-O02`](#d2-o02-critical-shell-periodic-saturation) | obstruction and rewrite seed | every nonempty finite wait schedule has a rational all-unit cycle; normalized nonfreeness persists under every generator scaling, while its odd family is a two-seed cancellative pump and the positive finite basis is complete only through length 30 | formalized core; audited strengthening | active |
@@ -14985,6 +14986,71 @@ matrices, or refine proper Archimedean escape into one of finitely many
 [`InverseOrbitRecurrence.lean`](MatrixMortality/InverseOrbitRecurrence.lean)
 and
 [`m34-proper-height-escape-2026-08-31.md`](audits/m34-proper-height-escape-2026-08-31.md).
+
+### D2-O14: Proper false inverse ray
+
+**Kind:** obstruction and sharpness example
+
+**Evidence:** formalized
+
+**Disposition:** graduated
+
+In the free dilation--parabolic group from `D2-O05`, retain the fixed source
+`p=9/4` and put
+
+```text
+r=11/5,       q=D⁻¹r=11/25.
+```
+
+The neutral anchor `r` lies outside both ping-pong chambers, while every
+nonzero power of either cyclic factor sends it into that factor's chamber.
+Hence `r` has trivial stabilizer. It is not in the orbit of `p`: the identity
+does not send `p` to `r`, and every nonidentity word sends `p` into a chamber.
+Therefore `q` is also unreachable from `p` and inherits trivial stabilizer by
+conjugation with `D⁻¹`.
+
+The integral determinant-one matrix
+
+```text
+g₀=[[-17,41],[-39,94]]
+```
+
+sends `[9:4]` to `[11:25]`. The represented subgroup misses
+`g₀Stab(p)`, so after the existing integral source conjugation this is an
+exact cardinality-zero `UCB₂({5})` instance with both endpoint stabilizers
+trivial.
+
+Unguided inverse search nevertheless contains the infinite branch
+
+```text
+q, D⁻¹q, D⁻²q, …
+```
+
+with distinct abstract prefixes and primitive pairs
+
+```text
+vₙ=(11,5^(n+2)),       height(vₙ)=5^(n+2) → +∞.
+```
+
+**Scope:** this branch deliberately ignores the chamber sign which would send
+the lower dilation chamber forward by `D` toward `r`. It is an obstruction to
+unguided inverse enumeration and to using height properness alone as a pruning
+criterion. It does not refute a chamber-directed normal form, an `S`-adic
+orientation, or another directional search.
+
+**Use:** `D2-O13` is sharp. Even after both endpoint stabilizers are trivial
+and every bounded height cube is eventually abandoned, a promised-empty
+instance can retain an irrelevant infinite inverse ray. A decision procedure
+must attach directional/chamber legality to proper escape; divergence of
+height by itself is not a rejection certificate.
+
+**Next promotion:** formalize a complete chamber-directed inverse parser and
+prove that it discards this ray while preserving every genuine transporter.
+
+**Artifacts:**
+[`TransverseDilationOrbit.lean`](MatrixMortality/TransverseDilationOrbit.lean)
+and
+[`m34-proper-false-inverse-ray-2026-08-31.md`](audits/m34-proper-false-inverse-ray-2026-08-31.md).
 
 ### D2-M01: Benchmark critical shell
 
