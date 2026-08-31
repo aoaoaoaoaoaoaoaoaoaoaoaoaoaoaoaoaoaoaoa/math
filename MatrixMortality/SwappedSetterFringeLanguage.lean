@@ -23,11 +23,25 @@ def fringeBlock : Bool → List Bool
 def SourceFringe (word : List Bool) : Prop :=
   ∃ phases, word <+: spell fringeBlock phases
 
-/-- A target fringe is the final bounded window of a lower spelling ending in an erasure. -/
-def TargetFringe (width : Nat) (word : List Bool) : Prop :=
+/-- Final bounded window of a body-independent lower spelling ending in an erasure. -/
+def BlockTargetFringe (width : Nat) (word : List Bool) : Prop :=
   ∃ phases,
     phases.getLast? = some false ∧
       word = (spell fringeBlock phases).rtake width
+
+/-- Necessary normal form of a physical target fringe ending in an erasure.  A preceding rule
+block contributes either no `true`, a complete final pair, or the right member of a pair cut by
+the width boundary.  The prefix before a complete pair may come from an encoded appendant. -/
+def TargetFringe (width : Nat) (word : List Bool) : Prop :=
+  word.length ≤ width ∧
+    ((∃ zeros,
+        2 ≤ zeros ∧
+          word = List.replicate zeros false) ∨
+      (∃ front zeros,
+        2 ≤ zeros ∧
+          word = front ++ [true, true] ++ List.replicate zeros false) ∨
+      (word.length = width ∧
+        word = true :: List.replicate (width - 1) false))
 
 /-- The two possible shapes of the maximal unmatched upper fringe. -/
 def UpperFringe (β : Nat) (word : List Bool) : Prop :=
