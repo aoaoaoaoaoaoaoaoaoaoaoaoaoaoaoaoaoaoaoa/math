@@ -140,6 +140,15 @@ theorem lowerCScale_gt_three (β : Nat) (body : List TagLetter) :
     one_le_pow₀ (by norm_num)
   nlinarith
 
+theorem twenty_seven_le_lowerCScale (β : Nat) (body : List TagLetter) :
+    27 ≤ lowerCScale β body := by
+  rw [lowerCScale, nearySideLowerCScale_eq_nine_mul]
+  have power_three_le :
+      (3 : ℚ) ≤ 3 ^ (tagEncode β body).length.succ := by
+    rw [pow_succ]
+    nlinarith [one_le_pow₀ (n := (tagEncode β body).length) (by norm_num : (1 : ℚ) ≤ 3)]
+  nlinarith
+
 theorem five_mul_lowerCScale_sub_nine_lt_six_mul_lowerCCode
     (β : Nat) (body : List TagLetter) :
     5 * lowerCScale β body - 9 < 6 * lowerCCode β body := by
@@ -164,6 +173,179 @@ theorem nearyTailRatio_lt_neg_three_halves (β : Nat) (body : List TagLetter) :
     linarith [lowerCScale_gt_three β body]
   rw [nearyTailRatio, div_lt_iff₀ denominator_positive]
   nlinarith [five_mul_lowerCScale_sub_nine_lt_six_mul_lowerCCode β body]
+
+/-- Common denominator of the rank-nine changed-separator realization. -/
+def transferDenominator (β : Nat) (body : List TagLetter) : ℚ :=
+  let widthScale := (3 : ℚ) ^ β
+  let lowerCode := lowerCCode β body
+  let lowerScale := lowerCScale β body
+  9 * lowerScale ^ 2 * widthScale ^ 2 +
+    2 * lowerScale ^ 2 * widthScale - lowerScale ^ 2 -
+    18 * lowerScale * lowerCode * widthScale ^ 2 +
+    2 * lowerScale * lowerCode - 9 * lowerScale * widthScale ^ 2 -
+    6 * lowerScale * widthScale - 47 * lowerScale + 48 * lowerCode + 96
+
+/-- The rational realization chart's common denominator is uniformly negative. -/
+theorem transferDenominator_lt_zero (β : Nat) (body : List TagLetter) :
+    transferDenominator β body < 0 := by
+  let widthScale : ℚ := 3 ^ β
+  let lowerCode := lowerCCode β body
+  let lowerScale := lowerCScale β body
+  have widthScale_one_le : 1 ≤ widthScale := by
+    exact one_le_pow₀ (by norm_num)
+  have widthScale_nonnegative : 0 ≤ widthScale := widthScale_one_le.trans' (by norm_num)
+  have widthScale_le_square : widthScale ≤ widthScale ^ 2 := by
+    nlinarith [mul_nonneg widthScale_nonnegative (sub_nonneg.mpr widthScale_one_le)]
+  have lowerScale_gt_three : 3 < lowerScale := by
+    exact lowerCScale_gt_three β body
+  have code_gap_positive :
+      0 < 6 * lowerCode - 5 * lowerScale + 9 := by
+    nlinarith [five_mul_lowerCScale_sub_nine_lt_six_mul_lowerCCode β body]
+  have base_positive :
+      0 < 9 * lowerScale * widthScale ^ 2 -
+        3 * lowerScale * widthScale - lowerScale + 12 := by
+    nlinarith
+  have gap_coefficient_negative :
+      -9 * lowerScale * widthScale ^ 2 + lowerScale + 24 < 0 := by
+    nlinarith
+  have denominator_identity :
+      3 * transferDenominator β body =
+        -2 * (lowerScale - 3) *
+            (9 * lowerScale * widthScale ^ 2 -
+              3 * lowerScale * widthScale - lowerScale + 12) +
+          (-9 * lowerScale * widthScale ^ 2 + lowerScale + 24) *
+            (6 * lowerCode - 5 * lowerScale + 9) := by
+    simp only [transferDenominator, widthScale, lowerCode, lowerScale]
+    ring
+  nlinarith [mul_pos (sub_pos.mpr lowerScale_gt_three) base_positive,
+    mul_neg_of_neg_of_pos gap_coefficient_negative code_gap_positive,
+    denominator_identity]
+
+/-- Numerator of a rank-three observable exterior pivot after one ambient step. -/
+def exteriorObservabilityPivotNumerator (β : Nat) (body : List TagLetter) : ℚ :=
+  let widthScale := (3 : ℚ) ^ β
+  let lowerCode := lowerCCode β body
+  let lowerScale := lowerCScale β body
+  9 * lowerScale ^ 2 * widthScale ^ 2 - lowerScale ^ 2 * widthScale -
+    18 * lowerScale * lowerCode * widthScale ^ 2 +
+    6 * lowerScale * lowerCode * widthScale -
+    9 * lowerScale * widthScale ^ 2 - 3 * lowerScale * widthScale -
+    48 * lowerScale + 48 * lowerCode + 96
+
+/-- The one-step observable exterior pivot is uniformly nonzero. -/
+theorem exteriorObservabilityPivotNumerator_lt_zero
+    (β : Nat) (body : List TagLetter) :
+    exteriorObservabilityPivotNumerator β body < 0 := by
+  let widthScale : ℚ := 3 ^ β
+  let lowerCode := lowerCCode β body
+  let lowerScale := lowerCScale β body
+  have widthScale_one_le : 1 ≤ widthScale := by
+    exact one_le_pow₀ (by norm_num)
+  have widthScale_nonnegative : 0 ≤ widthScale := widthScale_one_le.trans' (by norm_num)
+  have widthScale_le_square : widthScale ≤ widthScale ^ 2 := by
+    nlinarith [mul_nonneg widthScale_nonnegative (sub_nonneg.mpr widthScale_one_le)]
+  have lowerScale_gt_three : 3 < lowerScale := lowerCScale_gt_three β body
+  have lowerScale_large : 27 ≤ lowerScale := twenty_seven_le_lowerCScale β body
+  have code_gap_positive :
+      0 < 6 * lowerCode - 5 * lowerScale + 9 := by
+    nlinarith [five_mul_lowerCScale_sub_nine_lt_six_mul_lowerCCode β body]
+  have base_positive :
+      0 < 3 * lowerScale * widthScale ^ 2 -
+        2 * lowerScale * widthScale + 4 := by
+    nlinarith
+  have gap_coefficient_negative :
+      -18 * lowerScale * widthScale ^ 2 +
+        6 * lowerScale * widthScale + 48 < 0 := by
+    nlinarith
+  have pivot_identity :
+      6 * exteriorObservabilityPivotNumerator β body =
+        -12 * (lowerScale - 3) *
+            (3 * lowerScale * widthScale ^ 2 -
+              2 * lowerScale * widthScale + 4) +
+          (-18 * lowerScale * widthScale ^ 2 +
+              6 * lowerScale * widthScale + 48) *
+            (6 * lowerCode - 5 * lowerScale + 9) := by
+    simp only [exteriorObservabilityPivotNumerator, widthScale, lowerCode, lowerScale]
+    ring
+  nlinarith [mul_pos (sub_pos.mpr lowerScale_gt_three) base_positive,
+    mul_neg_of_neg_of_pos gap_coefficient_negative code_gap_positive,
+    pivot_identity]
+
+/-- The geometric tail eigenvalue has a nonzero numerator on every Neary instance. -/
+theorem lowerCScale_sub_two_mul_lowerCCode_sub_one_lt_zero
+    (β : Nat) (body : List TagLetter) :
+    lowerCScale β body - 2 * lowerCCode β body - 1 < 0 := by
+  have scale_gt_three := lowerCScale_gt_three β body
+  have code_gap := five_mul_lowerCScale_sub_nine_lt_six_mul_lowerCCode β body
+  nlinarith
+
+/-- The factor used by the chain-coordinate pivots is uniformly positive. -/
+theorem lowerCScale_add_three_mul_lowerCCode_sub_six_pos
+    (β : Nat) (body : List TagLetter) :
+    0 < lowerCScale β body + 3 * lowerCCode β body - 6 := by
+  have scale_gt_three := lowerCScale_gt_three β body
+  have code_gap := five_mul_lowerCScale_sub_nine_lt_six_mul_lowerCCode β body
+  nlinarith
+
+/-- A nonmaximal ternary digit leaves a strict unit gap below the all-two word. -/
+theorem ternaryCode_succ_lt_pow_length_of_false_mem
+    (word : List Bool) (false_mem : false ∈ word) :
+    ternaryCode word + 1 < 3 ^ word.length := by
+  induction word with
+  | nil => simp at false_mem
+  | cons bit tail induction =>
+      rw [ternaryCode_cons]
+      cases bit with
+      | false =>
+          have tail_bound := ternaryCode_lt_pow_length tail
+          simp only [List.length_cons, ternaryDigit, pow_succ]
+          omega
+      | true =>
+          have false_mem_tail : false ∈ tail := by
+            simpa using false_mem
+          have tail_bound := induction false_mem_tail
+          simp only [List.length_cons, ternaryDigit, pow_succ]
+          omega
+
+/-- Every positive-width encoding of a body containing `b` contains a zero bit. -/
+theorem false_mem_tagEncode_of_b_mem
+    (β : Nat) (β_pos : 0 < β) (body : List TagLetter) (b_mem : .b ∈ body) :
+    false ∈ tagEncode β body := by
+  induction body with
+  | nil => simp at b_mem
+  | cons letter tail induction =>
+      rw [tagEncode_cons]
+      cases letter with
+      | b =>
+          have β_ne : β ≠ 0 := Nat.ne_of_gt β_pos
+          simp [tagCode, List.mem_replicate, β_ne]
+      | c =>
+          have b_mem_tail : .b ∈ tail := by
+            simpa using b_mem
+          simpa [tagCode] using induction b_mem_tail
+
+/-- A positive-width body containing `b` avoids the sole degenerate chain chart. -/
+theorem lowerCCode_add_two_lt_lowerCScale_of_b_mem
+    (β : Nat) (β_pos : 0 < β) (body : List TagLetter) (b_mem : .b ∈ body) :
+    lowerCCode β body + 2 < lowerCScale β body := by
+  let prefixWord := true :: tagEncode β body ++ [true]
+  have false_mem_prefix : false ∈ prefixWord := by
+    have encoded_mem := false_mem_tagEncode_of_b_mem β β_pos body b_mem
+    simp [prefixWord, encoded_mem]
+  have prefix_gap :=
+    ternaryCode_succ_lt_pow_length_of_false_mem prefixWord false_mem_prefix
+  have lower_shape :
+      nearyLower β body (.rule .c) = prefixWord ++ [false] := by
+    simp [nearyLower, prefixWord]
+  have natural_gap :
+      ternaryCode (nearyLower β body (.rule .c)) + 2 <
+        3 ^ (nearyLower β body (.rule .c)).length := by
+    rw [lower_shape, ternaryCode_append]
+    simp only [List.length_append, List.length_singleton, ternaryCode_singleton,
+      ternaryDigit, pow_succ]
+    omega
+  rw [lowerCCode, lowerCScale, nearySideLowerC, nearySideLowerCScale]
+  exact_mod_cast natural_gap
 
 /-- Scalar recognized by the changed row and the ordinary paired right boundary. -/
 def tiltedPairedCoefficient (ratio : ℚ) (β : Nat) (body : List TagLetter)

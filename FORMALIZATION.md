@@ -361,9 +361,12 @@ Lean proves that `F_q(w)=ternaryCode(w)+q·3^|w|` is injective for `q<−3/2`, d
 for the Neary-selected ratio `q=(K−3V)/(K−3)`, and proves pointwise zero equivalence for every
 paired control word in both phases. The result survives trailing-toggle absorption and preserves
 existential nonempty zero reachability. An exact symbolic audit constructs the associated
-`3+3+2+1` nine-state transfer realization on its nondegenerate coordinate chart and verifies
-Hankel rank nine at the `β=3`, body `bb` benchmark. Primitive-recursive basis selection,
-exterior-run safety, and the integer two-generator endpoint are not yet Lean declarations. See
+`3+3+2+1` nine-state transfer realization. Lean proves its common denominator negative for every
+body and proves the last chart factor positive whenever the positive-width body contains `b`, as
+every emitted universal body does. The audit verifies the parameter-uniform exterior grammar
+`I/I/D_c/x` on the left and `I/D_b/D_c/u` on the right, plus all 36 short representatives at the
+`β=3`, body `bb` benchmark. Rational matrix emission, denominator clearing, and the final
+two-generator reduction are not yet Lean declarations. See
 [`m92-changed-separator-transfer-2026-08-31.md`](audits/m92-changed-separator-transfer-2026-08-31.md).
 
 Lean also constructs the canonical reachable-observable quotient around any internal physical

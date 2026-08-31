@@ -173,6 +173,82 @@ def nilpotent_chain_realization() -> tuple[sp.Matrix, sp.Matrix, sp.Matrix]:
     return transition, input_matrix, output_matrix
 
 
+def verify_symbolic_exterior(
+    transition: sp.Matrix, input_matrix: sp.Matrix, output_matrix: sp.Matrix
+) -> None:
+    toggle, data_b, data_c, column, row = benchmark_roles()
+    denominator, _, _, tail_eigenvalue, _ = construction_parameters()
+    tail_basis = sp.zeros(9, 1)
+    tail_basis[8, 0] = 1
+
+    assert entrywise_zero(output_matrix * input_matrix - toggle)
+    assert entrywise_zero(output_matrix * transition * input_matrix - data_b)
+    assert entrywise_zero(output_matrix * transition**2 * input_matrix - data_c)
+    assert entrywise_zero(output_matrix * transition**3 * input_matrix - column * row)
+    assert entrywise_zero(transition**3 * input_matrix - tail_basis * row)
+    assert entrywise_zero(
+        output_matrix * transition**3 - tail_eigenvalue**3 * column * tail_basis.T
+    )
+    assert entrywise_zero(transition * tail_basis - tail_eigenvalue * tail_basis)
+    assert entrywise_zero(tail_basis.T * transition - tail_eigenvalue * tail_basis.T)
+
+    one_step_input = transition * input_matrix
+    one_step_input_minor = one_step_input.extract([1, 4, 7, 8], [0, 1, 2, 3])
+    expected_one_step_input_det = (
+        -216
+        * (lower_scale - lower_code - 2)
+        * denominator
+        / (
+            lower_scale**2
+            * r
+            * (3 * r - 1)
+            * (lower_scale - 2 * lower_code - 1)
+            * (lower_scale + 3 * lower_code - 6)
+        )
+    )
+    assert sp.cancel(one_step_input_minor.det() - expected_one_step_input_det) == 0
+
+    one_step_output = output_matrix * transition
+    assert entrywise_zero(one_step_output[[1], :])
+    one_step_output_minor = one_step_output.extract([0, 2, 3], [0, 1, 3])
+    observability_pivot = (
+        9 * lower_scale**2 * r**2
+        - lower_scale**2 * r
+        - 18 * lower_scale * lower_code * r**2
+        + 6 * lower_scale * lower_code * r
+        - 9 * lower_scale * r**2
+        - 3 * lower_scale * r
+        - 48 * lower_scale
+        + 48 * lower_code
+        + 96
+    )
+    expected_one_step_output_det = (
+        162
+        * r
+        * (lower_scale - 3)
+        * observability_pivot
+        / (lower_scale * (3 * r - 1) ** 2 * (lower_scale - 2 * lower_code - 1) ** 2)
+    )
+    assert sp.cancel(one_step_output_minor.det() - expected_one_step_output_det) == 0
+
+    two_step_input = transition**2 * input_matrix
+    two_step_input_minor = two_step_input.extract([2, 5, 8], [0, 1, 2])
+    assert sp.cancel(two_step_input_minor.det() - 1 / r) == 0
+
+    two_step_output = output_matrix * transition**2
+    assert entrywise_zero(two_step_output[[1], :])
+    two_step_output_minor = two_step_output.extract([0, 2, 3], [0, 3, 8])
+    expected_two_step_output_det = (
+        -3
+        * lower_scale**3
+        * r
+        * (3 * r - 1) ** 2
+        * (lower_scale - 2 * lower_code - 1) ** 2
+        / denominator**2
+    )
+    assert sp.cancel(two_step_output_minor.det() - expected_two_step_output_det) == 0
+
+
 def verify_exact_benchmark(
     transition: sp.Matrix, input_matrix: sp.Matrix, output_matrix: sp.Matrix
 ) -> None:
@@ -185,6 +261,42 @@ def verify_exact_benchmark(
     assert (transition**3).rank() == 1
     assert input_matrix.rank() == 4
     assert output_matrix.rank() == 4
+
+    toggle, data_b, data_c, column, row = benchmark_roles()
+    data_b = data_b.subs(substitution)
+    data_c = data_c.subs(substitution)
+    column = column.subs(substitution)
+    row = row.subs(substitution)
+    assert [(transition**exponent * input_matrix).rank() for exponent in range(6)] == [
+        4,
+        4,
+        3,
+        1,
+        1,
+        1,
+    ]
+    assert [(output_matrix * transition**exponent).rank() for exponent in range(6)] == [
+        4,
+        3,
+        3,
+        1,
+        1,
+        1,
+    ]
+    left_candidates = [sp.eye(4), sp.eye(4), data_c, row, row, row]
+    right_candidates = [sp.eye(4), data_b, data_c, column, column, column]
+    for exponent in range(6):
+        left = transition**exponent * input_matrix
+        left_candidate = left_candidates[exponent]
+        assert sp.Matrix.vstack(left, left_candidate).rank() == left.rank()
+
+        right_transpose = (output_matrix * transition**exponent).T
+        right_candidate_transpose = right_candidates[exponent].T
+        assert (
+            sp.Matrix.vstack(right_transpose, right_candidate_transpose).rank()
+            == right_transpose.rank()
+        )
+    print("benchmark 36-class exterior kernels verified")
 
     _, _, _, tail_eigenvalue, ratio = construction_parameters()
     expected_ratio = sp.Rational(-18_793, 10_220)
@@ -210,6 +322,8 @@ def verify_exact_benchmark(
 def main() -> None:
     transition, input_matrix, output_matrix = nilpotent_chain_realization()
     print("symbolic 3+3+2+1 chain realization verified")
+    verify_symbolic_exterior(transition, input_matrix, output_matrix)
+    print("symbolic exterior rank profile verified")
     verify_exact_benchmark(transition, input_matrix, output_matrix)
 
 

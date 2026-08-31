@@ -250,7 +250,7 @@ The unknown cells immediately below this staircase are:
 | `M₃(4)` | three-active-role fixed-boundary PCP / `GPCP(3)`, or a new same-dimension generator compiler | by CHHN, also `M₉(2)` |
 | `M₄(3)` | an undecidable promised two-state overlap queue with pure deletion, or closure of either parabolic bridge language | by CHHN, also `M₈(2)` |
 | `M₅(3)` | a five-state binary same-zero root, a toggle/separator fusion, or fixed-width-three scheduled universality | supersedes `M₆(3)`; `M₁₀(2)` is already known |
-| `M₉(2)` | finish the tilted-separator rank-nine transfer: total basis selection, exterior-run converse, integer emission | improves the two-generator threshold by one |
+| `M₉(2)` | move the total tilted-separator realization and its closed exterior grammar into Lean, then clear denominators | improves the two-generator threshold by one |
 | `M₂(k≥3)` | a qualitatively different decidability or undecidability argument | settles the dimension-two wall |
 
 The scalar result `Z₆(2)` gives `M₆(3)` after adjoining a separator; that mortality point was
@@ -1166,10 +1166,21 @@ the separator row. Explicit rational functions give moments
 for every paired control word and both phases, including trailing-toggle absorption. This is the
 first exact rank-nine same-zero transfer core, not another finite-depth candidate.
 
-The live work is now narrow: make the rational basis choice total on the fixed universal Neary
-image, prove the arbitrary exterior-run converse for the physical pair `(A,UV)`, clear
-denominators, and connect the resulting integer pair to the existing code-halting reduction.
-Until those steps are checked, `M₉(2)` remains open.
+The rational chart is now total on the emitted family. Lean proves its common denominator and
+tail eigenvalue nonzero for every body and its last pivot nonzero when the body contains `b`;
+the universal compiler emits such bodies. The exact exterior grammar is also closed. For any
+interface matrix `X`, `A^pUXVA^q=0` reduces on each side through
+
+```text
+L_0=L_1=I,  L_2=D_c,  L_p=x (p≥3),
+R_0=I,      R_1=D_b,  R_2=D_c,  R_q=u (q≥3).
+```
+
+Role fringes extend a source word; `x,u` are the two separator boundaries. Hence the existing
+outer-product theorem reflects every malformed physical zero to a source scalar zero. The live
+work is now transcriptional but still proof-bearing: define the audited rational matrices in
+Lean, prove the moment and exterior certificates there, clear denominators, and connect the
+integer pair to the code-halting reduction. Until those steps are checked, `M₉(2)` remains open.
 See
 [`audits/m92-run-length-transfer-hankel-2026-08-31.md`](audits/m92-run-length-transfer-hankel-2026-08-31.md),
 [`audits/m92-sparse-transfer-hankel-2026-08-31.md`](audits/m92-sparse-transfer-hankel-2026-08-31.md),

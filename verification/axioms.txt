@@ -211,6 +211,18 @@
 'MatrixMortality.ChangedSeparatorTail.nearyTailRatio_lt_neg_three_halves' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.ChangedSeparatorTail.transferDenominator_lt_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ChangedSeparatorTail.exteriorObservabilityPivotNumerator_lt_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ChangedSeparatorTail.lowerCScale_sub_two_mul_lowerCCode_sub_one_lt_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ChangedSeparatorTail.lowerCCode_add_two_lt_lowerCScale_of_b_mem' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.ChangedSeparatorTail.nearyTiltedPairedCoefficient_eq_zero_iff' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]

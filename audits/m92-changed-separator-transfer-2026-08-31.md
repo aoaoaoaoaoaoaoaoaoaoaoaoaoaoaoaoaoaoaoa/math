@@ -49,10 +49,17 @@ det Q = −2Kr(K+3V−6)/((3r−1)(K−2V−1)),
 E₂₃ = 216(K−V−2)/(K(K+3V−6)).
 ```
 
-The exceptional locus `K−V−2=0` changes the nilpotent chain partition; the Hankel rank still
-does not exceed nine, but the displayed `3+3+2+1` coordinates are not a total parameterization
-there. A uniform emitted compiler must either prove the universal Neary bodies avoid this locus
-or branch to another rational basis.
+Lean proves that `D<0` for every `β,body`. It also proves
+
+```text
+K−2V−1<0,    K+3V−6>0.
+```
+
+The sole remaining chart factor is `K−V−2`. When `β>0` and the body contains `b`, its binary
+encoding contains a zero digit, so the lower `c` word is strictly below the unique maximal word
+of the same length and `K−V−2>0`. The fixed universal compiler emits bodies beginning and ending
+in `b`; hence the displayed `3+3+2+1` basis is total on the emitted family. No degenerate basis
+branch remains.
 
 ## Same-zero theorem
 
@@ -102,21 +109,47 @@ The checker reconstructs the canonical nine-state realization exactly. Its trans
 `6,3,1` at powers `1,2,3`, its input and output both have rank four, and a finite block-Hankel
 section has exact rank nine.
 
+## Exterior runs
+
+Write the two physical matrices as `(A,UV)`. For any interface matrix `X`, direct products have
+the following exact zero kernels:
+
+```text
+A^p U X V A^q = 0  iff  L_p X R_q = 0,
+
+L_0=L_1=I,    L_2=D_c,    L_p=x  for p≥3,
+R_0=I,        R_1=D_b,    R_2=D_c,    R_q=u  for q≥3.
+```
+
+The proof is finite. `VU=T` is invertible. `AU` has full column rank. Both `A²U` and `D_c`
+have rank three and the same kernel because `VA²U=D_c`. The matrices `VA` and `VA²` have the
+same one-dimensional left kernel as `D_b` and `D_c`, respectively. After three steps the two
+nilpotent length-three chains and the length-two chain vanish:
+
+```text
+A³U=e₈x,    VA³=s³u e₈ᵀ,
+Ae₈=se₈,   e₈ᵀA=se₈ᵀ.
+```
+
+The retained checker verifies these identities symbolically, together with four nonzero minors
+certifying the ranks. At the exact `β=3`, body `bb` benchmark, it also checks all 36 exterior
+representatives `p,q∈{0,1,2,3,4,5}` by equality of the corresponding kernels.
+
+Each `D_b` or `D_c` fringe merely extends the paired control word. Each `x` or `u` fringe is one
+boundary of the outer product `ux`. Therefore any physical zero gives a zero product, left
+boundary, right boundary, or scalar sandwich in the separated paired family. Adjoining the
+missing copy of `ux` turns the latter three cases into a zero product, and the Lean theorem
+`mortal_adjoin_outer_iff` reflects all four cases to a paired scalar zero. Thus arbitrary
+exterior transition runs introduce no new mortality.
+
 ## Remaining compiler obligations
 
 This result does not yet close `M₉(2)`. A complete reduction still needs:
 
-1. a rational, primitive-recursive choice of the nine-state realization for every body emitted
-   by the fixed universal Neary source, including any degenerate basis branch;
-2. the arbitrary-physical-word converse for exterior transition runs around the cut `UV`;
-3. denominator clearing and a checked integer `9×9` pair;
-4. integration with the existing universal-halting reduction and its exact axiom audit.
-
-The exterior converse has a promising rank profile. In the benchmark realization,
-`rank(A^kU)=4,4,3,1` for `k=0,1,2,≥3`, while `VA^k` has ranks `4,3,3,1`. Runs of length two
-reduce to the source role `D_c`; runs of length at least three reduce to the changed separator
-row. This gives a direct case split, but it is not yet a Lean theorem or a retained total
-parameter proof.
+1. define the audited rational `9×9` transition and cut matrices in Lean and prove their moment
+   and exterior identities there;
+2. prove primitive recursiveness, clear denominators, and emit the resulting integer pair;
+3. integrate the pair with the existing universal-halting reduction and exact axiom audit.
 
 ## Verification
 
@@ -127,4 +160,5 @@ Exact symbolic checker:
 [`tools/audit_m92_changed_separator_tail.py`](../tools/audit_m92_changed_separator_tail.py).
 
 The checker is part of `scripts/check.sh`. It uses exact SymPy rational functions; floating-point
-arithmetic is absent.
+arithmetic is absent. It checks the symbolic realization, total-chart pivots, tail eigenvectors,
+the parameter-uniform exterior kernel grammar, and the independent 36-class benchmark.

@@ -98,6 +98,7 @@ file owns the mathematical stock.
 | [`MM-O24`](#mm-o24-sparse-transfer-moment-tax) | obstruction | arbitrary distinct placements of the three paired roles with a constant separator tail need at least ten states; nonconsecutive placements need eleven | formalized late branch; audited early assembly | graduated |
 | [`MM-O25`](#mm-o25-moving-tail-transfer-tax) | obstruction | exact series agreeing after time `m`, with a last rank-three difference, have realization dimensions summing to at least `3(m+1)` | formalized | graduated |
 | [`MM-O26`](#mm-o26-geometric-tail-transfer-tax) | obstruction | every exact consecutive paired-role series with a nonzero scalar geometric separator tail needs at least ten states | formalized core; audited six-order certificates | graduated |
+| [`MM-C05`](#mm-c05-tilted-separator-rank-nine-transfer) | partial construction | a changed same-zero separator has an exact nine-state transfer realization with a finite, source-role exterior grammar | formalized semantic and chart arithmetic; audited realization | active |
 | [`MM-M01`](#mm-m01-off-diagonal-companion-interface) | partial mechanism | off-diagonal rank-two bridge has a complete fracture grammar | audited | stock |
 | [`MM-M02`](#mm-m02-bordered-toggle) | partial mechanism | one lifted toggle has a stable rank-two third power | audited | parked |
 | [`MM-M03`](#mm-m03-five-state-setter-punctuation) | partial mechanism | a mixed delimiter word is an exact internal rank-one separator | audited | closed |
@@ -2366,7 +2367,7 @@ moving tail must have at least two modes or leave exact moment preservation.
 ### MM-C05: Tilted-separator rank-nine transfer
 
 **Kind:** partial construction
-**Evidence:** formalized semantic core; audited symbolic realization
+**Evidence:** formalized semantic and chart arithmetic; audited symbolic realization and exterior grammar
 **Disposition:** active
 
 Let `r=3^β`, and let `V,K` be the code and scale of Neary's lower `c` word. Explicit rational
@@ -2388,17 +2389,41 @@ row by `(1,q,q,q)` preserves the scalar zero set for every paired control word a
 The same-zero theorem remains exact after trailing-toggle absorption and at the existential
 nonempty-word boundary.
 
-**Scope:** the same-zero boundary theorem is formal and uniform in `β,body`. The nine-state
-realization is an exact symbolic audit on a nondegenerate coordinate chart. A degenerate basis
-branch, exterior transition runs, effective integer emission, and the final universal reduction
-remain open. This record does not yet claim undecidability of `M₉(2)`.
+Lean also proves that the realization denominator is negative for every `β,body`, that the tail
+eigenvalue and one-step observability pivot are nonzero, and that the remaining chart factor
+`K−V−2` is positive whenever `β>0` and the body contains `b`. The emitted universal bodies begin
+and end in `b`, so the formerly exceptional basis branch is absent.
 
-**Use:** pursue the changed separator, not another lower bound. The old ten-state throat is
-breached at exact Hankel dimension nine while retaining the source zero language. Next prove the
-exterior-run converse and make basis selection total on the fixed universal Neary image.
+For arbitrary interface matrix `X`, the exact chain realization has only sixteen exterior
+kernel classes. Writing `u` for the changed separator column, they are
+
+```text
+A^p U X V A^q = 0  iff  L_p X R_q = 0,
+L_0=L_1=I,  L_2=D_c,  L_p=x for p≥3,
+R_0=I,      R_1=D_b,  R_2=D_c,  R_q=u for q≥3.
+```
+
+The symbolic checker verifies the parameter-uniform pivots and tail eigenvector identities from
+which all sixteen classes follow; its exact rational benchmark separately checks all 36
+representatives with `p,q∈{0,1,2,3,4,5}`. Source-role extensions remain inside the paired family,
+while a boundary `x` or `u` is exactly one side of its outer-product separator. The already formal
+`mortal_adjoin_outer_iff` theorem therefore reduces every physical exterior zero to a paired
+scalar zero.
+
+**Scope:** the same-zero theorem and every chart nonvanishing inequality are formal and uniform.
+The nine-state matrices and exterior-kernel certificates are exact symbolic audit artifacts, not
+yet Lean declarations. Rational matrix emission, denominator clearing, and the final universal
+reduction remain open. This record does not yet claim undecidability of `M₉(2)`.
+
+**Use:** the exact realization and its malformed-run converse now share one finite grammar. Move
+the audited matrices into Lean, clear their denominators, and connect the resulting integer pair
+to the universal source reduction.
 
 **Formalization:** `tiltedTernaryCode_injective`,
-`nearyTailRatio_lt_neg_three_halves`, `nearyTiltedPairedCoefficient_eq_zero_iff`, and
+`nearyTailRatio_lt_neg_three_halves`, `transferDenominator_lt_zero`,
+`exteriorObservabilityPivotNumerator_lt_zero`,
+`lowerCCode_add_two_lt_lowerCScale_of_b_mem`,
+`nearyTiltedPairedCoefficient_eq_zero_iff`, and
 `nearyTiltedTrailingToggle_hasNonemptyZero_iff` in
 [`MatrixMortality/ChangedSeparatorTail.lean`](MatrixMortality/ChangedSeparatorTail.lean).
 
