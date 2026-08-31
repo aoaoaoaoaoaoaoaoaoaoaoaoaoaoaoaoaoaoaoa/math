@@ -533,7 +533,7 @@ valuation `a−min(2b,a)` for `a=vₚ(B)` and `b=vₚ(t)`, except at the sole cr
 `a=2b`; at equality, its valuation is still nonpositive whenever the affine predecessor is
 defined. For `t=q^(w+1)`, this is the exact word-visible tax `2(w+1)vₚ(q)`. Positive denominator
 depth survives one terminal pullback only above that tax. Later shell re-entry and cross-prime
-common content remain unclassified. `R32-S44` through `R32-S47` are strict
+common content remain unclassified. `R32-S44` through `R32-S48` are strict
 obstructions, not the arbitrary-composite classification. The two-coordinate interface does
 not reduce to finite-alphabet `M₂(3)` because every scale `qⁿ` remains a distinct return letter.
 
@@ -557,6 +557,13 @@ tie is one explicit sum. Lean also checks a nonresonant five-return zero at `d=3
 even scales; its inverse orbit crosses both `x=−b` and the critical wall. Together with the
 earlier arbitrary-scale fractures, this shows that none of the four walls, nor common prime
 content alone, forces resonance. Common powers of one base remain unclassified.
+
+The denominator-cleared physical cut now supports fractional finite walls without assuming
+`A=1`. In every prime quotient where `q=1`, mortality forces `B=A`; where `q=−1`, it forces
+`B=±A`. Consequently every prime factor of `q−1` divides `B−A`, while every prime factor of
+`q+1` divides `B−A` or `B+A`. These word-independent cyclotomic conditions eliminate fraction
+assignments before inverse-wall search. They do not classify higher-order reductions of `q`,
+whose projective action need not remain on the two signed rays.
 
 The common-geometric-base hypothesis cannot be weakened to total divisibility of an arbitrary
 scale alphabet. Lean checks that `[3,15,3,3,15,3,3,3]` is pairwise totally ordered under
@@ -1719,6 +1726,7 @@ fixed-rank decision problem.
 | `ReturnSquareClassification.lean` | complete prime-power ReturnSquare parameter classification |
 | `ReturnSquareComposite.lean` | arbitrary-base root support, positive-valuation synchronization, and the divisibility-chain fracture |
 | `ReturnSquareFractionPullback.lean` | full fraction pullback, denominator-prime shell grammar, and exact four-wall residue laws |
+| `ReturnSquareFractionFiniteWall.lean` | denominator-cleared fractional cuts and fixed/signed cyclotomic finite walls |
 | `ReturnSquareTax.lean` | exact four-state lower bound for literal reversible-stack returns |
 | `ReturnSquareNoGo.lean` | quadratic-pencil reversible-squaring obstruction and blind-scaling collapse |
 | `ReturnJordan.lean` | parity-Jordan rail rigidity and modular immortality certificate |
@@ -1944,6 +1952,7 @@ fixed-rank decision problem.
 | Prime-power ReturnSquare is mortal exactly at one-return resonances | `ReturnSquare.physical_isMortal_primePower_iff` |
 | Every positive valuation of a composite-base ReturnSquare bridge zero equals the corresponding base valuation times one common proper-tail exponent | `ReturnSquare.positiveBridge_zero_positive_valuation_eq_tail`, `ReturnSquare.positiveBridge_zero_positive_valuations_cross_mul` |
 | Every denominator-prime valuation wall has one exact normalized residue transition; arbitrary even scales realize the numerator and critical walls in one nonresonant zero | `ReturnSquare.fractionPredecessor_hasValue_of_numerator_wall`, `ReturnSquare.fractionPredecessor_hasValue_of_equalScale_residue`, `ReturnSquare.fractionPredecessor_hasValue_of_denominatorScale_residue`, `ReturnSquare.fractionPredecessor_hasValue_of_critical_scale_wall`, `ReturnSquare.evenScales_threeFourths_wall_fracture` |
+| Every mortal fraction reduces to `1` where the base reduces to `1`, and to `±1` where the base reduces to `−1` | `ReturnSquare.isMortal_forces_fraction_modEq_one`, `ReturnSquare.isMortal_forces_fraction_modEq_neg_one` |
 | Total divisibility of an arbitrary scale alphabet does not force ReturnSquare resonance-only roots | `ReturnSquare.divisibilityChain_twentyFive_twentySeven_zero` |
 | Literal reversible-stack returns require at least four exact states | `ReturnSquareTax.reversibleStack_card_lower_bound` |
 | Three singular quadratic modes cannot exchange `t` with `κt²` | `ReturnSquareNoGo.threeMode_swap_eq_zero` |
