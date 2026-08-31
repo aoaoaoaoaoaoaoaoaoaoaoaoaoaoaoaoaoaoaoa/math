@@ -1585,6 +1585,14 @@ same module. `ParabolicBlade.bridge_bOne_cTwo_cZero_det` compresses the exact de
 numbers. The exact boundary is
 [`audits/m43-opposite-right-c-defect-cylinder-2026-08-31.md`](audits/m43-opposite-right-c-defect-cylinder-2026-08-31.md).
 
+The phase-zero double-`c` parity cylinder
+[`M4-S18`](SALVAGE.md#m4-s18-phase-zero-double-c-parity-cylinder) is checked in the same module.
+`ParabolicBlade.bridge_bZero_cTwo_cOne_det` gives the primitive integral code-coordinate core of
+`b(3z)c(3x+2)c(3y+1)`. The theorem
+`ParabolicBlade.bridge_bZero_cTwo_cOne_det_ne_zero_of_odd_body` proves that it is `2` modulo four
+whenever the body length and its number of `b` letters are both odd. The exact boundary is
+[`audits/m43-phase-zero-double-c-parity-cylinder-2026-08-31.md`](audits/m43-phase-zero-double-c-parity-cylinder-2026-08-31.md).
+
 The residue-zero `c`-endpoint exclusion
 [`M4-S12`](SALVAGE.md#m4-s12-residue-zero-c-endpoint-exclusion) is checked in the same module.
 `ParabolicBlade.bridge_cZero_bTwo_bOne_det` and
