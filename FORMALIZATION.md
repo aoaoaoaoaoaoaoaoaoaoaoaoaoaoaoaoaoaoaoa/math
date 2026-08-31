@@ -1254,9 +1254,12 @@ corridor an all-depth normal form. `DecimalSetterDepth.peeledNumerator_multi_she
 `depthTwo_suffix_to_peeled` connects this recurrence to the distinguished-reset suffix peel.
 `peeledHead_trichotomy` and `bTag_cannot_head_equalDepth` exclude the initial leading-`b`
 head. `peeledNumerator_forces_lastDigit` and `peeledLastDigit_twoStep` prove that the
-generalized carrier's unit residues form a compatible period-two cycle. The module does not
-identify later product residuals with raw encoded heads and does not cover upper length two with
-the modulo-`100` law.
+generalized carrier's unit residues form a compatible period-two cycle. Record
+[`MM-S18`](SALVAGE.md#mm-s18-length-two-carrier-extinction) removes the former exceptional
+transition: `peeledNumerator_twoAdic_deepens` proves that the difference of the two normalized
+`2`-adic units cannot remain a unit, and `peeledMultiPole_three_le_length` therefore forces
+every non-singleton consecutive multi-pole block to have upper length at least three. The module
+does not identify later product residuals with raw encoded heads or decide singleton targets.
 
 The dimension-two affine ledger has six independently checked records:
 
@@ -1696,7 +1699,7 @@ fixed-rank decision problem.
 | `DecimalSetterCarry.lean` | two-reset successive-pole identities, joint depth constraints, exact decimal suffix exhaustion, first-transfer prefix separation, and the ordinary depth-two A/B shell forest |
 | `DecimalSetterChamber.lean` | exact decimal pole chambers, both ordinary A-to-A length-two extinctions, and the emitted-body grammar certificate |
 | `DecimalSetterResonance.lean` | complete ordinary depth-two A-to-B and B-to-A extinction, phase-word exhaustion, and compiler-envelope specialization |
-| `DecimalSetterDepth.lean` | recursive two-unit A-shell carrier, initial raw-head exclusion, and the exact last-digit two-cycle obstruction |
+| `DecimalSetterDepth.lean` | recursive two-unit A-shell carrier, length-two extinction, initial raw-head exclusion, and the exact last-digit two-cycle obstruction |
 | `PairedMortality.lean` | common-column mortality converse and exact integer `4 × 4` family |
 | `PhaseFracture.lean` | phase normalization and dimension-free projective-identification contradiction |
 | `PhaseRigidity.lean` | checked local role algebra, discrepancy commutators, and invariant-pencil rigidity |

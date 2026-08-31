@@ -763,9 +763,12 @@ resonance by decimal units `(N,D)` with `t=N/(10μD)`. A block replaces the nume
 `R=NT−10μGVD`; a following A pole forces `R=10^(m−1)N'`, and the next pair is `(N',EN)`.
 The initial raw-head grammar excludes the leading-`b` head and reduces the nonterminal entry to
 the two-`c` head. It does not recur: `N'` is a generalized product residual. For `m≥3`, the
-forced last digits form a lawful period-two cycle, while `m=2` does not expose the second decimal
-digit. The next invariant must recognize a higher suffix language of generalized residuals and
-handle the length-two carrier transition separately.
+forced last digits form a lawful period-two cycle. The apparent `m=2` escape is now closed:
+[`MM-S18`](SALVAGE.md#mm-s18-length-two-carrier-extinction) proves that two equal-depth
+`2`-adic summands cancel beyond depth one, contradicting the shell forced by a following
+multi-role pole. Every surviving non-singleton transition therefore has `m≥3`, and the unit-digit
+law applies without an exceptional branch. The remaining invariant must recognize a higher
+suffix language of these generalized residuals; singleton targets remain separate.
 
 The immediate ternary question is which other positive valuation-one discrepancies survive its
 suffix sieve without already certifying source halting.

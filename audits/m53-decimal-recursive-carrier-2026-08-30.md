@@ -136,6 +136,10 @@ The upper-length-two case is separate. Equation (3) then gives only one factor o
 modulo-`100` cancellation used in (6) does not fire. The ordinary-reset two-c chamber does not
 apply automatically because a generalized carrier need not lie in its source interval.
 
+[`MM-S18`](../SALVAGE.md#mm-s18-length-two-carrier-extinction) subsequently closes this
+boundary: after division by ten, the two depth-one summands are `2`-adic units whose difference
+cannot remain a unit. Thus no consecutive multi-shell transition has upper length two.
+
 ## Exact Frontier
 
 The all-depth A-shell state is now the pair `(N,D)`, not a single raw discrepancy head. A
@@ -144,7 +148,7 @@ closure must do at least one of the following:
 1. prove a structural bridge from the generalized product residual `N'` to a restricted
    suffix language stronger than its unit residue;
 2. construct a higher-digit invariant that breaks the period-two unit cycle;
-3. kill the generalized upper-length-two transition by a new chamber or arithmetic identity.
+3. recognize every surviving transition at upper length at least three.
 
 Treating every `N'` as another encoded head is invalid. Treating the ordinary length-two
 chamber as a generalized-carrier theorem is also invalid.

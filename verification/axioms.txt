@@ -970,6 +970,12 @@
 'MatrixMortality.DecimalSetterDepth.peeledNumerator_multi_shell' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.DecimalSetterDepth.peeledNumerator_twoAdic_deepens' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterDepth.peeledMultiPole_three_le_length' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.DecimalSetterDepth.peeledStep_factor' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.DecimalSetterDepth.depthTwo_suffix_to_peeled' depends on axioms: [propext,
  Classical.choice,
