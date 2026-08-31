@@ -256,6 +256,7 @@ file owns the mathematical stock.
 | [`G3-O31`](#g3-o31-whole-carrier-terminal-row-obstruction) | obstruction | a nonzero row contains at most one plane in the explicit infinite nonprojective carrier orbit | formalized | graduated |
 | [`G3-O32`](#g3-o32-terminal-point-incidence-dichotomy) | obstruction | a fixed terminal point test on the infinite carrier orbit accepts all depths or at most two, sharply, but singleton acceptance has no uniform horizon | formalized | graduated |
 | [`G3-O33`](#g3-o33-uniform-terminal-coefficient-section) | universality | one total rational row section realizes every prescribed `A−B2ⁿ−C3ⁿ` terminal scalar at every source, including any source-indexed delayed singleton | formalized | graduated |
+| [`G3-O34`](#g3-o34-letter-blind-infinite-carrier-collision) | obstruction | the literal infinite-carrier generator identifies a `bcbc` terminal control with its certified nonterminal near-fork because both data letters use the same matrix | formalized | graduated |
 | [`G3-O02`](#g3-o02-rational-phase-fracture) | obstruction | a mortal paired instance has no rational phase-state same-zero compression | audited | stock |
 | [`G3-O03`](#g3-o03-history-sensitive-minimal-body-fracture) | obstruction | minimal bodies admit an exact history-sensitive three-state same-zero compiler | formalized | graduated |
 | [`G3-O04`](#g3-o04-expanding-affine-history-no-go) | obstruction | finite-mode expanding one-coordinate history has decidable target reachability | audited | graduated |
@@ -11110,9 +11111,64 @@ how the complete three-control monoid transports histories into a selected depth
 **Artifact:** [`TransverseInfiniteAtlas.lean`](MatrixMortality/TransverseInfiniteAtlas.lean) and
 [`m34-terminal-coefficient-section-2026-08-31.md`](audits/m34-terminal-coefficient-section-2026-08-31.md).
 
-**Next:** seek a source-computable generator family whose arbitrary-word state maps exactly the
-paired terminal histories to one selected depth, or prove that three-state rank-two word dynamics
-cannot supply such a history-to-depth map. Coefficient fitting itself is closed.
+**Next:** [`G3-O34`](#g3-o34-letter-blind-infinite-carrier-collision) kills the literal generator:
+using the same data map for `b` and `c` identifies a `bcbc` terminal control with a nonterminal
+near-fork. A survivor needs distinct data maps while retaining nonprojective infinite carriers and
+a terminal section.
+
+### G3-O34: Letter-blind infinite-carrier collision
+
+**Kind:** obstruction
+
+**Evidence:** formalized
+
+**Disposition:** graduated
+
+The `G3-O30` generator sends both data controls to the same rank-two matrix:
+
+```text
+X_b = D_s = X_c.
+```
+
+The two `bcbc` controls isolated in `G3-O26` have opposite paired semantics:
+
+```text
+u = c t b c b t c b t             (terminal),
+v = b t c b c t c b t             (nonterminal).
+```
+
+They have the same length and toggles in the same three positions. Every remaining position is a
+data control. Replacing both data letters by `D_s` therefore gives the exact matrix identity
+
+```text
+X_u = X_v
+```
+
+for every rational source `s`. Lean proves this at the actual `wordProduct` level, then quantifies
+over arbitrary rows and columns. If the resulting linear representation had the `bcbc` paired
+zero set, terminality of `u` would force its coefficient to zero; product equality would force
+the coefficient of `v` to zero; and the same-zero converse would contradict the certified
+nonterminality of `v`.
+
+**Scope:** the obstruction fixes the literal `G3-O30` generator, in which the two data labels are
+identified. It does not apply to distinct rank-two data maps, even if they share the same source
+plane, nor to a different nonprojective toggle. It does not weaken the carrier-orbit,
+zero-count, or coefficient-section theorems `G3-O30`–`G3-O33`; those remain reusable components of
+a modified architecture.
+
+**Use:** delete the direct hope that the existing infinite-carrier generator plus a more ingenious
+row or column can recognize the complete paired language. `G3-O33` makes terminal fitting
+universal, but no terminal fitting can repair a word-product collision with opposite source
+semantics. A survivor must make `X_b≠X_c` and reprove both the infinite-carrier geometry and the
+terminal section.
+
+**Artifact:**
+[`TransverseInfiniteCollision.lean`](MatrixMortality/TransverseInfiniteCollision.lean) and
+[`m34-letter-blind-infinite-carrier-collision-2026-08-31.md`](audits/m34-letter-blind-infinite-carrier-collision-2026-08-31.md).
+
+**Next:** perturb `D_s` into two source-computable rank-two data maps that separate the near-fork
+while preserving an infinite nonprojective carrier orbit. Then recompute the terminal scalar and
+all-word dynamics; row and column fitting alone cannot repair this collision.
 
 ### G3-O13: Rational serializer pumping
 

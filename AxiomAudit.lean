@@ -259,6 +259,8 @@ open MatrixMortality
 #print axioms TransverseInfiniteAtlas.coefficientSection_terminalValue
 #print axioms TransverseInfiniteAtlas.coefficientSection_sourceFamily_delayed_zero_iff
 #print axioms TransverseInfiniteAtlas.wordProduct_carrierWord
+#print axioms TransverseInfiniteCollision.bcbcTerminal_wordProduct_eq_nearFork
+#print axioms TransverseInfiniteCollision.no_letterBlind_bcbc_sameZero
 #print axioms BranchingHistory.bcbcNull_append
 #print axioms BranchingHistory.bcbcForkRoles_injective
 #print axioms BranchingHistory.bcbcTerminalFork_injective
