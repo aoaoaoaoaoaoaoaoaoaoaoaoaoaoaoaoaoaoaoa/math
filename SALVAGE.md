@@ -138,6 +138,7 @@ file owns the mathematical stock.
 | [`R32-O05`](#r32-o05-jordan-parity-verifier-collapse) | obstruction | the rank-compatible parity-Jordan verifier is unique and immortal modulo seven | formalized | graduated |
 | [`R32-D01`](#r32-d01-returnsquare-immortality-walls) | decidable stratum | nonnegative parameters and a uniform outer negative half-line are immortal | formalized | stock |
 | [`R32-D02`](#r32-d02-prime-power-returnsquare-classification) | decidable stratum | prime-power ReturnSquare is mortal exactly at one-return resonances | formalized | graduated |
+| [`R32-S44`](#r32-s44-composite-returnsquare-tail-synchronization) | structure theorem and obstruction | every numerator-prime valuation of a composite-base bridge zero is fixed by one common proper-tail exponent | formalized | active |
 | [`R32-M01`](#r32-m01-generic-reverse-edge-compiler) | partial mechanism | projective incidence generically embeds into a compatible two-plane edge square | formalized | active |
 | [`R32-M02`](#r32-m02-finite-quotient-sieve) | partial mechanism | finite monoid quotients give complete modular no-certificates for fixed candidates | formalized | active |
 | [`R32-M03`](#r32-m03-two-scale-return-conversion) | partial mechanism | a minimal two-scale return pencil has nonresonant multi-return zeros | formalized | active |
@@ -4718,6 +4719,55 @@ theorems in [`PrimitiveDivisor.lean`](MatrixMortality/PrimitiveDivisor.lean),
 
 **Use:** prime-power ReturnSquare is closed. Search multi-prime or genuinely multi-scale
 families instead of longer words in this family.
+
+### R32-S44: Composite ReturnSquare tail synchronization
+
+**Kind:** structure theorem and obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+Let a nondegenerate ReturnSquare bridge at integral base `q≠0` vanish on the positive-return
+word `[h] ++ tail`, and write its parameter as `c=−d`. The rational-root theorem first gives
+
+```text
+num(d) ∣ q^E,              den(d) ∣ q^(2E),
+E = waitExponent([h] ++ tail).
+```
+
+Hence every prime in the canonical numerator or denominator divides `q`. More sharply, if
+`p∣q` and `δ=vₚ(d)>0`, then Lean proves
+
+```text
+tail ≠ [],                 δ = vₚ(q)·waitExponent(tail).       (∗)
+```
+
+The proof follows the first column of the normalized return product. Its lower coordinate is
+always a p-adic unit. Before the accumulated wait valuation reaches `δ`, the upper-coordinate
+valuation is exactly that accumulation; after crossing `δ`, it is either zero at the crossing
+or strictly larger and cannot return. A zero at the leftmost return therefore forces the whole
+proper tail to land exactly on `δ`. Applying (∗) at two numerator primes gives the
+cross-multiplication law
+
+```text
+vₚ(d)vₗ(q) = vₗ(d)vₚ(q).
+```
+
+**Scope:** this synchronizes every positive valuation, equivalently every numerator-prime
+valuation, by one word-determined exponent. It does not control negative valuations at
+denominator primes. A denominator supported on several base primes may still choose unequal
+local depths; excluding those assignments, or constructing one, is the remaining
+arbitrary-composite ReturnSquare problem.
+
+**Artifact:** `ReturnSquare.rational_root_num_den_dvd_scale_product`,
+`positiveBridge_zero_num_den_dvd_base`,
+`positiveBridge_zero_positive_valuation_eq_tail`, and
+`positiveBridge_zero_positive_valuations_cross_mul` in
+[`ReturnSquareComposite.lean`](MatrixMortality/ReturnSquareComposite.lean), with audit
+[`m32-returnsquare-composite-synchronization-2026-08-31.md`](audits/m32-returnsquare-composite-synchronization-2026-08-31.md).
+
+**Use:** any composite-base counterexample must live entirely in the unsynchronized
+denominator branch or satisfy the common-tail numerator law (∗). Do not search arbitrary
+q-smooth numerator exponent vectors.
 
 ### R32-M01: Generic reverse edge compiler
 

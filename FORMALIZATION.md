@@ -663,6 +663,13 @@ general sieve [`R32-M02`](SALVAGE.md#r32-m02-finite-quotient-sieve) to
 exclude every nonresonant reciprocal. Thus prime-power ReturnSquare is mortal exactly at
 `c=−q⁻ᵐ`.
 
+The arbitrary-composite residue is now primewise rigid on its numerator side. Every nondegenerate
+bridge zero has canonical numerator dividing `q^E` and denominator dividing `q^(2E)`. If its
+word is `[h] ++ tail` and `vₚ(d)>0` for a prime `p∣q`, then Lean proves
+`tail≠[]` and `vₚ(d)=vₚ(q)·waitExponent(tail)`. Positive valuations at all base primes
+therefore share one exact word-determined exponent. Negative denominator valuations remain
+unclassified; `R32-S44` is a strict obstruction, not the arbitrary-composite classification.
+
 Two further return architectures are checked. The exact parity-Collatz pencil
 `C₀+(−1)ⁿC₁+n(−1)ⁿC₂` has one rank-compatible normal form under the stated singularity,
 tangency, and positive-return hypotheses; its physical pair preserves a nonzero line modulo
@@ -1982,6 +1989,7 @@ fixed-rank decision problem.
 | `ReturnSquareDynamics.lean` | homogeneous projective trap and outer negative immortality wall |
 | `ReturnSquarePrimePower.lean` | bridge-polynomial root support and finite quotient walls |
 | `ReturnSquareClassification.lean` | complete prime-power ReturnSquare parameter classification |
+| `ReturnSquareComposite.lean` | arbitrary-base root support and common-tail synchronization of positive valuations |
 | `ReturnSquareTax.lean` | exact four-state lower bound for literal reversible-stack returns |
 | `ReturnSquareNoGo.lean` | quadratic-pencil reversible-squaring obstruction and blind-scaling collapse |
 | `ReturnJordan.lean` | parity-Jordan rail rigidity and modular immortality certificate |
@@ -2243,6 +2251,7 @@ fixed-rank decision problem.
 | Nonnegative and outer-negative ReturnSquare parameters are immortal | `ReturnSquare.not_physical_isMortal_of_nonneg`, `ReturnSquare.not_physical_isMortal_of_beyond_negative_wall` |
 | Bang–Zsigmondy holds above exponent two, except for `2⁶−1` | `exists_primitivePrimeDivisor` |
 | Prime-power ReturnSquare is mortal exactly at one-return resonances | `ReturnSquare.physical_isMortal_primePower_iff` |
+| Every positive valuation of a composite-base ReturnSquare bridge zero equals the corresponding base valuation times one common proper-tail exponent | `ReturnSquare.positiveBridge_zero_positive_valuation_eq_tail`, `ReturnSquare.positiveBridge_zero_positive_valuations_cross_mul` |
 | Literal reversible-stack returns require at least four exact states | `ReturnSquareTax.reversibleStack_card_lower_bound` |
 | Three singular quadratic modes cannot exchange `t` with `κt²` | `ReturnSquareNoGo.threeMode_swap_eq_zero` |
 | Two exact squaring checks collapse to blind scaling | `ReturnSquareNoGo.verifiedPush_eq_blindScale` |
