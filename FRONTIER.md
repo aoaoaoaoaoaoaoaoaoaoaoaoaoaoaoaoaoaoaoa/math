@@ -652,6 +652,12 @@ Three live routes remain.
    constant companion channel forces the physical toggle to be invertible. This contradicts
    the required rank-two cube regardless of fifth-coordinate data couplings. The exact
    bordered-companion branch is therefore closed before any `S²/S³` fracture grammar can help.
+   This exact obstruction has no finite sourcewise-existential residue:
+   [`MM-O21`](SALVAGE.md#mm-o21-sourcewise-finite-probe-blindness) constructs a changed series
+   with the same zero existence whose entire `MM-O18` probe section is constant one. It also
+   proves that a source-computable complete finite probe cutoff would decide halting. Any weaker
+   no-go must therefore use an arbitrary-word consequence of a stated architecture; any weaker
+   construction must realize its changed series in five states.
    The setter candidate
    [`MM-M03`](SALVAGE.md#mm-m03-five-state-setter-punctuation) instead uses the mixed word
    `S²A_cS³=λC̃L̃`. It proves the regular decoder and halting-to-mortality implication.

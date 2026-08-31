@@ -130,6 +130,7 @@ import MatrixMortality.DecimalSetterDepth
 import MatrixMortality.SchottkyPunctuation
 import MatrixMortality.TwoStateObstructions
 import MatrixMortality.ForcedRuleCCompanion
+import MatrixMortality.ExistentialProbeBarrier
 import MatrixMortality.OverlapQueue
 import MatrixMortality.OverlapLag
 import MatrixMortality.OverlapLagDecision
