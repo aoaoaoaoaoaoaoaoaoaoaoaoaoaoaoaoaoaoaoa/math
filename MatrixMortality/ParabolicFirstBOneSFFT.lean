@@ -106,6 +106,49 @@ theorem bZeroBDefectCOneSfft_reconstruction_divisibility
     unfold bZeroBDefectCOneSfftV
     ring
 
+/-- Eliminating the complement coordinate from `U` leaves the inherited wait factor. -/
+theorem bZeroBDefectCOneSfftU_complement_resultant
+    {R : Type*} [CommRing R] (S D y : R) :
+    bZeroBDefectCOneSfftU S D y +
+        6 * (25863242868 * y + 5570432054549) * D =
+      116405489 * bZeroBDefectCOneWaitFactor S y := by
+  unfold bZeroBDefectCOneSfftU bZeroBDefectCOneSfftN
+    bZeroBDefectCOneSfftC bZeroBDefectCOneWaitFactor
+  ring
+
+/-- Eliminating the complement coordinate from `V` leaves two affine factors. -/
+theorem bZeroBDefectCOneSfftV_complement_resultant
+    {R : Type*} [CommRing R] (S D z : R) :
+    bZeroBDefectCOneSfftV S D z +
+        2997 * (25889132 * z + 2419297) * D =
+      (9 * S - 1) * (465621956 * z + 42879529) := by
+  unfold bZeroBDefectCOneSfftV bZeroBDefectCOneSfftN bZeroBDefectCOneSfftM
+  ring
+
+/-- Eliminating the complement coordinate between `U` and `W` gives this product. -/
+theorem bZeroBDefectCOneSfftU_W_resultant
+    {R : Type*} [CommRing R] (S D y : R) :
+    -6 * (25863242868 * y + 5570432054549) *
+          bZeroBDefectCOneSfftW S D +
+        1096376045 * bZeroBDefectCOneSfftU S D y =
+      -(100325969278335 * S - 11199056405551) *
+        (4333144 * y + 953012007) := by
+  unfold bZeroBDefectCOneSfftU bZeroBDefectCOneSfftN
+    bZeroBDefectCOneSfftC bZeroBDefectCOneSfftW
+  ring
+
+/-- Eliminating the complement coordinate between `V` and `W` gives this pencil. -/
+theorem bZeroBDefectCOneSfftV_W_resultant
+    {R : Type*} [CommRing R] (S D z : R) :
+    -2997 * (25889132 * z + 2419297) * bZeroBDefectCOneSfftW S D +
+        1096376045 * bZeroBDefectCOneSfftV S D z =
+      -541643 *
+        (401303877113340 * S * z + 37512705235635 * S -
+          44796225622204 * z - 4187413381139) := by
+  unfold bZeroBDefectCOneSfftV bZeroBDefectCOneSfftN bZeroBDefectCOneSfftM
+    bZeroBDefectCOneSfftW
+  ring
+
 /-- If scale and complement are divisible by `3`, then the specialized SFFT coefficients
 occupy their fixed residue classes modulo `3`. -/
 theorem bZeroBDefectCOneSfft_mod_three
