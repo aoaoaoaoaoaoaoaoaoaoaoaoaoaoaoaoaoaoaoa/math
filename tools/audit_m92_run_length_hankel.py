@@ -94,6 +94,11 @@ def main() -> None:
                 f"{order}: expected {certificate.determinant}, obtained {determinant}"
             )
         print(f"{order}: det = {determinant}")
+    tuned = block_hankel("Tbc").subs(
+        {a: 1, b: 1, c: sp.Rational(22_234_876, 1_594_323)}
+    )
+    assert tuned.rank() == 10
+    print("Tbc tuned full Hankel rank = 10")
 
 
 if __name__ == "__main__":

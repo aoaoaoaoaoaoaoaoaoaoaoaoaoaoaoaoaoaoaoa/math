@@ -70,6 +70,17 @@ every moment from index three onward equal `P′`. Form the `16 × 16` block Han
 Every determinant is nonzero when `a,b,c` are nonzero. Hence every such exact transfer system
 has `n≥10`, for all six assignments of the three roles to the consecutive run lengths.
 
+The lower bound is sharp as a matrix-series realization bound. For
+
+```text
+a=b=1,     c=22234876/1594323,
+```
+
+the complete `16 × 16` section has exact rank ten. Because the sequence is constant from index
+three onward, these four block rows and columns span the infinite block Hankel matrix. Thus the
+full transfer series has exact linear realization dimension ten. This sharpness calculation is
+exact audited computation, not a Lean theorem and not yet a complete mortality compiler.
+
 `tools/audit_m92_run_length_hankel.py` reconstructs the four matrices, all six block Hankel
 matrices, the listed minors, and their determinants with exact SymPy arithmetic. It is part of
 `scripts/check.sh`. Lean independently checks the `Tbc` certificate by sparse kernel
