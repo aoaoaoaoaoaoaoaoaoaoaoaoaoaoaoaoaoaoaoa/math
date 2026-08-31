@@ -10666,6 +10666,43 @@ Hence a rational source `u≠u_w` can follow repeated copies of `w` inside the u
 when `kn≤v₅(u−u_w)`. Fixed-block pumping is computably bounded away from the unique periodic
 source, even though varying rational schedules can be aperiodic.
 
+The varying-schedule valuation topology is now exact inside every uninterrupted negative
+`3`-adic chamber. The carrier is rational, not implicitly integral: write
+
+```text
+u=c/3^d,      d>0,      v₃(c)=0.
+```
+
+A wait `m` remains in the chamber precisely with positive next depth, and then
+
+```text
+d'=d+m−1,      c'=(2^m c+3^d')/5.
+```
+
+The sole exit is the boundary `d=1,m=0`. In reverse, a target `c'/3^d'` has the complete
+predecessor fan
+
+```text
+m=0,…,d',      d=d'+1−m,      c=(5c'−3^d')/2^m.
+```
+
+Lean proves both completeness and pairwise distinctness. If `v₅(c')=0` as well, every displayed
+predecessor carrier has `v₅(c)=0`, so all `d'+1` branches remain in the critical shell. Thus
+bounded reverse branching is false uniformly across depths even though each individual fan is
+finite.
+
+For an arbitrary uninterrupted schedule, Lean executes the same carrier recurrence and proves
+the Łukasiewicz balance
+
+```text
+d_end+length=d_start+sum(waits).
+```
+
+Its affine slope is `3^length(2/3)^sum(waits)/5^length`. Hence fixed endpoint depths and fixed
+length determine the slope. Two such bridges which agree at one rational source agree globally;
+within-length point collisions are exactly affine-map relations and belong to the existing raw
+kernel. Only cross-length carrier equality can create a genuinely source-specific collision.
+
 Every fixed infinite schedule has a unique orbit in `ℤ₅×` because the inverse branches contract
 by `1/5`; a periodic schedule's coded orbit is rational by the displayed formula. At every
 finite precision, the transition relation is maximal: for `k≥1`, each admissible source modulo
@@ -10765,7 +10802,9 @@ unit shell; representatives can also be chosen to avoid every earlier state.
 
 **Scope:** Lean checks the finite rational all-phases cycle, the distinct published schedules,
 their affine equality in arbitrary contexts, their common guarded periodic source, exact
-repeated-block displacement and unit bounds, contextual guard preservation, the raw/shell
+repeated-block displacement and unit bounds, the exact two- and three-adic walls, the complete
+negative-depth predecessor fan, arbitrary debt-safe schedules and their balance, and
+same-length collision rigidity; it also checks contextual guard preservation and the raw/shell
 conjugacy, the contextual boundary factorization, the infinite
 odd-length raw kernel family, its guarded contextual cycles, exact homogeneous equality under
 every independent generator scaling, its two-seed group pumping law, and three independent
@@ -10786,10 +10825,15 @@ rational source may also identify distinct affine maps.
 `PeriodicShell.shellRun_eq_wordAction`, `PeriodicShell.shellRun_benchmarkRelationShift`,
 `PeriodicShell.benchmarkRelationContextGuard`, `PeriodicShell.benchmarkRelationCycle`,
 `PeriodicShell.kernelOddScheduleContextGuard`, `PeriodicShell.kernelOddScheduleCycle`, and
-`PeriodicShell.shellRun_repeat_unit_bound` in
+`PeriodicShell.shellRun_repeat_unit_bound`, together with
+`MixedPrimeDebt.shellStep_debtState_eq_iff`, `MixedPrimeDebt.debtPredecessor_fan`,
+`MixedPrimeDebt.debtPredecessor_state_injective`, `MixedPrimeDebt.shellRun_debtSafe`,
+`MixedPrimeDebt.debtRunDepth_balance`, and
+`MixedPrimeDebt.debtSafe_sameLength_collision_global`, in
 [`MixedPrimeKernel.lean`](MatrixMortality/MixedPrimeKernel.lean),
 [`MixedPrimeNormalization.lean`](MatrixMortality/MixedPrimeNormalization.lean), and
-[`PeriodicShell.lean`](MatrixMortality/PeriodicShell.lean), with the source record in
+[`PeriodicShell.lean`](MatrixMortality/PeriodicShell.lean), and
+[`MixedPrimeDebt.lean`](MatrixMortality/MixedPrimeDebt.lean), with the source record in
 [`cassaigne-nicolas-2012-semigroup-freeness.md`](references/cassaigne-nicolas-2012-semigroup-freeness.md)
 and the exact census/critical-pair certificate in
 [`audit_mixed_prime_kernel.rs`](tools/audit_mixed_prime_kernel.rs). The full arithmetic audit is
@@ -10797,7 +10841,8 @@ and the exact census/critical-pair certificate in
 
 **Use:** reject state-independent finite forbidden wait blocks, residue-only bounded `5`-adic
 exclusion, eventual shell exit or periodicity, unbounded pumping of one fixed schedule away from
-its periodic point, universal strict state-height drift, and a
+its periodic point, uniformly bounded reverse fanout, source-specific collision mechanisms at
+one fixed debt-bridge length, universal strict state-height drift, and a
 compiler whose period-one configurations must remain in that set after every single wait. Also
 reject the hope that unit normalization restores a free action or that the odd family supplies a
 strict shortening pump. The live information is exact fixed-source endpoint equality across the
@@ -10806,6 +10851,7 @@ cancellative envelope.
 
 **Next:** classify the three length-30 relations and six residual computational length-31
 relations into even-length or further parametric families, distinguishing new group relations
-from positive-congruence phenomena. Run fixed-source point-collision and exit-fibre censuses
-separately from affine-map equality; then attack residual stabilizers and accepting exits without
-assuming a canonical rewrite normal form.
+from positive-congruence phenomena. For debt-safe prefixes, census affine-map equality within
+each length and source-specific collisions only across lengths. Then attack cross-length carrier
+equality, chamber exits and reentries, residual stabilizers, and accepting exits without assuming
+a canonical rewrite normal form.
