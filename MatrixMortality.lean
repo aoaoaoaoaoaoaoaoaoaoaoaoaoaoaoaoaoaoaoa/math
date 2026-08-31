@@ -172,6 +172,7 @@ import MatrixMortality.ChangedSeparatorMomentOne
 import MatrixMortality.ChangedSeparatorTransitionPowers
 import MatrixMortality.ChangedSeparatorMomentTwo
 import MatrixMortality.ChangedSeparatorMomentThree
+import MatrixMortality.ChangedSeparatorTailMoments
 import MatrixMortality.RationalClearing
 import MatrixMortality.PairedBinaryFullAlgebra
 import MatrixMortality.PrefixFullAlgebra

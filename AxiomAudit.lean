@@ -146,6 +146,7 @@ open MatrixMortality
 #print axioms ChangedSeparatorRealization.moment_one
 #print axioms ChangedSeparatorRealization.moment_two
 #print axioms ChangedSeparatorRealization.moment_three
+#print axioms ChangedSeparatorRealization.moment_add_three
 #print axioms clearRationalFamily_isMortal_iff
 #print axioms pairedProduct_mulVec_column
 #print axioms pairedCoefficient_eq_sideCoefficient
