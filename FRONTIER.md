@@ -937,6 +937,14 @@ all-erasure survivor must satisfy both `prefixWidth>β` and the exceptional raw-
 with terminal run `s=β−1`. The entire one-marker branch is now the exceptional-late tail; the
 theorem neither proves that tail nonempty nor controls multiple `D_b` or rule-bearing words.
 
+[`MM-S47`](SALVAGE.md#mm-s47-global-one-d_b-raw-head-extinction) kills the exceptional-late
+tail. The exceptional all-`D_c` residual and the exact positioned perturbation reduce to three
+five-adic depths with fixed unit coefficients. Every strict depth order is impossible, and the
+two equality arms have leading residues `4`, while their common corner has residue `1`.
+Consequently no one-`D_b` all-erasure word carries the initial two-`c` raw head to a second
+multi-role pole, in any position. The live erasure frontier begins with at least two `D_b`
+roles; rule-bearing first blocks and later generalized carriers also remain.
+
 The ternary and decimal branches now separate at their first multi-transfer front.
 [`MM-S37`](SALVAGE.md#mm-s37-decimal-three-shape-frontier-extinction) substitutes each of the
 three role shapes left by the swapped ternary gate into the decimal carrier equation. All are
