@@ -349,6 +349,13 @@ corollaries show that `m≥3` and `h≤2` force `n≥10` whenever the comparison
 the exceptional time. See
 [`m92-moving-tail-transfer-hankel-2026-08-31.md`](audits/m92-moving-tail-transfer-hankel-2026-08-31.md).
 
+The consecutive one-state tail is closed separately. Lean checks an explicit sparse minor for
+the exact sequence `aT,bD_b,cD_c,τP′,τ²P′,…` and proves it nonsingular whenever `a,c,τ≠0`, even
+without assuming `b≠0`. Every exact ambient realization therefore has at least ten states. The
+companion audit reconstructs nonzero exact minors for all six role orders and every nonzero
+`τ`. See
+[`m92-geometric-tail-transfer-hankel-2026-08-31.md`](audits/m92-geometric-tail-transfer-hankel-2026-08-31.md).
+
 Lean also constructs the canonical reachable-observable quotient around any internal physical
 word whose product factors as `UW`. Its generators act on
 

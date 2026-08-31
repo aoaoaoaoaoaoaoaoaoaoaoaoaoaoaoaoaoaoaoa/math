@@ -96,6 +96,7 @@ file owns the mathematical stock.
 | [`MM-O23`](#mm-o23-consecutive-transfer-moment-tax) | obstruction | every exact rank-four-cut realization of three consecutive paired roles and a constant safe separator tail needs at least ten states | formalized core; audited six-order certificates | graduated |
 | [`MM-O24`](#mm-o24-sparse-transfer-moment-tax) | obstruction | arbitrary distinct placements of the three paired roles with a constant separator tail need at least ten states; nonconsecutive placements need eleven | formalized late branch; audited early assembly | graduated |
 | [`MM-O25`](#mm-o25-moving-tail-transfer-tax) | obstruction | exact series agreeing after time `m`, with a last rank-three difference, have realization dimensions summing to at least `3(m+1)` | formalized | graduated |
+| [`MM-O26`](#mm-o26-geometric-tail-transfer-tax) | obstruction | every exact consecutive paired-role series with a nonzero scalar geometric separator tail needs at least ten states | formalized core; audited six-order certificates | graduated |
 | [`MM-M01`](#mm-m01-off-diagonal-companion-interface) | partial mechanism | off-diagonal rank-two bridge has a complete fracture grammar | audited | stock |
 | [`MM-M02`](#mm-m02-bordered-toggle) | partial mechanism | one lifted toggle has a stable rank-two third power | audited | parked |
 | [`MM-M03`](#mm-m03-five-state-setter-punctuation) | partial mechanism | a mixed delimiter word is an exact internal rank-one separator | audited | closed |
@@ -2310,6 +2311,39 @@ corollaries in
 
 **Artifact:**
 [`audits/m92-moving-tail-transfer-hankel-2026-08-31.md`](audits/m92-moving-tail-transfer-hankel-2026-08-31.md).
+
+### MM-O26: Geometric-tail transfer tax
+
+**Kind:** obstruction
+**Evidence:** formalized core; audited six-order certificates
+**Disposition:** graduated
+
+Put nonzero rescalings of `T,D_b,D_c` at transfer times `0,1,2`, in any order, and replace the
+constant separator tail by
+
+```text
+Mᵣ=τ^(r−2)P′,     r≥3,     τ≠0.
+```
+
+The same six `10 × 10` selections used by `MM-O23` remain nonsingular. Their determinants are
+the constant-tail monomials multiplied respectively by `τ³,τ²,τ³,τ⁴,τ³,τ³`. Thus every exact
+ambient transfer realization still needs at least ten states. Lean checks a sparse `Tbc`
+certificate and the cardinal bound; the audit program reconstructs all six exact determinants.
+
+**Scope:** exact consecutive benchmark roles followed by a nonzero scalar geometric multiple of
+the absorbed separator. This closes the one-state nonconstant tail at the consecutive positions
+left open by `MM-O25`. It does not cover zero tail ratio, multi-mode tails, changed nonzero role
+values, or nonlinear same-zero semantics.
+
+**Use:** do not spend the single tail state on scalar separator motion. A surviving consecutive
+moving tail must have at least two modes or leave exact moment preservation.
+
+**Formalization:** `tbcMinor_mulVec_eq_zero_iff`, `tbcMinor_det_ne_zero`, and
+`ten_le_card_of_tbc_geometric_transfer_moments` in
+[`MatrixMortality/GeometricTailHankel.lean`](MatrixMortality/GeometricTailHankel.lean).
+
+**Artifact:**
+[`audits/m92-geometric-tail-transfer-hankel-2026-08-31.md`](audits/m92-geometric-tail-transfer-hankel-2026-08-31.md).
 
 ### MM-M01: Off-diagonal companion interface
 

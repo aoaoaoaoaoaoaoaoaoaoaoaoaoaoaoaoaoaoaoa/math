@@ -120,6 +120,9 @@ open MatrixMortality
 #print axioms MovingTailHankel.ten_le_card_of_late_toggle_against_small_tail
 #print axioms MovingTailHankel.ten_le_card_of_late_dataB_against_small_tail
 #print axioms MovingTailHankel.ten_le_card_of_late_dataC_against_small_tail
+#print axioms GeometricTailHankel.tbcMinor_mulVec_eq_zero_iff
+#print axioms GeometricTailHankel.tbcMinor_det_ne_zero
+#print axioms GeometricTailHankel.ten_le_card_of_tbc_geometric_transfer_moments
 #print axioms pairedProduct_mulVec_column
 #print axioms pairedCoefficient_eq_sideCoefficient
 #print axioms decodePairedWord_surjective

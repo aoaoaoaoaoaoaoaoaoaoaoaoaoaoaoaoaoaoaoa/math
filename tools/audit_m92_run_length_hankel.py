@@ -4,7 +4,7 @@
 # dependencies = ["sympy==1.14.0"]
 # ///
 
-"""Verify all six exact M₉(2) consecutive-moment Hankel certificates."""
+"""Verify the six constant and geometric-tail M₉(2) Hankel certificates."""
 
 from __future__ import annotations
 
@@ -21,9 +21,10 @@ class Certificate:
     rows: tuple[int, ...]
     columns: tuple[int, ...]
     determinant: sp.Expr
+    geometric_tail_degree: int
 
 
-a, b, c = sp.symbols("a b c", nonzero=True)
+a, b, c, tau = sp.symbols("a b c tau", nonzero=True)
 toggle = sp.Matrix([[1, 0, 0, 0], [0, 0, 0, 1], [0, 0, 1, 0], [0, 1, 0, 0]])
 separator = sp.Matrix([67, 0, 81, -1]) * sp.Matrix([[1, 0, 0, 0]])
 data_b = sp.Matrix([[1, 25, 203, 1], [0, 0, 0, 0], [0, 0, 243, 0], [0, 27, 0, 3]])
@@ -42,31 +43,37 @@ certificates = {
         (0, 1, 2, 3, 4, 6, 7, 8, 11, 14),
         (1, 2, 3, 4, 5, 7, 8, 9, 10, 11),
         539_434_878_888_077_814_219_552 * a * c**7,
+        3,
     ),
     "Tcb": Certificate(
         (0, 1, 2, 3, 4, 6, 7, 10, 11, 12),
         (0, 1, 2, 3, 4, 5, 7, 9, 10, 11),
         246_112_452_864 * a * b * c**6,
+        2,
     ),
     "bTc": Certificate(
         (0, 1, 2, 3, 4, 5, 7, 8, 11, 14),
         (1, 2, 3, 4, 6, 7, 8, 9, 10, 11),
         -4_543_214_987_860_848 * b**2 * c**6,
+        3,
     ),
     "bcT": Certificate(
         (0, 1, 2, 3, 6, 7, 9, 10, 11, 14),
         (0, 2, 3, 4, 5, 7, 8, 9, 11, 12),
         -531_441 * b * c**5,
+        4,
     ),
     "cTb": Certificate(
         (0, 1, 2, 3, 4, 5, 6, 10, 11, 15),
         (1, 2, 3, 5, 6, 7, 8, 9, 10, 11),
         -464_904_586_800 * b**2 * c**7,
+        3,
     ),
     "cbT": Certificate(
         (1, 2, 3, 4, 5, 6, 7, 9, 11, 15),
         (1, 2, 3, 4, 5, 6, 7, 8, 10, 11),
         -5_481 * b**2 * c**6,
+        3,
     ),
 }
 
@@ -75,6 +82,18 @@ def block_hankel(order: str) -> sp.Matrix:
     scales = (a, b, c)
     moments = [scale * roles[name] for scale, name in zip(scales, order, strict=True)]
     moments.extend((separator,) * 4)
+    return sp.Matrix.vstack(
+        *(
+            sp.Matrix.hstack(*(moments[left + right] for right in range(4)))
+            for left in range(4)
+        )
+    )
+
+
+def geometric_tail_block_hankel(order: str) -> sp.Matrix:
+    scales = (a, b, c)
+    moments = [scale * roles[name] for scale, name in zip(scales, order, strict=True)]
+    moments.extend(tau**exponent * separator for exponent in range(1, 5))
     return sp.Matrix.vstack(
         *(
             sp.Matrix.hstack(*(moments[left + right] for right in range(4)))
@@ -94,6 +113,19 @@ def main() -> None:
                 f"{order}: expected {certificate.determinant}, obtained {determinant}"
             )
         print(f"{order}: det = {determinant}")
+        geometric_minor = geometric_tail_block_hankel(order).extract(
+            certificate.rows, certificate.columns
+        )
+        geometric_determinant = sp.factor(geometric_minor.det(method="domain-ge"))
+        expected_geometric = (
+            certificate.determinant * tau**certificate.geometric_tail_degree
+        )
+        if geometric_determinant != expected_geometric:
+            raise ValueError(
+                f"{order} geometric tail: expected {expected_geometric}, "
+                f"obtained {geometric_determinant}"
+            )
+        print(f"{order} geometric tail: det = {geometric_determinant}")
     tuned = block_hankel("Tbc").subs(
         {a: 1, b: 1, c: sp.Rational(22_234_876, 1_594_323)}
     )

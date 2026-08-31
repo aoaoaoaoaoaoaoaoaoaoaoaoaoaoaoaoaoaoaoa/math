@@ -189,6 +189,13 @@
 'MatrixMortality.MovingTailHankel.ten_le_card_of_late_dataC_against_small_tail' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.GeometricTailHankel.tbcMinor_mulVec_eq_zero_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GeometricTailHankel.tbcMinor_det_ne_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.GeometricTailHankel.ten_le_card_of_tbc_geometric_transfer_moments' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.pairedProduct_mulVec_column' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.pairedCoefficient_eq_sideCoefficient' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.decodePairedWord_surjective' depends on axioms: [propext]

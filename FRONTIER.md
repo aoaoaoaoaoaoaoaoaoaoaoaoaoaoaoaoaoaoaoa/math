@@ -1093,13 +1093,19 @@ its own exact realization dimension. If two exact series of dimensions `n,h` agr
 `3(m+1)≤n+h`. Thus a tail with `h≤2` cannot hide a late paired role inside nine ambient states;
 more generally nine states require `h≥3(m+1)−9`.
 
+[`MM-O26`](SALVAGE.md#mm-o26-geometric-tail-transfer-tax) closes the missing one-state tail at
+the consecutive positions. Replacing the constant separator by `τP′,τ²P′,…` for any `τ≠0`
+multiplies the six `MM-O23` determinant certificates only by nonzero powers of `τ`. Every order
+of `T,D_b,D_c` therefore still needs ten states.
+
 These theorems are not lower bounds for arbitrary same-zero series. The live seam must change
 the internal moment values, pay the required dimension in a moving exact tail, use a moving tail
-at the consecutive positions not covered by the late-block theorem, or make the boundary
-semantics nonlinear. See
+with at least two modes at the consecutive positions, or make the boundary semantics nonlinear.
+See
 [`audits/m92-run-length-transfer-hankel-2026-08-31.md`](audits/m92-run-length-transfer-hankel-2026-08-31.md),
 [`audits/m92-sparse-transfer-hankel-2026-08-31.md`](audits/m92-sparse-transfer-hankel-2026-08-31.md),
-and [`audits/m92-moving-tail-transfer-hankel-2026-08-31.md`](audits/m92-moving-tail-transfer-hankel-2026-08-31.md).
+[`audits/m92-moving-tail-transfer-hankel-2026-08-31.md`](audits/m92-moving-tail-transfer-hankel-2026-08-31.md),
+and [`audits/m92-geometric-tail-transfer-hankel-2026-08-31.md`](audits/m92-geometric-tail-transfer-hankel-2026-08-31.md).
 
 ### 4. Three-letter correspondence and direct mortality: `M₃(4)`
 

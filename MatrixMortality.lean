@@ -138,6 +138,7 @@ import MatrixMortality.PairedBinaryPrefixTax
 import MatrixMortality.RunLengthHankel
 import MatrixMortality.SparseTransferHankel
 import MatrixMortality.MovingTailHankel
+import MatrixMortality.GeometricTailHankel
 import MatrixMortality.PairedBinaryFullAlgebra
 import MatrixMortality.PrefixFullAlgebra
 import MatrixMortality.ScheduledBinaryRank
