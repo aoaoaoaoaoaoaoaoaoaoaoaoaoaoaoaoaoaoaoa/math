@@ -142,6 +142,7 @@ file owns the mathematical stock.
 | [`MM-S39`](#mm-s39-second-position-d_b-raw-head-extinction) | obstruction | no all-erasure word with `D_b` in its second position carries a lawful two-`c` raw head into another multi-role pole | formalized | graduated |
 | [`MM-S40`](#mm-s40-first-beta-plus-one-position-d_b-extinction) | obstruction | a sole `D_b` in any of the first `β+1` all-erasure positions cannot carry a lawful two-`c` raw head into another multi-role pole | formalized | graduated |
 | [`MM-S42`](#mm-s42-swapped-positive-depth-one-extinction) | structure theorem and obstruction | every regular positive-depth-one one-transfer pole either is an impossible Neary residual or certifies source halting | formalized | active |
+| [`MM-S44`](#mm-s44-compiler-envelope-rule-bearing-extinction) | obstruction | compiler-emitted bodies exclude every rule-bearing phase of the two surviving all-`c` first multi-transfer shapes | formalized | active |
 | [`MM-S45`](#mm-s45-exceptional-late-one-d_b-boundary) | structure theorem and obstruction | any one-`D_b` all-erasure raw-head survivor must combine the exceptional terminal run with a `D_b` after position `β+1` | formalized | graduated |
 | [`MM-S47`](#mm-s47-global-one-d_b-raw-head-extinction) | obstruction | no one-`D_b` all-erasure block carries a lawful two-`c` raw head into another multi-role pole, in any position | formalized | active |
 | [`R32-S01`](#r32-s01-split-return-normal-form) | structure theorem | rank-two cuts reduce one-unit binary mortality to a `2 × 2` return recurrence | formalized | graduated |
@@ -4704,6 +4705,73 @@ through `swappedUpperCode_double_c`, `upperLength_double_c`, and
 
 **Next:** decide `cc→multi` and `c^(β+1)→singleton`, retaining the first block's exact
 punctuated upper code and the middle block's phase-dependent lower code.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S44: Compiler-envelope rule-bearing extinction
+
+**Kind:** obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+Let `ρ=3^β`, `μ=2ρ−1`, `H=5ρ−1`, and let the first block have upper power `A` and
+punctuated swapped code `P`. Its signed mismatch is
+
+```text
+q=(μA−P)/P.                                               (1)
+```
+
+The complete upper-code cylinder depends only on the first role letter:
+
+```text
+first letter c:   q>(ρ−3)/(5ρ),
+first letter b:   q<−2/(9ρ).                              (2)
+```
+
+For a compiler-emitted body, `|body|≥β−1` and `head(body)=b`. If an all-`c` middle block of
+role length `n` contains `R_c`, the encoded body inside that rule forces
+
+```text
+V_m ≥ 9ρ²·3^(n−1),       P_m < 6ρ·3^(n−1).                (3)
+```
+
+Writing `T=3^(n−1)`, the state after the middle transfer has normalized discrepancy
+
+```text
+Δ=P_m/T − H V_m q/((ρ−2)T).                              (4)
+```
+
+Every physical nonempty target pole requires `0<Δ<3μ`. Equations (2)--(4) give `Δ≤0` when
+the first block begins in `c`, and `Δ>3μ` when it begins in `b`. Thus every rule-bearing
+phase of both live [`MM-S35`](#mm-s35-first-multi-transfer-trichotomy) all-`c` shapes is
+impossible. Combining this cylinder cut with [`MM-S38`](#mm-s38-two-c-singleton-b-extinction)
+leaves exactly
+
+```text
+middle = D_c²,          target depth 1;
+middle = D_c^(β+1),     target depth β.                  (5)
+```
+
+**Scope:** the body hypotheses are the exact compiler envelope; the theorem deliberately makes
+no claim for arbitrary bodies whose first letter is not `b`. The expected pole shells and code-
+unit hypotheses remain those of `MM-S35`. Equation (5) is a necessary survivor list, not an
+existence or reachability statement, and later multi-transfer histories remain open.
+
+**Use:** delete every phase assignment containing `R_c` from the first multi-transfer search.
+The entire live front is now the two literal all-erasure blocks in (5), where exact source
+ancestry and composed suffix equations can be used without phase branching.
+
+**Formalization:**
+[`MatrixMortality/SwappedSetterCylinder.lean`](MatrixMortality/SwappedSetterCylinder.lean),
+through `ruleBearing_allC_avoids_pole` and
+`firstMultiTransfer_pole_forces_all_erasure`.
+
+**Artifact:**
+[`audits/m53-compiler-envelope-rule-bearing-extinction-2026-08-31.md`](audits/m53-compiler-envelope-rule-bearing-extinction-2026-08-31.md).
+
+**Next:** decide the literal `D_c²→multi` and `D_c^(β+1)→singleton` branches, then propagate
+the resulting cut through later product residuals.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
