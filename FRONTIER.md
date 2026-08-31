@@ -911,6 +911,15 @@ remaining first-step saturation grammar is rule-bearing or contains `D_b`; later
 saturation from generalized product residuals also remains open. The distinction between source
 language membership and carrier reachability is now formal rather than advisory.
 
+[`MM-S33`](SALVAGE.md#mm-s33-leading-d_b-support-saturator-extinction) cuts the first
+`D_b`-bearing family. The physical word `D_bD_c^(n−1)` has exactly the same lower code as
+`D_c^n`, hence still contains the full gap, while its punctuated upper code is
+`P_b=P_c+μ10^(n+β+1)`. A strengthened arbitrary-width theorem proves
+`5^(n+β)∤R_c` for the all-`D_c` raw residual, including the exceptional first raw head. The
+leading-`D_b` perturbation is too deep to change that obstruction, so the required
+depth-`n+β` target shell is impossible. Other `D_b` positions, rule-bearing first blocks,
+singleton targets, and later product-residual carriers remain open.
+
 [`MM-O20`](SALVAGE.md#mm-o20-decimal-first-cylinder-collision) gives the unbounded suffix
 language an exact metric: a backward word gains the sum of its shifts in both decimal valuations,
 and one block maps the unit domain onto one exact suffix cylinder. But first-cylinder decoding is

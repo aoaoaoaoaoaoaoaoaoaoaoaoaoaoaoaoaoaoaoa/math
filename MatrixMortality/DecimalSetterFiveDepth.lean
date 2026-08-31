@@ -1,0 +1,417 @@
+import MatrixMortality.DecimalSetterDepth
+import Mathlib.Tactic
+
+/-!
+# Deep five-adic obstruction for the decimal setter
+
+The all-`D_c` raw residual falls short of five-adic depth `n+β` at every positive width.
+Consequently, prefixing its upper code by the exact `D_b` marker perturbation cannot create
+the deeper multi-role shell required by the mixed erasure word.
+-/
+
+namespace MatrixMortality.DecimalSetterDepth
+
+open MatrixMortality.DecimalSetterArithmetic
+open MatrixMortality.DecimalSetterCarry
+open MatrixMortality.DecimalSetterChamber
+
+private theorem fivePower_dvd_tenPower {small large : Nat} (bound : small ≤ large) :
+    (5 : ℤ) ^ small ∣ 10 ^ large :=
+  (pow_dvd_pow (5 : ℤ) bound).trans
+    (pow_dvd_pow_of_dvd (by norm_num : (5 : ℤ) ∣ 10) large)
+
+private theorem five_dvd_of_pow_succ_dvd_ten_pow_mul
+    {depth : Nat} {coefficient : ℤ}
+    (divides : (5 : ℤ) ^ (depth + 1) ∣ 10 ^ depth * coefficient) :
+    (5 : ℤ) ∣ coefficient := by
+  have ten_power : (10 : ℤ) ^ depth = 5 ^ depth * 2 ^ depth := by
+    rw [show (10 : ℤ) = 5 * 2 by norm_num, mul_pow]
+  rw [ten_power, pow_succ, mul_assoc] at divides
+  have rearranged : (5 : ℤ) ^ depth * 5 ∣
+      5 ^ depth * (2 ^ depth * coefficient) := by
+    simpa [mul_assoc] using divides
+  have power_ne : (5 : ℤ) ^ depth ≠ 0 := pow_ne_zero _ (by norm_num)
+  have five_dvd_scaled : (5 : ℤ) ∣ 2 ^ depth * coefficient :=
+    (mul_dvd_mul_iff_left power_ne).mp rearranged
+  have coprime : IsCoprime (5 : ℤ) ((2 : ℤ) ^ depth) :=
+    (by norm_num : IsCoprime (5 : ℤ) 2).pow_right
+  exact coprime.dvd_of_dvd_mul_left five_dvd_scaled
+
+private theorem five_dvd_of_pow_add_two_dvd_ten_pow_mul_five
+    {depth : Nat} {coefficient : ℤ}
+    (divides : (5 : ℤ) ^ (depth + 2) ∣ 10 ^ depth * 5 * coefficient) :
+    (5 : ℤ) ∣ coefficient := by
+  have factored : (5 : ℤ) * 5 ^ (depth + 1) ∣
+      5 * (10 ^ depth * coefficient) := by
+    simpa [pow_succ, mul_assoc, mul_left_comm, mul_comm] using divides
+  have reduced : (5 : ℤ) ^ (depth + 1) ∣ 10 ^ depth * coefficient :=
+    (mul_dvd_mul_iff_left (show (5 : ℤ) ≠ 0 by norm_num)).mp factored
+  exact five_dvd_of_pow_succ_dvd_ten_pow_mul reduced
+
+/-- Before the first-head boundary, an all-`D_c` raw residual misses the deeper five-adic
+depth `n+β` required after a marker prefix. -/
+theorem allCDeletion_regularRawHead_not_fiveDeep
+    {β s n : Nat} {H μ E G P V T R : ℤ}
+    (s_positive : 1 ≤ s) (suffix_below : s + 2 ≤ β) (n_positive : 1 ≤ n)
+    (head_eq : 9 * H = 5 * 10 ^ (β + 2) + 2 * 10 ^ s - 7)
+    (mu_eq : 9 * μ = 52 * 10 ^ β - 7)
+    (gap_eq : E = 18 * 10 ^ β - 63)
+    (lift_eq : G = 502 * 10 ^ β - 7)
+    (upper_eq : 9 * P = 50 * 10 ^ β * 10 ^ n + 2 * 10 ^ β - 7)
+    (lower_eq : 9 * V = 7 * 10 ^ n - 7)
+    (trace_eq : T = E * P + G * V)
+    (residual_eq : R = H * T - 10 * μ * G * V) :
+    ¬(5 : ℤ) ^ (n + β) ∣ R := by
+  let ρ : ℤ := 10 ^ β
+  let K : ℤ := 245 * 10 ^ (β + 2 - s) + 98
+  let A : ℤ :=
+    8100 * H * ρ ^ 2 + 3276 * H * ρ - 441 * H -
+      1827280 * ρ ^ 2 + 271460 * ρ - 3430
+  let B : ℤ :=
+    324 * H * ρ - 33894 * H + 1827280 * ρ - 271460
+  have head_factor := rawHead_linear_factor (show s ≤ β + 2 by omega) head_eq
+  have decomposition := allCDeletion_residual_decomposition
+    (ρ := ρ) (q := (10 : ℤ) ^ n)
+    mu_eq gap_eq lift_eq upper_eq lower_eq trace_eq residual_eq
+  have decomposition' :
+      81 * R = 10 ^ (s + 1) * K + 10 ^ n * A + 10 ^ β * B := by
+    rw [head_factor] at decomposition
+    dsimp [ρ, K, A, B]
+    rw [pow_two, ← pow_add] at decomposition
+    simpa [pow_succ, pow_add, mul_assoc, mul_left_comm, mul_comm] using decomposition
+  have rho_five : (5 : ℤ) ∣ ρ := by
+    dsimp [ρ]
+    exact fivePower_dvd_tenPower (show 1 ≤ β by omega)
+  obtain ⟨rhoQuotient, rho_eq⟩ := rho_five
+  have H_sub_two_dvd : (5 : ℤ) ∣ H - 2 := by
+    have scaled_eq : 9 * (H - 2) =
+        5 * 10 ^ (β + 2) + 2 * 10 ^ s - 25 := by
+      linear_combination head_eq
+    have first_dvd : (5 : ℤ) ∣ 5 * 10 ^ (β + 2) := dvd_mul_right 5 _
+    have second_dvd : (5 : ℤ) ∣ 2 * 10 ^ s := by
+      exact dvd_mul_of_dvd_right
+        (fivePower_dvd_tenPower (show 1 ≤ s by omega)) 2
+    have scaled_dvd : (5 : ℤ) ∣ 9 * (H - 2) := by
+      rw [scaled_eq]
+      exact dvd_sub (dvd_add first_dvd second_dvd) (by norm_num)
+    exact (by norm_num : IsCoprime (5 : ℤ) 9).dvd_of_dvd_mul_left scaled_dvd
+  have H_five_unit : ¬(5 : ℤ) ∣ H := by
+    intro H_dvd
+    have two_dvd : (5 : ℤ) ∣ 2 := by
+      simpa using dvd_sub H_dvd H_sub_two_dvd
+    norm_num at two_dvd
+  have K_sub_three_dvd : (5 : ℤ) ∣ K - 3 := by
+    refine ⟨49 * 10 ^ (β + 2 - s) + 19, ?_⟩
+    dsimp [K]
+    ring
+  have K_five_unit : ¬(5 : ℤ) ∣ K := by
+    intro K_dvd
+    have three_dvd : (5 : ℤ) ∣ 3 := by
+      simpa using dvd_sub K_dvd K_sub_three_dvd
+    norm_num at three_dvd
+  have A_add_H_dvd : (5 : ℤ) ∣ A + H := by
+    refine ⟨1620 * H * ρ ^ 2 + 3276 * H * rhoQuotient - 88 * H -
+      365456 * ρ ^ 2 + 54292 * ρ - 686, ?_⟩
+    dsimp [A]
+    rw [rho_eq]
+    ring
+  have A_five_unit : ¬(5 : ℤ) ∣ A := by
+    intro A_dvd
+    have H_dvd : (5 : ℤ) ∣ H := by
+      simpa using dvd_sub A_add_H_dvd A_dvd
+    exact H_five_unit H_dvd
+  have K_add_A_five_unit : ¬(5 : ℤ) ∣ K + A := by
+    intro sum_dvd
+    have one_dvd : (5 : ℤ) ∣ 1 := by
+      have combined := dvd_add
+        (dvd_sub (dvd_sub sum_dvd K_sub_three_dvd) A_add_H_dvd) H_sub_two_dvd
+      rw [show K + A - (K - 3) - (A + H) + (H - 2) = 1 by ring] at combined
+      exact combined
+    norm_num at one_dvd
+  intro deep_dvd
+  rcases lt_trichotomy n (s + 1) with n_small | n_equal | n_large
+  · have reduced_dvd : (5 : ℤ) ^ (n + 1) ∣ 81 * R := by
+      have power_dvd : (5 : ℤ) ^ (n + 1) ∣ R :=
+        (pow_dvd_pow (5 : ℤ) (by omega)).trans deep_dvd
+      exact dvd_mul_of_dvd_right power_dvd 81
+    have first_dvd : (5 : ℤ) ^ (n + 1) ∣ 10 ^ (s + 1) * K :=
+      dvd_mul_of_dvd_left (fivePower_dvd_tenPower (by omega)) K
+    have third_dvd : (5 : ℤ) ^ (n + 1) ∣ 10 ^ β * B :=
+      dvd_mul_of_dvd_left (fivePower_dvd_tenPower (by omega)) B
+    rw [decomposition'] at reduced_dvd
+    have first_second : (5 : ℤ) ^ (n + 1) ∣ 10 ^ (s + 1) * K + 10 ^ n * A := by
+      have truncated := dvd_sub reduced_dvd third_dvd
+      rw [show 10 ^ (s + 1) * K + 10 ^ n * A + 10 ^ β * B - 10 ^ β * B =
+        10 ^ (s + 1) * K + 10 ^ n * A by ring] at truncated
+      exact truncated
+    have second_dvd : (5 : ℤ) ^ (n + 1) ∣ 10 ^ n * A := by
+      simpa using dvd_sub first_second first_dvd
+    exact A_five_unit (five_dvd_of_pow_succ_dvd_ten_pow_mul second_dvd)
+  · subst n
+    have reduced_dvd : (5 : ℤ) ^ (s + 2) ∣ 81 * R := by
+      have power_dvd : (5 : ℤ) ^ (s + 2) ∣ R :=
+        (pow_dvd_pow (5 : ℤ) (by omega)).trans deep_dvd
+      exact dvd_mul_of_dvd_right power_dvd 81
+    have third_dvd : (5 : ℤ) ^ (s + 2) ∣ 10 ^ β * B :=
+      dvd_mul_of_dvd_left (fivePower_dvd_tenPower suffix_below) B
+    rw [decomposition'] at reduced_dvd
+    have first_second : (5 : ℤ) ^ (s + 2) ∣
+        10 ^ (s + 1) * K + 10 ^ (s + 1) * A := by
+      have truncated := dvd_sub reduced_dvd third_dvd
+      rw [show 10 ^ (s + 1) * K + 10 ^ (s + 1) * A + 10 ^ β * B -
+        10 ^ β * B = 10 ^ (s + 1) * K + 10 ^ (s + 1) * A by ring] at truncated
+      exact truncated
+    have combined_dvd : (5 : ℤ) ^ (s + 2) ∣ 10 ^ (s + 1) * (K + A) := by
+      simpa [mul_add] using first_second
+    exact K_add_A_five_unit
+      (five_dvd_of_pow_succ_dvd_ten_pow_mul combined_dvd)
+  · have reduced_dvd : (5 : ℤ) ^ (s + 2) ∣ 81 * R := by
+      have power_dvd : (5 : ℤ) ^ (s + 2) ∣ R :=
+        (pow_dvd_pow (5 : ℤ) (by omega)).trans deep_dvd
+      exact dvd_mul_of_dvd_right power_dvd 81
+    have second_dvd : (5 : ℤ) ^ (s + 2) ∣ 10 ^ n * A :=
+      dvd_mul_of_dvd_left (fivePower_dvd_tenPower (by omega)) A
+    have third_dvd : (5 : ℤ) ^ (s + 2) ∣ 10 ^ β * B :=
+      dvd_mul_of_dvd_left (fivePower_dvd_tenPower suffix_below) B
+    rw [decomposition'] at reduced_dvd
+    have first_second : (5 : ℤ) ^ (s + 2) ∣ 10 ^ (s + 1) * K + 10 ^ n * A := by
+      have truncated := dvd_sub reduced_dvd third_dvd
+      rw [show 10 ^ (s + 1) * K + 10 ^ n * A + 10 ^ β * B - 10 ^ β * B =
+        10 ^ (s + 1) * K + 10 ^ n * A by ring] at truncated
+      exact truncated
+    have first_dvd : (5 : ℤ) ^ (s + 2) ∣ 10 ^ (s + 1) * K := by
+      simpa using dvd_sub first_second second_dvd
+    exact K_five_unit
+      (five_dvd_of_pow_succ_dvd_ten_pow_mul first_dvd)
+
+/-- At the first-head boundary, an all-`D_c` raw residual also misses five-adic depth `n+β`.
+The proof resolves the possible collision between exponents `n+1` and `2β`. -/
+theorem allCDeletion_firstRawHead_not_fiveDeep
+    {β n : Nat} {H μ E G P V T R : ℤ}
+    (β_large : 2 ≤ β) (n_positive : 1 ≤ n)
+    (head_eq : 9 * H = 5 * 10 ^ (β + 2) + 2 * 10 ^ (β - 1) - 7)
+    (mu_eq : 9 * μ = 52 * 10 ^ β - 7)
+    (gap_eq : E = 18 * 10 ^ β - 63)
+    (lift_eq : G = 502 * 10 ^ β - 7)
+    (upper_eq : 9 * P = 50 * 10 ^ β * 10 ^ n + 2 * 10 ^ β - 7)
+    (lower_eq : 9 * V = 7 * 10 ^ n - 7)
+    (trace_eq : T = E * P + G * V)
+    (residual_eq : R = H * T - 10 * μ * G * V) :
+    ¬(5 : ℤ) ^ (n + β) ∣ R := by
+  have n_two_le_deep : n + 2 ≤ n + β + 1 := by omega
+  have first_ten_bound : n + 1 < 2 * β → n + 2 ≤ 2 * β := by omega
+  have equal_reduction_bound : n + 1 = 2 * β → 2 * β + 1 ≤ n + β + 1 := by omega
+  have third_reduction_bound : 2 * β < n + 1 → 2 * β + 1 ≤ n + β + 1 := by omega
+  have third_ten_bound : 2 * β < n + 1 → 2 * β ≤ n := by omega
+  let ρ : ℤ := 10 ^ β
+  let a : ℤ := 10 ^ (β - 1)
+  let A : ℤ := 250100 * ρ ^ 3 - 917504 * ρ ^ 2 + 135779 * ρ - 1715
+  let B : ℤ := 10004 * ρ - 31514
+  have exponent_eq : β = (β - 1) + 1 := by omega
+  have rho_eq_ten : ρ = 10 * a := by
+    dsimp [ρ, a]
+    calc
+      (10 : ℤ) ^ β = 10 ^ ((β - 1) + 1) := congrArg _ exponent_eq
+      _ = 10 ^ (β - 1) * 10 := pow_succ _ _
+      _ = 10 * 10 ^ (β - 1) := mul_comm _ _
+  have head_eq' : 9 * H = 500 * ρ + 2 * a - 7 := by
+    calc
+      9 * H = 5 * 10 ^ (β + 2) + 2 * 10 ^ (β - 1) - 7 := head_eq
+      _ = 500 * ρ + 2 * a - 7 := by
+        dsimp [ρ, a]
+        rw [pow_add]
+        norm_num
+        ring
+  have decomposition := allCDeletion_firstRawHead_residual_decomposition
+    rho_eq_ten head_eq' mu_eq gap_eq lift_eq upper_eq lower_eq trace_eq residual_eq
+  have decomposition' : 45 * R = 10 ^ n * A + 10 ^ (2 * β) * B := by
+    have scale_eq : (10 : ℤ) ^ (2 * β) = ρ ^ 2 := by
+      dsimp [ρ]
+      rw [two_mul, pow_add, pow_two]
+    rw [scale_eq]
+    simpa [A, B, mul_assoc, mul_left_comm, mul_comm] using decomposition
+  have rho_twenty_five : (25 : ℤ) ∣ ρ := by
+    dsimp [ρ]
+    simpa using fivePower_dvd_tenPower (small := 2) (show 2 ≤ β by omega)
+  obtain ⟨rhoQuotient, rho_eq⟩ := rho_twenty_five
+  let C : ℤ :=
+    250100 * 3125 * rhoQuotient ^ 3 - 917504 * 125 * rhoQuotient ^ 2 +
+      135779 * 5 * rhoQuotient - 343
+  have A_eq : A = 5 * C := by
+    dsimp [A, C]
+    rw [rho_eq]
+    ring
+  have C_sub_two_dvd : (5 : ℤ) ∣ C - 2 := by
+    refine ⟨250100 * 625 * rhoQuotient ^ 3 - 917504 * 25 * rhoQuotient ^ 2 +
+      135779 * rhoQuotient - 69, ?_⟩
+    dsimp [C]
+    ring
+  have C_five_unit : ¬(5 : ℤ) ∣ C := by
+    intro C_dvd
+    have two_dvd : (5 : ℤ) ∣ 2 := by
+      simpa using dvd_sub C_dvd C_sub_two_dvd
+    norm_num at two_dvd
+  have B_sub_one_dvd : (5 : ℤ) ∣ B - 1 := by
+    refine ⟨50020 * rhoQuotient - 6303, ?_⟩
+    dsimp [B]
+    rw [rho_eq]
+    ring
+  have B_five_unit : ¬(5 : ℤ) ∣ B := by
+    intro B_dvd
+    have one_dvd : (5 : ℤ) ∣ 1 := by
+      simpa using dvd_sub B_dvd B_sub_one_dvd
+    norm_num at one_dvd
+  have C_add_two_B_five_unit : ¬(5 : ℤ) ∣ C + 2 * B := by
+    intro sum_dvd
+    have four_dvd : (5 : ℤ) ∣ 4 := by
+      have deviation_dvd : (5 : ℤ) ∣ (C - 2) + 2 * (B - 1) :=
+        dvd_add C_sub_two_dvd (B_sub_one_dvd.mul_left 2)
+      have difference := dvd_sub sum_dvd deviation_dvd
+      rw [show C + 2 * B - ((C - 2) + 2 * (B - 1)) = 4 by ring] at difference
+      exact difference
+    norm_num at four_dvd
+  intro deep_dvd
+  have product_deep : (5 : ℤ) ^ (n + β + 1) ∣ 45 * R := by
+    rw [show 45 = (5 : ℤ) * 9 by norm_num,
+      show n + β + 1 = 1 + (n + β) by
+        simp only [Nat.add_assoc, Nat.add_comm], pow_add]
+    have raw := dvd_mul_of_dvd_left (mul_dvd_mul (dvd_refl 5) deep_dvd) 9
+    simpa [mul_assoc, mul_left_comm, mul_comm] using raw
+  rw [decomposition', A_eq] at product_deep
+  rcases lt_trichotomy (n + 1) (2 * β) with first_shallow | exponents_equal | second_shallow
+  · have reduced : (5 : ℤ) ^ (n + 2) ∣
+        10 ^ n * (5 * C) + 10 ^ (2 * β) * B :=
+      (pow_dvd_pow (5 : ℤ) n_two_le_deep).trans product_deep
+    have second_dvd : (5 : ℤ) ^ (n + 2) ∣ 10 ^ (2 * β) * B :=
+      dvd_mul_of_dvd_left (fivePower_dvd_tenPower (first_ten_bound first_shallow)) B
+    have first_dvd : (5 : ℤ) ^ (n + 2) ∣ 10 ^ n * 5 * C := by
+      have isolated := dvd_sub reduced second_dvd
+      rw [show 10 ^ n * (5 * C) + 10 ^ (2 * β) * B - 10 ^ (2 * β) * B =
+        10 ^ n * 5 * C by ring] at isolated
+      exact isolated
+    exact C_five_unit
+      (five_dvd_of_pow_add_two_dvd_ten_pow_mul_five first_dvd)
+  · have reduced : (5 : ℤ) ^ (2 * β + 1) ∣
+        10 ^ n * (5 * C) + 10 ^ (2 * β) * B :=
+      (pow_dvd_pow (5 : ℤ) (equal_reduction_bound exponents_equal)).trans product_deep
+    have ten_expansion :
+        10 ^ n * (5 * C) + 10 ^ (2 * β) * B =
+          5 ^ (2 * β) * (2 ^ n * C + 2 ^ (2 * β) * B) := by
+      rw [show (10 : ℤ) = 5 * 2 by norm_num]
+      simp only [mul_pow]
+      rw [← exponents_equal, pow_succ]
+      ring
+    rw [ten_expansion] at reduced
+    have power_ne : (5 : ℤ) ^ (2 * β) ≠ 0 := pow_ne_zero _ (by norm_num)
+    have coefficient_dvd : (5 : ℤ) ∣ 2 ^ n * C + 2 ^ (2 * β) * B := by
+      have rearranged : (5 : ℤ) ^ (2 * β) * 5 ∣
+          5 ^ (2 * β) * (2 ^ n * C + 2 ^ (2 * β) * B) := by
+        simpa [pow_succ] using reduced
+      exact (mul_dvd_mul_iff_left power_ne).mp rearranged
+    have coefficient_factor :
+        2 ^ n * C + 2 ^ (2 * β) * B = 2 ^ n * (C + 2 * B) := by
+      rw [← exponents_equal, pow_succ]
+      ring
+    rw [coefficient_factor] at coefficient_dvd
+    have two_coprime : IsCoprime (5 : ℤ) (2 ^ n) :=
+      (by norm_num : IsCoprime (5 : ℤ) 2).pow_right
+    exact C_add_two_B_five_unit
+      (two_coprime.dvd_of_dvd_mul_left coefficient_dvd)
+  · have reduced : (5 : ℤ) ^ (2 * β + 1) ∣
+        10 ^ n * (5 * C) + 10 ^ (2 * β) * B :=
+      (pow_dvd_pow (5 : ℤ) (third_reduction_bound second_shallow)).trans product_deep
+    have first_dvd : (5 : ℤ) ^ (2 * β + 1) ∣ 10 ^ n * (5 * C) := by
+      have base : (5 : ℤ) ^ (2 * β) ∣ 10 ^ n :=
+        fivePower_dvd_tenPower (third_ten_bound second_shallow)
+      have scaled : (5 : ℤ) ^ (2 * β) * 5 ∣ 10 ^ n * 5 :=
+        mul_dvd_mul base (dvd_refl 5)
+      simpa [pow_succ, mul_assoc, mul_left_comm, mul_comm] using scaled.mul_right C
+    have second_dvd : (5 : ℤ) ^ (2 * β + 1) ∣ 10 ^ (2 * β) * B := by
+      have isolated := dvd_sub reduced first_dvd
+      rw [show 10 ^ n * (5 * C) + 10 ^ (2 * β) * B - 10 ^ n * (5 * C) =
+        10 ^ (2 * β) * B by ring] at isolated
+      exact isolated
+    exact B_five_unit
+      (five_dvd_of_pow_succ_dvd_ten_pow_mul second_dvd)
+
+/-- Every decimal-unit two-`c` raw head followed by an all-`D_c` word has five-adic residual
+depth strictly below `n+β`, for every positive word length `n`. -/
+theorem allCDeletion_peeledDoubleCHead_not_fiveDeep
+    {β n : Nat} (tail : List TagLetter) {μ E G P V T R : ℤ}
+    (β_large : 2 ≤ β) (n_positive : 1 ≤ n)
+    (head_unit :
+      HasDecimalShell (code (peeledHeadWord β (.c :: .c :: tail)) : ℚ) 0 0)
+    (mu_eq : 9 * μ = 52 * 10 ^ β - 7)
+    (gap_eq : E = 18 * 10 ^ β - 63)
+    (lift_eq : G = 502 * 10 ^ β - 7)
+    (upper_eq : 9 * P = 50 * 10 ^ β * 10 ^ n + 2 * 10 ^ β - 7)
+    (lower_eq : 9 * V = 7 * 10 ^ n - 7)
+    (trace_eq : T = E * P + G * V)
+    (residual_eq :
+      R = (code (peeledHeadWord β (.c :: .c :: tail)) : ℤ) * T -
+        10 * μ * G * V) :
+    ¬(5 : ℤ) ^ (n + β) ∣ R := by
+  obtain ⟨suffix, suffix_positive, suffix_le, _, head_eq⟩ :=
+    peeledDoubleCHead_unit_shape tail (by omega) head_unit
+  rcases lt_or_eq_of_le suffix_le with suffix_below | first_head
+  · exact allCDeletion_regularRawHead_not_fiveDeep suffix_positive (by omega) n_positive head_eq
+      mu_eq gap_eq lift_eq upper_eq lower_eq trace_eq residual_eq
+  · rw [first_head] at head_eq
+    exact allCDeletion_firstRawHead_not_fiveDeep β_large n_positive head_eq
+      mu_eq gap_eq lift_eq upper_eq lower_eq trace_eq residual_eq
+
+private theorem fivePower_dvd_int_of_hasDecimalShell
+    {value : ℤ} {depth : Nat}
+    (shell : HasDecimalShell (value : ℚ) depth depth) :
+    (5 : ℤ) ^ depth ∣ value := by
+  have valuation_eq : padicValInt 5 value = depth := by
+    have valuation_rat := shell.2.2
+    rw [padicValRat.of_int] at valuation_rat
+    exact_mod_cast valuation_rat
+  exact (padicValInt_dvd_iff depth value).mpr (Or.inr (by rw [valuation_eq]))
+
+/-- Prefixing an all-`D_c` upper word by the marker-scale `D_b` perturbation cannot create the
+deeper multi-role shell. The conclusion holds at every positive erasure width. -/
+theorem leadingBDeletion_peeledDoubleCHead_shell_impossible
+    {β n : Nat} (tail : List TagLetter) {μ E G PAll PB V RAll RB : ℤ}
+    (β_large : 2 ≤ β) (n_positive : 1 ≤ n)
+    (head_unit :
+      HasDecimalShell (code (peeledHeadWord β (.c :: .c :: tail)) : ℚ) 0 0)
+    (mu_eq : 9 * μ = 52 * 10 ^ β - 7)
+    (gap_eq : E = 18 * 10 ^ β - 63)
+    (lift_eq : G = 502 * 10 ^ β - 7)
+    (allC_upper_eq : 9 * PAll = 50 * 10 ^ β * 10 ^ n + 2 * 10 ^ β - 7)
+    (lower_eq : 9 * V = 7 * 10 ^ n - 7)
+    (allC_residual_eq :
+      RAll = (code (peeledHeadWord β (.c :: .c :: tail)) : ℤ) *
+          (E * PAll + G * V) - 10 * μ * G * V)
+    (leadingB_upper_eq : PB = PAll + μ * 10 ^ (n + β + 1))
+    (leadingB_residual_eq :
+      RB = (code (peeledHeadWord β (.c :: .c :: tail)) : ℤ) *
+          (E * PB + G * V) - 10 * μ * G * V)
+    (shell : HasDecimalShell (RB : ℚ) (n + β) (n + β)) :
+    False := by
+  let H : ℤ := code (peeledHeadWord β (.c :: .c :: tail))
+  have allC_not_deep : ¬(5 : ℤ) ^ (n + β) ∣ RAll := by
+    refine allCDeletion_peeledDoubleCHead_not_fiveDeep
+      (T := E * PAll + G * V) (R := RAll) tail β_large n_positive
+        head_unit mu_eq gap_eq lift_eq allC_upper_eq lower_eq ?_ ?_
+    · rfl
+    · simpa only [H] using allC_residual_eq
+  have difference : RB = RAll + H * E * μ * 10 ^ (n + β + 1) := by
+    rw [leadingB_residual_eq, allC_residual_eq, leadingB_upper_eq]
+    dsimp only [H]
+    ring
+  have leading_deep : (5 : ℤ) ^ (n + β) ∣ RB :=
+    fivePower_dvd_int_of_hasDecimalShell shell
+  have perturbation_deep :
+      (5 : ℤ) ^ (n + β) ∣ H * E * μ * 10 ^ (n + β + 1) := by
+    exact dvd_mul_of_dvd_right
+      (fivePower_dvd_tenPower (show n + β ≤ n + β + 1 by omega)) (H * E * μ)
+  have allC_deep : (5 : ℤ) ^ (n + β) ∣ RAll := by
+    rw [difference] at leading_deep
+    have isolated := dvd_sub leading_deep perturbation_deep
+    simpa using isolated
+  exact allC_not_deep allC_deep
+
+end MatrixMortality.DecimalSetterDepth
