@@ -1669,6 +1669,15 @@ all-`c` pencil plus a coefficient-positive complement term.
 to the determinant. The exact boundary is
 [`audits/m43-phase-zero-right-c-thin-complement-2026-08-31.md`](audits/m43-phase-zero-right-c-thin-complement-2026-08-31.md).
 
+The phase-zero right-`c` long-leading-`c` cylinder
+[`M4-S28`](SALVAGE.md#m4-s28-phase-zero-right-c-long-leading-c-cylinder) is checked in the same
+module. `ParabolicBlade.tagComplementCode_cons_c` and
+`tagComplementCode_replicate_c_append` prove that a leading `c` run preserves the complement;
+`tagComplementCode_pos_of_mem_b` proves positivity for mixed tails; and
+`bridge_bZero_bTwo_cOne_det_ne_zero_of_long_c_prefix` combines the global complement bound
+with `M4-S27`. The exact boundary is
+[`audits/m43-phase-zero-right-c-long-c-prefix-2026-08-31.md`](audits/m43-phase-zero-right-c-long-c-prefix-2026-08-31.md).
+
 The residue-zero `c`-endpoint exclusion
 [`M4-S12`](SALVAGE.md#m4-s12-residue-zero-c-endpoint-exclusion) is checked in the same module.
 `ParabolicBlade.bridge_cZero_bTwo_bOne_det` and

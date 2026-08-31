@@ -57,6 +57,50 @@ theorem tagComplementCode_append_b (body : List TagLetter) :
   norm_num only [Nat.reducePow]
   omega
 
+/-- A leading `c` digit leaves the complementary ternary value unchanged. -/
+theorem tagComplementCode_cons_c (body : List TagLetter) :
+    tagComplementCode (.c :: body) = tagComplementCode body := by
+  have code_lt := ternaryCode_lt_pow_length (tagEncode 3 body)
+  unfold tagComplementCode
+  rw [tagEncode_cons, ternaryCode_append, List.length_append]
+  have c_length : (tagCode 3 .c).length = 1 := by decide
+  have c_code : ternaryCode (tagCode 3 .c) = 2 := by decide
+  rw [c_length, c_code, pow_add]
+  norm_num only [Nat.reducePow]
+  omega
+
+/-- A leading run of `c` digits leaves the complementary ternary value unchanged. -/
+theorem tagComplementCode_replicate_c_append (k : Nat) (body : List TagLetter) :
+    tagComplementCode (List.replicate k .c ++ body) = tagComplementCode body := by
+  induction k with
+  | zero => rfl
+  | succ k induction =>
+      rw [List.replicate_succ, List.cons_append, tagComplementCode_cons_c, induction]
+
+private theorem tagEncode_replicate_c_length (k : Nat) :
+    (tagEncode 3 (List.replicate k .c)).length = k := by
+  induction k with
+  | zero => rfl
+  | succ k induction =>
+      rw [List.replicate_succ, tagEncode_cons, List.length_append]
+      simp only [tagCode, List.length_singleton, induction]
+      omega
+
+/-- A physical tag word containing `b` has a strictly positive complement value. -/
+theorem tagComplementCode_pos_of_mem_b (body : List TagLetter) (contains_b : .b ∈ body) :
+    0 < tagComplementCode body := by
+  induction body using List.reverseRecOn with
+  | nil => simp at contains_b
+  | append_singleton body letter induction =>
+      cases letter with
+      | b =>
+          rw [tagComplementCode_append_b]
+          omega
+      | c =>
+          rw [tagComplementCode_append_c]
+          have body_contains_b : TagLetter.b ∈ body := by simpa using contains_b
+          exact Nat.mul_pos (by norm_num) (induction body_contains_b)
+
 theorem tagEncode_length_mod_four (body : List TagLetter) :
     (tagEncode 3 body).length % 4 = body.length % 4 := by
   induction body with
@@ -1056,4 +1100,44 @@ theorem bridge_bZero_bTwo_cOne_det_ne_zero_of_thin_complement
     norm_num [bZeroBDefectCOneCodeCore]
   rw [← cast_integer_core]
   exact_mod_cast integer_core_zero
+
+/-- Twelve leading `c` letters followed by a body containing `b` force the thin-complement
+criterion, independently of the remaining tail and all waits. -/
+theorem bridge_bZero_bTwo_cOne_det_ne_zero_of_long_c_prefix
+    (k : Nat) (twelve_le : 12 ≤ k) (tail : List TagLetter) (contains_b : .b ∈ tail)
+    (x y z : Nat) :
+    (bridge 27
+      (bAtom 27 (3 * z) * bAtom 27 (3 * x + 2) *
+        cAtom 27 (nearySideLowerC 3 (List.replicate k .c ++ tail))
+          (nearySideLowerCScale 3 (List.replicate k .c ++ tail))
+          (3 * y + 1))).det ≠ 0 := by
+  let T : Nat := 3 ^ (tagEncode 3 tail).length
+  let D : Nat := tagComplementCode tail
+  have tail_scale_positive : 1 ≤ T := by
+    dsimp [T]
+    exact one_le_pow₀ (by norm_num)
+  have tail_density_bound : 242 * D ≤ 39 * (T - 1) := by
+    dsimp [D, T]
+    exact tagComplementCode_global_bound tail
+  have twelve_prefix_thin : 2160000 * D < 3 ^ 12 * T := by
+    norm_num only [Nat.reducePow]
+    omega
+  have prefix_power_lower : 3 ^ 12 ≤ 3 ^ k :=
+    Nat.pow_le_pow_right (by norm_num) twelve_le
+  have prefix_scale_lower : 3 ^ 12 * T ≤ 3 ^ k * T :=
+    Nat.mul_le_mul_right T prefix_power_lower
+  have prefix_thin : 2160000 * D < 3 ^ k * T :=
+    twelve_prefix_thin.trans_le prefix_scale_lower
+  have encoded_length :
+      (tagEncode 3 (List.replicate k .c ++ tail)).length =
+        k + (tagEncode 3 tail).length := by
+    rw [tagEncode_append, List.length_append, tagEncode_replicate_c_length]
+  have scale_eq :
+      3 ^ (tagEncode 3 (List.replicate k .c ++ tail)).length = 3 ^ k * T := by
+    rw [encoded_length, pow_add]
+  apply bridge_bZero_bTwo_cOne_det_ne_zero_of_thin_complement
+  · rw [tagComplementCode_replicate_c_append]
+    exact tagComplementCode_pos_of_mem_b tail contains_b
+  · rw [tagComplementCode_replicate_c_append, scale_eq]
+    exact prefix_thin
 end MatrixMortality.ParabolicBlade
