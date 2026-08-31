@@ -149,6 +149,7 @@ import MatrixMortality.DecimalSetterDepth
 import MatrixMortality.DecimalSetterSuffix
 import MatrixMortality.DecimalSetterAncestry
 import MatrixMortality.SwappedSetterCompiler
+import MatrixMortality.SwappedSetterMultitransfer
 import MatrixMortality.SchottkyPunctuation
 import MatrixMortality.TwoStateObstructions
 import MatrixMortality.ForcedRuleCCompanion
