@@ -78,10 +78,23 @@ def DebtSafe : ℕ → List ℕ → Prop
 def shellSlope (waits : List ℕ) : ℚ :=
   (waits.map shellScale).prod / 5 ^ waits.length
 
+/-- Constant coefficient of one shell schedule. -/
+def shellIntercept (waits : List ℕ) : ℚ :=
+  shellRun waits 0
+
+/-- Unique source where two shell schedules with different slopes collide. -/
+def collisionSource (left right : List ℕ) : ℚ :=
+  (shellIntercept right - shellIntercept left) / (shellSlope left - shellSlope right)
+
 /-- A singleton schedule is one shell step. -/
 theorem shellRun_singleton (wait : ℕ) (state : ℚ) :
     shellRun [wait] state = shellStep wait state := by
   rfl
+
+/-- A schedule executes its first wait before its remaining tail. -/
+theorem shellRun_cons (wait : ℕ) (waits : List ℕ) (state : ℚ) :
+    shellRun (wait :: waits) state = shellRun waits (shellStep wait state) := by
+  rw [show wait :: waits = [wait] ++ waits by rfl, shellRun_append, shellRun_singleton]
 
 /-- Below the two-adic wall `v₂(state)+wait=0`, the incoming debt survives exactly. -/
 theorem shellStep_two_belowWall
@@ -532,6 +545,12 @@ theorem shellRun_sub_shellRun (waits : List ℕ) (left right : ℚ) :
       dsimp only [shellStep, shellScale]
       ring
 
+/-- Every shell schedule is its slope times the source plus its intercept. -/
+theorem shellRun_eq_slope_mul_add_intercept (waits : List ℕ) (state : ℚ) :
+    shellRun waits state = shellSlope waits * state + shellIntercept waits := by
+  have displacement := shellRun_sub_shellRun waits state 0
+  simpa [shellIntercept] using (sub_eq_iff_eq_add.mp displacement)
+
 /-- The slope remembers only schedule length and total wait. -/
 theorem shellSlope_eq_length_sum (waits : List ℕ) :
     shellSlope waits =
@@ -551,6 +570,235 @@ theorem shellSlope_eq_of_length_sum
     (sum_eq : left.sum = right.sum) :
     shellSlope left = shellSlope right := by
   rw [shellSlope_eq_length_sum, shellSlope_eq_length_sum, length_eq, sum_eq]
+
+private theorem shellScale_fiveUnit (wait : ℕ) : IsUnit 5 (shellScale wait) := by
+  have two_unit : IsUnit 5 (2 : ℚ) := intCast_isUnit_of_not_dvd (by norm_num)
+  have three_unit : IsUnit 5 (3 : ℚ) := intCast_isUnit_of_not_dvd (by norm_num)
+  exact mul_hasValue three_unit (unit_pow (div_hasValue two_unit three_unit) wait)
+
+/-- One shell step lowers every negative five-adic valuation by exactly one. -/
+theorem shellStep_fiveNegative
+    (wait : ℕ) {state : ℚ} {stateValue : ℤ}
+    (state_value : HasValue 5 state stateValue) (state_negative : stateValue < 0) :
+    HasValue 5 (shellStep wait state) (stateValue - 1) := by
+  have scale_unit : IsUnit 5 (3 * (2 / 3 : ℚ) ^ wait) := shellScale_fiveUnit wait
+  have leading_value :
+      HasValue 5 (3 * (2 / 3 : ℚ) ^ wait * state) stateValue := by
+    simpa using mul_hasValue scale_unit state_value
+  have numerator_value := add_hasValue_left leading_value
+    (show IsUnit 5 (1 : ℚ) from ⟨one_ne_zero, padicValRat.one⟩) state_negative
+  have five_value : HasValue 5 (5 : ℚ) 1 := by
+    simpa using (primePower_hasValue (prime := 5) 1)
+  simpa [shellStep] using div_hasValue numerator_value five_value
+
+/-- A negative five-adic source loses one valuation unit per scheduled wait. -/
+theorem shellRun_fiveNegative
+    (waits : List ℕ) {state : ℚ} {stateValue : ℤ}
+    (state_value : HasValue 5 state stateValue) (state_negative : stateValue < 0) :
+    HasValue 5 (shellRun waits state) (stateValue - waits.length) := by
+  induction waits generalizing state stateValue with
+  | nil =>
+      have run_nil : shellRun [] state = state := rfl
+      rw [run_nil]
+      simpa using state_value
+  | cons wait waits induction =>
+      have next_value := shellStep_fiveNegative wait state_value state_negative
+      have next_negative : stateValue - 1 < 0 := by omega
+      have tail := induction next_value next_negative
+      rw [shellRun_cons]
+      convert tail using 1
+      simp
+      ring
+
+/-- A schedule slope has five-adic valuation equal to the negative schedule length. -/
+theorem shellSlope_hasValue_five (waits : List ℕ) :
+    HasValue 5 (shellSlope waits) (-(waits.length : ℤ)) := by
+  have two_unit : IsUnit 5 (2 : ℚ) := intCast_isUnit_of_not_dvd (by norm_num)
+  have three_unit : IsUnit 5 (3 : ℚ) := intCast_isUnit_of_not_dvd (by norm_num)
+  have ratio_unit : IsUnit 5 ((2 : ℚ) / 3) := div_hasValue two_unit three_unit
+  have numerator_unit :
+      IsUnit 5 (3 ^ waits.length * (2 / 3 : ℚ) ^ waits.sum) :=
+    mul_hasValue (unit_pow three_unit waits.length) (unit_pow ratio_unit waits.sum)
+  have denominator_value : HasValue 5 ((5 : ℚ) ^ waits.length) waits.length :=
+    primePower_hasValue waits.length
+  rw [shellSlope_eq_length_sum]
+  simpa using div_hasValue numerator_unit denominator_value
+
+/-- Every nonempty schedule intercept has five-adic valuation equal to the negative schedule
+length. -/
+theorem shellIntercept_hasValue_five
+    {waits : List ℕ} (waits_ne : waits ≠ []) :
+    HasValue 5 (shellIntercept waits) (-(waits.length : ℤ)) := by
+  obtain ⟨wait, waits, rfl⟩ := List.exists_cons_of_ne_nil waits_ne
+  have first_value : HasValue 5 (shellStep wait 0) (-1) := by
+    have five_value : HasValue 5 (5 : ℚ) 1 := by
+      simpa using (primePower_hasValue (prime := 5) 1)
+    simpa [shellStep] using
+      div_hasValue (show IsUnit 5 (1 : ℚ) from ⟨one_ne_zero, padicValRat.one⟩) five_value
+  have tail := shellRun_fiveNegative waits first_value (by norm_num)
+  rw [shellIntercept, shellRun_cons]
+  convert tail using 1
+  simp
+  ring
+
+/-- Different schedule lengths force different shell slopes. -/
+theorem shellSlope_ne_of_length_ne
+    {left right : List ℕ} (length_ne : left.length ≠ right.length) :
+    shellSlope left ≠ shellSlope right := by
+  apply ne_of_valuation_ne
+  rw [(shellSlope_hasValue_five left).2, (shellSlope_hasValue_five right).2]
+  omega
+
+/-- The explicit collision source is where two different-slope schedules meet. -/
+theorem shellRun_collisionSource
+    (left right : List ℕ) (slope_ne : shellSlope left ≠ shellSlope right) :
+    shellRun left (collisionSource left right) =
+      shellRun right (collisionSource left right) := by
+  rw [shellRun_eq_slope_mul_add_intercept, shellRun_eq_slope_mul_add_intercept]
+  simp only [collisionSource]
+  field_simp
+  ring
+
+/-- The common collision target is the affine determinant divided by the slope difference. -/
+theorem shellRun_collisionSource_eq_targetQuotient
+    (left right : List ℕ) (slope_ne : shellSlope left ≠ shellSlope right) :
+    shellRun left (collisionSource left right) =
+      (shellSlope left * shellIntercept right - shellSlope right * shellIntercept left) /
+        (shellSlope left - shellSlope right) := by
+  rw [shellRun_eq_slope_mul_add_intercept]
+  simp only [collisionSource]
+  field_simp
+  ring
+
+/-- A collision between different-slope schedules forces the explicit source. -/
+theorem collisionSource_eq_of_shellRun_eq
+    (left right : List ℕ) (slope_ne : shellSlope left ≠ shellSlope right)
+    {source : ℚ} (collision : shellRun left source = shellRun right source) :
+    collisionSource left right = source := by
+  rw [shellRun_eq_slope_mul_add_intercept,
+    shellRun_eq_slope_mul_add_intercept] at collision
+  simp only [collisionSource]
+  field_simp
+  linarith
+
+/-- The unique collision source of two nonempty unequal-length schedules is automatically a
+five-adic unit. The source shell therefore cannot prune cross-length collisions. -/
+theorem collisionSource_fiveUnit
+    {left right : List ℕ} (left_ne : left ≠ []) (right_ne : right ≠ [])
+    (length_ne : left.length ≠ right.length) :
+    IsUnit 5 (collisionSource left right) := by
+  have left_slope := shellSlope_hasValue_five left
+  have right_slope := shellSlope_hasValue_five right
+  have left_intercept := shellIntercept_hasValue_five left_ne
+  have right_intercept := shellIntercept_hasValue_five right_ne
+  have valuation_ne : -(left.length : ℤ) ≠ -(right.length : ℤ) := by omega
+  have numerator_value := sub_hasValue_min right_intercept.1 left_intercept.1
+    (by rw [right_intercept.2, left_intercept.2]; exact valuation_ne.symm)
+  have denominator_value := sub_hasValue_min left_slope.1 right_slope.1
+    (by rw [left_slope.2, right_slope.2]; exact valuation_ne)
+  have numerator_value' :
+      HasValue 5 (shellIntercept right - shellIntercept left)
+        (min (-(right.length : ℤ)) (-(left.length : ℤ))) := by
+    simpa [right_intercept.2, left_intercept.2] using numerator_value
+  have denominator_value' :
+      HasValue 5 (shellSlope left - shellSlope right)
+        (min (-(left.length : ℤ)) (-(right.length : ℤ))) := by
+    simpa [left_slope.2, right_slope.2] using denominator_value
+  have quotient_value := div_hasValue numerator_value' denominator_value'
+  simpa [collisionSource, min_comm] using quotient_value
+
+/-- For unequal lengths, the common collision target is a five-adic unit exactly when the
+affine determinant has valuation `−max(left.length, right.length)`. The displayed minimum of
+the two negative lengths is that value. -/
+theorem collisionTarget_fiveUnit_iff
+    {left right : List ℕ} (length_ne : left.length ≠ right.length) :
+    IsUnit 5 (shellRun left (collisionSource left right)) ↔
+      HasValue 5
+        (shellSlope left * shellIntercept right - shellSlope right * shellIntercept left)
+        (min (-(left.length : ℤ)) (-(right.length : ℤ))) := by
+  have slope_ne : shellSlope left ≠ shellSlope right :=
+    shellSlope_ne_of_length_ne length_ne
+  have left_slope := shellSlope_hasValue_five left
+  have right_slope := shellSlope_hasValue_five right
+  have valuation_ne : -(left.length : ℤ) ≠ -(right.length : ℤ) := by omega
+  have denominator_min := sub_hasValue_min left_slope.1 right_slope.1
+    (by rw [left_slope.2, right_slope.2]; exact valuation_ne)
+  have denominator_value :
+      HasValue 5 (shellSlope left - shellSlope right)
+        (min (-(left.length : ℤ)) (-(right.length : ℤ))) := by
+    simpa [left_slope.2, right_slope.2] using denominator_min
+  have target_eq := shellRun_collisionSource_eq_targetQuotient left right slope_ne
+  constructor
+  · intro target_unit
+    have product_value := mul_hasValue target_unit denominator_value
+    have product_eq :
+        shellRun left (collisionSource left right) *
+            (shellSlope left - shellSlope right) =
+          shellSlope left * shellIntercept right -
+            shellSlope right * shellIntercept left := by
+      rw [target_eq]
+      exact div_mul_cancel₀ _ (sub_ne_zero.mpr slope_ne)
+    rw [product_eq] at product_value
+    simpa using product_value
+  · intro determinant_value
+    rw [target_eq]
+    have quotient_value := div_hasValue determinant_value denominator_value
+    simpa using quotient_value
+
+/-- The positive carrier orientation is realized by an exact unequal-length debt collision. -/
+theorem positiveOrientation_crossLengthCollision :
+    shellRun [1] (1 / 3) = 1 / 3 ∧
+      shellRun [1, 1] (1 / 3) = 1 / 3 ∧
+      debtState 1 1 = 1 / 3 ∧
+      IsUnit 5 (1 / 3 : ℚ) := by
+  constructor
+  · rw [shellRun_singleton]
+    norm_num [shellStep]
+  constructor
+  · rw [shellRun_cons, shellRun_singleton]
+    norm_num [shellStep]
+  constructor
+  · norm_num [debtState]
+  · exact div_hasValue
+      (intCast_isUnit_of_not_dvd (prime := 5) (by norm_num : ¬(5 : ℤ) ∣ 1))
+      (intCast_isUnit_of_not_dvd (prime := 5) (by norm_num : ¬(5 : ℤ) ∣ 3))
+
+/-- The opposite carrier orientation is also realized by an exact unequal-length debt
+collision. Both endpoints remain five-adic units. -/
+theorem negativeOrientation_crossLengthCollision :
+    shellRun [1] (19 / 42) = 8 / 21 ∧
+      shellRun [1, 2, 0] (19 / 42) = 8 / 21 ∧
+      debtState (19 / 14) 1 = 19 / 42 ∧
+      debtState (8 / 7) 1 = 8 / 21 ∧
+      IsUnit 5 (19 / 42 : ℚ) ∧
+      IsUnit 5 (8 / 21 : ℚ) ∧
+      HasValue 3 (19 / 14 + 1) 1 ∧
+      HasValue 3 (8 / 7 + 1) 1 := by
+  constructor
+  · rw [shellRun_singleton]
+    norm_num [shellStep]
+  constructor
+  · rw [shellRun_cons, shellRun_cons, shellRun_singleton]
+    norm_num [shellStep]
+  constructor
+  · norm_num [debtState]
+  constructor
+  · norm_num [debtState]
+  constructor
+  · exact div_hasValue
+      (intCast_isUnit_of_not_dvd (prime := 5) (by norm_num : ¬(5 : ℤ) ∣ 19))
+      (intCast_isUnit_of_not_dvd (prime := 5) (by norm_num : ¬(5 : ℤ) ∣ 42))
+  constructor
+  · exact div_hasValue
+      (intCast_isUnit_of_not_dvd (prime := 5) (by norm_num : ¬(5 : ℤ) ∣ 8))
+      (intCast_isUnit_of_not_dvd (prime := 5) (by norm_num : ¬(5 : ℤ) ∣ 21))
+  constructor
+  · convert primePower_mul_int_div_int_hasValue (prime := 3) 1
+      (by norm_num : ¬(3 : ℤ) ∣ 11) (by norm_num : ¬(3 : ℤ) ∣ 14) using 1 <;>
+      norm_num
+  · convert primePower_mul_int_div_int_hasValue (prime := 3) 1
+      (by norm_num : ¬(3 : ℤ) ∣ 5) (by norm_num : ¬(3 : ℤ) ∣ 7) using 1 <;>
+      norm_num
 
 /-- Within fixed debt endpoints and fixed length, a point collision is already a global affine
 relation. Source-specific collisions can occur only across different lengths. -/

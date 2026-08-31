@@ -2525,6 +2525,13 @@ uninterrupted schedules are Łukasiewicz bridges with
 `d_end+length=d_start+sum(waits)`. At fixed endpoint depths and length their affine slope is
 fixed, so a point collision is already a global affine-map relation. The remaining
 source-specific collision problem is cross-length, together with chamber exits and reentries.
+That cross-length seam now has an exact normal form: two nonempty unequal-length schedules have
+one collision source, and it is automatically a `5`-adic unit because both slope and intercept
+have valuation `−length`. Thus source-shell exclusion supplies no length bound. The common target
+is a unit exactly when the affine determinant `a_left b_right−a_right b_left` has valuation
+`−max(left.length,right.length)`; this exact shorter-length cancellation remains live. Exact
+unit-target examples realize both possible `3`-adic carrier orientations, killing that one-bit
+invariant as a global separator.
 Higher depth is not free: a published length-thirteen relation yields two distinct
 schedules with the same affine map and a common Lean-checked guarded periodic source. This is an
 exact rewrite seed. Lean also proves that it preserves all intermediate shell guards in every
@@ -2592,6 +2599,7 @@ artery; see
 | Separate the Collatz cusp by finite ambient quotients | every finite image identifies the positive monoid with the whole generated group |
 | Assume the mixed-prime schedule action is free | a published length-thirteen relation is a checked guarded collision |
 | Bound the mixed-prime reverse fan uniformly | a target at negative `3`-depth `d` has exactly `d+1` distinct shell-legal predecessors when its rational carrier is a `3`- and `5`-unit |
+| Prune cross-length shell collisions at their source | every two nonempty unequal-length shell maps have a unique collision source and it is automatically a `5`-adic unit; only fixed-source equality and target acceptance remain discriminating |
 | Invoke a general module `S`-unit algorithm | the arbitrary three-prime case leads to open linear-exponential systems, and forgetting the monotone path destroys useful structure |
 
 These are exclusion tests for future proposals. Any attack relying on one of them must identify

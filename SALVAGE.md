@@ -11286,6 +11286,48 @@ length determine the slope. Two such bridges which agree at one rational source 
 within-length point collisions are exactly affine-map relations and belong to the existing raw
 kernel. Only cross-length carrier equality can create a genuinely source-specific collision.
 
+That collision has a complete affine normal form. Write a schedule map as `a_wu+b_w`. Lean
+proves for every nonempty `w` that
+
+```text
+v₅(a_w)=v₅(b_w)=−|w|.
+```
+
+Schedules of unequal lengths have unequal slopes and therefore one collision source
+
+```text
+u_(w,v)=(b_v−b_w)/(a_w−a_v).
+```
+
+The two differences are each governed by the longer schedule's strictly smaller valuation, so
+`v₅(u_(w,v))=0`. Hence source-shell exclusion cannot prune any cross-length pair. This does not
+make every collision a legal target witness. Its common output is exactly
+
+```text
+y_(w,v)=(a_w b_v−a_v b_w)/(a_w−a_v),
+```
+
+and Lean proves it is a unit exactly when
+
+```text
+v₅(a_w b_v−a_v b_w)=−max(|w|,|v|).
+```
+
+The two determinant terms each have valuation `−|w|−|v|`, so acceptance requires exact
+cancellation through the shorter schedule length.
+
+The one-bit `3`-adic carrier orientation is saturated rather than decisive. Lean checks the two
+unit-target collisions
+
+```text
+[1]  versus [1,1]    at 1/3 ↦ 1/3,
+[1]  versus [1,2,0]  at 19/42 ↦ 8/21.
+```
+
+At depth one the first carrier is congruent to `1` modulo three; the second source and target
+carriers are congruent to `−1`. All displayed endpoints are `5`-adic units. The orientation is a
+lawful within-chamber invariant, but both of its values support cross-length accepted collisions.
+
 Every fixed infinite schedule has a unique orbit in `ℤ₅×` because the inverse branches contract
 by `1/5`; a periodic schedule's coded orbit is rational by the displayed formula. At every
 finite precision, the transition relation is maximal: for `k≥1`, each admissible source modulo
@@ -11387,7 +11429,9 @@ unit shell; representatives can also be chosen to avoid every earlier state.
 their affine equality in arbitrary contexts, their common guarded periodic source, exact
 repeated-block displacement and unit bounds, the exact two- and three-adic walls, the complete
 negative-depth predecessor fan, arbitrary debt-safe schedules and their balance, and
-same-length collision rigidity; it also checks contextual guard preservation and the raw/shell
+same-length collision rigidity; it also checks the unique unequal-length collision source, its
+automatic source-unit theorem, both carrier-orientation examples, contextual guard preservation,
+and the raw/shell
 conjugacy, the contextual boundary factorization, the infinite
 odd-length raw kernel family, its guarded contextual cycles, exact homogeneous equality under
 every independent generator scaling, its two-seed group pumping law, and three independent
@@ -11412,7 +11456,12 @@ rational source may also identify distinct affine maps.
 `MixedPrimeDebt.shellStep_debtState_eq_iff`, `MixedPrimeDebt.debtPredecessor_fan`,
 `MixedPrimeDebt.debtPredecessor_state_injective`, `MixedPrimeDebt.shellRun_debtSafe`,
 `MixedPrimeDebt.debtRunDepth_balance`, and
-`MixedPrimeDebt.debtSafe_sameLength_collision_global`, in
+`MixedPrimeDebt.debtSafe_sameLength_collision_global`,
+`MixedPrimeDebt.collisionSource_eq_of_shellRun_eq`,
+`MixedPrimeDebt.collisionSource_fiveUnit`,
+`MixedPrimeDebt.collisionTarget_fiveUnit_iff`,
+`MixedPrimeDebt.positiveOrientation_crossLengthCollision`, and
+`MixedPrimeDebt.negativeOrientation_crossLengthCollision`, in
 [`MixedPrimeKernel.lean`](MatrixMortality/MixedPrimeKernel.lean),
 [`MixedPrimeNormalization.lean`](MatrixMortality/MixedPrimeNormalization.lean), and
 [`PeriodicShell.lean`](MatrixMortality/PeriodicShell.lean), and
@@ -11425,7 +11474,8 @@ and the exact census/critical-pair certificate in
 **Use:** reject state-independent finite forbidden wait blocks, residue-only bounded `5`-adic
 exclusion, eventual shell exit or periodicity, unbounded pumping of one fixed schedule away from
 its periodic point, uniformly bounded reverse fanout, source-specific collision mechanisms at
-one fixed debt-bridge length, universal strict state-height drift, and a
+one fixed debt-bridge length, cross-length source-shell exclusion, the one-bit `3`-adic carrier
+orientation as a global separator, universal strict state-height drift, and a
 compiler whose period-one configurations must remain in that set after every single wait. Also
 reject the hope that unit normalization restores a free action or that the odd family supplies a
 strict shortening pump. The live information is exact fixed-source endpoint equality across the
@@ -11436,5 +11486,6 @@ cancellative envelope.
 relations into even-length or further parametric families, distinguishing new group relations
 from positive-congruence phenomena. For debt-safe prefixes, census affine-map equality within
 each length and source-specific collisions only across lengths. Then attack cross-length carrier
-equality, chamber exits and reentries, residual stabilizers, and accepting exits without assuming
-a canonical rewrite normal form.
+equality against the fixed source and test its common output for target-unit acceptance. Then
+attack chamber exits and reentries, residual stabilizers, and accepting exits without assuming a
+canonical rewrite normal form.
