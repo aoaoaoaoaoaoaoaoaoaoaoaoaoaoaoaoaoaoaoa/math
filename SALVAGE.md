@@ -179,6 +179,7 @@ file owns the mathematical stock.
 | [`R32-O21`](#r32-o21-finite-image-positivity-collapse) | obstruction | every finite ambient image identifies the positive Collatz monoid with the whole generated group | formalized core; audited application | graduated |
 | [`R32-O22`](#r32-o22-congruence-blind-free-orbit) | obstruction | one free trivial-stabilizer rational orbit misses a target that lies in its projective orbit modulo every integer | formalized | graduated |
 | [`R32-O23`](#r32-o23-cubic-continuant-fracture) | structure theorem and obstruction | the non-pure return family has an exact recurrence-digit continuant form, and nontriangular cancellation begins in two ternary blocks with no triangular adjacent pair | formalized | active |
+| [`R32-O24`](#r32-o24-unbounded-prime-continuants) | structure theorem and obstruction | a four-ray cycle pumps upper-triangular return words of unbounded length with no nontrivial upper-triangular concatenation split | formalized | active |
 | [`R32-D03`](#r32-d03-bounded-denominator-periodicity) | decidable stratum | every infinite legal rational guard orbit with bounded reduced denominators is eventually periodic | formalized | graduated |
 | [`M4-C01`](#m4-c01-two-state-pushout-compiler) | compiler | binary deterministic two-state scalar control compiles to three `4 × 4` matrices | formalized | graduated |
 | [`M4-O01`](#m4-o01-exact-toggle-fusion-leaves-an-immortal-core) | obstruction | exact local toggle fusion preserves a nonzero common anchor | formalized | graduated |
@@ -7137,6 +7138,59 @@ ternary and longer continuants, not only individual defects or adjacent pairs.
 
 **Next:** seek a descent or decision grammar for the recurrence-digit continuant, or use the
 derived triangular macros as controlled punctuation while proving an arbitrary-word converse.
+
+### R32-O24: Unbounded prime continuants
+
+**Kind:** structure theorem and obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+For `E=(1,0)` and finite rays
+
+```text
+P₀=(31,−30),  P₁=(−31,12),  P₂=(−29,−30),  P₃=(1,−18),
+```
+
+the false-wait returns have the exact entry, cycle, and exit actions
+
+```text
+M₂E=3P₂,       M₈P₂=90P₃,       M₇P₃=−12P₀,
+M₁₅P₀=120P₁,  M₂₁P₁=1458P₂,    M₁₉P₁=−6648E.
+```
+
+Therefore
+
+```text
+Wₖ=[19,15][7,8,21,15]ᵏ[7,8,2]
+```
+
+is upper triangular for every `k≥0` and has length `5+4k`. A uniform suffix induction proves
+that every nonempty proper suffix of `Wₖ` sends `E` to a nonzero multiple of one of
+`P₀,P₁,P₂,P₃`, so its lower-left product entry is nonzero. No nontrivial split of `Wₖ` can
+therefore have two upper-triangular factors.
+
+**Scope:** Lean checks all six one-step actions, the closed cycle and its multiplier, the entry
+and exit, the `k=0` boundary, the recursive proper-suffix census, triangularity, length, and the
+unbounded concatenation-prime conclusion. This excludes bounded-length factorization into
+upper-triangular macro words and finite upper-triangular macro dictionaries whose accepted words
+factor into dictionary members. It does not imply nonregularity, exclude finite automata, or
+classify every upper-triangular word.
+
+**Artifact:** `CubicReturn.NonPure.continuant_ray_steps`,
+`continuantCycleWord_mulVec`, `continuantTail_mulVec`,
+`continuantTail_nonemptySuffix_lowerLeft`, `continuantPumpWord_properSuffix_lowerLeft`, and
+`continuantPumpWord_unbounded_concat_prime` in
+[`CubicReturnNonPure.lean`](MatrixMortality/CubicReturnNonPure.lean), with reconstruction in
+[`m32-unbounded-prime-continuants-2026-08-31.md`](audits/m32-unbounded-prime-continuants-2026-08-31.md).
+
+**Use:** reject every continuant attack whose global grammar requires accepted words to factor
+into a bounded stock of triangular cancellations. A live decision proof must recognize the
+continuant globally, derive a descent compatible with the internal projective cycle, or use a
+grammar whose states do not require accepted-factor boundaries.
+
+**Next:** seek a global arithmetic descent or finite-nucleus theorem for the full recurrence-digit
+action, with the four-ray cycle treated as an explicit recurrent component rather than a macro to
+be enumerated away.
 
 ### R32-D03: Bounded-denominator periodicity
 

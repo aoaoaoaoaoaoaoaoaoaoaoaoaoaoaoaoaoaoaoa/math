@@ -689,6 +689,16 @@ open MatrixMortality
 #print axioms CubicReturn.NonPure.falseWaitReturn_det
 #print axioms CubicReturn.NonPure.nontriangular_triple_fifteen_eight_twentySix
 #print axioms CubicReturn.NonPure.nontriangular_triple_twelve_eight_thirtyThree
+#print axioms CubicReturn.NonPure.continuant_ray_steps
+#print axioms CubicReturn.NonPure.continuantCycleWord_mulVec
+#print axioms CubicReturn.NonPure.continuantTail_mulVec
+#print axioms CubicReturn.NonPure.continuantTail_prefix_actions
+#print axioms CubicReturn.NonPure.continuantTail_nonemptySuffix_lowerLeft
+#print axioms CubicReturn.NonPure.continuantPumpWord_lowerLeft
+#print axioms CubicReturn.NonPure.continuantPumpWord_length
+#print axioms CubicReturn.NonPure.continuantPumpWord_properSuffix_lowerLeft
+#print axioms CubicReturn.NonPure.continuantPumpWord_concat_prime
+#print axioms CubicReturn.NonPure.continuantPumpWord_unbounded_concat_prime
 #print axioms EdgeCompression.isMortal_iff_exists_edgeProduct_eq_zero
 #print axioms TwoPlaneEdges.output_mul_input
 #print axioms TwoPlaneEdges.generator_rank
