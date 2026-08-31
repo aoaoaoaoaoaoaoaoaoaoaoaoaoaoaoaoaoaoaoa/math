@@ -1243,6 +1243,12 @@ promised trivial-stabilizer source transfers triviality to the target. This cons
 height in every finite prefix family but does not make the height sequence monotone or prevent
 later returns.
 
+[`D2-O13`](SALVAGE.md#d2-o13-proper-height-escape) closes infinite low-height return behavior.
+At a trivial-stabilizer target, the primitive-state map along injective prefixes is injective, so
+the indices below any fixed height ceiling form a finite set. Primitive height therefore tends to
+infinity: every fixed cube has a last visit. What remains is an effective last-return bound or a
+place-sensitive escape direction, not another recurrent bounded-height mechanism.
+
 The ordinary mortality lift is likewise no longer part of the paired obstruction. For arbitrary
 controls `H_a`, column `γ`, and row `λ` over a field, adjoining `γλ` gives mortality exactly when some
 `λH_yγ` vanishes. A zero product without the separator is already a scalar-zero witness; after
@@ -1348,7 +1354,7 @@ or neutral word across the return, use an empty consume, or split recurrent outp
 | Positive projective transition lower bound | Same-zero dimension three is point-line incidence in `P²`, and actual one-sided shifts retain finite rank/kernel/image data | Derive a uniform nonstationary or noncommuting shift incompatibility from an unbounded terminal section; static support rank, formal inverse completion, fixed equal-length return flowers, and unary consecutive-repeat escape are forbidden |
 | Global word-residual recoding | Longer noncommutative atoms can retain order while discarding the four additive role channels | Escape `G3-D05`: fixed-priority affine counters and all one-way reset/transfer/fanout cascades are decidable |
 | Head-separated three-schema source | `G3-C04` discharges every arbitrary-trace forcing obligation locally; `G3-O24` isolates the directed stable-cone alternative | Preserve an undecidable mixed or neutral word across returns, or realize zero-sensitive S5 GLB decoding after the `G3-O25` separator-rank fork; complete pure forks are decidable by `G3-D07` |
-| Carvalho projective group-orbit separator | `G3-M03` gives the exact saturated three-positive cover; `G3-O23` collapses every singular carrier to invertible dimension two; `D2-D02/D08` decide all elementary group actions; `D2-D09` decides the profinite-blind step-three shear family by height | Combine effective target-stabilizer recognition with control of unbounded-height normal-form paths in arbitrary non-elementary `UCB₂(S)`, or construct the invertible three-state line/plane orbit left by `G3-O22`; finite ambient quotients are forbidden by `G3-O28`, primitive-height-only descent by `D2-O05`, and bounded trivial-stabilizer recurrence by `D2-O06` |
+| Carvalho projective group-orbit separator | `G3-M03` gives the exact saturated three-positive cover; `G3-O23` collapses every singular carrier to invertible dimension two; `D2-D02/D08` decide all elementary group actions; `D2-D09` decides the profinite-blind step-three shear family by height | Control the proper height-escaping normal-form paths forced by `D2-O13` in arbitrary non-elementary `UCB₂(S)`, or construct the invertible three-state line/plane orbit left by `G3-O22`; finite ambient quotients are forbidden by `G3-O28`, primitive-height-only descent by `D2-O05`, and bounded trivial-stabilizer recurrence by `D2-O06/O11` |
 
 These six lanes form three trunks. The first three race a direct paired construction against its
 one-sided projective lower bound. The next two seek genuine `GPCP(3)` through either global
@@ -1563,7 +1569,9 @@ finite horizon `(2H+1)²+1`. Hence the next hard no-instance cannot combine triv
 stabilizer with bounded recurrence. `D2-O11` further decides any supplied bounded window under
 trivial source stabilizer by conjugating its collision witness. Unbounded-height paths remain
 undecided, although `D2-O12` now forces the exact finite-family rate
-`N≤(2H+1)²` below every height ceiling `H`.
+`N≤(2H+1)²` below every height ceiling `H`. `D2-O13` strengthens this further: every fixed
+height sublevel is visited only finitely often, so the surviving path is proper but lacks a
+computable last-return bound.
 
 Work on projective incidence should therefore be treated as a joint `M₃(2)`/`M₂(3)` campaign.
 A `GPI₂` algorithm decides all of `M₂(3)` and the rank-`(2,2)` artery of `M₃(2)`; a universal
@@ -2757,8 +2765,10 @@ a diagonal `S`-unit and transverse parabolic admit a positive target stabilizer 
 inverse stripping cycles through primitive heights `5→3→5`. A viable state must detect and
 quotient such cycles or add a secondary well-founded invariant. `D2-O06` proves that bounded
 recurrence along distinct normal-form prefixes always comes from a target stabilizer. After that
-stabilizer component is removed, the exact survivor is an unbounded-height path. Raw word length
-alone is not a lawful height: relations can make long words represent short group elements.
+stabilizer component is removed, `D2-O10`–`D2-O13` give the exact survivor: a proper
+height-escaping path with at most `(2H+1)²` visits below each ceiling `H`, but without a computable
+last-return index. Raw word length alone is not a lawful height: relations can make long words
+represent short group elements.
 
 #### 6. Exact symbolic saturation and finite obstructions
 
@@ -2857,9 +2867,10 @@ universal computation.
    Carvalho branch into dimension two, and `G3-O28` has killed every finite quotient of one
    natural `S`-arithmetic ambient group there. `D2-D09` decides that fixed shear family by height;
    `D2-O05` forbids universalizing primitive height without recurrent-cycle state, while `D2-O06`
-   identifies every bounded injective-prefix recurrence with a target stabilizer. Seek an effective
-   stabilizer quotient and control the remaining unbounded-height paths rather than retaining either
-   example as a hardness candidate.
+   identifies every bounded injective-prefix recurrence with a target stabilizer. `D2-O10`–`D2-O13`
+   turn that branch into a finite certificate and prove that every trivial-stabilizer survivor tends
+   to infinite primitive height. Seek a computable last-return bound or place-sensitive escape law
+   rather than retaining either example as a hardness candidate.
    Do not revive singular spelling memory, conflate group inverses with positive `M₂(3)` controls,
    or retry finite ambient-group separation as a complete certificate.
 6. Formalize `D2-S02` and `D2-D05`–`D2-D07`, then attack fixed-source exact prefix and

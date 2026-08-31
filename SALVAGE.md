@@ -274,6 +274,7 @@ file owns the mathematical stock.
 | [`D2-O10`](#d2-o10-finite-bounded-prefix-horizon) | quantitative structural reduction | `(2H+1)²+1` distinct prefixes bounded by primitive height `H` already expose a nontrivial target stabilizer | formalized | graduated |
 | [`D2-O11`](#d2-o11-bounded-branch-nonreachability-certificate) | finite nonreachability certificate | under trivial source stabilizer, a bounded prefix window exposes a target stabilizer and certifies that no transporter exists | formalized | graduated |
 | [`D2-O12`](#d2-o12-exact-prefix-height-rate) | quantitative escape bound | `N` distinct prefixes at a trivial-stabilizer target bounded by height `H` satisfy `N≤(2H+1)²`, with an exact threshold contrapositive | formalized | graduated |
+| [`D2-O13`](#d2-o13-proper-height-escape) | asymptotic structure theorem | every bounded-height sublevel of an injective-prefix orbit at a trivial-stabilizer target is finite, so primitive height tends to infinity | formalized | graduated |
 | [`D2-M01`](#d2-m01-benchmark-critical-shell) | partial mechanism | the mixed-prime benchmark reduces generically to one guarded `5`-adic shell | audited | active |
 | [`D2-O01`](#d2-o01-canonical-collatz-reachability-is-not-automatic) | obstruction | full generalized-Collatz reachability is not synchronously recognizable in its canonical base | external theorem | active |
 | [`D2-O02`](#d2-o02-critical-shell-periodic-saturation) | obstruction and rewrite seed | every nonempty finite wait schedule has a rational all-unit cycle; normalized nonfreeness persists under every generator scaling, while its odd family is a two-seed cancellative pump and the positive finite basis is complete only through length 30 | formalized core; audited strengthening | active |
@@ -11268,6 +11269,58 @@ limits how often an inverse path can re-enter a smaller height cube.
 [`InverseOrbitRecurrence.lean`](MatrixMortality/InverseOrbitRecurrence.lean)
 and
 [`m34-prefix-height-rate-2026-08-31.md`](audits/m34-prefix-height-rate-2026-08-31.md).
+
+### D2-O13: Proper height escape
+
+**Kind:** asymptotic structure theorem
+
+**Evidence:** formalized
+
+**Disposition:** graduated
+
+Let `g₀,g₁,…` be pairwise distinct group prefixes acting on a rational
+projective target `q` with trivial stabilizer, and choose a primitive integral
+representative `vₙ` for every state `gₙq`. The state map is injective: equality
+`vᵢ=vⱼ` would make `gⱼ⁻¹gᵢ` a target stabilizer, forcing `gᵢ=gⱼ` and then
+`i=j`.
+
+For each height ceiling `H`, the preimage
+
+```text
+{n∈ℕ | height(vₙ)≤H}
+```
+
+is therefore finite, because it injects into the finite integer cube
+`[-H,H]²`. Equivalently,
+
+```text
+height(vₙ) → +∞  as n → +∞.
+```
+
+Thus the residual inverse path does not merely contain an unbounded
+subsequence. It eventually leaves every fixed primitive-height cube forever.
+
+**Scope:** convergence to infinity does not mean successive heights are
+monotone. The path may make arbitrarily many finite downward moves and may
+return below `H` after its first escape; the theorem says only that each fixed
+sublevel has a last visit. It supplies no computable bound on that last visit,
+no preferred Archimedean or `S`-adic escape direction, and no termination
+theorem for general `UCB₂(S)`.
+
+**Use:** infinite recurrence inside a fixed height range is now impossible at
+a trivial-stabilizer target. Any hard inverse path must be proper with respect
+to primitive height. The surviving problem is effective: control the last
+return to each cube or extract a place-sensitive direction from the proper
+escape.
+
+**Next promotion:** prove a computable last-return bound from the input
+matrices, or refine proper Archimedean escape into one of finitely many
+`S`-adic/real chambers with a well-founded transition law.
+
+**Artifacts:**
+[`InverseOrbitRecurrence.lean`](MatrixMortality/InverseOrbitRecurrence.lean)
+and
+[`m34-proper-height-escape-2026-08-31.md`](audits/m34-proper-height-escape-2026-08-31.md).
 
 ### D2-M01: Benchmark critical shell
 
