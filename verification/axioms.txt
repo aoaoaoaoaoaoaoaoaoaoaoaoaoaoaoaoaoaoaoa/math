@@ -2787,6 +2787,38 @@
 'MatrixMortality.MixedPrimeDebt.exists_guarded_shellRun_realTrapBandPoint_representative_iff' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.MixedPrimeDebt.shellStep_upperPredecessor' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.MixedPrimeDebt.shellStep_middlePredecessor' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.MixedPrimeDebt.shellStep_lowerPredecessor' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.MixedPrimeDebt.upperPredecessor_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.MixedPrimeDebt.middlePredecessor_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.MixedPrimeDebt.lowerPredecessor_mem_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.MixedPrimeDebt.shellStep_realTrapBandPoint_iff_three_predecessors' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.lowerCenteredNumerator_gcd' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.MixedPrimeDebt.lowerCenteredNumerator_twoValue_of_oddDenominator' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.lowerCenteredNumerator_twoValue_of_four_dvd_denominator' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.lowerCenteredNumerator_eq_twice_center' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.MixedPrimeDebt.lowerCenteredNumerator_twoValue_of_exactlyOne_denominator' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.lowerNormalizedMantissa_twoValue' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.lowerNormalizedMantissa_threeValue' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.lowerNormalizedMantissa_twoValue_of_exactlyOne_denominator' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.realTrapBandPoint_lowerNormalizedMantissa' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.MixedPrimeDebt.exists_shellStep_realTrap_predecessor' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
