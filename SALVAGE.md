@@ -159,6 +159,7 @@ file owns the mathematical stock.
 | [`R32-S45`](#r32-s45-fraction-pullback-and-terminal-denominator-shell) | structure theorem and obstruction | every rational ReturnSquare bridge is one reversed two-coordinate incidence, whose final denominator-prime predecessor has an exact clipped valuation outside one critical shell | formalized | active |
 | [`R32-S46`](#r32-s46-denominator-predecessor-shell-grammar) | structure theorem and obstruction | every inverse denominator-prime step outside four explicit valuation ties follows one exact tropical minimum | formalized | active |
 | [`R32-S47`](#r32-s47-exact-four-wall-residue-laws) | structure theorem and obstruction | all four denominator-prime ties have exact normalized residue transitions, and none alone forces resonance outside the common-geometric alphabet | formalized | active |
+| [`R32-S48`](#r32-s48-fractional-cyclotomic-finite-walls) | structure theorem and obstruction | every mortal fraction reduces to `1` when the base does and to `±1` when the base reduces to `−1` | formalized | active |
 | [`R32-M01`](#r32-m01-generic-reverse-edge-compiler) | partial mechanism | projective incidence generically embeds into a compatible two-plane edge square | formalized | active |
 | [`R32-M02`](#r32-m02-finite-quotient-sieve) | partial mechanism | finite monoid quotients give complete modular no-certificates for fixed candidates | formalized | active |
 | [`R32-M03`](#r32-m03-two-scale-return-conversion) | partial mechanism | a minimal two-scale return pencil has nonresonant multi-return zeros | formalized | active |
@@ -6032,6 +6033,61 @@ audit
 **Use:** branch on exact normalized residues, not unspecified cancellation. A closure must use
 the common-power relation among successive scales; valuation walls and a shared scale prime are
 insufficient.
+
+### R32-S48: Fractional cyclotomic finite walls
+
+**Kind:** structure theorem and obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+The fixed- and signed-ray finite quotients used in the prime-power classification extend from
+reciprocal integers to every rational fraction. For `d=A/B`, clear the physical cut denominator:
+
+```text
+C_{A,B} = [−B   B   B−A]
+          [−A   B     0]
+          [−B   B   B−A].                                  (1)
+```
+
+Lean proves that the integer pair `(diag(1,q,q²),C_{A,B})` is mortal exactly when the rational
+ReturnSquare pair at `c=−A/B` is mortal.
+
+In a prime quotient where `q=1`, the ray `(1,1,1)` is common to both generators. The cleared cut
+weight is `B−A`; therefore mortality forces
+
+```text
+q ≡ 1 (mod ℓ)  ⇒  B ≡ A (mod ℓ).                            (2)
+```
+
+In a prime quotient where `q=−1`, the ambient generator exchanges `(1,1,1)` and `(1,−1,1)`,
+while the cut resets either ray to `(1,1,1)` with weights `B−A` and `−(B+A)`. Therefore
+
+```text
+q ≡ −1 (mod ℓ)  ⇒  B ≡ A or B ≡ −A (mod ℓ).                (3)
+```
+
+Equivalently, every prime divisor `ℓ` of `q−1` divides `B−A`, and every prime divisor of `q+1`
+divides at least one of `B−A` or `B+A`. These are word-independent necessary conditions: they
+hold before any wait exponents or four-wall branches are chosen.
+
+**Scope:** (2)–(3) are cyclotomic filters, not a complete finite-quotient sieve. Fractions can
+satisfy every order-one and order-two congruence without being powers of `q`. Higher-order
+ambient quotients no longer stay on two rays, and their complete projective automata remain to be
+classified.
+
+**Artifact:** `ReturnSquare.fractionIntegralGenerator_isMortal_iff`,
+`not_physical_isMortal_of_fractionFiniteWall`,
+`isMortal_forces_fraction_modEq_one`,
+`isMortal_forces_fraction_modEq_neg_one`,
+`isMortal_forces_prime_dvd_fraction_sub_of_dvd_q_sub_one`, and
+`isMortal_forces_prime_dvd_fraction_sign_of_dvd_q_add_one` in
+[`ReturnSquareFractionFiniteWall.lean`](MatrixMortality/ReturnSquareFractionFiniteWall.lean),
+with audit
+[`m32-returnsquare-fraction-finite-walls-2026-08-31.md`](audits/m32-returnsquare-fraction-finite-walls-2026-08-31.md).
+
+**Use:** apply (2)–(3) before residue search. Any surviving nonresonant denominator assignment
+must lie in the simultaneous multiplicative relation lattice of the prime factors of `q` modulo
+every prime factor of `q−1` and `q+1`.
 
 ### R32-M01: Generic reverse edge compiler
 

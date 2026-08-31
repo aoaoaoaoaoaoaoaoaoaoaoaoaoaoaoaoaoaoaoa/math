@@ -2464,6 +2464,9 @@ The family is now sharply fenced:
   only even scales crosses both `x=−b` and the critical wall, so no wall or shared denominator
   prime is itself an obstruction, by
   [`R32-S47`](SALVAGE.md#r32-s47-exact-four-wall-residue-laws).
+- every mortal fraction `A/B` obeys two word-independent cyclotomic filters: modulo every prime
+  divisor of `q−1`, `B≡A`; modulo every prime divisor of `q+1`, `B≡±A`, by
+  [`R32-S48`](SALVAGE.md#r32-s48-fractional-cyclotomic-finite-walls).
 - replacing common powers of one base by a scale alphabet totally ordered under divisibility is
   unsound: `[3,15,3,3,15,3,3,3]` has the exact nonresonant root `d=25/27`, by
   [`R32-O25`](SALVAGE.md#r32-o25-divisibility-chain-returnsquare-fracture).
@@ -2481,10 +2484,12 @@ different denominator primes. Away from the four equalities
 dynamics on those moving walls remain locally free. Each wall now has one exact normalized
 residue coordinate, and arbitrary-scale multi-return zeros realize all four walls even when the
 scales share the relevant denominator prime. Neither cross-prime residue synchronization nor a
-geometric-scale counterexample is proved. The one-base geometric architecture is essential:
-mere divisibility comparability or common prime content cannot replace it. The one-base
-prime-power architecture remains closed. The two-coordinate pullback is not a reduction to
-finite-alphabet `M₂(3)`; every `qⁿ` remains a distinct return letter.
+geometric-scale counterexample is proved. Order-one and order-two cyclotomic quotients now force
+`B/A` onto the signed identity rays, but higher-order quotients require larger projective
+automata. The one-base geometric architecture is essential: mere divisibility comparability or
+common prime content cannot replace it. The one-base prime-power architecture remains closed.
+The two-coordinate pullback is not a reduction to finite-alphabet `M₂(3)`; every `qⁿ` remains a
+distinct return letter.
 
 The obvious nonsemisimple escape is closed as well. A `1⊕J₋₁` ambient mode can realize the
 exact parity-Collatz rails, but the rank-compatible branch is unique up to scalar and preserves
