@@ -166,6 +166,177 @@ theorem rawHead_factor_iff
       Int.modEq_zero_iff_dvd.mp (head_mod.trans r_dvd_boundary.modEq_zero_int)
     exact r9_coprime.dvd_of_dvd_mul_left left_dvd
 
+/-- For every gap factor, the raw-head boundary exponential is equivalent to its
+complementary-exponent reciprocal. -/
+theorem rawHeadBoundary_factor_iff
+    {β s : Nat} {r : ℤ}
+    (β_positive : 0 < β)
+    (s_le_beta : s ≤ β)
+    (r_dvd_q : r ∣ gapFactor β) :
+    r ∣ 2 * 10 ^ s + 1743 ↔ r ∣ 249 * 10 ^ (β - s) + 1 := by
+  let q := gapFactor β
+  let B : ℤ := 2 * 10 ^ s + 1743
+  let C : ℤ := 249 * 10 ^ (β - s) + 1
+  have power_split : (10 : ℤ) ^ (β - s) * 10 ^ s = 10 ^ β := by
+    rw [← pow_add, Nat.sub_add_cancel s_le_beta]
+  have bridge : (10 : ℤ) ^ (β - s) * B = q + 7 * C := by
+    calc
+      (10 : ℤ) ^ (β - s) * B =
+          2 * ((10 : ℤ) ^ (β - s) * 10 ^ s) + 1743 * 10 ^ (β - s) := by
+        simp only [B]
+        ring
+      _ = q + 7 * C := by
+        rw [power_split]
+        simp only [q, C, gapFactor]
+        ring
+  have r7_coprime : IsCoprime r (7 : ℤ) :=
+    IsCoprime.of_isCoprime_of_dvd_left (gapFactor_coprime_seven β) r_dvd_q
+  have q10_coprime : IsCoprime (gapFactor β) (10 : ℤ) := by
+    simpa using (gapFactor_coprime_two β).mul_right
+      (gapFactor_coprime_five β_positive)
+  have r10pow_coprime : IsCoprime r ((10 : ℤ) ^ (β - s)) :=
+    (IsCoprime.of_isCoprime_of_dvd_left q10_coprime r_dvd_q).pow_right
+  constructor
+  · intro r_dvd_B
+    have r_dvd_scaled : r ∣ (10 : ℤ) ^ (β - s) * B :=
+      r_dvd_B.mul_left _
+    have r_dvd_sevenC : r ∣ 7 * C := by
+      have r_dvd_difference := r_dvd_scaled.sub r_dvd_q
+      rw [bridge] at r_dvd_difference
+      simpa [q] using r_dvd_difference
+    exact r7_coprime.dvd_of_dvd_mul_left r_dvd_sevenC
+  · intro r_dvd_C
+    have r_dvd_scaled : r ∣ (10 : ℤ) ^ (β - s) * B := by
+      rw [bridge]
+      exact r_dvd_q.add (r_dvd_C.mul_left 7)
+    exact r10pow_coprime.dvd_of_dvd_mul_left r_dvd_scaled
+
+/-- The exact gap-factor support of a unit two-`c` raw head can be read at either endpoint of
+the admissible run-length interval. -/
+theorem rawHead_factor_iff_reciprocal
+    {β s : Nat} {r H : ℤ}
+    (β_positive : 0 < β)
+    (s_le_beta : s ≤ β)
+    (r_dvd_q : r ∣ gapFactor β)
+    (head_eq : 9 * H = 5 * 10 ^ (β + 2) + 2 * 10 ^ s - 7) :
+    r ∣ H ↔ r ∣ 249 * 10 ^ (β - s) + 1 :=
+  (rawHead_factor_iff β_positive r_dvd_q head_eq).trans
+    (rawHeadBoundary_factor_iff β_positive s_le_beta r_dvd_q)
+
+/-- Once a divisor occurs in the reciprocal support exponential, every later occurrence is
+exactly governed by the multiplicative period of ten. -/
+theorem reciprocalSupport_dvd_shift_iff
+    {t k : Nat} {r : ℤ}
+    (r_dvd_base : r ∣ 249 * 10 ^ t + 1) :
+    r ∣ 249 * 10 ^ (t + k) + 1 ↔ r ∣ 10 ^ k - 1 := by
+  let B : ℤ := 249 * 10 ^ t + 1
+  let C : ℤ := 249 * 10 ^ (t + k) + 1
+  have difference : (10 : ℤ) ^ k * B - C = 10 ^ k - 1 := by
+    simp only [B, C, pow_add]
+    ring
+  have reconstruction : (10 : ℤ) ^ k * B - (10 ^ k - 1) = C := by
+    rw [← difference]
+    ring
+  constructor
+  · intro r_dvd_C
+    have r_dvd_difference := (r_dvd_base.mul_left ((10 : ℤ) ^ k)).sub r_dvd_C
+    rw [difference] at r_dvd_difference
+    exact r_dvd_difference
+  · intro r_dvd_period
+    have r_dvd_C := (r_dvd_base.mul_left ((10 : ℤ) ^ k)).sub r_dvd_period
+    rw [reconstruction] at r_dvd_C
+    exact r_dvd_C
+
+/-- Once a divisor occurs in the primitive gap, its later width occurrences are governed by
+the same multiplicative period of ten. -/
+theorem gapFactor_dvd_shift_iff
+    {β k : Nat} {r : ℤ}
+    (r_dvd_q : r ∣ gapFactor β) :
+    r ∣ gapFactor (β + k) ↔ r ∣ 10 ^ k - 1 := by
+  have reconstruction :
+      gapFactor (β + k) =
+        (10 : ℤ) ^ k * gapFactor β + 7 * (10 ^ k - 1) := by
+    simp only [gapFactor, pow_add]
+    ring
+  have r7_coprime : IsCoprime r (7 : ℤ) :=
+    IsCoprime.of_isCoprime_of_dvd_left (gapFactor_coprime_seven β) r_dvd_q
+  constructor
+  · intro r_dvd_shift
+    rw [reconstruction] at r_dvd_shift
+    have r_dvd_sevenPeriod :=
+      r_dvd_shift.sub (r_dvd_q.mul_left ((10 : ℤ) ^ k))
+    have r_dvd_sevenPeriod' : r ∣ 7 * ((10 : ℤ) ^ k - 1) := by
+      simpa using r_dvd_sevenPeriod
+    exact r7_coprime.dvd_of_dvd_mul_left r_dvd_sevenPeriod'
+  · intro r_dvd_period
+    rw [reconstruction]
+    exact (r_dvd_q.mul_left ((10 : ℤ) ^ k)).add (r_dvd_period.mul_left 7)
+
+/-- The multiplicative order of ten modulo `43` is exactly `21`. -/
+theorem fortyThree_period_iff (k : Nat) :
+    (43 : ℤ) ∣ 10 ^ k - 1 ↔ 21 ∣ k := by
+  have order : orderOf (10 : ZMod 43) = 21 := by
+    apply orderOf_eq_of_pow_and_pow_div_prime (by norm_num)
+    · decide
+    · intro p p_prime p_dvd
+      have p_dvd_product : p ∣ 3 * 7 := by simpa using p_dvd
+      have p_cases : p = 3 ∨ p = 7 := by
+        rcases p_prime.dvd_mul.mp p_dvd_product with p_dvd_three | p_dvd_seven
+        · exact Or.inl
+            ((Nat.prime_dvd_prime_iff_eq p_prime (by norm_num)).mp p_dvd_three)
+        · exact Or.inr
+            ((Nat.prime_dvd_prime_iff_eq p_prime (by norm_num)).mp p_dvd_seven)
+      rcases p_cases with rfl | rfl <;> decide
+  constructor
+  · intro period_dvd
+    have cast_zero : (((10 : ℤ) ^ k - 1 : ℤ) : ZMod 43) = 0 :=
+      (ZMod.intCast_zmod_eq_zero_iff_dvd ((10 : ℤ) ^ k - 1) 43).mpr period_dvd
+    have pow_one : (10 : ZMod 43) ^ k = 1 := by
+      rw [← sub_eq_zero]
+      simpa using cast_zero
+    simpa [order] using (orderOf_dvd_iff_pow_eq_one.mpr pow_one)
+  · intro twentyOne_dvd
+    have pow_one : (10 : ZMod 43) ^ k = 1 :=
+      orderOf_dvd_iff_pow_eq_one.mp (by simpa [order] using twentyOne_dvd)
+    apply (ZMod.intCast_zmod_eq_zero_iff_dvd ((10 : ℤ) ^ k - 1) 43).mp
+    push_cast
+    exact sub_eq_zero.mpr pow_one
+
+/-- Proper-factor contamination is already physically attainable at the distinguished raw
+head: width five and the displayed two-`c` word share the gap prime `43`. -/
+theorem fortyThree_dvd_widthFive_rawHead :
+    (code (peeledHeadWord 5 [.c, .c, .c, .c, .c, .b]) : ℤ) = 5555557 ∧
+      (43 : ℤ) ∣ gapFactor 5 ∧
+      (43 : ℤ) ∣
+        (code (peeledHeadWord 5 [.c, .c, .c, .c, .c, .b]) : ℤ) := by
+  change (5555557 : ℤ) = 5555557 ∧ (43 : ℤ) ∣ gapFactor 5 ∧
+    (43 : ℤ) ∣ (code [true, true, true, true, true, true, false] : ℤ)
+  norm_num [gapFactor, code_cons]
+
+/-- At terminal run length one, the shared factor `43` occurs at exactly the width shifts
+divisible by `21`. -/
+theorem fortyThree_support_shift_iff (k : Nat) :
+    ((43 : ℤ) ∣ gapFactor (5 + k) ∧
+      (43 : ℤ) ∣ 249 * 10 ^ (4 + k) + 1) ↔ 21 ∣ k := by
+  have q_base : (43 : ℤ) ∣ gapFactor 5 := by
+    norm_num [gapFactor]
+  have reciprocal_base : (43 : ℤ) ∣ 249 * 10 ^ 4 + 1 := by
+    norm_num
+  constructor
+  · intro support
+    have period_dvd := (gapFactor_dvd_shift_iff q_base).mp support.1
+    exact (fortyThree_period_iff k).mp period_dvd
+  · intro shift_dvd
+    have period_dvd := (fortyThree_period_iff k).mpr shift_dvd
+    exact ⟨(gapFactor_dvd_shift_iff q_base).mpr period_dvd,
+      (reciprocalSupport_dvd_shift_iff reciprocal_base).mpr period_dvd⟩
+
+/-- The width-five support entry generates an infinite period-`21` subfamily. -/
+theorem fortyThree_support_periodic (n : Nat) :
+    (43 : ℤ) ∣ gapFactor (5 + 21 * n) ∧
+      (43 : ℤ) ∣ 249 * 10 ^ (4 + 21 * n) + 1 := by
+  exact (fortyThree_support_shift_iff (21 * n)).mpr ⟨n, rfl⟩
+
 /-- Divisibility by any factor of the primitive gap propagates through a recursive multi-shell
 step exactly by multiplication with the current lower code. Thus prime contamination is
 absorbing, and a new prime can enter only through an emitted lower word. -/

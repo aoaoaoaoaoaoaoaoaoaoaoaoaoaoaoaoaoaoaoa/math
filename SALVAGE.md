@@ -122,6 +122,7 @@ file owns the mathematical stock.
 | [`MM-S24`](#mm-s24-factorwise-gap-ancestry) | structure theorem and obstruction | every gap factor has an exact lower-code propagation law and imposes its own singleton quotient gate while it remains numerator-coprime | formalized | active |
 | [`MM-S25`](#mm-s25-separated-two-c-periodic-orbits) | structure theorem and obstruction | an infinite separated two-`c` width-three family has explicit nonhalting coupled orbits | formalized | active |
 | [`MM-S26`](#mm-s26-exact-raw-head-prime-support) | structure theorem | the prime support shared by the primitive gap and the initial unit two-`c` carrier is exactly the support of one explicit run-length exponential | formalized | active |
+| [`MM-S27`](#mm-s27-reciprocal-raw-head-support) | structure theorem and obstruction | raw-head gap support has an exact complementary-exponent form and periodic width law; proper-factor contamination already occurs physically at width five | formalized | active |
 | [`R32-S01`](#r32-s01-split-return-normal-form) | structure theorem | rank-two cuts reduce one-unit binary mortality to a `2 × 2` return recurrence | formalized | graduated |
 | [`R32-S02`](#r32-s02-two-plane-edge-square) | structure theorem | two rank-two generators are a two-vertex square of `2 × 2` edges | formalized | graduated |
 | [`R32-O01`](#r32-o01-rank-one-profile-collapse) | obstruction | a rank-one generator reduces mortality to order-at-most-three scalar recurrence zeros | audited | stock |
@@ -4073,6 +4074,85 @@ middle separation `r>0` as genuine dynamics rather than an automatic halting con
 
 **Next:** decide the residue-two diagonal and then test whether unequal outer runs admit a
 finite arithmetic macro system or unbounded queue growth.
+
+### MM-S27: Reciprocal raw-head support
+
+**Kind:** structure theorem and obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+Retain `q=2·10^β−7`, let `1≤s≤β−1`, and put `t=β−s`. The two support
+exponentials in [`MM-S26`](#mm-s26-exact-raw-head-prime-support) satisfy
+
+```text
+10^t(2·10^s+1743)=q+7(249·10^t+1).                (1)
+```
+
+Every `r∣q` is coprime to both seven and ten, so (1) can be cancelled in both directions:
+
+```text
+r∣2·10^s+1743  ↔  r∣249·10^(β−s)+1.              (2)
+```
+
+Together with `MM-S26`, this gives the exact reciprocal carrier-support law
+
+```text
+r∣H  ↔  r∣249·10^(β−s)+1.                         (3)
+```
+
+Occurrences are periodic without any unproved discrete-log premise. If
+`r∣249·10^t+1`, then for every `k≥0`,
+
+```text
+r∣249·10^(t+k)+1  ↔  r∣10^k−1.                   (4)
+```
+
+If `r∣q(β)`, the same law holds for `r∣q(β+k)`. Thus each nonzero support factor occupies exact
+congruence classes governed by the multiplicative period of ten.
+
+The shared-factor branch is not empty. At width five,
+
+```text
+q=199993=43·4651,
+H=code(1111110)=5555557=43·129199.
+```
+
+The word is the distinguished raw head of the physical role word `cccccb`; hence a universal
+gap-clean initial-carrier theorem is false. The multiplicative order of ten modulo `43` is
+exactly `21`, so the entire terminal-run-one class is
+
+```text
+43∣q(5+k) and 43∣249·10^(4+k)+1  ↔  21∣k.         (5)
+```
+
+In particular, proper support recurs at every width `5+21n`.
+
+**Scope:** equations (2)--(4) are exact integral laws for every divisor `r` of the stated base
+factor. The physical carrier interpretation of (3) uses the unit two-`c` identity and
+`1≤s≤β−1`. The width-five witness proves proper-factor entry at the raw head, not a singleton
+pole or a setter counterexample.
+
+**Use:** enumerate initial support through the smaller exponent `t=β−s`, reuse one modular
+order for both width and suffix shifts, and remove the gap-clean branch only factorwise. Any
+closure must tolerate the explicit `43` contamination or exclude it through later carrier and
+suffix semantics.
+
+**Formalization:**
+[`MatrixMortality/DecimalSetterAncestry.lean`](MatrixMortality/DecimalSetterAncestry.lean),
+through `rawHeadBoundary_factor_iff`, `rawHead_factor_iff_reciprocal`,
+`reciprocalSupport_dvd_shift_iff`, `gapFactor_dvd_shift_iff`, and
+`fortyThree_dvd_widthFive_rawHead`. The exact example class is
+`fortyThree_period_iff` and `fortyThree_support_shift_iff`, with its infinite subfamily in
+`fortyThree_support_periodic`.
+
+**Artifact:**
+[`audits/m53-decimal-gap-factor-ancestry-2026-08-31.md`](audits/m53-decimal-gap-factor-ancestry-2026-08-31.md).
+
+**Next:** intersect the periodic initial-support classes with the lower-code support-entry
+semigroup and the surviving factorwise singleton quotient gates.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
 
 ## Rank-Three Binary Frontier
 

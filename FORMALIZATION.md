@@ -1472,7 +1472,16 @@ For a unit two-`c` raw head `H` with terminal run length `s`,
 `DecimalSetterAncestry.gapFactorDivisor_coprime_nine` proves that every `r∣q` is coprime to
 nine, and `rawHead_factor_iff` then proves `r∣H ↔ r∣2·10^s+1743`. The initial contamination
 question is therefore a one-parameter exponential divisibility problem; later lower-code entry
-remains open.
+remains open. Record [`MM-S27`](SALVAGE.md#mm-s27-reciprocal-raw-head-support) sharpens that
+exponential to the complementary suffix length:
+`rawHeadBoundary_factor_iff` and `rawHead_factor_iff_reciprocal` prove
+`r∣H ↔ r∣249·10^(β−s)+1`. The corresponding gap and reciprocal-support occurrences have the
+same exact shift condition `r∣10^k−1`. This is a classification, not an exclusion:
+`fortyThree_dvd_widthFive_rawHead` proves that the physical width-five head `5555557` and
+`q=199993` share the proper factor `43`. Theorems `fortyThree_period_iff` and
+`fortyThree_support_shift_iff` prove that terminal-run-one support occurs exactly at widths
+congruent to five modulo `21`; `fortyThree_support_periodic` records the resulting infinite
+family.
 
 Record [`MM-S21`](SALVAGE.md#mm-s21-bounded-decimal-suffix-cycles) closes the fixed-precision
 suffix-descent lane. `DecimalSetterSuffix.cycleDefect_lift` gives an explicit one-digit lift for
@@ -2003,7 +2012,7 @@ fixed-rank decision problem.
 | `DecimalSetterChamber.lean` | exact decimal pole chambers, both ordinary A-to-A length-two extinctions, and the emitted-body grammar certificate |
 | `DecimalSetterResonance.lean` | complete ordinary depth-two A-to-B and B-to-A extinction, phase-word exhaustion, and compiler-envelope specialization |
 | `DecimalSetterDepth.lean` | recursive two-unit carrier; length-two and singleton-current extinction; exact all-`D_c` raw-head extinction; sharp `m≥β+3` abstract multi-to-singleton classification; initial raw-head exclusion; compatible last-digit two-cycle obstruction |
-| `DecimalSetterAncestry.lean` | primitive gap factor; exact raw two-`c` prime support; exact factor and prime-support propagation; denominator-ancestry reduction; full-gap and factorwise quotient gates for a singleton target |
+| `DecimalSetterAncestry.lean` | primitive gap factor; exact reciprocal and periodic raw two-`c` prime support; factor and prime-support propagation; denominator-ancestry reduction; full-gap and factorwise quotient gates for a singleton target |
 | `PairedMortality.lean` | common-column mortality converse and exact integer `4 × 4` family |
 | `PhaseFracture.lean` | phase normalization and dimension-free projective-identification contradiction |
 | `PhaseRigidity.lean` | checked local role algebra, discrepancy commutators, and invariant-pencil rigidity |

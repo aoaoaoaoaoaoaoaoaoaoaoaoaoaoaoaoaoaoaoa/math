@@ -914,6 +914,20 @@ Thus the initial set of contaminated gap primes is exactly an exponential divisi
 not an arbitrary compiler-code support. The remaining task is to classify that set and the
 support installed later by reachable lower words; this theorem does not close `M₅(3)`.
 
+[`MM-S27`](SALVAGE.md#mm-s27-reciprocal-raw-head-support) makes that exponential arithmetic
+reciprocal and periodic. With `t=β−s`, every `r∣q` satisfies
+
+```text
+r∣H  ↔  r∣249·10^t+1.
+```
+
+Once `r` occurs, both later gap widths and later reciprocal exponents occur exactly when
+`r∣10^k−1`. Proper-factor contamination is real: the physical width-five raw head
+`H=5555557` and `q=199993` share `43`. Since ten has exact order `21` modulo `43`, the same
+terminal-run-one support occurs exactly at widths congruent to five modulo `21`. The initial
+gap-clean shortcut is therefore false; a closure must track this periodic support through the
+lower-code ancestry and singleton gates.
+
 [`MM-O20`](SALVAGE.md#mm-o20-decimal-first-cylinder-collision) gives the unbounded suffix
 language an exact metric: a backward word gains the sum of its shifts in both decimal valuations,
 and one block maps the unit domain onto one exact suffix cylinder. But first-cylinder decoding is

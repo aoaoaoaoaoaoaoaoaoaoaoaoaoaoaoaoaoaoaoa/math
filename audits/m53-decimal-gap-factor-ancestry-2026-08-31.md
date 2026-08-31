@@ -152,6 +152,45 @@ Equation (12) classifies the complete initial gap-prime support by one run-lengt
 Together with (9), it separates support already present at the raw head from support first
 installed by a later compiler-emitted lower code.
 
+Put `t=β−s`. The identity
+
+```text
+10^t(2·10^s+1743)=q+7(249·10^t+1)                (13)
+```
+
+and the automatic coprimalities `gcd(r,7)=gcd(r,10)=1` give the reciprocal form
+
+```text
+r∣H  ↔  r∣249·10^(β−s)+1.                        (14)
+```
+
+This support is exactly periodic. Once `r∣249·10^t+1`,
+
+```text
+r∣249·10^(t+k)+1  ↔  r∣10^k−1.                  (15)
+```
+
+Once `r∣q(β)`, the same right side characterizes `r∣q(β+k)`. These are integral equivalences,
+not an appeal to an unformalized discrete logarithm.
+
+Proper-factor entry occurs in the physical raw grammar. At `β=5`, the role word `cccccb` has
+peeled head `1111110`, so
+
+```text
+q=199993=43·4651,
+H=5555557=43·129199.                              (16)
+```
+
+Equation (16) refutes a universal gap-clean initial-carrier invariant. Moreover
+the multiplicative order of ten modulo `43` is exactly `21`, so the exact shift laws give
+
+```text
+43∣q(5+k) and 43∣249·10^(4+k)+1  ↔  21∣k.         (17)
+```
+
+Thus terminal-run-one support occurs exactly at widths congruent to five modulo `21`. This is
+an infinite arithmetic family of support entries, not a false pole.
+
 ## Gate Saturation
 
 The factor gates are necessary, not sufficient. They already admit an all-`D_c` word at the
@@ -197,9 +236,10 @@ semantics beyond them.
 
 The theorem removes every gap-clean carrier/current-code pair that fails either (6) or (8), at
 every sign and length. It covers both singleton targets because their lower code is the same.
-Equation (12) exactly classifies support in the initial unit raw head, but does not classify the
-common divisors as `β,s` vary, support installed by later lower codes, or compiler-emitted pairs
-satisfying the quotient congruence.
+Equations (12)--(15) exactly classify support in the initial unit raw head and its width shifts;
+(16)--(17) show that proper support occurs infinitely often. They do not enumerate every
+initial congruence class, classify support installed by later lower codes, or exclude
+compiler-emitted pairs satisfying the quotient congruence.
 
 The remaining physical multi-to-singleton seam is therefore the disjunction:
 
@@ -225,5 +265,6 @@ theorem and not a reachability claim.
 - [`SALVAGE.md`](../SALVAGE.md#mm-s22-gap-factor-quotient-gate)
 - [`MM-S24`](../SALVAGE.md#mm-s24-factorwise-gap-ancestry)
 - [`MM-S26`](../SALVAGE.md#mm-s26-exact-raw-head-prime-support)
+- [`MM-S27`](../SALVAGE.md#mm-s27-reciprocal-raw-head-support)
 - [`FRONTIER.md`](../FRONTIER.md)
 - [`FORMALIZATION.md`](../FORMALIZATION.md)
