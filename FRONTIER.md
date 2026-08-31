@@ -2422,8 +2422,12 @@ one collision source, and it is automatically a `5`-adic unit because both slope
 have valuation `−length`. Thus source-shell exclusion supplies no length bound. The common target
 is a unit exactly when the affine determinant `a_left b_right−a_right b_left` has valuation
 `−max(left.length,right.length)`; this exact shorter-length cancellation remains live. Exact
-unit-target examples realize both possible `3`-adic carrier orientations, killing that one-bit
-invariant as a global separator.
+adjacent-length bridges sharpen it: common debt endpoints force slope ratio `2/5`, and with
+`C_w=5^|w|b_w`, target acceptance is equivalent to
+`v₅(C_long−2C_short)=|short|`. The suffix recurrence for `C_w` is explicit but still unbounded.
+The debt-safe collision `[4]` versus `[0,5]` at `2/9↦55/243` overcancels and rejects the target,
+so source unitality alone does not imply acceptance. Exact unit-target examples realize both
+possible `3`-adic carrier orientations, killing that one-bit invariant as a global separator.
 Higher depth is not free: a published length-thirteen relation yields two distinct
 schedules with the same affine map and a common Lean-checked guarded periodic source. This is an
 exact rewrite seed. Lean also proves that it preserves all intermediate shell guards in every
@@ -2492,6 +2496,7 @@ artery; see
 | Assume the mixed-prime schedule action is free | a published length-thirteen relation is a checked guarded collision |
 | Bound the mixed-prime reverse fan uniformly | a target at negative `3`-depth `d` has exactly `d+1` distinct shell-legal predecessors when its rational carrier is a `3`- and `5`-unit |
 | Prune cross-length shell collisions at their source | every two nonempty unequal-length shell maps have a unique collision source and it is automatically a `5`-adic unit; only fixed-source equality and target acceptance remain discriminating |
+| Infer target acceptance from the automatic cross-length source unit | the adjacent debt-safe bridges `[4]` and `[0,5]` collide from the `5`-unit source `2/9`, but their target `55/243` has `5`-adic valuation one |
 | Invoke a general module `S`-unit algorithm | the arbitrary three-prime case leads to open linear-exponential systems, and forgetting the monotone path destroys useful structure |
 
 These are exclusion tests for future proposals. Any attack relying on one of them must identify

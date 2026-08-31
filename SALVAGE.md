@@ -10733,6 +10733,40 @@ v₅(a_w b_v−a_v b_w)=−max(|w|,|v|).
 The two determinant terms each have valuation `−|w|−|v|`, so acceptance requires exact
 cancellation through the shorter schedule length.
 
+The one-gap debt-bridge slice has a sharper normal form. Suppose `short` and `long` remain in the
+negative `3`-adic chamber, begin and end at the same depths, and
+`|long|=|short|+1=n+1`. Balance forces
+
+```text
+a_long=(2/5)a_short.
+```
+
+Put `C_w=5^|w|b_w`. This is a rational `5`-unit for every nonempty schedule and obeys the exact
+suffix recurrence
+
+```text
+C_(m::w)=3^|w|(2/3)^sum(w)+5C_w.
+```
+
+In particular the newly prepended wait does not enter the cleared offset. Lean reduces the
+common target and its acceptance condition to
+
+```text
+y=(C_long−2C_short)/(3·5^n),
+y is a 5-unit  ↔  v₅(C_long−2C_short)=n.
+```
+
+The equation is necessary and sufficient, but it is not yet an algorithm: the suffix recurrence
+has unbounded length and varying powers. Nor is its right side automatic. The exact debt-safe
+pair
+
+```text
+[4] versus [0,5],   depth 2 → depth 5,   2/9 ↦ 55/243
+```
+
+has a `5`-unit collision source but target valuation one. Its cleared offsets overcancel beyond
+the required shorter length.
+
 The one-bit `3`-adic carrier orientation is saturated rather than decisive. Lean checks the two
 unit-target collisions
 
@@ -10847,7 +10881,8 @@ their affine equality in arbitrary contexts, their common guarded periodic sourc
 repeated-block displacement and unit bounds, the exact two- and three-adic walls, the complete
 negative-depth predecessor fan, arbitrary debt-safe schedules and their balance, and
 same-length collision rigidity; it also checks the unique unequal-length collision source, its
-automatic source-unit theorem, both carrier-orientation examples, contextual guard preservation,
+automatic source-unit theorem, the adjacent-length cleared-offset criterion and rejected target,
+both carrier-orientation examples, contextual guard preservation,
 and the raw/shell
 conjugacy, the contextual boundary factorization, the infinite
 odd-length raw kernel family, its guarded contextual cycles, exact homogeneous equality under
@@ -10877,6 +10912,10 @@ rational source may also identify distinct affine maps.
 `MixedPrimeDebt.collisionSource_eq_of_shellRun_eq`,
 `MixedPrimeDebt.collisionSource_fiveUnit`,
 `MixedPrimeDebt.collisionTarget_fiveUnit_iff`,
+`MixedPrimeDebt.shellOffset_cons`,
+`MixedPrimeDebt.adjacentDebtBridge_slope`,
+`MixedPrimeDebt.adjacentDebtBridge_collisionTarget_fiveUnit_iff`,
+`MixedPrimeDebt.adjacentDebtBridge_targetOvercancellation`,
 `MixedPrimeDebt.positiveOrientation_crossLengthCollision`, and
 `MixedPrimeDebt.negativeOrientation_crossLengthCollision`, in
 [`MixedPrimeKernel.lean`](MatrixMortality/MixedPrimeKernel.lean),
@@ -10892,7 +10931,8 @@ and the exact census/critical-pair certificate in
 exclusion, eventual shell exit or periodicity, unbounded pumping of one fixed schedule away from
 its periodic point, uniformly bounded reverse fanout, source-specific collision mechanisms at
 one fixed debt-bridge length, cross-length source-shell exclusion, the one-bit `3`-adic carrier
-orientation as a global separator, universal strict state-height drift, and a
+orientation as a global separator, automatic target acceptance from source unitality, universal
+strict state-height drift, and a
 compiler whose period-one configurations must remain in that set after every single wait. Also
 reject the hope that unit normalization restores a free action or that the odd family supplies a
 strict shortening pump. The live information is exact fixed-source endpoint equality across the
@@ -10903,6 +10943,7 @@ cancellative envelope.
 relations into even-length or further parametric families, distinguishing new group relations
 from positive-congruence phenomena. For debt-safe prefixes, census affine-map equality within
 each length and source-specific collisions only across lengths. Then attack cross-length carrier
-equality against the fixed source and test its common output for target-unit acceptance. Then
-attack chamber exits and reentries, residual stabilizers, and accepting exits without assuming a
-canonical rewrite normal form.
+equality against the fixed source. In the adjacent-length slice, decide or saturate the exact
+cleared-offset equation rather than retesting source unitality. Then attack chamber exits and
+reentries, residual stabilizers, and accepting exits without assuming a canonical rewrite normal
+form.

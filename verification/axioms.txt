@@ -1328,6 +1328,8 @@
  Quot.sound]
 'MatrixMortality.MixedPrimeDebt.shellSlope_hasValue_five' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.MixedPrimeDebt.shellIntercept_hasValue_five' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.MixedPrimeDebt.shellOffset_fiveUnit' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.MixedPrimeDebt.shellOffset_cons' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.MixedPrimeDebt.shellRun_collisionSource' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.MixedPrimeDebt.shellRun_collisionSource_eq_targetQuotient' depends on axioms: [propext,
  Classical.choice,
@@ -1337,7 +1339,17 @@
  Quot.sound]
 'MatrixMortality.MixedPrimeDebt.collisionSource_fiveUnit' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.MixedPrimeDebt.collisionTarget_fiveUnit_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.MixedPrimeDebt.adjacentDebtBridge_slope' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.MixedPrimeDebt.adjacentDebtBridge_collisionTarget' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.adjacentDebtBridge_collisionTarget_fiveUnit_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.MixedPrimeDebt.positiveOrientation_crossLengthCollision' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.adjacentDebtBridge_targetOvercancellation' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
 'MatrixMortality.MixedPrimeDebt.negativeOrientation_crossLengthCollision' depends on axioms: [propext,
