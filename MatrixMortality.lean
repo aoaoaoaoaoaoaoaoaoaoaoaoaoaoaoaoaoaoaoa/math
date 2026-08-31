@@ -169,6 +169,8 @@ import MatrixMortality.ChangedSeparatorTail
 import MatrixMortality.ChangedSeparatorRealization
 import MatrixMortality.ChangedSeparatorZeroMoment
 import MatrixMortality.ChangedSeparatorMomentOne
+import MatrixMortality.ChangedSeparatorTransitionPowers
+import MatrixMortality.ChangedSeparatorMomentTwo
 import MatrixMortality.RationalClearing
 import MatrixMortality.PairedBinaryFullAlgebra
 import MatrixMortality.PrefixFullAlgebra
