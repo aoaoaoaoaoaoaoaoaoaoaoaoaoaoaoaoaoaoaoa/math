@@ -1200,6 +1200,24 @@ one-transfer fringe candidates. The separate distinguished-boundary singleton `�
 formally closed by `MM-S08`; the later `D_c^(β+1)` singleton branch remains a different carrier
 and is handled algebraically in `MM-S50`.
 
+[`MM-S51`](SALVAGE.md#mm-s51-double-deletion-ratio-chamber-extinction) kills that final
+survivor without an integral fringe splice. The exact `D_c²` discrepancy and the full incoming
+upper cylinder force any following physical pole to have target ratio
+
+```text
+2/3 < V_t/P_t < 3/4.
+```
+
+No physical role block emitted against a body beginning in `b` occupies this chamber. Generic
+nonzero-ternary bounds reduce a hypothetical target to two adjacent word-length cases; the
+leading swapped prefixes exclude each case, with exact induction through an initial `D_c` run.
+Thus `firstMultiTransfer_pole_false` empties the expected-shell first multi-transfer interface
+for `β≥6`.
+
+The remaining ternary obligation is the **global earliest-pole reduction**: prove that every
+arbitrary surviving swapped product not already removed by the distinguished-boundary theorems
+enters this expected-shell first-multi interface, or classify the missing initial/shell
+constructor. `MM-S51` does not by itself prove projective avoidance.
 Exact bidirectional diagnostics for the ternary swap at `β=3`, body `bbcc`, exclude every
 false-pole word of at most six projective blocks when each regular block has
 role length at most three; this is computational evidence only.

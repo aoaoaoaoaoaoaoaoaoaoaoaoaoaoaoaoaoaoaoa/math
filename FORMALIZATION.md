@@ -1640,6 +1640,7 @@ The setter-projective audit now also exposes a kernel-friendly carry theorem:
 | [`MM-S44`](SALVAGE.md#mm-s44-compiler-envelope-rule-bearing-extinction) | first-role mismatch cylinder, compiler-body lower-code bound, target-pole discrepancy interval, and exact all-erasure survivor theorem |
 | [`MM-S50`](SALVAGE.md#mm-s50-long-all-erasure-singleton-extinction) | exact long all-erasure codes and discrepancy, uniform lower bound above twelve, both singleton target bounds, and double-deletion-only frontier theorem |
 | [`MM-S52`](SALVAGE.md#mm-s52-double-deletion-raw-ancestry-obstruction) | exact post-`D_c²` normalization, punctuated-code integrality gate, repeated-`D_c²` nonintegrality, and rational/integral carrier-pole equivalence |
+| [`MM-S51`](SALVAGE.md#mm-s51-double-deletion-ratio-chamber-extinction) | exact `D_c²` discrepancy chamber, physical role-block ratio gap, and complete expected-shell first multi-transfer extinction |
 
 `MM-S08` is now discharged in
 [`SwappedSetterSingletonShell.lean`](MatrixMortality/SwappedSetterSingletonShell.lean).
@@ -1902,7 +1903,24 @@ branch. `allDeletionC_long_transferDiscrepancy` computes `V_m=3ρ−1`,
 `q<1`; a positive shifted cubic then forces `Δ>12`. The singleton `D_c` and `D_b` pole equations
 force respectively `Δ=6μ/ρ<12` and `Δ=6Hμ/(ρB)<12`, contradictions. The composed theorem
 `firstMultiTransfer_pole_forces_doubleDeletion` leaves only literal `D_c²` before a depth-one
-target. Its exact reachability and rational carrier-to-fringe ancestry remain open.
+target.
+
+Record [`MM-S51`](SALVAGE.md#mm-s51-double-deletion-ratio-chamber-extinction) removes this last
+branch without imposing the integral raw-fringe interface. For `D_c²`, the full incoming upper
+cylinder places the exact discrepancy between the two rational thresholds equivalent, under the
+following-pole equation, to
+
+```text
+2/3 < V_t/P_t < 3/4.
+```
+
+`roleBlock_avoids_middle_ratio` proves that no physical swapped Neary target has a code ratio in
+this chamber. Nonzero ternary bounds first force the lower word length to equal the punctuated
+upper length or trail it by one. Exact leading prefixes exclude both cases; a leading `D_c` in
+the second case cancels and is stripped inductively. `firstMultiTransfer_pole_false` composes
+this ratio gap with `MM-S50`, so the complete expected-shell first multi-transfer interface is
+empty for `β≥6`. This does not itself prove the global earliest-pole reduction needed for
+projective avoidance.
 
 Record [`MM-S52`](SALVAGE.md#mm-s52-double-deletion-raw-ancestry-obstruction) proves that the
 shell does not supply that ancestry. If the first block has upper length `m` and punctuated code

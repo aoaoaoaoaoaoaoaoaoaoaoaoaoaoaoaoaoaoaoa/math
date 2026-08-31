@@ -75,7 +75,9 @@ middle = D_c²,       target depth 1.                     (5)
 
 Equation (5) is necessary, not existential. Its normalized discrepancy is generally rational;
 the integral positive-depth-one fringe classifier cannot be applied until a separate physical
-ancestry theorem constructs its digit-code difference and common-suffix witness.
+ancestry theorem constructs its digit-code difference and common-suffix witness. The later
+[`MM-S51`](../SALVAGE.md#mm-s51-double-deletion-ratio-chamber-extinction) result bypasses that
+interface and excludes (5) through the physical target-code ratio.
 
 ## Verification
 

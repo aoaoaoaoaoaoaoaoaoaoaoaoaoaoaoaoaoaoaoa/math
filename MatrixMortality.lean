@@ -185,6 +185,7 @@ import MatrixMortality.SwappedSetterSingletonShell
 import MatrixMortality.SwappedSetterCylinder
 import MatrixMortality.SwappedSetterAllErasure
 import MatrixMortality.SwappedSetterDepthOneAncestry
+import MatrixMortality.SwappedSetterDoubleDeletion
 import MatrixMortality.SchottkyPunctuation
 import MatrixMortality.TwoStateObstructions
 import MatrixMortality.ForcedRuleCCompanion
