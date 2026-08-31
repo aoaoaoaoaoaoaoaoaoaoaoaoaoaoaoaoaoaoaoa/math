@@ -160,6 +160,7 @@ file owns the mathematical stock.
 | [`R32-S40`](#r32-s40-binary-affine-syracuse-collapse) | structure theorem and obstruction | parity-selected affine reachability is decidable outside one mixed-slope signed Syracuse family, where only nonhomomorphic carry dynamics remains | audited | active |
 | [`R32-S41`](#r32-s41-parabolic-rational-subset-normal-form) | reduction and obstruction | PI₂ is a parabolic rational-subset problem, already containing fixed-subset shortcut Collatz inside the rank-two affine cusp `ℤ[1/6]⋊ℤ²` | audited | active |
 | [`R32-S42`](#r32-s42-non-pure-cubic-endpoints-and-false-waits) | structure theorem and obstruction | actual singular endpoints support free selected dynamics, but a clean one-singular family has an exact zero made solely from unselected unit waits | formalized core; audited strengthening | active |
+| [`R32-S43`](#r32-s43-cubic-defect-norm-and-thue-throat) | structure theorem and decidable stratum | the normalized cubic flag defect has zeros exactly at waits `0,1,5,14`, via a conserved norm and the exceptional discriminant-`-23` Thue equation | formalized core; audited completion | graduated |
 | [`R32-O19`](#r32-o19-projective-queue-centralizer-obstruction) | obstruction | an injective homomorphic projective word store with finite controller cannot recurrently delete and append queue data | audited | graduated |
 | [`R32-O20`](#r32-o20-transverse-reverse-reservoir) | obstruction | a lawful fixed projective cycle accumulates unbounded reverse 13-adic mass on its transverse eigenline | formalized | graduated |
 | [`R32-O21`](#r32-o21-finite-image-positivity-collapse) | obstruction | every finite ambient image identifies the positive Collatz monoid with the whole generated group | formalized core; audited application | graduated |
@@ -5984,9 +5985,14 @@ claimed.
 monotone shadow descent and any proof multiplying local Smith savings without charging bilateral
 packet overlap.
 
-**Next:** prove coefficient-effective bilateral shadow amortization
-`|Hₓ|/|K̂ₓ|≤Cρ^m(w)` for first-hit terminal words, or construct a rational reset-incidence
-orbit whose doubly broken packet intervals repay every Smith loss aperiodically.
+Pointwise bilateral shadow amortization over first-hit terminal words is not a live intermediate
+theorem. By `R32-O14`, a fixed guard has a singleton-or-empty positive terminal language.
+Existential constants are therefore automatic after its unique word is known, while any total
+coefficient algorithm producing constants strong enough to bound that word decides the guard.
+This is the same quantifier wall as `R32-O11`, not a new decision throat.
+
+**Next:** use the companion ledger only inside an explicit coefficient formula proved on a
+nonterminal class with independent content, or construct the aperiodic reset-incidence orbit.
 
 ### R32-S40: Binary affine Syracuse collapse
 
@@ -6173,6 +6179,70 @@ recurrence; a decision proof may attack that exact recurrence directly.
 **Next:** decide endpoint reachability for the fixed `H_n` recurrence, or find an arithmetic
 normalization proving every first hit has a selected-word representative. Finite congruence
 filters alone cannot isolate `{1,5}` because ambient powers are periodic modulo every modulus.
+
+### R32-S43: Cubic defect norm and Thue throat
+
+**Kind:** structure theorem and decidable stratum
+**Evidence:** formalized core; audited completion
+**Disposition:** graduated
+
+For the false-wait physical family, normalize the lower-left return coefficient by
+
+```text
+uₙ=−(Mₙ)₂₁/90.
+```
+
+Lean proves that `uₙ` is the integral recurrence
+
+```text
+u₀=0,  u₁=0,  u₂=1,  uₙ₊₃=uₙ−uₙ₊₂.
+```
+
+Write `T(a,b,c)=(b,c,a−c)` for its shift on consecutive triples.
+
+The return preserves the selected upper-triangular flag exactly when `uₙ=0`. In particular,
+the checked zeros `0,1,5,14` show that the former positive safe alphabet `{1,5}` omitted wait
+fourteen.
+
+Every consecutive defect window preserves the cubic norm
+
+```text
+N(a,b,c)=a³−a²c−ab²−3abc+b³+b²c+2bc²+c³,
+N(uₙ,uₙ₊₁,uₙ₊₂)=1.
+```
+
+At a zero, the unimodular substitution `x=uₙ₊₁`, `y=uₙ₊₁+uₙ₊₂` gives
+
+```text
+x³−xy²+y³=1,
+```
+
+the exceptional binary cubic form of discriminant `−23`.
+
+The Delone–Nagell classification of the exceptional form gives five integral solutions. In its
+displayed order they occur on the bilateral recurrence orbit at indices `1,0,5,−2,14`.
+Cyclicity of `s₀` and the real characteristic root in `(0,1)` make that orbit injective, so the
+negative-index state cannot recur at a natural index. Consequently `uₙ=0` exactly for
+`n∈{0,1,5,14}` and the maximal positive flag-preserving alphabet is `{1,5,14}`.
+
+**Scope:** the physical defect identity, integral recurrence, conserved norm, Thue reduction,
+and four natural zeros are Lean checked. The Delone–Nagell classification and exclusion of the
+fifth solution from the natural orbit are independently audited. The scalar classification
+controls only individual flag-preserving waits; the exact false word shows that nonzero defects
+can cancel across products.
+
+**Artifact:** `CubicReturn.NonPure.falseWaitReturn_lowerLeft`,
+`cubicDefectNorm_state`, and `cubicDefect_zero_forces_exceptionalThue` in
+[`CubicReturnNonPure.lean`](MatrixMortality/CubicReturnNonPure.lean), with reconstruction in
+[`m32-cubic-defect-thue-2026-08-30.md`](audits/m32-cubic-defect-thue-2026-08-30.md).
+
+**Use:** close the scalar triangular-wait Skolem slice and use `{1,5,14}` as the exact positive
+flag-preserving alphabet. Do not mistake that scalar classification for an arbitrary-word
+converse.
+
+**Next:** attack cancellation among nonzero defect letters directly. Formalizing the
+Delone–Nagell classification would strengthen evidence but would not change the full cubic
+frontier.
 
 ### R32-O19: Projective queue centralizer obstruction
 

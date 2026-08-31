@@ -15,8 +15,8 @@ through the same waits, anchored at the terminal/reset boundary where the projec
 nonzero.
 
 It does not prove a terminal bound. Its exact gain is to transmute actual reverse content into
-companion forward content and isolate one bilateral amortization inequality as the remaining
-decision throat.
+companion forward content. The terminal-only amortization formulation originally recorded here
+was corrected on 2026-08-30: it is goal-equivalent rather than an intermediate decision theorem.
 
 ## Same-Address Companion
 
@@ -134,7 +134,7 @@ coefficient-independent contraction, and contraction at every nonmaximal Smith s
 is supported on the fixed tuple through `2R`, so it does not kill a coefficient-effective
 amortized theorem.
 
-## Bilateral Shadow Amortization
+## Bilateral Shadow Quantifier Wall
 
 For a first-hit word `w`, define
 
@@ -144,21 +144,24 @@ For a first-hit word `w`, define
 
 At depth two let `m(w)` count actual Smith steps with nonmaximal moving reverse coordinate.
 Parity and maximal-step isolation give `length(w)≤2m(w)` in the only live even-reset stratum.
-The remaining proposition is:
+The originally proposed proposition was:
 
 ```text
 ∃ computable C≥1 and 0<ρ<1,
 ∀ reset-started first-hit terminal w,  Θ(w)≤Cρ^m(w).     (BSA)
 ```
 
-The constants must be computed from the fixed coefficients before orbit simulation. Because
-`δ₀` is a nonzero integer, BSA would effectively bound `m(w)`, then the terminal length, and
-therefore decide this split guard by exact forward simulation with cycle detection.
+By endpoint-word uniqueness, a fixed guard has at most one positive terminal word. Pointwise BSA
+is therefore automatic: take `ρ=1/2`, use any positive `C` in the immortal case, and after the
+unique terminal word is known enlarge `C` to dominate its single value. Conversely, a total
+coefficient algorithm producing constants strong enough to use `δ₀≠0` bounds `m(w)`, hence the
+terminal length, and decides the guard. A decider supplies such constants by first deciding and,
+in the mortal case, simulating to the unique terminal word. BSA is thus the same decision-oracle
+quantifier wall already recorded in `R32-O11`.
 
-No present theorem proves BSA. Sparse births, microscopic packet size, logarithmic recovery,
-and local `3/4` Smith savings do not control the overlap multiplicity of nested bilateral
-packet intervals. A single order-breaking wait can service many layers, and the wait gauges do
-not commute through the moving Smith charts.
+Sparse births, microscopic packet size, logarithmic recovery, and local `3/4` Smith savings still
+fail to control nested bilateral packet intervals. They become relevant only if assembled into
+an explicit coefficient formula proved on a nonterminal class with independent content.
 
 ## Adjudication
 
@@ -170,14 +173,16 @@ not commute through the moving Smith charts.
 | bilateral multiplicity ledger | promotion | exact valuation of the exterior recurrence |
 | final-boundary and two-sided order capture | restatement | existing moving-prime and recurrent-boundary calculus |
 | monotone companion-shadow descent | rejected | unbounded Lean-checked one-step counterfamily |
-| bilateral shadow amortization | open | exact remaining decision proposition; no constants produced |
-| computable terminal bound or `M₃(2)` decision | open | conditional on BSA |
+| pointwise bilateral shadow amortization | rejected as frontier movement | automatic from endpoint-word uniqueness |
+| effective bilateral constants | goal-equivalent | a total coefficient algorithm is already a guard decider |
+| computable terminal bound or `M₃(2)` decision | open | requires an explicit non-oracular recurrence estimate or a counterorbit |
 
 ## Wound
 
 ```text
 MASTER VERDICT: M₃(2) remains open
 REMOVED: endpoint-only reverse charging; monotone companion descent; per-nonmaximal-step contraction
-DECISION THROAT: prove coefficient-effective BSA for the canonical first-hit reset companion
+QUANTIFIER WALL: terminal-only BSA is pointwise vacuous and effectively goal-equivalent
+DECISION THROAT: prove an explicit coefficient estimate on a broader nonterminal class
 COUNTER DUAL: build a reset-incidence orbit whose doubly broken bilateral packets repay every Smith loss aperiodically
 ```
