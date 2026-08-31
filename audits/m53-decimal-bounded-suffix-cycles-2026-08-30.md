@@ -49,7 +49,14 @@ F(y)=10^k·10q(−b+2ax+aq10^k).                           (2)
 ```
 
 Consequently `y≡x (mod 10^k)` and `10^(k+1)∣F(y)`. Starting at `x=7` and iterating (2)
-constructs a coherent stationary root through every power of ten. This is the elementary
+constructs a coherent stationary root through every power of ten. It is unique at each
+precision: the difference of two defects factors as
+
+```text
+F(x)−F(y)=(x−y)(10^hE(x+y)−τ),
+```
+
+and the second factor is `−1` modulo ten, hence coprime to `10^k`. This is the elementary
 composite-radix form of a derivative-unit lift; no completeness or external `p`-adic theorem is
 used.
 
@@ -97,7 +104,8 @@ language intersects any compatible inverse-limit address.
 
 ## Verification
 
-`cycleDefect_lift` formalizes (2), `exists_cycleDefect_root` performs the induction,
+`cycleDefect_lift` formalizes (2), `cycleDefect_roots_congruent` proves uniqueness at each
+precision, `exists_cycleDefect_root` performs the induction,
 `peeledNumerator_factor` restores the literal residual `R=10^(h+1)N′`, and
 `emittedBlock_exists_approximate_cycle` composes the roots with (3)–(4). The narrow module build
 and Lean language-server diagnostics pass without warnings, suppressions, or proof apertures.

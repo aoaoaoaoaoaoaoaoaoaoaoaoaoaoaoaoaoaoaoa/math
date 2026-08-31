@@ -535,6 +535,7 @@ open MatrixMortality
 #print axioms DecimalSetterDepth.allCDeletion_firstRawHead_shell_impossible
 #print axioms DecimalSetterDepth.allCDeletion_peeledDoubleCHead_shell_impossible
 #print axioms DecimalSetterSuffix.cycleDefect_lift
+#print axioms DecimalSetterSuffix.cycleDefect_roots_congruent
 #print axioms DecimalSetterSuffix.exists_cycleDefect_root
 #print axioms DecimalSetterSuffix.exists_approximate_cycle
 #print axioms DecimalSetterSuffix.peeledNumerator_factor

@@ -3327,7 +3327,8 @@ y=x+q10^k
 ```
 
 satisfies `y≡x (mod 10^k)` and `10^(k+1)∣F(y)`. Induction gives coherent roots at every
-positive decimal precision.
+positive decimal precision. Any two roots modulo `10^k` coincide: their defect difference is
+`(x−y)u`, where `u≡−1 (mod 10)` and is therefore coprime to `10^k`.
 
 The recurrence consumer uses a root modulo `10^(h+k)`. It produces integers `x,N′,D′` with
 
@@ -3352,7 +3353,8 @@ residue.
 
 **Formalization:**
 [`MatrixMortality/DecimalSetterSuffix.lean`](MatrixMortality/DecimalSetterSuffix.lean), through
-`cycleDefect_lift`, `exists_cycleDefect_root`, `peeledNumerator_factor`, and
+`cycleDefect_lift`, `cycleDefect_roots_congruent`, `exists_cycleDefect_root`,
+`peeledNumerator_factor`, and
 `emittedBlock_exists_approximate_cycle`.
 
 **Artifact:**
