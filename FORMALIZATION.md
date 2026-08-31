@@ -1786,6 +1786,7 @@ fixed-rank decision problem.
 | `TransverseLineHardCore.lean` | exact one-plane embedding of two-generator projective incidence into the identity-toggle transverse atlas |
 | `TransverseInfiniteAtlas.lean` | exact rank-two data family with an injectively infinite carrier-plane orbit under a nonprojective diagonal toggle |
 | `BranchingHistory.lean` | fixed `bcbc` terminal forks and affine positional lower bounds |
+| `TransverseInfiniteCollision.lean` | exact `bcbc` terminal/nonterminal collision for the letter-blind infinite-carrier generator |
 | `AffineRecognizer.lean` | generic singular three-state guard-and-carry representation calculus |
 | `BranchingRecognizer.lean` | complete `bcbc` residual grammar and rational three-state recognizer |
 | `MixedBranchingHistory.lean` | equal-length mixed terminal grammar and exact raw-toggle normal form |
@@ -2067,6 +2068,8 @@ fixed-rank decision problem.
 | One point test has zero set exactly `{0,1}`, and singleton acceptance can be delayed to any prescribed depth | `TransverseInfiniteAtlas.terminalValue_two_zeroSet_eq`, `TransverseInfiniteAtlas.delayedRow_terminalValue_eq_zero_iff` |
 | The pole-free rational coefficient section realizes every terminal coefficient triple at every source | `TransverseInfiniteAtlas.source_sq_add_one_pos`, `TransverseInfiniteAtlas.source_sq_add_source_add_one_pos`, `TransverseInfiniteAtlas.terminalCoefficients_section`, `TransverseInfiniteAtlas.terminalCoefficients_surjective` |
 | Every source-indexed target depth has an exact delayed-singleton row-column family | `TransverseInfiniteAtlas.coefficientSection_terminalValue`, `TransverseInfiniteAtlas.coefficientSection_sourceFamily_delayed_zero_iff` |
+| The literal infinite-carrier generator gives the `bcbc` terminal prefix and nonterminal near-fork the same word product | `TransverseInfiniteCollision.bcbcTerminal_wordProduct_eq_nearFork` |
+| No row and column repair that letter-blind collision into a `bcbc` same-zero representation | `TransverseInfiniteCollision.no_letterBlind_bcbc_sameZero` |
 | The `bcbb` null histories and complete terminal language are one exact periodic ray | `PeriodicHistory.bcbbNull_iff`, `PeriodicHistory.bcbb_terminal_match_iff` |
 | The singular positional decoder obeys its all-control affine state equation | `PeriodicHistory.periodicProduct_mulVec_column`, `PeriodicHistory.periodicCoefficient_eq` |
 | The `bcbb` affine section has no false zero and matches the paired zero language | `PeriodicHistory.bcbbAffine_zero_iff`, `PeriodicHistory.bcbb_periodicCoefficient_zero_iff_paired_zero` |
@@ -2382,6 +2385,14 @@ function-parametric corollary realizes the zero set `{N(σ)}` for arbitrary sour
 target-depth functions. This closes algebraic coefficient fitting as a possible obstruction, but
 says nothing about mapping the complete raw control monoid or paired terminal histories to the
 selected depth.
+
+For `G3-O34`, Lean compares the certified `bcbc` terminal prefix and nonterminal near-fork from
+`BranchingHistory`. Their toggle positions coincide, and the literal `G3-O30` generator maps both
+data letters to the same matrix, so their full word products are definitionally reducible to the
+same matrix expression. The formal contradiction quantifies over arbitrary rows and columns:
+same-zero recognition transfers terminal zero across product equality and contradicts the proved
+nonterminal coefficient. This kills only the letter-blind generator. Distinct data maps retaining
+the infinite carrier and terminal section remain open.
 
 For `G3-O20`, Lean proves the free-monoid tail law: if one fixed-boundary equation with stationary
 left and right pump blocks holds at exponents `N` and `N+1`, it holds at every exponent `N+k`.
