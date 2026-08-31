@@ -484,6 +484,10 @@ open MatrixMortality
 #print axioms WidthThreeSparseBody.sparseBody_coupled_halts
 #print axioms WidthThreeSparseBody.coupled_halts_of_count_c_le_one
 #print axioms WidthThreeSparseBody.exact_source_has_body_with_two_c
+#print axioms WidthThreeAdjacentBody.lowerCycleQueue_reachesIn
+#print axioms WidthThreeAdjacentBody.upperCycleQueue_reachesIn
+#print axioms WidthThreeAdjacentBody.lowerCycleQueue_not_halts
+#print axioms WidthThreeAdjacentBody.upperCycleQueue_not_halts
 #print axioms SetterShear.sideBasis_det
 #print axioms SetterShear.delimiter_cube
 #print axioms SetterShear.delimiter_square_distinguishedColumn

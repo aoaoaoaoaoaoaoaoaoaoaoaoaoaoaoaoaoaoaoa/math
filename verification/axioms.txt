@@ -899,6 +899,10 @@
 'MatrixMortality.WidthThreeSparseBody.exact_source_has_body_with_two_c' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.WidthThreeAdjacentBody.lowerCycleQueue_reachesIn' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.WidthThreeAdjacentBody.upperCycleQueue_reachesIn' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.WidthThreeAdjacentBody.lowerCycleQueue_not_halts' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.WidthThreeAdjacentBody.upperCycleQueue_not_halts' depends on axioms: [propext, Quot.sound]
 'MatrixMortality.SetterShear.sideBasis_det' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.SetterShear.delimiter_cube' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.SetterShear.delimiter_square_distinguishedColumn' depends on axioms: [propext,

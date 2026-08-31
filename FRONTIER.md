@@ -189,9 +189,12 @@ dimension. The sparse source stratum is now closed:
 [`MM-D01`](SALVAGE.md#mm-d01-sparse-width-three-source-decision) proves that every coupled body
 containing at most one `c` halts, so any exact universal family must emit a body with at least
 two `c` letters on some rejecting code. This is a necessary condition, not universality of the
-two-`c` stratum. See
+two-`c` stratum. The boundary is dynamically sharp:
+[`MM-D02`](SALVAGE.md#mm-d02-adjacent-two-c-periodic-pair) constructs two exact periodic queues
+for every nontrivial even adjacent-two-`c` body. See
 `audits/scheduled-binary-fixed-width-2026-07-24.md` and
-`audits/m53-width-three-sparse-source-2026-08-30.md`.
+`audits/m53-width-three-sparse-source-2026-08-30.md`; the cycle proof is in
+`audits/m53-width-three-adjacent-cycles-2026-08-31.md`.
 
 Full mortality requires coding the four payloads and the rank-one separator. The complete
 prefix code
@@ -702,7 +705,9 @@ Three live routes remain.
    and its coupled suffix input from the same source, not merely supply a fixed width-three
    machine with an arbitrary input. [`MM-D01`](SALVAGE.md#mm-d01-sparse-width-three-source-decision)
    excludes every zero- or one-`c` source image; the next genuine source boundary starts with
-   at least two `c` letters.
+   at least two `c` letters. [`MM-D02`](SALVAGE.md#mm-d02-adjacent-two-c-periodic-pair) shows
+   balanced reproduction throughout the adjacent-two-`c` subfamily; its coupled initial-orbit
+   classification is the next finite-normal-form target.
 
 The decimal setter is now the sharpest constructive route. The ternary swap remains useful
 because its suffix and divisor-ray theory is mature; the decimal instance has stronger real

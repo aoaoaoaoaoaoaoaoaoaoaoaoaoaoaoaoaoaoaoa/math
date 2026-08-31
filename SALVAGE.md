@@ -68,6 +68,7 @@ file owns the mathematical stock.
 | [`MM-C03`](#mm-c03-scheduled-binary-compiler) | compiler | fixed-width tag strokes to a total two-letter scalar series | formalized | graduated |
 | [`MM-C04`](#mm-c04-internal-word-sandwich-minimization) | compiler | internal low-rank words repair reachable/observable minimization | formalized | graduated |
 | [`MM-D01`](#mm-d01-sparse-width-three-source-decision) | decidability theorem | every coupled width-three body with at most one `c` halts | formalized | graduated |
+| [`MM-D02`](#mm-d02-adjacent-two-c-periodic-pair) | dynamical theorem | every nontrivial even adjacent-two-`c` body has two explicit periodic queues | formalized | active |
 | [`MM-O01`](#mm-o01-all-placement-packing-rank) | obstruction | literal CHHN packing has exact rank six for every separator placement | formalized | graduated |
 | [`MM-O02`](#mm-o02-one-sided-phase-overlap) | obstruction | standard common-line phase fusion becomes one-sided | reported | parked |
 | [`MM-O03`](#mm-o03-two-channel-boundary-tax) | obstruction | exact diagonal rank-two punctuation costs two states beyond Hankel rank | formalized | graduated |
@@ -1185,6 +1186,38 @@ source theorem required by `MM-C03`.
 `MatrixMortality.WidthThreeSparseBody.exact_source_has_body_with_two_c` in
 [`WidthThreeSparseBody.lean`](MatrixMortality/WidthThreeSparseBody.lean). The proof audit is
 [`audits/m53-width-three-sparse-source-2026-08-30.md`](audits/m53-width-three-sparse-source-2026-08-30.md).
+
+### MM-D02: Adjacent two-`c` periodic pair
+
+**Kind:** dynamical theorem
+**Evidence:** formalized
+**Disposition:** active
+
+For `q=b^p c c b^s` with `p+s=2k` and `k>0`, the width-three restricted tag system has two
+explicit periodic queues:
+
+```text
+b^(3k-1) c c b^(s+1),    b^(3k) c c b^(s+1).
+```
+
+Both return after exactly `k+1` tag steps. The first traversal removes the first `c` with a
+leading `b` step and fires the second; the other fires the adjacent pair directly. Exact
+reproduction uses only `p+s=2k`.
+
+**Scope:** these are periodic queues for the body, not yet a classification of its coupled
+initial queue. They prove neither universality nor undecidability of the two-`c` stratum.
+
+**Use:** the one-`c` shrinking defect cannot extend across the two-`c` boundary without a new
+case: balanced reproduction already occurs for every nontrivial even adjacent body. The live
+normal-form target is to prove that each coupled adjacent-body orbit halts or reaches one of
+these cycles.
+
+**Artifact:** `MatrixMortality.WidthThreeAdjacentBody.lowerCycleQueue_reachesIn`,
+`MatrixMortality.WidthThreeAdjacentBody.upperCycleQueue_reachesIn`,
+`MatrixMortality.WidthThreeAdjacentBody.lowerCycleQueue_not_halts`, and
+`MatrixMortality.WidthThreeAdjacentBody.upperCycleQueue_not_halts` in
+[`WidthThreeAdjacentBody.lean`](MatrixMortality/WidthThreeAdjacentBody.lean). See
+[`audits/m53-width-three-adjacent-cycles-2026-08-31.md`](audits/m53-width-three-adjacent-cycles-2026-08-31.md).
 
 ### MM-O01: All-placement packing rank
 

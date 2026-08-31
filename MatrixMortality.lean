@@ -123,6 +123,7 @@ import MatrixMortality.PairedBinaryFullAlgebra
 import MatrixMortality.PrefixFullAlgebra
 import MatrixMortality.ScheduledBinaryRank
 import MatrixMortality.WidthThreeSparseBody
+import MatrixMortality.WidthThreeAdjacentBody
 import MatrixMortality.SetterShear
 import MatrixMortality.SetterJFraction
 import MatrixMortality.DecimalSetterArithmetic
