@@ -1517,6 +1517,22 @@ certificates remove every nonzero exceptional parameter. At `s=0`, the terminal 
 `ctbcbtcbt` and nonterminal `ctbcbcbbb` have the same target product. No row or column repairs
 the candidate at any rational source.
 
+[`G3-S03`](SALVAGE.md#g3-s03-terminal-fork-invariant-core) extracts the general cut. For arbitrary
+rational three-state controls, all flat/nested terminal-fork states span a common invariant
+subspace annihilated by the transported prefix row. Same-zero correctness makes both boundary
+vectors nonzero, so this fork carrier has dimension one or two. Thus an irreducible three-state
+fork is impossible independently of rank, kernel, or quotient coordinates. If the fork blocks
+are invertible, their terminal action is a `GL₁` or `GL₂` restriction; the two-dimensional
+branch is the joint positive `M₂(3)` projective-incidence seam.
+
+[`G3-C07`](SALVAGE.md#g3-c07-persistent-guard-rank-escape) shows that reducibility does not force
+two singular data maps. The exact `bcbcbb` recognizer remains exact after changing its data-`b`
+guard update to `g↦mg+2k+1` for any even integer `m`. For `m≠0`, data `b` has determinant
+`5m` and rational rank three, while singular data `c` retains the original accepting-carry reset.
+Lean proves the complete arbitrary-word zero equivalence. The live architecture is therefore one
+singular syntax gate feeding a persistent full-rank action, not a common-kernel pair. This remains
+fixed-body and does not evade the uniform finite-target cut `G3-O04`.
+
 [`G3-M02`](SALVAGE.md#g3-m02-square-root-punctuation-fracture) supplied a complete direct-mortality
 grammar. The source-uniform rational rank-two matrix `S` satisfies
 
@@ -1810,7 +1826,7 @@ or neutral word across the return, use an empty consume, or split recurrent outp
 | Lane | Available leverage | Decisive obstruction or obligation |
 | --- | --- | --- |
 | Common-kernel shuttle | The exact `bcbb` compiler moves its common data kernel out through the toggle and recovers it at the next data action | Uniformize this non-invariant shuttle in `(β,body)`; every toggle-invariant guard factors through the two-dimensional quotient |
-| Transverse-kernel terminal dynamics | `G3-O27/O29` reduce the involutive branch to the `M₂(3)` core; `G3-O30`–`O33` expose infinite carriers and universal isolated-depth fitting; `G3-O34` kills letter blindness; `G3-O35` kills the first distinct-data repair through its complete terminal fork | Change the nonprojective controls or terminal geometry so the fork quotient degenerates lawfully, solve the joint dimension-two node, or use a full-rank data map |
+| Transverse-kernel terminal dynamics | `G3-O27/O29` reduce the involutive branch to the `M₂(3)` core; `G3-O30`–`O35` expose and close the first infinite-carrier repair; `G3-S03` forces every exact `bcbc` fork into a 1D/2D invariant core; `G3-C07` preserves an exact fixed language with full-rank data `b` and singular data `c` | Uniformize a singular all-word gate feeding a source-dependent 1D/2D terminal core, or solve the joint positive dimension-two node; generic irreducible `GL₃` forks and common-kernel necessity are dead |
 | Positive projective transition lower bound | Same-zero dimension three is point-line incidence in `P²`, and actual one-sided shifts retain finite rank/kernel/image data | Derive a uniform nonstationary or noncommuting shift incompatibility from an unbounded terminal section; static support rank, formal inverse completion, fixed equal-length return flowers, and unary consecutive-repeat escape are forbidden |
 | Global word-residual recoding | Longer noncommutative atoms can retain order while discarding the four additive role channels | Escape `G3-D05`: fixed-priority affine counters and all one-way reset/transfer/fanout cascades are decidable |
 | Head-separated three-schema source | `G3-C04` discharges every arbitrary-trace forcing obligation locally; `G3-O24` isolates the directed stable-cone alternative | Preserve an undecidable mixed or neutral word across returns, or realize zero-sensitive S5 GLB decoding after the `G3-O25` separator-rank fork; complete pure forks are decidable by `G3-D07` |
@@ -1855,7 +1871,12 @@ raceable leaves:
    supplies distinct data maps that retain the orbit and separate the first near-fork, but
    `G3-O35` proves that three complete terminal forks force a false zero for every nonzero source
    and gives an opposite-semantics collision at source zero. The live nonprojective escape must
-   change the controls or terminal geometry, not retune the `G3-C06` row or column.
+   change the controls or terminal geometry, not retune the `G3-C06` row or column. `G3-S03`
+   forces its complete fork orbit into a one- or two-dimensional invariant core for every exact
+   three-state recognizer. `G3-C07` supplies the nearest lawful positive model: one singular reset
+   can guard a full-rank persistent data action without changing a complete all-word zero
+   language. The unresolved step is source-uniform terminal geometry in that core, not another
+   fixed-body rank perturbation.
 3. **Positive projective transition obstruction.** Derive from a source-unbounded terminal
    section a finite shift incompatibility which no three-dimensional rational same-zero
    representation can realize for any combination of generator ranks and kernels. It must use
@@ -1968,7 +1989,13 @@ data map remains the other escape. `G3-C06` realizes the distinct rank-two branc
 it preserves the original infinite carrier prefixes and delayed section while separating that
 near-fork at every source. `G3-O35` closes that concrete monoid: its complete binary terminal fork
 forces a false zero for `s≠0`, and an exact opposite-semantics collision closes `s=0`. The live
-rank-two branch must change its controls or terminal geometry; the full-rank escape remains.
+rank-two branch must change its controls or terminal geometry. `G3-S03` shows that every exact
+replacement, including a full-rank one, must make the flat/nested fork orbit reducible into a
+one- or two-dimensional invariant core. `G3-C07` proves that one raw data letter may nevertheless
+be full-rank: an even persistent guard preserves the complete `bcbcbb` language while singular
+data `c` performs the syntax reset. The live template is a singular all-word gate plus a
+source-dependent persistent core, with the two-dimensional branch shared explicitly with
+`M₂(3)`.
 A lower-bound attack must exclude both positive
 architectures through actual transition data. Backward cancellation, inverse cofinality, and
 static incidence cannot do so. Do not spend another attack on separator placement, fixed anchors,

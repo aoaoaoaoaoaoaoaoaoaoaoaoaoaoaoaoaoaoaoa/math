@@ -2361,10 +2361,12 @@ fixed-rank decision problem.
 | `SeparatedTwoCCantor.lean` | exact active-pair macros, width-three head bisimulation, finite Cantor-defect forcing, and halting for `n≡5 (mod 9)` |
 | `TransverseSeparatedForkNoGo.lean` | quotient-commutator terminal-fork obstruction and exceptional-fibre collision closing the distinct-data candidate |
 | `SeparatedTwoCResidueTwo.lean` | six-event active-`c` macro and halting for `n≡2,20 (mod 27)` |
+| `TerminalForkCore.lean` | representation-independent one-or-two-dimensional invariant fork core forced by exact `bcbc` recognition |
 | `AffineRecognizer.lean` | generic singular three-state guard-and-carry representation calculus |
 | `BranchingRecognizer.lean` | complete `bcbc` residual grammar and rational three-state recognizer |
 | `MixedBranchingHistory.lean` | equal-length mixed terminal grammar and exact raw-toggle normal form |
 | `MixedBranchingRecognizer.lean` | complete inverse carry graph and integral three-state same-zero recognizer |
+| `MixedBranchingPersistentGuard.lean` | even persistent-guard family preserving the complete `bcbcbb` zero language with full-rank data `b` |
 | `ExpandingHistoryNoGo.lean` | reset-affine orbit, finite reverse automaton, regularity, and universal computability obstruction |
 | `CancellativeProjectiveNoGo.lean` | paired residual conic, finite support-rank closure, cancellative role fractions, and projective commutator rigidity |
 | `PairedInverseChamber.lean` | one-turn residual chambers, protected formal inverse states, and positive forward-cone separation |
@@ -2686,6 +2688,7 @@ fixed-rank decision problem.
 | Its `bcbc` terminal/near-fork product difference has the uniformly positive entry `6(2s²−5s+4)` | `TransverseSeparatedAtlas.bcbc_product_difference_entry`, `TransverseSeparatedAtlas.separation_polynomial_pos`, `TransverseSeparatedAtlas.bcbcTerminal_wordProduct_ne_nearFork` |
 | The flat and nested `bcbc` fork blocks have exact two-state quotient actions with nonsingular commutator at every nonzero rational source | `TransverseSeparatedForkNoGo.planeHead_flatForkMatrix_mulVec`, `TransverseSeparatedForkNoGo.planeHead_nestedForkMatrix_mulVec`, `TransverseSeparatedForkNoGo.forkQuotient_commutator_det`, `TransverseSeparatedForkNoGo.cubicFactor_ne_zero`, `TransverseSeparatedForkNoGo.nonicFactor_ne_zero` |
 | Three terminal forks force one boundary vector to vanish and hence a false zero for every nonzero source parameter, while one exact opposite-semantics collision closes source zero | `TransverseSeparatedForkNoGo.terminalForkControl_paired_zero`, `TransverseSeparatedForkNoGo.planeRow_eq_zero_or_column_eq_zero_of_irreducible_pair`, `TransverseSeparatedForkNoGo.zeroSource_wordProduct_collision`, `TransverseSeparatedForkNoGo.no_bcbc_sameZero` |
+| Every exact three-state `bcbc` recognizer has a nonzero proper flat/nested-fork carrier of dimension one or two | `TerminalForkCore.forkTransition_mulVec_mem_carrier`, `TerminalForkCore.boundaryRow_dot_eq_zero_of_mem`, `TerminalForkCore.carrier_finrank_one_or_two_of_sameZero` |
 | The `bcbb` null histories and complete terminal language are one exact periodic ray | `PeriodicHistory.bcbbNull_iff`, `PeriodicHistory.bcbb_terminal_match_iff` |
 | The singular positional decoder obeys its all-control affine state equation | `PeriodicHistory.periodicProduct_mulVec_column`, `PeriodicHistory.periodicCoefficient_eq` |
 | The `bcbb` affine section has no false zero and matches the paired zero language | `PeriodicHistory.bcbbAffine_zero_iff`, `PeriodicHistory.bcbb_periodicCoefficient_zero_iff_paired_zero` |
@@ -2701,6 +2704,7 @@ fixed-rank decision problem.
 | Toggle scouring gives the exact two normal spellings of each mixed terminal history | `MixedBranchingRecognizer.decode_eq_terminal_iff_scourToggles` |
 | The integral mixed recognizer equals the paired zero language on every raw control word | `MixedBranchingRecognizer.recognizerCoefficient_eq_zero_iff`, `MixedBranchingRecognizer.pairedCoefficient_eq_zero_iff`, `MixedBranchingRecognizer.recognizerCoefficient_eq_zero_iff_paired` |
 | Its data maps have one exact common kernel, its toggle is involutive, and no generator product is zero | `MixedBranchingRecognizer.recognizerData_mulVec_eq_zero_iff`, `MixedBranchingRecognizer.recognizerToggle_involutive`, `MixedBranchingRecognizer.recognizerProduct_ne_zero` |
+| Any even persistent guard memory preserves the exact mixed-branching zero language; nonzero memory makes data `b` full-rank over `ℚ` and removes the common data kernel | `MixedBranchingPersistentGuard.guard_eq_zero_iff_recognizerGuard`, `MixedBranchingPersistentGuard.coefficient_eq_zero_iff_paired`, `MixedBranchingPersistentGuard.data_b_rank_rat`, `MixedBranchingPersistentGuard.data_b_guardAxis_ne_zero` |
 | A matrix square equal to an outer product gives the complete `SS`-free mortality grammar | `SquareRootPunctuation.isMortal_iff_exists_squareFree_zero` |
 | The explicit source-uniform Neary punctuation matrix has the required square and rank two | `SquareRootPunctuation.nearySquareRoot_sq`, `SquareRootPunctuation.nearySquareRoot_rank` |
 | Exact coefficient preservation on the `R_bR_b`-free subshift forces the `R_b` matrix to be a unit | `SquareRootPunctuation.ruleB_isUnit_of_exact_on_squareFree` |
@@ -3045,6 +3049,23 @@ zero; a degenerate terminal column instead makes the one-letter data control a f
 `s=0`, Lean proves that terminal `ctbcbtcbt` and nonterminal `ctbcbcbbb` have identical target
 products. The final theorem quantifies over all rational parameters and all row-column pairs and
 rejects `bcbc` same-zero recognition for the exact `G3-C06` generator.
+
+`G3-S03` removes the coordinates from that postmortem. For arbitrary rational three-state
+controls, the span of the toggled boundary column under all flat/nested `bcbc` null-block words
+is invariant under both block products. Exact same-zero recognition makes the transported prefix
+row nonzero, the toggled column nonzero, and the entire span a subspace of the row kernel. Lean
+therefore proves that this fork carrier is nonzero, proper, and has dimension one or two. A
+generic irreducible three-state fork cannot recognize `bcbc`; an invertible fork architecture
+must carry its terminal dynamics in a `GL₁` or `GL₂` restriction.
+
+`G3-C07` proves that this restriction does not force both data controls to remain singular. Start
+from the exact integral `bcbcbb` recognizer and replace the refreshed data-`b` guard by
+`g↦mg+2k+1`. For every even integer `m`, a `b`-headed guard is odd, while data `c` retains the
+original accepting-carry equation. Lean proves equality of the complete scalar zero languages on
+every raw control word. If `m≠0`, the data-`b` determinant is `5m` and its rational rank is three;
+data `c` remains the singular reset. Thus common-kernel and both-data-singular hypotheses are not
+available for a general lower bound. The result remains fixed-body and expanding-affine, so it
+does not supply the source-uniform compiler required for `M₃(4)`.
 
 For `G3-O20`, Lean proves the free-monoid tail law: if one fixed-boundary equation with stationary
 left and right pump blocks holds at exponents `N` and `N+1`, it holds at every exponent `N+k`.
