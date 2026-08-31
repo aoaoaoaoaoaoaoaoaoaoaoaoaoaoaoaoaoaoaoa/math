@@ -795,6 +795,18 @@ computationally certified physical all-`D_c` word at the compiler width `β=10` 
 full-gap congruences, so encoded suffix semantics beyond these modular conditions remain
 necessary.
 
+[`MM-S26`](SALVAGE.md#mm-s26-exact-raw-head-prime-support) removes the initial support opacity.
+If the unit two-`c` raw head `H` has terminal run length `s`, then every `r∣q` is automatically
+coprime to nine and
+
+```text
+r∣H  ↔  r∣2·10^s+1743,       1≤s≤β−1.
+```
+
+Thus the initial set of contaminated gap primes is exactly an exponential divisibility set,
+not an arbitrary compiler-code support. The remaining task is to classify that set and the
+support installed later by reachable lower words; this theorem does not close `M₅(3)`.
+
 The immediate ternary question is which other positive valuation-one discrepancies survive its
 suffix sieve without already certifying source halting.
 Exact bidirectional diagnostics for the ternary swap at `β=3`, body `bbcc`, exclude every

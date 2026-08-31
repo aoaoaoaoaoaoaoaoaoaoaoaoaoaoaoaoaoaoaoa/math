@@ -107,6 +107,7 @@ file owns the mathematical stock.
 | [`MM-S20`](#mm-s20-singleton-carrier-classification) | structure theorem and obstruction | singleton-current carrier transitions are empty, while abstract multi-to-singleton carriers exist exactly at length `m≥β+3` | formalized | active |
 | [`MM-S22`](#mm-s22-gap-factor-quotient-gate) | structure theorem and obstruction | every gap-clean denominator-descended carrier hitting a singleton must pass two exact gap-factor code congruences | formalized | active |
 | [`MM-S24`](#mm-s24-factorwise-gap-ancestry) | structure theorem and obstruction | every gap factor has an exact lower-code propagation law and imposes its own singleton quotient gate while it remains numerator-coprime | formalized | active |
+| [`MM-S26`](#mm-s26-exact-raw-head-prime-support) | structure theorem | the prime support shared by the primitive gap and the initial unit two-`c` carrier is exactly the support of one explicit run-length exponential | formalized | active |
 | [`R32-S01`](#r32-s01-split-return-normal-form) | structure theorem | rank-two cuts reduce one-unit binary mortality to a `2 × 2` return recurrence | formalized | graduated |
 | [`R32-S02`](#r32-s02-two-plane-edge-square) | structure theorem | two rank-two generators are a two-vertex square of `2 × 2` edges | formalized | graduated |
 | [`R32-O01`](#r32-o01-rank-one-profile-collapse) | obstruction | a rank-one generator reduces mortality to order-at-most-three scalar recurrence zeros | audited | stock |
@@ -3283,6 +3284,53 @@ through `gapFactor_not_dvd_twoCHead`, `carrierFactor_dvd_next_iff`,
 **Next:** classify prime support of compiler lower words at symbolic deletion width. The
 factorwise gates are not sufficient by themselves: the audit records a physical all-`D_c`
 word at `β=10` that passes both full-gap gates computationally.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S26: Exact raw-head prime support
+
+**Kind:** structure theorem
+**Evidence:** formalized
+**Disposition:** active
+
+Let `q=2·10^β−7`, and let `H` be a unit two-`c` raw head whose suffix calculation gives
+
+```text
+9H=5·10^(β+2)+2·10^s−7.
+```
+
+Every divisor `r∣q` is automatically coprime to nine. Indeed `q` is coprime to the fixed lift
+`G=502·10^β−7`, while `9∣G`; coprimality descends from `q` to `r`. The head identity is exactly
+
+```text
+9H=250q+(2·10^s+1743),
+```
+
+so cancellation of nine gives the equivalence
+
+```text
+r∣H  ↔  r∣2·10^s+1743.                           (1)
+```
+
+**Scope:** equation (1) holds for every `β>0`, every divisor of `q`, and every integer head
+satisfying the displayed identity. In the physical unit raw-head grammar, `1≤s≤β−1`. It does
+not apply directly to generalized product-residual numerators or classify the divisors in (1).
+
+**Use:** the initial carrier's complete gap-prime support is no longer an opaque code property;
+it is the support of a one-parameter exponential. Combined with
+[`MM-S24`](#mm-s24-factorwise-gap-ancestry), (1) identifies the initial support exactly and
+leaves later support entry only through emitted lower codes.
+
+**Formalization:**
+[`MatrixMortality/DecimalSetterAncestry.lean`](MatrixMortality/DecimalSetterAncestry.lean),
+through `gapFactorDivisor_coprime_nine` and `rawHead_factor_iff`.
+
+**Artifact:**
+[`audits/m53-decimal-gap-factor-ancestry-2026-08-31.md`](audits/m53-decimal-gap-factor-ancestry-2026-08-31.md).
+
+**Next:** classify common factors of `2·10^β−7` and `2·10^s+1743` for
+`1≤s≤β−1`, then propagate the surviving support through the physical lower-code semigroup.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).

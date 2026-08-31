@@ -515,6 +515,8 @@ open MatrixMortality
 #print axioms DecimalSetterDepth.peeledLastDigit_twoStep
 #print axioms DecimalSetterDepth.peeledHead_trichotomy
 #print axioms DecimalSetterAncestry.gapFactor_not_dvd_twoCHead
+#print axioms DecimalSetterAncestry.gapFactorDivisor_coprime_nine
+#print axioms DecimalSetterAncestry.rawHead_factor_iff
 #print axioms DecimalSetterAncestry.carrierFactor_dvd_next_iff
 #print axioms DecimalSetterAncestry.primeFactor_dvd_next_iff
 #print axioms DecimalSetterAncestry.carrierFactor_multiToSingleton_quotientGate
