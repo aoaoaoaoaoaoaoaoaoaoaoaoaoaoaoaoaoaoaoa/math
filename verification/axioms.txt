@@ -1994,3 +1994,90 @@
 'MatrixMortality.ParabolicBlade.bZeroBDefectCOneTrailing_resultant' depends on axioms: [propext, Quot.sound]
 'MatrixMortality.ParabolicBlade.bZeroBDefectCOneCodeCore_trailing_decomposition' depends on axioms: [propext,
  Quot.sound]
+'MatrixMortality.ParabolicBlade.tagComplementCode_first_b_sharp_upper' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.bZeroBDefectCOne_y_lt_of_first_b' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.bZeroBDefectCOne_y_le_of_first_b' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.bZeroBDefectCOneCodeCore_x211_normal_form' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.ParabolicBlade.bZeroBDefectCOneSfft_resultant' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.ParabolicBlade.bZeroBDefectCOneSfft_identity' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.ParabolicBlade.bZeroBDefectCOneSfft_eq_of_core_zero' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.ParabolicBlade.bZeroBDefectCOneSfft_fixed_content' depends on axioms: [propext]
+'MatrixMortality.ParabolicBlade.bZeroBDefectCOneSfft_reconstruction_divisibility' depends on axioms: [propext]
+'MatrixMortality.ParabolicBlade.bZeroBDefectCOneSfftU_complement_resultant' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.ParabolicBlade.bZeroBDefectCOneSfftV_complement_resultant' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.ParabolicBlade.bZeroBDefectCOneSfftU_W_resultant' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.ParabolicBlade.bZeroBDefectCOneSfftV_W_resultant' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.ParabolicBlade.bZeroBDefectCOneSfft_mod_three' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.ParabolicBlade.bZeroBDefectCOneSfft_divisor_mod_three' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.ParabolicBlade.bZeroBDefectCOneSfft_pos_of_cb_coordinates' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.bZeroBDefectCOneSfft_pos_of_cb' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.bZeroBDefectCOneSfft_positive_divisors_of_core_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.firstBTwo_root_between_envelopes' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.firstBTwo_no_root_at_y_one' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ParabolicBlade.firstBTwo_root_between_envelopes_of_tail' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.firstBTwo_z_equation_of_tail_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.bZeroBDefectCOneCodeCore_ccb_ne_zero_of_y_one' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.bZeroBDefectCOneCodeCore_ccb_ne_zero_of_y_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.firstBTwoRoot_y_one_between' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ParabolicBlade.firstBTwoRootWindow_y_one_empty' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.firstBTwoRootWindow_coarse' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ParabolicBlade.firstBTwoRootWindow_candidates' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.firstBTwoRootCandidate_of_bounds' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.FirstBTwoRootCandidate.window' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.firstBTwoRootWindow_iff_candidate' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.firstBTwoTail_root_eq_exception' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.bZeroBDefectCOneCodeCore_ccbccb_ne_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.bZeroBDefectCOneCodeCore_ccbccb_ne_zero_rat' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.bridge_bZero_bTwo_cOne_det_ne_zero_of_ccbccb' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.bZeroBDefectCOneCodeCore_ccb_ne_zero_of_mem_b' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.bZeroBDefectCOneCodeCore_ccb_ne_zero_of_even_b_count' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.bridge_bZero_bTwo_cOne_det_ne_zero_of_ccb_mem_b' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.bridge_bZero_bTwo_cOne_det_ne_zero_of_ccb_even_b_count' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]

@@ -631,6 +631,25 @@ cross-resultant; and the core isolates the sole unscaled wait term. Use this rep
 the bounded `3^13` classifier. The earlier lower bound obtained from an unreduced congruence
 representative remains invalid and must not reappear.
 
+The middle wait is globally finite
+[`M4-S32`](SALVAGE.md#m4-s32-phase-zero-right-c-global-middle-wait-bound). Every zero on a
+body containing `b` satisfies `y≤51767`; the proof uses four first-`b` density regimes and no
+body census. Future classifiers must use this theorem rather than an experimental search cap.
+
+At outer wait `x=211`, the `cb` chamber now has an exact positive divisor equation
+[`M4-S33`](SALVAGE.md#m4-s33-phase-zero-right-c-x211-divisor-chamber). Its two affine divisor
+coordinates multiply to `2·3^14·31·229·D·W`, obey reconstruction congruences, and carry four
+body-elimination resultants. This is a finite arithmetic interface, not yet an extinction
+theorem: close its divisor allocations against the bounded middle wait and trailing cylinders.
+
+The second-first-`b` cylinder is dead
+[`M4-S34`](SALVAGE.md#m4-s34-phase-zero-right-c-second-first-b-extinction). Analytic root
+envelopes reduce it to 77 outer-wait pairs; exact tail-density rectangles leave one endpoint,
+which lies in a certified grammar gap. The final theorem excludes every even-`b` body beginning
+`ccb`. With leading positions at least twelve already removed by `M4-S28`, the remaining
+first-`b` positions are `0`, `1`, and `3` through `11`. Reuse the root-window and exact-corner
+certificate architecture rather than returning to raw bounded word enumeration.
+
 Two original-family nodes survive, and they must not be conflated.
 
 1. **Exterior collision avoidance.** Use `M4-S06`--`M4-S15` to classify the transported kernel
