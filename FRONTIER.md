@@ -642,7 +642,13 @@ Three live routes remain.
    [`MM-M01`](SALVAGE.md#mm-m01-off-diagonal-companion-interface) supplies a complete bridge
    grammar once a physical control word realizes it. Pure delimiter powers cannot supply
    punctuation while preserving the exact isolated toggle
-   ([`MM-O06`](SALVAGE.md#mm-o06-pure-power-punctuation-obstruction)). The new setter candidate
+   ([`MM-O06`](SALVAGE.md#mm-o06-pure-power-punctuation-obstruction)). Nor can a bordered
+   compiler make every delimiter pair contextually invisible:
+   [`MM-O16`](SALVAGE.md#mm-o16-exact-delimiter-pair-obstruction) proves that exact parity-pair
+   cancellation forces immortality. Its cubic companion calculation also excludes pure and
+   fixed-context cubic projections for the full paired series. The sole bordered-companion
+   residue must absorb the forced initial `R_c`, couple both data matrices to the fifth
+   coordinate, and give square runs genuine semantics. The setter candidate
    [`MM-M03`](SALVAGE.md#mm-m03-five-state-setter-punctuation) instead uses the mixed word
    `S²A_cS³=λC̃L̃`. It proves the regular decoder and halting-to-mortality implication.
    Its entire malformed-word converse is the projective avoidance problem
@@ -669,7 +675,10 @@ Three live routes remain.
    malformed placement is excluded by the terminal-match normal form. The width-three
    rank-five theorem [`MM-O05`](SALVAGE.md#mm-o05-width-three-scheduled-rank) shows that five
    exact states are necessary at that width; it does not obstruct a same-zero clock
-   compression or delimiter fusion.
+   compression or delimiter fusion. Exact deletion-width-three source substitution remains a
+   separate open problem: the theorem needed by `MM-C03` must compute the variable rule body
+   and its coupled suffix input from the same source, not merely supply a fixed width-three
+   machine with an arbitrary input.
 
 The decimal setter is now the sharpest constructive route. The ternary swap remains useful
 because its suffix and divisor-ray theory is mature; the decimal instance has stronger real

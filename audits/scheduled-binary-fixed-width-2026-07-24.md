@@ -46,6 +46,27 @@ reachability decision theorem.
 Accordingly, the scheduled compiler is a fixed-width conditional reduction,
 not a new fixed cell of the mortality table.
 
+### Exact missing source
+
+A search update through 2026-08-30 sharpened the required theorem. It must provide a
+primitive-recursive family `q_e` such that
+
+```text
+2 ≤ |q_e|,        2 ∣ |q_e|,
+
+TagHaltsFrom 3
+  (b ↦ [b], c ↦ q_e ++ [b])
+  (q_e.drop 2 ++ [b])
+↔ CodeHalts e.
+```
+
+A fixed width-three tag table with an arbitrary input compiler is not by itself sufficient:
+`MM-C03` couples the initial queue to the same variable body that defines the `c` production.
+The verified universal binary cyclic-tag system can be upgraded by a direct audited argument to
+exact empty-data halting after one additional empty halt-appendant step, but its production
+remains phase-dependent. Eliminating that phase is precisely the missing width-three
+compilation; the existing Table 2 construction does so only at deletion width `10p`.
+
 ## Search
 
 The search covered exact phrases and notation variants for binary tag systems,
