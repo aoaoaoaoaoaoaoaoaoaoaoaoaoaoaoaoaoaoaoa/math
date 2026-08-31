@@ -1000,9 +1000,18 @@ grammar. Under the exact compiler envelope `|body|≥β−1`, `head(body)=b`, an
 of `R_c` forces the normalized second-transfer discrepancy outside the target-pole interval:
 `Δ≤0` for a `c`-leading first block and `Δ>3μ` for a `b`-leading one, whereas every physical
 target requires `0<Δ<3μ`. Combined with `MM-S35` and `MM-S38`, the first multi-transfer front
-now consists only of the literal blocks `D_c²→multi` and `D_c^(β+1)→singleton`. Neither is a
-witness; exact ancestry and composed suffix equations must now kill these two all-erasure
-survivors or expose a counterexample.
+then consists only of the literal blocks `D_c²→multi` and `D_c^(β+1)→singleton`.
+
+[`MM-S50`](SALVAGE.md#mm-s50-long-all-erasure-singleton-extinction) kills the long branch.
+For `D_c^(β+1)`, the exact codes `V_m=3ρ−1` and `2P_m=9ρ²+ρ−2`, together with the universal
+incoming bound `q<1`, force `Δ>12`. Either singleton target forces `Δ<12`. The sole first
+multi-transfer survivor is therefore `D_c²→multi`.
+
+The remaining carrier is not yet the integral raw-fringe state consumed by the positive
+depth-one classifier: its discrepancy
+`(14ρ−1)/3−8Hq/(3(ρ−2))` is generally rational and depends on the preceding punctuated upper
+cylinder. A lawful splice requires a new physical ancestry theorem supplying an integral
+digit-code difference and common-suffix factorization; the pole shell alone does neither.
 
 The immediate ternary question is which other positive valuation-one discrepancies survive its
 suffix sieve without already certifying source halting.

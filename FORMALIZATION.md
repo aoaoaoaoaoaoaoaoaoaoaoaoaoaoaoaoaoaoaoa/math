@@ -1422,6 +1422,7 @@ The setter-projective audit now also exposes a kernel-friendly carry theorem:
 | [`MM-S10`](SALVAGE.md#mm-s10-swapped-target-suffix-sieve) | `β+2`-digit pole congruence, swapped lower-suffix grammar, and exclusion of `Δ=ρ−1` |
 | [`MM-S35`](SALVAGE.md#mm-s35-first-multi-transfer-trichotomy) | exact upper-length grammar, nonresonant denominator shell, later-pole length balance, resonant singleton unit obstruction, and three-shape first multi-transfer gate |
 | [`MM-S44`](SALVAGE.md#mm-s44-compiler-envelope-rule-bearing-extinction) | first-role mismatch cylinder, compiler-body lower-code bound, target-pole discrepancy interval, and exact all-erasure survivor theorem |
+| [`MM-S50`](SALVAGE.md#mm-s50-long-all-erasure-singleton-extinction) | exact long all-erasure codes and discrepancy, uniform lower bound above twelve, both singleton target bounds, and double-deletion-only frontier theorem |
 
 These records narrow the missing arbitrary-depth theorem but do not prove
 projective avoidance. Their reconstruction is
@@ -1596,8 +1597,15 @@ body conditions `|body|≥β−1` and `head(body)=b` then force every middle `R_
 a `c`-leading first block and greater than `3μ` for a `b`-leading first block, while any physical
 target pole requires the open interval `(0,3μ)`. The packaged theorem
 `firstMultiTransfer_pole_forces_all_erasure` composes this cylinder with `MM-S35` and `MM-S38`:
-the only remaining first multi-transfer middles are literal `D_c²` and `D_c^(β+1)`. Their
-reachability and later product residuals remain open.
+the only remaining first multi-transfer middles are literal `D_c²` and `D_c^(β+1)`.
+
+Record [`MM-S50`](SALVAGE.md#mm-s50-long-all-erasure-singleton-extinction) removes the long
+branch. `allDeletionC_long_transferDiscrepancy` computes `V_m=3ρ−1`,
+`2P_m=9ρ²+ρ−2`, and the exact discrepancy after `D_c^(β+1)`. The full upper cylinder gives
+`q<1`; a positive shifted cubic then forces `Δ>12`. The singleton `D_c` and `D_b` pole equations
+force respectively `Δ=6μ/ρ<12` and `Δ=6Hμ/(ρB)<12`, contradictions. The composed theorem
+`firstMultiTransfer_pole_forces_doubleDeletion` leaves only literal `D_c²` before a depth-one
+target. Its exact reachability and rational carrier-to-fringe ancestry remain open.
 
 Record [`MM-S21`](SALVAGE.md#mm-s21-bounded-decimal-suffix-cycles) closes the fixed-precision
 suffix-descent lane. `DecimalSetterSuffix.cycleDefect_lift` gives an explicit one-digit lift for

@@ -151,6 +151,7 @@ import MatrixMortality.DecimalSetterAncestry
 import MatrixMortality.SwappedSetterCompiler
 import MatrixMortality.SwappedSetterMultitransfer
 import MatrixMortality.SwappedSetterCylinder
+import MatrixMortality.SwappedSetterAllErasure
 import MatrixMortality.SchottkyPunctuation
 import MatrixMortality.TwoStateObstructions
 import MatrixMortality.ForcedRuleCCompanion

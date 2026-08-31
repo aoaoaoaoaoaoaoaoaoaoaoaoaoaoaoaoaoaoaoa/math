@@ -132,6 +132,7 @@ file owns the mathematical stock.
 | [`MM-S35`](#mm-s35-first-multi-transfer-trichotomy) | structure theorem and obstruction | every first swapped-ternary multi-transfer pole in the expected shells passes through one of three exact all-`c`/singleton shapes | formalized | active |
 | [`MM-S38`](#mm-s38-two-c-singleton-b-extinction) | obstruction | the two-`c`, singleton-`D_b`, singleton-target branch of the swapped-ternary first multi-transfer gate is empty | formalized | active |
 | [`MM-S44`](#mm-s44-compiler-envelope-rule-bearing-extinction) | obstruction | compiler-emitted bodies exclude every rule-bearing phase of the two surviving all-`c` first multi-transfer shapes | formalized | active |
+| [`MM-S50`](#mm-s50-long-all-erasure-singleton-extinction) | obstruction | the long literal `D_c^(β+1)` middle has discrepancy above twelve, beyond both singleton pole values | formalized | active |
 | [`R32-S01`](#r32-s01-split-return-normal-form) | structure theorem | rank-two cuts reduce one-unit binary mortality to a `2 × 2` return recurrence | formalized | graduated |
 | [`R32-S02`](#r32-s02-two-plane-edge-square) | structure theorem | two rank-two generators are a two-vertex square of `2 × 2` edges | formalized | graduated |
 | [`R32-O01`](#r32-o01-rank-one-profile-collapse) | obstruction | a rank-one generator reduces mortality to order-at-most-three scalar recurrence zeros | audited | stock |
@@ -4586,8 +4587,71 @@ through `ruleBearing_allC_avoids_pole` and
 **Artifact:**
 [`audits/m53-compiler-envelope-rule-bearing-extinction-2026-08-31.md`](audits/m53-compiler-envelope-rule-bearing-extinction-2026-08-31.md).
 
-**Next:** decide the literal `D_c²→multi` and `D_c^(β+1)→singleton` branches, then propagate
-the resulting cut through later product residuals.
+**Next:** [`MM-S50`](#mm-s50-long-all-erasure-singleton-extinction) kills
+`D_c^(β+1)→singleton`; decide the sole remaining `D_c²→multi` carrier.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S50: Long all-erasure singleton extinction
+
+**Kind:** obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+The long survivor of [`MM-S44`](#mm-s44-compiler-envelope-rule-bearing-extinction) is the
+literal middle block `D_c^(β+1)` before a singleton target. Put `ρ=3^β`, `μ=2ρ−1`, and
+`H=5ρ−1`. Its exact codes are
+
+```text
+V_m=3ρ−1,       2P_m=9ρ²+ρ−2.                           (1)
+```
+
+For the preceding first block, let `A` be its upper power, `P` its punctuated upper code, and
+`q=(μA−P)/P`. The full upper cylinder `ρA≤P<2ρA` gives `q<1`. Substitution into the normalized
+transfer recurrence gives the exact discrepancy
+
+```text
+Δ=(9ρ²+ρ−2)/(2ρ) − H(3ρ−1)q/((ρ−2)ρ).                  (2)
+```
+
+For `β≥3`, equation (2) and `q<1` imply `Δ>12`. After normalization, the two singleton pole
+equations instead force
+
+```text
+D_c target:  Δ=6μ/ρ<12,
+D_b target:  Δ=6Hμ/(ρB)<12,
+B=18ρ²−40ρ+17.                                          (3)
+```
+
+The second inequality uses `H<B` and `μ<2ρ`, both strict for `ρ≥27`. Thus the long
+all-erasure branch is empty. Composing this result with `MM-S44` sharpens the entire expected-
+shell first multi-transfer frontier to
+
+```text
+middle = D_c²,       target depth 1.                     (4)
+```
+
+**Scope:** this is a swapped-ternary `MM-M04` theorem. It is uniform in the compiler body and
+the first role block, but assumes the centered first-transfer state and expected pole shells
+used by `MM-S35`. Equation (4) is necessary, not a reachable witness. It neither applies to the
+decimal setter nor decides later carrier histories.
+
+**Use:** remove the singleton-target fork from the first multi-transfer search. The sole live
+branch is `D_c²→multi`, whose normalized discrepancy is generally rational; importing the
+integral raw-fringe classifier requires a new carrier-to-fringe ancestry theorem.
+
+**Formalization:**
+[`MatrixMortality/SwappedSetterAllErasure.lean`](MatrixMortality/SwappedSetterAllErasure.lean),
+through `allDeletionC_long_transferDiscrepancy`, `longDeletion_avoids_singleton_pole`, and
+`firstMultiTransfer_pole_forces_doubleDeletion`.
+
+**Artifact:**
+[`audits/m53-long-all-erasure-singleton-extinction-2026-08-31.md`](audits/m53-long-all-erasure-singleton-extinction-2026-08-31.md).
+
+**Next:** decide `D_c²→multi` by retaining the preceding carrier's exact rational cylinder and
+the target block's full upper/lower ratio; do not apply the integral raw-fringe classifier
+without proving the missing ancestry interface.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
