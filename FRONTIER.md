@@ -1695,6 +1695,10 @@ The family is now sharply fenced:
 - every mortal fraction `A/B` obeys two word-independent cyclotomic filters: modulo every prime
   divisor of `q−1`, `B≡A`; modulo every prime divisor of `q+1`, `B≡±A`, by
   [`R32-S48`](SALVAGE.md#r32-s48-fractional-cyclotomic-finite-walls).
+- consecutive exact denominator-center hits force scale exponents `n,2n,4n,…` and can reach the
+  physical endpoint only at a one-return resonance. The exact zero residue of the critical wall
+  is incompatible with mortality in every fixed-ray quotient where `A/B` remains reduced, by
+  [`R32-S49`](SALVAGE.md#r32-s49-geometric-center-chain-extinction).
 - replacing common powers of one base by a scale alphabet totally ordered under divisibility is
   unsound: `[3,15,3,3,15,3,3,3]` has the exact nonresonant root `d=25/27`, by
   [`R32-O25`](SALVAGE.md#r32-o25-divisibility-chain-returnsquare-fracture).
@@ -1714,7 +1718,9 @@ residue coordinate, and arbitrary-scale multi-return zeros realize all four wall
 scales share the relevant denominator prime. Neither cross-prime residue synchronization nor a
 geometric-scale counterexample is proved. Order-one and order-two cyclotomic quotients now force
 `B/A` onto the signed identity rays, but higher-order quotients require larger projective
-automata. The one-base geometric architecture is essential: mere divisibility comparability or
+automata. Exact denominator-center chains already collapse to resonance, and a mortal reduced
+fraction cannot take the zero critical-residue branch; mixed nonzero residue transitions remain.
+The one-base geometric architecture is essential: mere divisibility comparability or
 common prime content cannot replace it. The one-base prime-power architecture remains closed.
 The two-coordinate pullback is not a reduction to finite-alphabet `M₂(3)`; every `qⁿ` remains a
 distinct return letter.

@@ -533,7 +533,7 @@ valuation `a−min(2b,a)` for `a=vₚ(B)` and `b=vₚ(t)`, except at the sole cr
 `a=2b`; at equality, its valuation is still nonpositive whenever the affine predecessor is
 defined. For `t=q^(w+1)`, this is the exact word-visible tax `2(w+1)vₚ(q)`. Positive denominator
 depth survives one terminal pullback only above that tax. Later shell re-entry and cross-prime
-common content remain unclassified. `R32-S44` through `R32-S48` are strict
+common content remain unclassified. `R32-S44` through `R32-S49` are strict
 obstructions, not the arbitrary-composite classification. The two-coordinate interface does
 not reduce to finite-alphabet `M₂(3)` because every scale `qⁿ` remains a distinct return letter.
 
@@ -564,6 +564,13 @@ The denominator-cleared physical cut now supports fractional finite walls withou
 `q+1` divides `B−A` or `B+A`. These word-independent cyclotomic conditions eliminate fraction
 assignments before inverse-wall search. They do not classify higher-order reductions of `q`,
 whose projective action need not remain on the two signed rays.
+
+Common-geometric exact centers now have a complete local classifier. A denominator-center state
+`B/qⁿ` maps to `B/q²ⁿ`; a consecutive center chain therefore uses exponents `n,2n,4n,…` and
+reaches the terminal coordinate `Aqʰ` only when `A/B=q^(−h−2ᵏn)`, already a one-return
+resonance. The zero critical residue is also excluded from every mortal fraction in a fixed-ray
+quotient where the numerator and denominator are not both zero: the residue forces `A=0`, while
+mortality forces `B=A`. Nonzero residue transitions and center re-entry remain open.
 
 The common-geometric-base hypothesis cannot be weakened to total divisibility of an arbitrary
 scale alphabet. Lean checks that `[3,15,3,3,15,3,3,3]` is pairwise totally ordered under
@@ -1727,6 +1734,7 @@ fixed-rank decision problem.
 | `ReturnSquareComposite.lean` | arbitrary-base root support, positive-valuation synchronization, and the divisibility-chain fracture |
 | `ReturnSquareFractionPullback.lean` | full fraction pullback, denominator-prime shell grammar, and exact four-wall residue laws |
 | `ReturnSquareFractionFiniteWall.lean` | denominator-cleared fractional cuts and fixed/signed cyclotomic finite walls |
+| `ReturnSquareGeometricCenter.lean` | exact geometric center-chain exponents and critical zero-residue exclusion |
 | `ReturnSquareTax.lean` | exact four-state lower bound for literal reversible-stack returns |
 | `ReturnSquareNoGo.lean` | quadratic-pencil reversible-squaring obstruction and blind-scaling collapse |
 | `ReturnJordan.lean` | parity-Jordan rail rigidity and modular immortality certificate |
@@ -1953,6 +1961,7 @@ fixed-rank decision problem.
 | Every positive valuation of a composite-base ReturnSquare bridge zero equals the corresponding base valuation times one common proper-tail exponent | `ReturnSquare.positiveBridge_zero_positive_valuation_eq_tail`, `ReturnSquare.positiveBridge_zero_positive_valuations_cross_mul` |
 | Every denominator-prime valuation wall has one exact normalized residue transition; arbitrary even scales realize the numerator and critical walls in one nonresonant zero | `ReturnSquare.fractionPredecessor_hasValue_of_numerator_wall`, `ReturnSquare.fractionPredecessor_hasValue_of_equalScale_residue`, `ReturnSquare.fractionPredecessor_hasValue_of_denominatorScale_residue`, `ReturnSquare.fractionPredecessor_hasValue_of_critical_scale_wall`, `ReturnSquare.evenScales_threeFourths_wall_fracture` |
 | Every mortal fraction reduces to `1` where the base reduces to `1`, and to `±1` where the base reduces to `−1` | `ReturnSquare.isMortal_forces_fraction_modEq_one`, `ReturnSquare.isMortal_forces_fraction_modEq_neg_one` |
+| Consecutive exact geometric denominator centers double their exponent into a one-return resonance; a reduced fixed-ray quotient excludes the zero critical residue | `ReturnSquare.fractionPredecessorChain_centerScales_terminal_ratio`, `ReturnSquare.fractionCriticalResidue_geometric_ne_zero_of_mortal` |
 | Total divisibility of an arbitrary scale alphabet does not force ReturnSquare resonance-only roots | `ReturnSquare.divisibilityChain_twentyFive_twentySeven_zero` |
 | Literal reversible-stack returns require at least four exact states | `ReturnSquareTax.reversibleStack_card_lower_bound` |
 | Three singular quadratic modes cannot exchange `t` with `κt²` | `ReturnSquareNoGo.threeMode_swap_eq_zero` |
