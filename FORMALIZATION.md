@@ -1224,6 +1224,12 @@ nonidentity target stabilizer, while a trivial target stabilizer forces height a
 that window. The bound deliberately counts nonprimitive, zero, and opposite-sign pairs; it is a
 uniform containing bound, not a sharp ray count.
 
+[`D2-O11`](SALVAGE.md#d2-o11-bounded-branch-nonreachability-certificate) composes that collision
+with the unique-coset source invariant. A nonidentity target stabilizer conjugates through any
+hypothetical source-to-target transporter to a nonidentity source stabilizer. Hence, under trivial
+source stabilizer, a bounded window directly certifies nonreachability. Every window of the
+explicit length therefore either escapes above `H` or proves that no transporter exists.
+
 Lean checks the internal algebra at the positive boundary: three positive letters surject onto
 the binary free group; quotient-blind boundaries accepting `g` and `g²` admit a nonempty identity
 witness; every injective transition on a finite invariant semantic fibre pumps an identity loop;
@@ -1726,7 +1732,7 @@ fixed-rank decision problem.
 | `CongruenceBlindOrbit.lean` | free rational shear orbit, trivial source stabilizer, projective all-modulus CRT closure, and a whole-matrix congruence ghost away from nineteen |
 | `ShearEuclidean.lean` | Euclidean chamber growth, determinant-one coprimality, and finite projective syntax bounds for the fixed step-three shear orbit |
 | `TransverseDilationOrbit.lean` | free diagonal--parabolic ping-pong, positive target stabilizer, promised-empty coset, and exact primitive-height inverse cycle |
-| `InverseOrbitRecurrence.lean` | exact integer-box cardinality, the finite bounded-prefix stabilizer horizon, and unbounded escape under trivial target stabilizer |
+| `InverseOrbitRecurrence.lean` | exact integer-box cardinality, finite bounded-prefix stabilizer and nonreachability certificates, and unbounded escape under trivial target stabilizer |
 | `AffineGroupOrbit.lean` | translation-kernel quotient and trivial-kernel fixed-point structure for rational affine groups |
 | `PadicValuation.lean` | nonzero rational p-adic shells, unequal-valuation calculus, and the adjacent-unit odd-prime obstruction |
 | `PeriodicShell.lean` | exact affine schedule composition, rational all-unit periodic cycles, and the published nonfree benchmark relation |
@@ -1947,6 +1953,7 @@ fixed-rank decision problem.
 | Chamber-directed inverse stripping follows the exact projective cycle `[3:5]→3→[3:5]` on coprime pairs of heights `5→3→5` | `TransverseDilationOrbit.targetPoint_mem_transverseChamber`, `TransverseDilationOrbit.inverseReduction_period_two`, `TransverseDilationOrbit.returnPoint_mem_dilationChamber`, `TransverseDilationOrbit.recurrentPairs_coprime`, `TransverseDilationOrbit.inverseReduction_height_cycle` |
 | Every bounded primitive-height orbit of pairwise distinct group prefixes contains a nonidentity quotient fixing the target; trivial target stabilizer therefore forces unbounded height | `InverseOrbitRecurrence.primitivePairBox_finite`, `InverseOrbitRecurrence.exists_nontrivial_stabilizer_of_orbit_collision`, `InverseOrbitRecurrence.exists_nontrivial_stabilizer_of_bounded_primitive_orbit`, `InverseOrbitRecurrence.primitiveHeight_unbounded_of_stabilizer_trivial` |
 | Among `(2H+1)²+1` distinct prefixes, primitive height at most `H` forces a nonidentity target stabilizer; a trivial stabilizer forces finite-window escape above `H` | `InverseOrbitRecurrence.integralPairCube_card`, `InverseOrbitRecurrence.mem_integralPairCube_of_pairHeight_le`, `InverseOrbitRecurrence.exists_nontrivial_stabilizer_of_bounded_prefix_window`, `InverseOrbitRecurrence.bounded_prefix_window_escape_of_stabilizer_trivial` |
+| Under trivial source stabilizer, a nonidentity target stabilizer forbids every transporter; a finite prefix window either escapes above `H` or certifies target nonreachability | `InverseOrbitRecurrence.target_unreachable_of_source_stabilizer_trivial`, `InverseOrbitRecurrence.target_unreachable_of_bounded_prefix_window`, `InverseOrbitRecurrence.height_escape_or_target_unreachable` |
 | Rational affine group hits are exact modulo the translation kernel; a trivial kernel forces one common fixed point | `AffineGroupOrbit.exists_exact_hit_iff_exists_hit_mod_translationKernel`, `AffineGroupOrbit.commute_of_translationKernel_eq_bot`, `AffineGroupOrbit.act_fixedPoint_of_translationKernel_eq_bot` |
 | The raw mixed-prime affine action has a published relation at length 27, an infinite distinct equal-map family at every odd length from 29, and three independent relations at length 30 | `MixedPrimeKernel.cassaigne_ne`, `MixedPrimeKernel.wordAction_cassaigne`, `MixedPrimeKernel.kernelOddFamily_length`, `MixedPrimeKernel.kernelOddFamily_ne`, `MixedPrimeKernel.wordAction_kernelOddFamily`, `MixedPrimeKernel.kernel30_ne`, `MixedPrimeKernel.wordAction_kernel30a`, `MixedPrimeKernel.wordAction_kernel30b`, `MixedPrimeKernel.wordAction_kernel30c` |
 | Every odd-family relation is an exact homogeneous matrix relation preserved by arbitrary independent generator scaling, so nonzero unit normalization cannot restore freeness | `MixedPrimeNormalization.kernelOddFamily_count`, `MixedPrimeNormalization.kernelOddFamily_perm`, `MixedPrimeNormalization.scaledAffineGenerator_isUnit`, `MixedPrimeNormalization.wordProduct_scaledAffineGenerator_kernelOddFamily`, `MixedPrimeNormalization.scaledAffineGenerator_not_injective` |
