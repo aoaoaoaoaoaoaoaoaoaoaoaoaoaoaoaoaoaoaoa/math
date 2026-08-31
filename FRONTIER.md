@@ -1007,14 +1007,24 @@ For `D_c^(β+1)`, the exact codes `V_m=3ρ−1` and `2P_m=9ρ²+ρ−2`, togethe
 incoming bound `q<1`, force `Δ>12`. Either singleton target forces `Δ<12`. The sole first
 multi-transfer survivor is therefore `D_c²→multi`.
 
-The remaining carrier is not yet the integral raw-fringe state consumed by the positive
-depth-one classifier: its discrepancy
-`(14ρ−1)/3−8Hq/(3(ρ−2))` is generally rational and depends on the preceding punctuated upper
-cylinder. A lawful splice requires a new physical ancestry theorem supplying an integral
-digit-code difference and common-suffix factorization; the pole shell alone does neither.
+[`MM-S51`](SALVAGE.md#mm-s51-double-deletion-ratio-chamber-extinction) kills that final
+survivor without an integral fringe splice. The exact `D_c²` discrepancy and the full incoming
+upper cylinder force any following physical pole to have target ratio
 
-The immediate ternary question is which other positive valuation-one discrepancies survive its
-suffix sieve without already certifying source halting.
+```text
+2/3 < V_t/P_t < 3/4.
+```
+
+No physical role block emitted against a body beginning in `b` occupies this chamber. Generic
+nonzero-ternary bounds reduce a hypothetical target to two adjacent word-length cases; the
+leading swapped prefixes exclude each case, with exact induction through an initial `D_c` run.
+Thus `firstMultiTransfer_pole_false` empties the expected-shell first multi-transfer interface
+for `β≥6`.
+
+The remaining ternary obligation is the **global earliest-pole reduction**: prove that every
+arbitrary surviving swapped product not already removed by the distinguished-boundary theorems
+enters this expected-shell first-multi interface, or classify the missing initial/shell
+constructor. `MM-S51` does not by itself prove projective avoidance.
 Exact bidirectional diagnostics for the ternary swap at `β=3`, body `bbcc`, exclude every
 false-pole word of at most six projective blocks when each regular block has
 role length at most three; this is computational evidence only.

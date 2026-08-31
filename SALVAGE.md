@@ -133,6 +133,7 @@ file owns the mathematical stock.
 | [`MM-S38`](#mm-s38-two-c-singleton-b-extinction) | obstruction | the two-`c`, singleton-`D_b`, singleton-target branch of the swapped-ternary first multi-transfer gate is empty | formalized | active |
 | [`MM-S44`](#mm-s44-compiler-envelope-rule-bearing-extinction) | obstruction | compiler-emitted bodies exclude every rule-bearing phase of the two surviving all-`c` first multi-transfer shapes | formalized | active |
 | [`MM-S50`](#mm-s50-long-all-erasure-singleton-extinction) | obstruction | the long literal `D_c^(β+1)` middle has discrepancy above twelve, beyond both singleton pole values | formalized | active |
+| [`MM-S51`](#mm-s51-double-deletion-ratio-chamber-extinction) | obstruction | the literal `D_c²` middle forces a target code ratio in an open chamber containing no physical swapped role block | formalized | active |
 | [`R32-S01`](#r32-s01-split-return-normal-form) | structure theorem | rank-two cuts reduce one-unit binary mortality to a `2 × 2` return recurrence | formalized | graduated |
 | [`R32-S02`](#r32-s02-two-plane-edge-square) | structure theorem | two rank-two generators are a two-vertex square of `2 × 2` edges | formalized | graduated |
 | [`R32-O01`](#r32-o01-rank-one-profile-collapse) | obstruction | a rank-one generator reduces mortality to order-at-most-three scalar recurrence zeros | audited | stock |
@@ -4634,12 +4635,12 @@ middle = D_c²,       target depth 1.                     (4)
 
 **Scope:** this is a swapped-ternary `MM-M04` theorem. It is uniform in the compiler body and
 the first role block, but assumes the centered first-transfer state and expected pole shells
-used by `MM-S35`. Equation (4) is necessary, not a reachable witness. It neither applies to the
-decimal setter nor decides later carrier histories.
+used by `MM-S35`. Equation (4) is necessary, not a reachable witness, and is subsequently
+excluded by [`MM-S51`](#mm-s51-double-deletion-ratio-chamber-extinction). This theorem neither
+applies to the decimal setter nor decides products outside the first-multi interface.
 
-**Use:** remove the singleton-target fork from the first multi-transfer search. The sole live
-branch is `D_c²→multi`, whose normalized discrepancy is generally rational; importing the
-integral raw-fringe classifier requires a new carrier-to-fringe ancestry theorem.
+**Use:** remove the singleton-target fork and hand the sole rational survivor `D_c²→multi` to
+the direct target-ratio chamber of `MM-S51`.
 
 **Formalization:**
 [`MatrixMortality/SwappedSetterAllErasure.lean`](MatrixMortality/SwappedSetterAllErasure.lean),
@@ -4649,9 +4650,79 @@ through `allDeletionC_long_transferDiscrepancy`, `longDeletion_avoids_singleton_
 **Artifact:**
 [`audits/m53-long-all-erasure-singleton-extinction-2026-08-31.md`](audits/m53-long-all-erasure-singleton-extinction-2026-08-31.md).
 
-**Next:** decide `D_c²→multi` by retaining the preceding carrier's exact rational cylinder and
-the target block's full upper/lower ratio; do not apply the integral raw-fringe classifier
-without proving the missing ancestry interface.
+**Next:** [`MM-S51`](#mm-s51-double-deletion-ratio-chamber-extinction) kills `D_c²→multi`
+directly from its rational cylinder and the target block's full upper/lower ratio.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S51: Double-deletion ratio-chamber extinction
+
+**Kind:** obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+The sole survivor of [`MM-S50`](#mm-s50-long-all-erasure-singleton-extinction) is the literal
+middle block `D_c²`. Put `ρ=3^β`, `μ=2ρ−1`, `H=5ρ−1`, and `D=ρ−2`. If the preceding
+punctuated upper carrier has mismatch `q`, its exact transfer discrepancy is
+
+```text
+Δ=(14ρ−1)/3 − 8Hq/(3D).                                (1)
+```
+
+The complete incoming cylinder gives `−1/(2ρ)<q<1`. For `β≥6`, direct shifted-polynomial
+inequalities sharpen (1) to
+
+```text
+6Hμ/(3D+2H) < Δ < 9Hμ/(4D+3H).                         (2)
+```
+
+Any following physical target pole satisfies
+
+```text
+ΔDP_t=H(3μ−Δ)V_t.                                      (3)
+```
+
+The ordinary pole interval makes every denominator in (2) and (3) positive. Cross-multiplying
+shows that (2) and (3) are exactly the target-ratio chamber
+
+```text
+2/3 < V_t/P_t < 3/4.                                   (4)
+```
+
+No physical swapped Neary role block emitted against a body beginning in `b` satisfies (4).
+Let `N` be the punctuated upper-word length and `M` the lower-word length. The nonzero ternary
+bounds `3^(n−1)≤code(word)<3^n` and (4) force `M=N` or `M+1=N`. If `M=N`, an erasure begins
+with lower digit `2` against upper digit `1`; `R_b` has lower/upper prefixes `112/122`; and
+`R_c` has prefixes `112/11`. Each gives `3P_t<4V_t`, contradicting (4). If `M+1=N`, every
+non-`D_c` head gives `3V_t<2P_t` from the prefixes `12` or `11/112`. A leading `D_c` cancels
+exactly in this comparison and is stripped inductively; the final-erasure base cannot have
+adjacent lengths because the punctuated upper word retains the marker.
+
+`doubleDeletion_avoids_role_pole` combines (2)-(4). `firstMultiTransfer_pole_false` composes
+it with `MM-S50`, proving that the complete expected-shell first multi-transfer interface is
+empty under the compiler envelope.
+
+**Scope:** this is a swapped-ternary `MM-M04` theorem. The discrepancy chamber requires
+`β≥6`; the physical ratio gap itself needs only `β≥2` and `head(body)=b`. The composed theorem
+retains every expected coefficient shell, lower-code unit, and centered first-transfer
+hypothesis of `MM-S35`. It does not classify arbitrary products outside that interface and does
+not by itself decide `M₅(3)`.
+
+**Use:** delete the last local branch of the first swapped multi-transfer search. The master
+frontier moves to the global earliest-pole reduction: every arbitrary survivor must be shown to
+enter this interface, or the missing initial/shell constructor must be isolated.
+
+**Formalization:**
+[`MatrixMortality/SwappedSetterDoubleDeletion.lean`](MatrixMortality/SwappedSetterDoubleDeletion.lean),
+through `allDeletionC_double_transferDiscrepancy`, `doubleDeletion_pole_targetRatio`,
+`roleBlock_avoids_middle_ratio`, and `firstMultiTransfer_pole_false`.
+
+**Artifact:**
+[`audits/m53-double-deletion-ratio-chamber-extinction-2026-08-31.md`](audits/m53-double-deletion-ratio-chamber-extinction-2026-08-31.md).
+
+**Next:** prove the global earliest-pole reduction from an arbitrary swapped product to the
+distinguished-boundary theorems or the now-empty expected-shell first-multi interface.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
