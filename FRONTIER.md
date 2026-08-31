@@ -1112,6 +1112,16 @@ non-singleton first block from the distinguished decimal raw head contains at le
 tile. This conclusion remains raw-head-specific: later generalized carriers retain the
 `m≥3` multi corridor and the reachable `m≥β+3` multi-to-singleton question.
 
+[`MM-S54`](SALVAGE.md#mm-s54-rightmost-rule-phase-toggle-trichotomy) now fractures the surviving
+rule-bearing raw-entry grammar at its rightmost rule. Its phase-erased companion has identical
+upper spelling, and the lower perturbation is `10^sK` after an erasure tail of width `s`. The
+three prefix classes `|u|=0`, `|u|=1`, and `|u|≥2` force respectively `K≡550,480,780
+(mod 1000)`, giving exact outer shells `(s+1,s+2)` and `(s+2,s+1)` and exact middle
+five-depth `s+1`. The first class kills every `R_cD_c^s`, `s≥1`, because its perturbation is
+deeper than the prospective `(s,s)` pole and would make the forbidden all-erasure companion
+share that shell. The live raw-entry grammar now begins with a later rightmost rule or contains
+`b`; those branches must meet the displayed off-diagonal companion resonances.
+
 The ternary and decimal branches now separate at their first multi-transfer front.
 [`MM-S37`](SALVAGE.md#mm-s37-decimal-three-shape-frontier-extinction) substitutes each of the
 three role shapes left by the swapped ternary gate into the decimal carrier equation. All are

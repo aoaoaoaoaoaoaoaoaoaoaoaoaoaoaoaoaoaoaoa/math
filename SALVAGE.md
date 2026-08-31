@@ -151,6 +151,7 @@ file owns the mathematical stock.
 | [`MM-S52`](#mm-s52-double-deletion-raw-ancestry-obstruction) | structure theorem and obstruction | an integral post-`D_c²` normalization forces a fixed divisibility, while the locally physical repeated-`D_c²` recurrence violates it | formalized | active |
 | [`MM-S51`](#mm-s51-double-deletion-ratio-chamber-extinction) | obstruction | the literal `D_c²` middle forces a target code ratio in an open chamber containing no physical swapped role block | formalized | active |
 | [`MM-S53`](#mm-s53-complete-all-erasure-first-entry-extinction) | obstruction | every non-singleton all-erasure first block misses the next multi-role pole from a lawful two-`c` raw head | formalized | active |
+| [`MM-S54`](#mm-s54-rightmost-rule-phase-toggle-trichotomy) | structure theorem and obstruction | the rightmost rule has one of three exact phase-toggle depth profiles, and a leading `R_cD_c⁺` first block is impossible | formalized | active |
 | [`R32-S01`](#r32-s01-split-return-normal-form) | structure theorem | rank-two cuts reduce one-unit binary mortality to a `2 × 2` return recurrence | formalized | graduated |
 | [`R32-S02`](#r32-s02-two-plane-edge-square) | structure theorem | two rank-two generators are a two-vertex square of `2 × 2` edges | formalized | graduated |
 | [`R32-O01`](#r32-o01-rank-one-profile-collapse) | obstruction | a rank-one generator reduces mortality to order-at-most-three scalar recurrence zeros | audited | stock |
@@ -5819,6 +5820,72 @@ through `poleCongruence_four_fringe_pairs`, `positiveDepthOnePoleWitness_halts`,
 [`audits/m53-swapped-positive-depth-one-extinction-2026-08-31.md`](audits/m53-swapped-positive-depth-one-extinction-2026-08-31.md).
 
 **Next:** assemble the analogous witness from the first surviving multi-transfer carriers.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S54: Rightmost-rule phase-toggle trichotomy
+
+**Kind:** structure theorem and obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+Write a rule-bearing role word at its unique rightmost rule as
+
+```text
+w=u R_x D(t),             |t|=s,
+```
+
+where `D(t)` erases every tag letter in `t`. Let `ε(w)` erase every phase in `w` while retaining
+the same tag letters. The upper spellings of `w` and `ε(w)` agree exactly. Their lower-code
+difference factors as
+
+```text
+V(w)−V(ε(w))=10^s K.                                  (1)
+```
+
+Only the number of roles before the rightmost rule controls the decisive suffix of `K`:
+
+```text
+|u|=0:   K≡550 (mod 1000),   shell(ΔV)=(s+1,s+2),
+|u|=1:   K≡480 (mod 1000),   ν₅(ΔV)=s+1,  2^(s+3)∣ΔV,
+|u|≥2:   K≡780 (mod 1000),   shell(ΔV)=(s+2,s+1).       (2)
+```
+
+For the raw residual `R(V)=H(EP+GV)−10μGV`, the upper code cancels and
+
+```text
+R(V₁)−R(V₂)=G(H−10μ)(V₁−V₂).                          (3)
+```
+
+Both `G` and `H−10μ` are decimal units under the physical calibration, so (2) passes unchanged
+to the residual difference. If the perturbation is deeper than a prospective equal shell, the
+phase-erased companion inherits that shell; if it is shallower at both primes, the companion
+inherits the perturbation shell.
+
+For `w=R_cD_c^s` with `s≥1`, the target depth is exactly `s`, while (2) puts the perturbation in
+shell `(s+1,s+2)`. Hence `ε(w)=D_c^(s+1)` would have the same target shell, contradicting
+[`MM-S53`](#mm-s53-complete-all-erasure-first-entry-extinction). Every such leading-rule family
+is therefore empty.
+
+**Scope:** the trichotomy covers every rightmost rule and arbitrary earlier phases. The global
+extinction corollary presently covers the leading `R_c` followed only by `D_c`. A rightmost rule
+in position two or later, any `b` tag, generalized carriers, and singleton targets remain open.
+
+**Use:** replace the undifferentiated rule-bearing raw-entry language by three phase-toggle
+classes. Search may delete `R_cD_c⁺` outright and must enforce the off-diagonal companion depths
+in (2) on every remaining branch.
+
+**Formalization:**
+[`MatrixMortality/DecimalSetterPhase.lean`](MatrixMortality/DecimalSetterPhase.lean), through
+`spell_erasePhase_upper`, `rightmostRuleLowerCode_sub_eq`, the three shell theorems,
+`peeledNumerator_sameUpper_sub`, and `leadingRuleC_rawHead_multi_shell_impossible`.
+
+**Artifact:**
+[`audits/m53-decimal-rightmost-rule-phase-toggle-2026-08-31.md`](audits/m53-decimal-rightmost-rule-phase-toggle-2026-08-31.md).
+
+**Next:** resolve the position-two and position-three boundary resonances, then impose the
+off-diagonal companion shell on later rules and `b`-bearing words.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
