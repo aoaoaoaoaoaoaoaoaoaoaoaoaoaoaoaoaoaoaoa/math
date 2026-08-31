@@ -2234,6 +2234,61 @@
 'MatrixMortality.TransverseDilationOrbit.inverseReduction_height_cycle' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.TransverseDilationOrbit.nontrivial_maps_base_into_chamber' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseDilationOrbit.base_stabilizer_trivial' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseDilationOrbit.falseRayTargetMatrix_det' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseDilationOrbit.falseRayAnchor_outside_chambers' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseDilationOrbit.falseRayAnchor_stabilizer_trivial' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseDilationOrbit.falseRayAnchor_not_reachable' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseDilationOrbit.representation_pureDilationWord' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseDilationOrbit.inverseDilation_anchor' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseDilationOrbit.forwardDilation_target' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseDilationOrbit.falseRayTarget_not_reachable' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseDilationOrbit.falseRayTargetUnit_smul_source' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseDilationOrbit.representation_ne_falseRayTarget_mul_stabilizer' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseDilationOrbit.falseRayTarget_stabilizer_trivial' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseDilationOrbit.falseRayPrefix_realizes' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseDilationOrbit.falseRayPrefix_injective' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseDilationOrbit.falseRayPair_projectivizes' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseDilationOrbit.falseRayPrefix_realizes_primitive' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseDilationOrbit.falseRayPair_height' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.TransverseDilationOrbit.falseRayPair_height_tendsto_atTop' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.InverseOrbitRecurrence.integralPairBox_finite' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
