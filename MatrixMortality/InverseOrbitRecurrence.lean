@@ -11,7 +11,8 @@ target stabilizer.  Consequently every infinite inverse normal-form path at a
 target with trivial stabilizer has unbounded primitive height.  The explicit
 integer cube sharpens this to a finite escape horizon: among
 `(2 * H + 1) ^ 2 + 1` distinct prefixes, either some state has height above
-`H` or two states expose a nontrivial target stabilizer.
+`H` or two states expose a nontrivial target stabilizer.  When the source
+stabilizer is trivial, the latter is a finite nonreachability certificate.
 -/
 
 set_option autoImplicit false
@@ -116,6 +117,35 @@ theorem exists_nontrivial_stabilizer_of_orbit_collision
       _ = right := by rw [quotient_one]; simp
   · rw [mul_smul, collision, inv_smul_smul]
 
+/-- A nonidentity target stabilizer forbids every source-to-target transporter
+when the source stabilizer is trivial. -/
+theorem target_unreachable_of_source_stabilizer_trivial
+    {G X : Type*} [Group G] [MulAction G X]
+    (source target : X)
+    (source_stabilizer_trivial :
+      ∀ element : G, element • source = source → element = 1)
+    {targetStabilizer : G} (targetStabilizer_ne : targetStabilizer ≠ 1)
+    (target_fixed : targetStabilizer • target = target) :
+    ∀ transporter : G, transporter • source ≠ target := by
+  intro transporter reaches
+  have conjugate_fixed :
+      (transporter⁻¹ * targetStabilizer * transporter) • source = source := by
+    calc
+      (transporter⁻¹ * targetStabilizer * transporter) • source =
+          transporter⁻¹ • targetStabilizer • transporter • source := by
+            simp only [mul_smul]
+      _ = transporter⁻¹ • targetStabilizer • target := by rw [reaches]
+      _ = transporter⁻¹ • target := by rw [target_fixed]
+      _ = source := by rw [← reaches, inv_smul_smul]
+  have conjugate_one : transporter⁻¹ * targetStabilizer * transporter = 1 :=
+    source_stabilizer_trivial _ conjugate_fixed
+  have targetStabilizer_one : targetStabilizer = 1 := by
+    calc
+      targetStabilizer = transporter *
+          (transporter⁻¹ * targetStabilizer * transporter) * transporter⁻¹ := by group
+      _ = 1 := by rw [conjugate_one]; simp
+  exact targetStabilizer_ne targetStabilizer_one
+
 /-- Infinitely many distinct orbit prefixes represented inside one bounded
 primitive-height box force a nontrivial target stabilizer. -/
 theorem exists_nontrivial_stabilizer_of_bounded_primitive_orbit
@@ -208,5 +238,43 @@ theorem bounded_prefix_window_escape_of_stabilizer_trivial
     exists_nontrivial_stabilizer_of_bounded_prefix_window target bound orbitPrefix
       orbitPrefix_injective state realizes no_escape
   exact stabilizer_ne (stabilizer_trivial stabilizer fixed)
+
+/-- With trivial source stabilizer, a bounded finite prefix window is already
+a certificate that the target is unreachable from the source. -/
+theorem target_unreachable_of_bounded_prefix_window
+    {G : Type*} [Group G] [MulAction G (ProjectiveLine.Point ℚ)]
+    (source target : ProjectiveLine.Point ℚ) (bound : ℕ)
+    (source_stabilizer_trivial :
+      ∀ element : G, element • source = source → element = 1)
+    (orbitPrefix : Fin ((2 * bound + 1) ^ 2 + 1) → G)
+    (orbitPrefix_injective : Function.Injective orbitPrefix)
+    (state : Fin ((2 * bound + 1) ^ 2 + 1) → PrimitivePair)
+    (realizes : ∀ index, orbitPrefix index • target = primitivePoint (state index))
+    (bounded : ∀ index, primitiveHeight (state index) ≤ bound) :
+    ∀ transporter : G, transporter • source ≠ target := by
+  obtain ⟨targetStabilizer, targetStabilizer_ne, target_fixed⟩ :=
+    exists_nontrivial_stabilizer_of_bounded_prefix_window target bound orbitPrefix
+      orbitPrefix_injective state realizes bounded
+  exact target_unreachable_of_source_stabilizer_trivial source target
+    source_stabilizer_trivial targetStabilizer_ne target_fixed
+
+/-- Every finite prefix window of the explicit length either escapes above the
+height ceiling or certifies source-to-target nonreachability. -/
+theorem height_escape_or_target_unreachable
+    {G : Type*} [Group G] [MulAction G (ProjectiveLine.Point ℚ)]
+    (source target : ProjectiveLine.Point ℚ) (bound : ℕ)
+    (source_stabilizer_trivial :
+      ∀ element : G, element • source = source → element = 1)
+    (orbitPrefix : Fin ((2 * bound + 1) ^ 2 + 1) → G)
+    (orbitPrefix_injective : Function.Injective orbitPrefix)
+    (state : Fin ((2 * bound + 1) ^ 2 + 1) → PrimitivePair)
+    (realizes : ∀ index, orbitPrefix index • target = primitivePoint (state index)) :
+    (∃ index, bound < primitiveHeight (state index)) ∨
+      ∀ transporter : G, transporter • source ≠ target := by
+  by_cases bounded : ∀ index, primitiveHeight (state index) ≤ bound
+  · exact Or.inr <| target_unreachable_of_bounded_prefix_window source target bound
+      source_stabilizer_trivial orbitPrefix orbitPrefix_injective state realizes bounded
+  · push Not at bounded
+    exact Or.inl bounded
 
 end MatrixMortality.InverseOrbitRecurrence

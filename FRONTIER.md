@@ -1630,6 +1630,12 @@ bounded side. The explicit integer square contains `(2H+1)²` possible represent
 trivial-stabilizer target, every such finite window escapes above `H`; no separate bounded
 aperiodic branch remains.
 
+[`D2-O11`](SALVAGE.md#d2-o11-bounded-branch-nonreachability-certificate) converts the finite
+collision into the certificate needed by the unique-coset problem. Under trivial source
+stabilizer, any nonidentity target stabilizer forbids a source-to-target transporter by
+conjugation. Thus every explicit prefix window either escapes above `H` or certifies that the
+target is unreachable; target-stabilizer recognition is unnecessary on the bounded branch.
+
 The ordinary mortality lift is likewise no longer part of the paired obstruction. For arbitrary
 controls `H_a`, column `γ`, and row `λ` over a field, adjoining `γλ` gives mortality exactly when some
 `λH_yγ` vanishes. A zero product without the separator is already a scalar-zero witness; after
@@ -1748,7 +1754,8 @@ same height cannot simply be carried to a dilation--parabolic free product: a po
 stabilizer creates an exact inverse cycle even in a promised-empty coset. `D2-O06` proves that
 every bounded cycle of distinct normal-form prefixes has exactly this algebraic source; a
 trivial-stabilizer successor must escape to unbounded height. `D2-O10` gives the explicit escape
-horizon `(2H+1)²+1` for each proposed height ceiling `H`.
+horizon `(2H+1)²+1` for each proposed height ceiling `H`; `D2-O11` turns a collision inside that
+window directly into a nonreachability certificate under the promised trivial source stabilizer.
 
 #### Raceable leaves
 
@@ -1980,7 +1987,9 @@ inverse heights `5→3→5`. [`D2-O06`](SALVAGE.md#d2-o06-bounded-inverse-recurr
 shows that every bounded-height injective-prefix recurrence forces a nontrivial target stabilizer.
 [`D2-O10`](SALVAGE.md#d2-o10-finite-bounded-prefix-horizon) strengthens this to the explicit
 finite horizon `(2H+1)²+1`. Hence the next hard no-instance cannot combine trivial target
-stabilizer with bounded recurrence; unbounded-height paths remain undecided.
+stabilizer with bounded recurrence. `D2-O11` further decides any supplied bounded window under
+trivial source stabilizer by conjugating its collision witness. Unbounded-height paths remain
+undecided.
 
 Work on projective incidence should therefore be treated as a joint `M₃(2)`/`M₂(3)` campaign.
 A `GPI₂` algorithm decides all of `M₂(3)` and the rank-`(2,2)` artery of `M₃(2)`; a universal

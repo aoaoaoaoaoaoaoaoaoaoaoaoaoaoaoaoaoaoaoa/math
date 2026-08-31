@@ -327,6 +327,7 @@ file owns the mathematical stock.
 | [`D2-D10`](#d2-d10-real-trap-exterior) | decidable stratum | the mixed-prime shell has invariant real trap `[1/5,1/2]`; every exterior target imposes a computable translated-letter bound | formalized reduction; audited decision corollary | stock |
 | [`D2-O06`](#d2-o06-bounded-inverse-recurrence-forces-a-stabilizer) | structural obstruction | every infinite injective-prefix rational inverse orbit with bounded primitive height contains a nontrivial target-stabilizer segment | formalized | graduated |
 | [`D2-O10`](#d2-o10-finite-bounded-prefix-horizon) | quantitative structural reduction | `(2H+1)²+1` distinct prefixes bounded by primitive height `H` already expose a nontrivial target stabilizer | formalized | graduated |
+| [`D2-O11`](#d2-o11-bounded-branch-nonreachability-certificate) | finite nonreachability certificate | under trivial source stabilizer, a bounded prefix window exposes a target stabilizer and certifies that no transporter exists | formalized | graduated |
 | [`D2-M01`](#d2-m01-benchmark-critical-shell) | partial mechanism | the mixed-prime benchmark reduces generically to one guarded `5`-adic shell | audited | active |
 | [`D2-O01`](#d2-o01-canonical-collatz-reachability-is-not-automatic) | obstruction | full generalized-Collatz reachability is not synchronously recognizable in its canonical base | external theorem | active |
 | [`D2-O02`](#d2-o02-critical-shell-periodic-saturation) | obstruction and rewrite seed | every nonempty finite wait schedule has a rational all-unit cycle; normalized nonfreeness persists under every generator scaling, while its odd family is a two-seed cancellative pump and the positive finite basis is complete only through length 30 | formalized core; audited strengthening | active |
@@ -14060,6 +14061,51 @@ forced unbounded-height branch.
 [`InverseOrbitRecurrence.lean`](MatrixMortality/InverseOrbitRecurrence.lean)
 and
 [`m34-bounded-prefix-horizon-2026-08-31.md`](audits/m34-bounded-prefix-horizon-2026-08-31.md).
+
+### D2-O11: Bounded-branch nonreachability certificate
+
+**Kind:** finite nonreachability certificate
+
+**Evidence:** formalized
+
+**Disposition:** graduated
+
+Let a group `G` act on a set, with source `p` and target `q`. If `p` has
+trivial stabilizer and a nonidentity element `s` fixes `q`, then no `g∈G`
+sends `p` to `q`: otherwise `g⁻¹sg` would be a nonidentity stabilizer of `p`.
+
+Compose this conjugation certificate with `D2-O10`. Given
+`(2H+1)²+1` distinct prefixes acting on `q`, if all supplied primitive states
+have height at most `H`, their finite collision yields such an `s`, and `q`
+is unreachable from `p`. Without the boundedness premise, the same window has
+the exact dichotomy
+
+```text
+some state has height > H
+    or
+no group element sends p to q.
+```
+
+**Scope:** triviality is required at the source, not the target. The prefix
+family must be injective and must realize the displayed target-orbit states.
+The theorem neither constructs that normal form nor controls a branch after
+the height escape. It is a complete certificate for a supplied bounded window,
+not a decision theorem for general `UCB₂(S)`.
+
+**Use:** in the unique-Borel-coset artery, source freeness is already the
+promise-side invariant. A bounded inverse parser no longer needs a separate
+target-stabilizer decision procedure: its first repeated primitive state gives
+the target stabilizer and the conjugation argument immediately rejects the
+instance. Only the height-escaping branch survives.
+
+**Next promotion:** instantiate the finite dichotomy with a complete inverse
+normal form for a non-elementary `UCB₂(S)` family, then control the escaping
+branch by a secondary Archimedean or `S`-adic invariant.
+
+**Artifacts:**
+[`InverseOrbitRecurrence.lean`](MatrixMortality/InverseOrbitRecurrence.lean)
+and
+[`m34-bounded-branch-certificate-2026-08-31.md`](audits/m34-bounded-branch-certificate-2026-08-31.md).
 
 ### D2-M01: Benchmark critical shell
 
