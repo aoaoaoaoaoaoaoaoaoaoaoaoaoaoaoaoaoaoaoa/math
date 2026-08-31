@@ -5,11 +5,15 @@ import MatrixMortality.MixedPrimeExit
 
 Every shell block preserves `[1/5, 1/2]`. Outside this interval the zero-wait block is extremal,
 so any fixed exterior target imposes an explicit computable bound on the number of shell blocks.
+Inside, every rational unit target has guarded rational predecessors of every block length.
 -/
 
 namespace MatrixMortality.MixedPrimeDebt
 
+open PadicValuation
 open PeriodicShell
+
+private local instance : Fact (Nat.Prime 5) := ⟨by norm_num⟩
 
 private theorem shellRatio_pow_nonneg (wait : ℕ) :
     0 ≤ (2 / 3 : ℚ) ^ wait := by
@@ -275,5 +279,104 @@ theorem shellRun_below_one_fifth_length_lt_bound
     linarith
   exact length_lt_realTrapLengthBound sourceDistance_positive targetDistance_positive
     distance_bound
+
+/-- Every rational point in the half-open real trap has a one-block predecessor in the same
+trap. -/
+theorem exists_shellStep_realTrap_predecessor
+    {target : ℚ} (target_lower : 1 / 5 < target) (target_upper : target ≤ 1 / 2) :
+    ∃ wait state, state ∈ Set.Ioc (1 / 5 : ℚ) (1 / 2) ∧
+      shellStep wait state = target := by
+  let displacement := target - 1 / 5
+  let threshold := (10 / 3 : ℚ) * displacement
+  have displacement_positive : 0 < displacement := by
+    simp only [displacement]
+    linarith
+  have threshold_positive : 0 < threshold := by
+    simp only [threshold]
+    positivity
+  have threshold_le_one : threshold ≤ 1 := by
+    simp only [threshold, displacement]
+    linarith
+  obtain ⟨wait, next_power_lt, threshold_le_power⟩ :=
+    exists_nat_pow_near_of_lt_one threshold_positive threshold_le_one
+      (by norm_num : (0 : ℚ) < 2 / 3) (by norm_num)
+  let ratioPower := (2 / 3 : ℚ) ^ wait
+  let slope := (3 / 5 : ℚ) * ratioPower
+  let state := displacement / slope
+  have ratioPower_positive : 0 < ratioPower := by
+    simp only [ratioPower]
+    positivity
+  have slope_positive : 0 < slope := by
+    simp only [slope]
+    positivity
+  have lower_displacement : (3 / 25 : ℚ) * ratioPower < displacement := by
+    simp only [threshold] at next_power_lt
+    rw [pow_succ] at next_power_lt
+    nlinarith
+  have upper_displacement : displacement ≤ (3 / 10 : ℚ) * ratioPower := by
+    simp only [threshold] at threshold_le_power
+    linarith
+  have state_lower : (1 / 5 : ℚ) < state := by
+    change (1 / 5 : ℚ) < displacement / slope
+    rw [lt_div_iff₀ slope_positive]
+    simp only [slope]
+    linarith
+  have state_upper : state ≤ (1 / 2 : ℚ) := by
+    change displacement / slope ≤ (1 / 2 : ℚ)
+    rw [div_le_iff₀ slope_positive]
+    simp only [slope]
+    linarith
+  refine ⟨wait, state, ⟨state_lower, state_upper⟩, ?_⟩
+  simp only [state, slope, displacement, shellStep]
+  field_simp
+  ring
+
+/-- A five-adic unit target in the half-open real trap has a unit predecessor there. -/
+theorem exists_shellStep_realTrap_unit_predecessor
+    {target : ℚ} (target_lower : 1 / 5 < target) (target_upper : target ≤ 1 / 2)
+    (target_unit : IsUnit 5 target) :
+    ∃ wait state, state ∈ Set.Ioc (1 / 5 : ℚ) (1 / 2) ∧ IsUnit 5 state ∧
+      shellStep wait state = target := by
+  obtain ⟨wait, state, state_mem, step_eq⟩ :=
+    exists_shellStep_realTrap_predecessor target_lower target_upper
+  have output_unit : IsUnit 5 (shellRun [wait] state) := by
+    rw [shellRun_singleton, step_eq]
+    exact target_unit
+  have prefixes := (shellPrefixesUnit_iff [wait] state).2 output_unit
+  have state_unit : IsUnit 5 (shellRun [] state) := prefixes [] [wait] rfl
+  have run_nil : shellRun [] state = state := rfl
+  rw [run_nil] at state_unit
+  exact ⟨wait, state, state_mem, state_unit, step_eq⟩
+
+/-- Every five-adic unit target in the half-open real trap has guarded rational predecessor
+schedules of every prescribed block length. -/
+theorem exists_shellRun_realTrap_unit_predecessor_of_length
+    {target : ℚ} (target_lower : 1 / 5 < target) (target_upper : target ≤ 1 / 2)
+    (target_unit : IsUnit 5 target) (length : ℕ) :
+    ∃ source waits, waits.length = length ∧
+      source ∈ Set.Ioc (1 / 5 : ℚ) (1 / 2) ∧
+        (∀ front back, waits = front ++ back → IsUnit 5 (shellRun front source)) ∧
+        shellRun waits source = target := by
+  induction length generalizing target with
+  | zero =>
+      have output_unit : IsUnit 5 (shellRun [] target) := by
+        have run_nil : shellRun [] target = target := rfl
+        rw [run_nil]
+        exact target_unit
+      have guarded := (shellPrefixesUnit_iff [] target).2 output_unit
+      exact ⟨target, [], rfl, ⟨target_lower, target_upper⟩, guarded, rfl⟩
+  | succ length induction =>
+      obtain ⟨wait, middle, middle_mem, middle_unit, step_eq⟩ :=
+        exists_shellStep_realTrap_unit_predecessor target_lower target_upper target_unit
+      obtain ⟨source, waits, waits_length, source_mem, _, reaches_middle⟩ :=
+        induction middle_mem.1 middle_mem.2 middle_unit
+      have reaches_target : shellRun (waits ++ [wait]) source = target := by
+        rw [shellRun_append, reaches_middle, shellRun_singleton, step_eq]
+      have output_unit : IsUnit 5 (shellRun (waits ++ [wait]) source) := by
+        rw [reaches_target]
+        exact target_unit
+      have guarded := (shellPrefixesUnit_iff (waits ++ [wait]) source).2 output_unit
+      exact ⟨source, waits ++ [wait], by simp [waits_length], source_mem, guarded,
+        reaches_target⟩
 
 end MatrixMortality.MixedPrimeDebt

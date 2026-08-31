@@ -266,6 +266,7 @@ file owns the mathematical stock.
 | [`D2-O03`](#d2-o03-fixed-source-adjacent-saturation) | obstruction and fixed-source family | the source `43/24` supports infinitely many accepted chamber-contained adjacent collisions on the complementary target pole; the targets are distinct and membership in their ray is decidable | formalized | active |
 | [`D2-O04`](#d2-o04-forced-exit-surface) | obstruction and decidable continuation cone | every next block leaves the accepted `43/24` collision ray at valuation minus one; target valuation fixes every post-exit length, making the whole controlled cone decidable | formalized reduction; audited decision corollary | active |
 | [`D2-O05`](#d2-o05-universal-exit-suffix-collapse) | structure theorem and decidable suffix reduction | after any critical-shell exit, a fixed target permits at most two nonempty suffix lengths; the remaining master obstruction lies before or at the exit | formalized reduction; audited decision corollary | active |
+| [`D2-O06`](#d2-o06-real-trap-backward-saturation) | obstruction and backward saturation | every rational `5`-adic unit target in the real trap has guarded rational predecessor schedules of every block length, with the source allowed to vary | formalized | active |
 
 ## Frankl Conjecture
 
@@ -11267,3 +11268,59 @@ images; each image has a uniformly finite target-derived suffix query.
 automaton, or finite union of rational cones for the fixed-source pre-exit relation and its
 first-exit image inside `[1/5,1/2]`. The remaining infinite quantifier must be cut before the exit,
 not after it.
+
+### D2-O06: Real-trap backward saturation
+
+**Kind:** obstruction and backward saturation
+**Evidence:** formalized
+**Disposition:** active
+
+The invariant interval left by [`D2-D10`](#d2-d10-real-trap-exterior) is saturated in reverse.
+For a rational target
+
+```text
+1/5<y≤1/2,
+```
+
+put `δ=y−1/5`. Choose `m` so that
+
+```text
+(2/3)^(m+1)<(10/3)δ≤(2/3)^m
+```
+
+and set
+
+```text
+x=δ/((3/5)(2/3)^m).
+```
+
+The adjacent-power inequalities give `1/5<x≤1/2`, and direct substitution gives `T_m(x)=y`.
+Lean proves this for every rational `y` in the half-open trap. If `y` is a `5`-adic unit, reverse
+unitality makes `x` a unit as well. Iteration yields the exact saturation theorem
+
+```text
+∀n, ∃x,w, |w|=n,
+  1/5<x≤1/2, v₅(x)=0, and T_w(x)=y.
+```
+
+Since the excluded lower endpoint `1/5` is not a `5`-adic unit, this covers every guarded target
+in the closed real trap.
+
+**Scope:** the source depends on `n`. This kills target-only real or translated-count bounds, not
+reachability from one specified source. Together with the fixed-source varying-target family
+[`D2-O03`](#d2-o03-fixed-source-adjacent-saturation), it shows that neither endpoint alone can
+control witness length. It does not decide simultaneous fixed-source/fixed-target reachability or
+`M₂(3)`.
+
+**Artifact:** `MixedPrimeDebt.exists_shellStep_realTrap_predecessor`,
+`MixedPrimeDebt.exists_shellStep_realTrap_unit_predecessor`, and
+`MixedPrimeDebt.exists_shellRun_realTrap_unit_predecessor_of_length` in
+[`MixedPrimeRealTrap.lean`](MatrixMortality/MixedPrimeRealTrap.lean).
+
+**Use:** reject real contraction, target position, or target unitality as a source-independent
+bound inside the trap. The surviving invariant must couple the exact fixed source to the ordered
+arithmetic address.
+
+**Next:** characterize the intersection of one fixed-source forward orbit with the backward-
+saturated guarded trap. Candidate representations must retain `2`/`3` exponent order and the
+`5`-adic carry; one-sided endpoint invariants are saturated.
