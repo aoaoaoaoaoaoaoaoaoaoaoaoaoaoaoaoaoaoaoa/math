@@ -3364,6 +3364,15 @@ fixed-source query therefore reduces to depths `0`, `1`, or one of `2,…,11`, w
 rational mantissa left untouched. The live reverse tree is an unbounded mantissa address, not an
 unbounded target-depth counter. This is
 [`D2-S08`](SALVAGE.md#d2-s08-twelve-class-target-depth-collapse).
+The exact mantissa address has three interval-separated reverse candidates: `μ/2`, `μ/3`, and,
+above `μ=9/10`, `2μ/9`. Only the last branch resets to unbounded depth. For reduced unit
+`μ=a/b`, its centered numerator is `N=10a−9b`, and Lean proves
+`gcd(N,b)=gcd(2,b)`. The odd-denominator and four-divisible-denominator updates are rigid. Every
+remaining cancellation lies on the single wall `b=2c`, where
+`v₂(ν)=v₂(5a−9c)−(n−1)` at predecessor depth `n`; the three-adic update is exact as well. This
+is [`D2-S09`](SALVAGE.md#d2-s09-centered-lower-mantissa-recurrence). The next live arithmetic
+question is whether repeated visits to that centered wall force height descent or support an
+exact high-cancellation orbit.
 The deepest of those three branches is itself a full depth reset. In normalized band coordinates
 `U(d,μ)=1/5+(3/10)(2/3)^dμ`, every target band `d≥2` contains a point whose `d−2` predecessor has
 any prescribed band `n≥7` and mantissa in `(2/3,1]`. An explicit guarded subfamily fixes target

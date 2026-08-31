@@ -340,6 +340,7 @@ file owns the mathematical stock.
 | [`D2-S06`](#d2-s06-spectator-prime-denominator-skeleton) | structure theorem | every denominator exponent away from `2`, `3`, and `5` is invariant through shell prefixes and first exits | formalized | active |
 | [`D2-S07`](#d2-s07-period-ten-shell-guard) | structure theorem | the one-step shell guard has period ten, while a length-`ℓ` tail has sharp uniform precision exponent `ℓ+1` | formalized | active |
 | [`D2-S08`](#d2-s08-twelve-class-target-depth-collapse) | structure theorem | guarded nonempty real-trap reachability reduces to twelve canonical target-depth classes while preserving the exact mantissa | formalized | active |
+| [`D2-S09`](#d2-s09-centered-lower-mantissa-recurrence) | structure theorem | the exact reverse mantissa address has one centered lower branch whose sole secondary cancellation wall is `v₂(b)=1` | formalized | active |
 | [`D2-D01`](#d2-d01-projectively-unimodular-stratum) | decidable stratum | projectively unimodular hard-core instances are decidable | audited | stock |
 | [`D2-D02`](#d2-d02-invariant-pair-stratum) | decidable stratum | invariant projective pairs reduce to effective multiplicative-subgroup membership | audited | graduated |
 | [`D2-D03`](#d2-d03-common-multiplier-stratum) | decidable stratum | rational affine maps with one multiplier are decidable under regular control | reported | active |
@@ -16647,6 +16648,92 @@ obstructions; only exact mantissa dynamics can distinguish their deep targets af
 
 **Next:** classify the exact rational mantissa orbit at depths `0,…,11`, combining the spectator-
 prime denominator skeleton with the two pole branches near mantissas `2/3` and `9/10`.
+
+### D2-S09: Centered lower-mantissa recurrence
+
+**Kind:** structure theorem
+**Evidence:** formalized
+**Disposition:** active
+
+For a normalized target `U(d,μ)`, every predecessor in the real trap is exactly one of the
+following candidates:
+
+```text
+source       final wait       availability
+μ/2          d                always
+μ/3          d−1              d≥1
+2μ/9         d−2              d≥2 and μ>9/10.
+```
+
+The three sources occupy the disjoint intervals `(1/3,1/2]`, `(2/9,1/3]`, and
+`(1/5,2/9]`. Lean proves the converse as well: there is no fourth predecessor. This is the exact
+reverse recurrence left by [`D2-S08`](#d2-s08-twelve-class-target-depth-collapse).
+
+The lower branch is the only unbounded depth reset. Write the unit mantissa in lowest terms as
+`μ=a/b`, so `gcd(a,b)=1` and `5∤b`, and put
+
+```text
+N=10a−9b.
+```
+
+If the lower predecessor has normalized depth `n`, its exact new mantissa is
+
+```text
+ν = 3^(n−3) N / (2^(n−1)b).
+```
+
+All cancellation against the inherited denominator is explicit:
+
+```text
+gcd(N,b)=gcd(2,b).
+```
+
+Thus no spectator prime, factor of five, or hidden odd factor disappears. The two-adic cases are
+complete:
+
+```text
+b odd       ⇒ v₂(N)=0,
+4∣b         ⇒ v₂(N)=1,
+b=2c, c odd ⇒ N=2(5a−9c),
+               v₂(N)=1+v₂(5a−9c).
+```
+
+The exact normalized transition is
+
+```text
+v₂(ν)=v₂(N)−(n−1)−v₂(b),
+v₃(ν)=(n−3)+v₃(N)−v₃(b).
+```
+
+On the unique secondary wall `b=2c` this contracts to
+
+```text
+v₂(ν)=v₂(5a−9c)−(n−1).
+```
+
+Hence every anomalous cancellation is concentrated in one centered residual, rather than spread
+through the reverse tree.
+
+**Scope:** the record gives an exact address and valuation recurrence, not a finite orbit
+classifier. The upper and middle branches remain exact rational maps, and the centered residual
+on the lower wall can still have unbounded two-adic value. The formulas assume a reduced
+five-adic-unit mantissa when invoking the gcd statement.
+
+**Artifact:** `MixedPrimeDebt.shellStep_realTrapBandPoint_iff_three_predecessors`,
+`MixedPrimeDebt.lowerCenteredNumerator_gcd`, the three
+`lowerCenteredNumerator_twoValue_*` theorems,
+`MixedPrimeDebt.lowerNormalizedMantissa_twoValue`,
+`MixedPrimeDebt.lowerNormalizedMantissa_threeValue`, and
+`MixedPrimeDebt.lowerNormalizedMantissa_twoValue_of_exactlyOne_denominator` in
+[`MixedPrimeRealTrapMantissa.lean`](MatrixMortality/MixedPrimeRealTrapMantissa.lean).
+
+**Use:** split every reduced reverse state first by `v₂(b)=0`, `1`, or at least `2`. Only the
+middle case merits a centered-cancellation search; all other lower-branch valuation updates are
+rigid.
+
+**Next:** test strict odd-part or height descent across repeated secondary-wall lower branches.
+If it fails, isolate an explicit high-cancellation family before seeking a target-dependent
+finite quotient.
 
 ### D2-O09: Guarded real-pole reset
 
