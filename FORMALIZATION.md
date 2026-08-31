@@ -1337,6 +1337,18 @@ whose next carrier ratio equals the current ratio modulo `10^k`. The theorem ass
 residue self-loops only; it proves neither an exact rational cycle nor reachability from the
 distinguished entry.
 
+Record [`MM-O20`](SALVAGE.md#mm-o20-decimal-first-cylinder-collision) formalizes the first
+unbounded suffix interface and its failure of physical decoding. `inverseCarrier_sub_hasDecimalShell`
+proves exact one-step contraction; `BackwardBlock.pullbackWord_sub_hasDecimalShell` sums the
+depth gains over an arbitrary backward word. `inverseCarrier_mem_carrierCylinder` and
+`existsUnique_inverseCarrier_unit_iff_carrierCylinder` identify the local image, with its unique
+tail, with one exact joint `2`/`5` cylinder.
+`physicalCarrierCenter_sameUpper_sub_hasDecimalShell` reduces center separation to a lower-code
+discrepancy. Finally, `emittedHiddenBlocks_firstCylinder_collision` proves that the lawful blocks
+`R_bR_cD_b` and `D_bR_cD_b` have the same first cylinder under the actual decimal calibration
+and compiler body bounds. This kills first-cylinder itinerary decoding but does not identify
+their complete inverse branches.
+
 The dimension-two affine ledger has seven independently checked records:
 
 | Record | Formalization obligation |

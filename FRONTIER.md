@@ -798,8 +798,14 @@ residuals. Singleton targets remain separate. A fixed bounded suffix quotient ca
 global descent: [`MM-S21`](SALVAGE.md#mm-s21-bounded-decimal-suffix-cycles) proves that every
 emitted multi-role block has a compatible projective carrier self-loop modulo `10^k` for every
 fixed `k`. These are not exact rational cycles and need not be reachable from the distinguished
-entry. The live cut is therefore the intersection of the encoded-entry orbit with an unbounded
-inverse-limit suffix language, rather than acyclicity of another finite congruence graph.
+entry. [`MM-O20`](SALVAGE.md#mm-o20-decimal-first-cylinder-collision) now gives that unbounded
+language an exact metric: a backward word gains the sum of its shifts in both decimal
+valuations, and one block maps the unit domain onto one exact suffix cylinder. But first-cylinder
+decoding is not injective. The lawful blocks `R_bR_cD_b` and `D_bR_cD_b` have identical
+depth-`2β+3` cylinders for every compiler-emitted body; the long common lower suffix hides their
+first phase. The live cut is therefore the intersection of the encoded-entry orbit with complete
+composed inverse branches, or a proved reachability-sound quotient of those branches. Neither a
+fixed congruence graph nor the first unbounded cylinder retains enough information.
 
 The immediate ternary question is which other positive valuation-one discrepancies survive its
 suffix sieve without already certifying source halting.
