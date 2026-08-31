@@ -1263,6 +1263,14 @@ contains at most one whole plane in the `G3-O30` orbit. Every remaining depth co
 proper moving line section. The live problem is now the arithmetic of those lines and the
 complete malformed-word converse, not selecting an unbounded set of depths wholesale.
 
+[`G3-O32`](SALVAGE.md#g3-o32-terminal-point-incidence-dichotomy) computes that arithmetic for
+every fixed point. For arbitrary `λ=(a,b,c)`, `γ=(x,y,z)`, and `s∈ℚ`, the terminal scalar is
+`A−B2ⁿ−C3ⁿ`, with `A=a(x+sy)`, `B=bx`, and `C=cy`. A positive generalized-Vandermonde
+minor shows that three distinct zero depths force `A=B=C=0`. Thus a fixed point test accepts all
+depths or at most two. The bound is sharp, but there is no row-independent horizon:
+`(2ᴺ,1,0)` on `γ=e₁` accepts exactly depth `N`. The exact survivor is therefore source-computed
+delayed singleton or two-depth targeting, not richer zero arithmetic in one fixed point.
+
 [`G3-M02`](SALVAGE.md#g3-m02-square-root-punctuation-fracture) supplied a complete direct-mortality
 grammar. The source-uniform rational rank-two matrix `S` satisfies
 
@@ -1516,7 +1524,7 @@ or neutral word across the return, use an empty consume, or split recurrent outp
 | Lane | Available leverage | Decisive obstruction or obligation |
 | --- | --- | --- |
 | Common-kernel shuttle | The exact `bcbb` compiler moves its common data kernel out through the toggle and recovers it at the next data action | Uniformize this non-invariant shuttle in `(β,body)`; every toggle-invariant guard factors through the two-dimensional quotient |
-| Transverse-kernel terminal dynamics | `G3-O27/O29` reduce the involutive branch to the `M₂(3)` core; `G3-O30` gives an infinite nonprojective plane orbit; `G3-O31` permits at most one whole-plane depth per nonzero row | Exploit the moving proper line sections with an all-word converse, solve the joint dimension-two node, or use a full-rank data map |
+| Transverse-kernel terminal dynamics | `G3-O27/O29` reduce the involutive branch to the `M₂(3)` core; `G3-O30` gives an infinite nonprojective plane orbit; `G3-O31/O32` reduce fixed row-column incidence to all depths or at most two, with arbitrarily delayed singleton targets | Make source-computed isolated depths carry the paired language with an all-word converse, solve the joint dimension-two node, vary the terminal geometry, or use a full-rank data map |
 | Positive projective transition lower bound | Same-zero dimension three is point-line incidence in `P²`, and actual one-sided shifts retain finite rank/kernel/image data | Derive a uniform nonstationary or noncommuting shift incompatibility from an unbounded terminal section; static support rank, formal inverse completion, fixed equal-length return flowers, and unary consecutive-repeat escape are forbidden |
 | Global word-residual recoding | Longer noncommutative atoms can retain order while discarding the four additive role channels | Escape `G3-D05`: fixed-priority affine counters and all one-way reset/transfer/fanout cascades are decidable |
 | Head-separated three-schema source | `G3-C04` discharges every arbitrary-trace forcing obligation locally; `G3-O24` isolates the directed stable-cone alternative | Preserve an undecidable mixed or neutral word across returns, or realize zero-sensitive S5 GLB decoding after the `G3-O25` separator-rank fork; complete pure forks are decidable by `G3-D07` |
@@ -1547,7 +1555,9 @@ raceable leaves:
    genuinely two-dimensional dynamics under singular data plus projective involution are closed;
    general one-chart incidence cannot be declared decidable without resolving `M₂(3)`, and
    `G3-O31` forces the nonprojective branch to use proper moving line sections at all but one
-   depth.
+   depth, while `G3-O32` proves that every fixed point on those lines accepts all depths or at
+   most two. The live nonprojective leaf is source-computed delayed singleton or two-depth
+   targeting, broader terminal geometry, or a different orbit.
 3. **Positive projective transition obstruction.** Derive from a source-unbounded terminal
    section a finite shift incompatibility which no three-dimensional rational same-zero
    representation can realize for any combination of generator ranks and kernels. It must use
@@ -1649,7 +1659,9 @@ identity-toggle chart. `G3-O30` shows that non-scalar toggle powers genuinely ge
 many exact rank-two carriers even for a rational diagonal toggle; the missing step is one
 source-uniform terminal section and complete arbitrary-word converse. `G3-O31` proves that a
 nonzero row can contain at most one whole carrier, so that section must exploit the moving proper
-lines at every other depth. A full-rank data map remains the other escape.
+lines at every other depth. `G3-O32` further proves that each fixed row-column incidence accepts
+all depths or at most two, sharply; arbitrarily delayed singleton depths remain possible when the
+row depends on the target. A full-rank data map remains the other escape.
 A lower-bound attack must exclude both positive
 architectures through actual transition data. Backward cancellation, inverse cofinality, and
 static incidence cannot do so. Do not spend another attack on separator placement, fixed anchors,
