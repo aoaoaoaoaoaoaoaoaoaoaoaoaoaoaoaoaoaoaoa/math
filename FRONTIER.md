@@ -1224,6 +1224,12 @@ nonidentity element of the target stabilizer. Thus every free normal-form invers
 trivial-stabilizer target has unbounded height. The frontier splits into effective target-stabilizer
 recognition and control of the unbounded-height paths left after that component is removed.
 
+[`D2-O10`](SALVAGE.md#d2-o10-finite-bounded-prefix-horizon) makes that split effective on the
+bounded side. The explicit integer square contains `(2H+1)²` possible representatives, so
+`(2H+1)²+1` distinct prefixes bounded by height `H` already produce a stabilizer witness. At a
+trivial-stabilizer target, every such finite window escapes above `H`; no separate bounded
+aperiodic branch remains.
+
 The ordinary mortality lift is likewise no longer part of the paired obstruction. For arbitrary
 controls `H_a`, column `γ`, and row `λ` over a field, adjoining `γλ` gives mortality exactly when some
 `λH_yγ` vanishes. A zero product without the separator is already a scalar-zero witness; after
@@ -1341,7 +1347,8 @@ that no-instance's complete fixed-source family by Archimedean height. `D2-O05` 
 same height cannot simply be carried to a dilation--parabolic free product: a positive target
 stabilizer creates an exact inverse cycle even in a promised-empty coset. `D2-O06` proves that
 every bounded cycle of distinct normal-form prefixes has exactly this algebraic source; a
-trivial-stabilizer successor must escape to unbounded height.
+trivial-stabilizer successor must escape to unbounded height. `D2-O10` gives the explicit escape
+horizon `(2H+1)²+1` for each proposed height ceiling `H`.
 
 #### Raceable leaves
 
@@ -1537,8 +1544,9 @@ is whether an effective descent survives after recurrent target stabilizers are 
 height as that descent: one free dilation--parabolic orbit has a positive target cycle and forced
 inverse heights `5→3→5`. [`D2-O06`](SALVAGE.md#d2-o06-bounded-inverse-recurrence-forces-a-stabilizer)
 shows that every bounded-height injective-prefix recurrence forces a nontrivial target stabilizer.
-Hence the next hard no-instance cannot combine trivial target stabilizer with bounded recurrence;
-unbounded-height paths remain undecided.
+[`D2-O10`](SALVAGE.md#d2-o10-finite-bounded-prefix-horizon) strengthens this to the explicit
+finite horizon `(2H+1)²+1`. Hence the next hard no-instance cannot combine trivial target
+stabilizer with bounded recurrence; unbounded-height paths remain undecided.
 
 Work on projective incidence should therefore be treated as a joint `M₃(2)`/`M₂(3)` campaign.
 A `GPI₂` algorithm decides all of `M₂(3)` and the rank-`(2,2)` artery of `M₃(2)`; a universal

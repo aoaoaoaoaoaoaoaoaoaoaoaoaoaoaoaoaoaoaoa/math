@@ -271,6 +271,7 @@ file owns the mathematical stock.
 | [`D2-D09`](#d2-d09-step-three-shear-height-decision) | decidable stratum | target height bounds every reduced syllable and exponent in the fixed step-three shear orbit of `[1:1]` | audited; formalized core | graduated |
 | [`D2-O05`](#d2-o05-promised-empty-free-orbit-inverse-cycle) | obstruction | a positive target stabilizer in a free dilation--parabolic orbit forces chamber-directed inverse stripping through the primitive-height cycle `5→3→5` | audited; formalized core | graduated |
 | [`D2-O06`](#d2-o06-bounded-inverse-recurrence-forces-a-stabilizer) | structural obstruction | every infinite injective-prefix rational inverse orbit with bounded primitive height contains a nontrivial target-stabilizer segment | formalized | graduated |
+| [`D2-O10`](#d2-o10-finite-bounded-prefix-horizon) | quantitative structural reduction | `(2H+1)²+1` distinct prefixes bounded by primitive height `H` already expose a nontrivial target stabilizer | formalized | graduated |
 | [`D2-M01`](#d2-m01-benchmark-critical-shell) | partial mechanism | the mixed-prime benchmark reduces generically to one guarded `5`-adic shell | audited | active |
 | [`D2-O01`](#d2-o01-canonical-collatz-reachability-is-not-automatic) | obstruction | full generalized-Collatz reachability is not synchronously recognizable in its canonical base | external theorem | active |
 | [`D2-O02`](#d2-o02-critical-shell-periodic-saturation) | obstruction and rewrite seed | every nonempty finite wait schedule has a rational all-unit cycle; normalized nonfreeness persists under every generator scaling, while its odd family is a two-seed cancellative pump and the positive finite basis is complete only through length 30 | formalized core; audited strengthening | active |
@@ -11130,6 +11131,47 @@ every primitive-height box.
 [`InverseOrbitRecurrence.lean`](MatrixMortality/InverseOrbitRecurrence.lean)
 and
 [`m34-bounded-inverse-recurrence-2026-08-31.md`](audits/m34-bounded-inverse-recurrence-2026-08-31.md).
+
+### D2-O10: Finite bounded-prefix horizon
+
+**Kind:** quantitative structural reduction
+
+**Evidence:** formalized
+
+**Disposition:** graduated
+
+For a primitive pair of height at most `H`, both integer coordinates lie in
+`[-H,H]`. The containing square has exactly `(2H+1)²` points. Therefore any
+`(2H+1)²+1` pairwise distinct group prefixes whose target images all admit
+primitive representatives of height at most `H` contain two equal
+representatives. Their prefix quotient is a nonidentity target stabilizer.
+
+Contrapositively, if the target stabilizer is trivial, one of the first
+`(2H+1)²+1` states has primitive height greater than `H`. This replaces the
+infinite pigeonhole step in `D2-O06` by an explicit finite horizon. A bounded
+normal-form branch can be simulated only through that horizon before it must
+either escape or expose a stabilizer witness.
+
+**Scope:** the square count is a safe containing bound, not the cardinality of
+primitive projective rays; it retains zero, noncoprime, and both-sign pairs.
+The theorem assumes distinct group prefixes and supplied primitive
+representatives. It neither decides target-stabilizer triviality nor controls
+the branch after the certified height escape, so general `UCB₂(S)` remains
+open.
+
+**Use:** bounded inverse search is now a finite branch rather than an
+asymptotic case. Research can concentrate on effective stabilizer recognition
+and the unbounded-height branch without retaining a separate bounded-but-
+aperiodic possibility.
+
+**Next promotion:** combine the finite collision witness with a normal-form
+stabilizer test, then seek a computable rate or secondary invariant for the
+forced unbounded-height branch.
+
+**Artifacts:**
+[`InverseOrbitRecurrence.lean`](MatrixMortality/InverseOrbitRecurrence.lean)
+and
+[`m34-bounded-prefix-horizon-2026-08-31.md`](audits/m34-bounded-prefix-horizon-2026-08-31.md).
 
 ### D2-M01: Benchmark critical shell
 
