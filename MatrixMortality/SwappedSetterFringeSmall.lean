@@ -119,21 +119,6 @@ private theorem source_length_le_seven {source : List Bool}
   norm_num at power_large
   omega
 
-private theorem source_length_le_eight {source : List Bool}
-    (source_last : source.getLast? = some false) (source_code : swappedCode source < 3280) :
-    source.length ≤ 8 := by
-  have source_nonempty : source ≠ [] := by
-    intro source_empty
-    subst source
-    simp at source_last
-  have lower := swappedCode_lower_bound' source source_nonempty
-  by_contra length_large
-  have exponent_large : 8 ≤ source.length - 1 := by omega
-  have power_large : 3 ^ 8 ≤ 3 ^ (source.length - 1) :=
-    Nat.pow_le_pow_right (by norm_num) exponent_large
-  norm_num at power_large
-  omega
-
 -- Kernel reduction of the finite regular languages needs depth proportional to their expansions.
 set_option maxRecDepth 100000 in
 private theorem betaFiveTable :
@@ -142,16 +127,6 @@ private theorem betaFiveTable :
         ¬(((1093 : ℤ) - swappedCode source) * ((3 : ℤ) ^ 5 - 2) ≡
           (6 * (3 : ℤ) ^ 5 - 3 - ((1093 : ℤ) - swappedCode source)) * swappedCode target
             [ZMOD 9 * (3 : ℤ) ^ 5]) := by
-  decide
-
--- Kernel reduction of the finite regular languages needs depth proportional to their expansions.
-set_option maxRecDepth 100000 in
-private theorem betaSixTable :
-    ∀ source ∈ sourceWords 8, ∀ target ∈ targetWords 8,
-      swappedCode source < 3280 →
-        ¬(((3280 : ℤ) - swappedCode source) * ((3 : ℤ) ^ 6 - 2) ≡
-          (6 * (3 : ℤ) ^ 6 - 3 - ((3280 : ℤ) - swappedCode source)) * swappedCode target
-            [ZMOD 9 * (3 : ℤ) ^ 6]) := by
   decide
 
 theorem allOnes_sourceFringe_five_false
@@ -167,23 +142,6 @@ theorem allOnes_sourceFringe_five_false
     (source_length_le_seven source_last source_code)
   have target_mem := target_mem_targetWords target_fringe
   have forbidden := betaFiveTable source source_mem target target_mem source_code
-  apply forbidden
-  norm_num [PoleCongruence, upper_code_eq] at pole ⊢
-  exact pole
-
-theorem allOnes_sourceFringe_six_false
-    {upper source target : List Bool}
-    (source_fringe : SourceFringe source) (source_last : source.getLast? = some false)
-    (code_lt : swappedCode source < swappedCode upper)
-    (upper_code : 2 * swappedCode upper + 1 = 9 * 3 ^ 6)
-    (target_fringe : TargetFringe 8 target)
-    (pole : PoleCongruence 6 upper source target) : False := by
-  have upper_code_eq : swappedCode upper = 3280 := by norm_num at upper_code ⊢; omega
-  have source_code : swappedCode source < 3280 := by simpa [upper_code_eq] using code_lt
-  have source_mem := source_mem_sourceWords source_fringe source_last
-    (source_length_le_eight source_last source_code)
-  have target_mem := target_mem_targetWords target_fringe
-  have forbidden := betaSixTable source source_mem target target_mem source_code
   apply forbidden
   norm_num [PoleCongruence, upper_code_eq] at pole ⊢
   exact pole
