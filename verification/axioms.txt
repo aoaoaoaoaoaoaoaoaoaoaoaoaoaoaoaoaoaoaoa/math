@@ -2055,6 +2055,15 @@
 'MatrixMortality.MixedPrimeDebt.shellStep_realTrap_guardedPoleReset' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.MixedPrimeDebt.shellStep_twoNinths_bandPoint' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.shellStep_realTrap_guardedPoleFeed' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.shellStep_realTrap_guardedPoleFeed_target_injective' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.MixedPrimeDebt.shellStep_realTrap_guardedPoleReset_twoThreeValues' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
