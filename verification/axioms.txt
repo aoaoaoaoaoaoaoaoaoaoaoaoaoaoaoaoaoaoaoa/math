@@ -963,6 +963,23 @@
 'MatrixMortality.DecimalSetterResonance.compilerBody_resonanceEnvelope' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.DecimalSetterDepth.peeledNumerator_multi_shell' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterDepth.peeledStep_factor' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.DecimalSetterDepth.depthTwo_suffix_to_peeled' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterDepth.bTag_cannot_head_equalDepth' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterDepth.terminalHeadWord_code_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.DecimalSetterDepth.peeledNumerator_forces_lastDigit' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterDepth.peeledLastDigit_advances' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.DecimalSetterDepth.peeledLastDigit_twoStep' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.DecimalSetterDepth.peeledHead_trichotomy' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.Undecidability.nearyScalarZero62_hasZero_iff_hasZeroStar' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]

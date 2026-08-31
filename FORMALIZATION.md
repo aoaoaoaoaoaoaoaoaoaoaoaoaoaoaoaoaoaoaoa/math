@@ -1238,6 +1238,17 @@ exact B/A image is above one, while every positive target pole is below one.
 instance. Thus no ordinary-reset false pole exists through two completed transfers; the
 distinguished-reset suffix corridor remains open.
 
+Record [`MM-S17`](SALVAGE.md#mm-s17-recursive-decimal-carrier) gives the surviving A-shell
+corridor an all-depth normal form. `DecimalSetterDepth.peeledNumerator_multi_shell` proves that
+`R=NT−10μGVD` has exact shell `(m−1,m−1)` before a multi-role pole, and
+`peeledStep_factor` turns its quotient into the next carrier `(N',EN)`.
+`depthTwo_suffix_to_peeled` connects this recurrence to the distinguished-reset suffix peel.
+`peeledHead_trichotomy` and `bTag_cannot_head_equalDepth` exclude the initial leading-`b`
+head. `peeledNumerator_forces_lastDigit` and `peeledLastDigit_twoStep` prove that the
+generalized carrier's unit residues form a compatible period-two cycle. The module does not
+identify later product residuals with raw encoded heads and does not cover upper length two with
+the modulo-`100` law.
+
 The dimension-two affine ledger has six independently checked records:
 
 | Record | Formalization obligation |
@@ -1674,6 +1685,7 @@ fixed-rank decision problem.
 | `DecimalSetterCarry.lean` | two-reset successive-pole identities, joint depth constraints, exact decimal suffix exhaustion, first-transfer prefix separation, and the ordinary depth-two A/B shell forest |
 | `DecimalSetterChamber.lean` | exact decimal pole chambers, both ordinary A-to-A length-two extinctions, and the emitted-body grammar certificate |
 | `DecimalSetterResonance.lean` | complete ordinary depth-two A-to-B and B-to-A extinction, phase-word exhaustion, and compiler-envelope specialization |
+| `DecimalSetterDepth.lean` | recursive two-unit A-shell carrier, initial raw-head exclusion, and the exact last-digit two-cycle obstruction |
 | `PairedMortality.lean` | common-column mortality converse and exact integer `4 × 4` family |
 | `PhaseFracture.lean` | phase normalization and dimension-free projective-identification contradiction |
 | `PhaseRigidity.lean` | checked local role algebra, discrepancy commutators, and invariant-pencil rigidity |

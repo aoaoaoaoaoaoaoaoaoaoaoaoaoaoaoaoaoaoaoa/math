@@ -750,9 +750,19 @@ both long all-`c` blocks, while the `β`-`c`/`D_b` image factors strictly above 
 false pole survives through two transfers. The distinguished reset is now the sole depth-two
 front and remains an unbounded normalized-suffix problem.
 
+That front now has an exact recursive state.
+[`MM-S17`](SALVAGE.md#mm-s17-recursive-decimal-carrier) represents every consecutive A-shell
+resonance by decimal units `(N,D)` with `t=N/(10μD)`. A block replaces the numerator by
+`R=NT−10μGVD`; a following A pole forces `R=10^(m−1)N'`, and the next pair is `(N',EN)`.
+The initial raw-head grammar excludes the leading-`b` head and reduces the nonterminal entry to
+the two-`c` head. It does not recur: `N'` is a generalized product residual. For `m≥3`, the
+forced last digits form a lawful period-two cycle, while `m=2` does not expose the second decimal
+digit. The next invariant must recognize a higher suffix language of generalized residuals and
+handle the length-two carrier transition separately.
+
 The immediate ternary question is which other positive valuation-one discrepancies survive its
-suffix sieve without already certifying source halting. Exact bidirectional diagnostics for the
-ternary swap at `β=3`, body `bbcc`, exclude every
+suffix sieve without already certifying source halting.
+Exact bidirectional diagnostics for the ternary swap at `β=3`, body `bbcc`, exclude every
 false-pole word of at most six projective blocks when each regular block has
 role length at most three; this is computational evidence only.
 A single explicit nonterminal pole orbit kills this family; a closed invariant proves

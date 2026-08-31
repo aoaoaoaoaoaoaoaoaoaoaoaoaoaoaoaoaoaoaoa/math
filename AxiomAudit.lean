@@ -498,6 +498,15 @@ open MatrixMortality
 #print axioms DecimalSetterResonance.allC_cLeading_avoids_singletonPole
 #print axioms DecimalSetterResonance.allC_bLeading_avoids_singletonPole
 #print axioms DecimalSetterResonance.compilerBody_resonanceEnvelope
+#print axioms DecimalSetterDepth.peeledNumerator_multi_shell
+#print axioms DecimalSetterDepth.peeledStep_factor
+#print axioms DecimalSetterDepth.depthTwo_suffix_to_peeled
+#print axioms DecimalSetterDepth.bTag_cannot_head_equalDepth
+#print axioms DecimalSetterDepth.terminalHeadWord_code_eq
+#print axioms DecimalSetterDepth.peeledNumerator_forces_lastDigit
+#print axioms DecimalSetterDepth.peeledLastDigit_advances
+#print axioms DecimalSetterDepth.peeledLastDigit_twoStep
+#print axioms DecimalSetterDepth.peeledHead_trichotomy
 #print axioms Undecidability.nearyScalarZero62_hasZero_iff_hasZeroStar
 #print axioms Undecidability.nearyScalarZero62_hasZero_iff_tagHaltsFrom
 #print axioms Undecidability.nearyScalarZero62_hasZeroStar_iff_tagHaltsFrom

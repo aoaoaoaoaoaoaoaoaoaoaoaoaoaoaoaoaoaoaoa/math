@@ -102,6 +102,7 @@ file owns the mathematical stock.
 | [`MM-S14`](#mm-s14-ordinary-depth-two-shell-forest) | structure theorem | the ordinary depth-two decimal carry has only three resonant families and no B-to-B branch | formalized | active |
 | [`MM-S15`](#mm-s15-ordinary-a-to-a-length-two-extinction) | obstruction | both ordinary A-to-A length-two resonances miss every admissible next pole | formalized | active |
 | [`MM-S16`](#mm-s16-complete-ordinary-depth-two-extinction) | obstruction | no ordinary-reset orbit reaches a false pole after two completed transfers | formalized core; audited assembly | active |
+| [`MM-S17`](#mm-s17-recursive-decimal-carrier) | structure theorem and obstruction | repeated A-shell resonances have an exact two-unit carrier whose last digits form a compatible period-two cycle | formalized | active |
 | [`R32-S01`](#r32-s01-split-return-normal-form) | structure theorem | rank-two cuts reduce one-unit binary mortality to a `2 × 2` return recurrence | formalized | graduated |
 | [`R32-S02`](#r32-s02-two-plane-edge-square) | structure theorem | two rank-two generators are a two-vertex square of `2 × 2` edges | formalized | graduated |
 | [`R32-O01`](#r32-o01-rank-one-profile-collapse) | obstruction | a rank-one generator reduces mortality to order-at-most-three scalar recurrence zeros | audited | stock |
@@ -2979,6 +2980,63 @@ through `allC_cLeading_avoids_singletonPole`, `allC_bLeading_avoids_singletonPol
 
 **Next:** transfer the shell and chamber cuts to the distinguished-reset normalized suffix and
 then derive a depth-uniform recurrence or invariant.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S17: Recursive decimal carrier
+
+**Kind:** structure theorem and obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+Represent an A-shell state by decimal units `(N,D)` through `t=N/(10μD)`. A block with trace
+`T`, lower code `V`, and upper length `m` leaves the residual
+
+```text
+R=NT−10μGVD.
+```
+
+If the following block is a multi-role pole, then `R` has exact shell `(m−1,m−1)`. Factoring
+`R=10^(m−1)N'` gives the next carrier `(N',EN)`. For a suffix-peeled distinguished source,
+the depth-two trace identity reduces exactly to
+
+```text
+(HT₂−10μGV₂)T₃=HEμG10^(m₂)V₃,
+```
+
+so this carrier begins at the existing two-prime peel and then iterates without changing
+coordinates.
+
+The initial `β+2`-digit raw head is `bTag`, the terminal `c b` head, or a two-`c` head.
+Equal `2`/`5` depth excludes `bTag` because its code ends in `5`; the terminal head returns to
+the already peeled distinguished reset. Only the two-`c` raw head enters the new corridor.
+
+For every later block of upper length at least three, the carrier forces `N≡7D (mod 10)`.
+The update `D'=EN` advances the pair to `D'≡9D`, `N'≡3D`; a second update returns to
+`D''≡D`, `N''≡7D`. The final digit is therefore a compatible period-two cycle, not a
+contradiction. Later numerators are generalized product residuals and need not be encoded-word
+heads. Upper length two forces only one decimal factor and lies outside the modulo-`100` law.
+
+**Scope:** this is an all-depth normal form for consecutive multi-shell resonances and a complete
+unit-digit audit. It does not bridge generalized residuals back to raw heads, kill the
+generalized length-two transition, decide singleton targets, or prove projective avoidance.
+
+**Use:** carry `(N,D)` as the canonical state in every deeper decimal attack. Reject any proof
+that reapplies the raw head trichotomy to `N'` without a structural bridge, or claims that the
+last decimal digit descends. Split upper length two before using the unit congruence.
+
+**Formalization:**
+[`MatrixMortality/DecimalSetterDepth.lean`](MatrixMortality/DecimalSetterDepth.lean), through
+`peeledNumerator_multi_shell`, `peeledStep_factor`, `depthTwo_suffix_to_peeled`,
+`peeledHead_trichotomy`, `bTag_cannot_head_equalDepth`,
+`peeledNumerator_forces_lastDigit`, and `peeledLastDigit_twoStep`.
+
+**Artifact:**
+[`audits/m53-decimal-recursive-carrier-2026-08-30.md`](audits/m53-decimal-recursive-carrier-2026-08-30.md).
+
+**Next:** attach a higher decimal suffix language to generalized residuals and decide the
+upper-length-two carrier transition separately.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
