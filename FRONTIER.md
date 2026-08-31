@@ -1128,6 +1128,14 @@ nonterminal near-fork have identical toggle positions, hence identical matrix pr
 letter-blind map. No row or column can separate them. A surviving infinite-carrier constructor
 must use distinct data maps and re-establish the orbit, terminal section, and all-word converse.
 
+[`G3-C06`](SALVAGE.md#g3-c06-distinct-data-infinite-carrier-candidate) supplies that first repair.
+Keep `D_b=D_s` and set `D_c=P D_s` for one fixed matrix `P` of determinant `−4`. Both maps are
+distinct and rank two; every `tⁿb` product, infinite carrier, and delayed-depth section remains
+unchanged. The `bcbc` terminal/near-fork product difference has entry
+`6(2s²−5s+4)>0` for every source, so the exact collision is gone without exceptional fibres.
+The master obligation is now the full distinct-data word dynamics, not finding another local
+perturbation.
+
 [`G3-M02`](SALVAGE.md#g3-m02-square-root-punctuation-fracture) supplied a complete direct-mortality
 grammar. The source-uniform rational rank-two matrix `S` satisfies
 
@@ -1365,7 +1373,7 @@ or neutral word across the return, use an empty consume, or split recurrent outp
 | Lane | Available leverage | Decisive obstruction or obligation |
 | --- | --- | --- |
 | Common-kernel shuttle | The exact `bcbb` compiler moves its common data kernel out through the toggle and recovers it at the next data action | Uniformize this non-invariant shuttle in `(β,body)`; every toggle-invariant guard factors through the two-dimensional quotient |
-| Transverse-kernel terminal dynamics | `G3-O27/O29` reduce the involutive branch to the `M₂(3)` core; `G3-O30`–`O33` expose infinite carriers and universal isolated-depth fitting; `G3-O34` kills the literal generator because its data controls are letter-blind | Build distinct rank-two data maps preserving the infinite orbit and history-to-depth section, solve the joint dimension-two node, vary the terminal geometry, or use a full-rank data map |
+| Transverse-kernel terminal dynamics | `G3-O27/O29` reduce the involutive branch to the `M₂(3)` core; `G3-O30`–`O33` expose infinite carriers and universal isolated-depth fitting; `G3-O34` kills letter blindness; `G3-C06` repairs it with distinct rank-two data and uniform fork separation | Derive the complete distinct-data state recurrence and all-word converse, find a finite collision, solve the joint dimension-two node, vary the terminal geometry, or use a full-rank data map |
 | Positive projective transition lower bound | Same-zero dimension three is point-line incidence in `P²`, and actual one-sided shifts retain finite rank/kernel/image data | Derive a uniform nonstationary or noncommuting shift incompatibility from an unbounded terminal section; static support rank, formal inverse completion, fixed equal-length return flowers, and unary consecutive-repeat escape are forbidden |
 | Global word-residual recoding | Longer noncommutative atoms can retain order while discarding the four additive role channels | Escape `G3-D05`: fixed-priority affine counters and all one-way reset/transfer/fanout cascades are decidable |
 | Head-separated three-schema source | `G3-C04` discharges every arbitrary-trace forcing obligation locally; `G3-O24` isolates the directed stable-cone alternative | Preserve an undecidable mixed or neutral word across returns, or realize zero-sensitive S5 GLB decoding after the `G3-O25` separator-rank fork; complete pure forks are decidable by `G3-D07` |
@@ -1401,6 +1409,8 @@ raceable leaves:
    universal, so the isolated-depth branch must now construct or exclude the required
    history-to-depth word map. `G3-O34` kills the current letter-blind generator outright; the
    constructive survivor requires distinct data maps that retain the nonprojective orbit.
+   `G3-C06` now provides such maps and separates the first certified fork uniformly; compute its
+   full word dynamics or kill it by a new collision.
 3. **Positive projective transition obstruction.** Derive from a source-unbounded terminal
    section a finite shift incompatibility which no three-dimensional rational same-zero
    representation can realize for any combination of generator ranks and kernels. It must use
@@ -1509,7 +1519,10 @@ every coefficient triple and every source. Coefficient algebra is therefore clos
 obstruction; history-to-depth word dynamics is not. `G3-O34` proves the literal generator cannot
 serve: identifying its two data matrices collapses a `bcbc` terminal control with a nonterminal
 near-fork. Distinct data maps, with the orbit and section rebuilt, are now mandatory. A full-rank
-data map remains the other escape.
+data map remains the other escape. `G3-C06` realizes the distinct rank-two branch explicitly:
+it preserves the original infinite carrier prefixes and delayed section while separating that
+near-fork at every source. What remains is the complete terminal formula and arbitrary-word
+converse for this concrete monoid.
 A lower-bound attack must exclude both positive
 architectures through actual transition data. Backward cancellation, inverse cofinality, and
 static incidence cannot do so. Do not spend another attack on separator placement, fixed anchors,
