@@ -757,6 +757,51 @@
 'MatrixMortality.GuardedMixedPrimeBridge.no_letterwise_benchmark_bcbc_gate' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.wordAction_injective' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.wordAction_eq_of_common_fixedPoint_of_scale_eq' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.wordAction_fixedPoint_unique_of_ne_nil' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.bcbc_fork_macro_common_fixedPoint' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.bcbc_fork_macro_actions_eq' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.bcbc_fork_macro_actions_commute' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.bcbc_fork_macro_word_or_kernel' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.no_bcbc_endpoint_of_common_macro_fixedPoint' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.forkEquation_split' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.wordAction_wordFixedPoint_of_ne_nil' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.wordAction_wordFixedPoint_of_commute' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.wordAction_eq_of_eq_at_two_points' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.forkEquation_common_fixedPoint_of_actions_ne' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.bcbc_literal_macro_equation' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.bcbc_encodedFork_length' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.no_bcbc_literal_fork_words' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.bcbc_fork_macro_kernel' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.SquareRootPunctuation.coefficient_append_square' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
@@ -1604,6 +1649,66 @@
 'MatrixMortality.SwappedSetterMultitransfer.firstMultiTransfer_pole_forces_doubleDeletion' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.SwappedSetterDepthOneAncestry.swappedUpperCode_mod_three' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SwappedSetterDepthOneAncestry.afterDoubleCDiscrepancy_eq' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SwappedSetterDepthOneAncestry.afterDoubleCDiscrepancy_integer_dvd' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SwappedSetterDepthOneAncestry.afterDoubleCDiscrepancy_integer_dvd_terminal' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SwappedSetterDepthOneAncestry.repeatedDoubleCDiscrepancy_not_integer' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SwappedSetterDepthOneAncestry.repeatedDoubleCDiscrepancy_ne_rawCodeDifference' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SwappedSetterDepthOneAncestry.repeatedDoubleCDiscrepancy_ne_witnessDiscrepancy' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SwappedSetterDepthOneAncestry.carrierPole_iff_rationalDepthOnePole' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SwappedSetterDepthOneAncestry.carrierPole_iff_positiveDepthOnePole' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SwappedSetterMultitransfer.allDeletionC_double_transferDiscrepancy' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SwappedSetterMultitransfer.doubleDeletion_pole_targetRatio' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SwappedSetterMultitransfer.roleBlock_avoids_middle_ratio' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SwappedSetterMultitransfer.doubleDeletion_avoids_role_pole' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SwappedSetterMultitransfer.firstMultiTransfer_pole_false' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SwappedSetterMultitransfer.roleBlock_lower_isUnit' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SwappedSetterMultitransfer.roleBlock_multi_coefficient_hasValue' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SwappedSetterMultitransfer.singleton_coefficient_hasValue' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SwappedSetterMultitransfer.roleBlock_arithmeticShell' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SwappedSetterMultitransfer.roleBlock_one_lt_upperLength_of_ne_singleton_c' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SwappedSetterMultitransfer.physicalFirstMultiTransfer_pole_false' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.DecimalSetterChamber.doubleDeletion_step_in_gap' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
@@ -1935,6 +2040,37 @@
  Classical.choice,
  Quot.sound]
 'MatrixMortality.DecimalSetterAncestry.letterErase_rawHead_shell_impossible_of_b_mem' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterAncestry.allCDeletion_double_rawHead_shell_impossible' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterAncestry.letterErase_rawHead_multi_shell_impossible' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterPhase.spell_erasePhase_upper' does not depend on any axioms
+'MatrixMortality.DecimalSetterPhase.rightmostRuleLowerCode_sub_hasDecimalShell_of_front_nil' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterPhase.rightmostRuleLowerCode_sub_hasValue_five_of_front_one' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterPhase.twoPower_dvd_rightmostRuleLowerCode_sub_of_front_one' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterPhase.rightmostRuleLowerCode_sub_hasDecimalShell_of_two_le_front' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterPhase.peeledNumerator_sameUpper_sub_hasDecimalShell' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterPhase.companion_hasDecimalShell_of_phaseToggle_deeper' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterPhase.companion_hasDecimalShell_of_phaseToggle_shallower' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterPhase.leadingRuleC_rawHead_multi_shell_impossible' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
 'MatrixMortality.DecimalSetterAncestry.carrierFactor_multiToSingleton_quotientGate' depends on axioms: [propext,
@@ -3306,6 +3442,46 @@
  Classical.choice,
  Quot.sound]
 'MatrixMortality.ReturnSquare.fractionCriticalResidue_geometric_ne_zero_of_mortal' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnSquare.fractionPredecessor_equalScale_zero_then_center_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnSquare.fractionEqualScaleZeroCenterResidue_ne_zero_of_mortal' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnSquare.not_fractionPredecessor_equalScale_zero_then_odd_center_of_mortal' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnSquare.fractionRayCross_pullbackWord' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ReturnSquare.positiveBridge_fraction_cons_zero_iff_tailAdjugate' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnSquare.positiveBridge_fraction_zero_positive_valuation_tail_certificate' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnSquare.fractionIntegralTailPredecessorState_decomposition' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnSquare.fractionIntegralTail_deep_incidence_synchronizes' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnSquare.positiveBridge_pureDenominator_deep_valuation_certificate' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnSquare.positiveBridge_pureDenominator_two_deep_primes_synchronize' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnSquare.fractionIntegralTail_middle_incidence_headExponent_le' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnSquare.fractionIntegralTail_incidence_firstScale_dvd_restLower' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnSquare.positiveBridge_pureDenominator_resonance_or_firstTailScale_dvd' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnSquare.positiveBridge_pureDenominator_rest_deep_pivot_certificate' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
 'MatrixMortality.ReturnSquare.fractionTerminalPredecessor_hasValue' depends on axioms: [propext,
