@@ -1961,3 +1961,10 @@
 'MatrixMortality.ParabolicBlade.bridge_bZero_bTwo_cOne_det_ne_zero_of_complement_residue' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.ParabolicBlade.bZeroBDefectCOneCodeCore_thin_decomposition' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.ParabolicBlade.bZeroBDefectCOneCodeCore_ne_zero_of_thin_complement' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.bridge_bZero_bTwo_cOne_det_ne_zero_of_thin_complement' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]

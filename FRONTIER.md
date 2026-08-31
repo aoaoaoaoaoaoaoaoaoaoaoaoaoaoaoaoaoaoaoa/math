@@ -595,6 +595,15 @@ therefore finite divisor problems, not wait boxes. The remaining uniform task is
 first-`b` complement cylinders into global wait bounds and feed those bounds into the trailing
 3-adic constraints.
 
+The thin end of complement space is now dead
+[`M4-S27`](SALVAGE.md#m4-s27-phase-zero-right-c-thin-complement-cone). The exact decomposition
+`H=FP+DJ` has opposite signs at consecutive `x` values 214 and 215 whenever
+`0<D/S<1/2160000`; the order reverses at `y=0`, but the same integral gap excludes a zero.
+Thus every mixed survivor has a uniform lower complement density. The remaining body language
+must now lie simultaneously in finitely many first-`b` density cylinders and the trailing
+3-adic cylinders. Complete that intersection analytically; computational emptiness at bounded
+body length is reconnaissance, not a theorem.
+
 Two original-family nodes survive, and they must not be conflated.
 
 1. **Exterior collision avoidance.** Use `M4-S06`--`M4-S15` to classify the transported kernel

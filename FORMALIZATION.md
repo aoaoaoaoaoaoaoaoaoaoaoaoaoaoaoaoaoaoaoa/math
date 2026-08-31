@@ -1660,6 +1660,15 @@ The phase-zero right-`c` complement SFFT
 coordinate bound is `ParabolicBlade.tagComplementCode_global_bound`. The exact boundary is
 [`audits/m43-phase-zero-right-c-complement-sfft-2026-08-31.md`](audits/m43-phase-zero-right-c-complement-sfft-2026-08-31.md).
 
+The phase-zero right-`c` thin-complement cone
+[`M4-S27`](SALVAGE.md#m4-s27-phase-zero-right-c-thin-complement-cone) is checked in the same
+module. `ParabolicBlade.bZeroBDefectCOneCodeCore_thin_decomposition` splits the core into its
+all-`c` pencil plus a coefficient-positive complement term.
+`bZeroBDefectCOneCodeCore_ne_zero_of_thin_complement` proves the rational cone theorem, and
+`bridge_bZero_bTwo_cOne_det_ne_zero_of_thin_complement` transfers its physical specialization
+to the determinant. The exact boundary is
+[`audits/m43-phase-zero-right-c-thin-complement-2026-08-31.md`](audits/m43-phase-zero-right-c-thin-complement-2026-08-31.md).
+
 The residue-zero `c`-endpoint exclusion
 [`M4-S12`](SALVAGE.md#m4-s12-residue-zero-c-endpoint-exclusion) is checked in the same module.
 `ParabolicBlade.bridge_cZero_bTwo_bOne_det` and
