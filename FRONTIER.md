@@ -2494,7 +2494,20 @@ are dense in both admissible `5`-adic cylinders. Every admissible source and uni
 finite `5`-adic precision are joined by one wait residue. Recursively lifting those residues
 gives every admissible rational source aperiodic all-unit addresses with arbitrarily large waits.
 Yet the single-wait graph on period-one nodes has only its loops and the exceptional edge
-`T₂(x₀)=x₁`. Higher depth is not free: a published length-thirteen relation yields two distinct
+`T₂(x₀)=x₁`. The varying-schedule valuation topology inside negative `3`-adic depth is now exact.
+For rational `3`-unit carrier `c`, the state `u=c/3^d` obeys
+
+```text
+d'=d+m−1,      c'=(2^m c+3^d')/5.
+```
+
+The only exit is `d=1,m=0`; a target at depth `d'` has a complete, pairwise-distinct fan of
+`d'+1` debt predecessors. A `5`-unit target carrier makes the whole fan shell-legal. Arbitrary
+uninterrupted schedules are Łukasiewicz bridges with
+`d_end+length=d_start+sum(waits)`. At fixed endpoint depths and length their affine slope is
+fixed, so a point collision is already a global affine-map relation. The remaining
+source-specific collision problem is cross-length, together with chamber exits and reentries.
+Higher depth is not free: a published length-thirteen relation yields two distinct
 schedules with the same affine map and a common Lean-checked guarded periodic source. This is an
 exact rewrite seed. Lean also proves that it preserves all intermediate shell guards in every
 word context. Lean now factors every boundary-shifted schedule equality as one raw `D,T` context
@@ -2560,6 +2573,7 @@ artery; see
 | Assume projective height descends | determinant-growing words may act projectively as the identity |
 | Separate the Collatz cusp by finite ambient quotients | every finite image identifies the positive monoid with the whole generated group |
 | Assume the mixed-prime schedule action is free | a published length-thirteen relation is a checked guarded collision |
+| Bound the mixed-prime reverse fan uniformly | a target at negative `3`-depth `d` has exactly `d+1` distinct shell-legal predecessors when its rational carrier is a `3`- and `5`-unit |
 | Invoke a general module `S`-unit algorithm | the arbitrary three-prime case leads to open linear-exponential systems, and forgetting the monotone path destroys useful structure |
 
 These are exclusion tests for future proposals. Any attack relying on one of them must identify
@@ -2778,9 +2792,12 @@ universal computation.
    accepting-exit reachability in the guarded `5`-adic schedule with a synchronized `2`/`3`/`5`
    representation. Use the checked `D2-S03` walls to isolate mixed-sign debt transfer and
    equality-wall cancellation; a chamber argument that never handles those transitions is
-   incomplete. In parallel, seek a parametric affine-kernel description beyond the checked
-   length-30 basis and run normalized collision/exit-fibre census. Do not reopen unlabeled
-   residue-only finite nuclei.
+   incomplete. Inside uninterrupted negative `3`-depth, restrict
+   source-specific point-collision search to cross-length bridges: fixed-length collisions are
+   already global affine relations by `D2-O02`. Treat chamber exit and reentry as separate seams.
+   In parallel, seek a parametric affine-kernel description beyond the checked length-30 basis
+   and run normalized collision/exit-fibre census.
+   Do not reopen unlabeled residue-only finite nuclei or uniformly bounded reverse fanout.
    Keep the non-elementary lanes independent: adelic cone types, parabolic rational subsets,
    trace/height descent, finite-obstruction saturation, and valuation universality.
 7. Synthesize the returned attacks by the discriminating signals above; do not average

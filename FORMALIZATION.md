@@ -444,6 +444,25 @@ simultaneous `2`/`3`-unit output therefore confines `m` to
 one independently of `m`. These are one-step restrictions, not a finite-state decision theorem:
 mixed-sign histories and equality-wall cancellation remain live.
 
+`MixedPrimeDebt` resolves the valuation topology of genuinely varying schedules inside the
+negative `3`-adic chamber. For a rational carrier `c` with `v₃(c)=0`, write `u=c/3^d`. Every
+step which remains at positive depth has the exact recurrence
+
+```text
+d' = d+m−1,      c' = (2^m c+3^d')/5.
+```
+
+The only chamber exit is `d=1,m=0`. Conversely, a target `c'/3^d'` has one distinct debt
+predecessor for every wait `m=0,…,d'`, with depth `d'+1−m` and carrier
+`(5c'−3^d')/2^m`. If the target carrier is additionally a `5`-adic unit, every predecessor
+carrier is a `5`-adic unit, so the whole fan is legal in the critical shell. Arbitrary
+debt-safe schedules satisfy the checked Łukasiewicz balance
+`d_end+length=d_start+sum(waits)`. Their slope is fixed by the two depths and the length; two
+same-length bridges between the same depths which collide at one source are already the same
+affine map globally. This moves all within-length point collisions back to the affine-kernel
+problem. It does not bound the reverse tree: its exact fan has width `d'+1`, and cross-length
+carrier equality remains open.
+
 `MixedPrimeKernel` now owns the raw `D,T` affine kernel. It checks the published shortest
 length-27 relation, an infinite family of distinct equal-map pairs at every odd length
 `29+2k`, and three independent length-30 relations. The former isolated length-29 relation is
@@ -1701,6 +1720,7 @@ fixed-rank decision problem.
 | `AffineGroupOrbit.lean` | translation-kernel quotient and trivial-kernel fixed-point structure for rational affine groups |
 | `PadicValuation.lean` | nonzero rational p-adic shells, unequal-valuation calculus, and the adjacent-unit odd-prime obstruction |
 | `PeriodicShell.lean` | exact affine schedule composition, rational all-unit periodic cycles, and the published nonfree benchmark relation |
+| `MixedPrimeDebt.lean` | exact two- and three-adic wait walls, complete negative-depth predecessor fans, arbitrary debt-safe recurrence, and fixed-length collision rigidity |
 | `MixedPrimeKernel.lean` | raw mixed-prime affine action, contextual composition, an infinite odd-length kernel family from length 29, and three independent length-30 relations |
 | `MixedPrimeNormalization.lean` | exact homogeneous odd-family relations, persistence under independent normalization scaling, and the two-seed cancellative pump |
 | `ReturnGuard.lean` | three-mode amalgamated return algebra, split mortality compiler, and exact state lower bound |
@@ -1916,6 +1936,10 @@ fixed-rank decision problem.
 | Every nonempty critical-shell wait schedule has a rational periodic `5`-unit at every cyclic phase | `PeriodicShell.shellPeriodicCycle` |
 | Repeating a fixed shell schedule subtracts its length from the `5`-adic displacement valuation each period, bounding legal repetition away from its unique periodic point | `PeriodicShell.shellRun_repeat_sub_periodicPoint_value`, `PeriodicShell.shellRun_repeat_unit_bound` |
 | A critical-shell step obeys exact `2`/`3` cancellation walls; simultaneous-unit output bounds the wait, and simultaneous negative debt rises by one | `PeriodicShell.shellStep_hasValue_two_of_negative`, `PeriodicShell.shellStep_unit_two_of_positive`, `PeriodicShell.shellStep_hasValue_three_of_negative`, `PeriodicShell.shellStep_unit_three_of_positive`, `PeriodicShell.shellStep_two_three_sum_of_both_negative`, `PeriodicShell.wait_mem_two_three_unit_interval` |
+| Every shell wait has exact two- and three-adic walls; away from equality, the lower valuation survives and the upper valuation resets to zero | `MixedPrimeDebt.shellStep_two_belowWall`, `MixedPrimeDebt.shellStep_two_aboveWall`, `MixedPrimeDebt.shellStep_three_belowWall`, `MixedPrimeDebt.shellStep_three_aboveWall` |
+| Every negative-depth target has a complete pairwise-distinct predecessor fan indexed by `0,…,d`; a `5`-unit target carrier makes every predecessor state a `5`-unit | `MixedPrimeDebt.shellStep_debtState_eq_iff`, `MixedPrimeDebt.debtState_fiveUnit`, `MixedPrimeDebt.debtPredecessor_fan`, `MixedPrimeDebt.debtPredecessor_state_injective` |
+| Arbitrary uninterrupted debt schedules obey their exact carrier recurrence and Łukasiewicz depth balance | `MixedPrimeDebt.shellRun_debtSafe`, `MixedPrimeDebt.debtRunDepth_balance` |
+| Same-length debt bridges with common endpoint depths have one slope, so a collision at one source is a global affine relation | `MixedPrimeDebt.debtSafe_sameLength_collision_global` |
 | Shell phases are all units exactly when the final output is a unit | `PeriodicShell.shellPrefixesUnit_iff` |
 | Raw words and shell schedules are conjugate, and every boundary-shifted benchmark schedule is one contextual raw rule | `PeriodicShell.shellRun_eq_wordAction`, `PeriodicShell.shellRawWord_benchmarkRelationShiftLeft`, `PeriodicShell.shellRawWord_benchmarkRelationShiftRight`, `PeriodicShell.shellRun_benchmarkRelationShift` |
 | Two distinct length-thirteen benchmark schedules induce the same affine map, preserve all guards in every context, and share a rational all-unit cycle | `PeriodicShell.benchmarkRelation_ne`, `PeriodicShell.shellRun_benchmarkRelationContext`, `PeriodicShell.benchmarkRelationContextGuard`, `PeriodicShell.benchmarkRelationCycle` |
