@@ -252,6 +252,7 @@ file owns the mathematical stock.
 | [`G3-O17`](#g3-o17-paired-inverse-chamber) | obstruction | protected two-turn inverse states have no positive future in the actual paired residual chambers | formalized | graduated |
 | [`D2-S01`](#d2-s01-projective-hard-core) | structure theorem | `M₂(3)` is equivalent to two-generator projective incidence | audited | active |
 | [`D2-S02`](#d2-s02-monotone-affine-path-form) | structure theorem | normalized affine words form monotone exponent paths | audited | stock |
+| [`D2-S04`](#d2-s04-real-trap-ternary-predecessor-nucleus) | structure theorem | real-trap positivity cuts every one-step reverse shell fan to a sharp computable window of three waits | formalized | active |
 | [`D2-D01`](#d2-d01-projectively-unimodular-stratum) | decidable stratum | projectively unimodular hard-core instances are decidable | audited | stock |
 | [`D2-D02`](#d2-d02-invariant-pair-stratum) | decidable stratum | invariant projective pairs reduce to abelian-by-`C₂` reachability | reported | active |
 | [`D2-D03`](#d2-d03-common-multiplier-stratum) | decidable stratum | rational affine maps with one multiplier are decidable under regular control | reported | active |
@@ -10996,8 +10997,10 @@ and the exact census/critical-pair certificate in
 
 **Use:** reject state-independent finite forbidden wait blocks, residue-only bounded `5`-adic
 exclusion, eventual shell exit or periodicity, unbounded pumping of one fixed schedule away from
-its periodic point, uniformly bounded reverse fanout, source-specific collision mechanisms at
-one fixed debt-bridge length, cross-length source-shell exclusion, the one-bit `3`-adic carrier
+its periodic point, valuation-only uniformly bounded reverse fanout outside the positivity
+restriction of [`D2-S04`](#d2-s04-real-trap-ternary-predecessor-nucleus), source-specific
+collision mechanisms at one fixed debt-bridge length, cross-length source-shell exclusion, the
+one-bit `3`-adic carrier
 orientation as a global separator, automatic target acceptance from source unitality, universal
 strict state-height drift, and a compiler whose period-one configurations must remain in that set
 after every single wait. Also
@@ -11324,3 +11327,66 @@ arithmetic address.
 **Next:** characterize the intersection of one fixed-source forward orbit with the backward-
 saturated guarded trap. Candidate representations must retain `2`/`3` exponent order and the
 `5`-adic carry; one-sided endpoint invariants are saturated.
+
+### D2-S04: Real-trap ternary predecessor nucleus
+
+**Kind:** structure theorem
+**Evidence:** formalized
+**Disposition:** active
+
+Real order repairs the globally false bounded-reverse-fan shortcut inside the sole recurrent
+interval. For a target `1/5<y≤1/2`, put
+
+```text
+τ=(10/3)(y−1/5)
+```
+
+and let `c` be the unique exponent bracketed by
+
+```text
+(2/3)^(c+1)<τ≤(2/3)^c.
+```
+
+The inverse of `T_m(x)=y` is
+
+```text
+x=(y−1/5)/((3/5)(2/3)^m).
+```
+
+Its real-trap condition is exactly
+
+```text
+τ≤(2/3)^m<(5/2)τ.
+```
+
+Consequently every real-trap predecessor wait satisfies
+
+```text
+c≤m+2  and  m≤c,
+```
+
+so `m` is one of `c`, `c−1`, or `c−2`. Lean defines the computable exponent `c` as
+`realTrapMaxPredecessorWait(y)` and proves fixed-source one-step reachability equivalent to the
+three corresponding rational equalities. The factor `3` is sharp: `y=49/150` has exactly the
+three waits `0,1,2`, with respective predecessors `19/90`, `19/60`, and `19/40` in the trap.
+Since `shellStep m` is injective, this is an exact ternary bound on predecessor pairs, not only on
+wait labels.
+
+**Scope:** outside the real trap, a negative-depth target can still have arbitrarily many
+shell-legal predecessors, as proved by [`D2-O02`](#d2-o02-critical-shell-periodic-saturation).
+Inside the trap, the complete backward graph is locally finite with branching at most three, but
+its depth remains unbounded. Local finiteness gives exhaustive semidecision and finite search at
+each prescribed length; it does not decide nonreachability from a fixed source, guarded shell
+reachability, or `M₂(3)`.
+
+**Artifact:** `MixedPrimeDebt.realTrapMaxPredecessorWait`,
+`MixedPrimeDebt.shellStep_realTrap_wait_window`,
+`MixedPrimeDebt.exists_shellStep_realTrap_iff_three_candidates`, and
+`MixedPrimeDebt.shellStep_realTrap_wait_window_sharp` in
+[`MixedPrimeRealTrap.lean`](MatrixMortality/MixedPrimeRealTrap.lean).
+
+**Use:** replace the unbounded debt-chamber predecessor fan by an exact ternary inverse tree after
+intersecting with the real survivor. The remaining obstruction is depth, not local branching.
+
+**Next:** find a target-dependent height or congruence making the ternary inverse tree finite up
+to equivalence, or exhibit a fixed-source recurrent branch that defeats every finite nucleus.

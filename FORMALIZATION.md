@@ -520,6 +520,10 @@ exactly the closed recurrent target interval `[1/5,1/2]`; it supplies no further
 Indeed every rational `5`-adic unit target in `(1/5,1/2]` has a rational unit predecessor there.
 Lean iterates this construction to produce guarded predecessor schedules of every prescribed
 length. The source varies, so the remaining question necessarily couples both fixed endpoints.
+Inside the trap, however, every fixed target has predecessors at only three consecutive waits.
+Lean computes their maximal wait, reduces fixed-source one-step reachability to three equality
+tests, and proves the width sharp. The reverse survivor is therefore a locally finite ternary
+tree; only its unbounded depth remains.
 
 `MixedPrimeKernel` now owns the raw `D,T` affine kernel. It checks the published shortest
 length-27 relation, an infinite family of distinct equal-map pairs at every odd length
@@ -1361,11 +1365,12 @@ transition: `peeledNumerator_twoAdic_deepens` proves that the difference of the 
 every non-singleton consecutive multi-pole block to have upper length at least three. The module
 does not identify later product residuals with raw encoded heads or decide singleton targets.
 
-The dimension-two affine ledger has eleven independently checked records:
+The dimension-two affine ledger has twelve independently checked records:
 
 | Record | Formalization obligation |
 | --- | --- |
 | [`D2-S02`](SALVAGE.md#d2-s02-monotone-affine-path-form) | affine conjugacy, elementary case split, operational word normal form, and recovery of block lengths |
+| [`D2-S04`](SALVAGE.md#d2-s04-real-trap-ternary-predecessor-nucleus) | computable maximal predecessor wait, sharp three-wait real-trap window, and exact fixed-source one-step reduction |
 | [`D2-D05`](SALVAGE.md#d2-d05-prescribed-translation-count) | primitive linear-polynomial divisibility, bounded carries in both scan directions, ordered-marker automaton, regular control, and `a=±1` cases |
 | [`D2-D06`](SALVAGE.md#d2-d06-private-prime-peeling) | unique-minimum valuation calculation, zero endpoints, fixed-count reduction, reversed language, and positive private valuation |
 | [`D2-D07`](SALVAGE.md#d2-d07-bounded-valuation-orthants) | localization support, denominator bounds in both orthants, invariant-interval recognition, finite graph, and regular-control product |
@@ -1950,6 +1955,7 @@ fixed-rank decision problem.
 | Every critical-shell exit is zero, valuation-minus-one, or positive; every nonempty suffix to a fixed target has one of two target-derived lengths | `MixedPrimeDebt.shellStep_fiveUnit_exit_cases`, `MixedPrimeDebt.shellRun_fiveUnit_exit_nonempty_tail_value_cases`, `MixedPrimeDebt.shellRun_fiveUnit_exit_nonempty_tail_length_cases` |
 | Every shell schedule preserves `[1/5,1/2]`; an exterior target obeys a zero-wait extremal envelope and has an explicit computable schedule-length bound | `MixedPrimeDebt.shellRun_mem_realTrap`, `MixedPrimeDebt.shellRun_above_half_envelope`, `MixedPrimeDebt.shellRun_above_half_length_lt_bound`, `MixedPrimeDebt.shellRun_below_one_fifth_envelope`, `MixedPrimeDebt.shellRun_below_one_fifth_length_lt_bound` |
 | Every rational `5`-adic unit target in `(1/5,1/2]` has guarded rational predecessor schedules of every prescribed block length | `MixedPrimeDebt.exists_shellStep_realTrap_predecessor`, `MixedPrimeDebt.exists_shellStep_realTrap_unit_predecessor`, `MixedPrimeDebt.exists_shellRun_realTrap_unit_predecessor_of_length` |
+| Every real-trap target has a computable sharp three-wait predecessor window, reducing fixed-source one-step reachability to three equalities | `MixedPrimeDebt.shellStep_realTrap_wait_window`, `MixedPrimeDebt.exists_shellStep_realTrap_iff_three_candidates`, `MixedPrimeDebt.shellStep_realTrap_wait_window_sharp` |
 | Shell phases are all units exactly when the final output is a unit | `PeriodicShell.shellPrefixesUnit_iff` |
 | Raw words and shell schedules are conjugate, and every boundary-shifted benchmark schedule is one contextual raw rule | `PeriodicShell.shellRun_eq_wordAction`, `PeriodicShell.shellRawWord_benchmarkRelationShiftLeft`, `PeriodicShell.shellRawWord_benchmarkRelationShiftRight`, `PeriodicShell.shellRun_benchmarkRelationShift` |
 | Two distinct length-thirteen benchmark schedules induce the same affine map, preserve all guards in every context, and share a rational all-unit cycle | `PeriodicShell.benchmarkRelation_ne`, `PeriodicShell.shellRun_benchmarkRelationContext`, `PeriodicShell.benchmarkRelationContextGuard`, `PeriodicShell.benchmarkRelationCycle` |

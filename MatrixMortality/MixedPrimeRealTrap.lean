@@ -5,7 +5,8 @@ import MatrixMortality.MixedPrimeExit
 
 Every shell block preserves `[1/5, 1/2]`. Outside this interval the zero-wait block is extremal,
 so any fixed exterior target imposes an explicit computable bound on the number of shell blocks.
-Inside, every rational unit target has guarded rational predecessors of every block length.
+Inside, every rational unit target has guarded rational predecessors of every block length, but
+the one-step predecessor waits of a fixed target occupy a computable three-element window.
 -/
 
 namespace MatrixMortality.MixedPrimeDebt
@@ -280,6 +281,86 @@ theorem shellRun_below_one_fifth_length_lt_bound
   exact length_lt_realTrapLengthBound sourceDistance_positive targetDistance_positive
     distance_bound
 
+private theorem exists_shellRatio_pow_near
+    {threshold : ℚ} (threshold_positive : 0 < threshold) (threshold_le_one : threshold ≤ 1) :
+    ∃ exponent : ℕ,
+      (2 / 3 : ℚ) ^ (exponent + 1) < threshold ∧
+        threshold ≤ (2 / 3 : ℚ) ^ exponent :=
+  exists_nat_pow_near_of_lt_one threshold_positive threshold_le_one
+    (by norm_num) (by norm_num)
+
+/-- The largest wait whose inverse shell step can remain at most `1/2`, for targets in the
+half-open real trap. -/
+def realTrapMaxPredecessorWait (target : ℚ) : ℕ :=
+  let threshold := (10 / 3 : ℚ) * (target - 1 / 5)
+  if admissible : 0 < threshold ∧ threshold ≤ 1 then
+    Nat.find (exists_shellRatio_pow_near admissible.1 admissible.2)
+  else 0
+
+private theorem realTrapMaxPredecessorWait_spec
+    {target : ℚ} (target_lower : 1 / 5 < target) (target_upper : target ≤ 1 / 2) :
+    (2 / 3 : ℚ) ^ (realTrapMaxPredecessorWait target + 1) <
+        (10 / 3 : ℚ) * (target - 1 / 5) ∧
+      (10 / 3 : ℚ) * (target - 1 / 5) ≤
+        (2 / 3 : ℚ) ^ realTrapMaxPredecessorWait target := by
+  have threshold_positive : 0 < (10 / 3 : ℚ) * (target - 1 / 5) := by
+    positivity
+  have threshold_le_one : (10 / 3 : ℚ) * (target - 1 / 5) ≤ 1 := by
+    linarith
+  rw [realTrapMaxPredecessorWait, dif_pos ⟨threshold_positive, threshold_le_one⟩]
+  exact Nat.find_spec
+    (exists_shellRatio_pow_near threshold_positive threshold_le_one)
+
+/-- Within the real trap, every one-step predecessor wait lies among the largest admissible wait
+and its two predecessors. -/
+theorem shellStep_realTrap_wait_window
+    {target : ℚ} (target_lower : 1 / 5 < target) (target_upper : target ≤ 1 / 2)
+    {wait : ℕ} {state : ℚ} (state_mem : state ∈ Set.Ioc (1 / 5 : ℚ) (1 / 2))
+    (step_eq : shellStep wait state = target) :
+    realTrapMaxPredecessorWait target ≤ wait + 2 ∧
+      wait ≤ realTrapMaxPredecessorWait target := by
+  let threshold := (10 / 3 : ℚ) * (target - 1 / 5)
+  have threshold_positive : 0 < threshold := by
+    simp only [threshold]
+    positivity
+  have step_displacement :
+      target - 1 / 5 = (3 / 5 : ℚ) * (2 / 3 : ℚ) ^ wait * state := by
+    rw [← step_eq]
+    simp only [shellStep]
+    ring
+  have wait_power_positive : 0 < (2 / 3 : ℚ) ^ wait := by positivity
+  have wait_lower : threshold ≤ (2 / 3 : ℚ) ^ wait := by
+    simp only [threshold, step_displacement]
+    nlinarith [state_mem.2]
+  have wait_upper : (2 / 3 : ℚ) ^ wait < (5 / 2 : ℚ) * threshold := by
+    simp only [threshold, step_displacement]
+    nlinarith [state_mem.1]
+  obtain ⟨candidate_next_lt, threshold_le_candidate⟩ :=
+    realTrapMaxPredecessorWait_spec target_lower target_upper
+  have candidate_next_lt' :
+      (2 / 3 : ℚ) ^ (realTrapMaxPredecessorWait target + 1) < threshold := by
+    simpa only [threshold] using candidate_next_lt
+  have threshold_le_candidate' :
+      threshold ≤ (2 / 3 : ℚ) ^ realTrapMaxPredecessorWait target := by
+    simpa only [threshold] using threshold_le_candidate
+  constructor
+  · by_contra candidate_not_le
+    have wait_three_le : wait + 3 ≤ realTrapMaxPredecessorWait target := by omega
+    have power_le :
+        (2 / 3 : ℚ) ^ realTrapMaxPredecessorWait target ≤
+          (2 / 3 : ℚ) ^ (wait + 3) :=
+      (pow_le_pow_iff_right_of_lt_one₀ (by norm_num) (by norm_num)).2 wait_three_le
+    rw [pow_add] at power_le
+    norm_num at power_le
+    nlinarith
+  · by_contra wait_not_le
+    have candidate_next_le : realTrapMaxPredecessorWait target + 1 ≤ wait := by omega
+    have power_le :
+        (2 / 3 : ℚ) ^ wait ≤
+          (2 / 3 : ℚ) ^ (realTrapMaxPredecessorWait target + 1) :=
+      (pow_le_pow_iff_right_of_lt_one₀ (by norm_num) (by norm_num)).2 candidate_next_le
+    linarith
+
 /-- Every rational point in the half-open real trap has a one-block predecessor in the same
 trap. -/
 theorem exists_shellStep_realTrap_predecessor
@@ -297,9 +378,13 @@ theorem exists_shellStep_realTrap_predecessor
   have threshold_le_one : threshold ≤ 1 := by
     simp only [threshold, displacement]
     linarith
-  obtain ⟨wait, next_power_lt, threshold_le_power⟩ :=
-    exists_nat_pow_near_of_lt_one threshold_positive threshold_le_one
-      (by norm_num : (0 : ℚ) < 2 / 3) (by norm_num)
+  let wait := realTrapMaxPredecessorWait target
+  obtain ⟨candidate_next_lt, threshold_le_candidate⟩ :=
+    realTrapMaxPredecessorWait_spec target_lower target_upper
+  have next_power_lt : (2 / 3 : ℚ) ^ (wait + 1) < threshold := by
+    simpa only [wait, threshold, displacement] using candidate_next_lt
+  have threshold_le_power : threshold ≤ (2 / 3 : ℚ) ^ wait := by
+    simpa only [wait, threshold, displacement] using threshold_le_candidate
   let ratioPower := (2 / 3 : ℚ) ^ wait
   let slope := (3 / 5 : ℚ) * ratioPower
   let state := displacement / slope
@@ -330,6 +415,77 @@ theorem exists_shellStep_realTrap_predecessor
   simp only [state, slope, displacement, shellStep]
   field_simp
   ring
+
+/-- For fixed endpoints in the real trap, one-step reachability is exactly three rational
+equalities. -/
+theorem exists_shellStep_realTrap_iff_three_candidates
+    {source target : ℚ} (source_mem : source ∈ Set.Ioc (1 / 5 : ℚ) (1 / 2))
+    (target_lower : 1 / 5 < target) (target_upper : target ≤ 1 / 2) :
+    (∃ wait, shellStep wait source = target) ↔
+      shellStep (realTrapMaxPredecessorWait target) source = target ∨
+        shellStep (realTrapMaxPredecessorWait target - 1) source = target ∨
+          shellStep (realTrapMaxPredecessorWait target - 2) source = target := by
+  constructor
+  · rintro ⟨wait, step_eq⟩
+    have window := shellStep_realTrap_wait_window target_lower target_upper source_mem step_eq
+    rcases (show wait = realTrapMaxPredecessorWait target ∨
+        wait + 1 = realTrapMaxPredecessorWait target ∨
+          wait + 2 = realTrapMaxPredecessorWait target by omega) with
+      wait_eq | wait_succ_eq | wait_two_eq
+    · exact Or.inl (wait_eq ▸ step_eq)
+    · right
+      left
+      have wait_eq : wait = realTrapMaxPredecessorWait target - 1 := by omega
+      exact wait_eq ▸ step_eq
+    · right
+      right
+      have wait_eq : wait = realTrapMaxPredecessorWait target - 2 := by omega
+      exact wait_eq ▸ step_eq
+  · rintro (candidate_hits | previous_hits | second_previous_hits)
+    · exact ⟨realTrapMaxPredecessorWait target, candidate_hits⟩
+    · exact ⟨realTrapMaxPredecessorWait target - 1, previous_hits⟩
+    · exact ⟨realTrapMaxPredecessorWait target - 2, second_previous_hits⟩
+
+private theorem realTrapMaxPredecessorWait_sharpTarget :
+    realTrapMaxPredecessorWait (49 / 150 : ℚ) = 2 := by
+  obtain ⟨candidate_next_lt, threshold_le_candidate⟩ :=
+    realTrapMaxPredecessorWait_spec (target := (49 / 150 : ℚ)) (by norm_num) (by norm_num)
+  have candidate_le : realTrapMaxPredecessorWait (49 / 150 : ℚ) ≤ 2 := by
+    by_contra candidate_not_le
+    have three_le_candidate : 3 ≤ realTrapMaxPredecessorWait (49 / 150 : ℚ) := by omega
+    have power_le :
+        (2 / 3 : ℚ) ^ realTrapMaxPredecessorWait (49 / 150 : ℚ) ≤ (2 / 3 : ℚ) ^ 3 :=
+      (pow_le_pow_iff_right_of_lt_one₀ (by norm_num) (by norm_num)).2
+        three_le_candidate
+    norm_num at threshold_le_candidate power_le
+    linarith
+  have two_le_candidate : 2 ≤ realTrapMaxPredecessorWait (49 / 150 : ℚ) := by
+    by_contra two_not_le
+    have candidate_next_le : realTrapMaxPredecessorWait (49 / 150 : ℚ) + 1 ≤ 2 := by omega
+    have power_le :
+        (2 / 3 : ℚ) ^ 2 ≤
+          (2 / 3 : ℚ) ^ (realTrapMaxPredecessorWait (49 / 150 : ℚ) + 1) :=
+      (pow_le_pow_iff_right_of_lt_one₀ (by norm_num) (by norm_num)).2
+        candidate_next_le
+    norm_num at candidate_next_lt power_le
+    linarith
+  omega
+
+/-- The uniform three-wait window is sharp: one target has real-trap predecessors at exactly
+three distinct waits. -/
+theorem shellStep_realTrap_wait_window_sharp (wait : ℕ) :
+    (∃ state : ℚ, state ∈ Set.Ioc (1 / 5 : ℚ) (1 / 2) ∧
+      shellStep wait state = 49 / 150) ↔ wait = 0 ∨ wait = 1 ∨ wait = 2 := by
+  constructor
+  · rintro ⟨state, state_mem, step_eq⟩
+    have window := shellStep_realTrap_wait_window
+      (target := (49 / 150 : ℚ)) (by norm_num) (by norm_num) state_mem step_eq
+    rw [realTrapMaxPredecessorWait_sharpTarget] at window
+    omega
+  · rintro (rfl | rfl | rfl)
+    · exact ⟨19 / 90, by norm_num, by norm_num [shellStep]⟩
+    · exact ⟨19 / 60, by norm_num, by norm_num [shellStep]⟩
+    · exact ⟨19 / 40, by norm_num, by norm_num [shellStep]⟩
 
 /-- A five-adic unit target in the half-open real trap has a unit predecessor there. -/
 theorem exists_shellStep_realTrap_unit_predecessor
