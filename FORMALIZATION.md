@@ -614,6 +614,9 @@ The real exterior is decidable. Every shell block preserves `[1/5,1/2]`; above `
 Lean turns the resulting envelope into an explicit rational-search bound on schedule length.
 The audited prescribed-count algorithm decides every smaller length. Thus real monotonicity leaves
 exactly the closed recurrent target interval `[1/5,1/2]`; it supplies no further bound inside.
+Indeed every rational `5`-adic unit target in `(1/5,1/2]` has a rational unit predecessor there.
+Lean iterates this construction to produce guarded predecessor schedules of every prescribed
+length. The source varies, so the remaining question necessarily couples both fixed endpoints.
 
 `MixedPrimeKernel` now owns the raw `D,T` affine kernel. It checks the published shortest
 length-27 relation, an infinite family of distinct equal-map pairs at every odd length
@@ -1649,7 +1652,7 @@ outer word by injectivity and proves that any cross-tail collision requires shel
 `(ℓ−2β+1,ℓ−2β+2)` between the later tails. This classifies the synchronization debt but does
 not yet exclude it from the encoded-entry orbit.
 
-The dimension-two affine ledger has ten independently checked records:
+The dimension-two affine ledger has eleven independently checked records:
 
 | Record | Formalization obligation |
 | --- | --- |
@@ -1664,6 +1667,7 @@ The dimension-two affine ledger has ten independently checked records:
 | [`D2-O03`](SALVAGE.md#d2-o03-fixed-source-adjacent-saturation) | accepted fixed-source adjacent collision family, target injectivity, complementary target pole, and sole-candidate ray membership |
 | [`D2-O04`](SALVAGE.md#d2-o04-forced-exit-surface) | exact forced-exit valuation, post-exit valuation descent and target-derived tail length, two-adic surface coordinates, injectivity, two-candidate surface membership, and fixed-count regular-control reduction of the full continuation cone |
 | [`D2-O07`](SALVAGE.md#d2-o07-universal-exit-suffix-collapse) | exhaustive valuation classification of every critical-shell exit and the two-candidate fixed-target length reduction for every nonempty suffix |
+| [`D2-O08`](SALVAGE.md#d2-o08-real-trap-backward-saturation) | exact rational predecessor cover of the half-open real trap, preservation of `5`-adic units in reverse, and guarded predecessor schedules of every prescribed block length |
 
 The shell record does not decide the benchmark. Every fixed exit has a decidable suffix and every
 real-exterior target has a computable length bound, but an arbitrary critical prefix inside
@@ -2112,7 +2116,7 @@ fixed-rank decision problem.
 | `MixedPrimeDebt.lean` | exact wait walls, debt recurrence and predecessor fans, cross-length collision arithmetic, the accepted fixed-source ray, and its forced-exit surface |
 | `MixedPrimeDebtBoundary.lean` | same-length collision rigidity and exact saturation of the remaining three-adic carrier orientation |
 | `MixedPrimeExit.lean` | universal critical-shell exit classification, two-candidate post-exit length reduction, and translated-letter count for the full fixed-source continuation cone |
-| `MixedPrimeRealTrap.lean` | invariant real trap, exterior contraction envelopes, and computable exterior schedule-length bounds |
+| `MixedPrimeRealTrap.lean` | invariant real trap, exterior contraction bounds, and guarded backward saturation of its unit interior |
 | `MixedPrimeKernel.lean` | raw mixed-prime affine action, contextual composition, an infinite odd-length kernel family from length 29, and three independent length-30 relations |
 | `MixedPrimeNormalization.lean` | exact homogeneous odd-family relations, persistence under independent normalization scaling, and the two-seed cancellative pump |
 | `ReturnGuard.lean` | three-mode amalgamated return algebra, split mortality compiler, and exact state lower bound |
@@ -2361,6 +2365,7 @@ fixed-rank decision problem.
 | Every next block from the accepted fixed-source collision ray is a forced valuation-minus-one exit; its surface is injective with a two-candidate target test, and target valuation reduces its full continuation cone to one fixed translated-letter count | `MixedPrimeDebt.fixedSourceAdjacentExitTarget_fiveNegative`, `MixedPrimeDebt.fixedSourceAdjacentExitTarget_displacement`, `MixedPrimeDebt.fixedSourceAdjacentExitTarget_displacement_twoValue`, `MixedPrimeDebt.fixedSourceAdjacentExitTarget_tail_fiveNegative`, `MixedPrimeDebt.fixedSourceAdjacentExitTarget_exists_iff`, `MixedPrimeDebt.fixedSourceAdjacentExitTarget_injective`, `MixedPrimeDebt.fixedSourceAdjacentContinuationSchedule_run`, `MixedPrimeDebt.fixedSourceAdjacentExitTarget_tail_length`, `MixedPrimeDebt.fixedSourceAdjacentContinuation_exists_iff_lengthCandidate`, `MixedPrimeDebt.fixedSourceAdjacentContinuation_translate_count` |
 | Every critical-shell exit is zero, valuation-minus-one, or positive; every nonempty suffix to a fixed target has one of two target-derived lengths | `MixedPrimeDebt.shellStep_fiveUnit_exit_cases`, `MixedPrimeDebt.shellRun_fiveUnit_exit_nonempty_tail_value_cases`, `MixedPrimeDebt.shellRun_fiveUnit_exit_nonempty_tail_length_cases` |
 | Every shell schedule preserves `[1/5,1/2]`; an exterior target obeys a zero-wait extremal envelope and has an explicit computable schedule-length bound | `MixedPrimeDebt.shellRun_mem_realTrap`, `MixedPrimeDebt.shellRun_above_half_envelope`, `MixedPrimeDebt.shellRun_above_half_length_lt_bound`, `MixedPrimeDebt.shellRun_below_one_fifth_envelope`, `MixedPrimeDebt.shellRun_below_one_fifth_length_lt_bound` |
+| Every rational `5`-adic unit target in `(1/5,1/2]` has guarded rational predecessor schedules of every prescribed block length | `MixedPrimeDebt.exists_shellStep_realTrap_predecessor`, `MixedPrimeDebt.exists_shellStep_realTrap_unit_predecessor`, `MixedPrimeDebt.exists_shellRun_realTrap_unit_predecessor_of_length` |
 | Shell phases are all units exactly when the final output is a unit | `PeriodicShell.shellPrefixesUnit_iff` |
 | Raw words and shell schedules are conjugate, and every boundary-shifted benchmark schedule is one contextual raw rule | `PeriodicShell.shellRun_eq_wordAction`, `PeriodicShell.shellRawWord_benchmarkRelationShiftLeft`, `PeriodicShell.shellRawWord_benchmarkRelationShiftRight`, `PeriodicShell.shellRun_benchmarkRelationShift` |
 | Two distinct length-thirteen benchmark schedules induce the same affine map, preserve all guards in every context, and share a rational all-unit cycle | `PeriodicShell.benchmarkRelation_ne`, `PeriodicShell.shellRun_benchmarkRelationContext`, `PeriodicShell.benchmarkRelationContextGuard`, `PeriodicShell.benchmarkRelationCycle` |

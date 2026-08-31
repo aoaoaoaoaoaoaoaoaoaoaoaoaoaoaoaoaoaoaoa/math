@@ -3020,6 +3020,12 @@ trajectory, whose distance from `1/2` contracts by `(3/5)^n`. Lean converts this
 computable block-count bound, and `D2-D05` decides every smaller count. The variable-schedule
 real survivor is therefore exactly the closed target interval `[1/5,1/2]`. This is
 [`D2-D10`](SALVAGE.md#d2-d10-real-trap-exterior).
+The guarded part of that interval is backward-saturated. Every rational `5`-adic unit target
+`y∈(1/5,1/2]` has a rational unit predecessor in the same interval, and iteration supplies a
+guarded predecessor schedule of every prescribed block length. The source varies with the
+length. Thus target position, target unitality, and real contraction cannot bound the remaining
+translated count; only the simultaneous fixed-source/fixed-target arithmetic can discriminate.
+This is [`D2-O08`](SALVAGE.md#d2-o08-real-trap-backward-saturation).
 Higher depth is not free: a published length-thirteen relation yields two distinct
 schedules with the same affine map and a common Lean-checked guarded periodic source. This is an
 exact rewrite seed. Lean also proves that it preserves all intermediate shell guards in every
@@ -3091,6 +3097,7 @@ artery; see
 | Infer target acceptance from the automatic cross-length source unit | the adjacent debt-safe bridges `[4]` and `[0,5]` collide from the `5`-unit source `2/9`, but their target `55/243` has `5`-adic valuation one |
 | Bound accepted debt-bridge waits from one fixed source | for every `k≥0`, `[1,10k+2]` and `[3,1,10k]` are accepted adjacent bridges from `43/24`, with terminal waits tending to infinity |
 | Use real contraction to bound every shell schedule | the common invariant interval `[1/5,1/2]` is the exact recurrent real survivor; zero-wait extremality bounds only exterior targets |
+| Bound the translated count from a target inside the real trap | every rational `5`-adic unit target there has guarded rational predecessor schedules of every prescribed length, with varying source |
 | Invoke a general module `S`-unit algorithm | the arbitrary three-prime case leads to open linear-exponential systems, and forgetting the monotone path destroys useful structure |
 
 These are exclusion tests for future proposals. Any attack relying on one of them must identify
@@ -3337,7 +3344,8 @@ universal computation.
    infinite seam, so treat chamber exit and reentry as separate pre-exit seams. In parallel, seek
    a parametric affine-kernel description beyond the checked length-30 basis and run normalized
    collision/exit-fibre census. Do not reopen unlabeled residue-only finite nuclei, uniformly
-   bounded reverse fanout, or global real drift inside the invariant trap.
+   bounded reverse fanout, one-sided endpoint bounds, or global real drift inside the invariant
+   trap. `D2-O08` already saturates target-only reverse length there when the source may vary.
    Keep the non-elementary lanes independent: adelic cone types, parabolic rational subsets,
    trace/height descent, finite-obstruction saturation, and valuation universality.
 7. Synthesize the returned attacks by the discriminating signals above; do not average

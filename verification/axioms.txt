@@ -2036,6 +2036,15 @@
 'MatrixMortality.MixedPrimeDebt.shellRun_below_one_fifth_length_lt_bound' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.MixedPrimeDebt.exists_shellStep_realTrap_predecessor' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.exists_shellStep_realTrap_unit_predecessor' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.exists_shellRun_realTrap_unit_predecessor_of_length' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.MixedPrimeDebt.negativeOrientation_crossLengthCollision' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
