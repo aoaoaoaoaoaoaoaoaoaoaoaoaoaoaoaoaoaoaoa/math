@@ -767,7 +767,7 @@ valuation `a−min(2b,a)` for `a=vₚ(B)` and `b=vₚ(t)`, except at the sole cr
 `a=2b`; at equality, its valuation is still nonpositive whenever the affine predecessor is
 defined. For `t=q^(w+1)`, this is the exact word-visible tax `2(w+1)vₚ(q)`. Positive denominator
 depth survives one terminal pullback only above that tax. Later shell re-entry and cross-prime
-common content remain unclassified. `R32-S44` through `R32-S51` are strict
+common content remain unclassified. `R32-S44` through `R32-S52` are strict
 obstructions, not the arbitrary-composite classification. The two-coordinate interface does
 not reduce to finite-alphabet `M₂(3)` because every scale `qⁿ` remains a distinct return letter.
 
@@ -817,8 +817,21 @@ fraction pullback moves across the alternating form, so a tail word determines o
 state `(R,S)` and the full bridge is zero exactly when `R=Aq^(head+1)S`. If
 `vₚ(A/B)=k vₚ(q)>0`, the positive-valuation synchronization theorem forces the tail's complete
 wait exponent to equal `k`. Hence positive-numerator branches reduce to finitely many weighted
-two-coordinate tails followed by one exact base-power membership test. Pure-denominator
-parameters remain unbounded.
+two-coordinate tails followed by one exact base-power membership test.
+
+The pure-denominator adjugate recurrence now has its first complete finite chamber. For
+`tail=first::rest`, `E=waitExponent(tail)`, and `E′=waitExponent(rest)`, its integral state obeys
+
+```text
+S=(−1)^|tail|q^(2E)+Bu,       R/B=(−1)^|tail|q^(2E′)+Bv
+```
+
+with integral corrections. At a prime with `r=vₚ(q)>0` and `a=vₚ(B)>2Er`, an incidence
+`R=qʰS` forces `a=(h+2(first+1))r` and `2E′<h`. For the physical bridge `h=head+1`, so the head,
+first tail wait, and remaining tail weight range over a finite set. Pure-denominator candidates
+outside this certificate are simultaneously shallow: `a≤2Er` at every denominator prime. If
+two primes are deep, cross multiplication of their two exact exponent laws forces
+`vₚ(B)v_ℓ(q)=v_ℓ(B)vₚ(q)`; unequal normalized depths exclude the jointly deep branch.
 
 The common-geometric-base hypothesis cannot be weakened to total divisibility of an arbitrary
 scale alphabet. Lean checks that `[3,15,3,3,15,3,3,3]` is pairwise totally ordered under
@@ -2558,6 +2571,7 @@ fixed-rank decision problem.
 | `ReturnSquareGeometricCenter.lean` | exact geometric center-chain exponents and critical zero-residue exclusion |
 | `ReturnSquareGeometricResidue.lean` | equal-scale zero-residue transition and odd signed-center exclusion |
 | `ReturnSquareTailAdjugate.lean` | head-separated adjugate tail incidence and fixed positive-valuation tail weight |
+| `ReturnSquarePureDenominator.lean` | integral pure-denominator tail expansion and deep-prime finite certificate |
 | `ReturnSquareTax.lean` | exact four-state lower bound for literal reversible-stack returns |
 | `ReturnSquareNoGo.lean` | quadratic-pencil reversible-squaring obstruction and blind-scaling collapse |
 | `ReturnJordan.lean` | parity-Jordan rail rigidity and modular immortality certificate |
