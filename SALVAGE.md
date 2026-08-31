@@ -87,6 +87,7 @@ file owns the mathematical stock.
 | [`MM-O16`](#mm-o16-exact-delimiter-pair-obstruction) | obstruction | exact ignored delimiter pairs force a bordered paired family to be immortal | formalized core; audited specialization | graduated |
 | [`MM-O17`](#mm-o17-factorized-binary-cross-ratio-wall) | obstruction | exact prefix and cyclic-cube nine-state compilers force a Neary cross-ratio that fails in every pairing | formalized core; audited assembly | graduated |
 | [`MM-O18`](#mm-o18-forced-rule-companion-toggle-wall) | obstruction | the forced-rule derivative and constant channel force an exact five-state companion toggle to be invertible | formalized | graduated |
+| [`MM-O19`](#mm-o19-trailing-toggle-exact-prefix-tax) | obstruction | trailing-toggle absorption preserves zeros; exact comb and balanced rank profiles cost at least ten and eleven states | formalized core; audited assembly | graduated |
 | [`MM-M01`](#mm-m01-off-diagonal-companion-interface) | partial mechanism | off-diagonal rank-two bridge has a complete fracture grammar | audited | stock |
 | [`MM-M02`](#mm-m02-bordered-toggle) | partial mechanism | one lifted toggle has a stable rank-two third power | audited | parked |
 | [`MM-M03`](#mm-m03-five-state-setter-punctuation) | partial mechanism | a mixed delimiter word is an exact internal rank-one separator | audited | closed |
@@ -1969,6 +1970,55 @@ cubic delimiter realize the exact companion. Pursue the setter/same-zero and sch
 
 **Artifact:**
 [`audits/m53-forced-rule-c-companion-2026-08-31.md`](audits/m53-forced-rule-c-companion-2026-08-31.md).
+
+### MM-O19: Trailing-toggle exact prefix tax
+
+**Kind:** obstruction
+**Evidence:** formalized core; audited assembly
+**Disposition:** graduated
+
+For the four-state paired series, let `T` be the phase toggle and absorb it into the right
+boundary: `C′=TC`. Since `T²=I`, every control word satisfies
+
+```text
+f(wtt)=f(w).
+```
+
+Consequently `g(w)=f(wt)` has a nonempty zero exactly when `f` does. This is an existential
+zero-language equivalence for arbitrary words; it assumes neither invertible controls nor
+universal nonvanishing of malformed words. The absorbed column has private rule coordinate zero,
+so its separator and both rank-three data generators have image in the same three-plane. The
+toggle remains rank four.
+
+In a direct-sum exact prefix compiler, the rank of a decoded leaf bounds every fibre on its
+factor path. A four-state short leaf and a rank-three depth-three leaf therefore cost at least
+
+```text
+4+3+3=10
+```
+
+states. The other placements are worse: a balanced placement of rank-four and rank-three leaves
+on opposite branches costs at least eleven, while putting the toggle below the short comb leaf
+costs at least eleven. Thus no complete exact four-role binary prefix layout reaches nine.
+Lean checks the matrix-rank inequalities; the complete-tree classification and the explicit
+ten-state comb assembly are audited separately. The finite 24-layout census is computational.
+
+**Scope:** complete binary prefix trees with direct-sum parser fibres and exact path products.
+The result permits singular roles and variable fibre dimensions. It does not cover overlapping
+fibres, cross-path superposition, changed nonzero values, a history-sensitive same-zero
+transducer, or a changed source.
+
+**Use:** retain trailing-toggle absorption as a lawful changed boundary, but stop exact prefix
+factor minimization at ten states. The live `M₉(2)` seam is non-exact internal superposition or
+another source family.
+
+**Formalization:**
+`pairedTrailingToggle_hasNonemptyZero_iff` and
+`VariablePrefixRankTax.ten_le_of_rank_four_short_rank_three_deep` in
+[`MatrixMortality/PairedBinaryPrefixTax.lean`](MatrixMortality/PairedBinaryPrefixTax.lean).
+
+**Artifact:**
+[`audits/m92-trailing-toggle-prefix-tax-2026-08-30.md`](audits/m92-trailing-toggle-prefix-tax-2026-08-30.md).
 
 ### MM-M01: Off-diagonal companion interface
 

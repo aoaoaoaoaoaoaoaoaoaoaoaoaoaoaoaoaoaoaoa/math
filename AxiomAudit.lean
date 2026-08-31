@@ -85,6 +85,17 @@ open MatrixMortality
 #print axioms pairedDataMatrix_eq_explicit
 #print axioms pairedToggleMatrix_eq_explicit
 #print axioms pairedToggleMatrix_eq_permMatrix
+#print axioms pairedToggleMatrix_rank_eq_four
+#print axioms pairedDataMatrix_rank_eq_three
+#print axioms pairedDataMatrix_mulVec_one
+#print axioms pairedTrailingToggleColumn_one
+#print axioms pairedTrailingToggleSeparator_one
+#print axioms pairedProduct_append_toggle_toggle
+#print axioms pairedCoefficient_append_toggle_toggle
+#print axioms pairedTrailingToggle_hasNonemptyZero_iff
+#print axioms VariablePrefixRankTax.shortLeaf_add_two_mul_deepLeaf_le
+#print axioms VariablePrefixRankTax.ten_le_of_rank_four_short_rank_three_deep
+#print axioms VariablePrefixRankTax.eleven_le_balanced_rank_four_rank_three
 #print axioms pairedProduct_mulVec_column
 #print axioms pairedCoefficient_eq_sideCoefficient
 #print axioms decodePairedWord_surjective

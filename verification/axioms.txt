@@ -110,6 +110,23 @@
 'MatrixMortality.pairedDataMatrix_eq_explicit' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.pairedToggleMatrix_eq_explicit' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.pairedToggleMatrix_eq_permMatrix' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.pairedToggleMatrix_rank_eq_four' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.pairedDataMatrix_rank_eq_three' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.pairedDataMatrix_mulVec_one' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.pairedTrailingToggleColumn_one' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.pairedTrailingToggleSeparator_one' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.pairedProduct_append_toggle_toggle' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.pairedCoefficient_append_toggle_toggle' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.pairedTrailingToggle_hasNonemptyZero_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.VariablePrefixRankTax.shortLeaf_add_two_mul_deepLeaf_le' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.VariablePrefixRankTax.ten_le_of_rank_four_short_rank_three_deep' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.VariablePrefixRankTax.eleven_le_balanced_rank_four_rank_three' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.pairedProduct_mulVec_column' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.pairedCoefficient_eq_sideCoefficient' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.decodePairedWord_surjective' depends on axioms: [propext]

@@ -119,6 +119,7 @@ import MatrixMortality.NearyCrossRatioNoGo
 import MatrixMortality.CHHNPackingRank
 import MatrixMortality.PairedBoundaryTax
 import MatrixMortality.DeletionFirstFracture
+import MatrixMortality.PairedBinaryPrefixTax
 import MatrixMortality.PairedBinaryFullAlgebra
 import MatrixMortality.PrefixFullAlgebra
 import MatrixMortality.ScheduledBinaryRank

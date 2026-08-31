@@ -233,7 +233,7 @@ The unknown cells immediately below this staircase are:
 | `M₃(4)` | three-active-role fixed-boundary PCP / `GPCP(3)`, or a new same-dimension generator compiler | by CHHN, also `M₉(2)` |
 | `M₄(3)` | an undecidable promised two-state overlap queue with pure deletion, or closure of either parabolic bridge language | by CHHN, also `M₈(2)` |
 | `M₅(3)` | a five-state binary same-zero root, a toggle/separator fusion, or fixed-width-three scheduled universality | supersedes `M₆(3)`; `M₁₀(2)` is already known |
-| `M₉(2)` | a changed physical pair, changed-zero-series compiler, or nonlinear reduction; the present pair spans `M₁₀(ℚ)` | improves the two-generator threshold by one |
+| `M₉(2)` | a history-sensitive same-zero compiler, overlapping parser fibres, or a changed source; canonical and trailing-toggle exact prefix routes stop at ten | improves the two-generator threshold by one |
 | `M₂(k≥3)` | a qualitatively different decidability or undecidability argument | settles the dimension-two wall |
 
 The scalar result `Z₆(2)` gives `M₆(3)` after adjoining a separator; that mortality point was
@@ -874,6 +874,21 @@ Thus neither another exact prefix layout nor an exact three-phase block factoriz
 live. The direct frontier is a genuinely changed zero series, a nonfactorial state-dependent
 decoder, another invariant quotient not induced by the generators' common image, or a nonlinear
 reduction. `GPCP(3)` remains the independent stronger ancestor.
+
+[`MM-O19`](SALVAGE.md#mm-o19-trailing-toggle-exact-prefix-tax) tests one changed-source seam.
+Because the paired toggle satisfies `T²=I`, moving one toggle into the terminal column preserves
+existence of a nonempty zero for every source body and every control word. The shifted separator
+then shares the data generators' three-dimensional image plane. This reaches an exact
+variable-fibre comb with profile `4+3+3=10`, but the same rank profile is a lower bound for every
+direct-sum exact four-role prefix layout: the rank-four toggle taxes its root path and a
+rank-three deep data leaf taxes both remaining fibres. Balanced layouts cost at least eleven.
+
+This closes code reassignment, variable prefix-fibre dimensions, and exact boundary-orbit
+factorization for the paired four-state source. It does not touch overlapping fibres or
+cross-path sums. The sharp next experiment is therefore a singular, history-sensitive compiler
+which preserves only existential zero reachability; exact internal-role products are already too
+rigid. See
+[`audits/m92-trailing-toggle-prefix-tax-2026-08-30.md`](audits/m92-trailing-toggle-prefix-tax-2026-08-30.md).
 
 ### 4. Three-letter correspondence and direct mortality: `M₃(4)`
 

@@ -302,6 +302,17 @@ embedding and retraction matrices prove the exact restriction and its converse, 
 new zero created by restriction. A generic zero-block theorem then preserves nonempty-word
 mortality in every dimension `10+n`.
 
+The changed-source `M₉(2)` audit has a separate checked boundary. The paired toggle is an
+involution, so appending two toggles preserves the coefficient on every word. Absorbing one
+toggle into the terminal column therefore preserves existential nonempty zero reachability in
+both directions, without a terminal-grammar or invertibility premise. Lean also checks that the
+shifted column and every data image have zero private rule coordinate, while the toggle and data
+roles have ranks four and three respectively. Generic rank-product inequalities then prove that
+an exact comb with a rank-four short leaf and rank-three depth-three leaf needs at least ten
+states; the corresponding balanced layout needs at least eleven. This is a theorem about
+direct-sum exact path products, not a lower bound for history-sensitive same-zero compilers. See
+[`m92-trailing-toggle-prefix-tax-2026-08-30.md`](audits/m92-trailing-toggle-prefix-tax-2026-08-30.md).
+
 Lean also constructs the canonical reachable-observable quotient around any internal physical
 word whose product factors as `UW`. Its generators act on
 
@@ -1856,6 +1867,7 @@ fixed-rank decision problem.
 | `TerminalReduction.lean` | rational and integer fixed-boundary mortality compiler |
 | `TerminalSource.lean` | generic primitive extraction and GPCP bridge |
 | `PairedCompression.lean` | reset/toggle specialization, explicit coordinate certificates, and arbitrary-word decoding |
+| `PairedBinaryPrefixTax.lean` | trailing-toggle zero-language equivalence, common-plane boundary absorption, and exact variable-fibre prefix rank taxes |
 | `ParabolicBlade.lean` | open cube root, nonzero mixed blade, complete atom grammar, annihilator guards, and exact `2 × 2` exceptional-chain contraction |
 | `ParabolicResidueWall.lean` | integral residue-{0,1} atom numerators, modulo-three two-ray action, and the necessity of residue two |
 | `ParabolicExterior.lean` | complete adjugate exterior state, bridge-wall coordinate, and four normalized safe actions |
@@ -2285,6 +2297,9 @@ fixed-rank decision problem.
 | Ten-state mortality iff prefix-machine mortality | `restrictedPrefixGenerator_mortal_iff_prefixMachine` |
 | Canonical `M₁₀(2)` instance mortal iff tag halting | `nearyMortality102_mortal_iff_tagHaltsFrom` |
 | Every zero-padded `M₁₀₊ₙ(2)` instance iff tag halting | `nearyMortality10Plus_mortal_iff_tagHaltsFrom` |
+| Appending two paired toggles preserves every coefficient, and absorbing one preserves nonempty zero reachability | `pairedCoefficient_append_toggle_toggle`, `pairedTrailingToggle_hasNonemptyZero_iff` |
+| A rank-four short leaf and rank-three depth-three leaf tax an exact prefix comb by ten states | `VariablePrefixRankTax.ten_le_of_rank_four_short_rank_three_deep` |
+| Opposite rank-four and rank-three branches tax a balanced exact prefix layout by eleven states | `VariablePrefixRankTax.eleven_le_balanced_rank_four_rank_three` |
 | Mathlib code halting has a verified `TM2` interpreter | `exists_universalTM2` |
 | Fixed two-tag halt-label reachability iff code halting | `UniversalTwoTag.reaches_halt_iff` |
 | Emitted restricted-tag halting iff code halting | `UniversalNeary.tagHaltsFrom_iff_codeHalts` |
