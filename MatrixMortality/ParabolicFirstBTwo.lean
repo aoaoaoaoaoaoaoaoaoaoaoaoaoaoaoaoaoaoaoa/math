@@ -695,51 +695,17 @@ its first two positions and a first `b` after them. -/
 private theorem tagComplementCode_second_position_density_gap (body : List TagLetter) :
     13 * 3 ^ (tagEncode 3 body).length ≤ 243 * tagComplementCode body ∨
       2178 * tagComplementCode body < 39 * 3 ^ (tagEncode 3 body).length := by
-  cases body with
-  | nil =>
-      right
-      norm_num [tagComplementCode, tagEncode, spell, ternaryCode]
-  | cons first tail =>
-      cases first with
-      | b =>
-          left
-          have density :
-              13 * 3 ^ (tagEncode 3 (.b :: tail)).length ≤
-                81 * tagComplementCode (.b :: tail) := by
-            simpa using (tagComplementCode_first_b_density 0 tail).1
-          omega
-      | c =>
-          cases tail with
-          | nil =>
-              right
-              norm_num [tagComplementCode, tagEncode, spell, tagCode, ternaryCode,
-                ternaryDigit]
-          | cons second rest =>
-              cases second with
-              | b =>
-                  left
-                  simpa using (tagComplementCode_first_b_density 1 rest).1
-              | c =>
-                  right
-                  let R : Nat := 3 ^ (tagEncode 3 rest).length
-                  let D : Nat := tagComplementCode rest
-                  have scale_positive : 1 ≤ R := by
-                    dsimp [R]
-                    exact one_le_pow₀ (by norm_num)
-                  have density : 242 * D ≤ 39 * (R - 1) := by
-                    dsimp [R, D]
-                    exact tagComplementCode_global_bound rest
-                  have complement_eq :
-                      tagComplementCode (.c :: .c :: rest) = D := by
-                    rw [tagComplementCode_cons_c, tagComplementCode_cons_c]
-                  have scale_eq :
-                      3 ^ (tagEncode 3 (.c :: .c :: rest)).length = 9 * R := by
-                    dsimp [R]
-                    simp only [List.length_append]
-                    norm_num [tagCode, pow_add]
-                    ring
-                  rw [complement_eq, scale_eq]
-                  omega
+  rcases tagComplementCode_first_b_position_gap 1 body with high | low
+  · left
+    calc
+      13 * 3 ^ (tagEncode 3 body).length ≤
+          81 * 3 ^ 1 * tagComplementCode body := high
+      _ = 243 * tagComplementCode body := by ring
+  · right
+    calc
+      2178 * tagComplementCode body =
+          242 * 3 ^ (1 + 1) * tagComplementCode body := by ring
+      _ < 39 * 3 ^ (tagEncode 3 body).length := low
 
 private theorem ccbccb_scale (rest : List TagLetter) :
     3 ^ (tagEncode 3 ([.c, .c, .b, .c, .c, .b] ++ rest)).length =
