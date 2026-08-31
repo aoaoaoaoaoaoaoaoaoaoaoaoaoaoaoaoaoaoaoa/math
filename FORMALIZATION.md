@@ -1013,7 +1013,24 @@ forces every invertible generator to commute or anticommute with `T`. Separate g
 lemmas verify that commuting preserves a twist eigenspace and anticommuting exchanges the
 opposite eigenspaces. The top theorem assumes one fixed leakage, one quotient action per
 generator, and three distinct source rays. It makes no claim about rank at most one,
-word-dependent leakage, nonspanning orbits, syntax guards, or a mortality converse.
+word-dependent leakage, nonspanning orbits, syntax guards, or a mortality converse. The adjacent
+`G3-S09` theorem closes rank at most one for a global fixed intertwiner.
+
+[`G3-S09`](SALVAGE.md#g3-s09-fixed-symmetric-square-leakage-taxonomy) is checked in
+`SymmetricSquareLeakageTaxonomy`. For a rank-one fixed intertwiner, Lean transposes the leakage,
+extracts a witnessed generator of its one-dimensional range, and proves that generator is a
+common dual Sym² eigenvector. The corresponding rational quadratic matrix transforms by
+`AᵀQA=λQ`. Its degenerate case is formally factored as a squared rational linear form and yields
+a common perpendicular ray. Its nondegenerate case supplies a traceless twist squaring to a
+nonzero scalar; determinant comparison yields commutation or anticommutation with every
+invertible generator. Lean also proves that rank zero means the matrix is zero and that
+determinant-zero `3×3` matrices have rank at most two. The singular-intertwiner theorem then
+combines rank zero, rank one, and `G3-S07` into `L=0` or elementary dynamics. The final corollary
+derives both singularity and global intertwining from a dependent image of three pairwise-distinct
+Veronese rays with pointwise quotient equations. An explicit nonzero middle-coordinate projector
+agrees with zero on two distinct Veronese axes, proving that two-ray pointwise data cannot replace
+the spanning hypothesis. No theorem promotes the `G3-S03` carrier to three underlying binary
+rays or excludes word/source-dependent leakage.
 
 The semantic core of [`G3-O04`](SALVAGE.md#g3-o04-expanding-affine-history-no-go) is formalized:
 the reset-affine orbit, finite reverse box, exact caged DFA, regularity, and universal
@@ -1794,6 +1811,7 @@ fixed-rank decision problem.
 | `ProjectiveLine.lean` | total affine-chart presentation of `ℙ¹` and exact unit-word ray action |
 | `SymmetricSquareCollision.lean` | covariant Sym² representation, gapped tangent collision test, full-rank cost, two-ray Veronese-plane obstruction, and fixed full-rank leakage no-go |
 | `SymmetricSquareLeakage.lean` | rank-two leakage kernel line, tensor similitude bifurcation, and common rational-point or algebraic-pair obstruction |
+| `SymmetricSquareLeakageTaxonomy.lean` | dual rank-one quadratic, singular fixed-leakage classification, unified three-ray corollary, and exact two-ray blindness witness |
 | `CongruenceBlindOrbit.lean` | free rational shear orbit, trivial source stabilizer, projective all-modulus CRT closure, and a whole-matrix congruence ghost away from nineteen |
 | `ShearEuclidean.lean` | Euclidean chamber growth, determinant-one coprimality, and finite projective syntax bounds for the fixed step-three shear orbit |
 | `TransverseDilationOrbit.lean` | free diagonal--parabolic ping-pong, bounded stabilizer recurrence, and a promised-empty trivial-stabilizer false inverse ray of proper height |

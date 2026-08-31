@@ -222,6 +222,7 @@ file owns the mathematical stock.
 | [`G3-S04`](#g3-s04-symmetric-square-collision-and-fork-obstruction) | structure theorem and obstruction | symmetric square turns projective collision into a gapped scalar zero, while a two-plane Veronese carrier contains at most two projective rays | formalized | graduated |
 | [`G3-S05`](#g3-s05-fixed-full-rank-symmetric-square-leakage-no-go) | obstruction | every fixed leakage which collapses three distinct Sym² rays into a plane is singular, even between nonsingular binary coordinate changes | formalized | graduated |
 | [`G3-S07`](#g3-s07-fixed-rank-two-symmetric-square-leakage-is-elementary) | structure theorem and obstruction | fixed rank-two leakage carrying three distinct Sym² rays equivariantly forces a common rational point or invariant algebraic pair | formalized | graduated |
+| [`G3-S09`](#g3-s09-fixed-symmetric-square-leakage-taxonomy) | structure theorem and obstruction | every singular fixed Sym² intertwiner is zero or elementary; a dependent three-ray image supplies singularity and global equivariance | formalized | graduated |
 | [`G3-O18`](#g3-o18-transverse-minimum-body-countermodel) | fixed-subclass compiler | distinct rank-two kernels encode every paired history and exactly recognize all minimum bodies | formalized | graduated |
 | [`G3-O02`](#g3-o02-rational-phase-fracture) | obstruction | a mortal paired instance has no rational phase-state same-zero compression | audited | stock |
 | [`G3-O03`](#g3-o03-history-sensitive-minimal-body-fracture) | obstruction | minimal bodies admit an exact history-sensitive three-state same-zero compiler | formalized | graduated |
@@ -9318,15 +9319,79 @@ exact elementary obstruction, not an appeal to an external group classification.
 witnessed pairwise-distinct source rays are essential. The theorem does not cover rank at most
 one, a leakage or quotient action selected by the word or source state, an orbit containing at
 most two rays, or equations known only on a nonspanning carrier. It supplies no malformed-word
-guard or mortality converse.
+guard or mortality converse. `G3-S09` subsequently closes rank at most one under a global fixed
+intertwiner and packages the three-ray fixed-leakage taxonomy.
 
 **Use:** reject a non-elementary Sym² repair which spends exactly one fixed dimension and still
 acts consistently on a spanning orbit. Together `G3-S05` and `G3-S07` kill fixed leakage of ranks
 three and two at this equivariance seam. Any surviving insertion must have rank at most one,
-vary dynamically, or avoid a three-ray spanning witness.
+vary dynamically, or avoid a three-ray spanning witness; `G3-S09` removes the first alternative
+when it obeys the same global fixed-equivariance law.
 
 **Artifact:** [`SymmetricSquareLeakage.lean`](MatrixMortality/SymmetricSquareLeakage.lean) and
 [`m34-fixed-rank-two-symmetric-square-leakage-2026-08-31.md`](audits/m34-fixed-rank-two-symmetric-square-leakage-2026-08-31.md).
+
+### G3-S09: Fixed symmetric-square leakage taxonomy
+
+**Kind:** structure theorem and obstruction
+
+**Evidence:** formalized
+
+**Disposition:** graduated
+
+Let `L` be a fixed rational three-state leakage satisfying one global quotient law for every
+invertible binary generator:
+
+```text
+L Sym²(Aᵢ)=HᵢL.
+```
+
+Lean now classifies every singular `L`. Rank zero is the zero matrix. Rank two is `G3-S07`: the
+kernel line is a common Sym² tensor eigenline and yields a common rational point or invariant
+algebraic pair. At rank one, transpose the intertwiner. The one-dimensional range of `Lᵀ` is
+invariant under `Sym²(Aᵢ)ᵀ`, so it contains a common nonzero quadratic covector `f` satisfying
+
+```text
+f Sym²(Aᵢ)=λᵢf.
+```
+
+Write `f=(p,q,r)` as the symmetric matrix
+
+```text
+Q(f)=[[p,q/2],[q/2,r]].
+```
+
+Then `AᵢᵀQ(f)Aᵢ=λᵢQ(f)`. If `det Q(f)=0`, rational factorization writes the corresponding tensor
+as `cν(n)`, so `f(v)=c(n·v)²`; the rational perpendicular ray to `n` is fixed by every generator.
+If `det Q(f)≠0`, the twist `T=JQ(f)` satisfies `tr T=0`,
+`T²=−det(Q(f))I`, and `AᵢT=±TAᵢ`. Thus rank one has the same exact point/pair elementary
+bifurcation as rank two, through the dual rather than primal Sym² action.
+
+The public three-ray corollary packages the taxonomy without assuming a rank. If three source
+rays have nonzero pairwise cross determinants, their Veronese columns form a basis. Pointwise
+quotient equations on those rays are therefore global, and dependence of their leaked images
+forces `det L=0`. Consequently `L=0` or the binary action is elementary. Together with `G3-S05`,
+no fixed full-rank, rank-two, or rank-one equivariant leakage carries a genuinely non-elementary
+spanning Sym² orbit into the terminal plane.
+
+**Scope:** the three-ray hypothesis is an actual boundary, not ceremonial slack. Lean exhibits
+two distinct Veronese axes on which the zero map and a nonzero middle-coordinate projector agree;
+two pointwise tests cannot force a global intertwiner. The terminal-fork carrier theorem
+`G3-S03` supplies a nonzero invariant line or plane but does not by itself supply three distinct
+underlying binary rays or the global quotient equation. Word-dependent leakage, source-dependent
+leakage, and pointwise compatibility confined to at most two rays remain outside this taxonomy.
+If an at-most-two-ray orbit is itself invariant under all invertible fork blocks, it is already
+the elementary invariant-point/pair case; the unresolved seam is failure of global equivariance,
+not a third kind of binary dynamics.
+
+**Use:** delete the entire fixed equivariant Sym² leakage tree for a non-elementary binary core.
+A successor must vary its lost direction with the word or source, expose no spanning three-ray
+test set, or abandon the Sym² carrier. Do not infer that `G3-S03` alone generates the three-ray
+witness needed by the packaged corollary.
+
+**Artifact:**
+[`SymmetricSquareLeakageTaxonomy.lean`](MatrixMortality/SymmetricSquareLeakageTaxonomy.lean) and
+[`m34-fixed-symmetric-square-leakage-taxonomy-2026-08-31.md`](audits/m34-fixed-symmetric-square-leakage-taxonomy-2026-08-31.md).
 
 ### G3-O18: Transverse minimum-body countermodel
 
