@@ -1171,11 +1171,19 @@ For `D_c^(β+1)`, the exact codes `V_m=3ρ−1` and `2P_m=9ρ²+ρ−2`, togethe
 incoming bound `q<1`, force `Δ>12`. Either singleton target forces `Δ<12`. The sole first
 multi-transfer survivor is therefore `D_c²→multi`.
 
-The remaining carrier is not yet the integral raw-fringe state consumed by the positive
-depth-one classifier: its discrepancy
-`(14ρ−1)/3−8Hq/(3(ρ−2))` is generally rational and depends on the preceding punctuated upper
-cylinder. A lawful splice requires a new physical ancestry theorem supplying an integral
-digit-code difference and common-suffix factorization; the pole shell alone does neither.
+The remaining carrier is not the integral raw-fringe state consumed by the positive depth-one
+classifier: its discrepancy `(14ρ−1)/3−8Hq/(3(ρ−2))` is generally rational and depends on the
+preceding punctuated upper cylinder. [`MM-S52`](SALVAGE.md#mm-s52-double-deletion-raw-ancestry-obstruction)
+proves that this is a real interface failure. For a first block of upper length `m` and
+punctuated code `P`, integrality after `D_c²` forces `P∣8Hμ`; the locally physical repeated
+`D_c²` state has `P=14ρ−1` and violates that divisibility for every `β≥3`. Hence no local splice
+can follow from the carrier shape and recurrence alone. The same record proves the sharp positive
+statement: for a nondegenerate rational carrier, the next-block pole equation is exactly the
+rational depth-one equation, and an integral normalization specializes exactly to
+`PositiveDepthOnePole`. A lawful `MM-S42` splice must still derive integrality, a raw digit-code
+difference, and common-suffix ancestry from the global orbit. The repeated state is not claimed
+reachable from the distinguished entry and does not kill the actual first-transfer survivor;
+its separate direct ratio-cylinder extinction is `MM-S51`.
 
 The positive depth-one ternary question is now closed at its exact witness interface.
 [`MM-S42`](SALVAGE.md#mm-s42-swapped-positive-depth-one-extinction) reduces every regular
