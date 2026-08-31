@@ -227,6 +227,7 @@ file owns the mathematical stock.
 | [`G3-O30`](#g3-o30-nonprojective-infinite-carrier-orbit) | counterexample | a diagonal toggle with eigenvalues `1,2,3` sends one rank-two data image through infinitely many distinct rational planes | formalized | graduated |
 | [`G3-O31`](#g3-o31-whole-carrier-terminal-row-obstruction) | obstruction | a nonzero row contains at most one plane in the explicit infinite nonprojective carrier orbit | formalized | graduated |
 | [`G3-O32`](#g3-o32-terminal-point-incidence-dichotomy) | obstruction | a fixed terminal point test on the infinite carrier orbit accepts all depths or at most two, sharply, but singleton acceptance has no uniform horizon | formalized | graduated |
+| [`G3-O33`](#g3-o33-uniform-terminal-coefficient-section) | universality | one total rational row section realizes every prescribed `A−B2ⁿ−C3ⁿ` terminal scalar at every source, including any source-indexed delayed singleton | formalized | graduated |
 | [`G3-O02`](#g3-o02-rational-phase-fracture) | obstruction | a mortal paired instance has no rational phase-state same-zero compression | audited | stock |
 | [`G3-O03`](#g3-o03-history-sensitive-minimal-body-fracture) | obstruction | minimal bodies admit an exact history-sensitive three-state same-zero compiler | formalized | graduated |
 | [`G3-O04`](#g3-o04-expanding-affine-history-no-go) | obstruction | finite-mode expanding one-coordinate history has decidable target reachability | audited | graduated |
@@ -9593,10 +9594,74 @@ malformed-word converse.
 **Artifact:** [`TransverseInfiniteAtlas.lean`](MatrixMortality/TransverseInfiniteAtlas.lean) and
 [`m34-terminal-point-incidence-2026-08-31.md`](audits/m34-terminal-point-incidence-2026-08-31.md).
 
-**Next:** classify source-computable coefficient maps `(A,B,C)` arising from unrestricted
-`(β,body)`. Either compile the required terminal history into one of the at-most-two depths with a
-complete all-word converse, or prove that finite exponential-polynomial zero sets cannot carry the
-joint source language.
+**Next:** [`G3-O33`](#g3-o33-uniform-terminal-coefficient-section) proves that every rational
+coefficient triple, including any source-indexed delayed singleton, is already attainable by a
+total rational section. The obstruction must constrain history-to-depth word dynamics, not the
+source-to-row map.
+
+### G3-O33: Uniform terminal coefficient section
+
+**Kind:** universality
+
+**Evidence:** formalized
+
+**Disposition:** graduated
+
+For every source `s∈ℚ`, define the single source-dependent column
+
+```text
+γ_s = (s²+1, 1, 0).
+```
+
+Both denominators in the row below are everywhere nonzero:
+
+```text
+s²+1 > 0,             s²+s+1 > 0.
+```
+
+For an arbitrary coefficient triple `(A,B,C)∈ℚ³`, take
+
+```text
+λ_{s,A,B,C} = (A/(s²+s+1), B/(s²+1), C).
+```
+
+The `G3-O32` coefficient map then evaluates exactly to
+
+```text
+a(x+sy) = A,             bx = B,             cy = C,
+```
+
+and hence
+
+```text
+λ_{s,A,B,C}(TⁿD_sγ_s) = A − B2ⁿ − C3ⁿ
+```
+
+for every depth `n`. Lean packages this as a right inverse to the full terminal-coefficient map;
+with `γ_s` fixed, varying only the row is surjective onto `ℚ³`.
+
+Taking `(A,B,C)=(2ᴺ,1,0)` yields a uniform family whose terminal scalar vanishes exactly at
+`n=N`. More strongly, Lean quantifies over an arbitrary source type, parameter map `s(σ)`, and
+target-depth function `N(σ)`. The displayed rational formulas realize the singleton `{N(σ)}`
+at every source. When those input functions are computable, the row and column formulas are
+computable as well.
+
+**Scope:** this is universality of the fixed-point coefficient map, not of the raw word dynamics.
+It does not provide a generator family that maps every valid terminal history to its selected
+depth, distinguish the two data letters, preserve an undecidable language, or exclude malformed
+words. It also does not enlarge the at-most-two zero set from `G3-O32`.
+
+**Use:** delete every lower-bound strategy that tries to bound terminal depth through algebraic
+restrictions on source-dependent rational rows or columns in the `G3-O30` family. Every coefficient
+triple is already available by one pole-free rational section. The only remaining obstruction is
+how the complete three-control monoid transports histories into a selected depth or point.
+
+**Artifact:** [`TransverseInfiniteAtlas.lean`](MatrixMortality/TransverseInfiniteAtlas.lean) and
+[`m34-terminal-coefficient-section-2026-08-31.md`](audits/m34-terminal-coefficient-section-2026-08-31.md).
+
+**Next:** seek a source-computable generator family whose arbitrary-word state maps exactly the
+paired terminal histories to one selected depth, or prove that three-state rank-two word dynamics
+cannot supply such a history-to-depth map. Coefficient fitting itself is closed.
 
 ### G3-O13: Rational serializer pumping
 
