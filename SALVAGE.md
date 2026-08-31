@@ -332,6 +332,7 @@ file owns the mathematical stock.
 | [`D2-S05`](#d2-s05-fixed-source-real-trap-rays) | structure theorem | every real-trap source has a one-step orbit on one computable normalized-mantissa ray | formalized | active |
 | [`D2-S06`](#d2-s06-spectator-prime-denominator-skeleton) | structure theorem | every denominator exponent away from `2`, `3`, and `5` is invariant through shell prefixes and first exits | formalized | active |
 | [`D2-S07`](#d2-s07-period-ten-shell-guard) | structure theorem | the one-step shell guard has period ten, while a length-`ℓ` tail has sharp uniform precision exponent `ℓ+1` | formalized | active |
+| [`D2-S08`](#d2-s08-twelve-class-target-depth-collapse) | structure theorem | guarded nonempty real-trap reachability reduces to twelve canonical target-depth classes while preserving the exact mantissa | formalized | active |
 | [`D2-D01`](#d2-d01-projectively-unimodular-stratum) | decidable stratum | projectively unimodular hard-core instances are decidable | audited | stock |
 | [`D2-D02`](#d2-d02-invariant-pair-stratum) | decidable stratum | invariant projective pairs reduce to effective multiplicative-subgroup membership | audited | graduated |
 | [`D2-D03`](#d2-d03-common-multiplier-stratum) | decidable stratum | rational affine maps with one multiplier are decidable under regular control | reported | active |
@@ -16036,7 +16037,9 @@ opposite guard outcomes at some depth.
 
 **Scope:** the result excludes uniform fixed-modulus compression, not finite automata with richer
 annotations, unbounded counters, or target-dependent arithmetic. It does not decide fixed-target
-reachability.
+reachability. For a fixed unit target the guard is automatic from final unitality, and
+[`D2-S08`](#d2-s08-twelve-class-target-depth-collapse) removes this growing precision from the
+actual fixed-endpoint seam.
 
 **Artifact:** `MixedPrimeDebt.shellStep_fiveUnit_add_ten_iff`,
 `MixedPrimeDebt.shellStep_fiveUnit_add_ten_mul_iff`, and
@@ -16051,9 +16054,69 @@ reachability.
 **Use:** replace every unbounded outgoing guarded-wait test by ten exact residue tests, but reject
 any proposed all-depth quotient whose wait modulus is fixed independently of the remaining tail.
 
-**Next:** synchronize the sharp growing `5`-adic precision with the exact real-ray mantissa and
-the `2`-/`3`-adic depth counters; test richer annotated or pushdown quotients rather than a fixed
-congruence modulus.
+**Next:** use the sharp hierarchy only for proposed tails without a fixed unit output. In the
+fixed-endpoint problem, attack the exact rational mantissa left by
+[`D2-S08`](#d2-s08-twelve-class-target-depth-collapse).
+
+### D2-S08: Twelve-class target-depth collapse
+
+**Kind:** structure theorem
+**Evidence:** formalized
+**Disposition:** active
+
+Write every real-trap target uniquely as
+
+```text
+U(d,μ)=1/5+(3/10)(2/3)^d μ,   2/3<μ≤1.
+```
+
+The one-step equality has the exact shift law
+
+```text
+T_(m+k)(x)=U(d+k,μ)  ↔  T_m(x)=U(d,μ).
+```
+
+Consequently, for every fixed source in `(1/5,1/2]`, every `d≥2`, and every `k≥0`, the set of
+nonempty shell prefixes reaching `U(d+k,μ)` is nonempty exactly when the corresponding set for
+`U(d,μ)` is nonempty. Upward transport adds `k` to the final wait. For downward transport, the
+sharp three-wait window forces the final wait to be at least `k`; subtracting `k` then gives the
+inverse witness. This proves both directions without assuming a chosen predecessor branch.
+
+Five-adic acceptance on a normalized ray is periodic in the target depth:
+
+```text
+v₅(U(d+10q,μ))=0  ↔  v₅(U(d,μ))=0.
+```
+
+Because final unitality is equivalent to every intermediate shell guard, guarded nonempty
+fixed-source reachability for every `d≥2` reduces to the canonical representative
+
+```text
+ρ(d)=2+((d−2) mod 10),   2≤ρ(d)≤11.
+```
+
+Depths zero and one remain separate because not every reverse branch has a nonnegative final
+wait there. Thus the reduction admits twelve canonical target-depth classes: `0`, `1`, and
+`2,…,11`.
+
+**Scope:** the theorem concerns nonempty shell-prefix reachability; the empty schedule is the
+separate equality test `source=target`. It does not quotient the normalized mantissa `μ`, which
+remains an exact unbounded rational parameter, and it does not decide its reverse orbit. It does
+not address a nonunit first-exit target.
+
+**Artifact:** `MixedPrimeDebt.shellStep_realTrapBandPoint_shift_iff`,
+`MixedPrimeDebt.exists_nonempty_shellRun_realTrapBandPoint_shift_iff`,
+`MixedPrimeDebt.realTrapBandPoint_fiveUnit_add_ten_mul_iff`,
+`MixedPrimeDebt.exists_guarded_shellRun_realTrapBandPoint_add_ten_mul_iff`, and
+`MixedPrimeDebt.exists_guarded_shellRun_realTrapBandPoint_representative_iff` in
+[`MixedPrimeRealTrapDepth.lean`](MatrixMortality/MixedPrimeRealTrapDepth.lean).
+
+**Use:** normalize every guarded fixed-target search to one of twelve depths before reverse
+search. Unbounded Archimedean target depth and the period-fifty pole feeder are no longer master
+obstructions; only exact mantissa dynamics can distinguish their deep targets after this cut.
+
+**Next:** classify the exact rational mantissa orbit at depths `0,…,11`, combining the spectator-
+prime denominator skeleton with the two pole branches near mantissas `2/3` and `9/10`.
 
 ### D2-O09: Guarded real-pole reset
 
