@@ -649,6 +649,11 @@ The exact first-`b` cylinders are now kernel-checked
 analytic classification: prove monotonicity once, check only rational interval corners, and
 retain reduced congruence representatives before extracting any trailing consequence.
 
+The zero middle-wait face is now cut by a second density cone
+[`M4-S30`](SALVAGE.md#m4-s30-phase-zero-right-c-zero-wait-complement-cone):
+`S−1≤585D` makes the core strictly positive. The finite first-`b` classification may therefore
+assume `y>0` throughout every sufficiently dense prefix cylinder.
+
 Two original-family nodes survive, and they must not be conflated.
 
 1. **Exterior collision avoidance.** Use `M4-S06`--`M4-S15` to classify the transported kernel

@@ -260,6 +260,7 @@ file owns the mathematical stock.
 | [`M4-S27`](#m4-s27-phase-zero-right-c-thin-complement-cone) | obstruction | no positive complement thinner than `1/2160000` of its code scale can close the right-`c` bridge | formalized | active |
 | [`M4-S28`](#m4-s28-phase-zero-right-c-long-leading-c-cylinder) | obstruction | any mixed body beginning with at least twelve `c` letters is excluded from the right-`c` bridge | formalized | active |
 | [`M4-S29`](#m4-s29-phase-zero-right-c-first-b-density-cylinder) | structure theorem | the first `b` position traps the complement density in an exact rational cylinder | formalized | active |
+| [`M4-S30`](#m4-s30-phase-zero-right-c-zero-wait-complement-cone) | obstruction | complement density at least `1/585` makes the zero middle-wait core strictly positive | formalized | active |
 | [`M4-C03`](#m4-c03-zero-framed-binary-two-lag-compiler) | compiler | the principal scanner is literally binary context-2 Lag and compiles to `M₄(3)` | formalized | graduated |
 | [`M4-D01`](#m4-d01-zero-framed-binary-two-lag-decision) | decidable stratum | the entire zero-framed binary context-2 Lag kernel has an exact syntactic classification | formalized | graduated |
 | [`M4-D02`](#m4-d02-zero-framed-reset-scanner-decision) | decidable stratum | zero-run reduction contracts the reset scanner to a regular two-token quotient | audited | graduated |
@@ -11538,6 +11539,43 @@ arbitrary bodies.
 **Artifact:**
 [`MatrixMortality/ParabolicEvenBody.lean`](MatrixMortality/ParabolicEvenBody.lean) and
 [`audits/m43-phase-zero-right-c-first-b-density-2026-08-31.md`](audits/m43-phase-zero-right-c-first-b-density-2026-08-31.md).
+
+### M4-S30: Phase-zero right-c zero-wait complement cone
+
+**Kind:** obstruction
+
+**Evidence:** formalized
+
+**Disposition:** active
+
+At `y=0`, the complement decomposition can be collected as
+
+```text
+H = x(DJx−9(S−1)A) + 9(S−1)B + DJ₀,
+```
+
+where `A,B,Jx,J₀` are coefficient-positive pencils in `z`. The exact gap
+
+```text
+Jx−585·9A = 266586336z+28363176
+```
+
+is positive. Therefore `S−1≤585D`, with `S>1` and `D>0`, makes both the `x` coefficient
+and constant term positive. The core is strictly positive for all natural `x,z`.
+
+**Scope:** the primitive `0|2|1` `b|b|c` core at middle wait `y=0`, for rational complement
+coordinates satisfying the displayed density inequality. Positive middle waits require separate
+analysis.
+
+**Use:** delete the zero-wait branch uniformly from the first-`b` cylinders now under attack;
+the `c³b` and `c²b` prefixes satisfy the density condition with room to spare.
+
+**Next:** combine `M4-S29` with positive-wait root envelopes to formalize the `c²b` cylinder
+extinction.
+
+**Artifact:**
+[`MatrixMortality/ParabolicEvenBody.lean`](MatrixMortality/ParabolicEvenBody.lean) and
+[`audits/m43-phase-zero-right-c-zero-wait-cone-2026-08-31.md`](audits/m43-phase-zero-right-c-zero-wait-cone-2026-08-31.md).
 
 ### M4-C03: Zero-framed binary two-Lag compiler
 
