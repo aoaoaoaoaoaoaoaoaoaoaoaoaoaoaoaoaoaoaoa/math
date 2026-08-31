@@ -1544,6 +1544,15 @@ deeper at two. `letterErase_rawHead_multi_shell_impossible` combines this bounda
 `MM-S19` for longer pure-`D_c` words and `MM-S49` for every word containing `D_b`. Hence every
 surviving distinguished raw-head-to-multi block contains a rule tile.
 
+Record [`MM-S54`](SALVAGE.md#mm-s54-rightmost-rule-phase-toggle-trichotomy) opens that remaining
+rule grammar at its unique rightmost rule. Erasing every phase preserves the upper spelling,
+while the lower-code difference factors as `10^s K`, where `s` is the erasure-tail width. The
+coefficient is `550`, `480`, or `780` modulo `1000` according as zero, one, or at least two
+roles precede the rule. Thus the outer cases have exact shells `(s+1,s+2)` and `(s+2,s+1)`;
+the middle case has exact five-depth `s+1` and at least `s+3` factors of two. The raw residual
+inherits these depths through `G(H−10μ)`. As a first extinction consequence,
+`leadingRuleC_rawHead_multi_shell_impossible` excludes every `R_cD_c^s`, `s≥1`, first block.
+
 Record [`MM-S37`](SALVAGE.md#mm-s37-decimal-three-shape-frontier-extinction) separates the
 ternary and decimal first-multi-transfer fronts. The single theorem
 `DecimalSetterDepth.firstMultiTransfer_threeShapeFrontier_impossible` consumes the three role
@@ -2067,6 +2076,7 @@ fixed-rank decision problem.
 | `DecimalSetterMultitransfer.lean` | extinction of all three swapped-ternary frontier shapes under the analogous decimal carrier shells |
 | `DecimalSetterAncestry.lean` | primitive gap factor; exact raw two-`c` prime support; arbitrary-history prime-support propagation and radical saturation; physical all-erasure full-gap lower codes; denominator-ancestry reduction; full-gap and factorwise quotient gates for a singleton target |
 | `DecimalSetterPositioned.lean` | rightmost-marker suffix calculus; exact unit coefficient under arbitrary earlier markers; complete all-erasure raw-head-to-multi extinction |
+| `DecimalSetterPhase.lean` | phase-erasure companion; exact rightmost-rule shell trichotomy; leading-`R_c` all-`D_c` raw-entry extinction |
 | `PairedMortality.lean` | common-column mortality converse and exact integer `4 × 4` family |
 | `PhaseFracture.lean` | phase normalization and dimension-free projective-identification contradiction |
 | `PhaseRigidity.lean` | checked local role algebra, discrepancy commutators, and invariant-pencil rigidity |
