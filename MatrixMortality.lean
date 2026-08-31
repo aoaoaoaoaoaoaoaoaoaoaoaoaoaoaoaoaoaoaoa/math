@@ -133,6 +133,7 @@ import MatrixMortality.PairedBoundaryTax
 import MatrixMortality.DeletionFirstFracture
 import MatrixMortality.PairedBinaryPrefixTax
 import MatrixMortality.RunLengthHankel
+import MatrixMortality.SparseTransferHankel
 import MatrixMortality.PairedBinaryFullAlgebra
 import MatrixMortality.PrefixFullAlgebra
 import MatrixMortality.ScheduledBinaryRank

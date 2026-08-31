@@ -94,6 +94,7 @@ file owns the mathematical stock.
 | [`MM-O21`](#mm-o21-sourcewise-finite-probe-blindness) | obstruction | sourcewise existential equivalence imposes no finite probe-rank shadow, while complete computable probe cutoffs cannot be universal | formalized | graduated |
 | [`MM-O22`](#mm-o22-six-guard-parser-rank-wall) | obstruction | the six-guard existence transform requires at least seven exact states on every source with an original zero | formalized | graduated |
 | [`MM-O23`](#mm-o23-consecutive-transfer-moment-tax) | obstruction | every exact rank-four-cut realization of three consecutive paired roles and a constant safe separator tail needs at least ten states | formalized core; audited six-order certificates | graduated |
+| [`MM-O24`](#mm-o24-sparse-transfer-moment-tax) | obstruction | arbitrary distinct placements of the three paired roles with a constant separator tail need at least ten states; nonconsecutive placements need eleven | formalized late branch; audited early assembly | graduated |
 | [`MM-M01`](#mm-m01-off-diagonal-companion-interface) | partial mechanism | off-diagonal rank-two bridge has a complete fracture grammar | audited | stock |
 | [`MM-M02`](#mm-m02-bordered-toggle) | partial mechanism | one lifted toggle has a stable rank-two third power | audited | parked |
 | [`MM-M03`](#mm-m03-five-state-setter-punctuation) | partial mechanism | a mixed delimiter word is an exact internal rank-one separator | audited | closed |
@@ -2230,6 +2231,41 @@ internal series or its run-length grammar.
 
 **Artifact:**
 [`audits/m92-run-length-transfer-hankel-2026-08-31.md`](audits/m92-run-length-transfer-hankel-2026-08-31.md).
+
+### MM-O24: Sparse transfer-moment tax
+
+**Kind:** obstruction
+**Evidence:** formalized late branch; audited early assembly
+**Disposition:** graduated
+
+Retain the exact four-coordinate transfer architecture of `MM-O23`, but place nonzero
+rescalings of `T,D_b,D_c` at arbitrary distinct run lengths and set every later moment to the
+absorbed rank-one separator `P′`. If the last exceptional run length is `m≥3`, subtracting `P′`
+produces four reversed time blocks whose diagonal is a rank-three minor of the last role and
+whose strict lower blocks vanish. The resulting `12 × 12` difference section is nonsingular.
+It factors through the ambient state space after one coordinate restores the rank-one tail, so
+`12≤n+1` and `n≥11`.
+
+Lean checks rank-three deviation minors for all three roles, with determinants `−81a²`,
+`3888b²`, and `237468348c²`. It also checks that three distinct positions either permute
+`0,1,2` or have a position at least three. The former branch inherits the six-order `n≥10`
+certificates of `MM-O23`; the latter has `n≥11`. Thus every exact placement in this class misses
+nine states.
+
+**Scope:** exact transfer moments equal to nonzero rescalings of the paired benchmark roles,
+followed after all three positions by a constant `P′` tail. The result permits arbitrary
+cross-path interference and arbitrary ambient transition. It does not cover changed nonzero
+values preserving only zeros, a nonconstant safe tail, or nonlinear boundary semantics.
+
+**Use:** do not pursue nine states by spacing the unchanged role moments farther apart while
+retaining a constant absorbed-separator tail. Change the moment values or the tail dynamics.
+
+**Formalization:** `eleven_le_card_of_late_rank_three_moment`, the three specialized benchmark
+bounds, and `permutes_zero_one_two_or_eleven_le_card_of_sparse_benchmark_moments` in
+[`MatrixMortality/SparseTransferHankel.lean`](MatrixMortality/SparseTransferHankel.lean).
+
+**Artifact:**
+[`audits/m92-sparse-transfer-hankel-2026-08-31.md`](audits/m92-sparse-transfer-hankel-2026-08-31.md).
 
 ### MM-M01: Off-diagonal companion interface
 

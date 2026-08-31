@@ -242,7 +242,7 @@ The unknown cells immediately below this staircase are:
 | `M₃(4)` | three-active-role fixed-boundary PCP / `GPCP(3)`, or a new same-dimension generator compiler | by CHHN, also `M₉(2)` |
 | `M₄(3)` | an undecidable promised two-state overlap queue with pure deletion, or closure of either parabolic bridge language | by CHHN, also `M₈(2)` |
 | `M₅(3)` | a five-state binary same-zero root, a toggle/separator fusion, or fixed-width-three scheduled universality | supersedes `M₆(3)`; `M₁₀(2)` is already known |
-| `M₉(2)` | a history-sensitive same-zero compiler or changed run-length series; exact prefix and consecutive transfer-moment routes stop at ten | improves the two-generator threshold by one |
+| `M₉(2)` | a history-sensitive same-zero compiler, nonconstant safe transfer tail, or nonlinear boundary; exact prefix and constant-tail transfer routes stop at ten | improves the two-generator threshold by one |
 | `M₂(k≥3)` | a qualitatively different decidability or undecidability argument | settles the dimension-two wall |
 
 The scalar result `Z₆(2)` gives `M₆(3)` after adjoining a separator; that mortality point was
@@ -1039,10 +1039,19 @@ rescalings of `T,D_b,D_c` in any order and every later moment is the absorbed se
 `10 × 10` minor is nonsingular in all six orders. Thus this cross-path architecture also needs at
 least ten states.
 
-The theorem is not a lower bound for arbitrary same-zero series. The live seam must change the
-internal moment values, distribute the three roles over nonconsecutive run lengths, use a
-nonconstant safe semigroup tail, or make the boundary semantics nonlinear. See
-[`audits/m92-run-length-transfer-hankel-2026-08-31.md`](audits/m92-run-length-transfer-hankel-2026-08-31.md).
+[`MM-O24`](SALVAGE.md#mm-o24-sparse-transfer-moment-tax) removes nonconsecutive placement as an
+escape within the same exact moment family. If the last of the three distinct role positions is
+at least three, four reversed time blocks expose a nonsingular `12 × 12` section after
+subtracting the rank-one separator tail. Restoring that tail costs one coordinate, so the
+ambient space has dimension at least eleven. Otherwise the positions are exactly `0,1,2`, and
+`MM-O23` gives ten. Thus every distinct placement of the unchanged roles with a constant `P′`
+tail misses nine states.
+
+These theorems are not lower bounds for arbitrary same-zero series. The live seam must change
+the internal moment values, use a nonconstant safe semigroup tail, or make the boundary
+semantics nonlinear. See
+[`audits/m92-run-length-transfer-hankel-2026-08-31.md`](audits/m92-run-length-transfer-hankel-2026-08-31.md) and
+[`audits/m92-sparse-transfer-hankel-2026-08-31.md`](audits/m92-sparse-transfer-hankel-2026-08-31.md).
 
 ### 4. Three-letter correspondence and direct mortality: `M₃(4)`
 

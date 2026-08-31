@@ -135,6 +135,39 @@
 'MatrixMortality.RunLengthHankel.ten_le_card_of_tbc_transfer_moments' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.SparseTransferHankel.card_le_add_one_of_rankOne_difference_det_ne_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SparseTransferHankel.fourBlockDifferenceSection_det_ne_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SparseTransferHankel.eleven_le_card_of_late_rank_three_moment' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SparseTransferHankel.toggleDeviationMinor_det' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SparseTransferHankel.dataBDeviationMinor_det' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SparseTransferHankel.dataCDeviationMinor_det' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SparseTransferHankel.eleven_le_card_of_late_toggle_moment' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SparseTransferHankel.eleven_le_card_of_late_dataB_moment' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SparseTransferHankel.eleven_le_card_of_late_dataC_moment' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SparseTransferHankel.distinct_positions_permute_zero_one_two_or_late' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SparseTransferHankel.permutes_zero_one_two_or_eleven_le_card_of_sparse_benchmark_moments' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.pairedProduct_mulVec_column' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.pairedCoefficient_eq_sideCoefficient' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.decodePairedWord_surjective' depends on axioms: [propext]

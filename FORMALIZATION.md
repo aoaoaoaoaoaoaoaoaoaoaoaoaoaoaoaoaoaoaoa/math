@@ -330,6 +330,17 @@ history-sensitive compiler that preserves only the zero set while changing the i
 moments. See
 [`m92-run-length-transfer-hankel-2026-08-31.md`](audits/m92-run-length-transfer-hankel-2026-08-31.md).
 
+Sparse role placement has a third checked boundary. After subtracting a constant rank-one tail,
+four reversed time blocks expose four identical rank-three diagonal minors at any last
+exceptional time `m≥3`; all strict lower blocks vanish. Lean proves that the resulting
+`12 × 12` difference section factors through the ambient state space with one extra coordinate,
+so every exact realization has at least eleven states. It checks suitable deviation minors for
+each of `T,D_b,D_c` and their exact determinants. A separate arithmetic theorem reduces three
+distinct positions either to this late case or to a permutation of `0,1,2`, where the `MM-O23`
+certificates give ten states. The assembled conclusion is restricted to unchanged role moments
+and a constant absorbed-separator tail. See
+[`m92-sparse-transfer-hankel-2026-08-31.md`](audits/m92-sparse-transfer-hankel-2026-08-31.md).
+
 Lean also constructs the canonical reachable-observable quotient around any internal physical
 word whose product factors as `UW`. Its generators act on
 
