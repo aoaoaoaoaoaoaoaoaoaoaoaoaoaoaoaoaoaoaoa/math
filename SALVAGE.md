@@ -269,6 +269,7 @@ file owns the mathematical stock.
 | [`D2-D07`](#d2-d07-bounded-valuation-orthants) | decidable stratum | bounded cooriented affine families have finite successful state spaces | audited | stock |
 | [`D2-D08`](#d2-d08-rational-affine-group-orbits) | decidable stratum | every finitely generated rational affine group orbit reduces to a finite translation quotient or multiplier membership | audited; formalized core | graduated |
 | [`D2-D09`](#d2-d09-step-three-shear-height-decision) | decidable stratum | target height bounds every reduced syllable and exponent in the fixed step-three shear orbit of `[1:1]` | audited; formalized core | graduated |
+| [`D2-O05`](#d2-o05-promised-empty-free-orbit-inverse-cycle) | obstruction | a positive target stabilizer in a free dilation--parabolic orbit forces chamber-directed inverse stripping through the primitive-height cycle `5→3→5` | audited; formalized core | graduated |
 | [`D2-M01`](#d2-m01-benchmark-critical-shell) | partial mechanism | the mixed-prime benchmark reduces generically to one guarded `5`-adic shell | audited | active |
 | [`D2-O01`](#d2-o01-canonical-collatz-reachability-is-not-automatic) | obstruction | full generalized-Collatz reachability is not synchronously recognizable in its canonical base | external theorem | active |
 | [`D2-O02`](#d2-o02-critical-shell-periodic-saturation) | obstruction and rewrite seed | every nonempty finite wait schedule has a rational all-unit cycle; normalized nonfreeness persists under every generator scaling, while its odd family is a two-seed cancellative pump and the positive finite basis is complete only through length 30 | formalized core; audited strengthening | active |
@@ -11022,6 +11023,66 @@ continued-fraction normal form, rather than another finite quotient.
 [`m34-step-three-shear-height-decision-2026-08-31.md`](audits/m34-step-three-shear-height-decision-2026-08-31.md),
 [`chorna-geller-shpilrain-2017-two-generator-subgroups.md`](references/chorna-geller-shpilrain-2017-two-generator-subgroups.md),
 and [`han-masuda-singh-thiel-2024-subgroup-membership.md`](references/han-masuda-singh-thiel-2024-subgroup-membership.md).
+
+### D2-O05: Promised-empty free-orbit inverse cycle
+
+**Kind:** obstruction
+
+**Evidence:** audited; formalized core
+
+**Disposition:** graduated
+
+Let
+
+```text
+D=[[5,0],[0,1]],       U=[[-2,3],[-3,4]],
+p=[9:4],               q=[3:5].
+```
+
+Strict ping-pong on
+
+```text
+X_D={z<1/2 or z>5/2}∪{∞},       X_U={1/2<z<2}
+```
+
+proves that `H=⟨D,U⟩` is free and that `p` has trivial stabilizer. The
+positive word `UD` is nonidentity and fixes `q`, since `D(q)=3` and `U(3)=q`.
+A hypothetical `h(p)=q` would make `h⁻¹(UD)h` a nonidentity stabilizer of
+`p`; hence `q∉H·p`. The determinant-one transporter
+`g₀=[[-1,3],[-3,8]]` sends `p` to `q`, so `H∩g₀Stab(p)=∅`. Conjugating
+`p` to infinity by the integral determinant-one matrix `[[9,2],[4,1]]` gives
+an exact cardinality-zero `UCB₂({5})` instance.
+
+The endpoint chambers prescribe the inverse stripping cycle
+
+```text
+q ∈ X_U,       q --U⁻¹→ 3 ∈ X_D,       3 --D⁻¹→ q.
+```
+
+The coprime representatives `(3,5)` and `(3,1)` have primitive heights five
+and three. Thus the inverse parser repeats `5→3→5`; the strict
+primitive-height ratchet of `D2-D09` does not survive one `S`-unit dilation
+and one transverse parabolic.
+
+**Scope:** this record refutes only a chamber-directed inverse reduction whose
+well-founded measure is primitive maximum-coordinate height. It does not
+exclude a richer Archimedean or continued-fraction state, and it proves
+neither decidability nor undecidability of general `UCB₂(S)`. The displayed
+no-instance is certified directly by its positive target stabilizer.
+
+**Use:** every generalization of `D2-D09` must detect and quotient recurrent
+target stabilizers, enrich the inverse state beyond primitive height, or use a
+different global invariant. The positive syntax is essential: `UD` and all
+its positive powers already fix the target.
+
+**Next promotion:** classify recurrent chamber cycles for a diagonal
+`S`-unit and an arbitrary transverse rational parabolic, then decide whether
+their quotient leaves an effectively well-founded inverse graph.
+
+**Artifacts:**
+[`TransverseDilationOrbit.lean`](MatrixMortality/TransverseDilationOrbit.lean)
+and
+[`m34-transverse-dilation-height-recurrence-2026-08-31.md`](audits/m34-transverse-dilation-height-recurrence-2026-08-31.md).
 
 ### D2-M01: Benchmark critical shell
 
