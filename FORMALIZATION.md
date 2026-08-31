@@ -800,6 +800,14 @@ guard. The live cubic object is the complete fixed recurrence, not another refle
 system. See `R32-S42` and
 [`audits/m32-cubic-endpoint-false-waits-2026-08-11.md`](audits/m32-cubic-endpoint-false-waits-2026-08-11.md).
 
+The false-wait family's normalized lower-left coefficient is now identified exactly with the
+integral recurrence `u₀=u₁=0`, `u₂=1`, `uₙ₊₃=uₙ−uₙ₊₂`. Lean proves a conserved cubic norm on
+consecutive triples and reduces every triangular wait to the fixed Thue equation
+`x³−xy²+y³=1` of discriminant `−23`. The zeros `0,1,5,14` are checked, so wait fourteen enlarges
+the former safe alphabet. The Delone–Nagell classification and an audited exclusion of its fifth,
+negative-index orbit point prove that these are all the natural zeros. See `R32-S43` and
+[`audits/m32-cubic-defect-thue-2026-08-30.md`](audits/m32-cubic-defect-thue-2026-08-30.md).
+
 The rank-(2,2) graph is no longer an independent residue. `RankTwoPunctuation` proves that every
 compatible square with one rank-one loop and three units transports exactly to the existing raw
 reverse compiler [`R32-M01`](SALVAGE.md#r32-m01-generic-reverse-edge-compiler). Its intrinsic
@@ -869,7 +877,9 @@ duplicate companion API was added. Lean instead checks the consuming counterexam
 `ReturnGuard.Examples.resetCompanion_counterfamily` is an unbounded family of one-return
 first-hit histories for which the actual forward product exceeds the companion reverse product
 by `(12n+1)/2`. Thus per-step shadow descent and multiplication of local Smith savings are false;
-only coefficient-effective bilateral amortization across a complete first-hit history remains.
+terminal-only bilateral amortization is pointwise vacuous and a coefficient algorithm for useful
+constants is equivalent to guard decision by the singleton-or-empty endpoint language. Any
+genuine successor must prove an explicit coefficient estimate on a broader nonterminal class.
 See `R32-S39` and
 [`audits/m32-reset-companion-2026-08-11.md`](audits/m32-reset-companion-2026-08-11.md).
 
@@ -1944,6 +1954,9 @@ fixed-rank decision problem.
 | A four-ray invariant modulo eleven excludes every primitive integral terminal execution of the period-three guard | `ReturnGuard.Examples.cycle_no_primitive_integral_terminal_execution` |
 | The executable drift-divisor classifier accepts the modulo-eleven period-three parameters | `ReturnGuard.Examples.cycle_driftDivisorCertifies` |
 | The same modulo-eleven certificate proves physical immortality through canonical integral lifting | `ReturnGuard.Examples.cycle_not_physical_isMortal_by_quotient` |
+| The non-pure cubic false-wait lower-left coefficient is an integral order-three recurrence | `CubicReturn.NonPure.falseWaitReturn_lowerLeft`, `CubicReturn.NonPure.cubicDefect_recurrence` |
+| Consecutive cubic defect windows have norm one, and every zero solves `x³−xy²+y³=1` | `CubicReturn.NonPure.cubicDefectNorm_state`, `CubicReturn.NonPure.cubicDefect_zero_forces_exceptionalThue` |
+| The cubic defect vanishes at waits zero, one, five, and fourteen | `CubicReturn.NonPure.cubicDefect_known_zeros` |
 | Rule and erasure matrices agree on the upper-side plane | `rule_erase_agree_on_upperSide` |
 | Every finite-controller letter routes its selected private channel exactly | `controllerMatrix_mulVec_controllerVector` |
 | Every suffix-controlled word obeys the generic total decoder | `controllerProduct_mulVec_controllerVector` |

@@ -60,6 +60,37 @@ def terminalReturn (wait : Nat) : Square (Fin 2) ℚ :=
 def falseWaitReturn (wait : Nat) : Square (Fin 2) ℚ :=
   ReturnFamily.returnMatrix ambient input falseWaitOutput wait
 
+/-- Three consecutive values of the scalar defect in the normalized return recurrence. -/
+structure CubicDefectState where
+  first : ℤ
+  second : ℤ
+  third : ℤ
+
+/-- Shift one scalar-defect window through `u_(n+3)=u_n-u_(n+2)`. -/
+def CubicDefectState.next (state : CubicDefectState) : CubicDefectState :=
+  ⟨state.second, state.third, state.first - state.third⟩
+
+/-- Integral scalar-defect windows for the non-pure cubic return family. -/
+def cubicDefectState : Nat → CubicDefectState
+  | 0 => ⟨0, 0, 1⟩
+  | wait + 1 => (cubicDefectState wait).next
+
+/-- Lower-left defect of the normalized non-pure cubic return. -/
+def cubicDefect (wait : Nat) : ℤ :=
+  (cubicDefectState wait).first
+
+/-- Cubic norm preserved by the scalar-defect recurrence. -/
+def cubicDefectNorm (state : CubicDefectState) : ℤ :=
+  state.first ^ 3 - state.first ^ 2 * state.third -
+      state.first * state.second ^ 2 -
+    3 * state.first * state.second * state.third + state.second ^ 3 +
+      state.second ^ 2 * state.third +
+    2 * state.second * state.third ^ 2 + state.third ^ 3
+
+/-- Rational lower-left defect extracted directly from the physical false-wait family. -/
+def falseWaitDefect (wait : Nat) : ℚ :=
+  -(falseWaitReturn wait 1 0) / 90
+
 /-- The ambient companion obeys its non-pure cubic polynomial. -/
 theorem ambient_recurrence : ambient ^ 3 + ambient ^ 2 = 1 := by
   ext i j
@@ -164,6 +195,94 @@ theorem return_recurrence
         ReturnFamily.returnMatrix ambient input output (wait + 2) := by
   simp only [ReturnFamily.returnMatrix]
   rw [ambient_pow_recurrence, Matrix.mul_sub, Matrix.sub_mul]
+
+@[simp]
+theorem cubicDefectState_succ (wait : Nat) :
+    cubicDefectState (wait + 1) = (cubicDefectState wait).next := rfl
+
+theorem cubicDefect_recurrence (wait : Nat) :
+    cubicDefect (wait + 3) = cubicDefect wait - cubicDefect (wait + 2) := by
+  simp [cubicDefect, cubicDefectState, CubicDefectState.next]
+
+/-- The recurrence shift preserves one discriminant-`-23` cubic norm. -/
+theorem cubicDefectNorm_next (state : CubicDefectState) :
+    cubicDefectNorm state.next = cubicDefectNorm state := by
+  simp [cubicDefectNorm, CubicDefectState.next]
+  ring
+
+/-- Every consecutive scalar-defect window has cubic norm one. -/
+theorem cubicDefectNorm_state (wait : Nat) :
+    cubicDefectNorm (cubicDefectState wait) = 1 := by
+  induction wait with
+  | zero => norm_num [cubicDefectNorm, cubicDefectState]
+  | succ wait induction =>
+      rw [cubicDefectState_succ, cubicDefectNorm_next, induction]
+
+/-- The first physical false-wait defect is the integral recurrence above. -/
+theorem falseWaitDefect_state (wait : Nat) :
+    falseWaitDefect wait = (cubicDefectState wait).first ∧
+      falseWaitDefect (wait + 1) = (cubicDefectState wait).second ∧
+      falseWaitDefect (wait + 2) = (cubicDefectState wait).third := by
+  induction wait with
+  | zero =>
+      norm_num [falseWaitDefect, falseWaitReturn, ReturnFamily.returnMatrix,
+        ambient, input, falseWaitOutput, cubicDefectState, Matrix.mul_apply,
+        Fin.sum_univ_succ, pow_succ]
+  | succ wait induction =>
+      rcases induction with ⟨first, second, third⟩
+      refine ⟨?_, ?_, ?_⟩
+      · simpa [cubicDefectState, CubicDefectState.next] using second
+      · simpa [cubicDefectState, CubicDefectState.next, Nat.add_assoc] using third
+      · have recurrence := congrFun (congrFun (return_recurrence falseWaitOutput wait) 1) 0
+        change
+          falseWaitReturn (wait + 3) 1 0 =
+            falseWaitReturn wait 1 0 - falseWaitReturn (wait + 2) 1 0
+          at recurrence
+        have defectRecurrence :
+            falseWaitDefect (wait + 3) =
+              falseWaitDefect wait - falseWaitDefect (wait + 2) := by
+          rw [falseWaitDefect, falseWaitDefect, falseWaitDefect, recurrence]
+          ring
+        rw [show wait + 1 + 2 = wait + 3 by omega, defectRecurrence, first, third]
+        simp [cubicDefectState, CubicDefectState.next]
+
+theorem falseWaitDefect_eq_cubicDefect (wait : Nat) :
+    falseWaitDefect wait = cubicDefect wait := by
+  simpa [cubicDefect] using (falseWaitDefect_state wait).1
+
+/-- The physical lower-left entry is exactly the integral cubic defect. -/
+theorem falseWaitReturn_lowerLeft (wait : Nat) :
+    falseWaitReturn wait 1 0 = -90 * cubicDefect wait := by
+  have defect := falseWaitDefect_eq_cubicDefect wait
+  rw [falseWaitDefect] at defect
+  linarith
+
+/-- A triangular return index yields an integral point on the exceptional discriminant-`-23`
+Thue curve `x³-xy²+y³=1`. -/
+theorem cubicDefect_zero_forces_exceptionalThue
+    {wait : Nat} (defect_zero : cubicDefect wait = 0) :
+    let x := cubicDefect (wait + 1)
+    let y := cubicDefect (wait + 1) + cubicDefect (wait + 2)
+    x ^ 3 - x * y ^ 2 + y ^ 3 = 1 := by
+  let state := cubicDefectState wait
+  have norm := cubicDefectNorm_state wait
+  have first_zero : state.first = 0 := by
+    simpa [state, cubicDefect] using defect_zero
+  have second_eq : cubicDefect (wait + 1) = state.second := by
+    simp [cubicDefect, state, cubicDefectState, CubicDefectState.next]
+  have third_eq : cubicDefect (wait + 2) = state.third := by
+    simp [cubicDefect, state, cubicDefectState, CubicDefectState.next]
+  dsimp
+  rw [second_eq, third_eq]
+  rw [cubicDefectNorm, first_zero] at norm
+  norm_num at norm
+  linear_combination norm
+
+/-- The four observed triangular indices on the normalized recurrence. -/
+theorem cubicDefect_known_zeros :
+    cubicDefect 0 = 0 ∧ cubicDefect 1 = 0 ∧
+      cubicDefect 5 = 0 ∧ cubicDefect 14 = 0 := by
+  norm_num [cubicDefect, cubicDefectState, CubicDefectState.next]
 
 /-- The endpoint-aligned twist has the displayed singular and selected returns. -/
 theorem terminal_returns :

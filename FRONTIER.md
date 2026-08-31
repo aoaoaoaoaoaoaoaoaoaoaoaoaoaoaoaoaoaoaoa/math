@@ -1591,6 +1591,22 @@ soundness. The remaining cubic problem is endpoint reachability for the complete
 See [`R32-S42`](SALVAGE.md#r32-s42-non-pure-cubic-endpoints-and-false-waits) and
 [`m32-cubic-endpoint-false-waits-2026-08-11.md`](audits/m32-cubic-endpoint-false-waits-2026-08-11.md).
 
+The scalar flag-preserving slice now has an exact arithmetic owner. For the false-wait family,
+the normalized lower-left coefficient is an integral recurrence
+
+```text
+u₀=0,  u₁=0,  u₂=1,  uₙ₊₃=uₙ−uₙ₊₂.
+```
+
+Its consecutive triples preserve one cubic norm, and every zero gives an integral solution of
+`x³−xy²+y³=1`, the exceptional discriminant-`−23` Thue equation. Lean checks the reduction and
+the zeros `0,1,5,14`; the Delone–Nagell classification and an audited orbit exclusion prove these
+are all the zeros. The exact positive flag-preserving alphabet is therefore `{1,5,14}`. The
+false word proves that this complete scalar classification cannot by itself control cancellation
+among nontriangular letters. See
+[`R32-S43`](SALVAGE.md#r32-s43-cubic-defect-norm-and-thue-throat) and
+[`m32-cubic-defect-thue-2026-08-30.md`](audits/m32-cubic-defect-thue-2026-08-30.md).
+
 ### ReturnSquare laboratory
 
 [`R32-S03`](SALVAGE.md#r32-s03-returnsquare-normal-form) is the first completely normalized
@@ -2180,9 +2196,10 @@ the actual trajectory obeys an exact exterior recurrence that converts every act
 content outside reset support into companion forward content. The uncancelled residue is one
 angular gcd deficit `|RH|/|K̂|`; every moving prime surviving there is order-broken on both
 chronological sides. This does not yet contract. A Lean-checked one-return family has
-`|H|/|K̂|=(12n+1)/2`, unbounded even on a nonmaximal Smith step. The exact decision throat is
-therefore coefficient-effective bilateral shadow amortization over complete first-hit histories,
-not multiplication of local savings. See
+`|H|/|K̂|=(12n+1)/2`, unbounded even on a nonmaximal Smith step. Multiplication of local savings
+is therefore false. Terminal-only bilateral amortization is also not a smaller live theorem:
+the positive terminal language is singleton-or-empty, so pointwise constants are automatic and
+a coefficient algorithm producing a terminal-length bound is already a guard decider. See
 [`R32-S39`](SALVAGE.md#r32-s39-reset-companion-and-bilateral-shadow) and
 [`m32-reset-companion-2026-08-11.md`](audits/m32-reset-companion-2026-08-11.md).
 
@@ -2249,13 +2266,13 @@ all-legal block inequality for the carried generalized continuant. See
 
 | Lane | Required move | Present obstruction |
 | --- | --- | --- |
-| Split-guard decision | Prove coefficient-effective bilateral shadow amortization for the canonical first-hit reset companion | Every residual packet is doubly order-broken, but one wait can service nested packets and one-step companion contraction is unboundedly false |
+| Split-guard decision | Produce an explicit coefficient recurrence-or-escape bound on a nonterminal class broad enough to contain every first-hit prefix | Terminal-only amortization is goal-equivalent; every residual packet is doubly order-broken and one wait can service nested packets |
 | Split-guard counter | Solve the rational reset incidence for an aperiodic p-adic Jacobi schedule with sparse microscopic doubly order-broken packets | Finite handoff alphabets and fixed rational charts are periodic or impossible; the history-dependent handoff height must be unbounded |
 | Irreducible cubic reflection orbit | Decide all-positive-wait endpoint reachability for the fixed non-pure order-three recurrence | Actual endpoints support free selected dynamics, but an explicit unselected seven-wait word defeats perfect selected ping-pong |
 | Generic projective incidence | Decide rational-subset membership in the rank-two affine cusp, or encode universality through its carry dynamics | Fixed-subset shortcut Collatz already occupies `ℤ[1/6]⋊ℤ²`; the Tits split, direct stores, and one-dilation algorithms miss it |
 
-The split-spectrum hot path is now an effective reset-anchored recurrence-or-escape theorem for
-the canonical companion's bilateral shadow, opposed by a genuinely history-sensitive aperiodic
+The split-spectrum hot path is an explicit reset-anchored recurrence-or-escape theorem on a
+nonterminal class, opposed by a genuinely history-sensitive aperiodic
 unbounded-denominator reset orbit solving one rational p-adic Jacobi incidence with sparse
 microscopic activations. The matrix compiler,
 arbitrary-word converse, deterministic wait decoder, rational inverse-address grammar,
@@ -2266,9 +2283,10 @@ geodesic are complete. Uniform first-bridge closure and coefficient-uniform all-
 descent are false; fixed positive renewal cycles are impossible; bounded local shadow depth does
 not imply bounded height; terminal length can exceed two; endpoint support and finite rational
 carry atlases are insufficient; reverse mass is invisible to projective endpoints on exact
-cycles; even the reset companion need not contract at one nonmaximal step. The rank-`(3,2)`
-artery now asks whether the bilateral packet ledger admits a coefficient-effective amortized
-bound across a complete first-hit history, or can sustain one exact aperiodic
+cycles; even the reset companion need not contract at one nonmaximal step. The companion ledger
+remains exact bookkeeping but terminal-only existential bounds are goal-equivalent. The
+rank-`(3,2)` artery asks for an explicit coefficient formula valid before terminality is known,
+or one exact aperiodic
 reset orbit with unbounded denominators and unbounded history. The final boundary, persistent
 exact orders, and divisibility-chain schedules are closed; only recycled support across
 two-sided order breaks remains. In parallel, rank-(2,2) is exactly generic PI₂.
