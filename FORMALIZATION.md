@@ -1479,6 +1479,16 @@ exact nonempty-code interval, including the sole quadratic `q²` coefficient com
 exact boundary is
 [`audits/m43-opposite-double-c-endpoint-2026-08-30.md`](audits/m43-opposite-double-c-endpoint-2026-08-30.md).
 
+The phase-zero left-`c` defect exclusion
+[`M4-S16`](SALVAGE.md#m4-s16-phase-zero-left-c-defect-exclusion) is checked in the same module.
+`ParabolicBlade.bridge_cZero_cTwo_bOne_det` collects the determinant of
+`c(3z)c(3x+2)b(3y+1)` into four wait monomials, and
+`ParabolicBlade.bridge_cZero_cTwo_bOne_det_ne_zero` proves all four coefficients positive from
+`27<M` and `0≤L<M`. The module also checks the exact eight-coefficient core of the remaining
+transposed `c(3z)b(3x+2)c(3y+1)` incidence, its factorization on `L=M−2`, and nonvanishing of
+that factorization at natural waits. The exact boundary is
+[`audits/m43-phase-zero-left-c-defect-2026-08-30.md`](audits/m43-phase-zero-left-c-defect-2026-08-30.md).
+
 The phase-zero `c`-defect exclusion
 [`M4-S10`](SALVAGE.md#m4-s10-phase-zero-c-defect-exclusion) is checked in the same module.
 `ParabolicBlade.bridge_bZero_cTwo_bOne_det` computes the exact width-three determinant for

@@ -8119,6 +8119,39 @@ one `c` endpoint.
 [`MatrixMortality/ParabolicMixedEndpoint.lean`](MatrixMortality/ParabolicMixedEndpoint.lean) and
 [`audits/m43-opposite-double-c-endpoint-2026-08-30.md`](audits/m43-opposite-double-c-endpoint-2026-08-30.md).
 
+### M4-S16: Phase-zero left-c defect exclusion
+
+**Kind:** obstruction
+
+**Evidence:** formalized
+
+**Disposition:** active
+
+At deletion width three, the shortest `0|2|1` bridge with a residue-zero `c` endpoint, a `c`
+defect, and a residue-one `b` endpoint is
+
+```text
+c(3z) c(3x+2) b(3y+1).
+```
+
+Its determinant is `243y/16` times a four-term polynomial in `xz,x,z,1`. Every coefficient is
+strictly positive under the native nonempty-body bounds `27<M` and `0≤L<M`. Hence no regular
+instance closes.
+
+**Scope:** exactly three atoms at `β=3`, with letters `c|c|b` in phase `0|2|1` and `y>0`. It
+does not cover the opposite orientation, another `c` endpoint, a longer defect run, or a
+nontrivial safe context.
+
+**Use:** seven shortest families remain. The transposed `c|b|c` family is still the immediate
+endpoint target; five of the other survivors contain a `c` defect.
+
+**Next:** decide the checked eight-coefficient `c(3z)b(3x+2)c(3y+1)` core on the non-all-`c`
+digit cylinders, then seek a transport cone covering the remaining `c`-defect placements.
+
+**Artifact:**
+[`MatrixMortality/ParabolicMixedEndpoint.lean`](MatrixMortality/ParabolicMixedEndpoint.lean) and
+[`audits/m43-phase-zero-left-c-defect-2026-08-30.md`](audits/m43-phase-zero-left-c-defect-2026-08-30.md).
+
 ### M4-C03: Zero-framed binary two-Lag compiler
 
 **Kind:** compiler
