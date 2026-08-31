@@ -1292,6 +1292,19 @@ that three pairwise distinct rays can land in a planar carrier only when the lea
 vanishes. The G3-S03 application is conditional on exactly its carrier and three-distinct-ray
 hypotheses; no theorem excludes singular, word-dependent, or source-dependent leakage.
 
+[`G3-S07`](SALVAGE.md#g3-s07-fixed-rank-two-symmetric-square-leakage-is-elementary) is
+formalized in `SymmetricSquareLeakage`. Lean proves that a rational rank-two `3×3` leakage has a
+witnessed one-dimensional kernel, that agreement of leakage dynamics on three pairwise-distinct
+Veronese rays forces a global intertwiner, and that the kernel is consequently a common Sym²
+eigenline. It then checks the exact tensor bifurcation. A nonzero degenerate rational symmetric
+tensor factors as a nonzero scalar times `ν(r)` and gives a common rational fixed ray. A
+nondegenerate tensor gives a traceless twist `T` with `T²=δI`, `δ≠0`; determinant comparison
+forces every invertible generator to commute or anticommute with `T`. Separate generic transport
+lemmas verify that commuting preserves a twist eigenspace and anticommuting exchanges the
+opposite eigenspaces. The top theorem assumes one fixed leakage, one quotient action per
+generator, and three distinct source rays. It makes no claim about rank at most one,
+word-dependent leakage, nonspanning orbits, syntax guards, or a mortality converse.
+
 The semantic core of [`G3-O04`](SALVAGE.md#g3-o04-expanding-affine-history-no-go) is formalized:
 the reset-affine orbit, finite reverse box, exact caged DFA, regularity, and universal
 noncomputability contradiction are kernel-checked. The remaining mechanization seam is uniform
@@ -2446,6 +2459,7 @@ fixed-rank decision problem.
 | `ReturnConvert.lean` | minimal two-scale return pencil and nonresonant multi-return zero |
 | `ProjectiveLine.lean` | total affine-chart presentation of `ℙ¹` and exact unit-word ray action |
 | `SymmetricSquareCollision.lean` | covariant Sym² representation, gapped tangent collision test, full-rank cost, two-ray Veronese-plane obstruction, and fixed full-rank leakage no-go |
+| `SymmetricSquareLeakage.lean` | rank-two leakage kernel line, tensor similitude bifurcation, and common rational-point or algebraic-pair obstruction |
 | `CongruenceBlindOrbit.lean` | free rational shear orbit, trivial source stabilizer, projective all-modulus CRT closure, and a whole-matrix congruence ghost away from nineteen |
 | `ShearEuclidean.lean` | Euclidean chamber growth, determinant-one coprimality, and finite projective syntax bounds for the fixed step-three shear orbit |
 | `TransverseDilationOrbit.lean` | free diagonal--parabolic ping-pong, bounded stabilizer recurrence, and a promised-empty trivial-stabilizer false inverse ray of proper height |

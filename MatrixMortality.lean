@@ -45,6 +45,7 @@ import MatrixMortality.ReturnJordan
 import MatrixMortality.ReturnConvert
 import MatrixMortality.ProjectiveLine
 import MatrixMortality.SymmetricSquareCollision
+import MatrixMortality.SymmetricSquareLeakage
 import MatrixMortality.CongruenceBlindOrbit
 import MatrixMortality.ShearEuclidean
 import MatrixMortality.TransverseDilationOrbit

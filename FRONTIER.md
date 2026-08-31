@@ -1549,6 +1549,15 @@ coordinate changes `P,Q`, Lean factors the transported three-ray determinant as
 `G3-S03` carrier through nonsingular `P,Q,L`. Any fixed word-independent leakage must therefore
 be singular; word-dependent, source-dependent, and explicitly rank-dropping mechanisms remain.
 
+[`G3-S07`](SALVAGE.md#g3-s07-fixed-rank-two-symmetric-square-leakage-is-elementary) now kills
+the rank-two fixed branch when it supports one quotient action on three distinct source rays.
+Those Veronese rays span, so pointwise compatibility is a global intertwiner. Its one-dimensional
+kernel is a common Sym² eigenline. A degenerate kernel tensor gives a common rational fixed ray;
+a nondegenerate tensor gives a traceless twist `T` with `T²=δI`, and every binary generator
+commutes or anticommutes with `T`, hence preserves or swaps its two algebraic eigendirections.
+Thus no genuinely non-elementary binary pair survives this fixed equivariant rank-two seam.
+Rank at most one, dynamically varying leakage, and nonspanning orbits remain open.
+
 [`G3-O18`](SALVAGE.md#g3-o18-transverse-minimum-body-countermodel) proves that transverse
 geometry itself is no obstruction. A variable-radix code with four distinct residues is carried
 by fixed integral rank-two data controls with kernels `ℚe₁` and `ℚe₂`. Lean checks the exact
@@ -2222,6 +2231,15 @@ the invariant-point/pair strata already removed by `D2-D02`.
 nonsingular `3×3` insertion preserve independence of every three distinct Veronese rays. A
 planar complete-fork carrier therefore forces the inserted map to be singular. This sharpens the
 joint seam without touching singular or dynamically varying leakage.
+
+[`G3-S07`](SALVAGE.md#g3-s07-fixed-rank-two-symmetric-square-leakage-is-elementary) closes the
+next fixed-rank branch at the natural equivariance seam. If rank-two `L` supports quotient
+dynamics on three distinct Veronese rays, then `ker L` is a common Sym² eigenline. Its symmetric
+tensor is either degenerate, yielding a common rational point, or nondegenerate, yielding an
+algebraic pair normalized by every generator. Hence a non-elementary UCB₂ action cannot pass
+through one fixed rank-two leakage while retaining consistent dynamics on a spanning Sym² orbit.
+Only rank at most one, fewer than three orbit rays, or leakage varying with the word/source
+escapes this cut.
 
 [`R32-O22`](SALVAGE.md#r32-o22-congruence-blind-free-orbit) shows that even the promised faithful
 free-orbit case has no congruence-separation theorem: one rational target outside the orbit is in

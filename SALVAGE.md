@@ -287,6 +287,7 @@ file owns the mathematical stock.
 | [`G3-S02`](#g3-s02-rank-two-kernel-bifurcation) | structure theorem | common kernels erase route differences; transverse fibres retain one bilinear survivor | formalized | active |
 | [`G3-S04`](#g3-s04-symmetric-square-collision-and-fork-obstruction) | structure theorem and obstruction | symmetric square turns projective collision into a gapped scalar zero, while a two-plane Veronese carrier contains at most two projective rays | formalized | graduated |
 | [`G3-S05`](#g3-s05-fixed-full-rank-symmetric-square-leakage-no-go) | obstruction | every fixed leakage which collapses three distinct Sym² rays into a plane is singular, even between nonsingular binary coordinate changes | formalized | graduated |
+| [`G3-S07`](#g3-s07-fixed-rank-two-symmetric-square-leakage-is-elementary) | structure theorem and obstruction | fixed rank-two leakage carrying three distinct Sym² rays equivariantly forces a common rational point or invariant algebraic pair | formalized | graduated |
 | [`G3-O18`](#g3-o18-transverse-minimum-body-countermodel) | fixed-subclass compiler | distinct rank-two kernels encode every paired history and exactly recognize all minimum bodies | formalized | graduated |
 | [`G3-O26`](#g3-o26-transverse-terminal-row-obstruction) | obstruction | two `bcbc` terminal histories force every exact row on the fixed transverse orbit to vanish | formalized | graduated |
 | [`G3-O27`](#g3-o27-projective-toggle-line-atlas) | obstruction | singular data and a projectively involutive toggle confine every raw orbit to six fixed rank-at-most-two carriers | formalized | graduated |
@@ -12870,6 +12871,62 @@ recovered without a fourth state.
 
 **Artifact:** [`SymmetricSquareCollision.lean`](MatrixMortality/SymmetricSquareCollision.lean) and
 [`m34-symmetric-square-leakage-no-go-2026-08-31.md`](audits/m34-symmetric-square-leakage-no-go-2026-08-31.md).
+
+### G3-S07: Fixed rank-two symmetric-square leakage is elementary
+
+**Kind:** structure theorem and obstruction
+
+**Evidence:** formalized
+
+**Disposition:** graduated
+
+Let `L` be a fixed rational `3×3` matrix of rank two. Suppose three pairwise-distinct binary
+rays `u,v,w` witness, for every invertible binary generator `Aᵢ`, one fixed quotient action
+`Hᵢ` through
+
+```text
+L Sym²(Aᵢ)ν(r) = HᵢLν(r),    r∈{u,v,w}.
+```
+
+Their Veronese columns are a basis by `G3-S04`, so these three equations force the global
+intertwiner `L Sym²(Aᵢ)=HᵢL`. Rank-nullity makes `ker L` a line `ℚk`, and every `Sym²(Aᵢ)`
+preserves that line. Write the symmetric tensor `k=(X,Y,Z)` as
+
+```text
+S(k) = [[X,Y],[Y,Z]].
+```
+
+Lean formalizes the complete bifurcation. If `det S(k)=0`, then `k=cν(r)` for a nonzero rational
+ray `r`, and every `Aᵢ` fixes that projective point. If `det S(k)≠0`, put
+
+```text
+T = S(k)[[0,−1],[1,0]],    δ = −det S(k).
+```
+
+Then `tr T=0`, `δ≠0`, `T²=δI`, and every generator satisfies one of
+
+```text
+AᵢT=TAᵢ,    AᵢT=−TAᵢ.
+```
+
+Over a field splitting `t²−δ`, the first relation preserves both eigendirections of `T` and the
+second swaps them; both transport laws are independently Lean-checked. Thus the binary action
+has a common rational projective point or preserves one algebraic projective pair. This is the
+exact elementary obstruction, not an appeal to an external group classification.
+
+**Scope:** one fixed rank-two leakage, one fixed quotient matrix per generator, and three
+witnessed pairwise-distinct source rays are essential. The theorem does not cover rank at most
+one, a leakage or quotient action selected by the word or source state, an orbit containing at
+most two rays, or equations known only on a nonspanning carrier. It supplies no malformed-word
+guard or mortality converse.
+
+**Use:** reject a non-elementary Sym² repair which spends exactly one fixed dimension and still
+acts consistently on a spanning orbit. Together `G3-S05` and `G3-S07` kill fixed leakage of ranks
+three and two at this equivariance seam. Any surviving insertion must have rank at most one,
+vary dynamically, or avoid a three-ray spanning witness.
+
+**Artifact:** [`SymmetricSquareLeakage.lean`](MatrixMortality/SymmetricSquareLeakage.lean) and
+[`m34-fixed-rank-two-symmetric-square-leakage-2026-08-31.md`](audits/m34-fixed-rank-two-symmetric-square-leakage-2026-08-31.md).
 
 ### G3-O18: Transverse minimum-body countermodel
 
