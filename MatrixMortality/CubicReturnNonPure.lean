@@ -5,8 +5,10 @@ import MatrixMortality.CubicReturn
 
 One irreducible non-pure cubic return family aligns the actual singular image and kernel through
 a selected unit return. A second family keeps every word over two selected waits away from the
-kernel, while seven strictly unselected positive waits reach it exactly. This isolates the
-arbitrary-wait converse as the remaining cubic obstruction.
+kernel, while seven strictly unselected positive waits reach it exactly. Its complete return is
+one linear projection of an integral cubic-recurrence state. Two nontriangular ternary words
+already cancel to upper-triangular macro returns, isolating the arbitrary-depth continuant as the
+remaining cubic obstruction.
 -/
 
 namespace MatrixMortality.CubicReturn.NonPure
@@ -86,6 +88,12 @@ def cubicDefectNorm (state : CubicDefectState) : ℤ :=
     3 * state.first * state.second * state.third + state.second ^ 3 +
       state.second ^ 2 * state.third +
     2 * state.second * state.third ^ 2 + state.third ^ 3
+
+/-- The complete false-wait return reconstructed from one integral defect window. -/
+def falseWaitReturnOfState (state : CubicDefectState) : Square (Fin 2) ℚ :=
+  !![(-63 : ℚ) * state.first + 24 * state.second,
+      24 * state.first - 21 * state.second - 79 * state.third;
+    (-90 : ℚ) * state.first, -30 * state.second - 90 * state.third]
 
 /-- Rational lower-left defect extracted directly from the physical false-wait family. -/
 def falseWaitDefect (wait : Nat) : ℚ :=
@@ -204,6 +212,65 @@ theorem cubicDefect_recurrence (wait : Nat) :
     cubicDefect (wait + 3) = cubicDefect wait - cubicDefect (wait + 2) := by
   simp [cubicDefect, cubicDefectState, CubicDefectState.next]
 
+private theorem falseWaitReturnOfState_recurrence (state : CubicDefectState) :
+    falseWaitReturnOfState state - falseWaitReturnOfState state.next.next =
+      falseWaitReturnOfState state.next.next.next := by
+  ext i j
+  fin_cases i <;> fin_cases j <;>
+    simp [falseWaitReturnOfState, CubicDefectState.next] <;> ring
+
+private theorem falseWaitReturn_window (wait : Nat) :
+    falseWaitReturn wait = falseWaitReturnOfState (cubicDefectState wait) ∧
+      falseWaitReturn (wait + 1) =
+        falseWaitReturnOfState (cubicDefectState wait).next ∧
+      falseWaitReturn (wait + 2) =
+        falseWaitReturnOfState (cubicDefectState wait).next.next := by
+  induction wait with
+  | zero =>
+      constructor
+      · ext i j
+        fin_cases i <;> fin_cases j <;>
+          norm_num [falseWaitReturn, ReturnFamily.returnMatrix, ambient, input,
+            falseWaitOutput, falseWaitReturnOfState, cubicDefectState,
+            CubicDefectState.next, Matrix.mul_apply, Fin.sum_univ_succ]
+      constructor <;>
+        ext i j <;>
+        fin_cases i <;> fin_cases j <;>
+          norm_num [falseWaitReturn, ReturnFamily.returnMatrix, ambient, input,
+            falseWaitOutput, falseWaitReturnOfState, cubicDefectState,
+            CubicDefectState.next, Matrix.mul_apply, Fin.sum_univ_succ, pow_succ]
+  | succ wait induction =>
+      rcases induction with ⟨first, second, third⟩
+      rw [cubicDefectState_succ]
+      refine ⟨second, third, ?_⟩
+      rw [show wait + 1 + 2 = wait + 3 by omega]
+      change
+        ReturnFamily.returnMatrix ambient input falseWaitOutput (wait + 3) =
+          falseWaitReturnOfState (cubicDefectState wait).next.next.next
+      rw [return_recurrence falseWaitOutput wait]
+      change
+        falseWaitReturn wait - falseWaitReturn (wait + 2) =
+          falseWaitReturnOfState (cubicDefectState wait).next.next.next
+      rw [first, third, falseWaitReturnOfState_recurrence]
+
+/-- Every entry of the physical false-wait return is controlled by the same integral defect
+window. -/
+theorem falseWaitReturn_eq_state (wait : Nat) :
+    falseWaitReturn wait = falseWaitReturnOfState (cubicDefectState wait) :=
+  (falseWaitReturn_window wait).1
+
+/-- The determinant is the quadratic companion of the cubic defect state. -/
+theorem falseWaitReturn_det (wait : Nat) :
+    let state := cubicDefectState wait
+    (falseWaitReturn wait).det =
+      720 * (3 * (state.first : ℚ) ^ 2 -
+        2 * state.first * state.third - state.second ^ 2 -
+        3 * state.second * state.third) := by
+  dsimp
+  rw [falseWaitReturn_eq_state, Matrix.det_fin_two]
+  simp [falseWaitReturnOfState]
+  ring
+
 /-- The recurrence shift preserves one discriminant-`-23` cubic norm. -/
 theorem cubicDefectNorm_next (state : CubicDefectState) :
     cubicDefectNorm state.next = cubicDefectNorm state := by
@@ -283,6 +350,28 @@ theorem cubicDefect_known_zeros :
     cubicDefect 0 = 0 ∧ cubicDefect 1 = 0 ∧
       cubicDefect 5 = 0 ∧ cubicDefect 14 = 0 := by
   norm_num [cubicDefect, cubicDefectState, CubicDefectState.next]
+
+/-- Three individually nontriangular returns can cancel their lower-left defects exactly. -/
+theorem nontriangular_triple_fifteen_eight_twentySix :
+    falseWaitReturn 15 1 0 ≠ 0 ∧ falseWaitReturn 8 1 0 ≠ 0 ∧
+      falseWaitReturn 26 1 0 ≠ 0 ∧
+      (falseWaitReturn 15 * falseWaitReturn 8) 1 0 ≠ 0 ∧
+      (falseWaitReturn 8 * falseWaitReturn 26) 1 0 ≠ 0 ∧
+      falseWaitReturn 15 * falseWaitReturn 8 * falseWaitReturn 26 =
+        !![9331200, 71139600; 0, 85665600] := by
+  norm_num [falseWaitReturn_eq_state, falseWaitReturnOfState, cubicDefectState,
+    CubicDefectState.next, Matrix.mul_apply, Fin.sum_univ_succ]
+
+/-- A second three-letter cancellation uses a different outer defect and recurrence index. -/
+theorem nontriangular_triple_twelve_eight_thirtyThree :
+    falseWaitReturn 12 1 0 ≠ 0 ∧ falseWaitReturn 8 1 0 ≠ 0 ∧
+      falseWaitReturn 33 1 0 ≠ 0 ∧
+      (falseWaitReturn 12 * falseWaitReturn 8) 1 0 ≠ 0 ∧
+      (falseWaitReturn 8 * falseWaitReturn 33) 1 0 ≠ 0 ∧
+      falseWaitReturn 12 * falseWaitReturn 8 * falseWaitReturn 33 =
+        !![-32348160, -70752420; 0, -76663800] := by
+  norm_num [falseWaitReturn_eq_state, falseWaitReturnOfState, cubicDefectState,
+    CubicDefectState.next, Matrix.mul_apply, Fin.sum_univ_succ]
 
 /-- The endpoint-aligned twist has the displayed singular and selected returns. -/
 theorem terminal_returns :

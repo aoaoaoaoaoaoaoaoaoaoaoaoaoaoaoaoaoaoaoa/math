@@ -1705,6 +1705,17 @@ among nontriangular letters. See
 [`R32-S43`](SALVAGE.md#r32-s43-cubic-defect-norm-and-thue-throat) and
 [`m32-cubic-defect-thue-2026-08-30.md`](audits/m32-cubic-defect-thue-2026-08-30.md).
 
+The complete matrix residue is now equally explicit. One defect window determines every return
+entry and its determinant, and every nontriangular return acts as one recurrence-digit negative
+continued-fraction letter `z↦xₙ−tₙ/(z+yₙ)`. Cancellation is therefore an exact generalized
+continuant language. It is not locally guarded: `M₁₅M₈M₂₆` and `M₁₂M₈M₃₃` are upper
+triangular even though every factor and both adjacent pairs in each word are nontriangular.
+These are lawful derived affine macro letters, but they neither classify the triangular language
+nor reach the singular endpoint. The remaining fork is descent or decision for the unbounded
+recurrence-digit continuant, or a sound compiler that uses its derived macros while controlling
+every other word. See [`R32-O23`](SALVAGE.md#r32-o23-cubic-continuant-fracture) and
+[`m32-cubic-continuant-fracture-2026-08-31.md`](audits/m32-cubic-continuant-fracture-2026-08-31.md).
+
 ### ReturnSquare laboratory
 
 [`R32-S03`](SALVAGE.md#r32-s03-returnsquare-normal-form) is the first completely normalized
@@ -2366,7 +2377,7 @@ all-legal block inequality for the carried generalized continuant. See
 | --- | --- | --- |
 | Split-guard decision | Produce an explicit coefficient recurrence-or-escape bound on a nonterminal class broad enough to contain every first-hit prefix | Terminal-only amortization is goal-equivalent; every residual packet is doubly order-broken and one wait can service nested packets |
 | Split-guard counter | Solve the rational reset incidence for an aperiodic p-adic Jacobi schedule with sparse microscopic doubly order-broken packets | Finite handoff alphabets and fixed rational charts are periodic or impossible; the history-dependent handoff height must be unbounded |
-| Irreducible cubic reflection orbit | Decide all-positive-wait endpoint reachability for the fixed non-pure order-three recurrence | Actual endpoints support free selected dynamics, but an explicit unselected seven-wait word defeats perfect selected ping-pong |
+| Irreducible cubic reflection orbit | Decide the recurrence-digit generalized-continuant endpoint language, or compile through its derived affine macros with an all-word converse | Ternary products can become triangular although every factor and adjacent pair is nontriangular; the endpoint witness still requires an uncontrolled seven-wait word |
 | Generic projective incidence | Decide rational-subset membership in the rank-two affine cusp, or encode universality through its carry dynamics | Fixed-subset shortcut Collatz already occupies `ℤ[1/6]⋊ℤ²`; the Tits split, direct stores, and one-dilation algorithms miss it |
 
 The split-spectrum hot path is an explicit reset-anchored recurrence-or-escape theorem on a

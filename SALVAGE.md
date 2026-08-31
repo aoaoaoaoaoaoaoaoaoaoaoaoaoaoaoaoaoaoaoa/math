@@ -173,6 +173,7 @@ file owns the mathematical stock.
 | [`R32-O20`](#r32-o20-transverse-reverse-reservoir) | obstruction | a lawful fixed projective cycle accumulates unbounded reverse 13-adic mass on its transverse eigenline | formalized | graduated |
 | [`R32-O21`](#r32-o21-finite-image-positivity-collapse) | obstruction | every finite ambient image identifies the positive Collatz monoid with the whole generated group | formalized core; audited application | graduated |
 | [`R32-O22`](#r32-o22-congruence-blind-free-orbit) | obstruction | one free trivial-stabilizer rational orbit misses a target that lies in its projective orbit modulo every integer | formalized | graduated |
+| [`R32-O23`](#r32-o23-cubic-continuant-fracture) | structure theorem and obstruction | the non-pure return family has an exact recurrence-digit continuant form, and nontriangular cancellation begins in two ternary blocks with no triangular adjacent pair | formalized | active |
 | [`R32-D03`](#r32-d03-bounded-denominator-periodicity) | decidable stratum | every infinite legal rational guard orbit with bounded reduced denominators is eventually periodic | formalized | graduated |
 | [`M4-C01`](#m4-c01-two-state-pushout-compiler) | compiler | binary deterministic two-state scalar control compiles to three `4 × 4` matrices | formalized | graduated |
 | [`M4-O01`](#m4-o01-exact-toggle-fusion-leaves-an-immortal-core) | obstruction | exact local toggle fusion preserves a nonzero common anchor | formalized | graduated |
@@ -6664,9 +6665,10 @@ can cancel across products.
 flag-preserving alphabet. Do not mistake that scalar classification for an arbitrary-word
 converse.
 
-**Next:** attack cancellation among nonzero defect letters directly. Formalizing the
-Delone–Nagell classification would strengthen evidence but would not change the full cubic
-frontier.
+**Next:** [`R32-O23`](#r32-o23-cubic-continuant-fracture) converts cancellation among nonzero
+defect letters into an exact generalized-continuant language and exhibits its first ternary
+fractures. Formalizing the Delone–Nagell classification would strengthen evidence but would not
+change the full cubic frontier.
 
 ### R32-O19: Projective queue centralizer obstruction
 
@@ -6825,6 +6827,61 @@ end-to-end congruence closure.
 
 **Artifact:**
 [`audits/m32-congruence-blind-free-orbit-2026-08-30.md`](audits/m32-congruence-blind-free-orbit-2026-08-30.md).
+
+### R32-O23: Cubic continuant fracture
+
+**Kind:** structure theorem and obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+For the false-wait family, one complete defect window `(a,b,c)=(uₙ,uₙ₊₁,uₙ₊₂)` determines
+the whole return:
+
+```text
+Mₙ = [[−63a+24b, 24a−21b−79c],
+      [−90a,     −30b−90c]],
+det Mₙ=720(3a²−2ac−b²−3bc).
+```
+
+When `a≠0`, its projective action has the exact Bruhat form
+
+```text
+Mₙ(z)=xₙ−tₙ/(z+yₙ),
+xₙ=7/10−4b/(15a),
+yₙ=(b+3c)/(3a),
+tₙ=4(3a²−2ac−b²−3bc)/(45a²).
+```
+
+Thus cancellation among nontriangular returns is a recurrence-digit negative generalized
+continuant. It already occurs in the exact ternary blocks
+
+```text
+M₁₅M₈M₂₆ = [[9331200,71139600],[0,85665600]],
+M₁₂M₈M₃₃ = [[−32348160,−70752420],[0,−76663800]].
+```
+
+Every displayed factor has nonzero lower-left entry. Both adjacent pairs in each word also have
+nonzero lower-left entry, so neither factorwise defect tests nor adjacent-pair triangularity can
+guard arbitrary products. The two products are new upper-triangular macro letters assembled
+entirely from the nontriangular alphabet.
+
+**Scope:** Lean checks the complete state projection, determinant formula, factor and adjacent
+pair nontriangularity, and both full matrix products. The Bruhat formula is an elementary audited
+identity. No completeness classification of ternary cancellation and no decision theorem for
+the unbounded continuant language is claimed.
+
+**Artifact:** `CubicReturn.NonPure.falseWaitReturn_eq_state`,
+`falseWaitReturn_det`, `nontriangular_triple_fifteen_eight_twentySix`, and
+`nontriangular_triple_twelve_eight_thirtyThree` in
+[`CubicReturnNonPure.lean`](MatrixMortality/CubicReturnNonPure.lean), with reconstruction in
+[`m32-cubic-continuant-fracture-2026-08-31.md`](audits/m32-cubic-continuant-fracture-2026-08-31.md).
+
+**Use:** formulate the non-pure cubic residue as a generalized-continuant language with singleton
+affine waits `{1,5,14}` and derived affine macro words. Any soundness argument must control
+ternary and longer continuants, not only individual defects or adjacent pairs.
+
+**Next:** seek a descent or decision grammar for the recurrence-digit continuant, or use the
+derived triangular macros as controlled punctuation while proving an arbitrary-word converse.
 
 ### R32-D03: Bounded-denominator periodicity
 

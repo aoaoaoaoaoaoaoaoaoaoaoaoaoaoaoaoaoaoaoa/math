@@ -1234,6 +1234,25 @@
  Quot.sound]
 'MatrixMortality.CubicReturn.NonPure.falseWait_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.CubicReturn.NonPure.selected_lower_ne_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.cubicDefect_recurrence' depends on axioms: [propext]
+'MatrixMortality.CubicReturn.NonPure.cubicDefectNorm_state' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitReturn_lowerLeft' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.cubicDefect_zero_forces_exceptionalThue' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.cubicDefect_known_zeros' depends on axioms: [propext]
+'MatrixMortality.CubicReturn.NonPure.falseWaitReturn_eq_state' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitReturn_det' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.nontriangular_triple_fifteen_eight_twentySix' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.nontriangular_triple_twelve_eight_thirtyThree' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.EdgeCompression.isMortal_iff_exists_edgeProduct_eq_zero' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
