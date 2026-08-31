@@ -40,13 +40,15 @@ bounded branch. The unbounded-height branch remains open.
 
 ## Formalization
 
-`InverseOrbitRecurrence.lean` adds three theorems:
+`InverseOrbitRecurrence.lean` adds four theorems:
 
-1. `target_unreachable_of_source_stabilizer_trivial`, the abstract
+1. `target_stabilizer_trivial_of_reachable_from_trivial_source`, transport of
+   stabilizer triviality through a known hit;
+2. `target_unreachable_of_source_stabilizer_trivial`, the abstract
    conjugation certificate;
-2. `target_unreachable_of_bounded_prefix_window`, its composition with the
+3. `target_unreachable_of_bounded_prefix_window`, its composition with the
    exact finite horizon; and
-3. `height_escape_or_target_unreachable`, the unconditional window
+4. `height_escape_or_target_unreachable`, the unconditional window
    dichotomy.
 
 All group multiplications and actions are explicit. The proof does not assume
@@ -79,6 +81,7 @@ warning suppression, reference PDF, or external literature premise was added.
 
 | Claim | Classification | Evidence |
 | --- | --- | --- |
+| Reachability transports trivial source stabilizer to the target | promotion | Lean-checked conjugation argument |
 | A nonidentity target stabilizer forbids reachability from a trivial-stabilizer source | promotion | Lean-checked conjugation argument |
 | A bounded `(2H+1)²+1` prefix window certifies target nonreachability | promotion | Lean-checked composition with `D2-O10` |
 | Every such window either escapes above `H` or certifies nonreachability | promotion | Lean-checked finite dichotomy |
