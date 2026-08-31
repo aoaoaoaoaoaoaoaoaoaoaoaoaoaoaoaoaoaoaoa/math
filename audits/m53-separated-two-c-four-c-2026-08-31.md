@@ -11,7 +11,7 @@ Human role: elicited by @eternalism_4eva
 The final `n≡11 (mod 27)` diagonal class contains a canonical four-active-`c` block with an
 exact two-copy reproduction law. In its first subresidue, `n≡11 (mod 81)`, the reproduced
 blocks both miss every deletion head, so the coupled queue halts. Only `n≡38,65 (mod 81)`
-remain open on the diagonal.
+remain open at this audit boundary; `MM-S48` later closes both phases.
 
 ## Canonical Block
 
@@ -65,5 +65,5 @@ kernel-checks the reusable `fourCBlock`, `fourCQueue`, and `fourCExpansion` defi
 exact theorem `SeparatedTwoCResidue.fourCQueue_reaches_final`, and the halting theorem
 `SeparatedTwoCResidue.elevenModuloEightyOne_tagHaltsFrom`.
 
-The result does not decide the two surviving tail phases, unequal separated runs, arbitrary
-two-`c` bodies, or deletion-width-three universality.
+The result does not itself decide the two surviving tail phases; `MM-S48` later does. Unequal
+separated runs, arbitrary two-`c` bodies, and deletion-width-three universality remain open.

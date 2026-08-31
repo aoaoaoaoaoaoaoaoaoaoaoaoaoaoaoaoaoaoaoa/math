@@ -2562,6 +2562,7 @@ fixed-rank decision problem.
 | `SeparatedTwoCCantor.lean` | exact active-pair macros, width-three head bisimulation, finite Cantor-defect forcing, and halting for `n≡5 (mod 9)` |
 | `TransverseSeparatedForkNoGo.lean` | quotient-commutator terminal-fork obstruction and exceptional-fibre collision closing the distinct-data candidate |
 | `SeparatedTwoCResidueTwo.lean` | six-event active-`c` cut, canonical four-`c` reproduction macro, and halting for `n≡2,20 (mod 27)` and `n≡11 (mod 81)` |
+| `SeparatedTwoCDiagonal.lean` | exact one/two-block return maps, finite injective centered-division extinction, and the complete diagonal classification |
 | `TerminalForkCore.lean` | representation-independent one-or-two-dimensional invariant fork core forced by exact `bcbc` recognition |
 | `AffineRecognizer.lean` | generic singular three-state guard-and-carry representation calculus |
 | `BranchingRecognizer.lean` | complete `bcbc` residual grammar and rational three-state recognizer |
@@ -3035,6 +3036,11 @@ fixed-rank decision problem.
 | Every diagonal separated body with `n≡2,20 (mod 27)` has a halting coupled input | `SeparatedTwoCResidue.twoModuloTwentySeven_tagHaltsFrom`, `SeparatedTwoCResidue.twentyModuloTwentySeven_tagHaltsFrom` |
 | A canonical four-active-`c` block has an exact two-copy expansion | `SeparatedTwoCResidue.fourCQueue_reaches_final` |
 | Every diagonal separated body with `n≡11 (mod 81)` has a halting coupled input | `SeparatedTwoCResidue.elevenModuloEightyOne_tagHaltsFrom` |
+| A canonical block reproduces across any suffix beginning with at least two unary letters | `SeparatedTwoCResidue.fourCBlock_bRun_reaches_final` |
+| The centered one/two-block macro is accessible from its initial defect | `SeparatedTwoCDiagonal.fourCCentered_initial_accessible` |
+| Every diagonal separated body with `n≡11 (mod 27)` has a halting coupled input | `SeparatedTwoCDiagonal.elevenModuloTwentySeven_tagHaltsFrom` |
+| Every diagonal separated body with `n≡2 (mod 3)` has a halting coupled input | `SeparatedTwoCDiagonal.twoModuloThree_tagHaltsFrom` |
+| A coupled diagonal separated source halts exactly when `n≡2 (mod 3)` | `SeparatedTwoCDiagonal.diagonal_tagHaltsFrom_iff` |
 | Every binary prefix-machine word has one decoded block per row | `prefixMachine_run`, `WeightedTransducer.wordProduct_apply` |
 | Prefix-machine mortality iff five-matrix mortality | `prefixMachine_mortal_iff_normalized` |
 | Both prefix generators share the ten-dimensional image | `prefixProjection_generator` |
@@ -3358,7 +3364,11 @@ macro. `SeparatedTwoCResidue.lean` proves that the complementary infinite class
 defect map and proves that every `n≡5 (mod 9)` coupled input halts.
 `SeparatedTwoCResidueTwo.lean` then proves halting in two of the three subresidues of the last
 class, `n≡2,20 (mod 27)`, derives the surviving four-`c` reproduction macro, and proves the
-further class `n≡11 (mod 81)` halts. Only `n≡38,65 (mod 81)` remain open on the diagonal.
+further class `n≡11 (mod 81)` halts. `SeparatedTwoCDiagonal.lean` closes the two surviving
+tail phases through a finite injective centered-division system and proves halting for every
+`n≡2 (mod 3)`. Together with the exact periodic orbits for the other two residues, this
+completes the coupled diagonal classification; the degenerate `n=0` source has a separately
+checked two-state cycle. Unequal separated runs remain open.
 No declaration claims that the full two-`c` stratum is universal or decidable.
 
 ## Prior Formalizations

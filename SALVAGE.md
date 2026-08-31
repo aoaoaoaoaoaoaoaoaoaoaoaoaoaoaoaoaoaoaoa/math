@@ -73,6 +73,7 @@ file owns the mathematical stock.
 | [`MM-S30`](#mm-s30-separated-residue-eight-drainage) | halting theorem | the diagonal separated family halts throughout `n≡8 (mod 9)` | formalized | active |
 | [`MM-S41`](#mm-s41-separated-residue-two-first-cut) | halting theorem | two thirds of the last diagonal residue halt: `n≡2,20 (mod 27)` | formalized | active |
 | [`MM-S43`](#mm-s43-four-c-reproduction-cut) | structure and halting theorem | one four-`c` block reproduces exactly; `n≡11 (mod 81)` halts | formalized | active |
+| [`MM-S48`](#mm-s48-centered-four-c-extinction) | structure and halting theorem | the one/two-block macro is a finite injective centered division system; every `n≡2 (mod 3)` diagonal source halts | formalized | active |
 | [`MM-O01`](#mm-o01-all-placement-packing-rank) | obstruction | literal CHHN packing has exact rank six for every separator placement | formalized | graduated |
 | [`MM-O02`](#mm-o02-one-sided-phase-overlap) | obstruction | standard common-line phase fusion becomes one-sided | reported | parked |
 | [`MM-O03`](#mm-o03-two-channel-boundary-tax) | obstruction | exact diagonal rank-two punctuation costs two states beyond Hankel rank | formalized | graduated |
@@ -4348,8 +4349,8 @@ the coupled source does not halt. The case `n=1` has a separate one-step entry b
 first wake is `bc`; the same return formula already covers its cycle.
 
 **Scope:** this proves an infinite nonhalting family of admissible separated two-`c` bodies.
-It does not classify the residue-two diagonal; `MM-S41` later reduces that diagonal to
-`n≡11 (mod 27)`, and `MM-S43` further reduces it to `n≡38,65 (mod 81)`. Bodies with unequal
+It does not classify the residue-two diagonal; `MM-S41` and `MM-S43` expose its final four-`c`
+macro, and `MM-S48` later proves that every residue-two diagonal source halts. Bodies with unequal
 outer runs and arbitrary `bᵖ c bʳ c bˢ` remain open, and the result supplies no width-three
 universality theorem.
 
@@ -4365,8 +4366,8 @@ middle separation `r>0` as genuine dynamics rather than an automatic halting con
 **Artifact:**
 [`audits/m53-separated-two-c-orbits-2026-08-31.md`](audits/m53-separated-two-c-orbits-2026-08-31.md).
 
-**Next:** decide the `MM-S43` survivors `n≡38,65 (mod 81)`, then test whether unequal outer
-runs admit a finite arithmetic macro system or unbounded queue growth.
+**Next:** test whether unequal outer runs admit a finite arithmetic macro system or unbounded
+queue growth.
 
 ### MM-S27: Reciprocal raw-head support
 
@@ -4881,8 +4882,8 @@ contains `b`; the general constant-head theorem drains the queue because `b` emi
 itself while each step deletes three letters.
 
 **Scope:** this decides only the diagonal residue `n≡8 (mod 9)`. Together with `MM-S25` and
-`MM-S34`, it reduces the diagonal to `n≡2 (mod 9)`; `MM-S41` subsequently reduces that class
-to `n≡11 (mod 27)`, and `MM-S43` further reduces it to `n≡38,65 (mod 81)`. Unequal separated
+`MM-S34`, it reduces the diagonal to `n≡2 (mod 9)`; `MM-S41` and `MM-S43` expose the last
+four-`c` macro, which `MM-S48` proves always halts. Unequal separated
 runs and bodies with at least three `c` letters remain open. The theorem supplies no
 width-three universality claim.
 
@@ -4897,8 +4898,7 @@ in the remaining residue class or escape the family.
 **Artifact:**
 [`audits/m53-separated-two-c-residue-eight-2026-08-31.md`](audits/m53-separated-two-c-residue-eight-2026-08-31.md).
 
-**Next:** `MM-S41` and `MM-S43` perform the first residue-two refinements. Continue from
-`n≡38,65 (mod 81)`.
+**Next:** `MM-S48` closes the residue-two diagonal. Continue with unequal separated runs.
 
 ### MM-S34: Separated residue-five Cantor drainage
 
@@ -4933,8 +4933,8 @@ predecessor would force `E₀` into an outer third, a contradiction. Hence every
 with `n≡5 (mod 9)` halts.
 
 **Scope:** this decides one further infinite diagonal class. Together with `MM-S25` and
-`MM-S30`, it reduces the diagonal to `n≡2 (mod 9)`; `MM-S41` subsequently reduces that class
-to `n≡11 (mod 27)`, and `MM-S43` further reduces it to `n≡38,65 (mod 81)`. The result does not
+`MM-S30`, it reduces the diagonal to `n≡2 (mod 9)`; `MM-S41` and `MM-S43` expose the last
+four-`c` macro, which `MM-S48` proves always halts. The result does not
 decide unequal outer runs, the full separated two-`c` stratum, or width-three universality.
 
 **Use:** the residue-five dynamics are finite after the correct defect quotient despite
@@ -4949,9 +4949,8 @@ principal tools for the last diagonal residue and for testing unequal separated 
 **Artifact:**
 [`audits/m53-separated-two-c-residue-five-2026-08-31.md`](audits/m53-separated-two-c-residue-five-2026-08-31.md).
 
-**Next:** `MM-S41` and `MM-S43` supply the first residue-two macros. Continue from
-`n≡38,65 (mod 81)` and decide whether the induced block system admits a finite injective
-quotient or an exact nonhalting cycle.
+**Next:** `MM-S48` supplies the finite injective quotient and closes the residue-two diagonal.
+Continue with unequal separated runs.
 
 ### MM-S41: Separated residue-two first cut
 
@@ -4979,8 +4978,8 @@ same holds, in the other inert phase, for `A≡7 (mod 9)`. The remaining queue t
 with `n≡2` or `20 (mod 27)` halts. The unique survivor of this cut is `A≡4 (mod 9)`, hence
 `n≡11 (mod 27)`.
 
-**Scope:** this refines only the residue-two diagonal `bb c bⁿ c bⁿ`. `MM-S43` subsequently
-proves the subresidue `n≡11 (mod 81)` halts, leaving `n≡38,65 (mod 81)`. Unequal separated
+**Scope:** this refines only the residue-two diagonal `bb c bⁿ c bⁿ`. `MM-S43` exposes its
+recursive block and `MM-S48` subsequently closes the entire diagonal. Unequal separated
 runs, arbitrary two-`c` bodies, and the width-three source problem remain open.
 
 **Use:** the formerly undifferentiated last diagonal residue is now one third as large. The
@@ -4995,8 +4994,7 @@ through `SeparatedTwoCResidue.twoModuloTwentySeven_tagHaltsFrom` and
 **Artifact:**
 [`audits/m53-separated-two-c-residue-two-2026-08-31.md`](audits/m53-separated-two-c-residue-two-2026-08-31.md).
 
-**Next:** `MM-S43` derives the post-six-event macro and kills its first subresidue. Continue
-from `n≡38,65 (mod 81)`.
+**Next:** `MM-S43` derives the post-six-event macro; `MM-S48` closes its centered block dynamics.
 
 ### MM-S43: Four-c reproduction cut
 
@@ -5029,7 +5027,7 @@ deletion head. The queue drains, proving that every coupled diagonal source with
 `n=81k+11` halts.
 
 **Scope:** this proves one further congruence class and exposes the exact recursive macro. It
-does not decide `n≡38,65 (mod 81)`, unequal separated runs, arbitrary two-`c` bodies, or the
+does not itself decide `n≡38,65 (mod 81)`, unequal separated runs, arbitrary two-`c` bodies, or the
 width-three source problem.
 
 **Use:** future work on the diagonal should operate on populations of `B_A` blocks and unary
@@ -5043,8 +5041,66 @@ through `SeparatedTwoCResidue.fourCQueue_reaches_final` and
 **Artifact:**
 [`audits/m53-separated-two-c-four-c-2026-08-31.md`](audits/m53-separated-two-c-four-c-2026-08-31.md).
 
-**Next:** derive exact one-block and two-block return maps for the two surviving tail phases,
-`n≡65` and `38 (mod 81)` respectively.
+**Next:** `MM-S48` derives the exact one-block and two-block return maps and proves extinction.
+
+### MM-S48: Centered four-c extinction
+
+**Kind:** structure theorem and halting theorem
+**Evidence:** formalized
+**Disposition:** active
+
+Write the last `MM-S41` class as `n=27a+11`, set `A=9a+4`, and let `B_A` be the `MM-S43`
+four-`c` block. The six-event entry reaches
+
+```text
+B_A b^(82a+38).
+```
+
+Every later active queue normalizes to either one block `O(T)=B_A b^T` or two blocks
+`P(T)=B_A b^(39a+19) B_A b^T`. Put
+
+```text
+s = 105a+49,    q = 129a+62,    x = T-s.
+```
+
+The exact four-`c` context macro and head-clean prefix deletion give the partial dynamics
+
+```text
+O: x≡0 ↦ O(x/3),       x≡2 ↦ P((x-q)/3),   x≡1 halts,
+P: x≡0 ↦ P(x/3),       x≡1 ↦ O((x+q)/3),   x≡2 halts.
+```
+
+The open interval `−q<2x<q` is invariant and finite over the integers. Within it, each live
+state has at most one predecessor: idle-branch images lie in the central third, while crossing
+images lie in the appropriate outer third. The initial state is `O(−23a−11)` and has no
+predecessor in the interval. Deleting a predecessor-free root from a finite injective partial
+graph recursively proves accessibility, so every orbit reaches a missing residue and the tag
+queue drains.
+
+Consequently every `n=27a+11` coupled source halts. Combining this with `MM-S30`, `MM-S34`,
+and `MM-S41` proves that every diagonal source with `n≡2 (mod 3)` halts; `MM-S25` supplies
+exact periodic nonhalting orbits in the other two residues for `n>0`. A direct two-step entry
+puts the degenerate `n=0` source on its own exact two-state cycle. Thus halting is equivalent to
+`n≡2 (mod 3)` for every natural `n`.
+
+**Scope:** this completes the coupled diagonal family `bb c bⁿ c bⁿ`. It does not classify
+unequal outer runs, arbitrary separated two-`c` bodies, or the full width-three source problem.
+
+**Use:** future separated-two-`c` work should quotient block populations before refining
+congruences. The centered interval and predecessor-free-root lemma apply whenever the context
+macro closes on one and two blocks with a fixed translation span.
+
+**Formalization:**
+[`MatrixMortality/SeparatedTwoCDiagonal.lean`](MatrixMortality/SeparatedTwoCDiagonal.lean),
+through `SeparatedTwoCDiagonal.fourCCentered_initial_accessible`,
+`SeparatedTwoCDiagonal.elevenModuloTwentySeven_tagHaltsFrom`, and
+`SeparatedTwoCDiagonal.diagonal_tagHaltsFrom_iff`. The arbitrary-suffix block macro is
+`SeparatedTwoCResidue.fourCBlock_bRun_reaches_final`.
+
+**Artifact:**
+[`audits/m53-separated-two-c-diagonal-complete-2026-08-31.md`](audits/m53-separated-two-c-diagonal-complete-2026-08-31.md).
+
+**Next:** classify unequal separated bodies `bᵖ c bʳ c bˢ`; the diagonal is closed.
 
 ### MM-S33: Leading-`D_b` support-saturator extinction
 

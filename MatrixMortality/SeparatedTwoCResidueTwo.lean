@@ -8,7 +8,7 @@ open congruence class. Writing `n = 3A - 1`, the case `A ≡ 1 (mod 3)` begins w
 `c`-headed events. The resulting queue has no `c` at a deletion head unless
 `A ≡ 4 (mod 9)`. Consequently the classes `n ≡ 2, 20 (mod 27)` halt, and only
 `n ≡ 11 (mod 27)` survives this first cut. Its exact four-`c` reproduction macro then proves
-`n ≡ 11 (mod 81)` halts, leaving only `n ≡ 38, 65 (mod 81)` open on the diagonal.
+`n ≡ 11 (mod 81)` halts. `SeparatedTwoCDiagonal` closes the remaining centered block dynamics.
 -/
 
 namespace MatrixMortality.SeparatedTwoCResidue
@@ -243,6 +243,101 @@ theorem fourCQueue_reaches_final (A middle tail : Nat) (A_pos : 0 < A)
     (fourCStageThree_step_final A middle tail A_pos)
   exact ((stageOne.trans stageTwo).trans stageThree).trans finalStep
 
+private def fourCContextStageOne (A front : Nat) (tail : List TagLetter) : List TagLetter :=
+  [.c] ++ bRun (4 * A + 1) ++ [.c] ++ bRun (3 * A - 1) ++
+    [.c] ++ bRun (front + 2) ++ tail ++ bRun 2 ++ [.c] ++
+      bRun (3 * A - 1) ++ [.c] ++ bRun (4 * A - 1)
+
+private def fourCContextStageTwo (A middle front : Nat)
+    (tail : List TagLetter) : List TagLetter :=
+  [.c] ++ bRun (3 * A - 1) ++ [.c] ++ bRun (front + 2) ++ tail ++ bRun 2 ++
+    [.c] ++ bRun (3 * A - 1) ++ [.c] ++ bRun (4 * A + 1) ++
+      [.c] ++ bRun (3 * A - 1) ++ [.c] ++ bRun (3 * A + middle)
+
+private def fourCContextStageThree (A middle front : Nat)
+    (tail : List TagLetter) : List TagLetter :=
+  [.c] ++ bRun (front + 2) ++ tail ++ bRun 2 ++ [.c] ++ bRun (3 * A - 1) ++
+    [.c] ++ bRun (4 * A + 1) ++ [.c] ++ bRun (3 * A - 1) ++
+      [.c] ++ bRun (3 * A + middle + 2) ++ [.c] ++ bRun (3 * A - 1) ++
+        [.c] ++ bRun (4 * A - 1)
+
+private theorem fourCContext_reaches_stageOne (A front : Nat) (tail : List TagLetter)
+    (A_pos : 0 < A) :
+    TagReaches 3 (tagOutput (separatedBody (3 * A - 1)))
+      (fourCBlock A ++ bRun (front + 2) ++ tail)
+      (fourCContextStageOne A front tail) := by
+  have reach := cbbRun_reaches (separatedBody (3 * A - 1)) (A - 1)
+    ([.c] ++ bRun (4 * A + 1) ++ [.c] ++ bRun (3 * A - 1) ++ [.c] ++
+      bRun (front + 2) ++ tail)
+  have firstGap : 3 * (A - 1) + 2 = 3 * A - 1 := by omega
+  have finalGap : 3 * A - 1 + 1 + (A - 1) = 4 * A - 1 := by omega
+  simpa [fourCBlock, fourCContextStageOne, separatedBody, tagOutput, nearyBody,
+    bRun, List.append_assoc, firstGap, finalGap] using reach
+
+private theorem fourCContext_stageOne_reaches_stageTwo
+    (A middle front : Nat) (tail : List TagLetter) (A_pos : 0 < A)
+    (middle_eq : 3 * middle = 4 * A - 1) :
+    TagReaches 3 (tagOutput (separatedBody (3 * A - 1)))
+      (fourCContextStageOne A front tail)
+      (fourCContextStageTwo A middle front tail) := by
+  have reach := cbbRun_reaches (separatedBody (3 * A - 1)) middle
+    ([.c] ++ bRun (3 * A - 1) ++ [.c] ++ bRun (front + 2) ++ tail ++ bRun 2 ++
+      [.c] ++ bRun (3 * A - 1) ++ [.c] ++ bRun (4 * A - 1))
+  have firstGap : 3 * middle + 2 = 4 * A + 1 := by omega
+  have bridgeGap : 4 * A - 1 + 1 + 1 = 4 * A + 1 := by omega
+  have finalGap : 3 * A - 1 + 1 + middle = 3 * A + middle := by omega
+  simpa [fourCContextStageOne, fourCContextStageTwo, separatedBody, tagOutput,
+    nearyBody, bRun, List.append_assoc, firstGap, bridgeGap, finalGap] using reach
+
+private theorem fourCContext_stageTwo_reaches_stageThree
+    (A middle front : Nat) (tail : List TagLetter) (A_pos : 0 < A) :
+    TagReaches 3 (tagOutput (separatedBody (3 * A - 1)))
+      (fourCContextStageTwo A middle front tail)
+      (fourCContextStageThree A middle front tail) := by
+  have reach := cbbRun_reaches (separatedBody (3 * A - 1)) (A - 1)
+    ([.c] ++ bRun (front + 2) ++ tail ++ bRun 2 ++ [.c] ++ bRun (3 * A - 1) ++
+      [.c] ++ bRun (4 * A + 1) ++ [.c] ++ bRun (3 * A - 1) ++
+        [.c] ++ bRun (3 * A + middle))
+  have firstGap : 3 * (A - 1) + 2 = 3 * A - 1 := by omega
+  have bridgeGap : 3 * A + middle + 1 + 1 = 3 * A + middle + 2 := by omega
+  have finalGap : 3 * A - 1 + 1 + (A - 1) = 4 * A - 1 := by omega
+  simpa [fourCContextStageTwo, fourCContextStageThree, separatedBody, tagOutput,
+    nearyBody, bRun, List.append_assoc, firstGap, bridgeGap, finalGap] using reach
+
+private theorem fourCContext_stageThree_step_final
+    (A middle front : Nat) (tail : List TagLetter) (A_pos : 0 < A) :
+    TagStep 3 (tagOutput (separatedBody (3 * A - 1)))
+      (fourCContextStageThree A middle front tail)
+      (bRun front ++ tail ++ bRun 2 ++ fourCBlock A ++
+        bRun (3 * A + middle + 2) ++ fourCBlock A ++ bRun (3 * A)) := by
+  refine ⟨strokeCBB,
+    bRun front ++ tail ++ bRun 2 ++ [.c] ++ bRun (3 * A - 1) ++ [.c] ++
+      bRun (4 * A + 1) ++ [.c] ++ bRun (3 * A - 1) ++ [.c] ++
+        bRun (3 * A + middle + 2) ++ [.c] ++ bRun (3 * A - 1) ++
+          [.c] ++ bRun (4 * A - 1), ?_, ?_⟩
+  · simp [fourCContextStageThree, strokeCBB, stroke₃, Stroke.letters, bRun,
+      List.append_assoc]
+  · have bridgeGap : 4 * A - 1 + 1 + 1 = 4 * A + 1 := by omega
+    have finalGap : 3 * A - 1 + 1 = 3 * A := by omega
+    simp [fourCBlock, separatedBody, strokeCBB, stroke₃, tagOutput, nearyBody,
+      bRun, List.append_assoc, bridgeGap, finalGap]
+
+/-- A canonical block followed by at least two unary letters reproduces across an arbitrary
+suffix; the two consumed unary letters reappear immediately before the emitted copies. -/
+theorem fourCBlock_bRun_reaches_final (A middle front : Nat) (tail : List TagLetter)
+    (A_pos : 0 < A) (middle_eq : 3 * middle = 4 * A - 1) :
+    TagReaches 3 (tagOutput (separatedBody (3 * A - 1)))
+      (fourCBlock A ++ bRun (front + 2) ++ tail)
+      (bRun front ++ tail ++ bRun 2 ++ fourCBlock A ++
+        bRun (3 * A + middle + 2) ++ fourCBlock A ++ bRun (3 * A)) := by
+  have stageOne := fourCContext_reaches_stageOne A front tail A_pos
+  have stageTwo := fourCContext_stageOne_reaches_stageTwo
+    A middle front tail A_pos middle_eq
+  have stageThree := fourCContext_stageTwo_reaches_stageThree A middle front tail A_pos
+  have finalStep := Relation.ReflTransGen.single
+    (fourCContext_stageThree_step_final A middle front tail A_pos)
+  exact ((stageOne.trans stageTwo).trans stageThree).trans finalStep
+
 private def ConstantAtOffset (offset : Nat) (word : List TagLetter) : Prop :=
   ∀ (index : Nat) (index_lt : index < word.length), 3 ∣ offset + index →
     word[index] = .b
@@ -380,6 +475,56 @@ private theorem residueTwoFinal_eleven_reaches_fourCQueue (k : Nat) :
   rw [source_eq, target_eq] at reach
   simpa [A, middle] using reach
 
+private theorem fourCPrelude_diagonal_length (a : Nat) :
+    (fourCPrelude (9 * a + 4) (12 * a + 5)).length = (55 * a + 26) * 3 := by
+  simp [fourCPrelude, bRun]
+  omega
+
+private theorem fourCPrelude_diagonal_clean (a : Nat) :
+    ConstantAtMultiples 3 TagLetter.b (fourCPrelude (9 * a + 4) (12 * a + 5)) := by
+  have shifted : ConstantAtOffset 0 (fourCPrelude (9 * a + 4) (12 * a + 5)) := by
+    unfold fourCPrelude
+    simp only [List.append_assoc, List.singleton_append]
+    apply constantAtOffset_bRun_c
+    · rw [Nat.dvd_iff_mod_eq_zero]
+      omega
+    · apply constantAtOffset_bRun_c
+      · rw [Nat.dvd_iff_mod_eq_zero]
+        omega
+      · apply constantAtOffset_bRun_c
+        · rw [Nat.dvd_iff_mod_eq_zero]
+          omega
+        · apply constantAtOffset_bRun_c
+          · rw [Nat.dvd_iff_mod_eq_zero]
+            omega
+          · exact constantAtOffset_replicate _ _
+  simpa [ConstantAtOffset, ConstantAtMultiples] using shifted
+
+private theorem residueTwoFinal_diagonal_reaches_fourCQueue (a : Nat) :
+    TagReaches 3 (tagOutput (separatedBody (27 * a + 11)))
+      (residueTwoFinal (9 * a + 4) (12 * a + 5))
+      (fourCQueue (9 * a + 4) (82 * a + 38)) := by
+  let A := 9 * a + 4
+  let middle := 12 * a + 5
+  let front := fourCPrelude A middle
+  let tail := fourCBlock A ++ bRun (3 * A)
+  let count := 55 * a + 26
+  have front_length : front.length = count * 3 := by
+    simpa [front, count, A, middle] using fourCPrelude_diagonal_length a
+  have front_clean : ConstantAtMultiples 3 TagLetter.b front := by
+    simpa [front, A, middle] using fourCPrelude_diagonal_clean a
+  have reach := cleanPrefix_reaches (separatedBody (27 * a + 11)) front tail count
+    front_length front_clean
+  have source_eq : front ++ tail = residueTwoFinal A middle := by
+    simpa [front, tail, List.append_assoc] using (residueTwoFinal_prelude A middle).symm
+  have tail_eq : 3 * A + count = 82 * a + 38 := by
+    dsimp [A, count]
+    omega
+  have target_eq : tail ++ bRun count = fourCQueue A (82 * a + 38) := by
+    simp [tail, fourCQueue, bRun, List.append_assoc, tail_eq]
+  rw [source_eq, target_eq] at reach
+  simpa [A, middle] using reach
+
 private theorem fourCExpansion_eleven_clean (k : Nat) :
     ConstantAtMultiples 3 TagLetter.b
       (fourCExpansion (27 * k + 4) (36 * k + 5) (246 * k + 38)) := by
@@ -492,6 +637,38 @@ private theorem initialPair_reaches_final (A middle : Nat) (A_pos : 0 < A)
   have finalStep := Relation.ReflTransGen.single (stageFive_step_final A middle A_pos)
   exact (((stageOne.trans stageTwo).trans stageThree).trans stageFour).trans
     (stageFive.trans finalStep)
+
+/-- Every source in the last residue-two diagonal class reaches one canonical four-`c` block
+with its exact unary tail. -/
+theorem elevenModuloTwentySeven_reaches_fourCQueue (a : Nat) :
+    TagReaches 3 (tagOutput (separatedBody (27 * a + 11)))
+      (coupledInitial (27 * a + 11))
+      (fourCQueue (9 * a + 4) (82 * a + 38)) := by
+  let A := 9 * a + 4
+  let middle := 12 * a + 5
+  have A_pos : 0 < A := by simp [A]
+  have middle_eq : 3 * middle = 4 * A - 1 := by
+    dsimp [A, middle]
+    omega
+  have exponent_eq : 3 * A - 1 = 27 * a + 11 := by
+    dsimp [A]
+    omega
+  have entry := initialPair_reaches_final A middle A_pos middle_eq
+  have entry' :
+      TagReaches 3 (tagOutput (separatedBody (27 * a + 11)))
+        (pairQueue A (3 * A)) (residueTwoFinal A middle) := by
+    rw [exponent_eq] at entry
+    exact entry
+  have exposure := residueTwoFinal_diagonal_reaches_fourCQueue a
+  have queue_eq : pairQueue A (3 * A) = coupledInitial (27 * a + 11) := by
+    rw [coupledInitial_eq]
+    unfold pairQueue
+    rw [exponent_eq]
+    congr 2
+    dsimp [A]
+    omega
+  rw [queue_eq] at entry'
+  simpa [A, middle] using entry'.trans exposure
 
 /-- Every coupled diagonal source with separation `n ≡ 2 (mod 27)` halts after the first
 six active `c` events leave a queue whose deletion heads are all `b`. -/

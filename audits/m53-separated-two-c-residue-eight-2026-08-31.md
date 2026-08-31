@@ -45,6 +45,6 @@ constant-head drainage theorem.
 
 Together with the subsequent `MM-S34` residue-five theorem, this reduces the diagonal to
 `n≡2 (mod 9)`; `MM-S41` later reduces that class further to `n≡11 (mod 27)`. The subsequent
-`MM-S43` refinement leaves only `n≡38,65 (mod 81)`. Those diagonal classes, bodies with
-unequal outer runs, and bodies containing at least three `c` letters remain open. No claim of
+`MM-S43` refinement leaves only `n≡38,65 (mod 81)`, which `MM-S48` later closes. Bodies with
+unequal outer runs and bodies containing at least three `c` letters remain open. No claim of
 deletion-width-three universality or full two-`c` decidability is made.

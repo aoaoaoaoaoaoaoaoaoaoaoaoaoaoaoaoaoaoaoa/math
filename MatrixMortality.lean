@@ -118,6 +118,7 @@ import MatrixMortality.TransverseSeparatedAtlas
 import MatrixMortality.SeparatedTwoCCantor
 import MatrixMortality.TransverseSeparatedForkNoGo
 import MatrixMortality.SeparatedTwoCResidueTwo
+import MatrixMortality.SeparatedTwoCDiagonal
 import MatrixMortality.TerminalForkCore
 import MatrixMortality.PrefixResidual
 import MatrixMortality.AffineRecognizer

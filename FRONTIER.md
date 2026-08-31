@@ -209,13 +209,17 @@ active-pair quotient in
 interval. [`MM-S41`](SALVAGE.md#mm-s41-separated-residue-two-first-cut) resolves two of the
 three subresidues of the last class by an exact six-event macro: `n≡2,20 (mod 27)` halt.
 [`MM-S43`](SALVAGE.md#mm-s43-four-c-reproduction-cut) identifies the survivor's canonical
-four-`c` reproduction macro and proves `n≡11 (mod 81)` halts. Only `n≡38,65 (mod 81)` remain
-open on the diagonal. See
+four-`c` reproduction macro and proves `n≡11 (mod 81)` halts.
+[`MM-S48`](SALVAGE.md#mm-s48-centered-four-c-extinction) closes its one/two-block dynamics by
+an injective centered-division quotient. Thus every diagonal source with `n≡2 (mod 3)` halts,
+while `MM-S25` gives periodic nonhalting orbits in the other residues for `n>0`; `MM-S48`
+also checks the degenerate `n=0` cycle. See
 `audits/m53-separated-two-c-orbits-2026-08-31.md`,
 `audits/m53-separated-two-c-residue-eight-2026-08-31.md`,
 `audits/m53-separated-two-c-residue-five-2026-08-31.md`, and
-`audits/m53-separated-two-c-residue-two-2026-08-31.md`; the four-`c` refinement is in
-`audits/m53-separated-two-c-four-c-2026-08-31.md`.
+`audits/m53-separated-two-c-residue-two-2026-08-31.md`; the four-`c` refinement and closure are
+in `audits/m53-separated-two-c-four-c-2026-08-31.md` and
+`audits/m53-separated-two-c-diagonal-complete-2026-08-31.md`.
 
 Full mortality requires coding the four payloads and the rank-one separator. The complete
 prefix code
@@ -858,8 +862,9 @@ Three live routes remain.
    [`MM-S41`](SALVAGE.md#mm-s41-separated-residue-two-first-cut) proves halting in subresidues
    two and twenty modulo twenty-seven.
    [`MM-S43`](SALVAGE.md#mm-s43-four-c-reproduction-cut) then proves residue eleven modulo
-   eighty-one halts. The next source-level cut is residue thirty-eight or sixty-five modulo
-   eighty-one, or unequal separated runs, not another adjacent-`c` example.
+   eighty-one halts, and [`MM-S48`](SALVAGE.md#mm-s48-centered-four-c-extinction) closes both
+   surviving tail phases. The next source-level cut is unequal separated runs, not another
+   diagonal or adjacent-`c` example.
 
 The decimal setter is now the sharpest constructive route. The ternary swap remains useful
 because its suffix and divisor-ray theory is mature; the decimal instance has stronger real
