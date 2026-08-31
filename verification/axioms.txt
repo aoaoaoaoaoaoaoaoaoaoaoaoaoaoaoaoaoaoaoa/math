@@ -1736,6 +1736,9 @@
 'MatrixMortality.DecimalSetterDepth.allCDeletion_regularRawHead_not_fiveAtBeta' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.DecimalSetterDepth.allCDeletion_firstRawHead_residueNormalForm' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.DecimalSetterDepth.allCDeletion_firstRawHead_not_fiveAboveWidth' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
@@ -1780,10 +1783,23 @@
 'MatrixMortality.DecimalSetterDepth.betaDeepUpperPerturbation_regularRawHead_shell_impossible' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.DecimalSetterDepth.exceptionalRawHead_lateUpperPerturbation_shell_impossible' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterAncestry.positionedB_punctuatedUpper_code_sub_eq' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.DecimalSetterAncestry.positionedBUpperCoefficient_sub_two_dvd_five' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.DecimalSetterAncestry.positionedBErase_regularRawHead_shell_impossible' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
 'MatrixMortality.DecimalSetterAncestry.positionedBErase_shell_forces_exceptionalLate' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterAncestry.positionedBErase_exceptionalRawHead_shell_impossible' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterAncestry.positionedBErase_rawHead_shell_impossible_allPositions' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
 'MatrixMortality.DecimalSetterAncestry.carrierFactor_multiToSingleton_quotientGate' depends on axioms: [propext,
