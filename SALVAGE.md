@@ -71,6 +71,7 @@ file owns the mathematical stock.
 | [`MM-D02`](#mm-d02-adjacent-two-c-source-decision) | decidability theorem | every nontrivial even adjacent-two-`c` coupled queue either halts or enters one fixed cycle | formalized | graduated |
 | [`MM-S23`](#mm-s23-adjacent-two-c-periodic-pair) | dynamical theorem | every nontrivial even adjacent-two-`c` body has two explicit periodic queues | formalized | graduated |
 | [`MM-S30`](#mm-s30-separated-residue-eight-drainage) | halting theorem | the diagonal separated family halts throughout `n≡8 (mod 9)` | formalized | active |
+| [`MM-S41`](#mm-s41-separated-residue-two-first-cut) | halting theorem | two thirds of the last diagonal residue halt: `n≡2,20 (mod 27)` | formalized | active |
 | [`MM-O01`](#mm-o01-all-placement-packing-rank) | obstruction | literal CHHN packing has exact rank six for every separator placement | formalized | graduated |
 | [`MM-O02`](#mm-o02-one-sided-phase-overlap) | obstruction | standard common-line phase fusion becomes one-sided | reported | parked |
 | [`MM-O03`](#mm-o03-two-channel-boundary-tax) | obstruction | exact diagonal rank-two punctuation costs two states beyond Hankel rank | formalized | graduated |
@@ -4273,8 +4274,9 @@ the coupled source does not halt. The case `n=1` has a separate one-step entry b
 first wake is `bc`; the same return formula already covers its cycle.
 
 **Scope:** this proves an infinite nonhalting family of admissible separated two-`c` bodies.
-It does not classify the residue-two diagonal, bodies with unequal outer runs, or arbitrary
-`bᵖ c bʳ c bˢ`; it supplies no width-three universality theorem.
+It does not classify the residue-two diagonal; `MM-S41` later reduces that diagonal to
+`n≡11 (mod 27)`. Bodies with unequal outer runs and arbitrary `bᵖ c bʳ c bˢ` remain open, and
+the result supplies no width-three universality theorem.
 
 **Use:** any width-three source construction must escape these exact periodic rays. Treat the
 middle separation `r>0` as genuine dynamics rather than an automatic halting condition.
@@ -4288,8 +4290,8 @@ middle separation `r>0` as genuine dynamics rather than an automatic halting con
 **Artifact:**
 [`audits/m53-separated-two-c-orbits-2026-08-31.md`](audits/m53-separated-two-c-orbits-2026-08-31.md).
 
-**Next:** decide the residue-two diagonal and then test whether unequal outer runs admit a
-finite arithmetic macro system or unbounded queue growth.
+**Next:** decide the `MM-S41` survivor `n≡11 (mod 27)`, then test whether unequal outer runs
+admit a finite arithmetic macro system or unbounded queue growth.
 
 ### MM-S27: Reciprocal raw-head support
 
@@ -4674,9 +4676,9 @@ contains `b`; the general constant-head theorem drains the queue because `b` emi
 itself while each step deletes three letters.
 
 **Scope:** this decides only the diagonal residue `n≡8 (mod 9)`. Together with `MM-S25` and
-`MM-S34`, the unresolved diagonal residue is `n≡2 (mod 9)`. Unequal separated runs and bodies
-with at least three `c` letters remain open. The theorem supplies no width-three universality
-claim.
+`MM-S34`, it reduces the diagonal to `n≡2 (mod 9)`; `MM-S41` subsequently reduces that class
+to `n≡11 (mod 27)`. Unequal separated runs and bodies with at least three `c` letters remain
+open. The theorem supplies no width-three universality claim.
 
 **Use:** the separated two-`c` boundary contains both infinite periodic and infinite halting
 subfamilies. Any source compiler confined to the diagonal family must encode its computation
@@ -4689,8 +4691,8 @@ in the remaining residue class or escape the family.
 **Artifact:**
 [`audits/m53-separated-two-c-residue-eight-2026-08-31.md`](audits/m53-separated-two-c-residue-eight-2026-08-31.md).
 
-**Next:** combine the active-event macro with the `MM-S34` defect coordinate and decide residue
-two modulo nine.
+**Next:** `MM-S41` performs the first residue-two refinement. Continue from its sole survivor
+`n≡11 (mod 27)`.
 
 ### MM-S34: Separated residue-five Cantor drainage
 
@@ -4725,8 +4727,9 @@ predecessor would force `E₀` into an outer third, a contradiction. Hence every
 with `n≡5 (mod 9)` halts.
 
 **Scope:** this decides one further infinite diagonal class. Together with `MM-S25` and
-`MM-S30`, only `n≡2 (mod 9)` remains open in `bb c bⁿ c bⁿ`. The result does not decide unequal
-outer runs, the full separated two-`c` stratum, or width-three universality.
+`MM-S30`, it reduces the diagonal to `n≡2 (mod 9)`; `MM-S41` subsequently reduces that class
+to `n≡11 (mod 27)`. The result does not decide unequal outer runs, the full separated two-`c`
+stratum, or width-three universality.
 
 **Use:** the residue-five dynamics are finite after the correct defect quotient despite
 unbounded raw queues. The same active-pair coordinate and inert-letter bisimulation are the
@@ -4740,8 +4743,54 @@ principal tools for the last diagonal residue and for testing unequal separated 
 **Artifact:**
 [`audits/m53-separated-two-c-residue-five-2026-08-31.md`](audits/m53-separated-two-c-residue-five-2026-08-31.md).
 
-**Next:** derive the residue-two active-pair macro and decide whether its defect system admits
-the same finite injective quotient or an exact nonhalting cycle.
+**Next:** `MM-S41` supplies the first residue-two macro. Continue from its sole survivor
+`n≡11 (mod 27)` and decide whether the induced defect system admits a finite injective quotient
+or an exact nonhalting cycle.
+
+### MM-S41: Separated residue-two first cut
+
+**Kind:** halting theorem and congruence refinement
+**Evidence:** formalized
+**Disposition:** active
+
+Write the last diagonal class as `n=3A-1` with `A≡1 (mod 3)`. From the coupled queue
+
+```text
+c b^(3A-1) c b^(3A)
+```
+
+five exact `cbb`-plus-unary macros and one final `cbb` step process the first six active `c`
+letters. If `3m=4A-1`, the resulting queue contains eight `c` letters with successive run
+lengths
+
+```text
+4A ; 3A-1 ; 4A+1 ; 3A-1 ; 3A+m+2 ; 3A-1 ; 4A+1 ; 3A-1 ; 3A.
+```
+
+For `A≡1 (mod 9)` every one of those `c` letters misses a width-three deletion head. The
+same holds, in the other inert phase, for `A≡7 (mod 9)`. The remaining queue therefore has
+`b` at every index divisible by three and drains. Equivalently, every coupled diagonal source
+with `n≡2` or `20 (mod 27)` halts. The unique survivor of this cut is `A≡4 (mod 9)`, hence
+`n≡11 (mod 27)`.
+
+**Scope:** this refines only the residue-two diagonal `bb c bⁿ c bⁿ`. It does not decide the
+surviving class `n≡11 (mod 27)`, unequal separated runs, arbitrary two-`c` bodies, or the
+width-three source problem.
+
+**Use:** the formerly undifferentiated last diagonal residue is now one third as large. Any
+recursive defect or orbit analysis can begin at `n=27k+11`; repeating the six-event census on
+the two extinguished subresidues is redundant.
+
+**Formalization:**
+[`MatrixMortality/SeparatedTwoCResidueTwo.lean`](MatrixMortality/SeparatedTwoCResidueTwo.lean),
+through `SeparatedTwoCResidue.twoModuloTwentySeven_tagHaltsFrom` and
+`SeparatedTwoCResidue.twentyModuloTwentySeven_tagHaltsFrom`.
+
+**Artifact:**
+[`audits/m53-separated-two-c-residue-two-2026-08-31.md`](audits/m53-separated-two-c-residue-two-2026-08-31.md).
+
+**Next:** derive the post-six-event active-head macro for `n=27k+11` and test whether its
+survivor parameter admits a finite injective quotient or another strict congruence descent.
 
 ### MM-S33: Leading-`D_b` support-saturator extinction
 
