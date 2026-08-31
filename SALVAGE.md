@@ -248,6 +248,7 @@ file owns the mathematical stock.
 | [`G3-O22`](#g3-o22-invertible-fibre-span-rigidity) | structural reduction | invertible spelling fibres form computable line or plane group orbits | formalized core | graduated |
 | [`G3-O23`](#g3-o23-singular-triangle-carrier-collapse) | structural reduction | every singular saturated three-state triangle carrier collapses effectively to an invertible two-state carrier | formalized core | graduated |
 | [`G3-O24`](#g3-o24-directed-dyck-absorption-collapse) | obstruction | faithful finite-dimensional absorption of one-way Dyck cancellation forces the reverse cancellation | formalized core | graduated |
+| [`G3-O25`](#g3-o25-stable-cone-rank-fork) | structural reduction and countermodel | a singular stable-cone separator compresses to its image, while directed monotonicity alone already fits rank-two three-state matrices | formalized | graduated |
 | [`G3-O20`](#g3-o20-consecutive-repeat-tail-closure) | obstruction | two consecutive solutions of a fixed-boundary one-block pump force every later exponent | formalized | graduated |
 | [`G3-O09`](#g3-o09-quotient-blind-positive-boundary-collapse) | obstruction | all-loop-complete group-factorizing boundaries accept a nonempty identity spelling | formalized core | graduated |
 | [`G3-O14`](#g3-o14-positive-cancellation-spelling-dichotomy) | obstruction | finite reversible spelling pumps, while singular one-coordinate spelling absorbs identity factors | formalized | graduated |
@@ -10259,6 +10260,53 @@ alone.
 [`matiyasevich-senizergues-2005-few-rule-semi-thue.md`](references/matiyasevich-senizergues-2005-few-rule-semi-thue.md).
 
 **Artifact:** [`DirectedCancellation.lean`](MatrixMortality/DirectedCancellation.lean) and
+[`m34-directed-dyck-absorption-2026-08-30.md`](audits/m34-directed-dyck-absorption-2026-08-30.md).
+
+### G3-O25: Stable-cone rank fork
+
+**Kind:** structural reduction and countermodel
+
+**Evidence:** formalized
+
+**Disposition:** graduated
+
+Every S5 stable word is `y b₁ y⋯bₖ y` with `bᵢ∈B`. For a linear carrier with separator
+`Y=M_y`, factor `Y=i∘q` through `im Y`. Lean proves the exact identity
+
+```text
+Y M₁ Y ⋯ Mₖ Y = i (qM₁i) ⋯ (qMₖi) q.
+```
+
+Thus `rank Y=2` compresses the complete stable-domain scalar behavior to a two-state block
+carrier. If `rank Y=1`, every compressed block is scalar, so the product depends only on the
+product of its block coefficients and loses order. Only invertible `Y` can retain genuinely
+three-dimensional stable-block state. Over `ℚ`, choosing an image basis is effective.
+
+The finite directed order itself supplies no fourth-state lower bound. The formal countermodel
+uses the positive rank-two matrices
+
+```text
+X = [1 1 1; 1 2 3; 2 3 4],     X̄ = [1 2 1; 2 1 2; 3 3 3].
+```
+
+Here `XX̄>I` entrywise, so retaining one redex strictly increases the selected coefficient in
+every nonnegative two-sided context with a positive boundary path. The blocks `U₁=XX̄` and
+`U₂=X²X̄²` do not commute, all eight published code matrices are distinct, and their exact
+scores decrease strictly along every cover of the A4 lattice. Yet every product is positive, so
+the resulting zero language is trivial.
+
+**Scope:** image compression concerns the stable block language, not arbitrary words and not the
+physical positive-generator count of a two-dimensional mortality instance. The countermodel
+realizes directed monotonicity and positional noncommutation, not the GLB decoder's zero fibres.
+It neither decides nor reduces the surviving group-PI₂ seam.
+
+**Use:** split every S5 carrier by `rank Y`. Delete rank one; hand rank two to the exact
+two-state block-orbit problem; in rank three, demand a zero-sensitive GLB decoder. Any lower
+bound must use those zero fibres, not merely the eight-element order or noncommuting updates.
+
+**Artifacts:** [`StableConeCompression.lean`](MatrixMortality/StableConeCompression.lean),
+[`DirectedCancellationCountermodel.lean`](MatrixMortality/DirectedCancellationCountermodel.lean),
+and
 [`m34-directed-dyck-absorption-2026-08-30.md`](audits/m34-directed-dyck-absorption-2026-08-30.md).
 
 ### G3-O20: Consecutive-repeat tail closure
