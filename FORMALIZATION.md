@@ -1595,6 +1595,16 @@ excludes this universal all-`D_c` saturator as the first transition from a lawfu
 head to another multi-role pole. Rule-bearing and `D_b`-containing first saturators, singleton
 targets, and later generalized product-residual carriers remain open.
 
+Record [`MM-S33`](SALVAGE.md#mm-s33-leading-d_b-support-saturator-extinction) removes one
+`D_b`-containing family. `DecimalSetterDepth.allCDeletion_peeledDoubleCHead_not_fiveDeep`
+proves that the all-`D_c` raw residual is not divisible by `5^(n+β)` for any `n≥1`.
+`DecimalSetterAncestry.leadingB_punctuatedUpper_code_perturbation` proves the exact marker
+shift `P_b=P_c+μ10^(n+β+1)`, while `leadingBEraseLowerCode_eq_allEraseLowerCode` preserves the
+literal lower word. At `n=entrySaturationWidth β`, the lower code contains the full gap and
+`entryLeadingBErase_rawHead_shell_impossible` excludes the required depth-`n+β` shell. This
+does not cover a nonleading `D_b`, a rule-bearing block, a singleton target, or a later
+generalized carrier.
+
 Record [`MM-S21`](SALVAGE.md#mm-s21-bounded-decimal-suffix-cycles) closes the fixed-precision
 suffix-descent lane. `DecimalSetterSuffix.cycleDefect_lift` gives an explicit one-digit lift for
 the stationary carrier defect `10^hEx²−τx+μGV`, whose derivative is `−1` modulo ten.

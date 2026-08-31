@@ -130,6 +130,7 @@ file owns the mathematical stock.
 | [`MM-S28`](#mm-s28-arbitrary-history-gap-support-saturation) | structure theorem and obstruction | gap-prime support over an arbitrary carrier history is exactly initial support plus emitted lower-code support, while one physical all-erasure lower code contains the full gap | formalized | active |
 | [`MM-S31`](#mm-s31-gcd-saturated-singleton-gate) | structure theorem and obstruction | exact gcd cancellation leaves a canonical gap quotient whose two singleton gates survive every partial numerator contamination | formalized | active |
 | [`MM-S32`](#mm-s32-entry-support-saturator-extinction) | obstruction | the universal all-`D_c` support saturator cannot be the first transition from a lawful two-`c` raw head to another multi-role pole | formalized | active |
+| [`MM-S33`](#mm-s33-leading-d_b-support-saturator-extinction) | obstruction | the full-gap-saturating leading-`D_b` erasure family cannot be the first transition from a lawful two-`c` raw head to another multi-role pole | formalized | active |
 | [`R32-S01`](#r32-s01-split-return-normal-form) | structure theorem | rank-two cuts reduce one-unit binary mortality to a `2 × 2` return recurrence | formalized | graduated |
 | [`R32-S02`](#r32-s02-two-plane-edge-square) | structure theorem | two rank-two generators are a two-vertex square of `2 × 2` edges | formalized | graduated |
 | [`R32-O01`](#r32-o01-rank-one-profile-collapse) | obstruction | a rank-one generator reduces mortality to order-at-most-three scalar recurrence zeros | audited | stock |
@@ -4523,6 +4524,69 @@ principal tools for the last diagonal residue and for testing unequal separated 
 
 **Next:** derive the residue-two active-pair macro and decide whether its defect system admits
 the same finite injective quotient or an exact nonhalting cycle.
+
+### MM-S33: Leading-`D_b` support-saturator extinction
+
+**Kind:** obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+Let `n=3φ(|q|)` with `q=2·10^β−7`, as in
+[`MM-S32`](#mm-s32-entry-support-saturator-extinction). Replace the first tile in `D_c^n` by
+`D_b`. Every erasure tile still contributes the one-digit lower word `0`, so
+
+```text
+lower(D_bD_c^(n−1))=0ⁿ,
+```
+
+and its lower code remains divisible by the full `q`. On the upper side, `D_b` contributes
+the marker followed by the bit contributed by `D_c`. If `P_c` and `P_b` are the punctuated
+upper codes of `D_c^n` and `D_bD_c^(n−1)`, respectively, the exact word and code identities
+give
+
+```text
+P_b=P_c+μ·10^(n+β+1).                           (1)
+```
+
+For every lawful decimal-unit two-`c` raw head, the all-`D_c` residual `R_c` satisfies the
+required deep exclusion
+
+```text
+5^(n+β) ∤ R_c.                                  (2)
+```
+
+This holds for every `n≥1`, including the exceptional raw-head suffix `s=β−1`; the latter
+proof resolves the three cases `n+1<2β`, `n+1=2β`, and `2β<n+1`. Equation (1) changes the
+residual only by `HEμ·10^(n+β+1)`, which is divisible by `5^(n+β)`. A target multi-role shell
+for the longer `D_b` upper word would make its residual divisible by `5^(n+β)`, and hence make
+`R_c` divisible by the same power, contradicting (2).
+
+**Scope:** this excludes the explicit body-independent family
+`D_bD_c^(3φ(|q|)−1)` at the distinguished raw-head entry. It does not exclude erasure
+saturators with `D_b` in another position, rule-bearing saturators, singleton targets, or any
+such block after a generalized product-residual carrier. The broader mixed-erasure language
+remains open.
+
+**Use:** the first-step support route must now leave both universal pure-erasure families:
+all `D_c`, and one leading `D_b` followed only by `D_c`. Search should retain exact rule
+placement or later-carrier ancestry rather than only lower support.
+
+**Formalization:**
+[`MatrixMortality/DecimalSetterFiveDepth.lean`](MatrixMortality/DecimalSetterFiveDepth.lean)
+proves the arbitrary-width five-adic exclusion and marker-perturbation obstruction.
+[`MatrixMortality/DecimalSetterAncestry.lean`](MatrixMortality/DecimalSetterAncestry.lean)
+proves the physical lower spelling, full-gap divisibility, upper-code perturbation, and entry
+composition through `entryLeadingBErase_rawHead_shell_impossible`.
+
+**Artifact:**
+[`audits/m53-leading-b-support-saturator-extinction-2026-08-31.md`](audits/m53-leading-b-support-saturator-extinction-2026-08-31.md).
+
+**Next:** decide the remaining rule-bearing and nonleading-`D_b` first-step grammar, then
+extend the exclusion from the distinguished raw head to reachable generalized product
+residuals.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
 
 ## Rank-Three Binary Frontier
 

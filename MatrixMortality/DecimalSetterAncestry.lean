@@ -1,4 +1,4 @@
-import MatrixMortality.DecimalSetterDepth
+import MatrixMortality.DecimalSetterFiveDepth
 import Mathlib.NumberTheory.PowModTotient
 import Mathlib.RingTheory.Radical.Basic
 import Mathlib.Tactic
@@ -714,6 +714,199 @@ theorem entrySaturator_rawHead_shell_impossible
   · exact trace_eq
   · exact residual_eq
   · exact shell
+
+/-- A leading-`D_b` erasure block followed by `tailWidth` copies of `D_c`. -/
+def leadingBEraseBlock (tailWidth : Nat) : List NearyTile :=
+  .erase .b :: List.replicate tailWidth (.erase .c)
+
+/-- Every lower side in a leading-`D_b` erasure block is the same one-digit zero word. -/
+@[simp] theorem spell_leadingBEraseBlock_lower
+    (β : Nat) (body : List TagLetter) (tailWidth : Nat) :
+    spell (nearyLower β body) (leadingBEraseBlock tailWidth) =
+      List.replicate (tailWidth + 1) false := by
+  change false :: spell (nearyLower β body) (List.replicate tailWidth (.erase .c)) =
+    false :: List.replicate tailWidth false
+  exact congrArg (false :: ·) (by
+    simpa only [allEraseBlock] using (spell_allEraseBlock β body tailWidth))
+
+@[simp] private theorem tagEncode_replicate_c (β width : Nat) :
+    tagEncode β (List.replicate width .c) = List.replicate width true := by
+  induction width with
+  | zero => rfl
+  | succ width induction =>
+      rw [List.replicate_succ, tagEncode_cons, tagCode, induction,
+        List.replicate_succ]
+      rfl
+
+/-- Replacing the leading `D_c` of an all-`D_c` word by `D_b` prefixes its punctuated upper
+word by exactly one marker word. -/
+theorem leadingB_punctuatedUpper_eq (β tailWidth : Nat) :
+    punctuatedUpper β (.b :: List.replicate tailWidth .c) =
+      markerWord β ++ punctuatedUpper β (List.replicate (tailWidth + 1) .c) := by
+  simp [punctuatedUpper, tagEncode_cons, tagCode, markerWord, List.replicate_succ,
+    List.append_assoc]
+
+private theorem allC_punctuatedUpper_length (β width : Nat) :
+    (punctuatedUpper β (List.replicate width .c)).length = width + β + 1 := by
+  simp [punctuatedUpper, markerWord, Nat.add_assoc]
+
+/-- The leading-`D_b` upper code differs from the same-width all-`D_c` code by one marker
+shifted past the entire punctuated all-`D_c` word. -/
+theorem leadingB_punctuatedUpper_code_eq (β tailWidth : Nat) :
+    code (punctuatedUpper β (.b :: List.replicate tailWidth .c)) =
+      code (punctuatedUpper β (List.replicate (tailWidth + 1) .c)) +
+        code (markerWord β) * 10 ^ (tailWidth + 1 + β + 1) := by
+  rw [leadingB_punctuatedUpper_eq, code_append,
+    allC_punctuatedUpper_length]
+  ring
+
+private theorem replicateTrue_code_identity (width : Nat) :
+    9 * code (List.replicate width true) + 5 = 5 * 10 ^ width := by
+  induction width with
+  | zero => norm_num
+  | succ width induction =>
+      rw [List.replicate_succ, code_cons, digit_true, List.length_replicate,
+        pow_succ]
+      omega
+
+/-- Exact upper-code formula for an all-`D_c` word followed by the marker. -/
+theorem allC_punctuatedUpper_code_identity (β width : Nat) :
+    9 * (code (punctuatedUpper β (List.replicate width .c)) : ℤ) =
+      50 * 10 ^ β * 10 ^ width + 2 * 10 ^ β - 7 := by
+  have upper_spelling :
+      punctuatedUpper β (List.replicate width .c) =
+        List.replicate width true ++ markerWord β := by
+    simp only [punctuatedUpper, tagEncode_replicate_c]
+  have true_identity :
+      9 * (code (List.replicate width true) : ℤ) + 5 = 5 * 10 ^ width := by
+    exact_mod_cast replicateTrue_code_identity width
+  have marker_identity :
+      9 * (code (markerWord β) : ℤ) + 7 = 52 * 10 ^ β := by
+    exact_mod_cast markerWord_code_identity β
+  rw [upper_spelling, code_append]
+  push_cast
+  rw [show (markerWord β).length = β + 1 by simp [markerWord]]
+  rw [pow_succ]
+  linear_combination 10 * 10 ^ β * true_identity + marker_identity
+
+/-- Decimal lower code emitted by a leading-`D_b` erasure block. -/
+def leadingBEraseLowerCode
+    (β : Nat) (body : List TagLetter) (tailWidth : Nat) : ℤ :=
+  code (spell (nearyLower β body) (leadingBEraseBlock tailWidth))
+
+/-- A leading-`D_b` erasure block has the same lower code as the same-width all-`D_c` block. -/
+theorem leadingBEraseLowerCode_eq_allEraseLowerCode
+    (β : Nat) (body : List TagLetter) (tailWidth : Nat) :
+    leadingBEraseLowerCode β body tailWidth =
+      allEraseLowerCode β body (tailWidth + 1) := by
+  simp only [leadingBEraseLowerCode, allEraseLowerCode,
+    spell_leadingBEraseBlock_lower, spell_allEraseBlock]
+
+/-- At the entry saturation width, the physical leading-`D_b` erasure lower code contains the
+full primitive gap. -/
+theorem gapFactor_dvd_entryLeadingBEraseLowerCode
+    {β : Nat} (β_positive : 0 < β) (body : List TagLetter) :
+    gapFactor β ∣ leadingBEraseLowerCode β body (entrySaturationWidth β - 1) := by
+  rw [leadingBEraseLowerCode_eq_allEraseLowerCode,
+    Nat.sub_add_cancel (show 1 ≤ entrySaturationWidth β by
+      exact (entrySaturationWidth_three_le β_positive).trans' (by norm_num))]
+  exact gapFactor_dvd_entrySaturationLowerCode β_positive body
+
+/-- Under the exact marker equation, the leading-`D_b` upper perturbation is
+`μ·10^(width+β+1)`. -/
+theorem leadingB_punctuatedUpper_code_perturbation
+    {β : Nat} {μ : ℤ} (tailWidth : Nat)
+    (mu_eq : 9 * μ = 52 * 10 ^ β - 7) :
+    (code (punctuatedUpper β (.b :: List.replicate tailWidth .c)) : ℤ) =
+      code (punctuatedUpper β (List.replicate (tailWidth + 1) .c)) +
+        μ * 10 ^ (tailWidth + 1 + β + 1) := by
+  have marker_identity :
+      9 * (code (markerWord β) : ℤ) = 52 * 10 ^ β - 7 := by
+    have identity :
+        9 * (code (markerWord β) : ℤ) + 7 = 52 * 10 ^ β := by
+      exact_mod_cast markerWord_code_identity β
+    linear_combination identity
+  have marker_eq : (code (markerWord β) : ℤ) = μ := by
+    have scaled : 9 * (code (markerWord β) : ℤ) = 9 * μ :=
+      marker_identity.trans mu_eq.symm
+    exact mul_left_cancel₀ (show (9 : ℤ) ≠ 0 by norm_num) scaled
+  have code_eq := leadingB_punctuatedUpper_code_eq β tailWidth
+  have code_eq_int :
+      (code (punctuatedUpper β (.b :: List.replicate tailWidth .c)) : ℤ) =
+        code (punctuatedUpper β (List.replicate (tailWidth + 1) .c)) +
+          code (markerWord β) * 10 ^ (tailWidth + 1 + β + 1) := by
+    exact_mod_cast code_eq
+  simpa only [marker_eq] using code_eq_int
+
+/-- The entry-width leading-`D_b` upper perturbation occurs exactly at decimal depth
+`entrySaturationWidth β+β+1`. -/
+theorem entryLeadingB_punctuatedUpper_code_perturbation
+    {β : Nat} {μ : ℤ} (β_positive : 0 < β)
+    (mu_eq : 9 * μ = 52 * 10 ^ β - 7) :
+    (code (punctuatedUpper β
+      (.b :: List.replicate (entrySaturationWidth β - 1) .c)) : ℤ) =
+        code (punctuatedUpper β
+          (List.replicate (entrySaturationWidth β) .c)) +
+            μ * 10 ^ (entrySaturationWidth β + β + 1) := by
+  have width_restore : entrySaturationWidth β - 1 + 1 = entrySaturationWidth β :=
+    Nat.sub_add_cancel (show 1 ≤ entrySaturationWidth β by
+      exact (entrySaturationWidth_three_le β_positive).trans' (by norm_num))
+  simpa only [width_restore] using
+    (leadingB_punctuatedUpper_code_perturbation
+      (entrySaturationWidth β - 1) mu_eq)
+
+/-- The support-saturating leading-`D_b` erasure block cannot be the first transition from a
+lawful two-`c` raw head to another multi-role pole. -/
+theorem entryLeadingBErase_rawHead_shell_impossible
+    {β : Nat} (body tail : List TagLetter) {μ E G : ℤ}
+    (β_large : 2 ≤ β)
+    (head_unit :
+      HasDecimalShell (code (peeledHeadWord β (.c :: .c :: tail)) : ℚ) 0 0)
+    (mu_eq : 9 * μ = 52 * 10 ^ β - 7)
+    (gap_eq : E = 18 * 10 ^ β - 63)
+    (lift_eq : G = 502 * 10 ^ β - 7)
+    (shell :
+      HasDecimalShell
+        (((code (peeledHeadWord β (.c :: .c :: tail)) : ℤ) *
+          (E * code (punctuatedUpper β
+              (.b :: List.replicate (entrySaturationWidth β - 1) .c)) +
+            G * leadingBEraseLowerCode β body (entrySaturationWidth β - 1)) -
+          10 * μ * G *
+            leadingBEraseLowerCode β body (entrySaturationWidth β - 1) : ℤ) : ℚ)
+        ((entrySaturationWidth β + β : Nat) : ℤ)
+        ((entrySaturationWidth β + β : Nat) : ℤ)) :
+    False := by
+  let n := entrySaturationWidth β
+  let H : ℤ := code (peeledHeadWord β (.c :: .c :: tail))
+  let PAll : ℤ := code (punctuatedUpper β (List.replicate n .c))
+  let PB : ℤ := code (punctuatedUpper β
+    (.b :: List.replicate (n - 1) .c))
+  let V := leadingBEraseLowerCode β body (n - 1)
+  let RAll := H * (E * PAll + G * V) - 10 * μ * G * V
+  let RB := H * (E * PB + G * V) - 10 * μ * G * V
+  have β_positive : 0 < β := by omega
+  have n_positive : 1 ≤ n := by
+    exact (entrySaturationWidth_three_le β_positive).trans' (by norm_num)
+  have allC_upper_eq : 9 * PAll =
+      50 * 10 ^ β * 10 ^ n + 2 * 10 ^ β - 7 := by
+    exact allC_punctuatedUpper_code_identity β n
+  have V_eq : V = allEraseLowerCode β body n := by
+    dsimp only [V]
+    rw [leadingBEraseLowerCode_eq_allEraseLowerCode,
+      Nat.sub_add_cancel n_positive]
+  have lower_eq : 9 * V = 7 * 10 ^ n - 7 := by
+    have identity := allEraseLowerCode_identity β body n
+    rw [V_eq]
+    linear_combination identity
+  have leadingB_upper_eq : PB = PAll + μ * 10 ^ (n + β + 1) := by
+    dsimp only [PB, PAll]
+    exact entryLeadingB_punctuatedUpper_code_perturbation β_positive mu_eq
+  refine leadingBDeletion_peeledDoubleCHead_shell_impossible
+    (RAll := RAll) (RB := RB) tail β_large n_positive head_unit mu_eq gap_eq lift_eq
+      allC_upper_eq lower_eq ?_ leadingB_upper_eq ?_ ?_
+  · rfl
+  · rfl
+  · simpa only [n, H, PB, V, RB, Nat.cast_add] using shell
 
 private theorem gapFactor_dvd_carrierProduct
     {q E G μ N D Nprev P₂ P₃ V₂ V₃ T₂ T₃ : ℤ} {m : Nat}

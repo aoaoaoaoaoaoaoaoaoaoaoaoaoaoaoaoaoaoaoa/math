@@ -1310,6 +1310,28 @@
 'MatrixMortality.DecimalSetterAncestry.entrySaturator_rawHead_shell_impossible' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.DecimalSetterDepth.allCDeletion_regularRawHead_not_fiveDeep' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterDepth.allCDeletion_firstRawHead_not_fiveDeep' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterDepth.allCDeletion_peeledDoubleCHead_not_fiveDeep' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterDepth.leadingBDeletion_peeledDoubleCHead_shell_impossible' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterAncestry.leadingBEraseLowerCode_eq_allEraseLowerCode' depends on axioms: [propext]
+'MatrixMortality.DecimalSetterAncestry.gapFactor_dvd_entryLeadingBEraseLowerCode' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterAncestry.entryLeadingB_punctuatedUpper_code_perturbation' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterAncestry.entryLeadingBErase_rawHead_shell_impossible' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.DecimalSetterAncestry.carrierFactor_multiToSingleton_quotientGate' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]

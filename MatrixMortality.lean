@@ -150,6 +150,7 @@ import MatrixMortality.DecimalSetterCarry
 import MatrixMortality.DecimalSetterChamber
 import MatrixMortality.DecimalSetterResonance
 import MatrixMortality.DecimalSetterDepth
+import MatrixMortality.DecimalSetterFiveDepth
 import MatrixMortality.DecimalSetterSuffix
 import MatrixMortality.DecimalSetterAncestry
 import MatrixMortality.SwappedSetterCompiler
