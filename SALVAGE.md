@@ -2416,12 +2416,13 @@ scalar zero.
 
 **Scope:** the same-zero theorem and every chart nonvanishing inequality are formal and uniform.
 The nine-state matrices and exterior-kernel certificates are exact symbolic audit artifacts, not
-yet Lean declarations. Rational matrix emission, denominator clearing, and the final universal
-reduction remain open. This record does not yet claim undecidability of `M₉(2)`.
+yet Lean declarations. Lean's canonical `Matrix.num` construction now clears every rational
+generator independently without changing mortality. Primitive-recursive pair emission and the
+final universal reduction remain open. This record does not yet claim undecidability of `M₉(2)`.
 
 **Use:** the exact realization and its malformed-run converse now share one finite grammar. Move
-the audited matrices into Lean, clear their denominators, and connect the resulting integer pair
-to the universal source reduction.
+the audited matrices into Lean, prove primitive recursiveness of their canonical integer
+numerators, and connect that pair to the universal source reduction.
 
 **Formalization:** `tiltedTernaryCode_injective`,
 `nearyTailRatio_lt_neg_three_halves`, `transferDenominator_lt_zero`,
@@ -2429,7 +2430,9 @@ to the universal source reduction.
 `lowerCCode_add_two_lt_lowerCScale_of_b_mem`,
 `nearyTiltedPairedCoefficient_eq_zero_iff`, and
 `nearyTiltedTrailingToggle_hasNonemptyZero_iff` in
-[`MatrixMortality/ChangedSeparatorTail.lean`](MatrixMortality/ChangedSeparatorTail.lean).
+[`MatrixMortality/ChangedSeparatorTail.lean`](MatrixMortality/ChangedSeparatorTail.lean), and
+`clearRationalFamily_isMortal_iff` in
+[`MatrixMortality/RationalClearing.lean`](MatrixMortality/RationalClearing.lean).
 
 **Artifact:**
 [`audits/m92-changed-separator-transfer-2026-08-31.md`](audits/m92-changed-separator-transfer-2026-08-31.md).

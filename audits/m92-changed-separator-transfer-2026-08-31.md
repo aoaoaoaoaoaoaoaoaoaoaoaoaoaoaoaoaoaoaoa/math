@@ -142,13 +142,27 @@ missing copy of `ux` turns the latter three cases into a zero product, and the L
 `mortal_adjoin_outer_iff` reflects all four cases to a paired scalar zero. Thus arbitrary
 exterior transition runs introduce no new mortality.
 
+## Integral lift
+
+Mathlib defines `Matrix.den` as the least common multiple of the entry denominators and
+`Matrix.num` as the resulting integer numerator matrix. Lean proves
+
+```text
+castMatrix(A.num)=A.den • A,
+```
+
+and `A.den≠0`. Applying this independently to the two rational generators preserves mortality by
+`isMortal_smulMatrix_iff`. Thus denominator clearing itself is closed uniformly; the remaining
+emission obligation is to define the audited rational pair and prove its dependence on the source
+body primitive recursive.
+
 ## Remaining compiler obligations
 
 This result does not yet close `M₉(2)`. A complete reduction still needs:
 
 1. define the audited rational `9×9` transition and cut matrices in Lean and prove their moment
    and exterior identities there;
-2. prove primitive recursiveness, clear denominators, and emit the resulting integer pair;
+2. prove primitive recursiveness and emit the canonical integer numerators;
 3. integrate the pair with the existing universal-halting reduction and exact axiom audit.
 
 ## Verification

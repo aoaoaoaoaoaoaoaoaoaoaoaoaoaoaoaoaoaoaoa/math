@@ -365,8 +365,9 @@ existential nonempty zero reachability. An exact symbolic audit constructs the a
 body and proves the last chart factor positive whenever the positive-width body contains `b`, as
 every emitted universal body does. The audit verifies the parameter-uniform exterior grammar
 `I/I/D_c/x` on the left and `I/D_b/D_c/u` on the right, plus all 36 short representatives at the
-`β=3`, body `bb` benchmark. Rational matrix emission, denominator clearing, and the final
-two-generator reduction are not yet Lean declarations. See
+`β=3`, body `bb` benchmark. Lean also proves that replacing any rational family by its canonical
+integer matrix numerators preserves mortality exactly. The rational pair, its primitive-recursive
+emission, and the final two-generator reduction are not yet Lean declarations. See
 [`m92-changed-separator-transfer-2026-08-31.md`](audits/m92-changed-separator-transfer-2026-08-31.md).
 
 Lean also constructs the canonical reachable-observable quotient around any internal physical
