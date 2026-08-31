@@ -104,6 +104,7 @@ file owns the mathematical stock.
 | [`MM-S16`](#mm-s16-complete-ordinary-depth-two-extinction) | obstruction | no ordinary-reset orbit reaches a false pole after two completed transfers | formalized core; audited assembly | active |
 | [`MM-S17`](#mm-s17-recursive-decimal-carrier) | structure theorem and obstruction | repeated A-shell resonances have an exact two-unit carrier whose last digits form a compatible period-two cycle | formalized | active |
 | [`MM-S18`](#mm-s18-length-two-carrier-extinction) | obstruction | every consecutive multi-shell carrier transition has upper length at least three | formalized | active |
+| [`MM-S19`](#mm-s19-all-deletion-raw-head-extinction) | obstruction | no all-`D_c` block of length at least three carries a lawful initial two-`c` raw head into another multi-role pole | formalized | active |
 | [`R32-S01`](#r32-s01-split-return-normal-form) | structure theorem | rank-two cuts reduce one-unit binary mortality to a `2 × 2` return recurrence | formalized | graduated |
 | [`R32-S02`](#r32-s02-two-plane-edge-square) | structure theorem | two rank-two generators are a two-vertex square of `2 × 2` edges | formalized | graduated |
 | [`R32-O01`](#r32-o01-rank-one-profile-collapse) | obstruction | a rank-one generator reduces mortality to order-at-most-three scalar recurrence zeros | audited | stock |
@@ -3091,6 +3092,64 @@ residuals, decide a transition into a singleton target, or prove projective avoi
 
 **Next:** classify the higher decimal suffix of the generalized residual on the now-uniform
 `m≥3` corridor.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S19: All-deletion raw-head extinction
+
+**Kind:** obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+Fix deletion width `β≥2`. A decimal-unit two-`c` raw head has the exact spelling
+`1^(β+2−s)0^s` for some `1≤s≤β−1`; if `H` is its decimal code, then
+
+```text
+9H=5·10^(β+2)+2·10^s−7.
+```
+
+For an all-`D_c` block of upper length `n≥3`, put `ρ=10^β`, `q=10^n`, and use the exact
+all-deletion upper and lower codes. Its initial-carrier residual `R=HT−10μGV` satisfies
+
+```text
+81R=10(441H+343)+qA+ρB,
+441H+343=10^s(245·10^(β+2−s)+98)
+```
+
+for explicit integers `A,B`. When `s≤β−2`, the last parenthesis is even but not divisible by
+five. Comparing `n` with `s+2` gives a `2`-adic overshoot for `n≤s+2` and a `5`-adic
+undershoot for `n≥s+3`, contradicting the exact shell `(n−1,n−1)` forced by a following
+multi-role pole. The endpoint `s=β−1` has a deeper cancellation:
+
+```text
+45R=q(250100ρ³−917504ρ²+135779ρ−1715)
+   +ρ²(10004ρ−31514).
+```
+
+The last factor is a `5`-adic unit. The same shell is impossible by `2`-adic overshoot when
+`n≤2β` and `5`-adic undershoot when `n>2β`. Thus every all-`D_c` block of length at least three
+is absent from the initial raw-head transition grammar. Together with `MM-S18`, this exhausts
+the family's admissible non-singleton lengths.
+
+**Scope:** this is an initial raw-head theorem. It does not identify generalized residuals with
+encoded heads, exclude rule-bearing or `D_b`-containing blocks, or decide singleton targets.
+
+**Use:** erase the all-`D_c` family from the distinguished-reset raw-head classifier before
+constructing the generalized-carrier transition language.
+
+**Formalization:**
+[`MatrixMortality/DecimalSetterDepth.lean`](MatrixMortality/DecimalSetterDepth.lean), through
+`peeledDoubleCHead_unit_shape`, `allCDeletion_residual_decomposition`,
+`allCDeletion_regularRawHead_shell_impossible`,
+`allCDeletion_firstRawHead_shell_impossible`, and
+`allCDeletion_peeledDoubleCHead_shell_impossible`.
+
+**Artifact:**
+[`audits/m53-decimal-all-c-raw-head-extinction-2026-08-30.md`](audits/m53-decimal-all-c-raw-head-extinction-2026-08-30.md).
+
+**Next:** classify rule-bearing and `D_b`-containing first blocks, then find a suffix invariant
+native to generalized residual carriers.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).

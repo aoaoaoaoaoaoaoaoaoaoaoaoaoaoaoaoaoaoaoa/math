@@ -767,8 +767,13 @@ forced last digits form a lawful period-two cycle. The apparent `m=2` escape is 
 [`MM-S18`](SALVAGE.md#mm-s18-length-two-carrier-extinction) proves that two equal-depth
 `2`-adic summands cancel beyond depth one, contradicting the shell forced by a following
 multi-role pole. Every surviving non-singleton transition therefore has `m≥3`, and the unit-digit
-law applies without an exceptional branch. The remaining invariant must recognize a higher
-suffix language of these generalized residuals; singleton targets remain separate.
+law applies without an exceptional branch. At the initial raw head only,
+[`MM-S19`](SALVAGE.md#mm-s19-all-deletion-raw-head-extinction) now removes every all-`D_c`
+block of upper length at least three by an exact mixed-prime suffix split. Combined with
+`MM-S18`, no all-`D_c` block remains at any admissible non-singleton length. The live initial
+grammar consists of rule-bearing phase words and all-erasure words containing `D_b`; after any
+surviving entry, the invariant must recognize a higher suffix language native to generalized
+residuals. Singleton targets remain separate.
 
 The immediate ternary question is which other positive valuation-one discrepancies survive its
 suffix sieve without already certifying source halting.

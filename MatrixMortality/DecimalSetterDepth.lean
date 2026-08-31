@@ -11,7 +11,8 @@ and five in that residual. Removing them gives the next carrier `(N', EN)`.
 The initial carrier comes from a raw encoded-word suffix peel and has a three-way head grammar.
 Later numerators are generalized product residuals, not raw encoded heads. A `2`-adic resonance
 law excludes upper length two, so every surviving transition enters the compatible final-digit
-two-cycle.
+two-cycle. At the initial raw two-`c` head, an exact mixed-prime suffix split excludes every
+all-`D_c` block of upper length at least three; this cut does not recur for generalized carriers.
 -/
 
 namespace MatrixMortality.DecimalSetterDepth
@@ -429,5 +430,535 @@ theorem peeledHead_trichotomy {β : Nat} {letters : List TagLetter}
                     exact min_eq_left continuation_long
                   · simp [peeledHeadWord, punctuatedUpper, tagEncode_cons, tagCode,
                       fringe]
+
+theorem tagPrefix_shape (β width : Nat) (letters : List TagLetter)
+    (width_pos : 1 ≤ width) (width_le : width ≤ β) :
+    ∃ ones, 1 ≤ ones ∧ ones ≤ width ∧
+      (tagEncode β letters ++ markerWord β).take width =
+        List.replicate ones true ++ List.replicate (width - ones) false := by
+  induction width generalizing letters with
+  | zero => omega
+  | succ width ih =>
+      cases width with
+      | zero =>
+          refine ⟨1, by omega, by omega, ?_⟩
+          cases letters with
+          | nil => simp [markerWord]
+          | cons letter tail => cases letter <;> simp [tagEncode_cons, tagCode]
+      | succ width =>
+          cases letters with
+          | nil =>
+              refine ⟨1, by omega, by omega, ?_⟩
+              simp [markerWord]
+              omega
+          | cons letter tail =>
+              cases letter with
+              | b =>
+                  refine ⟨1, by omega, by omega, ?_⟩
+                  simp [tagEncode_cons, tagCode]
+                  have remaining_le : width + 1 ≤ β := by omega
+                  rw [List.take_append_of_le_length (by simpa using remaining_le)]
+                  simp
+                  omega
+              | c =>
+                  obtain ⟨ones, ones_pos, ones_le, prefix_eq⟩ :=
+                    ih tail (by omega) (by omega)
+                  refine ⟨ones + 1, by omega, by omega, ?_⟩
+                  simp only [tagEncode_cons, tagCode,
+                    List.cons_append, List.take_succ_cons, List.replicate_succ,
+                    List.cons.injEq, true_and]
+                  change List.take (width + 1) (tagEncode β tail ++ markerWord β) = _
+                  rw [prefix_eq]
+                  rw [show width + 1 + 1 - (ones + 1) = width + 1 - ones by omega]
+
+theorem peeledDoubleCHead_shape {β : Nat} (tail : List TagLetter) (β_pos : 1 ≤ β) :
+    ∃ ones, 1 ≤ ones ∧ ones ≤ β ∧
+      peeledHeadWord β (.c :: .c :: tail) =
+        List.replicate (ones + 2) true ++ List.replicate (β - ones) false := by
+  obtain ⟨ones, ones_pos, ones_le, prefix_eq⟩ :=
+    tagPrefix_shape β β tail β_pos le_rfl
+  refine ⟨ones, ones_pos, ones_le, ?_⟩
+  change (true :: true :: (tagEncode β tail ++ markerWord β)).take (β + 2) = _
+  change true :: true :: (tagEncode β tail ++ markerWord β).take β = _
+  rw [prefix_eq]
+  rw [show ones + 2 = 2 + ones by omega, List.replicate_add]
+  rfl
+
+private theorem repeatedTrue_code_identity (width : Nat) :
+    9 * code (List.replicate width true) + 5 = 5 * 10 ^ width := by
+  induction width with
+  | zero => norm_num
+  | succ width induction =>
+      rw [List.replicate_succ, code_cons, digit_true, List.length_replicate,
+        pow_succ]
+      omega
+
+private theorem repeatedTrue_code_divisible_five (width : Nat) :
+    5 ∣ code (List.replicate width true) := by
+  induction width with
+  | zero => simp
+  | succ width induction =>
+      rw [List.replicate_succ, code_cons, digit_true, List.length_replicate]
+      exact dvd_add (dvd_mul_right 5 _) induction
+
+private theorem repeatedTrue_not_decimalUnit {width : Nat} (width_pos : 1 ≤ width) :
+    ¬HasDecimalShell (code (List.replicate width true) : ℚ) 0 0 := by
+  intro shell
+  have code_ne : code (List.replicate width true) ≠ 0 := by
+    apply Nat.ne_of_gt
+    exact code_pos_of_ne_nil (by simp; omega)
+  have valuation_pos : 0 < padicValNat 5 (code (List.replicate width true)) :=
+    one_le_padicValNat_of_dvd code_ne (repeatedTrue_code_divisible_five width)
+  have valuation_zero : padicValNat 5 (code (List.replicate width true)) = 0 := by
+    exact_mod_cast shell.2.2
+  omega
+
+private theorem rawHead_code_identity (ones suffix : Nat) :
+    9 * (code
+        (List.replicate (ones + 2) true ++ List.replicate suffix false) : ℤ) =
+      5 * 10 ^ (ones + 2 + suffix) + 2 * 10 ^ suffix - 7 := by
+  have true_identity :
+      9 * (code (List.replicate (ones + 2) true) : ℤ) + 5 =
+        5 * 10 ^ (ones + 2) := by
+    exact_mod_cast repeatedTrue_code_identity (ones + 2)
+  have false_identity :
+      9 * (code (List.replicate suffix false) : ℤ) + 7 =
+        7 * 10 ^ suffix := by
+    exact_mod_cast replicateFalse_code_identity suffix
+  rw [code_append, List.length_replicate]
+  push_cast
+  rw [show ones + 2 + suffix = (ones + 2) + suffix by rfl, pow_add]
+  linear_combination (10 : ℤ) ^ suffix * true_identity + false_identity
+
+/-- Every decimal-unit two-`c` raw head has a nonempty final run of sevens. -/
+theorem peeledDoubleCHead_unit_shape {β : Nat} (tail : List TagLetter)
+    (β_pos : 1 ≤ β)
+    (head_unit :
+      HasDecimalShell (code (peeledHeadWord β (.c :: .c :: tail)) : ℚ) 0 0) :
+    ∃ suffix, 1 ≤ suffix ∧ suffix ≤ β - 1 ∧
+      peeledHeadWord β (.c :: .c :: tail) =
+        List.replicate (β + 2 - suffix) true ++ List.replicate suffix false ∧
+      9 * (code (peeledHeadWord β (.c :: .c :: tail)) : ℤ) =
+        5 * 10 ^ (β + 2) + 2 * 10 ^ suffix - 7 := by
+  obtain ⟨ones, ones_pos, ones_le, head_shape⟩ :=
+    peeledDoubleCHead_shape tail β_pos
+  let suffix := β - ones
+  have suffix_le : suffix ≤ β - 1 := by
+    dsimp [suffix]
+    omega
+  have first_length : β + 2 - suffix = ones + 2 := by
+    dsimp [suffix]
+    omega
+  have total_length : ones + 2 + suffix = β + 2 := by
+    dsimp [suffix]
+    omega
+  have suffix_pos : 1 ≤ suffix := by
+    by_contra suffix_not_pos
+    have suffix_zero : suffix = 0 := by omega
+    have ones_eq : ones = β := by
+      dsimp [suffix] at suffix_zero
+      omega
+    have all_true :
+        peeledHeadWord β (.c :: .c :: tail) =
+          List.replicate (β + 2) true := by
+      rw [head_shape, ones_eq]
+      simp
+    rw [all_true] at head_unit
+    exact repeatedTrue_not_decimalUnit (by omega) head_unit
+  refine ⟨suffix, suffix_pos, suffix_le, ?_, ?_⟩
+  · simpa [first_length] using head_shape
+  · rw [head_shape]
+    rw [show β - ones = suffix by rfl]
+    simpa [total_length] using rawHead_code_identity ones suffix
+
+private theorem primePower_dvd_int_of_hasValue
+    {prime : Nat} [Fact prime.Prime] {value : ℤ} {depth : Nat}
+  (shell : HasValue prime (value : ℚ) depth) :
+    (prime : ℤ) ^ depth ∣ value := by
+  have valuation_eq : padicValInt prime value = depth := by
+    have valuation_rat := shell.2
+    rw [padicValRat.of_int] at valuation_rat
+    exact_mod_cast valuation_rat
+  exact (padicValInt_dvd_iff depth value).mpr (Or.inr (by omega))
+
+private theorem nextPrimePower_not_dvd_int_of_hasValue
+    {prime : Nat} [Fact prime.Prime] {value : ℤ} {depth : Nat}
+    (shell : HasValue prime (value : ℚ) depth) :
+    ¬(prime : ℤ) ^ (depth + 1) ∣ value := by
+  intro divides
+  have valuation_eq : padicValInt prime value = depth := by
+    have valuation_rat := shell.2
+    rw [padicValRat.of_int] at valuation_rat
+    exact_mod_cast valuation_rat
+  have bound := (padicValInt_dvd_iff (depth + 1) value).mp divides
+  have value_ne : value ≠ 0 := by exact_mod_cast shell.1
+  have depth_bound := bound.resolve_left value_ne
+  omega
+
+theorem rawHead_linear_factor
+    {β s : Nat} {H : ℤ} (suffix_bound : s ≤ β + 2)
+    (head_eq : 9 * H = 5 * 10 ^ (β + 2) + 2 * 10 ^ s - 7) :
+    441 * H + 343 =
+      10 ^ s * (245 * 10 ^ (β + 2 - s) + 98) := by
+  have exponent_eq : β + 2 = s + (β + 2 - s) := by omega
+  rw [exponent_eq, pow_add] at head_eq
+  linear_combination 49 * head_eq
+
+theorem allCDeletion_residual_decomposition
+    {ρ q H μ E G P V T R : ℤ}
+    (mu_eq : 9 * μ = 52 * ρ - 7)
+    (gap_eq : E = 18 * ρ - 63)
+    (lift_eq : G = 502 * ρ - 7)
+    (upper_eq : 9 * P = 50 * ρ * q + 2 * ρ - 7)
+    (lower_eq : 9 * V = 7 * q - 7)
+    (trace_eq : T = E * P + G * V)
+    (residual_eq : R = H * T - 10 * μ * G * V) :
+    81 * R = 10 * (441 * H + 343) +
+      q * (8100 * H * ρ ^ 2 + 3276 * H * ρ - 441 * H -
+        1827280 * ρ ^ 2 + 271460 * ρ - 3430) +
+      ρ * (324 * H * ρ - 33894 * H + 1827280 * ρ - 271460) := by
+  rw [residual_eq, trace_eq]
+  calc
+    81 * (H * (E * P + G * V) - 10 * μ * G * V) =
+        9 * H * (E * (9 * P) + G * (9 * V)) -
+          10 * (9 * μ) * G * (9 * V) := by ring
+    _ = _ := by rw [mu_eq, gap_eq, lift_eq, upper_eq, lower_eq]; ring
+
+private theorem primePower_dvd_tenPower
+    {prime exponent power : Nat} (prime_dvd_ten : (prime : ℤ) ∣ 10)
+    (exponent_le : exponent ≤ power) :
+    (prime : ℤ) ^ exponent ∣ 10 ^ power :=
+  (pow_dvd_pow (prime : ℤ) exponent_le).trans
+    (pow_dvd_pow_of_dvd prime_dvd_ten power)
+
+theorem regularHead_decimalShell_impossible
+    {β s n : Nat} {R A B K : ℤ}
+    (n_pos : 1 ≤ n) (suffix_below : s + 2 ≤ β)
+    (K_even : (2 : ℤ) ∣ K) (K_five_unit : ¬(5 : ℤ) ∣ K)
+    (decomposition :
+      81 * R = 10 ^ (s + 1) * K + 10 ^ n * A + 10 ^ β * B)
+    (shell : HasDecimalShell (R : ℚ)
+      ((n - 1 : Nat) : ℤ) ((n - 1 : Nat) : ℤ)) :
+    False := by
+  have two_not : ¬(2 : ℤ) ^ n ∣ R := by
+    have exact := nextPrimePower_not_dvd_int_of_hasValue shell.1
+    simpa [Nat.sub_add_cancel n_pos] using exact
+  have five_dvd : (5 : ℤ) ^ (n - 1) ∣ R :=
+    primePower_dvd_int_of_hasValue shell.2
+  rcases (show n ≤ s + 1 ∨ n = s + 2 ∨ s + 3 ≤ n by omega) with
+    shallow | boundary | deep
+  · apply two_not
+    have first_dvd : (2 : ℤ) ^ n ∣ 10 ^ (s + 1) * K :=
+      dvd_mul_of_dvd_left
+        (primePower_dvd_tenPower (prime := 2) (by norm_num) shallow) K
+    have second_dvd : (2 : ℤ) ^ n ∣ 10 ^ n * A :=
+      dvd_mul_of_dvd_left
+        (primePower_dvd_tenPower (prime := 2) (by norm_num) le_rfl) A
+    have third_dvd : (2 : ℤ) ^ n ∣ 10 ^ β * B :=
+      dvd_mul_of_dvd_left
+        (primePower_dvd_tenPower (prime := 2) (by norm_num) (by omega)) B
+    have product_dvd : (2 : ℤ) ^ n ∣ 81 * R := by
+      rw [decomposition]
+      exact dvd_add (dvd_add first_dvd second_dvd) third_dvd
+    have coprime : IsCoprime ((2 : ℤ) ^ n) 81 :=
+      (by norm_num : IsCoprime (2 : ℤ) 81).pow_left
+    exact coprime.dvd_of_dvd_mul_left product_dvd
+  · subst n
+    apply two_not
+    have first_power : (2 : ℤ) ^ (s + 2) ∣ 10 ^ (s + 1) * 2 := by
+      rw [show s + 2 = (s + 1) + 1 by omega, pow_add]
+      exact mul_dvd_mul
+        (primePower_dvd_tenPower (prime := 2) (by norm_num) le_rfl)
+        (dvd_refl 2)
+    have first_dvd : (2 : ℤ) ^ (s + 2) ∣ 10 ^ (s + 1) * K := by
+      obtain ⟨quotient, quotient_eq⟩ := K_even
+      rw [quotient_eq, ← mul_assoc]
+      exact dvd_mul_of_dvd_left first_power quotient
+    have second_dvd : (2 : ℤ) ^ (s + 2) ∣ 10 ^ (s + 2) * A :=
+      dvd_mul_of_dvd_left
+        (primePower_dvd_tenPower (prime := 2) (by norm_num) le_rfl) A
+    have third_dvd : (2 : ℤ) ^ (s + 2) ∣ 10 ^ β * B :=
+      dvd_mul_of_dvd_left
+        (primePower_dvd_tenPower (prime := 2) (by norm_num) suffix_below) B
+    have product_dvd : (2 : ℤ) ^ (s + 2) ∣ 81 * R := by
+      rw [decomposition]
+      exact dvd_add (dvd_add first_dvd second_dvd) third_dvd
+    have coprime : IsCoprime ((2 : ℤ) ^ (s + 2)) 81 :=
+      (by norm_num : IsCoprime (2 : ℤ) 81).pow_left
+    exact coprime.dvd_of_dvd_mul_left product_dvd
+  · have required_dvd : (5 : ℤ) ^ (s + 2) ∣ R := by
+      exact (pow_dvd_pow (5 : ℤ) (by omega)).trans five_dvd
+    have product_dvd : (5 : ℤ) ^ (s + 2) ∣ 81 * R :=
+      dvd_mul_of_dvd_right required_dvd 81
+    have second_dvd : (5 : ℤ) ^ (s + 2) ∣ 10 ^ n * A :=
+      dvd_mul_of_dvd_left
+        (primePower_dvd_tenPower (prime := 5) (by norm_num) (by omega)) A
+    have third_dvd : (5 : ℤ) ^ (s + 2) ∣ 10 ^ β * B :=
+      dvd_mul_of_dvd_left
+        (primePower_dvd_tenPower (prime := 5) (by norm_num) suffix_below) B
+    have first_dvd : (5 : ℤ) ^ (s + 2) ∣ 10 ^ (s + 1) * K := by
+      have error_dvd : (5 : ℤ) ^ (s + 2) ∣ 10 ^ n * A + 10 ^ β * B :=
+        dvd_add second_dvd third_dvd
+      rw [decomposition] at product_dvd
+      simpa [add_assoc] using dvd_sub product_dvd error_dvd
+    have cancelled : (5 : ℤ) ∣ K := by
+      have ten_power : (10 : ℤ) ^ (s + 1) =
+          (5 : ℤ) ^ (s + 1) * (2 : ℤ) ^ (s + 1) := by
+        rw [show (10 : ℤ) = 5 * 2 by norm_num, mul_pow]
+      rw [ten_power, pow_succ, mul_assoc] at first_dvd
+      have rearranged : (5 : ℤ) ^ (s + 1) * 5 ∣
+          (5 : ℤ) ^ (s + 1) * ((2 : ℤ) ^ (s + 1) * K) := by
+        simpa [mul_assoc, mul_left_comm, mul_comm] using first_dvd
+      have power_ne : (5 : ℤ) ^ (s + 1) ≠ 0 := pow_ne_zero _ (by norm_num)
+      have five_dvd_scaled : (5 : ℤ) ∣ (2 : ℤ) ^ (s + 1) * K :=
+        (mul_dvd_mul_iff_left power_ne).mp rearranged
+      have coprime : IsCoprime (5 : ℤ) ((2 : ℤ) ^ (s + 1)) :=
+        (by norm_num : IsCoprime (5 : ℤ) 2).pow_right
+      exact coprime.dvd_of_dvd_mul_left five_dvd_scaled
+    exact K_five_unit cancelled
+
+theorem allCDeletion_regularRawHead_shell_impossible
+    {β s n : Nat} {H μ E G P V T R : ℤ}
+    (n_large : 3 ≤ n) (suffix_below : s + 2 ≤ β)
+    (head_eq : 9 * H = 5 * 10 ^ (β + 2) + 2 * 10 ^ s - 7)
+    (mu_eq : 9 * μ = 52 * 10 ^ β - 7)
+    (gap_eq : E = 18 * 10 ^ β - 63)
+    (lift_eq : G = 502 * 10 ^ β - 7)
+    (upper_eq : 9 * P = 50 * 10 ^ β * 10 ^ n + 2 * 10 ^ β - 7)
+    (lower_eq : 9 * V = 7 * 10 ^ n - 7)
+    (trace_eq : T = E * P + G * V)
+    (residual_eq : R = H * T - 10 * μ * G * V)
+    (shell : HasDecimalShell (R : ℚ)
+      ((n - 1 : Nat) : ℤ) ((n - 1 : Nat) : ℤ)) :
+    False := by
+  let K : ℤ := 245 * 10 ^ (β + 2 - s) + 98
+  let A : ℤ :=
+    8100 * H * (10 : ℤ) ^ (β + β) + 3276 * H * 10 ^ β - 441 * H -
+      1827280 * 10 ^ (β + β) + 271460 * 10 ^ β - 3430
+  let B : ℤ :=
+    324 * H * 10 ^ β - 33894 * H + 1827280 * 10 ^ β - 271460
+  have suffix_bound : s ≤ β + 2 := by omega
+  have head_factor := rawHead_linear_factor suffix_bound head_eq
+  have decomposition := allCDeletion_residual_decomposition
+    (ρ := (10 : ℤ) ^ β) (q := (10 : ℤ) ^ n)
+    mu_eq gap_eq lift_eq upper_eq lower_eq trace_eq residual_eq
+  have decomposition' :
+      81 * R = 10 ^ (s + 1) * K + 10 ^ n * A + 10 ^ β * B := by
+    rw [head_factor] at decomposition
+    dsimp [K, A, B]
+    rw [pow_two, ← pow_add] at decomposition
+    simpa [pow_succ, mul_assoc, mul_left_comm, mul_comm] using decomposition
+  have exponent_pos : 1 ≤ β + 2 - s := by omega
+  have K_even : (2 : ℤ) ∣ K := by
+    have power_even : (2 : ℤ) ∣ 10 ^ (β + 2 - s) :=
+      primePower_dvd_tenPower (prime := 2) (by norm_num) exponent_pos
+    have first_even : (2 : ℤ) ∣ 245 * 10 ^ (β + 2 - s) :=
+      dvd_mul_of_dvd_right power_even 245
+    have last_even : (2 : ℤ) ∣ 98 := by norm_num
+    exact dvd_add first_even last_even
+  have K_five_unit : ¬(5 : ℤ) ∣ K := by
+    intro K_five
+    have first_five : (5 : ℤ) ∣ 245 * 10 ^ (β + 2 - s) :=
+      dvd_mul_of_dvd_left (by norm_num) _
+    have impossible : (5 : ℤ) ∣ 98 := by
+      dsimp [K] at K_five
+      simpa using dvd_sub K_five first_five
+    norm_num at impossible
+  exact regularHead_decimalShell_impossible (by omega) suffix_below
+    K_even K_five_unit decomposition' shell
+
+theorem exceptionalHead_decimalShell_impossible
+    {β n : Nat} {R A B : ℤ}
+    (n_pos : 1 ≤ n) (B_five_unit : ¬(5 : ℤ) ∣ B)
+    (decomposition :
+      45 * R = 10 ^ n * A + 10 ^ (2 * β) * B)
+    (shell : HasDecimalShell (R : ℚ)
+      ((n - 1 : Nat) : ℤ) ((n - 1 : Nat) : ℤ)) :
+    False := by
+  have two_not : ¬(2 : ℤ) ^ n ∣ R := by
+    have exact := nextPrimePower_not_dvd_int_of_hasValue shell.1
+    simpa [Nat.sub_add_cancel n_pos] using exact
+  have five_dvd : (5 : ℤ) ^ (n - 1) ∣ R :=
+    primePower_dvd_int_of_hasValue shell.2
+  by_cases shallow : n ≤ 2 * β
+  · apply two_not
+    have first_dvd : (2 : ℤ) ^ n ∣ 10 ^ n * A :=
+      dvd_mul_of_dvd_left
+        (primePower_dvd_tenPower (prime := 2) (by norm_num) le_rfl) A
+    have second_dvd : (2 : ℤ) ^ n ∣ 10 ^ (2 * β) * B :=
+      dvd_mul_of_dvd_left
+        (primePower_dvd_tenPower (prime := 2) (by norm_num) shallow) B
+    have product_dvd : (2 : ℤ) ^ n ∣ 45 * R := by
+      rw [decomposition]
+      exact dvd_add first_dvd second_dvd
+    have coprime : IsCoprime ((2 : ℤ) ^ n) 45 :=
+      (by norm_num : IsCoprime (2 : ℤ) 45).pow_left
+    exact coprime.dvd_of_dvd_mul_left product_dvd
+  · have exponent_le : 2 * β ≤ n - 1 := by omega
+    have required_dvd : (5 : ℤ) ^ (2 * β) ∣ R :=
+      (pow_dvd_pow (5 : ℤ) exponent_le).trans five_dvd
+    have product_dvd : (5 : ℤ) ^ (2 * β + 1) ∣ 45 * R := by
+      rw [show 45 = (5 : ℤ) * 9 by norm_num, show 2 * β + 1 = 1 + 2 * β by omega,
+        pow_add]
+      have raw := dvd_mul_of_dvd_left (mul_dvd_mul (dvd_refl 5) required_dvd) 9
+      simpa [mul_assoc, mul_left_comm, mul_comm] using raw
+    have first_dvd : (5 : ℤ) ^ (2 * β + 1) ∣ 10 ^ n * A :=
+      dvd_mul_of_dvd_left
+        (primePower_dvd_tenPower (prime := 5) (by norm_num) (by omega)) A
+    have second_dvd : (5 : ℤ) ^ (2 * β + 1) ∣ 10 ^ (2 * β) * B := by
+      rw [decomposition] at product_dvd
+      simpa using dvd_sub product_dvd first_dvd
+    have ten_power : (10 : ℤ) ^ (2 * β) =
+        (5 : ℤ) ^ (2 * β) * (2 : ℤ) ^ (2 * β) := by
+      rw [show (10 : ℤ) = 5 * 2 by norm_num, mul_pow]
+    rw [ten_power, pow_succ, mul_assoc] at second_dvd
+    have rearranged : (5 : ℤ) ^ (2 * β) * 5 ∣
+        (5 : ℤ) ^ (2 * β) * ((2 : ℤ) ^ (2 * β) * B) := by
+      simpa [mul_assoc, mul_left_comm, mul_comm] using second_dvd
+    have power_ne : (5 : ℤ) ^ (2 * β) ≠ 0 := pow_ne_zero _ (by norm_num)
+    have five_dvd_scaled : (5 : ℤ) ∣ (2 : ℤ) ^ (2 * β) * B :=
+      (mul_dvd_mul_iff_left power_ne).mp rearranged
+    have coprime : IsCoprime (5 : ℤ) ((2 : ℤ) ^ (2 * β)) :=
+      (by norm_num : IsCoprime (5 : ℤ) 2).pow_right
+    exact B_five_unit (coprime.dvd_of_dvd_mul_left five_dvd_scaled)
+
+theorem allCDeletion_firstRawHead_residual_decomposition
+    {ρ q a H μ E G P V T R : ℤ}
+    (rho_eq : ρ = 10 * a)
+    (head_eq : 9 * H = 500 * ρ + 2 * a - 7)
+    (mu_eq : 9 * μ = 52 * ρ - 7)
+    (gap_eq : E = 18 * ρ - 63)
+    (lift_eq : G = 502 * ρ - 7)
+    (upper_eq : 9 * P = 50 * ρ * q + 2 * ρ - 7)
+    (lower_eq : 9 * V = 7 * q - 7)
+    (trace_eq : T = E * P + G * V)
+    (residual_eq : R = H * T - 10 * μ * G * V) :
+    45 * R =
+      q * (250100 * ρ ^ 3 - 917504 * ρ ^ 2 + 135779 * ρ - 1715) +
+      ρ ^ 2 * (10004 * ρ - 31514) := by
+  have decomposition := allCDeletion_residual_decomposition
+    mu_eq gap_eq lift_eq upper_eq lower_eq trace_eq residual_eq
+  subst ρ
+  have head_zero : 9 * H - 5002 * a + 7 = 0 := by
+    linear_combination head_eq
+  have scaled :
+      9 * (q *
+          (250100 * (10 * a) ^ 3 - 917504 * (10 * a) ^ 2 +
+            135779 * (10 * a) - 1715) +
+        (10 * a) ^ 2 * (10004 * (10 * a) - 31514)) =
+        5 * (81 * R) := by
+    let C : ℤ :=
+      90000 * a ^ 2 * q + 3600 * a ^ 2 + 3640 * a * q -
+        37660 * a - 49 * q + 490
+    have difference_zero :
+      9 * (q *
+          (250100 * (10 * a) ^ 3 - 917504 * (10 * a) ^ 2 +
+            135779 * (10 * a) - 1715) +
+        (10 * a) ^ 2 * (10004 * (10 * a) - 31514)) -
+          5 * (81 * R) = 0 := by
+      calc
+        9 * (q *
+            (250100 * (10 * a) ^ 3 - 917504 * (10 * a) ^ 2 +
+              135779 * (10 * a) - 1715) +
+          (10 * a) ^ 2 * (10004 * (10 * a) - 31514)) -
+            5 * (81 * R) = -5 * C * (9 * H - 5002 * a + 7) := by
+            rw [decomposition]
+            dsimp [C]
+            ring
+        _ = 0 := by rw [head_zero]; ring
+    exact sub_eq_zero.mp difference_zero
+  have cancelled : 45 * R =
+      q * (250100 * (10 * a) ^ 3 - 917504 * (10 * a) ^ 2 +
+        135779 * (10 * a) - 1715) +
+      (10 * a) ^ 2 * (10004 * (10 * a) - 31514) := by
+    apply mul_left_cancel₀ (show (9 : ℤ) ≠ 0 by norm_num)
+    calc
+      9 * (45 * R) = 5 * (81 * R) := by ring
+      _ = _ := scaled.symm
+  exact cancelled
+
+theorem allCDeletion_firstRawHead_shell_impossible
+    {β n : Nat} {H μ E G P V T R : ℤ}
+    (β_large : 2 ≤ β) (n_large : 3 ≤ n)
+    (head_eq :
+      9 * H = 5 * 10 ^ (β + 2) + 2 * 10 ^ (β - 1) - 7)
+    (mu_eq : 9 * μ = 52 * 10 ^ β - 7)
+    (gap_eq : E = 18 * 10 ^ β - 63)
+    (lift_eq : G = 502 * 10 ^ β - 7)
+    (upper_eq : 9 * P = 50 * 10 ^ β * 10 ^ n + 2 * 10 ^ β - 7)
+    (lower_eq : 9 * V = 7 * 10 ^ n - 7)
+    (trace_eq : T = E * P + G * V)
+    (residual_eq : R = H * T - 10 * μ * G * V)
+    (shell : HasDecimalShell (R : ℚ)
+      ((n - 1 : Nat) : ℤ) ((n - 1 : Nat) : ℤ)) :
+    False := by
+  let ρ : ℤ := 10 ^ β
+  let a : ℤ := 10 ^ (β - 1)
+  let A : ℤ := 250100 * ρ ^ 3 - 917504 * ρ ^ 2 + 135779 * ρ - 1715
+  let B : ℤ := 10004 * ρ - 31514
+  have exponent_eq : β = (β - 1) + 1 := by omega
+  have rho_eq : ρ = 10 * a := by
+    dsimp [ρ, a]
+    calc
+      (10 : ℤ) ^ β = 10 ^ ((β - 1) + 1) := congrArg _ exponent_eq
+      _ = 10 ^ (β - 1) * 10 := pow_succ _ _
+      _ = 10 * 10 ^ (β - 1) := mul_comm _ _
+  have head_eq' : 9 * H = 500 * ρ + 2 * a - 7 := by
+    calc
+      9 * H = 5 * 10 ^ (β + 2) + 2 * 10 ^ (β - 1) - 7 := head_eq
+      _ = 500 * ρ + 2 * a - 7 := by
+        dsimp [ρ, a]
+        rw [pow_add]
+        norm_num
+        ring
+  have decomposition := allCDeletion_firstRawHead_residual_decomposition
+    rho_eq head_eq' mu_eq gap_eq lift_eq upper_eq lower_eq trace_eq residual_eq
+  have decomposition' : 45 * R = 10 ^ n * A + 10 ^ (2 * β) * B := by
+    have scale_eq : (10 : ℤ) ^ (2 * β) = ρ ^ 2 := by
+      dsimp [ρ]
+      rw [two_mul, pow_add, pow_two]
+    rw [scale_eq]
+    simpa [A, B, mul_assoc, mul_left_comm, mul_comm] using decomposition
+  have B_five_unit : ¬(5 : ℤ) ∣ B := by
+    intro B_five
+    have first_five : (5 : ℤ) ∣ 10004 * ρ := by
+      apply dvd_mul_of_dvd_right
+      dsimp [ρ]
+      exact primePower_dvd_tenPower (prime := 5) (exponent := 1) (power := β)
+        (by norm_num) (by omega)
+    have impossible : (5 : ℤ) ∣ 31514 := by
+      dsimp [B] at B_five
+      simpa using dvd_sub first_five B_five
+    norm_num at impossible
+  exact exceptionalHead_decimalShell_impossible (by omega)
+    B_five_unit decomposition' shell
+
+/-- No all-`D_c` block of length at least three can follow a lawful decimal-unit two-`c`
+raw head and land on another multi-role pole. -/
+theorem allCDeletion_peeledDoubleCHead_shell_impossible
+    {β n : Nat} (tail : List TagLetter) {μ E G P V T R : ℤ}
+    (β_large : 2 ≤ β) (n_large : 3 ≤ n)
+    (head_unit :
+      HasDecimalShell (code (peeledHeadWord β (.c :: .c :: tail)) : ℚ) 0 0)
+    (mu_eq : 9 * μ = 52 * 10 ^ β - 7)
+    (gap_eq : E = 18 * 10 ^ β - 63)
+    (lift_eq : G = 502 * 10 ^ β - 7)
+    (upper_eq : 9 * P = 50 * 10 ^ β * 10 ^ n + 2 * 10 ^ β - 7)
+    (lower_eq : 9 * V = 7 * 10 ^ n - 7)
+    (trace_eq : T = E * P + G * V)
+    (residual_eq :
+      R = (code (peeledHeadWord β (.c :: .c :: tail)) : ℤ) * T -
+        10 * μ * G * V)
+    (shell : HasDecimalShell (R : ℚ)
+      ((n - 1 : Nat) : ℤ) ((n - 1 : Nat) : ℤ)) :
+    False := by
+  obtain ⟨suffix, suffix_pos, suffix_le, _, head_eq⟩ :=
+    peeledDoubleCHead_unit_shape tail (by omega) head_unit
+  rcases lt_or_eq_of_le suffix_le with suffix_below | first_head
+  · exact allCDeletion_regularRawHead_shell_impossible n_large (by omega) head_eq
+      mu_eq gap_eq lift_eq upper_eq lower_eq trace_eq residual_eq shell
+  · rw [first_head] at head_eq
+    exact allCDeletion_firstRawHead_shell_impossible β_large n_large head_eq
+      mu_eq gap_eq lift_eq upper_eq lower_eq trace_eq residual_eq shell
 
 end MatrixMortality.DecimalSetterDepth
