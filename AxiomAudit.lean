@@ -917,6 +917,7 @@ open MatrixMortality
 #print axioms PeriodicShell.shellStep_unit_three_of_positive
 #print axioms PeriodicShell.shellStep_two_three_sum_of_both_negative
 #print axioms PeriodicShell.wait_mem_two_three_unit_interval
+#print axioms PeriodicShell.shellRawWord_count_translate
 #print axioms PeriodicShell.benchmarkRelation_ne
 #print axioms PeriodicShell.shellRun_benchmarkRelation
 #print axioms PeriodicShell.benchmarkRelationShift_ne
@@ -979,6 +980,10 @@ open MatrixMortality
 #print axioms MixedPrimeDebt.fixedSourceAdjacentExitTarget_tail_fiveNegative
 #print axioms MixedPrimeDebt.fixedSourceAdjacentExitTarget_exists_iff
 #print axioms MixedPrimeDebt.fixedSourceAdjacentExitTarget_injective
+#print axioms MixedPrimeDebt.fixedSourceAdjacentContinuationSchedule_run
+#print axioms MixedPrimeDebt.fixedSourceAdjacentExitTarget_tail_length
+#print axioms MixedPrimeDebt.fixedSourceAdjacentContinuation_exists_iff_lengthCandidate
+#print axioms MixedPrimeDebt.fixedSourceAdjacentContinuation_translate_count
 #print axioms MixedPrimeDebt.negativeOrientation_crossLengthCollision
 #print axioms RankTwoPunctuation.exists_pathProduct_eq_zero_iff_selfBridge_or_incidence
 #print axioms ReturnSquare.twoReturnDiscriminant_not_isSquare

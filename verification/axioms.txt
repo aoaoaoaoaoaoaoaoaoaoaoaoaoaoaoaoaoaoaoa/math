@@ -1691,6 +1691,7 @@
 'MatrixMortality.PeriodicShell.wait_mem_two_three_unit_interval' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.PeriodicShell.shellRawWord_count_translate' depends on axioms: [propext]
 'MatrixMortality.PeriodicShell.benchmarkRelation_ne' does not depend on any axioms
 'MatrixMortality.PeriodicShell.shellRun_benchmarkRelation' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.PeriodicShell.benchmarkRelationShift_ne' depends on axioms: [propext, Classical.choice, Quot.sound]
@@ -1805,6 +1806,18 @@
  Classical.choice,
  Quot.sound]
 'MatrixMortality.MixedPrimeDebt.fixedSourceAdjacentExitTarget_injective' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.fixedSourceAdjacentContinuationSchedule_run' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.fixedSourceAdjacentExitTarget_tail_length' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.fixedSourceAdjacentContinuation_exists_iff_lengthCandidate' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.fixedSourceAdjacentContinuation_translate_count' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
 'MatrixMortality.MixedPrimeDebt.negativeOrientation_crossLengthCollision' depends on axioms: [propext,
