@@ -955,6 +955,14 @@ multi-role pole. Pure all-`D_c` words belong to the earlier length cuts. The dec
 search is now confined to rule-bearing blocks and later generalized carriers; no ternary
 cylinder classification is being imported.
 
+[`MM-S53`](SALVAGE.md#mm-s53-complete-all-erasure-first-entry-extinction) finishes the
+first-entry erasure assembly. A pure two-role `D_c²` trace has shell `(1,1)`, while its two
+two-adic unit summands cancel to greater depth; longer pure-`D_c` words are already excluded by
+`MM-S19`, and every word with `D_b` is excluded by `MM-S49`. Thus every surviving
+non-singleton first block from the distinguished decimal raw head contains at least one rule
+tile. This conclusion remains raw-head-specific: later generalized carriers retain the
+`m≥3` multi corridor and the reachable `m≥β+3` multi-to-singleton question.
+
 The ternary and decimal branches now separate at their first multi-transfer front.
 [`MM-S37`](SALVAGE.md#mm-s37-decimal-three-shape-frontier-extinction) substitutes each of the
 three role shapes left by the swapped ternary gate into the decimal carrier equation. All are
