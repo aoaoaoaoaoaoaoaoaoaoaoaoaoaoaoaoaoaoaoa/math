@@ -1221,6 +1221,13 @@ every later plane. Thus the carrier orbit is injectively infinite for every `s�
 and rational diagonalizability do not recover a finite atlas once the toggle ceases to be
 projectively involutive. No terminal row or paired recognizer follows from the counterexample.
 
+[`G3-O31`](SALVAGE.md#g3-o31-whole-carrier-terminal-row-obstruction) removes the simplest use of
+that infinity. If one row annihilates the whole carrier planes at two depths `n<m`, the first
+spanning columns force `a=b2ⁿ=b2ᵐ`, hence `a=b=0`; the second forces `c=0`. Thus a nonzero row
+contains at most one whole plane in the `G3-O30` orbit. Every remaining depth contributes only a
+proper moving line section. The live problem is now the arithmetic of those lines and the
+complete malformed-word converse, not selecting an unbounded set of depths wholesale.
+
 [`G3-M02`](SALVAGE.md#g3-m02-square-root-punctuation-fracture) supplied a complete direct-mortality
 grammar. The source-uniform rational rank-two matrix `S` satisfies
 
@@ -1467,7 +1474,7 @@ or neutral word across the return, use an empty consume, or split recurrent outp
 | Lane | Available leverage | Decisive obstruction or obligation |
 | --- | --- | --- |
 | Common-kernel shuttle | The exact `bcbb` compiler moves its common data kernel out through the toggle and recovers it at the next data action | Uniformize this non-invariant shuttle in `(β,body)`; every toggle-invariant guard factors through the two-dimensional quotient |
-| Transverse-kernel terminal dynamics | `G3-O26` kills row retuning; `G3-O27` gives the involutive six-carrier atlas; `G3-O29` embeds `M₂(3)` there; `G3-O30` gives an injectively infinite nonprojective plane orbit | Exploit non-scalar toggle depth with one uniform terminal row, solve the joint dimension-two node, or use a full-rank data map |
+| Transverse-kernel terminal dynamics | `G3-O27/O29` reduce the involutive branch to the `M₂(3)` core; `G3-O30` gives an infinite nonprojective plane orbit; `G3-O31` permits at most one whole-plane depth per nonzero row | Exploit the moving proper line sections with an all-word converse, solve the joint dimension-two node, or use a full-rank data map |
 | Positive projective transition lower bound | Same-zero dimension three is point-line incidence in `P²`, and actual one-sided shifts retain finite rank/kernel/image data | Derive a uniform nonstationary or noncommuting shift incompatibility from an unbounded terminal section; static support rank, formal inverse completion, fixed equal-length return flowers, and unary consecutive-repeat escape are forbidden |
 | Global word-residual recoding | Longer noncommutative atoms can retain order while discarding the four additive role channels | Escape `G3-D05`: fixed-priority affine counters and all one-way reset/transfer/fanout cascades are decidable |
 | Head-separated three-schema source | `G3-C04` discharges every arbitrary-trace forcing obligation locally; `G3-O24` isolates the directed stable-cone alternative | Preserve an undecidable mixed or neutral word across returns, or realize zero-sensitive S5 GLB decoding after the `G3-O25` separator-rank fork; complete pure forks are decidable by `G3-D07` |
@@ -1495,7 +1502,9 @@ raceable leaves:
    or a full-rank data map.
    Pure kernel geometry, exceptional fibres, minimum-body examples, terminal-row retuning, and
    genuinely two-dimensional dynamics under singular data plus projective involution are closed;
-   general one-chart incidence cannot be declared decidable without resolving `M₂(3)`.
+   general one-chart incidence cannot be declared decidable without resolving `M₂(3)`, and
+   `G3-O31` forces the nonprojective branch to use proper moving line sections at all but one
+   depth.
 3. **Positive projective transition obstruction.** Derive from a source-unbounded terminal
    section a finite shift incompatibility which no three-dimensional rational same-zero
    representation can realize for any combination of generator ranks and kernels. It must use
@@ -1595,8 +1604,9 @@ rank-at-most-one terminal sections. Its exact internal survivor is point reachab
 rational `P¹` atlas. `G3-O29` embeds the complete `M₂(3)` incidence core already in one common
 identity-toggle chart. `G3-O30` shows that non-scalar toggle powers genuinely generate infinitely
 many exact rank-two carriers even for a rational diagonal toggle; the missing step is one
-source-uniform terminal section and complete arbitrary-word converse. A full-rank data map remains
-the other escape.
+source-uniform terminal section and complete arbitrary-word converse. `G3-O31` proves that a
+nonzero row can contain at most one whole carrier, so that section must exploit the moving proper
+lines at every other depth. A full-rank data map remains the other escape.
 A lower-bound attack must exclude both positive
 architectures through actual transition data. Backward cancellation, inverse cofinality, and
 static incidence cannot do so. Do not spend another attack on separator placement, fixed anchors,
