@@ -36,6 +36,7 @@ import MatrixMortality.ReturnSquareDynamics
 import MatrixMortality.ReturnSquareNoGo
 import MatrixMortality.ReturnSquareClassification
 import MatrixMortality.ReturnSquareComposite
+import MatrixMortality.ReturnSquareFractionPullback
 import MatrixMortality.ReturnSquareTax
 import MatrixMortality.ReturnJordan
 import MatrixMortality.ReturnConvert

@@ -723,8 +723,25 @@ The arbitrary-composite residue is now primewise rigid on its numerator side. Ev
 bridge zero has canonical numerator dividing `q^E` and denominator dividing `q^(2E)`. If its
 word is `[h] ++ tail` and `vₚ(d)>0` for a prime `p∣q`, then Lean proves
 `tail≠[]` and `vₚ(d)=vₚ(q)·waitExponent(tail)`. Positive valuations at all base primes
-therefore share one exact word-determined exponent. Negative denominator valuations remain
-unclassified; `R32-S44` is a strict obstruction, not the arbitrary-composite classification.
+therefore share one exact word-determined exponent.
+
+The full fraction `d=A/B` now has an exact homogeneous dual recurrence. After clearing `B`,
+transpose and a fixed diagonal gauge turn every bridge into the reversed product of
+
+```text
+H_t = [(B−A)t²−B   AB]
+      [−t            Bt]
+```
+
+from `(A,1)` to the target line `R=BS`. This equivalence retains all common factors and every
+word-order convention. At a prime dividing `B`, the unique predecessor of the target line has
+valuation `a−min(2b,a)` for `a=vₚ(B)` and `b=vₚ(t)`, except at the sole critical equality
+`a=2b`; at equality, its valuation is still nonpositive whenever the affine predecessor is
+defined. For `t=q^(w+1)`, this is the exact word-visible tax `2(w+1)vₚ(q)`. Positive denominator
+depth survives one terminal pullback only above that tax. Later shell re-entry and cross-prime
+common content remain unclassified. `R32-S44` and `R32-S45` are strict
+obstructions, not the arbitrary-composite classification. The two-coordinate interface does
+not reduce to finite-alphabet `M₂(3)` because every scale `qⁿ` remains a distinct return letter.
 
 The common-geometric-base hypothesis cannot be weakened to total divisibility of an arbitrary
 scale alphabet. Lean checks that `[3,15,3,3,15,3,3,3]` is pairwise totally ordered under
