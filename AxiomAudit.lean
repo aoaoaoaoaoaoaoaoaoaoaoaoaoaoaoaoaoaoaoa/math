@@ -693,6 +693,8 @@ open MatrixMortality
 #print axioms MixedPrimeDebt.adjacentDebtBridge_targetOvercancellation
 #print axioms MixedPrimeDebt.fixedSourceAdjacentFamily
 #print axioms MixedPrimeDebt.fixedSourceAdjacentFamily_target_injective
+#print axioms MixedPrimeDebt.fixedSourceAdjacentFamily_targetPole
+#print axioms MixedPrimeDebt.fixedSourceAdjacentFamily_target_exists_iff
 #print axioms MixedPrimeDebt.fixedSourceAdjacentFamily_ten_mul_numerator_mod
 #print axioms MixedPrimeDebt.fixedSourceAdjacentFamily_ten_mul_numerator
 #print axioms MixedPrimeDebt.fixedSourceAdjacentFamily_ten_mul_accepted

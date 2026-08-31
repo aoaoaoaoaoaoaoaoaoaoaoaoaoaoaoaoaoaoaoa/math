@@ -487,8 +487,12 @@ run from depth one to depth `m+2` and both send `43/24` to
 `11·2^(10k)+9·3^(10k)` has `5`-adic valuation exactly one, so the target is a unit. One rational
 source therefore supports infinitely many accepted chamber-contained cross-length collisions
 with unbounded waits. The target formula is injective in `m`; no fixed target occurs twice, and
-the family does not decide fixed-target reachability. Exact accepted examples also show that the
-debt chamber's one-bit carrier residue is saturated: `[1]` and `[1,1]` collide at `1/3↦1/3`,
+fixed-target intersection with this ray reduces to testing its sole valuation-derived candidate
+`m=max(0,v₂((45y−9)/11))`. Every target on the ray also satisfies the complementary endpoint
+pole `v₂(1−2y)=0`, which is the normalized form of `v₂(6y_original−15)=0`. Thus the family lies
+inside both unresolved endpoint shells, although it does not decide reachability outside this
+one ray. Exact accepted examples also show that the debt chamber's one-bit carrier residue is
+saturated: `[1]` and `[1,1]` collide at `1/3↦1/3`,
 while `[1]` and `[1,2,0]` collide at `19/42↦8/21`; their carrier orientations modulo three are
 opposite, and both sources and both targets are `5`-adic units.
 
@@ -1907,7 +1911,7 @@ fixed-rank decision problem.
 | Same-length debt bridges with common endpoint depths have one slope, so a collision at one source is a global affine relation | `MixedPrimeDebt.debtSafe_sameLength_collision_global` |
 | Unequal nonempty shell schedules have one explicit collision source, which is automatically a `5`-adic unit; target acceptance is exactly a determinant-valuation condition; both three-adic carrier orientations occur at shell-legal cross-length collisions | `MixedPrimeDebt.collisionSource_eq_of_shellRun_eq`, `MixedPrimeDebt.collisionSource_fiveUnit`, `MixedPrimeDebt.collisionTarget_fiveUnit_iff`, `MixedPrimeDebt.positiveOrientation_crossLengthCollision`, `MixedPrimeDebt.negativeOrientation_crossLengthCollision` |
 | Adjacent-length debt bridges between common depths have slope ratio `2/5`; target acceptance is exactly cancellation of their cleared offsets to the shorter length and is not automatic | `MixedPrimeDebt.shellOffset_cons`, `MixedPrimeDebt.adjacentDebtBridge_slope`, `MixedPrimeDebt.adjacentDebtBridge_collisionTarget_fiveUnit_iff`, `MixedPrimeDebt.adjacentDebtBridge_targetOvercancellation` |
-| The fixed source `43/24` supports an exact adjacent-length collision family at every terminal wait, with every wait divisible by ten accepted and all targets pairwise distinct | `MixedPrimeDebt.fixedSourceAdjacentFamily`, `MixedPrimeDebt.fixedSourceAdjacentFamily_target_injective`, `MixedPrimeDebt.fixedSourceAdjacentFamily_ten_mul_numerator_mod`, `MixedPrimeDebt.fixedSourceAdjacentFamily_ten_mul_numerator`, `MixedPrimeDebt.fixedSourceAdjacentFamily_ten_mul_accepted` |
+| The fixed source `43/24` supports an exact adjacent-length collision family at every terminal wait; its targets lie on the complementary two-adic pole, are pairwise distinct, admit an explicit fixed-target membership test, and are accepted whenever the wait is divisible by ten | `MixedPrimeDebt.fixedSourceAdjacentFamily`, `MixedPrimeDebt.fixedSourceAdjacentFamily_target_injective`, `MixedPrimeDebt.fixedSourceAdjacentFamily_targetPole`, `MixedPrimeDebt.fixedSourceAdjacentFamily_target_exists_iff`, `MixedPrimeDebt.fixedSourceAdjacentFamily_ten_mul_numerator_mod`, `MixedPrimeDebt.fixedSourceAdjacentFamily_ten_mul_numerator`, `MixedPrimeDebt.fixedSourceAdjacentFamily_ten_mul_accepted` |
 | Shell phases are all units exactly when the final output is a unit | `PeriodicShell.shellPrefixesUnit_iff` |
 | Raw words and shell schedules are conjugate, and every boundary-shifted benchmark schedule is one contextual raw rule | `PeriodicShell.shellRun_eq_wordAction`, `PeriodicShell.shellRawWord_benchmarkRelationShiftLeft`, `PeriodicShell.shellRawWord_benchmarkRelationShiftRight`, `PeriodicShell.shellRun_benchmarkRelationShift` |
 | Two distinct length-thirteen benchmark schedules induce the same affine map, preserve all guards in every context, and share a rational all-unit cycle | `PeriodicShell.benchmarkRelation_ne`, `PeriodicShell.shellRun_benchmarkRelationContext`, `PeriodicShell.benchmarkRelationContextGuard`, `PeriodicShell.benchmarkRelationCycle` |
