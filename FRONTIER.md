@@ -3088,6 +3088,15 @@ exactly three rational equality tests. The width is sharp at `y=49/150`. Thus th
 backward graph is an explicit ternary tree: unbounded depth, not unbounded local fanout, is now
 the reverse-search obstruction. This is
 [`D2-S04`](SALVAGE.md#d2-s04-real-trap-ternary-predecessor-nucleus).
+The source-side dual is sharper. Every `x∈(1/5,1/2]` lies in one of three intervals, and its
+entire one-step orbit is one normalized-mantissa ray:
+`U(m,2x)`, `U(m+1,3x)`, or `U(m+2,(9/2)x)`. Once the target depth is computed, fixed-source
+one-step reachability is one equality rather than three. This is
+[`D2-S05`](SALVAGE.md#d2-s05-fixed-source-real-trap-rays). Independently, every reduced-
+denominator exponent away from `2`, `3`, and `5` is invariant through all shell schedules,
+including first exits. Endpoint pairs with different prime-to-30 denominator skeletons are
+therefore excluded before the active-prime search. This is
+[`D2-S06`](SALVAGE.md#d2-s06-spectator-prime-denominator-skeleton).
 The deepest of those three branches is itself a full depth reset. In normalized band coordinates
 `U(d,μ)=1/5+(3/10)(2/3)^dμ`, every target band `d≥2` contains a point whose `d−2` predecessor has
 any prescribed band `n≥7` and mantissa in `(2/3,1]`. An explicit guarded subfamily fixes target

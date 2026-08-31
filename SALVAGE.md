@@ -312,6 +312,8 @@ file owns the mathematical stock.
 | [`D2-S02`](#d2-s02-monotone-affine-path-form) | structure theorem | normalized affine words form monotone exponent paths | audited | stock |
 | [`D2-S03`](#d2-s03-two-place-shell-walls) | structure theorem | the benchmark shell has exact `2`/`3` cancellation walls and a finite simultaneous-unit wait interval | formalized | active |
 | [`D2-S04`](#d2-s04-real-trap-ternary-predecessor-nucleus) | structure theorem | real-trap positivity cuts every one-step reverse shell fan to a sharp computable window of three waits | formalized | active |
+| [`D2-S05`](#d2-s05-fixed-source-real-trap-rays) | structure theorem | every real-trap source has a one-step orbit on one computable normalized-mantissa ray | formalized | active |
+| [`D2-S06`](#d2-s06-spectator-prime-denominator-skeleton) | structure theorem | every denominator exponent away from `2`, `3`, and `5` is invariant through shell prefixes and first exits | formalized | active |
 | [`D2-D01`](#d2-d01-projectively-unimodular-stratum) | decidable stratum | projectively unimodular hard-core instances are decidable | audited | stock |
 | [`D2-D02`](#d2-d02-invariant-pair-stratum) | decidable stratum | invariant projective pairs reduce to effective multiplicative-subgroup membership | audited | graduated |
 | [`D2-D03`](#d2-d03-common-multiplier-stratum) | decidable stratum | rational affine maps with one multiplier are decidable under regular control | reported | active |
@@ -14866,6 +14868,86 @@ intersecting with the real survivor. The remaining obstruction is depth, not loc
 
 **Next:** find a target-dependent height or congruence making the ternary inverse tree finite up
 to equivalence, or exhibit a fixed-source recurrent branch that defeats every finite nucleus.
+
+### D2-S05: Fixed-source real-trap rays
+
+**Kind:** structure theorem
+**Evidence:** formalized
+**Disposition:** active
+
+The target-side ternary window has an exact source-side dual. Write
+
+```text
+U(d,μ)=1/5+(3/10)(2/3)^d μ,   2/3<μ≤1.
+```
+
+For every wait `m` and source `x∈(1/5,1/2]`, direct normalization gives
+
+```text
+x∈(1/3,1/2]   ⇒ T_m(x)=U(m,2x),
+x∈(2/9,1/3]   ⇒ T_m(x)=U(m+1,3x),
+x∈(1/5,2/9]   ⇒ T_m(x)=U(m+2,(9/2)x).
+```
+
+Thus varying the wait changes only the target band depth. Each fixed source has one normalized
+mantissa, and one-step membership is a single rational equality at the computable target depth
+`realTrapMaxPredecessorWait(y)`, with the lower-depth guard `0`, `1`, or `2` selected by the
+source interval. This sharpens the three target-derived candidates of
+[`D2-S04`](#d2-s04-real-trap-ternary-predecessor-nucleus) to one candidate once the source is
+fixed. The earlier identity
+`T_(d−2)(2/9)=U(d,1)` is the lower interval's boundary case, not an isolated ray.
+
+**Scope:** this decides one shell block, not an arbitrary fixed-source shell prefix. After the
+first block, its chosen depth changes which of the three source intervals controls the next
+mantissa, producing a countable iterated-ray system.
+
+**Artifact:** `MixedPrimeDebt.shellStep_realTrap_upperRay`,
+`MixedPrimeDebt.shellStep_realTrap_middleRay`,
+`MixedPrimeDebt.shellStep_realTrap_lowerRay`, and the three
+`exists_shellStep_realTrap_*_iff_candidate` theorems in
+[`MixedPrimeRealTrapAddress.lean`](MatrixMortality/MixedPrimeRealTrapAddress.lean).
+
+**Use:** represent the remaining forward relation by exact depth/mantissa transitions rather than
+an unstructured infinite wait alphabet. One transition has no wait branching after the target
+depth is known.
+
+**Next:** classify iteration of the three fixed-source ray maps, retaining the active `5`-adic
+carry, or find a finite quotient of their depth/mantissa skew product.
+
+### D2-S06: Spectator-prime denominator skeleton
+
+**Kind:** structure theorem
+**Evidence:** formalized
+**Disposition:** active
+
+Let `p` be any prime at which `2`, `3`, and `5` are units. For every shell schedule `w` and
+rational state `x`, Lean proves
+
+```text
+min(v_p(T_w(x)),0)=min(v_p(x),0).
+```
+
+The negative part of `v_p` is the exponent of `p` in the reduced denominator. Therefore every
+denominator exponent outside the active primes `2`, `3`, and `5` is invariant through arbitrary
+shell execution. The statement does not assume the `5`-adic guard, so it also applies to the
+first-exit image. A source and target with different spectator-prime denominator exponents are
+unreachable for every schedule.
+
+**Scope:** numerator residues and the active `2`-, `3`-, and `5`-adic coordinates remain
+uncontrolled. Equal spectator denominator skeletons are necessary, not sufficient.
+
+**Artifact:** `MixedPrimeDebt.shellRun_spectatorDenominator`,
+`MixedPrimeDebt.shellRun_spectatorDenominator_of_ne_active`, and
+`MixedPrimeDebt.shellRun_ne_of_spectatorDenominator_ne` in
+[`MixedPrimeSpectator.lean`](MatrixMortality/MixedPrimeSpectator.lean).
+
+**Use:** reject all endpoint pairs whose prime-to-30 denominator skeletons differ before entering
+the critical-shell search. The unresolved arithmetic is supported on the active primes plus
+numerator carry.
+
+**Next:** combine the invariant spectator skeleton with
+[`D2-S05`](#d2-s05-fixed-source-real-trap-rays) and seek an exact classifier for the remaining
+active-prime depth/mantissa system.
 
 ### D2-O09: Guarded real-pole reset
 
