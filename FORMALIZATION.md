@@ -1763,6 +1763,15 @@ The phase-zero double-`c` parity cylinder
 whenever the body length and its number of `b` letters are both odd. The exact boundary is
 [`audits/m43-phase-zero-double-c-parity-cylinder-2026-08-31.md`](audits/m43-phase-zero-double-c-parity-cylinder-2026-08-31.md).
 
+The phase-zero right-`c` odd-length cylinder
+[`M4-S19`](SALVAGE.md#m4-s19-phase-zero-right-c-odd-length-cylinder) is checked in the same
+module. `ParabolicBlade.bridge_bZero_bTwo_cOne_det` gives the primitive integral
+code-coordinate core of `b(3z)b(3x+2)c(3y+1)`. The theorem
+`ParabolicBlade.bridge_bZero_bTwo_cOne_det_ne_zero_of_odd_body` proves that the core is `2`
+modulo four for every odd-length body, independently of its code and all waits. The exact
+boundary is
+[`audits/m43-phase-zero-right-c-odd-length-cylinder-2026-08-31.md`](audits/m43-phase-zero-right-c-odd-length-cylinder-2026-08-31.md).
+
 The residue-zero `c`-endpoint exclusion
 [`M4-S12`](SALVAGE.md#m4-s12-residue-zero-c-endpoint-exclusion) is checked in the same module.
 `ParabolicBlade.bridge_cZero_bTwo_bOne_det` and

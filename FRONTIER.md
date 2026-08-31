@@ -547,6 +547,12 @@ triple of waits. Hence any zero in this family must lie in the union of two comp
 cylinders: even body length or even `b` count. This narrows one survivor but does not remove it
 from the six-family list.
 
+The sole surviving one-`c` endpoint, `b`-defect family has a stronger parity cut
+[`M4-S19`](SALVAGE.md#m4-s19-phase-zero-right-c-odd-length-cylinder). For
+`b(3z)b(3x+2)c(3y+1)`, odd body length alone makes the primitive determinant core `2` modulo
+four, with no condition on the body code or waits. Hence every zero in the `0|2|1` `b|b|c`
+family must have even body length. The family remains in the six-family list.
+
 Two original-family nodes survive, and they must not be conflated.
 
 1. **Exterior collision avoidance.** Use `M4-S06`--`M4-S15` to classify the transported kernel
