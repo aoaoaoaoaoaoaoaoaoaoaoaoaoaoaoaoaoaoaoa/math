@@ -1167,6 +1167,13 @@ and
 `MM-O09` and `MM-O10` remain audited stock rather than publication dependencies; no live
 formalization issue is assigned to them.
 
+[`MM-O15`](SALVAGE.md#mm-o15-deletion-first-fibre-fracture) formalizes the local obstruction to
+processing the common Neary deletion channel before its letter bit. Lean proves that exact shared
+rule/deletion fibre transport forces the `b`- and `c`-rule lower scales to agree, then proves the
+body-dependent `c` scale is strictly larger than the fixed scale `27`. This closes only the exact
+native lower-fibre merge. It does not exclude a changed same-zero series or the weaker
+existence-only scalar interface, which is sufficient by `mortal_adjoin_outer_iff`.
+
 The setter-projective audit now also exposes a kernel-friendly carry theorem:
 
 | Record | Formalization obligation |

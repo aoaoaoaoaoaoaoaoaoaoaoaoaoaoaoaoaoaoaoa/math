@@ -318,6 +318,9 @@ open MatrixMortality
 #print axioms DirectedCancellation.asymmetric_zero_context_cancellation_not_smul_one
 #print axioms DirectedCancellation.asymmetric_zero_context_cancellation_forces_projective_blindness
 #print axioms paired_exact_diagonal_twoChannel_state_lower_bound
+#print axioms ruleScale_eq_of_deletionFirst_fibre
+#print axioms nearySideLowerCScale_gt_twentySeven
+#print axioms no_neary_deletionFirst_fibre
 #print axioms chhnNeary_exactRepresentation_six_le_card
 #print axioms twoStateProduct_mulVec_phaseVector
 #print axioms controllerRoleProduct_eq_sidePcpMatrix
