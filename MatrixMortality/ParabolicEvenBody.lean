@@ -243,6 +243,88 @@ theorem tagComplementCode_first_b_density (j : Nat) (tail : List TagLetter) :
   · simpa only [mul_assoc, mul_left_comm, mul_comm] using lower_scaled
   · simpa only [mul_assoc, mul_left_comm, mul_comm] using upper_scaled
 
+/-- Every physical tag word lies outside the open density gap between first-`b` positions at
+most `k` and first-`b` positions greater than `k`. -/
+theorem tagComplementCode_first_b_position_gap (k : Nat) (body : List TagLetter) :
+    13 * 3 ^ (tagEncode 3 body).length ≤ 81 * 3 ^ k * tagComplementCode body ∨
+      242 * 3 ^ (k + 1) * tagComplementCode body <
+        39 * 3 ^ (tagEncode 3 body).length := by
+  induction k generalizing body with
+  | zero =>
+      cases body with
+      | nil =>
+          right
+          norm_num [tagComplementCode, tagEncode, spell, tagCode, ternaryCode,
+            ternaryDigit]
+      | cons first tail =>
+          cases first with
+          | b =>
+              left
+              simpa using (tagComplementCode_first_b_density 0 tail).1
+          | c =>
+              right
+              have scale_positive : 1 ≤ 3 ^ (tagEncode 3 tail).length :=
+                one_le_pow₀ (by norm_num)
+              have global_bound := tagComplementCode_global_bound tail
+              have strict_bound :
+                  242 * tagComplementCode tail <
+                    39 * 3 ^ (tagEncode 3 tail).length := by
+                omega
+              have scaled_bound :=
+                Nat.mul_lt_mul_of_pos_left strict_bound (by norm_num : 0 < 3)
+              have scale_eq :
+                  3 ^ (tagEncode 3 (.c :: tail)).length =
+                    3 * 3 ^ (tagEncode 3 tail).length := by
+                simp [tagEncode_cons, tagCode, pow_add, mul_comm]
+              rw [tagComplementCode_cons_c, scale_eq]
+              norm_num only [pow_zero, pow_one]
+              calc
+                242 * 3 * tagComplementCode tail =
+                    3 * (242 * tagComplementCode tail) := by ring
+                _ < 3 * (39 * 3 ^ (tagEncode 3 tail).length) := scaled_bound
+                _ = 39 * (3 * 3 ^ (tagEncode 3 tail).length) := by ring
+  | succ k induction =>
+      cases body with
+      | nil =>
+          right
+          norm_num [tagComplementCode, tagEncode, spell, tagCode, ternaryCode,
+            ternaryDigit]
+      | cons first tail =>
+          cases first with
+          | b =>
+              left
+              have base_density := (tagComplementCode_first_b_density 0 tail).1
+              have power_one : 1 ≤ 3 ^ (k + 1) := one_le_pow₀ (by norm_num)
+              have complement_scaled :
+                  tagComplementCode (.b :: tail) ≤
+                    3 ^ (k + 1) * tagComplementCode (.b :: tail) := by
+                have scaled := Nat.mul_le_mul_right (tagComplementCode (.b :: tail)) power_one
+                simpa only [one_mul, mul_comm] using scaled
+              calc
+                13 * 3 ^ (tagEncode 3 (.b :: tail)).length ≤
+                    81 * tagComplementCode (.b :: tail) := by
+                  simpa using base_density
+                _ ≤ 81 * (3 ^ (k + 1) * tagComplementCode (.b :: tail)) :=
+                  Nat.mul_le_mul_left 81 complement_scaled
+                _ = 81 * 3 ^ (Nat.succ k) * tagComplementCode (.b :: tail) := by
+                  simp only [Nat.succ_eq_add_one, mul_assoc]
+          | c =>
+              have scale_eq :
+                  3 ^ (tagEncode 3 (.c :: tail)).length =
+                    3 * 3 ^ (tagEncode 3 tail).length := by
+                simp [tagEncode_cons, tagCode, pow_add, mul_comm]
+              rcases induction tail with high | low
+              · left
+                have scaled_high := Nat.mul_le_mul_left 3 high
+                rw [tagComplementCode_cons_c, scale_eq]
+                simpa only [pow_succ, Nat.succ_eq_add_one, mul_assoc, mul_left_comm,
+                  mul_comm] using scaled_high
+              · right
+                have scaled_low := Nat.mul_lt_mul_of_pos_left low (by norm_num : 0 < 3)
+                rw [tagComplementCode_cons_c, scale_eq]
+                simpa only [pow_succ, Nat.succ_eq_add_one, mul_assoc, mul_left_comm,
+                  mul_comm] using scaled_low
+
 private theorem tagComplementCode_cast (body : List TagLetter) :
     (tagComplementCode body : ℤ) =
       (3 : ℤ) ^ (tagEncode 3 body).length -

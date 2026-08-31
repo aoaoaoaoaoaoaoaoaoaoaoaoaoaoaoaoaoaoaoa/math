@@ -223,6 +223,7 @@ file owns the mathematical stock.
 | [`M4-S32`](#m4-s32-phase-zero-right-c-global-middle-wait-bound) | structure theorem | every first-`b` zero has middle wait at most `51767` | formalized | active |
 | [`M4-S33`](#m4-s33-phase-zero-right-c-x211-divisor-chamber) | structure theorem | the `x=211`, first-`b`-after-one-`c` chamber has an exact positive divisor equation and four elimination resultants | formalized | active |
 | [`M4-S34`](#m4-s34-phase-zero-right-c-second-first-b-extinction) | obstruction | no even-`b` body beginning `ccb` closes the phase-zero right-`c` bridge | formalized | active |
+| [`M4-S35`](#m4-s35-phase-zero-right-c-first-b-position-gap) | structure theorem | every tag body avoids every open density gap between consecutive first-`b` cylinders | formalized | active |
 | [`M4-C03`](#m4-c03-zero-framed-binary-two-lag-compiler) | compiler | the principal scanner is literally binary context-2 Lag and compiles to `M₄(3)` | formalized | graduated |
 | [`M4-D01`](#m4-d01-zero-framed-binary-two-lag-decision) | decidable stratum | the entire zero-framed binary context-2 Lag kernel has an exact syntactic classification | formalized | graduated |
 | [`M4-D02`](#m4-d02-zero-framed-reset-scanner-decision) | decidable stratum | zero-run reduction contracts the reset scanner to a regular two-token quotient | audited | graduated |
@@ -9344,6 +9345,41 @@ architecture on the remaining finite leading positions.
 [`scripts/generate-parabolic-first-b-two-tail.py`](scripts/generate-parabolic-first-b-two-tail.py),
 and
 [`audits/m43-phase-zero-right-c-second-first-b-extinction-2026-08-31.md`](audits/m43-phase-zero-right-c-second-first-b-extinction-2026-08-31.md).
+
+### M4-S35: Phase-zero right-c first-b position gap
+
+**Kind:** structure theorem
+
+**Evidence:** formalized
+
+**Disposition:** active
+
+For every natural `k` and every physical tag body, write
+`S=3^|encode(body)|` and `D=S−C−1`. Lean proves the exact dichotomy
+
+```text
+13S ≤ 81·3^kD
+  or
+242·3^(k+1)D < 39S.
+```
+
+The forbidden open interval is precisely the gap between bodies whose first `b` occurs at or
+before position `k` and bodies whose first `b` occurs later. The all-`c` ray lies on the second
+side. Both endpoints retain their correct weak/strict orientation.
+
+**Scope:** every finite word over the physical tag alphabet, independently of any determinant
+equation or parity hypothesis.
+
+**Use:** turn a forced complement ratio lying between consecutive first-`b` cylinders directly
+into a contradiction. The instances `k=0` and `k=1` are the two terminal density gaps arising
+in the `x=211` chamber.
+
+**Next:** use the generic cut in place of duplicated one- and two-position grammar casework,
+then compose it with the bounded divisor classifier.
+
+**Artifact:**
+[`MatrixMortality/ParabolicEvenBody.lean`](MatrixMortality/ParabolicEvenBody.lean) and
+[`audits/m43-phase-zero-right-c-first-b-position-gap-2026-08-31.md`](audits/m43-phase-zero-right-c-first-b-position-gap-2026-08-31.md).
 
 ### M4-C03: Zero-framed binary two-Lag compiler
 
