@@ -8933,6 +8933,61 @@ digit cylinders, then seek a transport cone covering the remaining `c`-defect pl
 [`MatrixMortality/ParabolicMixedEndpoint.lean`](MatrixMortality/ParabolicMixedEndpoint.lean) and
 [`audits/m43-phase-zero-left-c-defect-2026-08-30.md`](audits/m43-phase-zero-left-c-defect-2026-08-30.md).
 
+### M4-S17: Opposite right-c defect cylinder exclusion
+
+**Kind:** obstruction
+
+**Evidence:** formalized
+
+**Disposition:** active
+
+The shortest `1|2|0` bridge with a `b` left endpoint and body-dependent `c` atoms at the defect
+and right endpoint is
+
+```text
+b(3z+1) c(3x+2) c(3y).
+```
+
+Put `D=M−3` and
+
+```text
+A = 16274467L−5515409M−229072,
+B = 48637017L−16433267M−839712.
+```
+
+Lean computes its determinant as `729z/4` times
+
+```text
+D A y + B − 166944D(Dy+3)x.
+```
+
+Thus a zero would make `x` a weighted average of `A/(166944D)` and `B/(500832D)`. Splitting
+the body as an all-`c` word or `c^k b tail`, the native ternary cylinders put both endpoints in
+one common open unit interval:
+
+```text
+k=0: (59,60),   k=1: (62,63),   k=2: (63,64),
+k≥3: (64,65),   all-c: (64,65).
+```
+
+No interval contains a natural number, so the determinant is nonzero for every nonempty body,
+all nonnegative waits, and the regular endpoint condition `z>0`.
+
+**Scope:** deletion width three, exactly three atoms, orientation `1|2|0`, and letters `b|c|c`.
+It does not cover the `0|2|1` placement of the same letters, other letter placements, longer
+defect runs, or nontrivial safe contexts.
+
+**Use:** six shortest families remain. The `1|2|0` list contracts to `c|c|b` and `c|c|c`; every
+survivor in that orientation now begins with `c`.
+
+**Next:** test whether the same two-root cylinder survives the `0|2|1` `b|c|c` determinant, then
+seek a joint cone for the four surviving `c`-defect families.
+
+**Artifact:**
+[`MatrixMortality/ParabolicDefectCylinder.lean`](MatrixMortality/ParabolicDefectCylinder.lean)
+and
+[`audits/m43-opposite-right-c-defect-cylinder-2026-08-31.md`](audits/m43-opposite-right-c-defect-cylinder-2026-08-31.md).
+
 ### M4-C03: Zero-framed binary two-Lag compiler
 
 **Kind:** compiler

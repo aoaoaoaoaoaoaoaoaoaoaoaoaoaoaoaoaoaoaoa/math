@@ -422,6 +422,8 @@ open MatrixMortality
 #print axioms ParabolicBlade.bridge_bOne_cTwo_bZero_det
 #print axioms ParabolicBlade.bOne_cTwo_bZero_coefficient_gap
 #print axioms ParabolicBlade.bridge_bOne_cTwo_bZero_det_ne_zero
+#print axioms ParabolicBlade.bridge_bOne_cTwo_cZero_det
+#print axioms ParabolicBlade.bridge_bOne_cTwo_cZero_det_ne_zero
 #print axioms ParabolicBlade.bridge_cZero_bTwo_bOne_det
 #print axioms ParabolicBlade.bridge_cZero_bTwo_bOne_det_ne_zero
 #print axioms ParabolicBlade.bridge_bOne_bTwo_cZero_det

@@ -1672,6 +1672,15 @@ integer force the remaining wait below one and then contradict their strict endp
 exact boundary is
 [`audits/m43-opposite-c-defect-cylinder-2026-08-30.md`](audits/m43-opposite-c-defect-cylinder-2026-08-30.md).
 
+The opposite right-`c` defect cylinder exclusion
+[`M4-S17`](SALVAGE.md#m4-s17-opposite-right-c-defect-cylinder-exclusion) is formalized in the
+same module. `ParabolicBlade.bridge_bOne_cTwo_cZero_det` compresses the exact determinant of
+`b(3z+1)c(3x+2)c(3y)` to a weighted average of two rational roots.
+`ParabolicBlade.bridge_bOne_cTwo_cZero_det_ne_zero` partitions the native body into its leading
+`c`-run cylinders and places both roots in one open interval between consecutive natural
+numbers. The exact boundary is
+[`audits/m43-opposite-right-c-defect-cylinder-2026-08-31.md`](audits/m43-opposite-right-c-defect-cylinder-2026-08-31.md).
+
 The residue-zero `c`-endpoint exclusion
 [`M4-S12`](SALVAGE.md#m4-s12-residue-zero-c-endpoint-exclusion) is checked in the same module.
 `ParabolicBlade.bridge_cZero_bTwo_bOne_det` and
