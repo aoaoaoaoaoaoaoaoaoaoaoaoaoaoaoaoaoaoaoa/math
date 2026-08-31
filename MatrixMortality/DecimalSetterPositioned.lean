@@ -6,7 +6,8 @@ import MatrixMortality.DecimalSetterAncestry
 An all-erasure block preserves the all-zero lower word. Factoring at its rightmost `D_b`
 absorbs every earlier marker into one coefficient congruent to `2` modulo `5`. This exact
 suffix factorization excludes every nonempty-marker erasure word at the distinguished two-`c`
-raw head.
+raw head. The remaining pure-`D_c` boundary of length two dies by two-adic cancellation,
+completing the non-singleton all-erasure first-entry obstruction.
 -/
 
 namespace MatrixMortality.DecimalSetterAncestry
@@ -15,6 +16,7 @@ open MatrixMortality.DecimalSetterArithmetic
 open MatrixMortality.DecimalSetterCarry
 open MatrixMortality.DecimalSetterChamber
 open MatrixMortality.DecimalSetterDepth
+open MatrixMortality.PadicValuation
 
 private theorem tagEncode_replicate_c (β width : Nat) :
     tagEncode β (List.replicate width .c) = List.replicate width true := by
@@ -682,6 +684,179 @@ theorem letterErase_rawHead_shell_impossible_of_b_mem
   apply rightmostBErase_rawHead_shell_impossible body headTail front
     β_large head_unit mu_eq gap_eq lift_eq
   simpa only [tagEncode_length_eq_roleLength_add_markerCount] using shell
+
+/-- The two-role all-`D_c` block misses the next multi-role pole from a lawful two-`c` raw
+head. Its trace has shell `(1,1)`, so the two unit summands in the raw residual cancel to
+strictly greater two-adic depth than the prospective pole permits. -/
+theorem allCDeletion_double_rawHead_shell_impossible
+    {β : Nat} (body headTail : List TagLetter) {μ E G : ℤ}
+    (β_large : 2 ≤ β)
+    (head_unit :
+      HasDecimalShell (code (peeledHeadWord β (.c :: .c :: headTail)) : ℚ) 0 0)
+    (mu_eq : 9 * μ = 52 * 10 ^ β - 7)
+    (gap_eq : E = 18 * 10 ^ β - 63)
+    (lift_eq : G = 502 * 10 ^ β - 7)
+    (shell :
+      HasDecimalShell
+        (((code (peeledHeadWord β (.c :: .c :: headTail)) : ℤ) *
+          (E * code (punctuatedUpper β [.c, .c]) +
+            G * allEraseLowerCode β body 2) -
+          10 * μ * G * allEraseLowerCode β body 2 : ℤ) : ℚ) 1 1) :
+    False := by
+  let ρ : ℤ := 10 ^ β
+  let H : ℤ := code (peeledHeadWord β (.c :: .c :: headTail))
+  let P : ℤ := code (punctuatedUpper β [.c, .c])
+  let V : ℤ := allEraseLowerCode β body 2
+  let T : ℤ := E * P + G * V
+  let R : ℤ := H * T - 10 * μ * G * V
+  have rho_hundred : (100 : ℤ) ∣ ρ := by
+    dsimp only [ρ]
+    simpa [show (100 : ℤ) = 10 ^ 2 by norm_num] using
+      pow_dvd_pow (10 : ℤ) β_large
+  have rho_hundred_expanded : (100 : ℤ) ∣ 10 ^ β := by
+    simpa only [ρ] using rho_hundred
+  have rho_mod : ρ ≡ 0 [ZMOD 100] := by
+    rw [Int.modEq_zero_iff_dvd]
+    exact rho_hundred
+  have upper_identity : 9 * P = 50 * 10 ^ β * 10 ^ 2 + 2 * 10 ^ β - 7 := by
+    dsimp only [P]
+    simpa using allC_punctuatedUpper_code_identity β 2
+  have upper_scaled_dvd : (100 : ℤ) ∣ 9 * (P - 77) := by
+    rw [show 9 * (P - 77) = 9 * P - 693 by ring, upper_identity]
+    have first_dvd : (100 : ℤ) ∣ 50 * 10 ^ β * 10 ^ 2 :=
+      dvd_mul_of_dvd_right (by norm_num) _
+    have second_dvd : (100 : ℤ) ∣ 2 * 10 ^ β :=
+      rho_hundred_expanded.mul_left 2
+    rw [sub_sub, show (7 : ℤ) + 693 = 700 by norm_num]
+    exact dvd_sub (dvd_add first_dvd second_dvd) (by norm_num)
+  have P_mod : P ≡ 77 [ZMOD 100] := by
+    rw [Int.modEq_iff_dvd]
+    have difference_dvd : (100 : ℤ) ∣ P - 77 :=
+      (by norm_num : IsCoprime (100 : ℤ) 9).dvd_of_dvd_mul_left upper_scaled_dvd
+    rw [show 77 - P = -(P - 77) by ring]
+    exact dvd_neg.mpr difference_dvd
+  have V_eq : V = 77 := by
+    have lower_identity : 9 * V + 7 = 7 * 10 ^ 2 := by
+      dsimp only [V]
+      exact allEraseLowerCode_identity β body 2
+    norm_num at lower_identity
+    omega
+  have V_mod : V ≡ 77 [ZMOD 100] := by
+    rw [V_eq]
+  have gap_calibration : E = decimalGap ρ := by
+    rw [gap_eq]
+    dsimp only [ρ]
+    simp only [decimalGap]
+    ring
+  have lift_calibration : G = decimalLift ρ := by
+    rw [lift_eq]
+    rfl
+  have trace_shell : HasDecimalShell (T : ℚ) 1 1 := by
+    have calibrated := multiErasure_trace_hasDecimalShell rho_mod P_mod V_mod
+    rw [← gap_calibration, ← lift_calibration] at calibrated
+    dsimp only [T]
+    push_cast
+    simpa only [transferTrace] using calibrated
+  have rho_even : (2 : ℤ) ∣ ρ :=
+    (by norm_num : (2 : ℤ) ∣ 100).trans rho_hundred
+  have rho_even_expanded : (2 : ℤ) ∣ 10 ^ β := by
+    simpa only [ρ] using rho_even
+  have mu_not_even : ¬(2 : ℤ) ∣ μ := by
+    intro mu_even
+    have scaled_even : (2 : ℤ) ∣ 9 * μ := mu_even.mul_left 9
+    rw [mu_eq] at scaled_even
+    have leading_even : (2 : ℤ) ∣ 52 * 10 ^ β := by
+      exact rho_even_expanded.mul_left 52
+    have seven_even := dvd_sub leading_even scaled_even
+    norm_num at seven_even
+  have G_not_even : ¬(2 : ℤ) ∣ G := by
+    intro G_even
+    rw [lift_eq] at G_even
+    have leading_even : (2 : ℤ) ∣ 502 * 10 ^ β := by
+      exact rho_even_expanded.mul_left 502
+    have seven_even := dvd_sub leading_even G_even
+    norm_num at seven_even
+  have H_unit : IsUnit 2 (H : ℚ) := by
+    have H_cast : (H : ℚ) = code (peeledHeadWord β (.c :: .c :: headTail)) := by
+      dsimp only [H]
+      norm_num
+    rw [H_cast]
+    exact head_unit.1
+  have one_unit : IsUnit 2 (1 : ℚ) :=
+    intCast_isUnit_of_not_dvd (by norm_num)
+  have mu_unit : IsUnit 2 (μ : ℚ) := intCast_isUnit_of_not_dvd mu_not_even
+  have G_unit : IsUnit 2 (G : ℚ) := intCast_isUnit_of_not_dvd G_not_even
+  have V_unit : IsUnit 2 (V : ℚ) := by
+    apply intCast_isUnit_of_not_dvd
+    rw [V_eq]
+    norm_num
+  have residual_shell : HasValue 2 (R : ℚ) 1 := by
+    simpa only [R, T, H, P, V] using shell.1
+  have residual_eq :
+      (R : ℚ) = peeledNumerator (H : ℚ) 1 μ G T V := by
+    simp only [R, peeledNumerator]
+    push_cast
+    ring
+  have impossible := peeledNumerator_twoAdic_deepens
+    H_unit one_unit mu_unit G_unit trace_shell.1 V_unit
+  apply impossible
+  rw [← residual_eq]
+  exact residual_shell
+
+/-- Every non-singleton all-erasure first block misses the next multi-role pole from a lawful
+two-`c` raw head. The exact physical depth is
+`|tagEncode β letters| - 1 = |letters| + count_b(letters) * (β+1) - 1`. -/
+theorem letterErase_rawHead_multi_shell_impossible
+    {β : Nat} (body headTail letters : List TagLetter) {μ E G : ℤ}
+    (β_large : 2 ≤ β) (multi_role : 2 ≤ letters.length)
+    (head_unit :
+      HasDecimalShell (code (peeledHeadWord β (.c :: .c :: headTail)) : ℚ) 0 0)
+    (mu_eq : 9 * μ = 52 * 10 ^ β - 7)
+    (gap_eq : E = 18 * 10 ^ β - 63)
+    (lift_eq : G = 502 * 10 ^ β - 7)
+    (shell :
+      HasDecimalShell
+        (((code (peeledHeadWord β (.c :: .c :: headTail)) : ℤ) *
+          (E * code (punctuatedUpper β letters) +
+            G * letterEraseLowerCode β body letters) -
+          10 * μ * G * letterEraseLowerCode β body letters : ℤ) : ℚ)
+        ((((tagEncode β letters).length - 1 : Nat) : ℤ))
+        ((((tagEncode β letters).length - 1 : Nat) : ℤ))) :
+    False := by
+  by_cases marker_mem : .b ∈ letters
+  · apply letterErase_rawHead_shell_impossible_of_b_mem body headTail letters
+      β_large marker_mem head_unit mu_eq gap_eq lift_eq
+    simpa only [tagEncode_length_eq_roleLength_add_markerCount] using shell
+  · let n := letters.length
+    have letters_eq : letters = List.replicate n .c := by
+      apply List.eq_replicate_length.mpr
+      intro letter letter_mem
+      cases letter with
+      | b => exact False.elim (marker_mem letter_mem)
+      | c => rfl
+    have rewritten_shell := shell
+    rw [letters_eq] at rewritten_shell
+    have allC_shell :
+        HasDecimalShell
+          (((code (peeledHeadWord β (.c :: .c :: headTail)) : ℤ) *
+            (E * code (punctuatedUpper β (List.replicate n .c)) +
+              G * allEraseLowerCode β body n) -
+            10 * μ * G * allEraseLowerCode β body n : ℤ) : ℚ)
+          (((n - 1 : Nat) : ℤ)) (((n - 1 : Nat) : ℤ)) := by
+      simpa [tagEncode_length_eq_roleLength_add_markerCount,
+        letterEraseLowerCode_eq_allEraseLowerCode] using rewritten_shell
+    have n_multi : 2 ≤ n := by
+      simpa only [n] using multi_role
+    rcases eq_or_lt_of_le n_multi with n_eq | n_large
+    · have n_eq_two : n = 2 := by omega
+      apply allCDeletion_double_rawHead_shell_impossible
+        body headTail β_large head_unit mu_eq gap_eq lift_eq
+      simpa [n_eq_two] using allC_shell
+    · refine allCDeletion_peeledDoubleCHead_shell_impossible (n := n) headTail β_large
+        (by omega) head_unit mu_eq gap_eq lift_eq
+        (allC_punctuatedUpper_code_identity β n) ?_ rfl rfl allC_shell
+      have lower_identity := allEraseLowerCode_identity β body n
+      linear_combination lower_identity
 
 /-- An all-erasure word whose second tile is `D_b`. -/
 def secondBEraseBlock (tailWidth : Nat) : List NearyTile :=

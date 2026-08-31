@@ -124,7 +124,7 @@ file owns the mathematical stock.
 | [`MM-S16`](#mm-s16-complete-ordinary-depth-two-extinction) | obstruction | no ordinary-reset orbit reaches a false pole after two completed transfers | formalized core; audited assembly | active |
 | [`MM-S17`](#mm-s17-recursive-decimal-carrier) | structure theorem and obstruction | repeated A-shell resonances have an exact two-unit carrier whose last digits form a compatible period-two cycle | formalized | active |
 | [`MM-S18`](#mm-s18-length-two-carrier-extinction) | obstruction | every consecutive multi-shell carrier transition has upper length at least three | formalized | active |
-| [`MM-S19`](#mm-s19-all-deletion-raw-head-extinction) | obstruction | no all-`D_c` block of length at least three carries a lawful initial two-`c` raw head into another multi-role pole | formalized | active |
+| [`MM-S19`](#mm-s19-all-deletion-raw-head-extinction) | obstruction | no all-`D_c` block of length at least three carries a lawful initial two-`c` raw head into another multi-role pole | formalized | graduated |
 | [`MM-S20`](#mm-s20-singleton-carrier-classification) | structure theorem and obstruction | singleton-current carrier transitions are empty, while abstract multi-to-singleton carriers exist exactly at length `m≥β+3` | formalized | active |
 | [`MM-S21`](#mm-s21-bounded-decimal-suffix-cycles) | obstruction | every emitted multi-role block has a compatible projective self-loop in every bounded decimal-suffix quotient | formalized core; audited assembly | active |
 | [`MM-S22`](#mm-s22-gap-factor-quotient-gate) | structure theorem and obstruction | every gap-clean denominator-descended carrier hitting a singleton must pass two exact gap-factor code congruences | formalized | active |
@@ -146,10 +146,11 @@ file owns the mathematical stock.
 | [`MM-S44`](#mm-s44-compiler-envelope-rule-bearing-extinction) | obstruction | compiler-emitted bodies exclude every rule-bearing phase of the two surviving all-`c` first multi-transfer shapes | formalized | active |
 | [`MM-S45`](#mm-s45-exceptional-late-one-d_b-boundary) | structure theorem and obstruction | any one-`D_b` all-erasure raw-head survivor must combine the exceptional terminal run with a `D_b` after position `β+1` | formalized | graduated |
 | [`MM-S47`](#mm-s47-global-one-d_b-raw-head-extinction) | obstruction | no one-`D_b` all-erasure block carries a lawful two-`c` raw head into another multi-role pole, in any position | formalized | graduated |
-| [`MM-S49`](#mm-s49-nonempty-marker-all-erasure-extinction) | obstruction | every all-erasure word containing at least one `D_b` misses the next multi-role pole from a lawful two-`c` raw head | formalized | active |
+| [`MM-S49`](#mm-s49-nonempty-marker-all-erasure-extinction) | obstruction | every all-erasure word containing at least one `D_b` misses the next multi-role pole from a lawful two-`c` raw head | formalized | graduated |
 | [`MM-S50`](#mm-s50-long-all-erasure-singleton-extinction) | obstruction | the long literal `D_c^(β+1)` middle has discrepancy above twelve, beyond both singleton pole values | formalized | active |
 | [`MM-S52`](#mm-s52-double-deletion-raw-ancestry-obstruction) | structure theorem and obstruction | an integral post-`D_c²` normalization forces a fixed divisibility, while the locally physical repeated-`D_c²` recurrence violates it | formalized | active |
 | [`MM-S51`](#mm-s51-double-deletion-ratio-chamber-extinction) | obstruction | the literal `D_c²` middle forces a target code ratio in an open chamber containing no physical swapped role block | formalized | active |
+| [`MM-S53`](#mm-s53-complete-all-erasure-first-entry-extinction) | obstruction | every non-singleton all-erasure first block misses the next multi-role pole from a lawful two-`c` raw head | formalized | active |
 | [`R32-S01`](#r32-s01-split-return-normal-form) | structure theorem | rank-two cuts reduce one-unit binary mortality to a `2 × 2` return recurrence | formalized | graduated |
 | [`R32-S02`](#r32-s02-two-plane-edge-square) | structure theorem | two rank-two generators are a two-vertex square of `2 × 2` edges | formalized | graduated |
 | [`R32-O01`](#r32-o01-rank-one-profile-collapse) | obstruction | a rank-one generator reduces mortality to order-at-most-three scalar recurrence zeros | audited | stock |
@@ -3878,7 +3879,7 @@ avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issue
 
 **Kind:** obstruction
 **Evidence:** formalized
-**Disposition:** active
+**Disposition:** graduated
 
 Fix deletion width `β≥2`. A decimal-unit two-`c` raw head has the exact spelling
 `1^(β+2−s)0^s` for some `1≤s≤β−1`; if `H` is its decimal code, then
@@ -3926,8 +3927,7 @@ constructing the generalized-carrier transition language.
 **Artifact:**
 [`audits/m53-decimal-all-c-raw-head-extinction-2026-08-30.md`](audits/m53-decimal-all-c-raw-head-extinction-2026-08-30.md).
 
-**Next:** classify rule-bearing and `D_b`-containing first blocks, then find a suffix invariant
-native to generalized residual carriers.
+**Next:** graduated into `MM-S53`.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
@@ -5654,7 +5654,7 @@ avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issue
 
 **Kind:** obstruction
 **Evidence:** formalized
-**Disposition:** active
+**Disposition:** graduated
 
 Every tag word containing `b` has a unique rightmost occurrence and therefore a decomposition
 
@@ -5710,8 +5710,58 @@ all-zero lower word, physical obstruction, and
 **Artifact:**
 [`audits/m53-nonempty-marker-erasure-extinction-2026-08-31.md`](audits/m53-nonempty-marker-erasure-extinction-2026-08-31.md).
 
-**Next:** assemble this branch with the pure all-`D_c` cuts and classify the remaining decimal
-rule-bearing and generalized-carrier first-entry constructors.
+**Next:** graduated into `MM-S53`.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S53: Complete all-erasure first-entry extinction
+
+**Kind:** obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+Let `w` be the role-letter word of a non-singleton all-erasure block, and let
+
+```text
+m(w)=|tagEncode_β(w)|−1
+    =|w|+#_b(w)(β+1)−1                                  (1)
+```
+
+be the exact residual depth forced by a following multi-role pole. Three cases exhaust `w`.
+
+If `b∈w`, [`MM-S49`](#mm-s49-nonempty-marker-all-erasure-extinction) factors at the unique
+rightmost marker and contradicts the shell at (1). If `w=c^n` with `n≥3`,
+[`MM-S19`](#mm-s19-all-deletion-raw-head-extinction) gives the mixed-prime contradiction.
+The sole uncovered boundary is `w=cc`. Here its exact upper and lower codes are both `77`
+modulo `100`, so the trace lies in shell `(1,1)`. The raw head, marker, lift, and lower code
+are two-adic units. Consequently the two depth-one summands in
+
+```text
+R=H(EP+GV)−10μGV                                         (2)
+```
+
+cancel to depth strictly greater than one. The required physical shell for `cc` is exactly
+`(1,1)`, a contradiction.
+
+**Scope:** every non-singleton all-erasure first block over `{D_b,D_c}` is excluded from a
+lawful distinguished two-`c` raw head toward another multi-role pole. The theorem does not
+cover rule-bearing first blocks, singleton targets, or any block after a generalized carrier.
+
+**Use:** replace the entire decimal all-erasure first-entry grammar by the empty language.
+Every surviving raw-head-to-multi block contains `R_b` or `R_c`. Later multi-carrier blocks of
+upper length at least three and the `m≥β+3` multi-to-singleton seam remain separate.
+
+**Formalization:**
+[`MatrixMortality/DecimalSetterPositioned.lean`](MatrixMortality/DecimalSetterPositioned.lean)
+proves the two-role boundary in `allCDeletion_double_rawHead_shell_impossible` and the exhaustive
+assembly in `letterErase_rawHead_multi_shell_impossible`.
+
+**Artifact:**
+[`audits/m53-all-erasure-first-entry-extinction-2026-08-31.md`](audits/m53-all-erasure-first-entry-extinction-2026-08-31.md).
+
+**Next:** classify the exact rule-bearing raw-entry grammar, then reconnect it to the later
+generalized-carrier and singleton seams.
 
 ### MM-S42: Swapped positive depth-one extinction
 

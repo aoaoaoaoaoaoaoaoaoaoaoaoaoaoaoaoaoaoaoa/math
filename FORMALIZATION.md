@@ -1859,6 +1859,13 @@ marker superpositions into the unique rightmost `D_b`. For `w=u·b·c^t`,
 theorem `letterErase_rawHead_shell_impossible_of_b_mem` combines the early, regular-head, and
 exceptional-head cuts and excludes every all-erasure word with nonempty `D_b` support.
 
+Record [`MM-S53`](SALVAGE.md#mm-s53-complete-all-erasure-first-entry-extinction) closes the
+entire non-singleton all-erasure first-entry grammar. The remaining two-role pure-`D_c` case
+has trace shell `(1,1)`, but `peeledNumerator_twoAdic_deepens` forces its raw residual strictly
+deeper at two. `letterErase_rawHead_multi_shell_impossible` combines this boundary with
+`MM-S19` for longer pure-`D_c` words and `MM-S49` for every word containing `D_b`. Hence every
+surviving distinguished raw-head-to-multi block contains a rule tile.
+
 Record [`MM-S37`](SALVAGE.md#mm-s37-decimal-three-shape-frontier-extinction) separates the
 ternary and decimal first-multi-transfer fronts. The single theorem
 `DecimalSetterDepth.firstMultiTransfer_threeShapeFrontier_impossible` consumes the three role
@@ -2602,7 +2609,7 @@ fixed-rank decision problem.
 | `DecimalSetterSuffix.lean` | bounded-suffix Hensel cycles, exact inverse-cylinder contraction, first-cylinder collision, forward decoding, and arbitrary two-prime depth transport |
 | `DecimalSetterBranchSeparation.lean` | complete hidden-branch separation and the exact asymmetric later-tail shell forced by a branch-switch collision |
 | `DecimalSetterMultitransfer.lean` | extinction of all three swapped-ternary frontier shapes under the analogous decimal carrier shells |
-| `DecimalSetterPositioned.lean` | rightmost-marker suffix calculus; exact unit coefficient under arbitrary earlier markers; global nonempty-`D_b` all-erasure raw-head-to-multi extinction |
+| `DecimalSetterPositioned.lean` | rightmost-marker suffix calculus; exact unit coefficient under arbitrary earlier markers; complete all-erasure raw-head-to-multi extinction |
 | `PairedMortality.lean` | common-column mortality converse and exact integer `4 × 4` family |
 | `PhaseFracture.lean` | phase normalization and dimension-free projective-identification contradiction |
 | `PhaseRigidity.lean` | checked local role algebra, discrepancy commutators, and invariant-pencil rigidity |
