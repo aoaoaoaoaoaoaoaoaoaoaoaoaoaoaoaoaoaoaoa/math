@@ -1414,6 +1414,19 @@
 'MatrixMortality.TransverseDilationOrbit.inverseReduction_height_cycle' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.InverseOrbitRecurrence.integralPairBox_finite' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.InverseOrbitRecurrence.primitivePairBox_finite' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.InverseOrbitRecurrence.exists_nontrivial_stabilizer_of_orbit_collision' depends on axioms: [propext]
+'MatrixMortality.InverseOrbitRecurrence.exists_nontrivial_stabilizer_of_bounded_primitive_orbit' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.InverseOrbitRecurrence.primitiveHeight_unbounded_of_stabilizer_trivial' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.AffineGroupOrbit.multiplier_mul_mem_translationKernel' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]

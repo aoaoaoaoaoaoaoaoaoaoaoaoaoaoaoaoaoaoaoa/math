@@ -1208,6 +1208,15 @@ coprime primitive heights follow `5→3→5`. Lean also checks the integral conj
 infinity to `[9:4]` and disjointness from the target times `Stab(∞)` in those standard
 coordinates; restriction of the displayed rational matrices to `PGL₂(ℤ[1/5])` is audited.
 
+[`D2-O06`](SALVAGE.md#d2-o06-bounded-inverse-recurrence-forces-a-stabilizer) identifies the
+only possible source of bounded recurrence along a faithful normal-form path. Lean proves that
+bounded maximum-coordinate height leaves only finitely many coprime integral representatives.
+Two equal representatives reached by distinct group prefixes yield the nonidentity quotient
+`gⱼ⁻¹gᵢ` fixing the original target. Consequently a target with trivial stabilizer forces the
+primitive heights of every injective-prefix inverse orbit to be unbounded. This removes bounded
+free-orbit recurrence as a harder successor to `D2-O05`; it does not decide stabilizer triviality
+or unbounded inverse paths.
+
 Lean checks the internal algebra at the positive boundary: three positive letters surject onto
 the binary free group; quotient-blind boundaries accepting `g` and `g²` admit a nonempty identity
 witness; every injective transition on a finite invariant semantic fibre pumps an identity loop;
@@ -1710,6 +1719,7 @@ fixed-rank decision problem.
 | `CongruenceBlindOrbit.lean` | free rational shear orbit, trivial source stabilizer, projective all-modulus CRT closure, and a whole-matrix congruence ghost away from nineteen |
 | `ShearEuclidean.lean` | Euclidean chamber growth, determinant-one coprimality, and finite projective syntax bounds for the fixed step-three shear orbit |
 | `TransverseDilationOrbit.lean` | free diagonal--parabolic ping-pong, positive target stabilizer, promised-empty coset, and exact primitive-height inverse cycle |
+| `InverseOrbitRecurrence.lean` | finiteness of primitive-height boxes and the nontrivial target stabilizer forced by every bounded injective-prefix inverse orbit |
 | `AffineGroupOrbit.lean` | translation-kernel quotient and trivial-kernel fixed-point structure for rational affine groups |
 | `PadicValuation.lean` | nonzero rational p-adic shells, unequal-valuation calculus, and the adjacent-unit odd-prime obstruction |
 | `PeriodicShell.lean` | exact affine schedule composition, rational all-unit periodic cycles, and the published nonfree benchmark relation |
@@ -1928,6 +1938,7 @@ fixed-rank decision problem.
 | The dilation `D(z)=5z` and transverse parabolic `U(z)=(-2z+3)/(-3z+4)` act by strict ping-pong, making the source `[9:4]` stabilizer trivial and their free-product representation faithful | `TransverseDilationOrbit.source_outside_chambers`, `TransverseDilationOrbit.sourcePoint_stabilizer_trivial`, `TransverseDilationOrbit.representation_injective` |
 | The nonidentity positive word `UD` fixes `[3:5]`, so that target is outside the source orbit and the represented subgroup misses its transporter coset both at `[9:4]` and in standard `Stab(∞)` coordinates | `TransverseDilationOrbit.targetCycleWord_fixes_target`, `TransverseDilationOrbit.targetCycleWord_ne_one`, `TransverseDilationOrbit.targetPoint_not_reachable`, `TransverseDilationOrbit.represented_targetCoset_disjoint`, `TransverseDilationOrbit.infinityRepresentation_ne_target_mul_stabilizer` |
 | Chamber-directed inverse stripping follows the exact projective cycle `[3:5]→3→[3:5]` on coprime pairs of heights `5→3→5` | `TransverseDilationOrbit.targetPoint_mem_transverseChamber`, `TransverseDilationOrbit.inverseReduction_period_two`, `TransverseDilationOrbit.returnPoint_mem_dilationChamber`, `TransverseDilationOrbit.recurrentPairs_coprime`, `TransverseDilationOrbit.inverseReduction_height_cycle` |
+| Every bounded primitive-height orbit of pairwise distinct group prefixes contains a nonidentity quotient fixing the target; trivial target stabilizer therefore forces unbounded height | `InverseOrbitRecurrence.primitivePairBox_finite`, `InverseOrbitRecurrence.exists_nontrivial_stabilizer_of_orbit_collision`, `InverseOrbitRecurrence.exists_nontrivial_stabilizer_of_bounded_primitive_orbit`, `InverseOrbitRecurrence.primitiveHeight_unbounded_of_stabilizer_trivial` |
 | Rational affine group hits are exact modulo the translation kernel; a trivial kernel forces one common fixed point | `AffineGroupOrbit.exists_exact_hit_iff_exists_hit_mod_translationKernel`, `AffineGroupOrbit.commute_of_translationKernel_eq_bot`, `AffineGroupOrbit.act_fixedPoint_of_translationKernel_eq_bot` |
 | The raw mixed-prime affine action has a published relation at length 27, an infinite distinct equal-map family at every odd length from 29, and three independent relations at length 30 | `MixedPrimeKernel.cassaigne_ne`, `MixedPrimeKernel.wordAction_cassaigne`, `MixedPrimeKernel.kernelOddFamily_length`, `MixedPrimeKernel.kernelOddFamily_ne`, `MixedPrimeKernel.wordAction_kernelOddFamily`, `MixedPrimeKernel.kernel30_ne`, `MixedPrimeKernel.wordAction_kernel30a`, `MixedPrimeKernel.wordAction_kernel30b`, `MixedPrimeKernel.wordAction_kernel30c` |
 | Every odd-family relation is an exact homogeneous matrix relation preserved by arbitrary independent generator scaling, so nonzero unit normalization cannot restore freeness | `MixedPrimeNormalization.kernelOddFamily_count`, `MixedPrimeNormalization.kernelOddFamily_perm`, `MixedPrimeNormalization.scaledAffineGenerator_isUnit`, `MixedPrimeNormalization.wordProduct_scaledAffineGenerator_kernelOddFamily`, `MixedPrimeNormalization.scaledAffineGenerator_not_injective` |

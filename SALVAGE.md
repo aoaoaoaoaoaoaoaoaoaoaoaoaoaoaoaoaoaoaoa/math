@@ -270,6 +270,7 @@ file owns the mathematical stock.
 | [`D2-D08`](#d2-d08-rational-affine-group-orbits) | decidable stratum | every finitely generated rational affine group orbit reduces to a finite translation quotient or multiplier membership | audited; formalized core | graduated |
 | [`D2-D09`](#d2-d09-step-three-shear-height-decision) | decidable stratum | target height bounds every reduced syllable and exponent in the fixed step-three shear orbit of `[1:1]` | audited; formalized core | graduated |
 | [`D2-O05`](#d2-o05-promised-empty-free-orbit-inverse-cycle) | obstruction | a positive target stabilizer in a free dilation--parabolic orbit forces chamber-directed inverse stripping through the primitive-height cycle `5→3→5` | audited; formalized core | graduated |
+| [`D2-O06`](#d2-o06-bounded-inverse-recurrence-forces-a-stabilizer) | structural obstruction | every infinite injective-prefix rational inverse orbit with bounded primitive height contains a nontrivial target-stabilizer segment | formalized | graduated |
 | [`D2-M01`](#d2-m01-benchmark-critical-shell) | partial mechanism | the mixed-prime benchmark reduces generically to one guarded `5`-adic shell | audited | active |
 | [`D2-O01`](#d2-o01-canonical-collatz-reachability-is-not-automatic) | obstruction | full generalized-Collatz reachability is not synchronously recognizable in its canonical base | external theorem | active |
 | [`D2-O02`](#d2-o02-critical-shell-periodic-saturation) | obstruction and rewrite seed | every nonempty finite wait schedule has a rational all-unit cycle; normalized nonfreeness persists under every generator scaling, while its odd family is a two-seed cancellative pump and the positive finite basis is complete only through length 30 | formalized core; audited strengthening | active |
@@ -11083,6 +11084,52 @@ their quotient leaves an effectively well-founded inverse graph.
 [`TransverseDilationOrbit.lean`](MatrixMortality/TransverseDilationOrbit.lean)
 and
 [`m34-transverse-dilation-height-recurrence-2026-08-31.md`](audits/m34-transverse-dilation-height-recurrence-2026-08-31.md).
+
+### D2-O06: Bounded inverse recurrence forces a stabilizer
+
+**Kind:** structural obstruction
+
+**Evidence:** formalized
+
+**Disposition:** graduated
+
+Let a group `G` act on `P¹(ℚ)`, fix a target `q`, and let
+`g₀,g₁,…` be pairwise distinct normal-form prefixes. Choose a coprime integral
+pair representing each `gᵢq`. If all pairs have maximum-coordinate height at
+most `H`, two pairs coincide because the box `[-H,H]²∩ℤ²` is finite. For the
+corresponding distinct prefixes `gᵢ,gⱼ`,
+
+```text
+gᵢq=gⱼq,       (gⱼ⁻¹gᵢ)q=q,       gⱼ⁻¹gᵢ≠1.
+```
+
+Thus every bounded-height infinite inverse path with injective prefixes
+contains a nontrivial segment transported into `Stab_G(q)`. Contrapositively,
+if `q` has trivial stabilizer, the primitive heights along every such path are
+unbounded.
+
+**Scope:** the theorem does not decide whether the target stabilizer is
+trivial, bound the rate of height escape, or prove termination of an
+unbounded path. It requires distinct group prefixes; a syntax stream which
+revisits the same group element must first be reduced to a faithful normal
+form. It does not decide `UCB₂(S)`.
+
+**Use:** within injective-prefix paths, every bounded recurrence has the same
+algebraic source as `D2-O05`: its `5→3→5` cycle is the shadow of the positive
+target stabilizer `UD`. A promised-empty benchmark with trivial source and
+target stabilizers cannot strengthen `D2-O05` by another bounded-height free
+normal-form cycle. The surviving no-instance must instead support an
+unbounded-height inverse path or defeat effective stabilizer recognition.
+
+**Next promotion:** combine an effective target-stabilizer test with a
+normal-form analysis of unbounded inverse paths, or construct a
+trivial-stabilizer promised-empty instance whose forced inverse path escapes
+every primitive-height box.
+
+**Artifacts:**
+[`InverseOrbitRecurrence.lean`](MatrixMortality/InverseOrbitRecurrence.lean)
+and
+[`m34-bounded-inverse-recurrence-2026-08-31.md`](audits/m34-bounded-inverse-recurrence-2026-08-31.md).
 
 ### D2-M01: Benchmark critical shell
 
