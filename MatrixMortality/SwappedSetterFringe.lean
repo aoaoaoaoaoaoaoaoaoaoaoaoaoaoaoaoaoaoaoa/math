@@ -1460,7 +1460,9 @@ private theorem allOnes_patternSource_oneTail_false
     exact targetFactor_false_of_power_quotient target_fringe normalized_target quotient_unit
       quotient_ne_one quotient_ne_five quotient_ne_two
 
-private theorem allOnes_sourceFringe_false
+/-- No complete zero-ending source fringe can coexist with the all-ones upper fringe once the
+stable three-adic regime begins. -/
+theorem allOnes_sourceFringe_false
     {β : Nat} (β_large : 6 ≤ β) {upper source target : List Bool}
     (source_fringe : SourceFringe source) (source_last : source.getLast? = some false)
     (upper_code : 2 * swappedCode upper + 1 = 9 * 3 ^ β)
@@ -1477,7 +1479,8 @@ private theorem allOnes_sourceFringe_false
     · exact allOnes_patternSource_highTail_false (by omega) (by omega) phases front_eq source_eq
         upper_code target_fringe pole
 
-private theorem runPole_terminal_shapes
+/-- A run upper fringe satisfying the pole is one of its two terminal zero runs. -/
+theorem runPole_terminal_shapes
     {β ones : Nat} (β_large : 5 ≤ β) (ones_lower : 2 ≤ ones)
     (ones_upper : ones ≤ β + 1) {upper source target : List Bool}
     (upper_eq :
