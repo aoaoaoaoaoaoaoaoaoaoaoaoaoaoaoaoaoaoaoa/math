@@ -533,9 +533,23 @@ valuation `a−min(2b,a)` for `a=vₚ(B)` and `b=vₚ(t)`, except at the sole cr
 `a=2b`; at equality, its valuation is still nonpositive whenever the affine predecessor is
 defined. For `t=q^(w+1)`, this is the exact word-visible tax `2(w+1)vₚ(q)`. Positive denominator
 depth survives one terminal pullback only above that tax. Later shell re-entry and cross-prime
-common content remain unclassified. `R32-S44` and `R32-S45` are strict
+common content remain unclassified. `R32-S44`, `R32-S45`, and `R32-S46` are strict
 obstructions, not the arbitrary-composite classification. The two-coordinate interface does
 not reduce to finite-alphabet `M₂(3)` because every scale `qⁿ` remains a distinct return letter.
+
+The inverse shell law is now recurrence-wide. For a target coordinate `s`, the unique inverse
+branch is
+
+```text
+B(st−A)/(st+(B−A)t²−B).
+```
+
+At a denominator prime, write `a=vₚ(B)`, `b=vₚ(t)`, and `x=vₚ(s)`. If `x+b<0`, Lean proves
+that the predecessor returns to depth `a`. If `x+b>0` and the three valuations `x+b`, `2b`, and
+`a` are pairwise distinct, its depth is exactly `a−min(x+b,2b,a)`. Hence the only local
+valuation ties are `x=−b`, `x=b`, `x=a−b`, and `a=2b`. The surviving denominator problem is
+the residue and common-content dynamics on those four moving walls, not an arbitrary valuation
+assignment.
 
 The common-geometric-base hypothesis cannot be weakened to total divisibility of an arbitrary
 scale alphabet. Lean checks that `[3,15,3,3,15,3,3,3]` is pairwise totally ordered under
