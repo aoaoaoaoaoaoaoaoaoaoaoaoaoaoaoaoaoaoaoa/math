@@ -501,6 +501,8 @@ open MatrixMortality
 #print axioms DecimalSetterResonance.allC_bLeading_avoids_singletonPole
 #print axioms DecimalSetterResonance.compilerBody_resonanceEnvelope
 #print axioms DecimalSetterDepth.peeledNumerator_multi_shell
+#print axioms DecimalSetterDepth.peeledNumerator_twoAdic_deepens
+#print axioms DecimalSetterDepth.peeledMultiPole_three_le_length
 #print axioms DecimalSetterDepth.peeledStep_factor
 #print axioms DecimalSetterDepth.depthTwo_suffix_to_peeled
 #print axioms DecimalSetterDepth.bTag_cannot_head_equalDepth
