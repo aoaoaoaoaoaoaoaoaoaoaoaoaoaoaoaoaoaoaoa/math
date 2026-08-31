@@ -311,6 +311,34 @@ private theorem realTrapMaxPredecessorWait_spec
   exact Nat.find_spec
     (exists_shellRatio_pow_near threshold_positive threshold_le_one)
 
+private theorem realTrapMaxPredecessorWait_eq_of_bounds
+    {target : ℚ} (target_lower : 1 / 5 < target) (target_upper : target ≤ 1 / 2)
+    {wait : ℕ}
+    (next_power_lt :
+      (2 / 3 : ℚ) ^ (wait + 1) < (10 / 3 : ℚ) * (target - 1 / 5))
+    (threshold_le_power :
+      (10 / 3 : ℚ) * (target - 1 / 5) ≤ (2 / 3 : ℚ) ^ wait) :
+    realTrapMaxPredecessorWait target = wait := by
+  obtain ⟨candidate_next_lt, threshold_le_candidate⟩ :=
+    realTrapMaxPredecessorWait_spec target_lower target_upper
+  apply Nat.le_antisymm
+  · by_contra candidate_not_le
+    have wait_succ_le_candidate : wait + 1 ≤ realTrapMaxPredecessorWait target := by omega
+    have power_le :
+        (2 / 3 : ℚ) ^ realTrapMaxPredecessorWait target ≤
+          (2 / 3 : ℚ) ^ (wait + 1) :=
+      (pow_le_pow_iff_right_of_lt_one₀ (by norm_num) (by norm_num)).2
+        wait_succ_le_candidate
+    linarith
+  · by_contra wait_not_le
+    have candidate_succ_le_wait : realTrapMaxPredecessorWait target + 1 ≤ wait := by omega
+    have power_le :
+        (2 / 3 : ℚ) ^ wait ≤
+          (2 / 3 : ℚ) ^ (realTrapMaxPredecessorWait target + 1) :=
+      (pow_le_pow_iff_right_of_lt_one₀ (by norm_num) (by norm_num)).2
+        candidate_succ_le_wait
+    linarith
+
 /-- Within the real trap, every one-step predecessor wait lies among the largest admissible wait
 and its two predecessors. -/
 theorem shellStep_realTrap_wait_window
@@ -448,28 +476,8 @@ theorem exists_shellStep_realTrap_iff_three_candidates
 
 private theorem realTrapMaxPredecessorWait_sharpTarget :
     realTrapMaxPredecessorWait (49 / 150 : ℚ) = 2 := by
-  obtain ⟨candidate_next_lt, threshold_le_candidate⟩ :=
-    realTrapMaxPredecessorWait_spec (target := (49 / 150 : ℚ)) (by norm_num) (by norm_num)
-  have candidate_le : realTrapMaxPredecessorWait (49 / 150 : ℚ) ≤ 2 := by
-    by_contra candidate_not_le
-    have three_le_candidate : 3 ≤ realTrapMaxPredecessorWait (49 / 150 : ℚ) := by omega
-    have power_le :
-        (2 / 3 : ℚ) ^ realTrapMaxPredecessorWait (49 / 150 : ℚ) ≤ (2 / 3 : ℚ) ^ 3 :=
-      (pow_le_pow_iff_right_of_lt_one₀ (by norm_num) (by norm_num)).2
-        three_le_candidate
-    norm_num at threshold_le_candidate power_le
-    linarith
-  have two_le_candidate : 2 ≤ realTrapMaxPredecessorWait (49 / 150 : ℚ) := by
-    by_contra two_not_le
-    have candidate_next_le : realTrapMaxPredecessorWait (49 / 150 : ℚ) + 1 ≤ 2 := by omega
-    have power_le :
-        (2 / 3 : ℚ) ^ 2 ≤
-          (2 / 3 : ℚ) ^ (realTrapMaxPredecessorWait (49 / 150 : ℚ) + 1) :=
-      (pow_le_pow_iff_right_of_lt_one₀ (by norm_num) (by norm_num)).2
-        candidate_next_le
-    norm_num at candidate_next_lt power_le
-    linarith
-  omega
+  exact realTrapMaxPredecessorWait_eq_of_bounds (by norm_num) (by norm_num)
+    (by norm_num) (by norm_num)
 
 /-- The uniform three-wait window is sharp: one target has real-trap predecessors at exactly
 three distinct waits. -/
@@ -486,6 +494,90 @@ theorem shellStep_realTrap_wait_window_sharp (wait : ℕ) :
     · exact ⟨19 / 90, by norm_num, by norm_num [shellStep]⟩
     · exact ⟨19 / 60, by norm_num, by norm_num [shellStep]⟩
     · exact ⟨19 / 40, by norm_num, by norm_num [shellStep]⟩
+
+/-- A real-trap point with an explicit Archimedean depth and normalized mantissa. -/
+def realTrapBandPoint (depth : ℕ) (mantissa : ℚ) : ℚ :=
+  1 / 5 + (3 / 10 : ℚ) * (2 / 3 : ℚ) ^ depth * mantissa
+
+/-- Every normalized mantissa gives a point in its displayed real-trap band. -/
+theorem realTrapBandPoint_mem
+    (depth : ℕ) {mantissa : ℚ} (mantissa_lower : 2 / 3 < mantissa)
+    (mantissa_upper : mantissa ≤ 1) :
+    realTrapBandPoint depth mantissa ∈ Set.Ioc (1 / 5 : ℚ) (1 / 2) := by
+  constructor
+  · simp only [realTrapBandPoint]
+    have power_positive : 0 < (2 / 3 : ℚ) ^ depth := by positivity
+    nlinarith
+  · have power_le : (2 / 3 : ℚ) ^ depth ≤ 1 :=
+      pow_le_one₀ (by norm_num) (by norm_num)
+    have power_nonneg : 0 ≤ (2 / 3 : ℚ) ^ depth := by positivity
+    have scaled_le : (2 / 3 : ℚ) ^ depth * mantissa ≤ 1 := by
+      calc
+        (2 / 3 : ℚ) ^ depth * mantissa ≤ (2 / 3 : ℚ) ^ depth * 1 :=
+          mul_le_mul_of_nonneg_left mantissa_upper power_nonneg
+        _ ≤ 1 := by simpa using power_le
+    simp only [realTrapBandPoint]
+    linarith
+
+/-- The displayed depth of a normalized real-trap band point is its exact maximal predecessor
+wait. -/
+theorem realTrapMaxPredecessorWait_bandPoint
+    (depth : ℕ) {mantissa : ℚ} (mantissa_lower : 2 / 3 < mantissa)
+    (mantissa_upper : mantissa ≤ 1) :
+    realTrapMaxPredecessorWait (realTrapBandPoint depth mantissa) = depth := by
+  have point_mem := realTrapBandPoint_mem depth mantissa_lower mantissa_upper
+  apply realTrapMaxPredecessorWait_eq_of_bounds point_mem.1 point_mem.2
+  · simp only [realTrapBandPoint]
+    ring_nf
+    have power_positive : 0 < (2 / 3 : ℚ) ^ depth := by positivity
+    nlinarith
+  · simp only [realTrapBandPoint]
+    ring_nf
+    have power_nonneg : 0 ≤ (2 / 3 : ℚ) ^ depth := by positivity
+    nlinarith
+
+/-- Every target band at depth at least two contains a point whose deepest predecessor has any
+prescribed source depth at least seven and any normalized source mantissa. -/
+theorem shellStep_realTrap_poleBranch_full
+    {targetDepth sourceDepth : ℕ} (targetDepth_lower : 2 ≤ targetDepth)
+    (sourceDepth_lower : 7 ≤ sourceDepth) {mantissa : ℚ}
+    (mantissa_lower : 2 / 3 < mantissa) (mantissa_upper : mantissa ≤ 1) :
+    let source := realTrapBandPoint sourceDepth mantissa
+    let targetMantissa :=
+      9 / 10 + (27 / 20 : ℚ) * (2 / 3 : ℚ) ^ sourceDepth * mantissa
+    let target := realTrapBandPoint targetDepth targetMantissa
+    source ∈ Set.Ioc (1 / 5 : ℚ) (1 / 2) ∧
+      target ∈ Set.Ioc (1 / 5 : ℚ) (1 / 2) ∧
+      realTrapMaxPredecessorWait source = sourceDepth ∧
+      realTrapMaxPredecessorWait target = targetDepth ∧
+      shellStep (targetDepth - 2) source = target := by
+  let targetMantissa :=
+    9 / 10 + (27 / 20 : ℚ) * (2 / 3 : ℚ) ^ sourceDepth * mantissa
+  have depth_power_le : (2 / 3 : ℚ) ^ sourceDepth ≤ (2 / 3 : ℚ) ^ 7 :=
+    (pow_le_pow_iff_right_of_lt_one₀ (by norm_num) (by norm_num)).2 sourceDepth_lower
+  have depth_power_nonneg : 0 ≤ (2 / 3 : ℚ) ^ sourceDepth := by positivity
+  have mantissa_positive : 0 < mantissa := by linarith
+  have targetMantissa_lower : (2 / 3 : ℚ) < targetMantissa := by
+    simp only [targetMantissa]
+    have product_nonneg :
+        0 ≤ (2 / 3 : ℚ) ^ sourceDepth * mantissa :=
+      mul_nonneg depth_power_nonneg mantissa_positive.le
+    nlinarith
+  have targetMantissa_upper : targetMantissa ≤ 1 := by
+    simp only [targetMantissa]
+    nlinarith
+  have source_mem := realTrapBandPoint_mem sourceDepth mantissa_lower mantissa_upper
+  have target_mem :=
+    realTrapBandPoint_mem targetDepth targetMantissa_lower targetMantissa_upper
+  have source_candidate :=
+    realTrapMaxPredecessorWait_bandPoint sourceDepth mantissa_lower mantissa_upper
+  have target_candidate :=
+    realTrapMaxPredecessorWait_bandPoint targetDepth targetMantissa_lower targetMantissa_upper
+  refine ⟨source_mem, target_mem, source_candidate, target_candidate, ?_⟩
+  simp only [realTrapBandPoint, shellStep]
+  rw [show targetDepth = targetDepth - 2 + 2 by omega, pow_add]
+  norm_num
+  ring
 
 /-- A five-adic unit target in the half-open real trap has a unit predecessor there. -/
 theorem exists_shellStep_realTrap_unit_predecessor
