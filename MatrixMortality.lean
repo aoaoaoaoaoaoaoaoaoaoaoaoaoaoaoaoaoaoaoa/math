@@ -104,6 +104,7 @@ import MatrixMortality.MixedBranchingRecognizer
 import MatrixMortality.MixedBranchingPersistentGuard
 import MatrixMortality.GuardedTwoStateLift
 import MatrixMortality.GuardedMixedPrimeBridge
+import MatrixMortality.GuardedMixedPrimeFork
 import MatrixMortality.SquareRootPunctuation
 import MatrixMortality.TernaryClosedBlockNoGo
 import MatrixMortality.ThreePhaseBinaryNoGo

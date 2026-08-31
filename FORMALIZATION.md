@@ -1797,6 +1797,7 @@ fixed-rank decision problem.
 | `MixedBranchingPersistentGuard.lean` | even persistent-guard family preserving the complete `bcbcbb` zero language with full-rank data `b` |
 | `GuardedTwoStateLift.lean` | arbitrary odd two-state orbit, singular scalar gate, full-rank persistent lift, and exact source-family same-zero interface |
 | `GuardedMixedPrimeBridge.lean` | homogeneous mixed-prime block-code endpoint semantics, automatic parity, `bcbc` three-map necessity, and letterwise-code obstruction |
+| `GuardedMixedPrimeFork.lean` | injective affine-word calculus, forced flat/nested macro equality, fork-kernel dichotomy, and common-fixed-point obstruction |
 | `ExpandingHistoryNoGo.lean` | reset-affine orbit, finite reverse automaton, regularity, and universal computability obstruction |
 | `CancellativeProjectiveNoGo.lean` | paired residual conic, finite support-rank closure, cancellative role fractions, and projective commutator rigidity |
 | `PairedInverseChamber.lean` | one-turn residual chambers, protected formal inverse states, and positive forward-cone separation |
@@ -2101,6 +2102,8 @@ fixed-rank decision problem.
 | An odd two-state orbit plus one scalar gate gives an exact three-state all-word compiler iff its `c`-headed incidences equal the paired zeros | `GuardedTwoStateLift.coreState_second_odd_of_rows`, `GuardedTwoStateLift.coefficient_eq_zero_iff_gateLanguage`, `GuardedTwoStateLift.allWords_sameZero_iff_data_c_gate`, `GuardedTwoStateLift.family_sameZero_iff_data_c_gate` |
 | Every block-coded mixed-prime guarded core is exact fixed-endpoint reachability and inherits the odd-coordinate invariant from an odd source denominator, pointwise and for source families | `GuardedMixedPrimeBridge.affineValue_wordProduct`, `GuardedMixedPrimeBridge.benchmarkCore_coreState_second_odd`, `GuardedMixedPrimeBridge.benchmarkCore_gate_eq_zero_iff`, `GuardedMixedPrimeBridge.benchmarkCore_allWords_sameZero_iff_endpoint`, `GuardedMixedPrimeBridge.benchmarkFamily_sameZero_iff_endpoint` |
 | Exact `bcbc` suffix gating forces three pairwise distinct core matrices and, for endpoint gates, three pairwise distinct affine actions; every letterwise relabeling into the two mixed-prime letters is excluded | `GuardedMixedPrimeBridge.bcbc_gate_generators_pairwise_ne`, `GuardedMixedPrimeBridge.bcbc_macro_actions_pairwise_ne`, `GuardedMixedPrimeBridge.no_letterwise_benchmark_bcbc_gate` |
+| Mixed-prime word actions are injective, nonempty words have a unique affine fixed point, and equal slope plus one common fixed point determines the complete action | `GuardedMixedPrimeFork.wordAction_injective`, `GuardedMixedPrimeFork.wordAction_sub`, `GuardedMixedPrimeFork.wordAction_fixedPoint_unique_of_ne_nil`, `GuardedMixedPrimeFork.wordAction_eq_of_common_fixedPoint_of_scale_eq` |
+| Every exact `bcbc` endpoint code identifies the flat and nested fork actions, hence gives either a literal macro equation or a distinct mixed-prime kernel pair; three macros with one common affine fixed point are impossible | `GuardedMixedPrimeFork.bcbc_fork_macro_common_fixedPoint`, `GuardedMixedPrimeFork.bcbc_fork_macro_scale_eq`, `GuardedMixedPrimeFork.bcbc_fork_macro_actions_eq`, `GuardedMixedPrimeFork.bcbc_fork_macro_word_or_kernel`, `GuardedMixedPrimeFork.no_bcbc_endpoint_of_common_macro_fixedPoint` |
 | A matrix square equal to an outer product gives the complete `SS`-free mortality grammar | `SquareRootPunctuation.isMortal_iff_exists_squareFree_zero` |
 | The explicit source-uniform Neary punctuation matrix has the required square and rank two | `SquareRootPunctuation.nearySquareRoot_sq`, `SquareRootPunctuation.nearySquareRoot_rank` |
 | Exact coefficient preservation on the `R_bR_b`-free subshift forces the `R_b` matrix to be a unit | `SquareRootPunctuation.ruleB_isUnit_of_exact_on_squareFree` |
@@ -2482,6 +2485,18 @@ matrices to be pairwise distinct. For endpoint cores it strengthens
 this to pairwise distinct affine action functions. Consequently no letterwise map from the three
 paired controls to the two raw benchmark letters can work; a surviving route needs genuine
 macros with three distinct induced affine maps.
+
+`G3-S08` cancels the fixed terminal prefix on the accepted `bcbc` forks `[]`, `[false]`, and
+`[true]`. Raw `D,T` words are injective, so the encoded flat and nested fork blocks both fix the
+toggled source. Their control Parikh vectors are equal: each block contains eight data-`b`, four
+data-`c`, and four toggle controls. Hence their encoded raw words have equal affine slope. Lean's
+word-difference formula then proves that the two fork macros induce the same affine action on all
+of `ℚ`, and therefore commute. An exact code consequently supplies either a literal equality of
+the expanded raw fork words or a pair of distinct words in the mixed-prime kernel. Lean also
+excludes the elementary escape in which all three control macros share one affine fixed point: a
+nonempty flat fork has a unique fixed point, toggle injectivity then fixes the source, and the
+certified rejected collision suffix reaches the forced target. The remaining branch must combine
+a non-common-fixed macro triple with a literal morphic relation or a genuine kernel relation.
 
 For `G3-O20`, Lean proves the free-monoid tail law: if one fixed-boundary equation with stationary
 left and right pump blocks holds at exponents `N` and `N+1`, it holds at every exponent `N+k`.

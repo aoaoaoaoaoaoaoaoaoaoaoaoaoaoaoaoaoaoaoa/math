@@ -255,6 +255,7 @@ file owns the mathematical stock.
 | [`G3-C07`](#g3-c07-persistent-guard-rank-escape) | fixed-instance compiler | an even persistent guard makes data `b` full-rank while preserving the complete `bcbcbb` zero language | formalized | graduated |
 | [`G3-C08`](#g3-c08-guarded-two-state-lift) | conditional compiler | an odd two-state orbit and one scalar gate compile the complete three-state same-zero obligation | formalized | graduated |
 | [`G3-S06`](#g3-s06-guarded-mixed-prime-endpoint-bridge) | structural reduction and obstruction | every block-coded mixed-prime guard is fixed-endpoint reachability, while `bcbc` forces three distinct core maps and forbids letterwise coding | formalized | active |
+| [`G3-S08`](#g3-s08-mixed-prime-macro-fork-rigidity) | structure theorem and obstruction | exact endpoint coding identifies the flat and nested fork actions, while a common fixed point for all three macros is impossible | formalized | active |
 | [`G3-M02`](#g3-m02-square-root-punctuation-fracture) | partial mechanism | a rank-two square root gives an exact `SS`-free mortality grammar | formalized | closed |
 | [`G3-O10`](#g3-o10-square-root-boundary-saturation) | obstruction | every nondegenerate rank-one square root preserves boundary coefficient zeros | formalized | graduated |
 | [`G3-M01`](#g3-m01-free-group-discrepancy-engine) | partial mechanism | Carvalho's transducer gives an all-word marker-tail equation and a cyclic exponent-one equalizer | audited | active |
@@ -10092,6 +10093,85 @@ lane.
 **Next:** construct source-dependent macros and endpoints whose fixed-endpoint language is the
 paired `c`-suffix language, or prove that no finite block morphism has this preimage. Any search
 must quotient the checked mixed-prime kernel relations and retain the exact normalized mantissa.
+
+### G3-S08: Mixed-prime macro fork rigidity
+
+**Kind:** structure theorem and obstruction
+
+**Evidence:** formalized
+
+**Disposition:** active
+
+Every raw mixed-prime word acts injectively on `ℚ`. Its affine slope is
+
+```text
+σ(w)=∏_(letter in w) σ(letter),     σ(D)=2/3,     σ(T)=3/5.
+```
+
+Lean proves the exact difference law
+
+```text
+wordAction(w,x)−wordAction(w,y)=σ(w)(x−y).
+```
+
+Thus two word actions with one common fixed point and the same slope agree on every rational
+state. A nonempty word has `0<σ(w)<1` and therefore has a unique fixed point.
+
+Now assume a block code `κ` satisfies the `G3-S06` endpoint equation for the fixed `bcbc` source.
+Remove the compulsory leading data `c` from the canonical terminal-fork controls and put
+
+```text
+x = wordAction(κ(toggle),source).
+```
+
+The terminal forks indexed by `[]`, `[false]`, and `[true]` give
+
+```text
+P(x)=target,     P(F_flat(x))=target,     P(F_nested(x))=target,
+```
+
+where `P` is the encoded fixed terminal-prefix suffix. Since `P` is injective,
+
+```text
+F_flat(x)=x=F_nested(x).
+```
+
+The flat and nested control blocks each contain eight data-`b`, four data-`c`, and four toggle
+controls. Their encoded raw words therefore have the same slope for every choice of macros.
+Common fixed point plus equal slope yields the global identity
+
+```text
+wordAction(κ*(flatFork),z)=wordAction(κ*(nestedFork),z)     for every z∈ℚ.
+```
+
+In particular the two fork actions commute. Every exact code must therefore satisfy one of two
+sharply separated obligations: its expanded raw fork words are literally equal, giving a free-
+monoid morphism equation, or they are distinct words in the mixed-prime affine kernel.
+
+There is also a terminal obstruction. If the three control macros share one affine fixed point
+`p`, exactness is impossible. `G3-S06` makes at least one macro nonempty; the flat fork is then a
+strict contraction. Its fixed point `x` above must equal `p`. Toggle injectivity forces
+`source=p`; every encoded suffix then fixes `p`, and an accepted terminal suffix forces
+`target=p`. The certified rejected data-`b` collision suffix also reaches `p`, contradicting the
+endpoint equation.
+
+**Scope:** the theorem does not exclude three macros with no common affine fixed point. It does
+not classify solutions of the substituted free-monoid equation, and it does not decide which
+distinct expanded fork words lie in the mixed-prime kernel. Equality of the two fork actions is
+necessary, not sufficient, for the complete arbitrary-word converse.
+
+**Use:** every live mixed-prime `G3-C08` constructor must present a literal macro word equation or
+an explicit kernel relation for the flat/nested fork pair, while avoiding a common fixed point for
+its three macro actions. Test this before endpoint selection or normalized-mantissa analysis.
+
+**Artifact:**
+[`GuardedMixedPrimeFork.lean`](MatrixMortality/GuardedMixedPrimeFork.lean) and
+[`m34-mixed-prime-macro-fork-rigidity-2026-08-31.md`](audits/m34-mixed-prime-macro-fork-rigidity-2026-08-31.md).
+
+**Next:** classify the literal morphism equation and the distinct-kernel branch separately. The
+published shortest relation gives an immediate length tax once literal equality is excluded; the
+checked kernel completion should then test whether any relation admits three pairwise-distinct,
+non-common-fixed macro actions.
 
 ### G3-O13: Rational serializer pumping
 
