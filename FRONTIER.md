@@ -1157,6 +1157,14 @@ normalization. The exact internal survivor is point reachability in a finite rat
 potentially the joint `M₂(3)` core. A nonprojectively-involutive toggle and a full-rank data map
 remain separate structural escapes.
 
+[`G3-O29`](SALVAGE.md#g3-o29-one-chart-projective-hard-core) proves that “potentially” is already
+an exact hardness statement. Every two-generator rational projective-incidence instance embeds
+in one common invariant plane by `A↦diag(A,0)`, with identity toggle and row/column extended by
+zero. Deleting raw toggles preserves the coefficient word-for-word, and the toggle-free embedding
+is a section. Thus the one-chart atlas subfamily is instancewise equivalent to the `D2-S01` core;
+a general atlas decision algorithm would decide `M₂(3)`. This is not an undecidability result,
+and arbitrary multi-chart instances are not reduced back to one `M₂(3)` instance.
+
 [`G3-M02`](SALVAGE.md#g3-m02-square-root-punctuation-fracture) supplied a complete direct-mortality
 grammar. The source-uniform rational rank-two matrix `S` satisfies
 
@@ -1403,7 +1411,7 @@ or neutral word across the return, use an empty consume, or split recurrent outp
 | Lane | Available leverage | Decisive obstruction or obligation |
 | --- | --- | --- |
 | Common-kernel shuttle | The exact `bcbb` compiler moves its common data kernel out through the toggle and recovers it at the next data action | Uniformize this non-invariant shuttle in `(β,body)`; every toggle-invariant guard factors through the two-dimensional quotient |
-| Transverse-kernel terminal dynamics | `G3-O26` kills row retuning on the fixed orbit; `G3-O27` confines every singular-data/projectively-involutive variant to six rank-at-most-two carriers | Solve finite rational `P¹` point reachability, potentially with `M₂(3)`, or use non-scalar toggle powers or a full-rank data map |
+| Transverse-kernel terminal dynamics | `G3-O26` kills row retuning; `G3-O27` gives the six-carrier atlas; `G3-O29` embeds the full `M₂(3)` core in one identity-toggle chart | Solve the joint dimension-two incidence node, impose a strict decidable stratum, or use non-scalar toggle powers or a full-rank data map |
 | Positive projective transition lower bound | Same-zero dimension three is point-line incidence in `P²`, and actual one-sided shifts retain finite rank/kernel/image data | Derive a uniform nonstationary or noncommuting shift incompatibility from an unbounded terminal section; static support rank, formal inverse completion, fixed equal-length return flowers, and unary consecutive-repeat escape are forbidden |
 | Global word-residual recoding | Longer noncommutative atoms can retain order while discarding the four additive role channels | Escape `G3-D05`: fixed-priority affine counters and all one-way reset/transfer/fanout cascades are decidable |
 | Head-separated three-schema source | `G3-C04` discharges every arbitrary-trace forcing obligation locally; `G3-O24` isolates the directed stable-cone alternative | Preserve an undecidable mixed or neutral word across returns, or realize zero-sensitive S5 GLB decoding after the `G3-O25` separator-rank fork; complete pure forks are decidable by `G3-D07` |
@@ -1427,9 +1435,10 @@ raceable leaves:
    Prove its state formula and scalar-zero equivalence uniformly in `(β,body)` on the complete
    free control monoid. Toggle-invariant refresh is closed.
 2. **Transverse line-atlas escape.** Build a source-computable arbitrary-body recognizer using
-   finite rational `P¹` point reachability, non-scalar toggle powers, or a full-rank data map.
+   the `M₂(3)` projective-incidence core, non-scalar toggle powers, or a full-rank data map.
    Pure kernel geometry, exceptional fibres, minimum-body examples, terminal-row retuning, and
-   genuinely two-dimensional dynamics under singular data plus projective involution are closed.
+   genuinely two-dimensional dynamics under singular data plus projective involution are closed;
+   general one-chart incidence cannot be declared decidable without resolving `M₂(3)`.
 3. **Positive projective transition obstruction.** Derive from a source-unbounded terminal
    section a finite shift incompatibility which no three-dimensional rational same-zero
    representation can realize for any combination of generator ranks and kernels. It must use
@@ -1526,8 +1535,9 @@ construction already realizes the bilinear fibre intersection and every minimum-
 must now change the orbit itself. `G3-O27` proves that singular data plus a projectively
 involutive toggle still yields only six rank-at-most-two linear carriers, with whole-carrier or
 rank-at-most-one terminal sections. Its exact internal survivor is point reachability in a finite
-rational `P¹` atlas, potentially shared with `M₂(3)`; otherwise the constructor must use
-non-scalar toggle powers or a full-rank data map.
+rational `P¹` atlas. `G3-O29` embeds the complete `M₂(3)` incidence core already in one common
+identity-toggle chart; otherwise the constructor must use non-scalar toggle powers or a full-rank
+data map.
 A lower-bound attack must exclude both positive
 architectures through actual transition data. Backward cancellation, inverse cofinality, and
 static incidence cannot do so. Do not spend another attack on separator placement, fixed anchors,
@@ -2536,6 +2546,13 @@ problem and integer mortality are computably interreducible.
 
 The reduction has only one incidence instance. Multiple endpoint pairs arise for larger
 families with several singular generators, not in the hard three-generator case.
+
+[`G3-O29`](SALVAGE.md#g3-o29-one-chart-projective-hard-core) identifies this exact node inside
+the `M₃(4)` transverse campaign. The lifts `A↦diag(A,0)` and `B↦diag(B,0)`, together with identity
+toggle and zero-extended endpoints, preserve every scalar coefficient after toggle erasure. For
+invertible `A,B`, both lifts have rank exactly two and the same invariant image plane. Hence even
+the one-chart projectively involutive line atlas is `M₂(3)`-hard. Multi-chart coherence may make
+the general atlas richer, but it cannot make the full class easier than this subfamily.
 
 ### Established and provisional decidable strata
 

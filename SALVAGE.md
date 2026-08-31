@@ -234,6 +234,7 @@ file owns the mathematical stock.
 | [`G3-O18`](#g3-o18-transverse-minimum-body-countermodel) | fixed-subclass compiler | distinct rank-two kernels encode every paired history and exactly recognize all minimum bodies | formalized | graduated |
 | [`G3-O26`](#g3-o26-transverse-terminal-row-obstruction) | obstruction | two `bcbc` terminal histories force every exact row on the fixed transverse orbit to vanish | formalized | graduated |
 | [`G3-O27`](#g3-o27-projective-toggle-line-atlas) | obstruction | singular data and a projectively involutive toggle confine every raw orbit to six fixed rank-at-most-two carriers | formalized | graduated |
+| [`G3-O29`](#g3-o29-one-chart-projective-hard-core) | hardness embedding | one invariant plane with identity toggle already contains exact two-generator rational projective incidence | formalized | graduated |
 | [`G3-O02`](#g3-o02-rational-phase-fracture) | obstruction | a mortal paired instance has no rational phase-state same-zero compression | audited | stock |
 | [`G3-O03`](#g3-o03-history-sensitive-minimal-body-fracture) | obstruction | minimal bodies admit an exact history-sensitive three-state same-zero compiler | formalized | graduated |
 | [`G3-O04`](#g3-o04-expanding-affine-history-no-go) | obstruction | finite-mode expanding one-coordinate history has decidable target reachability | audited | graduated |
@@ -9989,9 +9990,70 @@ involutive toggle supplies no hidden projective history beyond this finite atlas
 **Artifact:** [`TransverseLineAtlas.lean`](MatrixMortality/TransverseLineAtlas.lean) and
 [`m34-projective-toggle-line-atlas-2026-08-31.md`](audits/m34-projective-toggle-line-atlas-2026-08-31.md).
 
-**Next:** determine whether the finite rational `P¹` point-reachability survivor reduces to, or
-strictly extends, `M₂(3)`; otherwise construct a source-computable escape using non-scalar toggle
-powers or full-rank data.
+**Next:** [`G3-O29`](#g3-o29-one-chart-projective-hard-core) proves that even the one-chart
+subfamily contains the full `M₂(3)` projective-incidence core. Attack that joint core, or impose a
+strict decidable restriction before returning to the atlas.
+
+### G3-O29: One-chart projective hard core
+
+**Kind:** hardness embedding
+
+**Evidence:** formalized
+
+**Disposition:** graduated
+
+Let `A_b,A_c∈M₂(ℚ)` and let `r,c∈ℚ²`. Write
+
+```text
+U = [e₁ e₂] : ℚ² → ℚ³,        V = Uᵀ,        VU = I₂,
+```
+
+and define
+
+```text
+D_x = U A_x V,        T = I₃,        λ = rV,        γ = Uc.
+```
+
+Both data matrices are singular. If `A_x` is invertible, `D_x` has rank exactly two and image
+exactly the common invariant plane `im U`. The toggle is a matrix-level involution. For a raw
+word `w∈{D_b,D_c,T}*`, let `eraseToggles(w)` delete every `T` without reversing the remaining
+letters. Lean proves the exact all-word identity
+
+```text
+λ D_w γ = r A_eraseToggles(w) c.
+```
+
+Conversely, mapping every two-letter word to the same data word with no toggles is a section of
+`eraseToggles`. Therefore
+
+```text
+∃w∈{D_b,D_c,T}*: λD_wγ=0
+  ↔ ∃u∈{A_b,A_c}*: rA_uc=0.
+```
+
+This is an exact instancewise equivalence for the one-chart lifted subfamily, including the empty
+word. No intended-language restriction, projective division, or promise about a successful word
+is used.
+
+**Scope:** for the `M₂(3)` hard core, require `A_b,A_c` invertible and `r,c` nonzero; then the
+right side is precisely the two-generator rational projective point-to-point incidence problem
+of `D2-S01`. The Lean embedding itself is stronger algebraically and permits singular generators
+or zero endpoints. The formal result does not mechanize the separate minimal-mortal-word proof
+that `D2-S01` is equivalent to all of `M₂(3)`, which remains audited. It also does not reduce an
+arbitrary multi-chart atlas back to one `M₂(3)` instance.
+
+**Use:** stop seeking a general decision theorem for the `G3-O27` survivor that bypasses the
+dimension-two wall. The full atlas problem is at least as hard as `M₂(3)` even with identity
+toggle, one common exact image plane, and no genuine chart switching. A useful decidable atlas
+stratum must exclude some established `M₂(3)` hard-core instance, for example through the
+projectively unimodular, invariant-pair, or valuation hypotheses already recorded in the
+dimension-two campaign.
+
+**Artifact:** [`TransverseLineHardCore.lean`](MatrixMortality/TransverseLineHardCore.lean) and
+[`m34-transverse-line-hard-core-2026-08-31.md`](audits/m34-transverse-line-hard-core-2026-08-31.md).
+
+**Next:** treat one-chart atlas incidence and `M₂(3)` as one research node; pursue `D2-S03`'s
+mixed-prime shell or another genuine dimension-two cut rather than atlas bookkeeping.
 
 ### G3-O13: Rational serializer pumping
 

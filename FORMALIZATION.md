@@ -1943,6 +1943,7 @@ fixed-rank decision problem.
 | `HistoryFracture.lean` | null-history counterexample, minimum-body base-five encoder, and integral mortality lift |
 | `TransverseHistory.lean` | injective mixed-radix transverse orbit, exact minimum-body zero language, and uniform terminal-row obstruction |
 | `TransverseLineAtlas.lean` | six-carrier normal form for singular data with a projectively involutive toggle and terminal-section dimension bound |
+| `TransverseLineHardCore.lean` | exact one-plane embedding of two-generator projective incidence into the identity-toggle transverse atlas |
 | `BranchingHistory.lean` | fixed `bcbc` terminal forks and affine positional lower bounds |
 | `AffineRecognizer.lean` | generic singular three-state guard-and-carry representation calculus |
 | `BranchingRecognizer.lean` | complete `bcbc` residual grammar and rational three-state recognizer |
@@ -2223,6 +2224,11 @@ fixed-rank decision problem.
 | Singular three-dimensional data images and all six carriers have vector dimension at most two, while boundary carriers have dimension at most one | `TransverseLineAtlas.range_finrank_le_two_of_det_zero`, `TransverseLineAtlas.boundary_carrier_finrank_le_one`, `TransverseLineAtlas.carrier_finrank_le_two` |
 | A terminal row cuts each carrier in the whole carrier or a subspace of vector dimension at most one | `TransverseLineAtlas.zeroSection_eq_carrier_or_finrank_le_one`, `TransverseLineAtlas.chart_zeroSection_classification` |
 | Every exact singular/projectively-involutive paired recognizer has its complete raw-control zero language on those six sections | `TransverseLineAtlas.pairedZero_iff_mem_six_zeroSections`, `TransverseLineAtlas.pairedZero_singular_sixLineAtlas` |
+| Every two-state generator embeds as a singular three-state map with one common invariant plane | `TransverseLineHardCore.liftMatrix_det`, `TransverseLineHardCore.liftMatrix_mulVec_mem_plane`, `TransverseLineHardCore.liftMatrix_range_eq_plane`, `TransverseLineHardCore.data_carrier_eq_plane` |
+| The plane inclusion and row extension preserve nonzero projective endpoints | `TransverseLineHardCore.liftColumn_eq_zero_iff`, `TransverseLineHardCore.liftRow_eq_zero_iff` |
+| Invertible two-state generators lift to exact rank-two data maps and the identity toggle is involutive | `TransverseLineHardCore.liftMatrix_rank_eq_two`, `TransverseLineHardCore.data_rank_eq_two`, `TransverseLineHardCore.toggle_involutive` |
+| Toggle erasure preserves the complete raw-word scalar coefficient in multiplication order | `TransverseLineHardCore.eraseToggles_dataWord`, `TransverseLineHardCore.wordProduct_mulVec_liftColumn`, `TransverseLineHardCore.linearCoefficient_eq` |
+| Zero existence in the one-chart transverse subfamily is exactly two-generator rational incidence | `TransverseLineHardCore.coefficient_zero_iff`, `TransverseLineHardCore.exists_zero_iff` |
 | The `bcbb` null histories and complete terminal language are one exact periodic ray | `PeriodicHistory.bcbbNull_iff`, `PeriodicHistory.bcbb_terminal_match_iff` |
 | The singular positional decoder obeys its all-control affine state equation | `PeriodicHistory.periodicProduct_mulVec_column`, `PeriodicHistory.periodicCoefficient_eq` |
 | The `bcbb` affine section has no false zero and matches the paired zero language | `PeriodicHistory.bcbbAffine_zero_iff`, `PeriodicHistory.bcbb_periodicCoefficient_zero_iff_paired_zero` |
@@ -2500,6 +2506,18 @@ section is projectively at most one point. This does not decide point reachabili
 rational projective-line transitions. Its connection to `G3-O04` requires that the six charts
 additionally admit the shared finite-mode integral affine normalization and expanding-or-
 stationary law used there. The remaining finite rational `P¹` atlas may share the `M₂(3)` core.
+
+For `G3-O29`, Lean proves the exact shared core. A two-state matrix `A` is lifted as `UAV`, where
+`U : ℚ²→ℚ³` includes the first coordinate plane, `V : ℚ³→ℚ²` projects onto it, and `VU=I₂`.
+Every lift is singular; if `A` is invertible, its lift has rank exactly two and image exactly
+`im U`. Both data generators therefore share one invariant plane, and the toggle is `I₃`. The
+recursive `eraseToggles` function deletes every raw toggle while preserving data-letter order.
+Lean proves equality of the three-state and two-state columns and scalar coefficients for every
+raw word, then proves the existential converse using the toggle-free data-word section. Thus the
+one-chart subfamily is instancewise equivalent to arbitrary two-generator rational scalar
+incidence. Combined with the separately audited `D2-S01` reduction, this makes the full atlas at
+least `M₂(3)`-hard; the Lean theorem itself does not formalize that separate mortality
+equivalence or reduce arbitrary multi-chart atlases to one chart.
 
 For `G3-O20`, Lean proves the free-monoid tail law: if one fixed-boundary equation with stationary
 left and right pump blocks holds at exponents `N` and `N+1`, it holds at every exponent `N+k`.
