@@ -1644,7 +1644,7 @@ fixed-rank decision problem.
 | `BoundaryTax.lean` | generic finite-witness two-channel boundary tax |
 | `ReturnFamily.lean` | split finite-rank return normal form and matrix-valued block-Hankel witnesses |
 | `CubicReturn.lean` | pure-cubic arbitrary-word collapse and automatic genericity of the one-singular normal form |
-| `CubicReturnNonPure.lean` | non-pure physical endpoint alignment, fixed return recurrence, and exact unselected-wait obstruction |
+| `CubicReturnNonPure.lean` | non-pure physical endpoints, fixed return recurrence, scalar-defect norm, continuant state projection, and exact unselected-wait obstructions |
 | `EdgeCompression.lean` | exact adjacent-edge compression for split finite-rank families |
 | `TwoPlaneEdges.lean` | compatible two-plane realization of a `2 × 2` edge square and exact rank-two certificates |
 | `ReverseEdge.lean` | generic projective-incidence reverse compiler, basis adaptation, and all-path converse |
@@ -1965,6 +1965,8 @@ fixed-rank decision problem.
 | The non-pure cubic false-wait lower-left coefficient is an integral order-three recurrence | `CubicReturn.NonPure.falseWaitReturn_lowerLeft`, `CubicReturn.NonPure.cubicDefect_recurrence` |
 | Consecutive cubic defect windows have norm one, and every zero solves `x³−xy²+y³=1` | `CubicReturn.NonPure.cubicDefectNorm_state`, `CubicReturn.NonPure.cubicDefect_zero_forces_exceptionalThue` |
 | The cubic defect vanishes at waits zero, one, five, and fourteen | `CubicReturn.NonPure.cubicDefect_known_zeros` |
+| One cubic defect window determines the complete false-wait return and its determinant | `CubicReturn.NonPure.falseWaitReturn_eq_state`, `CubicReturn.NonPure.falseWaitReturn_det` |
+| Two exact ternary words have nontriangular factors and adjacent pairs but upper-triangular products | `CubicReturn.NonPure.nontriangular_triple_fifteen_eight_twentySix`, `CubicReturn.NonPure.nontriangular_triple_twelve_eight_thirtyThree` |
 | Rule and erasure matrices agree on the upper-side plane | `rule_erase_agree_on_upperSide` |
 | Every finite-controller letter routes its selected private channel exactly | `controllerMatrix_mulVec_controllerVector` |
 | Every suffix-controlled word obeys the generic total decoder | `controllerProduct_mulVec_controllerVector` |
