@@ -1278,7 +1278,7 @@ the periodic saturation theorem and its remaining arithmetic boundary are recons
 formalization and the shell attack are tracked in
 [#7](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/7).
 
-The latest `M₅(3)` delimiter attack yielded four audited records:
+The `M₅(3)` delimiter attack has six durable records:
 
 | Record | Formalization obligation |
 | --- | --- |
@@ -1287,6 +1287,7 @@ The latest `M₅(3)` delimiter attack yielded four audited records:
 | [`MM-M03`](SALVAGE.md#mm-m03-five-state-setter-punctuation) | explicit setter matrices, delimiter powers and ranks, regular decoder, and `S²A_cS³=λC̃L̃` |
 | [`MM-S01`](SALVAGE.md#mm-s01-square-run-projective-normal-form) | invariant square-run plane, invertible `2 × 2` transfer, Möbius normalization, rank-one fracture grammar, and equivalence with pole avoidance |
 | [`MM-S02`](SALVAGE.md#mm-s02-reset-zero-projective-peeling) | scaled transfer identity, exact two-shell classification of all poles, and reset-zero one-transfer avoidance |
+| [`MM-O15`](SALVAGE.md#mm-o15-exact-delimiter-pair-obstruction) | generic ignored-pair immortality is formalized; paired common-kernel and cubic companion specializations are audited |
 
 The candidate proves only the halting-to-mortality direction. Its converse requires a theorem
 that every nonterminal projective orbit avoids every pole. No such theorem is formalized or
@@ -1663,7 +1664,7 @@ fixed-rank decision problem.
 | `SideNormal.lean` | side-normal word-pair calculus, common upper plane, boundary coefficient, and terminal-match semantics |
 | `ControllerPushout.lean` | arbitrary finite-controller pushout, total suffix decoder, and transposed prefix decoder |
 | `TwoStatePushout.lean` | rule/erasure specialization, exact rank classification, and integer mortality compiler |
-| `TwoStateObstructions.lean` | exact local toggle-fusion obstruction |
+| `TwoStateObstructions.lean` | exact local toggle-fusion and contextual delimiter-pair immortality obstructions |
 | `OverlapQueue.lean` | positive two-frame queue semantics, arbitrary-word causality, exact mortality compiler, and pure-deletion necessity |
 | `OverlapLag.lean` | literal binary context-2 Lag kernel, promise translation, mortality composition, and terminal-frame morphism obstruction |
 | `OverlapLagDecision.lean` | unconditional syntactic decision of the zero-framed binary context-2 Lag kernel |

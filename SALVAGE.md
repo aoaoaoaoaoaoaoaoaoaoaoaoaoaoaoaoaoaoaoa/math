@@ -81,6 +81,7 @@ file owns the mathematical stock.
 | [`MM-O12`](#mm-o12-boundary-calibrated-setter-shear-is-gauge) | obstruction | boundary calibration erases the setter's side-basis shear from its separator and transfer | formalized | graduated |
 | [`MM-O13`](#mm-o13-finite-positive-ray-setter-obstruction) | obstruction | arbitrary low/high setter blocks defeat every finite family of positive invariant rays | audited | graduated |
 | [`MM-O14`](#mm-o14-decimal-setter-elliptic-product) | obstruction | two strictly hyperbolic decimal setter blocks have an elliptic product | formalized | graduated |
+| [`MM-O15`](#mm-o15-exact-delimiter-pair-obstruction) | obstruction | exact ignored delimiter pairs force a bordered paired family to be immortal | formalized core; audited specialization | graduated |
 | [`MM-M01`](#mm-m01-off-diagonal-companion-interface) | partial mechanism | off-diagonal rank-two bridge has a complete fracture grammar | audited | stock |
 | [`MM-M02`](#mm-m02-bordered-toggle) | partial mechanism | one lifted toggle has a stable rank-two third power | audited | parked |
 | [`MM-M03`](#mm-m03-five-state-setter-punctuation) | partial mechanism | a mixed delimiter word is an exact internal rank-one separator | audited | closed |
@@ -1703,6 +1704,55 @@ hyperbolicity. Arithmetic or suffix information may still prove exact pole avoid
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-O15: Exact delimiter-pair obstruction
+
+**Kind:** obstruction
+**Evidence:** formalized core; audited specialization
+**Disposition:** graduated
+
+Let `Gᵢ,T∈M_d(K)` share a nonzero fixed column `e`, let `T²=I`, and suppose the `Gᵢ` have
+trivial common kernel. Border the toggle and zero-pad the data:
+
+```text
+S=[[T,a],[bᵀ,c]],        Ĝᵢ=diag(Gᵢ,0).
+```
+
+If a double delimiter is contextually two toggles in every data context,
+
+```text
+ĜᵢS²Ĝⱼ=ĜᵢĜⱼ,
+```
+
+then `{Ĝᵢ,S}` is immortal. The upper block of `S²` is `I+abᵀ`, so every context gives
+`(Gᵢa)(bᵀGⱼ)=0`. Either all `Gᵢa` vanish, whence `a=0` and every product retains top column
+`e`, or some `Gᵢa` is nonzero, whence every `bᵀGⱼ` vanishes and `(e,0)` is a common fixed
+column.
+
+The paired Neary data have trivial common kernel for every nonempty body. Thus the most direct
+terminal-normal-form treatment of `S²` as an ignored parity pair is incompatible with mortality.
+The square run must have genuine semantics, as it does in the setter's projective transfer.
+
+The bordered toggle's cubic projection cannot supply [`MM-M01`](#mm-m01-off-diagonal-companion-interface)
+for the full paired series either. A fixed-context companion would represent
+`diag(g(w)/α,1)`, whose block-Hankel rank is `rank(g)+1=5`, through the four-state paired
+carrier. Absorbing the forced initial `R_c` can lower the derivative rank and is the sole
+remaining bordered-companion seam.
+
+**Scope:** the Lean theorem is generic but assumes exact contextual cancellation of every
+delimiter pair. The paired common-kernel calculation and fixed-context block-Hankel argument
+are audited. Nonzero fifth-coordinate data couplings, a distinguished-`c` macro, and a genuine
+square-run grammar remain outside the obstruction.
+
+**Use:** do not treat `S²` as syntactically ignorable or use a pure/fixed-context cubic
+projection for the full paired series. Any bordered-toggle successor must change the data lift,
+absorb the forced initial role, and prove all overlapping square/cube placements.
+
+**Formalization:** `MatrixMortality.exactDelimiterPair_immortal` in
+[`TwoStateObstructions.lean`](MatrixMortality/TwoStateObstructions.lean).
+
+**Artifact:**
+[`audits/m53-exact-delimiter-pair-2026-08-30.md`](audits/m53-exact-delimiter-pair-2026-08-30.md).
 
 ### MM-M01: Off-diagonal companion interface
 
