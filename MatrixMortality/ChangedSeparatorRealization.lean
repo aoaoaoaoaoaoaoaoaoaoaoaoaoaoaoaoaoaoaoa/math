@@ -15,10 +15,10 @@ open scoped Matrix
 
 namespace ChangedSeparatorRealization
 
-/-- Ternary width scale of the changed-separator chart. -/
+/-- Positional radix used by the Neary body encoding. -/
 def widthScale (β : Nat) : ℚ := 3 ^ β
 
-/-- Common denominator of the changed-separator input/output chart. -/
+/-- Nonzero denominator of the geometric tail specialization. -/
 def denominator (β : Nat) (body : List TagLetter) : ℚ :=
   ChangedSeparatorTail.transferDenominator β body
 
@@ -33,7 +33,7 @@ theorem denominator_ne_zero (β : Nat) (body : List TagLetter) :
     denominator β body ≠ 0 :=
   ne_of_lt (denominator_lt_zero β body)
 
-/-- Eigenvalue carried by the one-dimensional safe tail. -/
+/-- Eigenvalue carried by the realization's one-dimensional geometric tail. -/
 def tailEigenvalue (β : Nat) (body : List TagLetter) : ℚ :=
   let ρ := widthScale β
   let V := ChangedSeparatorTail.lowerCCode β body
@@ -55,6 +55,107 @@ theorem tailEigenvalue_ne_zero (β : Nat) (body : List TagLetter) :
   exact div_ne_zero
     (mul_ne_zero (mul_ne_zero lowerScale_ne_zero widthFactor_ne_zero) tailGap_ne_zero)
     (denominator_ne_zero β body)
+
+/-- Nonvanishing locus of the exact rational chain chart. -/
+structure RegularChart (ρ V K : ℚ) : Prop where
+  width_ne_zero : ρ ≠ 0
+  lowerScale_ne_zero : K ≠ 0
+  widthFactor_ne_zero : 3 * ρ - 1 ≠ 0
+  tailGap_ne_zero : K - 2 * V - 1 ≠ 0
+  sumGap_ne_zero : K + 3 * V - 6 ≠ 0
+  chartGap_ne_zero : K - V - 2 ≠ 0
+
+namespace RegularChart
+
+/-- The output chart's tail factor is the negative of the input chart's factor. -/
+theorem negTailGap_eq (V K : ℚ) :
+    -K + 2 * V + 1 = -(K - 2 * V - 1) := by
+  ring
+
+/-- Normalized subtraction form of the output chart's tail factor. -/
+theorem subNegTailGap_eq (V K : ℚ) :
+    1 - (K - 2 * V) = -(K - 2 * V - 1) := by
+  ring
+
+/-- Odd powers preserve the normalized tail factor's sign reversal. -/
+theorem subNegTailGap_cube_eq (V K : ℚ) :
+    (1 - (K - 2 * V)) ^ 3 = -(K - 2 * V - 1) ^ 3 := by
+  rw [subNegTailGap_eq]
+  ring
+
+/-- The output chart's body gap is the negative of the input chart's gap. -/
+theorem negChartGap_eq (V K : ℚ) :
+    -K + V + 2 = -(K - V - 2) := by
+  ring
+
+/-- Parenthesized normalized subtraction form of the output chart's body gap. -/
+theorem subNegChartGap_eq (V K : ℚ) :
+    2 - (K - V) = -(K - V - 2) := by
+  ring
+
+/-- The output chart's sum factor is the negative of the input chart's factor. -/
+theorem negSumGap_eq (V K : ℚ) :
+    -K - 3 * V + 6 = -(K + 3 * V - 6) := by
+  ring
+
+/-- Normalized subtraction form of the output chart's sum factor. -/
+theorem normalizedNegSumGap_eq (V K : ℚ) :
+    6 - (K + 3 * V) = -(K + 3 * V - 6) := by
+  ring
+
+/-- The apparently mixed denominator is the product of the three chart gaps. -/
+theorem mixedDenominator_eq (ρ V K : ℚ) :
+    3 * K ^ 2 * ρ - K ^ 2 - 9 * K * V * ρ + 3 * K * V -
+        9 * K * ρ + 3 * K + 6 * V ^ 2 * ρ - 2 * V ^ 2 +
+        15 * V * ρ - 5 * V + 6 * ρ - 2 =
+      (3 * ρ - 1) * (K - 2 * V - 1) * (K - V - 2) := by
+  ring
+
+/-- The shorter mixed denominator is the product of the width and tail gaps. -/
+theorem widthTailDenominator_eq (ρ V K : ℚ) :
+    3 * K * ρ - K - 6 * V * ρ + 2 * V - 3 * ρ + 1 =
+      (3 * ρ - 1) * (K - 2 * V - 1) := by
+  ring
+
+theorem negTailGap_ne_zero {ρ V K : ℚ} (regular : RegularChart ρ V K) :
+    -K + 2 * V + 1 ≠ 0 := by
+  rw [negTailGap_eq]
+  exact neg_ne_zero.mpr regular.tailGap_ne_zero
+
+theorem negChartGap_ne_zero {ρ V K : ℚ} (regular : RegularChart ρ V K) :
+    -K + V + 2 ≠ 0 := by
+  rw [negChartGap_eq]
+  exact neg_ne_zero.mpr regular.chartGap_ne_zero
+
+theorem factoredGap_ne_zero {ρ V K : ℚ} (regular : RegularChart ρ V K) :
+    3 * K ^ 2 * ρ - K ^ 2 - 9 * K * V * ρ + 3 * K * V -
+        9 * K * ρ + 3 * K + 6 * V ^ 2 * ρ - 2 * V ^ 2 +
+        15 * V * ρ - 5 * V + 6 * ρ - 2 ≠ 0 := by
+  rw [mixedDenominator_eq]
+  exact mul_ne_zero
+    (mul_ne_zero regular.widthFactor_ne_zero regular.tailGap_ne_zero)
+    regular.chartGap_ne_zero
+
+end RegularChart
+
+/-- Every positive-width encoded body containing `b` lies in the regular chart. -/
+theorem regularChart (β : Nat) (β_pos : 0 < β) (body : List TagLetter)
+    (b_mem : .b ∈ body) :
+    RegularChart (widthScale β) (ChangedSeparatorTail.lowerCCode β body)
+      (ChangedSeparatorTail.lowerCScale β body) where
+  width_ne_zero := (widthScale_pos β).ne'
+  lowerScale_ne_zero := by
+    linarith [ChangedSeparatorTail.lowerCScale_gt_three β body]
+  widthFactor_ne_zero := by
+    have width_one_le : 1 ≤ widthScale β := one_le_pow₀ (by norm_num)
+    linarith
+  tailGap_ne_zero := by
+    linarith [ChangedSeparatorTail.lowerCScale_sub_two_mul_lowerCCode_sub_one_lt_zero β body]
+  sumGap_ne_zero := by
+    linarith [ChangedSeparatorTail.lowerCScale_add_three_mul_lowerCCode_sub_six_pos β body]
+  chartGap_ne_zero := by
+    linarith [ChangedSeparatorTail.lowerCCode_add_two_lt_lowerCScale_of_b_mem
+      β β_pos body b_mem]
 
 /-- Two length-three nilpotent chains, one length-two chain, and the geometric tail line. -/
 def transition (β : Nat) (body : List TagLetter) : Square (Fin 9) ℚ :=

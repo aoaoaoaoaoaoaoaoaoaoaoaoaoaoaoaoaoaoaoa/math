@@ -167,6 +167,7 @@ import MatrixMortality.MovingTailHankel
 import MatrixMortality.GeometricTailHankel
 import MatrixMortality.ChangedSeparatorTail
 import MatrixMortality.ChangedSeparatorRealization
+import MatrixMortality.ChangedSeparatorZeroMoment
 import MatrixMortality.RationalClearing
 import MatrixMortality.PairedBinaryFullAlgebra
 import MatrixMortality.PrefixFullAlgebra

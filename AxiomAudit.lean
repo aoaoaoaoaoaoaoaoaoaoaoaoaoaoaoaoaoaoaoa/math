@@ -142,6 +142,7 @@ open MatrixMortality
 #print axioms ChangedSeparatorRealization.denominator_lt_zero
 #print axioms ChangedSeparatorRealization.denominator_ne_zero
 #print axioms ChangedSeparatorRealization.tailEigenvalue_ne_zero
+#print axioms ChangedSeparatorRealization.zero_moment
 #print axioms clearRationalFamily_isMortal_iff
 #print axioms pairedProduct_mulVec_column
 #print axioms pairedCoefficient_eq_sideCoefficient
