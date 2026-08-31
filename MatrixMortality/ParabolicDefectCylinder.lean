@@ -477,4 +477,227 @@ theorem bridge_bOne_cTwo_bZero_det_ne_zero
       · norm_num
         exact crest_upper
 
+/-! ## Opposite right-`c` endpoint cylinder -/
+
+private def rightCScale (M : ℚ) : ℚ := 166944 * (M - 3)
+
+private def rightCCrest (L M : ℚ) : ℚ :=
+  16274467 * L - 5515409 * M - 229072
+
+private def rightCBase (L M : ℚ) : ℚ :=
+  48637017 * L - 16433267 * M - 839712
+
+private def rightCIncidence (L M x y : ℚ) : ℚ :=
+  (M - 3) * rightCCrest L M * y + rightCBase L M -
+    rightCScale M * ((M - 3) * y + 3) * x
+
+/-- Exact shortest `1 | 2 | 0` bridge determinant with a `c` defect and a residue-zero `c`
+right endpoint. -/
+theorem bridge_bOne_cTwo_cZero_det (body : List TagLetter) (x y z : Nat) :
+    (bridge 27
+      (bAtom 27 (3 * z + 1) *
+        cAtom 27 (nearySideLowerC 3 body) (nearySideLowerCScale 3 body) (3 * x + 2) *
+        cAtom 27 (nearySideLowerC 3 body) (nearySideLowerCScale 3 body) (3 * y))).det =
+      729 * z / 4 *
+        rightCIncidence
+          (nearySideLowerC 3 body) (nearySideLowerCScale 3 body) x y := by
+  rw [bAtom_three_mul_add_one_matrix, cAtom_three_mul_add_two_matrix,
+    cAtom_three_mul_matrix, Matrix.det_fin_two]
+  norm_num [bridge, coreInput, coreOutput, Matrix.mul_apply, Fin.sum_univ_succ,
+    rightCIncidence, rightCScale, rightCCrest, rightCBase]
+  ring
+
+private theorem rightC_root_between_consecutive_ne_zero
+    (D A B : ℚ) (x y n m : Nat) (adjacent : m = n + 1) (D_positive : 0 < D)
+    (crest_lower : n * (166944 * D) < A)
+    (crest_upper : A < m * (166944 * D))
+    (base_lower : n * (3 * (166944 * D)) < B)
+    (base_upper : B < m * (3 * (166944 * D))) :
+    D * A * y + B - 166944 * D * (D * y + 3) * x ≠ 0 := by
+  intro zero
+  have y_nonnegative : (0 : ℚ) ≤ y := by positivity
+  have denominator_positive : 0 < 166944 * D * (D * (y : ℚ) + 3) := by positivity
+  have lower_margin_positive :
+      0 < D * (y : ℚ) * (A - n * (166944 * D)) +
+        (B - n * (3 * (166944 * D))) := by positivity
+  have upper_margin_positive :
+      0 < D * (y : ℚ) * (m * (166944 * D) - A) +
+        (m * (3 * (166944 * D)) - B) := by positivity
+  have x_lower : (n : ℚ) < x := by nlinarith
+  have x_upper : (x : ℚ) < m := by nlinarith
+  have x_lower_nat : n < x := by exact_mod_cast x_lower
+  have x_upper_nat : x < m := by exact_mod_cast x_upper
+  omega
+
+private theorem rightC_run_b_zero_bounds (tail : List TagLetter) :
+    let body := .b :: tail
+    let L := nearySideLowerC 3 body
+    let M := nearySideLowerCScale 3 body
+    let A := rightCCrest L M
+    let B := rightCBase L M
+    let S := rightCScale M
+    59 * S < A ∧ A < 60 * S ∧ 59 * (3 * S) < B ∧ B < 60 * (3 * S) := by
+  dsimp only
+  rcases c_run_b_side_coordinates 0 tail with
+    ⟨lower_eq, lower_scale_eq, code_nonnegative, code_succ_le_scale⟩
+  norm_num at lower_eq lower_scale_eq
+  have crosses := b_zero_crosses_every_suffix tail
+  simp only [rightCCrest, rightCBase, rightCScale]
+  constructor
+  · nlinarith
+  constructor
+  · nlinarith
+  constructor <;> nlinarith
+
+private theorem rightC_run_b_one_bounds (tail : List TagLetter) :
+    let body := List.replicate 1 .c ++ .b :: tail
+    let L := nearySideLowerC 3 body
+    let M := nearySideLowerCScale 3 body
+    let A := rightCCrest L M
+    let B := rightCBase L M
+    let S := rightCScale M
+    62 * S < A ∧ A < 63 * S ∧ 62 * (3 * S) < B ∧ B < 63 * (3 * S) := by
+  dsimp only
+  rcases c_run_b_side_coordinates 1 tail with
+    ⟨lower_eq, lower_scale_eq, code_nonnegative, code_succ_le_scale⟩
+  norm_num at lower_eq lower_scale_eq
+  simp only [List.replicate_succ, List.replicate_zero, List.nil_append,
+    List.cons_append] at lower_eq lower_scale_eq ⊢
+  simp only [rightCCrest, rightCBase, rightCScale]
+  constructor
+  · nlinarith
+  constructor
+  · nlinarith
+  constructor <;> nlinarith
+
+private theorem rightC_run_b_two_bounds (tail : List TagLetter) :
+    let body := List.replicate 2 .c ++ .b :: tail
+    let L := nearySideLowerC 3 body
+    let M := nearySideLowerCScale 3 body
+    let A := rightCCrest L M
+    let B := rightCBase L M
+    let S := rightCScale M
+    63 * S < A ∧ A < 64 * S ∧ 63 * (3 * S) < B ∧ B < 64 * (3 * S) := by
+  dsimp only
+  rcases c_run_b_side_coordinates 2 tail with
+    ⟨lower_eq, lower_scale_eq, code_nonnegative, code_succ_le_scale⟩
+  norm_num at lower_eq lower_scale_eq
+  simp only [rightCCrest, rightCBase, rightCScale]
+  constructor
+  · nlinarith
+  constructor
+  · nlinarith
+  constructor <;> nlinarith
+
+private theorem rightC_run_b_long_bounds
+    (k : Nat) (tail : List TagLetter) (three_le : 3 ≤ k) :
+    let body := List.replicate k .c ++ .b :: tail
+    let L := nearySideLowerC 3 body
+    let M := nearySideLowerCScale 3 body
+    let A := rightCCrest L M
+    let B := rightCBase L M
+    let S := rightCScale M
+    64 * S < A ∧ A < 65 * S ∧ 64 * (3 * S) < B ∧ B < 65 * (3 * S) := by
+  dsimp only
+  rcases c_run_b_side_coordinates k tail with
+    ⟨lower_eq, lower_scale_eq, code_nonnegative, code_succ_le_scale⟩
+  have power_ge_nat : 3 ^ 3 ≤ 3 ^ k := Nat.pow_le_pow_right (by norm_num) three_le
+  have power_ge : (27 : ℚ) ≤ 3 ^ k := by exact_mod_cast power_ge_nat
+  have power_excess_nonnegative :
+      0 ≤ ((3 : ℚ) ^ k - 27) * 3 ^ (tagEncode 3 tail).length := by positivity
+  simp only [rightCCrest, rightCBase, rightCScale]
+  constructor
+  · nlinarith
+  constructor
+  · nlinarith
+  constructor <;> nlinarith
+
+private theorem rightC_run_bounds (k : Nat) (k_positive : 0 < k) :
+    let body := List.replicate k .c
+    let L := nearySideLowerC 3 body
+    let M := nearySideLowerCScale 3 body
+    let A := rightCCrest L M
+    let B := rightCBase L M
+    let S := rightCScale M
+    64 * S < A ∧ A < 65 * S ∧ 64 * (3 * S) < B ∧ B < 65 * (3 * S) := by
+  dsimp only
+  have code_eq := c_run_code k
+  have scale_eq :
+      (3 : ℚ) ^ (tagEncode 3 (List.replicate k .c)).length = 3 ^ k := by
+    rw [tagEncode_c_run]
+    simp
+  rcases side_coordinates (List.replicate k .c) with ⟨lower_eq, lower_scale_eq⟩
+  rw [code_eq, scale_eq] at lower_eq
+  rw [scale_eq] at lower_scale_eq
+  have power_ge : (3 : ℚ) ≤ 3 ^ k := by
+    have power_ge_nat : 3 ^ 1 ≤ 3 ^ k := Nat.pow_le_pow_right (by norm_num) k_positive
+    exact_mod_cast power_ge_nat
+  simp only [rightCCrest, rightCBase, rightCScale]
+  constructor
+  · nlinarith
+  constructor
+  · nlinarith
+  constructor <;> nlinarith
+
+/-- No regular shortest bad run of orientation `1 | 2 | 0` with a `c` defect and a residue-zero
+`c` right endpoint closes the bridge at deletion width three. -/
+theorem bridge_bOne_cTwo_cZero_det_ne_zero
+    (body : List TagLetter) (body_nonempty : body ≠ [])
+    (x y z : Nat) (z_positive : 0 < z) :
+    (bridge 27
+      (bAtom 27 (3 * z + 1) *
+        cAtom 27 (nearySideLowerC 3 body) (nearySideLowerCScale 3 body) (3 * x + 2) *
+        cAtom 27 (nearySideLowerC 3 body) (nearySideLowerCScale 3 body) (3 * y))).det ≠ 0 := by
+  rw [bridge_bOne_cTwo_cZero_det]
+  let L : ℚ := nearySideLowerC 3 body
+  let M : ℚ := nearySideLowerCScale 3 body
+  let D := M - 3
+  let A := rightCCrest L M
+  let B := rightCBase L M
+  have D_positive : 0 < D := by
+    have scale_positive := oppositeCScale_positive body body_nonempty
+    dsimp [oppositeCScale, D, M] at scale_positive ⊢
+    nlinarith
+  apply mul_ne_zero
+  · positivity
+  change rightCIncidence L M x y ≠ 0
+  change D * A * y + B - 166944 * D * (D * y + 3) * x ≠ 0
+  rcases tagWord_c_run_or_c_run_b body with ⟨k, body_eq⟩ | ⟨k, tail, body_eq⟩
+  · subst body
+    have k_positive : 0 < k := by
+      by_contra k_not_positive
+      have k_zero : k = 0 := by omega
+      subst k
+      simp at body_nonempty
+    rcases rightC_run_bounds k k_positive with
+      ⟨crest_lower, crest_upper, base_lower, base_upper⟩
+    norm_num [rightCScale, D, A, B, M, L] at crest_lower crest_upper base_lower base_upper ⊢
+    exact rightC_root_between_consecutive_ne_zero D A B x y 64 65 (by omega) D_positive
+      crest_lower crest_upper base_lower base_upper
+  · subst body
+    by_cases short : k < 3
+    · have cases : k = 0 ∨ k = 1 ∨ k = 2 := by omega
+      rcases cases with rfl | rfl | rfl
+      · rcases rightC_run_b_zero_bounds tail with
+          ⟨crest_lower, crest_upper, base_lower, base_upper⟩
+        norm_num [rightCScale, D, A, B, M, L] at crest_lower crest_upper base_lower base_upper ⊢
+        exact rightC_root_between_consecutive_ne_zero D A B x y 59 60 (by omega) D_positive
+          crest_lower crest_upper base_lower base_upper
+      · rcases rightC_run_b_one_bounds tail with
+          ⟨crest_lower, crest_upper, base_lower, base_upper⟩
+        norm_num [rightCScale, D, A, B, M, L] at crest_lower crest_upper base_lower base_upper ⊢
+        exact rightC_root_between_consecutive_ne_zero D A B x y 62 63 (by omega) D_positive
+          crest_lower crest_upper base_lower base_upper
+      · rcases rightC_run_b_two_bounds tail with
+          ⟨crest_lower, crest_upper, base_lower, base_upper⟩
+        norm_num [rightCScale, D, A, B, M, L] at crest_lower crest_upper base_lower base_upper ⊢
+        exact rightC_root_between_consecutive_ne_zero D A B x y 63 64 (by omega) D_positive
+          crest_lower crest_upper base_lower base_upper
+    · have three_le : 3 ≤ k := by omega
+      rcases rightC_run_b_long_bounds k tail three_le with
+        ⟨crest_lower, crest_upper, base_lower, base_upper⟩
+      norm_num [rightCScale, D, A, B, M, L] at crest_lower crest_upper base_lower base_upper ⊢
+      exact rightC_root_between_consecutive_ne_zero D A B x y 64 65 (by omega) D_positive
+        crest_lower crest_upper base_lower base_upper
+
 end MatrixMortality.ParabolicBlade
