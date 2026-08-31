@@ -81,6 +81,7 @@ file owns the mathematical stock.
 | [`MM-O12`](#mm-o12-boundary-calibrated-setter-shear-is-gauge) | obstruction | boundary calibration erases the setter's side-basis shear from its separator and transfer | formalized | graduated |
 | [`MM-O13`](#mm-o13-finite-positive-ray-setter-obstruction) | obstruction | arbitrary low/high setter blocks defeat every finite family of positive invariant rays | audited | graduated |
 | [`MM-O14`](#mm-o14-decimal-setter-elliptic-product) | obstruction | two strictly hyperbolic decimal setter blocks have an elliptic product | formalized | graduated |
+| [`MM-O15`](#mm-o15-factorized-binary-cross-ratio-wall) | obstruction | exact prefix and cyclic-cube nine-state compilers force a Neary cross-ratio that fails in every pairing | formalized core; audited assembly | graduated |
 | [`MM-M01`](#mm-m01-off-diagonal-companion-interface) | partial mechanism | off-diagonal rank-two bridge has a complete fracture grammar | audited | stock |
 | [`MM-M02`](#mm-m02-bordered-toggle) | partial mechanism | one lifted toggle has a stable rank-two third power | audited | parked |
 | [`MM-M03`](#mm-m03-five-state-setter-punctuation) | partial mechanism | a mixed delimiter word is an exact internal rank-one separator | audited | closed |
@@ -1703,6 +1704,52 @@ hyperbolicity. Arithmetic or suffix information may still prove exact pole avoid
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-O15: Factorized binary cross-ratio wall
+
+**Kind:** obstruction
+
+**Evidence:** formalized core; audited assembly
+
+**Disposition:** graduated
+
+An exact scalar-weighted factorization of four unit payloads through a binary rectangle forces
+their two right quotients to be proportional. The four ordinary normalized Neary matrices fail
+this law in every one of their three pairings. Their diagonal scale pairs are
+
+```text
+R_c:(B,3),  E_c:(3,3),  R_b:(27,9ρ),  E_b:(3,9ρ),
+```
+
+where `B>27` for every nonempty tag body. After normalizing the common first diagonal entry,
+the three candidate quotient pairs would respectively require `B=27`, `B=27`, or `B=1/3`.
+
+This excludes two natural exact routes to `M₉(2)`. For any factor-distributed complete binary
+prefix tree with five leaves, a common-image restriction to nine states would force two
+three-dimensional leaf fibres to coincide. The unique rank-one separator cannot lie in those
+fibres, so the four ordinary roles form the forbidden rectangle. In a native three-phase
+`3×3` cyclic cube, a rank-one separator vertex forces one phase factor to be singular; the four
+invertible roles must fill the opposite face and again form the forbidden rectangle.
+
+Pure width-three synchronization is even smaller: a binary comma-free code has at most two
+words, one from each nonconstant cyclic-shift orbit. A positional algebraic factorization does
+encode the four ordinary roles at `000,011,100,101`, but its extra cube vertices admit a
+six-block false terminal match on the certified nonhalting source `(3,bbcc)`.
+
+**Scope:** the prefix result concerns exact factor-distributed deterministic transducers followed
+by common-image restriction; the cyclic result concerns exact phase-factor cubes containing the
+canonical separator. Changed zero-series values, nonfactorial state-dependent decoding, other
+invariant quotients, nonlinear reductions, and `GPCP(3)` remain open.
+
+**Use:** stop rearranging or gauging exact five-leaf prefix trees and stop exact three-phase cube
+fits. Any direct `M₉(2)` attack must change the zero series or abandon these two geometries.
+
+**Artifact:** [`audits/m92-factorized-cross-ratio-2026-08-30.md`](audits/m92-factorized-cross-ratio-2026-08-30.md).
+
+**Formalization:** [`MatrixMortality/NearyCrossRatioNoGo.lean`](MatrixMortality/NearyCrossRatioNoGo.lean)
+and [`MatrixMortality/ThreePhaseBinaryNoGo.lean`](MatrixMortality/ThreePhaseBinaryNoGo.lean),
+through `factorizedFace_has_proportional_rightQuotients`, the three
+`*_rightQuotients_not_proportional` theorems, and `poison_false_positive`.
 
 ### MM-M01: Off-diagonal companion interface
 

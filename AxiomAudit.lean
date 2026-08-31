@@ -522,6 +522,14 @@ open MatrixMortality
 #print axioms isMortal_commonImage_iff
 #print axioms restrictedPrefixGenerator_mortal_iff_prefixMachine
 #print axioms restrictedPrefixGenerator_mortal_iff_tagHaltsFrom
+#print axioms NearyCrossRatioNoGo.factorizedFace_has_proportional_rightQuotients
+#print axioms NearyCrossRatioNoGo.twentySeven_lt_lowerCScale
+#print axioms NearyCrossRatioNoGo.ruleErase_rightQuotients_not_proportional
+#print axioms NearyCrossRatioNoGo.rulesErasers_rightQuotients_not_proportional
+#print axioms NearyCrossRatioNoGo.crossed_rightQuotients_not_proportional
+#print axioms ThreePhaseBinaryNoGo.blockMatrix_eq_sidePcpMatrix
+#print axioms ThreePhaseBinaryNoGo.blockMatrix_ruleC
+#print axioms ThreePhaseBinaryNoGo.poison_false_positive
 #print axioms prefixAlgebra_zero_cube
 #print axioms prefixAlgebraReachable_isUnit
 #print axioms prefixAlgebraObservable_isUnit
