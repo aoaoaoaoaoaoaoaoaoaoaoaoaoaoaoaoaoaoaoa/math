@@ -1263,7 +1263,14 @@ generalized carrier's unit residues form a compatible period-two cycle. Record
 transition: `peeledNumerator_twoAdic_deepens` proves that the difference of the two normalized
 `2`-adic units cannot remain a unit, and `peeledMultiPole_three_le_length` therefore forces
 every non-singleton consecutive multi-pole block to have upper length at least three. The module
-does not identify later product residuals with raw encoded heads or decide singleton targets.
+does not identify later product residuals with raw encoded heads. Record
+[`MM-S20`](SALVAGE.md#mm-s20-singleton-carrier-classification) closes its local singleton
+classification: `peeledSingletonToMulti_impossible` and
+`peeledSingletonToSingleton_impossible` eliminate both physical singleton-current branches,
+while `exists_decimalUnitCarrier_multiToSingleton_iff` proves that an unrestricted rational
+decimal-unit carrier reaches a singleton target exactly when `m≥β+3`. The latter construction
+is an abstraction barrier, not a setter counterexample: encoded reachability of the constructed
+carrier remains open.
 
 The dimension-two affine ledger has six independently checked records:
 
@@ -1703,7 +1710,7 @@ fixed-rank decision problem.
 | `DecimalSetterCarry.lean` | two-reset successive-pole identities, joint depth constraints, exact decimal suffix exhaustion, first-transfer prefix separation, and the ordinary depth-two A/B shell forest |
 | `DecimalSetterChamber.lean` | exact decimal pole chambers, both ordinary A-to-A length-two extinctions, and the emitted-body grammar certificate |
 | `DecimalSetterResonance.lean` | complete ordinary depth-two A-to-B and B-to-A extinction, phase-word exhaustion, and compiler-envelope specialization |
-| `DecimalSetterDepth.lean` | recursive two-unit A-shell carrier, length-two extinction, initial raw-head exclusion, and the exact last-digit two-cycle obstruction |
+| `DecimalSetterDepth.lean` | recursive two-unit carrier; length-two and singleton-current extinction; sharp `m≥β+3` abstract multi-to-singleton classification; initial raw-head exclusion; exact last-digit two-cycle obstruction |
 | `PairedMortality.lean` | common-column mortality converse and exact integer `4 × 4` family |
 | `PhaseFracture.lean` | phase normalization and dimension-free projective-identification contradiction |
 | `PhaseRigidity.lean` | checked local role algebra, discrepancy commutators, and invariant-pencil rigidity |

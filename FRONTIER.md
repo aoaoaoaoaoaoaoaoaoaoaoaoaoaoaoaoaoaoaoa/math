@@ -767,8 +767,14 @@ forced last digits form a lawful period-two cycle. The apparent `m=2` escape is 
 [`MM-S18`](SALVAGE.md#mm-s18-length-two-carrier-extinction) proves that two equal-depth
 `2`-adic summands cancel beyond depth one, contradicting the shell forced by a following
 multi-role pole. Every surviving non-singleton transition therefore has `m≥3`, and the unit-digit
-law applies without an exceptional branch. The remaining invariant must recognize a higher
-suffix language of these generalized residuals; singleton targets remain separate.
+law applies without an exceptional branch. [`MM-S20`](SALVAGE.md#mm-s20-singleton-carrier-classification)
+now resolves the separate singleton seam at the carrier level. A singleton-current block cannot
+reach any later multi-role or singleton pole. A multi-role block can reach a singleton pole only
+at upper length `m≥β+3`, and this bound is sharp for unrestricted decimal-unit rational carriers:
+an explicit carrier exists at every such length. The master residual is therefore the encoded
+reachability of that long multi-to-singleton carrier together with the higher suffix language of
+the surviving generalized multi-shell residuals. Local valuations and the abstract two-unit
+carrier cannot close either reachability question alone.
 
 The immediate ternary question is which other positive valuation-one discrepancies survive its
 suffix sieve without already certifying source halting.
