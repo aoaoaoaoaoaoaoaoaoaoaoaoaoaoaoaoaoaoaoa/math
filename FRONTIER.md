@@ -840,6 +840,14 @@ carrier together with intersection of the encoded-entry orbit and an unbounded i
 suffix language. Local valuations, the abstract two-unit carrier, and acyclicity of a finite
 congruence graph cannot close these questions alone.
 
+[`MM-S22`](SALVAGE.md#mm-s22-gap-factor-quotient-gate) now cuts the long singleton branch with
+the denominator ancestry absent from the unrestricted abstraction. Set `q=2·10^β−7` and
+`G=9g`. For a primitive integral carrier with `D=EN₋` and `gcd(q,N)=1`, a singleton pole forces
+both `V₂=qW` and `P₂+gW≡μ10^m (mod q)`. The fixed lift `G` and singleton lower digit `7` are
+automatically coprime to `q`. Thus the gap-clean branch is an exact compiler-code congruence
+problem; the remaining escape is either a gap-contaminated carrier numerator or an emitted code
+passing both gates. This does not settle `M₅(3)`.
+
 The immediate ternary question is which other positive valuation-one discrepancies survive its
 suffix sieve without already certifying source halting.
 Exact bidirectional diagnostics for the ternary swap at `β=3`, body `bbcc`, exclude every

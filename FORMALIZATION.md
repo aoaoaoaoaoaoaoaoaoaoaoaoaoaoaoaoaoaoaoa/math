@@ -1404,7 +1404,13 @@ classification: `peeledSingletonToMulti_impossible` and
 while `exists_decimalUnitCarrier_multiToSingleton_iff` proves that an unrestricted rational
 decimal-unit carrier reaches a singleton target exactly when `m≥β+3`. The latter construction
 is an abstraction barrier, not a setter counterexample: encoded reachability of the constructed
-carrier remains open.
+carrier remains open. Record [`MM-S22`](SALVAGE.md#mm-s22-gap-factor-quotient-gate) intersects
+that abstract branch with the physical recursive ancestry. For `q=2·10^β−7`,
+`DecimalSetterAncestry.gapClean_multiToSingleton_quotientGate` proves that a primitive integral
+carrier with `gcd(q,N)=1` can reach a singleton only if `V₂=qW` and
+`P₂+(G/9)W≡μ10^m (mod q)`. The fixed coefficient and singleton digit are discharged inside the
+theorem by exact coprimality proofs; gap-contaminated carrier numerators and the emitted-code
+quotient language remain open.
 
 Record [`MM-S21`](SALVAGE.md#mm-s21-bounded-decimal-suffix-cycles) closes the fixed-precision
 suffix-descent lane. `DecimalSetterSuffix.cycleDefect_lift` gives an explicit one-digit lift for
@@ -1895,6 +1901,7 @@ fixed-rank decision problem.
 | `DecimalSetterChamber.lean` | exact decimal pole chambers, both ordinary A-to-A length-two extinctions, and the emitted-body grammar certificate |
 | `DecimalSetterResonance.lean` | complete ordinary depth-two A-to-B and B-to-A extinction, phase-word exhaustion, and compiler-envelope specialization |
 | `DecimalSetterDepth.lean` | recursive two-unit carrier; length-two and singleton-current extinction; exact all-`D_c` raw-head extinction; sharp `m≥β+3` abstract multi-to-singleton classification; compatible last-digit two-cycle |
+| `DecimalSetterAncestry.lean` | primitive gap factor; fixed-coefficient coprimality; denominator-ancestry reduction; exact lower-code and quotient congruence gates for a singleton target |
 | `PairedMortality.lean` | common-column mortality converse and exact integer `4 × 4` family |
 | `PhaseFracture.lean` | phase normalization and dimension-free projective-identification contradiction |
 | `PhaseRigidity.lean` | checked local role algebra, discrepancy commutators, and invariant-pencil rigidity |
