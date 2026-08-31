@@ -481,10 +481,23 @@ y=(a_left b_right−a_right b_left)/(a_left−a_right),
 
 and it is a `5`-adic unit exactly when the numerator determinant has valuation
 `−max(left.length,right.length)`. Since its two terms begin at valuation
-`−left.length−right.length`, this is an exact cancellation demand of the shorter length. Exact
-examples show that the debt chamber's one-bit carrier residue is also saturated: `[1]` and
-`[1,1]` collide at `1/3↦1/3`, while `[1]` and `[1,2,0]` collide at `19/42↦8/21`; the two carrier
-orientations modulo three are opposite and both sources and both targets are `5`-adic units.
+`−left.length−right.length`, this is an exact cancellation demand of the shorter length. For
+debt-safe bridges between common endpoint depths with lengths `n` and `n+1`, the slope ratio
+is forced to `2/5`. Writing the cleared rational offset as `C_w=5^|w|b_w`, Lean proves
+
+```text
+C_(m::w)=3^|w|(2/3)^sum(w)+5C_w,
+y=(C_long−2C_short)/(3·5^n),
+y is a 5-unit  ↔  v₅(C_long−2C_short)=n.
+```
+
+This is an exact adjacent-bridge carry law, not a decision procedure: the offset recurrence still
+has unbounded length and varying exponents. Acceptance is not automatic. The debt-safe pair
+`[4]` and `[0,5]` runs from depth two to depth five and collides at `2/9↦55/243`, whose target has
+`5`-adic valuation one. Exact accepted examples show that the debt chamber's one-bit carrier
+residue is also saturated: `[1]` and `[1,1]` collide at `1/3↦1/3`, while `[1]` and `[1,2,0]`
+collide at `19/42↦8/21`; their carrier orientations modulo three are opposite, and both sources
+and both targets are `5`-adic units.
 
 `MixedPrimeKernel` now owns the raw `D,T` affine kernel. It checks the published shortest
 length-27 relation, an infinite family of distinct equal-map pairs at every odd length
@@ -1996,6 +2009,7 @@ fixed-rank decision problem.
 | Arbitrary uninterrupted debt schedules obey their exact carrier recurrence and Łukasiewicz depth balance | `MixedPrimeDebt.shellRun_debtSafe`, `MixedPrimeDebt.debtRunDepth_balance` |
 | Same-length debt bridges with common endpoint depths have one slope, so a collision at one source is a global affine relation | `MixedPrimeDebt.debtSafe_sameLength_collision_global` |
 | Unequal nonempty shell schedules have one explicit collision source, which is automatically a `5`-adic unit; target acceptance is exactly a determinant-valuation condition; both three-adic carrier orientations occur at shell-legal cross-length collisions | `MixedPrimeDebt.collisionSource_eq_of_shellRun_eq`, `MixedPrimeDebt.collisionSource_fiveUnit`, `MixedPrimeDebt.collisionTarget_fiveUnit_iff`, `MixedPrimeDebt.positiveOrientation_crossLengthCollision`, `MixedPrimeDebt.negativeOrientation_crossLengthCollision` |
+| Adjacent-length debt bridges between common depths have slope ratio `2/5`; target acceptance is exactly cancellation of their cleared offsets to the shorter length and is not automatic | `MixedPrimeDebt.shellOffset_cons`, `MixedPrimeDebt.adjacentDebtBridge_slope`, `MixedPrimeDebt.adjacentDebtBridge_collisionTarget_fiveUnit_iff`, `MixedPrimeDebt.adjacentDebtBridge_targetOvercancellation` |
 | Shell phases are all units exactly when the final output is a unit | `PeriodicShell.shellPrefixesUnit_iff` |
 | Raw words and shell schedules are conjugate, and every boundary-shifted benchmark schedule is one contextual raw rule | `PeriodicShell.shellRun_eq_wordAction`, `PeriodicShell.shellRawWord_benchmarkRelationShiftLeft`, `PeriodicShell.shellRawWord_benchmarkRelationShiftRight`, `PeriodicShell.shellRun_benchmarkRelationShift` |
 | Two distinct length-thirteen benchmark schedules induce the same affine map, preserve all guards in every context, and share a rational all-unit cycle | `PeriodicShell.benchmarkRelation_ne`, `PeriodicShell.shellRun_benchmarkRelationContext`, `PeriodicShell.benchmarkRelationContextGuard`, `PeriodicShell.benchmarkRelationCycle` |

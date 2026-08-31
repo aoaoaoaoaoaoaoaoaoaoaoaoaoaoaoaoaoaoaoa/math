@@ -82,6 +82,10 @@ def shellSlope (waits : List ℕ) : ℚ :=
 def shellIntercept (waits : List ℕ) : ℚ :=
   shellRun waits 0
 
+/-- Intercept with its forced five-power denominator cleared. -/
+def shellOffset (waits : List ℕ) : ℚ :=
+  5 ^ waits.length * shellIntercept waits
+
 /-- Unique source where two shell schedules with different slopes collide. -/
 def collisionSource (left right : List ℕ) : ℚ :=
   (shellIntercept right - shellIntercept left) / (shellSlope left - shellSlope right)
@@ -641,6 +645,25 @@ theorem shellIntercept_hasValue_five
   simp
   ring
 
+/-- Clearing the forced five-power denominator makes every nonempty schedule offset a
+five-adic unit. -/
+theorem shellOffset_fiveUnit {waits : List ℕ} (waits_ne : waits ≠ []) :
+    IsUnit 5 (shellOffset waits) := by
+  have power_value : HasValue 5 ((5 : ℚ) ^ waits.length) waits.length :=
+    primePower_hasValue waits.length
+  have intercept_value := shellIntercept_hasValue_five waits_ne
+  simpa [shellOffset] using mul_hasValue power_value intercept_value
+
+/-- The cleared offset is a suffix recurrence; the first wait does not enter it. -/
+theorem shellOffset_cons (wait : ℕ) (waits : List ℕ) :
+    shellOffset (wait :: waits) =
+      3 ^ waits.length * (2 / 3 : ℚ) ^ waits.sum + 5 * shellOffset waits := by
+  rw [shellOffset, List.length_cons, pow_succ, shellIntercept, shellRun_cons,
+    shellRun_eq_slope_mul_add_intercept, shellSlope_eq_length_sum]
+  simp only [shellStep, mul_zero, zero_add]
+  rw [shellOffset]
+  field_simp
+
 /-- Different schedule lengths force different shell slopes. -/
 theorem shellSlope_ne_of_length_ne
     {left right : List ℕ} (length_ne : left.length ≠ right.length) :
@@ -745,6 +768,77 @@ theorem collisionTarget_fiveUnit_iff
     have quotient_value := div_hasValue determinant_value denominator_value
     simpa using quotient_value
 
+/-- Two debt-safe bridges with the same endpoint depths and lengths differing by one have slopes
+in the fixed ratio `2/5`. -/
+theorem adjacentDebtBridge_slope
+    {short long : List ℕ} {startDepth endDepth : ℕ}
+    (short_safe : DebtSafe startDepth short) (long_safe : DebtSafe startDepth long)
+    (short_ends : debtRunDepth startDepth short = endDepth)
+    (long_ends : debtRunDepth startDepth long = endDepth)
+    (length_eq : long.length = short.length + 1) :
+    shellSlope long = (2 / 5 : ℚ) * shellSlope short := by
+  have short_balance := debtRunDepth_eq_of_balance short startDepth endDepth
+    short_safe short_ends
+  have long_balance := debtRunDepth_eq_of_balance long startDepth endDepth
+    long_safe long_ends
+  have sum_eq : long.sum = short.sum + 1 := by omega
+  rw [shellSlope_eq_length_sum, shellSlope_eq_length_sum, length_eq, sum_eq]
+  simp only [pow_succ]
+  ring
+
+/-- For adjacent-length debt bridges with common endpoint depths, the collision target is the
+difference of their cleared offsets divided by the shorter forced denominator. -/
+theorem adjacentDebtBridge_collisionTarget
+    {short long : List ℕ} {startDepth endDepth : ℕ}
+    (short_safe : DebtSafe startDepth short) (long_safe : DebtSafe startDepth long)
+    (short_ends : debtRunDepth startDepth short = endDepth)
+    (long_ends : debtRunDepth startDepth long = endDepth)
+    (length_eq : long.length = short.length + 1) :
+    shellRun short (collisionSource short long) =
+      (shellOffset long - 2 * shellOffset short) /
+        (3 * 5 ^ short.length) := by
+  have slope_ratio := adjacentDebtBridge_slope short_safe long_safe short_ends long_ends length_eq
+  have slope_ne : shellSlope short ≠ shellSlope long := by
+    apply shellSlope_ne_of_length_ne
+    omega
+  have short_slope_ne : shellSlope short ≠ 0 := (shellSlope_hasValue_five short).1
+  rw [shellRun_collisionSource_eq_targetQuotient short long slope_ne, slope_ratio]
+  simp only [shellOffset, length_eq, pow_succ]
+  field_simp
+  ring
+
+/-- An adjacent-length debt-bridge collision is accepted by the five-adic shell exactly when
+the two cleared offsets cancel to the shorter schedule length. -/
+theorem adjacentDebtBridge_collisionTarget_fiveUnit_iff
+    {short long : List ℕ} {startDepth endDepth : ℕ}
+    (short_safe : DebtSafe startDepth short) (long_safe : DebtSafe startDepth long)
+    (short_ends : debtRunDepth startDepth short = endDepth)
+    (long_ends : debtRunDepth startDepth long = endDepth)
+    (length_eq : long.length = short.length + 1) :
+    IsUnit 5 (shellRun short (collisionSource short long)) ↔
+      HasValue 5 (shellOffset long - 2 * shellOffset short) short.length := by
+  have target_eq := adjacentDebtBridge_collisionTarget short_safe long_safe short_ends
+    long_ends length_eq
+  have three_unit : IsUnit 5 (3 : ℚ) := intCast_isUnit_of_not_dvd (by norm_num)
+  have power_value : HasValue 5 ((5 : ℚ) ^ short.length) short.length :=
+    primePower_hasValue short.length
+  have denominator_value : HasValue 5 (3 * (5 : ℚ) ^ short.length) short.length := by
+    simpa using mul_hasValue three_unit power_value
+  constructor
+  · intro target_unit
+    have product_value := mul_hasValue target_unit denominator_value
+    have product_eq :
+        shellRun short (collisionSource short long) * (3 * 5 ^ short.length) =
+          shellOffset long - 2 * shellOffset short := by
+      rw [target_eq]
+      exact div_mul_cancel₀ _ denominator_value.1
+    rw [product_eq] at product_value
+    simpa using product_value
+  · intro offset_value
+    rw [target_eq]
+    have quotient_value := div_hasValue offset_value denominator_value
+    simpa using quotient_value
+
 /-- The positive carrier orientation is realized by an exact unequal-length debt collision. -/
 theorem positiveOrientation_crossLengthCollision :
     shellRun [1] (1 / 3) = 1 / 3 ∧
@@ -762,6 +856,41 @@ theorem positiveOrientation_crossLengthCollision :
   · exact div_hasValue
       (intCast_isUnit_of_not_dvd (prime := 5) (by norm_num : ¬(5 : ℤ) ∣ 1))
       (intCast_isUnit_of_not_dvd (prime := 5) (by norm_num : ¬(5 : ℤ) ∣ 3))
+
+/-- Source unitality does not force target acceptance, even for adjacent-length debt bridges.
+The displayed pair stays inside the negative three-adic chamber from depth two to depth five,
+but its common target has five-adic valuation one. -/
+theorem adjacentDebtBridge_targetOvercancellation :
+    DebtSafe 2 [4] ∧
+      DebtSafe 2 [0, 5] ∧
+      debtRunDepth 2 [4] = 5 ∧
+      debtRunDepth 2 [0, 5] = 5 ∧
+      collisionSource [4] [0, 5] = 2 / 9 ∧
+      shellRun [4] (2 / 9) = 55 / 243 ∧
+      shellRun [0, 5] (2 / 9) = 55 / 243 ∧
+      IsUnit 5 (2 / 9 : ℚ) ∧
+      HasValue 5 (55 / 243 : ℚ) 1 := by
+  have slope_ne : shellSlope [4] ≠ shellSlope [0, 5] := by
+    apply shellSlope_ne_of_length_ne
+    norm_num
+  have collision : shellRun [4] (2 / 9) = shellRun [0, 5] (2 / 9) := by
+    rw [shellRun_singleton, shellRun_cons, shellRun_singleton]
+    norm_num [shellStep]
+  have source_eq := collisionSource_eq_of_shellRun_eq [4] [0, 5] slope_ne collision
+  refine ⟨by norm_num [DebtSafe, debtNextDepth],
+    by norm_num [DebtSafe, debtNextDepth],
+    by norm_num [debtRunDepth, debtNextDepth],
+    by norm_num [debtRunDepth, debtNextDepth], source_eq, ?_, ?_, ?_, ?_⟩
+  · rw [shellRun_singleton]
+    norm_num [shellStep]
+  · rw [shellRun_cons, shellRun_singleton]
+    norm_num [shellStep]
+  · exact div_hasValue
+      (intCast_isUnit_of_not_dvd (prime := 5) (by norm_num : ¬(5 : ℤ) ∣ 2))
+      (intCast_isUnit_of_not_dvd (prime := 5) (by norm_num : ¬(5 : ℤ) ∣ 9))
+  · convert primePower_mul_int_div_int_hasValue (prime := 5) 1
+      (by norm_num : ¬(5 : ℤ) ∣ 11) (by norm_num : ¬(5 : ℤ) ∣ 243) using 1 <;>
+      norm_num
 
 /-- The opposite carrier orientation is also realized by an exact unequal-length debt
 collision. Both endpoints remain five-adic units. -/
