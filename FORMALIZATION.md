@@ -1314,7 +1314,15 @@ generalized carrier's unit residues form a compatible period-two cycle. Record
 transition: `peeledNumerator_twoAdic_deepens` proves that the difference of the two normalized
 `2`-adic units cannot remain a unit, and `peeledMultiPole_three_le_length` therefore forces
 every non-singleton consecutive multi-pole block to have upper length at least three. The module
-does not identify later product residuals with raw encoded heads or decide singleton targets.
+then records [`MM-S19`](SALVAGE.md#mm-s19-all-deletion-raw-head-extinction).
+`peeledDoubleCHead_unit_shape` classifies every decimal-unit two-`c` raw head as
+`1^(β+2−s)0^s`, with `1≤s≤β−1` and its exact integer code identity.
+`allCDeletion_peeledDoubleCHead_shell_impossible` composes that grammar with two exhaustive
+mixed-prime cuts and excludes every all-`D_c` block of length at least three from reaching a
+later multi-role pole. Together with `MM-S18`, this removes the complete all-deletion family
+at admissible non-singleton lengths from the initial raw-head grammar. The module does not
+identify later product residuals with raw encoded heads, exclude rule-bearing or
+`D_b`-containing first blocks, or decide singleton targets.
 
 The dimension-two affine ledger has seven independently checked records:
 
@@ -1768,7 +1776,7 @@ fixed-rank decision problem.
 | `DecimalSetterCarry.lean` | two-reset successive-pole identities, joint depth constraints, exact decimal suffix exhaustion, first-transfer prefix separation, and the ordinary depth-two A/B shell forest |
 | `DecimalSetterChamber.lean` | exact decimal pole chambers, both ordinary A-to-A length-two extinctions, and the emitted-body grammar certificate |
 | `DecimalSetterResonance.lean` | complete ordinary depth-two A-to-B and B-to-A extinction, phase-word exhaustion, and compiler-envelope specialization |
-| `DecimalSetterDepth.lean` | recursive two-unit A-shell carrier, length-two extinction, initial raw-head exclusion, and the exact last-digit two-cycle obstruction |
+| `DecimalSetterDepth.lean` | recursive two-unit A-shell carrier, length-two extinction, exact all-`D_c` raw-head extinction, and the compatible last-digit two-cycle |
 | `PairedMortality.lean` | common-column mortality converse and exact integer `4 × 4` family |
 | `PhaseFracture.lean` | phase normalization and dimension-free projective-identification contradiction |
 | `PhaseRigidity.lean` | checked local role algebra, discrepancy commutators, and invariant-pencil rigidity |

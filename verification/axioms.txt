@@ -1015,6 +1015,31 @@
 'MatrixMortality.DecimalSetterDepth.peeledLastDigit_advances' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.DecimalSetterDepth.peeledLastDigit_twoStep' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.DecimalSetterDepth.peeledHead_trichotomy' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.DecimalSetterDepth.tagPrefix_shape' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.DecimalSetterDepth.peeledDoubleCHead_shape' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.DecimalSetterDepth.peeledDoubleCHead_unit_shape' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterDepth.rawHead_linear_factor' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.DecimalSetterDepth.allCDeletion_residual_decomposition' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.DecimalSetterDepth.regularHead_decimalShell_impossible' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterDepth.allCDeletion_regularRawHead_shell_impossible' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterDepth.exceptionalHead_decimalShell_impossible' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterDepth.allCDeletion_firstRawHead_residual_decomposition' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterDepth.allCDeletion_firstRawHead_shell_impossible' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterDepth.allCDeletion_peeledDoubleCHead_shell_impossible' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.Undecidability.nearyScalarZero62_hasZero_iff_hasZeroStar' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
