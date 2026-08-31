@@ -592,6 +592,39 @@ theorem firstBTwo_root_between_envelopes_of_tail
     (parameters.2.2.2.1 two_le_y).1 (parameters.2.2.2.1 two_le_y).2
     parameters.2.1 parameters.2.2.1 root_eq
 
+/-- A zero on a body beginning `ccb` gives the normalized inner-wait equation used by the
+finite tail-cylinder certificate. -/
+theorem firstBTwo_z_equation_of_tail_zero
+    (tail : List TagLetter) (x y z : Nat)
+    (core_zero :
+      bZeroBDefectCOneCodeCore
+        ((3 : ℚ) ^ (tagEncode 3 ([.c, .c, .b] ++ tail)).length)
+        (ternaryCode (tagEncode 3 ([.c, .c, .b] ++ tail))) x y z = 0) :
+    let T : Nat := 3 ^ (tagEncode 3 tail).length
+    let E : Nat := tagComplementCode tail
+    let a : ℚ := 2187 * (72 * y - 9) + (9 - 8 * y) / T
+    let d : ℚ := 39 + E / T
+    (a * (25766986436 - 119911680 * x) -
+        d * (620717828832 * y + 631601581536 * x + 422435605080)) * z =
+      d * (58005064872 * y + 59048086536 * x + 37838186340) -
+        a * (2408152393 - 11209824 * x) := by
+  let T : Nat := 3 ^ (tagEncode 3 tail).length
+  let E : Nat := tagComplementCode tail
+  let a : ℚ := 2187 * (72 * y - 9) + (9 - 8 * y) / T
+  let d : ℚ := 39 + E / T
+  have scale_positive : 0 < T := by
+    dsimp [T]
+    positivity
+  have complement_core_zero :=
+    firstBTwo_core_zero_in_complement_coordinates tail x y z core_zero
+  dsimp only at complement_core_zero
+  have root_eq : firstBTwoRootDenominator a d z * x = firstBTwoRootNumerator a d y z := by
+    simpa only [a, d] using
+      firstBTwo_normalized_root_of_core_zero T E x y z scale_positive complement_core_zero
+  dsimp only
+  unfold firstBTwoRootDenominator firstBTwoRootNumerator at root_eq
+  linear_combination -root_eq
+
 /-- Middle wait one cannot close a second-first-`b` body whose suffix contains `b`. -/
 theorem bZeroBDefectCOneCodeCore_ccb_ne_zero_of_y_one
     (tail : List TagLetter) (contains_b : .b ∈ tail) (x z : Nat) :
