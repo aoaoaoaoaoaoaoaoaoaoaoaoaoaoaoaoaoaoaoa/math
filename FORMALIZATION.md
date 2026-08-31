@@ -2105,6 +2105,7 @@ fixed-rank decision problem.
 | `SeparatedTwoCOrbit.lean` | exact coupled entry and periodic nonhalting orbits for an infinite separated two-`c` width-three family |
 | `SeparatedTwoCResidue.lean` | exact halting certificate for the separated diagonal residue `n≡8 (mod 9)` |
 | `TransverseInfiniteCollision.lean` | exact `bcbc` terminal/nonterminal collision for the letter-blind infinite-carrier generator |
+| `TransverseSeparatedAtlas.lean` | distinct rank-two data escape retaining the infinite carrier section and uniformly separating the first `bcbc` fork |
 | `AffineRecognizer.lean` | generic singular three-state guard-and-carry representation calculus |
 | `BranchingRecognizer.lean` | complete `bcbc` residual grammar and rational three-state recognizer |
 | `MixedBranchingHistory.lean` | equal-length mixed terminal grammar and exact raw-toggle normal form |
@@ -2412,6 +2413,9 @@ fixed-rank decision problem.
 | Every source-indexed target depth has an exact delayed-singleton row-column family | `TransverseInfiniteAtlas.coefficientSection_terminalValue`, `TransverseInfiniteAtlas.coefficientSection_sourceFamily_delayed_zero_iff` |
 | The literal infinite-carrier generator gives the `bcbc` terminal prefix and nonterminal near-fork the same word product | `TransverseInfiniteCollision.bcbcTerminal_wordProduct_eq_nearFork` |
 | No row and column repair that letter-blind collision into a `bcbc` same-zero representation | `TransverseInfiniteCollision.no_letterBlind_bcbc_sameZero` |
+| The distinct-data left multiplier is invertible, preserves rank two, and separates the two data maps at every source | `TransverseSeparatedAtlas.separator_det`, `TransverseSeparatedAtlas.separator_isUnit`, `TransverseSeparatedAtlas.separatedData_rank_eq_two`, `TransverseSeparatedAtlas.separatedData_ne` |
+| The distinct-data candidate retains the original infinite `tⁿb` carrier and every source-indexed delayed singleton on it | `TransverseSeparatedAtlas.wordProduct_carrierWord`, `TransverseSeparatedAtlas.linearCoefficient_carrierWord`, `TransverseSeparatedAtlas.sourceFamily_delayed_carrierWord_zero_iff` |
+| Its `bcbc` terminal/near-fork product difference has the uniformly positive entry `6(2s²−5s+4)` | `TransverseSeparatedAtlas.bcbc_product_difference_entry`, `TransverseSeparatedAtlas.separation_polynomial_pos`, `TransverseSeparatedAtlas.bcbcTerminal_wordProduct_ne_nearFork` |
 | The `bcbb` null histories and complete terminal language are one exact periodic ray | `PeriodicHistory.bcbbNull_iff`, `PeriodicHistory.bcbb_terminal_match_iff` |
 | The singular positional decoder obeys its all-control affine state equation | `PeriodicHistory.periodicProduct_mulVec_column`, `PeriodicHistory.periodicCoefficient_eq` |
 | The `bcbb` affine section has no false zero and matches the paired zero language | `PeriodicHistory.bcbbAffine_zero_iff`, `PeriodicHistory.bcbb_periodicCoefficient_zero_iff_paired_zero` |
@@ -2749,6 +2753,15 @@ same matrix expression. The formal contradiction quantifies over arbitrary rows 
 same-zero recognition transfers terminal zero across product equality and contradicts the proved
 nonterminal coefficient. This kills only the letter-blind generator. Distinct data maps retaining
 the infinite carrier and terminal section remain open.
+
+For `G3-C06`, Lean left-multiplies the second data map by one fixed matrix of determinant `−4`.
+Both source-dependent data maps remain exact rank two and are uniformly distinct. Since the first
+map and diagonal toggle do not change, literal `tⁿb` words still produce the `G3-O30` carrier
+matrices, and the `G3-O33` coefficient section still realizes every delayed singleton on them.
+Direct multiplication of the `bcbc` terminal and near-fork controls gives separating entry
+`6(2s²−5s+4)`; Lean proves the quadratic positive for every rational source. This is a candidate
+mechanism, not a same-zero compiler: no complete terminal state formula or arbitrary-word converse
+is claimed.
 
 For `G3-O20`, Lean proves the free-monoid tail law: if one fixed-boundary equation with stationary
 left and right pump blocks holds at exponents `N` and `N+1`, it holds at every exponent `N+k`.

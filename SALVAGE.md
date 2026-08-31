@@ -278,6 +278,7 @@ file owns the mathematical stock.
 | [`G3-O07`](#g3-o07-near-fork-carry-collision) | obstruction | a terminal and nonterminal `bcbc` near-fork collide under the entire one-coordinate phase-line carry family | formalized | graduated |
 | [`G3-C02`](#g3-c02-fixed-bcbc-singular-recognizer) | fixed-instance compiler | a transient guard over one affine carry recognizes the complete `bcbc` language | audited, with formalized core | graduated |
 | [`G3-C05`](#g3-c05-equal-length-mixed-branching-recognizer) | fixed-instance compiler | three singular controls recognize the complete `bcbcbb` paired zero language | formalized | graduated |
+| [`G3-C06`](#g3-c06-distinct-data-infinite-carrier-candidate) | candidate mechanism | one invertible left multiplier separates the `bcbc` near-fork uniformly while preserving rank-two data, the infinite `tⁿb` carrier orbit, and delayed terminal sections | formalized | active |
 | [`G3-M02`](#g3-m02-square-root-punctuation-fracture) | partial mechanism | a rank-two square root gives an exact `SS`-free mortality grammar | formalized | closed |
 | [`G3-O10`](#g3-o10-square-root-boundary-saturation) | obstruction | every nondegenerate rank-one square root preserves boundary coefficient zeros | formalized | graduated |
 | [`G3-M01`](#g3-m01-free-group-discrepancy-engine) | partial mechanism | Carvalho's transducer gives an all-word marker-tail equation and a cyclic exponent-one equalizer | audited | active |
@@ -11218,9 +11219,68 @@ terminal section.
 [`TransverseInfiniteCollision.lean`](MatrixMortality/TransverseInfiniteCollision.lean) and
 [`m34-letter-blind-infinite-carrier-collision-2026-08-31.md`](audits/m34-letter-blind-infinite-carrier-collision-2026-08-31.md).
 
-**Next:** perturb `D_s` into two source-computable rank-two data maps that separate the near-fork
-while preserving an infinite nonprojective carrier orbit. Then recompute the terminal scalar and
-all-word dynamics; row and column fitting alone cannot repair this collision.
+**Next:** [`G3-C06`](#g3-c06-distinct-data-infinite-carrier-candidate) supplies an explicit
+uniform perturbation that separates the near-fork while preserving the original `tⁿb` orbit and
+terminal section. The remaining obligation is the complete arbitrary-word converse.
+
+### G3-C06: Distinct-data infinite-carrier candidate
+
+**Kind:** candidate mechanism
+
+**Evidence:** formalized
+
+**Disposition:** active
+
+Retain the nonprojective toggle `T=diag(1,2,3)` and first data map `D_b(s)=D_s`. For the second
+data letter, use
+
+```text
+P = [[2,−1,−1],              D_c(s) = P D_s.
+     [0, 0, 1],
+     [2, 1,−1]]
+```
+
+Lean proves `det(P)=−4`, so `P` is invertible and both data maps have rank exactly two. Their
+`(1,0)` entries already show `D_b(s)≠D_c(s)` for every source.
+
+Because the first data map and toggle are unchanged, every literal prefix `tⁿb` still has product
+
+```text
+TⁿD_b(s) = TⁿD_s.
+```
+
+The injectively infinite carrier orbit from `G3-O30` therefore survives verbatim. The pole-free
+coefficient section from `G3-O33` also remains exact on these prefixes, including an arbitrary
+source-indexed singleton depth.
+
+The new data map repairs the exact `G3-O34` collision uniformly. If `U_s` and `V_s` are the
+products of the `bcbc` terminal prefix and nonterminal near-fork, Lean computes
+
+```text
+(U_s−V_s)₁₀ = 6(2s²−5s+4).
+```
+
+The quadratic is strictly positive over `ℚ`: multiplying by eight gives
+`(4s−5)²+7`. Thus `U_s≠V_s` for every rational source. The repair requires no exceptional-source
+case and no row choice.
+
+**Scope:** product inequality is only necessary for a same-zero compiler. The candidate has no
+proved terminal row for unrestricted paired histories and no arbitrary-word converse. It may
+create other terminal/nonterminal collisions, false zeros, or dynamics outside the retained
+`tⁿb` prefixes. The theorem also does not claim that the separating `(1,0)` entry itself is a valid
+terminal functional.
+
+**Use:** reopen the nonprojective lane beyond letter blindness with one exact, source-uniform
+mechanism. Future attacks should analyze this concrete distinct-data monoid before proposing
+another perturbation: the carrier infinity, rank conditions, delayed terminal fitting, and first
+certified fork separation are already simultaneous.
+
+**Artifact:** [`TransverseSeparatedAtlas.lean`](MatrixMortality/TransverseSeparatedAtlas.lean) and
+[`m34-distinct-data-infinite-carrier-2026-08-31.md`](audits/m34-distinct-data-infinite-carrier-2026-08-31.md).
+
+**Next:** compute the full state recurrence or a finite collision certificate for the distinct-data
+monoid. Promotion to a compiler requires exact zeros on every paired terminal history and nonzeros
+on every malformed or nonterminal raw word.
 
 ### G3-O13: Rational serializer pumping
 

@@ -103,6 +103,7 @@ import MatrixMortality.BranchingHistory
 import MatrixMortality.SeparatedTwoCOrbit
 import MatrixMortality.SeparatedTwoCResidue
 import MatrixMortality.TransverseInfiniteCollision
+import MatrixMortality.TransverseSeparatedAtlas
 import MatrixMortality.PrefixResidual
 import MatrixMortality.AffineRecognizer
 import MatrixMortality.BranchingRecognizer
