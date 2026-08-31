@@ -936,7 +936,7 @@ private theorem cancel_eightyOne_factor {factor left right residue : Nat}
   exact left_relation.trans right_relation.symm
 
 private theorem allOnes_zeroSource_false
-    {β zeros : Nat} (β_large : 10 ≤ β) (zeros_pos : 1 ≤ zeros)
+    {β zeros : Nat} (β_large : 4 ≤ β) (zeros_pos : 1 ≤ zeros)
     {upper source target : List Bool}
     (source_eq : source = List.replicate zeros false)
     (upper_code : 2 * swappedCode upper + 1 = 9 * 3 ^ β)
@@ -1052,7 +1052,7 @@ private theorem allOnes_zeroSource_false
               (by norm_num [Nat.ModEq])
 
 private theorem allOnes_patternSource_highTail_false
-    {β zeros : Nat} (β_large : 10 ≤ β) (zeros_large : 2 ≤ zeros)
+    {β zeros : Nat} (β_large : 6 ≤ β) (zeros_large : 2 ≤ zeros)
     {upper source target front : List Bool} (front_phases : List Bool)
     (front_eq : front = spell fringeBlock front_phases)
     (source_eq : source = front ++ [true, true] ++ List.replicate zeros false)
@@ -1294,7 +1294,7 @@ private theorem targetFactor_false_of_power_quotient
     exact quotient_ne_two (unique.2.symm.trans factor_two)
 
 private theorem allOnes_patternSource_oneTail_false
-    {β : Nat} (β_large : 10 ≤ β) {upper source target front : List Bool}
+    {β : Nat} (β_large : 7 ≤ β) {upper source target front : List Bool}
     (front_phases : List Bool) (front_eq : front = spell fringeBlock front_phases)
     (source_eq : source = front ++ [true, true] ++ List.replicate 1 false)
     (upper_code : 2 * swappedCode upper + 1 = 9 * 3 ^ β)
@@ -1449,20 +1449,20 @@ private theorem allOnes_patternSource_oneTail_false
       quotient_ne_one quotient_ne_five quotient_ne_two
 
 private theorem allOnes_sourceFringe_false
-    {β : Nat} (β_large : 10 ≤ β) {upper source target : List Bool}
+    {β : Nat} (β_large : 7 ≤ β) {upper source target : List Bool}
     (source_fringe : SourceFringe source) (source_last : source.getLast? = some false)
     (upper_code : 2 * swappedCode upper + 1 = 9 * 3 ^ β)
     (target_fringe : TargetFringe (β + 2) target)
     (pole : PoleCongruence β upper source target) : False := by
   rcases sourceFringe_lastTrue_normal source_fringe source_last with zero_run | pair_run
   · obtain ⟨zeros, zeros_pos, source_eq⟩ := zero_run
-    exact allOnes_zeroSource_false β_large zeros_pos source_eq upper_code target_fringe pole
+    exact allOnes_zeroSource_false (by omega) zeros_pos source_eq upper_code target_fringe pole
   · obtain ⟨front, phases, zeros, zeros_pos, front_eq, source_eq⟩ := pair_run
     by_cases one_tail : zeros = 1
     · subst zeros
       exact allOnes_patternSource_oneTail_false β_large phases front_eq source_eq upper_code
         target_fringe pole
-    · exact allOnes_patternSource_highTail_false β_large (by omega) phases front_eq source_eq
+    · exact allOnes_patternSource_highTail_false (by omega) (by omega) phases front_eq source_eq
         upper_code target_fringe pole
 
 private theorem runPole_terminal_shapes
