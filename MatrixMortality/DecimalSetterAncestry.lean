@@ -116,6 +116,56 @@ private theorem nine_dvd_decimalLift_ten_pow (β : Nat) :
       _ ≡ 0 [ZMOD 9] := by norm_num
   exact Int.modEq_zero_iff_dvd.mp lift_mod
 
+/-- Every divisor of the primitive decimal gap is coprime to the factor nine removed from the
+full gap. -/
+theorem gapFactorDivisor_coprime_nine
+    {β : Nat} {r : ℤ}
+    (β_positive : 0 < β)
+    (r_dvd_q : r ∣ gapFactor β) :
+    IsCoprime r (9 : ℤ) := by
+  have qG_coprime : IsCoprime (gapFactor β) (decimalLift (10 ^ β)) :=
+    gapFactor_coprime_decimalLift β_positive
+  have nine_dvd_G : (9 : ℤ) ∣ decimalLift (10 ^ β) :=
+    nine_dvd_decimalLift_ten_pow β
+  have q9_coprime : IsCoprime (gapFactor β) (9 : ℤ) :=
+    IsCoprime.of_isCoprime_of_dvd_right qG_coprime nine_dvd_G
+  exact IsCoprime.of_isCoprime_of_dvd_left q9_coprime r_dvd_q
+
+/-- The exact mixed-prime identity for a unit two-`c` raw head reduces every gap-factor test to
+its final run length. This consumes the raw-head identity supplied by the suffix grammar. -/
+theorem rawHead_factor_iff
+    {β s : Nat} {r H : ℤ}
+    (β_positive : 0 < β)
+    (r_dvd_q : r ∣ gapFactor β)
+    (head_eq : 9 * H = 5 * 10 ^ (β + 2) + 2 * 10 ^ s - 7) :
+    r ∣ H ↔ r ∣ 2 * 10 ^ s + 1743 := by
+  let q := gapFactor β
+  have r9_coprime : IsCoprime r (9 : ℤ) :=
+    gapFactorDivisor_coprime_nine β_positive r_dvd_q
+  have decomposition : 9 * H = 250 * q + (2 * 10 ^ s + 1743) := by
+    calc
+      9 * H = 5 * 10 ^ (β + 2) + 2 * 10 ^ s - 7 := head_eq
+      _ = 250 * q + (2 * 10 ^ s + 1743) := by
+        simp [q, gapFactor, pow_add]
+        ring
+  have q_zero : q ≡ 0 [ZMOD r] := by
+    simpa [q] using r_dvd_q.modEq_zero_int
+  have head_mod : 9 * H ≡ 2 * 10 ^ s + 1743 [ZMOD r] := by
+    calc
+      9 * H = 250 * q + (2 * 10 ^ s + 1743) := decomposition
+      _ ≡ 250 * 0 + (2 * 10 ^ s + 1743) [ZMOD r] :=
+        ((Int.ModEq.refl 250).mul q_zero).add (Int.ModEq.refl _)
+      _ = 2 * 10 ^ s + 1743 := by ring
+  constructor
+  · intro r_dvd_H
+    have left_zero : 9 * H ≡ 0 [ZMOD r] :=
+      (r_dvd_H.mul_left 9).modEq_zero_int
+    exact Int.modEq_zero_iff_dvd.mp (head_mod.symm.trans left_zero)
+  · intro r_dvd_boundary
+    have left_dvd : r ∣ 9 * H :=
+      Int.modEq_zero_iff_dvd.mp (head_mod.trans r_dvd_boundary.modEq_zero_int)
+    exact r9_coprime.dvd_of_dvd_mul_left left_dvd
+
 /-- Divisibility by any factor of the primitive gap propagates through a recursive multi-shell
 step exactly by multiplication with the current lower code. Thus prime contamination is
 absorbing, and a new prime can enter only through an emitted lower word. -/

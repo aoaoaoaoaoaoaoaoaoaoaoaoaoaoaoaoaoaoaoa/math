@@ -659,6 +659,8 @@ open MatrixMortality
 #print axioms DecimalSetterSuffix.peeledNumerator_factor
 #print axioms DecimalSetterSuffix.emittedBlock_exists_approximate_cycle
 #print axioms DecimalSetterAncestry.gapFactor_not_dvd_twoCHead
+#print axioms DecimalSetterAncestry.gapFactorDivisor_coprime_nine
+#print axioms DecimalSetterAncestry.rawHead_factor_iff
 #print axioms DecimalSetterAncestry.carrierFactor_dvd_next_iff
 #print axioms DecimalSetterAncestry.primeFactor_dvd_next_iff
 #print axioms DecimalSetterAncestry.carrierFactor_multiToSingleton_quotientGate

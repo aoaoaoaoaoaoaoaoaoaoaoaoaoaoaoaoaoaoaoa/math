@@ -1458,7 +1458,13 @@ lower codes as the only first-entry channel for gap primes. The initial two-`c` 
 divisible by the full gap. If `q=rs` and `gcd(r,N)=1`,
 `carrierFactor_multiToSingleton_quotientGate` forces `V₂=rW` and
 `s(P₂−μ10^m)+gW≡0 (mod r)`. Proper factors already present in `N` therefore remove only their
-own gate, not every gap-factor constraint.
+own gate, not every gap-factor constraint. Record
+[`MM-S26`](SALVAGE.md#mm-s26-exact-raw-head-prime-support) makes the initial support exact.
+For a unit two-`c` raw head `H` with terminal run length `s`,
+`DecimalSetterAncestry.gapFactorDivisor_coprime_nine` proves that every `r∣q` is coprime to
+nine, and `rawHead_factor_iff` then proves `r∣H ↔ r∣2·10^s+1743`. The initial contamination
+question is therefore a one-parameter exponential divisibility problem; later lower-code entry
+remains open.
 
 Record [`MM-S21`](SALVAGE.md#mm-s21-bounded-decimal-suffix-cycles) closes the fixed-precision
 suffix-descent lane. `DecimalSetterSuffix.cycleDefect_lift` gives an explicit one-digit lift for
@@ -1971,7 +1977,7 @@ fixed-rank decision problem.
 | `DecimalSetterChamber.lean` | exact decimal pole chambers, both ordinary A-to-A length-two extinctions, and the emitted-body grammar certificate |
 | `DecimalSetterResonance.lean` | complete ordinary depth-two A-to-B and B-to-A extinction, phase-word exhaustion, and compiler-envelope specialization |
 | `DecimalSetterDepth.lean` | recursive two-unit carrier; length-two and singleton-current extinction; exact all-`D_c` raw-head extinction; sharp `m≥β+3` abstract multi-to-singleton classification; initial raw-head exclusion; compatible last-digit two-cycle obstruction |
-| `DecimalSetterAncestry.lean` | primitive gap factor; raw two-`c` exclusion; exact factor and prime-support propagation; denominator-ancestry reduction; full-gap and factorwise quotient gates for a singleton target |
+| `DecimalSetterAncestry.lean` | primitive gap factor; exact raw two-`c` prime support; exact factor and prime-support propagation; denominator-ancestry reduction; full-gap and factorwise quotient gates for a singleton target |
 | `PairedMortality.lean` | common-column mortality converse and exact integer `4 × 4` family |
 | `PhaseFracture.lean` | phase normalization and dimension-free projective-identification contradiction |
 | `PhaseRigidity.lean` | checked local role algebra, discrepancy commutators, and invariant-pencil rigidity |
