@@ -109,6 +109,7 @@ file owns the mathematical stock.
 | [`MM-S18`](#mm-s18-length-two-carrier-extinction) | obstruction | every consecutive multi-shell carrier transition has upper length at least three | formalized | active |
 | [`MM-S19`](#mm-s19-all-deletion-raw-head-extinction) | obstruction | no all-`D_c` block of length at least three carries a lawful initial two-`c` raw head into another multi-role pole | formalized | active |
 | [`MM-S20`](#mm-s20-singleton-carrier-classification) | structure theorem and obstruction | singleton-current carrier transitions are empty, while abstract multi-to-singleton carriers exist exactly at length `m≥β+3` | formalized | active |
+| [`MM-S21`](#mm-s21-bounded-decimal-suffix-cycles) | obstruction | every emitted multi-role block has a compatible projective self-loop in every bounded decimal-suffix quotient | formalized core; audited assembly | active |
 | [`R32-S01`](#r32-s01-split-return-normal-form) | structure theorem | rank-two cuts reduce one-unit binary mortality to a `2 × 2` return recurrence | formalized | graduated |
 | [`R32-S02`](#r32-s02-two-plane-edge-square) | structure theorem | two rank-two generators are a two-vertex square of `2 × 2` edges | formalized | graduated |
 | [`R32-O01`](#r32-o01-rank-one-profile-collapse) | obstruction | a rank-one generator reduces mortality to order-at-most-three scalar recurrence zeros | audited | stock |
@@ -3354,6 +3355,78 @@ encoded carrier reachability or stronger suffix semantics.
 
 **Next:** characterize which decimal-unit carriers are reachable from the initial two-`c`
 distinguished suffix, then exclude or exhibit the remaining `m≥β+3` multi-to-singleton pole.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S21: Bounded decimal suffix cycles
+
+**Kind:** obstruction
+**Evidence:** formalized core; audited assembly
+**Disposition:** active
+
+Fix one emitted multi-role block and write its normalized trace as `T=10τ`. If its upper
+length is `m≥3`, put `h=m−2`. A generalized carrier with denominator one and numerator `x`
+has normalized residual
+
+```text
+τx−μGV.
+```
+
+A stationary projective carrier ratio would satisfy
+
+```text
+F(x)=10^h E x²−τx+μGV=0.                         (1)
+```
+
+Every emitted block has
+
+```text
+E≡7,       τ≡1,       μ≡7,       G≡3,       V≡7  (mod 10).
+```
+
+Hence `F(7)≡0 (mod 10)` and the derivative is `F′(x)≡−1 (mod 10)`. More explicitly,
+if `10^k∣F(x)` and `F(x)=10^kq`, then
+
+```text
+y=x+q10^k
+```
+
+satisfies `y≡x (mod 10^k)` and `10^(k+1)∣F(y)`. Induction gives coherent roots at every
+positive decimal precision.
+
+The recurrence consumer uses a root modulo `10^(h+k)`. It produces integers `x,N′,D′` with
+
+```text
+x≡7,       D′=Ex≡9                              (mod 10),
+τx−μGV=10^hN′,
+N′≡xD′                                      (mod 10^k).   (2)
+```
+
+Thus this fixed physical block has a compatible projective carrier self-loop in the transition
+graph modulo `10^k`, for every fixed `k`.
+
+**Scope:** these are compatible residue carriers, not an exact rational or integer carrier
+cycle. The theorem does not place a residue cycle in the orbit of the distinguished raw head.
+It does not obstruct a recognizer that retains encoded-entry reachability or an unbounded
+suffix discrepancy.
+
+**Use:** reject a generalized-carrier proof whose only global argument is acyclicity or a
+strict ranking on one fixed decimal-suffix quotient. Closure must use reachability from the
+encoded entry, unbounded suffix semantics, or information not represented by the carrier
+residue.
+
+**Formalization:**
+[`MatrixMortality/DecimalSetterSuffix.lean`](MatrixMortality/DecimalSetterSuffix.lean), through
+`cycleDefect_lift`, `exists_cycleDefect_root`, `peeledNumerator_factor`, and
+`emittedBlock_exists_approximate_cycle`.
+
+**Artifact:**
+[`audits/m53-decimal-bounded-suffix-cycles-2026-08-30.md`](audits/m53-decimal-bounded-suffix-cycles-2026-08-30.md).
+
+**Next:** intersect the inverse-limit suffix address with the distinguished raw-head language;
+a successful invariant must prove that the physical entry misses every compatible address,
+not merely that a bounded quotient has no cycle.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).

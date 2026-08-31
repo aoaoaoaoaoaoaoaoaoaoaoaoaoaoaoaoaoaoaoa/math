@@ -809,10 +809,15 @@ grammar consists of rule-bearing phase words and all-erasure words containing `D
 now resolves the separate singleton seam at the carrier level. A singleton-current block cannot
 reach any later multi-role or singleton pole. A multi-role block can reach a singleton pole only
 at upper length `m≥β+3`, and this bound is sharp for unrestricted decimal-unit rational carriers:
-an explicit carrier exists at every such length. The master residual is therefore the encoded
-reachability of that long multi-to-singleton carrier together with the higher suffix language of
-the surviving generalized multi-shell residuals. Local valuations and the abstract two-unit
-carrier cannot close either reachability question alone.
+an explicit carrier exists at every such length. A fixed bounded suffix quotient cannot supply a
+global descent on the surviving generalized multi-shell residuals:
+[`MM-S21`](SALVAGE.md#mm-s21-bounded-decimal-suffix-cycles) proves that every
+emitted multi-role block has a compatible projective carrier self-loop modulo `10^k` for every
+fixed `k`. These are not exact rational cycles and need not be reachable from the distinguished
+entry. The master residual is therefore encoded reachability of the long multi-to-singleton
+carrier together with intersection of the encoded-entry orbit and an unbounded inverse-limit
+suffix language. Local valuations, the abstract two-unit carrier, and acyclicity of a finite
+congruence graph cannot close these questions alone.
 
 The immediate ternary question is which other positive valuation-one discrepancies survive its
 suffix sieve without already certifying source halting.
