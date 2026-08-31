@@ -126,6 +126,7 @@ file owns the mathematical stock.
 | [`MM-S27`](#mm-s27-reciprocal-raw-head-support) | structure theorem and obstruction | raw-head gap support has an exact complementary-exponent form and periodic width law; proper-factor contamination already occurs physically at width five | formalized | active |
 | [`MM-S28`](#mm-s28-arbitrary-history-gap-support-saturation) | structure theorem and obstruction | gap-prime support over an arbitrary carrier history is exactly initial support plus emitted lower-code support, while one physical all-erasure lower code contains the full gap | formalized | active |
 | [`MM-S31`](#mm-s31-gcd-saturated-singleton-gate) | structure theorem and obstruction | exact gcd cancellation leaves a canonical gap quotient whose two singleton gates survive every partial numerator contamination | formalized | active |
+| [`MM-S32`](#mm-s32-entry-support-saturator-extinction) | obstruction | the universal all-`D_c` support saturator cannot be the first transition from a lawful two-`c` raw head to another multi-role pole | formalized | active |
 | [`R32-S01`](#r32-s01-split-return-normal-form) | structure theorem | rank-two cuts reduce one-unit binary mortality to a `2 × 2` return recurrence | formalized | graduated |
 | [`R32-S02`](#r32-s02-two-plane-edge-square) | structure theorem | two rank-two generators are a two-vertex square of `2 × 2` edges | formalized | graduated |
 | [`R32-O01`](#r32-o01-rank-one-profile-collapse) | obstruction | a rank-one generator reduces mortality to order-at-most-three scalar recurrence zeros | audited | stock |
@@ -4299,6 +4300,52 @@ through `carrierCoprimeQuotient_multiToSingleton_quotientGate` and
 
 **Next:** classify whether reachable lower-code ancestry can make `q∣N`; otherwise intersect
 the canonical quotient gates with the compiler suffix language.
+
+### MM-S32: Entry support-saturator extinction
+
+**Kind:** obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+The all-erasure support witness from
+[`MM-S28`](#mm-s28-arbitrary-history-gap-support-saturation) can be placed uniformly inside
+the raw-head extinction range. Set
+
+```text
+n=3φ(|q|),       q=2·10^β−7.
+```
+
+The width `φ(|q|)` is positive for `β>0`, so `n≥3`. Its all-`D_c` lower code is the
+concatenation of three copies of the Euler-width lower word; since the latter is divisible by
+`q`, so is the entry-width code. Thus this physical block saturates the full gap support and
+meets the length hypothesis of [`MM-S19`](#mm-s19-all-deletion-raw-head-extinction).
+
+For `β≥2`, `MM-S19` now applies verbatim: no lawful decimal-unit two-`c` raw head followed by
+`D_c^n` can produce the exact decimal shell required by another multi-role pole. The universal
+support saturator exists in the source language but is not a first multi-role transition from
+the distinguished raw-head corridor.
+
+**Scope:** this excludes one explicit, body-independent support-saturating family at the first
+raw-head transition. It does not exclude rule-bearing support saturators, all-erasure words
+containing `D_b`, singleton targets, or the same `D_c^n` block after a generalized
+product-residual carrier. In particular, it is not a global support-saturation obstruction and
+does not settle `M₅(3)`.
+
+**Use:** any first-step saturation route must now use rule-bearing or `D_b`-containing grammar.
+Any later all-`D_c` saturation route must prove reachability of the preceding generalized
+carrier; the raw-head witness cannot be recycled as that proof.
+
+**Formalization:**
+[`MatrixMortality/DecimalSetterAncestry.lean`](MatrixMortality/DecimalSetterAncestry.lean),
+through `entrySaturationWidth_three_le`, `gapFactor_dvd_entrySaturationLowerCode`, and
+`entrySaturator_rawHead_shell_impossible`, consuming
+`DecimalSetterDepth.allCDeletion_peeledDoubleCHead_shell_impossible`.
+
+**Artifact:**
+[`audits/m53-entry-support-saturator-extinction-2026-08-31.md`](audits/m53-entry-support-saturator-extinction-2026-08-31.md).
+
+**Next:** decide support saturation in the remaining rule-bearing or `D_b`-containing first
+grammar, then extend the reachability cut from raw heads to generalized product residuals.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).

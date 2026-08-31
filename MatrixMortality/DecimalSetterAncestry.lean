@@ -640,6 +640,81 @@ theorem radical_gapFactor_dvd_allEraseLowerCode
   UniqueFactorizationMonoid.radical_dvd_self.trans
     (gapFactor_dvd_allEraseLowerCode β_positive body)
 
+/-- A support-saturating erasure width forced into the initial raw-head extinction range. -/
+def entrySaturationWidth (β : Nat) : Nat :=
+  3 * Nat.totient (gapFactor β).natAbs
+
+/-- The entry saturation width is at least three at every physical deletion width. -/
+theorem entrySaturationWidth_three_le {β : Nat} (β_positive : 0 < β) :
+    3 ≤ entrySaturationWidth β := by
+  have width_positive := allEraseSaturationWidth_pos β_positive
+  simp only [entrySaturationWidth]
+  omega
+
+/-- Exact decimal-code identity for every physical all-erasure lower word. -/
+theorem allEraseLowerCode_identity (β : Nat) (body : List TagLetter) (width : Nat) :
+    9 * allEraseLowerCode β body width + 7 = 7 * (10 : ℤ) ^ width := by
+  have identity := replicateFalse_code_identity width
+  have cast_identity := congrArg (fun value : Nat => (value : ℤ)) identity
+  norm_num at cast_identity
+  simpa only [allEraseLowerCode, spell_allEraseBlock] using cast_identity
+
+/-- The physical entry-width all-erasure lower code contains the full primitive gap. -/
+theorem gapFactor_dvd_entrySaturationLowerCode
+    {β : Nat} (β_positive : 0 < β) (body : List TagLetter) :
+    gapFactor β ∣ allEraseLowerCode β body (entrySaturationWidth β) := by
+  let width := Nat.totient (gapFactor β).natAbs
+  let zeros := List.replicate width false
+  have base : gapFactor β ∣ (code zeros : ℤ) := by
+    simpa only [width, zeros, allEraseLowerCode, spell_allEraseBlock] using
+      gapFactor_dvd_allEraseLowerCode β_positive body
+  have double : gapFactor β ∣ (code (zeros ++ zeros) : ℤ) := by
+    rw [code_append]
+    push_cast
+    exact dvd_add (base.mul_right (10 ^ zeros.length)) base
+  have triple : gapFactor β ∣ (code ((zeros ++ zeros) ++ zeros) : ℤ) := by
+    rw [code_append]
+    push_cast
+    exact dvd_add (double.mul_right (10 ^ zeros.length)) base
+  have spelling :
+      List.replicate (entrySaturationWidth β) false =
+        (zeros ++ zeros) ++ zeros := by
+    simp only [entrySaturationWidth, zeros, width]
+    rw [show 3 * Nat.totient (gapFactor β).natAbs =
+      (Nat.totient (gapFactor β).natAbs + Nat.totient (gapFactor β).natAbs) +
+        Nat.totient (gapFactor β).natAbs by omega]
+    simp only [List.replicate_add]
+  simpa only [allEraseLowerCode, spell_allEraseBlock, spelling] using triple
+
+/-- The universal all-erasure support saturator cannot be the first transition from a lawful
+two-`c` raw head to another multi-role pole. -/
+theorem entrySaturator_rawHead_shell_impossible
+    {β : Nat} (body tail : List TagLetter) {μ E G P T R : ℤ}
+    (β_large : 2 ≤ β)
+    (head_unit :
+      HasDecimalShell (code (peeledHeadWord β (.c :: .c :: tail)) : ℚ) 0 0)
+    (mu_eq : 9 * μ = 52 * 10 ^ β - 7)
+    (gap_eq : E = 18 * 10 ^ β - 63)
+    (lift_eq : G = 502 * 10 ^ β - 7)
+    (upper_eq :
+      9 * P = 50 * 10 ^ β * 10 ^ entrySaturationWidth β + 2 * 10 ^ β - 7)
+    (trace_eq :
+      T = E * P + G * allEraseLowerCode β body (entrySaturationWidth β))
+    (residual_eq :
+      R = (code (peeledHeadWord β (.c :: .c :: tail)) : ℤ) * T -
+        10 * μ * G * allEraseLowerCode β body (entrySaturationWidth β))
+    (shell : HasDecimalShell (R : ℚ)
+      ((entrySaturationWidth β - 1 : Nat) : ℤ)
+      ((entrySaturationWidth β - 1 : Nat) : ℤ)) :
+    False := by
+  apply allCDeletion_peeledDoubleCHead_shell_impossible tail β_large
+    (entrySaturationWidth_three_le (by omega)) head_unit mu_eq gap_eq lift_eq upper_eq
+  · have identity := allEraseLowerCode_identity β body (entrySaturationWidth β)
+    linear_combination identity
+  · exact trace_eq
+  · exact residual_eq
+  · exact shell
+
 private theorem gapFactor_dvd_carrierProduct
     {q E G μ N D Nprev P₂ P₃ V₂ V₃ T₂ T₃ : ℤ} {m : Nat}
     (E_multiple : q ∣ E)
