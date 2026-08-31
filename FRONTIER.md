@@ -1711,6 +1711,10 @@ The family is now sharply fenced:
   the tail by `2 waitExponent(rest)<head+1`. This entire deep chamber is finite; two jointly
   deep primes must also have equal normalized denominator depths `vₚ(B)/vₚ(q)`, by
   [`R32-S52`](SALVAGE.md#r32-s52-deep-pure-denominator-synchronization).
+- the finite chamber extends through the complete-tail wall. If one denominator prime is deeper
+  than the proper rest, either `R32-S52` applies or `head+1≤2 waitExponent(rest)`. The first tail
+  scale then divides a fixed nonzero rest coordinate unless `B=q^(head+1)` is already resonant,
+  by [`R32-S53`](SALVAGE.md#r32-s53-proper-rest-pivot-certificate).
 - replacing common powers of one base by a scale alphabet totally ordered under divisibility is
   unsound: `[3,15,3,3,15,3,3,3]` has the exact nonresonant root `d=25/27`, by
   [`R32-O25`](SALVAGE.md#r32-o25-divisibility-chain-returnsquare-fracture).
@@ -1734,10 +1738,11 @@ automata. Exact denominator-center chains already collapse to resonance, and a m
 fraction cannot take the zero critical-residue branch. A zero equal-scale residue can re-enter
 the center only at an even exponent whenever `q+1` has an odd prime; mixed nonzero residue
 transitions remain. Positive-numerator branches now have a finite weighted-tail certificate.
-The deep part of the pure-denominator branch is finite as well: any candidate outside that
-certificate must satisfy `a≤2Er` at every denominator prime with `r=vₚ(q)>0`. This simultaneously
-shallow chamber, rather than the whole pure-denominator branch, is the unrestricted arithmetic
-throat.
+The finite pure-denominator part now extends whenever one prime is deeper than the proper rest,
+not merely the complete tail. Any unbounded candidate must satisfy
+`a≤2 waitExponent(rest)r` at every denominator prime. Equivalently, its proper-rest adjugate
+state has common factor `B`; iterating or obstructing that exact common-content cancellation is
+the unrestricted arithmetic throat.
 The one-base geometric architecture is essential: mere divisibility comparability or
 common prime content cannot replace it. The one-base prime-power architecture remains closed.
 The two-coordinate pullback is not a reduction to finite-alphabet `M₂(3)`; every `qⁿ` remains a

@@ -124,6 +124,7 @@ file owns the mathematical stock.
 | [`R32-S50`](#r32-s50-odd-signed-re-entry-extinction) | structure theorem and obstruction | a zero equal-scale residue cannot enter a denominator center at an odd exponent in any reduced odd signed-ray quotient | formalized | active |
 | [`R32-S51`](#r32-s51-weighted-tail-adjugate-certificate) | structure theorem | every positive-valuation bridge zero has one fixed-weight adjugate tail followed by a single geometric-ray incidence | formalized | active |
 | [`R32-S52`](#r32-s52-deep-pure-denominator-synchronization) | decidable stratum | a pure-denominator prime deeper than twice the complete tail weight fixes the head and first-tail exponent sum and bounds the remaining tail | formalized | active |
+| [`R32-S53`](#r32-s53-proper-rest-pivot-certificate) | decidable stratum | one denominator prime deeper than the proper rest makes the pure-denominator bridge finite, unless its denominator is already the one-return resonance | formalized | active |
 | [`R32-M01`](#r32-m01-generic-reverse-edge-compiler) | partial mechanism | projective incidence generically embeds into a compatible two-plane edge square | formalized | active |
 | [`R32-M02`](#r32-m02-finite-quotient-sieve) | partial mechanism | finite monoid quotients give complete modular no-certificates for fixed candidates | formalized | active |
 | [`R32-M03`](#r32-m03-two-scale-return-conversion) | partial mechanism | a minimal two-scale return pencil has nonresonant multi-return zeros | formalized | active |
@@ -4038,6 +4039,71 @@ audit
 **Use:** enumerate the deep pure-denominator chamber as a finite family of two-coordinate
 adjugate products. The lawful `M₃(2)` to `M₂` bridge is bounded here by denominator depth; an
 unbounded `M₂(3)` alphabet remains only in the simultaneously shallow chamber.
+
+### R32-S53: Proper-rest pivot certificate
+
+**Kind:** decidable stratum
+**Evidence:** formalized
+**Disposition:** active
+
+Retain the notation of `R32-S52`, and write the proper-rest state as
+
+```text
+(U,V)=J_rest·(B,1),       t=q^(first+1),       s=q^(head+1).
+```
+
+Expanding the first tail adjugate in the incidence `R=sS` gives the exact divisibility
+
+```text
+t ∣ B(s−1)V.                                                (1)
+```
+
+Since every power of `q` is coprime to `qʰ−1`, Lean cancels the visible source defect:
+
+```text
+t ∣ BV.                                                     (2)
+```
+
+The rest state is nonzero: every rational adjugate letter has determinant
+`B(B−1)t(t²−1)≠0` for `q≥2` and `B≠0,1`. If `V=0`, the incidence and nonzero `U` force `B=s`,
+which is already the one-return resonance. Otherwise (2) bounds `first` by one fixed nonzero
+integer once `rest` is fixed.
+
+Now let `a=vₚ(B)`, `r=vₚ(q)>0`, and `E′=waitExponent(rest)`. If
+
+```text
+2E′r<a,                                                     (3)
+```
+
+there are two cases. When the complete tail is also deep, `R32-S52` fixes
+`a=(head+1+2(first+1))r` and gives `2E′<head+1`. Otherwise the lower coordinate has valuation at
+least `a`, while the upper coordinate has exact valuation `a+2E′r`; the incidence therefore
+forces
+
+```text
+head+1≤2E′.                                                 (4)
+```
+
+Condition (3) bounds `rest`, (4) bounds the head, and (2) bounds the first tail wait. Thus one
+proper-rest-deep denominator prime makes the whole bridge a finite exact enumeration, except
+for the already classified resonance.
+
+**Scope:** this is a one-layer pivot theorem for integral `q≥2` and pure denominator `B≠0,1`.
+It does not yet classify words satisfying `vₚ(B)≤2E′vₚ(q)` at every denominator prime. In that
+surviving chamber, `B∣q^(2E′)` and the proper-rest adjugate state has common factor `B`; iterated
+common-content cancellation is the sole remaining mechanism.
+
+**Artifact:** `ReturnSquare.fractionIntegralTail_middle_incidence_headExponent_le`,
+`fractionIntegralTail_incidence_firstScale_dvd_restLower`,
+`positiveBridge_pureDenominator_resonance_or_firstTailScale_dvd`, and
+`positiveBridge_pureDenominator_rest_deep_pivot_certificate` in
+[`ReturnSquarePureDenominator.lean`](MatrixMortality/ReturnSquarePureDenominator.lean), with
+audit
+[`m32-returnsquare-proper-rest-pivot-2026-08-31.md`](audits/m32-returnsquare-proper-rest-pivot-2026-08-31.md).
+
+**Use:** enumerate every bridge whose proper rest lies below one denominator depth. Any
+unbounded search must first cancel a common `B` from the proper-rest state; this is the exact
+joint `M₃(2)`/two-coordinate recurrence throat.
 
 ### R32-M01: Generic reverse edge compiler
 
