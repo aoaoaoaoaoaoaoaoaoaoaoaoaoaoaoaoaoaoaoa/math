@@ -59,10 +59,10 @@ Each public theorem depends only on `propext`, `Classical.choice`, and `Quot.sou
 
 ## Scope
 
-This closes one transfer from the distinguished boundary into a valuation-one target pole. It
-does not classify the singleton `β`-shell and does not identify a later multi-transfer carrier
-with the raw fringe witness. Consequently it does not settle `M₅(3)`: the first genuinely
-multi-transfer branches remain live.
+This module closes one transfer from the distinguished boundary into a valuation-one target
+pole. Its witness does not classify the singleton `β`-shell or identify a later multi-transfer
+carrier with the raw fringe witness. The former is now closed independently by `MM-S08`; the
+first genuinely multi-transfer branches remain outside this result.
 
 The compiler theorem consumes an assembled `PositiveDepthOnePoleWitness`; it does not construct
 that witness from an arbitrary raw projective orbit. In particular, `targetSuffix_eq` records the

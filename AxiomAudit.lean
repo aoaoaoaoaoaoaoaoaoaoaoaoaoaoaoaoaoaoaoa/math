@@ -80,6 +80,10 @@ open MatrixMortality
 #print axioms SwappedSetterFringe.poleCongruence_four_fringe_pairs
 #print axioms SwappedSetterFringe.positiveDepthOnePoleWitness_halts
 #print axioms SwappedSetterFringe.compilerPositiveDepthOnePoleWitness_halts
+#print axioms SwappedSetterSingletonShell.twoMarkerDiscrepancy_pattern
+#print axioms SwappedSetterSingletonShell.singletonB_pole_false
+#print axioms SwappedSetterSingletonShell.singletonC_pole_iff
+#print axioms SwappedSetterSingletonShell.singletonShellPoleWitness_false
 #print axioms sidePcpMatrix_eq_conjugate
 #print axioms rule_erase_agree_on_upperSide
 #print axioms controllerMatrix_mulVec_controllerVector

@@ -904,8 +904,12 @@ centered coefficient strictly negative and forces every integral
 valuation-one pole into a finite set of primitive slopes. The common scale of
 the two code integers remains unbounded, so this is not yet a finite word
 search. [`MM-S08`](SALVAGE.md#mm-s08-swapped-distinguished-boundary-beta-shell)
-excludes the residual value `2μ`, so the complete distinguished-boundary
-`β` shell is safe.
+now formally excludes the residual value `2μ`, so the complete
+distinguished-boundary `β` shell is safe at its exact physical witness
+interface: common-suffix cancellation leaves equal upper and lower prefixes
+of length `2β+1`. The later `D_c^(β+1)→singleton` branch has a different
+two-transfer incoming projective state and is not an instance of this
+theorem; its direct algebraic extinction belongs to `MM-S50`.
 [`MM-S09`](SALVAGE.md#mm-s09-canonical-swapped-residue-cannot-hit-a-pole)
 also excludes the unavoidable all-`D_c` valuation-one residue at every
 compiler-emitted width.
@@ -1159,8 +1163,10 @@ halting. The compiler width `β=10·period` lies safely above the analytic thres
 This does not construct a `PositiveDepthOnePoleWitness` from an arbitrary raw orbit. The witness
 retains physical target-suffix provenance, while the terminal proof consumes only its target
 grammar, pole congruence, exact factorizations, and exact pole. The surviving ternary questions
-therefore begin at genuinely multi-transfer carriers and at the separate singleton `β`-shell,
-not at another refinement of the four one-transfer fringe candidates.
+therefore begin at genuinely multi-transfer carriers, not at another refinement of the four
+one-transfer fringe candidates. The separate distinguished-boundary singleton `β`-shell is now
+formally closed by `MM-S08`; the later `D_c^(β+1)` singleton branch remains a different carrier
+and is handled algebraically in `MM-S50`.
 
 Exact bidirectional diagnostics for the ternary swap at `β=3`, body `bbcc`, exclude every
 false-pole word of at most six projective blocks when each regular block has

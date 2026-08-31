@@ -177,6 +177,7 @@ import MatrixMortality.SwappedSetterCompiler
 import MatrixMortality.DecimalSetterBranchSeparation
 import MatrixMortality.SwappedSetterMultitransfer
 import MatrixMortality.SwappedSetterPositiveDepthOne
+import MatrixMortality.SwappedSetterSingletonShell
 import MatrixMortality.SwappedSetterCylinder
 import MatrixMortality.SchottkyPunctuation
 import MatrixMortality.TwoStateObstructions

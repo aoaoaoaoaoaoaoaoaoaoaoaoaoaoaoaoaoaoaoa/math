@@ -112,7 +112,7 @@ file owns the mathematical stock.
 | [`MM-S05`](#mm-s05-distinguished-boundary-beta-shell) | obstruction | the distinguished-boundary `β`-shell cannot reach a false pole | audited | active |
 | [`MM-S06`](#mm-s06-valuation-one-divisor-normal-form) | structure theorem | every integral valuation-one pole lies on a finite family of divisor rays | audited | active |
 | [`MM-S07`](#mm-s07-swapped-digit-finite-slope-reduction) | structure theorem | the swapped setter reduces integral valuation-one poles to finitely many primitive slopes | audited | active |
-| [`MM-S08`](#mm-s08-swapped-distinguished-boundary-beta-shell) | obstruction | the swapped distinguished boundary cannot reach either single-erasure pole | audited | active |
+| [`MM-S08`](#mm-s08-swapped-distinguished-boundary-beta-shell) | obstruction | the swapped distinguished boundary cannot reach either single-erasure pole | formalized | graduated |
 | [`MM-S09`](#mm-s09-canonical-swapped-residue-cannot-hit-a-pole) | obstruction | the unavoidable all-erasure residue cannot meet a valuation-one pole at emitted widths | audited | active |
 | [`MM-S10`](#mm-s10-swapped-target-suffix-sieve) | structure theorem | pole compatibility fixes `β+2` lower digits and excludes the residue `Δ=ρ−1` | audited | active |
 | [`MM-S11`](#mm-s11-decimal-setter-hyperbolicity) | structure theorem | every decimal setter transfer is strictly hyperbolic | audited | active |
@@ -431,8 +431,8 @@ test whether minimal counterexamples force a strict upper bound.
 ### FC-O01: Homogeneous tilt persistence fails
 
 **Kind:** obstruction
-**Evidence:** audited
-**Disposition:** active
+**Evidence:** formalized
+**Disposition:** graduated
 
 There is a 17-coordinate, nine-set intersection-closed family `R` with one coordinate `i`
 occurring in `5/9` of its sets, yet under homogeneous product tilt `p=x/(1+x)` at
@@ -3246,17 +3246,30 @@ distinguished-boundary `β` shell is pole-free.
 
 **Scope:** later malformed transfers can re-enter a `β`-adic valuation shell
 from projective states other than the distinguished boundary.  This theorem
-does not classify those states.
+does not classify those states. In particular, the two-transfer
+`D_c^(β+1)→singleton` state has a different incoming projective carrier and
+does not supply the equal-length physical prefix witness used here. Its
+separate algebraic extinction belongs to `MM-S50`; no `MM-S08` carrier lift is
+claimed.
 
 **Use:** all distinguished-boundary danger is now concentrated in the
 valuation-one finite-slope languages of
 [`MM-S07`](#mm-s07-swapped-digit-finite-slope-reduction).
 
-**Artifact:** [`audits/m53-swapped-setter-2026-07-25.md`](audits/m53-swapped-setter-2026-07-25.md#elimination-of-the-beta-shell);
+**Formalization:**
+[`MatrixMortality/SwappedSetterSingletonShell.lean`](MatrixMortality/SwappedSetterSingletonShell.lean),
+through `twoMarkerDiscrepancy_pattern`, `singletonB_pole_false`,
+`singletonC_pole_iff`, and `singletonShellPoleWitness_false`.
+
+**Artifact:**
+[`audits/m53-swapped-singleton-shell-formalization-2026-08-31.md`](audits/m53-swapped-singleton-shell-formalization-2026-08-31.md);
+[`audits/m53-swapped-setter-2026-07-25.md`](audits/m53-swapped-setter-2026-07-25.md#elimination-of-the-beta-shell);
 [`tools/explore_setter_projective.py`](tools/explore_setter_projective.py).
 
-**Next:** intersect each surviving primitive slope with the reverse
-discrepancy language; a hit need only imply a genuine terminal suffix.
+**Next:** use the closed witness as the terminal constructor whenever raw
+ancestry yields the distinguished-boundary `2β+1` prefix pair. Treat later
+projective carriers through their own recurrence rather than weakening this
+physical interface.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
@@ -5399,9 +5412,10 @@ positive-period compiler instance lies strictly inside the analytic range.
 does not derive that structure from an arbitrary raw projective orbit. Its `targetSuffix_eq`
 field records physical suffix provenance, but the extinction proof no longer uses that equality
 after `targetFringe` and `poleCongruence` are supplied. The theorem closes the valuation-one pole
-immediately after one positive distinguished-boundary transfer. It does not classify singleton
-`β`-shell targets or identify a later multi-transfer carrier with this raw fringe witness, and
-therefore does not settle `M₅(3)`.
+immediately after one positive distinguished-boundary transfer. Its own interface does not
+classify singleton `β`-shell targets or identify a later multi-transfer carrier with this raw
+fringe witness. The former is now closed independently by `MM-S08`; the latter remains a
+separate carrier problem.
 
 **Use:** delete the complete positive one-transfer valuation-one branch. Future swapped-ternary
 attacks must start from a genuinely multi-transfer carrier or prove the missing carrier-to-witness
@@ -5414,8 +5428,7 @@ through `poleCongruence_four_fringe_pairs`, `positiveDepthOnePoleWitness_halts`,
 **Artifact:**
 [`audits/m53-swapped-positive-depth-one-extinction-2026-08-31.md`](audits/m53-swapped-positive-depth-one-extinction-2026-08-31.md).
 
-**Next:** assemble the analogous witness from the first surviving multi-transfer carriers and
-classify the separate singleton-shell targets.
+**Next:** assemble the analogous witness from the first surviving multi-transfer carriers.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).

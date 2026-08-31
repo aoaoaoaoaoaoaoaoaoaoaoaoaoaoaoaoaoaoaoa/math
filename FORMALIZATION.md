@@ -1612,6 +1612,15 @@ The setter-projective audit now also exposes a kernel-friendly carry theorem:
 | [`MM-S42`](SALVAGE.md#mm-s42-swapped-positive-depth-one-extinction) | exact positive-depth-one witness, complete four-fringe classification, `Δ₁`/`Δ₃` residual exclusion, terminal-discrepancy collapse, and compiler-width specialization |
 | [`MM-S44`](SALVAGE.md#mm-s44-compiler-envelope-rule-bearing-extinction) | first-role mismatch cylinder, compiler-body lower-code bound, target-pole discrepancy interval, and exact all-erasure survivor theorem |
 
+`MM-S08` is now discharged in
+[`SwappedSetterSingletonShell.lean`](MatrixMortality/SwappedSetterSingletonShell.lean).
+`twoMarkerDiscrepancy_pattern` proves the unique binary carry for `4·3^β−2`;
+`singletonB_pole_false` and `singletonC_pole_iff` close the two pole equations; and
+`singletonShellPoleWitness_false` composes the equal `2β+1` prefix lengths, physical Neary
+factorizations, upper grammar, and lower-language contradiction. The theorem deliberately does
+not identify the later two-transfer `D_c^(β+1)→singleton` carrier with the distinguished
+boundary. That state is outside its witness and is addressed algebraically by `MM-S50`.
+
 `MM-S42` closes the positive valuation-one one-transfer branch only after a
 `PositiveDepthOnePoleWitness` has been assembled. It does not construct that witness from a raw
 projective orbit; its suffix equality records physical provenance but is no longer needed after
@@ -1622,7 +1631,9 @@ the swapped construction is reconstructed in
 [`audits/m53-swapped-setter-2026-07-25.md`](audits/m53-swapped-setter-2026-07-25.md);
 the depth-one closure is audited in
 [`audits/m53-swapped-positive-depth-one-extinction-2026-08-31.md`](audits/m53-swapped-positive-depth-one-extinction-2026-08-31.md);
-promotion remains in
+the singleton-shell promotion is audited in
+[`audits/m53-swapped-singleton-shell-formalization-2026-08-31.md`](audits/m53-swapped-singleton-shell-formalization-2026-08-31.md);
+the remaining arbitrary-depth work stays in
 [#6](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
 
 The boundary-correct setter shear detour is closed in Lean. Record
