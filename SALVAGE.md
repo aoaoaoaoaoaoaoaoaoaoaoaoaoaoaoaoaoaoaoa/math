@@ -331,6 +331,7 @@ file owns the mathematical stock.
 | [`G3-C08`](#g3-c08-guarded-two-state-lift) | conditional compiler | an odd two-state orbit and one scalar gate compile the complete three-state same-zero obligation | formalized | graduated |
 | [`G3-S06`](#g3-s06-guarded-mixed-prime-endpoint-bridge) | structural reduction and obstruction | every block-coded mixed-prime guard is fixed-endpoint reachability, while `bcbc` forces three distinct core maps and forbids letterwise coding | formalized | active |
 | [`G3-S08`](#g3-s08-mixed-prime-macro-fork-rigidity) | structure theorem and obstruction | exact endpoint coding identifies the flat and nested fork actions, while a common fixed point for all three macros is impossible | formalized | active |
+| [`G3-S10`](#g3-s10-mixed-prime-literal-fork-extinction) | obstruction and structural reduction | literal flat/nested equality forces a forbidden common fixed point, so every exact code requires a genuine mixed-prime kernel collision | formalized | active |
 | [`G3-M02`](#g3-m02-square-root-punctuation-fracture) | partial mechanism | a rank-two square root gives an exact `SS`-free mortality grammar | formalized | closed |
 | [`G3-O10`](#g3-o10-square-root-boundary-saturation) | obstruction | every nondegenerate rank-one square root preserves boundary coefficient zeros | formalized | graduated |
 | [`G3-M01`](#g3-m01-free-group-discrepancy-engine) | partial mechanism | Carvalho's transducer gives an all-word marker-tail equation and a cyclic exponent-one equalizer | audited | active |
@@ -14334,23 +14335,88 @@ strict contraction. Its fixed point `x` above must equal `p`. Toggle injectivity
 `target=p`. The certified rejected data-`b` collision suffix also reaches `p`, contradicting the
 endpoint equation.
 
-**Scope:** the theorem does not exclude three macros with no common affine fixed point. It does
-not classify solutions of the substituted free-monoid equation, and it does not decide which
-distinct expanded fork words lie in the mixed-prime kernel. Equality of the two fork actions is
-necessary, not sufficient, for the complete arbitrary-word converse.
+**Scope:** the theorem does not exclude three macros with no common affine fixed point and does
+not decide which distinct expanded fork words lie in the mixed-prime kernel. `G3-S10` separately
+closes the literal free-monoid branch. Equality of the two fork actions is necessary, not
+sufficient, for the complete arbitrary-word converse.
 
-**Use:** every live mixed-prime `G3-C08` constructor must present a literal macro word equation or
-an explicit kernel relation for the flat/nested fork pair, while avoiding a common fixed point for
-its three macro actions. Test this before endpoint selection or normalized-mantissa analysis.
+**Use:** every live mixed-prime `G3-C08` constructor must present an explicit nontrivial kernel
+relation for the flat/nested fork pair while avoiding a common fixed point for its three macro
+actions. Test this before endpoint selection or normalized-mantissa analysis.
 
 **Artifact:**
 [`GuardedMixedPrimeFork.lean`](MatrixMortality/GuardedMixedPrimeFork.lean) and
 [`m34-mixed-prime-macro-fork-rigidity-2026-08-31.md`](audits/m34-mixed-prime-macro-fork-rigidity-2026-08-31.md).
 
-**Next:** classify the literal morphism equation and the distinct-kernel branch separately. The
-published shortest relation gives an immediate length tax once literal equality is excluded; the
-checked kernel completion should then test whether any relation admits three pairwise-distinct,
-non-common-fixed macro actions.
+**Next:** `G3-S10` excludes literal equality. Classify the distinct-kernel branch and test whether
+any relation admits three pairwise-distinct, non-common-fixed macro actions.
+
+### G3-S10: Mixed-prime literal fork extinction
+
+**Kind:** obstruction and structural reduction
+
+**Evidence:** formalized
+
+**Disposition:** active
+
+Let `x`, `y`, and `z` be the raw mixed-prime words assigned to data `b`, data `c`, and toggle.
+Expanding literal equality of the flat and nested `bcbc` fork words and cancelling their common
+prefix and suffix gives
+
+```text
+y z x y x = x z y x y.
+```
+
+The first three factors on both sides have the same total length, as do the last two. Lean's
+equal-length list splitting yields
+
+```text
+y z x = x z y,       y x = x y.
+```
+
+Exact endpoint semantics makes the affine actions of `x` and `y` distinct, so one of these words
+is nonempty. Its slope lies strictly between zero and one and its explicit rational fixed point
+`p` is unique. The commutation equation makes the other action fix `p`. Evaluating the three-
+factor equation at `p` shows that the two actions agree at `z(p)`. If `z(p)≠p`, they agree at two
+distinct points and therefore have the same slope and intercept, contradicting their action-level
+distinction. Thus `z(p)=p`, so all three macros share `p`; `G3-S08` proves that exact endpoint
+semantics is then impossible.
+
+Therefore literal flat/nested equality cannot occur. Composing this obstruction with `G3-S08`
+gives the unconditional necessary relation
+
+```text
+κ*(flatFork) ≠ κ*(nestedFork),
+wordAction(κ*(flatFork),q)=wordAction(κ*(nestedFork),q)     for every q∈ℚ.
+```
+
+Every surviving code must expose a genuine collision in the mixed-prime affine monoid. Lean also
+checks that both sides have raw length
+
+```text
+4(2|κ(b)|+|κ(c)|+|κ(toggle)|).
+```
+
+Conditional on the audited published minimum collision length `27`, this multiple-of-four shape
+forces length at least `28` and `2|κ(b)|+|κ(c)|+|κ(toggle)|≥7`. The formal obstruction does not
+depend on that minimum.
+
+**Scope:** the theorem uses the fixed `bcbc` endpoint language and the mixed-prime affine action.
+It kills literal word equality but not a non-common-fixed triple whose expanded fork words are a
+distinct kernel pair. It supplies a necessary condition, not the complete arbitrary-word
+converse or a decision procedure for the normalized mantissa.
+
+**Use:** reject every macro search lacking an explicit distinct equal-action flat/nested pair.
+Enumerate or solve genuine kernel relations first; only surviving triples merit endpoint and
+guarded-shell analysis.
+
+**Artifact:**
+[`GuardedMixedPrimeLiteralNoGo.lean`](MatrixMortality/GuardedMixedPrimeLiteralNoGo.lean) and
+[`m34-mixed-prime-literal-fork-extinction-2026-08-31.md`](audits/m34-mixed-prime-literal-fork-extinction-2026-08-31.md).
+
+**Next:** classify decompositions of mixed-prime kernel pairs into the forced macro pattern and
+test whether any decomposition has three pairwise-distinct actions without a common fixed point.
+The complete endpoint converse and exact mantissa remain downstream.
 
 ### G3-O13: Rational serializer pumping
 
