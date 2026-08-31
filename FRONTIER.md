@@ -2960,6 +2960,12 @@ one of two consecutive target-derived lengths. By `D2-D05`, every fixed exit has
 suffix. The sole infinite seam is the fixed-source set of shell-preserving prefixes and their
 first-exit images, not the schedule after an exit. This is
 [`D2-O05`](SALVAGE.md#d2-o05-universal-exit-suffix-collapse).
+Real order removes both exterior target components. Every shell block preserves
+`[1/5,1/2]`; a trajectory ending above `1/2` or below `1/5` is dominated by the all-zero-wait
+trajectory, whose distance from `1/2` contracts by `(3/5)^n`. Lean converts this into an explicit
+computable block-count bound, and `D2-D05` decides every smaller count. The variable-schedule
+real survivor is therefore exactly the closed target interval `[1/5,1/2]`. This is
+[`D2-D10`](SALVAGE.md#d2-d10-real-trap-exterior).
 Higher depth is not free: a published length-thirteen relation yields two distinct
 schedules with the same affine map and a common Lean-checked guarded periodic source. This is an
 exact rewrite seed. Lean also proves that it preserves all intermediate shell guards in every
@@ -3030,6 +3036,7 @@ artery; see
 | Prune cross-length shell collisions at their source | every two nonempty unequal-length shell maps have a unique collision source and it is automatically a `5`-adic unit; only fixed-source equality and target acceptance remain discriminating |
 | Infer target acceptance from the automatic cross-length source unit | the adjacent debt-safe bridges `[4]` and `[0,5]` collide from the `5`-unit source `2/9`, but their target `55/243` has `5`-adic valuation one |
 | Bound accepted debt-bridge waits from one fixed source | for every `k≥0`, `[1,10k+2]` and `[3,1,10k]` are accepted adjacent bridges from `43/24`, with terminal waits tending to infinity |
+| Use real contraction to bound every shell schedule | the common invariant interval `[1/5,1/2]` is the exact recurrent real survivor; zero-wait extremality bounds only exterior targets |
 | Invoke a general module `S`-unit algorithm | the arbitrary three-prime case leads to open linear-exponential systems, and forgetting the monotone path destroys useful structure |
 
 These are exclusion tests for future proposals. Any attack relying on one of them must identify
@@ -3260,16 +3267,17 @@ universal computation.
    cycle-quotiented infinite descent rather than retaining either example as a hardness candidate.
    Do not revive singular spelling memory, conflate group inverses with positive `M₂(3)` controls,
    or retry finite ambient-group separation as a complete certificate.
-6. Formalize `D2-S02` and `D2-D05`–`D2-D07`, then attack fixed-source exact prefix and
-   accepting-exit reachability in the guarded `5`-adic schedule with a synchronized `2`/`3`/`5`
-   representation. Use the checked `D2-S03` walls to isolate mixed-sign debt transfer and
-   equality-wall cancellation; a chamber argument that never handles those transitions is
-   incomplete. Inside uninterrupted negative `3`-depth, restrict
-   source-specific point-collision search to cross-length bridges: fixed-length collisions are
-   already global affine relations by `D2-O02`. Treat chamber exit and reentry as separate seams.
-   In parallel, seek a parametric affine-kernel description beyond the checked length-30 basis
-   and run normalized collision/exit-fibre census.
-   Do not reopen unlabeled residue-only finite nuclei or uniformly bounded reverse fanout.
+6. Formalize `D2-S02` and `D2-D05`–`D2-D07`, use `D2-D10` to remove real exterior targets, then
+   attack fixed-source exact prefix and first-exit-image reachability inside `[1/5,1/2]` with a
+   synchronized `2`/`3`/`5` representation. Use the checked `D2-S03` walls to isolate mixed-sign
+   debt transfer and equality-wall cancellation; a chamber argument that never handles those
+   transitions is incomplete. Inside uninterrupted negative `3`-depth, restrict source-specific
+   point-collision search to cross-length bridges: fixed-length collisions are already global
+   affine relations by `D2-O02`. The forced-exit records remove the post-exit schedule from the
+   infinite seam, so treat chamber exit and reentry as separate pre-exit seams. In parallel, seek
+   a parametric affine-kernel description beyond the checked length-30 basis and run normalized
+   collision/exit-fibre census. Do not reopen unlabeled residue-only finite nuclei, uniformly
+   bounded reverse fanout, or global real drift inside the invariant trap.
    Keep the non-elementary lanes independent: adelic cone types, parabolic rational subsets,
    trace/height descent, finite-obstruction saturation, and valuation universality.
 7. Synthesize the returned attacks by the discriminating signals above; do not average

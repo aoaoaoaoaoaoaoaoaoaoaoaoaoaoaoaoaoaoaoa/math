@@ -25,6 +25,7 @@ import MatrixMortality.PeriodicShell
 import MatrixMortality.MixedPrimeDebt
 import MatrixMortality.MixedPrimeDebtBoundary
 import MatrixMortality.MixedPrimeExit
+import MatrixMortality.MixedPrimeRealTrap
 import MatrixMortality.RankTwoPunctuation
 import MatrixMortality.ReturnSquare
 import MatrixMortality.ReturnSquareDynamics

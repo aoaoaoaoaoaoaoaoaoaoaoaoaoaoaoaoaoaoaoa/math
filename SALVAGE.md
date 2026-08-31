@@ -313,6 +313,7 @@ file owns the mathematical stock.
 | [`D2-D08`](#d2-d08-rational-affine-group-orbits) | decidable stratum | every finitely generated rational affine group orbit reduces to a finite translation quotient or multiplier membership | audited; formalized core | graduated |
 | [`D2-D09`](#d2-d09-step-three-shear-height-decision) | decidable stratum | target height bounds every reduced syllable and exponent in the fixed step-three shear orbit of `[1:1]` | audited; formalized core | graduated |
 | [`D2-O05`](#d2-o05-promised-empty-free-orbit-inverse-cycle) | obstruction | a positive target stabilizer in a free dilation--parabolic orbit forces chamber-directed inverse stripping through the primitive-height cycle `5→3→5` | audited; formalized core | graduated |
+| [`D2-D10`](#d2-d10-real-trap-exterior) | decidable stratum | the mixed-prime shell has invariant real trap `[1/5,1/2]`; every exterior target imposes a computable translated-letter bound | formalized reduction; audited decision corollary | stock |
 | [`D2-M01`](#d2-m01-benchmark-critical-shell) | partial mechanism | the mixed-prime benchmark reduces generically to one guarded `5`-adic shell | audited | active |
 | [`D2-O01`](#d2-o01-canonical-collatz-reachability-is-not-automatic) | obstruction | full generalized-Collatz reachability is not synchronously recognizable in its canonical base | external theorem | active |
 | [`D2-O02`](#d2-o02-critical-shell-periodic-saturation) | obstruction and rewrite seed | every nonempty finite wait schedule has a rational all-unit cycle; normalized nonfreeness persists under every generator scaling, while its odd family is a two-seed cancellative pump and the positive finite basis is complete only through length 30 | formalized core; audited strengthening | active |
@@ -13349,6 +13350,65 @@ their quotient leaves an effectively well-founded inverse graph.
 and
 [`m34-transverse-dilation-height-recurrence-2026-08-31.md`](audits/m34-transverse-dilation-height-recurrence-2026-08-31.md).
 
+### D2-D10: Real-trap exterior
+
+**Kind:** decidable stratum
+**Evidence:** formalized reduction; audited decision corollary
+**Disposition:** stock
+
+Every critical-shell block is the increasing real contraction
+
+```text
+T_m(u)=1/5+(3/5)(2/3)^m u.
+```
+
+Lean proves that the closed interval `[1/5,1/2]` is invariant under every finite schedule. The
+zero-wait block `T₀(u)=1/5+(3/5)u` is extremal on both exterior components. If a schedule `w`
+sends `x` to `y>1/2`, then `x>1/2` and
+
+```text
+y−1/2 ≤ (3/5)^|w|(x−1/2).
+```
+
+If it sends `x` to `y<1/5`, then `x<1/2` and
+
+```text
+1/2−y ≤ (3/5)^|w|(1/2−x).
+```
+
+For positive distances `A,D`, `realTrapLengthBound(A,D)` is the first `N` satisfying
+
+```text
+(3/5)^N < D/A.
+```
+
+The corresponding inequality proves `|w|<N`. This is an exact computable bound obtained by a
+terminating rational-power search. Audited [`D2-D05`](#d2-d05-prescribed-translation-count)
+then decides the finitely many translated-letter counts below `N`, including regular control.
+When the target is a `5`-adic unit, `PeriodicShell.shellPrefixesUnit_iff` makes the intermediate
+shell guard automatic.
+
+**Scope:** this decides exact block-schedule reachability to every rational target outside
+`[1/5,1/2]`; for a `5`-adic unit target this is exactly guarded shell reachability. It gives no
+length bound for a target in the closed trap, including one reached from an exterior source after
+entering it. The count-by-count decision step remains audited rather than Lean-formalized. No
+full `M₂(3)` decision theorem follows.
+
+**Artifact:** `MixedPrimeDebt.realTrapLengthBound`,
+`MixedPrimeDebt.shellRun_mem_realTrap`, `MixedPrimeDebt.shellRun_above_half_envelope`,
+`MixedPrimeDebt.shellRun_above_half_length_lt_bound`,
+`MixedPrimeDebt.shellRun_below_one_fifth_envelope`, and
+`MixedPrimeDebt.shellRun_below_one_fifth_length_lt_bound` in
+[`MixedPrimeRealTrap.lean`](MatrixMortality/MixedPrimeRealTrap.lean).
+
+**Use:** remove both real exterior components before attacking the variable-schedule critical
+shell. Real contraction and monotonicity leave exactly the recurrent target interval
+`[1/5,1/2]`; further progress inside it must use arithmetic or exact address structure.
+
+**Next:** intersect the fixed-source pre-exit relation with targets in `[1/5,1/2]` using the
+three-adic carrier recurrence and `5`-adic address constraints. Do not seek another global real
+height drift inside the invariant trap.
+
 ### D2-M01: Benchmark critical shell
 
 **Kind:** partial mechanism
@@ -13402,9 +13462,10 @@ carry with the `2`- and `3`-exponents or rational height.
 
 **Artifact:** [`audits/dimension-two-affine-peeling-2026-07-25.md`](audits/dimension-two-affine-peeling-2026-07-25.md#critical-shell-dynamics).
 
-**Next:** represent the exact shell-prefix and accepting-exit relation from a specified rational
-source, or construct a higher-period rational rewrite family with an all-other-waits exclusion
-theorem.
+**Next:** [`D2-D10`](#d2-d10-real-trap-exterior) removes targets outside `[1/5,1/2]`.
+Represent the exact shell-prefix and accepting-exit relation from a specified rational source
+inside that closed trap, or construct a higher-period rational rewrite family with an
+all-other-waits exclusion theorem.
 
 **Issue:** [#7, Formalize affine peeling and decide the `M₂(3)` benchmark
 shell](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/7).
@@ -14030,6 +14091,7 @@ follows.
 need only represent the exact set of shell-preserving prefixes together with their first exit
 images; each image has a uniformly finite target-derived suffix query.
 
-**Next:** construct an effective normal form, automaton, or finite union of rational cones for the
-fixed-source pre-exit relation and its first-exit image. The remaining infinite quantifier must be
-cut before the exit, not after it.
+**Next:** after [`D2-D10`](#d2-d10-real-trap-exterior), construct an effective normal form,
+automaton, or finite union of rational cones for the fixed-source pre-exit relation and its
+first-exit image inside `[1/5,1/2]`. The remaining infinite quantifier must be cut before the exit,
+not after it.
