@@ -1891,6 +1891,7 @@ fixed-rank decision problem.
 | `PhaseRigidity.lean` | checked local role algebra, discrepancy commutators, and invariant-pencil rigidity |
 | `HistoryFracture.lean` | null-history counterexample, minimum-body base-five encoder, and integral mortality lift |
 | `TransverseHistory.lean` | injective mixed-radix transverse orbit, exact minimum-body zero language, and uniform terminal-row obstruction |
+| `TransverseLineAtlas.lean` | six-carrier normal form for singular data with a projectively involutive toggle and terminal-section dimension bound |
 | `BranchingHistory.lean` | fixed `bcbc` terminal forks and affine positional lower bounds |
 | `AffineRecognizer.lean` | generic singular three-state guard-and-carry representation calculus |
 | `BranchingRecognizer.lean` | complete `bcbc` residual grammar and rational three-state recognizer |
@@ -2161,6 +2162,11 @@ fixed-rank decision problem.
 | Fixed transverse-kernel controls maintain that code on every raw control word | `TransverseHistory.product_mulVec_column`, `TransverseHistory.data_mulVec_eq_zero_iff` |
 | The transverse controls have exactly the paired zeros on every minimum body | `TransverseHistory.coefficient_zero_iff_decode_eq`, `TransverseHistory.minimalBody_zero_iff_paired_zero` |
 | No source-dependent terminal-row family extends the fixed transverse orbit to all admissible bodies | `TransverseHistory.rowCoefficient_eq`, `TransverseHistory.no_bcbc_terminal_row_section`, `TransverseHistory.no_sourceUniform_terminal_row_section` |
+| A projectively involutive toggle confines every raw control orbit to six fixed linear carriers | `TransverseLineAtlas.chart_count`, `TransverseLineAtlas.reachable_mem_carrier`, `TransverseLineAtlas.reachable_mem_carrier_of_involutive` |
+| Leading-toggle parity and the first data control select a canonical carrier for every raw word | `TransverseLineAtlas.wordChart`, `TransverseLineAtlas.wordProduct_mulVec_mem_wordChart` |
+| Singular three-dimensional data images and all six carriers have vector dimension at most two, while boundary carriers have dimension at most one | `TransverseLineAtlas.range_finrank_le_two_of_det_zero`, `TransverseLineAtlas.boundary_carrier_finrank_le_one`, `TransverseLineAtlas.carrier_finrank_le_two` |
+| A terminal row cuts each carrier in the whole carrier or a subspace of vector dimension at most one | `TransverseLineAtlas.zeroSection_eq_carrier_or_finrank_le_one`, `TransverseLineAtlas.chart_zeroSection_classification` |
+| Every exact singular/projectively-involutive paired recognizer has its complete raw-control zero language on those six sections | `TransverseLineAtlas.pairedZero_iff_mem_six_zeroSections`, `TransverseLineAtlas.pairedZero_singular_sixLineAtlas` |
 | The `bcbb` null histories and complete terminal language are one exact periodic ray | `PeriodicHistory.bcbbNull_iff`, `PeriodicHistory.bcbb_terminal_match_iff` |
 | The singular positional decoder obeys its all-control affine state equation | `PeriodicHistory.periodicProduct_mulVec_column`, `PeriodicHistory.periodicCoefficient_eq` |
 | The `bcbb` affine section has no false zero and matches the paired zero language | `PeriodicHistory.bcbbAffine_zero_iff`, `PeriodicHistory.bcbb_periodicCoefficient_zero_iff_paired_zero` |
@@ -2423,6 +2429,21 @@ contradicts same-zero exactness. The uniform theorem quantifies over every set-t
 source-dependent row family and requires exactness only on admissible bodies, so no separate
 computability premise is needed. It fixes the `G3-O18` controls and column and makes no claim
 against different two-dimensional transverse dynamics.
+
+For `G3-O27`, Lean no longer fixes the controls, row, or column. It assumes both rational
+three-dimensional data matrices are singular and the toggle satisfies the matrix identity
+`T²=sI` for one nonzero scalar `s`; the exact-involution theorem is the specialization `s=1`.
+Every raw control word then lands in one of six fixed linear subspaces: the two boundary spans and
+the two data images, each before and after one toggle. The boundary spans have vector dimension at
+most one; the data carriers have dimension at most two and become projective lines only at exact
+rank two. Lean proves that any row cuts each carrier in the whole carrier or a subspace of vector
+dimension at most one, and transfers a same-zero hypothesis into an exact canonical-section
+description on the complete free control monoid. The canonical label uses only leading-toggle
+parity and the first data control, so whole-chart acceptance is finite-mode; every non-whole
+section is projectively at most one point. This does not decide point reachability under arbitrary
+rational projective-line transitions. Its connection to `G3-O04` requires that the six charts
+additionally admit the shared finite-mode integral affine normalization and expanding-or-
+stationary law used there. The remaining finite rational `P¹` atlas may share the `M₂(3)` core.
 
 For `G3-O20`, Lean proves the free-monoid tail law: if one fixed-boundary equation with stationary
 left and right pump blocks holds at exponents `N` and `N+1`, it holds at every exponent `N+k`.

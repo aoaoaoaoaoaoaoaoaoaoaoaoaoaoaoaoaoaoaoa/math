@@ -230,6 +230,7 @@ file owns the mathematical stock.
 | [`G3-S02`](#g3-s02-rank-two-kernel-bifurcation) | structure theorem | common kernels erase route differences; transverse fibres retain one bilinear survivor | formalized | active |
 | [`G3-O18`](#g3-o18-transverse-minimum-body-countermodel) | fixed-subclass compiler | distinct rank-two kernels encode every paired history and exactly recognize all minimum bodies | formalized | graduated |
 | [`G3-O26`](#g3-o26-transverse-terminal-row-obstruction) | obstruction | two `bcbc` terminal histories force every exact row on the fixed transverse orbit to vanish | formalized | graduated |
+| [`G3-O27`](#g3-o27-projective-toggle-line-atlas) | obstruction | singular data and a projectively involutive toggle confine every raw orbit to six fixed rank-at-most-two carriers | formalized | graduated |
 | [`G3-O02`](#g3-o02-rational-phase-fracture) | obstruction | a mortal paired instance has no rational phase-state same-zero compression | audited | stock |
 | [`G3-O03`](#g3-o03-history-sensitive-minimal-body-fracture) | obstruction | minimal bodies admit an exact history-sensitive three-state same-zero compiler | formalized | graduated |
 | [`G3-O04`](#g3-o04-expanding-affine-history-no-go) | obstruction | finite-mode expanding one-coordinate history has decidable target reachability | audited | graduated |
@@ -9660,15 +9661,16 @@ sets may be infinite. The result kills any lower bound derived from distinct ran
 the bilinear fibre law, or exceptional projective fibres alone.
 
 **Use:** [`G3-O26`](#g3-o26-transverse-terminal-row-obstruction) closes every terminal-row
-extension of this fixed orbit. A transverse constructor must change the orbit and supply genuinely
-two-dimensional terminal dynamics. A lower bound must exploit unrestricted terminal arithmetic,
+extension of this fixed orbit. [`G3-O27`](#g3-o27-projective-toggle-line-atlas) further closes a
+genuinely two-dimensional projective escape whenever both data maps remain singular and the
+toggle is projectively involutive. A lower bound must exploit unrestricted terminal arithmetic,
 not transverse geometry by itself.
 
 **Artifact:** [`TransverseHistory.lean`](MatrixMortality/TransverseHistory.lean) and
 [`m34-transverse-history-2026-08-11.md`](audits/m34-transverse-history-2026-08-11.md).
 
-**Next:** replace the two affine phase lines by a genuinely two-dimensional invariant terminal
-surface with arbitrary-body soundness.
+**Next:** leave the projectively involutive singular line atlas, or solve its surviving finite
+rational `P¹` point-reachability problem with arbitrary-body soundness.
 
 ### G3-O26: Transverse terminal-row obstruction
 
@@ -9694,18 +9696,77 @@ make the fixed controls and initial column same-zero with the paired coefficient
 admissible `(β,body)`. Every computable family is a special case.
 
 **Scope:** the controls and initial column are fixed to the `G3-O18` orbit. The theorem does not
-exclude a different transverse construction, source-dependent controls, or a genuinely
-two-dimensional invariant surface.
+exclude different transverse controls or a source-dependent column. `G3-O27` separately
+classifies the projectively involutive singular-data branch without fixing either.
 
 **Use:** delete terminal-row retuning as the transverse live leaf. Any surviving transverse
 constructor must alter the orbit itself; fitting more row parameters cannot reach unrestricted
-terminal languages.
+terminal languages. Within singular data and projective involution, `G3-O27` shows that alteration
+still cannot produce a genuinely two-dimensional projective orbit.
 
 **Artifact:** [`TransverseHistory.lean`](MatrixMortality/TransverseHistory.lean) and
 [`m34-transverse-terminal-row-obstruction-2026-08-30.md`](audits/m34-transverse-terminal-row-obstruction-2026-08-30.md).
 
-**Next:** construct genuinely two-dimensional transverse terminal dynamics, or derive from its
-required shift laws the uniform positive-projective incompatibility sought by the opposing lane.
+**Next:** attack the finite rational `P¹` point-reachability problem left by `G3-O27`, or abandon
+projective involution or singularity in the data controls.
+
+### G3-O27: Projective-toggle line atlas
+
+**Kind:** obstruction
+
+**Evidence:** formalized
+
+**Disposition:** graduated
+
+Let `B,C,T∈M₃(ℚ)`, let `γ∈ℚ³`, and assume
+
+```text
+det B = det C = 0,             T² = sI,             s≠0.
+```
+
+For every raw word over `{B,C,T}`, its image of `γ` lies in one of the six fixed linear
+subspaces
+
+```text
+span(γ),  span(Tγ),  im(B),  T(im(B)),  im(C),  T(im(C)).
+```
+
+The first two have vector dimension at most one and are projective rays only when their spanning
+vectors are nonzero. The last four have vector dimension at most two; they are projective-line
+charts only when the corresponding image has rank exactly two. Thus this is a six-subspace
+cover, not six two-dimensional projective surfaces. The proof normalizes only repeated toggles:
+the leading data control absorbs the complete remaining history into its input vector.
+
+For any terminal row `λ`, Lean also proves that its zero section on each carrier is either the
+whole carrier or has vector dimension at most one. Consequently, if these controls and row are
+same-zero with a paired source, the complete raw-control zero language is exactly membership in
+the section of a canonical carrier. Its label depends only on the parity of the leading toggles
+and the first data control. Whole-carrier acceptance is therefore finite-mode and regular; every
+non-whole section is projectively at most one point. This conclusion is uniform in arbitrary
+`(β,body)`, controls, column, and row subject to the displayed hypotheses. Matrix-level
+involution `T²=I` is recorded as a separate scalar-one corollary.
+
+**Scope:** singular means rank at most two, not exactly two. The theorem does not decide the
+remaining arithmetic on a projective-line chart. In particular, `G3-O04` applies only when all
+chart transitions admit its shared integral affine coordinate, finite mode graph, and stationary-
+or-expanding law with bounded targets. Without that normalization, the exact survivor is point
+reachability in a finite rational `P¹` atlas under arbitrary chart transitions. This may be the
+same core as the open `M₂(3)` campaign. A nonprojectively-involutive toggle can also retain
+unbounded hidden toggle powers, and a full-rank data control escapes the six-carrier bound.
+
+**Use:** delete the proposed genuinely two-dimensional survivor inside the singular/projectively-
+involutive architecture and replace it by the finite rational `P¹` point-reachability problem. A
+constructor in this branch must solve that line-atlas arithmetic; otherwise it must use a toggle
+whose square is not scalar or at least one full-rank data map. The same cut applies to the
+singular same-zero/history compressor needed by the nine-state binary factor route: an
+involutive toggle supplies no hidden projective history beyond this finite atlas.
+
+**Artifact:** [`TransverseLineAtlas.lean`](MatrixMortality/TransverseLineAtlas.lean) and
+[`m34-projective-toggle-line-atlas-2026-08-31.md`](audits/m34-projective-toggle-line-atlas-2026-08-31.md).
+
+**Next:** determine whether the finite rational `P¹` point-reachability survivor reduces to, or
+strictly extends, `M₂(3)`; otherwise construct a source-computable escape using non-scalar toggle
+powers or full-rank data.
 
 ### G3-O13: Rational serializer pumping
 

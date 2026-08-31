@@ -873,7 +873,13 @@ exact positional four-role cube admits a checked false terminal witness on the n
 Thus neither another exact prefix layout nor an exact three-phase block factorization remains
 live. The direct frontier is a genuinely changed zero series, a nonfactorial state-dependent
 decoder, another invariant quotient not induced by the generators' common image, or a nonlinear
-reduction. `GPCP(3)` remains the independent stronger ancestor.
+reduction. A singular same-zero/history compressor borrowed from the `M₃(4)` lane is now governed
+by [`G3-O27`](SALVAGE.md#g3-o27-projective-toggle-line-atlas): if both data stages are singular
+and the absorbed trailing toggle is projectively involutive, its projective history remains in a
+six-carrier line atlas. Such a nine-state escape must therefore solve the surviving nonexpanding
+point-reachability problem in a finite rational `P¹` atlas, potentially jointly with `M₂(3)`,
+retain non-scalar toggle powers, or use a full-rank data stage. `GPCP(3)` remains the independent
+stronger ancestor.
 
 [`MM-O19`](SALVAGE.md#mm-o19-trailing-toggle-exact-prefix-tax) tests one changed-source seam.
 Because the paired toggle satisfies `T²=I`, moving one toggle into the terminal column preserves
@@ -1121,7 +1127,18 @@ several or infinitely many terminal histories.
 extension of that orbit. The two `bcbc` terminal histories require zeros at both phases of two
 distinct codes, forcing every exact row to vanish; the checked near-fork is then a false zero.
 This holds even for an arbitrary source-dependent row family. The live transverse problem is
-therefore a different, genuinely two-dimensional orbit, not more parameters in the terminal row.
+therefore a different orbit, not more parameters in the terminal row.
+
+[`G3-O27`](SALVAGE.md#g3-o27-projective-toggle-line-atlas) sharply restricts that escape. For
+arbitrary source-dependent controls and column, singular data maps together with
+`T²=sI`, `s≠0`, confine the complete raw orbit to two boundary subspaces of vector dimension at
+most one and four data-image subspaces of vector dimension at most two. Every terminal row cuts
+each carrier in the whole carrier or a subspace of vector dimension at most one. Hence this
+branch has only a finite projective-line atlas, not genuinely two-dimensional projective
+dynamics. `G3-O04` decides it only when those charts share its finite-mode expanding affine
+normalization. The exact internal survivor is point reachability in a finite rational `P¹` atlas,
+potentially the joint `M₂(3)` core. A nonprojectively-involutive toggle and a full-rank data map
+remain separate structural escapes.
 
 [`G3-M02`](SALVAGE.md#g3-m02-square-root-punctuation-fracture) supplied a complete direct-mortality
 grammar. The source-uniform rational rank-two matrix `S` satisfies
@@ -1360,7 +1377,7 @@ or neutral word across the return, use an empty consume, or split recurrent outp
 | Lane | Available leverage | Decisive obstruction or obligation |
 | --- | --- | --- |
 | Common-kernel shuttle | The exact `bcbb` compiler moves its common data kernel out through the toggle and recovers it at the next data action | Uniformize this non-invariant shuttle in `(β,body)`; every toggle-invariant guard factors through the two-dimensional quotient |
-| Transverse-kernel terminal dynamics | Fixed integral transverse controls expose the two affine phase lines, and `G3-O26` excludes every source-dependent terminal row on that orbit | Construct different transverse controls or a source-coupled column whose orbit supports a genuinely two-dimensional terminal surface |
+| Transverse-kernel terminal dynamics | `G3-O26` kills row retuning on the fixed orbit; `G3-O27` confines every singular-data/projectively-involutive variant to six rank-at-most-two carriers | Solve finite rational `P¹` point reachability, potentially with `M₂(3)`, or use non-scalar toggle powers or a full-rank data map |
 | Positive projective transition lower bound | Same-zero dimension three is point-line incidence in `P²`, and actual one-sided shifts retain finite rank/kernel/image data | Derive a uniform nonstationary or noncommuting shift incompatibility from an unbounded terminal section; static support rank, formal inverse completion, fixed equal-length return flowers, and unary consecutive-repeat escape are forbidden |
 | Global word-residual recoding | Longer noncommutative atoms can retain order while discarding the four additive role channels | Escape `G3-D05`: fixed-priority affine counters and all one-way reset/transfer/fanout cascades are decidable |
 | Head-separated three-schema source | `G3-C04` discharges every arbitrary-trace forcing obligation locally; `G3-O24` isolates the directed stable-cone alternative | Preserve an undecidable mixed or neutral word across returns, or realize zero-sensitive S5 GLB decoding after the `G3-O25` separator-rank fork; complete pure forks are decidable by `G3-D07` |
@@ -1375,17 +1392,18 @@ removes even positive congruence separation.
 
 #### Raceable leaves
 
-After `G3-O21`–`G3-O26`, `R32-O22`, and `G3-D07` close their respective carrier, absorption,
-pure-source, and fixed-transverse-orbit lanes, the net tree has six independent raceable leaves:
+After `G3-O21`–`G3-O27`, `R32-O22`, and `G3-D07` close their respective carrier, absorption,
+pure-source, fixed-transverse-orbit, and finite-line-atlas lanes, the net tree has six independent
+raceable leaves:
 
 1. **Common-kernel shuttle constructor.** Give one computable three-state paired recognizer in
    which the toggle moves a freshly minted common-kernel guard back into visible quotient data.
    Prove its state formula and scalar-zero equivalence uniformly in `(β,body)` on the complete
    free control monoid. Toggle-invariant refresh is closed.
-2. **Genuinely two-dimensional transverse constructor.** Replace the checked mixed-radix orbit,
-   whose two affine phase lines admit no source-dependent exact row, by transverse dynamics with
-   a source-computable terminal surface for unrestricted bodies. Pure kernel geometry,
-   exceptional fibres, minimum-body examples, and terminal-row retuning are closed.
+2. **Transverse line-atlas escape.** Build a source-computable arbitrary-body recognizer using
+   finite rational `P¹` point reachability, non-scalar toggle powers, or a full-rank data map.
+   Pure kernel geometry, exceptional fibres, minimum-body examples, terminal-row retuning, and
+   genuinely two-dimensional dynamics under singular data plus projective involution are closed.
 3. **Positive projective transition obstruction.** Derive from a source-unbounded terminal
    section a finite shift incompatibility which no three-dimensional rational same-zero
    representation can realize for any combination of generator ranks and kernels. It must use
@@ -1479,8 +1497,12 @@ hidden direction out through a non-invariant toggle; if the kernel is toggle-inv
 data action erases it and only the two-dimensional quotient persists. A transverse-kernel
 construction already realizes the bilinear fibre intersection and every minimum-body history;
 `G3-O26` proves that its fixed two-line orbit cannot be extended by any source-dependent row. It
-must now change the orbit itself and realize a genuinely two-dimensional, generally infinite
-terminal surface. A lower-bound attack must exclude both positive
+must now change the orbit itself. `G3-O27` proves that singular data plus a projectively
+involutive toggle still yields only six rank-at-most-two linear carriers, with whole-carrier or
+rank-at-most-one terminal sections. Its exact internal survivor is point reachability in a finite
+rational `P¹` atlas, potentially shared with `M₂(3)`; otherwise the constructor must use
+non-scalar toggle powers or a full-rank data map.
+A lower-bound attack must exclude both positive
 architectures through actual transition data. Backward cancellation, inverse cofinality, and
 static incidence cannot do so. Do not spend another attack on separator placement, fixed anchors,
 or control singularity after recognition; `MM-C01` closes them unconditionally.
