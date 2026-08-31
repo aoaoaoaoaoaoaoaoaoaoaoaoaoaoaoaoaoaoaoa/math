@@ -1092,6 +1092,14 @@ is a section. Thus the one-chart atlas subfamily is instancewise equivalent to t
 a general atlas decision algorithm would decide `M₂(3)`. This is not an undecidability result,
 and arbitrary multi-chart instances are not reduced back to one `M₂(3)` instance.
 
+[`G3-O30`](SALVAGE.md#g3-o30-nonprojective-infinite-carrier-orbit) proves that the other
+structural escape is real. The diagonal toggle `diag(1,2,3)` and an exact rank-two data map with
+source-parameter image normal `(1,1,s)` produce the literal raw-prefix carriers
+`im(TⁿD_s)`. Their normals are `(6ⁿ,3ⁿ,s·2ⁿ)`, and `(1,−2ⁿ,0)` separates the `n`th plane from
+every later plane. Thus the carrier orbit is injectively infinite for every `s∈ℚ`. Singularity
+and rational diagonalizability do not recover a finite atlas once the toggle ceases to be
+projectively involutive. No terminal row or paired recognizer follows from the counterexample.
+
 [`G3-M02`](SALVAGE.md#g3-m02-square-root-punctuation-fracture) supplied a complete direct-mortality
 grammar. The source-uniform rational rank-two matrix `S` satisfies
 
@@ -1329,7 +1337,7 @@ or neutral word across the return, use an empty consume, or split recurrent outp
 | Lane | Available leverage | Decisive obstruction or obligation |
 | --- | --- | --- |
 | Common-kernel shuttle | The exact `bcbb` compiler moves its common data kernel out through the toggle and recovers it at the next data action | Uniformize this non-invariant shuttle in `(β,body)`; every toggle-invariant guard factors through the two-dimensional quotient |
-| Transverse-kernel terminal dynamics | `G3-O26` kills row retuning; `G3-O27` gives the six-carrier atlas; `G3-O29` embeds the full `M₂(3)` core in one identity-toggle chart | Solve the joint dimension-two incidence node, impose a strict decidable stratum, or use non-scalar toggle powers or a full-rank data map |
+| Transverse-kernel terminal dynamics | `G3-O26` kills row retuning; `G3-O27` gives the involutive six-carrier atlas; `G3-O29` embeds `M₂(3)` there; `G3-O30` gives an injectively infinite nonprojective plane orbit | Exploit non-scalar toggle depth with one uniform terminal row, solve the joint dimension-two node, or use a full-rank data map |
 | Positive projective transition lower bound | Same-zero dimension three is point-line incidence in `P²`, and actual one-sided shifts retain finite rank/kernel/image data | Derive a uniform nonstationary or noncommuting shift incompatibility from an unbounded terminal section; static support rank, formal inverse completion, fixed equal-length return flowers, and unary consecutive-repeat escape are forbidden |
 | Global word-residual recoding | Longer noncommutative atoms can retain order while discarding the four additive role channels | Escape `G3-D05`: fixed-priority affine counters and all one-way reset/transfer/fanout cascades are decidable |
 | Head-separated three-schema source | `G3-C04` discharges every arbitrary-trace forcing obligation locally; `G3-O24` isolates the directed stable-cone alternative | Preserve an undecidable mixed or neutral word across returns, or realize zero-sensitive S5 GLB decoding after the `G3-O25` separator-rank fork; complete pure forks are decidable by `G3-D07` |
@@ -1353,7 +1361,8 @@ raceable leaves:
    Prove its state formula and scalar-zero equivalence uniformly in `(β,body)` on the complete
    free control monoid. Toggle-invariant refresh is closed.
 2. **Transverse line-atlas escape.** Build a source-computable arbitrary-body recognizer using
-   the `M₂(3)` projective-incidence core, non-scalar toggle powers, or a full-rank data map.
+   the `M₂(3)` projective-incidence core, the explicit `G3-O30` infinite non-scalar toggle orbit,
+   or a full-rank data map.
    Pure kernel geometry, exceptional fibres, minimum-body examples, terminal-row retuning, and
    genuinely two-dimensional dynamics under singular data plus projective involution are closed;
    general one-chart incidence cannot be declared decidable without resolving `M₂(3)`.
@@ -1454,8 +1463,10 @@ must now change the orbit itself. `G3-O27` proves that singular data plus a proj
 involutive toggle still yields only six rank-at-most-two linear carriers, with whole-carrier or
 rank-at-most-one terminal sections. Its exact internal survivor is point reachability in a finite
 rational `P¹` atlas. `G3-O29` embeds the complete `M₂(3)` incidence core already in one common
-identity-toggle chart; otherwise the constructor must use non-scalar toggle powers or a full-rank
-data map.
+identity-toggle chart. `G3-O30` shows that non-scalar toggle powers genuinely generate infinitely
+many exact rank-two carriers even for a rational diagonal toggle; the missing step is one
+source-uniform terminal section and complete arbitrary-word converse. A full-rank data map remains
+the other escape.
 A lower-bound attack must exclude both positive
 architectures through actual transition data. Backward cancellation, inverse cofinality, and
 static incidence cannot do so. Do not spend another attack on separator placement, fixed anchors,

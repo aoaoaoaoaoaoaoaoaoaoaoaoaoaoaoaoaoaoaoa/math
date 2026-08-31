@@ -224,6 +224,7 @@ file owns the mathematical stock.
 | [`G3-O26`](#g3-o26-transverse-terminal-row-obstruction) | obstruction | two `bcbc` terminal histories force every exact row on the fixed transverse orbit to vanish | formalized | graduated |
 | [`G3-O27`](#g3-o27-projective-toggle-line-atlas) | obstruction | singular data and a projectively involutive toggle confine every raw orbit to six fixed rank-at-most-two carriers | formalized | graduated |
 | [`G3-O29`](#g3-o29-one-chart-projective-hard-core) | hardness embedding | one invariant plane with identity toggle already contains exact two-generator rational projective incidence | formalized | graduated |
+| [`G3-O30`](#g3-o30-nonprojective-infinite-carrier-orbit) | counterexample | a diagonal toggle with eigenvalues `1,2,3` sends one rank-two data image through infinitely many distinct rational planes | formalized | graduated |
 | [`G3-O02`](#g3-o02-rational-phase-fracture) | obstruction | a mortal paired instance has no rational phase-state same-zero compression | audited | stock |
 | [`G3-O03`](#g3-o03-history-sensitive-minimal-body-fracture) | obstruction | minimal bodies admit an exact history-sensitive three-state same-zero compiler | formalized | graduated |
 | [`G3-O04`](#g3-o04-expanding-affine-history-no-go) | obstruction | finite-mode expanding one-coordinate history has decidable target reachability | audited | graduated |
@@ -9408,6 +9409,77 @@ dimension-two campaign.
 
 **Next:** treat one-chart atlas incidence and `M₂(3)` as one research node; pursue `D2-S03`'s
 mixed-prime shell or another genuine dimension-two cut rather than atlas bookkeeping.
+
+### G3-O30: Nonprojective infinite-carrier orbit
+
+**Kind:** counterexample
+
+**Evidence:** formalized
+
+**Disposition:** graduated
+
+Let
+
+```text
+T = diag(1,2,3),
+
+      [ 1   s   0 ]
+D_s = [−1   0   0 ],             s∈ℚ.
+      [ 0  −1   0 ]
+```
+
+The toggle has three distinct rational eigenvalues, determinant six, and `T²` is not a scalar
+matrix. Every `D_s` has determinant zero and rank exactly two. Its image is the plane with normal
+`(1,1,s)`.
+
+For each `n∈ℕ`, the literal raw prefix `tⁿb` has product `TⁿD_s`. Lean proves that this carrier
+matrix still has rank two and that its image plane is annihilated by
+
+```text
+N_n(s) = (6ⁿ, 3ⁿ, s·2ⁿ).
+```
+
+The same carrier contains the vector
+
+```text
+v_n = (1,−2ⁿ,0).
+```
+
+For `n<m`, its evaluation under the later normal is
+
+```text
+N_m(s)·v_n = 3^m(2^m−2^n) ≠ 0.
+```
+
+Hence `v_n∈im(TⁿD_s)` but `v_n∉im(TᵐD_s)`. Lean concludes that
+
+```text
+n ↦ im(TⁿD_s)
+```
+
+is injective for every rational parameter `s`. The carrier closure is therefore genuinely
+infinite even though the data map is singular of exact rank two and the toggle is diagonalizable
+over `ℚ` with three simple eigenvalues. The parameter `s` may be any computable source value;
+the separation is uniform in it.
+
+**Scope:** this is an explicit infinite-carrier counterexample, not a paired recognizer, a
+terminal-row construction, or an undecidability reduction. It does not classify all
+diagonalizable toggles or show that one fixed row recognizes useful source arithmetic on these
+planes. It also does not contradict `G3-O27`, whose matrix hypothesis is `T²=qI`, `q≠0`; the
+present toggle deliberately violates it.
+
+**Use:** the finite six-carrier atlas is a consequence of projective involution, not singular
+data alone. Delete any lower-bound argument asserting that rank-two data plus a diagonalizable
+phase action must have finite carrier closure. A live nonprojective constructor may store
+unbounded history in the toggle depth before the first data action, with the source parameter
+controlling the initial plane.
+
+**Artifact:** [`TransverseInfiniteAtlas.lean`](MatrixMortality/TransverseInfiniteAtlas.lean) and
+[`m34-nonprojective-infinite-carrier-2026-08-31.md`](audits/m34-nonprojective-infinite-carrier-2026-08-31.md).
+
+**Next:** classify when a rational diagonal toggle has finite subspace orbit, then determine
+whether one terminal row can exploit the infinite `TⁿD_s` family uniformly over unrestricted
+paired sources.
 
 ### G3-O13: Rational serializer pumping
 

@@ -91,6 +91,7 @@ import MatrixMortality.PeriodicHistory
 import MatrixMortality.TransverseHistory
 import MatrixMortality.TransverseLineAtlas
 import MatrixMortality.TransverseLineHardCore
+import MatrixMortality.TransverseInfiniteAtlas
 import MatrixMortality.BranchingHistory
 import MatrixMortality.PrefixResidual
 import MatrixMortality.AffineRecognizer
