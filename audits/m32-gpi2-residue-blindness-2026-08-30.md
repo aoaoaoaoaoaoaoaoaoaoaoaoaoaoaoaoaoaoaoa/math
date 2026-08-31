@@ -361,6 +361,48 @@ where powers denote repeated entries. Lean proves `shellRawWord(u_k)=T L_k` and
 domains, and a common rational all-unit periodic source for every `k`. This is unbounded guarded
 nonfreeness, not a fixed-source reachability decision.
 
+### Normalization and the finite pump
+
+The odd family is a true matrix-semigroup relation, not an equality created by a choice of
+projective representatives. Put
+
+```text
+D̄=[[2/3,0],[0,1]],        T̄=[[3/5,1],[0,1]].
+```
+
+Lean proves that their homogeneous action on `[z,1]` is the raw affine action and hence that the
+two matrix products in every member of (13) are exactly equal. Both sides have the same letter
+multiset, with `16+k` copies of `D` and `13+k` copies of `T`. Therefore independent rescaling
+`D̄↦aD̄`, `T̄↦bT̄` multiplies both products by the same scalar `a^(16+k)b^(13+k)`.
+`MixedPrimeNormalization.wordProduct_scaledAffineGenerator_kernelOddFamily` checks this for
+arbitrary rational `a,b`, and `scaledAffineGenerator_isUnit` checks invertibility when they are
+nonzero. In particular the independent nonzero scaling used by `exists_unitNormalized` cannot
+restore freeness.
+
+The infinite family is nevertheless finite in the cancellative envelope. Abstractly, if a group
+contains elements `A,B,C,S,V` satisfying
+
+```text
+AC=BCV,        ASC=BSCV,
+```
+
+then `AS^kC=BS^kCV` for every `k≥0`: the first equality gives
+`A=B(CVC⁻¹)`, and the second makes `CVC⁻¹` commute with `S`. Lean proves this as
+`MixedPrimeNormalization.groupPump_eq_of_zero_one` and instantiates it on the exact odd-family
+word factorization in `wordProduct_kernelOddFamily_of_zero_one`. Thus `k=0` and `k=1` force the
+entire family in every group-valued interpretation. They need not generate the same equalities in
+the uncancelled positive-word congruence; indeed the length-31 `k=1` pair is independent of the
+five checked positive rewrite rules.
+
+This adjudicates the three proposed consequences sharply:
+
+- **Normalization:** survives exactly; the normalized affine pair remains nonfree.
+- **Finite-index quotients:** no new separation theorem results. The balanced relation survives
+  every quotient and is already weaker than the full finite-image blindness theorem above.
+- **Pumping:** two seeds generate all odd-family equalities after cancellation, but every equality
+  preserves length and letter content. It supplies neither a shortening rule nor a depth bound
+  for fixed-source reachability.
+
 The five-rule census found seven length-31 relations:
 
 ```text
@@ -463,6 +505,9 @@ proliferates and does not approach confluence.
 | rational shell addresses are eventually periodic | rejected | strictly increasing-wait construction above |
 | the benchmark schedule action is free | rejected | published relation (9), affine equality and shared guarded cycle checked in Lean |
 | the published relation presents the affine kernel | rejected | an infinite checked family at every odd length from 29, three independent checked relations at length 30, and six residual computational classes at length 31 |
+| unit normalization can restore a free positive action | rejected | the odd family is balanced and remains an exact matrix relation under every independent generator scaling |
+| the odd family gives infinitely many independent group relations | rejected | the `k=0,1` instances force every `k` by one conjugate commutation |
+| the odd family yields a shortening pump or reachability bound | rejected | every member preserves length and letter content |
 | finite ambient quotients can separate `τ_N` from `PK` | rejected | positivity collapses in every finite image |
 | a finite syntax-sensitive or multi-place representation is impossible | open | outside both obstruction theorems |
 | normalized GPI₂ is decidable or undecidable | open | the rational global incidence remains |
@@ -473,5 +518,5 @@ proliferates and does not approach confluence.
 MASTER VERDICT: normalized GPI₂, M₂(3), and the rank-(2,2) profile of M₃(2) remain open
 REMOVED: ambient finite-quotient separation; state-independent unlabeled bounded-residue nonexistence pruning; eventual shell exit or periodicity; universal strict drift; one-wait period-one compiler
 EXACT DECISION THROAT: fixed-source exact prefix and accepting-exit reachability across an infinite ordered schedule tree
-NEW REWRITE FRONTIER: an infinite Lean-checked odd-length family grows from the length-29 rule; the five-rule basis is complete through length 30, leaves six unexplained classes at 31, and has 45 nonjoinable critical overlaps
+NEW REWRITE FRONTIER: exact nonfreeness survives normalization; k=0,1 force the odd family only after cancellation; the positive five-rule basis is complete through length 30, leaves six unexplained classes at 31, and has 45 nonjoinable critical overlaps
 ```

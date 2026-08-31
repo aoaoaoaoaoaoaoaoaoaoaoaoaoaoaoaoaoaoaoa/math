@@ -1232,6 +1232,36 @@
 'MatrixMortality.MixedPrimeKernel.wordAction_kernel30a' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.MixedPrimeKernel.wordAction_kernel30b' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.MixedPrimeKernel.wordAction_kernel30c' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.MixedPrimeNormalization.wordProduct_smulMatrix_eq_of_perm' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeNormalization.groupPump_eq_of_zero_one' depends on axioms: [propext]
+'MatrixMortality.MixedPrimeNormalization.kernelOddFamily_count' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeNormalization.kernelOddFamily_perm' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeNormalization.affineGenerator_isUnit' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeNormalization.scaledAffineGenerator_isUnit' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeNormalization.wordProduct_affineGenerator_mulVec' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeNormalization.wordProduct_affineGenerator_kernelOddFamily' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeNormalization.wordProduct_scaledAffineGenerator_kernelOddFamily' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeNormalization.scaledAffineGenerator_not_injective' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeNormalization.wordProduct_pumpWord' depends on axioms: [propext]
+'MatrixMortality.MixedPrimeNormalization.wordProduct_kernelOddFamily_of_zero_one' depends on axioms: [propext]
 'MatrixMortality.PeriodicShell.shellPrefixesUnit_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.PeriodicShell.shellPeriodicCycle' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.PeriodicShell.shellRun_eq_wordAction' depends on axioms: [propext, Classical.choice, Quot.sound]

@@ -260,7 +260,7 @@ file owns the mathematical stock.
 | [`D2-D07`](#d2-d07-bounded-valuation-orthants) | decidable stratum | bounded cooriented affine families have finite successful state spaces | audited | stock |
 | [`D2-M01`](#d2-m01-benchmark-critical-shell) | partial mechanism | the mixed-prime benchmark reduces generically to one guarded `5`-adic shell | audited | active |
 | [`D2-O01`](#d2-o01-canonical-collatz-reachability-is-not-automatic) | obstruction | full generalized-Collatz reachability is not synchronously recognizable in its canonical base | external theorem | active |
-| [`D2-O02`](#d2-o02-critical-shell-periodic-saturation) | obstruction and rewrite seed | every nonempty finite wait schedule has a rational all-unit cycle; the raw kernel contains a checked relation at every odd length from 29, while a finite terminating basis is complete only through length 30 | formalized core; audited strengthening | active |
+| [`D2-O02`](#d2-o02-critical-shell-periodic-saturation) | obstruction and rewrite seed | every nonempty finite wait schedule has a rational all-unit cycle; normalized nonfreeness persists under every generator scaling, while its odd family is a two-seed cancellative pump and the positive finite basis is complete only through length 30 | formalized core; audited strengthening | active |
 
 ## Frankl Conjecture
 
@@ -10671,6 +10671,19 @@ where powers denote repeated entries. Lean proves their raw factorization, equal
 schedule context, identical intermediate-guard domains, and a common rational all-unit cycle for
 every `k`.
 
+This nonfreeness survives unit normalization exactly. Lean realizes the raw action by invertible
+homogeneous matrices, proves exact matrix-product equality for every odd-family pair, proves the
+two sides are permutations, and transports the relation through arbitrary independent generator
+scaling. The two sides contain `16+k` dilations and `13+k` translations, so normalization
+multiplies both products by one common nonzero scalar.
+
+The apparent infinite schema has a finite cancellative source. In any group, equalities
+`AC=BCV` and `ASC=BSCV` force `AS^kC=BS^kCV` for every `k`: the first isolates the conjugate
+`CVC⁻¹`, and the second proves that it commutes with `S`. Lean proves the generic pump and the
+exact odd-word factorization. This does not contract the positive rewrite system, where
+cancellation is unavailable, and it does not shorten a witness: every family member preserves
+both length and letter content.
+
 Exact enumeration of all `2^n` raw words finds no relation outside this basis through length 30.
 At length 31 the five-rule census finds seven independent normal-form collisions. One is now the
 formal `k=1` family member; the remaining six are computational evidence, not theorem claims.
@@ -10689,8 +10702,9 @@ unit shell; representatives can also be chosen to avoid every earlier state.
 **Scope:** Lean checks the finite rational all-phases cycle, the distinct published schedules,
 their affine equality in arbitrary contexts, their common guarded periodic source, contextual
 guard preservation, the raw/shell conjugacy, the contextual boundary factorization, the infinite
-odd-length raw kernel family, its guarded contextual cycles, and three independent length-30
-relations. Infinite-schedule
+odd-length raw kernel family, its guarded contextual cycles, exact homogeneous equality under
+every independent generator scaling, its two-seed group pumping law, and three independent
+length-30 relations. Infinite-schedule
 completion, finite-precision completeness,
 the rational aperiodic construction, density, period-one single-wait rigidity, Knuth–Bendix
 critical-pair census, and exhaustive raw-word census are audited. The result does not decide exact
@@ -10700,11 +10714,15 @@ rational source may also identify distinct affine maps.
 **Artifact:** `MixedPrimeKernel.wordAction_cassaigne`,
 `MixedPrimeKernel.wordAction_kernelOddFamily`, `MixedPrimeKernel.kernelOddFamily_ne`, the three
 `wordAction_kernel30*` theorems,
+`MixedPrimeNormalization.wordProduct_scaledAffineGenerator_kernelOddFamily`,
+`MixedPrimeNormalization.scaledAffineGenerator_not_injective`, and
+`MixedPrimeNormalization.wordProduct_kernelOddFamily_of_zero_one`,
 `PeriodicShell.shellPeriodicCycle`, `PeriodicShell.shellPrefixesUnit_iff`,
 `PeriodicShell.shellRun_eq_wordAction`, `PeriodicShell.shellRun_benchmarkRelationShift`,
 `PeriodicShell.benchmarkRelationContextGuard`, `PeriodicShell.benchmarkRelationCycle`,
 `PeriodicShell.kernelOddScheduleContextGuard`, and `PeriodicShell.kernelOddScheduleCycle` in
-[`MixedPrimeKernel.lean`](MatrixMortality/MixedPrimeKernel.lean) and
+[`MixedPrimeKernel.lean`](MatrixMortality/MixedPrimeKernel.lean),
+[`MixedPrimeNormalization.lean`](MatrixMortality/MixedPrimeNormalization.lean), and
 [`PeriodicShell.lean`](MatrixMortality/PeriodicShell.lean), with the source record in
 [`cassaigne-nicolas-2012-semigroup-freeness.md`](references/cassaigne-nicolas-2012-semigroup-freeness.md)
 and the exact census/critical-pair certificate in
@@ -10713,11 +10731,14 @@ and the exact census/critical-pair certificate in
 
 **Use:** reject state-independent finite forbidden wait blocks, residue-only bounded `5`-adic
 exclusion, eventual shell exit or periodicity, universal strict state-height drift, and a
-compiler whose period-one configurations must remain in that set after every single wait. The
-live information is exact fixed-source endpoint equality across the ordered schedule and a
-parametric description of the proliferating affine kernel.
+compiler whose period-one configurations must remain in that set after every single wait. Also
+reject the hope that unit normalization restores a free action or that the odd family supplies a
+strict shortening pump. The live information is exact fixed-source endpoint equality across the
+ordered schedule and a parametric description of the positive affine congruence beyond its
+cancellative envelope.
 
 **Next:** classify the three length-30 relations and six residual computational length-31
-relations into even-length or further parametric families. Run fixed-source point-collision and
-exit-fibre censuses separately from affine-map equality; then attack residual stabilizers and
-accepting exits without assuming a canonical rewrite normal form.
+relations into even-length or further parametric families, distinguishing new group relations
+from positive-congruence phenomena. Run fixed-source point-collision and exit-fibre censuses
+separately from affine-map equality; then attack residual stabilizers and accepting exits without
+assuming a canonical rewrite normal form.

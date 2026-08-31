@@ -2408,7 +2408,11 @@ word context. Lean now factors every boundary-shifted schedule equality as one r
 and checks the published length-27 relation, an infinite family at every odd length `29+2k`, and
 three independent length-30 relations. Every odd-family relation has an exact shell schedule
 factorization, preserves every intermediate unit guard in arbitrary context, and has a common
-rational all-unit cycle. Lexical orientation of the original five-rule basis
+rational all-unit cycle. Exact homogeneous products show that the family remains nonfree after
+every independent nonzero scaling used by unit normalization. Its `k=0,1` instances force every
+later member after group cancellation, but not in the raw positive congruence; the schema
+preserves length and letter content and yields no reachability bound. Lexical orientation of the
+original five-rule basis
 terminates, but has 45 nonjoinable critical overlaps. Exhaustive affine census proves bounded
 completeness through raw length 30 and finds seven independent collisions at length 31; one is
 now the formal `k=1` family member and six remain computational. There is no
@@ -2537,8 +2541,10 @@ T_m(u)=(1+3u(2/3)^m)/5
 have a finite synchronized representation that couples the base-`5` carry to the `2`- and
 `3`-exponents and recognizes accepting shell exits. `D2-O02` proves that a bounded
 unlabeled residue-transition graph alone is maximally nondiscriminating. The odd-length family is
-now exact; the next algebraic experiment is to derive even-length families from the three checked
-length-30 relations and the six residual computational length-31 classes. The current finite
+now exact and collapses to two seeds only in the cancellative envelope; unit normalization does
+not remove it. The next algebraic experiment is to derive even-length families from the three
+checked length-30 relations and the six residual computational length-31 classes, classifying
+separately their group closure and their uncancelled positive congruence. The current finite
 Knuth–Bendix basis terminates but is nonconfluent and already incomplete at the next length. Run
 fixed-source point collisions, exit-fibre, and carry-state growth with total `2`- and
 `3`-exponents in parallel. For
