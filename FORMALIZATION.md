@@ -808,6 +808,16 @@ the former safe alphabet. The Delone–Nagell classification and an audited excl
 negative-index orbit point prove that these are all the natural zeros. See `R32-S43` and
 [`audits/m32-cubic-defect-thue-2026-08-30.md`](audits/m32-cubic-defect-thue-2026-08-30.md).
 
+The complete false-wait return is now one linear projection of the same recurrence window. Lean
+checks its determinant and two ternary cancellations in which every factor and adjacent pair is
+nontriangular. The recurrence-digit continuant also contains an exact four-ray projective cycle.
+Entry, any number of cycles, and exit give the upper-triangular words
+`[19,15][7,8,21,15]ᵏ[7,8,2]` of length `5+4k`. A uniform induction checks that every nonempty
+proper suffix is nontriangular, so these words are concatenation-prime inside the triangular
+language. This excludes bounded triangular-macro factorization, but proves neither nonregularity
+nor decidability of the complete language. See `R32-O23`, `R32-O24`, and
+[`audits/m32-unbounded-prime-continuants-2026-08-31.md`](audits/m32-unbounded-prime-continuants-2026-08-31.md).
+
 The rank-(2,2) graph is no longer an independent residue. `RankTwoPunctuation` proves that every
 compatible square with one rank-one loop and three units transports exactly to the existing raw
 reverse compiler [`R32-M01`](SALVAGE.md#r32-m01-generic-reverse-edge-compiler). Its intrinsic
@@ -1967,6 +1977,9 @@ fixed-rank decision problem.
 | The cubic defect vanishes at waits zero, one, five, and fourteen | `CubicReturn.NonPure.cubicDefect_known_zeros` |
 | One cubic defect window determines the complete false-wait return and its determinant | `CubicReturn.NonPure.falseWaitReturn_eq_state`, `CubicReturn.NonPure.falseWaitReturn_det` |
 | Two exact ternary words have nontriangular factors and adjacent pairs but upper-triangular products | `CubicReturn.NonPure.nontriangular_triple_fifteen_eight_twentySix`, `CubicReturn.NonPure.nontriangular_triple_twelve_eight_thirtyThree` |
+| Six exact return actions form an entry, a four-ray projective cycle, and an exit | `CubicReturn.NonPure.continuant_ray_steps`, `CubicReturn.NonPure.continuantCycleWord_mulVec` |
+| Pumped continuant words are upper triangular, have length `5+4k`, and every nonempty proper suffix is nontriangular | `CubicReturn.NonPure.continuantPumpWord_lowerLeft`, `CubicReturn.NonPure.continuantPumpWord_length`, `CubicReturn.NonPure.continuantPumpWord_properSuffix_lowerLeft` |
+| Upper-triangular recurrence words contain concatenation-prime members beyond every length bound | `CubicReturn.NonPure.continuantPumpWord_unbounded_concat_prime` |
 | Rule and erasure matrices agree on the upper-side plane | `rule_erase_agree_on_upperSide` |
 | Every finite-controller letter routes its selected private channel exactly | `controllerMatrix_mulVec_controllerVector` |
 | Every suffix-controlled word obeys the generic total decoder | `controllerProduct_mulVec_controllerVector` |

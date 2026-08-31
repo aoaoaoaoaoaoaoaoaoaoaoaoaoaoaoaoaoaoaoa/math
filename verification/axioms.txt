@@ -1162,6 +1162,30 @@
 'MatrixMortality.CubicReturn.NonPure.nontriangular_triple_twelve_eight_thirtyThree' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.continuant_ray_steps' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.continuantCycleWord_mulVec' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.continuantTail_mulVec' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.continuantTail_prefix_actions' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.continuantTail_nonemptySuffix_lowerLeft' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.continuantPumpWord_lowerLeft' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.continuantPumpWord_length' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.continuantPumpWord_properSuffix_lowerLeft' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.continuantPumpWord_concat_prime' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.continuantPumpWord_unbounded_concat_prime' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.EdgeCompression.isMortal_iff_exists_edgeProduct_eq_zero' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]

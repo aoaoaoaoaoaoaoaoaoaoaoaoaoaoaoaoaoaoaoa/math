@@ -1627,6 +1627,19 @@ recurrence-digit continuant, or a sound compiler that uses its derived macros wh
 every other word. See [`R32-O23`](SALVAGE.md#r32-o23-cubic-continuant-fracture) and
 [`m32-cubic-continuant-fracture-2026-08-31.md`](audits/m32-cubic-continuant-fracture-2026-08-31.md).
 
+Finite triangular-macro completion is now excluded. The exact projective actions contain a
+four-ray cycle with entry and exit, pumping
+`[19,15][7,8,21,15]ᵏ[7,8,2]`. Every such word is upper triangular, its length is `5+4k`, and
+every nonempty proper suffix is nontriangular. These are therefore concatenation-prime
+upper-triangular words of unbounded length. No bounded-length dictionary of triangular macros,
+and no finite such dictionary whose accepted words factor into its members, can generate the
+whole triangular language. This does not establish nonregularity or exclude finite-state
+recognition without accepted-factor boundaries. The live fork is now a global descent or
+finite-nucleus theorem compatible with the recurrent four-ray component, or a recognizer that
+does not factor accepted words into triangular macros. See
+[`R32-O24`](SALVAGE.md#r32-o24-unbounded-prime-continuants) and
+[`m32-unbounded-prime-continuants-2026-08-31.md`](audits/m32-unbounded-prime-continuants-2026-08-31.md).
+
 ### ReturnSquare laboratory
 
 [`R32-S03`](SALVAGE.md#r32-s03-returnsquare-normal-form) is the first completely normalized
