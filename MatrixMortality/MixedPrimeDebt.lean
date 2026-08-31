@@ -892,6 +892,170 @@ theorem adjacentDebtBridge_targetOvercancellation :
       (by norm_num : ¬(5 : ℤ) ∣ 11) (by norm_num : ¬(5 : ℤ) ∣ 243) using 1 <;>
       norm_num
 
+/-- Two distinct adjacent-length debt bridges collide from the fixed source `43/24` for every
+terminal wait. Their common target remains an explicit one-parameter rational. -/
+theorem fixedSourceAdjacentFamily (wait : ℕ) :
+    DebtSafe 1 [1, wait + 2] ∧
+      DebtSafe 1 [3, 1, wait] ∧
+      debtRunDepth 1 [1, wait + 2] = wait + 2 ∧
+      debtRunDepth 1 [3, 1, wait] = wait + 2 ∧
+      [1, wait + 2] ≠ [3, 1, wait] ∧
+      collisionSource [1, wait + 2] [3, 1, wait] = 43 / 24 ∧
+      shellRun [1, wait + 2] (43 / 24) =
+        (11 * (2 / 3 : ℚ) ^ wait + 9) / 45 ∧
+      shellRun [3, 1, wait] (43 / 24) =
+        (11 * (2 / 3 : ℚ) ^ wait + 9) / 45 := by
+  have collision :
+      shellRun [1, wait + 2] (43 / 24) =
+        shellRun [3, 1, wait] (43 / 24) := by
+    rw [shellRun_cons, shellRun_singleton, shellRun_cons, shellRun_cons,
+      shellRun_singleton]
+    simp only [shellStep, pow_add]
+    norm_num
+    ring
+  have slope_ne :
+      shellSlope [1, wait + 2] ≠ shellSlope [3, 1, wait] := by
+    apply shellSlope_ne_of_length_ne
+    norm_num
+  have source_eq := collisionSource_eq_of_shellRun_eq
+    [1, wait + 2] [3, 1, wait] slope_ne collision
+  have short_target :
+      shellRun [1, wait + 2] (43 / 24) =
+        (11 * (2 / 3 : ℚ) ^ wait + 9) / 45 := by
+    rw [shellRun_cons, shellRun_singleton]
+    simp only [shellStep, pow_add]
+    norm_num
+    ring
+  refine ⟨by simp [DebtSafe, debtNextDepth],
+    by simp [DebtSafe, debtNextDepth], ?_, ?_, by norm_num, source_eq, short_target, ?_⟩
+  · simp [debtRunDepth, debtNextDepth]
+  · simp [debtRunDepth, debtNextDepth]
+    omega
+  · exact collision.symm.trans short_target
+
+/-- Distinct terminal waits in the fixed-source family have distinct targets. -/
+theorem fixedSourceAdjacentFamily_target_injective : Function.Injective
+    (fun wait : ℕ => (11 * (2 / 3 : ℚ) ^ wait + 9) / 45) := by
+  intro left right target_eq
+  have power_eq : (2 / 3 : ℚ) ^ left = (2 / 3 : ℚ) ^ right := by
+    have normalized := target_eq
+    field_simp at normalized
+    linarith
+  exact pow_right_injective₀ (a := (2 / 3 : ℚ)) (by norm_num) (by norm_num) power_eq
+
+/-- The period-ten cleared target numerator has one explicit residue modulo twenty-five. -/
+theorem fixedSourceAdjacentFamily_ten_mul_numerator_mod (period : ℕ) :
+    11 * 2 ^ (10 * period) + 9 * 3 ^ (10 * period) ≡
+      20 * 24 ^ period [MOD 25] := by
+  have two_mod : 2 ^ 10 ≡ 24 [MOD 25] := by norm_num
+  have three_mod : 3 ^ 10 ≡ 24 [MOD 25] := by norm_num
+  rw [pow_mul, pow_mul]
+  calc
+    11 * (2 ^ 10) ^ period + 9 * (3 ^ 10) ^ period ≡
+        11 * 24 ^ period + 9 * 24 ^ period [MOD 25] :=
+      ((two_mod.pow period).mul_left 11).add ((three_mod.pow period).mul_left 9)
+    _ = 20 * 24 ^ period := by ring
+
+/-- The cleared numerator of every period-ten target has five-adic valuation exactly one. -/
+theorem fixedSourceAdjacentFamily_ten_mul_numerator (period : ℕ) :
+    HasValue 5
+      (11 * (2 : ℚ) ^ (10 * period) + 9 * 3 ^ (10 * period)) 1 := by
+  let numerator : ℕ :=
+    11 * 2 ^ (10 * period) + 9 * 3 ^ (10 * period)
+  have numerator_mod : numerator ≡ 20 * 24 ^ period [MOD 25] := by
+    simpa [numerator] using fixedSourceAdjacentFamily_ten_mul_numerator_mod period
+  have five_dvd_numerator : 5 ∣ numerator := by
+    have reduced := numerator_mod.of_dvd (by norm_num : 5 ∣ 25)
+    have right_zero : 20 * 24 ^ period ≡ 0 [MOD 5] :=
+      (dvd_mul_of_dvd_left (by norm_num : 5 ∣ 20) _).modEq_zero_nat
+    exact Nat.modEq_zero_iff_dvd.mp (reduced.trans right_zero)
+  have twentyfive_not_dvd_numerator : ¬25 ∣ numerator := by
+    intro twentyfive_dvd
+    have numerator_zero : numerator ≡ 0 [MOD 25] := twentyfive_dvd.modEq_zero_nat
+    have right_zero := numerator_mod.symm.trans numerator_zero
+    have right_dvd : 25 ∣ 20 * 24 ^ period := Nat.modEq_zero_iff_dvd.mp right_zero
+    have coprime : Nat.Coprime 25 (24 ^ period) :=
+      (by norm_num : Nat.Coprime 25 24).pow_right period
+    have impossible : 25 ∣ 20 := coprime.dvd_of_dvd_mul_right right_dvd
+    norm_num at impossible
+  have numerator_ne_int : (numerator : ℤ) ≠ 0 := by positivity
+  have numerator_value_int : padicValInt 5 (numerator : ℤ) = 1 := by
+    have one_le : 1 ≤ padicValInt 5 (numerator : ℤ) :=
+      ((padicValInt_dvd_iff (p := 5) 1 (numerator : ℤ)).mp (by
+        simpa using (show (5 : ℤ) ∣ numerator by
+          exact_mod_cast five_dvd_numerator))).resolve_left numerator_ne_int
+    have not_two_le : ¬2 ≤ padicValInt 5 (numerator : ℤ) := by
+      intro two_le
+      have twentyfive_dvd_int :=
+        (padicValInt_dvd_iff (p := 5) 2 (numerator : ℤ)).mpr (Or.inr two_le)
+      have twentyfive_dvd_nat : 25 ∣ numerator := by
+        exact_mod_cast twentyfive_dvd_int
+      exact twentyfive_not_dvd_numerator twentyfive_dvd_nat
+    omega
+  have numerator_value : HasValue 5 (numerator : ℚ) 1 := by
+    refine ⟨by positivity, ?_⟩
+    rw [padicValRat.of_nat, ← padicValInt.of_nat]
+    exact_mod_cast numerator_value_int
+  simpa [numerator] using numerator_value
+
+/-- Every terminal wait divisible by ten gives an accepted member of the fixed-source adjacent
+family. Thus one rational source supports infinitely many chamber-contained cross-length
+collisions with unbounded waits. -/
+theorem fixedSourceAdjacentFamily_ten_mul_accepted (period : ℕ) :
+    IsUnit 5 (43 / 24 : ℚ) ∧
+      HasValue 5
+        (11 * (2 : ℚ) ^ (10 * period) + 9 * 3 ^ (10 * period)) 1 ∧
+      IsUnit 5 ((11 * (2 / 3 : ℚ) ^ (10 * period) + 9) / 45) ∧
+      (∀ front back,
+        [1, 10 * period + 2] = front ++ back →
+          IsUnit 5 (shellRun front (43 / 24))) ∧
+      (∀ front back,
+        [3, 1, 10 * period] = front ++ back →
+          IsUnit 5 (shellRun front (43 / 24))) ∧
+      shellRun [1, 10 * period + 2] (43 / 24) =
+        (11 * (2 / 3 : ℚ) ^ (10 * period) + 9) / 45 ∧
+      shellRun [3, 1, 10 * period] (43 / 24) =
+        (11 * (2 / 3 : ℚ) ^ (10 * period) + 9) / 45 := by
+  have numerator_value := fixedSourceAdjacentFamily_ten_mul_numerator period
+  have three_unit : IsUnit 5 (3 : ℚ) := intCast_isUnit_of_not_dvd (by norm_num)
+  have fortyfive_value : HasValue 5 (45 : ℚ) 1 := by
+    have five_value : HasValue 5 (5 : ℚ) 1 := by
+      simpa using (primePower_hasValue (prime := 5) 1)
+    have nine_unit : IsUnit 5 (9 : ℚ) := intCast_isUnit_of_not_dvd (by norm_num)
+    convert mul_hasValue five_value nine_unit using 1 <;> norm_num
+  have denominator_value :
+      HasValue 5 (45 * (3 : ℚ) ^ (10 * period)) 1 := by
+    simpa using mul_hasValue fortyfive_value (unit_pow three_unit (10 * period))
+  have rational_eq :
+      (11 * (2 / 3 : ℚ) ^ (10 * period) + 9) / 45 =
+        (11 * (2 : ℚ) ^ (10 * period) + 9 * 3 ^ (10 * period)) /
+          (45 * 3 ^ (10 * period)) := by
+    rw [div_pow]
+    field_simp
+  have target_unit :
+      IsUnit 5 ((11 * (2 / 3 : ℚ) ^ (10 * period) + 9) / 45) := by
+    rw [rational_eq]
+    simpa using div_hasValue numerator_value denominator_value
+  have source_unit : IsUnit 5 (43 / 24 : ℚ) := div_hasValue
+    (intCast_isUnit_of_not_dvd (prime := 5) (by norm_num : ¬(5 : ℤ) ∣ 43))
+    (intCast_isUnit_of_not_dvd (prime := 5) (by norm_num : ¬(5 : ℤ) ∣ 24))
+  obtain ⟨_, _, _, _, _, _, short_target, long_target⟩ :=
+    fixedSourceAdjacentFamily (10 * period)
+  have short_output_unit :
+      IsUnit 5 (shellRun [1, 10 * period + 2] (43 / 24)) := by
+    rw [short_target]
+    exact target_unit
+  have long_output_unit :
+      IsUnit 5 (shellRun [3, 1, 10 * period] (43 / 24)) := by
+    rw [long_target]
+    exact target_unit
+  have short_phases :=
+    (shellPrefixesUnit_iff [1, 10 * period + 2] (43 / 24)).2 short_output_unit
+  have long_phases :=
+    (shellPrefixesUnit_iff [3, 1, 10 * period] (43 / 24)).2 long_output_unit
+  exact ⟨source_unit, numerator_value, target_unit, short_phases, long_phases,
+    short_target, long_target⟩
+
 /-- The opposite carrier orientation is also realized by an exact unequal-length debt
 collision. Both endpoints remain five-adic units. -/
 theorem negativeOrientation_crossLengthCollision :
