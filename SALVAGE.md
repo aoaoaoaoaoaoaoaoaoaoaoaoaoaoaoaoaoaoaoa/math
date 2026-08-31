@@ -11861,7 +11861,7 @@ terminal section. The remaining obligation is the complete arbitrary-word conver
 
 **Evidence:** formalized
 
-**Disposition:** active
+**Disposition:** closed
 
 Retain the nonprojective toggle `T=diag(1,2,3)` and first data map `D_b(s)=D_s`. For the second
 data letter, use
@@ -11897,22 +11897,77 @@ The quadratic is strictly positive over `ℚ`: multiplying by eight gives
 case and no row choice.
 
 **Scope:** product inequality is only necessary for a same-zero compiler. The candidate has no
-proved terminal row for unrestricted paired histories and no arbitrary-word converse. It may
-create other terminal/nonterminal collisions, false zeros, or dynamics outside the retained
-`tⁿb` prefixes. The theorem also does not claim that the separating `(1,0)` entry itself is a valid
-terminal functional.
+terminal row for unrestricted paired histories and no arbitrary-word converse. `G3-O35` proves
+that every row-column choice fails already on `bcbc`, so the positive prefix geometry cannot be
+promoted into a compiler for these controls.
 
-**Use:** reopen the nonprojective lane beyond letter blindness with one exact, source-uniform
-mechanism. Future attacks should analyze this concrete distinct-data monoid before proposing
-another perturbation: the carrier infinity, rank conditions, delayed terminal fitting, and first
-certified fork separation are already simultaneous.
+**Use:** retain the carrier infinity, rank conditions, delayed terminal fitting, and local fork
+separation as a controlled counterexample, but do not pursue row or column retuning for this
+generator. `G3-O35` closes that monoid.
 
 **Artifact:** [`TransverseSeparatedAtlas.lean`](MatrixMortality/TransverseSeparatedAtlas.lean) and
 [`m34-distinct-data-infinite-carrier-2026-08-31.md`](audits/m34-distinct-data-infinite-carrier-2026-08-31.md).
 
-**Next:** compute the full state recurrence or a finite collision certificate for the distinct-data
-monoid. Promotion to a compiler requires exact zeros on every paired terminal history and nonzeros
-on every malformed or nonterminal raw word.
+**Next:** [`G3-O35`](#g3-o35-distinct-data-terminal-fork-obstruction) gives the complete negative
+verdict. A surviving nonprojective constructor must change the controls or terminal geometry.
+
+### G3-O35: Distinct-data terminal-fork obstruction
+
+**Kind:** obstruction
+
+**Evidence:** formalized
+
+**Disposition:** graduated
+
+The exact `G3-C06` generator cannot represent the paired zero language of `bcbc` for any rational
+source parameter and any row-column pair.
+
+For the flat and nested four-stroke null blocks, Lean computes exact first-two-coordinate
+quotient actions `Q₀(s),Q₁(s)`. Both have determinant `1296s⁸`, while
+
+```text
+det(Q₀Q₁−Q₁Q₀) = −144s⁶ c(s)²p(s),
+
+c(s) = 8s³−23s²+11s−2,
+
+p(s) = 5120s⁹+2080s⁸−24796s⁷+50600s⁶−52007s⁵
+       +33053s⁴−12661s³+2956s²−400s+24.
+```
+
+The rational-root theorem and finite residue certificates show that `c` has no rational root
+modulo `7` and `p` has none modulo `13`. Hence the commutator is nonsingular whenever `s≠0`.
+
+The three certified terminal forks `[false]`, `[false,false]`, and `[false,true]` force one
+two-dimensional boundary row to annihilate `q,Q₀q,Q₁q`. If `q≠0`, nonsingularity of the
+commutator makes that row zero. Since the fixed prefix row has zero third coordinate and `Q₀` is
+invertible, the prefix row itself vanishes. The prefix control without its final toggle is then a
+false target zero. If `q=0`, the one-letter data-`b` control is instead a false zero.
+
+At the exceptional parameter `s=0`, Lean proves the exact word-product identity
+
+```text
+X₀(c t b c b c b b b) = X₀(c t b c b t c b t).
+```
+
+The right word is the canonical `bcbc` terminal prefix; the left word has nonzero paired source
+coefficient. This closes the last fibre.
+
+**Scope:** the theorem fixes the distinct rank-two controls of `G3-C06` and the admissible body
+`bcbc`. It is enough to reject those controls as a uniform arbitrary-body compiler. It does not
+exclude every distinct-data perturbation, every nonprojective toggle, a full-rank data map, or the
+one-chart `M₂(3)` core.
+
+**Use:** delete row/column retuning and deeper bounded collision search for `G3-C06`. A successor
+must change the controls or terminal geometry while retaining the infinite carrier, source
+section, and complete arbitrary-word converse.
+
+**Artifact:**
+[`TransverseSeparatedForkNoGo.lean`](MatrixMortality/TransverseSeparatedForkNoGo.lean) and
+[`m34-distinct-data-fork-no-go-2026-08-31.md`](audits/m34-distinct-data-fork-no-go-2026-08-31.md).
+
+**Next:** vary the distinct data action so that the flat/nested quotient commutator or the prefix
+rank argument degenerates lawfully without restoring a terminal/nonterminal collision; otherwise
+leave the nonprojective orbit and attack the joint `M₂(3)` core or a full-rank data map.
 
 ### G3-O13: Rational serializer pumping
 

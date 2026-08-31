@@ -108,6 +108,7 @@ import MatrixMortality.SeparatedTwoCResidue
 import MatrixMortality.TransverseInfiniteCollision
 import MatrixMortality.TransverseSeparatedAtlas
 import MatrixMortality.SeparatedTwoCCantor
+import MatrixMortality.TransverseSeparatedForkNoGo
 import MatrixMortality.PrefixResidual
 import MatrixMortality.AffineRecognizer
 import MatrixMortality.BranchingRecognizer
