@@ -369,6 +369,13 @@ open MatrixMortality
 #print axioms exactForcedRuleCCompanion_toggle_det_ne_zero
 #print axioms exactForcedRuleCCompanion_not_rankTwoCube
 #print axioms exactForcedRuleCOffDiagonalCompanion_not_rankTwoCube
+#print axioms guardedSeries_hasNonemptyZero_iff
+#print axioms guardedSeries_finiteHankel_eq_one
+#print axioms forcedRuleC_hasZero_iff_terminal_match
+#print axioms existentialGuardedForcedRuleC_hasNonemptyZero_iff_terminal_match
+#print axioms existentialGuardedForcedRuleC_probeHankel_det
+#print axioms Undecidability.UniversalNeary.boundedProbeZero_computable
+#print axioms Undecidability.UniversalNeary.no_boundedProbeZero_iff_universal
 #print axioms ruleScale_eq_of_deletionFirst_fibre
 #print axioms nearySideLowerCScale_gt_twentySeven
 #print axioms no_neary_deletionFirst_fibre

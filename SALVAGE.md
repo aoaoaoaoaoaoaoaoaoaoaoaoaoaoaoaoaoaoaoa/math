@@ -88,6 +88,7 @@ file owns the mathematical stock.
 | [`MM-O17`](#mm-o17-factorized-binary-cross-ratio-wall) | obstruction | exact prefix and cyclic-cube nine-state compilers force a Neary cross-ratio that fails in every pairing | formalized core; audited assembly | graduated |
 | [`MM-O18`](#mm-o18-forced-rule-companion-toggle-wall) | obstruction | the forced-rule derivative and constant channel force an exact five-state companion toggle to be invertible | formalized | graduated |
 | [`MM-O19`](#mm-o19-trailing-toggle-exact-prefix-tax) | obstruction | trailing-toggle absorption preserves zeros; exact comb and balanced rank profiles cost at least ten and eleven states | formalized core; audited assembly | graduated |
+| [`MM-O21`](#mm-o21-sourcewise-finite-probe-blindness) | obstruction | sourcewise existential equivalence imposes no finite probe-rank shadow, while complete computable probe cutoffs cannot be universal | formalized | graduated |
 | [`MM-M01`](#mm-m01-off-diagonal-companion-interface) | partial mechanism | off-diagonal rank-two bridge has a complete fracture grammar | audited | stock |
 | [`MM-M02`](#mm-m02-bordered-toggle) | partial mechanism | one lifted toggle has a stable rank-two third power | audited | parked |
 | [`MM-M03`](#mm-m03-five-state-setter-punctuation) | partial mechanism | a mixed delimiter word is an exact internal rank-one separator | audited | closed |
@@ -2023,6 +2024,57 @@ another source family.
 
 **Artifact:**
 [`audits/m92-trailing-toggle-prefix-tax-2026-08-30.md`](audits/m92-trailing-toggle-prefix-tax-2026-08-30.md).
+
+### MM-O21: Sourcewise finite-probe blindness
+
+**Kind:** obstruction
+
+**Evidence:** formalized
+
+**Disposition:** graduated
+
+For any word series `f`, alphabet letters `g,s`, and horizon `N`, define a guarded series by
+
+```text
+fᴳ(gᴺsw)=f(w),       fᴳ(u)=1 otherwise.
+```
+
+Then `fᴳ` has a nonempty zero exactly when `f` has a zero, including a possible empty-word zero
+of `f`. Every word of length at most `N` receives coefficient one. Consequently every finite
+Hankel section can be made the constant-one matrix without changing existential zero behavior:
+choose `N` above all concatenated probe lengths.
+
+For the forced-`R_c` derivative, take `g=t`, `s=b`, and `N=6`. Every Neary terminal word starts
+with `R_c`, and the paired decoder is surjective on its tail, so derivative zero existence is
+exactly terminal-match existence. The guarded derivative retains that equivalence, but the
+complete inserted-toggle section of [`MM-O18`](#mm-o18-forced-rule-companion-toggle-wall) is
+constant one and has determinant zero.
+
+The opposite finite shortcut also fails uniformly. If a primitive-recursive source predicate is
+accepted by one successful probe below a primitive-recursive source-dependent cutoff, then it is
+computable by bounded search. Such a predicate cannot have the universal paired zero answers,
+which are equivalent to the halting problem.
+
+**Scope:** the guard transform is a word-series construction, not a five-state linear
+realization. It proves that sourcewise existential equivalence alone entails no finite numerical
+or zero-pattern certificate. A specific architecture may still impose additional finite
+identities. The computability theorem excludes only complete primitive-recursive finite probe
+searches; it does not exclude an unbounded arbitrary-word invariant or a mortality compiler.
+
+**Use:** do not reuse exact Hankel minors, including `MM-O18`, against the corrected weak victory
+condition. A weak no-go must derive a computable witness cutoff, a pumping theorem, or another
+arbitrary-word consequence from its stated architecture. A construction must supply a genuinely
+finite-dimensional realization and global converse; the guarded series by itself is not one.
+
+**Formalization:** `guardedSeries_hasNonemptyZero_iff`,
+`guardedSeries_finiteHankel_eq_one`,
+`existentialGuardedForcedRuleC_hasNonemptyZero_iff_terminal_match`,
+`existentialGuardedForcedRuleC_probeHankel_det`, and
+`Undecidability.UniversalNeary.no_boundedProbeZero_iff_universal` in
+[`MatrixMortality/ExistentialProbeBarrier.lean`](MatrixMortality/ExistentialProbeBarrier.lean).
+
+**Artifact:**
+[`audits/m53-sourcewise-probe-blindness-2026-08-31.md`](audits/m53-sourcewise-probe-blindness-2026-08-31.md).
 
 ### MM-M01: Off-diagonal companion interface
 

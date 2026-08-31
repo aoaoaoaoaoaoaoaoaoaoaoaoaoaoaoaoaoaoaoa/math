@@ -380,6 +380,14 @@ the physical toggle. Its nonzero determinant makes that toggle invertible, so it
 five rather than two. The result allows arbitrary fifth-coordinate data couplings; it does not
 address same-zero, setter, or scheduled compilers.
 
+[`MM-O21`](SALVAGE.md#mm-o21-sourcewise-finite-probe-blindness) fixes the quantifier boundary.
+Lean constructs, for every finite horizon, a guarded changed series with the same zero existence
+as an arbitrary source series and coefficient one on every word inside that horizon. The
+forced-`R_c` specialization preserves terminal-match existence while turning the complete
+`MM-O18` probe matrix into the singular constant-one matrix. A second checked theorem proves
+that no primitive-recursive, source-dependent finite probe cutoff can have the universal paired
+zero answers. These are method boundaries, not a five-state realization.
+
 The rank-three binary campaign now has a checked structural core. A split finite-rank cut beside
 a unit fractures every arbitrary binary word into its `VAⁿU` return product; a finite
 block-Hankel section lower-bounds every exact realization of that matrix-valued sequence. For
@@ -1462,7 +1470,7 @@ the periodic saturation theorem and its remaining arithmetic boundary are recons
 formalization and the shell attack are tracked in
 [#7](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/7).
 
-The `M₅(3)` delimiter attack has seven durable records:
+The `M₅(3)` delimiter attack has eight durable records:
 
 | Record | Formalization obligation |
 | --- | --- |
@@ -1473,6 +1481,7 @@ The `M₅(3)` delimiter attack has seven durable records:
 | [`MM-S02`](SALVAGE.md#mm-s02-reset-zero-projective-peeling) | scaled transfer identity, exact two-shell classification of all poles, and reset-zero one-transfer avoidance |
 | [`MM-O16`](SALVAGE.md#mm-o16-exact-delimiter-pair-obstruction) | generic ignored-pair immortality is formalized; paired common-kernel and cubic companion specializations are audited |
 | [`MM-O18`](SALVAGE.md#mm-o18-forced-rule-companion-toggle-wall) | forced-rule semantic derivative, isolated-toggle Hankel determinant, five-channel factorization, toggle invertibility, and contradiction with a rank-two cube |
+| [`MM-O21`](SALVAGE.md#mm-o21-sourcewise-finite-probe-blindness) | existence-preserving guard transform, collapse of every bounded Hankel section, forced-rule specialization, and universal bounded-probe computability wall |
 
 The candidate proves only the halting-to-mortality direction. Its converse requires a theorem
 that every nonterminal projective orbit avoids every pole. No such theorem is formalized or
