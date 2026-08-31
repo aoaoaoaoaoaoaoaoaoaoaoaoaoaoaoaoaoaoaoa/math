@@ -18,27 +18,41 @@ namespace ChangedSeparatorRealization
 /-- Positional radix used by the Neary body encoding. -/
 def widthScale (β : Nat) : ℚ := 3 ^ β
 
+/-- Common denominator of the exact three-parameter chain chart. -/
+def chainDenominator (ρ V K : ℚ) : ℚ :=
+  9 * K ^ 2 * ρ ^ 2 + 2 * K ^ 2 * ρ - K ^ 2 -
+    18 * K * V * ρ ^ 2 + 2 * K * V - 9 * K * ρ ^ 2 -
+    6 * K * ρ - 47 * K + 48 * V + 96
+
 /-- Nonzero denominator of the geometric tail specialization. -/
 def denominator (β : Nat) (body : List TagLetter) : ℚ :=
-  ChangedSeparatorTail.transferDenominator β body
+  chainDenominator (widthScale β) (ChangedSeparatorTail.lowerCCode β body)
+    (ChangedSeparatorTail.lowerCScale β body)
+
+theorem denominator_eq_transferDenominator (β : Nat) (body : List TagLetter) :
+    denominator β body = ChangedSeparatorTail.transferDenominator β body := by
+  rfl
 
 theorem widthScale_pos (β : Nat) : 0 < widthScale β := by
   simp [widthScale]
 
 theorem denominator_lt_zero (β : Nat) (body : List TagLetter) :
     denominator β body < 0 :=
-  ChangedSeparatorTail.transferDenominator_lt_zero β body
+  denominator_eq_transferDenominator β body ▸
+    ChangedSeparatorTail.transferDenominator_lt_zero β body
 
 theorem denominator_ne_zero (β : Nat) (body : List TagLetter) :
     denominator β body ≠ 0 :=
   ne_of_lt (denominator_lt_zero β body)
 
-/-- Eigenvalue carried by the realization's one-dimensional geometric tail. -/
+/-- Eigenvalue of the exact chart's one-dimensional geometric tail. -/
+def chainTailEigenvalue (ρ V K : ℚ) : ℚ :=
+  K * (3 * ρ - 1) * (K - 2 * V - 1) / chainDenominator ρ V K
+
+/-- Eigenvalue carried by the realization's specialized geometric tail. -/
 def tailEigenvalue (β : Nat) (body : List TagLetter) : ℚ :=
-  let ρ := widthScale β
-  let V := ChangedSeparatorTail.lowerCCode β body
-  let K := ChangedSeparatorTail.lowerCScale β body
-  K * (3 * ρ - 1) * (K - 2 * V - 1) / denominator β body
+  chainTailEigenvalue (widthScale β) (ChangedSeparatorTail.lowerCCode β body)
+    (ChangedSeparatorTail.lowerCScale β body)
 
 theorem tailEigenvalue_ne_zero (β : Nat) (body : List TagLetter) :
     tailEigenvalue β body ≠ 0 := by
@@ -52,6 +66,7 @@ theorem tailEigenvalue_ne_zero (β : Nat) (body : List TagLetter) :
       ChangedSeparatorTail.lowerCScale β body -
           2 * ChangedSeparatorTail.lowerCCode β body - 1 ≠ 0 := by
     linarith [ChangedSeparatorTail.lowerCScale_sub_two_mul_lowerCCode_sub_one_lt_zero β body]
+  unfold tailEigenvalue chainTailEigenvalue
   exact div_ne_zero
     (mul_ne_zero (mul_ne_zero lowerScale_ne_zero widthFactor_ne_zero) tailGap_ne_zero)
     (denominator_ne_zero β body)
@@ -60,6 +75,7 @@ theorem tailEigenvalue_ne_zero (β : Nat) (body : List TagLetter) :
 structure RegularChart (ρ V K : ℚ) : Prop where
   width_ne_zero : ρ ≠ 0
   lowerScale_ne_zero : K ≠ 0
+  denominator_ne_zero : chainDenominator ρ V K ≠ 0
   widthFactor_ne_zero : 3 * ρ - 1 ≠ 0
   tailGap_ne_zero : K - 2 * V - 1 ≠ 0
   sumGap_ne_zero : K + 3 * V - 6 ≠ 0
@@ -146,6 +162,7 @@ theorem regularChart (β : Nat) (β_pos : 0 < β) (body : List TagLetter)
   width_ne_zero := (widthScale_pos β).ne'
   lowerScale_ne_zero := by
     linarith [ChangedSeparatorTail.lowerCScale_gt_three β body]
+  denominator_ne_zero := denominator_ne_zero β body
   widthFactor_ne_zero := by
     have width_one_le : 1 ≤ widthScale β := one_le_pow₀ (by norm_num)
     linarith
@@ -158,8 +175,8 @@ theorem regularChart (β : Nat) (β_pos : 0 < β) (body : List TagLetter)
       β β_pos body b_mem]
 
 /-- Two length-three nilpotent chains, one length-two chain, and the geometric tail line. -/
-def transition (β : Nat) (body : List TagLetter) : Square (Fin 9) ℚ :=
-  let s := tailEigenvalue β body
+def chainTransition (ρ V K : ℚ) : Square (Fin 9) ℚ :=
+  let s := chainTailEigenvalue ρ V K
   !![0, 0, 0, 0, 0, 0, 0, 0, 0;
      1, 0, 0, 0, 0, 0, 0, 0, 0;
      0, 1, 0, 0, 0, 0, 0, 0, 0;
@@ -169,6 +186,40 @@ def transition (β : Nat) (body : List TagLetter) : Square (Fin 9) ℚ :=
      0, 0, 0, 0, 0, 0, 0, 0, 0;
      0, 0, 0, 0, 0, 0, 1, 0, 0;
      0, 0, 0, 0, 0, 0, 0, 0, s]
+
+/-- The chain transition specialized to one encoded Neary instance. -/
+def transition (β : Nat) (body : List TagLetter) : Square (Fin 9) ℚ :=
+  chainTransition (widthScale β) (ChangedSeparatorTail.lowerCCode β body)
+    (ChangedSeparatorTail.lowerCScale β body)
+
+/-- The paired `b` data role in chart coordinates. -/
+def chainDataB (ρ : ℚ) : Square (Fin 4) ℚ :=
+  !![1, 25, (15 * ρ + 1) / 2, 1;
+     0, 0, 0, 0;
+     0, 0, 9 * ρ, 0;
+     0, 27, 0, 3]
+
+/-- The paired `c` data role in chart coordinates. -/
+def chainDataC (V K : ℚ) : Square (Fin 4) ℚ :=
+  !![1, V, 2, 1;
+     0, 0, 0, 0;
+     0, 0, 3, 0;
+     0, K, 0, 3]
+
+/-- Observable column of the surviving geometric tail. -/
+def chainTailColumn (ρ : ℚ) : Fin 4 → ℚ :=
+  ![(5 * ρ - 1) / 2, 0, 3 * ρ, -1]
+
+/-- Body-dependent row of the surviving geometric tail. -/
+def chainTailRow (ρ V K : ℚ) : Fin 4 → ℚ :=
+  ![2 * K * (K - 3) / chainDenominator ρ V K,
+    2 * K * (K - 3 * V) / chainDenominator ρ V K,
+    2 * K * (K - 3 * V) / chainDenominator ρ V K,
+    2 * K * (K - 3 * V) / chainDenominator ρ V K]
+
+/-- Rank-one matrix carried by the realization after the nilpotent chains die. -/
+def chainTailSeparator (ρ V K : ℚ) : Square (Fin 4) ℚ :=
+  Matrix.vecMulVec (chainTailColumn ρ) (chainTailRow ρ V K)
 
 /-- Four interface columns in the exact three-parameter chain chart. -/
 def chainInput (ρ V K : ℚ) : Matrix (Fin 9) (Fin 4) ℚ :=
