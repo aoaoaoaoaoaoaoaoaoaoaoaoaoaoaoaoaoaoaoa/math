@@ -1460,6 +1460,16 @@ and retains `b(1)` as the sole forbidden endpoint. This subsumes the one-defect 
 three-defect coefficient cores. The exact boundary is
 [`audits/m43-uniform-all-b-defect-run-2026-08-30.md`](audits/m43-uniform-all-b-defect-run-2026-08-30.md).
 
+The opposite double-`c` endpoint exclusion
+[`M4-S15`](SALVAGE.md#m4-s15-opposite-double-c-endpoint-exclusion) is formalized in
+[`MatrixMortality/ParabolicMixedEndpoint.lean`](MatrixMortality/ParabolicMixedEndpoint.lean).
+`ParabolicBlade.bridge_cOne_bTwo_cZero_det` collects the exact determinant of
+`c(3z+1)b(3x+2)c(3y)` into eight wait monomials in the native scale gap and code discrepancy.
+`ParabolicBlade.bridge_cOne_bTwo_cZero_det_ne_zero` proves every coefficient positive from the
+exact nonempty-code interval, including the sole quadratic `q²` coefficient competition. The
+exact boundary is
+[`audits/m43-opposite-double-c-endpoint-2026-08-30.md`](audits/m43-opposite-double-c-endpoint-2026-08-30.md).
+
 The phase-zero `c`-defect exclusion
 [`M4-S10`](SALVAGE.md#m4-s10-phase-zero-c-defect-exclusion) is checked in the same module.
 `ParabolicBlade.bridge_bZero_cTwo_bOne_det` computes the exact width-three determinant for
@@ -1495,15 +1505,6 @@ The residue-one left `c`-endpoint exclusion
 `ParabolicBlade.bridge_cOne_bTwo_bZero_det_ne_zero` proves every coefficient positive from the
 coarse native code interval. The exact boundary is
 [`audits/m43-residue-one-left-c-endpoint-2026-08-30.md`](audits/m43-residue-one-left-c-endpoint-2026-08-30.md).
-
-The minimal triple-`b` defect exclusion
-[`M4-S14`](SALVAGE.md#m4-s14-minimal-triple-b-defect-exclusion) is formalized in
-[`MatrixMortality/ParabolicLongDefect.lean`](MatrixMortality/ParabolicLongDefect.lean).
-`ParabolicBlade.bridge_bZero_bTwo_bTwo_bTwo_bZero_det` and
-`ParabolicBlade.bridge_bOne_bTwo_bTwo_bTwo_bOne_det` compute the two equal-phase shortest
-three-defect determinants. Their nonzero corollaries reduce both to explicit multilinear cores
-with positive integer coefficients. The exact boundary is
-[`audits/m43-minimal-triple-b-defect-2026-08-30.md`](audits/m43-minimal-triple-b-defect-2026-08-30.md).
 
 The original fixed-ray semantic route is obstructed by
 [`M4-O14`](SALVAGE.md#m4-o14-original-semantic-endpoint-obstruction), formalized in

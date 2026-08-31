@@ -197,6 +197,7 @@ file owns the mathematical stock.
 | [`M4-S12`](#m4-s12-residue-zero-c-endpoint-exclusion) | obstruction | a shortest bad run with a `b` defect cannot close when its residue-zero endpoint is `c` | formalized | active |
 | [`M4-S13`](#m4-s13-residue-one-left-c-endpoint-exclusion) | obstruction | the `1|2|0` shortest bad run with a `b` defect cannot close when its left endpoint is `c` | formalized | active |
 | [`M4-S14`](#m4-s14-uniform-all-b-defect-run-exclusion) | structure theorem and obstruction | every regular all-`b` safe/defect/safe bridge is nonsingular for an arbitrary residue-two run | formalized | active |
+| [`M4-S15`](#m4-s15-opposite-double-c-endpoint-exclusion) | obstruction | the `1|2|0` shortest bad run with a `b` defect cannot close when both endpoints are `c` | formalized | active |
 | [`M4-C03`](#m4-c03-zero-framed-binary-two-lag-compiler) | compiler | the principal scanner is literally binary context-2 Lag and compiles to `M₄(3)` | formalized | graduated |
 | [`M4-D01`](#m4-d01-zero-framed-binary-two-lag-decision) | decidable stratum | the entire zero-framed binary context-2 Lag kernel has an exact syntactic classification | formalized | graduated |
 | [`M4-D02`](#m4-d02-zero-framed-reset-scanner-decision) | decidable stratum | zero-run reduction contracts the reset scanner to a regular two-token quotient | audited | graduated |
@@ -8074,6 +8075,49 @@ transport that tolerates `c` inside longer runs.
 **Artifact:**
 [`MatrixMortality/ParabolicLongDefect.lean`](MatrixMortality/ParabolicLongDefect.lean) and
 [`audits/m43-uniform-all-b-defect-run-2026-08-30.md`](audits/m43-uniform-all-b-defect-run-2026-08-30.md).
+
+### M4-S15: Opposite double-c endpoint exclusion
+
+**Kind:** obstruction
+
+**Evidence:** formalized
+
+**Disposition:** active
+
+The shortest `1|2|0` bad bridge with a `b` defect and body-dependent `c` atoms at both safe
+endpoints is
+
+```text
+c(3z+1) b(3x+2) c(3y).
+```
+
+Put `D=M−3` and `q=11L−9M−32`. Lean collects its determinant as `729/704` times a polynomial
+in `xyz,xy,xz,x,yz,y,z,1`. Seven coefficients are immediately positive from
+
+```text
+24 < D,    0 < q < 16D.
+```
+
+The `xyz` and `xz` coefficients share the positive throat
+`84797D−2991q−143568`. The sole quadratic competition occurs in the `yz` coefficient; multiplying
+`q<16D` by `q>0` absorbs its negative `2871240q²` term, and `D>24` absorbs the remaining negative
+linear and constant terms. Hence the determinant is strictly positive for every nonempty body
+and all nonnegative waits.
+
+**Scope:** deletion width `β=3`, exactly three atoms, a residue-one `c` left endpoint, one `b`
+defect, and a residue-zero `c` right endpoint. It does not cover the transposed double-`c`
+endpoint orientation, a `c` defect, longer defect runs, or multi-atom safe contexts.
+
+**Use:** the `1|2|0` shortest family with a `b` defect is closed whenever its two endpoints are
+both body-dependent. Every surviving shortest `1|2|0` bridge now has a `c` defect and at least
+one `c` endpoint.
+
+**Next:** kill the transposed `c(3z)b(3x+2)c(3y+1)` bridge, then the six families combining a
+`c` defect with one or two `c` endpoints.
+
+**Artifact:**
+[`MatrixMortality/ParabolicMixedEndpoint.lean`](MatrixMortality/ParabolicMixedEndpoint.lean) and
+[`audits/m43-opposite-double-c-endpoint-2026-08-30.md`](audits/m43-opposite-double-c-endpoint-2026-08-30.md).
 
 ### M4-C03: Zero-framed binary two-Lag compiler
 

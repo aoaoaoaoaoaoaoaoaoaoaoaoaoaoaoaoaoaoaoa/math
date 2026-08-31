@@ -509,15 +509,22 @@ one-`c` endpoint survivor must place that `c` in residue-one phase. The second s
 left endpoint in the `1|2|0` orientation. The sole one-`c` endpoint survivor with a `b` defect is
 therefore `b(3z)b(3x+2)c(3y+1)`; its mixed-sign determinant is the next endpoint target.
 
-The equal-phase bad class also has a characteristic-zero base exclusion. The exact sign theorem
-[`M4-S14`](SALVAGE.md#m4-s14-minimal-triple-b-defect-exclusion) kills both all-`b` skeletons with
-three consecutive defects: the phase-zero core has 32 positive coefficients, while the
-phase-one core has eight. Body-dependent atoms and the lift from run length three to `3+4k`
-remain.
+The first two-`c` endpoint family is also dead. The coefficient theorem
+[`M4-S15`](SALVAGE.md#m4-s15-opposite-double-c-endpoint-exclusion) excludes
+`c(3z+1)b(3x+2)c(3y)` for every nonempty body and all waits. Eight shortest families remain:
+the five `0|2|1` forms
+
+```text
+b b c,  c b c,  c c b,  b c c,  c c c,
+```
+
+and the three `1|2|0` forms `c c b`, `b c c`, and `c c c`, where the positions record endpoint,
+defect, endpoint letters. The immediate target is the transposed `c b c` family in phase
+`0|2|1`; the other six survivors all use a `c` defect.
 
 Two original-family nodes survive, and they must not be conflated.
 
-1. **Exterior collision avoidance.** Use `M4-S06`--`M4-S14` to classify the transported kernel
+1. **Exterior collision avoidance.** Use `M4-S06`--`M4-S15` to classify the transported kernel
    across the two bad defect-run classes. A safe right endpoint can close only after the
    transport enters its leftmost-phase chamber. Uniform avoidance proves this family immortal;
    one hit gives an exact physical zero word. Do not rebuild a grammar for the right walls.
