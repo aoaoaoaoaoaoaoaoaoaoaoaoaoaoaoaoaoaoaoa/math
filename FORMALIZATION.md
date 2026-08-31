@@ -1419,15 +1419,17 @@ handles a zero higher coordinate explicitly and otherwise transfers the strict i
 two nonzero coordinates of equal `3`-adic valuation. The exact evidence boundary is
 [`audits/m43-safe-wall-transport-2026-08-30.md`](audits/m43-safe-wall-transport-2026-08-30.md).
 
-The minimal all-`b` bad-run exclusion
-[`M4-S09`](SALVAGE.md#m4-s09-minimal-all-b-bad-run-exclusion) is formalized in
-[`MatrixMortality/ParabolicDefect.lean`](MatrixMortality/ParabolicDefect.lean).
-`ParabolicBlade.bridge_bZero_bTwo_bOne_det` and
-`ParabolicBlade.bridge_bOne_bTwo_bZero_det` compute the two shortest opposite-phase defect
-determinants exactly. Their nonzero corollaries prove positivity of the remaining polynomial
-factors for `ρ≥1` and `ρ≥9`, respectively, and discharge every regular all-`b` instance at the
-universal scale. The exact scope and next generalization are recorded in
-[`audits/m43-minimal-all-b-bad-run-2026-08-30.md`](audits/m43-minimal-all-b-bad-run-2026-08-30.md).
+The uniform all-`b` defect-run exclusion
+[`M4-S14`](SALVAGE.md#m4-s14-uniform-all-b-defect-run-exclusion) is formalized in
+[`MatrixMortality/ParabolicLongDefect.lean`](MatrixMortality/ParabolicLongDefect.lean).
+`ParabolicBlade.bDefectRun` is the physical product of an arbitrary wait list of residue-two
+`b` atoms. `ParabolicBlade.bridge_bSafe_bDefectRun_bSafe_det_ne_zero` proves that every such run
+between regular safe `b` endpoints has nonzero bridge determinant at `β=3`, without a parity or
+nonemptiness hypothesis. Its invariant-cone proof tracks the exact `(−1)^length` exterior sign
+and retains `b(1)` as the sole forbidden endpoint. This subsumes the one-defect formulas of
+[`M4-S09`](SALVAGE.md#m4-s09-minimal-all-b-bad-run-exclusion) and replaces the deleted explicit
+three-defect coefficient cores. The exact boundary is
+[`audits/m43-uniform-all-b-defect-run-2026-08-30.md`](audits/m43-uniform-all-b-defect-run-2026-08-30.md).
 
 The phase-zero `c`-defect exclusion
 [`M4-S10`](SALVAGE.md#m4-s10-phase-zero-c-defect-exclusion) is checked in the same module.

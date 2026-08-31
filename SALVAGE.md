@@ -189,12 +189,12 @@ file owns the mathematical stock.
 | [`M4-S06`](#m4-s06-arbitrary-defect-bridge-grammar) | structure theorem | arbitrary defect skeletons and bridge walls reduce to one consecutive projective incidence | formalized | active |
 | [`M4-S07`](#m4-s07-one-sided-wall-orbit-normal-form) | structure theorem | every consecutive wall incidence is one explicit exterior point-to-ray reachability problem | audited | active |
 | [`M4-S08`](#m4-s08-safe-wall-transport-chamber) | structure theorem | incidence with a safe right wall forces the transported kernel into one strict phase-selected `3`-adic chamber | formalized | active |
-| [`M4-S09`](#m4-s09-minimal-all-b-bad-run-exclusion) | obstruction | neither orientation of the shortest bad defect run can close when all three atoms are `b` | formalized | active |
+| [`M4-S09`](#m4-s09-minimal-all-b-bad-run-exclusion) | obstruction | neither orientation of the shortest bad defect run can close when all three atoms are `b` | formalized | graduated |
 | [`M4-S10`](#m4-s10-phase-zero-c-defect-exclusion) | obstruction | the `0|2|1` shortest bad run cannot close with a `c` defect and `b` endpoints | formalized | active |
 | [`M4-S11`](#m4-s11-opposite-c-defect-cylinder-exclusion) | obstruction | the `1|2|0` shortest bad run cannot close with a `c` defect and `b` endpoints | formalized | active |
 | [`M4-S12`](#m4-s12-residue-zero-c-endpoint-exclusion) | obstruction | a shortest bad run with a `b` defect cannot close when its residue-zero endpoint is `c` | formalized | active |
 | [`M4-S13`](#m4-s13-residue-one-left-c-endpoint-exclusion) | obstruction | the `1|2|0` shortest bad run with a `b` defect cannot close when its left endpoint is `c` | formalized | active |
-| [`M4-S14`](#m4-s14-minimal-triple-b-defect-exclusion) | obstruction | neither equal-phase shortest three-defect run closes when every atom is `b` | formalized | active |
+| [`M4-S14`](#m4-s14-uniform-all-b-defect-run-exclusion) | structure theorem and obstruction | every regular all-`b` safe/defect/safe bridge is nonsingular for an arbitrary residue-two run | formalized | active |
 | [`M4-C03`](#m4-c03-zero-framed-binary-two-lag-compiler) | compiler | the principal scanner is literally binary context-2 Lag and compiles to `M₄(3)` | formalized | graduated |
 | [`M4-D01`](#m4-d01-zero-framed-binary-two-lag-decision) | decidable stratum | the entire zero-framed binary context-2 Lag kernel has an exact syntactic classification | formalized | graduated |
 | [`M4-D02`](#m4-d02-zero-framed-reset-scanner-decision) | decidable stratum | zero-run reduction contracts the reset scanner to a regular two-token quotient | audited | graduated |
@@ -7692,7 +7692,7 @@ hit.
 
 **Evidence:** formalized
 
-**Disposition:** active
+**Disposition:** graduated
 
 The shortest bad skeleton left by `M4-S06` is one residue-two atom between opposite safe phases.
 For all-`b` atoms its two orientations are
@@ -7719,16 +7719,14 @@ Thus neither orientation can be a wall at the universal-source scale `ρ=3^β`, 
 particular at `β=3`.
 
 **Scope:** exactly three atoms, one residue-two atom, both safe phases, and letter `b` at both
-endpoints and at the defect. This excludes a physical lift of the smallest bad residue skeleton;
-it does not yet allow a `c` defect, a `c` endpoint, a longer run `1+4k`, or additional safe atoms
-inside either endpoint wall.
+endpoints and at the defect. `M4-S14` now strictly subsumes this scope, including the same exact
+regularity boundary, for every finite residue-two run at deletion width three.
 
 **Use:** the smallest bad skeleton is no longer merely a modulo-three survivor. Any minimal
 one-defect wall must use the body-dependent `c` atom or a nontrivial safe context. The positive
 factorization also supplies the characteristic-zero sign template for the longer-run attack.
 
-**Next:** replace the middle defect by `c`, then allow one `c` endpoint, then factor the
-residue-two four-cycle to treat every run length `1+4k` without enumeration.
+**Next:** none within the all-`b` run. The live alphabet extensions use a `c` defect or endpoint.
 
 **Artifact:**
 [`MatrixMortality/ParabolicDefect.lean`](MatrixMortality/ParabolicDefect.lean) and
@@ -7923,43 +7921,52 @@ a second body-dependent atom.
 [`MatrixMortality/ParabolicDefect.lean`](MatrixMortality/ParabolicDefect.lean) and
 [`audits/m43-residue-one-left-c-endpoint-2026-08-30.md`](audits/m43-residue-one-left-c-endpoint-2026-08-30.md).
 
-### M4-S14: Minimal triple-b defect exclusion
+### M4-S14: Uniform all-b defect-run exclusion
 
-**Kind:** obstruction
+**Kind:** structure theorem and obstruction
 
 **Evidence:** formalized
 
 **Disposition:** active
 
-The second shortest bad residue skeleton has three consecutive residue-two defects between equal
-safe phases. At deletion width three its two all-`b` orientations are
+At deletion width three, let `Bε(j)` be the residue-zero (`ε=false`) or residue-one
+(`ε=true`) safe `b` atom, and let `D(j)=b(3j+2)`. For arbitrary endpoint phases and every finite
+wait list `w`, Lean proves
 
 ```text
-b(3z)   b(3a+2) b(3b+2) b(3c+2) b(3y),
-b(3z+1) b(3a+2) b(3b+2) b(3c+2) b(3y+1).
+det bridge(27, Bε(z) · D(w₀) ··· D(wₙ₋₁) · Bδ(y)) ≠ 0
 ```
 
-Lean expands the phase-zero determinant as `6561/32` times a multilinear polynomial whose 32
-integer coefficients are positive. The phase-one determinant is `−2187yz/4` times an
-eight-coefficient polynomial in `a,b,c`, again with every coefficient positive. The first
-determinant is therefore positive for all nonnegative waits; the second is negative under the
-regularity conditions `y,z>0`.
+whenever both endpoints are regular. The only excluded endpoint is `b(1)`, represented by the
+residue-one phase with zero wait. No parity or nonemptiness hypothesis is required.
 
-**Scope:** deletion width `β=3`, exactly three consecutive defects, equal safe phases, and letter
-`b` at all five atoms. The result does not allow a `c` atom, a longer run `3+4k`, or a nontrivial
-safe context. The phase-one boundary assumptions exclude the two exceptional singular `b(1)`
-endpoints.
+The proof conjugates the adjugate-transpose defect action by `S=diag(1,−1,−1)`. After removing
+one global minus sign per defect, every wait acts through an explicit matrix preserving the cone
 
-**Use:** both protected-plane bad residue classes now have characteristic-zero base cases: the
-opposite-phase one-defect class at run length one and the equal-phase three-defect class at run
-length three. Any shortest equal-phase survivor must use body dependence.
+```text
+0 < x,    x ≤ 2y,    7y ≤ 6x,    x ≤ z.
+```
 
-**Next:** introduce one `c` atom into the triple-defect skeleton, then determine whether the
-residue-two four-cycle lifts the two base exclusions uniformly to lengths `1+4k` and `3+4k`.
+Both regular right safe endpoints enter this cone. The signed left bridge covector is strictly
+negative in residue-zero phase and strictly positive in residue-one phase. A run of length `n`
+therefore changes only the global factor `(−1)^n`; it cannot create a zero.
+
+**Scope:** arbitrary finite runs consisting entirely of residue-two `b` atoms between single
+regular safe `b` endpoints, exactly at `β=3`. This includes every all-`b` bad run of lengths
+`1+4k` and `3+4k`, as well as even and empty runs. It does not allow a body-dependent `c` atom
+inside the defect run or either endpoint, or a multi-atom safe endpoint context.
+
+**Use:** all-`b` defect-run length has disappeared from the `M₄(3)` frontier. The former exact
+one-defect result `M4-S09` and the explicit three-defect coefficient expansion are subsumed; the
+latter has been deleted. Every surviving bad bridge family must contain a `c` atom or a
+nontrivial safe context.
+
+**Next:** classify the shortest bad bridges containing `c`, then seek a cone or cylinder
+transport that tolerates `c` inside longer runs.
 
 **Artifact:**
 [`MatrixMortality/ParabolicLongDefect.lean`](MatrixMortality/ParabolicLongDefect.lean) and
-[`audits/m43-minimal-triple-b-defect-2026-08-30.md`](audits/m43-minimal-triple-b-defect-2026-08-30.md).
+[`audits/m43-uniform-all-b-defect-run-2026-08-30.md`](audits/m43-uniform-all-b-defect-run-2026-08-30.md).
 
 ### M4-C03: Zero-framed binary two-Lag compiler
 

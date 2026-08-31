@@ -476,12 +476,12 @@ safe flag. If the right wall begins in residue zero, its transported kernel must
 valuation is therefore an exact avoidance certificate. This leaves the bad defect skeletons,
 not arbitrary safe right-wall reachability, as the next transport classification.
 
-The first bad skeleton has now been cut in characteristic zero. The exact factorization
-[`M4-S09`](SALVAGE.md#m4-s09-minimal-all-b-bad-run-exclusion) proves that neither three-atom
-orientation `0|2|1` or `1|2|0` can close when all atoms are `b`; after removing the one forbidden
-exceptional wait, its determinant has a fixed nonzero sign. The next atom-level target is the
-same skeleton with a `c` defect, followed by one `c` endpoint. Only then should the run be lifted
-from length one to `1+4k` by a uniform four-cycle factor.
+All-`b` defect runs are now closed uniformly. The invariant-cone theorem
+[`M4-S14`](SALVAGE.md#m4-s14-uniform-all-b-defect-run-exclusion) proves that a regular
+safe/defect/safe bridge cannot close for any finite run of residue-two `b` atoms, independent of
+run length, parity, phases, and waits. This strictly subsumes the shortest exact factorization
+`M4-S09` and deletes the former three-defect coefficient expansion. Defect-run length is no
+longer a frontier axis until a body-dependent `c` atom enters the run or an endpoint context.
 
 Both `c`-defect orientations with `b` endpoints are now dead. The exact width-three sign theorem
 [`M4-S10`](SALVAGE.md#m4-s10-phase-zero-c-defect-exclusion) excludes
