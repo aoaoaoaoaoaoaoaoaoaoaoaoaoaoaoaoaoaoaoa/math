@@ -1505,6 +1505,36 @@
 'MatrixMortality.CongruenceBlindOrbit.shearRepresentation_injective' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.ShearEuclidean.shearPair_doubles_height' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ShearEuclidean.shearPair_exponent_natAbs_le_height' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ShearEuclidean.reducedMatrixProduct_det' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ShearEuclidean.reducedMatrixProduct_mulVec_pairVector' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ShearEuclidean.reducedPairAction_isCoprime' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ShearEuclidean.coprime_pairs_eq_or_neg_of_cross_eq' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ShearEuclidean.reducedPairAction_power_le_height' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ShearEuclidean.reducedPairAction_exponents_le_height' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ShearEuclidean.reducedPairAction_source_power_le_height' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ShearEuclidean.reducedPairAction_source_exponents_le_height' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ShearEuclidean.finite_search_bounds_of_projective_hit' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ShearEuclidean.finite_search_bounds_of_matrix_hit' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.AffineGroupOrbit.multiplier_mul_mem_translationKernel' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]

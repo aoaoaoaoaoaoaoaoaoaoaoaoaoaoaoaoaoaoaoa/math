@@ -1306,6 +1306,14 @@ when the translation kernel is trivial, and the resulting common fixed point. Th
 relation-lattice construction of the kernel, principal fractional-ideal quotient, finite search,
 and invariant-pair extension are audited rather than executable Lean algorithms.
 
+[`D2-D09`](SALVAGE.md#d2-d09-step-three-shear-height-decision) closes the explicit
+profinite-blind step-three shear family by an infinite invariant. Lean proves that every nonzero
+alternating syllable from `[1:1]` at least doubles primitive pair height, that every signed
+exponent is bounded by endpoint height, and that the recursive action equals the literal
+determinant-one matrix product. Coprimality reduces a projective hit to the target pair up to sign,
+so target height gives a finite complete search envelope. The enumeration algorithm is audited
+rather than implemented as an executable Lean decider.
+
 Lean checks the internal algebra at the positive boundary: three positive letters surject onto
 the binary free group; quotient-blind boundaries accepting `g` and `g²` admit a nonempty identity
 witness; every injective transition on a finite invariant semantic fibre pumps an identity loop;
@@ -1904,6 +1912,7 @@ fixed-rank decision problem.
 | `ReturnConvert.lean` | minimal two-scale return pencil and nonresonant multi-return zero |
 | `ProjectiveLine.lean` | total affine-chart presentation of `ℙ¹` and exact unit-word ray action |
 | `CongruenceBlindOrbit.lean` | free rational shear orbit, trivial source stabilizer, projective all-modulus CRT closure, and a whole-matrix congruence ghost away from nineteen |
+| `ShearEuclidean.lean` | Euclidean chamber growth, determinant-one coprimality, and finite projective syntax bounds for the fixed step-three shear orbit |
 | `AffineGroupOrbit.lean` | translation-kernel quotient and trivial-kernel fixed-point structure for rational affine groups |
 | `PadicValuation.lean` | nonzero rational p-adic shells, unequal-valuation calculus, and the adjacent-unit odd-prime obstruction |
 | `PeriodicShell.lean` | exact affine schedule composition, rational all-unit periodic cycles, and the published nonfree benchmark relation |
@@ -2125,6 +2134,9 @@ fixed-rank decision problem.
 | In a finite group, positive monoid closure of a group-generating set is the whole group | `FinitePositiveImage.Submonoid.inv_mem_of_finite`, `FinitePositiveImage.mclosure_eq_top_of_group_closure_eq_top` |
 | A free rational shear orbit with trivial source stabilizer misses `[10:13]`, while a positive shear word reaches it projectively modulo every positive integer | `CongruenceBlindOrbit.shearRepresentation_injective`, `CongruenceBlindOrbit.sourcePoint_stabilizer_trivial`, `CongruenceBlindOrbit.targetPoint_not_reachable`, `CongruenceBlindOrbit.exists_positiveBridgeWord_modular_hit` |
 | The same free orbit is disjoint from the complete target-matrix coset of the source stabilizer, while modulo every integer prime to nineteen a positive shear word equals that determinant-one target matrix carrying `[1:1]` to `[7:10]` | `CongruenceBlindOrbit.shearRepresentation_ne_profiniteTarget_mul_stabilizer`, `CongruenceBlindOrbit.profiniteTargetPoint_not_reachable`, `CongruenceBlindOrbit.exists_positiveProfiniteBridgeWord_modular_eq`, `CongruenceBlindOrbit.profiniteTargetMatrix_det`, `CongruenceBlindOrbit.profiniteTargetMatrix_mulVec_source` |
+| A nonzero step-three shear across the opposite dominance chamber doubles integral pair height and bounds its exponent by the output height | `ShearEuclidean.shearPair_doubles_height`, `ShearEuclidean.shearPair_exponent_natAbs_le_height` |
+| Reduced shear syntax equals its literal determinant-one matrix action and preserves coprimality of integral pairs | `ShearEuclidean.reducedMatrixProduct_mulVec_pairVector`, `ShearEuclidean.reducedMatrixProduct_det`, `ShearEuclidean.reducedPairAction_isCoprime` |
+| A projective hit from `[1:1]` on a primitive target of height `H` has `2^k≤H` syllables and every signed exponent bounded by `H` | `ShearEuclidean.coprime_pairs_eq_or_neg_of_cross_eq`, `ShearEuclidean.finite_search_bounds_of_projective_hit` |
 | Rational affine group hits are exact modulo the translation kernel; a trivial kernel forces one common fixed point | `AffineGroupOrbit.exists_exact_hit_iff_exists_hit_mod_translationKernel`, `AffineGroupOrbit.commute_of_translationKernel_eq_bot`, `AffineGroupOrbit.act_fixedPoint_of_translationKernel_eq_bot` |
 | The raw mixed-prime affine action has a published relation at length 27, an infinite distinct equal-map family at every odd length from 29, and three independent relations at length 30 | `MixedPrimeKernel.cassaigne_ne`, `MixedPrimeKernel.wordAction_cassaigne`, `MixedPrimeKernel.kernelOddFamily_length`, `MixedPrimeKernel.kernelOddFamily_ne`, `MixedPrimeKernel.wordAction_kernelOddFamily`, `MixedPrimeKernel.kernel30_ne`, `MixedPrimeKernel.wordAction_kernel30a`, `MixedPrimeKernel.wordAction_kernel30b`, `MixedPrimeKernel.wordAction_kernel30c` |
 | Every odd-family relation is an exact homogeneous matrix relation preserved by arbitrary independent generator scaling, so nonzero unit normalization cannot restore freeness | `MixedPrimeNormalization.kernelOddFamily_count`, `MixedPrimeNormalization.kernelOddFamily_perm`, `MixedPrimeNormalization.scaledAffineGenerator_isUnit`, `MixedPrimeNormalization.wordProduct_scaledAffineGenerator_kernelOddFamily`, `MixedPrimeNormalization.scaledAffineGenerator_not_injective` |

@@ -294,6 +294,7 @@ file owns the mathematical stock.
 | [`D2-D06`](#d2-d06-private-prime-peeling) | decidable stratum | a private multiplier prime decides every noncritical endpoint shell | audited | stock |
 | [`D2-D07`](#d2-d07-bounded-valuation-orthants) | decidable stratum | bounded cooriented affine families have finite successful state spaces | audited | stock |
 | [`D2-D08`](#d2-d08-rational-affine-group-orbits) | decidable stratum | every finitely generated rational affine group orbit reduces to a finite translation quotient or multiplier membership | audited; formalized core | graduated |
+| [`D2-D09`](#d2-d09-step-three-shear-height-decision) | decidable stratum | target height bounds every reduced syllable and exponent in the fixed step-three shear orbit of `[1:1]` | audited; formalized core | graduated |
 | [`D2-M01`](#d2-m01-benchmark-critical-shell) | partial mechanism | the mixed-prime benchmark reduces generically to one guarded `5`-adic shell | audited | active |
 | [`D2-O01`](#d2-o01-canonical-collatz-reachability-is-not-automatic) | obstruction | full generalized-Collatz reachability is not synchronously recognizable in its canonical base | external theorem | active |
 | [`D2-O02`](#d2-o02-critical-shell-periodic-saturation) | obstruction and rewrite seed | every nonempty finite wait schedule has a rational all-unit cycle; normalized nonfreeness persists under every generator scaling, while its odd family is a two-seed cancellative pump and the positive finite basis is complete only through length 30 | formalized core; audited strengthening | active |
@@ -11694,11 +11695,13 @@ valid uniqueness-promise instance but survives every finite quotient of its natu
 **Scope:** profinite closure is relative to the displayed ambient `Γ₀(3)`, its projective image,
 and the full `PGL₂` ambient by restriction. The theorem does not assert intrinsic finite-quotient
 blindness for a smaller abstract presentation, local density of the whole orbit, undecidability,
-or failure of syntax-sensitive and Archimedean algorithms.
+or failure of syntax-sensitive and Archimedean algorithms. [`D2-D09`](#d2-d09-step-three-shear-height-decision)
+now gives such an Archimedean algorithm for this complete fixed-source shear family.
 
 **Use:** delete finite ambient-group separation, including hypothetical noncongruence quotients,
-from the `UCB₂(S)` decision tree. A surviving algorithm must retain syntax, height, Archimedean
-geometry, or another infinite invariant.
+from the `UCB₂(S)` decision tree. Retire the displayed family as a hardness candidate: target
+height decides it. For the general survivor, retain syntax, height, Archimedean geometry, or
+another infinite invariant.
 
 **Artifacts:** [`CongruenceBlindOrbit.lean`](MatrixMortality/CongruenceBlindOrbit.lean),
 [`m34-unique-coset-profinite-blindness-2026-08-30.md`](audits/m34-unique-coset-profinite-blindness-2026-08-30.md),
@@ -12356,6 +12359,53 @@ reachability. Together with `D2-D02`, it removes every elementary branch of grou
 
 **Artifacts:** [`AffineGroupOrbit.lean`](MatrixMortality/AffineGroupOrbit.lean) and
 [`rational-elementary-group-orbits-2026-08-30.md`](audits/rational-elementary-group-orbits-2026-08-30.md).
+
+### D2-D09: Step-three shear height decision
+
+**Kind:** decidable stratum
+
+**Evidence:** audited; formalized core
+
+**Disposition:** graduated
+
+Let `A=[[1,3],[0,1]]`, `B=[[1,0],[3,1]]`, and let `H=⟨A,B⟩` act on the fixed
+source `[1:1]`. If a nonidentity reduced alternating word
+
+```text
+w=X₁^e₁⋯X_k^e_k,       Xᵢ∈{A,B},       eᵢ∈ℤ∖{0},
+```
+
+reaches a primitive integral target pair of height `H_t`, then
+
+```text
+2^k≤H_t,               |eᵢ|≤H_t for every i.
+```
+
+The proof is an integral Euclidean descent in reverse. Across the opposite coordinate-dominance
+chamber, a nonzero step-three shear at least doubles the maximum absolute coordinate and enters
+its own strict chamber. Alternation makes the next syllable satisfy the same hypothesis. Literal
+matrix evaluation, determinant one, and coprimality show that projective equality with a primitive
+target introduces only the sign scale `±1`.
+
+The bounds give a finite decision procedure: normalize the rational target to a coprime pair,
+check the identity, and enumerate the finitely many reduced words whose syllable count and signed
+exponents obey the displayed bounds. For the profinite-blind `G3-O28` target `[7:10]`, every
+hypothetical witness has at most three syllables and exponents of absolute value at most ten.
+
+**Scope:** the theorem fixes the equal step-three upper/lower shears and source `[1:1]`. It does
+not decide arbitrary two-generator non-elementary subgroups of `PGL₂(ℚ)`, arbitrary sources, or
+general `UCB₂(S)`. Chorna--Geller--Shpilrain peak reduction and Han--Masuda--Singh--Thiel
+continued-fraction criteria decide membership of a supplied complete matrix; they are related
+prior art, not proofs of this projective orbit theorem.
+
+**Use:** retire the explicit `G3-O28` family as a candidate hard instance while retaining its
+finite-certificate obstruction. A general attack should seek an effective Archimedean or
+continued-fraction normal form, rather than another finite quotient.
+
+**Artifacts:** [`ShearEuclidean.lean`](MatrixMortality/ShearEuclidean.lean),
+[`m34-step-three-shear-height-decision-2026-08-31.md`](audits/m34-step-three-shear-height-decision-2026-08-31.md),
+[`chorna-geller-shpilrain-2017-two-generator-subgroups.md`](references/chorna-geller-shpilrain-2017-two-generator-subgroups.md),
+and [`han-masuda-singh-thiel-2024-subgroup-membership.md`](references/han-masuda-singh-thiel-2024-subgroup-membership.md).
 
 ### D2-M01: Benchmark critical shell
 
