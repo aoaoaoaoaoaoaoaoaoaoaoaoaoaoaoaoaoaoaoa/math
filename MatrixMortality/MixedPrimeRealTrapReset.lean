@@ -277,6 +277,53 @@ theorem shellStep_realTrap_guardedPoleReset (period : ℕ) :
   exact ⟨source_mem, target_mem', by simpa only [source] using source_unit, target_unit,
     source_candidate, target_candidate', step_eq'⟩
 
+/-- The point `2/9` reaches the normalized mantissa one in every real band at depth at least two
+through the deepest predecessor branch. -/
+theorem shellStep_twoNinths_bandPoint
+    {depth : ℕ} (depth_lower : 2 ≤ depth) :
+    shellStep (depth - 2) (2 / 9) = realTrapBandPoint depth 1 := by
+  simp only [shellStep, realTrapBandPoint]
+  rw [show depth = depth - 2 + 2 by omega, pow_add]
+  norm_num
+  ring
+
+/-- The guarded pole-reset ray has a fixed real-trap source. From `2/9`, one accepted shell step
+reaches depths `50·period+50` with unbounded waits. -/
+theorem shellStep_realTrap_guardedPoleFeed (period : ℕ) :
+    let depth := 50 * period + 50
+    let target := realTrapBandPoint depth 1
+    (2 / 9 : ℚ) ∈ Set.Ioc (1 / 5 : ℚ) (1 / 2) ∧
+      target ∈ Set.Ioc (1 / 5 : ℚ) (1 / 2) ∧
+      IsUnit 5 (2 / 9 : ℚ) ∧ IsUnit 5 target ∧
+      realTrapMaxPredecessorWait target = depth ∧
+      shellStep (depth - 2) (2 / 9) = target := by
+  let depth := 50 * period + 50
+  let target := realTrapBandPoint depth 1
+  have target_mem :=
+    realTrapBandPoint_mem depth (mantissa := 1) (by norm_num) (by norm_num)
+  have target_candidate :=
+    realTrapMaxPredecessorWait_bandPoint depth (mantissa := 1) (by norm_num) (by norm_num)
+  have target_unit := (poleReset_units period).1
+  have two_unit : IsUnit 5 (2 : ℚ) := intCast_isUnit_of_not_dvd (by norm_num)
+  have nine_unit : IsUnit 5 (9 : ℚ) := intCast_isUnit_of_not_dvd (by norm_num)
+  have source_unit : IsUnit 5 (2 / 9 : ℚ) := div_hasValue two_unit nine_unit
+  have depth_lower : 2 ≤ depth := by
+    simp only [depth]
+    omega
+  exact ⟨by norm_num, target_mem, source_unit,
+    by simpa only [target] using target_unit, target_candidate,
+    shellStep_twoNinths_bandPoint depth_lower⟩
+
+/-- The guarded fixed-source pole-feed targets are pairwise distinct. -/
+theorem shellStep_realTrap_guardedPoleFeed_target_injective : Function.Injective
+    (fun period : ℕ => realTrapBandPoint (50 * period + 50) 1) := by
+  intro left right targets_eq
+  have candidates_eq := congrArg realTrapMaxPredecessorWait targets_eq
+  rw [realTrapMaxPredecessorWait_bandPoint (50 * left + 50) (by norm_num) (by norm_num),
+    realTrapMaxPredecessorWait_bandPoint (50 * right + 50) (by norm_num) (by norm_num)]
+    at candidates_eq
+  omega
+
 /-- The guarded pole reset keeps the two-adic wall clear while its three-adic debt grows by one.
 The fixed real target depth therefore hides unbounded three-adic depth. -/
 theorem shellStep_realTrap_guardedPoleReset_twoThreeValues (period : ℕ) :

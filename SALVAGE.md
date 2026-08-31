@@ -11440,6 +11440,15 @@ are `5`-adic units. The proof clears their denominators and checks
 The first numerator has valuation one and the second valuation two, exactly cancelling the
 respective denominator powers of five. Hence one fixed target depth and one fixed wait support
 guarded predecessors of unbounded source depth, although the rational endpoints vary with `k`.
+The same deep-band ray has a fixed source inside the real trap:
+
+```text
+T_(50k+48)(2/9)=U(50k+50,1).
+```
+
+Both endpoints are `5`-adic units, and the targets are pairwise distinct because their exact
+maximal predecessor waits are `50k+50`. Thus the sole real survivor admits accepted one-step
+witnesses with one fixed source and unbounded waits; only the target varies.
 The two other prime coordinates are exact:
 
 ```text
@@ -11453,14 +11462,18 @@ wall remains clear. Lean also proves the displayed targets pairwise distinct, so
 infinite fixed-target fibre.
 
 **Scope:** this refutes a finite-state quotient based only on Archimedean depth, relative branch,
-and the `5`-unit bit. It does not give one fixed target infinitely many predecessors, an arbitrary
-guarded mantissa reset, an infinite prescribed depth word, a counter simulation, or a decision
-theorem. Exact fixed-source/fixed-target reachability remains open.
+and the `5`-unit bit, and it refutes a source-only wait bound within the real trap. It does not
+give one fixed target infinitely many predecessors, an arbitrary guarded mantissa reset, an
+infinite prescribed depth word, a counter simulation, or a decision theorem. Exact simultaneous
+fixed-source/fixed-target reachability remains open.
 
 **Artifact:** `MixedPrimeDebt.realTrapBandPoint`,
 `MixedPrimeDebt.realTrapMaxPredecessorWait_bandPoint`,
 `MixedPrimeDebt.shellStep_realTrap_poleBranch_full`, and
 `MixedPrimeDebt.shellStep_realTrap_guardedPoleReset`,
+`MixedPrimeDebt.shellStep_twoNinths_bandPoint`,
+`MixedPrimeDebt.shellStep_realTrap_guardedPoleFeed`,
+`MixedPrimeDebt.shellStep_realTrap_guardedPoleFeed_target_injective`,
 `MixedPrimeDebt.shellStep_realTrap_guardedPoleReset_twoThreeValues`, and
 `MixedPrimeDebt.shellStep_realTrap_guardedPoleReset_target_injective` in
 [`MixedPrimeRealTrap.lean`](MatrixMortality/MixedPrimeRealTrap.lean) and

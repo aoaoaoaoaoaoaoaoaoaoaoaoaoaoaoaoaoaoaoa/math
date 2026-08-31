@@ -2478,7 +2478,9 @@ depth four and wait two while the source depths run through `50k+50`; exact resi
 prove that both endpoints remain `5`-adic units. Both are also `2`-adic units, while their exact
 `3`-adic depths are `50k+49` and `50k+50`. The targets are pairwise distinct. Therefore fixed
 real depth plus finitely many valuation modes cannot form an inverse nucleus, but this ray still
-does not create a fixed-target fibre. Exact mantissa arithmetic is indispensable. This is
+does not create a fixed-target fibre. Moreover `T_(50k+48)(2/9)=U(50k+50,1)`: one fixed unit
+source inside the real trap feeds the ray at unbounded waits, again with distinct targets. Exact
+mantissa arithmetic is indispensable. This is
 [`D2-O07`](SALVAGE.md#d2-o07-guarded-real-pole-reset).
 Higher depth is not free: a published length-thirteen relation yields two distinct
 schedules with the same affine map and a common Lean-checked guarded periodic source. This is an
@@ -2549,7 +2551,7 @@ artery; see
 | Bound the mixed-prime reverse fan by valuations alone | a target at negative `3`-depth `d` has exactly `d+1` distinct shell-legal predecessors when its rational carrier is a `3`- and `5`-unit; `D2-S04` recovers a sharp ternary bound only after intersecting both endpoints with the real trap |
 | Prune cross-length shell collisions at their source | every two nonempty unequal-length shell maps have a unique collision source and it is automatically a `5`-adic unit; only fixed-source equality and target acceptance remain discriminating |
 | Infer target acceptance from the automatic cross-length source unit | the adjacent debt-safe bridges `[4]` and `[0,5]` collide from the `5`-unit source `2/9`, but their target `55/243` has `5`-adic valuation one |
-| Bound accepted debt-bridge waits from one fixed source | for every `k≥0`, `[1,10k+2]` and `[3,1,10k]` are accepted adjacent bridges from `43/24`, with terminal waits tending to infinity |
+| Bound accepted waits from one fixed source | for every `k≥0`, `[1,10k+2]` and `[3,1,10k]` are accepted adjacent bridges from `43/24`; inside the real trap itself, `T_(50k+48)(2/9)=U(50k+50,1)` is an accepted one-step family |
 | Use real contraction to bound every shell schedule | the common invariant interval `[1/5,1/2]` is the exact recurrent real survivor; zero-wait extremality bounds only exterior targets |
 | Bound the translated count from a target inside the real trap | every rational `5`-adic unit target there has guarded rational predecessor schedules of every prescribed length, with varying source |
 | Bound the next real-trap depth from the current depth and unit status | the guarded pole-reset family has fixed target depth four and fixed wait two but source depths `50k+50` |

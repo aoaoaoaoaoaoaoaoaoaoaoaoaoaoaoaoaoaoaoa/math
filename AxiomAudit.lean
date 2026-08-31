@@ -726,6 +726,9 @@ open MatrixMortality
 #print axioms MixedPrimeDebt.realTrapMaxPredecessorWait_bandPoint
 #print axioms MixedPrimeDebt.shellStep_realTrap_poleBranch_full
 #print axioms MixedPrimeDebt.shellStep_realTrap_guardedPoleReset
+#print axioms MixedPrimeDebt.shellStep_twoNinths_bandPoint
+#print axioms MixedPrimeDebt.shellStep_realTrap_guardedPoleFeed
+#print axioms MixedPrimeDebt.shellStep_realTrap_guardedPoleFeed_target_injective
 #print axioms MixedPrimeDebt.shellStep_realTrap_guardedPoleReset_twoThreeValues
 #print axioms MixedPrimeDebt.shellStep_realTrap_guardedPoleReset_target_injective
 #print axioms MixedPrimeDebt.exists_shellStep_realTrap_predecessor
