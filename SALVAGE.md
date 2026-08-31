@@ -117,6 +117,7 @@ file owns the mathematical stock.
 | [`MM-S20`](#mm-s20-singleton-carrier-classification) | structure theorem and obstruction | singleton-current carrier transitions are empty, while abstract multi-to-singleton carriers exist exactly at length `m≥β+3` | formalized | active |
 | [`MM-S21`](#mm-s21-bounded-decimal-suffix-cycles) | obstruction | every emitted multi-role block has a compatible projective self-loop in every bounded decimal-suffix quotient | formalized core; audited assembly | active |
 | [`MM-S22`](#mm-s22-gap-factor-quotient-gate) | structure theorem and obstruction | every gap-clean denominator-descended carrier hitting a singleton must pass two exact gap-factor code congruences | formalized | active |
+| [`MM-S24`](#mm-s24-factorwise-gap-ancestry) | structure theorem and obstruction | every gap factor has an exact lower-code propagation law and imposes its own singleton quotient gate while it remains numerator-coprime | formalized | active |
 | [`R32-S01`](#r32-s01-split-return-normal-form) | structure theorem | rank-two cuts reduce one-unit binary mortality to a `2 × 2` return recurrence | formalized | graduated |
 | [`R32-S02`](#r32-s02-two-plane-edge-square) | structure theorem | two rank-two generators are a two-vertex square of `2 × 2` edges | formalized | graduated |
 | [`R32-O01`](#r32-o01-rank-one-profile-collapse) | obstruction | a rank-one generator reduces mortality to order-at-most-three scalar recurrence zeros | audited | stock |
@@ -3751,7 +3752,7 @@ It cuts the gap-clean branch of the `m≥β+3` residual from
 carrier numerator is coprime to `q`, nor that compiler-emitted lower codes cannot satisfy both
 displayed divisibility conditions.
 
-**Use:** split the remaining multi-to-singleton search into gap-contaminated carrier ancestry
+**Use:** split the remaining multi-to-singleton search into shared-factor carrier ancestry
 and the exact quotient-congruence language above. A closure of the clean branch now needs only a
 compiler-code theorem excluding `P₂+g(V₂/q)≡μ10^m (mod q)`; decimal valuations need not be
 revisited.
@@ -3764,7 +3765,68 @@ through `gapFactor` and `gapClean_multiToSingleton_quotientGate`.
 [`audits/m53-decimal-gap-factor-ancestry-2026-08-31.md`](audits/m53-decimal-gap-factor-ancestry-2026-08-31.md).
 
 **Next:** recognize the compiler-emitted pairs `(P₂,V₂)` modulo `q`, and separately decide
-whether a reachable primitive carrier can acquire `q∣N`.
+which proper factors of the generally composite `q` can enter a reachable carrier numerator.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S24: Factorwise gap ancestry
+
+**Kind:** structure theorem and obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+The complement of the clean hypothesis in [`MM-S22`](#mm-s22-gap-factor-quotient-gate) is
+`gcd(q,N)≠1`, not `q∣N`: the primitive gap `q=2·10^β−7` can be composite. Let `r∣q`. For one
+recursive multi-shell step with current lower code `V` and next numerator `N'`, exact reduction
+modulo `r` gives
+
+```text
+r∣N'  ↔  r∣NV.                                    (1)
+```
+
+Every prime `p∣q` therefore obeys the sharper support law
+
+```text
+p∣N'  ↔  p∣N or p∣V.                              (2)
+```
+
+A gap prime is absorbing after entry, and its only first-entry channel is a compiler-emitted
+lower word. The distinguished two-`c` raw head lies strictly between `27q` and `28q`, so the
+full factor `q` does not divide the initial numerator, although proper factors can.
+
+The singleton quotient gate also localizes. Factor `q=rs` with `gcd(r,N)=1`. A physical
+multi-to-singleton pole forces integers `g,W` with `G=9g` and
+
+```text
+V₂=rW,
+r ∣ s(P₂−μ10^m)+gW.                               (3)
+```
+
+Taking `r=q,s=1` recovers `MM-S22`. Thus every portion of the gap still coprime to the carrier
+continues to cut the code language even after other gap primes have contaminated the numerator.
+
+**Scope:** equations (1)--(3) are exact integral laws for every `β>0`, every sign, and every
+physical trace form with recursive denominator ancestry. The raw-head exclusion requires the
+setter range `β≥3`. These results neither prove that proper gap factors cannot enter through
+lower words nor classify words satisfying every surviving factor gate.
+
+**Use:** track the prime support of `N` rather than treating a composite `q` as one Boolean
+contamination flag. At a proposed singleton pole, apply (3) to each product of gap prime powers
+still coprime to `N`. Any closure must now either saturate the numerator with all gap-prime
+support through earlier lower codes or satisfy the corresponding emitted-code congruences.
+
+**Formalization:**
+[`MatrixMortality/DecimalSetterAncestry.lean`](MatrixMortality/DecimalSetterAncestry.lean),
+through `gapFactor_not_dvd_twoCHead`, `carrierFactor_dvd_next_iff`,
+`primeFactor_dvd_next_iff`, and `carrierFactor_multiToSingleton_quotientGate`.
+
+**Artifact:**
+[`audits/m53-decimal-gap-factor-ancestry-2026-08-31.md`](audits/m53-decimal-gap-factor-ancestry-2026-08-31.md).
+
+**Next:** classify prime support of compiler lower words at symbolic deletion width. The
+factorwise gates are not sufficient by themselves: the audit records a physical all-`D_c`
+word at `β=10` that passes both full-gap gates computationally.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).

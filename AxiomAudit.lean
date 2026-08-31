@@ -625,6 +625,10 @@ open MatrixMortality
 #print axioms DecimalSetterSuffix.exists_approximate_cycle
 #print axioms DecimalSetterSuffix.peeledNumerator_factor
 #print axioms DecimalSetterSuffix.emittedBlock_exists_approximate_cycle
+#print axioms DecimalSetterAncestry.gapFactor_not_dvd_twoCHead
+#print axioms DecimalSetterAncestry.carrierFactor_dvd_next_iff
+#print axioms DecimalSetterAncestry.primeFactor_dvd_next_iff
+#print axioms DecimalSetterAncestry.carrierFactor_multiToSingleton_quotientGate
 #print axioms DecimalSetterAncestry.gapClean_multiToSingleton_quotientGate
 #print axioms Undecidability.nearyScalarZero62_hasZero_iff_hasZeroStar
 #print axioms Undecidability.nearyScalarZero62_hasZero_iff_tagHaltsFrom
