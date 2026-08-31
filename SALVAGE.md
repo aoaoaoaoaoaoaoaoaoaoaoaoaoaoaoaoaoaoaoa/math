@@ -257,6 +257,7 @@ file owns the mathematical stock.
 | [`M4-S25`](#m4-s25-phase-zero-right-c-complement-blade) | obstruction and structure theorem | the complement coordinate obeys a two-case modulo-sixteen guillotine on mixed even/even bodies | formalized | active |
 | [`M4-S26`](#m4-s26-phase-zero-right-c-complement-sfft) | structure theorem | the mixed complement core has an exact three-factor SFFT discriminant and finite divisor reduction | formalized | active |
 | [`M4-S27`](#m4-s27-phase-zero-right-c-thin-complement-cone) | obstruction | no positive complement thinner than `1/2160000` of its code scale can close the right-`c` bridge | formalized | active |
+| [`M4-S28`](#m4-s28-phase-zero-right-c-long-leading-c-cylinder) | obstruction | any mixed body beginning with at least twelve `c` letters is excluded from the right-`c` bridge | formalized | active |
 | [`M4-C03`](#m4-c03-zero-framed-binary-two-lag-compiler) | compiler | the principal scanner is literally binary context-2 Lag and compiles to `M₄(3)` | formalized | graduated |
 | [`M4-D01`](#m4-d01-zero-framed-binary-two-lag-decision) | decidable stratum | the entire zero-framed binary context-2 Lag kernel has an exact syntactic classification | formalized | graduated |
 | [`M4-D02`](#m4-d02-zero-framed-reset-scanner-decision) | decidable stratum | zero-run reduction contracts the reset scanner to a regular two-token quotient | audited | graduated |
@@ -11387,6 +11388,51 @@ surviving prefix cylinders with the trailing-`c` 3-adic blade.
 **Artifact:**
 [`MatrixMortality/ParabolicEvenBody.lean`](MatrixMortality/ParabolicEvenBody.lean) and
 [`audits/m43-phase-zero-right-c-thin-complement-2026-08-31.md`](audits/m43-phase-zero-right-c-thin-complement-2026-08-31.md).
+
+### M4-S28: Phase-zero right-c long-leading-c cylinder
+
+**Kind:** obstruction
+
+**Evidence:** formalized
+
+**Disposition:** active
+
+Leading and trailing `c` letters act differently on the complement coordinate:
+
+```text
+D(cw)=D(w),
+D(wc)=3D(w).
+```
+
+Thus a prefix of `k` leading `c` letters preserves `D` while multiplying the code scale by
+`3^k`. If the remaining tail contains `b`, then `D>0`; the sharp global bound on that tail is
+
+```text
+242D≤39(T−1),
+```
+
+where `T` is its code scale. Since
+
+```text
+2160000·39 < 242·3^12,
+```
+
+every `k≥12` prefix forces `2160000D<3^kT`. The body therefore lies in the `M4-S27`
+thin-complement cone and cannot close the bridge for any waits.
+
+**Scope:** deletion width three, exactly three atoms, orientation `0|2|1`, letters `b|b|c`,
+and bodies of the form `c^k tail` with `k≥12` and at least one `b` in `tail`. Pure all-`c`
+bodies are already excluded by `M4-S22`.
+
+**Use:** the first `b` of any mixed survivor occurs among the first twelve body positions. This
+turns the unbounded leading direction into twelve explicit prefix cylinders.
+
+**Next:** sharpen the twelve-cylinder bound with exact first-`b` density intervals, then cross
+the surviving prefixes with the valid reduced 3-adic residue classes at the trailing end.
+
+**Artifact:**
+[`MatrixMortality/ParabolicEvenBody.lean`](MatrixMortality/ParabolicEvenBody.lean) and
+[`audits/m43-phase-zero-right-c-long-c-prefix-2026-08-31.md`](audits/m43-phase-zero-right-c-long-c-prefix-2026-08-31.md).
 
 ### M4-C03: Zero-framed binary two-Lag compiler
 

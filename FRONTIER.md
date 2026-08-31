@@ -634,6 +634,14 @@ must now lie simultaneously in finitely many first-`b` density cylinders and the
 3-adic cylinders. Complete that intersection analytically; computational emptiness at bounded
 body length is reconnaissance, not a theorem.
 
+The leading direction is now formally finite
+[`M4-S28`](SALVAGE.md#m4-s28-phase-zero-right-c-long-leading-c-cylinder). A leading `c` fixes
+`D` while tripling `S`; the global complement bound and `3^12` therefore put every mixed body
+with twelve leading `c` letters inside `M4-S27`. Any hypothetical survivor has its first `b`
+among the first twelve body positions. The exact cylinder analysis should now lower that
+coarse formal cutoff and meet the three reduced Hensel residue classes in the middle; do not
+infer a trailing-run bound from an unreduced congruence representative.
+
 Two original-family nodes survive, and they must not be conflated.
 
 1. **Exterior collision avoidance.** Use `M4-S06`--`M4-S15` to classify the transported kernel

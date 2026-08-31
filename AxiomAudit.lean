@@ -1470,3 +1470,7 @@ open MatrixMortality
 #print axioms ParabolicBlade.bZeroBDefectCOneCodeCore_thin_decomposition
 #print axioms ParabolicBlade.bZeroBDefectCOneCodeCore_ne_zero_of_thin_complement
 #print axioms ParabolicBlade.bridge_bZero_bTwo_cOne_det_ne_zero_of_thin_complement
+#print axioms ParabolicBlade.tagComplementCode_cons_c
+#print axioms ParabolicBlade.tagComplementCode_replicate_c_append
+#print axioms ParabolicBlade.tagComplementCode_pos_of_mem_b
+#print axioms ParabolicBlade.bridge_bZero_bTwo_cOne_det_ne_zero_of_long_c_prefix
