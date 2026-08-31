@@ -999,6 +999,9 @@
 'MatrixMortality.DecimalSetterDepth.peeledLastDigit_advances' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.DecimalSetterDepth.peeledLastDigit_twoStep' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.DecimalSetterDepth.peeledHead_trichotomy' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.DecimalSetterAncestry.gapClean_multiToSingleton_quotientGate' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.Undecidability.nearyScalarZero62_hasZero_iff_hasZeroStar' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]

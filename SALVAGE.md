@@ -105,6 +105,7 @@ file owns the mathematical stock.
 | [`MM-S17`](#mm-s17-recursive-decimal-carrier) | structure theorem and obstruction | repeated A-shell resonances have an exact two-unit carrier whose last digits form a compatible period-two cycle | formalized | active |
 | [`MM-S18`](#mm-s18-length-two-carrier-extinction) | obstruction | every consecutive multi-shell carrier transition has upper length at least three | formalized | active |
 | [`MM-S20`](#mm-s20-singleton-carrier-classification) | structure theorem and obstruction | singleton-current carrier transitions are empty, while abstract multi-to-singleton carriers exist exactly at length `m≥β+3` | formalized | active |
+| [`MM-S22`](#mm-s22-gap-factor-quotient-gate) | structure theorem and obstruction | every gap-clean denominator-descended carrier hitting a singleton must pass two exact gap-factor code congruences | formalized | active |
 | [`R32-S01`](#r32-s01-split-return-normal-form) | structure theorem | rank-two cuts reduce one-unit binary mortality to a `2 × 2` return recurrence | formalized | graduated |
 | [`R32-S02`](#r32-s02-two-plane-edge-square) | structure theorem | two rank-two generators are a two-vertex square of `2 × 2` edges | formalized | graduated |
 | [`R32-O01`](#r32-o01-rank-one-profile-collapse) | obstruction | a rank-one generator reduces mortality to order-at-most-three scalar recurrence zeros | audited | stock |
@@ -3156,6 +3157,70 @@ encoded carrier reachability or stronger suffix semantics.
 
 **Next:** characterize which decimal-unit carriers are reachable from the initial two-`c`
 distinguished suffix, then exclude or exhibit the remaining `m≥β+3` multi-to-singleton pole.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S22: Gap-factor quotient gate
+
+**Kind:** structure theorem and obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+Put
+
+```text
+q=2·10^β−7,       E=9q,       G=502·10^β−7=9g.
+```
+
+The primitive gap factor is coprime to both fixed coefficients needed at a singleton target:
+
+```text
+gcd(q,G)=gcd(q,7)=1.
+```
+
+Indeed `G=251q+1750`, while `q` is coprime to `2`, `5`, and `7`. Now take a primitive integral
+representative of a recursive carrier whose denominator records its ancestry,
+`D=EN₋`. Write the current and singleton-target traces as
+
+```text
+T₂=EP₂+GV₂,       T₃=EP₃+7G.
+```
+
+If `gcd(q,N)=1`, reduction of the exact next-pole equation modulo `q` first gives
+
+```text
+q ∣ NG²V₂·7,
+```
+
+and hence `V₂=qW`. Substituting this quotient, cancelling the exact common factor `81q`, and
+reducing once more modulo `q` gives the sharper gate
+
+```text
+q ∣ P₂+gW−μ10^m.                                  (MM-S22)
+```
+
+**Scope:** this is an integral, sign-free theorem for every `β>0`, every emitted current code,
+both singleton erasures, and every recursive carrier satisfying the exact denominator ancestry.
+It cuts the gap-clean branch of the `m≥β+3` residual from
+[`MM-S20`](#mm-s20-singleton-carrier-classification). It does not prove that every reachable
+carrier numerator is coprime to `q`, nor that compiler-emitted lower codes cannot satisfy both
+displayed divisibility conditions.
+
+**Use:** split the remaining multi-to-singleton search into gap-contaminated carrier ancestry
+and the exact quotient-congruence language above. A closure of the clean branch now needs only a
+compiler-code theorem excluding `P₂+g(V₂/q)≡μ10^m (mod q)`; decimal valuations need not be
+revisited.
+
+**Formalization:**
+[`MatrixMortality/DecimalSetterAncestry.lean`](MatrixMortality/DecimalSetterAncestry.lean),
+through `gapFactor` and `gapClean_multiToSingleton_quotientGate`.
+
+**Artifact:**
+[`audits/m53-decimal-gap-factor-ancestry-2026-08-31.md`](audits/m53-decimal-gap-factor-ancestry-2026-08-31.md).
+
+**Next:** recognize the compiler-emitted pairs `(P₂,V₂)` modulo `q`, and separately decide
+whether a reachable primitive carrier can acquire `q∣N`.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
