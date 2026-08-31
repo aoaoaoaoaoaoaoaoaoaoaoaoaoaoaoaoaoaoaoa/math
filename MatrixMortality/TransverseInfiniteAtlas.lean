@@ -323,6 +323,332 @@ theorem wholeCarrierDepths_subsingleton (row : State) (source : ℚ) (row_ne : r
   intro first first_mem second second_mem
   exact annihilatesCarrier_at_most_one row source row_ne first_mem second_mem
 
+/-- Generalized-Vandermonde minor governing three zero depths of a `2ⁿ,3ⁿ` scalar. -/
+def exponentialMinor (firstGap secondGap : Nat) : ℚ :=
+  ((2 : ℚ) ^ firstGap - 1) * ((3 : ℚ) ^ (firstGap + secondGap) - 1) -
+    ((3 : ℚ) ^ firstGap - 1) * ((2 : ℚ) ^ (firstGap + secondGap) - 1)
+
+theorem exponentialMinor_pos (firstGap secondGap : Nat)
+    (firstGap_pos : 0 < firstGap) (secondGap_pos : 0 < secondGap) :
+    0 < exponentialMinor firstGap secondGap := by
+  induction secondGap with
+  | zero => omega
+  | succ gap induction =>
+      by_cases gap_zero : gap = 0
+      · subst gap
+        have twoPower_ge : (2 : ℚ) ≤ (2 : ℚ) ^ firstGap := by
+          simpa using pow_le_pow_right₀ (show (1 : ℚ) ≤ 2 by norm_num)
+            (Nat.succ_le_iff.mpr firstGap_pos)
+        have twoPower_pos : 0 < (2 : ℚ) ^ firstGap := pow_pos (by norm_num) _
+        have threePower_nonneg : 0 ≤ (3 : ℚ) ^ firstGap := (pow_pos (by norm_num) _).le
+        have product_nonneg :
+            0 ≤ (3 : ℚ) ^ firstGap * ((2 : ℚ) ^ firstGap - 2) :=
+          mul_nonneg threePower_nonneg (sub_nonneg.mpr twoPower_ge)
+        have identity :
+            exponentialMinor firstGap 1 =
+              (3 : ℚ) ^ firstGap * ((2 : ℚ) ^ firstGap - 2) +
+                (2 : ℚ) ^ firstGap := by
+          simp only [exponentialMinor, Nat.add_one, pow_succ]
+          ring
+        rw [identity]
+        positivity
+      · have gap_pos : 0 < gap := Nat.pos_of_ne_zero gap_zero
+        have previous_pos := induction gap_pos
+        have twoPower_ge : (2 : ℚ) ≤ (2 : ℚ) ^ firstGap := by
+          simpa using pow_le_pow_right₀ (show (1 : ℚ) ≤ 2 by norm_num)
+            (Nat.succ_le_iff.mpr firstGap_pos)
+        have twoPower_monotone :
+            (2 : ℚ) ^ firstGap ≤ (2 : ℚ) ^ (firstGap + gap) := by
+          exact pow_le_pow_right₀ (show (1 : ℚ) ≤ 2 by norm_num) (Nat.le_add_right _ _)
+        have binaryRemainder_nonneg :
+            0 ≤ (2 : ℚ) ^ (firstGap + gap) - 2 :=
+          sub_nonneg.mpr (twoPower_ge.trans twoPower_monotone)
+        have ternaryRemainder_nonneg :
+            0 ≤ (3 : ℚ) ^ firstGap - 1 := by
+          exact sub_nonneg.mpr (one_le_pow₀ (by norm_num))
+        have recurrence :
+            exponentialMinor firstGap (gap + 1) =
+              3 * exponentialMinor firstGap gap +
+                2 * ((2 : ℚ) ^ firstGap - 1) +
+                ((3 : ℚ) ^ firstGap - 1) *
+                  ((2 : ℚ) ^ (firstGap + gap) - 2) := by
+          simp only [exponentialMinor]
+          ring
+        rw [recurrence]
+        have binaryFirstRemainder_nonneg :
+            0 ≤ (2 : ℚ) ^ firstGap - 1 := by
+          exact sub_nonneg.mpr (one_le_pow₀ (by norm_num))
+        positivity
+
+/-- Three-term exponential scalar obtained from a fixed row-column terminal test. -/
+def exponentialScalar (constant binary ternary : ℚ) (power : Nat) : ℚ :=
+  constant - binary * (2 : ℚ) ^ power - ternary * (3 : ℚ) ^ power
+
+theorem coefficients_eq_zero_of_three_zeros
+    (constant binary ternary : ℚ) (offset firstGap secondGap : Nat)
+    (firstGap_pos : 0 < firstGap) (secondGap_pos : 0 < secondGap)
+    (zeroAtOffset : exponentialScalar constant binary ternary offset = 0)
+    (zeroAtFirst : exponentialScalar constant binary ternary (offset + firstGap) = 0)
+    (zeroAtSecond :
+      exponentialScalar constant binary ternary (offset + firstGap + secondGap) = 0) :
+    constant = 0 ∧ binary = 0 ∧ ternary = 0 := by
+  have offsetEquation :
+      constant - binary * (2 : ℚ) ^ offset - ternary * (3 : ℚ) ^ offset = 0 := by
+    simpa only [exponentialScalar] using zeroAtOffset
+  have firstEquation :
+      constant - binary * (2 : ℚ) ^ (offset + firstGap) -
+        ternary * (3 : ℚ) ^ (offset + firstGap) = 0 := by
+    simpa only [exponentialScalar] using zeroAtFirst
+  have secondEquation :
+      constant - binary * (2 : ℚ) ^ (offset + firstGap + secondGap) -
+        ternary * (3 : ℚ) ^ (offset + firstGap + secondGap) = 0 := by
+    simpa only [exponentialScalar] using zeroAtSecond
+  have firstDifference :
+      binary * (2 : ℚ) ^ offset * ((2 : ℚ) ^ firstGap - 1) +
+        ternary * (3 : ℚ) ^ offset * ((3 : ℚ) ^ firstGap - 1) = 0 := by
+    have expandedFirstEquation :
+        constant - binary * ((2 : ℚ) ^ offset * (2 : ℚ) ^ firstGap) -
+          ternary * ((3 : ℚ) ^ offset * (3 : ℚ) ^ firstGap) = 0 := by
+      simpa only [pow_add] using firstEquation
+    linear_combination offsetEquation - expandedFirstEquation
+  have secondDifference :
+      binary * (2 : ℚ) ^ offset *
+          ((2 : ℚ) ^ (firstGap + secondGap) - 1) +
+        ternary * (3 : ℚ) ^ offset *
+          ((3 : ℚ) ^ (firstGap + secondGap) - 1) = 0 := by
+    have expandedSecondEquation :
+        constant -
+            binary * ((2 : ℚ) ^ offset * (2 : ℚ) ^ (firstGap + secondGap)) -
+          ternary * ((3 : ℚ) ^ offset * (3 : ℚ) ^ (firstGap + secondGap)) = 0 := by
+      simpa only [Nat.add_assoc, pow_add] using secondEquation
+    linear_combination offsetEquation - expandedSecondEquation
+  have ternary_times_minor :
+      ternary * (3 : ℚ) ^ offset * exponentialMinor firstGap secondGap = 0 := by
+    simp only [exponentialMinor, pow_add]
+    linear_combination
+      ((2 : ℚ) ^ firstGap - 1) * secondDifference -
+        ((2 : ℚ) ^ (firstGap + secondGap) - 1) * firstDifference
+  have minor_ne : exponentialMinor firstGap secondGap ≠ 0 :=
+    ne_of_gt (exponentialMinor_pos firstGap secondGap firstGap_pos secondGap_pos)
+  have ternary_zero : ternary = 0 := by
+    rcases mul_eq_zero.mp ternary_times_minor with product_zero | minor_zero
+    · rcases mul_eq_zero.mp product_zero with ternary_zero | threePower_zero
+      · exact ternary_zero
+      · exact False.elim ((pow_ne_zero _ (by norm_num)) threePower_zero)
+    · exact False.elim (minor_ne minor_zero)
+  have firstBinaryProduct :
+      binary * (2 : ℚ) ^ offset * ((2 : ℚ) ^ firstGap - 1) = 0 := by
+    simpa only [ternary_zero, zero_mul, add_zero] using firstDifference
+  have firstGapPower_ne : (2 : ℚ) ^ firstGap - 1 ≠ 0 := by
+    have one_lt : (1 : ℚ) < (2 : ℚ) ^ firstGap := by
+      exact one_lt_pow₀ (by norm_num) (Nat.ne_of_gt firstGap_pos)
+    exact sub_ne_zero.mpr (ne_of_gt one_lt)
+  have binary_zero : binary = 0 := by
+    rcases mul_eq_zero.mp firstBinaryProduct with product_zero | gapPower_zero
+    · rcases mul_eq_zero.mp product_zero with binary_zero | offsetPower_zero
+      · exact binary_zero
+      · exact False.elim ((pow_ne_zero _ (by norm_num)) offsetPower_zero)
+    · exact False.elim (firstGapPower_ne gapPower_zero)
+  have constant_zero : constant = 0 := by
+    simpa only [exponentialScalar, binary_zero, ternary_zero, zero_mul, sub_zero] using
+      zeroAtOffset
+  exact ⟨constant_zero, binary_zero, ternary_zero⟩
+
+theorem no_three_ordered_zeros
+    (constant binary ternary : ℚ)
+    (nonidentity : ¬ (constant = 0 ∧ binary = 0 ∧ ternary = 0))
+    {first middle last : Nat} (first_lt_middle : first < middle)
+    (middle_lt_last : middle < last)
+    (zeroAtFirst : exponentialScalar constant binary ternary first = 0)
+    (zeroAtMiddle : exponentialScalar constant binary ternary middle = 0)
+    (zeroAtLast : exponentialScalar constant binary ternary last = 0) : False := by
+  have firstGap_pos : 0 < middle - first := by omega
+  have secondGap_pos : 0 < last - middle := by omega
+  have middle_eq : first + (middle - first) = middle := by omega
+  have last_eq : first + (middle - first) + (last - middle) = last := by omega
+  apply nonidentity
+  apply coefficients_eq_zero_of_three_zeros constant binary ternary first
+    (middle - first) (last - middle) firstGap_pos secondGap_pos zeroAtFirst
+  · simpa only [middle_eq] using zeroAtMiddle
+  · simpa only [last_eq] using zeroAtLast
+
+theorem three_zeros_force_collision
+    (constant binary ternary : ℚ)
+    (nonidentity : ¬ (constant = 0 ∧ binary = 0 ∧ ternary = 0))
+    {first second third : Nat}
+    (zeroAtFirst : exponentialScalar constant binary ternary first = 0)
+    (zeroAtSecond : exponentialScalar constant binary ternary second = 0)
+    (zeroAtThird : exponentialScalar constant binary ternary third = 0) :
+    first = second ∨ first = third ∨ second = third := by
+  by_contra distinct
+  have first_ne_second : first ≠ second := fun equal => distinct (Or.inl equal)
+  have first_ne_third : first ≠ third := fun equal => distinct (Or.inr (Or.inl equal))
+  have second_ne_third : second ≠ third := fun equal => distinct (Or.inr (Or.inr equal))
+  rcases lt_or_gt_of_ne first_ne_second with first_lt_second | second_lt_first
+  · rcases lt_or_gt_of_ne second_ne_third with second_lt_third | third_lt_second
+    · exact no_three_ordered_zeros constant binary ternary nonidentity
+        first_lt_second second_lt_third zeroAtFirst zeroAtSecond zeroAtThird
+    · rcases lt_or_gt_of_ne first_ne_third with first_lt_third | third_lt_first
+      · exact no_three_ordered_zeros constant binary ternary nonidentity
+          first_lt_third third_lt_second zeroAtFirst zeroAtThird zeroAtSecond
+      · exact no_three_ordered_zeros constant binary ternary nonidentity
+          third_lt_first first_lt_second zeroAtThird zeroAtFirst zeroAtSecond
+  · rcases lt_or_gt_of_ne first_ne_third with first_lt_third | third_lt_first
+    · exact no_three_ordered_zeros constant binary ternary nonidentity
+        second_lt_first first_lt_third zeroAtSecond zeroAtFirst zeroAtThird
+    · rcases lt_or_gt_of_ne second_ne_third with second_lt_third | third_lt_second
+      · exact no_three_ordered_zeros constant binary ternary nonidentity
+          second_lt_third third_lt_first zeroAtSecond zeroAtThird zeroAtFirst
+      · exact no_three_ordered_zeros constant binary ternary nonidentity
+          third_lt_second second_lt_first zeroAtThird zeroAtSecond zeroAtFirst
+
+theorem exponentialScalar_zeroSet_encard_le_two
+    (constant binary ternary : ℚ)
+    (nonidentity : ¬ (constant = 0 ∧ binary = 0 ∧ ternary = 0)) :
+    Set.encard {power | exponentialScalar constant binary ternary power = 0} ≤ 2 := by
+  by_contra cardinality
+  have two_lt :
+      (2 : ℕ∞) < Set.encard {power | exponentialScalar constant binary ternary power = 0} :=
+    lt_of_not_ge cardinality
+  have three_le :
+      (3 : ℕ∞) ≤ Set.encard {power | exponentialScalar constant binary ternary power = 0} := by
+    exact ENat.natCast_add_one_le_iff.mpr two_lt
+  obtain ⟨triple, triple_subset, triple_card⟩ := Set.exists_subset_encard_eq three_le
+  obtain ⟨first, second, third, first_ne_second, first_ne_third, second_ne_third, rfl⟩ :=
+    Set.encard_eq_three.mp triple_card
+  have zeroAtFirst : exponentialScalar constant binary ternary first = 0 :=
+    triple_subset (by simp)
+  have zeroAtSecond : exponentialScalar constant binary ternary second = 0 :=
+    triple_subset (by simp)
+  have zeroAtThird : exponentialScalar constant binary ternary third = 0 :=
+    triple_subset (by simp)
+  rcases three_zeros_force_collision constant binary ternary nonidentity zeroAtFirst
+      zeroAtSecond zeroAtThird with equal | equal | equal
+  · exact first_ne_second equal
+  · exact first_ne_third equal
+  · exact second_ne_third equal
+
+theorem exponentialScalar_zeroSet_eq_univ_iff
+    (constant binary ternary : ℚ) :
+    {power | exponentialScalar constant binary ternary power = 0} = Set.univ ↔
+      constant = 0 ∧ binary = 0 ∧ ternary = 0 := by
+  constructor
+  · intro allPowers
+    have zeroAtZero : exponentialScalar constant binary ternary 0 = 0 := by
+      exact allPowers.symm.subset (Set.mem_univ 0)
+    have zeroAtOne : exponentialScalar constant binary ternary 1 = 0 := by
+      exact allPowers.symm.subset (Set.mem_univ 1)
+    have zeroAtTwo : exponentialScalar constant binary ternary 2 = 0 := by
+      exact allPowers.symm.subset (Set.mem_univ 2)
+    exact coefficients_eq_zero_of_three_zeros constant binary ternary 0 1 1
+      (by norm_num) (by norm_num) zeroAtZero zeroAtOne zeroAtTwo
+  · rintro ⟨rfl, rfl, rfl⟩
+    ext power
+    simp [exponentialScalar]
+
+theorem exponentialScalar_binary_singleton (target power : Nat) :
+    exponentialScalar ((2 : ℚ) ^ target) 1 0 power = 0 ↔ power = target := by
+  rw [exponentialScalar]
+  simp only [one_mul, zero_mul, sub_zero, sub_eq_zero]
+  simpa only [eq_comm] using
+    (pow_right_injective₀ (show (0 : ℚ) < 2 by norm_num) (by norm_num)).eq_iff
+
+/-- Scalar tested by a terminal row after the explicit depth-`power` carrier prefix. -/
+def terminalValue (row : State) (source : ℚ) (column : State) (power : Nat) : ℚ :=
+  row ⬝ᵥ (carrierMatrix source power *ᵥ column)
+
+/-- Depth-independent coefficient in the terminal exponential polynomial. -/
+def terminalConstant (row column : State) (source : ℚ) : ℚ :=
+  row 0 * (column 0 + source * column 1)
+
+/-- Coefficient of `2ⁿ` in the terminal exponential polynomial. -/
+def terminalBinary (row column : State) : ℚ :=
+  row 1 * column 0
+
+/-- Coefficient of `3ⁿ` in the terminal exponential polynomial. -/
+def terminalTernary (row column : State) : ℚ :=
+  row 2 * column 1
+
+theorem terminalValue_eq_exponentialScalar
+    (row : State) (source : ℚ) (column : State) (power : Nat) :
+    terminalValue row source column power =
+      exponentialScalar (terminalConstant row column source)
+        (terminalBinary row column) (terminalTernary row column) power := by
+  rw [terminalValue, carrierMatrix_mulVec]
+  simp [terminalConstant, terminalBinary, terminalTernary, exponentialScalar,
+    dotProduct, Fin.sum_univ_succ]
+  ring
+
+/-- Unless the terminal scalar is identically zero, its zero-depth set has cardinality at most
+two. -/
+theorem terminalValue_zeroSet_encard_le_two
+    (row : State) (source : ℚ) (column : State)
+    (nonidentity :
+      ¬ (terminalConstant row column source = 0 ∧ terminalBinary row column = 0 ∧
+        terminalTernary row column = 0)) :
+    Set.encard {power | terminalValue row source column power = 0} ≤ 2 := by
+  simpa only [terminalValue_eq_exponentialScalar] using
+    exponentialScalar_zeroSet_encard_le_two (terminalConstant row column source)
+      (terminalBinary row column) (terminalTernary row column) nonidentity
+
+/-- The terminal scalar vanishes at every depth exactly when all three coefficients vanish. -/
+theorem terminalValue_zeroSet_eq_univ_iff (row : State) (source : ℚ) (column : State) :
+    {power | terminalValue row source column power = 0} = Set.univ ↔
+      terminalConstant row column source = 0 ∧ terminalBinary row column = 0 ∧
+        terminalTernary row column = 0 := by
+  simpa only [terminalValue_eq_exponentialScalar] using
+    exponentialScalar_zeroSet_eq_univ_iff (terminalConstant row column source)
+      (terminalBinary row column) (terminalTernary row column)
+
+/-- Rows realizing an arbitrarily delayed singleton terminal zero. -/
+def delayedRow (target : Nat) : State :=
+  ![(2 : ℚ) ^ target, 1, 0]
+
+/-- There is no row-independent finite search horizon: `delayedRow target` vanishes on the
+distinguished carrier column exactly at `target`. -/
+theorem delayedRow_terminalValue_eq_zero_iff (source : ℚ) (target power : Nat) :
+    terminalValue (delayedRow target) source witnessInput power = 0 ↔ power = target := by
+  rw [terminalValue_eq_exponentialScalar]
+  simp only [terminalConstant, terminalBinary, terminalTernary, delayedRow, witnessInput,
+    Matrix.cons_val_zero, Matrix.cons_val_one, Matrix.cons_val_two,
+    Matrix.head_cons, Matrix.tail_cons, mul_zero, add_zero, mul_one]
+  exact exponentialScalar_binary_singleton target power
+
+/-- The two-zero upper bound is sharp in the actual carrier architecture. -/
+theorem terminalValue_two_distinct_zeros :
+    terminalValue ![-1, -2, 1] 0 ![1, 1, 0] 0 = 0 ∧
+      terminalValue ![-1, -2, 1] 0 ![1, 1, 0] 1 = 0 := by
+  constructor <;> norm_num [terminalValue, carrierMatrix_mulVec, dotProduct, Fin.sum_univ_succ]
+
+/-- The sharp example has exactly the two terminal depths zero and one. -/
+theorem terminalValue_two_zeroSet_eq :
+    {power | terminalValue ![-1, -2, 1] 0 ![1, 1, 0] power = 0} =
+      ({0, 1} : Set Nat) := by
+  ext power
+  constructor
+  · intro zeroAtPower
+    have scalarAtPower : exponentialScalar (-1) (-2) 1 power = 0 := by
+      simpa [terminalValue_eq_exponentialScalar, terminalConstant, terminalBinary,
+        terminalTernary] using zeroAtPower
+    have scalarAtZero : exponentialScalar (-1) (-2) 1 0 = 0 := by
+      norm_num [exponentialScalar]
+    have scalarAtOne : exponentialScalar (-1) (-2) 1 1 = 0 := by
+      norm_num [exponentialScalar]
+    have collision := three_zeros_force_collision (-1) (-2) 1 (by norm_num) scalarAtPower
+      scalarAtZero scalarAtOne
+    have power_eq : power = 0 ∨ power = 1 := by
+      rcases collision with power_zero | power_one | zero_one
+      · exact Or.inl power_zero
+      · exact Or.inr power_one
+      · exact False.elim (Nat.zero_ne_one zero_one)
+    simpa only [Set.mem_insert_iff, Set.mem_singleton_iff] using power_eq
+  · intro power_mem
+    have power_eq : power = 0 ∨ power = 1 := by
+      simpa only [Set.mem_insert_iff, Set.mem_singleton_iff] using power_mem
+    rcases power_eq with rfl | rfl
+    · exact terminalValue_two_distinct_zeros.1
+    · exact terminalValue_two_distinct_zeros.2
+
 /-- Literal raw prefix spelling of the `power`-th carrier matrix. -/
 def carrierWord (power : Nat) : List PairedControl :=
   List.replicate power .toggle ++ [.data .b]

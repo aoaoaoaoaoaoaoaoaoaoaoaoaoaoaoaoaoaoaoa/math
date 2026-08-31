@@ -226,6 +226,7 @@ file owns the mathematical stock.
 | [`G3-O29`](#g3-o29-one-chart-projective-hard-core) | hardness embedding | one invariant plane with identity toggle already contains exact two-generator rational projective incidence | formalized | graduated |
 | [`G3-O30`](#g3-o30-nonprojective-infinite-carrier-orbit) | counterexample | a diagonal toggle with eigenvalues `1,2,3` sends one rank-two data image through infinitely many distinct rational planes | formalized | graduated |
 | [`G3-O31`](#g3-o31-whole-carrier-terminal-row-obstruction) | obstruction | a nonzero row contains at most one plane in the explicit infinite nonprojective carrier orbit | formalized | graduated |
+| [`G3-O32`](#g3-o32-terminal-point-incidence-dichotomy) | obstruction | a fixed terminal point test on the infinite carrier orbit accepts all depths or at most two, sharply, but singleton acceptance has no uniform horizon | formalized | graduated |
 | [`G3-O02`](#g3-o02-rational-phase-fracture) | obstruction | a mortal paired instance has no rational phase-state same-zero compression | audited | stock |
 | [`G3-O03`](#g3-o03-history-sensitive-minimal-body-fracture) | obstruction | minimal bodies admit an exact history-sensitive three-state same-zero compiler | formalized | graduated |
 | [`G3-O04`](#g3-o04-expanding-affine-history-no-go) | obstruction | finite-mode expanding one-coordinate history has decidable target reachability | audited | graduated |
@@ -9528,9 +9529,74 @@ row.
 **Artifact:** [`TransverseInfiniteAtlas.lean`](MatrixMortality/TransverseInfiniteAtlas.lean) and
 [`m34-whole-carrier-row-obstruction-2026-08-31.md`](audits/m34-whole-carrier-row-obstruction-2026-08-31.md).
 
-**Next:** compute the moving intersection line explicitly and test whether its projective
-coordinate reduces to a decidable exponential equation or supports source-uniform terminal
-arithmetic.
+**Next:** [`G3-O32`](#g3-o32-terminal-point-incidence-dichotomy) classifies every fixed point test
+on those moving lines. Determine whether source-computed delayed singleton or two-depth targets can
+carry an undecidable language rather than merely fit isolated terminal histories.
+
+### G3-O32: Terminal point-incidence dichotomy
+
+**Kind:** obstruction
+
+**Evidence:** formalized
+
+**Disposition:** graduated
+
+Fix a rational terminal row `λ=(a,b,c)`, source parameter `s`, and input column
+`γ=(x,y,z)`. On the `G3-O30` carrier at toggle depth `n`, direct multiplication gives
+
+```text
+λ(TⁿD_sγ) = A − B·2ⁿ − C·3ⁿ,
+
+A = a(x+sy),            B = bx,            C = cy.
+```
+
+If this scalar vanishes at three depths `n₀<n₁<n₂`, put `p=n₁−n₀>0` and
+`q=n₂−n₁>0`. Subtracting the first equation from the other two yields a two-by-two linear system
+in `B` and `C`. Its positive generalized-Vandermonde minor is
+
+```text
+Δ(p,q) = (2ᵖ−1)(3ᵖ⁺ᑫ−1) − (3ᵖ−1)(2ᵖ⁺ᑫ−1) > 0.
+```
+
+Lean proves positivity without analytic approximation. The base case is
+
+```text
+Δ(p,1) = 3ᵖ(2ᵖ−2)+2ᵖ > 0,
+```
+
+and the induction step is
+
+```text
+Δ(p,q+1) = 3Δ(p,q) + 2(2ᵖ−1) + (3ᵖ−1)(2ᵖ⁺ᑫ−2) > 0.
+```
+
+Consequently the system forces `C=0`, then `B=0`, then `A=0`. Thus the zero-depth set is exactly
+all of `ℕ` when `A=B=C=0`, and otherwise has extended-natural cardinality at most two.
+
+Both sides are sharp in the actual matrix family. The row `(-1,-2,1)` with `s=0` and
+`γ=(1,1,0)` vanishes at the two distinct depths `0` and `1`. Conversely, for every prescribed
+`N`, the row `(2ᴺ,1,0)` on `γ=(1,0,0)` vanishes exactly at `n=N`. Hence no finite search horizon
+can be uniform in the row.
+
+**Scope:** the theorem fixes `λ`, `s`, and `γ` while varying only toggle depth. It classifies point
+incidence with the moving carrier-line sections, not the sections themselves. In particular, it
+does not forbid computing a delayed singleton or two-depth target from the source, varying the
+column with the encoded body, combining several point tests, or exploiting arbitrary raw words.
+It is an exact sparsity theorem, not a decision theorem for the full nonprojective architecture and
+not an `M₃(4)` result.
+
+**Use:** delete any constructor that asks one fixed row-column pair to recognize three or more
+proper carrier depths without becoming identically terminal. A surviving constructor must explain
+how source-computed isolated depths encode the whole paired zero language and must still prove the
+malformed-word converse.
+
+**Artifact:** [`TransverseInfiniteAtlas.lean`](MatrixMortality/TransverseInfiniteAtlas.lean) and
+[`m34-terminal-point-incidence-2026-08-31.md`](audits/m34-terminal-point-incidence-2026-08-31.md).
+
+**Next:** classify source-computable coefficient maps `(A,B,C)` arising from unrestricted
+`(β,body)`. Either compile the required terminal history into one of the at-most-two depths with a
+complete all-word converse, or prove that finite exponential-polynomial zero sets cannot carry the
+joint source language.
 
 ### G3-O13: Rational serializer pumping
 

@@ -2061,6 +2061,10 @@ fixed-rank decision problem.
 | Literal raw prefixes `tⁿb` realize an injectively infinite family of carrier planes | `TransverseInfiniteAtlas.wordProduct_carrierWord`, `TransverseInfiniteAtlas.carrier_ne_of_lt`, `TransverseInfiniteAtlas.carrier_injective` |
 | A row annihilating two distinct planes in the infinite carrier orbit is zero | `TransverseInfiniteAtlas.sourceWitness_mem_carrier`, `TransverseInfiniteAtlas.row_eq_zero_of_annihilates_two` |
 | A nonzero row has at most one whole-carrier toggle depth | `TransverseInfiniteAtlas.annihilatesCarrier_at_most_one`, `TransverseInfiniteAtlas.wholeCarrierDepths_subsingleton` |
+| The generalized-Vandermonde minor for the `2ⁿ,3ⁿ` terminal sequence is positive at every pair of positive gaps | `TransverseInfiniteAtlas.exponentialMinor_pos` |
+| A nonidentity terminal exponential scalar has at most two zero depths; the identity case has every depth | `TransverseInfiniteAtlas.exponentialScalar_zeroSet_encard_le_two`, `TransverseInfiniteAtlas.exponentialScalar_zeroSet_eq_univ_iff` |
+| Every fixed carrier point test inherits the all-or-at-most-two dichotomy | `TransverseInfiniteAtlas.terminalValue_eq_exponentialScalar`, `TransverseInfiniteAtlas.terminalValue_zeroSet_encard_le_two`, `TransverseInfiniteAtlas.terminalValue_zeroSet_eq_univ_iff` |
+| One point test has zero set exactly `{0,1}`, and singleton acceptance can be delayed to any prescribed depth | `TransverseInfiniteAtlas.terminalValue_two_zeroSet_eq`, `TransverseInfiniteAtlas.delayedRow_terminalValue_eq_zero_iff` |
 | The `bcbb` null histories and complete terminal language are one exact periodic ray | `PeriodicHistory.bcbbNull_iff`, `PeriodicHistory.bcbb_terminal_match_iff` |
 | The singular positional decoder obeys its all-control affine state equation | `PeriodicHistory.periodicProduct_mulVec_column`, `PeriodicHistory.periodicCoefficient_eq` |
 | The `bcbb` affine section has no false zero and matches the paired zero language | `PeriodicHistory.bcbbAffine_zero_iff`, `PeriodicHistory.bcbb_periodicCoefficient_zero_iff_paired_zero` |
@@ -2358,6 +2362,15 @@ plane vanishing at depths `n<m` evaluates the first spanning vectors as
 equality extensionally. Its public corollary states that the set of whole-carrier depths of every
 nonzero row is a subsingleton. Proper line intersections at all remaining depths are expressly
 outside the result.
+
+For `G3-O32`, Lean evaluates an arbitrary fixed row-column pair on those carriers as
+`A−B2ⁿ−C3ⁿ`. Three ordered zero depths yield two difference equations whose determinant is a
+generalized-Vandermonde minor. Lean proves that minor positive for all positive gaps by an exact
+induction, so three zeros force `A=B=C=0`. The zero set therefore has extended-natural cardinality
+at most two unless it is all of `ℕ`. Both conclusions are exact: one row-column pair has zeros at
+depths zero and one, while the family `(2ᴺ,1,0)` on the first input column vanishes exactly at an
+arbitrary prescribed depth `N`. The theorem fixes the row, column, and source while varying depth;
+it does not exclude source-computed delayed targets or moving line sections as a whole.
 
 For `G3-O20`, Lean proves the free-monoid tail law: if one fixed-boundary equation with stationary
 left and right pump blocks holds at exponents `N` and `N+1`, it holds at every exponent `N+k`.
