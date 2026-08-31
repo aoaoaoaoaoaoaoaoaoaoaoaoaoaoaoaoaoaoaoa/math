@@ -1676,6 +1676,11 @@ The family is now sharply fenced:
 - at an arbitrary integral base, every rational bridge root is supported on the primes of `q`;
   every positive p-adic valuation is the base valuation times one common proper-tail exponent,
   by [`R32-S44`](SALVAGE.md#r32-s44-composite-returnsquare-tail-synchronization).
+- every rational fraction `d=A/B` has an exact reversed two-coordinate pullback. At a prime
+  dividing `B`, the unique final predecessor has valuation
+  `a−min(2(w+1)vₚ(q),a)` unless `a=2(w+1)vₚ(q)`; at equality its valuation is
+  nonpositive, by
+  [`R32-S45`](SALVAGE.md#r32-s45-fraction-pullback-and-terminal-denominator-shell).
 - replacing common powers of one base by a scale alphabet totally ordered under divisibility is
   unsound: `[3,15,3,3,15,3,3,3]` has the exact nonresonant root `d=25/27`, by
   [`R32-O25`](SALVAGE.md#r32-o25-divisibility-chain-returnsquare-fracture).
@@ -1683,11 +1688,16 @@ The family is now sharply fenced:
 Thus every unclassified ReturnSquare instance has a base divisible by at least two distinct
 primes and at least three positive returns in the bounded middle negative strip. Its canonical
 numerator and denominator are q-smooth. The numerator-prime exponents, when present, are already
-synchronized by the complete proper tail. The surviving obstruction is the negative-valuation
-branch: denominator primes may still carry unequal local depths, and neither their equality nor
-a counterexample is proved. The one-base geometric architecture is essential: mere divisibility
+synchronized by the complete proper tail. The negative side is now one exact reversed
+projective incidence. A last inverse step retains positive denominator depth only above twice
+the selected geometric depth, and then subtracts that exact tax. At or below the tax it becomes
+nonpositive; equality leaves only its exact residue-sensitive value open. The surviving
+obstruction is later re-entry across these shells and the common content which can couple
+different denominator primes. Neither synchronization nor a geometric-scale
+counterexample is proved. The one-base geometric architecture is essential: mere divisibility
 comparability of several scales cannot replace it. The one-base prime-power architecture remains
-closed.
+closed. The two-coordinate pullback is not a reduction to finite-alphabet `M₂(3)`; every `qⁿ`
+remains a distinct return letter.
 
 The obvious nonsemisimple escape is closed as well. A `1⊕J₋₁` ambient mode can realize the
 exact parity-Collatz rails, but the rank-compatible branch is unique up to scalar and preserves

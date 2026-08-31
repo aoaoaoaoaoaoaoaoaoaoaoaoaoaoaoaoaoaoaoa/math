@@ -116,6 +116,7 @@ file owns the mathematical stock.
 | [`R32-D01`](#r32-d01-returnsquare-immortality-walls) | decidable stratum | nonnegative parameters and a uniform outer negative half-line are immortal | formalized | stock |
 | [`R32-D02`](#r32-d02-prime-power-returnsquare-classification) | decidable stratum | prime-power ReturnSquare is mortal exactly at one-return resonances | formalized | graduated |
 | [`R32-S44`](#r32-s44-composite-returnsquare-tail-synchronization) | structure theorem and obstruction | every numerator-prime valuation of a composite-base bridge zero is fixed by one common proper-tail exponent | formalized | active |
+| [`R32-S45`](#r32-s45-fraction-pullback-and-terminal-denominator-shell) | structure theorem and obstruction | every rational ReturnSquare bridge is one reversed two-coordinate incidence, whose final denominator-prime predecessor has an exact clipped valuation outside one critical shell | formalized | active |
 | [`R32-M01`](#r32-m01-generic-reverse-edge-compiler) | partial mechanism | projective incidence generically embeds into a compatible two-plane edge square | formalized | active |
 | [`R32-M02`](#r32-m02-finite-quotient-sieve) | partial mechanism | finite monoid quotients give complete modular no-certificates for fixed candidates | formalized | active |
 | [`R32-M03`](#r32-m03-two-scale-return-conversion) | partial mechanism | a minimal two-scale return pencil has nonresonant multi-return zeros | formalized | active |
@@ -3516,6 +3517,75 @@ arbitrary-composite ReturnSquare problem.
 **Use:** any composite-base counterexample must live entirely in the unsynchronized
 denominator branch or satisfy the common-tail numerator law (∗). Do not search arbitrary
 q-smooth numerator exponent vectors.
+
+### R32-S45: Fraction pullback and terminal denominator shell
+
+**Kind:** structure theorem and obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+Write a positive rational ReturnSquare parameter as `d=A/B`, with `B≠0`. After multiplying one
+return by `B`, its matrix is
+
+```text
+G_t = [(B−A)t²−B   Bt]
+      [−A           Bt].
+```
+
+Encode a dual row as `(R,−BS)`. Pulling it through `G_t` is exactly the homogeneous
+two-coordinate action
+
+```text
+H_t [R] = [(B−A)t²−B   AB] [R].
+    [S]   [−t            Bt] [S]
+```
+
+For every return-scale word `s`, Lean proves the complete zero equivalence
+
+```text
+bridge(A/B,s)=0
+  ↔ (wordProduct H (reverse s) · (A,1))₀
+       = B (wordProduct H (reverse s) · (A,1))₁.             (1)
+```
+
+No affine division or primitive reduction occurs in (1). The first pullback normalizes to
+`(At,1)`. The terminal line `(B,1)` has the unique affine predecessor
+
+```text
+P_t = B(Bt−A) / (Bt+(B−A)t²−B).                              (2)
+```
+
+At a denominator prime `p`, reducedness makes `A` a p-adic unit. Put
+`a=vₚ(B)>0` and `b=vₚ(t)>0`. Unless `a=2b`, the two summands
+`(B−A)t²` and `B(t−1)` in the denominator of (2) have unequal valuations, and Lean proves
+
+```text
+vₚ(P_t)=a−min(2b,a).                                         (3)
+```
+
+Thus `a<2b` drains the predecessor to a unit, while `a>2b` subtracts exactly `2b`. For the
+actual geometric scale `t=q^(w+1)`, the tax is exactly `2(w+1)vₚ(q)`. The equality
+`a=2(w+1)vₚ(q)` is the sole first-step exact-valuation ambiguity; if the affine predecessor is
+defined, Lean still proves that its valuation is nonpositive.
+
+**Scope:** (1) is a two-dimensional projective return interface, not an interreduction from
+`M₃(2)` to three-generator `M₂(3)`. Its alphabet still contains every `qⁿ`. Equation (3)
+classifies the last inverse step at each denominator prime; iterated critical-shell interaction
+and common-content cancellation can still couple distinct primes. Arbitrary-composite
+ReturnSquare remains open.
+
+**Artifact:** `ReturnSquare.positiveBridge_fraction_zero_iff`,
+`fractionPullback_terminal_incidence_iff_eq_predecessor`,
+`fractionTerminalPredecessor_hasValue`, and
+`fractionTerminalPredecessor_geometric_hasValue` in
+[`ReturnSquareFractionPullback.lean`](MatrixMortality/ReturnSquareFractionPullback.lean), with
+audit
+[`m32-returnsquare-fraction-pullback-2026-08-31.md`](audits/m32-returnsquare-fraction-pullback-2026-08-31.md).
+
+**Use:** run the negative-valuation attack backward from the terminal line. A predecessor retains
+positive denominator depth only when `a>2(w+1)vₚ(q)`, in which case the exact remaining depth is
+their difference. Any closure must now control later re-entry from unit or negative shells, or
+prove that cross-prime common content cannot sustain it.
 
 ### R32-M01: Generic reverse edge compiler
 
