@@ -388,6 +388,13 @@ forced-`R_c` specialization preserves terminal-match existence while turning the
 that no primitive-recursive, source-dependent finite probe cutoff can have the universal paired
 zero answers. These are method boundaries, not a five-state realization.
 
+[`MM-O22`](SALVAGE.md#mm-o22-six-guard-parser-rank-wall) closes that guard as a construction.
+Given any original zero witness, Lean identifies a witness-dependent `7×7` Hankel section of
+the six-guard series with `J₇-I₇`, checks the inverse `(1/6)J₇-I₇`, and proves that every
+wordwise exact rational realization has at least seven states. The forced-rule specialization
+applies on every positive-width terminal yes-source. This is a no-go for the guarded changed
+series only, not for arbitrary sourcewise existence-equivalent series.
+
 The rank-three binary campaign now has a checked structural core. A split finite-rank cut beside
 a unit fractures every arbitrary binary word into its `VAⁿU` return product; a finite
 block-Hankel section lower-bounds every exact realization of that matrix-valued sequence. For
@@ -1499,7 +1506,7 @@ the periodic saturation theorem and its remaining arithmetic boundary are recons
 formalization and the shell attack are tracked in
 [#7](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/7).
 
-The `M₅(3)` delimiter attack has eight durable records:
+The `M₅(3)` delimiter attack has nine durable records:
 
 | Record | Formalization obligation |
 | --- | --- |
@@ -1511,6 +1518,7 @@ The `M₅(3)` delimiter attack has eight durable records:
 | [`MM-O16`](SALVAGE.md#mm-o16-exact-delimiter-pair-obstruction) | generic ignored-pair immortality is formalized; paired common-kernel and cubic companion specializations are audited |
 | [`MM-O18`](SALVAGE.md#mm-o18-forced-rule-companion-toggle-wall) | forced-rule semantic derivative, isolated-toggle Hankel determinant, five-channel factorization, toggle invertibility, and contradiction with a rank-two cube |
 | [`MM-O21`](SALVAGE.md#mm-o21-sourcewise-finite-probe-blindness) | existence-preserving guard transform, collapse of every bounded Hankel section, forced-rule specialization, and universal bounded-probe computability wall |
+| [`MM-O22`](SALVAGE.md#mm-o22-six-guard-parser-rank-wall) | witness-dependent `J₇-I₇` Hankel section, explicit inverse, seven-state exact lower bound, and forced-rule yes-source specialization |
 
 The candidate proves only the halting-to-mortality direction. Its converse requires a theorem
 that every nonterminal projective orbit avoids every pole. No such theorem is formalized or

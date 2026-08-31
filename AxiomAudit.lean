@@ -414,6 +414,10 @@ open MatrixMortality
 #print axioms forcedRuleC_hasZero_iff_terminal_match
 #print axioms existentialGuardedForcedRuleC_hasNonemptyZero_iff_terminal_match
 #print axioms existentialGuardedForcedRuleC_probeHankel_det
+#print axioms guardedSeries_sixGuard_hankel_eq
+#print axioms sixGuardHankel_det_ne_zero
+#print axioms guardedSeries_sixGuard_exact_state_lower_bound
+#print axioms existentialGuardedForcedRuleC_seven_le_card_of_terminal_match
 #print axioms Undecidability.UniversalNeary.boundedProbeZero_computable
 #print axioms Undecidability.UniversalNeary.no_boundedProbeZero_iff_universal
 #print axioms ruleScale_eq_of_deletionFirst_fibre
