@@ -33,6 +33,7 @@ import MatrixMortality.MixedPrimeFiveCarry
 import MatrixMortality.MixedPrimeRealTrapDepth
 import MatrixMortality.MixedPrimeRealTrapMantissa
 import MatrixMortality.MixedPrimeRealTrapWall
+import MatrixMortality.MixedPrimeRealTrapExcursion
 import MatrixMortality.RankTwoPunctuation
 import MatrixMortality.ReturnSquare
 import MatrixMortality.ReturnSquareDynamics

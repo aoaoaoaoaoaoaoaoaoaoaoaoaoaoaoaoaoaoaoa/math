@@ -3591,6 +3591,12 @@ the rectangle with the `D2-S08` representative gives a finite coordinate-by-twel
 This is [`D2-S10`](SALVAGE.md#d2-s10-finite-secondary-wall-nucleus). The live arithmetic
 obstruction is no longer internal wall recurrence, but excursions through upper or middle
 branches or rigid two-adic strata and their later returns.
+The rigid stratum is now closed. Exact upper, middle, and lower valuation formulas show that any
+reduced denominator divisible by four remains divisible by four under every reverse branch. A
+lower-wall under-cancellation enters this absorbing cone and cannot return; exact wall
+cancellation remains in the finite `D2-S10` nucleus. This is
+[`D2-S11`](SALVAGE.md#d2-s11-absorbing-four-divisible-cone). Only wall-preserving upper steps and
+lower over-cancellation into an odd denominator can participate in a recurrent excursion.
 The deepest of those three branches is itself a full depth reset. In normalized band coordinates
 `U(d,μ)=1/5+(3/10)(2/3)^dμ`, every target band `d≥2` contains a point whose `d−2` predecessor has
 any prescribed band `n≥7` and mantissa in `(2/3,1]`. An explicit guarded subfamily fixes target
