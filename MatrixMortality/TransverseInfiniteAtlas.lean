@@ -649,6 +649,82 @@ theorem terminalValue_two_zeroSet_eq :
     · exact terminalValue_two_distinct_zeros.1
     · exact terminalValue_two_distinct_zeros.2
 
+/-- Three coefficients governing a fixed terminal row-column test. -/
+def terminalCoefficients (row : State) (source : ℚ) (column : State) : State :=
+  ![terminalConstant row column source, terminalBinary row column, terminalTernary row column]
+
+/-- Total source-dependent column for the rational coefficient section. -/
+def coefficientSectionColumn (source : ℚ) : State :=
+  ![source ^ 2 + 1, 1, 0]
+
+/-- Total row section realizing any prescribed terminal coefficient triple. -/
+def coefficientSectionRow (source : ℚ) (coefficients : State) : State :=
+  ![coefficients 0 / (source ^ 2 + source + 1),
+    coefficients 1 / (source ^ 2 + 1), coefficients 2]
+
+theorem source_sq_add_one_pos (source : ℚ) : 0 < source ^ 2 + 1 := by
+  nlinarith [sq_nonneg source]
+
+theorem source_sq_add_source_add_one_pos (source : ℚ) :
+    0 < source ^ 2 + source + 1 := by
+  nlinarith [sq_nonneg (2 * source + 1)]
+
+theorem coefficientSection_terminalConstant (source : ℚ) (coefficients : State) :
+    terminalConstant (coefficientSectionRow source coefficients)
+      (coefficientSectionColumn source) source = coefficients 0 := by
+  have denominator_ne : source ^ 2 + source + 1 ≠ 0 :=
+    ne_of_gt (source_sq_add_source_add_one_pos source)
+  simp only [terminalConstant, coefficientSectionRow, coefficientSectionColumn,
+    Matrix.cons_val_zero, Matrix.cons_val_one, mul_one]
+  rw [show source ^ 2 + 1 + source = source ^ 2 + source + 1 by ring]
+  exact div_mul_cancel₀ (coefficients 0) denominator_ne
+
+theorem coefficientSection_terminalBinary (source : ℚ) (coefficients : State) :
+    terminalBinary (coefficientSectionRow source coefficients)
+      (coefficientSectionColumn source) = coefficients 1 := by
+  have denominator_ne : source ^ 2 + 1 ≠ 0 := ne_of_gt (source_sq_add_one_pos source)
+  simp [terminalBinary, coefficientSectionRow, coefficientSectionColumn, denominator_ne]
+
+theorem coefficientSection_terminalTernary (source : ℚ) (coefficients : State) :
+    terminalTernary (coefficientSectionRow source coefficients)
+      (coefficientSectionColumn source) = coefficients 2 := by
+  simp [terminalTernary, coefficientSectionRow, coefficientSectionColumn]
+
+theorem terminalCoefficients_section (source : ℚ) (coefficients : State) :
+    terminalCoefficients (coefficientSectionRow source coefficients) source
+      (coefficientSectionColumn source) = coefficients := by
+  funext coordinate
+  fin_cases coordinate
+  · exact coefficientSection_terminalConstant source coefficients
+  · exact coefficientSection_terminalBinary source coefficients
+  · exact coefficientSection_terminalTernary source coefficients
+
+theorem terminalCoefficients_surjective (source : ℚ) :
+    Function.Surjective
+      (fun row => terminalCoefficients row source (coefficientSectionColumn source)) := by
+  intro coefficients
+  exact ⟨coefficientSectionRow source coefficients,
+    terminalCoefficients_section source coefficients⟩
+
+theorem coefficientSection_terminalValue
+    (source : ℚ) (coefficients : State) (power : Nat) :
+    terminalValue (coefficientSectionRow source coefficients) source
+        (coefficientSectionColumn source) power =
+      exponentialScalar (coefficients 0) (coefficients 1) (coefficients 2) power := by
+  rw [terminalValue_eq_exponentialScalar, coefficientSection_terminalConstant,
+    coefficientSection_terminalBinary, coefficientSection_terminalTernary]
+
+theorem coefficientSection_sourceFamily_delayed_zero_iff
+    {Source : Type*} (sourceParameter : Source → ℚ) (targetDepth : Source → Nat)
+    (source : Source) (power : Nat) :
+    terminalValue
+        (coefficientSectionRow (sourceParameter source)
+          ![(2 : ℚ) ^ targetDepth source, 1, 0])
+        (sourceParameter source) (coefficientSectionColumn (sourceParameter source)) power = 0 ↔
+      power = targetDepth source := by
+  rw [coefficientSection_terminalValue]
+  simpa using exponentialScalar_binary_singleton (targetDepth source) power
+
 /-- Literal raw prefix spelling of the `power`-th carrier matrix. -/
 def carrierWord (power : Nat) : List PairedControl :=
   List.replicate power .toggle ++ [.data .b]

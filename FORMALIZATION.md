@@ -2371,6 +2371,8 @@ fixed-rank decision problem.
 | A nonidentity terminal exponential scalar has at most two zero depths; the identity case has every depth | `TransverseInfiniteAtlas.exponentialScalar_zeroSet_encard_le_two`, `TransverseInfiniteAtlas.exponentialScalar_zeroSet_eq_univ_iff` |
 | Every fixed carrier point test inherits the all-or-at-most-two dichotomy | `TransverseInfiniteAtlas.terminalValue_eq_exponentialScalar`, `TransverseInfiniteAtlas.terminalValue_zeroSet_encard_le_two`, `TransverseInfiniteAtlas.terminalValue_zeroSet_eq_univ_iff` |
 | One point test has zero set exactly `{0,1}`, and singleton acceptance can be delayed to any prescribed depth | `TransverseInfiniteAtlas.terminalValue_two_zeroSet_eq`, `TransverseInfiniteAtlas.delayedRow_terminalValue_eq_zero_iff` |
+| The pole-free rational coefficient section realizes every terminal coefficient triple at every source | `TransverseInfiniteAtlas.source_sq_add_one_pos`, `TransverseInfiniteAtlas.source_sq_add_source_add_one_pos`, `TransverseInfiniteAtlas.terminalCoefficients_section`, `TransverseInfiniteAtlas.terminalCoefficients_surjective` |
+| Every source-indexed target depth has an exact delayed-singleton row-column family | `TransverseInfiniteAtlas.coefficientSection_terminalValue`, `TransverseInfiniteAtlas.coefficientSection_sourceFamily_delayed_zero_iff` |
 | The `bcbb` null histories and complete terminal language are one exact periodic ray | `PeriodicHistory.bcbbNull_iff`, `PeriodicHistory.bcbb_terminal_match_iff` |
 | The singular positional decoder obeys its all-control affine state equation | `PeriodicHistory.periodicProduct_mulVec_column`, `PeriodicHistory.periodicCoefficient_eq` |
 | The `bcbb` affine section has no false zero and matches the paired zero language | `PeriodicHistory.bcbbAffine_zero_iff`, `PeriodicHistory.bcbb_periodicCoefficient_zero_iff_paired_zero` |
@@ -2691,6 +2693,15 @@ at most two unless it is all of `ℕ`. Both conclusions are exact: one row-colum
 depths zero and one, while the family `(2ᴺ,1,0)` on the first input column vanishes exactly at an
 arbitrary prescribed depth `N`. The theorem fixes the row, column, and source while varying depth;
 it does not exclude source-computed delayed targets or moving line sections as a whole.
+
+For `G3-O33`, Lean fixes the total source-dependent column `(s²+1,1,0)` and proves positivity of
+both `s²+1` and `s²+s+1` over `ℚ`. Dividing an arbitrary coefficient triple `(A,B,C)` by those
+two factors gives a pole-free row whose terminal coefficients are exactly `(A,B,C)`. The resulting
+fixed-column map from rows to coefficient triples is formally surjective for every source. A
+function-parametric corollary realizes the zero set `{N(σ)}` for arbitrary source parameter and
+target-depth functions. This closes algebraic coefficient fitting as a possible obstruction, but
+says nothing about mapping the complete raw control monoid or paired terminal histories to the
+selected depth.
 
 For `G3-O20`, Lean proves the free-monoid tail law: if one fixed-boundary equation with stationary
 left and right pump blocks holds at exponents `N` and `N+1`, it holds at every exponent `N+k`.

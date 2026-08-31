@@ -252,6 +252,12 @@ open MatrixMortality
 #print axioms TransverseInfiniteAtlas.delayedRow_terminalValue_eq_zero_iff
 #print axioms TransverseInfiniteAtlas.terminalValue_two_distinct_zeros
 #print axioms TransverseInfiniteAtlas.terminalValue_two_zeroSet_eq
+#print axioms TransverseInfiniteAtlas.source_sq_add_one_pos
+#print axioms TransverseInfiniteAtlas.source_sq_add_source_add_one_pos
+#print axioms TransverseInfiniteAtlas.terminalCoefficients_section
+#print axioms TransverseInfiniteAtlas.terminalCoefficients_surjective
+#print axioms TransverseInfiniteAtlas.coefficientSection_terminalValue
+#print axioms TransverseInfiniteAtlas.coefficientSection_sourceFamily_delayed_zero_iff
 #print axioms TransverseInfiniteAtlas.wordProduct_carrierWord
 #print axioms BranchingHistory.bcbcNull_append
 #print axioms BranchingHistory.bcbcForkRoles_injective
