@@ -538,6 +538,14 @@ Consequently every guarded nonempty fixed-source query reduces to depths `0`, `1
 canonical representatives `2,…,11`, while retaining the exact rational mantissa. The surviving
 unbounded object is the mantissa address, not Archimedean target depth.
 
+That address is now exact. A target `U(d,μ)` has only the three predecessor candidates `μ/2`, `μ/3`, and
+`2μ/9`; their waits are `d`, `d−1`, and `d−2`, with the last branch present exactly when
+`μ>9/10`. For a reduced unit mantissa `a/b`, Lean expresses the normalized lower predecessor
+through the centered numerator `N=10a−9b` and proves `gcd(N,b)=gcd(2,b)`. Odd denominators and
+denominators divisible by four therefore have rigid two-adic updates. The sole secondary wall is
+`b=2c` with `c` odd, where every remaining cancellation is exactly `v₂(5a−9c)`. Both the full
+two- and three-adic transition formulas are checked.
+
 `MixedPrimeKernel` now owns the raw `D,T` affine kernel. It checks the published shortest
 length-27 relation, an infinite family of distinct equal-map pairs at every odd length
 `29+2k`, and three independent length-30 relations. The former isolated length-29 relation is
@@ -1378,7 +1386,7 @@ transition: `peeledNumerator_twoAdic_deepens` proves that the difference of the 
 every non-singleton consecutive multi-pole block to have upper length at least three. The module
 does not identify later product residuals with raw encoded heads or decide singleton targets.
 
-The dimension-two affine ledger has seventeen independently checked records:
+The dimension-two affine ledger has eighteen independently checked records:
 
 | Record | Formalization obligation |
 | --- | --- |
@@ -1388,6 +1396,7 @@ The dimension-two affine ledger has seventeen independently checked records:
 | [`D2-S06`](SALVAGE.md#d2-s06-spectator-prime-denominator-skeleton) | preservation of every prime-to-30 denominator exponent through arbitrary shell schedules and first exits |
 | [`D2-S07`](SALVAGE.md#d2-s07-period-ten-shell-guard) | exact period-ten acceptance, the tail-dependent period `2·5^(ℓ+1)`, finite residue reduction, sharpness by unit zero preimages, and failure of every fixed wait modulus |
 | [`D2-S08`](SALVAGE.md#d2-s08-twelve-class-target-depth-collapse) | exact target/wait shift conjugacy, equality of every deep nonempty predecessor set, depth-periodic unitality, and guarded reduction to twelve canonical target-depth classes |
+| [`D2-S09`](SALVAGE.md#d2-s09-centered-lower-mantissa-recurrence) | complete three-branch reverse address, centered lower numerator, exact gcd cancellation, valuation transition, and isolation of the sole secondary wall |
 | [`D2-D05`](SALVAGE.md#d2-d05-prescribed-translation-count) | primitive linear-polynomial divisibility, bounded carries in both scan directions, ordered-marker automaton, regular control, and `a=±1` cases |
 | [`D2-D06`](SALVAGE.md#d2-d06-private-prime-peeling) | unique-minimum valuation calculation, zero endpoints, fixed-count reduction, reversed language, and positive private valuation |
 | [`D2-D07`](SALVAGE.md#d2-d07-bounded-valuation-orthants) | localization support, denominator bounds in both orthants, invariant-interval recognition, finite graph, and regular-control product |
@@ -1763,6 +1772,7 @@ fixed-rank decision problem.
 | `MixedPrimeSpectator.lean` | invariant spectator-prime denominator skeleton for every shell prefix and first exit |
 | `MixedPrimeFiveCarry.lean` | exact one-step and tail-dependent shell-guard periods, finite residue classifiers, and sharp precision loss through unit zero preimages |
 | `MixedPrimeRealTrapDepth.lean` | exact deep target/wait shift, nonempty predecessor-set collapse, and twelve-class guarded target-depth normalization |
+| `MixedPrimeRealTrapMantissa.lean` | complete reverse mantissa address, centered lower-branch gcd, and exact two-/three-adic cancellation recurrence |
 | `MixedPrimeKernel.lean` | raw mixed-prime affine action, contextual composition, an infinite odd-length kernel family from length 29, and three independent length-30 relations |
 | `MixedPrimeNormalization.lean` | exact homogeneous odd-family relations, persistence under independent normalization scaling, and the two-seed cancellative pump |
 | `ReturnGuard.lean` | three-mode amalgamated return algebra, split mortality compiler, and exact state lower bound |
@@ -1983,6 +1993,7 @@ fixed-rank decision problem.
 | Every reduced-denominator exponent away from `2`, `3`, and `5` is invariant through arbitrary shell execution, including first exits | `MixedPrimeDebt.shellRun_spectatorDenominator`, `MixedPrimeDebt.shellRun_spectatorDenominator_of_ne_active`, `MixedPrimeDebt.shellRun_ne_of_spectatorDenominator_ne` |
 | At every `5`-adic unit source, one-step shell acceptance depends only on the wait modulo ten; a fixed length-`ℓ` tail has period `2·5^(ℓ+1)`, lowering the precision exponent by one fails at an explicit unit zero preimage, and every fixed modulus identifies opposite guard outcomes at some depth | `MixedPrimeDebt.shellStep_fiveUnit_add_ten_iff`, `MixedPrimeDebt.shellStep_fiveUnit_add_ten_mul_iff`, `MixedPrimeDebt.shellStep_fiveUnit_iff_mod_ten`, `MixedPrimeDebt.shellRun_tail_fiveUnit_add_precisionPeriod_iff`, `MixedPrimeDebt.shellRun_tail_fiveUnit_add_precisionPeriod_mul_iff`, `MixedPrimeDebt.shellRun_tail_fiveUnit_iff_mod_precisionPeriod`, `MixedPrimeDebt.shellRun_shellZeroPreimage`, `MixedPrimeDebt.shellZeroPreimage_fiveUnit`, `MixedPrimeDebt.shellRun_tail_precisionPeriod_sharp`, `MixedPrimeDebt.shellRun_fixedModulus_sharp` |
 | Raising a normalized target depth and the final wait by the same amount preserves equality; above depth one, nonempty source reachability is depth-independent and guarded reachability reduces to the twelve canonical depth classes `0,…,11` while retaining exact mantissa | `MixedPrimeDebt.shellStep_realTrapBandPoint_shift_iff`, `MixedPrimeDebt.exists_nonempty_shellRun_realTrapBandPoint_shift_iff`, `MixedPrimeDebt.realTrapBandPoint_fiveUnit_add_ten_mul_iff`, `MixedPrimeDebt.exists_guarded_shellRun_realTrapBandPoint_add_ten_mul_iff`, `MixedPrimeDebt.realTrapDepthRepresentative_decomposition`, `MixedPrimeDebt.exists_guarded_shellRun_realTrapBandPoint_representative_iff` |
+| Every normalized target has at most three exact interval-separated predecessor candidates; on the sole unbounded branch, inherited-denominator cancellation is `gcd(10a−9b,b)=gcd(2,b)` and only the wall `b=2c` exposes the secondary residual `5a−9c` | `MixedPrimeDebt.shellStep_realTrapBandPoint_iff_three_predecessors`, `MixedPrimeDebt.lowerCenteredNumerator_gcd`, `MixedPrimeDebt.lowerCenteredNumerator_twoValue_of_oddDenominator`, `MixedPrimeDebt.lowerCenteredNumerator_twoValue_of_four_dvd_denominator`, `MixedPrimeDebt.lowerCenteredNumerator_twoValue_of_exactlyOne_denominator`, `MixedPrimeDebt.lowerNormalizedMantissa_twoValue`, `MixedPrimeDebt.lowerNormalizedMantissa_threeValue`, `MixedPrimeDebt.lowerNormalizedMantissa_twoValue_of_exactlyOne_denominator` |
 | Every sufficiently deep normalized source band occurs on the deepest real-trap predecessor branch; a period-fifty subfamily preserves both endpoint unit guards at unbounded depth, is fed from the fixed source `2/9`, has exact two-/three-adic values, and has distinct targets | `MixedPrimeDebt.realTrapMaxPredecessorWait_bandPoint`, `MixedPrimeDebt.shellStep_realTrap_poleBranch_full`, `MixedPrimeDebt.shellStep_realTrap_guardedPoleReset`, `MixedPrimeDebt.shellStep_realTrap_guardedPoleFeed`, `MixedPrimeDebt.shellStep_realTrap_guardedPoleFeed_target_injective`, `MixedPrimeDebt.shellStep_realTrap_guardedPoleReset_twoThreeValues`, `MixedPrimeDebt.shellStep_realTrap_guardedPoleReset_target_injective` |
 | Shell phases are all units exactly when the final output is a unit | `PeriodicShell.shellPrefixesUnit_iff` |
 | Raw words and shell schedules are conjugate, and every boundary-shifted benchmark schedule is one contextual raw rule | `PeriodicShell.shellRun_eq_wordAction`, `PeriodicShell.shellRawWord_benchmarkRelationShiftLeft`, `PeriodicShell.shellRawWord_benchmarkRelationShiftRight`, `PeriodicShell.shellRun_benchmarkRelationShift` |

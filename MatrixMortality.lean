@@ -29,6 +29,7 @@ import MatrixMortality.MixedPrimeRealTrapAddress
 import MatrixMortality.MixedPrimeSpectator
 import MatrixMortality.MixedPrimeFiveCarry
 import MatrixMortality.MixedPrimeRealTrapDepth
+import MatrixMortality.MixedPrimeRealTrapMantissa
 import MatrixMortality.RankTwoPunctuation
 import MatrixMortality.ReturnSquare
 import MatrixMortality.ReturnSquareDynamics
