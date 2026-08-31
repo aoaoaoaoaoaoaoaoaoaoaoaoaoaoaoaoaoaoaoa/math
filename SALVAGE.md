@@ -328,6 +328,7 @@ file owns the mathematical stock.
 | [`D2-O04`](#d2-o04-forced-exit-surface) | obstruction and decidable continuation cone | every next block leaves the accepted `43/24` collision ray at valuation minus one; target valuation fixes every post-exit length, making the whole controlled cone decidable | formalized reduction; audited decision corollary | active |
 | [`D2-O07`](#d2-o07-universal-exit-suffix-collapse) | structure theorem and decidable suffix reduction | after any critical-shell exit, a fixed target permits at most two nonempty suffix lengths; the remaining master obstruction lies before or at the exit | formalized reduction; audited decision corollary | active |
 | [`D2-O08`](#d2-o08-real-trap-backward-saturation) | obstruction and backward saturation | every rational `5`-adic unit target in the real trap has guarded rational predecessor schedules of every block length, with the source allowed to vary | formalized | active |
+| [`D2-O09`](#d2-o09-guarded-real-pole-reset) | obstruction and depth reset | the deepest real-trap branch reaches every sufficiently deep Archimedean band, and an explicit unbounded subfamily survives the `5`-adic guard | formalized | active |
 
 ## Frankl Conjecture
 
@@ -14561,3 +14562,71 @@ intersecting with the real survivor. The remaining obstruction is depth, not loc
 
 **Next:** find a target-dependent height or congruence making the ternary inverse tree finite up
 to equivalence, or exhibit a fixed-source recurrent branch that defeats every finite nucleus.
+
+### D2-O09: Guarded real-pole reset
+
+**Kind:** obstruction and depth reset
+**Evidence:** formalized
+**Disposition:** active
+
+The third branch of [`D2-S04`](#d2-s04-real-trap-ternary-predecessor-nucleus) contains the whole
+unbounded-depth obstruction. Parameterize the real trap by
+
+```text
+U(d,μ)=1/5+(3/10)(2/3)^d μ,   2/3<μ≤1.
+```
+
+Lean proves `realTrapMaxPredecessorWait(U(d,μ))=d`. For arbitrary target depth `d≥2`, source
+depth `n≥7`, and normalized source mantissa `ν∈(2/3,1]`, put
+
+```text
+μ=9/10+(27/20)(2/3)^n ν.
+```
+
+Then `2/3<μ≤1` and the exact deepest-branch identity is
+
+```text
+T_(d−2)(U(n,ν))=U(d,μ).
+```
+
+Thus every target band of depth at least two contains points whose deepest predecessor has any
+prescribed depth at least seven and any prescribed normalized mantissa. The branch is countably
+full before imposing the shell guard.
+
+The reset is not an artifact of rejected exits. For every `k≥0`, take `n=50k+50`, `ν=1`, and
+`d=4`. Both endpoints of
+
+```text
+T₂(U(50k+50,1))
+  = U(4, 9/10+(27/20)(2/3)^(50k+50))
+```
+
+are `5`-adic units. The proof clears their denominators and checks
+
+```text
+3^(50k+49)+2^(50k+49) ≡ 20·124^k  (mod 125),
+19·3^(50k+49)+4·2^(50k+49) ≡ 75·124^k  (mod 125).
+```
+
+The first numerator has valuation one and the second valuation two, exactly cancelling the
+respective denominator powers of five. Hence one fixed target depth and one fixed wait support
+guarded predecessors of unbounded source depth, although the rational endpoints vary with `k`.
+
+**Scope:** this refutes a finite-state quotient based only on Archimedean depth, relative branch,
+and the `5`-unit bit. It does not give one fixed target infinitely many predecessors, an arbitrary
+guarded mantissa reset, an infinite prescribed depth word, a counter simulation, or a decision
+theorem. Exact fixed-source/fixed-target reachability remains open.
+
+**Artifact:** `MixedPrimeDebt.realTrapBandPoint`,
+`MixedPrimeDebt.realTrapMaxPredecessorWait_bandPoint`,
+`MixedPrimeDebt.shellStep_realTrap_poleBranch_full`, and
+`MixedPrimeDebt.shellStep_realTrap_guardedPoleReset` in
+[`MixedPrimeRealTrap.lean`](MatrixMortality/MixedPrimeRealTrap.lean) and
+[`MixedPrimeRealTrapReset.lean`](MatrixMortality/MixedPrimeRealTrapReset.lean).
+
+**Use:** concentrate reverse-search invariants on the pole branch near normalized mantissa
+`9/10`. A lawful finite nucleus must retain enough exact mantissa or arithmetic information to
+separate its full depth resets; depth and shell status alone are saturated.
+
+**Next:** decide whether the guarded pole-reset relation admits arbitrary finite concatenation,
+or find a height/congruence that contracts after quotienting its explicit period-fifty ray.

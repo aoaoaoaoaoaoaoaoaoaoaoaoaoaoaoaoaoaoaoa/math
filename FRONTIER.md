@@ -3033,6 +3033,13 @@ exactly three rational equality tests. The width is sharp at `y=49/150`. Thus th
 backward graph is an explicit ternary tree: unbounded depth, not unbounded local fanout, is now
 the reverse-search obstruction. This is
 [`D2-S04`](SALVAGE.md#d2-s04-real-trap-ternary-predecessor-nucleus).
+The deepest of those three branches is itself a full depth reset. In normalized band coordinates
+`U(d,μ)=1/5+(3/10)(2/3)^dμ`, every target band `d≥2` contains a point whose `d−2` predecessor has
+any prescribed band `n≥7` and mantissa in `(2/3,1]`. An explicit guarded subfamily fixes target
+depth four and wait two while the source depths run through `50k+50`; exact residues modulo 125
+prove that both endpoints remain `5`-adic units. Therefore depth plus the shell bit cannot form a
+finite inverse nucleus. Exact mantissa arithmetic is indispensable. This is
+[`D2-O09`](SALVAGE.md#d2-o09-guarded-real-pole-reset).
 Higher depth is not free: a published length-thirteen relation yields two distinct
 schedules with the same affine map and a common Lean-checked guarded periodic source. This is an
 exact rewrite seed. Lean also proves that it preserves all intermediate shell guards in every
@@ -3105,6 +3112,7 @@ artery; see
 | Bound accepted debt-bridge waits from one fixed source | for every `k≥0`, `[1,10k+2]` and `[3,1,10k]` are accepted adjacent bridges from `43/24`, with terminal waits tending to infinity |
 | Use real contraction to bound every shell schedule | the common invariant interval `[1/5,1/2]` is the exact recurrent real survivor; zero-wait extremality bounds only exterior targets |
 | Bound the translated count from a target inside the real trap | every rational `5`-adic unit target there has guarded rational predecessor schedules of every prescribed length, with varying source |
+| Bound the next real-trap depth from the current depth and unit status | the guarded pole-reset family has fixed target depth four and fixed wait two but source depths `50k+50` |
 | Invoke a general module `S`-unit algorithm | the arbitrary three-prime case leads to open linear-exponential systems, and forgetting the monotone path destroys useful structure |
 
 These are exclusion tests for future proposals. Any attack relying on one of them must identify
@@ -3354,7 +3362,10 @@ universal computation.
    valuation-only reverse bounds, one-sided endpoint bounds, or global real drift inside the
    invariant trap. `D2-O08` already saturates target-only reverse length there when the source may
    vary, while `D2-S04` replaces its local reverse fan by a sharp ternary nucleus. Attack the
-   unbounded depth of that inverse tree through endpoint-coupled height or congruence.
+   unbounded depth of that inverse tree through endpoint-coupled height or congruence. `D2-O09`
+   localizes every unbounded Archimedean reset to the deepest branch and proves that fixed
+   depth/unit modes do not contain it; attack that branch through exact mantissa arithmetic,
+   guarded concatenation, or endpoint-coupled height.
    Keep the non-elementary lanes independent: adelic cone types, parabolic rational subsets,
    trace/height descent, finite-obstruction saturation, and valuation universality.
 7. Synthesize the returned attacks by the discriminating signals above; do not average
