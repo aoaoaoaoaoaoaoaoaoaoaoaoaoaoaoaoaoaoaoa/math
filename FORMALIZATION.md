@@ -658,7 +658,14 @@ That address is now exact. A target `U(d,μ)` has only the three predecessor can
 through the centered numerator `N=10a−9b` and proves `gcd(N,b)=gcd(2,b)`. Odd denominators and
 denominators divisible by four therefore have rigid two-adic updates. The sole secondary wall is
 `b=2c` with `c` odd, where every remaining cancellation is exactly `v₂(5a−9c)`. Both the full
-two- and three-adic transition formulas are checked.
+two- and three-adic transition formulas are checked. The wall supports an explicit infinite
+guarded fixed family: for every `d≥7`, the reduced mantissa
+`μ_d=3^(d−1)/(10·3^(d−3)−2^(d−1))` satisfies `9/10<μ_d≤1`, `v₂(b_d)=1`, centered
+residual value `d−2`, and `T_(d−2)(U(d,μ_d))=U(d,μ_d)`. Lean also proves that every
+repetition of this lower wait fixes the state and preserves every five-adic shell guard. Thus no
+uniform strict height, odd-part, or centered-valuation descent can cross all lower branches. The
+family is the exact secondary-wall coordinate of the singleton cycles previously known from
+`PeriodicShell.shellPeriodicCycle`, not a new periodicity phenomenon.
 
 `MixedPrimeKernel` now owns the raw `D,T` affine kernel. It checks the published shortest
 length-27 relation, an infinite family of distinct equal-map pairs at every odd length
@@ -1912,7 +1919,7 @@ The dimension-two affine ledger has eighteen independently checked records:
 | [`D2-S06`](SALVAGE.md#d2-s06-spectator-prime-denominator-skeleton) | preservation of every prime-to-30 denominator exponent through arbitrary shell schedules and first exits |
 | [`D2-S07`](SALVAGE.md#d2-s07-period-ten-shell-guard) | exact period-ten acceptance, the tail-dependent period `2·5^(ℓ+1)`, finite residue reduction, sharpness by unit zero preimages, and failure of every fixed wait modulus |
 | [`D2-S08`](SALVAGE.md#d2-s08-twelve-class-target-depth-collapse) | exact target/wait shift conjugacy, equality of every deep nonempty predecessor set, depth-periodic unitality, and guarded reduction to twelve canonical target-depth classes |
-| [`D2-S09`](SALVAGE.md#d2-s09-centered-lower-mantissa-recurrence) | complete three-branch reverse address, centered lower numerator, exact gcd cancellation, valuation transition, and isolation of the sole secondary wall |
+| [`D2-S09`](SALVAGE.md#d2-s09-centered-lower-mantissa-recurrence) | complete three-branch reverse address, centered lower numerator, exact gcd cancellation and valuation transition, isolation of the sole secondary wall, and an infinite guarded fixed family with unbounded centered cancellation |
 | [`D2-D05`](SALVAGE.md#d2-d05-prescribed-translation-count) | primitive linear-polynomial divisibility, bounded carries in both scan directions, ordered-marker automaton, regular control, and `a=±1` cases |
 | [`D2-D06`](SALVAGE.md#d2-d06-private-prime-peeling) | unique-minimum valuation calculation, zero endpoints, fixed-count reduction, reversed language, and positive private valuation |
 | [`D2-D07`](SALVAGE.md#d2-d07-bounded-valuation-orthants) | localization support, denominator bounds in both orthants, invariant-interval recognition, finite graph, and regular-control product |
@@ -2445,7 +2452,7 @@ fixed-rank decision problem.
 | `MixedPrimeSpectator.lean` | invariant spectator-prime denominator skeleton for every shell prefix and first exit |
 | `MixedPrimeFiveCarry.lean` | exact one-step and tail-dependent shell-guard periods, finite residue classifiers, and sharp precision loss through unit zero preimages |
 | `MixedPrimeRealTrapDepth.lean` | exact deep target/wait shift, nonempty predecessor-set collapse, and twelve-class guarded target-depth normalization |
-| `MixedPrimeRealTrapMantissa.lean` | complete reverse mantissa address, centered lower-branch gcd, and exact two-/three-adic cancellation recurrence |
+| `MixedPrimeRealTrapMantissa.lean` | complete reverse mantissa address, centered lower-branch gcd, exact two-/three-adic cancellation recurrence, and guarded secondary-wall fixed points at every depth at least seven |
 | `MixedPrimeKernel.lean` | raw mixed-prime affine action, contextual composition, an infinite odd-length kernel family from length 29, and three independent length-30 relations |
 | `MixedPrimeNormalization.lean` | exact homogeneous odd-family relations, persistence under independent normalization scaling, and the two-seed cancellative pump |
 | `ReturnGuard.lean` | three-mode amalgamated return algebra, split mortality compiler, and exact state lower bound |

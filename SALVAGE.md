@@ -16889,26 +16889,59 @@ v₂(ν)=v₂(5a−9c)−(n−1).
 Hence every anomalous cancellation is concentrated in one centered residual, rather than spread
 through the reverse tree.
 
+That residual does not descend. For every `d≥7`, define
+
+```text
+a_d = 3^(d−1),
+b_d = 10·3^(d−3) − 2^(d−1),
+μ_d = a_d/b_d.
+```
+
+Lean proves that `μ_d` is reduced, `5∤b_d`, and `9/10<μ_d≤1`. It lies on the secondary wall
+with exact unbounded cancellation:
+
+```text
+v₂(b_d)=1,
+10a_d−9b_d=9·2^(d−1),
+v₂(5a_d−9(b_d/2))=d−2.
+```
+
+The normalized lower recurrence returns `μ_d` itself, and its real-trap state is its own lower
+predecessor:
+
+```text
+U(d,μ_d)=2μ_d/9,
+T_(d−2)(U(d,μ_d))=U(d,μ_d).
+```
+
+The state is a five-adic unit. Every repetition `[d−2]^k` fixes it, and every intermediate
+shell phase remains a unit. These guarded self-loops disprove every strict height, odd-part, or
+centered-valuation descent asserted uniformly across repeated lower branches. They are the
+singleton periodic cycles already guaranteed abstractly by
+[`D2-O02`](#d2-o02-critical-shell-periodic-saturation); the new content is their exact reduced
+coordinate on the unique [`D2-S09`](#d2-s09-centered-lower-mantissa-recurrence) cancellation wall.
+
 **Scope:** the record gives an exact address and valuation recurrence, not a finite orbit
-classifier. The upper and middle branches remain exact rational maps, and the centered residual
-on the lower wall can still have unbounded two-adic value. The formulas assume a reduced
-five-adic-unit mantissa when invoking the gcd statement.
+classifier. The fixed family is recognizable and does not itself create a hard fixed-endpoint
+fibre. The upper and middle branches and nonperiodic transitions through the lower wall remain
+unbounded exact rational dynamics. The formulas assume a reduced five-adic-unit mantissa when
+invoking the gcd statement.
 
 **Artifact:** `MixedPrimeDebt.shellStep_realTrapBandPoint_iff_three_predecessors`,
 `MixedPrimeDebt.lowerCenteredNumerator_gcd`, the three
 `lowerCenteredNumerator_twoValue_*` theorems,
 `MixedPrimeDebt.lowerNormalizedMantissa_twoValue`,
 `MixedPrimeDebt.lowerNormalizedMantissa_threeValue`, and
-`MixedPrimeDebt.lowerNormalizedMantissa_twoValue_of_exactlyOne_denominator` in
+`MixedPrimeDebt.lowerNormalizedMantissa_twoValue_of_exactlyOne_denominator`, together with the
+`lowerFixed*` and `shellRun_replicate_lowerFixedPoint*` family, in
 [`MixedPrimeRealTrapMantissa.lean`](MatrixMortality/MixedPrimeRealTrapMantissa.lean).
 
 **Use:** split every reduced reverse state first by `v₂(b)=0`, `1`, or at least `2`. Only the
 middle case merits a centered-cancellation search; all other lower-branch valuation updates are
-rigid.
+rigid. Recognize and quotient the explicit fixed loops rather than attempting a global descent.
 
-**Next:** test strict odd-part or height descent across repeated secondary-wall lower branches.
-If it fails, isolate an explicit high-cancellation family before seeking a target-dependent
-finite quotient.
+**Next:** classify nonperiodic transitions on the secondary wall, or construct a target-dependent
+finite quotient that treats the explicit fixed loops as terminal strongly connected components.
 
 ### D2-O09: Guarded real-pole reset
 

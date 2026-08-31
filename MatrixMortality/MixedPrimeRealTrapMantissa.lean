@@ -6,15 +6,19 @@ import MatrixMortality.MixedPrimeRealTrapDepth
 A normalized target has three explicit predecessors, occupying disjoint source intervals. The
 lowest branch is the only unbounded depth reset. In reduced coordinates its centered numerator
 has no hidden cancellation outside the prime two, and the denominator wall at exact two-adic
-value one is the sole secondary cancellation locus.
+value one is the sole secondary cancellation locus. An explicit reduced five-adic-unit fixed
+family on that wall has unbounded centered cancellation, so no strict height or odd-part descent
+can hold across all repeated lower branches.
 -/
 
 namespace MatrixMortality.MixedPrimeDebt
 
 open PadicValuation
+open PeriodicShell
 
 private local instance : Fact (Nat.Prime 2) := ⟨by norm_num⟩
 private local instance : Fact (Nat.Prime 3) := ⟨by norm_num⟩
+private local instance : Fact (Nat.Prime 5) := ⟨by norm_num⟩
 
 /-- The upper reverse candidate for a normalized target. -/
 theorem shellStep_upperPredecessor (wait : ℕ) (mantissa : ℚ) :
@@ -322,5 +326,337 @@ theorem realTrapBandPoint_lowerNormalizedMantissa
   rw [div_pow]
   field_simp
   ring
+
+private theorem two_pow_six_add_le_three_pow_four_add (offset : ℕ) :
+    2 ^ (6 + offset) ≤ 3 ^ (4 + offset) := by
+  induction offset with
+  | zero => norm_num
+  | succ offset induction =>
+      rw [Nat.add_succ, Nat.add_succ, pow_succ, pow_succ]
+      exact (Nat.mul_le_mul_right 2 induction).trans
+        (Nat.mul_le_mul_left (3 ^ (4 + offset)) (by norm_num))
+
+/-- Numerator of the centered lower-branch fixed mantissa at one displayed depth. -/
+def lowerFixedNumerator (depth : ℕ) : ℕ :=
+  3 ^ (depth - 1)
+
+/-- Denominator of the centered lower-branch fixed mantissa at one displayed depth. -/
+def lowerFixedDenominator (depth : ℕ) : ℕ :=
+  10 * 3 ^ (depth - 3) - 2 ^ (depth - 1)
+
+private theorem lowerFixed_power_le
+    {depth : ℕ} (depth_lower : 7 ≤ depth) :
+    2 ^ (depth - 1) ≤ 3 ^ (depth - 3) := by
+  obtain ⟨offset, rfl⟩ := Nat.exists_eq_add_of_le depth_lower
+  have left_exponent : 7 + offset - 1 = 6 + offset := by omega
+  have right_exponent : 7 + offset - 3 = 4 + offset := by omega
+  rw [left_exponent, right_exponent]
+  exact two_pow_six_add_le_three_pow_four_add offset
+
+private theorem lowerFixedNumerator_eq_nine_mul
+    {depth : ℕ} (depth_lower : 3 ≤ depth) :
+    lowerFixedNumerator depth = 9 * 3 ^ (depth - 3) := by
+  have exponent : depth - 3 + 2 = depth - 1 := by omega
+  rw [lowerFixedNumerator, ← exponent, pow_add]
+  norm_num
+  ring
+
+private theorem lowerFixedNumerator_le_denominator
+    {depth : ℕ} (depth_lower : 7 ≤ depth) :
+    lowerFixedNumerator depth ≤ lowerFixedDenominator depth := by
+  have power_le := lowerFixed_power_le depth_lower
+  rw [lowerFixedNumerator_eq_nine_mul (by omega), lowerFixedDenominator]
+  omega
+
+/-- The fixed-family lower centered numerator is an explicit growing power of two. -/
+theorem lowerFixed_centeredNumerator
+    {depth : ℕ} (depth_lower : 7 ≤ depth) :
+    lowerCenteredNumerator (lowerFixedNumerator depth) (lowerFixedDenominator depth) =
+      9 * 2 ^ (depth - 1) := by
+  have power_le := lowerFixed_power_le depth_lower
+  have numerator_eq := lowerFixedNumerator_eq_nine_mul (by omega : 3 ≤ depth)
+  simp only [lowerCenteredNumerator, lowerFixedNumerator, lowerFixedDenominator]
+  simp only [lowerFixedNumerator] at numerator_eq
+  rw [numerator_eq]
+  omega
+
+private theorem lowerFixed_denominator_ne
+    {depth : ℕ} (depth_lower : 7 ≤ depth) : lowerFixedDenominator depth ≠ 0 := by
+  have numerator_positive : 0 < lowerFixedNumerator depth := by
+    simp [lowerFixedNumerator]
+  have numerator_le := lowerFixedNumerator_le_denominator depth_lower
+  omega
+
+private theorem lowerFixed_three_not_dvd_denominator
+    {depth : ℕ} (depth_lower : 7 ≤ depth) : ¬3 ∣ lowerFixedDenominator depth := by
+  intro three_dvd_b
+  have power_le := lowerFixed_power_le depth_lower
+  have two_power_le_first : 2 ^ (depth - 1) ≤ 10 * 3 ^ (depth - 3) := by omega
+  have decomposition :
+      lowerFixedDenominator depth + 2 ^ (depth - 1) = 10 * 3 ^ (depth - 3) := by
+    exact Nat.sub_add_cancel two_power_le_first
+  have three_dvd_first : 3 ∣ 10 * 3 ^ (depth - 3) := by
+    exact dvd_mul_of_dvd_right (dvd_pow_self 3 (by omega)) 10
+  have three_dvd_two_power : 3 ∣ 2 ^ (depth - 1) := by
+    rw [← decomposition] at three_dvd_first
+    exact (Nat.dvd_add_iff_right three_dvd_b).mpr three_dvd_first
+  have three_two_power_coprime : Nat.Coprime 3 (2 ^ (depth - 1)) :=
+    (by norm_num : Nat.Coprime 3 2).pow_right (depth - 1)
+  have three_eq_one := three_two_power_coprime.eq_one_of_dvd three_dvd_two_power
+  omega
+
+/-- The fixed-family numerator and denominator are reduced. -/
+theorem lowerFixed_coprime
+    {depth : ℕ} (depth_lower : 7 ≤ depth) :
+    (lowerFixedNumerator depth).Coprime (lowerFixedDenominator depth) := by
+  have three_coprime : Nat.Coprime 3 (lowerFixedDenominator depth) :=
+    Nat.prime_three.coprime_iff_not_dvd.mpr
+      (lowerFixed_three_not_dvd_denominator depth_lower)
+  simpa only [lowerFixedNumerator] using three_coprime.pow_left (depth - 1)
+
+/-- The fixed-family denominator is coprime to five. -/
+theorem lowerFixed_five_coprime_denominator
+    {depth : ℕ} (depth_lower : 7 ≤ depth) :
+    Nat.Coprime 5 (lowerFixedDenominator depth) := by
+  apply Nat.prime_five.coprime_iff_not_dvd.mpr
+  intro five_dvd_b
+  have power_le := lowerFixed_power_le depth_lower
+  have two_power_le_first : 2 ^ (depth - 1) ≤ 10 * 3 ^ (depth - 3) := by omega
+  have decomposition :
+      lowerFixedDenominator depth + 2 ^ (depth - 1) = 10 * 3 ^ (depth - 3) := by
+    exact Nat.sub_add_cancel two_power_le_first
+  have five_dvd_first : 5 ∣ 10 * 3 ^ (depth - 3) :=
+    ⟨2 * 3 ^ (depth - 3), by ring⟩
+  have five_dvd_two_power : 5 ∣ 2 ^ (depth - 1) := by
+    rw [← decomposition] at five_dvd_first
+    exact (Nat.dvd_add_iff_right five_dvd_b).mpr five_dvd_first
+  have five_two_power_coprime : Nat.Coprime 5 (2 ^ (depth - 1)) :=
+    (by norm_num : Nat.Coprime 5 2).pow_right (depth - 1)
+  have five_eq_one := five_two_power_coprime.eq_one_of_dvd five_dvd_two_power
+  omega
+
+/-- Every fixed-family denominator lies on the secondary wall `v₂(b)=1`. -/
+theorem lowerFixed_denominator_twoValue
+    {depth : ℕ} (depth_lower : 7 ≤ depth) :
+    padicValNat 2 (lowerFixedDenominator depth) = 1 := by
+  have power_le := lowerFixed_power_le depth_lower
+  have two_power_le_first : 2 ^ (depth - 1) ≤ 10 * 3 ^ (depth - 3) := by omega
+  have four_dvd_two_power : 4 ∣ 2 ^ (depth - 1) := by
+    change 2 ^ 2 ∣ 2 ^ (depth - 1)
+    exact pow_dvd_pow 2 (by omega)
+  have two_dvd_first : 2 ∣ 10 * 3 ^ (depth - 3) :=
+    dvd_mul_of_dvd_left (by norm_num) _
+  have two_dvd_two_power : 2 ∣ 2 ^ (depth - 1) := dvd_pow_self 2 (by omega)
+  have two_dvd_denominator : 2 ∣ lowerFixedDenominator depth := by
+    exact Nat.dvd_sub two_dvd_first two_dvd_two_power
+  have not_four_dvd_denominator : ¬4 ∣ lowerFixedDenominator depth := by
+    intro four_dvd
+    have four_dvd_first : 4 ∣ 10 * 3 ^ (depth - 3) := by
+      have decomposition := Nat.sub_add_cancel two_power_le_first
+      rw [← decomposition]
+      exact Nat.dvd_add four_dvd four_dvd_two_power
+    have four_three_power_coprime : Nat.Coprime 4 (3 ^ (depth - 3)) :=
+      (by norm_num : Nat.Coprime 4 3).pow_right (depth - 3)
+    have four_dvd_ten : 4 ∣ 10 :=
+      four_three_power_coprime.dvd_of_dvd_mul_right four_dvd_first
+    norm_num at four_dvd_ten
+  have denominator_ne := lowerFixed_denominator_ne depth_lower
+  have one_le := (padicValNat_dvd_iff_le (p := 2) (n := 1) denominator_ne).mp (by
+    simpa using two_dvd_denominator)
+  have not_two_le : ¬2 ≤ padicValNat 2 (lowerFixedDenominator depth) := by
+    intro two_le
+    have four_dvd :=
+      (padicValNat_dvd_iff_le (p := 2) (n := 2) denominator_ne).mpr two_le
+    norm_num at four_dvd
+    exact not_four_dvd_denominator four_dvd
+  omega
+
+/-- The fixed-family centered numerator has unbounded exact two-adic value. -/
+theorem lowerFixed_centeredNumerator_twoValue
+    {depth : ℕ} (depth_lower : 7 ≤ depth) :
+    padicValNat 2
+        (lowerCenteredNumerator (lowerFixedNumerator depth) (lowerFixedDenominator depth)) =
+      depth - 1 := by
+  rw [lowerFixed_centeredNumerator depth_lower, padicValNat.mul]
+  · rw [padicValNat.prime_pow]
+    norm_num
+  · norm_num
+  · positivity
+
+/-- The fixed-family secondary center has unbounded exact two-adic value. -/
+theorem lowerFixed_secondaryCenter_twoValue
+    {depth : ℕ} (depth_lower : 7 ≤ depth) :
+    padicValNat 2
+        (5 * lowerFixedNumerator depth - 9 * (lowerFixedDenominator depth / 2)) =
+      depth - 2 := by
+  have denominator_ne := lowerFixed_denominator_ne depth_lower
+  have denominator_value := lowerFixed_denominator_twoValue depth_lower
+  have one_le : 1 ≤ padicValNat 2 (lowerFixedDenominator depth) := by omega
+  have two_dvd : 2 ∣ lowerFixedDenominator depth :=
+    (padicValNat_dvd_iff_le (p := 2) (n := 1) denominator_ne).mpr one_le
+  have denominator_eq : 2 * (lowerFixedDenominator depth / 2) =
+      lowerFixedDenominator depth := Nat.mul_div_cancel' two_dvd
+  have half_ne : lowerFixedDenominator depth / 2 ≠ 0 := by
+    intro half_zero
+    rw [half_zero, mul_zero] at denominator_eq
+    exact denominator_ne denominator_eq.symm
+  have half_not_even : ¬2 ∣ lowerFixedDenominator depth / 2 := by
+    intro half_even
+    have four_dvd : 2 ^ 2 ∣ lowerFixedDenominator depth := by
+      rw [← denominator_eq, pow_two]
+      exact Nat.mul_dvd_mul_left 2 half_even
+    have two_le :=
+      (padicValNat_dvd_iff_le (p := 2) (n := 2) denominator_ne).mp four_dvd
+    omega
+  have half_odd : Odd (lowerFixedDenominator depth / 2) :=
+    Nat.prime_two.coprime_iff_not_dvd.mpr half_not_even |>.odd_of_left
+  have coprime : (lowerFixedNumerator depth).Coprime
+      (2 * (lowerFixedDenominator depth / 2)) := by
+    rw [denominator_eq]
+    exact lowerFixed_coprime depth_lower
+  have positive : 18 * (lowerFixedDenominator depth / 2) <
+      10 * lowerFixedNumerator depth := by
+    rw [show 18 * (lowerFixedDenominator depth / 2) =
+      9 * lowerFixedDenominator depth by omega]
+    have centered := lowerFixed_centeredNumerator depth_lower
+    have centered_positive : 0 < lowerCenteredNumerator
+        (lowerFixedNumerator depth) (lowerFixedDenominator depth) := by
+      rw [centered]
+      positivity
+    simpa only [lowerCenteredNumerator, Nat.sub_pos_iff_lt] using centered_positive
+  have wall_value := lowerCenteredNumerator_twoValue_of_exactlyOne_denominator
+    coprime half_odd positive
+  rw [denominator_eq, lowerFixed_centeredNumerator_twoValue depth_lower] at wall_value
+  omega
+
+/-- The lower normalized recurrence fixes the displayed reduced mantissa exactly. -/
+theorem lowerNormalizedMantissa_fixed
+    {depth : ℕ} (depth_lower : 7 ≤ depth) :
+    lowerNormalizedMantissa depth (lowerFixedNumerator depth) (lowerFixedDenominator depth) =
+      (lowerFixedNumerator depth : ℚ) / lowerFixedDenominator depth := by
+  have denominator_ne := lowerFixed_denominator_ne depth_lower
+  have centered := lowerFixed_centeredNumerator depth_lower
+  have depth_three : depth - 3 + 2 = depth - 1 := by omega
+  rw [lowerNormalizedMantissa, centered, lowerFixedNumerator]
+  rw [← depth_three, pow_add]
+  simp only [pow_add]
+  norm_num
+  field_simp
+
+/-- Reduced mantissa of the lower-branch fixed point at one depth. -/
+def lowerFixedMantissa (depth : ℕ) : ℚ :=
+  (lowerFixedNumerator depth : ℚ) / lowerFixedDenominator depth
+
+/-- Every fixed-family mantissa lies strictly above the lower-branch threshold and at most one. -/
+theorem lowerFixedMantissa_normalized
+    {depth : ℕ} (depth_lower : 7 ≤ depth) :
+    9 / 10 < lowerFixedMantissa depth ∧ lowerFixedMantissa depth ≤ 1 := by
+  have denominator_ne := lowerFixed_denominator_ne depth_lower
+  have numerator_le := lowerFixedNumerator_le_denominator depth_lower
+  have centered := lowerFixed_centeredNumerator depth_lower
+  have centered_positive : 0 < lowerCenteredNumerator
+      (lowerFixedNumerator depth) (lowerFixedDenominator depth) := by
+    rw [centered]
+    positivity
+  have lower_nat : 9 * lowerFixedDenominator depth < 10 * lowerFixedNumerator depth := by
+    simpa only [lowerCenteredNumerator, Nat.sub_pos_iff_lt] using centered_positive
+  have denominator_positive : (0 : ℚ) < lowerFixedDenominator depth := by
+    exact_mod_cast Nat.zero_lt_of_ne_zero denominator_ne
+  have lower_rat :
+      (9 : ℚ) * lowerFixedDenominator depth < 10 * lowerFixedNumerator depth := by
+    exact_mod_cast lower_nat
+  constructor
+  · rw [lowerFixedMantissa, lt_div_iff₀ denominator_positive]
+    nlinarith
+  · rw [lowerFixedMantissa, div_le_one denominator_positive]
+    exact_mod_cast numerator_le
+
+/-- The fixed-family band point is its own lower predecessor. -/
+theorem realTrapBandPoint_lowerFixedMantissa_eq_lowerPredecessor
+    {depth : ℕ} (depth_lower : 7 ≤ depth) :
+    realTrapBandPoint depth (lowerFixedMantissa depth) =
+      2 * lowerFixedMantissa depth / 9 := by
+  have normalized := lowerNormalizedMantissa_fixed depth_lower
+  have predecessor := realTrapBandPoint_lowerNormalizedMantissa
+    (a := lowerFixedNumerator depth) (b := lowerFixedDenominator depth)
+    (depth := depth) (by omega) (lowerFixed_denominator_ne depth_lower) (by
+      have centered := lowerFixed_centeredNumerator depth_lower
+      have centered_positive : 0 < lowerCenteredNumerator
+          (lowerFixedNumerator depth) (lowerFixedDenominator depth) := by
+        rw [centered]
+        positivity
+      exact (Nat.sub_pos_iff_lt.mp
+        (by simpa only [lowerCenteredNumerator] using centered_positive)).le)
+  rw [normalized] at predecessor
+  exact predecessor
+
+/-- Every depth at least seven carries a rational lower-branch fixed point. -/
+theorem shellStep_lowerFixedPoint
+    {depth : ℕ} (depth_lower : 7 ≤ depth) :
+    shellStep (depth - 2) (realTrapBandPoint depth (lowerFixedMantissa depth)) =
+      realTrapBandPoint depth (lowerFixedMantissa depth) := by
+  have state_eq := realTrapBandPoint_lowerFixedMantissa_eq_lowerPredecessor depth_lower
+  calc
+    shellStep (depth - 2) (realTrapBandPoint depth (lowerFixedMantissa depth)) =
+        shellStep (depth - 2) (2 * lowerFixedMantissa depth / 9) := by rw [state_eq]
+    _ = realTrapBandPoint ((depth - 2) + 2) (lowerFixedMantissa depth) :=
+      shellStep_lowerPredecessor (depth - 2) (lowerFixedMantissa depth)
+    _ = realTrapBandPoint depth (lowerFixedMantissa depth) := by
+      rw [Nat.sub_add_cancel (by omega : 2 ≤ depth)]
+
+private theorem lowerFixedMantissa_fiveUnit
+    {depth : ℕ} (depth_lower : 7 ≤ depth) :
+    IsUnit 5 (lowerFixedMantissa depth) := by
+  have numerator_unit : IsUnit 5 (lowerFixedNumerator depth : ℚ) := by
+    rw [lowerFixedNumerator, Nat.cast_pow]
+    have three_unit : IsUnit 5 (3 : ℚ) := intCast_isUnit_of_not_dvd (by norm_num)
+    have three_value : padicValRat 5 ((3 : ℕ) : ℚ) = 0 := by
+      simpa using three_unit.2
+    refine ⟨pow_ne_zero _ three_unit.1, ?_⟩
+    rw [padicValRat.pow, three_value]
+    simp
+  have denominator_not_dvd_nat : ¬5 ∣ lowerFixedDenominator depth :=
+    Nat.prime_five.coprime_iff_not_dvd.mp
+      (lowerFixed_five_coprime_denominator depth_lower)
+  have denominator_not_dvd_int :
+      ¬(5 : ℤ) ∣ (lowerFixedDenominator depth : ℤ) := by
+    exact_mod_cast denominator_not_dvd_nat
+  have denominator_unit : IsUnit 5 (lowerFixedDenominator depth : ℚ) := by
+    simpa using intCast_isUnit_of_not_dvd (prime := 5) denominator_not_dvd_int
+  exact div_hasValue numerator_unit denominator_unit
+
+/-- Every lower-branch fixed state is a five-adic unit. -/
+theorem lowerFixedPoint_fiveUnit
+    {depth : ℕ} (depth_lower : 7 ≤ depth) :
+    IsUnit 5 (realTrapBandPoint depth (lowerFixedMantissa depth)) := by
+  have two_unit : IsUnit 5 (2 : ℚ) := intCast_isUnit_of_not_dvd (by norm_num)
+  have nine_unit : IsUnit 5 (9 : ℚ) := intCast_isUnit_of_not_dvd (by norm_num)
+  rw [realTrapBandPoint_lowerFixedMantissa_eq_lowerPredecessor depth_lower]
+  exact div_hasValue
+    (mul_hasValue two_unit (lowerFixedMantissa_fiveUnit depth_lower)) nine_unit
+
+/-- Every repetition of the lower wait fixes its displayed state. -/
+theorem shellRun_replicate_lowerFixedPoint
+    {depth : ℕ} (depth_lower : 7 ≤ depth) (repetitions : ℕ) :
+    shellRun (List.replicate repetitions (depth - 2))
+        (realTrapBandPoint depth (lowerFixedMantissa depth)) =
+      realTrapBandPoint depth (lowerFixedMantissa depth) := by
+  induction repetitions with
+  | zero => rfl
+  | succ repetitions induction =>
+      rw [List.replicate_succ, shellRun_cons,
+        shellStep_lowerFixedPoint depth_lower, induction]
+
+/-- Every phase of every repeated lower fixed-point schedule is accepted. -/
+theorem shellRun_replicate_lowerFixedPoint_guarded
+    {depth : ℕ} (depth_lower : 7 ≤ depth) (repetitions : ℕ) :
+    ∀ front back,
+      List.replicate repetitions (depth - 2) = front ++ back →
+        IsUnit 5
+          (shellRun front (realTrapBandPoint depth (lowerFixedMantissa depth))) := by
+  apply (shellPrefixesUnit_iff (List.replicate repetitions (depth - 2))
+    (realTrapBandPoint depth (lowerFixedMantissa depth))).2
+  rw [shellRun_replicate_lowerFixedPoint depth_lower repetitions]
+  exact lowerFixedPoint_fiveUnit depth_lower
 
 end MatrixMortality.MixedPrimeDebt

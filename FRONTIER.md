@@ -3402,9 +3402,15 @@ above `μ=9/10`, `2μ/9`. Only the last branch resets to unbounded depth. For re
 `gcd(N,b)=gcd(2,b)`. The odd-denominator and four-divisible-denominator updates are rigid. Every
 remaining cancellation lies on the single wall `b=2c`, where
 `v₂(ν)=v₂(5a−9c)−(n−1)` at predecessor depth `n`; the three-adic update is exact as well. This
-is [`D2-S09`](SALVAGE.md#d2-s09-centered-lower-mantissa-recurrence). The next live arithmetic
-question is whether repeated visits to that centered wall force height descent or support an
-exact high-cancellation orbit.
+is [`D2-S09`](SALVAGE.md#d2-s09-centered-lower-mantissa-recurrence). Exact high-cancellation
+orbits exist. For every `d≥7`, the reduced mantissa
+`μ_d=3^(d−1)/(10·3^(d−3)−2^(d−1))` lies above `9/10`, has denominator two-adic value one,
+and gives a guarded fixed state `T_(d−2)(U(d,μ_d))=U(d,μ_d)`. Its centered residual has
+two-adic value `d−2`; arbitrary repetitions remain accepted. Global height, odd-part, and
+centered-valuation descent are therefore dead. This identifies the abstract singleton cycles of
+`D2-O02` exactly on the `D2-S09` secondary wall. The live arithmetic question is whether the
+explicit fixed components can be quotiented while nonperiodic secondary-wall transitions admit
+a finite target-dependent classifier.
 The deepest of those three branches is itself a full depth reset. In normalized band coordinates
 `U(d,μ)=1/5+(3/10)(2/3)^dμ`, every target band `d≥2` contains a point whose `d−2` predecessor has
 any prescribed band `n≥7` and mantissa in `(2/3,1]`. An explicit guarded subfamily fixes target
