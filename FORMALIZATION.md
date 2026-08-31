@@ -1971,6 +1971,7 @@ fixed-rank decision problem.
 | `TransverseHistory.lean` | injective mixed-radix transverse orbit, exact minimum-body zero language, and uniform terminal-row obstruction |
 | `TransverseLineAtlas.lean` | six-carrier normal form for singular data with a projectively involutive toggle and terminal-section dimension bound |
 | `TransverseLineHardCore.lean` | exact one-plane embedding of two-generator projective incidence into the identity-toggle transverse atlas |
+| `TransverseInfiniteAtlas.lean` | exact rank-two data family with an injectively infinite carrier-plane orbit under a nonprojective diagonal toggle |
 | `BranchingHistory.lean` | fixed `bcbc` terminal forks and affine positional lower bounds |
 | `AffineRecognizer.lean` | generic singular three-state guard-and-carry representation calculus |
 | `BranchingRecognizer.lean` | complete `bcbc` residual grammar and rational three-state recognizer |
@@ -2256,6 +2257,10 @@ fixed-rank decision problem.
 | Invertible two-state generators lift to exact rank-two data maps and the identity toggle is involutive | `TransverseLineHardCore.liftMatrix_rank_eq_two`, `TransverseLineHardCore.data_rank_eq_two`, `TransverseLineHardCore.toggle_involutive` |
 | Toggle erasure preserves the complete raw-word scalar coefficient in multiplication order | `TransverseLineHardCore.eraseToggles_dataWord`, `TransverseLineHardCore.wordProduct_mulVec_liftColumn`, `TransverseLineHardCore.linearCoefficient_eq` |
 | Zero existence in the one-chart transverse subfamily is exactly two-generator rational incidence | `TransverseLineHardCore.coefficient_zero_iff`, `TransverseLineHardCore.exists_zero_iff` |
+| The diagonal toggle has powers `diag(1,2ⁿ,3ⁿ)`, determinant six, and non-scalar square | `TransverseInfiniteAtlas.toggle_pow`, `TransverseInfiniteAtlas.toggle_det`, `TransverseInfiniteAtlas.toggle_sq_ne_smul_one` |
+| Every source-parameter data map and every toggled carrier matrix has rank exactly two | `TransverseInfiniteAtlas.data_rank_eq_two`, `TransverseInfiniteAtlas.data_det`, `TransverseInfiniteAtlas.carrierMatrix_rank_eq_two` |
+| The displayed plane normal annihilates each carrier, while an earlier witness survives every later normal | `TransverseInfiniteAtlas.normal_dotProduct_carrierMatrix_mulVec`, `TransverseInfiniteAtlas.normal_dotProduct_witness_ne_zero` |
+| Literal raw prefixes `tⁿb` realize an injectively infinite family of carrier planes | `TransverseInfiniteAtlas.wordProduct_carrierWord`, `TransverseInfiniteAtlas.carrier_ne_of_lt`, `TransverseInfiniteAtlas.carrier_injective` |
 | The `bcbb` null histories and complete terminal language are one exact periodic ray | `PeriodicHistory.bcbbNull_iff`, `PeriodicHistory.bcbb_terminal_match_iff` |
 | The singular positional decoder obeys its all-control affine state equation | `PeriodicHistory.periodicProduct_mulVec_column`, `PeriodicHistory.periodicCoefficient_eq` |
 | The `bcbb` affine section has no false zero and matches the paired zero language | `PeriodicHistory.bcbbAffine_zero_iff`, `PeriodicHistory.bcbb_periodicCoefficient_zero_iff_paired_zero` |
@@ -2547,6 +2552,15 @@ one-chart subfamily is instancewise equivalent to arbitrary two-generator ration
 incidence. Combined with the separately audited `D2-S01` reduction, this makes the full atlas at
 least `M₂(3)`-hard; the Lean theorem itself does not formalize that separate mortality
 equivalence or reduce arbitrary multi-chart atlases to one chart.
+
+For `G3-O30`, Lean fixes the rational diagonal toggle `T=diag(1,2,3)` and a rank-two data family
+`D_s` whose image has normal `(1,1,s)`. It proves `Tⁿ=diag(1,2ⁿ,3ⁿ)`, `det T=6`, and
+`T²≠qI` for every rational scalar `q`. Every `D_s` and `TⁿD_s` has rank exactly two. The literal
+raw word with `n` leading toggles followed by one data control has product `TⁿD_s`. Its image is
+annihilated by `(6ⁿ,3ⁿ,s·2ⁿ)` and contains `(1,−2ⁿ,0)`. For `n<m`, the later normal evaluates
+that earlier vector as `3^m(2^m−2^n)`, which is nonzero. Lean therefore proves injectivity of
+`n↦im(TⁿD_s)` uniformly in `s`. This is an infinite-carrier counterexample to extending G3-O27
+beyond projective involution, not a terminal-row construction or paired same-zero theorem.
 
 For `G3-O20`, Lean proves the free-monoid tail law: if one fixed-boundary equation with stationary
 left and right pump blocks holds at exponents `N` and `N+1`, it holds at every exponent `N+k`.
