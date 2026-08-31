@@ -238,6 +238,7 @@ file owns the mathematical stock.
 | [`M4-S20`](#m4-s20-phase-zero-triple-c-parity-cylinder) | obstruction | odd body length and odd `b` count exclude the `0|2|1` `c|c|c` family for all waits | formalized | active |
 | [`M4-S21`](#m4-s21-phase-zero-right-c-parity-rectangle) | obstruction | a `0|2|1` `b|b|c` zero requires both even body length and even `b` count; fixed 2-power congruences cannot remove the residue | formalized | active |
 | [`M4-S22`](#m4-s22-phase-zero-right-c-all-c-ray-exclusion) | obstruction | no nonempty all-`c` body closes the `0|2|1` `b|b|c` bridge, for any waits | formalized | active |
+| [`M4-S23`](#m4-s23-phase-zero-right-c-bb-body-exclusion) | obstruction | the shortest remaining body `bb` makes the `0|2|1` `b|b|c` core uniformly `8` modulo `16` | formalized | active |
 | [`M4-C03`](#m4-c03-zero-framed-binary-two-lag-compiler) | compiler | the principal scanner is literally binary context-2 Lag and compiles to `M₄(3)` | formalized | graduated |
 | [`M4-D01`](#m4-d01-zero-framed-binary-two-lag-decision) | decidable stratum | the entire zero-framed binary context-2 Lag kernel has an exact syntactic classification | formalized | graduated |
 | [`M4-D02`](#m4-d02-zero-framed-reset-scanner-decision) | decidable stratum | zero-run reduction contracts the reset scanner to a regular two-token quotient | audited | graduated |
@@ -10348,6 +10349,47 @@ body residue through the complement coordinate `D=S−C−1` and its sharp tag-c
 [`MatrixMortality/ParabolicDefectCylinder.lean`](MatrixMortality/ParabolicDefectCylinder.lean)
 and
 [`audits/m43-phase-zero-right-c-all-c-ray-2026-08-31.md`](audits/m43-phase-zero-right-c-all-c-ray-2026-08-31.md).
+
+### M4-S23: Phase-zero right-c bb-body exclusion
+
+**Kind:** obstruction
+
+**Evidence:** formalized
+
+**Disposition:** active
+
+After `M4-S22` removes `cc`, the shortest body in the even-length, even-`b` rectangle is `bb`.
+Its exact tag coordinates are
+
+```text
+S = 3^10 = 59049,
+C = 49532.
+```
+
+At these coordinates, Lean checks an integral polynomial `Q` such that
+
+```text
+H(59049,49532,x,y,z) = 16Q(x,y,z)+8.
+```
+
+The core, and hence the determinant, is nonzero for every natural wait triple. This is a
+complete elimination of the body `bb`, not a bounded search.
+
+**Scope:** deletion width three, exactly three atoms, orientation `0|2|1`, letters `b|b|c`,
+and exactly the body `bb`. Longer all-`b` bodies, mixed even/even bodies, other shortest
+families, longer defect runs, and nontrivial safe contexts remain open.
+
+**Use:** neither length-two body survives the `M4-S21` rectangle: `cc` falls to `M4-S22`, and
+`bb` falls here. Any remaining body in this family has length at least four; it either contains
+both letters or lies farther along the even all-`b` ray.
+
+**Next:** lift the mod-16 identity along the `b`-append recurrence, and isolate the first
+2-adically saturated all-`b` exponent before returning to the mixed complement coordinate.
+
+**Artifact:**
+[`MatrixMortality/ParabolicDefectCylinder.lean`](MatrixMortality/ParabolicDefectCylinder.lean)
+and
+[`audits/m43-phase-zero-right-c-bb-body-2026-08-31.md`](audits/m43-phase-zero-right-c-bb-body-2026-08-31.md).
 
 ### M4-C03: Zero-framed binary two-Lag compiler
 

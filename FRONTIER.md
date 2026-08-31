@@ -589,6 +589,12 @@ nonempty all-`c` ray is dead. Inside the even/even rectangle this removes every 
 `bb` is now its shortest surviving body. The next split is the all-`b` ray versus genuinely
 mixed bodies, using `D=S−C−1` as the complement coordinate.
 
+The new shortest residue is also dead
+[`M4-S23`](SALVAGE.md#m4-s23-phase-zero-right-c-bb-body-exclusion). The body `bb` has exact
+coordinates `(S,C)=(59049,49532)`, where the `b|b|c` core is uniformly `8` modulo `16` for all
+waits. Thus no length-two body remains in the even/even rectangle. Any live body there has
+length at least four; it is either farther along the even all-`b` ray or contains both letters.
+
 Two original-family nodes survive, and they must not be conflated.
 
 1. **Exterior collision avoidance.** Use `M4-S06`--`M4-S15` to classify the transported kernel
