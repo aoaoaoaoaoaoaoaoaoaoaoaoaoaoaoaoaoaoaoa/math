@@ -1,5 +1,5 @@
 import MatrixMortality.DecimalSetterCarry
-import MatrixMortality.Undecidability.NearyCompiler
+import MatrixMortality.Undecidability.NearyExecution
 import Mathlib.Tactic
 
 /-!
@@ -844,6 +844,42 @@ theorem compiler_body_head_b {period : Nat} (system : CyclicTag period) (input :
   rw [NearyCompiler.wholeAppendant_eq_body_append,
     List.head?_append_of_ne_nil _ body_ne] at whole_head
   exact whole_head
+
+/-- The truncated compiler body also ends in `b`; its final position is the penultimate, hence
+even, position of the woven appendant. -/
+theorem compiler_body_getLast?_b {period : Nat} (system : CyclicTag period) (input : List Bool)
+    (haltPhase : Fin period) (period_pos : 0 < period) :
+    (NearyCompiler.body system input haltPhase period_pos).getLast? = some .b := by
+  let body := NearyCompiler.body system input haltPhase period_pos
+  let whole := NearyCompiler.wholeAppendant system input haltPhase period_pos
+  have body_ne : body ≠ [] := by
+    intro body_empty
+    have lengths := congrArg List.length body_empty
+    rw [NearyCompiler.body_length] at lengths
+    have beta_large := NearyCompiler.deletionWidth_large period_pos
+    simp [NearyCompiler.deletionWidth] at lengths
+    omega
+  have whole_eq : whole = body ++ [.b] :=
+    NearyCompiler.wholeAppendant_eq_body_append system input haltPhase period_pos
+  have whole_even : 2 ∣ whole.length := by
+    exact dvd_trans (by norm_num)
+      (NearyCompiler.wholeAppendant_aligned system input haltPhase period_pos)
+  have body_length : body.length + 1 = whole.length := by
+    rw [whole_eq]
+    simp
+  have index_lt_body : body.length - 1 < body.length := by omega
+  have index_even : (body.length - 1) % 2 = 0 := by
+    have whole_mod : whole.length % 2 = 0 := Nat.dvd_iff_mod_eq_zero.mp whole_even
+    omega
+  have index_lt_whole : body.length - 1 < whole.length := by omega
+  have whole_at_last : whole[body.length - 1] = .b := by
+    apply NearyCompiler.wholeAppendant_get_of_even_index system input haltPhase period_pos
+      (body.length - 1) index_lt_whole index_even
+  have body_at_last : body[body.length - 1] = .b := by
+    simpa only [whole_eq, List.getElem_append_left index_lt_body] using whole_at_last
+  rw [List.getLast?_eq_getLast_of_ne_nil body_ne]
+  apply congrArg some
+  simpa [List.getLast_eq_getElem] using body_at_last
 
 theorem compiler_ruleDeletionLowerWord_shape {period : Nat}
     (system : CyclicTag period) (input : List Bool) (haltPhase : Fin period)
