@@ -3,7 +3,7 @@ import MatrixMortality.ParabolicRetunedObstruction
 /-!
 # Three-phase binary factorization obstruction
 
-The four Neary role pairs admit an exact positional factorization through three binary phases.
+The four Neary role pairs have an exact positional factorization through three binary phases.
 The other four vertices of the resulting binary cube are malformed roles.  On the admissible
 nonhalting instance `(β, body) = (3, bbcc)`, six cube vertices satisfy the terminal equation.
 The factorization therefore cannot supply the arbitrary-word converse for the direct cyclic
