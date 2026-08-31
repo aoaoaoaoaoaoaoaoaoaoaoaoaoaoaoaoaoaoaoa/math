@@ -220,6 +220,7 @@ file owns the mathematical stock.
 | [`G3-S01`](#g3-s01-shift-equivariant-zero-incidence) | structure theorem | same-zero state dimension is equivariant projective incidence dimension | audited | active |
 | [`G3-S02`](#g3-s02-rank-two-kernel-bifurcation) | structure theorem | common kernels erase route differences; transverse fibres retain one bilinear survivor | formalized | active |
 | [`G3-S04`](#g3-s04-symmetric-square-collision-and-fork-obstruction) | structure theorem and obstruction | symmetric square turns projective collision into a gapped scalar zero, while a two-plane Veronese carrier contains at most two projective rays | formalized | graduated |
+| [`G3-S05`](#g3-s05-fixed-full-rank-symmetric-square-leakage-no-go) | obstruction | every fixed leakage which collapses three distinct Sym² rays into a plane is singular, even between nonsingular binary coordinate changes | formalized | graduated |
 | [`G3-O18`](#g3-o18-transverse-minimum-body-countermodel) | fixed-subclass compiler | distinct rank-two kernels encode every paired history and exactly recognize all minimum bodies | formalized | graduated |
 | [`G3-O02`](#g3-o02-rational-phase-fracture) | obstruction | a mortal paired instance has no rational phase-state same-zero compression | audited | stock |
 | [`G3-O03`](#g3-o03-history-sensitive-minimal-body-fracture) | obstruction | minimal bodies admit an exact history-sensitive three-state same-zero compiler | formalized | graduated |
@@ -9219,7 +9220,8 @@ elementary dynamics remain.
 exclude the zero pair when interpreting it as equality in `P¹`. The representation uses all
 three states. Squaring canonicalizes and gaps one incidence test, but supplies neither syntax
 guard space, a positive-monoid compiler, nor a sign or chamber telling an inverse search which
-branch is lawful. A fixed leakage insertion around Sym² remains a separate construction problem.
+branch is lawful. `G3-S05` further forces any fixed leakage insertion which reaches a planar
+complete-fork carrier to be singular.
 
 **Use:** replace ad hoc quadratic collision formulas by the checked monoid representation and
 tangent row. Reject a direct irreducible Sym² realization of a complete fork whose exact
@@ -9228,6 +9230,46 @@ nonnegativity of the square.
 
 **Artifact:** [`SymmetricSquareCollision.lean`](MatrixMortality/SymmetricSquareCollision.lean) and
 [`m34-symmetric-square-collision-2026-08-31.md`](audits/m34-symmetric-square-collision-2026-08-31.md).
+
+### G3-S05: Fixed full-rank symmetric-square leakage no-go
+
+**Kind:** obstruction
+
+**Evidence:** formalized
+
+**Disposition:** graduated
+
+Let `P,Q` be binary coordinate changes, let `L` be an arbitrary fixed `3×3` leakage matrix, and
+put the three Veronese rays `ν(u),ν(v),ν(w)` into columns. Lean proves the exact determinant
+transport
+
+```text
+det(Sym²(P)L Sym²(Q)[ν(u) ν(v) ν(w)])
+  = det(P)³ det(L) det(Q)³ Δ(u,v)Δ(u,w)Δ(v,w).
+```
+
+Consequently, if `P` and `Q` are nonsingular and the three binary rays are pairwise distinct,
+the transported columns are independent whenever `L` is nonsingular. Contrapositively, if those
+three outputs lie in one plane, then `det(L)=0`.
+
+This is the precise seam needed by `G3-S03`. That carrier theorem supplies planar dependence for
+three accepted complete-fork states. If a proposed fixed Sym² realization exposes three distinct
+underlying projective rays and surrounds one word-independent leakage by nonsingular binary
+coordinate changes, the leakage must spend rank. A full-rank insertion cannot turn the
+irreducible Sym² orbit into the required terminal carrier.
+
+**Scope:** the theorem assumes one fixed leakage matrix and three witnessed pairwise-distinct
+rays. It does not exclude a singular leakage, leakage depending on the word or source instance,
+or a construction whose accepted binary orbit has at most two rays. It does not prove that every
+singular leakage is elementary, police malformed raw controls, or produce a mortality converse.
+
+**Use:** reject every claim that an invertible change of three-state basis or other full-rank
+fixed insertion reconciles irreducible Sym² dynamics with the complete-fork carrier. The surviving
+construction must identify the exact rank loss and explain how the lost direction is later
+recovered without a fourth state.
+
+**Artifact:** [`SymmetricSquareCollision.lean`](MatrixMortality/SymmetricSquareCollision.lean) and
+[`m34-symmetric-square-leakage-no-go-2026-08-31.md`](audits/m34-symmetric-square-leakage-no-go-2026-08-31.md).
 
 ### G3-O18: Transverse minimum-body countermodel
 

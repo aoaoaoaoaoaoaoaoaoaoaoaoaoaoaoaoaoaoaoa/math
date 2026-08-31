@@ -994,6 +994,14 @@ formalized carrier bound `G3-S03`, this excludes a direct non-elementary Sym² r
 complete `bcbc` fork. No declaration claims a syntax guard, directional pruning, positive
 compiler, or minimality among arbitrary collision detectors.
 
+[`G3-S05`](SALVAGE.md#g3-s05-fixed-full-rank-symmetric-square-leakage-no-go) is checked in the
+same module. `leakedVeroneseColumns_det` gives the determinant of an arbitrary fixed three-state
+leakage between two binary Sym² coordinate changes over a commutative ring. Its domain-valued
+nonzero and contrapositive forms prove
+that three pairwise distinct rays can land in a planar carrier only when the leakage determinant
+vanishes. The G3-S03 application is conditional on exactly its carrier and three-distinct-ray
+hypotheses; no theorem excludes singular, word-dependent, or source-dependent leakage.
+
 The semantic core of [`G3-O04`](SALVAGE.md#g3-o04-expanding-affine-history-no-go) is formalized:
 the reset-affine orbit, finite reverse box, exact caged DFA, regularity, and universal
 noncomputability contradiction are kernel-checked. The remaining mechanization seam is uniform
@@ -1771,7 +1779,7 @@ fixed-rank decision problem.
 | `ReturnJordan.lean` | parity-Jordan rail rigidity and modular immortality certificate |
 | `ReturnConvert.lean` | minimal two-scale return pencil and nonresonant multi-return zero |
 | `ProjectiveLine.lean` | total affine-chart presentation of `ℙ¹` and exact unit-word ray action |
-| `SymmetricSquareCollision.lean` | covariant Sym² representation, gapped tangent collision test, full-rank cost, and the two-ray Veronese-plane obstruction |
+| `SymmetricSquareCollision.lean` | covariant Sym² representation, gapped tangent collision test, full-rank cost, two-ray Veronese-plane obstruction, and fixed full-rank leakage no-go |
 | `CongruenceBlindOrbit.lean` | free rational shear orbit, trivial source stabilizer, projective all-modulus CRT closure, and a whole-matrix congruence ghost away from nineteen |
 | `ShearEuclidean.lean` | Euclidean chamber growth, determinant-one coprimality, and finite projective syntax bounds for the fixed step-three shear orbit |
 | `TransverseDilationOrbit.lean` | free diagonal--parabolic ping-pong, bounded stabilizer recurrence, and a promised-empty trivial-stabilizer false inverse ray of proper height |
