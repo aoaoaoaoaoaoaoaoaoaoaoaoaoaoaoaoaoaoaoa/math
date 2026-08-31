@@ -54,6 +54,13 @@ def veroneseColumns {R : Type*} [CommRing R]
     (first second third : Pair R) : Square (Fin 3) R :=
   fun row column => ![veronese first, veronese second, veronese third] column row
 
+/-- A fixed three-state leakage between binary changes of projective coordinates. -/
+def leakedVeroneseColumns {R : Type*} [CommRing R]
+    (post : Square (Fin 2) R) (leakage : Square (Fin 3) R)
+    (pre : Square (Fin 2) R) (first second third : Pair R) : Square (Fin 3) R :=
+  symmetricSquare post * leakage * symmetricSquare pre *
+    veroneseColumns first second third
+
 /-- The symmetric-square matrix sends each Veronese vector to the Veronese vector of its image. -/
 theorem symmetricSquare_mulVec_veronese {R : Type*} [CommRing R]
     (matrix : Square (Fin 2) R) (vector : Pair R) :
@@ -176,16 +183,66 @@ theorem one_le_tangentValue_int_of_crossDet_ne_zero (left right : Pair ℤ)
   exact Int.one_le_abs cross_ne_zero
 
 /-- Three Veronese columns have the Vandermonde determinant given by pairwise cross determinants. -/
-theorem veroneseColumns_det (first second third : Pair ℤ) :
+theorem veroneseColumns_det {R : Type*} [CommRing R] (first second third : Pair R) :
     (veroneseColumns first second third).det =
       crossDet first second * crossDet first third * crossDet second third := by
   rw [Matrix.det_fin_three]
   simp [veroneseColumns, veronese, crossDet]
   ring
 
+/-- Fixed leakage and binary coordinate changes multiply the three-ray determinant character. -/
+theorem leakedVeroneseColumns_det
+    {R : Type*} [CommRing R]
+    (post : Square (Fin 2) R) (leakage : Square (Fin 3) R)
+    (pre : Square (Fin 2) R) (first second third : Pair R) :
+    (leakedVeroneseColumns post leakage pre first second third).det =
+      post.det ^ 3 * leakage.det * pre.det ^ 3 *
+        crossDet first second * crossDet first third * crossDet second third := by
+  rw [leakedVeroneseColumns, Matrix.det_mul, Matrix.det_mul, Matrix.det_mul,
+    symmetricSquare_det, symmetricSquare_det, veroneseColumns_det]
+  ring
+
+/-- Full-rank fixed leakage cannot collapse three pairwise distinct rays into a plane. -/
+theorem leakedVeroneseColumns_det_ne_zero
+    {R : Type*} [CommRing R] [IsDomain R]
+    {post : Square (Fin 2) R} {leakage : Square (Fin 3) R}
+    {pre : Square (Fin 2) R} {first second third : Pair R}
+    (post_ne_zero : post.det ≠ 0) (leakage_ne_zero : leakage.det ≠ 0)
+    (pre_ne_zero : pre.det ≠ 0)
+    (first_second_distinct : crossDet first second ≠ 0)
+    (first_third_distinct : crossDet first third ≠ 0)
+    (second_third_distinct : crossDet second third ≠ 0) :
+    (leakedVeroneseColumns post leakage pre first second third).det ≠ 0 := by
+  rw [leakedVeroneseColumns_det]
+  exact mul_ne_zero
+    (mul_ne_zero
+      (mul_ne_zero
+        (mul_ne_zero
+          (mul_ne_zero (pow_ne_zero 3 post_ne_zero) leakage_ne_zero)
+            (pow_ne_zero 3 pre_ne_zero))
+          first_second_distinct)
+        first_third_distinct)
+      second_third_distinct
+
+/-- If a fixed leakage sends three distinct rays into a plane, that leakage is singular. -/
+theorem leakage_det_eq_zero_of_three_distinct_carrier
+    {R : Type*} [CommRing R] [IsDomain R]
+    {post : Square (Fin 2) R} {leakage : Square (Fin 3) R}
+    {pre : Square (Fin 2) R} {first second third : Pair R}
+    (post_ne_zero : post.det ≠ 0) (pre_ne_zero : pre.det ≠ 0)
+    (first_second_distinct : crossDet first second ≠ 0)
+    (first_third_distinct : crossDet first third ≠ 0)
+    (second_third_distinct : crossDet second third ≠ 0)
+    (carrier_singular :
+      (leakedVeroneseColumns post leakage pre first second third).det = 0) :
+    leakage.det = 0 := by
+  by_contra leakage_ne_zero
+  exact leakedVeroneseColumns_det_ne_zero post_ne_zero leakage_ne_zero pre_ne_zero
+    first_second_distinct first_third_distinct second_third_distinct carrier_singular
+
 /-- Three singular Veronese columns contain a projectively colliding pair. -/
 theorem exists_pairwise_crossDet_eq_zero_of_veroneseColumns_det_eq_zero
-    (first second third : Pair ℤ)
+    {R : Type*} [CommRing R] [IsDomain R] (first second third : Pair R)
     (singular : (veroneseColumns first second third).det = 0) :
     crossDet first second = 0 ∨ crossDet first third = 0 ∨ crossDet second third = 0 := by
   rw [veroneseColumns_det, mul_eq_zero, mul_eq_zero] at singular
@@ -196,7 +253,7 @@ theorem exists_pairwise_crossDet_eq_zero_of_veroneseColumns_det_eq_zero
 
 /-- Once two rays are distinct, any third ray in their singular Veronese carrier repeats one. -/
 theorem crossDet_first_third_eq_zero_or_second_third_eq_zero_of_det_eq_zero
-    (first second third : Pair ℤ)
+    {R : Type*} [CommRing R] [IsDomain R] (first second third : Pair R)
     (first_second_distinct : crossDet first second ≠ 0)
     (singular : (veroneseColumns first second third).det = 0) :
     crossDet first third = 0 ∨ crossDet second third = 0 := by
