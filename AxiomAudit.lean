@@ -1049,6 +1049,7 @@ open MatrixMortality
 #print axioms ReturnGuard.sub_one_pow_totient_le_exponent_mul_primitiveCyclotomicPart
 #print axioms ReturnSquare.physical_isMortal_primePower_iff
 #print axioms ReturnSquare.rational_root_num_den_dvd_scale_product
+#print axioms ReturnSquare.arbitraryScales_seven_eighths_zero
 #print axioms ReturnSquare.normalizedWord_zero_positive_valuation_eq_tail
 #print axioms ReturnSquare.positiveBridge_zero_num_den_dvd_base
 #print axioms ReturnSquare.positiveBridge_zero_fraction_prime_dvd_base

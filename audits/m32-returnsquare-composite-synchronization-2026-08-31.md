@@ -68,12 +68,14 @@ vₚ(d)vₗ(q) = vₗ(d)vₚ(q).                                  (4)
 | every fraction prime divides the base | promotion | Lean checked |
 | a positive valuation is an arbitrary multiple of the base valuation | replaced | sharpened to the exact common proper-tail exponent (3) |
 | positive valuations at different base primes may choose different depths | rejected | contradicted by (4) |
+| arbitrary scale lists obey the same rigidity | rejected | Lean checks the nonresonant root `d=7/8` at scales `(2,4,2,14)` |
 | negative valuations obey the same common exponent | open | the forward unit-state induction does not control denominator crossings |
 | arbitrary-composite ReturnSquare is classified | open | no theorem excludes unequal denominator depths and no exact counterexample is known |
 
 Exact searches found no nonresonant rational root for composite bases through the tested finite
-radii, but no computational completeness claim is retained. Arbitrary scale chains cannot replace
-the geometric hypothesis: scales `(2,4,2,14)` have the exact nonresonant root `d=7/8`.
+radii, but no computational completeness claim is retained. Lean separately checks that arbitrary
+scale lists cannot replace the geometric hypothesis: `(2,4,2,14)` has the exact nonresonant root
+`d=7/8`.
 
 ## Wound
 

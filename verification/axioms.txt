@@ -1980,6 +1980,9 @@
 'MatrixMortality.ReturnSquare.rational_root_num_den_dvd_scale_product' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.ReturnSquare.arbitraryScales_seven_eighths_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.ReturnSquare.normalizedWord_zero_positive_valuation_eq_tail' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]

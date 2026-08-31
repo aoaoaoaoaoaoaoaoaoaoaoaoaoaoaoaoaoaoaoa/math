@@ -42,6 +42,15 @@ theorem rational_root_num_den_dvd_scale_product
       one_pow, one_mul, Int.natAbs_pow]
   rwa [absolute_value] at absolute
 
+/-- Geometric powers are essential to the composite-base obstruction. The arbitrary scale word
+`[2,4,2,14]` has the nonresonant normalized root `d=7/8`. -/
+theorem arbitraryScales_seven_eighths_zero :
+    (wordProduct (normalizedTransfer (7 / 8 : ℚ)) [2, 4, 2, 14]) 0 0 = 0 ∧
+      ∀ t ∈ ([2, 4, 2, 14] : List ℚ), (7 / 8 : ℚ) ≠ t⁻¹ := by
+  constructor
+  · norm_num [wordProduct, normalizedTransfer_eq, Matrix.mul_apply, Fin.sum_univ_succ]
+  · norm_num [List.mem_cons]
+
 private theorem normalizedWord_cons_entry_zero
     {α : Type*} (d : ℚ) (scale : α → ℚ) (head : α) (tail : List α) :
     (wordProduct (fun letter => normalizedTransfer d (scale letter)) (head :: tail)) 0 0 =
