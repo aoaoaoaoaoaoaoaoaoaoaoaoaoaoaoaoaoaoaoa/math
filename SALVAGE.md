@@ -264,6 +264,7 @@ file owns the mathematical stock.
 | [`D2-O02`](#d2-o02-critical-shell-periodic-saturation) | obstruction and rewrite seed | every nonempty finite wait schedule has a rational all-unit cycle; normalized nonfreeness persists under every generator scaling, while its odd family is a two-seed cancellative pump and the positive finite basis is complete only through length 30 | formalized core; audited strengthening | active |
 | [`D2-O03`](#d2-o03-fixed-source-adjacent-saturation) | obstruction and fixed-source family | the source `43/24` supports infinitely many accepted chamber-contained adjacent collisions on the complementary target pole; the targets are distinct and membership in their ray is decidable | formalized | active |
 | [`D2-O04`](#d2-o04-forced-exit-surface) | obstruction and decidable continuation cone | every next block leaves the accepted `43/24` collision ray at valuation minus one; target valuation fixes every post-exit length, making the whole controlled cone decidable | formalized reduction; audited decision corollary | active |
+| [`D2-O05`](#d2-o05-universal-exit-suffix-collapse) | structure theorem and decidable suffix reduction | after any critical-shell exit, a fixed target permits at most two nonempty suffix lengths; the remaining master obstruction lies before or at the exit | formalized reduction; audited decision corollary | active |
 
 ## Frankl Conjecture
 
@@ -10557,8 +10558,9 @@ T_m(u)=(1+3u(2/3)^m)/5
 
 is a `5`-adic unit. Its first guard digit forces odd `m` when `u≡2 mod 5`,
 even `m` when `u≡3 mod 5`, and forbids continuation for residues `1,4`.
-Once a path leaves the shell, it cannot return, and every fixed exit has a
-decidable suffix by [`D2-D06`](#d2-d06-private-prime-peeling).
+Once a path leaves the shell, it cannot return. [`D2-O05`](#d2-o05-universal-exit-suffix-collapse)
+sharpens private-prime peeling: every fixed target permits at most two nonempty suffix lengths
+after any exit, and [`D2-D05`](#d2-d05-prescribed-translation-count) decides both.
 
 **Scope:** the guarded maps describe every maximal shell-preserving prefix.
 They do not yet decide the infinite union of possible exits. This corrects the
@@ -11141,5 +11143,65 @@ No mortality or full `M₂(3)` decision theorem follows.
 fibre by an uncontrolled exit or post-exit tail. The entire continuation cone is reduced to one
 fixed-count regular-control query; the remaining infinite seam starts with other pre-exit states.
 
-**Next:** enlarge the decidable cone by classifying other reachable pre-exit families, or prove a
-normal-form theorem rewriting every accepting exit into finitely many such fixed-count cones.
+**Next:** [`D2-O05`](#d2-o05-universal-exit-suffix-collapse) removes arbitrary post-exit tails
+from every exit, not only this cone. Classify the reachable pre-exit states and their exit images.
+
+### D2-O05: Universal exit-suffix collapse
+
+**Kind:** structure theorem and decidable suffix reduction
+**Evidence:** formalized reduction; audited decision corollary
+**Disposition:** active
+
+Write the critical-shell transition as
+
+```text
+T_m(u)=(3(2/3)^m u+1)/5.
+```
+
+If `u` is a `5`-adic unit and `T_m(u)` leaves the unit shell, Lean proves the exhaustive
+classification
+
+```text
+T_m(u)=0  or  v₅(T_m(u))=−1  or  v₅(T_m(u))>0.
+```
+
+The negative case cannot lie below `−1`: the numerator is a sum of two units, so its valuation
+is nonnegative before division by five. A zero or positive exit reaches valuation `−1` after any
+one further block. Once negative, each later block lowers the valuation exactly once.
+
+Consequently, let a nonempty suffix `w` continue an arbitrary exit to a fixed target `y`. Lean
+proves
+
+```text
+v₅(y)=−1−|w|  or  v₅(y)=−|w|,
+```
+
+and hence
+
+```text
+|w|=max(0,−v₅(y)−1)  or  |w|=max(0,−v₅(y)).
+```
+
+These are consecutive target-derived candidates. The empty suffix is the immediate exit itself.
+For any fixed exit state and target, the audited prescribed-translation-count algorithm
+[`D2-D05`](#d2-d05-prescribed-translation-count) therefore decides the remaining suffix query
+using at most two block counts; unrestricted suffix control is regular.
+
+**Scope:** this theorem is uniform over every rational critical-shell state, exit wait, and later
+schedule. It does not enumerate the shell prefixes reachable from a fixed source, bound the exit
+wait, or decide which resulting exit state can reach the target. The benchmark still quantifies
+over an infinite family of pre-exit prefixes and exit images. No full `M₂(3)` decision theorem
+follows.
+
+**Artifact:** `MixedPrimeDebt.shellStep_fiveUnit_exit_cases`,
+`MixedPrimeDebt.shellRun_fiveUnit_exit_nonempty_tail_value_cases`, and
+`MixedPrimeDebt.shellRun_fiveUnit_exit_nonempty_tail_length_cases` in
+[`MixedPrimeExit.lean`](MatrixMortality/MixedPrimeExit.lean).
+
+**Use:** remove arbitrary post-exit scheduling from the master obstruction. A decision procedure
+need only represent the exact set of shell-preserving prefixes together with their first exit
+images; each image has a uniformly finite target-derived suffix query.
+
+**Next:** construct an effective normal form, automaton, or finite union of rational cones for the
+fixed-source pre-exit relation and its first-exit image. The remaining infinite quantifier must be
+cut before the exit, not after it.

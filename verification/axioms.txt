@@ -1388,6 +1388,15 @@
 'MatrixMortality.MixedPrimeDebt.fixedSourceAdjacentExitTarget_injective' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.MixedPrimeDebt.shellStep_fiveUnit_exit_cases' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.shellRun_fiveUnit_exit_nonempty_tail_value_cases' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.shellRun_fiveUnit_exit_nonempty_tail_length_cases' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.MixedPrimeDebt.fixedSourceAdjacentContinuationSchedule_run' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
