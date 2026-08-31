@@ -2441,8 +2441,10 @@ leaves the shell at valuation `−1`, and every later block lowers that valuatio
 two-parameter exit surface has displacement
 `75E(k,r)−15=(2/3)^r(9+11(2/3)^(10k))`; it is injective, and fixed-target membership reduces to
 two valuation-derived equality tests. Thus neither the ray nor its first exit block has an
-infinite fixed-target fibre. The remaining seam is the post-exit fixed-length suffix relation or
-an exit from a different reachable shell state. This is
+infinite fixed-target fibre. Target valuation also fixes the length of every later suffix. The
+resulting full schedules have one fixed translated-letter count and regular wait control, so
+`D2-D05` decides the entire continuation cone. The remaining seam is an exit from a different
+reachable shell state or a finite-cone normal form for all accepting exits. This is
 [`D2-O04`](SALVAGE.md#d2-o04-forced-exit-surface).
 Higher depth is not free: a published length-thirteen relation yields two distinct
 schedules with the same affine map and a common Lean-checked guarded periodic source. This is an

@@ -187,6 +187,21 @@ theorem shellRawWord_append (left right : List ℕ) :
   | cons wait left induction =>
       simp [shellRawWord, induction, List.append_assoc]
 
+/-- Every shell block contributes exactly one translated letter to its raw word. -/
+theorem shellRawWord_count_translate (waits : List ℕ) :
+    (shellRawWord waits).count .translate = waits.length := by
+  induction waits with
+  | nil => rfl
+  | cons wait waits induction =>
+      have dilate_count :
+          (List.replicate wait Letter.dilate).count .translate = 0 := by
+        induction wait with
+        | zero => rfl
+        | succ wait wait_induction =>
+            rw [List.replicate_succ, List.count_cons]
+            simp [wait_induction]
+      simp [shellRawWord, shellRawBlock, induction, dilate_count]
+
 private theorem pumpWord_append_pair (pump : ℕ) :
     pumpWord pump ++ [.dilate, .translate] =
       [.dilate, .translate] ++ pumpWord pump := by
