@@ -1294,7 +1294,7 @@ private theorem targetFactor_false_of_power_quotient
     exact quotient_ne_two (unique.2.symm.trans factor_two)
 
 private theorem allOnes_patternSource_oneTail_false
-    {β : Nat} (β_large : 7 ≤ β) {upper source target front : List Bool}
+    {β : Nat} (β_large : 6 ≤ β) {upper source target front : List Bool}
     (front_phases : List Bool) (front_eq : front = spell fringeBlock front_phases)
     (source_eq : source = front ++ [true, true] ++ List.replicate 1 false)
     (upper_code : 2 * swappedCode upper + 1 = 9 * 3 ^ β)
@@ -1365,28 +1365,40 @@ private theorem allOnes_patternSource_oneTail_false
       exact specialized_target
     have target_code := targetFactor_eq_power_of_quotient_modEq_one target_fringe
       normalized_target (by norm_num) (by norm_num [Nat.ModEq])
-    have specialized_relation := relation
-    rw [front_two] at specialized_relation
-    have relation_int :
-        ((3 * 3 ^ β + 131) * (swappedCode target + 1) : ℤ) ≡
-          405 [ZMOD (3 : ℤ) ^ β] := by
-      exact Int.natCast_modEq_iff.mpr specialized_relation
-    have difference_dvd := Int.dvd_neg.mpr relation_int.dvd
-    have target_code_int : (swappedCode target : ℤ) + 1 = 81 := by
-      exact_mod_cast target_code
-    have rho_dvd_whole :
-        ((3 : ℤ) ^ β) ∣ 243 * (3 : ℤ) ^ β + 10206 := by
-      convert difference_dvd using 1
-      rw [target_code_int]
-      norm_num
-      ring
-    have rho_dvd_bulk : ((3 : ℤ) ^ β) ∣ 243 * (3 : ℤ) ^ β := dvd_mul_left _ _
-    have rho_dvd_fixed : ((3 : ℤ) ^ β) ∣ 10206 := by
-      convert Int.dvd_sub rho_dvd_whole rho_dvd_bulk using 1
-      ring
-    have rho_dvd_fixed_nat : 3 ^ β ∣ 10206 := by
-      exact_mod_cast rho_dvd_fixed
-    exact pow_three_not_dvd_10206 (by omega) rho_dvd_fixed_nat
+    by_cases beta_six : β = 6
+    · subst β
+      have upper_code_eq : swappedCode upper = 3280 := by
+        norm_num at upper_code ⊢
+        omega
+      have source_code_eq : swappedCode source = 68 := by
+        rw [front_two] at source_code
+        omega
+      have target_code_eq : swappedCode target = 80 := by omega
+      norm_num [PoleCongruence, upper_code_eq, source_code_eq, target_code_eq,
+        Int.ModEq] at pole
+    · have beta_large' : 7 ≤ β := by omega
+      have specialized_relation := relation
+      rw [front_two] at specialized_relation
+      have relation_int :
+          ((3 * 3 ^ β + 131) * (swappedCode target + 1) : ℤ) ≡
+            405 [ZMOD (3 : ℤ) ^ β] := by
+        exact Int.natCast_modEq_iff.mpr specialized_relation
+      have difference_dvd := Int.dvd_neg.mpr relation_int.dvd
+      have target_code_int : (swappedCode target : ℤ) + 1 = 81 := by
+        exact_mod_cast target_code
+      have rho_dvd_whole :
+          ((3 : ℤ) ^ β) ∣ 243 * (3 : ℤ) ^ β + 10206 := by
+        convert difference_dvd using 1
+        rw [target_code_int]
+        norm_num
+        ring
+      have rho_dvd_bulk : ((3 : ℤ) ^ β) ∣ 243 * (3 : ℤ) ^ β := dvd_mul_left _ _
+      have rho_dvd_fixed : ((3 : ℤ) ^ β) ∣ 10206 := by
+        convert Int.dvd_sub rho_dvd_whole rho_dvd_bulk using 1
+        ring
+      have rho_dvd_fixed_nat : 3 ^ β ∣ 10206 := by
+        exact_mod_cast rho_dvd_fixed
+      exact pow_three_not_dvd_10206 beta_large' rho_dvd_fixed_nat
   · have scaled := front_five.mul_left 4
     have shifted := scaled.add (Nat.ModEq.refl 2)
     have quotient_residue : 4 * swappedCode front + 2 ≡ 4 [MOD 9] := by
@@ -1449,7 +1461,7 @@ private theorem allOnes_patternSource_oneTail_false
       quotient_ne_one quotient_ne_five quotient_ne_two
 
 private theorem allOnes_sourceFringe_false
-    {β : Nat} (β_large : 7 ≤ β) {upper source target : List Bool}
+    {β : Nat} (β_large : 6 ≤ β) {upper source target : List Bool}
     (source_fringe : SourceFringe source) (source_last : source.getLast? = some false)
     (upper_code : 2 * swappedCode upper + 1 = 9 * 3 ^ β)
     (target_fringe : TargetFringe (β + 2) target)
