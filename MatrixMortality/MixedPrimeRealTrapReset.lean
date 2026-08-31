@@ -12,6 +12,8 @@ namespace MatrixMortality.MixedPrimeDebt
 open PadicValuation
 open PeriodicShell
 
+private local instance : Fact (Nat.Prime 2) := ⟨by norm_num⟩
+private local instance : Fact (Nat.Prime 3) := ⟨by norm_num⟩
 private local instance : Fact (Nat.Prime 5) := ⟨by norm_num⟩
 
 private theorem unit_pow
@@ -20,6 +22,13 @@ private theorem unit_pow
   refine ⟨pow_ne_zero exponent value_unit.1, ?_⟩
   rw [padicValRat.pow, value_unit.2]
   simp
+
+private theorem hasValue_pow
+    {prime : ℕ} [Fact prime.Prime] {value : ℚ} {valuation : ℤ}
+    (value_hasValue : HasValue prime value valuation) (exponent : ℕ) :
+    HasValue prime (value ^ exponent) (exponent * valuation) := by
+  refine ⟨pow_ne_zero exponent value_hasValue.1, ?_⟩
+  rw [padicValRat.pow, value_hasValue.2]
 
 private theorem natCast_fiveValue_one
     {value : ℕ} (five_dvd : 5 ∣ value) (twentyfive_not_dvd : ¬25 ∣ value) :
@@ -57,6 +66,52 @@ private theorem natCast_fiveValue_two
   convert mul_hasValue twentyfive_value quotient_unit using 1
   · norm_num [value_eq]
   · norm_num
+
+private theorem realTrapBandPoint_one_twoUnit
+    {depth : ℕ} (depth_lower : 2 ≤ depth) :
+    IsUnit 2 (realTrapBandPoint depth 1) := by
+  have one_unit : IsUnit 2 (1 : ℚ) := ⟨one_ne_zero, padicValRat.one⟩
+  have five_unit : IsUnit 2 (5 : ℚ) := intCast_isUnit_of_not_dvd (by norm_num)
+  have offset_unit : IsUnit 2 (1 / 5 : ℚ) := div_hasValue one_unit five_unit
+  have two_value : HasValue 2 (2 : ℚ) 1 := by
+    simpa using (primePower_hasValue (prime := 2) 1)
+  have three_unit : IsUnit 2 (3 : ℚ) := intCast_isUnit_of_not_dvd (by norm_num)
+  have ten_value : HasValue 2 (10 : ℚ) 1 := by
+    have five_mul := mul_hasValue two_value five_unit
+    convert five_mul using 1 <;> norm_num
+  have coefficient_value : HasValue 2 (3 / 10 : ℚ) (-1) := by
+    simpa using div_hasValue three_unit ten_value
+  have ratio_value : HasValue 2 (2 / 3 : ℚ) 1 := by
+    simpa using div_hasValue two_value three_unit
+  have scaled_value :
+      HasValue 2 ((3 / 10 : ℚ) * (2 / 3 : ℚ) ^ depth) (depth - 1) := by
+    simpa [sub_eq_add_neg, add_comm] using
+      mul_hasValue coefficient_value (hasValue_pow ratio_value depth)
+  have scaled_positive : IsPositive 2 ((3 / 10 : ℚ) * (2 / 3 : ℚ) ^ depth) :=
+    ⟨scaled_value.1, by rw [scaled_value.2]; omega⟩
+  simpa [realTrapBandPoint] using unit_add_positive offset_unit scaled_positive
+
+private theorem realTrapBandPoint_one_threeValue
+    {depth : ℕ} (depth_lower : 2 ≤ depth) :
+    HasValue 3 (realTrapBandPoint depth 1) (1 - depth) := by
+  have one_unit : IsUnit 3 (1 : ℚ) := ⟨one_ne_zero, padicValRat.one⟩
+  have five_unit : IsUnit 3 (5 : ℚ) := intCast_isUnit_of_not_dvd (by norm_num)
+  have offset_unit : IsUnit 3 (1 / 5 : ℚ) := div_hasValue one_unit five_unit
+  have three_value : HasValue 3 (3 : ℚ) 1 := by
+    simpa using (primePower_hasValue (prime := 3) 1)
+  have ten_unit : IsUnit 3 (10 : ℚ) := intCast_isUnit_of_not_dvd (by norm_num)
+  have coefficient_value : HasValue 3 (3 / 10 : ℚ) 1 := by
+    simpa using div_hasValue three_value ten_unit
+  have two_unit : IsUnit 3 (2 : ℚ) := intCast_isUnit_of_not_dvd (by norm_num)
+  have ratio_value : HasValue 3 (2 / 3 : ℚ) (-1) := by
+    simpa using div_hasValue two_unit three_value
+  have scaled_value :
+      HasValue 3 ((3 / 10 : ℚ) * (2 / 3 : ℚ) ^ depth) (1 - depth) := by
+    have raw := mul_hasValue coefficient_value (hasValue_pow ratio_value depth)
+    convert raw using 1
+    omega
+  simpa [realTrapBandPoint] using
+    add_hasValue_right offset_unit scaled_value (by omega)
 
 private theorem poleReset_sourceNumerator_mod (period : ℕ) :
     3 ^ (50 * period + 49) + 2 ^ (50 * period + 49) ≡
@@ -221,5 +276,40 @@ theorem shellStep_realTrap_guardedPoleReset (period : ℕ) :
     simpa only [source] using output_unit
   exact ⟨source_mem, target_mem', by simpa only [source] using source_unit, target_unit,
     source_candidate, target_candidate', step_eq'⟩
+
+/-- The guarded pole reset keeps the two-adic wall clear while its three-adic debt grows by one.
+The fixed real target depth therefore hides unbounded three-adic depth. -/
+theorem shellStep_realTrap_guardedPoleReset_twoThreeValues (period : ℕ) :
+    let depth := 50 * period + 50
+    let source := realTrapBandPoint depth 1
+    IsUnit 2 source ∧ IsUnit 2 (shellStep 2 source) ∧
+      HasValue 3 source (1 - depth) ∧ HasValue 3 (shellStep 2 source) (-depth) := by
+  let depth := 50 * period + 50
+  let source := realTrapBandPoint depth 1
+  have depth_lower : 2 ≤ depth := by
+    simp only [depth]
+    omega
+  have source_two := realTrapBandPoint_one_twoUnit depth_lower
+  have target_two := shellStep_two_aboveWall 2 source_two (by norm_num)
+  have source_three := realTrapBandPoint_one_threeValue depth_lower
+  have target_three := shellStep_three_belowWall 2 source_three (by
+    simp only [depth]
+    omega)
+  exact ⟨source_two, target_two, source_three, by
+    convert target_three using 1
+    simp only [depth]
+    omega⟩
+
+/-- Distinct guarded pole-reset periods have distinct targets; the reset ray does not create an
+infinite fixed-target fibre. -/
+theorem shellStep_realTrap_guardedPoleReset_target_injective : Function.Injective
+    (fun period : ℕ => shellStep 2 (realTrapBandPoint (50 * period + 50) 1)) := by
+  intro left right targets_eq
+  have sources_eq := shellStep_injective 2 targets_eq
+  have candidates_eq := congrArg realTrapMaxPredecessorWait sources_eq
+  rw [realTrapMaxPredecessorWait_bandPoint (50 * left + 50) (by norm_num) (by norm_num),
+    realTrapMaxPredecessorWait_bandPoint (50 * right + 50) (by norm_num) (by norm_num)]
+    at candidates_eq
+  omega
 
 end MatrixMortality.MixedPrimeDebt

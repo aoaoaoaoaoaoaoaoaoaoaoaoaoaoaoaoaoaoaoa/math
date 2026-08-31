@@ -11440,6 +11440,17 @@ are `5`-adic units. The proof clears their denominators and checks
 The first numerator has valuation one and the second valuation two, exactly cancelling the
 respective denominator powers of five. Hence one fixed target depth and one fixed wait support
 guarded predecessors of unbounded source depth, although the rational endpoints vary with `k`.
+The two other prime coordinates are exact:
+
+```text
+v₂(U(50k+50,1))=v₂(T₂(U(50k+50,1)))=0,
+v₃(U(50k+50,1))=1−(50k+50),
+v₃(T₂(U(50k+50,1)))=−(50k+50).
+```
+
+Thus fixed Archimedean target depth four conceals unbounded three-adic debt while the two-adic
+wall remains clear. Lean also proves the displayed targets pairwise distinct, so this ray has no
+infinite fixed-target fibre.
 
 **Scope:** this refutes a finite-state quotient based only on Archimedean depth, relative branch,
 and the `5`-unit bit. It does not give one fixed target infinitely many predecessors, an arbitrary
@@ -11449,7 +11460,9 @@ theorem. Exact fixed-source/fixed-target reachability remains open.
 **Artifact:** `MixedPrimeDebt.realTrapBandPoint`,
 `MixedPrimeDebt.realTrapMaxPredecessorWait_bandPoint`,
 `MixedPrimeDebt.shellStep_realTrap_poleBranch_full`, and
-`MixedPrimeDebt.shellStep_realTrap_guardedPoleReset` in
+`MixedPrimeDebt.shellStep_realTrap_guardedPoleReset`,
+`MixedPrimeDebt.shellStep_realTrap_guardedPoleReset_twoThreeValues`, and
+`MixedPrimeDebt.shellStep_realTrap_guardedPoleReset_target_injective` in
 [`MixedPrimeRealTrap.lean`](MatrixMortality/MixedPrimeRealTrap.lean) and
 [`MixedPrimeRealTrapReset.lean`](MatrixMortality/MixedPrimeRealTrapReset.lean).
 
