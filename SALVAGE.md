@@ -209,6 +209,7 @@ file owns the mathematical stock.
 | [`M4-S18`](#m4-s18-phase-zero-double-c-parity-cylinder) | obstruction | odd body length and odd `b` count exclude the `0|2|1` `b|c|c` family for all waits | formalized | active |
 | [`M4-S19`](#m4-s19-phase-zero-right-c-odd-length-cylinder) | obstruction | odd body length excludes the `0|2|1` `b|b|c` family for all waits | formalized | active |
 | [`M4-S20`](#m4-s20-phase-zero-triple-c-parity-cylinder) | obstruction | odd body length and odd `b` count exclude the `0|2|1` `c|c|c` family for all waits | formalized | active |
+| [`M4-S21`](#m4-s21-phase-zero-right-c-parity-rectangle) | obstruction | a `0|2|1` `b|b|c` zero requires both even body length and even `b` count; fixed 2-power congruences cannot remove the residue | formalized | active |
 | [`M4-C03`](#m4-c03-zero-framed-binary-two-lag-compiler) | compiler | the principal scanner is literally binary context-2 Lag and compiles to `M₄(3)` | formalized | graduated |
 | [`M4-D01`](#m4-d01-zero-framed-binary-two-lag-decision) | decidable stratum | the entire zero-framed binary context-2 Lag kernel has an exact syntactic classification | formalized | graduated |
 | [`M4-D02`](#m4-d02-zero-framed-reset-scanner-decision) | decidable stratum | zero-run reduction contracts the reset scanner to a regular two-token quotient | audited | graduated |
@@ -8714,6 +8715,61 @@ whether the phase-zero pair admits one endpoint-independent mod-four proof.
 [`MatrixMortality/ParabolicDefectCylinder.lean`](MatrixMortality/ParabolicDefectCylinder.lean)
 and
 [`audits/m43-phase-zero-triple-c-parity-cylinder-2026-08-31.md`](audits/m43-phase-zero-triple-c-parity-cylinder-2026-08-31.md).
+
+### M4-S21: Phase-zero right-c parity rectangle
+
+**Kind:** obstruction
+
+**Evidence:** formalized
+
+**Disposition:** active
+
+Return to the `b`-defect family
+
+```text
+b(3z) b(3x+2) c(3y+1).
+```
+
+Its primitive integral core is the polynomial `H(S,C,x,y,z)` from `M4-S19`. Even body length
+gives `S≡1 (mod 8)`, while odd `b` count gives `C≡1 (mod 2)`. Lean checks the exact identity
+
+```text
+H(8s+1,2c+1,x,y,z) = 8U(s,c,x,y,z)+4.
+```
+
+This excludes the even-length, odd-`b` body class for every wait triple. Together with
+`M4-S19`, which excludes both odd-length classes without inspecting `C`, it removes three of
+the four body-parity classes. Any zero in the `0|2|1` `b|b|c` family must have both even body
+length and even `b` count.
+
+The remaining rectangle is not vulnerable to a higher fixed 2-power congruence. For the
+concrete body `bbcc`, Lean computes `S=531441`, `C=445796`, and the exact factorization
+
+```text
+H(S,C,x,y,z) = 32 P(x,y,z),
+P(0,0,z) = 4981923137668815z + 461209693766445.
+```
+
+The coefficient of `z` is odd, hence invertible modulo every power of two. For each fixed
+2-power modulus, a natural residue representative `z` therefore makes this core vanish modulo
+that modulus. This is a no-go only for uniform fixed 2-power exclusion: it neither supplies an
+integral zero nor weakens the exact parity obstruction.
+
+**Scope:** deletion width three, exactly three atoms, orientation `0|2|1`, letters `b|b|c`.
+The exclusion covers every body except the even-length, even-`b` class. Other shortest families,
+longer defect runs, and nontrivial safe contexts remain open.
+
+**Use:** the `b|b|c` survivor is confined to one parity rectangle. Its next useful structure
+must see divisibility, root straddling, or the full archimedean trilinear geometry rather than
+another fixed 2-power residue.
+
+**Next:** factor the fixed-`y` single-fractional-linear transform and prove that its two rational
+root endpoints either occupy one open unit interval or leave only a finite divisor equation.
+
+**Artifact:**
+[`MatrixMortality/ParabolicDefectCylinder.lean`](MatrixMortality/ParabolicDefectCylinder.lean)
+and
+[`audits/m43-phase-zero-right-c-parity-rectangle-2026-08-31.md`](audits/m43-phase-zero-right-c-parity-rectangle-2026-08-31.md).
 
 ### M4-C03: Zero-framed binary two-Lag compiler
 

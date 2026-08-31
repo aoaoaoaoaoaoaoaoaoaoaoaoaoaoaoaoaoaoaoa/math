@@ -970,6 +970,107 @@ theorem bridge_bZero_bTwo_cOne_det_ne_zero_of_odd_body
     (3 ^ (tagEncode 3 body).length) (ternaryCode (tagEncode 3 body)) x y z
       scale_mod_four) integer_core_zero
 
+private theorem three_pow_mod_eight_of_even_exponent (n : Nat) (n_even : n % 2 = 0) :
+    3 ^ n % 8 = 1 := by
+  obtain ⟨k, n_eq⟩ : ∃ k, n = 2 * k := by
+    refine ⟨n / 2, ?_⟩
+    omega
+  rw [n_eq, pow_mul]
+  norm_num [Nat.pow_mod]
+
+private def bZeroBDefectCOneEvenOddQuotient (s c x y z : ℤ) : ℤ :=
+  s * (x * (y * (8633640960 * z + 807107328) + 630522376416 * z + 58947198120) +
+      y * (-1234505194560 * z - 115381907424) + 654338483004 * z + 59511557877) +
+    c * (x * (-157900395384 * z - 14762021634) +
+      y * (-155179457208 * z - 14501266218) - 105608901270 * z - 9459546585) +
+    x * (y * (959293440 * z + 89678592) - 78950197692 * z - 7381010817) +
+    y * (-283725620092 * z - 26515852253) - 52804450635 * z - 4729773293
+
+private theorem bZeroBDefectCOneCodeCore_even_odd_factor
+    (s c x y z : ℤ) :
+    bZeroBDefectCOneCodeCore (8 * s + 1) (2 * c + 1) x y z =
+      8 * bZeroBDefectCOneEvenOddQuotient s c x y z + 4 := by
+  unfold bZeroBDefectCOneCodeCore bZeroBDefectCOneEvenOddQuotient
+  ring
+
+private theorem bZeroBDefectCOneCodeCore_ne_zero_of_even_odd_coordinates
+    (S C x y z : Nat) (S_mod_eight : S % 8 = 1) (C_odd : C % 2 = 1) :
+    bZeroBDefectCOneCodeCore (S : ℤ) C x y z ≠ 0 := by
+  intro core_zero
+  obtain ⟨s, S_eq⟩ : ∃ s, S = 8 * s + 1 := by
+    refine ⟨S / 8, ?_⟩
+    omega
+  obtain ⟨c, C_eq⟩ : ∃ c, C = 2 * c + 1 := by
+    refine ⟨C / 2, ?_⟩
+    omega
+  rw [S_eq, C_eq] at core_zero
+  push_cast at core_zero
+  rw [bZeroBDefectCOneCodeCore_even_odd_factor] at core_zero
+  omega
+
+/-- Even body length and an odd number of `b` letters exclude the shortest `0 | 2 | 1` bridge
+with letters `b | b | c`, independently of all waits. -/
+theorem bridge_bZero_bTwo_cOne_det_ne_zero_of_even_body_odd_b_count
+    (body : List TagLetter) (body_length_even : body.length % 2 = 0)
+    (b_count_odd : body.count .b % 2 = 1) (x y z : Nat) :
+    (bridge 27
+      (bAtom 27 (3 * z) * bAtom 27 (3 * x + 2) *
+        cAtom 27 (nearySideLowerC 3 body) (nearySideLowerCScale 3 body)
+          (3 * y + 1))).det ≠ 0 := by
+  rw [bridge_bZero_bTwo_cOne_det]
+  apply mul_ne_zero (by norm_num)
+  have encoded_length_even : (tagEncode 3 body).length % 2 = 0 := by
+    rw [tagEncode_length_mod_two]
+    exact body_length_even
+  have encoded_code_odd : ternaryCode (tagEncode 3 body) % 2 = 1 := by
+    rw [tagEncode_code_mod_two]
+    exact b_count_odd
+  have scale_mod_eight : 3 ^ (tagEncode 3 body).length % 8 = 1 :=
+    three_pow_mod_eight_of_even_exponent (tagEncode 3 body).length encoded_length_even
+  intro core_zero
+  have power_cast :
+      ((3 ^ (tagEncode 3 body).length : Nat) : ℚ) =
+        (3 : ℚ) ^ (tagEncode 3 body).length := by norm_num
+  rw [← power_cast] at core_zero
+  have cast_integer_core :
+      ((bZeroBDefectCOneCodeCore
+        ((3 ^ (tagEncode 3 body).length : Nat) : ℤ)
+        (ternaryCode (tagEncode 3 body)) x y z : ℤ) : ℚ) =
+        bZeroBDefectCOneCodeCore
+          ((3 ^ (tagEncode 3 body).length : Nat) : ℚ)
+          (ternaryCode (tagEncode 3 body)) x y z := by
+    norm_num [bZeroBDefectCOneCodeCore]
+  have integer_core_zero :
+      bZeroBDefectCOneCodeCore
+        ((3 ^ (tagEncode 3 body).length : Nat) : ℤ)
+        (ternaryCode (tagEncode 3 body)) x y z = 0 := by
+    have cast_zero :
+        ((bZeroBDefectCOneCodeCore
+          ((3 ^ (tagEncode 3 body).length : Nat) : ℤ)
+          (ternaryCode (tagEncode 3 body)) x y z : ℤ) : ℚ) = 0 := by
+      exact cast_integer_core.trans core_zero
+    exact_mod_cast cast_zero
+  exact (bZeroBDefectCOneCodeCore_ne_zero_of_even_odd_coordinates
+    (3 ^ (tagEncode 3 body).length) (ternaryCode (tagEncode 3 body)) x y z
+      scale_mod_eight encoded_code_odd) integer_core_zero
+
+/-- On the shortest even-length, even-`b` body `bbcc`, the primitive `b | b | c` core has
+content `32`; its quotient has an odd affine coefficient in `z` at `x=y=0`. -/
+theorem bZeroBDefectCOneCodeCore_bbcc_factor (x y z : ℤ) :
+    bZeroBDefectCOneCodeCore
+        ((3 : ℤ) ^ (tagEncode 3 [.b, .b, .c, .c]).length)
+        (ternaryCode (tagEncode 3 [.b, .b, .c, .c])) x y z =
+      32 * (143383432066560 * x * y * z +
+        13404057369408 * x * y + 1672479783753012 * x * z +
+        156359318234067 * x - 29149394215815268 * y * z -
+        2724285653213807 * y + 4981923137668815 * z +
+        461209693766445) := by
+  have encoded_length : (tagEncode 3 [.b, .b, .c, .c]).length = 12 := by decide
+  have encoded_code : ternaryCode (tagEncode 3 [.b, .b, .c, .c]) = 445796 := by decide
+  rw [encoded_length, encoded_code]
+  norm_num [bZeroBDefectCOneCodeCore]
+  ring
+
 /-! ## Phase-zero triple-`c` parity cylinder -/
 
 /-- Primitive code-coordinate determinant core for the shortest `0 | 2 | 1` bridge with three
