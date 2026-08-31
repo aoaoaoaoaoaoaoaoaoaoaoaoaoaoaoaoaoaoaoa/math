@@ -1223,6 +1223,14 @@ singular, order-sensitive action confined to the directed stable cone may use no
 contexts to distinguish cancellation positions. No source theorem currently realizes that
 action with three states.
 
+[`G3-O25`](SALVAGE.md#g3-o25-stable-cone-rank-fork) splits that survivor by the `y`-separator.
+Because the stable cone is `B*y`, every stable matrix word factors through `im M_y`. Rank one
+loses block order; rank two is exactly a two-state block carrier; only invertible `M_y` retains
+genuine three-state block memory. Conversely, explicit positive rank-two `X,X̄` matrices realize
+strict cancellation monotonicity, noncommuting `u₁,u₂`, and every A4 cover in three states. Their
+zero language is trivial. Thus a fourth-state obstruction must use zero-sensitive GLB fibres,
+not directed order or positional noncommutation alone.
+
 [`G3-D03`](SALVAGE.md#g3-d03-one-sided-corrected-drift) closes a broad source class before
 compilation. If some positive target-symbol weighting and finite-state potential make every trim
 transition drift in one direction, terminal equality bounds every accepting residual and exact
@@ -1255,7 +1263,7 @@ or neutral word across the return, use an empty consume, or split recurrent outp
 | Transverse-kernel terminal dynamics | Fixed integral transverse controls encode every history and exactly recognize all minimum bodies | Replace the singleton target row by an infinite, source-computable terminal section for unrestricted bodies |
 | Positive projective transition lower bound | Same-zero dimension three is point-line incidence in `P²`, and actual one-sided shifts retain finite rank/kernel/image data | Derive a uniform nonstationary or noncommuting shift incompatibility from an unbounded terminal section; static support rank, formal inverse completion, fixed equal-length return flowers, and unary consecutive-repeat escape are forbidden |
 | Global word-residual recoding | Longer noncommutative atoms can retain order while discarding the four additive role channels | Escape `G3-D05`: fixed-priority affine counters and all one-way reset/transfer/fanout cascades are decidable |
-| Head-separated three-schema source | `G3-C04` discharges every arbitrary-trace forcing obligation locally; `G3-O24` isolates the directed stable-cone alternative | Preserve an undecidable mixed or neutral word across returns, or realize the S5 directed decoder order by a nonprojectively blind singular action; complete pure forks are decidable by `G3-D07` |
+| Head-separated three-schema source | `G3-C04` discharges every arbitrary-trace forcing obligation locally; `G3-O24` isolates the directed stable-cone alternative | Preserve an undecidable mixed or neutral word across returns, or realize zero-sensitive S5 GLB decoding after the `G3-O25` separator-rank fork; complete pure forks are decidable by `G3-D07` |
 | Carvalho projective group-orbit separator | `G3-M03` gives the exact saturated three-positive cover; `G3-O23` collapses every singular carrier to invertible dimension two | Universalize or decide the promised at-most-one rational Borel-coset intersection through global or noncongruence structure; `R32-O22` kills residue-orbit separation. Otherwise construct the invertible three-state line/plane orbit left by `G3-O22` |
 
 These six lanes form three trunks. The first three race a direct paired construction against its
@@ -1266,7 +1274,7 @@ singular spelling memory, and `R32-O22` removes congruence separation.
 
 #### Raceable leaves
 
-After `G3-O21`–`G3-O24`, `R32-O22`, and `G3-D07` close their respective carrier, absorption,
+After `G3-O21`–`G3-O25`, `R32-O22`, and `G3-D07` close their respective carrier, absorption,
 and pure-source lanes, the net tree has six independent raceable leaves:
 
 1. **Common-kernel shuttle constructor.** Give one computable three-state paired recognizer in
@@ -1294,8 +1302,9 @@ and pure-source lanes, the net tree has six independent raceable leaves:
    every complete pure two-chamber fork, including arbitrary finite forward branching. The
    empty-pump and genuinely splitting variants remain secondary constructions. The published
    three-rule S5 source is not head-separated: `G3-O24` forbids absorbing its directed deletion
-   faithfully, but leaves the sharper alternative of a rank-two singular stable-cone action
-   whose zero contexts retain redex order.
+   faithfully. `G3-O25` then deletes rank-one separators, compresses rank two to a two-state block
+   carrier, and refutes monotonicity-only lower bounds. The live branch is zero-sensitive GLB
+   decoding with invertible `M_y`, together with the adjacent two-state block seam.
 6. **Carvalho projective group-orbit separator.** Starting from the exact `G3-M03` saturated
    cover, realize its singleton exponent-one fibre by an effective projective orbit separator.
    In dimension three, `G3-O22` forces an invertible line/plane group orbit. If any transition is

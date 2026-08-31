@@ -127,6 +127,42 @@ singular action in three states can realize the stable-cone update while also me
 nonprojective zero-context condition. Failure of the finite lattice alone is not enough; the
 proof must use its unbounded contextual product.
 
+## Stable-Cone Rank Fork
+
+Every stable word has the block form `y b₁ y⋯bₖ y`, with each `bᵢ` in the finite set `B`. If
+`Y=M_y` factors as `i∘q` through its image, then
+
+```text
+Y M₁ Y ⋯ Mₖ Y = i (qM₁i) ⋯ (qMₖi) q.
+```
+
+Lean proves this for arbitrary block lists, including the empty list. Hence a singular `Y`
+compresses the complete stable-domain scalar behavior to `rank Y` states. Rank one is stronger:
+every compressed block is scalar, so only the product of block coefficients survives and block
+order disappears. Rank two is an exact two-state block carrier; this is a joint group-PI₂ seam,
+not a positive `M₂(3)` reduction. Invertible `Y` is the only genuinely three-state branch.
+
+The finite order does admit a positive rank-two, order-sensitive three-state representation.
+For
+
+```text
+X = [1 1 1; 1 2 3; 2 3 4],     X̄ = [1 2 1; 2 1 2; 3 3 3],
+```
+
+both matrices have rank two and `XX̄>I` entrywise. Retaining a redex therefore strictly raises
+the `(0,0)` coefficient in every nonnegative two-sided context whose boundary path is positive.
+Moreover `U₁=XX̄` and `U₂=X²X̄²` do not commute. The eight code scores are
+
+```text
+d=1, a=372552, â=592736996, b=590460360,
+b̂=939434284388, c=14571576, č=23179095612, ĉ=37693915494876.
+```
+
+They decrease strictly along every A4 cover, and the eight code matrices are distinct. This
+refutes any fourth-state argument based only on directed monotonicity, finite lattice order, or
+positional noncommutation. All entries and products are positive, however, so the zero language
+is trivial. Zero-sensitive GLB decoding is the indispensable missing property.
+
 ## Claim Classification
 
 | Claim | Classification | Evidence |
@@ -138,6 +174,9 @@ proof must use its unbounded contextual product.
 | Complete scalar-value saturation can remain oriented | rejected | formal context-faithful theorem |
 | Projectively faithful zero-context saturation can remain oriented | rejected | formal zero-context theorem |
 | Every zero-only or singular S5 carrier is impossible | rejected | nonprojective, domain-restricted singular actions remain |
+| Directed GLB monotonicity alone needs four states | rejected | explicit positive rank-two three-state countermodel |
+| A rank-one separator retains stable-block order | rejected | formal scalar-product factorization |
+| A rank-two separator supplies hidden third-state memory | rejected | formal image compression to a two-state block carrier |
 | The bicyclic quotient preserves the accessibility converse | open | only the directed-to-quotient implication is immediate |
 
 ## Master Delta
@@ -148,11 +187,14 @@ REMOVED: direct use of the three S5 rule names as three prefix productions;
          faithful finite-dimensional absorption of the Dyck rule;
          scalar-value saturation and projectively faithful zero saturation.
 ADDED:   the exact nonprojective zero-context criterion for every asymmetric carrier.
-REMAINS: construct an order-sensitive rank-two singular action on the directed stable cone,
-         or prove that its unbounded positional lattice update requires a fourth state.
+ADDED:   the exact separator-rank fork and a rank-two monotonicity countermodel.
+REMAINS: construct zero-sensitive GLB decoding in the invertible-Y branch, or settle the
+         exact two-state block carrier induced by rank(Y)=2.
 ```
 
 ## Artifacts
 
 - [`DirectedCancellation.lean`](../MatrixMortality/DirectedCancellation.lean)
+- [`StableConeCompression.lean`](../MatrixMortality/StableConeCompression.lean)
+- [`DirectedCancellationCountermodel.lean`](../MatrixMortality/DirectedCancellationCountermodel.lean)
 - [`matiyasevich-senizergues-2005-few-rule-semi-thue.md`](../references/matiyasevich-senizergues-2005-few-rule-semi-thue.md)

@@ -568,6 +568,26 @@
 'MatrixMortality.DirectedCancellation.asymmetric_zero_context_cancellation_forces_projective_blindness' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.StableConeCompression.stableProduct_eq_rangeCompressed' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.StableConeCompression.exists_stableProduct_eq_smul_of_finrank_range_eq_one' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DirectedCancellationCountermodel.push_rank' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.DirectedCancellationCountermodel.pop_rank' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.DirectedCancellationCountermodel.unitBlock_entry_gt_one' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DirectedCancellationCountermodel.context_deletion_score_strict' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DirectedCancellationCountermodel.blocks_do_not_commute' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DirectedCancellationCountermodel.code_scores_strict_on_covers' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.paired_exact_diagonal_twoChannel_state_lower_bound' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]

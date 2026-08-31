@@ -107,6 +107,8 @@ import MatrixMortality.PositiveShiftCountermodel
 import MatrixMortality.PositiveResetNoGo
 import MatrixMortality.PositiveFreeCancellation
 import MatrixMortality.DirectedCancellation
+import MatrixMortality.StableConeCompression
+import MatrixMortality.DirectedCancellationCountermodel
 import MatrixMortality.NearyBinaryDefect
 import MatrixMortality.NearyPhaseSignature
 import MatrixMortality.CHHNPackingRank

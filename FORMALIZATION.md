@@ -1160,6 +1160,13 @@ and the selected contexts are not globally projectively faithful. The applicatio
 directed Matiyasevich–Sénizergues stable cone, including its positional redex semantics and
 greatest-lower-bound decoder, is source-audited rather than encoded in Lean.
 
+[`G3-O25`](SALVAGE.md#g3-o25-stable-cone-rank-fork) is formalized on both sides. Lean proves
+that every separator-bracketed block word factors canonically through the separator image, and
+that a one-dimensional image reduces every block word to a product of scalars. A separate exact
+matrix countermodel gives positive rank-two `X,X̄`, strict deletion monotonicity in every
+nonnegative context with a positive boundary path, noncommuting `u₁,u₂`, and strict scores on all
+A4 covers. The countermodel's zero language is deliberately trivial.
+
 The adjacent [`R32-O22`](SALVAGE.md#r32-o22-congruence-blind-free-orbit) obstruction applies to
 this residual group-orbit shell: its all-modulus CRT closure is formalized without claiming
 orbit density, decidability, or hardness for rational Borel-coset intersection.
@@ -1756,6 +1763,8 @@ fixed-rank decision problem.
 | `PairedInverseChamber.lean` | one-turn residual chambers, protected formal inverse states, and positive forward-cone separation |
 | `PositiveFreeCancellation.lean` | positive `F₂` cover, finite-fibre pumping, singular quotient absorption, and rank-six syntax wall |
 | `DirectedCancellation.lean` | direct finiteness and value/zero-context obstructions to one-way cancellation absorption |
+| `StableConeCompression.lean` | exact image factorization of separator-bracketed stable block words |
+| `DirectedCancellationCountermodel.lean` | positive rank-two monotonicity and A4-order countermodel |
 | `PairedRank.lean` | uniform exact rank-four certificate for the paired scalar series |
 | `PairedBoundaryTax.lean` | exact six-state lower bound for diagonal paired-series bridges |
 | `PairedBinary.lean` | total two-bit decoder and exact six-state scalar representation |
@@ -2067,6 +2076,10 @@ fixed-rank decision problem.
 | Complete value-context absorption of one cancellation forces the reverse | `DirectedCancellation.reverse_value_context_cancellation_of_forward` |
 | Projectively separating zero-context absorption forces the reverse | `DirectedCancellation.reverse_zero_context_cancellation_of_forward` |
 | Asymmetric zero cancellation excludes every nonzero scalar identity and global projective separation | `DirectedCancellation.asymmetric_zero_context_cancellation_not_smul_one`, `DirectedCancellation.asymmetric_zero_context_cancellation_forces_projective_blindness` |
+| Every separator-bracketed word factors through the separator image | `StableConeCompression.stableProduct_eq_rangeCompressed` |
+| A rank-one separator erases stable-block order into scalar multiplication | `StableConeCompression.exists_stableProduct_eq_smul_of_finrank_range_eq_one` |
+| Positive rank-two generators make every contextual deletion strictly monotone | `DirectedCancellationCountermodel.push_rank`, `DirectedCancellationCountermodel.pop_rank`, `DirectedCancellationCountermodel.context_deletion_score_strict` |
+| The explicit monotone blocks remain noncommuting and follow every A4 cover | `DirectedCancellationCountermodel.blocks_do_not_commute`, `DirectedCancellationCountermodel.code_scores_strict_on_covers` |
 | Every exact diagonal paired-series bridge needs six states | `paired_exact_diagonal_twoChannel_state_lower_bound` |
 | Every literal Neary CHHN placement needs six exact states | `chhnNeary_exactRepresentation_six_le_card` |
 | Every two-state pushout word obeys its suffix decoder | `twoStateProduct_mulVec_phaseVector`, `twoStateCoefficient_eq_controlled` |
@@ -2265,6 +2278,15 @@ separate elements up to nonzero scalar. Conversely, any context family distingui
 reverse product forces the forward product away from every nonzero scalar identity; an
 asymmetric forward equivalence forces failure of global projective separation. The Lean theorem
 does not assert that the directed S5 stable cone has this separation property.
+
+For `G3-O25`, Lean proves the exact empty-word-safe factorization of every
+`Y M₁ Y⋯Mₖ Y` through `im Y`; over a one-dimensional image it constructs one coefficient
+function for all blocks and proves the ambient product is the scalar coefficient product times
+`Y`. It also checks both explicit generators have rank two, their entries are positive,
+`XX̄>I` entrywise, every nonnegative contextual deletion is strictly monotone under the stated
+boundary condition, the two encoded blocks do not commute, and the published code scores follow
+every lattice cover. No declaration claims zero-sensitive decoding or a positive `M₂(3)`
+reduction.
 
 For `R32-O22`, Lean proves every algebraic claim in the explicit obstruction: signed shear-word
 evaluation, the power-of-three endpoint congruence, the CRT unit over composite moduli, an
