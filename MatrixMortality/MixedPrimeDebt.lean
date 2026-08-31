@@ -1102,64 +1102,378 @@ theorem fixedSourceAdjacentFamily_ten_mul_accepted (period : ℕ) :
   exact ⟨source_unit, numerator_value, target_unit, short_phases, long_phases,
     short_target, long_target⟩
 
-/-- The opposite carrier orientation is also realized by an exact unequal-length debt
-collision. Both endpoints remain five-adic units. -/
-theorem negativeOrientation_crossLengthCollision :
-    shellRun [1] (19 / 42) = 8 / 21 ∧
-      shellRun [1, 2, 0] (19 / 42) = 8 / 21 ∧
-      debtState (19 / 14) 1 = 19 / 42 ∧
-      debtState (8 / 7) 1 = 8 / 21 ∧
-      IsUnit 5 (19 / 42 : ℚ) ∧
-      IsUnit 5 (8 / 21 : ℚ) ∧
-      HasValue 3 (19 / 14 + 1) 1 ∧
-      HasValue 3 (8 / 7 + 1) 1 := by
-  constructor
-  · rw [shellRun_singleton]
-    norm_num [shellStep]
-  constructor
-  · rw [shellRun_cons, shellRun_cons, shellRun_singleton]
-    norm_num [shellStep]
-  constructor
-  · norm_num [debtState]
-  constructor
-  · norm_num [debtState]
-  constructor
-  · exact div_hasValue
-      (intCast_isUnit_of_not_dvd (prime := 5) (by norm_num : ¬(5 : ℤ) ∣ 19))
-      (intCast_isUnit_of_not_dvd (prime := 5) (by norm_num : ¬(5 : ℤ) ∣ 42))
-  constructor
-  · exact div_hasValue
-      (intCast_isUnit_of_not_dvd (prime := 5) (by norm_num : ¬(5 : ℤ) ∣ 8))
-      (intCast_isUnit_of_not_dvd (prime := 5) (by norm_num : ¬(5 : ℤ) ∣ 21))
-  constructor
-  · convert primePower_mul_int_div_int_hasValue (prime := 3) 1
-      (by norm_num : ¬(3 : ℤ) ∣ 11) (by norm_num : ¬(3 : ℤ) ∣ 14) using 1 <;>
-      norm_num
-  · convert primePower_mul_int_div_int_hasValue (prime := 3) 1
-      (by norm_num : ¬(3 : ℤ) ∣ 5) (by norm_num : ¬(3 : ℤ) ∣ 7) using 1 <;>
-      norm_num
+private theorem exitCoefficient_not_five_dvd (wait : ℕ) :
+    ¬5 ∣ 4 * 2 ^ wait + 3 * 3 ^ wait := by
+  intro divisible
+  have cast_zero :
+      ((4 * 2 ^ wait + 3 * 3 ^ wait : ℕ) : ZMod 5) = 0 :=
+    (ZMod.natCast_eq_zero_iff _ _).2 divisible
+  rcases Nat.even_or_odd wait with wait_even | wait_odd
+  · obtain ⟨half, wait_eq⟩ := wait_even
+    have cast_eq :
+        ((4 * 2 ^ wait + 3 * 3 ^ wait : ℕ) : ZMod 5) =
+          2 * 4 ^ half := by
+      push_cast
+      rw [wait_eq, show half + half = 2 * half by omega, pow_mul, pow_mul]
+      have two_square : (2 : ZMod 5) ^ 2 = 4 := by decide
+      have three_square : (3 : ZMod 5) ^ 2 = 4 := by decide
+      rw [two_square, three_square]
+      ring_nf
+      have seven_eq_two : (7 : ZMod 5) = 2 := by decide
+      rw [seven_eq_two]
+    have right_ne : (2 : ZMod 5) * 4 ^ half ≠ 0 :=
+      mul_ne_zero (by decide) (pow_ne_zero _ (by decide))
+    exact right_ne (cast_eq.symm.trans cast_zero)
+  · obtain ⟨half, wait_eq⟩ := wait_odd
+    have cast_eq :
+        ((4 * 2 ^ wait + 3 * 3 ^ wait : ℕ) : ZMod 5) =
+          2 * 4 ^ half := by
+      push_cast
+      rw [wait_eq, pow_succ, pow_succ, pow_mul, pow_mul]
+      have two_square : (2 : ZMod 5) ^ 2 = 4 := by decide
+      have three_square : (3 : ZMod 5) ^ 2 = 4 := by decide
+      rw [two_square, three_square]
+      ring_nf
+      have seventeen_eq_two : (17 : ZMod 5) = 2 := by decide
+      rw [seventeen_eq_two]
+    have right_ne : (2 : ZMod 5) * 4 ^ half ≠ 0 :=
+      mul_ne_zero (by decide) (pow_ne_zero _ (by decide))
+    exact right_ne (cast_eq.symm.trans cast_zero)
 
-/-- Within fixed debt endpoints and fixed length, a point collision is already a global affine
-relation. Source-specific collisions can occur only across different lengths. -/
-theorem debtSafe_sameLength_collision_global
-    {left right : List ℕ} {startDepth endDepth : ℕ} {source : ℚ}
-    (left_safe : DebtSafe startDepth left) (right_safe : DebtSafe startDepth right)
-    (left_ends : debtRunDepth startDepth left = endDepth)
-    (right_ends : debtRunDepth startDepth right = endDepth)
-    (length_eq : left.length = right.length)
-    (collision : shellRun left source = shellRun right source) :
-    ∀ state, shellRun left state = shellRun right state := by
-  have left_balance := debtRunDepth_eq_of_balance left startDepth endDepth
-    left_safe left_ends
-  have right_balance := debtRunDepth_eq_of_balance right startDepth endDepth
-    right_safe right_ends
-  have sum_eq : left.sum = right.sum := by omega
-  have slope_eq : shellSlope left = shellSlope right :=
-    shellSlope_eq_of_length_sum length_eq sum_eq
-  intro state
-  have left_displacement := shellRun_sub_shellRun left state source
-  have right_displacement := shellRun_sub_shellRun right state source
-  rw [slope_eq, collision] at left_displacement
-  linarith
+/-- The first block after an accepted fixed-source collision target. -/
+def fixedSourceAdjacentExitTarget (period nextWait : ℕ) : ℚ :=
+  shellStep nextWait ((11 * (2 / 3 : ℚ) ^ (10 * period) + 9) / 45)
+
+private theorem fixedSourceAdjacentExitTarget_numerator_mod (period nextWait : ℕ) :
+    11 * 2 ^ (10 * period + nextWait) +
+          9 * 2 ^ nextWait * 3 ^ (10 * period) +
+        15 * 3 ^ (10 * period + nextWait) ≡
+      5 * 24 ^ period * (4 * 2 ^ nextWait + 3 * 3 ^ nextWait) [MOD 25] := by
+  have target_mod := fixedSourceAdjacentFamily_ten_mul_numerator_mod period
+  have three_mod : 3 ^ 10 ≡ 24 [MOD 25] := by norm_num
+  have three_period : 3 ^ (10 * period) ≡ 24 ^ period [MOD 25] := by
+    rw [pow_mul]
+    exact three_mod.pow period
+  calc
+    11 * 2 ^ (10 * period + nextWait) +
+            9 * 2 ^ nextWait * 3 ^ (10 * period) +
+          15 * 3 ^ (10 * period + nextWait) =
+        2 ^ nextWait *
+            (11 * 2 ^ (10 * period) + 9 * 3 ^ (10 * period)) +
+          15 * 3 ^ (10 * period) * 3 ^ nextWait := by
+      rw [pow_add, pow_add]
+      ring
+    _ ≡ 2 ^ nextWait * (20 * 24 ^ period) +
+          15 * 24 ^ period * 3 ^ nextWait [MOD 25] :=
+      (target_mod.mul_left (2 ^ nextWait)).add
+        ((three_period.mul_left 15).mul_right (3 ^ nextWait))
+    _ = 5 * 24 ^ period * (4 * 2 ^ nextWait + 3 * 3 ^ nextWait) := by ring
+
+private theorem fixedSourceAdjacentExitTarget_numerator
+    (period nextWait : ℕ) :
+    HasValue 5
+      (11 * (2 : ℚ) ^ (10 * period + nextWait) +
+          9 * 2 ^ nextWait * 3 ^ (10 * period) +
+        15 * 3 ^ (10 * period + nextWait)) 1 := by
+  let numerator : ℕ :=
+    11 * 2 ^ (10 * period + nextWait) +
+        9 * 2 ^ nextWait * 3 ^ (10 * period) +
+      15 * 3 ^ (10 * period + nextWait)
+  let coefficient : ℕ := 4 * 2 ^ nextWait + 3 * 3 ^ nextWait
+  have numerator_mod :
+      numerator ≡ 5 * 24 ^ period * coefficient [MOD 25] := by
+    simpa [numerator, coefficient] using
+      fixedSourceAdjacentExitTarget_numerator_mod period nextWait
+  have five_dvd_numerator : 5 ∣ numerator := by
+    have reduced := numerator_mod.of_dvd (by norm_num : 5 ∣ 25)
+    have right_zero : 5 * 24 ^ period * coefficient ≡ 0 [MOD 5] := by
+      simpa [Nat.mul_assoc] using
+        (dvd_mul_right 5 (24 ^ period * coefficient)).modEq_zero_nat
+    exact Nat.modEq_zero_iff_dvd.mp (reduced.trans right_zero)
+  have twentyfive_not_dvd_numerator : ¬25 ∣ numerator := by
+    intro twentyfive_dvd
+    have numerator_zero : numerator ≡ 0 [MOD 25] := twentyfive_dvd.modEq_zero_nat
+    have right_dvd : 25 ∣ 5 * 24 ^ period * coefficient :=
+      Nat.modEq_zero_iff_dvd.mp (numerator_mod.symm.trans numerator_zero)
+    have cancelled : 5 ∣ 24 ^ period * coefficient := by
+      apply Nat.dvd_of_mul_dvd_mul_left (by norm_num : 0 < 5)
+      simpa [Nat.mul_assoc] using right_dvd
+    have coprime : Nat.Coprime 5 (24 ^ period) :=
+      (by norm_num : Nat.Coprime 5 24).pow_right period
+    exact exitCoefficient_not_five_dvd nextWait
+      (coprime.dvd_of_dvd_mul_right (by simpa [coefficient, mul_comm] using cancelled))
+  have numerator_ne_int : (numerator : ℤ) ≠ 0 := by positivity
+  have numerator_value_int : padicValInt 5 (numerator : ℤ) = 1 := by
+    have one_le : 1 ≤ padicValInt 5 (numerator : ℤ) :=
+      ((padicValInt_dvd_iff (p := 5) 1 (numerator : ℤ)).mp (by
+        simpa using (show (5 : ℤ) ∣ numerator by
+          exact_mod_cast five_dvd_numerator))).resolve_left numerator_ne_int
+    have not_two_le : ¬2 ≤ padicValInt 5 (numerator : ℤ) := by
+      intro two_le
+      have twentyfive_dvd_int :=
+        (padicValInt_dvd_iff (p := 5) 2 (numerator : ℤ)).mpr (Or.inr two_le)
+      have twentyfive_dvd_nat : 25 ∣ numerator := by
+        exact_mod_cast twentyfive_dvd_int
+      exact twentyfive_not_dvd_numerator twentyfive_dvd_nat
+    omega
+  have numerator_value : HasValue 5 (numerator : ℚ) 1 := by
+    refine ⟨by positivity, ?_⟩
+    rw [padicValRat.of_nat, ← padicValInt.of_nat]
+    exact_mod_cast numerator_value_int
+  simpa [numerator] using numerator_value
+
+/-- Every next block leaves the critical shell at valuation exactly minus one. -/
+theorem fixedSourceAdjacentExitTarget_fiveNegative (period nextWait : ℕ) :
+    HasValue 5 (fixedSourceAdjacentExitTarget period nextWait) (-1) := by
+  have numerator_value := fixedSourceAdjacentExitTarget_numerator period nextWait
+  have three_unit : IsUnit 5 (3 : ℚ) := intCast_isUnit_of_not_dvd (by norm_num)
+  have seventyfive_value : HasValue 5 (75 : ℚ) 2 := by
+    convert mul_hasValue (primePower_hasValue (prime := 5) 2)
+      (intCast_isUnit_of_not_dvd (by norm_num : ¬(5 : ℤ) ∣ 3)) using 1 <;>
+      norm_num
+  have denominator_value :
+      HasValue 5 (75 * (3 : ℚ) ^ (10 * period + nextWait)) 2 := by
+    simpa using mul_hasValue seventyfive_value
+      (unit_pow three_unit (10 * period + nextWait))
+  have exit_eq :
+      fixedSourceAdjacentExitTarget period nextWait =
+        (11 * (2 : ℚ) ^ (10 * period + nextWait) +
+              9 * 2 ^ nextWait * 3 ^ (10 * period) +
+            15 * 3 ^ (10 * period + nextWait)) /
+          (75 * 3 ^ (10 * period + nextWait)) := by
+    simp only [fixedSourceAdjacentExitTarget, shellStep, div_pow]
+    field_simp
+    ring
+  rw [exit_eq]
+  simpa using div_hasValue numerator_value denominator_value
+
+/-- A one-block exit separates into one wait power and one period carrier. -/
+theorem fixedSourceAdjacentExitTarget_displacement (period nextWait : ℕ) :
+    75 * fixedSourceAdjacentExitTarget period nextWait - 15 =
+      (2 / 3 : ℚ) ^ nextWait *
+        (9 + 11 * (2 / 3 : ℚ) ^ (10 * period)) := by
+  simp only [fixedSourceAdjacentExitTarget, shellStep]
+  ring
+
+/-- The two-adic displacement of a one-block exit separates the exceptional zero period. -/
+theorem fixedSourceAdjacentExitTarget_displacement_twoValue
+    (period nextWait : ℕ) :
+    HasValue 2 (75 * fixedSourceAdjacentExitTarget period nextWait - 15)
+      (if period = 0 then nextWait + 2 else nextWait) := by
+  have two_value : HasValue 2 (2 : ℚ) 1 := by
+    simpa using (primePower_hasValue (prime := 2) 1)
+  have three_unit : IsUnit 2 (3 : ℚ) := intCast_isUnit_of_not_dvd (by norm_num)
+  have ratio_value : HasValue 2 (2 / 3 : ℚ) 1 := div_hasValue two_value three_unit
+  have wait_value : HasValue 2 ((2 / 3 : ℚ) ^ nextWait) nextWait := by
+    simpa using hasValue_pow ratio_value nextWait
+  rw [fixedSourceAdjacentExitTarget_displacement]
+  by_cases period_zero : period = 0
+  · subst period
+    simp only [mul_zero, pow_zero]
+    have twenty_value : HasValue 2 (20 : ℚ) 2 := by
+      convert mul_hasValue (primePower_hasValue (prime := 2) 2)
+        (intCast_isUnit_of_not_dvd (by norm_num : ¬(2 : ℤ) ∣ 5)) using 1 <;>
+        norm_num
+    convert mul_hasValue wait_value twenty_value using 1 <;> norm_num
+  · simp only [if_neg period_zero]
+    have exponent_positive : 0 < 10 * period := by omega
+    have power_value :
+        HasValue 2 ((2 / 3 : ℚ) ^ (10 * period)) (10 * period) := by
+      simpa using hasValue_pow ratio_value (10 * period)
+    have eleven_unit : IsUnit 2 (11 : ℚ) := intCast_isUnit_of_not_dvd (by norm_num)
+    have perturbation_value := mul_hasValue eleven_unit power_value
+    have perturbation_positive :
+        IsPositive 2 (11 * (2 / 3 : ℚ) ^ (10 * period)) :=
+      ⟨perturbation_value.1, by rw [perturbation_value.2]; omega⟩
+    have nine_unit : IsUnit 2 (9 : ℚ) := intCast_isUnit_of_not_dvd (by norm_num)
+    have bracket_unit := unit_add_positive nine_unit perturbation_positive
+    simpa using mul_hasValue wait_value bracket_unit
+
+/-- Every suffix after the forced exit remains outside the shell and loses one five-adic unit
+per block. -/
+theorem fixedSourceAdjacentExitTarget_tail_fiveNegative
+    (period nextWait : ℕ) (tail : List ℕ) :
+    HasValue 5
+      (shellRun tail (fixedSourceAdjacentExitTarget period nextWait))
+      (-1 - tail.length) :=
+  shellRun_fiveNegative tail
+    (fixedSourceAdjacentExitTarget_fiveNegative period nextWait) (by omega)
+
+/-- The exceptional-period wait forced by a prescribed one-block exit target. -/
+def fixedSourceAdjacentExceptionalExitWaitCandidate (target : ℚ) : ℕ :=
+  Int.toNat (padicValRat 2 (75 * target - 15) - 2)
+
+/-- The ordinary wait forced by a prescribed one-block exit target. -/
+def fixedSourceAdjacentExitWaitCandidate (target : ℚ) : ℕ :=
+  Int.toNat (padicValRat 2 (75 * target - 15))
+
+/-- The ordinary period forced after extracting a prescribed exit target's wait. -/
+def fixedSourceAdjacentExitPeriodCandidate (target : ℚ) : ℕ :=
+  Int.toNat
+      (padicValRat 2
+        (((75 * target - 15) /
+              (2 / 3 : ℚ) ^ fixedSourceAdjacentExitWaitCandidate target - 9) /
+          11)) /
+    10
+
+/-- Membership in the one-block exit surface reduces to two explicit rational equality tests. -/
+theorem fixedSourceAdjacentExitTarget_exists_iff (target : ℚ) :
+    (∃ period nextWait : ℕ,
+        fixedSourceAdjacentExitTarget period nextWait = target) ↔
+      fixedSourceAdjacentExitTarget 0
+          (fixedSourceAdjacentExceptionalExitWaitCandidate target) = target ∨
+        fixedSourceAdjacentExitTarget
+            (fixedSourceAdjacentExitPeriodCandidate target)
+            (fixedSourceAdjacentExitWaitCandidate target) = target := by
+  constructor
+  · rintro ⟨period, nextWait, target_eq⟩
+    by_cases period_zero : period = 0
+    · subst period
+      left
+      have displacement_value :=
+        fixedSourceAdjacentExitTarget_displacement_twoValue 0 nextWait
+      have valuation_eq :
+          padicValRat 2 (75 * target - 15) = nextWait + 2 := by
+        rw [← target_eq]
+        simpa using displacement_value.2
+      have candidate_eq :
+          fixedSourceAdjacentExceptionalExitWaitCandidate target = nextWait := by
+        rw [fixedSourceAdjacentExceptionalExitWaitCandidate, valuation_eq]
+        simp
+      simpa [candidate_eq] using target_eq
+    · right
+      have displacement_value :=
+        fixedSourceAdjacentExitTarget_displacement_twoValue period nextWait
+      have valuation_eq :
+          padicValRat 2 (75 * target - 15) = nextWait := by
+        rw [← target_eq]
+        simpa [period_zero] using displacement_value.2
+      have wait_candidate_eq :
+          fixedSourceAdjacentExitWaitCandidate target = nextWait := by
+        rw [fixedSourceAdjacentExitWaitCandidate, valuation_eq]
+        simp
+      have transformed_eq :
+          ((75 * target - 15) / (2 / 3 : ℚ) ^ nextWait - 9) / 11 =
+            (2 / 3 : ℚ) ^ (10 * period) := by
+        rw [← target_eq]
+        simp only [fixedSourceAdjacentExitTarget, shellStep]
+        field_simp
+        ring
+      have two_value : HasValue 2 (2 : ℚ) 1 := by
+        simpa using (primePower_hasValue (prime := 2) 1)
+      have three_unit : IsUnit 2 (3 : ℚ) := intCast_isUnit_of_not_dvd (by norm_num)
+      have ratio_value : HasValue 2 (2 / 3 : ℚ) 1 := div_hasValue two_value three_unit
+      have period_candidate_eq :
+          fixedSourceAdjacentExitPeriodCandidate target = period := by
+        rw [fixedSourceAdjacentExitPeriodCandidate, wait_candidate_eq, transformed_eq,
+          padicValRat.pow, ratio_value.2]
+        simp only [mul_one, Int.toNat_natCast]
+        omega
+      simpa [period_candidate_eq, wait_candidate_eq] using target_eq
+  · rintro (exceptional_hit | ordinary_hit)
+    · exact ⟨0, fixedSourceAdjacentExceptionalExitWaitCandidate target, exceptional_hit⟩
+    · exact ⟨fixedSourceAdjacentExitPeriodCandidate target,
+        fixedSourceAdjacentExitWaitCandidate target, ordinary_hit⟩
+
+/-- Period and next-wait coordinates are unique on the one-block exit surface. -/
+theorem fixedSourceAdjacentExitTarget_injective : Function.Injective
+    (fun coordinates : ℕ × ℕ =>
+      fixedSourceAdjacentExitTarget coordinates.1 coordinates.2) := by
+  rintro ⟨leftPeriod, leftWait⟩ ⟨rightPeriod, rightWait⟩ target_eq
+  change fixedSourceAdjacentExitTarget leftPeriod leftWait =
+    fixedSourceAdjacentExitTarget rightPeriod rightWait at target_eq
+  have displacement_eq :
+      (2 / 3 : ℚ) ^ leftWait *
+          (9 + 11 * (2 / 3 : ℚ) ^ (10 * leftPeriod)) =
+        (2 / 3 : ℚ) ^ rightWait *
+          (9 + 11 * (2 / 3 : ℚ) ^ (10 * rightPeriod)) := by
+    rw [← fixedSourceAdjacentExitTarget_displacement,
+      ← fixedSourceAdjacentExitTarget_displacement, target_eq]
+  have left_value :=
+    fixedSourceAdjacentExitTarget_displacement_twoValue leftPeriod leftWait
+  have right_value :=
+    fixedSourceAdjacentExitTarget_displacement_twoValue rightPeriod rightWait
+  have valuation_eq :
+      (if leftPeriod = 0 then (leftWait : ℤ) + 2 else leftWait) =
+        if rightPeriod = 0 then (rightWait : ℤ) + 2 else rightWait := by
+    rw [← left_value.2, ← right_value.2]
+    exact congrArg (padicValRat 2)
+      (congrArg (fun target => 75 * target - 15) target_eq)
+  by_cases left_zero : leftPeriod = 0
+  · subst leftPeriod
+    by_cases right_zero : rightPeriod = 0
+    · subst rightPeriod
+      have valuation_eq' : (leftWait : ℤ) + 2 = (rightWait : ℤ) + 2 := by
+        simpa using valuation_eq
+      have wait_eq : leftWait = rightWait := by omega
+      simp [wait_eq]
+    · have valuation_eq' : (leftWait : ℤ) + 2 = rightWait := by
+        simpa [right_zero] using valuation_eq
+      have wait_eq : rightWait = leftWait + 2 := by omega
+      rw [wait_eq] at displacement_eq
+      have power_ne : (2 / 3 : ℚ) ^ leftWait ≠ 0 := by positivity
+      have reduced_eq :
+          (20 : ℚ) = (2 / 3 : ℚ) ^ 2 *
+            (9 + 11 * (2 / 3 : ℚ) ^ (10 * rightPeriod)) := by
+        apply mul_left_cancel₀ power_ne
+        calc
+          (2 / 3 : ℚ) ^ leftWait * 20 =
+              (2 / 3 : ℚ) ^ leftWait *
+                (9 + 11 * (2 / 3 : ℚ) ^ (10 * 0)) := by norm_num
+          _ = (2 / 3 : ℚ) ^ (leftWait + 2) *
+                (9 + 11 * (2 / 3 : ℚ) ^ (10 * rightPeriod)) := displacement_eq
+          _ = (2 / 3 : ℚ) ^ leftWait *
+                ((2 / 3 : ℚ) ^ 2 *
+                  (9 + 11 * (2 / 3 : ℚ) ^ (10 * rightPeriod))) := by
+            rw [pow_add]
+            ring
+      have power_le_one : (2 / 3 : ℚ) ^ (10 * rightPeriod) ≤ 1 :=
+        pow_le_one₀ (by norm_num) (by norm_num)
+      norm_num at reduced_eq
+      nlinarith
+  · by_cases right_zero : rightPeriod = 0
+    · subst rightPeriod
+      have valuation_eq' : (leftWait : ℤ) = (rightWait : ℤ) + 2 := by
+        simpa [left_zero] using valuation_eq
+      have wait_eq : leftWait = rightWait + 2 := by omega
+      rw [wait_eq] at displacement_eq
+      have power_ne : (2 / 3 : ℚ) ^ rightWait ≠ 0 := by positivity
+      have reduced_eq :
+          (2 / 3 : ℚ) ^ 2 *
+              (9 + 11 * (2 / 3 : ℚ) ^ (10 * leftPeriod)) =
+            20 := by
+        apply mul_left_cancel₀ power_ne
+        calc
+          (2 / 3 : ℚ) ^ rightWait *
+              ((2 / 3 : ℚ) ^ 2 *
+                (9 + 11 * (2 / 3 : ℚ) ^ (10 * leftPeriod))) =
+            (2 / 3 : ℚ) ^ (rightWait + 2) *
+              (9 + 11 * (2 / 3 : ℚ) ^ (10 * leftPeriod)) := by
+                rw [pow_add]
+                ring
+          _ = (2 / 3 : ℚ) ^ rightWait *
+              (9 + 11 * (2 / 3 : ℚ) ^ (10 * 0)) := displacement_eq
+          _ = (2 / 3 : ℚ) ^ rightWait * 20 := by norm_num
+      have power_le_one : (2 / 3 : ℚ) ^ (10 * leftPeriod) ≤ 1 :=
+        pow_le_one₀ (by norm_num) (by norm_num)
+      norm_num at reduced_eq
+      nlinarith
+    · have valuation_eq' : (leftWait : ℤ) = rightWait := by
+        simpa [left_zero, right_zero] using valuation_eq
+      have wait_eq : leftWait = rightWait := by omega
+      subst rightWait
+      have power_ne : (2 / 3 : ℚ) ^ leftWait ≠ 0 := by positivity
+      have carrier_eq :
+          9 + 11 * (2 / 3 : ℚ) ^ (10 * leftPeriod) =
+            9 + 11 * (2 / 3 : ℚ) ^ (10 * rightPeriod) :=
+        mul_left_cancel₀ power_ne displacement_eq
+      have powers_eq :
+          (2 / 3 : ℚ) ^ (10 * leftPeriod) =
+            (2 / 3 : ℚ) ^ (10 * rightPeriod) := by
+        linarith
+      have exponents_eq : 10 * leftPeriod = 10 * rightPeriod :=
+        pow_right_injective₀ (a := (2 / 3 : ℚ)) (by norm_num) (by norm_num) powers_eq
+      have periods_eq : leftPeriod = rightPeriod := by omega
+      simp [periods_eq]
 
 end MatrixMortality.MixedPrimeDebt

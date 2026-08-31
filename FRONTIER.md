@@ -2796,6 +2796,14 @@ quantifier. Every target nevertheless lies on the complementary endpoint pole
 `v₂(1−2u)=0`. Within this ray the fixed-target query is decidable by testing the sole candidate
 `m=max(0,v₂((45y−9)/11))`; the unresolved quantifier is intersection of the full reachable set,
 not this family. This is [`D2-O03`](SALVAGE.md#d2-o03-fixed-source-adjacent-saturation).
+The first exit extension is also exact. Every next wait from the accepted `m=10k` subfamily
+leaves the shell at valuation `−1`, and every later block lowers that valuation once more. The
+two-parameter exit surface has displacement
+`75E(k,r)−15=(2/3)^r(9+11(2/3)^(10k))`; it is injective, and fixed-target membership reduces to
+two valuation-derived equality tests. Thus neither the ray nor its first exit block has an
+infinite fixed-target fibre. The remaining seam is the post-exit fixed-length suffix relation or
+an exit from a different reachable shell state. This is
+[`D2-O04`](SALVAGE.md#d2-o04-forced-exit-surface).
 Higher depth is not free: a published length-thirteen relation yields two distinct
 schedules with the same affine map and a common Lean-checked guarded periodic source. This is an
 exact rewrite seed. Lean also proves that it preserves all intermediate shell guards in every
