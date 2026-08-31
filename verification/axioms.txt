@@ -1143,6 +1143,18 @@
 'MatrixMortality.CongruenceBlindOrbit.shearRepresentation_bridgeWord' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.CongruenceBlindOrbit.modularBridgeWord_product' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CongruenceBlindOrbit.bridgeMatrix_projectively_hits_of_crt' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CongruenceBlindOrbit.congruenceTerminalExponent_relation' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CongruenceBlindOrbit.exists_bridgeWord_modular_hit' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.CongruenceBlindOrbit.source_target_outside_chambers' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]

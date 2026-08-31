@@ -10,8 +10,9 @@ Human role: elicited by @eternalism_4eva
 
 There is an explicit free subgroup of `GL₂(ℤ)` with a trivial-stabilizer rational projective
 orbit and a rational target outside that orbit, although the target lies in the orbit modulo
-every positive integer. Thus no family of ordinary integral congruence quotients decides even
-this free, generic projective-incidence no-instance.
+every positive integer. Thus no modulus, nor any finite family of moduli, separates this free
+projective-incidence no-instance by residue-orbit nonmembership; the corresponding
+all-congruence local-global membership criterion is false.
 
 This is an obstruction to congruence separation, not a decision or undecidability theorem for
 `GPI₂`, `M₂(3)`, or `M₃(2)`.
@@ -127,17 +128,19 @@ and equals `13⁻¹` on its complement, while `13(1+3n)=10` there, then
 `bridgeMatrix_idempotent_projective_target` turns (7) into `H(x,n)p=uq`.
 
 `bridgeWord` is the literal free-product word (3), and
-`shearRepresentation_bridgeWord` checks that its rational matrix is `H(3rd,n)`. The existence
-of `d`, `n`, and the CRT scalar for each `N` is the elementary audited assembly above; it is not
-yet quantified by one end-to-end `ZMod N` Lean declaration.
+`shearRepresentation_bridgeWord` checks that its rational matrix is `H(3rd,n)`.
+`congruenceTerminalExponent_relation` formalizes the inverse congruence at every three-adic
+depth, including `k=0`; `bridgeMatrix_projectively_hits_of_crt` constructs the CRT unit and
+proves both vectors unimodular over the composite residue ring; and
+`exists_bridgeWord_modular_hit` quantifies the complete assembly for every `N>0`.
 
 ## Scope
 
 The theorem says that one explicit orbit no-instance is invisible to all integral congruence
 quotients, with the witnessing word allowed to depend on the modulus. It does not say that the
-whole orbit is dense in any `p`-adic projective line, nor that arbitrary `GPI₂` instances are
-congruence-blind. It also does not obstruct representations that preserve positive syntax,
-Archimedean order, heights, or unbounded carry data.
+whole orbit is dense in any `p`-adic projective line or adelic product, nor that arbitrary
+`GPI₂` instances are congruence-blind. It also does not obstruct algorithms combining
+congruence data with positive syntax, Archimedean order, heights, or unbounded carry data.
 
 The consequence for the joint `M₂(3)`/rank-`(2,2)` artery of `M₃(2)` is exact: a decision proof
 cannot rely on eventual separation of every no-instance by ordinary reductions modulo `N`, even

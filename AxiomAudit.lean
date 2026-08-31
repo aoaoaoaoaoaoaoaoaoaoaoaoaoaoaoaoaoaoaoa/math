@@ -582,6 +582,10 @@ open MatrixMortality
 #print axioms CongruenceBlindOrbit.bridgeMatrix_idempotent_mulVec_source
 #print axioms CongruenceBlindOrbit.bridgeMatrix_idempotent_projective_target
 #print axioms CongruenceBlindOrbit.shearRepresentation_bridgeWord
+#print axioms CongruenceBlindOrbit.modularBridgeWord_product
+#print axioms CongruenceBlindOrbit.bridgeMatrix_projectively_hits_of_crt
+#print axioms CongruenceBlindOrbit.congruenceTerminalExponent_relation
+#print axioms CongruenceBlindOrbit.exists_bridgeWord_modular_hit
 #print axioms CongruenceBlindOrbit.source_target_outside_chambers
 #print axioms CongruenceBlindOrbit.targetPoint_not_reachable
 #print axioms CongruenceBlindOrbit.sourcePoint_stabilizer_trivial

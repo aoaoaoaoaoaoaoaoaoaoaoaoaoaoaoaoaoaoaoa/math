@@ -407,8 +407,9 @@ This failure is not peculiar to positive-coset saturation. `R32-O22` gives expli
 `A=U(3)`, `B=L(3)` and rays `p=[1:1]`, `q=[10:13]`. Lean proves by ping-pong that their
 representation is free, `Stab(p)=1`, and `q` is outside the rational orbit. The checked
 five-factor bridge and idempotent interpolation send `p` projectively to `q` in every CRT
-component; the elementary modular inverse and CRT existence are audited. Thus one generic free
-orbit no-instance survives every ordinary modulus.
+component. Lean now also constructs the modular inverses, composite-ring CRT unit, unimodular
+rays, and one witness for every positive modulus. Thus one generic free-orbit no-instance
+survives every ordinary modulus.
 
 The affine critical shell has a complementary checked obstruction. `PeriodicShell` composes an
 arbitrary nonempty list of rational `5`-unit affine scales, constructs its explicit rational
@@ -1119,6 +1120,10 @@ an effective positive inverse-spelling section, fixed explicitly for the triangl
 `F₂` singleton-fibre `PGL₂`/at-most-one Borel-coset sharpening is also audited outside Lean. No
 declaration converts group inverses into positive controls or claims `M₂(3)`.
 
+The adjacent [`R32-O22`](SALVAGE.md#r32-o22-congruence-blind-free-orbit) obstruction applies to
+this residual group-orbit shell: its all-modulus CRT closure is formalized without claiming
+orbit density, decidability, or hardness for rational Borel-coset intersection.
+
 Lean checks the internal algebra at the positive boundary: three positive letters surject onto
 the binary free group; quotient-blind boundaries accepting `g` and `g²` admit a nonempty identity
 witness; every injective transition on a finite invariant semantic fibre pumps an identity loop;
@@ -1573,7 +1578,7 @@ fixed-rank decision problem.
 | `ReturnJordan.lean` | parity-Jordan rail rigidity and modular immortality certificate |
 | `ReturnConvert.lean` | minimal two-scale return pencil and nonresonant multi-return zero |
 | `ProjectiveLine.lean` | total affine-chart presentation of `ℙ¹` and exact unit-word ray action |
-| `CongruenceBlindOrbit.lean` | free rational shear orbit, trivial source stabilizer, explicit five-factor CRT bridge, and congruence-blind target |
+| `CongruenceBlindOrbit.lean` | free rational shear orbit, trivial source stabilizer, explicit five-factor bridge, and end-to-end all-modulus CRT closure |
 | `PadicValuation.lean` | nonzero rational p-adic shells, unequal-valuation calculus, and the adjacent-unit odd-prime obstruction |
 | `PeriodicShell.lean` | exact affine schedule composition, rational all-unit periodic cycles, and the published nonfree benchmark relation |
 | `MixedPrimeKernel.lean` | raw mixed-prime affine action, contextual composition, an infinite odd-length kernel family from length 29, and three independent length-30 relations |
@@ -1770,7 +1775,7 @@ fixed-rank decision problem.
 | Every malformed Collatz predecessor word remains nonintegral by negative 3-adic valuation | `ProjectiveCollatz.predecessorState_reaches_or_negative` |
 | Every nonzero shortcut-Collatz target reduces exactly to normalized GPI₂ | `ProjectiveCollatz.normalizedScalars`, `ProjectiveCollatz.exists_normalizedIncidence_zero_iff` |
 | In a finite group, positive monoid closure of a group-generating set is the whole group | `FinitePositiveImage.Submonoid.inv_mem_of_finite`, `FinitePositiveImage.mclosure_eq_top_of_group_closure_eq_top` |
-| A free rational shear orbit with trivial source stabilizer misses `[10:13]`, while one idempotent five-factor bridge reaches it projectively in every CRT component | `CongruenceBlindOrbit.shearRepresentation_injective`, `CongruenceBlindOrbit.sourcePoint_stabilizer_trivial`, `CongruenceBlindOrbit.targetPoint_not_reachable`, `CongruenceBlindOrbit.bridgeMatrix_idempotent_projective_target`, `CongruenceBlindOrbit.shearRepresentation_bridgeWord` |
+| A free rational shear orbit with trivial source stabilizer misses `[10:13]`, while an explicit five-factor word reaches it projectively modulo every positive integer | `CongruenceBlindOrbit.shearRepresentation_injective`, `CongruenceBlindOrbit.sourcePoint_stabilizer_trivial`, `CongruenceBlindOrbit.targetPoint_not_reachable`, `CongruenceBlindOrbit.bridgeMatrix_idempotent_projective_target`, `CongruenceBlindOrbit.shearRepresentation_bridgeWord`, `CongruenceBlindOrbit.exists_bridgeWord_modular_hit` |
 | The raw mixed-prime affine action has a published relation at length 27, an infinite distinct equal-map family at every odd length from 29, and three independent relations at length 30 | `MixedPrimeKernel.cassaigne_ne`, `MixedPrimeKernel.wordAction_cassaigne`, `MixedPrimeKernel.kernelOddFamily_length`, `MixedPrimeKernel.kernelOddFamily_ne`, `MixedPrimeKernel.wordAction_kernelOddFamily`, `MixedPrimeKernel.kernel30_ne`, `MixedPrimeKernel.wordAction_kernel30a`, `MixedPrimeKernel.wordAction_kernel30b`, `MixedPrimeKernel.wordAction_kernel30c` |
 | Every nonempty critical-shell wait schedule has a rational periodic `5`-unit at every cyclic phase | `PeriodicShell.shellPeriodicCycle` |
 | Shell phases are all units exactly when the final output is a unit | `PeriodicShell.shellPrefixesUnit_iff` |
@@ -2149,6 +2154,14 @@ rational two-coordinate transport, the empty-language carrier, and the triangle 
 dichotomy. The triangle's effective rank sieve and its at-most-one rational Borel-coset
 formulation for the promised empty-or-singleton fibre are audited consequences, not Lean
 declarations.
+
+For `R32-O22`, Lean proves every algebraic claim in the explicit obstruction: signed shear-word
+evaluation, the power-of-three endpoint congruence, the CRT unit over composite moduli, an
+all-positive-modulus projective hit, rational chamber inequalities, free-product injectivity,
+trivial point stabilizer, and rational nonreachability. The strategic conclusion is confined to
+the failure of residue-orbit nonmembership and of the corresponding all-congruence membership
+criterion. It does not assert topological density at any local or adelic place, nor decide the
+remaining Borel-coset shell.
 
 The scheduled compiler introduces a separate source-width seam. Neary's published construction
 sets `β = 10p`, where `p` is the simulated cyclic-tag program period. The fixed-width audit found
