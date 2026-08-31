@@ -576,14 +576,19 @@ three integer 4 × 4 matrices mortal
 
 with a converse over every physical matrix word. The fifth affine coordinate is unnecessary.
 
+The cyclic-side stratum is now closed. [`M4-D04`](SALVAGE.md#m4-d04-cyclic-side-binary-fixed-boundary-decision)
+reduces any instance with one cyclic-image homomorphism to rational-subset membership in
+`F(Δ)×ℤ`, which is decidable. A noninjective homomorphism from `F₂` to a free group has cyclic
+image, so every hard binary instance must make both homomorphisms injective.
+
 Two free-cancellation nodes survive and should be raced against each other.
 
 1. **Constructive binary compiler.** Compile the four-letter marker-tail equation into positive
    binary fixed-boundary free-group equality, preserving solvability in both directions over the
-   complete binary free monoid and forcing an empty-interior mismatch. A solution closes
-   `M₄(3)` immediately through `M4-M05`.
-2. **Fixed-rank classification.** Decide the same restricted binary fixed-boundary problem, or
-   prove a structural obstruction to carrying the Carvalho equation.
+   complete binary free monoid, forcing an empty-interior mismatch, and making both maps
+   injective. A solution closes `M₄(3)` immediately through `M4-M05`.
+2. **Injective fixed-rank classification.** Decide the remaining injective/injective binary
+   fixed-boundary problem, or prove a structural obstruction to carrying the Carvalho equation.
    [`Logan`](references/logan-2022-equalizer-rank-two.md) bounds injective equalizers from `F₂`
    by rank two but gives no general triviality algorithm;
    [`Ciobanu--Logan`](references/ciobanu-logan-2021-free-group-pcp-variations.md) use hypotheses

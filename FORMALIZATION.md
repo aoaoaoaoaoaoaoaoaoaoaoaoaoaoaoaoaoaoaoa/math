@@ -1676,6 +1676,7 @@ fixed-rank decision problem.
 | `PCPEncoding.lean` | `3 × 3` word-pair morphism and equality entry |
 | `TerminalTile.lean` | arbitrary rank-one chains, fracture at every separator, and fixed-boundary folding into separator rays |
 | `SchottkyPunctuation.lean` | four-dimensional integral left--right action and homogeneous first-column incidence coefficient |
+| `CyclicBinaryBoundary.lean` | cyclic-side fixed-boundary equality as a weighted trace/corridor intersection in `G × ℤ` |
 | `TerminalReduction.lean` | rational and integer fixed-boundary mortality compiler |
 | `TerminalSource.lean` | generic primitive extraction and GPCP bridge |
 | `PairedCompression.lean` | reset/toggle specialization, explicit coordinate certificates, and arbitrary-word decoding |
@@ -2004,6 +2005,8 @@ fixed-rank decision problem.
 | Three positive letters cover every prescribed first-exponent slice exactly | `PositiveFreeCancellation.firstExponent_triangleEvaluate`, `PositiveFreeCancellation.triangleSliceEvaluate_surjective` |
 | Positive identity-triangle padding preserves both value and affine weight | `PositiveFreeCancellation.triangle_identity_padding` |
 | Quotient-blind boundaries accepting an element and its square admit a nonempty identity witness | `PositiveFreeCancellation.exists_nonempty_identity_witness` |
+| A positive cyclic morphism evaluates as one power with its additive word weight | `CyclicBinaryBoundary.positiveEvaluate_cyclic` |
+| Cyclic-side fixed-boundary equality is exactly weighted-trace/cyclic-corridor intersection | `CyclicBinaryBoundary.exists_boundaryEquation_iff_trace_inter_corridor_nonempty` |
 | Invertible positive transitions carry each spelling-fibre span exactly along the group orbit | `PositiveFreeCancellation.positiveFibreSpan_word_map_eq`, `PositiveFreeCancellation.positiveFibreSpan_word_symm_map_eq` |
 | Every nonzero vanished three-dimensional fibre has rank one or two | `PositiveFreeCancellation.positiveFibreSpan_finrank_one_or_two`, `PositiveFreeCancellation.positiveFibreSpan_eq_ker_of_finrank_two` |
 | The identity fibre is the seed orbit of its unital identity-word operator algebra | `PositiveFreeCancellation.positiveIdentityAlgebra_map_apply_eq_fibre` |
