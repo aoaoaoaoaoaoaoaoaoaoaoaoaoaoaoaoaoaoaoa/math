@@ -526,6 +526,7 @@ open MatrixMortality
 #print axioms OverlapLag.mortality_iff_syntax
 #print axioms OverlapLag.terminal_image_ne_frame
 #print axioms exactLeftToggleFusion_immortal
+#print axioms exactDelimiterPair_immortal
 #print axioms closedSubstitutionHalts_iff_noReachableCycle
 #print axioms twoPrivateState_ruleScale_eq
 #print axioms neary_twoPrivateState_phaseCompiler_impossible
@@ -584,6 +585,8 @@ open MatrixMortality
 #print axioms ParabolicBlade.bridge_bSafe_bDefectRun_bSafe_det_ne_zero
 #print axioms ParabolicBlade.bridge_cOne_bTwo_cZero_det
 #print axioms ParabolicBlade.bridge_cOne_bTwo_cZero_det_ne_zero
+#print axioms ParabolicBlade.cZeroBDefectCOneCore_allC_ne_zero
+#print axioms ParabolicBlade.bridge_cZero_cTwo_bOne_det_ne_zero
 #print axioms ParabolicBlade.pureDefect_bridge_det_ne_zero
 #print axioms ParabolicBlade.bridgeFractureChain_eq_zero_iff
 #print axioms ParabolicBlade.bridgeCokernel_regular_word_ne_zero
@@ -1040,6 +1043,9 @@ open MatrixMortality
 #print axioms AffineGroupOrbit.exists_exact_hit_iff_exists_hit_mod_translationKernel
 #print axioms AffineGroupOrbit.commute_of_translationKernel_eq_bot
 #print axioms AffineGroupOrbit.act_fixedPoint_of_translationKernel_eq_bot
+#print axioms CyclicBinaryBoundary.positiveEvaluate_cyclic
+#print axioms CyclicBinaryBoundary.boundaryEquation_iff_mem_cyclicCorridor
+#print axioms CyclicBinaryBoundary.exists_boundaryEquation_iff_trace_inter_corridor_nonempty
 #print axioms MixedPrimeKernel.wordAction_context
 #print axioms MixedPrimeKernel.pumpWord_length
 #print axioms MixedPrimeKernel.wordAction_pumpWord
