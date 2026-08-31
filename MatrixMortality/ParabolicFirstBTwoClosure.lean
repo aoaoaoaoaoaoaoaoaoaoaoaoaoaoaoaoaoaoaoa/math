@@ -53,6 +53,23 @@ theorem bZeroBDefectCOneCodeCore_ccb_ne_zero_of_mem_b
   push_cast at core_zero
   simpa only [List.cons_append, List.nil_append] using core_zero
 
+/-- A body beginning `ccb` and containing an even number of `b` letters cannot zero the
+primitive phase-zero right-`c` core. -/
+theorem bZeroBDefectCOneCodeCore_ccb_ne_zero_of_even_b_count
+    (tail : List TagLetter)
+    (b_count_even :
+      (([TagLetter.c, TagLetter.c, TagLetter.b] : List TagLetter) ++ tail).count
+          TagLetter.b % 2 = 0)
+    (x y z : Nat) :
+    bZeroBDefectCOneCodeCore
+      ((3 : ℚ) ^ (tagEncode 3 ([.c, .c, .b] ++ tail)).length)
+      (ternaryCode (tagEncode 3 ([.c, .c, .b] ++ tail))) x y z ≠ 0 := by
+  have contains_b : .b ∈ tail := by
+    by_contra not_mem
+    have tail_count_zero : tail.count .b = 0 := List.count_eq_zero.mpr not_mem
+    simp [tail_count_zero] at b_count_even
+  exact bZeroBDefectCOneCodeCore_ccb_ne_zero_of_mem_b tail contains_b x y z
+
 /-- The second-first-`b` cylinder cannot close the residual `b | b | c` bridge when its
 remaining tail contains `b`. -/
 theorem bridge_bZero_bTwo_cOne_det_ne_zero_of_ccb_mem_b
@@ -65,5 +82,22 @@ theorem bridge_bZero_bTwo_cOne_det_ne_zero_of_ccb_mem_b
   rw [bridge_bZero_bTwo_cOne_det]
   exact mul_ne_zero (by norm_num)
     (bZeroBDefectCOneCodeCore_ccb_ne_zero_of_mem_b tail contains_b x y z)
+
+/-- The second-first-`b` cylinder cannot close the residual `b | b | c` bridge inside the
+even-`b` parity rectangle. -/
+theorem bridge_bZero_bTwo_cOne_det_ne_zero_of_ccb_even_b_count
+    (tail : List TagLetter)
+    (b_count_even :
+      (([TagLetter.c, TagLetter.c, TagLetter.b] : List TagLetter) ++ tail).count
+          TagLetter.b % 2 = 0)
+    (x y z : Nat) :
+    (bridge 27
+      (bAtom 27 (3 * z) * bAtom 27 (3 * x + 2) *
+        cAtom 27 (nearySideLowerC 3 ([.c, .c, .b] ++ tail))
+          (nearySideLowerCScale 3 ([.c, .c, .b] ++ tail))
+          (3 * y + 1))).det ≠ 0 := by
+  rw [bridge_bZero_bTwo_cOne_det]
+  exact mul_ne_zero (by norm_num)
+    (bZeroBDefectCOneCodeCore_ccb_ne_zero_of_even_b_count tail b_count_even x y z)
 
 end MatrixMortality.ParabolicBlade

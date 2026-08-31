@@ -277,6 +277,9 @@ file owns the mathematical stock.
 | [`M4-S29`](#m4-s29-phase-zero-right-c-first-b-density-cylinder) | structure theorem | the first `b` position traps the complement density in an exact rational cylinder | formalized | active |
 | [`M4-S30`](#m4-s30-phase-zero-right-c-zero-wait-complement-cone) | obstruction | complement density at least `1/585` makes the zero middle-wait core strictly positive | formalized | active |
 | [`M4-S31`](#m4-s31-phase-zero-right-c-trailing-arithmetic) | structure theorem | an exact trailing `c` run exposes the complement valuation, primitive pencils, and factored cross-resultant | formalized | active |
+| [`M4-S32`](#m4-s32-phase-zero-right-c-global-middle-wait-bound) | structure theorem | every first-`b` zero has middle wait at most `51767` | formalized | active |
+| [`M4-S33`](#m4-s33-phase-zero-right-c-x211-divisor-chamber) | structure theorem | the `x=211`, first-`b`-after-one-`c` chamber has an exact positive divisor equation and four elimination resultants | formalized | active |
+| [`M4-S34`](#m4-s34-phase-zero-right-c-second-first-b-extinction) | obstruction | no even-`b` body beginning `ccb` closes the phase-zero right-`c` bridge | formalized | active |
 | [`M4-C03`](#m4-c03-zero-framed-binary-two-lag-compiler) | compiler | the principal scanner is literally binary context-2 Lag and compiles to `M₄(3)` | formalized | graduated |
 | [`M4-D01`](#m4-d01-zero-framed-binary-two-lag-decision) | decidable stratum | the entire zero-framed binary context-2 Lag kernel has an exact syntactic classification | formalized | graduated |
 | [`M4-D02`](#m4-d02-zero-framed-reset-scanner-decision) | decidable stratum | zero-run reduction contracts the reset scanner to a regular two-token quotient | audited | graduated |
@@ -12639,6 +12642,133 @@ that every `h≥9` candidate falls into a first-`b` density gap.
 **Artifact:**
 [`MatrixMortality/ParabolicTrailing.lean`](MatrixMortality/ParabolicTrailing.lean) and
 [`audits/m43-phase-zero-right-c-trailing-arithmetic-2026-08-31.md`](audits/m43-phase-zero-right-c-trailing-arithmetic-2026-08-31.md).
+
+### M4-S32: Phase-zero right-c global middle-wait bound
+
+**Kind:** structure theorem
+
+**Evidence:** formalized
+
+**Disposition:** active
+
+Write a body whose first `b` follows `j` leading copies of `c` as `c^j b v`, and put
+`S=3^|encode(c^j b v)|` and `D=S−C−1`. Lean proves the sharpened cylinder inequality
+
+```text
+242·3^jD ≤ 39(S−1).
+```
+
+Combining it with the exact lower density bound and monotonicity of the primitive core gives,
+for every natural `x,y,z`,
+
+```text
+H(S,C,x,y,z)=0  ⇒  y≤51767.
+```
+
+The proof partitions only the four analytic density regimes `j=0`, `j=1`, `j=2`, and `j≥3`;
+it does not enumerate bodies or waits.
+
+**Scope:** every physical body containing `b` in the phase-zero right-`c` primitive core. The
+bound concerns the middle wait only and does not assert that any bounded candidate is a zero.
+
+**Use:** replace the unbounded middle-wait axis by the exact finite interval
+`0≤y≤51767` before applying divisor or tail-cylinder arithmetic.
+
+**Next:** intersect the bound with the `x=211` divisor chamber and the remaining first-`b`
+density cylinders.
+
+**Artifact:**
+[`MatrixMortality/ParabolicWaitBounds.lean`](MatrixMortality/ParabolicWaitBounds.lean) and
+[`audits/m43-phase-zero-right-c-middle-wait-bound-2026-08-31.md`](audits/m43-phase-zero-right-c-middle-wait-bound-2026-08-31.md).
+
+### M4-S33: Phase-zero right-c x211 divisor chamber
+
+**Kind:** structure theorem
+
+**Evidence:** formalized
+
+**Disposition:** active
+
+At outer wait `x=211`, define five affine body coordinates `N,M,C,K,W` and
+
+```text
+U=8Ny−3C,
+V=4Nz−M.
+```
+
+The primitive core has the exact normal form
+
+```text
+H=−32Nyz+8My+12Cz+3K,
+```
+
+and every zero satisfies
+
+```text
+UV=67908593862DW=2·3^14·31·229·D·W.
+```
+
+Lean also proves both reconstruction divisibilities, the residue constraints
+`U≡2y (mod 3)` and `V≡z−1 (mod 3)`, and four exact resultants eliminating `D` between
+`U,V,W`. On every physical body beginning `cb`, all five body coordinates are positive; at a
+zero, so are `U` and `V`.
+
+**Scope:** the `x=211` slice of the first-`b`-after-one-`c` density cylinder. This result is an
+exact positive divisor reduction, not a nonvanishing theorem for that slice.
+
+**Use:** allocate the fixed prime content and the body factors among two positive affine
+divisors, while the elimination resultants constrain their possible common factors.
+
+**Next:** combine `M4-S32`, the bounded trailing residues, and the first-`b` density gaps to
+exclude every positive divisor allocation.
+
+**Artifact:**
+[`MatrixMortality/ParabolicFirstBOneSFFT.lean`](MatrixMortality/ParabolicFirstBOneSFFT.lean) and
+[`audits/m43-phase-zero-right-c-x211-sfft-2026-08-31.md`](audits/m43-phase-zero-right-c-x211-sfft-2026-08-31.md).
+
+### M4-S34: Phase-zero right-c second-first-b extinction
+
+**Kind:** obstruction
+
+**Evidence:** formalized
+
+**Disposition:** active
+
+No body beginning `ccb` and containing an even number of `b` letters zeros the primitive
+phase-zero right-`c` core, for any three waits. Equivalently, no such body closes the residual
+`b | b | c` bridge.
+
+For `y≥2`, every possible outer wait lies in the normalized root interval
+
+```text
+(5541372938576372618y−718629336347817375)
+  /(25950255067173888y+30751845545334654)
+≤ x <
+(112032354356496y−14545738406053)
+  /(524493688320y+618673335624).
+```
+
+Exact integer arithmetic compresses this interval to 12 ranges containing 77 pairs `(x,y)`.
+Exact affine-rectangle checks for the first `b` in the remaining tail eliminate every integral
+inner wait except `(x,y,z)=(213,465,38)` with tail prefix `ccb`; the endpoint grammar gap then
+excludes that point. The faces `y=0` and `y=1` are discharged separately.
+
+**Scope:** precisely the body cylinder `ccb·{b,c}*` inside the even-`b` parity rectangle. The
+stronger formal interface assumes only even `b` count, not even length. It does not exclude the
+other first-`b` positions or settle `M₄(3)`.
+
+**Use:** delete the entire second-first-`b` chamber from the sole phase-zero right-`c` parity
+survivor. Together with `M4-S28`, the live leading positions are `0`, `1`, and `3` through
+`11`.
+
+**Next:** close the `cb` divisor chamber, then reuse the same root-window and density-certificate
+architecture on the remaining finite leading positions.
+
+**Artifact:**
+[`MatrixMortality/ParabolicFirstBTwoClosure.lean`](MatrixMortality/ParabolicFirstBTwoClosure.lean),
+[`scripts/generate-parabolic-first-b-two-tail.py`](scripts/generate-parabolic-first-b-two-tail.py),
+and
+[`audits/m43-phase-zero-right-c-second-first-b-extinction-2026-08-31.md`](audits/m43-phase-zero-right-c-second-first-b-extinction-2026-08-31.md).
 
 ### M4-C03: Zero-framed binary two-Lag compiler
 

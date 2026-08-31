@@ -36,18 +36,23 @@ def firstBTwoTailZNumerator (a d : ℚ) (x y : Nat) : ℚ :=
   d * (58005064872 * y + 59048086536 * x + 37838186340) -
     a * (2408152393 - 11209824 * x)
 
+/-- Lower endpoint of the normalized all-`c` coordinate on first-`b` tail cylinder `j`. -/
 def firstBTwoTailALower (j : Nat) (y : Nat) : ℚ :=
   2187 * (72 * y - 9) + (9 - 8 * y) / 3 ^ (j + 5)
 
+/-- Upper endpoint of the normalized all-`c` coordinate on every first-`b` tail cylinder. -/
 def firstBTwoTailAUpper (y : Nat) : ℚ :=
   2187 * (72 * y - 9)
 
+/-- Lower endpoint of the normalized complement coordinate on first-`b` tail cylinder `j`. -/
 def firstBTwoTailDLower (j : Nat) : ℚ :=
   39 + 13 / (81 * 3 ^ j)
 
+/-- Upper endpoint of the normalized complement coordinate on first-`b` tail cylinder `j`. -/
 def firstBTwoTailDUpper (j : Nat) : ℚ :=
   39 + 39 / (242 * 3 ^ j)
 
+/-- Membership of `(a,d)` in a closed affine rectangle. -/
 structure FirstBTwoTailRectangle
     (a₀ a₁ d₀ d₁ a d : ℚ) : Prop where
   a_lower : a₀ ≤ a
@@ -288,6 +293,7 @@ theorem firstBTwoTailZNegative_affine
   unfold firstBTwoTailZNumerator
   ring
 
+/-- Strict corner conditions trapping the inner-wait root in `(lower,upper)`. -/
 def FirstBTwoTailOpenCorners
     (x y lower upper : Nat) (s a₀ a₁ d₀ d₁ : ℚ) : Prop :=
   0 < s * firstBTwoTailZDenominator a₀ d₀ x y ∧
@@ -311,6 +317,7 @@ def FirstBTwoTailOpenCorners
     0 < s * (upper * firstBTwoTailZDenominator a₁ d₁ x y -
       firstBTwoTailZNumerator a₁ d₁ x y)
 
+/-- Strict corner conditions making the inner-wait numerator negative throughout a rectangle. -/
 def FirstBTwoTailNegativeCorners
     (x y : Nat) (s a₀ a₁ d₀ d₁ : ℚ) : Prop :=
   0 < s * firstBTwoTailZDenominator a₀ d₀ x y ∧

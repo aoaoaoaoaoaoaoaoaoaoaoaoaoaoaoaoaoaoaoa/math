@@ -2459,6 +2459,37 @@ and `tagComplementCode_b_cofactor_mod_three` expose the exact complement valuati
 boundary is
 [`audits/m43-phase-zero-right-c-trailing-arithmetic-2026-08-31.md`](audits/m43-phase-zero-right-c-trailing-arithmetic-2026-08-31.md).
 
+The global phase-zero right-`c` middle-wait bound
+[`M4-S32`](SALVAGE.md#m4-s32-phase-zero-right-c-global-middle-wait-bound) is checked in
+`MatrixMortality/ParabolicWaitBounds.lean`.
+`ParabolicBlade.tagComplementCode_first_b_sharp_upper` retains the integral endpoint gap in
+every first-`b` density cylinder, while `bZeroBDefectCOne_y_lt_of_first_b` and its closed-form
+corollary prove `y≤51767` for every core zero. The exact boundary is
+[`audits/m43-phase-zero-right-c-middle-wait-bound-2026-08-31.md`](audits/m43-phase-zero-right-c-middle-wait-bound-2026-08-31.md).
+
+The outer-wait-`211` SFFT reduction
+[`M4-S33`](SALVAGE.md#m4-s33-phase-zero-right-c-x211-divisor-chamber) is checked in
+`MatrixMortality/ParabolicFirstBOneSFFT.lean`.
+`ParabolicBlade.bZeroBDefectCOneCodeCore_x211_normal_form` exposes the four-term bilinear
+core; `bZeroBDefectCOneSfft_identity` and `bZeroBDefectCOneSfft_eq_of_core_zero` give the exact
+divisor equation; the reconstruction, residue, positivity, and four resultant theorems supply
+its arithmetic interface. No nonvanishing claim is attached to this reduction. The exact
+boundary is
+[`audits/m43-phase-zero-right-c-x211-sfft-2026-08-31.md`](audits/m43-phase-zero-right-c-x211-sfft-2026-08-31.md).
+
+The second-first-`b` extinction
+[`M4-S34`](SALVAGE.md#m4-s34-phase-zero-right-c-second-first-b-extinction) is checked across
+`MatrixMortality/ParabolicFirstBTwo.lean`,
+`MatrixMortality/ParabolicFirstBTwoReduction.lean`, the four
+`MatrixMortality/ParabolicFirstBTwoTail*.lean` certificate modules, and
+`MatrixMortality/ParabolicFirstBTwoClosure.lean`. The root envelope contracts the unbounded
+wait plane to 77 exact `(x,y)` pairs. The repository-owned generator computes rational corner
+signs and gaps, while the emitted Lean terms independently recheck every corner with
+`norm_num`; `ParabolicBlade.firstBTwoTail_root_eq_exception` exposes the sole endpoint and
+`bZeroBDefectCOneCodeCore_ccb_ne_zero_of_even_b_count` closes the parity cylinder. The exact
+boundary is
+[`audits/m43-phase-zero-right-c-second-first-b-extinction-2026-08-31.md`](audits/m43-phase-zero-right-c-second-first-b-extinction-2026-08-31.md).
+
 The residue-zero `c`-endpoint exclusion
 [`M4-S12`](SALVAGE.md#m4-s12-residue-zero-c-endpoint-exclusion) is checked in the same module.
 `ParabolicBlade.bridge_cZero_bTwo_bOne_det` and
