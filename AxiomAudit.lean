@@ -390,6 +390,8 @@ open MatrixMortality
 #print axioms ParabolicBlade.bZeroBDefectCOneCodeCore_bbcc_factor
 #print axioms ParabolicBlade.bZeroBDefectCOneCodeCore_all_c_factor
 #print axioms ParabolicBlade.bridge_bZero_bTwo_cOne_det_ne_zero_of_c_run
+#print axioms ParabolicBlade.bZeroBDefectCOneCodeCore_bb_factor
+#print axioms ParabolicBlade.bridge_bZero_bTwo_cOne_det_ne_zero_of_bb
 #print axioms ParabolicBlade.bridge_cZero_cTwo_cOne_det
 #print axioms ParabolicBlade.bridge_cZero_cTwo_cOne_det_ne_zero_of_odd_body
 #print axioms ParabolicBlade.bridge_cZero_bTwo_bOne_det

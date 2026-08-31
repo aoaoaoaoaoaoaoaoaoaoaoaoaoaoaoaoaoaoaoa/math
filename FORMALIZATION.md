@@ -1629,6 +1629,14 @@ vanishes for a nonempty body and that the other pencil would force `214<x<215`. 
 boundary is
 [`audits/m43-phase-zero-right-c-all-c-ray-2026-08-31.md`](audits/m43-phase-zero-right-c-all-c-ray-2026-08-31.md).
 
+The phase-zero right-`c` `bb`-body exclusion
+[`M4-S23`](SALVAGE.md#m4-s23-phase-zero-right-c-bb-body-exclusion) is checked in the same
+module. `ParabolicBlade.bZeroBDefectCOneCodeCore_bb_factor` proves that the exact core at the
+tag coordinates of `bb` is `8` modulo `16` for every wait triple, and
+`ParabolicBlade.bridge_bZero_bTwo_cOne_det_ne_zero_of_bb` transfers this integral obstruction
+to the rational determinant. The exact boundary is
+[`audits/m43-phase-zero-right-c-bb-body-2026-08-31.md`](audits/m43-phase-zero-right-c-bb-body-2026-08-31.md).
+
 The residue-zero `c`-endpoint exclusion
 [`M4-S12`](SALVAGE.md#m4-s12-residue-zero-c-endpoint-exclusion) is checked in the same module.
 `ParabolicBlade.bridge_cZero_bTwo_bOne_det` and

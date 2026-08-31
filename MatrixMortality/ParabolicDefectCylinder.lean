@@ -1150,6 +1150,67 @@ theorem bridge_bZero_bTwo_cOne_det_ne_zero_of_c_run
   exact bZeroBDefectCOneCodeCore_ne_zero_of_all_c_coordinates
     ((3 : ℚ) ^ k) x y z (by exact_mod_cast power_large_nat)
 
+private def bZeroBDefectCOneBBQuotient (x y z : ℤ) : ℤ :=
+  31862931609600 * x * y * z + 2978674433280 * x * y +
+    371662234123176 * x * z + 34746520768038 * x -
+    6477631707076088 * y * z - 605395741535338 * y +
+    1107081147099852 * z + 102489838983013
+
+/-- On the shortest residual body `bb`, the primitive `b | b | c` core is `8` modulo `16`
+for every wait triple. -/
+theorem bZeroBDefectCOneCodeCore_bb_factor (x y z : ℤ) :
+    bZeroBDefectCOneCodeCore
+        ((3 : ℤ) ^ (tagEncode 3 [.b, .b]).length)
+        (ternaryCode (tagEncode 3 [.b, .b])) x y z =
+      16 * bZeroBDefectCOneBBQuotient x y z + 8 := by
+  have encoded_length : (tagEncode 3 [.b, .b]).length = 10 := by decide
+  have encoded_code : ternaryCode (tagEncode 3 [.b, .b]) = 49532 := by decide
+  rw [encoded_length, encoded_code]
+  unfold bZeroBDefectCOneCodeCore bZeroBDefectCOneBBQuotient
+  norm_num
+  ring
+
+private theorem bZeroBDefectCOneCodeCore_bb_ne_zero (x y z : Nat) :
+    bZeroBDefectCOneCodeCore
+        ((3 : ℤ) ^ (tagEncode 3 [.b, .b]).length)
+        (ternaryCode (tagEncode 3 [.b, .b])) x y z ≠ 0 := by
+  rw [bZeroBDefectCOneCodeCore_bb_factor]
+  omega
+
+/-- The shortest even-length, even-`b` body `bb` cannot close the `0 | 2 | 1` bridge with
+letters `b | b | c`, independently of all waits. -/
+theorem bridge_bZero_bTwo_cOne_det_ne_zero_of_bb (x y z : Nat) :
+    (bridge 27
+      (bAtom 27 (3 * z) * bAtom 27 (3 * x + 2) *
+        cAtom 27 (nearySideLowerC 3 [.b, .b])
+          (nearySideLowerCScale 3 [.b, .b]) (3 * y + 1))).det ≠ 0 := by
+  rw [bridge_bZero_bTwo_cOne_det]
+  refine mul_ne_zero (by norm_num) ?_
+  have power_cast :
+      (((3 : ℤ) ^ (tagEncode 3 [.b, .b]).length : ℤ) : ℚ) =
+        (3 : ℚ) ^ (tagEncode 3 [.b, .b]).length := by norm_num
+  rw [← power_cast]
+  intro core_zero
+  have cast_integer_core :
+      ((bZeroBDefectCOneCodeCore
+        ((3 ^ (tagEncode 3 [.b, .b]).length : Nat) : ℤ)
+        (ternaryCode (tagEncode 3 [.b, .b])) x y z : ℤ) : ℚ) =
+        bZeroBDefectCOneCodeCore
+          ((3 ^ (tagEncode 3 [.b, .b]).length : Nat) : ℚ)
+          (ternaryCode (tagEncode 3 [.b, .b])) x y z := by
+    norm_num [bZeroBDefectCOneCodeCore]
+  have cast_zero :
+      ((bZeroBDefectCOneCodeCore
+        ((3 ^ (tagEncode 3 [.b, .b]).length : Nat) : ℤ)
+        (ternaryCode (tagEncode 3 [.b, .b])) x y z : ℤ) : ℚ) = 0 := by
+    exact cast_integer_core.trans core_zero
+  have integer_zero :
+      bZeroBDefectCOneCodeCore
+        ((3 ^ (tagEncode 3 [.b, .b]).length : Nat) : ℤ)
+        (ternaryCode (tagEncode 3 [.b, .b])) x y z = 0 := by
+    exact_mod_cast cast_zero
+  exact bZeroBDefectCOneCodeCore_bb_ne_zero x y z integer_zero
+
 /-! ## Phase-zero triple-`c` parity cylinder -/
 
 /-- Primitive code-coordinate determinant core for the shortest `0 | 2 | 1` bridge with three
