@@ -13,6 +13,7 @@ import MatrixMortality.ReturnFamily
 import MatrixMortality.CubicReturn
 import MatrixMortality.CubicReturnNonPure
 import MatrixMortality.CyclicBinaryBoundary
+import MatrixMortality.ExtendableBinaryBoundary
 import MatrixMortality.EdgeCompression
 import MatrixMortality.TwoPlaneEdges
 import MatrixMortality.ReverseEdge
