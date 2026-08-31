@@ -1686,6 +1686,12 @@ The family is now sharply fenced:
   denominator depth `a`; above zero the next depth is `a−min(x+b,2b,a)` unless two displayed
   terms tie, by
   [`R32-S46`](SALVAGE.md#r32-s46-denominator-predecessor-shell-grammar).
+- all four ties have exact normalized residue laws. The walls `x=b`, `x=a−b`, and `a=2b`
+  reduce to one displayed residual denominator after removing their common `B`; `x=−b` has a
+  unit denominator and carries exactly the valuation of `st−A`. An exact nonresonant word with
+  only even scales crosses both `x=−b` and the critical wall, so no wall or shared denominator
+  prime is itself an obstruction, by
+  [`R32-S47`](SALVAGE.md#r32-s47-exact-four-wall-residue-laws).
 - replacing common powers of one base by a scale alphabet totally ordered under divisibility is
   unsound: `[3,15,3,3,15,3,3,3]` has the exact nonresonant root `d=25/27`, by
   [`R32-O25`](SALVAGE.md#r32-o25-divisibility-chain-returnsquare-fracture).
@@ -1700,11 +1706,13 @@ nonpositive; equality leaves only its exact residue-sensitive value open. The su
 obstruction is later re-entry across these shells and the common content which can couple
 different denominator primes. Away from the four equalities
 `x∈{−b,b,a−b}` or `a=2b`, the recurrence is now deterministic at every prime; only residue
-dynamics on those moving walls remain locally free. Neither synchronization nor a geometric-scale
-counterexample is proved. The one-base geometric architecture is essential: mere divisibility
-comparability of several scales cannot replace it. The one-base prime-power architecture remains
-closed. The two-coordinate pullback is not a reduction to finite-alphabet `M₂(3)`; every `qⁿ`
-remains a distinct return letter.
+dynamics on those moving walls remain locally free. Each wall now has one exact normalized
+residue coordinate, and arbitrary-scale multi-return zeros realize all four walls even when the
+scales share the relevant denominator prime. Neither cross-prime residue synchronization nor a
+geometric-scale counterexample is proved. The one-base geometric architecture is essential:
+mere divisibility comparability or common prime content cannot replace it. The one-base
+prime-power architecture remains closed. The two-coordinate pullback is not a reduction to
+finite-alphabet `M₂(3)`; every `qⁿ` remains a distinct return letter.
 
 The obvious nonsemisimple escape is closed as well. A `1⊕J₋₁` ambient mode can realize the
 exact parity-Collatz rails, but the rank-compatible branch is unique up to scalar and preserves

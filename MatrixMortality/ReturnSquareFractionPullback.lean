@@ -302,6 +302,426 @@ theorem fractionPredecessor_hasValue_of_target_above
         first_min_ne_denominator
   exact div_hasValue numerator_shell denominator_shell
 
+/-! ## Exact residue laws on the four valuation walls -/
+
+/-- At the numerator wall `vₚ(st)=0`, the denominator stays a unit.  Every common factor in
+the predecessor therefore comes exactly from the visible difference `st-A`. -/
+theorem fractionPredecessor_hasValue_of_numerator_wall
+    {prime : Nat} [Fact prime.Prime]
+    (A B t s : ℚ) (BValue tValue residueValue : ℤ)
+    (A_unit : IsUnit prime A)
+    (B_shell : HasValue prime B BValue) (B_positive : 0 < BValue)
+    (t_shell : HasValue prime t tValue) (t_positive : 0 < tValue)
+    (target_scale_unit : IsUnit prime (s * t))
+    (residue_shell : HasValue prime (s * t - A) residueValue) :
+    HasValue prime (fractionPredecessor A B t s) (BValue + residueValue) := by
+  have B_positive_shell : IsPositive prime B :=
+    ⟨B_shell.1, B_shell.2.symm ▸ B_positive⟩
+  have A_sub_B_unit : IsUnit prime (A - B) :=
+    unit_sub_positive A_unit B_positive_shell
+  have B_sub_A_unit : IsUnit prime (B - A) := by
+    rw [show B - A = -(A - B) by ring]
+    exact neg_hasValue A_sub_B_unit
+  have t_sq_shell : HasValue prime (t ^ 2) (2 * tValue) := by
+    have square := mul_hasValue t_shell t_shell
+    simpa [pow_two, two_mul] using square
+  have square_term_shell :
+      HasValue prime ((B - A) * t ^ 2) (2 * tValue) := by
+    simpa using mul_hasValue B_sub_A_unit t_sq_shell
+  have square_term_positive : IsPositive prime ((B - A) * t ^ 2) :=
+    ⟨square_term_shell.1, square_term_shell.2.symm ▸ (by omega)⟩
+  have first_sum_unit : IsUnit prime (s * t + (B - A) * t ^ 2) :=
+    unit_add_positive target_scale_unit square_term_positive
+  have denominator_unit :
+      IsUnit prime (s * t + (B - A) * t ^ 2 - B) := by
+    simpa [sub_eq_add_neg] using
+      unit_add_positive first_sum_unit
+        ⟨(neg_hasValue B_shell).1, (neg_hasValue B_shell).2.symm ▸ B_positive⟩
+  have numerator_shell :
+      HasValue prime (B * (s * t - A)) (BValue + residueValue) :=
+    mul_hasValue B_shell residue_shell
+  simpa [fractionPredecessor] using
+    div_hasValue numerator_shell denominator_unit
+
+/-- The center of the numerator wall is exact: `st=A` pulls back to zero.  Conversely, zero
+cannot arise elsewhere on this wall because both the cleared denominator and `B` survive. -/
+theorem fractionPredecessor_eq_zero_iff_of_numerator_wall
+    {prime : Nat} [Fact prime.Prime]
+    (A B t s : ℚ) (BValue tValue : ℤ)
+    (A_unit : IsUnit prime A)
+    (B_shell : HasValue prime B BValue) (B_positive : 0 < BValue)
+    (t_shell : HasValue prime t tValue) (t_positive : 0 < tValue)
+    (target_scale_unit : IsUnit prime (s * t)) :
+    fractionPredecessor A B t s = 0 ↔ s * t = A := by
+  have B_positive_shell : IsPositive prime B :=
+    ⟨B_shell.1, B_shell.2.symm ▸ B_positive⟩
+  have A_sub_B_unit : IsUnit prime (A - B) :=
+    unit_sub_positive A_unit B_positive_shell
+  have B_sub_A_unit : IsUnit prime (B - A) := by
+    rw [show B - A = -(A - B) by ring]
+    exact neg_hasValue A_sub_B_unit
+  have t_sq_shell : HasValue prime (t ^ 2) (2 * tValue) := by
+    have square := mul_hasValue t_shell t_shell
+    simpa [pow_two, two_mul] using square
+  have square_term_shell :
+      HasValue prime ((B - A) * t ^ 2) (2 * tValue) := by
+    simpa using mul_hasValue B_sub_A_unit t_sq_shell
+  have square_term_positive : IsPositive prime ((B - A) * t ^ 2) :=
+    ⟨square_term_shell.1, square_term_shell.2.symm ▸ (by omega)⟩
+  have first_sum_unit : IsUnit prime (s * t + (B - A) * t ^ 2) :=
+    unit_add_positive target_scale_unit square_term_positive
+  have denominator_unit :
+      IsUnit prime (s * t + (B - A) * t ^ 2 - B) := by
+    simpa [sub_eq_add_neg] using
+      unit_add_positive first_sum_unit
+        ⟨(neg_hasValue B_shell).1, (neg_hasValue B_shell).2.symm ▸ B_positive⟩
+  rw [fractionPredecessor]
+  constructor
+  · intro quotient_zero
+    have numerator_or_denominator := div_eq_zero_iff.mp quotient_zero
+    have numerator_zero :=
+      numerator_or_denominator.resolve_right denominator_unit.1
+    exact sub_eq_zero.mp
+      ((mul_eq_zero.mp numerator_zero).resolve_left B_shell.1)
+  · intro target_eq
+    rw [target_eq, sub_self, mul_zero, zero_div]
+
+/-- Residue remaining after the common `B` factor is removed on `s=tu`. -/
+def fractionEqualScaleResidue (A B t u : ℚ) : ℚ :=
+  t ^ 2 * (u + B - A) / B - 1
+
+/-- Exact normalized inverse law on the equal-scale wall. -/
+theorem fractionPredecessor_eq_equalScale_normalForm
+    (A B t u : ℚ) (B_ne : B ≠ 0) :
+    fractionPredecessor A B t (t * u) =
+      (t ^ 2 * u - A) / fractionEqualScaleResidue A B t u := by
+  rw [fractionPredecessor, fractionEqualScaleResidue]
+  field_simp
+  ring
+
+/-- Once the common `B` factor is removed, the complete equal-scale-wall cancellation is the
+valuation of `fractionEqualScaleResidue`; no hidden primitive reduction remains. -/
+theorem fractionPredecessor_hasValue_of_equalScale_residue
+    {prime : Nat} [Fact prime.Prime]
+    (A B t u : ℚ) (tValue residueValue : ℤ)
+    (A_unit : IsUnit prime A) (B_ne : B ≠ 0)
+    (t_shell : HasValue prime t tValue) (t_positive : 0 < tValue)
+    (u_unit : IsUnit prime u)
+    (residue_shell :
+      HasValue prime (fractionEqualScaleResidue A B t u) residueValue) :
+    HasValue prime (fractionPredecessor A B t (t * u)) (-residueValue) := by
+  have t_sq_shell : HasValue prime (t ^ 2) (2 * tValue) := by
+    have square := mul_hasValue t_shell t_shell
+    simpa [pow_two, two_mul] using square
+  have t_sq_u_shell : HasValue prime (t ^ 2 * u) (2 * tValue) := by
+    simpa using mul_hasValue t_sq_shell u_unit
+  have t_sq_u_positive : IsPositive prime (t ^ 2 * u) :=
+    ⟨t_sq_u_shell.1, t_sq_u_shell.2.symm ▸ (by omega)⟩
+  have numerator_unit : IsUnit prime (t ^ 2 * u - A) := by
+    have A_sub_target_unit := unit_sub_positive A_unit t_sq_u_positive
+    rw [show t ^ 2 * u - A = -(A - t ^ 2 * u) by ring]
+    exact neg_hasValue A_sub_target_unit
+  rw [fractionPredecessor_eq_equalScale_normalForm A B t u B_ne]
+  simpa using div_hasValue numerator_unit residue_shell
+
+/-- On `vₚ(s)=vₚ(t)`, writing `s=tu` exposes the sole first residue
+`u+B-A`. -/
+theorem fractionPredecessor_hasValue_of_equal_scale_wall
+    {prime : Nat} [Fact prime.Prime]
+    (A B t u : ℚ) (BValue tValue residueValue : ℤ)
+    (A_unit : IsUnit prime A)
+    (B_shell : HasValue prime B BValue) (B_positive : 0 < BValue)
+    (t_shell : HasValue prime t tValue) (t_positive : 0 < tValue)
+    (u_unit : IsUnit prime u)
+    (residue_shell : HasValue prime (u + B - A) residueValue)
+    (secondary_ne : 2 * tValue + residueValue ≠ BValue) :
+    HasValue prime (fractionPredecessor A B t (t * u))
+      (BValue - min (2 * tValue + residueValue) BValue) := by
+  have B_positive_shell : IsPositive prime B :=
+    ⟨B_shell.1, B_shell.2.symm ▸ B_positive⟩
+  have t_sq_shell : HasValue prime (t ^ 2) (2 * tValue) := by
+    have square := mul_hasValue t_shell t_shell
+    simpa [pow_two, two_mul] using square
+  have t_sq_u_shell : HasValue prime (t ^ 2 * u) (2 * tValue) := by
+    simpa using mul_hasValue t_sq_shell u_unit
+  have t_sq_u_positive : IsPositive prime (t ^ 2 * u) :=
+    ⟨t_sq_u_shell.1, t_sq_u_shell.2.symm ▸ (by omega)⟩
+  have target_sub_A_unit : IsUnit prime ((t * u) * t - A) := by
+    have A_sub_target_unit := unit_sub_positive A_unit t_sq_u_positive
+    rw [show (t * u) * t - A = -(A - t ^ 2 * u) by ring]
+    exact neg_hasValue A_sub_target_unit
+  have numerator_shell :
+      HasValue prime (B * ((t * u) * t - A)) BValue := by
+    simpa using mul_hasValue B_shell target_sub_A_unit
+  have residue_term_shell :
+      HasValue prime (t ^ 2 * (u + B - A))
+        (2 * tValue + residueValue) :=
+    mul_hasValue t_sq_shell residue_shell
+  have denominator_shell :
+      HasValue prime (t ^ 2 * (u + B - A) - B)
+        (min (2 * tValue + residueValue) BValue) := by
+    simpa [sub_eq_add_neg] using
+      add_hasValue_min_of_ne residue_term_shell (neg_hasValue B_shell) secondary_ne
+  have denominator_eq :
+      (t * u) * t + (B - A) * t ^ 2 - B =
+        t ^ 2 * (u + B - A) - B := by
+    ring
+  rw [fractionPredecessor, denominator_eq]
+  exact div_hasValue numerator_shell denominator_shell
+
+/-- The zero residue on the equal-scale wall collapses to a unit affine expression rather than
+creating an extra denominator shell. -/
+theorem fractionPredecessor_equal_scale_eq_of_residue_zero
+    (A B t u : ℚ) (B_ne : B ≠ 0) (residue_zero : u + B - A = 0) :
+    fractionPredecessor A B t (t * u) = A - t ^ 2 * u := by
+  rw [fractionPredecessor]
+  have denominator_eq :
+      (t * u) * t + (B - A) * t ^ 2 - B = -B := by
+    linear_combination t ^ 2 * residue_zero
+  rw [denominator_eq]
+  field_simp
+  ring
+
+/-- The zero first residue on the equal-scale wall always drains to the unit shell. -/
+theorem fractionPredecessor_isUnit_of_equalScale_residue_zero
+    {prime : Nat} [Fact prime.Prime]
+    (A B t u : ℚ) (tValue : ℤ)
+    (A_unit : IsUnit prime A) (B_ne : B ≠ 0)
+    (t_shell : HasValue prime t tValue) (t_positive : 0 < tValue)
+    (u_unit : IsUnit prime u) (residue_zero : u + B - A = 0) :
+    IsUnit prime (fractionPredecessor A B t (t * u)) := by
+  have t_sq_shell : HasValue prime (t ^ 2) (2 * tValue) := by
+    have square := mul_hasValue t_shell t_shell
+    simpa [pow_two, two_mul] using square
+  have t_sq_u_shell : HasValue prime (t ^ 2 * u) (2 * tValue) := by
+    simpa using mul_hasValue t_sq_shell u_unit
+  have t_sq_u_positive : IsPositive prime (t ^ 2 * u) :=
+    ⟨t_sq_u_shell.1, t_sq_u_shell.2.symm ▸ (by omega)⟩
+  rw [fractionPredecessor_equal_scale_eq_of_residue_zero
+    A B t u B_ne residue_zero]
+  exact unit_sub_positive A_unit t_sq_u_positive
+
+/-- Residue remaining after the common `B` factor is removed on `st=Bu`. -/
+def fractionDenominatorScaleResidue (A B t u : ℚ) : ℚ :=
+  u - 1 + (B - A) * t ^ 2 / B
+
+/-- Exact normalized inverse law on the target-scale-versus-denominator wall. -/
+theorem fractionPredecessor_eq_denominatorScale_normalForm
+    (A B t s u : ℚ) (B_ne : B ≠ 0) (target_scale_eq : s * t = B * u) :
+    fractionPredecessor A B t s =
+      (B * u - A) / fractionDenominatorScaleResidue A B t u := by
+  rw [fractionPredecessor, fractionDenominatorScaleResidue, target_scale_eq]
+  field_simp
+  ring
+
+/-- Once the common `B` factor is removed, the complete denominator-scale-wall cancellation is
+the valuation of `fractionDenominatorScaleResidue`. -/
+theorem fractionPredecessor_hasValue_of_denominatorScale_residue
+    {prime : Nat} [Fact prime.Prime]
+    (A B t s u : ℚ) (BValue residueValue : ℤ)
+    (A_unit : IsUnit prime A)
+    (B_shell : HasValue prime B BValue) (B_positive : 0 < BValue)
+    (u_unit : IsUnit prime u) (target_scale_eq : s * t = B * u)
+    (residue_shell :
+      HasValue prime (fractionDenominatorScaleResidue A B t u) residueValue) :
+    HasValue prime (fractionPredecessor A B t s) (-residueValue) := by
+  have B_u_shell : HasValue prime (B * u) BValue := by
+    simpa using mul_hasValue B_shell u_unit
+  have B_u_positive : IsPositive prime (B * u) :=
+    ⟨B_u_shell.1, B_u_shell.2.symm ▸ B_positive⟩
+  have numerator_unit : IsUnit prime (B * u - A) := by
+    have A_sub_target_unit := unit_sub_positive A_unit B_u_positive
+    rw [show B * u - A = -(A - B * u) by ring]
+    exact neg_hasValue A_sub_target_unit
+  rw [fractionPredecessor_eq_denominatorScale_normalForm
+    A B t s u B_shell.1 target_scale_eq]
+  simpa using div_hasValue numerator_unit residue_shell
+
+/-- On `vₚ(st)=vₚ(B)`, writing `st=Bu` exposes the sole first residue `u-1`. -/
+theorem fractionPredecessor_hasValue_of_denominator_scale_wall
+    {prime : Nat} [Fact prime.Prime]
+    (A B t s u : ℚ) (BValue tValue residueValue : ℤ)
+    (A_unit : IsUnit prime A)
+    (B_shell : HasValue prime B BValue) (B_positive : 0 < BValue)
+    (t_shell : HasValue prime t tValue)
+    (u_unit : IsUnit prime u) (target_scale_eq : s * t = B * u)
+    (residue_shell : HasValue prime (u - 1) residueValue)
+    (secondary_ne : BValue + residueValue ≠ 2 * tValue) :
+    HasValue prime (fractionPredecessor A B t s)
+      (BValue - min (BValue + residueValue) (2 * tValue)) := by
+  have B_positive_shell : IsPositive prime B :=
+    ⟨B_shell.1, B_shell.2.symm ▸ B_positive⟩
+  have B_sub_A_unit : IsUnit prime (B - A) := by
+    have A_sub_B_unit := unit_sub_positive A_unit B_positive_shell
+    rw [show B - A = -(A - B) by ring]
+    exact neg_hasValue A_sub_B_unit
+  have B_u_shell : HasValue prime (B * u) BValue := by
+    simpa using mul_hasValue B_shell u_unit
+  have B_u_positive : IsPositive prime (B * u) :=
+    ⟨B_u_shell.1, B_u_shell.2.symm ▸ B_positive⟩
+  have target_sub_A_unit : IsUnit prime (s * t - A) := by
+    have A_sub_target_unit := unit_sub_positive A_unit B_u_positive
+    rw [target_scale_eq, show B * u - A = -(A - B * u) by ring]
+    exact neg_hasValue A_sub_target_unit
+  have numerator_shell :
+      HasValue prime (B * (s * t - A)) BValue := by
+    simpa using mul_hasValue B_shell target_sub_A_unit
+  have B_residue_shell :
+      HasValue prime (B * (u - 1)) (BValue + residueValue) :=
+    mul_hasValue B_shell residue_shell
+  have t_sq_shell : HasValue prime (t ^ 2) (2 * tValue) := by
+    have square := mul_hasValue t_shell t_shell
+    simpa [pow_two, two_mul] using square
+  have square_term_shell :
+      HasValue prime ((B - A) * t ^ 2) (2 * tValue) := by
+    simpa using mul_hasValue B_sub_A_unit t_sq_shell
+  have denominator_shell :
+      HasValue prime (B * (u - 1) + (B - A) * t ^ 2)
+        (min (BValue + residueValue) (2 * tValue)) :=
+    add_hasValue_min_of_ne B_residue_shell square_term_shell secondary_ne
+  have denominator_eq :
+      s * t + (B - A) * t ^ 2 - B =
+        B * (u - 1) + (B - A) * t ^ 2 := by
+    rw [target_scale_eq]
+    ring
+  rw [fractionPredecessor, denominator_eq]
+  exact div_hasValue numerator_shell denominator_shell
+
+/-- The exact center `st=B` of the denominator-scale wall is the monomial shift `B/t²`; it
+does not depend on the numerator `A`. -/
+theorem fractionPredecessor_eq_of_target_scale_eq_denominator
+    (A B t s : ℚ) (B_sub_A_ne : B - A ≠ 0) (t_ne : t ≠ 0)
+    (target_scale_eq : s * t = B) :
+    fractionPredecessor A B t s = B / t ^ 2 := by
+  rw [fractionPredecessor, target_scale_eq]
+  field_simp
+  ring
+
+/-- Unit residue left after dividing the critical square-versus-denominator tie by `B`. -/
+def fractionCriticalResidue (A B t : ℚ) : ℚ :=
+  (B - A) * t ^ 2 / B - 1
+
+/-- The critical residue exactly carries the common denominator factor. -/
+theorem fractionCriticalResidue_spec
+    (A B t : ℚ) (B_ne : B ≠ 0) :
+    B * fractionCriticalResidue A B t = (B - A) * t ^ 2 - B := by
+  rw [fractionCriticalResidue]
+  field_simp
+
+/-- Exact normalized inverse law at the square-versus-denominator wall.  After the common `B`
+is removed, all remaining cancellation is the displayed sum of two normalized residues. -/
+theorem fractionPredecessor_eq_critical_normalForm
+    (A B t s : ℚ) (B_ne : B ≠ 0) :
+    fractionPredecessor A B t s =
+      (s * t - A) / (s * t / B + fractionCriticalResidue A B t) := by
+  rw [fractionPredecessor, fractionCriticalResidue]
+  field_simp
+  ring
+
+/-- At `vₚ(B)=2vₚ(t)`, every nonzero critical residue has nonnegative valuation. -/
+theorem fractionCriticalResidue_valuation_nonnegative
+    {prime : Nat} [Fact prime.Prime]
+    (A B t : ℚ) (BValue tValue : ℤ)
+    (A_unit : IsUnit prime A)
+    (B_shell : HasValue prime B BValue) (B_positive : 0 < BValue)
+    (t_shell : HasValue prime t tValue)
+    (critical : BValue = 2 * tValue)
+    (residue_ne : fractionCriticalResidue A B t ≠ 0) :
+    0 ≤ padicValRat prime (fractionCriticalResidue A B t) := by
+  have B_positive_shell : IsPositive prime B :=
+    ⟨B_shell.1, B_shell.2.symm ▸ B_positive⟩
+  have B_sub_A_unit : IsUnit prime (B - A) := by
+    have A_sub_B_unit := unit_sub_positive A_unit B_positive_shell
+    rw [show B - A = -(A - B) by ring]
+    exact neg_hasValue A_sub_B_unit
+  have t_sq_shell : HasValue prime (t ^ 2) (2 * tValue) := by
+    have square := mul_hasValue t_shell t_shell
+    simpa [pow_two, two_mul] using square
+  have quotient_unit : IsUnit prime ((B - A) * t ^ 2 / B) := by
+    have numerator_shell := mul_hasValue B_sub_A_unit t_sq_shell
+    have quotient_shell := div_hasValue numerator_shell B_shell
+    simpa [critical] using quotient_shell
+  have residue_bound := min_le_sub (prime := prime) residue_ne
+  simpa [fractionCriticalResidue, quotient_unit.2, padicValRat.one] using residue_bound
+
+/-- The exact critical-wall transition.  If `y=vₚ(st)>0` and `κ` is the valuation of the
+critical residue, the only secondary wall is `y-a=κ`; away from it the predecessor has value
+`-min(y-a,κ)`. -/
+theorem fractionPredecessor_hasValue_of_critical_scale_wall
+    {prime : Nat} [Fact prime.Prime]
+    (A B t s : ℚ) (BValue tValue targetScaleValue residueValue : ℤ)
+    (A_unit : IsUnit prime A)
+    (B_shell : HasValue prime B BValue) (B_positive : 0 < BValue)
+    (t_shell : HasValue prime t tValue)
+    (critical : BValue = 2 * tValue)
+    (target_scale_shell : HasValue prime (s * t) targetScaleValue)
+    (target_scale_positive : 0 < targetScaleValue)
+    (residue_shell :
+      HasValue prime (fractionCriticalResidue A B t) residueValue)
+    (secondary_ne : targetScaleValue - BValue ≠ residueValue) :
+    0 ≤ residueValue ∧
+      HasValue prime (fractionPredecessor A B t s)
+        (-min (targetScaleValue - BValue) residueValue) := by
+  have residue_nonnegative : 0 ≤ residueValue := by
+    rw [← residue_shell.2]
+    exact fractionCriticalResidue_valuation_nonnegative
+      A B t BValue tValue A_unit B_shell B_positive t_shell critical residue_shell.1
+  have target_scale_positive_shell : IsPositive prime (s * t) :=
+    ⟨target_scale_shell.1, target_scale_shell.2.symm ▸ target_scale_positive⟩
+  have A_sub_target_scale_unit : IsUnit prime (A - s * t) :=
+    unit_sub_positive A_unit target_scale_positive_shell
+  have numerator_unit : IsUnit prime (s * t - A) := by
+    rw [show s * t - A = -(A - s * t) by ring]
+    exact neg_hasValue A_sub_target_scale_unit
+  have normalized_target_shell :
+      HasValue prime (s * t / B) (targetScaleValue - BValue) :=
+    div_hasValue target_scale_shell B_shell
+  have normalized_denominator_shell :
+      HasValue prime (s * t / B + fractionCriticalResidue A B t)
+        (min (targetScaleValue - BValue) residueValue) :=
+    add_hasValue_min_of_ne normalized_target_shell residue_shell secondary_ne
+  refine ⟨residue_nonnegative, ?_⟩
+  rw [fractionPredecessor_eq_critical_normalForm A B t s B_shell.1]
+  simpa using div_hasValue numerator_unit normalized_denominator_shell
+
+/-- The numerator and critical walls are not global obstructions once common geometric powers
+are discarded. This nonresonant word uses only even scales; its exact inverse orbit crosses both
+walls at the denominator prime two. -/
+theorem evenScales_threeFourths_wall_fracture :
+    List.Forall (fun scale : ℤ => 2 ∣ scale) [44, 2, 6, 10, 6] ∧
+      (wordProduct (normalizedTransfer (3 / 4 : ℚ)) [44, 2, 6, 10, 6]) 0 0 = 0 ∧
+      (∀ scale ∈ ([44, 2, 6, 10, 6] : List ℚ), (3 / 4 : ℚ) ≠ scale⁻¹) ∧
+      fractionPredecessor 3 4 6 4 = 3 / 2 ∧
+      fractionPredecessor 3 4 10 (3 / 2) = 16 / 37 ∧
+      fractionPredecessor 3 4 6 (16 / 37) = -3 / 64 ∧
+      fractionPredecessor 3 4 2 (-3 / 64) = 132 := by
+  norm_num [List.forall_cons, wordProduct, normalizedTransfer_eq,
+    Matrix.mul_apply, Fin.sum_univ_succ, fractionPredecessor]
+
+/-- Exact two-adic shells certifying the critical and numerator-wall crossings in
+`evenScales_threeFourths_wall_fracture`. -/
+theorem evenScales_threeFourths_wall_values :
+    HasValue 2 (4 : ℚ) 2 ∧
+      HasValue 2 (6 : ℚ) 1 ∧
+      HasValue 2 (3 / 2 : ℚ) (-1) ∧
+      HasValue 2 (10 : ℚ) 1 := by
+  let _ : Fact (Nat.Prime 2) := ⟨by decide⟩
+  have two_shell : HasValue 2 (2 : ℚ) 1 := by
+    simpa using (primePower_hasValue (prime := 2) 1)
+  have three_unit : IsUnit 2 (3 : ℚ) :=
+    intCast_isUnit_of_not_dvd (by norm_num)
+  have five_unit : IsUnit 2 (5 : ℚ) :=
+    intCast_isUnit_of_not_dvd (by norm_num)
+  have four_shell : HasValue 2 (4 : ℚ) 2 := by
+    convert (primePower_hasValue (prime := 2) 2) using 1 <;> norm_num
+  have six_shell : HasValue 2 (6 : ℚ) 1 := by
+    convert mul_hasValue two_shell three_unit using 1 <;> norm_num
+  have three_halves_shell : HasValue 2 (3 / 2 : ℚ) (-1) := by
+    simpa using div_hasValue three_unit two_shell
+  have ten_shell : HasValue 2 (10 : ℚ) 1 := by
+    convert mul_hasValue two_shell five_unit using 1 <;> norm_num
+  exact ⟨four_shell, six_shell, three_halves_shell, ten_shell⟩
+
 /-- Away from `vₚ(B)=2vₚ(t)`, a denominator prime gives the terminal predecessor the exact
 clipped valuation `vₚ(B)-min(2vₚ(t),vₚ(B))`.  The numerator is allowed to contain every other
 base prime; only its required p-adic unit hypothesis is used. -/
