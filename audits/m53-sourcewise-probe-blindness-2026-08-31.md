@@ -84,8 +84,10 @@ its finite probes are complete; a determinant on arbitrary nonwitness words says
 
 ## Remaining Boundary
 
-The word-series transform (1) uses a finite regular guard but no five-state realization is
-claimed. Realizing a six-letter horizon naïvely costs additional parser states. It is a logical
+The word-series transform (1) uses a finite regular guard but is not a five-state realization.
+[`MM-O22`](../SALVAGE.md#mm-o22-six-guard-parser-rank-wall) proves the sharper boundary: on
+every source for which `f` has a zero, the six-guard series has a witness-dependent `7×7`
+Hankel minor `J₇-I₇` and therefore needs at least seven exact states. The guard is a logical
 countermodel to finite-probe inference, not a candidate reduction.
 
 The live constructive obligation is unchanged: exhibit two `5×5` rational or integer matrices

@@ -86,6 +86,7 @@ file owns the mathematical stock.
 | [`MM-O17`](#mm-o17-factorized-binary-cross-ratio-wall) | obstruction | exact prefix and cyclic-cube nine-state compilers force a Neary cross-ratio that fails in every pairing | formalized core; audited assembly | graduated |
 | [`MM-O18`](#mm-o18-forced-rule-companion-toggle-wall) | obstruction | the forced-rule derivative and constant channel force an exact five-state companion toggle to be invertible | formalized | graduated |
 | [`MM-O21`](#mm-o21-sourcewise-finite-probe-blindness) | obstruction | sourcewise existential equivalence imposes no finite probe-rank shadow, while complete computable probe cutoffs cannot be universal | formalized | graduated |
+| [`MM-O22`](#mm-o22-six-guard-parser-rank-wall) | obstruction | the six-guard existence transform requires at least seven exact states on every source with an original zero | formalized | graduated |
 | [`MM-M01`](#mm-m01-off-diagonal-companion-interface) | partial mechanism | off-diagonal rank-two bridge has a complete fracture grammar | audited | stock |
 | [`MM-M02`](#mm-m02-bordered-toggle) | partial mechanism | one lifted toggle has a stable rank-two third power | audited | parked |
 | [`MM-M03`](#mm-m03-five-state-setter-punctuation) | partial mechanism | a mixed delimiter word is an exact internal rank-one separator | audited | closed |
@@ -1949,6 +1950,54 @@ finite-dimensional realization and global converse; the guarded series by itself
 
 **Artifact:**
 [`audits/m53-sourcewise-probe-blindness-2026-08-31.md`](audits/m53-sourcewise-probe-blindness-2026-08-31.md).
+
+### MM-O22: Six-guard parser rank wall
+
+**Kind:** obstruction
+
+**Evidence:** formalized
+
+**Disposition:** graduated
+
+Let `f(w₀)=0`, let `g≠s`, and apply the six-letter guard transform from
+[`MM-O21`](#mm-o21-sourcewise-finite-probe-blindness). For `0≤i,j≤6`, choose
+
+```text
+pᵢ=gⁱ,                 qⱼ=g^(6−j) s w₀.
+```
+
+The concatenation `pᵢqⱼ` decodes exactly when `i=j`. Its guarded coefficient is then
+`f(w₀)=0`; otherwise the separator arrives too early or an extra guard occupies its place, so
+the coefficient is one. The resulting witness-dependent Hankel section is therefore
+
+```text
+H = J₇-I₇.
+```
+
+It is nonsingular because `(1/6)J₇-I₇` is its inverse: `J₇²=7J₇`. Every wordwise exact linear
+realization factors this section through its state space, hence has at least seven states.
+For the forced-rule derivative, every positive-width source with a Neary terminal match supplies
+the required zero `w₀`. Its guarded changed series therefore has no exact five-state rational
+realization on any yes-source.
+
+**Scope:** this is an arbitrary-word obstruction to the specific six-guard construction. Its
+minor depends on an actual, potentially unbounded zero witness, so it does not recover the
+bounded-probe inference rejected by `MM-O21`. It neither lower-bounds every series with the same
+zero existence nor decides finite-dimensional realizability on no-sources. It does not prove
+`M₅(3)`.
+
+**Use:** the `MM-O21` guard remains a logical countermodel showing why fixed exact probes cannot
+follow from existential equivalence, but it is closed as a five-state compiler. Any surviving
+changed-series construction must hide zero witnesses without retaining seven independent guard
+progress states.
+
+**Formalization:** `guardedSeries_sixGuard_hankel_eq`,
+`sixGuardHankel_det_ne_zero`, `guardedSeries_sixGuard_exact_state_lower_bound`, and
+`existentialGuardedForcedRuleC_seven_le_card_of_terminal_match` in
+[`MatrixMortality/ExistentialProbeBarrier.lean`](MatrixMortality/ExistentialProbeBarrier.lean).
+
+**Artifact:**
+[`audits/m53-six-guard-rank-wall-2026-08-31.md`](audits/m53-six-guard-rank-wall-2026-08-31.md).
 
 ### MM-M01: Off-diagonal companion interface
 

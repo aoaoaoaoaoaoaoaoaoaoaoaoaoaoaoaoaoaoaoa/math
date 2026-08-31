@@ -658,6 +658,12 @@ Three live routes remain.
    proves that a source-computable complete finite probe cutoff would decide halting. Any weaker
    no-go must therefore use an arbitrary-word consequence of a stated architecture; any weaker
    construction must realize its changed series in five states.
+   The guard itself fails that constructive obligation:
+   [`MM-O22`](SALVAGE.md#mm-o22-six-guard-parser-rank-wall) extracts, from any original zero
+   witness, a `7×7` Hankel section `J₇-I₇` of the six-guard changed series. Every wordwise exact
+   realization on a yes-source therefore has at least seven states. This does not restore a
+   fixed probe certificate: the minor depends on the potentially unbounded witness whose
+   existence the weak criterion asserts.
    The setter candidate
    [`MM-M03`](SALVAGE.md#mm-m03-five-state-setter-punctuation) instead uses the mixed word
    `S²A_cS³=λC̃L̃`. It proves the regular decoder and halting-to-mortality implication.
