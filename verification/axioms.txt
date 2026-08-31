@@ -1300,6 +1300,14 @@
  Quot.sound]
 'MatrixMortality.PeriodicShell.kernelOddScheduleContextGuard' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.PeriodicShell.kernelOddScheduleCycle' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.PeriodicShell.shellRun_sub_periodicPoint' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.PeriodicShell.shellRun_repeat_sub_periodicPoint' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.PeriodicShell.shellRun_repeat_sub_periodicPoint_value' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.PeriodicShell.shellRun_repeat_unit_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.RankTwoPunctuation.exists_pathProduct_eq_zero_iff_selfBridge_or_incidence' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
