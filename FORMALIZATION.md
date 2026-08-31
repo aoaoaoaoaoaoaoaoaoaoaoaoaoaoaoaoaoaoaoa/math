@@ -1788,6 +1788,7 @@ fixed-rank decision problem.
 | `BranchingHistory.lean` | fixed `bcbc` terminal forks and affine positional lower bounds |
 | `TransverseInfiniteCollision.lean` | exact `bcbc` terminal/nonterminal collision for the letter-blind infinite-carrier generator |
 | `TransverseSeparatedAtlas.lean` | distinct rank-two data escape retaining the infinite carrier section and uniformly separating the first `bcbc` fork |
+| `TransverseSeparatedForkNoGo.lean` | quotient-commutator terminal-fork obstruction and exceptional-fibre collision closing the distinct-data candidate |
 | `AffineRecognizer.lean` | generic singular three-state guard-and-carry representation calculus |
 | `BranchingRecognizer.lean` | complete `bcbc` residual grammar and rational three-state recognizer |
 | `MixedBranchingHistory.lean` | equal-length mixed terminal grammar and exact raw-toggle normal form |
@@ -2074,6 +2075,8 @@ fixed-rank decision problem.
 | The distinct-data left multiplier is invertible, preserves rank two, and separates the two data maps at every source | `TransverseSeparatedAtlas.separator_det`, `TransverseSeparatedAtlas.separator_isUnit`, `TransverseSeparatedAtlas.separatedData_rank_eq_two`, `TransverseSeparatedAtlas.separatedData_ne` |
 | The distinct-data candidate retains the original infinite `tⁿb` carrier and every source-indexed delayed singleton on it | `TransverseSeparatedAtlas.wordProduct_carrierWord`, `TransverseSeparatedAtlas.linearCoefficient_carrierWord`, `TransverseSeparatedAtlas.sourceFamily_delayed_carrierWord_zero_iff` |
 | Its `bcbc` terminal/near-fork product difference has the uniformly positive entry `6(2s²−5s+4)` | `TransverseSeparatedAtlas.bcbc_product_difference_entry`, `TransverseSeparatedAtlas.separation_polynomial_pos`, `TransverseSeparatedAtlas.bcbcTerminal_wordProduct_ne_nearFork` |
+| The flat and nested `bcbc` fork blocks have exact two-state quotient actions with nonsingular commutator at every nonzero rational source | `TransverseSeparatedForkNoGo.planeHead_flatForkMatrix_mulVec`, `TransverseSeparatedForkNoGo.planeHead_nestedForkMatrix_mulVec`, `TransverseSeparatedForkNoGo.forkQuotient_commutator_det`, `TransverseSeparatedForkNoGo.cubicFactor_ne_zero`, `TransverseSeparatedForkNoGo.nonicFactor_ne_zero` |
+| Three terminal forks force one boundary vector to vanish and hence a false zero for every nonzero source parameter, while one exact opposite-semantics collision closes source zero | `TransverseSeparatedForkNoGo.terminalForkControl_paired_zero`, `TransverseSeparatedForkNoGo.planeRow_eq_zero_or_column_eq_zero_of_irreducible_pair`, `TransverseSeparatedForkNoGo.zeroSource_wordProduct_collision`, `TransverseSeparatedForkNoGo.no_bcbc_sameZero` |
 | The `bcbb` null histories and complete terminal language are one exact periodic ray | `PeriodicHistory.bcbbNull_iff`, `PeriodicHistory.bcbb_terminal_match_iff` |
 | The singular positional decoder obeys its all-control affine state equation | `PeriodicHistory.periodicProduct_mulVec_column`, `PeriodicHistory.periodicCoefficient_eq` |
 | The `bcbb` affine section has no false zero and matches the paired zero language | `PeriodicHistory.bcbbAffine_zero_iff`, `PeriodicHistory.bcbb_periodicCoefficient_zero_iff_paired_zero` |
@@ -2404,8 +2407,19 @@ map and diagonal toggle do not change, literal `tⁿb` words still produce the `
 matrices, and the `G3-O33` coefficient section still realizes every delayed singleton on them.
 Direct multiplication of the `bcbc` terminal and near-fork controls gives separating entry
 `6(2s²−5s+4)`; Lean proves the quadratic positive for every rational source. This is a candidate
-mechanism, not a same-zero compiler: no complete terminal state formula or arbitrary-word converse
-is claimed.
+mechanism, not a same-zero compiler. `G3-O35` closes it rather than supplying the missing
+converse.
+
+For `G3-O35`, Lean factors the complete flat and nested four-stroke fork blocks through their
+first two coordinates. Both quotient determinants are `1296s⁸`; their commutator determinant is
+`−144s⁶c(s)²p(s)`. The rational-root theorem plus exhaustive kernel checks modulo `7` and `13`
+prove that `c` and `p` have no rational roots. At every `s≠0`, the three certified terminal forks
+`[false]`, `[false,false]`, and `[false,true]` therefore force the terminal boundary row to zero.
+Invertibility of the flat quotient then kills the fixed prefix row, producing a certified false
+zero; a degenerate terminal column instead makes the one-letter data control a false zero. At
+`s=0`, Lean proves that terminal `ctbcbtcbt` and nonterminal `ctbcbcbbb` have identical target
+products. The final theorem quantifies over all rational parameters and all row-column pairs and
+rejects `bcbc` same-zero recognition for the exact `G3-C06` generator.
 
 For `G3-O20`, Lean proves the free-monoid tail law: if one fixed-boundary equation with stationary
 left and right pump blocks holds at exponents `N` and `N+1`, it holds at every exponent `N+k`.
