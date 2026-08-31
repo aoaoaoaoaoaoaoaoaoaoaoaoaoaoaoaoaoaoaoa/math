@@ -153,6 +153,7 @@ file owns the mathematical stock.
 | [`R32-D02`](#r32-d02-prime-power-returnsquare-classification) | decidable stratum | prime-power ReturnSquare is mortal exactly at one-return resonances | formalized | graduated |
 | [`R32-S44`](#r32-s44-composite-returnsquare-tail-synchronization) | structure theorem and obstruction | every numerator-prime valuation of a composite-base bridge zero is fixed by one common proper-tail exponent | formalized | active |
 | [`R32-S45`](#r32-s45-fraction-pullback-and-terminal-denominator-shell) | structure theorem and obstruction | every rational ReturnSquare bridge is one reversed two-coordinate incidence, whose final denominator-prime predecessor has an exact clipped valuation outside one critical shell | formalized | active |
+| [`R32-S46`](#r32-s46-denominator-predecessor-shell-grammar) | structure theorem and obstruction | every inverse denominator-prime step outside four explicit valuation ties follows one exact tropical minimum | formalized | active |
 | [`R32-M01`](#r32-m01-generic-reverse-edge-compiler) | partial mechanism | projective incidence generically embeds into a compatible two-plane edge square | formalized | active |
 | [`R32-M02`](#r32-m02-finite-quotient-sieve) | partial mechanism | finite monoid quotients give complete modular no-certificates for fixed candidates | formalized | active |
 | [`R32-M03`](#r32-m03-two-scale-return-conversion) | partial mechanism | a minimal two-scale return pencil has nonresonant multi-return zeros | formalized | active |
@@ -5617,6 +5618,63 @@ audit
 positive denominator depth only when `a>2(w+1)vₚ(q)`, in which case the exact remaining depth is
 their difference. Any closure must now control later re-entry from unit or negative shells, or
 prove that cross-prime common content cannot sustain it.
+
+### R32-S46: Denominator predecessor shell grammar
+
+**Kind:** structure theorem and obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+The terminal calculation in `R32-S45` extends to every target coordinate `s`. Its unique affine
+predecessor under the return scale `t` is
+
+```text
+F_t⁻¹(s) = B(st−A) / (st+(B−A)t²−B).                         (1)
+```
+
+Fix a denominator prime and put
+
+```text
+a=vₚ(B)>0,      b=vₚ(t)>0,      x=vₚ(s).
+```
+
+Lean proves two exact regimes.
+
+```text
+x+b<0  ⇒  vₚ(F_t⁻¹(s))=a,                                   (2)
+
+x+b>0 and x+b,2b,a pairwise distinct
+  ⇒ vₚ(F_t⁻¹(s))=a−min(x+b,2b,a).                            (3)
+```
+
+Thus a sufficiently negative target resets the predecessor to the complete denominator depth.
+Above that boundary, every tie-free step is one deterministic tropical minimum. The exhaustive
+valuation-equality set omitted by (2)–(3) is
+
+```text
+x=−b,          x=b,          x=a−b,          a=2b.           (4)
+```
+
+For one-base ReturnSquare, `b=(w+1)vₚ(q)`, so every wall in (4) is word-visible. The first wall
+is the numerator cancellation `st−A`; the other three are exactly the pairwise ties among the
+denominator terms `st`, `(B−A)t²`, and `−B`.
+
+**Scope:** this is a valuation grammar, not a complete rational recurrence. On the four walls,
+unit residues and common reduction factors decide the next shell. Different denominator primes
+can encounter different walls at the same return. No synchronization or decision theorem is
+claimed.
+
+**Artifact:** `ReturnSquare.fractionPullback_incidence_iff_eq_predecessor`,
+`fractionPredecessor_hasValue_of_target_below`, and
+`fractionPredecessor_hasValue_of_target_above` in
+[`ReturnSquareFractionPullback.lean`](MatrixMortality/ReturnSquareFractionPullback.lean), with
+audit
+[`m32-returnsquare-denominator-shell-grammar-2026-08-31.md`](audits/m32-returnsquare-denominator-shell-grammar-2026-08-31.md).
+
+**Use:** replace unconstrained negative-depth search by the tropical recurrence (2)–(3) and
+branch only on the four equalities (4). A closure must prove that residue choices on those walls
+cannot assemble a full backward path from `B` to the boundary coordinate `At_head`, or exhibit
+such a path and lift it to an exact rational root.
 
 ### R32-M01: Generic reverse edge compiler
 

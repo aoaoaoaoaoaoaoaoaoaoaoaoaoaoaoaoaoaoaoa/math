@@ -14,6 +14,19 @@ namespace MatrixMortality.ReturnSquare
 open scoped Matrix
 open PadicValuation
 
+private theorem add_hasValue_min_of_ne
+    {prime : Nat} [Fact prime.Prime]
+    {left right : ℚ} {leftValue rightValue : ℤ}
+    (left_shell : HasValue prime left leftValue)
+    (right_shell : HasValue prime right rightValue)
+    (value_ne : leftValue ≠ rightValue) :
+    HasValue prime (left + right) (min leftValue rightValue) := by
+  rcases lt_or_gt_of_ne value_ne with left_lt | right_lt
+  · simpa [min_eq_left left_lt.le] using
+      add_hasValue_left left_shell right_shell left_lt
+  · simpa [min_eq_right right_lt.le] using
+      add_hasValue_right left_shell right_shell right_lt
+
 /-- A denominator-cleared return at parameter `c=-A/B`. -/
 def fractionIntegralTransfer {R : Type*} [CommRing R] (A B t : R) :
     Square (Fin 2) R :=
@@ -128,6 +141,166 @@ theorem fractionPullback_terminal_incidence_iff_eq_predecessor
     rw [fractionTerminalPredecessor] at predecessor
     have cross := (eq_div_iff denominator_ne).1 predecessor
     simpa [mul_comm] using cross
+
+/-- Homogeneous predecessor of an arbitrary target ray `(s,1)`. -/
+def fractionPredecessorVector {R : Type*} [CommRing R] (A B t s : R) :
+    Fin 2 → R :=
+  ![B * (s * t - A), s * t + (B - A) * t ^ 2 - B]
+
+/-- The arbitrary predecessor vector realizes its target ray exactly. -/
+theorem fractionPullback_mulVec_predecessor
+    {R : Type*} [CommRing R] (A B t s : R) :
+    fractionPullback A B t *ᵥ fractionPredecessorVector A B t s =
+      (B * (B - A) * t * (t ^ 2 - 1)) • ![s, 1] := by
+  ext i
+  fin_cases i <;>
+    simp [fractionPullback, fractionPredecessorVector,
+      Matrix.mulVec, dotProduct, Fin.sum_univ_succ]
+  all_goals ring
+
+/-- Affine inverse branch for an arbitrary target coordinate. -/
+def fractionPredecessor (A B t s : ℚ) : ℚ :=
+  B * (s * t - A) / (s * t + (B - A) * t ^ 2 - B)
+
+/-- Cross-multiplied classification of every predecessor of `(s,1)`. -/
+theorem fractionPullback_incidence_iff
+    {R : Type*} [CommRing R] (A B t s r : R) :
+    (fractionPullback A B t *ᵥ ![r, 1]) 0 =
+        s * (fractionPullback A B t *ᵥ ![r, 1]) 1 ↔
+      (s * t + (B - A) * t ^ 2 - B) * r = B * (s * t - A) := by
+  simp [fractionPullback, Matrix.mulVec, dotProduct, Fin.sum_univ_succ]
+  constructor <;> intro equality
+  · linear_combination equality
+  · linear_combination equality
+
+/-- The arbitrary affine inverse branch is unique off its displayed pole. -/
+theorem fractionPullback_incidence_iff_eq_predecessor
+    (A B t s r : ℚ)
+    (denominator_ne : s * t + (B - A) * t ^ 2 - B ≠ 0) :
+    (fractionPullback A B t *ᵥ ![r, 1]) 0 =
+        s * (fractionPullback A B t *ᵥ ![r, 1]) 1 ↔
+      r = fractionPredecessor A B t s := by
+  rw [fractionPullback_incidence_iff]
+  constructor
+  · intro cross
+    rw [fractionPredecessor]
+    apply (eq_div_iff denominator_ne).2
+    simpa [mul_comm] using cross
+  · intro predecessor
+    rw [fractionPredecessor] at predecessor
+    have cross := (eq_div_iff denominator_ne).1 predecessor
+    simpa [mul_comm] using cross
+
+/-- A target deeper than the inverse scale (`vₚ(s)+vₚ(t)<0`) pulls back to the complete
+denominator depth. -/
+theorem fractionPredecessor_hasValue_of_target_below
+    {prime : Nat} [Fact prime.Prime]
+    (A B t s : ℚ) (BValue tValue targetValue : ℤ)
+    (A_unit : IsUnit prime A)
+    (B_shell : HasValue prime B BValue) (B_positive : 0 < BValue)
+    (t_shell : HasValue prime t tValue) (t_positive : 0 < tValue)
+    (target_shell : HasValue prime s targetValue)
+    (target_below : targetValue + tValue < 0) :
+    HasValue prime (fractionPredecessor A B t s) BValue := by
+  have B_positive_shell : IsPositive prime B :=
+    ⟨B_shell.1, B_shell.2.symm ▸ B_positive⟩
+  have t_positive_shell : IsPositive prime t :=
+    ⟨t_shell.1, t_shell.2.symm ▸ t_positive⟩
+  have A_neg_unit : IsUnit prime (-A) := neg_hasValue A_unit
+  have B_sub_A_unit : IsUnit prime (B - A) := by
+    have A_sub_B_unit := unit_sub_positive A_unit B_positive_shell
+    rw [show B - A = -(A - B) by ring]
+    exact neg_hasValue A_sub_B_unit
+  have target_scale_shell :
+      HasValue prime (s * t) (targetValue + tValue) :=
+    mul_hasValue target_shell t_shell
+  have target_sub_A_shell :
+      HasValue prime (s * t - A) (targetValue + tValue) := by
+    simpa [sub_eq_add_neg] using
+      add_hasValue_left target_scale_shell A_neg_unit target_below
+  have numerator_shell :
+      HasValue prime (B * (s * t - A))
+        (BValue + (targetValue + tValue)) :=
+    mul_hasValue B_shell target_sub_A_shell
+  have t_sq_shell : HasValue prime (t ^ 2) (2 * tValue) := by
+    have square := mul_hasValue t_shell t_shell
+    simpa [pow_two, two_mul] using square
+  have square_term_shell :
+      HasValue prime ((B - A) * t ^ 2) (2 * tValue) := by
+    simpa using mul_hasValue B_sub_A_unit t_sq_shell
+  have first_sum_shell :
+      HasValue prime (s * t + (B - A) * t ^ 2)
+        (targetValue + tValue) :=
+    add_hasValue_left target_scale_shell square_term_shell (by omega)
+  have denominator_shell :
+      HasValue prime (s * t + (B - A) * t ^ 2 - B)
+        (targetValue + tValue) := by
+    simpa [sub_eq_add_neg] using
+      add_hasValue_left first_sum_shell (neg_hasValue B_shell) (by omega)
+  have quotient := div_hasValue numerator_shell denominator_shell
+  simpa [fractionPredecessor] using quotient
+
+/-- Above the inverse scale, and away from the three pairwise valuation ties in the denominator,
+the inverse branch follows one exact tropical minimum. -/
+theorem fractionPredecessor_hasValue_of_target_above
+    {prime : Nat} [Fact prime.Prime]
+    (A B t s : ℚ) (BValue tValue targetValue : ℤ)
+    (A_unit : IsUnit prime A)
+    (B_shell : HasValue prime B BValue) (B_positive : 0 < BValue)
+    (t_shell : HasValue prime t tValue) (t_positive : 0 < tValue)
+    (target_shell : HasValue prime s targetValue)
+    (target_above : 0 < targetValue + tValue)
+    (target_scale_ne_square : targetValue + tValue ≠ 2 * tValue)
+    (target_scale_ne_denominator : targetValue + tValue ≠ BValue)
+    (square_ne_denominator : 2 * tValue ≠ BValue) :
+    HasValue prime (fractionPredecessor A B t s)
+      (BValue - min (min (targetValue + tValue) (2 * tValue)) BValue) := by
+  have B_positive_shell : IsPositive prime B :=
+    ⟨B_shell.1, B_shell.2.symm ▸ B_positive⟩
+  have t_positive_shell : IsPositive prime t :=
+    ⟨t_shell.1, t_shell.2.symm ▸ t_positive⟩
+  have target_scale_shell :
+      HasValue prime (s * t) (targetValue + tValue) :=
+    mul_hasValue target_shell t_shell
+  have target_scale_positive : IsPositive prime (s * t) :=
+    ⟨target_scale_shell.1, target_scale_shell.2.symm ▸ target_above⟩
+  have A_sub_target_scale_unit : IsUnit prime (A - s * t) :=
+    unit_sub_positive A_unit target_scale_positive
+  have target_scale_sub_A_unit : IsUnit prime (s * t - A) := by
+    rw [show s * t - A = -(A - s * t) by ring]
+    exact neg_hasValue A_sub_target_scale_unit
+  have numerator_shell :
+      HasValue prime (B * (s * t - A)) BValue := by
+    simpa using mul_hasValue B_shell target_scale_sub_A_unit
+  have A_sub_B_unit : IsUnit prime (A - B) :=
+    unit_sub_positive A_unit B_positive_shell
+  have B_sub_A_unit : IsUnit prime (B - A) := by
+    rw [show B - A = -(A - B) by ring]
+    exact neg_hasValue A_sub_B_unit
+  have t_sq_shell : HasValue prime (t ^ 2) (2 * tValue) := by
+    have square := mul_hasValue t_shell t_shell
+    simpa [pow_two, two_mul] using square
+  have square_term_shell :
+      HasValue prime ((B - A) * t ^ 2) (2 * tValue) := by
+    simpa using mul_hasValue B_sub_A_unit t_sq_shell
+  have first_sum_shell :
+      HasValue prime (s * t + (B - A) * t ^ 2)
+        (min (targetValue + tValue) (2 * tValue)) :=
+    add_hasValue_min_of_ne target_scale_shell square_term_shell
+      target_scale_ne_square
+  have first_min_ne_denominator :
+      min (targetValue + tValue) (2 * tValue) ≠ BValue := by
+    intro equality
+    rcases min_choice (targetValue + tValue) (2 * tValue) with minimum | minimum
+    · exact target_scale_ne_denominator (minimum ▸ equality)
+    · exact square_ne_denominator (minimum ▸ equality)
+  have denominator_shell :
+      HasValue prime (s * t + (B - A) * t ^ 2 - B)
+        (min (min (targetValue + tValue) (2 * tValue)) BValue) := by
+    simpa [sub_eq_add_neg] using
+      add_hasValue_min_of_ne first_sum_shell (neg_hasValue B_shell)
+        first_min_ne_denominator
+  exact div_hasValue numerator_shell denominator_shell
 
 /-- Away from `vₚ(B)=2vₚ(t)`, a denominator prime gives the terminal predecessor the exact
 clipped valuation `vₚ(B)-min(2vₚ(t),vₚ(B))`.  The numerator is allowed to contain every other

@@ -2329,6 +2329,11 @@ The family is now sharply fenced:
   `a−min(2(w+1)vₚ(q),a)` unless `a=2(w+1)vₚ(q)`; at equality its valuation is
   nonpositive, by
   [`R32-S45`](SALVAGE.md#r32-s45-fraction-pullback-and-terminal-denominator-shell).
+- every later inverse step is tropical away from four word-visible valuation walls. If the
+  target depth is `x` and the selected scale depth is `b`, then `x+b<0` resets to the full
+  denominator depth `a`; above zero the next depth is `a−min(x+b,2b,a)` unless two displayed
+  terms tie, by
+  [`R32-S46`](SALVAGE.md#r32-s46-denominator-predecessor-shell-grammar).
 - replacing common powers of one base by a scale alphabet totally ordered under divisibility is
   unsound: `[3,15,3,3,15,3,3,3]` has the exact nonresonant root `d=25/27`, by
   [`R32-O25`](SALVAGE.md#r32-o25-divisibility-chain-returnsquare-fracture).
@@ -2341,7 +2346,9 @@ projective incidence. A last inverse step retains positive denominator depth onl
 the selected geometric depth, and then subtracts that exact tax. At or below the tax it becomes
 nonpositive; equality leaves only its exact residue-sensitive value open. The surviving
 obstruction is later re-entry across these shells and the common content which can couple
-different denominator primes. Neither synchronization nor a geometric-scale
+different denominator primes. Away from the four equalities
+`x∈{−b,b,a−b}` or `a=2b`, the recurrence is now deterministic at every prime; only residue
+dynamics on those moving walls remain locally free. Neither synchronization nor a geometric-scale
 counterexample is proved. The one-base geometric architecture is essential: mere divisibility
 comparability of several scales cannot replace it. The one-base prime-power architecture remains
 closed. The two-coordinate pullback is not a reduction to finite-alphabet `M₂(3)`; every `qⁿ`
