@@ -1579,6 +1579,14 @@ later pole. `firstMultiTransfer_trichotomy_of_pole` packages both branches for p
 codes. The three surviving shapes remain reachability problems; the theorem does not settle
 `M₅(3)`.
 
+Record [`MM-S38`](SALVAGE.md#mm-s38-two-c-singleton-b-extinction) kills the third shape.
+`swappedUpperCode_double_c` and `upperLength_double_c` show that every phase assignment on the
+initial two `c` roles enters the branch with the same punctuated upper code `14ρ−1` and upper
+length two. `twoC_then_singletonB_avoids_singleton_pole` substitutes the literal middle `D_b`
+and factors the two singleton-target equations into one cubic and one quintic. Shifting
+`ρ=t+27` makes every coefficient strictly positive, so both pole expressions are negative.
+Only `cc→multi` and `c^(β+1)→singleton` survive the first swapped-ternary multi-transfer gate.
+
 Record [`MM-S21`](SALVAGE.md#mm-s21-bounded-decimal-suffix-cycles) closes the fixed-precision
 suffix-descent lane. `DecimalSetterSuffix.cycleDefect_lift` gives an explicit one-digit lift for
 the stationary carrier defect `10^hEx²−τx+μGV`, whose derivative is `−1` modulo ten.

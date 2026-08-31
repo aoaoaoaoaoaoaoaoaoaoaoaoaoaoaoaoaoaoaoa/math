@@ -691,4 +691,176 @@ theorem firstMultiTransfer_trichotomy_of_pole
     · obtain ⟨_, middleDepth_eq⟩ := middle_multi
       omega
 
+/-! ## Extinction of the two-`c`, singleton-`b`, singleton branch -/
+
+/-- The punctuated swapped upper code depends only on role letters. Two `c` roles give the
+closed value `14ρ-1`, independently of their rule/erasure phases. -/
+theorem swappedUpperCode_double_c
+    {width : Nat} {block : List NearyTile}
+    (letters : block.map NearyTile.letter = [.c, .c]) :
+    swappedUpperCode width block = 14 * widthScale width - 1 := by
+  rw [swappedUpperCode, spell_nearyUpper, letters]
+  change
+    (ternaryCode ((true :: ([true, true] ++ List.replicate width false)).map not) : ℤ) =
+      14 * widthScale width - 1
+  have tail :
+      (ternaryCode (([true, true] ++ List.replicate width false).map not) : ℤ) =
+        terminalDiscrepancy width := by
+    exact swappedUpperCode_singleton_c width
+  rw [List.map_cons, ternaryCode_cons, List.length_map, List.length_append,
+    List.length_replicate]
+  push_cast
+  rw [tail]
+  norm_num [ternaryDigit]
+  simp [terminalDiscrepancy, widthScale]
+  ring
+
+/-- Two `c` roles have upper length two, independently of their phases. -/
+theorem upperLength_double_c
+    {width : Nat} {block : List NearyTile}
+    (letters : block.map NearyTile.letter = [.c, .c]) :
+    upperLength width block = 2 := by
+  rw [upperLength, spell_nearyUpper, letters]
+  simp [tagEncode_cons, tagCode]
+
+/-- The third shape in the first multi-transfer trichotomy is empty. After a two-`c` first
+block, the literal singleton `D_b` middle block misses both singleton target poles. The exact
+pole expressions factor into strictly negative polynomials for every `β≥3`. -/
+theorem twoC_then_singletonB_avoids_singleton_pole
+    {width : Nat} (width_large : 3 ≤ width) (body : List TagLetter)
+    {first : List NearyTile}
+    (first_letters : first.map NearyTile.letter = [.c, .c])
+    (target : TagLetter)
+    (pole :
+      (singletonCoefficient width target : ℚ) *
+          nextY (blockCoefficient width body [.erase .b]) (centeredCoupling width) 2
+            ((3 : ℚ) ^ upperLength width first)
+            (centeredCoefficient width * swappedUpperCode width first) +
+        centeredCoupling width * 2 *
+          nextX (3 ^ upperLength width [.erase .b])
+            (centeredCoefficient width * swappedUpperCode width first) = 0) : False := by
+  have scale_ge_nat : 3 ^ 3 ≤ 3 ^ width :=
+    Nat.pow_le_pow_right (by omega) width_large
+  have scale_ge_int : (27 : ℤ) ≤ widthScale width := by
+    have casted : ((3 ^ 3 : Nat) : ℤ) ≤ ((3 ^ width : Nat) : ℤ) := by
+      exact_mod_cast scale_ge_nat
+    simpa [widthScale] using casted
+  have scale_ge : (27 : ℚ) ≤ (widthScale width : ℚ) := by
+    exact_mod_cast scale_ge_int
+  have cubic_pos :
+      (0 : ℚ) <
+        252 * (widthScale width : ℚ) ^ 3 -
+          578 * (widthScale width : ℚ) ^ 2 +
+          238 * (widthScale width : ℚ) - 9 := by
+    have shifted_pos :
+        (0 : ℚ) <
+          252 * ((widthScale width : ℚ) - 27) ^ 3 +
+            19834 * ((widthScale width : ℚ) - 27) ^ 2 +
+            520150 * ((widthScale width : ℚ) - 27) + 4545171 := by
+      positivity
+    nlinarith [shifted_pos]
+  have quintic_pos :
+      (0 : ℚ) <
+        4536 * (widthScale width : ℚ) ^ 5 -
+          11412 * (widthScale width : ℚ) ^ 4 +
+          3824 * (widthScale width : ℚ) ^ 3 +
+          2848 * (widthScale width : ℚ) ^ 2 -
+          1588 * (widthScale width : ℚ) + 171 := by
+    have shifted_pos :
+        (0 : ℚ) <
+          4536 * ((widthScale width : ℚ) - 27) ^ 5 +
+            600948 * ((widthScale width : ℚ) - 27) ^ 4 +
+            31838768 * ((widthScale width : ℚ) - 27) ^ 3 +
+            843217384 * ((widthScale width : ℚ) - 27) ^ 2 +
+            11163107588 * ((widthScale width : ℚ) - 27) + 59099138739 := by
+      positivity
+    nlinarith [shifted_pos]
+  rw [upperLength_double_c first_letters, upperLength_singleton_erase_b,
+    swappedUpperCode_double_c first_letters, blockCoefficient_singleton] at pole
+  have punctuated_cast :
+      (((14 * widthScale width - 1 : ℤ) : ℚ)) =
+        14 * (widthScale width : ℚ) - 1 := by
+    push_cast
+    ring
+  rw [punctuated_cast] at pole
+  have scale_pos : (0 : ℚ) < (widthScale width : ℚ) := by linarith
+  have scale_minus_two_pos : (0 : ℚ) < (widthScale width : ℚ) - 2 := by
+    linarith
+  have head_pos : (0 : ℚ) < 5 * (widthScale width : ℚ) - 1 := by
+    linarith
+  cases target with
+  | c =>
+      have expression_eq :
+          (singletonCoefficient width .c : ℚ) *
+                nextY (singletonCoefficient width .b) (centeredCoupling width) 2
+                  ((3 : ℚ) ^ 2)
+                  (centeredCoefficient width * (14 * widthScale width - 1)) +
+              centeredCoupling width * 2 *
+                nextX (3 ^ (width + 2))
+                  (centeredCoefficient width * (14 * widthScale width - 1)) =
+            -(widthScale width : ℚ) * ((widthScale width : ℚ) - 2) ^ 2 *
+              (5 * (widthScale width : ℚ) - 1) *
+              (252 * (widthScale width : ℚ) ^ 3 -
+                578 * (widthScale width : ℚ) ^ 2 +
+                238 * (widthScale width : ℚ) - 9) := by
+        norm_num [nextX, nextY, singletonCoefficient, singletonBCofactor,
+          centeredCoefficient, centeredCoupling, terminalDiscrepancy, setterMarker,
+          widthScale, pow_succ]
+        ring
+      rw [expression_eq] at pole
+      have expression_neg :
+          -(widthScale width : ℚ) * ((widthScale width : ℚ) - 2) ^ 2 *
+              (5 * (widthScale width : ℚ) - 1) *
+              (252 * (widthScale width : ℚ) ^ 3 -
+                578 * (widthScale width : ℚ) ^ 2 +
+                238 * (widthScale width : ℚ) - 9) < 0 := by
+        have product_pos :
+            (0 : ℚ) <
+              (widthScale width : ℚ) * ((widthScale width : ℚ) - 2) ^ 2 *
+                (5 * (widthScale width : ℚ) - 1) *
+                (252 * (widthScale width : ℚ) ^ 3 -
+                  578 * (widthScale width : ℚ) ^ 2 +
+                  238 * (widthScale width : ℚ) - 9) := by
+          positivity
+        nlinarith
+      linarith
+  | b =>
+      have expression_eq :
+          (singletonCoefficient width .b : ℚ) *
+                nextY (singletonCoefficient width .b) (centeredCoupling width) 2
+                  ((3 : ℚ) ^ 2)
+                  (centeredCoefficient width * (14 * widthScale width - 1)) +
+              centeredCoupling width * 2 *
+                nextX (3 ^ (width + 2))
+                  (centeredCoefficient width * (14 * widthScale width - 1)) =
+            -(widthScale width : ℚ) * ((widthScale width : ℚ) - 2) ^ 2 *
+              (4536 * (widthScale width : ℚ) ^ 5 -
+                11412 * (widthScale width : ℚ) ^ 4 +
+                3824 * (widthScale width : ℚ) ^ 3 +
+                2848 * (widthScale width : ℚ) ^ 2 -
+                1588 * (widthScale width : ℚ) + 171) := by
+        norm_num [nextX, nextY, singletonCoefficient, singletonBCofactor,
+          centeredCoefficient, centeredCoupling, terminalDiscrepancy, setterMarker,
+          widthScale, pow_succ]
+        ring
+      rw [expression_eq] at pole
+      have expression_neg :
+          -(widthScale width : ℚ) * ((widthScale width : ℚ) - 2) ^ 2 *
+              (4536 * (widthScale width : ℚ) ^ 5 -
+                11412 * (widthScale width : ℚ) ^ 4 +
+                3824 * (widthScale width : ℚ) ^ 3 +
+                2848 * (widthScale width : ℚ) ^ 2 -
+                1588 * (widthScale width : ℚ) + 171) < 0 := by
+        have product_pos :
+            (0 : ℚ) <
+              (widthScale width : ℚ) * ((widthScale width : ℚ) - 2) ^ 2 *
+                (4536 * (widthScale width : ℚ) ^ 5 -
+                  11412 * (widthScale width : ℚ) ^ 4 +
+                  3824 * (widthScale width : ℚ) ^ 3 +
+                  2848 * (widthScale width : ℚ) ^ 2 -
+                  1588 * (widthScale width : ℚ) + 171) := by
+          positivity
+        nlinarith
+      linarith
+
 end MatrixMortality.SwappedSetterMultitransfer

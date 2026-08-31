@@ -989,6 +989,12 @@ singleton. The only equal-depth singleton branch is impossible by an exact norma
 calculation. These are necessary shapes, not witnesses; attack their complete suffix equations
 before extending the carry to greater depth.
 
+[`MM-S38`](SALVAGE.md#mm-s38-two-c-singleton-b-extinction) kills the last of those three shapes
+for both singleton targets. The two pole expressions factor into strictly negative cubic and
+quintic products after the shift `ρ=t+27`; the result is independent of the initial two `c`
+phases and of the compiler body. The first swapped-ternary multi-transfer front now has two
+branches: `cc→multi` and `c^(β+1)→singleton`.
+
 The immediate ternary question is which other positive valuation-one discrepancies survive its
 suffix sieve without already certifying source halting.
 Exact bidirectional diagnostics for the ternary swap at `β=3`, body `bbcc`, exclude every

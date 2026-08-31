@@ -130,6 +130,7 @@ file owns the mathematical stock.
 | [`MM-S31`](#mm-s31-gcd-saturated-singleton-gate) | structure theorem and obstruction | exact gcd cancellation leaves a canonical gap quotient whose two singleton gates survive every partial numerator contamination | formalized | active |
 | [`MM-S32`](#mm-s32-entry-support-saturator-extinction) | obstruction | the universal all-`D_c` support saturator cannot be the first transition from a lawful two-`c` raw head to another multi-role pole | formalized | active |
 | [`MM-S35`](#mm-s35-first-multi-transfer-trichotomy) | structure theorem and obstruction | every first swapped-ternary multi-transfer pole in the expected shells passes through one of three exact all-`c`/singleton shapes | formalized | active |
+| [`MM-S38`](#mm-s38-two-c-singleton-b-extinction) | obstruction | the two-`c`, singleton-`D_b`, singleton-target branch of the swapped-ternary first multi-transfer gate is empty | formalized | active |
 | [`R32-S01`](#r32-s01-split-return-normal-form) | structure theorem | rank-two cuts reduce one-unit binary mortality to a `2 × 2` return recurrence | formalized | graduated |
 | [`R32-S02`](#r32-s02-two-plane-edge-square) | structure theorem | two rank-two generators are a two-vertex square of `2 × 2` edges | formalized | graduated |
 | [`R32-O01`](#r32-o01-rank-one-profile-collapse) | obstruction | a rank-one generator reduces mortality to order-at-most-three scalar recurrence zeros | audited | stock |
@@ -4458,6 +4459,67 @@ through `firstMultiTransfer_trichotomy_of_pole`; the nonresonant and resonant co
 
 **Next:** decide the three literal shapes in (4), retaining complete suffix information rather
 than only the `3`-adic shell.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S38: Two-c singleton-b extinction
+
+**Kind:** obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+The third branch of [`MM-S35`](#mm-s35-first-multi-transfer-trichotomy) starts at the ordinary
+reset with any two-role block whose letters are `cc`, applies the literal singleton `D_b`, and
+asks to hit either singleton target pole. The first block's phases affect its lower spelling but
+not the state entering this branch. Its punctuated upper code and upper length are exactly
+
+```text
+P=14ρ−1,       m=2,       ρ=3^β.                     (1)
+```
+
+Substituting (1), the singleton `D_b` coefficient, and the two singleton target coefficients
+into the centered recurrence factors the two prospective pole expressions as
+
+```text
+D_c target: −ρ(ρ−2)^2(5ρ−1)
+  ·(252ρ^3−578ρ^2+238ρ−9),
+
+D_b target: −ρ(ρ−2)^2
+  ·(4536ρ^5−11412ρ^4+3824ρ^3+2848ρ^2−1588ρ+171).    (2)
+```
+
+For `β≥3`, put `t=ρ−27≥0`. The cubic and quintic factors in (2) become
+
+```text
+252t^3+19834t^2+520150t+4545171,
+
+4536t^5+600948t^4+31838768t^3+843217384t^2
+  +11163107588t+59099138739.                              (3)
+```
+
+Every coefficient in (3) is positive. Both expressions in (2) are therefore strictly negative
+and cannot be pole equations.
+
+**Scope:** the theorem is uniform in the compiler body and in the rule/erasure phases of the
+initial two `c` roles. It kills only the third `MM-S35` branch. The surviving swapped-ternary
+first multi-transfer shapes are `cc` before a multi-role target and `c^(β+1)` before a singleton;
+later histories remain open. No full `M₅(3)` conclusion follows.
+
+**Use:** remove the singleton-`D_b` bridge from all physical search and induction cases. Attack
+the remaining `cc` branch through the valuation-one fringe classifier and the long all-`c`
+branch through its exact phase-dependent lower code.
+
+**Formalization:**
+[`MatrixMortality/SwappedSetterMultitransfer.lean`](MatrixMortality/SwappedSetterMultitransfer.lean),
+through `swappedUpperCode_double_c`, `upperLength_double_c`, and
+`twoC_then_singletonB_avoids_singleton_pole`.
+
+**Artifact:**
+[`audits/m53-two-c-singleton-b-extinction-2026-08-31.md`](audits/m53-two-c-singleton-b-extinction-2026-08-31.md).
+
+**Next:** decide `cc→multi` and `c^(β+1)→singleton`, retaining the first block's exact
+punctuated upper code and the middle block's phase-dependent lower code.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
