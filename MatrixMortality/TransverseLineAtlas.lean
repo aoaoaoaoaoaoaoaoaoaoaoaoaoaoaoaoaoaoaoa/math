@@ -16,7 +16,9 @@ namespace TransverseLineAtlas
 
 open scoped Matrix
 
+/-- Three-dimensional carrier state. -/
 abbrev State := Fin 3 → ℚ
+/-- Rational control action on the carrier state. -/
 abbrev ControlMatrix := Matrix (Fin 3) (Fin 3) ℚ
 
 /-- The two boundary-ray charts and the four optionally toggled data-image charts. -/

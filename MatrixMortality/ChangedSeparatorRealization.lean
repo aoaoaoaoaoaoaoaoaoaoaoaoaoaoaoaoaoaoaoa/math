@@ -15,8 +15,10 @@ open scoped Matrix
 
 namespace ChangedSeparatorRealization
 
+/-- Ternary width scale of the changed-separator chart. -/
 def widthScale (β : Nat) : ℚ := 3 ^ β
 
+/-- Common denominator of the changed-separator input/output chart. -/
 def denominator (β : Nat) (body : List TagLetter) : ℚ :=
   ChangedSeparatorTail.transferDenominator β body
 
@@ -31,6 +33,7 @@ theorem denominator_ne_zero (β : Nat) (body : List TagLetter) :
     denominator β body ≠ 0 :=
   ne_of_lt (denominator_lt_zero β body)
 
+/-- Eigenvalue carried by the one-dimensional safe tail. -/
 def tailEigenvalue (β : Nat) (body : List TagLetter) : ℚ :=
   let ρ := widthScale β
   let V := ChangedSeparatorTail.lowerCCode β body

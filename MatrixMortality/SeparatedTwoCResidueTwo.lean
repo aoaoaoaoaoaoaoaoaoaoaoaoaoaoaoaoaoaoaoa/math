@@ -30,7 +30,7 @@ def fourCExpansion (A middle front : Nat) : List TagLetter :=
 private def residueTwoFinal (A middle : Nat) : List TagLetter :=
   fourCExpansion A middle (4 * A)
 
-@[simp] private theorem consumed_replicate_strokeBBB (count : Nat) :
+private theorem consumed_replicate_strokeBBB (count : Nat) :
     consumed (List.replicate count strokeBBB) = bRun (3 * count) := by
   induction count with
   | zero => rfl
@@ -39,7 +39,7 @@ private def residueTwoFinal (A middle : Nat) : List TagLetter :=
       simp [strokeBBB, stroke₃, Stroke.letters]
       exact congrArg bRun (by omega)
 
-@[simp] private theorem produced_replicate_strokeBBB (body : List TagLetter) (count : Nat) :
+private theorem produced_replicate_strokeBBB (body : List TagLetter) (count : Nat) :
     produced (tagOutput body) (List.replicate count strokeBBB) = bRun count := by
   induction count with
   | zero => rfl

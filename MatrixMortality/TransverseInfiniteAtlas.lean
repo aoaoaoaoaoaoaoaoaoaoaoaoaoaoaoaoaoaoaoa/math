@@ -13,8 +13,11 @@ namespace TransverseInfiniteAtlas
 
 open scoped Matrix
 
+/-- Two-dimensional data interface of the transverse atlas. -/
 abbrev Interface := Fin 2
+/-- Three-dimensional carrier state. -/
 abbrev State := Fin 3 → ℚ
+/-- Rational control action on the carrier state. -/
 abbrev ControlMatrix := Matrix (Fin 3) (Fin 3) ℚ
 
 /-- Diagonal toggle with three distinct rational eigenvalues. -/

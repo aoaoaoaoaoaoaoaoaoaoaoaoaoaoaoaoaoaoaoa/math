@@ -32,7 +32,7 @@ def bRun (length : Nat) : List TagLetter := List.replicate length .b
   rw [show length + 1 = 1 + length by omega, ← bRun_append]
   rfl
 
-@[simp] private theorem bRun_snoc (length : Nat) :
+private theorem bRun_snoc (length : Nat) :
     bRun length ++ [.b] = bRun (length + 1) := by
   simpa [bRun] using bRun_append length 1
 
@@ -49,7 +49,7 @@ def bRun (length : Nat) : List TagLetter := List.replicate length .b
     TagLetter.b :: (bRun length ++ tail) = (TagLetter.b :: bRun length) ++ tail := rfl
     _ = bRun (length + 1) ++ tail := by rw [bRun_cons]
 
-@[simp] private theorem replicate_b_append (left right : Nat) :
+private theorem replicate_b_append (left right : Nat) :
     List.replicate left TagLetter.b ++ List.replicate right TagLetter.b =
       List.replicate (left + right) TagLetter.b := by
   exact (List.replicate_add left right TagLetter.b).symm
@@ -120,20 +120,11 @@ private def oneReturnHistory (k : Nat) : List (Stroke TagLetter 3) :=
     consumed (left ++ right) = consumed left ++ consumed right := by
   simp [consumed]
 
-@[simp] private theorem produced_append (body : List TagLetter)
+private theorem produced_append (body : List TagLetter)
     (left right : List (Stroke TagLetter 3)) :
     produced (tagOutput body) (left ++ right) =
       produced (tagOutput body) left ++ produced (tagOutput body) right := by
   simp [produced]
-
-@[simp] private theorem consumed_replicate_strokeBBB (count : Nat) :
-    consumed (List.replicate count strokeBBB) = bRun (3 * count) := by
-  induction count with
-  | zero => rfl
-  | succ count induction =>
-      rw [List.replicate_succ, consumed_cons, induction]
-      simp [strokeBBB, stroke₃, Stroke.letters]
-      exact congrArg bRun (by omega)
 
 @[simp] private theorem produced_replicate_strokeBBB (body : List TagLetter) (count : Nat) :
     produced (tagOutput body) (List.replicate count strokeBBB) = bRun count := by
@@ -157,8 +148,8 @@ private theorem zeroEntryHistory_consumed (k : Nat) :
 
 private theorem zeroEntryHistory_produced (body : List TagLetter) (k : Nat) :
     produced (tagOutput body) (zeroEntryHistory k) = bRun (3 * k + 4) := by
-  simp [zeroEntryHistory, strokeBCB, strokeBBC, stroke₃, tagOutput, nearyBody,
-    List.append_assoc]
+  simp [zeroEntryHistory, produced_append, strokeBCB, strokeBBC, stroke₃, tagOutput,
+    nearyBody, List.append_assoc]
   congr 1
   omega
 
@@ -176,8 +167,8 @@ private theorem oneEntryHistory_consumed (k : Nat) :
 
 private theorem oneEntryHistory_produced (body : List TagLetter) (k : Nat) :
     produced (tagOutput body) (oneEntryHistory k) = bRun (3 * k + 5) := by
-  simp [oneEntryHistory, strokeBCB, strokeBBC, stroke₃, tagOutput, nearyBody,
-    List.append_assoc]
+  simp [oneEntryHistory, produced_append, strokeBCB, strokeBBC, stroke₃, tagOutput,
+    nearyBody, List.append_assoc]
   congr 1
   omega
 
@@ -195,7 +186,8 @@ private theorem zeroReturnHistory_consumed (k : Nat) :
 
 private theorem zeroReturnHistory_produced (body : List TagLetter) (k : Nat) :
     produced (tagOutput body) (zeroReturnHistory k) = bRun (3 * k + 4) := by
-  simp [zeroReturnHistory, strokeBBC, stroke₃, tagOutput, nearyBody, List.append_assoc]
+  simp [zeroReturnHistory, produced_append, strokeBBC, stroke₃, tagOutput, nearyBody,
+    List.append_assoc]
   congr 1
   omega
 
@@ -212,7 +204,8 @@ private theorem oneReturnHistory_consumed (k : Nat) :
 
 private theorem oneReturnHistory_produced (body : List TagLetter) (k : Nat) :
     produced (tagOutput body) (oneReturnHistory k) = bRun (3 * k + 2) := by
-  simp [oneReturnHistory, strokeBCB, stroke₃, tagOutput, nearyBody, List.append_assoc]
+  simp [oneReturnHistory, produced_append, strokeBCB, stroke₃, tagOutput, nearyBody,
+    List.append_assoc]
   congr 1
   omega
 

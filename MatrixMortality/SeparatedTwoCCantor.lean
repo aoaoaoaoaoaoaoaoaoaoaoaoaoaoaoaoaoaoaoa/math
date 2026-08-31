@@ -136,9 +136,11 @@ theorem tagHaltsFrom_headEquivalent_iff {output : TagLetter → List TagLetter}
   ⟨fun halts => TagHaltsFrom.of_headEquivalent halts equivalent,
     fun halts => TagHaltsFrom.of_headEquivalent halts equivalent.symm⟩
 
+/-- Two-active-`c` queue at the entrance to one paired macro. -/
 def pairQueue (A tail : Nat) : List TagLetter :=
   [TagLetter.c] ++ bRun (3 * A - 1) ++ [TagLetter.c] ++ bRun tail
 
+/-- Queue produced after executing one paired active-`c` macro. -/
 def afterPair (A tail : Nat) : List TagLetter :=
   bRun tail ++ [TagLetter.c] ++ bRun (3 * A - 1) ++ [TagLetter.c] ++
     bRun (4 * A + 1) ++ [TagLetter.c] ++ bRun (3 * A - 1) ++
@@ -172,6 +174,7 @@ theorem pairQueue_reaches_afterPair (A tail : Nat) (A_pos : 0 < A) (tail_two : 2
   rw [source_eq, target_eq] at reach
   exact reach.toReaches
 
+/-- Four-`c` queue whose final run carries the drainage gap `g`. -/
 def zeroAfter (A g : Nat) : List TagLetter :=
   [TagLetter.c] ++ bRun (3 * A - 1) ++ [TagLetter.c] ++ bRun (4 * A + 1) ++
     [TagLetter.c] ++ bRun (3 * A - 1) ++ [TagLetter.c] ++ bRun (3 * A + g)

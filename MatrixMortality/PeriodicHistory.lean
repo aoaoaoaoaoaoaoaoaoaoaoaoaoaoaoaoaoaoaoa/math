@@ -174,7 +174,7 @@ private def leadingB (word : List TagLetter) : Nat :=
       rw [show 3 * (length + 1) = 3 + 3 * length by omega, List.replicate_add]
       rfl
 
-@[simp] private theorem produced_replicate_B (length : Nat) :
+private theorem produced_replicate_B (length : Nat) :
     produced (tagOutput bcbbBody) (List.replicate length strokeBBB) =
       List.replicate length .b := by
   induction length with
@@ -199,7 +199,7 @@ private theorem leadingB_null_left (prefixLength : Nat) (tail : List TagLetter) 
       3 * prefixLength := by
   simp [List.append_assoc]
 
-@[simp] private theorem leadingB_null_right (prefixLength : Nat) (tail : List TagLetter) :
+private theorem leadingB_null_right (prefixLength : Nat) (tail : List TagLetter) :
     leadingB
       (.b :: (List.replicate prefixLength .b ++
         .b :: .c :: .b :: .b :: .b :: tail)) =
@@ -234,7 +234,8 @@ private theorem bcbbNull_peel (history : List (Stroke TagLetter 3))
       simpa [strokeCBB, stroke₃, Stroke.letters, bcbbBody, tagOutput, nearyBody,
         List.append_assoc] using null
     have lead_equality : 3 * prefixLength = prefixLength + 2 := by
-      simpa [List.append_assoc, leadingB_null_left] using congrArg leadingB normalized
+      simpa [List.append_assoc, leadingB_null_left, leadingB_null_right] using
+        congrArg leadingB normalized
     have prefix_one : prefixLength = 1 := by omega
     subst prefixLength
     refine ⟨tail, ?_, ?_⟩

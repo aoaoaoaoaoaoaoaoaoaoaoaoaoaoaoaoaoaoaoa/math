@@ -16,7 +16,7 @@ open MatrixMortality.DecimalSetterCarry
 open MatrixMortality.DecimalSetterChamber
 open MatrixMortality.DecimalSetterDepth
 
-@[simp] private theorem tagEncode_replicate_c (β width : Nat) :
+private theorem tagEncode_replicate_c (β width : Nat) :
     tagEncode β (List.replicate width .c) = List.replicate width true := by
   induction width with
   | zero => rfl
