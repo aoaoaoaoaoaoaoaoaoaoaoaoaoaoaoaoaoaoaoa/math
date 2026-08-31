@@ -31,6 +31,7 @@ import MatrixMortality.ReturnJordan
 import MatrixMortality.ReturnConvert
 import MatrixMortality.ProjectiveLine
 import MatrixMortality.CongruenceBlindOrbit
+import MatrixMortality.ShearEuclidean
 import MatrixMortality.AffineGroupOrbit
 import MatrixMortality.PadicValuation
 import MatrixMortality.ReturnGuard
