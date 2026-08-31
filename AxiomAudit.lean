@@ -600,6 +600,13 @@ open MatrixMortality
 #print axioms PeriodicShell.benchmarkRelationShiftContextGuard
 #print axioms PeriodicShell.benchmarkRelationCycle
 #print axioms PeriodicShell.benchmarkRelationShiftCycle
+#print axioms PeriodicShell.kernelOddSchedule_ne
+#print axioms PeriodicShell.shellRawWord_kernelOddScheduleLeft
+#print axioms PeriodicShell.shellRawWord_kernelOddScheduleRight
+#print axioms PeriodicShell.shellRun_kernelOddSchedule
+#print axioms PeriodicShell.shellRun_kernelOddScheduleContext
+#print axioms PeriodicShell.kernelOddScheduleContextGuard
+#print axioms PeriodicShell.kernelOddScheduleCycle
 #print axioms RankTwoPunctuation.exists_pathProduct_eq_zero_iff_selfBridge_or_incidence
 #print axioms ReturnSquare.twoReturnDiscriminant_not_isSquare
 #print axioms ReturnSquare.positiveBridge_pair_ne_zero

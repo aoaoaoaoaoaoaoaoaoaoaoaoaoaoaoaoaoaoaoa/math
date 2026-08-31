@@ -1153,6 +1153,15 @@
  Quot.sound]
 'MatrixMortality.PeriodicShell.benchmarkRelationCycle' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.PeriodicShell.benchmarkRelationShiftCycle' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.PeriodicShell.kernelOddSchedule_ne' depends on axioms: [propext]
+'MatrixMortality.PeriodicShell.shellRawWord_kernelOddScheduleLeft' depends on axioms: [propext]
+'MatrixMortality.PeriodicShell.shellRawWord_kernelOddScheduleRight' depends on axioms: [propext]
+'MatrixMortality.PeriodicShell.shellRun_kernelOddSchedule' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.PeriodicShell.shellRun_kernelOddScheduleContext' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.PeriodicShell.kernelOddScheduleContextGuard' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.PeriodicShell.kernelOddScheduleCycle' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.RankTwoPunctuation.exists_pathProduct_eq_zero_iff_selfBridge_or_incidence' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]

@@ -10361,9 +10361,23 @@ have the same affine action and common length `29+2k`. The proof computes the en
 `(DT)^k(z)=(2/5)^k z+(10/9)(1−(2/5)^k)`. The `k=0` member is the finite-basis rule; `k=1`
 is one of the seven length-31 normal-form collisions found by census.
 
+Prefixing by `T` gives exact shell schedules
+
+```text
+[2,1^k,9,2,2,0^9,1],
+[0,0,2,1^k,0,2,0,2,1,1,2,0,6,0,0],
+```
+
+where powers denote repeated entries. Lean proves their raw factorization, equal action in every
+schedule context, identical intermediate-guard domains, and a common rational all-unit cycle for
+every `k`.
+
 Exact enumeration of all `2^n` raw words finds no relation outside this basis through length 30.
 At length 31 the five-rule census finds seven independent normal-form collisions. One is now the
 formal `k=1` family member; the remaining six are computational evidence, not theorem claims.
+The maintained checker additionally verifies that the family instances `k=1,…,11` have two
+irreducible sides. Since their lengths are at most 51 and the first critical overlap has length
+52, they lie outside the five-rule congruence.
 The checked finite basis is therefore a reduction accelerator, not a complete presentation of
 the affine kernel.
 
@@ -10376,7 +10390,8 @@ unit shell; representatives can also be chosen to avoid every earlier state.
 **Scope:** Lean checks the finite rational all-phases cycle, the distinct published schedules,
 their affine equality in arbitrary contexts, their common guarded periodic source, contextual
 guard preservation, the raw/shell conjugacy, the contextual boundary factorization, the infinite
-odd-length raw kernel family, and three independent length-30 relations. Infinite-schedule
+odd-length raw kernel family, its guarded contextual cycles, and three independent length-30
+relations. Infinite-schedule
 completion, finite-precision completeness,
 the rational aperiodic construction, density, period-one single-wait rigidity, Knuth–Bendix
 critical-pair census, and exhaustive raw-word census are audited. The result does not decide exact
@@ -10388,7 +10403,8 @@ rational source may also identify distinct affine maps.
 `wordAction_kernel30*` theorems,
 `PeriodicShell.shellPeriodicCycle`, `PeriodicShell.shellPrefixesUnit_iff`,
 `PeriodicShell.shellRun_eq_wordAction`, `PeriodicShell.shellRun_benchmarkRelationShift`,
-`PeriodicShell.benchmarkRelationContextGuard`, and `PeriodicShell.benchmarkRelationCycle` in
+`PeriodicShell.benchmarkRelationContextGuard`, `PeriodicShell.benchmarkRelationCycle`,
+`PeriodicShell.kernelOddScheduleContextGuard`, and `PeriodicShell.kernelOddScheduleCycle` in
 [`MixedPrimeKernel.lean`](MatrixMortality/MixedPrimeKernel.lean) and
 [`PeriodicShell.lean`](MatrixMortality/PeriodicShell.lean), with the source record in
 [`cassaigne-nicolas-2012-semigroup-freeness.md`](references/cassaigne-nicolas-2012-semigroup-freeness.md)

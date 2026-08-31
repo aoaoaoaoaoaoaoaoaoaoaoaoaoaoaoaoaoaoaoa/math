@@ -2343,7 +2343,9 @@ schedules with the same affine map and a common Lean-checked guarded periodic so
 exact rewrite seed. Lean also proves that it preserves all intermediate shell guards in every
 word context. Lean now factors every boundary-shifted schedule equality as one raw `D,T` context
 and checks the published length-27 relation, an infinite family at every odd length `29+2k`, and
-three independent length-30 relations. Lexical orientation of the original five-rule basis
+three independent length-30 relations. Every odd-family relation has an exact shell schedule
+factorization, preserves every intermediate unit guard in arbitrary context, and has a common
+rational all-unit cycle. Lexical orientation of the original five-rule basis
 terminates, but has 45 nonjoinable critical overlaps. Exhaustive affine census proves bounded
 completeness through raw length 30 and finds seven independent collisions at length 31; one is
 now the formal `k=1` family member and six remain computational. There is no

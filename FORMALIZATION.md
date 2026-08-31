@@ -429,6 +429,11 @@ schedules. The two schedule boundaries of the published relation are then factor
 single raw context `T D^last _ D^first`; the apparent two-parameter schedule family is not a
 family of new relations.
 
+The odd raw family also lifts uniformly to the guarded shell. Exact schedule factorizations give
+`shellRawWord_kernelOddScheduleLeft/Right`; `kernelOddScheduleContextGuard` proves equal guard
+domains in every schedule context, and `kernelOddScheduleCycle` supplies a common rational
+all-unit cycle for every pump depth.
+
 `shellRun_benchmarkRelation` proves global affine equality of the two published schedules;
 `benchmarkRelationCycle` proves that their explicit periodic points coincide and every phase of
 both cycles is a `5`-adic unit. The generic `shellPrefixesUnit_iff` identifies all-phase legality
@@ -442,8 +447,9 @@ lexicographically larger side to its smaller side; equal length and content make
 immediate. The published raw rule has two nonjoinable self-overlap critical pairs. The five-rule
 basis has 45 nonjoinable proper critical overlaps, so it is not confluent. Exact enumeration of
 all raw words proves that this basis accounts for every affine collision through length 30; seven
-independent collisions appear among the `2^31` words of length 31 and remain computational rather
-than formalized. The exact enumerator and all-branch critical-pair checker are retained in
+independent collisions appear among the `2^31` words of length 31. One is the formal index-one
+family member; six remain computational. The exact enumerator and all-branch critical-pair
+checker are retained in
 [`audit_mixed_prime_kernel.rs`](tools/audit_mixed_prime_kernel.rs); its independent small-radius
 self-check is part of the canonical gate, while the multi-billion-word census is not. No
 presentation-completeness claim survives. Fixed-source point collisions add a separate stabilizer
@@ -1200,7 +1206,7 @@ The dimension-two affine ledger has six independently checked records:
 | [`D2-D06`](SALVAGE.md#d2-d06-private-prime-peeling) | unique-minimum valuation calculation, zero endpoints, fixed-count reduction, reversed language, and positive private valuation |
 | [`D2-D07`](SALVAGE.md#d2-d07-bounded-valuation-orthants) | localization support, denominator bounds in both orthants, invariant-interval recognition, finite graph, and regular-control product |
 | [`D2-M01`](SALVAGE.md#d2-m01-benchmark-critical-shell) | benchmark conjugacies, endpoint-shell translation, guarded `5`-adic transition, parity guard, and no-return-after-exit theorem |
-| [`D2-O02`](SALVAGE.md#d2-o02-critical-shell-periodic-saturation) | complete: rational periodic cycles for every nonempty finite wait schedule, raw/shell conjugacy, contextual boundary factorization, an infinite odd-length raw kernel family, and three independent length-30 relations; audited strengthening: terminating but nonconfluent critical-pair census, bounded five-rule kernel completeness through length 30 and six unexplained classes at 31 after adjoining the family member, infinite completion, finite-precision completeness, rational aperiodic addresses, density, and period-one single-wait transition rigidity |
+| [`D2-O02`](SALVAGE.md#d2-o02-critical-shell-periodic-saturation) | complete: rational periodic cycles for every nonempty finite wait schedule, raw/shell conjugacy, contextual boundary factorization, an infinite odd-length raw kernel family with guarded contextual cycles, and three independent length-30 relations; audited strengthening: terminating but nonconfluent critical-pair census, bounded five-rule kernel completeness through length 30 and six unexplained classes at 31 after adjoining the family member, infinite completion, finite-precision completeness, rational aperiodic addresses, density, and period-one single-wait transition rigidity |
 
 The shell record does not decide the benchmark. Every fixed exit has a decidable suffix, but an
 arbitrary critical prefix can produce infinitely many exits. A formal benchmark theorem must

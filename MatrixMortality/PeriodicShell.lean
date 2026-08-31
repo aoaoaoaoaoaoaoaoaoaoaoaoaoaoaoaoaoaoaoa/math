@@ -179,6 +179,36 @@ def shellRawWord : List ℕ → List Letter
   | [] => []
   | wait :: waits => shellRawWord waits ++ shellRawBlock wait
 
+/-- Chronological schedule concatenation reverses into matrix-product word order. -/
+theorem shellRawWord_append (left right : List ℕ) :
+    shellRawWord (left ++ right) = shellRawWord right ++ shellRawWord left := by
+  induction left with
+  | nil => simp [shellRawWord]
+  | cons wait left induction =>
+      simp [shellRawWord, induction, List.append_assoc]
+
+private theorem pumpWord_append_pair (pump : ℕ) :
+    pumpWord pump ++ [.dilate, .translate] =
+      [.dilate, .translate] ++ pumpWord pump := by
+  induction pump with
+  | zero => rfl
+  | succ pump induction =>
+      simp only [pumpWord, List.append_assoc]
+      rw [induction]
+
+private theorem shellRawWord_replicate_one_bridge (pump : ℕ) :
+    shellRawWord (List.replicate pump 1) ++ [.translate] =
+      [.translate] ++ pumpWord pump := by
+  induction pump with
+  | zero => rfl
+  | succ pump induction =>
+      have extended := congrArg
+        (fun word => word ++ [.dilate, .translate]) induction
+      simp only [List.append_assoc] at extended
+      rw [pumpWord_append_pair] at extended
+      simpa [List.replicate_succ, shellRawWord, shellRawBlock, pumpWord,
+        List.append_assoc] using extended
+
 private theorem wordAction_replicate_dilate (wait : ℕ) (state : ℚ) :
     wordAction (List.replicate wait .dilate) state = (2 / 3 : ℚ) ^ wait * state := by
   induction wait with
@@ -285,6 +315,97 @@ theorem shellRun_benchmarkRelation (state : ℚ) :
     shellRun benchmarkRelationLeft state = shellRun benchmarkRelationRight state := by
   norm_num [shellRun, benchmarkRelationLeft, benchmarkRelationRight, run, step, shellScale]
   ring
+
+/-- Left shell schedule induced by prefixing the odd raw kernel family with `T`. -/
+def kernelOddScheduleLeft (pump : ℕ) : List ℕ :=
+  [2] ++ List.replicate pump 1 ++ [9, 2, 2] ++ List.replicate 9 0 ++ [1]
+
+/-- Right shell schedule induced by prefixing the odd raw kernel family with `T`. -/
+def kernelOddScheduleRight (pump : ℕ) : List ℕ :=
+  [0, 0, 2] ++ List.replicate pump 1 ++ [0, 2, 0, 2, 1, 1, 2, 0, 6, 0, 0]
+
+/-- Every odd-family shell pair consists of distinct schedules. -/
+theorem kernelOddSchedule_ne (pump : ℕ) :
+    kernelOddScheduleLeft pump ≠ kernelOddScheduleRight pump := by
+  simp [kernelOddScheduleLeft, kernelOddScheduleRight]
+
+/-- Prefixing the left odd-family word by `T` is exactly its shell schedule word. -/
+theorem shellRawWord_kernelOddScheduleLeft (pump : ℕ) :
+    shellRawWord (kernelOddScheduleLeft pump) =
+      [.translate] ++ kernelOddFamilyLeft pump := by
+  have bridge := shellRawWord_replicate_one_bridge pump
+  have contextual := congrArg
+    (fun word =>
+      shellRawWord ([9, 2, 2] ++ List.replicate 9 0 ++ [1]) ++ word ++
+        List.replicate 2 .dilate) bridge
+  simpa [kernelOddScheduleLeft, shellRawWord_append, shellRawWord, shellRawBlock,
+    kernelOddFamilyLeft, List.append_assoc] using contextual
+
+/-- Prefixing the right odd-family word by `T` is exactly its shell schedule word. -/
+theorem shellRawWord_kernelOddScheduleRight (pump : ℕ) :
+    shellRawWord (kernelOddScheduleRight pump) =
+      [.translate] ++ kernelOddFamilyRight pump := by
+  have bridge := shellRawWord_replicate_one_bridge pump
+  have contextual := congrArg
+    (fun word =>
+      shellRawWord [0, 2, 0, 2, 1, 1, 2, 0, 6, 0, 0] ++ word ++
+        [.dilate, .dilate, .translate, .translate]) bridge
+  simpa [kernelOddScheduleRight, shellRawWord_append, shellRawWord, shellRawBlock,
+    kernelOddFamilyRight, List.append_assoc] using contextual
+
+/-- Every odd-family shell pair induces the same rational affine map. -/
+theorem shellRun_kernelOddSchedule (pump : ℕ) (state : ℚ) :
+    shellRun (kernelOddScheduleLeft pump) state =
+      shellRun (kernelOddScheduleRight pump) state := by
+  rw [shellRun_eq_wordAction, shellRun_eq_wordAction,
+    shellRawWord_kernelOddScheduleLeft, shellRawWord_kernelOddScheduleRight]
+  simp only [wordAction_append]
+  rw [wordAction_kernelOddFamily]
+
+/-- Every odd-family shell equality remains valid inside an arbitrary schedule context. -/
+theorem shellRun_kernelOddScheduleContext
+    (pump : ℕ) (before after : List ℕ) (state : ℚ) :
+    shellRun (before ++ kernelOddScheduleLeft pump ++ after) state =
+      shellRun (before ++ kernelOddScheduleRight pump ++ after) state := by
+  simp only [shellRun_append]
+  rw [shellRun_kernelOddSchedule]
+
+/-- Contextual substitution of an odd-family relation preserves every shell guard. -/
+theorem kernelOddScheduleContextGuard
+    (pump : ℕ) (before after : List ℕ) (state : ℚ) :
+    (∀ front back, before ++ kernelOddScheduleLeft pump ++ after = front ++ back →
+      IsUnit 5 (shellRun front state)) ↔
+      ∀ front back, before ++ kernelOddScheduleRight pump ++ after = front ++ back →
+        IsUnit 5 (shellRun front state) := by
+  rw [shellPrefixesUnit_iff, shellPrefixesUnit_iff,
+    shellRun_kernelOddScheduleContext]
+
+/-- Every odd-family relation is realized by two all-unit cycles from one rational source. -/
+theorem kernelOddScheduleCycle (pump : ℕ) :
+    let left := kernelOddScheduleLeft pump
+    let right := kernelOddScheduleRight pump
+    let source := shellPeriodicPoint left
+    IsUnit 5 source ∧
+      shellRun left source = source ∧
+      shellRun right source = source ∧
+      (∀ front back, left = front ++ back → IsUnit 5 (shellRun front source)) ∧
+      ∀ front back, right = front ++ back → IsUnit 5 (shellRun front source) := by
+  have left_ne : kernelOddScheduleLeft pump ≠ [] := by
+    simp [kernelOddScheduleLeft]
+  have left_cycle := shellPeriodicCycle left_ne
+  have left_phases :
+      ∀ front back,
+        [] ++ kernelOddScheduleLeft pump ++ [] = front ++ back →
+          IsUnit 5 (shellRun front (shellPeriodicPoint (kernelOddScheduleLeft pump))) := by
+    simpa only [List.nil_append, List.append_nil] using left_cycle.2.2
+  have right_phases :=
+    (kernelOddScheduleContextGuard pump [] []
+      (shellPeriodicPoint (kernelOddScheduleLeft pump))).mp left_phases
+  dsimp only
+  refine ⟨left_cycle.1, left_cycle.2.1, ?_, left_cycle.2.2, ?_⟩
+  · rw [← shellRun_kernelOddSchedule]
+    exact left_cycle.2.1
+  simpa only [List.nil_append, List.append_nil] using right_phases
 
 /-- Two-parameter boundary shift of the published relation's left schedule. -/
 def benchmarkRelationShiftLeft (first last : ℕ) : List ℕ :=

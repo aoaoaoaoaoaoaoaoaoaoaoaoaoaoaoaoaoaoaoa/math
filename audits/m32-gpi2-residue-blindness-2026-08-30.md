@@ -349,6 +349,18 @@ the seven length-31 collisions below. Thus the kernel already contains a relatio
 length from 29. Lean also checks the three independent length-30 relations in
 `MixedPrimeKernel`.
 
+The full odd family survives the shell guard. Prefixing its two sides by `T` gives schedules
+
+```text
+u_k=[2,1^k,9,2,2,0^9,1],
+v_k=[0,0,2,1^k,0,2,0,2,1,1,2,0,6,0,0],
+```
+
+where powers denote repeated entries. Lean proves `shellRawWord(u_k)=T L_k` and
+`shellRawWord(v_k)=T R_k`, equal action in every schedule context, identical all-prefix guard
+domains, and a common rational all-unit periodic source for every `k`. This is unbounded guarded
+nonfreeness, not a fixed-source reachability decision.
+
 The five-rule census found seven length-31 relations:
 
 ```text
@@ -388,8 +400,9 @@ rustc --crate-name mixed_prime_kernel_audit --edition 2021 -D warnings -C opt-le
 
 `self-check` compares the optimized `(d,t,B)` recurrence against independent full `2×2` integer
 matrix multiplication on every word through length 12, checks all five rule matrices and lexical
-orientations, and verifies the expected two-rule and five-rule critical-pair totals. This cheap
-check is part of `scripts/check.sh`. `critical` enumerates every inclusion and suffix-prefix
+orientations, verifies the expected two-rule and five-rule critical-pair totals, and checks the
+odd family through `k=11`, including irreducibility for `k=1,…,11`. This cheap check is part of
+`scripts/check.sh`. `critical` enumerates every inclusion and suffix-prefix
 overlap, explores every terminating reduction branch, and tests joinability by exact normal-form
 sets. `census` groups each fixed-content class by sorted `u128` offsets; its final line records
 `congruence_deciding_nf=true` only below the computed first critical length.
@@ -433,9 +446,9 @@ kernel basis only as a reduction accelerator, not as a canonical presentation. F
 source `u₀`, enumerate schedules by depth and exponent budget, compute `(Q_nu₀+C_n)/5^n`, and
 record orbit collisions, shell exits, and accepting exit fibres while retaining total `2`- and
 `3`-exponents. Compare affine-map equality exactly before fixed-source point equality, because the
-latter includes additional stabilizers. In parallel, seek a parametric description of the
-length-29, length-30, and length-31 kernel layers; adding isolated Knuth–Bendix rules without such
-a description already proliferates and does not approach confluence.
+latter includes additional stabilizers. In parallel, seek pump families through the three
+length-30 and six residual length-31 relations; adding isolated Knuth–Bendix rules already
+proliferates and does not approach confluence.
 
 ## Adjudication
 

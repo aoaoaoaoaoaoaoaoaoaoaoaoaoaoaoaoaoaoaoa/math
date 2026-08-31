@@ -37,6 +37,9 @@ const RULES: [Rule; 5] = [
     },
 ];
 
+const ODD_FAMILY_LEFT_HEAD: &str = "DTTTTTTTTTTDDTDDTDDDDDDDDDT";
+const ODD_FAMILY_RIGHT_HEAD: &str = "TTDDDDDDTTDDTDTDTDDTTDDTT";
+
 #[derive(Clone, Copy, Debug, Eq, Hash, Ord, PartialEq, PartialOrd)]
 struct Matrix([[u128; 2]; 2]);
 
@@ -128,8 +131,7 @@ fn word_string(word: u64, length: usize) -> String {
     text
 }
 
-fn normalize(word: u64, length: usize, rules: &[Rule]) -> String {
-    let mut text = word_string(word, length);
+fn normalize_text(mut text: String, rules: &[Rule]) -> String {
     loop {
         let redex = rules
             .iter()
@@ -143,6 +145,18 @@ fn normalize(word: u64, length: usize, rules: &[Rule]) -> String {
         };
         text.replace_range(position..position + larger.len(), smaller);
     }
+}
+
+fn normalize(word: u64, length: usize, rules: &[Rule]) -> String {
+    normalize_text(word_string(word, length), rules)
+}
+
+fn odd_family(pump: usize) -> (String, String) {
+    let spine = "DT".repeat(pump);
+    (
+        format!("{ODD_FAMILY_LEFT_HEAD}{spine}DD"),
+        format!("{ODD_FAMILY_RIGHT_HEAD}{spine}DDTT"),
+    )
 }
 
 fn binomial(n: usize, k: usize) -> u64 {
@@ -478,7 +492,23 @@ fn self_check() {
     assert_eq!(five_rule_report.inclusions, 0);
     assert_eq!(five_rule_report.joinable, 0);
     assert_eq!(five_rule_report.minimum_length, 52);
-    println!("SELF_CHECK\tlengths=1..12\trules=5\tstatus=ok");
+
+    for pump in 0..=11 {
+        let (left, right) = odd_family(pump);
+        assert_eq!(left.len(), 29 + 2 * pump);
+        assert_eq!(right.len(), 29 + 2 * pump);
+        assert_ne!(left, right);
+        assert_eq!(word_matrix(&left), word_matrix(&right));
+        let left_normal = normalize_text(left.clone(), &RULES);
+        let right_normal = normalize_text(right.clone(), &RULES);
+        if pump == 0 {
+            assert_eq!(left_normal, right_normal);
+        } else {
+            assert_eq!(left_normal, left);
+            assert_eq!(right_normal, right);
+        }
+    }
+    println!("SELF_CHECK\tlengths=1..12\trules=5\todd_family=0..11\tstatus=ok");
 }
 
 fn selected_rules(argument: Option<&String>) -> &'static [Rule] {
