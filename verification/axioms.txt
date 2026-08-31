@@ -552,6 +552,12 @@
 'MatrixMortality.PositiveFreeCancellation.six_le_card_of_forbiddenTripleSupport' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.ExtendableBinaryBoundary.positiveEvaluate_extension' depends on axioms: [propext]
+'MatrixMortality.ExtendableBinaryBoundary.boundaryEquation_iff_normalized' depends on axioms: [propext]
+'MatrixMortality.ExtendableBinaryBoundary.boundaryEquation_iff_endoTwistedConjugator' depends on axioms: [propext]
+'MatrixMortality.ExtendableBinaryBoundary.endoTwistedConjugator_mul_iff' depends on axioms: [propext]
+'MatrixMortality.ExtendableBinaryBoundary.endoTwistedConjugator_iff_stabilizer_mul' depends on axioms: [propext]
+'MatrixMortality.ExtendableBinaryBoundary.exists_boundaryEquation_iff_trace_inter_endoTwisted_nonempty' depends on axioms: [propext]
 'MatrixMortality.DirectedCancellation.mul_eq_one_reverse_of_finiteDimensional' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]

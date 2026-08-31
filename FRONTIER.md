@@ -584,14 +584,26 @@ reduces any instance with one cyclic-image homomorphism to rational-subset membe
 `F(Δ)×ℤ`, which is decidable. A noninjective homomorphism from `F₂` to a free group has cyclic
 image, so every hard binary instance must make both homomorphisms injective.
 
+The endomorphism-extendable stratum is also closed.
+[`M4-D05`](SALVAGE.md#m4-d05-endomorphism-extendable-fixed-boundary-decision) proves that if
+`α=Φ∘β` for an ambient free-group endomorphism, then the boundary equation is ordinary
+endomorphism-twisted conjugacy restricted to the rational positive trace of `β`. Its solution set
+is a computable fixed-subgroup coset, so rational intersection decides the restriction. Extension
+existence is decidable by equations in a free group. Swapping the sides gives the symmetric cut.
+Thus a hard instance must be mutually nonextendable; in its minimal instance subgroup neither
+coordinate image can be a retract or a free factor. Equivalently, the surviving problem is
+positive-basis-constrained partial twisted conjugacy for a nonextendable rank-two partial
+endomorphism.
+
 Two free-cancellation nodes survive and should be raced against each other.
 
 1. **Constructive binary compiler.** Compile the four-letter marker-tail equation into positive
    binary fixed-boundary free-group equality, preserving solvability in both directions over the
    complete binary free monoid, forcing an empty-interior mismatch, and making both maps
-   injective. A solution closes `M₄(3)` immediately through `M4-M05`.
-2. **Injective fixed-rank classification.** Decide the remaining injective/injective binary
-   fixed-boundary problem, or prove a structural obstruction to carrying the Carvalho equation.
+   injective and mutually nonextendable. A solution closes `M₄(3)` immediately through `M4-M05`.
+2. **Nonextendable fixed-rank classification.** Decide the remaining mutually nonextendable
+   injective/injective binary fixed-boundary problem, or prove a structural obstruction to
+   carrying the Carvalho equation.
    [`Logan`](references/logan-2022-equalizer-rank-two.md) bounds injective equalizers from `F₂`
    by rank two but gives no general triviality algorithm;
    [`Ciobanu--Logan`](references/ciobanu-logan-2021-free-group-pcp-variations.md) use hypotheses

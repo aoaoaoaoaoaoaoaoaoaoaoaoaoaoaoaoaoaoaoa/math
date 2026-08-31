@@ -1686,6 +1686,16 @@ equivalent to a zero scalar on one bounded interior word, with a converse over e
 and number of separators. No source compiler from Carvalho's four-letter marker-tail equation to
 positive binary fixed-boundary equality is claimed.
 
+[`MatrixMortality/ExtendableBinaryBoundary.lean`](MatrixMortality/ExtendableBinaryBoundary.lean)
+closes the endomorphism-extendable part of that source problem. If one positive morphism is the
+other followed by an ambient endomorphism, `boundaryEquation_iff_endoTwistedConjugator` turns
+the four-boundary equality into one endomorphism-twisted conjugacy equation on the lower positive
+trace. `endoTwistedConjugator_iff_stabilizer_mul` identifies all group solutions as one twisted-
+stabilizer coset, and
+`exists_boundaryEquation_iff_trace_inter_endoTwisted_nonempty` retains the exact positive-word
+constraint. The free-group decision layer and effective extension test are audited in
+[`m43-endomorphism-extendable-boundary-2026-08-30.md`](audits/m43-endomorphism-extendable-boundary-2026-08-30.md).
+
 No `M₄(3)` undecidability theorem follows from the present corpus. The exhaustive promised
 positive overlap-queue source class, the retuned fixed-row closure, the original fixed-ray
 formal-plane compiler, and the four-parameter `M4-C04` endpoint architecture are closed. The
@@ -1783,6 +1793,7 @@ fixed-rank decision problem.
 | `TerminalTile.lean` | arbitrary rank-one chains, fracture at every separator, and fixed-boundary folding into separator rays |
 | `SchottkyPunctuation.lean` | four-dimensional integral left--right action and homogeneous first-column incidence coefficient |
 | `CyclicBinaryBoundary.lean` | cyclic-side fixed-boundary equality as a weighted trace/corridor intersection in `G × ℤ` |
+| `ExtendableBinaryBoundary.lean` | ambient-endomorphism reduction, twisted-stabilizer coset, and exact positive-trace intersection |
 | `TerminalReduction.lean` | rational and integer fixed-boundary mortality compiler |
 | `TerminalSource.lean` | generic primitive extraction and GPCP bridge |
 | `PairedCompression.lean` | reset/toggle specialization, explicit coordinate certificates, and arbitrary-word decoding |
@@ -2132,6 +2143,9 @@ fixed-rank decision problem.
 | Quotient-blind boundaries accepting an element and its square admit a nonempty identity witness | `PositiveFreeCancellation.exists_nonempty_identity_witness` |
 | A positive cyclic morphism evaluates as one power with its additive word weight | `CyclicBinaryBoundary.positiveEvaluate_cyclic` |
 | Cyclic-side fixed-boundary equality is exactly weighted-trace/cyclic-corridor intersection | `CyclicBinaryBoundary.exists_boundaryEquation_iff_trace_inter_corridor_nonempty` |
+| An ambient endomorphism extension turns fixed-boundary equality into endomorphism-twisted conjugacy | `ExtendableBinaryBoundary.boundaryEquation_iff_endoTwistedConjugator` |
+| All endomorphism-twisted conjugators form one twisted-stabilizer right coset | `ExtendableBinaryBoundary.endoTwistedConjugator_iff_stabilizer_mul` |
+| Extendable fixed-boundary existence is exactly positive-trace/twisted-class intersection | `ExtendableBinaryBoundary.exists_boundaryEquation_iff_trace_inter_endoTwisted_nonempty` |
 | Invertible positive transitions carry each spelling-fibre span exactly along the group orbit | `PositiveFreeCancellation.positiveFibreSpan_word_map_eq`, `PositiveFreeCancellation.positiveFibreSpan_word_symm_map_eq` |
 | Every nonzero vanished three-dimensional fibre has rank one or two | `PositiveFreeCancellation.positiveFibreSpan_finrank_one_or_two`, `PositiveFreeCancellation.positiveFibreSpan_eq_ker_of_finrank_two` |
 | The identity fibre is the seed orbit of its unital identity-word operator algebra | `PositiveFreeCancellation.positiveIdentityAlgebra_map_apply_eq_fibre` |
