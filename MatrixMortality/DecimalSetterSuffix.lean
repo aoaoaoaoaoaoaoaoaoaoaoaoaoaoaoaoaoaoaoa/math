@@ -40,6 +40,10 @@ def cycleDiscriminant (shift : Nat) (E τ C : ℚ) : ℚ :=
 def inverseCarrier (shift : Nat) (E τ C tail : ℚ) : ℚ :=
   C / (τ - 10 ^ shift * E * tail)
 
+/-- Forward successor recovered from a current carrier ratio and one normalized block. -/
+def forwardCarrier (shift : Nat) (E τ C current : ℚ) : ℚ :=
+  (τ * current - C) / (10 ^ shift * E * current)
+
 /-- Center of the first suffix cylinder for one backward carrier block. -/
 def carrierCenter (τ C : ℚ) : ℚ :=
   C / τ
@@ -276,21 +280,35 @@ private theorem inverseCarrier_denominator_hasDecimalShell
         rw [shifted_shell.2.2]
         exact shift_int_pos⟩⟩
 
-/-- One backward carrier step is an exact simultaneous `2`/`5`-adic contraction. If two tail
-states differ in decimal shell `(r,r)`, their preimages differ in shell `(r+shift,r+shift)`.
-The theorem is compositional: a backward block word gains the sum of its shifts. -/
+/-- Forward decoding recovers the tail of a backward carrier step on decimal units. -/
+theorem forwardCarrier_inverseCarrier
+    {shift : Nat} {E τ C tail : ℚ}
+    (shift_pos : 1 ≤ shift)
+    (E_unit : HasDecimalShell E 0 0)
+    (tau_unit : HasDecimalShell τ 0 0)
+    (C_unit : HasDecimalShell C 0 0)
+    (tail_unit : HasDecimalShell tail 0 0) :
+    forwardCarrier shift E τ C (inverseCarrier shift E τ C tail) = tail := by
+  have denominator_unit :=
+    inverseCarrier_denominator_hasDecimalShell shift_pos E_unit tau_unit tail_unit
+  unfold forwardCarrier inverseCarrier
+  field_simp [denominator_unit.1.1, E_unit.1.1, C_unit.1.1]
+  ring
+
+/-- One backward carrier step is an exact simultaneous `2`/`5`-adic contraction. It adds its
+shift to both depths of any prescribed tail-difference shell. -/
 theorem inverseCarrier_sub_hasDecimalShell
-    {shift : Nat} {E τ C tail₁ tail₂ : ℚ} {depth : ℤ}
+    {shift : Nat} {E τ C tail₁ tail₂ : ℚ} {twoDepth fiveDepth : ℤ}
     (shift_pos : 1 ≤ shift)
     (E_unit : HasDecimalShell E 0 0)
     (tau_unit : HasDecimalShell τ 0 0)
     (C_unit : HasDecimalShell C 0 0)
     (tail1_unit : HasDecimalShell tail₁ 0 0)
     (tail2_unit : HasDecimalShell tail₂ 0 0)
-    (difference_shell : HasDecimalShell (tail₁ - tail₂) depth depth) :
+    (difference_shell : HasDecimalShell (tail₁ - tail₂) twoDepth fiveDepth) :
     HasDecimalShell
       (inverseCarrier shift E τ C tail₁ - inverseCarrier shift E τ C tail₂)
-      (depth + shift) (depth + shift) := by
+      (twoDepth + shift) (fiveDepth + shift) := by
   have scale_shell : HasDecimalShell ((10 : ℚ) ^ shift) shift shift := by
     simpa using ten_hasDecimalShell.pow shift
   have denominator1_shell :
@@ -506,16 +524,33 @@ theorem pullbackWord_hasDecimalShell
       exact inverseCarrier_hasDecimalShell block.shift_pos block.gap_unit block.trace_unit
         block.constant_unit induction
 
-/-- A backward word gains exactly the sum of its block shifts in both decimal valuations. -/
-theorem pullbackWord_sub_hasDecimalShell
-    (blocks : List BackwardBlock) {tail₁ tail₂ : ℚ} {depth : ℤ}
+/-- A backward block word is injective on decimal-unit tails. -/
+theorem pullbackWord_injective_of_decimalUnits
+    (blocks : List BackwardBlock) {tail₁ tail₂ : ℚ}
     (tail1_unit : HasDecimalShell tail₁ 0 0)
     (tail2_unit : HasDecimalShell tail₂ 0 0)
-    (difference_shell : HasDecimalShell (tail₁ - tail₂) depth depth) :
+    (images_eq : pullbackWord blocks tail₁ = pullbackWord blocks tail₂) :
+    tail₁ = tail₂ := by
+  induction blocks with
+  | nil => exact images_eq
+  | cons block blocks induction =>
+      have pulled1_unit := pullbackWord_hasDecimalShell blocks tail1_unit
+      have pulled2_unit := pullbackWord_hasDecimalShell blocks tail2_unit
+      have pulled_eq := inverseCarrier_injective_of_decimalUnits
+        block.shift_pos block.gap_unit block.trace_unit block.constant_unit
+          pulled1_unit pulled2_unit images_eq
+      exact induction pulled_eq
+
+/-- A backward word adds exactly its total shift to both decimal depths of a tail difference. -/
+theorem pullbackWord_sub_hasDecimalShell
+    (blocks : List BackwardBlock) {tail₁ tail₂ : ℚ} {twoDepth fiveDepth : ℤ}
+    (tail1_unit : HasDecimalShell tail₁ 0 0)
+    (tail2_unit : HasDecimalShell tail₂ 0 0)
+    (difference_shell : HasDecimalShell (tail₁ - tail₂) twoDepth fiveDepth) :
     HasDecimalShell
       (pullbackWord blocks tail₁ - pullbackWord blocks tail₂)
-      (depth + totalShift blocks) (depth + totalShift blocks) := by
-  induction blocks generalizing depth with
+      (twoDepth + totalShift blocks) (fiveDepth + totalShift blocks) := by
+  induction blocks generalizing twoDepth fiveDepth with
   | nil => simpa [pullbackWord, totalShift] using difference_shell
   | cons block blocks induction =>
       have pulled1_unit := pullbackWord_hasDecimalShell blocks tail1_unit
@@ -541,6 +576,162 @@ theorem physicalCarrierCenter_sub
   unfold physicalCarrierCenter
   field_simp [trace1_ne, trace2_ne]
   ring
+
+private theorem div_ten_decimalUnit_of_shell
+    {value : ℚ} (value_shell : HasDecimalShell value 1 1) :
+    HasDecimalShell (value / 10) 0 0 := by
+  exact
+    ⟨by simpa using div_hasValue value_shell.1 ten_hasDecimalShell.1,
+      by simpa using div_hasValue value_shell.2 ten_hasDecimalShell.2⟩
+
+/-- Distinct lower codes with one extra factor of five remain separated under their complete
+same-upper inverse branches. Unlike their first cylinders, the branches retain the asymmetric
+shell at every common decimal-unit tail. -/
+theorem physicalInverseCarrier_sameUpper_sub_hasDecimalShell
+    {shift : Nat} {E G μ P V₁ V₂ tail : ℚ} {twoDepth fiveDepth : ℤ}
+    (shift_pos : 1 ≤ shift)
+    (E_unit : HasDecimalShell E 0 0)
+    (G_unit : HasDecimalShell G 0 0)
+    (mu_unit : HasDecimalShell μ 0 0)
+    (P_unit : HasDecimalShell P 0 0)
+    (trace1_shell : HasDecimalShell (E * P + G * V₁) 1 1)
+    (trace2_shell : HasDecimalShell (E * P + G * V₂) 1 1)
+    (tail_unit : HasDecimalShell tail 0 0)
+    (lower_difference_shell :
+      HasDecimalShell (V₁ - V₂) (twoDepth + 1) (fiveDepth + 1)) :
+    HasDecimalShell
+      (inverseCarrier shift E ((E * P + G * V₁) / 10) (μ * G * V₁) tail -
+        inverseCarrier shift E ((E * P + G * V₂) / 10) (μ * G * V₂) tail)
+      twoDepth fiveDepth := by
+  let τ₁ : ℚ := (E * P + G * V₁) / 10
+  let τ₂ : ℚ := (E * P + G * V₂) / 10
+  have tau1_unit : HasDecimalShell τ₁ 0 0 := by
+    simpa [τ₁] using div_ten_decimalUnit_of_shell trace1_shell
+  have tau2_unit : HasDecimalShell τ₂ 0 0 := by
+    simpa [τ₂] using div_ten_decimalUnit_of_shell trace2_shell
+  have scale_shell : HasDecimalShell ((10 : ℚ) ^ shift) shift shift := by
+    simpa using ten_hasDecimalShell.pow shift
+  have shifted_tail_shell :
+      HasDecimalShell (10 ^ shift * E * tail) shift shift := by
+    simpa only [zero_add, add_zero] using (scale_shell.mul E_unit).mul tail_unit
+  have shift_int_pos : (0 : ℤ) < shift := by
+    exact_mod_cast Nat.zero_lt_of_lt shift_pos
+  have denominator1_unit :
+      HasDecimalShell (τ₁ - 10 ^ shift * E * tail) 0 0 :=
+    ⟨unit_sub_positive tau1_unit.1
+        ⟨shifted_tail_shell.1.1, by
+          rw [shifted_tail_shell.1.2]
+          exact shift_int_pos⟩,
+      unit_sub_positive tau1_unit.2
+        ⟨shifted_tail_shell.2.1, by
+          rw [shifted_tail_shell.2.2]
+          exact shift_int_pos⟩⟩
+  have denominator2_unit :
+      HasDecimalShell (τ₂ - 10 ^ shift * E * tail) 0 0 :=
+    ⟨unit_sub_positive tau2_unit.1
+        ⟨shifted_tail_shell.1.1, by
+          rw [shifted_tail_shell.1.2]
+          exact shift_int_pos⟩,
+      unit_sub_positive tau2_unit.2
+        ⟨shifted_tail_shell.2.1, by
+          rw [shifted_tail_shell.2.2]
+          exact shift_int_pos⟩⟩
+  have next_scale_shell :
+      HasDecimalShell ((10 : ℚ) ^ (shift + 1)) (shift + 1) (shift + 1) := by
+    simpa using ten_hasDecimalShell.pow (shift + 1)
+  have next_shifted_tail_shell :
+      HasDecimalShell (10 ^ (shift + 1) * tail) (shift + 1) (shift + 1) := by
+    simpa only [add_zero] using next_scale_shell.mul tail_unit
+  have next_shift_pos : (0 : ℤ) < shift + 1 := by
+    exact_mod_cast (show 0 < shift + 1 by omega)
+  have head_difference_unit :
+      HasDecimalShell (P - 10 ^ (shift + 1) * tail) 0 0 :=
+    ⟨unit_sub_positive P_unit.1
+        ⟨next_shifted_tail_shell.1.1, by
+          rw [next_shifted_tail_shell.1.2]
+          exact next_shift_pos⟩,
+      unit_sub_positive P_unit.2
+        ⟨next_shifted_tail_shell.2.1, by
+          rw [next_shifted_tail_shell.2.2]
+          exact next_shift_pos⟩⟩
+  have difference_identity :
+      inverseCarrier shift E τ₁ (μ * G * V₁) tail -
+          inverseCarrier shift E τ₂ (μ * G * V₂) tail =
+        μ * G * E * (V₁ - V₂) * (P - 10 ^ (shift + 1) * tail) /
+          (10 * (τ₁ - 10 ^ shift * E * tail) *
+            (τ₂ - 10 ^ shift * E * tail)) := by
+    unfold inverseCarrier
+    field_simp [denominator1_unit.1.1, denominator2_unit.1.1]
+    dsimp only [τ₁, τ₂]
+    rw [pow_succ]
+    ring
+  change HasDecimalShell
+    (inverseCarrier shift E τ₁ (μ * G * V₁) tail -
+      inverseCarrier shift E τ₂ (μ * G * V₂) tail) twoDepth fiveDepth
+  rw [difference_identity]
+  have numerator_shell :=
+    ((((mu_unit.mul G_unit).mul E_unit).mul lower_difference_shell).mul
+      head_difference_unit)
+  have denominator_shell :=
+    (ten_hasDecimalShell.mul denominator1_unit).mul denominator2_unit
+  constructor
+  · have quotient := div_hasValue numerator_shell.1 denominator_shell.1
+    convert quotient using 1
+    ring
+  · have quotient := div_hasValue numerator_shell.2 denominator_shell.2
+    convert quotient using 1
+    ring
+
+/-- If one current carrier is decoded through two same-upper physical blocks, the resulting
+tails differ by the lower-code shell after removal of the block shift and the trace factor ten.
+This is the exact branch-switch discrepancy hidden by an overlapping first cylinder. -/
+theorem physicalForwardCarrier_sameUpper_sub_hasDecimalShell
+    {shift : Nat} {E G μ P V₁ V₂ current : ℚ} {twoDepth fiveDepth : ℤ}
+    (E_unit : HasDecimalShell E 0 0)
+    (G_unit : HasDecimalShell G 0 0)
+    (mu_unit : HasDecimalShell μ 0 0)
+    (current_unit : HasDecimalShell current 0 0)
+    (lower_difference_shell :
+      HasDecimalShell (V₁ - V₂)
+        (twoDepth + (shift + 1)) (fiveDepth + (shift + 1))) :
+    HasDecimalShell
+      (forwardCarrier shift E ((E * P + G * V₁) / 10) (μ * G * V₁) current -
+        forwardCarrier shift E ((E * P + G * V₂) / 10) (μ * G * V₂) current)
+      twoDepth fiveDepth := by
+  have ten_mu_shell : HasDecimalShell (10 * μ) 1 1 := by
+    simpa only [add_zero] using ten_hasDecimalShell.mul mu_unit
+  have current_sub_ten_mu_unit : HasDecimalShell (current - 10 * μ) 0 0 :=
+    ⟨unit_sub_positive current_unit.1
+        ⟨ten_mu_shell.1.1, by
+          rw [ten_mu_shell.1.2]
+          norm_num⟩,
+      unit_sub_positive current_unit.2
+        ⟨ten_mu_shell.2.1, by
+          rw [ten_mu_shell.2.2]
+          norm_num⟩⟩
+  have difference_identity :
+      forwardCarrier shift E ((E * P + G * V₁) / 10) (μ * G * V₁) current -
+          forwardCarrier shift E ((E * P + G * V₂) / 10) (μ * G * V₂) current =
+        G * (V₁ - V₂) * (current - 10 * μ) /
+          (10 ^ (shift + 1) * E * current) := by
+    unfold forwardCarrier
+    field_simp [E_unit.1.1, current_unit.1.1]
+    rw [pow_succ]
+    ring
+  rw [difference_identity]
+  have scale_shell :
+      HasDecimalShell ((10 : ℚ) ^ (shift + 1)) (shift + 1) (shift + 1) := by
+    simpa using ten_hasDecimalShell.pow (shift + 1)
+  have numerator_shell :=
+    (G_unit.mul lower_difference_shell).mul current_sub_ten_mu_unit
+  have denominator_shell := (scale_shell.mul E_unit).mul current_unit
+  constructor
+  · have quotient := div_hasValue numerator_shell.1 denominator_shell.1
+    convert quotient using 1
+    omega
+  · have quotient := div_hasValue numerator_shell.2 denominator_shell.2
+    convert quotient using 1
+    omega
 
 /-- For two blocks with the same upper code, a prescribed shell of the lower-code difference
 passes to their center difference after one factor of ten is gained and two trace factors are
@@ -649,6 +840,32 @@ def hiddenEraseLowerCode (β : Nat) (body : List TagLetter) : Nat :=
 def hiddenPhaseLowerSuffix (β : Nat) (body : List TagLetter) : List Bool :=
   nearyLower β body (.rule .c) ++ nearyLower β body (.erase .b)
 
+/-- Complete inverse branch of the rule-first hidden-phase block. -/
+def hiddenRuleInverseBranch
+    (β : Nat) (body : List TagLetter) (E G μ tail : ℚ) : ℚ :=
+  inverseCarrier (2 * β + 3) E
+    ((E * hiddenRuleUpperCode β + G * hiddenRuleLowerCode β body) / 10)
+    (μ * G * hiddenRuleLowerCode β body) tail
+
+/-- Complete inverse branch of the erasure-first hidden-phase block. -/
+def hiddenEraseInverseBranch
+    (β : Nat) (body : List TagLetter) (E G μ tail : ℚ) : ℚ :=
+  inverseCarrier (2 * β + 3) E
+    ((E * hiddenRuleUpperCode β + G * hiddenEraseLowerCode β body) / 10)
+    (μ * G * hiddenEraseLowerCode β body) tail
+
+/-- Rule-first hidden branch at the physical decimal calibration. -/
+def emittedHiddenRuleInverseBranch (β : Nat) (body : List TagLetter) (tail : ℚ) : ℚ :=
+  hiddenRuleInverseBranch β body
+    (decimalGap ((10 : ℤ) ^ β)) (decimalLift ((10 : ℤ) ^ β))
+      (code (nearyMarker β)) tail
+
+/-- Erasure-first hidden branch at the physical decimal calibration. -/
+def emittedHiddenEraseInverseBranch (β : Nat) (body : List TagLetter) (tail : ℚ) : ℚ :=
+  hiddenEraseInverseBranch β body
+    (decimalGap ((10 : ℤ) ^ β)) (decimalLift ((10 : ℤ) ^ β))
+      (code (nearyMarker β)) tail
+
 private theorem hiddenUpper_ends_false_false
     {β : Nat} (beta_large : 2 ≤ β) :
     ∃ stem : List Bool,
@@ -735,6 +952,20 @@ theorem hiddenEraseLowerCode_mod_hundred (β : Nat) (body : List TagLetter) :
   unfold hiddenEraseLowerCode
   rw [word_eq]
   exact code_append_false_false_mod_hundred stem
+
+theorem hiddenRuleLowerCode_decimalUnit (β : Nat) (body : List TagLetter) :
+    HasDecimalShell (hiddenRuleLowerCode β body : ℚ) 0 0 := by
+  obtain ⟨stem, word_eq⟩ := hiddenRuleLower_ends_false_false β body
+  unfold hiddenRuleLowerCode
+  rw [word_eq, show stem ++ [false, false] = (stem ++ [false]) ++ [false] by simp]
+  exact code_append_false_hasDecimalShell (stem ++ [false])
+
+theorem hiddenEraseLowerCode_decimalUnit (β : Nat) (body : List TagLetter) :
+    HasDecimalShell (hiddenEraseLowerCode β body : ℚ) 0 0 := by
+  obtain ⟨stem, word_eq⟩ := hiddenEraseLower_ends_false_false β body
+  unfold hiddenEraseLowerCode
+  rw [word_eq, show stem ++ [false, false] = (stem ++ [false]) ++ [false] by simp]
+  exact code_append_false_hasDecimalShell (stem ++ [false])
 
 /-- The calibrated gap, lift, marker, and common upper code are decimal units for the physical
 hidden-phase pair. -/

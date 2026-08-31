@@ -1349,6 +1349,18 @@ discrepancy. Finally, `emittedHiddenBlocks_firstCylinder_collision` proves that 
 and compiler body bounds. This kills first-cylinder itinerary decoding but does not identify
 their complete inverse branches.
 
+Record [`MM-S22`](SALVAGE.md#mm-s22-complete-hidden-branch-separation) resolves that complete-
+branch boundary. `DecimalSetterSuffix.forwardCarrier_inverseCarrier` provides the exact forward
+decoder, while `inverseCarrier_sub_hasDecimalShell` and
+`BackwardBlock.pullbackWord_sub_hasDecimalShell` now preserve arbitrary, not merely equal,
+`2`/`5` depth pairs. `DecimalSetterBranchSeparation.hiddenInverseBranches_sub_hasDecimalShell`
+proves that the collision pair differs by the exact shell `(ℓ+4,ℓ+5)` at a common tail, and the
+outer-word theorem shifts both depths without erasing the gap. Finally,
+`emittedHiddenInverseBranches_pullbackWord_eq_forces_tail_sub_hasDecimalShell` strips a common
+outer word by injectivity and proves that any cross-tail collision requires shell
+`(ℓ−2β+1,ℓ−2β+2)` between the later tails. This classifies the synchronization debt but does
+not yet exclude it from the encoded-entry orbit.
+
 The dimension-two affine ledger has seven independently checked records:
 
 | Record | Formalization obligation |
@@ -1802,6 +1814,8 @@ fixed-rank decision problem.
 | `DecimalSetterChamber.lean` | exact decimal pole chambers, both ordinary A-to-A length-two extinctions, and the emitted-body grammar certificate |
 | `DecimalSetterResonance.lean` | complete ordinary depth-two A-to-B and B-to-A extinction, phase-word exhaustion, and compiler-envelope specialization |
 | `DecimalSetterDepth.lean` | recursive two-unit A-shell carrier, length-two extinction, exact all-`D_c` raw-head extinction, and the compatible last-digit two-cycle |
+| `DecimalSetterSuffix.lean` | bounded-suffix Hensel cycles, exact inverse-cylinder contraction, first-cylinder collision, forward decoding, and arbitrary two-prime depth transport |
+| `DecimalSetterBranchSeparation.lean` | complete hidden-branch separation and the exact asymmetric later-tail shell forced by a branch-switch collision |
 | `PairedMortality.lean` | common-column mortality converse and exact integer `4 × 4` family |
 | `PhaseFracture.lean` | phase normalization and dimension-free projective-identification contradiction |
 | `PhaseRigidity.lean` | checked local role algebra, discrepancy commutators, and invariant-pencil rigidity |

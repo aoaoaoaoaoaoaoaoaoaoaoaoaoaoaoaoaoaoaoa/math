@@ -110,6 +110,7 @@ file owns the mathematical stock.
 | [`MM-S18`](#mm-s18-length-two-carrier-extinction) | obstruction | every consecutive multi-shell carrier transition has upper length at least three | formalized | active |
 | [`MM-S19`](#mm-s19-all-deletion-raw-head-extinction) | obstruction | no all-`D_c` block of length at least three carries a lawful initial two-`c` raw head into another multi-role pole | formalized | active |
 | [`MM-S21`](#mm-s21-bounded-decimal-suffix-cycles) | obstruction | every emitted multi-role block has a compatible projective self-loop in every bounded decimal-suffix quotient | formalized core; audited assembly | active |
+| [`MM-S22`](#mm-s22-complete-hidden-branch-separation) | structure theorem | the first-cylinder collision pair separates on complete same-tail addresses, while any cross-tail collision forces one exact asymmetric shell | formalized | active |
 | [`R32-S01`](#r32-s01-split-return-normal-form) | structure theorem | rank-two cuts reduce one-unit binary mortality to a `2 × 2` return recurrence | formalized | graduated |
 | [`R32-S02`](#r32-s02-two-plane-edge-square) | structure theorem | two rank-two generators are a two-vertex square of `2 × 2` edges | formalized | graduated |
 | [`R32-O01`](#r32-o01-rank-one-profile-collapse) | obstruction | a rank-one generator reduces mortality to order-at-most-three scalar recurrence zeros | audited | stock |
@@ -3447,6 +3448,76 @@ or quotient phase-hidden blocks only after proving that the quotient preserves r
 
 **Next:** determine whether complete composed inverse branches separate the collision pair, or
 whether a phase-blind quotient can be proved reachability-sound.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S22: Complete hidden-branch separation
+
+**Kind:** structure theorem
+**Evidence:** formalized
+**Disposition:** active
+
+Continue with the two lawful blocks from [`MM-O20`](#mm-o20-decimal-first-cylinder-collision),
+
+```text
+B_R=R_b R_c D_b,             B_D=D_b R_c D_b.
+```
+
+Write `ℓ=|H(body)|`, `h=2β+3`, and let `Ψ_R,Ψ_D` be their complete inverse carrier branches.
+For every common decimal-unit tail `y`, direct cancellation of the shared upper code gives
+
+```text
+ν₂(Ψ_R(y)−Ψ_D(y))=ℓ+4,
+ν₅(Ψ_R(y)−Ψ_D(y))=ℓ+5.                    (1)
+```
+
+Every common outer inverse word of total shift `s` preserves the one-step gap and adds `s` to
+both depths. In particular, the complete addresses remain distinct when their earlier itinerary
+and later tail agree. The collision is therefore a projection failure of the first cylinder,
+not equality of the two Möbius branches.
+
+The cross-tail case is also exact. If two complete addresses share an outer word but use
+`B_R` and `B_D` with possibly different later unit tails `y_R,y_D`, equality forces
+
+```text
+ν₂(y_R−y_D)=ℓ−2β+1,
+ν₅(y_R−y_D)=ℓ−2β+2.                        (2)
+```
+
+For every compiler-emitted body, `ℓ≥2β`, so a branch switch necessarily injects a positive-depth
+discrepancy with cross-prime gap one. Equation (2) is obtained by the exact forward decoder
+
+```text
+y=(τx−C)/(10^hEx),
+```
+
+whose difference cancels the shared upper contribution and divides the lower-code discrepancy
+by precisely `10^(h+1)`.
+
+**Scope:** this does not make the two branch images disjoint; [`MM-O20`](#mm-o20-decimal-first-cylinder-collision)
+proves that their unit-domain images have the same first cylinder. It classifies, but does not
+exclude, the distinct tails required by a cross-itinerary collision. No theorem yet proves that
+the encoded-entry orbit cannot realize the shell in (2), and singleton targets remain separate.
+
+**Use:** retain complete tail coordinates across the hidden-phase quotient. A reachability proof
+may now close this seam by excluding the exact positive-depth gap-one tail discrepancy, while a
+counterexample search should target that shell directly rather than rescan bounded cylinders.
+
+**Formalization:**
+[`MatrixMortality/DecimalSetterSuffix.lean`](MatrixMortality/DecimalSetterSuffix.lean), through
+`forwardCarrier_inverseCarrier`, the two generalized contraction and injectivity theorems, and
+the physical same-upper branch identities; and
+[`MatrixMortality/DecimalSetterBranchSeparation.lean`](MatrixMortality/DecimalSetterBranchSeparation.lean),
+through `emittedHiddenInverseBranches_pullbackWord_sub_hasDecimalShell` and
+`emittedHiddenInverseBranches_pullbackWord_eq_forces_tail_sub_hasDecimalShell`.
+
+**Artifact:**
+[`audits/m53-decimal-complete-hidden-branch-separation-2026-08-31.md`](audits/m53-decimal-complete-hidden-branch-separation-2026-08-31.md).
+
+**Next:** intersect the forced shell (2) with pairs of reachable suffix carriers from the encoded
+entry. Either prove that no lawful suffix pair has this first unequal cross-prime depth, or
+construct the first exact branch-switch cascade.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).

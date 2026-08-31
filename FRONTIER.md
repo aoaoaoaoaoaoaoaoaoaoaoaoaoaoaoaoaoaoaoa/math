@@ -803,9 +803,15 @@ language an exact metric: a backward word gains the sum of its shifts in both de
 valuations, and one block maps the unit domain onto one exact suffix cylinder. But first-cylinder
 decoding is not injective. The lawful blocks `R_bR_cD_b` and `D_bR_cD_b` have identical
 depth-`2β+3` cylinders for every compiler-emitted body; the long common lower suffix hides their
-first phase. The live cut is therefore the intersection of the encoded-entry orbit with complete
-composed inverse branches, or a proved reachability-sound quotient of those branches. Neither a
-fixed congruence graph nor the first unbounded cylinder retains enough information.
+first phase. [`MM-S22`](SALVAGE.md#mm-s22-complete-hidden-branch-separation) proves that the
+complete branches themselves do not collide at a common tail: their difference has exact shell
+`(ℓ+4,ℓ+5)`, and every common outer word shifts both depths equally. More sharply, equality with
+different later tails forces their difference into the unique shell
+`(ℓ−2β+1,ℓ−2β+2)`. Emitted bodies have `ℓ≥2β`, so every hidden-phase switch injects a
+positive-depth cross-prime gap. The live cut is now the intersection of that exact forced shell
+with pairs of suffix carriers reachable from the encoded entry, or an explicit branch-switch
+cascade realizing it. Neither a fixed congruence graph nor the first unbounded cylinder retains
+enough information.
 
 The immediate ternary question is which other positive valuation-one discrepancies survive its
 suffix sieve without already certifying source halting.
