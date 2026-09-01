@@ -143,6 +143,7 @@ file owns the mathematical stock.
 | [`MM-S77`](#mm-s77-shallow-generalized-raw-head-adapter) | structure theorem | every shallow square-reset pole obeys one exact generalized raw-head equation whose full root code and complement are decimal units | formalized | active |
 | [`MM-S79`](#mm-s79-minimum-body-lawful-shallow-pole) | normalization boundary | every minimum-length body attains the shallow pole at its unique lawful terminal word, while compiler-emitted bodies lie strictly above this slice | formalized | active |
 | [`MM-S81`](#mm-s81-one-r_c-root-terminal-normalization) | structure theorem | every shallow pole over the one-`R_c` root is exactly a literal Neary terminal match, with no malformed survivor | formalized | active |
+| [`MM-S82`](#mm-s82-one-r_b-root-sign-extinction) | obstruction | the one-`R_b` root has negative exact-length complement and cannot hit any shallow pole | formalized | active |
 | [`R32-S01`](#r32-s01-split-return-normal-form) | structure theorem | rank-two cuts reduce one-unit binary mortality to a `2 × 2` return recurrence | formalized | graduated |
 | [`R32-S02`](#r32-s02-two-plane-edge-square) | structure theorem | two rank-two generators are a two-vertex square of `2 × 2` edges | formalized | graduated |
 | [`R32-O01`](#r32-o01-rank-one-profile-collapse) | obstruction | a rank-one generator reduces mortality to order-at-most-three scalar recurrence zeros | audited | stock |
@@ -5198,10 +5199,11 @@ No malformed shallow pole survives on this root branch. `MM-S79` is the minimum-
 where the unique terminal target is explicit; this theorem holds for arbitrary bodies and
 targets.
 
-**Scope:** the source history is exactly the singleton block `[R_c]`. Other singleton roots,
-longer rule-ended roots, singleton targets, and deep histories are not classified. The theorem
-identifies poles with terminal matches; converting those matches to tag halting still uses the
-usual Neary compiler-envelope hypotheses.
+**Scope:** the source history is exactly the singleton block `[R_c]`. The `[R_b]` root is
+classified separately by [`MM-S82`](#mm-s82-one-r_b-root-sign-extinction); longer rule-ended
+roots, singleton targets, and deep histories are not classified. The theorem identifies poles
+with terminal matches; converting those matches to tag halting still uses the usual Neary
+compiler-envelope hypotheses.
 
 **Use:** remove the entire one-`R_c` source constructor from the malformed shallow frontier.
 Future shallow attacks should classify the remaining rule-ended roots and must not re-prove or
@@ -5216,9 +5218,57 @@ through `ruleCRoot_code_calibration`, `ruleCRoot_complement_calibration`,
 **Artifact:**
 [`audits/m53-rule-c-root-terminal-normalization-2026-08-31.md`](audits/m53-rule-c-root-terminal-normalization-2026-08-31.md).
 
-**Next:** classify shallow poles over every other parser-lawful `EndsInRule` root. Seek a
-rightmost-root reduction to `ruleCRoot` plus a provably nonzero discrepancy, using the emitted
-body's strict length surplus.
+**Next:** after the `[R_b]` extinction in `MM-S82`, classify shallow poles over rule-ended roots
+of length at least two. Seek a rightmost-root reduction to `ruleCRoot` plus a provably nonzero
+discrepancy, using the emitted body's strict length surplus.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S82: One-`R_b` root sign extinction
+
+**Kind:** obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+The other one-role parser root has the exact complement calibration
+
+```text
+9Δ_[R_b] = −lift(10^β).
+```
+
+For every positive deletion width, `gap(10^β)` and `lift(10^β)` are positive. Every punctuated
+upper code is positive, every lower code is nonnegative, and the displayed calibration makes
+the `[R_b]` complement strictly negative. In the generalized shallow equation, the left side is
+therefore strictly positive while the right side is nonpositive. No target or body can satisfy
+it.
+
+Combining this sign extinction with `MM-S81` gives the complete one-role classification:
+
+```text
+HitsSquarePole target [[R_letter]]
+↔ letter=c and target is a literal Neary terminal match.
+```
+
+**Scope:** this covers exactly one-role, rule-ended shallow sources. It assumes only `β>0` and
+places no length, phase, shell, or compiler-envelope restriction on the target. Rule-ended roots
+of length at least two, singleton targets, and deep histories remain outside.
+
+**Use:** delete `[R_b]` from the shallow source grammar and normalize `[R_c]` to the lawful
+terminal language. Every unresolved shallow false pole now begins with a genuinely multi-role
+root block.
+
+**Formalization:**
+[`MatrixMortality/DecimalSetterMinimumBody.lean`](MatrixMortality/DecimalSetterMinimumBody.lean),
+through `ruleBRoot_complement_calibration`, `ruleBRoot_hitsSquarePole_impossible`, and
+`singletonRuleRoot_hitsSquarePole_iff_terminalMatch`.
+
+**Artifact:**
+[`audits/m53-rule-b-root-sign-extinction-2026-08-31.md`](audits/m53-rule-b-root-sign-extinction-2026-08-31.md).
+
+**Next:** factor a multi-role rule-ended root at its first or last role and determine whether its
+complement retains a sign chamber or reduces to the one-`R_c` terminal normalization plus an
+explicit nonzero discrepancy.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).

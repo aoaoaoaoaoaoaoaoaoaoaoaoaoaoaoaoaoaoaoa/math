@@ -21,6 +21,9 @@ open MatrixMortality.Undecidability
 /-- The one-`R_c` root immediately to the right of a shallow reset. -/
 def ruleCRoot : List NearyTile := [.rule .c]
 
+/-- The other one-role parser root. -/
+def ruleBRoot : List NearyTile := [.rule .b]
+
 private theorem minimumBodyTarget_upper_spelling (β : Nat) (body : List TagLetter) :
     spell (nearyUpper β) (minimalBodyWord body) =
       [true] ++ tagEncode β body := by
@@ -113,6 +116,33 @@ theorem ruleCRoot_complement_calibration (β : Nat) :
       simp [DecimalSetterCarry.gap, DecimalSetterCarry.lift]
       ring
 
+/-- The exact-length complement of the one-`R_b` root is negative one ninth of the physical
+lift. -/
+theorem ruleBRoot_complement_calibration (β : Nat) :
+    9 * upperBoundaryComplement β ruleBRoot =
+      -DecimalSetterCarry.lift ((10 : ℚ) ^ β) := by
+  have upper_spelling :
+      spell (nearyUpper β) ruleBRoot = DecimalSetterChamber.bTag β := by
+    simp [ruleBRoot, spell, nearyUpper, tagCode, DecimalSetterChamber.bTag,
+      DecimalSetterChamber.markerWord]
+  have upper_code :
+      (DecimalSetterCarry.code (spell (nearyUpper β) ruleBRoot) : ℚ) =
+        10 * marker β + 5 := by
+    rw [upper_spelling, DecimalSetterChamber.bTag_code]
+    simp [marker, DecimalSetterChamber.markerWord, nearyMarker]
+  calc
+    9 * upperBoundaryComplement β ruleBRoot =
+        -(450 * (10 : ℚ) ^ β + 9 * marker β) := by
+      rw [upperBoundaryComplement, upperBoundaryCode_eq, upper_code]
+      simp [ruleBRoot, spell, nearyUpper, tagCode, markerScale]
+      rw [show β + 2 = (β + 1) + 1 by omega, pow_succ, pow_succ]
+      ring
+    _ = -(502 * (10 : ℚ) ^ β - 7) := by
+      rw [marker_relation]
+      ring
+    _ = -DecimalSetterCarry.lift ((10 : ℚ) ^ β) := by
+      simp [DecimalSetterCarry.lift]
+
 /-- Equality of a target's decimal boundary codes is equivalent to its literal Neary terminal
 word equation. -/
 theorem boundaryCode_eq_iff_terminalMatch (β : Nat) (body : List TagLetter)
@@ -186,6 +216,72 @@ theorem ruleCRoot_hitsSquarePole_iff_terminalMatch
         spell (nearyLower β body) target := by
   rw [ruleCRoot_hitsSquarePole_iff_boundaryCode_eq β_pos,
     boundaryCode_eq_iff_terminalMatch]
+
+/-- The one-`R_b` root cannot hit any shallow square-reset pole: its exact-length complement has
+the opposite sign from every physical target code. -/
+theorem ruleBRoot_hitsSquarePole_impossible
+    {β : Nat} (β_pos : 0 < β) (body : List TagLetter) (target : List NearyTile) :
+    ¬HitsSquarePole β body target [ruleBRoot] := by
+  have rho_lower : (10 : ℚ) ≤ 10 ^ β := by
+    obtain ⟨offset, rfl⟩ :=
+      Nat.exists_eq_succ_of_ne_zero (Nat.ne_of_gt β_pos)
+    have power_one : (1 : ℚ) ≤ 10 ^ offset := one_le_pow₀ (by norm_num)
+    rw [pow_succ]
+    nlinarith
+  have gap_pos : 0 < DecimalSetterCarry.gap ((10 : ℚ) ^ β) := by
+    simp [DecimalSetterCarry.gap]
+    linarith
+  have lift_pos : 0 < DecimalSetterCarry.lift ((10 : ℚ) ^ β) := by
+    simp [DecimalSetterCarry.lift]
+    linarith
+  have target_upper_unit := upperBoundaryCode_decimalUnit β_pos target
+  have target_upper_nonneg : 0 ≤ upperBoundaryCode β target := by
+    unfold upperBoundaryCode
+    positivity
+  have target_upper_pos : 0 < upperBoundaryCode β target :=
+    lt_of_le_of_ne target_upper_nonneg (Ne.symm target_upper_unit.1.1)
+  have root_upper_unit := upperBoundaryCode_decimalUnit β_pos ruleBRoot
+  have root_upper_nonneg : 0 ≤ upperBoundaryCode β ruleBRoot := by
+    unfold upperBoundaryCode
+    positivity
+  have root_upper_pos : 0 < upperBoundaryCode β ruleBRoot :=
+    lt_of_le_of_ne root_upper_nonneg (Ne.symm root_upper_unit.1.1)
+  have target_lower_nonneg : 0 ≤ lowerBoundaryCode β body target := by
+    unfold lowerBoundaryCode
+    positivity
+  have complement_neg : upperBoundaryComplement β ruleBRoot < 0 := by
+    have calibration := ruleBRoot_complement_calibration β
+    nlinarith
+  intro pole
+  have equation :=
+    (hitsSquarePole_single_iff_generalizedRawHead β_pos body target ruleBRoot).mp pole
+  have left_pos :
+      0 < DecimalSetterCarry.gap ((10 : ℚ) ^ β) *
+        upperBoundaryCode β target * upperBoundaryCode β ruleBRoot :=
+    mul_pos (mul_pos gap_pos target_upper_pos) root_upper_pos
+  have right_nonpos :
+      DecimalSetterCarry.lift ((10 : ℚ) ^ β) *
+          lowerBoundaryCode β body target * upperBoundaryComplement β ruleBRoot ≤ 0 :=
+    mul_nonpos_of_nonneg_of_nonpos
+      (mul_nonneg lift_pos.le target_lower_nonneg) complement_neg.le
+  rw [equation] at left_pos
+  exact (not_lt_of_ge right_nonpos) left_pos
+
+/-- Complete one-role shallow-source classification: only `R_c` can hit, and it hits exactly on
+a literal terminal match. -/
+theorem singletonRuleRoot_hitsSquarePole_iff_terminalMatch
+    {β : Nat} (β_pos : 0 < β) (body : List TagLetter)
+    (target : List NearyTile) (letter : TagLetter) :
+    HitsSquarePole β body target [[.rule letter]] ↔
+      letter = .c ∧
+        spell (nearyUpper β) target ++ nearyMarker β =
+          spell (nearyLower β body) target := by
+  cases letter with
+  | b =>
+      simpa [ruleBRoot] using ruleBRoot_hitsSquarePole_impossible β_pos body target
+  | c =>
+      simpa [ruleCRoot] using
+        ruleCRoot_hitsSquarePole_iff_terminalMatch β_pos body target
 
 /-- The lawful minimum-body target hits the exact shallow square-reset pole over the one-`R_c`
 root. -/

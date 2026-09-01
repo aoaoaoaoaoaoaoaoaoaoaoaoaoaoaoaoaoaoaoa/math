@@ -1057,8 +1057,14 @@ lawful normalization.
 shallow-root branch, not only its minimum-body instance. The root calibrations cancel S77's
 equation to `P=V`, and injectivity of the decimal word code turns that equality into the literal
 Neary terminal equation. Thus every such pole is lawful and no malformed survivor exists over
-`[R_c]`. The unresolved shallow roots are precisely the other parser-lawful rule-ended blocks;
-their extra roles must now supply the separating discrepancy.
+`[R_c]`.
+
+[`MM-S82`](SALVAGE.md#mm-s82-one-r_b-root-sign-extinction) kills the other one-role root by an
+exact sign wall: `9Δ_[R_b]=−lift`, so the generalized pole has a positive left side and a
+nonpositive right side. The combined classifier says a one-role source hits iff it is `R_c` and
+the target is a literal terminal match. The unresolved shallow roots are now precisely the
+parser-lawful rule-ended blocks of length at least two; their extra roles must supply the
+separating discrepancy.
 
 The ternary and decimal branches now separate at their first multi-transfer front.
 [`MM-S37`](SALVAGE.md#mm-s37-decimal-three-shape-frontier-extinction) substitutes each of the
