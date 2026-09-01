@@ -658,6 +658,16 @@ gap between consecutive first-`b` cylinders should terminate through this theore
 prefix case split. In particular, the two density gaps left by the `x=211` terminal candidates
 are its `k=0` and `k=1` instances.
 
+The bounded `x=211` `cb` chamber is now dead
+[`M4-S36`](SALVAGE.md#m4-s36-phase-zero-right-c-bounded-x211-extinction). The physical SFFT
+product and trailing factorization force an exact two-coordinate 3-adic allocation; the core
+equation supplies the density envelope and the global middle-wait interval. Under
+`h≤5`, `j≤13`, and `z<3^13`, an exact generated classifier leaves ten triples, all with the
+next `b` immediate, and `M4-S35` kills their two terminal density gaps. This is not the full
+`cb` extinction: no theorem yet supplies those three bounds. Attack `h≥6`, `j≥14`, and the
+unbounded `z` residue rays separately. Density alone cannot cap `z`: the formal envelope already
+contains every `z≥394` at `h=j=0` and `y=39726`.
+
 Two original-family nodes survive, and they must not be conflated.
 
 1. **Exterior collision avoidance.** Use `M4-S06`--`M4-S15` to classify the transported kernel

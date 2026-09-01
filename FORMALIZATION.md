@@ -1741,6 +1741,23 @@ The proof is a structural induction on the threshold and tag word; it uses the e
 cylinder and global complement bound, with no search. The exact boundary is
 [`audits/m43-phase-zero-right-c-first-b-position-gap-2026-08-31.md`](audits/m43-phase-zero-right-c-first-b-position-gap-2026-08-31.md).
 
+The bounded outer-wait-`211` extinction
+[`M4-S36`](SALVAGE.md#m4-s36-phase-zero-right-c-bounded-x211-extinction) is checked across
+`MatrixMortality/ParabolicFirstBOneValuation.lean`,
+`MatrixMortality/ParabolicFirstBOneFunnel.lean`,
+`MatrixMortality/ParabolicFirstBOneClosure.lean`, and
+`MatrixMortality/ParabolicFirstBOnePhysical.lean`.
+`ParabolicBlade.firstBOneX211ValuationEnvelope_of_core_zero` derives the exact truncated
+3-adic allocation from a physical core zero;
+`firstBOneX211DensityEnvelope_of_core_zero` derives the cleared density inequalities;
+`firstBOneX211Candidate_of_envelopes` reduces the bounded chamber to ten exact triples; and
+`bZeroBDefectCOneCodeCore_x211_ne_zero_of_bounds` composes their strict grammar gaps into the
+final nonvanishing theorem. `firstBOneX211DensityEnvelope_unbounded_inner_ray` checks that the
+density envelope alone contains every `z≥394` at `h=j=0`, `y=39726`. The generated classifier
+is reproduced by
+`scripts/generate-parabolic-first-b-one-funnel.py`. Its exact boundary is
+[`audits/m43-phase-zero-right-c-bounded-x211-extinction-2026-08-31.md`](audits/m43-phase-zero-right-c-bounded-x211-extinction-2026-08-31.md).
+
 The residue-zero `c`-endpoint exclusion
 [`M4-S12`](SALVAGE.md#m4-s12-residue-zero-c-endpoint-exclusion) is checked in the same module.
 `ParabolicBlade.bridge_cZero_bTwo_bOne_det` and

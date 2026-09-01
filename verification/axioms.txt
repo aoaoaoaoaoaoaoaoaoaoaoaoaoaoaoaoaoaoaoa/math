@@ -2084,3 +2084,54 @@
 'MatrixMortality.ParabolicBlade.tagComplementCode_first_b_position_gap' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.ParabolicBlade.bZeroBDefectCOneCodeCore_x211_rest_normal_form' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.ParabolicBlade.firstBOneX211Candidate_rest_gap' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.firstBOneX211Candidate_core_ne_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.bZeroBDefectCOneCodeCore_x211_ne_zero_of_funnel' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.firstBOneX211Candidate_of_envelopes' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.exactThreeOrder_iff_padicValInt' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.three_pow_dvd_mul_iff_of_three_unit' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.exactThreeOrder_congruent_unit_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.three_pow_dvd_congruent_unit_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.tagComplementCode_three_dvd' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ParabolicBlade.firstBOneX211ValuationEnvelope_of_core_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.firstBOneX211_tail_scale_lower' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.firstBOneX211_core_balance' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ParabolicBlade.firstBOneX211DensityEnvelope_of_core_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.firstBOneX211_y_lower_of_density_envelope' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.firstBOneX211DensityEnvelope_unbounded_inner_ray' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.firstBOneX211_wait_positive_of_valuation_envelope' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.bZeroBDefectCOneCodeCore_x211_ne_zero_of_valuation_envelope' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.bZeroBDefectCOneCodeCore_x211_ne_zero_of_bounds' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
