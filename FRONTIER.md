@@ -224,6 +224,9 @@ excluded phase: when `r≡8 (mod 9)` and `t≢2 (mod 3)`, an exact four-active-`
 a head-clean queue, so the coupled source halts.
 [`MM-S72`](SALVAGE.md#mm-s72-sheared-residue-twenty-six-drainage) penetrates the remaining
 shear phase: `r≡26 (mod 27)` and `t≡2,5 (mod 9)` halt after an exact ten-active-`c` history.
+[`MM-S75`](SALVAGE.md#mm-s75-matched-six-c-shear-drainage) gives the complementary short
+macro: for `e=0,1`, the matched pair `r=9k+3e+2`, `t=3u+e` halts whenever
+`k+2u+2e+2` is nonzero modulo three.
 All cuts are checked in
 `MatrixMortality/SeparatedTwoCShear.lean`. The diagonal audit trail is
 `audits/m53-separated-two-c-orbits-2026-08-31.md`,
@@ -930,7 +933,9 @@ Three live routes remain.
    [`MM-S70`](SALVAGE.md#mm-s70-sheared-residue-eight-drainage) then proves halting in the
    middle-phase-two wedge `r≡8 (mod 9)`, `r-s≢2 (mod 3)`, while
    [`MM-S72`](SALVAGE.md#mm-s72-sheared-residue-twenty-six-drainage) proves halting in the
-   surviving-shear subwedge `r≡26 (mod 27)`, `r-s≡2,5 (mod 9)`. The next source-level cut is
+   surviving-shear subwedge `r≡26 (mod 27)`, `r-s≡2,5 (mod 9)`.
+   [`MM-S75`](SALVAGE.md#mm-s75-matched-six-c-shear-drainage) further drains two thirds of the
+   matched `r≡2,r-s≡0 (mod 3)` and `r≡5,r-s≡1 (mod 3)` pairs. The next source-level cut is
    a remaining sheared phase-two residue pair or coupled triples outside that plane, not
    another diagonal or adjacent-`c` example.
 

@@ -800,6 +800,7 @@ open MatrixMortality
 #print axioms SeparatedTwoCShear.sheared_not_tagHaltsFrom
 #print axioms SeparatedTwoCShear.shearedEight_tagHaltsFrom
 #print axioms SeparatedTwoCShear.shearedTwentySix_tagHaltsFrom
+#print axioms SeparatedTwoCShear.shearedMatched_tagHaltsFrom
 #print axioms SetterShear.sideBasis_det
 #print axioms SetterShear.delimiter_cube
 #print axioms SetterShear.delimiter_square_distinguishedColumn

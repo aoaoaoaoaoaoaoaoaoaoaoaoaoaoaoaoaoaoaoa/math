@@ -19,6 +19,9 @@ Inside the excluded middle phase, a four-active-`c` history drains every source 
 
 On the surviving shear phase, a ten-active-`c` history drains the subwedge with middle run
 `26 mod 27` and shear `2` or `5 mod 9`.
+
+A matched six-active-`c` history also drains two joint phases in middle residues two and five
+modulo nine.
 -/
 
 namespace MatrixMortality.SeparatedTwoCShear
@@ -722,6 +725,106 @@ theorem shearedTwentySix_tagHaltsFrom (phase shear separation k v : Nat)
       (shearedEightHistory shear (3 * k + 2)) (shearedEntryQueue shear separation)
       (shearedEightFinal shear separation (3 * k + 2)) residue_halts
       (shearedEightHistory_equation shear separation (3 * k + 2) (by omega))
+  exact Undecidability.tagHaltsFrom_of_reaches
+    (shearedInitial_reaches_entry shear separation).toReaches entry_halts
+
+private def shearedMatchedHistory (phase k u : Nat) : List (Stroke TagLetter 3) :=
+  [strokeCBB] ++ List.replicate (3 * k + phase) strokeBBB ++ [strokeCBB] ++
+    List.replicate (3 * k + 3 * u + 2 * phase + 1) strokeBBB ++ [strokeCBB] ++
+      List.replicate (3 * k + phase) strokeBBB ++ [strokeCBB] ++
+        List.replicate (4 * k + 2 * u + 2 * phase + 1) strokeBBB ++ [strokeCBB] ++
+          List.replicate (3 * k + phase) strokeBBB ++ [strokeCBB]
+
+private def shearedMatchedFinal (phase separation k u : Nat) : List TagLetter :=
+  bRun (12 * k + 9 * u + 7 * phase + 4) ++ [.c] ++
+    bRun (9 * k + 3 * phase + 2) ++ [.c] ++
+      bRun (12 * k + 6 * u + 6 * phase + 5) ++ [.c] ++
+        bRun (9 * k + 3 * phase + 2) ++ [.c] ++
+          bRun (13 * k + 8 * u + 7 * phase + 6) ++ [.c] ++
+            bRun (9 * k + 3 * phase + 2) ++ [.c] ++
+              bRun (12 * k + 6 * u + 6 * phase + 5) ++ [.c] ++
+                bRun (9 * k + 3 * phase + 2) ++ [.c] ++ bRun (separation + 1)
+
+private theorem shearedMatchedHistory_equation (phase shear separation k u : Nat)
+    (shear_eq : shear = 3 * u + phase)
+    (middle_eq : separation + shear = 9 * k + 3 * phase + 2) :
+    consumed (shearedMatchedHistory phase k u) ++
+        shearedMatchedFinal phase separation k u =
+      shearedEntryQueue shear separation ++
+        produced (tagOutput (shearedBody shear separation))
+          (shearedMatchedHistory phase k u) := by
+  simp [shearedMatchedHistory, shearedMatchedFinal, shearedEntryQueue, shearedBody, twoCBody,
+    strokeCBB, stroke₃, Stroke.letters, tagOutput, nearyBody, bRun, List.append_assoc]
+  have middleRun : 3 * (3 * k + phase) + 2 = 9 * k + 3 * phase + 2 := by omega
+  have firstBridge : 3 * (3 * k + 3 * u + 2 * phase + 1) + 2 =
+      9 * k + 3 * phase + 2 + 1 + (3 * shear + 2) := by omega
+  have matchedBridge : 3 * (4 * k + 2 * u + 2 * phase + 1) + 2 =
+      separation + 1 + (3 * k + phase + (3 * shear + 2)) := by omega
+  have firstFinalBridge : 12 * k + 9 * u + 7 * phase + 4 + 2 =
+      separation + 1 +
+        (3 * k + 3 * u + 2 * phase + 1 + (3 * shear + 2)) := by omega
+  have repeatedFinalBridge : 12 * k + 6 * u + 6 * phase + 5 =
+      separation + 1 + (3 * k + phase + (3 * shear + 2)) := by omega
+  have highFinalBridge : 13 * k + 8 * u + 7 * phase + 6 =
+      separation + 1 +
+        (4 * k + 2 * u + 2 * phase + 1 + (3 * shear + 2)) := by omega
+  rw [middle_eq, middleRun, firstBridge, matchedBridge, firstFinalBridge,
+    repeatedFinalBridge, highFinalBridge]
+
+private theorem shearedMatchedFinal_clean (phase separation k u : Nat)
+    (phase_lt : phase < 2)
+    (joint_phase : (k + 2 * u + 2 * phase + 2) % 3 ≠ 0) :
+    Undecidability.ConstantAtMultiples 3 TagLetter.b
+      (shearedMatchedFinal phase separation k u) := by
+  have clean : ConstantAtOffset 0 (shearedMatchedFinal phase separation k u) := by
+    unfold shearedMatchedFinal
+    simp only [List.singleton_append, List.append_assoc]
+    apply constantAtOffset_bRun_c
+    · rw [Nat.dvd_iff_mod_eq_zero]
+      omega
+    · apply constantAtOffset_bRun_c
+      · rw [Nat.dvd_iff_mod_eq_zero]
+        omega
+      · apply constantAtOffset_bRun_c
+        · rw [Nat.dvd_iff_mod_eq_zero]
+          omega
+        · apply constantAtOffset_bRun_c
+          · rw [Nat.dvd_iff_mod_eq_zero]
+            omega
+          · apply constantAtOffset_bRun_c
+            · rw [Nat.dvd_iff_mod_eq_zero]
+              omega
+            · apply constantAtOffset_bRun_c
+              · rw [Nat.dvd_iff_mod_eq_zero]
+                omega
+              · apply constantAtOffset_bRun_c
+                · rw [Nat.dvd_iff_mod_eq_zero]
+                  omega
+                · apply constantAtOffset_bRun_c
+                  · rw [Nat.dvd_iff_mod_eq_zero]
+                    omega
+                  · exact constantAtOffset_replicate _ _
+  simpa [ConstantAtOffset, Undecidability.ConstantAtMultiples] using clean
+
+/-- The matched six-active-`c` history drains two joint phases of middle residues two and
+five modulo nine. -/
+theorem shearedMatched_tagHaltsFrom (phase shear separation k u : Nat)
+    (phase_lt : phase < 2)
+    (shear_eq : shear = 3 * u + phase)
+    (middle_eq : separation + shear = 9 * k + 3 * phase + 2)
+    (joint_phase : (k + 2 * u + 2 * phase + 2) % 3 ≠ 0) :
+    TagHaltsFrom 3 (tagOutput (shearedBody shear separation))
+      (shearedInitial shear separation) := by
+  have final_halts := Undecidability.tagHaltsFrom_of_constantAtMultiples 3 (by omega)
+    (tagOutput (shearedBody shear separation)) TagLetter.b rfl
+    (shearedMatchedFinal phase separation k u)
+    (shearedMatchedFinal_clean phase separation k u phase_lt joint_phase)
+  have entry_halts : TagHaltsFrom 3 (tagOutput (shearedBody shear separation))
+      (shearedEntryQueue shear separation) :=
+    tagHaltsFrom_of_history_equation (tagOutput (shearedBody shear separation))
+      (shearedMatchedHistory phase k u) (shearedEntryQueue shear separation)
+      (shearedMatchedFinal phase separation k u) final_halts
+      (shearedMatchedHistory_equation phase shear separation k u shear_eq middle_eq)
   exact Undecidability.tagHaltsFrom_of_reaches
     (shearedInitial_reaches_entry shear separation).toReaches entry_halts
 

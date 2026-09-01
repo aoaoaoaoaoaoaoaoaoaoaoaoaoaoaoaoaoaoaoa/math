@@ -77,6 +77,7 @@ file owns the mathematical stock.
 | [`MM-S58`](#mm-s58-unequal-two-c-cycle-law) | structure theorem and obstruction | every nontrivial even two-`c` body off middle phase two has a canonical cycle; an unequal sheared diagonal reaches it from the coupled source | formalized | active |
 | [`MM-S70`](#mm-s70-sheared-residue-eight-drainage) | halting theorem | a four-active-`c` history drains the sheared middle-phase-two wedge `r≡8 (mod 9)`, `r-s≢2 (mod 3)` | formalized | active |
 | [`MM-S72`](#mm-s72-sheared-residue-twenty-six-drainage) | halting theorem | a ten-active-`c` history drains the surviving-shear subwedge `r≡26 (mod 27)`, `r-s≡2,5 (mod 9)` | formalized | active |
+| [`MM-S75`](#mm-s75-matched-six-c-shear-drainage) | halting theorem | one six-active-`c` macro drains two thirds of the matched middle residues two and five modulo nine | formalized | active |
 | [`MM-O01`](#mm-o01-all-placement-packing-rank) | obstruction | literal CHHN packing has exact rank six for every separator placement | formalized | graduated |
 | [`MM-O02`](#mm-o02-one-sided-phase-overlap) | obstruction | standard common-line phase fusion becomes one-sided | reported | parked |
 | [`MM-O03`](#mm-o03-two-channel-boundary-tax) | obstruction | exact diagonal rank-two punctuation costs two states beyond Hankel rank | formalized | graduated |
@@ -6399,8 +6400,62 @@ nucleus.
 [`MatrixMortality/SeparatedTwoCShear.lean`](MatrixMortality/SeparatedTwoCShear.lean), through
 `SeparatedTwoCShear.shearedTwentySix_tagHaltsFrom`.
 
-**Next:** formalize the matched six-active-`c` macro for middle residues two and five, then
-classify shear `8 mod 9` and the remaining residue-eight sublevels.
+**Next:** `MM-S75` formalizes the matched six-active-`c` macro. Classify shear `8 mod 9`, the
+remaining matched subphases, and the phase-mismatched middle residues.
+
+### MM-S75: Matched six-c shear drainage
+
+**Kind:** halting theorem
+**Evidence:** formalized
+**Disposition:** active
+
+Let `e<2` and write the sheared middle run and shear as
+
+```text
+r=n+t=9k+3e+2,    t=3u+e.
+```
+
+Set
+
+```text
+m=3k+e,    g=3k+3u+2e+1,    h=4k+2u+2e+1.
+```
+
+The entry queue has the exact six-active-`c` history
+
+```text
+C B^m C B^g C B^m C B^h C B^m C,
+C=cbb,  B=bbb.
+```
+
+Its residual run vector is
+
+```text
+[12k+9u+7e+4, r, 12k+6u+6e+5, r,
+ 13k+8u+7e+6, r, 12k+6u+6e+5, r, n+1].
+```
+
+The first four `c` positions have phase `e+1` modulo three; the last four have phase
+`k+2u+2e+2`. The first phase is nonzero because `e<2`. If the second is also nonzero, every
+deletion head is `b`, so the residual and the coupled source halt.
+
+For `e=0`, this gives `r=9k+2`, `t=3u`, with the sole excluded joint class
+`k+2u≡1 (mod 3)`. For `e=1`, it gives `r=9k+5`, `t=3u+1`, excluding only
+`k+2u≡2 (mod 3)`. Positive `u` supplies unequal bodies.
+
+**Scope:** this proves two-thirds drainage only for those two matched residue/shear pairs. It
+does not decide their excluded joint class, the phase-mismatched pairs, the residue-eight shear
+subphases left by `MM-S72`, or coupled triples outside the sheared plane.
+
+**Use:** middle residues two and five share one affine active-event macro. The residue-eight
+case is its failed phase `e=2`; `MM-S70` and `MM-S72` supply the longer continuation there.
+
+**Formalization:**
+[`MatrixMortality/SeparatedTwoCShear.lean`](MatrixMortality/SeparatedTwoCShear.lean), through
+`SeparatedTwoCShear.shearedMatched_tagHaltsFrom`.
+
+**Next:** derive the phase-mismatched six-event successors, then join their surviving classes
+to the residue-eight continuation or a finite active-block nucleus.
 
 ### MM-S33: Leading-`D_b` support-saturator extinction
 
