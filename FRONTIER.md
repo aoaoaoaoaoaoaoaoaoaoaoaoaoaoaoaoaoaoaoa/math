@@ -1207,6 +1207,14 @@ data fixed point, away from the other. Exhaustive rational search finds no requi
 distinct, non-common-fixed triple for `N≤36`. Thus every live code has `N≥37`; this bound is
 computational, while the reduction and fixed-point geometry are Lean-checked.
 
+[`G3-S12`](SALVAGE.md#g3-s12-fork-crossing-transport-and-address-ambiguity) factors the reduced
+collision through two canonical crossings: the toggle must carry the crossing of `XYX,YXY` to
+the crossing of `X,Y`. Lean classifies the resulting five-point order for all physical
+contractions. This does not yield a raw leading-run descent: prefixing Cassaigne's relation by
+`Tⁿ` gives two distinct equal-action words with leading runs `n` and `n+2` for every `n`, even
+inside the exact slope-conditioned fixed-point cylinders. The live obstruction must therefore
+classify the fork in an oriented quotient of the mixed-prime word monoid.
+
 [`G3-M02`](SALVAGE.md#g3-m02-square-root-punctuation-fracture) supplied a complete direct-mortality
 grammar. The source-uniform rational rank-two matrix `S` satisfies
 
@@ -1496,8 +1504,10 @@ raceable leaves:
    macro triple. `G3-S10` proves that literal equality itself forces such a forbidden common fixed
    point. `G3-S11` then cancels the inert action context, proves every macro nonempty, forces the
    toggle fixed point beyond the more contracting data fixed point, and exhaustively excludes
-   reduced relation length at most `36`. The unresolved step is an unbounded obstruction or a
-   longer non-common-fixed five-factor relation with the complete endpoint converse, not another
+   reduced relation length at most `36`. `G3-S12` factors the equation through two ordered
+   crossings and proves that equal-action Cassaigne rewrites shift the leading-run address by two
+   at every depth. The unresolved step is an oriented-quotient obstruction or a longer
+   non-common-fixed five-factor relation with the complete endpoint converse, not another
    fixed-body rank perturbation, guard recurrence, or finite target-depth label.
 3. **Positive projective transition obstruction.** Derive from a source-unbounded terminal
    section a finite shift incompatibility which no three-dimensional rational same-zero
@@ -1628,8 +1638,10 @@ common-fixed macro triples. `G3-S10` also kills the literal branch, leaving only
 action kernel pair of raw length `4(2|κ(b)|+|κ(c)|+|κ(toggle)|)`. `D2-S08` does not automatically
 apply to the unguarded macro image. `G3-S11` cancels the inert context to a positive reduced
 five-factor pair, forces exterior toggle-fixed-point geometry, and computationally excludes
-reduced length at most `36`. After the missing guard and closure proofs, `D2-S08` still leaves the
-normalized mantissa unbounded. Any lower-bound attack
+reduced length at most `36`. `G3-S12` turns the pair into an exact crossing transport but proves
+that the affine action cannot determine a raw leading-run address; the known kernel changes that
+address by two. After the missing guard and closure proofs, `D2-S08` still leaves the normalized
+mantissa unbounded. Any lower-bound attack
 must exclude both positive architectures through actual transition data. Backward cancellation,
 inverse cofinality, static incidence, and target-depth classes cannot do so.
 Do not spend another attack on separator placement, fixed anchors, or control singularity after

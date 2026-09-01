@@ -107,6 +107,7 @@ import MatrixMortality.GuardedMixedPrimeBridge
 import MatrixMortality.GuardedMixedPrimeFork
 import MatrixMortality.GuardedMixedPrimeLiteralNoGo
 import MatrixMortality.GuardedMixedPrimeReducedKernel
+import MatrixMortality.GuardedMixedPrimeForkCrossing
 import MatrixMortality.SquareRootPunctuation
 import MatrixMortality.TernaryClosedBlockNoGo
 import MatrixMortality.ThreePhaseBinaryNoGo
