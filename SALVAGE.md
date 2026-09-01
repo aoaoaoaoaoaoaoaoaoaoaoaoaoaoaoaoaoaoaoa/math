@@ -142,6 +142,7 @@ file owns the mathematical stock.
 | [`MM-S64`](#mm-s64-unique-predecessor-cylinder) | structure theorem and obstruction | a nonterminal full-erasure-tail pole selects one exact high-precision cylinder for its primitive predecessor; a final literal `D_c` forces `3^(β−1)` into the predecessor numerator | formalized | active |
 | [`MM-S68`](#mm-s68-backward-numerator-resonance) | structure theorem and obstruction | a deep successor numerator forces full upper-length cancellation and a predecessor cylinder; across literal `D_c` it toggles exactly into the full carrier-gap congruence | formalized | active |
 | [`MM-S69`](#mm-s69-sequential-double-deletion-zero-gap-extinction) | obstruction | the distinguished carrier after two sequential singleton `D_c` transfers cannot hit a full-tail threshold, eliminating the zero-gap survivor of the backward toggle | formalized | active |
+| [`MM-S71`](#mm-s71-three-block-backward-frontier) | structure theorem and obstruction | behind two final singleton `D_c` transfers, every nonterminal full-tail pole either halts or places the preceding physical block in its exact nonzero predecessor cylinder | formalized | active |
 | [`R32-S01`](#r32-s01-split-return-normal-form) | structure theorem | rank-two cuts reduce one-unit binary mortality to a `2 × 2` return recurrence | formalized | graduated |
 | [`R32-S02`](#r32-s02-two-plane-edge-square) | structure theorem | two rank-two generators are a two-vertex square of `2 × 2` edges | formalized | graduated |
 | [`R32-O01`](#r32-o01-rank-one-profile-collapse) | obstruction | a rank-one generator reduces mortality to order-at-most-three scalar recurrence zeros | audited | stock |
@@ -5367,6 +5368,64 @@ through `distinguishedDoubleDeletionC_avoids_erasureTail_threshold`,
 **Next:** feed the forced nonzero full gap through `MM-S63`/`MM-S64` at the block before the
 singleton pair, then classify its first non-`D_c` cylinder. The generic target-suffix seam
 remains independent.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S71: Three-block backward frontier
+
+**Kind:** structure theorem and obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+Let a primitive carrier `(m,e)` cross a physical role block `w` to primitive `(n,d)`, with raw
+output `s(n,d)`. Follow it by two sequential singleton `D_c` transfers and suppose the resulting
+primitive carrier meets a nonterminal target pole whose spelling ends in `β` erasure tiles.
+`MM-S69` first gives either a genuine source halt or
+
+```text
+d−n≠0,      3^β ∣ d−n.                                  (1)
+```
+
+In the second branch, `MM-S64` applies to the transition through `w`. If
+
+```text
+g=v₃(s),      a=upperLength(w),
+E=P_we−V_wm,      H=5·3^β−1,
+```
+
+then Lean proves the complete three-block frontier
+
+```text
+a=g+1,
+3^(g+β−1) ∣ E−3^gHe.                                  (2)
+```
+
+Thus the nonzero branch of the backward toggle is no longer an informal composition: all three
+primitive normalization witnesses and both singleton square-run boundaries are retained, and
+the block before the pair lands in the unique cylinder of precision `a+β−2`. At the first
+non-`D_c` block, (2) is the exact surviving local obligation.
+
+**Scope:** `β≥2`, arbitrary compiler body of length at least `β−1`, one physical role block
+followed by two distinct singleton `D_c` transfers, explicit nonzero integral normalization
+scales, primitive carriers at every boundary, and a live nonterminal pole with a full
+`β`-erasure target tail. The theorem neither classifies the cylinder (2) nor forces a generic
+physical target to have that tail.
+
+**Use:** iterate the literal-`D_c` numerator/gap toggle as far backward as the history permits,
+then hand the first non-`D_c` role block to a single exact congruence problem. Any proposed
+global earliest-pole proof must either empty this cylinder or bypass the full-tail restriction.
+
+**Formalization:**
+[`MatrixMortality/SwappedSetterThreeBlockFrontier.lean`](MatrixMortality/SwappedSetterThreeBlockFrontier.lean),
+through `erasureTailPole_threeBlock_backwardFrontier`.
+
+**Artifact:**
+[`audits/m53-three-block-backward-frontier-2026-08-31.md`](audits/m53-three-block-backward-frontier-2026-08-31.md).
+
+**Next:** classify (2) for the first physical role block not equal to singleton `D_c`, preserving
+its Neary source/upper ancestry rather than projecting to a fixed residue quotient. The generic
+target-suffix seam remains independent.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).

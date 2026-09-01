@@ -1432,6 +1432,7 @@ The setter-projective audit now also exposes a kernel-friendly carry theorem:
 | [`MM-S64`](SALVAGE.md#mm-s64-unique-predecessor-cylinder) | exact predecessor-cylinder congruence at a full-erasure-tail pole, literal-`D_c` numerator divisibility, and a sharp distinguished-spine witness |
 | [`MM-S68`](SALVAGE.md#mm-s68-backward-numerator-resonance) | backward deep-numerator resonance, exact predecessor cylinder, literal-`D_c` numerator/gap toggle, and the zero-carrier terminal branch |
 | [`MM-S69`](SALVAGE.md#mm-s69-sequential-double-deletion-zero-gap-extinction) | exact prefix equation for the distinguished sequential two-`D_c` carrier, modulo-three lower-prefix extinction, denominator size contradiction, and zero-gap physical adapter |
+| [`MM-S71`](SALVAGE.md#mm-s71-three-block-backward-frontier) | exact three-block primitive-normalization composition, nonzero full-gap branch, and unique cylinder at the block before two final singleton `D_c` transfers |
 
 These records narrow the missing arbitrary-depth theorem but do not prove
 projective avoidance. Their reconstruction is
@@ -1733,6 +1734,21 @@ strict bound `d₂>μ(3^β−1)`. Lean identifies every primitive represented ze
 scalar copy of the distinguished raw-head ray and composes the no-go. The resulting two-block
 pullback exposes either `TagHaltsFrom` or a nonzero full-gap predecessor. This theorem concerns
 two separate singleton transfers, not the single `[D_c,D_c]` block handled by `MM-S51`.
+
+Record [`MM-S71`](SALVAGE.md#mm-s71-three-block-backward-frontier) closes the composition seam
+immediately before those two transfers. Starting from an explicitly normalized primitive
+transition through a physical role block `w`, it retains the two subsequent singleton
+normalizations and the final primitive carrier. A nonterminal full-tail pole then either gives
+`TagHaltsFrom` or forces the intermediate gap to be nonzero and divisible by `3^β`; the
+predecessor-cylinder theorem yields
+
+```text
+upperLength(w)=v₃(s)+1,
+3^(v₃(s)+β−1) ∣ (P_we−V_wm)−3^(v₃(s))He.
+```
+
+This is the exact cylinder to consume at the first non-`D_c` block, not its extinction. The
+target must still contain a full `β`-erasure tail.
 
 Record [`MM-S21`](SALVAGE.md#mm-s21-bounded-decimal-suffix-cycles) closes the fixed-precision
 suffix-descent lane. `DecimalSetterSuffix.cycleDefect_lift` gives an explicit one-digit lift for
@@ -2287,6 +2303,7 @@ fixed-rank decision problem.
 | `SwappedSetterPredecessorCylinder.lean` | unique high-precision predecessor cylinder at a nonterminal full-tail pole, literal-deletion numerator consequence, and sharpness on the distinguished deletion spine |
 | `SwappedSetterBackwardResonance.lean` | backward deep-numerator resonance, exact high-precision ancestry cylinder, literal-deletion numerator/gap toggle, and the zero-carrier terminal fork |
 | `SwappedSetterSequentialDoubleDeletion.lean` | direct full-tail extinction for the distinguished sequential two-deletion carrier and elimination of the backward toggle's zero-gap survivor |
+| `SwappedSetterThreeBlockFrontier.lean` | exact primitive three-block pullback from a full-tail pole to the unique cylinder at the physical block before two singleton deletions |
 | `PairedMortality.lean` | common-column mortality converse and exact integer `4 × 4` family |
 | `PhaseFracture.lean` | phase normalization and dimension-free projective-identification contradiction |
 | `PhaseRigidity.lean` | checked local role algebra, discrepancy commutators, and invariant-pencil rigidity |
