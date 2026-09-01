@@ -1287,6 +1287,15 @@ digits seven and three. The remaining shallow seam is structural rather than she
 has neither form. Prove a genuine ancestry normalization or attack the generalized equation
 directly; do not silently substitute one head for the other.
 
+[`MM-S79`](SALVAGE.md#mm-s79-minimum-body-lawful-shallow-pole) proves that the generalized
+shallow equation has genuine physical solutions and therefore cannot be killed globally. On the
+minimum slice `|body|=β−1`, `target=R_c::body.map D` has `P=V`, while `source=[R_c]` has
+`9H=lift` and `9Δ=gap`; the parsed shallow pole follows identically. This is the unique lawful
+terminal spelling of an immediately halting source, not a malformed witness. The universal
+compiler remains separated because its emitted length is strictly larger than `β−1`. The next
+shallow attack must use that length surplus or finer compiler grammar while preserving this
+lawful normalization.
+
 The ternary and decimal branches now separate at their first multi-transfer front.
 [`MM-S37`](SALVAGE.md#mm-s37-decimal-three-shape-frontier-extinction) substitutes each of the
 three role shapes left by the swapped ternary gate into the decimal carrier equation. All are

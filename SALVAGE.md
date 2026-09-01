@@ -179,6 +179,7 @@ file owns the mathematical stock.
 | [`MM-S74`](#mm-s74-triple-free-bridge-frontier) | structure theorem | decimal setter mortality is exactly a parsed singleton, shallow-reset, or deep square-pole frontier | formalized | active |
 | [`MM-S77`](#mm-s77-shallow-generalized-raw-head-adapter) | structure theorem | every shallow square-reset pole obeys one exact generalized raw-head equation whose full root code and complement are decimal units | formalized | active |
 | [`MM-S76`](#mm-s76-primitive-target-multiplier-braid) | structure theorem and obstruction | primitivity identifies one unique unit target multiplier, turning the suffix charge into a literal prefix discrepancy and restricting its predecessor cylinder to two first-mismatch residue arms | formalized | active |
+| [`MM-S79`](#mm-s79-minimum-body-lawful-shallow-pole) | normalization boundary | every minimum-length body attains the shallow pole at its unique lawful terminal word, while compiler-emitted bodies lie strictly above this slice | formalized | active |
 | [`R32-S01`](#r32-s01-split-return-normal-form) | structure theorem | rank-two cuts reduce one-unit binary mortality to a `2 × 2` return recurrence | formalized | graduated |
 | [`R32-S02`](#r32-s02-two-plane-edge-square) | structure theorem | two rank-two generators are a two-vertex square of `2 × 2` edges | formalized | graduated |
 | [`R32-O01`](#r32-o01-rank-one-profile-collapse) | obstruction | a rank-one generator reduces mortality to order-at-most-three scalar recurrence zeros | audited | stock |
@@ -7669,6 +7670,71 @@ map between the full root and peeled-head parameters.
 **Next:** either prove that every reachable shallow parser root normalizes to the peeled two-`c`
 boundary, or exclude the displayed generalized equation for arbitrary rule-ended roots. Keep
 singleton targets and deeper histories as separate branches.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S79: Minimum-body lawful shallow pole
+
+**Kind:** normalization boundary
+**Evidence:** formalized
+**Disposition:** active
+
+For every `β>2` and every body of minimum admissible length `|body|=β−1`, let
+
+```text
+source = [R_c],
+target = R_c :: body.map D.
+```
+
+The target spellings coincide as literal binary words:
+
+```text
+spell upper target · marker = spell lower target.
+```
+
+Thus its decimal codes satisfy `P=V`. For the one-`R_c` source, Lean proves the exact
+calibrations
+
+```text
+9H = lift(10^β),     9Δ = gap(10^β).
+```
+
+Substitution into `MM-S77` gives the shallow pole identically. Lean constructs its concrete
+`CoreSpelling`, places it in the shallow arm of `HasParsedZeroFrontier`, and transports the
+witness through exact clearing to the integer three-generator `5 × 5` family.
+
+This is not a false positive. The source queue is
+`body.drop(β−1)·b=[b]`, already shorter than `β`, so it halts immediately. The inherited
+minimum-body theorem proves that `target` is the unique terminal role spelling. Conversely,
+Neary's primitive-recursive compiler emits bodies of length
+
+```text
+(safetyBound·β+1)(β−1) > β−1,
+```
+
+so its universal instances never occupy this exact slice.
+
+**Scope:** the theorem gives a complete shallow normalization on minimum bodies and an actual
+mortality witness. It neither supplies a malformed zero nor threatens the intended compiler
+image. Longer admissible bodies, singleton targets, and deep histories remain outside.
+
+**Use:** reject any proposed global theorem that the generalized shallow equation is empty for
+all rule-ended roots. A valid converse must distinguish lawful terminal poles from malformed
+ones and must use the emitted body's strict length surplus or stronger compiler grammar.
+
+**Formalization:**
+[`MatrixMortality/DecimalSetterMinimumBody.lean`](MatrixMortality/DecimalSetterMinimumBody.lean),
+through `minimumBodyTarget_word_identity`, `minimumBody_initialQueue_halts`,
+`minimumBodyTarget_unique`, `hasParsedZeroFrontier_of_minimumBody`, and
+`compiler_body_length_gt_minimum`.
+
+**Artifact:**
+[`audits/m53-minimum-body-lawful-shallow-pole-2026-08-31.md`](audits/m53-minimum-body-lawful-shallow-pole-2026-08-31.md).
+
+**Next:** exploit the compiler's strict length surplus to classify or exclude shallow poles
+without excluding the lawful minimum-body normalization. The distinguishing invariant must see
+more than the root's decimal-unit shell.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
