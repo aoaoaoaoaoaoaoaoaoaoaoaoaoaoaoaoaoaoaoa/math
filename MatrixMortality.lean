@@ -145,6 +145,7 @@ import MatrixMortality.DecimalSetterRuleResonance
 import MatrixMortality.DecimalSetterRuleCoefficient
 import MatrixMortality.DecimalSetterPositionTwo
 import MatrixMortality.DecimalSetterAllCRule
+import MatrixMortality.DecimalSetterRuleEntry
 import MatrixMortality.SchottkyPunctuation
 import MatrixMortality.TwoStateObstructions
 import MatrixMortality.ForcedRuleCCompanion
