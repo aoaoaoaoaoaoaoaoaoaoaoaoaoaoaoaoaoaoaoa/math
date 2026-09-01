@@ -1,0 +1,402 @@
+#!/usr/bin/env -S uv run --script
+# /// script
+# requires-python = ">=3.13"
+# ///
+"""Generate the exact bounded x=211 valuation-density certificate.
+
+The default output is the generated Lean module. ``--write`` replaces that module;
+``--check`` fails when it is stale. Lean rechecks every emitted divisibility and density
+branch with kernel-trusted tactics, so this generator is provenance and reproducibility
+machinery rather than part of the proof.
+"""
+
+from __future__ import annotations
+
+import argparse
+from pathlib import Path
+
+SOURCE_MODULE = Path("MatrixMortality/ParabolicFirstBOneFunnel.lean")
+
+out = []
+
+
+def emit(text=""):
+    out.append(text)
+
+
+def disjunction(var, values, indent="    "):
+    pieces = [f"{var} = {value}" for value in values]
+    lines = []
+    current = indent
+    for index, piece in enumerate(pieces):
+        token = piece if index == len(pieces) - 1 else piece + " ∨"
+        if len(current) + len(token) + 1 > 100 and current.strip():
+            lines.append(current.rstrip())
+            current = indent + token + " "
+        else:
+            current += token + " "
+    lines.append(current.rstrip())
+    return "\n".join(lines)
+
+
+roots = [36, 1746, 315, 15705, 2826, 141336]
+z12 = [952165, 1483606]
+z11 = [66430, 243577, 597871, 775018, 1129312, 1306459]
+z10_groups = [
+    [7381, 125479, 184528, 302626, 361675, 479773],
+    [538822, 656920, 715969, 834067, 893116, 1011214],
+    [1070263, 1188361, 1247410, 1365508, 1424557, 1542655],
+]
+deep_y = {
+    0: [
+        24093,
+        26280,
+        28467,
+        30654,
+        32841,
+        35028,
+        37215,
+        39402,
+        41589,
+        43776,
+        45963,
+        48150,
+        50337,
+    ],
+    1: [27990, 34551, 41112, 47673],
+    2: [39681],
+}
+
+emit("import MatrixMortality.ParabolicFirstBOneClosure")
+emit()
+emit("/-!")
+emit("# The bounded valuation-density funnel at outer wait 211")
+emit()
+emit(
+    "This module records the exact 3-adic and density envelopes used in the unresolved"
+)
+emit(
+    "first-`b`-after-one-`c` chamber.  Its finite certificate proves that the envelopes leave"
+)
+emit(
+    "exactly the ten triples already extinguished by `ParabolicFirstBOneClosure`, all with the"
+)
+emit("tail's first `b` at position zero.")
+emit("-/")
+emit()
+emit("namespace MatrixMortality.ParabolicBlade")
+emit()
+emit("/-- Exact divisibility by a power of `3`, but not by the next power. -/")
+emit("def ExactThreeOrder (value : ℤ) (order : Nat) : Prop :=")
+emit("  (3 : ℤ) ^ order ∣ value ∧ ¬(3 : ℤ) ^ (order + 1) ∣ value")
+emit()
+emit(
+    "/-- The six universal `U`-coordinate roots for trailing runs of length at most five. -/"
+)
+emit("def firstBOneX211RootResidue (h : Nat) : ℤ :=")
+emit("  match h with")
+for h, root in enumerate(roots[:-1]):
+    emit(f"  | {h} => {root}")
+emit(f"  | _ => {roots[-1]}")
+emit()
+emit("/-- The exact bounded 3-adic allocation forced by the SFFT product equation. -/")
+emit("def FirstBOneX211ValuationEnvelope (h y z : Nat) : Prop :=")
+emit("  ∃ uOrder vOrder : Nat,")
+emit("    h + 3 ≤ uOrder ∧ uOrder + vOrder = h + 16 ∧ vOrder ≤ 13 ∧")
+emit("      ((uOrder < h + 7 ∧")
+emit("          ExactThreeOrder ((y : ℤ) - firstBOneX211RootResidue h) uOrder) ∨")
+emit("        (h + 7 ≤ uOrder ∧")
+emit("          (3 : ℤ) ^ (h + 7) ∣ (y : ℤ) - firstBOneX211RootResidue h)) ∧")
+emit("      ((vOrder = 13 ∧ z = 420724) ∨")
+emit("        (vOrder < 13 ∧ ExactThreeOrder ((z : ℤ) - 420724) vOrder))")
+emit()
+emit("/-- Positive affine `z` factor in the x=211 rest-core equation. -/")
+emit("def firstBOneX211Q (z : Nat) : ℤ :=")
+emit("  465621956 * z + 42879529")
+emit()
+emit("/-- Positive bilinear coefficient of the suffix complement at x=211. -/")
+emit("def firstBOneX211J (y z : Nat) : ℤ :=")
+emit("  620717828832 * y * z + 58005064872 * y +")
+emit("    133690369309176 * z + 12496984445436")
+emit()
+emit("/-- Scale coefficient in the normalized x=211 rest-core equation. -/")
+emit("def firstBOneX211A (y z : Nat) : ℤ :=")
+emit("  729 * (72 * y - 9) * firstBOneX211Q z")
+emit()
+emit("/-- Finite-scale correction in the normalized x=211 rest-core equation. -/")
+emit("def firstBOneX211B (y z : Nat) : ℤ :=")
+emit("  (8 * y - 9) * firstBOneX211Q z")
+emit()
+emit(
+    "/-- Cleared exact density inequalities for first-`b` position `j` and trailing run `h`. -/"
+)
+emit("def FirstBOneX211DensityEnvelope (h j y z : Nat) : Prop :=")
+emit("  let p : ℤ := 3 ^ j")
+emit("  let T : ℤ := 3 ^ (j + 5 + h)")
+emit("  (39 * (81 * p) + 13) * firstBOneX211J y z ≤")
+emit("      81 * p * firstBOneX211A y z ∧")
+emit("    242 * p * (T * firstBOneX211A y z - firstBOneX211B y z) ≤")
+emit("      T * (39 * (242 * p) + 39) * firstBOneX211J y z")
+emit()
+
+emit("private theorem firstBOneX211_z_order_twelve (z : Nat) (bound : z < 3 ^ 13)")
+emit("    (shell : ExactThreeOrder ((z : ℤ) - 420724) 12) :")
+emit(disjunction("z", z12))
+emit("    := by")
+emit("  norm_num [ExactThreeOrder] at shell")
+emit("  omega")
+emit()
+emit("private theorem firstBOneX211_z_order_eleven (z : Nat) (bound : z < 3 ^ 13)")
+emit("    (shell : ExactThreeOrder ((z : ℤ) - 420724) 11) :")
+emit(disjunction("z", z11))
+emit("    := by")
+emit("  norm_num [ExactThreeOrder] at shell")
+emit("  omega")
+emit()
+
+for group_index, values in enumerate(z10_groups):
+    suffix = "ABC"[group_index]
+    emit(f"private def FirstBOneX211ZTen{suffix} (z : Nat) : Prop :=")
+    emit(disjunction("z", values, "  "))
+    emit()
+
+emit("private theorem firstBOneX211_z_order_ten (z : Nat) (bound : z < 3 ^ 13)")
+emit("    (shell : ExactThreeOrder ((z : ℤ) - 420724) 10) :")
+emit("    FirstBOneX211ZTenA z ∨ FirstBOneX211ZTenB z ∨ FirstBOneX211ZTenC z := by")
+emit("  norm_num [ExactThreeOrder, FirstBOneX211ZTenA, FirstBOneX211ZTenB,")
+emit("    FirstBOneX211ZTenC] at shell ⊢")
+emit("  omega")
+emit()
+
+norm_defs = (
+    "FirstBOneX211DensityEnvelope, firstBOneX211A, firstBOneX211B, "
+    "firstBOneX211Q,\n      firstBOneX211J, ExactThreeOrder, FirstBOneX211Candidate"
+)
+
+
+def emit_shallow(h, label, uorder, values=None, group=None):
+    root = roots[h]
+    emit(f"private theorem firstBOneX211_shallow_h{h}_{label}")
+    emit("    (j y z : Nat) (j_le : j ≤ 13) (y_lower : 22529 ≤ y)")
+    emit("    (y_upper : y ≤ 51767)")
+    emit(f"    (u_exact : ExactThreeOrder ((y : ℤ) - {root}) {uorder})")
+    if group is not None:
+        emit(f"    (z_cases : FirstBOneX211ZTen{group} z)")
+    else:
+        emit("    (z_cases :")
+        emit(disjunction("z", values, "      "))
+        emit("    )")
+    emit(f"    (density : FirstBOneX211DensityEnvelope {h} j y z) :")
+    emit(f"    FirstBOneX211Candidate {h} y z ∧ j = 0 := by")
+    if group is not None:
+        emit(f"  unfold FirstBOneX211ZTen{group} at z_cases")
+    count = len(values) if values is not None else 6
+    patterns = " | ".join(["rfl"] * count)
+    if count == 1:
+        emit("  rcases z_cases with rfl")
+        emit("  interval_cases j <;>")
+    else:
+        emit(f"  rcases z_cases with {patterns} <;>")
+        emit("    interval_cases j <;>")
+    tactic_indent = "  " if count == 1 else "    "
+    emit(f"{tactic_indent}norm_num [{norm_defs}] at density u_exact ⊢ <;>")
+    emit(f"{tactic_indent}omega")
+    emit()
+
+
+for h in range(6):
+    emit_shallow(h, "v13", h + 3, [420724])
+    emit_shallow(h, "v12", h + 4, z12)
+    emit_shallow(h, "v11", h + 5, z11)
+    for group_index, values in enumerate(z10_groups):
+        emit_shallow(h, f"v10_{'abc'[group_index]}", h + 6, values, "ABC"[group_index])
+
+emit("private theorem firstBOneX211_of_shallow_orders")
+emit("    (h j y z uOrder vOrder : Nat) (h_le : h ≤ 5) (j_le : j ≤ 13)")
+emit("    (y_lower : 22529 ≤ y) (y_upper : y ≤ 51767) (z_upper : z < 3 ^ 13)")
+emit("    (u_lower : h + 3 ≤ uOrder) (order_sum : uOrder + vOrder = h + 16)")
+emit("    (u_shallow : uOrder < h + 7)")
+emit("    (u_exact : ExactThreeOrder ((y : ℤ) - firstBOneX211RootResidue h) uOrder)")
+emit("    (v_shell : (vOrder = 13 ∧ z = 420724) ∨")
+emit("      (vOrder < 13 ∧ ExactThreeOrder ((z : ℤ) - 420724) vOrder))")
+emit("    (density : FirstBOneX211DensityEnvelope h j y z) :")
+emit("    FirstBOneX211Candidate h y z ∧ j = 0 := by")
+emit("  have order_cases :")
+emit("      (uOrder = h + 3 ∧ vOrder = 13) ∨")
+emit("        (uOrder = h + 4 ∧ vOrder = 12) ∨")
+emit("        (uOrder = h + 5 ∧ vOrder = 11) ∨")
+emit("        (uOrder = h + 6 ∧ vOrder = 10) := by")
+emit("    omega")
+emit("  rcases order_cases with first | second | third | fourth")
+
+
+def emit_h_calls(indent, label, case_arg):
+    emit(f"{indent}interval_cases h")
+    for h in range(6):
+        emit(
+            f"{indent}· exact firstBOneX211_shallow_h{h}_{label} j y z j_le y_lower y_upper"
+        )
+        emit(f"{indent}    u_exact {case_arg} density")
+
+
+emit("  · rcases first with ⟨rfl, rfl⟩")
+emit("    rcases v_shell with top | small")
+emit("    · rcases top with ⟨_, z_eq⟩")
+emit_h_calls("      ", "v13", "z_eq")
+emit("    · omega")
+emit("  · rcases second with ⟨rfl, rfl⟩")
+emit("    rcases v_shell with top | shell")
+emit("    · omega")
+emit("    · rcases shell with ⟨_, v_exact⟩")
+emit("      have z_cases := firstBOneX211_z_order_twelve z z_upper v_exact")
+emit_h_calls("      ", "v12", "z_cases")
+emit("  · rcases third with ⟨rfl, rfl⟩")
+emit("    rcases v_shell with top | shell")
+emit("    · omega")
+emit("    · rcases shell with ⟨_, v_exact⟩")
+emit("      have z_cases := firstBOneX211_z_order_eleven z z_upper v_exact")
+emit_h_calls("      ", "v11", "z_cases")
+emit("  · rcases fourth with ⟨rfl, rfl⟩")
+emit("    rcases v_shell with top | shell")
+emit("    · omega")
+emit("    · rcases shell with ⟨_, v_exact⟩")
+emit("      rcases firstBOneX211_z_order_ten z z_upper v_exact with")
+emit("        group_a | group_b | group_c")
+for label, arg in [("v10_a", "group_a"), ("v10_b", "group_b"), ("v10_c", "group_c")]:
+    emit("      · interval_cases h")
+    for h in range(6):
+        emit(
+            f"        · exact firstBOneX211_shallow_h{h}_{label} j y z j_le y_lower y_upper"
+        )
+        emit(f"            u_exact {arg} density")
+emit()
+
+flat_deep = [(h, y) for h, ys in deep_y.items() for y in ys]
+emit("private def FirstBOneX211DeepY (h y : Nat) : Prop :=")
+for index, (h, y) in enumerate(flat_deep):
+    suffix = " ∨" if index < len(flat_deep) - 1 else ""
+    emit(f"  (h = {h} ∧ y = {y}){suffix}")
+emit()
+emit("private theorem firstBOneX211_deep_y_cases (h y : Nat) (h_le : h ≤ 5)")
+emit("    (y_lower : 22529 ≤ y) (y_upper : y ≤ 51767)")
+emit("    (divisible : (3 : ℤ) ^ (h + 7) ∣ (y : ℤ) - firstBOneX211RootResidue h) :")
+emit("    FirstBOneX211DeepY h y := by")
+emit("  interval_cases h <;>")
+emit("    norm_num [firstBOneX211RootResidue, FirstBOneX211DeepY] at divisible ⊢ <;>")
+emit("    omega")
+emit()
+
+
+def emit_deep_point(h, y):
+    base = f"firstBOneX211_deep_h{h}_y{y}"
+    for side in ["low", "high"]:
+        emit(f"private theorem {base}_{side}")
+        emit("    (j z vOrder : Nat) (j_le : j ≤ 13) (z_upper : z < 3 ^ 13)")
+        if side == "low":
+            emit("    (v_upper : vOrder ≤ 4)")
+        else:
+            emit("    (v_lower : 5 ≤ vOrder) (v_upper : vOrder ≤ 9)")
+        emit("    (v_exact : ExactThreeOrder ((z : ℤ) - 420724) vOrder)")
+        emit(f"    (density : FirstBOneX211DensityEnvelope {h} j {y} z) : False := by")
+        emit("  interval_cases vOrder <;> interval_cases j <;>")
+        emit(
+            "    norm_num [FirstBOneX211DensityEnvelope, firstBOneX211A, firstBOneX211B,"
+        )
+        emit(
+            "      firstBOneX211Q, firstBOneX211J, ExactThreeOrder] at density v_exact <;>"
+        )
+        emit("    omega")
+        emit()
+    emit(f"private theorem {base}")
+    emit("    (j z uOrder vOrder : Nat) (j_le : j ≤ 13) (z_upper : z < 3 ^ 13)")
+    emit(f"    (u_deep : {h} + 7 ≤ uOrder) (order_sum : uOrder + vOrder = {h} + 16)")
+    emit("    (v_shell : (vOrder = 13 ∧ z = 420724) ∨")
+    emit("      (vOrder < 13 ∧ ExactThreeOrder ((z : ℤ) - 420724) vOrder))")
+    emit(f"    (density : FirstBOneX211DensityEnvelope {h} j {y} z) : False := by")
+    emit("  rcases v_shell with top | shell")
+    emit("  · omega")
+    emit("  · rcases shell with ⟨_, v_exact⟩")
+    emit("    have v_at_most_nine : vOrder ≤ 9 := by omega")
+    emit("    by_cases v_low : vOrder ≤ 4")
+    emit(f"    · exact {base}_low j z vOrder j_le z_upper v_low v_exact density")
+    emit("    · have v_high : 5 ≤ vOrder := by omega")
+    emit(f"      exact {base}_high j z vOrder j_le z_upper v_high v_at_most_nine")
+    emit("        v_exact density")
+    emit()
+
+
+for h, y in flat_deep:
+    emit_deep_point(h, y)
+
+emit("private theorem firstBOneX211_of_deep_orders")
+emit("    (h j y z uOrder vOrder : Nat) (h_le : h ≤ 5) (j_le : j ≤ 13)")
+emit("    (y_lower : 22529 ≤ y) (y_upper : y ≤ 51767) (z_upper : z < 3 ^ 13)")
+emit("    (u_deep : h + 7 ≤ uOrder) (order_sum : uOrder + vOrder = h + 16)")
+emit("    (y_divisible :")
+emit("      (3 : ℤ) ^ (h + 7) ∣ (y : ℤ) - firstBOneX211RootResidue h)")
+emit("    (v_shell : (vOrder = 13 ∧ z = 420724) ∨")
+emit("      (vOrder < 13 ∧ ExactThreeOrder ((z : ℤ) - 420724) vOrder))")
+emit("    (density : FirstBOneX211DensityEnvelope h j y z) :")
+emit("    FirstBOneX211Candidate h y z ∧ j = 0 := by")
+emit(
+    "  have y_cases := firstBOneX211_deep_y_cases h y h_le y_lower y_upper y_divisible"
+)
+emit("  unfold FirstBOneX211DeepY at y_cases")
+patterns = ["⟨rfl, rfl⟩"] * len(flat_deep)
+emit("  rcases y_cases with")
+for start in range(0, len(patterns), 5):
+    chunk = patterns[start : start + 5]
+    suffix = " |" if start + len(chunk) < len(patterns) else ""
+    emit("    " + " | ".join(chunk) + suffix)
+for h, y in flat_deep:
+    emit(f"  · exact False.elim (firstBOneX211_deep_h{h}_y{y} j z uOrder vOrder j_le")
+    emit("      z_upper u_deep order_sum v_shell density)")
+emit()
+
+emit(
+    "/-- The bounded valuation and density envelopes leave exactly the ten terminal candidates,"
+)
+emit("and force the tail's first `b` to occur at position zero. -/")
+emit("theorem firstBOneX211Candidate_of_envelopes")
+emit("    (h j y z : Nat) (h_le : h ≤ 5) (j_le : j ≤ 13)")
+emit("    (y_lower : 22529 ≤ y) (y_upper : y ≤ 51767) (z_upper : z < 3 ^ 13)")
+emit("    (valuation : FirstBOneX211ValuationEnvelope h y z)")
+emit("    (density : FirstBOneX211DensityEnvelope h j y z) :")
+emit("    FirstBOneX211Candidate h y z ∧ j = 0 := by")
+emit("  rcases valuation with")
+emit("    ⟨uOrder, vOrder, u_lower, order_sum, v_upper, u_shell, v_shell⟩")
+emit("  rcases u_shell with shallow | deep")
+emit("  · rcases shallow with ⟨u_shallow, u_exact⟩")
+emit(
+    "    exact firstBOneX211_of_shallow_orders h j y z uOrder vOrder h_le j_le y_lower"
+)
+emit("      y_upper z_upper u_lower order_sum u_shallow u_exact v_shell density")
+emit("  · rcases deep with ⟨u_deep, y_divisible⟩")
+emit("    exact firstBOneX211_of_deep_orders h j y z uOrder vOrder h_le j_le y_lower")
+emit("      y_upper z_upper u_deep order_sum y_divisible v_shell density")
+emit()
+emit("end MatrixMortality.ParabolicBlade")
+
+
+def generate() -> str:
+    return "\n".join(out) + "\n"
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--write", action="store_true")
+    parser.add_argument("--check", action="store_true")
+    args = parser.parse_args()
+    source = generate()
+    if args.check:
+        if not SOURCE_MODULE.exists() or SOURCE_MODULE.read_text() != source:
+            raise SystemExit(f"stale generated valuation funnel: {SOURCE_MODULE}")
+        return
+    if args.write:
+        SOURCE_MODULE.write_text(source)
+        return
+    print(source, end="")
+
+
+if __name__ == "__main__":
+    main()
