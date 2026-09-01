@@ -132,7 +132,8 @@ file owns the mathematical stock.
 | [`MM-S49`](#mm-s49-nonempty-marker-all-erasure-extinction) | obstruction | every all-erasure word containing at least one `D_b` misses the next multi-role pole from a lawful two-`c` raw head | formalized | graduated |
 | [`MM-S53`](#mm-s53-complete-all-erasure-first-entry-extinction) | obstruction | every non-singleton all-erasure first block misses the next multi-role pole from a lawful two-`c` raw head | formalized | active |
 | [`MM-S54`](#mm-s54-rightmost-rule-phase-toggle-trichotomy) | structure theorem and obstruction | the rightmost rule has one of three exact phase-toggle depth profiles, and a leading `R_cD_c⁺` first block is impossible | formalized | active |
-| [`MM-S56`](#mm-s56-exact-rule-resonance-grammar) | structure theorem and obstruction | exact comparison depths reduce every later rightmost rule to a finite raw-head and rightmost-`b` resonance grammar | formalized | active |
+| [`MM-S56`](#mm-s56-exact-rule-resonance-grammar) | structure theorem and obstruction | exact comparison depths reduce every later rightmost rule to a finite raw-head and rightmost-`b` resonance grammar | formalized | graduated |
+| [`MM-S60`](#mm-s60-complete-b-bearing-rule-entry-extinction) | obstruction | every b-bearing rightmost-rule block misses the physical multi-role pole shell from a lawful two-`c` raw head | formalized | active |
 | [`R32-S01`](#r32-s01-split-return-normal-form) | structure theorem | rank-two cuts reduce one-unit binary mortality to a `2 × 2` return recurrence | formalized | graduated |
 | [`R32-S02`](#r32-s02-two-plane-edge-square) | structure theorem | two rank-two generators are a two-vertex square of `2 × 2` edges | formalized | graduated |
 | [`R32-O01`](#r32-o01-rank-one-profile-collapse) | obstruction | a rank-one generator reduces mortality to order-at-most-three scalar recurrence zeros | audited | stock |
@@ -4643,7 +4644,7 @@ avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issue
 
 **Kind:** structure theorem and obstruction
 **Evidence:** formalized
-**Disposition:** active
+**Disposition:** graduated
 
 Let `A_n` be the distinguished raw residual for the all-`D_c` word of role width `n`. A lawful
 two-`c` raw head ends in a nonempty run of sevens of width `h≤β−1`. Lean proves the exact
@@ -4702,8 +4703,56 @@ through `allCDeletion_peeledDoubleCHead_hasValue_five`,
 **Artifact:**
 [`audits/m53-exact-rule-resonance-grammar-2026-08-31.md`](audits/m53-exact-rule-resonance-grammar-2026-08-31.md).
 
-**Next:** compare normalized leading coefficients on the three exceptional arms and resolve the
-all-`c` position-two boundary with its stronger two-adic phase divisibility.
+**Next:** the b-bearing coefficient arms graduate into [`MM-S60`](#mm-s60-complete-b-bearing-rule-entry-extinction).
+Resolve the all-`c` position-two boundary with its stronger two-adic phase divisibility.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S60: Complete b-bearing rule-entry extinction
+
+**Kind:** obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+The three equal-depth arms isolated by `MM-S56` have fixed normalized leading coefficients.
+At the exceptional raw head, multiplication by `45` exposes the all-`D_c` coefficient as `2`,
+except for coefficient `4` at the collision `n=2β−1`; the rightmost-`b` upper perturbation and
+the rightmost-rule phase perturbation both have coefficient `2`. No nonempty minimum-depth
+subset of `2 or 4, 2, 2` vanishes modulo five, including every pairwise collision and the
+three-way corner.
+
+At a regular head with final-seven width `h`, the `MM-S56` grammar already forces a nonleading
+rule with erasure-tail width `h`. Multiplication by `81` exposes normalized coefficient `2^h`
+on both the all-`D_c` and phase arms. Their sum is still a five-adic unit after the common
+factor is removed, while the rightmost-`b` arm is strictly deeper. Thus this resonance also
+cannot reach the physical target depth.
+
+`bBearingRightmostRule_rawHead_shell_impossible` consumes the complete `MM-S56` position
+grammar and dispatches both cases. Hence no distinguished two-`c` raw-head entry containing a
+rule and at least one `b` role reaches a multi-role pole.
+
+**Scope:** the theorem covers rightmost-rule blocks followed only by erasures, from the
+distinguished decimal-unit two-`c` raw head to the physical multi-role shell. It does not cover
+the all-`c` position-two rule boundary, generalized later carriers, or singleton targets.
+
+**Use:** delete the entire b-bearing rule branch from the distinguished first-entry grammar.
+The only rule-bearing raw-entry constructor left by `MM-S56` is the all-`c` position-two
+boundary.
+
+**Formalization:**
+[`MatrixMortality/DecimalSetterRuleCoefficient.lean`](MatrixMortality/DecimalSetterRuleCoefficient.lean),
+through `exceptionalThreeLead_hasValue`, `exceptionalAllC_scaled_lead`,
+`exceptionalBBearingRightmostRule_rawHead_shell_impossible`,
+`regularAllC_scaledEightyOne_lead`,
+`regularBBearingRightmostRule_rawHead_shell_impossible`, and
+`bBearingRightmostRule_rawHead_shell_impossible`.
+
+**Artifact:**
+[`audits/m53-b-bearing-rule-entry-extinction-2026-08-31.md`](audits/m53-b-bearing-rule-entry-extinction-2026-08-31.md).
+
+**Next:** resolve the all-`c` position-two rule boundary using its stronger two-adic phase
+divisibility, then assemble the complete distinguished raw-head first-entry theorem.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).

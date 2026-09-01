@@ -983,6 +983,14 @@ the position-two boundary, while the exceptional head retains the phase frontier
 two explicit rightmost-`b` relative-position resonances. The next cut is coefficient-level
 cancellation on those exceptional arms and the position-two boundary.
 
+[`MM-S60`](SALVAGE.md#mm-s60-complete-b-bearing-rule-entry-extinction) executes that coefficient
+cut and removes the entire b-bearing branch. At the exceptional head, the three scaled leading
+coefficients are `2 or 4`, `2`, and `2`; every possible minimum-depth subset is nonzero modulo
+five. At a regular head, the two tied arms both normalize to `2^h`, and the marker arm is
+strictly deeper. The complete S56 positional grammar therefore has no b-bearing survivor. The
+sole distinguished raw-head rule constructor still open is the all-`c` position-two boundary;
+later generalized carriers and singleton targets remain outside this assembly.
+
 The ternary and decimal branches now separate at their first multi-transfer front.
 [`MM-S37`](SALVAGE.md#mm-s37-decimal-three-shape-frontier-extinction) substitutes each of the
 three role shapes left by the swapped ternary gate into the decimal carrier equation. All are
