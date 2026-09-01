@@ -1774,6 +1774,12 @@ Record [`MM-S102`](SALVAGE.md#mm-s102-long-double-c-relative-gap-resonance) reso
 divide `10^(β−s)−1`. Every ambient prime absent from the current lower spelling is therefore an
 explicit relative-position decimal-period resonance, rather than an arbitrary fringe factor.
 
+Record [`MM-S103`](SALVAGE.md#mm-s103-long-terminal-head-collapse-extinction) kills the
+support-saturated `cb` chamber without coprimality. The terminal head satisfies both `9H=G` and
+`H−10μ=−q`; with `E=9q`, the exact three-block equation factors by nonzero `Gq` and becomes
+`S(P−V)=7μGA`. This is precisely the `R_c`-rooted two-block singleton equation excluded by
+`MM-S89`. Hence every long `cb` three-block pole is impossible, for either singleton target.
+
 Record [`MM-S37`](SALVAGE.md#mm-s37-decimal-three-shape-frontier-extinction) separates the
 ternary and decimal first-multi-transfer fronts. The single theorem
 `DecimalSetterDepth.firstMultiTransfer_threeShapeFrontier_impossible` consumes the three role
@@ -1829,7 +1835,7 @@ the periodic saturation theorem and its remaining arithmetic boundary are recons
 formalization and the shell attack are tracked in
 [#7](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/7).
 
-The `M₅(3)` delimiter attack has thirty-one foundational records:
+The `M₅(3)` delimiter attack has thirty-two foundational records:
 
 | Record | Formalization obligation |
 | --- | --- |
@@ -1858,6 +1864,7 @@ The `M₅(3)` delimiter attack has thirty-one foundational records:
 | [`MM-S100`](SALVAGE.md#mm-s100-complete-three-block-singleton-next-extinction) | quotient-one and mixed-prime extinction of both singleton interveners, forced multi/multi source, and unconditional three-block classifier |
 | [`MM-S101`](SALVAGE.md#mm-s101-long-r_c-peeled-head-support-gate) | full long-head support product, exact `cb` saturation identity, `cc` fringe-residue gate, and arbitrary-divisor transfer into the current lower code |
 | [`MM-S102`](SALVAGE.md#mm-s102-long-double-c-relative-gap-resonance) | exact smaller-gap head identity, `q_β∣Vq_s` support law, common-divisor decimal-period equivalence, and exceptional-prime grammar |
+| [`MM-S103`](SALVAGE.md#mm-s103-long-terminal-head-collapse-extinction) | terminal-head calibrations, exact collapse to the two-block singleton equation, and complete long-`cb` chamber extinction |
 | [`MM-S01`](SALVAGE.md#mm-s01-square-run-projective-normal-form) | invariant square-run plane, invertible `2 × 2` transfer, Möbius normalization, rank-one fracture grammar, and equivalence with pole avoidance |
 | [`MM-S02`](SALVAGE.md#mm-s02-reset-zero-projective-peeling) | scaled transfer identity, exact two-shell classification of all poles, and reset-zero one-transfer avoidance |
 | [`MM-O16`](SALVAGE.md#mm-o16-exact-delimiter-pair-obstruction) | generic ignored-pair immortality is formalized; paired common-kernel and cubic companion specializations are audited |

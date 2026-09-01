@@ -1907,6 +1907,12 @@
 'MatrixMortality.DecimalSetterBridgeRay.singletonPole_threeBlock_ruleCRoot_long_doubleC_exceptionalPrime_period' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.DecimalSetterBridgeRay.singletonPole_threeBlock_ruleCRoot_long_cb_forces_twoBlockPole' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterBridgeRay.singletonPole_threeBlock_ruleCRoot_long_cb_impossible' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.DecimalSetterAncestry.carrierFactor_multiToSingleton_quotientGate' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]

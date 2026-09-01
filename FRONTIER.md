@@ -1215,7 +1215,14 @@ classification for `cc`, and a genuinely different second-predecessor or size ar
 `1≤s≤β−1` with `9(H−10μ)=q_s−10q_β`, hence every pole forces `q_β∣V_current q_s`. A prime factor
 absent from the current lower code must divide both `q_s` and
 `10^(β−s)−1`. The live `cc` task is now the intersection of this finite relative-position
-resonance with the lower spelling; the support-saturated `cb` task is unchanged.
+resonance with the lower spelling; the support-saturated `cb` task is unchanged at this record
+boundary.
+
+[`MM-S103`](SALVAGE.md#mm-s103-long-terminal-head-collapse-extinction) kills that apparently
+saturated `cb` task by retaining the full equation. The terminal head is exactly the calibrated
+`R_c` code, so `9H=G`, `H−10μ=−q`, and `E=9q` collapse the three-block pole to the already-empty
+two-block singleton equation. The long `R_c` head frontier is now only `cc`, under the finite
+relative-gap resonance of `MM-S102`.
 
 The ternary and decimal branches now separate at their first multi-transfer front.
 [`MM-S37`](SALVAGE.md#mm-s37-decimal-three-shape-frontier-extinction) substitutes each of the

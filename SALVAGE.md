@@ -160,6 +160,7 @@ file owns the mathematical stock.
 | [`MM-S100`](#mm-s100-complete-three-block-singleton-next-extinction) | obstruction and classifier | every lawful three-block singleton pole has both non-root blocks multi-role; the unconditional survivor grammar is exactly the established deep-root or `R_c` multi/multi chamber | formalized | active |
 | [`MM-S101`](#mm-s101-long-r_c-peeled-head-support-gate) | structure theorem and obstruction | every long `R_c` pole forces gap support through `H−10μ`; the `cb` head is exactly saturated, while the `cc` head exposes the fringe residue `18F−35` | formalized | active |
 | [`MM-S102`](#mm-s102-long-double-c-relative-gap-resonance) | structure theorem and obstruction | every long `cc` pole forces `q_β∣Vq_s` for one `1≤s≤β−1`; every absent ambient prime is confined to a smaller-gap decimal-period resonance | formalized | active |
+| [`MM-S103`](#mm-s103-long-terminal-head-collapse-extinction) | obstruction | the support-saturated long `cb` three-block equation collapses exactly to the already-impossible two-block singleton equation, so the entire chamber is empty | formalized | active |
 | [`R32-S01`](#r32-s01-split-return-normal-form) | structure theorem | rank-two cuts reduce one-unit binary mortality to a `2 × 2` return recurrence | formalized | graduated |
 | [`R32-S02`](#r32-s02-two-plane-edge-square) | structure theorem | two rank-two generators are a two-vertex square of `2 × 2` edges | formalized | graduated |
 | [`R32-O01`](#r32-o01-rank-one-profile-collapse) | obstruction | a rank-one generator reduces mortality to order-at-most-three scalar recurrence zeros | audited | stock |
@@ -6317,6 +6318,53 @@ through `peeledDoubleCHead_unit_gapRelation`,
 
 **Next:** intersect the finite relative-position resonance with the current lower spelling; the
 support-saturated `cb` branch still requires a second predecessor or coefficient-size attack.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S103: Long terminal-head collapse extinction
+
+**Kind:** obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+The support-saturated `cb` chamber left by `MM-S101` is nevertheless algebraically empty. Exact
+suffix exhaustion reduces a three-block pole to
+
+```text
+H((EP+GV)S−7EμGA)=10GVμS.                           (1)
+```
+
+The terminal peeled head is the calibrated `R_c` root code. It therefore obeys
+
+```text
+9H=G,          H−10μ=−q,          E=9q.             (2)
+```
+
+Substitution and cancellation of the nonzero product `Gq` turn (1) into
+
+```text
+S(P−V)=7μGA.                                        (3)
+```
+
+This is literally the two-block singleton-pole equation over `R_c` for the same current and
+target. The physical current and literal root satisfy `BlocksLaw`, so the complete two-block
+extinction in `MM-S89` contradicts (3) for both singleton letters.
+
+**Scope:** `β≥3`, an actual `R_c`-rooted singleton pole with multi-role erasure-ending current
+and intervening blocks, a long current, and intervening role letters beginning `cb`. The result
+is unconditional inside that chamber and uses no support-coprimality premise.
+
+**Formalization:**
+[`MatrixMortality/DecimalSetterThreeBlockLongTerminal.lean`](MatrixMortality/DecimalSetterThreeBlockLongTerminal.lean),
+through `singletonPole_threeBlock_ruleCRoot_long_cb_forces_twoBlockPole` and
+`singletonPole_threeBlock_ruleCRoot_long_cb_impossible`.
+
+**Artifact:**
+[`audits/m53-long-terminal-head-collapse-2026-09-01.md`](audits/m53-long-terminal-head-collapse-2026-09-01.md).
+
+**Next:** the long `R_c` head grammar now contains only `cc`; intersect its `MM-S102`
+relative-gap resonance with the current lower spelling.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
