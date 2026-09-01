@@ -1176,6 +1176,15 @@ to the physical positive words and proves projective source injectivity for word
 `71,192+4|β|`. See `R32-S76` and
 [`audits/m32-cubic-free-source-probe-2026-09-01.md`](audits/m32-cubic-free-source-probe-2026-09-01.md).
 
+`CubicContinuantTerminalRayNoGo` closes the obvious pop-reader route through the fixed ray
+connector. It defines the full segmented grammar of radix writers, positive readers, and all four
+terminal translations, proves that every product has diagonal ratio `(25/4)^h`, and computes the
+transported transverse ratio as `(9/340)(25/4)^h`. Its `17`-adic valuation is always `-1`, whereas
+both transverse inverse ratios have valuation zero. Lean proves the resulting direct
+projective-inverse exclusion. The theorem is connector-specific, not a ban on alternative heads
+or tails. See `R32-S77` and
+[`audits/m32-cubic-terminal-ray-no-go-2026-09-01.md`](audits/m32-cubic-terminal-ray-no-go-2026-09-01.md).
+
 The rank-(2,2) graph is no longer an independent residue. `RankTwoPunctuation` proves that every
 compatible square with one rank-one loop and three units transports exactly to the existing raw
 reverse compiler [`R32-M01`](SALVAGE.md#r32-m01-generic-reverse-edge-compiler). Its intrinsic

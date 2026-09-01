@@ -1878,6 +1878,16 @@ either parse into the intended machine or cannot hit its accepting incidence. Se
 [`R32-S76`](SALVAGE.md#r32-s76-one-wait-decoder-for-the-free-source-memory) and
 [`m32-cubic-free-source-probe-2026-09-01.md`](audits/m32-cubic-free-source-probe-2026-09-01.md).
 
+The direct inverse-reader route through the current fixed connector is closed. Every segmented
+terminal word built from radix writers, positive readers, and all four terminal translations has
+diagonal ratio `(25/4)^h`; after the `[1,15,8]`/`[13]` ray connector its transverse multiplier
+has `17`-adic valuation `-1`. Both required pump inverses have valuation zero. This is an all-word
+obstruction within that grammar, but it does not cover alternative connectors: several positive
+tails already remove the `17`-adic defect. The live route is a non-inverse height gate, not more
+search behind the fixed connector. See
+[`R32-S77`](SALVAGE.md#r32-s77-fixed-connector-cannot-pop-the-transverse-stack) and
+[`m32-cubic-terminal-ray-no-go-2026-09-01.md`](audits/m32-cubic-terminal-ray-no-go-2026-09-01.md).
+
 ### ReturnSquare laboratory
 
 [`R32-S03`](SALVAGE.md#r32-s03-returnsquare-normal-form) is the first completely normalized
