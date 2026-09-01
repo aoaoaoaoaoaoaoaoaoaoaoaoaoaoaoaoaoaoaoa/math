@@ -150,6 +150,7 @@ file owns the mathematical stock.
 | [`MM-S86`](#mm-s86-exact-deletion-c-contraction-chamber) | structure theorem and obstruction | singleton `D_c` contracts Farey height exactly in one primitive gcd channel with a sharp gap inequality | formalized | active |
 | [`MM-S87`](#mm-s87-empty-front-backward-chamber-cut) | structure theorem and obstruction | no `b`-leading physical block can pull an empty-front seed into the deletion-contraction chamber; the canonical `R_c;D_b` branch has a sharp near-diagonal gap | formalized | active |
 | [`MM-S88`](#mm-s88-conditional-post-rcdb-no-reentry) | structure theorem and obstruction | after the literal canonical `R_c;D_b;D_c` history, an exact two-state affine automaton sends every next physical block outside the deletion-contraction chamber | formalized | active |
+| [`MM-S89`](#mm-s89-primitive-physical-pullback-cancellation) | structure theorem and obstruction | exact gcd arithmetic decides when raw half-head divisibility survives primitive inverse-block normalization | formalized | active |
 | [`R32-S01`](#r32-s01-split-return-normal-form) | structure theorem | rank-two cuts reduce one-unit binary mortality to a `2 × 2` return recurrence | formalized | graduated |
 | [`R32-S02`](#r32-s02-two-plane-edge-square) | structure theorem | two rank-two generators are a two-vertex square of `2 × 2` edges | formalized | graduated |
 | [`R32-O01`](#r32-o01-rank-one-profile-collapse) | obstruction | a rank-one generator reduces mortality to order-at-most-three scalar recurrence zeros | audited | stock |
@@ -5939,6 +5940,80 @@ through `postRcDbIntercept_eq_closed_of_seed`, `postRcDbIntercept_upper`,
 **Next:** classify the noncanonical full-`3H` contraction survivors by their exact intercept
 shift. The next global cut must cover the `(R_c,D_b^k)` equal-spelling families and the longer
 modular-return branch; canonical no-reentry alone cannot close the ancestry tree.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S89: Primitive physical pullback cancellation
+
+**Kind:** structure theorem and obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+For positive natural incoming coordinates `(n,d)`, a physical inverse block with punctuated upper
+code `P`, lower code `V`, and upper power `A` has raw pair
+
+```text
+T=rn+Hd,
+Nraw=PT−HμAd,
+Draw=VT.
+```
+
+The formula is proved directly from the rational inverse action whenever the displayed natural
+subtraction is genuine. Modulo the half-head `h=H/2`,
+
+```text
+Nraw ≡ Prn  (mod h).
+```
+
+Since `gcd(h,r)=1`, this gives the exact incoming-numerator channel
+
+```text
+h∣Nraw ↔ h/gcd(h,n) ∣ P.                       (1)
+```
+
+Raw divisibility is not enough after primitive reduction. If `Nraw=h·s`, Lean factors
+
+```text
+gcd(hs,Draw)=gcd(s,Draw)·gcd(h,Draw/gcd(s,Draw))
+```
+
+and proves the sharp survival criterion
+
+```text
+h ∣ Nraw/gcd(Nraw,Draw)
+  ↔ gcd(h,Draw/gcd(s,Draw))=1.                  (2)
+```
+
+The module also exposes the target upper-code recurrence
+
+```text
+c : Z ↦ 3Z+1,
+b : Z ↦ 9·3^β Z + 6·3^β−2,
+```
+
+and proves that the `b` step fixes residue one modulo `h`.
+
+**Scope:** positive natural coordinates and a genuine raw subtraction. Equations (1) and (2)
+are arithmetic criteria for a supplied block; they do not prove that its codes are physical,
+classify `c`-leading words, instantiate an `MM-O29` seed, establish encoded-entry reachability,
+or prove a pole.
+
+**Use:** pull the `MM-S86` half-head condition backward without discarding the normalization gcd.
+Any proposed exact-block classification must satisfy both (1) and (2), not raw congruence alone.
+
+**Formalization:**
+[`MatrixMortality/SwappedSetterPrimitivePullback.lean`](MatrixMortality/SwappedSetterPrimitivePullback.lean),
+through `deletionCHalfHead_dvd_pullbackRawNumerator_iff`,
+`halfHead_dvd_primitiveNumerator_iff`, and
+`deletionCHalfHead_dvd_primitivePullback_iff`.
+
+**Artifact:**
+[`audits/m53-primitive-pullback-2026-09-01.md`](audits/m53-primitive-pullback-2026-09-01.md).
+
+**Next:** normalize the public empty-front seed cores to a primitive pair and express
+`gcd(h,n)` directly in the physical target code. Then combine (2) with the `c`-leading spelling
+grammar; do not replace post-cancellation survival by raw divisibility.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).

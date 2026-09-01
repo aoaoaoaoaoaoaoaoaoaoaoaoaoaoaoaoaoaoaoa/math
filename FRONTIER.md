@@ -1209,6 +1209,15 @@ noncanonical contraction survivors by their post-`D_c` intercept shift. Prove a 
 family of admissible shifts or return an infinite family whose successor can re-enter the
 chamber; do not generalize the canonical lower bound to these survivors.
 
+[`MM-S89`](SALVAGE.md#mm-s89-primitive-physical-pullback-cancellation) isolates the exact
+normalization seam for that classification. For incoming natural coordinates `(n,d)`, raw
+half-head divisibility is equivalent to `h/gcd(h,n)∣P`; after writing the raw numerator as `h·s`,
+the whole `h` survives primitive reduction exactly when
+`gcd(h, rawDenominator/gcd(s,rawDenominator))=1`. The upper target code also has explicit affine
+append recurrences, with `b` fixing residue one modulo `h`. The live task is now to instantiate
+these criteria on the polynomial `MM-O29` seed and then combine them with physical spelling; the
+generic arithmetic theorem alone asserts no grammar, ancestry, or pole.
+
 The remaining ternary obligation is now the **nonzero history-defect branch** of the global
 earliest-pole reduction. In the normalized coordinate `δ=D/y`, the complete physical recurrence
 is
@@ -1229,7 +1238,7 @@ erasure tile, not `β` of them. A complete proof must either force the long tail
 false pole or extend the carry/cylinder invariant to arbitrary physical target suffixes. Fixed
 residue and unit projections are empirically saturated, and the exact carry window grows with
 carrier height. None of `MM-S51`, `MM-S55`, `MM-S57`, `MM-S59`, `MM-S61`, `MM-S63`, `MM-S64`,
-`MM-S68`, `MM-S69`, `MM-S71`, `MM-O27`, `MM-S73`, `MM-S76`, `MM-O29`, `MM-S86`, `MM-S87`, or `MM-S88`
+`MM-S68`, `MM-S69`, `MM-S71`, `MM-O27`, `MM-S73`, `MM-S76`, `MM-O29`, `MM-S86`, `MM-S87`, `MM-S88`, or `MM-S89`
 alone proves projective avoidance.
 Exact bidirectional diagnostics for the ternary swap at `β=3`, body `bbcc`, exclude every
 false-pole word of at most six projective blocks when each regular block has

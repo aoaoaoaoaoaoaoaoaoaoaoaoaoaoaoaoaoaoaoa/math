@@ -170,6 +170,7 @@ import MatrixMortality.SwappedSetterEmptyFrontRay
 import MatrixMortality.SwappedSetterDeletionCContraction
 import MatrixMortality.SwappedSetterEmptyFrontChamber
 import MatrixMortality.SwappedSetterPostRcDbChamber
+import MatrixMortality.SwappedSetterPrimitivePullback
 import MatrixMortality.SchottkyPunctuation
 import MatrixMortality.TwoStateObstructions
 import MatrixMortality.ForcedRuleCCompanion
