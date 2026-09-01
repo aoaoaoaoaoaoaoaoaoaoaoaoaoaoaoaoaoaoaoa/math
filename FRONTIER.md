@@ -1081,6 +1081,19 @@ this is `3^(β−1)∣n`. The constraint is sharp on the distinguished deletion 
 primitive numerator already contains that power; it is a backward-ancestry interface, not a
 contradiction.
 
+[`MM-S68`](SALVAGE.md#mm-s68-backward-numerator-resonance) pulls the selected numerator
+cylinder through the preceding physical block. If its nonzero primitive successor numerator
+contains `3^(β−1)` and the preceding upper length is `a`, the preceding normalization discards
+exactly `a` powers of three and the antecedent satisfies
+
+```text
+3^(a+β−1) ∣ (P_we−V_wm)−μ3^a e.
+```
+
+For literal `D_c`, this cylinder is exactly `3^β∣e−m`. The zero-numerator fork is terminal.
+Hence two final literal deletions before a full-tail pole either expose a genuine source halt or
+toggle the carrier before them into the full-gap cylinder.
+
 The remaining ternary obligation is now the **nonzero history-defect branch** of the global
 earliest-pole reduction. In the normalized coordinate `δ=D/y`, the complete physical recurrence
 is
@@ -1091,14 +1104,16 @@ is
 
 The distinguished coordinate `R/H` is a target threshold exactly for terminal equality `P=V`.
 The first `D_c` and `D_b` images lie on opposite sides of zero, so a one-sided real trap is
-already impossible. On the full-erasure-tail branch, the live question is backward ancestry of
-the `MM-S64` predecessor cylinder. Earliestness has not yet been used. More importantly, this
+already impossible. On the full-erasure-tail branch, backward ancestry now has an exact
+two-state numerator/gap toggle through literal `D_c`; the live local question is the first
+non-`D_c` predecessor and the exact full-gap-zero return. Earliestness has not yet been used.
+More importantly, this
 branch is not the global target grammar: a physical role block is known only to end in one
 erasure tile, not `β` of them. A complete proof must either force the long tail at an earliest
 false pole or extend the carry/cylinder invariant to arbitrary physical target suffixes. Fixed
 residue and unit projections are empirically saturated, and the exact carry window grows with
-carrier height. None of `MM-S51`, `MM-S55`, `MM-S57`, `MM-S59`, `MM-S61`, `MM-S63`, or `MM-S64`
-alone proves projective avoidance.
+carrier height. None of `MM-S51`, `MM-S55`, `MM-S57`, `MM-S59`, `MM-S61`, `MM-S63`, `MM-S64`, or
+`MM-S68` alone proves projective avoidance.
 Exact bidirectional diagnostics for the ternary swap at `β=3`, body `bbcc`, exclude every
 false-pole word of at most six projective blocks when each regular block has
 role length at most three; this is computational evidence only.

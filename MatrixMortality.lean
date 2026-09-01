@@ -159,6 +159,7 @@ import MatrixMortality.SwappedSetterThresholdCarry
 import MatrixMortality.SwappedSetterCarrierGap
 import MatrixMortality.SwappedSetterCarrierResonance
 import MatrixMortality.SwappedSetterPredecessorCylinder
+import MatrixMortality.SwappedSetterBackwardResonance
 import MatrixMortality.SchottkyPunctuation
 import MatrixMortality.TwoStateObstructions
 import MatrixMortality.ForcedRuleCCompanion
