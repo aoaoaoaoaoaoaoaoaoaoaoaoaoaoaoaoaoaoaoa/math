@@ -1727,6 +1727,11 @@ The family is now sharply fenced:
   bounds its head by the absolute upper integral adjugate coordinate. The exceptional fraction
   `1` is handled exactly as the zero-power resonance, by
   [`R32-S55`](SALVAGE.md#r32-s55-effective-returnsquare-decision).
+- the rightmost pure-denominator inverse step contracts the terminal target below its quotient
+  by the selected scale. A word `head::(properTail++[last])` therefore obeys the strict budget
+  `q^(last+1)(q^(head+1)+Σ_properTail(q^(wait+1)−1))<B`. Since every nonresonant zero needs at
+  least three returns, mortality is resonance-only throughout `B≤2q²−q`, by
+  [`R32-S56`](SALVAGE.md#r32-s56-terminal-weighted-shallow-classification).
 - replacing common powers of one base by a scale alphabet totally ordered under divisibility is
   unsound: `[3,15,3,3,15,3,3,3]` has the exact nonresonant root `d=25/27`, by
   [`R32-O25`](SALVAGE.md#r32-o25-divisibility-chain-returnsquare-fracture).

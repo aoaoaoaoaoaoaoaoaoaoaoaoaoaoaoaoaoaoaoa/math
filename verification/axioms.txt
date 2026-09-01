@@ -1429,6 +1429,191 @@
 'MatrixMortality.ReturnSquare.positiveBridge_zero_positive_valuations_cross_mul' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.ReturnSquare.fractionIntegralWord_transpose_mul_gauge' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnSquare.fractionPullback_mulVec_terminalPredecessor' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnSquare.fractionPullback_terminal_incidence_iff_eq_predecessor' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnSquare.fractionPullback_mulVec_predecessor' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnSquare.fractionPullback_incidence_iff_eq_predecessor' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnSquare.fractionPredecessor_hasValue_of_target_below' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnSquare.fractionPredecessor_hasValue_of_target_above' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnSquare.fractionPredecessor_hasValue_of_numerator_wall' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnSquare.fractionPredecessor_eq_zero_iff_of_numerator_wall' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnSquare.fractionPredecessor_hasValue_of_equalScale_residue' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnSquare.fractionPredecessor_isUnit_of_equalScale_residue_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnSquare.fractionPredecessor_hasValue_of_denominatorScale_residue' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnSquare.fractionPredecessor_eq_of_target_scale_eq_denominator' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnSquare.fractionPredecessor_hasValue_of_critical_scale_wall' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnSquare.evenScales_threeFourths_wall_fracture' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnSquare.evenScales_threeFourths_wall_values' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnSquare.fractionIntegralGenerator_isMortal_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnSquare.mapped_fractionIntegralGenerator_positiveRay' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnSquare.mapped_fractionIntegralGenerator_signedRay' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnSquare.not_physical_isMortal_of_fractionFiniteWall' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnSquare.isMortal_forces_fraction_modEq_one' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnSquare.isMortal_forces_fraction_modEq_neg_one' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnSquare.isMortal_forces_prime_dvd_fraction_sub_of_dvd_q_sub_one' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnSquare.isMortal_forces_prime_dvd_fraction_sign_of_dvd_q_add_one' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnSquare.fractionPredecessorChain_centerScales' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnSquare.fractionPredecessorChain_centerScales_terminal_ratio' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnSquare.fractionCriticalIntegralResidue_ne_zero_of_mortal' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnSquare.fractionCriticalResidue_geometric_ne_zero_of_mortal' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnSquare.fractionPredecessor_equalScale_zero_then_center_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnSquare.fractionEqualScaleZeroCenterResidue_ne_zero_of_mortal' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnSquare.not_fractionPredecessor_equalScale_zero_then_odd_center_of_mortal' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnSquare.fractionRayCross_pullbackWord' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ReturnSquare.positiveBridge_fraction_cons_zero_iff_tailAdjugate' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnSquare.positiveBridge_fraction_zero_positive_valuation_tail_certificate' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnSquare.fractionIntegralTailPredecessorState_decomposition' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnSquare.fractionIntegralTail_deep_incidence_synchronizes' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnSquare.positiveBridge_pureDenominator_deep_valuation_certificate' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnSquare.positiveBridge_pureDenominator_two_deep_primes_synchronize' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnSquare.fractionIntegralTail_middle_incidence_headExponent_le' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnSquare.fractionIntegralTail_incidence_firstScale_dvd_restLower' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnSquare.positiveBridge_pureDenominator_resonance_or_firstTailScale_dvd' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnSquare.positiveBridge_pureDenominator_rest_deep_pivot_certificate' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnSquare.fractionPredecessorRun_add_cost_le' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnSquare.fractionTailPredecessorState_pure_lower_pos_and_ratio' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnSquare.positiveBridge_pureDenominator_zero_run_eq' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnSquare.positiveBridge_pureDenominator_zero_add_cost_le' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnSquare.positiveBridge_pureDenominator_zero_tail_scale_lt' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnSquare.positiveBridge_pureDenominator_zero_length_bound' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnSquare.mem_boundedWaitWords_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ReturnSquare.exists_positiveBridge_pureDenominator_zero_iff_candidates_nonempty' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnSquare.fractionIntegralAdjugateTailState_ne_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnSquare.exists_positiveBridge_positiveNumerator_zero_iff_all_candidates_nonempty' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnSquare.not_exists_positiveBridge_zero_of_numerator_prime_not_dvd_base' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnSquare.physical_isMortal_positiveNumerator_iff_all_candidates_nonempty' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnSquare.physicalPositiveFractionDecidable' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnSquare.positiveBridge_pureDenominator_zero_terminal_budget' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnSquare.positiveBridge_pureDenominator_shallow_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnSquare.physical_isMortal_pureDenominator_shallow_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnSquare.physical_isMortal_neg_one_resonance' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnSquare.fractionTerminalPredecessor_hasValue' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnSquare.fractionTerminalPredecessor_valuation_nonpositive_of_critical' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnSquare.fractionTerminalPredecessor_geometric_hasValue' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnSquare.positiveBridge_fraction_zero_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.ReturnSquareTax.finiteReturnHankel_det' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.ReturnSquareTax.reversibleStack_card_lower_bound' depends on axioms: [propext,
  Classical.choice,

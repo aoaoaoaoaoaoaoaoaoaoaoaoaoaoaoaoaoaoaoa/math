@@ -642,6 +642,19 @@ finite word set by exact bridge evaluation is equivalent to physical mortality, 
 constructs a `Decidable` term from that equivalence. ReturnSquare is therefore closed as a
 decision problem; resonance-only classification at composite bases remains a finite question.
 
+The pure-denominator classifier now has a quadratic resonance-only chamber. If the rightmost
+tail scale is `τ=q^(last+1)`, its terminal inverse is strictly below `B/τ`. Applying global
+descent to the proper tail yields
+
+```text
+τ(q^(head+1)+Σ_properTail(q^(wait+1)−1))<B.
+```
+
+A nonresonant zero has at least three positive returns, so the proper tail is nonempty and the
+left side is at least `q(2q−1)`. Lean therefore proves that every `2≤B≤2q²−q` is mortal exactly
+when `B=q^(head+1)`. This strictly improves the raw additive floor `3q−2` and supplies a
+multiplicative pruning law for the remaining finite candidates.
+
 The common-geometric-base hypothesis cannot be weakened to total divisibility of an arbitrary
 scale alphabet. Lean checks that `[3,15,3,3,15,3,3,3]` is pairwise totally ordered under
 divisibility, yet its normalized bridge vanishes at the nonresonant root `d=25/27`. This is an
