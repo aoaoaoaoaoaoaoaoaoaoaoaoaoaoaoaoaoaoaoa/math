@@ -148,6 +148,7 @@ file owns the mathematical stock.
 | [`R32-S73`](#r32-s73-reader-writer-affine-quotient-normal-form) | structure theorem | the four cubic radix writer-reader macros have a complete decidable affine normal form for physical projective equality | formalized | active |
 | [`R32-S74`](#r32-s74-selected-comparator-self-enforces-cleanup) | compiler mechanism | the fixed source selector rejects every wrong reader-cleanup count as well as every bit mismatch | formalized | active |
 | [`R32-S75`](#r32-s75-free-binary-source-stabilizer-fibre) | obstruction and compiler mechanism | the separator-source stabilizer contains a projectively free positive binary monoid, yielding `2^n` distinct selected-fibre products at every width | formalized | active |
+| [`R32-S76`](#r32-s76-one-wait-decoder-for-the-free-source-memory) | compiler mechanism | one positive wait makes every address in the free source-stabilizer memory projectively observable and exactly decodable | formalized | active |
 | [`R32-M01`](#r32-m01-generic-reverse-edge-compiler) | partial mechanism | projective incidence generically embeds into a compatible two-plane edge square | formalized | active |
 | [`R32-M02`](#r32-m02-finite-quotient-sieve) | partial mechanism | finite monoid quotients give complete modular no-certificates for fixed candidates | formalized | active |
 | [`R32-M03`](#r32-m03-two-scale-return-conversion) | partial mechanism | a minimal two-scale return pencil has nonresonant multi-return zeros | formalized | active |
@@ -5650,6 +5651,70 @@ with audit
 contains unbounded free binary memory. Any sound compiler must either observe and decode that
 memory in a later context or prove that its entire accepting-state action is a lawful epsilon
 semantics. A context-free collapse is invalid because these matrices are projectively distinct.
+
+### R32-S76: One-wait decoder for the free source memory
+
+**Kind:** compiler mechanism
+**Evidence:** formalized
+**Disposition:** active
+
+The free source-stabilizer payload of `R32-S75` is dynamically observable. Append the single
+positive wait `[1]` after its safe suffix. In the transverse common-ray basis, the probed source
+is a nonzero scale of
+
+```text
+(z,1)ᵀ,                 z = -26658067/399826944.             (1)
+```
+
+For a binary address `β`, its normalized transverse product sends (1) to a source whose
+projective coordinate is
+
+```text
+χ(β) = (z + code(reverse β)) / ∏ ratio(βᵢ),
+ratio(0)=1/625,          ratio(1)=197/336000.                 (2)
+```
+
+The cleared numerator in (2) is a `197`-adic unit. Hence
+
+```text
+v₁₉₇(χ(β)) = -#₁(β),                                      (3)
+```
+
+which recovers the number of one-bits. The empty address has negative coordinate; every
+nonempty address has positive numerator in one explicit shell narrower than a factor of `625`.
+After (3), projective equality therefore also forces equal zero-bit counts. Cancelling the
+common denominator products then gives equality of the affine radix codes, whose existing
+injectivity recovers the complete ordered bit word.
+
+Physically, if `Aword` is the fixed positive source-return prefix and `S` the safe suffix, then
+
+```text
+Rβ = Aword ++ E(β) ++ S ++ [1],
+|Rβ| = 71192 + 4|β|.                                       (4)
+```
+
+Every wait in `Rβ` is positive, and Lean proves
+
+```text
+Π(Rα)c ∼ Π(Rβ)c   implies   α=β.                            (5)
+```
+
+**Scope:** the exact chart (1), modulo-`197` noncancellation, valuation law (3), sign split,
+explicit shell bounds and separation, coordinate injectivity, normalized source transport,
+physical realization, positivity, length (4), and projective source injectivity (5) are Lean
+checked. This does not yet compose the decoded ray with the selected zero comparator or prove a
+converse for arbitrary unsegmented positive-wait words.
+
+**Artifact:**
+`CubicReturn.NonPure.falseWaitOneProbeCoordinate_injective` and
+`falseWaitReadableSourceMemoryWord_source_projectively_injective` in
+[`CubicContinuantFreeSourceProbe.lean`](MatrixMortality/CubicContinuantFreeSourceProbe.lean),
+with audit
+[`m32-cubic-free-source-probe-2026-09-01.md`](audits/m32-cubic-free-source-probe-2026-09-01.md).
+
+**Use:** treat the `R32-S75` stabilizer fibre as a genuine write/store/read channel rather than
+dead hidden state. The sharp compiler seam is now to route this readable projective source into
+the selected mismatch-zero gate while controlling arbitrary raw-word block formation.
 
 ### R32-M01: Generic reverse edge compiler
 

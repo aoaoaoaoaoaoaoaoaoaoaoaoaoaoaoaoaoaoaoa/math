@@ -1925,6 +1925,70 @@
 'MatrixMortality.CubicReturn.NonPure.falseWaitSelectedFreeSourceFibreFamily_card' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitOneProbe_source_chart' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitOneProbe_source_basis' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitOneProbeAffineResidue_ne_target' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitOneProbeAffineNumerator_not_dvd' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitOneProbeAffineNumerator_val197' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitOneProbeAffineNumerator_ne' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitOneProbeCoordinate_val197' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitOneProbeAffineNumerator_shell' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitOneProbeShell_separated' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitOneProbeCoordinate_nil_neg' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitOneProbeCoordinate_pos' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitOneProbeCoordinate_injective' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitOneProbeNormalizedLoop_source' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitOneProbeCoordinate_eq_entries' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitOneProbeNormalizedLoop_source_projectively_injective' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitOneProbeWord_source_chart' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitOneProbeWord_source_projectively_injective' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitOneProbeWord_positive' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitOneProbeWord_length' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitReadableSourceMemoryWord_eq_stabilizer_append_one' depends on axioms: [propext]
+'MatrixMortality.CubicReturn.NonPure.falseWaitReadableSourceMemoryWord_positive' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitReadableSourceMemoryWord_length' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitReadableSourceMemoryWord_source_factor' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitReadableSourceMemoryWord_source_projectively_injective' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.EdgeCompression.isMortal_iff_exists_edgeProduct_eq_zero' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]

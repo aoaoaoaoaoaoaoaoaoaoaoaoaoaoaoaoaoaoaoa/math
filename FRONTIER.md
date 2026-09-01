@@ -1868,6 +1868,16 @@ a lawful state-dependent epsilon semantics. See
 [`R32-S75`](SALVAGE.md#r32-s75-free-binary-source-stabilizer-fibre) and
 [`m32-cubic-free-source-stabilizer-2026-09-01.md`](audits/m32-cubic-free-source-stabilizer-2026-09-01.md).
 
+The payload is readable: one appended positive wait moves the safe source off its stabilized ray
+and exposes a projective coordinate that injectively encodes the complete binary address. Its
+`197`-adic valuation recovers the one-count, an explicit shell narrower than a factor of `625`
+recovers the zero-count, and the affine radix code recovers the order. Thus the source fibre is
+not terminally blind; it is a positive write/store/read channel. The remaining seam is to compose
+this readout with the selected mismatch-zero gate and to prove that arbitrary positive raw words
+either parse into the intended machine or cannot hit its accepting incidence. See
+[`R32-S76`](SALVAGE.md#r32-s76-one-wait-decoder-for-the-free-source-memory) and
+[`m32-cubic-free-source-probe-2026-09-01.md`](audits/m32-cubic-free-source-probe-2026-09-01.md).
+
 ### ReturnSquare laboratory
 
 [`R32-S03`](SALVAGE.md#r32-s03-returnsquare-normal-form) is the first completely normalized

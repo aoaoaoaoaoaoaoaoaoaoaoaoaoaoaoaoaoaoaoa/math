@@ -31,6 +31,7 @@ import MatrixMortality.CubicContinuantMacroNormalForm
 import MatrixMortality.CubicContinuantTranslationLattice
 import MatrixMortality.CubicContinuantSourceStabilizer
 import MatrixMortality.CubicContinuantFreeSourceStabilizer
+import MatrixMortality.CubicContinuantFreeSourceProbe
 import MatrixMortality.CyclicBinaryBoundary
 import MatrixMortality.EdgeCompression
 import MatrixMortality.TwoPlaneEdges

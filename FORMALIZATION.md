@@ -1167,6 +1167,15 @@ selected `00` prefix, width `n` supplies exactly `2^n` equal-length, pairwise pr
 products in one observed source fibre. See `R32-S75` and
 [`audits/m32-cubic-free-source-stabilizer-2026-09-01.md`](audits/m32-cubic-free-source-stabilizer-2026-09-01.md).
 
+`CubicContinuantFreeSourceProbe` proves that this free memory remains readable after storage.
+Appending one positive wait after the safe suffix exposes the exact common-ray coordinate
+`-26658067/399826944`. A modulo-`197` unit certificate recovers the number of one-bits from its
+valuation; a positive shell narrower than the false-letter factor `625` recovers the number of
+zero-bits; affine-address injectivity then recovers their order. Lean transports the decoder back
+to the physical positive words and proves projective source injectivity for words of length
+`71,192+4|β|`. See `R32-S76` and
+[`audits/m32-cubic-free-source-probe-2026-09-01.md`](audits/m32-cubic-free-source-probe-2026-09-01.md).
+
 The rank-(2,2) graph is no longer an independent residue. `RankTwoPunctuation` proves that every
 compatible square with one rank-one loop and three units transports exactly to the existing raw
 reverse compiler [`R32-M01`](SALVAGE.md#r32-m01-generic-reverse-edge-compiler). Its intrinsic
