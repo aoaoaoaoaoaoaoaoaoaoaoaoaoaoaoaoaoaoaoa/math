@@ -1320,6 +1320,14 @@ parameter by two-letter locality. Thus the full `G3-S16` census is dead in both 
 orientations; only another kernel family, interleaving, or separate endpoint routing can continue
 this address architecture.
 
+[`G3-S26`](SALVAGE.md#g3-s26-odd-family-one-sided-cloak-extinction) removes the explicit odd
+family from that survivor list. Its unique positive proper balanced suffix has length `|Lₖ|-3`,
+contradicting the strict prefix gate `2(address_depth+q)<|Lₖ|`; Lean proves both relation
+orientations. In suffix orientation, all `ε/DT/TD` trigram targets and their reversals miss the
+same `1,243`-vector physical catalogue, uniformly in pump depth. Every currently explicit
+infinite kernel family is now dead as a one-sided cloak. The live address routes are an
+undiscovered relation with different local factors, interleaving, or separate two-offset routing.
+
 [`G3-M02`](SALVAGE.md#g3-m02-square-root-punctuation-fracture) supplied a complete direct-mortality
 grammar. The source-uniform rational rank-two matrix `S` satisfies
 
@@ -1557,7 +1565,7 @@ or neutral word across the return, use an empty consume, or split recurrent outp
 | Lane | Available leverage | Decisive obstruction or obligation |
 | --- | --- | --- |
 | Common-kernel shuttle | The exact `bcbb` compiler moves its common data kernel out through the toggle and recovers it at the next data action | Uniformize this non-invariant shuttle in `(β,body)`; every toggle-invariant guard factors through the two-dimensional quotient |
-| Transverse-kernel terminal dynamics | `G3-O27/O29` reduce the involutive branch to the `M₂(3)` core; `G3-O30`–`O35` close the first infinite-carrier repair; `G3-S03/C07/C08` force and compile the sole two-state gate; `G3-S06/S08/S10/S11` force a positive non-common-fixed fork-kernel triple; `G3-S13`–`S15` close the first finite-quotient layers; `G3-S16/S17` give 23 external pump schemas, eliminate their moving one-context cells, and expose a free binary affine address stack; `G3-S18`–`S20` delimit its carrier; `G3-S21` gives explicit asymmetric kernel-cloaked comparators; `G3-S22`–`S25` globally reject all 23 pump schemas in both one-sided cloak orientations | Factor the odd kernel family or another relation, interleave address digits through a kernel cloak, or route two scalar offsets to one difference row, then prove the arbitrary-word converse and retain exact normalized mantissa. Alternatively find or exclude a genuinely multi-window quotient fork, or prove every lawful core lies in an audited `D2` decision stratum. Generic irreducible `GL₃` forks, letterwise, literal, empty-macro, common-fixed, short reduced codes, the odd family as a bare contextual fork, first/second-critical one-window repairs, fixed unary readers, moving pump cells, globally aligned or common-wrapped address codes, fixed prefix cloaks, all 23 pumped one-sided cloaks, depth-class-only gates, and further third-state guard tuning are dead |
+| Transverse-kernel terminal dynamics | `G3-O27/O29` reduce the involutive branch to the `M₂(3)` core; `G3-O30`–`O35` close the first infinite-carrier repair; `G3-S03/C07/C08` force and compile the sole two-state gate; `G3-S06/S08/S10/S11` force a positive non-common-fixed fork-kernel triple; `G3-S13`–`S15` close the first finite-quotient layers; `G3-S16/S17` give 23 external pump schemas, eliminate their moving one-context cells, and expose a free binary affine address stack; `G3-S18`–`S20` delimit its carrier; `G3-S21` gives explicit asymmetric kernel-cloaked comparators; `G3-S22`–`S26` reject all 23 pump schemas and the explicit odd family in both one-sided cloak orientations | Discover a kernel relation outside the current catalogues, interleave address digits through a kernel cloak, or route two scalar offsets to one difference row, then prove the arbitrary-word converse and retain exact normalized mantissa. Alternatively find or exclude a genuinely multi-window quotient fork, or prove every lawful core lies in an audited `D2` decision stratum. Generic irreducible `GL₃` forks, letterwise, literal, empty-macro, common-fixed, short reduced codes, the odd family as a bare contextual fork, first/second-critical one-window repairs, fixed unary readers, moving pump cells, globally aligned or common-wrapped address codes, fixed prefix cloaks, all explicit pumped one-sided cloaks, depth-class-only gates, and further third-state guard tuning are dead |
 | Positive projective transition lower bound | Same-zero dimension three is point-line incidence in `P²`, and actual one-sided shifts retain finite rank/kernel/image data | Derive a uniform nonstationary or noncommuting shift incompatibility from an unbounded terminal section; static support rank, formal inverse completion, fixed equal-length return flowers, and unary consecutive-repeat escape are forbidden |
 | Global word-residual recoding | Longer noncommutative atoms can retain order while discarding the four additive role channels | Escape `G3-D05`: fixed-priority affine counters and all one-way reset/transfer/fanout cascades are decidable |
 | Head-separated three-schema source | `G3-C04` discharges every arbitrary-trace forcing obligation locally; `G3-O24` isolates the directed stable-cone alternative | Preserve an undecidable mixed or neutral word across returns, or realize zero-sensitive S5 GLB decoding after the `G3-O25` separator-rank fork; complete pure forks are decidable by `G3-D07` |
@@ -1633,9 +1641,10 @@ raceable leaves:
    cloak suffix under the sharper gate `2(address_depth+q)<cloak_length`, globally killing twelve
    pump families and leaving exactly eleven periodic suffix ladders. `G3-S24` kills all eleven by
    bigram/trigram boundary signatures, closing every `G3-S16` pump schema in prefix orientation.
-   `G3-S25` closes suffix orientation for all `23` as well. The unresolved step is a one-sided
-   factorization from the odd or another kernel family, interleaved address/cloak production and
-   complete endpoint converse, separate two-offset routing, or a genuinely multi-window
+   `G3-S25` closes suffix orientation for all `23` as well. `G3-S26` then kills both one-sided
+   orientations of the explicit odd family. The unresolved step is a one-sided factorization
+   from an undiscovered kernel relation, interleaved address/cloak production and complete
+   endpoint converse, separate two-offset routing, or a genuinely multi-window
    non-common-fixed quotient fork, not another fixed-body rank perturbation, guard recurrence, or
    finite target-depth label.
 3. **Positive projective transition obstruction.** Derive from a source-unbounded terminal
@@ -1780,10 +1789,10 @@ five-factor equality tests for arbitrary synchronized addresses; `G3-S19` forces
 fork outside the aligned address submonoid, and `G3-S20` kills a common phase-breaking wrapper. An
 asymmetric reader now exists abstractly by `G3-S21`. `G3-S22` kills every fixed prefix cloak as an
 unbounded carrier and all `23` base pump prefix cloaks outright. `G3-S23` kills twelve full pump
-families, and `G3-S24` kills the remaining eleven by local factor boundaries. A prefix cloak from
-another kernel family remains possible, but `G3-S25` kills suffix orientation for all `23` pumps
-as well. An odd/other cloak, interleaved realization, or separate two-offset route, plus the
-all-word endpoint converse, remains.
+families, and `G3-S24` kills the remaining eleven by local factor boundaries. `G3-S25` kills
+suffix orientation for all `23` pumps, and `G3-S26` kills both one-sided orientations of the
+explicit odd family. A cloak from an undiscovered relation, interleaved realization, or separate
+two-offset route, plus the all-word endpoint converse, remains.
 After the missing guard and closure proofs,
 `D2-S08` still leaves the normalized mantissa unbounded. Any lower-bound attack
 must exclude both positive architectures through actual transition data. Backward cancellation,

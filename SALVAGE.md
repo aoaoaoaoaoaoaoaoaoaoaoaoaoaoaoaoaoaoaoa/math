@@ -272,6 +272,7 @@ file owns the mathematical stock.
 | [`G3-S23`](#g3-s23-pumped-prefix-cloak-suffix-collapse) | uniform obstruction and exact family cut | a balanced nonempty cloak suffix with `2(n+q)<|L|` is mandatory; this kills 12 of the 23 pump families globally | formalized universal gate; exact symbolic and finite certificates | active |
 | [`G3-S24`](#g3-s24-prefix-cloak-factor-boundary-collapse) | uniform obstruction and complete family extinction | bigram/trigram boundary signatures kill the remaining eleven pump families, so none of the 23 schemas can realize a prefix cloak | formalized head reduction; exact symbolic certificate | active |
 | [`G3-S25`](#g3-s25-suffix-cloak-factor-boundary-collapse) | uniform obstruction and complete family extinction | trigram boundary signatures kill all 23 pump schemas in suffix orientation at every depth | exact independently replayable symbolic certificate | active |
+| [`G3-S26`](#g3-s26-odd-family-one-sided-cloak-extinction) | uniform obstruction and complete family extinction | the explicit odd kernel family fails the prefix size gate and the suffix trigram catalogue in both orientations | formalized prefix no-go; exact independently replayable suffix certificate | active |
 | [`G3-M02`](#g3-m02-square-root-punctuation-fracture) | partial mechanism | a rank-two square root gives an exact `SS`-free mortality grammar | formalized | closed |
 | [`G3-O10`](#g3-o10-square-root-boundary-saturation) | obstruction | every nondegenerate rank-one square root preserves boundary coefficient zeros | formalized | graduated |
 | [`G3-M01`](#g3-m01-free-group-discrepancy-engine) | partial mechanism | Carvalho's transducer gives an all-word marker-tail equation and a cyclic exponent-one equalizer | audited | active |
@@ -11137,9 +11138,60 @@ boundary catalogue is reusable against any new suffix cloak with a local periodi
 and
 [`m34-suffix-factor-boundary-collapse-2026-09-01.md`](audits/m34-suffix-factor-boundary-collapse-2026-09-01.md).
 
-**Next:** run the same paired orientation sieve on the odd kernel family, then test interleaved
-address placements or the separate two-offset gate. The arbitrary-word endpoint converse remains
-mandatory after any carrier survives.
+**Next:** `G3-S26` applies the paired orientation sieve to the odd family. Continue with
+interleaved address placements or the separate two-offset gate. The arbitrary-word endpoint
+converse remains mandatory after any carrier survives.
+
+### G3-S26: Odd-family one-sided cloak extinction
+
+**Kind:** uniform obstruction and complete family extinction
+
+**Evidence:** formalized prefix no-go; exact independently replayable suffix certificate
+
+**Disposition:** active
+
+The explicit infinite odd kernel family from `G3-S21` fails both one-sided cloak orientations.
+For a prefix cloak, `G3-S23` forces a positive proper Parikh-balanced cloak suffix of length `q`
+with
+
+```text
+2(address_depth+q)<|Lₖ|.
+```
+
+The odd-family Parikh theorem identifies its only such suffix exactly:
+`q=|Lₖ|-3`. Since `|Lₖ|=29+2k`, the strict gate is impossible. Lean proves this for both
+assignments of `Lₖ,Rₖ` to the flat and nested physical fork words.
+
+For a suffix cloak, the relation factorization is
+
+```text
+Lₖ=oddFamilyLeftHead·(DT)ᵏ·DTDD,
+Rₖ=oddFamilyRightHead·(DT)ᵏ·DDTT.
+```
+
+The aligned address contributes only the trigram junction contexts `ε/DT/TD`. All three target
+discrepancies miss the complete `1,243`-vector physical `yzxyx/xzyxy` boundary catalogue; their
+negatives miss it after reversing the relation. Depth zero and the stable positive-depth cell
+coincide. Two-letter locality proves that inserting another `DT` period preserves the target
+vector, so the certificate covers every depth rather than a finite cutoff.
+
+**Scope:** combined with `G3-S24` and `G3-S25`, every currently explicit infinite mixed-prime
+kernel family is impossible as either a prefix or suffix cloak. This does not classify all kernel
+relations, addresses interleaved through a relation, asymmetric two-offset routing, or the
+source-indexed arbitrary-word endpoint converse.
+
+**Use:** retire the odd family from one-sided cloak searches. Any continuation of the address
+architecture must first produce a new kernel geometry, interleave address and relation letters,
+or route two offsets through a separate channel.
+
+**Artifact:**
+[`MixedPrimeOddFamilyCloakNoGo.lean`](MatrixMortality/MixedPrimeOddFamilyCloakNoGo.lean),
+[`certify_mixed_prime_odd_cloaks.py`](tools/certify_mixed_prime_odd_cloaks.py), and
+[`m34-odd-family-cloak-extinction-2026-09-01.md`](audits/m34-odd-family-cloak-extinction-2026-09-01.md).
+
+**Next:** classify the minimal interleaving or two-offset equation before searching another
+one-sided family. A new kernel relation is relevant only if its local factor data evade the
+reusable prefix and suffix catalogues.
 
 ### G3-O13: Rational serializer pumping
 

@@ -1809,6 +1809,7 @@ fixed-rank decision problem.
 | `GuardedMixedPrimeForkCrossing.lean` | exact fork-crossing factorization, four physical order chains, slope-conditioned leading-run cylinders, and Cassaigne address ambiguity |
 | `GuardedMixedPrimeForkQuotient.lean` | full-triple centralizer collapse, the exact length-312 critical Cassaigne fork, its common fixed point and monogenic action collapse, and endpoint rejection |
 | `GuardedMixedPrimeOddFamilyParikh.lean` | uniform balanced-prefix/suffix classification and seven-cell contextual obstruction for the infinite odd kernel family |
+| `MixedPrimeOddFamilyCloakNoGo.lean` | exact prefix-cloak obstruction for both orientations of the infinite odd kernel family |
 | `GuardedMixedPrimePumpedCuts.lean` | reusable pumping calculus, seven certified kernel families, and balanced-prefix transport recurrence |
 | `GuardedMixedPrimePumpedContext.lean` | exact all-depth cut census for seven pumped kernel families, uniform moving-cell extinction, and finite family-six exceptional residue |
 | `TwoSeedPumpPropagation.lean` | two-dimensional Cayley-Hamilton span and exact propagation of side-contextual word pumps from depths zero and one |
@@ -2137,6 +2138,7 @@ fixed-rank decision problem.
 | The two forced endpoint-fork words cannot both be aligned addresses; coding every control by a whole address, or both data controls by equal-length addresses, is impossible | `MixedPrimeAddressForkNoGo.no_bcbc_endpoint_of_fork_address_words`, `MixedPrimeAddressForkNoGo.no_bcbc_endpoint_address_macro_code`, `MixedPrimeAddressForkNoGo.no_bcbc_endpoint_of_equalLength_address_data` |
 | A common literal prefix and suffix around the two aligned address interiors cancel and cannot rescue the forced endpoint fork | `MixedPrimeAddressWrapperNoGo.no_bcbc_endpoint_of_commonContext_address_words` |
 | Every genuine mixed-prime kernel pair gives prefix- and suffix-cloaked raw-distinct comparators for arbitrary addresses; the odd kernel family supplies explicit instances at every depth | `MixedPrimeKernelCloakedAddress.prefixCloakedAddress_genuineComparator`, `MixedPrimeKernelCloakedAddress.suffixCloakedAddress_genuineComparator`, `MixedPrimeKernelCloakedAddress.kernelOddFamily_prefixCloakedAddress_genuineComparator`, `MixedPrimeKernelCloakedAddress.kernelOddFamily_suffixCloakedAddress_genuineComparator` |
+| Neither orientation of the odd kernel family can satisfy the physical exact-endpoint prefix-cloak equation at any pump or address depth | `MixedPrimeOddFamilyCloakNoGo.no_bcbc_endpoint_of_kernelOddFamily_prefixCloak`, `MixedPrimeOddFamilyCloakNoGo.no_bcbc_endpoint_of_kernelOddFamily_prefixCloak_reverse` |
 | A matrix square equal to an outer product gives the complete `SS`-free mortality grammar | `SquareRootPunctuation.isMortal_iff_exists_squareFree_zero` |
 | The explicit source-uniform Neary punctuation matrix has the required square and rank two | `SquareRootPunctuation.nearySquareRoot_sq`, `SquareRootPunctuation.nearySquareRoot_rank` |
 | Exact coefficient preservation on the `R_bR_b`-free subshift forces the `R_b` matrix to be a unit | `SquareRootPunctuation.ruleB_isUnit_of_exact_on_squareFree` |
@@ -2759,7 +2761,18 @@ four-boundary discrepancy vectors. Every contextual target vector for every sche
 that set. Pump depth zero is the sole preperiod; from depth one onward a further two-letter pump
 adds the same internal factors and preserves all trigram junctions. Thus six symbolic cells per
 family cover every depth. Combined with `G3-S24`, none of the `23` schemas realizes either
-one-sided cloak orientation. The odd relation, interleaving, and separate endpoint routing remain.
+one-sided cloak orientation. The remaining explicit one-sided candidate was the odd relation.
+
+`G3-S26` also closes the odd relation in both one-sided orientations. For a prefix cloak, the
+formal `G3-S23` gate supplies a nonempty balanced suffix of length `q` with
+`2(address_depth+q)<|Lₖ|`; the odd-family Parikh classification forces `q=|Lₖ|-3`, impossible
+because `|Lₖ|≥29`. The two Lean theorems cover both assignments of the relation sides. For a
+suffix cloak, exact trigram enumeration tests the three address junctions `ε/DT/TD` against the
+complete `1,243`-vector physical boundary catalogue. The forward target signatures and their
+negatives under reversal all miss. Depth zero already equals the stable positive-depth cell, and
+two-letter locality makes this uniform in `k`. Every currently explicit infinite mixed-prime
+kernel family is therefore dead as a one-sided cloak. Undiscovered relations, interleaved
+address/cloak words, separate two-offset routing, and the complete endpoint converse remain.
 
 For `G3-O20`, Lean proves the free-monoid tail law: if one fixed-boundary equation with stationary
 left and right pump blocks holds at exponents `N` and `N+1`, it holds at every exponent `N+k`.
