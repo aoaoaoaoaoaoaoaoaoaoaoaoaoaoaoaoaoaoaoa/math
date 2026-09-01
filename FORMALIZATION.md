@@ -1149,6 +1149,15 @@ identity, positivity, and the `R32-S71` mismatch witness. The theorem excludes t
 terminal translations, transverse pumps, and unsegmented raw waits. See `R32-S73` and
 [`audits/m32-cubic-macro-normal-form-2026-09-01.md`](audits/m32-cubic-macro-normal-form-2026-09-01.md).
 
+`CubicContinuantSelectedCleanup` strengthens the selected comparator to an arbitrary number of
+true-reader cleanup blocks. A uniform bound on the signed mismatch radix and the exact selector
+row offset exclude every cleanup count except the number of clocked checks. Lean proves the full
+physical biconditional: selected incidence vanishes exactly when cleanup equals check count and
+every guessed bit matches. The module also checks the terminal affine form, connector, selected
+row, positivity, incidence factorization, and exact reduction to `R32-S71` at balanced cleanup.
+See `R32-S74` and
+[`audits/m32-cubic-selected-cleanup-2026-09-01.md`](audits/m32-cubic-selected-cleanup-2026-09-01.md).
+
 The rank-(2,2) graph is no longer an independent residue. `RankTwoPunctuation` proves that every
 compatible square with one rank-one loop and three units transports exactly to the existing raw
 reverse compiler [`R32-M01`](SALVAGE.md#r32-m01-generic-reverse-edge-compiler). Its intrinsic

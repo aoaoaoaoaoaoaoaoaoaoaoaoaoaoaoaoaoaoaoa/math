@@ -190,7 +190,9 @@ def continuantMismatchClockProduct : List ℤ → Square (Fin 2) ℚ
       continuantDefectTranslation (digit * (125 / 48)) *
         continuantMismatchClock * continuantMismatchClockProduct digits
 
-private theorem mismatchAffine_mul (leftRatio leftShift rightRatio rightShift : ℚ) :
+/-- Multiplication of normalized upper affine matrices. -/
+theorem continuantMismatchAffine_mul
+    (leftRatio leftShift rightRatio rightShift : ℚ) :
     continuantMismatchAffine leftRatio leftShift *
         continuantMismatchAffine rightRatio rightShift =
       continuantMismatchAffine (leftRatio * rightRatio)
@@ -203,7 +205,8 @@ private theorem mismatchAffine_mul (leftRatio leftShift rightRatio rightShift : 
 private theorem mismatchTranslation_eq_affine (shift : ℚ) :
     continuantDefectTranslation shift = continuantMismatchAffine 1 shift := rfl
 
-private theorem mismatchClock_eq_affine :
+/-- The true radix clock in fixed-point affine coordinates. -/
+theorem continuantMismatchClock_eq_affine :
     continuantMismatchClock =
       continuantMismatchAffine continuantMismatchClockRatio
         ((149 / 252) * (1 - continuantMismatchClockRatio)) := by
@@ -212,7 +215,8 @@ private theorem mismatchClock_eq_affine :
     norm_num [continuantMismatchClock, continuantMismatchClockRatio, continuantMismatchAffine,
       continuantRadixGenerator, continuantRadixDigit, Matrix.smul_apply]
 
-private theorem mismatchClockReader_eq_affine :
+/-- The true radix reader in fixed-point affine coordinates. -/
+theorem continuantMismatchClockReader_eq_affine :
     continuantMismatchClockReader =
       continuantMismatchAffine continuantMismatchClockRatio⁻¹
         ((149 / 252) * (1 - continuantMismatchClockRatio⁻¹)) := by
@@ -221,7 +225,8 @@ private theorem mismatchClockReader_eq_affine :
     norm_num [continuantMismatchClockReader, continuantMismatchClockRatio, continuantMismatchAffine,
       continuantRadixReader, continuantRadixDigit]
 
-private theorem mismatchClockProduct_affine (digits : List ℤ) :
+/-- Exact affine normal form of a complete signed clock schedule. -/
+theorem continuantMismatchClockProduct_affine (digits : List ℤ) :
     continuantMismatchClockProduct digits =
       continuantMismatchAffine (continuantMismatchClockRatio ^ digits.length)
         ((149 / 252) * (1 - continuantMismatchClockRatio ^ digits.length) +
@@ -234,15 +239,16 @@ private theorem mismatchClockProduct_affine (digits : List ℤ) :
           continuantMismatchDefect, Matrix.one_apply]
   | cons digit digits induction =>
       rw [continuantMismatchClockProduct, mismatchTranslation_eq_affine,
-        mismatchClock_eq_affine, induction, mismatchAffine_mul,
-        mismatchAffine_mul]
+        continuantMismatchClock_eq_affine, induction, continuantMismatchAffine_mul,
+        continuantMismatchAffine_mul]
       ext i j
       fin_cases i <;> fin_cases j <;>
         (simp [continuantMismatchAffine, continuantMismatchDefect, List.length_cons, pow_succ,
             continuantMismatchClockRatio] <;>
           ring)
 
-private theorem mismatchClockReader_pow_affine (cleanup : ℕ) :
+/-- Exact affine normal form of an arbitrary true-reader cleanup run. -/
+theorem continuantMismatchClockReader_pow_affine (cleanup : ℕ) :
     continuantMismatchClockReader ^ cleanup =
       continuantMismatchAffine (continuantMismatchClockRatio⁻¹ ^ cleanup)
         ((149 / 252) * (1 - continuantMismatchClockRatio⁻¹ ^ cleanup)) := by
@@ -252,14 +258,16 @@ private theorem mismatchClockReader_pow_affine (cleanup : ℕ) :
       fin_cases i <;> fin_cases j <;>
         norm_num [continuantMismatchAffine, Matrix.one_apply]
   | succ cleanup induction =>
-      rw [pow_succ', induction, mismatchClockReader_eq_affine,
-        mismatchAffine_mul]
+      rw [pow_succ', induction, continuantMismatchClockReader_eq_affine,
+        continuantMismatchAffine_mul]
       ext i j
       fin_cases i <;> fin_cases j <;>
         (simp [continuantMismatchAffine, pow_succ] <;>
           ring)
 
-private theorem mismatchClockProduct_cleanup_affine (digits : List ℤ) (cleanup : ℕ) :
+/-- Exact affine normal form of a signed clock schedule followed by arbitrary cleanup. -/
+theorem continuantMismatchClockProduct_cleanup_affine
+    (digits : List ℤ) (cleanup : ℕ) :
     continuantMismatchClockProduct digits * continuantMismatchClockReader ^ cleanup =
       continuantMismatchAffine
         (continuantMismatchClockRatio ^ digits.length * continuantMismatchClockRatio⁻¹ ^ cleanup)
@@ -267,8 +275,9 @@ private theorem mismatchClockProduct_cleanup_affine (digits : List ℤ) (cleanup
             (1 - continuantMismatchClockRatio ^ digits.length *
               continuantMismatchClockRatio⁻¹ ^ cleanup) +
           (125 / 48) * continuantMismatchDefect digits) := by
-  rw [mismatchClockProduct_affine, mismatchClockReader_pow_affine,
-    mismatchAffine_mul]
+  rw [continuantMismatchClockProduct_affine,
+    continuantMismatchClockReader_pow_affine,
+    continuantMismatchAffine_mul]
   ext i j
   fin_cases i <;> fin_cases j <;>
     (simp [continuantMismatchAffine] <;>
@@ -315,7 +324,8 @@ private theorem mismatchBalanceConstant_val_five :
     val5_two, val5_fortyThree, val5_three, val5_five, val5_seven]
   norm_num
 
-private theorem mismatchClockRatio_ne_zero : continuantMismatchClockRatio ≠ 0 := by
+/-- The normalized mismatch-clock ratio is nonzero. -/
+theorem continuantMismatchClockRatio_ne_zero : continuantMismatchClockRatio ≠ 0 := by
   norm_num [continuantMismatchClockRatio]
 
 private theorem mismatchClockRatio_pow_ne_one {exponent : ℕ}
@@ -330,7 +340,7 @@ private theorem mismatchClockRatio_one_sub_pow_val_five {exponent : ℕ}
     (positive : 0 < exponent) :
     padicValRat 5 (1 - continuantMismatchClockRatio ^ exponent) = -(2 * exponent) := by
   have power_nonzero : continuantMismatchClockRatio ^ exponent ≠ 0 :=
-    pow_ne_zero _ mismatchClockRatio_ne_zero
+    pow_ne_zero _ continuantMismatchClockRatio_ne_zero
   have difference_nonzero : 1 - continuantMismatchClockRatio ^ exponent ≠ 0 := by
     intro difference_zero
     apply mismatchClockRatio_pow_ne_one positive
@@ -365,7 +375,7 @@ private theorem mismatchClockRatio_one_sub_inv_pow_val_two {exponent : ℕ}
     (positive : 0 < exponent) :
     padicValRat 2 (1 - continuantMismatchClockRatio⁻¹ ^ exponent) = -(2 * exponent) := by
   have inverse_nonzero : continuantMismatchClockRatio⁻¹ ≠ 0 :=
-    inv_ne_zero mismatchClockRatio_ne_zero
+    inv_ne_zero continuantMismatchClockRatio_ne_zero
   have power_nonzero : continuantMismatchClockRatio⁻¹ ^ exponent ≠ 0 :=
     pow_ne_zero _ inverse_nonzero
   have difference_nonzero : 1 - continuantMismatchClockRatio⁻¹ ^ exponent ≠ 0 := by
@@ -391,7 +401,8 @@ private theorem mismatchClockRatio_one_sub_inv_pow_val_two {exponent : ℕ}
   rw [power_val] at valuation
   simpa [sub_eq_add_neg, add_comm] using valuation
 
-private theorem clock_pow_mul_inverse_pow_of_le {count cleanup : ℕ}
+/-- Cancelling at most as many inverse clocks as forward clocks leaves the exponent gap. -/
+theorem continuantMismatchClock_pow_mul_inverse_pow_of_le {count cleanup : ℕ}
     (le : cleanup ≤ count) :
     continuantMismatchClockRatio ^ count * continuantMismatchClockRatio⁻¹ ^ cleanup =
       continuantMismatchClockRatio ^ (count - cleanup) := by
@@ -408,9 +419,11 @@ private theorem clock_pow_mul_inverse_pow_of_le {count cleanup : ℕ}
           continuantMismatchClockRatio ^ remainder := by
       rw [mul_pow]
     _ = continuantMismatchClockRatio ^ remainder := by
-      rw [mul_inv_cancel₀ mismatchClockRatio_ne_zero, one_pow, one_mul]
+      rw [mul_inv_cancel₀ continuantMismatchClockRatio_ne_zero, one_pow, one_mul]
 
-private theorem clock_pow_mul_inverse_pow_of_le_reverse {count cleanup : ℕ}
+/-- Cancelling at least as many inverse clocks as forward clocks leaves the inverse exponent
+gap. -/
+theorem continuantMismatchClock_pow_mul_inverse_pow_of_le_reverse {count cleanup : ℕ}
     (le : count ≤ cleanup) :
     continuantMismatchClockRatio ^ count * continuantMismatchClockRatio⁻¹ ^ cleanup =
       continuantMismatchClockRatio⁻¹ ^ (cleanup - count) := by
@@ -427,7 +440,7 @@ private theorem clock_pow_mul_inverse_pow_of_le_reverse {count cleanup : ℕ}
           continuantMismatchClockRatio⁻¹ ^ remainder := by
       rw [mul_pow]
     _ = continuantMismatchClockRatio⁻¹ ^ remainder := by
-      rw [mul_inv_cancel₀ mismatchClockRatio_ne_zero, one_pow, one_mul]
+      rw [mul_inv_cancel₀ continuantMismatchClockRatio_ne_zero, one_pow, one_mul]
 
 private theorem mismatchBalanceConstant_ne_zero : continuantMismatchBalanceConstant ≠ 0 := by
   norm_num [continuantMismatchBalanceConstant]
@@ -477,7 +490,7 @@ theorem continuantMismatchBalanceEquation_forces (digits : List ℤ) (cleanup : 
   · have ratio_eq :
         continuantMismatchClockRatio ^ digits.length * continuantMismatchClockRatio⁻¹ ^ cleanup =
           continuantMismatchClockRatio ^ (digits.length - cleanup) :=
-      clock_pow_mul_inverse_pow_of_le (Nat.le_of_lt cleanup_lt)
+      continuantMismatchClock_pow_mul_inverse_pow_of_le (Nat.le_of_lt cleanup_lt)
     rw [ratio_eq] at equation
     have exponent_positive : 0 < digits.length - cleanup := by omega
     have difference_nonzero :
@@ -500,14 +513,14 @@ theorem continuantMismatchBalanceEquation_forces (digits : List ℤ) (cleanup : 
         continuantMismatchClockRatio ^ digits.length *
             continuantMismatchClockRatio⁻¹ ^ digits.length = 1 := by
       simpa using
-        clock_pow_mul_inverse_pow_of_le (count := digits.length)
+        continuantMismatchClock_pow_mul_inverse_pow_of_le (count := digits.length)
           (cleanup := digits.length) (le_refl digits.length)
     rw [ratio_eq, sub_self, mul_zero] at equation
     exact ⟨rfl, (continuantMismatchDefect_eq_zero_iff digits range).mp equation⟩
   · have ratio_eq :
         continuantMismatchClockRatio ^ digits.length * continuantMismatchClockRatio⁻¹ ^ cleanup =
           continuantMismatchClockRatio⁻¹ ^ (cleanup - digits.length) :=
-      clock_pow_mul_inverse_pow_of_le_reverse (Nat.le_of_lt count_lt)
+      continuantMismatchClock_pow_mul_inverse_pow_of_le_reverse (Nat.le_of_lt count_lt)
     rw [ratio_eq] at equation
     have exponent_positive : 0 < cleanup - digits.length := by omega
     have difference_nonzero :
@@ -556,7 +569,8 @@ theorem continuantMismatchBridge_zero_iff (digits : List ℤ) (cleanup : ℕ)
           wordProduct falseWaitReturn [12, 8, 12, 12, 15, 8] *
         falseWaitReturn 0 = 0 ↔
       cleanup = digits.length ∧ ∀ digit ∈ digits, digit = 0 := by
-  rw [mismatchClockProduct_cleanup_affine, continuantMismatchBridge_detects_affine]
+  rw [continuantMismatchClockProduct_cleanup_affine,
+    continuantMismatchBridge_detects_affine]
   let ratio :=
     continuantMismatchClockRatio ^ digits.length * continuantMismatchClockRatio⁻¹ ^ cleanup
   let shift :=
@@ -582,7 +596,7 @@ theorem continuantMismatchBridge_zero_iff (digits : List ℤ) (cleanup : ℕ)
       dsimp [ratio]
       rw [cleanup_eq]
       simpa using
-        clock_pow_mul_inverse_pow_of_le (count := digits.length)
+        continuantMismatchClock_pow_mul_inverse_pow_of_le (count := digits.length)
           (cleanup := digits.length) (le_refl digits.length)
     have radix_zero : continuantMismatchDefect digits = 0 :=
       mismatchRadix_eq_zero_of_all_zero digits all_zero

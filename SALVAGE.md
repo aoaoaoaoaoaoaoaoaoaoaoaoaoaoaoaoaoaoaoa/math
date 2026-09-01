@@ -146,6 +146,7 @@ file owns the mathematical stock.
 | [`R32-S71`](#r32-s71-selected-comparator-and-neutral-fracture) | compiler mechanism and obstruction | the balanced clock composes with the singleton selector, but two unclocked wrong reads insert as a shorter scalar-identity false spelling | formalized | active |
 | [`R32-S72`](#r32-s72-non-scalar-source-stabilizer-collision) | obstruction | a positive non-scalar affine stabilizer preserves the selected source ray, so scalar stutters do not exhaust its fibre | formalized | active |
 | [`R32-S73`](#r32-s73-reader-writer-affine-quotient-normal-form) | structure theorem | the four cubic radix writer-reader macros have a complete decidable affine normal form for physical projective equality | formalized | active |
+| [`R32-S74`](#r32-s74-selected-comparator-self-enforces-cleanup) | compiler mechanism | the fixed source selector rejects every wrong reader-cleanup count as well as every bit mismatch | formalized | active |
 | [`R32-M01`](#r32-m01-generic-reverse-edge-compiler) | partial mechanism | projective incidence generically embeds into a compatible two-plane edge square | formalized | active |
 | [`R32-M02`](#r32-m02-finite-quotient-sieve) | partial mechanism | finite monoid quotients give complete modular no-certificates for fixed candidates | formalized | active |
 | [`R32-M03`](#r32-m03-two-scale-return-conversion) | partial mechanism | a minimal two-scale return pencil has nonresonant multi-return zeros | formalized | active |
@@ -5521,6 +5522,63 @@ with audit
 **Use:** decide and quotient all scalar stutters once a word has been lawfully segmented into
 the radix writer-reader alphabet. Do not extrapolate this normal form to the larger known macro
 dictionary or treat it as an arbitrary raw-word parser.
+
+### R32-S74: Selected comparator self-enforces cleanup
+
+**Kind:** compiler mechanism
+**Evidence:** formalized
+**Disposition:** active
+
+The selected `00` source itself enforces the number of cleanup readers. Let `N` be the number of
+complete clocked comparison blocks, `m` the arbitrary cleanup count, `q=4/25`, and `S` the signed
+mismatch radix. The terminal affine product has ratio
+
+```text
+ρ=qᴺ q⁻ᵐ
+```
+
+and the fixed selector row vanishes exactly when
+
+```text
+S = K(1-ρ),           K=236474506444/1614375.                 (1)
+```
+
+Every signed digit belongs to `{-1,0,1}`, so the complete radix obeys the strict global bound
+
+```text
+|S| < 25/21.                                                  (2)
+```
+
+If `m<N`, then `1-ρ≥21/25`; if `m>N`, then `1-ρ≤-21/4`. In either case the right side
+of (1) already has magnitude larger than `25/21`, contradicting (2). Hence `m=N`, so `ρ=1` and
+`S=0`. Signed-radix injectivity then forces every guessed bit to match its writer. Lean transports
+this through the exact terminal realization, common-ray connector, selected row, and all nonzero
+physical scales to prove
+
+```text
+r Π(C(χ,m) ++ E(00)) c = 0
+  iff m=|χ| and every comparison in χ matches.                     (3)
+```
+
+Every wait in `C(χ,m)` is positive. At `m=|χ|`, the physical word is exactly the balanced
+selected comparator from `R32-S71`.
+
+**Scope:** the mismatch-radix bound, balance exclusion in both cleanup directions, exact terminal
+affine product, connector, row chart, positivity, physical incidence, balanced-word identity, and
+biconditional (3) are Lean checked. The theorem assumes a lawful sequence of complete clock
+blocks followed by a reader-cleanup suffix. It does not enforce formation or segmentation of
+those blocks inside an arbitrary positive raw word.
+
+**Artifact:**
+`CubicReturn.NonPure.falseWaitFirstHitSelectedCleanupBalance_zero_iff` and
+`falseWaitFirstHitSelectedComparatorWordWithCleanup_zero_iff` in
+[`CubicContinuantSelectedCleanup.lean`](MatrixMortality/CubicContinuantSelectedCleanup.lean),
+with audit
+[`m32-cubic-selected-cleanup-2026-09-01.md`](audits/m32-cubic-selected-cleanup-2026-09-01.md).
+
+**Use:** remove cleanup-count correctness from the external grammar obligations of the selected
+comparator. The remaining soundness burden begins earlier: force or decode complete clock blocks
+within arbitrary raw positive-wait words, modulo the two-sided source fibre exposed by `R32-S72`.
 
 ### R32-M01: Generic reverse edge compiler
 

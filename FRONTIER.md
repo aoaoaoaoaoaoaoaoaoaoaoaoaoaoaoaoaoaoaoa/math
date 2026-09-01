@@ -1849,6 +1849,15 @@ the larger two-sided fibre. See
 [`R32-S73`](SALVAGE.md#r32-s73-reader-writer-affine-quotient-normal-form) and
 [`m32-cubic-macro-normal-form-2026-09-01.md`](audits/m32-cubic-macro-normal-form-2026-09-01.md).
 
+The selected comparator now self-enforces its cleanup count. For `N` complete clock blocks and
+an arbitrary suffix of `m` true readers, the selector equation is a huge fixed multiple of
+`1-(4/25)ᴺ(4/25)⁻ᵐ`. The signed mismatch radix always has magnitude below `25/21`, so either
+nonzero exponent gap is impossible. The physical selected incidence therefore vanishes exactly
+when `m=N` and every comparison matches. Cleanup correctness is no longer an external grammar
+obligation; complete block formation and the arbitrary-word fibre remain. See
+[`R32-S74`](SALVAGE.md#r32-s74-selected-comparator-self-enforces-cleanup) and
+[`m32-cubic-selected-cleanup-2026-09-01.md`](audits/m32-cubic-selected-cleanup-2026-09-01.md).
+
 ### ReturnSquare laboratory
 
 [`R32-S03`](SALVAGE.md#r32-s03-returnsquare-normal-form) is the first completely normalized
