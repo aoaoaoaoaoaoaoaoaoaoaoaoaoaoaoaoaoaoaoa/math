@@ -1888,6 +1888,17 @@ search behind the fixed connector. See
 [`R32-S77`](SALVAGE.md#r32-s77-fixed-connector-cannot-pop-the-transverse-stack) and
 [`m32-cubic-terminal-ray-no-go-2026-09-01.md`](audits/m32-cubic-terminal-ray-no-go-2026-09-01.md).
 
+The non-inverse route succeeds. A positive height-five terminal gate lands its common-chart row
+exactly on the annihilator of the probed address `00`; source-coordinate injectivity makes this a
+singleton over every binary address. A positive inverse translation cancels the fixed source-return
+prefix, so the theorem applies to the complete readable-memory family. With the marker convention
+`00++payload`, zero incidence is equivalent to an empty payload. The explicit free source fibre is
+therefore no longer an unresolved soundness obstruction: every nonempty encoded insertion can be
+made visible and rejected. What remains is to combine this sentinel gate with the unbounded
+self-balancing mismatch schedule and then extend the converse beyond segmented words. See
+[`R32-S78`](SALVAGE.md#r32-s78-positive-singleton-gate-for-readable-source-memory) and
+[`m32-cubic-readable-source-selector-2026-09-01.md`](audits/m32-cubic-readable-source-selector-2026-09-01.md).
+
 ### ReturnSquare laboratory
 
 [`R32-S03`](SALVAGE.md#r32-s03-returnsquare-normal-form) is the first completely normalized

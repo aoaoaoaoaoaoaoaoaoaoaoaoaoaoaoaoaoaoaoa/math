@@ -1185,6 +1185,15 @@ projective-inverse exclusion. The theorem is connector-specific, not a ban on al
 or tails. See `R32-S77` and
 [`audits/m32-cubic-terminal-ray-no-go-2026-09-01.md`](audits/m32-cubic-terminal-ray-no-go-2026-09-01.md).
 
+`CubicContinuantReadableSourceSelector` bypasses that inverse wall with a positive height-five
+gate. Exact terminal translations around `G₀⁵`, preceded by one translated row prefix, produce
+the annihilator of the one-wait source coordinate at address `00`. Coordinate injectivity gives a
+physical singleton biconditional over all binary addresses. A separate positive `T(41/90)` word
+cancels the fixed source-return prefix, extending the gate to the complete readable-memory words.
+Lean also proves positivity, exact length `735,077,869+4|β|`, and the marker corollary that the gate
+on `00++payload` vanishes exactly for an empty payload. See `R32-S78` and
+[`audits/m32-cubic-readable-source-selector-2026-09-01.md`](audits/m32-cubic-readable-source-selector-2026-09-01.md).
+
 The rank-(2,2) graph is no longer an independent residue. `RankTwoPunctuation` proves that every
 compatible square with one rank-one loop and three units transports exactly to the existing raw
 reverse compiler [`R32-M01`](SALVAGE.md#r32-m01-generic-reverse-edge-compiler). Its intrinsic

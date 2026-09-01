@@ -33,6 +33,7 @@ import MatrixMortality.CubicContinuantSourceStabilizer
 import MatrixMortality.CubicContinuantFreeSourceStabilizer
 import MatrixMortality.CubicContinuantFreeSourceProbe
 import MatrixMortality.CubicContinuantTerminalRayNoGo
+import MatrixMortality.CubicContinuantReadableSourceSelector
 import MatrixMortality.CyclicBinaryBoundary
 import MatrixMortality.EdgeCompression
 import MatrixMortality.TwoPlaneEdges

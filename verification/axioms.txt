@@ -2013,6 +2013,71 @@
 'MatrixMortality.CubicReturn.NonPure.continuantTerminalRayTransport_mul_pump_not_projectiveIdentity' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitReadableSelectorPre_shift' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitReadableSelectorLeft_shift' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitReadableSelectorRight_shift' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitReadableSelectorCancellation_shift' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitReadableSelectorMiddleWord_projectivelyRealizes' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitReadableSelectorLoop_eq_transport' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitReadableSelectorPrefix_row' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitReadableSelectorConnector_chart' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitReadableSelectorPrefixRow_mul_loop' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitOneProbeSelectorWord_row' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitReadableSelectorRow_zero_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitOneProbeSelectorWord_incidence' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitOneProbeSelectorWord_zero_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitReadableSelectorCancellationWord_mul_return' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitReadableSourceSelectorWord_zero_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitReadableSourceSelectorWord_marker_zero_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitReadableSelectorMiddleWord_positive' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitOneProbeSelectorWord_positive' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitReadableSourceSelectorWord_positive' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitReadableSelectorPreWord_length' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitReadableSelectorLeftWord_length' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitReadableSelectorRightWord_length' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitReadableSelectorCancellationWord_length' depends on axioms: [propext,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitOneProbeSelectorWord_length' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitReadableSourceSelectorWord_length' depends on axioms: [propext,
+ Quot.sound]
 'MatrixMortality.EdgeCompression.isMortal_iff_exists_edgeProduct_eq_zero' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]

@@ -150,6 +150,7 @@ file owns the mathematical stock.
 | [`R32-S75`](#r32-s75-free-binary-source-stabilizer-fibre) | obstruction and compiler mechanism | the separator-source stabilizer contains a projectively free positive binary monoid, yielding `2^n` distinct selected-fibre products at every width | formalized | active |
 | [`R32-S76`](#r32-s76-one-wait-decoder-for-the-free-source-memory) | compiler mechanism | one positive wait makes every address in the free source-stabilizer memory projectively observable and exactly decodable | formalized | active |
 | [`R32-S77`](#r32-s77-fixed-connector-cannot-pop-the-transverse-stack) | obstruction | the current terminal writer-reader-translation grammar transported through the fixed connector cannot realize either transverse pump inverse | formalized | active |
+| [`R32-S78`](#r32-s78-positive-singleton-gate-for-readable-source-memory) | compiler mechanism | a positive non-inverse height-five gate annihilates exactly address `00` in the readable free-memory family, and a marker rejects every nonempty payload | formalized | active |
 | [`R32-M01`](#r32-m01-generic-reverse-edge-compiler) | partial mechanism | projective incidence generically embeds into a compatible two-plane edge square | formalized | active |
 | [`R32-M02`](#r32-m02-finite-quotient-sieve) | partial mechanism | finite monoid quotients give complete modular no-certificates for fixed candidates | formalized | active |
 | [`R32-M03`](#r32-m03-two-scale-return-conversion) | partial mechanism | a minimal two-scale return pencil has nonresonant multi-return zeros | formalized | active |
@@ -5771,6 +5772,76 @@ with audit
 **Use:** stop searching the current terminal macro grammar behind the fixed connector for a
 positive pop operation. Change the connector, use a non-inverse observation gate, or leave this
 macro grammar. `R32-S78` takes the second route.
+
+### R32-S78: Positive singleton gate for readable source memory
+
+**Kind:** compiler mechanism
+**Evidence:** formalized
+**Disposition:** active
+
+The inverse obstruction `R32-S77` is not an observation obstruction. Three exact positive
+terminal translations surrounding five false radix writers realize
+
+```text
+H = T(-6760234/151875) · G₀⁵ · T(431/4860)
+  = [[1024, -38166180409/90], [0, 9765625]].                 (1)
+```
+
+Before the connector, an additional translation `T(-183270179/9720)` moves the short selector
+prefix to the required projective row. Transporting (1) into the common-ray chart then gives
+
+```text
+Ĥ = [[1, -12968085961/139264], [0, 17578125/69632]],
+[1, 623057891/1869140625] Ĥ
+  = [1, -4133081074213/44425216].                            (2)
+```
+
+The second row coordinate in (2) is exactly the negative of the `R32-S76` one-wait source
+coordinate at address `00`. Since that coordinate is injective on all binary words, the positive
+physical selector `L` satisfies
+
+```text
+ℓΠ(L ++ E(β) ++ S ++ [1])c = 0   iff   β=00.               (3)
+```
+
+The source-memory word itself begins with the fixed return translation `T(-41/90)`. A fourth
+positive count vector realizes `T(41/90)`, so inserting it before the memory cancels that prefix
+up to a nonzero scalar. The complete gate therefore satisfies the same biconditional (3) for the
+full `R32-S76` readable-memory word.
+
+All count vectors are nonnegative and use only the four established positive translation blocks.
+The selector has length `734,916,756`; the cancellation word has length `89,921`; and the complete
+gate has length
+
+```text
+735077869 + 4|β|.                                           (4)
+```
+
+Finally, feeding the address `00++payload` into the gate turns `00` into a sentinel:
+
+```text
+gate(00++payload)=0   iff   payload=[].                     (5)
+```
+
+Thus every nonempty member of the explicit free source-stabilizer insertion family is rejected
+once it is placed after the marker and followed by the one-wait probe.
+
+**Scope:** the four exact translation shifts, height-five matrix (1), common-chart transport and
+row (2), normalized and physical singleton biconditionals (3), positive cancellation of the
+source-return prefix, sentinel theorem (5), positivity, and exact lengths (4) are Lean checked.
+This does not yet prove that every arbitrary positive raw-word disturbance lies in the encoded
+free family, nor does it yet combine the sentinel with the unbounded mismatch schedule.
+
+**Artifact:**
+`CubicReturn.NonPure.falseWaitReadableSourceSelectorWord_zero_iff` and
+`falseWaitReadableSourceSelectorWord_marker_zero_iff` in
+[`CubicContinuantReadableSourceSelector.lean`](MatrixMortality/CubicContinuantReadableSourceSelector.lean),
+with audit
+[`m32-cubic-readable-source-selector-2026-09-01.md`](audits/m32-cubic-readable-source-selector-2026-09-01.md).
+
+**Use:** replace the impossible pop reader by a non-inverse zero gate. The known exponential
+source fibre can now be punctuated with `00` and forced empty. The next composition is to insert
+the self-balancing mismatch schedule into the height-five terminal middle while retaining (5).
 
 ### R32-M01: Generic reverse edge compiler
 
