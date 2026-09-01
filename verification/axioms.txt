@@ -1676,15 +1676,30 @@
 'MatrixMortality.CubicReturn.NonPure.falseWaitFirstHitSingletonLoop_row' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitFirstHitChart_conjugatedRow' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitFirstHitChart_vecMul_smul' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.CubicReturn.NonPure.falseWaitFirstHitSingletonWord_row' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
 'MatrixMortality.CubicReturn.NonPure.continuantRepeatWord_length' depends on axioms: [propext]
 'MatrixMortality.CubicReturn.NonPure.falseWaitFirstHitSingletonWord_length' depends on axioms: [propext]
+'MatrixMortality.CubicReturn.NonPure.falseWaitFirstHitSingletonMiddle_positive' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.CubicReturn.NonPure.falseWaitFirstHitSingletonWord_positive' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
 'MatrixMortality.CubicReturn.NonPure.falseWaitFirstHitBinarySourceRow_zero_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitFirstHitBinaryBasis_pairing' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitFirstHitChartRow_incidence' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
 'MatrixMortality.CubicReturn.NonPure.falseWaitFirstHitSingletonWord_incidence' depends on axioms: [propext,
@@ -1692,6 +1707,45 @@
  Quot.sound]
 'MatrixMortality.CubicReturn.NonPure.falseWaitFirstHitSingletonWord_zero_iff' depends on axioms: [propext,
  Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitFirstHitSelectedComparatorMiddle_projectivelyRealizes' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitFirstHitSelectedComparatorConnector_chart' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitFirstHitSelectedComparatorLoop_row' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitFirstHitSelectedComparatorWord_row' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitFirstHitSelectedComparatorWord_positive' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitFirstHitSelectedComparatorRow_zero_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitFirstHitSelectedComparatorWord_incidence' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitFirstHitSelectedComparatorWord_zero_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitFirstHitNeutralMismatchWord_projectiveIdentity' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitFirstHitNeutralMismatchWord_positive' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitFirstHitNeutralMismatchWord_length' depends on axioms: [propext]
+'MatrixMortality.CubicReturn.NonPure.falseWaitFirstHitSingletonZeroWord_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitFirstHitSingletonNeutralFractureWord_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitFirstHitSingletonNeutralFractureWord_ne' depends on axioms: [propext,
  Quot.sound]
 'MatrixMortality.EdgeCompression.isMortal_iff_exists_edgeProduct_eq_zero' depends on axioms: [propext,
  Classical.choice,

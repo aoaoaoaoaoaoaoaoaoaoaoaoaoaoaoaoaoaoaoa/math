@@ -146,7 +146,9 @@ theorem falseWaitFirstHitSingletonLoop_row :
     norm_num [falseWaitFirstHitSingletonLoop, Matrix.vecMul, dotProduct,
       Fin.sum_univ_succ]
 
-private theorem falseWaitFirstHitChart_conjugatedRow
+/-- Conjugating a right factor transports the corresponding left row into the common-ray
+chart. -/
+theorem falseWaitFirstHitChart_conjugatedRow
     (row : Fin 2 → ℚ) (left right : Square (Fin 2) ℚ) :
     (row ᵥ* (left * right)) ᵥ* falseWaitFirstHitBinaryBasis =
       ((row ᵥ* left) ᵥ* falseWaitFirstHitBinaryBasis) ᵥ*
@@ -157,7 +159,8 @@ private theorem falseWaitFirstHitChart_conjugatedRow
       falseWaitFirstHitBinaryBasisInverse (right * falseWaitFirstHitBinaryBasis),
     falseWaitFirstHitBinaryBasis_inverse_right, Matrix.one_mul]
 
-private theorem vecMul_smul_smul
+/-- Scaling a chart row and matrix multiplies the scale of their row action. -/
+theorem falseWaitFirstHitChart_vecMul_smul
     (leftScale rightScale : ℚ) (row : Fin 2 → ℚ)
     (matrix : Square (Fin 2) ℚ) :
     (leftScale • row) ᵥ* (rightScale • matrix) =
@@ -183,7 +186,7 @@ theorem falseWaitFirstHitSingletonWord_row :
   rw [falseWaitFirstHitSingletonWord, wordProduct_append,
     falseWaitFirstHitChart_conjugatedRow,
     falseWaitFirstHitSingletonPrefix_row, connectorChart,
-    vecMul_smul_smul, falseWaitFirstHitSingletonLoop_row]
+    falseWaitFirstHitChart_vecMul_smul, falseWaitFirstHitSingletonLoop_row]
 
 /-- Repetition multiplies the compressed word length without expanding the list. -/
 theorem continuantRepeatWord_length (word : List Nat) (repetitions : Nat) :
@@ -206,28 +209,32 @@ theorem falseWaitFirstHitSingletonWord_length :
     falseWaitFirstHitSingletonPositiveCount,
     continuantReaderNegativeWord, continuantReaderPositiveWord]
 
-/-- Every wait in the exact singleton selector is strictly positive. -/
-theorem falseWaitFirstHitSingletonWord_positive :
-    ∀ wait ∈ falseWaitFirstHitSingletonWord, 0 < wait := by
+/-- Every wait in the repeated terminal translation is strictly positive. -/
+theorem falseWaitFirstHitSingletonMiddle_positive :
+    ∀ wait ∈ falseWaitFirstHitSingletonMiddle, 0 < wait := by
   have negative :
       ∀ wait ∈ continuantReaderNegativeWord false, 0 < wait := by
     simp [continuantReaderNegativeWord]
   have positive :
       ∀ wait ∈ continuantReaderPositiveWord false, 0 < wait := by
     simp [continuantReaderPositiveWord]
-  have middle : ∀ wait ∈ falseWaitFirstHitSingletonMiddle, 0 < wait := by
-    intro wait membership
-    rw [falseWaitFirstHitSingletonMiddle, List.mem_append] at membership
-    exact membership.elim
-      (continuantRepeatWord_positive negative _ wait)
-      (continuantRepeatWord_positive positive _ wait)
+  intro wait membership
+  rw [falseWaitFirstHitSingletonMiddle, List.mem_append] at membership
+  exact membership.elim
+    (continuantRepeatWord_positive negative _ wait)
+    (continuantRepeatWord_positive positive _ wait)
+
+/-- Every wait in the exact singleton selector is strictly positive. -/
+theorem falseWaitFirstHitSingletonWord_positive :
+    ∀ wait ∈ falseWaitFirstHitSingletonWord, 0 < wait := by
   intro wait membership
   rw [falseWaitFirstHitSingletonWord, List.mem_append] at membership
   rcases membership with prefix_mem | connector_mem
   · simp only [falseWaitFirstHitSingletonPrefix, List.mem_cons,
       List.not_mem_nil, or_false] at prefix_mem
     omega
-  · exact falseWaitFirstHitRayTransportWord_positive middle wait connector_mem
+  · exact falseWaitFirstHitRayTransportWord_positive
+      falseWaitFirstHitSingletonMiddle_positive wait connector_mem
 
 /-- In the normalized chart, the row defined by any target source coordinate annihilates
 exactly that binary source. -/
@@ -270,7 +277,8 @@ theorem falseWaitFirstHitBinarySourceRow_zero_iff
     field_simp [lower_ne]
     ring
 
-private theorem falseWaitFirstHitBinaryBasis_pairing
+/-- The common-ray basis and its inverse preserve the row-column scalar pairing. -/
+theorem falseWaitFirstHitBinaryBasis_pairing
     (row column : Fin 2 → ℚ) :
     ((row ᵥ* falseWaitFirstHitBinaryBasis) ⬝ᵥ
         (falseWaitFirstHitBinaryBasisInverse *ᵥ column)) =
@@ -278,6 +286,64 @@ private theorem falseWaitFirstHitBinaryBasis_pairing
   rw [Matrix.dotProduct_mulVec, Matrix.vecMul_vecMul,
     falseWaitFirstHitBinaryBasis_inverse_right]
   simp
+
+/-- Any nonzero physical left-row chart factors incidence against an encoded source through
+the normalized common-ray source action. -/
+theorem falseWaitFirstHitChartRow_incidence
+    (leftWord : List Nat) (chartRow : Fin 2 → ℚ)
+    (rowScale : ℚ) (rowScale_ne : rowScale ≠ 0)
+    (rowChart :
+      (falseWaitSeparatorRow ᵥ* wordProduct falseWaitReturn leftWord) ᵥ*
+          falseWaitFirstHitBinaryBasis = rowScale • chartRow)
+    (bits : List Bool) :
+    ∃ scale : ℚ, scale ≠ 0 ∧
+      falseWaitSeparatorRow ⬝ᵥ
+          (wordProduct falseWaitReturn
+            (leftWord ++ falseWaitFirstHitBinaryEncoding bits) *ᵥ
+            falseWaitSeparatorColumn) =
+        scale *
+          (chartRow ⬝ᵥ
+            (wordProduct falseWaitFirstHitBinaryNormalizedLoop bits *ᵥ
+              falseWaitFirstHitBinarySourceChartVector)) := by
+  let sourceScale := (bits.map falseWaitFirstHitBinaryScale).prod
+  have sourceScale_ne : sourceScale ≠ 0 :=
+    falseWaitFirstHitBinaryEncoding_scale_ne_zero bits
+  refine ⟨rowScale * sourceScale, mul_ne_zero rowScale_ne sourceScale_ne, ?_⟩
+  let physicalRow :=
+    falseWaitSeparatorRow ᵥ* wordProduct falseWaitReturn leftWord
+  let physicalSource :=
+    wordProduct falseWaitReturn (falseWaitFirstHitBinaryEncoding bits) *ᵥ
+      falseWaitSeparatorColumn
+  have pairing := falseWaitFirstHitBinaryBasis_pairing physicalRow physicalSource
+  have sourceChart := falseWaitFirstHitBinaryEncoding_source_chart bits
+  calc
+    falseWaitSeparatorRow ⬝ᵥ
+          (wordProduct falseWaitReturn
+            (leftWord ++ falseWaitFirstHitBinaryEncoding bits) *ᵥ
+            falseWaitSeparatorColumn) =
+        physicalRow ⬝ᵥ physicalSource := by
+          simp only [physicalRow, physicalSource, wordProduct_append,
+            ← Matrix.mulVec_mulVec, Matrix.dotProduct_mulVec]
+    _ = (physicalRow ᵥ* falseWaitFirstHitBinaryBasis) ⬝ᵥ
+          (falseWaitFirstHitBinaryBasisInverse *ᵥ physicalSource) :=
+        pairing.symm
+    _ = (rowScale • chartRow) ⬝ᵥ
+          (sourceScale •
+            (wordProduct falseWaitFirstHitBinaryNormalizedLoop bits *ᵥ
+              falseWaitFirstHitBinarySourceChartVector)) := by
+        rw [show physicalRow ᵥ* falseWaitFirstHitBinaryBasis =
+            rowScale • chartRow by simpa only [physicalRow] using rowChart,
+          show falseWaitFirstHitBinaryBasisInverse *ᵥ physicalSource =
+            sourceScale •
+              (wordProduct falseWaitFirstHitBinaryNormalizedLoop bits *ᵥ
+                falseWaitFirstHitBinarySourceChartVector) by
+              simpa only [physicalSource, sourceScale] using sourceChart]
+    _ = (rowScale * sourceScale) *
+          (chartRow ⬝ᵥ
+            (wordProduct falseWaitFirstHitBinaryNormalizedLoop bits *ᵥ
+              falseWaitFirstHitBinarySourceChartVector)) := by
+        simp [dotProduct, Fin.sum_univ_succ]
+        ring
 
 /-- Physical singleton incidence is one nonzero scale times its normalized source incidence. -/
 theorem falseWaitFirstHitSingletonWord_incidence (bits : List Bool) :
@@ -295,54 +361,10 @@ theorem falseWaitFirstHitSingletonWord_incidence (bits : List Bool) :
               falseWaitFirstHitBinarySourceChartVector)) := by
   rcases falseWaitFirstHitSingletonWord_row with
     ⟨rowScale, rowScale_ne, rowChart⟩
-  let sourceScale := (bits.map falseWaitFirstHitBinaryScale).prod
-  have sourceScale_ne : sourceScale ≠ 0 :=
-    falseWaitFirstHitBinaryEncoding_scale_ne_zero bits
-  refine ⟨rowScale * sourceScale, mul_ne_zero rowScale_ne sourceScale_ne, ?_⟩
-  let physicalRow :=
-    falseWaitSeparatorRow ᵥ*
-      wordProduct falseWaitReturn falseWaitFirstHitSingletonWord
-  let physicalSource :=
-    wordProduct falseWaitReturn (falseWaitFirstHitBinaryEncoding bits) *ᵥ
-      falseWaitSeparatorColumn
-  have pairing := falseWaitFirstHitBinaryBasis_pairing physicalRow physicalSource
-  have sourceChart := falseWaitFirstHitBinaryEncoding_source_chart bits
-  calc
-    falseWaitSeparatorRow ⬝ᵥ
-          (wordProduct falseWaitReturn
-            (falseWaitFirstHitSingletonWord ++
-              falseWaitFirstHitBinaryEncoding bits) *ᵥ
-            falseWaitSeparatorColumn) =
-        physicalRow ⬝ᵥ physicalSource := by
-          simp only [physicalRow, physicalSource, wordProduct_append,
-            ← Matrix.mulVec_mulVec, Matrix.dotProduct_mulVec]
-    _ = (physicalRow ᵥ* falseWaitFirstHitBinaryBasis) ⬝ᵥ
-          (falseWaitFirstHitBinaryBasisInverse *ᵥ physicalSource) :=
-        pairing.symm
-    _ = (rowScale • ![1,
-            falseWaitFirstHitBinarySourceCoordinate
-              falseWaitFirstHitSingletonTarget]) ⬝ᵥ
-          (sourceScale •
-            (wordProduct falseWaitFirstHitBinaryNormalizedLoop bits *ᵥ
-              falseWaitFirstHitBinarySourceChartVector)) := by
-        rw [show physicalRow ᵥ* falseWaitFirstHitBinaryBasis =
-            rowScale • ![1,
-              falseWaitFirstHitBinarySourceCoordinate
-                falseWaitFirstHitSingletonTarget] by
-              simpa only [physicalRow] using rowChart,
-          show falseWaitFirstHitBinaryBasisInverse *ᵥ physicalSource =
-            sourceScale •
-              (wordProduct falseWaitFirstHitBinaryNormalizedLoop bits *ᵥ
-                falseWaitFirstHitBinarySourceChartVector) by
-              simpa only [physicalSource, sourceScale] using sourceChart]
-    _ = (rowScale * sourceScale) *
-          (![1,
-              falseWaitFirstHitBinarySourceCoordinate
-                falseWaitFirstHitSingletonTarget] ⬝ᵥ
-            (wordProduct falseWaitFirstHitBinaryNormalizedLoop bits *ᵥ
-              falseWaitFirstHitBinarySourceChartVector)) := by
-        simp [dotProduct, Fin.sum_univ_succ]
-        ring
+  exact falseWaitFirstHitChartRow_incidence
+    falseWaitFirstHitSingletonWord
+    ![1, falseWaitFirstHitBinarySourceCoordinate falseWaitFirstHitSingletonTarget]
+    rowScale rowScale_ne rowChart bits
 
 /-- The complete positive physical left word annihilates exactly the encoded binary source
 `00`. -/

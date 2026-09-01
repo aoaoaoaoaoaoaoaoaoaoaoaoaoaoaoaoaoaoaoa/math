@@ -143,6 +143,7 @@ file owns the mathematical stock.
 | [`R32-S68`](#r32-s68-separator-source-projective-decoder) | structure theorem and compiler mechanism | modulo-197 valuation and a real shell make the free binary pump act projectively faithfully on the original separator source | formalized | active |
 | [`R32-S69`](#r32-s69-common-ray-transport-and-unsafe-expansion) | compiler mechanism and obstruction | a fixed connector transports positive terminal loops to signed equal-ratio common-ray digits and exposes the first expanding but first-hit-unsafe loop | formalized | active |
 | [`R32-S70`](#r32-s70-positive-singleton-source-selector) | compiler mechanism | one finite positive left word annihilates exactly the encoded cubic-pump source `00` among all binary addresses | formalized | active |
+| [`R32-S71`](#r32-s71-selected-comparator-and-neutral-fracture) | compiler mechanism and obstruction | the balanced clock composes with the singleton selector, but two unclocked wrong reads insert as a shorter scalar-identity false spelling | formalized | active |
 | [`R32-M01`](#r32-m01-generic-reverse-edge-compiler) | partial mechanism | projective incidence generically embeds into a compatible two-plane edge square | formalized | active |
 | [`R32-M02`](#r32-m02-finite-quotient-sieve) | partial mechanism | finite monoid quotients give complete modular no-certificates for fixed candidates | formalized | active |
 | [`R32-M03`](#r32-m03-two-scale-return-conversion) | partial mechanism | a minimal two-scale return pencil has nonresonant multi-return zeros | formalized | active |
@@ -5324,6 +5325,88 @@ writer/comparator whose legal accepting computations arrive at the selected `00`
 prove that every arbitrary positive raw-word zero decodes to that grammar. Search shorter
 selectors only if their structure advances those two obligations; witness compression alone is
 irrelevant.
+
+### R32-S71: Selected comparator and neutral fracture
+
+**Kind:** compiler mechanism and obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+The `R32-S59` mismatch clock composes exactly with the `R32-S70` source selector. For a list of
+guessed and written bit pairs `χ`, let
+
+```text
+δχ = mismatchDefect(map readError χ).
+```
+
+The balanced physical checker realizes the terminal translation `T((125/48)δχ)`. Appending it
+to the fixed selector translation and applying the `R32-S69` connector gives the common-ray loop
+
+```text
+Fχ = [[1, −85828079/1020+(625/1088)δχ],
+      [0,                         9/340]].                (1)
+```
+
+The fixed prefix row from `R32-S70` transforms (1) into
+
+```text
+[1, s(00)+(625/1088)δχ].                                (2)
+```
+
+The lower coordinate of the normalized `00` source is nonzero, while `[1,s(00)]` annihilates
+it. Hence (2) annihilates it exactly when `δχ=0`. The signed radix theorem from `R32-S59` then
+gives the complete designated-spelling biconditional
+
+```text
+r Π(C(χ) ++ E(00)) c = 0
+  iff every guessed bit in χ equals its written bit.     (3)
+```
+
+Lean proves every wait in `C(χ)` is positive and transports (3) through all nonzero physical
+scales.
+
+Literal grammar enforcement nevertheless fails immediately. Put
+
+```text
+J = R₀G₁R₁G₀,
+```
+
+where `R_b` is a physical radix reader and `G_b` its writer. These are two opposite wrong reads
+with neither mandatory clock block. Their defects cancel exactly:
+
+```text
+Π(J)=λI,       λ≠0,       |J|=3265.                     (4)
+```
+
+Every wait in `J` is positive. If `Z` is the singularly punctuated `R32-S70` singleton zero,
+Lean proves both
+
+```text
+Π(Z)=0,
+Π(Z with J inserted)=0,
+```
+
+and the two raw words are distinct. Thus the selected comparator admits a malformed zero whose
+macro interpretation contains wrong reads and omits their clocks.
+
+**Scope:** the mismatch-dependent terminal realization, connector, row, normalized and physical
+matching biconditionals, positivity, the length-`3265` scalar identity, both punctuated zeros,
+and their literal inequality are Lean checked. The obstruction is to literal or uniquely
+segmented block syntax. It does not preclude a compiler whose converse quotients every nonzero
+projective-identity insertion as an epsilon stutter.
+
+**Artifact:** `CubicReturn.NonPure.falseWaitFirstHitSelectedComparatorWord_zero_iff`,
+`falseWaitFirstHitNeutralMismatchWord_projectiveIdentity`, and
+`falseWaitFirstHitSingletonNeutralFractureWord_zero` in
+[`CubicContinuantSelectedComparator.lean`](MatrixMortality/CubicContinuantSelectedComparator.lean),
+with audit
+[`m32-cubic-selected-comparator-2026-09-01.md`](audits/m32-cubic-selected-comparator-2026-09-01.md).
+
+**Use:** treat the local writer, reader, clock, and selector pipeline as complete only modulo the
+projective-neutral congruence. The remaining arbitrary-word converse must either decode every
+neutral insertion as an epsilon move or add a nonhomogeneous control component that makes such
+insertions observable. Do not pursue literal unique factorization in the current two-dimensional
+return quotient.
 
 ### R32-M01: Generic reverse edge compiler
 

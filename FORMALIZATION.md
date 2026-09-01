@@ -1121,6 +1121,16 @@ give the physical biconditional `rΠ(L ++ E(γ))c=0 ↔ γ=00`. This is a fixed 
 selector, not an arbitrary-word converse or a complete compiler. See `R32-S70` and
 [`audits/m32-cubic-singleton-selector-2026-09-01.md`](audits/m32-cubic-singleton-selector-2026-09-01.md).
 
+`CubicContinuantSelectedComparator` composes the balanced signed-defect clock with the singleton
+selector. Lean proves that the resulting positive physical incidence against `E(00)c` vanishes
+exactly when every guessed bit equals its writer. The same module proves the sharp syntax
+fracture: two opposite unclocked wrong reads form a positive length-`3265` nonzero scalar
+identity, so insertion into the singularly punctuated singleton zero yields a distinct malformed
+zero. The local comparator is complete, but every global converse must quotient projective
+identities as epsilon stutters or make them observable outside the homogeneous return quotient.
+See `R32-S71` and
+[`audits/m32-cubic-selected-comparator-2026-09-01.md`](audits/m32-cubic-selected-comparator-2026-09-01.md).
+
 The rank-(2,2) graph is no longer an independent residue. `RankTwoPunctuation` proves that every
 compatible square with one rank-one loop and three units transports exactly to the existing raw
 reverse compiler [`R32-M01`](SALVAGE.md#r32-m01-generic-reverse-edge-compiler). Its intrinsic

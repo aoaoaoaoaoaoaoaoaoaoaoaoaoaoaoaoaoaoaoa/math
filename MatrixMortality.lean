@@ -25,6 +25,7 @@ import MatrixMortality.CubicContinuantTransversePump
 import MatrixMortality.CubicContinuantSourceDecoder
 import MatrixMortality.CubicContinuantRayTransport
 import MatrixMortality.CubicContinuantSingletonSelector
+import MatrixMortality.CubicContinuantSelectedComparator
 import MatrixMortality.CyclicBinaryBoundary
 import MatrixMortality.EdgeCompression
 import MatrixMortality.TwoPlaneEdges

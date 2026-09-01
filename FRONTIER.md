@@ -1819,6 +1819,18 @@ grammar. See
 [`R32-S70`](SALVAGE.md#r32-s70-positive-singleton-source-selector) and
 [`m32-cubic-singleton-selector-2026-09-01.md`](audits/m32-cubic-singleton-selector-2026-09-01.md).
 
+The local streams now compose. Inserting the balanced signed-defect checker inside the singleton
+connector moves the selected row by exactly `(625/1088)δ`, so its physical incidence against
+`E(00)c` vanishes exactly when every guessed bit matches its writer. All waits are positive.
+Literal block syntax still fractures: the two opposite wrong-read blocks form a positive
+length-`3265` nonzero scalar identity, and inserting them into the punctuated singleton word
+produces a distinct malformed zero with both mandatory clocks omitted. The remaining converse
+must therefore operate modulo projective-neutral insertion, decoding such words as epsilon
+stutters, or leave the homogeneous two-dimensional return quotient for a control component that
+observes them. See
+[`R32-S71`](SALVAGE.md#r32-s71-selected-comparator-and-neutral-fracture) and
+[`m32-cubic-selected-comparator-2026-09-01.md`](audits/m32-cubic-selected-comparator-2026-09-01.md).
+
 ### ReturnSquare laboratory
 
 [`R32-S03`](SALVAGE.md#r32-s03-returnsquare-normal-form) is the first completely normalized
