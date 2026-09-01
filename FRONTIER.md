@@ -1057,6 +1057,18 @@ gap `3^βμ`, already a nonzero multiple of the suffix modulus. Both pairs and t
 reachability are Lean-checked. Thus both the universal height bound and bare modular
 nondivisibility are dead.
 
+[`MM-S63`](SALVAGE.md#mm-s63-full-tail-last-step-resonance) recovers an exact target-coupled
+constraint. If the last raw update is `s(n',d')` and primitive `(n',d')` reaches a nonterminal
+full-erasure-tail pole, then
+
+```text
+upperLength(last block)=v₃(s)+1.
+```
+
+Primitivity and the target congruence automatically make both adjacent carrier denominators
+units. The equality follows by comparing the required deep output gap with the two summand
+depths in the `MM-S61` raw gap factorization.
+
 The remaining ternary obligation is now the **nonzero history-defect branch** of the global
 earliest-pole reduction. In the normalized coordinate `δ=D/y`, the complete physical recurrence
 is
@@ -1068,11 +1080,11 @@ is
 The distinguished coordinate `R/H` is a target threshold exactly for terminal equality `P=V`.
 The first `D_c` and `D_b` images lie on opposite sides of zero, so a one-sided real trap is
 already impossible. On the full-erasure-tail branch, the live question is now target-coupled:
-combine the `MM-S59` suffix carry with primitive gcd cancellation in `MM-S61`, or use
-earliest-pole ancestry to exclude the reachable `3^β`-divisible gap states before they match a
-physical target. Fixed residue and unit projections are empirically saturated, and the exact
-carry window grows with carrier height. None of `MM-S51`, `MM-S55`, `MM-S57`, `MM-S59`, or
-`MM-S61` alone proves projective avoidance.
+exclude exact cancellation of `upperLength−1` powers of three in the final raw carrier, or feed
+that forced shell into the reversed suffix carry and rule/erasure grammar. Earliestness has not
+yet been used. Fixed residue and unit projections are empirically saturated, and the exact carry
+window grows with carrier height. None of `MM-S51`, `MM-S55`, `MM-S57`, `MM-S59`, `MM-S61`, or
+`MM-S63` alone proves projective avoidance.
 Exact bidirectional diagnostics for the ternary swap at `β=3`, body `bbcc`, exclude every
 false-pole word of at most six projective blocks when each regular block has
 role length at most three; this is computational evidence only.

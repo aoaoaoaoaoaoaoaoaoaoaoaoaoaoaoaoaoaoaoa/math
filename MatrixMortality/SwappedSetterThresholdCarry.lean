@@ -294,17 +294,16 @@ private theorem spell_nearyLower_erase_map
       rw [induction]
       cases letter <;> simp [nearyLower, List.replicate_succ]
 
-/-- Any threshold equality against a target ending in `width` erasures is terminal whenever the
-primitive carrier gap is smaller than `3^width`. -/
-theorem erasureTail_threshold_terminal
+/-- A threshold equality against a target ending in `width` erasures forces the primitive
+carrier gap to contain the full marker power. -/
+theorem erasureTail_threshold_dvd_gap
     {width : Nat} (body : List TagLetter) {target : List NearyTile}
     (target_tail : HasErasureTail width target)
-    {numerator denominator : ℤ} (denominator_ne : denominator ≠ 0)
-    (gap_small : |denominator - numerator| < (3 : ℤ) ^ width)
+    {numerator denominator : ℤ}
     (threshold :
       denominator * swappedUpperCode width target =
         numerator * swappedLowerCode width body target) :
-    swappedUpperCode width target = swappedLowerCode width body target := by
+    (3 : ℤ) ^ width ∣ denominator - numerator := by
   obtain ⟨front, letters, letters_length, target_eq⟩ := target_tail
   have upper_factorization :
       spell (nearyUpper width) target ++ nearyMarker width =
@@ -328,7 +327,22 @@ theorem erasureTail_threshold_terminal
     (lowerPrefix := spell (nearyLower width body) front)
     (upperSuffix := List.replicate width false)
     (lowerSuffix := List.replicate width false) (by simp) cross
-  have carrier_eq := matchedFalseSuffix_eq suffix gap_small
+  exact matchedFalseSuffix_dvd_gap suffix
+
+/-- Any threshold equality against a target ending in `width` erasures is terminal whenever the
+primitive carrier gap is smaller than `3^width`. -/
+theorem erasureTail_threshold_terminal
+    {width : Nat} (body : List TagLetter) {target : List NearyTile}
+    (target_tail : HasErasureTail width target)
+    {numerator denominator : ℤ} (denominator_ne : denominator ≠ 0)
+    (gap_small : |denominator - numerator| < (3 : ℤ) ^ width)
+    (threshold :
+      denominator * swappedUpperCode width target =
+        numerator * swappedLowerCode width body target) :
+    swappedUpperCode width target = swappedLowerCode width body target := by
+  have gap_dvd := erasureTail_threshold_dvd_gap body target_tail threshold
+  have gap_zero := Int.eq_zero_of_abs_lt_dvd gap_dvd gap_small
+  have carrier_eq := sub_eq_zero.mp gap_zero
   subst numerator
   exact mul_left_cancel₀ denominator_ne threshold
 

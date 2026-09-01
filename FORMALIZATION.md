@@ -1428,6 +1428,7 @@ The setter-projective audit now also exposes a kernel-friendly carry theorem:
 | [`MM-S57`](SALVAGE.md#mm-s57-centered-history-defect-transport) | exact centered continuant, raw-head/ordinary-ray equivalence, last-resonance correction, normalized threshold recurrence, singleton sign split, and ordinary-return adapter |
 | [`MM-S59`](SALVAGE.md#mm-s59-multiplicative-threshold-suffix-carry) | multiplicative target cross-product, exact balanced suffix carry, finite fixed-carrier window, Neary erasure/rule contractions, and the erasure-tail carrier-gap cut |
 | [`MM-S61`](SALVAGE.md#mm-s61-primitive-carrier-gap-no-go) | exact integral carrier recurrence and gap factor, primitive one- and two-`D_c` distinguished carriers, and counterexamples to bare height and modulus invariants |
+| [`MM-S63`](SALVAGE.md#mm-s63-full-tail-last-step-resonance) | primitive congruence units, automatic predecessor unit depth, exact last-block normalization balance, and the full-erasure-tail pole adapter |
 
 These records narrow the missing arbitrary-depth theorem but do not prove
 projective avoidance. Their reconstruction is
@@ -1675,6 +1676,16 @@ explicit coprime carrier with primitive gap `ρμ`. The first carrier refutes th
 `|d−n|<ρ`, while the second refutes bare nondivisibility by `ρ`. Neither state is a pole. The
 remaining theorem must therefore combine carrier normalization with target-language
 compatibility or earliest-pole ancestry.
+
+Record [`MM-S63`](SALVAGE.md#mm-s63-full-tail-last-step-resonance) performs that coupling for a
+full erasure tail. If a primitive predecessor crosses one physical block, the raw successor is
+`s(n',d')`, and primitive `(n',d')` reaches a nonterminal full-tail pole, then Lean first derives
+that both predecessor and successor denominators are `3`-adic units. Writing `g=v₃(s)` and
+`a=upperLength(block)`, the raw denominator has depth `g`, while the two terms of the exact gap
+obstruction have depths `a` and `g+1`. The target suffix gives a nonzero output gap of depth at
+least `β`. Unequal summand depths would survive below the required total depth, so the last step
+must satisfy `a=g+1`. This converts the failed carrier-only bound into one exact target-coupled
+normalization resonance; excluding that resonance remains open.
 
 Record [`MM-S21`](SALVAGE.md#mm-s21-bounded-decimal-suffix-cycles) closes the fixed-precision
 suffix-descent lane. `DecimalSetterSuffix.cycleDefect_lift` gives an explicit one-digit lift for
@@ -2225,6 +2236,7 @@ fixed-rank decision problem.
 | `DecimalSetterAncestry.lean` | primitive gap factor; exact reciprocal and periodic raw two-`c` prime support; arbitrary-history prime-support propagation and radical saturation; physical all-erasure full-gap lower code and first-entry extinction; denominator-ancestry reduction; full-gap, factorwise, and gcd-saturated quotient gates for a singleton target |
 | `SwappedSetterThresholdCarry.lean` | exact multiplicative target cross-product, finite balanced suffix carry, Neary macro contractions, and the full-erasure-tail terminal cut |
 | `SwappedSetterCarrierGap.lean` | exact integral centered-carrier lift, raw gap factorization, and primitive one- and two-deletion counterexamples to reachability-only gap invariants |
+| `SwappedSetterCarrierResonance.lean` | target-coupled primitive normalization, deep-gap last-step resonance, and the full-erasure-tail pole adapter |
 | `PairedMortality.lean` | common-column mortality converse and exact integer `4 × 4` family |
 | `PhaseFracture.lean` | phase normalization and dimension-free projective-identification contradiction |
 | `PhaseRigidity.lean` | checked local role algebra, discrepancy commutators, and invariant-pencil rigidity |
