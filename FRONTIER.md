@@ -1167,6 +1167,14 @@ forces complete suffix exhaustion and a `cb` or `cc` head. Both singleton curren
 deep-root singleton-current/singleton-intervening residue plus the explicit multi/multi A/B
 grammar. Shell-compatible tails are not thereby reachable poles.
 
+The contaminated counterfamily is no longer arithmetically opaque.
+[`MM-S96`](SALVAGE.md#mm-s96-contaminated-tail-factorwise-pole-gate) proves that any singleton
+pole over it forces `q∣V_current·V_tail`. Every gap divisor absent from the inherited lower code
+must therefore occur in the current lower code. The boundary is exact: one formal `β=3` body
+already puts the whole gap into the inherited code, so unconditional cancellation to
+`q∣V_current` is false at the gate level. The live task is a factor-support language, not a
+choice of projective normalization.
+
 The ternary and decimal branches now separate at their first multi-transfer front.
 [`MM-S37`](SALVAGE.md#mm-s37-decimal-three-shape-frontier-extinction) substitutes each of the
 three role shapes left by the swapped ternary gate into the decimal carrier equation. All are

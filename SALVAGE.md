@@ -153,6 +153,7 @@ file owns the mathematical stock.
 | [`MM-S90`](#mm-s90-exact-singleton-tail-ancestry-equivalence) | structure theorem | at any lawful singleton pole, older unit peeled ancestry is equivalent to a multi-role current with at least `β+3` upper digits | formalized | active |
 | [`MM-S91`](#mm-s91-exact-parser-gap-clean-ancestry-gate) | structure theorem and obstruction | every `(1,1)` parser ray has integral gap-descended coordinates, but gap-clean coordinates exist exactly when the primitive gap divides its reduced normalized numerator | formalized | active |
 | [`MM-S94`](#mm-s94-three-block-singleton-chamber-classification) | structure theorem and obstruction | every lawful three-block singleton pole lies in an exact deep-root or `R_c` discrepancy grammar, and the entire `R_c` singleton-current quadrant is empty | formalized | active |
+| [`MM-S96`](#mm-s96-contaminated-tail-factorwise-pole-gate) | structure theorem and obstruction | a singleton pole over the uniform contaminated tail forces the primitive gap into the product of current and inherited lower codes, with exact factorwise transfer outside inherited support | formalized | active |
 | [`R32-S01`](#r32-s01-split-return-normal-form) | structure theorem | rank-two cuts reduce one-unit binary mortality to a `2 × 2` return recurrence | formalized | graduated |
 | [`R32-S02`](#r32-s02-two-plane-edge-square) | structure theorem | two rank-two generators are a two-vertex square of `2 × 2` edges | formalized | graduated |
 | [`R32-O01`](#r32-o01-rank-one-profile-collapse) | obstruction | a rank-one generator reduces mortality to order-at-most-three scalar recurrence zeros | audited | stock |
@@ -5923,6 +5924,73 @@ through `singletonPole_olderRatio_pos`,
 **Next:** kill singleton-current histories over deep roots and singleton intervening blocks;
 then decide the two-c deep-root corridor and the `cb/cc` `R_c` suffix grammar without assuming
 that shell-compatible rays are reachable poles.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S96: Contaminated-tail factorwise pole gate
+
+**Kind:** structure theorem and obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+The lawful tail used by `MM-S91` has normalized quotient whose reduced numerator is coprime to
+the primitive gap `q=2·10^β−7`; it therefore admits no gap-clean descended carrier. At an actual
+singleton pole above this tail, clearing the exact rational recurrence nevertheless yields an
+unconditional support law. If `V_current` and `V_tail` are the current and inherited lower
+boundary codes, then
+
+```text
+q ∣ V_current·V_tail.                                (1)
+```
+
+The proof first relates the reduced discrepancy `den−10·num` to `V_tail` through coefficients
+that are units modulo every divisor of `q`. The physical pole equation forces the raw
+discrepancy into the current lower code. Cancellation of the common rational reduction factor,
+followed by the exact marker and lift congruences, gives (1).
+
+Equation (1) has the sharp factorwise form
+
+```text
+r∣q and gcd(r,V_tail)=1  ⇒  r∣V_current.             (2)
+```
+
+For a prime `p∣q`, absence from the inherited lower code therefore forces `p` into the current
+lower code. This is the precise contaminated analogue of the gap-clean gate: support already
+present in the inherited code is silent, while every absent factor must enter through the
+current spelling.
+
+The cancellation boundary cannot be removed. At `β=3`, the explicit body
+
+```text
+b b b b c b c c c c
+```
+
+makes the inherited lower code divisible by the whole gap `q=1993`. Lean checks this exact
+divisibility. It is a resonance of the gate, not a singleton-pole witness.
+
+**Scope:** the product law holds for every `β>0`, body, singleton target, and current block,
+conditional only on an actual pole over the fixed lawful `gapContaminatedTail`. The divisor and
+prime corollaries are stated for `β≥3`. No theorem asserts that this tail reaches a pole or that
+inherited support alone propagates to the current block.
+
+**Use:** replace failed global coprimality cancellation by a support ledger. For each gap factor,
+either prove absence from the inherited lower language and force it into the current code, or
+classify the exact body congruence that absorbs it. Do not infer full-gap divisibility of the
+current code without the coprimality premise in (2).
+
+**Formalization:**
+[`MatrixMortality/DecimalSetterContaminatedPoleGate.lean`](MatrixMortality/DecimalSetterContaminatedPoleGate.lean),
+through `gapContaminatedTail_singletonPole_forces_lowerProduct`,
+`gapContaminatedTail_singletonPole_forces_gapDivisor_dvd_currentLower`,
+`gapContaminatedTail_singletonPole_forces_gapPrime_dvd_currentLower`, and
+`betaThree_gapContaminatedNext_lower_contains_gapFactor`.
+
+**Artifact:**
+[`audits/m53-contaminated-tail-factorwise-pole-gate-2026-09-01.md`](audits/m53-contaminated-tail-factorwise-pole-gate-2026-09-01.md).
+
+**Next:** intersect the forced support with the current lower-code grammar and lift the
+factorwise ledger from this uniform tail to the `cb/cc` peeled-head family isolated by `MM-S94`.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).

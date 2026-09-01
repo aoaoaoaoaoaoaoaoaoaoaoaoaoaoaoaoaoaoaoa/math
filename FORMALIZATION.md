@@ -1721,6 +1721,14 @@ long intervening head to `cb` or `cc`. Both singleton currents are impossible ov
 every intervening block and either singleton target. Deep-root singleton-current histories and
 the surviving multi/multi grammar remain open.
 
+Record [`MM-S96`](SALVAGE.md#mm-s96-contaminated-tail-factorwise-pole-gate) replaces the failed
+gap-clean cancellation on the uniform counterfamily by an exact support law. Any singleton pole
+over that tail forces the primitive gap to divide the product of the current and inherited lower
+codes. Consequently every divisor of the gap that is coprime to the inherited code divides the
+current code, with a primewise absence-to-entry corollary. The coprimality boundary is real:
+Lean checks an explicit `β=3` body whose inherited lower code contains the whole gap. This body
+is not a pole witness.
+
 Record [`MM-S37`](SALVAGE.md#mm-s37-decimal-three-shape-frontier-extinction) separates the
 ternary and decimal first-multi-transfer fronts. The single theorem
 `DecimalSetterDepth.firstMultiTransfer_threeShapeFrontier_impossible` consumes the three role
@@ -1798,6 +1806,7 @@ The `M₅(3)` delimiter attack has twenty-three foundational records:
 | [`MM-S90`](SALVAGE.md#mm-s90-exact-singleton-tail-ancestry-equivalence) | nonzero lawful parser rays, automatic long-current unit ancestry, exact current-shape equivalence, and complementary singleton/all-`c` short grammar |
 | [`MM-S91`](SALVAGE.md#mm-s91-exact-parser-gap-clean-ancestry-gate) | automatic integral gap descent, exact reduced-numerator criterion for primitive-gap coprimality, and a lawful shell counterexample to automatic gap-clean ancestry |
 | [`MM-S94`](SALVAGE.md#mm-s94-three-block-singleton-chamber-classification) | positive singleton chamber, exact deep-root/`R_c` multi-current classifier, suffix/head grammar, and complete `R_c` singleton-current extinction |
+| [`MM-S96`](SALVAGE.md#mm-s96-contaminated-tail-factorwise-pole-gate) | exact current/inherited lower-code product divisibility, arbitrary-divisor and primewise support transfer, and a formal inherited-support saturation boundary |
 | [`MM-S01`](SALVAGE.md#mm-s01-square-run-projective-normal-form) | invariant square-run plane, invertible `2 × 2` transfer, Möbius normalization, rank-one fracture grammar, and equivalence with pole avoidance |
 | [`MM-S02`](SALVAGE.md#mm-s02-reset-zero-projective-peeling) | scaled transfer identity, exact two-shell classification of all poles, and reset-zero one-transfer avoidance |
 | [`MM-O16`](SALVAGE.md#mm-o16-exact-delimiter-pair-obstruction) | generic ignored-pair immortality is formalized; paired common-kernel and cubic companion specializations are audited |

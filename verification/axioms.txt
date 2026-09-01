@@ -1770,6 +1770,16 @@
 'MatrixMortality.DecimalSetterBridgeRay.gapContaminatedTail_no_gapCleanIntegralCarrier' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.DecimalSetterBridgeRay.gapContaminatedTail_singletonPole_forces_lowerProduct' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterBridgeRay.gapContaminatedTail_singletonPole_forces_gapDivisor_dvd_currentLower' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterBridgeRay.gapContaminatedTail_singletonPole_forces_gapPrime_dvd_currentLower' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterBridgeRay.betaThree_gapContaminatedNext_lower_contains_gapFactor' depends on axioms: [propext]
 'MatrixMortality.DecimalSetterBridgeRay.two_mul_tenPow_lift_le_singletonTrace' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
