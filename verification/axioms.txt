@@ -2077,6 +2077,24 @@
 'MatrixMortality.MixedPrimeDebt.lengthTwoCollisionSource_pos_iff_crossingNormalForm' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.MixedPrimeDebt.lengthThreeFalling_collisionSource' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.lengthThreeFallingSource_realTrap_forces_k_le_two' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.lengthThreeFallingSource_realTrap_forces_k_pos' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.lengthThreeFallingSource_realTrap_forces_k_eq_one_or_two' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.lengthThreeFalling_collision_realTrap_forces_k_le_two' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.lengthThreeFalling_collision_realTrap_forces_k_eq_one_or_two' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.MixedPrimeDebt.shellRun_fixedPoint_unique' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.MixedPrimeDebt.shellPeriodicPoint_eq_iff_commute' depends on axioms: [propext,
  Classical.choice,

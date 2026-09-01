@@ -272,6 +272,7 @@ file owns the mathematical stock.
 | [`D2-S21`](#d2-s21-affine-determinant-carry-stripping) | reduction | common initial and terminal waits strip exactly from the fixed-source equation, while the cleared determinant has explicit recurrences | formalized | active |
 | [`D2-S22`](#d2-s22-prefix-carry-minimum-classifier) | structure theorem | accepted same-length cross-grade collisions require a bounded later cancellation of their first nonzero prefix carry | formalized | active |
 | [`D2-S23`](#d2-s23-length-two-mixed-sign-classifier) | exact classifier | fully guarded positive two-wait collisions form one explicit finite union of affine congruence families | formalized | active |
+| [`D2-S24`](#d2-s24-first-length-three-chamber-cut) | structure theorem | the closed positive-positive-negative three-wait chamber has an exact source independent of its final gauge, and the real trap leaves exactly transfers one and two | formalized | active |
 | [`D2-D01`](#d2-d01-projectively-unimodular-stratum) | decidable stratum | projectively unimodular hard-core instances are decidable | audited | stock |
 | [`D2-D02`](#d2-d02-invariant-pair-stratum) | decidable stratum | invariant projective pairs reduce to abelian-by-`C₂` reachability | reported | active |
 | [`D2-D03`](#d2-d03-common-multiplier-stratum) | decidable stratum | rational affine maps with one multiplier are decidable under regular control | reported | active |
@@ -12758,6 +12759,55 @@ valuation calculation, real inequality, or unbounded search remains at length tw
 
 **Next:** the live mathematical attack begins at length three, where at least three prefix terms
 can share the lowest carry.
+
+### D2-S24: First length-three chamber cut
+
+**Kind:** structure theorem and Archimedean reduction
+**Evidence:** formalized
+**Disposition:** active
+
+The closure of the first length-three chamber surviving the suffix antichain has schedules
+
+```text
+u=[p+A,q+B,t],   v=[p,q,t+k],   k<A+B.
+```
+
+Here `A,B,k` are nonnegative and the strict positive-positive-negative chamber adds
+`A,B,k>0`. Put `r=2/3`. Lean proves that the collision source is independent of the final
+gauge `t` and is exactly
+
+```text
+x(p,q,A,B,k)=
+  [9r^q(r^B−r^k)+15(1−r^k)] / [27r^(p+q)(r^k−r^(A+B))].
+```
+
+This is not merely a symbolic normalization. If `k≥3`, then the numerator is at least `71/9`,
+while the positive denominator is strictly less than `8`; hence `x>1/2`. Therefore every
+collision source in the real trap `[1/5,1/2]` satisfies
+
+```text
+k≤2.
+```
+
+At `k=0`, the numerator is nonpositive while the denominator is positive, contradicting the
+real trap's lower endpoint. Hence the surviving transfers are exactly `k=1` and `k=2`. The
+cut is uniform in `p,q,A,B,t`; no residue or denominator hypothesis is used.
+
+**Scope:** this record treats only the closed positive-positive-negative chamber. It neither
+classifies the `k=1,2` five-adic carry trees nor identifies the other length-three sign
+chambers. In particular, the remaining parameters are unbounded.
+
+**Artifact:** `MixedPrimeDebt.lengthThreeFalling_collisionSource`,
+`MixedPrimeDebt.lengthThreeFallingSource_realTrap_forces_k_le_two`, and
+`MixedPrimeDebt.lengthThreeFalling_collision_realTrap_forces_k_eq_one_or_two` in
+[`MixedPrimeRealTrapLengthThree.lean`](MatrixMortality/MixedPrimeRealTrapLengthThree.lean).
+
+**Use:** split the first live length-three chamber into the two exact transfers `k=1` and `k=2`
+before entering the tied-minimum carry tree. The terminal gauge `t` can be omitted from every
+source-side calculation.
+
+**Next:** classify source and target five-unit acceptance for `k=1,2` through the three prefix
+carry heights, then normalize the remaining sign chambers.
 
 ### D2-O09: Guarded real-pole reset
 

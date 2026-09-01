@@ -2616,6 +2616,14 @@ forty accepted `(Δ,b)` residue pairs. The fully guarded length-two parameter la
 explicit finite union of affine congruence families. This is
 [`D2-S23`](SALVAGE.md#d2-s23-length-two-mixed-sign-classifier). The live carry-tree search
 therefore begins at length three, where three or more prefix terms can share the lowest height.
+In the closure of its first positive-positive-negative chamber, write the schedules as
+`[p+A,q+B,t]` and `[p,q,t+k]`, with `k<A+B`. Their collision source has one exact rational
+formula independent of the terminal gauge `t`. A uniform numerator/denominator comparison,
+together with exclusion of the zero-transfer wall, proves that real-trap membership forces
+`k∈{1,2}`. This is
+[`D2-S24`](SALVAGE.md#d2-s24-first-length-three-chamber-cut). The live residue is now the exact
+three-term source and target carry for `k=1,2`, together with normalization of the other
+length-three sign chambers.
 The deepest of those three branches is itself a full depth reset. In normalized band coordinates
 `U(d,μ)=1/5+(3/10)(2/3)^dμ`, every target band `d≥2` contains a point whose `d−2` predecessor has
 any prescribed band `n≥7` and mantissa in `(2/3,1]`. An explicit guarded subfamily fixes target
@@ -2940,8 +2948,10 @@ universal computation.
    `D2-S23` completely classifies length-two mixed-sign crossings: `k≤2`, the gap lies in one of
    two explicit residue families, the target lies in a `10×50` or `10×250` residue rectangle,
    each rectangle has an exact forty-pair table, and the real gauge is classified exactly.
-   Begin the remaining higher-depth
-   tied-minimum search at length three through the weighted source balance. Abandon
+   `D2-S24` starts length three in the closed positive-positive-negative chamber: the collision
+   source is independent of its terminal gauge and the real trap leaves exactly `k∈{1,2}`.
+   Classify the remaining three-term carries, then normalize the other sign chambers. Begin
+   every remaining higher-depth tied-minimum search through the weighted source balance. Abandon
    finite literal return censuses and local forbidden-factor grammars; attack those
    endpoint-coupled fibres. Treat chamber
    exit and reentry as separate pre-exit seams. Do not reopen

@@ -41,6 +41,7 @@ import MatrixMortality.MixedPrimeRealTrapAntichain
 import MatrixMortality.MixedPrimeRealTrapDeterminant
 import MatrixMortality.MixedPrimeRealTrapPrefixCarry
 import MatrixMortality.MixedPrimeRealTrapLengthTwo
+import MatrixMortality.MixedPrimeRealTrapLengthThree
 import MatrixMortality.RankTwoPunctuation
 import MatrixMortality.ReturnSquare
 import MatrixMortality.ReturnSquareDynamics
