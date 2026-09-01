@@ -190,6 +190,7 @@ file owns the mathematical stock.
 | [`R32-S54`](#r32-s54-global-pure-denominator-descent) | decidable stratum | every pure-denominator bridge zero pays the sum of all selected scale decrements from its fixed terminal denominator | formalized | active |
 | [`R32-S55`](#r32-s55-effective-returnsquare-decision) | decision theorem | every reduced positive rational ReturnSquare parameter at base at least four is decided by an explicit finite candidate set | formalized | active |
 | [`R32-S56`](#r32-s56-terminal-weighted-shallow-classification) | decidable stratum | the rightmost pure-denominator return multiplies the remaining inverse-word budget, forcing resonance through denominator `2q²−q` | formalized | active |
+| [`R32-S57`](#r32-s57-free-cubic-continuant-radix-stack) | structure theorem and compiler mechanism | two positive fixed-cubic macro returns form a free binary affine radix stack with projectively distinct endpoint-zero bridge extensions | formalized | active |
 | [`R32-M01`](#r32-m01-generic-reverse-edge-compiler) | partial mechanism | projective incidence generically embeds into a compatible two-plane edge square | formalized | active |
 | [`R32-M02`](#r32-m02-finite-quotient-sieve) | partial mechanism | finite monoid quotients give complete modular no-certificates for fixed candidates | formalized | active |
 | [`R32-M03`](#r32-m03-two-scale-return-conversion) | partial mechanism | a minimal two-scale return pencil has nonresonant multi-return zeros | formalized | active |
@@ -8061,6 +8062,61 @@ with audit
 
 **Use:** delete every pure-denominator candidate through `2q²−q` without enumeration. For larger
 denominators, prune the finite `R32-S55` search by the exact multiplicative budget (1).
+
+### R32-S57: Free cubic-continuant radix stack
+
+**Kind:** structure theorem and compiler mechanism
+**Evidence:** formalized
+**Disposition:** active
+
+The fixed false-wait return family for `X³+X²−1` contains two positive macro blocks with the
+same normalized diagonal ratio and distinct affine digits:
+
+```text
+M₅ ∼ [[48,274],[0,300]],
+M₈M₁M₁₅M₈M₁M₈M₁₅M₂₁M₁₅ ∼ [[48,149],[0,300]].
+```
+
+For `d(0)=274`, `d(1)=149`, define
+
+```text
+κ(ε)=0,       κ(bw)=d(b)25^|w|+4κ(w).
+```
+
+The normalized product of a bit word `w` has entries
+
+```text
+F(w)₀₀=4^|w|,   F(w)₁₀=0,   F(w)₁₁=25^|w|,   F(w)₀₁=κ(w)/12.
+```
+
+Modulo four recovers the first digit because `274≡2` and `149≡1`. Recursion recovers the whole
+word at a fixed length. The projective diagonal ratio `(4/25)^|w|` recovers the length, so the
+physical macro product is injective even up to arbitrary rational rescaling. There are therefore
+`2^n` projectively distinct upper-triangular continuants at every macro depth `n`.
+
+The singular return absorbs every such upper-triangular prefix by its lower-right entry. Hence
+prefixing the checked seven-wait endpoint bridge by any radix word gives another physical zero.
+The bridge product is invertible, so these extended bridge transformations remain projectively
+distinct by right cancellation.
+
+**Scope:** this is a free write-only binary stack inside one fixed non-pure cubic terminal
+language. It excludes finite nuclei whose states are exact projective transformations. Every
+macro product fixes the same terminal ray, so the result does not exclude a quotient tracking
+only that current ray. It also does not exclude finite abstract recognizers, supply a read or
+comparison macro, prove nonregularity, or decide the complete recurrence-digit continuant.
+
+**Artifact:** `CubicReturn.NonPure.continuantRadixWord_product`,
+`continuantRadixGenerator_product_entries`,
+`continuantRadixEncoding_projectively_injective`, `continuantRadixEncoding_lowerLeft`,
+`continuantRadixEncoding_zero`, and `continuantRadixBridge_projectively_injective` in
+[`CubicContinuantRadix.lean`](MatrixMortality/CubicContinuantRadix.lean), with audit
+[`m32-cubic-continuant-radix-2026-08-31.md`](audits/m32-cubic-continuant-radix-2026-08-31.md).
+
+**Use:** delete every fixed-cubic decision argument that requires finitely many exact terminal
+projective products. For a compiler, seek a positive recurrence word which reads or
+compares the base-`(4,25)` digits while making every malformed read nonterminal. For a decision
+proof, show that every possible reader factors through a decidable affine quotient despite the
+free write stack.
 
 ### R32-M01: Generic reverse edge compiler
 

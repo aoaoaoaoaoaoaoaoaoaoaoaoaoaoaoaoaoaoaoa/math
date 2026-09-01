@@ -2604,6 +2604,33 @@
 'MatrixMortality.CubicReturn.NonPure.continuantPumpWord_unbounded_concat_prime' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.continuantRadixWord_product' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.continuantRadixEncoding_positive' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.continuantRadixEncoding_product_eq_smul' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.continuantRadixCode_injective_of_length_eq' depends on axioms: [propext,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.continuantRadixGenerator_product_entries' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.continuantRadixGenerator_projectively_injective' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.continuantRadixEncoding_projectively_injective' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.continuantRadixEncoding_lowerLeft' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.continuantRadixEncoding_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.continuantRadixBridge_projectively_injective' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.EdgeCompression.isMortal_iff_exists_edgeProduct_eq_zero' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
