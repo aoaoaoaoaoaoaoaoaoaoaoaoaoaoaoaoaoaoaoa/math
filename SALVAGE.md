@@ -159,6 +159,7 @@ file owns the mathematical stock.
 | [`MM-S61`](#mm-s61-primitive-carrier-gap-no-go) | obstruction | primitive deletion carriers already exceed the marker height and then acquire its full modulus, killing both unqualified carrier-gap invariants | formalized | active |
 | [`MM-S60`](#mm-s60-complete-b-bearing-rule-entry-extinction) | obstruction | every b-bearing rightmost-rule block misses the physical multi-role pole shell from a lawful two-`c` raw head | formalized | active |
 | [`MM-S62`](#mm-s62-all-c-position-two-rule-extinction) | obstruction | no all-`c` rightmost-rule block with exactly one preceding role reaches the physical pole shell from a lawful two-`c` raw head | formalized | active |
+| [`MM-S63`](#mm-s63-full-tail-last-step-resonance) | structure theorem and obstruction | every nonterminal full-erasure-tail pole forces the final history block's upper length to equal one plus its discarded normalization depth | formalized | active |
 | [`R32-S01`](#r32-s01-split-return-normal-form) | structure theorem | rank-two cuts reduce one-unit binary mortality to a `2 × 2` return recurrence | formalized | graduated |
 | [`R32-S02`](#r32-s02-two-plane-edge-square) | structure theorem | two rank-two generators are a two-vertex square of `2 × 2` edges | formalized | graduated |
 | [`R32-O01`](#r32-o01-rank-one-profile-collapse) | obstruction | a rank-one generator reduces mortality to order-at-most-three scalar recurrence zeros | audited | stock |
@@ -5311,7 +5312,8 @@ small carrier height nor nondivisibility is an invariant of reachability alone.
 [`MatrixMortality/SwappedSetterThresholdCarry.lean`](MatrixMortality/SwappedSetterThresholdCarry.lean),
 through `carryRun_iff`, `suffixCarry_iff_run`, `SuffixCarry.carry_mem`,
 `suffixCarry_of_crossProduct`, `matchedFalseSuffix_dvd_gap`,
-`threshold_crossProduct_of_pole`, `suffixCarry_of_pole`, and `erasureTail_pole_halts`.
+`erasureTail_threshold_dvd_gap`, `threshold_crossProduct_of_pole`, `suffixCarry_of_pole`, and
+`erasureTail_pole_halts`.
 
 **Artifact:**
 [`audits/m53-multiplicative-threshold-carry-2026-08-31.md`](audits/m53-multiplicative-threshold-carry-2026-08-31.md).
@@ -5398,6 +5400,81 @@ through `blockStep_represents_nextCarrier`, `nextCarrier_gap`,
 
 **Next:** track the target's Neary suffix state jointly with the primitive gcd cancellation in
 (1), or use earliest-pole ancestry to exclude the `ρ`-divisible gap states before a target hit.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S63: Full-tail last-step resonance
+
+**Kind:** structure theorem and obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+Let `(n,d)` be a primitive carrier before the last completed history block `z`, and let
+`(n',d')` be its primitive successor. Write the unreduced update from `MM-S61` as
+
+```text
+N=s n',      D=s d',                                   (1)
+```
+
+where `s≠0` is the discarded common scale. Suppose the prospective target ends in `β`
+erasures, is a pole from the successor state, and is nonterminal. `MM-S59` gives
+
+```text
+ρ=3^β ∣ d'−n'.                                         (2)
+```
+
+Primitivity and (2) first force `d'` to be a `3`-adic unit. More strongly, the predecessor
+denominator `d` is also a unit: if `3∣d`, primitivity makes `n` a unit, so
+`E=P_zd−V_zn` is a unit. The denominator equation `D=RE=s d'` then makes `s` a unit, while the
+raw gap equation has exact depth one, contradicting the depth at least `β≥2` supplied by (2).
+
+Put
+
+```text
+a=upperLength(z),      g=v₃(s),      h=v₃(d'−n').       (3)
+```
+
+The denominator equation gives `v₃(E)=g`. The exact raw gap factorization is
+
+```text
+s(d'−n')=μ(H·3^a d−3E).                                (4)
+```
+
+Its left side has depth `g+h`, where `h≥β≥2`. The two terms inside the right side have depths
+`a` and `g+1`. If these depths differ, the smaller survives, strictly below `g+h`. Therefore
+they must coincide:
+
+```text
+upperLength(z)=v₃(s)+1.                                 (5)
+```
+
+`erasureTailPole_forces_lastStep_resonance` proves (5) directly from the physical pole,
+primitive predecessor and successor, raw normalization equations, and live successor
+denominator. No additive raw-word ancestry is assumed.
+
+**Scope:** the theorem holds for `β≥2`, every physical role block, and every target with a full
+`β`-erasure tail. It requires a nonterminal pole and an explicit primitive normalization of the
+last raw carrier. It does not bound `v₃(s)`, exclude the resonance in (5), or classify targets
+without the full erasure tail. No `M₅(3)` conclusion follows.
+
+**Use:** replace the dead reachability-only height and modulus inductions of `MM-S61` by the
+target-coupled equality (5). A closure now needs only to show that physical gcd cancellation
+cannot discard exactly `upperLength(z)−1` powers of three before the first nonterminal full-tail
+pole, or to combine this forced shell with the reversed Neary carry.
+
+**Formalization:**
+[`MatrixMortality/SwappedSetterCarrierResonance.lean`](MatrixMortality/SwappedSetterCarrierResonance.lean),
+through `primitiveCongruent_denominator_isUnit`,
+`primitiveDivisibleSuccessor_forces_lastStep_resonance`, and
+`erasureTailPole_forces_lastStep_resonance`. The target divisibility adapter is
+`SwappedSetterThresholdCarry.erasureTail_threshold_dvd_gap`.
+
+**Artifact:**
+[`audits/m53-full-tail-last-step-resonance-2026-08-31.md`](audits/m53-full-tail-last-step-resonance-2026-08-31.md).
+
+**Next:** bound the common normalization depth in (1) from primitive predecessor arithmetic, or
+feed the forced value `g=a−1` into the exact suffix carry and exclude its first mismatch.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
