@@ -273,6 +273,7 @@ file owns the mathematical stock.
 | [`D2-S22`](#d2-s22-prefix-carry-minimum-classifier) | structure theorem | accepted same-length cross-grade collisions require a bounded later cancellation of their first nonzero prefix carry | formalized | active |
 | [`D2-S23`](#d2-s23-length-two-mixed-sign-classifier) | exact classifier | fully guarded positive two-wait collisions form one explicit finite union of affine congruence families | formalized | active |
 | [`D2-S24`](#d2-s24-first-length-three-chamber-cut) | structure theorem | the closed positive-positive-negative three-wait chamber reduces to transfers one and two, one depth-two target carry, and ten terminal residues | formalized | active |
+| [`D2-S25`](#d2-s25-remaining-strict-length-three-chamber-classifier) | exact classifier | every strict three-wait sign chamber outside the first positive-positive-negative chamber is either impossible over the real trap or one explicit semilinear residue language | formalized | active |
 | [`D2-D01`](#d2-d01-projectively-unimodular-stratum) | decidable stratum | projectively unimodular hard-core instances are decidable | audited | stock |
 | [`D2-D02`](#d2-d02-invariant-pair-stratum) | decidable stratum | invariant projective pairs reduce to abelian-by-`C₂` reachability | reported | active |
 | [`D2-D03`](#d2-d03-common-multiplier-stratum) | decidable stratum | rational affine maps with one multiplier are decidable under regular control | reported | active |
@@ -12841,9 +12842,10 @@ Thus only 67 outer `(q,p,B)` states remain when `B` is counted only in the strat
 bounded; the unbounded parameters occur solely inside the exact depth-two carry. In the strict
 chamber, target acceptance also forces `A` even by the general first-prefix carry obstruction.
 
-**Scope:** this record treats only the closed positive-positive-negative chamber. It neither
-classifies the `k=1,2` five-adic carry trees nor identifies the other length-three sign
-chambers. In particular, the remaining parameters are unbounded.
+**Scope:** this record treats only the closed positive-positive-negative chamber. It does not
+classify its `k=1,2` five-adic carry trees. The other strict length-three sign chambers are now
+classified by [`D2-S25`](#d2-s25-remaining-strict-length-three-chamber-classifier), but the
+parameters inside this chamber remain unbounded.
 
 **Artifact:** `MixedPrimeDebt.lengthThreeFalling_collisionSource`,
 `MixedPrimeDebt.lengthThreeFallingSource_realTrap_forces_k_le_two`, and
@@ -12864,8 +12866,110 @@ the universal carry laws `MixedPrimeDebt.terminalCarryTarget_fiveUnit_forces_car
 before entering the tied-minimum carry tree. The terminal gauge `t` can be omitted from every
 source-side calculation.
 
-**Next:** classify the depth-two carry `E` for `k=1,2`, then finish the exact residue tables
-for the remaining sign chambers.
+**Next:** classify the depth-two carry `E` for `k=1,2`. This is the sole surviving strict
+length-three chamber.
+
+### D2-S25: Remaining strict length-three chamber classifier
+
+**Kind:** exact classifier
+**Evidence:** formalized
+**Disposition:** active
+
+Orient unequal total waits so that the left schedule has the larger sum, strip common initial
+and terminal waits by [`D2-S21`](#d2-s21-affine-determinant-carry-stripping), and assume the
+collision source is positive. The suffix antichain [`D2-S20`](#d2-s20-positive-endpoint-suffix-antichain)
+then places every endpoint-strict length-three core in exactly one of four coordinate-sign
+chambers:
+
+```text
+(+,≥0,−),  (+,−,−),  (+,−,+),  (−,+,−).
+```
+
+The first is closed along its middle-zero wall and contains the still-live strict chamber of
+[`D2-S24`](#d2-s24-first-length-three-chamber-cut). Lean completely classifies the other three.
+
+In the positive-negative-negative chamber the exact collision source is always strictly greater
+than `1/2`. Hence this chamber never meets the real trap `[1/5,1/2]`.
+
+In the positive-negative-positive, or rebounding, chamber, positivity and the real trap force
+the normalized parameters
+
+```text
+k=1,  q=0,  B∈{6,7}.
+```
+
+Write `d=offset+1` and retain the terminal wait `t`. For `B=6`, complete guarded real-trap
+acceptance is equivalent to `p∈{3,4}` and one of the following forty pairs
+`(d mod 250,t mod 10)`:
+
+```text
+25→{2,4,6,8}    35→{1,5,7,9}    75→{0,2,6,8}    85→{1,3,5,7}
+125→{0,2,4,6}   135→{1,3,7,9}   175→{0,4,6,8}   185→{3,5,7,9}
+225→{0,2,4,8}   235→{1,3,5,9}.
+```
+
+On the `B=6` source-unit fibre `κ(d)=0`, the incoming carry has value two precisely when
+`d mod 50∈{15,25,35,45}`. For `B=7`, acceptance is equivalent to `p∈{0,1}` and one of the
+following forty pairs
+`(d mod 1250,t mod 10)`:
+
+```text
+82→{3,5,7,9}     232→{0,2,4,6}    332→{1,3,5,7}    482→{2,4,6,8}
+582→{1,3,5,9}    732→{0,4,6,8}    832→{1,3,7,9}    982→{0,2,6,8}
+1082→{1,5,7,9}   1232→{0,2,4,8}.
+```
+
+On the `B=7` source-unit fibre `κ(d)=1`, the incoming carry has value two precisely when
+`d mod 250∈{82,132,182,232}`. Exact shift laws prove periods `250` and `1250`; the tables are not
+bounded-search claims.
+
+In the negative-positive-negative, or reversing, chamber, the real and target guards force
+
+```text
+k=1,  q=1,  A=2,  p∈{1,2}.
+```
+
+Complete real and five-adic acceptance is then equivalent to one of the following forty pairs
+`(d mod 250,t mod 10)`, again with `d=offset+1`:
+
+```text
+16→{0,2,4,8}    36→{3,5,7,9}    66→{0,2,4,6}    86→{1,3,5,7}
+116→{2,4,6,8}   136→{1,3,5,9}   166→{0,4,6,8}   186→{1,3,7,9}
+216→{0,2,6,8}   236→{1,5,7,9}.
+```
+
+In both alternating chambers, target unitality propagates backward through the exact shell
+prefix equivalence, so the displayed classifiers include every intermediate five-adic guard,
+not merely the endpoints.
+
+**Scope:** this record closes the three strict sign chambers outside the positive-positive-negative
+chamber after common-end stripping. It does not classify the residual `k=1,2` carry in
+[`D2-S24`](#d2-s24-first-length-three-chamber-cut), schedules of length at least four, or pairs
+whose equal boundary coordinates first reduce to a shorter core.
+
+**Artifact:** `MixedPrimeDebt.lengthThree_strictCrossing_chambers`,
+`MixedPrimeDebt.lengthThree_positiveCollision_chambers`,
+`MixedPrimeDebt.lengthThreeDoublyFalling_collision_not_mem_realTrap`, and the normalized source,
+target, carry, shift, and guard reductions in
+[`MixedPrimeRealTrapLengthThreeChambers.lean`](MatrixMortality/MixedPrimeRealTrapLengthThreeChambers.lean);
+`MixedPrimeDebt.lengthThreeReboundingTargetCarry_six_hasValue_two_iff_residue`,
+`MixedPrimeDebt.lengthThreeReboundingTargetCarry_seven_hasValue_two_iff_residue`,
+`MixedPrimeDebt.lengthThreeRebounding_six_acceptance_iff`, and
+`MixedPrimeDebt.lengthThreeRebounding_seven_acceptance_iff` in
+[`MixedPrimeRealTrapLengthThreeRebounding.lean`](MatrixMortality/MixedPrimeRealTrapLengthThreeRebounding.lean);
+the exact Archimedean classifier in
+[`MixedPrimeRealTrapLengthThreeReversing.lean`](MatrixMortality/MixedPrimeRealTrapLengthThreeReversing.lean);
+and `MixedPrimeDebt.lengthThreeReversing_realTrap_targetUnit_parameter_cut`,
+`MixedPrimeDebt.lengthThreeReversingTarget_q1_A2_fiveUnit_iff_residue`, and
+`MixedPrimeDebt.lengthThreeReversing_q1_A2_fullAcceptance_iff` in
+[`MixedPrimeRealTrapLengthThreeReversingTarget.lean`](MatrixMortality/MixedPrimeRealTrapLengthThreeReversingTarget.lean).
+
+**Use:** discard the positive-negative-negative chamber and replace both alternating chambers
+by their finite residue automata. Every remaining strict length-three search can now be confined
+to the two transfers inside `D2-S24`.
+
+**Next:** kill the `D2-S24` depth-two carry for `k=1,2`; if it survives, extract its exact
+semilinear language before moving the crossing-walk census to length four.
 
 ### D2-O09: Guarded real-pole reset
 

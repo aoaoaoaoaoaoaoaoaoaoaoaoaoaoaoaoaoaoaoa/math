@@ -1411,7 +1411,7 @@ transition: `peeledNumerator_twoAdic_deepens` proves that the difference of the 
 every non-singleton consecutive multi-pole block to have upper length at least three. The module
 does not identify later product residuals with raw encoded heads or decide singleton targets.
 
-The dimension-two affine ledger has thirty-three independently checked records:
+The dimension-two affine ledger has thirty-four independently checked records:
 
 | Record | Formalization obligation |
 | --- | --- |
@@ -1437,6 +1437,7 @@ The dimension-two affine ledger has thirty-three independently checked records:
 | [`D2-S22`](SALVAGE.md#d2-s22-prefix-carry-minimum-classifier) | the exact weighted suffix balance and real-trap corridor, complementary prefix-determinant expansion, termwise parity/LTE values, unique-minimum obstruction, bounded cancellation partner, generic even-gap successor, and sharp accepted/rejected witnesses |
 | [`D2-S23`](SALVAGE.md#d2-s23-length-two-mixed-sign-classifier) | the complete positive-source length-two normal form up to swap, exact source and target coordinates, full tail- and gap-shift valuation laws, `k≤2` real bound, two exact gap-residue families, exhaustive forty-pair target tables, exact real-gauge classification, and the final semilinear acceptance iff |
 | [`D2-S24`](SALVAGE.md#d2-s24-first-length-three-chamber-cut) | the exact source and target throughout the closed positive-positive-negative length-three chamber, terminal-gauge independence of the source, the uniform real-trap reduction to `k∈{1,2}`, global prefix-guard implication of source acceptance, the universal depth-two terminal carry, exact ten-periodic terminal acceptance, the finite outer parameter cut, and forced even first displacement |
+| [`D2-S25`](SALVAGE.md#d2-s25-remaining-strict-length-three-chamber-classifier) | the exhaustive four-chamber arithmetic partition, real exclusion of the positive-negative-negative chamber, exact Archimedean and five-adic reductions of both alternating chambers, exact carry periods, three forty-pair target tables, backward propagation of all prefix guards, and the final semilinear acceptance iff statements |
 | [`D2-D05`](SALVAGE.md#d2-d05-prescribed-translation-count) | primitive linear-polynomial divisibility, bounded carries in both scan directions, ordered-marker automaton, regular control, and `a=±1` cases |
 | [`D2-D06`](SALVAGE.md#d2-d06-private-prime-peeling) | unique-minimum valuation calculation, zero endpoints, fixed-count reduction, reversed language, and positive private valuation |
 | [`D2-D07`](SALVAGE.md#d2-d07-bounded-valuation-orthants) | localization support, denominator bounds in both orthants, invariant-interval recognition, finite graph, and regular-control product |

@@ -39,6 +39,56 @@ private theorem terminalCarry_ratio_power_unit (exponent : ℕ) :
   have three_unit : IsUnit 5 (3 : ℚ) := intCast_isUnit_of_not_dvd (by norm_num)
   exact terminalCarry_unit_pow (div_hasValue two_unit three_unit) exponent
 
+/-- Changing only the carry shifts the terminal coordinate three five-adic levels downward. -/
+theorem terminalCarryTarget_carry_sub_hasValue
+    (wait : ℕ) {later earlier : ℚ} {value : ℤ}
+    (carry_sub_value : HasValue 5 (later - earlier) value) :
+    HasValue 5
+      (terminalCarryTarget wait later - terminalCarryTarget wait earlier)
+      (value - 3) := by
+  have power_unit := terminalCarry_ratio_power_unit wait
+  have denominator_value : HasValue 5 (125 : ℚ) 3 := by
+    convert primePower_hasValue (prime := 5) 3 using 1 <;> norm_num
+  have difference_eq :
+      terminalCarryTarget wait later - terminalCarryTarget wait earlier =
+        ((2 / 3 : ℚ) ^ wait * (later - earlier)) / 125 := by
+    rw [terminalCarryTarget, terminalCarryTarget]
+    ring
+  rw [difference_eq]
+  have numerator_value := mul_hasValue power_unit carry_sub_value
+  convert div_hasValue numerator_value denominator_value using 1
+  ring
+
+/-- A carry perturbation of value at least four preserves terminal acceptance. -/
+theorem terminalCarryTarget_carry_sub_fiveUnit_iff
+    (wait : ℕ) {later earlier : ℚ} {value : ℤ} (four_le : 4 ≤ value)
+    (carry_sub_value : HasValue 5 (later - earlier) value) :
+    IsUnit 5 (terminalCarryTarget wait later) ↔
+      IsUnit 5 (terminalCarryTarget wait earlier) := by
+  have target_sub_value :=
+    terminalCarryTarget_carry_sub_hasValue wait carry_sub_value
+  have target_sub_positive :
+      IsPositive 5
+        (terminalCarryTarget wait later - terminalCarryTarget wait earlier) :=
+    ⟨target_sub_value.1, by rw [target_sub_value.2]; omega⟩
+  have reverse_value := neg_hasValue target_sub_value
+  have reverse_positive :
+      IsPositive 5
+        (terminalCarryTarget wait earlier - terminalCarryTarget wait later) := by
+    convert (show IsPositive 5
+      (-(terminalCarryTarget wait later - terminalCarryTarget wait earlier)) from
+        ⟨reverse_value.1, by rw [reverse_value.2]; omega⟩) using 1
+    ring
+  constructor
+  · intro later_unit
+    have earlier_unit := unit_add_positive later_unit reverse_positive
+    convert earlier_unit using 1
+    ring
+  · intro earlier_unit
+    have later_unit := unit_add_positive earlier_unit target_sub_positive
+    convert later_unit using 1
+    ring
+
 /-- Target acceptance is exact depth three of the universal terminal numerator. -/
 theorem terminalCarryTarget_fiveUnit_iff_numerator
     (wait : ℕ) (carry : ℚ) :
