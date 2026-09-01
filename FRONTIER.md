@@ -1066,6 +1066,13 @@ the target is a literal terminal match. The unresolved shallow roots are now pre
 parser-lawful rule-ended blocks of length at least two; their extra roles must supply the
 separating discrepancy.
 
+[`MM-S83`](SALVAGE.md#mm-s83-leading-b-shallow-root-sign-extinction) removes every longer root
+whose first role carries `b`. Its exact complement is a negative sum of three positive or
+nonnegative radix terms, so the same sign wall applies independently of the remaining roles and
+phases. Every unresolved malformed shallow root now begins with `c` and has length at least two.
+At length two, the sole letter words are `cb` and `cc`; the first role's phase is invisible to
+the one-block square-reset state.
+
 The ternary and decimal branches now separate at their first multi-transfer front.
 [`MM-S37`](SALVAGE.md#mm-s37-decimal-three-shape-frontier-extinction) substitutes each of the
 three role shapes left by the swapped ternary gate into the decimal carrier equation. All are

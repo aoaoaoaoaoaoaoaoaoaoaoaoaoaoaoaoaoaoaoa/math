@@ -144,6 +144,7 @@ file owns the mathematical stock.
 | [`MM-S79`](#mm-s79-minimum-body-lawful-shallow-pole) | normalization boundary | every minimum-length body attains the shallow pole at its unique lawful terminal word, while compiler-emitted bodies lie strictly above this slice | formalized | active |
 | [`MM-S81`](#mm-s81-one-r_c-root-terminal-normalization) | structure theorem | every shallow pole over the one-`R_c` root is exactly a literal Neary terminal match, with no malformed survivor | formalized | active |
 | [`MM-S82`](#mm-s82-one-r_b-root-sign-extinction) | obstruction | the one-`R_b` root has negative exact-length complement and cannot hit any shallow pole | formalized | active |
+| [`MM-S83`](#mm-s83-leading-b-shallow-root-sign-extinction) | obstruction | every shallow root beginning with a `b`-role has negative exact-length complement and misses every target | formalized | active |
 | [`R32-S01`](#r32-s01-split-return-normal-form) | structure theorem | rank-two cuts reduce one-unit binary mortality to a `2 × 2` return recurrence | formalized | graduated |
 | [`R32-S02`](#r32-s02-two-plane-edge-square) | structure theorem | two rank-two generators are a two-vertex square of `2 × 2` edges | formalized | graduated |
 | [`R32-O01`](#r32-o01-rank-one-profile-collapse) | obstruction | a rank-one generator reduces mortality to order-at-most-three scalar recurrence zeros | audited | stock |
@@ -5269,6 +5270,55 @@ through `ruleBRoot_complement_calibration`, `ruleBRoot_hitsSquarePole_impossible
 **Next:** factor a multi-role rule-ended root at its first or last role and determine whether its
 complement retains a sign chamber or reduces to the one-`R_c` terminal normalization plus an
 explicit nonzero discrepancy.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S83: Leading-`b` shallow-root sign extinction
+
+**Kind:** obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+Let a shallow root begin with any rule or erasure role carrying `b`, followed by an arbitrary
+role word `rest`. Lean computes its exact-length complement as
+
+```text
+Δ = −(5·10^(β+1+|upper(rest)|)
+      + code(upper(rest))·10^(β+1)
+      + μ).
+```
+
+Every term inside the parentheses is nonnegative and the marker is positive, so `Δ<0`
+unconditionally. The generic negative-complement gate combines this sign with positive
+`gap`, positive punctuated upper codes, positive source upper code, nonnegative target lower
+code, and positive `lift`. The shallow pole equation again has a strictly positive left side and
+a nonpositive right side.
+
+Therefore no shallow root beginning with a `b`-role can hit any target, regardless of its later
+roles, phases, target, or body. This strictly generalizes the one-role `MM-S82` extinction.
+
+**Scope:** the theorem assumes `β>0` only at the final pole gate; the exact complement identity
+and negativity hold for every `β`. It classifies roots by their first role's tag letter, not by
+their last parser phase. Roots beginning with `c`, singleton targets, and deep histories remain
+outside.
+
+**Use:** remove half of every shallow-root length stratum at once. Combined with `MM-S81`, every
+unresolved malformed shallow root now begins with `c` and has length at least two. At length two,
+only the letter words `cb` and `cc` survive, with either phase on the first role and a rule on the
+last.
+
+**Formalization:**
+[`MatrixMortality/DecimalSetterMinimumBody.lean`](MatrixMortality/DecimalSetterMinimumBody.lean),
+through `tagCodeB_code_eq`, `leadingBRoot_complement_eq`,
+`leadingBRoot_complement_neg`, `hitsSquarePole_single_impossible_of_complement_neg`, and
+`leadingBRoot_hitsSquarePole_impossible`.
+
+**Artifact:**
+[`audits/m53-leading-b-shallow-root-sign-extinction-2026-08-31.md`](audits/m53-leading-b-shallow-root-sign-extinction-2026-08-31.md).
+
+**Next:** classify the two surviving length-two source letter words `cb` and `cc`. Their first
+role phase is invisible to the one-block square-reset state, so only two exact code ratios remain.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
