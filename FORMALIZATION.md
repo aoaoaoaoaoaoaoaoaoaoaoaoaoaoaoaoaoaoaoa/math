@@ -2793,6 +2793,7 @@ fixed-rank decision problem.
 | `GuardedMixedPrimeBridge.lean` | homogeneous mixed-prime block-code endpoint semantics, automatic parity, `bcbc` three-map necessity, and letterwise-code obstruction |
 | `GuardedMixedPrimeFork.lean` | injective affine-word calculus, forced flat/nested macro equality, fork-kernel dichotomy, and common-fixed-point obstruction |
 | `GuardedMixedPrimeLiteralNoGo.lean` | equal-length fork-equation split, two-point affine rigidity, literal macro extinction, and mandatory mixed-prime kernel collision |
+| `GuardedMixedPrimeReducedKernel.lean` | context cancellation, reduced fork collision, positive-macro necessity, exact fixed-point balance, and exterior toggle geometry |
 | `ExpandingHistoryNoGo.lean` | reset-affine orbit, finite reverse automaton, regularity, and universal computability obstruction |
 | `CancellativeProjectiveNoGo.lean` | paired residual conic, finite support-rank closure, cancellative role fractions, and projective commutator rigidity |
 | `PairedInverseChamber.lean` | one-turn residual chambers, protected formal inverse states, and positive forward-cone separation |
@@ -3145,6 +3146,7 @@ fixed-rank decision problem.
 | Mixed-prime word actions are injective, nonempty words have a unique affine fixed point, and equal slope plus one common fixed point determines the complete action | `GuardedMixedPrimeFork.wordAction_injective`, `GuardedMixedPrimeFork.wordAction_sub`, `GuardedMixedPrimeFork.wordAction_fixedPoint_unique_of_ne_nil`, `GuardedMixedPrimeFork.wordAction_eq_of_common_fixedPoint_of_scale_eq` |
 | Every exact `bcbc` endpoint code identifies the flat and nested fork actions, hence gives either a literal macro equation or a distinct mixed-prime kernel pair; three macros with one common affine fixed point are impossible | `GuardedMixedPrimeFork.bcbc_fork_macro_common_fixedPoint`, `GuardedMixedPrimeFork.bcbc_fork_macro_scale_eq`, `GuardedMixedPrimeFork.bcbc_fork_macro_actions_eq`, `GuardedMixedPrimeFork.bcbc_fork_macro_word_or_kernel`, `GuardedMixedPrimeFork.no_bcbc_endpoint_of_common_macro_fixedPoint` |
 | Literal flat/nested equality splits into commuting data macros and forces a forbidden common fixed point; every exact code therefore supplies a distinct equal-action mixed-prime kernel pair of length `4(2|κ(b)|+|κ(c)|+|κ(toggle)|)` | `GuardedMixedPrimeFork.forkEquation_split`, `GuardedMixedPrimeFork.forkEquation_common_fixedPoint_of_actions_ne`, `GuardedMixedPrimeFork.no_bcbc_literal_fork_words`, `GuardedMixedPrimeFork.bcbc_fork_macro_kernel`, `GuardedMixedPrimeFork.bcbc_encodedFork_length` |
+| Cancelling the common bijective context yields a distinct equal-action reduced pair of length `2|κ(b)|+2|κ(c)|+|κ(toggle)|`; every macro is nonempty, the data slopes and fixed points differ, and the toggle fixed point lies beyond the more contracting data fixed point, which is strictly inside `[0,5/2]` | `GuardedMixedPrimeFork.bcbc_reducedFork_genuine_kernel`, `GuardedMixedPrimeFork.bcbc_reducedFork_length`, `GuardedMixedPrimeFork.bcbc_macro_words_ne_nil`, `GuardedMixedPrimeFork.bcbc_data_macro_scales_ne`, `GuardedMixedPrimeFork.bcbc_data_macro_fixedPoints_ne`, `GuardedMixedPrimeFork.bcbc_toggle_fixedPoint_exterior`, `GuardedMixedPrimeFork.bcbc_moreContracting_fixedPoint_interior` |
 | A matrix square equal to an outer product gives the complete `SS`-free mortality grammar | `SquareRootPunctuation.isMortal_iff_exists_squareFree_zero` |
 | The explicit source-uniform Neary punctuation matrix has the required square and rank two | `SquareRootPunctuation.nearySquareRoot_sq`, `SquareRootPunctuation.nearySquareRoot_rank` |
 | Exact coefficient preservation on the `R_bR_b`-free subshift forces the `R_b` matrix to be a unit | `SquareRootPunctuation.ruleB_isUnit_of_exact_on_squareFree` |
@@ -3573,6 +3575,32 @@ makes the `x` and `y` actions identical. Thus all three macros share one fixed p
 words inducing the same mixed-prime affine map. Both words have length
 `4(2|κ(b)|+|κ(c)|+|κ(toggle)|)`. The only remaining mixed-prime branch is a genuine non-common-
 fixed kernel decomposition plus the complete endpoint converse.
+
+`G3-S11` cancels the common bijective prefix and suffix at the action level, not merely in the
+free monoid. Every exact code therefore supplies the shorter distinct equal-action pair
+
+```text
+κ(c)κ(toggle)κ(b)κ(c)κ(b),
+κ(b)κ(toggle)κ(c)κ(b)κ(c),
+```
+
+of common length `2|κ(b)|+2|κ(c)|+|κ(toggle)|`. Lean proves that all three macro words are
+nonempty and that the two data actions have different slopes and fixed points. If their slopes
+are `a,b,c` and their fixed points are `p,q,r`, respectively, the fork equality is exactly
+
+```text
+A(p-r)=B(q-r),
+B-A=(a-b)(1-c),
+```
+
+where `A=(1-a)(1-bc(1-a(1-b)))` and
+`B=(1-b)(1-ac(1-b(1-a)))` are positive. Consequently the fixed point belonging to the smaller
+data slope lies strictly between the other data fixed point and `r`, hence strictly inside the
+common invariant interval `[0,5/2]`. An exact rational search,
+owned by `tools/audit_mixed_prime_fork.py`, exhausts all positive macro triples of reduced length
+at most `36` and finds none satisfying the required pairwise action distinction and absence of a
+common fixed point. The length cut is computational; the context cancellation, positivity, and
+exterior geometry are kernel-checked.
 
 For `G3-O20`, Lean proves the free-monoid tail law: if one fixed-boundary equation with stationary
 left and right pump blocks holds at exponents `N` and `N+1`, it holds at every exponent `N+k`.

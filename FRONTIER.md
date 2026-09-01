@@ -1804,6 +1804,14 @@ produce distinct flat/nested raw words inducing one affine map. Their common len
 `4(2|κ(b)|+|κ(c)|+|κ(toggle)|)`. The sole surviving specialization is a non-common-fixed genuine
 mixed-prime kernel decomposition satisfying the full endpoint converse.
 
+[`G3-S11`](SALVAGE.md#g3-s11-reduced-fork-kernel-gauntlet) removes the common bijective macro
+context and forces the shorter collision `yzxyx=xzyxy` at the action level, of reduced length
+`N=2|x|+2|y|+|z|`. All three macros are nonempty; the data actions have unequal slopes and fixed
+points. An exact positive balance makes the toggle fixed point lie beyond the more contracting
+data fixed point, away from the other. Exhaustive rational search finds no required pairwise-
+distinct, non-common-fixed triple for `N≤36`. Thus every live code has `N≥37`; this bound is
+computational, while the reduction and fixed-point geometry are Lean-checked.
+
 [`G3-M02`](SALVAGE.md#g3-m02-square-root-punctuation-fracture) supplied a complete direct-mortality
 grammar. The source-uniform rational rank-two matrix `S` satisfies
 
@@ -2104,7 +2112,7 @@ or neutral word across the return, use an empty consume, or split recurrent outp
 | Lane | Available leverage | Decisive obstruction or obligation |
 | --- | --- | --- |
 | Common-kernel shuttle | The exact `bcbb` compiler moves its common data kernel out through the toggle and recovers it at the next data action | Uniformize this non-invariant shuttle in `(β,body)`; every toggle-invariant guard factors through the two-dimensional quotient |
-| Transverse-kernel terminal dynamics | `G3-O27/O29` reduce the involutive branch to the `M₂(3)` core; `G3-O30`–`O35` expose and close the first infinite-carrier repair; `G3-S03` forces every exact `bcbc` fork into a 1D/2D invariant core; `G3-C07/C08` compile rank escape and the sole two-state gate; `G3-S06` identifies mixed-prime specialization with fixed-endpoint reachability; `G3-S07/S09` close every fixed spanning Sym² leakage rank; `G3-S08/S10` force a distinct flat/nested kernel pair and exclude literal or common-fixed codes | Decompose a genuine mixed-prime kernel pair into three non-common-fixed macro actions and retain exact normalized mantissa; alternatively prove every lawful core lies in an audited `D2` decision stratum. Generic irreducible `GL₃` forks, fixed spanning leakage, letterwise, literal, and common-fixed codes, depth-class-only gates, and further third-state guard tuning are dead |
+| Transverse-kernel terminal dynamics | `G3-O27/O29` reduce the involutive branch to the `M₂(3)` core; `G3-O30`–`O35` expose and close the first infinite-carrier repair; `G3-S03` forces every exact `bcbc` fork into a 1D/2D invariant core; `G3-C07/C08` compile rank escape and the sole two-state gate; `G3-S06` identifies mixed-prime specialization with fixed-endpoint reachability; `G3-S07/S09` close every fixed spanning Sym² leakage rank; `G3-S08/S10/S11` force a positive reduced fork-kernel triple, exterior fixed-point geometry, and reduced length at least 37 | Derive an unbounded obstruction for the five-factor mixed-prime relation or find a longer triple, then retain exact normalized mantissa; alternatively prove every lawful core lies in an audited `D2` decision stratum. Generic irreducible `GL₃` forks, fixed spanning leakage, letterwise, literal, empty-macro, common-fixed, and short reduced codes, depth-class-only gates, and further third-state guard tuning are dead |
 | Positive projective transition lower bound | Same-zero dimension three is point-line incidence in `P²`, and actual one-sided shifts retain finite rank/kernel/image data | Derive a uniform nonstationary or noncommuting shift incompatibility from an unbounded terminal section; direct non-elementary Sym² forks, full-rank fixed leakage, fixed equivariant rank-two leakage on three rays, static support rank, formal inverse completion, fixed equal-length return flowers, and unary consecutive-repeat escape are forbidden |
 | Global word-residual recoding | Longer noncommutative atoms can retain order while discarding the four additive role channels | Escape `G3-D05`: fixed-priority affine counters and all one-way reset/transfer/fanout cascades are decidable |
 | Head-separated three-schema source | `G3-C04` discharges every arbitrary-trace forcing obligation locally; `G3-O24` isolates the directed stable-cone alternative | Preserve an undecidable mixed or neutral word across returns, or realize zero-sensitive S5 GLB decoding after the `G3-O25` separator-rank fork; complete pure forks are decidable by `G3-D07` |
@@ -2161,10 +2169,11 @@ raceable leaves:
    `bcbc` fork forbids every letterwise relabeling and requires three distinct macro maps.
    `G3-S08` further identifies the flat and nested fork actions and excludes every common-fixed
    macro triple. `G3-S10` proves that literal equality itself forces such a forbidden common fixed
-   point, so the expanded words must be a distinct mixed-prime kernel pair. The unresolved step is
-   decomposing a genuine relation into a non-common-fixed macro triple with the complete endpoint
-   converse, not another fixed-body rank perturbation, guard recurrence, or finite target-depth
-   label.
+   point. `G3-S11` then cancels the inert action context, proves every macro nonempty, forces the
+   toggle fixed point beyond the more contracting data fixed point, and exhaustively excludes
+   reduced relation length at most `36`. The unresolved step is an unbounded obstruction or a
+   longer non-common-fixed five-factor relation with the complete endpoint converse, not another
+   fixed-body rank perturbation, guard recurrence, or finite target-depth label.
 3. **Positive projective transition obstruction.** Derive from a source-unbounded terminal
    section a finite shift incompatibility which no three-dimensional rational same-zero
    representation can realize for any combination of generator ranks and kernels. It must use
@@ -2292,8 +2301,10 @@ endpoint reachability. Its fixed `bcbc` witnesses force three distinct induced m
 letterwise codes. `G3-S08` forces the flat/nested block images to be one affine action and kills
 common-fixed macro triples. `G3-S10` also kills the literal branch, leaving only a distinct equal-
 action kernel pair of raw length `4(2|κ(b)|+|κ(c)|+|κ(toggle)|)`. `D2-S08` does not automatically
-apply to the unguarded macro image and, after the missing guard and closure proofs, still leaves
-the normalized mantissa unbounded. Any lower-bound attack
+apply to the unguarded macro image. `G3-S11` cancels the inert context to a positive reduced
+five-factor pair, forces exterior toggle-fixed-point geometry, and computationally excludes
+reduced length at most `36`. After the missing guard and closure proofs, `D2-S08` still leaves the
+normalized mantissa unbounded. Any lower-bound attack
 must exclude both positive architectures through actual transition data. Backward cancellation,
 inverse cofinality, static incidence, and target-depth classes cannot do so.
 Do not spend another attack on separator placement, fixed anchors, or control singularity after
