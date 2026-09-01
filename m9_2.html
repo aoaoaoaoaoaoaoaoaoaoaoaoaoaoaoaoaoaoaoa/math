@@ -4,16 +4,18 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="author" content="GPT-5.6 Sol; elicited by @eternalism_4eva">
-  <meta property="og:title" content="Singular Return Compression">
+  <meta property="og:title" content="M₉(2): Two 9 × 9 Matrices via Singular Return Compression">
   <meta property="og:type" content="article">
-  <title>Singular Return Compression | Matrix Mortality</title>
+  <title>M₉(2): Two 9 × 9 Matrices via Singular Return Compression | Matrix Mortality</title>
 </head>
 <body>
   <a class="skip-link" href="#article">Skip to the exposition</a>
 
   <header class="masthead">
     <div class="masthead-inner">
-      <h1>Singular Return Compression</h1>
+      <p><strong>Under review</strong></p>
+      <h1>M₉(2): Mortality of Two 9 × 9 Integer Matrices</h1>
+      <p>Singular Return Compression</p>
       <p class="byline">GPT-5.6 Sol · elicited by <a href="https://x.com/eternalism_4eva">@eternalism_4eva</a></p>
     </div>
   </header>
@@ -30,6 +32,7 @@
         <li>
           <a href="#known-stuff">Known Stuff</a>
           <ol>
+            <li><a href="#problem-convention">Problem convention</a></li>
             <li><a href="#paired-source">Paired scalar source</a></li>
             <li><a href="#return-interface">Return interface</a></li>
             <li><a href="#previous-bound">Previous two-generator bound</a></li>
@@ -81,19 +84,39 @@
         <details class="major-section">
           <summary><h2 id="known-stuff">Known Stuff<a class="fragment-link" href="#known-stuff" aria-label="Link to this section">#</a></h2></summary>
 
-          <h3 id="paired-source">Paired scalar source<a class="fragment-link" href="#paired-source" aria-label="Link to this section">#</a></h3>
-          <p>The <a href="/math/matrix_mortality/m3_5/">fixed-boundary construction</a> compiles a restricted binary tag system into a scalar series over three paired controls: a phase toggle <var>T</var> and data roles <var>D</var><sub><span class="word">b</span></sub>, <var>D</var><sub><span class="word">c</span></sub>. For every regular source width <var>β</var> and body <var>b</var>, a nonempty control word has zero coefficient exactly when the tag system halts.</p>
+          <h3 id="problem-convention">Problem convention<a class="fragment-link" href="#problem-convention" aria-label="Link to this section">#</a></h3>
+          <p>For positive integers <var>d</var> and <var>k</var>, M<sub><var>d</var></sub>(<var>k</var>) is mortality for a family of at most <var>k</var> integer <var>d</var> × <var>d</var> matrices. The formal encoding uses <var>k</var> named matrices; a smaller nonempty family gives an equivalent tuple by repeating one generator. Products are read from left to right, and the empty product is excluded.</p>
           <div class="formula plain">
             <math display="block">
               <mrow>
-                <mtext>TagHaltsFrom</mtext><mo>(</mo><mi>β</mi><mo>,</mo><mi>b</mi><mo>)</mo>
+                <msub><mi>M</mi><mi>d</mi></msub><mo>(</mo><mi>k</mi><mo>)</mo><mo>(</mo><mi>G</mi><mo>)</mo>
+                <mo>⇔</mo>
+                <mo>∃</mo><mi>n</mi><mo>≥</mo><mn>1</mn><mo>,</mo>
+                <mo>∃</mo><msub><mi>i</mi><mn>1</mn></msub><mo>,</mo><mo>…</mo><mo>,</mo><msub><mi>i</mi><mi>n</mi></msub>
+                <mo>∈</mo><mo>{</mo><mn>0</mn><mo>,</mo><mo>…</mo><mo>,</mo><mi>k</mi><mo>−</mo><mn>1</mn><mo>}</mo><mo>:</mo>
+                <msub><mi>G</mi><msub><mi>i</mi><mn>1</mn></msub></msub>
+                <mo>⋯</mo>
+                <msub><mi>G</mi><msub><mi>i</mi><mi>n</mi></msub></msub>
+                <mo>=</mo><msub><mn>0</mn><mrow><mi>d</mi><mo>×</mo><mi>d</mi></mrow></msub><mo>.</mo>
+              </mrow>
+            </math>
+          </div>
+          <p>The formal target is the noncomputability of this predicate at <var>d</var> = 9 and <var>k</var> = 2, with integer entries represented transparently as finite functions.</p>
+
+          <h3 id="paired-source">Paired scalar source<a class="fragment-link" href="#paired-source" aria-label="Link to this section">#</a></h3>
+          <p>The <a href="/math/matrix_mortality/m3_5/">fixed-boundary construction</a> compiles a restricted binary tag system into a scalar series over three paired controls: a phase toggle <var>T</var> and data roles <var>D</var><sub><span class="word">b</span></sub>, <var>D</var><sub><span class="word">c</span></sub>. Let <var>β</var> be the deletion width and <var>B</var> the binary body. If <var>β</var> &gt; 2, <var>β</var> − 1 ≤ |<var>B</var>|, and <var>β</var> − 1 divides |<var>B</var>|, then a nonempty control word has zero coefficient exactly when the corresponding tag instance halts.</p>
+          <div class="formula plain">
+            <math display="block">
+              <mrow>
+                <mtext>TagHaltsFrom</mtext><mo>(</mo><mi>β</mi><mo>,</mo><mi>B</mi><mo>)</mo>
                 <mo>⇔</mo>
                 <mo>∃</mo><mi>w</mi><mo>≠</mo><mi>ε</mi><mo>:</mo>
-                <msub><mi>c</mi><mrow><mi>β</mi><mo>,</mo><mi>b</mi></mrow></msub>
+                <msub><mi>c</mi><mrow><mi>β</mi><mo>,</mo><mi>B</mi></mrow></msub>
                 <mo>(</mo><mi>w</mi><mo>)</mo><mo>=</mo><mn>0</mn><mo>.</mo>
               </mrow>
             </math>
           </div>
+          <p>Here the abbreviated tag predicate uses output map <code>tagOutput B</code> and initial queue <code>B.drop (β − 1) ++ [b]</code>. The rank-nine chart additionally requires the distinguished letter <span class="word">b</span> to occur in <var>B</var>. The fixed universal source satisfies every condition, and <a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/main/MatrixMortality/Undecidability/UniversalNeary.lean#L20-L33"><code>tagHaltsFrom_iff_codeHalts</code></a> identifies its tag instance with mathlib's universal partial-recursive program halting at input zero.</p>
           <p>The three controls act on a four-dimensional paired phase space. The usual scalar-to-mortality construction adjoins a rank-one outer product <var>u</var><var>x</var>. A product containing that separator is zero exactly when the intervening paired coefficient vanishes.</p>
 
           <h3 id="return-interface">Return interface<a class="fragment-link" href="#return-interface" aria-label="Link to this section">#</a></h3>
@@ -111,7 +134,7 @@
           <p>Return realizations let one binary matrix pair present a larger interface alphabet. The difficulty is the converse: arbitrary products may begin or end inside a transition run, and a pure power of <var>A</var> must not vanish.</p>
 
           <h3 id="previous-bound">Previous two-generator bound<a class="fragment-link" href="#previous-bound" aria-label="Link to this section">#</a></h3>
-          <p>The <a href="/math/matrix_mortality/binary_compilers/#mortality-ten">complete prefix compiler</a> gave two 10 × 10 integer matrices. Exact minimization of that pair cannot reach dimension nine: its word products span the full 10 × 10 matrix algebra, and every nonzero internal-word sandwich has Hankel rank ten. The construction below changes the scalar zero series instead of compressing the ten-state pair.</p>
+          <p>The <a href="/math/matrix_mortality/binary_compilers/#mortality-ten">complete prefix compiler</a> gave two 10 × 10 integer matrices. Exact minimization of that pair cannot reach dimension nine: its word products span the full 10 × 10 matrix algebra, and every nonzero internal-word sandwich has Hankel rank ten. The construction below changes the scalar zero series instead of compressing that pair.</p>
         </details>
 
         <details class="major-section">
@@ -141,7 +164,7 @@
           <h3 id="tilted-separator">Tilted same-zero separator<a class="fragment-link" href="#tilted-separator" aria-label="Link to this section">#</a></h3>
 
           <h4 id="tilted-code">Injective tilted code<a class="fragment-link" href="#tilted-code" aria-label="Link to this section">#</a></h4>
-          <p>For the lower <span class="word">c</span>-role word, let <var>V</var> be its base-three value and <var>K</var> the next power of three. The new separator row uses</p>
+          <p>For the lower <span class="word">c</span>-role word, let <var>V</var> be its base-three value and <var>K</var> the power of three indexed by its length. The new separator row uses</p>
           <div class="formula plain">
             <math display="block">
               <mrow>
@@ -157,7 +180,7 @@
               </mrow>
             </math>
           </div>
-          <p>The restricted source syntax gives <var>q</var> &lt; −3/2. At this slope, words of different lengths occupy disjoint value bands; equal-length equality reduces to ordinary base-three injectivity. Lean proves <var>F</var><sub><var>q</var></sub> injective for all finite binary words.</p>
+          <p>The restricted source syntax gives <var>q</var> &lt; −3/2. At this slope, words of different lengths occupy disjoint value bands; equal-length equality reduces to ordinary base-three injectivity. Lean proves <a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/main/MatrixMortality/ChangedSeparatorTail.lean#L73-L78"><code>tiltedTernaryCode_injective</code></a> for all finite binary words and <a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/main/MatrixMortality/ChangedSeparatorTail.lean#L170-L173"><code>nearyTailRatio_lt_neg_three_halves</code></a> for every encoded body.</p>
 
           <h4 id="phase-evaluation">Both paired phases<a class="fragment-link" href="#phase-evaluation" aria-label="Link to this section">#</a></h4>
           <p>The row (1,<var>q</var>,<var>q</var>,<var>q</var>) evaluates either paired phase as the difference of two tilted codes:</p>
@@ -174,7 +197,7 @@
               </mrow>
             </math>
           </div>
-          <p>Its value is zero exactly when the upper and lower words agree. Replacing the ordinary boundary row by this uniform tilted row therefore preserves every paired scalar zero, including the absorbed trailing-toggle convention. With the existing boundary column <var>u</var>, it defines the rank-one separator</p>
+          <p>Its value is zero exactly when the upper and lower words agree. <a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/main/MatrixMortality/ChangedSeparatorTail.lean#L382-L423"><code>nearyTiltedPairedCoefficient_eq_zero_iff</code></a> proves this for every control word and both phases; the adjacent trailing-toggle theorem transports the existential nonempty zero language. With the existing boundary column <var>u</var>, the row defines the rank-one separator</p>
           <div class="formula plain">
             <math display="block">
               <mrow>
@@ -188,7 +211,7 @@
           <h3 id="nine-state-chart">Nine-state return chart<a class="fragment-link" href="#nine-state-chart" aria-label="Link to this section">#</a></h3>
 
           <h4 id="moment-sequence">Moment sequence<a class="fragment-link" href="#moment-sequence" aria-label="Link to this section">#</a></h4>
-          <p>An explicit rational <code>3+3+2+1</code> chain supplies a 9 × 9 transition <var>A</var>, a 9 × 4 input <var>U</var>, and a 4 × 9 output <var>O</var>. Its returns are</p>
+          <p>An explicit rational <code>3+3+2+1</code> chain supplies a 9 × 9 transition <var>A</var>, a 9 × 4 input <var>U</var>, and a 4 × 9 output <var>O</var>. Two length-three nilpotent chains and one length-two chain carry the exceptional moments; the last state is a geometric eigenline. Its returns are</p>
           <div class="formula">
             <math display="block">
               <mrow>
@@ -206,7 +229,7 @@
               </mrow>
             </math>
           </div>
-          <p>Here <var>s</var> is nonzero and <var>R</var> is a nonzero scalar multiple of the tilted separator. The first two length-three chains and one length-two chain realize the exceptional moments; the final eigenline carries the geometric tail. On the audited rational chart, the transition has the equivalent block profile</p>
+          <p>Here <var>s</var> is nonzero and <var>R</var> is a nonzero scalar multiple of the tilted separator. The sparse transition and every rational entry of the larger <var>U</var> and <var>O</var> charts are explicit in <a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/main/MatrixMortality/ChangedSeparatorRealization.lean#L178-L374"><code>ChangedSeparatorRealization</code></a>. Separate theorems check <a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/main/MatrixMortality/ChangedSeparatorZeroMoment.lean#L31-L38"><code>zero_moment</code></a>, <a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/main/MatrixMortality/ChangedSeparatorMomentOne.lean#L161-L173"><code>moment_one</code></a>, <a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/main/MatrixMortality/ChangedSeparatorMomentTwo.lean#L167-L180"><code>moment_two</code></a>, and <a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/main/MatrixMortality/ChangedSeparatorTailMoments.lean#L43-L58"><code>moment_add_three</code></a>. The transition has block profile</p>
           <div class="formula plain">
             <math display="block">
               <mrow>
@@ -218,7 +241,7 @@
               </mrow>
             </math>
           </div>
-          <p>The chart denominators and pivots are nonzero for every emitted source. The only source-specific condition beyond the standard Neary regularity hypotheses is that the body contains <span class="word">b</span>; the universal compiler proves the stronger leading-<span class="word">b</span> invariant.</p>
+          <p>For <var>β</var> &gt; 0 and <span class="word">b</span> ∈ <var>B</var>, the chart denominators and basis pivots are nonzero. The universal source has <var>β</var> &gt; 2 and proves the stronger leading-<span class="word">b</span> invariant, so the chart is total on every emitted program.</p>
 
           <h4 id="pure-transition">Pure transition words<a class="fragment-link" href="#pure-transition" aria-label="Link to this section">#</a></h4>
           <p>Let <var>e</var> be the basis vector of the geometric tail. The transition acts on it by the nonzero eigenvalue <var>s</var>, so every power remains nonzero:</p>
@@ -234,7 +257,7 @@
           </div>
 
           <h3 id="singular-return">Singular return compression<a class="fragment-link" href="#singular-return" aria-label="Link to this section">#</a></h3>
-          <p>The physical generators are <var>A</var> and the singular cut <var>C</var> = <var>UO</var>. A general singular-return theorem absorbs the exterior transition runs and gives an exact equivalence, not only the forward encoding:</p>
+          <p>The physical generators are <var>A</var> and the singular cut <var>C</var> = <var>UO</var>. The cut need not be invertible. The general theorem <a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/main/MatrixMortality/SingularReturnFamily.lean#L42-L108"><code>pairGenerator_isMortal_iff_returnFamily</code></a> assumes only that <var>A</var><sup><var>n</var></sup> ≠ 0 for every <var>n</var> ∈ ℕ and gives an exact equivalence:</p>
           <div class="formula plain">
             <math display="block">
               <mrow>
@@ -245,14 +268,30 @@
               </mrow>
             </math>
           </div>
-          <p>Every return is a nonzero scaling of one of <var>T</var>, <var>D</var><sub><span class="word">b</span></sub>, <var>D</var><sub><span class="word">c</span></sub>, and the tilted separator. Return times 0, 1, 2, and 3 form a right inverse to this finite relabelling. Independent nonzero scalings preserve zero products, so the return family is mortal exactly when the paired scalar series has a nonempty zero.</p>
+          <p>For the difficult direction, any physical zero containing a cut has a unique run form with exterior waits. Multiplying the entire zero on the left by <var>O</var> and on the right by <var>U</var> retains those waits as the first and last returns:</p>
+          <div class="formula plain">
+            <math display="block">
+              <mrow>
+                <msup><mi>A</mi><msub><mi>p</mi><mn>0</mn></msub></msup><mi>UO</mi>
+                <msup><mi>A</mi><msub><mi>p</mi><mn>1</mn></msub></msup><mo>⋯</mo><mi>UO</mi>
+                <msup><mi>A</mi><msub><mi>p</mi><mi>r</mi></msub></msup><mo>=</mo><mn>0</mn>
+                <mo>⇒</mo>
+                <mrow><mo>(</mo><mi>O</mi><msup><mi>A</mi><msub><mi>p</mi><mn>0</mn></msub></msup><mi>U</mi><mo>)</mo></mrow>
+                <mo>⋯</mo>
+                <mrow><mo>(</mo><mi>O</mi><msup><mi>A</mi><msub><mi>p</mi><mi>r</mi></msub></msup><mi>U</mi><mo>)</mo></mrow>
+                <mo>=</mo><mn>0</mn><mo>.</mo>
+              </mrow>
+            </math>
+          </div>
+          <p>A physical zero without a cut would be a pure power of <var>A</var>, excluded by the eigenline. Conversely, a zero product of returns expands directly to a physical word with cuts. Thus arbitrary initial and terminal transition runs create no unproved exterior-cancellation case.</p>
+          <p>It remains to replace the infinite return alphabet by four roles. Lean proves each return has the form <var>ρ</var><sub><var>n</var></sub><var>G</var><sub><var>ℓ</var>(<var>n</var>)</sub>, where <var>ρ</var><sub><var>n</var></sub> ≠ 0 and <var>G</var> ranges over <var>T</var>, <var>D</var><sub><span class="word">b</span></sub>, <var>D</var><sub><span class="word">c</span></sub>, and the tilted separator. The relabelling <var>ℓ</var> has the explicit right inverse selecting return times 0, 1, 2, and 3. Hence every four-role word lifts to a return word, while any return word projects to a four-role word. The corresponding products differ by the product of their nonzero return scalars, so zero products are preserved in both directions.</p>
           <div class="formula plain">
             <math display="block">
               <mrow>
                 <mtext>IsMortal</mtext><mo>{</mo><mi>A</mi><mo>,</mo><mi>UO</mi><mo>}</mo>
                 <mo>⇔</mo>
                 <mo>∃</mo><mi>w</mi><mo>≠</mo><mi>ε</mi><mo>:</mo>
-                <msub><mi>c</mi><mrow><mi>β</mi><mo>,</mo><mi>b</mi></mrow></msub>
+                <msub><mi>c</mi><mrow><mi>β</mi><mo>,</mo><mi>B</mi></mrow></msub>
                 <mo>(</mo><mi>w</mi><mo>)</mo><mo>=</mo><mn>0</mn><mo>.</mo>
               </mrow>
             </math>
@@ -261,7 +300,7 @@
           <h3 id="effective-emitter">Effective integer emitter<a class="fragment-link" href="#effective-emitter" aria-label="Link to this section">#</a></h3>
 
           <h4 id="unreduced-clearing">Unreduced denominator clearing<a class="fragment-link" href="#unreduced-clearing" aria-label="Link to this section">#</a></h4>
-          <p>The rational formulas are evaluated as unreduced numerator-denominator pairs. Addition, multiplication, division, negation, and fixed powers remain primitive recursive without normalization or greatest-common-divisor computation. For each generator, the 81 entries are flattened and cleared by one recursively accumulated product of their nonzero denominators.</p>
+          <p>The rational formulas are evaluated as unreduced numerator-denominator pairs. Addition, multiplication, division, negation, and fixed powers remain primitive recursive without normalization or greatest-common-divisor computation. For each of the two labels, the 81 entries are flattened and cleared by one recursively accumulated common denominator.</p>
           <div class="formula plain">
             <math display="block">
               <mrow>
@@ -274,10 +313,27 @@
               </mrow>
             </math>
           </div>
-          <p>The two generators may use different clearing factors. A product of emitted matrices is the corresponding rational product times a product of nonzero scalars, so mortality is preserved and reflected. Lean proves every fixed emitted entry primitive recursive in the source body.</p>
+          <p>The two generators may use different factors. For an arbitrary nonempty label word, casting the integer product back to the rationals gives</p>
+          <div class="formula plain">
+            <math display="block">
+              <mrow>
+                <mtext>cast</mtext><mo>(</mo>
+                <msub><mover><mi>G</mi><mo>^</mo></mover><msub><mi>i</mi><mn>1</mn></msub></msub>
+                <mo>⋯</mo>
+                <msub><mover><mi>G</mi><mo>^</mo></mover><msub><mi>i</mi><mi>n</mi></msub></msub>
+                <mo>)</mo>
+                <mo>=</mo>
+                <mrow><mo>(</mo><munderover><mo>∏</mo><mrow><mi>j</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><msub><mi>d</mi><msub><mi>i</mi><mi>j</mi></msub></msub><mo>)</mo></mrow>
+                <msub><mi>G</mi><msub><mi>i</mi><mn>1</mn></msub></msub>
+                <mo>⋯</mo>
+                <msub><mi>G</mi><msub><mi>i</mi><mi>n</mi></msub></msub><mo>.</mo>
+              </mrow>
+            </math>
+          </div>
+          <p>Every <var>d</var><sub><var>i</var></sub> is nonzero, so the scalar product is nonzero in ℚ. The integer product is zero exactly when the rational product is zero. <a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/main/MatrixMortality/ChangedSeparatorEffectivity.lean#L140-L219"><code>ChangedSeparatorEffectivity</code></a> proves the scaling identity, mortality equivalence, and primitive recursiveness of every emitted entry.</p>
 
           <h4 id="universal-reduction">Universal reduction<a class="fragment-link" href="#universal-reduction" aria-label="Link to this section">#</a></h4>
-          <p>The fixed universal two-tag system is compiled through Cook’s cyclic-tag construction and Neary’s restricted binary-tag construction. The source emitter is primitive recursive, its body begins with <span class="word">b</span>, and its tag instance halts exactly for accepted program codes. Composition with the integer matrix emitter gives the many-one reduction in the theorem.</p>
+          <p><code>CodeHalts(e)</code> means that mathlib's universal partially recursive code <var>e</var> halts on input zero; this predicate is not computable. The fixed universal two-tag system is compiled through Cook's cyclic-tag construction and Neary's restricted binary-tag construction. Its width is greater than two; each emitted body is long enough, has length divisible by <var>β</var> − 1, begins with <span class="word">b</span>, and is primitive recursive in <var>e</var>. The checked source theorem identifies tag halting with <code>CodeHalts(e)</code>.</p>
           <div class="formula plain">
             <math display="block">
               <mrow>
@@ -289,6 +345,7 @@
               </mrow>
             </math>
           </div>
+          <p><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/main/MatrixMortality/Undecidability/UniversalNeary.lean#L159-L189"><code>mortality92Reduction</code></a> composes that source emitter with the integer pair. Lean proves the resulting matrix-valued function primitive recursive, its mortality predicate equivalent to <code>CodeHalts</code> on every input, the many-one reduction, and noncomputability of M<sub>9</sub>(2).</p>
 
           <h3 id="consequences">Consequences<a class="fragment-link" href="#consequences" aria-label="Link to this section">#</a></h3>
           <p>For every <var>n</var> ≥ 0, zero-block padding sends each 9 × 9 generator to</p>
@@ -301,7 +358,8 @@
               </mrow>
             </math>
           </div>
-          <p>This preserves every zero product and proves M<sub>9+<var>n</var></sub>(2) undecidable. The two-generator frontier therefore moves from dimension ten to nine; M<sub>8</sub>(2) is the next open cell.</p>
+          <p>The generic theorem <a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/main/MatrixMortality/MatrixSemigroup.lean#L739-L778"><code>isMortal_zeroPad_iff</code></a> proves that this preserves and reflects every nonempty zero product. The coordinate padding is primitive recursive, so M<sub>9+<var>n</var></sub>(2) is undecidable for every <var>n</var> ≥ 0.</p>
+          <p>M<sub>8</sub>(2) remains unresolved. <a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/main/MatrixMortality/TiltedGeometricHankel.lean#L383-L412"><code>nine_le_card_of_tilted_geometric_transfer_moments</code></a> proves that the width-three <span class="word">bb</span> benchmark already has transfer rank nine for every rational retuning of its one-mode geometric tail and every tilted ratio <var>q</var> &lt; −3/2. This rules out direct parameter compression of the present chart, not a different same-zero compiler or an undecidability theorem in dimension eight.</p>
         </details>
 
         <details class="major-section">
@@ -310,24 +368,36 @@
           <h3 id="verification">Verification and provenance<a class="fragment-link" href="#verification" aria-label="Link to this section">#</a></h3>
           <div class="status-grid">
             <div>
-              <b><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/main/MatrixMortality/ChangedSeparatorTail.lean">Same-zero separator</a></b>
-              <p>Lean proves the tilted-code length bands, injectivity, source ratio bound, both-phase evaluation, and exact transport of nonempty scalar zeros.</p>
+              <b><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/main/MatrixMortality/Undecidability/Problems.lean#L171-L202">Decision predicate</a></b>
+              <p><code>MortalityProblem.Mortal</code> is mortality of a finite integer family under the nonempty-word convention.</p>
             </div>
             <div>
-              <b><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/main/MatrixMortality/ChangedSeparatorRealization.lean">Nine-state chart</a></b>
-              <p>The realization and moment modules check the rational <code>3+3+2+1</code> chart, its first three returns, geometric tail, total source locus, and nonzero eigenvalue.</p>
+              <b><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/main/MatrixMortality/Undecidability/NearySource.lean#L17-L48">Universal source contract</a></b>
+              <p>The source owns primitive-recursive bodies, width, length, divisibility, leading-<span class="word">b</span>, and exact halting hypotheses.</p>
             </div>
             <div>
-              <b><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/main/MatrixMortality/ChangedSeparatorMortality.lean">Mortality equivalence</a></b>
-              <p>Lean proves the pure-power guard, singular-return equivalence, nonzero return scaling, finite relabelling, tilted-family mortality, and paired-zero criterion.</p>
+              <b><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/main/MatrixMortality/ChangedSeparatorTail.lean#L73-L78">Same-zero separator</a></b>
+              <p><code>tiltedTernaryCode_injective</code>, the source ratio bound, and the paired-phase theorems establish the exact zero-language transport.</p>
             </div>
             <div>
-              <b><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/main/MatrixMortality/ChangedSeparatorEffectivity.lean">Effective integer pair</a></b>
-              <p>Lean evaluates the chart in primitive-recursive unreduced fractions, clears all entries, proves exact rational scaling, and certifies each integer entry primitive recursive.</p>
+              <b><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/main/MatrixMortality/ChangedSeparatorRealization.lean#L158-L220">Nine-state chart</a></b>
+              <p>The explicit realization and its moment modules check the <code>3+3+2+1</code> chart, first three returns, geometric tail, and total source locus.</p>
             </div>
             <div>
-              <b><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/main/MatrixMortality/Undecidability/UniversalNeary.lean">Universal endpoint</a></b>
-              <p><code>codeHalts_reduces_mortality92</code> and <code>mortality92_not_computable</code> close the primitive-recursive reduction and undecidability theorem.</p>
+              <b><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/main/MatrixMortality/ChangedSeparatorMortality.lean#L169-L265">Mortality equivalence</a></b>
+              <p>Return scaling, finite relabelling, singular-return compression, the pure-power guard, and same-zero transport compose here.</p>
+            </div>
+            <div>
+              <b><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/main/MatrixMortality/ChangedSeparatorEffectivity.lean#L140-L219">Effective integer pair</a></b>
+              <p>The chart is evaluated in primitive-recursive unreduced fractions; common-denominator clearing gives exact nonzero rational scalings.</p>
+            </div>
+            <div>
+              <b><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/main/MatrixMortality/Undecidability/UniversalNeary.lean#L159-L189">Universal endpoint</a></b>
+              <p><code>mortality92Instance_primrec</code>, <code>codeHalts_reduces_mortality92</code>, and <code>mortality92_not_computable</code> close the reduction.</p>
+            </div>
+            <div>
+              <b><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/main/MatrixMortality/TiltedGeometricHankel.lean#L383-L412">Exact rank-nine benchmark</a></b>
+              <p>The checked compiler is identified with the benchmark moment family; a uniform 9 × 9 Hankel minor theorem excludes every eight-state exact retuning in that family.</p>
             </div>
             <div>
               <b><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/main/verification/axioms.txt">Transitive axioms</a></b>
@@ -336,16 +406,17 @@
           </div>
 
           <h3 id="formal-scope">Formal scope<a class="fragment-link" href="#formal-scope" aria-label="Link to this section">#</a></h3>
-          <p>Lean checks the source invariant, same-zero theorem for every control word, complete rational moment family, arbitrary physical products, denominator clearing, primitive-recursive matrix entries, canonical <code>Fin 2</code> instance, many-one reduction, and noncomputability conclusion. The theorem does not depend on a finite search, a floating-point computation, or an exterior-kernel assumption.</p>
+          <p>Lean checks the source invariant, same-zero theorem for every control word, complete rational moment family, arbitrary physical products, denominator clearing, primitive-recursive matrix entries, canonical <code>Fin 2</code> instance, many-one reduction, and noncomputability conclusion. The generic zero-padding equivalence is also formal. The theorem does not depend on a finite search, floating-point computation, unproved invertibility, or an exterior-kernel assumption.</p>
           <p>The <a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/main/tools/audit_m92_changed_separator_tail.py">exact symbolic checker</a> independently reconstructs the chart, verifies its pivots and exterior identities, and certifies a rank-nine Hankel benchmark. The <a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/main/audits/m92-changed-separator-transfer-2026-08-31.md">discovery audit</a> records that calculation; its original list of remaining compiler obligations is superseded by the later Lean effectivity and undecidability modules.</p>
 
           <h3 id="priority">Priority<a class="fragment-link" href="#priority" aria-label="Link to this section">#</a></h3>
-          <p>To our knowledge, the public-literature search through 24 July 2026 found no proof of M<sub>10</sub>(2) and no stronger M<sub>9</sub>(2) theorem. Any M<sub>9</sub>(2) theorem implies M<sub>10</sub>(2) by zero-block padding. The search covers publicly discoverable work, not unpublished results. Return realizations, rank-one separators, alphabet reduction, and rational denominator clearing are prior techniques; the claim concerns this tilted same-zero separator, rank-nine chart, and complete effective reduction.</p>
+          <p>The project's public-literature search, last audited 24 July 2026, found no prior public proof of M<sub>10</sub>(2) or M<sub>9</sub>(2) before this series. The search covers publicly discoverable work, not unpublished results. Return realizations, rank-one separators, alphabet reduction, and rational denominator clearing are prior techniques. Priority is claimed for the rank-nine undecidability theorem and the complete construction assembled here, not for those inherited methods in isolation.</p>
 
           <ul class="artifact-list" aria-label="Proof artifacts">
             <li><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math"><b>Complete source repository</b>Lean development, strict verification gate, reference corpus, and publication sources</a></li>
             <li><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/main/FORMALIZATION.md"><b>Formalization map</b>Principal declarations, exact axiom sets, trust boundary, and independent audits</a></li>
             <li><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/main/SALVAGE.md#mm-c05-tilted-separator-rank-nine-transfer"><b>MM-C05 registry record</b>Reusable same-zero, return-compression, and effective-fraction components</a></li>
+            <li><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/main/SALVAGE.md#mm-o28-tilted-geometric-tail-rank-nine-wall"><b>MM-O28 boundary record</b>Exact scope of the benchmark rank-nine lower bound and the surviving M<sub>8</sub>(2) routes</a></li>
           </ul>
 
           <h3 id="sources">References<a class="fragment-link" href="#sources" aria-label="Link to this section">#</a></h3>
