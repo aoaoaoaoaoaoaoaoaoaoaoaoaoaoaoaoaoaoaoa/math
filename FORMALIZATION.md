@@ -2728,6 +2728,18 @@ exact parity certificate exhausts the resulting finite windows for all `23` base
 both branch orientations: `77,280` geometries, maximum address depth `14`, no survivor. This
 finite rejection does not cover pumped/source-varying cloaks, the odd family, or suffix cloaks.
 
+`G3-S23` extracts the necessary suffix invariant uniformly. Removing the proper common address
+suffix from the two terminal data blocks exposes nonempty cloak suffixes `L′,R′`. Lean proves
+that they have one length `q`, equal `D/T` counts, and satisfy
+`2(address_depth+q)<cloak_length`. Exact symbolic replay applies this gate to every pump depth:
+after a finite preperiod, every feasible suffix lies inside the two-letter pump plus its fixed
+tail, where the Parikh discrepancy is an explicit two-periodic function. Eleven of the `23`
+families have nonzero discrepancy in both parities and no balanced preperiod. Family `l32-12` has
+the sole preperiodic option `q=2k+5` for `0≤k≤10`; exact parity replay rejects all `2,288`
+physical geometries, and the periodic discrepancy is `-1` from `k=11` onward. Twelve families are
+therefore globally excluded. Eleven genuine balanced-suffix families remain; their negative
+search through pump depth `20` is deliberately not promoted.
+
 For `G3-O20`, Lean proves the free-monoid tail law: if one fixed-boundary equation with stationary
 left and right pump blocks holds at exponents `N` and `N+1`, it holds at every exponent `N+k`.
 The proof uses only prefix comparability and left/right cancellation. This closes a unary

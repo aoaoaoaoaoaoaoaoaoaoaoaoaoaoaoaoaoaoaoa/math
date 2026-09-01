@@ -269,6 +269,7 @@ file owns the mathematical stock.
 | [`G3-S20`](#g3-s20-common-address-wrapper-obstruction) | obstruction | a common phase-breaking prefix and suffix cancel, so they cannot wrap the aligned address comparator into the forced fork | formalized | active |
 | [`G3-S21`](#g3-s21-kernel-cloaked-address-comparators) | enabling structure theorem | every genuine mixed-prime kernel pair asymmetrically cloaks an exact arbitrary-length address comparator while preserving raw-word distinctness | formalized; explicit infinite family | active |
 | [`G3-S22`](#g3-s22-prefix-cloak-size-obstruction) | obstruction and finite rejection | every physical prefix cloak obeys `2|u|<|x|+|y|<|L|`; all 23 base pump cloaks fail the remaining finite factorization census | formalized universal bound; exact independently replayable certificate | active |
+| [`G3-S23`](#g3-s23-pumped-prefix-cloak-suffix-collapse) | uniform obstruction and exact family cut | a balanced nonempty cloak suffix with `2(n+q)<|L|` is mandatory; this kills 12 of the 23 pump families globally | formalized universal gate; exact symbolic and finite certificates | active |
 | [`G3-M02`](#g3-m02-square-root-punctuation-fracture) | partial mechanism | a rank-two square root gives an exact `SS`-free mortality grammar | formalized | closed |
 | [`G3-O10`](#g3-o10-square-root-boundary-saturation) | obstruction | every nondegenerate rank-one square root preserves boundary coefficient zeros | formalized | graduated |
 | [`G3-M01`](#g3-m01-free-group-discrepancy-engine) | partial mechanism | Carvalho's transducer gives an all-word marker-tail equation and a cyclic exponent-one equalizer | audited | active |
@@ -10981,6 +10982,64 @@ prefix search must satisfy the strict size gate before literal or affine algebra
 **Next:** derive a uniform contradiction for pumped/source-varying prefix cloaks, or move to the
 suffix orientation where the address does not create the same terminal overlap. Any positive
 candidate must still satisfy the complete arbitrary-word endpoint converse.
+
+### G3-S23: Pumped prefix-cloak suffix collapse
+
+**Kind:** uniform obstruction and exact family cut
+
+**Evidence:** formalized universal gate; exact symbolic and finite certificates
+
+**Disposition:** active
+
+The proper terminal overlap from `G3-S22` exposes a stronger invariant. In every physical prefix
+factorization there are nonempty suffixes `L′,R′` of the two cloaks such that
+
+```text
+yx=L′·expandAddress(u),       xy=R′·expandAddress(u).
+```
+
+Lean proves `|L′|=|R′|=:q`, equality of their complete `D/T` Parikh vectors, and the strict
+gate
+
+```text
+2(|u|+q) < |L|.
+```
+
+The count condition follows by cancelling the common address contribution from the cyclic pair
+`yx,xy`. The size condition combines `|x|+|y|=q+2|u|` with the reduced-word length equation and
+the nonempty toggle. This condition is independent of the particular kernel presentation.
+
+Applied to the `23` Cayley–Hamilton pump schemas, the gate kills `11` families uniformly at every
+pump depth. After a finite preperiod every feasible suffix lies inside `Pᵏ·tail`, where
+`P∈{DT,TD}`. Its exact `D` count is a fixed tail count plus `⌊r/2⌋` and one parity bit, so the
+left-right discrepancy is two-periodic and nonzero in both parities. Exact replay checks the
+finite preperiod. The dead families are `l31-03`, `l31-05`, `l31-07`, `l32-01`, `l32-03`,
+`l32-04`, `l32-09`, `l32-10`, `l32-11`, `l32-14`, and `l32-16`.
+
+Family `l32-12` has one balanced preperiodic suffix `q=2k+5` for `0≤k≤10`. A complete
+parity-DSU replay rejects all `2,288` physical length geometries in both branch orientations. At
+`k≥11` the periodic suffix discrepancy is constantly `-1`, so this twelfth family also dies at
+every depth.
+
+**Scope:** exactly `11` pump families remain:
+`l31-01`, `l31-02`, `l31-04`, `l31-06`, `l32-02`, `l32-05`, `l32-06`, `l32-07`,
+`l32-08`, `l32-13`, and `l32-15`. Exploratory exact search finds no physical factorization through
+pump depth `20`, but that cutoff is not evidence of a theorem. Suffix cloaks, unequal/interleaved
+interiors, and separate two-offset routing remain outside the result.
+
+**Use:** delete the twelve dead families from every prefix-cloak search. On the remaining eleven,
+work only inside their genuine periodic balanced-suffix ladders and derive a stronger word-equation
+invariant; do not increase the depth cutoff as a substitute.
+
+**Artifact:**
+[`MixedPrimePrefixPumpSuffixNoGo.lean`](MatrixMortality/MixedPrimePrefixPumpSuffixNoGo.lean),
+[`certify_mixed_prime_prefix_pump_suffixes.py`](tools/certify_mixed_prime_prefix_pump_suffixes.py),
+and
+[`m34-prefix-pump-suffix-collapse-2026-09-01.md`](audits/m34-prefix-pump-suffix-collapse-2026-09-01.md).
+
+**Next:** classify the periodic literal word equations in the eleven surviving prefix families,
+or derive the corresponding head-overlap gate for suffix cloaks. The all-word endpoint converse
+remains a separate obligation after any physical carrier is found.
 
 ### G3-O13: Rational serializer pumping
 

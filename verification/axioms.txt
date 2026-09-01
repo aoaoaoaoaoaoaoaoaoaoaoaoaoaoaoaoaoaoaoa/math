@@ -878,6 +878,11 @@
 'MatrixMortality.MixedPrimePrefixCloakNoGo.bcbc_prefixCloak_strict_size' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.MixedPrimePrefixPumpSuffixNoGo.forkWords_exists_balanced_cloakSuffixes' depends on axioms: [propext,
+ Quot.sound]
+'MatrixMortality.MixedPrimePrefixPumpSuffixNoGo.bcbc_prefixCloak_exists_balanced_suffixes' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.SquareRootPunctuation.coefficient_append_square' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
