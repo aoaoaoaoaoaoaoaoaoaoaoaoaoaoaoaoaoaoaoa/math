@@ -1758,6 +1758,18 @@ irreducible quotient classes is yet proved. See
 [`R32-S65`](SALVAGE.md#r32-s65-internal-ray-bridge-pumps) and
 [`m32-cubic-internal-pumps-2026-09-01.md`](audits/m32-cubic-internal-pumps-2026-09-01.md).
 
+The ray-stabilizer congruence branches immediately. Two distinct positive length-four loops fix
+the same nonaccepting ray `(4,3)`, avoid acceptance at every internal suffix, and are individually
+non-scalar. Their fixed-block encoding is injective on arbitrary bit strings. Appending the safe
+six-letter suffix and prefixing wait `13` yields a first-hit bridge: every proper suffix is
+nonaccepting, but the full word reaches the accepting ray with an explicit nonzero scale. Width
+`n` gives exactly `2^n` distinct words of common length `7+4n`, all Lean-checked mortality
+witnesses and all projectively colliding at acceptance. This proves exponential literal
+branching, not yet an infinite matrix-semigroup quotient; the next cut is whether the full loop
+products retain or erase the bit stack transversely. See
+[`R32-S66`](SALVAGE.md#r32-s66-binary-first-hit-bridge-pump) and
+[`m32-cubic-binary-pumps-2026-09-01.md`](audits/m32-cubic-binary-pumps-2026-09-01.md).
+
 ### ReturnSquare laboratory
 
 [`R32-S03`](SALVAGE.md#r32-s03-returnsquare-normal-form) is the first completely normalized

@@ -1073,6 +1073,16 @@ longer word remains nonaccepting. Thus unique first-hit decoding already fails a
 accepting fibre, and quotienting only scalar-identity words is insufficient. See `R32-S65` and
 [`audits/m32-cubic-internal-pumps-2026-09-01.md`](audits/m32-cubic-internal-pumps-2026-09-01.md).
 
+`CubicContinuantBinaryPump` upgrades the unary obstruction to a binary first-hit language. The
+two positive length-four blocks `[1,15,7,1]` and `[1,15,38,6]` are non-scalar and safely fix the
+same nonaccepting ray `(4,3)`, with distinct nonzero scales. Their literal concatenation code is
+injective. For every bit string `β`, Lean proves that `[13] ++ code(β) ++ S` is a positive bridge
+of length `7+4|β|`, its full product vanishes between singular returns, and every proper suffix
+remains nonaccepting. Fixed width `n` therefore gives exactly `2^n` distinct equal-length
+first-hit bridges, all projectively colliding at acceptance. This is literal bridge-language
+freeness; freeness of the loop matrices themselves is not part of `R32-S66`. See
+[`audits/m32-cubic-binary-pumps-2026-09-01.md`](audits/m32-cubic-binary-pumps-2026-09-01.md).
+
 The rank-(2,2) graph is no longer an independent residue. `RankTwoPunctuation` proves that every
 compatible square with one rank-one loop and three units transports exactly to the existing raw
 reverse compiler [`R32-M01`](SALVAGE.md#r32-m01-generic-reverse-edge-compiler). Its intrinsic
@@ -1918,6 +1928,7 @@ fixed-rank decision problem.
 | `CubicContinuantPunctuation.lean` | unique singular return, scalar-bridge reduction, and exact terminal-row aliases and bounded bridge cores of the fixed cubic language |
 | `CubicContinuantEndpoint.lean` | separator-adapted endpoint chart and exact reduction of the fixed cubic bridge language to accepting-ray reachability |
 | `CubicContinuantInternalPump.lean` | infinite internal-ray bridge pumps and a nonaccepting source-merge obstruction to naive endpoint decoding |
+| `CubicContinuantBinaryPump.lean` | free literal binary first-hit bridge language on two safe non-scalar stabilizer loops |
 | `EdgeCompression.lean` | exact adjacent-edge compression for split finite-rank families |
 | `TwoPlaneEdges.lean` | compatible two-plane realization of a `2 × 2` edge square and exact rank-two certificates |
 | `ReverseEdge.lean` | generic projective-incidence reverse compiler, basis adaptation, and all-path converse |

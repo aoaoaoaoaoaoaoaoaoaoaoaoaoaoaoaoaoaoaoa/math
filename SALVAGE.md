@@ -138,6 +138,7 @@ file owns the mathematical stock.
 | [`R32-S63`](#r32-s63-length-nine-cubic-bridge-novelty) | structure theorem and obstruction | eight exact length-nine bridge cores survive the shorter alias system, while three new row rewrites explain the derived bounded hits | formalized | active |
 | [`R32-S64`](#r32-s64-cubic-endpoint-chart) | exact reduction | a separator-adapted conjugacy turns fixed-cubic mortality into positive reachability from `e₀` to the nonzero `e₁` ray | formalized | active |
 | [`R32-S65`](#r32-s65-internal-ray-bridge-pumps) | structure theorem and obstruction | two non-scalar internal-ray loops give injective infinite bridge families and a first-hit-safe nonaccepting source merge | formalized | active |
+| [`R32-S66`](#r32-s66-binary-first-hit-bridge-pump) | structure theorem and obstruction | two safe non-scalar loops give exactly `2^n` distinct equal-length first-hit bridges at width `n` | formalized | active |
 | [`R32-M01`](#r32-m01-generic-reverse-edge-compiler) | partial mechanism | projective incidence generically embeds into a compatible two-plane edge square | formalized | active |
 | [`R32-M02`](#r32-m02-finite-quotient-sieve) | partial mechanism | finite monoid quotients give complete modular no-certificates for fixed candidates | formalized | active |
 | [`R32-M03`](#r32-m03-two-scale-return-conversion) | partial mechanism | a minimal two-scale return pencil has nonresonant multi-return zeros | formalized | active |
@@ -4927,6 +4928,75 @@ that any natural quotient is infinite or undecidable.
 **Use:** reject source decoders quotiented only by global projective identities. Any lawful
 normal form must account for ray-specific stabilizer loops while still recognizing entry into
 the accepting ray; determine whether that stabilizer quotient remains effectively finite.
+
+### R32-S66: Binary first-hit bridge pump
+
+**Kind:** structure theorem and obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+The nonaccepting ray `(4,3)` admits two positive length-four stabilizer blocks:
+
+```text
+C₀=[1,15,7,1],    Π(C₀)(4,3)=777600000(4,3),
+C₁=[1,15,38,6],   Π(C₁)(4,3)=182891520000(4,3).    (1)
+```
+
+Both scales are nonzero. Neither loop product is a scalar identity; Lean rejects every `λI` by
+an off-diagonal entry. For a bit string `β`, let `E(β)` concatenate `C₀` or `C₁` according to
+each bit. Lean proves
+
+```text
+E(βγ)=E(β)++E(γ),
+length(E(β))=4|β|,
+Π(E(β))(4,3)=∏ᵢ scale(βᵢ)·(4,3),                 (2)
+```
+
+and the raw code `β↦E(β)` is injective. Every wait is positive.
+
+Let `S=[15,29,11,13,7,8]` and
+
+```text
+W(β)=[13] ++ E(β) ++ S.
+```
+
+Then
+
+```text
+Π(W(β))c=29617088832000000·∏ᵢ scale(βᵢ)·e₀.      (3)
+```
+
+The scale in (3) never vanishes. Lean derives `M₀Π(W(β))M₀=0`, positivity, exact length
+`7+4|β|`, and injectivity of `β↦W(β)`.
+
+The first-hit assertion is compositional, not a bounded check for each `β`. Lean defines the
+predicate that every source-reading suffix avoids the accepting row, checks it for each loop and
+the fixed suffix, and proves an append theorem whenever the right block reaches the left source
+ray with nonzero scale. Induction then proves every proper suffix of every `W(β)` nonaccepting.
+The full word accepts by (3), so every encoded bridge first hits acceptance at its leftmost wait.
+
+For fixed width `n`, Lean indexes the words by `Fin n → Bool`, proves this indexing injective,
+proves every word has length `7+4n`, and computes the image finset cardinality as exactly `2^n`.
+Any pair in that family has an explicit nonzero projective collision ratio on the accepting ray.
+
+**Scope:** (1)–(3), nonzero scales, positivity, literal encoding and bridge injectivity, safe
+composition, all-word proper-suffix safety, all-word zero products, fixed-width projective
+collision, common length, and cardinality `2^n` are Lean checked. This proves a free literal
+binary bridge code. It does not yet prove that distinct bit strings give distinct full matrix
+products, so a matrix-semigroup quotient could still collapse the code.
+
+**Artifact:** `CubicReturn.NonPure.falseWaitFirstHitBinaryEncoding_ray`,
+`falseWaitFirstHitBinaryEncoding_injective`,
+`falseWaitFirstHitBinaryBridgeWord_noAcceptingProperSuffix`,
+`falseWaitFirstHitBinaryBridgeWord_zero`,
+`falseWaitFirstHitBinaryBridgeOfVector_projective_collision`, and
+`falseWaitFirstHitBinaryBridgeFamily_card` in
+[`CubicContinuantBinaryPump.lean`](MatrixMortality/CubicContinuantBinaryPump.lean), with audit
+[`m32-cubic-binary-pumps-2026-09-01.md`](audits/m32-cubic-binary-pumps-2026-09-01.md).
+
+**Use:** any source-based decision quotient must collapse an exponentially branching family of
+first-hit-safe stabilizer spellings. Test whether the full loop matrices retain a transverse free
+stack; if they do, source observation erases an algebraically genuine binary memory.
 
 ### R32-M01: Generic reverse edge compiler
 

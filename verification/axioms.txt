@@ -1454,6 +1454,65 @@
 'MatrixMortality.CubicReturn.NonPure.falseWaitNonacceptingMergeLong_no_accepting_suffix' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitFirstHitBinaryLoop_ray' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitFirstHitBinaryScale_ne_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitFirstHitBinaryLoop_not_projectiveIdentity' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitFirstHitBinaryEncoding_positive' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitFirstHitBinaryEncoding_append' depends on axioms: [propext]
+'MatrixMortality.CubicReturn.NonPure.falseWaitFirstHitBinaryEncoding_ray' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitFirstHitBinaryEncoding_scale_ne_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitFirstHitBinaryEncoding_suffix_source' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitFirstHitBinaryBridgeWord_source' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitFirstHitBinaryBridgeWord_sourceScale_ne_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitFirstHitBinaryBridgeWord_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitNoAcceptingSuffixFrom_append' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitFirstHitBinaryEncoding_suffix_noAccepting' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitFirstHitBinaryBridgeWord_noAcceptingProperSuffix' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitFirstHitBinaryEncoding_length' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitFirstHitBinaryEncoding_injective' depends on axioms: [propext]
+'MatrixMortality.CubicReturn.NonPure.falseWaitFirstHitBinaryBridgeWord_length' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitFirstHitBinaryBridgeWord_positive' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitFirstHitBinaryBridgeWord_injective' depends on axioms: [propext,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitFirstHitBinaryBridgeOfVector_injective' depends on axioms: [propext,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitFirstHitBinaryBridgeOfVector_length' depends on axioms: [propext,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitFirstHitBinaryBridgeOfVector_source' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitFirstHitBinaryBridgeOfVector_projective_collision' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitFirstHitBinaryBridgeFamily_card' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.EdgeCompression.isMortal_iff_exists_edgeProduct_eq_zero' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
