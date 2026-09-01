@@ -136,6 +136,7 @@ file owns the mathematical stock.
 | [`R32-O26`](#r32-o26-projective-neutral-insertion-invisibility) | obstruction | nonzero scalar-identity words are mortality-invisible, and the cubic clock admits an explicit positive radix-carry identity | formalized | graduated |
 | [`R32-S62`](#r32-s62-terminal-row-bridge-aliases) | structure theorem | exact triangular prefixes and boundary rewrites reduce all eight bounded length-eight bridge hits to two length-seven cores | formalized | active |
 | [`R32-S63`](#r32-s63-length-nine-cubic-bridge-novelty) | structure theorem and obstruction | eight exact length-nine bridge cores survive the shorter alias system, while three new row rewrites explain the derived bounded hits | formalized | active |
+| [`R32-S64`](#r32-s64-cubic-endpoint-chart) | exact reduction | a separator-adapted conjugacy turns fixed-cubic mortality into positive reachability from `e₀` to the nonzero `e₁` ray | formalized | active |
 | [`R32-M01`](#r32-m01-generic-reverse-edge-compiler) | partial mechanism | projective incidence generically embeds into a compatible two-plane edge square | formalized | active |
 | [`R32-M02`](#r32-m02-finite-quotient-sieve) | partial mechanism | finite monoid quotients give complete modular no-certificates for fixed candidates | formalized | active |
 | [`R32-M03`](#r32-m03-two-scale-return-conversion) | partial mechanism | a minimal two-scale return pencil has nonresonant multi-return zeros | formalized | active |
@@ -4781,6 +4782,75 @@ from `R32-O26` supplies another collision against the empty word at positive len
 decoder only before first arrival at the accepting ray and modulo the projective-neutral
 congruence, while quotienting the highly collisional terminal-row prefix action. Do not claim
 raw column freeness or seek a symmetric normal form.
+
+### R32-S64: Cubic endpoint chart
+
+**Kind:** exact reduction
+**Evidence:** formalized
+**Disposition:** active
+
+Let
+
+```text
+B=[[-79,1],[-90,0]],       B⁻¹=[[0,−1/90],[1,−79/90]].
+```
+
+The first column of `B` is the separator source `c=[−79,−90]ᵀ`, while the separator row satisfies
+`rB=−90e₀ᵀ`. Lean checks both inverse identities and, for a cubic defect state `(a,b,c)`, the
+exact conjugated return
+
+```text
+T(a,b,c)=B⁻¹M(a,b,c)B
+        =[[-79a−30b−90c, a],
+          [−3424a−2376b, 16a+24b]].                (1)
+```
+
+For every word `w`, Lean proves
+
+```text
+Π(T,w)=B⁻¹Π(M,w)B,
+det Π(T,w)=det Π(M,w),
+bridge(w)=−90·Π(T,w)₀₀.                            (2)
+```
+
+Every positive endpoint product is a unit. Consequently the vanishing of the scalar in (2) is
+equivalent to the existence of a nonzero `λ` with
+
+```text
+Π(T,w)e₀=λe₁.                                      (3)
+```
+
+Combining (3) with `R32-S61` gives an exact equivalence between mortality of the complete fixed
+family and positive-word reachability of the nonzero accepting `e₁` ray. This is a coordinate
+reduction, not a decision theorem.
+
+The chart also exposes the source-freeness obstruction without inference from search. The two
+distinct length-seven cores `A` and `B` satisfy
+
+```text
+Π(T,A)e₀=29617088832000000e₁,
+Π(T,B)e₀=13080043192320000e₁,
+Π(T,A)e₀=(195925/86528)Π(T,B)e₀.                   (4)
+```
+
+Thus equal-length projective injectivity fails exactly on the accepting fibre. `R32-O26`
+separately gives later collisions under neutral scalar-identity insertion.
+
+**Scope:** all identities (1)–(4), determinant transport, positive-product invertibility, the
+ray-hitting equivalence, and the mortality equivalence are Lean checked. No injectivity,
+first-arrival classification, or decision procedure is claimed.
+
+**Artifact:** `CubicReturn.NonPure.falseWaitEndpointReturn_eq_state`,
+`falseWaitEndpoint_wordProduct_conjugate`, `falseWaitEndpoint_wordProduct_det`,
+`falseWaitPositiveBridge_zero_iff_endpoint_accepting`,
+`falseWaitReturn_isMortal_iff_endpoint_accepting`, and
+`falseWaitEndpoint_lengthSevenBridgeCore_collision` in
+[`CubicContinuantEndpoint.lean`](MatrixMortality/CubicContinuantEndpoint.lean), with audit
+[`m32-cubic-endpoint-chart-2026-09-01.md`](audits/m32-cubic-endpoint-chart-2026-09-01.md).
+
+**Use:** replace the scalar bridge by exact projective reachability. Classify source-ray
+stabilizers and all entries into the accepting ray before proposing any decoder; raw projective
+freeness is formally impossible.
 
 ### R32-M01: Generic reverse edge compiler
 

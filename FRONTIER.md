@@ -1735,6 +1735,17 @@ insertion, while quotienting the collisional left/terminal action. See
 and
 [`m32-cubic-length-nine-bridges-2026-08-31.md`](audits/m32-cubic-length-nine-bridges-2026-08-31.md).
 
+The endpoint chart makes that asymmetric target exact. With
+`B=[[-79,1],[-90,0]]`, conjugation sends the separator source to `e₀`, its covector to
+`−90e₀ᵀ`, preserves every word determinant, and turns the bridge scalar into `−90(ΠT)₀₀`.
+Therefore the complete fixed family is mortal exactly when a positive endpoint word sends `e₀`
+to the nonzero `e₁` ray. The two length-seven cores already collide on that accepting ray, so
+neither raw nor equal-length projective source freeness can be the theorem. The sharp remaining
+problem is to classify source-ray stabilizer loops and every arrival at `e₁`; no prefix decoder
+may be assumed before those stabilizers are quotiented. See
+[`R32-S64`](SALVAGE.md#r32-s64-cubic-endpoint-chart) and
+[`m32-cubic-endpoint-chart-2026-09-01.md`](audits/m32-cubic-endpoint-chart-2026-09-01.md).
+
 ### ReturnSquare laboratory
 
 [`R32-S03`](SALVAGE.md#r32-s03-returnsquare-normal-form) is the first completely normalized

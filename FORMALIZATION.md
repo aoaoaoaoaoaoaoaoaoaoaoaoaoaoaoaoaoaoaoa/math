@@ -1047,11 +1047,21 @@ length-nine bridge words and proves each separator incidence and full bridge pro
 additional exact terminal-row aliases explain the derived part of the same bounded census. The
 facts that the census has `35` hits, that `27` reduce, and that the eight displayed words survive
 all checked shorter aliases are computational; the eight zeros and three aliases are formal.
-This redirects the decision lane toward first-arrival decoding on the much less collisional
-separator-column orbit, and away from symmetric row/column normal forms. Global column
+This redirects the decision lane toward the much less collisional separator-column geometry,
+and away from symmetric row/column normal forms. Global column
 injectivity is already false: the two length-seven cores collide projectively on the accepting
 ray, and every correct read-write block supplies a later neutral collision. See `R32-S63` and
 [`audits/m32-cubic-length-nine-bridges-2026-08-31.md`](audits/m32-cubic-length-nine-bridges-2026-08-31.md).
+
+`CubicContinuantEndpoint` now puts the scalar bridge in its exact endpoint chart. The basis
+`[[-79,1],[-90,0]]` sends the separator source to `e₀` and its covector to `−90e₀ᵀ`; for every
+word, the conjugated product has the same determinant and the bridge scalar is `−90` times its
+upper-left entry. Since every positive product is a unit, mortality of the fixed family is
+equivalent to a positive endpoint word sending `e₀` to a nonzero multiple of `e₁`. Lean also
+checks the distinct equal-length-seven accepting collision explicitly. Thus raw source freeness
+is impossible; the live geometric target is classification of source-ray stabilizers and
+accepting-ray arrivals, without assuming unique decoding. See `R32-S64` and
+[`audits/m32-cubic-endpoint-chart-2026-09-01.md`](audits/m32-cubic-endpoint-chart-2026-09-01.md).
 
 The rank-(2,2) graph is no longer an independent residue. `RankTwoPunctuation` proves that every
 compatible square with one rank-one loop and three units transports exactly to the existing raw
@@ -1896,6 +1906,7 @@ fixed-rank decision problem.
 | `CubicContinuantMismatchClock.lean` | contracting signed-error clock and exact endpoint zero test for balanced cubic radix comparisons |
 | `CubicContinuantSelfBalance.lean` | 2-adic and 5-adic rejection of every incorrect cubic-comparator cleanup count |
 | `CubicContinuantPunctuation.lean` | unique singular return, scalar-bridge reduction, and exact terminal-row aliases and bounded bridge cores of the fixed cubic language |
+| `CubicContinuantEndpoint.lean` | separator-adapted endpoint chart and exact reduction of the fixed cubic bridge language to accepting-ray reachability |
 | `EdgeCompression.lean` | exact adjacent-edge compression for split finite-rank families |
 | `TwoPlaneEdges.lean` | compatible two-plane realization of a `2 × 2` edge square and exact rank-two certificates |
 | `ReverseEdge.lean` | generic projective-incidence reverse compiler, basis adaptation, and all-path converse |
