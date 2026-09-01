@@ -358,6 +358,16 @@ open MatrixMortality
 #print axioms GuardedMixedPrimeFork.forkActions_crossing
 #print axioms GuardedMixedPrimeFork.bcbc_macro_crossing_transport
 #print axioms GuardedMixedPrimeFork.fixedAffineFork_crossing_chain
+#print axioms GuardedMixedPrimeFork.centralizerFork_common_fixedPoint
+#print axioms GuardedMixedPrimeFork.wordAction_cassaigneCritical
+#print axioms GuardedMixedPrimeFork.criticalFork_factorization
+#print axioms GuardedMixedPrimeFork.wordAction_criticalFork
+#print axioms GuardedMixedPrimeFork.criticalFork_ne
+#print axioms GuardedMixedPrimeFork.criticalFork_lengths
+#print axioms GuardedMixedPrimeFork.criticalFork_scales_pairwise_ne
+#print axioms GuardedMixedPrimeFork.criticalFork_common_fixedPoint_exact
+#print axioms GuardedMixedPrimeFork.criticalFork_actions_eq_powers
+#print axioms GuardedMixedPrimeFork.no_bcbc_endpoint_criticalForkCode
 #print axioms SquareRootPunctuation.coefficient_append_square
 #print axioms SquareRootPunctuation.exists_squareFree_zero_of_zero
 #print axioms SquareRootPunctuation.isMortal_iff_exists_squareFree_zero
