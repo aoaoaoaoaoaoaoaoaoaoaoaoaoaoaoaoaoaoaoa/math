@@ -113,6 +113,7 @@ import MatrixMortality.GuardedMixedPrimeOddFamilyParikh
 import MatrixMortality.GuardedMixedPrimePumpedContext
 import MatrixMortality.TwoSeedPumpPropagation
 import MatrixMortality.MixedPrimeMacroAddress
+import MatrixMortality.MixedPrimeMacroComparator
 import MatrixMortality.SquareRootPunctuation
 import MatrixMortality.TernaryClosedBlockNoGo
 import MatrixMortality.ThreePhaseBinaryNoGo

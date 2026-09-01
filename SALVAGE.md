@@ -264,6 +264,7 @@ file owns the mathematical stock.
 | [`G3-S15`](#g3-s15-uniform-mixed-prime-contextual-cut-collapse) | uniform obstruction and computational cut | Parikh-balanced contextual cuts kill the odd kernel family at every depth and contract the first two completed critical generations to a finite internal cell, where exact replay finds no fork | formalized parametric obstruction; audited extraction and exact exhaustive computation | active |
 | [`G3-S16`](#g3-s16-cayley-hamilton-pump-census-and-free-macro-address) | structure theorem, exact census, and separation | exhaustive length-32 census yields 23 infinite external pump schemas; the derived macros `DT,TD` form a free two-sided binary affine address stack, while every schema reads only one unary constant address | formalized mechanism; exact exhaustive and independently replayable certificates | active |
 | [`G3-S17`](#g3-s17-uniform-pumped-context-classification) | uniform obstruction and finite residue | exact all-depth cuts eliminate every moving internal cell in seven pump families; family six's sole static internal residue contracts to 156 rejected geometries | formalized uniform obstruction; exact independently replayable certificate | active |
+| [`G3-S18`](#g3-s18-exact-mixed-prime-address-comparators) | structure theorem and comparator | evaluation at zero globally decodes the free `DT/TD` stack; at equal length, both commutation and the literal five-factor fork compare arbitrary addresses exactly | formalized | active |
 | [`G3-M02`](#g3-m02-square-root-punctuation-fracture) | partial mechanism | a rank-two square root gives an exact `SS`-free mortality grammar | formalized | closed |
 | [`G3-O10`](#g3-o10-square-root-boundary-saturation) | obstruction | every nondegenerate rank-one square root preserves boundary coefficient zeros | formalized | graduated |
 | [`G3-M01`](#g3-m01-free-group-discrepancy-engine) | partial mechanism | Carvalho's transducer gives an all-word marker-tail equation and a cyclic exponent-one equalizer | audited | active |
@@ -10733,6 +10734,73 @@ binary address mechanism.
 **Next:** type the exhaustive comparable/same-shorter layout extraction if a one-context claim is
 still needed. Otherwise compose the free `{DT,TD}` address stack with the literal `bcbc` endpoint
 fork and retain the all-word converse.
+
+### G3-S18: Exact mixed-prime address comparators
+
+**Kind:** structure theorem and comparator
+
+**Evidence:** formalized
+
+**Disposition:** active
+
+Evaluation at zero is a globally injective scalar code for the free `{DT,TD}` affine stack. For a
+nonempty address `w` of length `n`,
+
+```text
+offset(w)=code(w)/(3·5^(n-1)),       5∤code(w).
+```
+
+If two offsets agree, clearing denominators gives
+
+```text
+code(u)5^|v|=code(v)5^|u|.
+```
+
+Five-adic divisibility forces `|u|=|v|`; the fixed-length mixed-radix decoder then forces `u=v`.
+The empty address is isolated because its offset is zero and every nonempty offset is positive.
+Thus one scalar, not a length-plus-offset pair, recovers every finite address.
+
+At equal address length, the literal commutator is an exact scalar equality test:
+
+```text
+UV(0)=VU(0)  ↔  U=V.
+```
+
+The mandatory reduced `bcbc` fork has the same power. For arbitrary raw mixed-prime toggle word
+`Z`, including the empty word,
+
+```text
+VZUVU(0)=UZVUV(0)  ↔  U=V
+```
+
+whenever `U,V` are equal-length `{DT,TD}` addresses. Writing their common multiplier as
+`0<r<1`, their offsets as `u,v`, and the toggle multiplier as `c≤1`, the branch difference is
+
+```text
+(u-v)(c(r³-r²+r)-1).
+```
+
+Since `0<r³-r²+r<1`, the second factor is strictly negative. Lean proves both scalar theorems and
+the corresponding whole-action equalities.
+
+**Scope:** equal length is essential to the five-factor theorem. With `A=DT`, the nonempty triple
+`U=A,V=A²,Z=A³` makes both branches literally `A⁹`; it lies on the common-fixed centralizer
+diagonal already forbidden by `G3-S08`. The globally injective direct offset reader has no length
+restriction, but it requires an interface that exposes two scalar offsets or their difference.
+Neither result dynamically generates source-dependent addresses or rejects malformed physical
+words outside the address grammar.
+
+**Use:** stop searching for an abstract equality test inside the mixed-prime core; it now exists in
+the exact physical five-factor shape. The constructive seam is synchronized dynamic production of
+`U,V`, or direct routing of their scalar offsets, followed by the complete endpoint converse.
+
+**Artifact:**
+[`MixedPrimeMacroComparator.lean`](MatrixMortality/MixedPrimeMacroComparator.lean) and
+[`m34-macro-address-comparator-2026-08-31.md`](audits/m34-macro-address-comparator-2026-08-31.md).
+
+**Next:** compile the two source histories into synchronized `{DT,TD}` addresses inside the
+`G3-C08` two-state endpoint core, or expose their globally injective offsets to one terminal
+difference row. In either case prove rejection of every malformed raw control word.
 
 ### G3-O13: Rational serializer pumping
 

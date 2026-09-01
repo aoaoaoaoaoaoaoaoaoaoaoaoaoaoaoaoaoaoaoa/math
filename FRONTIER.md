@@ -1245,9 +1245,8 @@ kernel structure. Exhaustive length-`32` census yields `23` boundary-reduced cor
 to an infinite `DT`- or `TD`-pump schema by a formal two-seed Cayley-Hamilton theorem. All remain
 outside the finite quotient. More importantly, the derived macros `{DT,TD}` generate a free
 binary affine submonoid with exact left-mod-`2` and right-mod-`5` decoding. The `23` contexts are
-only unary readers: every alternate-pump test is nonzero. The positive external-kernel node is now
-to make the `bcbc` fork compare general stack addresses; the matching no-go is to prove its forced
-two-state core cannot upgrade unary reading.
+only unary readers: every alternate-pump test is nonzero. This isolates general address equality
+as a separate algebraic interface rather than another unary-context search.
 
 [`G3-S17`](SALVAGE.md#g3-s17-uniform-pumped-context-classification) cuts the seven length-`31`
 schemas uniformly. Lean gives their exact balanced-prefix census at every depth and eliminates
@@ -1256,8 +1255,17 @@ fixed prefixes `DTTT` and `TTDD`. Family six's remaining static cut-`27` residue
 exact `156`-geometry certificate rejects it; cut `28` and the weak cut-`27` orientation have
 separate formal word mismatches. A global one-context extinction statement still requires a typed
 exhaustive extraction of the comparable and same-shorter layouts. The substantive live branch is
-therefore address comparison or a genuinely multi-window quotient fork, not another moving pump
+therefore a genuine address interface or a multi-window quotient fork, not another moving pump
 placement.
+
+[`G3-S18`](SALVAGE.md#g3-s18-exact-mixed-prime-address-comparators) resolves the equality-test
+algebra. Evaluation at zero globally decodes an arbitrary `{DT,TD}` address, including its length.
+At equal length, both `UV/VU` and the literal five-factor `VZUVU/UZVUV` fork compare two addresses
+exactly at one scalar state, for every arbitrary raw toggle word `Z`. The latter test does not
+infer equal length: `U=A,V=A²,Z=A³` with `A=DT` makes both branches `A⁹`, on the already forbidden
+common-fixed diagonal. The live external seam is now dynamic synchronized address production or
+direct routing of two scalar offsets through the `G3-C08` endpoint gate, plus rejection of every
+malformed physical word.
 
 [`G3-M02`](SALVAGE.md#g3-m02-square-root-punctuation-fracture) supplied a complete direct-mortality
 grammar. The source-uniform rational rank-two matrix `S` satisfies
@@ -1496,7 +1504,7 @@ or neutral word across the return, use an empty consume, or split recurrent outp
 | Lane | Available leverage | Decisive obstruction or obligation |
 | --- | --- | --- |
 | Common-kernel shuttle | The exact `bcbb` compiler moves its common data kernel out through the toggle and recovers it at the next data action | Uniformize this non-invariant shuttle in `(β,body)`; every toggle-invariant guard factors through the two-dimensional quotient |
-| Transverse-kernel terminal dynamics | `G3-O27/O29` reduce the involutive branch to the `M₂(3)` core; `G3-O30`–`O35` close the first infinite-carrier repair; `G3-S03/C07/C08` force and compile the sole two-state gate; `G3-S06/S08/S10/S11` force a positive non-common-fixed fork-kernel triple; `G3-S13`–`S15` close the first finite-quotient layers; `G3-S16/S17` give 23 external pump schemas, eliminate their moving one-context cells, and expose a free binary affine address stack | Find or exclude a genuinely multi-window quotient fork, or make the `bcbc` fork compare general `{DT,TD}` stack addresses, then retain exact normalized mantissa. Alternatively prove every lawful core lies in an audited `D2` decision stratum. Generic irreducible `GL₃` forks, letterwise, literal, empty-macro, common-fixed, short reduced codes, the odd family, first/second-critical one-window repairs, fixed unary readers, moving pump cells, depth-class-only gates, and further third-state guard tuning are dead |
+| Transverse-kernel terminal dynamics | `G3-O27/O29` reduce the involutive branch to the `M₂(3)` core; `G3-O30`–`O35` close the first infinite-carrier repair; `G3-S03/C07/C08` force and compile the sole two-state gate; `G3-S06/S08/S10/S11` force a positive non-common-fixed fork-kernel triple; `G3-S13`–`S15` close the first finite-quotient layers; `G3-S16/S17` give 23 external pump schemas, eliminate their moving one-context cells, and expose a free binary affine address stack; `G3-S18` supplies exact scalar and five-factor address comparators | Dynamically produce synchronized `{DT,TD}` addresses inside the `G3-C08` endpoint core, or route their two scalar offsets to one difference row, then prove the arbitrary-word converse and retain exact normalized mantissa. Alternatively find or exclude a genuinely multi-window quotient fork, or prove every lawful core lies in an audited `D2` decision stratum. Generic irreducible `GL₃` forks, letterwise, literal, empty-macro, common-fixed, short reduced codes, the odd family, first/second-critical one-window repairs, fixed unary readers, moving pump cells, depth-class-only gates, and further third-state guard tuning are dead |
 | Positive projective transition lower bound | Same-zero dimension three is point-line incidence in `P²`, and actual one-sided shifts retain finite rank/kernel/image data | Derive a uniform nonstationary or noncommuting shift incompatibility from an unbounded terminal section; static support rank, formal inverse completion, fixed equal-length return flowers, and unary consecutive-repeat escape are forbidden |
 | Global word-residual recoding | Longer noncommutative atoms can retain order while discarding the four additive role channels | Escape `G3-D05`: fixed-priority affine counters and all one-way reset/transfer/fanout cascades are decidable |
 | Head-separated three-schema source | `G3-C04` discharges every arbitrary-trace forcing obligation locally; `G3-O24` isolates the directed stable-cone alternative | Preserve an undecidable mixed or neutral word across returns, or realize zero-sensitive S5 GLB decoding after the `G3-O25` separator-rank fork; complete pure forks are decidable by `G3-D07` |
@@ -1560,10 +1568,11 @@ raceable leaves:
    macros `{DT,TD}` form a free binary affine stack. `G3-S17` gives the exact all-depth cut census
    for the seven length-`31` schemas, kills every moving internal cell, and reduces family six's
    static exception to `156` rejected geometries. Every discovered context still reads only one
-   constant stack address. The unresolved step is a genuinely multi-window non-common-fixed fork
-   over the quotient or a `bcbc` comparator for general stack addresses with the complete endpoint
-   converse, not another fixed-body rank perturbation, guard recurrence, or finite target-depth
-   label.
+   constant stack address. `G3-S18` nevertheless proves that one scalar offset globally decodes
+   an arbitrary address and that the literal five-factor fork compares synchronized addresses
+   exactly. The unresolved step is dynamic source-address production and the complete endpoint
+   converse, or a genuinely multi-window non-common-fixed quotient fork, not another fixed-body
+   rank perturbation, guard recurrence, or finite target-depth label.
 3. **Positive projective transition obstruction.** Derive from a source-unbounded terminal
    section a finite shift incompatibility which no three-dimensional rational same-zero
    representation can realize for any combination of generator ranks and kernels. It must use
@@ -1701,8 +1710,9 @@ five-rule quotient unique normal forms and proves the infinite odd family is ext
 kills that family as a contextual fork at every depth and eliminates all second-critical
 one-context repairs through `N=171`, but leaves genuinely multi-window quotient forks open.
 `G3-S16` adds a free `{DT,TD}` binary affine stack and `23` exact unary readers; `G3-S17` kills
-every moving internal placement of the seven length-`31` schemas, but no reader yet compares
-arbitrary addresses. After the missing guard and closure proofs,
+every moving internal placement of the seven length-`31` schemas. `G3-S18` gives exact scalar and
+five-factor equality tests for arbitrary synchronized addresses; dynamic address production and
+the all-word endpoint converse remain. After the missing guard and closure proofs,
 `D2-S08` still leaves the normalized mantissa unbounded. Any lower-bound attack
 must exclude both positive architectures through actual transition data. Backward cancellation,
 inverse cofinality, static incidence, and target-depth classes cannot do so.
