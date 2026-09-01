@@ -113,6 +113,8 @@ readonly PYTHON_CHECKERS=(
 uvx --from ruff==0.15.22 ruff check "${PYTHON_CHECKERS[@]}"
 uvx --from ruff==0.15.22 ruff format --check "${PYTHON_CHECKERS[@]}"
 uvx --from ty==0.0.58 ty check "${PYTHON_CHECKERS[@]}"
+uv run scripts/generate-parabolic-first-b-one-funnel.py --check
+uv run scripts/generate-parabolic-first-b-two-tail.py --check
 uv run --script tools/audit_prefix_algebra.py
 uv run --script tools/audit_chhn_packing_rank.py
 uv run --script tools/audit_six_state_sandwich.py
