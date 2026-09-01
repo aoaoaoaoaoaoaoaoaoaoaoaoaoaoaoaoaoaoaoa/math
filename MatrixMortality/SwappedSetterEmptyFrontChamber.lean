@@ -106,7 +106,8 @@ private theorem tagEncode_length_ge (width : Nat) (letters : List TagLetter) :
 private def physicalUpperWord (width : Nat) (block : List NearyTile) : List Bool :=
   (spell (nearyUpper width) block ++ nearyMarker width).map not
 
-private def physicalLowerWord (width : Nat) (body : List TagLetter)
+/-- Swapped ternary word emitted by the physical lower spelling of a role block. -/
+def swappedPhysicalLowerWord (width : Nat) (body : List TagLetter)
     (block : List NearyTile) : List Bool :=
   (spell (nearyLower width body) block).map not
 
@@ -123,11 +124,12 @@ private theorem physicalUpperWord_cons (width : Nat) (tile : NearyTile)
   simp only [List.map_cons, tagEncode_cons]
   rw [List.append_assoc, List.map_append]
 
-private theorem physicalLowerWord_cons (width : Nat) (body : List TagLetter)
+/-- The physical lower spelling is a left-to-right concatenation of tile emissions. -/
+theorem swappedPhysicalLowerWord_cons (width : Nat) (body : List TagLetter)
     (tile : NearyTile) (rest : List NearyTile) :
-    physicalLowerWord width body (tile :: rest) =
-      (nearyLower width body tile).map not ++ physicalLowerWord width body rest := by
-  simp [physicalLowerWord, spell, List.map_append]
+    swappedPhysicalLowerWord width body (tile :: rest) =
+      (nearyLower width body tile).map not ++ swappedPhysicalLowerWord width body rest := by
+  simp [swappedPhysicalLowerWord, spell, List.map_append]
 
 private theorem physicalUpperWord_b_prefix
     {width : Nat} (width_pos : 0 < width) {tile : NearyTile}
@@ -148,30 +150,33 @@ private theorem physicalUpperWord_b_prefix_three
   rw [physicalUpperWord_cons, tile_b]
   simp [tagCode, List.replicate_add]
 
-private theorem physicalLowerWord_erase_prefix
+/-- Every lower erasure spelling begins with swapped ternary digit two. -/
+theorem swappedPhysicalLowerWord_erase_prefix
     (width : Nat) (body : List TagLetter) (letter : TagLetter)
     (rest : List NearyTile) :
-    ∃ tail, physicalLowerWord width body (.erase letter :: rest) = true :: tail := by
-  exact ⟨physicalLowerWord width body rest,
-    by simp [physicalLowerWord_cons, nearyLower]⟩
+    ∃ tail, swappedPhysicalLowerWord width body (.erase letter :: rest) = true :: tail := by
+  exact ⟨swappedPhysicalLowerWord width body rest,
+    by simp [swappedPhysicalLowerWord_cons, nearyLower]⟩
 
-private theorem physicalLowerWord_rule_b_prefix
+/-- Every lower `R_b` spelling begins with swapped ternary digits `112`. -/
+theorem swappedPhysicalLowerWord_rule_b_prefix
     (width : Nat) (body : List TagLetter) (rest : List NearyTile) :
     ∃ tail,
-      physicalLowerWord width body (.rule .b :: rest) =
+      swappedPhysicalLowerWord width body (.rule .b :: rest) =
         false :: false :: true :: tail := by
-  exact ⟨physicalLowerWord width body rest,
-    by simp [physicalLowerWord_cons, nearyLower]⟩
+  exact ⟨swappedPhysicalLowerWord width body rest,
+    by simp [swappedPhysicalLowerWord_cons, nearyLower]⟩
 
-private theorem physicalLowerWord_nonempty
+/-- Every nonempty physical block has a nonempty lower spelling. -/
+theorem swappedPhysicalLowerWord_nonempty
     (width : Nat) (body : List TagLetter) (tile : NearyTile)
     (rest : List NearyTile) :
-    physicalLowerWord width body (tile :: rest) ≠ [] := by
+    swappedPhysicalLowerWord width body (tile :: rest) ≠ [] := by
   intro word_nil
   have mapped_nil :
       List.map not
           (nearyLower width body tile ++ spell (nearyLower width body) rest) = [] := by
-    simpa [physicalLowerWord, spell] using word_nil
+    simpa [swappedPhysicalLowerWord, spell] using word_nil
   have spelling_nil :
       nearyLower width body tile ++ spell (nearyLower width body) rest = [] :=
     List.map_eq_nil_iff.mp mapped_nil
@@ -282,16 +287,16 @@ private theorem lowerCode_pos
     (width : Nat) (body : List TagLetter) (tile : NearyTile)
     (rest : List NearyTile) :
     (0 : ℤ) < swappedLowerCode width body (tile :: rest) := by
-  have word_nonempty := physicalLowerWord_nonempty width body tile rest
+  have word_nonempty := swappedPhysicalLowerWord_nonempty width body tile rest
   have code_bound := ternaryCode_lower_bound
-    (physicalLowerWord width body (tile :: rest)) word_nonempty
-  have code_pos : 0 < ternaryCode (physicalLowerWord width body (tile :: rest)) :=
+    (swappedPhysicalLowerWord width body (tile :: rest)) word_nonempty
+  have code_pos : 0 < ternaryCode (swappedPhysicalLowerWord width body (tile :: rest)) :=
     lt_of_lt_of_le
       (pow_pos (by norm_num)
-        ((physicalLowerWord width body (tile :: rest)).length - 1))
+        ((swappedPhysicalLowerWord width body (tile :: rest)).length - 1))
       code_bound
-  simpa only [swappedLowerCode, physicalLowerWord] using (show
-    (0 : ℤ) < (ternaryCode (physicalLowerWord width body (tile :: rest)) : ℤ) by
+  simpa only [swappedLowerCode, swappedPhysicalLowerWord] using (show
+    (0 : ℤ) < (ternaryCode (swappedPhysicalLowerWord width body (tile :: rest)) : ℤ) by
       exact_mod_cast code_pos)
 
 /-- Exact punctuated upper code of the exceptional `R_c;D_b` block. -/
@@ -398,23 +403,26 @@ theorem emptyTarget_upperPrefix_lower
       2 * (ternaryCode ((tagEncode (offset + 1) letters ++ [true]).map not) : ℤ) + 1
   exact_mod_cast natural_bound
 
-private def seedDenominatorCore (scale upperPrefix : ℤ) : ℤ :=
+/-- Positive core controlling the sign of the empty-front seed denominator. -/
+def emptyFrontSeedDenominatorCore (scale upperPrefix : ℤ) : ℤ :=
   (135 * scale ^ 5 - 207 * scale ^ 4 + 168 * scale ^ 3 -
       72 * scale ^ 2 + 8 * scale) * upperPrefix -
     108 * scale ^ 4 + 558 * scale ^ 3 - 330 * scale ^ 2 +
       64 * scale - 4
 
-private def seedHeadGapCore (scale upperPrefix : ℤ) : ℤ :=
+/-- Positive core controlling the seed's gap above the terminal discrepancy. -/
+def emptyFrontSeedHeadGapCore (scale upperPrefix : ℤ) : ℤ :=
   (21870 * scale ^ 7 - 53784 * scale ^ 6 + 49167 * scale ^ 5 -
       21357 * scale ^ 4 + 4596 * scale ^ 3 - 408 * scale ^ 2 +
       8 * scale) * upperPrefix -
     17496 * scale ^ 6 + 36612 * scale ^ 5 - 34236 * scale ^ 4 +
       14094 * scale ^ 3 - 2586 * scale ^ 2 + 196 * scale - 4
 
-private theorem seedDenominatorCore_pos
+/-- The empty-front denominator core is positive on every physical target prefix. -/
+theorem emptyFrontSeedDenominatorCore_pos
     {scale upperPrefix : ℤ} (scale_three : 3 ≤ scale)
     (prefix_lower : 9 * scale ≤ 2 * upperPrefix + 1) :
-    0 < seedDenominatorCore scale upperPrefix := by
+    0 < emptyFrontSeedDenominatorCore scale upperPrefix := by
   let shifted := scale - 3
   let coefficient :=
     135 * scale ^ 5 - 207 * scale ^ 4 + 168 * scale ^ 3 -
@@ -440,19 +448,20 @@ private theorem seedDenominatorCore_pos
   have gap_nonneg : 0 ≤ 2 * upperPrefix - 9 * scale + 1 := by
     omega
   have decomposition :
-      2 * seedDenominatorCore scale upperPrefix =
+      2 * emptyFrontSeedDenominatorCore scale upperPrefix =
         coefficient * (2 * upperPrefix - 9 * scale + 1) + minimum := by
-    simp only [seedDenominatorCore, coefficient, minimum, shifted]
+    simp only [emptyFrontSeedDenominatorCore, coefficient, minimum, shifted]
     ring
   have product_nonneg :
       0 ≤ coefficient * (2 * upperPrefix - 9 * scale + 1) :=
     mul_nonneg coefficient_pos.le gap_nonneg
   nlinarith
 
-private theorem seedHeadGapCore_pos
+/-- The empty-front terminal-gap core is positive on every physical target prefix. -/
+theorem emptyFrontSeedHeadGapCore_pos
     {scale upperPrefix : ℤ} (scale_three : 3 ≤ scale)
     (prefix_lower : 9 * scale ≤ 2 * upperPrefix + 1) :
-    0 < seedHeadGapCore scale upperPrefix := by
+    0 < emptyFrontSeedHeadGapCore scale upperPrefix := by
   let shifted := scale - 3
   let coefficient :=
     21870 * scale ^ 7 - 53784 * scale ^ 6 + 49167 * scale ^ 5 -
@@ -482,9 +491,9 @@ private theorem seedHeadGapCore_pos
   have gap_nonneg : 0 ≤ 2 * upperPrefix - 9 * scale + 1 := by
     omega
   have decomposition :
-      2 * seedHeadGapCore scale upperPrefix =
+      2 * emptyFrontSeedHeadGapCore scale upperPrefix =
         coefficient * (2 * upperPrefix - 9 * scale + 1) + minimum := by
-    simp only [seedHeadGapCore, coefficient, minimum, shifted]
+    simp only [emptyFrontSeedHeadGapCore, coefficient, minimum, shifted]
     ring
   have product_nonneg :
       0 ≤ coefficient * (2 * upperPrefix - 9 * scale + 1) :=
@@ -508,8 +517,8 @@ theorem emptyFrontSeed_above_terminal
   have prefix_lower' : 9 * scale ≤ 2 * upperPrefix + 1 := by
     simpa [scale, pow_add, mul_comm, mul_left_comm, mul_assoc] using prefix_lower
   have denominator_core_pos :=
-    seedDenominatorCore_pos scale_three prefix_lower'
-  have head_gap_core_pos := seedHeadGapCore_pos scale_three prefix_lower'
+    emptyFrontSeedDenominatorCore_pos scale_three prefix_lower'
+  have head_gap_core_pos := emptyFrontSeedHeadGapCore_pos scale_three prefix_lower'
   have head_pos : 0 < terminalDiscrepancy (offset + 1) := by
     simp only [terminalDiscrepancy, widthScale, pow_succ]
     have power_pos : (0 : ℤ) < 3 ^ offset := by positivity
@@ -520,27 +529,27 @@ theorem emptyFrontSeed_above_terminal
   have denominator_eq :
       deletionBInverseDenominator offset upperPrefix =
         -2 * terminalDiscrepancy (offset + 1) *
-          seedDenominatorCore scale upperPrefix := by
+          emptyFrontSeedDenominatorCore scale upperPrefix := by
     simp only [deletionBInverseDenominator, setterMarker,
       secondDeletionInverseNumerator, firstDeletionInverseNumerator,
       firstDeletionInverseDenominator, firstDeletionResidual,
       secondDeletionGapCore, terminalDiscrepancy, centeredCoefficient,
       width_scale_eq]
-    simp only [seedDenominatorCore]
+    simp only [emptyFrontSeedDenominatorCore]
     ring
   have head_gap_eq :
       deletionBInverseNumerator offset upperPrefix -
           terminalDiscrepancy (offset + 1) *
             deletionBInverseDenominator offset upperPrefix =
         -terminalDiscrepancy (offset + 1) *
-          seedHeadGapCore scale upperPrefix := by
+          emptyFrontSeedHeadGapCore scale upperPrefix := by
     simp only [deletionBInverseNumerator, deletionBCofactor,
       deletionBInverseDenominator, setterMarker,
       secondDeletionInverseNumerator, firstDeletionInverseNumerator,
       firstDeletionInverseDenominator, firstDeletionResidual,
       secondDeletionGapCore, terminalDiscrepancy, centeredCoefficient,
       width_scale_eq]
-    simp only [seedHeadGapCore]
+    simp only [emptyFrontSeedHeadGapCore]
     ring
   have denominator_neg :
       deletionBInverseDenominator offset upperPrefix < 0 := by
@@ -809,11 +818,11 @@ theorem bLeading_physicalBackwardBlock_avoids_deletionCChamber
         (chamberRadius width : ℚ) / (chamberRadius width - 3)) := by
   intro chamber
   let upper := physicalUpperWord width (tile :: rest)
-  let lower := physicalLowerWord width body (tile :: rest)
+  let lower := swappedPhysicalLowerWord width body (tile :: rest)
   have width_pos : 0 < width := by omega
   have width_two : 2 ≤ width := by omega
   have lower_nonempty : lower ≠ [] :=
-    physicalLowerWord_nonempty width body tile rest
+    swappedPhysicalLowerWord_nonempty width body tile rest
   have lower_pos :
       (0 : ℚ) < swappedLowerCode width body (tile :: rest) := by
     exact_mod_cast lowerCode_pos width body tile rest
@@ -833,7 +842,7 @@ theorem bLeading_physicalBackwardBlock_avoids_deletionCChamber
         exact_mod_cast lower_code_lt
       rw [show upper = physicalUpperWord width (tile :: rest) by rfl,
         physicalUpper_predecessorPower] at cast_bound
-      simpa only [swappedLowerCode, lower, physicalLowerWord] using cast_bound
+      simpa only [swappedLowerCode, lower, swappedPhysicalLowerWord] using cast_bound
     have lower_short :
         (swappedLowerCode width body (tile :: rest) : ℚ) <
           widthScale width * upperPower width (tile :: rest) := by
@@ -875,7 +884,7 @@ theorem bLeading_physicalBackwardBlock_avoids_deletionCChamber
                 physicalUpper_predecessorPower]
               ring
         rw [power_eq] at cast_bound
-        simpa only [swappedLowerCode, lower, physicalLowerWord] using cast_bound
+        simpa only [swappedLowerCode, lower, swappedPhysicalLowerWord] using cast_bound
       have lower_long :
           3 * (widthScale width : ℚ) * upperPower width (tile :: rest) ≤
             swappedLowerCode width body (tile :: rest) := by
@@ -895,7 +904,7 @@ theorem bLeading_physicalBackwardBlock_avoids_deletionCChamber
           obtain ⟨upperTail, upper_eq⟩ :=
             physicalUpperWord_b_prefix width_pos tile_b rest
           obtain ⟨lowerTail, lower_eq⟩ :=
-            physicalLowerWord_erase_prefix width body letter rest
+            swappedPhysicalLowerWord_erase_prefix width body letter rest
           have prefix_length_eq :
               (false :: true :: upperTail).length = (true :: lowerTail).length := by
             rw [← upper_eq, ← lower_eq]
@@ -911,7 +920,7 @@ theorem bLeading_physicalBackwardBlock_avoids_deletionCChamber
               exact_mod_cast code_lt
             rw [← upper_eq, ← lower_eq] at cast_lt
             simpa only [swappedUpperCode, swappedLowerCode,
-              physicalUpperWord, physicalLowerWord] using cast_lt.le
+              physicalUpperWord, swappedPhysicalLowerWord] using cast_lt.le
           have erase_prefix :
               (swappedUpperCode width (.erase letter :: rest) : ℚ) ≤
                 swappedLowerCode width body (.erase letter :: rest) := by
@@ -926,7 +935,7 @@ theorem bLeading_physicalBackwardBlock_avoids_deletionCChamber
               obtain ⟨upperTail, upper_eq⟩ :=
                 physicalUpperWord_b_prefix_three width_two tile_b rest
               obtain ⟨lowerTail, lower_eq⟩ :=
-                physicalLowerWord_rule_b_prefix width body rest
+                swappedPhysicalLowerWord_rule_b_prefix width body rest
               have prefix_length_eq :
                   (false :: true :: true :: upperTail).length =
                     (false :: false :: true :: lowerTail).length := by
@@ -949,7 +958,7 @@ theorem bLeading_physicalBackwardBlock_avoids_deletionCChamber
                 rw [← upper_eq, ← lower_eq,
                   physicalUpper_predecessorPower] at cast_gap
                 simp only [swappedUpperCode, swappedLowerCode,
-                  physicalUpperWord, physicalLowerWord] at cast_gap ⊢
+                  physicalUpperWord, swappedPhysicalLowerWord] at cast_gap ⊢
                 linarith
               have rule_b_gap :
                   (widthScale width : ℚ) * upperPower width (.rule .b :: rest) ≤
@@ -986,7 +995,7 @@ theorem bLeading_physicalBackwardBlock_avoids_deletionCChamber
                     _ = 3 * widthScale width * upperPower width (.rule .b :: rest) := by
                       ring
                 rw [power_eq] at cast_lt
-                simpa only [swappedLowerCode, lower, physicalLowerWord] using cast_lt
+                simpa only [swappedLowerCode, lower, swappedPhysicalLowerWord] using cast_lt
               have equal_length_upper :
                   (swappedLowerCode width body (.rule .b :: rest) : ℚ) <
                     3 * widthScale width * upperPower width (.rule .b :: rest) := by

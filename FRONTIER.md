@@ -1197,9 +1197,17 @@ Every physical empty-front seed lies above `H`; from any carrier on that ray, no
 whose first role letter is `b` can enter the slope interval `(1,r/(r−3))`. Thus every contraction
 candidate is `c`-leading. The literal `(R_c,D_b)` branch against body `b c^(β−2)` also satisfies
 the quantitative label `(x−1)/x<1/(80ρ)` whenever `x>1`. The interval alone does not exclude
-longer `c`-leading blocks with that prefix. The next cut must pull the exact `3H` gcd channel
-backward to force or eliminate the remaining suffix, then charge any surviving contraction to
-its adjacent transition.
+longer `c`-leading blocks with that prefix.
+
+[`MM-S88`](SALVAGE.md#mm-s88-conditional-post-rcdb-no-reentry) proves the complete next-block cut
+after the literal canonical `(R_c,D_b);D_c` history. Its exact intercept bounds and affine
+automaton classify every next physical block as negative, below one, or above the `MM-S86`
+chamber ceiling. This does not force the canonical history. That strengthening is false already
+at width six: target `c^6`, body `bcbcc`, and `(R_c,D_b,D_b)` survive the full `3H` channel;
+longer modular-return survivors also occur. The live node is therefore the classification of all
+noncanonical contraction survivors by their post-`D_c` intercept shift. Prove a finite labelled
+family of admissible shifts or return an infinite family whose successor can re-enter the
+chamber; do not generalize the canonical lower bound to these survivors.
 
 The remaining ternary obligation is now the **nonzero history-defect branch** of the global
 earliest-pole reduction. In the normalized coordinate `δ=D/y`, the complete physical recurrence
@@ -1221,7 +1229,7 @@ erasure tile, not `β` of them. A complete proof must either force the long tail
 false pole or extend the carry/cylinder invariant to arbitrary physical target suffixes. Fixed
 residue and unit projections are empirically saturated, and the exact carry window grows with
 carrier height. None of `MM-S51`, `MM-S55`, `MM-S57`, `MM-S59`, `MM-S61`, `MM-S63`, `MM-S64`,
-`MM-S68`, `MM-S69`, `MM-S71`, `MM-O27`, `MM-S73`, `MM-S76`, `MM-O29`, `MM-S86`, or `MM-S87`
+`MM-S68`, `MM-S69`, `MM-S71`, `MM-O27`, `MM-S73`, `MM-S76`, `MM-O29`, `MM-S86`, `MM-S87`, or `MM-S88`
 alone proves projective avoidance.
 Exact bidirectional diagnostics for the ternary swap at `β=3`, body `bbcc`, exclude every
 false-pole word of at most six projective blocks when each regular block has

@@ -1439,6 +1439,7 @@ The setter-projective audit now also exposes a kernel-friendly carry theorem:
 | [`MM-O29`](SALVAGE.md#mm-o29-uniform-empty-front-local-rays) | uniform local `D_b;D_c;D_c` backward rays for every empty-front erasure target, exact shell and cylinder formulas, and complete terminal-`c` gap valuation law |
 | [`MM-S86`](SALVAGE.md#mm-s86-exact-deletion-c-contraction-chamber) | exact singleton-`D_c` adjugate, primitive `3H` gcd channel, sharp Farey-contraction inequality, and limiting ratio |
 | [`MM-S87`](SALVAGE.md#mm-s87-empty-front-backward-chamber-cut) | empty-front seeds lie above `H`, no `b`-leading physical predecessor enters the contraction interval, and the canonical `(R_c,D_b)` pullback has gap below `1/(80ρ)` |
+| [`MM-S88`](SALVAGE.md#mm-s88-conditional-post-rcdb-no-reentry) | exact canonical post-`D_c` intercept bounds, affine next-block automaton, and total physical no-reentry after the literal `(R_c,D_b);D_c` history |
 
 These records narrow the missing arbitrary-depth theorem but do not prove
 projective avoidance. Their reconstruction is
@@ -1820,6 +1821,17 @@ lower spelling lengths and proves that no block whose first role letter is `b` c
 `(R_c,D_b)` block against body `b c^(β−2)`, the exact codes imply
 `(x−1)/x<1/(80ρ)` whenever `x>1`. The theorem does not force an arbitrary chamber ancestor to
 equal that block; this remaining step must consume the `MM-S86` gcd channel.
+
+Record [`MM-S88`](SALVAGE.md#mm-s88-conditional-post-rcdb-no-reentry) closes the successor of
+that literal branch. Physical empty-front seeds satisfy `c>8ρ²`. After the canonical
+`(R_c,D_b);D_c` pullback, the boundary intercept `Ξ` lies above `6·3^(β−6)/5` and below one of
+two fixed-point margins. The exact next-block numerator automaton is
+`b:X↦9ρX+H`, `c:X↦3X−r`. Every `c`-leading block is negative; exact ternary length and prefix
+bounds put every `b`-leading block below one or above `51/50` at width six and `6/5` thereafter.
+Hence no next physical block re-enters `(1,r/(r−3))`. This is conditional on the literal
+canonical history. Exact-block forcing is false: the width-six target `c^6`, body `bcbcc`, and
+block `(R_c,D_b,D_b)` survive the full `3H` contraction channel, and longer modular-return
+survivors remain outside the theorem.
 
 Record [`MM-S21`](SALVAGE.md#mm-s21-bounded-decimal-suffix-cycles) closes the fixed-precision
 suffix-descent lane. `DecimalSetterSuffix.cycleDefect_lift` gives an explicit one-digit lift for
@@ -2382,6 +2394,8 @@ fixed-rank decision problem.
 | `SwappedSetterEmptyFrontRay.lean` | exact local empty-front `D_b;D_c;D_c` backward family, shell and predecessor-cylinder formulas, and terminal-run gap valuation classification |
 | `SwappedSetterDeletionCContraction.lean` | exact inverse singleton-`D_c` gcd chamber, Farey-height contraction criterion, physical recurrence adapter, and limiting contraction ratio |
 | `SwappedSetterEmptyFrontChamber.lean` | terminal lower bound for empty-front seeds, physical `b`-leading exclusion from the deletion-contraction interval, and canonical `(R_c,D_b)` gap estimate |
+| `SwappedSetterPostRcDbAutomaton.lean` | exact canonical post-`D_c` intercept bounds and the reusable two-state affine next-block automaton |
+| `SwappedSetterPostRcDbChamber.lean` | physical ternary length partition, signed first-colour classification, and conditional total no-reentry theorem |
 | `PairedMortality.lean` | common-column mortality converse and exact integer `4 × 4` family |
 | `PhaseFracture.lean` | phase normalization and dimension-free projective-identification contradiction |
 | `PhaseRigidity.lean` | checked local role algebra, discrepancy commutators, and invariant-pencil rigidity |

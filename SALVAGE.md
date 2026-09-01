@@ -149,6 +149,7 @@ file owns the mathematical stock.
 | [`MM-O29`](#mm-o29-uniform-empty-front-local-rays) | obstruction | every empty-front erasure target admits an exact local `D_b;D_c;D_c` backward ray with the required shells and predecessor cylinder | formalized | active |
 | [`MM-S86`](#mm-s86-exact-deletion-c-contraction-chamber) | structure theorem and obstruction | singleton `D_c` contracts Farey height exactly in one primitive gcd channel with a sharp gap inequality | formalized | active |
 | [`MM-S87`](#mm-s87-empty-front-backward-chamber-cut) | structure theorem and obstruction | no `b`-leading physical block can pull an empty-front seed into the deletion-contraction chamber; the canonical `R_c;D_b` branch has a sharp near-diagonal gap | formalized | active |
+| [`MM-S88`](#mm-s88-conditional-post-rcdb-no-reentry) | structure theorem and obstruction | after the literal canonical `R_c;D_b;D_c` history, an exact two-state affine automaton sends every next physical block outside the deletion-contraction chamber | formalized | active |
 | [`R32-S01`](#r32-s01-split-return-normal-form) | structure theorem | rank-two cuts reduce one-unit binary mortality to a `2 × 2` return recurrence | formalized | graduated |
 | [`R32-S02`](#r32-s02-two-plane-edge-square) | structure theorem | two rank-two generators are a two-vertex square of `2 × 2` edges | formalized | graduated |
 | [`R32-O01`](#r32-o01-rank-one-profile-collapse) | obstruction | a rank-one generator reduces mortality to order-at-most-three scalar recurrence zeros | audited | stock |
@@ -5866,6 +5867,78 @@ through `physicalEmptyFrontSeed_above_terminal`,
 **Next:** pull the `MM-S86` divisibility channel backward through a `c`-leading physical block.
 The interval alone permits longer blocks with prefix `(R_c,D_b)`; exact-block classification
 must use the `3H` gcd channel rather than an Archimedean code bound.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S88: Conditional post-RcDb no-reentry
+
+**Kind:** structure theorem and obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+Fix width `β≥6`, put `ρ=3^β`, `r=ρ−2`, `H=5ρ−1`, `μ=2ρ−1`, and
+`Q=3^(β−6)`. Every physical empty-front `MM-O29` seed `c` satisfies
+
+```text
+c > 8ρ².
+```
+
+Pull `c` backward through the literal canonical block `(R_c,D_b)`, then through singleton
+`D_c`. The resulting boundary intercept `Ξ` has an exact closed rational form. Lean proves
+
+```text
+6Q/5 < Ξ,
+β=6  →  Ξ < 2−H/(9ρ−1),
+β≥7  →  Ξ < 14Q/9−H/(9ρ−1).                 (1)
+```
+
+For every subsequent physical block, its backward numerator is generated exactly by the affine
+automaton
+
+```text
+b : X ↦ 9ρX+H,
+c : X ↦ 3X−r.                               (2)
+```
+
+A `c`-leading block enters the invariant cone `X<−1`, hence has negative backward slope. For a
+`b`-leading block, the lower spelling length relative to the upper length and the shift `β−6`
+gives three cases. Short lower words lie below `QA`; words at least two places longer lie above
+`3QA`; at the critical length, `D_b` begins with swapped digit `2`, while `R_b` begins with
+digits `112`. Combining these exact ternary cylinders with (1) yields
+
+```text
+β=6  →  slope<1 or 51/50<slope,
+β≥7  →  slope<1 or 6/5<slope.                (3)
+```
+
+Both positive gaps lie above the `MM-S86` chamber ceiling `r/(r−3)`. Thus no next physical
+block re-enters the singleton-`D_c` contraction chamber after this literal history.
+
+**Scope:** this is a conditional successor theorem, not an exact-block forcing theorem. Such
+forcing is false already at width six: target `c^6`, body `bcbcc`, and block
+`(R_c,D_b,D_b)` give a lawful local `MM-S86` contraction survivor in the full `3H` channel.
+Further equal-spelling and modular-return survivors occur beyond the canonical branch. The
+theorem proves neither encoded-entry reachability nor that any local carrier is a pole.
+
+**Use:** delete every continuation whose contraction ancestry is known independently to be the
+literal canonical `(R_c,D_b);D_c` branch. Reuse the affine automaton from any other branch only
+after proving the appropriate intercept bounds; no family-wide bound is inferred here.
+
+**Formalization:**
+[`MatrixMortality/SwappedSetterPostRcDbAutomaton.lean`](MatrixMortality/SwappedSetterPostRcDbAutomaton.lean)
+and
+[`MatrixMortality/SwappedSetterPostRcDbChamber.lean`](MatrixMortality/SwappedSetterPostRcDbChamber.lean),
+through `postRcDbIntercept_eq_closed_of_seed`, `postRcDbIntercept_upper`,
+`carriedUpper_eq_walkIntercept`, `bLeading_postRcDbPhysicalSlope_classification`, and
+`physicalEmptyTarget_postRcDb_avoids_deletionCChamber`.
+
+**Artifact:**
+[`audits/m53-post-rcdb-chamber-2026-09-01.md`](audits/m53-post-rcdb-chamber-2026-09-01.md).
+
+**Next:** classify the noncanonical full-`3H` contraction survivors by their exact intercept
+shift. The next global cut must cover the `(R_c,D_b^k)` equal-spelling families and the longer
+modular-return branch; canonical no-reentry alone cannot close the ancestry tree.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
