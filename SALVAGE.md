@@ -141,6 +141,7 @@ file owns the mathematical stock.
 | [`R32-S66`](#r32-s66-binary-first-hit-bridge-pump) | structure theorem and obstruction | two safe non-scalar loops give exactly `2^n` distinct equal-length first-hit bridges at width `n` | formalized | active |
 | [`R32-S67`](#r32-s67-transverse-free-pump-and-ray-blindness) | structure theorem and obstruction | the binary loop matrices form a projectively free monoid whose entire stack is zero-invisible after the fixed ray-reaching suffix | formalized | active |
 | [`R32-S68`](#r32-s68-separator-source-projective-decoder) | structure theorem and compiler mechanism | modulo-197 valuation and a real shell make the free binary pump act projectively faithfully on the original separator source | formalized | active |
+| [`R32-S69`](#r32-s69-common-ray-transport-and-unsafe-expansion) | compiler mechanism and obstruction | a fixed connector transports positive terminal loops to signed equal-ratio common-ray digits and exposes the first expanding but first-hit-unsafe loop | formalized | active |
 | [`R32-M01`](#r32-m01-generic-reverse-edge-compiler) | partial mechanism | projective incidence generically embeds into a compatible two-plane edge square | formalized | active |
 | [`R32-M02`](#r32-m02-finite-quotient-sieve) | partial mechanism | finite monoid quotients give complete modular no-certificates for fixed candidates | formalized | active |
 | [`R32-M03`](#r32-m03-two-scale-return-conversion) | partial mechanism | a minimal two-scale return pencil has nonresonant multi-return zeros | formalized | active |
@@ -5166,6 +5167,76 @@ audit
 **Use:** the pump is readable before the suffix, so seek a positive left context which
 annihilates exactly a selected encoded source ray. Keep the separate arbitrary-word converse:
 source injectivity does not enforce block syntax or exclude unrelated bridge zeros.
+
+### R32-S69: Common-ray transport and unsafe expansion
+
+**Kind:** compiler mechanism and obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+Let `B=[[4,1],[3,1]]` be the common-ray basis from `R32-S67`. For every upper-triangular
+terminal matrix `H=[[a,b],[0,d]]`, Lean checks the exact connector identity
+
+```text
+B⁻¹Π(1,15,8)HΠ(13)B =
+  [[1057536000a, 515808000a+233280000b−195955200d],
+   [0,             27993600d]].                         (1)
+```
+
+If `a≠0`, division by the leading entry gives the normalized affine loop
+
+```text
+[[1, 199/408+(15/68)(b/a)−(63/340)(d/a)],
+ [0,                         (9/340)(d/a)]].             (2)
+```
+
+Every nonzero projective physical realization of `H` transports through (1), and strict
+positivity of its wait spelling survives the fixed connectors. Applying (2) to the two terminal
+translations from `R32-S58` gives positive physical words realizing
+
+```text
+F₋=[ [1, −4736689/16320], [0, 9/340] ],
+F₊=[ [1,     74677/12240], [0, 9/340] ].                 (3)
+```
+
+Thus the fixed cubic family contains opposite-signed affine digits with one common positive
+contraction ratio. This refutes the bounded-search suggestion that positive returns cannot
+produce a negative common-ray digit.
+
+The same connector transports `H=Π(5,5)` to the six-wait loop
+
+```text
+L=(1,15,8,5,5,13),
+B⁻¹Π(L)B = 609140736000·[[1,15529/6528],[0,1125/1088]]. (4)
+```
+
+Its transverse ratio is greater than one. It is unusable as a first-hit pump, however, because
+its three terminal suffixes already land on the accepting physical ray:
+
+```text
+Π(13)(4,3)       = −408(1,0),
+Π(5,13)(4,3)     = 9792(1,0),
+Π(5,5,13)(4,3)   = −235008(1,0).                        (5)
+```
+
+**Scope:** the generic connector law, normalized affine formula, projective transport,
+positivity preservation, the two signed equal-ratio physical digits, the expanding chart, its
+ray eigenvalue, and all three accepting suffixes are Lean checked. The result does not realize a
+selected `R32-S68` source annihilator, prove that arbitrary signed-digit words are syntactically
+forced, or decide `M₃(2)`.
+
+**Artifact:** `CubicReturn.NonPure.falseWaitFirstHitRayTransport_raw`,
+`falseWaitFirstHitRayTransport_projectivelyRealizes`,
+`falseWaitFirstHitSignedDigits_equalRatio`,
+`falseWaitFirstHitExpandingLoop_chart`, and
+`falseWaitFirstHitExpandingLoop_unsafeSuffixes` in
+[`CubicContinuantRayTransport.lean`](MatrixMortality/CubicContinuantRayTransport.lean), with
+audit
+[`m32-cubic-ray-transport-2026-09-01.md`](audits/m32-cubic-ray-transport-2026-09-01.md).
+
+**Use:** terminal triangular loops are now a systematic source of common-ray affine digits.
+Search their diagonal ratios and translations for an exact annihilator of an `R32-S68` source
+coordinate. Enforce first-hit safety separately; expansion alone is not a lawful bridge pump.
 
 ### R32-M01: Generic reverse edge compiler
 

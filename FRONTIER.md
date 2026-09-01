@@ -1797,6 +1797,17 @@ source ray, while retaining an arbitrary-raw-word converse. See
 [`R32-S68`](SALVAGE.md#r32-s68-separator-source-projective-decoder) and
 [`m32-cubic-source-decoder-2026-09-01.md`](audits/m32-cubic-source-decoder-2026-09-01.md).
 
+A fixed positive connector now transports every terminal upper-triangular loop into the
+common-ray chart. Two existing positive terminal translations become affine digits of opposite
+sign with common ratio `9/340`; positive physical syntax therefore supports signed common-ray
+arithmetic. The same connector yields the first short expanding loop, with ratio `1125/1088`,
+but each of its three terminal suffixes already reaches the accepting ray, so it cannot enter a
+first-hit bridge. The remaining local target is sharper: synthesize the exact left annihilator
+of one `R32-S68` source coordinate from safe transported loops, or prove an arithmetic exclusion
+for the reachable affine orbit. See
+[`R32-S69`](SALVAGE.md#r32-s69-common-ray-transport-and-unsafe-expansion) and
+[`m32-cubic-ray-transport-2026-09-01.md`](audits/m32-cubic-ray-transport-2026-09-01.md).
+
 ### ReturnSquare laboratory
 
 [`R32-S03`](SALVAGE.md#r32-s03-returnsquare-normal-form) is the first completely normalized

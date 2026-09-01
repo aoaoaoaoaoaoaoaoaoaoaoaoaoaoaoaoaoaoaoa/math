@@ -182,6 +182,20 @@ private theorem continuantReaderNegativeWord_realizes (bit : Bool) :
         falseWaitReturnOfState, cubicDefectState, CubicDefectState.next,
         Matrix.mul_apply, Matrix.smul_apply, Fin.sum_univ_succ]
 
+/-- Each positive-translation block has its displayed nonzero physical projective
+realization. -/
+theorem continuantReaderPositiveWord_projectivelyRealizes (bit : Bool) :
+    continuantProjectivelyRealizes (continuantReaderPositiveWord bit)
+      (continuantReaderPositive bit) :=
+  continuantReaderPositiveWord_realizes bit
+
+/-- Each negative-translation block has its displayed nonzero physical projective
+realization. -/
+theorem continuantReaderNegativeWord_projectivelyRealizes (bit : Bool) :
+    continuantProjectivelyRealizes (continuantReaderNegativeWord bit)
+      (continuantReaderNegative bit) :=
+  continuantReaderNegativeWord_realizes bit
+
 private theorem upperTranslation_pow (shift : ℚ) (repetitions : Nat) :
     (!![1, shift; 0, 1] : Square (Fin 2) ℚ) ^ repetitions =
       !![1, repetitions * shift; 0, 1] := by

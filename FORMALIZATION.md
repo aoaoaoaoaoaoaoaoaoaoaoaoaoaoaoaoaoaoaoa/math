@@ -1103,6 +1103,15 @@ string. Exact conjugacy lifts this to projective injectivity of the physical pum
 original source. See `R32-S68` and
 [`audits/m32-cubic-source-decoder-2026-09-01.md`](audits/m32-cubic-source-decoder-2026-09-01.md).
 
+`CubicContinuantRayTransport` proves an exact connector from arbitrary upper-triangular terminal
+loops to the common-ray chart. Instantiating it with the positive and negative translation
+blocks from `CubicContinuantReader` gives two strictly positive physical words whose normalized
+affine digits have opposite signs and the common contraction ratio `9/340`. Lean also checks a
+six-wait expanding common-ray loop with ratio `1125/1088`, then proves that its three terminal
+suffixes already reach the accepting ray. Signed affine synthesis is therefore available, but
+the first expanding candidate is not a lawful first-hit pump. See `R32-S69` and
+[`audits/m32-cubic-ray-transport-2026-09-01.md`](audits/m32-cubic-ray-transport-2026-09-01.md).
+
 The rank-(2,2) graph is no longer an independent residue. `RankTwoPunctuation` proves that every
 compatible square with one rank-one loop and three units transports exactly to the existing raw
 reverse compiler [`R32-M01`](SALVAGE.md#r32-m01-generic-reverse-edge-compiler). Its intrinsic

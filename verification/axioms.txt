@@ -1616,6 +1616,51 @@
 'MatrixMortality.CubicReturn.NonPure.falseWaitFirstHitBinaryEncoding_source_projectively_injective' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.continuantReaderPositiveWord_projectivelyRealizes' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.continuantReaderNegativeWord_projectivelyRealizes' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitFirstHitRayTransport_raw' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitFirstHitRayTransport_normalized' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitFirstHitRayTransport_projectivelyRealizes' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitFirstHitRayTransportWord_positive' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitFirstHitNegativeDigitWord_chart' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitFirstHitPositiveDigitWord_chart' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitFirstHitSignedDigitWords_positive' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitFirstHitSignedDigits_equalRatio' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitFirstHitExpandingLoop_chart' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitFirstHitExpandingLoop_ratio_gt_one' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitFirstHitExpandingLoop_ray' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitFirstHitExpandingLoop_unsafeSuffixes' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitFirstHitExpandingLoop_unsafeSuffixes_accepting' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.EdgeCompression.isMortal_iff_exists_edgeProduct_eq_zero' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
