@@ -1831,6 +1831,15 @@ observes them. See
 [`R32-S71`](SALVAGE.md#r32-s71-selected-comparator-and-neutral-fracture) and
 [`m32-cubic-selected-comparator-2026-09-01.md`](audits/m32-cubic-selected-comparator-2026-09-01.md).
 
+Even quotienting scalar identities is too narrow. The positive affine word
+`H=G₀T(-11/10)` fixes the original separator source exactly but is not projectively scalar.
+Appending its length-`29,004` spelling after the selected `00` source produces a length-`29,012`
+word with the same observed source ray and a projectively different matrix product. The converse
+must therefore classify a two-sided fibre: left stabilizers of the selected target, right
+stabilizers of the source, and the raw positive-wait words between them. See
+[`R32-S72`](SALVAGE.md#r32-s72-non-scalar-source-stabilizer-collision) and
+[`m32-cubic-source-stabilizer-2026-09-01.md`](audits/m32-cubic-source-stabilizer-2026-09-01.md).
+
 ### ReturnSquare laboratory
 
 [`R32-S03`](SALVAGE.md#r32-s03-returnsquare-normal-form) is the first completely normalized

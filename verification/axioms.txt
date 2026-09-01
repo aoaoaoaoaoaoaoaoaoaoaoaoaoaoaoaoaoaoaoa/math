@@ -1747,6 +1747,32 @@
  Quot.sound]
 'MatrixMortality.CubicReturn.NonPure.falseWaitFirstHitSingletonNeutralFractureWord_ne' depends on axioms: [propext,
  Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitSourceStabilizerTranslationWord_projectivelyRealizes' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitSourceStabilizerWord_projectivelyRealizes' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitSourceStabilizer_source' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitSourceStabilizer_not_projectiveIdentity' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitSourceStabilizerWord_positive' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitSourceStabilizerWord_length' depends on axioms: [propext]
+'MatrixMortality.CubicReturn.NonPure.falseWaitSelectedSourceStabilizerCollisionWord_length' depends on axioms: [propext]
+'MatrixMortality.CubicReturn.NonPure.falseWaitSelectedSourceStabilizerCollisionWord_positive' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitSelectedSourceStabilizerCollisionWord_source' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitSelectedSourceStabilizerCollisionWord_not_projectivelyEqual' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.EdgeCompression.isMortal_iff_exists_edgeProduct_eq_zero' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]

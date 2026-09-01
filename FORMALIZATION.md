@@ -1131,6 +1131,15 @@ identities as epsilon stutters or make them observable outside the homogeneous r
 See `R32-S71` and
 [`audits/m32-cubic-selected-comparator-2026-09-01.md`](audits/m32-cubic-selected-comparator-2026-09-01.md).
 
+`CubicContinuantSourceStabilizer` proves that scalar identities do not exhaust the selected
+source fibre. One explicit positive length-`29,004` word realizes the non-scalar affine map
+`[[4/25,553/750],[0,1]]`, which fixes the original separator source exactly. Appending it to the
+selected `00` encoding preserves the source ray by a nonzero scale but changes the projective
+matrix product. Lean checks the exact translation relation, realization, source fixation,
+nonscalarity, positivity, lengths, ray collision, and unit-cancellation separation. See
+`R32-S72` and
+[`audits/m32-cubic-source-stabilizer-2026-09-01.md`](audits/m32-cubic-source-stabilizer-2026-09-01.md).
+
 The rank-(2,2) graph is no longer an independent residue. `RankTwoPunctuation` proves that every
 compatible square with one rank-one loop and three units transports exactly to the existing raw
 reverse compiler [`R32-M01`](SALVAGE.md#r32-m01-generic-reverse-edge-compiler). Its intrinsic

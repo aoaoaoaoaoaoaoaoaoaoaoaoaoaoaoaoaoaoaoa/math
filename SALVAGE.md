@@ -144,6 +144,7 @@ file owns the mathematical stock.
 | [`R32-S69`](#r32-s69-common-ray-transport-and-unsafe-expansion) | compiler mechanism and obstruction | a fixed connector transports positive terminal loops to signed equal-ratio common-ray digits and exposes the first expanding but first-hit-unsafe loop | formalized | active |
 | [`R32-S70`](#r32-s70-positive-singleton-source-selector) | compiler mechanism | one finite positive left word annihilates exactly the encoded cubic-pump source `00` among all binary addresses | formalized | active |
 | [`R32-S71`](#r32-s71-selected-comparator-and-neutral-fracture) | compiler mechanism and obstruction | the balanced clock composes with the singleton selector, but two unclocked wrong reads insert as a shorter scalar-identity false spelling | formalized | active |
+| [`R32-S72`](#r32-s72-non-scalar-source-stabilizer-collision) | obstruction | a positive non-scalar affine stabilizer preserves the selected source ray, so scalar stutters do not exhaust its fibre | formalized | active |
 | [`R32-M01`](#r32-m01-generic-reverse-edge-compiler) | partial mechanism | projective incidence generically embeds into a compatible two-plane edge square | formalized | active |
 | [`R32-M02`](#r32-m02-finite-quotient-sieve) | partial mechanism | finite monoid quotients give complete modular no-certificates for fixed candidates | formalized | active |
 | [`R32-M03`](#r32-m03-two-scale-return-conversion) | partial mechanism | a minimal two-scale return pencil has nonresonant multi-return zeros | formalized | active |
@@ -5407,6 +5408,60 @@ projective-neutral congruence. The remaining arbitrary-word converse must either
 neutral insertion as an epsilon move or add a nonhomogeneous control component that makes such
 insertions observable. Do not pursue literal unique factorization in the current two-dimensional
 return quotient.
+
+### R32-S72: Non-scalar source-stabilizer collision
+
+**Kind:** obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+Scalar-identity stutters are not the full obstruction at the original separator source. The
+available positive terminal translations satisfy the exact relation
+
+```text
+25(2839/108) + 5(-189665/144) + 1221(31457/6480) = -11/10.      (1)
+```
+
+Let `T` be the positive physical spelling of this translation and let `G₀` be the false radix
+writer. Their normalized product is
+
+```text
+H = [[4/25, 137/150], [0, 1]] [[1, -11/10], [0, 1]]
+  = [[4/25, 553/750], [0, 1]].                                  (2)
+```
+
+For the physical separator source `c=(-79,-90)ᵀ`, direct multiplication gives
+
+```text
+Hc=c,                    H is not projectively scalar.           (3)
+```
+
+The positive physical spelling of `H` has length `29,004`. If `E₀₀` is the length-eight
+selected source word from `R32-S70`, then the length-`29,012` word `E₀₀H` satisfies
+
+```text
+Π(E₀₀H)c = σ Π(E₀₀)c,       σ≠0,
+Π(E₀₀H) is not projectively equal to Π(E₀₀).                     (4)
+```
+
+The second clause uses invertibility of the positive `E₀₀` product to cancel it and the
+nonscalarity in (3). Every physical wait in both words is strictly positive.
+
+**Scope:** the translation identity, nonzero physical realization, exact source fixation,
+nonscalarity, positivity, both lengths, source-ray equality, and failure of projective matrix
+equality are Lean checked. This is a right stabilizer of the original source. It does not
+classify the full source fibre or the independent left stabilizer of the selected target ray.
+
+**Artifact:** `CubicReturn.NonPure.falseWaitSourceStabilizerWord_projectivelyRealizes`,
+`falseWaitSelectedSourceStabilizerCollisionWord_source`, and
+`falseWaitSelectedSourceStabilizerCollisionWord_not_projectivelyEqual` in
+[`CubicContinuantSourceStabilizer.lean`](MatrixMortality/CubicContinuantSourceStabilizer.lean),
+with audit
+[`m32-cubic-source-stabilizer-2026-09-01.md`](audits/m32-cubic-source-stabilizer-2026-09-01.md).
+
+**Use:** replace a scalar-neutral quotient by a source-fibre or double-coset analysis. A complete
+converse must quotient the entire right stabilizer of the separator source, together with any
+left stabilizer of the selected target, and still recognize arbitrary raw positive-wait words.
 
 ### R32-M01: Generic reverse edge compiler
 
