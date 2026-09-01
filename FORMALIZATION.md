@@ -2010,7 +2010,15 @@ perturbation is divisible by `2^n` and has exact five-depth `n−1`. Before eith
 frontier, the all-erasure companion is also divisible by `2^n`; beyond it, the companion has
 strictly shallower exact five-depth. The physical equal-depth shell is impossible in both
 regimes. Composing this obstruction with `MM-S56` leaves only the later all-`c` tail widths `h`
-and `2β−2`. Generalized carriers and singleton targets remain separate.
+and `2β−2`.
+
+Record [`MM-S65`](SALVAGE.md#mm-s65-complete-all-c-rule-entry-extinction) closes both later
+frontiers. At a regular head, the `81`-scaled all-erasure and phase arms have equal normalized
+residue `2^h`; their sum remains a five-adic unit at depth `h+1`, below the physical target. At
+the exceptional head, the `45`-scaled base coefficient is `2` or `4` and the phase coefficient
+is `2`; their sum is `4` or `6` modulo five at depth `2β`, again below the target. Thus every
+all-`c` rightmost-rule first entry is impossible. Generalized carriers and singleton targets
+remain separate.
 
 Record [`MM-S37`](SALVAGE.md#mm-s37-decimal-three-shape-frontier-extinction) separates the
 ternary and decimal first-multi-transfer fronts. The single theorem
@@ -2896,6 +2904,7 @@ fixed-rank decision problem.
 | `DecimalSetterRuleCoefficient.lean` | normalized rule-arm coefficients and complete b-bearing distinguished raw-entry extinction |
 | `DecimalSetterPositionTwo.lean` | two-adic companion divisibility and all-`c` position-two rightmost-rule extinction |
 | `SwappedSetterCarrierResonance.lean` | target-coupled primitive normalization, deep-gap last-step resonance, and the full-erasure-tail pole adapter |
+| `DecimalSetterAllCRule.lean` | normalized later-frontier collisions and complete all-`c` rightmost-rule extinction |
 | `PairedMortality.lean` | common-column mortality converse and exact integer `4 × 4` family |
 | `PhaseFracture.lean` | phase normalization and dimension-free projective-identification contradiction |
 | `PhaseRigidity.lean` | checked local role algebra, discrepancy commutators, and invariant-pencil rigidity |

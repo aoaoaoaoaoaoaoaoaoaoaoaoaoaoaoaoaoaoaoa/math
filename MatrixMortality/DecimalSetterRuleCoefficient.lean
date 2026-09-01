@@ -1154,7 +1154,7 @@ private theorem repeatedTrue_intCode_identity (width : Nat) :
       push_cast
       omega
 
-private theorem rawHeadShape_code_identity
+theorem rawHeadShape_code_identity
     {β suffix : Nat} {word : List Bool} (suffix_bound : suffix ≤ β + 2)
     (word_eq : word =
       List.replicate (β + 2 - suffix) true ++ List.replicate suffix false) :
