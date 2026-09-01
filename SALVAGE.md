@@ -293,6 +293,7 @@ file owns the mathematical stock.
 | [`M4-S34`](#m4-s34-phase-zero-right-c-second-first-b-extinction) | obstruction | no even-`b` body beginning `ccb` closes the phase-zero right-`c` bridge | formalized | active |
 | [`M4-S35`](#m4-s35-phase-zero-right-c-first-b-position-gap) | structure theorem | every tag body avoids every open density gap between consecutive first-`b` cylinders | formalized | active |
 | [`M4-S36`](#m4-s36-phase-zero-right-c-bounded-x211-extinction) | obstruction and structure theorem | the bounded `x=211` `cb` valuation-density chamber is empty | formalized | active |
+| [`M4-S37`](#m4-s37-phase-zero-right-c-x211-position-extinction) | obstruction and structure theorem | every late next-`b` position in the bounded `x=211` chamber is impossible | formalized | active |
 | [`M4-C03`](#m4-c03-zero-framed-binary-two-lag-compiler) | compiler | the principal scanner is literally binary context-2 Lag and compiles to `M₄(3)` | formalized | graduated |
 | [`M4-D01`](#m4-d01-zero-framed-binary-two-lag-decision) | decidable stratum | the entire zero-framed binary context-2 Lag kernel has an exact syntactic classification | formalized | graduated |
 | [`M4-D02`](#m4-d02-zero-framed-reset-scanner-decision) | decidable stratum | zero-run reduction contracts the reset scanner to a regular two-token quotient | audited | graduated |
@@ -13658,6 +13659,50 @@ density envelope alone: at `h=j=0` and `y=39726`, the envelope holds for every `
 [`scripts/generate-parabolic-first-b-one-funnel.py`](scripts/generate-parabolic-first-b-one-funnel.py),
 and
 [`audits/m43-phase-zero-right-c-bounded-x211-extinction-2026-08-31.md`](audits/m43-phase-zero-right-c-bounded-x211-extinction-2026-08-31.md).
+
+### M4-S37: Phase-zero right-c x211 position extinction
+
+**Kind:** obstruction and structure theorem
+
+**Evidence:** formalized
+
+**Disposition:** active
+
+In the S36 chamber, suppose the next `b` in the tail occurs at position `j≥13`. After the
+common position power is cancelled, the density envelope forces
+
+```text
+0 < A−39J,
+242·3^13·(A−39J) ≤ B+39J.
+```
+
+These inequalities no longer contain `h` or `j`. Writing `k=y−22529`, their positive strip
+first gives `k≤817`. Exact integral classification of this one parameter leaves
+
+```text
+y ∈ {22529,22530,22531,22532,22533,22534,
+     22538,22539,22540,22573,23346}.
+```
+
+For every `h≤5`, each value contradicts the valuation envelope's base divisibility
+`3^(h+3) ∣ y−r_h`. Hence `j<13`. Composing this derived bound with S36 proves the physical
+core nonzero without any assumed position restriction.
+
+**Scope:** physical `x=211` `cb` bodies with both first- and last-`b` decompositions, `h≤5`, and
+`z<3^13`. The theorem removes the position hypothesis only; it does not prove either retained
+bound or close the full `cb` chamber.
+
+**Use:** deletes the `j≥14` escape from S36, and in fact excludes every `j≥13`. Only `h≥6`
+and `z≥3^13` remain, and either may now be attacked without another prefix-position split.
+
+**Next:** seek one valuation or size inequality that kills both remaining exits. Density alone
+cannot kill the inner-wait exit because its formal envelope contains an unbounded `z` ray.
+
+**Artifact:**
+[`MatrixMortality/ParabolicFirstBOnePosition.lean`](MatrixMortality/ParabolicFirstBOnePosition.lean),
+[`MatrixMortality/ParabolicFirstBOnePhysical.lean`](MatrixMortality/ParabolicFirstBOnePhysical.lean),
+and
+[`audits/m43-phase-zero-right-c-x211-position-extinction-2026-08-31.md`](audits/m43-phase-zero-right-c-x211-position-extinction-2026-08-31.md).
 
 ### M4-C03: Zero-framed binary two-Lag compiler
 

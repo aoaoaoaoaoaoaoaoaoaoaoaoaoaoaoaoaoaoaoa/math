@@ -697,10 +697,15 @@ The bounded `x=211` `cb` chamber is now dead
 product and trailing factorization force an exact two-coordinate 3-adic allocation; the core
 equation supplies the density envelope and the global middle-wait interval. Under
 `h≤5`, `j≤13`, and `z<3^13`, an exact generated classifier leaves ten triples, all with the
-next `b` immediate, and `M4-S35` kills their two terminal density gaps. This is not the full
-`cb` extinction: no theorem yet supplies those three bounds. Attack `h≥6`, `j≥14`, and the
-unbounded `z` residue rays separately. Density alone cannot cap `z`: the formal envelope already
-contains every `z≥394` at `h=j=0` and `y=39726`.
+next `b` immediate, and `M4-S35` kills their two terminal density gaps.
+
+The next-`b` position restriction is now eliminated
+[`M4-S37`](SALVAGE.md#m4-s37-phase-zero-right-c-x211-position-extinction). If `j≥13`, exact
+cancellation contracts the density inequalities to a strip in the common displacement
+`k=y−22529≤817`; its eleven possible waits all violate the base 3-adic divisibility from the
+valuation envelope. Thus `j<13` is derived, and the S36 classifier applies with no position
+hypothesis. The full `cb` chamber still has two honest exits: `h≥6` and `z≥3^13`. Density alone
+cannot cap `z`: the formal envelope contains every `z≥394` at `h=j=0` and `y=39726`.
 
 Two original-family nodes survive, and they must not be conflated.
 

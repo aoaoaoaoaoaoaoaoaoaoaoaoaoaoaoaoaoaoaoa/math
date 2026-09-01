@@ -2656,6 +2656,17 @@ is reproduced by
 `scripts/generate-parabolic-first-b-one-funnel.py`. Its exact boundary is
 [`audits/m43-phase-zero-right-c-bounded-x211-extinction-2026-08-31.md`](audits/m43-phase-zero-right-c-bounded-x211-extinction-2026-08-31.md).
 
+The next-`b` position extinction
+[`M4-S37`](SALVAGE.md#m4-s37-phase-zero-right-c-x211-position-extinction) is checked in
+`MatrixMortality/ParabolicFirstBOnePosition.lean` and
+`MatrixMortality/ParabolicFirstBOnePhysical.lean`.
+`ParabolicBlade.firstBOneX211_large_position_strip` removes the powers carrying `h` and `j`;
+`firstBOneX211_large_position_y_cases` classifies the resulting common displacement;
+`firstBOneX211_position_lt_thirteen_of_envelopes` contradicts all eleven waits through the
+valuation shell; and `bZeroBDefectCOneCodeCore_x211_ne_zero_of_run_and_inner_bounds` composes
+that result with S36. Its exact boundary is
+[`audits/m43-phase-zero-right-c-x211-position-extinction-2026-08-31.md`](audits/m43-phase-zero-right-c-x211-position-extinction-2026-08-31.md).
+
 The residue-zero `c`-endpoint exclusion
 [`M4-S12`](SALVAGE.md#m4-s12-residue-zero-c-endpoint-exclusion) is checked in the same module.
 `ParabolicBlade.bridge_cZero_bTwo_bOne_det` and
