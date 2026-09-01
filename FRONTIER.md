@@ -1746,6 +1746,18 @@ may be assumed before those stabilizers are quotiented. See
 [`R32-S64`](SALVAGE.md#r32-s64-cubic-endpoint-chart) and
 [`m32-cubic-endpoint-chart-2026-09-01.md`](audits/m32-cubic-endpoint-chart-2026-09-01.md).
 
+The first stabilizer classification already destroys the residual naive decoder. Two exact
+non-scalar length-three loops fix internal rays of the two length-seven cores. Repeating them
+produces two injective all-positive bridge families of length `7+3k`, with explicit accepting
+scales and exact zeros for every `k`. For the first loop, the six-letter suffix and its
+nine-letter loop extension are distinct but projectively equal on the source, and every suffix
+state of the longer word is nonaccepting. Hence even first-hit-safe nonaccepting prefixes merge;
+the necessary quotient must include ray-specific stabilizers, not merely global scalar
+identities. This may be the decisive obstruction to a finite decoder, but no infinitude of
+irreducible quotient classes is yet proved. See
+[`R32-S65`](SALVAGE.md#r32-s65-internal-ray-bridge-pumps) and
+[`m32-cubic-internal-pumps-2026-09-01.md`](audits/m32-cubic-internal-pumps-2026-09-01.md).
+
 ### ReturnSquare laboratory
 
 [`R32-S03`](SALVAGE.md#r32-s03-returnsquare-normal-form) is the first completely normalized

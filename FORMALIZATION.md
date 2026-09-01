@@ -1063,6 +1063,16 @@ is impossible; the live geometric target is classification of source-ray stabili
 accepting-ray arrivals, without assuming unique decoding. See `R32-S64` and
 [`audits/m32-cubic-endpoint-chart-2026-09-01.md`](audits/m32-cubic-endpoint-chart-2026-09-01.md).
 
+`CubicContinuantInternalPump` then finds exact internal stabilizers, not just accepting-fibre
+collisions. Two non-scalar length-three loops preserve the rays `(4,3)` and `(1,4)` with scales
+`7776000` and `−32348160`. Inserting either loop `k` times into its length-seven bridge core gives
+an injective family of positive words of length `7+3k`, with explicit nonzero accepting scale and
+full zero product for every `k`. More sharply, the shorter suffix and its one-loop extension are
+distinct projectively equal source words, and Lean checks every source-reading suffix of the
+longer word remains nonaccepting. Thus unique first-hit decoding already fails away from the
+accepting fibre, and quotienting only scalar-identity words is insufficient. See `R32-S65` and
+[`audits/m32-cubic-internal-pumps-2026-09-01.md`](audits/m32-cubic-internal-pumps-2026-09-01.md).
+
 The rank-(2,2) graph is no longer an independent residue. `RankTwoPunctuation` proves that every
 compatible square with one rank-one loop and three units transports exactly to the existing raw
 reverse compiler [`R32-M01`](SALVAGE.md#r32-m01-generic-reverse-edge-compiler). Its intrinsic
@@ -1907,6 +1917,7 @@ fixed-rank decision problem.
 | `CubicContinuantSelfBalance.lean` | 2-adic and 5-adic rejection of every incorrect cubic-comparator cleanup count |
 | `CubicContinuantPunctuation.lean` | unique singular return, scalar-bridge reduction, and exact terminal-row aliases and bounded bridge cores of the fixed cubic language |
 | `CubicContinuantEndpoint.lean` | separator-adapted endpoint chart and exact reduction of the fixed cubic bridge language to accepting-ray reachability |
+| `CubicContinuantInternalPump.lean` | infinite internal-ray bridge pumps and a nonaccepting source-merge obstruction to naive endpoint decoding |
 | `EdgeCompression.lean` | exact adjacent-edge compression for split finite-rank families |
 | `TwoPlaneEdges.lean` | compatible two-plane realization of a `2 × 2` edge square and exact rank-two certificates |
 | `ReverseEdge.lean` | generic projective-incidence reverse compiler, basis adaptation, and all-path converse |

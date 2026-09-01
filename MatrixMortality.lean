@@ -19,6 +19,7 @@ import MatrixMortality.CubicContinuantMismatchClock
 import MatrixMortality.CubicContinuantSelfBalance
 import MatrixMortality.CubicContinuantPunctuation
 import MatrixMortality.CubicContinuantEndpoint
+import MatrixMortality.CubicContinuantInternalPump
 import MatrixMortality.CyclicBinaryBoundary
 import MatrixMortality.EdgeCompression
 import MatrixMortality.TwoPlaneEdges
