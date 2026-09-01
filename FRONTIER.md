@@ -1157,6 +1157,16 @@ exactly into a reduced-numerator clean language, where `MM-S22` applies, and a g
 contaminated support language governed by `MM-S24`; projective rescaling cannot erase the
 distinction.
 
+[`MM-S94`](SALVAGE.md#mm-s94-three-block-singleton-chamber-classification) now cuts the first
+three-source singleton layer exactly. Every actual singleton pole lies in the positive older-ray
+chamber. For multi-role current and intervening blocks, a deep root forces the intervening block
+to be literal two-`c` and the current long; a shallow root is `R_c`, where longness is equivalent
+to an exact discrepancy shell and the short complement is all-`c`. The long discrepancy also
+forces complete suffix exhaustion and a `cb` or `cc` head. Both singleton currents are dead over
+`R_c`, regardless of the intervening block. The live three-source frontier is therefore the
+deep-root singleton-current/singleton-intervening residue plus the explicit multi/multi A/B
+grammar. Shell-compatible tails are not thereby reachable poles.
+
 The ternary and decimal branches now separate at their first multi-transfer front.
 [`MM-S37`](SALVAGE.md#mm-s37-decimal-three-shape-frontier-extinction) substitutes each of the
 three role shapes left by the swapped ternary gate into the decimal carrier equation. All are

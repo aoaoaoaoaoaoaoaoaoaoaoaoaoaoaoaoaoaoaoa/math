@@ -1770,6 +1770,33 @@
 'MatrixMortality.DecimalSetterBridgeRay.gapContaminatedTail_no_gapCleanIntegralCarrier' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.DecimalSetterBridgeRay.two_mul_tenPow_lift_le_singletonTrace' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterBridgeRay.erasureEnded_singletonCoefficient_pos' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterBridgeRay.singletonPole_olderRatio_pos' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterBridgeRay.pair_deepRoot_multi_admitsUnitPeeledCarrier_iff_upperLength_eq_two' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterBridgeRay.singletonPole_threeBlock_multi_classifier' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterBridgeRay.singletonPole_threeBlock_ruleCRoot_long_nextHead' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterBridgeRay.singletonPole_threeBlock_ruleCRoot_currentC_impossible' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterBridgeRay.singletonPole_threeBlock_ruleCRoot_currentB_impossible' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterBridgeRay.singletonPole_threeBlock_ruleCRoot_singletonCurrent_impossible' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.DecimalSetterAncestry.carrierFactor_multiToSingleton_quotientGate' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]

@@ -1711,6 +1711,16 @@ the quotient after removing its built-in factor ten. The uniform lawful tail
 has shell `(1,1)`, while the primitive gap is coprime to its reduced numerator. Shell and parser
 law alone therefore cannot feed the gap-clean quotient theorem.
 
+Record [`MM-S94`](SALVAGE.md#mm-s94-three-block-singleton-chamber-classification) resolves the
+first complete three-source shell layer. Every lawful singleton pole has positive older
+quotient. With multi-role current and intervening blocks, a deep root forces the intervening
+block to be exactly two `c` roles and the current into the long corridor. A shallow root is
+exactly `R_c`; there the long corridor is equivalent to one exact discrepancy shell, while its
+complement is an all-`c` current of width at most `β+2`. Exact suffix exhaustion reduces the
+long intervening head to `cb` or `cc`. Both singleton currents are impossible over `R_c`, for
+every intervening block and either singleton target. Deep-root singleton-current histories and
+the surviving multi/multi grammar remain open.
+
 Record [`MM-S37`](SALVAGE.md#mm-s37-decimal-three-shape-frontier-extinction) separates the
 ternary and decimal first-multi-transfer fronts. The single theorem
 `DecimalSetterDepth.firstMultiTransfer_threeShapeFrontier_impossible` consumes the three role
@@ -1787,6 +1797,7 @@ The `M₅(3)` delimiter attack has twenty-three foundational records:
 | [`MM-S89`](SALVAGE.md#mm-s89-complete-two-block-singleton-extinction) | target-independent `R_c` discrepancy identity, exact `D_b` shell and suffix factorization, coefficient bounds, and complete two-block singleton extinction |
 | [`MM-S90`](SALVAGE.md#mm-s90-exact-singleton-tail-ancestry-equivalence) | nonzero lawful parser rays, automatic long-current unit ancestry, exact current-shape equivalence, and complementary singleton/all-`c` short grammar |
 | [`MM-S91`](SALVAGE.md#mm-s91-exact-parser-gap-clean-ancestry-gate) | automatic integral gap descent, exact reduced-numerator criterion for primitive-gap coprimality, and a lawful shell counterexample to automatic gap-clean ancestry |
+| [`MM-S94`](SALVAGE.md#mm-s94-three-block-singleton-chamber-classification) | positive singleton chamber, exact deep-root/`R_c` multi-current classifier, suffix/head grammar, and complete `R_c` singleton-current extinction |
 | [`MM-S01`](SALVAGE.md#mm-s01-square-run-projective-normal-form) | invariant square-run plane, invertible `2 × 2` transfer, Möbius normalization, rank-one fracture grammar, and equivalence with pole avoidance |
 | [`MM-S02`](SALVAGE.md#mm-s02-reset-zero-projective-peeling) | scaled transfer identity, exact two-shell classification of all poles, and reset-zero one-transfer avoidance |
 | [`MM-O16`](SALVAGE.md#mm-o16-exact-delimiter-pair-obstruction) | generic ignored-pair immortality is formalized; paired common-kernel and cubic companion specializations are audited |
