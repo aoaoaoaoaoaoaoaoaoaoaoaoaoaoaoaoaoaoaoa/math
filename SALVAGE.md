@@ -100,7 +100,7 @@ file owns the mathematical stock.
 | [`MM-O24`](#mm-o24-sparse-transfer-moment-tax) | obstruction | arbitrary distinct placements of the three paired roles with a constant separator tail need at least ten states; nonconsecutive placements need eleven | formalized late branch; audited early assembly | graduated |
 | [`MM-O25`](#mm-o25-moving-tail-transfer-tax) | obstruction | exact series agreeing after time `m`, with a last rank-three difference, have realization dimensions summing to at least `3(m+1)` | formalized | graduated |
 | [`MM-O26`](#mm-o26-geometric-tail-transfer-tax) | obstruction | every exact consecutive paired-role series with a nonzero scalar geometric separator tail needs at least ten states | formalized core; audited six-order certificates | graduated |
-| [`MM-C05`](#mm-c05-tilted-separator-rank-nine-transfer) | partial construction | a changed same-zero separator has an exact nine-state transfer realization with a finite, source-role exterior grammar | formalized semantic and chart arithmetic; audited realization | active |
+| [`MM-C05`](#mm-c05-tilted-separator-rank-nine-transfer) | compiler | tilted same-zero separation and singular return compression compile universal halting to two `9 × 9` integer matrices | formalized | graduated |
 | [`MM-M01`](#mm-m01-off-diagonal-companion-interface) | partial mechanism | off-diagonal rank-two bridge has a complete fracture grammar | audited | stock |
 | [`MM-M02`](#mm-m02-bordered-toggle) | partial mechanism | one lifted toggle has a stable rank-two third power | audited | parked |
 | [`MM-M03`](#mm-m03-five-state-setter-punctuation) | partial mechanism | a mixed delimiter word is an exact internal rank-one separator | audited | closed |

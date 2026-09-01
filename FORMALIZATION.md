@@ -121,9 +121,9 @@ reflects source-code halting.
 The one-hot cyclic compiler preserves that avoidance invariant and reflects every distinguished
 firing. The Table 2 compiler then proves both directions for every emitted source: protected
 execution gives halting, while its arbitrary-execution converse excludes spurious halting after
-the semantic data are exhausted. Its body, padding, ternary arithmetic, four-letter GPCP instance,
-and five-matrix integer family are all primitive recursive. The five `codeHalts_reduces_*`
-declarations are therefore complete computable many-one
+the semantic data are exhausted. Its body, padding, leading-`b` invariant, ternary arithmetic,
+four-letter GPCP instance, five-matrix integer family, and effective rank-nine pair are primitive
+recursive. The six `codeHalts_reduces_*` declarations are therefore complete computable many-one
 reductions; their corresponding `*_not_computable` declarations are unconditional
 kernel-checked no-decider theorems.
 
@@ -2972,9 +2972,12 @@ fixed-rank decision problem.
 | `ChangedSeparatorZeroMoment.lean` | exact toggle return assembled from independent entry certificates |
 | `ChangedSeparatorMomentOne.lean` | exact first data return |
 | `ChangedSeparatorMomentTwo.lean` | exact second data return |
+| `ChangedSeparatorMomentThree.lean` | exact first geometric-tail return |
+| `ChangedSeparatorTransitionPowers.lean` | closed transition-power action on the emitted and tail bases |
 | `ChangedSeparatorTailMoments.lean` | geometric tail recurrence for every later return |
 | `SingularReturnFamily.lean` | mortality-preserving return compression for singular ambient generators |
 | `ChangedSeparatorMortality.lean` | complete rational and canonical-integer rank-nine mortality equivalence |
+| `RationalClearing.lean` | mortality-preserving common-denominator clearing for finite rational matrix families |
 | `EffectiveRational.lean` | primitive-recursive unreduced fractions and finite common-denominator clearing |
 | `ChangedSeparatorEffectivity.lean` | primitive-recursive integer rank-nine pair and exact rational scaling |
 | `LintAudit.lean` | package-wide default mathlib environment lint |
@@ -2991,11 +2994,11 @@ fixed-rank decision problem.
 | `Undecidability/TwoTagSource.lean` | verified finite two-tag sources and their Cook cyclic consequences |
 | `Undecidability/Tracks.lean` | typed fixed-stride track serialization and recovery |
 | `Undecidability/TagExecution.lean` | exact finite executions, sliced-track recovery, and congruence-head drainage |
-| `Undecidability/NearyCompiler.lean` | exact Table 2 words, tracks, padding, and arithmetic envelope |
+| `Undecidability/NearyCompiler.lean` | exact Table 2 words, tracks, padding, leading-`b` invariant, and arithmetic envelope |
 | `Undecidability/NearySimulation.lean` | traversal semantics of raw, bit, epsilon, and halting objects |
 | `Undecidability/NearyData.lean` | garbage calculus, token invariant, and ordinary cyclic pulses |
 | `Undecidability/NearyExecution.lean` | literal initialization, first-firing extraction, and the complete post-seed halting cascade |
-| `Undecidability/NearySource.lean` | compositional Cook–Neary compiler into verified restricted-tag sources |
+| `Undecidability/NearySource.lean` | compositional Cook–Neary compiler and leading-`b` membership for verified restricted-tag sources |
 | `Undecidability/UniversalTwoTag.lean` | fixed universal finite two-tag system and primitive-recursive source queue |
 | `Undecidability/UniversalNeary.lean` | complete computable reductions to binary `GPCP(4)`, `M₃(5)`, `M₄(4)`, `Z₆(2)`, `M₉(2)`, and `M₁₀(2)` |
 | `Undecidability/NearyProblems.lean` | canonical `Fin 4` and `Fin 5` target instances |
@@ -3444,7 +3447,9 @@ fixed-rank decision problem.
 | The rank-nine transition has no zero pure power | `ChangedSeparatorRealization.transition_pow_ne_zero` |
 | Every rank-nine return is a nonzero scaling of one tilted role | `ChangedSeparatorRealization.returnMatrix_eq_scaled_tiltedFamily` |
 | The rational rank-nine pair is mortal iff the paired scalar series vanishes | `ChangedSeparatorRealization.generator_mortal_iff_paired_zero` |
+| Every entry of the effective integer rank-nine pair is primitive recursive | `ChangedSeparatorRealization.effectiveIntegralGenerator_entry_primrec` |
 | The primitive-recursive integer rank-nine pair is mortal iff tag halting | `ChangedSeparatorRealization.effectiveIntegralGenerator_mortal_iff_tagHaltsFrom` |
+| The canonical `M₉(2)` emitter is primitive recursive | `nearyMortality92_primrec` |
 | Canonical `M₉(2)` instance mortal iff tag halting | `nearyMortality92_mortal_iff_tagHaltsFrom` |
 | Appending two paired toggles preserves every coefficient, and absorbing one preserves nonempty zero reachability | `pairedCoefficient_append_toggle_toggle`, `pairedTrailingToggle_hasNonemptyZero_iff` |
 | A rank-four short leaf and rank-three depth-three leaf tax an exact prefix comb by ten states | `VariablePrefixRankTax.ten_le_of_rank_four_short_rank_three_deep` |
@@ -3452,6 +3457,7 @@ fixed-rank decision problem.
 | Mathlib code halting has a verified `TM2` interpreter | `exists_universalTM2` |
 | Fixed two-tag halt-label reachability iff code halting | `UniversalTwoTag.reaches_halt_iff` |
 | Emitted restricted-tag halting iff code halting | `UniversalNeary.tagHaltsFrom_iff_codeHalts` |
+| Every Cook–Neary source body contains the distinguished letter `b` | `RestrictedTagSource.b_mem` |
 | Code halting many-one reduces to binary `GPCP(4)` | `UniversalNeary.codeHalts_reduces_gpcp4` |
 | Binary `GPCP(4)` solvability is not computable | `UniversalNeary.gpcp4_not_computable` |
 | Code halting many-one reduces to `M₃(5)` | `UniversalNeary.codeHalts_reduces_mortality35` |

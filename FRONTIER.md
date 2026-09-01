@@ -243,8 +243,9 @@ constructions.
 
 ## Current mortality staircase
 
-After terminal absorption, paired-role compression, binary compilation, dimension padding, and
-CHHN's generator–dimension trade, the established Pareto-minimal undecidable points are
+After terminal absorption, paired-role compression, binary compilation, changed-separator return
+compression, dimension padding, and CHHN's generator–dimension trade, the established
+Pareto-minimal undecidable points are
 
 ```text
 M₃(5), M₄(4), M₆(3), M₉(2).
@@ -254,7 +255,7 @@ The unknown cells immediately below this staircase are:
 
 | Cell | What would suffice | Automatic reward |
 | --- | --- | --- |
-| `M₃(4)` | three-active-role fixed-boundary PCP / `GPCP(3)`, or a new same-dimension generator compiler | no new Pareto point; `M₉(2)` is already known |
+| `M₃(4)` | three-active-role fixed-boundary PCP / `GPCP(3)`, or a new same-dimension generator compiler | replaces `M₃(5)` and `M₄(4)` on the staircase; CHHN's `M₉(2)` corollary is already known |
 | `M₄(3)` | an undecidable promised two-state overlap queue with pure deletion, or closure of either parabolic bridge language | by CHHN, also `M₈(2)` |
 | `M₅(3)` | a five-state binary same-zero root, a toggle/separator fusion, or fixed-width-three scheduled universality | supersedes `M₆(3)`; `M₉(2)` is already known |
 | `M₂(k≥3)` | a qualitatively different decidability or undecidability argument | settles the dimension-two wall |
@@ -1395,16 +1396,14 @@ opposite cube face. Pure width-three comma-free coding carries at most two symbo
 exact positional four-role cube admits a checked false terminal witness on the nonhalting source
 `(3,bbcc)`.
 
-Thus neither another exact prefix layout nor an exact three-phase block factorization remains
-live. The direct frontier is a genuinely changed zero series, a nonfactorial state-dependent
+Thus neither another exact prefix layout nor an exact three-phase block factorization survived.
+Before `MM-C05`, the remaining routes were a changed zero series, a nonfactorial state-dependent
 decoder, another invariant quotient not induced by the generators' common image, or a nonlinear
-reduction. A singular same-zero/history compressor borrowed from the `M₃(4)` lane is now governed
-by [`G3-O27`](SALVAGE.md#g3-o27-projective-toggle-line-atlas): if both data stages are singular
-and the absorbed trailing toggle is projectively involutive, its projective history remains in a
-six-carrier line atlas. Such a nine-state escape must therefore solve the surviving nonexpanding
-point-reachability problem in a finite rational `P¹` atlas, potentially jointly with `M₂(3)`,
-retain non-scalar toggle powers, or use a full-rank data stage. `GPCP(3)` remains the independent
-stronger ancestor.
+reduction; `MM-C05` takes the first route. A different singular same-zero/history family is
+governed by [`G3-O27`](SALVAGE.md#g3-o27-projective-toggle-line-atlas): if both data stages are
+singular and the absorbed trailing toggle is projectively involutive, its projective history
+remains in a six-carrier line atlas. That obstruction remains relevant below rank nine.
+`GPCP(3)` is the independent stronger ancestor.
 
 [`MM-O19`](SALVAGE.md#mm-o19-trailing-toggle-exact-prefix-tax) tests one changed-source seam.
 Because the paired toggle satisfies `T²=I`, moving one toggle into the terminal column preserves
