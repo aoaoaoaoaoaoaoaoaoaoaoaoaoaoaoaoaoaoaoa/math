@@ -103,6 +103,7 @@ if rg -n 'set_option[[:space:]]+(autoImplicit[[:space:]]+true|warningAsError[[:s
 fi
 
 readonly PYTHON_CHECKERS=(
+  scripts/generate-parabolic-first-b-late-tail.py
   scripts/generate-parabolic-first-b-one-outer-suffix.py
   scripts/generate-parabolic-first-b-one-outer.py
   scripts/generate-parabolic-first-b-one-inner.py
@@ -116,6 +117,7 @@ readonly PYTHON_CHECKERS=(
 uvx --from ruff==0.15.22 ruff check "${PYTHON_CHECKERS[@]}"
 uvx --from ruff==0.15.22 ruff format --check "${PYTHON_CHECKERS[@]}"
 uvx --from ty==0.0.58 ty check "${PYTHON_CHECKERS[@]}"
+uv run scripts/generate-parabolic-first-b-late-tail.py --check
 uv run scripts/generate-parabolic-first-b-one-funnel.py --check
 uv run scripts/generate-parabolic-first-b-one-inner.py --check
 uv run scripts/generate-parabolic-first-b-one-outer.py --check

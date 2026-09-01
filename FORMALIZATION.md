@@ -1835,6 +1835,25 @@ determinant-level cylinder theorem. The generator is reproduced by
 `scripts/generate-parabolic-first-b-one-outer-suffix.py`. Its exact boundary is
 [`audits/m43-phase-zero-right-c-first-b-one-extinction-2026-09-01.md`](audits/m43-phase-zero-right-c-first-b-one-extinction-2026-09-01.md).
 
+The later first-`b` extinction
+[`M4-S43`](SALVAGE.md#m4-s43-phase-zero-right-c-later-first-b-extinction) is checked across
+`MatrixMortality/ParabolicFirstBLateCore.lean`,
+`MatrixMortality/ParabolicFirstBLateReduction.lean`,
+`MatrixMortality/ParabolicFirstBLateTailCore.lean`, the four generated
+`MatrixMortality/ParabolicFirstBLateCertificate*.lean` shards,
+`MatrixMortality/ParabolicFirstBLateBoundary.lean`, and
+`MatrixMortality/ParabolicFirstBLateClosure.lean`.
+`ParabolicBlade.firstBLateRootCandidate_of_core_zero` contracts every `y≥2` zero at first-`b`
+positions `3` through `11` to 44 exact `(k,x,y)` points;
+`firstBLateTail_false_of_candidate` eliminates their complete tail cylinders through 66 exact
+or envelope rectangle leaves. The boundary module handles `y=0,1` separately and reduces its
+three outer survivors to an open inner-root gap or one of two exact suffix-density gaps.
+`bZeroBDefectCOneCodeCore_late_ne_zero_of_mem_b` composes the three middle-wait strata, while
+`bridge_bZero_bTwo_cOne_det_ne_zero_of_late_even_b_count` exposes the determinant theorem for
+every even-`b` body in these nine cylinders. The generator is reproduced by
+`scripts/generate-parabolic-first-b-late-tail.py`. Its exact boundary is
+[`audits/m43-phase-zero-right-c-later-first-b-extinction-2026-09-01.md`](audits/m43-phase-zero-right-c-later-first-b-extinction-2026-09-01.md).
+
 The residue-zero `c`-endpoint exclusion
 [`M4-S12`](SALVAGE.md#m4-s12-residue-zero-c-endpoint-exclusion) is checked in the same module.
 `ParabolicBlade.bridge_cZero_bTwo_bOne_det` and

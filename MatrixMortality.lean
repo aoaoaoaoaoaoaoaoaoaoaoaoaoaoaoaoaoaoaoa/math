@@ -146,6 +146,7 @@ import MatrixMortality.ParabolicFirstBOneSFFT
 import MatrixMortality.ParabolicFirstBOneInner
 import MatrixMortality.ParabolicFirstBOneOuterClosure
 import MatrixMortality.ParabolicFirstBTwoClosure
+import MatrixMortality.ParabolicFirstBLateClosure
 import MatrixMortality.ParabolicLongDefect
 import MatrixMortality.ParabolicMixedEndpoint
 import MatrixMortality.ParabolicSemanticObstruction

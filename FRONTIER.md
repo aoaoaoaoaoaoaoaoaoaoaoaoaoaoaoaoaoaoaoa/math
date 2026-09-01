@@ -714,11 +714,20 @@ The other four chambers require 15 nodes, for a complete 96-node certificate of 
 five. Together with the outer cap and the `x=211` theorem, this proves that no even-`b` body
 beginning `cb` closes the phase-zero right-`c` bridge at any waits.
 
-Inside the even-length/even-`b` rectangle, the live first-`b` positions are therefore `0` and
-`3` through `11`: position `1` is M4-S42, position `2` is M4-S34, positions at least `12` are
-M4-S28, and the unary rays are M4-S22/M4-S24. The next local attack should generalize the same
-outer-root/suffix architecture across those nine cylinders, starting with position `0`, whose
-complement density is largest.
+The later first-`b` cylinders are now dead
+[`M4-S43`](SALVAGE.md#m4-s43-phase-zero-right-c-later-first-b-extinction). For middle wait at
+least two, one normalized root window leaves 44 exact `(k,x,y)` points across positions `3`
+through `6`; a generated 66-leaf rational rectangle certificate kills every complete tail
+cylinder, while positions `7` through `11` have no root candidate. Separate positive-cone,
+outer-root, inner-root, and strict-density arguments close the zero- and one-wait faces. Thus
+positions `3` through `11` are empty with no body-length, suffix-depth, or wait bound.
+
+Inside the even-length/even-`b` rectangle, only first-`b` position `0` remains: position `1` is
+M4-S42, position `2` is M4-S34, positions `3` through `11` are M4-S43, positions at least `12`
+are M4-S28, and the unary rays are M4-S22/M4-S24. Exact computational reconnaissance of the
+leading-`b` cylinder leaves 3,244 outer pairs and 146 suffix survivors concentrated around
+`x=203`, with `y` roughly `6950` through `8117`; these counts are provisional evidence, not a
+theorem. Extract their common algebraic parameter before generating another certificate.
 
 Two original-family nodes survive, and they must not be conflated.
 

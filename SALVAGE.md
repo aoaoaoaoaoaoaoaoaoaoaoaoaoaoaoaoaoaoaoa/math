@@ -231,6 +231,7 @@ file owns the mathematical stock.
 | [`M4-S40`](#m4-s40-phase-zero-right-c-outer-wait-cap) | structure theorem | every physical `cb` bridge zero has outer wait at most `211` | formalized | active |
 | [`M4-S41`](#m4-s41-phase-zero-right-c-lower-range-classification) | structure theorem | every physical `cb` zero with outer wait at most `210` lies in one of five exact suffix chambers | formalized | active |
 | [`M4-S42`](#m4-s42-phase-zero-right-c-first-b-one-extinction) | obstruction | no even-`b` body beginning `cb` closes the phase-zero right-`c` bridge | formalized | active |
+| [`M4-S43`](#m4-s43-phase-zero-right-c-later-first-b-extinction) | obstruction | no even-`b` body whose first `b` is at position `3` through `11` closes the phase-zero right-`c` bridge | formalized | active |
 | [`M4-C03`](#m4-c03-zero-framed-binary-two-lag-compiler) | compiler | the principal scanner is literally binary context-2 Lag and compiles to `M₄(3)` | formalized | graduated |
 | [`M4-D01`](#m4-d01-zero-framed-binary-two-lag-decision) | decidable stratum | the entire zero-framed binary context-2 Lag kernel has an exact syntactic classification | formalized | graduated |
 | [`M4-D02`](#m4-d02-zero-framed-reset-scanner-decision) | decidable stratum | zero-run reduction contracts the reset scanner to a regular two-token quotient | audited | graduated |
@@ -9740,9 +9741,7 @@ through `11`, the whole phase-zero cell, or `M₄(3)`.
 `11` remain among mixed even/even bodies. The same root-window and interval suffix machinery is
 now available without the exceptional `x=211` valuation split.
 
-**Next:** extend the normalized outer-root envelope to the leading-`b` cylinder `j=0`, then to
-the eight remaining positions `3` through `11`; preserve each position's exact density rather
-than reverting to raw body enumeration.
+**Next:** discharged for positions `3` through `11` by M4-S43. The leading-`b` cylinder remains.
 
 **Artifact:**
 [`MatrixMortality/ParabolicFirstBOneOuterSuffixCore.lean`](MatrixMortality/ParabolicFirstBOneOuterSuffixCore.lean),
@@ -9751,6 +9750,52 @@ than reverting to raw body enumeration.
 [`scripts/generate-parabolic-first-b-one-outer-suffix.py`](scripts/generate-parabolic-first-b-one-outer-suffix.py),
 and
 [`audits/m43-phase-zero-right-c-first-b-one-extinction-2026-09-01.md`](audits/m43-phase-zero-right-c-first-b-one-extinction-2026-09-01.md).
+
+### M4-S43: Phase-zero right-c later-first-b extinction
+
+**Kind:** obstruction
+
+**Evidence:** formalized
+
+**Disposition:** active
+
+Write a physical body as `c^k b tail`, where `3≤k≤11` and `tail` contains another `b`.
+Normalizing by the tail scale gives exact outer- and inner-root equations in the tail complement.
+For middle wait `y≥2`, the global root window leaves 44 integral `(k,x,y)` points: 38 at
+`k=3`, four at `k=4`, and one each at `k=5,6`; positions `7` through `11` have none. Exact
+first-`b` tail rectangles and stabilized envelope rectangles eliminate those points in 66
+kernel-rechecked leaves.
+
+The two boundary waits are separate proof layers. At `y=0`, positions `3,4` lie in the strict
+positive complement cone; the outer rectangle leaves only `(k,x)=(5,351)` and `(8,218)`.
+The latter has its inner root in `(0,1)`, while the former forces the exact endpoint word
+`cccccbcb`, which violates the suffix density gap. At `y=1`, the outer rectangle leaves only
+`(k,x)=(4,184)`; its inner root forces `ccccbb`, and the position-zero suffix gap kills it.
+
+**Scope:** all natural waits and every physical body whose first `b` follows between three and
+eleven leading copies of `c`, with even total `b` count. The primitive theorem assumes instead
+that the tail contains `b`; parity supplies that fact. No body-length, suffix-depth, or wait
+bound remains. This does not close the leading-`b` cylinder, the complete phase-zero cell, or
+`M₄(3)`.
+
+**Use:** M4-S22, M4-S24, M4-S28, M4-S34, M4-S42, and M4-S43 now remove every even/even body in
+the phase-zero right-`c` cell except the leading-`b` cylinder. Computational reconnaissance of
+that final cylinder is not part of this theorem.
+
+**Next:** derive a uniform analytic reduction for the leading-`b` cylinder. Current exact
+reconnaissance concentrates the surviving outer-root chambers at `x=203`, but no finite
+classifier or nonvanishing claim has yet been formalized there.
+
+**Artifact:**
+[`MatrixMortality/ParabolicFirstBLateCore.lean`](MatrixMortality/ParabolicFirstBLateCore.lean),
+[`MatrixMortality/ParabolicFirstBLateReduction.lean`](MatrixMortality/ParabolicFirstBLateReduction.lean),
+[`MatrixMortality/ParabolicFirstBLateTailCore.lean`](MatrixMortality/ParabolicFirstBLateTailCore.lean),
+[`MatrixMortality/ParabolicFirstBLateCertificate.lean`](MatrixMortality/ParabolicFirstBLateCertificate.lean),
+[`MatrixMortality/ParabolicFirstBLateBoundary.lean`](MatrixMortality/ParabolicFirstBLateBoundary.lean),
+[`MatrixMortality/ParabolicFirstBLateClosure.lean`](MatrixMortality/ParabolicFirstBLateClosure.lean),
+[`scripts/generate-parabolic-first-b-late-tail.py`](scripts/generate-parabolic-first-b-late-tail.py),
+and
+[`audits/m43-phase-zero-right-c-later-first-b-extinction-2026-09-01.md`](audits/m43-phase-zero-right-c-later-first-b-extinction-2026-09-01.md).
 
 ### M4-C03: Zero-framed binary two-Lag compiler
 
