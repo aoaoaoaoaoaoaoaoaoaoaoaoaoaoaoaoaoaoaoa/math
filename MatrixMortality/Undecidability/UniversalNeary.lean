@@ -155,7 +155,7 @@ theorem mortality102_not_computable :
     ¬ComputablePred (MortalityProblem.Mortal (d := 10) (k := 2)) :=
   mortality102Reduction.target_not_computable codeHalts_not_computable
 
-/-- Certified compilation from universal halting to two-matrix rank-nine mortality. -/
+/-- Certified compilation from universal halting to two-matrix nine-dimensional mortality. -/
 noncomputable def mortality92Reduction :
     PrimrecReduction CodeHalts (MortalityProblem.Mortal (d := 9) (k := 2)) where
   emit index := nearyMortality92 source.width (source.body index)
@@ -166,11 +166,11 @@ noncomputable def mortality92Reduction :
       (source.b_mem index),
       tagHaltsFrom_iff_codeHalts]
 
-/-- The concrete two-matrix rank-nine mortality instance emitted for one source program. -/
+/-- The concrete two-matrix nine-dimensional mortality instance emitted for one source program. -/
 noncomputable def mortality92Instance : Nat.Partrec.Code → Mortality92 :=
   mortality92Reduction.emit
 
-/-- The rank-nine mortality instance family is primitive recursive. -/
+/-- The nine-dimensional mortality instance family is primitive recursive. -/
 theorem mortality92Instance_primrec : Primrec mortality92Instance :=
   mortality92Reduction.emit_primrec
 
@@ -187,6 +187,30 @@ theorem codeHalts_reduces_mortality92 :
 theorem mortality92_not_computable :
     ¬ComputablePred (MortalityProblem.Mortal (d := 9) (k := 2)) :=
   mortality92Reduction.target_not_computable codeHalts_not_computable
+
+/-- Certified compilation from universal halting to two-matrix mortality in dimension
+`9 + extra`. -/
+noncomputable def mortality9PlusReduction (extra : Nat) :
+    PrimrecReduction CodeHalts (MortalityProblem.Mortal (d := 9 + extra) (k := 2)) where
+  emit index := nearyMortality9Plus extra source.width (source.body index)
+  emit_primrec :=
+    (nearyMortality9Plus_primrec extra source.width).comp source.body_primrec
+  target_iff_source index := by
+    rw [nearyMortality9Plus_mortal_iff_tagHaltsFrom extra source.width
+      (source.body index) source.width_large (source.body_long index)
+      (source.body_divisible index) (source.b_mem index),
+      tagHaltsFrom_iff_codeHalts]
+
+/-- Halting at input zero many-one reduces to two-matrix mortality in every dimension at least
+nine. -/
+theorem codeHalts_reduces_mortality9Plus (extra : Nat) :
+    CodeHalts ≤₀ MortalityProblem.Mortal (d := 9 + extra) (k := 2) :=
+  (mortality9PlusReduction extra).toManyOne
+
+/-- Mortality of two integer matrices is not computable in every dimension at least nine. -/
+theorem mortality9Plus_not_computable (extra : Nat) :
+    ¬ComputablePred (MortalityProblem.Mortal (d := 9 + extra) (k := 2)) :=
+  (mortality9PlusReduction extra).target_not_computable codeHalts_not_computable
 
 end UniversalNeary
 end Undecidability

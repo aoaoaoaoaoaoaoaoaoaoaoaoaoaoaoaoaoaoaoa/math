@@ -153,6 +153,8 @@ open MatrixMortality
 #print axioms ChangedSeparatorRealization.integralGenerator_mortal_iff_tagHaltsFrom
 #print axioms ChangedSeparatorRealization.effectiveIntegralGenerator_mortal_iff_tagHaltsFrom
 #print axioms Undecidability.nearyMortality92_mortal_iff_tagHaltsFrom
+#print axioms Undecidability.nearyMortality9Plus_primrec
+#print axioms Undecidability.nearyMortality9Plus_mortal_iff_tagHaltsFrom
 #print axioms clearRationalFamily_isMortal_iff
 #print axioms pairedProduct_mulVec_column
 #print axioms pairedCoefficient_eq_sideCoefficient
@@ -1225,6 +1227,9 @@ open MatrixMortality
 #print axioms Undecidability.UniversalNeary.mortality102_not_computable
 #print axioms Undecidability.UniversalNeary.codeHalts_reduces_mortality92
 #print axioms Undecidability.UniversalNeary.mortality92_not_computable
+#print axioms Undecidability.UniversalNeary.codeHalts_reduces_mortality9Plus
+#print axioms Undecidability.UniversalNeary.mortality9PlusReduction
+#print axioms Undecidability.UniversalNeary.mortality9Plus_not_computable
 #print axioms not_isMortal_of_map_not_isMortal
 #print axioms ReturnFamily.finiteReturnHankel_factor
 #print axioms ReturnFamily.returnHankel_card_le

@@ -101,12 +101,13 @@ mortality of the emitted five 3 × 3 integer matrices
 
 for Cook–Neary compiler-emitted bodies:
 four-tile terminal equation
-  ↔ mortality of two 9 × 9 integer matrices.
+  ↔ mortality of two 9 × 9 integer matrices
+  ↔ mortality of two (9+n) × (9+n) integer matrices.
 ```
 
-The final `GPCP(4)`, `M₃(5)`, `M₄(4)`, `Z₆(2)`, `M₉(2)`, and `M₁₀(2)` constructors are primitive
-recursive. Lean proves the corresponding many-one reductions and no-decider theorems from
-mathlib's halting theorem. No external universality theorem, Neary's defective terminal-pair
+The final `GPCP(4)`, `M₃(5)`, `M₄(4)`, `Z₆(2)`, `M₉₊ₙ(2)`, and `M₁₀(2)` constructors are
+primitive recursive. Lean proves the corresponding many-one reductions and no-decider theorems
+from mathlib's halting theorem. No external universality theorem, Neary's defective terminal-pair
 converse, or Rote's long-block repair is assumed.
 
 ## Checked Scope
@@ -122,10 +123,11 @@ The one-hot cyclic compiler preserves that avoidance invariant and reflects ever
 firing. The Table 2 compiler then proves both directions for every emitted source: protected
 execution gives halting, while its arbitrary-execution converse excludes spurious halting after
 the semantic data are exhausted. Its body, padding, leading-`b` invariant, ternary arithmetic,
-four-letter GPCP instance, five-matrix integer family, and effective rank-nine pair are primitive
-recursive. The six `codeHalts_reduces_*` declarations are therefore complete computable many-one
-reductions; their corresponding `*_not_computable` declarations are unconditional
-kernel-checked no-decider theorems.
+four-letter GPCP instance, five-matrix integer family, and effective nine-dimensional pair are
+primitive recursive. The six fixed-endpoint `codeHalts_reduces_*` declarations and the padded
+`codeHalts_reduces_mortality9Plus` family are complete computable many-one reductions; their
+corresponding `*_not_computable` declarations are unconditional kernel-checked no-decider
+theorems.
 
 For deletion width `β`, body `q`, rules `b ↦ b` and `c ↦ q ++ [b]`, and initial queue
 `q.drop (β−1) ++ [b]`, Lean proves under
@@ -385,7 +387,8 @@ The effective integer pair evaluates the same chart in primitive-recursive unred
 A common nonzero denominator is multiplied across each generator's 81 entries, avoiding rational
 normalization and gcd computation. Cook–Neary source bodies carry the required leading-`b`
 invariant. Lean therefore checks a primitive-recursive reduction from code halting to `M₉(2)`
-and proves that `M₉(2)` mortality is not computable. See
+and proves that `M₉(2)` mortality is not computable. Explicit zero padding, finite reindexing,
+and entrywise primitive recursiveness compose the same reduction in every dimension `9+n`. See
 [`m92-changed-separator-transfer-2026-08-31.md`](audits/m92-changed-separator-transfer-2026-08-31.md).
 
 Lean also constructs the canonical reachable-observable quotient around any internal physical
@@ -3335,7 +3338,7 @@ fixed-rank decision problem.
 | `Undecidability/NearyExecution.lean` | literal initialization, first-firing extraction, and the complete post-seed halting cascade |
 | `Undecidability/NearySource.lean` | compositional Cook–Neary compiler and leading-`b` membership for verified restricted-tag sources |
 | `Undecidability/UniversalTwoTag.lean` | fixed universal finite two-tag system and primitive-recursive source queue |
-| `Undecidability/UniversalNeary.lean` | complete computable reductions to binary `GPCP(4)`, `M₃(5)`, `M₄(4)`, `Z₆(2)`, `M₉(2)`, and `M₁₀(2)` |
+| `Undecidability/UniversalNeary.lean` | complete computable reductions to binary `GPCP(4)`, `M₃(5)`, `M₄(4)`, `Z₆(2)`, `M₉₊ₙ(2)`, and `M₁₀(2)` |
 | `Undecidability/NearyProblems.lean` | canonical `Fin 4` and `Fin 5` target instances |
 | `MacroIrreducibility.lean` | exact nonerasing Neary role-macro lower bound |
 | `TernaryClosedBlockNoGo.lean` | paired-Parikh independence, exact erasing macro lower bound, block semantics, and closed-return arithmetic |
@@ -3347,7 +3350,7 @@ fixed-rank decision problem.
 | `Undecidability/PairedProblems.lean` | canonical four-matrix target instance and structural promises |
 | `Undecidability/BinaryProblems.lean` | canonical structured `Z₆(2)` instance |
 | `Undecidability/PrefixProblems.lean` | canonical `M₁₀(2)` instance and all zero-padded dimensions |
-| `Undecidability/ChangedSeparatorProblems.lean` | canonical primitive-recursive `M₉(2)` instance |
+| `Undecidability/ChangedSeparatorProblems.lean` | canonical primitive-recursive `M₉(2)` instance and every zero-padded dimension |
 | `Undecidability/Problems.lean` | encoded source and target decision predicates |
 
 ## Principal Declarations
@@ -3806,6 +3809,8 @@ fixed-rank decision problem.
 | The primitive-recursive integer rank-nine pair is mortal iff tag halting | `ChangedSeparatorRealization.effectiveIntegralGenerator_mortal_iff_tagHaltsFrom` |
 | The canonical `M₉(2)` emitter is primitive recursive | `nearyMortality92_primrec` |
 | Canonical `M₉(2)` instance mortal iff tag halting | `nearyMortality92_mortal_iff_tagHaltsFrom` |
+| Every zero-padded `M₉₊ₙ(2)` emitter is primitive recursive | `nearyMortality9Plus_primrec` |
+| Every zero-padded `M₉₊ₙ(2)` instance is mortal iff tag halting | `nearyMortality9Plus_mortal_iff_tagHaltsFrom` |
 | Appending two paired toggles preserves every coefficient, and absorbing one preserves nonempty zero reachability | `pairedCoefficient_append_toggle_toggle`, `pairedTrailingToggle_hasNonemptyZero_iff` |
 | A rank-four short leaf and rank-three depth-three leaf tax an exact prefix comb by ten states | `VariablePrefixRankTax.ten_le_of_rank_four_short_rank_three_deep` |
 | Opposite rank-four and rank-three branches tax a balanced exact prefix layout by eleven states | `VariablePrefixRankTax.eleven_le_balanced_rank_four_rank_three` |
@@ -3825,6 +3830,8 @@ fixed-rank decision problem.
 | `M₁₀(2)` mortality is not computable | `UniversalNeary.mortality102_not_computable` |
 | Code halting many-one reduces to `M₉(2)` | `UniversalNeary.codeHalts_reduces_mortality92` |
 | `M₉(2)` mortality is not computable | `UniversalNeary.mortality92_not_computable` |
+| Code halting many-one reduces to every `M₉₊ₙ(2)` | `UniversalNeary.codeHalts_reduces_mortality9Plus` |
+| Every `M₉₊ₙ(2)` mortality predicate is not computable | `UniversalNeary.mortality9Plus_not_computable` |
 | Two-tag executions reach their cyclic firing phase | `CyclicTag.reaches_firing_phase` |
 | A woven compiler word emits its prescribed track | `read_wholeAppendant_track` |
 | One arbitrary ordinary cyclic pulse has a nonempty physical simulation | `read_next_dataBit_transGen` |

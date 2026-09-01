@@ -276,6 +276,10 @@
 'MatrixMortality.Undecidability.nearyMortality92_mortal_iff_tagHaltsFrom' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.Undecidability.nearyMortality9Plus_primrec' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.Undecidability.nearyMortality9Plus_mortal_iff_tagHaltsFrom' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.clearRationalFamily_isMortal_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.pairedProduct_mulVec_column' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.pairedCoefficient_eq_sideCoefficient' depends on axioms: [propext, Classical.choice, Quot.sound]
@@ -2040,6 +2044,10 @@
 'MatrixMortality.SwappedSetterReachableCylinder.reachable_nonDeletionC_predecessorCylinder' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.SwappedSetterCylinderCharge.swappedUpperCode_markerTail_factorization' depends on axioms: [propext,
+ Quot.sound]
+'MatrixMortality.SwappedSetterCylinderCharge.erasureTail_swappedLowerCode_factorization' depends on axioms: [propext,
+ Quot.sound]
 'MatrixMortality.SwappedSetterCylinderCharge.erasureTail_threshold_gap_eq_charge' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
@@ -2083,6 +2091,52 @@
  Classical.choice,
  Quot.sound]
 'MatrixMortality.SwappedSetterCylinderCharge.erasureTailPole_threeBlock_charge_frontier' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SwappedSetterTargetMultiplier.primitive_crossProduct_factor' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SwappedSetterTargetMultiplier.primitive_crossProduct_factor_unique' depends on axioms: [propext]
+'MatrixMortality.SwappedSetterTargetMultiplier.erasureTail_primitive_targetMultiplier' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SwappedSetterTargetMultiplier.erasureTail_primitive_targetMultiplier_unique' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SwappedSetterTargetMultiplier.erasureTarget_primitive_targetMultiplier_unique' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SwappedSetterTargetMultiplier.ThreeBlockChargeWitness.existsUnique_targetMultiplier_braid' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SwappedSetterTargetMultiplier.targetPrefixDiscrepancy_not_dvd_three' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SwappedSetterTargetMultiplier.ThreeBlockChargeWitness.predecessorBraidResidual_not_dvd_three' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SwappedSetterTargetResidue.erasureTailCharge_not_dvd_three' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SwappedSetterTargetResidue.witness_targetCharge_not_dvd_three' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SwappedSetterTargetResidue.witness_previousNumeratorCharge_not_dvd_three' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SwappedSetterTargetResidue.witness_middleAffineCharge_not_dvd_three' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SwappedSetterTargetResidue.witness_prefixDiscrepancy_and_braidResidual_not_dvd_three' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SwappedSetterTargetResidue.erasureTailCharge_front_residue' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SwappedSetterTargetResidue.witness_front_gap_residue_fork' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SwappedSetterTargetResidue.witness_front_initialCylinder_residue_fork' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
 'MatrixMortality.DecimalSetterChamber.doubleDeletion_step_in_gap' depends on axioms: [propext,
@@ -2554,6 +2608,32 @@
 'MatrixMortality.DecimalSetterBridge.mortalityProblem_mortal_iff_exists_parsedZeroFrontier' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.DecimalSetterBridge.sourceBoundary_decimalUnits' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterBridge.hitsSquarePole_single_iff_generalizedRawHead' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterBridge.hitsSquarePole_single_iff_generalizedRawHead_with_units' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterMinimumBody.minimumBodyTarget_word_identity' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.DecimalSetterMinimumBody.minimumBody_initialQueue_halts' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.DecimalSetterMinimumBody.minimumBodyTarget_unique' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterMinimumBody.hasParsedZeroFrontier_of_minimumBody' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterMinimumBody.mortalityProblem_mortal_of_minimumBody' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterMinimumBody.compiler_body_length_gt_minimum' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterMinimumBody.ruleCRoot_hitsSquarePole_iff_terminalMatch' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.DecimalSetterAncestry.carrierFactor_multiToSingleton_quotientGate' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
@@ -2709,6 +2789,15 @@
  Classical.choice,
  Quot.sound]
 'MatrixMortality.Undecidability.UniversalNeary.mortality92_not_computable' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.Undecidability.UniversalNeary.codeHalts_reduces_mortality9Plus' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.Undecidability.UniversalNeary.mortality9PlusReduction' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.Undecidability.UniversalNeary.mortality9Plus_not_computable' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
 'MatrixMortality.not_isMortal_of_map_not_isMortal' depends on axioms: [propext]
