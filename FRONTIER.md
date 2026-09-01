@@ -706,9 +706,19 @@ chambers:
             (210,1,801,z) with z≥380.
 ```
 
-This is a theorem-level classification, not a zero exclusion. The immediate acceptance test is
-an exact suffix certificate eliminating all five chambers, including a theorem-level cap and
-complete treatment of the apparent inner-wait ray.
+The five chambers are now empty
+[`M4-S42`](SALVAGE.md#m4-s42-phase-zero-right-c-first-b-one-extinction). Removing the tail's
+first `b` gives the uniform integer suffix grammar `GJ=RH−B`. On the apparent ray, its strict
+position-zero gap forces `z<1448`; 11 exact inner-wait intervals then close in an 81-node tree.
+The other four chambers require 15 nodes, for a complete 96-node certificate of depth at most
+five. Together with the outer cap and the `x=211` theorem, this proves that no even-`b` body
+beginning `cb` closes the phase-zero right-`c` bridge at any waits.
+
+Inside the even-length/even-`b` rectangle, the live first-`b` positions are therefore `0` and
+`3` through `11`: position `1` is M4-S42, position `2` is M4-S34, positions at least `12` are
+M4-S28, and the unary rays are M4-S22/M4-S24. The next local attack should generalize the same
+outer-root/suffix architecture across those nine cylinders, starting with position `0`, whose
+complement density is largest.
 
 Two original-family nodes survive, and they must not be conflated.
 

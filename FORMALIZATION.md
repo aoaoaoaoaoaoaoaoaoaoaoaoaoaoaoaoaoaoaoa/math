@@ -1821,6 +1821,20 @@ first-`b` decomposition. The deterministic certificate is reproduced by
 `scripts/generate-parabolic-first-b-one-outer.py`. Its exact boundary is
 [`audits/m43-phase-zero-right-c-lower-range-classification-2026-09-01.md`](audits/m43-phase-zero-right-c-lower-range-classification-2026-09-01.md).
 
+The complete first-`b`-after-one-`c` extinction
+[`M4-S42`](SALVAGE.md#m4-s42-phase-zero-right-c-first-b-one-extinction) is checked across
+`MatrixMortality/ParabolicFirstBOneOuterSuffixCore.lean`, the generated
+`MatrixMortality/ParabolicFirstBOneOuterSuffixCertificate*.lean` shards, and
+`MatrixMortality/ParabolicFirstBOneOuterClosure.lean`.
+`ParabolicBlade.firstBOneOuterSuffixCore_of_core_zero` extracts the uniform integer suffix
+balance; `firstBOneOuterRay_z_lt_1448` cuts the sole ray by the strict position-zero grammar
+gap; and the generated 96-node interval tree eliminates the remaining bounded chambers.
+`bZeroBDefectCOneCodeCore_cb_ne_zero_of_mem_b` composes M4-S40, M4-S39, M4-S41, and the terminal
+certificate, while `bridge_bZero_bTwo_cOne_det_ne_zero_of_cb_even_b_count` exposes the complete
+determinant-level cylinder theorem. The generator is reproduced by
+`scripts/generate-parabolic-first-b-one-outer-suffix.py`. Its exact boundary is
+[`audits/m43-phase-zero-right-c-first-b-one-extinction-2026-09-01.md`](audits/m43-phase-zero-right-c-first-b-one-extinction-2026-09-01.md).
+
 The residue-zero `c`-endpoint exclusion
 [`M4-S12`](SALVAGE.md#m4-s12-residue-zero-c-endpoint-exclusion) is checked in the same module.
 `ParabolicBlade.bridge_cZero_bTwo_bOne_det` and

@@ -2023,6 +2023,23 @@
 'MatrixMortality.ParabolicBlade.firstBOneOuterCandidate_of_core_zero' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.ParabolicBlade.firstBOneOuter_core_balance' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ParabolicBlade.firstBOneOuterSuffixCore_of_core_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.firstBOneOuterRay_z_lt_1448' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ParabolicBlade.firstBOneOuterSuffixCore_false_210_1_801' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.bZeroBDefectCOneCodeCore_cb_ne_zero_of_mem_b' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.bZeroBDefectCOneCodeCore_cb_ne_zero_of_even_b_count' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.bridge_bZero_bTwo_cOne_det_ne_zero_of_cb_even_b_count' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.ParabolicBlade.bZeroBDefectCOneCodeCore_x211_normal_form' depends on axioms: [propext, Quot.sound]
 'MatrixMortality.ParabolicBlade.bZeroBDefectCOneSfft_resultant' depends on axioms: [propext, Quot.sound]
 'MatrixMortality.ParabolicBlade.bZeroBDefectCOneSfft_identity' depends on axioms: [propext, Quot.sound]

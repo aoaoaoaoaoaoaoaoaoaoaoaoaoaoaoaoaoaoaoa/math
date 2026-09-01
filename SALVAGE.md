@@ -230,6 +230,7 @@ file owns the mathematical stock.
 | [`M4-S39`](#m4-s39-phase-zero-right-c-x211-large-inner-extinction) | obstruction and structure theorem | a depth-three suffix certificate eliminates the large-inner exit and closes the complete `x=211` `cb` cylinder | formalized | active |
 | [`M4-S40`](#m4-s40-phase-zero-right-c-outer-wait-cap) | structure theorem | every physical `cb` bridge zero has outer wait at most `211` | formalized | active |
 | [`M4-S41`](#m4-s41-phase-zero-right-c-lower-range-classification) | structure theorem | every physical `cb` zero with outer wait at most `210` lies in one of five exact suffix chambers | formalized | active |
+| [`M4-S42`](#m4-s42-phase-zero-right-c-first-b-one-extinction) | obstruction | no even-`b` body beginning `cb` closes the phase-zero right-`c` bridge | formalized | active |
 | [`M4-C03`](#m4-c03-zero-framed-binary-two-lag-compiler) | compiler | the principal scanner is literally binary context-2 Lag and compiles to `M₄(3)` | formalized | graduated |
 | [`M4-D01`](#m4-d01-zero-framed-binary-two-lag-decision) | decidable stratum | the entire zero-framed binary context-2 Lag kernel has an exact syntactic classification | formalized | graduated |
 | [`M4-D02`](#m4-d02-zero-framed-reset-scanner-decision) | decidable stratum | zero-run reduction contracts the reset scanner to a regular two-token quotient | audited | graduated |
@@ -9682,8 +9683,8 @@ the lower outer-wait range, not a nonvanishing theorem for the five terminal cha
 chambers. The former 113-pair arithmetic surface has contracted to one finite list and one
 one-dimensional ray.
 
-**Next:** eliminate all five suffix chambers by the exact suffix grammar. The ray requires a
-theorem-level upper cut before finite certification; sampled word search is not sufficient.
+**Next:** discharged by M4-S42, which supplies the theorem-level ray cut and complete exact
+suffix certificate.
 
 **Artifact:**
 [`MatrixMortality/ParabolicFirstBOneOuterCore.lean`](MatrixMortality/ParabolicFirstBOneOuterCore.lean),
@@ -9692,6 +9693,64 @@ theorem-level upper cut before finite certification; sampled word search is not 
 [`scripts/generate-parabolic-first-b-one-outer.py`](scripts/generate-parabolic-first-b-one-outer.py),
 and
 [`audits/m43-phase-zero-right-c-lower-range-classification-2026-09-01.md`](audits/m43-phase-zero-right-c-lower-range-classification-2026-09-01.md).
+
+### M4-S42: Phase-zero right-c first-b-one extinction
+
+**Kind:** obstruction
+
+**Evidence:** formalized
+
+**Disposition:** active
+
+For arbitrary outer wait, define the positive root pencil `Q`, complement coefficient `J`,
+scale coefficient `A`, and finite correction `B` so that a physical `cb` zero satisfies
+
+```text
+(39T+E)J = TA−B.
+```
+
+If the tail's first `b` follows `j` leading copies of `c`, removing that prefix gives the exact
+suffix equation
+
+```text
+GJ = RH−B,
+H = 243·3^j(A−39J)−39J.
+```
+
+Reading a suffix `c` sends `H↦3H`, while reading `b` sends `H↦243H−39J`. Nonpositive `H`, the
+global complement wall, a strict first-`b` position gap, or an incompatible empty suffix ends
+each branch.
+
+In the sole ray left by M4-S41, `(x,j,y)=(210,1,801)` and `z≥380`. At `z≥1448`, the exact
+position-zero gap has positive low-side margin and negative high-side margin, so the ray stops at
+`z=1447`. The bounded interval `380≤z≤1447` partitions into 11 exact sign intervals whose
+suffix trees contain 81 nodes. The other four M4-S41 chambers require 15 nodes. Thus a
+deterministic 96-node certificate of maximum depth five eliminates every lower-range chamber.
+
+Composing this certificate with the M4-S40 cap and M4-S39 endpoint theorem proves that no
+physical `cb` body whose tail contains `b` zeros the primitive core. Even body `b` parity forces
+such a tail `b`, yielding the determinant theorem for the complete `cb` cylinder.
+
+**Scope:** all natural waits and every physical body beginning `cb` with even `b` count. No
+body-length, suffix-depth, trailing-run, or wait bound remains. This closes first-`b` position
+one inside the phase-zero right-`c` parity rectangle; it does not close positions `0` or `3`
+through `11`, the whole phase-zero cell, or `M₄(3)`.
+
+**Use:** together with M4-S34 and M4-S28, only leading first-`b` positions `0` and `3` through
+`11` remain among mixed even/even bodies. The same root-window and interval suffix machinery is
+now available without the exceptional `x=211` valuation split.
+
+**Next:** extend the normalized outer-root envelope to the leading-`b` cylinder `j=0`, then to
+the eight remaining positions `3` through `11`; preserve each position's exact density rather
+than reverting to raw body enumeration.
+
+**Artifact:**
+[`MatrixMortality/ParabolicFirstBOneOuterSuffixCore.lean`](MatrixMortality/ParabolicFirstBOneOuterSuffixCore.lean),
+[`MatrixMortality/ParabolicFirstBOneOuterSuffixCertificate.lean`](MatrixMortality/ParabolicFirstBOneOuterSuffixCertificate.lean),
+[`MatrixMortality/ParabolicFirstBOneOuterClosure.lean`](MatrixMortality/ParabolicFirstBOneOuterClosure.lean),
+[`scripts/generate-parabolic-first-b-one-outer-suffix.py`](scripts/generate-parabolic-first-b-one-outer-suffix.py),
+and
+[`audits/m43-phase-zero-right-c-first-b-one-extinction-2026-09-01.md`](audits/m43-phase-zero-right-c-first-b-one-extinction-2026-09-01.md).
 
 ### M4-C03: Zero-framed binary two-Lag compiler
 
