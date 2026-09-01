@@ -261,6 +261,7 @@ file owns the mathematical stock.
 | [`D2-S10`](#d2-s10-finite-secondary-wall-nucleus) | structure theorem | every consecutive unit secondary-wall orbit lies in a target-dependent finite rectangle and is eventually periodic | formalized | active |
 | [`D2-S11`](#d2-s11-absorbing-four-divisible-cone) | structure theorem | reduced mantissas with denominator divisible by four remain in that cone under every normalized reverse branch | formalized | active |
 | [`D2-S12`](#d2-s12-exact-wall-odd-two-cycle-family) | structure theorem | a sharp infinite depth family has unique guarded wall-to-odd two-cycles | formalized | active |
+| [`D2-S14`](#d2-s14-arbitrary-body-wall-excursion-saturation) | structure theorem | every finite wait word occurs inside a guarded wall-anchored periodic excursion | formalized | active |
 | [`D2-D01`](#d2-d01-projectively-unimodular-stratum) | decidable stratum | projectively unimodular hard-core instances are decidable | audited | stock |
 | [`D2-D02`](#d2-d02-invariant-pair-stratum) | decidable stratum | invariant projective pairs reduce to abelian-by-`C₂` reachability | reported | active |
 | [`D2-D03`](#d2-d03-common-multiplier-stratum) | decidable stratum | rational affine maps with one multiplier are decidable under regular control | reported | active |
@@ -11953,6 +11954,68 @@ bounded-return-depth, finite literal cycle-census, and uniform return-margin arg
 
 **Next:** classify every exit from this family under a third predecessor and determine whether
 longer odd excursions reduce to finitely many symbolic return schemas.
+
+### D2-S14: Arbitrary-body wall-excursion saturation
+
+**Kind:** structure theorem and schedule-language saturation
+**Evidence:** formalized
+**Disposition:** active
+
+Let `E` be an arbitrary finite wait word, let `a≥0`, and choose `c≥7`. Wrap the body as
+
+```text
+W(a,E,c) = [a] ++ E ++ [c],
+x = shellPeriodicPoint(W(a,E,c)),
+μ = 9x/2.
+```
+
+Lean first proves a missing global fact: the periodic point of every nonempty shell schedule
+lies in the half-open real trap `(1/5,1/2]`. Because the last wait of `W` is at least seven,
+the preceding phase is at most `1/2` and the closing contraction gives the sharper bound
+
+```text
+1/5 < x ≤ 2/9.
+```
+
+Hence `9/10<μ≤1`. The closing wait is positive, so the schedule intercept is a two-adic unit
+and its slope has positive two-adic valuation. The fixed-point denominator `1−slope` is
+therefore also a unit. Thus `x` is a two-adic unit and `v₂(μ)=−1`; both `x` and `μ` are
+five-adic units. The entry identity is exact:
+
+```text
+x = 2μ/9,
+T_a(x) = U(a+2,μ).
+```
+
+The whole wrapped schedule returns to `x`, and every prefix satisfies the five-adic guard.
+Consequently every finite wait word is a literal middle factor of some guarded periodic
+excursion anchored on the reduced secondary wall. Lean packages the witnesses as
+`WallAnchoredScheduleCertificate` and proves factor universality of
+`IsWallAnchoredSchedule`. In particular no single finite word can be forbidden from every
+wall-anchored schedule.
+
+**Scope:** the periodic source and wall mantissa depend on `E`. Factor universality does not
+imply nonregularity and does not defeat an arbitrary finite automaton; a factor-universal
+language can itself be regular. It specifically refutes nontrivial forbidden-factor, bounded
+excursion-word, and local exclusion arguments. It does not create a fixed-source or fixed-target
+fibre.
+
+**Artifact:** `MixedPrimeDebt.shellPeriodicPoint_mem_realTrap`,
+`MixedPrimeDebt.wallExcursionSource_mem_lowerWindow`,
+`MixedPrimeDebt.wallExcursionSource_twoUnit`,
+`MixedPrimeDebt.wallExcursionMantissa_twoValue`, `MixedPrimeDebt.wallExcursion_entryStep`,
+`MixedPrimeDebt.wallExcursion_cycle`,
+`MixedPrimeDebt.wallExcursionSchedule_isWallAnchored`,
+`MixedPrimeDebt.wallAnchoredSchedules_factorUniversal`, and
+`MixedPrimeDebt.not_forall_wallAnchoredSchedule_avoids_factor` in
+[`MixedPrimeRealTrapSaturation.lean`](MatrixMortality/MixedPrimeRealTrapSaturation.lean).
+
+**Use:** reject every proposed wall classifier that excludes a finite local wait pattern or
+bounds excursion-word complexity independently of the endpoints. Any successful quotient must
+use the exact source/target arithmetic, not the internal wait word alone.
+
+**Next:** impose one fixed endpoint, or one fixed endpoint fibre, and determine which part of
+the arbitrary-body saturation survives.
 
 ### D2-O09: Guarded real-pole reset
 

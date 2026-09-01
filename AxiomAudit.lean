@@ -833,6 +833,17 @@ open MatrixMortality
 #print axioms MixedPrimeDebt.wallOddCycleLowerState_tendsto_oneFifth
 #print axioms MixedPrimeDebt.wallOddCycleMantissas_unique
 #print axioms MixedPrimeDebt.wallOddCycle_depthSix_mantissas_unique
+#print axioms MixedPrimeDebt.shellPeriodicPoint_mem_realTrap
+#print axioms MixedPrimeDebt.wallExcursionSource_mem_lowerWindow
+#print axioms MixedPrimeDebt.wallExcursionSource_twoUnit
+#print axioms MixedPrimeDebt.wallExcursionMantissa_normalized
+#print axioms MixedPrimeDebt.wallExcursionMantissa_twoValue
+#print axioms MixedPrimeDebt.wallExcursionMantissa_fiveUnit
+#print axioms MixedPrimeDebt.wallExcursion_entryStep
+#print axioms MixedPrimeDebt.wallExcursion_cycle
+#print axioms MixedPrimeDebt.wallExcursionSchedule_isWallAnchored
+#print axioms MixedPrimeDebt.wallAnchoredSchedules_factorUniversal
+#print axioms MixedPrimeDebt.not_forall_wallAnchoredSchedule_avoids_factor
 #print axioms MixedPrimeDebt.exists_shellStep_realTrap_predecessor
 #print axioms MixedPrimeDebt.exists_shellStep_realTrap_unit_predecessor
 #print axioms MixedPrimeDebt.exists_shellRun_realTrap_unit_predecessor_of_length
