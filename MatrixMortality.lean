@@ -155,6 +155,7 @@ import MatrixMortality.SwappedSetterAllErasure
 import MatrixMortality.SwappedSetterDoubleDeletion
 import MatrixMortality.SwappedSetterPhysicalShell
 import MatrixMortality.SwappedSetterHistory
+import MatrixMortality.SwappedSetterThresholdCarry
 import MatrixMortality.SchottkyPunctuation
 import MatrixMortality.TwoStateObstructions
 import MatrixMortality.ForcedRuleCCompanion

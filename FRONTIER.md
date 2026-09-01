@@ -1036,6 +1036,14 @@ blocks, the prospective pole is the canonical `MM-S55` residual plus one explici
 the incoming ordinary-reset defect. A genuine ordinary-ray return therefore activates `MM-S55`
 and is impossible at the next nontrivial first-multi pole.
 
+[`MM-S59`](SALVAGE.md#mm-s59-multiplicative-threshold-suffix-carry) supplies the suffix invariant
+that remains valid off the ordinary ray. If `(n,d)` represents the normalized projective defect,
+a target pole satisfies `dP=nV`. Least-significant swapped digits produce an exact balanced
+carry in the finite interval `[-(|n|+|d|), |n|+|d|]`; reversed Neary erasure and rule blocks are
+explicit affine contractions. For a target ending in `β` erasure tiles, the shared terminal
+suffix forces `3^β ∣ d−n`. Hence `|d−n|<3^β` makes the pole terminal and invokes the checked
+decoder.
+
 The remaining ternary obligation is now the **nonzero history-defect branch** of the global
 earliest-pole reduction. In the normalized coordinate `δ=D/y`, the complete physical recurrence
 is
@@ -1046,9 +1054,11 @@ is
 
 The distinguished coordinate `R/H` is a target threshold exactly for terminal equality `P=V`.
 The first `D_c` and `D_b` images lie on opposite sides of zero, so a one-sided real trap is
-already impossible. Exclude every other reachable threshold using the Neary suffix language.
-Fixed residue and unit projections are empirically saturated on the benchmark, but this does
-not rule out every finite semantic quotient. None of `MM-S51`, `MM-S55`, or `MM-S57` alone proves
+already impossible. On the full-erasure-tail branch, the live question is whether primitive
+centered-history carriers satisfy `|d−n|<3^β`, or a stronger modulus-versus-height inequality
+that consumes the divisibility from `MM-S59`. Fixed residue and unit projections are empirically
+saturated on the benchmark, while the exact carry window grows with `|n|+|d|`; neither fact
+settles this height question. None of `MM-S51`, `MM-S55`, `MM-S57`, or `MM-S59` alone proves
 projective avoidance.
 Exact bidirectional diagnostics for the ternary swap at `β=3`, body `bbcc`, exclude every
 false-pole word of at most six projective blocks when each regular block has

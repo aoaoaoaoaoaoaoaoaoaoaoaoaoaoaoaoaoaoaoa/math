@@ -136,6 +136,7 @@ file owns the mathematical stock.
 | [`MM-S51`](#mm-s51-double-deletion-ratio-chamber-extinction) | obstruction | the literal `D_c²` middle forces a target code ratio in an open chamber containing no physical swapped role block | formalized | active |
 | [`MM-S55`](#mm-s55-physical-role-block-shell-completion) | structure theorem and obstruction | every physical swapped role block supplies its expected pole shell, coefficient depth, and lower unit, yielding a shell-free first-multi extinction theorem | formalized | active |
 | [`MM-S57`](#mm-s57-centered-history-defect-transport) | structure theorem and obstruction | an arbitrary centered fold has one exact raw-head correction; sliding-window reuse is valid exactly at an ordinary-ray return | formalized | active |
+| [`MM-S59`](#mm-s59-multiplicative-threshold-suffix-carry) | structure theorem and obstruction | every later swapped pole has an exact multiplicative suffix carry; a full erasure tail forces terminality below the carrier-gap threshold | formalized | active |
 | [`R32-S01`](#r32-s01-split-return-normal-form) | structure theorem | rank-two cuts reduce one-unit binary mortality to a `2 × 2` return recurrence | formalized | graduated |
 | [`R32-S02`](#r32-s02-two-plane-edge-square) | structure theorem | two rank-two generators are a two-vertex square of `2 × 2` edges | formalized | graduated |
 | [`R32-O01`](#r32-o01-rank-one-profile-collapse) | obstruction | a rank-one generator reduces mortality to order-at-most-three scalar recurrence zeros | audited | stock |
@@ -4920,6 +4921,86 @@ shell bookkeeping or one-sided sign interval can recover the discarded history.
 
 **Next:** prove exact threshold avoidance for the physical Möbius language (9), with complete
 Neary suffix ancestry retained, or prove that any earliest threshold hit is terminal.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S59: Multiplicative threshold suffix carry
+
+**Kind:** structure theorem and obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+Normalize the nonzero history defect from `MM-S57` by
+
+```text
+q=(H/R)δ=n/d.                                           (1)
+```
+
+If a physical target with swapped upper and lower codes `P,V` is a pole, then its exact
+threshold equation is
+
+```text
+dP=nV.                                                  (2)
+```
+
+Unlike the distinguished-boundary discrepancy, (2) survives an arbitrary centered history.
+Reading equally long suffixes from least to most significant digit gives the balanced carry
+
+```text
+cᵢ+d·digit(pᵢ)−n·digit(vᵢ)=3cᵢ₊₁,      c₀=0.           (3)
+```
+
+`carryRun_iff` proves that (3) is equivalent to the accumulated suffix product equation;
+`suffixCarry_of_crossProduct` identifies its outgoing carry with the difference of the two
+discarded prefix products. Every carry reached from zero satisfies
+
+```text
+|cᵢ|≤|n|+|d|.                                           (4)
+```
+
+Thus each fixed carrier has an exact finite suffix automaton, independent of the suffix length.
+The two reversed Neary lower-language blocks act without approximation:
+
+```text
+erasure:  c+2(d−n)=3c',
+rule 011: c+26d−14n=27c'.                              (5)
+```
+
+The consuming cut is the full erasure tail. If the target ends in `β` erasure tiles, its upper
+marker and lower spelling have the same terminal word `0^β`, of swapped value `3^β−1`.
+Equation (2) then forces
+
+```text
+3^β ∣ d−n.                                              (6)
+```
+
+Consequently `|d−n|<3^β` implies `d=n`. If `d≠0`, equation (2) reduces to `P=V`; the checked
+Neary decoder then proves `TagHaltsFrom`. Every nonterminal pole in this branch therefore has
+carrier gap at least `3^β`.
+
+**Scope:** the carry theorem applies to every integer representative `(n,d)` of a live centered
+defect ratio and makes no raw-word ancestry assumption. The finite interval depends on the
+carrier height; it is not a uniform finite quotient across arbitrary histories. The terminal
+cut requires a target ending in `β` erasure tiles and does not prove the missing inequality
+`|d−n|<3^β`. No `M₅(3)` conclusion follows.
+
+**Use:** replace the unavailable additive common-suffix ancestry by the exact multiplicative
+carry. For the full-erasure-tail branch, it remains only to bound the primitive carrier gap
+below the marker modulus, or to prove a stronger modulus-versus-height constraint from the
+centered history recurrence.
+
+**Formalization:**
+[`MatrixMortality/SwappedSetterThresholdCarry.lean`](MatrixMortality/SwappedSetterThresholdCarry.lean),
+through `carryRun_iff`, `suffixCarry_iff_run`, `SuffixCarry.carry_mem`,
+`suffixCarry_of_crossProduct`, `matchedFalseSuffix_dvd_gap`,
+`threshold_crossProduct_of_pole`, `suffixCarry_of_pole`, and `erasureTail_pole_halts`.
+
+**Artifact:**
+[`audits/m53-multiplicative-threshold-carry-2026-08-31.md`](audits/m53-multiplicative-threshold-carry-2026-08-31.md).
+
+**Next:** derive `|d−n|<3^β`, or a consuming replacement, for primitive centered-history
+carriers entering a full-erasure-tail target.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
