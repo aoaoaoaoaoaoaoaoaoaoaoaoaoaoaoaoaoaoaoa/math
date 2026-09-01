@@ -262,6 +262,7 @@ file owns the mathematical stock.
 | [`G3-S13`](#g3-s13-contextual-kernel-fork-classification) | structure theorem, obstruction, and sharp counterexample | one-context embeddings of the five audited relations and their first critical pairs either miss the fork or enter a common-fixed centralizer; the first fork occurs at length 312 on that forbidden diagonal | formalized core; audited combinatorics and exact exhaustive computation | active |
 | [`G3-S14`](#g3-s14-finite-convergent-mixed-prime-presentation) | structure theorem, decision procedure, and separation | adjoining the 45 first critical branch pairs gives a finite 50-rule convergent presentation of the five-rule congruence; the quotient contains the forbidden length-312 fork but excludes every positive-depth odd-family relation | exact independently replayable certificate; Lean fork witness | active |
 | [`G3-S15`](#g3-s15-uniform-mixed-prime-contextual-cut-collapse) | uniform obstruction and computational cut | Parikh-balanced contextual cuts kill the odd kernel family at every depth and contract the first two completed critical generations to a finite internal cell, where exact replay finds no fork | formalized parametric obstruction; audited extraction and exact exhaustive computation | active |
+| [`G3-S16`](#g3-s16-cayley-hamilton-pump-census-and-free-macro-address) | structure theorem, exact census, and separation | exhaustive length-32 census yields 23 infinite external pump schemas; the derived macros `DT,TD` form a free two-sided binary affine address stack, while every schema reads only one unary constant address | formalized mechanism; exact exhaustive and independently replayable certificates | active |
 | [`G3-M02`](#g3-m02-square-root-punctuation-fracture) | partial mechanism | a rank-two square root gives an exact `SS`-free mortality grammar | formalized | closed |
 | [`G3-O10`](#g3-o10-square-root-boundary-saturation) | obstruction | every nondegenerate rank-one square root preserves boundary coefficient zeros | formalized | graduated |
 | [`G3-M01`](#g3-m01-free-group-discrepancy-engine) | partial mechanism | Carvalho's transducer gives an all-word marker-tail equation and a cyclic exponent-one equalizer | audited | active |
@@ -10596,6 +10597,80 @@ through new equal-action families, with the contextual cuts applied before any e
 
 **Next:** attack the newly found Cayley-Hamilton-pumpable affine-kernel families. In the finite
 quotient, seek a multi-window fork invariant rather than adding another raw length cutoff.
+
+### G3-S16: Cayley-Hamilton pump census and free macro address
+
+**Kind:** structure theorem, exact census, and separation
+
+**Evidence:** formalized mechanism; exact exhaustive and independently replayable certificates
+
+**Disposition:** active
+
+Exhaustive exact census of all `2³²` raw words finds `44` independent duplicate edges outside the
+five-rule congruence. Cancelling maximal common literal contexts and deduplicating leaves `23`
+boundary-reduced cores: seven of length `31` and sixteen of length `32`. Every core admits a
+nontrivial side-specific insertion of one common pump `S∈{DT,TD}`. Exact integer signatures agree
+at depths zero and one. Lean proves over every commutative ring that every power of a `2×2` matrix
+lies in `span{I,S}`, and lifts those two seed equalities to
+
+```text
+A Sᵏ C = B Sᵏ D
+```
+
+for every `k≥0`. These are `23` explicit parametric affine-kernel schemas, with distinct
+boundary-reduced seeds. This does not assert that their pumped members are pairwise disjoint.
+For the invertible raw contexts, Lean proves the sharper normal form: with `P=A⁻¹B`, the base
+equality gives `C=PD`, and `AWC=BWD` holds exactly when `W` commutes with `P`. Every schema is a
+centralizer reader; Cayley-Hamilton is its noninvertible two-dimensional extension.
+
+All `23` schemas remain outside the finite convergent quotient at every depth. Every completed
+left side has length at most `59`. An exact finite periodic-window basis through pump power `31`
+covers redexes wholly inside the pump, meeting either boundary, or spanning both boundaries.
+`67,390` occurrence checks find none, so both sides are distinct irreducible normal forms for all
+depths.
+
+The two pumps themselves expose a positive mechanism:
+
+```text
+DT=[[6,10],[0,15]],       TD=[[6,15],[0,15]].
+```
+
+For an equal-length macro address with digits `dᵢ∈{2,3}`, its upper entry is
+
+```text
+5·3^(n-1) Σᵢ dᵢ2^(i-1)5^(n-i).
+```
+
+Lean proves that modulo two peels the address from the left and modulo five peels it from the
+right; the common multiplier recovers address length. Hence `{DT,TD}` is a free affine macro
+submonoid. This does not contradict the
+long kernel relations over the raw generators `{D,T}`.
+
+Each pump schema is an exact unary reader, not a general stack reader. Its connector centralizes
+one pump. Substituting the alternate pump at the same cuts gives a nonzero exact offset
+discrepancy in all `23` cases. Since fixed-length macro actions lie on one affine offset line and
+their offsets are injective, the context accepts exactly the constant address `Sᵏ`.
+
+**Scope:** the census is exhaustive at raw length `32`, not beyond. The infinite theorem uses one
+repeated pump with fixed side-specific contexts. No result here compares two arbitrary binary
+addresses or supplies the normalized-mantissa
+endpoint converse.
+
+**Use:** retain `{DT,TD}` as the first explicit lossless binary stack inside the mixed-prime hard
+core. Treat the `23` relations as unary readers and candidate ingredients, not completed
+compilers. Any positive successor must make the `bcbc` fork compare or select general stack
+addresses; a no-go should prove that its forced two-state core cannot upgrade unary reading.
+
+**Artifact:**
+[`TwoSeedPumpPropagation.lean`](MatrixMortality/TwoSeedPumpPropagation.lean),
+[`MixedPrimeMacroAddress.lean`](MatrixMortality/MixedPrimeMacroAddress.lean),
+[`certify_mixed_prime_pump_families.py`](tools/certify_mixed_prime_pump_families.py),
+[`audit_mixed_prime_kernel.rs`](tools/audit_mixed_prime_kernel.rs), and
+[`m34-mixed-prime-pump-census-2026-08-31.md`](audits/m34-mixed-prime-pump-census-2026-08-31.md).
+
+**Next:** test whether two or more side-contextual readers can be composed into an arbitrary
+address comparator under the physical `D/T` grammar. In parallel, extend the uniform contextual
+cut to the six new length-`31` pump families and the sixteen length-`32` schemas.
 
 ### G3-O13: Rational serializer pumping
 

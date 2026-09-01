@@ -753,6 +753,36 @@
 'MatrixMortality.GuardedMixedPrimeFork.no_kernelOddFamily_offCentralizer_cutCertificate' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.TwoSeedPumpPropagation.finTwo_cayleyHamilton' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TwoSeedPumpPropagation.group_context_eq_iff_commute' depends on axioms: [propext]
+'MatrixMortality.TwoSeedPumpPropagation.group_context_pow_eq_of_zero_one' depends on axioms: [propext]
+'MatrixMortality.TwoSeedPumpPropagation.finTwo_pow_mem_span_one_self' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TwoSeedPumpPropagation.finTwo_linearContext_pow_eq_of_zero_one' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TwoSeedPumpPropagation.finTwo_contextual_pow_eq_of_zero_one' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TwoSeedPumpPropagation.wordProduct_pump_eq_of_zero_one' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeMacroAddress.addressOffset_scaled' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.MixedPrimeMacroAddress.addressCode_cons_mod_two' depends on axioms: [propext]
+'MatrixMortality.MixedPrimeMacroAddress.addressCode_append_cast_zmod_five' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.MixedPrimeMacroAddress.addressCode_injective_of_length_eq' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.MixedPrimeMacroAddress.expandAddress_wordAction_injective_of_length_eq' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeMacroAddress.expandAddress_wordAction_injective' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeMacroAddress.eq_replicate_of_addressOffset_eq' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.SquareRootPunctuation.coefficient_append_square' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
