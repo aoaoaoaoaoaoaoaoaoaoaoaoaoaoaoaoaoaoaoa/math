@@ -370,6 +370,7 @@ file owns the mathematical stock.
 | [`D2-S09`](#d2-s09-centered-lower-mantissa-recurrence) | structure theorem | the exact reverse mantissa address has one centered lower branch whose sole secondary cancellation wall is `v₂(b)=1` | formalized | active |
 | [`D2-S10`](#d2-s10-finite-secondary-wall-nucleus) | structure theorem | every consecutive unit secondary-wall orbit lies in a target-dependent finite rectangle and is eventually periodic | formalized | active |
 | [`D2-S11`](#d2-s11-absorbing-four-divisible-cone) | structure theorem | reduced mantissas with denominator divisible by four remain in that cone under every normalized reverse branch | formalized | active |
+| [`D2-S12`](#d2-s12-exact-wall-odd-two-cycle-family) | structure theorem | a sharp infinite depth family has unique guarded wall-to-odd two-cycles | formalized | active |
 | [`D2-D01`](#d2-d01-projectively-unimodular-stratum) | decidable stratum | projectively unimodular hard-core instances are decidable | audited | stock |
 | [`D2-D02`](#d2-d02-invariant-pair-stratum) | decidable stratum | invariant projective pairs reduce to effective multiplicative-subgroup membership | audited | graduated |
 | [`D2-D03`](#d2-d03-common-multiplier-stratum) | decidable stratum | rational affine maps with one multiplier are decidable under regular control | reported | active |
@@ -18560,6 +18561,84 @@ through the nonnegative two-adic cone.
 
 **Next:** classify wall-preserving upper runs and odd-denominator returns; an effective global
 quotient must control both rather than revisit the absorbing cone.
+
+### D2-S12: Exact wall-odd two-cycle family
+
+**Kind:** structure theorem and recurrent excursion family
+**Evidence:** formalized
+**Disposition:** active
+
+Fix either `n≥7` and `2≤m≤6`, or the exceptional boundary values `n=6` and `4≤m≤6`,
+and put
+
+```text
+P=3^(n−3),   Q=2^(n−1),   R=3^(m−2),   E=2^(m−2),
+H=25PR−QE,
+A=3R(15P+Q),   B=3P(5R+3E),
+μ=A/(2H),   ν=B/H.
+```
+
+Lean proves `H>0`. After dividing `A,H` and `B,H` by their respective gcds, `μ` is a reduced
+five-adic-unit secondary-wall coordinate with exact two-adic value `−1`, while `ν` has odd
+reduced denominator, is a five-adic unit, and lies in `(2/3,1]`. The wall coordinate lies in
+`(9/10,1]`. The two defining identities are
+
+```text
+ν = (P/Q)(10μ−9),
+μ = (R/(2E))(5ν−3).
+```
+
+In normalized band coordinates `U(d,ξ)=1/5+(3/10)(2/3)^dξ`, they become
+
+```text
+U(n,ν)=2μ/9,   U(m,μ)=ν/3.
+```
+
+The shell therefore closes with the exact waits
+
+```text
+T_(n−1)(U(m,μ)) = U(n,ν),
+T_(m−2)(U(n,ν)) = U(m,μ).
+```
+
+Every prefix of `[n−1,m−2]` satisfies the five-adic guard. Conversely, for fixed `n,m`,
+the two displayed affine equations have the unique rational solution `(μ,ν)` above. Thus this
+exhausts every immediate lower-to-odd-to-middle two-cycle with those depths.
+
+The boundary is sharp: for `3≤n≤6` and `2≤m≤6`, both mantissas are normalized exactly when
+`n=6` and `m≥4`. At fixed `m`, the wall mantissas for `n≥7` are strictly decreasing and converge
+to `9/10`. Hence there are infinitely many distinct guarded cycles, their first wait is
+unbounded, and their lower-depth states `U(n,ν)=2μ/9` converge to the excluded real-trap endpoint
+`1/5`. Literal
+finite SCC enumeration of the whole secondary wall therefore fails: the finite nucleus of
+[`D2-S10`](#d2-s10-finite-secondary-wall-nucleus) applies only while consecutive transitions
+remain on the wall. Any global quotient must collapse this family by a symbolic invariant rather
+than list its exact cyclic states.
+
+**Scope:** this classifies immediate lower/middle two-cycles. It does not classify longer odd
+excursions, wall-preserving upper runs, or a fixed-source/fixed-target fibre. The family remains
+parametric and may still admit an effective symbolic quotient.
+
+**Artifact:** `MixedPrimeDebt.wallOddCycleWallPair_isLowerWallMantissa`,
+`MixedPrimeDebt.wallOddCycleOddPair_data`, `MixedPrimeDebt.wallOddCycle_firstStep`,
+`MixedPrimeDebt.wallOddCycle_secondStep`, `MixedPrimeDebt.wallOddCycle_shellPrefixesUnit`,
+`MixedPrimeDebt.wallOddCycle_depthSix_wallPair_isLowerWallMantissa`,
+`MixedPrimeDebt.wallOddCycle_depthSix_oddPair_data`,
+`MixedPrimeDebt.wallOddCycle_depthSix_firstStep`,
+`MixedPrimeDebt.wallOddCycle_depthSix_secondStep`,
+`MixedPrimeDebt.wallOddCycle_depthSix_shellPrefixesUnit`,
+`MixedPrimeDebt.wallOddCycle_depthSix_mantissas_unique`,
+`MixedPrimeDebt.wallOddCycleWallMantissa_strictAnti`,
+`MixedPrimeDebt.wallOddCycleWallMantissa_tendsto_nineTenths`,
+`MixedPrimeDebt.wallOddCycleLowerState_tendsto_oneFifth`, and
+`MixedPrimeDebt.wallOddCycleMantissas_unique` in
+[`MixedPrimeRealTrapReturn.lean`](MatrixMortality/MixedPrimeRealTrapReturn.lean).
+
+**Use:** quotient this exact two-cycle schema before analyzing longer excursions. Reject global
+bounded-return-depth, finite literal cycle-census, and uniform return-margin arguments.
+
+**Next:** classify every exit from this family under a third predecessor and determine whether
+longer odd excursions reduce to finitely many symbolic return schemas.
 
 ### D2-O09: Guarded real-pole reset
 

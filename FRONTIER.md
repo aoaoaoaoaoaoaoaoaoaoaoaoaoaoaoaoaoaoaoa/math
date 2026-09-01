@@ -3656,6 +3656,15 @@ lower-wall under-cancellation enters this absorbing cone and cannot return; exac
 cancellation remains in the finite `D2-S10` nucleus. This is
 [`D2-S11`](SALVAGE.md#d2-s11-absorbing-four-divisible-cone). Only wall-preserving upper steps and
 lower over-cancellation into an odd denominator can participate in a recurrent excursion.
+Those odd exits are genuinely recurrent. For every `n≥7`, `2≤m≤6`, and also exactly the
+boundary pairs `n=6`, `4≤m≤6`, an explicit reduced five-adic-unit pair closes a guarded
+two-cycle with waits `[n−1,m−2]`. For each depth pair it is the unique solution of the
+lower/middle cycle equations. At fixed `m` the wall mantissas for `n≥7` form a
+strict infinite sequence converging to `9/10`, while the corresponding lower-depth states
+converge to the excluded endpoint `1/5`. This is
+[`D2-S12`](SALVAGE.md#d2-s12-exact-wall-odd-two-cycle-family). The finite literal SCC census of
+`D2-S10` cannot extend across excursions; the live target is a symbolic classifier for these
+two-cycles and every longer odd return, not another finite valuation box.
 The deepest of those three branches is itself a full depth reset. In normalized band coordinates
 `U(d,μ)=1/5+(3/10)(2/3)^dμ`, every target band `d≥2` contains a point whose `d−2` predecessor has
 any prescribed band `n≥7` and mantissa in `(2/3,1]`. An explicit guarded subfamily fixes target
@@ -3999,8 +4008,9 @@ universal computation.
    depth/unit modes do not contain it; attack that branch through exact mantissa arithmetic,
    guarded concatenation, or endpoint-coupled height. `D2-S10` classifies every consecutive
    reduced unit-wall segment inside a finite denominator-bounded rectangle and proves eventual
-   periodicity there; the live seam is excursion through another two-adic stratum and later
-   return, not further refinement of the wall-only graph.
+   periodicity there. `D2-S12` classifies every immediate lower/middle two-cycle and kills a
+   finite literal return census; quotient its depth-pair formula before attacking excursions
+   through another two-adic stratum and later return. Do not further refine the wall-only graph.
    Keep the non-elementary lanes independent: adelic cone types, parabolic rational subsets,
    trace/height descent, finite-obstruction saturation, and valuation universality.
 7. Synthesize the returned attacks by the discriminating signals above; do not average
