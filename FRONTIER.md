@@ -2562,6 +2562,12 @@ global affine-kernel class, or have different slopes and the source equals their
 collision source. This is [`D2-S17`](SALVAGE.md#d2-s17-fixed-endpoint-fibre-dichotomy). Thus the
 general fixed-endpoint search may quotient the balanced kernel grade by grade and send every
 cross-grade pair to one source equation before considering the target.
+For the same-length cross-grade branch, source acceptance is now one exact carry. If
+`Δ=|sum(u)−sum(v)|`, the slope difference has five-adic value `κ(Δ)−length`, where `κ` is zero
+for odd `Δ` and `1+v₅(Δ/2)` for even `Δ`. The collision source is a unit exactly when the
+intercept difference has that value. This is
+[`D2-S18`](SALVAGE.md#d2-s18-same-length-cross-grade-five-carry). The remaining same-length
+tasks are the common-target unit test and the fixed-source intercept equation.
 The deepest of those three branches is itself a full depth reset. In normalized band coordinates
 `U(d,μ)=1/5+(3/10)(2/3)^dμ`, every target band `d≥2` contains a point whose `d−2` predecessor has
 any prescribed band `n≥7` and mantissa in `(2/3,1]`. An explicit guarded subfamily fixes target
@@ -2874,9 +2880,10 @@ universal computation.
    periodic endpoints with global affine commutation and splits it into balanced-kernel and
    explicit collision-source fibres. `D2-S16` further turns any two-loop fibre into either a
    global power relation or an injective rank-two guarded loop family. `D2-S17` extends the
-   balanced-kernel/collision-source split to arbitrary fixed endpoint fibres. Abandon finite literal
-   return censuses and local
-   forbidden-factor grammars; attack those endpoint-coupled fibres. Treat chamber
+   balanced-kernel/collision-source split to arbitrary fixed endpoint fibres. `D2-S18` reduces
+   same-length cross-grade source acceptance to one explicit parity/LTE intercept carry. Abandon
+   finite literal return censuses and local forbidden-factor grammars; attack those
+   endpoint-coupled fibres. Treat chamber
    exit and reentry as separate pre-exit seams. Do not reopen
    unlabeled residue-only finite nuclei, valuation-only reverse bounds, one-sided endpoint bounds,
    or global real drift. Attack the pole branch through exact mantissa arithmetic, guarded

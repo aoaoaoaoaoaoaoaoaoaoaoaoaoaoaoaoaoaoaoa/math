@@ -58,6 +58,130 @@ theorem shellSlope_eq_iff_length_sum (left right : List ℕ) :
   · rintro ⟨length_eq, sum_eq⟩
     exact shellSlope_eq_of_length_sum length_eq sum_eq
 
+/-- Five-adic cancellation depth contributed by a nonzero gap between two total waits. -/
+def shellSlopeGapFiveDepth (gap : ℕ) : ℕ :=
+  if Odd gap then 0 else padicValNat 5 (gap / 2) + 1
+
+/-- Absolute gap between the total waits of two schedules. -/
+def shellSlopeSumGap (left right : List ℕ) : ℕ :=
+  max left.sum right.sum - min left.sum right.sum
+
+private theorem shellRatio_oddPower_sub_one_isUnit (halfExponent : ℕ) :
+    IsUnit 5 ((2 / 3 : ℚ) ^ (2 * halfExponent + 1) - 1) := by
+  have one_unit : IsUnit 5 (1 : ℚ) := ⟨one_ne_zero, padicValRat.one⟩
+  have two_unit : IsUnit 5 (2 : ℚ) := intCast_isUnit_of_not_dvd (by norm_num)
+  have three_unit : IsUnit 5 (3 : ℚ) := intCast_isUnit_of_not_dvd (by norm_num)
+  have ratio_unit : IsUnit 5 ((2 : ℚ) / 3) := div_hasValue two_unit three_unit
+  have base_difference_unit : IsUnit 5 ((2 / 3 : ℚ) - 1) := by
+    have negative_one_unit : IsUnit 5 (-1 : ℚ) := neg_hasValue one_unit
+    convert div_hasValue negative_one_unit three_unit using 1 <;> norm_num
+  by_cases half_zero : halfExponent = 0
+  · subst halfExponent
+    simpa using base_difference_unit
+  · have even_difference :=
+      shellRatio_evenMultiple_sub_one_hasValue halfExponent half_zero
+    have scaled_value := mul_hasValue ratio_unit even_difference
+    have scaled_positive :
+        IsPositive 5
+          ((2 / 3 : ℚ) * ((2 / 3 : ℚ) ^ (2 * halfExponent) - 1)) :=
+      ⟨scaled_value.1, by
+        rw [scaled_value.2]
+        have valuation_nonnegative : 0 ≤ padicValNat 5 halfExponent := by positivity
+        omega⟩
+    have sum_unit := unit_add_positive base_difference_unit scaled_positive
+    convert sum_unit using 1
+    rw [pow_add]
+    ring
+
+/-- The five-adic depth of a nonzero shell-ratio power gap depends only on its parity and the
+valuation of half the gap. -/
+theorem shellRatio_pow_sub_one_hasValue
+    {gap : ℕ} (gap_positive : 0 < gap) :
+    HasValue 5 ((2 / 3 : ℚ) ^ gap - 1) (shellSlopeGapFiveDepth gap) := by
+  rcases Nat.even_or_odd gap with gap_even | gap_odd
+  · have gap_not_odd : ¬Odd gap := Nat.not_odd_iff_even.mpr gap_even
+    have half_positive : 0 < gap / 2 := by
+      have reconstruction := Nat.two_mul_div_two_of_even gap_even
+      omega
+    have even_value :=
+      shellRatio_evenMultiple_sub_one_hasValue (gap / 2) (Nat.ne_of_gt half_positive)
+    have reconstruction := Nat.two_mul_div_two_of_even gap_even
+    rw [reconstruction] at even_value
+    rw [shellSlopeGapFiveDepth, if_neg gap_not_odd]
+    convert even_value using 1
+    norm_num
+  · have reconstruction := Nat.two_mul_div_two_add_one_of_odd gap_odd
+    have odd_unit := shellRatio_oddPower_sub_one_isUnit (gap / 2)
+    have odd_value :
+        HasValue 5 ((2 / 3 : ℚ) ^ (2 * (gap / 2) + 1) - 1) (0 : ℤ) := odd_unit
+    rw [reconstruction] at odd_value
+    rw [shellSlopeGapFiveDepth, if_pos gap_odd]
+    simpa using odd_value
+
+private theorem shellSlope_sub_hasValue_five_of_sum_lt
+    {left right : List ℕ} (length_eq : left.length = right.length)
+    (sum_lt : left.sum < right.sum) :
+    HasValue 5 (shellSlope left - shellSlope right)
+      ((shellSlopeGapFiveDepth (right.sum - left.sum) : ℤ) - left.length) := by
+  let gap := right.sum - left.sum
+  have gap_positive : 0 < gap := Nat.sub_pos_of_lt sum_lt
+  have sum_split : right.sum = left.sum + gap := by
+    dsimp only [gap]
+    omega
+  have slope_factor :
+      shellSlope right = shellSlope left * (2 / 3 : ℚ) ^ gap := by
+    rw [shellSlope_eq_length_sum, shellSlope_eq_length_sum, length_eq, sum_split, pow_add]
+    ring
+  have left_value := shellSlope_hasValue_five left
+  have gap_value := neg_hasValue (shellRatio_pow_sub_one_hasValue gap_positive)
+  have product_value := mul_hasValue left_value gap_value
+  convert product_value using 1
+  · rw [slope_factor]
+    ring
+  · ring
+
+/-- For equal-length schedules with different total waits, the exact five-adic value of the
+slope difference is the parity/LTE carry of their absolute wait gap minus their common length. -/
+theorem shellSlope_sub_hasValue_five_of_sameLength
+    {left right : List ℕ} (length_eq : left.length = right.length)
+    (sum_ne : left.sum ≠ right.sum) :
+    HasValue 5 (shellSlope left - shellSlope right)
+      ((shellSlopeGapFiveDepth (shellSlopeSumGap left right) : ℤ) - left.length) := by
+  rcases lt_or_gt_of_ne sum_ne with sum_lt | sum_gt
+  · have value := shellSlope_sub_hasValue_five_of_sum_lt length_eq sum_lt
+    simpa [shellSlopeSumGap, Nat.max_eq_right sum_lt.le,
+      Nat.min_eq_left sum_lt.le] using value
+  · have value := shellSlope_sub_hasValue_five_of_sum_lt length_eq.symm sum_gt
+    have negative_value := neg_hasValue value
+    convert negative_value using 1
+    · ring
+    · simp [shellSlopeSumGap, Nat.max_eq_left sum_gt.le,
+        Nat.min_eq_right sum_gt.le]
+      exact length_eq
+
+/-- In the same-length cross-grade fibre, the collision source is a five-adic unit exactly when
+the cleared intercept gap cancels to the slope gap's parity/LTE depth. -/
+theorem sameLengthCollisionSource_fiveUnit_iff
+    {left right : List ℕ} (length_eq : left.length = right.length)
+    (sum_ne : left.sum ≠ right.sum) :
+    IsUnit 5 (collisionSource left right) ↔
+      HasValue 5 (shellIntercept right - shellIntercept left)
+        ((shellSlopeGapFiveDepth (shellSlopeSumGap left right) : ℤ) - left.length) := by
+  have denominator_value :=
+    shellSlope_sub_hasValue_five_of_sameLength length_eq sum_ne
+  constructor
+  · intro source_unit
+    have product_value := mul_hasValue source_unit denominator_value
+    have product_eq :
+        collisionSource left right * (shellSlope left - shellSlope right) =
+          shellIntercept right - shellIntercept left := by
+      rw [collisionSource]
+      exact div_mul_cancel₀ _ denominator_value.1
+    rw [product_eq] at product_value
+    simpa using product_value
+  · intro numerator_value
+    simpa [collisionSource] using div_hasValue numerator_value denominator_value
+
 private theorem shellSlope_ne_one {waits : List ℕ} (waits_ne : waits ≠ []) :
     shellSlope waits ≠ 1 := by
   have length_ne : waits.length ≠ ([] : List ℕ).length := by
