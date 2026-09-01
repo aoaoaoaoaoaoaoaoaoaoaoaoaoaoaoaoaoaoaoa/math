@@ -1672,10 +1672,19 @@ true-readers erase the clock baseline, and splitting the existing endpoint bridg
 first positive wait converts the surviving translation into a nonzero scalar multiple of the
 singular return. The resulting physical word is zero exactly when every guessed bit matches its
 writer. What remains is global syntax, not local comparison: an arbitrary raw wait word may omit
-or split a clocked block, use the wrong cleanup multiplicity, or reach an unrelated zero. The
-compiler lane now needs an arbitrary-word converse or a guard forcing this block grammar. See
+or split a clocked block, or reach an unrelated zero. The cleanup multiplicity itself is now
+self-checking. With `n` clocks and `m` cleanup readers, the split endpoint bridge forces an affine
+balance equation. Its right side has odd `5`-adic valuation when `n>m` and odd `2`-adic valuation
+when `m>n`, while every nonzero signed mismatch radix has even valuation at both primes. Hence
+zero forces `m=n` and then forces every comparison to match. The fixed family already contains
+an unconditional endpoint zero, so this remains a local semigroup gadget rather than a reduction
+for that fixed instance. The compiler lane needs instance-dependent target geometry together
+with an arbitrary-word block converse or an independent control phase. See
 [`R32-S59`](SALVAGE.md#r32-s59-clocked-cubic-radix-comparator) and
-[`m32-cubic-continuant-mismatch-clock-2026-08-31.md`](audits/m32-cubic-continuant-mismatch-clock-2026-08-31.md).
+[`R32-S60`](SALVAGE.md#r32-s60-self-balancing-cubic-comparator-cleanup), with audits
+[`m32-cubic-continuant-mismatch-clock-2026-08-31.md`](audits/m32-cubic-continuant-mismatch-clock-2026-08-31.md)
+and
+[`m32-cubic-continuant-self-balance-2026-08-31.md`](audits/m32-cubic-continuant-self-balance-2026-08-31.md).
 
 ### ReturnSquare laboratory
 

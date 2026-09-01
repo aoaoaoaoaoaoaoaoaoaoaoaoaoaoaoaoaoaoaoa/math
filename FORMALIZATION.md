@@ -996,6 +996,18 @@ bit, and every interior wait is positive. This is a sound comparator for that ba
 not an arbitrary-word compiler converse. See `R32-S59` and
 [`audits/m32-cubic-continuant-mismatch-clock-2026-08-31.md`](audits/m32-cubic-continuant-mismatch-clock-2026-08-31.md).
 
+`CubicContinuantSelfBalance` removes the exact-cleanup assumption. For `n` checks and an
+arbitrary cleanup count `m`, Lean computes the remaining affine ratio and shift and reduces
+endpoint vanishing to one rational balance equation. Every nonzero signed radix has even
+`5`-adic and `2`-adic valuation. A deficient cleanup suffix gives the equation's other side odd
+`5`-adic valuation; an excess suffix gives it odd `2`-adic valuation. Hence the endpoint bridge
+self-enforces `m=n`, after which the signed-radix theorem forces every check to match. The final
+physical theorem retains every nonzero projective scale and proves positivity of every interior
+wait. It still assumes complete clocked check blocks, and the fixed family is already mortal by
+an unconditional bridge, so an instance-dependent target and a raw-word control phase remain
+necessary. See `R32-S60` and
+[`audits/m32-cubic-continuant-self-balance-2026-08-31.md`](audits/m32-cubic-continuant-self-balance-2026-08-31.md).
+
 The rank-(2,2) graph is no longer an independent residue. `RankTwoPunctuation` proves that every
 compatible square with one rank-one loop and three units transports exactly to the existing raw
 reverse compiler [`R32-M01`](SALVAGE.md#r32-m01-generic-reverse-edge-compiler). Its intrinsic
@@ -1836,6 +1848,7 @@ fixed-rank decision problem.
 | `CubicContinuantRadix.lean` | free binary affine radix stack inside the fixed non-pure cubic terminal language |
 | `CubicContinuantReader.lean` | positive projective inverses for both cubic radix letters and the exact opposite-mismatch cancellation |
 | `CubicContinuantMismatchClock.lean` | contracting signed-error clock and exact endpoint zero test for balanced cubic radix comparisons |
+| `CubicContinuantSelfBalance.lean` | 2-adic and 5-adic rejection of every incorrect cubic-comparator cleanup count |
 | `EdgeCompression.lean` | exact adjacent-edge compression for split finite-rank families |
 | `TwoPlaneEdges.lean` | compatible two-plane realization of a `2 × 2` edge square and exact rank-two certificates |
 | `ReverseEdge.lean` | generic projective-incidence reverse compiler, basis adaptation, and all-path converse |

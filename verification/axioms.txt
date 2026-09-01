@@ -1240,10 +1240,28 @@
 'MatrixMortality.CubicReturn.NonPure.continuantRadixReaderWord_two_mismatches' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.continuantMismatchCode_zero_forces_all_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.continuantMismatchDefect_eq_scaledCode' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.continuantMismatchDefect_eq_zero_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.CubicReturn.NonPure.continuantReadError_eq_zero_iff' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.continuantReadErrors_range' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.CubicReturn.NonPure.continuantReadDefect_eq_zero_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.continuantClockedReadWord_projectivelyRealizes' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.continuantClockedReadWords_projectivelyRealize' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
 'MatrixMortality.CubicReturn.NonPure.continuantBalancedReadWord_projectivelyRealizes' depends on axioms: [propext,
@@ -1256,6 +1274,24 @@
  Classical.choice,
  Quot.sound]
 'MatrixMortality.CubicReturn.NonPure.continuantCheckedZeroWord_zero_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.continuantMismatchBalanceEquation_forces' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.continuantMismatchBridge_detects_affine' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.continuantMismatchBridge_zero_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.continuantReadWordWithCleanup_projectivelyRealizes' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.continuantReadWordWithCleanup_positive' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.continuantCheckedZeroWordWithCleanup_zero_iff' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
 'MatrixMortality.EdgeCompression.isMortal_iff_exists_edgeProduct_eq_zero' depends on axioms: [propext,
