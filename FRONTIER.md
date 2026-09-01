@@ -1266,6 +1266,15 @@ state to the physical shell hypotheses consumed by `MM-S67` and the separate sin
 extinctions. Primitive-recursive emission of the cleared integer family remains independently
 unproved.
 
+[`MM-S77`](SALVAGE.md#mm-s77-shallow-generalized-raw-head-adapter) now closes that adapter's
+algebraic and unit-shell half for a one-block root. If `H` is the full punctuated source upper
+code and `Δ=μ·10^|upper|−H`, the shallow pole is exactly
+`gap(10^β)·P·H=lift(10^β)·V·Δ`; parser law forces `H` and `Δ` to be decimal units, ending in
+digits seven and three. The remaining shallow seam is structural rather than shell-theoretic:
+`MM-S67` assumes a peeled two-`c` head and complement `10μ−H`, while the arbitrary parser root
+has neither form. Prove a genuine ancestry normalization or attack the generalized equation
+directly; do not silently substitute one head for the other.
+
 The ternary and decimal branches now separate at their first multi-transfer front.
 [`MM-S37`](SALVAGE.md#mm-s37-decimal-three-shape-frontier-extinction) substitutes each of the
 three role shapes left by the swapped ternary gate into the decimal carrier equation. All are

@@ -77,39 +77,6 @@ private theorem modEq_fourHundredEighty_hasValue_five
   rw [value_eq, Int.cast_mul]
   simpa using mul_hasValue five_hasDecimalShell.2 unit_shell
 
-private theorem intCast_hasDecimalShell_of_mod_seven
-    {value : ℤ} (value_mod : value ≡ 7 [ZMOD 10]) :
-    HasDecimalShell (value : ℚ) 0 0 := by
-  rw [Int.modEq_iff_dvd] at value_mod
-  obtain ⟨carry, carry_eq⟩ := value_mod
-  have value_eq : value = 7 - 10 * carry := by omega
-  refine ⟨intCast_isUnit_of_not_dvd ?_, intCast_isUnit_of_not_dvd ?_⟩
-  · rw [value_eq]
-    rintro ⟨quotient, quotient_eq⟩
-    omega
-  · rw [value_eq]
-    rintro ⟨quotient, quotient_eq⟩
-    omega
-
-private theorem intCast_hasDecimalShell_of_mod_three
-    {value : ℤ} (value_mod : value ≡ 3 [ZMOD 10]) :
-    HasDecimalShell (value : ℚ) 0 0 := by
-  rw [Int.modEq_iff_dvd] at value_mod
-  obtain ⟨carry, carry_eq⟩ := value_mod
-  have value_eq : value = 3 - 10 * carry := by omega
-  refine ⟨intCast_isUnit_of_not_dvd ?_, intCast_isUnit_of_not_dvd ?_⟩
-  · rw [value_eq]
-    rintro ⟨quotient, quotient_eq⟩
-    omega
-  · rw [value_eq]
-    rintro ⟨quotient, quotient_eq⟩
-    omega
-
-private theorem code_append_false_mod_ten (stem : List Bool) :
-    (code (stem ++ [false]) : ℤ) ≡ 7 [ZMOD 10] := by
-  rw [code_append]
-  norm_num [code, digit, Nat.ofDigits]
-
 private theorem count_b_replicate_c (width : Nat) :
     (List.replicate width TagLetter.c).count TagLetter.b = 0 := by
   induction width with
