@@ -261,6 +261,7 @@ file owns the mathematical stock.
 | [`D2-S10`](#d2-s10-finite-secondary-wall-nucleus) | structure theorem | every consecutive unit secondary-wall orbit lies in a target-dependent finite rectangle and is eventually periodic | formalized | active |
 | [`D2-S11`](#d2-s11-absorbing-four-divisible-cone) | structure theorem | reduced mantissas with denominator divisible by four remain in that cone under every normalized reverse branch | formalized | active |
 | [`D2-S12`](#d2-s12-exact-wall-odd-two-cycle-family) | structure theorem | a sharp infinite depth family has unique guarded wall-to-odd two-cycles | formalized | active |
+| [`D2-S13`](#d2-s13-guarded-upper-run-cycles-of-every-period) | structure theorem | explicit wall-odd upper-run families realize guarded primitive cycles of every period at least three | formalized | active |
 | [`D2-S14`](#d2-s14-arbitrary-body-wall-excursion-saturation) | structure theorem | every finite wait word occurs inside a guarded wall-anchored periodic excursion | formalized | active |
 | [`D2-S15`](#d2-s15-fixed-endpoint-centralizer-reduction) | reduction | equality of nonempty shell periodic points is exactly global affine commutation, split by the slope fibre | formalized | active |
 | [`D2-S16`](#d2-s16-periodic-centralizer-determinant-fork) | structure theorem | two common-source loops force either a global power relation or an injective `ℕ²` family of guarded loops | formalized | active |
@@ -11958,8 +11959,66 @@ parametric and may still admit an effective symbolic quotient.
 **Use:** quotient this exact two-cycle schema before analyzing longer excursions. Reject global
 bounded-return-depth, finite literal cycle-census, and uniform return-margin arguments.
 
-**Next:** classify every exit from this family under a third predecessor and determine whether
-longer odd excursions reduce to finitely many symbolic return schemas.
+**Next:** [`D2-S13`](#d2-s13-guarded-upper-run-cycles-of-every-period) supplies the complete
+upper-run extension. Classify fixed-source fibres across its depth and period parameters.
+
+### D2-S13: Guarded upper-run cycles of every period
+
+**Kind:** structure theorem and periodic-saturation obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+Fix a lower depth `n≥7`, middle depth `2≤m≤6`, and upper-run length `r≥0`. Lean constructs
+explicit rational mantissas for the reverse-branch itinerary
+
+```text
+L_n, U₀^r, U₁, M_m
+```
+
+and the chronological shell schedule
+
+```text
+[0]^(r+1) ++ [n,m−2].
+```
+
+The wall mantissa lies in `(9/10,1)`. The first and second odd-phase mantissas lie in
+`(2/3,1)`, the last upper mantissa lies in `(2/3,4/5)`, and every earlier upper mantissa lies
+in `(4/5,1)`. Exact affine identities prove every displayed lower, upper, and middle transition,
+including every intermediate zero-wait upper step and the final return to the wall state.
+
+The wall mantissa has exact two-adic value `−1`; every odd and upper mantissa has nonnegative
+two-adic value, while the middle center has the exact value `m−2`. Every prefix state is a
+five-adic unit. Thus the entire orbit stays inside the normalized guarded real-trap dynamics,
+not merely the four distinguished boundary phases.
+
+The `r+3` phases are distinct. Upper mantissas are strictly decreasing with their index, upper
+states are injective and disjoint from all distinguished wall/odd states, and no positive proper
+prefix of the schedule returns to the source. Specializing `n=7`, `m=2`, and `r=p−3` therefore
+gives a guarded primitive cycle of exact period `p` for every `p≥3`. Together with the period-one
+and period-two families already in `D2-S09` and `D2-S12`, the real trap supports every positive
+period.
+
+**Scope:** this is an explicit three-parameter family, not a classification of every periodic
+orbit or a fixed-source fibre. The period varies with the source. Arbitrarily long primitive
+cycles do not by themselves rule out a symbolic or automata-theoretic quotient that identifies
+their formula.
+
+**Artifact:** `MixedPrimeDebt.wallOddUpperFamilySchedule`,
+`MixedPrimeDebt.wallOddUpperFamily_cycle`,
+`MixedPrimeDebt.wallOddUpperFamily_shellPrefixesUnit`,
+`MixedPrimeDebt.wallOddUpperFamilyUpperMantissa_normalized`,
+`MixedPrimeDebt.wallOddUpperFamilyUpperMantissa_twoNonnegative`,
+`MixedPrimeDebt.wallOddUpperFamily_no_early_return`, and
+`MixedPrimeDebt.exists_guarded_wallCycle_exact_period` in
+[`MixedPrimeRealTrapUpperCycles.lean`](MatrixMortality/MixedPrimeRealTrapUpperCycles.lean) and
+[`MixedPrimeRealTrapUpperCyclePeriods.lean`](MatrixMortality/MixedPrimeRealTrapUpperCyclePeriods.lean).
+
+**Use:** reject any global bounded-period, finite literal cycle-census, or eventual fixed-period
+argument for the real-trap shell. Quotient this family by its three symbolic parameters before
+searching periodic endpoint fibres.
+
+**Next:** determine when two parameter triples share one rational wall source or target. Combine
+the explicit mantissa formulas with the centralizer and suffix-antichain cuts of `D2-S15`–`D2-S20`.
 
 ### D2-S14: Arbitrary-body wall-excursion saturation
 

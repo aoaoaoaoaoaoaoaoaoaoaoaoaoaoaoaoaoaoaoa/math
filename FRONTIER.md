@@ -2535,6 +2535,13 @@ converge to the excluded endpoint `1/5`. This is
 [`D2-S12`](SALVAGE.md#d2-s12-exact-wall-odd-two-cycle-family). The finite literal SCC census of
 `D2-S10` cannot extend across excursions; the live target is a symbolic classifier for these
 two-cycles and every longer odd return, not another finite valuation box.
+The longer upper-run branch is now explicit. For every `n≥7`, `2≤m≤6`, and `r≥0`, the itinerary
+`L_n,U₀^r,U₁,M_m` closes a guarded primitive cycle of exact period `r+3`, with every intermediate
+mantissa, branch interval, two-adic phase, and five-adic prefix guard checked. In particular the
+real trap has primitive cycles of every period at least three. This is
+[`D2-S13`](SALVAGE.md#d2-s13-guarded-upper-run-cycles-of-every-period). Literal period bounds and
+finite cycle lists are therefore dead; the family must be collapsed symbolically or coupled to
+a fixed endpoint.
 In fact the schedule word itself has no restrictive local grammar. For arbitrary finite `E`,
 every wrapped word `[a]++E++[c]` with `c≥7` has a guarded periodic source `x∈(1/5,2/9]` whose
 mantissa `9x/2` lies exactly on the reduced unit wall; the first step is its lower predecessor.
@@ -2886,7 +2893,8 @@ universal computation.
    infinite seam, while `D2-O08` saturates target-only reverse length inside the real trap and
    `D2-S04` replaces its local reverse fan by a sharp ternary nucleus. `D2-O09` then localizes
    every unbounded Archimedean reset to the deepest branch and proves that fixed depth/unit modes
-   do not contain it. `D2-S12` classifies every immediate lower/middle two-cycle, while `D2-S14`
+   do not contain it. `D2-S12` classifies every immediate lower/middle two-cycle, `D2-S13`
+   realizes primitive guarded cycles of every period through exact upper runs, and `D2-S14`
    embeds every finite wait body in a guarded wall excursion. `D2-S15` identifies equality of
    periodic endpoints with global affine commutation and splits it into balanced-kernel and
    explicit collision-source fibres. `D2-S16` further turns any two-loop fibre into either a
