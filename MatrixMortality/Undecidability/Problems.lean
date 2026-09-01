@@ -197,6 +197,9 @@ abbrev Mortality35 := MortalityProblem 3 5
 /-- Four labelled `4 × 4` integer matrices. -/
 abbrev Mortality44 := MortalityProblem 4 4
 
+/-- Two labelled `9 × 9` integer matrices. -/
+abbrev Mortality92 := MortalityProblem 9 2
+
 /-- Two labelled `10 × 10` integer matrices. -/
 abbrev Mortality102 := MortalityProblem 10 2
 
