@@ -249,22 +249,12 @@ theorem witness_prefixDiscrepancy_and_braidResidual_not_dvd_three
           witness.initialCylinderQuotient antecedentDenominator := by
   obtain ⟨multiplier, properties, -⟩ :=
     existsUnique_targetMultiplier_braid width_pos current_primitive threshold witness
-  have charge_not_dvd :=
-    witness_targetCharge_not_dvd_three width_pos witness current_primitive
   have prefix_not_dvd :
-      ¬(3 : ℤ) ∣ targetPrefixDiscrepancy width body target witness.front := by
-    rw [properties.2.2.2.2.1]
-    intro product_dvd
-    rcases (by norm_num : Prime (3 : ℤ)).dvd_mul.mp product_dvd with
-      multiplier_dvd | charge_dvd
-    · exact properties.2.1 multiplier_dvd
-    · exact charge_not_dvd charge_dvd
-  have depth_one :=
-    prefixDiscrepancy_dvd_iff width_pos witness properties.2.1
-      properties.2.2.2.2.2.2 1
-  have divisor_eq : (3 : ℤ) ^ 1 = 3 := by norm_num
-  rw [divisor_eq] at depth_one
-  exact ⟨prefix_not_dvd, fun residual_dvd => prefix_not_dvd (depth_one.mpr residual_dvd)⟩
+      ¬(3 : ℤ) ∣ targetPrefixDiscrepancy width body target witness.front :=
+    targetPrefixDiscrepancy_not_dvd_three width body target witness.front
+  have residual_not_dvd :=
+    predecessorBraidResidual_not_dvd_three witness properties.2.2.2.2.2.2
+  exact ⟨prefix_not_dvd, residual_not_dvd⟩
 
 /-- The first unequal discarded ternary digit fixes the charge residue. An empty lower prefix
 gives `q ≡ d`; every nonempty lower prefix ends in `false` and gives `q ≡ −d`. -/

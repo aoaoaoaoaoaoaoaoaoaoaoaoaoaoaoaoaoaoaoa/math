@@ -6048,11 +6048,11 @@ Substitution into the `MM-S73` charge braid and cancellation of `3^β−1` yield
 u₀u₁u₂Δ = −2μHλ(2μk₀+u₀d₀).                              (2)
 ```
 
-Consequently `Δ` and the predecessor braid residual have identical divisibility by every power
-of three and equal integer three-adic valuations. The final ternary digit makes `q₂` a unit:
-the upper discarded prefix ends in `true`, while the lower prefix is empty or ends in `false`.
-Thus `q₂`, the intervening numerator charge, the middle affine charge, `Δ`, and the predecessor
-braid residual are all indivisible by three.
+The terminal unequal digit makes `Δ` a unit without any carrier or pole hypothesis: the upper
+discarded prefix ends in `true`, while the lower prefix is empty or ends in `false`. Equation (2)
+therefore forces the predecessor braid residual to be a unit. Equation (1) and the exact charge
+chain then show that `q₂`, the intervening numerator charge, and the middle affine charge are
+also indivisible by three. No positive three-adic depth is transported here.
 
 Transporting that first unequal digit backward through both physical `D_c` denominator
 recurrences and the initial role-block denominator gives exactly two arms:
