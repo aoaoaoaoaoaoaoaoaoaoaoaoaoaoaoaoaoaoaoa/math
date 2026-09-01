@@ -23,7 +23,7 @@ def falseWaitReadableSelectorLeftCounts : ContinuantTerminalTranslationCounts :=
 
 /-- Translation to the right of the height-five terminal writer. -/
 def falseWaitReadableSelectorRightCounts : ContinuantTerminalTranslationCounts :=
-  ⟨0, 0, 874404, 4846250⟩
+  ⟨205, 12, 2236, 500⟩
 
 /-- Short positive realization of the inverse source-return shift `41/90`. -/
 def falseWaitReadableSelectorCancellationCounts :
@@ -477,9 +477,9 @@ theorem falseWaitReadableSelectorLeftWord_length :
     continuantTerminalTranslationWord_length]
   norm_num [falseWaitReadableSelectorLeftCounts]
 
-/-- The right height translation has length `199,422,542`. -/
+/-- The right height translation has length `76,486`. -/
 theorem falseWaitReadableSelectorRightWord_length :
-    falseWaitReadableSelectorRightWord.length = 199422542 := by
+    falseWaitReadableSelectorRightWord.length = 76486 := by
   rw [falseWaitReadableSelectorRightWord,
     continuantTerminalTranslationWord_length]
   norm_num [falseWaitReadableSelectorRightCounts]
@@ -491,15 +491,15 @@ theorem falseWaitReadableSelectorCancellationWord_length :
     continuantTerminalTranslationWord_length]
   norm_num [falseWaitReadableSelectorCancellationCounts]
 
-/-- The positive one-probe selector has length `734,916,756`. -/
+/-- The positive one-probe selector has length `535,570,700`. -/
 theorem falseWaitOneProbeSelectorWord_length :
-    falseWaitOneProbeSelectorWord.length = 734916756 := by
+    falseWaitOneProbeSelectorWord.length = 535570700 := by
   have short_length : falseWaitFirstHitSingletonPrefix.length = 4 := by
     rfl
   have height_length : falseWaitReadableSelectorHeightWord.length = 5 := by
     rw [falseWaitReadableSelectorHeightWord, continuantRepeatWord_length]
     norm_num [continuantRadixWord]
-  have middle_length : falseWaitReadableSelectorMiddleWord.length = 659079433 := by
+  have middle_length : falseWaitReadableSelectorMiddleWord.length = 459733377 := by
     calc
       falseWaitReadableSelectorMiddleWord.length =
           falseWaitReadableSelectorLeftWord.length +
@@ -510,12 +510,12 @@ theorem falseWaitOneProbeSelectorWord_length :
           (falseWaitReadableSelectorHeightWord.length +
             falseWaitReadableSelectorRightWord.length) := by
             rw [List.length_append]
-      _ = 659079433 := by
+      _ = 459733377 := by
             rw [falseWaitReadableSelectorLeftWord_length,
               height_length, falseWaitReadableSelectorRightWord_length]
   have connector_length :
       (falseWaitFirstHitRayTransportWord
-        falseWaitReadableSelectorMiddleWord).length = 659079437 := by
+        falseWaitReadableSelectorMiddleWord).length = 459733381 := by
     calc
       (falseWaitFirstHitRayTransportWord
             falseWaitReadableSelectorMiddleWord).length =
@@ -527,7 +527,7 @@ theorem falseWaitOneProbeSelectorWord_length :
             falseWaitReadableSelectorMiddleWord.length) +
           falseWaitFirstHitRayTransportTail.length := by
             rw [List.length_append]
-      _ = 659079437 := by
+      _ = 459733381 := by
             rw [middle_length]
             norm_num [falseWaitFirstHitRayTransportHead,
               falseWaitFirstHitRayTransportTail]
@@ -543,14 +543,14 @@ theorem falseWaitOneProbeSelectorWord_length :
         (falseWaitFirstHitRayTransportWord
           falseWaitReadableSelectorMiddleWord).length := by
           rw [List.length_append]
-    _ = 734916756 := by
+    _ = 535570700 := by
           rw [short_length, falseWaitReadableSelectorPreWord_length,
             connector_length]
 
-/-- The complete gate has length `735,077,869+4|β|`. -/
+/-- The complete gate has length `535,731,813+4|β|`. -/
 theorem falseWaitReadableSourceSelectorWord_length (bits : List Bool) :
     (falseWaitReadableSourceSelectorWord bits).length =
-      735077869 + 4 * bits.length := by
+      535731813 + 4 * bits.length := by
   calc
     (falseWaitReadableSourceSelectorWord bits).length =
         falseWaitOneProbeSelectorWord.length +
@@ -561,7 +561,7 @@ theorem falseWaitReadableSourceSelectorWord_length (bits : List Bool) :
         (falseWaitReadableSelectorCancellationWord.length +
           (falseWaitReadableSourceMemoryWord bits).length) := by
           rw [List.length_append]
-    _ = 735077869 + 4 * bits.length := by
+    _ = 535731813 + 4 * bits.length := by
           rw [falseWaitOneProbeSelectorWord_length,
             falseWaitReadableSelectorCancellationWord_length,
             falseWaitReadableSourceMemoryWord_length]

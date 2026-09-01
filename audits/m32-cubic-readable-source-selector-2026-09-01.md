@@ -40,8 +40,8 @@ vector `(769,21,1669,750)` realizes `T(41/90)` with a positive word of length `8
 product is a nonzero projective identity. Inserting this cancellation word extends the singleton
 theorem to the full memory family.
 
-The selector itself has length `734,916,756`; the complete gate has length
-`735,077,869+4|β|`. Every wait is positive. Prefixing an address by the selected marker gives the
+The selector itself has length `535,570,700`; the complete gate has length
+`535,731,813+4|β|`. Every wait is positive. Prefixing an address by the selected marker gives the
 exact sentinel law
 
 ```text

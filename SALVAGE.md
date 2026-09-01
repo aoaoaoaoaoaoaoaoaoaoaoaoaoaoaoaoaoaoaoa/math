@@ -5810,11 +5810,11 @@ up to a nonzero scalar. The complete gate therefore satisfies the same biconditi
 full `R32-S76` readable-memory word.
 
 All count vectors are nonnegative and use only the four established positive translation blocks.
-The selector has length `734,916,756`; the cancellation word has length `89,921`; and the complete
+The selector has length `535,570,700`; the cancellation word has length `89,921`; and the complete
 gate has length
 
 ```text
-735077869 + 4|β|.                                           (4)
+535731813 + 4|β|.                                           (4)
 ```
 
 Finally, feeding the address `00++payload` into the gate turns `00` into a sentinel:

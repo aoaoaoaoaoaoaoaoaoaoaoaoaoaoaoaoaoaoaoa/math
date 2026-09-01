@@ -1190,7 +1190,7 @@ gate. Exact terminal translations around `G₀⁵`, preceded by one translated r
 the annihilator of the one-wait source coordinate at address `00`. Coordinate injectivity gives a
 physical singleton biconditional over all binary addresses. A separate positive `T(41/90)` word
 cancels the fixed source-return prefix, extending the gate to the complete readable-memory words.
-Lean also proves positivity, exact length `735,077,869+4|β|`, and the marker corollary that the gate
+Lean also proves positivity, exact length `535,731,813+4|β|`, and the marker corollary that the gate
 on `00++payload` vanishes exactly for an empty payload. See `R32-S78` and
 [`audits/m32-cubic-readable-source-selector-2026-09-01.md`](audits/m32-cubic-readable-source-selector-2026-09-01.md).
 
