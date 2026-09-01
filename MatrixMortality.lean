@@ -37,6 +37,7 @@ import MatrixMortality.CubicContinuantReadableSourceSelector
 import MatrixMortality.CubicReadableMonotoneComparator
 import MatrixMortality.CubicFalsePumpInverseConnector
 import MatrixMortality.CubicTruePumpInverseConnector
+import MatrixMortality.CubicBinaryPumpExactComparator
 import MatrixMortality.CyclicBinaryBoundary
 import MatrixMortality.EdgeCompression
 import MatrixMortality.TwoPlaneEdges

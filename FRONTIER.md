@@ -1934,6 +1934,16 @@ syntax. See
 [`R32-S81`](SALVAGE.md#r32-s81-positive-projective-pop-for-the-true-transverse-pump) and
 [`m32-cubic-true-pump-inverse-2026-09-01.md`](audits/m32-cubic-true-pump-inverse-2026-09-01.md).
 
+Algebraic word comparison is now exact at arbitrary depth. Reverse the positive inverse spelling
+of every guessed bit, place all such readers before the forward transverse writer word, and ask
+whether the complete physical product is projectively identity. Lean proves this holds exactly
+when the guessed and written bit strings agree. The converse is inherited from projective
+freeness, so no opposite mismatch or affine-group relation survives the phase restriction.
+The unresolved boundary is entirely operational: the comparator must be protected from internal
+first hits, and arbitrary raw words must be forced into the reader-then-writer phase language.
+See [`R32-S82`](SALVAGE.md#r32-s82-exact-phased-transverse-word-comparator) and
+[`m32-cubic-binary-pump-comparator-2026-09-01.md`](audits/m32-cubic-binary-pump-comparator-2026-09-01.md).
+
 ### ReturnSquare laboratory
 
 [`R32-S03`](SALVAGE.md#r32-s03-returnsquare-normal-form) is the first completely normalized

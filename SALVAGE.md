@@ -154,6 +154,7 @@ file owns the mathematical stock.
 | [`R32-S79`](#r32-s79-monotone-readable-memory-comparator) | compiler mechanism | positive mismatch corrections turn every wrong read into the same unit translation, so one physical gate accepts exactly an empty payload and a wholly matching schedule | formalized | active |
 | [`R32-S80`](#r32-s80-positive-projective-pop-for-the-false-transverse-pump) | compiler mechanism and obstruction | an alternative positive connector realizes an exact two-sided inverse of the false transverse pump, but its final bridge lands on the accepting ray | formalized | active |
 | [`R32-S81`](#r32-s81-positive-projective-pop-for-the-true-transverse-pump) | compiler mechanism and obstruction | a finite positive word realizes the exact two-sided inverse of the true transverse pump, while a generic theorem excludes every terminal-`e₀` connector from first-hit-safe use | formalized | active |
+| [`R32-S82`](#r32-s82-exact-phased-transverse-word-comparator) | compiler mechanism | reverse positive readers followed by forward writers form a projective identity exactly when the guessed and written binary words agree | formalized | active |
 | [`R32-M01`](#r32-m01-generic-reverse-edge-compiler) | partial mechanism | projective incidence generically embeds into a compatible two-plane edge square | formalized | active |
 | [`R32-M02`](#r32-m02-finite-quotient-sieve) | partial mechanism | finite monoid quotients give complete modular no-certificates for fixed candidates | formalized | active |
 | [`R32-M03`](#r32-m03-two-scale-return-conversion) | partial mechanism | a minimal two-scale return pencil has nonresonant multi-return zeros | formalized | active |
@@ -6035,6 +6036,62 @@ with audit
 words. Stop optimizing connectors that factor through the terminal accepting ray: first-hit
 safety requires a right context that masks the tail, a different nonaccepting eigenline, or a
 separate punctuation architecture.
+
+### R32-S82: Exact phased transverse word comparator
+
+**Kind:** compiler mechanism
+**Evidence:** formalized
+**Disposition:** active
+
+Let `E(β)` be the free transverse writer product from `R32-S67`. Select the `R32-S80` or
+`R32-S81` positive inverse for each bit of `γ`, reverse their order, and concatenate them into
+`I(γ)`. Exact two-sided letter cancellation gives
+
+```text
+J(γ)⁻¹J(γ)=I,                    J(γ)J(γ)⁻¹=I,              (1)
+```
+
+where `J` denotes normalized common-ray products. More importantly, projective freeness of the
+writer monoid gives the converse
+
+```text
+J(γ)⁻¹J(β) ∼ I                 iff γ=β.                     (2)
+```
+
+The proof multiplies a putative identity by `J(γ)` and invokes the existing projective
+injectivity theorem; it does not rely on a finite search or a bounded word length. Lean
+transports (2) to literal physical products:
+
+```text
+Π(I(γ) ++ E(β)) ∼ I            iff γ=β.                     (3)
+```
+
+All inverse readers occur before all writers. This phase order excludes the adjacent,
+opposite-error cancellations that defeated the interleaved local comparator. Each false inverse
+costs `37681`, each true inverse costs `306510`, and each writer costs four returns, so
+
+```text
+|I(γ) ++ E(β)| = Σ inverseCost(γᵢ) + 4|β|.                 (4)
+```
+
+Every wait in this variable-rate spelling is positive.
+
+**Scope:** both normalized cancellation orders (1), normalized projective identity converse
+(2), physical reader and comparison charts, the literal biconditional (3), positivity, and exact
+length (4) are Lean checked for arbitrary bit lists. This is an algebraic phased-language
+theorem. It does not prove that the unguarded physical comparator avoids a premature first hit,
+or that every arbitrary positive raw word respects the reader/writer phase boundary.
+
+**Artifact:**
+`CubicReturn.NonPure.falseWaitBinaryPumpNormalizedComparator_identity_iff` and
+`falseWaitBinaryPumpComparatorWord_projectiveIdentity_iff` in
+[`CubicBinaryPumpExactComparator.lean`](MatrixMortality/CubicBinaryPumpExactComparator.lean),
+with audit
+[`m32-cubic-binary-pump-comparator-2026-09-01.md`](audits/m32-cubic-binary-pump-comparator-2026-09-01.md).
+
+**Use:** compare arbitrary binary words without a clock, signed mismatch sum, or bounded-depth
+argument. The remaining obligations are operational: mask internal accepting suffixes and force
+every mortality witness into the all-readers-before-all-writers grammar.
 
 ### R32-M01: Generic reverse edge compiler
 

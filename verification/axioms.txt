@@ -2177,6 +2177,41 @@
 'MatrixMortality.CubicReturn.NonPure.falseWaitTruePumpInverseWord_not_noAcceptingSuffix' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitBinaryPumpInverseWord_chart' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitBinaryPumpInverseLoop_mul_writer' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitBinaryPump_writer_mul_inverseLoop' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitBinaryPumpInverseProduct_mul_product' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitBinaryPumpProduct_mul_inverseProduct' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitBinaryPumpNormalizedComparator_identity_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitBinaryPumpInverseEncoding_chart' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitBinaryPumpComparatorWord_chart' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitBinaryPumpComparatorWord_projectiveIdentity_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitBinaryPumpInverseEncoding_positive' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitBinaryPumpInverseEncoding_length' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitBinaryPumpComparatorWord_length' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitBinaryPumpComparatorWord_positive' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.EdgeCompression.isMortal_iff_exists_edgeProduct_eq_zero' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]

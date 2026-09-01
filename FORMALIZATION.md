@@ -1224,6 +1224,15 @@ suffix, so the complete architecture cannot be first-hit safe without an additio
 context or a different eigenline. See `R32-S81` and
 [`audits/m32-cubic-true-pump-inverse-2026-09-01.md`](audits/m32-cubic-true-pump-inverse-2026-09-01.md).
 
+`CubicBinaryPumpExactComparator` turns the two positive inverse words into an arbitrary-depth
+whole-word comparator. It reverses the guessed bits, concatenates their inverse spellings, and
+then appends the forward writer encoding. Lean proves both normalized cancellation orders and
+uses projective freeness to show that the normalized product is projectively identity exactly
+when the guessed and written lists agree. The theorem is transported to the literal physical
+word, with positivity and the exact variable-rate length. This is a phased-language equality
+test; first-hit safety and raw phase enforcement remain separate. See `R32-S82` and
+[`audits/m32-cubic-binary-pump-comparator-2026-09-01.md`](audits/m32-cubic-binary-pump-comparator-2026-09-01.md).
+
 The rank-(2,2) graph is no longer an independent residue. `RankTwoPunctuation` proves that every
 compatible square with one rank-one loop and three units transports exactly to the existing raw
 reverse compiler [`R32-M01`](SALVAGE.md#r32-m01-generic-reverse-edge-compiler). Its intrinsic
