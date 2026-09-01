@@ -1442,6 +1442,7 @@ The setter-projective audit now also exposes a kernel-friendly carry theorem:
 | [`MM-S88`](SALVAGE.md#mm-s88-conditional-post-rcdb-no-reentry) | exact canonical post-`D_c` intercept bounds, affine next-block automaton, and total physical no-reentry after the literal `(R_c,D_b);D_c` history |
 | [`MM-S89`](SALVAGE.md#mm-s89-primitive-physical-pullback-cancellation) | exact raw inverse-block coordinates, half-head survival through primitive gcd cancellation, incoming-numerator modulus, and upper-code affine recurrence |
 | [`MM-S92`](SALVAGE.md#mm-s92-primitive-empty-front-seed-adapter) | exact positive primitive coordinates for every physical empty-front seed, target-code control of its half-head content, and instantiated raw and post-cancellation pullback criteria |
+| [`MM-O30`](SALVAGE.md#mm-o30-primitive-normalization-collapse) | exact width-six local witness in which canonical `(R_c,D_b)` normalization and the following full-channel `D_c` step both contract Farey height |
 
 These records narrow the missing arbitrary-depth theorem but do not prove
 projective avoidance. Their reconstruction is
@@ -1852,6 +1853,14 @@ polynomial cores, Lean proves that the seed is the primitive ratio obtained from
 Consequently any raw half-head pullback forces `h/d∣P`; the exact raw and post-cancellation
 equivalences remain available with all coordinates expanded in `U`. The bound is sharp as a
 support statement but does not imply `gcd(h,N)=1`, and no physical block classification follows.
+
+Record [`MM-O30`](SALVAGE.md#mm-o30-primitive-normalization-collapse) closes the tempting blanket
+two-step Farey argument. At width six, Lean checks an explicit seed above `H`, its exact canonical
+`(R_c,D_b)` primitive pullback, and the following singleton `D_c` pullback in the full `3H`
+channel. Farey height decreases on the first step, the second step, and the complete window. The
+seed is an abstract local carrier: the theorem proves neither that it belongs to the `MM-O29`
+family or encoded-entry orbit nor that it is a pole. A valid Lyapunov theorem must therefore use
+the target-code restrictions from `MM-S92` or stronger ancestry data.
 
 Record [`MM-S21`](SALVAGE.md#mm-s21-bounded-decimal-suffix-cycles) closes the fixed-precision
 suffix-descent lane. `DecimalSetterSuffix.cycleDefect_lift` gives an explicit one-digit lift for

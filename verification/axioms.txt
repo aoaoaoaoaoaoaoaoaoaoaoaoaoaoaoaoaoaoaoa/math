@@ -1937,6 +1937,9 @@
 'MatrixMortality.SwappedSetterPrimitiveSeedAdapter.emptyFrontSeed_primitivePullback_halfHead_iff' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.SwappedSetterNormalizationCollapse.exists_normalizationCollapseWitness' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.DecimalSetterChamber.doubleDeletion_step_in_gap' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]

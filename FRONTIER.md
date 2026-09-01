@@ -1177,7 +1177,9 @@ neither encoded-entry reachability nor a pole. Width-six diagnostics further sho
 maximum-coordinate and Farey heights can contract after an earlier block exits the initial
 shell multicone. Every observed Farey contraction occurs after `(R_c,D_b)` and before `D_c`,
 while all tested two-step windows expand; this is computational evidence for a finite-memory
-Lyapunov certificate, not a theorem.
+Lyapunov certificate, not a theorem. [`MM-O30`](SALVAGE.md#mm-o30-primitive-normalization-collapse)
+now refutes its unrestricted form with an exact abstract width-six local carrier; any surviving
+two-step statement must use physical `MM-O29` target-code or reachability hypotheses.
 
 [`MM-S86`](SALVAGE.md#mm-s86-exact-deletion-c-contraction-chamber) isolates that failure exactly.
 For `H=5·3^β−1=2h`, `r=3^β−2`, `μ=2·3^β−1`, and a primitive positive carrier `d<n` with
@@ -1227,6 +1229,14 @@ post-cancellation criterion remains essential. The live node is now physical `c`
 spelling plus that residual-denominator criterion, not further algebraic reconstruction of the
 seed.
 
+[`MM-O30`](SALVAGE.md#mm-o30-primitive-normalization-collapse) forbids replacing the remaining
+grammar by a universal two-step Farey weight. Its explicit width-six seed lies above `H`, pulls
+back through the canonical `(R_c,D_b)` block into the exact `3H` channel, and then contracts
+again under `D_c`; both individual steps and their composite lower Farey height. The witness is
+neither proved to be an `MM-O29` seed nor reachable nor a pole. Thus it kills only the abstract
+local monotonicity claim, while confirming that the physical target-code restriction in `MM-S92`
+is indispensable.
+
 The remaining ternary obligation is now the **nonzero history-defect branch** of the global
 earliest-pole reduction. In the normalized coordinate `δ=D/y`, the complete physical recurrence
 is
@@ -1247,7 +1257,7 @@ erasure tile, not `β` of them. A complete proof must either force the long tail
 false pole or extend the carry/cylinder invariant to arbitrary physical target suffixes. Fixed
 residue and unit projections are empirically saturated, and the exact carry window grows with
 carrier height. None of `MM-S51`, `MM-S55`, `MM-S57`, `MM-S59`, `MM-S61`, `MM-S63`, `MM-S64`,
-`MM-S68`, `MM-S69`, `MM-S71`, `MM-O27`, `MM-S73`, `MM-S76`, `MM-O29`, `MM-S86`, `MM-S87`, `MM-S88`, `MM-S89`, or `MM-S92`
+`MM-S68`, `MM-S69`, `MM-S71`, `MM-O27`, `MM-S73`, `MM-S76`, `MM-O29`, `MM-O30`, `MM-S86`, `MM-S87`, `MM-S88`, `MM-S89`, or `MM-S92`
 alone proves projective avoidance.
 Exact bidirectional diagnostics for the ternary swap at `β=3`, body `bbcc`, exclude every
 false-pole word of at most six projective blocks when each regular block has

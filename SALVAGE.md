@@ -152,6 +152,7 @@ file owns the mathematical stock.
 | [`MM-S88`](#mm-s88-conditional-post-rcdb-no-reentry) | structure theorem and obstruction | after the literal canonical `R_c;D_b;D_c` history, an exact two-state affine automaton sends every next physical block outside the deletion-contraction chamber | formalized | active |
 | [`MM-S89`](#mm-s89-primitive-physical-pullback-cancellation) | structure theorem and obstruction | exact gcd arithmetic decides when raw half-head divisibility survives primitive inverse-block normalization | formalized | active |
 | [`MM-S92`](#mm-s92-primitive-empty-front-seed-adapter) | structure theorem and obstruction | physical empty-front seeds have exact primitive positive coordinates whose half-head content is supported on one target-code gcd | formalized | active |
+| [`MM-O30`](#mm-o30-primitive-normalization-collapse) | obstruction | an abstract canonical width-six local carrier contracts Farey height on both adjacent inverse steps and across their complete window | formalized | active |
 | [`R32-S01`](#r32-s01-split-return-normal-form) | structure theorem | rank-two cuts reduce one-unit binary mortality to a `2 × 2` return recurrence | formalized | graduated |
 | [`R32-S02`](#r32-s02-two-plane-edge-square) | structure theorem | two rank-two generators are a two-vertex square of `2 × 2` edges | formalized | graduated |
 | [`R32-O01`](#r32-o01-rank-one-profile-collapse) | obstruction | a rank-one generator reduces mortality to order-at-most-three scalar recurrence zeros | audited | stock |
@@ -6090,6 +6091,77 @@ through `emptyFrontSeed_primitiveCoordinates`, `emptyFrontSeed_core_halfHead_gcd
 **Next:** combine the target modulus and residual-denominator criterion with the exact first
 `R_c` lower spelling. A proof that uses only raw divisibility still omits the decisive primitive
 cancellation seam.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-O30: Primitive normalization collapse
+
+**Kind:** obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+At width six, take the canonical body `b c⁴`, block `(R_c,D_b)`, and the explicit local seed
+
+```text
+(n₀,d₀)=(1915861521737,27626).
+```
+
+It lies above the terminal ray. The exact inverse canonical adjugate has content
+
+```text
+g=166177436936869872
+```
+
+and primitive sign-normalized carrier
+
+```text
+(n₁,d₁)=(200420,200417).
+```
+
+The existing forward recurrence restores `(n₀,d₀)` with nonzero scale `−10932`, so this is not
+a free-standing numerical ratio coincidence. The carrier `(n₁,d₁)` satisfies the complete
+`MM-S86` channel:
+
+```text
+h∣n₁,
+gcd(r,d₁)=1,
+gcd(n₁−d₁,3μ)=3,
+gcd(D_c^raw(n₁,d₁))=3H.
+```
+
+After division by `3H`, its singleton-`D_c` pullback is
+
+```text
+(n₂,d₂)=(727,160268).
+```
+
+Lean verifies all three strict inequalities
+
+```text
+F(n₁,d₁)<F(n₀,d₀),
+F(n₂,d₂)<F(n₁,d₁),
+F(n₂,d₂)<F(n₀,d₀).
+```
+
+**Scope:** this is an abstract local width-six carrier. It is not proved to arise from an
+`MM-O29` physical empty target, to be reachable from the encoded entry, or to be a pole. It
+refutes universal one- and two-step Farey monotonicity under only the canonical-block,
+above-terminal, and exact-channel hypotheses; it does not refute a theorem using the `MM-S92`
+target-code restriction or global ancestry.
+
+**Use:** reject any closure proof that assigns every `MM-S86` contraction to a preceding
+canonical Farey expansion without retaining normalization content or physical target data.
+
+**Formalization:**
+[`MatrixMortality/SwappedSetterNormalizationCollapse.lean`](MatrixMortality/SwappedSetterNormalizationCollapse.lean),
+through `exists_normalizationCollapseWitness`.
+
+**Artifact:**
+[`audits/m53-normalization-collapse-2026-09-01.md`](audits/m53-normalization-collapse-2026-09-01.md).
+
+**Next:** keep the `MM-S92` target modulus and post-cancellation gcd in any multistep weight.
+Determine whether those physical restrictions exclude this collapse mechanism or merely thin it.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
