@@ -1922,6 +1922,18 @@ pop, or encode both logical letters through reversible padded blocks. See
 [`R32-S80`](SALVAGE.md#r32-s80-positive-projective-pop-for-the-false-transverse-pump) and
 [`m32-cubic-false-pump-inverse-2026-09-01.md`](audits/m32-cubic-false-pump-inverse-2026-09-01.md).
 
+The second algebraic pop now exists. Two short certified terminal translations around seven
+false radix readers, one alternative connector, three false-pump inverses, and `187` copies of a
+positive parabolic tuner form a positive word of length `306510` whose common-ray chart is the
+exact two-sided inverse of the true pump. Thus both free binary letters have literal positive
+physical push-pop identities. The construction simultaneously proves a broader no-go: every
+connector whose right tail sends the common ray through the terminal `e₀` line is first-hit
+unsafe because the complete tail is already accepting. The live problem is no longer algebraic
+invertibility, but masking that suffix fracture and forcing the global reader/writer phase
+syntax. See
+[`R32-S81`](SALVAGE.md#r32-s81-positive-projective-pop-for-the-true-transverse-pump) and
+[`m32-cubic-true-pump-inverse-2026-09-01.md`](audits/m32-cubic-true-pump-inverse-2026-09-01.md).
+
 ### ReturnSquare laboratory
 
 [`R32-S03`](SALVAGE.md#r32-s03-returnsquare-normal-form) is the first completely normalized

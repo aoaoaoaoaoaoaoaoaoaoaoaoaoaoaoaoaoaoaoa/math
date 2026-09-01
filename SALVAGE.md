@@ -153,6 +153,7 @@ file owns the mathematical stock.
 | [`R32-S78`](#r32-s78-positive-singleton-gate-for-readable-source-memory) | compiler mechanism | a positive non-inverse height-five gate annihilates exactly address `00` in the readable free-memory family, and a marker rejects every nonempty payload | formalized | active |
 | [`R32-S79`](#r32-s79-monotone-readable-memory-comparator) | compiler mechanism | positive mismatch corrections turn every wrong read into the same unit translation, so one physical gate accepts exactly an empty payload and a wholly matching schedule | formalized | active |
 | [`R32-S80`](#r32-s80-positive-projective-pop-for-the-false-transverse-pump) | compiler mechanism and obstruction | an alternative positive connector realizes an exact two-sided inverse of the false transverse pump, but its final bridge lands on the accepting ray | formalized | active |
+| [`R32-S81`](#r32-s81-positive-projective-pop-for-the-true-transverse-pump) | compiler mechanism and obstruction | a finite positive word realizes the exact two-sided inverse of the true transverse pump, while a generic theorem excludes every terminal-`e₀` connector from first-hit-safe use | formalized | active |
 | [`R32-M01`](#r32-m01-generic-reverse-edge-compiler) | partial mechanism | projective incidence generically embeds into a compatible two-plane edge square | formalized | active |
 | [`R32-M02`](#r32-m02-finite-quotient-sieve) | partial mechanism | finite monoid quotients give complete modular no-certificates for fixed candidates | formalized | active |
 | [`R32-M03`](#r32-m03-two-scale-return-conversion) | partial mechanism | a minimal two-scale return pencil has nonresonant multi-return zeros | formalized | active |
@@ -5964,6 +5965,76 @@ with audit
 letter now has a positive physical pop. Any first-hit compiler must reroute or mask the full-tail
 accepting event, and still supply a true-letter pop or a padded code whose two letters are both
 reversible.
+
+### R32-S81: Positive projective pop for the true transverse pump
+
+**Kind:** compiler mechanism and obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+The true transverse digit also has a finite positive physical inverse. Two terminal-translation
+count vectors
+
+```text
+C₀=(114,7,1840,1250),        C₇=(779,23,2415,136)
+```
+
+surround seven false radix readers. Their exact shifts make the terminal program realize
+
+```text
+M = [[(25/4)⁷, 65450709305237/98304], [0,1]].               (1)
+```
+
+The positive head `[8,3,1,12,15,8,38,6]` and tail
+`[1,4,15,8,12,12,15,8,12]` transport (1) to a common-ray connector. Prepending three copies of
+the `R32-S80` false inverse and `187` copies of the positive parabolic tuner
+
+```text
+P = T(-241/18)
+```
+
+then gives exactly
+
+```text
+J₁⁻¹ = [[1,-857689/1773],[0,336000/197]].                  (2)
+```
+
+This is the two-sided inverse of the true transverse pump. The literal positive word `I₁` has
+length `306510`, and Lean proves
+
+```text
+Π(I₁ ++ E₁) = sI,                 s ≠ 0,                    (3)
+Π((I₁ ++ E₁) ++ w) = sΠ(w)                                  (4)
+```
+
+for every suffix `w`. Together with `R32-S80`, both letters of the free binary transverse stack
+therefore have finite positive algebraic pops.
+
+The connector method has a universal first-hit defect. Its tail and even its one-step-shorter
+tail send the common ray to nonzero multiples of `e₀`. More generally, if a connector tail sends
+the common ray to `e₀`, then that complete tail is itself an accepting suffix. Lean proves that
+every head/program/tail word of this form fails the suffix-safety predicate, independently of
+the head or terminal program. Merely searching for another terminal-`e₀` connector cannot repair
+the reader.
+
+**Scope:** both translation certificates, terminal matrix (1), bridge matrices and connector
+chart, tuner chart and power, exact product (2), physical realization, two-sided inverse,
+literal cancellation (3), arbitrary-suffix law (4), positivity, exact length, both explicit
+tail hits, and the generic terminal-`e₀` safety obstruction are Lean checked. This does not yet
+give a first-hit-safe inverse macro or an arbitrary-word compiler converse.
+
+**Artifact:**
+`CubicReturn.NonPure.falseWaitTruePumpInverseWord_push_pop`,
+`falseWaitTruePumpInverseWord_pop_suffix`, and
+`falseWaitTerminalConnector_not_noAcceptingSuffix` in
+[`CubicTruePumpInverseConnector.lean`](MatrixMortality/CubicTruePumpInverseConnector.lean),
+with audit
+[`m32-cubic-true-pump-inverse-2026-09-01.md`](audits/m32-cubic-true-pump-inverse-2026-09-01.md).
+
+**Use:** treat the transverse binary alphabet as algebraically reversible by positive physical
+words. Stop optimizing connectors that factor through the terminal accepting ray: first-hit
+safety requires a right context that masks the tail, a different nonaccepting eigenline, or a
+separate punctuation architecture.
 
 ### R32-M01: Generic reverse edge compiler
 

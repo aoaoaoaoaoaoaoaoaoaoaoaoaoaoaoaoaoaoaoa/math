@@ -1213,6 +1213,17 @@ suffix. It also isolates the operational defect exactly: every proper suffix of 
 is nonaccepting, but the complete bridge reaches the accepting ray. See `R32-S80` and
 [`audits/m32-cubic-false-pump-inverse-2026-09-01.md`](audits/m32-cubic-false-pump-inverse-2026-09-01.md).
 
+`CubicTruePumpInverseConnector` completes algebraic reversibility of the transverse binary
+alphabet. An exact two-translation terminal program around seven false radix readers, transported
+by an alternative connector and preceded by three false inverses and `187` parabolic tuners,
+realizes `[[1,-857689/1773],[0,336000/197]]`. Lean verifies that this is the two-sided inverse of
+the true pump and that the literal positive word of length `306510` cancels it to nonzero scalar
+identity while preserving every later suffix. The same module proves a generic operational
+obstruction: any connector tail that lands the common ray on terminal `e₀` is itself an accepting
+suffix, so the complete architecture cannot be first-hit safe without an additional masking
+context or a different eigenline. See `R32-S81` and
+[`audits/m32-cubic-true-pump-inverse-2026-09-01.md`](audits/m32-cubic-true-pump-inverse-2026-09-01.md).
+
 The rank-(2,2) graph is no longer an independent residue. `RankTwoPunctuation` proves that every
 compatible square with one rank-one loop and three units transports exactly to the existing raw
 reverse compiler [`R32-M01`](SALVAGE.md#r32-m01-generic-reverse-edge-compiler). Its intrinsic
