@@ -273,6 +273,7 @@ file owns the mathematical stock.
 | [`G3-S24`](#g3-s24-prefix-cloak-factor-boundary-collapse) | uniform obstruction and complete family extinction | bigram/trigram boundary signatures kill the remaining eleven pump families, so none of the 23 schemas can realize a prefix cloak | formalized head reduction; exact symbolic certificate | active |
 | [`G3-S25`](#g3-s25-suffix-cloak-factor-boundary-collapse) | uniform obstruction and complete family extinction | trigram boundary signatures kill all 23 pump schemas in suffix orientation at every depth | exact independently replayable symbolic certificate | active |
 | [`G3-S26`](#g3-s26-odd-family-one-sided-cloak-extinction) | uniform obstruction and complete family extinction | the explicit odd kernel family fails the prefix size gate and the suffix trigram catalogue in both orientations | formalized prefix no-go; exact independently replayable suffix certificate | active |
+| [`G3-S27`](#g3-s27-single-cut-address-interleaving-collapse) | structure theorem and uniform obstruction | three address probes split every uniform single-cut comparator into kernel pairs; the odd family is forced to an endpoint cut already killed by G3-S26 | formalized | active |
 | [`G3-M02`](#g3-m02-square-root-punctuation-fracture) | partial mechanism | a rank-two square root gives an exact `SS`-free mortality grammar | formalized | closed |
 | [`G3-O10`](#g3-o10-square-root-boundary-saturation) | obstruction | every nondegenerate rank-one square root preserves boundary coefficient zeros | formalized | graduated |
 | [`G3-M01`](#g3-m01-free-group-discrepancy-engine) | partial mechanism | Carvalho's transducer gives an all-word marker-tail equation and a cyclic exponent-one equalizer | audited | active |
@@ -11192,6 +11193,68 @@ or route two offsets through a separate channel.
 **Next:** classify the minimal interleaving or two-offset equation before searching another
 one-sided family. A new kernel relation is relevant only if its local factor data evade the
 reusable prefix and suffix catalogues.
+
+### G3-S27: Single-cut address-interleaving collapse
+
+**Kind:** structure theorem and uniform obstruction
+
+**Evidence:** formalized
+
+**Disposition:** active
+
+A uniform insertion of the free `{DT,TD}` address at one fixed cut cannot create a new comparator
+geometry. If fixed pieces satisfy
+
+```text
+action(P·expandAddress(u)·Q)=action(R·expandAddress(u)·S)
+```
+
+for every address `u`, the empty address and the two one-digit probes already force
+
+```text
+action(P)=action(R),       action(Q)=action(S).
+```
+
+The two digits have common multiplier `2/5` and distinct offsets. Subtracting their equations
+first identifies the prefix slopes; subtracting the empty equation from one digit then identifies
+the suffix actions; surjectivity cancels that suffix and identifies the prefix actions. A
+raw-distinct comparator therefore contains a genuine kernel pair wholly before or wholly after
+the cut. Lean composes this with the reduced `bcbc` fork, whose two raw words are necessarily
+distinct under exact endpoint semantics.
+
+The formal slope valuation sharpens the result for side-specific cuts:
+
+```text
+scale(w)=(3/5)^|w|·(10/9)^{#D(w)},
+v₂(scale(w))=#D(w),
+v₅(scale(w))=#D(w)-|w|.
+```
+
+Equal actions therefore force equal slopes, lengths, and Parikh vectors. In the odd family, the
+two cut positions must coincide. Its only positive proper Parikh-balanced prefix cut is `3`, but
+the corresponding prefixes `DTT/TTD` have different affine offsets. Thus a uniform single-cut
+odd-family comparator can use only cut `0` or cut `29+2k`, in either relation orientation.
+`G3-S26` kills precisely these suffix- and prefix-cloak endpoints. The odd family is therefore
+dead at every single insertion position, including proposals with different initial cuts.
+
+**Scope:** the comparator must work uniformly for arbitrary address pairs, with one fixed cut on
+each relation side. The theorem does not cover two or more alternating address segments,
+address-dependent cut positions, a stateful reader that needs only a restricted address language,
+or a separate terminal channel. For another kernel family, a proper equal-action prefix pair may
+survive and must be classified rather than assumed absent.
+
+**Use:** remove all single-cut odd-family interleavings from the carrier tree. Before searching a
+single-cut placement in any new relation, classify its proper prefix kernel pairs; without one,
+the architecture reduces immediately to the already rejected one-sided endpoints.
+
+**Artifact:**
+[`MixedPrimeAddressInterleavingCollapse.lean`](MatrixMortality/MixedPrimeAddressInterleavingCollapse.lean)
+and
+[`m34-single-cut-interleaving-collapse-2026-09-01.md`](audits/m34-single-cut-interleaving-collapse-2026-09-01.md).
+
+**Next:** classify proper prefix kernel pairs in the `23` pump schemas, then either eliminate
+their internal cuts or isolate the first genuine two-kernel split. If none survives, move to a
+two-cut/stateful address word or the separate two-offset terminal gate.
 
 ### G3-O13: Rational serializer pumping
 

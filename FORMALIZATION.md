@@ -1810,6 +1810,7 @@ fixed-rank decision problem.
 | `GuardedMixedPrimeForkQuotient.lean` | full-triple centralizer collapse, the exact length-312 critical Cassaigne fork, its common fixed point and monogenic action collapse, and endpoint rejection |
 | `GuardedMixedPrimeOddFamilyParikh.lean` | uniform balanced-prefix/suffix classification and seven-cell contextual obstruction for the infinite odd kernel family |
 | `MixedPrimeOddFamilyCloakNoGo.lean` | exact prefix-cloak obstruction for both orientations of the infinite odd kernel family |
+| `MixedPrimeAddressInterleavingCollapse.lean` | three-probe single-cut decomposition, mixed-prime slope homogeneity, and odd-family endpoint-cut classification |
 | `GuardedMixedPrimePumpedCuts.lean` | reusable pumping calculus, seven certified kernel families, and balanced-prefix transport recurrence |
 | `GuardedMixedPrimePumpedContext.lean` | exact all-depth cut census for seven pumped kernel families, uniform moving-cell extinction, and finite family-six exceptional residue |
 | `TwoSeedPumpPropagation.lean` | two-dimensional Cayley-Hamilton span and exact propagation of side-contextual word pumps from depths zero and one |
@@ -2139,6 +2140,9 @@ fixed-rank decision problem.
 | A common literal prefix and suffix around the two aligned address interiors cancel and cannot rescue the forced endpoint fork | `MixedPrimeAddressWrapperNoGo.no_bcbc_endpoint_of_commonContext_address_words` |
 | Every genuine mixed-prime kernel pair gives prefix- and suffix-cloaked raw-distinct comparators for arbitrary addresses; the odd kernel family supplies explicit instances at every depth | `MixedPrimeKernelCloakedAddress.prefixCloakedAddress_genuineComparator`, `MixedPrimeKernelCloakedAddress.suffixCloakedAddress_genuineComparator`, `MixedPrimeKernelCloakedAddress.kernelOddFamily_prefixCloakedAddress_genuineComparator`, `MixedPrimeKernelCloakedAddress.kernelOddFamily_suffixCloakedAddress_genuineComparator` |
 | Neither orientation of the odd kernel family can satisfy the physical exact-endpoint prefix-cloak equation at any pump or address depth | `MixedPrimeOddFamilyCloakNoGo.no_bcbc_endpoint_of_kernelOddFamily_prefixCloak`, `MixedPrimeOddFamilyCloakNoGo.no_bcbc_endpoint_of_kernelOddFamily_prefixCloak_reverse` |
+| A mixed-prime word slope has exact two-adic/five-adic values `#D` and `#D-|w|`; equal slopes force equal raw length and Parikh vector | `MixedPrimeAddressInterleavingCollapse.wordScale_eq_length_mul_dilateCount`, `MixedPrimeAddressInterleavingCollapse.padicValRat_two_wordScale`, `MixedPrimeAddressInterleavingCollapse.padicValRat_five_wordScale`, `MixedPrimeAddressInterleavingCollapse.length_eq_and_dilateCount_eq_of_wordScale_eq` |
+| Empty, `DT`, and `TD` probes split every uniform single-cut address equality into equal-action prefix and suffix pairs; a raw-distinct exact `bcbc` fork has a genuine kernel pair on one side | `MixedPrimeAddressInterleavingCollapse.piecewise_actions_eq_of_empty_false_true`, `MixedPrimeAddressInterleavingCollapse.interleavedAddress_piecewise_actions_eq`, `MixedPrimeAddressInterleavingCollapse.bcbc_interleavedAddress_exists_genuine_piece` |
+| Any uniform single-cut comparator from the odd family uses the same endpoint cut on both relation sides, in either orientation | `MixedPrimeAddressInterleavingCollapse.kernelOddFamily_no_proper_prefix_actions_eq`, `MixedPrimeAddressInterleavingCollapse.kernelOddFamily_interleavedAddress_cuts_eq_boundary`, `MixedPrimeAddressInterleavingCollapse.kernelOddFamily_interleavedAddress_cuts_eq_boundary_reverse` |
 | A matrix square equal to an outer product gives the complete `SS`-free mortality grammar | `SquareRootPunctuation.isMortal_iff_exists_squareFree_zero` |
 | The explicit source-uniform Neary punctuation matrix has the required square and rank two | `SquareRootPunctuation.nearySquareRoot_sq`, `SquareRootPunctuation.nearySquareRoot_rank` |
 | Exact coefficient preservation on the `R_bR_b`-free subshift forces the `R_b` matrix to be a unit | `SquareRootPunctuation.ruleB_isUnit_of_exact_on_squareFree` |
@@ -2773,6 +2777,17 @@ negatives under reversal all miss. Depth zero already equals the stable positive
 two-letter locality makes this uniform in `k`. Every currently explicit infinite mixed-prime
 kernel family is therefore dead as a one-sided cloak. Undiscovered relations, interleaved
 address/cloak words, separate two-offset routing, and the complete endpoint converse remain.
+
+`G3-S27` kills the first interleaving generalization. For fixed pieces
+`P·expandAddress(u)·Q/R·expandAddress(u)·S`, equality on the empty address and `DT/TD` already
+forces `action(P)=action(R)` and `action(Q)=action(S)`. Thus every raw-distinct uniform single-cut
+comparator contains a genuine kernel pair wholly on one side of the cut. Exact two-adic and
+five-adic slope formulas also show that action-equal mixed-prime words have equal length and
+Parikh vector. Applied to the odd family with independently chosen side cuts, this forces the
+cuts to coincide; the only proper balanced cut is `3`, where `DTT` and `TTD` have different
+offsets. Only the two endpoint cuts remain, and `G3-S26` kills both. The odd family is now dead at
+every single insertion position. Multi-cut or stateful interleaving, a new relation with proper
+kernel subpairs, and separate two-offset routing remain.
 
 For `G3-O20`, Lean proves the free-monoid tail law: if one fixed-boundary equation with stationary
 left and right pump blocks holds at exponents `N` and `N+1`, it holds at every exponent `N+k`.

@@ -889,6 +889,42 @@
 'MatrixMortality.MixedPrimeOddFamilyCloakNoGo.no_bcbc_endpoint_of_kernelOddFamily_prefixCloak_reverse' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.MixedPrimeAddressInterleavingCollapse.wordScale_eq_length_mul_dilateCount' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeAddressInterleavingCollapse.padicValRat_two_wordScale' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeAddressInterleavingCollapse.padicValRat_five_wordScale' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeAddressInterleavingCollapse.length_eq_and_dilateCount_eq_of_wordScale_eq' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeAddressInterleavingCollapse.wordScale_eq_of_wordActions_eq' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeAddressInterleavingCollapse.piecewise_actions_eq_of_empty_false_true' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeAddressInterleavingCollapse.interleavedAddress_piecewise_actions_eq' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeAddressInterleavingCollapse.kernelOddFamily_no_proper_prefix_actions_eq' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeAddressInterleavingCollapse.kernelOddFamily_interleavedAddress_cuts_eq_boundary' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeAddressInterleavingCollapse.kernelOddFamily_interleavedAddress_cuts_eq_boundary_reverse' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeAddressInterleavingCollapse.interleavedAddress_exists_genuine_piece' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeAddressInterleavingCollapse.bcbc_interleavedAddress_exists_genuine_piece' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.SquareRootPunctuation.coefficient_append_square' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
