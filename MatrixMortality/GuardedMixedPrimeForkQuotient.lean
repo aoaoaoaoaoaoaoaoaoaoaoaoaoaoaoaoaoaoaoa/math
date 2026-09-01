@@ -29,7 +29,6 @@ theorem wordPower_succ (word : List Letter) (exponent : ℕ) :
     wordPower word (exponent + 1) = word ++ wordPower word exponent := by
   simp [wordPower, List.replicate_succ]
 
-@[simp]
 theorem wordPower_one (word : List Letter) : wordPower word 1 = word := by
   simp [wordPower_succ]
 
