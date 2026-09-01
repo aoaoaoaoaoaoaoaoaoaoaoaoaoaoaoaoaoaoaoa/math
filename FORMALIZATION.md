@@ -629,6 +629,19 @@ Consequently every tail scale is below `B` and
 `q^(head+1)+|tail|(q−1)≤B`. This closes the shallow common-content throat as a finite search;
 no p-adic cancellation hypothesis enters the proof.
 
+The two finite certificates now assemble into a uniform decision procedure. For a reduced
+positive fraction `d=A/B` at `q≥4`, the implementation splits as follows. The fraction `1` is
+the exact zero-power resonance. If `A=1<B`, every zero lies among words of length below `B` with
+all waits below `B`. If `A>1`, the executable prime `minFac(A)` either lies outside the support
+of `q`, which the rational-root theorem rejects, or has positive valuation. In the supported
+case Lean enumerates the finitely many `W≤vₚ(d)` satisfying
+`vₚ(d)=Wvₚ(q)`, then every tail of wait exponent `W`. For the exact integral adjugate state
+`(R,S)`, mortality forces `R=Aq^(head+1)S`; nonvanishing gives `q^(head+1)∣R`, hence
+`head<|R|`. This computed coordinate supplies the final head range. Filtering the resulting
+finite word set by exact bridge evaluation is equivalent to physical mortality, and Lean
+constructs a `Decidable` term from that equivalence. ReturnSquare is therefore closed as a
+decision problem; resonance-only classification at composite bases remains a finite question.
+
 The common-geometric-base hypothesis cannot be weakened to total divisibility of an arbitrary
 scale alphabet. Lean checks that `[3,15,3,3,15,3,3,3]` is pairwise totally ordered under
 divisibility, yet its normalized bridge vanishes at the nonresonant root `d=25/27`. This is an
@@ -1796,6 +1809,7 @@ fixed-rank decision problem.
 | `ReturnSquareTailAdjugate.lean` | head-separated adjugate tail incidence and fixed positive-valuation tail weight |
 | `ReturnSquarePureDenominator.lean` | integral pure-denominator tail expansion, deep-prime synchronization, and proper-rest pivot certificate |
 | `ReturnSquarePureDenominatorDescent.lean` | exact affine adjugate ratio and global finite pure-denominator descent certificate |
+| `ReturnSquareFiniteCertificate.lean` | computable finite word enumerators and the uniform reduced-positive-fraction ReturnSquare decision procedure |
 | `ReturnSquareTax.lean` | exact four-state lower bound for literal reversible-stack returns |
 | `ReturnSquareNoGo.lean` | quadratic-pencil reversible-squaring obstruction and blind-scaling collapse |
 | `ReturnJordan.lean` | parity-Jordan rail rigidity and modular immortality certificate |

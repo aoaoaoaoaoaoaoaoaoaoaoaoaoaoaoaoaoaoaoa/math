@@ -1721,34 +1721,23 @@ The family is now sharply fenced:
   `q^(head+1)+Σ(q^(wait+1)−1)≤B`; every tail scale is below `B` and
   `q^(head+1)+|tail|(q−1)≤B`, by
   [`R32-S54`](SALVAGE.md#r32-s54-global-pure-denominator-descent).
+- these certificates assemble into a uniform executable decision procedure. For a reduced
+  positive fraction `A/B`, numerator one uses the `R32-S54` box. Otherwise `minFac(A)` either
+  lies outside the base support and rejects mortality, or fixes the tail weight; each tail then
+  bounds its head by the absolute upper integral adjugate coordinate. The exceptional fraction
+  `1` is handled exactly as the zero-power resonance, by
+  [`R32-S55`](SALVAGE.md#r32-s55-effective-returnsquare-decision).
 - replacing common powers of one base by a scale alphabet totally ordered under divisibility is
   unsound: `[3,15,3,3,15,3,3,3]` has the exact nonresonant root `d=25/27`, by
   [`R32-O25`](SALVAGE.md#r32-o25-divisibility-chain-returnsquare-fracture).
 
-Thus every unclassified ReturnSquare instance has a base divisible by at least two distinct
-primes and at least three positive returns in the bounded middle negative strip. Its canonical
-numerator and denominator are q-smooth. The numerator-prime exponents, when present, are already
-synchronized by the complete proper tail. The negative side is now one exact reversed
-projective incidence. A last inverse step retains positive denominator depth only above twice
-the selected geometric depth, and then subtracts that exact tax. At or below the tax it becomes
-nonpositive; equality leaves only its exact residue-sensitive value open. The surviving
-obstruction is later re-entry across these shells and the common content which can couple
-different denominator primes. Away from the four equalities
-`x∈{−b,b,a−b}` or `a=2b`, the recurrence is now deterministic at every prime; only residue
-dynamics on those moving walls remain locally free. Each wall now has one exact normalized
-residue coordinate, and arbitrary-scale multi-return zeros realize all four walls even when the
-scales share the relevant denominator prime. Neither cross-prime residue synchronization nor a
-geometric-scale counterexample is proved. Order-one and order-two cyclotomic quotients now force
-`B/A` onto the signed identity rays, but higher-order quotients require larger projective
-automata. Exact denominator-center chains already collapse to resonance, and a mortal reduced
-fraction cannot take the zero critical-residue branch. A zero equal-scale residue can re-enter
-the center only at an even exponent whenever `q+1` has an odd prime; mixed nonzero residue
-transitions remain. Positive-numerator branches have a finite weighted-tail certificate.
-Pure-denominator branches are now finite outright: the real affine descent cuts through the
-simultaneously shallow common-content chamber left by the p-adic analysis. The remaining
-ReturnSquare work is to compose these two certificates into one effective enumeration, handle
-the zero-valuation and one-return seams exactly, and execute the bounded search for composite
-bases.
+Thus the ReturnSquare decision problem is closed. For every reduced positive rational `d=A/B`
+and every `q≥4`, Lean constructs a finite `Finset` whose exact bridge zeros are equivalent to
+physical mortality, then derives a `Decidable` term from its nonemptiness. Parameters `c≥0` are
+already immortal, while bases `2` and `3` belong to the stronger prime-power classification.
+What remains is classification, not decidability: execute the candidate sets to decide whether
+composite bases admit a bounded nonresonant multi-return root, or prove that every such set
+contains only the one-return resonance.
 The one-base geometric architecture is essential: mere divisibility comparability or
 common prime content cannot replace it. The one-base prime-power architecture remains closed.
 The two-coordinate pullback is not a reduction to finite-alphabet `M₂(3)`; every `qⁿ` remains a
