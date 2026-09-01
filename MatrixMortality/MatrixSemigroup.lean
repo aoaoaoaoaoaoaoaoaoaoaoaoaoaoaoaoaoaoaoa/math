@@ -55,6 +55,31 @@ theorem wordProduct_append {α M : Type*} [Monoid M] (generators : α → M)
       wordProduct generators left * wordProduct generators right := by
   simp [wordProduct, List.map_append, List.prod_append]
 
+/-- Inserting a word whose product is a scalar identity only scales the surrounding matrix
+product. -/
+theorem wordProduct_projectiveIdentity_insertion
+    {α : Type*} (generators : α → Square (Fin 2) ℚ)
+    (left neutral right : List α) (scale : ℚ)
+    (neutral_product :
+      wordProduct generators neutral = scale • (1 : Square (Fin 2) ℚ)) :
+    wordProduct generators (left ++ neutral ++ right) =
+      scale • wordProduct generators (left ++ right) := by
+  rw [wordProduct_append, wordProduct_append, wordProduct_append,
+    neutral_product, Matrix.mul_smul, Matrix.mul_one, Matrix.smul_mul]
+
+/-- A nonzero projective-identity word may be inserted or deleted in any context without
+changing whether the product is zero. -/
+theorem wordProduct_zero_iff_projectiveIdentity_insertion
+    {α : Type*} (generators : α → Square (Fin 2) ℚ)
+    (left neutral right : List α) (scale : ℚ) (scale_ne_zero : scale ≠ 0)
+    (neutral_product :
+      wordProduct generators neutral = scale • (1 : Square (Fin 2) ℚ)) :
+    wordProduct generators (left ++ neutral ++ right) = 0 ↔
+      wordProduct generators (left ++ right) = 0 := by
+  rw [wordProduct_projectiveIdentity_insertion generators left neutral right scale
+    neutral_product]
+  simp [scale_ne_zero]
+
 theorem wordProduct_comp {α β M : Type*} [Monoid M] (generators : β → M)
     (relabel : α → β) (word : List α) :
     wordProduct (generators ∘ relabel) word =

@@ -2833,6 +2833,29 @@
 'MatrixMortality.CubicReturn.NonPure.continuantRadixReaderWord_two_mismatches' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.wordProduct_projectiveIdentity_insertion' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.wordProduct_zero_iff_projectiveIdentity_insertion' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.continuantCorrectReadWrite_insertion_zero_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.continuantReadWriteWord_projectivelyRealizes' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.continuantCarry_normalized_identity' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.continuantCarryNeutralWord_projectiveIdentity' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.continuantCarryNeutralWord_positive' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.continuantCarryNeutralWord_length' depends on axioms: [propext]
+'MatrixMortality.CubicReturn.NonPure.continuantCarryNeutralWord_insertion_zero_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.CubicReturn.NonPure.continuantMismatchCode_zero_forces_all_zero' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]

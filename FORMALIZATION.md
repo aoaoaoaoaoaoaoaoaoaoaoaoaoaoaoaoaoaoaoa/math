@@ -1292,6 +1292,20 @@ bridge semantics, but the already-mortal fixed instance cannot itself carry an
 instance-dependent undecidability reduction. See `R32-S61` and
 [`audits/m32-cubic-continuant-punctuation-2026-08-31.md`](audits/m32-cubic-continuant-punctuation-2026-08-31.md).
 
+`MatrixSemigroup` and `CubicContinuantNeutrality` record the corresponding syntax no-go. Lean
+proves generically that inserting a word with product `λI`, `λ≠0`, multiplies every contextual
+product by `λ` and therefore preserves zero exactly. The cubic specialization applies this to
+each correct physical reader-writer pair. No homogeneous context in the same `2×2`
+representation can enforce the presence, count, or boundary of those neutral blocks. The result
+does not exclude quotient-saturated source grammars or an independent phase/control component.
+The cubic module also constructs a malformed positive carry word:
+`(R₀G₁)⁴G₁(R₁G₀)²⁵R₁∼I`. Lean proves the normalized `25³⁰I` identity, lifts it through all
+nonzero physical scales, proves its length `38,742` and positivity, and derives contextual
+insertion invariance. Thus the clocked affine component cannot itself enforce one bounded error
+digit per level.
+See `R32-O26` and
+[`audits/m32-projective-neutral-insertion-2026-08-31.md`](audits/m32-projective-neutral-insertion-2026-08-31.md).
+
 The rank-(2,2) graph is no longer an independent residue. `RankTwoPunctuation` proves that every
 compatible square with one rank-one loop and three units transports exactly to the existing raw
 reverse compiler [`R32-M01`](SALVAGE.md#r32-m01-generic-reverse-edge-compiler). Its intrinsic
@@ -3057,7 +3071,7 @@ fixed-rank decision problem.
 | `Computability.lean` | primitive-recursive closure lemmas used by the explicit compilers |
 | `WordMorphism.lean` | free-monoid morphism laws and consecutive-repeat closure of fixed-boundary equations |
 | `FinitePositiveImage.lean` | inverse closure of submonoids in finite groups and collapse of positive closure to group closure |
-| `MatrixSemigroup.lean` | shared word semantics, mortality transports, common-image restriction, transposition, and zero padding |
+| `MatrixSemigroup.lean` | shared word semantics, projective-neutral insertion, mortality transports, common-image restriction, transposition, and zero padding |
 | `LinearRepresentation.lean` | finite Hankel sections and exact-realization state lower bounds |
 | `BoundaryTax.lean` | generic finite-witness two-channel boundary tax |
 | `ReturnFamily.lean` | split finite-rank return normal form and matrix-valued block-Hankel witnesses |
@@ -3065,6 +3079,7 @@ fixed-rank decision problem.
 | `CubicReturnNonPure.lean` | non-pure physical endpoints, fixed return recurrence, scalar-defect norm, continuant state projection, and exact unselected-wait obstructions |
 | `CubicContinuantRadix.lean` | free binary affine radix stack inside the fixed non-pure cubic terminal language |
 | `CubicContinuantReader.lean` | positive projective inverses for both cubic radix letters and the exact opposite-mismatch cancellation |
+| `CubicContinuantNeutrality.lean` | contextual insertion/deletion invariance of correct projective-identity read-write blocks |
 | `CubicContinuantMismatchClock.lean` | contracting signed-error clock and exact endpoint zero test for balanced cubic radix comparisons |
 | `CubicContinuantSelfBalance.lean` | 2-adic and 5-adic rejection of every incorrect cubic-comparator cleanup count |
 | `CubicContinuantPunctuation.lean` | unique singular return and complete scalar-bridge reduction of the fixed cubic language |
