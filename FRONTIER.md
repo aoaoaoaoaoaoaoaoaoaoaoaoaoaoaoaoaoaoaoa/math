@@ -2542,6 +2542,14 @@ Thus every finite wait word occurs as a middle factor of a wall-anchored periodi
 This is [`D2-S14`](SALVAGE.md#d2-s14-arbitrary-body-wall-excursion-saturation). It kills local
 forbidden-factor and bounded-excursion grammars, though not regularity: the endpoints vary with
 the body. The remaining seam is necessarily endpoint-coupled.
+For periodic endpoint fibres, that coupling has an exact algebraic owner. Two nonempty schedules
+have the same periodic source exactly when their global affine actions commute. Their slopes are
+equal exactly when both length and total wait agree. The equal-slope branch is therefore the
+existing balanced affine kernel; every unequal-slope branch is the single explicit equation
+`collisionSource(u,v)=shellPeriodicPoint(u)`. This is
+[`D2-S15`](SALVAGE.md#d2-s15-fixed-endpoint-centralizer-reduction). It replaces a separate
+periodic-state census by a positive-centralizer problem, but does not yet decide that
+centralizer or general unequal-endpoint reachability.
 The deepest of those three branches is itself a full depth reset. In normalized band coordinates
 `U(d,μ)=1/5+(3/10)(2/3)^dμ`, every target band `d≥2` contains a point whose `d−2` predecessor has
 any prescribed band `n≥7` and mantissa in `(2/3,1]`. An explicit guarded subfamily fixes target
@@ -2850,8 +2858,10 @@ universal computation.
    `D2-S04` replaces its local reverse fan by a sharp ternary nucleus. `D2-O09` then localizes
    every unbounded Archimedean reset to the deepest branch and proves that fixed depth/unit modes
    do not contain it. `D2-S12` classifies every immediate lower/middle two-cycle, while `D2-S14`
-   embeds every finite wait body in a guarded wall excursion. Abandon finite literal return
-   censuses and local forbidden-factor grammars; attack endpoint-coupled fibres. Treat chamber
+   embeds every finite wait body in a guarded wall excursion. `D2-S15` identifies equality of
+   periodic endpoints with global affine commutation and splits it into balanced-kernel and
+   explicit collision-source fibres. Abandon finite literal return censuses and local
+   forbidden-factor grammars; attack those endpoint-coupled fibres. Treat chamber
    exit and reentry as separate pre-exit seams. Do not reopen
    unlabeled residue-only finite nuclei, valuation-only reverse bounds, one-sided endpoint bounds,
    or global real drift. Attack the pole branch through exact mantissa arithmetic, guarded
