@@ -1,4 +1,5 @@
 import MatrixMortality.MixedPrimeRealTrapLengthTwo
+import MatrixMortality.MixedPrimeTerminalCarry
 
 /-!
 # Falling-tail length-three crossings
@@ -334,192 +335,30 @@ theorem lengthThreeFalling_commonTarget
     ring
   exact ⟨collision.trans right_target, right_target⟩
 
-theorem lengthThreeFallingTarget_fiveUnit_iff_numerator
+/-- The falling-tail target is the universal coordinate at wait `t+k`. -/
+theorem lengthThreeFallingTarget_eq_terminalCarryTarget
     (q t A B k : ℕ) :
-    IsUnit 5 (lengthThreeFallingTarget q t A B k) ↔
-      HasValue 5
-        (25 + (2 / 3 : ℚ) ^ (t + k) *
-          lengthThreeFallingTargetCarry q A B k) 3 := by
-  have denominator_value : HasValue 5 (125 : ℚ) 3 := by
-    convert primePower_hasValue (prime := 5) 3 using 1 <;> norm_num
-  rw [lengthThreeFallingTarget]
-  constructor
-  · intro target_unit
-    have numerator_value := mul_hasValue target_unit denominator_value
-    have numerator_eq :
-        (25 + (2 / 3 : ℚ) ^ (t + k) *
-              lengthThreeFallingTargetCarry q A B k) /
-              125 * 125 =
-          25 + (2 / 3 : ℚ) ^ (t + k) *
-              lengthThreeFallingTargetCarry q A B k :=
-      div_mul_cancel₀ _ denominator_value.1
-    rwa [numerator_eq] at numerator_value
-  · intro numerator_value
-    exact div_hasValue numerator_value denominator_value
+    lengthThreeFallingTarget q t A B k =
+      terminalCarryTarget (t + k) (lengthThreeFallingTargetCarry q A B k) := by
+  rfl
 
-theorem lengthThreeFallingTarget_fiveUnit_forces_carry
-    (q t A B k : ℕ)
-    (target_unit : IsUnit 5 (lengthThreeFallingTarget q t A B k)) :
-    HasValue 5 (lengthThreeFallingTargetCarry q A B k) 2 := by
-  have twentyFive_value : HasValue 5 (25 : ℚ) 2 := by
-    convert primePower_hasValue (prime := 5) 2 using 1 <;> norm_num
-  have numerator_value :=
-    (lengthThreeFallingTarget_fiveUnit_iff_numerator q t A B k).1 target_unit
-  have power_unit := shellRatio_power_unit (t + k)
-  by_cases carry_zero : lengthThreeFallingTargetCarry q A B k = 0
-  · rw [carry_zero, mul_zero, add_zero] at numerator_value
-    have impossible : (2 : ℤ) = 3 := by
-      rw [← twentyFive_value.2, numerator_value.2]
-    omega
-  · let carryValue := padicValRat 5 (lengthThreeFallingTargetCarry q A B k)
-    have carry_value :
-        HasValue 5 (lengthThreeFallingTargetCarry q A B k) carryValue :=
-      ⟨carry_zero, rfl⟩
-    have scaled_value :
-        HasValue 5
-          ((2 / 3 : ℚ) ^ (t + k) *
-            lengthThreeFallingTargetCarry q A B k) carryValue := by
-      simpa only [zero_add] using mul_hasValue power_unit carry_value
-    rcases lt_trichotomy (2 : ℤ) carryValue with lower | equal | higher
-    · have surviving := add_hasValue_left twentyFive_value scaled_value lower
-      have impossible : (2 : ℤ) = 3 := by
-        rw [← surviving.2, numerator_value.2]
-      omega
-    · convert carry_value using 1
-    · have surviving := add_hasValue_right twentyFive_value scaled_value higher
-      have impossible : carryValue = 3 := by
-        rw [← surviving.2, numerator_value.2]
-      omega
-
+/-- A guarded common target already forces the collision source to be a five-unit. -/
 theorem lengthThreeFallingTarget_fiveUnit_forces_source_fiveUnit
     (p q t A B : ℕ) {k : ℕ} (total_positive : k < A + B)
     (target_unit : IsUnit 5 (lengthThreeFallingTarget q t A B k)) :
     IsUnit 5 (lengthThreeFallingSource p q A B k) := by
-  have carry_value :=
-    lengthThreeFallingTarget_fiveUnit_forces_carry q t A B k target_unit
-  have carry_positive :
-      IsPositive 5 (lengthThreeFallingTargetCarry q A B k) :=
-    ⟨carry_value.1, by rw [carry_value.2]; norm_num⟩
-  have nine_unit : IsUnit 5 (9 : ℚ) := intCast_isUnit_of_not_dvd (by norm_num)
-  have fifteen_positive : IsPositive 5 (15 : ℚ) := by
-    have fifteen_value : HasValue 5 (15 : ℚ) 1 := by
-      convert mul_hasValue
-        (show IsUnit 5 (3 : ℚ) from intCast_isUnit_of_not_dvd (by norm_num))
-        (show HasValue 5 (5 : ℚ) 1 by
-          simpa using (primePower_hasValue (prime := 5) 1)) using 1 <;> norm_num
-    exact ⟨fifteen_value.1, by rw [fifteen_value.2]; norm_num⟩
-  have q_term_unit : IsUnit 5 (9 * (2 / 3 : ℚ) ^ q) :=
-    mul_hasValue nine_unit (shellRatio_power_unit q)
-  have q_sum_unit : IsUnit 5 (9 * (2 / 3 : ℚ) ^ q + 15) :=
-    unit_add_positive q_term_unit fifteen_positive
-  have negative_q_sum_unit :
-      IsUnit 5 (-(9 * (2 / 3 : ℚ) ^ q + 15)) :=
-    neg_hasValue q_sum_unit
-  have sourceCarry_unit := unit_add_positive negative_q_sum_unit carry_positive
-  apply (lengthThreeFallingSource_fiveUnit_iff_sourceCarry
-    p q A B total_positive).2
-  convert sourceCarry_unit using 1
-  rw [lengthThreeFallingTargetCarry]
-  ring
-
-theorem lengthThreeFallingTarget_add_sub_hasValue
-    (q t A B k : ℕ) {shift : ℕ} (shift_positive : 0 < shift)
-    (carry_value : HasValue 5 (lengthThreeFallingTargetCarry q A B k) 2) :
-    HasValue 5
-      (lengthThreeFallingTarget q (t + shift) A B k -
-        lengthThreeFallingTarget q t A B k)
-      ((shellSlopeGapFiveDepth shift : ℤ) - 1) := by
-  have shift_value := shellRatio_pow_sub_one_hasValue shift_positive
-  have power_unit := shellRatio_power_unit (t + k)
-  have denominator_value : HasValue 5 (125 : ℚ) 3 := by
-    convert primePower_hasValue (prime := 5) 3 using 1 <;> norm_num
-  have difference_eq :
-      lengthThreeFallingTarget q (t + shift) A B k -
-          lengthThreeFallingTarget q t A B k =
-        ((2 / 3 : ℚ) ^ (t + k) *
-          ((2 / 3 : ℚ) ^ shift - 1) *
-          lengthThreeFallingTargetCarry q A B k) / 125 := by
-    rw [lengthThreeFallingTarget, lengthThreeFallingTarget]
-    rw [show t + shift + k = t + k + shift by omega, pow_add]
-    ring
-  rw [difference_eq]
-  have numerator_value :=
-    mul_hasValue (mul_hasValue power_unit shift_value) carry_value
-  have difference_value := div_hasValue numerator_value denominator_value
-  convert difference_value using 1
-  ring
-
-theorem lengthThreeFallingTarget_fiveUnit_add_ten_iff
-    (q t A B k : ℕ)
-    (carry_value : HasValue 5 (lengthThreeFallingTargetCarry q A B k) 2) :
-    IsUnit 5 (lengthThreeFallingTarget q (t + 10) A B k) ↔
-      IsUnit 5 (lengthThreeFallingTarget q t A B k) := by
-  have difference_value := lengthThreeFallingTarget_add_sub_hasValue
-    q t A B k (show 0 < 10 by norm_num) carry_value
-  have ten_depth : shellSlopeGapFiveDepth 10 = 2 := by
-    rw [shellSlopeGapFiveDepth, if_neg (by norm_num : ¬Odd 10)]
-    norm_num [padicValNat_self]
-  rw [ten_depth] at difference_value
-  norm_num at difference_value
-  have forward_positive : IsPositive 5
-      (lengthThreeFallingTarget q (t + 10) A B k -
-        lengthThreeFallingTarget q t A B k) :=
-    ⟨difference_value.1, by rw [difference_value.2]; norm_num⟩
-  have reverse_value := neg_hasValue difference_value
-  have reverse_positive : IsPositive 5
-      (lengthThreeFallingTarget q t A B k -
-        lengthThreeFallingTarget q (t + 10) A B k) := by
-    convert (show IsPositive 5
-      (-(lengthThreeFallingTarget q (t + 10) A B k -
-        lengthThreeFallingTarget q t A B k)) from
-          ⟨reverse_value.1, by rw [reverse_value.2]; norm_num⟩) using 1
-    ring
-  constructor
-  · intro later_unit
-    have earlier_unit := unit_add_positive later_unit reverse_positive
-    convert earlier_unit using 1
-    ring
-  · intro earlier_unit
-    have later_unit := unit_add_positive earlier_unit forward_positive
-    convert later_unit using 1
-    ring
-
-theorem lengthThreeFallingTarget_fiveUnit_iff_mod_ten
-    (q t A B k : ℕ)
-    (carry_value : HasValue 5 (lengthThreeFallingTargetCarry q A B k) 2) :
-    IsUnit 5 (lengthThreeFallingTarget q t A B k) ↔
-      IsUnit 5 (lengthThreeFallingTarget q (t % 10) A B k) := by
-  have periodic (base repetitions : ℕ) :
-      IsUnit 5 (lengthThreeFallingTarget q (base + 10 * repetitions) A B k) ↔
-        IsUnit 5 (lengthThreeFallingTarget q base A B k) := by
-    induction repetitions with
-    | zero => simp
-    | succ repetitions induction =>
-        rw [Nat.mul_succ, ← Nat.add_assoc,
-          lengthThreeFallingTarget_fiveUnit_add_ten_iff
-            q (base + 10 * repetitions) A B k carry_value]
-        exact induction
-  have decomposition : t % 10 + 10 * (t / 10) = t := by omega
-  have reduced := periodic (t % 10) (t / 10)
-  rwa [decomposition] at reduced
-
-theorem lengthThreeFallingTarget_oddShift_hasValue_negOne
-    (q t A B k : ℕ) {shift : ℕ} (shift_positive : 0 < shift)
-    (shift_odd : Odd shift)
-    (target_unit : IsUnit 5 (lengthThreeFallingTarget q t A B k)) :
-    HasValue 5 (lengthThreeFallingTarget q (t + shift) A B k) (-1) := by
-  have carry_value :=
-    lengthThreeFallingTarget_fiveUnit_forces_carry q t A B k target_unit
-  have difference_value := lengthThreeFallingTarget_add_sub_hasValue
-    q t A B k shift_positive carry_value
-  have shift_depth : shellSlopeGapFiveDepth shift = 0 := by
-    rw [shellSlopeGapFiveDepth, if_pos shift_odd]
-  rw [shift_depth] at difference_value
-  norm_num at difference_value
-  have shifted_value := add_hasValue_left difference_value target_unit (by norm_num)
-  convert shifted_value using 1
-  ring
-
+  have right_target :=
+    (lengthThreeFalling_commonTarget p q t A B total_positive).2
+  have output_unit :
+      IsUnit 5
+        (shellRun (lengthThreeFallingRight p q t k)
+          (lengthThreeFallingSource p q A B k)) := by
+    rw [right_target]
+    exact target_unit
+  have prefixes :=
+    (shellPrefixesUnit_iff (lengthThreeFallingRight p q t k)
+      (lengthThreeFallingSource p q A B k)).2 output_unit
+  exact prefixes [] (lengthThreeFallingRight p q t k) (by simp)
 private theorem lengthThreeFalling_two_realTrap_forces_q_zero
     (p q A B : ℕ) (total_positive : 2 < A + B)
     (source_mem :

@@ -12815,8 +12815,8 @@ condition
 v₅(25+r^(t+k)E)=3.
 ```
 
-It forces `v₅(E)=2`. Since `9r^q+15` is a five-unit, `Z=E−(9r^q+15)` is then automatically
-a five-unit: throughout this chamber, the target guard implies the source guard.
+It forces `v₅(E)=2`. Independently, the global shell-prefix equivalence applied to the right
+schedule shows that any five-unit common target forces the collision source to be a five-unit.
 
 Once `v₅(E)=2`, every positive terminal shift `s` has the exact transition
 
@@ -12849,13 +12849,16 @@ chambers. In particular, the remaining parameters are unbounded.
 `MixedPrimeDebt.lengthThreeFallingSource_realTrap_forces_k_le_two`, and
 `MixedPrimeDebt.lengthThreeFalling_collision_realTrap_forces_k_eq_one_or_two`,
 `MixedPrimeDebt.lengthThreeFalling_commonTarget`,
+`MixedPrimeDebt.lengthThreeFallingTarget_eq_terminalCarryTarget`,
 `MixedPrimeDebt.lengthThreeFallingTarget_fiveUnit_forces_source_fiveUnit`,
-`MixedPrimeDebt.lengthThreeFallingTarget_add_sub_hasValue`, and
-`MixedPrimeDebt.lengthThreeFallingTarget_fiveUnit_iff_mod_ten`,
 `MixedPrimeDebt.lengthThreeFalling_two_realTrap_forces_pq_zero`,
 `MixedPrimeDebt.lengthThreeFalling_one_realTrap_parameter_cut`, and
 `MixedPrimeDebt.lengthThreeFallingTarget_fiveUnit_forces_A_even` in
-[`MixedPrimeRealTrapLengthThree.lean`](MatrixMortality/MixedPrimeRealTrapLengthThree.lean).
+[`MixedPrimeRealTrapLengthThree.lean`](MatrixMortality/MixedPrimeRealTrapLengthThree.lean), with
+the universal carry laws `MixedPrimeDebt.terminalCarryTarget_fiveUnit_forces_carry`,
+`MixedPrimeDebt.terminalCarryTarget_add_sub_hasValue`, and
+`MixedPrimeDebt.terminalCarryTarget_fiveUnit_iff_mod_ten` in
+[`MixedPrimeTerminalCarry.lean`](MatrixMortality/MixedPrimeTerminalCarry.lean).
 
 **Use:** split the first live length-three chamber into the two exact transfers `k=1` and `k=2`
 before entering the tied-minimum carry tree. The terminal gauge `t` can be omitted from every

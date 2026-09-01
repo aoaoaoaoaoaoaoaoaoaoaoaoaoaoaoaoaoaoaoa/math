@@ -2625,8 +2625,9 @@ together with exclusion of the zero-transfer wall, proves that real-trap members
 depth-two target carry for `k=1,2`, together with normalization of the other length-three sign
 chambers. In source-carry coordinates `Z` and target-carry coordinates `E=Z+9r^q+15`, the
 source and target are `Z/(27r^(p+q))` and `[25+r^(t+k)E]/125`. Target acceptance forces
-`v₅(E)=2`, hence forces source acceptance; it is exactly ten-periodic in the terminal gauge,
-while every positive odd shift rejects. The real trap also forces `p=q=0` at `k=2); at
+`v₅(E)=2`; the global shell-prefix equivalence separately forces source acceptance. Target
+acceptance is exactly ten-periodic in the terminal gauge,
+while every positive odd shift rejects. The real trap also forces `p=q=0` at `k=2`; at
 `k=1` it leaves only `q=0,B≤5,p≤9`, `q=1,p≤4`, or `q=2,p≤1`. In the strict chamber,
 target acceptance forces `A` even.
 The deepest of those three branches is itself a full depth reset. In normalized band coordinates
@@ -2955,7 +2956,8 @@ universal computation.
    each rectangle has an exact forty-pair table, and the real gauge is classified exactly.
    `D2-S24` starts length three in the closed positive-positive-negative chamber: the collision
    source is independent of its terminal gauge and the real trap leaves exactly `k∈{1,2}`.
-   Its target guard forces the source guard through one depth-two carry, target acceptance is
+   Its target guard forces the source guard by the global prefix equivalence; the target has
+   one depth-two carry, and acceptance is
    ten-periodic in the terminal gauge, and the real trap leaves a finite outer parameter box;
    target acceptance also forces the first displacement even. Classify the residual carry, then
    normalize the other sign chambers. Begin
