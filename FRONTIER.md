@@ -1665,6 +1665,18 @@ resulting affine signed-defect quotient. See
 [`R32-S58`](SALVAGE.md#r32-s58-positive-cubic-radix-readers) and
 [`m32-cubic-continuant-reader-2026-08-31.md`](audits/m32-cubic-continuant-reader-2026-08-31.md).
 
+The local mismatch seam is now closed for a designated spelling. Appending the true radix
+letter after every read contracts successive signed errors by `4/25`; the resulting
+base-`(4,25)` code is injective on digits `−1,0,1` by a modulo-four induction. Exactly enough
+true-readers erase the clock baseline, and splitting the existing endpoint bridge after its
+first positive wait converts the surviving translation into a nonzero scalar multiple of the
+singular return. The resulting physical word is zero exactly when every guessed bit matches its
+writer. What remains is global syntax, not local comparison: an arbitrary raw wait word may omit
+or split a clocked block, use the wrong cleanup multiplicity, or reach an unrelated zero. The
+compiler lane now needs an arbitrary-word converse or a guard forcing this block grammar. See
+[`R32-S59`](SALVAGE.md#r32-s59-clocked-cubic-radix-comparator) and
+[`m32-cubic-continuant-mismatch-clock-2026-08-31.md`](audits/m32-cubic-continuant-mismatch-clock-2026-08-31.md).
+
 ### ReturnSquare laboratory
 
 [`R32-S03`](SALVAGE.md#r32-s03-returnsquare-normal-form) is the first completely normalized

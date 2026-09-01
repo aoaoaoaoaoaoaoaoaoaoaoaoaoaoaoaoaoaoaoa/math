@@ -985,6 +985,17 @@ identity projectively. Thus the readers are exact but not locally sound without 
 See `R32-S58` and
 [`audits/m32-cubic-continuant-reader-2026-08-31.md`](audits/m32-cubic-continuant-reader-2026-08-31.md).
 
+`CubicContinuantMismatchClock` repairs that cancellation in a designated physical comparison
+word. Each reader-writer pair is followed by the same true radix writer, so successive signed
+errors acquire weights `(4/25)ⁱ`. Lean proves injectivity of the cleared signed code on digits
+`−1,0,1` by peeling its head modulo four. Repeating the true-reader exactly once per check then
+removes the common clock baseline. A separately checked split of the known singular endpoint
+bridge maps the residual upper translation to a nonzero scalar multiple of `M₀`. Consequently,
+the complete physical endpoint word vanishes exactly when every guessed bit equals its written
+bit, and every interior wait is positive. This is a sound comparator for that balanced spelling,
+not an arbitrary-word compiler converse. See `R32-S59` and
+[`audits/m32-cubic-continuant-mismatch-clock-2026-08-31.md`](audits/m32-cubic-continuant-mismatch-clock-2026-08-31.md).
+
 The rank-(2,2) graph is no longer an independent residue. `RankTwoPunctuation` proves that every
 compatible square with one rank-one loop and three units transports exactly to the existing raw
 reverse compiler [`R32-M01`](SALVAGE.md#r32-m01-generic-reverse-edge-compiler). Its intrinsic
@@ -1824,6 +1835,7 @@ fixed-rank decision problem.
 | `CubicReturnNonPure.lean` | non-pure physical endpoints, fixed return recurrence, scalar-defect norm, continuant state projection, and exact unselected-wait obstructions |
 | `CubicContinuantRadix.lean` | free binary affine radix stack inside the fixed non-pure cubic terminal language |
 | `CubicContinuantReader.lean` | positive projective inverses for both cubic radix letters and the exact opposite-mismatch cancellation |
+| `CubicContinuantMismatchClock.lean` | contracting signed-error clock and exact endpoint zero test for balanced cubic radix comparisons |
 | `EdgeCompression.lean` | exact adjacent-edge compression for split finite-rank families |
 | `TwoPlaneEdges.lean` | compatible two-plane realization of a `2 × 2` edge square and exact rank-two certificates |
 | `ReverseEdge.lean` | generic projective-incidence reverse compiler, basis adaptation, and all-path converse |
