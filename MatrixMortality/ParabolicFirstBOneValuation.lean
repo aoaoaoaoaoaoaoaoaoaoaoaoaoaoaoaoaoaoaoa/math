@@ -151,8 +151,12 @@ private theorem product_orders
     d_value.2, w_value.2] at valuations_equal
   omega
 
-private def firstBOneX211TrailingScale (h : Nat) (A : ℤ) : ℤ := 729 * (243 * 3 ^ h * A)
-private def firstBOneX211TrailingComplement (h : Nat) (A G : ℤ) : ℤ :=
+/-- Scale coordinate of a `cb · stem · b c^h` body after the stem scale is named `A`. -/
+def firstBOneX211RunScale (h : Nat) (A : ℤ) : ℤ := 729 * (243 * 3 ^ h * A)
+
+/-- Complement coordinate of a `cb · stem · b c^h` body after the stem coordinates are
+named `A` and `G`. -/
+def firstBOneX211RunComplement (h : Nat) (A G : ℤ) : ℤ :=
   39 * (243 * 3 ^ h * A) + 3 ^ (h + 1) * (81 * G + 13)
 
 private theorem trailing_c_encoded_length (h : Nat) :
@@ -173,19 +177,21 @@ private theorem trailing_encoded_length (stem : List TagLetter) (h : Nat) :
   norm_num [tagCode]
   omega
 
-private theorem cb_trailing_scale (stem : List TagLetter) (h : Nat) :
+/-- Exact scale coordinates supplied by the final-`b` decomposition. -/
+theorem firstBOneX211RunScale_of_stem (stem : List TagLetter) (h : Nat) :
     (3 : ℤ) ^ (tagEncode 3 ([.c, .b] ++
         (stem ++ .b :: List.replicate h .c))).length =
-      firstBOneX211TrailingScale h (3 ^ (tagEncode 3 stem).length) := by
+      firstBOneX211RunScale h (3 ^ (tagEncode 3 stem).length) := by
   rw [tagEncode_append, List.length_append, trailing_encoded_length, pow_add, pow_add,
     pow_add]
-  norm_num [tagEncode, spell, tagCode, firstBOneX211TrailingScale]
+  norm_num [tagEncode, spell, tagCode, firstBOneX211RunScale]
   ring
 
-private theorem cb_trailing_complement (stem : List TagLetter) (h : Nat) :
+/-- Exact complement coordinates supplied by the final-`b` decomposition. -/
+theorem firstBOneX211RunComplement_of_stem (stem : List TagLetter) (h : Nat) :
     (tagComplementCode ([.c, .b] ++
         (stem ++ .b :: List.replicate h .c)) : ℤ) =
-      firstBOneX211TrailingComplement h (3 ^ (tagEncode 3 stem).length)
+      firstBOneX211RunComplement h (3 ^ (tagEncode 3 stem).length)
         (tagComplementCode stem) := by
   rw [tagComplementCode_append]
   have cb_complement : tagComplementCode [.c, .b] = 39 := by decide
@@ -198,8 +204,68 @@ private theorem cb_trailing_complement (stem : List TagLetter) (h : Nat) :
     ring
   push_cast
   rw [tail_scale]
-  unfold firstBOneX211TrailingComplement
+  unfold firstBOneX211RunComplement
   ring
+
+/-- A rational physical core with a displayed final `b` is exactly the integral run-coordinate
+core. -/
+theorem firstBOneX211RunCore_of_core_zero
+    (stem : List TagLetter) (h y z : Nat)
+    (core_zero :
+      bZeroBDefectCOneCodeCore
+        ((3 : ℚ) ^ (tagEncode 3
+          ([.c, .b] ++ (stem ++ .b :: List.replicate h .c))).length)
+        (ternaryCode (tagEncode 3
+          ([.c, .b] ++ (stem ++ .b :: List.replicate h .c)))) 211 y z = 0) :
+    bZeroBDefectCOneCodeCore
+      (firstBOneX211RunScale h ((3 : ℤ) ^ (tagEncode 3 stem).length))
+      (firstBOneX211RunScale h ((3 : ℤ) ^ (tagEncode 3 stem).length) - 1 -
+        firstBOneX211RunComplement h ((3 : ℤ) ^ (tagEncode 3 stem).length)
+          (tagComplementCode stem)) 211 y z = 0 := by
+  let body := [.c, .b] ++ (stem ++ .b :: List.replicate h .c)
+  let S : Nat := 3 ^ (tagEncode 3 body).length
+  let C : Nat := ternaryCode (tagEncode 3 body)
+  let D : Nat := tagComplementCode body
+  have scale_eq_int :
+      (S : ℤ) = firstBOneX211RunScale h ((3 : ℤ) ^ (tagEncode 3 stem).length) := by
+    change ((3 ^ (tagEncode 3 ([.c, .b] ++
+        (stem ++ .b :: List.replicate h .c))).length : Nat) : ℤ) =
+      firstBOneX211RunScale h ((3 : ℤ) ^ (tagEncode 3 stem).length)
+    simpa only [Nat.cast_pow, Nat.cast_ofNat] using
+      firstBOneX211RunScale_of_stem stem h
+  have complement_eq_int :
+      (D : ℤ) = firstBOneX211RunComplement h ((3 : ℤ) ^ (tagEncode 3 stem).length)
+        (tagComplementCode stem) := by
+    dsimp [D, body]
+    exact firstBOneX211RunComplement_of_stem stem h
+  have code_lt : C < S := by
+    dsimp [C, S, body]
+    exact ternaryCode_lt_pow_length
+      (tagEncode 3 ([.c, .b] ++ (stem ++ .b :: List.replicate h .c)))
+  have complement_nat : D = S - C - 1 := rfl
+  have coordinate_sum : C + D + 1 = S := by omega
+  have coordinate_sum_int : (C : ℤ) + D + 1 = S := by
+    exact_mod_cast coordinate_sum
+  have code_eq_int :
+      (C : ℤ) = firstBOneX211RunScale h ((3 : ℤ) ^ (tagEncode 3 stem).length) - 1 -
+        firstBOneX211RunComplement h ((3 : ℤ) ^ (tagEncode 3 stem).length)
+          (tagComplementCode stem) := by
+    omega
+  have scale_cast :
+      (S : ℚ) =
+        (3 : ℚ) ^
+          (tagEncode 3 ([.c, .b] ++
+            (stem ++ .b :: List.replicate h .c))).length := by
+    dsimp [S, body]
+    norm_num
+  rw [← scale_cast] at core_zero
+  change bZeroBDefectCOneCodeCore (S : ℚ) (C : ℚ) 211 y z = 0 at core_zero
+  have core_zero_int :
+      bZeroBDefectCOneCodeCore (S : ℤ) (C : ℤ) 211 y z = 0 := by
+    unfold bZeroBDefectCOneCodeCore at core_zero ⊢
+    exact_mod_cast core_zero
+  rw [scale_eq_int, code_eq_int] at core_zero_int
+  exact core_zero_int
 
 /-- Every encoded-body complement is divisible by three. -/
 theorem tagComplementCode_three_dvd (body : List TagLetter) :
@@ -219,61 +285,61 @@ private theorem u_root_congruence
     (h : Nat) (A G : ℤ) (h_le : h ≤ 5) (G_three : (3 : ℤ) ∣ G) :
     (3 : ℤ) ^ (h + 7) ∣
       8 * bZeroBDefectCOneSfftN
-          (firstBOneX211TrailingScale h A) (firstBOneX211TrailingComplement h A G) *
+          (firstBOneX211RunScale h A) (firstBOneX211RunComplement h A G) *
           firstBOneX211RootResidue h -
         3 * bZeroBDefectCOneSfftC
-          (firstBOneX211TrailingScale h A)
-          (firstBOneX211TrailingComplement h A G) := by
+          (firstBOneX211RunScale h A)
+          (firstBOneX211RunComplement h A G) := by
   obtain ⟨g, rfl⟩ := G_three
   interval_cases h <;>
-    norm_num [firstBOneX211TrailingScale, firstBOneX211TrailingComplement, bZeroBDefectCOneSfftN,
+    norm_num [firstBOneX211RunScale, firstBOneX211RunComplement, bZeroBDefectCOneSfftN,
       bZeroBDefectCOneSfftC, firstBOneX211RootResidue] <;>
     omega
 
 private theorem v_root_congruence (h : Nat) (A G : ℤ) (h_le : h ≤ 5) :
     (3 : ℤ) ^ 13 ∣
       4 * bZeroBDefectCOneSfftN
-          (firstBOneX211TrailingScale h A) (firstBOneX211TrailingComplement h A G) *
+          (firstBOneX211RunScale h A) (firstBOneX211RunComplement h A G) *
           420724 -
         bZeroBDefectCOneSfftM
-          (firstBOneX211TrailingScale h A)
-          (firstBOneX211TrailingComplement h A G) := by
+          (firstBOneX211RunScale h A)
+          (firstBOneX211RunComplement h A G) := by
   interval_cases h <;>
-    norm_num [firstBOneX211TrailingScale, firstBOneX211TrailingComplement, bZeroBDefectCOneSfftN,
+    norm_num [firstBOneX211RunScale, firstBOneX211RunComplement, bZeroBDefectCOneSfftN,
       bZeroBDefectCOneSfftM] <;>
     omega
 
 private theorem v_root_exact (h : Nat) (A G : ℤ) (h_le : h ≤ 5) :
     ExactThreeOrder (bZeroBDefectCOneSfftV
-      (firstBOneX211TrailingScale h A)
-      (firstBOneX211TrailingComplement h A G) 420724) 13 := by
+      (firstBOneX211RunScale h A)
+      (firstBOneX211RunComplement h A G) 420724) 13 := by
   interval_cases h <;>
-    norm_num [ExactThreeOrder, firstBOneX211TrailingScale,
-      firstBOneX211TrailingComplement, bZeroBDefectCOneSfftV,
+    norm_num [ExactThreeOrder, firstBOneX211RunScale,
+      firstBOneX211RunComplement, bZeroBDefectCOneSfftV,
       bZeroBDefectCOneSfftN, bZeroBDefectCOneSfftM] <;>
     omega
 
 private theorem complement_exact (h : Nat) (A G : ℤ) (h_le : h ≤ 5) :
-    ExactThreeOrder (firstBOneX211TrailingComplement h A G) (h + 1) := by
+    ExactThreeOrder (firstBOneX211RunComplement h A G) (h + 1) := by
   interval_cases h <;>
-    norm_num [ExactThreeOrder, firstBOneX211TrailingComplement] <;>
+    norm_num [ExactThreeOrder, firstBOneX211RunComplement] <;>
     omega
 
 private theorem w_exact (h : Nat) (A G : ℤ) (h_le : h ≤ 5) :
     ExactThreeOrder (bZeroBDefectCOneSfftW
-      (firstBOneX211TrailingScale h A)
-      (firstBOneX211TrailingComplement h A G)) 1 := by
+      (firstBOneX211RunScale h A)
+      (firstBOneX211RunComplement h A G)) 1 := by
   interval_cases h <;>
-    norm_num [ExactThreeOrder, firstBOneX211TrailingScale,
-      firstBOneX211TrailingComplement, bZeroBDefectCOneSfftW] <;>
+    norm_num [ExactThreeOrder, firstBOneX211RunScale,
+      firstBOneX211RunComplement, bZeroBDefectCOneSfftW] <;>
     omega
 
 private theorem n_unit (h : Nat) (A G : ℤ) (h_le : h ≤ 5) :
     ¬(3 : ℤ) ∣ bZeroBDefectCOneSfftN
-      (firstBOneX211TrailingScale h A)
-      (firstBOneX211TrailingComplement h A G) := by
+      (firstBOneX211RunScale h A)
+      (firstBOneX211RunComplement h A G) := by
   interval_cases h <;>
-    norm_num [firstBOneX211TrailingScale, firstBOneX211TrailingComplement,
+    norm_num [firstBOneX211RunScale, firstBOneX211RunComplement,
       bZeroBDefectCOneSfftN] <;>
     omega
 
@@ -281,11 +347,11 @@ private theorem valuation_envelope_coordinates
     (h y z : Nat) (A G : ℤ) (h_le : h ≤ 5) (z_upper : z < 3 ^ 13)
     (G_three : (3 : ℤ) ∣ G)
     (core_zero :
-      bZeroBDefectCOneCodeCore (firstBOneX211TrailingScale h A)
-        (firstBOneX211TrailingScale h A - 1 - firstBOneX211TrailingComplement h A G) 211 y z = 0) :
+      bZeroBDefectCOneCodeCore (firstBOneX211RunScale h A)
+        (firstBOneX211RunScale h A - 1 - firstBOneX211RunComplement h A G) 211 y z = 0) :
     FirstBOneX211ValuationEnvelope h y z := by
-  let S := firstBOneX211TrailingScale h A
-  let D := firstBOneX211TrailingComplement h A G
+  let S := firstBOneX211RunScale h A
+  let D := firstBOneX211RunComplement h A G
   let N := bZeroBDefectCOneSfftN S D
   let U := bZeroBDefectCOneSfftU S D (y : ℤ)
   let V := bZeroBDefectCOneSfftV S D (z : ℤ)
@@ -314,7 +380,7 @@ private theorem valuation_envelope_coordinates
   have product_eq : U * V = 67908593862 * D * W := by
     dsimp [U, V, S, D, W]
     exact bZeroBDefectCOneSfft_eq_of_core_zero
-      (firstBOneX211TrailingScale h A) (firstBOneX211TrailingComplement h A G) y z core_zero
+      (firstBOneX211RunScale h A) (firstBOneX211RunComplement h A G) y z core_zero
   have d_ne : D ≠ 0 := (exactThreeOrder_iff_padicValInt D (h + 1)).mp d_exact |>.1
   have w_ne : W ≠ 0 := (exactThreeOrder_iff_padicValInt W 1).mp w_has_order |>.1
   have right_ne : (67908593862 : ℤ) * D * W ≠ 0 :=
@@ -418,45 +484,12 @@ theorem firstBOneX211ValuationEnvelope_of_core_zero
         (ternaryCode (tagEncode 3 ([.c, .b] ++ tail))) 211 y z = 0) :
     FirstBOneX211ValuationEnvelope h y z := by
   subst tail
-  let body := [.c, .b] ++ (stem ++ .b :: List.replicate h .c)
   let A : ℤ := (3 : ℤ) ^ (tagEncode 3 stem).length
   let G : ℤ := tagComplementCode stem
-  let S : Nat := 3 ^ (tagEncode 3 body).length
-  let C : Nat := ternaryCode (tagEncode 3 body)
-  let D : Nat := tagComplementCode body
-  have scale_eq_int : (S : ℤ) = firstBOneX211TrailingScale h A := by
-    change ((3 ^ (tagEncode 3 ([.c, .b] ++
-        (stem ++ .b :: List.replicate h .c))).length : Nat) : ℤ) =
-      firstBOneX211TrailingScale h ((3 : ℤ) ^ (tagEncode 3 stem).length)
-    simpa only [Nat.cast_pow, Nat.cast_ofNat] using cb_trailing_scale stem h
-  have complement_eq_int : (D : ℤ) = firstBOneX211TrailingComplement h A G := by
-    dsimp [D, body, A, G]
-    exact cb_trailing_complement stem h
-  have code_lt : C < S := by
-    dsimp [C, S, body]
-    exact ternaryCode_lt_pow_length
-      (tagEncode 3 ([.c, .b] ++ (stem ++ .b :: List.replicate h .c)))
-  have complement_nat : D = S - C - 1 := rfl
-  have coordinate_sum : C + D + 1 = S := by omega
-  have coordinate_sum_int : (C : ℤ) + D + 1 = S := by
-    exact_mod_cast coordinate_sum
-  have code_eq_int :
-      (C : ℤ) = firstBOneX211TrailingScale h A - 1 - firstBOneX211TrailingComplement h A G := by
-    omega
-  have scale_cast :
-      (S : ℚ) =
-        (3 : ℚ) ^
-          (tagEncode 3 ([.c, .b] ++
-            (stem ++ .b :: List.replicate h .c))).length := by
-    dsimp [S, body]
-    norm_num
-  rw [← scale_cast] at core_zero
-  change bZeroBDefectCOneCodeCore (S : ℚ) (C : ℚ) 211 y z = 0 at core_zero
-  have core_zero_int :
-      bZeroBDefectCOneCodeCore (S : ℤ) (C : ℤ) 211 y z = 0 := by
-    unfold bZeroBDefectCOneCodeCore at core_zero ⊢
-    exact_mod_cast core_zero
-  rw [scale_eq_int, code_eq_int] at core_zero_int
+  have core_zero_int := firstBOneX211RunCore_of_core_zero stem h y z core_zero
+  change bZeroBDefectCOneCodeCore (firstBOneX211RunScale h A)
+    (firstBOneX211RunScale h A - 1 - firstBOneX211RunComplement h A G)
+      211 y z = 0 at core_zero_int
   have G_three : (3 : ℤ) ∣ G := by
     dsimp [G]
     exact_mod_cast tagComplementCode_three_dvd stem

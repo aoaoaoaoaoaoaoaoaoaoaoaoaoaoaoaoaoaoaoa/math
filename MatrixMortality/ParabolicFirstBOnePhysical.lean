@@ -1,13 +1,13 @@
-import MatrixMortality.ParabolicFirstBOnePosition
+import MatrixMortality.ParabolicFirstBOneRun
 import MatrixMortality.ParabolicWaitBounds
 
 /-!
 # Physical reduction to the x=211 valuation-density funnel
 
 The exact core equation and the native first- and last-`b` decompositions supply the density
-envelope consumed by `ParabolicFirstBOneFunnel`.  Composing that envelope with the position
-extinction, finite classifier, and terminal certificate leaves only the bounded valuation
-envelope and two explicit numerical bounds as upstream obligations.
+envelope consumed by `ParabolicFirstBOneFunnel`. Composing that envelope with the run and
+position extinctions, finite classifier, and terminal certificate leaves only the inner-wait
+bound as an upstream obligation.
 -/
 
 namespace MatrixMortality.ParabolicBlade
@@ -136,6 +136,55 @@ theorem firstBOneX211_core_balance
   unfold bZeroBDefectCOneCodeCore at core_zero_int
   unfold firstBOneX211J firstBOneX211A firstBOneX211B firstBOneX211Q
   linear_combination core_zero_int
+
+/-- A physical x=211 `cb` zero has middle wait at least two. This is independent of every
+trailing-run and inner-wait bound. -/
+theorem firstBOneX211_wait_two_le_of_core_zero
+    (tail : List TagLetter) (y z : Nat)
+    (core_zero :
+      bZeroBDefectCOneCodeCore
+        ((3 : ℚ) ^ (tagEncode 3 ([.c, .b] ++ tail)).length)
+        (ternaryCode (tagEncode 3 ([.c, .b] ++ tail))) 211 y z = 0) :
+    2 ≤ y := by
+  let T : Nat := 3 ^ (tagEncode 3 tail).length
+  let E : Nat := tagComplementCode tail
+  have scale_positive : (1 : ℤ) ≤ T := by
+    dsimp [T]
+    exact_mod_cast one_le_pow₀ (by norm_num : 0 < 3)
+  have balance := firstBOneX211_core_balance tail y z core_zero
+  change ((39 * T + E : Nat) : ℤ) * firstBOneX211J y z =
+    (T : ℤ) * firstBOneX211A y z - firstBOneX211B y z at balance
+  have left_nonnegative :
+      (0 : ℤ) ≤ ((39 * T + E : Nat) : ℤ) * firstBOneX211J y z := by
+    have complement_nonnegative : (0 : ℤ) ≤ ((39 * T + E : Nat) : ℤ) :=
+      Int.natCast_nonneg _
+    have coefficient_positive : (0 : ℤ) < firstBOneX211J y z := by
+      unfold firstBOneX211J
+      positivity
+    exact mul_nonneg complement_nonnegative coefficient_positive.le
+  by_contra wait_not_two
+  have wait_cases : y = 0 ∨ y = 1 := by omega
+  rcases wait_cases with rfl | rfl
+  · have factor_positive :
+        (0 : ℤ) < 5216979348711180 * z + 487663725961773 := by
+      positivity
+    have scaled_nonnegative :
+        (0 : ℤ) ≤ ((T : ℤ) - 1) *
+          (5216979348711180 * z + 487663725961773) := by
+      exact mul_nonneg (sub_nonneg.mpr scale_positive) factor_positive.le
+    norm_num [firstBOneX211A, firstBOneX211B, firstBOneX211Q,
+      firstBOneX211J] at balance left_nonnegative
+    nlinarith
+  · have factor_positive :
+        (0 : ℤ) < 5216747778809100 * z + 487675262773629 := by
+      positivity
+    have scaled_nonnegative :
+        (0 : ℤ) ≤ ((T : ℤ) - 1) *
+          (5216747778809100 * z + 487675262773629) := by
+      exact mul_nonneg (sub_nonneg.mpr scale_positive) factor_positive.le
+    norm_num [firstBOneX211A, firstBOneX211B, firstBOneX211Q,
+      firstBOneX211J] at balance left_nonnegative
+    nlinarith
 
 /-- A physical x=211 zero with exact first- and last-`b` decompositions satisfies the cleared
 density envelope used by the finite classifier. -/
@@ -424,5 +473,48 @@ theorem bZeroBDefectCOneCodeCore_x211_ne_zero_of_run_and_inner_bounds
   exact
     bZeroBDefectCOneCodeCore_x211_ne_zero_of_valuation_envelope_without_position_bound
       j h tail stem rest y z first_b last_b run_bound inner_bound valuation core_zero
+
+/-- No physical x=211 `cb` zero survives under the inner-wait bound. The trailing-run and
+next-`b` bounds are both consequences of the exact physical coordinates. -/
+theorem bZeroBDefectCOneCodeCore_x211_ne_zero_of_inner_bound
+    (j h : Nat) (tail stem rest : List TagLetter) (y z : Nat)
+    (first_b : tail = List.replicate j .c ++ .b :: rest)
+    (last_b : tail = stem ++ .b :: List.replicate h .c)
+    (inner_bound : z < 3 ^ 13) :
+    bZeroBDefectCOneCodeCore
+      ((3 : ℚ) ^ (tagEncode 3 ([.c, .b] ++ tail)).length)
+      (ternaryCode (tagEncode 3 ([.c, .b] ++ tail))) 211 y z ≠ 0 := by
+  intro core_zero
+  have wait_positive := firstBOneX211_wait_two_le_of_core_zero tail y z core_zero
+  have density :=
+    firstBOneX211DensityEnvelope_of_core_zero j h tail stem rest y z
+      first_b last_b wait_positive core_zero
+  have wait_lower := firstBOneX211_y_lower_of_density_envelope h j y z density
+  have core_zero_first_b :
+      bZeroBDefectCOneCodeCore
+        ((3 : ℚ) ^
+          (tagEncode 3 (List.replicate 1 .c ++ .b :: tail)).length)
+        (ternaryCode (tagEncode 3 (List.replicate 1 .c ++ .b :: tail)))
+        211 y z = 0 := by
+    simpa using core_zero
+  have wait_upper :=
+    bZeroBDefectCOne_y_le_of_first_b 1 tail 211 y z core_zero_first_b
+  by_cases run_bounded : h ≤ 5
+  · exact bZeroBDefectCOneCodeCore_x211_ne_zero_of_run_and_inner_bounds
+      j h tail stem rest y z first_b last_b run_bounded inner_bound core_zero
+  · have run_large : 6 ≤ h := by omega
+    let A : ℤ := (3 : ℤ) ^ (tagEncode 3 stem).length
+    let G : ℤ := tagComplementCode stem
+    have run_core := firstBOneX211RunCore_of_core_zero stem h y z (by
+      rw [← last_b]
+      exact core_zero)
+    change bZeroBDefectCOneCodeCore (firstBOneX211RunScale h A)
+      (firstBOneX211RunScale h A - 1 - firstBOneX211RunComplement h A G)
+        211 y z = 0 at run_core
+    have G_three : (3 : ℤ) ∣ G := by
+      dsimp [G]
+      exact_mod_cast tagComplementCode_three_dvd stem
+    exact bZeroBDefectCOneCodeCore_x211_ne_zero_of_large_run_coordinates
+      h j y z A G run_large wait_lower wait_upper inner_bound G_three density run_core
 
 end MatrixMortality.ParabolicBlade

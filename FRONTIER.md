@@ -673,6 +673,13 @@ valuation envelope. Thus `j<13` is derived, and the S36 classifier applies with 
 hypothesis. The full `cb` chamber still has two honest exits: `h≥6` and `z≥3^13`. Density alone
 cannot cap `z`: the formal envelope contains every `z≥394` at `h=j=0` and `y=39726`.
 
+The trailing-run restriction is also eliminated below the inner-wait cap
+[`M4-S38`](SALVAGE.md#m4-s38-phase-zero-right-c-x211-run-extinction). Exact run coordinates
+give `v₃(U)+v₃(V)=h+16`; `z<3^13` caps the second order, while root congruences and density
+extinguish every `h≥6`. Composed with S37 and S36, the physical `x=211` `cb` core is now
+nonzero under the sole bound `z<3^13`. The unique live exit is `z≥3^13`; attack it through
+the suffix complement grammar, not by seeking a false density-only cap.
+
 Two original-family nodes survive, and they must not be conflated.
 
 1. **Exterior collision avoidance.** Use `M4-S06`--`M4-S15` to classify the transported kernel

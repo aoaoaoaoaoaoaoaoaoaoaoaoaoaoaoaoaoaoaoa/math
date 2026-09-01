@@ -12,15 +12,6 @@ three, and the last has incompatible exact coordinate orders.
 
 namespace MatrixMortality.ParabolicBlade
 
-/-- Scale coordinate of a `cb · stem · b c^h` body after the stem scale is named `A`. -/
-def firstBOneX211RunScale (h : Nat) (A : ℤ) : ℤ :=
-  729 * (243 * 3 ^ h * A)
-
-/-- Complement coordinate of a `cb · stem · b c^h` body after the stem coordinates are
-named `A` and `G`. -/
-def firstBOneX211RunComplement (h : Nat) (A G : ℤ) : ℤ :=
-  39 * (243 * 3 ^ h * A) + 3 ^ (h + 1) * (81 * G + 13)
-
 private abbrev runS := firstBOneX211RunScale
 private abbrev runD := firstBOneX211RunComplement
 
