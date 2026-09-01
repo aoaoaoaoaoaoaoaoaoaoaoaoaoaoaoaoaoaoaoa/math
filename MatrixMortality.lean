@@ -227,6 +227,7 @@ import MatrixMortality.SwappedSetterCarrierResonance
 import MatrixMortality.DecimalSetterAllCRule
 import MatrixMortality.SwappedSetterPredecessorCylinder
 import MatrixMortality.SwappedSetterBackwardResonance
+import MatrixMortality.DecimalSetterRuleEntry
 import MatrixMortality.SchottkyPunctuation
 import MatrixMortality.TwoStateObstructions
 import MatrixMortality.ForcedRuleCCompanion

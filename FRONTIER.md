@@ -1196,6 +1196,12 @@ remain strictly shallower than the physical target. Leading and position-two rul
 removed by `MM-S54` and `MM-S62`; no all-`c` rightmost-rule first entry survives. Generalized
 carriers and singleton targets remain outside this assembly.
 
+[`MM-S66`](SALVAGE.md#mm-s66-complete-rule-bearing-first-entry-extinction) closes the complete
+rule-bearing branch. Factoring at the rightmost rule leaves an alphabet word that either
+contains `b` or is entirely `c`; `MM-S60` kills the first arm and `MM-S65` the second. The sole
+remaining distinguished raw-head first-entry class is all-erasure, already classified by
+`MM-S53`.
+
 The ternary and decimal branches now separate at their first multi-transfer front.
 [`MM-S37`](SALVAGE.md#mm-s37-decimal-three-shape-frontier-extinction) substitutes each of the
 three role shapes left by the swapped ternary gate into the decimal carrier equation. All are

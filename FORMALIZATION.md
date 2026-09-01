@@ -2048,6 +2048,11 @@ is `2`; their sum is `4` or `6` modulo five at depth `2β`, again below the targ
 all-`c` rightmost-rule first entry is impossible. Generalized carriers and singleton targets
 remain separate.
 
+Record [`MM-S66`](SALVAGE.md#mm-s66-complete-rule-bearing-first-entry-extinction) performs the
+exhaustive two-letter split. A rightmost-rule word containing `b` is impossible by `MM-S60`;
+one without `b` consists entirely of `c` and is impossible by `MM-S65`. Consequently no
+rule-bearing block carries the distinguished two-`c` raw head into a multi-role pole.
+
 Record [`MM-S37`](SALVAGE.md#mm-s37-decimal-three-shape-frontier-extinction) separates the
 ternary and decimal first-multi-transfer fronts. The single theorem
 `DecimalSetterDepth.firstMultiTransfer_threeShapeFrontier_impossible` consumes the three role
@@ -2977,6 +2982,7 @@ fixed-rank decision problem.
 | `DecimalSetterAllCRule.lean` | normalized later-frontier collisions and complete all-`c` rightmost-rule extinction |
 | `SwappedSetterPredecessorCylinder.lean` | unique high-precision predecessor cylinder at a nonterminal full-tail pole, literal-deletion numerator consequence, and sharpness on the distinguished deletion spine |
 | `SwappedSetterBackwardResonance.lean` | backward deep-numerator resonance, exact high-precision ancestry cylinder, literal-deletion numerator/gap toggle, and the zero-carrier terminal fork |
+| `DecimalSetterRuleEntry.lean` | exhaustive b-bearing/all-`c` split and complete rule-bearing first-entry extinction |
 | `PairedMortality.lean` | common-column mortality converse and exact integer `4 × 4` family |
 | `PhaseFracture.lean` | phase normalization and dimension-free projective-identification contradiction |
 | `PhaseRigidity.lean` | checked local role algebra, discrepancy commutators, and invariant-pencil rigidity |
