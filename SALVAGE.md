@@ -345,6 +345,7 @@ file owns the mathematical stock.
 | [`G3-S08`](#g3-s08-mixed-prime-macro-fork-rigidity) | structure theorem and obstruction | exact endpoint coding identifies the flat and nested fork actions, while a common fixed point for all three macros is impossible | formalized | active |
 | [`G3-S10`](#g3-s10-mixed-prime-literal-fork-extinction) | obstruction and structural reduction | literal flat/nested equality forces a forbidden common fixed point, so every exact code requires a genuine mixed-prime kernel collision | formalized | active |
 | [`G3-S11`](#g3-s11-reduced-fork-kernel-gauntlet) | structural reduction and computational obstruction | context cancellation forces a positive reduced kernel triple with exterior fixed-point geometry; exhaustive exact search excludes reduced length at most 36 | formalized; audited arithmetic and computational cuts | active |
+| [`G3-S12`](#g3-s12-fork-crossing-transport-and-address-ambiguity) | structural reduction and obstruction | the toggle transports one explicit data-action crossing to another, while a prefixed Cassaigne relation destroys every action-level leading-run decoder | formalized | active |
 | [`G3-M02`](#g3-m02-square-root-punctuation-fracture) | partial mechanism | a rank-two square root gives an exact `SS`-free mortality grammar | formalized | closed |
 | [`G3-O10`](#g3-o10-square-root-boundary-saturation) | obstruction | every nondegenerate rank-one square root preserves boundary coefficient zeros | formalized | graduated |
 | [`G3-M01`](#g3-m01-free-group-discrepancy-engine) | partial mechanism | Carvalho's transducer gives an all-word marker-tail equation and a cyclic exponent-one equalizer | audited | active |
@@ -15237,6 +15238,75 @@ least `37`; another short published kernel identity or an empty macro cannot ins
 form into an unbounded obstruction for the physical `D,T` grammar. Any surviving triple must
 still satisfy the complete fixed-endpoint converse and the `D2-S08` normalized-mantissa
 obligation.
+
+### G3-S12: Fork crossing transport and address ambiguity
+
+**Kind:** structural reduction and obstruction
+
+**Evidence:** formalized
+
+**Disposition:** active
+
+Write the data actions as
+
+```text
+X(t)=at+(1-a)p,       Y(t)=bt+(1-b)q,
+```
+
+and let `Z(t)=ct+(1-c)r`. For `a≠b`, define the outer crossing `τ` of `X,Y` and the inner
+crossing `σ` of `XYX,YXY` by
+
+```text
+τ = ((1-a)p-(1-b)q)/(b-a),
+σ = ((1-a)p(ab²-ab+b)+(1-b)q(-a²b+ab-a))/(b-a).
+```
+
+Lean proves the exact factorization
+
+```text
+Y Z X Y X(t) - X Z Y X Y(t) = (b-a)(Z(σ)-τ).
+```
+
+Thus the reduced fork equality is equivalent to the single crossing transport `Z(σ)=τ`.
+The displacement identities
+
+```text
+σ-τ = (1-a)(1-b)(1+ab)(p-q)/(a-b),
+τ-q = (a-1)(p-q)/(a-b),
+τ-p = (b-1)(p-q)/(a-b)
+```
+
+give a complete order classification for physical contractions. The data fixed point belonging
+to the more contracting action is followed by `σ`, then `τ`, then the toggle fixed point; reversing
+the fixed-point order reverses the chain. This sharpens `G3-S11`: the toggle must transport one
+specific interior point across a prescribed interval, not merely have an exterior fixed point.
+
+The apparent leading-run descent is not an action invariant. Prefix Cassaigne's distinct
+length-`27` relation by `Tⁿ`. Lean proves that its two sides remain distinct, induce the same
+affine action on every rational state, and have leading `T` runs `n` and `n+2`, respectively, for
+every `n`. It also proves the exact slope-conditioned fixed-point cylinder for every word
+beginning `TⁿD`. Hence neither the affine action, its slope and fixed point, nor the cylinder
+containing that fixed point selects a unique leading-run branch. Any global parity or ordering
+descent must first quotient or orient mixed-prime kernel rewrites.
+
+**Scope:** the crossing factorization and all four strict order chains are unbounded rational
+theorems. The cylinder and prefixed Cassaigne ambiguity are also formal. They do not prove that a
+fork triple exists or cannot exist. The order theorem assumes three strict contractions, unequal
+data slopes, unequal data fixed points, and the crossing transport. It does not settle the
+normalized mantissa or the complete endpoint converse.
+
+**Use:** replace direct five-factor expansion by the scalar equation `Z(σ)=τ`. Reject every
+search which decodes a word's leading run from its affine action without choosing a certified
+kernel normal form. The live obstruction target is the fork equation in an oriented quotient of
+the mixed-prime word monoid.
+
+**Artifact:**
+[`GuardedMixedPrimeForkCrossing.lean`](MatrixMortality/GuardedMixedPrimeForkCrossing.lean) and
+[`m34-mixed-prime-fork-crossing-2026-08-31.md`](audits/m34-mixed-prime-fork-crossing-2026-08-31.md).
+
+**Next:** orient the audited mixed-prime relations and their critical overlaps, then classify or
+exclude quotient representatives of `yzxyx=xzyxy`. Raising the raw length cutoff without such a
+normal-form invariant is no longer the primary attack.
 
 ### G3-O13: Rational serializer pumping
 

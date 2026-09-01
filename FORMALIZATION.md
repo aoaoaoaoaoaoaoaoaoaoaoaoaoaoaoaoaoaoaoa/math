@@ -2850,6 +2850,7 @@ fixed-rank decision problem.
 | `GuardedMixedPrimeFork.lean` | injective affine-word calculus, forced flat/nested macro equality, fork-kernel dichotomy, and common-fixed-point obstruction |
 | `GuardedMixedPrimeLiteralNoGo.lean` | equal-length fork-equation split, two-point affine rigidity, literal macro extinction, and mandatory mixed-prime kernel collision |
 | `GuardedMixedPrimeReducedKernel.lean` | context cancellation, reduced fork collision, positive-macro necessity, exact fixed-point balance, and exterior toggle geometry |
+| `GuardedMixedPrimeForkCrossing.lean` | exact fork-crossing factorization, four physical order chains, slope-conditioned leading-run cylinders, and Cassaigne address ambiguity |
 | `ExpandingHistoryNoGo.lean` | reset-affine orbit, finite reverse automaton, regularity, and universal computability obstruction |
 | `CancellativeProjectiveNoGo.lean` | paired residual conic, finite support-rank closure, cancellative role fractions, and projective commutator rigidity |
 | `PairedInverseChamber.lean` | one-turn residual chambers, protected formal inverse states, and positive forward-cone separation |
@@ -3657,6 +3658,27 @@ owned by `tools/audit_mixed_prime_fork.py`, exhausts all positive macro triples 
 at most `36` and finds none satisfying the required pairwise action distinction and absence of a
 common fixed point. The length cut is computational; the context cancellation, positivity, and
 exterior geometry are kernel-checked.
+
+`G3-S12` refactors the reduced five-factor equality into an exact one-dimensional transport.
+For data actions with slopes and fixed points `(a,p)` and `(b,q)`, Lean defines `τ` as their
+crossing and `σ` as the crossing of the palindromic actions `XYX` and `YXY`. It proves
+
+```text
+Y Z X Y X(t) - X Z Y X Y(t) = (b-a)(Z(σ)-τ),
+```
+
+so unequal data slopes make the fork equality equivalent to `Z(σ)=τ`. Three rational
+displacement identities give all four strict order chains among `p,q,σ,τ,r` for contraction
+slopes in `(0,1)`. The toggle lies beyond `τ`, while `σ` lies strictly between `τ` and the fixed
+point of the more contracting data action.
+
+The same module closes an invalid route from that order to a raw-word descent. For every `n`,
+prefixing the two distinct Cassaigne words by `Tⁿ` gives equal affine actions whose leading
+translation runs are `n` and `n+2`. Lean also bounds the fixed point of every `TⁿD`-headed word
+inside its exact slope-conditioned cylinder. Thus action data cannot select a leading-run
+representative even after slope and fixed point are known. A global descent must operate in an
+oriented quotient of the mixed-prime word monoid; the theorem does not claim that such a quotient
+is finite or confluent.
 
 For `G3-O20`, Lean proves the free-monoid tail law: if one fixed-boundary equation with stationary
 left and right pump blocks holds at exponents `N` and `N+1`, it holds at every exponent `N+k`.
