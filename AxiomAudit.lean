@@ -924,6 +924,15 @@ open MatrixMortality
 #print axioms CubicReturn.NonPure.falseWaitReadableSelectorCancellationWord_length
 #print axioms CubicReturn.NonPure.falseWaitOneProbeSelectorWord_length
 #print axioms CubicReturn.NonPure.falseWaitReadableSourceSelectorWord_length
+#print axioms CubicReturn.NonPure.falseWaitMonotoneCorrection_shifts
+#print axioms CubicReturn.NonPure.falseWaitMonotoneCheckWord_projectivelyRealizes
+#print axioms CubicReturn.NonPure.falseWaitMonotoneComparatorWord_projectivelyRealizes
+#print axioms CubicReturn.NonPure.falseWaitMonotoneMismatchCount_eq_zero_iff
+#print axioms CubicReturn.NonPure.falseWaitReadableMonotoneRow_incidence
+#print axioms CubicReturn.NonPure.falseWaitReadableMonotoneRow_marker_zero_iff
+#print axioms CubicReturn.NonPure.falseWaitReadableMonotoneGateWord_zero_iff
+#print axioms CubicReturn.NonPure.falseWaitReadableMonotoneGateWord_positive
+#print axioms CubicReturn.NonPure.falseWaitReadableMonotoneGateWord_length_exact
 #print axioms EdgeCompression.isMortal_iff_exists_edgeProduct_eq_zero
 #print axioms TwoPlaneEdges.output_mul_input
 #print axioms TwoPlaneEdges.generator_rank

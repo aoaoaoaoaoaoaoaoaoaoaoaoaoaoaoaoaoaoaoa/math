@@ -1194,6 +1194,16 @@ Lean also proves positivity, exact length `535,731,813+4|β|`, and the marker co
 on `00++payload` vanishes exactly for an empty payload. See `R32-S78` and
 [`audits/m32-cubic-readable-source-selector-2026-09-01.md`](audits/m32-cubic-readable-source-selector-2026-09-01.md).
 
+`CubicReadableMonotoneComparator` removes cancellation from the composed source-memory check.
+Positive correction words make each matching reader-writer block projectively `T(0)` and each
+mismatch projectively `T(1)`, so a schedule realizes translation by its ordinary mismatch count.
+The `00` marker's source-coordinate gap and the resulting `(15/68)` mismatch row shift are both
+nonnegative and vanish independently. Lean proves the full positive physical biconditional:
+the gate vanishes exactly for an empty payload and a schedule in which every guessed bit equals
+its written bit. The module also proves exact local costs, total length, positivity, transport,
+and the normalized incidence formula. See `R32-S79` and
+[`audits/m32-cubic-readable-monotone-comparator-2026-09-01.md`](audits/m32-cubic-readable-monotone-comparator-2026-09-01.md).
+
 The rank-(2,2) graph is no longer an independent residue. `RankTwoPunctuation` proves that every
 compatible square with one rank-one loop and three units transports exactly to the existing raw
 reverse compiler [`R32-M01`](SALVAGE.md#r32-m01-generic-reverse-edge-compiler). Its intrinsic

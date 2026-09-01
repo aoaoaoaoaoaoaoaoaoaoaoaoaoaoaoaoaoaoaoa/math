@@ -1899,6 +1899,18 @@ self-balancing mismatch schedule and then extend the converse beyond segmented w
 [`R32-S78`](SALVAGE.md#r32-s78-positive-singleton-gate-for-readable-source-memory) and
 [`m32-cubic-readable-source-selector-2026-09-01.md`](audits/m32-cubic-readable-source-selector-2026-09-01.md).
 
+The marker and comparator now compose without a clock or a cleanup phase. Two positive terminal
+corrections turn both orientations of a wrong reader-writer pair into the same unit translation,
+while a match becomes the identity. A schedule therefore contributes its unsigned mismatch
+count. Inside the readable height-five selector this adds a nonnegative row shift; the `00`
+marker payload contributes a second nonnegative coordinate gap. Their sum vanishes exactly when
+the payload is empty and every check matches. The complete statement is a literal positive
+physical-word biconditional with exact length. What remains is no longer arithmetic
+cancellation inside the intended blocks, but the global syntax converse for arbitrary positive
+wait words. See
+[`R32-S79`](SALVAGE.md#r32-s79-monotone-readable-memory-comparator) and
+[`m32-cubic-readable-monotone-comparator-2026-09-01.md`](audits/m32-cubic-readable-monotone-comparator-2026-09-01.md).
+
 ### ReturnSquare laboratory
 
 [`R32-S03`](SALVAGE.md#r32-s03-returnsquare-normal-form) is the first completely normalized
