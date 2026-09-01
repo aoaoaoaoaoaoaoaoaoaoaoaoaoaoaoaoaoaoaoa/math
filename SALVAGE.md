@@ -228,6 +228,7 @@ file owns the mathematical stock.
 | [`M4-S37`](#m4-s37-phase-zero-right-c-x211-position-extinction) | obstruction and structure theorem | every late next-`b` position in the bounded `x=211` chamber is impossible | formalized | active |
 | [`M4-S38`](#m4-s38-phase-zero-right-c-x211-run-extinction) | obstruction and structure theorem | every trailing run of at least six `c`s in the inner-bounded `x=211` chamber is impossible | formalized | active |
 | [`M4-S39`](#m4-s39-phase-zero-right-c-x211-large-inner-extinction) | obstruction and structure theorem | a depth-three suffix certificate eliminates the large-inner exit and closes the complete `x=211` `cb` cylinder | formalized | active |
+| [`M4-S40`](#m4-s40-phase-zero-right-c-outer-wait-cap) | structure theorem | every physical `cb` bridge zero has outer wait at most `211` | formalized | active |
 | [`M4-C03`](#m4-c03-zero-framed-binary-two-lag-compiler) | compiler | the principal scanner is literally binary context-2 Lag and compiles to `M₄(3)` | formalized | graduated |
 | [`M4-D01`](#m4-d01-zero-framed-binary-two-lag-decision) | decidable stratum | the entire zero-framed binary context-2 Lag kernel has an exact syntactic classification | formalized | graduated |
 | [`M4-D02`](#m4-d02-zero-framed-reset-scanner-decision) | decidable stratum | zero-run reduction contracts the reset scanner to a regular two-token quotient | audited | graduated |
@@ -9598,6 +9599,46 @@ that full lower range; the endpoint theorem `x=211` must not be restated as the 
 [`scripts/generate-parabolic-first-b-one-inner.py`](scripts/generate-parabolic-first-b-one-inner.py),
 and
 [`audits/m43-phase-zero-right-c-x211-large-inner-extinction-2026-08-31.md`](audits/m43-phase-zero-right-c-x211-large-inner-extinction-2026-08-31.md).
+
+### M4-S40: Phase-zero right-c outer-wait cap
+
+**Kind:** structure theorem
+
+**Evidence:** formalized
+
+**Disposition:** active
+
+Let `S` be the ternary scale and `D=S−C−1` the complement of a body beginning `cb`.
+The first-`b` density cylinder gives `13S≤243D`. If the middle wait is zero, this density is
+already stronger than the M4-S30 positivity cone. For positive middle wait, the primitive core
+is strictly increasing in the outer wait. At `x=212`, its zero-middle-wait value is positive,
+and its middle-wait slope has the exact decomposition
+
+```text
+243·slope = S(2020784785920z+199972684656)
+              +(243D−13S)(620717828832z+58005064872)
+              +(672060776544z+61565906520),
+```
+
+whose three terms are respectively positive, nonnegative, and positive. Thus the core is
+strictly positive for every `x≥212`, contradicting a zero.
+
+**Scope:** every natural outer, middle, and inner wait for a physical body beginning `cb`.
+Neither body parity nor a suffix decomposition is assumed. The theorem is exposed both as a
+primitive-core implication and as a zero-determinant implication for the residual
+`b | b | c` bridge. It proves only `x≤211`; it does not eliminate `x≤210`.
+
+**Use:** S40 composes with M4-S39 to remove the entire endpoint `x=211`. Any remaining `cb`
+zero must lie in the finite outer range `x≤210`, while its middle wait is already bounded by
+M4-S32.
+
+**Next:** classify the exact suffix envelope uniformly over `x≤210` and eliminate every
+surviving arithmetic chamber. A computation suggesting a short chamber list is not a theorem
+until the uniform parameter reduction and each terminal obstruction are kernel checked.
+
+**Artifact:**
+[`MatrixMortality/ParabolicWaitBounds.lean`](MatrixMortality/ParabolicWaitBounds.lean) and
+[`audits/m43-phase-zero-right-c-outer-wait-cap-2026-08-31.md`](audits/m43-phase-zero-right-c-outer-wait-cap-2026-08-31.md).
 
 ### M4-C03: Zero-framed binary two-Lag compiler
 

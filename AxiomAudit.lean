@@ -972,6 +972,9 @@ open MatrixMortality
 #print axioms ParabolicBlade.tagComplementCode_first_b_sharp_upper
 #print axioms ParabolicBlade.bZeroBDefectCOne_y_lt_of_first_b
 #print axioms ParabolicBlade.bZeroBDefectCOne_y_le_of_first_b
+#print axioms ParabolicBlade.bZeroBDefectCOne_x_le_211_of_first_b_one_density
+#print axioms ParabolicBlade.bZeroBDefectCOne_x_le_211_of_first_b_one
+#print axioms ParabolicBlade.bridge_bZero_bTwo_cOne_det_zero_implies_x_le_211_of_cb
 #print axioms ParabolicBlade.bZeroBDefectCOneCodeCore_x211_normal_form
 #print axioms ParabolicBlade.bZeroBDefectCOneSfft_resultant
 #print axioms ParabolicBlade.bZeroBDefectCOneSfft_identity
