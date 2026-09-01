@@ -141,6 +141,7 @@ import MatrixMortality.DecimalSetterSuffix
 import MatrixMortality.DecimalSetterAncestry
 import MatrixMortality.DecimalSetterPositioned
 import MatrixMortality.DecimalSetterPhase
+import MatrixMortality.DecimalSetterRuleResonance
 import MatrixMortality.SchottkyPunctuation
 import MatrixMortality.TwoStateObstructions
 import MatrixMortality.ForcedRuleCCompanion

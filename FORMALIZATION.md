@@ -1553,6 +1553,16 @@ the middle case has exact five-depth `s+1` and at least `s+3` factors of two. Th
 inherits these depths through `G(H−10μ)`. As a first extinction consequence,
 `leadingRuleC_rawHead_multi_shell_impossible` excludes every `R_cD_c^s`, `s≥1`, first block.
 
+Record [`MM-S56`](SALVAGE.md#mm-s56-exact-rule-resonance-grammar) assigns the all-`D_c`
+comparison residual its exact five-depth. A regular raw head with final-seven width `h` has
+depth `min(n,h+1)`; the exceptional head has depth `min(n,2β−1)`. Combining this frontier
+with the rightmost-rule phase depth and the exact rightmost-`b` upper depth
+`t_b+β+2` replaces every `b`-bearing spelling by a minimum-resonance equation. For pure
+`c` words, a surviving rightmost rule is either in position two or has erasure-tail width
+exactly `h` at a regular head and `2β−2` at the exceptional head. The arithmetic classifier
+also collapses every regular `b`-bearing resonance to the same `s=h` arm; only three explicit
+exceptional relative-position arms remain.
+
 Record [`MM-S37`](SALVAGE.md#mm-s37-decimal-three-shape-frontier-extinction) separates the
 ternary and decimal first-multi-transfer fronts. The single theorem
 `DecimalSetterDepth.firstMultiTransfer_threeShapeFrontier_impossible` consumes the three role
@@ -2077,6 +2087,7 @@ fixed-rank decision problem.
 | `DecimalSetterAncestry.lean` | primitive gap factor; exact raw two-`c` prime support; arbitrary-history prime-support propagation and radical saturation; physical all-erasure full-gap lower codes; denominator-ancestry reduction; full-gap and factorwise quotient gates for a singleton target |
 | `DecimalSetterPositioned.lean` | rightmost-marker suffix calculus; exact unit coefficient under arbitrary earlier markers; complete all-erasure raw-head-to-multi extinction |
 | `DecimalSetterPhase.lean` | phase-erasure companion; exact rightmost-rule shell trichotomy; leading-`R_c` all-`D_c` raw-entry extinction |
+| `DecimalSetterRuleResonance.lean` | exact all-`D_c` five-depth frontier; rightmost-rule/rightmost-`b` minimum-resonance grammar |
 | `PairedMortality.lean` | common-column mortality converse and exact integer `4 × 4` family |
 | `PhaseFracture.lean` | phase normalization and dimension-free projective-identification contradiction |
 | `PhaseRigidity.lean` | checked local role algebra, discrepancy commutators, and invariant-pencil rigidity |

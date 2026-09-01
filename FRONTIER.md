@@ -973,6 +973,16 @@ deeper than the prospective `(s,s)` pole and would make the forbidden all-erasur
 share that shell. The live raw-entry grammar now begins with a later rightmost rule or contains
 `b`; those branches must meet the displayed off-diagonal companion resonances.
 
+[`MM-S56`](SALVAGE.md#mm-s56-exact-rule-resonance-grammar) solves those companion depths.
+For all-`D_c` width `n`, the exact five-depth is `min(n,h+1)` at a regular head with
+final-seven width `h`, and `min(n,2β−1)` at the exceptional head. A `b`-bearing rule block is
+the sum of this comparison residual, a rightmost-`b` upper perturbation at depth `t_b+β+2`,
+and a rightmost-rule phase perturbation. A physical pole forces a repeated minimum among these
+three depths. Solving the regular equations leaves only `s=h`; all-`c` words additionally retain
+the position-two boundary, while the exceptional head retains the phase frontier `s=2β−2` and
+two explicit rightmost-`b` relative-position resonances. The next cut is coefficient-level
+cancellation on those exceptional arms and the position-two boundary.
+
 The ternary and decimal branches now separate at their first multi-transfer front.
 [`MM-S37`](SALVAGE.md#mm-s37-decimal-three-shape-frontier-extinction) substitutes each of the
 three role shapes left by the swapped ternary gate into the decimal carrier equation. All are
