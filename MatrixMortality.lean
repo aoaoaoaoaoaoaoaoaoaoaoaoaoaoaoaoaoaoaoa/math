@@ -208,6 +208,10 @@ import MatrixMortality.WidthThreeSparseBody
 import MatrixMortality.WidthThreeAdjacentBody
 import MatrixMortality.SetterShear
 import MatrixMortality.SetterJFraction
+import MatrixMortality.RationalMatrixClearing
+import MatrixMortality.DecimalSetterMatrix
+import MatrixMortality.DecimalSetterFracture
+import MatrixMortality.DecimalSetterInteger
 import MatrixMortality.DecimalSetterArithmetic
 import MatrixMortality.DecimalSetterCarry
 import MatrixMortality.DecimalSetterChamber

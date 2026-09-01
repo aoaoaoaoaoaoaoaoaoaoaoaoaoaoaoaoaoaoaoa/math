@@ -2402,13 +2402,14 @@ the periodic saturation theorem and its remaining arithmetic boundary are recons
 formalization and the shell attack are tracked in
 [#7](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/7).
 
-The `M₅(3)` delimiter attack has nine durable records:
+The `M₅(3)` delimiter attack has ten foundational records:
 
 | Record | Formalization obligation |
 | --- | --- |
 | [`MM-O06`](SALVAGE.md#mm-o06-pure-power-punctuation-obstruction) | common image and kernel of the lifted paired data, fixed-vector extraction, and contradiction with a contextual pure-power separator |
 | [`MM-O07`](SALVAGE.md#mm-o07-setter-parameter-rigidity) | boundary alignment forces `r=t/μ`; verify the rejected benchmark coefficient |
 | [`MM-M03`](SALVAGE.md#mm-m03-five-state-setter-punctuation) | explicit setter matrices, delimiter powers and ranks, regular decoder, and `S²A_cS³=λC̃L̃` |
+| [`MM-M06`](SALVAGE.md#mm-m06-formal-decimal-setter-compiler) | formal decimal matrices, exact rank profile and regular decoder, forward integer compiler, and arbitrary `S³` scalar-bridge fracture |
 | [`MM-S01`](SALVAGE.md#mm-s01-square-run-projective-normal-form) | invariant square-run plane, invertible `2 × 2` transfer, Möbius normalization, rank-one fracture grammar, and equivalence with pole avoidance |
 | [`MM-S02`](SALVAGE.md#mm-s02-reset-zero-projective-peeling) | scaled transfer identity, exact two-shell classification of all poles, and reset-zero one-transfer avoidance |
 | [`MM-O16`](SALVAGE.md#mm-o16-exact-delimiter-pair-obstruction) | generic ignored-pair immortality is formalized; paired common-kernel and cubic companion specializations are audited |
@@ -2416,9 +2417,14 @@ The `M₅(3)` delimiter attack has nine durable records:
 | [`MM-O21`](SALVAGE.md#mm-o21-sourcewise-finite-probe-blindness) | existence-preserving guard transform, collapse of every bounded Hankel section, forced-rule specialization, and universal bounded-probe computability wall |
 | [`MM-O22`](SALVAGE.md#mm-o22-six-guard-parser-rank-wall) | witness-dependent `J₇-I₇` Hankel section, explicit inverse, seven-state exact lower bound, and forced-rule yes-source specialization |
 
-The candidate proves only the halting-to-mortality direction. Its converse requires a theorem
-that every nonterminal projective orbit avoids every pole. No such theorem is formalized or
-assumed. The exact reconstruction and promotion boundary are recorded in
+`DecimalSetterMatrix`, `DecimalSetterFracture`, `RationalMatrixClearing`, and
+`DecimalSetterInteger` now formalize the candidate through the halting-to-mortality direction.
+The explicit delimiter has ranks `3,2,1` at powers `1,2,3`, stabilizes at its cube, and the mixed
+separator is exact. Regular physical spellings decode to Neary roles, terminal matches produce
+zero words, denominator clearing yields three integer `5 × 5` matrices, and every arbitrary
+word fractures at disjoint delimiter cubes into scalar bridges. The converse still requires a
+maximal-run theorem parsing every triple-free bridge into the arithmetic pole grammar; no such
+theorem is formalized or assumed. The exact reconstruction and promotion boundary are recorded in
 [`audits/m53-setter-projective-2026-07-24.md`](audits/m53-setter-projective-2026-07-24.md).
 The first projective peeling theorem and the bounded residue diagnostics are in
 [`audits/setter-projective-peeling-2026-07-25.md`](audits/setter-projective-peeling-2026-07-25.md).
@@ -3082,6 +3088,10 @@ fixed-rank decision problem.
 | `ParabolicRetunedObstruction.lean` | explicit malformed terminal no-instance defeating the retuned fixed-row and original endpoint closures |
 | `SetterShear.lean` | boundary-calibrated side-basis shear, internal separator invariance, and transfer-tail gauge obstruction |
 | `SetterJFraction.lean` | exact decimal coefficient boxes and the hyperbolic-block/elliptic-product obstruction |
+| `RationalMatrixClearing.lean` | generic finite rational denominator clearing and exact mortality preservation |
+| `DecimalSetterMatrix.lean` | explicit decimal `5 × 5` setter, delimiter ranks, regular decoder, internal separator, and forward rational compiler |
+| `DecimalSetterFracture.lean` | greedy delimiter-cube fracture and complete arbitrary-product scalar-bridge normal form |
+| `DecimalSetterInteger.lean` | explicit three-label integer `M₅(3)` family and forward Neary compiler |
 | `DecimalSetterArithmetic.lean` | decimal setter centered carry, reciprocal recurrence, coupled `2`/`5` target shells, and successive-pole valuation balance |
 | `DecimalSetterCarry.lean` | two-reset successive-pole identities, joint depth constraints, exact decimal suffix exhaustion, first-transfer prefix separation, and the ordinary depth-two A/B shell forest |
 | `DecimalSetterChamber.lean` | exact decimal pole chambers, both ordinary A-to-A length-two extinctions, and the emitted-body grammar certificate |

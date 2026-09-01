@@ -109,6 +109,7 @@ file owns the mathematical stock.
 | [`MM-M03`](#mm-m03-five-state-setter-punctuation) | partial mechanism | a mixed delimiter word is an exact internal rank-one separator | audited | closed |
 | [`MM-M04`](#mm-m04-swapped-digit-setter) | partial mechanism | reversing the nonzero ternary digits preserves the setter and makes every transfer orientation preserving | audited | active |
 | [`MM-M05`](#mm-m05-decimal-swapped-setter) | partial mechanism | radix ten with digits `0 ↦ 7`, `1 ↦ 5` preserves the setter and separates every real length shell | audited | active |
+| [`MM-M06`](#mm-m06-formal-decimal-setter-compiler) | partial mechanism | three explicit integer `5 × 5` matrices have exact regular semantics, forward Neary compilation, and arbitrary delimiter-cube fracture | formalized | active |
 | [`MM-S01`](#mm-s01-square-run-projective-normal-form) | structure theorem | malformed square runs reduce to rational projective pole avoidance | audited | active |
 | [`MM-S02`](#mm-s02-reset-zero-projective-peeling) | structure theorem | the ordinary reset cannot reach a false pole after one transfer | audited | active |
 | [`MM-S03`](#mm-s03-centered-setter-carry) | structure theorem | setter orbits obey an integer valuation-and-suffix carry recurrence | audited | active |
@@ -2816,6 +2817,59 @@ separation matters.
 positive-ray labels are excluded by [`MM-O13`](#mm-o13-finite-positive-ray-setter-obstruction),
 and [`MM-O14`](#mm-o14-decimal-setter-elliptic-product) closes every argument from blockwise real
 hyperbolicity alone.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-M06: Formal decimal setter compiler
+
+**Kind:** partial mechanism
+**Evidence:** formalized
+**Disposition:** active
+
+The decimal specialization now has explicit rational matrices `A_b,A_c,S` in dimension five.
+The data matrices are the radix-ten side correspondence in the boundary-adapted basis for
+`0↦7,1↦5`. The delimiter is the audited matrix and Lean proves
+
+```text
+rank S=3,      rank S²=2,      rank S³=1,
+Sⁿ=S³ for n≥3,      S²A_cS³=λC̃L̃.
+```
+
+`RegularSpelling` gives a total decoder for physical words without adjacent delimiters: an
+isolated delimiter selects erasure, its absence selects rule, and the rightmost data letter is
+an erasure. Its boundary coefficient is exactly the decimal upper/lower code discrepancy.
+Every Neary terminal match therefore yields an explicit zero word. Generic finite rational
+denominator clearing preserves mortality, producing a transparent three-generator integer
+`5 × 5` family.
+
+Greedy fracture at disjoint `S³` subwords reconstructs every arbitrary product exactly. If at
+least one triple occurs, the product is an exterior column-row product scaled by the product of
+the intervening bridge coefficients. This is the complete rank-one fracture normal form, not a
+classification of its triple-free chunks.
+
+**Scope:** the formalization proves explicit matrices, the audited rank profile, regular
+semantics, halting-to-mortality, integer clearing, and arbitrary `S³` fracture. It does not prove
+primitive-recursive emission or the mortality converse. The missing converse adapter must parse
+each triple-free bridge into the `S²`-separated role/pole grammar. Singleton next targets and any
+ordinary-reset target beyond the checked shallow cases remain outside the current extinction
+assembly.
+
+**Use:** this is the outer algebraic owner for the decimal `M₅(3)` attack. Arithmetic records
+such as `MM-S67` are leaves consumed only after the triple-free bridge parser identifies their
+physical entry hypotheses.
+
+**Formalization:**
+[`MatrixMortality/DecimalSetterMatrix.lean`](MatrixMortality/DecimalSetterMatrix.lean),
+[`MatrixMortality/DecimalSetterFracture.lean`](MatrixMortality/DecimalSetterFracture.lean),
+[`MatrixMortality/RationalMatrixClearing.lean`](MatrixMortality/RationalMatrixClearing.lean),
+and [`MatrixMortality/DecimalSetterInteger.lean`](MatrixMortality/DecimalSetterInteger.lean).
+
+**Artifact:**
+[`audits/m53-formal-decimal-setter-compiler-2026-08-31.md`](audits/m53-formal-decimal-setter-compiler-2026-08-31.md).
+
+**Next:** prove a maximal-run parser for every triple-free bridge, then discharge its pole cases
+with the existing decimal arithmetic and prove the integer emitter primitive recursive.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
