@@ -1179,6 +1179,20 @@ shell multicone. Every observed Farey contraction occurs after `(R_c,D_b)` and b
 while all tested two-step windows expand; this is computational evidence for a finite-memory
 Lyapunov certificate, not a theorem.
 
+[`MM-S86`](SALVAGE.md#mm-s86-exact-deletion-c-contraction-chamber) isolates that failure exactly.
+For `H=5·3^β−1=2h`, `r=3^β−2`, `μ=2·3^β−1`, and a primitive positive carrier `d<n` with
+`q=n−d`, inverse `D_c` has raw magnitudes `a=Hrq` and `b=2rq+6μd`. Its exceptional
+normalization is
+
+```text
+gcd(a,b)=3H ↔ h∣n ∧ gcd(r,d)=1 ∧ gcd(q,3μ)=3,
+```
+
+and within that channel Farey height contracts exactly when `rq<3n`. The denominator ratio is
+`2μ/H−2q/(3n)`, with limiting factor `4/5−6/(5H)`. This proves the contraction mechanism, not
+its ancestry. The remaining geometric cut is to show that only a controlled predecessor colour
+can enter this gcd chamber, then charge the contraction to its preceding expansion.
+
 The remaining ternary obligation is now the **nonzero history-defect branch** of the global
 earliest-pole reduction. In the normalized coordinate `δ=D/y`, the complete physical recurrence
 is
@@ -1199,8 +1213,8 @@ erasure tile, not `β` of them. A complete proof must either force the long tail
 false pole or extend the carry/cylinder invariant to arbitrary physical target suffixes. Fixed
 residue and unit projections are empirically saturated, and the exact carry window grows with
 carrier height. None of `MM-S51`, `MM-S55`, `MM-S57`, `MM-S59`, `MM-S61`, `MM-S63`, `MM-S64`,
-`MM-S68`, `MM-S69`, `MM-S71`, `MM-O27`, `MM-S73`, `MM-S76`, or `MM-O29` alone proves projective
-avoidance.
+`MM-S68`, `MM-S69`, `MM-S71`, `MM-O27`, `MM-S73`, `MM-S76`, `MM-O29`, or `MM-S86` alone proves
+projective avoidance.
 Exact bidirectional diagnostics for the ternary swap at `β=3`, body `bbcc`, exclude every
 false-pole word of at most six projective blocks when each regular block has
 role length at most three; this is computational evidence only.

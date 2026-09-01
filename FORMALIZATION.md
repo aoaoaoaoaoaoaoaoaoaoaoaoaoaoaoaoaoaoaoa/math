@@ -1437,6 +1437,7 @@ The setter-projective audit now also exposes a kernel-friendly carry theorem:
 | [`MM-S73`](SALVAGE.md#mm-s73-live-three-block-charge-frontier) | exact predecessor-cylinder preimage, derived three-block live-prefix certificate, literal matched-tail suffix carry, and nonzero charge transport through both singleton `D_c` resonances |
 | [`MM-S76`](SALVAGE.md#mm-s76-primitive-target-multiplier-braid) | unique primitive target multiplier, literal prefix-discrepancy braid, unit transfer, and the two-arm first-mismatch residue pullback to the initial cylinder |
 | [`MM-O29`](SALVAGE.md#mm-o29-uniform-empty-front-local-rays) | uniform local `D_b;D_c;D_c` backward rays for every empty-front erasure target, exact shell and cylinder formulas, and complete terminal-`c` gap valuation law |
+| [`MM-S86`](SALVAGE.md#mm-s86-exact-deletion-c-contraction-chamber) | exact singleton-`D_c` adjugate, primitive `3H` gcd channel, sharp Farey-contraction inequality, and limiting ratio |
 
 These records narrow the missing arbitrary-depth theorem but do not prove
 projective avoidance. Their reconstruction is
@@ -1800,6 +1801,15 @@ initial predecessor cylinder is a multiple of
 forward reachability from the encoded entry nor a pole. Computational width-six diagnostics
 reject universal one-step maximum-coordinate and Farey-height monotonicity; a history-sensitive
 multicone or multi-step weight remains possible.
+
+Record [`MM-S86`](SALVAGE.md#mm-s86-exact-deletion-c-contraction-chamber) formalizes the observed
+Farey failure. For a primitive carrier `0<d<n`, the sign-normalized inverse-`D_c` adjugate is
+`(Hr(n−d), 2(rn+Hd))`. Lean proves that its gcd is `3H` exactly when
+`H/2∣n`, `gcd(r,d)=1`, and `gcd(n−d,3μ)=3`; in that channel, normalized Farey height contracts
+exactly when `r(n−d)<3n`. The normalized denominator ratio is
+`2μ/H−2(n−d)/(3n)`, whose limiting factor is strictly below `4/5`. The adapter theorem advances
+the signed raw pair through the existing singleton-`D_c` carrier recurrence with determinant
+`−6HRμ`. No theorem yet classifies which earlier physical blocks enter this chamber.
 
 Record [`MM-S21`](SALVAGE.md#mm-s21-bounded-decimal-suffix-cycles) closes the fixed-precision
 suffix-descent lane. `DecimalSetterSuffix.cycleDefect_lift` gives an explicit one-digit lift for
@@ -2360,6 +2370,7 @@ fixed-rank decision problem.
 | `SwappedSetterTargetMultiplier.lean` | unique primitive target multiplier, unconditional target-prefix unit, and exact braid transport to the predecessor-cylinder unit |
 | `SwappedSetterTargetResidue.lean` | three-adic unit chain and first-mismatch residue pullback from the target prefix through both singleton deletions to the initial cylinder quotient |
 | `SwappedSetterEmptyFrontRay.lean` | exact local empty-front `D_b;D_c;D_c` backward family, shell and predecessor-cylinder formulas, and terminal-run gap valuation classification |
+| `SwappedSetterDeletionCContraction.lean` | exact inverse singleton-`D_c` gcd chamber, Farey-height contraction criterion, physical recurrence adapter, and limiting contraction ratio |
 | `PairedMortality.lean` | common-column mortality converse and exact integer `4 × 4` family |
 | `PhaseFracture.lean` | phase normalization and dimension-free projective-identification contradiction |
 | `PhaseRigidity.lean` | checked local role algebra, discrepancy commutators, and invariant-pencil rigidity |

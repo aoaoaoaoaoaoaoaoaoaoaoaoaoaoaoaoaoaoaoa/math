@@ -147,6 +147,7 @@ file owns the mathematical stock.
 | [`MM-S73`](#mm-s73-live-three-block-charge-frontier) | structure theorem and obstruction | the reachable predecessor cylinder, both deletion resonances, and the literal target suffix carry form one exact nonzero chain that automatically forces the whole three-block prefix live | formalized | active |
 | [`MM-S76`](#mm-s76-primitive-target-multiplier-braid) | structure theorem and obstruction | primitivity identifies one unique unit target multiplier, turning the suffix charge into a literal prefix discrepancy and restricting its predecessor cylinder to two first-mismatch residue arms | formalized | active |
 | [`MM-O29`](#mm-o29-uniform-empty-front-local-rays) | obstruction | every empty-front erasure target admits an exact local `D_b;D_c;D_c` backward ray with the required shells and predecessor cylinder | formalized | active |
+| [`MM-S86`](#mm-s86-exact-deletion-c-contraction-chamber) | structure theorem and obstruction | singleton `D_c` contracts Farey height exactly in one primitive gcd channel with a sharp gap inequality | formalized | active |
 | [`R32-S01`](#r32-s01-split-return-normal-form) | structure theorem | rank-two cuts reduce one-unit binary mortality to a `2 × 2` return recurrence | formalized | graduated |
 | [`R32-S02`](#r32-s02-two-plane-edge-square) | structure theorem | two rank-two generators are a two-vertex square of `2 × 2` edges | formalized | graduated |
 | [`R32-O01`](#r32-o01-rank-one-profile-collapse) | obstruction | a rank-one generator reduces mortality to order-at-most-three scalar recurrence zeros | audited | stock |
@@ -5709,6 +5710,88 @@ through `exists_emptyFrontLocalRay`, `emptyTarget_gapCore_padicValInt_cases`, an
 **Next:** decide whether any ray meets the encoded-entry orbit before the `D_b` block, using
 history-sensitive geometry rather than a universal one-step norm. Attack the nonempty target
 front and arbitrary-target-suffix obligations independently.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S86: Exact deletion-C contraction chamber
+
+**Kind:** structure theorem and obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+Fix `β≥2` and write
+
+```text
+H=5·3^β−1=2h,       r=3^β−2,       μ=2·3^β−1.
+```
+
+For a primitive carrier `0<d<n`, put `q=n−d`. The sign-normalized adjugate pullback through a
+singleton `D_c` has raw positive coordinates
+
+```text
+a=Hrq,       b=2(rn+Hd)=2rq+6μd.
+```
+
+Lean proves that this pair has the exceptional common factor observed in the width-six search
+exactly when
+
+```text
+gcd(a,b)=3H
+  ↔ h∣n ∧ gcd(r,d)=1 ∧ gcd(q,3μ)=3.                  (1)
+```
+
+The use of `3μ`, rather than `6μ`, is essential at odd widths: the single factor two in `H` then
+absorbs the even part of `q`. The module also proves that `(-a,-b)` is the exact adjugate
+preimage under the existing carrier recurrence; one forward `D_c` restores `(n,d)` multiplied
+by the determinant `−6HRμ`.
+
+In channel (1), primitive normalization divides both raw coordinates by `3H`. For the Farey
+height
+
+```text
+F(n,d)=max(n,d,|n−d|),
+```
+
+the inverse step contracts exactly when
+
+```text
+F(a/(3H),b/(3H)) < F(n,d)  ↔  rq < 3n.             (2)
+```
+
+The denominator coordinate has the exact normalized ratio
+
+```text
+b/(3Hn)=2μ/H−2q/(3n),
+```
+
+and the limiting factor satisfies
+
+```text
+2μ/H = 4/5−6/(5H) < 4/5.
+```
+
+**Scope:** `β≥2`, primitive nonnegative coordinates with `0<d<n`, and one inverse singleton
+`D_c`. The theorem classifies the exact `3H` normalization channel and its height behavior. It
+does not prove that a given backward ancestry enters the channel, that only `(R_c,D_b)` can
+enter it, or that any two-step weight is monotone.
+
+**Use:** replace the computational Farey-contraction observation in `MM-O29` by an exact target.
+A global proof need only prevent earlier blocks from producing (1) together with `rq<3n`, or
+pair every such entry with a compensating adjacent transition. Universal one-step Farey
+monotonicity is impossible on this chamber.
+
+**Formalization:**
+[`MatrixMortality/SwappedSetterDeletionCContraction.lean`](MatrixMortality/SwappedSetterDeletionCContraction.lean),
+through `deletionC_rawAdjugate_forward`, `deletionC_gcd_eq_three_mul_head_iff`,
+`deletionC_fareyHeight_contracts_iff_channel`, and `deletionC_denominator_ratio`.
+
+**Artifact:**
+[`audits/m53-deletion-c-contraction-2026-09-01.md`](audits/m53-deletion-c-contraction-2026-09-01.md).
+
+**Next:** classify which physical predecessor blocks can place an `MM-O29` carrier in (1), then
+prove a finite-memory two-step height inequality or exclude that entry channel by exact prefix
+ancestry.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
