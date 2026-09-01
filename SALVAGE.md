@@ -143,6 +143,7 @@ file owns the mathematical stock.
 | [`MM-S68`](#mm-s68-backward-numerator-resonance) | structure theorem and obstruction | a deep successor numerator forces full upper-length cancellation and a predecessor cylinder; across literal `D_c` it toggles exactly into the full carrier-gap congruence | formalized | active |
 | [`MM-S69`](#mm-s69-sequential-double-deletion-zero-gap-extinction) | obstruction | the distinguished carrier after two sequential singleton `D_c` transfers cannot hit a full-tail threshold, eliminating the zero-gap survivor of the backward toggle | formalized | active |
 | [`MM-S71`](#mm-s71-three-block-backward-frontier) | structure theorem and obstruction | behind two final singleton `D_c` transfers, every nonterminal full-tail pole either halts or places the preceding physical block in its exact nonzero predecessor cylinder | formalized | active |
+| [`MM-O27`](#mm-o27-reachable-predecessor-cylinder) | obstruction | a concrete ordinary-reset history reaches the exact non-`D_c` predecessor cylinder, refuting every block-local extinction of the `MM-S71` survivor | formalized | active |
 | [`R32-S01`](#r32-s01-split-return-normal-form) | structure theorem | rank-two cuts reduce one-unit binary mortality to a `2 × 2` return recurrence | formalized | graduated |
 | [`R32-S02`](#r32-s02-two-plane-edge-square) | structure theorem | two rank-two generators are a two-vertex square of `2 × 2` edges | formalized | graduated |
 | [`R32-O01`](#r32-o01-rank-one-profile-collapse) | obstruction | a rank-one generator reduces mortality to order-at-most-three scalar recurrence zeros | audited | stock |
@@ -5426,6 +5427,65 @@ through `erasureTailPole_threeBlock_backwardFrontier`.
 **Next:** classify (2) for the first physical role block not equal to singleton `D_c`, preserving
 its Neary source/upper ancestry rather than projecting to a fixed residue quotient. The generic
 target-suffix seam remains independent.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-O27: Reachable predecessor cylinder
+
+**Kind:** obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+The exact `MM-S71` cylinder is not empty on the reachable centered orbit. At width `β=3`, body
+`bbcc`, and physical block
+
+```text
+B=[R_c,D_c],
+```
+
+two copies of `B` from the ordinary reset reach the primitive defect ratio
+
+```text
+m/e = −570661367816 / 106465174525.                   (1)
+```
+
+A third `B` has upper length `a=2` and raw normalization scale `s=−3`. Its primitive successor
+is
+
+```text
+n/d = −607561904608405895896 / 113351524805114612975,
+d−n = 27·26700497385685944773 ≠ 0.                    (2)
+```
+
+Here `P_B=377`, `V_B=23835752`, and `H=134`. The predecessor-cylinder residual is
+
+```text
+P_Be−V_Bm−3He = 27·503782969541244241.                (3)
+```
+
+Thus every local hypothesis behind the `a=2`, `g=1` cylinder can occur on an exact physical
+history. The witness is not a target pole; it refutes only an argument that physical block
+grammar or primitive normalization alone empties the `MM-S71` survivor.
+
+**Scope:** one concrete width-three compiler body and a three-block ordinary-reset history. The
+result proves reachability, primitivity, exact raw normalization, a nonzero full-modulus output
+gap, and the predecessor-cylinder divisibility. It asserts neither a false pole nor failure of
+the swapped setter.
+
+**Use:** reject block-local residue, phase, or length classifications that attempt to close
+`MM-S71` without target carry or earlier-history information. The next invariant must couple
+the reachable cylinder to the target spelling or to earliestness.
+
+**Formalization:**
+[`MatrixMortality/SwappedSetterReachableCylinder.lean`](MatrixMortality/SwappedSetterReachableCylinder.lean),
+through `reachable_nonDeletionC_predecessorCylinder`.
+
+**Artifact:**
+[`audits/m53-reachable-predecessor-cylinder-2026-08-31.md`](audits/m53-reachable-predecessor-cylinder-2026-08-31.md).
+
+**Next:** express the cylinder as the exact projective preimage of the full-gap residue and
+retain the target carry or first-pole condition when pulling it through earlier history.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).

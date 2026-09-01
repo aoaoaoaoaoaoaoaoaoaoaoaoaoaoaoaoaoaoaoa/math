@@ -1119,6 +1119,13 @@ a=g+1,      3^(g+β−1) ∣ E−3^gHe.
 The first non-`D_c` ancestor is therefore isolated as one exact cylinder of precision
 `a+β−2`; no normalization or sequential boundary remains implicit in that local node.
 
+[`MM-O27`](SALVAGE.md#mm-o27-reachable-predecessor-cylinder) shows that this cylinder cannot be
+emptied locally. For `β=3`, body `bbcc`, the ordinary-reset history `[R_c,D_c]²` reaches a
+primitive carrier for which a third `[R_c,D_c]` normalizes at the required depth and produces a
+nonzero gap divisible by `27`; the exact predecessor residual is also divisible by `27`. This is
+not a pole. It kills a block-grammar-only extinction and forces the next argument to retain the
+target carry or an earliest-pole ancestry condition.
+
 The remaining ternary obligation is now the **nonzero history-defect branch** of the global
 earliest-pole reduction. In the normalized coordinate `δ=D/y`, the complete physical recurrence
 is
@@ -1138,7 +1145,7 @@ erasure tile, not `β` of them. A complete proof must either force the long tail
 false pole or extend the carry/cylinder invariant to arbitrary physical target suffixes. Fixed
 residue and unit projections are empirically saturated, and the exact carry window grows with
 carrier height. None of `MM-S51`, `MM-S55`, `MM-S57`, `MM-S59`, `MM-S61`, `MM-S63`, `MM-S64`,
-`MM-S68`, `MM-S69`, or `MM-S71` alone proves projective avoidance.
+`MM-S68`, `MM-S69`, `MM-S71`, or `MM-O27` alone proves projective avoidance.
 Exact bidirectional diagnostics for the ternary swap at `β=3`, body `bbcc`, exclude every
 false-pole word of at most six projective blocks when each regular block has
 role length at most three; this is computational evidence only.
