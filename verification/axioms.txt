@@ -1970,6 +1970,9 @@
 'MatrixMortality.SwappedSetterSequentialDoubleDeletion.sequentialDoubleDeletionC_erasureTailPole_forces_halt_or_nonzeroPredecessorGap' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.SwappedSetterThreeBlockFrontier.erasureTailPole_threeBlock_backwardFrontier' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.DecimalSetterChamber.doubleDeletion_step_in_gap' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
