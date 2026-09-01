@@ -850,6 +850,8 @@ open MatrixMortality
 #print axioms MixedPrimeDebt.shellRatio_pow_sub_one_hasValue
 #print axioms MixedPrimeDebt.shellSlope_sub_hasValue_five_of_sameLength
 #print axioms MixedPrimeDebt.sameLengthCollisionSource_fiveUnit_iff
+#print axioms MixedPrimeDebt.sameLengthCollisionTarget_fiveUnit_iff
+#print axioms MixedPrimeDebt.sameLengthCollisionPrefixesUnit_iff
 #print axioms MixedPrimeDebt.shellRun_fixedPoint_unique
 #print axioms MixedPrimeDebt.shellPeriodicPoint_eq_iff_commute
 #print axioms MixedPrimeDebt.shellPeriodicPoint_eq_iff_globalRelation_of_length_sum

@@ -266,6 +266,7 @@ file owns the mathematical stock.
 | [`D2-S16`](#d2-s16-periodic-centralizer-determinant-fork) | structure theorem | two common-source loops force either a global power relation or an injective `ℕ²` family of guarded loops | formalized | active |
 | [`D2-S17`](#d2-s17-fixed-endpoint-fibre-dichotomy) | reduction | every pair in a fixed shell endpoint fibre is either a balanced affine-kernel relation or one explicit unequal-slope collision source | formalized | active |
 | [`D2-S18`](#d2-s18-same-length-cross-grade-five-carry) | structure theorem | same-length cross-grade source acceptance is exactly one parity/LTE valuation test on the cleared intercept gap | formalized | active |
+| [`D2-S19`](#d2-s19-same-length-collision-acceptance-certificate) | structure theorem | same-length cross-grade collision acceptance is exactly one affine-determinant valuation test | formalized | active |
 | [`D2-D01`](#d2-d01-projectively-unimodular-stratum) | decidable stratum | projectively unimodular hard-core instances are decidable | audited | stock |
 | [`D2-D02`](#d2-d02-invariant-pair-stratum) | decidable stratum | invariant projective pairs reduce to abelian-by-`C₂` reachability | reported | active |
 | [`D2-D03`](#d2-d03-common-multiplier-stratum) | decidable stratum | rational affine maps with one multiplier are decidable under regular control | reported | active |
@@ -12256,9 +12257,61 @@ not this record. Unequal lengths retain the separate determinant criterion for t
 and demand one exact intercept-gap valuation before any target or real-trap analysis. This
 replaces an unstructured five-adic collision test by a single explicit carry depth.
 
-**Next:** derive the matching common-target unit criterion in the same-length regime and express
-the cleared intercept difference by its suffix recurrence. Then test whether the fixed source
-equation bounds the admissible carry depths.
+**Next:** combine [`D2-S19`](#d2-s19-same-length-collision-acceptance-certificate) with a suffix
+recurrence for the intercept and determinant. Then test whether the fixed-source equation bounds
+the admissible carry depths.
+
+### D2-S19: Same-length collision acceptance certificate
+
+**Kind:** exact valuation classifier
+**Evidence:** formalized
+**Disposition:** active
+
+Let `u,v` have the same length `n` and different total waits, let
+
+```text
+Δ = |sum(u)−sum(v)|,
+η = κ(Δ)−n,
+D = slope(u)·intercept(v) − slope(v)·intercept(u),
+```
+
+where `κ` is the parity/LTE carry from [`D2-S18`](#d2-s18-same-length-cross-grade-five-carry).
+The slopes differ, so the unique collision source is defined and its common target is exactly
+
+```text
+shellRun(u,collisionSource(u,v))
+  = shellRun(v,collisionSource(u,v))
+  = D / (slope(u)−slope(v)).
+```
+
+`D2-S18` gives the denominator value `η`. Consequently Lean proves the exact criterion
+
+```text
+the common target is a 5-unit ↔ v₅(D)=η.
+```
+
+For shell schedules, the final state is a five-unit exactly when every prefix state is a
+five-unit. The determinant criterion is therefore equivalent to every prefix guard on both
+`u` and `v`. The empty prefixes include the common source, while the full prefixes include the
+common target, so this one valuation is the complete five-adic acceptance certificate for the
+collision; no separate intermediate-phase test remains.
+
+**Scope:** this result does not decide the determinant value, the fixed-source equation
+`collisionSource(u,v)=x`, or real-trap membership. It excludes equal total waits, which belong
+to the balanced affine kernel. Unequal schedule lengths retain their separate determinant
+criterion.
+
+**Artifact:** `MixedPrimeDebt.sameLengthCollisionTarget_fiveUnit_iff` and
+`MixedPrimeDebt.sameLengthCollisionPrefixesUnit_iff` in
+[`MixedPrimeRealTrapCentralizer.lean`](MatrixMortality/MixedPrimeRealTrapCentralizer.lean).
+
+**Use:** in a same-length cross-grade endpoint search, compute the affine determinant and test
+one exact five-adic value. Success certifies the source, target, and every intermediate shell
+phase on both schedules simultaneously.
+
+**Next:** derive a state-dependent suffix recurrence for `D` under paired schedule extension,
+then combine it with the equation fixing the collision source and the twelve target-depth
+classes.
 
 ### D2-O09: Guarded real-pole reset
 

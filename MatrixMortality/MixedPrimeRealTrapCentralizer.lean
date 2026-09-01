@@ -182,6 +182,71 @@ theorem sameLengthCollisionSource_fiveUnit_iff
   · intro numerator_value
     simpa [collisionSource] using div_hasValue numerator_value denominator_value
 
+/-- In the same-length cross-grade fibre, common-target acceptance is exactly the matching
+five-adic value of the affine determinant. -/
+theorem sameLengthCollisionTarget_fiveUnit_iff
+    {left right : List ℕ} (length_eq : left.length = right.length)
+    (sum_ne : left.sum ≠ right.sum) :
+    IsUnit 5 (shellRun left (collisionSource left right)) ↔
+      HasValue 5
+        (shellSlope left * shellIntercept right -
+          shellSlope right * shellIntercept left)
+        ((shellSlopeGapFiveDepth (shellSlopeSumGap left right) : ℤ) - left.length) := by
+  have denominator_value :=
+    shellSlope_sub_hasValue_five_of_sameLength length_eq sum_ne
+  have slope_ne : shellSlope left ≠ shellSlope right := by
+    intro slope_eq
+    exact sum_ne ((shellSlope_eq_iff_length_sum left right).1 slope_eq).2
+  have target_eq := shellRun_collisionSource_eq_targetQuotient left right slope_ne
+  constructor
+  · intro target_unit
+    have product_value := mul_hasValue target_unit denominator_value
+    have product_eq :
+        shellRun left (collisionSource left right) *
+            (shellSlope left - shellSlope right) =
+          shellSlope left * shellIntercept right -
+            shellSlope right * shellIntercept left := by
+      rw [target_eq]
+      exact div_mul_cancel₀ _ denominator_value.1
+    rw [product_eq] at product_value
+    simpa using product_value
+  · intro determinant_value
+    rw [target_eq]
+    simpa using div_hasValue determinant_value denominator_value
+
+/-- The determinant valuation is also exactly the all-prefix guard certificate for both sides
+of a same-length cross-grade collision. -/
+theorem sameLengthCollisionPrefixesUnit_iff
+    {left right : List ℕ} (length_eq : left.length = right.length)
+    (sum_ne : left.sum ≠ right.sum) :
+    ((∀ front back,
+        left = front ++ back →
+          IsUnit 5 (shellRun front (collisionSource left right))) ∧
+      ∀ front back,
+        right = front ++ back →
+          IsUnit 5 (shellRun front (collisionSource left right))) ↔
+      HasValue 5
+        (shellSlope left * shellIntercept right -
+          shellSlope right * shellIntercept left)
+        ((shellSlopeGapFiveDepth (shellSlopeSumGap left right) : ℤ) - left.length) := by
+  have slope_ne : shellSlope left ≠ shellSlope right := by
+    intro slope_eq
+    exact sum_ne ((shellSlope_eq_iff_length_sum left right).1 slope_eq).2
+  have collision := shellRun_collisionSource left right slope_ne
+  constructor
+  · intro prefixes
+    have target_unit : IsUnit 5 (shellRun left (collisionSource left right)) :=
+      prefixes.1 left [] (by simp)
+    exact (sameLengthCollisionTarget_fiveUnit_iff length_eq sum_ne).1 target_unit
+  · intro determinant_value
+    have target_unit : IsUnit 5 (shellRun left (collisionSource left right)) :=
+      (sameLengthCollisionTarget_fiveUnit_iff length_eq sum_ne).2 determinant_value
+    constructor
+    · exact (shellPrefixesUnit_iff left (collisionSource left right)).2 target_unit
+    · apply (shellPrefixesUnit_iff right (collisionSource left right)).2
+      rw [← collision]
+      exact target_unit
+
 private theorem shellSlope_ne_one {waits : List ℕ} (waits_ne : waits ≠ []) :
     shellSlope waits ≠ 1 := by
   have length_ne : waits.length ≠ ([] : List ℕ).length := by

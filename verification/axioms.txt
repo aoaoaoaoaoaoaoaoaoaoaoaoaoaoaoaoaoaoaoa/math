@@ -1757,6 +1757,12 @@
 'MatrixMortality.MixedPrimeDebt.sameLengthCollisionSource_fiveUnit_iff' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.MixedPrimeDebt.sameLengthCollisionTarget_fiveUnit_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.sameLengthCollisionPrefixesUnit_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.MixedPrimeDebt.shellRun_fixedPoint_unique' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.MixedPrimeDebt.shellPeriodicPoint_eq_iff_commute' depends on axioms: [propext,
  Classical.choice,

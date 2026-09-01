@@ -2566,8 +2566,12 @@ For the same-length cross-grade branch, source acceptance is now one exact carry
 `Δ=|sum(u)−sum(v)|`, the slope difference has five-adic value `κ(Δ)−length`, where `κ` is zero
 for odd `Δ` and `1+v₅(Δ/2)` for even `Δ`. The collision source is a unit exactly when the
 intercept difference has that value. This is
-[`D2-S18`](SALVAGE.md#d2-s18-same-length-cross-grade-five-carry). The remaining same-length
-tasks are the common-target unit test and the fixed-source intercept equation.
+[`D2-S18`](SALVAGE.md#d2-s18-same-length-cross-grade-five-carry). Target acceptance is equally
+exact: the common target, and equivalently every prefix on both colliding schedules, is a
+five-unit exactly when the affine determinant has value `κ(Δ)−length`. This is
+[`D2-S19`](SALVAGE.md#d2-s19-same-length-collision-acceptance-certificate). The remaining
+same-length task is to solve the fixed-source intercept equation together with this determinant
+carry, not to inspect intermediate guards.
 The deepest of those three branches is itself a full depth reset. In normalized band coordinates
 `U(d,μ)=1/5+(3/10)(2/3)^dμ`, every target band `d≥2` contains a point whose `d−2` predecessor has
 any prescribed band `n≥7` and mantissa in `(2/3,1]`. An explicit guarded subfamily fixes target
@@ -2881,7 +2885,8 @@ universal computation.
    explicit collision-source fibres. `D2-S16` further turns any two-loop fibre into either a
    global power relation or an injective rank-two guarded loop family. `D2-S17` extends the
    balanced-kernel/collision-source split to arbitrary fixed endpoint fibres. `D2-S18` reduces
-   same-length cross-grade source acceptance to one explicit parity/LTE intercept carry. Abandon
+   same-length cross-grade source acceptance to one explicit parity/LTE intercept carry, and
+   `D2-S19` reduces complete collision acceptance to the matching affine-determinant carry. Abandon
    finite literal return censuses and local forbidden-factor grammars; attack those
    endpoint-coupled fibres. Treat chamber
    exit and reentry as separate pre-exit seams. Do not reopen
