@@ -1142,8 +1142,20 @@ The physical upper-length identity sharpens the non-unit branch further: it is e
 singleton current or an all-`c` multi-role current of width `2..β+2`. In particular every
 `b`-bearing multi-role current has automatic unit ancestry. The singleton frontier now has two
 disjoint tasks. Kill this finite-width letter grammar by exact ray arithmetic, or upgrade the
-automatic unit coordinates on the long branch to the integral gap ancestry and common-suffix
-support required by `MM-S22`/`MM-S24`.
+automatic unit coordinates on the long branch to the arithmetic interface required by
+`MM-S22`/`MM-S24`.
+
+[`MM-S91`](SALVAGE.md#mm-s91-exact-parser-gap-clean-ancestry-gate) performs that upgrade and
+finds a sharp boundary. Every quotient of shell `(1,1)` admits integral decimal-unit coordinates
+with denominator `D=E·Nprev`; for one parser step these coordinates are an exact common scaling
+of the physical residual and inherited upper coordinate. But a representation with
+`gcd(q,N)=1` exists exactly when `q` divides the reduced numerator of `(ray₂/ray₁)/10`. This is
+not a formal consequence of parser law and shell data: for every `β≥3` and tag body, the lawful
+tail `[R_c,D_c] ; [R_c,R_c]` has the required shell while its reduced numerator is coprime to
+`q`, so no gap-clean descended representation exists. Thus the long singleton branch now splits
+exactly into a reduced-numerator clean language, where `MM-S22` applies, and a genuinely
+contaminated support language governed by `MM-S24`; projective rescaling cannot erase the
+distinction.
 
 The ternary and decimal branches now separate at their first multi-transfer front.
 [`MM-S37`](SALVAGE.md#mm-s37-decimal-three-shape-frontier-extinction) substitutes each of the

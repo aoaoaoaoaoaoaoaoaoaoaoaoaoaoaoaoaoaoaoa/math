@@ -1736,6 +1736,40 @@
 'MatrixMortality.DecimalSetterBridgeRay.singletonPole_tail_not_admitsUnitPeeledCarrier_iff_singleton_or_shortAllC' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.DecimalSetterBridgeRay.admitsIntegralGapPeeledCarrier_of_ratio_shell' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterBridgeRay.rayStep_admitsIntegralGapPeeledCarrier_of_ratio_shell' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterBridgeRay.gapFactor_coprime_marker' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterBridgeRay.exists_gapCleanIntegralPeeledCarrier_iff_gapFactor_dvd_reducedNumerator' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterBridgeRay.gapContaminatedTail_blocksLaw' does not depend on any axioms
+'MatrixMortality.DecimalSetterBridgeRay.gapContaminatedRoot_upperBoundaryCode_eq' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterBridgeRay.gapContaminatedTail_parsedRay_coordinates' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterBridgeRay.gapContaminatedTail_normalizedQuotient_formula' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterBridgeRay.gapContaminatedTail_ratio_hasDecimalShell' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterBridgeRay.gapContaminatedTail_rawNumerator_coprime_gapFactor' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterBridgeRay.gapContaminatedTail_reducedNumerator_coprime_gapFactor' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterBridgeRay.gapContaminatedTail_no_gapCleanIntegralCarrier' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.DecimalSetterAncestry.carrierFactor_multiToSingleton_quotientGate' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]

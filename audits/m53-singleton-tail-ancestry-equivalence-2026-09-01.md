@@ -60,9 +60,10 @@ therefore lies in the automatic-unit branch.
 ## Boundary
 
 The result assumes `β≥3`, an actual singleton pole, an erasure-ended current, and parser law on
-the nonempty older tail. It does not exclude the short residual grammar. On the long branch it
-constructs rational unit coordinates, not the integral denominator recurrence or common-suffix
-factorization required by the denominator-ancestry quotient gates.
+the nonempty older tail. It does not exclude the short residual grammar. Record `MM-S91`
+subsequently supplies integral denominator descent on the long branch and proves that
+primitive-gap coprimality is a separate reduced-numerator condition, not a consequence of these
+shells.
 
 ## Verification
 

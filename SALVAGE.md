@@ -151,6 +151,7 @@ file owns the mathematical stock.
 | [`MM-S88`](#mm-s88-r_c-root-singleton-d_c-extinction) | obstruction | no parser-lawful two-block source reaches the singleton `D_c` pole for `β≥3` | formalized | graduated |
 | [`MM-S89`](#mm-s89-complete-two-block-singleton-extinction) | obstruction | no parser-lawful two-block source reaches either singleton target for `β≥3` | formalized | active |
 | [`MM-S90`](#mm-s90-exact-singleton-tail-ancestry-equivalence) | structure theorem | at any lawful singleton pole, older unit peeled ancestry is equivalent to a multi-role current with at least `β+3` upper digits | formalized | active |
+| [`MM-S91`](#mm-s91-exact-parser-gap-clean-ancestry-gate) | structure theorem and obstruction | every `(1,1)` parser ray has integral gap-descended coordinates, but gap-clean coordinates exist exactly when the primitive gap divides its reduced normalized numerator | formalized | active |
 | [`R32-S01`](#r32-s01-split-return-normal-form) | structure theorem | rank-two cuts reduce one-unit binary mortality to a `2 × 2` return recurrence | formalized | graduated |
 | [`R32-S02`](#r32-s02-two-plane-edge-square) | structure theorem | two rank-two generators are a two-vertex square of `2 × 2` edges | formalized | graduated |
 | [`R32-O01`](#r32-o01-rank-one-profile-collapse) | obstruction | a rank-one generator reduces mortality to order-at-most-three scalar recurrence zeros | audited | stock |
@@ -5749,12 +5750,13 @@ branch.
 **Scope:** (3) and (4) assume `β≥3`, an actual singleton pole, an erasure-ended current block,
 and parser law on the nonempty older tail. They impose no distinguished raw head. They do not
 exclude either short branch in (4), and unit peeled coordinates do not yet supply the integral
-gap ancestry or support factorization required by the strongest quotient gates.
+gap-coprimality or support factorization required by the strongest quotient gates.
 
 **Use:** remove unit ancestry as an independent conjecture on the long arbitrary-history
 singleton branch. The remaining frontier splits exactly into singleton currents, all-`c`
-multi-role currents of width `2..β+2`, and the long unit branch, whose next missing premise is
-integral/support ancestry.
+multi-role currents of width `2..β+2`, and the long unit branch. [`MM-S91`](#mm-s91-exact-parser-gap-clean-ancestry-gate)
+supplies integral denominator descent there and isolates primitive-gap coprimality as an exact
+reduced-numerator divisibility condition.
 
 **Formalization:**
 [`MatrixMortality/DecimalSetterSingletonAncestry.lean`](MatrixMortality/DecimalSetterSingletonAncestry.lean),
@@ -5766,9 +5768,89 @@ through `parsedRay_ne_zero_of_blocksLaw`,
 **Artifact:**
 [`audits/m53-singleton-tail-ancestry-equivalence-2026-09-01.md`](audits/m53-singleton-tail-ancestry-equivalence-2026-09-01.md).
 
-**Next:** kill the singleton/all-`c` short grammar, and on the long branch strengthen the
-automatic unit coordinates to the integral denominator and common-suffix ancestry consumed by
-`MM-S22` and `MM-S24`.
+**Next:** kill the singleton/all-`c` short grammar, and on the long branch intersect the
+reduced-numerator gate from `MM-S91` with the exact pole equation and encoded-entry history.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S91: Exact parser gap-clean ancestry gate
+
+**Kind:** structure theorem and obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+Let a parser ray be `(x,y)` with quotient shell `(1,1)`, and write its normalized quotient in
+lowest terms as
+
+```text
+s=(y/x)/10=a/b.
+```
+
+Both `a` and `b` are decimal units. With primitive gap `q=2·10^β−7`, full gap `E=9q`, and
+marker `μ`, the coordinates
+
+```text
+N=Eμb,       Nprev=a,       D=Ea
+```
+
+are integral decimal units, satisfy `D=E·Nprev`, and represent the parser ray. For an explicit
+parser step they are a common nonzero rational rescaling of the physical residual and inherited
+upper coordinate. Thus the denominator descent missing from the abstract unit-carrier interface
+is automatic on the shell supplied by [`MM-S90`](#mm-s90-exact-singleton-tail-ancestry-equivalence).
+
+Coprimality is rigid. Every integral descended representation obeys
+
+```text
+aN=bμE·Nprev.                                      (1)
+```
+
+The primitive gap is coprime to nine and to `μ`. Hence `gcd(q,N)=1` forces `q∣a`. Conversely,
+if `a=qc`, then `N=9μb`, `Nprev=c`, and `D=Ec` give gap-clean integral coordinates. Lean
+packages the exact criterion
+
+```text
+gap-clean integral descended coordinates exist
+  ↔ q divides numerator((y/x)/10).                 (2)
+```
+
+Parser law and shell data do not imply the right side. For every `β≥3` and every tag body, the
+lawful tail `[R_c,D_c] ; [R_c,R_c]` has
+
+```text
+(y/x)/10 = 90μP/(9P²−11GV),
+```
+
+where `P` is the common punctuated upper code and `V` is the first block's lower code. The raw
+numerator and denominator are respectively `610` and `990` modulo `1000`, so both have shell
+`(1,1)`. Yet `q` is coprime to the raw, and therefore reduced, numerator. By (2), no integral
+gap-clean representation exists anywhere in this uniform lawful family.
+
+**Scope:** the normalization and (2) hold for every `β>0` and every rational ray with quotient
+shell `(1,1)`. The obstruction family holds for every `β≥3` and every tag body. Its members are
+lawful parser tails, not singleton-pole witnesses; an actual pole may impose additional code or
+sign constraints that exclude them.
+
+**Use:** replace the vague long-branch “integral ancestry” premise by one exact dichotomy.
+Denominator descent is free. The clean branch is precisely the reduced-numerator divisibility
+language in (2), where [`MM-S22`](#mm-s22-gap-factor-quotient-gate) applies; the complementary
+branch must be handled by the factorwise support dynamics of
+[`MM-S24`](#mm-s24-factorwise-gap-ancestry) and encoded reachability. Projective rescaling alone
+cannot cross this boundary.
+
+**Formalization:**
+[`MatrixMortality/DecimalSetterGapCleanAncestry.lean`](MatrixMortality/DecimalSetterGapCleanAncestry.lean),
+through `admitsIntegralGapPeeledCarrier_of_ratio_shell`,
+`rayStep_admitsIntegralGapPeeledCarrier_of_ratio_shell`,
+`exists_gapCleanIntegralPeeledCarrier_iff_gapFactor_dvd_reducedNumerator`, and the
+`gapContaminatedTail` family through `gapContaminatedTail_no_gapCleanIntegralCarrier`.
+
+**Artifact:**
+[`audits/m53-parser-gap-clean-ancestry-gate-2026-09-01.md`](audits/m53-parser-gap-clean-ancestry-gate-2026-09-01.md).
+
+**Next:** intersect (2) with the exact singleton-pole equation and encoded-entry history; either
+force the divisibility and apply the quotient gate, or classify the contaminated factor support
+that survives every physical predecessor.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).

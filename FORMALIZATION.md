@@ -1698,8 +1698,18 @@ an older quotient of shell `(1,1)`. The existing forward wall gives the converse
 the exact equivalence between unit peeled ancestry and the current shape
 `length≥2, upperLength≥β+3`. The physical upper-length identity then sharpens the complement
 to singleton currents or all-`c` multi-role currents of width `2..β+2`; every `b`-bearing
-multi-role current lies automatically in the unit branch. Integral gap ancestry and support
-factorization remain open on the long branch.
+multi-role current lies automatically in the unit branch. The integral and primitive-gap
+normalization of that long branch is resolved separately by `MM-S91`.
+
+Record [`MM-S91`](SALVAGE.md#mm-s91-exact-parser-gap-clean-ancestry-gate) settles the integral
+normalization and identifies the remaining coprimality seam exactly. Any parser quotient of
+shell `(1,1)` has integral decimal-unit coordinates with `D=E·Nprev`; on a concrete parser step
+they are a nonzero common scaling of the physical residual and inherited upper coordinate.
+Gap-clean coordinates exist if and only if the primitive gap divides the reduced numerator of
+the quotient after removing its built-in factor ten. The uniform lawful tail
+`[R_c,D_c] ; [R_c,R_c]` violates this condition for every `β≥3` and every tag body: its quotient
+has shell `(1,1)`, while the primitive gap is coprime to its reduced numerator. Shell and parser
+law alone therefore cannot feed the gap-clean quotient theorem.
 
 Record [`MM-S37`](SALVAGE.md#mm-s37-decimal-three-shape-frontier-extinction) separates the
 ternary and decimal first-multi-transfer fronts. The single theorem
@@ -1756,7 +1766,7 @@ the periodic saturation theorem and its remaining arithmetic boundary are recons
 formalization and the shell attack are tracked in
 [#7](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/7).
 
-The `M₅(3)` delimiter attack has twenty-two foundational records:
+The `M₅(3)` delimiter attack has twenty-three foundational records:
 
 | Record | Formalization obligation |
 | --- | --- |
@@ -1776,6 +1786,7 @@ The `M₅(3)` delimiter attack has twenty-two foundational records:
 | [`MM-S88`](SALVAGE.md#mm-s88-r_c-root-singleton-d_c-extinction) | exact `R_c`-root `D_c` discrepancy equation, suffix factorization, prefix-length contradiction, and complete two-block `D_c` extinction |
 | [`MM-S89`](SALVAGE.md#mm-s89-complete-two-block-singleton-extinction) | target-independent `R_c` discrepancy identity, exact `D_b` shell and suffix factorization, coefficient bounds, and complete two-block singleton extinction |
 | [`MM-S90`](SALVAGE.md#mm-s90-exact-singleton-tail-ancestry-equivalence) | nonzero lawful parser rays, automatic long-current unit ancestry, exact current-shape equivalence, and complementary singleton/all-`c` short grammar |
+| [`MM-S91`](SALVAGE.md#mm-s91-exact-parser-gap-clean-ancestry-gate) | automatic integral gap descent, exact reduced-numerator criterion for primitive-gap coprimality, and a lawful shell counterexample to automatic gap-clean ancestry |
 | [`MM-S01`](SALVAGE.md#mm-s01-square-run-projective-normal-form) | invariant square-run plane, invertible `2 × 2` transfer, Möbius normalization, rank-one fracture grammar, and equivalence with pole avoidance |
 | [`MM-S02`](SALVAGE.md#mm-s02-reset-zero-projective-peeling) | scaled transfer identity, exact two-shell classification of all poles, and reset-zero one-transfer avoidance |
 | [`MM-O16`](SALVAGE.md#mm-o16-exact-delimiter-pair-obstruction) | generic ignored-pair immortality is formalized; paired common-kernel and cubic companion specializations are audited |
