@@ -1190,8 +1190,16 @@ gcd(a,b)=3H ↔ h∣n ∧ gcd(r,d)=1 ∧ gcd(q,3μ)=3,
 
 and within that channel Farey height contracts exactly when `rq<3n`. The denominator ratio is
 `2μ/H−2q/(3n)`, with limiting factor `4/5−6/(5H)`. This proves the contraction mechanism, not
-its ancestry. The remaining geometric cut is to show that only a controlled predecessor colour
-can enter this gcd chamber, then charge the contraction to its preceding expansion.
+its ancestry.
+
+[`MM-S87`](SALVAGE.md#mm-s87-empty-front-backward-chamber-cut) proves the first ancestry cut.
+Every physical empty-front seed lies above `H`; from any carrier on that ray, no physical block
+whose first role letter is `b` can enter the slope interval `(1,r/(r−3))`. Thus every contraction
+candidate is `c`-leading. The literal `(R_c,D_b)` branch against body `b c^(β−2)` also satisfies
+the quantitative label `(x−1)/x<1/(80ρ)` whenever `x>1`. The interval alone does not exclude
+longer `c`-leading blocks with that prefix. The next cut must pull the exact `3H` gcd channel
+backward to force or eliminate the remaining suffix, then charge any surviving contraction to
+its adjacent transition.
 
 The remaining ternary obligation is now the **nonzero history-defect branch** of the global
 earliest-pole reduction. In the normalized coordinate `δ=D/y`, the complete physical recurrence
@@ -1213,8 +1221,8 @@ erasure tile, not `β` of them. A complete proof must either force the long tail
 false pole or extend the carry/cylinder invariant to arbitrary physical target suffixes. Fixed
 residue and unit projections are empirically saturated, and the exact carry window grows with
 carrier height. None of `MM-S51`, `MM-S55`, `MM-S57`, `MM-S59`, `MM-S61`, `MM-S63`, `MM-S64`,
-`MM-S68`, `MM-S69`, `MM-S71`, `MM-O27`, `MM-S73`, `MM-S76`, `MM-O29`, or `MM-S86` alone proves
-projective avoidance.
+`MM-S68`, `MM-S69`, `MM-S71`, `MM-O27`, `MM-S73`, `MM-S76`, `MM-O29`, `MM-S86`, or `MM-S87`
+alone proves projective avoidance.
 Exact bidirectional diagnostics for the ternary swap at `β=3`, body `bbcc`, exclude every
 false-pole word of at most six projective blocks when each regular block has
 role length at most three; this is computational evidence only.

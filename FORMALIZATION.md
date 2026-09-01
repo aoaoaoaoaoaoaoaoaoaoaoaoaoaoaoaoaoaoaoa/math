@@ -1438,6 +1438,7 @@ The setter-projective audit now also exposes a kernel-friendly carry theorem:
 | [`MM-S76`](SALVAGE.md#mm-s76-primitive-target-multiplier-braid) | unique primitive target multiplier, literal prefix-discrepancy braid, unit transfer, and the two-arm first-mismatch residue pullback to the initial cylinder |
 | [`MM-O29`](SALVAGE.md#mm-o29-uniform-empty-front-local-rays) | uniform local `D_b;D_c;D_c` backward rays for every empty-front erasure target, exact shell and cylinder formulas, and complete terminal-`c` gap valuation law |
 | [`MM-S86`](SALVAGE.md#mm-s86-exact-deletion-c-contraction-chamber) | exact singleton-`D_c` adjugate, primitive `3H` gcd channel, sharp Farey-contraction inequality, and limiting ratio |
+| [`MM-S87`](SALVAGE.md#mm-s87-empty-front-backward-chamber-cut) | empty-front seeds lie above `H`, no `b`-leading physical predecessor enters the contraction interval, and the canonical `(R_c,D_b)` pullback has gap below `1/(80ρ)` |
 
 These records narrow the missing arbitrary-depth theorem but do not prove
 projective avoidance. Their reconstruction is
@@ -1810,6 +1811,15 @@ exactly when `r(n−d)<3n`. The normalized denominator ratio is
 `2μ/H−2(n−d)/(3n)`, whose limiting factor is strictly below `4/5`. The adapter theorem advances
 the signed raw pair through the existing singleton-`D_c` carrier recurrence with determinant
 `−6HRμ`. No theorem yet classifies which earlier physical blocks enter this chamber.
+
+Record [`MM-S87`](SALVAGE.md#mm-s87-empty-front-backward-chamber-cut) supplies the first global
+ancestry cut. Every physical `MM-O29` empty-front seed satisfies `X>H`. Above that ray, an inverse
+physical block has the exact form `(P−cA)/V` with `0<c<3`. Lean exhausts the relative upper and
+lower spelling lengths and proves that no block whose first role letter is `b` can land in
+`(1,r/(r−3))`; every `MM-S86` slope-chamber ancestor is therefore `c`-leading. For the literal
+`(R_c,D_b)` block against body `b c^(β−2)`, the exact codes imply
+`(x−1)/x<1/(80ρ)` whenever `x>1`. The theorem does not force an arbitrary chamber ancestor to
+equal that block; this remaining step must consume the `MM-S86` gcd channel.
 
 Record [`MM-S21`](SALVAGE.md#mm-s21-bounded-decimal-suffix-cycles) closes the fixed-precision
 suffix-descent lane. `DecimalSetterSuffix.cycleDefect_lift` gives an explicit one-digit lift for
@@ -2371,6 +2381,7 @@ fixed-rank decision problem.
 | `SwappedSetterTargetResidue.lean` | three-adic unit chain and first-mismatch residue pullback from the target prefix through both singleton deletions to the initial cylinder quotient |
 | `SwappedSetterEmptyFrontRay.lean` | exact local empty-front `D_b;D_c;D_c` backward family, shell and predecessor-cylinder formulas, and terminal-run gap valuation classification |
 | `SwappedSetterDeletionCContraction.lean` | exact inverse singleton-`D_c` gcd chamber, Farey-height contraction criterion, physical recurrence adapter, and limiting contraction ratio |
+| `SwappedSetterEmptyFrontChamber.lean` | terminal lower bound for empty-front seeds, physical `b`-leading exclusion from the deletion-contraction interval, and canonical `(R_c,D_b)` gap estimate |
 | `PairedMortality.lean` | common-column mortality converse and exact integer `4 × 4` family |
 | `PhaseFracture.lean` | phase normalization and dimension-free projective-identification contradiction |
 | `PhaseRigidity.lean` | checked local role algebra, discrepancy commutators, and invariant-pencil rigidity |

@@ -148,6 +148,7 @@ file owns the mathematical stock.
 | [`MM-S76`](#mm-s76-primitive-target-multiplier-braid) | structure theorem and obstruction | primitivity identifies one unique unit target multiplier, turning the suffix charge into a literal prefix discrepancy and restricting its predecessor cylinder to two first-mismatch residue arms | formalized | active |
 | [`MM-O29`](#mm-o29-uniform-empty-front-local-rays) | obstruction | every empty-front erasure target admits an exact local `D_b;D_c;D_c` backward ray with the required shells and predecessor cylinder | formalized | active |
 | [`MM-S86`](#mm-s86-exact-deletion-c-contraction-chamber) | structure theorem and obstruction | singleton `D_c` contracts Farey height exactly in one primitive gcd channel with a sharp gap inequality | formalized | active |
+| [`MM-S87`](#mm-s87-empty-front-backward-chamber-cut) | structure theorem and obstruction | no `b`-leading physical block can pull an empty-front seed into the deletion-contraction chamber; the canonical `R_c;D_b` branch has a sharp near-diagonal gap | formalized | active |
 | [`R32-S01`](#r32-s01-split-return-normal-form) | structure theorem | rank-two cuts reduce one-unit binary mortality to a `2 × 2` return recurrence | formalized | graduated |
 | [`R32-S02`](#r32-s02-two-plane-edge-square) | structure theorem | two rank-two generators are a two-vertex square of `2 × 2` edges | formalized | graduated |
 | [`R32-O01`](#r32-o01-rank-one-profile-collapse) | obstruction | a rank-one generator reduces mortality to order-at-most-three scalar recurrence zeros | audited | stock |
@@ -5792,6 +5793,79 @@ through `deletionC_rawAdjugate_forward`, `deletionC_gcd_eq_three_mul_head_iff`,
 **Next:** classify which physical predecessor blocks can place an `MM-O29` carrier in (1), then
 prove a finite-memory two-step height inequality or exclude that entry channel by exact prefix
 ancestry.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S87: Empty-front backward chamber cut
+
+**Kind:** structure theorem and obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+Write `ρ=3^β`, `H=5ρ−1`, and `r=ρ−2`. Every physical empty-front target of width `β≥2`
+supplies an `MM-O29` antecedent `X` satisfying the strict Archimedean bound
+
+```text
+H < X.
+```
+
+For an arbitrary physical block with punctuated upper code `P`, lower code `V`, and upper
+power `A`, its inverse action above this ray is
+
+```text
+f(X) = (P−cA)/V,
+c = Hμ/(H+rX),
+0 < c < 3.                                             (1)
+```
+
+At every width `β≥6`, a physical block whose first role letter is `b` cannot land in the
+singleton-`D_c` contraction interval:
+
+```text
+¬(1 < f(X) < r/(r−3)).                                (2)
+```
+
+The proof exhausts the exact lower-versus-upper spelling lengths. A shorter lower spelling and
+an equal-length `R_b` prefix place `f(X)` above `r/(r−3)`; a longer lower spelling and an
+equal-length erasure prefix place it below one. Hence any physical predecessor entering the
+`MM-S86` slope chamber must be `c`-leading.
+
+For the canonical body `b c^(β−2)` and literal block `(R_c,D_b)`, Lean also proves
+
+```text
+P = 45ρ²−4ρ−1,
+2V = 90ρ²−9ρ+7,
+A = 27ρ.
+```
+
+Whenever this pullback remains above one, its near-diagonal coordinate obeys
+
+```text
+(f(X)−1)/f(X) < 1/(80ρ).                              (3)
+```
+
+**Scope:** (2) excludes only first role letter `b`; it does not prove that a chamber-entering
+`c`-leading block is exactly `(R_c,D_b)`. Equation (3) is conditional on the literal block and
+canonical body. These results prove neither forward reachability from the encoded entry nor a
+target pole, and they do not establish a universal one- or two-step Lyapunov function.
+
+**Use:** combine (2) with the exact `MM-S86` gcd channel before analyzing any contraction.
+Equation (3) supplies a history-sensitive quantitative label for the observed exceptional
+`(R_c,D_b);D_c` transition without asserting that every chamber ancestor has that form.
+
+**Formalization:**
+[`MatrixMortality/SwappedSetterEmptyFrontChamber.lean`](MatrixMortality/SwappedSetterEmptyFrontChamber.lean),
+through `physicalEmptyFrontSeed_above_terminal`,
+`bLeading_physicalBackwardBlock_avoids_deletionCChamber`, the three canonical code formulas,
+`canonicalRcDbBackward_epsilon_lt`, and `deletionCSuccessorSlope_eq`.
+
+**Artifact:**
+[`audits/m53-empty-front-backward-chamber-2026-09-01.md`](audits/m53-empty-front-backward-chamber-2026-09-01.md).
+
+**Next:** pull the `MM-S86` divisibility channel backward through a `c`-leading physical block.
+The interval alone permits longer blocks with prefix `(R_c,D_b)`; exact-block classification
+must use the `3H` gcd channel rather than an Archimedean code bound.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
