@@ -148,6 +148,7 @@ file owns the mathematical stock.
 | [`MM-S84`](#mm-s84-complete-shallow-root-terminal-normalization) | structure theorem | every parser-lawful non-singleton shallow pole has source exactly `R_c` and is exactly a literal Neary terminal match | formalized | active |
 | [`MM-S85`](#mm-s85-parser-ray-singleton-adapter) | structure theorem and obstruction | the physical bridge has an exact homogeneous parser ray; shallow singleton targets are impossible, and unit-peeled deep singleton poles require a non-singleton current block of upper length at least `β+3` | formalized | active |
 | [`MM-S86`](#mm-s86-two-block-singleton-source-classifier) | structure theorem and obstruction | a parser singleton pole over exactly two source blocks has canonical root `R_c` and a multi-role current block of upper length at least `β+3` | formalized | active |
+| [`MM-S88`](#mm-s88-r_c-root-singleton-d_c-extinction) | obstruction | no parser-lawful two-block source reaches the singleton `D_c` pole for `β≥3` | formalized | active |
 | [`R32-S01`](#r32-s01-split-return-normal-form) | structure theorem | rank-two cuts reduce one-unit binary mortality to a `2 × 2` return recurrence | formalized | graduated |
 | [`R32-S02`](#r32-s02-two-plane-edge-square) | structure theorem | two rank-two generators are a two-vertex square of `2 × 2` edges | formalized | graduated |
 | [`R32-O01`](#r32-o01-rank-one-profile-collapse) | obstruction | a rank-one generator reduces mortality to order-at-most-three scalar recurrence zeros | audited | stock |
@@ -5544,6 +5545,62 @@ projective ancestry.
 **Next:** substitute the exact `R_c` calibrations `9H=lift` and `H−10μ=−gap/9` into the sole
 surviving long-block equation. For target `D_c`, it reduces to the literal code discrepancy
 `2·10^β(P−V)=7μ·10^m`; attack that suffix equation before generalizing to deeper histories.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S88: `R_c`-root singleton-`D_c` extinction
+
+**Kind:** obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+`MM-S86` reduces every parser-lawful two-block singleton pole to a multi-role current block over
+the canonical root `R_c`, with current upper length `m≥β+3`. For target `D_c`, the exact trace
+and root calibrations turn the physical pole equation into
+
+```text
+2·10^β(P−V)=7μ·10^m,                                  (1)
+```
+
+where `P` and `V` are the current upper and lower decimal codes and `μ` is the marker code. Set
+`w=m−β−1`; then `w>0`, and natural-number cancellation in (1) gives
+
+```text
+P−V=35μ·10^w.                                         (2)
+```
+
+The marker code `μ` is odd. Thus `10^w` divides `P−V`, while `2·10^w` does not. Exact decimal
+suffix exhaustion forces the lower word to equal the length-`w` suffix of the punctuated upper
+word. Removing that suffix from (2) makes the complementary prefix code exactly `35μ`. Its
+length is exactly `2β+2`, so every lawful encoded prefix has code at least
+`5·10^(2β+1)`. But `μ<10^(β+1)` and `β≥3` imply
+
+```text
+35μ < 5·10^(2β+1),
+```
+
+a contradiction. Therefore no lawful two-block source hits the singleton `D_c` pole.
+
+**Scope:** this closes only the `D_c` target arm of the two-source-block singleton frontier.
+The same classifier still leaves the `D_b` target over `R_c` with a long multi-role current
+block. Older histories remain outside.
+
+**Use:** delete one of the two target letters from the first deep singleton slice of `MM-S74`.
+The sole two-block singleton question is now the exact `D_b` discrepancy equation over `R_c`.
+
+**Formalization:**
+[`MatrixMortality/DecimalSetterRuleCRootSingleton.lean`](MatrixMortality/DecimalSetterRuleCRootSingleton.lean),
+through `singletonCTrace_eq`,
+`hitsSquarePole_singletonC_ruleCRoot_iff_codeDiscrepancy`, and
+`singletonC_twoBlockSource_impossible`.
+
+**Artifact:**
+[`audits/m53-rule-c-root-singleton-c-extinction-2026-09-01.md`](audits/m53-rule-c-root-singleton-c-extinction-2026-09-01.md).
+
+**Next:** derive the corresponding exact `D_b` discrepancy equation. Its singleton trace has an
+additional primitive coefficient, so the next cut must combine its prime support with suffix
+exhaustion rather than reuse (2) verbatim.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).

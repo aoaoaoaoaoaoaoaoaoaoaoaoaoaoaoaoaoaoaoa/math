@@ -1107,6 +1107,15 @@ survivor grammar: a long multi-role erasure block over `R_c`. The next cut is it
 equation; for target `D_c`, the calibrations collapse it to
 `2·10^β(P−V)=7μ·10^m`.
 
+[`MM-S88`](SALVAGE.md#mm-s88-r_c-root-singleton-d_c-extinction) kills that `D_c` arm. Writing
+`w=m−β−1>0`, the fixed-root equation gives `P−V=35μ·10^w` with odd `μ`. Exact suffix exhaustion
+therefore identifies the lower word with the final `w` digits of the punctuated upper word and
+forces the remaining prefix, of length `2β+2`, to have code `35μ`. Every lawful prefix of that
+length is at least `5·10^(2β+1)`, while the marker bound makes `35μ` strictly smaller for `β≥3`.
+The only two-source-block singleton arm still live is target `D_b` over `R_c` with a multi-role
+current block of upper length at least `β+3`; histories with more than two source blocks remain
+open.
+
 The ternary and decimal branches now separate at their first multi-transfer front.
 [`MM-S37`](SALVAGE.md#mm-s37-decimal-three-shape-frontier-extinction) substitutes each of the
 three role shapes left by the swapped ternary gate into the decimal carrier equation. All are
