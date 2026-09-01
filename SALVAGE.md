@@ -176,6 +176,7 @@ file owns the mathematical stock.
 | [`R32-S52`](#r32-s52-deep-pure-denominator-synchronization) | decidable stratum | a pure-denominator prime deeper than twice the complete tail weight fixes the head and first-tail exponent sum and bounds the remaining tail | formalized | active |
 | [`R32-S53`](#r32-s53-proper-rest-pivot-certificate) | decidable stratum | one denominator prime deeper than the proper rest makes the pure-denominator bridge finite, unless its denominator is already the one-return resonance | formalized | active |
 | [`R32-S54`](#r32-s54-global-pure-denominator-descent) | decidable stratum | every pure-denominator bridge zero pays the sum of all selected scale decrements from its fixed terminal denominator | formalized | active |
+| [`R32-S55`](#r32-s55-effective-returnsquare-decision) | decision theorem | every reduced positive rational ReturnSquare parameter at base at least four is decided by an explicit finite candidate set | formalized | active |
 | [`R32-M01`](#r32-m01-generic-reverse-edge-compiler) | partial mechanism | projective incidence generically embeds into a compatible two-plane edge square | formalized | active |
 | [`R32-M02`](#r32-m02-finite-quotient-sieve) | partial mechanism | finite monoid quotients give complete modular no-certificates for fixed candidates | formalized | active |
 | [`R32-M03`](#r32-m03-two-scale-return-conversion) | partial mechanism | a minimal two-scale return pencil has nonresonant multi-return zeros | formalized | active |
@@ -6606,7 +6607,7 @@ defined, Lean still proves that its valuation is nonpositive.
 `M₃(2)` to three-generator `M₂(3)`. Its alphabet still contains every `qⁿ`. Equation (3)
 classifies the last inverse step at each denominator prime; iterated critical-shell interaction
 and common-content cancellation can still couple distinct primes. Arbitrary-composite
-ReturnSquare remains open.
+ReturnSquare remained open at this ratchet; `R32-S55` later closes its decision problem.
 
 **Artifact:** `ReturnSquare.positiveBridge_fraction_zero_iff`,
 `fractionPullback_terminal_incidence_iff_eq_predecessor`,
@@ -7194,6 +7195,76 @@ with audit
 **Use:** enumerate every pure-denominator ReturnSquare bridge inside one explicit finite box.
 The lawful `M₃(2)` to two-coordinate bridge is exact here: its positive lower coordinate makes
 affine normalization reversible throughout the word.
+
+### R32-S55: Effective ReturnSquare decision
+
+**Kind:** decision theorem
+**Evidence:** formalized
+**Disposition:** active
+
+Fix `q≥4` and a reduced positive rational `d=A/B`, with `A,B>0` and `gcd(A,B)=1`. Lean now
+constructs a `Decidable` term for mortality of the physical ReturnSquare pair at parameter
+`c=−d`. The construction has three exact branches.
+
+If `A=B=1`, then `c=−1` is the zero-power one-return resonance. The empty positive bridge
+vanishes, agreeing with the physical word `cut(−1)²=0`.
+
+If `A=1<B`, `R32-S54` places every bridge zero in the computable set of words satisfying
+
+```text
+length<B,       every wait<B.                              (1)
+```
+
+The implementation enumerates this finite box, evaluates the exact rational bridge, and keeps
+only its zeros. Nonemptiness of that filtered `Finset` is equivalent to physical mortality.
+The sharper cost inequality from `R32-S54` remains available for pruning.
+
+If `A>1`, choose the executable prime `p=minFac(A)`. Coprimality gives `vₚ(d)>0`. If `p∤q`,
+the rational-root support theorem rejects every bridge immediately. Otherwise put
+`a=vₚ(d)>0` and `r=vₚ(q)>0`. Every zero has one proper tail with
+
+```text
+waitExponent(tail)=W,       a=Wr.                          (2)
+```
+
+The candidate generator checks the finitely many `1≤W≤a`; equation (2) leaves at most one
+weight chamber. Every tail in that chamber has `length≤W` and each entry below `W`. For its
+integral adjugate state `(R,S)`, the head incidence is
+
+```text
+R=Aq^(head+1)S.                                             (3)
+```
+
+The general adjugate word is nonzero, so (3) forces `S≠0`, `R≠0`, and
+`q^(head+1)∣R`. Hence
+
+```text
+head<|R|.                                                   (4)
+```
+
+The exact computed integer `|R|`, rather than a symbolic height estimate, is the head search
+bound for that tail. The union of all such words is finite and computable. Filtering it by
+exact bridge evaluation is again equivalent to physical mortality.
+
+**Scope:** the uniform theorem covers every reduced positive rational parameter at every
+`q≥4`, hence every composite integral base. Parameters `c≥0` were already proved immortal;
+the prime bases `q=2,3` already have the stronger resonance-only classification. This is a
+decision theorem, not a proof that the finite candidate sets contain only one-return
+resonances.
+
+**Artifact:** `ReturnSquare.boundedWaitWords`, `pureDenominatorZeroCandidates`,
+`positiveNumeratorAllZeroCandidates`,
+`exists_positiveBridge_pureDenominator_zero_iff_candidates_nonempty`,
+`exists_positiveBridge_positiveNumerator_zero_iff_all_candidates_nonempty`,
+`not_exists_positiveBridge_zero_of_numerator_prime_not_dvd_base`, and the uniform executable
+decision term `physicalPositiveFractionDecidable` in
+[`ReturnSquareFiniteCertificate.lean`](MatrixMortality/ReturnSquareFiniteCertificate.lean), with
+audit
+[`m32-returnsquare-finite-decision-2026-08-31.md`](audits/m32-returnsquare-finite-decision-2026-08-31.md).
+
+**Use:** remove ReturnSquare from the open strategy tree as a decision obstruction. Its finite
+candidate sets can now be exhaustively evaluated to test the stronger resonance-only conjecture
+and to search for the smallest composite-base nonresonant root.
 
 ### R32-M01: Generic reverse edge compiler
 
