@@ -28,12 +28,26 @@ structure RestrictedTagSource (ι : Type*) [Primcodable ι] (accepts : ι → Pr
   body_long : ∀ index, width - 1 ≤ (body index).length
   /-- Every emitted appendant has the required terminal congruence. -/
   body_divisible : ∀ index, width - 1 ∣ (body index).length
+  /-- Every emitted appendant begins with the distinguished binary-tag letter. -/
+  body_head_b : ∀ index, (body index).head? = some .b
   /-- Arbitrary restricted-tag termination is exactly source acceptance. -/
   halts_iff :
     ∀ index,
       TagHaltsFrom width (tagOutput (body index))
           ((body index).drop (width - 1) ++ [.b]) ↔
         accepts index
+
+namespace RestrictedTagSource
+
+/-- The distinguished leading letter occurs in every emitted appendant. -/
+theorem b_mem {ι : Type*} [Primcodable ι] {accepts : ι → Prop}
+    (source : RestrictedTagSource ι accepts) (index : ι) :
+    .b ∈ source.body index := by
+  apply List.mem_of_mem_head?
+  rw [source.body_head_b index]
+  rfl
+
+end RestrictedTagSource
 
 namespace NearyCompiler
 
@@ -59,6 +73,9 @@ noncomputable def compile {ι : Type*} [Primcodable ι] {accepts : ι → Prop}
       NearyArithmeticEnvelope.body_divisible
         (arithmeticEnvelope source.cyclicSystem (source.cyclicInput index)
           source.haltPhase source.period_pos)
+  body_head_b index :=
+    NearyCompiler.body_head_b source.cyclicSystem (source.cyclicInput index)
+      source.haltPhase source.period_pos
   halts_iff index := by
     constructor
     · intro halts

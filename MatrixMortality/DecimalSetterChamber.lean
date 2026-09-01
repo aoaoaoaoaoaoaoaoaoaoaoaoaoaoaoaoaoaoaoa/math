@@ -820,31 +820,6 @@ theorem ruleDeletionLowerWord_shape {β : Nat} {body : List TagLetter}
         simp [lowerTail, tagEncode_cons, tagCode] at encoded_bound ⊢
         omega
 
-theorem compiler_body_head_b {period : Nat} (system : CyclicTag period) (input : List Bool)
-    (haltPhase : Fin period) (period_pos : 0 < period) :
-    (NearyCompiler.body system input haltPhase period_pos).head? = some .b := by
-  have whole_head :
-      (NearyCompiler.wholeAppendant system input haltPhase period_pos).head? = some .b := by
-    have not_last : 0 ≠ 10 * period - 1 := by
-      simp
-      omega
-    unfold NearyCompiler.wholeAppendant weave
-    simp [List.head?_eq_getElem?, NearyCompiler.tableTrack, NearyCompiler.tableTrackVal,
-      NearyCompiler.deletionWidth, period_pos, NearyCompiler.trackWidth_pos, not_last]
-    change
-      (List.replicate (NearyCompiler.trackWidth system input) TagLetter.b)[0]'_ = TagLetter.b
-    simp
-  have body_ne : NearyCompiler.body system input haltPhase period_pos ≠ [] := by
-    intro body_empty
-    have lengths := congrArg List.length body_empty
-    rw [NearyCompiler.body_length] at lengths
-    have beta_large := NearyCompiler.deletionWidth_large period_pos
-    simp [NearyCompiler.deletionWidth] at lengths
-    omega
-  rw [NearyCompiler.wholeAppendant_eq_body_append,
-    List.head?_append_of_ne_nil _ body_ne] at whole_head
-  exact whole_head
-
 /-- The truncated compiler body also ends in `b`; its final position is the penultimate, hence
 even, position of the woven appendant. -/
 theorem compiler_body_getLast?_b {period : Nat} (system : CyclicTag period) (input : List Bool)
@@ -895,6 +870,6 @@ theorem compiler_ruleDeletionLowerWord_shape {period : Nat}
       (NearyArithmeticEnvelope.body_long
         (NearyCompiler.arithmeticEnvelope system input haltPhase period_pos))
   exact ruleDeletionLowerWord_shape body_long
-    (compiler_body_head_b system input haltPhase period_pos)
+    (NearyCompiler.body_head_b system input haltPhase period_pos)
 
 end MatrixMortality.DecimalSetterChamber

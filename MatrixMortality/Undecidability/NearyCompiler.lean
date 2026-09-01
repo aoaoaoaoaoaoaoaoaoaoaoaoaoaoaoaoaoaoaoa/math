@@ -876,6 +876,31 @@ theorem body_length {period : Nat} (system : CyclicTag period) (input : List Boo
   rw [product_eq]
   omega
 
+/-- Every compiler-emitted variable body begins with the distinguished binary-tag letter. -/
+theorem body_head_b {period : Nat} (system : CyclicTag period) (input : List Bool)
+    (haltPhase : Fin period) (period_pos : 0 < period) :
+    (body system input haltPhase period_pos).head? = some .b := by
+  have whole_head :
+      (wholeAppendant system input haltPhase period_pos).head? = some .b := by
+    have not_last : 0 ≠ 10 * period - 1 := by
+      simp
+      omega
+    unfold wholeAppendant weave
+    simp [List.head?_eq_getElem?, tableTrack, tableTrackVal,
+      deletionWidth, period_pos, trackWidth_pos, not_last]
+    change (List.replicate (trackWidth system input) TagLetter.b)[0]'_ = TagLetter.b
+    simp
+  have body_ne : body system input haltPhase period_pos ≠ [] := by
+    intro body_empty
+    have lengths := congrArg List.length body_empty
+    rw [body_length] at lengths
+    have beta_large := deletionWidth_large period_pos
+    simp [deletionWidth] at lengths
+    omega
+  rw [wholeAppendant_eq_body_append,
+    List.head?_append_of_ne_nil _ body_ne] at whole_head
+  exact whole_head
+
 /-- Every padded Table 2 output inhabits the arithmetic envelope consumed downstream. -/
 def arithmeticEnvelope {period : Nat} (system : CyclicTag period) (input : List Bool)
     (haltPhase : Fin period) (period_pos : 0 < period) : NearyArithmeticEnvelope where

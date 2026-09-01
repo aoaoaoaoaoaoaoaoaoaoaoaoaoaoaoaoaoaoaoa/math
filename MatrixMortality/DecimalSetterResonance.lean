@@ -692,6 +692,6 @@ theorem compilerBody_resonanceEnvelope {period : Nat}
       (NearyArithmeticEnvelope.body_long
         (NearyCompiler.arithmeticEnvelope system input haltPhase period_pos))
   exact ⟨NearyCompiler.deletionWidth_large period_pos, body_long,
-    compiler_body_head_b system input haltPhase period_pos⟩
+    NearyCompiler.body_head_b system input haltPhase period_pos⟩
 
 end MatrixMortality.DecimalSetterResonance
