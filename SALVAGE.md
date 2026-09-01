@@ -155,8 +155,11 @@ file owns the mathematical stock.
 | [`MM-S94`](#mm-s94-three-block-singleton-chamber-classification) | structure theorem and obstruction | every lawful three-block singleton pole lies in an exact deep-root or `R_c` discrepancy grammar, and the entire `R_c` singleton-current quadrant is empty | formalized | active |
 | [`MM-S95`](#mm-s95-complete-three-block-singleton-current-extinction) | obstruction and classifier | every lawful three-block singleton pole has a multi-role current; with a multi-role intervening block it obeys the complete `MM-S94` classifier without an extra current-shape hypothesis | formalized | active |
 | [`MM-S96`](#mm-s96-contaminated-tail-factorwise-pole-gate) | structure theorem and obstruction | a singleton pole over the uniform contaminated tail forces the primitive gap into the product of current and inherited lower codes, with exact factorwise transfer outside inherited support | formalized | active |
+| [`MM-S97`](#mm-s97-short-all-c-three-block-shell-grammar) | structure theorem | every short all-`c` current through width `β+2` has an exact mixed-prime discrepancy grammar; only the width-`β+2`, target-`D_b` two-adic residual remains open | formalized | active |
 | [`MM-S98`](#mm-s98-long-r_c-gap-clean-ancestry-extinction) | obstruction | every hypothetical long `R_c` three-block singleton pole has normalized quotient `μ/H` and reduced numerator coprime to the primitive gap, so its entire gap-clean ancestry branch is empty | formalized | active |
+| [`MM-S100`](#mm-s100-complete-three-block-singleton-next-extinction) | obstruction and classifier | every lawful three-block singleton pole has both non-root blocks multi-role; the unconditional survivor grammar is exactly the established deep-root or `R_c` multi/multi chamber | formalized | active |
 | [`MM-S101`](#mm-s101-long-r_c-peeled-head-support-gate) | structure theorem and obstruction | every long `R_c` pole forces gap support through `H−10μ`; the `cb` head is exactly saturated, while the `cc` head exposes the fringe residue `18F−35` | formalized | active |
+| [`MM-S102`](#mm-s102-long-double-c-relative-gap-resonance) | structure theorem and obstruction | every long `cc` pole forces `q_β∣Vq_s` for one `1≤s≤β−1`; every factor absent from the current code is confined to a smaller-gap decimal-period resonance | formalized | active |
 | [`R32-S01`](#r32-s01-split-return-normal-form) | structure theorem | rank-two cuts reduce one-unit binary mortality to a `2 × 2` return recurrence | formalized | graduated |
 | [`R32-S02`](#r32-s02-two-plane-edge-square) | structure theorem | two rank-two generators are a two-vertex square of `2 × 2` edges | formalized | graduated |
 | [`R32-O01`](#r32-o01-rank-one-profile-collapse) | obstruction | a rank-one generator reduces mortality to order-at-most-three scalar recurrence zeros | audited | stock |
@@ -6066,6 +6069,45 @@ factorwise ledger from this uniform tail to the `cb/cc` peeled-head family isola
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
 
+### MM-S97: Short all-`c` three-block shell grammar
+
+**Kind:** structure theorem
+**Evidence:** formalized
+**Disposition:** active
+
+For an all-`c` current of width `n`, with intervening upper length `k`, the exact singleton-pole
+equation gives the following necessary discrepancy depths:
+
+```text
+n≤β:       (v₂δ,v₅δ)=(k+β+1−n,k+β−n),
+n=β+1:     (v₂δ,v₅δ)=(k,k−1),
+n=β+2:     v₅δ=k−1,
+n=β+2 and target D_c: (v₂δ,v₅δ)=(k−2,k−1).
+```
+
+At `β+1`, a normalized residue `2 mod 5` kills the apparent equal-depth cancellation. At
+`β+2`, target `D_c` has normalized two-coefficient `2 mod 4`. For target `D_b`, Lean proves the
+remaining coefficient factors as `2^(β+4)·C`; the phase-sensitive depth and nonvanishing of
+`C` are the exact unresolved boundary.
+
+**Scope:** `β≥3`, arbitrary body and intervening block, all-`c` multi-role erasure-ended current,
+and an actual `R_c`-rooted three-block singleton pole. These are necessary shells, not witnesses.
+
+**Formalization:**
+[`MatrixMortality/DecimalSetterThreeBlockShortCurrent.lean`](MatrixMortality/DecimalSetterThreeBlockShortCurrent.lean),
+through `singletonPole_threeBlock_ruleCRoot_shortAllC_discrepancyGrammar`,
+`singletonC_coefficient_currentUpper_eq_beta_add_two_hasValue_two`, and
+`singletonB_coefficient_currentUpper_eq_beta_add_two_factor`.
+
+**Artifact:**
+[`audits/m53-short-all-c-three-block-shells-2026-09-01.md`](audits/m53-short-all-c-three-block-shells-2026-09-01.md).
+
+**Next:** determine the normalized two-adic residual `C` for lawful `D_b` phases, beginning with
+the pure all-erasure slice.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
 ### MM-S98: Long `R_c` gap-clean ancestry extinction
 
 **Kind:** obstruction
@@ -6117,6 +6159,41 @@ through `singletonPole_threeBlock_ruleCRoot_long_normalizedQuotient_eq`,
 **Next:** generalize the factorwise pole product law from the uniform contaminated tail to an
 arbitrary peeled `cb/cc` head, then intersect forced gap support with the exact lower suffix
 language.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S100: Complete three-block singleton-next extinction
+
+**Kind:** obstruction and classifier
+**Evidence:** formalized
+**Disposition:** active
+
+The only source shape left by `MM-S95` had a multi-role current and singleton intervening block.
+Both singleton letters are impossible. A `D_b` intervener has older ray quotient below one,
+whereas every erasure-current singleton pole forces that quotient above one. For `D_c`, failure
+of unit peeled ancestry forces a short all-`c` current; the exact recurrence then has incompatible
+two- and five-depths for both shallow roots and roots of depth at least `β`.
+
+Therefore every lawful three-block singleton pole has both current and next multi-role.
+`singletonPole_threeBlock_classifier` is the canonical unconditional theorem: its only
+alternatives are the established multi/multi deep-root chamber or the exact `R_c` discrepancy
+grammar.
+
+**Scope:** the theorem consumes the parser-lawful root shell and erasure-ending physical blocks.
+It eliminates singleton interveners, not the surviving multi/multi chambers.
+
+**Formalization:**
+[`MatrixMortality/DecimalSetterThreeBlockSingletonNext.lean`](MatrixMortality/DecimalSetterThreeBlockSingletonNext.lean),
+through `singletonPole_threeBlock_singletonBNext_impossible`,
+`singletonPole_threeBlock_singletonCNext_multiCurrent_impossible`,
+`singletonPole_threeBlock_forces_next_multi`, and `singletonPole_threeBlock_classifier`.
+
+**Artifact:**
+[`audits/m53-complete-three-block-singleton-next-extinction-2026-09-01.md`](audits/m53-complete-three-block-singleton-next-extinction-2026-09-01.md).
+
+**Next:** use the unconditional classifier as the entry point for all further three-block work;
+do not reopen singleton-current or singleton-next cases.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
@@ -6190,6 +6267,56 @@ through `singletonPole_threeBlock_ruleCRoot_long_forces_headSupportProduct`,
 **Next:** classify the lawful `cc` fringe residues against the factors of `q`; attack the
 support-saturated `cb` chamber through a second predecessor or an exact archimedean coefficient
 bound.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S102: Long double-`c` relative-gap resonance
+
+**Kind:** structure theorem and obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+On the long `cc` chamber, decimal-unit peeling forces a nonempty terminal run of `s` sevens,
+with `1≤s≤β−1`. For `q_n=2·10^n−7`, the peeled-head coefficient satisfies
+
+```text
+9(H−10μ)=q_s−10q_β.                                 (1)
+```
+
+Combining (1) with the `MM-S101` product gives the exact support gate
+
+```text
+q_β ∣ V_current·q_s.                                (2)
+```
+
+The smaller gap is not an opaque exceptional coefficient. For every integer `r` and `s≤β`,
+Lean proves
+
+```text
+r∣q_β and r∣q_s  iff  r∣q_s and r∣(10^(β−s)−1).    (3)
+```
+
+Thus every prime factor of `q_β` absent from the current lower code must divide both one smaller
+gap and the exact decimal-period term. If `q_β` is coprime to all smaller `q_s`, the entire
+ambient gap enters the current lower code.
+
+**Scope:** `β≥3`, long `R_c` root, multi-role current and intervening blocks, `cc` head, and an
+actual singleton pole. Smaller-gap resonances occur at some exponents; this is a finite grammar,
+not a universal coprimality or extinction theorem.
+
+**Formalization:**
+[`MatrixMortality/DecimalSetterThreeBlockLongDoubleC.lean`](MatrixMortality/DecimalSetterThreeBlockLongDoubleC.lean),
+through `peeledDoubleCHead_unit_gapRelation`,
+`singletonPole_threeBlock_ruleCRoot_long_doubleC_forces_gapResonance`,
+`gapFactor_commonDivisor_iff_relative_decimalPeriod`, and
+`singletonPole_threeBlock_ruleCRoot_long_doubleC_exceptionalPrime_period`.
+
+**Artifact:**
+[`audits/m53-long-double-c-gap-resonance-2026-09-01.md`](audits/m53-long-double-c-gap-resonance-2026-09-01.md).
+
+**Next:** intersect the finite relative-position resonance with the current lower spelling; the
+support-saturated `cb` branch still requires a second predecessor or coefficient-size attack.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).

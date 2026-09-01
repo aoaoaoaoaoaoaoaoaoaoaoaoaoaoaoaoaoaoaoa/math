@@ -1165,7 +1165,7 @@ to an exact discrepancy shell and the short complement is all-`c`. The long disc
 forces complete suffix exhaustion and a `cb` or `cc` head. Both singleton currents are dead over
 `R_c`, regardless of the intervening block. The live three-source frontier is therefore the
 deep-root singleton-current/singleton-intervening residue plus the explicit multi/multi A/B
-grammar. Shell-compatible tails are not thereby reachable poles.
+grammar at this record boundary. Shell-compatible tails are not thereby reachable poles.
 
 [`MM-S95`](SALVAGE.md#mm-s95-complete-three-block-singleton-current-extinction) closes the
 singleton-current residue left by that classifier. Physical root rays lie below quotient two,
@@ -1175,6 +1175,13 @@ case, and a shallow root reduces to the `R_c` theorem. Every lawful three-block 
 therefore has multi-role current. The only adjacent source-shape slice not yet fed into the
 multi/multi classifier is a multi-role current followed by a singleton intervening block.
 
+[`MM-S100`](SALVAGE.md#mm-s100-complete-three-block-singleton-next-extinction) removes that last
+slice. `D_b` contradicts the strict quotient-one wall; `D_c` forces a short all-`c` current and
+then fails the exact mixed-prime recurrence in both root-depth chambers. Every lawful
+three-block singleton pole therefore has both non-root blocks multi-role. The unconditional
+classifier leaves only the known deep-root or `R_c` multi/multi grammar; no singleton source
+shape should be reopened.
+
 The contaminated counterfamily is no longer arithmetically opaque.
 [`MM-S96`](SALVAGE.md#mm-s96-contaminated-tail-factorwise-pole-gate) proves that any singleton
 pole over it forces `q∣V_current·V_tail`. Every gap divisor absent from the inherited lower code
@@ -1182,6 +1189,12 @@ must therefore occur in the current lower code. The boundary is exact: one forma
 already puts the whole gap into the inherited code, so unconditional cancellation to
 `q∣V_current` is false at the gate level. The live task is a factor-support language, not a
 choice of projective normalization.
+
+[`MM-S97`](SALVAGE.md#mm-s97-short-all-c-three-block-shell-grammar) resolves the short all-`c`
+complement through width `β+2`. Widths `n≤β` and `n=β+1` have complete exact shells; at
+`n=β+2` the five-depth is fixed, and target `D_c` has reversed shell `(k−2,k−1)`. The sole short
+arithmetic seam is target `D_b` at width `β+2`, where the coefficient factors by
+`2^(β+4)` but its normalized phase residual is not yet classified.
 
 The long `R_c` arm is now known to be uniformly contaminated.
 [`MM-S98`](SALVAGE.md#mm-s98-long-r_c-gap-clean-ancestry-extinction) combines its exact suffix
@@ -1196,6 +1209,13 @@ reduction. Every long `R_c` pole forces `q∣V_current(H−10μ)`. The `cb` coef
 to the explicit fringe residue `18F−35`, giving `q∣V_current(18F−35)` and divisorwise transfer
 whenever that residue is coprime. The frontier has therefore bifurcated cleanly: fringe-support
 classification for `cc`, and a genuinely different second-predecessor or size argument for `cb`.
+
+[`MM-S102`](SALVAGE.md#mm-s102-long-double-c-relative-gap-resonance) replaces the arbitrary
+`cc` fringe by an exact smaller-gap grammar. A lawful decimal-unit head has one
+`1≤s≤β−1` with `9(H−10μ)=q_s−10q_β`, hence every pole forces `q_β∣V_current q_s`. A factor can
+remain outside the current lower code only if it divides both `q_s` and
+`10^(β−s)−1`. The live `cc` task is now the intersection of this finite relative-position
+resonance with the lower spelling; the support-saturated `cb` task is unchanged.
 
 The ternary and decimal branches now separate at their first multi-transfer front.
 [`MM-S37`](SALVAGE.md#mm-s37-decimal-three-shape-frontier-extinction) substitutes each of the

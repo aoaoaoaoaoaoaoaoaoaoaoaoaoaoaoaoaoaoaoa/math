@@ -1738,6 +1738,13 @@ current code, with a primewise absence-to-entry corollary. The coprimality bound
 Lean checks an explicit `β=3` body whose inherited lower code contains the whole gap. This body
 is not a pole witness.
 
+Record [`MM-S97`](SALVAGE.md#mm-s97-short-all-c-three-block-shell-grammar) fixes the complete
+mixed-prime discrepancy grammar for all-`c` currents through width `β+2`. Widths at most `β`
+have shell `(k+β+1−n,k+β−n)`; width `β+1` has `(k,k−1)`. At width `β+2`, the five-depth is
+always `k−1`, and target `D_c` has the full reversed shell `(k−2,k−1)`. The unique unresolved
+short seam is target `D_b` at width `β+2`: its coefficient has a checked factor
+`2^(β+4)`, but the remaining phase-sensitive two-adic residual is not yet classified.
+
 Record [`MM-S98`](SALVAGE.md#mm-s98-long-r_c-gap-clean-ancestry-extinction) removes the clean
 branch from every long `R_c` survivor, not merely the uniform counterfamily. Exact suffix
 exhaustion writes its discrepancy as `H·10^(k−1)`, so the normalized older quotient is exactly
@@ -1746,12 +1753,26 @@ The exact criterion in `MM-S91` then forbids every gap-clean integral descended 
 pole itself remains hypothetical; all further attacks on this arm must retain factorwise gap
 support.
 
+Record [`MM-S100`](SALVAGE.md#mm-s100-complete-three-block-singleton-next-extinction) closes the
+last cardinality seam in the three-block source. A `D_b` intervening singleton contradicts the
+strict quotient-one wall. A `D_c` intervener forces a short all-`c` current whose exact
+two/five-depth balance fails for both shallow and deep roots. Hence every lawful three-block
+singleton pole has both non-root blocks multi-role. The canonical classifier is now
+unconditional and exposes only the known multi/multi deep-root or `R_c` chambers.
+
 Record [`MM-S101`](SALVAGE.md#mm-s101-long-r_c-peeled-head-support-gate) supplies the required
 factorwise replacement on the full long-head family. Every hypothetical pole forces
 `q∣V_current(H−10μ)`. For the `cb` head, `H−10μ=−q` exactly, so the first-pole support gate is
 completely saturated. For a `cc` head with fringe code `F`, the same coefficient is congruent,
 up to the unit eighteen, to `18F−35`; hence `q∣V_current(18F−35)`, and every gap divisor absent
 from that fringe residue enters the current lower code.
+
+Record [`MM-S102`](SALVAGE.md#mm-s102-long-double-c-relative-gap-resonance) resolves the lawful
+`cc` fringe coefficient into one smaller primitive gap. A decimal-unit head supplies
+`1≤s≤β−1` with `9(H−10μ)=q_s−10q_β`, so every hypothetical pole forces
+`q_β∣V_current q_s`. Common factors of `q_β` and `q_s` are exactly the factors of `q_s` that
+divide `10^(β−s)−1`. Every ambient prime absent from the current lower spelling is therefore an
+explicit relative-position decimal-period resonance, rather than an arbitrary fringe factor.
 
 Record [`MM-S37`](SALVAGE.md#mm-s37-decimal-three-shape-frontier-extinction) separates the
 ternary and decimal first-multi-transfer fronts. The single theorem
@@ -1808,7 +1829,7 @@ the periodic saturation theorem and its remaining arithmetic boundary are recons
 formalization and the shell attack are tracked in
 [#7](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/7).
 
-The `M₅(3)` delimiter attack has twenty-three foundational records:
+The `M₅(3)` delimiter attack has thirty-one foundational records:
 
 | Record | Formalization obligation |
 | --- | --- |
@@ -1830,10 +1851,13 @@ The `M₅(3)` delimiter attack has twenty-three foundational records:
 | [`MM-S90`](SALVAGE.md#mm-s90-exact-singleton-tail-ancestry-equivalence) | nonzero lawful parser rays, automatic long-current unit ancestry, exact current-shape equivalence, and complementary singleton/all-`c` short grammar |
 | [`MM-S91`](SALVAGE.md#mm-s91-exact-parser-gap-clean-ancestry-gate) | automatic integral gap descent, exact reduced-numerator criterion for primitive-gap coprimality, and a lawful shell counterexample to automatic gap-clean ancestry |
 | [`MM-S94`](SALVAGE.md#mm-s94-three-block-singleton-chamber-classification) | positive singleton chamber, exact deep-root/`R_c` multi-current classifier, suffix/head grammar, and complete `R_c` singleton-current extinction |
-| [`MM-S95`](SALVAGE.md#mm-s95-complete-three-block-singleton-current-extinction) | universal root quotient chamber, consecutive-singleton and deep-root singleton-current extinction, canonical current-multi theorem, and unconditional next-multi classifier |
+| [`MM-S95`](SALVAGE.md#mm-s95-complete-three-block-singleton-current-extinction) | universal root quotient chamber, consecutive-singleton and deep-root singleton-current extinction, canonical current-multi theorem, and classifier conditional only on a multi-role intervener |
 | [`MM-S96`](SALVAGE.md#mm-s96-contaminated-tail-factorwise-pole-gate) | exact current/inherited lower-code product divisibility, arbitrary-divisor and primewise support transfer, and a formal inherited-support saturation boundary |
+| [`MM-S97`](SALVAGE.md#mm-s97-short-all-c-three-block-shell-grammar) | exact short all-`c` shells through width `β+1`, width-`β+2` five-depth, target-`D_c` reversed shell, and isolated target-`D_b` two-adic residual |
 | [`MM-S98`](SALVAGE.md#mm-s98-long-r_c-gap-clean-ancestry-extinction) | exact normalized quotient `μ/H`, reduced-numerator coprimality, and complete gap-clean ancestry extinction for the long `R_c` three-block arm |
+| [`MM-S100`](SALVAGE.md#mm-s100-complete-three-block-singleton-next-extinction) | quotient-one and mixed-prime extinction of both singleton interveners, forced multi/multi source, and unconditional three-block classifier |
 | [`MM-S101`](SALVAGE.md#mm-s101-long-r_c-peeled-head-support-gate) | full long-head support product, exact `cb` saturation identity, `cc` fringe-residue gate, and arbitrary-divisor transfer into the current lower code |
+| [`MM-S102`](SALVAGE.md#mm-s102-long-double-c-relative-gap-resonance) | exact smaller-gap head identity, `q_β∣Vq_s` support law, common-divisor decimal-period equivalence, and exceptional-prime grammar |
 | [`MM-S01`](SALVAGE.md#mm-s01-square-run-projective-normal-form) | invariant square-run plane, invertible `2 × 2` transfer, Möbius normalization, rank-one fracture grammar, and equivalence with pole avoidance |
 | [`MM-S02`](SALVAGE.md#mm-s02-reset-zero-projective-peeling) | scaled transfer identity, exact two-shell classification of all poles, and reset-zero one-transfer avoidance |
 | [`MM-O16`](SALVAGE.md#mm-o16-exact-delimiter-pair-obstruction) | generic ignored-pair immortality is formalized; paired common-kernel and cubic companion specializations are audited |
