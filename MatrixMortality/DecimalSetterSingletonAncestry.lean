@@ -10,7 +10,9 @@ The intrinsic quotient criterion then supplies decimal-unit peeled coordinates.
 
 Combined with the existing forward length wall, unit peeled ancestry is equivalent to the
 physical current shape `length≥2` and `upperLength≥β+3`. It is therefore no longer an
-independent hypothesis on the long arbitrary-history singleton branch.
+independent hypothesis on the long arbitrary-history singleton branch. The exact physical
+length formula sharpens the complementary branch to singleton currents and all-`c` multi-role
+currents of width at most `β+2`.
 -/
 
 namespace MatrixMortality.DecimalSetterBridgeRay
@@ -240,5 +242,72 @@ theorem singletonPole_tail_not_admitsUnitPeeledCarrier_iff_shortCurrent
   rw [singletonPole_tail_admitsUnitPeeledCarrier_iff_currentShape
     β_large body targetLetter current_ends tail_law pole]
   omega
+
+/-- Every physically short multi-role block is marker-free: all of its upper letters are `c`,
+and its role width is at most `β+2`.
+
+This statement needs no pole equation. A single `b` would contribute its ordinary role digit
+plus a marker of width `β+1`, already exceeding the short upper-length ceiling. -/
+theorem shortMulti_upperLetters_allC
+    (β : Nat) {current : List NearyTile}
+    (current_multi : 2 ≤ current.length)
+    (current_short : (spell (nearyUpper β) current).length ≤ β + 2) :
+    current.map NearyTile.letter = List.replicate current.length .c ∧
+      current.length ≤ β + 2 := by
+  let letters := current.map NearyTile.letter
+  have upper_length : (spell (nearyUpper β) current).length =
+      current.length + letters.count .b * (β + 1) := by
+    rw [spell_nearyUpper]
+    simpa only [letters, List.length_map] using
+      DecimalSetterAncestry.tagEncode_length_eq_roleLength_add_markerCount β letters
+  have b_not_mem : .b ∉ letters := by
+    intro b_mem
+    have b_count_pos : 0 < letters.count .b := List.count_pos_iff.mpr b_mem
+    have one_le_count : 1 ≤ letters.count .b := b_count_pos
+    have marker_width_le : β + 1 ≤ letters.count .b * (β + 1) := by
+      simpa [Nat.mul_comm] using Nat.mul_le_mul_right (β + 1) one_le_count
+    omega
+  have letters_all_c : letters = List.replicate letters.length .c := by
+    apply List.eq_replicate_length.mpr
+    intro letter letter_mem
+    cases letter with
+    | b => exact False.elim (b_not_mem letter_mem)
+    | c => rfl
+  constructor
+  · simpa only [letters, List.length_map] using letters_all_c
+  · omega
+
+/-- Physical form of the exact non-unit singleton-tail grammar.
+
+At an actual lawful singleton pole, failure of older unit ancestry means precisely that the
+current block is a singleton, or that it is a marker-free all-`c` multi-role block of width at
+most `β+2`. Thus every `b`-bearing multi-role current belongs automatically to the long unit
+branch. -/
+theorem singletonPole_tail_not_admitsUnitPeeledCarrier_iff_singleton_or_shortAllC
+    {β : Nat} (β_large : 3 ≤ β) (body : List TagLetter)
+    (targetLetter : TagLetter) {current next : List NearyTile}
+    {rest : List (List NearyTile)} (current_ends : EndsInErase current)
+    (tail_law : BlocksLaw (next :: rest))
+    (pole : HitsSquarePole β body [.erase targetLetter] (current :: next :: rest)) :
+    ¬AdmitsUnitPeeledCarrier β (parsedRay β body (next :: rest)) ↔
+      current.length = 1 ∨
+        (2 ≤ current.length ∧ current.length ≤ β + 2 ∧
+          current.map NearyTile.letter = List.replicate current.length .c) := by
+  rw [singletonPole_tail_not_admitsUnitPeeledCarrier_iff_shortCurrent
+    β_large body targetLetter current_ends tail_law pole]
+  constructor
+  · rintro (current_singleton | ⟨current_multi, current_short⟩)
+    · exact Or.inl current_singleton
+    · obtain ⟨letters_all_c, current_width⟩ :=
+        shortMulti_upperLetters_allC β current_multi current_short
+      exact Or.inr ⟨current_multi, current_width, letters_all_c⟩
+  · rintro (current_singleton | ⟨current_multi, current_width, letters_all_c⟩)
+    · exact Or.inl current_singleton
+    · right
+      refine ⟨current_multi, ?_⟩
+      rw [spell_nearyUpper,
+        DecimalSetterAncestry.tagEncode_length_eq_roleLength_add_markerCount,
+        letters_all_c]
+      simpa [List.count_replicate] using current_width
 
 end MatrixMortality.DecimalSetterBridgeRay

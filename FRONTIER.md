@@ -1138,10 +1138,12 @@ unit peeled ancestry
   ↔ multi-role current with upper length at least β+3.
 ```
 
-Thus the non-unit branch is no longer amorphous: it is exactly a singleton current or a
-multi-role current of upper length at most `β+2`. The singleton frontier now has two disjoint
-tasks. Kill this short grammar directly, or upgrade the automatic unit coordinates on the long
-branch to the integral gap ancestry and common-suffix support required by `MM-S22`/`MM-S24`.
+The physical upper-length identity sharpens the non-unit branch further: it is exactly a
+singleton current or an all-`c` multi-role current of width `2..β+2`. In particular every
+`b`-bearing multi-role current has automatic unit ancestry. The singleton frontier now has two
+disjoint tasks. Kill this finite-width letter grammar by exact ray arithmetic, or upgrade the
+automatic unit coordinates on the long branch to the integral gap ancestry and common-suffix
+support required by `MM-S22`/`MM-S24`.
 
 The ternary and decimal branches now separate at their first multi-transfer front.
 [`MM-S37`](SALVAGE.md#mm-s37-decimal-three-shape-frontier-extinction) substitutes each of the

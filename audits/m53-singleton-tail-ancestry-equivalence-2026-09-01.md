@@ -46,8 +46,16 @@ AdmitsUnitPeeledCarrier(older ray)
   ↔ length(current)≥2 and m≥β+3.
 ```
 
-Because an erasure-ended current is nonempty, negating the equivalence gives the exact residual
-grammar: the current is a singleton, or it is multi-role with `m≤β+2`.
+Because an erasure-ended current is nonempty, negating the equivalence first gives a singleton
+current or a multi-role current with `m≤β+2`. The exact physical length identity
+
+```text
+m = length(current) + count_b(current)·(β+1)
+```
+
+then removes every `b` from the multi-role arm. The residual grammar is exactly a singleton
+current or an all-`c` multi-role current of width `2..β+2`. Every `b`-bearing multi-role current
+therefore lies in the automatic-unit branch.
 
 ## Boundary
 

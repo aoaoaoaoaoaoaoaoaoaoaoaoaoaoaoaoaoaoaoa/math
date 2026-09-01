@@ -5734,26 +5734,39 @@ not AdmitsUnitPeeledCarrier(older ray)
      or (length(current)≥2 and upperLength(current)≤β+2).  (4)
 ```
 
+The physical upper-length identity
+
+```text
+upperLength(current)
+  = length(current) + count_b(current)·(β+1)
+```
+
+sharpens (4) without another pole argument. One `b` already costs at least `β+2` digits in a
+multi-role block, so the second arm is exactly an all-`c` block of width between `2` and `β+2`.
+Equivalently, every `b`-bearing multi-role current belongs automatically to the long unit
+branch.
+
 **Scope:** (3) and (4) assume `β≥3`, an actual singleton pole, an erasure-ended current block,
 and parser law on the nonempty older tail. They impose no distinguished raw head. They do not
 exclude either short branch in (4), and unit peeled coordinates do not yet supply the integral
 gap ancestry or support factorization required by the strongest quotient gates.
 
 **Use:** remove unit ancestry as an independent conjecture on the long arbitrary-history
-singleton branch. The remaining frontier splits exactly into the short grammar (4) and the
-long unit branch, whose next missing premise is integral/support ancestry.
+singleton branch. The remaining frontier splits exactly into singleton currents, all-`c`
+multi-role currents of width `2..β+2`, and the long unit branch, whose next missing premise is
+integral/support ancestry.
 
 **Formalization:**
 [`MatrixMortality/DecimalSetterSingletonAncestry.lean`](MatrixMortality/DecimalSetterSingletonAncestry.lean),
 through `parsedRay_ne_zero_of_blocksLaw`,
 `singletonPole_longMultiTail_admitsUnitPeeledCarrier`,
 `singletonPole_tail_admitsUnitPeeledCarrier_iff_currentShape`, and
-`singletonPole_tail_not_admitsUnitPeeledCarrier_iff_shortCurrent`.
+`singletonPole_tail_not_admitsUnitPeeledCarrier_iff_singleton_or_shortAllC`.
 
 **Artifact:**
 [`audits/m53-singleton-tail-ancestry-equivalence-2026-09-01.md`](audits/m53-singleton-tail-ancestry-equivalence-2026-09-01.md).
 
-**Next:** kill the singleton/short-multi grammar in (4), and on the long branch strengthen the
+**Next:** kill the singleton/all-`c` short grammar, and on the long branch strengthen the
 automatic unit coordinates to the integral denominator and common-suffix ancestry consumed by
 `MM-S22` and `MM-S24`.
 

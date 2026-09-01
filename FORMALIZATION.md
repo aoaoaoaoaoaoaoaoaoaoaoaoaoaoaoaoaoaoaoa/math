@@ -1696,8 +1696,10 @@ nondegenerate older quotient. Solving the recurrence backward and comparing the 
 trace with the deeper pole correction proves that a long multi-role current automatically gives
 an older quotient of shell `(1,1)`. The existing forward wall gives the converse. Lean packages
 the exact equivalence between unit peeled ancestry and the current shape
-`length≥2, upperLength≥β+3`, plus its complementary singleton-or-short-multi grammar. Integral
-gap ancestry and support factorization remain open on the long branch.
+`length≥2, upperLength≥β+3`. The physical upper-length identity then sharpens the complement
+to singleton currents or all-`c` multi-role currents of width `2..β+2`; every `b`-bearing
+multi-role current lies automatically in the unit branch. Integral gap ancestry and support
+factorization remain open on the long branch.
 
 Record [`MM-S37`](SALVAGE.md#mm-s37-decimal-three-shape-frontier-extinction) separates the
 ternary and decimal first-multi-transfer fronts. The single theorem
@@ -1773,7 +1775,7 @@ The `M₅(3)` delimiter attack has twenty-two foundational records:
 | [`MM-S86`](SALVAGE.md#mm-s86-two-block-singleton-source-classifier) | unit-ancestry quotient criterion, exact root shells, singleton-current extinction over every root, and canonical `R_c` long-current classifier |
 | [`MM-S88`](SALVAGE.md#mm-s88-r_c-root-singleton-d_c-extinction) | exact `R_c`-root `D_c` discrepancy equation, suffix factorization, prefix-length contradiction, and complete two-block `D_c` extinction |
 | [`MM-S89`](SALVAGE.md#mm-s89-complete-two-block-singleton-extinction) | target-independent `R_c` discrepancy identity, exact `D_b` shell and suffix factorization, coefficient bounds, and complete two-block singleton extinction |
-| [`MM-S90`](SALVAGE.md#mm-s90-exact-singleton-tail-ancestry-equivalence) | nonzero lawful parser rays, automatic long-current unit ancestry, exact current-shape equivalence, and complementary short-current grammar |
+| [`MM-S90`](SALVAGE.md#mm-s90-exact-singleton-tail-ancestry-equivalence) | nonzero lawful parser rays, automatic long-current unit ancestry, exact current-shape equivalence, and complementary singleton/all-`c` short grammar |
 | [`MM-S01`](SALVAGE.md#mm-s01-square-run-projective-normal-form) | invariant square-run plane, invertible `2 × 2` transfer, Möbius normalization, rank-one fracture grammar, and equivalence with pole avoidance |
 | [`MM-S02`](SALVAGE.md#mm-s02-reset-zero-projective-peeling) | scaled transfer identity, exact two-shell classification of all poles, and reset-zero one-transfer avoidance |
 | [`MM-O16`](SALVAGE.md#mm-o16-exact-delimiter-pair-obstruction) | generic ignored-pair immortality is formalized; paired common-kernel and cubic companion specializations are audited |
