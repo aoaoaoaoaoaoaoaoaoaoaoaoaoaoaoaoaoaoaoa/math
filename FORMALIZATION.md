@@ -1994,6 +1994,16 @@ exactly `h` at a regular head and `2β−2` at the exceptional head. The arithme
 also collapses every regular `b`-bearing resonance to the same `s=h` arm; only three explicit
 exceptional relative-position arms remain.
 
+Record [`MM-S60`](SALVAGE.md#mm-s60-complete-b-bearing-rule-entry-extinction) closes every one
+of those b-bearing arms by retaining normalized leading coefficients. At the exceptional head,
+scaling by `45` gives base coefficient `2`, or `4` at `n=2β−1`, and coefficient `2` on both
+the rightmost-`b` and phase perturbations; no minimum-depth subset cancels modulo five. At a
+regular head, scaling by `81` gives coefficient `2^h` on both tied arms, whose sum remains a
+unit, while the marker arm is deeper. The physical theorem
+`bBearingRightmostRule_rawHead_shell_impossible` consumes the complete `MM-S56` position
+grammar. The distinguished raw-entry search is now confined to the all-`c` position-two rule
+boundary; generalized carriers and singleton targets remain separate.
+
 Record [`MM-S37`](SALVAGE.md#mm-s37-decimal-three-shape-frontier-extinction) separates the
 ternary and decimal first-multi-transfer fronts. The single theorem
 `DecimalSetterDepth.firstMultiTransfer_threeShapeFrontier_impossible` consumes the three role
@@ -2864,6 +2874,7 @@ fixed-rank decision problem.
 | `DecimalSetterRuleResonance.lean` | exact all-`D_c` five-depth frontier; rightmost-rule/rightmost-`b` minimum-resonance grammar |
 | `SwappedSetterThresholdCarry.lean` | exact multiplicative target cross-product, finite balanced suffix carry, Neary macro contractions, and the full-erasure-tail terminal cut |
 | `SwappedSetterCarrierGap.lean` | exact integral centered-carrier lift, raw gap factorization, and primitive one- and two-deletion counterexamples to reachability-only gap invariants |
+| `DecimalSetterRuleCoefficient.lean` | normalized rule-arm coefficients and complete b-bearing distinguished raw-entry extinction |
 | `PairedMortality.lean` | common-column mortality converse and exact integer `4 × 4` family |
 | `PhaseFracture.lean` | phase normalization and dimension-free projective-identification contradiction |
 | `PhaseRigidity.lean` | checked local role algebra, discrepancy commutators, and invariant-pencil rigidity |
