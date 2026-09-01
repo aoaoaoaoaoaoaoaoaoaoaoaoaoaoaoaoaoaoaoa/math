@@ -253,6 +253,8 @@ import MatrixMortality.SwappedSetterThreeBlockFrontier
 import MatrixMortality.SwappedSetterReachableCylinder
 import MatrixMortality.SwappedSetterCylinderCharge
 import MatrixMortality.DecimalSetterBridge
+import MatrixMortality.SwappedSetterTargetMultiplier
+import MatrixMortality.SwappedSetterTargetResidue
 import MatrixMortality.SchottkyPunctuation
 import MatrixMortality.TwoStateObstructions
 import MatrixMortality.ForcedRuleCCompanion
