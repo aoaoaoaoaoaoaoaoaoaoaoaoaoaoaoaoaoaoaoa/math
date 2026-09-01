@@ -146,6 +146,7 @@ file owns the mathematical stock.
 | [`MM-S82`](#mm-s82-one-r_b-root-sign-extinction) | obstruction | the one-`R_b` root has negative exact-length complement and cannot hit any shallow pole | formalized | active |
 | [`MM-S83`](#mm-s83-leading-b-shallow-root-sign-extinction) | obstruction | every shallow root beginning with a `b`-role has negative exact-length complement and misses every target | formalized | active |
 | [`MM-S84`](#mm-s84-complete-shallow-root-terminal-normalization) | structure theorem | every parser-lawful non-singleton shallow pole has source exactly `R_c` and is exactly a literal Neary terminal match | formalized | active |
+| [`MM-S85`](#mm-s85-parser-ray-singleton-adapter) | structure theorem and obstruction | the physical bridge has an exact homogeneous parser ray; shallow singleton targets are impossible, and unit-peeled deep singleton poles require a non-singleton current block of upper length at least `β+3` | formalized | active |
 | [`R32-S01`](#r32-s01-split-return-normal-form) | structure theorem | rank-two cuts reduce one-unit binary mortality to a `2 × 2` return recurrence | formalized | graduated |
 | [`R32-S02`](#r32-s02-two-plane-edge-square) | structure theorem | two rank-two generators are a two-vertex square of `2 × 2` edges | formalized | graduated |
 | [`R32-O01`](#r32-o01-rank-one-profile-collapse) | obstruction | a rank-one generator reduces mortality to order-at-most-three scalar recurrence zeros | audited | stock |
@@ -5386,6 +5387,86 @@ deep-history branches beyond lawful terminal matches.
 
 **Next:** compose this exact classifier into the `MM-S74` parsed frontier and concentrate the
 remaining arithmetic on singleton targets and deeper histories.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S85: Parser-ray singleton adapter
+
+**Kind:** structure theorem and obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+The physical three-coordinate bridge state has the exact homogeneous quotient
+
+```text
+ray(z) = (z₀, z₀+basisGap·z₂).
+```
+
+For a block with trace `T=gap·P+lift·V` and upper scale `A=10^m`, its square-reset action is
+
+```text
+(x,y) ↦ ((Tx−lift·Vy)/(gap·μ), Ax).                    (1)
+```
+
+Lean proves (1) directly from the conjugated role matrices and proves by induction that the
+right-to-left recursion `parsedRay` is exactly `ray(bridgeState)`. A singleton target with trace
+`S` therefore hits precisely when
+
+```text
+Sx = 7·lift·y.                                         (2)
+```
+
+If an older ray represents the peeled carrier `N/(10μD)`, meaning
+
+```text
+x·10μD = yN,
+```
+
+then a current block followed by a singleton pole satisfies exactly
+
+```text
+peeledNumerator(N,D,μ,lift,T,V)·S
+  = gap·μ·lift·10^m·N·7.                               (3)
+```
+
+The equivalence is bidirectional when `x` and `N` are nonzero. It is also stated directly on
+`bridgeState`, so no projective normalization is hidden in the adapter.
+
+Two outer consequences are unconditional or sharply conditional. First, a singleton target over
+one parser-lawful root block is impossible: the root upper code, lift, marker, and final digit
+are decimal units, while `S` has shell `(β+1,β)`. Second, define unit peeled ancestry to mean
+that the older parser ray admits nonzero coordinates `N,D` of shell `(0,0)` satisfying the
+displayed homogeneous identity. Under that exact hypothesis, a singleton target over a deeper
+parser history cannot follow a singleton current block; an erasure-ended current block must be
+non-singleton and have at least `β+3` upper digits.
+
+**Scope:** the theorem does not prove unit peeled ancestry for every parser tail. An arbitrary
+nonzero rational ray always has projective coordinates, but requiring both peeled coordinates to
+be decimal units is substantive and is exactly what the recursive depth theorems consume. Long
+multi-role current blocks satisfying that ancestry remain live. The theorem neither imports the
+swapped ternary recurrence nor identifies a deep parser ray with the distinguished two-`c` raw
+head.
+
+**Use:** replace the informal matrix-to-carrier splice in the singleton branch of `MM-S74`.
+The shallow singleton slice is now empty. In the deep slice, the only unit-ancestry survivor is
+a multi-role block with upper length at least `β+3`, in the literal equation required by
+`MM-S20`, `MM-S22`, and `MM-S24`.
+
+**Formalization:**
+[`MatrixMortality/DecimalSetterBridgeRay.lean`](MatrixMortality/DecimalSetterBridgeRay.lean),
+through `boundaryRay_roleProduct_squareReset`, `boundaryRay_bridgeState`,
+`hitsSquarePole_singleton_iff_rayEquation`, `singletonTarget_shallow_impossible`,
+`bridgeState_representsPeeledCarrier_iff`,
+`hitsSquarePole_singleton_cons_iff_peeledEquation`, and
+`singletonPole_of_unitPeeledCarrier_currentShape`.
+
+**Artifact:**
+[`audits/m53-parser-ray-singleton-adapter-2026-09-01.md`](audits/m53-parser-ray-singleton-adapter-2026-09-01.md).
+
+**Next:** prove that every older tail in a minimal parsed singleton frontier admits unit peeled
+coordinates, or classify the exact valuation obstruction when it does not. Then transport the
+integral denominator ancestry `D=gap·Nprev` and factor support needed by `MM-S22`/`MM-S24`.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).

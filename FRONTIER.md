@@ -1082,6 +1082,20 @@ terminal equation by `MM-S81`. Thus shallow poles are lawful terminal witnesses;
 shallow root survives. The outer `MM-S74` frontier is reduced to singleton targets and deeper
 histories.
 
+[`MM-S85`](SALVAGE.md#mm-s85-parser-ray-singleton-adapter) now supplies the missing exact
+matrix-to-carrier splice for the singleton branch. The homogeneous quotient
+`(z₀,z₀+basisGap·z₂)` turns each physical square-reset block into the recursive J-fraction ray
+step and agrees with `bridgeState` on every parsed history. Singleton poles are therefore one
+explicit ray equation. A singleton over one rule-ended root is impossible outright. For deeper
+histories, any older ray with nonzero decimal-unit peeled coordinates gives literally the
+`MM-S20` carrier equation: a singleton current block is impossible, and an erasure-ended current
+block must be non-singleton with upper length at least `β+3`. The remaining seam is exact rather
+than rhetorical: prove this unit peeled representation for every relevant minimal parser tail,
+or classify its failure; then recover the integral denominator ancestry and gap-factor support
+used by `MM-S22` and `MM-S24`. Bounded meet-in-the-middle searches find no singleton hit through
+eleven blocks at role width at most two, or through seven blocks at role width at most three, for
+`β=3` and body `bbcc`; these bounds are computational evidence only.
+
 The ternary and decimal branches now separate at their first multi-transfer front.
 [`MM-S37`](SALVAGE.md#mm-s37-decimal-three-shape-frontier-extinction) substitutes each of the
 three role shapes left by the swapped ternary gate into the decimal carrier equation. All are
