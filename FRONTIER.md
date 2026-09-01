@@ -2550,6 +2550,12 @@ existing balanced affine kernel; every unequal-slope branch is the single explic
 [`D2-S15`](SALVAGE.md#d2-s15-fixed-endpoint-centralizer-reduction). It replaces a separate
 periodic-state census by a positive-centralizer problem, but does not yet decide that
 centralizer or general unequal-endpoint reachability.
+That centralizer has a sharp determinant fork. Two common-point schedules whose `(length,sum)`
+vectors are dependent force an explicit global equality between fixed powers. Independent
+vectors generate an injective `ℕ²` family of pairwise distinct guarded loops at the same rational
+source. This is [`D2-S16`](SALVAGE.md#d2-s16-periodic-centralizer-determinant-fork). Hence a
+genuinely noncyclic centralizer cannot be sporadic: one witness saturates the fixed source in two
+parameters. The live centralizer question is whether this independent branch exists at all.
 The deepest of those three branches is itself a full depth reset. In normalized band coordinates
 `U(d,μ)=1/5+(3/10)(2/3)^dμ`, every target band `d≥2` contains a point whose `d−2` predecessor has
 any prescribed band `n≥7` and mantissa in `(2/3,1]`. An explicit guarded subfamily fixes target
@@ -2860,7 +2866,9 @@ universal computation.
    do not contain it. `D2-S12` classifies every immediate lower/middle two-cycle, while `D2-S14`
    embeds every finite wait body in a guarded wall excursion. `D2-S15` identifies equality of
    periodic endpoints with global affine commutation and splits it into balanced-kernel and
-   explicit collision-source fibres. Abandon finite literal return censuses and local
+   explicit collision-source fibres. `D2-S16` further turns any two-loop fibre into either a
+   global power relation or an injective rank-two guarded loop family. Abandon finite literal
+   return censuses and local
    forbidden-factor grammars; attack those endpoint-coupled fibres. Treat chamber
    exit and reentry as separate pre-exit seams. Do not reopen
    unlabeled residue-only finite nuclei, valuation-only reverse bounds, one-sided endpoint bounds,

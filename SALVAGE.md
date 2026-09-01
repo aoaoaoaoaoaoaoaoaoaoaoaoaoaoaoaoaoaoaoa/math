@@ -263,6 +263,7 @@ file owns the mathematical stock.
 | [`D2-S12`](#d2-s12-exact-wall-odd-two-cycle-family) | structure theorem | a sharp infinite depth family has unique guarded wall-to-odd two-cycles | formalized | active |
 | [`D2-S14`](#d2-s14-arbitrary-body-wall-excursion-saturation) | structure theorem | every finite wait word occurs inside a guarded wall-anchored periodic excursion | formalized | active |
 | [`D2-S15`](#d2-s15-fixed-endpoint-centralizer-reduction) | reduction | equality of nonempty shell periodic points is exactly global affine commutation, split by the slope fibre | formalized | active |
+| [`D2-S16`](#d2-s16-periodic-centralizer-determinant-fork) | structure theorem | two common-source loops force either a global power relation or an injective `ℕ²` family of guarded loops | formalized | active |
 | [`D2-D01`](#d2-d01-projectively-unimodular-stratum) | decidable stratum | projectively unimodular hard-core instances are decidable | audited | stock |
 | [`D2-D02`](#d2-d02-invariant-pair-stratum) | decidable stratum | invariant projective pairs reduce to abelian-by-`C₂` reachability | reported | active |
 | [`D2-D03`](#d2-d03-common-multiplier-stratum) | decidable stratum | rational affine maps with one multiplier are decidable under regular control | reported | active |
@@ -12081,6 +12082,71 @@ search a separate periodic-point state graph before applying this split.
 **Next:** classify the positive centralizer of one rational homothety. In the unequal-slope
 fibre, combine the collision-source equation with target-depth normalization and the exact
 active-prime mantissa recurrence.
+
+### D2-S16: Periodic-centralizer determinant fork
+
+**Kind:** structure theorem
+**Evidence:** formalized
+**Disposition:** active
+
+Suppose two nonempty schedules `u,v` have the same periodic point. Attach the slope vectors
+
+```text
+α=(length(u),sum(u)),   β=(length(v),sum(v)).
+```
+
+The determinant of these two integer vectors gives a complete structural fork.
+
+If
+
+```text
+length(v)·sum(u) = length(u)·sum(v),
+```
+
+then taking `length(v)` copies of `u` and `length(u)` copies of `v` produces schedules with the
+same length, the same total wait, and the same periodic point. By
+[`D2-S15`](#d2-s15-fixed-endpoint-centralizer-reduction), they induce the same affine map on
+every rational state:
+
+```text
+T_(u^length(v)) = T_(v^length(u)).
+```
+
+Thus every dependent-vector common endpoint yields an explicit global power relation, including
+the possibility that it descends from the known balanced affine kernel.
+
+If the determinant is nonzero, define
+
+```text
+W(m,n)=u^m ++ v^n,   (m,n)∈ℕ².
+```
+
+Every `W(m,n)` fixes the same rational point and every prefix satisfies the five-adic guard. Its
+slope vector is `mα+nβ`. Lean proves that this vector, and hence the exact rational slope, is
+injective in `(m,n)`. The affine actions are therefore pairwise distinct. Any genuinely
+noncyclic positive centralizer would consequently produce an exact two-parameter family of
+distinct guarded loops at one fixed rational source; it cannot remain an isolated pair.
+
+**Scope:** the theorem is a dichotomy, not an exclusion of the independent branch. It does not
+prove that every dependent-vector power relation comes from a common syntactic word power, nor
+does it decide the positive affine kernel. The independent branch is conditional on the
+existence of two common-source schedules with nonzero determinant.
+
+**Artifact:** `MixedPrimeDebt.shellSchedulePower`,
+`MixedPrimeDebt.shellPeriodicPoint_schedulePower`,
+`MixedPrimeDebt.commonPeriodicPoint_bipower_loop`,
+`MixedPrimeDebt.shellSlope_bipower_injective`,
+`MixedPrimeDebt.commonPeriodicPoint_powerRelation_of_determinant_zero`, and
+`MixedPrimeDebt.commonPeriodicPoint_rankTwo_loops` in
+[`MixedPrimeRealTrapCentralizer.lean`](MatrixMortality/MixedPrimeRealTrapCentralizer.lean).
+
+**Use:** split every proposed common-periodic-source pair by its length/sum determinant. Send the
+zero determinant immediately to a balanced global power relation. Treat one nonzero-determinant
+witness as rank-two saturation, not as a lone exceptional collision.
+
+**Next:** decide whether the positive shell monoid has any nonzero-determinant centralizer pair.
+Search cyclic rotations inside the exact affine kernel, then seek a number-theoretic obstruction
+to rank-two slope support at one rational fixed point.
 
 ### D2-O09: Guarded real-pole reset
 
