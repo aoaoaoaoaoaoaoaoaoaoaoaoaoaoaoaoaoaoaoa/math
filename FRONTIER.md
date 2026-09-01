@@ -1302,6 +1302,19 @@ explicit affine contractions. For a target ending in `β` erasure tiles, the sha
 suffix forces `3^β ∣ d−n`. Hence `|d−n|<3^β` makes the pole terminal and invokes the checked
 decoder.
 
+[`MM-S61`](SALVAGE.md#mm-s61-primitive-carrier-gap-no-go) proves that reachability alone cannot
+supply that last inequality. The exact integral update is
+
+```text
+n'=H((P−μA)d−Vn),      d'=R(Pd−Vn),
+d'−n'=μ(HAd−3(Pd−Vn)).
+```
+
+One literal `D_c` from the distinguished reset has a primitive gap `μ>3^β`; two have primitive
+gap `3^βμ`, already a nonzero multiple of the suffix modulus. Both pairs and their centered
+reachability are Lean-checked. Thus both the universal height bound and bare modular
+nondivisibility are dead.
+
 The remaining ternary obligation is now the **nonzero history-defect branch** of the global
 earliest-pole reduction. In the normalized coordinate `δ=D/y`, the complete physical recurrence
 is
@@ -1312,12 +1325,12 @@ is
 
 The distinguished coordinate `R/H` is a target threshold exactly for terminal equality `P=V`.
 The first `D_c` and `D_b` images lie on opposite sides of zero, so a one-sided real trap is
-already impossible. On the full-erasure-tail branch, the live question is whether primitive
-centered-history carriers satisfy `|d−n|<3^β`, or a stronger modulus-versus-height inequality
-that consumes the divisibility from `MM-S59`. Fixed residue and unit projections are empirically
-saturated on the benchmark, while the exact carry window grows with `|n|+|d|`; neither fact
-settles this height question. None of `MM-S51`, `MM-S55`, `MM-S57`, or `MM-S59` alone proves
-projective avoidance.
+already impossible. On the full-erasure-tail branch, the live question is now target-coupled:
+combine the `MM-S59` suffix carry with primitive gcd cancellation in `MM-S61`, or use
+earliest-pole ancestry to exclude the reachable `3^β`-divisible gap states before they match a
+physical target. Fixed residue and unit projections are empirically saturated, and the exact
+carry window grows with carrier height. None of `MM-S51`, `MM-S55`, `MM-S57`, `MM-S59`, or
+`MM-S61` alone proves projective avoidance.
 Exact bidirectional diagnostics for the ternary swap at `β=3`, body `bbcc`, exclude every
 false-pole word of at most six projective blocks when each regular block has
 role length at most three; this is computational evidence only.
