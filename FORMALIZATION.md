@@ -2740,6 +2740,17 @@ physical geometries, and the periodic discrepancy is `-1` from `k=11` onward. Tw
 therefore globally excluded. Eleven genuine balanced-suffix families remain; their negative
 search through pump depth `20` is deliberately not promoted.
 
+`G3-S24` closes those eleven without a cutoff. The `G3-S23` factorization identifies the
+complementary cloak heads as `yzx` and `xzy` for nonempty `x,y,z`. Internal length-`r` factors
+cancel, leaving at most `2(r-1)` boundary factors per head and therefore ℓ¹ discrepancy at most
+`4(r-1)`. Exact symbolic pump-head catalogues kill six families at `r=2` with norms `8`–`16` and
+four more at `r=3` with norms `10`–`22`. The last family `l32-05` saturates the trigram norm bound,
+but its forced endpoint types make a crossing `DDD` impossible while its head signature requires
+one. Exact enumeration against all `21` bigram and `1,203` trigram boundary types independently
+confirms the cut. Finite preperiod plus the stable `t=2k-q` cells cover every pump depth. Thus none
+of the `23` `G3-S16` schemas can realize a prefix-cloaked physical fork; other kernel families and
+the suffix orientation remain outside the result.
+
 For `G3-O20`, Lean proves the free-monoid tail law: if one fixed-boundary equation with stationary
 left and right pump blocks holds at exponents `N` and `N+1`, it holds at every exponent `N+k`.
 The proof uses only prefix comparability and left/right cancellation. This closes a unary

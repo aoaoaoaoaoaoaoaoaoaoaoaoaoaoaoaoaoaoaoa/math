@@ -270,6 +270,7 @@ file owns the mathematical stock.
 | [`G3-S21`](#g3-s21-kernel-cloaked-address-comparators) | enabling structure theorem | every genuine mixed-prime kernel pair asymmetrically cloaks an exact arbitrary-length address comparator while preserving raw-word distinctness | formalized; explicit infinite family | active |
 | [`G3-S22`](#g3-s22-prefix-cloak-size-obstruction) | obstruction and finite rejection | every physical prefix cloak obeys `2|u|<|x|+|y|<|L|`; all 23 base pump cloaks fail the remaining finite factorization census | formalized universal bound; exact independently replayable certificate | active |
 | [`G3-S23`](#g3-s23-pumped-prefix-cloak-suffix-collapse) | uniform obstruction and exact family cut | a balanced nonempty cloak suffix with `2(n+q)<|L|` is mandatory; this kills 12 of the 23 pump families globally | formalized universal gate; exact symbolic and finite certificates | active |
+| [`G3-S24`](#g3-s24-prefix-cloak-factor-boundary-collapse) | uniform obstruction and complete family extinction | bigram/trigram boundary signatures kill the remaining eleven pump families, so none of the 23 schemas can realize a prefix cloak | formalized head reduction; exact symbolic certificate | active |
 | [`G3-M02`](#g3-m02-square-root-punctuation-fracture) | partial mechanism | a rank-two square root gives an exact `SS`-free mortality grammar | formalized | closed |
 | [`G3-O10`](#g3-o10-square-root-boundary-saturation) | obstruction | every nondegenerate rank-one square root preserves boundary coefficient zeros | formalized | graduated |
 | [`G3-M01`](#g3-m01-free-group-discrepancy-engine) | partial mechanism | Carvalho's transducer gives an all-word marker-tail equation and a cyclic exponent-one equalizer | audited | active |
@@ -11040,6 +11041,59 @@ and
 **Next:** classify the periodic literal word equations in the eleven surviving prefix families,
 or derive the corresponding head-overlap gate for suffix cloaks. The all-word endpoint converse
 remains a separate obligation after any physical carrier is found.
+
+### G3-S24: Prefix-cloak factor-boundary collapse
+
+**Kind:** uniform obstruction and complete family extinction
+
+**Evidence:** formalized head reduction; exact symbolic certificate
+
+**Disposition:** active
+
+The eleven `G3-S23` survivors all fail a local invariant on the complementary cloak heads. The
+formal factorization gives
+
+```text
+head(Lₖ)=yzx,       head(Rₖ)=xzy
+```
+
+for nonempty physical macros `x,y,z`. Internal contiguous factors of the three blocks cancel
+between the two permutations. For factors of length `r`, only the two block boundaries remain;
+each head has at most `2(r-1)` crossing occurrences. Hence the ℓ¹ norm of the complete
+factor-count discrepancy is at most `4(r-1)`.
+
+The exact all-depth pump-head catalogue violates this bound at `r=2` for six families:
+`l31-01`, `l31-02`, `l31-04`, `l32-06`, `l32-07`, and `l32-15`. Their bigram discrepancy norms
+range from `8` to `16`, above the boundary budget `4`. At `r=3`, four more families violate the
+budget `8`: `l31-06`, `l32-02`, `l32-08`, and `l32-13`, with norms from `10` to `22`.
+
+The last family, `l32-05`, saturates the trigram norm bound but misses the exact boundary set. Its
+bigram vector uniquely forces endpoint types `x:T…D`, `y:D…T`, `z:T…T`. Both boundaries of
+`yzx` then contain `TT`, so no crossing trigram can be `DDD`; the pumped head discrepancy requires
+one surplus crossing `DDD`. Equivalently, both of its trigram vectors lie outside the complete
+`1,203`-element boundary catalogue.
+
+The certificate is global, not a depth cutoff. It replays the finite preperiod from `G3-S23`, then
+classifies long suffixes by `t=2k-q`. Once the remaining alternating pump segment exceeds the
+factor radius, `t↦t+2` adds one common period and preserves the discrepancy. The finite residue
+cells and one stable cell per parity exhaust every pump depth. A depth-`50` replay only audits this
+symbolic decomposition.
+
+**Scope:** this closes all `23` `G3-S16` pump schemas in prefix orientation. It does not exclude
+the explicit odd kernel family used by `G3-S21`, a different or undiscovered kernel relation,
+suffix cloaks, interleaved address interiors, or a separate two-offset terminal channel.
+
+**Use:** stop searching the `23` Cayley–Hamilton pump families for a prefix realization. Reuse the
+factor-boundary invariant against any new periodic cloak before running a physical search.
+
+**Artifact:**
+[`certify_mixed_prime_prefix_factor_boundaries.py`](tools/certify_mixed_prime_prefix_factor_boundaries.py)
+and
+[`m34-prefix-factor-boundary-collapse-2026-09-01.md`](audits/m34-prefix-factor-boundary-collapse-2026-09-01.md).
+
+**Next:** attack the suffix orientation, where the address changes the head rather than the
+terminal boundary, or subject the odd kernel family to the same prefix size and local-factor
+sieves. Any surviving carrier still needs the complete arbitrary-word endpoint converse.
 
 ### G3-O13: Rational serializer pumping
 
