@@ -1,4 +1,5 @@
 import MatrixMortality.ChangedSeparatorTail
+import MatrixMortality.EffectiveRational
 import MatrixMortality.RationalClearing
 import MatrixMortality.ReturnFamily
 
@@ -18,8 +19,8 @@ namespace ChangedSeparatorRealization
 /-- Positional radix used by the Neary body encoding. -/
 def widthScale (β : Nat) : ℚ := 3 ^ β
 
-/-- Common denominator of the exact three-parameter chain chart. -/
-def chainDenominator (ρ V K : ℚ) : ℚ :=
+/-- Common denominator polynomial of the exact three-parameter chain chart. -/
+def chainDenominator {R : Type*} [FractionArithmetic R] (ρ V K : R) : R :=
   9 * K ^ 2 * ρ ^ 2 + 2 * K ^ 2 * ρ - K ^ 2 -
     18 * K * V * ρ ^ 2 + 2 * K * V - 9 * K * ρ ^ 2 -
     6 * K * ρ - 47 * K + 48 * V + 96
@@ -46,7 +47,7 @@ theorem denominator_ne_zero (β : Nat) (body : List TagLetter) :
   ne_of_lt (denominator_lt_zero β body)
 
 /-- Eigenvalue of the exact chart's one-dimensional geometric tail. -/
-def chainTailEigenvalue (ρ V K : ℚ) : ℚ :=
+def chainTailEigenvalue {R : Type*} [FractionArithmetic R] (ρ V K : R) : R :=
   K * (3 * ρ - 1) * (K - 2 * V - 1) / chainDenominator ρ V K
 
 /-- Eigenvalue carried by the realization's specialized geometric tail. -/
@@ -175,7 +176,7 @@ theorem regularChart (β : Nat) (β_pos : 0 < β) (body : List TagLetter)
       β β_pos body b_mem]
 
 /-- Two length-three nilpotent chains, one length-two chain, and the geometric tail line. -/
-def chainTransition (ρ V K : ℚ) : Square (Fin 9) ℚ :=
+def chainTransition {R : Type*} [FractionArithmetic R] (ρ V K : R) : Square (Fin 9) R :=
   let s := chainTailEigenvalue ρ V K
   !![0, 0, 0, 0, 0, 0, 0, 0, 0;
      1, 0, 0, 0, 0, 0, 0, 0, 0;
@@ -222,7 +223,8 @@ def chainTailSeparator (ρ V K : ℚ) : Square (Fin 4) ℚ :=
   Matrix.vecMulVec (chainTailColumn ρ) (chainTailRow ρ V K)
 
 /-- Four interface columns in the exact three-parameter chain chart. -/
-def chainInput (ρ V K : ℚ) : Matrix (Fin 9) (Fin 4) ℚ :=
+def chainInput {R : Type*} [FractionArithmetic R]
+    (ρ V K : R) : Matrix (Fin 9) (Fin 4) R :=
   !![
     1,
     0,
@@ -278,7 +280,8 @@ def chainInput (ρ V K : ℚ) : Matrix (Fin 9) (Fin 4) ℚ :=
 /- The exact generated chart is expensive to elaborate but contains no proof search. -/
 set_option maxHeartbeats 800000 in
 /-- Four interface rows in the exact three-parameter chain chart. -/
-def chainOutput (ρ V K : ℚ) : Matrix (Fin 4) (Fin 9) ℚ :=
+def chainOutput {R : Type*} [FractionArithmetic R]
+    (ρ V K : R) : Matrix (Fin 4) (Fin 9) R :=
   !![
     (K ^ 2*(3*ρ - 1) ^ 3*(-K + 2*V + 1) ^ 3 + (K - 3)*(5*ρ - 1)*(9*K ^ 2*ρ ^ 2 + 2*K ^ 2*ρ - K ^ 2 -
       18*K*V*ρ ^ 2 + 2*K*V - 9*K*ρ ^ 2 - 6*K*ρ - 47*K + 48*V + 96) ^ 2)/(K ^ 2*(3*ρ - 1) ^ 3*(-K +
