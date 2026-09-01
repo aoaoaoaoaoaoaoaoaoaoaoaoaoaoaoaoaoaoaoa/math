@@ -2705,6 +2705,12 @@ The family is now sharply fenced:
   than the proper rest, either `R32-S52` applies or `head+1≤2 waitExponent(rest)`. The first tail
   scale then divides a fixed nonzero rest coordinate unless `B=q^(head+1)` is already resonant,
   by [`R32-S53`](SALVAGE.md#r32-s53-proper-rest-pivot-certificate).
+- the entire pure-denominator chamber is finite without a depth hypothesis. Its exact affine
+  predecessor preserves `[-1,∞)`, and every viable step at scale `t` decreases a target above
+  one by at least `t−1`. A bridge zero therefore satisfies
+  `q^(head+1)+Σ(q^(wait+1)−1)≤B`; every tail scale is below `B` and
+  `q^(head+1)+|tail|(q−1)≤B`, by
+  [`R32-S54`](SALVAGE.md#r32-s54-global-pure-denominator-descent).
 - replacing common powers of one base by a scale alphabet totally ordered under divisibility is
   unsound: `[3,15,3,3,15,3,3,3]` has the exact nonresonant root `d=25/27`, by
   [`R32-O25`](SALVAGE.md#r32-o25-divisibility-chain-returnsquare-fracture).
@@ -2727,12 +2733,12 @@ geometric-scale counterexample is proved. Order-one and order-two cyclotomic quo
 automata. Exact denominator-center chains already collapse to resonance, and a mortal reduced
 fraction cannot take the zero critical-residue branch. A zero equal-scale residue can re-enter
 the center only at an even exponent whenever `q+1` has an odd prime; mixed nonzero residue
-transitions remain. Positive-numerator branches now have a finite weighted-tail certificate.
-The finite pure-denominator part now extends whenever one prime is deeper than the proper rest,
-not merely the complete tail. Any unbounded candidate must satisfy
-`a≤2 waitExponent(rest)r` at every denominator prime. Equivalently, its proper-rest adjugate
-state has common factor `B`; iterating or obstructing that exact common-content cancellation is
-the unrestricted arithmetic throat.
+transitions remain. Positive-numerator branches have a finite weighted-tail certificate.
+Pure-denominator branches are now finite outright: the real affine descent cuts through the
+simultaneously shallow common-content chamber left by the p-adic analysis. The remaining
+ReturnSquare work is to compose these two certificates into one effective enumeration, handle
+the zero-valuation and one-return seams exactly, and execute the bounded search for composite
+bases.
 The one-base geometric architecture is essential: mere divisibility comparability or
 common prime content cannot replace it. The one-base prime-power architecture remains closed.
 The two-coordinate pullback is not a reduction to finite-alphabet `M₂(3)`; every `qⁿ` remains a

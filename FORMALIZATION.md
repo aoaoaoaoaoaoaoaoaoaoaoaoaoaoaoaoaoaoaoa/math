@@ -785,9 +785,11 @@ valuation `a−min(2b,a)` for `a=vₚ(B)` and `b=vₚ(t)`, except at the sole cr
 `a=2b`; at equality, its valuation is still nonpositive whenever the affine predecessor is
 defined. For `t=q^(w+1)`, this is the exact word-visible tax `2(w+1)vₚ(q)`. Positive denominator
 depth survives one terminal pullback only above that tax. Later shell re-entry and cross-prime
-common content remain unclassified. `R32-S44` through `R32-S52` are strict
-obstructions, not the arbitrary-composite classification. The two-coordinate interface does
-not reduce to finite-alphabet `M₂(3)` because every scale `qⁿ` remains a distinct return letter.
+common content are not controlled primewise by these lemmas. `R32-S44` through `R32-S53` are
+strict local obstructions, not the arbitrary-composite classification. The global real descent
+below closes the pure-denominator branch without resolving those residue dynamics individually.
+The two-coordinate interface does not reduce to finite-alphabet `M₂(3)` because every scale
+`qⁿ` remains a distinct return letter.
 
 The inverse shell law is now recurrence-wide. For a target coordinate `s`, the unique inverse
 branch is
@@ -858,6 +860,26 @@ The rest state cannot vanish. If `V=0`, the bridge forces the one-return resonan
 `B=q^(head+1)`; otherwise the nonzero divisor `BV` bounds `t`. Hence every bridge with one
 proper-rest-deep prime is decidable by finite enumeration. The remaining chamber has common
 factor `B` in the proper-rest state at every denominator prime.
+
+That remaining pure-denominator chamber is now finite by a global real argument. For `B≥2` and
+`t≥4`, the affine inverse
+
+```text
+P_t(s)=B(st−1)/(st+(B−1)t²−B)
+```
+
+maps `[-1,∞)` into itself, satisfies `P_t(s)>1` exactly when `s>t`, and then obeys
+`P_t(s)≤s−t+1`. The homogeneous adjugate tail has positive lower coordinate and affine ratio
+equal to the iterated predecessor run. A bridge zero therefore gives the exact identity
+`Run=q^(head+1)` and the summed bound
+
+```text
+q^(head+1)+Σ_wait∈tail(q^(wait+1)−1)≤B.
+```
+
+Consequently every tail scale is below `B` and
+`q^(head+1)+|tail|(q−1)≤B`. This closes the shallow common-content throat as a finite search;
+no p-adic cancellation hypothesis enters the proof.
 
 The common-geometric-base hypothesis cannot be weakened to total divisibility of an arbitrary
 scale alphabet. Lean checks that `[3,15,3,3,15,3,3,3]` is pairwise totally ordered under
@@ -2656,6 +2678,7 @@ fixed-rank decision problem.
 | `ReturnSquareGeometricResidue.lean` | equal-scale zero-residue transition and odd signed-center exclusion |
 | `ReturnSquareTailAdjugate.lean` | head-separated adjugate tail incidence and fixed positive-valuation tail weight |
 | `ReturnSquarePureDenominator.lean` | integral pure-denominator tail expansion, deep-prime synchronization, and proper-rest pivot certificate |
+| `ReturnSquarePureDenominatorDescent.lean` | exact affine adjugate ratio and global finite pure-denominator descent certificate |
 | `ReturnSquareTax.lean` | exact four-state lower bound for literal reversible-stack returns |
 | `ReturnSquareNoGo.lean` | quadratic-pencil reversible-squaring obstruction and blind-scaling collapse |
 | `ReturnJordan.lean` | parity-Jordan rail rigidity and modular immortality certificate |
