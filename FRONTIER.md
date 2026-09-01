@@ -1904,6 +1904,15 @@ conjugacy lift leaves a commuting core `RˢK=KRˢ` and collapses onto the common
 Audited bounds plus exact assignment search eliminate every other placement of one base or first
 critical relation. Only multi-step quotient derivations or new kernel relations remain.
 
+[`G3-S14`](SALVAGE.md#g3-s14-finite-convergent-mixed-prime-presentation) closes the completion
+question for that quotient. The five rules plus their `45` first critical branch pairs form a
+finite convergent `50`-rule presentation: there are no inclusion ambiguities and all `450` proper
+overlaps join. Unique normal forms decide every fixed congruence query, replay the length-`312`
+fork in four versus five reductions, and prove that every positive-depth odd-family relation lies
+outside the quotient. Confluence does not decide the remaining existential word equation: the
+live quotient branch is to find or exclude a non-common-fixed solution of `YZXYX≡XZYXY`; the
+orthogonal branch is a new affine-kernel relation outside the presentation.
+
 [`G3-M02`](SALVAGE.md#g3-m02-square-root-punctuation-fracture) supplied a complete direct-mortality
 grammar. The source-uniform rational rank-two matrix `S` satisfies
 
@@ -2267,9 +2276,11 @@ raceable leaves:
    crossings and proves that equal-action Cassaigne rewrites shift the leading-run address by two
    at every depth. `G3-S13` then classifies every one-context use of the five audited relations
    and their first critical pairs: the first actual fork appears at length `312`, but is the
-   forbidden monogenic triple `F,F²,F⁴`. The unresolved step is a multi-step quotient obstruction
-   or a longer non-common-fixed five-factor relation with the complete endpoint converse, not another
-   fixed-body rank perturbation, guard recurrence, or finite target-depth label.
+   forbidden monogenic triple `F,F²,F⁴`. `G3-S14` completes those relations to a convergent
+   `50`-rule presentation and separates the whole positive-depth odd family from it. The unresolved
+   step is the parametric non-common-fixed fork equation over that quotient or a new affine-kernel
+   relation with the complete endpoint converse, not another fixed-body rank perturbation, guard
+   recurrence, or finite target-depth label.
 3. **Positive projective transition obstruction.** Derive from a source-unbounded terminal
    section a finite shift incompatibility which no three-dimensional rational same-zero
    representation can realize for any combination of generator ranks and kernels. It must use
@@ -2402,8 +2413,10 @@ five-factor pair, forces exterior toggle-fixed-point geometry, and computational
 reduced length at most `36`. `G3-S12` turns the pair into an exact crossing transport but proves
 that the affine action cannot determine a raw leading-run address; the known kernel changes that
 address by two. `G3-S13` eliminates the complete one-context/first-critical hull off the
-common-fixed diagonal and formally rejects its exact length-`312` fork. After the missing guard
-and closure proofs, `D2-S08` still leaves the normalized mantissa unbounded. Any lower-bound attack
+common-fixed diagonal and formally rejects its exact length-`312` fork. `G3-S14` gives that
+five-rule quotient unique normal forms and proves the infinite odd family is external, but leaves
+the quotient's parametric fork equation open. After the missing guard and closure proofs,
+`D2-S08` still leaves the normalized mantissa unbounded. Any lower-bound attack
 must exclude both positive architectures through actual transition data. Backward cancellation,
 inverse cofinality, static incidence, and target-depth classes cannot do so.
 Do not spend another attack on separator placement, fixed anchors, or control singularity after
