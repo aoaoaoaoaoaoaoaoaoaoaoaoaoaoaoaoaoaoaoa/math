@@ -63,17 +63,7 @@ structure FirstBTwoTailRectangle
 theorem firstBTwoTail_first_b_decomposition
     (tail : List TagLetter) (contains_b : .b ∈ tail) :
     ∃ j rest, tail = List.replicate j .c ++ .b :: rest := by
-  induction tail with
-  | nil => simp at contains_b
-  | cons first tail induction =>
-      cases first with
-      | b =>
-          exact ⟨0, tail, by simp⟩
-      | c =>
-          have tail_contains_b : .b ∈ tail := by simpa using contains_b
-          obtain ⟨j, rest, tail_eq⟩ := induction tail_contains_b
-          refine ⟨j + 1, rest, ?_⟩
-          rw [List.replicate_succ, List.cons_append, tail_eq]
+  exact tagWord_first_b_decomposition tail contains_b
 
 theorem firstBTwoTail_replicate_c_length (j : Nat) :
     (tagEncode 3 (List.replicate j .c)).length = j := by

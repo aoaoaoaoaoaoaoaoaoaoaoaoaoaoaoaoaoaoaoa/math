@@ -148,6 +148,36 @@ theorem tagComplementCode_pos_of_mem_b (body : List TagLetter) (contains_b : .b 
           have body_contains_b : TagLetter.b ∈ body := by simpa using contains_b
           exact Nat.mul_pos (by norm_num) (induction body_contains_b)
 
+/-- Split a tag word containing `b` at its first `b`. -/
+theorem tagWord_first_b_decomposition
+    (body : List TagLetter) (contains_b : .b ∈ body) :
+    ∃ j tail, body = List.replicate j .c ++ .b :: tail := by
+  induction body with
+  | nil => simp at contains_b
+  | cons first tail induction =>
+      cases first with
+      | b => exact ⟨0, tail, by simp⟩
+      | c =>
+          have tail_contains_b : .b ∈ tail := by simpa using contains_b
+          obtain ⟨j, rest, tail_eq⟩ := induction tail_contains_b
+          exact ⟨j + 1, rest, by rw [List.replicate_succ, List.cons_append, tail_eq]⟩
+
+/-- Split a tag word containing `b` at its last `b`. -/
+theorem tagWord_last_b_decomposition
+    (body : List TagLetter) (contains_b : .b ∈ body) :
+    ∃ h stem, body = stem ++ .b :: List.replicate h .c := by
+  induction body using List.reverseRecOn with
+  | nil => simp at contains_b
+  | append_singleton body last induction =>
+      cases last with
+      | b => exact ⟨0, body, by simp⟩
+      | c =>
+          have body_contains_b : .b ∈ body := by simpa using contains_b
+          obtain ⟨h, stem, body_eq⟩ := induction body_contains_b
+          refine ⟨h + 1, stem, ?_⟩
+          rw [List.replicate_succ']
+          simp only [body_eq, List.cons_append, List.append_assoc]
+
 theorem tagEncode_length_mod_four (body : List TagLetter) :
     (tagEncode 3 body).length % 4 = body.length % 4 := by
   induction body with
