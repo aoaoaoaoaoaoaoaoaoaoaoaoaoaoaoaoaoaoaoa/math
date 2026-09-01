@@ -249,6 +249,7 @@ import MatrixMortality.SwappedSetterSequentialDoubleDeletion
 import MatrixMortality.SwappedSetterThreeBlockFrontier
 import MatrixMortality.SwappedSetterReachableCylinder
 import MatrixMortality.SwappedSetterCylinderCharge
+import MatrixMortality.DecimalSetterBridge
 import MatrixMortality.SchottkyPunctuation
 import MatrixMortality.TwoStateObstructions
 import MatrixMortality.ForcedRuleCCompanion

@@ -173,6 +173,7 @@ file owns the mathematical stock.
 | [`MM-S71`](#mm-s71-three-block-backward-frontier) | structure theorem and obstruction | behind two final singleton `D_c` transfers, every nonterminal full-tail pole either halts or places the preceding physical block in its exact nonzero predecessor cylinder | formalized | active |
 | [`MM-O27`](#mm-o27-reachable-predecessor-cylinder) | obstruction | a concrete ordinary-reset history reaches the exact non-`D_c` predecessor cylinder, refuting every block-local extinction of the `MM-S71` survivor | formalized | active |
 | [`MM-S73`](#mm-s73-live-three-block-charge-frontier) | structure theorem and obstruction | the reachable predecessor cylinder, both deletion resonances, and the literal target suffix carry form one exact nonzero chain that automatically forces the whole three-block prefix live | formalized | active |
+| [`MM-S74`](#mm-s74-triple-free-bridge-frontier) | structure theorem | decimal setter mortality is exactly a parsed singleton, shallow-reset, or deep square-pole frontier | formalized | active |
 | [`R32-S01`](#r32-s01-split-return-normal-form) | structure theorem | rank-two cuts reduce one-unit binary mortality to a `2 × 2` return recurrence | formalized | graduated |
 | [`R32-S02`](#r32-s02-two-plane-edge-square) | structure theorem | two rank-two generators are a two-vertex square of `2 × 2` edges | formalized | graduated |
 | [`R32-O01`](#r32-o01-rank-one-profile-collapse) | obstruction | a rank-one generator reduces mortality to order-at-most-three scalar recurrence zeros | audited | stock |
@@ -2849,15 +2850,15 @@ the intervening bridge coefficients. This is the complete rank-one fracture norm
 classification of its triple-free chunks.
 
 **Scope:** the formalization proves explicit matrices, the audited rank profile, regular
-semantics, halting-to-mortality, integer clearing, and arbitrary `S³` fracture. It does not prove
-primitive-recursive emission or the mortality converse. The missing converse adapter must parse
-each triple-free bridge into the `S²`-separated role/pole grammar. Singleton next targets and any
-ordinary-reset target beyond the checked shallow cases remain outside the current extinction
-assembly.
+semantics, halting-to-mortality, integer clearing, and arbitrary `S³` fracture. Record
+[`MM-S74`](#mm-s74-triple-free-bridge-frontier) now supplies the complete outer algebraic
+mortality converse as an exact `S²`-separated pole frontier. It does not prove that the existing
+distinguished-raw-head extinction covers every singleton, shallow, or deep frontier state, nor
+does it prove primitive-recursive emission of the cleared integer family.
 
-**Use:** this is the outer algebraic owner for the decimal `M₅(3)` attack. Arithmetic records
-such as `MM-S67` are leaves consumed only after the triple-free bridge parser identifies their
-physical entry hypotheses.
+**Use:** this is the matrix-family owner for the decimal `M₅(3)` attack. `MM-S74` reduces its
+mortality converse to arithmetic pole exclusion; `MM-S67` applies only after an additional
+adapter identifies its distinguished two-`c` raw-head shell.
 
 **Formalization:**
 [`MatrixMortality/DecimalSetterMatrix.lean`](MatrixMortality/DecimalSetterMatrix.lean),
@@ -2868,8 +2869,8 @@ and [`MatrixMortality/DecimalSetterInteger.lean`](MatrixMortality/DecimalSetterI
 **Artifact:**
 [`audits/m53-formal-decimal-setter-compiler-2026-08-31.md`](audits/m53-formal-decimal-setter-compiler-2026-08-31.md).
 
-**Next:** prove a maximal-run parser for every triple-free bridge, then discharge its pole cases
-with the existing decimal arithmetic and prove the integer emitter primitive recursive.
+**Next:** discharge all three `MM-S74` pole branches with the existing decimal arithmetic, then
+prove the integer emitter primitive recursive.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
@@ -7265,6 +7266,69 @@ through `allErase_or_exists_rightmostRule` and
 **Next:** compose this extinction through the setter projective-avoidance theorem and the
 integer mortality/source compiler; audit whether any singleton or later-carrier hypothesis
 remains.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S74: Triple-free bridge frontier
+
+**Kind:** structure theorem
+**Evidence:** formalized
+**Disposition:** active
+
+Repeated factorization at a delimiter cube is exact:
+
+```text
+B(left · S³ · right) = B(left) B(right).
+```
+
+Consequently every zero matrix word contains a contiguous `S³`-free chunk with zero bridge
+coefficient. Boundary delimiter runs do not change that coefficient. The remaining data-anchored
+core has a recursive spelling by role blocks separated by `S²`: every block except the
+rightmost ends in an erasure, while the rightmost block ends in a rule.
+
+The exact three-coordinate execution proves that a lone rightmost block has positive first
+coordinate and cannot vanish. Every zero core therefore has a target block, a block to its right,
+and an exact square-pole equation
+
+```text
+(roleProduct target · squareReset(source))₀ = 0.
+```
+
+The target is exactly one of:
+
+1. a singleton erasure;
+2. a non-singleton over one rightmost root block;
+3. a non-singleton over a history of at least two blocks.
+
+`isMortal_iff_exists_parsedZeroFrontier` proves the converse as well: any zero parsed core can be
+surrounded by delimiter cubes to make a literal zero matrix word. Thus this is the complete outer
+algebraic mortality normal form for the rational decimal setter.
+`mortalityProblem_mortal_iff_exists_parsedZeroFrontier` transports the equivalence through exact
+denominator clearing to the three-generator integer `5 × 5` family.
+
+**Scope:** the theorem classifies arbitrary physical zero words for the explicit `MM-M06`
+rational family. It does not identify an arbitrary square-reset source with the distinguished
+two-`c` raw head assumed by `MM-S67`. Singleton targets and deeper generalized histories remain
+live arithmetic branches. Rational denominator clearing transfers mortality, but does not prove
+that the source-to-integer-family map is primitive recursive.
+
+**Use:** replace the former unproved maximal-run parser in the `M₅(3)` route. The sole
+mathematical converse seam is now exclusion of the displayed singleton, shallow, and deep pole
+frontiers; the computability seam is the integer-family emitter.
+
+**Formalization:**
+[`MatrixMortality/DecimalSetterBridge.lean`](MatrixMortality/DecimalSetterBridge.lean), through
+`bridgeScalar_append_delimiter_cube`, `CoreSpelling.zero_frontier`,
+`exists_zeroFrontier_of_wordProduct_eq_zero`, and
+`mortalityProblem_mortal_iff_exists_parsedZeroFrontier`.
+
+**Artifact:**
+[`audits/m53-triple-free-bridge-frontier-2026-08-31.md`](audits/m53-triple-free-bridge-frontier-2026-08-31.md).
+
+**Next:** derive the exact decimal shell carried by an arbitrary `squareReset` source and map each
+of the three frontier branches either to an existing extinction theorem or to a new generalized
+carrier theorem. Prove primitive-recursive emission separately.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
