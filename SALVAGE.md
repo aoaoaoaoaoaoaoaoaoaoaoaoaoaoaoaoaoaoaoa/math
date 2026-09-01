@@ -307,6 +307,7 @@ file owns the mathematical stock.
 | [`M4-S35`](#m4-s35-phase-zero-right-c-first-b-position-gap) | structure theorem | every tag body avoids every open density gap between consecutive first-`b` cylinders | formalized | active |
 | [`M4-S36`](#m4-s36-phase-zero-right-c-bounded-x211-extinction) | obstruction and structure theorem | the bounded `x=211` `cb` valuation-density chamber is empty | formalized | active |
 | [`M4-S37`](#m4-s37-phase-zero-right-c-x211-position-extinction) | obstruction and structure theorem | every late next-`b` position in the bounded `x=211` chamber is impossible | formalized | active |
+| [`M4-S38`](#m4-s38-phase-zero-right-c-x211-run-extinction) | obstruction and structure theorem | every trailing run of at least six `c`s in the inner-bounded `x=211` chamber is impossible | formalized | active |
 | [`M4-C03`](#m4-c03-zero-framed-binary-two-lag-compiler) | compiler | the principal scanner is literally binary context-2 Lag and compiles to `M₄(3)` | formalized | graduated |
 | [`M4-D01`](#m4-d01-zero-framed-binary-two-lag-decision) | decidable stratum | the entire zero-framed binary context-2 Lag kernel has an exact syntactic classification | formalized | graduated |
 | [`M4-D02`](#m4-d02-zero-framed-reset-scanner-decision) | decidable stratum | zero-run reduction contracts the reset scanner to a regular two-token quotient | audited | graduated |
@@ -14439,6 +14440,54 @@ cannot kill the inner-wait exit because its formal envelope contains an unbounde
 [`MatrixMortality/ParabolicFirstBOnePhysical.lean`](MatrixMortality/ParabolicFirstBOnePhysical.lean),
 and
 [`audits/m43-phase-zero-right-c-x211-position-extinction-2026-08-31.md`](audits/m43-phase-zero-right-c-x211-position-extinction-2026-08-31.md).
+
+### M4-S38: Phase-zero right-c x211 run extinction
+
+**Kind:** obstruction and structure theorem
+
+**Evidence:** formalized
+
+**Disposition:** active
+
+Write the final `b` decomposition as `tail=stem·b c^h`, and name the stem scale and
+complement `A` and `G`. The exact body coordinates are
+
+```text
+S = 729·243·3^h A,
+D = 39·243·3^h A + 3^(h+1)(81G+13).
+```
+
+For `h≥6`, the complement has exact 3-adic order `h+1`, the residual SFFT factor has order
+one, and the fixed content has order fourteen. Thus the two affine SFFT coordinates `U,V`
+satisfy `v₃(U)+v₃(V)=h+16`. The universal `V` root is `420724` modulo `3^13`; under
+`z<3^13` this gives `v₃(V)≤13` and hence `v₃(U)≥h+3`.
+
+Exact `U` congruences reduce `h=6,7,8` respectively to
+
+```text
+y ∈ {25425,45108},   y=31986,   y=51669.
+```
+
+Density kills the first two chambers. The third forces `(j,z)=(0,1)`, where deeper
+congruences give `v₃(U)=11` and `v₃(V)=2`, contradicting the required sum `24`. At `h=9`
+and `h≥10`, divisibility modulo `3^12` places `y` outside the already proved interval
+`22529≤y≤51767`. Hence every physical zero below the inner-wait cap has `h<6`.
+
+**Scope:** physical `x=211` `cb` bodies with first- and last-`b` decompositions and
+`z<3^13`. No trailing-run or next-`b` position bound is assumed. The theorem does not control
+`z≥3^13`, so it does not yet close the complete `cb` chamber.
+
+**Use:** composing `h<6` with M4-S37 and M4-S36 proves the core nonzero under the single
+remaining hypothesis `z<3^13`. The only honest escape is now the large inner-wait cylinder.
+
+**Next:** extinguish `z≥3^13` through the exact suffix complement equation; density alone
+cannot do so because M4-S36 preserves a formal unbounded ray.
+
+**Artifact:**
+[`MatrixMortality/ParabolicFirstBOneRun.lean`](MatrixMortality/ParabolicFirstBOneRun.lean),
+[`MatrixMortality/ParabolicFirstBOnePhysical.lean`](MatrixMortality/ParabolicFirstBOnePhysical.lean),
+and
+[`audits/m43-phase-zero-right-c-x211-run-extinction-2026-08-31.md`](audits/m43-phase-zero-right-c-x211-run-extinction-2026-08-31.md).
 
 ### M4-C03: Zero-framed binary two-Lag compiler
 

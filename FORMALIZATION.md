@@ -2804,6 +2804,18 @@ valuation shell; and `bZeroBDefectCOneCodeCore_x211_ne_zero_of_run_and_inner_bou
 that result with S36. Its exact boundary is
 [`audits/m43-phase-zero-right-c-x211-position-extinction-2026-08-31.md`](audits/m43-phase-zero-right-c-x211-position-extinction-2026-08-31.md).
 
+The trailing-run extinction
+[`M4-S38`](SALVAGE.md#m4-s38-phase-zero-right-c-x211-run-extinction) is checked in
+`MatrixMortality/ParabolicFirstBOneRun.lean` and
+`MatrixMortality/ParabolicFirstBOnePhysical.lean`.
+`ParabolicBlade.firstBOneX211RunEnvelope_of_core_zero` extracts the exact SFFT order sum and
+universal inner-wait congruence from the displayed run coordinates;
+`firstBOneX211_run_lt_six_of_envelopes` reduces every `h≥6` branch to exact root chambers and
+contradicts density or the order sum; and
+`bZeroBDefectCOneCodeCore_x211_ne_zero_of_inner_bound` derives the run and position bounds
+before invoking the bounded certificate. Its exact boundary is
+[`audits/m43-phase-zero-right-c-x211-run-extinction-2026-08-31.md`](audits/m43-phase-zero-right-c-x211-run-extinction-2026-08-31.md).
+
 The residue-zero `c`-endpoint exclusion
 [`M4-S12`](SALVAGE.md#m4-s12-residue-zero-c-endpoint-exclusion) is checked in the same module.
 `ParabolicBlade.bridge_cZero_bTwo_bOne_det` and
