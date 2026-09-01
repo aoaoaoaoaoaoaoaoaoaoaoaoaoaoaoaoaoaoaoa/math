@@ -1570,8 +1570,15 @@ the rightmost-`b` and phase perturbations; no minimum-depth subset cancels modul
 regular head, scaling by `81` gives coefficient `2^h` on both tied arms, whose sum remains a
 unit, while the marker arm is deeper. The physical theorem
 `bBearingRightmostRule_rawHead_shell_impossible` consumes the complete `MM-S56` position
-grammar. The distinguished raw-entry search is now confined to the all-`c` position-two rule
-boundary; generalized carriers and singleton targets remain separate.
+grammar. The all-`c` position-two boundary and the exact later-frontier resonances remain.
+
+Record [`MM-S62`](SALVAGE.md#mm-s62-all-c-position-two-rule-extinction) closes the position-two
+boundary by combining its two-adic and five-adic profiles. With block width `n=t+2`, the phase
+perturbation is divisible by `2^n` and has exact five-depth `n−1`. Before either raw-head
+frontier, the all-erasure companion is also divisible by `2^n`; beyond it, the companion has
+strictly shallower exact five-depth. The physical equal-depth shell is impossible in both
+regimes. Composing this obstruction with `MM-S56` leaves only the later all-`c` tail widths `h`
+and `2β−2`. Generalized carriers and singleton targets remain separate.
 
 Record [`MM-S37`](SALVAGE.md#mm-s37-decimal-three-shape-frontier-extinction) separates the
 ternary and decimal first-multi-transfer fronts. The single theorem
@@ -2099,6 +2106,7 @@ fixed-rank decision problem.
 | `DecimalSetterPhase.lean` | phase-erasure companion; exact rightmost-rule shell trichotomy; leading-`R_c` all-`D_c` raw-entry extinction |
 | `DecimalSetterRuleResonance.lean` | exact all-`D_c` five-depth frontier; rightmost-rule/rightmost-`b` minimum-resonance grammar |
 | `DecimalSetterRuleCoefficient.lean` | normalized rule-arm coefficients and complete b-bearing distinguished raw-entry extinction |
+| `DecimalSetterPositionTwo.lean` | two-adic companion divisibility and all-`c` position-two rightmost-rule extinction |
 | `PairedMortality.lean` | common-column mortality converse and exact integer `4 × 4` family |
 | `PhaseFracture.lean` | phase normalization and dimension-free projective-identification contradiction |
 | `PhaseRigidity.lean` | checked local role algebra, discrepancy commutators, and invariant-pencil rigidity |

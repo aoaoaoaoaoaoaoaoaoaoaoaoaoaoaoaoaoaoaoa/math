@@ -35,8 +35,8 @@ three-arm obstruction. These cases exhaust every b-bearing rightmost-rule block 
 erasure tail.
 
 The result does not cover all-`c` words, generalized later carriers, or singleton targets. The
-only rule-bearing distinguished raw-entry constructor still open in the S56 grammar is the
-all-`c` position-two boundary.
+all-`c` S56 grammar retains the position-two boundary and the exact regular or exceptional
+later-frontier resonances.
 
 ## Verification
 
