@@ -28,14 +28,6 @@ def prefixedCassaigneRight (depth : ℕ) : List Letter :=
   List.replicate depth .translate ++ cassaigneRight
 
 @[simp]
-theorem leadingTranslateRun_replicate_translate_dilate
-    (depth : ℕ) (tail : List Letter) :
-    leadingTranslateRun (List.replicate depth .translate ++ .dilate :: tail) = depth := by
-  induction depth with
-  | zero => rfl
-  | succ depth induction => simp [List.replicate_succ, leadingTranslateRun, induction]
-
-@[simp]
 theorem leadingTranslateRun_replicate_translate_append
     (depth : ℕ) (word : List Letter) :
     leadingTranslateRun (List.replicate depth .translate ++ word) =
