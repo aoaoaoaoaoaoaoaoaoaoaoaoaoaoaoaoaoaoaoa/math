@@ -1783,6 +1783,20 @@ grammar forbids such a readout. See
 [`R32-S67`](SALVAGE.md#r32-s67-transverse-free-pump-and-ray-blindness) and
 [`m32-cubic-transverse-pump-2026-09-01.md`](audits/m32-cubic-transverse-pump-2026-09-01.md).
 
+The required pre-collapse diversion is the original source itself. In the common-ray chart it is
+`(11,−123)`, and an encoded word has projective coordinate
+`sβ=(11/123−Dβ)/Qβ`. A modulo-197 orbit certificate proves that every numerator offset is a
+unit and that `v₁₉₇(sβ)=−count₁(β)`. Once the true-letter count is known, every extra false
+letter changes `Qβ` by `1/625`; Lean proves that all nonempty numerator magnitudes lie in a
+positive shell narrower than that factor, so equality recovers the false-letter count as well.
+The address injection then recovers the full word, and physical conjugacy proves projective
+injectivity on the actual separator source. The stack is therefore readable before collapse.
+The remaining compiler seam is now left-sided: realize, by positive return words or
+instance-dependent endpoint geometry, a covector which annihilates exactly the chosen encoded
+source ray, while retaining an arbitrary-raw-word converse. See
+[`R32-S68`](SALVAGE.md#r32-s68-separator-source-projective-decoder) and
+[`m32-cubic-source-decoder-2026-09-01.md`](audits/m32-cubic-source-decoder-2026-09-01.md).
+
 ### ReturnSquare laboratory
 
 [`R32-S03`](SALVAGE.md#r32-s03-returnsquare-normal-form) is the first completely normalized

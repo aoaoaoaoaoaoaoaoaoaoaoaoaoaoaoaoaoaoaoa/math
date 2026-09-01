@@ -22,6 +22,7 @@ import MatrixMortality.CubicContinuantEndpoint
 import MatrixMortality.CubicContinuantInternalPump
 import MatrixMortality.CubicContinuantBinaryPump
 import MatrixMortality.CubicContinuantTransversePump
+import MatrixMortality.CubicContinuantSourceDecoder
 import MatrixMortality.CyclicBinaryBoundary
 import MatrixMortality.EdgeCompression
 import MatrixMortality.TwoPlaneEdges

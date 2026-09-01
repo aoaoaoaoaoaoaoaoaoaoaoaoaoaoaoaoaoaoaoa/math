@@ -140,6 +140,7 @@ file owns the mathematical stock.
 | [`R32-S65`](#r32-s65-internal-ray-bridge-pumps) | structure theorem and obstruction | two non-scalar internal-ray loops give injective infinite bridge families and a first-hit-safe nonaccepting source merge | formalized | active |
 | [`R32-S66`](#r32-s66-binary-first-hit-bridge-pump) | structure theorem and obstruction | two safe non-scalar loops give exactly `2^n` distinct equal-length first-hit bridges at width `n` | formalized | active |
 | [`R32-S67`](#r32-s67-transverse-free-pump-and-ray-blindness) | structure theorem and obstruction | the binary loop matrices form a projectively free monoid whose entire stack is zero-invisible after the fixed ray-reaching suffix | formalized | active |
+| [`R32-S68`](#r32-s68-separator-source-projective-decoder) | structure theorem and compiler mechanism | modulo-197 valuation and a real shell make the free binary pump act projectively faithfully on the original separator source | formalized | active |
 | [`R32-M01`](#r32-m01-generic-reverse-edge-compiler) | partial mechanism | projective incidence generically embeds into a compatible two-plane edge square | formalized | active |
 | [`R32-M02`](#r32-m02-finite-quotient-sieve) | partial mechanism | finite monoid quotients give complete modular no-certificates for fixed candidates | formalized | active |
 | [`R32-M03`](#r32-m03-two-scale-return-conversion) | partial mechanism | a minimal two-scale return pencil has nonresonant multi-return zeros | formalized | active |
@@ -5067,7 +5068,8 @@ the entire projectively free stack for zero detection after `S` has reached `(4,
 product formula (2), normalized and physical projective freeness (3), generic source-image and
 incidence laws (4), the zero equivalence, and specialized all-left-context invisibility are Lean
 checked. The result does not show that the transverse stack can be read before the fixed suffix,
-nor does it construct an instance-dependent compiler.
+nor does it construct an instance-dependent compiler. `R32-S68` resolves the first question:
+the original separator source is a projectively faithful pre-collapse probe.
 
 **Artifact:** `MatrixMortality.wordProduct_rayStabilizer_insertion_zero_iff`,
 `CubicReturn.NonPure.falseWaitFirstHitBinaryLoop_chart`,
@@ -5080,8 +5082,90 @@ audit
 [`m32-cubic-transverse-pump-2026-09-01.md`](audits/m32-cubic-transverse-pump-2026-09-01.md).
 
 **Use:** treat the two loops as a genuine transverse binary stack, but never attempt to read it
-with a left zero context after the source has entered their common ray. Seek an earlier fork or
-right-context diversion that exposes the affine coordinate before collapse.
+with a left zero context after the source has entered their common ray. Use the pre-collapse
+source decoder from `R32-S68`; its remaining readout seam is left-sided target annihilation.
+
+### R32-S68: Separator-source projective decoder
+
+**Kind:** structure theorem and compiler mechanism
+**Evidence:** formalized
+**Disposition:** active
+
+The earlier diversion required by `R32-S67` is already present: use the original separator
+source before appending the ray-reaching suffix. In the common-ray basis,
+
+```text
+B⁻¹c=(11,−123).
+```
+
+For a bit string `β`, put
+
+```text
+Dβ=A(reverse β),       Qβ=∏ᵢq_(βᵢ),
+sβ=(11/123−Dβ)/Qβ.                                      (1)
+```
+
+Lean checks that the normalized source image is `(11−123Dβ,−123Qβ)`, so `sβ` is its negative
+projective coordinate. The empty word has positive coordinate; every nonempty word has negative
+coordinate.
+
+The address has an integral presentation `Dβ=Nβ/Eβ` with `Eβ` nonzero modulo `197`. Its residue
+obeys
+
+```text
+r([])=0,       r(0::β)=88+29r(β),       r(1::β)=66  in 𝔽₁₉₇.       (2)
+```
+
+The zero-letter map has fixed point `25` and `29⁴⁹=1`. Lean proves
+
+```text
+(r(β)−25)⁴⁹=1 or (r(β)−25)⁴⁹=−1,
+```
+
+but the source residue is `11/123=109` and `(109−25)⁴⁹=183`. Therefore every
+`Dβ−11/123` is a `197`-adic unit. Since `v₁₉₇(q₀)=0` and `v₁₉₇(q₁)=1`,
+
+```text
+v₁₉₇(sβ)=−count₁(β).                                  (3)
+```
+
+Equality of source coordinates first recovers the true-letter count. Lean also proves the exact
+nonempty shell
+
+```text
+3439607/17712000 ≤ Dβ−11/123 ≤ 49936/230625,
+49936/230625 < 625·3439607/17712000.                    (4)
+```
+
+With the true-letter count fixed, each extra false letter changes `Qβ` by `1/625`; (4) makes
+equal coordinates impossible unless the false-letter counts also agree. The two counts determine
+`Qβ`, then (1) determines `Dβ`, and affine-address injectivity determines `β`. Exact conjugacy
+and the nonzero physical scales lift the result to
+
+```text
+Π(M,E(β))c = λ·Π(M,E(γ))c  implies  β=γ.                (5)
+```
+
+**Scope:** the integral address formula, denominator unit, residue recurrence and orbit
+exclusion, `197`-adic unit law, exact shell, count recovery, coordinate injection, normalized
+source formula, and physical projective source-action injection are Lean checked. The exact
+width-14 census in `tools/certify_cubic_source_decoder.py` is only a cross-check. The result does
+not realize a positive left row that annihilates one selected source ray, enforce binary blocks
+in arbitrary raw words, or decide `M₃(2)`.
+
+**Artifact:** `CubicReturn.NonPure.falseWaitFirstHitBinaryAffineResidue_orbit`,
+`falseWaitFirstHitBinaryAffineCode_sub_source_val197`,
+`falseWaitFirstHitBinaryAffineCode_sub_source_shell`,
+`falseWaitFirstHitBinarySourceCoordinate_val197`,
+`falseWaitFirstHitBinarySourceCoordinate_injective`, and
+`falseWaitFirstHitBinaryEncoding_source_projectively_injective` in
+[`CubicContinuantSourceDecoder.lean`](MatrixMortality/CubicContinuantSourceDecoder.lean), with
+audit
+[`m32-cubic-source-decoder-2026-09-01.md`](audits/m32-cubic-source-decoder-2026-09-01.md).
+
+**Use:** the pump is readable before the suffix, so seek a positive left context which
+annihilates exactly a selected encoded source ray. Keep the separate arbitrary-word converse:
+source injectivity does not enforce block syntax or exclude unrelated bridge zeros.
 
 ### R32-M01: Generic reverse edge compiler
 

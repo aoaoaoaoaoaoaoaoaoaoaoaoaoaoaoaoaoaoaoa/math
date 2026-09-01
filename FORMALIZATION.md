@@ -1094,6 +1094,15 @@ incidence by its nonzero eigenvalue. The entire free projective stack is therefo
 zero observation after the fixed suffix. See `R32-S67` and
 [`audits/m32-cubic-transverse-pump-2026-09-01.md`](audits/m32-cubic-transverse-pump-2026-09-01.md).
 
+`CubicContinuantSourceDecoder` proves that the same pump is completely readable before the
+ray-reaching suffix. The original separator source is `(11,−123)` in the common-ray chart. Lean
+derives its rational projective coordinate, uses a period-49 modulo-197 orbit certificate to
+recover the number of true letters, and uses an exact real shell narrower than one factor of
+`625` to recover the number of false letters. The affine address then recovers the full bit
+string. Exact conjugacy lifts this to projective injectivity of the physical pump action on the
+original source. See `R32-S68` and
+[`audits/m32-cubic-source-decoder-2026-09-01.md`](audits/m32-cubic-source-decoder-2026-09-01.md).
+
 The rank-(2,2) graph is no longer an independent residue. `RankTwoPunctuation` proves that every
 compatible square with one rank-one loop and three units transports exactly to the existing raw
 reverse compiler [`R32-M01`](SALVAGE.md#r32-m01-generic-reverse-edge-compiler). Its intrinsic
@@ -1941,6 +1950,7 @@ fixed-rank decision problem.
 | `CubicContinuantInternalPump.lean` | infinite internal-ray bridge pumps and a nonaccepting source-merge obstruction to naive endpoint decoding |
 | `CubicContinuantBinaryPump.lean` | free literal binary first-hit bridge language on two safe non-scalar stabilizer loops |
 | `CubicContinuantTransversePump.lean` | projectively free transverse binary loop monoid and generic ray-stabilizer zero-observation congruence |
+| `CubicContinuantSourceDecoder.lean` | modulo-197 and real-shell decoder for the binary pump action on the original separator source |
 | `EdgeCompression.lean` | exact adjacent-edge compression for split finite-rank families |
 | `TwoPlaneEdges.lean` | compatible two-plane realization of a `2 × 2` edge square and exact rank-two certificates |
 | `ReverseEdge.lean` | generic projective-incidence reverse compiler, basis adaptation, and all-path converse |
