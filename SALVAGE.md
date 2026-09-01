@@ -145,6 +145,7 @@ file owns the mathematical stock.
 | [`MM-S71`](#mm-s71-three-block-backward-frontier) | structure theorem and obstruction | behind two final singleton `D_c` transfers, every nonterminal full-tail pole either halts or places the preceding physical block in its exact nonzero predecessor cylinder | formalized | active |
 | [`MM-O27`](#mm-o27-reachable-predecessor-cylinder) | obstruction | a concrete ordinary-reset history reaches the exact non-`D_c` predecessor cylinder, refuting every block-local extinction of the `MM-S71` survivor | formalized | active |
 | [`MM-S73`](#mm-s73-live-three-block-charge-frontier) | structure theorem and obstruction | the reachable predecessor cylinder, both deletion resonances, and the literal target suffix carry form one exact nonzero chain that automatically forces the whole three-block prefix live | formalized | active |
+| [`MM-S76`](#mm-s76-primitive-target-multiplier-braid) | structure theorem and obstruction | primitivity identifies one unique unit target multiplier, turning the suffix charge into a literal prefix discrepancy and restricting its predecessor cylinder to two first-mismatch residue arms | formalized | active |
 | [`R32-S01`](#r32-s01-split-return-normal-form) | structure theorem | rank-two cuts reduce one-unit binary mortality to a `2 × 2` return recurrence | formalized | graduated |
 | [`R32-S02`](#r32-s02-two-plane-edge-square) | structure theorem | two rank-two generators are a two-vertex square of `2 × 2` edges | formalized | graduated |
 | [`R32-O01`](#r32-o01-rank-one-profile-collapse) | obstruction | a rank-one generator reduces mortality to order-at-most-three scalar recurrence zeros | audited | stock |
@@ -5562,6 +5563,87 @@ through `erasureTailPole_threeBlock_charge_frontier`.
 **Next:** relate the nonzero peeled target charge `q₂` to the first unequal upper/lower Neary
 prefix and show that the unit chain (1) cannot persist on an arbitrary earlier centered history.
 The generic target-suffix seam remains independent.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S76: Primitive target multiplier braid
+
+**Kind:** structure theorem and obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+`MM-S73` retains the peeled target charge but does not identify it with the physical target
+prefixes. Let `(n₂,d₂)` be the primitive final carrier, let `P` and `V` be the swapped upper and
+lower target codes, and write the full-tail target as a front followed by `β` erasures. The exact
+code factorizations are
+
+```text
+P=3^β(U+1)−1,       V=3^β(L+1)−1,
+```
+
+where `U` and `L` are the signed codes of the discarded upper and lower prefixes. The pole
+equation `d₂P=n₂V` and primitivity force a unique common multiplier `λ` such that
+
+```text
+P=λn₂,       V=λd₂.
+```
+
+Since `P≡−1 (mod 3)`, `λ` is nonzero and `3∤λ`. If `d₂−n₂=3^βq₂`, cancellation of `3^β` gives
+the literal prefix equation
+
+```text
+Δ := L−U = λq₂.                                           (1)
+```
+
+Substitution into the `MM-S73` charge braid and cancellation of `3^β−1` yields
+
+```text
+u₀u₁u₂Δ = −2μHλ(2μk₀+u₀d₀).                              (2)
+```
+
+Consequently `Δ` and the predecessor braid residual have identical divisibility by every power
+of three and equal integer three-adic valuations. The final ternary digit makes `q₂` a unit:
+the upper discarded prefix ends in `true`, while the lower prefix is empty or ends in `false`.
+Thus `q₂`, the intervening numerator charge, the middle affine charge, `Δ`, and the predecessor
+braid residual are all indivisible by three.
+
+Transporting that first unequal digit backward through both physical `D_c` denominator
+recurrences and the initial role-block denominator gives exactly two arms:
+
+```text
+front=[]       => 3 ∣ k₀,
+front≠[]       => k₀ ≡ e₋₁ (mod 3),
+```
+
+where `k₀` is the initial predecessor-cylinder quotient and `e₋₁` is the origin denominator.
+Exact width-three search finds the required carrier residue pattern on reachable local chains in
+both arms, so this residue fork does not support a block-local extinction. Those witnesses are
+not poles.
+
+**Scope:** `β≥2`, the full `β`-erasure target tail, primitive final carrier, and the complete
+`w;D_c;D_c` normalization data of `MM-S73`. The multiplier theorem itself needs only a primitive
+target carrier and the pole cross-product. The backward residue fork additionally uses all three
+physical denominator equations. No arbitrary-target or `M₅(3)` conclusion follows.
+
+**Use:** replace the abstract target charge by a unique literal prefix discrepancy and reject the
+third predecessor-cylinder residue. Any strict consumer must now use more than the local block
+grammar. In the empty-front arm, `V=3^β−1=λd₂`, so `λ∣(3^β−1)` and
+`|d₂|≤3^β−1`; exact width-three classification nevertheless leaves all eight erasure targets.
+The nonempty arm requires longer exact prefix ancestry.
+
+**Formalization:**
+[`MatrixMortality/SwappedSetterTargetMultiplier.lean`](MatrixMortality/SwappedSetterTargetMultiplier.lean)
+and
+[`MatrixMortality/SwappedSetterTargetResidue.lean`](MatrixMortality/SwappedSetterTargetResidue.lean),
+through `witness_front_initialCylinder_residue_fork`.
+
+**Artifact:**
+[`audits/m53-target-multiplier-2026-08-31.md`](audits/m53-target-multiplier-2026-08-31.md).
+
+**Next:** decide whether any finite empty-front backward ray meets the encoded-entry orbit before
+`w`, then lift (1) beyond the terminal residue for the nonempty front. Removing the full-tail
+restriction remains independent.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).

@@ -51,6 +51,43 @@ private theorem spell_nearyLower_erase_map
       rw [induction]
       cases letter <;> simp [nearyLower, List.replicate_succ]
 
+/-- The punctuated upper code exposes the marker's matched false tail and its exact discarded
+prefix. -/
+theorem swappedUpperCode_markerTail_factorization
+    (width : Nat) (target : List NearyTile) :
+    swappedUpperCode width target =
+      (3 : ℤ) ^ width *
+          (signedSwappedCode (spell (nearyUpper width) target ++ [true]) + 1) - 1 := by
+  have factorization :
+      spell (nearyUpper width) target ++ nearyMarker width =
+        (spell (nearyUpper width) target ++ [true]) ++
+          List.replicate width false := by
+    simp [nearyMarker, List.append_assoc]
+  rw [swappedUpperCode]
+  change signedSwappedCode
+    (spell (nearyUpper width) target ++ nearyMarker width) = _
+  rw [factorization, signedSwappedCode_append, signedSwappedCode_replicate_false]
+  simp
+  ring
+
+/-- A full erasure tail exposes the lower code's exact discarded prefix. -/
+theorem erasureTail_swappedLowerCode_factorization
+    {width : Nat} (body : List TagLetter) {target front : List NearyTile}
+    {letters : List TagLetter} (letters_length : letters.length = width)
+    (target_eq : target = front ++ letters.map NearyTile.erase) :
+    swappedLowerCode width body target =
+      (3 : ℤ) ^ width *
+          (signedSwappedCode (spell (nearyLower width body) front) + 1) - 1 := by
+  have factorization :
+      spell (nearyLower width body) target =
+        spell (nearyLower width body) front ++ List.replicate width false := by
+    rw [target_eq, spell_append, spell_nearyLower_erase_map, letters_length]
+  rw [swappedLowerCode]
+  change signedSwappedCode (spell (nearyLower width body) target) = _
+  rw [factorization, signedSwappedCode_append, signedSwappedCode_replicate_false]
+  simp
+  ring
+
 /-- A full erasure-tail threshold factors its primitive gap by the marker power, with the
 quotient still carrying the exact discarded target prefixes. -/
 theorem erasureTail_threshold_gap_eq_charge
@@ -64,37 +101,8 @@ theorem erasureTail_threshold_gap_eq_charge
     denominator - numerator =
       (3 : ℤ) ^ width *
         erasureTailCharge width body target front numerator denominator := by
-  have upper_factorization :
-      spell (nearyUpper width) target ++ nearyMarker width =
-        (spell (nearyUpper width) target ++ [true]) ++
-          List.replicate width false := by
-    simp [nearyMarker, List.append_assoc]
-  have lower_factorization :
-      spell (nearyLower width body) target =
-        spell (nearyLower width body) front ++ List.replicate width false := by
-    rw [target_eq, spell_append, spell_nearyLower_erase_map, letters_length]
-  have upper_code_eq :
-      swappedUpperCode width target =
-        (3 : ℤ) ^ width *
-            signedSwappedCode (spell (nearyUpper width) target ++ [true]) +
-          ((3 : ℤ) ^ width - 1) := by
-    rw [swappedUpperCode]
-    change signedSwappedCode
-      (spell (nearyUpper width) target ++ nearyMarker width) = _
-    rw [upper_factorization, signedSwappedCode_append,
-      signedSwappedCode_replicate_false]
-    simp
-  have lower_code_eq :
-      swappedLowerCode width body target =
-        (3 : ℤ) ^ width *
-            signedSwappedCode (spell (nearyLower width body) front) +
-          ((3 : ℤ) ^ width - 1) := by
-    rw [swappedLowerCode]
-    change signedSwappedCode (spell (nearyLower width body) target) = _
-    rw [lower_factorization, signedSwappedCode_append,
-      signedSwappedCode_replicate_false]
-    simp
-  rw [upper_code_eq, lower_code_eq] at threshold
+  rw [swappedUpperCode_markerTail_factorization,
+    erasureTail_swappedLowerCode_factorization body letters_length target_eq] at threshold
   simp only [erasureTailCharge]
   linear_combination -threshold
 

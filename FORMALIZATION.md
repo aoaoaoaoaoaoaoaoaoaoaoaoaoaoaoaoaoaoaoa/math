@@ -1435,6 +1435,7 @@ The setter-projective audit now also exposes a kernel-friendly carry theorem:
 | [`MM-S71`](SALVAGE.md#mm-s71-three-block-backward-frontier) | exact three-block primitive-normalization composition, nonzero full-gap branch, and unique cylinder at the block before two final singleton `D_c` transfers |
 | [`MM-O27`](SALVAGE.md#mm-o27-reachable-predecessor-cylinder) | exact width-three ordinary-reset orbit, primitive normalizations, nonzero full-gap successor, and a reachable non-`D_c` predecessor-cylinder witness |
 | [`MM-S73`](SALVAGE.md#mm-s73-live-three-block-charge-frontier) | exact predecessor-cylinder preimage, derived three-block live-prefix certificate, literal matched-tail suffix carry, and nonzero charge transport through both singleton `D_c` resonances |
+| [`MM-S76`](SALVAGE.md#mm-s76-primitive-target-multiplier-braid) | unique primitive target multiplier, literal prefix-discrepancy braid, exact three-adic depth transfer, and the two-arm first-mismatch residue pullback to the initial cylinder |
 
 These records narrow the missing arbitrary-depth theorem but do not prove
 projective avoidance. Their reconstruction is
@@ -1774,6 +1775,19 @@ with exact denominator transport, prove that every boundary in the three-block w
 this local projection of earliestness is a conclusion, not an added premise. The remaining task
 is to contradict the derived braided target-carry equation using Neary prefix ancestry or to
 remove the full-tail target restriction.
+
+Record [`MM-S76`](SALVAGE.md#mm-s76-primitive-target-multiplier-braid) consumes the first layer of
+that prefix ancestry. A primitive target cross-product has one unique common multiplier `λ`; the
+matched-tail code factorizations prove that `λ` is a three-adic unit and that the discarded
+prefix discrepancy equals `λq₂`. Lean transports exact power-of-three divisibility from this
+literal discrepancy to the initial braid residual, proves both are units, and pulls the final
+unequal ternary digit through both deletion denominators and the initial physical denominator.
+The survivor is the explicit fork `front=[] => 3∣k₀` or
+`front≠[] => k₀≡e₋₁ (mod 3)`. Both carrier residue patterns have computationally reachable local
+witnesses, none a pole. For the finite empty-front target Lean additionally proves
+`3^β−1=λd₂`, `λ∣(3^β−1)`, and `|d₂|≤3^β−1`; all eight width-three targets still survive the
+remaining local equations. A strict cut must therefore use global reachability or longer
+target-prefix ancestry.
 
 Record [`MM-S21`](SALVAGE.md#mm-s21-bounded-decimal-suffix-cycles) closes the fixed-precision
 suffix-descent lane. `DecimalSetterSuffix.cycleDefect_lift` gives an explicit one-digit lift for
@@ -2331,6 +2345,8 @@ fixed-rank decision problem.
 | `SwappedSetterThreeBlockFrontier.lean` | exact primitive three-block pullback from a full-tail pole to the unique cylinder at the physical block before two singleton deletions |
 | `SwappedSetterReachableCylinder.lean` | closed width-three ordinary-reset witness showing that the non-`D_c` predecessor cylinder is physically reachable and cannot be killed locally |
 | `SwappedSetterCylinderCharge.lean` | exact locally earliest three-block charge chain coupling the predecessor cylinder through both deletion resonances to the target's matched-tail suffix carry |
+| `SwappedSetterTargetMultiplier.lean` | unique primitive target multiplier, literal target-prefix discrepancy, and exact braid/divisibility transport to the predecessor cylinder |
+| `SwappedSetterTargetResidue.lean` | three-adic unit chain and first-mismatch residue pullback from the target prefix through both singleton deletions to the initial cylinder quotient |
 | `PairedMortality.lean` | common-column mortality converse and exact integer `4 × 4` family |
 | `PhaseFracture.lean` | phase normalization and dimension-free projective-identification contradiction |
 | `PhaseRigidity.lean` | checked local role algebra, discrepancy commutators, and invariant-pencil rigidity |
