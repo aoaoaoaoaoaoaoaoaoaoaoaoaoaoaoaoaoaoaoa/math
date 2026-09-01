@@ -1686,6 +1686,19 @@ with an arbitrary-word block converse or an independent control phase. See
 and
 [`m32-cubic-continuant-self-balance-2026-08-31.md`](audits/m32-cubic-continuant-self-balance-2026-08-31.md).
 
+The raw punctuation is now complete. After removing the constant determinant factor, the cubic
+return at wait `n` has coefficient `Δ_n` with `Δ₀=0`, `Δ₁=2`, `Δ₂=3`, and
+`Δ_(n+3)=Δ_(n+1)+Δ_n`. Lean proves `Δ_n>0` for every positive `n`; hence `M₀` is the sole
+nonunit return and every positive-only word is a unit. Its exact rank-one factorization reduces
+unrestricted mortality to one scalar bridge over positive waits. This kills the remaining
+punctuation question but sharpens the semantic one: classify the positive bridge language. It
+also makes the target rectification unavoidable. The fixed family already has at least two
+formal seven-positive-wait bridge zeros, so S57–S60 cannot alone encode an instance-dependent
+answer in that family. A cell-closing compiler must vary or twist the endpoint geometry, or add
+an independent control representation. See
+[`R32-S61`](SALVAGE.md#r32-s61-sole-singular-cubic-punctuation) and
+[`m32-cubic-continuant-punctuation-2026-08-31.md`](audits/m32-cubic-continuant-punctuation-2026-08-31.md).
+
 ### ReturnSquare laboratory
 
 [`R32-S03`](SALVAGE.md#r32-s03-returnsquare-normal-form) is the first completely normalized

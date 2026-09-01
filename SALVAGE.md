@@ -132,6 +132,7 @@ file owns the mathematical stock.
 | [`R32-S58`](#r32-s58-positive-cubic-radix-readers) | compiler mechanism and obstruction | each fixed-cubic radix digit has a positive projective inverse, but two opposite wrong reads cancel exactly | formalized | active |
 | [`R32-S59`](#r32-s59-clocked-cubic-radix-comparator) | compiler mechanism | a common contracting clock turns every mismatch schedule into an injective signed radix code, and a physical endpoint bridge vanishes exactly on matching checks | formalized | active |
 | [`R32-S60`](#r32-s60-self-balancing-cubic-comparator-cleanup) | compiler mechanism | the split endpoint bridge rejects every excess or deficient cleanup-reader count by incompatible 2-adic and 5-adic parity | formalized | active |
+| [`R32-S61`](#r32-s61-sole-singular-cubic-punctuation) | structure theorem | wait zero is the unique nonunit return, and mortality of the complete fixed family is exactly one scalar bridge over positive waits | formalized | active |
 | [`R32-M01`](#r32-m01-generic-reverse-edge-compiler) | partial mechanism | projective incidence generically embeds into a compatible two-plane edge square | formalized | active |
 | [`R32-M02`](#r32-m02-finite-quotient-sieve) | partial mechanism | finite monoid quotients give complete modular no-certificates for fixed candidates | formalized | active |
 | [`R32-M03`](#r32-m03-two-scale-return-conversion) | partial mechanism | a minimal two-scale return pencil has nonresonant multi-return zeros | formalized | active |
@@ -4523,6 +4524,77 @@ gadget into instance-dependent endpoint geometry or add independent phase/contro
 **Use:** permit arbitrary cleanup multiplicity in every designated comparator construction.
 Spend the remaining compiler effort on block formation, instance-dependent target geometry, and
 an independent phase representation; do not add another counter for the cleanup suffix.
+
+### R32-S61: Sole-singular cubic punctuation
+
+**Kind:** structure theorem
+**Evidence:** formalized
+**Disposition:** active
+
+For a cubic defect state `(a,b,c)`, define
+
+```text
+Δ(a,b,c)=3a²−2ac−b²−3bc.
+```
+
+The false-wait determinant is `720Δ`. Lean checks the exact recurrence
+
+```text
+Δ(state(n+3))=Δ(state(n+1))+Δ(state(n))
+```
+
+with initial values `Δ₀=0`, `Δ₁=2`, and `Δ₂=3`. Strong induction gives `Δₙ>0` for every
+`n>0`. Thus `M₀` is the unique nonunit return; every positive return and every positive-only
+word is invertible.
+
+The singular return has the exact outer-product factorization
+
+```text
+M₀ = [-79,−90]ᵀ [0,1].
+```
+
+Relabel positive waits by `P_n=M_(n+1)` and put
+
+```text
+β(w)=[0,1] Π(P,w) [-79,−90]ᵀ.
+```
+
+The generic rank-one fracture theorem then gives the complete arbitrary-word reduction
+
+```text
+IsMortal(M) ↔ ∃w, β(w)=0.
+```
+
+This reduction includes malformed words and all numbers of separators: every zero localizes to
+one positive bridge between two consecutive copies of `M₀`. Lean also checks a second explicit
+seven-positive-wait zero,
+
+```text
+M₀ M₁₃M₁₅M₂₉M₁₁M₁₃M₇M₈ M₀ = 0,
+```
+
+distinct from the earlier bridge at `[12,12,8,12,12,15,8]`.
+
+**Scope:** punctuation is completely classified for this fixed return family. The remaining raw
+language is the scalar bridge language over positive unit returns, not an unconstrained matrix
+word problem. The result neither decides that bridge language uniformly nor turns the fixed
+family into an undecidability reduction: the two displayed bridges already make this single
+instance mortal. The exact bounded census found no positive bridge zeros at lengths at most four
+with waits at most `300`, none at length five with waits at most `120`, none at length six with
+waits at most `100`, and exactly the two displayed length-seven hits with waits at most `50`;
+those exhaustiveness bounds are computational evidence only.
+
+**Artifact:** `CubicReturn.NonPure.falseWaitReturn_isUnit_iff_positive`,
+`falseWaitReturn_wordProduct_isUnit_of_positive`,
+`falseWaitReturn_isMortal_iff_positiveBridge`, and
+`falseWait_second_positive_bridge_zero` in
+[`CubicContinuantPunctuation.lean`](MatrixMortality/CubicContinuantPunctuation.lean), with audit
+[`m32-cubic-continuant-punctuation-2026-08-31.md`](audits/m32-cubic-continuant-punctuation-2026-08-31.md).
+
+**Use:** begin every complete-language argument from the exact `M₀`/positive-unit fracture.
+Do not spend state on recognizing singular letters or exterior unit-only words. Classify the
+positive scalar bridge language, or transplant the local stack gadget into target-dependent
+endpoint geometry.
 
 ### R32-M01: Generic reverse edge compiler
 
