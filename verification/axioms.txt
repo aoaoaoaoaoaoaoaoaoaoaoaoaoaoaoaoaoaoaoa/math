@@ -2095,6 +2095,60 @@
 'MatrixMortality.MixedPrimeDebt.lengthThreeFalling_collision_realTrap_forces_k_eq_one_or_two' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.MixedPrimeDebt.lengthThreeFallingSource_eq_sourceCarry' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.lengthThreeFallingSource_fiveUnit_iff_sourceCarry' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.lengthThreeFalling_commonTarget' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.lengthThreeFallingTarget_fiveUnit_iff_numerator' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.lengthThreeFallingTarget_fiveUnit_forces_carry' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.lengthThreeFallingTarget_fiveUnit_forces_source_fiveUnit' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.lengthThreeFallingTarget_add_sub_hasValue' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.lengthThreeFallingTarget_fiveUnit_add_ten_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.lengthThreeFallingTarget_fiveUnit_iff_mod_ten' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.lengthThreeFallingTarget_oddShift_hasValue_negOne' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.lengthThreeFalling_two_realTrap_forces_pq_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.lengthThreeFalling_one_realTrap_forces_q_le_two' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.lengthThreeFalling_one_realTrap_q_two_forces_p_le_one' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.lengthThreeFalling_one_realTrap_q_one_forces_p_le_four' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.lengthThreeFalling_one_realTrap_q_zero_forces_B_le_five' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.lengthThreeFalling_one_realTrap_q_zero_forces_p_le_nine' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.lengthThreeFalling_one_realTrap_parameter_cut' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.lengthThreeFallingTarget_fiveUnit_forces_A_even' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.MixedPrimeDebt.shellRun_fixedPoint_unique' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.MixedPrimeDebt.shellPeriodicPoint_eq_iff_commute' depends on axioms: [propext,
  Classical.choice,

@@ -272,7 +272,7 @@ file owns the mathematical stock.
 | [`D2-S21`](#d2-s21-affine-determinant-carry-stripping) | reduction | common initial and terminal waits strip exactly from the fixed-source equation, while the cleared determinant has explicit recurrences | formalized | active |
 | [`D2-S22`](#d2-s22-prefix-carry-minimum-classifier) | structure theorem | accepted same-length cross-grade collisions require a bounded later cancellation of their first nonzero prefix carry | formalized | active |
 | [`D2-S23`](#d2-s23-length-two-mixed-sign-classifier) | exact classifier | fully guarded positive two-wait collisions form one explicit finite union of affine congruence families | formalized | active |
-| [`D2-S24`](#d2-s24-first-length-three-chamber-cut) | structure theorem | the closed positive-positive-negative three-wait chamber has an exact source independent of its final gauge, and the real trap leaves exactly transfers one and two | formalized | active |
+| [`D2-S24`](#d2-s24-first-length-three-chamber-cut) | structure theorem | the closed positive-positive-negative three-wait chamber reduces to transfers one and two, one depth-two target carry, and ten terminal residues | formalized | active |
 | [`D2-D01`](#d2-d01-projectively-unimodular-stratum) | decidable stratum | projectively unimodular hard-core instances are decidable | audited | stock |
 | [`D2-D02`](#d2-d02-invariant-pair-stratum) | decidable stratum | invariant projective pairs reduce to abelian-by-`C₂` reachability | reported | active |
 | [`D2-D03`](#d2-d03-common-multiplier-stratum) | decidable stratum | rational affine maps with one multiplier are decidable under regular control | reported | active |
@@ -12793,21 +12793,76 @@ At `k=0`, the numerator is nonpositive while the denominator is positive, contra
 real trap's lower endpoint. Hence the surviving transfers are exactly `k=1` and `k=2`. The
 cut is uniform in `p,q,A,B,t`; no residue or denominator hypothesis is used.
 
+The five-adic carry also contracts. Put
+
+```text
+D = r^k−r^(A+B),
+Z = [9r^q(r^B−r^k)+15(1−r^k)]/D,
+E = Z+9r^q+15.
+```
+
+Then the collision source and common target are exactly
+
+```text
+x = Z/(27r^(p+q)),
+y_t = [25+r^(t+k)E]/125.
+```
+
+Thus the source is a five-unit exactly when `Z` is. Target acceptance is the single cleared
+condition
+
+```text
+v₅(25+r^(t+k)E)=3.
+```
+
+It forces `v₅(E)=2`. Since `9r^q+15` is a five-unit, `Z=E−(9r^q+15)` is then automatically
+a five-unit: throughout this chamber, the target guard implies the source guard.
+
+Once `v₅(E)=2`, every positive terminal shift `s` has the exact transition
+
+```text
+v₅(y_(t+s)−y_t)=κ(s)−1.
+```
+
+Target acceptance is therefore exactly ten-periodic in `t`, and every positive odd shift from
+an accepted terminal gauge has value `−1`. The simultaneous source-target carry tree has become
+one depth-two equation and ten terminal residues.
+
+The real trap leaves only a finite outer parameter box before that carry equation. At `k=2`,
+it forces `p=q=0`. At `k=1`, it forces exactly one of the following necessary strata:
+
+```text
+q=0, B≤5, p≤9;
+q=1,      p≤4;
+q=2,      p≤1.
+```
+
+Thus only 67 outer `(q,p,B)` states remain when `B` is counted only in the stratum where it is
+bounded; the unbounded parameters occur solely inside the exact depth-two carry. In the strict
+chamber, target acceptance also forces `A` even by the general first-prefix carry obstruction.
+
 **Scope:** this record treats only the closed positive-positive-negative chamber. It neither
 classifies the `k=1,2` five-adic carry trees nor identifies the other length-three sign
 chambers. In particular, the remaining parameters are unbounded.
 
 **Artifact:** `MixedPrimeDebt.lengthThreeFalling_collisionSource`,
 `MixedPrimeDebt.lengthThreeFallingSource_realTrap_forces_k_le_two`, and
-`MixedPrimeDebt.lengthThreeFalling_collision_realTrap_forces_k_eq_one_or_two` in
+`MixedPrimeDebt.lengthThreeFalling_collision_realTrap_forces_k_eq_one_or_two`,
+`MixedPrimeDebt.lengthThreeFalling_commonTarget`,
+`MixedPrimeDebt.lengthThreeFallingTarget_fiveUnit_forces_source_fiveUnit`,
+`MixedPrimeDebt.lengthThreeFallingTarget_add_sub_hasValue`, and
+`MixedPrimeDebt.lengthThreeFallingTarget_fiveUnit_iff_mod_ten`,
+`MixedPrimeDebt.lengthThreeFalling_two_realTrap_forces_pq_zero`,
+`MixedPrimeDebt.lengthThreeFalling_one_realTrap_parameter_cut`, and
+`MixedPrimeDebt.lengthThreeFallingTarget_fiveUnit_forces_A_even` in
 [`MixedPrimeRealTrapLengthThree.lean`](MatrixMortality/MixedPrimeRealTrapLengthThree.lean).
 
 **Use:** split the first live length-three chamber into the two exact transfers `k=1` and `k=2`
 before entering the tied-minimum carry tree. The terminal gauge `t` can be omitted from every
 source-side calculation.
 
-**Next:** classify source and target five-unit acceptance for `k=1,2` through the three prefix
-carry heights, then normalize the remaining sign chambers.
+**Next:** classify the depth-two carry `E` for `k=1,2`, then finish the exact residue tables
+for the remaining sign chambers.
 
 ### D2-O09: Guarded real-pole reset
 

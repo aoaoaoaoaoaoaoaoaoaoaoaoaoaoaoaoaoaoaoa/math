@@ -2622,8 +2622,13 @@ formula independent of the terminal gauge `t`. A uniform numerator/denominator c
 together with exclusion of the zero-transfer wall, proves that real-trap membership forces
 `k∈{1,2}`. This is
 [`D2-S24`](SALVAGE.md#d2-s24-first-length-three-chamber-cut). The live residue is now the exact
-three-term source and target carry for `k=1,2`, together with normalization of the other
-length-three sign chambers.
+depth-two target carry for `k=1,2`, together with normalization of the other length-three sign
+chambers. In source-carry coordinates `Z` and target-carry coordinates `E=Z+9r^q+15`, the
+source and target are `Z/(27r^(p+q))` and `[25+r^(t+k)E]/125`. Target acceptance forces
+`v₅(E)=2`, hence forces source acceptance; it is exactly ten-periodic in the terminal gauge,
+while every positive odd shift rejects. The real trap also forces `p=q=0` at `k=2); at
+`k=1` it leaves only `q=0,B≤5,p≤9`, `q=1,p≤4`, or `q=2,p≤1`. In the strict chamber,
+target acceptance forces `A` even.
 The deepest of those three branches is itself a full depth reset. In normalized band coordinates
 `U(d,μ)=1/5+(3/10)(2/3)^dμ`, every target band `d≥2` contains a point whose `d−2` predecessor has
 any prescribed band `n≥7` and mantissa in `(2/3,1]`. An explicit guarded subfamily fixes target
@@ -2950,7 +2955,10 @@ universal computation.
    each rectangle has an exact forty-pair table, and the real gauge is classified exactly.
    `D2-S24` starts length three in the closed positive-positive-negative chamber: the collision
    source is independent of its terminal gauge and the real trap leaves exactly `k∈{1,2}`.
-   Classify the remaining three-term carries, then normalize the other sign chambers. Begin
+   Its target guard forces the source guard through one depth-two carry, target acceptance is
+   ten-periodic in the terminal gauge, and the real trap leaves a finite outer parameter box;
+   target acceptance also forces the first displacement even. Classify the residual carry, then
+   normalize the other sign chambers. Begin
    every remaining higher-depth tied-minimum search through the weighted source balance. Abandon
    finite literal return censuses and local forbidden-factor grammars; attack those
    endpoint-coupled fibres. Treat chamber
