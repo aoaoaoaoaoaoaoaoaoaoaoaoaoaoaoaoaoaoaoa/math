@@ -227,6 +227,11 @@ shear phase: `r≡26 (mod 27)` and `t≡2,5 (mod 9)` halt after an exact ten-act
 [`MM-S75`](SALVAGE.md#mm-s75-matched-six-c-shear-drainage) gives the complementary short
 macro: for `e=0,1`, the matched pair `r=9k+3e+2`, `t=3u+e` halts whenever
 `k+2u+2e+2` is nonzero modulo three.
+[`MM-S78`](SALVAGE.md#mm-s78-phase-mismatched-six-c-drainage) cuts all four remaining
+phase-mismatched residue pairs. The complementary pair `t+e=3u+1` halts when
+`k+u≡2 (mod 3)`; the shear-residue-two pair `t=3u+2` halts when `u≡e (mod 3)`. Each failed
+class reaches an exact six-event residual with one active `c` pair, but no theorem yet closes
+those successors.
 All cuts are checked in
 `MatrixMortality/SeparatedTwoCShear.lean`. The diagonal audit trail is
 `audits/m53-separated-two-c-orbits-2026-08-31.md`,
@@ -944,9 +949,11 @@ Three live routes remain.
    [`MM-S72`](SALVAGE.md#mm-s72-sheared-residue-twenty-six-drainage) proves halting in the
    surviving-shear subwedge `r≡26 (mod 27)`, `r-s≡2,5 (mod 9)`.
    [`MM-S75`](SALVAGE.md#mm-s75-matched-six-c-shear-drainage) further drains two thirds of the
-   matched `r≡2,r-s≡0 (mod 3)` and `r≡5,r-s≡1 (mod 3)` pairs. The next source-level cut is
-   a remaining sheared phase-two residue pair or coupled triples outside that plane, not
-   another diagonal or adjacent-`c` example.
+   matched `r≡2,r-s≡0 (mod 3)` and `r≡5,r-s≡1 (mod 3)` pairs.
+   [`MM-S78`](SALVAGE.md#mm-s78-phase-mismatched-six-c-drainage) then drains one joint
+   subphase in each of the four phase-mismatched pairs and identifies the exact surviving
+   active pair. The next source-level cut is that finite successor nucleus or coupled triples
+   outside the sheared plane, not another diagonal or adjacent-`c` example.
 
 The decimal setter is now the sharpest constructive route. The ternary swap remains useful
 because its suffix and divisor-ray theory is mature; the decimal instance has stronger real

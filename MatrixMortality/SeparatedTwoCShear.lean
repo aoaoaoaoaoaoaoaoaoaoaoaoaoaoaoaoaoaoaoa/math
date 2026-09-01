@@ -22,6 +22,9 @@ On the surviving shear phase, a ten-active-`c` history drains the subwedge with 
 
 A matched six-active-`c` history also drains two joint phases in middle residues two and five
 modulo nine.
+
+Two histories containing inert `bbc`/`bcb` crossings drain one joint subphase in each of the
+four phase-mismatched residue pairs over the same two middle residues.
 -/
 
 namespace MatrixMortality.SeparatedTwoCShear
@@ -825,6 +828,265 @@ theorem shearedMatched_tagHaltsFrom (phase shear separation k u : Nat)
       (shearedMatchedHistory phase k u) (shearedEntryQueue shear separation)
       (shearedMatchedFinal phase separation k u) final_halts
       (shearedMatchedHistory_equation phase shear separation k u shear_eq middle_eq)
+  exact Undecidability.tagHaltsFrom_of_reaches
+    (shearedInitial_reaches_entry shear separation).toReaches entry_halts
+
+private def shearedCrossStroke (phase : Nat) : Stroke TagLetter 3 :=
+  if phase = 0 then strokeBBC else strokeBCB
+
+private def shearedOppositeCrossStroke (phase : Nat) : Stroke TagLetter 3 :=
+  if phase = 0 then strokeBCB else strokeBBC
+
+private def shearedComplementaryHistory (phase k u : Nat) : List (Stroke TagLetter 3) :=
+  [strokeCBB] ++ List.replicate (3 * k + phase) strokeBBB ++ [strokeCBB] ++
+    List.replicate (3 * k + 3 * u + 2) strokeBBB ++ [strokeCBB] ++
+      List.replicate (3 * k + phase) strokeBBB ++ [strokeCBB] ++
+        List.replicate (4 * k + 2 * u + phase + 1) strokeBBB ++
+          [shearedCrossStroke phase] ++ List.replicate (3 * k + phase) strokeBBB ++
+            [shearedCrossStroke phase] ++ List.replicate (4 * k + 3 * u + 3) strokeBBB ++
+              [strokeCBB] ++ List.replicate (3 * k + phase) strokeBBB ++ [strokeCBB]
+
+private def shearedComplementaryFinal
+    (phase separation k u : Nat) : List TagLetter :=
+  bRun (12 * k + 6 * u + 2 * phase + 5) ++ [.c] ++
+    bRun (9 * k + 3 * phase + 2) ++ [.c] ++
+      bRun (20 * k + 11 * u + 3 * phase + 13) ++ [.c] ++
+        bRun (9 * k + 3 * phase + 2) ++ [.c] ++
+          bRun (12 * k + 6 * u + 2 * phase + 7) ++ [.c] ++
+            bRun (9 * k + 3 * phase + 2) ++ [.c] ++ bRun (separation + 1)
+
+private theorem shearedComplementaryHistory_equation
+    (phase shear separation k u : Nat)
+    (phase_lt : phase < 2)
+    (shear_eq : shear + phase = 3 * u + 1)
+    (middle_eq : separation + shear = 9 * k + 3 * phase + 2) :
+    consumed (shearedComplementaryHistory phase k u) ++
+        shearedComplementaryFinal phase separation k u =
+      shearedEntryQueue shear separation ++
+        produced (tagOutput (shearedBody shear separation))
+          (shearedComplementaryHistory phase k u) := by
+  have phase_cases : phase = 0 ∨ phase = 1 := by omega
+  rcases phase_cases with rfl | rfl
+  · simp [shearedComplementaryHistory, shearedComplementaryFinal, shearedCrossStroke,
+      shearedEntryQueue, shearedBody, twoCBody, strokeBBC, strokeCBB, stroke₃,
+      Stroke.letters, tagOutput, nearyBody, bRun, List.append_assoc] at shear_eq middle_eq ⊢
+    have middleRun : 3 * (3 * k) + 1 + 1 = 9 * k + 2 := by omega
+    have sourceBridge : 3 * (3 * k + 3 * u + 2) + 1 + 1 =
+        9 * k + 2 + 1 + (3 * shear + 2) := by omega
+    have firstCrossBridge : 3 * (4 * k + 2 * u + 1) + 1 + 1 + 1 + 1 =
+        separation + 1 + (3 * k + (3 * shear + 2)) := by omega
+    have secondCrossBridge : 3 * (4 * k + 3 * u + 3) =
+        separation + 1 + (3 * k + 3 * u + 2 + (3 * shear + 2)) := by omega
+    have finalBridge : 12 * k + 6 * u + 5 + 1 + 1 =
+        separation + 1 + (3 * k + (3 * shear + 2)) := by omega
+    have highFinalBridge : 20 * k + 11 * u + 13 =
+        separation + 1 +
+          (4 * k + 2 * u + 1 +
+            (3 * k + (4 * k + 3 * u + 3 + (3 * shear + 2) + 1) + 1)) := by
+      omega
+    rw [middle_eq, middleRun, sourceBridge, firstCrossBridge, secondCrossBridge, finalBridge,
+      highFinalBridge]
+  · simp [shearedComplementaryHistory, shearedComplementaryFinal, shearedCrossStroke,
+      shearedEntryQueue, shearedBody, twoCBody, strokeBCB, strokeCBB, stroke₃,
+      Stroke.letters, tagOutput, nearyBody, bRun, List.append_assoc] at shear_eq middle_eq ⊢
+    have middleRun : 3 * (3 * k + 1) + 1 + 1 = 9 * k + 5 := by omega
+    have middlePhase : 9 * k + 3 + 2 = 9 * k + 5 := by omega
+    have sourceBridge : 3 * (3 * k + 3 * u + 2) + 1 + 1 =
+        9 * k + 5 + 1 + (3 * shear + 2) := by omega
+    have firstCrossBridge : 3 * (4 * k + 2 * u + 2) + 1 + 1 + 1 =
+        separation + 1 + (3 * k + 1 + (3 * shear + 2)) := by omega
+    have secondCrossBridge : 3 * (4 * k + 3 * u + 3) + 1 =
+        separation + 1 + (3 * k + 3 * u + 2 + (3 * shear + 2)) := by omega
+    have finalBridge : 12 * k + 6 * u + 7 + 1 + 1 =
+        separation + 1 + (3 * k + 1 + (3 * shear + 2)) := by omega
+    have highFinalBridge : 20 * k + 11 * u + 16 =
+        separation + 1 +
+          (4 * k + 2 * u + 1 + 1 +
+            (3 * k + 1 + (4 * k + 3 * u + 3 + (3 * shear + 2) + 1) + 1)) := by
+      omega
+    rw [middle_eq, middleRun, middlePhase, sourceBridge, firstCrossBridge, secondCrossBridge,
+      finalBridge, highFinalBridge]
+
+private theorem shearedComplementaryFinal_clean (phase separation k u : Nat)
+    (phase_lt : phase < 2)
+    (joint_phase : (k + u) % 3 = 2) :
+    Undecidability.ConstantAtMultiples 3 TagLetter.b
+      (shearedComplementaryFinal phase separation k u) := by
+  have clean : ConstantAtOffset 0 (shearedComplementaryFinal phase separation k u) := by
+    unfold shearedComplementaryFinal
+    simp only [List.singleton_append, List.append_assoc]
+    apply constantAtOffset_bRun_c
+    · rw [Nat.dvd_iff_mod_eq_zero]
+      omega
+    · apply constantAtOffset_bRun_c
+      · rw [Nat.dvd_iff_mod_eq_zero]
+        omega
+      · apply constantAtOffset_bRun_c
+        · rw [Nat.dvd_iff_mod_eq_zero]
+          omega
+        · apply constantAtOffset_bRun_c
+          · rw [Nat.dvd_iff_mod_eq_zero]
+            omega
+          · apply constantAtOffset_bRun_c
+            · rw [Nat.dvd_iff_mod_eq_zero]
+              omega
+            · apply constantAtOffset_bRun_c
+              · rw [Nat.dvd_iff_mod_eq_zero]
+                omega
+              · exact constantAtOffset_replicate _ _
+  simpa [ConstantAtOffset, Undecidability.ConstantAtMultiples] using clean
+
+/-- The six-active-`c` history drains the complementary middle/shear phase when the joint
+quotient is two modulo three. -/
+theorem shearedComplementary_tagHaltsFrom (phase shear separation k u : Nat)
+    (phase_lt : phase < 2)
+    (shear_eq : shear + phase = 3 * u + 1)
+    (middle_eq : separation + shear = 9 * k + 3 * phase + 2)
+    (joint_phase : (k + u) % 3 = 2) :
+    TagHaltsFrom 3 (tagOutput (shearedBody shear separation))
+      (shearedInitial shear separation) := by
+  have final_halts := Undecidability.tagHaltsFrom_of_constantAtMultiples 3 (by omega)
+    (tagOutput (shearedBody shear separation)) TagLetter.b rfl
+    (shearedComplementaryFinal phase separation k u)
+    (shearedComplementaryFinal_clean phase separation k u phase_lt joint_phase)
+  have entry_halts : TagHaltsFrom 3 (tagOutput (shearedBody shear separation))
+      (shearedEntryQueue shear separation) :=
+    tagHaltsFrom_of_history_equation (tagOutput (shearedBody shear separation))
+      (shearedComplementaryHistory phase k u) (shearedEntryQueue shear separation)
+      (shearedComplementaryFinal phase separation k u) final_halts
+      (shearedComplementaryHistory_equation phase shear separation k u phase_lt shear_eq
+        middle_eq)
+  exact Undecidability.tagHaltsFrom_of_reaches
+    (shearedInitial_reaches_entry shear separation).toReaches entry_halts
+
+private def shearedShearResidueTwoHistory
+    (phase k u : Nat) : List (Stroke TagLetter 3) :=
+  [strokeCBB] ++ List.replicate (3 * k + phase) strokeBBB ++ [strokeCBB] ++
+    List.replicate (3 * k + 3 * u + phase + 3) strokeBBB ++ [strokeCBB] ++
+      List.replicate (3 * k + phase) strokeBBB ++ [strokeCBB] ++
+        List.replicate (4 * k + 2 * u + phase + 2) strokeBBB ++
+          [shearedOppositeCrossStroke phase] ++
+            List.replicate (3 * k + phase) strokeBBB ++
+              [shearedOppositeCrossStroke phase] ++
+                List.replicate (4 * k + 3 * u + 2 * phase + 3) strokeBBB ++
+                  [shearedCrossStroke phase] ++ List.replicate (3 * k + phase) strokeBBB ++
+                    [shearedCrossStroke phase] ++
+                      List.replicate (4 * k + 2 * u + phase + 3) strokeBBB ++
+                        [strokeCBB] ++ List.replicate (3 * k + phase) strokeBBB ++ [strokeCBB]
+
+private def shearedShearResidueTwoFinal
+    (phase separation k u : Nat) : List TagLetter :=
+  bRun (27 * k + 13 * u + 9 * phase + 19) ++ [.c] ++
+    bRun (9 * k + 3 * phase + 2) ++ [.c] ++
+      bRun (12 * k + 6 * u + 4 * phase + 9) ++ [.c] ++
+        bRun (9 * k + 3 * phase + 2) ++ [.c] ++ bRun (separation + 1)
+
+private theorem shearedShearResidueTwoHistory_equation
+    (phase shear separation k u : Nat)
+    (phase_lt : phase < 2)
+    (shear_eq : shear = 3 * u + 2)
+    (middle_eq : separation + shear = 9 * k + 3 * phase + 2) :
+    consumed (shearedShearResidueTwoHistory phase k u) ++
+        shearedShearResidueTwoFinal phase separation k u =
+      shearedEntryQueue shear separation ++
+        produced (tagOutput (shearedBody shear separation))
+          (shearedShearResidueTwoHistory phase k u) := by
+  have phase_cases : phase = 0 ∨ phase = 1 := by omega
+  rcases phase_cases with rfl | rfl
+  · simp [shearedShearResidueTwoHistory, shearedShearResidueTwoFinal,
+      shearedCrossStroke, shearedOppositeCrossStroke, shearedEntryQueue, shearedBody,
+      twoCBody, strokeBBC, strokeBCB, strokeCBB, stroke₃, Stroke.letters, tagOutput,
+      nearyBody, bRun, List.append_assoc] at shear_eq middle_eq ⊢
+    have middleRun : 3 * (3 * k) + 1 + 1 = 9 * k + 2 := by omega
+    have sourceBridge : 3 * (3 * k + 3 * u + 3) + 1 + 1 =
+        9 * k + 2 + 1 + (3 * shear + 2) := by omega
+    have firstCrossBridge : 3 * (4 * k + 2 * u + 2) + 1 + 1 + 1 =
+        separation + 1 + (3 * k + (3 * shear + 2)) := by omega
+    have secondCrossBridge : 3 * (4 * k + 3 * u + 3) + 1 + 1 + 1 =
+        separation + 1 + (3 * k + 3 * u + 3 + (3 * shear + 2)) := by omega
+    have thirdCrossBridge : 3 * (4 * k + 2 * u + 3) =
+        separation + 1 + (3 * k + (3 * shear + 2)) := by omega
+    have highFinalBridge : 27 * k + 13 * u + 19 + 1 + 1 =
+        separation + 1 +
+          (4 * k + 2 * u + 2 +
+            (3 * k +
+              (4 * k + 3 * u + 3 +
+                (3 * k + (4 * k + 2 * u + 3 + (3 * shear + 2) + 1) + 1) + 1) + 1)) := by
+      omega
+    have finalBridge : 12 * k + 6 * u + 9 =
+        separation + 1 + (3 * k + (3 * shear + 2)) := by omega
+    rw [middle_eq, middleRun, sourceBridge, firstCrossBridge, secondCrossBridge, thirdCrossBridge,
+      highFinalBridge, finalBridge]
+  · simp [shearedShearResidueTwoHistory, shearedShearResidueTwoFinal,
+      shearedCrossStroke, shearedOppositeCrossStroke, shearedEntryQueue, shearedBody,
+      twoCBody, strokeBBC, strokeBCB, strokeCBB, stroke₃, Stroke.letters, tagOutput,
+      nearyBody, bRun, List.append_assoc] at shear_eq middle_eq ⊢
+    have middleRun : 3 * (3 * k + 1) + 1 + 1 = 9 * k + 5 := by omega
+    have middlePhase : 9 * k + 3 + 2 = 9 * k + 5 := by omega
+    have sourceBridge : 3 * (3 * k + 3 * u + 4) + 1 + 1 =
+        9 * k + 5 + 1 + (3 * shear + 2) := by omega
+    have firstCrossBridge : 3 * (4 * k + 2 * u + 3) + 1 + 1 + 1 + 1 =
+        separation + 1 + (3 * k + 1 + (3 * shear + 2)) := by omega
+    have secondCrossBridge : 3 * (4 * k + 3 * u + 5) + 1 =
+        separation + 1 + (3 * k + 3 * u + 1 + 3 + (3 * shear + 2)) := by omega
+    have thirdCrossBridge : 3 * (4 * k + 2 * u + 4) + 1 =
+        separation + 1 + (3 * k + 1 + (3 * shear + 2)) := by omega
+    have highFinalBridge : 27 * k + 13 * u + 28 + 1 + 1 =
+        separation + 1 +
+          (4 * k + 2 * u + 1 + 2 +
+            (3 * k + 1 +
+              (4 * k + 3 * u + 2 + 3 +
+                (3 * k + 1 +
+                  (4 * k + 2 * u + 1 + 3 + (3 * shear + 2) + 1) + 1) + 1) + 1)) := by
+      omega
+    have finalBridge : 12 * k + 6 * u + 13 =
+        separation + 1 + (3 * k + 1 + (3 * shear + 2)) := by omega
+    rw [middle_eq, middleRun, middlePhase, sourceBridge, firstCrossBridge, secondCrossBridge,
+      thirdCrossBridge, highFinalBridge, finalBridge]
+
+private theorem shearedShearResidueTwoFinal_clean (phase separation k u : Nat)
+    (phase_lt : phase < 2)
+    (quotient_phase : u % 3 = phase) :
+    Undecidability.ConstantAtMultiples 3 TagLetter.b
+      (shearedShearResidueTwoFinal phase separation k u) := by
+  have clean : ConstantAtOffset 0 (shearedShearResidueTwoFinal phase separation k u) := by
+    unfold shearedShearResidueTwoFinal
+    simp only [List.singleton_append, List.append_assoc]
+    apply constantAtOffset_bRun_c
+    · rw [Nat.dvd_iff_mod_eq_zero]
+      omega
+    · apply constantAtOffset_bRun_c
+      · rw [Nat.dvd_iff_mod_eq_zero]
+        omega
+      · apply constantAtOffset_bRun_c
+        · rw [Nat.dvd_iff_mod_eq_zero]
+          omega
+        · apply constantAtOffset_bRun_c
+          · rw [Nat.dvd_iff_mod_eq_zero]
+            omega
+          · exact constantAtOffset_replicate _ _
+  simpa [ConstantAtOffset, Undecidability.ConstantAtMultiples] using clean
+
+/-- The six-active-`c` history drains the shear-residue-two mismatch when its shear quotient
+matches the middle quotient phase. -/
+theorem shearedShearResidueTwo_tagHaltsFrom (phase shear separation k u : Nat)
+    (phase_lt : phase < 2)
+    (shear_eq : shear = 3 * u + 2)
+    (middle_eq : separation + shear = 9 * k + 3 * phase + 2)
+    (quotient_phase : u % 3 = phase) :
+    TagHaltsFrom 3 (tagOutput (shearedBody shear separation))
+      (shearedInitial shear separation) := by
+  have final_halts := Undecidability.tagHaltsFrom_of_constantAtMultiples 3 (by omega)
+    (tagOutput (shearedBody shear separation)) TagLetter.b rfl
+    (shearedShearResidueTwoFinal phase separation k u)
+    (shearedShearResidueTwoFinal_clean phase separation k u phase_lt quotient_phase)
+  have entry_halts : TagHaltsFrom 3 (tagOutput (shearedBody shear separation))
+      (shearedEntryQueue shear separation) :=
+    tagHaltsFrom_of_history_equation (tagOutput (shearedBody shear separation))
+      (shearedShearResidueTwoHistory phase k u) (shearedEntryQueue shear separation)
+      (shearedShearResidueTwoFinal phase separation k u) final_halts
+      (shearedShearResidueTwoHistory_equation phase shear separation k u phase_lt shear_eq
+        middle_eq)
   exact Undecidability.tagHaltsFrom_of_reaches
     (shearedInitial_reaches_entry shear separation).toReaches entry_halts
 

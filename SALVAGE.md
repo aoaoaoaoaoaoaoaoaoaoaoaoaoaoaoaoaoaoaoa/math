@@ -78,6 +78,7 @@ file owns the mathematical stock.
 | [`MM-S70`](#mm-s70-sheared-residue-eight-drainage) | halting theorem | a four-active-`c` history drains the sheared middle-phase-two wedge `r≡8 (mod 9)`, `r-s≢2 (mod 3)` | formalized | active |
 | [`MM-S72`](#mm-s72-sheared-residue-twenty-six-drainage) | halting theorem | a ten-active-`c` history drains the surviving-shear subwedge `r≡26 (mod 27)`, `r-s≡2,5 (mod 9)` | formalized | active |
 | [`MM-S75`](#mm-s75-matched-six-c-shear-drainage) | halting theorem | one six-active-`c` macro drains two thirds of the matched middle residues two and five modulo nine | formalized | active |
+| [`MM-S78`](#mm-s78-phase-mismatched-six-c-drainage) | halting theorems | two mixed-stroke six-active-`c` macros drain one joint subphase in each of four phase-mismatched sheared residue pairs | formalized | active |
 | [`MM-O01`](#mm-o01-all-placement-packing-rank) | obstruction | literal CHHN packing has exact rank six for every separator placement | formalized | graduated |
 | [`MM-O02`](#mm-o02-one-sided-phase-overlap) | obstruction | standard common-line phase fusion becomes one-sided | reported | parked |
 | [`MM-O03`](#mm-o03-two-channel-boundary-tax) | obstruction | exact diagonal rank-two punctuation costs two states beyond Hankel rank | formalized | graduated |
@@ -6460,6 +6461,101 @@ case is its failed phase `e=2`; `MM-S70` and `MM-S72` supply the longer continua
 
 **Next:** derive the phase-mismatched six-event successors, then join their surviving classes
 to the residue-eight continuation or a finite active-block nucleus.
+
+### MM-S78: Phase-mismatched six-c drainage
+
+**Kind:** halting theorems
+**Evidence:** formalized
+**Disposition:** active
+
+Let `e<2` and write the sheared middle run as
+
+```text
+r=n+t=9k+3e+2.
+```
+
+Put `m=3k+e`, `X₀=bbc`, and `X₁=bcb`; both `Xₑ` strokes are `b`-headed. First consider the
+complementary shear phase
+
+```text
+t+e=3u+1.
+```
+
+With `g=3k+3u+2`, `h=4k+2u+e+1`, and `j=4k+3u+3`, the entry queue has the exact history
+
+```text
+C B^m C B^g C B^m C B^h Xₑ B^m Xₑ B^j C B^m C,
+C=cbb,  B=bbb.
+```
+
+Its residual run vector is
+
+```text
+[12k+6u+2e+5, r, 20k+11u+3e+13, r,
+ 12k+6u+2e+7, r, n+1].
+```
+
+The three pairs of `c` positions have phases
+
+```text
+2e+2,    2(k+u+e+2),    2(k+u+2e)             (mod 3).
+```
+
+They are all nonzero when `k+u≡2 (mod 3)`, so that residual and the coupled source halt.
+
+The other mismatch has shear residue two:
+
+```text
+t=3u+2.
+```
+
+Let `Y₀=bcb`, `Y₁=bbc`, and set
+
+```text
+g=3k+3u+e+3,    h=4k+2u+e+2,
+j=4k+3u+2e+3,   ℓ=4k+2u+e+3.
+```
+
+Then the exact history is
+
+```text
+C B^m C B^g C B^m C B^h Yₑ B^m Yₑ B^j Xₑ B^m Xₑ B^ℓ C B^m C.
+```
+
+It leaves the shorter residual
+
+```text
+[27k+13u+9e+19, r, 12k+6u+4e+9, r, n+1].
+```
+
+Its two pairs of `c` positions have phases `u+1` and `u+e+2` modulo three. Both are nonzero
+when `u≡e (mod 3)`, and the source again halts.
+
+The surviving subphases are explicit. In the complementary family, write
+`q=(k+u) mod 3`: `(e,q)=(0,0),(1,1)` leave the last pair active, while
+`(e,q)=(0,1),(1,0)` leave the middle pair active. In the shear-residue-two family, write
+`q=u mod 3`: `(e,q)=(0,1),(1,0)` leave the last pair active, while
+`(e,q)=(0,2),(1,2)` leave the first pair active. “Active” here describes the exact successor
+of this six-event macro; it does not assert nonhalting.
+
+**Scope:** these theorems drain one joint subphase in each of the four phase-mismatched pairs
+over middle residues two and five modulo nine. They do not decide the eight surviving
+subphases just listed, the matched survivors left by `MM-S75`, the residue-eight survivors left
+by `MM-S72`, or coupled triples outside the sheared plane. Later drainage seen in finite
+simulation is computational only and is not part of either theorem.
+
+**Use:** inert `bbc` and `bcb` crossings absorb the phase mismatch without changing the output
+letter. After six active events every unresolved mismatch has exactly one active `c` pair, so
+the next search has a finite, explicitly oriented successor nucleus rather than four opaque
+source families.
+
+**Formalization:**
+[`MatrixMortality/SeparatedTwoCShear.lean`](MatrixMortality/SeparatedTwoCShear.lean), through
+`SeparatedTwoCShear.shearedComplementary_tagHaltsFrom` and
+`SeparatedTwoCShear.shearedShearResidueTwo_tagHaltsFrom`.
+
+**Next:** derive the exact two-active successor on the eight listed subphases and either close
+its finite nucleus or exhibit the first countercycle.
 
 ### MM-S33: Leading-`D_b` support-saturator extinction
 

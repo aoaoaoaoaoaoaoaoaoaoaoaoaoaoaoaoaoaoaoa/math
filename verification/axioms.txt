@@ -1677,6 +1677,12 @@
 'MatrixMortality.SeparatedTwoCShear.shearedMatched_tagHaltsFrom' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.SeparatedTwoCShear.shearedComplementary_tagHaltsFrom' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SeparatedTwoCShear.shearedShearResidueTwo_tagHaltsFrom' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.SetterShear.sideBasis_det' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.SetterShear.delimiter_cube' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.SetterShear.delimiter_square_distinguishedColumn' depends on axioms: [propext,
