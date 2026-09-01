@@ -1154,8 +1154,9 @@ physical target prefixes. Primitivity gives a unique three-adic-unit multiplier 
 u₀u₁u₂Δ=−2μHλ(2μk₀+u₀d₀).
 ```
 
-The literal discrepancy and the predecessor residual have equal three-adic depth; in fact both
-are units. The last unequal discarded digit then pulls back to the exact fork
+The last unequal discarded digit makes the literal discrepancy a unit unconditionally, and the
+braid forces the predecessor residual to be a unit. Pulling that digit backward gives the exact
+fork
 
 ```text
 front=[] => 3∣k₀,       front≠[] => k₀≡e₋₁ (mod 3).

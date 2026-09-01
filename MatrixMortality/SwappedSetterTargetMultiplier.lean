@@ -160,7 +160,7 @@ private theorem spell_nearyUpper_erase_map
   simp [List.map_map, Function.comp_def, NearyTile.letter]
 
 /-- When the matched erasure tail is the entire target, the unique primitive multiplier divides
-the lower marker value, exposes one tag-code discrepancy, and bounds the denominator. -/
+the lower tail code, exposes one tag-code discrepancy, and bounds the denominator. -/
 theorem erasureTarget_primitive_targetMultiplier_unique
     {width : Nat} (width_pos : 0 < width) (body : List TagLetter)
     (letters : List TagLetter) (letters_length : letters.length = width)
@@ -343,16 +343,91 @@ private theorem mul_not_dvd_three
   · exact left_not_dvd left_dvd
   · exact right_not_dvd right_dvd
 
-private theorem power_coprime_of_not_dvd_three
-    (depth : Nat) {value : ℤ} (value_not_dvd : ¬(3 : ℤ) ∣ value) :
-    IsCoprime ((3 : ℤ) ^ depth) value :=
-  ((by norm_num : Prime (3 : ℤ)).coprime_iff_not_dvd.mpr value_not_dvd).pow_left
+private theorem signedSwappedCode_append_true_mod_three
+    (word : List Bool) :
+    signedSwappedCode (word ++ [true]) ≡ 1 [ZMOD 3] := by
+  rw [Int.modEq_iff_dvd, signedSwappedCode_append]
+  have singleton_code : signedSwappedCode [true] = 1 := by
+    norm_num [signedSwappedCode, ternaryCode, ternaryDigit]
+  rw [singleton_code]
+  refine ⟨-signedSwappedCode word, ?_⟩
+  norm_num
 
-/-- The literal target first-mismatch depth equals the depth of the initial braid residual at
-every power of three. -/
-theorem ThreeBlockChargeWitness.prefixDiscrepancy_dvd_iff
-    {width : Nat} (width_pos : 0 < width)
-    {body : List TagLetter} {precedingBlock target : List NearyTile}
+private theorem signedSwappedCode_append_false_mod_three
+    (word : List Bool) :
+    signedSwappedCode (word ++ [false]) ≡ 2 [ZMOD 3] := by
+  rw [Int.modEq_iff_dvd, signedSwappedCode_append]
+  have singleton_code : signedSwappedCode [false] = 2 := by
+    norm_num [signedSwappedCode, ternaryCode, ternaryDigit]
+  rw [singleton_code]
+  refine ⟨-signedSwappedCode word, ?_⟩
+  norm_num
+
+private theorem spell_nearyLower_nonempty_ends_false
+    (width : Nat) (body : List TagLetter) {front : List NearyTile}
+    (front_ne : front ≠ []) :
+    ∃ stem, spell (nearyLower width body) front = stem ++ [false] := by
+  induction front using List.reverseRecOn with
+  | nil => exact False.elim (front_ne rfl)
+  | append_singleton front tile =>
+      cases tile with
+      | erase letter =>
+          refine ⟨spell (nearyLower width body) front, ?_⟩
+          cases letter <;> simp [spell, nearyLower]
+      | rule letter =>
+          cases letter with
+          | b =>
+              refine ⟨spell (nearyLower width body) front ++ [true, true], ?_⟩
+              simp [spell, nearyLower, List.append_assoc]
+          | c =>
+              refine ⟨spell (nearyLower width body) front ++
+                [true] ++ tagEncode width body ++ [true], ?_⟩
+              simp [spell, nearyLower, List.append_assoc]
+
+/-- The terminal unequal digit makes every peeled target-prefix discrepancy a three-adic unit,
+independently of any carrier or pole equation. -/
+theorem targetPrefixDiscrepancy_not_dvd_three
+    (width : Nat) (body : List TagLetter) (target front : List NearyTile) :
+    ¬(3 : ℤ) ∣ targetPrefixDiscrepancy width body target front := by
+  have upper_mod :
+      signedSwappedCode (spell (nearyUpper width) target ++ [true]) ≡
+        1 [ZMOD 3] :=
+    signedSwappedCode_append_true_mod_three _
+  by_cases front_empty : front = []
+  · subst front
+    have discrepancy_mod :
+        targetPrefixDiscrepancy width body target [] ≡ 2 [ZMOD 3] := by
+      simp only [targetPrefixDiscrepancy]
+      have lower_zero : signedSwappedCode (spell (nearyLower width body) []) = 0 := by
+        norm_num [spell, signedSwappedCode, ternaryCode]
+      rw [lower_zero]
+      exact (Int.ModEq.refl (0 : ℤ)).sub upper_mod |>.trans (by norm_num)
+    intro discrepancy_dvd
+    have two_zero : (2 : ℤ) ≡ 0 [ZMOD 3] :=
+      discrepancy_mod.symm.trans discrepancy_dvd.modEq_zero_int
+    rw [Int.modEq_iff_dvd] at two_zero
+    norm_num at two_zero
+  · obtain ⟨stem, lower_eq⟩ :=
+      spell_nearyLower_nonempty_ends_false width body front_empty
+    have lower_mod :
+        signedSwappedCode (spell (nearyLower width body) front) ≡ 2 [ZMOD 3] := by
+      rw [lower_eq]
+      exact signedSwappedCode_append_false_mod_three stem
+    have discrepancy_mod :
+        targetPrefixDiscrepancy width body target front ≡ 1 [ZMOD 3] := by
+      simp only [targetPrefixDiscrepancy]
+      exact lower_mod.sub upper_mod |>.trans (by norm_num)
+    intro discrepancy_dvd
+    have one_zero : (1 : ℤ) ≡ 0 [ZMOD 3] :=
+      discrepancy_mod.symm.trans discrepancy_dvd.modEq_zero_int
+    rw [Int.modEq_iff_dvd] at one_zero
+    norm_num at one_zero
+
+/-- The literal prefix braid forces its initial predecessor-cylinder residual to be a
+three-adic unit. -/
+theorem ThreeBlockChargeWitness.predecessorBraidResidual_not_dvd_three
+    {width : Nat} {body : List TagLetter}
+    {precedingBlock target : List NearyTile}
     {originNumerator originDenominator
       antecedentNumerator antecedentDenominator antecedentScale
       previousNumerator previousDenominator previousScale
@@ -362,120 +437,32 @@ theorem ThreeBlockChargeWitness.prefixDiscrepancy_dvd_iff
       antecedentNumerator antecedentDenominator antecedentScale
       previousNumerator previousDenominator previousScale
       currentNumerator currentDenominator currentScale)
-    (multiplier_not_dvd : ¬(3 : ℤ) ∣ multiplier)
-    (braid :
-      witness.initialUnit * witness.middleUnit * witness.currentUnit *
-          targetPrefixDiscrepancy width body target witness.front =
-        -2 * setterMarker width * terminalDiscrepancy width * multiplier *
-          predecessorBraidResidual width witness.initialUnit
-            witness.initialCylinderQuotient antecedentDenominator)
-    (depth : Nat) :
-    (3 : ℤ) ^ depth ∣ targetPrefixDiscrepancy width body target witness.front ↔
-      (3 : ℤ) ^ depth ∣
-        predecessorBraidResidual width witness.initialUnit
-          witness.initialCylinderQuotient antecedentDenominator := by
-  have leftCoefficient_not_dvd :
-      ¬(3 : ℤ) ∣ witness.initialUnit * witness.middleUnit * witness.currentUnit :=
-    mul_not_dvd_three
-      (mul_not_dvd_three witness.initialUnit_not_dvd witness.middleUnit_not_dvd)
-      witness.currentUnit_not_dvd
-  have marker_not_dvd : ¬(3 : ℤ) ∣ setterMarker width := by
-    simpa [setterMarker, widthScale, mul_comm] using
-      power_mul_sub_one_not_dvd_three width_pos 2
-  have terminal_not_dvd : ¬(3 : ℤ) ∣ terminalDiscrepancy width := by
-    simpa [terminalDiscrepancy, widthScale, mul_comm] using
-      power_mul_sub_one_not_dvd_three width_pos 5
-  have rightCoefficient_not_dvd :
-      ¬(3 : ℤ) ∣ -2 * setterMarker width * terminalDiscrepancy width * multiplier :=
-    mul_not_dvd_three
-      (mul_not_dvd_three
-        (mul_not_dvd_three (by norm_num) marker_not_dvd) terminal_not_dvd)
-      multiplier_not_dvd
-  have left_coprime :=
-    power_coprime_of_not_dvd_three depth leftCoefficient_not_dvd
-  have right_coprime :=
-    power_coprime_of_not_dvd_three depth rightCoefficient_not_dvd
-  constructor
-  · intro discrepancy_dvd
-    have product_dvd :
-        (3 : ℤ) ^ depth ∣
-          witness.initialUnit * witness.middleUnit * witness.currentUnit *
-            targetPrefixDiscrepancy width body target witness.front := by
-      exact dvd_mul_of_dvd_right discrepancy_dvd _
-    rw [braid] at product_dvd
-    exact right_coprime.dvd_of_dvd_mul_left product_dvd
-  · intro residual_dvd
-    have product_dvd :
-        (3 : ℤ) ^ depth ∣
-          (-2 * setterMarker width * terminalDiscrepancy width * multiplier) *
-            predecessorBraidResidual width witness.initialUnit
-              witness.initialCylinderQuotient antecedentDenominator :=
-      dvd_mul_of_dvd_right residual_dvd _
-    rw [← braid] at product_dvd
-    exact left_coprime.dvd_of_dvd_mul_left product_dvd
-
-/-- The peeled target first-mismatch discrepancy and the initial braid residual have exactly the
-same three-adic depth. -/
-theorem ThreeBlockChargeWitness.prefixDiscrepancy_padicValInt_eq
-    {width : Nat} (width_pos : 0 < width)
-    {body : List TagLetter} {precedingBlock target : List NearyTile}
-    {originNumerator originDenominator
-      antecedentNumerator antecedentDenominator antecedentScale
-      previousNumerator previousDenominator previousScale
-      currentNumerator currentDenominator currentScale multiplier : ℤ}
-    (witness : ThreeBlockChargeWitness width body precedingBlock target
-      originNumerator originDenominator
-      antecedentNumerator antecedentDenominator antecedentScale
-      previousNumerator previousDenominator previousScale
-      currentNumerator currentDenominator currentScale)
-    (multiplier_not_dvd : ¬(3 : ℤ) ∣ multiplier)
-    (prefix_ne : targetPrefixDiscrepancy width body target witness.front ≠ 0)
     (braid :
       witness.initialUnit * witness.middleUnit * witness.currentUnit *
           targetPrefixDiscrepancy width body target witness.front =
         -2 * setterMarker width * terminalDiscrepancy width * multiplier *
           predecessorBraidResidual width witness.initialUnit
             witness.initialCylinderQuotient antecedentDenominator) :
-    padicValInt 3 (targetPrefixDiscrepancy width body target witness.front) =
-      padicValInt 3
-        (predecessorBraidResidual width witness.initialUnit
-          witness.initialCylinderQuotient antecedentDenominator) := by
-  let prefixValue := targetPrefixDiscrepancy width body target witness.front
-  let residual := predecessorBraidResidual width witness.initialUnit
-    witness.initialCylinderQuotient antecedentDenominator
-  have leftCoefficient_ne :
-      witness.initialUnit * witness.middleUnit * witness.currentUnit ≠ 0 := by
-    exact mul_ne_zero
-      (mul_ne_zero
-        (fun initial_zero => witness.initialUnit_not_dvd (initial_zero ▸ dvd_zero 3))
-        (fun middle_zero => witness.middleUnit_not_dvd (middle_zero ▸ dvd_zero 3)))
-      (fun current_zero => witness.currentUnit_not_dvd (current_zero ▸ dvd_zero 3))
-  have residual_ne : residual ≠ 0 := by
-    intro residual_zero
-    have left_zero :
-        witness.initialUnit * witness.middleUnit * witness.currentUnit * prefixValue = 0 := by
-      rw [braid]
-      simp [residual, residual_zero]
-    exact prefix_ne <| (mul_eq_zero.mp left_zero).resolve_left leftCoefficient_ne
-  have divides_iff (depth : Nat) :
-      (3 : ℤ) ^ depth ∣ prefixValue ↔ (3 : ℤ) ^ depth ∣ residual := by
-    exact prefixDiscrepancy_dvd_iff width_pos witness multiplier_not_dvd braid depth
-  have prefixDepth_dvd : (3 : ℤ) ^ padicValInt 3 prefixValue ∣ prefixValue :=
-    (padicValInt_dvd_iff (padicValInt 3 prefixValue) prefixValue).mpr (Or.inr le_rfl)
-  have prefixDepth_dvd_residual :=
-    (divides_iff (padicValInt 3 prefixValue)).mp prefixDepth_dvd
-  have prefixDepth_le_residualDepth :
-      padicValInt 3 prefixValue ≤ padicValInt 3 residual :=
-    ((padicValInt_dvd_iff (padicValInt 3 prefixValue) residual).mp
-      prefixDepth_dvd_residual).resolve_left residual_ne
-  have residualDepth_dvd : (3 : ℤ) ^ padicValInt 3 residual ∣ residual :=
-    (padicValInt_dvd_iff (padicValInt 3 residual) residual).mpr (Or.inr le_rfl)
-  have residualDepth_dvd_prefixValue :=
-    (divides_iff (padicValInt 3 residual)).mpr residualDepth_dvd
-  have residualDepth_le_prefixDepth :
-      padicValInt 3 residual ≤ padicValInt 3 prefixValue :=
-    ((padicValInt_dvd_iff (padicValInt 3 residual) prefixValue).mp
-      residualDepth_dvd_prefixValue).resolve_left prefix_ne
-  exact le_antisymm prefixDepth_le_residualDepth residualDepth_le_prefixDepth
+    ¬(3 : ℤ) ∣
+      predecessorBraidResidual width witness.initialUnit
+        witness.initialCylinderQuotient antecedentDenominator := by
+  have coefficient_not_dvd :
+      ¬(3 : ℤ) ∣ witness.initialUnit * witness.middleUnit * witness.currentUnit :=
+    mul_not_dvd_three
+      (mul_not_dvd_three witness.initialUnit_not_dvd witness.middleUnit_not_dvd)
+      witness.currentUnit_not_dvd
+  have discrepancy_not_dvd :=
+    targetPrefixDiscrepancy_not_dvd_three width body target witness.front
+  intro residual_dvd
+  have product_dvd :
+      (3 : ℤ) ∣
+        witness.initialUnit * witness.middleUnit * witness.currentUnit *
+          targetPrefixDiscrepancy width body target witness.front := by
+    rw [braid]
+    exact dvd_mul_of_dvd_right residual_dvd _
+  rcases (by norm_num : Prime (3 : ℤ)).dvd_mul.mp product_dvd with
+    coefficient_dvd | discrepancy_dvd
+  · exact coefficient_not_dvd coefficient_dvd
+  · exact discrepancy_not_dvd discrepancy_dvd
 
 end MatrixMortality.SwappedSetterTargetMultiplier

@@ -26,8 +26,9 @@ Substitution into the `MM-S73` charge braid gives
 u₀u₁u₂(L−U)=−2μHλ(2μk₀+u₀d₀).
 ```
 
-Lean proves equivalent divisibility by `3^h` for every `h` and equal integer three-adic
-valuations on the two exposed factors.
+The terminal unequal digit makes `L−U` indivisible by three without any carrier hypothesis. The
+braid therefore makes `2μk₀+u₀d₀` indivisible by three. It transports a unit, not a positive
+three-adic depth.
 
 ## First Mismatch
 
