@@ -1246,9 +1246,23 @@ spelling lengths and
 
 After the following singleton `D_c`, its exact boundary intercept satisfies
 `0<Ξ<8·3^(β−6)/5`. This replaces the canonical upper-gap estimate by a uniform theorem, but
-does not supply the quotient-scale lower bound used by `MM-S88`. The live contraction node is now
-exactly arithmetic: intersect the `MM-S86` primitive `3H` channel and `MM-S92` target modulus with
-the equal-spelling prefix to force such a lower bound, or classify the physical small-`Ξ` family.
+does not by itself supply the two-sided window used by `MM-S88`.
+
+[`MM-S99`](SALVAGE.md#mm-s99-sharp-post-contraction-successor-frontier) extracts the exact common
+prefix code `45ρ−5`, improving the bound to `ε<1/(90ρ−10)`. The resulting intercept satisfies
+the full `MM-S88` affine upper ceiling: `Ξ<2−H/(9ρ−1)` at width six and
+`Ξ<14Q/9−H/(9ρ−1)` thereafter. Running one arbitrary next physical block now kills every
+`c`-leading branch and every `b`-leading branch except
+
+```text
+V < Q A,
+```
+
+plus the width-six critical rule-`b` chamber `14A≤9V`, `3V<5A`. A blanket lower intercept
+bound is false: the exact-channel family suggested by `body=b c b^(β−3)`, target `c^β`, and
+block `R_c D_b^(β−2)` has computational `Ξ/Q→0.9`. The live contraction node is therefore the
+short-lower spelling itself, to be intersected with `MM-S86` normalization and `MM-S92` target
+support; the second residual is a width-six arithmetic calculation.
 
 The remaining ternary obligation is now the **nonzero history-defect branch** of the global
 earliest-pole reduction. In the normalized coordinate `δ=D/y`, the complete physical recurrence
@@ -1270,7 +1284,7 @@ erasure tile, not `β` of them. A complete proof must either force the long tail
 false pole or extend the carry/cylinder invariant to arbitrary physical target suffixes. Fixed
 residue and unit projections are empirically saturated, and the exact carry window grows with
 carrier height. None of `MM-S51`, `MM-S55`, `MM-S57`, `MM-S59`, `MM-S61`, `MM-S63`, `MM-S64`,
-`MM-S68`, `MM-S69`, `MM-S71`, `MM-O27`, `MM-S73`, `MM-S76`, `MM-O29`, `MM-O30`, `MM-S86`, `MM-S87`, `MM-S88`, `MM-S89`, `MM-S92`, or `MM-S93`
+`MM-S68`, `MM-S69`, `MM-S71`, `MM-O27`, `MM-S73`, `MM-S76`, `MM-O29`, `MM-O30`, `MM-S86`, `MM-S87`, `MM-S88`, `MM-S89`, `MM-S92`, `MM-S93`, or `MM-S99`
 alone proves projective avoidance.
 Exact bidirectional diagnostics for the ternary swap at `β=3`, body `bbcc`, exclude every
 false-pole word of at most six projective blocks when each regular block has

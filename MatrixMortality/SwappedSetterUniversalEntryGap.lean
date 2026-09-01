@@ -68,38 +68,20 @@ private theorem swappedPhysicalUpperWord_predecessorPower
       width + upperLength width block := by omega
   rw [exponent_eq, pow_add]
 
-private theorem prefixCode_lower
-    {width : Nat} (width_pos : 0 < width) :
-    40 * 3 ^ width <
-      ternaryCode (false :: (tagCode width .b).map not ++ [false]) := by
-  obtain ⟨offset, rfl⟩ :=
-    Nat.exists_eq_succ_of_ne_zero (Nat.ne_of_gt width_pos)
-  let tail := List.replicate offset true ++ [false, false]
-  have word_eq :
-      false :: (tagCode (offset + 1) .b).map not ++ [false] =
-        false :: false :: true :: tail := by
-    simp only [tail, tagCode, List.map_append, List.map_cons, Bool.not_true,
-      Bool.not_false, List.map_replicate]
-    simp [List.replicate_succ]
-  rw [word_eq]
-  have code_eq :
-      ternaryCode (false :: false :: true :: tail) =
-        14 * 3 ^ tail.length + ternaryCode tail := by
-    simp only [ternaryCode_cons, List.length_cons, ternaryDigit, pow_succ]
-    ring
-  rw [code_eq]
-  have tail_length : tail.length = offset + 2 := by simp [tail]
-  rw [tail_length]
-  have tail_power : 3 ^ (offset + 2) = 3 * 3 ^ (offset + 1) := by
-    rw [pow_succ]
-    ring
-  rw [tail_power]
-  change
-    40 * 3 ^ (offset + 1) <
-      14 * (3 * 3 ^ (offset + 1)) + ternaryCode tail
-  have scale_pos : 0 < 3 ^ (offset + 1) := pow_pos (by omega) _
-  have tail_nonneg : 0 ≤ ternaryCode tail := Nat.zero_le _
-  nlinarith
+private theorem prefixCode_exact (width : Nat) :
+    ternaryCode (false :: (tagCode width .b).map not ++ [false]) =
+      45 * 3 ^ width - 5 := by
+  rw [ternaryCode_append, ternaryCode_cons, swappedCode_tagCode_b]
+  simp only [List.length_map, List.length_singleton, ternaryDigit, pow_one]
+  simp [tagCode, ternaryCode, pow_succ]
+  have scale_pos : 0 < 3 ^ width := pow_pos (by omega) width
+  have expanded :
+      3 * (3 ^ width * 3 * 3 + (6 * 3 ^ width - 2)) + 1 + 5 =
+        45 * 3 ^ width := by
+    omega
+  change 3 * (3 ^ width * 3 * 3 + (6 * 3 ^ width - 2)) + 1 =
+    45 * 3 ^ width - 5
+  omega
 
 private theorem equalLength_false_lt_true
     (leftTail rightTail : List Bool)
@@ -174,7 +156,7 @@ private theorem equalLength_cLeading_codeGap
     (code_gt :
       ternaryCode (swappedPhysicalLowerWord width body (tile :: rest)) <
         ternaryCode (swappedPhysicalUpperWord width (tile :: rest))) :
-    80 * 3 ^ width *
+    (90 * 3 ^ width - 10) *
         (ternaryCode (swappedPhysicalUpperWord width (tile :: rest)) -
           ternaryCode (swappedPhysicalLowerWord width body (tile :: rest))) <
       ternaryCode (swappedPhysicalLowerWord width body (tile :: rest)) := by
@@ -265,9 +247,14 @@ private theorem equalLength_cLeading_codeGap
                         simp only [lowerTail, List.length_append,
                           List.length_cons] at length_eq ⊢
                         omega
-                      have prefix_pos : 40 * 3 ^ width < ternaryCode shared := by
-                        simpa [shared, List.append_assoc] using
-                          (prefixCode_lower (show 0 < width by omega))
+                      have prefix_eq :
+                          ternaryCode shared = 45 * 3 ^ width - 5 := by
+                        simpa [shared, List.append_assoc] using prefixCode_exact width
+                      have doubled_prefix_eq :
+                          2 * ternaryCode shared = 90 * 3 ^ width - 10 := by
+                        rw [prefix_eq]
+                        have scale_pos : 0 < 3 ^ width := pow_pos (by omega) width
+                        omega
                       have spread := ternaryCode_spread tail_length
                       have upper_code_eq :
                           ternaryCode
@@ -285,10 +272,6 @@ private theorem equalLength_cLeading_codeGap
                         rw [lower_eq, ternaryCode_append]
                         simp only [lowerTail]
                         ring
-                      have prefix_scaled :
-                          40 * 3 ^ width * 3 ^ lowerTail.length <
-                            ternaryCode shared * 3 ^ lowerTail.length :=
-                        mul_lt_mul_of_pos_right prefix_pos (pow_pos (by omega) _)
                       have tail_gap :
                           2 * (ternaryCode upperTail - ternaryCode lowerTail) <
                             3 ^ lowerTail.length := by
@@ -305,15 +288,18 @@ private theorem equalLength_cLeading_codeGap
                         omega
                       rw [gap_eq, lower_code_eq]
                       calc
-                        80 * 3 ^ width *
+                        (90 * 3 ^ width - 10) *
                             (ternaryCode upperTail - ternaryCode lowerTail) =
-                            (40 * 3 ^ width) *
+                            ternaryCode shared *
                               (2 * (ternaryCode upperTail - ternaryCode lowerTail)) := by
+                                rw [← doubled_prefix_eq]
                                 ring
-                        _ < (40 * 3 ^ width) * 3 ^ lowerTail.length :=
+                        _ < ternaryCode shared * 3 ^ lowerTail.length :=
                           (Nat.mul_lt_mul_left
-                            (show 0 < 40 * 3 ^ width by positivity)).2 tail_gap
-                        _ < ternaryCode shared * 3 ^ lowerTail.length := prefix_scaled
+                            (show 0 < ternaryCode shared by
+                              rw [prefix_eq]
+                              have scale_pos : 0 < 3 ^ width := pow_pos (by omega) width
+                              omega)).2 tail_gap
                         _ ≤ ternaryCode shared * 3 ^ lowerTail.length +
                             ternaryCode lowerTail := Nat.le_add_right _ _
 
@@ -670,6 +656,379 @@ theorem postDeletionCIntercept_pos_lt_eight_fifths
     exact epsilon_numerator_bound.trans
       (marker_comparison.trans target_scaled)
 
+private theorem postDeletionCIntercept_strictMono
+    {width : Nat} (width_large : 6 ≤ width) {left right : ℚ}
+    (left_pos : 0 < left) (left_lt_right : left < right) :
+    postDeletionCIntercept width left < postDeletionCIntercept width right := by
+  have scale_large : (729 : ℚ) ≤ widthScale width := by
+    have power_bound : 3 ^ 6 ≤ 3 ^ width :=
+      Nat.pow_le_pow_right (by norm_num) width_large
+    norm_num [widthScale] at power_bound ⊢
+    exact_mod_cast power_bound
+  have radius_pos : (0 : ℚ) < chamberRadius width := by
+    simp only [chamberRadius]
+    push_cast
+    linarith
+  have marker_pos : (0 : ℚ) < setterMarker width := by
+    simp only [setterMarker]
+    push_cast
+    linarith
+  have coefficient_pos :
+      (0 : ℚ) < chamberRadius width ^ 2 + 2 * chamberRadius width -
+        6 * setterMarker width := by
+    simp only [chamberRadius, setterMarker]
+    push_cast
+    nlinarith
+  have right_pos : 0 < right := left_pos.trans left_lt_right
+  have left_denominator_pos :
+      0 < 6 * setterMarker width +
+        (chamberRadius width ^ 2 + 2 * chamberRadius width -
+          6 * setterMarker width) * left := by positivity
+  have right_denominator_pos :
+      0 < 6 * setterMarker width +
+        (chamberRadius width ^ 2 + 2 * chamberRadius width -
+          6 * setterMarker width) * right := by positivity
+  simp only [postDeletionCIntercept]
+  apply (div_lt_div_iff₀ left_denominator_pos right_denominator_pos).2
+  have difference_identity :
+      setterMarker width * chamberRadius width ^ 2 * right *
+          (6 * setterMarker width +
+            (chamberRadius width ^ 2 + 2 * chamberRadius width -
+              6 * setterMarker width) * left) -
+        setterMarker width * chamberRadius width ^ 2 * left *
+          (6 * setterMarker width +
+            (chamberRadius width ^ 2 + 2 * chamberRadius width -
+              6 * setterMarker width) * right) =
+      setterMarker width * chamberRadius width ^ 2 *
+        (6 * setterMarker width) * (right - left) := by ring
+  rw [← sub_pos, difference_identity]
+  positivity
+
+private theorem sharpCapIntercept_upper
+    {width : Nat} (width_large : 6 ≤ width) :
+    (width = 6 ∧
+        postDeletionCIntercept width (1 / (90 * widthScale width - 10)) <
+          2 - interceptMargin width) ∨
+      (7 ≤ width ∧
+        postDeletionCIntercept width (1 / (90 * widthScale width - 10)) <
+          14 * chamberQuotient width / 9 - interceptMargin width) := by
+  rcases eq_or_lt_of_le width_large with width_eq | width_seven
+  · subst width
+    left
+    constructor
+    · rfl
+    · norm_num [postDeletionCIntercept, interceptMargin, widthScale,
+        setterMarker, chamberRadius, terminalDiscrepancy]
+  · right
+    refine ⟨width_seven, ?_⟩
+    let q : ℚ := chamberQuotient width
+    let rho : ℚ := widthScale width
+    let shifted := q - 3
+    have q_three : 3 ≤ q := by
+      simpa only [q] using chamberQuotient_ge_three width_seven
+    have shifted_nonneg : 0 ≤ shifted := by
+      simp only [shifted]
+      linarith
+    have rho_eq : rho = 729 * q := by
+      have integer_eq := widthScale_eq_729_mul_chamberQuotient width_large
+      simp only [rho, q]
+      exact_mod_cast integer_eq
+    let capDenominator : ℚ := 1081 * rho ^ 2 - 674 * rho + 66
+    have cap_denominator_pos : 0 < capDenominator := by
+      simp only [capDenominator]
+      rw [rho_eq]
+      nlinarith [sq_nonneg q]
+    let marginDenominator : ℚ := 9 * rho - 1
+    have margin_denominator_pos : 0 < marginDenominator := by
+      simp only [marginDenominator]
+      rw [rho_eq]
+      linarith
+    let gapPolynomial : ℚ :=
+      558 - 6273240 * q + 20742328854 * q ^ 2 -
+        18609841505700 * q ^ 3 + 7015410214812 * q ^ 4
+    have gap_polynomial_pos : 0 < gapPolynomial := by
+      have expansion : gapPolynomial =
+          65969168886396 + 255323030245680 * shifted +
+            211364320377402 * shifted ^ 2 +
+            65575081072044 * shifted ^ 3 +
+            7015410214812 * shifted ^ 4 := by
+        simp only [gapPolynomial, shifted]
+        ring
+      rw [expansion]
+      positivity
+    have cap_closed :
+        postDeletionCIntercept width (1 / (90 * widthScale width - 10)) =
+          (2 * rho - 1) * (rho - 2) ^ 2 / capDenominator := by
+      simp only [postDeletionCIntercept, setterMarker, chamberRadius, rho]
+      push_cast
+      change
+        (2 * rho - 1) * (rho - 2) ^ 2 * (1 / (90 * rho - 10)) /
+            (6 * (2 * rho - 1) +
+              ((rho - 2) ^ 2 + 2 * (rho - 2) - 6 * (2 * rho - 1)) *
+                (1 / (90 * rho - 10))) =
+          (2 * rho - 1) * (rho - 2) ^ 2 / capDenominator
+      have sharp_denominator_pos : 0 < 90 * rho - 10 := by
+        rw [rho_eq]
+        linarith
+      have denominator_eq :
+          6 * (2 * rho - 1) +
+              ((rho - 2) ^ 2 + 2 * (rho - 2) - 6 * (2 * rho - 1)) *
+                (1 / (90 * rho - 10)) =
+            capDenominator / (90 * rho - 10) := by
+        let base := 6 * (2 * rho - 1)
+        let coefficient :=
+          (rho - 2) ^ 2 + 2 * (rho - 2) - 6 * (2 * rho - 1)
+        let sharpDenominator := 90 * rho - 10
+        have base_eq : base = base * sharpDenominator / sharpDenominator := by
+          rw [eq_div_iff (by simpa only [sharpDenominator] using
+            sharp_denominator_pos.ne')]
+        change base + coefficient * (1 / sharpDenominator) =
+          capDenominator / sharpDenominator
+        rw [show coefficient * (1 / sharpDenominator) =
+          coefficient / sharpDenominator by ring, base_eq, ← add_div]
+        congr 1
+        simp only [base, coefficient, sharpDenominator, capDenominator]
+        ring
+      rw [denominator_eq]
+      rw [show (2 * rho - 1) * (rho - 2) ^ 2 * (1 / (90 * rho - 10)) =
+        (2 * rho - 1) * (rho - 2) ^ 2 / (90 * rho - 10) by ring]
+      rw [div_eq_mul_inv, inv_div]
+      exact div_mul_div_cancel₀ sharp_denominator_pos.ne'
+    have gap_identity :
+        14 * q / 9 - (5 * rho - 1) / marginDenominator -
+            (2 * rho - 1) * (rho - 2) ^ 2 / capDenominator =
+          gapPolynomial /
+            (9 * marginDenominator * capDenominator) := by
+      field_simp [margin_denominator_pos.ne', cap_denominator_pos.ne']
+      simp only [marginDenominator, capDenominator, gapPolynomial]
+      rw [rho_eq]
+      ring
+    rw [cap_closed]
+    simp only [interceptMargin, terminalDiscrepancy]
+    push_cast
+    change
+      (2 * rho - 1) * (rho - 2) ^ 2 / capDenominator <
+        14 * q / 9 - (5 * rho - 1) / marginDenominator
+    rw [← sub_pos, gap_identity]
+    positivity
+
+/-- The sharp physical gap cap lies below the affine ceiling required by the next-block
+automaton. -/
+theorem postDeletionCIntercept_upper_sharp
+    {width : Nat} (width_large : 6 ≤ width) {epsilon : ℚ}
+    (epsilon_pos : 0 < epsilon)
+    (epsilon_upper : epsilon < 1 / (90 * widthScale width - 10)) :
+    (width = 6 ∧
+        postDeletionCIntercept width epsilon < 2 - interceptMargin width) ∨
+      (7 ≤ width ∧
+        postDeletionCIntercept width epsilon <
+          14 * chamberQuotient width / 9 - interceptMargin width) := by
+  have monotone := postDeletionCIntercept_strictMono width_large epsilon_pos epsilon_upper
+  rcases sharpCapIntercept_upper width_large with left | right
+  · exact Or.inl ⟨left.1, monotone.trans left.2⟩
+  · exact Or.inr ⟨right.1, monotone.trans right.2⟩
+
+/-- Backward slope of a physical block after an arbitrary chamber carrier passes through
+singleton `D_c`. -/
+def postDeletionCPhysicalSlope (width : Nat) (epsilon : ℚ)
+    (body : List TagLetter) (block : List NearyTile) : ℚ :=
+  backwardBlock width
+    (swappedUpperCode width block)
+    (swappedLowerCode width body block)
+    (upperPower width block) (deletionCSuccessorSlope width epsilon)
+
+/-- Relative gap of the backward image of one physical role block. -/
+def physicalEntryEpsilon (width : Nat) (body : List TagLetter)
+    (block : List NearyTile) (current : ℚ) : ℚ :=
+  let image := backwardBlock width
+    (swappedUpperCode width block)
+    (swappedLowerCode width body block)
+    (upperPower width block) current
+  (image - 1) / image
+
+private theorem postDeletionCPhysicalSlope_eq_walk
+    {width : Nat} (width_large : 6 ≤ width) {epsilon : ℚ}
+    (epsilon_pos : 0 < epsilon)
+    (epsilon_upper : epsilon < 1 / (90 * widthScale width - 10))
+    (body : List TagLetter) (tile : NearyTile) (rest : List NearyTile) :
+    postDeletionCPhysicalSlope width epsilon body (tile :: rest) =
+      walkIntercept width (tile :: rest) (postDeletionCIntercept width epsilon) /
+        swappedLowerCode width body (tile :: rest) := by
+  have scale_large : (729 : ℚ) ≤ widthScale width := by
+    have power_bound : 3 ^ 6 ≤ 3 ^ width :=
+      Nat.pow_le_pow_right (by norm_num) width_large
+    norm_num [widthScale] at power_bound ⊢
+    exact_mod_cast power_bound
+  have sharp_denominator_pos : (0 : ℚ) < 90 * widthScale width - 10 := by
+    linarith
+  have epsilon_cross :
+      (90 * widthScale width - 10) * epsilon < 1 :=
+    by simpa only [mul_comm] using
+      (lt_div_iff₀ sharp_denominator_pos).mp epsilon_upper
+  have carrier_denominator_pos :
+      0 < 6 * setterMarker width +
+        (2 * chamberRadius width - 6 * setterMarker width) * epsilon := by
+    simp only [chamberRadius, setterMarker]
+    push_cast
+    nlinarith
+  have terminal_pos : (0 : ℚ) < terminalDiscrepancy width := by
+    simp only [terminalDiscrepancy]
+    push_cast
+    linarith
+  have radius_pos : (0 : ℚ) < chamberRadius width := by
+    simp only [chamberRadius]
+    push_cast
+    linarith
+  have carrier_pos : 0 < deletionCSuccessorSlope width epsilon := by
+    simp only [deletionCSuccessorSlope]
+    exact div_pos (mul_pos (mul_pos terminal_pos radius_pos) epsilon_pos)
+      carrier_denominator_pos
+  have boundary_denominator_pos :
+      0 < terminalDiscrepancy width +
+        chamberRadius width * deletionCSuccessorSlope width epsilon := by positivity
+  have coarse_denominator_pos : (0 : ℚ) < 80 * widthScale width := by positivity
+  have denominator_lt :
+      (80 : ℚ) * widthScale width < 90 * widthScale width - 10 := by
+    linarith
+  have reciprocal_lt :
+      (1 : ℚ) / (90 * widthScale width - 10) <
+        1 / (80 * widthScale width) := by
+    apply (div_lt_div_iff₀ sharp_denominator_pos coarse_denominator_pos).2
+    nlinarith
+  have intercept_eq := postDeletionCIntercept_eq_carrierBoundary
+    width_large epsilon_pos (epsilon_upper.trans reciprocal_lt)
+  apply backwardBlock_eq_walkIntercept
+    (physicalLowerCode_pos width body tile rest).ne'
+    boundary_denominator_pos.ne' intercept_eq
+
+/-- The only lower-length chamber not automatically dominated by the sharp post-`D_c`
+intercept ceiling. -/
+def postDeletionCShortLowerSurvivor (width : Nat) (body : List TagLetter)
+    (block : List NearyTile) : Prop :=
+  (swappedLowerCode width body block : ℚ) <
+    chamberQuotient width * interceptPower width block
+
+/-- The critical `R_b` lower-prefix chamber retained only at width six. -/
+def postDeletionCCriticalRuleSurvivor (width : Nat) (body : List TagLetter)
+    (block : List NearyTile) : Prop :=
+  let base : ℚ := chamberQuotient width * interceptPower width block
+  let lower : ℚ := swappedLowerCode width body block
+  14 * base ≤ 9 * lower ∧ 3 * lower < 5 * base
+
+/-- A `c`-leading successor after any physical contraction-chamber entry has negative backward
+slope. -/
+theorem cLeading_postDeletionCPhysicalSlope_negative
+    {width : Nat} (width_large : 6 ≤ width) {epsilon : ℚ}
+    (epsilon_pos : 0 < epsilon)
+    (epsilon_upper : epsilon < 1 / (90 * widthScale width - 10))
+    (body : List TagLetter) {tile : NearyTile}
+    (tile_c : tile.letter = .c) (rest : List NearyTile) :
+    postDeletionCPhysicalSlope width epsilon body (tile :: rest) < 0 := by
+  have intercept_upper :=
+    postDeletionCIntercept_upper_sharp width_large epsilon_pos epsilon_upper
+  have intercept_small :
+      postDeletionCIntercept width epsilon <
+        (chamberRadius width - 1) / 3 := by
+    rcases intercept_upper with ⟨width_eq, upper⟩ | ⟨width_seven, upper⟩
+    · subst width
+      norm_num [interceptMargin, chamberRadius, terminalDiscrepancy, widthScale] at upper ⊢
+      linarith
+    · have q_three := chamberQuotient_ge_three width_seven
+      have scale_eq : (widthScale width : ℚ) = 729 * chamberQuotient width := by
+        exact_mod_cast widthScale_eq_729_mul_chamberQuotient width_large
+      have margin_pos := interceptMargin_pos width_large
+      simp only [chamberRadius]
+      push_cast
+      rw [scale_eq]
+      nlinarith
+  have numerator_neg := cLeading_walkIntercept_negative
+    width_large intercept_small tile_c rest
+  rw [postDeletionCPhysicalSlope_eq_walk width_large epsilon_pos epsilon_upper]
+  exact div_neg_of_neg_of_pos numerator_neg
+    (physicalLowerCode_pos width body tile rest)
+
+/-- Apart from the short-lower chamber and one width-six critical prefix, every `b`-leading
+successor lies below one. -/
+theorem bLeading_postDeletionCPhysicalSlope_frontier
+    {width : Nat} (width_large : 6 ≤ width) {epsilon : ℚ}
+    (epsilon_pos : 0 < epsilon)
+    (epsilon_upper : epsilon < 1 / (90 * widthScale width - 10))
+    (body : List TagLetter) {tile : NearyTile}
+    (tile_b : tile.letter = .b) (rest : List NearyTile) :
+    (width = 6 ∧
+      (postDeletionCPhysicalSlope width epsilon body (tile :: rest) < 1 ∨
+        postDeletionCShortLowerSurvivor width body (tile :: rest) ∨
+        postDeletionCCriticalRuleSurvivor width body (tile :: rest))) ∨
+    (7 ≤ width ∧
+      (postDeletionCPhysicalSlope width epsilon body (tile :: rest) < 1 ∨
+        postDeletionCShortLowerSurvivor width body (tile :: rest))) := by
+  let intercept := postDeletionCIntercept width epsilon
+  let power := interceptPower width (tile :: rest)
+  let numerator := walkIntercept width (tile :: rest) intercept
+  let lower : ℚ := swappedLowerCode width body (tile :: rest)
+  let base : ℚ := chamberQuotient width * power
+  have power_pos : 0 < power := interceptPower_pos width (tile :: rest)
+  have lower_pos : 0 < lower := physicalLowerCode_pos width body tile rest
+  have lower_partition := bLeading_lowerCode_partition width body tile_b rest
+  have slope_eq :
+      postDeletionCPhysicalSlope width epsilon body (tile :: rest) =
+        numerator / lower := by
+    simpa only [intercept, numerator, lower] using
+      postDeletionCPhysicalSlope_eq_walk width_large epsilon_pos epsilon_upper
+        body tile rest
+  have intercept_upper :=
+    postDeletionCIntercept_upper_sharp width_large epsilon_pos epsilon_upper
+  rcases intercept_upper with ⟨width_eq, intercept_upper⟩ |
+      ⟨width_seven, intercept_upper⟩
+  · subst width
+    have numerator_upper : numerator < 2 * power :=
+      bLeading_walkIntercept_upper (by norm_num) (by
+        simpa only [intercept] using intercept_upper) tile_b rest
+    norm_num [chamberQuotient] at lower_partition
+    refine Or.inl ⟨rfl, ?_⟩
+    rcases lower_partition with short | long | criticalErase | criticalRule
+    · refine Or.inr (Or.inl ?_)
+      change lower < (chamberQuotient 6 : ℚ) * power
+      norm_num [chamberQuotient]
+      exact short
+    · exact Or.inl (by
+        rw [slope_eq]
+        apply (div_lt_iff₀ lower_pos).2
+        nlinarith)
+    · exact Or.inl (by
+        rw [slope_eq]
+        apply (div_lt_iff₀ lower_pos).2
+        nlinarith)
+    · refine Or.inr (Or.inr ?_)
+      change
+        14 * ((chamberQuotient 6 : ℚ) * power) ≤ 9 * lower ∧
+          3 * lower < 5 * ((chamberQuotient 6 : ℚ) * power)
+      norm_num [chamberQuotient]
+      exact criticalRule
+  · have numerator_upper :
+        numerator < 14 * chamberQuotient width / 9 * power :=
+      bLeading_walkIntercept_upper width_large (by
+        simpa only [intercept, interceptMargin] using intercept_upper) tile_b rest
+    have quotient_pos : (0 : ℚ) < chamberQuotient width := by
+      exact_mod_cast chamberQuotient_pos width
+    have base_pos : 0 < base := mul_pos quotient_pos power_pos
+    refine Or.inr ⟨width_seven, ?_⟩
+    rcases lower_partition with short | long | criticalErase | criticalRule
+    · exact Or.inr (by
+        simpa only [postDeletionCShortLowerSurvivor, base, power, lower] using short)
+    · exact Or.inl (by
+        rw [slope_eq]
+        apply (div_lt_iff₀ lower_pos).2
+        nlinarith)
+    · exact Or.inl (by
+        rw [slope_eq]
+        apply (div_lt_iff₀ lower_pos).2
+        nlinarith)
+    · exact Or.inl (by
+        rw [slope_eq]
+        apply (div_lt_iff₀ lower_pos).2
+        nlinarith [criticalRule.1])
+
 private theorem longLower_physicalBackwardBlock_below_one
     {width : Nat} (width_large : 6 ≤ width) {body : List TagLetter}
     (tile : NearyTile) (rest : List NearyTile) {current : ℚ}
@@ -741,8 +1100,8 @@ private theorem longLower_physicalBackwardBlock_below_one
     lower_pos upperPower_pos lower_long upper_bound
 
 /-- Every compiler-emitted physical block entering the singleton-`D_c` contraction chamber
-from above the terminal ray has a uniformly tiny relative gap. -/
-theorem physicalBackwardBlock_chamber_epsilon_lt
+from above the terminal ray has the sharp common-prefix relative-gap bound. -/
+theorem physicalBackwardBlock_chamber_epsilon_lt_sharp
     {width : Nat} (width_large : 6 ≤ width) {body : List TagLetter}
     (body_long : width - 1 ≤ body.length) (body_head : body.head? = some .b)
     (tile : NearyTile) (rest : List NearyTile) {current : ℚ}
@@ -765,7 +1124,7 @@ theorem physicalBackwardBlock_chamber_epsilon_lt
           (swappedUpperCode width (tile :: rest))
           (swappedLowerCode width body (tile :: rest))
           (upperPower width (tile :: rest)) current <
-      1 / (80 * widthScale width) := by
+      1 / (90 * widthScale width - 10) := by
   let block := tile :: rest
   let image := backwardBlock width
     (swappedUpperCode width block) (swappedLowerCode width body block)
@@ -853,31 +1212,41 @@ theorem physicalBackwardBlock_chamber_epsilon_lt
       have scale_pos_int : (0 : ℤ) < widthScale width := by simp [widthScale]
       have scale_pos : (0 : ℚ) < widthScale width := by exact_mod_cast scale_pos_int
       have code_gap_rat :
-          80 * (widthScale width : ℚ) *
+          (90 * (widthScale width : ℚ) - 10) *
               ((ternaryCode upper : ℚ) - ternaryCode lower) <
             ternaryCode lower := by
         have code_gap_int :
-            (80 : ℤ) * 3 ^ width *
+            ((90 * 3 ^ width - 10 : Nat) : ℤ) *
                 ((ternaryCode upper - ternaryCode lower : Nat) : ℤ) <
               ternaryCode lower := by exact_mod_cast code_gap
+        have coefficient_cast :
+            ((90 * 3 ^ width - 10 : Nat) : ℤ) =
+              90 * (3 : ℤ) ^ width - 10 := by
+          have scale_pos_nat : 0 < 3 ^ width := pow_pos (by omega) width
+          rw [Nat.cast_sub (show 10 ≤ 90 * 3 ^ width by omega)]
+          norm_num
         have sub_cast :
             ((ternaryCode upper - ternaryCode lower : Nat) : ℤ) =
               (ternaryCode upper : ℤ) - ternaryCode lower := by
           rw [Nat.cast_sub code_gt.le]
-        rw [sub_cast] at code_gap_int
+        rw [coefficient_cast, sub_cast] at code_gap_int
         have cast_gap :
-            (80 : ℚ) * ((3 ^ width : Nat) : ℚ) *
+            (90 * ((3 ^ width : Nat) : ℚ) - 10) *
                 ((ternaryCode upper : ℚ) - ternaryCode lower) <
               ternaryCode lower := by exact_mod_cast code_gap_int
         change
-          (80 : ℚ) * ((3 ^ width : Nat) : ℚ) *
+          (90 * ((3 ^ width : Nat) : ℚ) - 10) *
               ((ternaryCode upper : ℚ) - ternaryCode lower) <
             ternaryCode lower
         exact cast_gap
       have code_ratio_gap :
           (ternaryCode upper : ℚ) / ternaryCode lower - 1 <
-            1 / (80 * widthScale width) := by
-        have denominator_pos : (0 : ℚ) < 80 * widthScale width := by positivity
+            1 / (90 * widthScale width - 10) := by
+        have denominator_pos : (0 : ℚ) < 90 * widthScale width - 10 := by
+          have scale_pos_int' : (0 : ℤ) < widthScale width := by simp [widthScale]
+          have scale_one_int : (1 : ℤ) ≤ widthScale width := by omega
+          have scale_one : (1 : ℚ) ≤ widthScale width := by exact_mod_cast scale_one_int
+          nlinarith
         rw [show (ternaryCode upper : ℚ) / ternaryCode lower - 1 =
           ((ternaryCode upper : ℚ) - ternaryCode lower) /
             ternaryCode lower by field_simp [lower_pos.ne']]
@@ -891,8 +1260,112 @@ theorem physicalBackwardBlock_chamber_epsilon_lt
       have epsilon_lt_gap : (image - 1) / image < image - 1 := by
         rw [div_lt_iff₀ image_pos]
         nlinarith [image_chamber.1]
-      change (image - 1) / image < 1 / (80 * widthScale width)
+      change (image - 1) / image < 1 / (90 * widthScale width - 10)
       linarith
+
+/-- Every physical chamber entry has relative gap below `1/(80ρ)`. -/
+theorem physicalBackwardBlock_chamber_epsilon_lt
+    {width : Nat} (width_large : 6 ≤ width) {body : List TagLetter}
+    (body_long : width - 1 ≤ body.length) (body_head : body.head? = some .b)
+    (tile : NearyTile) (rest : List NearyTile) {current : ℚ}
+    (current_above : (terminalDiscrepancy width : ℚ) < current)
+    (chamber :
+      1 < backwardBlock width
+          (swappedUpperCode width (tile :: rest))
+          (swappedLowerCode width body (tile :: rest))
+          (upperPower width (tile :: rest)) current ∧
+        backwardBlock width
+          (swappedUpperCode width (tile :: rest))
+          (swappedLowerCode width body (tile :: rest))
+          (upperPower width (tile :: rest)) current <
+          (chamberRadius width : ℚ) / (chamberRadius width - 3)) :
+    (backwardBlock width
+          (swappedUpperCode width (tile :: rest))
+          (swappedLowerCode width body (tile :: rest))
+          (upperPower width (tile :: rest)) current - 1) /
+        backwardBlock width
+          (swappedUpperCode width (tile :: rest))
+          (swappedLowerCode width body (tile :: rest))
+          (upperPower width (tile :: rest)) current <
+      1 / (80 * widthScale width) := by
+  have sharp := physicalBackwardBlock_chamber_epsilon_lt_sharp
+    width_large body_long body_head tile rest current_above chamber
+  have scale_large : (729 : ℚ) ≤ widthScale width := by
+    have power_bound : 3 ^ 6 ≤ 3 ^ width :=
+      Nat.pow_le_pow_right (by norm_num) width_large
+    norm_num [widthScale] at power_bound ⊢
+    exact_mod_cast power_bound
+  have sharp_denominator_pos : (0 : ℚ) < 90 * widthScale width - 10 := by
+    linarith
+  have coarse_denominator_pos : (0 : ℚ) < 80 * widthScale width := by positivity
+  have denominator_lt :
+      (80 : ℚ) * widthScale width < 90 * widthScale width - 10 := by
+    linarith
+  have reciprocal_lt :
+      (1 : ℚ) / (90 * widthScale width - 10) <
+        1 / (80 * widthScale width) := by
+    apply (div_lt_div_iff₀ sharp_denominator_pos coarse_denominator_pos).2
+    nlinarith
+  exact sharp.trans reciprocal_lt
+
+/-- Every physical chamber entrant reaches the affine ceiling required by the next-block
+automaton after singleton `D_c`. -/
+theorem physicalBackwardBlock_postDeletionCIntercept_upper
+    {width : Nat} (width_large : 6 ≤ width) {body : List TagLetter}
+    (body_long : width - 1 ≤ body.length) (body_head : body.head? = some .b)
+    (tile : NearyTile) (rest : List NearyTile) {current : ℚ}
+    (current_above : (terminalDiscrepancy width : ℚ) < current)
+    (chamber :
+      1 < backwardBlock width
+          (swappedUpperCode width (tile :: rest))
+          (swappedLowerCode width body (tile :: rest))
+          (upperPower width (tile :: rest)) current ∧
+        backwardBlock width
+          (swappedUpperCode width (tile :: rest))
+          (swappedLowerCode width body (tile :: rest))
+          (upperPower width (tile :: rest)) current <
+          (chamberRadius width : ℚ) / (chamberRadius width - 3)) :
+    (width = 6 ∧
+        postDeletionCIntercept width
+            ((backwardBlock width
+                (swappedUpperCode width (tile :: rest))
+                (swappedLowerCode width body (tile :: rest))
+                (upperPower width (tile :: rest)) current - 1) /
+              backwardBlock width
+                (swappedUpperCode width (tile :: rest))
+                (swappedLowerCode width body (tile :: rest))
+                (upperPower width (tile :: rest)) current) <
+          2 - interceptMargin width) ∨
+      (7 ≤ width ∧
+        postDeletionCIntercept width
+            ((backwardBlock width
+                (swappedUpperCode width (tile :: rest))
+                (swappedLowerCode width body (tile :: rest))
+                (upperPower width (tile :: rest)) current - 1) /
+              backwardBlock width
+                (swappedUpperCode width (tile :: rest))
+                (swappedLowerCode width body (tile :: rest))
+                (upperPower width (tile :: rest)) current) <
+          14 * chamberQuotient width / 9 - interceptMargin width) := by
+  let image := backwardBlock width
+    (swappedUpperCode width (tile :: rest))
+    (swappedLowerCode width body (tile :: rest))
+    (upperPower width (tile :: rest)) current
+  have image_pos : 0 < image := by
+    change 0 < backwardBlock width
+      (swappedUpperCode width (tile :: rest))
+      (swappedLowerCode width body (tile :: rest))
+      (upperPower width (tile :: rest)) current
+    linarith [chamber.1]
+  have epsilon_pos : 0 < (image - 1) / image := by
+    exact div_pos (sub_pos.mpr (by simpa only [image] using chamber.1)) image_pos
+  have epsilon_upper :
+      (image - 1) / image < 1 / (90 * widthScale width - 10) := by
+    simpa only [image] using
+      physicalBackwardBlock_chamber_epsilon_lt_sharp width_large body_long body_head
+        tile rest current_above chamber
+  simpa only [image] using
+    postDeletionCIntercept_upper_sharp width_large epsilon_pos epsilon_upper
 
 /-- A physical chamber entry leaves a positive post-`D_c` boundary intercept below
 `8·3^(width-6)/5`. -/
@@ -949,5 +1422,66 @@ theorem physicalBackwardBlock_postDeletionCIntercept_bound
         tile rest current_above chamber
   simpa only [image] using
     postDeletionCIntercept_pos_lt_eight_fifths width_large epsilon_pos epsilon_upper
+
+/-- After any physical contraction-chamber entry and its singleton `D_c`, every further physical
+block lies below one except for the short-lower chamber and the width-six critical prefix. -/
+theorem physicalBackwardBlock_postDeletionC_successor_frontier
+    {width : Nat} (width_large : 6 ≤ width) {body : List TagLetter}
+    (body_long : width - 1 ≤ body.length) (body_head : body.head? = some .b)
+    (tile : NearyTile) (rest : List NearyTile) {current : ℚ}
+    (current_above : (terminalDiscrepancy width : ℚ) < current)
+    (chamber :
+      1 < backwardBlock width
+          (swappedUpperCode width (tile :: rest))
+          (swappedLowerCode width body (tile :: rest))
+          (upperPower width (tile :: rest)) current ∧
+        backwardBlock width
+          (swappedUpperCode width (tile :: rest))
+          (swappedLowerCode width body (tile :: rest))
+          (upperPower width (tile :: rest)) current <
+          (chamberRadius width : ℚ) / (chamberRadius width - 3))
+    (nextBody : List TagLetter) (nextTile : NearyTile)
+    (nextRest : List NearyTile) :
+    postDeletionCPhysicalSlope width
+          (physicalEntryEpsilon width body (tile :: rest) current)
+          nextBody (nextTile :: nextRest) < 1 ∨
+      postDeletionCShortLowerSurvivor width nextBody (nextTile :: nextRest) ∨
+      (width = 6 ∧
+        postDeletionCCriticalRuleSurvivor width nextBody (nextTile :: nextRest)) := by
+  let epsilon := physicalEntryEpsilon width body (tile :: rest) current
+  let image := backwardBlock width
+    (swappedUpperCode width (tile :: rest))
+    (swappedLowerCode width body (tile :: rest))
+    (upperPower width (tile :: rest)) current
+  have image_pos : 0 < image := by
+    change 0 < backwardBlock width
+      (swappedUpperCode width (tile :: rest))
+      (swappedLowerCode width body (tile :: rest))
+      (upperPower width (tile :: rest)) current
+    linarith [chamber.1]
+  have epsilon_pos : 0 < epsilon := by
+    change 0 < (image - 1) / image
+    exact div_pos (sub_pos.mpr (by simpa only [image] using chamber.1)) image_pos
+  have epsilon_upper :
+      epsilon < 1 / (90 * widthScale width - 10) := by
+    simpa only [epsilon, physicalEntryEpsilon, image] using
+      physicalBackwardBlock_chamber_epsilon_lt_sharp width_large body_long body_head
+        tile rest current_above chamber
+  cases next_letter : nextTile.letter with
+  | c =>
+      left
+      have negative := cLeading_postDeletionCPhysicalSlope_negative
+        width_large epsilon_pos epsilon_upper nextBody next_letter nextRest
+      simpa only [epsilon] using negative.trans (by norm_num : (0 : ℚ) < 1)
+  | b =>
+      have frontier := bLeading_postDeletionCPhysicalSlope_frontier
+        width_large epsilon_pos epsilon_upper nextBody next_letter nextRest
+      rcases frontier with ⟨width_eq, below | short | critical⟩ |
+          ⟨-, below | short⟩
+      · exact Or.inl (by simpa only [epsilon] using below)
+      · exact Or.inr (Or.inl short)
+      · exact Or.inr (Or.inr ⟨width_eq, critical⟩)
+      · exact Or.inl (by simpa only [epsilon] using below)
+      · exact Or.inr (Or.inl short)
 
 end MatrixMortality.SwappedSetterUniversalEntryGap

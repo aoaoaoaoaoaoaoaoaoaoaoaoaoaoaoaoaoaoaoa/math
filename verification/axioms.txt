@@ -1832,6 +1832,9 @@
 'MatrixMortality.SwappedSetterEmptyFrontChamber.emptyFrontSeedHeadGapCore_pos' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.SwappedSetterPostRcDbChamber.physicalLowerCode_pos' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.SwappedSetterPostRcDbChamber.emptyFrontSeed_gt_eight_widthScale_sq' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
@@ -1892,6 +1895,9 @@
 'MatrixMortality.SwappedSetterPostRcDbChamber.bLeading_postRcDbPhysicalSlope_classification' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.SwappedSetterPostRcDbChamber.bLeading_lowerCode_partition' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.SwappedSetterPostRcDbChamber.postRcDbPhysicalSlope_avoids_deletionCChamber' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
@@ -1904,10 +1910,28 @@
 'MatrixMortality.SwappedSetterUniversalEntryGap.postDeletionCIntercept_pos_lt_eight_fifths' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.SwappedSetterUniversalEntryGap.postDeletionCIntercept_upper_sharp' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SwappedSetterUniversalEntryGap.cLeading_postDeletionCPhysicalSlope_negative' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SwappedSetterUniversalEntryGap.bLeading_postDeletionCPhysicalSlope_frontier' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SwappedSetterUniversalEntryGap.physicalBackwardBlock_chamber_epsilon_lt_sharp' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.SwappedSetterUniversalEntryGap.physicalBackwardBlock_chamber_epsilon_lt' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.SwappedSetterUniversalEntryGap.physicalBackwardBlock_postDeletionCIntercept_upper' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.SwappedSetterUniversalEntryGap.physicalBackwardBlock_postDeletionCIntercept_bound' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SwappedSetterUniversalEntryGap.physicalBackwardBlock_postDeletionC_successor_frontier' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
 'MatrixMortality.SwappedSetterPrimitivePullback.inverseFraction_eq_rawRatio' depends on axioms: [propext,

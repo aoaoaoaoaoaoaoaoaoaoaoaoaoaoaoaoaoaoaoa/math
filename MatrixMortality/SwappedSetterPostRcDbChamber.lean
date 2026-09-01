@@ -18,7 +18,8 @@ open SwappedSetterMultitransfer SwappedSetterThresholdCarry
 
 /-! ## Physical spelling chambers -/
 
-private theorem physicalLowerCode_pos
+/-- Every nonempty physical lower spelling has positive swapped ternary code. -/
+theorem physicalLowerCode_pos
     (width : Nat) (body : List TagLetter) (tile : NearyTile)
     (rest : List NearyTile) :
     (0 : ℚ) < swappedLowerCode width body (tile :: rest) := by
@@ -202,7 +203,9 @@ private theorem ruleBCritical_lowerCode
     rw [lower_code_eq]
     nlinarith [base_power_eq]
 
-private theorem bLeading_lowerCode_partition
+/-- A `b`-leading lower spelling lies in one of the four quotient-scaled length and prefix
+chambers. -/
+theorem bLeading_lowerCode_partition
     (width : Nat) (body : List TagLetter) {tile : NearyTile}
     (tile_b : tile.letter = .b) (rest : List NearyTile) :
     let lower : ℚ := swappedLowerCode width body (tile :: rest)

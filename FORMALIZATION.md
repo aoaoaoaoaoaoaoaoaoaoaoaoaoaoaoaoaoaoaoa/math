@@ -1444,6 +1444,7 @@ The setter-projective audit now also exposes a kernel-friendly carry theorem:
 | [`MM-S92`](SALVAGE.md#mm-s92-primitive-empty-front-seed-adapter) | exact positive primitive coordinates for every physical empty-front seed, target-code control of its half-head content, and instantiated raw and post-cancellation pullback criteria |
 | [`MM-O30`](SALVAGE.md#mm-o30-primitive-normalization-collapse) | exact width-six local witness in which canonical `(R_c,D_b)` normalization and the following full-channel `D_c` step both contract Farey height |
 | [`MM-S93`](SALVAGE.md#mm-s93-universal-contraction-chamber-entry-gap) | equal-spelling chamber-entry classification, uniform relative-gap bound below `1/(80ρ)`, exact post-`D_c` boundary identity, and quotient-scaled intercept ceiling |
+| [`MM-S99`](SALVAGE.md#mm-s99-sharp-post-contraction-successor-frontier) | exact `45ρ−5` common prefix, sharp `1/(90ρ−10)` gap, affine successor ceiling, and reduction to the short-lower and width-six critical prefix chambers |
 
 These records narrow the missing arbitrary-depth theorem but do not prove
 projective avoidance. Their reconstruction is
@@ -1871,6 +1872,14 @@ length at least `β−1` beginning in `b`, every nonempty physical block pulling
 `0<Ξ<8·3^(β−6)/5`. This is a local entry theorem, not reachability, a primitive-channel
 classification, post-contraction no-reentry, or a pole. The remaining successor cut needs a
 quotient-scale lower bound from `MM-S86` normalization or `MM-S92` target ancestry.
+
+Record [`MM-S99`](SALVAGE.md#mm-s99-sharp-post-contraction-successor-frontier) replaces that
+lower-bound route. The common swapped prefix has exact code `45ρ−5`, strengthening the physical
+entry bound to `(x−1)/x<1/(90ρ−10)`. Its post-`D_c` intercept lies below the precise affine
+ceiling used by the `MM-S88` automaton. Lean composes one arbitrary further physical block: every
+`c`-leading successor is negative, and every `b`-leading successor is below one except when its
+lower spelling is shorter than `Q` times its upper scale. Width six retains one additional
+critical rule-`b` prefix. No primitive-channel, reachability, or pole conclusion is asserted.
 
 Record [`MM-S21`](SALVAGE.md#mm-s21-bounded-decimal-suffix-cycles) closes the fixed-precision
 suffix-descent lane. `DecimalSetterSuffix.cycleDefect_lift` gives an explicit one-digit lift for
@@ -2438,7 +2447,7 @@ fixed-rank decision problem.
 | `SwappedSetterPrimitivePullback.lean` | exact raw inverse-block coordinates and preservation criterion for half-head divisibility through primitive cancellation |
 | `SwappedSetterPrimitiveSeedAdapter.lean` | positive primitive empty-front seed coordinates and target-code control of their half-head content |
 | `SwappedSetterNormalizationCollapse.lean` | exact abstract width-six witness refuting one- and two-step Farey expansion under local hypotheses alone |
-| `SwappedSetterUniversalEntryGap.lean` | uniform physical contraction-chamber gap and quotient-scaled post-`D_c` intercept envelope |
+| `SwappedSetterUniversalEntryGap.lean` | uniform physical contraction-chamber gap, exact affine post-`D_c` ceiling, and short-lower successor frontier |
 | `PairedMortality.lean` | common-column mortality converse and exact integer `4 × 4` family |
 | `PhaseFracture.lean` | phase normalization and dimension-free projective-identification contradiction |
 | `PhaseRigidity.lean` | checked local role algebra, discrepancy commutators, and invariant-pencil rigidity |

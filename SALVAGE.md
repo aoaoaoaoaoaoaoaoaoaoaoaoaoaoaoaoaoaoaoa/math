@@ -154,6 +154,7 @@ file owns the mathematical stock.
 | [`MM-S92`](#mm-s92-primitive-empty-front-seed-adapter) | structure theorem and obstruction | physical empty-front seeds have exact primitive positive coordinates whose half-head content is supported on one target-code gcd | formalized | active |
 | [`MM-O30`](#mm-o30-primitive-normalization-collapse) | obstruction | an abstract canonical width-six local carrier contracts Farey height on both adjacent inverse steps and across their complete window | formalized | active |
 | [`MM-S93`](#mm-s93-universal-contraction-chamber-entry-gap) | structure theorem and obstruction | every compiler-emitted physical block entering the deletion-contraction chamber from above the terminal ray has relative gap below `1/(80ρ)` and a uniformly bounded post-`D_c` intercept | formalized | active |
+| [`MM-S99`](#mm-s99-sharp-post-contraction-successor-frontier) | structure theorem and obstruction | the exact common-prefix gap and affine ceiling reduce every post-contraction successor to the short-lower spelling chamber or one width-six critical prefix | formalized | active |
 | [`R32-S01`](#r32-s01-split-return-normal-form) | structure theorem | rank-two cuts reduce one-unit binary mortality to a `2 × 2` return recurrence | formalized | graduated |
 | [`R32-S02`](#r32-s02-two-plane-edge-square) | structure theorem | two rank-two generators are a two-vertex square of `2 × 2` edges | formalized | graduated |
 | [`R32-O01`](#r32-o01-rank-one-profile-collapse) | obstruction | a rank-one generator reduces mortality to order-at-most-three scalar recurrence zeros | audited | stock |
@@ -6226,10 +6227,74 @@ through `postDeletionCIntercept_eq_carrierBoundary`,
 **Artifact:**
 [`audits/m53-universal-entry-gap-2026-09-01.md`](audits/m53-universal-entry-gap-2026-09-01.md).
 
-**Next:** intersect the universal upper window with the `MM-S86` primitive `3H` channel and the
-`MM-S92` target modulus. Either derive a positive quotient-scale lower bound for `Ξ`, sufficient
-for the `MM-S88` next-block automaton, or exhibit the exact physical small-intercept family that
-survives it.
+**Next:** apply `MM-S99`, which sharpens the common-prefix constant and consumes the affine
+successor automaton. The remaining lower-spelling chambers require arithmetic rather than a
+blanket lower intercept estimate.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S99: Sharp post-contraction successor frontier
+
+**Kind:** structure theorem and obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+The equal-length physical entrant isolated by `MM-S93` has rule `c` followed by a `b`-letter
+tile. Its exact common swapped prefix has code `45ρ−5`, so the ternary suffix-spread estimate
+sharpens the relative gap to
+
+```text
+ε=(x−1)/x < 1/(90ρ−10).                           (1)
+```
+
+The post-`D_c` intercept is strictly increasing in positive `ε`. Substitution of the endpoint
+in (1) yields precisely the affine ceilings required by the `MM-S88` next-block automaton:
+
+```text
+β=6:  Ξ < 2−H/(9ρ−1),
+β≥7:  Ξ < 14Q/9−H/(9ρ−1),     Q=3^(β−6).       (2)
+```
+
+Lean then classifies an arbitrary further physical block. Every `c`-leading successor has
+negative slope. For `β≥7`, every `b`-leading successor lies below one unless
+
+```text
+V < Q A,                                             (3)
+```
+
+where `V` is its lower code and `A` its upper spelling power. At `β=6`, the only additional
+survivor is the critical rule-`b` prefix chamber
+
+```text
+14A ≤ 9V  and  3V < 5A.                           (4)
+```
+
+The composed theorem begins with any physical `MM-S93` chamber entrant, passes through singleton
+`D_c`, and returns exactly the survivors (3) and (4); it has no canonical-block hypothesis.
+
+**Scope:** this is a local two-transition frontier. It assumes the first carrier lies above `H`
+and enters the slope chamber, but not the primitive `3H` normalization channel. It proves no
+encoded-entry reachability, existence of a chamber entry, pole, or global no-reentry theorem.
+
+**Use:** delete all post-contraction successor words except the short-lower spelling chamber and
+the width-six critical prefix. A universal `MM-S88`-strength lower bound for `Ξ` is false; the
+survivors must be cut by `MM-S86` normalization, `MM-S92` target support, or earlier-pole
+ancestry.
+
+**Formalization:**
+[`MatrixMortality/SwappedSetterUniversalEntryGap.lean`](MatrixMortality/SwappedSetterUniversalEntryGap.lean),
+through `physicalBackwardBlock_chamber_epsilon_lt_sharp`,
+`postDeletionCIntercept_upper_sharp`,
+`cLeading_postDeletionCPhysicalSlope_negative`,
+`bLeading_postDeletionCPhysicalSlope_frontier`, and
+`physicalBackwardBlock_postDeletionC_successor_frontier`.
+
+**Artifact:**
+[`audits/m53-sharp-successor-frontier-2026-09-01.md`](audits/m53-sharp-successor-frontier-2026-09-01.md).
+
+**Next:** intersect (3) and (4) with the exact primitive `3H` channel. The short-lower branch is
+the sole uniform-width successor node; (4) is a finite-width arithmetic residue problem.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
