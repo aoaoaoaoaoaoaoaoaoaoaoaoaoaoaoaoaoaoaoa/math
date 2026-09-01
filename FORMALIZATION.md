@@ -1777,6 +1777,7 @@ The setter-projective audit now also exposes a kernel-friendly carry theorem:
 | [`MM-S59`](SALVAGE.md#mm-s59-multiplicative-threshold-suffix-carry) | multiplicative target cross-product, exact balanced suffix carry, finite fixed-carrier window, Neary erasure/rule contractions, and the erasure-tail carrier-gap cut |
 | [`MM-S61`](SALVAGE.md#mm-s61-primitive-carrier-gap-no-go) | exact integral carrier recurrence and gap factor, primitive one- and two-`D_c` distinguished carriers, and counterexamples to bare height and modulus invariants |
 | [`MM-S63`](SALVAGE.md#mm-s63-full-tail-last-step-resonance) | primitive congruence units, automatic predecessor unit depth, exact last-block normalization balance, and the full-erasure-tail pole adapter |
+| [`MM-S64`](SALVAGE.md#mm-s64-unique-predecessor-cylinder) | exact predecessor-cylinder congruence at a full-erasure-tail pole, literal-`D_c` numerator divisibility, and a sharp distinguished-spine witness |
 
 `MM-S08` is now discharged in
 [`SwappedSetterSingletonShell.lean`](MatrixMortality/SwappedSetterSingletonShell.lean).
@@ -2179,6 +2180,20 @@ obstruction have depths `a` and `g+1`. The target suffix gives a nonzero output 
 least `β`. Unequal summand depths would survive below the required total depth, so the last step
 must satisfy `a=g+1`. This converts the failed carrier-only bound into one exact target-coupled
 normalization resonance; excluding that resonance remains open.
+
+Record [`MM-S64`](SALVAGE.md#mm-s64-unique-predecessor-cylinder) converts the resonance into a
+high-precision constraint on the preceding primitive carrier. With
+`E=P_zd−V_zn`, `a=upperLength(z)`, and raw successor scale `s`, a nonterminal pole whose target
+ends in `β` erasure tiles forces
+
+```text
+v₃(s)=a−1,      3^(a+β−2) ∣ E−3^(a−1)Hd.
+```
+
+For literal final `D_c`, this reduces to `3^(β−1)∣n`. Lean also proves that the distinguished
+one-`D_c` carrier realizes this numerator divisibility, so the result selects a backward
+cylinder but does not empty it. A generic physical role block has only one final erasure tile;
+the full-tail hypothesis is not a hidden global earliest-pole reduction.
 
 Record [`MM-S21`](SALVAGE.md#mm-s21-bounded-decimal-suffix-cycles) closes the fixed-precision
 suffix-descent lane. `DecimalSetterSuffix.cycleDefect_lift` gives an explicit one-digit lift for
@@ -2944,6 +2959,7 @@ fixed-rank decision problem.
 | `DecimalSetterPositionTwo.lean` | two-adic companion divisibility and all-`c` position-two rightmost-rule extinction |
 | `SwappedSetterCarrierResonance.lean` | target-coupled primitive normalization, deep-gap last-step resonance, and the full-erasure-tail pole adapter |
 | `DecimalSetterAllCRule.lean` | normalized later-frontier collisions and complete all-`c` rightmost-rule extinction |
+| `SwappedSetterPredecessorCylinder.lean` | unique high-precision predecessor cylinder at a nonterminal full-tail pole, literal-deletion numerator consequence, and sharpness on the distinguished deletion spine |
 | `PairedMortality.lean` | common-column mortality converse and exact integer `4 × 4` family |
 | `PhaseFracture.lean` | phase normalization and dimension-free projective-identification contradiction |
 | `PhaseRigidity.lean` | checked local role algebra, discrepancy commutators, and invariant-pencil rigidity |

@@ -161,6 +161,7 @@ file owns the mathematical stock.
 | [`MM-S62`](#mm-s62-all-c-position-two-rule-extinction) | obstruction | no all-`c` rightmost-rule block with exactly one preceding role reaches the physical pole shell from a lawful two-`c` raw head | formalized | active |
 | [`MM-S63`](#mm-s63-full-tail-last-step-resonance) | structure theorem and obstruction | every nonterminal full-erasure-tail pole forces the final history block's upper length to equal one plus its discarded normalization depth | formalized | active |
 | [`MM-S65`](#mm-s65-complete-all-c-rule-entry-extinction) | obstruction | every all-`c` rightmost-rule block misses the physical multi-role pole shell from a lawful two-`c` raw head | formalized | active |
+| [`MM-S64`](#mm-s64-unique-predecessor-cylinder) | structure theorem and obstruction | a nonterminal full-erasure-tail pole selects one exact high-precision cylinder for its primitive predecessor; a final literal `D_c` forces `3^(β−1)` into the predecessor numerator | formalized | active |
 | [`R32-S01`](#r32-s01-split-return-normal-form) | structure theorem | rank-two cuts reduce one-unit binary mortality to a `2 × 2` return recurrence | formalized | graduated |
 | [`R32-S02`](#r32-s02-two-plane-edge-square) | structure theorem | two rank-two generators are a two-vertex square of `2 × 2` edges | formalized | graduated |
 | [`R32-O01`](#r32-o01-rank-one-profile-collapse) | obstruction | a rank-one generator reduces mortality to order-at-most-three scalar recurrence zeros | audited | stock |
@@ -5485,6 +5486,69 @@ through `primitiveCongruent_denominator_isUnit`,
 
 **Next:** bound the common normalization depth in (1) from primitive predecessor arithmetic, or
 feed the forced value `g=a−1` into the exact suffix carry and exclude its first mismatch.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S64: Unique predecessor cylinder
+
+**Kind:** structure theorem and obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+Continue with the primitive transition and notation of `MM-S63`. Let
+
+```text
+E=P_zd−V_zn,      a=upperLength(z),      g=v₃(s).
+```
+
+A nonterminal target with a full `β`-erasure tail gives `3^β∣d'−n'`, while the exact last-step
+resonance gives `a=g+1`. Multiplying the target divisibility by `3^g∣s` and using the raw gap
+identity
+
+```text
+s(d'−n')=μ(H·3^a d−3E)
+```
+
+allows cancellation of the `3`-adic unit `μ` and one explicit factor of three. The predecessor
+must therefore lie in the single cylinder
+
+```text
+3^(a+β−2) ∣ E−3^(a−1)Hd.                              (1)
+```
+
+For a literal final `D_c`, `a=1`, `P_z=H`, and `V_z=2`; (1) becomes
+
+```text
+3^(β−1) ∣ n.                                           (2)
+```
+
+The physical adapter derives (1) directly from the target pole and erasure-tail spelling. The
+consequence (2) is sharp rather than contradictory: the primitive carrier after the first
+distinguished `D_c` already has its numerator divisible by the complete preceding width power.
+
+**Scope:** `β≥2`, primitive predecessor and successor, an exact nonzero integer normalization of
+one physical role-block transition, and a nonterminal pole against a target ending in `β`
+erasure tiles. The theorem does not apply to a generic role block, which is known only to end in
+one erasure tile. It neither excludes the cylinder nor proves setter projective avoidance.
+
+**Use:** replace valuation-shell refinement by backward cylinder ancestry. Any full-tail
+counterexample must pull (1) through the preceding physical block. For literal `D_c`, track the
+high numerator valuation backward; do not seek a contradiction from (2) alone.
+
+**Formalization:**
+[`MatrixMortality/SwappedSetterPredecessorCylinder.lean`](MatrixMortality/SwappedSetterPredecessorCylinder.lean),
+through `primitiveDivisibleSuccessor_predecessorCylinder`,
+`erasureTailPole_forces_predecessorCylinder`,
+`literalDeletionC_erasureTailPole_forces_numeratorDivisible`, and
+`widthScale_dvd_distinguishedDeletionCNumerator`.
+
+**Artifact:**
+[`audits/m53-unique-predecessor-cylinder-2026-08-31.md`](audits/m53-unique-predecessor-cylinder-2026-08-31.md).
+
+**Next:** invert (1) through the exact physical block recurrence and prove a first-mismatch
+theorem for its swapped Neary suffix. Independently, a global setter proof still needs an
+arbitrary-target suffix theorem: `HasErasureTail β target` is not automatic.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
