@@ -162,6 +162,7 @@ file owns the mathematical stock.
 | [`MM-S63`](#mm-s63-full-tail-last-step-resonance) | structure theorem and obstruction | every nonterminal full-erasure-tail pole forces the final history block's upper length to equal one plus its discarded normalization depth | formalized | active |
 | [`MM-S65`](#mm-s65-complete-all-c-rule-entry-extinction) | obstruction | every all-`c` rightmost-rule block misses the physical multi-role pole shell from a lawful two-`c` raw head | formalized | active |
 | [`MM-S64`](#mm-s64-unique-predecessor-cylinder) | structure theorem and obstruction | a nonterminal full-erasure-tail pole selects one exact high-precision cylinder for its primitive predecessor; a final literal `D_c` forces `3^(β−1)` into the predecessor numerator | formalized | active |
+| [`MM-S68`](#mm-s68-backward-numerator-resonance) | structure theorem and obstruction | a deep successor numerator forces full upper-length cancellation and a predecessor cylinder; across literal `D_c` it toggles exactly into the full carrier-gap congruence | formalized | active |
 | [`R32-S01`](#r32-s01-split-return-normal-form) | structure theorem | rank-two cuts reduce one-unit binary mortality to a `2 × 2` return recurrence | formalized | graduated |
 | [`R32-S02`](#r32-s02-two-plane-edge-square) | structure theorem | two rank-two generators are a two-vertex square of `2 × 2` edges | formalized | graduated |
 | [`R32-O01`](#r32-o01-rank-one-profile-collapse) | obstruction | a rank-one generator reduces mortality to order-at-most-three scalar recurrence zeros | audited | stock |
@@ -5549,6 +5550,79 @@ through `primitiveDivisibleSuccessor_predecessorCylinder`,
 **Next:** invert (1) through the exact physical block recurrence and prove a first-mismatch
 theorem for its swapped Neary suffix. Independently, a global setter proof still needs an
 arbitrary-target suffix theorem: `HasErasureTail β target` is not automatic.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S68: Backward numerator resonance
+
+**Kind:** structure theorem and obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+Let primitive `(m,e)` cross a physical block `w` to primitive `(n,d)`, with unreduced output
+`t(n,d)`. Suppose `n≠0` and
+
+```text
+3^(β−1) ∣ n.                                           (1)
+```
+
+Primitivity first makes `d` a `3`-adic unit. The preceding denominator `e` is also a unit: if
+`3∣e`, then `m`, the residual `P_we−V_wm`, the raw numerator, and `t` are units, contradicting
+(1). Put `a=upperLength(w)` and `g=v₃(t)`. The denominator normalization gives
+`v₃(P_we−V_wm)=g`, while the numerator equation is
+
+```text
+t n=H((P_we−V_wm)−μ3^a e).                             (2)
+```
+
+The left side of (2) has depth at least `g+β−1`. Since `H`, `μ`, and `e` are units, unequal
+depths on the right would survive below that bound. Hence
+
+```text
+g=a,
+3^(a+β−1) ∣ (P_we−V_wm)−μ3^a e.                       (3)
+```
+
+For literal `w=D_c`, (3) simplifies without loss to
+
+```text
+3^β ∣ e−m.                                             (4)
+```
+
+The zero fork excluded from (1) is not deferred: a represented carrier `(0,d)`, `d≠0`, is the
+ordinary ray. Literal `D_c` sends it to the distinguished ratio, so every following physical
+pole has equal target codes and is a genuine Neary terminal match.
+
+Composing this result with `MM-S64` gives a consuming two-block theorem. A nonterminal
+full-erasure-tail pole after two final literal `D_c` blocks either already proves
+`TagHaltsFrom`, or the carrier before the pair satisfies (4). Thus backward traversal through
+literal deletions toggles between the deep-numerator and full-gap cylinders.
+
+**Scope:** `β≥2`, explicit primitive normalizations, nonzero scales, and physical role blocks.
+The general resonance assumes the deep successor numerator is nonzero; the physical consuming
+theorem handles zero separately. The final two-block theorem still inherits the target's full
+`β`-erasure-tail hypothesis. It does not classify the first non-`D_c` predecessor or prove
+global setter avoidance.
+
+**Use:** run a backward two-state ancestry automaton through an all-`D_c` suffix. At the first
+non-`D_c` block, consume the exact cylinder in (3); if the full gap becomes zero, identify the
+distinguished projective return and splice the existing first-multi extinction theorem.
+
+**Formalization:**
+[`MatrixMortality/SwappedSetterBackwardResonance.lean`](MatrixMortality/SwappedSetterBackwardResonance.lean),
+through `primitiveDeepNumeratorSuccessor_forces_previousResonance`,
+`literalDeletionC_deepNumeratorSuccessor_forces_predecessorGap`,
+`zeroNumerator_literalDeletionC_pole_halts`,
+`erasureTailPole_previousBlock_resonance_or_halts`, and
+`doubleLiteralDeletionC_erasureTailPole_forces_halt_or_predecessorGap`.
+
+**Artifact:**
+[`audits/m53-backward-numerator-resonance-2026-08-31.md`](audits/m53-backward-numerator-resonance-2026-08-31.md).
+
+**Next:** classify the first non-literal-`D_c` predecessor cylinder in (3), and prove that an
+exact full-gap-zero return is projectively the distinguished reset needed by the local
+first-multi theorem. The arbitrary-target suffix seam remains independent.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).

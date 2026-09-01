@@ -1778,6 +1778,7 @@ The setter-projective audit now also exposes a kernel-friendly carry theorem:
 | [`MM-S61`](SALVAGE.md#mm-s61-primitive-carrier-gap-no-go) | exact integral carrier recurrence and gap factor, primitive one- and two-`D_c` distinguished carriers, and counterexamples to bare height and modulus invariants |
 | [`MM-S63`](SALVAGE.md#mm-s63-full-tail-last-step-resonance) | primitive congruence units, automatic predecessor unit depth, exact last-block normalization balance, and the full-erasure-tail pole adapter |
 | [`MM-S64`](SALVAGE.md#mm-s64-unique-predecessor-cylinder) | exact predecessor-cylinder congruence at a full-erasure-tail pole, literal-`D_c` numerator divisibility, and a sharp distinguished-spine witness |
+| [`MM-S68`](SALVAGE.md#mm-s68-backward-numerator-resonance) | backward deep-numerator resonance, exact predecessor cylinder, literal-`D_c` numerator/gap toggle, and the zero-carrier terminal branch |
 
 `MM-S08` is now discharged in
 [`SwappedSetterSingletonShell.lean`](MatrixMortality/SwappedSetterSingletonShell.lean).
@@ -2194,6 +2195,21 @@ For literal final `D_c`, this reduces to `3^(β−1)∣n`. Lean also proves that
 one-`D_c` carrier realizes this numerator divisibility, so the result selects a backward
 cylinder but does not empty it. A generic physical role block has only one final erasure tile;
 the full-tail hypothesis is not a hidden global earliest-pole reduction.
+
+Record [`MM-S68`](SALVAGE.md#mm-s68-backward-numerator-resonance) pulls that cylinder through
+the preceding block. A nonzero primitive successor numerator divisible by `3^(β−1)` forces the
+preceding denominator to be a unit, the discarded scale depth to equal the complete preceding
+upper length `a`, and
+
+```text
+3^(a+β−1) ∣ (P_we−V_wm)−μ3^a e.
+```
+
+For literal `D_c`, this is exactly `3^β∣e−m`. The numerator-zero fork is proved terminal rather
+than assumed away. Consequently, a full-tail pole after two final literal `D_c` blocks either
+gives `TagHaltsFrom` or forces the carrier before the pair to be one modulo `3^β`. This is the
+first exact backward toggle between the numerator and gap cylinders; it still does not classify
+the first non-`D_c` predecessor or remove the full-tail restriction.
 
 Record [`MM-S21`](SALVAGE.md#mm-s21-bounded-decimal-suffix-cycles) closes the fixed-precision
 suffix-descent lane. `DecimalSetterSuffix.cycleDefect_lift` gives an explicit one-digit lift for
@@ -2960,6 +2976,7 @@ fixed-rank decision problem.
 | `SwappedSetterCarrierResonance.lean` | target-coupled primitive normalization, deep-gap last-step resonance, and the full-erasure-tail pole adapter |
 | `DecimalSetterAllCRule.lean` | normalized later-frontier collisions and complete all-`c` rightmost-rule extinction |
 | `SwappedSetterPredecessorCylinder.lean` | unique high-precision predecessor cylinder at a nonterminal full-tail pole, literal-deletion numerator consequence, and sharpness on the distinguished deletion spine |
+| `SwappedSetterBackwardResonance.lean` | backward deep-numerator resonance, exact high-precision ancestry cylinder, literal-deletion numerator/gap toggle, and the zero-carrier terminal fork |
 | `PairedMortality.lean` | common-column mortality converse and exact integer `4 × 4` family |
 | `PhaseFracture.lean` | phase normalization and dimension-free projective-identification contradiction |
 | `PhaseRigidity.lean` | checked local role algebra, discrepancy commutators, and invariant-pencil rigidity |
