@@ -3007,6 +3007,7 @@ fixed-rank decision problem.
 | `TransverseSeparatedForkNoGo.lean` | quotient-commutator terminal-fork obstruction and exceptional-fibre collision closing the distinct-data candidate |
 | `SeparatedTwoCResidueTwo.lean` | six-event active-`c` cut, canonical four-`c` reproduction macro, and halting for `n≡2,20 (mod 27)` and `n≡11 (mod 81)` |
 | `SeparatedTwoCDiagonal.lean` | exact one/two-block return maps, finite injective centered-division extinction, and the complete diagonal classification |
+| `SeparatedTwoCShear.lean` | canonical cycle law for every nontrivial even two-`c` body off middle phase two and coupled entry for a sheared diagonal containing unequal bodies |
 | `TerminalForkCore.lean` | representation-independent one-or-two-dimensional invariant fork core forced by exact `bcbc` recognition |
 | `AffineRecognizer.lean` | generic singular three-state guard-and-carry representation calculus |
 | `BranchingRecognizer.lean` | complete `bcbc` residual grammar and rational three-state recognizer |
@@ -3516,6 +3517,9 @@ fixed-rank decision problem.
 | Every diagonal separated body with `n≡11 (mod 27)` has a halting coupled input | `SeparatedTwoCDiagonal.elevenModuloTwentySeven_tagHaltsFrom` |
 | Every diagonal separated body with `n≡2 (mod 3)` has a halting coupled input | `SeparatedTwoCDiagonal.twoModuloThree_tagHaltsFrom` |
 | A coupled diagonal separated source halts exactly when `n≡2 (mod 3)` | `SeparatedTwoCDiagonal.diagonal_tagHaltsFrom_iff` |
+| Every positive even two-`c` body off middle phase two has a canonical one-active-`c` cycle | `SeparatedTwoCShear.canonicalCycle_reachesIn`, `SeparatedTwoCShear.canonicalCycle_not_tagHaltsFrom` |
+| Every sheared body `b^(3t+2) c b^(n+t) c b^n` satisfies the width-three source envelope | `SeparatedTwoCShear.shearedBody_admissible` |
+| Every coupled sheared source with `n+t≢2 (mod 3)` is nonhalting | `SeparatedTwoCShear.shearedInitial_reaches_cycle`, `SeparatedTwoCShear.sheared_not_tagHaltsFrom` |
 | Every binary prefix-machine word has one decoded block per row | `prefixMachine_run`, `WeightedTransducer.wordProduct_apply` |
 | Prefix-machine mortality iff five-matrix mortality | `prefixMachine_mortal_iff_normalized` |
 | Both prefix generators share the ten-dimensional image | `prefixProjection_generator` |
@@ -3975,7 +3979,11 @@ further class `n≡11 (mod 81)` halts. `SeparatedTwoCDiagonal.lean` closes the t
 tail phases through a finite injective centered-division system and proves halting for every
 `n≡2 (mod 3)`. Together with the exact periodic orbits for the other two residues, this
 completes the coupled diagonal classification; the degenerate `n=0` source has a separately
-checked two-state cycle. Unequal separated runs remain open.
+checked two-state cycle. `SeparatedTwoCShear.lean` proves that every positive even body
+`bᵖ c bʳ c bˢ` with `r≢2 (mod 3)` has the exact cycle
+`c b^(s+(p+r+s)/2+1)`. It also proves that the coupled source reaches this cycle throughout the
+unequal plane `p=3(r-s)+2`, `r≥s`; those sheared sources are nonhalting off middle phase two.
+The sheared middle-phase-two class and coupled triples outside that plane remain open.
 No declaration claims that the full two-`c` stratum is universal or decidable.
 
 ## Prior Formalizations

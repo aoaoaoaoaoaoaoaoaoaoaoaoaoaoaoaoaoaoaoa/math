@@ -1,0 +1,431 @@
+import MatrixMortality.SeparatedTwoCDiagonal
+
+/-!
+# Unequal separated two-c cycles
+
+Every nontrivial even width-three body `b^p c b^r c b^s` has a canonical one-active-`c` queue.
+Away from the middle phase `r ≡ 2 (mod 3)`, that queue returns after exactly
+`(p+r+s)/2+1` steps.
+
+Away from the same middle phase, the coupled source enters this cycle on the sheared diagonal
+
+`b^(3t+2) c b^(n+t) c b^n`.
+
+Thus every member of this two-parameter family with `n+t ≢ 2 (mod 3)` is nonhalting; positive
+shear gives unequal runs.
+-/
+
+namespace MatrixMortality.SeparatedTwoCShear
+
+open BranchingHistory PeriodicHistory SeparatedTwoCOrbit
+
+/-- A width-three body with two distinguished `c` letters and three unary runs. -/
+def twoCBody (left middle right : Nat) : List TagLetter :=
+  bRun left ++ [.c] ++ bRun middle ++ [.c] ++ bRun right
+
+@[simp] theorem twoCBody_length (left middle right : Nat) :
+    (twoCBody left middle right).length = left + middle + right + 2 := by
+  simp [twoCBody, bRun]
+  omega
+
+/-- The canonical one-active-`c` queue of an even two-`c` body. -/
+def canonicalCycleQueue (halfRunSum right : Nat) : List TagLetter :=
+  [.c] ++ bRun (right + halfRunSum + 1)
+
+private def cycleFront (left middle right halfRunSum : Nat) : List TagLetter :=
+  bRun (left + right + halfRunSum - 1) ++ [.c] ++ bRun middle
+
+private def cycleExpansion (left middle right halfRunSum : Nat) : List TagLetter :=
+  cycleFront left middle right halfRunSum ++ [.c] ++ bRun (right + 1)
+
+private def ConstantAtOffset (offset : Nat) (word : List TagLetter) : Prop :=
+  ∀ (index : Nat) (index_lt : index < word.length), 3 ∣ offset + index →
+    word[index] = .b
+
+private theorem constantAtOffset_replicate (offset count : Nat) :
+    ConstantAtOffset offset (bRun count) := by
+  intro index index_lt _
+  exact List.getElem_replicate index_lt
+
+private theorem ConstantAtOffset.append {offset : Nat} {left right : List TagLetter}
+    (left_clean : ConstantAtOffset offset left)
+    (right_clean : ConstantAtOffset (offset + left.length) right) :
+    ConstantAtOffset offset (left ++ right) := by
+  intro index index_lt index_aligned
+  by_cases in_left : index < left.length
+  · rw [List.getElem_append_left in_left]
+    exact left_clean index in_left index_aligned
+  · have left_le : left.length ≤ index := Nat.le_of_not_gt in_left
+    have right_lt : index - left.length < right.length := by
+      simp only [List.length_append] at index_lt
+      omega
+    rw [List.getElem_append_right left_le]
+    apply right_clean (index - left.length) right_lt
+    convert index_aligned using 1
+    omega
+
+private theorem constantAtOffset_cons_c {offset : Nat} {tail : List TagLetter}
+    (inert : ¬3 ∣ offset) (tail_clean : ConstantAtOffset (offset + 1) tail) :
+    ConstantAtOffset offset (.c :: tail) := by
+  intro index index_lt index_aligned
+  cases index with
+  | zero => exact False.elim (inert index_aligned)
+  | succ index =>
+      simp only [List.getElem_cons_succ]
+      apply tail_clean index (by
+        simpa only [List.length_cons, Nat.succ_lt_succ_iff] using index_lt)
+      convert index_aligned using 1
+      omega
+
+private theorem constantAtOffset_bRun_c {offset run : Nat} {tail : List TagLetter}
+    (inert : ¬3 ∣ offset + run)
+    (tail_clean : ConstantAtOffset (offset + run + 1) tail) :
+    ConstantAtOffset offset (bRun run ++ .c :: tail) := by
+  apply ConstantAtOffset.append (constantAtOffset_replicate offset run)
+  simpa [bRun, Nat.add_assoc] using constantAtOffset_cons_c inert tail_clean
+
+private theorem sampleHeads_eq_bRun (count : Nat) (word : List TagLetter)
+    (enough : count * 3 ≤ word.length)
+    (clean : Undecidability.ConstantAtMultiples 3 TagLetter.b word) :
+    Undecidability.sampleHeads 3 (by omega) count word enough = bRun count := by
+  apply List.ext_getElem
+  · simp [bRun]
+  · intro index sample_lt replicate_lt
+    have index_lt : index < count := by simpa [bRun] using replicate_lt
+    have source_lt : index * 3 < word.length :=
+      ((Nat.mul_lt_mul_right (by omega : 0 < 3)).mpr index_lt).trans_le enough
+    simp only [Undecidability.sampleHeads, List.getElem_ofFn, bRun,
+      List.getElem_replicate]
+    exact clean (index * 3) source_lt ⟨index, by omega⟩
+
+private theorem spell_tagOutput_bRun (body : List TagLetter) (count : Nat) :
+    spell (tagOutput body) (bRun count) = bRun count := by
+  unfold bRun
+  induction count with
+  | zero => rfl
+  | succ count induction =>
+      rw [List.replicate_succ]
+      change [.b] ++ spell (tagOutput body) (List.replicate count .b) =
+        .b :: List.replicate count .b
+      rw [induction]
+      rfl
+
+private theorem cleanPrefix_reachesIn (body front tail : List TagLetter) (count : Nat)
+    (front_length : front.length = count * 3)
+    (front_clean : Undecidability.ConstantAtMultiples 3 TagLetter.b front) :
+    TagReachesIn 3 (tagOutput body) count (front ++ tail) (tail ++ bRun count) := by
+  have enough : count * 3 ≤ front.length := front_length.ge
+  have reach := Undecidability.tagReachesIn_chunks 3 (by omega) (tagOutput body)
+    count front tail enough
+  have sampled := sampleHeads_eq_bRun count front enough front_clean
+  rw [sampled] at reach
+  have take_eq : front.take (count * 3) = front := by
+    rw [← front_length]
+    exact List.take_length
+  rw [take_eq, spell_tagOutput_bRun] at reach
+  simpa using reach
+
+private theorem cycleFront_length (left middle right halfRunSum : Nat)
+    (halfRunSum_pos : 0 < halfRunSum)
+    (run_sum : left + middle + right = 2 * halfRunSum) :
+    (cycleFront left middle right halfRunSum).length = halfRunSum * 3 := by
+  simp [cycleFront, bRun]
+  omega
+
+private theorem cycleFront_clean (left middle right halfRunSum : Nat)
+    (halfRunSum_pos : 0 < halfRunSum)
+    (run_sum : left + middle + right = 2 * halfRunSum)
+    (middle_phase : middle % 3 ≠ 2) :
+    Undecidability.ConstantAtMultiples 3 TagLetter.b
+      (cycleFront left middle right halfRunSum) := by
+  let offset := left + right + halfRunSum - 1
+  have offset_balance : offset + middle + 1 = 3 * halfRunSum := by
+    dsimp only [offset]
+    omega
+  have offset_inert : ¬3 ∣ offset := by
+    intro offset_divides
+    have offset_mod : offset % 3 = 0 := Nat.dvd_iff_mod_eq_zero.mp offset_divides
+    have offset_division := Nat.mod_add_div offset 3
+    have middle_division := Nat.mod_add_div middle 3
+    have middle_mod_lt : middle % 3 < 3 := Nat.mod_lt middle (by omega)
+    omega
+  have clean : ConstantAtOffset 0 (bRun offset ++ .c :: bRun middle) := by
+    apply constantAtOffset_bRun_c (by simpa using offset_inert)
+    simpa [Nat.add_assoc] using constantAtOffset_replicate (offset + 1) middle
+  simpa [cycleFront, offset, List.append_assoc, ConstantAtOffset,
+    Undecidability.ConstantAtMultiples] using clean
+
+private theorem canonicalCycle_step (left middle right halfRunSum : Nat)
+    (halfRunSum_pos : 0 < halfRunSum) :
+    TagStep 3 (tagOutput (twoCBody left middle right))
+      (canonicalCycleQueue halfRunSum right)
+      (cycleExpansion left middle right halfRunSum) := by
+  have source_exponent : right + halfRunSum + 1 = 2 + (right + halfRunSum - 1) := by
+    omega
+  have prefix_exponent : right + halfRunSum - 1 + left =
+      left + right + halfRunSum - 1 := by
+    omega
+  have source_split : 2 + (right + halfRunSum - 1) =
+      right + halfRunSum - 1 + 1 + 1 := by
+    omega
+  refine ⟨stroke₃ .c .b .b, bRun (right + halfRunSum - 1), ?_, ?_⟩
+  · rw [canonicalCycleQueue, source_exponent]
+    simp [stroke₃, Stroke.letters, bRun, source_split]
+  · simp [cycleExpansion, cycleFront, twoCBody, stroke₃, tagOutput, nearyBody,
+      bRun, List.append_assoc, prefix_exponent]
+
+/-- The canonical queue returns after one active `c` step and `(p+r+s)/2` inert steps. -/
+theorem canonicalCycle_reachesIn (left middle right halfRunSum : Nat)
+    (halfRunSum_pos : 0 < halfRunSum)
+    (run_sum : left + middle + right = 2 * halfRunSum)
+    (middle_phase : middle % 3 ≠ 2) :
+    TagReachesIn 3 (tagOutput (twoCBody left middle right)) (halfRunSum + 1)
+      (canonicalCycleQueue halfRunSum right) (canonicalCycleQueue halfRunSum right) := by
+  have drainage := cleanPrefix_reachesIn (twoCBody left middle right)
+    (cycleFront left middle right halfRunSum) ([.c] ++ bRun (right + 1)) halfRunSum
+    (cycleFront_length left middle right halfRunSum halfRunSum_pos run_sum)
+    (cycleFront_clean left middle right halfRunSum halfRunSum_pos run_sum middle_phase)
+  have drainage' :
+      TagReachesIn 3 (tagOutput (twoCBody left middle right)) halfRunSum
+        (cycleExpansion left middle right halfRunSum)
+        (canonicalCycleQueue halfRunSum right) := by
+    have exponent_eq : right + 1 + halfRunSum = right + halfRunSum + 1 := by omega
+    simpa [cycleExpansion, canonicalCycleQueue, bRun, List.append_assoc, exponent_eq] using drainage
+  exact Relation.ReachesIn.head
+    (canonicalCycle_step left middle right halfRunSum halfRunSum_pos) drainage'
+
+/-- The canonical queue of every positive even two-`c` body off middle phase two is nonhalting. -/
+theorem canonicalCycle_not_tagHaltsFrom (left middle right halfRunSum : Nat)
+    (halfRunSum_pos : 0 < halfRunSum)
+    (run_sum : left + middle + right = 2 * halfRunSum)
+    (middle_phase : middle % 3 ≠ 2) :
+    ¬TagHaltsFrom 3 (tagOutput (twoCBody left middle right))
+      (canonicalCycleQueue halfRunSum right) := by
+  let queue := canonicalCycleQueue halfRunSum right
+  have cycle :
+      TagReachesIn 3 (tagOutput (twoCBody left middle right)) (halfRunSum + 1)
+        queue queue :=
+    canonicalCycle_reachesIn left middle right halfRunSum halfRunSum_pos run_sum middle_phase
+  apply Undecidability.not_tagHaltsFrom_of_transGen_progress (fun candidate => candidate = queue)
+  · intro candidate candidate_eq
+    subst candidate
+    exact ⟨queue, rfl, cycle.toTransGen (by omega)⟩
+  · rfl
+
+/-- The sheared diagonal `b^(3t+2) c b^(n+t) c b^n`. -/
+def shearedBody (shear separation : Nat) : List TagLetter :=
+  twoCBody (3 * shear + 2) (separation + shear) separation
+
+/-- Every sheared-diagonal body satisfies the scheduled width-three length envelope. -/
+theorem shearedBody_admissible (shear separation : Nat) :
+    2 ≤ (shearedBody shear separation).length ∧
+      2 ∣ (shearedBody shear separation).length := by
+  rw [shearedBody, twoCBody_length]
+  constructor
+  · omega
+  · refine ⟨separation + 2 * shear + 2, ?_⟩
+    omega
+
+@[simp] theorem shearedBody_zero (separation : Nat) :
+    shearedBody 0 separation = separatedBody separation := by
+  simp [shearedBody, twoCBody, separatedBody, bRun, List.append_assoc]
+
+/-- The source queue coupled to a sheared-diagonal body. -/
+def shearedInitial (shear separation : Nat) : List TagLetter :=
+  (shearedBody shear separation).drop 2 ++ [.b]
+
+/-- The diagonal-shaped queue exposed after deleting the shear prefix. -/
+def shearedEntryQueue (shear separation : Nat) : List TagLetter :=
+  [.c] ++ bRun (separation + shear) ++ [.c] ++ bRun (separation + shear + 1)
+
+@[simp] theorem shearedInitial_eq (shear separation : Nat) :
+    shearedInitial shear separation =
+      bRun (3 * shear) ++ [.c] ++ bRun (separation + shear) ++ [.c] ++
+        bRun (separation + 1) := by
+  unfold shearedInitial shearedBody twoCBody
+  simp only [List.append_assoc]
+  rw [List.drop_append_of_le_length (by simp [bRun])]
+  rw [bRun, List.drop_replicate]
+  have exponent_eq : 3 * shear + 2 - 2 = 3 * shear := by omega
+  simp [bRun, List.append_assoc, exponent_eq]
+
+private theorem shearedInitial_reaches_entry (shear separation : Nat) :
+    TagReachesIn 3 (tagOutput (shearedBody shear separation)) shear
+      (shearedInitial shear separation) (shearedEntryQueue shear separation) := by
+  have drainage := cleanPrefix_reachesIn (shearedBody shear separation) (bRun (3 * shear))
+    ([.c] ++ bRun (separation + shear) ++ [.c] ++ bRun (separation + 1)) shear
+    (by simp [bRun, Nat.mul_comm])
+    (Undecidability.ConstantAtMultiples.replicate 3 (3 * shear) TagLetter.b)
+  have exponent_eq : separation + 1 + shear = separation + shear + 1 := by omega
+  simpa [shearedInitial_eq, shearedEntryQueue, bRun, List.append_assoc, exponent_eq] using drainage
+
+private def shearedEntryFront (shear separation : Nat) : List TagLetter :=
+  let middle := separation + shear
+  bRun (middle - 2) ++ [.c] ++ bRun (middle + 3 * shear + 3) ++ [.c] ++ bRun middle
+
+private def shearedEntryExpansion (shear separation : Nat) : List TagLetter :=
+  shearedEntryFront shear separation ++ [.c] ++ bRun (separation + 1)
+
+private theorem shearedEntry_step (shear separation : Nat)
+    (middle_large : 2 ≤ separation + shear) :
+    TagStep 3 (tagOutput (shearedBody shear separation))
+      (shearedEntryQueue shear separation) (shearedEntryExpansion shear separation) := by
+  let middle := separation + shear
+  have source_exponent : middle = 2 + (middle - 2) := by
+    dsimp only [middle]
+    omega
+  have bridge_exponent : middle + 1 + (3 * shear + 2) = middle + 3 * shear + 3 := by
+    omega
+  have source_split : 2 + (middle - 2) = middle - 2 + 1 + 1 := by
+    omega
+  refine ⟨stroke₃ .c .b .b, bRun (middle - 2) ++ [.c] ++ bRun (middle + 1), ?_, ?_⟩
+  · rw [shearedEntryQueue, show separation + shear = middle by rfl, source_exponent]
+    simp [stroke₃, Stroke.letters, bRun, List.append_assoc, source_split]
+  · simp [shearedEntryExpansion, shearedEntryFront, shearedBody, twoCBody, middle,
+      stroke₃, tagOutput, nearyBody, bRun, List.append_assoc, bridge_exponent]
+
+private theorem shearedEntryFront_length (shear separation : Nat)
+    (middle_large : 2 ≤ separation + shear) :
+    (shearedEntryFront shear separation).length =
+      (separation + 2 * shear + 1) * 3 := by
+  simp [shearedEntryFront, bRun]
+  omega
+
+private theorem shearedEntryFront_clean (shear separation : Nat)
+    (middle_large : 2 ≤ separation + shear)
+    (middle_phase : (separation + shear) % 3 ≠ 2) :
+    Undecidability.ConstantAtMultiples 3 TagLetter.b
+      (shearedEntryFront shear separation) := by
+  let middle := separation + shear
+  have first_inert : ¬3 ∣ middle - 2 := by
+    intro divides
+    have offset_mod : (middle - 2) % 3 = 0 := Nat.dvd_iff_mod_eq_zero.mp divides
+    have offset_division := Nat.mod_add_div (middle - 2) 3
+    have middle_division := Nat.mod_add_div middle 3
+    have middle_mod_lt : middle % 3 < 3 := Nat.mod_lt middle (by omega)
+    omega
+  have second_inert : ¬3 ∣ (middle - 2) + 1 + (middle + 3 * shear + 3) := by
+    intro divides
+    have offset_mod : ((middle - 2) + 1 + (middle + 3 * shear + 3)) % 3 = 0 :=
+      Nat.dvd_iff_mod_eq_zero.mp divides
+    have offset_division :=
+      Nat.mod_add_div ((middle - 2) + 1 + (middle + 3 * shear + 3)) 3
+    have middle_division := Nat.mod_add_div middle 3
+    have middle_mod_lt : middle % 3 < 3 := Nat.mod_lt middle (by omega)
+    omega
+  have clean : ConstantAtOffset 0
+      (bRun (middle - 2) ++ .c ::
+        (bRun (middle + 3 * shear + 3) ++ .c :: bRun middle)) := by
+    apply constantAtOffset_bRun_c (by simpa using first_inert)
+    apply constantAtOffset_bRun_c (by simpa [bRun] using second_inert)
+    simpa [Nat.add_assoc] using constantAtOffset_replicate
+      ((middle - 2) + 1 + (middle + 3 * shear + 3) + 1) middle
+  simpa [shearedEntryFront, middle, List.append_assoc, ConstantAtOffset,
+    Undecidability.ConstantAtMultiples] using clean
+
+private theorem shearedEntry_reaches_cycle_large (shear separation : Nat)
+    (middle_large : 2 ≤ separation + shear)
+    (middle_phase : (separation + shear) % 3 ≠ 2) :
+    TagReaches 3 (tagOutput (shearedBody shear separation))
+      (shearedEntryQueue shear separation)
+      (canonicalCycleQueue (separation + 2 * shear + 1) separation) := by
+  let count := separation + 2 * shear + 1
+  have drainage := cleanPrefix_reachesIn (shearedBody shear separation)
+    (shearedEntryFront shear separation) ([.c] ++ bRun (separation + 1)) count
+    (by simpa [count] using shearedEntryFront_length shear separation middle_large)
+    (shearedEntryFront_clean shear separation middle_large middle_phase)
+  have drainage' :
+      TagReachesIn 3 (tagOutput (shearedBody shear separation)) count
+        (shearedEntryExpansion shear separation)
+        (canonicalCycleQueue count separation) := by
+    have exponent_eq : separation + 1 + count = separation + count + 1 := by omega
+    simpa [shearedEntryExpansion, canonicalCycleQueue, count, bRun, List.append_assoc,
+      exponent_eq] using drainage
+  exact (Relation.ReflTransGen.single (shearedEntry_step shear separation middle_large)).trans
+    drainage'.toReaches
+
+private def shearedOneEntryFront (shear : Nat) : List TagLetter :=
+  bRun (3 * shear + 4) ++ [.c] ++ bRun 1
+
+private def shearedOneEntryExpansion (shear separation : Nat) : List TagLetter :=
+  shearedOneEntryFront shear ++ [.c] ++ bRun (separation + 1)
+
+private theorem shearedOneEntry_step (shear separation : Nat)
+    (middle_one : separation + shear = 1) :
+    TagStep 3 (tagOutput (shearedBody shear separation))
+      (shearedEntryQueue shear separation) (shearedOneEntryExpansion shear separation) := by
+  refine ⟨stroke₃ .c .b .c, bRun (separation + shear + 1), ?_, ?_⟩
+  · simp [shearedEntryQueue, middle_one, stroke₃, Stroke.letters, bRun]
+  · simp [shearedOneEntryExpansion, shearedOneEntryFront, shearedBody, twoCBody,
+      middle_one, stroke₃, tagOutput, nearyBody, bRun, List.append_assoc]
+
+private theorem shearedOneEntryFront_clean (shear : Nat) :
+    Undecidability.ConstantAtMultiples 3 TagLetter.b (shearedOneEntryFront shear) := by
+  have inert : ¬3 ∣ 3 * shear + 4 := by omega
+  have clean : ConstantAtOffset 0 (bRun (3 * shear + 4) ++ .c :: bRun 1) := by
+    apply constantAtOffset_bRun_c (by simpa using inert)
+    simpa [Nat.add_assoc] using constantAtOffset_replicate (3 * shear + 5) 1
+  simpa [shearedOneEntryFront, ConstantAtOffset,
+    Undecidability.ConstantAtMultiples] using clean
+
+private theorem shearedEntry_reaches_cycle_one (shear separation : Nat)
+    (middle_one : separation + shear = 1) :
+    TagReaches 3 (tagOutput (shearedBody shear separation))
+      (shearedEntryQueue shear separation)
+      (canonicalCycleQueue (separation + 2 * shear + 1) separation) := by
+  let count := shear + 2
+  have drainage := cleanPrefix_reachesIn (shearedBody shear separation)
+    (shearedOneEntryFront shear) ([.c] ++ bRun (separation + 1)) count
+    (by simp [shearedOneEntryFront, count, bRun]; omega)
+    (shearedOneEntryFront_clean shear)
+  have count_eq : count = separation + 2 * shear + 1 := by
+    dsimp only [count]
+    omega
+  have drainage' :
+      TagReachesIn 3 (tagOutput (shearedBody shear separation)) count
+        (shearedOneEntryExpansion shear separation)
+        (canonicalCycleQueue count separation) := by
+    have exponent_eq : separation + 1 + count = separation + count + 1 := by omega
+    simpa [shearedOneEntryExpansion, canonicalCycleQueue, bRun, List.append_assoc,
+      exponent_eq] using drainage
+  rw [← count_eq]
+  exact (Relation.ReflTransGen.single
+      (shearedOneEntry_step shear separation middle_one)).trans drainage'.toReaches
+
+/-- Every positive sheared-diagonal source off middle phase two reaches its canonical cycle. -/
+theorem shearedInitial_reaches_cycle (shear separation : Nat)
+    (middle_pos : 0 < separation + shear)
+    (middle_phase : (separation + shear) % 3 ≠ 2) :
+    TagReaches 3 (tagOutput (shearedBody shear separation))
+      (shearedInitial shear separation)
+      (canonicalCycleQueue (separation + 2 * shear + 1) separation) := by
+  have entry := (shearedInitial_reaches_entry shear separation).toReaches
+  by_cases middle_one : separation + shear = 1
+  · exact entry.trans (shearedEntry_reaches_cycle_one shear separation middle_one)
+  · have middle_large : 2 ≤ separation + shear := by omega
+    exact entry.trans
+      (shearedEntry_reaches_cycle_large shear separation middle_large middle_phase)
+
+/-- Every sheared-diagonal coupled source off middle phase two is nonhalting. -/
+theorem sheared_not_tagHaltsFrom (shear separation : Nat)
+    (middle_phase : (separation + shear) % 3 ≠ 2) :
+    ¬TagHaltsFrom 3 (tagOutput (shearedBody shear separation))
+      (shearedInitial shear separation) := by
+  by_cases middle_zero : separation + shear = 0
+  · have shear_zero : shear = 0 := by omega
+    have separation_zero : separation = 0 := by omega
+    subst shear
+    subst separation
+    simpa [shearedBody, shearedInitial, twoCBody, SeparatedTwoCOrbit.separatedBody,
+      SeparatedTwoCOrbit.coupledInitial, bRun] using
+      SeparatedTwoCDiagonal.zeroSeparation_not_tagHaltsFrom
+  · have middle_pos : 0 < separation + shear := Nat.pos_of_ne_zero middle_zero
+    have reaches := shearedInitial_reaches_cycle shear separation middle_pos middle_phase
+    have cycle_nonhalting := canonicalCycle_not_tagHaltsFrom
+      (3 * shear + 2) (separation + shear) separation (separation + 2 * shear + 1)
+      (by omega) (by omega) middle_phase
+    intro initial_halts
+    exact cycle_nonhalting
+      (Undecidability.tagHaltsFrom_after_reaches reaches initial_halts)
+
+end MatrixMortality.SeparatedTwoCShear

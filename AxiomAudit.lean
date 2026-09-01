@@ -769,6 +769,11 @@ open MatrixMortality
 #print axioms SeparatedTwoCDiagonal.twoModuloThree_tagHaltsFrom
 #print axioms SeparatedTwoCDiagonal.zeroSeparation_not_tagHaltsFrom
 #print axioms SeparatedTwoCDiagonal.diagonal_tagHaltsFrom_iff
+#print axioms SeparatedTwoCShear.canonicalCycle_reachesIn
+#print axioms SeparatedTwoCShear.canonicalCycle_not_tagHaltsFrom
+#print axioms SeparatedTwoCShear.shearedBody_admissible
+#print axioms SeparatedTwoCShear.shearedInitial_reaches_cycle
+#print axioms SeparatedTwoCShear.sheared_not_tagHaltsFrom
 #print axioms SetterShear.sideBasis_det
 #print axioms SetterShear.delimiter_cube
 #print axioms SetterShear.delimiter_square_distinguishedColumn

@@ -74,6 +74,7 @@ file owns the mathematical stock.
 | [`MM-S41`](#mm-s41-separated-residue-two-first-cut) | halting theorem | two thirds of the last diagonal residue halt: `n≡2,20 (mod 27)` | formalized | active |
 | [`MM-S43`](#mm-s43-four-c-reproduction-cut) | structure and halting theorem | one four-`c` block reproduces exactly; `n≡11 (mod 81)` halts | formalized | active |
 | [`MM-S48`](#mm-s48-centered-four-c-extinction) | structure and halting theorem | the one/two-block macro is a finite injective centered division system; every `n≡2 (mod 3)` diagonal source halts | formalized | active |
+| [`MM-S58`](#mm-s58-unequal-two-c-cycle-law) | structure theorem and obstruction | every nontrivial even two-`c` body off middle phase two has a canonical cycle; an unequal sheared diagonal reaches it from the coupled source | formalized | active |
 | [`MM-O01`](#mm-o01-all-placement-packing-rank) | obstruction | literal CHHN packing has exact rank six for every separator placement | formalized | graduated |
 | [`MM-O02`](#mm-o02-one-sided-phase-overlap) | obstruction | standard common-line phase fusion becomes one-sided | reported | parked |
 | [`MM-O03`](#mm-o03-two-channel-boundary-tax) | obstruction | exact diagonal rank-two punctuation costs two states beyond Hankel rank | formalized | graduated |
@@ -5867,7 +5868,68 @@ through `SeparatedTwoCDiagonal.fourCCentered_initial_accessible`,
 **Artifact:**
 [`audits/m53-separated-two-c-diagonal-complete-2026-08-31.md`](audits/m53-separated-two-c-diagonal-complete-2026-08-31.md).
 
-**Next:** classify unequal separated bodies `bᵖ c bʳ c bˢ`; the diagonal is closed.
+**Next:** `MM-S58` cuts an unequal sheared diagonal and isolates the middle-run phase as the
+canonical-cycle gate.
+
+### MM-S58: Unequal two-c cycle law
+
+**Kind:** structure theorem and obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+Let
+
+```text
+q(p,r,s) = b^p c b^r c b^s,    p+r+s=2h,    h>0.
+```
+
+If `r≢2 (mod 3)`, then
+
+```text
+C(h,s) = c b^(s+h+1)
+```
+
+returns to itself after exactly `h+1` steps. Its active step expands it to
+
+```text
+b^(p+s+h-1) c b^r c b^(s+1).
+```
+
+The prefix ending immediately before the second `c` has length `3h`. Its only `c` occurs at
+offset `p+s+h-1=3h-r-1`, which is a deletion head exactly when `r≡2 (mod 3)`. Off that phase,
+the next `h` heads are all `b`; deleting the prefix appends `b^h` and returns to `C(h,s)`.
+
+This cycle is coupled to the two-parameter sheared diagonal
+
+```text
+q(t,n) = b^(3t+2) c b^(n+t) c b^n.
+```
+
+Deleting the initial `b^(3t)` prefix takes exactly `t` inert steps and exposes
+`c b^(n+t) c b^(n+t+1)`. When `n+t>0` and `n+t≢2 (mod 3)`, one active step followed by a
+head-clean prefix of length `3(n+2t+1)` reaches `C(n+2t+1,n)`. The middle-run-one case consumes
+the second `c` in the active wake and has a separate exact prefix equation; `t=n=0` is the
+degenerate diagonal cycle already checked in `MM-S48`. Hence every coupled sheared source off
+middle phase two is nonhalting. The slice contains the diagonal at `t=0` and genuinely unequal
+runs for every `t>0`.
+
+**Scope:** the canonical cycle exists for every positive even two-`c` body off middle phase
+two, but coupled-source reachability is proved only when `p=3(r-s)+2` and `r≥s`. The result does
+not decide sheared sources with `r≡2 (mod 3)`, arbitrary unequal triples, or the full
+width-three source problem.
+
+**Use:** the middle run, not equality of the outer runs, controls the universal one-active-`c`
+cycle. Further coupled-source classifications should first test reachability of `C(h,s)` and
+reserve higher-active-`c` nuclei for middle phase two or for sources missing the shear equation.
+
+**Formalization:**
+[`MatrixMortality/SeparatedTwoCShear.lean`](MatrixMortality/SeparatedTwoCShear.lean), through
+`SeparatedTwoCShear.canonicalCycle_reachesIn`,
+`SeparatedTwoCShear.shearedInitial_reaches_cycle`, and
+`SeparatedTwoCShear.sheared_not_tagHaltsFrom`.
+
+**Next:** decide the sheared middle-phase-two sources, then derive the first-return map for
+coupled triples outside `p=3(r-s)+2`.
 
 ### MM-S33: Leading-`D_b` support-saturator extinction
 
