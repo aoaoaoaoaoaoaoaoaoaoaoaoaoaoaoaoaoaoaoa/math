@@ -153,6 +153,7 @@ file owns the mathematical stock.
 | [`MM-S53`](#mm-s53-complete-all-erasure-first-entry-extinction) | obstruction | every non-singleton all-erasure first block misses the next multi-role pole from a lawful two-`c` raw head | formalized | active |
 | [`MM-S54`](#mm-s54-rightmost-rule-phase-toggle-trichotomy) | structure theorem and obstruction | the rightmost rule has one of three exact phase-toggle depth profiles, and a leading `R_cD_c⁺` first block is impossible | formalized | active |
 | [`MM-S55`](#mm-s55-physical-role-block-shell-completion) | structure theorem and obstruction | every physical swapped role block supplies its expected pole shell, coefficient depth, and lower unit, yielding a shell-free first-multi extinction theorem | formalized | active |
+| [`MM-S57`](#mm-s57-centered-history-defect-transport) | structure theorem and obstruction | an arbitrary centered fold has one exact raw-head correction; sliding-window reuse is valid exactly at an ordinary-ray return | formalized | active |
 | [`R32-S01`](#r32-s01-split-return-normal-form) | structure theorem | rank-two cuts reduce one-unit binary mortality to a `2 × 2` return recurrence | formalized | graduated |
 | [`R32-S02`](#r32-s02-two-plane-edge-square) | structure theorem | two rank-two generators are a two-vertex square of `2 × 2` edges | formalized | graduated |
 | [`R32-O01`](#r32-o01-rank-one-profile-collapse) | obstruction | a rank-one generator reduces mortality to order-at-most-three scalar recurrence zeros | audited | stock |
@@ -5102,6 +5103,126 @@ through `roleBlock_lower_isUnit`, `roleBlock_multi_coefficient_hasValue`,
 **Next:** formalize `centeredEarliestPole_is_terminal`: every earliest pole in an arbitrary
 centered fold is terminal, or else expose the exact later-history constructor not covered by
 the first-multi interface.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S57: Centered-history defect transport
+
+**Kind:** structure theorem and obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+Put `ρ=3^β`, `μ=2ρ−1`, `H=5ρ−1`, `R=2−ρ`, and `K=RHμ`. A physical block `z` has upper power
+`A_z`, punctuated upper code `P_z`, lower code `V_z`, and centered coefficient
+`C_z=RP_z−HV_z`. Its homogeneous transfer is
+
+```text
+T_z(x,y)=(A_zy, KV_zx+C_zy).                            (1)
+```
+
+`CenteredContinuant` records the four rational coefficients of an arbitrary left-to-right fold
+of (1), and `historyContinuant_act` proves that its action is exactly the recursive physical
+state. Thus no implicit reinitialization is built into the fold.
+
+Define the ordinary-reset defect and the raw-head defect of `z` by
+
+```text
+D(x,y)=y−Rμx,
+ε_z(x,y)=A_zy−RP_zx.                                    (2)
+```
+
+Direct substitution gives the transport identity
+
+```text
+ε_z(T_z(x,y))=−A_zHV_zD(x,y).                           (3)
+```
+
+Every physical `A_z`, `H`, and `V_z` is nonzero. Consequently the output of a completed block
+lies on that block's canonical raw-head ray exactly when its incoming state lies on the
+ordinary-reset ray. This is the precise condition missing from a sliding-window application of
+the first-multi theorem. It is not automatic even at the other physical reset: for
+`r₁=(3,RH)`,
+
+```text
+D(r₁)=R²≠0.                                              (4)
+```
+
+There is also an exact last-resonance correction. For first, middle, and target blocks `f,m,t`,
+write
+
+```text
+L=C_tC_m+KV_tA_m,
+E=Pole_t(T_m(A_f,RP_f)).                                 (5)
+```
+
+For every carrier `q`, Lean proves
+
+```text
+A_f Pole_t(T_mq)=q_xE+Lε_f(q).                          (6)
+```
+
+If `q=T_f(s)` and the target is a pole, equations (3) and (6), after cancelling the nonzero
+`A_f`, give the projectively intrinsic condition
+
+```text
+s_yE=HV_fL D(s).                                         (7)
+```
+
+Thus every later pole differs from the canonical `MM-S55` interface by one and only one
+history-poison term. When `D(s)=0` and `s_x≠0`, `ordinaryReturn_firstMultiTransfer_pole_false`
+rescales the state to the ordinary reset and invokes `physicalFirstMultiTransfer_pole_false`.
+
+The poison itself evolves by
+
+```text
+D(T_zs)=R(P_z−μA_z)s_y−HV_zD(s).                         (8)
+```
+
+For every live state put `δ=D/y`. Equations (1) and (8) give the exact Möbius recurrence
+
+```text
+δ'=[R(P_z−μA_z)−HV_zδ]/[RP_z−HV_zδ].                    (9)
+```
+
+A target `z` is a pole exactly at
+
+```text
+δ=(R/H)(P_z/V_z).                                       (10)
+```
+
+The ordinary and distinguished resets have coordinates `0` and `R/H`. A physical target
+threshold equals `R/H` exactly when `P_z=V_z`, so terminal equality is precisely the
+distinguished threshold. Sign gives no global trap: from the ordinary reset, `D_c` lands at the
+negative value `R/H`, whereas `D_b` lands at the positive value `H/P_Db`. The raw entry gap in
+(8)-(9) is the surviving unbounded datum and crosses zero immediately.
+
+**Scope:** equations (1)-(8) are exact over `ℚ`. The raw-head equivalence uses `β≥2` and a
+physical role block only to ensure the multiplier in (3) is nonzero. The final adapter uses the
+`MM-S55` compiler envelope `β≥6`, `|body|≥β−1`, and `head(body)=b`. The result proves neither
+that a nonempty history cannot return to the ordinary ray nor that the nonzero correction in
+(7) is impossible. Benchmark saturation of fixed residue quotients is computational evidence,
+not a theorem excluding every finite semantic quotient.
+
+**Use:** replace every proposed sliding-window splice by the exact test `D=0`. On the remaining
+branch, attack equation (7), equivalently threshold avoidance for (9)-(10); no further local
+shell bookkeeping or one-sided sign interval can recover the discarded history.
+
+**Formalization:**
+[`MatrixMortality/SwappedSetterHistory.lean`](MatrixMortality/SwappedSetterHistory.lean), through
+`historyContinuant_act`, `rawHeadDefect_blockStep`, `ordinaryDefect_blockStep`,
+`rawHeadDefect_blockStep_eq_zero_iff`, `poleResidual_blockStep_rawHeadCorrection`,
+`canonicalResidual_eq_scaledOrdinaryDefect_of_pole`, and
+`ordinaryReturn_firstMultiTransfer_pole_false`, together with `defectCoordinate_blockStep`,
+`poleResidual_eq_zero_iff_defectCoordinate_eq_target`,
+`targetCoordinate_eq_distinguished_iff_terminal`,
+`tagHaltsFrom_of_targetCoordinate_eq_distinguished`, and `ordinary_singletons_straddle_zero`.
+
+**Artifact:**
+[`audits/m53-centered-history-defect-2026-08-31.md`](audits/m53-centered-history-defect-2026-08-31.md).
+
+**Next:** prove exact threshold avoidance for the physical Möbius language (9), with complete
+Neary suffix ancestry retained, or prove that any earliest threshold hit is terminal.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).

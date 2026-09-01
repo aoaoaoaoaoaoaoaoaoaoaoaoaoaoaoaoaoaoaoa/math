@@ -1712,6 +1712,7 @@ The setter-projective audit now also exposes a kernel-friendly carry theorem:
 | [`MM-S52`](SALVAGE.md#mm-s52-double-deletion-raw-ancestry-obstruction) | exact post-`D_c²` normalization, punctuated-code integrality gate, repeated-`D_c²` nonintegrality, and rational/integral carrier-pole equivalence |
 | [`MM-S51`](SALVAGE.md#mm-s51-double-deletion-ratio-chamber-extinction) | exact `D_c²` discrepancy chamber, physical role-block ratio gap, and complete expected-shell first multi-transfer extinction |
 | [`MM-S55`](SALVAGE.md#mm-s55-physical-role-block-shell-completion) | automatic physical pole shells, coefficient depths, lower-code units, initial-block dichotomy, and shell-free first-multi extinction |
+| [`MM-S57`](SALVAGE.md#mm-s57-centered-history-defect-transport) | exact centered continuant, raw-head/ordinary-ray equivalence, last-resonance correction, normalized threshold recurrence, singleton sign split, and ordinary-return adapter |
 
 `MM-S08` is now discharged in
 [`SwappedSetterSingletonShell.lean`](MatrixMortality/SwappedSetterSingletonShell.lean).
@@ -2034,6 +2035,20 @@ and lower unit from `IsRoleBlock` alone. The only role block of upper length one
 only the compiler envelope and exact centered pole equation. The unresolved global problem is
 later history: a general fold state is not known to reinitialize to this special first-transfer
 form.
+
+Record [`MM-S57`](SALVAGE.md#mm-s57-centered-history-defect-transport) identifies the exact
+failure of that reinitialization. The four-coefficient `CenteredContinuant` acts exactly as an
+arbitrary block fold. If `D(x,y)=y−Rμx` is the ordinary-reset defect and
+`ε_z(x,y)=A_zy−RP_zx` is the raw-head defect for one block, then Lean proves
+`ε_z(T_z(x,y))=−A_zHV_zD(x,y)`. Hence a later completed block lies on its canonical raw-head ray
+if and only if the preceding history genuinely returned to the ordinary ray; the distinguished
+reset misses it by exactly `R²`. More generally, every later pole splits into the canonical
+first-multi residual plus one explicit multiple of `D`. If `D=0`, the shell-free `MM-S55`
+theorem applies and gives a contradiction. The surviving global problem is therefore the
+nonzero history-defect correction, not an omitted shell constructor. Normalizing by the live
+denominator gives one exact Möbius recurrence for `δ=D/y`; a target is a pole exactly at
+`δ=(R/H)(P/V)`. Terminal equality is the distinguished threshold `R/H`. The singleton images
+`D_c` and `D_b` straddle zero, formally excluding a one-sided sign trap.
 
 Record [`MM-S21`](SALVAGE.md#mm-s21-bounded-decimal-suffix-cycles) closes the fixed-precision
 suffix-descent lane. `DecimalSetterSuffix.cycleDefect_lift` gives an explicit one-digit lift for

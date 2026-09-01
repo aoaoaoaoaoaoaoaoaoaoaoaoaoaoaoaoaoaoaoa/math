@@ -1266,12 +1266,28 @@ upper length greater than one. Consequently `physicalFirstMultiTransfer_pole_fal
 three physical role blocks, the compiler envelope, and the exact centered two-step pole
 equation.
 
-The remaining ternary obligation is the **global earliest-pole reduction**. A later earliest
-pole begins from a general centered fold state, not the special first-transfer state consumed by
-`MM-S55`; there is no lawful sliding-window reinitialization. Prove that every arbitrary
-surviving fold either reaches the distinguished state and terminal equality or enters a
-forbidden physical interface, or isolate the missing history constructor. None of
-`MM-S51`-`MM-S55` alone proves projective avoidance.
+[`MM-S57`](SALVAGE.md#mm-s57-centered-history-defect-transport) isolates the exact history
+constructor. A physical step lands on its canonical raw-head ray if and only if its incoming
+state lies on the ordinary-reset ray. The distinguished reset already misses that ray by `R²`,
+so sliding the first-multi window is formally invalid. For arbitrary first, middle, and target
+blocks, the prospective pole is the canonical `MM-S55` residual plus one explicit multiple of
+the incoming ordinary-reset defect. A genuine ordinary-ray return therefore activates `MM-S55`
+and is impossible at the next nontrivial first-multi pole.
+
+The remaining ternary obligation is now the **nonzero history-defect branch** of the global
+earliest-pole reduction. In the normalized coordinate `δ=D/y`, the complete physical recurrence
+is
+
+```text
+δ'=[R(P−μA)−HVδ]/[RP−HVδ],      pole at δ=(R/H)(P/V).
+```
+
+The distinguished coordinate `R/H` is a target threshold exactly for terminal equality `P=V`.
+The first `D_c` and `D_b` images lie on opposite sides of zero, so a one-sided real trap is
+already impossible. Exclude every other reachable threshold using the Neary suffix language.
+Fixed residue and unit projections are empirically saturated on the benchmark, but this does
+not rule out every finite semantic quotient. None of `MM-S51`, `MM-S55`, or `MM-S57` alone proves
+projective avoidance.
 Exact bidirectional diagnostics for the ternary swap at `β=3`, body `bbcc`, exclude every
 false-pole word of at most six projective blocks when each regular block has
 role length at most three; this is computational evidence only.
