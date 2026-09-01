@@ -156,6 +156,7 @@ file owns the mathematical stock.
 | [`MM-S95`](#mm-s95-complete-three-block-singleton-current-extinction) | obstruction and classifier | every lawful three-block singleton pole has a multi-role current; with a multi-role intervening block it obeys the complete `MM-S94` classifier without an extra current-shape hypothesis | formalized | active |
 | [`MM-S96`](#mm-s96-contaminated-tail-factorwise-pole-gate) | structure theorem and obstruction | a singleton pole over the uniform contaminated tail forces the primitive gap into the product of current and inherited lower codes, with exact factorwise transfer outside inherited support | formalized | active |
 | [`MM-S98`](#mm-s98-long-r_c-gap-clean-ancestry-extinction) | obstruction | every hypothetical long `R_c` three-block singleton pole has normalized quotient `μ/H` and reduced numerator coprime to the primitive gap, so its entire gap-clean ancestry branch is empty | formalized | active |
+| [`MM-S101`](#mm-s101-long-r_c-peeled-head-support-gate) | structure theorem and obstruction | every long `R_c` pole forces gap support through `H−10μ`; the `cb` head is exactly saturated, while the `cc` head exposes the fringe residue `18F−35` | formalized | active |
 | [`R32-S01`](#r32-s01-split-return-normal-form) | structure theorem | rank-two cuts reduce one-unit binary mortality to a `2 × 2` return recurrence | formalized | graduated |
 | [`R32-S02`](#r32-s02-two-plane-edge-square) | structure theorem | two rank-two generators are a two-vertex square of `2 × 2` edges | formalized | graduated |
 | [`R32-O01`](#r32-o01-rank-one-profile-collapse) | obstruction | a rank-one generator reduces mortality to order-at-most-three scalar recurrence zeros | audited | stock |
@@ -6116,6 +6117,79 @@ through `singletonPole_threeBlock_ruleCRoot_long_normalizedQuotient_eq`,
 **Next:** generalize the factorwise pole product law from the uniform contaminated tail to an
 arbitrary peeled `cb/cc` head, then intersect forced gap support with the exact lower suffix
 language.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S101: Long `R_c` peeled-head support gate
+
+**Kind:** structure theorem and obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+For a hypothetical long `R_c` three-block singleton pole, let `H` be the peeled-head code, `μ`
+the marker, `q=2·10^β−7` the primitive gap, and `V_current` the current lower code. Cancelling the
+exact `10^(k−1)` suffix factor from the pole equation and reducing modulo `q` gives
+
+```text
+q ∣ V_current·(H−10μ).                               (1)
+```
+
+The singleton trace and calibrated lift are units modulo `q`, so no hidden target or lift factor
+remains in (1). This is the factorwise pole law for the entire long `cb/cc` family, rather than
+the one uniform contaminated tail of `MM-S96`.
+
+The two peeled-head chambers behave differently. For the terminal `cb` head, the marker relation
+gives the exact identity
+
+```text
+H−10μ = −q.                                          (2)
+```
+
+Thus (1) is tautological: the whole primitive gap is already present in the head coefficient.
+This chamber is support-saturated and cannot be cut by any factorwise cancellation based only on
+the first long pole.
+
+For a `cc` head, write its remaining `β` digits as fringe code `F`. Lean proves
+
+```text
+18(H−10μ)=18F−25q−35.                                (3)
+```
+
+Combining (1) and (3) yields the informative gate
+
+```text
+q ∣ V_current·(18F−35).                              (4)
+```
+
+Consequently every divisor `r∣q` coprime to `18F−35` must divide the current lower code. The
+only silent factors on the `cc` branch are those already absorbed by this explicit fringe
+residue.
+
+**Scope:** the pole product assumes `β≥3`, multi-role current and intervening blocks, the long
+current inequality, root `R_c`, and an actual singleton pole. Equations (2) and (3) are
+unconditional code identities. No theorem excludes the saturated `cb` branch or guarantees
+coprimality of every `cc` fringe residue.
+
+**Use:** split future long-head attacks immediately. The `cb` chamber requires information
+beyond first-pole gap support, such as a predecessor cylinder or exact coefficient size. On the
+`cc` chamber, classify `gcd(q,18F−35)` over the lawful fringe language and force every absent
+factor into the current lower spelling.
+
+**Formalization:**
+[`MatrixMortality/DecimalSetterThreeBlockLongSupport.lean`](MatrixMortality/DecimalSetterThreeBlockLongSupport.lean),
+through `singletonPole_threeBlock_ruleCRoot_long_forces_headSupportProduct`,
+`terminalHead_sub_ten_marker_eq_neg_gapFactor`,
+`doubleCHead_sub_ten_marker_residue`,
+`singletonPole_threeBlock_ruleCRoot_long_doubleC_forces_fringeSupportProduct`, and
+`singletonPole_threeBlock_ruleCRoot_long_doubleC_forces_gapDivisor_currentLower`.
+
+**Artifact:**
+[`audits/m53-long-rule-c-peeled-head-support-gate-2026-09-01.md`](audits/m53-long-rule-c-peeled-head-support-gate-2026-09-01.md).
+
+**Next:** classify the lawful `cc` fringe residues against the factors of `q`; attack the
+support-saturated `cb` chamber through a second predecessor or an exact archimedean coefficient
+bound.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).

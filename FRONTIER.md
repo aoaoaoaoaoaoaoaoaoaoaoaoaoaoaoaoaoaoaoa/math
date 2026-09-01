@@ -1190,6 +1190,13 @@ remove factors from `μ`, which is coprime to the primitive gap. Therefore no hy
 `R_c` pole can satisfy the gap-clean ancestry interface. This kills a proof branch, not the
 pole: the `cb/cc` family must be attacked through factorwise support and exact lower spelling.
 
+[`MM-S101`](SALVAGE.md#mm-s101-long-r_c-peeled-head-support-gate) performs that factorwise
+reduction. Every long `R_c` pole forces `q∣V_current(H−10μ)`. The `cb` coefficient is exactly
+`−q`, so this chamber is fully support-saturated at the first pole. The `cc` coefficient reduces
+to the explicit fringe residue `18F−35`, giving `q∣V_current(18F−35)` and divisorwise transfer
+whenever that residue is coprime. The frontier has therefore bifurcated cleanly: fringe-support
+classification for `cc`, and a genuinely different second-predecessor or size argument for `cb`.
+
 The ternary and decimal branches now separate at their first multi-transfer front.
 [`MM-S37`](SALVAGE.md#mm-s37-decimal-three-shape-frontier-extinction) substitutes each of the
 three role shapes left by the swapped ternary gate into the decimal carrier equation. All are

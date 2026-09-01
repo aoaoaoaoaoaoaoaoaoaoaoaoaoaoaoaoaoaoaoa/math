@@ -1746,6 +1746,13 @@ The exact criterion in `MM-S91` then forbids every gap-clean integral descended 
 pole itself remains hypothetical; all further attacks on this arm must retain factorwise gap
 support.
 
+Record [`MM-S101`](SALVAGE.md#mm-s101-long-r_c-peeled-head-support-gate) supplies the required
+factorwise replacement on the full long-head family. Every hypothetical pole forces
+`q∣V_current(H−10μ)`. For the `cb` head, `H−10μ=−q` exactly, so the first-pole support gate is
+completely saturated. For a `cc` head with fringe code `F`, the same coefficient is congruent,
+up to the unit eighteen, to `18F−35`; hence `q∣V_current(18F−35)`, and every gap divisor absent
+from that fringe residue enters the current lower code.
+
 Record [`MM-S37`](SALVAGE.md#mm-s37-decimal-three-shape-frontier-extinction) separates the
 ternary and decimal first-multi-transfer fronts. The single theorem
 `DecimalSetterDepth.firstMultiTransfer_threeShapeFrontier_impossible` consumes the three role
@@ -1826,6 +1833,7 @@ The `M₅(3)` delimiter attack has twenty-three foundational records:
 | [`MM-S95`](SALVAGE.md#mm-s95-complete-three-block-singleton-current-extinction) | universal root quotient chamber, consecutive-singleton and deep-root singleton-current extinction, canonical current-multi theorem, and unconditional next-multi classifier |
 | [`MM-S96`](SALVAGE.md#mm-s96-contaminated-tail-factorwise-pole-gate) | exact current/inherited lower-code product divisibility, arbitrary-divisor and primewise support transfer, and a formal inherited-support saturation boundary |
 | [`MM-S98`](SALVAGE.md#mm-s98-long-r_c-gap-clean-ancestry-extinction) | exact normalized quotient `μ/H`, reduced-numerator coprimality, and complete gap-clean ancestry extinction for the long `R_c` three-block arm |
+| [`MM-S101`](SALVAGE.md#mm-s101-long-r_c-peeled-head-support-gate) | full long-head support product, exact `cb` saturation identity, `cc` fringe-residue gate, and arbitrary-divisor transfer into the current lower code |
 | [`MM-S01`](SALVAGE.md#mm-s01-square-run-projective-normal-form) | invariant square-run plane, invertible `2 × 2` transfer, Möbius normalization, rank-one fracture grammar, and equivalence with pole avoidance |
 | [`MM-S02`](SALVAGE.md#mm-s02-reset-zero-projective-peeling) | scaled transfer identity, exact two-shell classification of all poles, and reset-zero one-transfer avoidance |
 | [`MM-O16`](SALVAGE.md#mm-o16-exact-delimiter-pair-obstruction) | generic ignored-pair immortality is formalized; paired common-kernel and cubic companion specializations are audited |
