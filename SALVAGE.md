@@ -76,6 +76,7 @@ file owns the mathematical stock.
 | [`MM-S48`](#mm-s48-centered-four-c-extinction) | structure and halting theorem | the one/two-block macro is a finite injective centered division system; every `n≡2 (mod 3)` diagonal source halts | formalized | active |
 | [`MM-S58`](#mm-s58-unequal-two-c-cycle-law) | structure theorem and obstruction | every nontrivial even two-`c` body off middle phase two has a canonical cycle; an unequal sheared diagonal reaches it from the coupled source | formalized | active |
 | [`MM-S70`](#mm-s70-sheared-residue-eight-drainage) | halting theorem | a four-active-`c` history drains the sheared middle-phase-two wedge `r≡8 (mod 9)`, `r-s≢2 (mod 3)` | formalized | active |
+| [`MM-S72`](#mm-s72-sheared-residue-twenty-six-drainage) | halting theorem | a ten-active-`c` history drains the surviving-shear subwedge `r≡26 (mod 27)`, `r-s≡2,5 (mod 9)` | formalized | active |
 | [`MM-O01`](#mm-o01-all-placement-packing-rank) | obstruction | literal CHHN packing has exact rank six for every separator placement | formalized | graduated |
 | [`MM-O02`](#mm-o02-one-sided-phase-overlap) | obstruction | standard common-line phase fusion becomes one-sided | reported | parked |
 | [`MM-O03`](#mm-o03-two-channel-boundary-tax) | obstruction | exact diagonal rank-two punctuation costs two states beyond Hankel rank | formalized | graduated |
@@ -6349,8 +6350,57 @@ wedge can be deleted before constructing a larger active-block nucleus.
 [`MatrixMortality/SeparatedTwoCShear.lean`](MatrixMortality/SeparatedTwoCShear.lean), through
 `SeparatedTwoCShear.shearedEight_tagHaltsFrom`.
 
-**Next:** derive the successor of the same four-event history for shear phase two, then attack
-middle residues two and five modulo nine.
+**Next:** `MM-S72` drains the first subwedge of the surviving shear phase. Classify its other
+subresidues, then attack middle residues two and five modulo nine.
+
+### MM-S72: Sheared residue-twenty-six drainage
+
+**Kind:** halting theorem
+**Evidence:** formalized
+**Disposition:** active
+
+Continue with the sheared body `q(t,n)=b^(3t+2)c b^(n+t)c b^n`. Write
+
+```text
+r=n+t=9j+8,    t=3u+2,
+```
+
+and suppose `j≡2 (mod 3)` and `u≢2 (mod 3)`. Equivalently, `r≡26 (mod 27)` and
+`t≡2,5 (mod 9)`. The ten-active-`c` history from the entry queue is
+
+```text
+C B^(3j+2) C B^(3j+3u+5) C B^(3j+2) C
+B^(4j+2u+5) C B^(3j+2) C B^(4j+3u+6) C
+B^(3j+2) C B^(4j+2u+5) C B^(3j+2) C,
+C=cbb,  B=bbb.
+```
+
+Its residual run vector is
+
+```text
+[13j+8u+18, r, 12j+6u+17, r, 13j+9u+21, r,
+ 12j+6u+17, r, 13j+8u+20, r, 12j+6u+17, r, n+1].
+```
+
+Writing `j=3K+2` and `u=3v+e` with `e<2`, the twelve `c` positions occur in three
+four-letter phase groups: `2+2e`, `2+2e`, and `1+e` modulo three. None is a deletion head.
+The residual therefore drains, so the coupled source halts.
+
+**Scope:** this proves halting only when the middle run is `26 mod 27` and the shear is `2` or
+`5 mod 9`. It does not decide shear `8 mod 9` on that middle residue, the other `8 mod 9`
+middle subresidues, middle residues two or five modulo nine, or coupled triples outside the
+sheared plane.
+
+**Use:** the shear-two survivor of `MM-S70` is not stable. Its six-event successor has a finite
+joint phase test, and two of the three shear subphases drain without entering a larger block
+nucleus.
+
+**Formalization:**
+[`MatrixMortality/SeparatedTwoCShear.lean`](MatrixMortality/SeparatedTwoCShear.lean), through
+`SeparatedTwoCShear.shearedTwentySix_tagHaltsFrom`.
+
+**Next:** formalize the matched six-active-`c` macro for middle residues two and five, then
+classify shear `8 mod 9` and the remaining residue-eight sublevels.
 
 ### MM-S33: Leading-`D_b` support-saturator extinction
 

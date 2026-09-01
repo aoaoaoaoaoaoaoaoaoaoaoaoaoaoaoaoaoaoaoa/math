@@ -16,6 +16,9 @@ shear gives unequal runs.
 
 Inside the excluded middle phase, a four-active-`c` history drains every source with
 `n+t ≡ 8 (mod 9)` and shear not congruent to two modulo three.
+
+On the surviving shear phase, a ten-active-`c` history drains the subwedge with middle run
+`26 mod 27` and shear `2` or `5 mod 9`.
 -/
 
 namespace MatrixMortality.SeparatedTwoCShear
@@ -440,6 +443,30 @@ private theorem shear_produced_append (output : TagLetter → List TagLetter)
     produced output (left ++ right) = produced output left ++ produced output right := by
   simp [produced]
 
+private theorem shearedOutput_c (shear separation : Nat) :
+    tagOutput (shearedBody shear separation) .c =
+      bRun (3 * shear + 2) ++ [.c] ++ bRun (separation + shear) ++ [.c] ++
+        bRun (separation + 1) := by
+  simp [shearedBody, twoCBody, tagOutput, nearyBody, bRun, List.append_assoc]
+
+private theorem shearedOutput_bridge (shear separation front following : Nat)
+    (tail : List TagLetter) :
+    bRun front ++
+        (tagOutput (shearedBody shear separation) .c ++ (bRun following ++ tail)) =
+      bRun (front + (3 * shear + 2)) ++ [.c] ++ bRun (separation + shear) ++ [.c] ++
+        bRun (separation + 1 + following) ++ tail := by
+  simp [shearedOutput_c, bRun, List.append_assoc]
+
+private theorem shearedOutput_initialBridge
+    (shear separation left front following : Nat) (tail : List TagLetter) :
+    bRun left ++
+        (bRun front ++
+          (tagOutput (shearedBody shear separation) .c ++ (bRun following ++ tail))) =
+      bRun (left + front + (3 * shear + 2)) ++ [.c] ++
+        bRun (separation + shear) ++ [.c] ++ bRun (separation + 1 + following) ++ tail := by
+  simp [shearedOutput_c, bRun, List.append_assoc]
+  omega
+
 private def shearedEightHistory (shear k : Nat) : List (Stroke TagLetter 3) :=
   [strokeCBB] ++ List.replicate (3 * k + 2) strokeBBB ++ [strokeCBB] ++
     List.replicate (3 * k + 3 + shear) strokeBBB ++ [strokeCBB] ++
@@ -541,6 +568,160 @@ theorem shearedEight_tagHaltsFrom (shear separation k : Nat)
       (shearedEightHistory shear k) (shearedEntryQueue shear separation)
       (shearedEightFinal shear separation k) final_halts
       (shearedEightHistory_equation shear separation k middle_eq)
+  exact Undecidability.tagHaltsFrom_of_reaches
+    (shearedInitial_reaches_entry shear separation).toReaches entry_halts
+
+private def shearedTwentySixTailHistory (phase k v : Nat) : List (Stroke TagLetter 3) :=
+  List.replicate (12 * k + 13 + 6 * v + 2 * phase) strokeBBB ++ [strokeCBB] ++
+    List.replicate (9 * k + 8) strokeBBB ++ [strokeCBB] ++
+      List.replicate (12 * k + 14 + 9 * v + 3 * phase) strokeBBB ++ [strokeCBB] ++
+        List.replicate (9 * k + 8) strokeBBB ++ [strokeCBB] ++
+          List.replicate (12 * k + 13 + 6 * v + 2 * phase) strokeBBB ++ [strokeCBB] ++
+            List.replicate (9 * k + 8) strokeBBB ++ [strokeCBB]
+
+private def shearedTwentySixFinal (phase separation k v : Nat) : List TagLetter :=
+  bRun (39 * k + 44 + 24 * v + 8 * phase) ++ [.c] ++ bRun (27 * k + 26) ++ [.c] ++
+    bRun (36 * k + 41 + 18 * v + 6 * phase) ++ [.c] ++ bRun (27 * k + 26) ++ [.c] ++
+      bRun (39 * k + 47 + 27 * v + 9 * phase) ++ [.c] ++ bRun (27 * k + 26) ++ [.c] ++
+        bRun (36 * k + 41 + 18 * v + 6 * phase) ++ [.c] ++ bRun (27 * k + 26) ++ [.c] ++
+          bRun (39 * k + 46 + 24 * v + 8 * phase) ++ [.c] ++ bRun (27 * k + 26) ++ [.c] ++
+            bRun (36 * k + 41 + 18 * v + 6 * phase) ++ [.c] ++ bRun (27 * k + 26) ++ [.c] ++
+              bRun (separation + 1)
+
+private def shearedTwentySixProduced (phase shear separation k v : Nat) : List TagLetter :=
+  bRun (12 * k + 13 + 6 * v + 2 * phase) ++
+    tagOutput (shearedBody shear separation) .c ++ bRun (9 * k + 8) ++
+      tagOutput (shearedBody shear separation) .c ++
+        bRun (12 * k + 14 + 9 * v + 3 * phase) ++
+          tagOutput (shearedBody shear separation) .c ++ bRun (9 * k + 8) ++
+            tagOutput (shearedBody shear separation) .c ++
+              bRun (12 * k + 13 + 6 * v + 2 * phase) ++
+                tagOutput (shearedBody shear separation) .c ++ bRun (9 * k + 8) ++
+                  tagOutput (shearedBody shear separation) .c
+
+private theorem shearedTwentySixTailHistory_produced (phase shear separation k v : Nat) :
+    produced (tagOutput (shearedBody shear separation))
+        (shearedTwentySixTailHistory phase k v) =
+      shearedTwentySixProduced phase shear separation k v := by
+  simp [shearedTwentySixTailHistory, shearedTwentySixProduced, strokeCBB, stroke₃, bRun,
+    List.append_assoc]
+
+private theorem shearedEightFinal_reaches_twentySixFinal (phase shear separation k v : Nat)
+    (phase_lt : phase < 2)
+    (shear_eq : shear = 9 * v + 3 * phase + 2)
+    (middle_eq : separation + shear = 27 * k + 26) :
+    TagReaches 3 (tagOutput (shearedBody shear separation))
+      (shearedEightFinal shear separation (3 * k + 2))
+      (shearedTwentySixFinal phase separation k v) := by
+  have reach := Undecidability.tagReaches_history (tagOutput (shearedBody shear separation))
+    (shearedTwentySixTailHistory phase k v) (bRun (separation - 1))
+  have source_eq :
+      consumed (shearedTwentySixTailHistory phase k v) ++ bRun (separation - 1) =
+        shearedEightFinal shear separation (3 * k + 2) := by
+    have firstRun : 3 * (12 * k + 13 + 6 * v + 2 * phase) =
+        12 * (3 * k + 2) + 11 + 2 * shear := by omega
+    have shortRun : 3 * (9 * k + 8) + 2 = 9 * (3 * k + 2) + 8 := by omega
+    have longRun : 3 * (12 * k + 14 + 9 * v + 3 * phase) + 2 =
+        12 * (3 * k + 2) + 14 + 3 * shear := by omega
+    have tailRun : separation - 1 + 2 = separation + 1 := by omega
+    simp [shearedTwentySixTailHistory, shearedEightFinal, strokeCBB, stroke₃,
+      Stroke.letters, bRun, List.append_assoc, firstRun, shortRun, longRun, tailRun]
+    omega
+  have target_eq :
+      bRun (separation - 1) ++
+          produced (tagOutput (shearedBody shear separation))
+            (shearedTwentySixTailHistory phase k v) =
+        shearedTwentySixFinal phase separation k v := by
+    have initialRun : separation - 1 + (12 * k + 13 + 6 * v + 2 * phase) +
+        (3 * shear + 2) = 39 * k + 44 + 24 * v + 8 * phase := by omega
+    have shortBridge : separation + 1 + (9 * k + 8) + (3 * shear + 2) =
+        36 * k + 41 + 18 * v + 6 * phase := by omega
+    have longBridge :
+        separation + 1 + ((12 * k + 14 + 9 * v + 3 * phase) + (3 * shear + 2)) =
+          39 * k + 47 + 27 * v + 9 * phase := by omega
+    have lastBridge : separation + 1 +
+        ((12 * k + 13 + 6 * v + 2 * phase) + (3 * shear + 2)) =
+          39 * k + 46 + 24 * v + 8 * phase := by omega
+    rw [shearedTwentySixTailHistory_produced]
+    unfold shearedTwentySixProduced shearedTwentySixFinal
+    simp only [List.append_assoc]
+    rw [shearedOutput_initialBridge]
+    repeat rw [shearedOutput_bridge]
+    simp [shearedOutput_c, bRun, List.append_assoc, initialRun, shortBridge, longBridge,
+      lastBridge, middle_eq]
+  rw [source_eq, target_eq] at reach
+  exact reach
+
+private theorem shearedTwentySixFinal_clean (phase separation k v : Nat)
+    (phase_lt : phase < 2) :
+    Undecidability.ConstantAtMultiples 3 TagLetter.b
+      (shearedTwentySixFinal phase separation k v) := by
+  have clean : ConstantAtOffset 0 (shearedTwentySixFinal phase separation k v) := by
+    unfold shearedTwentySixFinal
+    simp only [List.singleton_append, List.append_assoc]
+    apply constantAtOffset_bRun_c
+    · rw [Nat.dvd_iff_mod_eq_zero]
+      omega
+    · apply constantAtOffset_bRun_c
+      · rw [Nat.dvd_iff_mod_eq_zero]
+        omega
+      · apply constantAtOffset_bRun_c
+        · rw [Nat.dvd_iff_mod_eq_zero]
+          omega
+        · apply constantAtOffset_bRun_c
+          · rw [Nat.dvd_iff_mod_eq_zero]
+            omega
+          · apply constantAtOffset_bRun_c
+            · rw [Nat.dvd_iff_mod_eq_zero]
+              omega
+            · apply constantAtOffset_bRun_c
+              · rw [Nat.dvd_iff_mod_eq_zero]
+                omega
+              · apply constantAtOffset_bRun_c
+                · rw [Nat.dvd_iff_mod_eq_zero]
+                  omega
+                · apply constantAtOffset_bRun_c
+                  · rw [Nat.dvd_iff_mod_eq_zero]
+                    omega
+                  · apply constantAtOffset_bRun_c
+                    · rw [Nat.dvd_iff_mod_eq_zero]
+                      omega
+                    · apply constantAtOffset_bRun_c
+                      · rw [Nat.dvd_iff_mod_eq_zero]
+                        omega
+                      · apply constantAtOffset_bRun_c
+                        · rw [Nat.dvd_iff_mod_eq_zero]
+                          omega
+                        · apply constantAtOffset_bRun_c
+                          · rw [Nat.dvd_iff_mod_eq_zero]
+                            omega
+                          · exact constantAtOffset_replicate _ _
+  simpa [ConstantAtOffset, Undecidability.ConstantAtMultiples] using clean
+
+/-- The shear-two residue-eight survivor halts when its middle run is `26 mod 27` and its
+shear is `2` or `5 mod 9`. -/
+theorem shearedTwentySix_tagHaltsFrom (phase shear separation k v : Nat)
+    (phase_lt : phase < 2)
+    (shear_eq : shear = 9 * v + 3 * phase + 2)
+    (middle_eq : separation + shear = 27 * k + 26) :
+    TagHaltsFrom 3 (tagOutput (shearedBody shear separation))
+      (shearedInitial shear separation) := by
+  have final_halts := Undecidability.tagHaltsFrom_of_constantAtMultiples 3 (by omega)
+    (tagOutput (shearedBody shear separation)) TagLetter.b rfl
+    (shearedTwentySixFinal phase separation k v)
+    (shearedTwentySixFinal_clean phase separation k v phase_lt)
+  have residue_halts : TagHaltsFrom 3 (tagOutput (shearedBody shear separation))
+      (shearedEightFinal shear separation (3 * k + 2)) :=
+    Undecidability.tagHaltsFrom_of_reaches
+      (shearedEightFinal_reaches_twentySixFinal phase shear separation k v phase_lt shear_eq
+        middle_eq)
+      final_halts
+  have entry_halts : TagHaltsFrom 3 (tagOutput (shearedBody shear separation))
+      (shearedEntryQueue shear separation) :=
+    tagHaltsFrom_of_history_equation (tagOutput (shearedBody shear separation))
+      (shearedEightHistory shear (3 * k + 2)) (shearedEntryQueue shear separation)
+      (shearedEightFinal shear separation (3 * k + 2)) residue_halts
+      (shearedEightHistory_equation shear separation (3 * k + 2) (by omega))
   exact Undecidability.tagHaltsFrom_of_reaches
     (shearedInitial_reaches_entry shear separation).toReaches entry_halts
 
