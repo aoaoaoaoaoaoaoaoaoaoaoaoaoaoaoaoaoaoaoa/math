@@ -1858,6 +1858,16 @@ obligation; complete block formation and the arbitrary-word fibre remain. See
 [`R32-S74`](SALVAGE.md#r32-s74-selected-comparator-self-enforces-cleanup) and
 [`m32-cubic-selected-cleanup-2026-09-01.md`](audits/m32-cubic-selected-cleanup-2026-09-01.md).
 
+The source-fibre obstruction is now exponentially sharp. A fixed positive translation sends the
+safe transverse pump ray back to the separator source, so sandwiching every free binary pump word
+between that translation and the safe suffix gives a projectively free positive source-stabilizer
+family. Prefixing the selected `00` source yields exactly `2^n` equal-length, pairwise
+projectively distinct products in one observed source fibre at every width. Finite, scalar, and
+cyclic stabilizer quotients are dead. The binary payload must be read in a later context or given
+a lawful state-dependent epsilon semantics. See
+[`R32-S75`](SALVAGE.md#r32-s75-free-binary-source-stabilizer-fibre) and
+[`m32-cubic-free-source-stabilizer-2026-09-01.md`](audits/m32-cubic-free-source-stabilizer-2026-09-01.md).
+
 ### ReturnSquare laboratory
 
 [`R32-S03`](SALVAGE.md#r32-s03-returnsquare-normal-form) is the first completely normalized

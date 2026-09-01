@@ -1158,6 +1158,15 @@ row, positivity, incidence factorization, and exact reduction to `R32-S71` at ba
 See `R32-S74` and
 [`audits/m32-cubic-selected-cleanup-2026-09-01.md`](audits/m32-cubic-selected-cleanup-2026-09-01.md).
 
+`CubicContinuantTranslationLattice` packages arbitrary nonnegative counts of the four positive
+terminal translations with exact shift, physical realization, positivity, and length.
+`CubicContinuantFreeSourceStabilizer` instantiates this lattice at shift `-41/90`, which sends the
+safe transverse ray back to the separator source. Lean proves that sandwiching every transverse
+binary address produces a positive, projectively injective source-stabilizer family. After the
+selected `00` prefix, width `n` supplies exactly `2^n` equal-length, pairwise projectively distinct
+products in one observed source fibre. See `R32-S75` and
+[`audits/m32-cubic-free-source-stabilizer-2026-09-01.md`](audits/m32-cubic-free-source-stabilizer-2026-09-01.md).
+
 The rank-(2,2) graph is no longer an independent residue. `RankTwoPunctuation` proves that every
 compatible square with one rank-one loop and three units transports exactly to the existing raw
 reverse compiler [`R32-M01`](SALVAGE.md#r32-m01-generic-reverse-edge-compiler). Its intrinsic

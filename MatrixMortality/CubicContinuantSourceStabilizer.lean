@@ -1,4 +1,5 @@
 import MatrixMortality.CubicContinuantSelectedComparator
+import MatrixMortality.CubicContinuantTranslationLattice
 
 /-!
 # A non-scalar positive source stabilizer in the fixed cubic continuant
@@ -13,11 +14,14 @@ namespace MatrixMortality.CubicReturn.NonPure
 
 open scoped Matrix
 
+/-- Count vector realizing the exact normalized shift `-11/10`. -/
+def falseWaitSourceStabilizerTranslationCounts :
+    ContinuantTerminalTranslationCounts :=
+  ⟨25, 5, 1221, 0⟩
+
 /-- Positive translation word whose exact normalized shift is `-11/10`. -/
 def falseWaitSourceStabilizerTranslationWord : List Nat :=
-  continuantRepeatWord (continuantReaderPositiveWord false) 25 ++
-    (continuantRepeatWord (continuantReaderNegativeWord false) 5 ++
-      continuantRepeatWord (continuantReaderPositiveWord true) 1221)
+  continuantTerminalTranslationWord falseWaitSourceStabilizerTranslationCounts
 
 /-- Positive physical spelling of the separator-source affine stabilizer. -/
 def falseWaitSourceStabilizerWord : List Nat :=
@@ -35,65 +39,19 @@ def falseWaitSelectedSourceWord : List Nat :=
 def falseWaitSelectedSourceStabilizerCollisionWord : List Nat :=
   falseWaitSelectedSourceWord ++ falseWaitSourceStabilizerWord
 
-private theorem falseWaitSourceTranslation_pow (shift : ℚ) (repetitions : Nat) :
-    continuantDefectTranslation shift ^ repetitions =
-      continuantDefectTranslation (repetitions * shift) := by
-  induction repetitions with
-  | zero =>
-      ext i j
-      fin_cases i <;> fin_cases j <;>
-        norm_num [continuantDefectTranslation, Matrix.one_apply]
-  | succ repetitions induction =>
-      rw [pow_succ', induction]
-      ext i j
-      fin_cases i
-      · fin_cases j
-        · simp [continuantDefectTranslation, Matrix.mul_apply,
-            Fin.sum_univ_succ]
-        · simp [continuantDefectTranslation, Matrix.mul_apply,
-            Fin.sum_univ_succ]
-          ring
-      · fin_cases j <;>
-          simp [continuantDefectTranslation, Matrix.mul_apply,
-            Fin.sum_univ_succ]
-
 /-- The three positive terminal-translation runs realize the exact total shift `-11/10`. -/
 theorem falseWaitSourceStabilizerTranslationWord_projectivelyRealizes :
     continuantProjectivelyRealizes falseWaitSourceStabilizerTranslationWord
       (continuantDefectTranslation (-11 / 10)) := by
-  have positiveFalse :
-      continuantProjectivelyRealizes (continuantReaderPositiveWord false)
-        (continuantDefectTranslation (2839 / 108)) := by
-    simpa [continuantReaderPositive, continuantDefectTranslation] using
-      continuantReaderPositiveWord_projectivelyRealizes false
-  have negativeFalse :
-      continuantProjectivelyRealizes (continuantReaderNegativeWord false)
-        (continuantDefectTranslation (-189665 / 144)) := by
-    simpa [continuantReaderNegative, continuantDefectTranslation] using
-      continuantReaderNegativeWord_projectivelyRealizes false
-  have positiveTrue :
-      continuantProjectivelyRealizes (continuantReaderPositiveWord true)
-        (continuantDefectTranslation (31457 / 6480)) := by
-    simpa [continuantReaderPositive, continuantDefectTranslation] using
-      continuantReaderPositiveWord_projectivelyRealizes true
-  have first := continuantProjectivelyRealizes_repeat positiveFalse 25
-  have second := continuantProjectivelyRealizes_repeat negativeFalse 5
-  have third := continuantProjectivelyRealizes_repeat positiveTrue 1221
-  have combined := continuantProjectivelyRealizes_append first
-    (continuantProjectivelyRealizes_append second third)
-  have normalized :
-      continuantDefectTranslation (2839 / 108) ^ 25 *
-          (continuantDefectTranslation (-189665 / 144) ^ 5 *
-            continuantDefectTranslation (31457 / 6480) ^ 1221) =
-        continuantDefectTranslation (-11 / 10) := by
-    rw [falseWaitSourceTranslation_pow, falseWaitSourceTranslation_pow,
-      falseWaitSourceTranslation_pow]
-    ext i j
-    fin_cases i <;> fin_cases j <;>
-      norm_num [continuantDefectTranslation, Matrix.mul_apply,
-        Fin.sum_univ_succ]
-  rw [normalized] at combined
-  simpa only [falseWaitSourceStabilizerTranslationWord] using combined
+  have realization := continuantTerminalTranslationWord_projectivelyRealizes
+    falseWaitSourceStabilizerTranslationCounts
+  have shift :
+      continuantTerminalTranslationShift
+          falseWaitSourceStabilizerTranslationCounts = -11 / 10 := by
+    norm_num [falseWaitSourceStabilizerTranslationCounts,
+      continuantTerminalTranslationShift]
+  rw [shift] at realization
+  exact realization
 
 private theorem falseWaitSourceStabilizerWriter_projectivelyRealizes :
     continuantProjectivelyRealizes (continuantRadixWord false)
@@ -149,34 +107,20 @@ theorem falseWaitSourceStabilizerWord_positive :
     intro wait membership
     exact continuantRadixEncoding_positive [false] wait (by
       simpa [continuantRadixEncoding] using membership)
-  have positiveFalse :
-      ∀ wait ∈ continuantReaderPositiveWord false, 0 < wait := by
-    simp [continuantReaderPositiveWord]
-  have negativeFalse :
-      ∀ wait ∈ continuantReaderNegativeWord false, 0 < wait := by
-    simp [continuantReaderNegativeWord]
-  have positiveTrue :
-      ∀ wait ∈ continuantReaderPositiveWord true, 0 < wait := by
-    simp [continuantReaderPositiveWord]
   intro wait membership
   rw [falseWaitSourceStabilizerWord, List.mem_append] at membership
   rcases membership with writer_mem | translation_mem
   · exact writer wait writer_mem
-  · simp only [falseWaitSourceStabilizerTranslationWord,
-      List.mem_append] at translation_mem
-    rcases translation_mem with positive_false_mem | rest_mem
-    · exact continuantRepeatWord_positive positiveFalse 25 wait positive_false_mem
-    · rcases rest_mem with negative_false_mem | positive_true_mem
-      · exact continuantRepeatWord_positive negativeFalse 5 wait negative_false_mem
-      · exact continuantRepeatWord_positive positiveTrue 1221 wait positive_true_mem
+  · exact continuantTerminalTranslationWord_positive
+      falseWaitSourceStabilizerTranslationCounts wait translation_mem
 
 /-- The source-stabilizer spelling has exact physical length `29,004`. -/
 theorem falseWaitSourceStabilizerWord_length :
     falseWaitSourceStabilizerWord.length = 29004 := by
-  norm_num [falseWaitSourceStabilizerWord,
-    falseWaitSourceStabilizerTranslationWord, List.length_append,
-    continuantRepeatWord_length, continuantRadixWord,
-    continuantReaderPositiveWord, continuantReaderNegativeWord]
+  rw [falseWaitSourceStabilizerWord, List.length_append,
+    falseWaitSourceStabilizerTranslationWord,
+    continuantTerminalTranslationWord_length]
+  norm_num [falseWaitSourceStabilizerTranslationCounts, continuantRadixWord]
 
 /-- The extended selected source word has exact physical length `29,012`. -/
 theorem falseWaitSelectedSourceStabilizerCollisionWord_length :
@@ -213,19 +157,6 @@ theorem falseWaitSelectedSourceStabilizerCollisionWord_source :
     ← Matrix.mulVec_mulVec, stabilizerProduct, Matrix.smul_mulVec,
     falseWaitSourceStabilizer_source, Matrix.mulVec_smul]
 
-private theorem falseWaitPositiveWord_product_isUnit
-    (word : List Nat) (positive : ∀ wait ∈ word, 0 < wait) :
-    IsUnit (wordProduct falseWaitReturn word) := by
-  induction word with
-  | nil => exact isUnit_one
-  | cons wait word induction =>
-      rw [wordProduct_cons]
-      exact ((falseWaitReturn_isUnit_iff_positive wait).2
-        (positive wait (by simp))).mul
-        (induction (by
-          intro tail tail_mem
-          exact positive tail (by simp [tail_mem])))
-
 /-- The collision word and the selected source word are not projectively equal as matrices,
 despite inducing the same source ray. -/
 theorem falseWaitSelectedSourceStabilizerCollisionWord_not_projectivelyEqual
@@ -237,7 +168,7 @@ theorem falseWaitSelectedSourceStabilizerCollisionWord_not_projectivelyEqual
     ⟨stabilizerScale, stabilizerScale_ne, stabilizerProduct⟩
   have sourceUnit :
       IsUnit (wordProduct falseWaitReturn falseWaitSelectedSourceWord) := by
-    exact falseWaitPositiveWord_product_isUnit falseWaitSelectedSourceWord
+    exact falseWaitReturn_wordProduct_isUnit_of_positive falseWaitSelectedSourceWord
       (by
         intro wait membership
         exact falseWaitFirstHitBinaryEncoding_positive

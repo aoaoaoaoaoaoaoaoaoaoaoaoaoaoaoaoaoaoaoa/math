@@ -147,6 +147,7 @@ file owns the mathematical stock.
 | [`R32-S72`](#r32-s72-non-scalar-source-stabilizer-collision) | obstruction | a positive non-scalar affine stabilizer preserves the selected source ray, so scalar stutters do not exhaust its fibre | formalized | active |
 | [`R32-S73`](#r32-s73-reader-writer-affine-quotient-normal-form) | structure theorem | the four cubic radix writer-reader macros have a complete decidable affine normal form for physical projective equality | formalized | active |
 | [`R32-S74`](#r32-s74-selected-comparator-self-enforces-cleanup) | compiler mechanism | the fixed source selector rejects every wrong reader-cleanup count as well as every bit mismatch | formalized | active |
+| [`R32-S75`](#r32-s75-free-binary-source-stabilizer-fibre) | obstruction and compiler mechanism | the separator-source stabilizer contains a projectively free positive binary monoid, yielding `2^n` distinct selected-fibre products at every width | formalized | active |
 | [`R32-M01`](#r32-m01-generic-reverse-edge-compiler) | partial mechanism | projective incidence generically embeds into a compatible two-plane edge square | formalized | active |
 | [`R32-M02`](#r32-m02-finite-quotient-sieve) | partial mechanism | finite monoid quotients give complete modular no-certificates for fixed candidates | formalized | active |
 | [`R32-M03`](#r32-m03-two-scale-return-conversion) | partial mechanism | a minimal two-scale return pencil has nonresonant multi-return zeros | formalized | active |
@@ -5579,6 +5580,76 @@ with audit
 **Use:** remove cleanup-count correctness from the external grammar obligations of the selected
 comparator. The remaining soundness burden begins earlier: force or decode complete clock blocks
 within arbitrary raw positive-wait words, modulo the two-sided source fibre exposed by `R32-S72`.
+
+### R32-S75: Free binary source-stabilizer fibre
+
+**Kind:** obstruction and compiler mechanism
+**Evidence:** formalized
+**Disposition:** active
+
+The right stabilizer from `R32-S72` is not merely nontrivial or cyclic. The four positive terminal
+translation blocks satisfy
+
+```text
+1003(2839/108) + 24(-189665/144)
+  + 1148(31457/6480) + 375(-266051/303750) = -41/90.              (1)
+```
+
+Let `A=T(-41/90)`, let `E(β)` be the projectively free transverse binary pump, and let
+`S=[15,29,11,13,7,8]` be its safe suffix. Exact source transport gives
+
+```text
+Π(S)c = -72590904000000·(4,3)ᵀ,
+A(4,3)ᵀ = -(1/30)c.                                         (2)
+```
+
+Therefore every positive word
+
+```text
+Wβ = Aword ++ E(β) ++ S                                  (3)
+```
+
+stabilizes the original separator source up to a nonzero scale. The fixed prefix `Aword` and
+suffix `S` are units. Cancelling them from any projective equality `Π(Wα)∼Π(Wβ)` reduces to
+the projective freeness of `E`, so `α=β`. Thus the positive source stabilizer contains a free
+binary monoid.
+
+The fixed translation word has length `71,185`, and
+
+```text
+|Wβ| = 71,191 + 4|β|.                                      (4)
+```
+
+Prefixing the selected length-eight source word gives `Fβ=E(00)Wβ`. Every `Fβ` induces the
+same selected source ray, while the matrices remain projectively injective in `β`. At every
+width `n`, Lean packages a family of exactly `2^n` positive equal-length words
+
+```text
+|Fβ| = 71,199 + 4n                                             (5)
+```
+
+whose matrix products are pairwise projectively distinct but whose action on the separator
+source is one common ray.
+
+**Scope:** the four-generator positive translation lattice, exact shift (1), nonzero realization,
+positivity, length, ray transport (2), all-address source stabilization, unit cancellations,
+projective injectivity, fixed-width lengths, and exact `2^n` cardinality are Lean checked. The
+reported global length minimality of the count vector in (1) is computational and is not part of
+the theorem.
+
+**Artifact:** `CubicReturn.NonPure.falseWaitFreeSourceStabilizerWord_source`,
+`falseWaitFreeSourceStabilizerWord_projectively_injective`, and
+`falseWaitSelectedFreeSourceFibreFamily_card` in
+[`CubicContinuantFreeSourceStabilizer.lean`](MatrixMortality/CubicContinuantFreeSourceStabilizer.lean),
+using the reusable count-vector abstraction in
+[`CubicContinuantTranslationLattice.lean`](MatrixMortality/CubicContinuantTranslationLattice.lean),
+with audit
+[`m32-cubic-free-source-stabilizer-2026-09-01.md`](audits/m32-cubic-free-source-stabilizer-2026-09-01.md).
+
+**Use:** abandon finite, scalar, or cyclic quotients of the selected source fibre. The fibre itself
+contains unbounded free binary memory. Any sound compiler must either observe and decode that
+memory in a later context or prove that its entire accepting-state action is a lawful epsilon
+semantics. A context-free collapse is invalid because these matrices are projectively distinct.
 
 ### R32-M01: Generic reverse edge compiler
 

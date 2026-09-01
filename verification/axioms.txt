@@ -1762,8 +1762,9 @@
 'MatrixMortality.CubicReturn.NonPure.falseWaitSourceStabilizerWord_positive' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
-'MatrixMortality.CubicReturn.NonPure.falseWaitSourceStabilizerWord_length' depends on axioms: [propext]
-'MatrixMortality.CubicReturn.NonPure.falseWaitSelectedSourceStabilizerCollisionWord_length' depends on axioms: [propext]
+'MatrixMortality.CubicReturn.NonPure.falseWaitSourceStabilizerWord_length' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitSelectedSourceStabilizerCollisionWord_length' depends on axioms: [propext,
+ Quot.sound]
 'MatrixMortality.CubicReturn.NonPure.falseWaitSelectedSourceStabilizerCollisionWord_positive' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
@@ -1864,6 +1865,64 @@
  Classical.choice,
  Quot.sound]
 'MatrixMortality.CubicReturn.NonPure.falseWaitFirstHitSelectedComparatorWordWithCleanup_zero_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.continuantDefectTranslation_pow' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.continuantTerminalTranslationWord_projectivelyRealizes' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.continuantTerminalTranslationWord_positive' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.continuantTerminalTranslationWord_length' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitFreeSourceReturnWord_projectivelyRealizes' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitFreeSourceReturn_ray' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitFreeSourceReturnWord_positive' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitFreeSourceReturnWord_length' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitFreeSourceStabilizerWord_positive' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitFreeSourceStabilizerWord_length' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitFreeSourceStabilizerWord_source' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitFreeSourceStabilizerWord_projectively_injective' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitSelectedFreeSourceFibreWord_positive' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitSelectedFreeSourceFibreWord_length' depends on axioms: [propext,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitSelectedFreeSourceFibreWord_source' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitSelectedFreeSourceFibreWord_projectively_injective' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitSelectedFreeSourceFibreWord_injective' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitSelectedFreeSourceFibreOfVector_injective' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitSelectedFreeSourceFibreOfVector_projectively_injective' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitSelectedFreeSourceFibreOfVector_length' depends on axioms: [propext,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitSelectedFreeSourceFibreOfVector_source' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitSelectedFreeSourceFibreFamily_card' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
 'MatrixMortality.EdgeCompression.isMortal_iff_exists_edgeProduct_eq_zero' depends on axioms: [propext,
