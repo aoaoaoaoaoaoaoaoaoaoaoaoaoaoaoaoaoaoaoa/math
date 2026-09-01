@@ -1427,6 +1427,7 @@ The setter-projective audit now also exposes a kernel-friendly carry theorem:
 | [`MM-S55`](SALVAGE.md#mm-s55-physical-role-block-shell-completion) | automatic physical pole shells, coefficient depths, lower-code units, initial-block dichotomy, and shell-free first-multi extinction |
 | [`MM-S57`](SALVAGE.md#mm-s57-centered-history-defect-transport) | exact centered continuant, raw-head/ordinary-ray equivalence, last-resonance correction, normalized threshold recurrence, singleton sign split, and ordinary-return adapter |
 | [`MM-S59`](SALVAGE.md#mm-s59-multiplicative-threshold-suffix-carry) | multiplicative target cross-product, exact balanced suffix carry, finite fixed-carrier window, Neary erasure/rule contractions, and the erasure-tail carrier-gap cut |
+| [`MM-S61`](SALVAGE.md#mm-s61-primitive-carrier-gap-no-go) | exact integral carrier recurrence and gap factor, primitive one- and two-`D_c` distinguished carriers, and counterexamples to bare height and modulus invariants |
 
 These records narrow the missing arbitrary-depth theorem but do not prove
 projective avoidance. Their reconstruction is
@@ -1661,9 +1662,19 @@ Reading aligned swapped-ternary suffixes backwards yields an exact balanced carr
 remain in `[-(|n|+|d|), |n|+|d|]`. The reversed Neary erasure and rule blocks act by
 `c+2(d−n)=3c'` and `c+26d−14n=27c'`. If a target ends in `β` erasure tiles, the common
 all-erasure suffix forces `3^β ∣ d−n`; the strict gap bound `|d−n|<3^β` therefore forces
-`d=n`, target-code equality, and `TagHaltsFrom`. The theorem leaves the carrier-gap bound open:
-its finite carry window depends on the primitive carrier height and is not a uniform quotient
-over arbitrary histories.
+`d=n`, target-code equality, and `TagHaltsFrom`. Its finite carry window depends on the primitive
+carrier height and is not a uniform quotient over arbitrary histories.
+
+Record [`MM-S61`](SALVAGE.md#mm-s61-primitive-carrier-gap-no-go) tests whether centered
+reachability itself supplies the missing gap condition. Lean lifts the Möbius update to the exact
+unreduced integer recurrence
+`n'=H((P−μA)d−Vn)`, `d'=R(Pd−Vn)` and factors its raw gap as
+`d'−n'=μ(HAd−3(Pd−Vn))`. The normalized obstruction is real. From the distinguished reset, one
+literal `D_c` has an explicit coprime carrier with primitive gap `μ>ρ`; a second `D_c` has an
+explicit coprime carrier with primitive gap `ρμ`. The first carrier refutes the universal bound
+`|d−n|<ρ`, while the second refutes bare nondivisibility by `ρ`. Neither state is a pole. The
+remaining theorem must therefore combine carrier normalization with target-language
+compatibility or earliest-pole ancestry.
 
 Record [`MM-S21`](SALVAGE.md#mm-s21-bounded-decimal-suffix-cycles) closes the fixed-precision
 suffix-descent lane. `DecimalSetterSuffix.cycleDefect_lift` gives an explicit one-digit lift for
@@ -2212,6 +2223,8 @@ fixed-rank decision problem.
 | `DecimalSetterResonance.lean` | complete ordinary depth-two A-to-B and B-to-A extinction, phase-word exhaustion, and compiler-envelope specialization |
 | `DecimalSetterDepth.lean` | recursive two-unit carrier; length-two and singleton-current extinction; exact all-`D_c` raw-head extinction; sharp `m≥β+3` abstract multi-to-singleton classification; initial raw-head exclusion; compatible last-digit two-cycle obstruction |
 | `DecimalSetterAncestry.lean` | primitive gap factor; exact reciprocal and periodic raw two-`c` prime support; arbitrary-history prime-support propagation and radical saturation; physical all-erasure full-gap lower code and first-entry extinction; denominator-ancestry reduction; full-gap, factorwise, and gcd-saturated quotient gates for a singleton target |
+| `SwappedSetterThresholdCarry.lean` | exact multiplicative target cross-product, finite balanced suffix carry, Neary macro contractions, and the full-erasure-tail terminal cut |
+| `SwappedSetterCarrierGap.lean` | exact integral centered-carrier lift, raw gap factorization, and primitive one- and two-deletion counterexamples to reachability-only gap invariants |
 | `PairedMortality.lean` | common-column mortality converse and exact integer `4 × 4` family |
 | `PhaseFracture.lean` | phase normalization and dimension-free projective-identification contradiction |
 | `PhaseRigidity.lean` | checked local role algebra, discrepancy commutators, and invariant-pencil rigidity |

@@ -137,6 +137,7 @@ file owns the mathematical stock.
 | [`MM-S55`](#mm-s55-physical-role-block-shell-completion) | structure theorem and obstruction | every physical swapped role block supplies its expected pole shell, coefficient depth, and lower unit, yielding a shell-free first-multi extinction theorem | formalized | active |
 | [`MM-S57`](#mm-s57-centered-history-defect-transport) | structure theorem and obstruction | an arbitrary centered fold has one exact raw-head correction; sliding-window reuse is valid exactly at an ordinary-ray return | formalized | active |
 | [`MM-S59`](#mm-s59-multiplicative-threshold-suffix-carry) | structure theorem and obstruction | every later swapped pole has an exact multiplicative suffix carry; a full erasure tail forces terminality below the carrier-gap threshold | formalized | active |
+| [`MM-S61`](#mm-s61-primitive-carrier-gap-no-go) | obstruction | primitive deletion carriers already exceed the marker height and then acquire its full modulus, killing both unqualified carrier-gap invariants | formalized | active |
 | [`R32-S01`](#r32-s01-split-return-normal-form) | structure theorem | rank-two cuts reduce one-unit binary mortality to a `2 × 2` return recurrence | formalized | graduated |
 | [`R32-S02`](#r32-s02-two-plane-edge-square) | structure theorem | two rank-two generators are a two-vertex square of `2 × 2` edges | formalized | graduated |
 | [`R32-O01`](#r32-o01-rank-one-profile-collapse) | obstruction | a rank-one generator reduces mortality to order-at-most-three scalar recurrence zeros | audited | stock |
@@ -4986,9 +4987,9 @@ cut requires a target ending in `β` erasure tiles and does not prove the missin
 `|d−n|<3^β`. No `M₅(3)` conclusion follows.
 
 **Use:** replace the unavailable additive common-suffix ancestry by the exact multiplicative
-carry. For the full-erasure-tail branch, it remains only to bound the primitive carrier gap
-below the marker modulus, or to prove a stronger modulus-versus-height constraint from the
-centered history recurrence.
+carry. On the full-erasure-tail branch, any target-compatible history must now explain how its
+primitive gap reaches a nonzero multiple of the marker modulus. `MM-S61` shows that neither
+small carrier height nor nondivisibility is an invariant of reachability alone.
 
 **Formalization:**
 [`MatrixMortality/SwappedSetterThresholdCarry.lean`](MatrixMortality/SwappedSetterThresholdCarry.lean),
@@ -4999,8 +5000,88 @@ through `carryRun_iff`, `suffixCarry_iff_run`, `SuffixCarry.carry_mem`,
 **Artifact:**
 [`audits/m53-multiplicative-threshold-carry-2026-08-31.md`](audits/m53-multiplicative-threshold-carry-2026-08-31.md).
 
-**Next:** derive `|d−n|<3^β`, or a consuming replacement, for primitive centered-history
-carriers entering a full-erasure-tail target.
+**Next:** combine the carry with target-language compatibility or earliest-pole ancestry; bare
+centered reachability cannot supply the required height or modulus cut.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S61: Primitive carrier-gap no-go
+
+**Kind:** structure theorem and obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+For an integer carrier `q=n/d`, a physical block with upper power `A`, punctuated upper code
+`P`, and lower code `V` has the exact unreduced successor
+
+```text
+n'=H((P−μA)d−Vn),
+d'=R(Pd−Vn).                                            (1)
+```
+
+`blockStep_represents_nextCarrier` proves that (1) represents the Möbius defect update of
+`MM-S57` without a nonzero or coprimality hypothesis. Before gcd cancellation its gap is
+
+```text
+d'−n'=μ(HAd−3(Pd−Vn)).                                 (2)
+```
+
+Thus every raw successor gap contains the marker factor `μ`, but normalization may cancel an
+arbitrary part of that factor. Two explicit physical histories show that neither of the proposed
+post-normalization invariants survives.
+
+Write `β=k+1`, `ρ=3^β`, and `3^k=2t+1`, so `ρ=6t+3`. Starting from the distinguished carrier
+`q=1`, one literal `D_c` produces the primitive pair
+
+```text
+n₁=(2t+1)(15t+7),
+d₁=(6t+1)(5t+2),
+n₁−d₁=μ.                                                (3)
+```
+
+Lean proves `IsCoprime n₁ d₁`, represents the actual centered state by `(n₁,d₁)`, and proves
+
+```text
+ρ<|d₁−n₁|=μ.                                            (4)
+```
+
+The universal height proposal `|d−n|<ρ` therefore fails after one physical block. Applying a
+second literal `D_c` gives another primitive pair
+
+```text
+n₂=180t³+192t²+87t+16,
+d₂=(6t+1)(30t²+15t+1),
+n₂−d₂=ρμ.                                               (5)
+```
+
+This is an actual centered carrier and its nonzero primitive gap is divisible by `ρ`. Hence the
+bare replacement `ρ∤d−n` also fails at depth two.
+
+**Scope:** equations (1)-(2) hold for every integer carrier and every physical block. Equations
+(3)-(5) use only `β≥1`, the distinguished reset, and literal `D_c`. These carriers are not pole
+hits and do not refute a bound conditioned on target-language compatibility or earliestness.
+They refute every attempt to derive the `MM-S59` gap cut from centered reachability alone. No
+`M₅(3)` conclusion follows.
+
+**Use:** retain (1)-(2) as the exact gcd-accounting interface. Any successor attack on a full
+erasure tail must couple the carrier to the prospective target word; a carrier-only height or
+modulus induction has explicit primitive counterexamples.
+
+**Formalization:**
+[`MatrixMortality/SwappedSetterCarrierGap.lean`](MatrixMortality/SwappedSetterCarrierGap.lean),
+through `blockStep_represents_nextCarrier`, `nextCarrier_gap`,
+`distinguishedDeletionC_isCoprime`, `distinguishedDeletionC_represents`,
+`widthScale_lt_distinguishedDeletionC_gap_abs`,
+`distinguishedDoubleDeletionC_isCoprime`,
+`widthScale_dvd_distinguishedDoubleDeletionC_gap`, and
+`distinguishedDoubleDeletionC_represents`.
+
+**Artifact:**
+[`audits/m53-primitive-carrier-gap-no-go-2026-08-31.md`](audits/m53-primitive-carrier-gap-no-go-2026-08-31.md).
+
+**Next:** track the target's Neary suffix state jointly with the primitive gcd cancellation in
+(1), or use earliest-pole ancestry to exclude the `ρ`-divisible gap states before a target hit.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
