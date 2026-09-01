@@ -2031,6 +2031,54 @@
 'MatrixMortality.SwappedSetterThreeBlockFrontier.erasureTailPole_threeBlock_backwardFrontier' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.SwappedSetterReachableCylinder.reachable_nonDeletionC_predecessorCylinder' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SwappedSetterCylinderCharge.erasureTail_threshold_gap_eq_charge' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SwappedSetterCylinderCharge.erasureTail_threshold_suffixCarry' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SwappedSetterCylinderCharge.normalizedTransition_gap_transport' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SwappedSetterCylinderCharge.normalizedTransition_gap_zero_iff_predecessorCylinder_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SwappedSetterCylinderCharge.represented_blockStep_denominator_transport' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SwappedSetterCylinderCharge.represented_blockStep_predecessor_y_ne' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SwappedSetterCylinderCharge.predecessorCylinder_predecessorDenominator_ne' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SwappedSetterCylinderCharge.primitiveDeepNumerator_denominator_ne' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SwappedSetterCylinderCharge.resonantTransition_gap_charge' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SwappedSetterCylinderCharge.resonantTransition_erasureTail_charge' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SwappedSetterCylinderCharge.resonantTransition_deepNumerator_charge' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SwappedSetterCylinderCharge.literalDeletionC_backwardNumeratorCylinder_eq' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SwappedSetterCylinderCharge.literalDeletionC_deepNumerator_gap_charge' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SwappedSetterCylinderCharge.ThreeBlockChargeWitness.braidedCarry_eq' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SwappedSetterCylinderCharge.erasureTailPole_threeBlock_charge_frontier' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.DecimalSetterChamber.doubleDeletion_step_in_gap' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
@@ -2459,6 +2507,45 @@
  Quot.sound]
 'MatrixMortality.DecimalSetterFirstEntry.allErase_or_exists_rightmostRule' does not depend on any axioms
 'MatrixMortality.DecimalSetterFirstEntry.rawHead_firstEntry_multi_shell_impossible' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterMatrix.delimiter_rank_eq_three' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.DecimalSetterMatrix.delimiter_square_rank_eq_two' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterMatrix.delimiter_cube_rank_eq_one' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterMatrix.internalSeparator' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.DecimalSetterMatrix.RegularSpelling.coefficient_eq_zero_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterMatrix.mortal_of_tagHaltsFrom' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.DecimalSetterFracture.wordProduct_eq_scalarBridges' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.RationalMatrixClearing.clearRationalFamily_mortal_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterInteger.mortalityProblem_mortal_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterInteger.mortalityProblem_mortal_of_tagHaltsFrom' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterBridge.bridgeScalar_append_delimiter_cube' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterBridge.CoreSpelling.zero_frontier' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterBridge.exists_zeroFrontier_of_wordProduct_eq_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterBridge.isMortal_iff_exists_parsedZeroFrontier' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterBridge.mortalityProblem_mortal_iff_exists_parsedZeroFrontier' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
 'MatrixMortality.DecimalSetterAncestry.carrierFactor_multiToSingleton_quotientGate' depends on axioms: [propext,
