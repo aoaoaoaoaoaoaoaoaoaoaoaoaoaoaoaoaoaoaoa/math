@@ -274,7 +274,7 @@ fn census_group(length: usize, dilates: usize, rules: &[Rule]) -> Census {
 }
 
 fn census(length: usize, rules: &[Rule], print: bool) -> Census {
-    assert!((1..=31).contains(&length));
+    assert!((1..=32).contains(&length));
     let critical_report = critical_pairs(rules, false, false);
     let congruence_deciding =
         critical_report.inclusions == 0 && length < critical_report.minimum_length;
@@ -317,6 +317,67 @@ fn census(length: usize, rules: &[Rule], print: bool) -> Census {
         );
     }
     total
+}
+
+fn boundary_reduce_relation(left: &str, right: &str) -> (String, String) {
+    assert_eq!(left.len(), right.len());
+    let (left_bytes, right_bytes) = (left.as_bytes(), right.as_bytes());
+    let mut start = 0;
+    while start < left.len() && left_bytes[start] == right_bytes[start] {
+        start += 1;
+    }
+    let mut end = left.len();
+    while start < end && left_bytes[end - 1] == right_bytes[end - 1] {
+        end -= 1;
+    }
+    assert!(start < end);
+    let reduced_left = left[start..end].to_owned();
+    let reduced_right = right[start..end].to_owned();
+    assert_ne!(
+        reduced_left.as_bytes().first(),
+        reduced_right.as_bytes().first()
+    );
+    assert_ne!(
+        reduced_left.as_bytes().last(),
+        reduced_right.as_bytes().last()
+    );
+    assert_eq!(word_matrix(&reduced_left), word_matrix(&reduced_right));
+    (reduced_left, reduced_right)
+}
+
+fn context_core_census(length: usize, rules: &[Rule]) {
+    let census = census(length, rules, false);
+    let raw_pairs = census.independent_pairs.len();
+    let cores: BTreeSet<_> = census
+        .independent_pairs
+        .iter()
+        .map(|(left, right, _)| boundary_reduce_relation(left, right))
+        .collect();
+    let mut length_histogram = BTreeMap::<usize, usize>::new();
+    for (left, right) in &cores {
+        assert_eq!(left.len(), right.len());
+        *length_histogram.entry(left.len()).or_default() += 1;
+        println!("BOUNDARY_REDUCED_CORE\tlength={}", left.len());
+        println!("  {left}\n  {right}");
+    }
+    if length == 32 && rules.len() == 5 {
+        assert_eq!(census.words, 1_u64 << 32);
+        assert_eq!(census.classes, 4_294_966_992);
+        assert_eq!(census.generated_duplicates, 260);
+        assert_eq!(census.independent_duplicates, 44);
+        assert_eq!(raw_pairs, 44);
+        assert_eq!(cores.len(), 23);
+        assert_eq!(length_histogram, BTreeMap::from([(31, 7), (32, 16)]));
+    }
+    println!(
+        "BOUNDARY_REDUCED_TOTAL\tlength={length}\trules={}\twords={}\tclasses={}\tgenerated_duplicates={}\tindependent_duplicates={}\traw_independent_pairs={raw_pairs}\tunique_cores={}\tlength_histogram={length_histogram:?}",
+        rules.len(),
+        census.words,
+        census.classes,
+        census.generated_duplicates,
+        census.independent_duplicates,
+        cores.len(),
+    );
 }
 
 fn occurrences(word: &str, pattern: &str) -> Vec<usize> {
@@ -1074,8 +1135,14 @@ fn main() {
         Some("census") if (2..=3).contains(&arguments.len()) => {
             let length = arguments[1]
                 .parse()
-                .expect("LENGTH must be an integer from 1 through 31");
+                .expect("LENGTH must be an integer from 1 through 32");
             census(length, selected_rules(arguments.get(2)), true);
+        }
+        Some("context-core-census") if (2..=3).contains(&arguments.len()) => {
+            let length = arguments[1]
+                .parse()
+                .expect("LENGTH must be an integer from 1 through 32");
+            context_core_census(length, selected_rules(arguments.get(2)));
         }
         Some("critical") if arguments.len() <= 3 => {
             let rules = selected_rules(
@@ -1126,7 +1193,7 @@ fn main() {
         }
         _ => {
             eprintln!(
-                "usage:\n  mixed-prime-kernel-audit self-check\n  mixed-prime-kernel-audit census LENGTH [RULE_COUNT]\n  mixed-prime-kernel-audit critical [RULE_COUNT] [--verbose]\n  mixed-prime-kernel-audit fork-context LOWER UPPER MODE [RULE_COUNT]\n  mixed-prime-kernel-audit fork-context-g2 LOWER UPPER MODE SHARD SHARDS\n  mixed-prime-kernel-audit aligned-square [RULE_COUNT] [--verbose]"
+                "usage:\n  mixed-prime-kernel-audit self-check\n  mixed-prime-kernel-audit census LENGTH [RULE_COUNT]\n  mixed-prime-kernel-audit context-core-census LENGTH [RULE_COUNT]\n  mixed-prime-kernel-audit critical [RULE_COUNT] [--verbose]\n  mixed-prime-kernel-audit fork-context LOWER UPPER MODE [RULE_COUNT]\n  mixed-prime-kernel-audit fork-context-g2 LOWER UPPER MODE SHARD SHARDS\n  mixed-prime-kernel-audit aligned-square [RULE_COUNT] [--verbose]"
             );
             std::process::exit(2);
         }

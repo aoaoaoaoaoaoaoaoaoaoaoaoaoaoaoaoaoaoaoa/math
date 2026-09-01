@@ -139,7 +139,7 @@ second covers `20,043,556`; their union is `799,088,198`. Every run reconstructs
 `450` raw overlaps, `45` old pairs, `405` new pairs, zero left-side inclusions, and the exact
 second-generation length histogram. The canonical project check runs the construction and
 self-check, but omits the 799-million-geometry research replay. The audited Rust source SHA-256 is
-`b09b349b502071cf6044a5dc377a0df6cb530ae3d7019d2c4f4219e71fcbbd3c`.
+`108635879fad5f6046b2b05e55cebb099a68419b1ccbb8a21f82fdbf8860ad2e`.
 
 ## Claim Classification
 

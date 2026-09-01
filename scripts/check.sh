@@ -111,6 +111,7 @@ readonly PYTHON_CHECKERS=(
   tools/audit_six_state_sandwich.py
   tools/certify_mixed_prime_completion.py
   tools/certify_mixed_prime_context_cuts.py
+  tools/certify_mixed_prime_pump_families.py
   tools/certify_frankl.py
   tools/explore_setter_projective.py
   tools/scour_source.py
@@ -129,6 +130,7 @@ uv run --script tools/audit_mixed_prime_fork.py thin 3 100
 uv run --script tools/audit_six_state_sandwich.py
 uv run --script tools/certify_mixed_prime_completion.py
 uv run --script tools/certify_mixed_prime_context_cuts.py
+uv run --script tools/certify_mixed_prime_pump_families.py
 uv run --script tools/certify_frankl.py
 uv run --script tools/explore_setter_projective.py --audit --primes 3
 uv run --script tools/scour_source.py
