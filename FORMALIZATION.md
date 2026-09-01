@@ -2751,6 +2751,16 @@ confirms the cut. Finite preperiod plus the stable `t=2k-q` cells cover every pu
 of the `23` `G3-S16` schemas can realize a prefix-cloaked physical fork; other kernel families and
 the suffix orientation remain outside the result.
 
+`G3-S25` closes the suffix orientation for the same `23` schemas. If the reduced fork were
+`W·Lₖ/W·Rₖ`, internal trigrams of the common aligned address cancel and only its last two letters
+affect the cloak junction. The complete contexts are `ε`, `DT`, and `TD`. On the physical
+`yzxyx/xzyxy` side, internal block trigrams cancel and exact enumeration gives `1,243` possible
+four-boundary discrepancy vectors. Every contextual target vector for every schema lies outside
+that set. Pump depth zero is the sole preperiod; from depth one onward a further two-letter pump
+adds the same internal factors and preserves all trigram junctions. Thus six symbolic cells per
+family cover every depth. Combined with `G3-S24`, none of the `23` schemas realizes either
+one-sided cloak orientation. The odd relation, interleaving, and separate endpoint routing remain.
+
 For `G3-O20`, Lean proves the free-monoid tail law: if one fixed-boundary equation with stationary
 left and right pump blocks holds at exponents `N` and `N+1`, it holds at every exponent `N+k`.
 The proof uses only prefix comparability and left/right cancellation. This closes a unary

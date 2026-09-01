@@ -271,6 +271,7 @@ file owns the mathematical stock.
 | [`G3-S22`](#g3-s22-prefix-cloak-size-obstruction) | obstruction and finite rejection | every physical prefix cloak obeys `2|u|<|x|+|y|<|L|`; all 23 base pump cloaks fail the remaining finite factorization census | formalized universal bound; exact independently replayable certificate | active |
 | [`G3-S23`](#g3-s23-pumped-prefix-cloak-suffix-collapse) | uniform obstruction and exact family cut | a balanced nonempty cloak suffix with `2(n+q)<|L|` is mandatory; this kills 12 of the 23 pump families globally | formalized universal gate; exact symbolic and finite certificates | active |
 | [`G3-S24`](#g3-s24-prefix-cloak-factor-boundary-collapse) | uniform obstruction and complete family extinction | bigram/trigram boundary signatures kill the remaining eleven pump families, so none of the 23 schemas can realize a prefix cloak | formalized head reduction; exact symbolic certificate | active |
+| [`G3-S25`](#g3-s25-suffix-cloak-factor-boundary-collapse) | uniform obstruction and complete family extinction | trigram boundary signatures kill all 23 pump schemas in suffix orientation at every depth | exact independently replayable symbolic certificate | active |
 | [`G3-M02`](#g3-m02-square-root-punctuation-fracture) | partial mechanism | a rank-two square root gives an exact `SS`-free mortality grammar | formalized | closed |
 | [`G3-O10`](#g3-o10-square-root-boundary-saturation) | obstruction | every nondegenerate rank-one square root preserves boundary coefficient zeros | formalized | graduated |
 | [`G3-M01`](#g3-m01-free-group-discrepancy-engine) | partial mechanism | Carvalho's transducer gives an all-word marker-tail equation and a cyclic exponent-one equalizer | audited | active |
@@ -11094,6 +11095,51 @@ and
 **Next:** attack the suffix orientation, where the address changes the head rather than the
 terminal boundary, or subject the odd kernel family to the same prefix size and local-factor
 sieves. Any surviving carrier still needs the complete arbitrary-word endpoint converse.
+
+### G3-S25: Suffix-cloak factor-boundary collapse
+
+**Kind:** uniform obstruction and complete family extinction
+
+**Evidence:** exact independently replayable symbolic certificate
+
+**Disposition:** active
+
+The suffix orientation of every `G3-S16` pump schema also fails. An accepting equal-address
+factorization would have
+
+```text
+yzxyx=W·Lₖ,       xzyxy=W·Rₖ
+```
+
+for an aligned address `W`. Internal trigram counts of `x,y,z` cancel between the physical words;
+only four block boundaries remain. There are exactly `1,243` possible binary discrepancy vectors
+for nonempty `x,y,z`.
+
+On the target side, internal factors of the common `W` cancel. A trigram crossing the cloak
+boundary sees only the last two letters of `W`. The complete contexts are `ε`, `DT`, and `TD`,
+because every nonempty aligned address ends in one full macro. For every pump schema, each of
+these three target discrepancies lies outside the physical boundary catalogue.
+
+This is uniform in pump depth. Depth zero is the finite preperiod. Once one two-letter pump block
+is present, adding another period contributes the same internal trigrams on both branches and
+preserves the two-letter junction contexts. The six cells per family—three contexts at `k=0` and
+three at `k≥1`—therefore cover all depths exactly.
+
+**Scope:** combined with `G3-S24`, this kills both one-sided cloak orientations for all `23` pump
+schemas. It does not cover the explicit odd relation from `G3-S21`, another kernel family,
+addresses interleaved through the cloak, or a separate endpoint channel.
+
+**Use:** retire the complete `G3-S16` pump census from one-sided cloak searches. The trigram
+boundary catalogue is reusable against any new suffix cloak with a local periodic presentation.
+
+**Artifact:**
+[`certify_mixed_prime_suffix_factor_boundaries.py`](tools/certify_mixed_prime_suffix_factor_boundaries.py)
+and
+[`m34-suffix-factor-boundary-collapse-2026-09-01.md`](audits/m34-suffix-factor-boundary-collapse-2026-09-01.md).
+
+**Next:** run the same paired orientation sieve on the odd kernel family, then test interleaved
+address placements or the separate two-offset gate. The arbitrary-word endpoint converse remains
+mandatory after any carrier survives.
 
 ### G3-O13: Rational serializer pumping
 
