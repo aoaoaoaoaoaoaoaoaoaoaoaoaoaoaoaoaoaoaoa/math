@@ -276,6 +276,7 @@ file owns the mathematical stock.
 | [`G3-S27`](#g3-s27-single-cut-address-interleaving-collapse) | structure theorem and uniform obstruction | three address probes split every uniform single-cut comparator into kernel pairs; the odd family is forced to an endpoint cut already killed by G3-S26 | formalized | active |
 | [`G3-S28`](#g3-s28-pump-family-prefix-kernel-extinction) | uniform obstruction and complete family extinction | exact count-walk and affine-defect recurrences prove all 23 pump families prefix-kernel-free, killing every single-cut placement | formalized composition; exact independently replayable symbolic certificate | active |
 | [`G3-S29`](#g3-s29-two-cut-collapse-and-exact-sandwich-carrier) | structure theorem and positive mechanism | five probes collapse every uniform double insertion to three kernel pairs; the sole central placement turns any genuine affine kernel pair into an exact raw-distinct address comparator | formalized | active |
+| [`G3-S30`](#g3-s30-explicit-sandwich-boundary-extinction) | uniform obstruction and complete family extinction | trigram filtering and a complete fourgram boundary catalogue kill the central sandwich in all 23 pump schemas and the odd family at every depth and in both orientations | audited exact independently replayable certificate | active |
 | [`G3-M02`](#g3-m02-square-root-punctuation-fracture) | partial mechanism | a rank-two square root gives an exact `SS`-free mortality grammar | formalized | closed |
 | [`G3-O10`](#g3-o10-square-root-boundary-saturation) | obstruction | every nondegenerate rank-one square root preserves boundary coefficient zeros | formalized | graduated |
 | [`G3-M01`](#g3-m01-free-group-discrepancy-engine) | partial mechanism | Carvalho's transducer gives an all-word marker-tail equation and a cyclic exponent-one equalizer | audited | active |
@@ -11305,9 +11306,9 @@ carrier tree.
 and
 [`m34-pump-prefix-kernel-extinction-2026-09-01.md`](audits/m34-pump-prefix-kernel-extinction-2026-09-01.md).
 
-**Next:** derive the two-cut three-probe equations and determine whether they force a chain of
-proper kernel subpairs or admit a genuinely stateful comparator. The orthogonal route is a
-separate two-offset terminal gate.
+**Next:** `G3-S29/S30` close uniform same-address double insertion for the explicit corpus. Move
+to a new relation, different or stateful address segments, a restricted producer, or a separate
+two-offset terminal gate.
 
 ### G3-S29: Two-cut collapse and exact sandwich carrier
 
@@ -11372,8 +11373,57 @@ its endpoint semantics is considered.
 [`MixedPrimeAddressSandwich.lean`](MatrixMortality/MixedPrimeAddressSandwich.lean) and
 [`m34-two-cut-sandwich-2026-09-01.md`](audits/m34-two-cut-sandwich-2026-09-01.md).
 
-**Next:** run the complete boundary-signature catalogue against the `23` pump schemas and the odd
-family. If those fail, seek a new kernel geometry or a stateful/restricted address producer.
+**Next:** `G3-S30` closes the central sandwich for every currently explicit infinite relation.
+Seek a new kernel geometry, different or stateful address segments, a restricted producer, or a
+separate two-offset terminal channel.
+
+### G3-S30: Explicit sandwich boundary extinction
+
+**Kind:** uniform obstruction and complete family extinction
+
+**Evidence:** audited exact independently replayable certificate
+
+**Disposition:** active
+
+For the overlapping length-`r` factor-count vector `Φᵣ`, every nonempty physical macro has one
+complete boundary representative: keep words shorter than `2(r−1)`, and otherwise retain only
+their length-`r−1` prefix and suffix. Internal factors cancel in
+`yzxyx−xzyxy`. This gives exact physical catalogues of `1,243` trigram discrepancies and
+`93,463` fourgram discrepancies.
+
+An aligned `{DT,TD}` address has only five radius-two boundary pairs and nineteen radius-three
+pairs. Every explicit relation has the form `A·Sᵏ·C/B·Sᵏ·E` with `|S|=2`. Once
+`2k≥r−1`, no length-`r` factor spans both pump seams, the seam factors are fixed, and the two
+internal periodic increments cancel. Thus the factor discrepancy is constant for every later
+pump depth.
+
+Across the `23` Cayley–Hamilton pump schemas and the odd family, `24·2·5=240` forward trigram
+cells leave exactly three survivors: `l32-02` at depth zero in one address boundary cell, and
+`l32-04` in one boundary cell in both depth classes. They refine to fourteen logical fourgram
+cells. Every target and its reverse misses the complete physical catalogue. The conditional
+physical fibres contain `144` fourgram discrepancies in each of the four oriented trigram
+classes and also miss.
+
+Combined with the `G3-S29` trichotomy and the endpoint extinctions `G3-S24`–`S26`, this closes
+every uniform same-address double insertion in all `24` currently explicit infinite kernel
+families.
+
+**Scope:** endpoint exactness supplies nonempty data and toggle macros. The same aligned address
+is inserted twice at fixed cuts. The result does not cover a new kernel relation, two different
+address segments, a reversed or state-dependent second address, address-dependent cuts, a
+restricted producer, or a separate two-offset terminal channel.
+
+**Use:** remove the entire explicit uniform double-insertion family tree. Further work on this
+carrier must change relation geometry or the address interface, not retune pump depth or boundary
+placement.
+
+**Artifact:**
+[`certify_mixed_prime_sandwich.rs`](tools/certify_mixed_prime_sandwich.rs) and
+[`m34-sandwich-boundary-extinction-2026-09-01.md`](audits/m34-sandwich-boundary-extinction-2026-09-01.md).
+
+**Next:** classify nonuniform two-segment address interfaces or construct a new kernel relation
+whose radius-four boundary signature lies in the physical catalogue. The orthogonal route is a
+separate two-offset terminal gate.
 
 ### G3-O13: Rational serializer pumping
 

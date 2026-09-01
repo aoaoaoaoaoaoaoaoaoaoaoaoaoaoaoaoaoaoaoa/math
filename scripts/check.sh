@@ -148,6 +148,13 @@ rustc --crate-name mixed_prime_kernel_audit --edition 2021 -D warnings -C opt-le
   tools/audit_mixed_prime_kernel.rs -o "$SCRATCH/audit_mixed_prime_kernel"
 "$SCRATCH/audit_mixed_prime_kernel" self-check
 
+uv run --script tools/certify_mixed_prime_pump_families.py --seed-manifest \
+  > "$SCRATCH/mixed-prime-pump-families.tsv"
+rustfmt --edition 2021 --check tools/certify_mixed_prime_sandwich.rs
+rustc --crate-name mixed_prime_sandwich_certificate --edition 2021 -D warnings -C opt-level=2 \
+  tools/certify_mixed_prime_sandwich.rs -o "$SCRATCH/certify_mixed_prime_sandwich"
+"$SCRATCH/certify_mixed_prime_sandwich" "$SCRATCH/mixed-prime-pump-families.tsv"
+
 assert_manifest_route() {
   local href="$1"
   local path="${href%%#*}"

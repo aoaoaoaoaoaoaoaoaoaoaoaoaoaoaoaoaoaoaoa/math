@@ -2811,7 +2811,13 @@ insertion to split into three affine kernel pairs. Prefix-kernel freedom leaves 
 one-sided endpoints and the central sandwich `W·L·W/W·R·W`. Unlike the endpoints, the central
 placement is an exact globally raw-distinct address comparator for every genuine affine kernel
 pair. A physical reduced `bcbc` realization must satisfy `|W|<|x|+|y|` and `|toggle|<|L|`.
-Literal realization and the arbitrary-word converse remain.
+`G3-S30` supplies the exact audited boundary certificate for the explicit family corpus. The
+complete `1,243`-trigram physical catalogue reduces `240` pump/address cells to three; all
+fourteen logical fourgram refinements and their reverses miss the complete `93,463`-vector
+physical catalogue. Factor locality makes the finite certificate uniform in pump depth. Thus
+`G3-S24`–`S30` kill every uniform same-address double insertion in the `23` pump schemas and the
+odd family. A new relation, different or stateful address segments, restricted production,
+separate two-offset routing, and the arbitrary-word converse remain.
 
 For `G3-O20`, Lean proves the free-monoid tail law: if one fixed-boundary equation with stationary
 left and right pump blocks holds at exponents `N` and `N+1`, it holds at every exponent `N+k`.

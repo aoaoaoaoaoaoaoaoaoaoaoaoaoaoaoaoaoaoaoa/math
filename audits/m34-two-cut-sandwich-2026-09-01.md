@@ -66,16 +66,17 @@ suffixes of the common suffix `W`. The exact length equation then gives `|toggle
 | Prefix-kernel-free relations admit distributed internal cuts | rejected | formal cut trichotomy |
 | The central sandwich is an exact address comparator | promoted | Lean theorem, no equal-length premise |
 | The sandwich raw words can collapse despite `L≠R` | rejected | formal two-sided cancellation |
-| Every listed pump relation physically realizes the sandwich | open | boundary catalogue not yet composed |
+| Any listed pump relation physically realizes the sandwich | rejected downstream | `G3-S30` complete boundary catalogue |
 | The arbitrary-word terminal converse follows | open | outside affine comparison |
 | `M₃(4)` follows | rejected | physical realization and converse remain |
 
 ## Master Delta
 
 ```text
-DEAD: diffuse uniform two-cut placement.
-LIVE: one exact central sandwich W·L·W/W·R·W.
-GATE: literal bcbc factorization with |W|<|x|+|y| and |toggle|<|L|.
+DEAD: diffuse uniform two-cut placement; downstream G3-S30 kills the central placement in every
+      explicit infinite relation family.
+LIVE: the abstract exact central sandwich W·L·W/W·R·W for new relation geometry.
+GATE: literal bcbc factorization with |W|<|x|+|y| and |toggle|<|L| outside the explicit corpus.
 MASTER VERDICT: M₃(4) remains open.
 ```
 

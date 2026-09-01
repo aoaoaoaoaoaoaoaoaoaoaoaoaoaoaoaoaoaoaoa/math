@@ -384,8 +384,23 @@ def certify() -> tuple[dict[str, object], PumpSummary]:
 def main() -> None:
     """Print either the compact summary or the canonical full certificate."""
     parser = argparse.ArgumentParser()
-    parser.add_argument("--full", action="store_true")
+    mode = parser.add_mutually_exclusive_group()
+    mode.add_argument("--full", action="store_true")
+    mode.add_argument("--seed-manifest", action="store_true")
     arguments = parser.parse_args()
+    if arguments.seed_manifest:
+        print("identifier\tleft\tright\tpump\tleft_cut\tright_cut")
+        for seed in PUMP_SEEDS:
+            print(
+                seed.identifier,
+                seed.left,
+                seed.right,
+                seed.pump,
+                seed.left_cut,
+                seed.right_cut,
+                sep="\t",
+            )
+        return
     payload, summary = certify()
     output: object = payload if arguments.full else asdict(summary)
     print(json.dumps(output, sort_keys=True, separators=(",", ":")))
