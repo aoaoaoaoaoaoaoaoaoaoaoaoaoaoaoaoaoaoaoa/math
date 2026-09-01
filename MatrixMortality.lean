@@ -230,6 +230,7 @@ import MatrixMortality.SwappedSetterPredecessorCylinder
 import MatrixMortality.SwappedSetterBackwardResonance
 import MatrixMortality.DecimalSetterRuleEntry
 import MatrixMortality.DecimalSetterFirstEntry
+import MatrixMortality.SwappedSetterSequentialDoubleDeletion
 import MatrixMortality.SchottkyPunctuation
 import MatrixMortality.TwoStateObstructions
 import MatrixMortality.ForcedRuleCCompanion

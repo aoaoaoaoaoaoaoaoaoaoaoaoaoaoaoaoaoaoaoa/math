@@ -1779,6 +1779,7 @@ The setter-projective audit now also exposes a kernel-friendly carry theorem:
 | [`MM-S63`](SALVAGE.md#mm-s63-full-tail-last-step-resonance) | primitive congruence units, automatic predecessor unit depth, exact last-block normalization balance, and the full-erasure-tail pole adapter |
 | [`MM-S64`](SALVAGE.md#mm-s64-unique-predecessor-cylinder) | exact predecessor-cylinder congruence at a full-erasure-tail pole, literal-`D_c` numerator divisibility, and a sharp distinguished-spine witness |
 | [`MM-S68`](SALVAGE.md#mm-s68-backward-numerator-resonance) | backward deep-numerator resonance, exact predecessor cylinder, literal-`D_c` numerator/gap toggle, and the zero-carrier terminal branch |
+| [`MM-S69`](SALVAGE.md#mm-s69-sequential-double-deletion-zero-gap-extinction) | exact prefix equation for the distinguished sequential two-`D_c` carrier, modulo-three lower-prefix extinction, denominator size contradiction, and zero-gap physical adapter |
 
 `MM-S08` is now discharged in
 [`SwappedSetterSingletonShell.lean`](MatrixMortality/SwappedSetterSingletonShell.lean).
@@ -2221,6 +2222,21 @@ than assumed away. Consequently, a full-tail pole after two final literal `D_c` 
 gives `TagHaltsFrom` or forces the carrier before the pair to be one modulo `3^β`. This is the
 first exact backward toggle between the numerator and gap cylinders; it still does not classify
 the first non-`D_c` predecessor or remove the full-tail restriction.
+
+Record [`MM-S69`](SALVAGE.md#mm-s69-sequential-double-deletion-zero-gap-extinction) eliminates
+the zero-gap survivor of that toggle. For the explicit primitive carrier after two sequential
+singleton `D_c` transfers, a full-tail threshold reduces to
+
+```text
+d₂U−n₂L=μ(3^β−1).
+```
+
+All fixed terms and the marker-ending upper prefix are one modulo three, forcing `3∣L`. A
+nonempty swapped word is never divisible by three, so `L=0`; then the equation contradicts the
+strict bound `d₂>μ(3^β−1)`. Lean identifies every primitive represented zero-gap state with a
+scalar copy of the distinguished raw-head ray and composes the no-go. The resulting two-block
+pullback exposes either `TagHaltsFrom` or a nonzero full-gap predecessor. This theorem concerns
+two separate singleton transfers, not the single `[D_c,D_c]` block handled by `MM-S51`.
 
 Record [`MM-S21`](SALVAGE.md#mm-s21-bounded-decimal-suffix-cycles) closes the fixed-precision
 suffix-descent lane. `DecimalSetterSuffix.cycleDefect_lift` gives an explicit one-digit lift for
@@ -2990,6 +3006,7 @@ fixed-rank decision problem.
 | `SwappedSetterBackwardResonance.lean` | backward deep-numerator resonance, exact high-precision ancestry cylinder, literal-deletion numerator/gap toggle, and the zero-carrier terminal fork |
 | `DecimalSetterRuleEntry.lean` | exhaustive b-bearing/all-`c` split and complete rule-bearing first-entry extinction |
 | `DecimalSetterFirstEntry.lean` | exhaustive phase factorization and complete distinguished raw-head first-entry extinction |
+| `SwappedSetterSequentialDoubleDeletion.lean` | direct full-tail extinction for the distinguished sequential two-deletion carrier and elimination of the backward toggle's zero-gap survivor |
 | `PairedMortality.lean` | common-column mortality converse and exact integer `4 × 4` family |
 | `PhaseFracture.lean` | phase normalization and dimension-free projective-identification contradiction |
 | `PhaseRigidity.lean` | checked local role algebra, discrepancy commutators, and invariant-pencil rigidity |

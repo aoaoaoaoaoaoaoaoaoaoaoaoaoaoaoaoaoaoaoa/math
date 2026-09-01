@@ -166,6 +166,7 @@ file owns the mathematical stock.
 | [`MM-S68`](#mm-s68-backward-numerator-resonance) | structure theorem and obstruction | a deep successor numerator forces full upper-length cancellation and a predecessor cylinder; across literal `D_c` it toggles exactly into the full carrier-gap congruence | formalized | active |
 | [`MM-S66`](#mm-s66-complete-rule-bearing-first-entry-extinction) | obstruction | every rule-bearing block misses the physical multi-role pole shell from a lawful two-`c` raw head | formalized | active |
 | [`MM-S67`](#mm-s67-complete-distinguished-first-entry-extinction) | obstruction | no non-singleton physical first block carries a lawful two-`c` raw head into another multi-role pole | formalized | active |
+| [`MM-S69`](#mm-s69-sequential-double-deletion-zero-gap-extinction) | obstruction | the distinguished carrier after two sequential singleton `D_c` transfers cannot hit a full-tail threshold, eliminating the zero-gap survivor of the backward toggle | formalized | active |
 | [`R32-S01`](#r32-s01-split-return-normal-form) | structure theorem | rank-two cuts reduce one-unit binary mortality to a `2 × 2` return recurrence | formalized | graduated |
 | [`R32-S02`](#r32-s02-two-plane-edge-square) | structure theorem | two rank-two generators are a two-vertex square of `2 × 2` edges | formalized | graduated |
 | [`R32-O01`](#r32-o01-rank-one-profile-collapse) | obstruction | a rank-one generator reduces mortality to order-at-most-three scalar recurrence zeros | audited | stock |
@@ -5626,6 +5627,75 @@ through `primitiveDeepNumeratorSuccessor_forces_previousResonance`,
 **Next:** classify the first non-literal-`D_c` predecessor cylinder in (3), and prove that an
 exact full-gap-zero return is projectively the distinguished reset needed by the local
 first-multi theorem. The arbitrary-target suffix seam remains independent.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S69: Sequential double-deletion zero-gap extinction
+
+**Kind:** obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+The primitive carrier after two sequential singleton `D_c` transfers from the distinguished
+ray is the `MM-S61` pair `(n₂,d₂)`, with
+
+```text
+n₂−d₂=ρμ,      ρ=3^β,      μ=2ρ−1.                    (1)
+```
+
+Suppose a target ending in `β` erasure tiles satisfies the threshold `d₂P=n₂V`. Strip the
+common swapped suffix of value `ρ−1` and write the remaining upper and lower prefix codes as
+`U,L`. Exact positional expansion and (1) give
+
+```text
+d₂U−n₂L=μ(ρ−1).                                       (2)
+```
+
+The explicit primitive coordinates satisfy `d₂≡n₂≡1 (mod 3)`. The upper prefix ends in the
+marker bit, so `U≡1 (mod 3)`, while `μ(ρ−1)≡1 (mod 3)`. Equation (2) therefore forces
+`3∣L`. Every nonempty swapped ternary word has final digit one or two and is not divisible by
+three, hence `L=0`. Equation (2) reduces to
+
+```text
+d₂U=μ(ρ−1).
+```
+
+But `U≥1` and the closed denominator formula gives `d₂>μ(ρ−1)` for every `β≥2`, a
+contradiction.
+
+A primitive represented zero-gap carrier lies on a scalar copy of the distinguished raw-head
+ray. Therefore the direct threshold theorem, not the single-block `D_c²` theorem `MM-S51`,
+kills the zero-gap survivor in `MM-S68`. The consuming result is now
+
+```text
+TagHaltsFrom ∨ (e−m≠0 ∧ 3^β∣e−m)
+```
+
+after two sequential singleton `D_c` transfers and a nonterminal full-tail pole.
+
+**Scope:** `β≥2`, arbitrary compiler body, a live pole, explicit primitive normalizations, and
+a target with a full `β`-erasure tail. “Sequential” means two distinct singleton block
+transfers separated by square-run boundaries. It is not the one physical block
+`[D_c,D_c]` killed by `MM-S51`. The theorem does not remove the full-tail hypothesis.
+
+**Use:** the backward toggle can no longer stop at its distinguished zero-gap state. Every
+nonhalting survivor exposes a nonzero full-gap carrier, ready for `MM-S63` and `MM-S64` on the
+preceding physical block.
+
+**Formalization:**
+[`MatrixMortality/SwappedSetterSequentialDoubleDeletion.lean`](MatrixMortality/SwappedSetterSequentialDoubleDeletion.lean),
+through `distinguishedDoubleDeletionC_avoids_erasureTail_threshold`,
+`primitiveGapZero_state_eq_scale_rawHead`,
+`gapZero_sequentialDoubleDeletionC_avoids_erasureTail_pole`, and
+`sequentialDoubleDeletionC_erasureTailPole_forces_halt_or_nonzeroPredecessorGap`.
+
+**Artifact:**
+[`audits/m53-sequential-double-deletion-zero-gap-2026-08-31.md`](audits/m53-sequential-double-deletion-zero-gap-2026-08-31.md).
+
+**Next:** feed the forced nonzero full gap through `MM-S63`/`MM-S64` at the block before the
+singleton pair, then classify its first non-`D_c` cylinder. The generic target-suffix seam
+remains independent.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
