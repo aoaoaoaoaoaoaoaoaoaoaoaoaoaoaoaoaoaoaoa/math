@@ -448,6 +448,7 @@ fn critical_pairs(rules: &[Rule], verbose: bool, print: bool) -> CriticalReport 
     }
 }
 
+#[derive(Clone)]
 struct ContextRelation {
     name: String,
     left: String,
@@ -495,6 +496,102 @@ fn context_relations(rules: &[Rule]) -> Vec<ContextRelation> {
         assert_eq!(word_matrix(&relation.left), word_matrix(&relation.right));
     }
     relations
+}
+
+fn normalize_relation_text(mut text: String, rules: &[ContextRelation]) -> (String, usize) {
+    let mut steps = 0;
+    loop {
+        let redex = rules
+            .iter()
+            .enumerate()
+            .filter_map(|(index, rule)| {
+                text.find(&rule.right)
+                    .map(|position| (position, rule.right.as_str(), index))
+            })
+            .min();
+        let Some((position, _, index)) = redex else {
+            return (text, steps);
+        };
+        let rule = &rules[index];
+        assert!(rule.right > rule.left);
+        text.replace_range(position..position + rule.right.len(), &rule.left);
+        steps += 1;
+    }
+}
+
+fn second_context_relations() -> Vec<ContextRelation> {
+    let completed = context_relations(&RULES);
+    assert_eq!(completed.len(), 50);
+    let mut inclusions = 0;
+    for (outer_index, outer) in completed.iter().enumerate() {
+        for (inner_index, inner) in completed.iter().enumerate() {
+            for position in occurrences(&outer.right, &inner.right) {
+                if outer_index != inner_index || position != 0 {
+                    inclusions += 1;
+                }
+            }
+        }
+    }
+    assert_eq!(inclusions, 0);
+
+    let mut seen: BTreeSet<_> = completed
+        .iter()
+        .map(|relation| (relation.left.clone(), relation.right.clone()))
+        .collect();
+    let mut second_generation = Vec::new();
+    let mut raw_overlaps = 0;
+    let mut old_pairs = 0;
+    let mut endpoint_xor = 0;
+    let mut joined = 0;
+    for first in &completed {
+        for second in &completed {
+            let limit = first.right.len().min(second.right.len());
+            for overlap in 1..limit {
+                if first.right[first.right.len() - overlap..] != second.right[..overlap] {
+                    continue;
+                }
+                raw_overlaps += 1;
+                let left_branch = format!("{}{}", first.left, &second.right[overlap..]);
+                let right_branch = format!(
+                    "{}{}",
+                    &first.right[..first.right.len() - overlap],
+                    second.left,
+                );
+                let (smaller, larger) = if left_branch < right_branch {
+                    (left_branch, right_branch)
+                } else {
+                    (right_branch, left_branch)
+                };
+                if !seen.insert((smaller.clone(), larger.clone())) {
+                    old_pairs += 1;
+                    continue;
+                }
+                let (left_normal, left_steps) =
+                    normalize_relation_text(smaller.clone(), &completed);
+                let (right_normal, right_steps) =
+                    normalize_relation_text(larger.clone(), &completed);
+                endpoint_xor += usize::from((left_steps == 0) != (right_steps == 0));
+                joined += usize::from(left_normal == right_normal);
+                assert_eq!([left_steps, right_steps].into_iter().max(), Some(2));
+                assert_eq!(left_steps.min(right_steps), 0);
+                assert_eq!(left_normal, right_normal);
+                // Both branches replace one side of an already checked completed rule inside
+                // the same critical source, so equality is structural. Their length-88 integer
+                // matrices can exceed this audit tool's deliberately bounded `u128` carrier.
+                second_generation.push(ContextRelation {
+                    name: format!("g2:{}>{}@{overlap}", first.name, second.name),
+                    left: smaller,
+                    right: larger,
+                });
+            }
+        }
+    }
+    assert_eq!(raw_overlaps, 450);
+    assert_eq!(old_pairs, 45);
+    assert_eq!(second_generation.len(), 405);
+    assert_eq!(endpoint_xor, 405);
+    assert_eq!(joined, 405);
+    second_generation
 }
 
 struct AlignedSquareReport {
@@ -777,9 +874,22 @@ impl ForkLayout {
     }
 }
 
-fn fork_context_search(lower: usize, upper: usize, mode: ForkContextMode, rules: &[Rule]) {
+fn fork_relation_search(
+    lower: usize,
+    upper: usize,
+    mode: ForkContextMode,
+    relations: &[ContextRelation],
+    relation_label: &str,
+    shard: usize,
+    shards: usize,
+) {
     assert!(0 < lower && lower <= upper);
-    let relations = context_relations(rules);
+    assert!(0 < shards && shard < shards);
+    let selected_relations = relations
+        .iter()
+        .enumerate()
+        .filter(|(index, _)| index % shards == shard)
+        .count();
     let mut assignments = 0_u64;
     for total in lower..=upper {
         for x in 1..total {
@@ -793,7 +903,10 @@ fn fork_context_search(lower: usize, upper: usize, mode: ForkContextMode, rules:
                 }
                 let z = total - macro_weight;
                 let layout = ForkLayout::new(x, y, z);
-                for relation in &relations {
+                for (relation_index, relation) in relations.iter().enumerate() {
+                    if relation_index % shards != shard {
+                        continue;
+                    }
                     if total < relation.left.len() {
                         continue;
                     }
@@ -824,10 +937,14 @@ fn fork_context_search(lower: usize, upper: usize, mode: ForkContextMode, rules:
         }
     }
     println!(
-        "FORK_CONTEXT_NONE\trules={}\trelations={}\tlower={lower}\tupper={upper}\tassignments={assignments}",
-        rules.len(),
+        "FORK_CONTEXT_NONE\trelation_set={relation_label}\trelations={}\tselected_relations={selected_relations}\tlower={lower}\tupper={upper}\tshard={shard}/{shards}\tassignments={assignments}",
         relations.len(),
     );
+}
+
+fn fork_context_search(lower: usize, upper: usize, mode: ForkContextMode, rules: &[Rule]) {
+    let relations = context_relations(rules);
+    fork_relation_search(lower, upper, mode, &relations, "g1", 0, 1);
 }
 
 fn self_check() {
@@ -898,6 +1015,32 @@ fn self_check() {
     assert_eq!(square_report.unary, 770);
     assert_eq!(square_report.unary_with_constant_opposite_prefix, 0);
 
+    let second_generation = second_context_relations();
+    let second_lengths = second_generation.iter().fold(
+        BTreeMap::<usize, usize>::new(),
+        |mut histogram, relation| {
+            *histogram.entry(relation.left.len()).or_default() += 1;
+            histogram
+        },
+    );
+    assert_eq!(
+        second_lengths,
+        BTreeMap::from([
+            (77, 1),
+            (78, 2),
+            (79, 4),
+            (80, 13),
+            (81, 22),
+            (82, 29),
+            (83, 52),
+            (84, 69),
+            (85, 60),
+            (86, 63),
+            (87, 63),
+            (88, 27),
+        ]),
+    );
+
     for pump in 0..=11 {
         let (left, right) = odd_family(pump);
         assert_eq!(left.len(), 29 + 2 * pump);
@@ -953,6 +1096,23 @@ fn main() {
             let mode = ForkContextMode::parse(&arguments[3]);
             fork_context_search(lower, upper, mode, selected_rules(arguments.get(4)));
         }
+        Some("fork-context-g2") if arguments.len() == 6 => {
+            let lower = arguments[1]
+                .parse()
+                .expect("LOWER must be a positive integer");
+            let upper = arguments[2]
+                .parse()
+                .expect("UPPER must be a positive integer no smaller than LOWER");
+            let mode = ForkContextMode::parse(&arguments[3]);
+            let shard = arguments[4]
+                .parse()
+                .expect("SHARD must be a nonnegative integer");
+            let shards = arguments[5]
+                .parse()
+                .expect("SHARDS must be a positive integer");
+            let relations = second_context_relations();
+            fork_relation_search(lower, upper, mode, &relations, "g2", shard, shards);
+        }
         Some("aligned-square") if arguments.len() <= 3 => {
             let rule_argument = arguments
                 .get(1)
@@ -966,7 +1126,7 @@ fn main() {
         }
         _ => {
             eprintln!(
-                "usage:\n  mixed-prime-kernel-audit self-check\n  mixed-prime-kernel-audit census LENGTH [RULE_COUNT]\n  mixed-prime-kernel-audit critical [RULE_COUNT] [--verbose]\n  mixed-prime-kernel-audit fork-context LOWER UPPER MODE [RULE_COUNT]\n  mixed-prime-kernel-audit aligned-square [RULE_COUNT] [--verbose]"
+                "usage:\n  mixed-prime-kernel-audit self-check\n  mixed-prime-kernel-audit census LENGTH [RULE_COUNT]\n  mixed-prime-kernel-audit critical [RULE_COUNT] [--verbose]\n  mixed-prime-kernel-audit fork-context LOWER UPPER MODE [RULE_COUNT]\n  mixed-prime-kernel-audit fork-context-g2 LOWER UPPER MODE SHARD SHARDS\n  mixed-prime-kernel-audit aligned-square [RULE_COUNT] [--verbose]"
             );
             std::process::exit(2);
         }

@@ -223,7 +223,260 @@
 'MatrixMortality.TransverseHistory.minimalBody_zero_iff_paired_zero' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.TransverseHistory.rowCoefficient_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.TransverseHistory.no_bcbc_terminal_row_section' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseHistory.no_sourceUniform_terminal_row_section' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.TransverseHistory.data_mulVec_eq_zero_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.TransverseLineAtlas.chart_count' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.TransverseLineAtlas.reachableForm' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.TransverseLineAtlas.wordProduct_mulVec_mem_wordChart' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseLineAtlas.reachable_mem_carrier' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.TransverseLineAtlas.reachable_mem_carrier_of_involutive' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseLineAtlas.range_finrank_le_two_of_det_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseLineAtlas.boundary_carrier_finrank_le_one' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseLineAtlas.carrier_finrank_le_two' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.TransverseLineAtlas.mem_zeroSection_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.TransverseLineAtlas.zeroSection_eq_carrier_or_finrank_le_one' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseLineAtlas.chart_zeroSection_classification' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseLineAtlas.pairedZero_iff_mem_six_zeroSections' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseLineAtlas.pairedZero_iff_mem_wordChart_zeroSection' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseLineAtlas.pairedZero_singular_sixLineAtlas' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseLineAtlas.pairedZero_singular_sixLineAtlas_of_involutive' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseLineHardCore.planeProjection_mul_planeInput' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseLineHardCore.planeProjection_mulVec_liftColumn' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseLineHardCore.liftColumn_eq_zero_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseLineHardCore.liftRow_vecMul_planeInput' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseLineHardCore.liftRow_eq_zero_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.TransverseLineHardCore.liftMatrix_mulVec_liftColumn' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseLineHardCore.liftRow_dotProduct_liftColumn' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseLineHardCore.liftMatrix_det' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.TransverseLineHardCore.liftMatrix_rank_eq_two' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseLineHardCore.liftMatrix_mulVec_mem_plane' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseLineHardCore.liftMatrix_range_eq_plane' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseLineHardCore.liftColumn_mem_plane' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.TransverseLineHardCore.eraseToggles_dataWord' does not depend on any axioms
+'MatrixMortality.TransverseLineHardCore.wordProduct_mulVec_liftColumn' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseLineHardCore.linearCoefficient_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.TransverseLineHardCore.coefficient_zero_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.TransverseLineHardCore.exists_zero_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.TransverseLineHardCore.data_det' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.TransverseLineHardCore.data_rank_eq_two' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.TransverseLineHardCore.data_range_eq_plane' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.TransverseLineHardCore.data_carrier_eq_plane' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseLineHardCore.toggle_involutive' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.TransverseInfiniteAtlas.dataLeftInverse_mul_dataInput' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseInfiniteAtlas.dataProjection_mul_dataSection' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseInfiniteAtlas.data_rank_eq_two' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.TransverseInfiniteAtlas.data_det' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.TransverseInfiniteAtlas.toggle_pow' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.TransverseInfiniteAtlas.toggle_det' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.TransverseInfiniteAtlas.toggle_pow_det' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.TransverseInfiniteAtlas.toggle_sq_ne_smul_one' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseInfiniteAtlas.carrierMatrix_rank_eq_two' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseInfiniteAtlas.carrierMatrix_mulVec' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseInfiniteAtlas.carrierMatrix_mulVec_witnessInput' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseInfiniteAtlas.carrierMatrix_mulVec_sourceWitnessInput' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseInfiniteAtlas.normal_dotProduct_carrierMatrix_mulVec' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseInfiniteAtlas.witness_mem_carrier' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.TransverseInfiniteAtlas.sourceWitness_mem_carrier' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseInfiniteAtlas.normal_dotProduct_eq_zero_of_mem_carrier' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseInfiniteAtlas.normal_dotProduct_witness_ne_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseInfiniteAtlas.carrier_ne_of_lt' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.TransverseInfiniteAtlas.carrier_injective' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.TransverseInfiniteAtlas.row_eq_zero_of_annihilates_two' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseInfiniteAtlas.annihilatesCarrier_at_most_one' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseInfiniteAtlas.wholeCarrierDepths_subsingleton' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseInfiniteAtlas.exponentialMinor_pos' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseInfiniteAtlas.coefficients_eq_zero_of_three_zeros' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseInfiniteAtlas.exponentialScalar_zeroSet_encard_le_two' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseInfiniteAtlas.exponentialScalar_zeroSet_eq_univ_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseInfiniteAtlas.terminalValue_eq_exponentialScalar' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseInfiniteAtlas.terminalValue_zeroSet_encard_le_two' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseInfiniteAtlas.terminalValue_zeroSet_eq_univ_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseInfiniteAtlas.delayedRow_terminalValue_eq_zero_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseInfiniteAtlas.terminalValue_two_distinct_zeros' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseInfiniteAtlas.terminalValue_two_zeroSet_eq' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseInfiniteAtlas.source_sq_add_one_pos' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseInfiniteAtlas.source_sq_add_source_add_one_pos' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseInfiniteAtlas.terminalCoefficients_section' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseInfiniteAtlas.terminalCoefficients_surjective' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseInfiniteAtlas.coefficientSection_terminalValue' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseInfiniteAtlas.coefficientSection_sourceFamily_delayed_zero_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseInfiniteAtlas.wordProduct_carrierWord' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseInfiniteCollision.bcbcTerminal_wordProduct_eq_nearFork' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseInfiniteCollision.no_letterBlind_bcbc_sameZero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseSeparatedAtlas.separator_det' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.TransverseSeparatedAtlas.separator_isUnit' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.TransverseSeparatedAtlas.separatedData_rank_eq_two' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseSeparatedAtlas.separatedData_ne' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.TransverseSeparatedAtlas.wordProduct_carrierWord' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseSeparatedAtlas.sourceFamily_delayed_carrierWord_zero_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseSeparatedAtlas.bcbc_product_difference_entry' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseSeparatedAtlas.separation_polynomial_pos' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseSeparatedAtlas.bcbcTerminal_wordProduct_ne_nearFork' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseSeparatedForkNoGo.planeHead_flatForkMatrix_mulVec' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseSeparatedForkNoGo.planeHead_nestedForkMatrix_mulVec' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseSeparatedForkNoGo.forkQuotient_commutator_det' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseSeparatedForkNoGo.cubicFactor_ne_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseSeparatedForkNoGo.nonicFactor_ne_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseSeparatedForkNoGo.planeRow_eq_zero_of_irreducible_pair' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseSeparatedForkNoGo.planeRow_eq_zero_or_column_eq_zero_of_irreducible_pair' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseSeparatedForkNoGo.terminalForkControl_paired_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseSeparatedForkNoGo.zeroSource_wordProduct_collision' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TransverseSeparatedForkNoGo.no_bcbc_sameZero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TerminalForkCore.forkTransition_mulVec_mem_carrier' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TerminalForkCore.boundaryRow_dot_eq_zero_of_mem' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TerminalForkCore.carrier_finrank_one_or_two_of_sameZero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.BranchingHistory.bcbcNull_append' depends on axioms: [propext]
 'MatrixMortality.BranchingHistory.bcbcForkRoles_injective' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.BranchingHistory.bcbcTerminalFork_injective' depends on axioms: [propext, Classical.choice, Quot.sound]
@@ -295,6 +548,209 @@
  Classical.choice,
  Quot.sound]
 'MatrixMortality.MixedBranchingRecognizer.recognizerProduct_ne_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedBranchingPersistentGuard.wordProduct_mulVec_delta' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedBranchingPersistentGuard.guard_eq_zero_iff_recognizerGuard' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedBranchingPersistentGuard.coefficient_eq_zero_iff_paired' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedBranchingPersistentGuard.data_b_rank_rat' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedTwoStateLift.wordProduct_mulVec_column' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedTwoStateLift.coreState_second_odd_of_rows' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedTwoStateLift.pairedCoefficient_data_b_cons_ne_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedTwoStateLift.coefficient_eq_zero_iff_gateLanguage' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedTwoStateLift.data_b_rank_rat' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.GuardedTwoStateLift.allWords_sameZero_iff_gate_exact' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedTwoStateLift.allWords_sameZero_iff_data_c_gate' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedTwoStateLift.family_sameZero_iff_gate_exact' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedTwoStateLift.family_sameZero_iff_data_c_gate' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedMixedPrimeBridge.affineValue_wordProduct' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedMixedPrimeBridge.benchmarkCore_coreState_second_odd' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedMixedPrimeBridge.benchmarkCore_gate_eq_zero_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedMixedPrimeBridge.benchmarkCore_allWords_sameZero_iff_endpoint' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedMixedPrimeBridge.benchmarkFamily_sameZero_iff_endpoint' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedMixedPrimeBridge.bcbc_gate_generators_pairwise_ne' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedMixedPrimeBridge.bcbc_macro_actions_pairwise_ne' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedMixedPrimeBridge.no_letterwise_benchmark_bcbc_gate' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.wordAction_injective' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.wordAction_eq_of_common_fixedPoint_of_scale_eq' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.wordAction_fixedPoint_unique_of_ne_nil' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.bcbc_fork_macro_common_fixedPoint' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.bcbc_fork_macro_actions_eq' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.bcbc_fork_macro_actions_commute' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.bcbc_fork_macro_word_or_kernel' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.no_bcbc_endpoint_of_common_macro_fixedPoint' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.forkEquation_split' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.wordAction_wordFixedPoint_of_ne_nil' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.wordAction_wordFixedPoint_of_commute' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.wordAction_eq_of_eq_at_two_points' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.forkEquation_common_fixedPoint_of_actions_ne' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.bcbc_literal_macro_equation' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.bcbc_encodedFork_length' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.no_bcbc_literal_fork_words' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.bcbc_fork_macro_kernel' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.wordAction_cancel_context' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.bcbc_reducedFork_genuine_kernel' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.wordFixedPoint_mem_interval' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.forkActions_fixedPoint_balance' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.forkActions_fixedPoint_exterior' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.bcbc_macro_words_ne_nil' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.bcbc_data_macro_scales_ne' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.bcbc_data_macro_fixedPoints_ne' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.bcbc_toggle_fixedPoint_exterior' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.bcbc_moreContracting_fixedPoint_interior' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.prefixedCassaigne_leadingTranslateRun' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.prefixedCassaigne_ne' depends on axioms: [propext]
+'MatrixMortality.GuardedMixedPrimeFork.wordAction_prefixedCassaigne' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.wordFixedPoint_mem_leadingTranslateCylinder' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.fixedAffineFork_difference_eq_crossing' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.fixedAffineFork_eq_iff_crossing' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.forkActions_crossing' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.bcbc_macro_crossing_transport' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.fixedAffineFork_crossing_chain' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.centralizerFork_common_fixedPoint' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.wordAction_cassaigneCritical' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.criticalFork_factorization' depends on axioms: [propext]
+'MatrixMortality.GuardedMixedPrimeFork.wordAction_criticalFork' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.criticalFork_ne' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.criticalFork_lengths' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.criticalFork_scales_pairwise_ne' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.criticalFork_common_fixedPoint_exact' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.criticalFork_actions_eq_powers' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.no_bcbc_endpoint_criticalForkCode' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.alignedTail_count_eq' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.kernelOddFamily_prefix_dilateCount_eq' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.kernelOddFamily_suffix_dilateCount_eq' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.no_kernelOddFamily_internal_internal_cut' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.no_kernelOddFamily_internalPrefix_comparableSuffix_cut' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.no_kernelOddFamily_comparablePrefix_internalSuffix_cut' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.no_kernelOddFamily_sameShorter_cut' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.no_kernelOddFamily_offCentralizer_cutCertificate' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
 'MatrixMortality.SquareRootPunctuation.coefficient_append_square' depends on axioms: [propext,
