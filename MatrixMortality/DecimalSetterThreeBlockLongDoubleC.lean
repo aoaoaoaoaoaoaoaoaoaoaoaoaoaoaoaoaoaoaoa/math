@@ -33,8 +33,8 @@ theorem peeledDoubleCHead_unit_gapRelation
   norm_num at head_relation
   linear_combination head_relation - 10 * marker_relation
 
-/-- A long `c c` peeled-head pole forces the current lower code to absorb every primitive-gap
-factor not shared with one strictly smaller relative-position gap. -/
+/-- A long `c c` peeled-head pole confines missing primitive-gap prime support to one strictly
+smaller relative-position gap. -/
 theorem singletonPole_threeBlock_ruleCRoot_long_doubleC_forces_gapResonance
     {β : Nat} (β_large : 3 ≤ β) (body : List TagLetter)
     (targetLetter : TagLetter) {current next : List NearyTile}

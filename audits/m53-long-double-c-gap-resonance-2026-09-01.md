@@ -3,7 +3,7 @@
 **Date:** 2026-09-01
 **Target:** exact primitive-gap support on the long `cc` peeled-head chamber
 **Authors:** GPT-5.6 Sol; elicited by @eternalism_4eva
-**Verdict:** every exceptional ambient gap factor is confined to one smaller-gap decimal-period
+**Verdict:** every absent ambient gap prime is confined to one smaller-gap decimal-period
 resonance
 
 ## Head Identity

@@ -1212,8 +1212,8 @@ classification for `cc`, and a genuinely different second-predecessor or size ar
 
 [`MM-S102`](SALVAGE.md#mm-s102-long-double-c-relative-gap-resonance) replaces the arbitrary
 `cc` fringe by an exact smaller-gap grammar. A lawful decimal-unit head has one
-`1≤s≤β−1` with `9(H−10μ)=q_s−10q_β`, hence every pole forces `q_β∣V_current q_s`. A factor can
-remain outside the current lower code only if it divides both `q_s` and
+`1≤s≤β−1` with `9(H−10μ)=q_s−10q_β`, hence every pole forces `q_β∣V_current q_s`. A prime factor
+absent from the current lower code must divide both `q_s` and
 `10^(β−s)−1`. The live `cc` task is now the intersection of this finite relative-position
 resonance with the lower spelling; the support-saturated `cb` task is unchanged.
 

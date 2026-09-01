@@ -159,7 +159,7 @@ file owns the mathematical stock.
 | [`MM-S98`](#mm-s98-long-r_c-gap-clean-ancestry-extinction) | obstruction | every hypothetical long `R_c` three-block singleton pole has normalized quotient `μ/H` and reduced numerator coprime to the primitive gap, so its entire gap-clean ancestry branch is empty | formalized | active |
 | [`MM-S100`](#mm-s100-complete-three-block-singleton-next-extinction) | obstruction and classifier | every lawful three-block singleton pole has both non-root blocks multi-role; the unconditional survivor grammar is exactly the established deep-root or `R_c` multi/multi chamber | formalized | active |
 | [`MM-S101`](#mm-s101-long-r_c-peeled-head-support-gate) | structure theorem and obstruction | every long `R_c` pole forces gap support through `H−10μ`; the `cb` head is exactly saturated, while the `cc` head exposes the fringe residue `18F−35` | formalized | active |
-| [`MM-S102`](#mm-s102-long-double-c-relative-gap-resonance) | structure theorem and obstruction | every long `cc` pole forces `q_β∣Vq_s` for one `1≤s≤β−1`; every factor absent from the current code is confined to a smaller-gap decimal-period resonance | formalized | active |
+| [`MM-S102`](#mm-s102-long-double-c-relative-gap-resonance) | structure theorem and obstruction | every long `cc` pole forces `q_β∣Vq_s` for one `1≤s≤β−1`; every absent ambient prime is confined to a smaller-gap decimal-period resonance | formalized | active |
 | [`R32-S01`](#r32-s01-split-return-normal-form) | structure theorem | rank-two cuts reduce one-unit binary mortality to a `2 × 2` return recurrence | formalized | graduated |
 | [`R32-S02`](#r32-s02-two-plane-edge-square) | structure theorem | two rank-two generators are a two-vertex square of `2 × 2` edges | formalized | graduated |
 | [`R32-O01`](#r32-o01-rank-one-profile-collapse) | obstruction | a rank-one generator reduces mortality to order-at-most-three scalar recurrence zeros | audited | stock |
@@ -6301,9 +6301,9 @@ Thus every prime factor of `q_β` absent from the current lower code must divide
 gap and the exact decimal-period term. If `q_β` is coprime to all smaller `q_s`, the entire
 ambient gap enters the current lower code.
 
-**Scope:** `β≥3`, long `R_c` root, multi-role current and intervening blocks, `cc` head, and an
-actual singleton pole. Smaller-gap resonances occur at some exponents; this is a finite grammar,
-not a universal coprimality or extinction theorem.
+**Scope:** `β≥3`, an `R_c`-rooted long-current chamber, multi-role current and intervening
+blocks, `cc` head, and an actual singleton pole. Smaller-gap resonances occur at some exponents;
+this is a finite grammar, not a universal coprimality or extinction theorem.
 
 **Formalization:**
 [`MatrixMortality/DecimalSetterThreeBlockLongDoubleC.lean`](MatrixMortality/DecimalSetterThreeBlockLongDoubleC.lean),
