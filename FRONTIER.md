@@ -1126,6 +1126,23 @@ The live seam is the older ray after one intervening physical block: either clas
 shell and suffix factorization, or prove a minimal-history ancestry invariant that transports the
 same prefix contradiction through arbitrary tails.
 
+[`MM-S90`](SALVAGE.md#mm-s90-exact-singleton-tail-ancestry-equivalence) removes unit peeled
+ancestry as an independent hypothesis on the arbitrary-history singleton branch. Every lawful
+tail ray is nonzero. Solving the pole recurrence backward shows that a current trace of shell
+`(1,1)` dominates the pole correction as soon as the current upper length is at least `β+3`;
+the older quotient is then automatically shell `(1,1)`. Together with the converse length wall,
+an actual singleton pole satisfies the exact equivalence
+
+```text
+unit peeled ancestry
+  ↔ multi-role current with upper length at least β+3.
+```
+
+Thus the non-unit branch is no longer amorphous: it is exactly a singleton current or a
+multi-role current of upper length at most `β+2`. The singleton frontier now has two disjoint
+tasks. Kill this short grammar directly, or upgrade the automatic unit coordinates on the long
+branch to the integral gap ancestry and common-suffix support required by `MM-S22`/`MM-S24`.
+
 The ternary and decimal branches now separate at their first multi-transfer front.
 [`MM-S37`](SALVAGE.md#mm-s37-decimal-three-shape-frontier-extinction) substitutes each of the
 three role shapes left by the swapped ternary gate into the decimal carrier equation. All are

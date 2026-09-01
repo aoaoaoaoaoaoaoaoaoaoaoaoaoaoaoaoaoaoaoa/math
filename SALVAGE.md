@@ -146,10 +146,11 @@ file owns the mathematical stock.
 | [`MM-S82`](#mm-s82-one-r_b-root-sign-extinction) | obstruction | the one-`R_b` root has negative exact-length complement and cannot hit any shallow pole | formalized | active |
 | [`MM-S83`](#mm-s83-leading-b-shallow-root-sign-extinction) | obstruction | every shallow root beginning with a `b`-role has negative exact-length complement and misses every target | formalized | active |
 | [`MM-S84`](#mm-s84-complete-shallow-root-terminal-normalization) | structure theorem | every parser-lawful non-singleton shallow pole has source exactly `R_c` and is exactly a literal Neary terminal match | formalized | active |
-| [`MM-S85`](#mm-s85-parser-ray-singleton-adapter) | structure theorem and obstruction | the physical bridge has an exact homogeneous parser ray; shallow singleton targets are impossible, and unit-peeled deep singleton poles require a non-singleton current block of upper length at least `β+3` | formalized | active |
+| [`MM-S85`](#mm-s85-parser-ray-singleton-adapter) | structure theorem and obstruction | the physical bridge has an exact homogeneous parser ray; shallow singleton targets are impossible, and unit-peeled deep singleton poles require a non-singleton current block of upper length at least `β+3` | formalized | graduated |
 | [`MM-S86`](#mm-s86-two-block-singleton-source-classifier) | structure theorem and obstruction | a parser singleton pole over exactly two source blocks has canonical root `R_c` and a multi-role current block of upper length at least `β+3` | formalized | active |
 | [`MM-S88`](#mm-s88-r_c-root-singleton-d_c-extinction) | obstruction | no parser-lawful two-block source reaches the singleton `D_c` pole for `β≥3` | formalized | graduated |
 | [`MM-S89`](#mm-s89-complete-two-block-singleton-extinction) | obstruction | no parser-lawful two-block source reaches either singleton target for `β≥3` | formalized | active |
+| [`MM-S90`](#mm-s90-exact-singleton-tail-ancestry-equivalence) | structure theorem | at any lawful singleton pole, older unit peeled ancestry is equivalent to a multi-role current with at least `β+3` upper digits | formalized | active |
 | [`R32-S01`](#r32-s01-split-return-normal-form) | structure theorem | rank-two cuts reduce one-unit binary mortality to a `2 × 2` return recurrence | formalized | graduated |
 | [`R32-S02`](#r32-s02-two-plane-edge-square) | structure theorem | two rank-two generators are a two-vertex square of `2 × 2` edges | formalized | graduated |
 | [`R32-O01`](#r32-o01-rank-one-profile-collapse) | obstruction | a rank-one generator reduces mortality to order-at-most-three scalar recurrence zeros | audited | stock |
@@ -5398,7 +5399,7 @@ avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issue
 
 **Kind:** structure theorem and obstruction
 **Evidence:** formalized
-**Disposition:** active
+**Disposition:** graduated
 
 The physical three-coordinate bridge state has the exact homogeneous quotient
 
@@ -5467,9 +5468,10 @@ through `boundaryRay_roleProduct_squareReset`, `boundaryRay_bridgeState`,
 **Artifact:**
 [`audits/m53-parser-ray-singleton-adapter-2026-09-01.md`](audits/m53-parser-ray-singleton-adapter-2026-09-01.md).
 
-**Next:** prove that every older tail in a minimal parsed singleton frontier admits unit peeled
-coordinates, or classify the exact valuation obstruction when it does not. Then transport the
-integral denominator ancestry `D=gap·Nprev` and factor support needed by `MM-S22`/`MM-S24`.
+**Next:** the unit-coordinate question is classified exactly by `MM-S90`: it holds precisely on
+the long multi-role current branch. The remaining upgrade is integral denominator ancestry
+`D=gap·Nprev` and factor support for `MM-S22`/`MM-S24`; the complementary short-current grammar
+must be killed separately.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
@@ -5681,6 +5683,79 @@ through `singletonBTrace_eq`,
 **Next:** classify the ray obtained from one physical block over `R_c`, or prove that every
 minimal singleton history inherits a suffix factorization strong enough to repeat the prefix
 contradiction.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S90: Exact singleton-tail ancestry equivalence
+
+**Kind:** structure theorem
+**Evidence:** formalized
+**Disposition:** active
+
+Every parser-lawful block history has a nonzero homogeneous ray. At a recursive step, a nonzero
+older numerator makes the new denominator nonzero. If that numerator vanishes, parser law makes
+the current lower code and older denominator nonzero, so the new numerator is nonzero instead.
+
+Now suppose a singleton target is an actual pole above a current erasure-ended block and an older
+lawful tail. Write the older ray as `(x,y)`, the current upper length as `m`, its trace as `T`,
+and the singleton trace as `S`. The exact recurrence is
+
+```text
+(Tx−lift·Vy)S=gap·μ·lift·10^m·x·7.                   (1)
+```
+
+Nonvanishing of the tail ray and (1) force `x≠0`. Solving for its quotient gives
+
+```text
+y/x = (T−R)/(lift·V),
+R   = gap·μ·lift·10^m·7/S.                           (2)
+```
+
+For a multi-role current, `T` has shell `(1,1)`. The correction `R` has shell
+`(m−β−1,m−β)`. If `m≥β+3`, both correction depths are strictly greater than one, so
+unequal-valuation subtraction fixes `T−R` at shell `(1,1)`. The denominator in (2) is a decimal
+unit. Hence `y/x` has shell `(1,1)`, and the intrinsic criterion of `MM-S86` supplies unit peeled
+coordinates for the older ray.
+
+Combining this reverse implication with the forward length wall in `MM-S85`, Lean proves the
+exact parser-facing equivalence
+
+```text
+AdmitsUnitPeeledCarrier(older ray)
+  ↔ length(current)≥2 and upperLength(current)≥β+3.   (3)
+```
+
+Its negation has the complete complementary grammar
+
+```text
+not AdmitsUnitPeeledCarrier(older ray)
+  ↔ length(current)=1
+     or (length(current)≥2 and upperLength(current)≤β+2).  (4)
+```
+
+**Scope:** (3) and (4) assume `β≥3`, an actual singleton pole, an erasure-ended current block,
+and parser law on the nonempty older tail. They impose no distinguished raw head. They do not
+exclude either short branch in (4), and unit peeled coordinates do not yet supply the integral
+gap ancestry or support factorization required by the strongest quotient gates.
+
+**Use:** remove unit ancestry as an independent conjecture on the long arbitrary-history
+singleton branch. The remaining frontier splits exactly into the short grammar (4) and the
+long unit branch, whose next missing premise is integral/support ancestry.
+
+**Formalization:**
+[`MatrixMortality/DecimalSetterSingletonAncestry.lean`](MatrixMortality/DecimalSetterSingletonAncestry.lean),
+through `parsedRay_ne_zero_of_blocksLaw`,
+`singletonPole_longMultiTail_admitsUnitPeeledCarrier`,
+`singletonPole_tail_admitsUnitPeeledCarrier_iff_currentShape`, and
+`singletonPole_tail_not_admitsUnitPeeledCarrier_iff_shortCurrent`.
+
+**Artifact:**
+[`audits/m53-singleton-tail-ancestry-equivalence-2026-09-01.md`](audits/m53-singleton-tail-ancestry-equivalence-2026-09-01.md).
+
+**Next:** kill the singleton/short-multi grammar in (4), and on the long branch strengthen the
+automatic unit coordinates to the integral denominator and common-suffix ancestry consumed by
+`MM-S22` and `MM-S24`.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).

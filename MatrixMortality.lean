@@ -158,6 +158,7 @@ import MatrixMortality.DecimalSetterBridgeRay
 import MatrixMortality.DecimalSetterRootRay
 import MatrixMortality.DecimalSetterRuleCRootSingleton
 import MatrixMortality.DecimalSetterTwoBlockSingleton
+import MatrixMortality.DecimalSetterSingletonAncestry
 import MatrixMortality.SchottkyPunctuation
 import MatrixMortality.TwoStateObstructions
 import MatrixMortality.ForcedRuleCCompanion
