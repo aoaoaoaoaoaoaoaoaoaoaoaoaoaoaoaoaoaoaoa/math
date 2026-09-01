@@ -1415,6 +1415,18 @@ Modulo three forces the lower prefix code `L` to vanish; the remaining equation 
 full-gap predecessor. This is distinct from `MM-S51`: sequential singleton transfers retain a
 square-run boundary and are not one `[D_c,D_c]` role block.
 
+[`MM-S71`](SALVAGE.md#mm-s71-three-block-backward-frontier) now performs the next pullback with
+every primitive normalization boundary explicit. Let the physical block `w` immediately before
+the two singleton deletions have upper length `a`, discarded scale depth `g`, and predecessor
+residual `E=P_we−V_wm`. A nonterminal full-tail pole either halts or forces
+
+```text
+a=g+1,      3^(g+β−1) ∣ E−3^gHe.
+```
+
+The first non-`D_c` ancestor is therefore isolated as one exact cylinder of precision
+`a+β−2`; no normalization or sequential boundary remains implicit in that local node.
+
 The remaining ternary obligation is now the **nonzero history-defect branch** of the global
 earliest-pole reduction. In the normalized coordinate `δ=D/y`, the complete physical recurrence
 is
@@ -1434,7 +1446,7 @@ erasure tile, not `β` of them. A complete proof must either force the long tail
 false pole or extend the carry/cylinder invariant to arbitrary physical target suffixes. Fixed
 residue and unit projections are empirically saturated, and the exact carry window grows with
 carrier height. None of `MM-S51`, `MM-S55`, `MM-S57`, `MM-S59`, `MM-S61`, `MM-S63`, `MM-S64`,
-`MM-S68`, or `MM-S69` alone proves projective avoidance.
+`MM-S68`, `MM-S69`, or `MM-S71` alone proves projective avoidance.
 Exact bidirectional diagnostics for the ternary swap at `β=3`, body `bbcc`, exclude every
 false-pole word of at most six projective blocks when each regular block has
 role length at most three; this is computational evidence only.
