@@ -1662,6 +1662,17 @@ block and forces every erasure-ended current block to be non-singleton with at l
 digits. Existence of those unit coordinates for every relevant minimal parser tail, followed by
 integral denominator ancestry, is the remaining adapter obligation.
 
+Record [`MM-S86`](SALVAGE.md#mm-s86-two-block-singleton-source-classifier) closes that ancestry
+obligation for a one-root older history. `admitsUnitPeeledCarrier_iff_ratio_hasDecimalShell`
+identifies unit peeled ancestry with quotient shell `(1,1)`, and
+`rootRay_admitsUnitPeeledCarrier_iff_upperLength_eq_one` computes a root quotient's shell as
+`(m,m)`. The uncancelled ray recurrence proves that a multi-role current block under a singleton
+target forces `m=1`; parser law makes the root exactly `R_c`, after which S85 gives the long
+bound `upperLength(current)≥β+3`. A separate three-case valuation proof excludes every singleton
+current over every root. `singletonPole_twoBlockSource_classifier` packages the complete
+parser-lawful result. The fixed-root long multi-role code equation is the sole survivor at two
+source blocks.
+
 Record [`MM-S37`](SALVAGE.md#mm-s37-decimal-three-shape-frontier-extinction) separates the
 ternary and decimal first-multi-transfer fronts. The single theorem
 `DecimalSetterDepth.firstMultiTransfer_threeShapeFrontier_impossible` consumes the three role
@@ -1717,7 +1728,7 @@ the periodic saturation theorem and its remaining arithmetic boundary are recons
 formalization and the shell attack are tracked in
 [#7](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/7).
 
-The `M₅(3)` delimiter attack has eighteen foundational records:
+The `M₅(3)` delimiter attack has nineteen foundational records:
 
 | Record | Formalization obligation |
 | --- | --- |
@@ -1733,6 +1744,7 @@ The `M₅(3)` delimiter attack has eighteen foundational records:
 | [`MM-S83`](SALVAGE.md#mm-s83-leading-b-shallow-root-sign-extinction) | exact arbitrary-tail complement formula and sign extinction for every shallow root beginning with `b` |
 | [`MM-S84`](SALVAGE.md#mm-s84-complete-shallow-root-terminal-normalization) | `(1,1)` target-trace shell, forced source upper length one, parser normalization to `R_c`, and exact terminal-match equivalence |
 | [`MM-S85`](SALVAGE.md#mm-s85-parser-ray-singleton-adapter) | exact homogeneous parser ray, physical block transport, arbitrary-history singleton equation, shallow singleton extinction, and conditional deep `m≥β+3` classifier |
+| [`MM-S86`](SALVAGE.md#mm-s86-two-block-singleton-source-classifier) | unit-ancestry quotient criterion, exact root shells, singleton-current extinction over every root, and canonical `R_c` long-current classifier |
 | [`MM-S01`](SALVAGE.md#mm-s01-square-run-projective-normal-form) | invariant square-run plane, invertible `2 × 2` transfer, Möbius normalization, rank-one fracture grammar, and equivalence with pole avoidance |
 | [`MM-S02`](SALVAGE.md#mm-s02-reset-zero-projective-peeling) | scaled transfer identity, exact two-shell classification of all poles, and reset-zero one-transfer avoidance |
 | [`MM-O16`](SALVAGE.md#mm-o16-exact-delimiter-pair-obstruction) | generic ignored-pair immortality is formalized; paired common-kernel and cubic companion specializations are audited |
@@ -2197,6 +2209,7 @@ fixed-rank decision problem.
 | `DecimalSetterFracture.lean` | greedy delimiter-cube fracture and complete arbitrary-product scalar-bridge normal form |
 | `DecimalSetterBridge.lean` | recursive cube elimination, exhaustive triple-free block parser, mortality-equivalent pole frontier, and exact shallow generalized raw-head adapter |
 | `DecimalSetterBridgeRay.lean` | exact homogeneous quotient of the bridge recurrence, singleton-pole equation, shallow singleton extinction, and unit-peeled deep singleton classifier |
+| `DecimalSetterRootRay.lean` | intrinsic unit-ancestry shell criterion, root-ray shells, and complete two-block singleton-source classification |
 | `DecimalSetterMinimumBody.lean` | one-`R_c` terminal normalization, minimum-body lawful shallow pole, exact parsed frontier witness, and compiler-image length separation |
 | `DecimalSetterInteger.lean` | explicit three-label integer `M₅(3)` family and forward Neary compiler |
 | `DecimalSetterArithmetic.lean` | decimal setter centered carry, reciprocal recurrence, coupled `2`/`5` target shells, and successive-pole valuation balance |

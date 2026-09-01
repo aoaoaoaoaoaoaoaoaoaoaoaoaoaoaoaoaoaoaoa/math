@@ -1096,6 +1096,17 @@ used by `MM-S22` and `MM-S24`. Bounded meet-in-the-middle searches find no singl
 eleven blocks at role width at most two, or through seven blocks at role width at most three, for
 `β=3` and body `bbcc`; these bounds are computational evidence only.
 
+[`MM-S86`](SALVAGE.md#mm-s86-two-block-singleton-source-classifier) resolves the unit-ancestry
+question completely when the older history is one root block. A ray admits unit peeled
+coordinates iff its quotient has shell `(1,1)`; a root quotient has shell `(m,m)`, where `m` is
+its upper length. The uncancelled singleton recurrence then shows that a multi-role current block
+forces `m=1`, while a singleton current block is impossible for every root at `β≥3`. Parser law
+turns `m=1` into the literal root `R_c`, and S85 supplies the remaining bound
+`upperLength(current)≥β+3`. Thus the entire two-source-block singleton frontier has one exact
+survivor grammar: a long multi-role erasure block over `R_c`. The next cut is its fixed-root code
+equation; for target `D_c`, the calibrations collapse it to
+`2·10^β(P−V)=7μ·10^m`.
+
 The ternary and decimal branches now separate at their first multi-transfer front.
 [`MM-S37`](SALVAGE.md#mm-s37-decimal-three-shape-frontier-extinction) substitutes each of the
 three role shapes left by the swapped ternary gate into the decimal carrier equation. All are

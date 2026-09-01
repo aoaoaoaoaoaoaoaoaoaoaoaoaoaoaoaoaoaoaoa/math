@@ -155,6 +155,7 @@ import MatrixMortality.DecimalSetterBridge
 import MatrixMortality.DecimalSetterMinimumBody
 import MatrixMortality.DecimalSetterShallow
 import MatrixMortality.DecimalSetterBridgeRay
+import MatrixMortality.DecimalSetterRootRay
 import MatrixMortality.SchottkyPunctuation
 import MatrixMortality.TwoStateObstructions
 import MatrixMortality.ForcedRuleCCompanion

@@ -147,6 +147,7 @@ file owns the mathematical stock.
 | [`MM-S83`](#mm-s83-leading-b-shallow-root-sign-extinction) | obstruction | every shallow root beginning with a `b`-role has negative exact-length complement and misses every target | formalized | active |
 | [`MM-S84`](#mm-s84-complete-shallow-root-terminal-normalization) | structure theorem | every parser-lawful non-singleton shallow pole has source exactly `R_c` and is exactly a literal Neary terminal match | formalized | active |
 | [`MM-S85`](#mm-s85-parser-ray-singleton-adapter) | structure theorem and obstruction | the physical bridge has an exact homogeneous parser ray; shallow singleton targets are impossible, and unit-peeled deep singleton poles require a non-singleton current block of upper length at least `β+3` | formalized | active |
+| [`MM-S86`](#mm-s86-two-block-singleton-source-classifier) | structure theorem and obstruction | a parser singleton pole over exactly two source blocks has canonical root `R_c` and a multi-role current block of upper length at least `β+3` | formalized | active |
 | [`R32-S01`](#r32-s01-split-return-normal-form) | structure theorem | rank-two cuts reduce one-unit binary mortality to a `2 × 2` return recurrence | formalized | graduated |
 | [`R32-S02`](#r32-s02-two-plane-edge-square) | structure theorem | two rank-two generators are a two-vertex square of `2 × 2` edges | formalized | graduated |
 | [`R32-O01`](#r32-o01-rank-one-profile-collapse) | obstruction | a rank-one generator reduces mortality to order-at-most-three scalar recurrence zeros | audited | stock |
@@ -5467,6 +5468,82 @@ through `boundaryRay_roleProduct_squareReset`, `boundaryRay_bridgeState`,
 **Next:** prove that every older tail in a minimal parsed singleton frontier admits unit peeled
 coordinates, or classify the exact valuation obstruction when it does not. Then transport the
 integral denominator ancestry `D=gap·Nprev` and factor support needed by `MM-S22`/`MM-S24`.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S86: Two-block singleton-source classifier
+
+**Kind:** structure theorem and obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+The unit-ancestry premise of `MM-S85` has an exact intrinsic form. For a homogeneous ray
+`(x,y)` and positive width,
+
+```text
+AdmitsUnitPeeledCarrier(x,y)
+  ↔ x≠0 and shell(y/x)=(1,1).                          (1)
+```
+
+The forward direction divides `x·10μD=yN` by the unit coordinates `N,D`; the reverse direction
+takes `D=1` and `N=10μ/(y/x)`. A physical root with upper spelling length `m` has numerator shell
+`(0,0)`, denominator shell `(m,m)`, and quotient shell `(m,m)`. Hence it satisfies (1) exactly
+when `m=1`.
+
+The singleton equation can also be retained before any peeled normalization. If `T,V,A` belong
+to the current block, `S` is the singleton-target trace, and `(x,y)` is the older parser ray,
+then
+
+```text
+(Tx−lift·Vy)S = gap·μ·lift·A·x·7.                    (2)
+```
+
+Apply (2) when the older history is one physical root. For a multi-role erasure current block,
+`T` has shell `(1,1)`, while the two root terms have depths one and `m`. If `m≠1`, their
+difference retains shell `(1,1)` and multiplication by `S` produces unequal depths
+`(β+2,β+1)`, contradicting the equal-depth right side. Thus `m=1`; parser law identifies the
+root as exactly `R_c`, and `MM-S85` forces the current upper length to be at least `β+3`.
+
+If the current block is itself a singleton, its trace has shell `(β+1,β)`. Comparing the root
+depth `m` with `β` gives three exhaustive cases: `m<β`, `m=β`, and `β<m`. Unequal-valuation
+subtraction fixes both residual depths in the first case and one decisive depth in each boundary
+case. Each contradicts the equal-depth right side of (2) for either singleton letter when
+`β≥3`. No singleton-current branch survives.
+
+The canonical parser theorem therefore states
+
+```text
+BlocksLaw [current,root] and HitsSquarePole D_ℓ [current,root]
+  implies root=R_c,
+          length(current)≥2,
+          upperLength(current)≥β+3.
+```
+
+**Scope:** this is the complete singleton-target classification for exactly two source blocks.
+It does not exclude the displayed long multi-role current over `R_c`, and it says nothing about
+older histories of two or more blocks. The unit-ray equivalence is exact but does not make unit
+ancestry automatic beyond a root.
+
+**Use:** delete every noncanonical root and every singleton current from the first deep
+singleton slice of `MM-S74`. The sole survivor now has a fixed root carrier and one long physical
+multi-role block, so the next attack can use its exact `R_c` calibration rather than arbitrary
+projective ancestry.
+
+**Formalization:**
+[`MatrixMortality/DecimalSetterRootRay.lean`](MatrixMortality/DecimalSetterRootRay.lean), through
+`admitsUnitPeeledCarrier_iff_ratio_hasDecimalShell`, `rootRay_ratio_hasDecimalShell`,
+`rootRay_admitsUnitPeeledCarrier_iff_upperLength_eq_one`,
+`hitsSquarePole_singleton_cons_iff_rayRecurrence`,
+`singletonPole_over_singleton_root_impossible`, and
+`singletonPole_twoBlockSource_classifier`.
+
+**Artifact:**
+[`audits/m53-two-block-singleton-source-2026-09-01.md`](audits/m53-two-block-singleton-source-2026-09-01.md).
+
+**Next:** substitute the exact `R_c` calibrations `9H=lift` and `H−10μ=−gap/9` into the sole
+surviving long-block equation. For target `D_c`, it reduces to the literal code discrepancy
+`2·10^β(P−V)=7μ·10^m`; attack that suffix equation before generalizing to deeper histories.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
