@@ -369,6 +369,7 @@ file owns the mathematical stock.
 | [`G3-S12`](#g3-s12-fork-crossing-transport-and-address-ambiguity) | structural reduction and obstruction | the toggle transports one explicit data-action crossing to another, while a prefixed Cassaigne relation destroys every action-level leading-run decoder | formalized | active |
 | [`G3-S13`](#g3-s13-contextual-kernel-fork-classification) | structure theorem, obstruction, and sharp counterexample | one-context embeddings of the five audited relations and their first critical pairs either miss the fork or enter a common-fixed centralizer; the first fork occurs at length 312 on that forbidden diagonal | formalized core; audited combinatorics and exact exhaustive computation | active |
 | [`G3-S14`](#g3-s14-finite-convergent-mixed-prime-presentation) | structure theorem, decision procedure, and separation | adjoining the 45 first critical branch pairs gives a finite 50-rule convergent presentation of the five-rule congruence; the quotient contains the forbidden length-312 fork but excludes every positive-depth odd-family relation | exact independently replayable certificate; Lean fork witness | active |
+| [`G3-S15`](#g3-s15-uniform-mixed-prime-contextual-cut-collapse) | uniform obstruction and computational cut | Parikh-balanced contextual cuts kill the odd kernel family at every depth and contract the first two completed critical generations to a finite internal cell, where exact replay finds no fork | formalized parametric obstruction; audited extraction and exact exhaustive computation | active |
 | [`G3-M02`](#g3-m02-square-root-punctuation-fracture) | partial mechanism | a rank-two square root gives an exact `SS`-free mortality grammar | formalized | closed |
 | [`G3-O10`](#g3-o10-square-root-boundary-saturation) | obstruction | every nondegenerate rank-one square root preserves boundary coefficient zeros | formalized | graduated |
 | [`G3-M01`](#g3-m01-free-group-discrepancy-engine) | partial mechanism | Carvalho's transducer gives an all-word marker-tail equation and a cyclic exponent-one equalizer | audited | active |
@@ -16690,6 +16691,57 @@ composed with
 **Next:** classify the parametric fork equation over this convergent quotient, with common-fixed
 action as the rejection predicate. In parallel, attack the affine-kernel relations outside the
 quotient by Parikh cuts before attempting another contextual compiler.
+
+### G3-S15: Uniform mixed-prime contextual-cut collapse
+
+**Kind:** uniform obstruction and computational cut
+
+**Evidence:** formalized parametric obstruction; audited extraction and exact exhaustive
+computation
+
+**Disposition:** active
+
+For the odd mixed-prime kernel family of common length `m=29+2k`, Lean proves that `3` is the
+unique positive proper prefix length with equal dilation count and `m-3` is the unique balanced
+suffix length. The letters immediately beyond the prefix cut disagree, as do the only short
+blocks which can align at the suffix cut. The seven unequal-length, off-centralizer cells in the
+literal `YZXYX/XZYXY` contextual decomposition are represented by an exact inductive certificate;
+Lean proves that no such certificate exists at any depth. Full prefix or suffix exits are the
+common-fixed centralizer branch already rejected by `G3-S08/G3-S13`, while equal data lengths make
+the two literal fork layouts identical. The infinite odd family is therefore dead as a direct
+one-context compiler.
+
+An independent cut certificate applies the same invariant to the finite completion. The five
+base rules have one proper balanced prefix cut, at `3`; the `45` first-critical rules have exactly
+`{3,a}` with `28≤a≤32`; and the `405` genuinely new second-critical pairs have exactly
+`{3,a,b}` with `28≤a≤32` and `53≤b≤61`. Immediately adjacent letters disagree at every cut.
+The nine prefix/suffix cells consequently contract to the full centralizer exits and the sole
+internal/internal cell. If `m` is the relation length, that cell has total fork length at most
+`2m-5`, giving bounds `113` and `171` for the first and second generations.
+
+The first generation was already eliminated through length `120`. A durable exact union-find
+replay rejects all `405` second-critical pairs in both orientations: `779,044,642` geometries for
+all cells through length `120`, then `20,043,556` internal geometries through length `171`.
+Thus neither of the first two critical generations supplies a noncentral one-context fork.
+
+**Scope:** the Lean theorem consumes the audited cell-extraction certificate; it does not derive
+that certificate from arbitrary lists. The finite replay concerns one fixed two-sided context
+around one completed rule or one new second-critical branch pair. An arbitrary multi-step
+conversion in the convergent quotient need not localize to either form. Other affine-kernel
+relations are also outside the finite presentation.
+
+**Use:** retire the odd-family contextual lane and all first/second-critical one-window repairs.
+Search the quotient only through genuinely multi-window normal-form structure. Search outside it
+through new equal-action families, with the contextual cuts applied before any endpoint work.
+
+**Artifact:**
+[`GuardedMixedPrimeOddFamilyParikh.lean`](MatrixMortality/GuardedMixedPrimeOddFamilyParikh.lean),
+[`certify_mixed_prime_context_cuts.py`](tools/certify_mixed_prime_context_cuts.py),
+[`audit_mixed_prime_kernel.rs`](tools/audit_mixed_prime_kernel.rs), and
+[`m34-mixed-prime-context-cuts-2026-08-31.md`](audits/m34-mixed-prime-context-cuts-2026-08-31.md).
+
+**Next:** attack the newly found Cayley-Hamilton-pumpable affine-kernel families. In the finite
+quotient, seek a multi-window fork invariant rather than adding another raw length cutoff.
 
 ### G3-O13: Rational serializer pumping
 

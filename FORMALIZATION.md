@@ -3100,6 +3100,7 @@ fixed-rank decision problem.
 | `GuardedMixedPrimeReducedKernel.lean` | context cancellation, reduced fork collision, positive-macro necessity, exact fixed-point balance, and exterior toggle geometry |
 | `GuardedMixedPrimeForkCrossing.lean` | exact fork-crossing factorization, four physical order chains, slope-conditioned leading-run cylinders, and Cassaigne address ambiguity |
 | `GuardedMixedPrimeForkQuotient.lean` | full-triple centralizer collapse, the exact length-312 critical Cassaigne fork, its common fixed point and monogenic action collapse, and endpoint rejection |
+| `GuardedMixedPrimeOddFamilyParikh.lean` | uniform balanced-prefix/suffix classification and seven-cell contextual obstruction for the infinite odd kernel family |
 | `ExpandingHistoryNoGo.lean` | reset-affine orbit, finite reverse automaton, regularity, and universal computability obstruction |
 | `CancellativeProjectiveNoGo.lean` | paired residual conic, finite support-rank closure, cancellative role fractions, and projective commutator rigidity |
 | `PairedInverseChamber.lean` | one-turn residual chambers, protected formal inverse states, and positive forward-cone separation |
@@ -3473,6 +3474,8 @@ fixed-rank decision problem.
 | Every exact `bcbc` endpoint code identifies the flat and nested fork actions, hence gives either a literal macro equation or a distinct mixed-prime kernel pair; three macros with one common affine fixed point are impossible | `GuardedMixedPrimeFork.bcbc_fork_macro_common_fixedPoint`, `GuardedMixedPrimeFork.bcbc_fork_macro_scale_eq`, `GuardedMixedPrimeFork.bcbc_fork_macro_actions_eq`, `GuardedMixedPrimeFork.bcbc_fork_macro_word_or_kernel`, `GuardedMixedPrimeFork.no_bcbc_endpoint_of_common_macro_fixedPoint` |
 | Literal flat/nested equality splits into commuting data macros and forces a forbidden common fixed point; every exact code therefore supplies a distinct equal-action mixed-prime kernel pair of length `4(2|κ(b)|+|κ(c)|+|κ(toggle)|)` | `GuardedMixedPrimeFork.forkEquation_split`, `GuardedMixedPrimeFork.forkEquation_common_fixedPoint_of_actions_ne`, `GuardedMixedPrimeFork.no_bcbc_literal_fork_words`, `GuardedMixedPrimeFork.bcbc_fork_macro_kernel`, `GuardedMixedPrimeFork.bcbc_encodedFork_length` |
 | Cancelling the common bijective context yields a distinct equal-action reduced pair of length `2|κ(b)|+2|κ(c)|+|κ(toggle)|`; every macro is nonempty, the data slopes and fixed points differ, and the toggle fixed point lies beyond the more contracting data fixed point, which is strictly inside `[0,5/2]` | `GuardedMixedPrimeFork.bcbc_reducedFork_genuine_kernel`, `GuardedMixedPrimeFork.bcbc_reducedFork_length`, `GuardedMixedPrimeFork.bcbc_macro_words_ne_nil`, `GuardedMixedPrimeFork.bcbc_data_macro_scales_ne`, `GuardedMixedPrimeFork.bcbc_data_macro_fixedPoints_ne`, `GuardedMixedPrimeFork.bcbc_toggle_fixedPoint_exterior`, `GuardedMixedPrimeFork.bcbc_moreContracting_fixedPoint_interior` |
+| Every odd-family relation has one positive proper balanced prefix cut and one complementary balanced suffix cut | `GuardedMixedPrimeFork.kernelOddFamily_prefix_dilateCount_eq`, `GuardedMixedPrimeFork.kernelOddFamily_suffix_dilateCount_eq` |
+| The seven unequal-length off-centralizer contextual cells are impossible for the odd kernel family at every depth | `GuardedMixedPrimeFork.no_kernelOddFamily_internal_internal_cut`, `GuardedMixedPrimeFork.no_kernelOddFamily_internalPrefix_comparableSuffix_cut`, `GuardedMixedPrimeFork.no_kernelOddFamily_comparablePrefix_internalSuffix_cut`, `GuardedMixedPrimeFork.no_kernelOddFamily_sameShorter_cut`, `GuardedMixedPrimeFork.no_kernelOddFamily_offCentralizer_cutCertificate` |
 | A matrix square equal to an outer product gives the complete `SS`-free mortality grammar | `SquareRootPunctuation.isMortal_iff_exists_squareFree_zero` |
 | The explicit source-uniform Neary punctuation matrix has the required square and rank two | `SquareRootPunctuation.nearySquareRoot_sq`, `SquareRootPunctuation.nearySquareRoot_rank` |
 | Exact coefficient preservation on the `R_bR_b`-free subshift forces the `R_b` matrix to be a unit | `SquareRootPunctuation.ruleB_isUnit_of_exact_on_squareFree` |
@@ -3999,6 +4002,21 @@ length-`312` fork in four versus five reductions. It also proves that both sides
 positive-depth odd-family relation are distinct irreducible normal forms, separating the full
 affine kernel from this quotient. Convergence does not settle whether every parametric quotient
 fork is common-fixed; that existential word equation remains open.
+
+`G3-S15` applies a Parikh cut before further endpoint work. Lean proves uniformly that an
+odd-family relation of length `m=29+2k` has unique positive proper balanced prefix cut `3` and
+unique balanced suffix length `m-3`; the adjacent aligned letters or short blocks disagree. An
+inductive interface enumerates the seven unequal-length off-centralizer cells extracted from a
+literal fork placement, and Lean refutes every constructor at every depth. The extraction itself
+remains audited word combinatorics. Full prefix/suffix exits enter the already rejected
+centralizer, and equal data lengths make the fork layouts identical.
+
+The exact cut certificate also enumerates every balanced cut in the `50` completed rules and all
+`405` new second-critical branch pairs. It contracts their contextual search to the
+internal/internal bound `N≤2m-5`, hence `N≤113` and `N≤171`. The existing first-generation
+search and a new `799,088,198`-geometry union-find replay reject both generations completely as
+one-context repairs. This does not classify arbitrary multi-window conversions in the convergent
+quotient or affine-kernel relations outside it.
 
 For `G3-O20`, Lean proves the free-monoid tail law: if one fixed-boundary equation with stationary
 left and right pump blocks holds at exponents `N` and `N+1`, it holds at every exponent `N+k`.

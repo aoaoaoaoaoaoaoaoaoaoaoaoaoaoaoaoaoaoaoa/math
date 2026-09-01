@@ -898,6 +898,28 @@
 'MatrixMortality.GuardedMixedPrimeFork.no_bcbc_endpoint_criticalForkCode' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.alignedTail_count_eq' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.kernelOddFamily_prefix_dilateCount_eq' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.kernelOddFamily_suffix_dilateCount_eq' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.no_kernelOddFamily_internal_internal_cut' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.no_kernelOddFamily_internalPrefix_comparableSuffix_cut' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.no_kernelOddFamily_comparablePrefix_internalSuffix_cut' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.no_kernelOddFamily_sameShorter_cut' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.no_kernelOddFamily_offCentralizer_cutCertificate' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.SquareRootPunctuation.coefficient_append_square' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
