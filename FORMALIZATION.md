@@ -1820,6 +1820,7 @@ The setter-projective audit now also exposes a kernel-friendly carry theorem:
 | [`MM-S68`](SALVAGE.md#mm-s68-backward-numerator-resonance) | backward deep-numerator resonance, exact predecessor cylinder, literal-`D_c` numerator/gap toggle, and the zero-carrier terminal branch |
 | [`MM-S69`](SALVAGE.md#mm-s69-sequential-double-deletion-zero-gap-extinction) | exact prefix equation for the distinguished sequential two-`D_c` carrier, modulo-three lower-prefix extinction, denominator size contradiction, and zero-gap physical adapter |
 | [`MM-S71`](SALVAGE.md#mm-s71-three-block-backward-frontier) | exact three-block primitive-normalization composition, nonzero full-gap branch, and unique cylinder at the block before two final singleton `D_c` transfers |
+| [`MM-O27`](SALVAGE.md#mm-o27-reachable-predecessor-cylinder) | exact width-three ordinary-reset orbit, primitive normalizations, nonzero full-gap successor, and a reachable non-`D_c` predecessor-cylinder witness |
 
 `MM-S08` is now discharged in
 [`SwappedSetterSingletonShell.lean`](MatrixMortality/SwappedSetterSingletonShell.lean).
@@ -2292,6 +2293,13 @@ upperLength(w)=v₃(s)+1,
 
 This is the exact cylinder to consume at the first non-`D_c` block, not its extinction. The
 target must still contain a full `β`-erasure tail.
+
+Record [`MM-O27`](SALVAGE.md#mm-o27-reachable-predecessor-cylinder) proves that no block-local
+extinction is possible. At `β=3`, body `bbcc`, the ordinary-reset history
+`[R_c,D_c]²` reaches an explicit primitive carrier. A third `[R_c,D_c]` normalizes by `−3`,
+has nonzero primitive gap divisible by `27`, and satisfies the `MM-S71` cylinder modulo `27`.
+All coordinates, gcd claims, and recurrence equations are closed numeral proofs. The witness is
+not a pole, so target carry and earliestness remain available and necessary.
 
 Record [`MM-S21`](SALVAGE.md#mm-s21-bounded-decimal-suffix-cycles) closes the fixed-precision
 suffix-descent lane. `DecimalSetterSuffix.cycleDefect_lift` gives an explicit one-digit lift for
@@ -3081,6 +3089,7 @@ fixed-rank decision problem.
 | `DecimalSetterFirstEntry.lean` | exhaustive phase factorization and complete distinguished raw-head first-entry extinction |
 | `SwappedSetterSequentialDoubleDeletion.lean` | direct full-tail extinction for the distinguished sequential two-deletion carrier and elimination of the backward toggle's zero-gap survivor |
 | `SwappedSetterThreeBlockFrontier.lean` | exact primitive three-block pullback from a full-tail pole to the unique cylinder at the physical block before two singleton deletions |
+| `SwappedSetterReachableCylinder.lean` | closed width-three ordinary-reset witness showing that the non-`D_c` predecessor cylinder is physically reachable and cannot be killed locally |
 | `PairedMortality.lean` | common-column mortality converse and exact integer `4 × 4` family |
 | `PhaseFracture.lean` | phase normalization and dimension-free projective-identification contradiction |
 | `PhaseRigidity.lean` | checked local role algebra, discrepancy commutators, and invariant-pencil rigidity |
