@@ -268,6 +268,7 @@ file owns the mathematical stock.
 | [`G3-S19`](#g3-s19-aligned-address-fork-obstruction) | obstruction | the complete forced fork cannot lie in the aligned `DT/TD` address submonoid; some control boundary must break address phase | formalized | active |
 | [`G3-S20`](#g3-s20-common-address-wrapper-obstruction) | obstruction | a common phase-breaking prefix and suffix cancel, so they cannot wrap the aligned address comparator into the forced fork | formalized | active |
 | [`G3-S21`](#g3-s21-kernel-cloaked-address-comparators) | enabling structure theorem | every genuine mixed-prime kernel pair asymmetrically cloaks an exact arbitrary-length address comparator while preserving raw-word distinctness | formalized; explicit infinite family | active |
+| [`G3-S22`](#g3-s22-prefix-cloak-size-obstruction) | obstruction and finite rejection | every physical prefix cloak obeys `2|u|<|x|+|y|<|L|`; all 23 base pump cloaks fail the remaining finite factorization census | formalized universal bound; exact independently replayable certificate | active |
 | [`G3-M02`](#g3-m02-square-root-punctuation-fracture) | partial mechanism | a rank-two square root gives an exact `SS`-free mortality grammar | formalized | closed |
 | [`G3-O10`](#g3-o10-square-root-boundary-saturation) | obstruction | every nondegenerate rank-one square root preserves boundary coefficient zeros | formalized | graduated |
 | [`G3-M01`](#g3-m01-free-group-discrepancy-engine) | partial mechanism | Carvalho's transducer gives an all-word marker-tail equation and a cyclic exponent-one equalizer | audited | active |
@@ -10928,6 +10929,58 @@ residual branches are one of the two displayed forms.
 **Next:** solve the word-factor equations
 `yzxyx=L·expandAddress(u)` and `xzyxy=R·expandAddress(v)`, or the suffix analogues, with one
 explicit kernel cloak and source-computable address maps. Then test the complete endpoint converse.
+
+### G3-S22: Prefix-cloak size obstruction
+
+**Kind:** obstruction and finite rejection
+
+**Evidence:** formalized universal bound; exact independently replayable certificate
+
+**Disposition:** active
+
+The prefix orientation of `G3-S21` pays a strict terminal-size tax. Suppose one accepting equal
+address is physically realized as
+
+```text
+yzxyx=L·expandAddress(u),       xzyxy=R·expandAddress(u).
+```
+
+Lean proves
+
+```text
+2|u| < |x|+|y| < |L|.
+```
+
+If the common address suffix reached `|x|+|y|` letters, it would contain both final blocks `yx`
+and `xy`. Equal-length suffixes of one word coincide, so the data words would commute. Exact
+endpoint semantics forbids this: commutation makes the two nonempty contracting data actions
+share their unique rational fixed point, contradicting the already forced fixed-point separation.
+The exact reduced-word length equation and nonempty toggle then give the second strict inequality.
+
+Thus no fixed prefix cloak carries unbounded address depth. A prefix construction must make its
+cloak source-dependent and strictly longer than the data boundary, rather than attaching a fixed
+kernel relation to an arbitrarily long address.
+
+The formal bound makes each fixed cloak search finite. An exact parity-DSU certificate applies it
+to all `23` base pump relations from `G3-S16`, in both branch orientations. The complete census has
+`77,280` positive length geometries, reaches maximum address depth `14`, and has no survivor.
+
+**Scope:** the finite rejection covers the `23` base prefix cloaks only. It does not cover pumped
+descendants, the odd family, suffix cloaks, unequal or interleaved address interiors, or a separate
+two-offset channel. The universal size theorem applies to every prefix cloak but permits a family
+whose cloak grows with the source and address.
+
+**Use:** prune every fixed-cloak prefix compiler and all `23` base candidates. Any surviving
+prefix search must satisfy the strict size gate before literal or affine algebra is attempted.
+
+**Artifact:**
+[`MixedPrimePrefixCloakNoGo.lean`](MatrixMortality/MixedPrimePrefixCloakNoGo.lean),
+[`certify_mixed_prime_prefix_cloaks.py`](tools/certify_mixed_prime_prefix_cloaks.py), and
+[`m34-prefix-cloak-size-2026-09-01.md`](audits/m34-prefix-cloak-size-2026-09-01.md).
+
+**Next:** derive a uniform contradiction for pumped/source-varying prefix cloaks, or move to the
+suffix orientation where the address does not create the same terminal overlap. Any positive
+candidate must still satisfy the complete arbitrary-word endpoint converse.
 
 ### G3-O13: Rational serializer pumping
 

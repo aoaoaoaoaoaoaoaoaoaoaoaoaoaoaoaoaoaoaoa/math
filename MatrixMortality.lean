@@ -117,6 +117,7 @@ import MatrixMortality.MixedPrimeMacroComparator
 import MatrixMortality.MixedPrimeAddressForkNoGo
 import MatrixMortality.MixedPrimeAddressWrapperNoGo
 import MatrixMortality.MixedPrimeKernelCloakedAddress
+import MatrixMortality.MixedPrimePrefixCloakNoGo
 import MatrixMortality.SquareRootPunctuation
 import MatrixMortality.TernaryClosedBlockNoGo
 import MatrixMortality.ThreePhaseBinaryNoGo

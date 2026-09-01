@@ -2717,6 +2717,17 @@ cancel to `L=R`. Lean instantiates both orientations with every member of the ex
 family. What remains is to factor the cloaked branches as the physical `yzxyx/xzyxy` images of
 three fixed controls and prove the source-indexed arbitrary-word endpoint converse.
 
+`G3-S22` proves that the prefix factorization has a strict universal size gate. Exact endpoint
+semantics makes the data words noncommuting: if they commuted, each would preserve the other's
+unique rational fixed point, contradicting their forced fixed-point separation. If a common
+aligned suffix in `yzxyx=L·expandAddress(u)` and `xzyxy=R·expandAddress(u)` had length at least
+`|x|+|y|`, its two equal-length terminal suffixes would force `yx=xy`. Hence
+`2|u|<|x|+|y|`; the exact length equation and nonempty toggle sharpen this to
+`2|u|<|x|+|y|<|L|`. No fixed prefix cloak can therefore carry unbounded depth. The associated
+exact parity certificate exhausts the resulting finite windows for all `23` base pump cloaks in
+both branch orientations: `77,280` geometries, maximum address depth `14`, no survivor. This
+finite rejection does not cover pumped/source-varying cloaks, the odd family, or suffix cloaks.
+
 For `G3-O20`, Lean proves the free-monoid tail law: if one fixed-boundary equation with stationary
 left and right pump blocks holds at exponents `N` and `N+1`, it holds at every exponent `N+k`.
 The proof uses only prefix comparability and left/right cancellation. This closes a unary

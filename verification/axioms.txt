@@ -869,6 +869,15 @@
 'MatrixMortality.MixedPrimeKernelCloakedAddress.kernelOddFamily_suffixCloakedAddress_genuineComparator' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.MixedPrimePrefixCloakNoGo.forkWords_data_commute_of_commonSuffix_long' depends on axioms: [propext,
+ Quot.sound]
+'MatrixMortality.MixedPrimePrefixCloakNoGo.bcbc_data_macro_words_not_commute' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimePrefixCloakNoGo.prefixCloak_strict_size' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.MixedPrimePrefixCloakNoGo.bcbc_prefixCloak_strict_size' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.SquareRootPunctuation.coefficient_append_square' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
