@@ -219,8 +219,10 @@ even body `bᵖ c bʳ c bˢ` with `r≢2 (mod 3)` has the exact canonical cycle
 `c b^(s+(p+r+s)/2+1)`. For the sheared plane
 `p=3t+2`, `r=n+t`, `s=n`, the coupled initial queue reaches that cycle, so every such source
 off middle phase two is nonhalting. This is an exact unequal-run cut, not a classification of
-arbitrary triples; its checked owner is `MatrixMortality/SeparatedTwoCShear.lean`. The diagonal
-audit trail is
+arbitrary triples. [`MM-S70`](SALVAGE.md#mm-s70-sheared-residue-eight-drainage) enters the
+excluded phase: when `r≡8 (mod 9)` and `t≢2 (mod 3)`, an exact four-active-`c` history reaches
+a head-clean queue, so the coupled source halts. Both cuts are checked in
+`MatrixMortality/SeparatedTwoCShear.lean`. The diagonal audit trail is
 `audits/m53-separated-two-c-orbits-2026-08-31.md`,
 `audits/m53-separated-two-c-residue-eight-2026-08-31.md`,
 `audits/m53-separated-two-c-residue-five-2026-08-31.md`, and
@@ -914,9 +916,11 @@ Three live routes remain.
    eighty-one halts, and [`MM-S48`](SALVAGE.md#mm-s48-centered-four-c-extinction) closes both
    surviving tail phases. [`MM-S58`](SALVAGE.md#mm-s58-unequal-two-c-cycle-law) proves a
    canonical cycle law for every nontrivial even body off middle phase two and proves coupled
-   entry on the unequal plane `p=3(r-s)+2`, `r≥s`. The next source-level cut is the sheared
-   phase `r≡2 (mod 3)` or coupled triples outside that plane, not another diagonal or
-   adjacent-`c` example.
+   entry on the unequal plane `p=3(r-s)+2`, `r≥s`.
+   [`MM-S70`](SALVAGE.md#mm-s70-sheared-residue-eight-drainage) then proves halting in the
+   middle-phase-two wedge `r≡8 (mod 9)`, `r-s≢2 (mod 3)`. The next source-level cut is a
+   remaining sheared phase-two residue pair or coupled triples outside that plane, not another
+   diagonal or adjacent-`c` example.
 
 The decimal setter is now the sharpest constructive route. The ternary swap remains useful
 because its suffix and divisor-ray theory is mature; the decimal instance has stronger real

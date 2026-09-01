@@ -75,6 +75,7 @@ file owns the mathematical stock.
 | [`MM-S43`](#mm-s43-four-c-reproduction-cut) | structure and halting theorem | one four-`c` block reproduces exactly; `n≡11 (mod 81)` halts | formalized | active |
 | [`MM-S48`](#mm-s48-centered-four-c-extinction) | structure and halting theorem | the one/two-block macro is a finite injective centered division system; every `n≡2 (mod 3)` diagonal source halts | formalized | active |
 | [`MM-S58`](#mm-s58-unequal-two-c-cycle-law) | structure theorem and obstruction | every nontrivial even two-`c` body off middle phase two has a canonical cycle; an unequal sheared diagonal reaches it from the coupled source | formalized | active |
+| [`MM-S70`](#mm-s70-sheared-residue-eight-drainage) | halting theorem | a four-active-`c` history drains the sheared middle-phase-two wedge `r≡8 (mod 9)`, `r-s≢2 (mod 3)` | formalized | active |
 | [`MM-O01`](#mm-o01-all-placement-packing-rank) | obstruction | literal CHHN packing has exact rank six for every separator placement | formalized | graduated |
 | [`MM-O02`](#mm-o02-one-sided-phase-overlap) | obstruction | standard common-line phase fusion becomes one-sided | reported | parked |
 | [`MM-O03`](#mm-o03-two-channel-boundary-tax) | obstruction | exact diagonal rank-two punctuation costs two states beyond Hankel rank | formalized | graduated |
@@ -6059,8 +6060,56 @@ reserve higher-active-`c` nuclei for middle phase two or for sources missing the
 `SeparatedTwoCShear.shearedInitial_reaches_cycle`, and
 `SeparatedTwoCShear.sheared_not_tagHaltsFrom`.
 
-**Next:** decide the sheared middle-phase-two sources, then derive the first-return map for
-coupled triples outside `p=3(r-s)+2`.
+**Next:** `MM-S70` cuts the first sheared middle-phase-two residue wedge; classify the remaining
+joint residues, then derive the first-return map outside `p=3(r-s)+2`.
+
+### MM-S70: Sheared residue-eight drainage
+
+**Kind:** halting theorem
+**Evidence:** formalized
+**Disposition:** active
+
+Continue on the sheared plane from `MM-S58`:
+
+```text
+q(t,n) = b^(3t+2) c b^(n+t) c b^n.
+```
+
+Write `n+t=9k+8` and suppose `t≢2 (mod 3)`. These sources lie inside the middle phase excluded
+from the canonical-cycle theorem. After the initial `t` inert steps expose
+`c b^(n+t) c b^(n+t+1)`, the stroke history
+
+```text
+C B^(3k+2) C B^(3k+3+t) C B^(3k+2) C,
+C=cbb,  B=bbb,
+```
+
+has an exact terminal-history equation. Its residual queue is
+
+```text
+b^(12k+11+2t) c b^(9k+8) c
+b^(12k+14+3t) c b^(9k+8) c
+b^(12k+13+2t) c b^(9k+8) c b^(n+1).
+```
+
+Every deletion head in this queue is `b` exactly on the two shear phases `t≡0,1 (mod 3)`.
+It therefore drains, and the original coupled source halts. Positive `t` supplies genuinely
+unequal examples; `t=0` recovers the diagonal residue-eight certificate.
+
+**Scope:** this proves halting only on the sheared plane with middle run `8 mod 9` and shear
+off phase two. It does not decide `t≡2 (mod 3)` on that middle residue, middle residues two or
+five modulo nine, or coupled triples outside `p=3(r-s)+2`.
+
+**Use:** the excluded middle phase is not a uniform survivor. Its first four active events are
+controlled by the joint residue pair `(r mod 9, (r-s) mod 3)`, and the residue-eight/off-two
+wedge can be deleted before constructing a larger active-block nucleus.
+
+**Formalization:**
+[`MatrixMortality/SeparatedTwoCShear.lean`](MatrixMortality/SeparatedTwoCShear.lean), through
+`SeparatedTwoCShear.shearedEight_tagHaltsFrom`.
+
+**Next:** derive the successor of the same four-event history for shear phase two, then attack
+middle residues two and five modulo nine.
 
 ### MM-S33: Leading-`D_b` support-saturator extinction
 
