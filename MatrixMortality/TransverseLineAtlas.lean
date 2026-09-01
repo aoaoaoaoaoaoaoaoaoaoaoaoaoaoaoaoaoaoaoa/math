@@ -16,7 +16,9 @@ namespace TransverseLineAtlas
 
 open scoped Matrix
 
+/-- Three-dimensional rational state space. -/
 abbrev State := Fin 3 → ℚ
+/-- Rational control matrices acting on the state space. -/
 abbrev ControlMatrix := Matrix (Fin 3) (Fin 3) ℚ
 
 /-- The two boundary-ray charts and the four optionally toggled data-image charts. -/

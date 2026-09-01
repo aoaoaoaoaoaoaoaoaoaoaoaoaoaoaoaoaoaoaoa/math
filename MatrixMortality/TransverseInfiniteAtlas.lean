@@ -13,8 +13,11 @@ namespace TransverseInfiniteAtlas
 
 open scoped Matrix
 
+/-- Two-dimensional input interface carried by the atlas. -/
 abbrev Interface := Fin 2
+/-- Three-dimensional rational state space. -/
 abbrev State := Fin 3 → ℚ
+/-- Rational control matrices acting on the state space. -/
 abbrev ControlMatrix := Matrix (Fin 3) (Fin 3) ℚ
 
 /-- Diagonal toggle with three distinct rational eigenvalues. -/

@@ -16,10 +16,15 @@ namespace TransverseLineHardCore
 
 open scoped Matrix
 
+/-- Two-dimensional projective interface. -/
 abbrev Interface := Fin 2
+/-- Rational states on the projective interface. -/
 abbrev SmallState := Interface → ℚ
+/-- Rational matrices acting on the projective interface. -/
 abbrev SmallMatrix := Matrix Interface Interface ℚ
+/-- Three-dimensional rational carrier state. -/
 abbrev State := Fin 3 → ℚ
+/-- Rational control matrices acting on the carrier. -/
 abbrev ControlMatrix := Matrix (Fin 3) (Fin 3) ℚ
 
 /-- Inclusion of the first coordinate plane. -/
