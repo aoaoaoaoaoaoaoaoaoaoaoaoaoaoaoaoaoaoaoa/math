@@ -1755,6 +1755,12 @@
 'MatrixMortality.MixedPrimeDebt.shellPeriodicPoint_eq_iff_collisionSource' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.MixedPrimeDebt.shellRun_eq_iff_globalRelation_of_length_sum' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.shellRun_eq_iff_kernel_or_collisionSource' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.MixedPrimeDebt.shellPeriodicPoint_schedulePower' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]

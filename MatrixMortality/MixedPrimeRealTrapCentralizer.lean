@@ -182,6 +182,52 @@ theorem shellPeriodicPoint_eq_iff_collisionSource
       collision.symm.trans left_fixed
     exact shellRun_fixedPoint_unique right_ne right_fixed
 
+/-! ## Arbitrary fixed-endpoint fibres -/
+
+/-- Inside one length/sum grade, equality at one rational source is already a global affine
+relation. -/
+theorem shellRun_eq_iff_globalRelation_of_length_sum
+    {left right : List ℕ} (length_eq : left.length = right.length)
+    (sum_eq : left.sum = right.sum) (source : ℚ) :
+    shellRun left source = shellRun right source ↔
+      ∀ state, shellRun left state = shellRun right state := by
+  have slope_eq : shellSlope left = shellSlope right :=
+    shellSlope_eq_of_length_sum length_eq sum_eq
+  constructor
+  · intro collision state
+    have left_displacement := shellRun_sub_shellRun left state source
+    have right_displacement := shellRun_sub_shellRun right state source
+    rw [slope_eq, collision] at left_displacement
+    linarith
+  · intro relation
+    exact relation source
+
+/-- Every pair in an arbitrary fixed-source/fixed-target fibre is exactly either one balanced
+global affine relation or one unequal-slope collision-source equality. -/
+theorem shellRun_eq_iff_kernel_or_collisionSource
+    (left right : List ℕ) (source : ℚ) :
+    shellRun left source = shellRun right source ↔
+      ((left.length = right.length ∧ left.sum = right.sum) ∧
+        ∀ state, shellRun left state = shellRun right state) ∨
+      (¬(left.length = right.length ∧ left.sum = right.sum) ∧
+        collisionSource left right = source) := by
+  constructor
+  · intro collision
+    by_cases vector_eq : left.length = right.length ∧ left.sum = right.sum
+    · exact Or.inl ⟨vector_eq,
+        (shellRun_eq_iff_globalRelation_of_length_sum
+          vector_eq.1 vector_eq.2 source).1 collision⟩
+    · have slope_ne : shellSlope left ≠ shellSlope right := by
+        exact fun slope_eq => vector_eq ((shellSlope_eq_iff_length_sum left right).1 slope_eq)
+      exact Or.inr ⟨vector_eq,
+        collisionSource_eq_of_shellRun_eq left right slope_ne collision⟩
+  · rintro (⟨_, relation⟩ | ⟨vector_ne, source_eq⟩)
+    · exact relation source
+    · have slope_ne : shellSlope left ≠ shellSlope right := by
+        exact fun slope_eq => vector_ne ((shellSlope_eq_iff_length_sum left right).1 slope_eq)
+      have collision := shellRun_collisionSource left right slope_ne
+      simpa only [source_eq] using collision
+
 /-! ## Determinant fork inside one periodic-point centralizer -/
 
 /-- Concatenate a fixed number of copies of one shell schedule. -/

@@ -264,6 +264,7 @@ file owns the mathematical stock.
 | [`D2-S14`](#d2-s14-arbitrary-body-wall-excursion-saturation) | structure theorem | every finite wait word occurs inside a guarded wall-anchored periodic excursion | formalized | active |
 | [`D2-S15`](#d2-s15-fixed-endpoint-centralizer-reduction) | reduction | equality of nonempty shell periodic points is exactly global affine commutation, split by the slope fibre | formalized | active |
 | [`D2-S16`](#d2-s16-periodic-centralizer-determinant-fork) | structure theorem | two common-source loops force either a global power relation or an injective `ℕ²` family of guarded loops | formalized | active |
+| [`D2-S17`](#d2-s17-fixed-endpoint-fibre-dichotomy) | reduction | every pair in a fixed shell endpoint fibre is either a balanced affine-kernel relation or one explicit unequal-slope collision source | formalized | active |
 | [`D2-D01`](#d2-d01-projectively-unimodular-stratum) | decidable stratum | projectively unimodular hard-core instances are decidable | audited | stock |
 | [`D2-D02`](#d2-d02-invariant-pair-stratum) | decidable stratum | invariant projective pairs reduce to abelian-by-`C₂` reachability | reported | active |
 | [`D2-D03`](#d2-d03-common-multiplier-stratum) | decidable stratum | rational affine maps with one multiplier are decidable under regular control | reported | active |
@@ -12147,6 +12148,53 @@ witness as rank-two saturation, not as a lone exceptional collision.
 **Next:** decide whether the positive shell monoid has any nonzero-determinant centralizer pair.
 Search cyclic rotations inside the exact affine kernel, then seek a number-theoretic obstruction
 to rank-two slope support at one rational fixed point.
+
+### D2-S17: Fixed-endpoint fibre dichotomy
+
+**Kind:** exact reduction
+**Evidence:** formalized
+**Disposition:** active
+
+Fix an arbitrary rational source `x`; no real-trap, guard, or periodicity hypothesis is needed.
+For two schedules `u,v`, Lean proves
+
+```text
+T_u(x)=T_v(x)
+  ↔
+  [ (length(u),sum(u))=(length(v),sum(v))
+      and T_u=T_v globally ]
+  or
+  [ (length(u),sum(u))≠(length(v),sum(v))
+      and collisionSource(u,v)=x ].
+```
+
+The first branch follows because equal length and total wait give equal slopes. Equality at one
+source then forces equal intercepts, so the two schedules agree on every rational state. This is
+exactly the balanced positive affine kernel already exposed by
+[`D2-O02`](#d2-o02-critical-shell-periodic-saturation). In the second branch the slope vectors,
+and hence the slopes, differ. The affine maps have one and only one collision source, whose
+closed formula is already checked.
+
+This extends the periodic-point split of [`D2-S15`](#d2-s15-fixed-endpoint-centralizer-reduction)
+to every source/target fibre. The target need not be named in the theorem: equality of the two
+outputs at `x` says precisely that both schedules lie in one endpoint fibre.
+
+**Scope:** the dichotomy classifies pairs inside a fibre; it does not decide whether a fibre is
+nonempty or enumerate the unequal-slope solutions of `collisionSource(u,v)=x`. The balanced
+kernel is nonfree and does not yet have a complete positive presentation. Different slopes may
+still collide at the fixed source and land outside the accepted shell.
+
+**Artifact:** `MixedPrimeDebt.shellRun_eq_iff_globalRelation_of_length_sum` and
+`MixedPrimeDebt.shellRun_eq_iff_kernel_or_collisionSource` in
+[`MixedPrimeRealTrapCentralizer.lean`](MatrixMortality/MixedPrimeRealTrapCentralizer.lean).
+
+**Use:** quotient every fixed-endpoint search by `(length,sum)` before any state enumeration.
+Within one grade, retain one affine-kernel representative. Between grades, discard the target
+equation and test the single exact source equation first; target equality is then automatic.
+
+**Next:** classify unequal-slope collision sources at one fixed rational `x`, retaining target
+unitality and the twelve target-depth classes. Treat balanced-kernel normalization as a separate
+positive-congruence problem rather than duplicating it in the endpoint search.
 
 ### D2-O09: Guarded real-pole reset
 
