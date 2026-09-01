@@ -1808,6 +1808,19 @@ and `bridge_bZero_bTwo_cOne_det_zero_implies_x_le_211_of_cb` exposes the determi
 implication. Its exact boundary is
 [`audits/m43-phase-zero-right-c-outer-wait-cap-2026-08-31.md`](audits/m43-phase-zero-right-c-outer-wait-cap-2026-08-31.md).
 
+The uniform lower-range classification
+[`M4-S41`](SALVAGE.md#m4-s41-phase-zero-right-c-lower-range-classification) is checked across
+`MatrixMortality/ParabolicFirstBOneOuterCore.lean`, the generated
+`MatrixMortality/ParabolicFirstBOneOuterCertificate*.lean` shards, and
+`MatrixMortality/ParabolicFirstBOneOuter.lean`.
+`ParabolicBlade.firstBOneOuterRootCandidate_of_core_zero` traps every physical zero with
+`x≤210` in 22 compressed root-window ranges containing 113 exact `(x,y)` pairs.
+`firstBOneOuterCandidate_of_root_candidate` rechecks the density rectangle for every pair and
+leaves five suffix chambers, while `firstBOneOuterCandidate_of_core_zero` supplies the physical
+first-`b` decomposition. The deterministic certificate is reproduced by
+`scripts/generate-parabolic-first-b-one-outer.py`. Its exact boundary is
+[`audits/m43-phase-zero-right-c-lower-range-classification-2026-09-01.md`](audits/m43-phase-zero-right-c-lower-range-classification-2026-09-01.md).
+
 The residue-zero `c`-endpoint exclusion
 [`M4-S12`](SALVAGE.md#m4-s12-residue-zero-c-endpoint-exclusion) is checked in the same module.
 `ParabolicBlade.bridge_cZero_bTwo_bOne_det` and

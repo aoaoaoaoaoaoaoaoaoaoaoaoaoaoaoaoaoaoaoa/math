@@ -694,6 +694,22 @@ so only `x≤210` remains. The next accepted ratchet must classify the exact suf
 uniformly over that full lower range and eliminate every surviving arithmetic chamber. A finite
 search through sampled suffix positions does not discharge the uniform reduction.
 
+The lower range is now classified uniformly
+[`M4-S41`](SALVAGE.md#m4-s41-phase-zero-right-c-lower-range-classification). Complement
+normalization traps every physical `x≤210` zero in 22 compressed outer-root ranges containing
+113 exact `(x,y)` pairs. Exact first-`b` density rectangles reduce all of them to five suffix
+chambers:
+
+```text
+(x,j,y,z) = (206,0,162,7 or 8), (207,2,202,1),
+            (210,1,802,4), (210,0,812,9),
+            (210,1,801,z) with z≥380.
+```
+
+This is a theorem-level classification, not a zero exclusion. The immediate acceptance test is
+an exact suffix certificate eliminating all five chambers, including a theorem-level cap and
+complete treatment of the apparent inner-wait ray.
+
 Two original-family nodes survive, and they must not be conflated.
 
 1. **Exterior collision avoidance.** Use `M4-S06`--`M4-S15` to classify the transported kernel
