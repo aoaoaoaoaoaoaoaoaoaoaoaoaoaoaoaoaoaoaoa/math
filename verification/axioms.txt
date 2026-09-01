@@ -843,6 +843,17 @@
 'MatrixMortality.MixedPrimeMacroComparator.wordAction_addressFork_eq_iff_of_length_eq' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.MixedPrimeAddressForkNoGo.expandAddress_append' depends on axioms: [propext]
+'MatrixMortality.MixedPrimeAddressForkNoGo.encodedWord_addressCode' depends on axioms: [propext]
+'MatrixMortality.MixedPrimeAddressForkNoGo.no_bcbc_endpoint_of_fork_address_words' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeAddressForkNoGo.no_bcbc_endpoint_address_macro_code' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeAddressForkNoGo.no_bcbc_endpoint_of_equalLength_address_data' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.SquareRootPunctuation.coefficient_append_square' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]

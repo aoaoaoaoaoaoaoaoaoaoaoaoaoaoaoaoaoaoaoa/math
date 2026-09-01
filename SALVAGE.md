@@ -265,6 +265,7 @@ file owns the mathematical stock.
 | [`G3-S16`](#g3-s16-cayley-hamilton-pump-census-and-free-macro-address) | structure theorem, exact census, and separation | exhaustive length-32 census yields 23 infinite external pump schemas; the derived macros `DT,TD` form a free two-sided binary affine address stack, while every schema reads only one unary constant address | formalized mechanism; exact exhaustive and independently replayable certificates | active |
 | [`G3-S17`](#g3-s17-uniform-pumped-context-classification) | uniform obstruction and finite residue | exact all-depth cuts eliminate every moving internal cell in seven pump families; family six's sole static internal residue contracts to 156 rejected geometries | formalized uniform obstruction; exact independently replayable certificate | active |
 | [`G3-S18`](#g3-s18-exact-mixed-prime-address-comparators) | structure theorem and comparator | evaluation at zero globally decodes the free `DT/TD` stack; at equal length, both commutation and the literal five-factor fork compare arbitrary addresses exactly | formalized | active |
+| [`G3-S19`](#g3-s19-aligned-address-fork-obstruction) | obstruction | the complete forced fork cannot lie in the aligned `DT/TD` address submonoid; some control boundary must break address phase | formalized | active |
 | [`G3-M02`](#g3-m02-square-root-punctuation-fracture) | partial mechanism | a rank-two square root gives an exact `SS`-free mortality grammar | formalized | closed |
 | [`G3-O10`](#g3-o10-square-root-boundary-saturation) | obstruction | every nondegenerate rank-one square root preserves boundary coefficient zeros | formalized | graduated |
 | [`G3-M01`](#g3-m01-free-group-discrepancy-engine) | partial mechanism | Carvalho's transducer gives an all-word marker-tail equation and a cyclic exponent-one equalizer | audited | active |
@@ -10801,6 +10802,45 @@ the exact physical five-factor shape. The constructive seam is synchronized dyna
 **Next:** compile the two source histories into synchronized `{DT,TD}` addresses inside the
 `G3-C08` two-state endpoint core, or expose their globally injective offsets to one terminal
 difference row. In either case prove rejection of every malformed raw control word.
+
+### G3-S19: Aligned-address fork obstruction
+
+**Kind:** obstruction
+
+**Evidence:** formalized
+
+**Disposition:** active
+
+The `G3-S18` stack cannot carry the complete forced `bcbc` fork as one aligned object. Exact
+endpoint semantics forces the encoded flat and nested fork words to be distinct while inducing
+the same affine action. If both words were expansions of binary `{DT,TD}` addresses, equality at
+zero and global scalar injectivity would identify the addresses and hence the raw words, a
+contradiction. Their address lengths may differ; no synchronized-length premise is used.
+
+Address expansion preserves concatenation. Therefore a code assigning every fixed paired control
+one whole address sends every control word, including both fork branches, into the aligned address
+submonoid and is impossible. Empty control addresses and unequal control-address lengths do not
+evade the theorem. A second corollary allows an arbitrary unaligned toggle but rejects
+equal-length aligned data macros: both would have slope `(2/5)^n`, contradicting the forced
+unequal data slopes of `G3-S11`.
+
+**Scope:** the result does not reject an address occurring strictly inside a larger globally
+unaligned fork word. It does not reject a phase-breaking wrapper, source-dependent routing of two
+offsets, or a terminal functional outside the fixed-endpoint block-code interface. At least one
+fork branch must leave the aligned submonoid; the theorem does not classify how it leaves or
+whether it can return around an interior comparison.
+
+**Use:** reject every direct controlwise serializer into the free address stack. A positive
+construction must deliberately break the two-letter address phase around the global fork and read
+an interior address discrepancy, or expose two offsets through a separate endpoint channel.
+
+**Artifact:**
+[`MixedPrimeAddressForkNoGo.lean`](MatrixMortality/MixedPrimeAddressForkNoGo.lean) and
+[`m34-aligned-address-fork-no-go-2026-09-01.md`](audits/m34-aligned-address-fork-no-go-2026-09-01.md).
+
+**Next:** classify the smallest phase-breaking wrapper which can place an injective address
+segment inside the forced kernel pair without making the two complete fork words aligned. Test its
+arbitrary-word endpoint language before any larger search.
 
 ### G3-O13: Rational serializer pumping
 
