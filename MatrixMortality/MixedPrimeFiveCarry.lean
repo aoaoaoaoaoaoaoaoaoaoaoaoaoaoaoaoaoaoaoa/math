@@ -24,7 +24,9 @@ private theorem unit_pow
   rw [padicValRat.pow, value_unit.2]
   simp
 
-private theorem shellRatio_evenMultiple_sub_one_hasValue
+/-- An even power of the shell ratio differs from one at the exact five-adic depth carried by
+half its exponent. -/
+theorem shellRatio_evenMultiple_sub_one_hasValue
     (multiplier : ℕ) (multiplier_ne : multiplier ≠ 0) :
     HasValue 5 ((2 / 3 : ℚ) ^ (2 * multiplier) - 1)
       ((padicValNat 5 multiplier : ℤ) + 1) := by

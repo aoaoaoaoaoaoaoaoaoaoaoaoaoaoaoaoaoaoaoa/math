@@ -2183,7 +2183,7 @@ outer word by injectivity and proves that any cross-tail collision requires shel
 `(ℓ−2β+1,ℓ−2β+2)` between the later tails. This classifies the synchronization debt but does
 not yet exclude it from the encoded-entry orbit.
 
-The dimension-two affine ledger has twenty-five independently checked records:
+The dimension-two affine ledger has twenty-six independently checked records:
 
 | Record | Formalization obligation |
 | --- | --- |
@@ -2202,6 +2202,7 @@ The dimension-two affine ledger has twenty-five independently checked records:
 | [`D2-S15`](SALVAGE.md#d2-s15-fixed-endpoint-centralizer-reduction) | two-adic slope value, exact length/sum slope classification, fixed-point uniqueness, periodic-point equality iff global commutation, and the equal-/unequal-slope fibre split |
 | [`D2-S16`](SALVAGE.md#d2-s16-periodic-centralizer-determinant-fork) | schedule-power periodicity, guarded bipowers, the dependent-vector global power relation, and the independent-vector injective `ℕ²` loop family |
 | [`D2-S17`](SALVAGE.md#d2-s17-fixed-endpoint-fibre-dichotomy) | equal-grade point-collision rigidity and the exact balanced-kernel/unequal-slope collision-source decomposition of every fixed endpoint fibre pair |
+| [`D2-S18`](SALVAGE.md#d2-s18-same-length-cross-grade-five-carry) | parity/LTE valuation of every shell-ratio and equal-length slope gap, plus the exact five-unit collision-source criterion for unequal total waits |
 | [`D2-D05`](SALVAGE.md#d2-d05-prescribed-translation-count) | primitive linear-polynomial divisibility, bounded carries in both scan directions, ordered-marker automaton, regular control, and `a=±1` cases |
 | [`D2-D06`](SALVAGE.md#d2-d06-private-prime-peeling) | unique-minimum valuation calculation, zero endpoints, fixed-count reduction, reversed language, and positive private valuation |
 | [`D2-D07`](SALVAGE.md#d2-d07-bounded-valuation-orthants) | localization support, denominator bounds in both orthants, invariant-interval recognition, finite graph, and regular-control product |

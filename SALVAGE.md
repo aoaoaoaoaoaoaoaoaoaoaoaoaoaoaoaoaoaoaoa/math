@@ -385,6 +385,7 @@ file owns the mathematical stock.
 | [`D2-S15`](#d2-s15-fixed-endpoint-centralizer-reduction) | reduction | equality of nonempty shell periodic points is exactly global affine commutation, split by the slope fibre | formalized | active |
 | [`D2-S16`](#d2-s16-periodic-centralizer-determinant-fork) | structure theorem | two common-source loops force either a global power relation or an injective `ℕ²` family of guarded loops | formalized | active |
 | [`D2-S17`](#d2-s17-fixed-endpoint-fibre-dichotomy) | reduction | every pair in a fixed shell endpoint fibre is either a balanced affine-kernel relation or one explicit unequal-slope collision source | formalized | active |
+| [`D2-S18`](#d2-s18-same-length-cross-grade-five-carry) | structure theorem | same-length cross-grade source acceptance is exactly one parity/LTE valuation test on the cleared intercept gap | formalized | active |
 | [`D2-D01`](#d2-d01-projectively-unimodular-stratum) | decidable stratum | projectively unimodular hard-core instances are decidable | audited | stock |
 | [`D2-D02`](#d2-d02-invariant-pair-stratum) | decidable stratum | invariant projective pairs reduce to effective multiplicative-subgroup membership | audited | graduated |
 | [`D2-D03`](#d2-d03-common-multiplier-stratum) | decidable stratum | rational affine maps with one multiplier are decidable under regular control | reported | active |
@@ -19563,6 +19564,69 @@ equation and test the single exact source equation first; target equality is the
 **Next:** classify unequal-slope collision sources at one fixed rational `x`, retaining target
 unitality and the twelve target-depth classes. Treat balanced-kernel normalization as a separate
 positive-congruence problem rather than duplicating it in the endpoint search.
+
+### D2-S18: Same-length cross-grade five-carry
+
+**Kind:** exact valuation classifier
+**Evidence:** formalized
+**Disposition:** active
+
+The unequal-slope branch of [`D2-S17`](#d2-s17-fixed-endpoint-fibre-dichotomy) has two distinct
+arithmetic regimes. Unequal schedule lengths were already classified by `D2-O02`: their unique
+collision source is automatically a five-adic unit. The previously untreated regime has equal
+length `n` but different total waits. Put
+
+```text
+Δ = |sum(u)−sum(v)| > 0,
+κ(Δ) = 0                         if Δ is odd,
+       1+v₅(Δ/2)                if Δ is even.
+```
+
+The shell-ratio calculation is exact:
+
+```text
+v₅((2/3)^Δ−1)=κ(Δ).
+```
+
+For odd `Δ`, the ratio is congruent to `−1` modulo five, so its difference from one is a unit.
+For `Δ=2k`, odd-prime lifting of the exponent gives `1+v₅(k)`. Since an `n`-step shell slope
+has its common five-power denominator `5^n`, Lean obtains
+
+```text
+v₅(slope(u)−slope(v)) = κ(Δ)−n.
+```
+
+Write `b_w=shellIntercept(w)`. The exact collision-source criterion is therefore
+
+```text
+collisionSource(u,v) is a 5-unit
+  ↔ v₅(b_v−b_u)=κ(Δ)−n.
+```
+
+Equivalently, the sole acceptance carry in a same-length cross-grade source collision is whether
+the cleared intercept difference cancels to exactly the parity/LTE depth forced by the wait-sum
+gap. There is no additional slope uncertainty.
+
+**Scope:** this classifies five-adic acceptance of the collision source, not the common target.
+It does not decide the intercept-gap valuation or the fixed rational equation
+`collisionSource(u,v)=x`. Equal length and equal total wait belong to the balanced affine kernel,
+not this record. Unequal lengths retain the separate determinant criterion for target acceptance.
+
+**Artifact:** `MixedPrimeDebt.shellRatio_evenMultiple_sub_one_hasValue` in
+[`MixedPrimeFiveCarry.lean`](MatrixMortality/MixedPrimeFiveCarry.lean), and
+`MixedPrimeDebt.shellSlopeGapFiveDepth`, `MixedPrimeDebt.shellSlopeSumGap`,
+`MixedPrimeDebt.shellRatio_pow_sub_one_hasValue`,
+`MixedPrimeDebt.shellSlope_sub_hasValue_five_of_sameLength`, and
+`MixedPrimeDebt.sameLengthCollisionSource_fiveUnit_iff` in
+[`MixedPrimeRealTrapCentralizer.lean`](MatrixMortality/MixedPrimeRealTrapCentralizer.lean).
+
+**Use:** split cross-grade endpoint collisions first by length. For equal lengths, compute `Δ`
+and demand one exact intercept-gap valuation before any target or real-trap analysis. This
+replaces an unstructured five-adic collision test by a single explicit carry depth.
+
+**Next:** derive the matching common-target unit criterion in the same-length regime and express
+the cleared intercept difference by its suffix recurrence. Then test whether the fixed source
+equation bounds the admissible carry depths.
 
 ### D2-O09: Guarded real-pole reset
 

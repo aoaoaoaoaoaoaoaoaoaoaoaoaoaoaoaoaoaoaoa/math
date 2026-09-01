@@ -1464,6 +1464,7 @@ open MatrixMortality
 #print axioms MixedPrimeDebt.shellRun_spectatorDenominator_of_ne_active
 #print axioms MixedPrimeDebt.shellRun_ne_of_spectatorDenominator_ne
 #print axioms MixedPrimeDebt.shellStep_fiveUnit_add_ten_iff
+#print axioms MixedPrimeDebt.shellRatio_evenMultiple_sub_one_hasValue
 #print axioms MixedPrimeDebt.shellStep_fiveUnit_add_ten_mul_iff
 #print axioms MixedPrimeDebt.shellStep_fiveUnit_iff_mod_ten
 #print axioms MixedPrimeDebt.shellRun_tail_fiveUnit_add_precisionPeriod_iff
@@ -1569,6 +1570,9 @@ open MatrixMortality
 #print axioms MixedPrimeDebt.not_forall_wallAnchoredSchedule_avoids_factor
 #print axioms MixedPrimeDebt.shellSlope_hasValue_two
 #print axioms MixedPrimeDebt.shellSlope_eq_iff_length_sum
+#print axioms MixedPrimeDebt.shellRatio_pow_sub_one_hasValue
+#print axioms MixedPrimeDebt.shellSlope_sub_hasValue_five_of_sameLength
+#print axioms MixedPrimeDebt.sameLengthCollisionSource_fiveUnit_iff
 #print axioms MixedPrimeDebt.shellRun_fixedPoint_unique
 #print axioms MixedPrimeDebt.shellPeriodicPoint_eq_iff_commute
 #print axioms MixedPrimeDebt.shellPeriodicPoint_eq_iff_globalRelation_of_length_sum
