@@ -247,17 +247,16 @@ After terminal absorption, paired-role compression, binary compilation, dimensio
 CHHN's generator–dimension trade, the established Pareto-minimal undecidable points are
 
 ```text
-M₃(5), M₄(4), M₆(3), M₁₀(2).
+M₃(5), M₄(4), M₆(3), M₉(2).
 ```
 
 The unknown cells immediately below this staircase are:
 
 | Cell | What would suffice | Automatic reward |
 | --- | --- | --- |
-| `M₃(4)` | three-active-role fixed-boundary PCP / `GPCP(3)`, or a new same-dimension generator compiler | by CHHN, also `M₉(2)` |
+| `M₃(4)` | three-active-role fixed-boundary PCP / `GPCP(3)`, or a new same-dimension generator compiler | no new Pareto point; `M₉(2)` is already known |
 | `M₄(3)` | an undecidable promised two-state overlap queue with pure deletion, or closure of either parabolic bridge language | by CHHN, also `M₈(2)` |
-| `M₅(3)` | a five-state binary same-zero root, a toggle/separator fusion, or fixed-width-three scheduled universality | supersedes `M₆(3)`; `M₁₀(2)` is already known |
-| `M₉(2)` | move the total tilted-separator realization and its closed exterior grammar into Lean, then emit its canonical integer numerators | improves the two-generator threshold by one |
+| `M₅(3)` | a five-state binary same-zero root, a toggle/separator fusion, or fixed-width-three scheduled universality | supersedes `M₆(3)`; `M₉(2)` is already known |
 | `M₂(k≥3)` | a qualitatively different decidability or undecidability argument | settles the dimension-two wall |
 
 The scalar result `Z₆(2)` gives `M₆(3)` after adjoining a separator; that mortality point was
@@ -1373,7 +1372,7 @@ A single explicit nonterminal pole orbit kills this family; a closed invariant p
 
 ### 3. Two-generator realization: `M₉(2)`
 
-The exact obstruction is now complete. The physical word `000` in the restricted ten-state
+The canonical prefix-pair obstruction is complete. The physical word `000` in the restricted ten-state
 pair is rank one, but its scalar sandwich has exact Hankel rank ten. More strongly, the word
 products of the pair span `M₁₀(ℚ)`
 ([`MM-O08`](SALVAGE.md#mm-o08-full-algebra-prefix-pair)). The pair therefore has no nonzero
@@ -1381,8 +1380,8 @@ proper invariant subspace or quotient, and every nonzero internal-word sandwich 
 realization dimension ten. Common-image restriction, kernel quotient, reachable/observable
 minimization, and internal punctuation cannot reach nine states from this pair.
 
-The surviving route must change the physical pair, change its nonzero values while preserving
-zeros, or use a nonlinear compiler. A literal binary prefix tree for five source symbols has
+The successful construction changes the physical pair and its nonzero values while preserving
+zeros. A literal binary prefix tree for five source symbols has
 four internal states, while a literal two-state ternary tree cannot obtain a five-state
 common-image restriction ([`MM-O09`](SALVAGE.md#mm-o09-two-state-ternary-prefix-image)).
 The stronger factorized cross-ratio wall
@@ -1450,33 +1449,29 @@ the consecutive positions. Replacing the constant separator by `τP′,τ²P′,
 multiplies the six `MM-O23` determinant certificates only by nonzero powers of `τ`. Every order
 of `T,D_b,D_c` therefore still needs ten states.
 
-[`MM-C05`](SALVAGE.md#mm-c05-tilted-separator-rank-nine-transfer) breaches that wall by changing
-the separator row. Explicit rational functions give moments
+[`MM-C05`](SALVAGE.md#mm-c05-tilted-separator-rank-nine-transfer) breaches and closes that wall
+by changing the separator row. Explicit rational functions give moments
 `T,D_b,D_c,ux,sux,s²ux,…` with an audited nine-state `3+3+2+1` realization. The row ratio
 `q=(K−3V)/(K−3)` is below `−3/2`; Lean proves that the tilted code
 `ternaryCode(w)+q·3^|w|` remains injective. Hence the changed row preserves the scalar zero set
 for every paired control word and both phases, including trailing-toggle absorption. This is the
 first exact rank-nine same-zero transfer core, not another finite-depth candidate.
 
-The rational chart is now total on the emitted family. Lean proves its common denominator and
-tail eigenvalue nonzero for every body and its last pivot nonzero when the body contains `b`;
-the universal compiler emits such bodies. The exact exterior grammar is also closed. For any
-interface matrix `X`, `A^pUXVA^q=0` reduces on each side through
+Lean now checks the entire rational chart and its mortality semantics. The first three returns
+are exactly the toggle and two data roles; every later return is a nonzero geometric multiple of
+the tilted separator. A nonzero tail eigenline excludes pure transition zeros. The generic
+singular-return theorem sandwiches any physical zero by the output and input, retaining both
+exterior waits as returns; no splitting or exterior-kernel classification is required. Every
+return is a nonzero scaling of one of the four tilted roles, and a right-inverse relabelling
+reduces their mortality exactly to the paired scalar zero language.
 
-```text
-L_0=L_1=I,  L_2=D_c,  L_p=x (p≥3),
-R_0=I,      R_1=D_b,  R_2=D_c,  R_q=u (q≥3).
-```
-
-Role fringes extend a source word; `x,u` are the two separator boundaries. Hence the existing
-outer-product theorem reflects every malformed physical zero to a source scalar zero. Canonical
-matrix numerators already clear denominators without changing mortality. The exact `3+3+2+1`
-transition, three-parameter input/output chart, specialized rational pair, and canonical integer
-numerator pair are now Lean declarations in `ChangedSeparatorRealization.lean`; their common
-denominator and tail eigenvalue are formally nonzero. No moment identity follows merely from
-declaring those matrices. The live work is to certify the sixteen moment entries and exterior
-classes, prove primitive recursiveness of the integer-pair emission, and connect the result to the
-code-halting reduction. Until those steps are checked, `M₉(2)` remains open.
+The integer emitter evaluates the chart in primitive-recursive unreduced fractions and clears
+each `9 × 9` generator by one certified nonzero common denominator. Its entries are primitive
+recursive without rational normalization or gcd computation. Cook–Neary bodies carry the checked
+leading-`b` invariant required by the chart. Consequently
+`UniversalNeary.codeHalts_reduces_mortality92` is a primitive-recursive many-one reduction from
+code halting, and `UniversalNeary.mortality92_not_computable` proves `M₉(2)` undecidable. Zero
+padding gives `M_d(2)` for every `d≥9`.
 See
 [`audits/m92-run-length-transfer-hankel-2026-08-31.md`](audits/m92-run-length-transfer-hankel-2026-08-31.md),
 [`audits/m92-sparse-transfer-hankel-2026-08-31.md`](audits/m92-sparse-transfer-hankel-2026-08-31.md),
@@ -1505,7 +1500,7 @@ pre-mortem are not evidence and are not retained.
 The foundational reward points the other way. `GPCP(3)` would immediately yield
 
 ```text
-Z₃(3), M₃(4), R₃(4), R₄(3), Z₅(2), R₆(2), M₉(2),
+Z₃(3), M₃(4), R₃(4), R₄(3), Z₅(2), R₆(2),
 ```
 
 through the standard scalar, corner, mortality, and packing reductions. A direct mortality
@@ -4091,10 +4086,7 @@ universal computation.
    [`MM-D01`](SALVAGE.md#mm-d01-sparse-width-three-source-decision) one-`c` closure and
    [`MM-D02`](SALVAGE.md#mm-d02-adjacent-two-c-source-decision) adjacent-two-`c` closure on
    candidate source families. Reopen `MM-C04` only for a physically different six-state family.
-4. Treat `MM-O08` and `MM-O11` as formally closed exact-family obstructions. Search for
-   `M₉(2)` only through a changed physical pair, changed nonzero behavior, or a nonlinear
-   compiler.
-5. Run the `M₃(4)` program on distinct tracks: history-sensitive paired point-line synthesis,
+4. Run the `M₃(4)` program on distinct tracks: history-sensitive paired point-line synthesis,
    projective group-orbit separation for the exponent-one singleton, global word-residual
    recoding, and native three-schema rewriting. `G3-O23` has absorbed the singular saturated
    Carvalho branch into dimension two, and `G3-O28` has killed every finite quotient of one
@@ -4107,7 +4099,7 @@ universal computation.
    either example as a hardness candidate.
    Do not revive singular spelling memory, conflate group inverses with positive `M₂(3)` controls,
    or retry finite ambient-group separation as a complete certificate.
-6. Formalize `D2-S02` and `D2-D05`–`D2-D07`, use `D2-D10` to remove real exterior targets, then
+5. Formalize `D2-S02` and `D2-D05`–`D2-D07`, use `D2-D10` to remove real exterior targets, then
    attack fixed-source exact prefix and first-exit-image reachability inside `[1/5,1/2]` with a
    synchronized `2`/`3`/`5` representation. Use the checked `D2-S03` walls to isolate mixed-sign
    debt transfer and equality-wall cancellation; a chamber argument that never handles those
@@ -4136,7 +4128,7 @@ universal computation.
    cross-grade source acceptance to one explicit parity/LTE intercept carry.
    Keep the non-elementary lanes independent: adelic cone types, parabolic rational subsets,
    trace/height descent, finite-obstruction saturation, and valuation universality.
-7. Synthesize the returned attacks by the discriminating signals above; do not average
+6. Synthesize the returned attacks by the discriminating signals above; do not average
    incompatible hypotheses into one generic mortality prompt.
 
 These are research programs, not consequences of the present theorem.

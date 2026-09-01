@@ -2434,9 +2434,9 @@ moving tail must have at least two modes or leave exact moment preservation.
 
 ### MM-C05: Tilted-separator rank-nine transfer
 
-**Kind:** partial construction
-**Evidence:** formalized semantic and chart arithmetic; audited symbolic realization and exterior grammar
-**Disposition:** active
+**Kind:** construction and undecidability theorem
+**Evidence:** formalized
+**Disposition:** graduated
 
 Let `r=3^β`, and let `V,K` be the code and scale of Neary's lower `c` word. Explicit rational
 functions `a,z,s` give the consecutive transfer moments
@@ -2459,8 +2459,8 @@ nonempty-word boundary.
 
 Lean also proves that the realization denominator is negative for every `β,body`, that the tail
 eigenvalue and one-step observability pivot are nonzero, and that the remaining chart factor
-`K−V−2` is positive whenever `β>0` and the body contains `b`. The emitted universal bodies begin
-and end in `b`, so the formerly exceptional basis branch is absent.
+`K−V−2` is positive whenever `β>0` and the body contains `b`. The Cook–Neary compiler records
+that every emitted body begins with `b`, so the formerly exceptional basis branch is absent.
 
 For arbitrary interface matrix `X`, the exact chain realization has only sixteen exterior
 kernel classes. Writing `u` for the changed separator column, they are
@@ -2473,21 +2473,21 @@ R_0=I,      R_1=D_b,  R_2=D_c,  R_q=u for q≥3.
 
 The symbolic checker verifies the parameter-uniform pivots and tail eigenvector identities from
 which all sixteen classes follow; its exact rational benchmark separately checks all 36
-representatives with `p,q∈{0,1,2,3,4,5}`. Source-role extensions remain inside the paired family,
-while a boundary `x` or `u` is exactly one side of its outer-product separator. The already formal
-`mortal_adjoin_outer_iff` theorem therefore reduces every physical exterior zero to a paired
-scalar zero.
+representatives with `p,q∈{0,1,2,3,4,5}`. The final proof uses a stronger and shorter theorem:
+sandwiching a physical zero by the output and input retains both exterior waits as additional
+returns. If no pure ambient power vanishes, mortality of the singular physical pair is therefore
+equivalent to mortality of its complete return family, without an exterior classification.
 
-**Scope:** the same-zero theorem and every chart nonvanishing inequality are formal and uniform.
-The exact nine-state transition, input/output chart, specialized rational pair, and canonical
-integer numerator pair are Lean declarations. Their moment and exterior-kernel identities remain
-exact symbolic audit artifacts rather than Lean theorems. Primitive-recursive pair emission and
-the final universal reduction remain open. This record does not yet claim undecidability of
-`M₉(2)`.
+**Scope:** the chart, moment identities, geometric tail, pure-power nonvanishing, singular-return
+compression, same-zero reduction, and integer pair are formal and uniform under the stated
+positive-width and leading-`b` conditions. The integer emitter evaluates the chart in
+primitive-recursive unreduced fractions and clears one certified common denominator per
+generator. `UniversalNeary.codeHalts_reduces_mortality92` and
+`UniversalNeary.mortality92_not_computable` prove `M₉(2)` undecidable.
 
-**Use:** the exact realization and its malformed-run converse now share one finite grammar. Prove
-the chart moment and exterior identities entrywise, prove primitive recursiveness of the canonical
-integer numerators, and connect that pair to the universal source reduction.
+**Use:** `M₉(2)` is closed. Reuse singular-return sandwiching and unreduced effective fractions
+when an exact rational compiler has singular input/output maps or expensive canonical numerator
+normalization.
 
 **Formalization:** `tiltedTernaryCode_injective`,
 `nearyTailRatio_lt_neg_three_halves`, `transferDenominator_lt_zero`,
@@ -2495,11 +2495,13 @@ integer numerators, and connect that pair to the universal source reduction.
 `lowerCCode_add_two_lt_lowerCScale_of_b_mem`,
 `nearyTiltedPairedCoefficient_eq_zero_iff`, and
 `nearyTiltedTrailingToggle_hasNonemptyZero_iff` in
-[`MatrixMortality/ChangedSeparatorTail.lean`](MatrixMortality/ChangedSeparatorTail.lean), and
-`clearRationalFamily_isMortal_iff` in
-[`MatrixMortality/RationalClearing.lean`](MatrixMortality/RationalClearing.lean). The exact matrix
-and pair declarations, together with denominator and tail-eigenvalue nonvanishing, are in
-[`MatrixMortality/ChangedSeparatorRealization.lean`](MatrixMortality/ChangedSeparatorRealization.lean).
+[`MatrixMortality/ChangedSeparatorTail.lean`](MatrixMortality/ChangedSeparatorTail.lean);
+`moment_add_three`, `transition_pow_ne_zero`, and
+`effectiveIntegralGenerator_mortal_iff_tagHaltsFrom` in the
+`ChangedSeparator*` modules; `pairGenerator_isMortal_iff_returnFamily` in
+[`MatrixMortality/SingularReturnFamily.lean`](MatrixMortality/SingularReturnFamily.lean); and
+`mortality92_not_computable` in
+[`MatrixMortality/Undecidability/UniversalNeary.lean`](MatrixMortality/Undecidability/UniversalNeary.lean).
 
 **Artifact:**
 [`audits/m92-changed-separator-transfer-2026-08-31.md`](audits/m92-changed-separator-transfer-2026-08-31.md).

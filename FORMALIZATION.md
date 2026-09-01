@@ -98,9 +98,13 @@ four-tile terminal equation
 mortality of the emitted five 3 × 3 integer matrices
   ↔ mortality of two 10 × 10 integer matrices
   ↔ mortality of two (10+n) × (10+n) integer matrices.
+
+for Cook–Neary compiler-emitted bodies:
+four-tile terminal equation
+  ↔ mortality of two 9 × 9 integer matrices.
 ```
 
-The final `GPCP(4)`, `M₃(5)`, `M₄(4)`, `Z₆(2)`, and `M₁₀(2)` constructors are primitive
+The final `GPCP(4)`, `M₃(5)`, `M₄(4)`, `Z₆(2)`, `M₉(2)`, and `M₁₀(2)` constructors are primitive
 recursive. Lean proves the corresponding many-one reductions and no-decider theorems from
 mathlib's halting theorem. No external universality theorem, Neary's defective terminal-pair
 converse, or Rote's long-block repair is assumed.
@@ -356,21 +360,24 @@ companion audit reconstructs nonzero exact minors for all six role orders and ev
 `τ`. See
 [`m92-geometric-tail-transfer-hankel-2026-08-31.md`](audits/m92-geometric-tail-transfer-hankel-2026-08-31.md).
 
-The changed-separator construction leaves exact role values but changes the rank-one tail row.
-Lean proves that `F_q(w)=ternaryCode(w)+q·3^|w|` is injective for `q<−3/2`, derives that bound
-for the Neary-selected ratio `q=(K−3V)/(K−3)`, and proves pointwise zero equivalence for every
-paired control word in both phases. The result survives trailing-toggle absorption and preserves
-existential nonempty zero reachability. An exact symbolic audit constructs the associated
-`3+3+2+1` nine-state transfer realization. Lean proves its common denominator negative for every
-body and proves the last chart factor positive whenever the positive-width body contains `b`, as
-every emitted universal body does. The audit verifies the parameter-uniform exterior grammar
-`I/I/D_c/x` on the left and `I/D_b/D_c/u` on the right, plus all 36 short representatives at the
-`β=3`, body `bb` benchmark. Lean also proves that replacing any rational family by its canonical
-integer matrix numerators preserves mortality exactly. `ChangedSeparatorRealization.lean` now
-declares the exact `3+3+2+1` transition, rational chart, specialized two-generator pair, and its
-canonical integer numerator pair, and proves the chart denominator and tail eigenvalue nonzero.
-The sixteen moment identities, exterior certificates, primitive-recursive emission theorem, and
-final two-generator reduction remain unchecked. See
+The changed-separator construction leaves the first three exact role values but changes the
+rank-one tail row. Lean proves that `F_q(w)=ternaryCode(w)+q·3^|w|` is injective for `q<−3/2`,
+derives that bound for `q=(K−3V)/(K−3)`, and proves pointwise zero equivalence for every paired
+control word in both phases. It checks the complete `3+3+2+1` rational realization: the first
+three returns are `T,D_b,D_c`, every later return is a nonzero geometric multiple of the tilted
+separator, and a nonzero tail eigenline excludes pure-transition zeros.
+
+A generic singular-return theorem retains both exterior waits by sandwiching any physical zero
+with the output and input. It reduces pair mortality to the infinite return family without an
+input/output splitting or exterior-kernel grammar. Nonzero return scalings and a right-inverse
+relabel reduce that family to the four tilted roles, whose zero language is exactly the ordinary
+paired scalar language.
+
+The effective integer pair evaluates the same chart in primitive-recursive unreduced fractions.
+A common nonzero denominator is multiplied across each generator's 81 entries, avoiding rational
+normalization and gcd computation. Cook–Neary source bodies carry the required leading-`b`
+invariant. Lean therefore checks a primitive-recursive reduction from code halting to `M₉(2)`
+and proves that `M₉(2)` mortality is not computable. See
 [`m92-changed-separator-transfer-2026-08-31.md`](audits/m92-changed-separator-transfer-2026-08-31.md).
 
 Lean also constructs the canonical reachable-observable quotient around any internal physical
@@ -2960,6 +2967,16 @@ fixed-rank decision problem.
 | `PrefixFullAlgebra.lean` | full `M₁₀(ℚ)` product span and exact internal-sandwich lower bound |
 | `NearyCrossRatioNoGo.lean` | scalar-weighted binary-face quotient law and all three Neary cross-ratio failures |
 | `ThreePhaseBinaryNoGo.lean` | exact positional four-role cube factorization and a certified malformed false witness |
+| `ChangedSeparatorTail.lean` | tilted separator code, injectivity chamber, and exact same-zero transport |
+| `ChangedSeparatorRealization.lean` | total rational `3+3+2+1` chain chart |
+| `ChangedSeparatorZeroMoment.lean` | exact toggle return assembled from independent entry certificates |
+| `ChangedSeparatorMomentOne.lean` | exact first data return |
+| `ChangedSeparatorMomentTwo.lean` | exact second data return |
+| `ChangedSeparatorTailMoments.lean` | geometric tail recurrence for every later return |
+| `SingularReturnFamily.lean` | mortality-preserving return compression for singular ambient generators |
+| `ChangedSeparatorMortality.lean` | complete rational and canonical-integer rank-nine mortality equivalence |
+| `EffectiveRational.lean` | primitive-recursive unreduced fractions and finite common-denominator clearing |
+| `ChangedSeparatorEffectivity.lean` | primitive-recursive integer rank-nine pair and exact rational scaling |
 | `LintAudit.lean` | package-wide default mathlib environment lint |
 | `AxiomAudit.lean` | transitive axioms of publication-facing declarations |
 | `Undecidability/UniversalMachine.lean` | verified two-tape interpreter for mathlib code halting |
@@ -2980,7 +2997,7 @@ fixed-rank decision problem.
 | `Undecidability/NearyExecution.lean` | literal initialization, first-firing extraction, and the complete post-seed halting cascade |
 | `Undecidability/NearySource.lean` | compositional Cook–Neary compiler into verified restricted-tag sources |
 | `Undecidability/UniversalTwoTag.lean` | fixed universal finite two-tag system and primitive-recursive source queue |
-| `Undecidability/UniversalNeary.lean` | complete computable reductions to binary `GPCP(4)`, `M₃(5)`, `M₄(4)`, `Z₆(2)`, and `M₁₀(2)` |
+| `Undecidability/UniversalNeary.lean` | complete computable reductions to binary `GPCP(4)`, `M₃(5)`, `M₄(4)`, `Z₆(2)`, `M₉(2)`, and `M₁₀(2)` |
 | `Undecidability/NearyProblems.lean` | canonical `Fin 4` and `Fin 5` target instances |
 | `MacroIrreducibility.lean` | exact nonerasing Neary role-macro lower bound |
 | `TernaryClosedBlockNoGo.lean` | paired-Parikh independence, exact erasing macro lower bound, block semantics, and closed-return arithmetic |
@@ -2992,6 +3009,7 @@ fixed-rank decision problem.
 | `Undecidability/PairedProblems.lean` | canonical four-matrix target instance and structural promises |
 | `Undecidability/BinaryProblems.lean` | canonical structured `Z₆(2)` instance |
 | `Undecidability/PrefixProblems.lean` | canonical `M₁₀(2)` instance and all zero-padded dimensions |
+| `Undecidability/ChangedSeparatorProblems.lean` | canonical primitive-recursive `M₉(2)` instance |
 | `Undecidability/Problems.lean` | encoded source and target decision predicates |
 
 ## Principal Declarations
@@ -3422,6 +3440,12 @@ fixed-rank decision problem.
 | Ten-state mortality iff prefix-machine mortality | `restrictedPrefixGenerator_mortal_iff_prefixMachine` |
 | Canonical `M₁₀(2)` instance mortal iff tag halting | `nearyMortality102_mortal_iff_tagHaltsFrom` |
 | Every zero-padded `M₁₀₊ₙ(2)` instance iff tag halting | `nearyMortality10Plus_mortal_iff_tagHaltsFrom` |
+| A singular two-generator pair is mortal iff its complete return family is mortal | `ReturnFamily.pairGenerator_isMortal_iff_returnFamily` |
+| The rank-nine transition has no zero pure power | `ChangedSeparatorRealization.transition_pow_ne_zero` |
+| Every rank-nine return is a nonzero scaling of one tilted role | `ChangedSeparatorRealization.returnMatrix_eq_scaled_tiltedFamily` |
+| The rational rank-nine pair is mortal iff the paired scalar series vanishes | `ChangedSeparatorRealization.generator_mortal_iff_paired_zero` |
+| The primitive-recursive integer rank-nine pair is mortal iff tag halting | `ChangedSeparatorRealization.effectiveIntegralGenerator_mortal_iff_tagHaltsFrom` |
+| Canonical `M₉(2)` instance mortal iff tag halting | `nearyMortality92_mortal_iff_tagHaltsFrom` |
 | Appending two paired toggles preserves every coefficient, and absorbing one preserves nonempty zero reachability | `pairedCoefficient_append_toggle_toggle`, `pairedTrailingToggle_hasNonemptyZero_iff` |
 | A rank-four short leaf and rank-three depth-three leaf tax an exact prefix comb by ten states | `VariablePrefixRankTax.ten_le_of_rank_four_short_rank_three_deep` |
 | Opposite rank-four and rank-three branches tax a balanced exact prefix layout by eleven states | `VariablePrefixRankTax.eleven_le_balanced_rank_four_rank_three` |
@@ -3438,6 +3462,8 @@ fixed-rank decision problem.
 | `Z₆(2)` scalar zero is not computable | `UniversalNeary.scalarZero62_not_computable` |
 | Code halting many-one reduces to `M₁₀(2)` | `UniversalNeary.codeHalts_reduces_mortality102` |
 | `M₁₀(2)` mortality is not computable | `UniversalNeary.mortality102_not_computable` |
+| Code halting many-one reduces to `M₉(2)` | `UniversalNeary.codeHalts_reduces_mortality92` |
+| `M₉(2)` mortality is not computable | `UniversalNeary.mortality92_not_computable` |
 | Two-tag executions reach their cyclic firing phase | `CyclicTag.reaches_firing_phase` |
 | A woven compiler word emits its prescribed track | `read_wholeAppendant_track` |
 | One arbitrary ordinary cyclic pulse has a nonempty physical simulation | `read_next_dataBit_transGen` |
