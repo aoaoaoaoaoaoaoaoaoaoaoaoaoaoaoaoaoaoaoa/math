@@ -317,14 +317,16 @@ check_collection() {
   assert_xpath_count 1 \
     "$article/section[h2[@id='frontier']]//table[contains(concat(' ', normalize-space(@class), ' '), ' status-table ')]"
   local table_stars="$article//table[contains(concat(' ', normalize-space(@class), ' '), ' status-table ')]//strong[contains(concat(' ', normalize-space(@class), ' '), ' new-result ') and normalize-space()='U★']"
-  assert_xpath_count 6 "$table_stars"
-  assert_xpath_count 6 "$table_stars/parent::a"
+  assert_xpath_count 7 "$table_stars"
+  assert_xpath_count 7 "$table_stars/parent::a"
   assert_xpath_count 4 \
     "$table_stars/parent::a[@href='/math/matrix_mortality/m3_5/#result']"
   assert_xpath_count 1 \
     "$table_stars/parent::a[@href='/math/matrix_mortality/m4_4/#result']"
   assert_xpath_count 1 \
     "$table_stars/parent::a[@href='/math/matrix_mortality/binary_compilers/#mortality-ten']"
+  assert_xpath_count 1 \
+    "$table_stars/parent::a[@href='/math/matrix_mortality/m9_2/#result']"
 
   local formulas='//div[contains(concat(" ", normalize-space(@class), " "), " formula ")]'
   local formula_count
@@ -350,6 +352,7 @@ check_publication frankl.html 0 collection
 check_publication m3_5.html 3
 check_publication m4_4.html 0
 check_publication binary_compilers.html 0
+check_publication m9_2.html 0
 check_publication m3_2_return_guard.html 0
 
 PUBLICATION=math.html
@@ -363,7 +366,7 @@ done < <(jq -r '.publications[] | select(.kind == "collection") | .route' "$MANI
 
 diff --unified \
   <(jq -r '.publications[] | select(.kind != "index") | .source' "$MANIFEST" | sort) \
-  <(printf '%s\n' binary_compilers.html frankl.html m3_2_return_guard.html matrix_mortality.html m3_5.html m4_4.html | sort)
+  <(printf '%s\n' binary_compilers.html frankl.html m3_2_return_guard.html m9_2.html matrix_mortality.html m3_5.html m4_4.html | sort)
 
 tectonic --bundle "$TECTONIC_BUNDLE" --outdir "$SCRATCH" paper/main.tex
 cmp --silent "$SCRATCH/main.pdf" paper/main.pdf || {

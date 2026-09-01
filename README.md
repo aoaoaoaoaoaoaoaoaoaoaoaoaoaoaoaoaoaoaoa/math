@@ -12,7 +12,12 @@ mortality generator is nonzero of rank one over `ℚ`.
 Two binary compilers sharpen the two-generator frontier. Paired-channel packing gives scalar
 zero reachability for two `6 × 6` integer matrices sharing first column `e₁`. A complete prefix
 decoder followed by a common-image restriction gives mortality for two `10 × 10` integer
-matrices. Zero-block padding preserves mortality in every dimension at least ten.
+matrices.
+
+Singular return compression lowers the mortality dimension to nine. An injective
+tilted separator preserves the paired scalar zero language, a `3+3+2+1` transfer chart realizes
+its returns, and primitive-recursive denominator clearing emits two `9 × 9` integer matrices.
+Zero-block padding preserves mortality in every dimension at least nine.
 
 The complete undecidability chain, from an explicit universal machine through the restricted
 tag source and matrix compilers, is machine-checked in Lean 4.
@@ -27,6 +32,7 @@ tag source and matrix compilers, is machine-checked in Lean 4.
 - [Fixed-Boundary Correspondence](m3_5.html): `GPCP(4)` and `M₃(5)`
 - [Paired-Role Compression](m4_4.html): `Z₄(3)` and `M₄(4)`
 - [Binary Compilers](binary_compilers.html): `Z₆(2)` and `M₁₀(2)`
+- [Singular Return Compression](m9_2.html): `M₉(2)`
 - [`M₃(5)` technical manuscript](paper/main.pdf)
 
 ## Supporting Material
@@ -87,3 +93,5 @@ scalar-to-mortality separator is prior art. See [NOVELTY.md](NOVELTY.md) and the
 To our knowledge, after searches through 24 July 2026, no prior proof establishes `Z₆(2)`,
 `R₇(2)`, or `M₁₀(2)`. Generic binary coding, alphabet reduction, and scalar-to-corner transport
 are prior art; the qualified technique claims are stated in [Binary Compilers](binary_compilers.html).
+The changed-separator compiler strengthens the last bound to `M₉(2)`; any earlier `M₉(2)` result
+would also have implied `M₁₀(2)` by zero-block padding.

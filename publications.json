@@ -35,6 +35,11 @@
     },
     {
       "kind": "result",
+      "source": "m9_2.html",
+      "route": "matrix_mortality/m9_2"
+    },
+    {
+      "kind": "result",
       "source": "m3_2_return_guard.html",
       "route": "matrix_mortality/m3_2_return_guard"
     }
