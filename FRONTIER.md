@@ -2526,6 +2526,15 @@ lower-wall under-cancellation enters this absorbing cone and cannot return; exac
 cancellation remains in the finite `D2-S10` nucleus. This is
 [`D2-S11`](SALVAGE.md#d2-s11-absorbing-four-divisible-cone). Only wall-preserving upper steps and
 lower over-cancellation into an odd denominator can participate in a recurrent excursion.
+Those odd exits are genuinely recurrent. For every `n≥7`, `2≤m≤6`, and also exactly the
+boundary pairs `n=6`, `4≤m≤6`, an explicit reduced five-adic-unit pair closes a guarded
+two-cycle with waits `[n−1,m−2]`. For each depth pair it is the unique solution of the
+lower/middle cycle equations. At fixed `m` the wall mantissas for `n≥7` form a
+strict infinite sequence converging to `9/10`, while the corresponding lower-depth states
+converge to the excluded endpoint `1/5`. This is
+[`D2-S12`](SALVAGE.md#d2-s12-exact-wall-odd-two-cycle-family). The finite literal SCC census of
+`D2-S10` cannot extend across excursions; the live target is a symbolic classifier for these
+two-cycles and every longer odd return, not another finite valuation box.
 The deepest of those three branches is itself a full depth reset. In normalized band coordinates
 `U(d,μ)=1/5+(3/10)(2/3)^dμ`, every target band `d≥2` contains a point whose `d−2` predecessor has
 any prescribed band `n≥7` and mantissa in `(2/3,1]`. An explicit guarded subfamily fixes target
@@ -2833,7 +2842,9 @@ universal computation.
    infinite seam, while `D2-O08` saturates target-only reverse length inside the real trap and
    `D2-S04` replaces its local reverse fan by a sharp ternary nucleus. `D2-O09` then localizes
    every unbounded Archimedean reset to the deepest branch and proves that fixed depth/unit modes
-   do not contain it. Treat chamber exit and reentry as separate pre-exit seams. Do not reopen
+   do not contain it. `D2-S12` classifies every immediate lower/middle two-cycle and kills a
+   finite literal return census; quotient its depth-pair formula before attacking longer odd
+   excursions. Treat chamber exit and reentry as separate pre-exit seams. Do not reopen
    unlabeled residue-only finite nuclei, valuation-only reverse bounds, one-sided endpoint bounds,
    or global real drift. Attack the pole branch through exact mantissa arithmetic, guarded
    concatenation, or endpoint-coupled height.
