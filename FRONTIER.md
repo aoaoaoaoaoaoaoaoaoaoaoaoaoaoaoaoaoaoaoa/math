@@ -1911,6 +1911,17 @@ wait words. See
 [`R32-S79`](SALVAGE.md#r32-s79-monotone-readable-memory-comparator) and
 [`m32-cubic-readable-monotone-comparator-2026-09-01.md`](audits/m32-cubic-readable-monotone-comparator-2026-09-01.md).
 
+Changing the connector reopens one inverse route. An explicit positive word of length `37681`
+realizes the exact two-sided projective inverse of the false transverse pump, so appending that
+word before the false pump gives a nonzero scalar identity and preserves every later suffix.
+This is a genuine physical pop, not merely a normalized chart calculation. Its right bridge,
+however, lands on the accepting ray at its full endpoint; only its proper suffixes are safe.
+The result therefore establishes algebraic reversibility of one stack letter while exposing the
+remaining operational obligation: bypass that premature first hit and obtain a compatible true
+pop, or encode both logical letters through reversible padded blocks. See
+[`R32-S80`](SALVAGE.md#r32-s80-positive-projective-pop-for-the-false-transverse-pump) and
+[`m32-cubic-false-pump-inverse-2026-09-01.md`](audits/m32-cubic-false-pump-inverse-2026-09-01.md).
+
 ### ReturnSquare laboratory
 
 [`R32-S03`](SALVAGE.md#r32-s03-returnsquare-normal-form) is the first completely normalized

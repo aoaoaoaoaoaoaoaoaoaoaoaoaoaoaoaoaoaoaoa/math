@@ -152,6 +152,7 @@ file owns the mathematical stock.
 | [`R32-S77`](#r32-s77-fixed-connector-cannot-pop-the-transverse-stack) | obstruction | the current terminal writer-reader-translation grammar transported through the fixed connector cannot realize either transverse pump inverse | formalized | active |
 | [`R32-S78`](#r32-s78-positive-singleton-gate-for-readable-source-memory) | compiler mechanism | a positive non-inverse height-five gate annihilates exactly address `00` in the readable free-memory family, and a marker rejects every nonempty payload | formalized | active |
 | [`R32-S79`](#r32-s79-monotone-readable-memory-comparator) | compiler mechanism | positive mismatch corrections turn every wrong read into the same unit translation, so one physical gate accepts exactly an empty payload and a wholly matching schedule | formalized | active |
+| [`R32-S80`](#r32-s80-positive-projective-pop-for-the-false-transverse-pump) | compiler mechanism and obstruction | an alternative positive connector realizes an exact two-sided inverse of the false transverse pump, but its final bridge lands on the accepting ray | formalized | active |
 | [`R32-M01`](#r32-m01-generic-reverse-edge-compiler) | partial mechanism | projective incidence generically embeds into a compatible two-plane edge square | formalized | active |
 | [`R32-M02`](#r32-m02-finite-quotient-sieve) | partial mechanism | finite monoid quotients give complete modular no-certificates for fixed candidates | formalized | active |
 | [`R32-M03`](#r32-m03-two-scale-return-conversion) | partial mechanism | a minimal two-scale return pencil has nonresonant multi-return zeros | formalized | active |
@@ -5908,6 +5909,61 @@ with audit
 can be segmented. The `00` marker and the mismatch schedule now form one cancellation-free AND
 gate; the remaining master seam is the converse from arbitrary raw positive words to lawful
 segmented executions.
+
+### R32-S80: Positive projective pop for the false transverse pump
+
+**Kind:** compiler mechanism and obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+The fixed-connector obstruction `R32-S77` does not survive a change of connector. The positive
+head and tail
+
+```text
+H = [8,8,15,21,1,1,8,4],
+K = [12,12,15,8,1,8,1,15,8,2]
+```
+
+transport the terminal translation `T(-76507/1080)` to the transverse chart matrix
+
+```text
+J₀⁻¹ = [[1,-1712/9],[0,625]].                              (1)
+```
+
+The translation has nonnegative count certificate `(859,19,489,0)`. Consequently its physical
+spelling `I₀` uses only positive waits, has length `37681`, and satisfies
+
+```text
+Π(I₀ ++ E₀) = sI,                 s ≠ 0,                    (2)
+Π((I₀ ++ E₀) ++ w) = sΠ(w)                                  (3)
+```
+
+for every suffix `w`, where `E₀` is the false transverse pump. Equation (1) is an exact
+two-sided inverse identity, while (2) and (3) transport it to the literal physical word.
+
+There is a precise first-hit defect. Every proper suffix inside `K` is nonaccepting from the
+terminal ray `(4,3)`, but the complete tail sends that ray to a nonzero multiple of `e₀`.
+Thus the algebraic pop exists and is context-transparent after completion, yet this particular
+spelling cannot be inserted unchanged into a compiler whose operational semantics halt at the
+first accepting incidence.
+
+**Scope:** the translation certificate, both bridge realizations, exact conjugacy (1), positive
+physical spelling and length, two-sided normalized inverse, physical cancellation (2), arbitrary
+suffix law (3), proper-suffix safety, and terminal full-tail hit are Lean checked. No claim is
+made that the accepting endpoint can be bypassed, or that a positive inverse for the true pump
+has been found.
+
+**Artifact:**
+`CubicReturn.NonPure.falseWaitFalsePumpInverseWord_push_pop` and
+`falseWaitFalsePumpInverseWord_pop_suffix` in
+[`CubicFalsePumpInverseConnector.lean`](MatrixMortality/CubicFalsePumpInverseConnector.lean),
+with audit
+[`m32-cubic-false-pump-inverse-2026-09-01.md`](audits/m32-cubic-false-pump-inverse-2026-09-01.md).
+
+**Use:** retain the free transverse stack as an algebraically reversible channel: its false
+letter now has a positive physical pop. Any first-hit compiler must reroute or mask the full-tail
+accepting event, and still supply a true-letter pop or a padded code whose two letters are both
+reversible.
 
 ### R32-M01: Generic reverse edge compiler
 

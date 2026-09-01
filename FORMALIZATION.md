@@ -1204,6 +1204,15 @@ its written bit. The module also proves exact local costs, total length, positiv
 and the normalized incidence formula. See `R32-S79` and
 [`audits/m32-cubic-readable-monotone-comparator-2026-09-01.md`](audits/m32-cubic-readable-monotone-comparator-2026-09-01.md).
 
+`CubicFalsePumpInverseConnector` shows that the fixed-connector valuation obstruction is not
+global. Two alternative positive bridges and one certified terminal translation realize
+`[[1,-1712/9],[0,625]]`, the exact two-sided inverse of the false transverse pump. Lean proves
+that the literal positive word has length `37681`, that its concatenation with the physical
+false pump is a nonzero scalar identity, and that this cancellation preserves every subsequent
+suffix. It also isolates the operational defect exactly: every proper suffix of the right bridge
+is nonaccepting, but the complete bridge reaches the accepting ray. See `R32-S80` and
+[`audits/m32-cubic-false-pump-inverse-2026-09-01.md`](audits/m32-cubic-false-pump-inverse-2026-09-01.md).
+
 The rank-(2,2) graph is no longer an independent residue. `RankTwoPunctuation` proves that every
 compatible square with one rank-one loop and three units transports exactly to the existing raw
 reverse compiler [`R32-M01`](SALVAGE.md#r32-m01-generic-reverse-edge-compiler). Its intrinsic

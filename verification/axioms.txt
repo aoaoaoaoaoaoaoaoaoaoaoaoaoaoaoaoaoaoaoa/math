@@ -2103,6 +2103,31 @@
  Quot.sound]
 'MatrixMortality.CubicReturn.NonPure.falseWaitReadableMonotoneGateWord_length_exact' depends on axioms: [propext,
  Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitFalsePumpInverseTranslationShift' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitFalsePumpInverseWord_chart' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitFalsePumpInverseWord_positive' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitFalsePumpInverseWord_length' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitFalsePumpInverseLoop_isInverse' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitFalsePumpInverseWord_push_pop' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitFalsePumpInverseWord_pop_suffix' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitFalsePumpInverseTail_properSuffixes_nonaccepting' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitFalsePumpInverseTail_accepting' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.EdgeCompression.isMortal_iff_exists_edgeProduct_eq_zero' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
