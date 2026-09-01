@@ -2639,6 +2639,15 @@ classifier. Each accepted rectangle contains forty residue pairs, and target acc
 all source and intermediate guards. This is
 [`D2-S25`](SALVAGE.md#d2-s25-remaining-strict-length-three-chamber-classifier). Thus the only
 strict length-three seam is the `D2-S24` carry itself.
+That carry has two positive-valuation denominator branches. After multiplying by a five-adic
+unit, each is a fixed residual divided by `1−r^(2h)`, minus one coefficient. Target acceptance
+forces that coefficient to have value one and the residual valuation to equal `κ(2h)+1`; all
+other wall depths reject before the final tied digit. Equivalently, depth two of the carry is
+exactly numerator depth `κ(2h)+2`, while moving
+the split by `s` changes that numerator at exact depth `κ(2s)`. This is
+[`D2-S26`](SALVAGE.md#d2-s26-centered-length-three-residual-depth-match). The
+remaining work is now the exact Hensel lift at the matched depth plus the two denominator-unit
+parity tables, not an undifferentiated depth-two carry.
 The deepest of those three branches is itself a full depth reset. In normalized band coordinates
 `U(d,μ)=1/5+(3/10)(2/3)^dμ`, every target band `d≥2` contains a point whose `d−2` predecessor has
 any prescribed band `n≥7` and mantissa in `(2/3,1]`. An explicit guarded subfamily fixes target
@@ -2972,7 +2981,8 @@ universal computation.
    strict sign chamber: the positive-negative-negative chamber is Archimedeanly impossible,
    while both alternating chambers are exact finite unions of congruence classes with forty
    accepted residue pairs in each surviving fibre. Classify only the residual `D2-S24` carry,
-   then begin
+   beginning with the `D2-S26` fixed-residual/moving-wall depth match and its one remaining tied
+   digit, then begin
    every remaining higher-depth tied-minimum search through the weighted source balance. Abandon
    finite literal return censuses and local forbidden-factor grammars; attack those
    endpoint-coupled fibres. Treat chamber

@@ -274,6 +274,7 @@ file owns the mathematical stock.
 | [`D2-S23`](#d2-s23-length-two-mixed-sign-classifier) | exact classifier | fully guarded positive two-wait collisions form one explicit finite union of affine congruence families | formalized | active |
 | [`D2-S24`](#d2-s24-first-length-three-chamber-cut) | structure theorem | the closed positive-positive-negative three-wait chamber reduces to transfers one and two, one depth-two target carry, and ten terminal residues | formalized | active |
 | [`D2-S25`](#d2-s25-remaining-strict-length-three-chamber-classifier) | exact classifier | every strict three-wait sign chamber outside the first positive-positive-negative chamber is either impossible over the real trap or one explicit semilinear residue language | formalized | active |
+| [`D2-S26`](#d2-s26-centered-length-three-residual-depth-match) | structure theorem | the two nonunit-denominator branches of the last length-three chamber force a fixed residual to sit exactly one five-adic level below a variable-depth moving wall | formalized | active |
 | [`D2-D01`](#d2-d01-projectively-unimodular-stratum) | decidable stratum | projectively unimodular hard-core instances are decidable | audited | stock |
 | [`D2-D02`](#d2-d02-invariant-pair-stratum) | decidable stratum | invariant projective pairs reduce to abelian-by-`C₂` reachability | reported | active |
 | [`D2-D03`](#d2-d03-common-multiplier-stratum) | decidable stratum | rational affine maps with one multiplier are decidable under regular control | reported | active |
@@ -12969,7 +12970,120 @@ by their finite residue automata. Every remaining strict length-three search can
 to the two transfers inside `D2-S24`.
 
 **Next:** kill the `D2-S24` depth-two carry for `k=1,2`; if it survives, extract its exact
-semilinear language before moving the crossing-walk census to length four.
+valuation-stratified language before moving the crossing-walk census to length four.
+
+### D2-S26: Centered length-three residual-depth match
+
+**Kind:** structure theorem and carry reduction
+**Evidence:** formalized
+**Disposition:** active
+
+The last chamber of [`D2-S24`](#d2-s24-first-length-three-chamber-cut) separates into
+denominator-unit branches and two centered branches whose denominator has potentially unbounded
+five-adic depth. Put `r=2/3`.
+
+For `k=1`, write the odd-middle branch as
+
+```text
+A=2a,  B=2b+1,  h=a+b>0.
+```
+
+Define
+
+```text
+L₁(q,a)=9r^(q+1)(1−r^(2a))−10r^(2a),
+J₁(q,a)=15r^(2a)+L₁(q,a).
+```
+
+Lean proves the exact centered coordinate
+
+```text
+r^(2a)E = J₁(q,a)/[r(1−r^(2h))] − L₁(q,a)/r.
+```
+
+The corresponding uncleared numerator is
+
+```text
+M₁(q,b,h)=15+9r^(q+1)r^(2b)−(9r^(q+1)+10)r^(2h).
+```
+
+Lean proves the exact classifier and fixed-wall difference law
+
+```text
+v₅(E)=2  ⇔  v₅(M₁(q,b,h))=κ(2h)+2,
+v₅(M₁(q,b+s,h)−M₁(q,b,h))=κ(2s)   for s>0.
+```
+
+If the target is a five-unit, then `E` has value two and the fixed residual satisfies
+
+```text
+v₅(J₁(q,a)) = κ(2h)+1.
+```
+
+For `k=2`, the real trap has already forced `p=q=0`. Write the even-middle branch as
+
+```text
+A=2a,  B=2(b+1),  h=a+b>0,
+```
+
+and define
+
+```text
+L₂(a)=9−24r^(2a),
+J₂(a)=15r^(2a)+r²L₂(a).
+```
+
+The exact coordinate and forced depth are
+
+```text
+r^(2a)E = J₂(a)/[r²(1−r^(2h))] − L₂(a),
+v₅(J₂(a)) = κ(2h)+1.
+```
+
+Writing
+
+```text
+M₂(c,w)=15+9r^(2c)−24r^(2w),
+```
+
+the `B=2(b+1)` branch has the exact companion laws
+
+```text
+v₅(E)=2  ⇔  v₅(M₂(b+1,h+1))=κ(2h)+2,
+v₅(M₂(c+s,w)−M₂(c,w))=κ(2s)   for s>0.
+```
+
+The proof does not infer the residual depth by comparing a truncated residue table. It clears
+the centered quotient, proves the coefficient has value one from the accepted carry itself, and
+then applies the strict ultrametric minimum twice. Thus every pole and cancellation is retained.
+
+**Scope:** this is a necessary classifier for the odd-`B`, `k=1` and even-`B`, `k=2` branches.
+It does not classify the final tied digit, prove that accepted points exist at every wall depth,
+or close the complementary even-`B`, `k=1` and odd-`B`, `k=2` denominator-unit branches. In
+particular, the formal statement does not yet claim a no-fixed-modulus theorem.
+
+**Artifact:** `MixedPrimeDebt.lengthThreeFalling_one_odd_targetCarry_centered`,
+`MixedPrimeDebt.lengthThreeFalling_one_odd_targetCarry_cleared`,
+`MixedPrimeDebt.lengthThreeFalling_one_odd_targetCarry_mul_wall`,
+`MixedPrimeDebt.lengthThreeFalling_one_odd_targetCarry_hasValue_two_iff_numerator`,
+`MixedPrimeDebt.lengthThreeFallingOneOddWallNumerator_add_sub_hasValue`,
+`MixedPrimeDebt.lengthThreeFalling_one_odd_targetCarry_forces_residualDepth`,
+`MixedPrimeDebt.lengthThreeFalling_one_odd_target_forces_residualDepth`,
+`MixedPrimeDebt.lengthThreeFalling_two_even_targetCarry_centered`,
+`MixedPrimeDebt.lengthThreeFalling_two_even_targetCarry_cleared`,
+`MixedPrimeDebt.lengthThreeFalling_two_even_targetCarry_mul_wall`,
+`MixedPrimeDebt.lengthThreeFalling_two_even_targetCarry_hasValue_two_iff_numerator`,
+`MixedPrimeDebt.lengthThreeFallingTwoEvenWallNumerator_add_sub_hasValue`,
+`MixedPrimeDebt.lengthThreeFalling_two_even_targetCarry_forces_residualDepth`, and
+`MixedPrimeDebt.lengthThreeFalling_two_even_target_forces_residualDepth` in
+[`MixedPrimeRealTrapLengthThreeCentered.lean`](MatrixMortality/MixedPrimeRealTrapLengthThreeCentered.lean).
+
+**Use:** evaluate the fixed residual before entering either centered branch. Its valuation fixes
+the sole possible wall depth; every other depth rejects immediately. Only the next tied digit
+remains after a match.
+
+**Next:** formalize the compatible Hensel lifts. Prove or refute guarded acceptance at every
+depth, then classify the denominator-unit parity branches by their finite residue tables.
 
 ### D2-O09: Guarded real-pole reset
 
