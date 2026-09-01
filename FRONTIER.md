@@ -1168,6 +1168,17 @@ first non-`D_c` block grammar does not finish the argument. The empty arm has
 erasure targets survive the exact local shell equations. The nonempty arm requires a
 higher-prefix ancestry invariant.
 
+[`MM-O29`](SALVAGE.md#mm-o29-uniform-empty-front-local-rays) makes the empty-arm obstruction
+uniform. Every length-`β` erasure target has an exact body-independent local backward ray
+through `D_b;D_c;D_c`; the scale depths are `β+1,1,0`, and the initial cylinder contains
+`3^(2β)`. If the target ends in `b c^t`, its intermediate gap has exact depth `β+t+2`; the
+all-`c` target has depth `2β+1`. These are local backward projective rays only: `MM-O29` proves
+neither encoded-entry reachability nor a pole. Width-six diagnostics further show that both the
+maximum-coordinate and Farey heights can contract after an earlier block exits the initial
+shell multicone. Every observed Farey contraction occurs after `(R_c,D_b)` and before `D_c`,
+while all tested two-step windows expand; this is computational evidence for a finite-memory
+Lyapunov certificate, not a theorem.
+
 The remaining ternary obligation is now the **nonzero history-defect branch** of the global
 earliest-pole reduction. In the normalized coordinate `δ=D/y`, the complete physical recurrence
 is
@@ -1188,7 +1199,8 @@ erasure tile, not `β` of them. A complete proof must either force the long tail
 false pole or extend the carry/cylinder invariant to arbitrary physical target suffixes. Fixed
 residue and unit projections are empirically saturated, and the exact carry window grows with
 carrier height. None of `MM-S51`, `MM-S55`, `MM-S57`, `MM-S59`, `MM-S61`, `MM-S63`, `MM-S64`,
-`MM-S68`, `MM-S69`, `MM-S71`, `MM-O27`, `MM-S73`, or `MM-S76` alone proves projective avoidance.
+`MM-S68`, `MM-S69`, `MM-S71`, `MM-O27`, `MM-S73`, `MM-S76`, or `MM-O29` alone proves projective
+avoidance.
 Exact bidirectional diagnostics for the ternary swap at `β=3`, body `bbcc`, exclude every
 false-pole word of at most six projective blocks when each regular block has
 role length at most three; this is computational evidence only.

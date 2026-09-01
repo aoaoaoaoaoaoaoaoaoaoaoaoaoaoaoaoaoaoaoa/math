@@ -146,6 +146,7 @@ file owns the mathematical stock.
 | [`MM-O27`](#mm-o27-reachable-predecessor-cylinder) | obstruction | a concrete ordinary-reset history reaches the exact non-`D_c` predecessor cylinder, refuting every block-local extinction of the `MM-S71` survivor | formalized | active |
 | [`MM-S73`](#mm-s73-live-three-block-charge-frontier) | structure theorem and obstruction | the reachable predecessor cylinder, both deletion resonances, and the literal target suffix carry form one exact nonzero chain that automatically forces the whole three-block prefix live | formalized | active |
 | [`MM-S76`](#mm-s76-primitive-target-multiplier-braid) | structure theorem and obstruction | primitivity identifies one unique unit target multiplier, turning the suffix charge into a literal prefix discrepancy and restricting its predecessor cylinder to two first-mismatch residue arms | formalized | active |
+| [`MM-O29`](#mm-o29-uniform-empty-front-local-rays) | obstruction | every empty-front erasure target admits an exact local `D_b;D_c;D_c` backward ray with the required shells and predecessor cylinder | formalized | active |
 | [`R32-S01`](#r32-s01-split-return-normal-form) | structure theorem | rank-two cuts reduce one-unit binary mortality to a `2 × 2` return recurrence | formalized | graduated |
 | [`R32-S02`](#r32-s02-two-plane-edge-square) | structure theorem | two rank-two generators are a two-vertex square of `2 × 2` edges | formalized | graduated |
 | [`R32-O01`](#r32-o01-rank-one-profile-collapse) | obstruction | a rank-one generator reduces mortality to order-at-most-three scalar recurrence zeros | audited | stock |
@@ -5644,6 +5645,70 @@ through `witness_front_initialCylinder_residue_fork`.
 **Next:** decide whether any finite empty-front backward ray meets the encoded-entry orbit before
 `w`, then lift (1) beyond the terminal residue for the nonempty front. Removing the full-tail
 restriction remains independent.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-O29: Uniform empty-front local rays
+
+**Kind:** obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+Let `β≥3`, let `letters` be any tag word of length `β`, and set
+
+```text
+U=signedSwappedCode(tagEncode β letters ++ [true]),
+P=3^β(U+1)−1,       V=3^β−1.
+```
+
+The exact projective target pair `(P,V)` has a body-independent backward pullback through
+`D_b;D_c;D_c`. Its displayed forward scales have three-adic depths `β+1`, `1`, and `0`;
+after those forced powers are removed, the displayed coordinates are three-adic units. Primitive
+reduction can therefore cancel only three-adic-unit common factors, preserving the depths. If
+`H=5·3^β−1`, `R=2−3^β`, `s=3^(β−1)`, and
+
+```text
+Q=45s³U−75s²U+36sU−4U−36s²+18s−2,
+```
+
+then the intermediate gap and the initial predecessor cylinder are
+
+```text
+d₀−n₀=−3^βHQ,
+C_b=3^(2β)(−2H²RQ).
+```
+
+The terminal run of `c` letters gives the complete valuation law. For `letters=c^β`,
+`v₃(d₀−n₀)=2β+1`; for `letters=stem·b·c^t`,
+`v₃(d₀−n₀)=β+t+2`. Hence all `2^β` empty-front targets survive the exact local shell and
+cylinder equations uniformly, not merely at width three.
+
+**Scope:** these are local backward projective rays only. The construction starts at the target
+ratio and does not prove that the encoded entry reaches any displayed carrier. It does not prove
+that any displayed carrier is a pole. It therefore proves neither a counterexample to the setter
+nor `M₅(3)`.
+
+Exact width-six diagnostics also reject the two natural global height extrapolations. Both
+`max(|n|,|d|)` and `max(|n|,|d|,|d−n|)` can contract after the initial shell multicone is exited.
+This is computational evidence only; no separate obstruction theorem is claimed.
+
+**Use:** remove the empty-front arm from every block-local extinction strategy. A closing
+argument must couple the ray to forward encoded-entry reachability, retain enough history for a
+multicone or multi-step weight, or use ancestry before the three-block window. The generic
+target-suffix seam remains independent.
+
+**Formalization:**
+[`MatrixMortality/SwappedSetterEmptyFrontRay.lean`](MatrixMortality/SwappedSetterEmptyFrontRay.lean),
+through `exists_emptyFrontLocalRay`, `emptyTarget_gapCore_padicValInt_cases`, and
+`emptyTarget_antecedentGap_padicValInt_cases`.
+
+**Artifact:**
+[`audits/m53-empty-front-local-rays-2026-09-01.md`](audits/m53-empty-front-local-rays-2026-09-01.md).
+
+**Next:** decide whether any ray meets the encoded-entry orbit before the `D_b` block, using
+history-sensitive geometry rather than a universal one-step norm. Attack the nonempty target
+front and arbitrary-target-suffix obligations independently.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).

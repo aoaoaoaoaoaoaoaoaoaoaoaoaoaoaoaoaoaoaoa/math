@@ -1436,6 +1436,7 @@ The setter-projective audit now also exposes a kernel-friendly carry theorem:
 | [`MM-O27`](SALVAGE.md#mm-o27-reachable-predecessor-cylinder) | exact width-three ordinary-reset orbit, primitive normalizations, nonzero full-gap successor, and a reachable non-`D_c` predecessor-cylinder witness |
 | [`MM-S73`](SALVAGE.md#mm-s73-live-three-block-charge-frontier) | exact predecessor-cylinder preimage, derived three-block live-prefix certificate, literal matched-tail suffix carry, and nonzero charge transport through both singleton `D_c` resonances |
 | [`MM-S76`](SALVAGE.md#mm-s76-primitive-target-multiplier-braid) | unique primitive target multiplier, literal prefix-discrepancy braid, unit transfer, and the two-arm first-mismatch residue pullback to the initial cylinder |
+| [`MM-O29`](SALVAGE.md#mm-o29-uniform-empty-front-local-rays) | uniform local `D_b;D_c;D_c` backward rays for every empty-front erasure target, exact shell and cylinder formulas, and complete terminal-`c` gap valuation law |
 
 These records narrow the missing arbitrary-depth theorem but do not prove
 projective avoidance. Their reconstruction is
@@ -1788,6 +1789,17 @@ witnesses, none a pole. For the finite empty-front target Lean additionally prov
 `3^β−1=λd₂`, `λ∣(3^β−1)`, and `|d₂|≤3^β−1`; all eight width-three targets still survive the
 remaining local equations. A strict cut must therefore use global reachability or longer
 target-prefix ancestry.
+
+Record [`MM-O29`](SALVAGE.md#mm-o29-uniform-empty-front-local-rays) proves that the finite
+empty-front survivor is not a width-three accident. For every `β≥3` and every length-`β` tag
+word, Lean constructs the exact body-independent projective pullback through `D_b;D_c;D_c`.
+The displayed scale depths are `β+1,1,0`; primitive reduction cancels only three-adic units. The
+initial predecessor cylinder is a multiple of
+`3^(2β)`, and the intermediate gap has depth `β+t+2` when the target ends in `b c^t`, or
+`2β+1` for the all-`c` target. This is a local backward-ray theorem only: it asserts neither
+forward reachability from the encoded entry nor a pole. Computational width-six diagnostics
+reject universal one-step maximum-coordinate and Farey-height monotonicity; a history-sensitive
+multicone or multi-step weight remains possible.
 
 Record [`MM-S21`](SALVAGE.md#mm-s21-bounded-decimal-suffix-cycles) closes the fixed-precision
 suffix-descent lane. `DecimalSetterSuffix.cycleDefect_lift` gives an explicit one-digit lift for
@@ -2347,6 +2359,7 @@ fixed-rank decision problem.
 | `SwappedSetterCylinderCharge.lean` | exact locally earliest three-block charge chain coupling the predecessor cylinder through both deletion resonances to the target's matched-tail suffix carry |
 | `SwappedSetterTargetMultiplier.lean` | unique primitive target multiplier, unconditional target-prefix unit, and exact braid transport to the predecessor-cylinder unit |
 | `SwappedSetterTargetResidue.lean` | three-adic unit chain and first-mismatch residue pullback from the target prefix through both singleton deletions to the initial cylinder quotient |
+| `SwappedSetterEmptyFrontRay.lean` | exact local empty-front `D_b;D_c;D_c` backward family, shell and predecessor-cylinder formulas, and terminal-run gap valuation classification |
 | `PairedMortality.lean` | common-column mortality converse and exact integer `4 × 4` family |
 | `PhaseFracture.lean` | phase normalization and dimension-free projective-identification contradiction |
 | `PhaseRigidity.lean` | checked local role algebra, discrepancy commutators, and invariant-pencil rigidity |

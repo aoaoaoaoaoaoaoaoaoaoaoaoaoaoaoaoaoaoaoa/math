@@ -166,6 +166,7 @@ import MatrixMortality.SwappedSetterReachableCylinder
 import MatrixMortality.SwappedSetterCylinderCharge
 import MatrixMortality.SwappedSetterTargetMultiplier
 import MatrixMortality.SwappedSetterTargetResidue
+import MatrixMortality.SwappedSetterEmptyFrontRay
 import MatrixMortality.SchottkyPunctuation
 import MatrixMortality.TwoStateObstructions
 import MatrixMortality.ForcedRuleCCompanion
