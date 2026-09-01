@@ -112,6 +112,7 @@ import MatrixMortality.TerminalCompiler
 import MatrixMortality.NearyEncoding
 
 /- Computable endpoint reductions. -/
+import MatrixMortality.Undecidability.ChangedSeparatorProblems
 import MatrixMortality.Undecidability.UniversalNeary
 
 /- Source-specific obstructions and finite certificates. -/
@@ -181,6 +182,8 @@ import MatrixMortality.ChangedSeparatorMomentTwo
 import MatrixMortality.ChangedSeparatorMomentThree
 import MatrixMortality.ChangedSeparatorTailMoments
 import MatrixMortality.ChangedSeparatorMortality
+import MatrixMortality.ChangedSeparatorEffectivity
+import MatrixMortality.EffectiveRational
 import MatrixMortality.RationalClearing
 import MatrixMortality.SingularReturnFamily
 import MatrixMortality.PairedBinaryFullAlgebra

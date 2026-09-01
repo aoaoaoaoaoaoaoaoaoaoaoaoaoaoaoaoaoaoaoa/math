@@ -264,6 +264,12 @@
 'MatrixMortality.ChangedSeparatorRealization.integralGenerator_mortal_iff_tagHaltsFrom' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.ChangedSeparatorRealization.effectiveIntegralGenerator_mortal_iff_tagHaltsFrom' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.Undecidability.nearyMortality92_mortal_iff_tagHaltsFrom' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.clearRationalFamily_isMortal_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.pairedProduct_mulVec_column' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.pairedCoefficient_eq_sideCoefficient' depends on axioms: [propext, Classical.choice, Quot.sound]
@@ -2231,6 +2237,12 @@
  Classical.choice,
  Quot.sound]
 'MatrixMortality.Undecidability.UniversalNeary.mortality102_not_computable' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.Undecidability.UniversalNeary.codeHalts_reduces_mortality92' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.Undecidability.UniversalNeary.mortality92_not_computable' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
 'MatrixMortality.not_isMortal_of_map_not_isMortal' depends on axioms: [propext]
