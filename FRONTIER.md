@@ -726,8 +726,17 @@ The trailing-run restriction is also eliminated below the inner-wait cap
 [`M4-S38`](SALVAGE.md#m4-s38-phase-zero-right-c-x211-run-extinction). Exact run coordinates
 give `v₃(U)+v₃(V)=h+16`; `z<3^13` caps the second order, while root congruences and density
 extinguish every `h≥6`. Composed with S37 and S36, the physical `x=211` `cb` core is now
-nonzero under the sole bound `z<3^13`. The unique live exit is `z≥3^13`; attack it through
-the suffix complement grammar, not by seeking a false density-only cap.
+nonzero under the sole bound `z<3^13`.
+
+The large-inner exit is now eliminated
+[`M4-S39`](SALVAGE.md#m4-s39-phase-zero-right-c-x211-large-inner-extinction). The exact suffix
+balance and global complement wall leave 155 affine `(j,y)` chambers when `z≥3^13`; a
+kernel-rechecked 231-node decision tree reads at most three suffix letters before reaching a
+sign, density, or empty-suffix contradiction. Thus every even-`b` body beginning `cb` has
+nonzero bridge determinant at `x=211`, with no remaining wait or body-length bound. This is a
+cylinder closure, not a cell closure. The next accepted ratchet must first force `x≤211` for
+every physical `cb` zero and then eliminate the full residual range `x≤210`; it must not replace
+that lower range by the endpoint equation `x=211`.
 
 Two original-family nodes survive, and they must not be conflated.
 

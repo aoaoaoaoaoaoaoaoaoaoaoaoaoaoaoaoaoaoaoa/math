@@ -2860,6 +2860,22 @@ contradicts density or the order sum; and
 before invoking the bounded certificate. Its exact boundary is
 [`audits/m43-phase-zero-right-c-x211-run-extinction-2026-08-31.md`](audits/m43-phase-zero-right-c-x211-run-extinction-2026-08-31.md).
 
+The large-inner extinction
+[`M4-S39`](SALVAGE.md#m4-s39-phase-zero-right-c-x211-large-inner-extinction) is checked across
+`MatrixMortality/ParabolicFirstBOneInnerCore.lean`, the generated
+`MatrixMortality/ParabolicFirstBOneInnerCertificate*.lean` shards, and
+`MatrixMortality/ParabolicFirstBOneInner.lean`.
+`ParabolicBlade.firstBOneX211SuffixCore_of_core_zero` extracts the exact affine suffix
+equation; `firstBOneX211LargeInnerCandidate_of_envelope` contracts every `z≥3^13` solution to
+155 `(j,y)` chambers; and
+`firstBOneX211SuffixCore_false_of_large_inner_candidate` rechecks their depth-three grammar
+certificate. `bZeroBDefectCOneCodeCore_x211_ne_zero` composes that result with M4-S38, while
+`bridge_bZero_bTwo_cOne_det_ne_zero_of_cb_x211_even_b_count` derives the grammar
+decompositions from even `b` parity and exposes the determinant-level cylinder theorem. The
+generator is reproduced by `scripts/generate-parabolic-first-b-one-inner.py`. Its exact
+boundary is
+[`audits/m43-phase-zero-right-c-x211-large-inner-extinction-2026-08-31.md`](audits/m43-phase-zero-right-c-x211-large-inner-extinction-2026-08-31.md).
+
 The residue-zero `c`-endpoint exclusion
 [`M4-S12`](SALVAGE.md#m4-s12-residue-zero-c-endpoint-exclusion) is checked in the same module.
 `ParabolicBlade.bridge_cZero_bTwo_bOne_det` and

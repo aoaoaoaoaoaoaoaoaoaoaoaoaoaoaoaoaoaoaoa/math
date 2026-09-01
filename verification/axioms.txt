@@ -4933,6 +4933,8 @@
 'MatrixMortality.ParabolicBlade.tagComplementCode_pos_of_mem_b' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.ParabolicBlade.tagWord_first_b_decomposition' depends on axioms: [propext]
+'MatrixMortality.ParabolicBlade.tagWord_last_b_decomposition' depends on axioms: [propext]
 'MatrixMortality.ParabolicBlade.bridge_bZero_bTwo_cOne_det_ne_zero_of_long_c_prefix' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
@@ -5134,5 +5136,50 @@
  Classical.choice,
  Quot.sound]
 'MatrixMortality.ParabolicBlade.bZeroBDefectCOneCodeCore_x211_ne_zero_of_inner_bound' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.firstBOneX211SuffixCore_cons_c' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.firstBOneX211SuffixCore_cons_b' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.firstBOneX211SuffixCore_false_of_nonpositive' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.firstBOneX211SuffixCore_false_of_global' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.firstBOneX211SuffixCore_false_of_gap' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.firstBOneX211SuffixCore_of_core_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.firstBOneX211LargeInnerEnvelope_of_suffix_core' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.firstBOneX211_position_lt_thirteen_of_large_inner_envelope' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.firstBOneX211_y_lower_of_large_inner_envelope' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.firstBOneX211LargeInnerCandidate_of_envelope' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.firstBOneX211SuffixCore_false_of_large_inner_candidate' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.bZeroBDefectCOneCodeCore_x211_ne_zero_of_large_inner' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.bZeroBDefectCOneCodeCore_x211_ne_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.bZeroBDefectCOneCodeCore_cb_x211_ne_zero_of_even_b_count' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.bridge_bZero_bTwo_cOne_det_ne_zero_of_cb_x211_even_b_count' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]

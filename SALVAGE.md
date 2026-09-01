@@ -314,6 +314,7 @@ file owns the mathematical stock.
 | [`M4-S36`](#m4-s36-phase-zero-right-c-bounded-x211-extinction) | obstruction and structure theorem | the bounded `x=211` `cb` valuation-density chamber is empty | formalized | active |
 | [`M4-S37`](#m4-s37-phase-zero-right-c-x211-position-extinction) | obstruction and structure theorem | every late next-`b` position in the bounded `x=211` chamber is impossible | formalized | active |
 | [`M4-S38`](#m4-s38-phase-zero-right-c-x211-run-extinction) | obstruction and structure theorem | every trailing run of at least six `c`s in the inner-bounded `x=211` chamber is impossible | formalized | active |
+| [`M4-S39`](#m4-s39-phase-zero-right-c-x211-large-inner-extinction) | obstruction and structure theorem | a depth-three suffix certificate eliminates the large-inner exit and closes the complete `x=211` `cb` cylinder | formalized | active |
 | [`M4-C03`](#m4-c03-zero-framed-binary-two-lag-compiler) | compiler | the principal scanner is literally binary context-2 Lag and compiles to `M₄(3)` | formalized | graduated |
 | [`M4-D01`](#m4-d01-zero-framed-binary-two-lag-decision) | decidable stratum | the entire zero-framed binary context-2 Lag kernel has an exact syntactic classification | formalized | graduated |
 | [`M4-D02`](#m4-d02-zero-framed-reset-scanner-decision) | decidable stratum | zero-run reduction contracts the reset scanner to a regular two-token quotient | audited | graduated |
@@ -14847,6 +14848,59 @@ cannot do so because M4-S36 preserves a formal unbounded ray.
 [`MatrixMortality/ParabolicFirstBOnePhysical.lean`](MatrixMortality/ParabolicFirstBOnePhysical.lean),
 and
 [`audits/m43-phase-zero-right-c-x211-run-extinction-2026-08-31.md`](audits/m43-phase-zero-right-c-x211-run-extinction-2026-08-31.md).
+
+### M4-S39: Phase-zero right-c x211 large-inner extinction
+
+**Kind:** obstruction and structure theorem
+
+**Evidence:** formalized
+
+**Disposition:** active
+
+After the first `b` in an `x=211` `cb` body, let `R` and `G` be the suffix scale and
+complement. A physical zero forces
+
+```text
+GJ = RH - B,
+H = 243·3^j(A−39J) − 39J,
+```
+
+where `j` is the number of intervening `c` letters. Positivity and the global complement wall
+contract this equation to two affine inequalities. For `z≥3^13`, the global middle-wait bound
+and exact corner inequalities give `j<13`, `y≥22529`, and only four nonempty strips:
+
+```text
+j=0, 39701≤y≤39830;   j=1, 26337≤y≤26355;
+j=2, 23671≤y≤23675;   j=3, y=22898.
+```
+
+These 155 pairs are eliminated by an exact suffix decision tree with 231 nodes and maximum
+depth three. Reading `c` sends `H↦3H`; reading `b` sends `H↦243H−39J`. Every leaf contradicts
+coefficient positivity, the global complement wall, a first-`b` position gap, or the empty
+suffix equation. The deterministic generator verifies the tree and emits ordinary Lean proofs;
+Lean rechecks every branch and sign.
+
+**Scope:** physical outer-wait-`211` bodies beginning `cb`. The coordinate theorem assumes
+first- and last-`b` decompositions; the body theorem derives them from even `b` parity and proves
+the corresponding bridge determinant nonzero for all middle and inner waits. No body-length,
+suffix-depth, trailing-run, or wait bound remains. This closes the `x=211` cylinder, not the
+whole phase-zero right-`c` cell or `M₄(3)`.
+
+**Use:** S39 closes the `z≥3^13` exit and composes with M4-S38 to prove the complete physical
+`x=211` `cb` core nonzero. The result is exposed both at the primitive-core surface and at the
+residual bridge determinant.
+
+**Next:** promote the physical `cb` root analysis to an upstream theorem forcing `x≤211` for
+every zero, then eliminate the remaining `x≤210` chamber. Acceptance requires a theorem over
+that full lower range; the endpoint theorem `x=211` must not be restated as the reduction.
+
+**Artifact:**
+[`MatrixMortality/ParabolicFirstBOneInnerCore.lean`](MatrixMortality/ParabolicFirstBOneInnerCore.lean),
+[`MatrixMortality/ParabolicFirstBOneInnerCertificate.lean`](MatrixMortality/ParabolicFirstBOneInnerCertificate.lean),
+[`MatrixMortality/ParabolicFirstBOneInner.lean`](MatrixMortality/ParabolicFirstBOneInner.lean),
+[`scripts/generate-parabolic-first-b-one-inner.py`](scripts/generate-parabolic-first-b-one-inner.py),
+and
+[`audits/m43-phase-zero-right-c-x211-large-inner-extinction-2026-08-31.md`](audits/m43-phase-zero-right-c-x211-large-inner-extinction-2026-08-31.md).
 
 ### M4-C03: Zero-framed binary two-Lag compiler
 
