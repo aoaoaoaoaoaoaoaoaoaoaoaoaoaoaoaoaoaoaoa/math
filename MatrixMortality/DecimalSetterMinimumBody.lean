@@ -18,8 +18,8 @@ open MatrixMortality.DecimalSetterAncestry
 open MatrixMortality.DecimalSetterMatrix
 open MatrixMortality.Undecidability
 
-/-- The one-role root immediately to the right of the shallow reset. -/
-def minimumBodyRoot : List NearyTile := [.rule .c]
+/-- The one-`R_c` root immediately to the right of a shallow reset. -/
+def ruleCRoot : List NearyTile := [.rule .c]
 
 private theorem minimumBodyTarget_upper_spelling (β : Nat) (body : List TagLetter) :
     spell (nearyUpper β) (minimalBodyWord body) =
@@ -82,14 +82,14 @@ theorem minimumBodyTarget_boundaryCode_eq {β : Nat} (β_pos : 0 < β)
   rw [minimumBodyTarget_word_identity β_pos body_length]
 
 /-- The punctuated upper code of the one-`R_c` root is one ninth of the physical lift. -/
-theorem minimumBodyRoot_code_calibration (β : Nat) :
-    9 * upperBoundaryCode β minimumBodyRoot =
+theorem ruleCRoot_code_calibration (β : Nat) :
+    9 * upperBoundaryCode β ruleCRoot =
       DecimalSetterCarry.lift ((10 : ℚ) ^ β) := by
   calc
-    9 * upperBoundaryCode β minimumBodyRoot =
+    9 * upperBoundaryCode β ruleCRoot =
         45 * (10 : ℚ) ^ (β + 1) + 9 * marker β := by
       rw [upperBoundaryCode_eq]
-      simp [minimumBodyRoot, spell, nearyUpper, tagCode, markerScale]
+      simp [ruleCRoot, spell, nearyUpper, tagCode, markerScale]
       ring
     _ = 502 * (10 : ℚ) ^ β - 7 := by
       rw [marker_relation, pow_succ]
@@ -98,53 +98,112 @@ theorem minimumBodyRoot_code_calibration (β : Nat) :
       simp [DecimalSetterCarry.lift]
 
 /-- The exact-length complement of the one-`R_c` root is one ninth of the physical gap. -/
-theorem minimumBodyRoot_complement_calibration (β : Nat) :
-    9 * upperBoundaryComplement β minimumBodyRoot =
+theorem ruleCRoot_complement_calibration (β : Nat) :
+    9 * upperBoundaryComplement β ruleCRoot =
       DecimalSetterCarry.gap ((10 : ℚ) ^ β) := by
   calc
-    9 * upperBoundaryComplement β minimumBodyRoot =
-        10 * (9 * marker β) - 9 * upperBoundaryCode β minimumBodyRoot := by
-      simp [upperBoundaryComplement, minimumBodyRoot, spell, nearyUpper, tagCode]
+    9 * upperBoundaryComplement β ruleCRoot =
+        10 * (9 * marker β) - 9 * upperBoundaryCode β ruleCRoot := by
+      simp [upperBoundaryComplement, ruleCRoot, spell, nearyUpper, tagCode]
       ring
     _ = 10 * (52 * (10 : ℚ) ^ β - 7) -
         DecimalSetterCarry.lift ((10 : ℚ) ^ β) := by
-      rw [marker_relation, minimumBodyRoot_code_calibration]
+      rw [marker_relation, ruleCRoot_code_calibration]
     _ = DecimalSetterCarry.gap ((10 : ℚ) ^ β) := by
       simp [DecimalSetterCarry.gap, DecimalSetterCarry.lift]
       ring
+
+/-- Equality of a target's decimal boundary codes is equivalent to its literal Neary terminal
+word equation. -/
+theorem boundaryCode_eq_iff_terminalMatch (β : Nat) (body : List TagLetter)
+    (target : List NearyTile) :
+    upperBoundaryCode β target = lowerBoundaryCode β body target ↔
+      spell (nearyUpper β) target ++ nearyMarker β =
+        spell (nearyLower β body) target := by
+  unfold upperBoundaryCode lowerBoundaryCode
+  constructor
+  · intro code_eq
+    apply DecimalSetterCarry.code_injective
+    exact_mod_cast code_eq
+  · intro word_eq
+    rw [word_eq]
+
+/-- Over the one-`R_c` root, a shallow pole is exactly equality of the target's upper and lower
+boundary codes. -/
+theorem ruleCRoot_hitsSquarePole_iff_boundaryCode_eq
+    {β : Nat} (β_pos : 0 < β) (body : List TagLetter) (target : List NearyTile) :
+    HitsSquarePole β body target [ruleCRoot] ↔
+      upperBoundaryCode β target = lowerBoundaryCode β body target := by
+  rw [hitsSquarePole_single_iff_generalizedRawHead β_pos]
+  have root_ends : EndsInRule ruleCRoot := by
+    exact ⟨[], .c, by simp [ruleCRoot]⟩
+  obtain ⟨root_unit, complement_unit⟩ := sourceBoundary_decimalUnits β_pos root_ends
+  have factor_ne :
+      9 * upperBoundaryCode β ruleCRoot * upperBoundaryComplement β ruleCRoot ≠ 0 :=
+    mul_ne_zero (mul_ne_zero (by norm_num) root_unit.1.1) complement_unit.1.1
+  constructor
+  · intro pole
+    have scaled :
+        (9 * upperBoundaryCode β ruleCRoot * upperBoundaryComplement β ruleCRoot) *
+            upperBoundaryCode β target =
+          (9 * upperBoundaryCode β ruleCRoot * upperBoundaryComplement β ruleCRoot) *
+            lowerBoundaryCode β body target := by
+      calc
+        (9 * upperBoundaryCode β ruleCRoot * upperBoundaryComplement β ruleCRoot) *
+              upperBoundaryCode β target =
+            DecimalSetterCarry.gap ((10 : ℚ) ^ β) *
+              upperBoundaryCode β target * upperBoundaryCode β ruleCRoot := by
+          rw [← ruleCRoot_complement_calibration]
+          ring
+        _ = DecimalSetterCarry.lift ((10 : ℚ) ^ β) *
+              lowerBoundaryCode β body target * upperBoundaryComplement β ruleCRoot := pole
+        _ = (9 * upperBoundaryCode β ruleCRoot *
+              upperBoundaryComplement β ruleCRoot) *
+              lowerBoundaryCode β body target := by
+          rw [← ruleCRoot_code_calibration]
+          ring
+    exact mul_left_cancel₀ factor_ne scaled
+  · intro code_eq
+    rw [code_eq]
+    calc
+      DecimalSetterCarry.gap ((10 : ℚ) ^ β) *
+            lowerBoundaryCode β body target * upperBoundaryCode β ruleCRoot =
+          (9 * upperBoundaryComplement β ruleCRoot) *
+            lowerBoundaryCode β body target * upperBoundaryCode β ruleCRoot := by
+        rw [ruleCRoot_complement_calibration]
+      _ = (9 * upperBoundaryCode β ruleCRoot) *
+            lowerBoundaryCode β body target * upperBoundaryComplement β ruleCRoot := by ring
+      _ = DecimalSetterCarry.lift ((10 : ℚ) ^ β) *
+            lowerBoundaryCode β body target * upperBoundaryComplement β ruleCRoot := by
+        rw [ruleCRoot_code_calibration]
+
+/-- Complete one-`R_c` shallow-root normalization: its pole language is exactly the literal
+Neary terminal language, so this root admits no malformed shallow pole. -/
+theorem ruleCRoot_hitsSquarePole_iff_terminalMatch
+    {β : Nat} (β_pos : 0 < β) (body : List TagLetter) (target : List NearyTile) :
+    HitsSquarePole β body target [ruleCRoot] ↔
+      spell (nearyUpper β) target ++ nearyMarker β =
+        spell (nearyLower β body) target := by
+  rw [ruleCRoot_hitsSquarePole_iff_boundaryCode_eq β_pos,
+    boundaryCode_eq_iff_terminalMatch]
 
 /-- The lawful minimum-body target hits the exact shallow square-reset pole over the one-`R_c`
 root. -/
 theorem minimumBodyTarget_hitsSquarePole {β : Nat} (β_pos : 0 < β)
     {body : List TagLetter} (body_length : body.length = β - 1) :
-    HitsSquarePole β body (minimalBodyWord body) [minimumBodyRoot] := by
-  rw [hitsSquarePole_single_iff_generalizedRawHead β_pos]
-  rw [minimumBodyTarget_boundaryCode_eq β_pos body_length]
-  calc
-    DecimalSetterCarry.gap ((10 : ℚ) ^ β) *
-          lowerBoundaryCode β body (minimalBodyWord body) *
-          upperBoundaryCode β minimumBodyRoot =
-        (9 * upperBoundaryComplement β minimumBodyRoot) *
-          lowerBoundaryCode β body (minimalBodyWord body) *
-          upperBoundaryCode β minimumBodyRoot := by
-      rw [minimumBodyRoot_complement_calibration]
-    _ = (9 * upperBoundaryCode β minimumBodyRoot) *
-          lowerBoundaryCode β body (minimalBodyWord body) *
-          upperBoundaryComplement β minimumBodyRoot := by ring
-    _ = DecimalSetterCarry.lift ((10 : ℚ) ^ β) *
-          lowerBoundaryCode β body (minimalBodyWord body) *
-          upperBoundaryComplement β minimumBodyRoot := by
-      rw [minimumBodyRoot_code_calibration]
+    HitsSquarePole β body (minimalBodyWord body) [ruleCRoot] := by
+  exact (ruleCRoot_hitsSquarePole_iff_terminalMatch β_pos body _).mpr
+    (minimumBodyTarget_word_identity β_pos body_length)
 
 private theorem exists_eraseTarget_coreSpelling (front : List TagLetter)
     (last : TagLetter) :
     ∃ core,
       CoreSpelling core
-        (letterEraseBlock (front ++ [last]) :: [minimumBodyRoot]) := by
+        (letterEraseBlock (front ++ [last]) :: [ruleCRoot]) := by
   induction front with
   | nil =>
       refine ⟨[some last, none, none, some .c], ?_⟩
-      simpa [letterEraseBlock, minimumBodyRoot] using
+      simpa [letterEraseBlock, ruleCRoot] using
         CoreSpelling.square last (CoreSpelling.terminal .c)
   | cons letter front induction =>
       obtain ⟨core, spelling⟩ := induction
@@ -154,13 +213,13 @@ private theorem exists_eraseTarget_coreSpelling (front : List TagLetter)
 /-- Every nonempty minimum body has a literal cube-free core spelling for the shallow pole. -/
 theorem exists_minimumBody_coreSpelling {body : List TagLetter} (body_ne : body ≠ []) :
     ∃ core,
-      CoreSpelling core (minimalBodyWord body :: [minimumBodyRoot]) := by
+      CoreSpelling core (minimalBodyWord body :: [ruleCRoot]) := by
   induction body using List.reverseRecOn with
   | nil => exact False.elim (body_ne rfl)
   | append_singleton front last =>
       obtain ⟨core, spelling⟩ := exists_eraseTarget_coreSpelling front last
       refine ⟨some .c :: core, ?_⟩
-      simpa [minimalBodyWord, minimumBodyRoot, letterEraseBlock] using
+      simpa [minimalBodyWord, ruleCRoot, letterEraseBlock] using
         CoreSpelling.rule .c spelling
 
 /-- Every minimum-length body occupies the shallow branch of the complete parsed zero frontier. -/
@@ -181,7 +240,7 @@ theorem hasParsedZeroFrontier_of_minimumBody {β : Nat} (β_large : 2 < β)
   have target_multi : 2 ≤ (minimalBodyWord body).length := by
     simp [minimalBodyWord, body_length]
     omega
-  exact ⟨core, minimalBodyWord body, minimumBodyRoot, [], spelling, bridge_zero,
+  exact ⟨core, minimalBodyWord body, ruleCRoot, [], spelling, bridge_zero,
     blocks_law.1, blocks_law.2, pole, Or.inr (Or.inl ⟨target_multi, rfl⟩)⟩
 
 /-- Every minimum-length body produces an actual mortal rational decimal setter. This witness is

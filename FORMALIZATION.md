@@ -1624,6 +1624,13 @@ has `9H=lift` and `9Δ=gap`. It therefore occupies the exact shallow `MM-S74` fr
 source already halts and this target is its unique terminal spelling, so the pole is lawful.
 Compiler-emitted bodies have length `(safetyBound·β+1)(β−1)>β−1` and remain outside this slice.
 
+Record [`MM-S81`](SALVAGE.md#mm-s81-one-r_c-root-terminal-normalization) removes the minimum-body
+restriction from the root normalization. For every body and target,
+`HitsSquarePole target [[R_c]]` is equivalent first to equality of its boundary codes and then,
+by radix-ten code injectivity, to the literal Neary terminal equation. Hence the complete
+one-`R_c` shallow-root pole language is lawful; malformed shallow roots must have another
+rule-ended spelling.
+
 Record [`MM-S37`](SALVAGE.md#mm-s37-decimal-three-shape-frontier-extinction) separates the
 ternary and decimal first-multi-transfer fronts. The single theorem
 `DecimalSetterDepth.firstMultiTransfer_threeShapeFrontier_impossible` consumes the three role
@@ -1679,7 +1686,7 @@ the periodic saturation theorem and its remaining arithmetic boundary are recons
 formalization and the shell attack are tracked in
 [#7](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/7).
 
-The `M₅(3)` delimiter attack has thirteen foundational records:
+The `M₅(3)` delimiter attack has fourteen foundational records:
 
 | Record | Formalization obligation |
 | --- | --- |
@@ -1690,6 +1697,7 @@ The `M₅(3)` delimiter attack has thirteen foundational records:
 | [`MM-S74`](SALVAGE.md#mm-s74-triple-free-bridge-frontier) | recursive delimiter-cube coefficient factorization, exhaustive cube-free block parser, exact execution, and mortality-equivalent singleton/shallow/deep pole frontier |
 | [`MM-S77`](SALVAGE.md#mm-s77-shallow-generalized-raw-head-adapter) | exact shallow square-reset equation, decimal coefficient calibration, and full-root code/complement unit shells |
 | [`MM-S79`](SALVAGE.md#mm-s79-minimum-body-lawful-shallow-pole) | literal minimum-body target identity, exact shallow frontier witness, immediate source halting, unique terminal spelling, and compiler-length separation |
+| [`MM-S81`](SALVAGE.md#mm-s81-one-r_c-root-terminal-normalization) | exact equivalence between the one-`R_c` shallow pole language and literal Neary terminal matches |
 | [`MM-S01`](SALVAGE.md#mm-s01-square-run-projective-normal-form) | invariant square-run plane, invertible `2 × 2` transfer, Möbius normalization, rank-one fracture grammar, and equivalence with pole avoidance |
 | [`MM-S02`](SALVAGE.md#mm-s02-reset-zero-projective-peeling) | scaled transfer identity, exact two-shell classification of all poles, and reset-zero one-transfer avoidance |
 | [`MM-O16`](SALVAGE.md#mm-o16-exact-delimiter-pair-obstruction) | generic ignored-pair immortality is formalized; paired common-kernel and cubic companion specializations are audited |
@@ -2153,7 +2161,7 @@ fixed-rank decision problem.
 | `DecimalSetterMatrix.lean` | explicit decimal `5 × 5` setter, delimiter ranks, regular decoder, internal separator, and forward rational compiler |
 | `DecimalSetterFracture.lean` | greedy delimiter-cube fracture and complete arbitrary-product scalar-bridge normal form |
 | `DecimalSetterBridge.lean` | recursive cube elimination, exhaustive triple-free block parser, mortality-equivalent pole frontier, and exact shallow generalized raw-head adapter |
-| `DecimalSetterMinimumBody.lean` | minimum-body lawful shallow pole, exact parsed frontier witness, and compiler-image length separation |
+| `DecimalSetterMinimumBody.lean` | one-`R_c` terminal normalization, minimum-body lawful shallow pole, exact parsed frontier witness, and compiler-image length separation |
 | `DecimalSetterInteger.lean` | explicit three-label integer `M₅(3)` family and forward Neary compiler |
 | `DecimalSetterArithmetic.lean` | decimal setter centered carry, reciprocal recurrence, coupled `2`/`5` target shells, and successive-pole valuation balance |
 | `DecimalSetterCarry.lean` | two-reset successive-pole identities, joint depth constraints, exact decimal suffix exhaustion, first-transfer prefix separation, and the ordinary depth-two A/B shell forest |

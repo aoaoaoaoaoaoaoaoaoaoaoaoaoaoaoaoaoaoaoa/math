@@ -1053,6 +1053,13 @@ compiler remains separated because its emitted length is strictly larger than `Î
 shallow attack must use that length surplus or finer compiler grammar while preserving this
 lawful normalization.
 
+[`MM-S81`](SALVAGE.md#mm-s81-one-r_c-root-terminal-normalization) closes the entire one-`R_c`
+shallow-root branch, not only its minimum-body instance. The root calibrations cancel S77's
+equation to `P=V`, and injectivity of the decimal word code turns that equality into the literal
+Neary terminal equation. Thus every such pole is lawful and no malformed survivor exists over
+`[R_c]`. The unresolved shallow roots are precisely the other parser-lawful rule-ended blocks;
+their extra roles must now supply the separating discrepancy.
+
 The ternary and decimal branches now separate at their first multi-transfer front.
 [`MM-S37`](SALVAGE.md#mm-s37-decimal-three-shape-frontier-extinction) substitutes each of the
 three role shapes left by the swapped ternary gate into the decimal carrier equation. All are
