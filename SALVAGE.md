@@ -164,6 +164,7 @@ file owns the mathematical stock.
 | [`MM-S64`](#mm-s64-unique-predecessor-cylinder) | structure theorem and obstruction | a nonterminal full-erasure-tail pole selects one exact high-precision cylinder for its primitive predecessor; a final literal `D_c` forces `3^(β−1)` into the predecessor numerator | formalized | active |
 | [`MM-S68`](#mm-s68-backward-numerator-resonance) | structure theorem and obstruction | a deep successor numerator forces full upper-length cancellation and a predecessor cylinder; across literal `D_c` it toggles exactly into the full carrier-gap congruence | formalized | active |
 | [`MM-S66`](#mm-s66-complete-rule-bearing-first-entry-extinction) | obstruction | every rule-bearing block misses the physical multi-role pole shell from a lawful two-`c` raw head | formalized | active |
+| [`MM-S67`](#mm-s67-complete-distinguished-first-entry-extinction) | obstruction | no non-singleton physical first block carries a lawful two-`c` raw head into another multi-role pole | formalized | active |
 | [`R32-S01`](#r32-s01-split-return-normal-form) | structure theorem | rank-two cuts reduce one-unit binary mortality to a `2 × 2` return recurrence | formalized | graduated |
 | [`R32-S02`](#r32-s02-two-plane-edge-square) | structure theorem | two rank-two generators are a two-vertex square of `2 × 2` edges | formalized | graduated |
 | [`R32-O01`](#r32-o01-rank-one-profile-collapse) | obstruction | a rank-one generator reduces mortality to order-at-most-three scalar recurrence zeros | audited | stock |
@@ -6372,8 +6373,8 @@ assembly in `letterErase_rawHead_multi_shell_impossible`.
 **Artifact:**
 [`audits/m53-all-erasure-first-entry-extinction-2026-08-31.md`](audits/m53-all-erasure-first-entry-extinction-2026-08-31.md).
 
-**Next:** classify the exact rule-bearing raw-entry grammar, then reconnect it to the later
-generalized-carrier and singleton seams.
+**Next:** the rule-bearing branch and this all-erasure branch graduate into
+[`MM-S67`](#mm-s67-complete-distinguished-first-entry-extinction).
 
 ### MM-S42: Swapped positive depth-one extinction
 
@@ -6737,8 +6738,51 @@ through `rightmostRule_rawHead_shell_impossible`.
 **Artifact:**
 [`audits/m53-complete-rule-bearing-first-entry-extinction-2026-08-31.md`](audits/m53-complete-rule-bearing-first-entry-extinction-2026-08-31.md).
 
-**Next:** split every physical first block at its rightmost rule versus the all-erasure branch,
-then discharge those arms with `MM-S66` and `MM-S53`.
+**Next:** the exhaustive physical phase split graduates into
+[`MM-S67`](#mm-s67-complete-distinguished-first-entry-extinction).
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S67: Complete distinguished first-entry extinction
+
+**Kind:** obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+Every physical role block admits one of two exact factorizations. If it contains no rule, each
+tile is the erasure of its own tag letter, so the block is the all-erasure word handled by
+`MM-S53`. If it contains a rule, factor at the rightmost one; its suffix is necessarily the
+letterwise erasure tail handled by `MM-S66`.
+
+`rawHead_firstEntry_multi_shell_impossible` transports this phase factorization through both
+upper and lower spellings and through the exact physical depth
+
+```text
+|tagEncode_β(w)|−1=|w|+#_b(w)(β+1)−1.
+```
+
+Both arms are empty. Hence no non-singleton physical first block carries the distinguished
+decimal-unit two-`c` raw head into another multi-role pole.
+
+**Scope:** the theorem covers arbitrary finite role words from the distinguished raw head to a
+multi-role pole. It does not by itself cover singleton first targets, later generalized
+carriers, or the outer compiler theorem that reduces mortality to such a first entry.
+
+**Use:** discharge the complete raw-head first-entry hypothesis in the setter
+projective-avoidance assembly. No residual grammar constructor remains at this boundary.
+
+**Formalization:**
+[`MatrixMortality/DecimalSetterFirstEntry.lean`](MatrixMortality/DecimalSetterFirstEntry.lean),
+through `allErase_or_exists_rightmostRule` and
+`rawHead_firstEntry_multi_shell_impossible`.
+
+**Artifact:**
+[`audits/m53-complete-distinguished-first-entry-extinction-2026-08-31.md`](audits/m53-complete-distinguished-first-entry-extinction-2026-08-31.md).
+
+**Next:** compose this extinction through the setter projective-avoidance theorem and the
+integer mortality/source compiler; audit whether any singleton or later-carrier hypothesis
+remains.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).

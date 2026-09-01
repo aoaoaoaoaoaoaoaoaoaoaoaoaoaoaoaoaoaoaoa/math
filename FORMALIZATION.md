@@ -2053,6 +2053,12 @@ exhaustive two-letter split. A rightmost-rule word containing `b` is impossible 
 one without `b` consists entirely of `c` and is impossible by `MM-S65`. Consequently no
 rule-bearing block carries the distinguished two-`c` raw head into a multi-role pole.
 
+Record [`MM-S67`](SALVAGE.md#mm-s67-complete-distinguished-first-entry-extinction) performs the
+exhaustive phase split on an arbitrary physical role block. A word with no rule is exactly the
+letterwise all-erasure block and dies by `MM-S53`. Otherwise it factors at its unique rightmost
+rule, with only erasures afterward, and dies by `MM-S66`. Thus no non-singleton first block
+carries the distinguished two-`c` raw head into another multi-role pole.
+
 Record [`MM-S37`](SALVAGE.md#mm-s37-decimal-three-shape-frontier-extinction) separates the
 ternary and decimal first-multi-transfer fronts. The single theorem
 `DecimalSetterDepth.firstMultiTransfer_threeShapeFrontier_impossible` consumes the three role
@@ -2983,6 +2989,7 @@ fixed-rank decision problem.
 | `SwappedSetterPredecessorCylinder.lean` | unique high-precision predecessor cylinder at a nonterminal full-tail pole, literal-deletion numerator consequence, and sharpness on the distinguished deletion spine |
 | `SwappedSetterBackwardResonance.lean` | backward deep-numerator resonance, exact high-precision ancestry cylinder, literal-deletion numerator/gap toggle, and the zero-carrier terminal fork |
 | `DecimalSetterRuleEntry.lean` | exhaustive b-bearing/all-`c` split and complete rule-bearing first-entry extinction |
+| `DecimalSetterFirstEntry.lean` | exhaustive phase factorization and complete distinguished raw-head first-entry extinction |
 | `PairedMortality.lean` | common-column mortality converse and exact integer `4 × 4` family |
 | `PhaseFracture.lean` | phase normalization and dimension-free projective-identification contradiction |
 | `PhaseRigidity.lean` | checked local role algebra, discrepancy commutators, and invariant-pencil rigidity |
