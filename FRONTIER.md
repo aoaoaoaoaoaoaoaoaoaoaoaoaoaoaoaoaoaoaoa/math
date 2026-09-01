@@ -3691,6 +3691,12 @@ vectors generate an injective `ℕ²` family of pairwise distinct guarded loops 
 source. This is [`D2-S16`](SALVAGE.md#d2-s16-periodic-centralizer-determinant-fork). Hence a
 genuinely noncyclic centralizer cannot be sporadic: one witness saturates the fixed source in two
 parameters. The live centralizer question is whether this independent branch exists at all.
+The same slope split applies without periodicity. For any fixed rational source, two schedules
+have the same output exactly when they are either equal-length/equal-sum representatives of one
+global affine-kernel class, or have different slopes and the source equals their explicit unique
+collision source. This is [`D2-S17`](SALVAGE.md#d2-s17-fixed-endpoint-fibre-dichotomy). Thus the
+general fixed-endpoint search may quotient the balanced kernel grade by grade and send every
+cross-grade pair to one source equation before considering the target.
 The deepest of those three branches is itself a full depth reset. In normalized band coordinates
 `U(d,μ)=1/5+(3/10)(2/3)^dμ`, every target band `d≥2` contains a point whose `d−2` predecessor has
 any prescribed band `n≥7` and mantissa in `(2/3,1]`. An explicit guarded subfamily fixes target
@@ -4040,7 +4046,8 @@ universal computation.
    fibres rather than refining the wall-only graph. `D2-S15` identifies equality of periodic
    endpoints with global affine commutation and splits it into balanced-kernel and explicit
    collision-source fibres. `D2-S16` further turns any two-loop fibre into either a global power
-   relation or an injective rank-two guarded loop family.
+   relation or an injective rank-two guarded loop family. `D2-S17` extends the balanced-kernel/
+   collision-source split to arbitrary fixed endpoint fibres.
    Keep the non-elementary lanes independent: adelic cone types, parabolic rational subsets,
    trace/height descent, finite-obstruction saturation, and valuation universality.
 7. Synthesize the returned attacks by the discriminating signals above; do not average

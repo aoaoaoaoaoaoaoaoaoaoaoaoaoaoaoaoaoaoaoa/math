@@ -1527,6 +1527,8 @@ open MatrixMortality
 #print axioms MixedPrimeDebt.shellPeriodicPoint_eq_iff_commute
 #print axioms MixedPrimeDebt.shellPeriodicPoint_eq_iff_globalRelation_of_length_sum
 #print axioms MixedPrimeDebt.shellPeriodicPoint_eq_iff_collisionSource
+#print axioms MixedPrimeDebt.shellRun_eq_iff_globalRelation_of_length_sum
+#print axioms MixedPrimeDebt.shellRun_eq_iff_kernel_or_collisionSource
 #print axioms MixedPrimeDebt.shellPeriodicPoint_schedulePower
 #print axioms MixedPrimeDebt.commonPeriodicPoint_bipower_loop
 #print axioms MixedPrimeDebt.shellSlope_bipower_injective
