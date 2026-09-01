@@ -367,6 +367,14 @@ control word in both phases. It checks the complete `3+3+2+1` rational realizati
 three returns are `T,D_b,D_c`, every later return is a nonzero geometric multiple of the tilted
 separator, and a nonzero tail eigenline excludes pure-transition zeros.
 
+The benchmark transfer series is also minimal within this exact architecture. For arbitrary
+rational tail amplitude and eigenratio and every `q<−3/2`, Lean proves that
+`T,D_b,D_c,λux,λτux,…`, with the benchmark column `u=(67,0,81,−1)ᵀ` and row
+`x=(1,q,q,q)`, has no realization below nine states. Four explicit `9 × 9` minors cover the zero
+tail, generic tail scale, and two exceptional-pivot branches. This does not constrain a compiler
+which changes an early moment, uses several tail modes, or preserves only existential zeros. See
+[`m92-tilted-geometric-tail-rank-nine-2026-08-31.md`](audits/m92-tilted-geometric-tail-rank-nine-2026-08-31.md).
+
 A generic singular-return theorem retains both exterior waits by sandwiching any physical zero
 with the output and input. It reduces pair mortality to the infinite return family without an
 input/output splitting or exterior-kernel grammar. Nonzero return scalings and a right-inverse
@@ -3101,6 +3109,7 @@ fixed-rank decision problem.
 | `ChangedSeparatorMomentThree.lean` | exact first geometric-tail return |
 | `ChangedSeparatorTransitionPowers.lean` | closed transition-power action on the emitted and tail bases |
 | `ChangedSeparatorTailMoments.lean` | geometric tail recurrence for every later return |
+| `TiltedGeometricHankel.lean` | uniform exact nine-state lower bound for the benchmark tilted geometric-tail family |
 | `SingularReturnFamily.lean` | mortality-preserving return compression for singular ambient generators |
 | `ChangedSeparatorMortality.lean` | complete rational and canonical-integer rank-nine mortality equivalence |
 | `RationalClearing.lean` | mortality-preserving common-denominator clearing for finite rational matrix families |
@@ -3577,6 +3586,8 @@ fixed-rank decision problem.
 | Canonical `M₁₀(2)` instance mortal iff tag halting | `nearyMortality102_mortal_iff_tagHaltsFrom` |
 | Every zero-padded `M₁₀₊ₙ(2)` instance iff tag halting | `nearyMortality10Plus_mortal_iff_tagHaltsFrom` |
 | A singular two-generator pair is mortal iff its complete return family is mortal | `ReturnFamily.pairGenerator_isMortal_iff_returnFamily` |
+| The width-three `bb` rank-nine compiler has the benchmark tilted geometric moments | `TiltedGeometricHankel.benchmark_return_eq_moment` |
+| Every exact benchmark tilted geometric-tail realization in the same-zero chamber needs nine states | `TiltedGeometricHankel.nine_le_card_of_tilted_geometric_transfer_moments` |
 | The rank-nine transition has no zero pure power | `ChangedSeparatorRealization.transition_pow_ne_zero` |
 | Every rank-nine return is a nonzero scaling of one tilted role | `ChangedSeparatorRealization.returnMatrix_eq_scaled_tiltedFamily` |
 | The rational rank-nine pair is mortal iff the paired scalar series vanishes | `ChangedSeparatorRealization.generator_mortal_iff_paired_zero` |

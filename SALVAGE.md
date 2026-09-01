@@ -102,6 +102,7 @@ file owns the mathematical stock.
 | [`MM-O24`](#mm-o24-sparse-transfer-moment-tax) | obstruction | arbitrary distinct placements of the three paired roles with a constant separator tail need at least ten states; nonconsecutive placements need eleven | formalized late branch; audited early assembly | graduated |
 | [`MM-O25`](#mm-o25-moving-tail-transfer-tax) | obstruction | exact series agreeing after time `m`, with a last rank-three difference, have realization dimensions summing to at least `3(m+1)` | formalized | graduated |
 | [`MM-O26`](#mm-o26-geometric-tail-transfer-tax) | obstruction | every exact consecutive paired-role series with a nonzero scalar geometric separator tail needs at least ten states | formalized core; audited six-order certificates | graduated |
+| [`MM-O27`](#mm-o27-tilted-geometric-tail-rank-nine-wall) | obstruction | every exact benchmark tilted-tail realization in the injective chamber needs at least nine states, for arbitrary geometric-tail parameters | formalized | graduated |
 | [`MM-C05`](#mm-c05-tilted-separator-rank-nine-transfer) | compiler | tilted same-zero separation and singular return compression compile universal halting to two `9 × 9` integer matrices | formalized | graduated |
 | [`MM-M01`](#mm-m01-off-diagonal-companion-interface) | partial mechanism | off-diagonal rank-two bridge has a complete fracture grammar | audited | stock |
 | [`MM-M02`](#mm-m02-bordered-toggle) | partial mechanism | one lifted toggle has a stable rank-two third power | audited | parked |
@@ -2447,6 +2448,48 @@ moving tail must have at least two modes or leave exact moment preservation.
 
 **Artifact:**
 [`audits/m92-geometric-tail-transfer-hankel-2026-08-31.md`](audits/m92-geometric-tail-transfer-hankel-2026-08-31.md).
+
+### MM-O27: Tilted geometric-tail rank-nine wall
+
+**Kind:** obstruction
+**Evidence:** formalized
+**Disposition:** graduated
+
+At deletion width three and body `bb`, let `T,D_b,D_c` be the paired benchmark roles, let
+
+```text
+u=(67,0,81,−1)ᵀ,     x=(1,q,q,q),     q<−3/2,
+```
+
+and consider the exact transfer moments
+
+```text
+T, D_b, D_c, λux, λτux, λτ²ux, …
+```
+
+for arbitrary rational `λ,τ`, including zero. Every rational realization `Mₙ=VAⁿU` of this
+series has at least nine states. Four sparse `9 × 9` Hankel minors cover the full parameter
+space. The zero-tail case is nonsingular directly. Away from
+`209357λ=473489874`, a second minor is nonsingular. At that exceptional scale a primary affine
+pivot either survives, or its vanishing determines `τ`; the last pivot is then strictly negative
+throughout `q<−3/2`.
+
+**Scope:** the first three moments, the benchmark tail column, a uniform tilted row, and a single
+scalar geometric tail are exact. The theorem permits arbitrary tail amplitude and eigenratio but
+does not cover moved or changed early roles, sums of tail modes, nonlinear dynamics, or a
+realization preserving only existential zeros.
+
+**Use:** the `MM-C05` benchmark chart has exact transfer rank nine, and no retuning of its tilted
+row or one-state tail within the injective same-zero chamber can produce `M₈(2)`. A dimension-eight
+attack must change the early return language, introduce a genuinely different tail, or abandon
+exact transfer-moment preservation.
+
+**Formalization:** `benchmark_return_eq_moment` and
+`nine_le_card_of_tilted_geometric_transfer_moments` in
+[`MatrixMortality/TiltedGeometricHankel.lean`](MatrixMortality/TiltedGeometricHankel.lean).
+
+**Artifact:**
+[`audits/m92-tilted-geometric-tail-rank-nine-2026-08-31.md`](audits/m92-tilted-geometric-tail-rank-nine-2026-08-31.md).
 
 ### MM-C05: Tilted-separator rank-nine transfer
 

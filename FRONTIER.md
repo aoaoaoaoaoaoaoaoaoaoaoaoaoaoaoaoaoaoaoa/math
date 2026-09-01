@@ -1557,11 +1557,21 @@ leading-`b` invariant required by the chart. Consequently
 `UniversalNeary.codeHalts_reduces_mortality92` is a primitive-recursive many-one reduction from
 code halting, and `UniversalNeary.mortality92_not_computable` proves `M₉(2)` undecidable. Zero
 padding gives `M_d(2)` for every `d≥9`.
+
+[`MM-O27`](SALVAGE.md#mm-o27-tilted-geometric-tail-rank-nine-wall) proves that this benchmark
+series has exact transfer rank nine uniformly over every rational tail amplitude and eigenratio
+and every tilted-row parameter `q<−3/2`. Four sparse `9 × 9` minors cover zero tail, generic tail
+scale, and both exceptional-pivot branches. Thus `M₈(2)` cannot follow by retuning the one-state
+tail or the tilted separator while retaining `T,D_b,D_c` as the first three exact returns. The
+next contraction must change an early return, use a non-geometric or multi-mode mechanism, or
+preserve only the existential zero language.
+
 See
 [`audits/m92-run-length-transfer-hankel-2026-08-31.md`](audits/m92-run-length-transfer-hankel-2026-08-31.md),
 [`audits/m92-sparse-transfer-hankel-2026-08-31.md`](audits/m92-sparse-transfer-hankel-2026-08-31.md),
 [`audits/m92-moving-tail-transfer-hankel-2026-08-31.md`](audits/m92-moving-tail-transfer-hankel-2026-08-31.md),
 [`audits/m92-geometric-tail-transfer-hankel-2026-08-31.md`](audits/m92-geometric-tail-transfer-hankel-2026-08-31.md),
+[`audits/m92-tilted-geometric-tail-rank-nine-2026-08-31.md`](audits/m92-tilted-geometric-tail-rank-nine-2026-08-31.md),
 and [`audits/m92-changed-separator-transfer-2026-08-31.md`](audits/m92-changed-separator-transfer-2026-08-31.md).
 
 ### 4. Three-letter correspondence and direct mortality: `M₃(4)`

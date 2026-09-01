@@ -189,6 +189,7 @@ import MatrixMortality.ChangedSeparatorMomentTwo
 import MatrixMortality.ChangedSeparatorMomentThree
 import MatrixMortality.ChangedSeparatorTailMoments
 import MatrixMortality.ChangedSeparatorMortality
+import MatrixMortality.TiltedGeometricHankel
 import MatrixMortality.ChangedSeparatorEffectivity
 import MatrixMortality.EffectiveRational
 import MatrixMortality.RationalClearing

@@ -130,6 +130,8 @@ open MatrixMortality
 #print axioms GeometricTailHankel.tbcMinor_mulVec_eq_zero_iff
 #print axioms GeometricTailHankel.tbcMinor_det_ne_zero
 #print axioms GeometricTailHankel.ten_le_card_of_tbc_geometric_transfer_moments
+#print axioms TiltedGeometricHankel.benchmark_return_eq_moment
+#print axioms TiltedGeometricHankel.nine_le_card_of_tilted_geometric_transfer_moments
 #print axioms ChangedSeparatorTail.tiltedTernaryCode_injective
 #print axioms ChangedSeparatorTail.nearyTailRatio_lt_neg_three_halves
 #print axioms ChangedSeparatorTail.transferDenominator_lt_zero
