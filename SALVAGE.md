@@ -158,6 +158,7 @@ file owns the mathematical stock.
 | [`MM-S59`](#mm-s59-multiplicative-threshold-suffix-carry) | structure theorem and obstruction | every later swapped pole has an exact multiplicative suffix carry; a full erasure tail forces terminality below the carrier-gap threshold | formalized | active |
 | [`MM-S61`](#mm-s61-primitive-carrier-gap-no-go) | obstruction | primitive deletion carriers already exceed the marker height and then acquire its full modulus, killing both unqualified carrier-gap invariants | formalized | active |
 | [`MM-S60`](#mm-s60-complete-b-bearing-rule-entry-extinction) | obstruction | every b-bearing rightmost-rule block misses the physical multi-role pole shell from a lawful two-`c` raw head | formalized | active |
+| [`MM-S62`](#mm-s62-all-c-position-two-rule-extinction) | obstruction | no all-`c` rightmost-rule block with exactly one preceding role reaches the physical pole shell from a lawful two-`c` raw head | formalized | active |
 | [`R32-S01`](#r32-s01-split-return-normal-form) | structure theorem | rank-two cuts reduce one-unit binary mortality to a `2 × 2` return recurrence | formalized | graduated |
 | [`R32-S02`](#r32-s02-two-plane-edge-square) | structure theorem | two rank-two generators are a two-vertex square of `2 × 2` edges | formalized | graduated |
 | [`R32-O01`](#r32-o01-rank-one-profile-collapse) | obstruction | a rank-one generator reduces mortality to order-at-most-three scalar recurrence zeros | audited | stock |
@@ -6337,8 +6338,9 @@ through `allCDeletion_peeledDoubleCHead_hasValue_five`,
 **Artifact:**
 [`audits/m53-exact-rule-resonance-grammar-2026-08-31.md`](audits/m53-exact-rule-resonance-grammar-2026-08-31.md).
 
-**Next:** the b-bearing coefficient arms graduate into [`MM-S60`](#mm-s60-complete-b-bearing-rule-entry-extinction).
-Resolve the all-`c` position-two boundary with its stronger two-adic phase divisibility.
+**Next:** the b-bearing coefficient arms graduate into [`MM-S60`](#mm-s60-complete-b-bearing-rule-entry-extinction),
+and the all-`c` position-two boundary graduates into
+[`MM-S62`](#mm-s62-all-c-position-two-rule-extinction).
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
@@ -6366,13 +6368,13 @@ cannot reach the physical target depth.
 grammar and dispatches both cases. Hence no distinguished two-`c` raw-head entry containing a
 rule and at least one `b` role reaches a multi-role pole.
 
-**Scope:** the theorem covers rightmost-rule blocks followed only by erasures, from the
-distinguished decimal-unit two-`c` raw head to the physical multi-role shell. It does not cover
-the all-`c` position-two rule boundary, generalized later carriers, or singleton targets.
+**Scope:** the theorem covers b-bearing rightmost-rule blocks followed only by erasures, from
+the distinguished decimal-unit two-`c` raw head to the physical multi-role shell. It does not
+cover all-`c` rules, generalized later carriers, or singleton targets.
 
 **Use:** delete the entire b-bearing rule branch from the distinguished first-entry grammar.
-The only rule-bearing raw-entry constructor left by `MM-S56` is the all-`c` position-two
-boundary.
+The all-`c` branch still contains the position-two boundary and the exact regular or exceptional
+later-frontier resonances isolated by `MM-S56`.
 
 **Formalization:**
 [`MatrixMortality/DecimalSetterRuleCoefficient.lean`](MatrixMortality/DecimalSetterRuleCoefficient.lean),
@@ -6386,7 +6388,53 @@ through `exceptionalThreeLead_hasValue`, `exceptionalAllC_scaled_lead`,
 [`audits/m53-b-bearing-rule-entry-extinction-2026-08-31.md`](audits/m53-b-bearing-rule-entry-extinction-2026-08-31.md).
 
 **Next:** resolve the all-`c` position-two rule boundary using its stronger two-adic phase
-divisibility, then assemble the complete distinguished raw-head first-entry theorem.
+divisibility, then attack the later all-`c` frontier collisions.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S62: All-c position-two rule extinction
+
+**Kind:** obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+Let `n=t+2` be the width of an all-`c` block with one role before its rightmost rule and `t`
+erasures after it. The phase-erased companion has the same all-`c` upper word. Its lower-code
+perturbation has exact five-depth `t+1=n−1` but is divisible by `2^(t+3)`, hence by `2^n`.
+Multiplication by the calibrated carrier factors preserves the five-depth and the two-power
+divisibility.
+
+At a regular raw head with final-seven width `h`, the all-erasure companion is divisible by
+`2^n` whenever `n≤h+2`. The endpoint `n=h+2` uses the additional factor of two in the leading
+coefficient of its `81`-scaled normal form. When `h+3≤n`, the companion instead has exact
+five-depth `h+1<n−1`; adding the phase perturbation preserves that shallower depth. The
+exceptional head has the same dichotomy at `n=2β`: two-divisibility for `n≤2β`, and exact
+companion five-depth `2β−1<n−1` for `2β<n`. Both regimes contradict the physical shell
+`(n−1,n−1)`.
+
+`allCRightmostRule_rawHead_forces_laterResonance` consumes the position-two alternative in the
+`MM-S56` grammar. Every surviving all-`c` rightmost-rule entry must therefore lie on the exact
+later frontier: tail width `h` at a regular head, or `2β−2` at the exceptional head.
+
+**Scope:** the theorem kills exactly the one-preceding-role all-`c` boundary for distinguished
+two-`c` raw-head entry into a multi-role pole. It does not kill the displayed later-frontier
+resonances, generalized carriers, or singleton targets.
+
+**Use:** remove the position-two constructor before coefficient analysis. No enumeration of the
+preceding tile phase or erasure-tail width remains.
+
+**Formalization:**
+[`MatrixMortality/DecimalSetterPositionTwo.lean`](MatrixMortality/DecimalSetterPositionTwo.lean),
+through `regularAllC_twoPower_dvd`, `exceptionalAllC_twoPower_dvd`,
+`positionTwoAllCRightmostRule_rawHead_shell_impossible`, and
+`allCRightmostRule_rawHead_forces_laterResonance`.
+
+**Artifact:**
+[`audits/m53-all-c-position-two-rule-extinction-2026-08-31.md`](audits/m53-all-c-position-two-rule-extinction-2026-08-31.md).
+
+**Next:** classify the normalized coefficient collision on the regular tail `t=h` and the
+exceptional tail `t=2β−2`, then assemble the complete distinguished raw-head rule-entry theorem.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).

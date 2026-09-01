@@ -216,6 +216,7 @@ import MatrixMortality.SwappedSetterHistory
 import MatrixMortality.SwappedSetterThresholdCarry
 import MatrixMortality.SwappedSetterCarrierGap
 import MatrixMortality.DecimalSetterRuleCoefficient
+import MatrixMortality.DecimalSetterPositionTwo
 import MatrixMortality.SchottkyPunctuation
 import MatrixMortality.TwoStateObstructions
 import MatrixMortality.ForcedRuleCCompanion

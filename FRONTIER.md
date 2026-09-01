@@ -1173,9 +1173,16 @@ cancellation on those exceptional arms and the position-two boundary.
 cut and removes the entire b-bearing branch. At the exceptional head, the three scaled leading
 coefficients are `2 or 4`, `2`, and `2`; every possible minimum-depth subset is nonzero modulo
 five. At a regular head, the two tied arms both normalize to `2^h`, and the marker arm is
-strictly deeper. The complete S56 positional grammar therefore has no b-bearing survivor. The
-sole distinguished raw-head rule constructor still open is the all-`c` position-two boundary;
-later generalized carriers and singleton targets remain outside this assembly.
+strictly deeper. The complete S56 positional grammar therefore has no b-bearing survivor.
+
+[`MM-S62`](SALVAGE.md#mm-s62-all-c-position-two-rule-extinction) removes the all-`c`
+position-two boundary. If the block width lies before the regular or exceptional raw-head
+frontier, the phase perturbation and its all-erasure companion are both divisible by the next
+power of two. Beyond that frontier, the companion has strictly shallower exact five-depth than
+the phase perturbation. Either case contradicts the physical equal-depth shell. The surviving
+distinguished raw-head rule grammar is now confined to the later all-`c` frontier: tail width
+`h` at a regular head or `2β−2` at the exceptional head. Generalized carriers and singleton
+targets remain outside this assembly.
 
 The ternary and decimal branches now separate at their first multi-transfer front.
 [`MM-S37`](SALVAGE.md#mm-s37-decimal-three-shape-frontier-extinction) substitutes each of the

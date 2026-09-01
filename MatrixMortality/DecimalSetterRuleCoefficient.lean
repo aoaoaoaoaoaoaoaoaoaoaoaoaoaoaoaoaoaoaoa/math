@@ -787,12 +787,11 @@ theorem exceptionalBBearingRightmostRule_rawHead_shell_impossible
     exact (min_le_right _ _).trans (min_le_right _ _)
   omega
 
-/-- Beyond the regular raw-head frontier, scaling the all-`D_c` residual by `81` exposes the
-normalized leading residue `2^suffix`. -/
-theorem regularAllC_scaledEightyOne_lead
+/-- Scaling a regular-head all-`D_c` residual by `81` separates its raw-head, carrier-width,
+and calibration depths.  The raw-head coefficient is even and congruent to `3` modulo five. -/
+theorem regularAllC_residualNormalForm
     {β suffix n : Nat} {H μ E G P V T R : ℤ}
     (suffix_below : suffix + 2 ≤ β)
-    (width_deep : suffix + 1 < n)
     (head_eq : 9 * H = 5 * 10 ^ (β + 2) + 2 * 10 ^ suffix - 7)
     (mu_eq : 9 * μ = 52 * 10 ^ β - 7)
     (gap_eq : E = 18 * 10 ^ β - 63)
@@ -801,7 +800,9 @@ theorem regularAllC_scaledEightyOne_lead
     (lower_eq : 9 * V = 7 * 10 ^ n - 7)
     (trace_eq : T = E * P + G * V)
     (residual_eq : R = H * T - 10 * μ * G * V) :
-    HasFiveLeadingResidue (81 * R) (suffix + 1) (2 ^ suffix) := by
+    ∃ K A B : ℤ,
+      81 * R = 10 ^ (suffix + 1) * K + 10 ^ n * A + 10 ^ β * B ∧
+      (5 : ℤ) ∣ K - 3 ∧ (2 : ℤ) ∣ K := by
   let ρ : ℤ := 10 ^ β
   let K : ℤ := 245 * 10 ^ (β + 2 - suffix) + 98
   let A : ℤ :=
@@ -819,6 +820,37 @@ theorem regularAllC_scaledEightyOne_lead
     dsimp [ρ, K, A, B]
     rw [pow_two, ← pow_add] at decomposition
     simpa [pow_succ, pow_add, mul_assoc, mul_left_comm, mul_comm] using decomposition
+  have K_sub_three_dvd : (5 : ℤ) ∣ K - 3 := by
+    refine ⟨49 * 10 ^ (β + 2 - suffix) + 19, ?_⟩
+    dsimp only [K]
+    ring
+  have exponent_positive : 1 ≤ β + 2 - suffix := by omega
+  have power_even : (2 : ℤ) ∣ 10 ^ (β + 2 - suffix) :=
+    (pow_dvd_pow (2 : ℤ) exponent_positive).trans
+      (pow_dvd_pow_of_dvd (by norm_num : (2 : ℤ) ∣ 10) (β + 2 - suffix))
+  have K_even : (2 : ℤ) ∣ K := by
+    dsimp only [K]
+    exact dvd_add (power_even.mul_left 245) (by norm_num)
+  exact ⟨K, A, B, decomposition', K_sub_three_dvd, K_even⟩
+
+/-- Beyond the regular raw-head frontier, scaling the all-`D_c` residual by `81` exposes the
+normalized leading residue `2^suffix`. -/
+theorem regularAllC_scaledEightyOne_lead
+    {β suffix n : Nat} {H μ E G P V T R : ℤ}
+    (suffix_below : suffix + 2 ≤ β)
+    (width_deep : suffix + 1 < n)
+    (head_eq : 9 * H = 5 * 10 ^ (β + 2) + 2 * 10 ^ suffix - 7)
+    (mu_eq : 9 * μ = 52 * 10 ^ β - 7)
+    (gap_eq : E = 18 * 10 ^ β - 63)
+    (lift_eq : G = 502 * 10 ^ β - 7)
+    (upper_eq : 9 * P = 50 * 10 ^ β * 10 ^ n + 2 * 10 ^ β - 7)
+    (lower_eq : 9 * V = 7 * 10 ^ n - 7)
+    (trace_eq : T = E * P + G * V)
+    (residual_eq : R = H * T - 10 * μ * G * V) :
+    HasFiveLeadingResidue (81 * R) (suffix + 1) (2 ^ suffix) := by
+  obtain ⟨K, A, B, decomposition', K_sub_three_dvd, _⟩ :=
+    regularAllC_residualNormalForm suffix_below head_eq mu_eq gap_eq lift_eq
+      upper_eq lower_eq trace_eq residual_eq
   let widthRemainder := n - (suffix + 1)
   let headRemainder := β - (suffix + 1)
   have width_remainder_positive : 1 ≤ widthRemainder := by
@@ -841,10 +873,6 @@ theorem regularAllC_scaledEightyOne_lead
       show n - (suffix + 1) = widthRemainder by rfl,
       show β - (suffix + 1) = headRemainder by rfl]
     norm_num
-    ring
-  have K_sub_three_dvd : (5 : ℤ) ∣ K - 3 := by
-    refine ⟨49 * 10 ^ (β + 2 - suffix) + 19, ?_⟩
-    dsimp only [K]
     ring
   have K_mod : K ≡ 3 [ZMOD 5] :=
     (Int.modEq_iff_dvd.mpr K_sub_three_dvd).symm
