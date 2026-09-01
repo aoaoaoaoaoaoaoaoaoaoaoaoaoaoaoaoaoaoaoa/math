@@ -266,6 +266,7 @@ file owns the mathematical stock.
 | [`G3-S17`](#g3-s17-uniform-pumped-context-classification) | uniform obstruction and finite residue | exact all-depth cuts eliminate every moving internal cell in seven pump families; family six's sole static internal residue contracts to 156 rejected geometries | formalized uniform obstruction; exact independently replayable certificate | active |
 | [`G3-S18`](#g3-s18-exact-mixed-prime-address-comparators) | structure theorem and comparator | evaluation at zero globally decodes the free `DT/TD` stack; at equal length, both commutation and the literal five-factor fork compare arbitrary addresses exactly | formalized | active |
 | [`G3-S19`](#g3-s19-aligned-address-fork-obstruction) | obstruction | the complete forced fork cannot lie in the aligned `DT/TD` address submonoid; some control boundary must break address phase | formalized | active |
+| [`G3-S20`](#g3-s20-common-address-wrapper-obstruction) | obstruction | a common phase-breaking prefix and suffix cancel, so they cannot wrap the aligned address comparator into the forced fork | formalized | active |
 | [`G3-M02`](#g3-m02-square-root-punctuation-fracture) | partial mechanism | a rank-two square root gives an exact `SS`-free mortality grammar | formalized | closed |
 | [`G3-O10`](#g3-o10-square-root-boundary-saturation) | obstruction | every nondegenerate rank-one square root preserves boundary coefficient zeros | formalized | graduated |
 | [`G3-M01`](#g3-m01-free-group-discrepancy-engine) | partial mechanism | Carvalho's transducer gives an all-word marker-tail equation and a cyclic exponent-one equalizer | audited | active |
@@ -10841,6 +10842,44 @@ an interior address discrepancy, or expose two offsets through a separate endpoi
 **Next:** classify the smallest phase-breaking wrapper which can place an injective address
 segment inside the forced kernel pair without making the two complete fork words aligned. Test its
 arbitrary-word endpoint language before any larger search.
+
+### G3-S20: Common address-wrapper obstruction
+
+**Kind:** obstruction
+
+**Evidence:** formalized
+
+**Disposition:** active
+
+A shared phase-breaking wrapper does not evade `G3-S19`. Suppose the forced flat and nested fork
+words factor as
+
+```text
+P·expandAddress(u)·Q,       P·expandAddress(v)·Q.
+```
+
+The fixed literal contexts `P,Q` may be unaligned, source-dependent, nonempty, or empty, and the
+addresses may have unequal lengths. Every mixed-prime word action is bijective, so the common
+two-sided context cancels from the forced action equality. Global scalar address injectivity gives
+`u=v`; restoring the common raw contexts identifies the complete fork words, contradicting the
+mandatory genuine kernel pair.
+
+**Scope:** the theorem requires the same literal prefix and suffix on both branches. Distinct
+wrappers whose actions differ, interleaved address fragments, and a separate two-offset terminal
+channel remain outside it. It proves no claim about whether an asymmetric wrapper exists or can
+satisfy the arbitrary-word endpoint converse.
+
+**Use:** do not spend a wrapper merely to shift the address pair boundary. Any surviving interior
+comparator must interact asymmetrically with the two fork branches or reach a terminal channel
+before common-context cancellation applies.
+
+**Artifact:**
+[`MixedPrimeAddressWrapperNoGo.lean`](MatrixMortality/MixedPrimeAddressWrapperNoGo.lean) and
+[`m34-address-wrapper-no-go-2026-09-01.md`](audits/m34-address-wrapper-no-go-2026-09-01.md).
+
+**Next:** classify asymmetric prefix/suffix wrappers under the exact reduced fork equation. Search
+first for a wrapper whose residual action is a nonzero scalar multiple of the address-offset
+difference, then test its all-word endpoint language.
 
 ### G3-O13: Rational serializer pumping
 
