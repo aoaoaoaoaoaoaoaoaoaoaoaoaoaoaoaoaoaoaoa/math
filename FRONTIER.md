@@ -3685,6 +3685,12 @@ existing balanced affine kernel; every unequal-slope branch is the single explic
 [`D2-S15`](SALVAGE.md#d2-s15-fixed-endpoint-centralizer-reduction). It replaces a separate
 periodic-state census by a positive-centralizer problem, but does not yet decide that
 centralizer or general unequal-endpoint reachability.
+That centralizer has a sharp determinant fork. Two common-point schedules whose `(length,sum)`
+vectors are dependent force an explicit global equality between fixed powers. Independent
+vectors generate an injective `ℕ²` family of pairwise distinct guarded loops at the same rational
+source. This is [`D2-S16`](SALVAGE.md#d2-s16-periodic-centralizer-determinant-fork). Hence a
+genuinely noncyclic centralizer cannot be sporadic: one witness saturates the fixed source in two
+parameters. The live centralizer question is whether this independent branch exists at all.
 The deepest of those three branches is itself a full depth reset. In normalized band coordinates
 `U(d,μ)=1/5+(3/10)(2/3)^dμ`, every target band `d≥2` contains a point whose `d−2` predecessor has
 any prescribed band `n≥7` and mantissa in `(2/3,1]`. An explicit guarded subfamily fixes target
@@ -4033,7 +4039,8 @@ universal computation.
    excursion, so local forbidden-factor grammars are equally exhausted. Attack endpoint-coupled
    fibres rather than refining the wall-only graph. `D2-S15` identifies equality of periodic
    endpoints with global affine commutation and splits it into balanced-kernel and explicit
-   collision-source fibres.
+   collision-source fibres. `D2-S16` further turns any two-loop fibre into either a global power
+   relation or an injective rank-two guarded loop family.
    Keep the non-elementary lanes independent: adelic cone types, parabolic rational subsets,
    trace/height descent, finite-obstruction saturation, and valuation universality.
 7. Synthesize the returned attacks by the discriminating signals above; do not average

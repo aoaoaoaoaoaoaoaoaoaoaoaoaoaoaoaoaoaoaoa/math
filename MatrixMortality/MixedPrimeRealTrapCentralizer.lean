@@ -182,4 +182,205 @@ theorem shellPeriodicPoint_eq_iff_collisionSource
       collision.symm.trans left_fixed
     exact shellRun_fixedPoint_unique right_ne right_fixed
 
+/-! ## Determinant fork inside one periodic-point centralizer -/
+
+/-- Concatenate a fixed number of copies of one shell schedule. -/
+def shellSchedulePower (waits : List ℕ) (exponent : ℕ) : List ℕ :=
+  (List.replicate exponent waits).flatten
+
+@[simp]
+theorem shellSchedulePower_length (waits : List ℕ) (exponent : ℕ) :
+    (shellSchedulePower waits exponent).length = exponent * waits.length := by
+  simp [shellSchedulePower, List.length_flatten]
+
+@[simp]
+theorem shellSchedulePower_sum (waits : List ℕ) (exponent : ℕ) :
+    (shellSchedulePower waits exponent).sum = exponent * waits.sum := by
+  simp [shellSchedulePower, List.sum_flatten]
+
+private theorem shellSchedulePower_ne_nil
+    {waits : List ℕ} (waits_ne : waits ≠ []) {exponent : ℕ}
+    (exponent_positive : 0 < exponent) :
+    shellSchedulePower waits exponent ≠ [] := by
+  have waits_length_positive : 0 < waits.length := List.length_pos_of_ne_nil waits_ne
+  apply List.ne_nil_of_length_pos
+  simp only [shellSchedulePower_length]
+  positivity
+
+/-- Every positive power of a nonempty schedule has the same periodic point. -/
+theorem shellPeriodicPoint_schedulePower
+    {waits : List ℕ} (waits_ne : waits ≠ []) {exponent : ℕ}
+    (exponent_positive : 0 < exponent) :
+    shellPeriodicPoint (shellSchedulePower waits exponent) =
+      shellPeriodicPoint waits := by
+  have power_ne := shellSchedulePower_ne_nil waits_ne exponent_positive
+  have displacement :=
+    shellRun_repeat_sub_periodicPoint waits_ne exponent (shellPeriodicPoint waits)
+  have power_fixed :
+      shellRun (shellSchedulePower waits exponent) (shellPeriodicPoint waits) =
+        shellPeriodicPoint waits := by
+    change shellRun (List.replicate exponent waits).flatten (shellPeriodicPoint waits) = _
+    simpa only [sub_self, mul_zero, sub_eq_zero] using displacement
+  exact (shellRun_fixedPoint_unique power_ne power_fixed).symm
+
+/-- Every two-parameter product of schedules with one periodic point is a guarded loop at that
+point. -/
+theorem commonPeriodicPoint_bipower_loop
+    {left right : List ℕ} (left_ne : left ≠ []) (right_ne : right ≠ [])
+    (point_eq : shellPeriodicPoint left = shellPeriodicPoint right)
+    (leftExponent rightExponent : ℕ) :
+    let schedule :=
+      shellSchedulePower left leftExponent ++ shellSchedulePower right rightExponent
+    shellRun schedule (shellPeriodicPoint left) = shellPeriodicPoint left ∧
+      ∀ front back,
+        schedule = front ++ back →
+          IsUnit 5 (shellRun front (shellPeriodicPoint left)) := by
+  let point := shellPeriodicPoint left
+  have left_displacement :=
+    shellRun_repeat_sub_periodicPoint left_ne leftExponent point
+  have left_fixed : shellRun (shellSchedulePower left leftExponent) point = point := by
+    change shellRun (List.replicate leftExponent left).flatten point = point
+    dsimp only [point] at left_displacement ⊢
+    simpa only [sub_self, mul_zero, sub_eq_zero] using left_displacement
+  have right_point_eq : point = shellPeriodicPoint right := point_eq
+  have right_displacement :=
+    shellRun_repeat_sub_periodicPoint right_ne rightExponent point
+  have right_fixed : shellRun (shellSchedulePower right rightExponent) point = point := by
+    change shellRun (List.replicate rightExponent right).flatten point = point
+    rw [right_point_eq] at right_displacement ⊢
+    simpa only [sub_self, mul_zero, sub_eq_zero] using right_displacement
+  have combined_fixed :
+      shellRun
+          (shellSchedulePower left leftExponent ++
+            shellSchedulePower right rightExponent) point = point := by
+    rw [shellRun_append, left_fixed, right_fixed]
+  have point_unit : IsUnit 5 point := (shellPeriodicCycle left_ne).1
+  have output_unit :
+      IsUnit 5
+        (shellRun
+          (shellSchedulePower left leftExponent ++
+            shellSchedulePower right rightExponent) point) := by
+    rw [combined_fixed]
+    exact point_unit
+  exact ⟨combined_fixed,
+    (shellPrefixesUnit_iff
+      (shellSchedulePower left leftExponent ++ shellSchedulePower right rightExponent)
+      point).2 output_unit⟩
+
+private theorem natLinearPair_injective
+    {leftLength leftSum rightLength rightSum : ℕ}
+    (determinant_ne : rightLength * leftSum ≠ leftLength * rightSum) :
+    Function.Injective
+      (fun exponents : ℕ × ℕ =>
+        (exponents.1 * leftLength + exponents.2 * rightLength,
+          exponents.1 * leftSum + exponents.2 * rightSum)) := by
+  rintro ⟨leftExponent, rightExponent⟩ ⟨leftExponent', rightExponent'⟩ pair_eq
+  have length_eq := congrArg Prod.fst pair_eq
+  have sum_eq := congrArg Prod.snd pair_eq
+  simp only at length_eq sum_eq
+  have determinant_ne' :
+      (rightLength : ℤ) * leftSum - leftLength * rightSum ≠ 0 := by
+    exact sub_ne_zero.mpr (by exact_mod_cast determinant_ne)
+  have length_eq' :
+      (leftExponent : ℤ) * leftLength + rightExponent * rightLength =
+        leftExponent' * leftLength + rightExponent' * rightLength := by
+    exact_mod_cast length_eq
+  have sum_eq' :
+      (leftExponent : ℤ) * leftSum + rightExponent * rightSum =
+        leftExponent' * leftSum + rightExponent' * rightSum := by
+    exact_mod_cast sum_eq
+  have left_product_zero :
+      ((leftExponent : ℤ) - leftExponent') *
+          ((rightLength : ℤ) * leftSum - leftLength * rightSum) = 0 := by
+    linear_combination rightLength * sum_eq' - rightSum * length_eq'
+  have right_product_zero :
+      ((rightExponent : ℤ) - rightExponent') *
+          ((rightLength : ℤ) * leftSum - leftLength * rightSum) = 0 := by
+    linear_combination leftSum * length_eq' - leftLength * sum_eq'
+  have left_eq : (leftExponent : ℤ) = leftExponent' :=
+    sub_eq_zero.mp
+      ((mul_eq_zero.mp left_product_zero).resolve_right determinant_ne')
+  have right_eq : (rightExponent : ℤ) = rightExponent' :=
+    sub_eq_zero.mp
+      ((mul_eq_zero.mp right_product_zero).resolve_right determinant_ne')
+  congr
+  · exact_mod_cast left_eq
+  · exact_mod_cast right_eq
+
+/-- Independent length/sum vectors give an injective two-parameter family of schedule slopes. -/
+theorem shellSlope_bipower_injective
+    {left right : List ℕ}
+    (determinant_ne : right.length * left.sum ≠ left.length * right.sum) :
+    Function.Injective
+      (fun exponents : ℕ × ℕ =>
+        shellSlope
+          (shellSchedulePower left exponents.1 ++
+            shellSchedulePower right exponents.2)) := by
+  intro first second slope_eq
+  have length_sum_eq :=
+    (shellSlope_eq_iff_length_sum
+      (shellSchedulePower left first.1 ++ shellSchedulePower right first.2)
+      (shellSchedulePower left second.1 ++ shellSchedulePower right second.2)).1 slope_eq
+  have vector_eq :
+      (first.1 * left.length + first.2 * right.length,
+        first.1 * left.sum + first.2 * right.sum) =
+      (second.1 * left.length + second.2 * right.length,
+        second.1 * left.sum + second.2 * right.sum) := by
+    apply Prod.ext
+    · simpa only [List.length_append, shellSchedulePower_length] using length_sum_eq.1
+    · simpa only [List.sum_append, shellSchedulePower_sum] using length_sum_eq.2
+  exact natLinearPair_injective determinant_ne vector_eq
+
+/-- Dependent length/sum vectors turn a common periodic point into an explicit global power
+relation. -/
+theorem commonPeriodicPoint_powerRelation_of_determinant_zero
+    {left right : List ℕ} (left_ne : left ≠ []) (right_ne : right ≠ [])
+    (point_eq : shellPeriodicPoint left = shellPeriodicPoint right)
+    (determinant_zero : right.length * left.sum = left.length * right.sum) :
+    ∀ state,
+      shellRun (shellSchedulePower left right.length) state =
+        shellRun (shellSchedulePower right left.length) state := by
+  have left_length_positive : 0 < left.length := List.length_pos_of_ne_nil left_ne
+  have right_length_positive : 0 < right.length := List.length_pos_of_ne_nil right_ne
+  have left_power_ne := shellSchedulePower_ne_nil left_ne right_length_positive
+  have right_power_ne := shellSchedulePower_ne_nil right_ne left_length_positive
+  have power_point_eq :
+      shellPeriodicPoint (shellSchedulePower left right.length) =
+        shellPeriodicPoint (shellSchedulePower right left.length) := by
+    rw [shellPeriodicPoint_schedulePower left_ne right_length_positive,
+      shellPeriodicPoint_schedulePower right_ne left_length_positive]
+    exact point_eq
+  have power_length_eq :
+      (shellSchedulePower left right.length).length =
+        (shellSchedulePower right left.length).length := by
+    simp only [shellSchedulePower_length, Nat.mul_comm]
+  have power_sum_eq :
+      (shellSchedulePower left right.length).sum =
+        (shellSchedulePower right left.length).sum := by
+    simpa only [shellSchedulePower_sum] using determinant_zero
+  exact (shellPeriodicPoint_eq_iff_globalRelation_of_length_sum
+    left_power_ne right_power_ne power_length_eq power_sum_eq).1 power_point_eq
+
+/-- Independent length/sum vectors and one common periodic point produce an injective `ℕ²`
+family of distinct guarded loops. -/
+theorem commonPeriodicPoint_rankTwo_loops
+    {left right : List ℕ} (left_ne : left ≠ []) (right_ne : right ≠ [])
+    (point_eq : shellPeriodicPoint left = shellPeriodicPoint right)
+    (determinant_ne : right.length * left.sum ≠ left.length * right.sum) :
+    (∀ exponents : ℕ × ℕ,
+      let schedule :=
+        shellSchedulePower left exponents.1 ++ shellSchedulePower right exponents.2
+      shellRun schedule (shellPeriodicPoint left) = shellPeriodicPoint left ∧
+        ∀ front back,
+          schedule = front ++ back →
+            IsUnit 5 (shellRun front (shellPeriodicPoint left))) ∧
+      Function.Injective
+        (fun exponents : ℕ × ℕ =>
+          shellSlope
+            (shellSchedulePower left exponents.1 ++
+              shellSchedulePower right exponents.2)) := by
+  exact ⟨fun exponents =>
+    commonPeriodicPoint_bipower_loop left_ne right_ne point_eq exponents.1 exponents.2,
+    shellSlope_bipower_injective determinant_ne⟩
+
 end MatrixMortality.MixedPrimeDebt
