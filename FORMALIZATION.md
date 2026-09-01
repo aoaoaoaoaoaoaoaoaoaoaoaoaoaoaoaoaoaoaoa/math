@@ -1281,6 +1281,17 @@ an unconditional bridge, so an instance-dependent target and a raw-word control 
 necessary. See `R32-S60` and
 [`audits/m32-cubic-continuant-self-balance-2026-08-31.md`](audits/m32-cubic-continuant-self-balance-2026-08-31.md).
 
+`CubicContinuantPunctuation` completes the raw separator analysis. Lean factors every return
+determinant through one integral quadratic coefficient, proves its lagged positive recurrence,
+and derives positivity at every nonzero wait. Consequently, `M₀` is the unique nonunit return
+and every positive-only word is invertible. An exact outer-product factorization of `M₀`, the
+natural-number/optional-natural relabelling, and the generic rank-one fracture theorem then give
+an iff between unrestricted mortality and one scalar bridge over positive waits. A second exact
+seven-wait bridge zero is checked. This reduces the full fixed language to its positive scalar
+bridge semantics, but the already-mortal fixed instance cannot itself carry an
+instance-dependent undecidability reduction. See `R32-S61` and
+[`audits/m32-cubic-continuant-punctuation-2026-08-31.md`](audits/m32-cubic-continuant-punctuation-2026-08-31.md).
+
 The rank-(2,2) graph is no longer an independent residue. `RankTwoPunctuation` proves that every
 compatible square with one rank-one loop and three units transports exactly to the existing raw
 reverse compiler [`R32-M01`](SALVAGE.md#r32-m01-generic-reverse-edge-compiler). Its intrinsic
@@ -3006,6 +3017,7 @@ fixed-rank decision problem.
 | `CubicContinuantReader.lean` | positive projective inverses for both cubic radix letters and the exact opposite-mismatch cancellation |
 | `CubicContinuantMismatchClock.lean` | contracting signed-error clock and exact endpoint zero test for balanced cubic radix comparisons |
 | `CubicContinuantSelfBalance.lean` | 2-adic and 5-adic rejection of every incorrect cubic-comparator cleanup count |
+| `CubicContinuantPunctuation.lean` | unique singular return and complete scalar-bridge reduction of the fixed cubic language |
 | `EdgeCompression.lean` | exact adjacent-edge compression for split finite-rank families |
 | `TwoPlaneEdges.lean` | compatible two-plane realization of a `2 × 2` edge square and exact rank-two certificates |
 | `ReverseEdge.lean` | generic projective-incidence reverse compiler, basis adaptation, and all-path converse |

@@ -2881,6 +2881,43 @@
 'MatrixMortality.CubicReturn.NonPure.continuantCheckedZeroWordWithCleanup_zero_iff' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitDeterminantCoefficient_next_three' depends on axioms: [propext,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitDeterminantCoefficient_state_recurrence' depends on axioms: [propext,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitDeterminantCoefficient_state_positive' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitReturn_positive_det_ne_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitReturn_positive_isUnit' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitReturn_isUnit_iff_positive' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.positiveFalseWaitReturn_isUnit' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.positiveFalseWaitReturn_wordProduct_isUnit' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitReturn_wordProduct_isUnit_of_positive' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitReturn_zero_eq_outer' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.separatedPositiveFalseWaitReturn_comp_natEquivOption' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitReturn_isMortal_iff_positiveBridge' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWait_second_positive_bridge_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.EdgeCompression.isMortal_iff_exists_edgeProduct_eq_zero' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
