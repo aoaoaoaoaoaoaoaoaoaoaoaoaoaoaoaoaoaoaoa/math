@@ -261,6 +261,9 @@
 'MatrixMortality.ReturnFamily.pairGenerator_isMortal_iff_returnFamily' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.ChangedSeparatorRealization.integralGenerator_mortal_iff_tagHaltsFrom' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.clearRationalFamily_isMortal_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.pairedProduct_mulVec_column' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.pairedCoefficient_eq_sideCoefficient' depends on axioms: [propext, Classical.choice, Quot.sound]

@@ -17,6 +17,28 @@ namespace ReturnFamily
 variable {R Large Small : Type*} [CommSemiring R]
   [Fintype Large] [DecidableEq Large] [Fintype Small] [DecidableEq Small]
 
+/-- Relabelling along a map with an explicit right inverse preserves mortality. -/
+theorem isMortal_comp_rightInverse_iff
+    {α β M : Type*} [MonoidWithZero M]
+    (generators : β → M) (relabel : α → β) (lift : β → α)
+    (right_inverse : Function.RightInverse lift relabel) :
+    IsMortal (generators ∘ relabel) ↔ IsMortal generators := by
+  constructor
+  · rintro ⟨word, word_nonempty, product_zero⟩
+    refine ⟨word.map relabel, by simpa using word_nonempty, ?_⟩
+    rw [← wordProduct_comp]
+    exact product_zero
+  · rintro ⟨word, word_nonempty, product_zero⟩
+    refine ⟨word.map lift, by simpa using word_nonempty, ?_⟩
+    rw [wordProduct_comp]
+    have relabel_lift : (word.map lift).map relabel = word := by
+      have comp_eq : relabel ∘ lift = id := by
+        funext label
+        exact right_inverse label
+      rw [List.map_map, comp_eq, List.map_id]
+    rw [relabel_lift]
+    exact product_zero
+
 /-- Sandwiching a nonempty intercalation gives the product of every return, including both
 exterior waits. -/
 theorem sandwichedIntercalatedPowers_eq_returnProduct
