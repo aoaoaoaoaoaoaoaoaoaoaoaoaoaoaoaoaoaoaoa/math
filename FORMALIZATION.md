@@ -1599,6 +1599,17 @@ letterwise all-erasure block and dies by `MM-S53`. Otherwise it factors at its u
 rule, with only erasures afterward, and dies by `MM-S66`. Thus no non-singleton first block
 carries the distinguished two-`c` raw head into another multi-role pole.
 
+Record [`MM-S74`](SALVAGE.md#mm-s74-triple-free-bridge-frontier) completes the outer algebraic
+mortality normal form. `bridgeScalar_append_delimiter_cube` factors a bridge coefficient at any
+`S³`; recursive descent extracts a contiguous cube-free zero chunk from every zero matrix word.
+`CoreSpelling` parses its boundary-trimmed core into `S²`-separated blocks and proves the exact
+three-coordinate execution. `CoreSpelling.zero_frontier` excludes a lone root block and leaves
+exactly a singleton erasure target, a non-singleton target over one root block, or a
+non-singleton target over a deeper history. `isMortal_iff_exists_parsedZeroFrontier` is the full
+converse equivalence, and `mortalityProblem_mortal_iff_exists_parsedZeroFrontier` transports it to
+the cleared integer family. The remaining theorem must identify or exclude the arbitrary
+square-reset source; `MM-S67` covers only its distinguished two-`c` raw-head specialization.
+
 Record [`MM-S37`](SALVAGE.md#mm-s37-decimal-three-shape-frontier-extinction) separates the
 ternary and decimal first-multi-transfer fronts. The single theorem
 `DecimalSetterDepth.firstMultiTransfer_threeShapeFrontier_impossible` consumes the three role
@@ -1654,7 +1665,7 @@ the periodic saturation theorem and its remaining arithmetic boundary are recons
 formalization and the shell attack are tracked in
 [#7](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/7).
 
-The `M₅(3)` delimiter attack has ten foundational records:
+The `M₅(3)` delimiter attack has eleven foundational records:
 
 | Record | Formalization obligation |
 | --- | --- |
@@ -1662,6 +1673,7 @@ The `M₅(3)` delimiter attack has ten foundational records:
 | [`MM-O07`](SALVAGE.md#mm-o07-setter-parameter-rigidity) | boundary alignment forces `r=t/μ`; verify the rejected benchmark coefficient |
 | [`MM-M03`](SALVAGE.md#mm-m03-five-state-setter-punctuation) | explicit setter matrices, delimiter powers and ranks, regular decoder, and `S²A_cS³=λC̃L̃` |
 | [`MM-M06`](SALVAGE.md#mm-m06-formal-decimal-setter-compiler) | formal decimal matrices, exact rank profile and regular decoder, forward integer compiler, and arbitrary `S³` scalar-bridge fracture |
+| [`MM-S74`](SALVAGE.md#mm-s74-triple-free-bridge-frontier) | recursive delimiter-cube coefficient factorization, exhaustive cube-free block parser, exact execution, and mortality-equivalent singleton/shallow/deep pole frontier |
 | [`MM-S01`](SALVAGE.md#mm-s01-square-run-projective-normal-form) | invariant square-run plane, invertible `2 × 2` transfer, Möbius normalization, rank-one fracture grammar, and equivalence with pole avoidance |
 | [`MM-S02`](SALVAGE.md#mm-s02-reset-zero-projective-peeling) | scaled transfer identity, exact two-shell classification of all poles, and reset-zero one-transfer avoidance |
 | [`MM-O16`](SALVAGE.md#mm-o16-exact-delimiter-pair-obstruction) | generic ignored-pair immortality is formalized; paired common-kernel and cubic companion specializations are audited |
@@ -1669,14 +1681,15 @@ The `M₅(3)` delimiter attack has ten foundational records:
 | [`MM-O21`](SALVAGE.md#mm-o21-sourcewise-finite-probe-blindness) | existence-preserving guard transform, collapse of every bounded Hankel section, forced-rule specialization, and universal bounded-probe computability wall |
 | [`MM-O22`](SALVAGE.md#mm-o22-six-guard-parser-rank-wall) | witness-dependent `J₇-I₇` Hankel section, explicit inverse, seven-state exact lower bound, and forced-rule yes-source specialization |
 
-`DecimalSetterMatrix`, `DecimalSetterFracture`, `RationalMatrixClearing`, and
-`DecimalSetterInteger` now formalize the candidate through the halting-to-mortality direction.
-The explicit delimiter has ranks `3,2,1` at powers `1,2,3`, stabilizes at its cube, and the mixed
-separator is exact. Regular physical spellings decode to Neary roles, terminal matches produce
-zero words, denominator clearing yields three integer `5 × 5` matrices, and every arbitrary
-word fractures at disjoint delimiter cubes into scalar bridges. The converse still requires a
-maximal-run theorem parsing every triple-free bridge into the arithmetic pole grammar; no such
-theorem is formalized or assumed. The exact reconstruction and promotion boundary are recorded in
+`DecimalSetterMatrix`, `DecimalSetterFracture`, `DecimalSetterBridge`,
+`RationalMatrixClearing`, and `DecimalSetterInteger` now formalize both the forward compiler and
+the outer algebraic mortality converse. The explicit delimiter has ranks `3,2,1` at powers
+`1,2,3`, stabilizes at its cube, and the mixed separator is exact. Regular physical spellings
+decode to Neary roles, terminal matches produce zero words, denominator clearing yields three
+integer `5 × 5` matrices, and every arbitrary zero word reduces to a parsed cube-free
+singleton/shallow/deep square-pole frontier. The unresolved mathematical step is extinction of
+those general square-reset states; the source emitter's primitive recursiveness is also unproved.
+The exact reconstruction and promotion boundary are recorded in
 [`audits/m53-setter-projective-2026-07-24.md`](audits/m53-setter-projective-2026-07-24.md).
 The first projective peeling theorem and the bounded residue diagnostics are in
 [`audits/setter-projective-peeling-2026-07-25.md`](audits/setter-projective-peeling-2026-07-25.md).
@@ -2123,6 +2136,7 @@ fixed-rank decision problem.
 | `RationalMatrixClearing.lean` | generic finite rational denominator clearing and exact mortality preservation |
 | `DecimalSetterMatrix.lean` | explicit decimal `5 × 5` setter, delimiter ranks, regular decoder, internal separator, and forward rational compiler |
 | `DecimalSetterFracture.lean` | greedy delimiter-cube fracture and complete arbitrary-product scalar-bridge normal form |
+| `DecimalSetterBridge.lean` | recursive cube elimination, exhaustive triple-free block parser, exact square-reset execution, and mortality-equivalent pole frontier |
 | `DecimalSetterInteger.lean` | explicit three-label integer `M₅(3)` family and forward Neary compiler |
 | `DecimalSetterArithmetic.lean` | decimal setter centered carry, reciprocal recurrence, coupled `2`/`5` target shells, and successive-pole valuation balance |
 | `DecimalSetterCarry.lean` | two-reset successive-pole identities, joint depth constraints, exact decimal suffix exhaustion, first-transfer prefix separation, and the ordinary depth-two A/B shell forest |

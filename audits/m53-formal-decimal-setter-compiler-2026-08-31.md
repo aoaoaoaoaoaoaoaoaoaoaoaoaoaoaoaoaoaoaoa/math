@@ -56,16 +56,17 @@ occurs, the whole product is
 (product of interior bridge scalars) · (exterior column) (exterior row).
 ```
 
-This reduces a zero containing delimiter cubes to a zero bridge coefficient or a vanishing
-exterior factor. It does not classify a triple-free bridge: such a chunk may contain isolated
-delimiters and maximal delimiter runs of length two in arbitrary positions.
+This reduces a zero containing delimiter cubes to scalar bridges and exterior factors. The later
+[`MM-S74`](../SALVAGE.md#mm-s74-triple-free-bridge-frontier) audit closes the triple-free parser
+and exterior-factor boundary.
 
 ## Boundary
 
-The mortality converse requires a maximal-run parser connecting each triple-free bridge to the
-existing projective transfer and pole equations. The current arithmetic extinction proves that
-one distinguished non-singleton raw-head entry into a multi-role pole is impossible. It does not
-yet exhaust singleton next targets, generalized carriers, or every ordinary-reset history.
+`MM-S74` now proves the complete outer algebraic mortality converse: every zero word reduces to
+a parsed erasure-ended square-pole entry, split into singleton, one-root-block, and deeper-history
+branches. The current arithmetic extinction proves that one distinguished non-singleton two-`c`
+raw-head entry into a multi-role pole is impossible. It does not yet identify an arbitrary
+square-reset source with that head or exclude every singleton and deeper-history branch.
 
 The integer family is definitionally computable, but no Lean theorem yet proves its dependence
 on the source primitive recursive. Consequently this audit does not yield a many-one reduction

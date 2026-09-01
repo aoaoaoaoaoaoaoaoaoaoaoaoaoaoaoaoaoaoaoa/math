@@ -1021,12 +1021,19 @@ projective-avoidance and mortality compiler, rather than reopening the grammar.
 [`MM-M06`](SALVAGE.md#mm-m06-formal-decimal-setter-compiler) now owns that outer algebraic
 surface. Lean checks the explicit decimal `5 × 5` matrices, delimiter ranks `3,2,1`, regular
 role decoder, mixed rank-one separator, forward rational and integer compilers, and arbitrary
-fracture at delimiter cubes. The fracture reduces every word containing `S³` to scalar bridges,
-but its chunks are only known to be `S³`-free. The exact remaining outer seam is a maximal-run
-parser converting every such chunk into the `S²`-separated pole grammar. Until that parser
-proves exhaustion, `MM-S67` is an arithmetic leaf rather than a mortality converse. Singleton
-next targets and ordinary-reset targets beyond the checked shallow cases remain explicit
-branches; primitive-recursive emission of the cleared integer family is also unproved.
+fracture at delimiter cubes.
+
+[`MM-S74`](SALVAGE.md#mm-s74-triple-free-bridge-frontier) closes the formerly missing outer
+parser and converse. A delimiter cube factors its bridge coefficient multiplicatively, so every
+zero word contains a cube-free zero chunk. After boundary trimming, every such chunk parses into
+`S²`-separated role blocks; all but the rightmost end in erasure, and the rightmost ends in rule.
+The exact three-state execution excludes a lone root block. Mortality is therefore equivalent to
+one erasure-ended block hitting a square-reset pole, with exactly three branches: singleton
+target, non-singleton over one root block, or non-singleton over a deeper history. The live
+mathematical seam is no longer word grammar: it is the adapter from an arbitrary square-reset
+state to the physical shell hypotheses consumed by `MM-S67` and the separate singleton/deep
+extinctions. Primitive-recursive emission of the cleared integer family remains independently
+unproved.
 
 The ternary and decimal branches now separate at their first multi-transfer front.
 [`MM-S37`](SALVAGE.md#mm-s37-decimal-three-shape-frontier-extinction) substitutes each of the
