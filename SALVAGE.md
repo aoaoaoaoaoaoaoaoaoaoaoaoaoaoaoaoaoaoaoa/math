@@ -355,6 +355,7 @@ file owns the mathematical stock.
 | [`G3-S10`](#g3-s10-mixed-prime-literal-fork-extinction) | obstruction and structural reduction | literal flat/nested equality forces a forbidden common fixed point, so every exact code requires a genuine mixed-prime kernel collision | formalized | active |
 | [`G3-S11`](#g3-s11-reduced-fork-kernel-gauntlet) | structural reduction and computational obstruction | context cancellation forces a positive reduced kernel triple with exterior fixed-point geometry; exhaustive exact search excludes reduced length at most 36 | formalized; audited arithmetic and computational cuts | active |
 | [`G3-S12`](#g3-s12-fork-crossing-transport-and-address-ambiguity) | structural reduction and obstruction | the toggle transports one explicit data-action crossing to another, while a prefixed Cassaigne relation destroys every action-level leading-run decoder | formalized | active |
+| [`G3-S13`](#g3-s13-contextual-kernel-fork-classification) | structure theorem, obstruction, and sharp counterexample | one-context embeddings of the five audited relations and their first critical pairs either miss the fork or enter a common-fixed centralizer; the first fork occurs at length 312 on that forbidden diagonal | formalized core; audited combinatorics and exact exhaustive computation | active |
 | [`G3-M02`](#g3-m02-square-root-punctuation-fracture) | partial mechanism | a rank-two square root gives an exact `SS`-free mortality grammar | formalized | closed |
 | [`G3-O10`](#g3-o10-square-root-boundary-saturation) | obstruction | every nondegenerate rank-one square root preserves boundary coefficient zeros | formalized | graduated |
 | [`G3-M01`](#g3-m01-free-group-discrepancy-engine) | partial mechanism | Carvalho's transducer gives an all-word marker-tail equation and a cyclic exponent-one equalizer | audited | active |
@@ -15859,6 +15860,97 @@ the mixed-prime word monoid.
 **Next:** orient the audited mixed-prime relations and their critical overlaps, then classify or
 exclude quotient representatives of `yzxyx=xzyxy`. Raising the raw length cutoff without such a
 normal-form invariant is no longer the primary attack.
+
+### G3-S13: Contextual kernel-fork classification
+
+**Kind:** structure theorem, obstruction, and sharp counterexample
+
+**Evidence:** formalized core; audited word combinatorics and exact exhaustive computation
+
+**Disposition:** active
+
+The five audited mixed-prime relations have `45` proper one-overlap critical branch pairs. Consider
+the exact one-context hull
+
+```text
+Y Z X Y X = P U Q,       X Z Y X Y = P V Q,
+```
+
+where `U=V` is one of those `50` equal-action pairs in either orientation and `X,Y,Z` are positive
+raw words. Every pair differs in its first and last letter, so `|P|` and `|Q|` are the exact
+prefix and suffix mismatch cuts. Comparing each cut with `min(|X|,|Y|)` partitions every model
+into nine prefix/suffix cells. Two crossed cells are length-impossible. Exact word bounds and an
+assignment-complete equality solver eliminate every bounded cell: the internal/internal cell has
+total length at most `2m-5`; the four one-comparable cells have length at most `4m-11`; the
+nonoverlapping same-shorter cell has length at most `3m-1`; and the overlapping same-shorter cell
+has length at most `192`, where `m≤59` is the core length. Every commuting exit forces the already
+forbidden common fixed point.
+
+The full-triple escape is unbounded but rigid. If `Y=XA` and the common prefix includes
+`YZX=XZY`, then
+
+```text
+A(ZX)=(ZX)A.
+```
+
+The commuting-word theorem gives `A=Rˢ` and `ZX=Rᵗ`. Splitting `R=HK` at the suffix occupied by
+`X` yields
+
+```text
+X=KRᵏ,       Y=KR^(k+s),       Z=R^(t-k-1)H.
+```
+
+After the literal common context is removed, the kernel core is `RˢK=KRˢ`. Lean proves the
+action-level terminal theorem: equality of those two affine actions makes `Rˢ` and `K` commute,
+so their unique fixed point is also fixed by `R`, then by `H`, and therefore by `X,Y,Z`. Every
+full-triple contextual lift is rejected by `G3-S08`.
+
+This escape genuinely occurs. Let `A` and `B` be the right and left Cassaigne words, write
+`A=TMT`, and put
+
+```text
+K=TM,       H=BM,       R=HK,
+X=K,        Y=KR,       Z=H.
+```
+
+The first self-overlap critical pair is
+
+```text
+U=B A.tail,       V=A.dropLast B.
+```
+
+Lean proves that the two reduced fork words are distinct, have equal affine actions by two
+contextual Cassaigne rewrites, and have total length `312`, with macro lengths `(26,104,52)`.
+Their slopes are pairwise distinct. Nevertheless all three actions fix exactly
+
+```text
+6560881480 / 3955045357,
+```
+
+and are `F,F²,F⁴` for one strict contraction `F`. Lean consequently proves that this explicit
+code fails the complete `bcbc` endpoint converse. This is the first fork-shaped kernel witness
+found in the audited completion and a sharp negative compiler witness at once.
+
+**Scope:** the exhaustive classification covers one fixed two-sided context around one of the
+five audited base relations or one of their `45` proper first-overlap branch pairs. It does not
+cover an arbitrary multi-step congruence derivation, a higher critical completion, or an
+unaudited affine-kernel relation. The word bounds are audited combinatorics; the assignment solver
+is exact computation. The centralizer collapse, the length-`312` witness, its equal action,
+distinctness, slopes, fixed point, power structure, and endpoint failure are Lean-checked.
+
+**Use:** discard all one-rewrite and first-critical contextual repairs. Search must either find a
+genuinely non-central multi-step quotient fork or prove that every longer derivation inherits a
+centralizer. Any candidate must additionally clear crossing transport and the complete
+normalized-mantissa endpoint converse.
+
+**Artifact:**
+[`GuardedMixedPrimeForkQuotient.lean`](MatrixMortality/GuardedMixedPrimeForkQuotient.lean),
+[`audit_mixed_prime_kernel.rs`](tools/audit_mixed_prime_kernel.rs), and
+[`m34-mixed-prime-fork-quotient-2026-08-31.md`](audits/m34-mixed-prime-fork-quotient-2026-08-31.md).
+
+**Next:** compute and orient second-generation critical completions, then test whether every
+fork-shaped derivation factors through a full-triple centralizer. The positive alternative is a
+non-common-fixed quotient fork followed by the unchanged endpoint and mantissa converse.
 
 ### G3-O13: Rational serializer pumping
 

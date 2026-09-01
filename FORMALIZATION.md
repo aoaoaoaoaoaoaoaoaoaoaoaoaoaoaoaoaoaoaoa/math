@@ -2967,6 +2967,7 @@ fixed-rank decision problem.
 | `GuardedMixedPrimeLiteralNoGo.lean` | equal-length fork-equation split, two-point affine rigidity, literal macro extinction, and mandatory mixed-prime kernel collision |
 | `GuardedMixedPrimeReducedKernel.lean` | context cancellation, reduced fork collision, positive-macro necessity, exact fixed-point balance, and exterior toggle geometry |
 | `GuardedMixedPrimeForkCrossing.lean` | exact fork-crossing factorization, four physical order chains, slope-conditioned leading-run cylinders, and Cassaigne address ambiguity |
+| `GuardedMixedPrimeForkQuotient.lean` | full-triple centralizer collapse, the exact length-312 critical Cassaigne fork, its common fixed point and monogenic action collapse, and endpoint rejection |
 | `ExpandingHistoryNoGo.lean` | reset-affine orbit, finite reverse automaton, regularity, and universal computability obstruction |
 | `CancellativeProjectiveNoGo.lean` | paired residual conic, finite support-rank closure, cancellative role fractions, and projective commutator rigidity |
 | `PairedInverseChamber.lean` | one-turn residual chambers, protected formal inverse states, and positive forward-cone separation |
@@ -3820,6 +3821,30 @@ inside its exact slope-conditioned cylinder. Thus action data cannot select a le
 representative even after slope and fixed point are known. A global descent must operate in an
 oriented quotient of the mixed-prime word monoid; the theorem does not claim that such a quotient
 is finite or confluent.
+
+`G3-S13` resolves the first quotient layer. Lean constructs the proper self-overlap critical pair
+of Cassaigne's relation and embeds it into the reduced fork with macro lengths `(26,104,52)` and
+total length `312`. The two raw fork words are distinct but induce the same affine action. Their
+three macro slopes are pairwise distinct, so this is a genuine fork-shaped kernel collision, not
+a repeated macro.
+
+The same module proves why the witness is unusable. A generic full-triple lift has
+
+```text
+X=KRᵏ,       Y=KR^(k+s),       Z=R^(t-k-1)H,       R=HK,
+```
+
+and its residual core is `RˢK=KRˢ` at action level. The strict affine contractions `Rˢ` and `K`
+therefore share a fixed point; `R=HK` propagates it to `H`, hence to all three macros. For the
+explicit witness Lean computes the point as `6560881480/3955045357` and proves that its macro
+actions are `F,F²,F⁴`. The existing common-fixed obstruction then rejects its complete endpoint
+converse for every source and target.
+
+An exact assignment solver complements the formal theorem. Audited word combinatorics bounds all
+non-full-triple placements of one of the five base rules or `45` first critical branch pairs by
+finite cutoffs at most `225`; exhaustive equality propagation finds none. This is a classification
+of the one-context, first-critical hull only. Longer multi-step congruence derivations and
+unaudited kernel relations remain outside both the computation and the Lean theorem.
 
 For `G3-O20`, Lean proves the free-monoid tail law: if one fixed-boundary equation with stationary
 left and right pump blocks holds at exponents `N` and `N+1`, it holds at every exponent `N+k`.

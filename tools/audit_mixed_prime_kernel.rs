@@ -448,6 +448,388 @@ fn critical_pairs(rules: &[Rule], verbose: bool, print: bool) -> CriticalReport 
     }
 }
 
+struct ContextRelation {
+    name: String,
+    left: String,
+    right: String,
+}
+
+fn context_relations(rules: &[Rule]) -> Vec<ContextRelation> {
+    let mut relations: Vec<_> = rules
+        .iter()
+        .map(|rule| ContextRelation {
+            name: rule.name.to_owned(),
+            left: rule.smaller.to_owned(),
+            right: rule.larger.to_owned(),
+        })
+        .collect();
+    for first in rules {
+        for second in rules {
+            let limit = first.larger.len().min(second.larger.len());
+            for overlap in 1..limit {
+                if first.larger[first.larger.len() - overlap..] != second.larger[..overlap] {
+                    continue;
+                }
+                relations.push(ContextRelation {
+                    name: format!("{}>{}@{overlap}", first.name, second.name),
+                    left: format!("{}{}", first.smaller, &second.larger[overlap..]),
+                    right: format!(
+                        "{}{}",
+                        &first.larger[..first.larger.len() - overlap],
+                        second.smaller,
+                    ),
+                });
+            }
+        }
+    }
+    for relation in &relations {
+        assert_eq!(relation.left.len(), relation.right.len());
+        assert_ne!(
+            relation.left.as_bytes().first(),
+            relation.right.as_bytes().first()
+        );
+        assert_ne!(
+            relation.left.as_bytes().last(),
+            relation.right.as_bytes().last()
+        );
+        assert_eq!(word_matrix(&relation.left), word_matrix(&relation.right));
+    }
+    relations
+}
+
+struct AlignedSquareReport {
+    candidates: usize,
+    roots: BTreeMap<String, usize>,
+    unary: usize,
+    unary_with_constant_opposite_prefix: usize,
+}
+
+fn aligned_square_report(
+    relations: &[ContextRelation],
+    verbose: bool,
+    print_total: bool,
+) -> AlignedSquareReport {
+    let mut report = AlignedSquareReport {
+        candidates: 0,
+        roots: BTreeMap::new(),
+        unary: 0,
+        unary_with_constant_opposite_prefix: 0,
+    };
+    for relation in relations {
+        for (orientation, left, right) in [
+            ("LR", relation.left.as_bytes(), relation.right.as_bytes()),
+            ("RL", relation.right.as_bytes(), relation.left.as_bytes()),
+        ] {
+            let length = left.len();
+            for root_length in 1..=(length - 2) / 2 {
+                for prefix in 1..length - 2 * root_length {
+                    let root = &left[prefix..prefix + root_length];
+                    let left_square = left[prefix + root_length..prefix + 2 * root_length] == *root;
+                    let right_square = right[prefix..prefix + root_length] == *root
+                        && right[prefix + root_length..prefix + 2 * root_length] == *root;
+                    if !left_square || !right_square {
+                        continue;
+                    }
+                    report.candidates += 1;
+                    let root_text = std::str::from_utf8(root).expect("letters are ASCII");
+                    *report.roots.entry(root_text.to_owned()).or_default() += 1;
+                    let unary = root.iter().all(|letter| *letter == root[0]);
+                    report.unary += usize::from(unary);
+                    let opposite_prefix_constant =
+                        unary && right[..prefix].iter().all(|letter| *letter == root[0]);
+                    report.unary_with_constant_opposite_prefix +=
+                        usize::from(opposite_prefix_constant);
+                    if verbose {
+                        println!(
+                            "ALIGNED_SQUARE\trelation={}\torientation={orientation}\tlength={length}\tprefix={prefix}\troot={root_text}",
+                            relation.name,
+                        );
+                    }
+                }
+            }
+        }
+    }
+    if print_total {
+        println!(
+            "ALIGNED_SQUARE_TOTAL\trelations={}\tcandidates={}\tper_root={:?}\tunary={}\tunary_with_constant_opposite_prefix={}",
+            relations.len(),
+            report.candidates,
+            report.roots,
+            report.unary,
+            report.unary_with_constant_opposite_prefix,
+        );
+    }
+    report
+}
+
+#[derive(Clone, Copy)]
+enum ForkContextMode {
+    All,
+    Internal,
+    OneComparable,
+    SameShorter,
+    OverlapSameShorter,
+    NonoverlapSameShorter,
+}
+
+impl ForkContextMode {
+    fn parse(value: &str) -> Self {
+        match value {
+            "all" => Self::All,
+            "internal" => Self::Internal,
+            "one-comparable" => Self::OneComparable,
+            "same-shorter" => Self::SameShorter,
+            "overlap-same-shorter" => Self::OverlapSameShorter,
+            "nonoverlap-same-shorter" => Self::NonoverlapSameShorter,
+            _ => panic!(
+                "MODE must be all, internal, one-comparable, same-shorter, \
+                 overlap-same-shorter, or nonoverlap-same-shorter"
+            ),
+        }
+    }
+
+    fn accepts_lengths(self, x: usize, y: usize) -> bool {
+        let shorter = x.min(y);
+        let longer = x.max(y);
+        match self {
+            Self::All | Self::Internal | Self::OneComparable => true,
+            Self::SameShorter => x != y,
+            Self::OverlapSameShorter => x != y && longer < 2 * shorter,
+            Self::NonoverlapSameShorter => x != y && shorter <= 2 && 2 * shorter <= longer,
+        }
+    }
+
+    fn accepts(
+        self,
+        x: usize,
+        y: usize,
+        prefix: usize,
+        suffix: usize,
+        relation_length: usize,
+    ) -> bool {
+        let shorter = x.min(y);
+        let longer = x.max(y);
+        let prefix_internal = prefix < shorter;
+        let suffix_internal = suffix < shorter;
+        match self {
+            Self::All => true,
+            Self::Internal => prefix_internal && suffix_internal,
+            Self::OneComparable => prefix_internal != suffix_internal,
+            Self::SameShorter => x != y && !prefix_internal && !suffix_internal,
+            Self::OverlapSameShorter => {
+                x != y
+                    && longer < 2 * shorter
+                    && 2 * shorter + 2 <= relation_length
+                    && !prefix_internal
+                    && !suffix_internal
+            }
+            Self::NonoverlapSameShorter => {
+                // `aligned_square_report` exhausts the selected cores and proves that every
+                // aligned root has length at most two.
+                x != y
+                    && shorter <= 2
+                    && 2 * shorter <= longer
+                    && !prefix_internal
+                    && !suffix_internal
+            }
+        }
+    }
+}
+
+struct LetterDsu {
+    parent: Vec<usize>,
+    rank: Vec<u8>,
+    value: Vec<Option<u8>>,
+}
+
+impl LetterDsu {
+    fn new(cardinality: usize) -> Self {
+        Self {
+            parent: (0..cardinality).collect(),
+            rank: vec![0; cardinality],
+            value: vec![None; cardinality],
+        }
+    }
+
+    fn find(&mut self, mut element: usize) -> usize {
+        let mut root = element;
+        while self.parent[root] != root {
+            root = self.parent[root];
+        }
+        while self.parent[element] != element {
+            let next = self.parent[element];
+            self.parent[element] = root;
+            element = next;
+        }
+        root
+    }
+
+    fn merge(&mut self, left: usize, right: usize) -> bool {
+        let (mut left_root, mut right_root) = (self.find(left), self.find(right));
+        if left_root == right_root {
+            return true;
+        }
+        if self.rank[left_root] < self.rank[right_root] {
+            std::mem::swap(&mut left_root, &mut right_root);
+        }
+        let merged = match (self.value[left_root], self.value[right_root]) {
+            (Some(left_value), Some(right_value)) if left_value != right_value => return false,
+            (Some(value), _) | (_, Some(value)) => Some(value),
+            (None, None) => None,
+        };
+        self.parent[right_root] = left_root;
+        self.value[left_root] = merged;
+        if self.rank[left_root] == self.rank[right_root] {
+            self.rank[left_root] += 1;
+        }
+        true
+    }
+
+    fn bind(&mut self, element: usize, value: u8) -> bool {
+        let root = self.find(element);
+        match self.value[root] {
+            Some(bound) => bound == value,
+            None => {
+                self.value[root] = Some(value);
+                true
+            }
+        }
+    }
+
+    fn materialize(&mut self, element: usize) -> u8 {
+        let root = self.find(element);
+        self.value[root].unwrap_or(b'D')
+    }
+}
+
+struct ForkLayout {
+    left: Vec<usize>,
+    right: Vec<usize>,
+    x: usize,
+    y: usize,
+    z: usize,
+}
+
+impl ForkLayout {
+    fn new(x: usize, y: usize, z: usize) -> Self {
+        let x_ids: Vec<_> = (0..x).collect();
+        let y_ids: Vec<_> = (x..x + y).collect();
+        let z_ids: Vec<_> = (x + y..x + y + z).collect();
+        let mut left = Vec::with_capacity(2 * x + 2 * y + z);
+        let mut right = Vec::with_capacity(2 * x + 2 * y + z);
+        for block in [&y_ids, &z_ids, &x_ids, &y_ids, &x_ids] {
+            left.extend(block);
+        }
+        for block in [&x_ids, &z_ids, &y_ids, &x_ids, &y_ids] {
+            right.extend(block);
+        }
+        Self {
+            left,
+            right,
+            x,
+            y,
+            z,
+        }
+    }
+
+    fn solve(
+        &self,
+        relation_left: &str,
+        relation_right: &str,
+        prefix: usize,
+    ) -> Option<(String, String, String)> {
+        let mut dsu = LetterDsu::new(self.x + self.y + self.z);
+        let relation_length = relation_left.len();
+        for position in 0..self.left.len() {
+            let consistent = if position < prefix || prefix + relation_length <= position {
+                dsu.merge(self.left[position], self.right[position])
+            } else {
+                let relation_position = position - prefix;
+                dsu.bind(
+                    self.left[position],
+                    relation_left.as_bytes()[relation_position],
+                ) && dsu.bind(
+                    self.right[position],
+                    relation_right.as_bytes()[relation_position],
+                )
+            };
+            if !consistent {
+                return None;
+            }
+        }
+        let letters: Vec<_> = (0..self.x + self.y + self.z)
+            .map(|element| dsu.materialize(element))
+            .collect();
+        let x = String::from_utf8(letters[..self.x].to_vec()).expect("letters are ASCII");
+        let y = String::from_utf8(letters[self.x..self.x + self.y].to_vec())
+            .expect("letters are ASCII");
+        let z = String::from_utf8(letters[self.x + self.y..].to_vec()).expect("letters are ASCII");
+        let left = format!("{y}{z}{x}{y}{x}");
+        let right = format!("{x}{z}{y}{x}{y}");
+        assert_eq!(&left[prefix..prefix + relation_length], relation_left);
+        assert_eq!(&right[prefix..prefix + relation_length], relation_right,);
+        assert_eq!(&left[..prefix], &right[..prefix]);
+        assert_eq!(
+            &left[prefix + relation_length..],
+            &right[prefix + relation_length..],
+        );
+        Some((x, y, z))
+    }
+}
+
+fn fork_context_search(lower: usize, upper: usize, mode: ForkContextMode, rules: &[Rule]) {
+    assert!(0 < lower && lower <= upper);
+    let relations = context_relations(rules);
+    let mut assignments = 0_u64;
+    for total in lower..=upper {
+        for x in 1..total {
+            for y in 1..total {
+                let macro_weight = 2 * x + 2 * y;
+                if total <= macro_weight {
+                    continue;
+                }
+                if !mode.accepts_lengths(x, y) {
+                    continue;
+                }
+                let z = total - macro_weight;
+                let layout = ForkLayout::new(x, y, z);
+                for relation in &relations {
+                    if total < relation.left.len() {
+                        continue;
+                    }
+                    let context_length = total - relation.left.len();
+                    for (orientation, left, right) in [
+                        ("LR", relation.left.as_str(), relation.right.as_str()),
+                        ("RL", relation.right.as_str(), relation.left.as_str()),
+                    ] {
+                        for prefix in 0..=context_length {
+                            let suffix = context_length - prefix;
+                            if !mode.accepts(x, y, prefix, suffix, relation.left.len()) {
+                                continue;
+                            }
+                            assignments += 1;
+                            if let Some((x_word, y_word, z_word)) =
+                                layout.solve(left, right, prefix)
+                            {
+                                println!(
+                                    "FORK_CONTEXT_HIT\trelation={}\torientation={orientation}\ttotal={total}\tx={x}\ty={y}\tz={z}\tprefix={prefix}\tsuffix={suffix}\n  X={x_word}\n  Y={y_word}\n  Z={z_word}",
+                                    relation.name,
+                                );
+                                return;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    println!(
+        "FORK_CONTEXT_NONE\trules={}\trelations={}\tlower={lower}\tupper={upper}\tassignments={assignments}",
+        rules.len(),
+        relations.len(),
+    );
+}
+
 fn self_check() {
     for rule in RULES {
         assert_eq!(rule.larger.len(), rule.smaller.len());
@@ -492,6 +874,29 @@ fn self_check() {
     assert_eq!(five_rule_report.inclusions, 0);
     assert_eq!(five_rule_report.joinable, 0);
     assert_eq!(five_rule_report.minimum_length, 52);
+
+    let context_relations = context_relations(&RULES);
+    assert_eq!(context_relations.len(), 50);
+    let first_critical = context_relations
+        .iter()
+        .find(|relation| relation.name == "r27>r27@1")
+        .expect("the first proper Cassaigne overlap must exist");
+    assert_eq!(first_critical.left.len(), 53);
+    assert!(ForkLayout::new(26, 104, 52)
+        .solve(&first_critical.left, &first_critical.right, 208)
+        .is_some());
+    let square_report = aligned_square_report(&context_relations, false, false);
+    assert_eq!(square_report.candidates, 770);
+    assert_eq!(
+        square_report.roots,
+        BTreeMap::from([
+            ("D".to_owned(), 590),
+            ("DD".to_owned(), 20),
+            ("T".to_owned(), 160),
+        ]),
+    );
+    assert_eq!(square_report.unary, 770);
+    assert_eq!(square_report.unary_with_constant_opposite_prefix, 0);
 
     for pump in 0..=11 {
         let (left, right) = odd_family(pump);
@@ -538,9 +943,30 @@ fn main() {
             let verbose = arguments.iter().any(|argument| argument == "--verbose");
             critical_pairs(rules, verbose, true);
         }
+        Some("fork-context") if (4..=5).contains(&arguments.len()) => {
+            let lower = arguments[1]
+                .parse()
+                .expect("LOWER must be a positive integer");
+            let upper = arguments[2]
+                .parse()
+                .expect("UPPER must be a positive integer no smaller than LOWER");
+            let mode = ForkContextMode::parse(&arguments[3]);
+            fork_context_search(lower, upper, mode, selected_rules(arguments.get(4)));
+        }
+        Some("aligned-square") if arguments.len() <= 3 => {
+            let rule_argument = arguments
+                .get(1)
+                .filter(|value| value.as_str() != "--verbose");
+            let relations = context_relations(selected_rules(rule_argument));
+            aligned_square_report(
+                &relations,
+                arguments.iter().any(|argument| argument == "--verbose"),
+                true,
+            );
+        }
         _ => {
             eprintln!(
-                "usage:\n  mixed-prime-kernel-audit self-check\n  mixed-prime-kernel-audit census LENGTH [RULE_COUNT]\n  mixed-prime-kernel-audit critical [RULE_COUNT] [--verbose]"
+                "usage:\n  mixed-prime-kernel-audit self-check\n  mixed-prime-kernel-audit census LENGTH [RULE_COUNT]\n  mixed-prime-kernel-audit critical [RULE_COUNT] [--verbose]\n  mixed-prime-kernel-audit fork-context LOWER UPPER MODE [RULE_COUNT]\n  mixed-prime-kernel-audit aligned-square [RULE_COUNT] [--verbose]"
             );
             std::process::exit(2);
         }
