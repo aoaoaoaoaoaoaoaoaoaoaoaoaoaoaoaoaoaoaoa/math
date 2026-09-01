@@ -3629,6 +3629,29 @@
 'MatrixMortality.MixedPrimeDebt.sameLengthCollisionPrefixesUnit_iff' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.MixedPrimeDebt.shellSlope_eq_gain_div' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.MixedPrimeDebt.shellClearedRun' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.MixedPrimeDebt.shellRun_eq_iff_clearedRun_eq_of_length_eq' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.suffixSumLE_length_eq' depends on axioms: [propext]
+'MatrixMortality.MixedPrimeDebt.suffixSumLE_sum_le' depends on axioms: [propext]
+'MatrixMortality.MixedPrimeDebt.suffixSumLE_of_forall₂' depends on axioms: [propext]
+'MatrixMortality.MixedPrimeDebt.suffixSumLE_iff_forall_drop_sum_le' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.MixedPrimeDebt.shellGain_anti' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.MixedPrimeDebt.shellOffset_anti' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.MixedPrimeDebt.shellRun_strictAnti_of_suffixSumLE' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.positiveSource_collision_suffixSum_incomparable' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.sameLength_positiveSource_collision_suffixSums_cross' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.collisionSource_nonpos_of_suffixSumLE' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.MixedPrimeDebt.shellRun_fixedPoint_unique' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.MixedPrimeDebt.shellPeriodicPoint_eq_iff_commute' depends on axioms: [propext,
  Classical.choice,

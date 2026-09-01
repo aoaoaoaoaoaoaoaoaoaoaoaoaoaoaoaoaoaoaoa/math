@@ -3785,6 +3785,13 @@ five-unit exactly when the affine determinant has value `κ(Δ)−length`. This 
 [`D2-S19`](SALVAGE.md#d2-s19-same-length-collision-acceptance-certificate). The remaining
 same-length task is to solve the fixed-source intercept equation together with this determinant
 carry, not to inspect intermediate guards.
+That equation now has a global monotone cut. Order equal-length schedules by all aligned suffix
+sums. For every positive source the shell endpoint is strictly antitone in this order, so every
+nontrivial endpoint fibre is an antichain; equivalently, the suffix-sum difference of any
+colliding pair must take both signs. This is
+[`D2-S20`](SALVAGE.md#d2-s20-positive-endpoint-suffix-antichain). The live same-length search may
+discard every one-sided cumulative-wait walk before computing the fixed-source equation or the
+`D2-S19` determinant carry.
 The deepest of those three branches is itself a full depth reset. In normalized band coordinates
 `U(d,μ)=1/5+(3/10)(2/3)^dμ`, every target band `d≥2` contains a point whose `d−2` predecessor has
 any prescribed band `n≥7` and mantissa in `(2/3,1]`. An explicit guarded subfamily fixes target
@@ -4134,7 +4141,9 @@ universal computation.
    relation or an injective rank-two guarded loop family. `D2-S17` extends the balanced-kernel/
    collision-source split to arbitrary fixed endpoint fibres. `D2-S18` reduces same-length
    cross-grade source acceptance to one explicit parity/LTE intercept carry, and `D2-S19`
-   reduces complete collision acceptance to the matching affine-determinant carry.
+   reduces complete collision acceptance to the matching affine-determinant carry. `D2-S20`
+   removes every suffix-ordered pair from every positive-source fibre, leaving only signed
+   cumulative-wait walks that cross zero.
    Keep the non-elementary lanes independent: adelic cone types, parabolic rational subsets,
    trace/height descent, finite-obstruction saturation, and valuation universality.
 6. Synthesize the returned attacks by the discriminating signals above; do not average
