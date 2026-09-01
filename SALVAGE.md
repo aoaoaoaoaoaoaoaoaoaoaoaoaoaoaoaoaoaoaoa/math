@@ -135,6 +135,7 @@ file owns the mathematical stock.
 | [`R32-S61`](#r32-s61-sole-singular-cubic-punctuation) | structure theorem | wait zero is the unique nonunit return, and mortality of the complete fixed family is exactly one scalar bridge over positive waits | formalized | active |
 | [`R32-O26`](#r32-o26-projective-neutral-insertion-invisibility) | obstruction | nonzero scalar-identity words are mortality-invisible, and the cubic clock admits an explicit positive radix-carry identity | formalized | graduated |
 | [`R32-S62`](#r32-s62-terminal-row-bridge-aliases) | structure theorem | exact triangular prefixes and boundary rewrites reduce all eight bounded length-eight bridge hits to two length-seven cores | formalized | active |
+| [`R32-S63`](#r32-s63-length-nine-cubic-bridge-novelty) | structure theorem and obstruction | eight exact length-nine bridge cores survive the shorter alias system, while three new row rewrites explain the derived bounded hits | formalized | active |
 | [`R32-M01`](#r32-m01-generic-reverse-edge-compiler) | partial mechanism | projective incidence generically embeds into a compatible two-plane edge square | formalized | active |
 | [`R32-M02`](#r32-m02-finite-quotient-sieve) | partial mechanism | finite monoid quotients give complete modular no-certificates for fixed candidates | formalized | active |
 | [`R32-M03`](#r32-m03-two-scale-return-conversion) | partial mechanism | a minimal two-scale return pencil has nonresonant multi-return zeros | formalized | active |
@@ -4704,7 +4705,8 @@ are formalized. Exhaustiveness of the bounded census is computational evidence. 
 length-seven census with the first six waits at most `200` and the last at most `50` found only
 the two cores; that statement is also computational, not a global classification. The aliases
 suggest a rewrite quotient for the positive bridge language but do not prove termination,
-confluence, or a finite normal-form theorem.
+confluence, or a finite normal-form theorem. `R32-S63` immediately supplies eight new
+length-nine cores, so closure on only `A` and `B` is false.
 
 **Artifact:** `CubicReturn.NonPure.falseWaitSeparatorRow_triangular_prefixes`,
 `falseWaitSeparatorRow_boundary_rewrites`,
@@ -4714,8 +4716,71 @@ confluence, or a finite normal-form theorem.
 [`m32-cubic-bridge-aliases-2026-08-31.md`](audits/m32-cubic-bridge-aliases-2026-08-31.md).
 
 **Use:** quotient terminal bridge prefixes by (1)–(2) before any finite search or decision
-argument. Test whether their completion yields a terminating normal form; do not count the eight
-bounded hits as independent bridge phenomena.
+argument. Do not count the eight bounded hits as independent bridge phenomena, and do not infer
+that the two surviving cores generate deeper layers.
+
+### R32-S63: Length-nine cubic bridge novelty
+
+**Kind:** structure theorem and obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+An exact meet-in-the-middle census of length-nine positive bridges with waits at most `30`
+returned `35` hits. The known aliases from `R32-S62`, together with three new boundary rewrites,
+explain `27`. The new identities are
+
+```text
+rΠ[4,1,8,7]=−180rΠ[13,15],
+rΠ[7,16,15,1]=73440rΠ[13,15],
+rΠ[15,8,16,1]=−(50400/13)rΠ[12,12].                 (1)
+```
+
+The remaining eight words are
+
+```text
+[22,3,5,15,4,15,6,8,2]
+[21,1,8,7,1,7,1,8,7]
+[7,16,15,7,7,7,1,8,7]
+[8,7,1,1,17,15,1,8,7]
+[22,22,8,22,19,15,8,1,8]
+[10,12,15,8,12,1,15,11,8]
+[3,15,1,21,17,1,15,22,8]
+[7,16,15,4,1,15,21,22,8].                          (2)
+```
+
+Lean indexes (2) by `Fin 8`, checks each separator incidence zero by exact rational
+multiplication, and derives each full `M₀Π(w)M₀=0` identity from rank-one outer algebra. It also
+checks all three projective row identities in (1).
+
+**Scope:** every displayed identity and zero is formalized. The claims that the bounded census
+has `35` hits, that `27` reduce, and that the eight words in (2) survive all shorter terminal-row
+representatives through prefix length four are computational evidence. The result decisively
+refutes closure of the bounded bridge language on only the two length-seven cores and the five
+`R32-S62` aliases. It does not refute a richer finite rewrite system or prove infinitely many
+irreducible cores.
+
+The search also exposes a sharp provisional asymmetry. In the waits-at-most-thirty census,
+terminal-row words have `89,567` projective collisions through depth four, while all `837,931`
+separator-column words have distinct projective images. Larger column checks remain collision
+free through depth four at waits at most `50`, depth three at waits at most `100`, and depth two
+at waits at most `300`. This is computational evidence only and cannot extend to global
+injectivity. Lean checks that the two length-seven cores already send the source column to
+`[29617088832000000,0]ᵀ` and `[13080043192320000,0]ᵀ`, respectively, and hence collide
+projectively on the accepting ray with ratio `195925/86528`. The true correct read-write block
+from `R32-O26` supplies another collision against the empty word at positive length `1175`.
+
+**Artifact:** `CubicReturn.NonPure.falseWaitLengthSevenBridgeCore_source_images`,
+`falseWaitLengthSevenBridgeCore_source_collision`,
+`falseWaitLengthNineNewBridge_scalar_zero`,
+`falseWaitLengthNineNewBridge_zero`, and
+`falseWaitSeparatorRow_lengthNine_boundary_rewrites` in
+[`CubicContinuantPunctuation.lean`](MatrixMortality/CubicContinuantPunctuation.lean), with audit
+[`m32-cubic-length-nine-bridges-2026-08-31.md`](audits/m32-cubic-length-nine-bridges-2026-08-31.md).
+
+**Use:** reject the two-core rewrite closure. For a decision attack, seek a right/source-column
+decoder only before first arrival at the accepting ray and modulo the projective-neutral
+congruence, while quotienting the highly collisional terminal-row prefix action. Do not claim
+raw column freeness or seek a symmetric normal form.
 
 ### R32-M01: Generic reverse edge compiler
 

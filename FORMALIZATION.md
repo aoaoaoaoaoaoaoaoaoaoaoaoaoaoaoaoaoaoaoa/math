@@ -1042,6 +1042,17 @@ bounded census is computational evidence; the row identities and indexed reducti
 checked. See `R32-S62` and
 [`audits/m32-cubic-bridge-aliases-2026-08-31.md`](audits/m32-cubic-bridge-aliases-2026-08-31.md).
 
+The two-core closure fails one level later. `CubicContinuantPunctuation` now indexes eight new
+length-nine bridge words and proves each separator incidence and full bridge product zero. Three
+additional exact terminal-row aliases explain the derived part of the same bounded census. The
+facts that the census has `35` hits, that `27` reduce, and that the eight displayed words survive
+all checked shorter aliases are computational; the eight zeros and three aliases are formal.
+This redirects the decision lane toward first-arrival decoding on the much less collisional
+separator-column orbit, and away from symmetric row/column normal forms. Global column
+injectivity is already false: the two length-seven cores collide projectively on the accepting
+ray, and every correct read-write block supplies a later neutral collision. See `R32-S63` and
+[`audits/m32-cubic-length-nine-bridges-2026-08-31.md`](audits/m32-cubic-length-nine-bridges-2026-08-31.md).
+
 The rank-(2,2) graph is no longer an independent residue. `RankTwoPunctuation` proves that every
 compatible square with one rank-one loop and three units transports exactly to the existing raw
 reverse compiler [`R32-M01`](SALVAGE.md#r32-m01-generic-reverse-edge-compiler). Its intrinsic
@@ -1884,7 +1895,7 @@ fixed-rank decision problem.
 | `CubicContinuantNeutrality.lean` | contextual insertion/deletion invariance of correct projective-identity read-write blocks |
 | `CubicContinuantMismatchClock.lean` | contracting signed-error clock and exact endpoint zero test for balanced cubic radix comparisons |
 | `CubicContinuantSelfBalance.lean` | 2-adic and 5-adic rejection of every incorrect cubic-comparator cleanup count |
-| `CubicContinuantPunctuation.lean` | unique singular return, scalar-bridge reduction, and exact terminal-row bridge aliases of the fixed cubic language |
+| `CubicContinuantPunctuation.lean` | unique singular return, scalar-bridge reduction, and exact terminal-row aliases and bounded bridge cores of the fixed cubic language |
 | `EdgeCompression.lean` | exact adjacent-edge compression for split finite-rank families |
 | `TwoPlaneEdges.lean` | compatible two-plane realization of a `2 × 2` edge square and exact rank-two certificates |
 | `ReverseEdge.lean` | generic projective-incidence reverse compiler, basis adaptation, and all-path converse |

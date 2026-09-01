@@ -219,6 +219,34 @@ def falseWaitLengthSevenBridgeCore : Fin 2 → List Nat :=
   ![[13, 15, 29, 11, 13, 7, 8],
     [12, 12, 8, 12, 12, 15, 8]]
 
+/-- The two length-seven bridge cores send the separator source to explicit nonzero vectors on
+the accepting ray. -/
+theorem falseWaitLengthSevenBridgeCore_source_images :
+    wordProduct falseWaitReturn (falseWaitLengthSevenBridgeCore 0) *ᵥ
+        falseWaitSeparatorColumn = ![29617088832000000, 0] ∧
+      wordProduct falseWaitReturn (falseWaitLengthSevenBridgeCore 1) *ᵥ
+        falseWaitSeparatorColumn = ![13080043192320000, 0] := by
+  constructor <;>
+    ext coordinate <;>
+    fin_cases coordinate <;>
+      norm_num [falseWaitLengthSevenBridgeCore, falseWaitSeparatorColumn,
+        wordProduct_cons, wordProduct_nil, falseWaitReturn_eq_state,
+        falseWaitReturnOfState, cubicDefectState, CubicDefectState.next,
+        Matrix.mul_apply, Matrix.mulVec, dotProduct, Fin.sum_univ_succ]
+
+/-- The two distinct length-seven bridge cores already collide projectively on the separator
+source orbit. -/
+theorem falseWaitLengthSevenBridgeCore_source_collision :
+    wordProduct falseWaitReturn (falseWaitLengthSevenBridgeCore 0) *ᵥ
+        falseWaitSeparatorColumn =
+      (195925 / 86528 : ℚ) •
+        (wordProduct falseWaitReturn (falseWaitLengthSevenBridgeCore 1) *ᵥ
+          falseWaitSeparatorColumn) := by
+  rw [falseWaitLengthSevenBridgeCore_source_images.1,
+    falseWaitLengthSevenBridgeCore_source_images.2]
+  ext coordinate
+  fin_cases coordinate <;> norm_num
+
 /-- The eight bridge hits in the exact length-eight, waits-at-most-thirty census. -/
 def falseWaitLengthEightBridgeHit : Fin 8 → List Nat :=
   ![[1, 13, 15, 29, 11, 13, 7, 8],
@@ -282,5 +310,69 @@ theorem falseWaitLengthEightBridgeHit_zero (index : Fin 8) :
       falseWaitLengthSevenBridgeCore_scalar_zero, smul_zero]
   rw [falseWaitReturn_zero_eq_outer,
     outer_mul, outer_mul_outer, scalar_zero, zero_smul]
+
+/-- Eight exact length-nine bridge cores not reduced by the known shorter boundary aliases. -/
+def falseWaitLengthNineNewBridge : Fin 8 → List Nat :=
+  ![[22, 3, 5, 15, 4, 15, 6, 8, 2],
+    [21, 1, 8, 7, 1, 7, 1, 8, 7],
+    [7, 16, 15, 7, 7, 7, 1, 8, 7],
+    [8, 7, 1, 1, 17, 15, 1, 8, 7],
+    [22, 22, 8, 22, 19, 15, 8, 1, 8],
+    [10, 12, 15, 8, 12, 1, 15, 11, 8],
+    [3, 15, 1, 21, 17, 1, 15, 22, 8],
+    [7, 16, 15, 4, 1, 15, 21, 22, 8]]
+
+/-- Every displayed new length-nine core has zero separator incidence. -/
+theorem falseWaitLengthNineNewBridge_scalar_zero (index : Fin 8) :
+    (falseWaitSeparatorRow ᵥ*
+        wordProduct falseWaitReturn (falseWaitLengthNineNewBridge index)) ⬝ᵥ
+      falseWaitSeparatorColumn = 0 := by
+  fin_cases index <;>
+    norm_num [falseWaitLengthNineNewBridge, falseWaitSeparatorRow,
+      falseWaitSeparatorColumn, wordProduct_cons, wordProduct_nil,
+      falseWaitReturn_eq_state, falseWaitReturnOfState, cubicDefectState,
+      CubicDefectState.next, Matrix.mul_apply, Matrix.vecMul, dotProduct,
+      Fin.sum_univ_succ]
+
+/-- Every displayed new length-nine core gives an exact zero between singular returns. -/
+theorem falseWaitLengthNineNewBridge_zero (index : Fin 8) :
+    falseWaitReturn 0 *
+        wordProduct falseWaitReturn (falseWaitLengthNineNewBridge index) *
+      falseWaitReturn 0 = 0 := by
+  rw [falseWaitReturn_zero_eq_outer, outer_mul, outer_mul_outer,
+    falseWaitLengthNineNewBridge_scalar_zero, zero_smul]
+
+/-- Three further terminal-row aliases explain the derived portion of the bounded length-nine
+bridge census. -/
+theorem falseWaitSeparatorRow_lengthNine_boundary_rewrites :
+    falseWaitSeparatorRow ᵥ*
+        wordProduct falseWaitReturn [4, 1, 8, 7] =
+          (-180 : ℚ) •
+            (falseWaitSeparatorRow ᵥ*
+              wordProduct falseWaitReturn [13, 15]) ∧
+      falseWaitSeparatorRow ᵥ*
+          wordProduct falseWaitReturn [7, 16, 15, 1] =
+        (73440 : ℚ) •
+          (falseWaitSeparatorRow ᵥ*
+            wordProduct falseWaitReturn [13, 15]) ∧
+      falseWaitSeparatorRow ᵥ*
+          wordProduct falseWaitReturn [15, 8, 16, 1] =
+        (-50400 / 13 : ℚ) •
+          (falseWaitSeparatorRow ᵥ*
+            wordProduct falseWaitReturn [12, 12]) := by
+  constructor
+  · ext coordinate
+    fin_cases coordinate <;>
+      norm_num [falseWaitSeparatorRow, wordProduct_cons, wordProduct_nil,
+        falseWaitReturn_eq_state, falseWaitReturnOfState, cubicDefectState,
+        CubicDefectState.next, Matrix.mul_apply, Matrix.vecMul, dotProduct,
+        Fin.sum_univ_succ]
+  constructor <;>
+    ext coordinate <;>
+    fin_cases coordinate <;>
+      norm_num [falseWaitSeparatorRow, wordProduct_cons, wordProduct_nil,
+        falseWaitReturn_eq_state, falseWaitReturnOfState, cubicDefectState,
+        CubicDefectState.next, Matrix.mul_apply, Matrix.vecMul, dotProduct,
+        Fin.sum_univ_succ]
 
 end MatrixMortality.CubicReturn.NonPure

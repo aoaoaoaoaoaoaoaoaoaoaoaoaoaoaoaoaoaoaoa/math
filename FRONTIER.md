@@ -1719,11 +1719,21 @@ waits `1,5,14` are scalar identities, while `[4,6]` rewrites to `[13]` and `[3,8
 to `[12,12]`, each with a nonzero rational scale. These five identities reduce all eight hits in
 the bounded length-eight, waits-at-most-thirty census to the two formal length-seven bridge cores;
 Lean checks the indexed reductions and all resulting zeros. The census completeness remains
-computational. The decision lane can now ask a sharp algebraic question: do these aliases extend
-to a terminating, confluent rewrite system for every positive scalar bridge, or do deeper words
-produce a third irreducible core? See
+computational. Deeper words already answer the two-core closure negatively. A length-nine,
+waits-at-most-thirty census found `35` hits; `27` reduce through known or three new exact row
+aliases, but eight exact Lean-checked zeros remain as new cores. The bounded geometry is sharply
+one-sided: terminal-row prefixes have tens of thousands of projective collisions, while the
+separator-column orbit has none in substantially larger exact censuses. Global column
+injectivity is nevertheless false already at length seven: the two formal cores send the source
+to nonzero scalar multiples on the accepting ray. `R32-O26` also gives a positive
+scalar-identity collision of length `1175`. The next lawful decision attack should decode the
+right/source orbit only until its first arrival at the accepting ray, modulo projective-neutral
+insertion, while quotienting the collisional left/terminal action. See
 [`R32-S62`](SALVAGE.md#r32-s62-terminal-row-bridge-aliases) and
-[`m32-cubic-bridge-aliases-2026-08-31.md`](audits/m32-cubic-bridge-aliases-2026-08-31.md).
+[`R32-S63`](SALVAGE.md#r32-s63-length-nine-cubic-bridge-novelty), with audits
+[`m32-cubic-bridge-aliases-2026-08-31.md`](audits/m32-cubic-bridge-aliases-2026-08-31.md)
+and
+[`m32-cubic-length-nine-bridges-2026-08-31.md`](audits/m32-cubic-length-nine-bridges-2026-08-31.md).
 
 ### ReturnSquare laboratory
 
