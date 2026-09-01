@@ -1653,6 +1653,18 @@ with this write-only stack, or prove that all such readers collapse into a decid
 quotient. See [`R32-S57`](SALVAGE.md#r32-s57-free-cubic-continuant-radix-stack) and
 [`m32-cubic-continuant-radix-2026-08-31.md`](audits/m32-cubic-continuant-radix-2026-08-31.md).
 
+The write-only seam is now closed. The same positive recurrence semigroup contains exact
+projective inverses for both radix letters: one reader has physical length `2089`, the other
+`1166`, and each correct reader deletes its head letter while preserving every suffix up to a
+nonzero scalar. The construction uses a reciprocal-ratio terminal loop corrected by positive
+and negative parabolic translations. It also exposes the remaining obstruction exactly. A wrong
+zero-read leaves translation `−125/48`, a wrong one-read leaves `125/48`, and the two defects
+cancel. Hence a terminal identity test alone is unsound. The compiler lane now needs a local
+mismatch trap or a grammar admitting at most one defect sign; the decision lane may exploit the
+resulting affine signed-defect quotient. See
+[`R32-S58`](SALVAGE.md#r32-s58-positive-cubic-radix-readers) and
+[`m32-cubic-continuant-reader-2026-08-31.md`](audits/m32-cubic-continuant-reader-2026-08-31.md).
+
 ### ReturnSquare laboratory
 
 [`R32-S03`](SALVAGE.md#r32-s03-returnsquare-normal-form) is the first completely normalized

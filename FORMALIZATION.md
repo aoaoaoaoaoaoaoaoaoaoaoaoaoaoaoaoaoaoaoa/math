@@ -975,6 +975,16 @@ projectively distinct. This kills finite exact-product stabilizer nuclei, but no
 tracking only the common fixed terminal ray. See `R32-S57` and
 [`audits/m32-cubic-continuant-radix-2026-08-31.md`](audits/m32-cubic-continuant-radix-2026-08-31.md).
 
+`CubicContinuantReader` closes the corresponding write-only seam. Two explicitly repeated
+positive terminal-loop words realize the normalized inverse matrices
+`[[25/4,−274/48],[0,1]]` and `[[25/4,−149/48],[0,1]]`. Lean proves that each reader times its
+matching radix generator is `25I`, and lifts this equality through the nonzero physical scales
+to deletion of the head of every encoded word. The same module computes the mismatch defect:
+the two wrong reader-letter pairs are opposite translations by `125/48` and multiply to the
+identity projectively. Thus the readers are exact but not locally sound without another trap.
+See `R32-S58` and
+[`audits/m32-cubic-continuant-reader-2026-08-31.md`](audits/m32-cubic-continuant-reader-2026-08-31.md).
+
 The rank-(2,2) graph is no longer an independent residue. `RankTwoPunctuation` proves that every
 compatible square with one rank-one loop and three units transports exactly to the existing raw
 reverse compiler [`R32-M01`](SALVAGE.md#r32-m01-generic-reverse-edge-compiler). Its intrinsic
@@ -1813,6 +1823,7 @@ fixed-rank decision problem.
 | `CubicReturn.lean` | pure-cubic arbitrary-word collapse and automatic genericity of the one-singular normal form |
 | `CubicReturnNonPure.lean` | non-pure physical endpoints, fixed return recurrence, scalar-defect norm, continuant state projection, and exact unselected-wait obstructions |
 | `CubicContinuantRadix.lean` | free binary affine radix stack inside the fixed non-pure cubic terminal language |
+| `CubicContinuantReader.lean` | positive projective inverses for both cubic radix letters and the exact opposite-mismatch cancellation |
 | `EdgeCompression.lean` | exact adjacent-edge compression for split finite-rank families |
 | `TwoPlaneEdges.lean` | compatible two-plane realization of a `2 × 2` edge square and exact rank-two certificates |
 | `ReverseEdge.lean` | generic projective-incidence reverse compiler, basis adaptation, and all-path converse |
@@ -2157,6 +2168,8 @@ fixed-rank decision problem.
 | Two positive cubic-continuant macros realize a common-ratio binary radix code | `CubicReturn.NonPure.continuantRadixWord_product`, `CubicReturn.NonPure.continuantRadixGenerator_product_entries` |
 | The physical radix encoding is projectively injective and every encoding is upper triangular | `CubicReturn.NonPure.continuantRadixEncoding_projectively_injective`, `CubicReturn.NonPure.continuantRadixEncoding_lowerLeft` |
 | Every radix prefix extends the fixed endpoint bridge to a zero without projective bridge collisions | `CubicReturn.NonPure.continuantRadixEncoding_zero`, `CubicReturn.NonPure.continuantRadixBridge_projectively_injective` |
+| Both cubic radix letters have positive physical projective inverses which pop every encoded suffix | `CubicReturn.NonPure.continuantRadixReaderWord_positive`, `CubicReturn.NonPure.continuantRadixReaderWord_pop_encoding` |
+| Wrong cubic radix reads leave opposite parabolic defects and two opposite mismatches cancel | `CubicReturn.NonPure.continuantRadixReader_mismatch`, `CubicReturn.NonPure.continuantRadixReaderWord_two_mismatches` |
 | Rule and erasure matrices agree on the upper-side plane | `rule_erase_agree_on_upperSide` |
 | Every finite-controller letter routes its selected private channel exactly | `controllerMatrix_mulVec_controllerVector` |
 | Every suffix-controlled word obeys the generic total decoder | `controllerProduct_mulVec_controllerVector` |

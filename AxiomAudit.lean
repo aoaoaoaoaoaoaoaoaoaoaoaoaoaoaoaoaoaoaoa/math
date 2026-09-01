@@ -613,6 +613,14 @@ open MatrixMortality
 #print axioms CubicReturn.NonPure.continuantRadixEncoding_lowerLeft
 #print axioms CubicReturn.NonPure.continuantRadixEncoding_zero
 #print axioms CubicReturn.NonPure.continuantRadixBridge_projectively_injective
+#print axioms CubicReturn.NonPure.continuantRadixReaderWord_positive
+#print axioms CubicReturn.NonPure.continuantRadixReader_mul_generator
+#print axioms CubicReturn.NonPure.continuantRadixReaderWord_push_pop
+#print axioms CubicReturn.NonPure.continuantRadixReaderWord_pop_suffix
+#print axioms CubicReturn.NonPure.continuantRadixReaderWord_pop_encoding
+#print axioms CubicReturn.NonPure.continuantRadixReader_mismatch
+#print axioms CubicReturn.NonPure.continuantRadixReader_two_mismatches
+#print axioms CubicReturn.NonPure.continuantRadixReaderWord_two_mismatches
 #print axioms EdgeCompression.isMortal_iff_exists_edgeProduct_eq_zero
 #print axioms TwoPlaneEdges.output_mul_input
 #print axioms TwoPlaneEdges.generator_rank
