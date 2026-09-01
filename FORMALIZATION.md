@@ -1411,7 +1411,7 @@ transition: `peeledNumerator_twoAdic_deepens` proves that the difference of the 
 every non-singleton consecutive multi-pole block to have upper length at least three. The module
 does not identify later product residuals with raw encoded heads or decide singleton targets.
 
-The dimension-two affine ledger has thirty independently checked records:
+The dimension-two affine ledger has thirty-one independently checked records:
 
 | Record | Formalization obligation |
 | --- | --- |
@@ -1434,6 +1434,7 @@ The dimension-two affine ledger has thirty independently checked records:
 | [`D2-S19`](SALVAGE.md#d2-s19-same-length-collision-acceptance-certificate) | the exact affine-determinant valuation criterion for a five-unit common target and, equivalently, every prefix guard on both sides of a same-length cross-grade collision |
 | [`D2-S20`](SALVAGE.md#d2-s20-positive-endpoint-suffix-antichain) | the cleared fixed-source equation, gain and offset antitonicity in reverse cumulative waits, strict positive-source endpoint order, and the two-sided suffix-crossing condition for every collision |
 | [`D2-S21`](SALVAGE.md#d2-s21-affine-determinant-carry-stripping) | the exact cleared affine determinant identity, corrected positive acceptance exponent, paired initial and terminal recurrences, and common-end endpoint stripping |
+| [`D2-S22`](SALVAGE.md#d2-s22-prefix-carry-minimum-classifier) | the exact weighted suffix balance and real-trap corridor, complementary prefix-determinant expansion, termwise parity/LTE values, unique-minimum obstruction, bounded cancellation partner, generic even-gap successor, and sharp accepted/rejected witnesses |
 | [`D2-D05`](SALVAGE.md#d2-d05-prescribed-translation-count) | primitive linear-polynomial divisibility, bounded carries in both scan directions, ordered-marker automaton, regular control, and `a=±1` cases |
 | [`D2-D06`](SALVAGE.md#d2-d06-private-prime-peeling) | unique-minimum valuation calculation, zero endpoints, fixed-count reduction, reversed language, and positive private valuation |
 | [`D2-D07`](SALVAGE.md#d2-d07-bounded-valuation-orthants) | localization support, denominator bounds in both orthants, invariant-interval recognition, finite graph, and regular-control product |

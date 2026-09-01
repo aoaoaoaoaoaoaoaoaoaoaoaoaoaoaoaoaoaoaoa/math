@@ -270,6 +270,7 @@ file owns the mathematical stock.
 | [`D2-S19`](#d2-s19-same-length-collision-acceptance-certificate) | structure theorem | same-length cross-grade collision acceptance is exactly one affine-determinant valuation test | formalized | active |
 | [`D2-S20`](#d2-s20-positive-endpoint-suffix-antichain) | structure theorem | every positive-source endpoint fibre is an antichain in the reverse cumulative-wait order | formalized | active |
 | [`D2-S21`](#d2-s21-affine-determinant-carry-stripping) | reduction | common initial and terminal waits strip exactly from the fixed-source equation, while the cleared determinant has explicit recurrences | formalized | active |
+| [`D2-S22`](#d2-s22-prefix-carry-minimum-classifier) | structure theorem | accepted same-length cross-grade collisions require a bounded later cancellation of their first nonzero prefix carry | formalized | active |
 | [`D2-D01`](#d2-d01-projectively-unimodular-stratum) | decidable stratum | projectively unimodular hard-core instances are decidable | audited | stock |
 | [`D2-D02`](#d2-d02-invariant-pair-stratum) | decidable stratum | invariant projective pairs reduce to abelian-by-`C₂` reachability | reported | active |
 | [`D2-D03`](#d2-d03-common-multiplier-stratum) | decidable stratum | rational affine maps with one multiplier are decidable under regular control | reported | active |
@@ -12521,6 +12522,107 @@ unchanged under terminal stripping, and test `v₅(H)=n+κ(Δ)` only on the rema
 **Next:** run the determinant recurrence only on irreducible signed suffix-gap walks. Seek a
 finite carry quotient or a height contraction for walks whose fixed source lies in the real
 trap and whose target occupies one of the twelve canonical depth classes.
+
+### D2-S22: Prefix-carry minimum classifier
+
+**Kind:** exact expansion and carry obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+For equal-length schedules `u,v` of length `n`, let `G` and `H` be the cleared gain and
+determinant from [`D2-S21`](#d2-s21-affine-determinant-carry-stripping). For `1≤i≤n`, put
+
+```text
+uⁱ=take(i,u),   uᵢ=drop(i,u),
+Pᵢ=|sum(uⁱ)−sum(vⁱ)|.
+```
+
+The offset suffix recurrence expands exactly as
+
+```text
+O(u)=Σᵢ 5^(i−1)G(uᵢ).
+```
+
+Substitution into `H` and multiplicativity of `G` give the complementary prefix expansion
+
+```text
+H(u,v)=Σᵢ 5^(i−1)G(uᵢ)G(vᵢ)(G(uⁱ)−G(vⁱ)).
+```
+
+Every gain is a five-adic unit. If `Pᵢ≠0`, the `i`th summand has exact value
+
+```text
+hᵢ=(i−1)+κ(Pᵢ).
+```
+
+A finite sum with a unique lowest nonzero summand has that exact value. Hence an accepted
+collision cannot have a unique minimum among the `hᵢ`: the final term has height
+`n−1+κ(Pₙ)`, already one below the required accepted value `n+κ(Pₙ)` from `D2-S21`.
+
+Let `j` be the first index with `Pⱼ≠0`. Acceptance forces a later index `i` satisfying
+
+```text
+j<i≤n,   Pᵢ≠0,   (i−j)+κ(Pᵢ)≤κ(Pⱼ).
+```
+
+Thus the first nonzero prefix gap is even. In the generic even case `κ(Pⱼ)=1`, the only
+possible partner is `i=j+1`, and `Pᵢ` must be odd. Larger carry depth still gives a finite
+window of at most `κ(Pⱼ)` later indices.
+
+The source equation has the dual exact weighted suffix form
+
+```text
+x(G(u)−G(v))+Σᵢ 5^(i−1)(G(uᵢ)−G(vᵢ))=0.
+```
+
+Orient the pair by `sum(v)<sum(u)` and put
+
+```text
+A=G(v)−G(u)>0,   B=O(u)−O(v).
+```
+
+Then `collisionSource(u,v)=B/A`, and real-trap membership is the exact cleared corridor
+
+```text
+collisionSource(u,v)∈[1/5,1/2]  ↔  A/5≤B≤A/2.
+```
+
+Appending possibly different waits also has the closed recurrence
+
+```text
+H(u++[a],v++[b])
+  =sₐs_bH(u,v)+5^n(G(u++[a])−G(v++[b])).
+```
+
+The cuts are sharp. The pair `{[0,2],[2,1]}` collides at source `1/2` and accepted target
+`1/3`, with both prefix terms tied at height one. The strict-interior pair
+`{[1,1],[9,0]}` collides at `2187/8236` and accepted target `664/2059`, again with the same
+two-term tie. Conversely `{[2,5],[0,6]}` has the same signed suffix-gap walk and source `1/2`
+as the boundary accepted pair when oriented as `[0,6]` against `[2,5]`, but its target
+`55/243` has five-adic value one.
+
+**Scope:** repeated minimum height is necessary, not sufficient; tied terms may cancel beyond
+the accepted depth. The accepted/rejected pair proves that even the complete integer-valued
+suffix-gap walk and source do not determine target acceptance. The exact suffix weights and
+prefix carries remain necessary. This record does not bound `κ(Pⱼ)` or classify its higher-depth
+cancellation trees.
+
+**Artifact:** `MixedPrimeDebt.shellRun_eq_iff_weightedSuffixBalance`,
+`MixedPrimeDebt.collisionSource_mem_realTrap_iff_weightedBalanceCorridor`,
+`MixedPrimeDebt.shellClearedDeterminant_eq_sum_prefixTerms`,
+`MixedPrimeDebt.shellPrefixDeterminantTerm_hasValue`,
+`MixedPrimeDebt.shellClearedDeterminant_hasValue_of_uniquePrefixCarryMinimum`,
+`MixedPrimeDebt.acceptedCollision_exists_prefixCarryPartner`, and
+`MixedPrimeDebt.acceptedCollision_nextPrefixGap_odd_of_firstCarryDepth_one` in
+[`MixedPrimeRealTrapPrefixCarry.lean`](MatrixMortality/MixedPrimeRealTrapPrefixCarry.lean).
+
+**Use:** after the common-end stripping of `D2-S21`, find the first nonzero prefix gap. Reject
+it if odd. If its carry depth is one, demand a nonzero odd next prefix gap. At greater depth,
+enumerate only the bounded partner window before evaluating the exact weighted source balance.
+
+**Next:** classify the `κ(Pⱼ)≥2` cancellation tree under the real-trap source corridor. Test
+whether the forced chain of successively smaller carries terminates, becomes periodic, or
+determines a finite state-dependent modulus.
 
 ### D2-O09: Guarded real-pole reset
 

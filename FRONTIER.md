@@ -2594,6 +2594,15 @@ collision source fixed. This is
 [`D2-S21`](SALVAGE.md#d2-s21-affine-determinant-carry-stripping). The live crossing-walk search
 therefore starts only from pairs with different initial and terminal waits; terminal extension
 still has an inhomogeneous determinant carry and remains part of the hard core.
+The carry is now termwise. The cleared determinant is a weighted sum of prefix-gain gaps whose
+nonzero term at index `i` has exact value `i−1+κ(Pᵢ)`. Accepted collisions cannot have a unique
+lowest term. If `j` is the first nonzero prefix gap, some `i>j` must satisfy
+`i−j+κ(Pᵢ)≤κ(Pⱼ)`. Hence `Pⱼ` is even; when `κ(Pⱼ)=1`, the next prefix gap exists and is odd.
+This is [`D2-S22`](SALVAGE.md#d2-s22-prefix-carry-minimum-classifier). It leaves only
+higher-depth tied-minimum trees coupled to the exact weighted suffix source equation and its
+cleared real-trap corridor. Two exact
+length-two pairs with the same signed suffix-gap walk and source have opposite target-acceptance
+outcomes, so no suffix-gap-only quotient can decide the residue.
 The deepest of those three branches is itself a full depth reset. In normalized band coordinates
 `U(d,μ)=1/5+(3/10)(2/3)^dμ`, every target band `d≥2` contains a point whose `d−2` predecessor has
 any prescribed band `n≥7` and mantissa in `(2/3,1]`. An explicit guarded subfamily fixes target
@@ -2913,7 +2922,10 @@ universal computation.
    `D2-S20` removes every suffix-ordered pair from every positive-source fibre, leaving only
    signed cumulative-wait walks that cross zero. `D2-S21` strips every common initial or terminal
    segment from the fixed-source equation and gives the exact cleared-determinant recurrence;
-   enumerate only endpoint-irreducible crossing walks. Abandon
+   enumerate only endpoint-irreducible crossing walks. `D2-S22` rejects odd first prefix gaps,
+   forces a bounded later carry partner, and completely classifies the depth-one first carry;
+   attack only the remaining higher-depth tied-minimum trees through the weighted source
+   balance. Abandon
    finite literal return censuses and local forbidden-factor grammars; attack those
    endpoint-coupled fibres. Treat chamber
    exit and reentry as separate pre-exit seams. Do not reopen
