@@ -1699,6 +1699,21 @@ an independent control representation. See
 [`R32-S61`](SALVAGE.md#r32-s61-sole-singular-cubic-punctuation) and
 [`m32-cubic-continuant-punctuation-2026-08-31.md`](audits/m32-cubic-continuant-punctuation-2026-08-31.md).
 
+The obvious same-component syntax repair is impossible. Any physical word whose normalized
+product is a nonzero scalar identity can be inserted or deleted inside every left/right context
+without changing whether the total product is zero. Each correct cubic reader-writer pair is
+such a word. Thus no homogeneous terminal context in this same `2×2` return representation can
+count correct pairs, require their presence, or enforce their boundaries. A lawful compiler must
+either be formulated modulo this neutral congruence or carry syntax in a genuinely independent
+phase/control representation. Worse, a fully positive malformed carry word satisfies
+`(R₀G₁)⁴G₁(R₁G₀)²⁵R₁∼I`: four mismatch units below one clock cancel twenty-five opposite units
+above it because `4−25(4/25)=0`. Lean checks the normalized identity, the nonzero physical scale,
+all `38,742` positive waits, and contextual insertion invisibility. Thus the clock cannot enforce
+its own one-digit-per-level hypothesis; that obligation must live in the independent control
+phase as well. See
+[`R32-O26`](SALVAGE.md#r32-o26-projective-neutral-insertion-invisibility) and
+[`m32-projective-neutral-insertion-2026-08-31.md`](audits/m32-projective-neutral-insertion-2026-08-31.md).
+
 ### ReturnSquare laboratory
 
 [`R32-S03`](SALVAGE.md#r32-s03-returnsquare-normal-form) is the first completely normalized

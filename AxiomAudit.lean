@@ -622,6 +622,15 @@ open MatrixMortality
 #print axioms CubicReturn.NonPure.continuantRadixReader_mismatch
 #print axioms CubicReturn.NonPure.continuantRadixReader_two_mismatches
 #print axioms CubicReturn.NonPure.continuantRadixReaderWord_two_mismatches
+#print axioms wordProduct_projectiveIdentity_insertion
+#print axioms wordProduct_zero_iff_projectiveIdentity_insertion
+#print axioms CubicReturn.NonPure.continuantCorrectReadWrite_insertion_zero_iff
+#print axioms CubicReturn.NonPure.continuantReadWriteWord_projectivelyRealizes
+#print axioms CubicReturn.NonPure.continuantCarry_normalized_identity
+#print axioms CubicReturn.NonPure.continuantCarryNeutralWord_projectiveIdentity
+#print axioms CubicReturn.NonPure.continuantCarryNeutralWord_positive
+#print axioms CubicReturn.NonPure.continuantCarryNeutralWord_length
+#print axioms CubicReturn.NonPure.continuantCarryNeutralWord_insertion_zero_iff
 #print axioms CubicReturn.NonPure.continuantMismatchCode_zero_forces_all_zero
 #print axioms CubicReturn.NonPure.continuantMismatchDefect_eq_scaledCode
 #print axioms CubicReturn.NonPure.continuantMismatchDefect_eq_zero_iff

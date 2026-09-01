@@ -133,6 +133,7 @@ file owns the mathematical stock.
 | [`R32-S59`](#r32-s59-clocked-cubic-radix-comparator) | compiler mechanism | a common contracting clock turns every mismatch schedule into an injective signed radix code, and a physical endpoint bridge vanishes exactly on matching checks | formalized | active |
 | [`R32-S60`](#r32-s60-self-balancing-cubic-comparator-cleanup) | compiler mechanism | the split endpoint bridge rejects every excess or deficient cleanup-reader count by incompatible 2-adic and 5-adic parity | formalized | active |
 | [`R32-S61`](#r32-s61-sole-singular-cubic-punctuation) | structure theorem | wait zero is the unique nonunit return, and mortality of the complete fixed family is exactly one scalar bridge over positive waits | formalized | active |
+| [`R32-O26`](#r32-o26-projective-neutral-insertion-invisibility) | obstruction | nonzero scalar-identity words are mortality-invisible, and the cubic clock admits an explicit positive radix-carry identity | formalized | graduated |
 | [`R32-M01`](#r32-m01-generic-reverse-edge-compiler) | partial mechanism | projective incidence generically embeds into a compatible two-plane edge square | formalized | active |
 | [`R32-M02`](#r32-m02-finite-quotient-sieve) | partial mechanism | finite monoid quotients give complete modular no-certificates for fixed candidates | formalized | active |
 | [`R32-M03`](#r32-m03-two-scale-return-conversion) | partial mechanism | a minimal two-scale return pencil has nonresonant multi-return zeros | formalized | active |
@@ -4595,6 +4596,69 @@ those exhaustiveness bounds are computational evidence only.
 Do not spend state on recognizing singular letters or exterior unit-only words. Classify the
 positive scalar bridge language, or transplant the local stack gadget into target-dependent
 endpoint geometry.
+
+### R32-O26: Projective-neutral insertion invisibility
+
+**Kind:** obstruction
+**Evidence:** formalized
+**Disposition:** graduated
+
+Let a word `N` over any `2×2` rational matrix family satisfy
+
+```text
+Π(N)=λI,       λ≠0.
+```
+
+For arbitrary left and right contexts `L,R`, associativity and central scalar multiplication
+give
+
+```text
+Π(LNR)=λΠ(LR).
+```
+
+Consequently,
+
+```text
+Π(LNR)=0 ↔ Π(LR)=0.                                  (1)
+```
+
+The result is independent of the surrounding generators and words. In the fixed cubic radix
+stack, each correct physical reader-writer block satisfies the hypotheses by `R32-S58`.
+Lean therefore specializes (1) to both bit values and every pair of physical wait contexts.
+
+There is also a genuinely malformed neutral word. Write `G₁` for the true writer and `R_b` for
+the readers. Exact normalized multiplication gives
+
+```text
+(R₀G₁)⁴ G₁ (R₁G₀)²⁵ R₁ = 25³⁰I.                    (2)
+```
+
+This is the affine carry `−4+(4/25)25=0`: four negative mismatches below one clock cancel
+twenty-five positive mismatches above it. Lean lifts (2) to an explicit physical word of length
+`38,742`, proves that every wait is positive, carries its nonzero physical scale, and proves that
+the word is insertion/deletion invisible in every context.
+
+**Scope:** no homogeneous zero test in the same two-dimensional projective representation can
+enforce the presence, number, or boundary of correct reader-writer blocks: inserting or deleting
+one is semantically invisible. The carry word further shows that the `R32-S59` clock is sound
+only after enforcing one signed digit per level; unrestricted macro concatenation recreates an
+exact neutral cancellation. This does not forbid a source grammar already saturated under those
+neutral relations, an independent phase/control representation, a direct-sum compiler, or
+instance-dependent endpoint geometry in which the relevant block is not a scalar identity.
+
+**Artifact:** `MatrixMortality.wordProduct_projectiveIdentity_insertion`,
+`wordProduct_zero_iff_projectiveIdentity_insertion`, and
+`CubicReturn.NonPure.continuantCorrectReadWrite_insertion_zero_iff`,
+`continuantCarryNeutralWord_projectiveIdentity`, and
+`continuantCarryNeutralWord_insertion_zero_iff` in
+[`MatrixSemigroup.lean`](MatrixMortality/MatrixSemigroup.lean) and
+[`CubicContinuantNeutrality.lean`](MatrixMortality/CubicContinuantNeutrality.lean), with audit
+[`m32-projective-neutral-insertion-2026-08-31.md`](audits/m32-projective-neutral-insertion-2026-08-31.md).
+
+**Use:** reject every proposed same-component homogeneous grammar guard whose correctness
+depends on counting or delimiting scalar-identity blocks, and reject every clock grammar that
+does not bound the signed multiplicity at each level. Add a genuinely independent control
+observable, or formulate the compiler modulo the neutral congruence from the outset.
 
 ### R32-M01: Generic reverse edge compiler
 
