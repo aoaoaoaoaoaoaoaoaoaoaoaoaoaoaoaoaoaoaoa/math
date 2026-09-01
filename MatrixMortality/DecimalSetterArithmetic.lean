@@ -61,6 +61,36 @@ private theorem integerUnit_hasDecimalShell
     HasDecimalShell unit 0 0 :=
   ⟨intCast_isUnit_of_not_dvd unit_two, intCast_isUnit_of_not_dvd unit_five⟩
 
+/-- An integer ending in decimal digit seven is a unit at both prime factors of ten. -/
+theorem intCast_hasDecimalShell_of_mod_seven
+    {value : ℤ} (value_mod : value ≡ 7 [ZMOD 10]) :
+    HasDecimalShell (value : ℚ) 0 0 := by
+  rw [Int.modEq_iff_dvd] at value_mod
+  obtain ⟨carry, carry_eq⟩ := value_mod
+  have value_eq : value = 7 - 10 * carry := by omega
+  apply integerUnit_hasDecimalShell
+  · rw [value_eq]
+    rintro ⟨quotient, quotient_eq⟩
+    omega
+  · rw [value_eq]
+    rintro ⟨quotient, quotient_eq⟩
+    omega
+
+/-- An integer ending in decimal digit three is a unit at both prime factors of ten. -/
+theorem intCast_hasDecimalShell_of_mod_three
+    {value : ℤ} (value_mod : value ≡ 3 [ZMOD 10]) :
+    HasDecimalShell (value : ℚ) 0 0 := by
+  rw [Int.modEq_iff_dvd] at value_mod
+  obtain ⟨carry, carry_eq⟩ := value_mod
+  have value_eq : value = 3 - 10 * carry := by omega
+  apply integerUnit_hasDecimalShell
+  · rw [value_eq]
+    rintro ⟨quotient, quotient_eq⟩
+    omega
+  · rw [value_eq]
+    rintro ⟨quotient, quotient_eq⟩
+    omega
+
 private theorem modEq_ten_hasDecimalShell
     {value : ℤ} (value_mod : value ≡ 10 [ZMOD 100]) :
     HasDecimalShell value 1 1 := by

@@ -480,6 +480,17 @@ theorem code_append (head tail : List Bool) :
     List.length_map, List.length_reverse]
   ring
 
+/-- A positive radix-ten binary code ending in `false` ends in decimal digit seven. -/
+theorem code_append_false_mod_ten (stem : List Bool) :
+    (code (stem ++ [false]) : ℤ) ≡ 7 [ZMOD 10] := by
+  rw [code_append]
+  norm_num [code, digit, Nat.ofDigits]
+
+/-- A positive radix-ten binary code ending in the digit seven is a decimal unit. -/
+theorem code_append_false_hasDecimalShell (stem : List Bool) :
+    HasDecimalShell (code (stem ++ [false]) : ℚ) 0 0 := by
+  simpa using intCast_hasDecimalShell_of_mod_seven (code_append_false_mod_ten stem)
+
 theorem code_cons (bit : Bool) (tail : List Bool) :
     code (bit :: tail) = digit bit * 10 ^ tail.length + code tail := by
   simpa only [List.singleton_append, code_singleton] using code_append [bit] tail

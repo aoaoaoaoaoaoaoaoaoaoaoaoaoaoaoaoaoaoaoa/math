@@ -140,6 +140,7 @@ file owns the mathematical stock.
 | [`MM-S66`](#mm-s66-complete-rule-bearing-first-entry-extinction) | obstruction | every rule-bearing block misses the physical multi-role pole shell from a lawful two-`c` raw head | formalized | active |
 | [`MM-S67`](#mm-s67-complete-distinguished-first-entry-extinction) | obstruction | no non-singleton physical first block carries a lawful two-`c` raw head into another multi-role pole | formalized | active |
 | [`MM-S74`](#mm-s74-triple-free-bridge-frontier) | structure theorem | decimal setter mortality is exactly a parsed singleton, shallow-reset, or deep square-pole frontier | formalized | active |
+| [`MM-S77`](#mm-s77-shallow-generalized-raw-head-adapter) | structure theorem | every shallow square-reset pole obeys one exact generalized raw-head equation whose full root code and complement are decimal units | formalized | active |
 | [`R32-S01`](#r32-s01-split-return-normal-form) | structure theorem | rank-two cuts reduce one-unit binary mortality to a `2 × 2` return recurrence | formalized | graduated |
 | [`R32-S02`](#r32-s02-two-plane-edge-square) | structure theorem | two rank-two generators are a two-vertex square of `2 × 2` edges | formalized | graduated |
 | [`R32-O01`](#r32-o01-rank-one-profile-collapse) | obstruction | a rank-one generator reduces mortality to order-at-most-three scalar recurrence zeros | audited | stock |
@@ -5043,6 +5044,57 @@ frontiers; the computability seam is the integer-family emitter.
 **Next:** derive the exact decimal shell carried by an arbitrary `squareReset` source and map each
 of the three frontier branches either to an existing extinction theorem or to a new generalized
 carrier theorem. Prove primitive-recursive emission separately.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S77: Shallow generalized raw-head adapter
+
+**Kind:** structure theorem
+**Evidence:** formalized
+**Disposition:** active
+
+Let `source` be the parser's sole rightmost root block and put
+
+```text
+H = code(spell upper source · marker),
+Δ = μ·10^|spell upper source| − H.
+```
+
+For any target block, write `P` for its punctuated upper code and `V` for its complete lower
+code. Lean reduces the shallow square-reset pole exactly to
+
+```text
+gap(10^β)·P·H = lift(10^β)·V·Δ.
+```
+
+This is the physical decimal carry equation: the matrix coefficients satisfy
+`9μ·basisGap=gap(10^β)` and `9μ·alpha=lift(10^β)`, and the common nonzero scale cancels in both
+directions. If `β>0` and the source obeys the parser law `EndsInRule`, then `H` ends in decimal
+digit seven and `Δ` ends in digit three. Hence both have exact decimal shell `(0,0)`.
+
+**Scope:** this closes the exact algebra and root-unit obligations for the `MM-S74` shallow
+branch. It does not identify the full root boundary `H` with the peeled two-`c` head used by
+`MM-S67`; its complement is `μ·10^|upper|−H`, not `10μ−H`. The singleton-target and deep-history
+branches are also outside this theorem. No shallow pole is excluded merely by the unit facts.
+
+**Use:** instantiate generalized decimal carry arguments directly from a parsed shallow root,
+without postulating its projective coordinates or prime shells. Any attempted composition with
+the distinguished first-entry extinction must now supply an explicit ancestry or normalization
+map between the full root and peeled-head parameters.
+
+**Formalization:**
+[`MatrixMortality/DecimalSetterBridge.lean`](MatrixMortality/DecimalSetterBridge.lean), through
+`upperBoundaryCode_decimalUnit`, `upperBoundaryComplement_decimalUnit`,
+`sourceBoundary_decimalUnits`, and
+`hitsSquarePole_single_iff_generalizedRawHead_with_units`.
+
+**Artifact:**
+[`audits/m53-shallow-square-reset-adapter-2026-08-31.md`](audits/m53-shallow-square-reset-adapter-2026-08-31.md).
+
+**Next:** either prove that every reachable shallow parser root normalizes to the peeled two-`c`
+boundary, or exclude the displayed generalized equation for arbitrary rule-ended roots. Keep
+singleton targets and deeper histories as separate branches.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).

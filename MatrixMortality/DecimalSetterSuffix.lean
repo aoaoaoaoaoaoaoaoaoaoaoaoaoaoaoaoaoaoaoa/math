@@ -69,41 +69,6 @@ private theorem fiveHundredFifty_hasDecimalShell : HasDecimalShell (550 : ℚ) 1
       eleven_hasDecimalShell)
   convert product_shell using 1 <;> norm_num
 
-private theorem intCast_hasDecimalShell_of_mod_seven
-    {value : ℤ} (value_mod : value ≡ 7 [ZMOD 10]) :
-    HasDecimalShell (value : ℚ) 0 0 := by
-  rw [Int.modEq_iff_dvd] at value_mod
-  obtain ⟨carry, carry_eq⟩ := value_mod
-  have value_eq : value = 7 - 10 * carry := by omega
-  refine ⟨intCast_isUnit_of_not_dvd ?_, intCast_isUnit_of_not_dvd ?_⟩
-  · rw [value_eq]
-    rintro ⟨quotient, quotient_eq⟩
-    omega
-  · rw [value_eq]
-    rintro ⟨quotient, quotient_eq⟩
-    omega
-
-private theorem intCast_hasDecimalShell_of_mod_three
-    {value : ℤ} (value_mod : value ≡ 3 [ZMOD 10]) :
-    HasDecimalShell (value : ℚ) 0 0 := by
-  rw [Int.modEq_iff_dvd] at value_mod
-  obtain ⟨carry, carry_eq⟩ := value_mod
-  have value_eq : value = 3 - 10 * carry := by omega
-  refine ⟨intCast_isUnit_of_not_dvd ?_, intCast_isUnit_of_not_dvd ?_⟩
-  · rw [value_eq]
-    rintro ⟨quotient, quotient_eq⟩
-    omega
-  · rw [value_eq]
-    rintro ⟨quotient, quotient_eq⟩
-    omega
-
-private theorem code_append_false_hasDecimalShell (stem : List Bool) :
-    HasDecimalShell (code (stem ++ [false]) : ℚ) 0 0 := by
-  have code_mod : (code (stem ++ [false]) : ℤ) ≡ 7 [ZMOD 10] := by
-    rw [code_append]
-    norm_num [code, digit, Nat.ofDigits]
-  simpa using intCast_hasDecimalShell_of_mod_seven code_mod
-
 private theorem code_append_false_false_mod_hundred (stem : List Bool) :
     (code (stem ++ [false, false]) : ℤ) ≡ 77 [ZMOD 100] := by
   rw [code_append]

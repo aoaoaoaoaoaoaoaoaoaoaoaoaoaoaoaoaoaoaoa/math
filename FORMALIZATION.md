@@ -1610,6 +1610,13 @@ converse equivalence, and `mortalityProblem_mortal_iff_exists_parsedZeroFrontier
 the cleared integer family. The remaining theorem must identify or exclude the arbitrary
 square-reset source; `MM-S67` covers only its distinguished two-`c` raw-head specialization.
 
+Record [`MM-S77`](SALVAGE.md#mm-s77-shallow-generalized-raw-head-adapter) computes the exact
+one-root square reset. With `H` the full punctuated source upper code and
+`Δ=μ·10^|upper|−H`, a shallow pole is equivalent to
+`gap(10^β)·P·H=lift(10^β)·V·Δ`. A parser-lawful rule-ended source makes `H` a decimal-seven unit
+and `Δ` a decimal-three unit. This supplies the physical equation and both root shells without
+identifying the full root with `MM-S67`'s peeled two-`c` head.
+
 Record [`MM-S37`](SALVAGE.md#mm-s37-decimal-three-shape-frontier-extinction) separates the
 ternary and decimal first-multi-transfer fronts. The single theorem
 `DecimalSetterDepth.firstMultiTransfer_threeShapeFrontier_impossible` consumes the three role
@@ -1665,7 +1672,7 @@ the periodic saturation theorem and its remaining arithmetic boundary are recons
 formalization and the shell attack are tracked in
 [#7](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/7).
 
-The `M₅(3)` delimiter attack has eleven foundational records:
+The `M₅(3)` delimiter attack has twelve foundational records:
 
 | Record | Formalization obligation |
 | --- | --- |
@@ -1674,6 +1681,7 @@ The `M₅(3)` delimiter attack has eleven foundational records:
 | [`MM-M03`](SALVAGE.md#mm-m03-five-state-setter-punctuation) | explicit setter matrices, delimiter powers and ranks, regular decoder, and `S²A_cS³=λC̃L̃` |
 | [`MM-M06`](SALVAGE.md#mm-m06-formal-decimal-setter-compiler) | formal decimal matrices, exact rank profile and regular decoder, forward integer compiler, and arbitrary `S³` scalar-bridge fracture |
 | [`MM-S74`](SALVAGE.md#mm-s74-triple-free-bridge-frontier) | recursive delimiter-cube coefficient factorization, exhaustive cube-free block parser, exact execution, and mortality-equivalent singleton/shallow/deep pole frontier |
+| [`MM-S77`](SALVAGE.md#mm-s77-shallow-generalized-raw-head-adapter) | exact shallow square-reset equation, decimal coefficient calibration, and full-root code/complement unit shells |
 | [`MM-S01`](SALVAGE.md#mm-s01-square-run-projective-normal-form) | invariant square-run plane, invertible `2 × 2` transfer, Möbius normalization, rank-one fracture grammar, and equivalence with pole avoidance |
 | [`MM-S02`](SALVAGE.md#mm-s02-reset-zero-projective-peeling) | scaled transfer identity, exact two-shell classification of all poles, and reset-zero one-transfer avoidance |
 | [`MM-O16`](SALVAGE.md#mm-o16-exact-delimiter-pair-obstruction) | generic ignored-pair immortality is formalized; paired common-kernel and cubic companion specializations are audited |
@@ -2136,7 +2144,7 @@ fixed-rank decision problem.
 | `RationalMatrixClearing.lean` | generic finite rational denominator clearing and exact mortality preservation |
 | `DecimalSetterMatrix.lean` | explicit decimal `5 × 5` setter, delimiter ranks, regular decoder, internal separator, and forward rational compiler |
 | `DecimalSetterFracture.lean` | greedy delimiter-cube fracture and complete arbitrary-product scalar-bridge normal form |
-| `DecimalSetterBridge.lean` | recursive cube elimination, exhaustive triple-free block parser, exact square-reset execution, and mortality-equivalent pole frontier |
+| `DecimalSetterBridge.lean` | recursive cube elimination, exhaustive triple-free block parser, mortality-equivalent pole frontier, and exact shallow generalized raw-head adapter |
 | `DecimalSetterInteger.lean` | explicit three-label integer `M₅(3)` family and forward Neary compiler |
 | `DecimalSetterArithmetic.lean` | decimal setter centered carry, reciprocal recurrence, coupled `2`/`5` target shells, and successive-pole valuation balance |
 | `DecimalSetterCarry.lean` | two-reset successive-pole identities, joint depth constraints, exact decimal suffix exhaustion, first-transfer prefix separation, and the ordinary depth-two A/B shell forest |

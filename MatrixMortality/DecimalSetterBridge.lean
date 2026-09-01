@@ -685,4 +685,246 @@ theorem mortalityProblem_mortal_iff_exists_parsedZeroFrontier
   rw [DecimalSetterInteger.mortalityProblem_mortal_iff,
     isMortal_iff_exists_parsedZeroFrontier β_pos]
 
+/-! ## Shallow square-reset adapter -/
+
+/-- Full punctuated upper code carried by a role block. -/
+def upperBoundaryCode (β : Nat) (roles : List NearyTile) : ℚ :=
+  DecimalSetterCarry.code (spell (nearyUpper β) roles ++ nearyMarker β)
+
+/-- Split a punctuated upper boundary into its variable prefix and fixed marker. -/
+theorem upperBoundaryCode_eq (β : Nat) (roles : List NearyTile) :
+    upperBoundaryCode β roles =
+      DecimalSetterCarry.code (spell (nearyUpper β) roles) * markerScale β + marker β := by
+  rw [upperBoundaryCode, DecimalSetterCarry.code_append]
+  simp [markerScale, marker, nearyMarker]
+
+/-- Complement of a punctuated upper block inside its exact decimal length. -/
+def upperBoundaryComplement (β : Nat) (roles : List NearyTile) : ℚ :=
+  marker β * 10 ^ (spell (nearyUpper β) roles).length - upperBoundaryCode β roles
+
+/-- Every positive-width punctuated upper boundary ends in decimal digit seven. -/
+theorem upperBoundaryCode_decimalUnit {β : Nat} (β_pos : 0 < β)
+    (roles : List NearyTile) :
+    DecimalSetterArithmetic.HasDecimalShell (upperBoundaryCode β roles) 0 0 := by
+  obtain ⟨offset, rfl⟩ := Nat.exists_eq_succ_of_ne_zero (Nat.ne_of_gt β_pos)
+  simpa [upperBoundaryCode, nearyMarker, List.replicate_succ', List.append_assoc] using
+    DecimalSetterCarry.code_append_false_hasDecimalShell
+      (spell (nearyUpper (offset + 1)) roles ++ [true] ++
+        List.replicate offset false)
+
+/-- The exact-length complement of a nonempty punctuated upper boundary ends in decimal digit
+three, hence is a unit at both prime factors of ten. -/
+theorem upperBoundaryComplement_decimalUnit {β : Nat} (β_pos : 0 < β)
+    {roles : List NearyTile} (roles_ne : roles ≠ []) :
+    DecimalSetterArithmetic.HasDecimalShell (upperBoundaryComplement β roles) 0 0 := by
+  obtain ⟨markerTail, rfl⟩ :=
+    Nat.exists_eq_succ_of_ne_zero (Nat.ne_of_gt β_pos)
+  have upper_ne : spell (nearyUpper (markerTail + 1)) roles ≠ [] := by
+    obtain ⟨role, tail, roles_eq⟩ := List.exists_cons_of_ne_nil roles_ne
+    rw [roles_eq]
+    simp [spell, nearyUpper_ne_nil]
+  have upper_length_ne : (spell (nearyUpper (markerTail + 1)) roles).length ≠ 0 := by
+    intro length_eq
+    exact upper_ne (List.length_eq_zero_iff.mp length_eq)
+  obtain ⟨width, width_eq⟩ := Nat.exists_eq_succ_of_ne_zero upper_length_ne
+  have power_mod :
+      (10 : ℤ) ^ (spell (nearyUpper (markerTail + 1)) roles).length ≡ 0 [ZMOD 10] := by
+    rw [width_eq, pow_succ]
+    simpa using
+      (Int.ModEq.refl ((10 : ℤ) ^ width)).mul
+        (by norm_num : (10 : ℤ) ≡ 0 [ZMOD 10])
+  have punctuated_eq :
+      spell (nearyUpper (markerTail + 1)) roles ++ nearyMarker (markerTail + 1) =
+        (spell (nearyUpper (markerTail + 1)) roles ++ [true] ++
+          List.replicate markerTail false) ++ [false] := by
+    simp [nearyMarker, List.replicate_succ', List.append_assoc]
+  have punctuated_mod :
+      (DecimalSetterCarry.code
+          (spell (nearyUpper (markerTail + 1)) roles ++
+            nearyMarker (markerTail + 1)) : ℤ) ≡ 7 [ZMOD 10] := by
+    rw [punctuated_eq]
+    exact DecimalSetterCarry.code_append_false_mod_ten _
+  have scaled_mod :
+      (DecimalSetterCarry.code (nearyMarker (markerTail + 1)) : ℤ) *
+          10 ^ (spell (nearyUpper (markerTail + 1)) roles).length ≡ 0 [ZMOD 10] := by
+    simpa using
+      (Int.ModEq.refl
+        (DecimalSetterCarry.code (nearyMarker (markerTail + 1)) : ℤ)).mul power_mod
+  have complement_mod :
+      (DecimalSetterCarry.code (nearyMarker (markerTail + 1)) : ℤ) *
+            10 ^ (spell (nearyUpper (markerTail + 1)) roles).length -
+          DecimalSetterCarry.code
+            (spell (nearyUpper (markerTail + 1)) roles ++
+              nearyMarker (markerTail + 1)) ≡ 3 [ZMOD 10] := by
+    calc
+      (DecimalSetterCarry.code (nearyMarker (markerTail + 1)) : ℤ) *
+              10 ^ (spell (nearyUpper (markerTail + 1)) roles).length -
+            DecimalSetterCarry.code
+              (spell (nearyUpper (markerTail + 1)) roles ++
+                nearyMarker (markerTail + 1)) ≡
+          0 - 7 [ZMOD 10] := scaled_mod.sub punctuated_mod
+      _ ≡ 3 [ZMOD 10] := by norm_num
+  have complement_unit :=
+    DecimalSetterArithmetic.intCast_hasDecimalShell_of_mod_three complement_mod
+  simpa [upperBoundaryComplement, upperBoundaryCode, marker] using complement_unit
+
+/-- A parser-lawful root block has decimal-unit punctuated code and exact-length complement. -/
+theorem sourceBoundary_decimalUnits {β : Nat} (β_pos : 0 < β)
+    {source : List NearyTile} (source_ends : EndsInRule source) :
+    DecimalSetterArithmetic.HasDecimalShell (upperBoundaryCode β source) 0 0 ∧
+      DecimalSetterArithmetic.HasDecimalShell (upperBoundaryComplement β source) 0 0 := by
+  have source_ne : source ≠ [] := by
+    obtain ⟨front, letter, source_eq⟩ := source_ends
+    rw [source_eq]
+    simp
+  exact ⟨upperBoundaryCode_decimalUnit β_pos source,
+    upperBoundaryComplement_decimalUnit β_pos source_ne⟩
+
+/-- Complete lower code of a role block. -/
+def lowerBoundaryCode (β : Nat) (body : List TagLetter) (roles : List NearyTile) : ℚ :=
+  DecimalSetterCarry.code (spell (nearyLower β body) roles)
+
+/-- Exact root state of one unsquared block, expressed by its punctuated upper code and
+complement. -/
+theorem bridgeState_single_eq {β : Nat} (β_pos : 0 < β)
+    (body : List TagLetter) (roles : List NearyTile) :
+    bridgeState β body [roles] =
+      ![upperBoundaryCode β roles / marker β,
+        0,
+        upperBoundaryComplement β roles / (marker β * basisGap β)] := by
+  rw [bridgeState, roleProduct_eq_conjugatedSide β_pos,
+    ← Matrix.mulVec_mulVec, ← Matrix.mulVec_mulVec]
+  ext coordinate
+  fin_cases coordinate <;>
+    simp [upperBoundaryComplement, sideBasis, sideBasisInv,
+      sideMatrix, ratio, markerScale, upperBoundaryCode_eq,
+      Matrix.mulVec, dotProduct, Fin.sum_univ_succ]
+  all_goals field_simp [ne_of_gt (marker_pos β), basisGap_ne_zero β_pos]
+  all_goals ring
+
+/-- Closed first coordinate of a target acting on the square reset of one root block. -/
+theorem shallowSquarePole_coordinate {β : Nat} (β_pos : 0 < β)
+    (body : List TagLetter) (target source : List NearyTile) :
+    (roleProduct β body target *ᵥ
+        squareReset β (bridgeState β body [source])) 0 =
+      (basisGap β * upperBoundaryCode β target * upperBoundaryCode β source -
+          alpha β * lowerBoundaryCode β body target *
+            upperBoundaryComplement β source) /
+        (marker β ^ 2 * basisGap β) := by
+  rw [bridgeState_single_eq β_pos]
+  rw [roleProduct_eq_conjugatedSide β_pos,
+    ← Matrix.mulVec_mulVec, ← Matrix.mulVec_mulVec]
+  simp [squareReset, upperBoundaryComplement, lowerBoundaryCode,
+    upperBoundaryCode_eq, sideBasis, sideBasisInv, sideMatrix, ratio,
+    separatorScale, Matrix.mulVec, dotProduct, Fin.sum_univ_succ]
+  field_simp [ne_of_gt (marker_pos β), basisGap_ne_zero β_pos]
+  ring
+
+/-- A shallow parser pole is exactly the generalized raw-head equation for the root block's
+punctuated upper code and complement. -/
+theorem hitsSquarePole_single_iff {β : Nat} (β_pos : 0 < β)
+    (body : List TagLetter) (target source : List NearyTile) :
+    HitsSquarePole β body target [source] ↔
+      basisGap β * upperBoundaryCode β target * upperBoundaryCode β source =
+        alpha β * lowerBoundaryCode β body target *
+          upperBoundaryComplement β source := by
+  rw [HitsSquarePole, shallowSquarePole_coordinate β_pos]
+  simp [ne_of_gt (marker_pos β), basisGap_ne_zero β_pos, sub_eq_zero]
+
+/-- The matrix basis gap is the physical decimal carry gap after removing the common `9μ`
+scale. -/
+theorem basisGap_calibration (β : Nat) :
+    9 * marker β * basisGap β =
+      DecimalSetterCarry.gap ((10 : ℚ) ^ β) := by
+  have marker_ne : marker β ≠ 0 := ne_of_gt (marker_pos β)
+  have relation := marker_relation β
+  unfold basisGap ratio markerScale DecimalSetterCarry.gap
+  field_simp [marker_ne]
+  rw [pow_succ]
+  linarith
+
+/-- The square-reset coefficient is the physical decimal carry lift after removing the common
+`9μ` scale. -/
+theorem alpha_calibration (β : Nat) :
+    9 * marker β * alpha β =
+      DecimalSetterCarry.lift ((10 : ℚ) ^ β) := by
+  have marker_ne : marker β ≠ 0 := ne_of_gt (marker_pos β)
+  have relation := marker_relation β
+  unfold alpha ratio markerScale DecimalSetterCarry.lift
+  field_simp [marker_ne]
+  rw [pow_succ]
+  linarith
+
+/-- Physical form of the shallow generalized raw-head equation. It matches the decimal carry
+pole equation, but its source is the full root-block boundary code rather than S67's peeled
+two-`c` head. -/
+theorem hitsSquarePole_single_iff_generalizedRawHead
+    {β : Nat} (β_pos : 0 < β) (body : List TagLetter)
+    (target source : List NearyTile) :
+    HitsSquarePole β body target [source] ↔
+      DecimalSetterCarry.gap ((10 : ℚ) ^ β) *
+          upperBoundaryCode β target * upperBoundaryCode β source =
+        DecimalSetterCarry.lift ((10 : ℚ) ^ β) *
+          lowerBoundaryCode β body target * upperBoundaryComplement β source := by
+  rw [hitsSquarePole_single_iff β_pos]
+  constructor
+  · intro pole
+    rw [← basisGap_calibration, ← alpha_calibration]
+    calc
+      9 * marker β * basisGap β * upperBoundaryCode β target *
+            upperBoundaryCode β source =
+          9 * marker β *
+            (basisGap β * upperBoundaryCode β target * upperBoundaryCode β source) := by ring
+      _ = 9 * marker β *
+            (alpha β * lowerBoundaryCode β body target *
+              upperBoundaryComplement β source) := by rw [pole]
+      _ = 9 * marker β * alpha β * lowerBoundaryCode β body target *
+            upperBoundaryComplement β source := by ring
+  · intro pole
+    have scaled :
+        9 * marker β *
+            (basisGap β * upperBoundaryCode β target * upperBoundaryCode β source) =
+          9 * marker β *
+            (alpha β * lowerBoundaryCode β body target *
+              upperBoundaryComplement β source) := by
+      calc
+        9 * marker β *
+              (basisGap β * upperBoundaryCode β target * upperBoundaryCode β source) =
+            DecimalSetterCarry.gap ((10 : ℚ) ^ β) *
+              upperBoundaryCode β target * upperBoundaryCode β source := by
+                rw [← basisGap_calibration]
+                ring
+        _ = DecimalSetterCarry.lift ((10 : ℚ) ^ β) *
+              lowerBoundaryCode β body target * upperBoundaryComplement β source := pole
+        _ = 9 * marker β *
+              (alpha β * lowerBoundaryCode β body target *
+                upperBoundaryComplement β source) := by
+                rw [← alpha_calibration]
+                ring
+    exact mul_left_cancel₀
+      (mul_ne_zero (by norm_num) (ne_of_gt (marker_pos β))) scaled
+
+/-- Complete shallow-root adapter: a parser-lawful singleton root hits a square-reset pole
+exactly when its full boundary code satisfies the generalized raw-head equation, and both root
+factors are decimal units. These full-root factors are not S67's peeled two-`c` head and
+`10μ-H` complement. -/
+theorem hitsSquarePole_single_iff_generalizedRawHead_with_units
+    {β : Nat} (β_pos : 0 < β) (body : List TagLetter)
+    (target source : List NearyTile) (source_ends : EndsInRule source) :
+    HitsSquarePole β body target [source] ↔
+      DecimalSetterCarry.gap ((10 : ℚ) ^ β) *
+            upperBoundaryCode β target * upperBoundaryCode β source =
+          DecimalSetterCarry.lift ((10 : ℚ) ^ β) *
+            lowerBoundaryCode β body target * upperBoundaryComplement β source ∧
+        DecimalSetterArithmetic.HasDecimalShell (upperBoundaryCode β source) 0 0 ∧
+        DecimalSetterArithmetic.HasDecimalShell (upperBoundaryComplement β source) 0 0 := by
+  obtain ⟨source_unit, complement_unit⟩ :=
+    sourceBoundary_decimalUnits β_pos source_ends
+  constructor
+  · intro pole
+    exact ⟨(hitsSquarePole_single_iff_generalizedRawHead β_pos body target source).mp pole,
+      source_unit, complement_unit⟩
+  · rintro ⟨pole, _, _⟩
+    exact (hitsSquarePole_single_iff_generalizedRawHead β_pos body target source).mpr pole
+
 end MatrixMortality.DecimalSetterBridge
