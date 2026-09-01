@@ -267,6 +267,7 @@ file owns the mathematical stock.
 | [`D2-S17`](#d2-s17-fixed-endpoint-fibre-dichotomy) | reduction | every pair in a fixed shell endpoint fibre is either a balanced affine-kernel relation or one explicit unequal-slope collision source | formalized | active |
 | [`D2-S18`](#d2-s18-same-length-cross-grade-five-carry) | structure theorem | same-length cross-grade source acceptance is exactly one parity/LTE valuation test on the cleared intercept gap | formalized | active |
 | [`D2-S19`](#d2-s19-same-length-collision-acceptance-certificate) | structure theorem | same-length cross-grade collision acceptance is exactly one affine-determinant valuation test | formalized | active |
+| [`D2-S20`](#d2-s20-positive-endpoint-suffix-antichain) | structure theorem | every positive-source endpoint fibre is an antichain in the reverse cumulative-wait order | formalized | active |
 | [`D2-D01`](#d2-d01-projectively-unimodular-stratum) | decidable stratum | projectively unimodular hard-core instances are decidable | audited | stock |
 | [`D2-D02`](#d2-d02-invariant-pair-stratum) | decidable stratum | invariant projective pairs reduce to abelian-by-`C₂` reachability | reported | active |
 | [`D2-D03`](#d2-d03-common-multiplier-stratum) | decidable stratum | rational affine maps with one multiplier are decidable under regular control | reported | active |
@@ -12312,6 +12313,72 @@ phase on both schedules simultaneously.
 **Next:** derive a state-dependent suffix recurrence for `D` under paired schedule extension,
 then combine it with the equation fixing the collision source and the twelve target-depth
 classes.
+
+### D2-S20: Positive-endpoint suffix antichain
+
+**Kind:** monotone endpoint classifier
+**Evidence:** formalized
+**Disposition:** active
+
+For schedules `u,v` of equal length, write `u≼ₛv` when every aligned suffix of `u` has no larger
+total wait than the corresponding suffix of `v`:
+
+```text
+u≼ₛv  ↔  sum(drop(i,u))≤sum(drop(i,v)) for every i.
+```
+
+This suffix-sum order includes coordinatewise wait comparison. Put
+
+```text
+G(w)=3^length(w)(2/3)^sum(w),
+O(w)=5^length(w)·intercept(w).
+```
+
+The fixed-source equation has the denominator-free form
+
+```text
+5^length(w)·shellRun(w,x)=G(w)x+O(w).
+```
+
+If `u≼ₛv`, antitonicity of powers of `2/3` gives `G(v)≤G(u)`. The suffix recurrence
+
+```text
+O(a::w)=G(w)+5O(w)
+```
+
+gives `O(v)≤O(u)` by induction. Equality in both inequalities under `u≼ₛv` forces `u=v`.
+Consequently, for every positive rational source `x` and distinct schedules,
+
+```text
+u≼ₛv  →  shellRun(v,x)<shellRun(u,x).
+```
+
+Every positive-source endpoint fibre is therefore an antichain. More explicitly, two distinct
+equal-length schedules meeting at `x>0` must have suffix-sum gaps of both signs: some aligned
+suffix of `u` has larger sum than its mate in `v`, and another has smaller sum. In the
+cross-grade case, any suffix-ordered pair has `collisionSource(u,v)≤0`, so it cannot meet in the
+positive real trap.
+
+**Scope:** the classifier leaves suffix-incomparable pairs, whose cumulative-wait difference
+crosses zero. It does not bound their length, decide the fixed-source equation among them, or
+test the determinant carry of [`D2-S19`](#d2-s19-same-length-collision-acceptance-certificate).
+The conclusion uses only source positivity; no five-adic, two-adic, or real-trap hypothesis is
+needed.
+
+**Artifact:** `MixedPrimeDebt.SuffixSumLE`, `MixedPrimeDebt.shellGain`,
+`MixedPrimeDebt.shellRun_eq_iff_clearedRun_eq_of_length_eq`,
+`MixedPrimeDebt.shellRun_strictAnti_of_suffixSumLE`,
+`MixedPrimeDebt.sameLength_positiveSource_collision_suffixSums_cross`, and
+`MixedPrimeDebt.collisionSource_nonpos_of_suffixSumLE` in
+[`MixedPrimeRealTrapAntichain.lean`](MatrixMortality/MixedPrimeRealTrapAntichain.lean).
+
+**Use:** reject every same-length collision candidate whose reverse cumulative-wait difference
+has one sign. Enumerate only signed walks that cross zero before evaluating the exact source
+equation and determinant carry.
+
+**Next:** derive the paired recurrence on the signed suffix-gap walk and the cleared determinant,
+then decide whether a fixed positive source and one of the twelve target-depth classes bound its
+zero crossings or carry states.
 
 ### D2-O09: Guarded real-pole reset
 

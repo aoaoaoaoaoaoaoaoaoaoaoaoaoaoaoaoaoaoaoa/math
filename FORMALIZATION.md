@@ -1411,7 +1411,7 @@ transition: `peeledNumerator_twoAdic_deepens` proves that the difference of the 
 every non-singleton consecutive multi-pole block to have upper length at least three. The module
 does not identify later product residuals with raw encoded heads or decide singleton targets.
 
-The dimension-two affine ledger has twenty-seven independently checked records:
+The dimension-two affine ledger has twenty-eight independently checked records:
 
 | Record | Formalization obligation |
 | --- | --- |
@@ -1431,6 +1431,7 @@ The dimension-two affine ledger has twenty-seven independently checked records:
 | [`D2-S17`](SALVAGE.md#d2-s17-fixed-endpoint-fibre-dichotomy) | equal-grade point-collision rigidity and the exact balanced-kernel/unequal-slope collision-source decomposition of every fixed endpoint fibre pair |
 | [`D2-S18`](SALVAGE.md#d2-s18-same-length-cross-grade-five-carry) | parity/LTE valuation of every shell-ratio and equal-length slope gap, plus the exact five-unit collision-source criterion for unequal total waits |
 | [`D2-S19`](SALVAGE.md#d2-s19-same-length-collision-acceptance-certificate) | the exact affine-determinant valuation criterion for a five-unit common target and, equivalently, every prefix guard on both sides of a same-length cross-grade collision |
+| [`D2-S20`](SALVAGE.md#d2-s20-positive-endpoint-suffix-antichain) | the cleared fixed-source equation, gain and offset antitonicity in reverse cumulative waits, strict positive-source endpoint order, and the two-sided suffix-crossing condition for every collision |
 | [`D2-D05`](SALVAGE.md#d2-d05-prescribed-translation-count) | primitive linear-polynomial divisibility, bounded carries in both scan directions, ordered-marker automaton, regular control, and `a=±1` cases |
 | [`D2-D06`](SALVAGE.md#d2-d06-private-prime-peeling) | unique-minimum valuation calculation, zero endpoints, fixed-count reduction, reversed language, and positive private valuation |
 | [`D2-D07`](SALVAGE.md#d2-d07-bounded-valuation-orthants) | localization support, denominator bounds in both orthants, invariant-interval recognition, finite graph, and regular-control product |
