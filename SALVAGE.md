@@ -195,6 +195,7 @@ file owns the mathematical stock.
 | [`R32-S56`](#r32-s56-terminal-weighted-shallow-classification) | decidable stratum | the rightmost pure-denominator return multiplies the remaining inverse-word budget, forcing resonance through denominator `2q²−q` | formalized | active |
 | [`R32-S57`](#r32-s57-free-cubic-continuant-radix-stack) | structure theorem and compiler mechanism | two positive fixed-cubic macro returns form a free binary affine radix stack with projectively distinct endpoint-zero bridge extensions | formalized | active |
 | [`R32-S58`](#r32-s58-positive-cubic-radix-readers) | compiler mechanism and obstruction | each fixed-cubic radix digit has a positive projective inverse, but two opposite wrong reads cancel exactly | formalized | active |
+| [`R32-S59`](#r32-s59-clocked-cubic-radix-comparator) | compiler mechanism | a common contracting clock turns every mismatch schedule into an injective signed radix code, and a physical endpoint bridge vanishes exactly on matching checks | formalized | active |
 | [`R32-M01`](#r32-m01-generic-reverse-edge-compiler) | partial mechanism | projective incidence generically embeds into a compatible two-plane edge square | formalized | active |
 | [`R32-M02`](#r32-m02-finite-quotient-sieve) | partial mechanism | finite monoid quotients give complete modular no-certificates for fixed candidates | formalized | active |
 | [`R32-M03`](#r32-m03-two-scale-return-conversion) | partial mechanism | a minimal two-scale return pencil has nonresonant multi-return zeros | formalized | active |
@@ -8333,6 +8334,61 @@ result does not classify arbitrary upper-triangular returns or decide the cubic 
 **Use:** stop searching for a reader. Search for an independent mismatch trap or a one-sided
 source language in which the signed parabolic defect cannot cancel. Any proposed terminal-only
 reader is unsound unless it distinguishes the displayed two-mismatch identity.
+
+### R32-S59: Clocked cubic radix comparator
+
+**Kind:** compiler mechanism
+**Evidence:** formalized
+**Disposition:** active
+
+Insert the true radix writer after every reader-writer check. Its diagonal ratio `4/25`
+separates errors by position. If `eᵢ∈{−1,0,1}` is the signed error at position `i`, the
+normalized product of `n` clocked checks followed by `n` true-readers is
+
+```text
+[[1,(125/48)S],[0,1]],       S=Σᵢ eᵢ(4/25)ⁱ.
+```
+
+After clearing denominators, the signed code obeys
+
+```text
+C([])=0,       C(e::es)=e·25^|es|+4C(es),
+25^|digits| S(digits)=25C(digits).
+```
+
+Reduction modulo four peels the first digit, because `25^k≡1 (mod 4)`. Hence `S=0` forces
+every error digit to vanish. The error table itself has value zero exactly when the guessed and
+written bits agree.
+
+The known endpoint zero has a stronger split form. Inserting an arbitrary upper translation
+`U(s)` after its first positive wait gives
+
+```text
+M₀M₁₂ U(s) M₁₂M₈M₁₂M₁₂M₁₅M₈M₀
+  =−60369430118400000·s·M₀.
+```
+
+Combining the clock, exactly `n` true-reader cleanup blocks, and this split bridge yields a
+physical positive interior word whose complete endpoint product is zero if and only if every
+one of the `n` guesses matches its writer. Lean carries every erased physical multiplier as an
+explicit nonzero rational scale.
+
+**Scope:** this is a sound comparator for the designated balanced spelling. It defeats the
+opposite-mismatch cancellation in `R32-S58`; no restriction on the two error signs remains.
+It does not prove that an arbitrary mortality word contains complete reader-writer-clock blocks,
+uses exactly the balanced cleanup, or avoids unrelated endpoint zeros. A full compiler still
+needs a global grammar guard or an arbitrary-word converse.
+
+**Artifact:** `CubicReturn.NonPure.continuantReadDefect_eq_zero_iff`,
+`continuantBalancedReadWord_projectivelyRealizes`, `continuantMismatchBridge_detects`, and
+`continuantCheckedZeroWord_zero_iff` in
+[`CubicContinuantMismatchClock.lean`](MatrixMortality/CubicContinuantMismatchClock.lean), with
+audit
+[`m32-cubic-continuant-mismatch-clock-2026-08-31.md`](audits/m32-cubic-continuant-mismatch-clock-2026-08-31.md).
+
+**Use:** treat local read soundness as solved. The next compiler obligation is structural: force
+every zero candidate into the clocked comparison grammar, or prove that every malformed raw
+wait word stays nonzero.
 
 ### R32-M01: Generic reverse edge compiler
 

@@ -1186,6 +1186,7 @@ open MatrixMortality
 #print axioms CubicReturn.NonPure.continuantRadixEncoding_lowerLeft
 #print axioms CubicReturn.NonPure.continuantRadixEncoding_zero
 #print axioms CubicReturn.NonPure.continuantRadixBridge_projectively_injective
+#print axioms CubicReturn.NonPure.continuantRadixReaderWord_projectivelyRealizes
 #print axioms CubicReturn.NonPure.continuantRadixReaderWord_positive
 #print axioms CubicReturn.NonPure.continuantRadixReader_mul_generator
 #print axioms CubicReturn.NonPure.continuantRadixReaderWord_push_pop
@@ -1194,6 +1195,12 @@ open MatrixMortality
 #print axioms CubicReturn.NonPure.continuantRadixReader_mismatch
 #print axioms CubicReturn.NonPure.continuantRadixReader_two_mismatches
 #print axioms CubicReturn.NonPure.continuantRadixReaderWord_two_mismatches
+#print axioms CubicReturn.NonPure.continuantReadError_eq_zero_iff
+#print axioms CubicReturn.NonPure.continuantReadDefect_eq_zero_iff
+#print axioms CubicReturn.NonPure.continuantBalancedReadWord_projectivelyRealizes
+#print axioms CubicReturn.NonPure.continuantBalancedReadWord_positive
+#print axioms CubicReturn.NonPure.continuantMismatchBridge_detects
+#print axioms CubicReturn.NonPure.continuantCheckedZeroWord_zero_iff
 #print axioms EdgeCompression.isMortal_iff_exists_edgeProduct_eq_zero
 #print axioms TwoPlaneEdges.output_mul_input
 #print axioms TwoPlaneEdges.generator_rank

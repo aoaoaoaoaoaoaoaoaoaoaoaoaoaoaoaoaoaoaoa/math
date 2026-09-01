@@ -88,26 +88,29 @@ def continuantReaderNegative (bit : Bool) : Square (Fin 2) ℚ :=
 def continuantRadixReader (bit : Bool) : Square (Fin 2) ℚ :=
   !![25 / 4, -(continuantRadixDigit bit : ℚ) / 48; 0, 1]
 
-private def ContinuantProjectivelyRealizes
+/-- A physical false-wait word realizes a normalized matrix up to one nonzero rational scale. -/
+def continuantProjectivelyRealizes
     (word : List Nat) (matrix : Square (Fin 2) ℚ) : Prop :=
   ∃ scale : ℚ, scale ≠ 0 ∧
     wordProduct falseWaitReturn word = scale • matrix
 
-private theorem continuantProjectivelyRealizes_append
+/-- Projective realizations compose under concatenation. -/
+theorem continuantProjectivelyRealizes_append
     {leftWord rightWord : List Nat} {leftMatrix rightMatrix : Square (Fin 2) ℚ}
-    (left : ContinuantProjectivelyRealizes leftWord leftMatrix)
-    (right : ContinuantProjectivelyRealizes rightWord rightMatrix) :
-    ContinuantProjectivelyRealizes (leftWord ++ rightWord) (leftMatrix * rightMatrix) := by
+    (left : continuantProjectivelyRealizes leftWord leftMatrix)
+    (right : continuantProjectivelyRealizes rightWord rightMatrix) :
+    continuantProjectivelyRealizes (leftWord ++ rightWord) (leftMatrix * rightMatrix) := by
   rcases left with ⟨leftScale, leftScale_ne, leftProduct⟩
   rcases right with ⟨rightScale, rightScale_ne, rightProduct⟩
   refine ⟨leftScale * rightScale, mul_ne_zero leftScale_ne rightScale_ne, ?_⟩
   rw [wordProduct_append, leftProduct, rightProduct, Matrix.smul_mul, Matrix.mul_smul]
   simp only [smul_smul]
 
-private theorem continuantProjectivelyRealizes_repeat
+/-- Repeating one physical realization realizes the corresponding normalized power. -/
+theorem continuantProjectivelyRealizes_repeat
     {word : List Nat} {matrix : Square (Fin 2) ℚ}
-    (realizes : ContinuantProjectivelyRealizes word matrix) (repetitions : Nat) :
-    ContinuantProjectivelyRealizes (continuantRepeatWord word repetitions)
+    (realizes : continuantProjectivelyRealizes word matrix) (repetitions : Nat) :
+    continuantProjectivelyRealizes (continuantRepeatWord word repetitions)
       (matrix ^ repetitions) := by
   induction repetitions with
   | zero =>
@@ -118,7 +121,7 @@ private theorem continuantProjectivelyRealizes_repeat
         continuantProjectivelyRealizes_append realizes induction
 
 private theorem continuantReaderExpansionWord_realizes (bit : Bool) :
-    ContinuantProjectivelyRealizes (continuantReaderExpansionWord bit)
+    continuantProjectivelyRealizes (continuantReaderExpansionWord bit)
       (continuantReaderExpansion bit) := by
   cases bit
   · refine ⟨350478128260971999568608408075016857496996911513600000000000000000000000,
@@ -139,7 +142,7 @@ private theorem continuantReaderExpansionWord_realizes (bit : Bool) :
         Matrix.mul_apply, Matrix.smul_apply, Fin.sum_univ_succ]
 
 private theorem continuantReaderPositiveWord_realizes (bit : Bool) :
-    ContinuantProjectivelyRealizes (continuantReaderPositiveWord bit)
+    continuantProjectivelyRealizes (continuantReaderPositiveWord bit)
       (continuantReaderPositive bit) := by
   cases bit
   · refine ⟨-880308120189957480269339373741663194185728000000000000000000000,
@@ -159,7 +162,7 @@ private theorem continuantReaderPositiveWord_realizes (bit : Bool) :
         Matrix.mul_apply, Matrix.smul_apply, Fin.sum_univ_succ]
 
 private theorem continuantReaderNegativeWord_realizes (bit : Bool) :
-    ContinuantProjectivelyRealizes (continuantReaderNegativeWord bit)
+    continuantProjectivelyRealizes (continuantReaderNegativeWord bit)
       (continuantReaderNegative bit) := by
   cases bit
   · refine ⟨23241255189719628618607984620359208056830033920000000000000000000000000,
@@ -222,8 +225,9 @@ private theorem continuantReader_factorization (bit : Bool) :
       continuantReaderPositiveCount, continuantRadixReader, continuantRadixDigit,
       Matrix.mul_apply, Fin.sum_univ_succ]
 
-private theorem continuantRadixReaderWord_realizes (bit : Bool) :
-    ContinuantProjectivelyRealizes (continuantRadixReaderWord bit)
+/-- Every physical reader word realizes its normalized projective inverse with nonzero scale. -/
+theorem continuantRadixReaderWord_projectivelyRealizes (bit : Bool) :
+    continuantProjectivelyRealizes (continuantRadixReaderWord bit)
       (continuantRadixReader bit) := by
   have negative := continuantProjectivelyRealizes_repeat
     (continuantReaderNegativeWord_realizes bit) (continuantReaderNegativeCount bit)
@@ -235,7 +239,8 @@ private theorem continuantRadixReaderWord_realizes (bit : Bool) :
   rw [continuantReader_factorization bit] at combined
   simpa only [continuantRadixReaderWord] using combined
 
-private theorem continuantRepeatWord_positive {word : List Nat}
+/-- Repetition preserves strict positivity of every physical wait. -/
+theorem continuantRepeatWord_positive {word : List Nat}
     (positive : ∀ wait ∈ word, 0 < wait) (repetitions : Nat) :
     ∀ wait ∈ continuantRepeatWord word repetitions, 0 < wait := by
   induction repetitions with
@@ -278,9 +283,9 @@ theorem continuantRadixReaderWord_push_pop (bit : Bool) :
       wordProduct falseWaitReturn
           (continuantRadixReaderWord bit ++ continuantRadixWord bit) =
         scale • (1 : Square (Fin 2) ℚ) := by
-  have reader := continuantRadixReaderWord_realizes bit
+  have reader := continuantRadixReaderWord_projectivelyRealizes bit
   have writer :
-      ContinuantProjectivelyRealizes (continuantRadixWord bit)
+      continuantProjectivelyRealizes (continuantRadixWord bit)
         (continuantRadixGenerator bit) := by
     refine ⟨continuantRadixScale bit, ?_, continuantRadixWord_product bit⟩
     cases bit <;> norm_num [continuantRadixScale]
@@ -343,15 +348,15 @@ theorem continuantRadixReaderWord_two_mismatches :
             (continuantRadixWord true ++
               (continuantRadixReaderWord true ++ continuantRadixWord false))) =
         scale • (1 : Square (Fin 2) ℚ) := by
-  have readerFalse := continuantRadixReaderWord_realizes false
-  have readerTrue := continuantRadixReaderWord_realizes true
+  have readerFalse := continuantRadixReaderWord_projectivelyRealizes false
+  have readerTrue := continuantRadixReaderWord_projectivelyRealizes true
   have writerFalse :
-      ContinuantProjectivelyRealizes (continuantRadixWord false)
+      continuantProjectivelyRealizes (continuantRadixWord false)
         (continuantRadixGenerator false) := by
     refine ⟨continuantRadixScale false, by norm_num [continuantRadixScale],
       continuantRadixWord_product false⟩
   have writerTrue :
-      ContinuantProjectivelyRealizes (continuantRadixWord true)
+      continuantProjectivelyRealizes (continuantRadixWord true)
         (continuantRadixGenerator true) := by
     refine ⟨continuantRadixScale true, by norm_num [continuantRadixScale],
       continuantRadixWord_product true⟩
