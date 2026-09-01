@@ -422,6 +422,7 @@ file owns the mathematical stock.
 | [`D2-S20`](#d2-s20-positive-endpoint-suffix-antichain) | structure theorem | every positive-source endpoint fibre is an antichain in the reverse cumulative-wait order | formalized | active |
 | [`D2-S21`](#d2-s21-affine-determinant-carry-stripping) | reduction | common initial and terminal waits strip exactly from the fixed-source equation, while the cleared determinant has explicit recurrences | formalized | active |
 | [`D2-S22`](#d2-s22-prefix-carry-minimum-classifier) | structure theorem | accepted same-length cross-grade collisions require a bounded later cancellation of their first nonzero prefix carry | formalized | active |
+| [`D2-S23`](#d2-s23-length-two-mixed-sign-classifier) | exact classifier | fully guarded positive two-wait collisions form one explicit finite union of affine congruence families | formalized | active |
 | [`D2-D01`](#d2-d01-projectively-unimodular-stratum) | decidable stratum | projectively unimodular hard-core instances are decidable | audited | stock |
 | [`D2-D02`](#d2-d02-invariant-pair-stratum) | decidable stratum | invariant projective pairs reduce to effective multiplicative-subgroup membership | audited | graduated |
 | [`D2-D03`](#d2-d03-common-multiplier-stratum) | decidable stratum | rational affine maps with one multiplier are decidable under regular control | reported | active |
@@ -21828,6 +21829,140 @@ enumerate only the bounded partner window before evaluating the exact weighted s
 **Next:** classify the `κ(Pⱼ)≥2` cancellation tree under the real-trap source corridor. Test
 whether the forced chain of successively smaller carries terminates, becomes periodic, or
 determines a finite state-dependent modulus.
+
+### D2-S23: Length-two mixed-sign classifier
+
+**Kind:** exact classifier and finite-gauge reduction
+**Evidence:** formalized
+**Disposition:** active
+
+Every cross-grade pair of two-wait schedules with positive collision source has, after at most
+swapping the schedules, the unique form
+
+```text
+u=[c+k+Δ,b],   v=[c,b+k],   k>0,   Δ>0.
+```
+
+The opposite signs of its head and tail gaps are forced by the suffix antichain theorem
+[`D2-S20`](#d2-s20-positive-endpoint-suffix-antichain), not imposed as an extra hypothesis. Put
+`r=2/3`. Its collision source and common target are exactly
+
+```text
+x(c,k,Δ)=(1−r^k)/(3r^(c+k)(1−r^Δ)),
+y(b,k,Δ)=(5+3r^b(1−r^(Δ+k))/(1−r^Δ))/25.
+```
+
+The source is positive. Its five-adic value is
+
+```text
+v₅(x)=κ(k)−κ(Δ),
+```
+
+so the source guard is equivalent to `κ(k)=κ(Δ)`. After clearing the target's forced
+denominator, put
+
+```text
+N(b,k,Δ)=5(1−r^Δ)+3r^b(1−r^(Δ+k)).
+```
+
+Then the target guard is exactly
+
+```text
+v₅(N)=2+κ(Δ).
+```
+
+It forces the two length-two prefix terms to tie:
+
+```text
+κ(Δ+k)=κ(Δ)+1.
+```
+
+Under this necessary tie, every positive shift `s` satisfies the exact transition law
+
+```text
+v₅(y(b+s,k,Δ)−y(b,k,Δ))=κ(s)−1.
+```
+
+Adding ten therefore changes the target at value one, so acceptance depends only on `b mod 10`.
+Every positive odd shift from an accepted `b` instead lands at target value `−1`; all accepted
+tail gauges lie in one parity class.
+
+The real trap bounds the transfer gap itself. Since `x(c,k,Δ)` increases with `c`, its value at
+`c=0` must not exceed `1/2`; for `k≥3` that value is already greater than `19/24`. Hence
+`k≤2`. The two carry equations then have the exact residue classification
+
+```text
+k=1,  Δ odd,  Δ mod 10≠9;
+k=2,  Δ mod 10=8,  Δ mod 50≠48.
+```
+
+Gap variation is finite for the target guard as well. A positive gap shift `L` satisfying
+`κ(k)=κ(Δ)=κ(Δ+L)` changes the target at exact value `κ(L)−κ(Δ)−2`. Thus the `k=1` family is
+fifty-periodic in `Δ`, and the `k=2` family is 250-periodic. Complete target acceptance reduces
+respectively to `(b mod 10,Δ mod 50)` and `(b mod 10,Δ mod 250)`.
+
+Lean exhausts both rectangles. Each has exactly forty accepted pairs:
+
+```text
+k=1:
+Δ : accepted b
+ 1 : 1,3,7,9    7 : 0,4,6,8   11 : 1,5,7,9   17 : 0,2,6,8   21 : 3,5,7,9
+27 : 0,2,4,8   31 : 1,3,5,7   37 : 0,2,4,6   41 : 1,3,5,9   47 : 2,4,6,8
+
+k=2:
+Δ : accepted b
+ 18 : 0,2,4,6    28 : 1,3,5,9    68 : 0,4,6,8    78 : 1,5,7,9
+118 : 0,2,4,8   128 : 1,3,5,7   168 : 2,4,6,8   178 : 1,3,7,9
+218 : 0,2,6,8   228 : 3,5,7,9
+```
+
+Every other residue allowed by the two carry equations is target-rejected.
+
+The Archimedean gauge is exact, not merely bounded. In the `k=1` family,
+
+```text
+x(c,1,Δ)∈[1/5,1/2]
+  ↔ (Δ=1 and c=0) or (Δ=3 and c≤1) or (Δ≥5 and c∈{1,2}).
+```
+
+Every surviving `k=2` gap has `Δ≥8`, and then the source lies in the real trap exactly when
+`c=0`. Since the target table rejects `Δ=3`, the fully guarded language consists of the isolated
+`k=1,Δ=1,c=0` row, all other displayed `k=1` congruence instances with `c∈{1,2}`, and the
+displayed `k=2` rows with `c=0`. It is an explicit finite union of affine congruence families.
+
+**Scope:** the numerical gap `Δ` remains unbounded but lies in the displayed congruence families.
+The theorem classifies every length-two mixed-sign collision; it does not bound longer signed
+crossing walks or decide their tied-carry trees. The periodic tail and gap laws are derived only
+after the exact carry conditions, not asserted for arbitrary rejected fibres.
+
+**Artifact:** `MixedPrimeDebt.lengthTwoCollisionSource_pos_iff_crossingNormalForm`,
+`MixedPrimeDebt.lengthTwoCrossing_collisionSource`,
+`MixedPrimeDebt.lengthTwoCrossing_commonTarget`,
+`MixedPrimeDebt.lengthTwoCrossingSource_fiveUnit_iff`,
+`MixedPrimeDebt.lengthTwoCrossingTarget_fiveUnit_iff`,
+`MixedPrimeDebt.lengthTwoCrossingTarget_fiveUnit_forces_carry`,
+`MixedPrimeDebt.lengthTwoCrossingTarget_add_sub_hasValue`,
+`MixedPrimeDebt.lengthTwoCrossingTarget_gap_add_sub_hasValue`,
+`MixedPrimeDebt.lengthTwoCrossingTarget_fiveUnit_iff_mod_ten`,
+`MixedPrimeDebt.lengthTwoCrossingTarget_oddShift_hasValue_negOne`,
+`MixedPrimeDebt.lengthTwoCrossing_realTrap_forces_k_le_two`,
+`MixedPrimeDebt.lengthTwoGapDepths_iff_residues`,
+`MixedPrimeDebt.lengthTwoCrossingTarget_one_gap_fiveUnit_iff_mod_fifty`,
+`MixedPrimeDebt.lengthTwoCrossingTarget_two_gap_fiveUnit_iff_mod_twoFifty`,
+`MixedPrimeDebt.lengthTwoCrossingTarget_one_fiveUnit_iff_residue`,
+`MixedPrimeDebt.lengthTwoCrossingTarget_two_fiveUnit_iff_residue`,
+`MixedPrimeDebt.lengthTwoCrossingOneSource_mem_realTrap_iff`,
+`MixedPrimeDebt.lengthTwoCrossingTwoSource_mem_realTrap_iff`,
+`MixedPrimeDebt.lengthTwoCrossing_acceptance_iff_semilinearTable`, and
+`MixedPrimeDebt.lengthTwoCrossing_realTrap_gauge_distance_lt_three` in
+[`MixedPrimeRealTrapLengthTwo.lean`](MatrixMortality/MixedPrimeRealTrapLengthTwo.lean).
+
+**Use:** remove length two from the higher-depth carry tree. Normalize every positive
+cross-grade candidate and read acceptance directly from the finite semilinear table. No
+valuation calculation, real inequality, or unbounded search remains at length two.
+
+**Next:** the live mathematical attack begins at length three, where at least three prefix terms
+can share the lowest carry.
 
 ### D2-O09: Guarded real-pole reset
 

@@ -4106,6 +4106,19 @@ higher-depth tied-minimum trees coupled to the exact weighted suffix source equa
 cleared real-trap corridor. Two exact
 length-two pairs with the same signed suffix-gap walk and source have opposite target-acceptance
 outcomes, so no suffix-gap-only quotient can decide the residue.
+Length two is now closed as a separate seam. Every positive cross-grade pair has, up to swap,
+the form `[c+k+Δ,b]` against `[c,b+k]`. Source acceptance is `κ(k)=κ(Δ)`; target acceptance
+forces `κ(k+Δ)=κ(Δ)+1`. The exact tail transition has value `κ(s)−1` under a positive shift
+`s`, so target acceptance depends only on `b mod 10` and accepted gauges share one parity. The
+real trap forces `k≤2`; the carry equations then give exactly the `k=1` odd gaps excluding
+`9 mod 10`, or the `k=2` gaps equal to `8 mod 10` excluding `48 mod 50`. Target acceptance is
+respectively periodic in `Δ mod 50` or `Δ mod 250`. For fixed gaps the real-trap condition
+is exact: `k=1` leaves `c=0` at gap one, `c≤1` at gap three, and `c∈{1,2}` thereafter;
+`k=2` leaves only `c=0`. Lean exhausts both finite target rectangles: each contains exactly
+forty accepted `(Δ,b)` residue pairs. The fully guarded length-two parameter language is an
+explicit finite union of affine congruence families. This is
+[`D2-S23`](SALVAGE.md#d2-s23-length-two-mixed-sign-classifier). The live carry-tree search
+therefore begins at length three, where three or more prefix terms can share the lowest height.
 The deepest of those three branches is itself a full depth reset. In normalized band coordinates
 `U(d,μ)=1/5+(3/10)(2/3)^dμ`, every target band `d≥2` contains a point whose `d−2` predecessor has
 any prescribed band `n≥7` and mantissa in `(2/3,1]`. An explicit guarded subfamily fixes target
@@ -4462,8 +4475,11 @@ universal computation.
    segment from the fixed-source equation and gives the exact cleared-determinant recurrence;
    enumerate only endpoint-irreducible crossing walks. `D2-S22` rejects odd first prefix gaps,
    forces a bounded later carry partner, and completely classifies the depth-one first carry;
-   attack only the remaining higher-depth tied-minimum trees through the weighted source
-   balance.
+   `D2-S23` completely classifies length-two mixed-sign crossings: `k≤2`, the gap lies in one of
+   two explicit residue families, the target lies in a `10×50` or `10×250` residue rectangle,
+   each rectangle has an exact forty-pair table, and the real gauge is classified exactly.
+   Begin the remaining higher-depth
+   tied-minimum search at length three through the weighted source balance.
    Keep the non-elementary lanes independent: adelic cone types, parabolic rational subsets,
    trace/height descent, finite-obstruction saturation, and valuation universality.
 6. Synthesize the returned attacks by the discriminating signals above; do not average

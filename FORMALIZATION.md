@@ -2396,7 +2396,7 @@ outer word by injectivity and proves that any cross-tail collision requires shel
 `(ℓ−2β+1,ℓ−2β+2)` between the later tails. This classifies the synchronization debt but does
 not yet exclude it from the encoded-entry orbit.
 
-The dimension-two affine ledger has thirty-one independently checked records:
+The dimension-two affine ledger has thirty-two independently checked records:
 
 | Record | Formalization obligation |
 | --- | --- |
@@ -2421,6 +2421,7 @@ The dimension-two affine ledger has thirty-one independently checked records:
 | [`D2-S20`](SALVAGE.md#d2-s20-positive-endpoint-suffix-antichain) | the cleared fixed-source equation, gain and offset antitonicity in reverse cumulative waits, strict positive-source endpoint order, and the two-sided suffix-crossing condition for every collision |
 | [`D2-S21`](SALVAGE.md#d2-s21-affine-determinant-carry-stripping) | the exact cleared affine determinant identity, corrected positive acceptance exponent, paired initial and terminal recurrences, and common-end endpoint stripping |
 | [`D2-S22`](SALVAGE.md#d2-s22-prefix-carry-minimum-classifier) | the exact weighted suffix balance and real-trap corridor, complementary prefix-determinant expansion, termwise parity/LTE values, unique-minimum obstruction, bounded cancellation partner, generic even-gap successor, and sharp accepted/rejected witnesses |
+| [`D2-S23`](SALVAGE.md#d2-s23-length-two-mixed-sign-classifier) | the complete positive-source length-two normal form up to swap, exact source and target coordinates, full tail- and gap-shift valuation laws, `k≤2` real bound, two exact gap-residue families, exhaustive forty-pair target tables, exact real-gauge classification, and the final semilinear acceptance iff |
 | [`D2-D05`](SALVAGE.md#d2-d05-prescribed-translation-count) | primitive linear-polynomial divisibility, bounded carries in both scan directions, ordered-marker automaton, regular control, and `a=±1` cases |
 | [`D2-D06`](SALVAGE.md#d2-d06-private-prime-peeling) | unique-minimum valuation calculation, zero endpoints, fixed-count reduction, reversed language, and positive private valuation |
 | [`D2-D07`](SALVAGE.md#d2-d07-bounded-valuation-orthants) | localization support, denominator bounds in both orthants, invariant-interval recognition, finite graph, and regular-control product |
