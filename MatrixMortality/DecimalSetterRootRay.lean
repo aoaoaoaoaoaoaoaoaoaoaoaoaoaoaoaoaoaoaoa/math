@@ -149,6 +149,78 @@ theorem hitsSquarePole_singleton_cons_iff_rayRecurrence
   simp only [parsedRay, rayStep]
   field_simp [gap_ne, marker_ne]
 
+/-- Over the canonical `R_c` root, a singleton pole is exactly the target trace times the
+current upper/lower code discrepancy. The target letter remains a parameter, and no parser or
+block law is needed. -/
+theorem hitsSquarePole_singleton_ruleCRoot_iff_traceDiscrepancy
+    {β : Nat} (β_pos : 0 < β) (body : List TagLetter)
+    (letter : TagLetter) (current : List NearyTile) :
+    HitsSquarePole β body [.erase letter]
+        [current, DecimalSetterMinimumBody.ruleCRoot] ↔
+      singletonTrace β letter *
+          (upperBoundaryCode β current - lowerBoundaryCode β body current) =
+        7 * DecimalSetterMatrix.marker β * lift ((10 : ℚ) ^ β) *
+          upperScale β current := by
+  let ρ : ℚ := 10 ^ β
+  let E := gap ρ
+  let G := lift ρ
+  let μ := DecimalSetterMatrix.marker β
+  let H := upperBoundaryCode β DecimalSetterMinimumBody.ruleCRoot
+  let P := upperBoundaryCode β current
+  let V := lowerBoundaryCode β body current
+  let A := upperScale β current
+  let S := singletonTrace β letter
+  have μ_ne : μ ≠ 0 := (marker_hasDecimalShell β_pos).1.1
+  have H_ne : H ≠ 0 :=
+    (upperBoundaryCode_decimalUnit β_pos DecimalSetterMinimumBody.ruleCRoot).1.1
+  have E_ne : E ≠ 0 := (gap_tenPow_hasDecimalShell β_pos).1.1
+  have H_eq : H = G / 9 := by
+    have calibration := DecimalSetterMinimumBody.ruleCRoot_code_calibration β
+    dsimp only [H, G, ρ]
+    linarith
+  have E_eq : E = 9 * (10 * μ - H) := by
+    have calibration := DecimalSetterMinimumBody.ruleCRoot_complement_calibration β
+    have complement_eq :
+        upperBoundaryComplement β DecimalSetterMinimumBody.ruleCRoot =
+          10 * μ - H := by
+      simp [upperBoundaryComplement, DecimalSetterMinimumBody.ruleCRoot,
+        spell, nearyUpper, tagCode, μ, H]
+      ring
+    rw [complement_eq] at calibration
+    simpa only [E, ρ] using calibration.symm
+  have raw := hitsSquarePole_singleton_cons_iff_rayRecurrence β_pos body letter current
+    DecimalSetterMinimumBody.ruleCRoot []
+  simp only [parsedRay] at raw
+  rw [raw]
+  dsimp only [rootRay, Prod.fst, Prod.snd]
+  have root_scale : upperScale β DecimalSetterMinimumBody.ruleCRoot = 10 := by
+    simp [upperScale, DecimalSetterMinimumBody.ruleCRoot, spell, nearyUpper, tagCode]
+  rw [root_scale]
+  change
+    ((E * P + G * V) * (H / μ) - G * V * 10) * S =
+        E * μ * G * A * (H / μ) * 7 ↔
+      S * (P - V) = 7 * μ * G * A
+  have coefficient_ne : E * H / μ ≠ 0 :=
+    div_ne_zero (mul_ne_zero E_ne H_ne) μ_ne
+  have scaled_identity :
+      (((E * P + G * V) * (H / μ) - G * V * 10) * S -
+        E * μ * G * A * (H / μ) * 7) =
+          (E * H / μ) * (S * (P - V) - 7 * μ * G * A) := by
+    field_simp [μ_ne]
+    rw [E_eq, H_eq]
+    ring
+  constructor
+  · intro equation
+    have scaled_zero :
+        (E * H / μ) * (S * (P - V) - 7 * μ * G * A) = 0 := by
+      rw [← scaled_identity, equation, sub_self]
+    exact sub_eq_zero.mp ((mul_eq_zero.mp scaled_zero).resolve_left coefficient_ne)
+  · intro equation
+    have scaled_zero :
+        (E * H / μ) * (S * (P - V) - 7 * μ * G * A) = 0 := by
+      rw [sub_eq_zero.mpr equation, mul_zero]
+    exact sub_eq_zero.mp (scaled_identity.trans scaled_zero)
+
 /-- A singleton target over one multi-role erasure block and one lawful root forces the root's
 upper spelling to have length one. Any other equal-depth root quotient leaves an incompatible
 cross-prime shell after the current block. -/

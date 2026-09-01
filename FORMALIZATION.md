@@ -1681,6 +1681,15 @@ The universal leading-digit lower bound contradicts the marker upper bound when 
 `singletonC_twoBlockSource_impossible` packages the unconditional parser-lawful extinction. The
 two-block singleton frontier now consists only of target `D_b` over `R_c`.
 
+Record [`MM-S89`](SALVAGE.md#mm-s89-complete-two-block-singleton-extinction) closes that final
+arm. `hitsSquarePole_singleton_ruleCRoot_iff_traceDiscrepancy` factors every singleton target
+over `R_c` through the same current code discrepancy. The `D_b` trace has coefficient
+`B=5200ρ²−18398ρ+2443`; shell balance and suffix exhaustion reduce its pole equation to
+`BK=35μ·lift`, where `K` is a lawful prefix of length `2β+2`. Uniform lower bounds on `B,K`
+and upper bounds on `μ,lift` contradict this equality. The combined
+`singletonTarget_twoBlockSource_impossible` theorem removes every target letter. Any remaining
+singleton pole has at least three source blocks.
+
 Record [`MM-S37`](SALVAGE.md#mm-s37-decimal-three-shape-frontier-extinction) separates the
 ternary and decimal first-multi-transfer fronts. The single theorem
 `DecimalSetterDepth.firstMultiTransfer_threeShapeFrontier_impossible` consumes the three role
@@ -1736,7 +1745,7 @@ the periodic saturation theorem and its remaining arithmetic boundary are recons
 formalization and the shell attack are tracked in
 [#7](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/7).
 
-The `M₅(3)` delimiter attack has twenty foundational records:
+The `M₅(3)` delimiter attack has twenty-one foundational records:
 
 | Record | Formalization obligation |
 | --- | --- |
@@ -1754,6 +1763,7 @@ The `M₅(3)` delimiter attack has twenty foundational records:
 | [`MM-S85`](SALVAGE.md#mm-s85-parser-ray-singleton-adapter) | exact homogeneous parser ray, physical block transport, arbitrary-history singleton equation, shallow singleton extinction, and conditional deep `m≥β+3` classifier |
 | [`MM-S86`](SALVAGE.md#mm-s86-two-block-singleton-source-classifier) | unit-ancestry quotient criterion, exact root shells, singleton-current extinction over every root, and canonical `R_c` long-current classifier |
 | [`MM-S88`](SALVAGE.md#mm-s88-r_c-root-singleton-d_c-extinction) | exact `R_c`-root `D_c` discrepancy equation, suffix factorization, prefix-length contradiction, and complete two-block `D_c` extinction |
+| [`MM-S89`](SALVAGE.md#mm-s89-complete-two-block-singleton-extinction) | target-independent `R_c` discrepancy identity, exact `D_b` shell and suffix factorization, coefficient bounds, and complete two-block singleton extinction |
 | [`MM-S01`](SALVAGE.md#mm-s01-square-run-projective-normal-form) | invariant square-run plane, invertible `2 × 2` transfer, Möbius normalization, rank-one fracture grammar, and equivalence with pole avoidance |
 | [`MM-S02`](SALVAGE.md#mm-s02-reset-zero-projective-peeling) | scaled transfer identity, exact two-shell classification of all poles, and reset-zero one-transfer avoidance |
 | [`MM-O16`](SALVAGE.md#mm-o16-exact-delimiter-pair-obstruction) | generic ignored-pair immortality is formalized; paired common-kernel and cubic companion specializations are audited |
@@ -2220,6 +2230,7 @@ fixed-rank decision problem.
 | `DecimalSetterBridgeRay.lean` | exact homogeneous quotient of the bridge recurrence, singleton-pole equation, shallow singleton extinction, and unit-peeled deep singleton classifier |
 | `DecimalSetterRootRay.lean` | intrinsic unit-ancestry shell criterion, root-ray shells, and complete two-block singleton-source classification |
 | `DecimalSetterRuleCRootSingleton.lean` | exact `R_c`-root `D_c` discrepancy equation and complete parser-lawful two-block `D_c` singleton extinction |
+| `DecimalSetterTwoBlockSingleton.lean` | exact `R_c`-root `D_b` discrepancy, shell-driven suffix contradiction, and complete parser-lawful two-block singleton extinction |
 | `DecimalSetterMinimumBody.lean` | one-`R_c` terminal normalization, minimum-body lawful shallow pole, exact parsed frontier witness, and compiler-image length separation |
 | `DecimalSetterInteger.lean` | explicit three-label integer `M₅(3)` family and forward Neary compiler |
 | `DecimalSetterArithmetic.lean` | decimal setter centered carry, reciprocal recurrence, coupled `2`/`5` target shells, and successive-pole valuation balance |

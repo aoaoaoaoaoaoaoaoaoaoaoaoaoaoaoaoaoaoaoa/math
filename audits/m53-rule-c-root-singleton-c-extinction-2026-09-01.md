@@ -46,10 +46,10 @@ assume reachability beyond `BlocksLaw [current,R_c]`.
 
 ## Boundary
 
-The result closes the `D_c` target arm only. The `D_b` target has a different singleton trace
-coefficient, so its fixed-root discrepancy does not reduce to (2). Singleton poles with more
-than two source blocks also remain outside because their older parser ray need not be a physical
-root ray.
+The result itself closes the `D_c` target arm only. The `D_b` target has a different singleton
+trace coefficient, so its fixed-root discrepancy does not reduce to (2); `MM-S89` subsequently
+closes that arm by a coefficient-bound argument. Singleton poles with more than two source blocks
+remain outside because their older parser ray need not be a physical root ray.
 
 ## Verification
 

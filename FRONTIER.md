@@ -1116,6 +1116,16 @@ The only two-source-block singleton arm still live is target `D_b` over `R_c` wi
 current block of upper length at least `β+3`; histories with more than two source blocks remain
 open.
 
+[`MM-S89`](SALVAGE.md#mm-s89-complete-two-block-singleton-extinction) removes that final arm and
+therefore the entire lawful two-source-block singleton layer. The target-independent `R_c`
+identity is `singletonTrace(ℓ)(P−V)=7μ·lift·10^m`. For `D_b`, its coefficient and exact shell
+again exhaust a suffix of width `w=m−β−1`, leaving a prefix `K` of length `2β+2` with
+`BK=35μ·lift`. The bounds `B>4000`, `K≥50ρ²`, `μ<10ρ`, and `lift<502ρ` make the two sides
+strictly incompatible. A remaining singleton pole must now have at least three source blocks.
+The live seam is the older ray after one intervening physical block: either classify its exact
+shell and suffix factorization, or prove a minimal-history ancestry invariant that transports the
+same prefix contradiction through arbitrary tails.
+
 The ternary and decimal branches now separate at their first multi-transfer front.
 [`MM-S37`](SALVAGE.md#mm-s37-decimal-three-shape-frontier-extinction) substitutes each of the
 three role shapes left by the swapped ternary gate into the decimal carrier equation. All are

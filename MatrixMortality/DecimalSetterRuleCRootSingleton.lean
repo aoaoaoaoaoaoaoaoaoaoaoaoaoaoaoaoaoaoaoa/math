@@ -50,67 +50,28 @@ theorem hitsSquarePole_singletonC_ruleCRoot_iff_codeDiscrepancy
           (upperBoundaryCode β current - lowerBoundaryCode β body current) =
         7 * DecimalSetterMatrix.marker β * upperScale β current := by
   let ρ : ℚ := 10 ^ β
-  let E := gap ρ
   let G := lift ρ
   let μ := DecimalSetterMatrix.marker β
-  let H := upperBoundaryCode β DecimalSetterMinimumBody.ruleCRoot
   let P := upperBoundaryCode β current
   let V := lowerBoundaryCode β body current
   let A := upperScale β current
-  have μ_ne : μ ≠ 0 := by
-    exact (marker_hasDecimalShell β_pos).1.1
-  have H_ne : H ≠ 0 := by
-    exact (upperBoundaryCode_decimalUnit β_pos
-      DecimalSetterMinimumBody.ruleCRoot).1.1
-  have E_ne : E ≠ 0 := by exact (gap_tenPow_hasDecimalShell β_pos).1.1
   have G_ne : G ≠ 0 := by exact (lift_tenPow_hasDecimalShell β_pos).1.1
-  have H_eq : H = G / 9 := by
-    have calibration := DecimalSetterMinimumBody.ruleCRoot_code_calibration β
-    dsimp only [H, G, ρ]
-    linarith
-  have E_eq : E = 9 * (10 * μ - H) := by
-    have calibration := DecimalSetterMinimumBody.ruleCRoot_complement_calibration β
-    have complement_eq :
-        upperBoundaryComplement β DecimalSetterMinimumBody.ruleCRoot =
-          10 * μ - H := by
-      simp [upperBoundaryComplement, DecimalSetterMinimumBody.ruleCRoot,
-        spell, nearyUpper, tagCode, μ, H]
-      ring
-    rw [complement_eq] at calibration
-    simpa only [E, ρ] using calibration.symm
-  have raw := hitsSquarePole_singleton_cons_iff_rayRecurrence β_pos body .c current
-    DecimalSetterMinimumBody.ruleCRoot []
-  simp only [parsedRay] at raw
-  rw [raw]
-  dsimp only [rootRay, Prod.fst, Prod.snd]
-  have root_scale :
-      upperScale β DecimalSetterMinimumBody.ruleCRoot = 10 := by
-    simp [upperScale, DecimalSetterMinimumBody.ruleCRoot, spell, nearyUpper, tagCode]
-  rw [root_scale, singletonCTrace_eq]
-  change
-    ((E * P + G * V) * (H / μ) - G * V * 10) * (2 * ρ * G) =
-        E * μ * G * A * (H / μ) * 7 ↔
-      2 * ρ * (P - V) = 7 * μ * A
-  have coefficient_ne : E * G * H / μ ≠ 0 :=
-    div_ne_zero (mul_ne_zero (mul_ne_zero E_ne G_ne) H_ne) μ_ne
-  have scaled_identity :
-      (((E * P + G * V) * (H / μ) - G * V * 10) * (2 * ρ * G) -
-        E * μ * G * A * (H / μ) * 7) =
-          (E * G * H / μ) * (2 * ρ * (P - V) - 7 * μ * A) := by
-    field_simp [μ_ne]
-    rw [E_eq, H_eq]
-    ring
+  rw [hitsSquarePole_singleton_ruleCRoot_iff_traceDiscrepancy β_pos,
+    singletonCTrace_eq]
+  change 2 * ρ * G * (P - V) = 7 * μ * G * A ↔
+    2 * ρ * (P - V) = 7 * μ * A
   constructor
   · intro equation
-    have scaled_zero :
-        (E * G * H / μ) * (2 * ρ * (P - V) - 7 * μ * A) = 0 := by
-      rw [← scaled_identity, equation, sub_self]
-    exact sub_eq_zero.mp ((mul_eq_zero.mp scaled_zero).resolve_left coefficient_ne)
+    apply mul_right_cancel₀ G_ne
+    calc
+      (2 * ρ * (P - V)) * G = 2 * ρ * G * (P - V) := by ring
+      _ = 7 * μ * G * A := equation
+      _ = (7 * μ * A) * G := by ring
   · intro equation
-    have scaled_zero :
-        (E * G * H / μ) * (2 * ρ * (P - V) - 7 * μ * A) = 0 := by
-      rw [sub_eq_zero.mpr equation, mul_zero]
-    exact sub_eq_zero.mp (scaled_identity.trans scaled_zero)
+    calc
+      2 * ρ * G * (P - V) = G * (2 * ρ * (P - V)) := by ring
+      _ = G * (7 * μ * A) := by rw [equation]
+      _ = 7 * μ * G * A := by ring
 
 /-- No parser-lawful two-block source reaches the singleton `D_c` pole when `β≥3`.
 
