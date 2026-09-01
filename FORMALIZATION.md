@@ -965,6 +965,16 @@ language. This excludes bounded triangular-macro factorization, but proves neith
 nor decidability of the complete language. See `R32-O23`, `R32-O24`, and
 [`audits/m32-unbounded-prime-continuants-2026-08-31.md`](audits/m32-unbounded-prime-continuants-2026-08-31.md).
 
+The same fixed terminal language now contains a free binary radix stack. Wait five and the
+nine-wait block `[8,1,15,8,1,8,15,21,15]` are projectively
+`[[48,274],[0,300]]` and `[[48,149],[0,300]]`. Lean derives their complete base-`(4,25)`
+positional product and proves injectivity modulo four, including under arbitrary projective
+rescaling. Thus depth `n` contains `2^n` distinct terminal transformations. Every one prefixes
+the checked endpoint bridge to another zero, and the resulting bridge transformations remain
+projectively distinct. This kills finite exact-product stabilizer nuclei, but not a quotient
+tracking only the common fixed terminal ray. See `R32-S57` and
+[`audits/m32-cubic-continuant-radix-2026-08-31.md`](audits/m32-cubic-continuant-radix-2026-08-31.md).
+
 The rank-(2,2) graph is no longer an independent residue. `RankTwoPunctuation` proves that every
 compatible square with one rank-one loop and three units transports exactly to the existing raw
 reverse compiler [`R32-M01`](SALVAGE.md#r32-m01-generic-reverse-edge-compiler). Its intrinsic
@@ -1802,6 +1812,7 @@ fixed-rank decision problem.
 | `ReturnFamily.lean` | split finite-rank return normal form and matrix-valued block-Hankel witnesses |
 | `CubicReturn.lean` | pure-cubic arbitrary-word collapse and automatic genericity of the one-singular normal form |
 | `CubicReturnNonPure.lean` | non-pure physical endpoints, fixed return recurrence, scalar-defect norm, continuant state projection, and exact unselected-wait obstructions |
+| `CubicContinuantRadix.lean` | free binary affine radix stack inside the fixed non-pure cubic terminal language |
 | `EdgeCompression.lean` | exact adjacent-edge compression for split finite-rank families |
 | `TwoPlaneEdges.lean` | compatible two-plane realization of a `2 × 2` edge square and exact rank-two certificates |
 | `ReverseEdge.lean` | generic projective-incidence reverse compiler, basis adaptation, and all-path converse |
@@ -2143,6 +2154,9 @@ fixed-rank decision problem.
 | Six exact return actions form an entry, a four-ray projective cycle, and an exit | `CubicReturn.NonPure.continuant_ray_steps`, `CubicReturn.NonPure.continuantCycleWord_mulVec` |
 | Pumped continuant words are upper triangular, have length `5+4k`, and every nonempty proper suffix is nontriangular | `CubicReturn.NonPure.continuantPumpWord_lowerLeft`, `CubicReturn.NonPure.continuantPumpWord_length`, `CubicReturn.NonPure.continuantPumpWord_properSuffix_lowerLeft` |
 | Upper-triangular recurrence words contain concatenation-prime members beyond every length bound | `CubicReturn.NonPure.continuantPumpWord_unbounded_concat_prime` |
+| Two positive cubic-continuant macros realize a common-ratio binary radix code | `CubicReturn.NonPure.continuantRadixWord_product`, `CubicReturn.NonPure.continuantRadixGenerator_product_entries` |
+| The physical radix encoding is projectively injective and every encoding is upper triangular | `CubicReturn.NonPure.continuantRadixEncoding_projectively_injective`, `CubicReturn.NonPure.continuantRadixEncoding_lowerLeft` |
+| Every radix prefix extends the fixed endpoint bridge to a zero without projective bridge collisions | `CubicReturn.NonPure.continuantRadixEncoding_zero`, `CubicReturn.NonPure.continuantRadixBridge_projectively_injective` |
 | Rule and erasure matrices agree on the upper-side plane | `rule_erase_agree_on_upperSide` |
 | Every finite-controller letter routes its selected private channel exactly | `controllerMatrix_mulVec_controllerVector` |
 | Every suffix-controlled word obeys the generic total decoder | `controllerProduct_mulVec_controllerVector` |

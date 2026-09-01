@@ -1640,6 +1640,19 @@ does not factor accepted words into triangular macros. See
 [`R32-O24`](SALVAGE.md#r32-o24-unbounded-prime-continuants) and
 [`m32-unbounded-prime-continuants-2026-08-31.md`](audits/m32-unbounded-prime-continuants-2026-08-31.md).
 
+The exact terminal-product nucleus is now dead as well. In the same fixed recurrence, wait five
+and the positive block `[8,1,15,8,1,8,15,21,15]` have a common normalized diagonal ratio
+`4/25` and affine digits `274/300` and `149/300`. Their binary products carry a base-`(4,25)`
+positional numerator whose first digit is recovered modulo four. Lean proves that the resulting
+physical products are injective even up to rational rescaling, giving `2^n` distinct
+upper-triangular transformations at every macro depth. Prefixing the known endpoint bridge by
+any code word yields a zero, and these bridge transformations remain projectively distinct.
+This does not refute a finite quotient which remembers only the common terminal ray or another
+abstract congruence. The live dual is now explicit: compose a positive read/compare operation
+with this write-only stack, or prove that all such readers collapse into a decidable affine
+quotient. See [`R32-S57`](SALVAGE.md#r32-s57-free-cubic-continuant-radix-stack) and
+[`m32-cubic-continuant-radix-2026-08-31.md`](audits/m32-cubic-continuant-radix-2026-08-31.md).
+
 ### ReturnSquare laboratory
 
 [`R32-S03`](SALVAGE.md#r32-s03-returnsquare-normal-form) is the first completely normalized
