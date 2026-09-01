@@ -202,6 +202,7 @@ file owns the mathematical stock.
 | [`R32-S57`](#r32-s57-free-cubic-continuant-radix-stack) | structure theorem and compiler mechanism | two positive fixed-cubic macro returns form a free binary affine radix stack with projectively distinct endpoint-zero bridge extensions | formalized | active |
 | [`R32-S58`](#r32-s58-positive-cubic-radix-readers) | compiler mechanism and obstruction | each fixed-cubic radix digit has a positive projective inverse, but two opposite wrong reads cancel exactly | formalized | active |
 | [`R32-S59`](#r32-s59-clocked-cubic-radix-comparator) | compiler mechanism | a common contracting clock turns every mismatch schedule into an injective signed radix code, and a physical endpoint bridge vanishes exactly on matching checks | formalized | active |
+| [`R32-S60`](#r32-s60-self-balancing-cubic-comparator-cleanup) | compiler mechanism | the split endpoint bridge rejects every excess or deficient cleanup-reader count by incompatible 2-adic and 5-adic parity | formalized | active |
 | [`R32-M01`](#r32-m01-generic-reverse-edge-compiler) | partial mechanism | projective incidence generically embeds into a compatible two-plane edge square | formalized | active |
 | [`R32-M02`](#r32-m02-finite-quotient-sieve) | partial mechanism | finite monoid quotients give complete modular no-certificates for fixed candidates | formalized | active |
 | [`R32-M03`](#r32-m03-two-scale-return-conversion) | partial mechanism | a minimal two-scale return pencil has nonresonant multi-return zeros | formalized | active |
@@ -8740,7 +8741,8 @@ explicit nonzero rational scale.
 opposite-mismatch cancellation in `R32-S58`; no restriction on the two error signs remains.
 It does not prove that an arbitrary mortality word contains complete reader-writer-clock blocks,
 uses exactly the balanced cleanup, or avoids unrelated endpoint zeros. A full compiler still
-needs a global grammar guard or an arbitrary-word converse.
+needs a global grammar guard or an arbitrary-word converse. `R32-S60` subsequently removes the
+cleanup-count assumption.
 
 **Artifact:** `CubicReturn.NonPure.continuantReadDefect_eq_zero_iff`,
 `continuantBalancedReadWord_projectivelyRealizes`, `continuantMismatchBridge_detects`, and
@@ -8752,6 +8754,61 @@ audit
 **Use:** treat local read soundness as solved. The next compiler obligation is structural: force
 every zero candidate into the clocked comparison grammar, or prove that every malformed raw
 wait word stays nonzero.
+
+### R32-S60: Self-balancing cubic comparator cleanup
+
+**Kind:** compiler mechanism
+**Evidence:** formalized
+**Disposition:** active
+
+Let `n` signed clocked checks be followed by an arbitrary number `m` of true-readers. Write
+`q=4/25`, `f=149/252`, and
+
+```text
+S=Σᵢeᵢqⁱ,       eᵢ∈{−1,0,1}.
+```
+
+After removing a nonzero projective scale, the complete middle product is the affine matrix
+
+```text
+[[r, f(1−r)+(125/48)S], [0,1]],
+r=qⁿq⁻ᵐ.
+```
+
+The split endpoint bridge reads the affine functional `r+4t−1`. Its vanishing is therefore
+equivalent to
+
+```text
+S=−(344/2625)(1−r).                                    (1)
+```
+
+Every nonzero signed radix `S` has even `5`-adic valuation `−2j` and even `2`-adic valuation
+`2j'`. If `n>m`, the right side of (1) has `5`-adic valuation
+`−2(n−m)−3`, which is odd. If `m>n`, it has `2`-adic valuation
+`3−2(m−n)`, also odd. Both cases are impossible. Thus (1) forces `m=n`; signed-radix
+injectivity from `R32-S59` then forces every error digit to vanish.
+
+Lean lifts the normalized argument through the explicit nonzero physical scales. For every
+Boolean check list and every natural cleanup count, the physical endpoint word is zero exactly
+when the cleanup count equals the list length and every guessed bit equals its writer. Every
+interior wait is positive.
+
+**Scope:** cleanup multiplicity no longer belongs to the open grammar seam. Complete
+reader-writer-clock blocks are still assumed in the designated spelling. Arbitrary raw words may
+split, omit, or interleave those blocks. Moreover, the fixed false-wait family already has an
+unconditional endpoint zero; this comparator is a reusable local semigroup gadget, not by itself
+an undecidability reduction for that fixed instance. A cell-closing compiler must transplant the
+gadget into instance-dependent endpoint geometry or add independent phase/control.
+
+**Artifact:** `CubicReturn.NonPure.continuantMismatchBalanceEquation_forces`,
+`continuantMismatchBridge_zero_iff`, and
+`continuantCheckedZeroWordWithCleanup_zero_iff` in
+[`CubicContinuantSelfBalance.lean`](MatrixMortality/CubicContinuantSelfBalance.lean), with audit
+[`m32-cubic-continuant-self-balance-2026-08-31.md`](audits/m32-cubic-continuant-self-balance-2026-08-31.md).
+
+**Use:** permit arbitrary cleanup multiplicity in every designated comparator construction.
+Spend the remaining compiler effort on block formation, instance-dependent target geometry, and
+an independent phase representation; do not add another counter for the cleanup suffix.
 
 ### R32-M01: Generic reverse edge compiler
 

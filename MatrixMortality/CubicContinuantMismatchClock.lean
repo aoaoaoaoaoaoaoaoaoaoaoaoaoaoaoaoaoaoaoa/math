@@ -64,7 +64,8 @@ private theorem twentyFive_pow_emod_four (exponent : Nat) :
       rw [pow_succ, Int.mul_emod, induction]
       norm_num
 
-private theorem continuantMismatchCode_zero_forces_all_zero (digits : List ℤ)
+/-- A zero cleared signed radix code has only zero digits in the signed binary alphabet. -/
+theorem continuantMismatchCode_zero_forces_all_zero (digits : List ℤ)
     (digit_range : ∀ digit ∈ digits, digit = -1 ∨ digit = 0 ∨ digit = 1)
     (code_zero : continuantMismatchCode digits = 0) :
     ∀ digit ∈ digits, digit = 0 := by
@@ -111,7 +112,8 @@ private theorem continuantMismatchCode_eq_zero_of_all_zero (digits : List ℤ)
       rw [continuantMismatchCode, head_zero, induction tail_zero]
       ring
 
-private theorem continuantMismatchDefect_eq_scaledCode (digits : List ℤ) :
+/-- The rational mismatch defect is the cleared integer code divided by its radix scale. -/
+theorem continuantMismatchDefect_eq_scaledCode (digits : List ℤ) :
     continuantMismatchDefect digits =
       25 * continuantMismatchCode digits / 25 ^ digits.length := by
   induction digits with
@@ -122,7 +124,8 @@ private theorem continuantMismatchDefect_eq_scaledCode (digits : List ℤ) :
       push_cast
       field_simp
 
-private theorem continuantMismatchDefect_eq_zero_iff (digits : List ℤ)
+/-- On signed binary digits, the rational mismatch defect vanishes exactly on the zero word. -/
+theorem continuantMismatchDefect_eq_zero_iff (digits : List ℤ)
     (digit_range : ∀ digit ∈ digits, digit = -1 ∨ digit = 0 ∨ digit = 1) :
     continuantMismatchDefect digits = 0 ↔
       ∀ digit ∈ digits, digit = 0 := by
@@ -147,7 +150,8 @@ theorem continuantReadError_eq_zero_iff (check : Bool × Bool) :
   rcases check with ⟨guess, actual⟩
   cases guess <;> cases actual <;> norm_num [continuantReadError]
 
-private theorem continuantReadErrors_range (checks : List (Bool × Bool)) :
+/-- Every Boolean read error belongs to the signed binary digit alphabet. -/
+theorem continuantReadErrors_range (checks : List (Bool × Bool)) :
     ∀ digit ∈ checks.map continuantReadError,
       digit = -1 ∨ digit = 0 ∨ digit = 1 := by
   intro digit membership
@@ -240,7 +244,8 @@ private theorem continuantClockedRead_normalization (check : Bool × Bool) :
       continuantRadixGenerator, continuantRadixDigit, Matrix.mul_apply,
       Matrix.smul_apply, Fin.sum_univ_succ]
 
-private theorem continuantClockedReadWord_projectivelyRealizes (check : Bool × Bool) :
+/-- One physical reader-writer-clock block realizes its normalized signed defect block. -/
+theorem continuantClockedReadWord_projectivelyRealizes (check : Bool × Bool) :
     continuantProjectivelyRealizes (continuantClockedReadWord check)
       (continuantClockedReadGenerator (continuantReadError check)) := by
   have reader := continuantRadixReaderWord_projectivelyRealizes check.1
@@ -262,7 +267,8 @@ private theorem continuantClockedReadWord_projectivelyRealizes (check : Bool × 
   rw [continuantClockedReadWord, product]
   simp only [smul_smul]
 
-private theorem continuantClockedReadWords_projectivelyRealize
+/-- Concatenated physical check blocks realize the corresponding normalized defect product. -/
+theorem continuantClockedReadWords_projectivelyRealize
     (checks : List (Bool × Bool)) :
     continuantProjectivelyRealizes (checks.flatMap continuantClockedReadWord)
       (wordProduct continuantClockedReadGenerator (checks.map continuantReadError)) := by
