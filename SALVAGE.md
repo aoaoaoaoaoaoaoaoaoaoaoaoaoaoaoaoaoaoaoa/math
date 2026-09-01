@@ -183,6 +183,7 @@ file owns the mathematical stock.
 | [`R32-S53`](#r32-s53-proper-rest-pivot-certificate) | decidable stratum | one denominator prime deeper than the proper rest makes the pure-denominator bridge finite, unless its denominator is already the one-return resonance | formalized | active |
 | [`R32-S54`](#r32-s54-global-pure-denominator-descent) | decidable stratum | every pure-denominator bridge zero pays the sum of all selected scale decrements from its fixed terminal denominator | formalized | active |
 | [`R32-S55`](#r32-s55-effective-returnsquare-decision) | decision theorem | every reduced positive rational ReturnSquare parameter at base at least four is decided by an explicit finite candidate set | formalized | active |
+| [`R32-S56`](#r32-s56-terminal-weighted-shallow-classification) | decidable stratum | the rightmost pure-denominator return multiplies the remaining inverse-word budget, forcing resonance through denominator `2q²−q` | formalized | active |
 | [`R32-M01`](#r32-m01-generic-reverse-edge-compiler) | partial mechanism | projective incidence generically embeds into a compatible two-plane edge square | formalized | active |
 | [`R32-M02`](#r32-m02-finite-quotient-sieve) | partial mechanism | finite monoid quotients give complete modular no-certificates for fixed candidates | formalized | active |
 | [`R32-M03`](#r32-m03-two-scale-return-conversion) | partial mechanism | a minimal two-scale return pencil has nonresonant multi-return zeros | formalized | active |
@@ -7657,6 +7658,57 @@ audit
 **Use:** remove ReturnSquare from the open strategy tree as a decision obstruction. Its finite
 candidate sets can now be exhaustively evaluated to test the stronger resonance-only conjecture
 and to search for the smallest composite-base nonresonant root.
+
+### R32-S56: Terminal-weighted shallow classification
+
+**Kind:** decidable stratum
+**Evidence:** formalized
+**Disposition:** active
+
+For a pure denominator `d=1/B`, isolate the rightmost tail letter. Write the positive-return
+word as
+
+```text
+head :: (properTail ++ [last]),       τ=q^(last+1).
+```
+
+The terminal inverse step is strictly smaller than `B/τ`. Applying the `R32-S54` additive
+descent only to the remaining proper tail gives the stronger exact budget
+
+```text
+τ(q^(head+1)+Σ_wait∈properTail(q^(wait+1)−1)) < B.          (1)
+```
+
+Every nonresonant zero has at least three positive returns by `R32-O02`. Its proper tail in
+(1) is therefore nonempty. Since every displayed scale is at least `q`, (1) forces
+
+```text
+q(2q−1)<B,             equivalently 2q²<B+q.               (2)
+```
+
+Consequently, for `q≥4`, `B≥2`, and `B+q≤2q²` (equivalently `B≤2q²−q`), physical mortality at
+`c=−1/B` holds exactly when
+
+```text
+B=q^(head+1)
+```
+
+for some natural `head`. Thus the entire quadratic shallow chamber is resonance-only. The
+initial additive threshold `3q−2` is not sharp; the terminal contraction moves it to
+`2q²−q`.
+
+**Scope:** this classifies only pure-denominator parameters in the displayed quadratic chamber.
+It does not settle larger `B` or fractions with numerator greater than one.
+
+**Artifact:** `ReturnSquare.positiveBridge_pureDenominator_zero_terminal_budget`,
+`positiveBridge_pureDenominator_shallow_iff`, and
+`physical_isMortal_pureDenominator_shallow_iff` in
+[`ReturnSquareShallowDenominator.lean`](MatrixMortality/ReturnSquareShallowDenominator.lean),
+with audit
+[`m32-returnsquare-terminal-budget-2026-08-31.md`](audits/m32-returnsquare-terminal-budget-2026-08-31.md).
+
+**Use:** delete every pure-denominator candidate through `2q²−q` without enumeration. For larger
+denominators, prune the finite `R32-S55` search by the exact multiplicative budget (1).
 
 ### R32-M01: Generic reverse edge compiler
 

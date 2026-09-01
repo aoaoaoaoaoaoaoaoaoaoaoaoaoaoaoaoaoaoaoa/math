@@ -52,6 +52,7 @@ import MatrixMortality.ReturnSquareTailAdjugate
 import MatrixMortality.ReturnSquarePureDenominator
 import MatrixMortality.ReturnSquarePureDenominatorDescent
 import MatrixMortality.ReturnSquareFiniteCertificate
+import MatrixMortality.ReturnSquareShallowDenominator
 import MatrixMortality.ReturnSquareTax
 import MatrixMortality.ReturnJordan
 import MatrixMortality.ReturnConvert
