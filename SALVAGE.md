@@ -180,6 +180,7 @@ file owns the mathematical stock.
 | [`MM-S77`](#mm-s77-shallow-generalized-raw-head-adapter) | structure theorem | every shallow square-reset pole obeys one exact generalized raw-head equation whose full root code and complement are decimal units | formalized | active |
 | [`MM-S76`](#mm-s76-primitive-target-multiplier-braid) | structure theorem and obstruction | primitivity identifies one unique unit target multiplier, turning the suffix charge into a literal prefix discrepancy and restricting its predecessor cylinder to two first-mismatch residue arms | formalized | active |
 | [`MM-S79`](#mm-s79-minimum-body-lawful-shallow-pole) | normalization boundary | every minimum-length body attains the shallow pole at its unique lawful terminal word, while compiler-emitted bodies lie strictly above this slice | formalized | active |
+| [`MM-S81`](#mm-s81-one-r_c-root-terminal-normalization) | structure theorem | every shallow pole over the one-`R_c` root is exactly a literal Neary terminal match, with no malformed survivor | formalized | active |
 | [`R32-S01`](#r32-s01-split-return-normal-form) | structure theorem | rank-two cuts reduce one-unit binary mortality to a `2 × 2` return recurrence | formalized | graduated |
 | [`R32-S02`](#r32-s02-two-plane-edge-square) | structure theorem | two rank-two generators are a two-vertex square of `2 × 2` edges | formalized | graduated |
 | [`R32-O01`](#r32-o01-rank-one-profile-collapse) | obstruction | a rank-one generator reduces mortality to order-at-most-three scalar recurrence zeros | audited | stock |
@@ -7735,6 +7736,63 @@ through `minimumBodyTarget_word_identity`, `minimumBody_initialQueue_halts`,
 **Next:** exploit the compiler's strict length surplus to classify or exclude shallow poles
 without excluding the lawful minimum-body normalization. The distinguishing invariant must see
 more than the root's decimal-unit shell.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S81: One-`R_c` root terminal normalization
+
+**Kind:** structure theorem
+**Evidence:** formalized
+**Disposition:** active
+
+Fix any positive deletion width, any body, and any target role word. Over the shallow source
+`ruleCRoot=[R_c]`, the generalized pole equation is equivalent to
+
+```text
+P_target = V_target.
+```
+
+Indeed `9H=lift(10^β)` and `9Δ=gap(10^β)` for this root. The root and complement are nonzero by
+their exact decimal-unit shells, so the common factor `9HΔ` cancels in both directions. Since
+the radix-ten binary code is injective, code equality is equivalent to the literal word equation
+
+```text
+spell upper target · marker = spell lower target.
+```
+
+Therefore
+
+```text
+HitsSquarePole β body target [[R_c]]
+↔ target is a Neary terminal match.
+```
+
+No malformed shallow pole survives on this root branch. `MM-S79` is the minimum-body instance,
+where the unique terminal target is explicit; this theorem holds for arbitrary bodies and
+targets.
+
+**Scope:** the source history is exactly the singleton block `[R_c]`. Other singleton roots,
+longer rule-ended roots, singleton targets, and deep histories are not classified. The theorem
+identifies poles with terminal matches; converting those matches to tag halting still uses the
+usual Neary compiler-envelope hypotheses.
+
+**Use:** remove the entire one-`R_c` source constructor from the malformed shallow frontier.
+Future shallow attacks should classify the remaining rule-ended roots and must not re-prove or
+exclude the lawful terminal branch.
+
+**Formalization:**
+[`MatrixMortality/DecimalSetterMinimumBody.lean`](MatrixMortality/DecimalSetterMinimumBody.lean),
+through `ruleCRoot_code_calibration`, `ruleCRoot_complement_calibration`,
+`boundaryCode_eq_iff_terminalMatch`, and
+`ruleCRoot_hitsSquarePole_iff_terminalMatch`.
+
+**Artifact:**
+[`audits/m53-rule-c-root-terminal-normalization-2026-08-31.md`](audits/m53-rule-c-root-terminal-normalization-2026-08-31.md).
+
+**Next:** classify shallow poles over every other parser-lawful `EndsInRule` root. Seek a
+rightmost-root reduction to `ruleCRoot` plus a provably nonzero discrepancy, using the emitted
+body's strict length surplus.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
