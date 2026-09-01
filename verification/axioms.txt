@@ -1969,6 +1969,114 @@
 'MatrixMortality.MixedPrimeDebt.prefixCarryInteriorAcceptedCollision' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.MixedPrimeDebt.lengthTwoCrossing_normalForm_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.lengthTwoCrossing_normalForm_unique' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.lengthTwoCrossing_collisionSource' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.lengthTwoCrossing_commonTarget' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.lengthTwoCrossingTarget_eq_cleared' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.lengthTwoCrossingSource_hasValue' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.lengthTwoCrossingSource_fiveUnit_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.lengthTwoCrossingTarget_fiveUnit_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.lengthTwoCrossingTarget_fiveUnit_forces_carry' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.lengthTwoCrossingTarget_add_sub_hasValue' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.lengthTwoCrossingTarget_add_ten_sub_hasValue' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.lengthTwoCrossingTarget_fiveUnit_add_ten_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.lengthTwoCrossingTarget_oddShift_hasValue_negOne' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.lengthTwoCrossingTarget_fiveUnit_iff_mod_ten' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.lengthTwoCrossingTarget_gap_add_sub_hasValue' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.lengthTwoCrossingTarget_gap_add_fiveUnit_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.lengthTwoCrossingTarget_one_gap_add_fifty_fiveUnit_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.lengthTwoCrossingTarget_two_gap_add_twoFifty_fiveUnit_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.lengthTwoCrossingTarget_one_gap_fiveUnit_iff_mod_fifty' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.lengthTwoCrossingTarget_two_gap_fiveUnit_iff_mod_twoFifty' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.lengthTwoOneTargetResidue' does not depend on any axioms
+'MatrixMortality.MixedPrimeDebt.lengthTwoCrossingTarget_one_fiveUnit_iff_residue' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.lengthTwoTwoTargetResidue' does not depend on any axioms
+'MatrixMortality.MixedPrimeDebt.lengthTwoCrossingTarget_two_fiveUnit_iff_residue' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.lengthTwoCrossingOneSource_mem_realTrap_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.lengthTwoCrossingTwoSource_mem_realTrap_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.lengthTwoCrossing_acceptance_iff_mod_ten' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.lengthTwoCrossing_acceptance_iff_semilinearTable' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.lengthTwoCrossingSource_positive' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.lengthTwoCrossingSource_add' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.MixedPrimeDebt.lengthTwoCrossingSource_strictMono' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.lengthTwoCrossingSource_add_three_gt_half' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.lengthTwoCrossing_realTrap_gauge_lt_three' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.lengthTwoCrossing_realTrap_gauge_distance_lt_three' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.lengthTwoCrossing_realTrap_forces_k_le_two' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.lengthTwoGapDepths_iff_residues' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.lengthTwoCrossing_acceptance_forces_residueFamily' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.lengthTwoCollisionSource_pos_iff_crossingNormalForm' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.MixedPrimeDebt.shellRun_fixedPoint_unique' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.MixedPrimeDebt.shellPeriodicPoint_eq_iff_commute' depends on axioms: [propext,
  Classical.choice,
