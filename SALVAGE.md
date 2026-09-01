@@ -269,6 +269,7 @@ file owns the mathematical stock.
 | [`D2-S18`](#d2-s18-same-length-cross-grade-five-carry) | structure theorem | same-length cross-grade source acceptance is exactly one parity/LTE valuation test on the cleared intercept gap | formalized | active |
 | [`D2-S19`](#d2-s19-same-length-collision-acceptance-certificate) | structure theorem | same-length cross-grade collision acceptance is exactly one affine-determinant valuation test | formalized | active |
 | [`D2-S20`](#d2-s20-positive-endpoint-suffix-antichain) | structure theorem | every positive-source endpoint fibre is an antichain in the reverse cumulative-wait order | formalized | active |
+| [`D2-S21`](#d2-s21-affine-determinant-carry-stripping) | reduction | common initial and terminal waits strip exactly from the fixed-source equation, while the cleared determinant has explicit recurrences | formalized | active |
 | [`D2-D01`](#d2-d01-projectively-unimodular-stratum) | decidable stratum | projectively unimodular hard-core instances are decidable | audited | stock |
 | [`D2-D02`](#d2-d02-invariant-pair-stratum) | decidable stratum | invariant projective pairs reduce to abelian-by-`C₂` reachability | reported | active |
 | [`D2-D03`](#d2-d03-common-multiplier-stratum) | decidable stratum | rational affine maps with one multiplier are decidable under regular control | reported | active |
@@ -12438,6 +12439,88 @@ equation and determinant carry.
 **Next:** derive the paired recurrence on the signed suffix-gap walk and the cleared determinant,
 then decide whether a fixed positive source and one of the twelve target-depth classes bound its
 zero crossings or carry states.
+
+### D2-S21: Affine-determinant carry stripping
+
+**Kind:** exact recurrence and reduction
+**Evidence:** formalized
+**Disposition:** active
+
+For a shell schedule `w`, retain the cleared gain and offset from
+[`D2-S20`](#d2-s20-positive-endpoint-suffix-antichain),
+
+```text
+G(w)=3^length(w)(2/3)^sum(w),
+O(w)=5^length(w)·intercept(w),
+```
+
+and define the cleared affine determinant
+
+```text
+H(u,v)=G(u)O(v)−G(v)O(u).
+```
+
+If `u,v` have common length `n`, their ordinary affine determinant is exactly
+
+```text
+slope(u)·intercept(v)−slope(v)·intercept(u)=H(u,v)/5^(2n).
+```
+
+Consequently the accepted-collision criterion of
+[`D2-S19`](#d2-s19-same-length-collision-acceptance-certificate) becomes the corrected positive
+cleared value
+
+```text
+v₅(H(u,v))=n+κ(Δ),   Δ=|sum(u)−sum(v)|.
+```
+
+For `s_a=3(2/3)^a`, paired extension has the exact recurrences
+
+```text
+H(a::u,a::v)=5s_a H(u,v),
+H(u++[a],v++[a])
+  =s_a²H(u,v)+s_a(G(u)5^length(v)−G(v)5^length(u)).
+```
+
+The first factor has five-adic value one. Removing one common initial wait therefore lowers
+both `v₅(H)` and the required acceptance exponent by one. At the endpoint level,
+
+```text
+shellRun(a::u,x)=shellRun(a::v,x)
+  ↔ shellRun(u,shellStep(a,x))=shellRun(v,shellStep(a,x)).
+```
+
+For a cross-grade pair, `shellStep(a,collisionSource(a::u,a::v))=collisionSource(u,v)`.
+At the other end, injectivity of `shellStep(a,·)` gives
+
+```text
+shellRun(u++[a],x)=shellRun(v++[a],x)
+  ↔ shellRun(u,x)=shellRun(v,x),
+```
+
+and the unique cross-grade collision source is unchanged.
+
+**Scope:** common terminal waits do not strip multiplicatively from `H`; their recurrence has
+the displayed gain-difference term. The result does not classify irreducible pairs or bound
+their length. It reduces the fixed-source search to pairs with no common initial or terminal
+wait and transfers the determinant carry through every removed initial wait.
+
+**Artifact:** `MixedPrimeDebt.shellClearedDeterminant`,
+`MixedPrimeDebt.shellDeterminant_eq_cleared`,
+`MixedPrimeDebt.shellClearedDeterminant_cons_same_hasValue_iff`,
+`MixedPrimeDebt.shellClearedDeterminant_append_same`,
+`MixedPrimeDebt.sameLengthCollisionClearedDeterminant_fiveUnit_iff`,
+`MixedPrimeDebt.collisionSource_cons_same_step`, and
+`MixedPrimeDebt.collisionSource_append_same` in
+[`MixedPrimeRealTrapDeterminant.lean`](MatrixMortality/MixedPrimeRealTrapDeterminant.lean).
+
+**Use:** strip maximal common initial and terminal schedule segments before the signed
+suffix-crossing search. Advance the fixed source through the removed initial segment, leave it
+unchanged under terminal stripping, and test `v₅(H)=n+κ(Δ)` only on the remaining pair.
+
+**Next:** run the determinant recurrence only on irreducible signed suffix-gap walks. Seek a
+finite carry quotient or a height contraction for walks whose fixed source lies in the real
+trap and whose target occupies one of the twelve canonical depth classes.
 
 ### D2-O09: Guarded real-pole reset
 
