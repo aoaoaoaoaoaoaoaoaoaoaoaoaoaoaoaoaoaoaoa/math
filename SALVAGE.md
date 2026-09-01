@@ -257,6 +257,7 @@ file owns the mathematical stock.
 | [`G3-S06`](#g3-s06-guarded-mixed-prime-endpoint-bridge) | structural reduction and obstruction | every block-coded mixed-prime guard is fixed-endpoint reachability, while `bcbc` forces three distinct core maps and forbids letterwise coding | formalized | active |
 | [`G3-S08`](#g3-s08-mixed-prime-macro-fork-rigidity) | structure theorem and obstruction | exact endpoint coding identifies the flat and nested fork actions, while a common fixed point for all three macros is impossible | formalized | active |
 | [`G3-S10`](#g3-s10-mixed-prime-literal-fork-extinction) | obstruction and structural reduction | literal flat/nested equality forces a forbidden common fixed point, so every exact code requires a genuine mixed-prime kernel collision | formalized | active |
+| [`G3-S11`](#g3-s11-reduced-fork-kernel-gauntlet) | structural reduction and computational obstruction | context cancellation forces a positive reduced kernel triple with exterior fixed-point geometry; exhaustive exact search excludes reduced length at most 36 | formalized; audited arithmetic and computational cuts | active |
 | [`G3-M02`](#g3-m02-square-root-punctuation-fracture) | partial mechanism | a rank-two square root gives an exact `SS`-free mortality grammar | formalized | closed |
 | [`G3-O10`](#g3-o10-square-root-boundary-saturation) | obstruction | every nondegenerate rank-one square root preserves boundary coefficient zeros | formalized | graduated |
 | [`G3-M01`](#g3-m01-free-group-discrepancy-engine) | partial mechanism | Carvalho's transducer gives an all-word marker-tail equation and a cyclic exponent-one equalizer | audited | active |
@@ -10169,8 +10170,8 @@ actions. Test this before endpoint selection or normalized-mantissa analysis.
 [`GuardedMixedPrimeFork.lean`](MatrixMortality/GuardedMixedPrimeFork.lean) and
 [`m34-mixed-prime-macro-fork-rigidity-2026-08-31.md`](audits/m34-mixed-prime-macro-fork-rigidity-2026-08-31.md).
 
-**Next:** `G3-S10` excludes literal equality. Classify the distinct-kernel branch and test whether
-any relation admits three pairwise-distinct, non-common-fixed macro actions.
+**Next:** `G3-S10/S11` exclude literal, empty-macro, and reduced-length-at-most-`36` branches.
+Derive an unbounded obstruction for the exterior fixed-point equation or find a longer triple.
 
 ### G3-S10: Mixed-prime literal fork extinction
 
@@ -10235,9 +10236,91 @@ guarded-shell analysis.
 [`GuardedMixedPrimeLiteralNoGo.lean`](MatrixMortality/GuardedMixedPrimeLiteralNoGo.lean) and
 [`m34-mixed-prime-literal-fork-extinction-2026-08-31.md`](audits/m34-mixed-prime-literal-fork-extinction-2026-08-31.md).
 
-**Next:** classify decompositions of mixed-prime kernel pairs into the forced macro pattern and
-test whether any decomposition has three pairwise-distinct actions without a common fixed point.
-The complete endpoint converse and exact mantissa remain downstream.
+**Next:** `G3-S11` cancels the inert action context, proves all macros positive, extracts exact
+fixed-point geometry, and excludes reduced length at most `36`. Derive an unbounded obstruction
+or find a longer triple; the complete endpoint converse and exact mantissa remain downstream.
+
+### G3-S11: Reduced fork-kernel gauntlet
+
+**Kind:** structural reduction and computational obstruction
+
+**Evidence:** formalized; audited arithmetic and exact exhaustive computation for the bounded cuts
+
+**Disposition:** active
+
+The full fork words share a fixed encoded prefix and suffix. Every raw mixed-prime action is
+bijective, so these contexts cancel from equality of actions. Write the data-`b`, data-`c`, and
+toggle macro words as `x`, `y`, and `z`. Every exact code therefore supplies the reduced relation
+
+```text
+wordAction(y z x y x) = wordAction(x z y x y)
+```
+
+on every rational state. The two raw words are distinct, and their exact common length is
+
+```text
+N = 2|x| + 2|y| + |z|.
+```
+
+This cancellation is stronger than the full-word kernel witness of `G3-S10`; a search need not
+carry the inert terminal context.
+
+Lean also eliminates every degenerate macro boundary. Each of `x,y,z` is nonempty. The actions
+of `x` and `y` have different slopes and different rational fixed points. Put their slopes and
+fixed points at `(a,p)` and `(b,q)`, and put the toggle data at `(c,r)`. The reduced action
+equation has the exact balance
+
+```text
+A(p-r) = B(q-r),
+A = (1-a)(1-bc(1-a(1-b))),
+B = (1-b)(1-ac(1-b(1-a))),
+B-A = (a-b)(1-c).
+```
+
+All three slopes lie strictly between zero and one, and `A,B>0`. If `b<a`, then `B>A` and `q`
+lies strictly between `p` and `r`. If `a<b`, then `A>B` and `p` lies strictly between `q` and
+`r`. Thus the toggle fixed point is not a free search coordinate: it is uniquely prescribed and
+lies beyond the more contracting data fixed point, away from the other. Lean proves that every
+word fixed point lies in `[0,5/2]`, so this middle data fixed point is strictly interior.
+
+The exact checker exhausts every positive triple of raw `D,T` words with `N≤36`. For each length
+partition it enumerates two macros and every prime-unique slope of the third, solves the one
+linear offset equation, and decides exact word membership by a meet-in-the-middle hash over
+`fractions.Fraction`. It finds no triple whose three actions are pairwise distinct and have no
+common fixed point. These are necessary conditions of exact endpoint semantics, so any surviving
+code has reduced length at least `37`.
+
+There is also an exact 2-adic cut. If all three words contain `D`, then their offsets satisfy
+
+```text
+v₂(u_y-u_x) ≥ min(#D(x),#D(y)).
+```
+
+In particular the leading `T` runs of `x` and `y` have the same parity. This follows by reducing
+the affine fork equation in the 2-adic integers, where every denominator is odd and the slope
+valuation is exactly the `D` count. It is a necessary sieve, not a contradiction. Exact backward
+normal-form search separately excludes the thin rectangle `1≤|x|,|y|≤3`, `1≤|z|≤100`.
+
+**Scope:** the length-`36` and thin-rectangle exclusions are computational, not Lean theorems and
+not unbounded nonexistence results. The 2-adic congruence is audited exact arithmetic but is not
+yet formalized. The search does not test the complete endpoint converse; it first excludes the
+mandatory fork relation. The formal results prove context cancellation, distinctness, positive
+macro lengths, the balance equation, and exterior fixed-point geometry without a length bound.
+
+**Use:** search the five-factor relation directly at reduced length, solve the toggle coordinate
+from the balance, and reject every candidate violating the exterior order before attempting the
+normalized-mantissa endpoint equation. A positive route now needs a relation of reduced length at
+least `37`; another short published kernel identity or an empty macro cannot instantiate it.
+
+**Artifact:**
+[`GuardedMixedPrimeReducedKernel.lean`](MatrixMortality/GuardedMixedPrimeReducedKernel.lean),
+[`audit_mixed_prime_fork.py`](tools/audit_mixed_prime_fork.py), and
+[`m34-mixed-prime-reduced-kernel-2026-08-31.md`](audits/m34-mixed-prime-reduced-kernel-2026-08-31.md).
+
+**Next:** combine exterior fixed-point order, 2-adic leading-run parity, and exact backward normal
+form into an unbounded obstruction for the physical `D,T` grammar. Any surviving triple must
+still satisfy the complete fixed-endpoint converse and the `D2-S08` normalized-mantissa
+obligation.
 
 ### G3-O13: Rational serializer pumping
 

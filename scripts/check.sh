@@ -104,6 +104,7 @@ fi
 
 readonly PYTHON_CHECKERS=(
   tools/audit_chhn_packing_rank.py
+  tools/audit_mixed_prime_fork.py
   tools/audit_prefix_algebra.py
   tools/audit_six_state_sandwich.py
   tools/certify_frankl.py
@@ -115,6 +116,8 @@ uvx --from ruff==0.15.22 ruff format --check "${PYTHON_CHECKERS[@]}"
 uvx --from ty==0.0.58 ty check "${PYTHON_CHECKERS[@]}"
 uv run --script tools/audit_prefix_algebra.py
 uv run --script tools/audit_chhn_packing_rank.py
+uv run --script tools/audit_mixed_prime_fork.py self-check
+uv run --script tools/audit_mixed_prime_fork.py thin 3 100
 uv run --script tools/audit_six_state_sandwich.py
 uv run --script tools/certify_frankl.py
 uv run --script tools/explore_setter_projective.py --audit --primes 3
