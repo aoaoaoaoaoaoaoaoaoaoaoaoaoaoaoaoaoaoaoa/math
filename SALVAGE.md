@@ -145,6 +145,7 @@ file owns the mathematical stock.
 | [`MM-S81`](#mm-s81-one-r_c-root-terminal-normalization) | structure theorem | every shallow pole over the one-`R_c` root is exactly a literal Neary terminal match, with no malformed survivor | formalized | active |
 | [`MM-S82`](#mm-s82-one-r_b-root-sign-extinction) | obstruction | the one-`R_b` root has negative exact-length complement and cannot hit any shallow pole | formalized | active |
 | [`MM-S83`](#mm-s83-leading-b-shallow-root-sign-extinction) | obstruction | every shallow root beginning with a `b`-role has negative exact-length complement and misses every target | formalized | active |
+| [`MM-S84`](#mm-s84-complete-shallow-root-terminal-normalization) | structure theorem | every parser-lawful non-singleton shallow pole has source exactly `R_c` and is exactly a literal Neary terminal match | formalized | active |
 | [`R32-S01`](#r32-s01-split-return-normal-form) | structure theorem | rank-two cuts reduce one-unit binary mortality to a `2 × 2` return recurrence | formalized | graduated |
 | [`R32-S02`](#r32-s02-two-plane-edge-square) | structure theorem | two rank-two generators are a two-vertex square of `2 × 2` edges | formalized | graduated |
 | [`R32-O01`](#r32-o01-rank-one-profile-collapse) | obstruction | a rank-one generator reduces mortality to order-at-most-three scalar recurrence zeros | audited | stock |
@@ -5317,8 +5318,74 @@ through `tagCodeB_code_eq`, `leadingBRoot_complement_eq`,
 **Artifact:**
 [`audits/m53-leading-b-shallow-root-sign-extinction-2026-08-31.md`](audits/m53-leading-b-shallow-root-sign-extinction-2026-08-31.md).
 
-**Next:** classify the two surviving length-two source letter words `cb` and `cc`. Their first
-role phase is invisible to the one-block square-reset state, so only two exact code ratios remain.
+**Next:** graduated into
+[`MM-S84`](#mm-s84-complete-shallow-root-terminal-normalization).
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S84: Complete shallow-root terminal normalization
+
+**Kind:** structure theorem
+**Evidence:** formalized
+**Disposition:** active
+
+Let an erasure-ended target block have at least two roles, and let one parser-lawful root block
+lie to the right of its square reset. For `β≥2`, the target's punctuated upper and complete lower
+words both end in `00`, hence their decimal codes satisfy
+
+```text
+P ≡ V ≡ 77 (mod 100).
+```
+
+The calibrated trace
+
+```text
+T = gap(10^β)·P + lift(10^β)·V
+```
+
+therefore has exact decimal shell `(1,1)`. Write `H` for the source's punctuated upper code,
+`m` for the length of its upper spelling, and `Δ=μ·10^m−H` for its exact-length complement.
+The shallow pole equation rearranges without division:
+
+```text
+gap·P·H = lift·V·Δ
+    ⟺ H·T = lift·μ·10^m·V.                              (1)
+```
+
+The factors `H`, `lift`, `μ`, and `V` are decimal units. Comparing either valuation in (1)
+against the shell `(1,1)` forces `m=1`. Every role contributes at least one upper digit, so the
+parser's rule-ended source is a singleton. `MM-S82` removes `R_b`; the source is exactly `R_c`.
+Finally `MM-S81` identifies its pole equation with literal terminal equality. Lean proves the
+canonical equivalence
+
+```text
+HitsSquarePole β body target [source]
+  ↔ source = [R_c] ∧ upper(target)·marker = lower(target).
+```
+
+**Scope:** this is unconditional in the body and assumes only `β≥2`, a non-singleton
+erasure-ended target, one source block, and the parser's rule-ended source law. It is exactly the
+shallow non-singleton branch of `MM-S74`. Singleton targets and deeper block histories remain
+outside.
+
+**Use:** delete every malformed shallow root, including all length-two `cb` and `cc` sources and
+all longer generalized roots. The outer mortality frontier now has only the singleton-target and
+deep-history branches beyond lawful terminal matches.
+
+**Formalization:**
+[`MatrixMortality/DecimalSetterShallow.lean`](MatrixMortality/DecimalSetterShallow.lean), through
+`multiRoleErasureEnded_boundaryTrace_hasDecimalShell`,
+`shallowSquarePole_sourceUpperLength_eq_one`,
+`shallowSquarePole_impossible_of_source_multi`, and
+`shallowSquarePole_iff_ruleCRoot_terminalMatch`, with the parser-facing corollary
+`coreSpelling_shallowSquarePole_iff_ruleCRoot_terminalMatch`.
+
+**Artifact:**
+[`audits/m53-complete-shallow-root-terminal-normalization-2026-09-01.md`](audits/m53-complete-shallow-root-terminal-normalization-2026-09-01.md).
+
+**Next:** compose this exact classifier into the `MM-S74` parsed frontier and concentrate the
+remaining arithmetic on singleton targets and deeper histories.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).

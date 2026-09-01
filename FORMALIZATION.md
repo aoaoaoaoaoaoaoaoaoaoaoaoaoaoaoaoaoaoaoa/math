@@ -1643,6 +1643,13 @@ to arbitrary source length. Any root beginning with a `b`-role has complement
 unresolved malformed shallow source now begins with `c` and has length at least two; the
 length-two residue consists only of `cb` and `cc`.
 
+Record [`MM-S84`](SALVAGE.md#mm-s84-complete-shallow-root-terminal-normalization) closes that
+entire residue and every longer parser-lawful shallow root at once. A non-singleton
+erasure-ended target has upper and lower codes `77 (mod 100)`, so its calibrated trace has shell
+`(1,1)`. Rewriting the pole as `H·trace=lift·μ·10^m·V` forces the source upper length `m=1`.
+Parser law then makes the source exactly `R_c`, and S81 makes the pole equivalent to literal
+terminal equality. No malformed shallow pole remains.
+
 Record [`MM-S37`](SALVAGE.md#mm-s37-decimal-three-shape-frontier-extinction) separates the
 ternary and decimal first-multi-transfer fronts. The single theorem
 `DecimalSetterDepth.firstMultiTransfer_threeShapeFrontier_impossible` consumes the three role
@@ -1698,7 +1705,7 @@ the periodic saturation theorem and its remaining arithmetic boundary are recons
 formalization and the shell attack are tracked in
 [#7](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/7).
 
-The `M₅(3)` delimiter attack has sixteen foundational records:
+The `M₅(3)` delimiter attack has seventeen foundational records:
 
 | Record | Formalization obligation |
 | --- | --- |
@@ -1712,6 +1719,7 @@ The `M₅(3)` delimiter attack has sixteen foundational records:
 | [`MM-S81`](SALVAGE.md#mm-s81-one-r_c-root-terminal-normalization) | exact equivalence between the one-`R_c` shallow pole language and literal Neary terminal matches |
 | [`MM-S82`](SALVAGE.md#mm-s82-one-r_b-root-sign-extinction) | exact negative complement of the one-`R_b` root and complete one-role shallow-source classification |
 | [`MM-S83`](SALVAGE.md#mm-s83-leading-b-shallow-root-sign-extinction) | exact arbitrary-tail complement formula and sign extinction for every shallow root beginning with `b` |
+| [`MM-S84`](SALVAGE.md#mm-s84-complete-shallow-root-terminal-normalization) | `(1,1)` target-trace shell, forced source upper length one, parser normalization to `R_c`, and exact terminal-match equivalence |
 | [`MM-S01`](SALVAGE.md#mm-s01-square-run-projective-normal-form) | invariant square-run plane, invertible `2 × 2` transfer, Möbius normalization, rank-one fracture grammar, and equivalence with pole avoidance |
 | [`MM-S02`](SALVAGE.md#mm-s02-reset-zero-projective-peeling) | scaled transfer identity, exact two-shell classification of all poles, and reset-zero one-transfer avoidance |
 | [`MM-O16`](SALVAGE.md#mm-o16-exact-delimiter-pair-obstruction) | generic ignored-pair immortality is formalized; paired common-kernel and cubic companion specializations are audited |

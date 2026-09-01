@@ -1073,6 +1073,15 @@ phases. Every unresolved malformed shallow root now begins with `c` and has leng
 At length two, the sole letter words are `cb` and `cc`; the first role's phase is invisible to
 the one-block square-reset state.
 
+[`MM-S84`](SALVAGE.md#mm-s84-complete-shallow-root-terminal-normalization) closes the complete
+non-singleton shallow branch rather than enumerating `cb`, `cc`, and longer roots. Every
+erasure-ended multi-role target has upper and lower boundary codes `77 (mod 100)`, placing its
+calibrated trace in shell `(1,1)`. The shallow pole identity then forces the source upper
+spelling to have length one. Parser law leaves exactly `R_c`, and its pole is exactly the literal
+terminal equation by `MM-S81`. Thus shallow poles are lawful terminal witnesses; no malformed
+shallow root survives. The outer `MM-S74` frontier is reduced to singleton targets and deeper
+histories.
+
 The ternary and decimal branches now separate at their first multi-transfer front.
 [`MM-S37`](SALVAGE.md#mm-s37-decimal-three-shape-frontier-extinction) substitutes each of the
 three role shapes left by the swapped ternary gate into the decimal carrier equation. All are
