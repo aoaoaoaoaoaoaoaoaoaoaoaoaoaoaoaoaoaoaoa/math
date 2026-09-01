@@ -135,6 +135,7 @@ file owns the mathematical stock.
 | [`MM-S56`](#mm-s56-exact-rule-resonance-grammar) | structure theorem and obstruction | exact comparison depths reduce every later rightmost rule to a finite raw-head and rightmost-`b` resonance grammar | formalized | graduated |
 | [`MM-S60`](#mm-s60-complete-b-bearing-rule-entry-extinction) | obstruction | every b-bearing rightmost-rule block misses the physical multi-role pole shell from a lawful two-`c` raw head | formalized | active |
 | [`MM-S62`](#mm-s62-all-c-position-two-rule-extinction) | obstruction | no all-`c` rightmost-rule block with exactly one preceding role reaches the physical pole shell from a lawful two-`c` raw head | formalized | active |
+| [`MM-S65`](#mm-s65-complete-all-c-rule-entry-extinction) | obstruction | every all-`c` rightmost-rule block misses the physical multi-role pole shell from a lawful two-`c` raw head | formalized | active |
 | [`R32-S01`](#r32-s01-split-return-normal-form) | structure theorem | rank-two cuts reduce one-unit binary mortality to a `2 × 2` return recurrence | formalized | graduated |
 | [`R32-S02`](#r32-s02-two-plane-edge-square) | structure theorem | two rank-two generators are a two-vertex square of `2 × 2` edges | formalized | graduated |
 | [`R32-O01`](#r32-o01-rank-one-profile-collapse) | obstruction | a rank-one generator reduces mortality to order-at-most-three scalar recurrence zeros | audited | stock |
@@ -4799,8 +4800,51 @@ through `regularAllC_twoPower_dvd`, `exceptionalAllC_twoPower_dvd`,
 **Artifact:**
 [`audits/m53-all-c-position-two-rule-extinction-2026-08-31.md`](audits/m53-all-c-position-two-rule-extinction-2026-08-31.md).
 
-**Next:** classify the normalized coefficient collision on the regular tail `t=h` and the
-exceptional tail `t=2β−2`, then assemble the complete distinguished raw-head rule-entry theorem.
+**Next:** the two later-frontier collisions graduate into
+[`MM-S65`](#mm-s65-complete-all-c-rule-entry-extinction).
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S65: Complete all-c rule-entry extinction
+
+**Kind:** obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+After `MM-S62`, the all-`c` rightmost-rule grammar has two later frontiers. At a regular raw
+head with final-seven width `h`, the erasure-tail width must equal `h`. Scaling by `81` exposes
+normalized residue `2^h` on both the all-erasure companion and the phase perturbation. Their
+sum has residue `2·2^h`, a five-adic unit, so the rule residual has exact five-depth `h+1`.
+At least two roles precede the rule, making the physical target at least `h+2`.
+
+At the exceptional head, the erasure-tail width is `2β−2`. Scaling by `45` puts both arms at
+depth `2β`. The all-erasure coefficient is `2` or `4`, while the phase coefficient is `2`;
+their sum is `4` or `6` modulo five. The scaled rule residual therefore has exact depth `2β`,
+whereas the scaled physical target has depth at least `2β+1`.
+
+`allCRightmostRule_rawHead_shell_impossible` first invokes the `MM-S62` grammar adapter. It
+dispatches leading and position-two rules through `MM-S54` and `MM-S62`, proves that every
+remaining rule has at least two predecessors, and applies the appropriate coefficient
+collision. Hence every all-`c` rightmost-rule distinguished raw-head entry is impossible.
+
+**Scope:** the theorem covers every all-`c` block with a rightmost rule followed by erasures,
+from the distinguished decimal-unit two-`c` raw head to the physical multi-role shell. It does
+not cover b-bearing rules, generalized later carriers, or singleton targets.
+
+**Use:** combine with [`MM-S60`](#mm-s60-complete-b-bearing-rule-entry-extinction) to remove the
+complete rightmost-rule branch from the distinguished first-entry grammar.
+
+**Formalization:**
+[`MatrixMortality/DecimalSetterAllCRule.lean`](MatrixMortality/DecimalSetterAllCRule.lean),
+through `laterAllCRightmostRule_rawHead_shell_impossible` and
+`allCRightmostRule_rawHead_shell_impossible`.
+
+**Artifact:**
+[`audits/m53-complete-all-c-rule-entry-extinction-2026-08-31.md`](audits/m53-complete-all-c-rule-entry-extinction-2026-08-31.md).
+
+**Next:** split arbitrary rightmost-rule words into b-bearing and all-`c` branches, then combine
+that complete rule extinction with `MM-S53`.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).

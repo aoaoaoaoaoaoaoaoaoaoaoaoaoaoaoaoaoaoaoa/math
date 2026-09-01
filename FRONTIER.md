@@ -995,8 +995,15 @@ frontier, the phase perturbation and its all-erasure companion are both divisibl
 power of two. Beyond that frontier, the companion has strictly shallower exact five-depth than
 the phase perturbation. Either case contradicts the physical equal-depth shell. The surviving
 distinguished raw-head rule grammar is now confined to the later all-`c` frontier: tail width
-`h` at a regular head or `2β−2` at the exceptional head. Generalized carriers and singleton
-targets remain outside this assembly.
+`h` at a regular head or `2β−2` at the exceptional head.
+
+[`MM-S65`](SALVAGE.md#mm-s65-complete-all-c-rule-entry-extinction) extinguishes those final
+all-`c` frontiers. At a regular head, the `81`-scaled companion and phase coefficients are both
+`2^h`, so their equal-depth sum remains nonzero modulo five. At the exceptional head, the
+`45`-scaled coefficients are `2 or 4` and `2`, whose sum is likewise nonzero. Both collisions
+remain strictly shallower than the physical target. Leading and position-two rules were already
+removed by `MM-S54` and `MM-S62`; no all-`c` rightmost-rule first entry survives. Generalized
+carriers and singleton targets remain outside this assembly.
 
 The ternary and decimal branches now separate at their first multi-transfer front.
 [`MM-S37`](SALVAGE.md#mm-s37-decimal-three-shape-frontier-extinction) substitutes each of the
