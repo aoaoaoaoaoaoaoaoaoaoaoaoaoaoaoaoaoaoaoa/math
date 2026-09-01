@@ -1558,7 +1558,7 @@ leading-`b` invariant required by the chart. Consequently
 code halting, and `UniversalNeary.mortality92_not_computable` proves `M₉(2)` undecidable. Zero
 padding gives `M_d(2)` for every `d≥9`.
 
-[`MM-O27`](SALVAGE.md#mm-o27-tilted-geometric-tail-rank-nine-wall) proves that this benchmark
+[`MM-O28`](SALVAGE.md#mm-o28-tilted-geometric-tail-rank-nine-wall) proves that this benchmark
 series has exact transfer rank nine uniformly over every rational tail amplitude and eigenratio
 and every tilted-row parameter `q<−3/2`. Four sparse `9 × 9` minors cover zero tail, generic tail
 scale, and both exceptional-pivot branches. Thus `M₈(2)` cannot follow by retuning the one-state

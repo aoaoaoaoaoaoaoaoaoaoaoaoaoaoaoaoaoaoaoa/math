@@ -1,7 +1,7 @@
 # M₉(2) tilted geometric-tail rank-nine audit
 
-Date: 2026-08-31  
-Record: `MM-O27`  
+Date: 2026-08-31
+Record: `MM-O28`
 Evidence: formalized
 
 ## Claim
