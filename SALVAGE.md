@@ -145,6 +145,7 @@ file owns the mathematical stock.
 | [`R32-S70`](#r32-s70-positive-singleton-source-selector) | compiler mechanism | one finite positive left word annihilates exactly the encoded cubic-pump source `00` among all binary addresses | formalized | active |
 | [`R32-S71`](#r32-s71-selected-comparator-and-neutral-fracture) | compiler mechanism and obstruction | the balanced clock composes with the singleton selector, but two unclocked wrong reads insert as a shorter scalar-identity false spelling | formalized | active |
 | [`R32-S72`](#r32-s72-non-scalar-source-stabilizer-collision) | obstruction | a positive non-scalar affine stabilizer preserves the selected source ray, so scalar stutters do not exhaust its fibre | formalized | active |
+| [`R32-S73`](#r32-s73-reader-writer-affine-quotient-normal-form) | structure theorem | the four cubic radix writer-reader macros have a complete decidable affine normal form for physical projective equality | formalized | active |
 | [`R32-M01`](#r32-m01-generic-reverse-edge-compiler) | partial mechanism | projective incidence generically embeds into a compatible two-plane edge square | formalized | active |
 | [`R32-M02`](#r32-m02-finite-quotient-sieve) | partial mechanism | finite monoid quotients give complete modular no-certificates for fixed candidates | formalized | active |
 | [`R32-M03`](#r32-m03-two-scale-return-conversion) | partial mechanism | a minimal two-scale return pencil has nonresonant multi-return zeros | formalized | active |
@@ -5462,6 +5463,64 @@ with audit
 **Use:** replace a scalar-neutral quotient by a source-fibre or double-coset analysis. A complete
 converse must quotient the entire right stabilizer of the separator source, together with any
 left stabilizer of the selected target, and still recognize arbitrary raw positive-wait words.
+
+### R32-S73: Reader-writer affine quotient normal form
+
+**Kind:** structure theorem
+**Evidence:** formalized
+**Disposition:** active
+
+Restrict to the four segmented macros consisting of the two radix writers `Wₐ` and their
+positive physical readers `Rₐ`. Normalize every matrix to lower-right entry one and put
+`q=4/25`. Each letter has the affine form
+
+```text
+M(a) = [[q^h(a), s(a)], [0,1]],       h(Wₐ)=1, h(Rₐ)=-1.    (1)
+```
+
+For a macro word `a·w`, define the exact recursive normal form
+
+```text
+N(ε)=(0,0),
+N(a·w)=(h(a)+h(w), s(a)+q^h(a)s(w)).                          (2)
+```
+
+Lean proves the full product law
+
+```text
+Π(w) = [[q^N(w).height, N(w).shift], [0,1]].                  (3)
+```
+
+Since integer powers of `4/25` are injective and the lower-right entry fixes every projective
+scale, both normalized and positive physical words satisfy
+
+```text
+Π(u) ∼ Π(v)  iff  N(u)=N(v).                                  (4)
+```
+
+In particular, a positive physical macro spelling is projectively scalar exactly when its
+height and shift both vanish. Reversing a word and exchanging writers with readers gives an
+exact two-sided inverse, so equality of two products is equivalent to identity of their quotient
+word. The opposite unclocked mismatch insertion from `R32-S71` evaluates to `(0,0)` exactly.
+
+**Scope:** the semidirect-product evaluator, exact normalized product, nonzero physical
+realization, positivity, projective-equality biconditionals, neutral-kernel classifier, inverses,
+quotient law, and the `R32-S71` witness are Lean checked. Completeness is only for the four-letter
+writer-reader alphabet. The terminal positive/negative translation blocks, transverse source
+pumps, and arbitrary unsegmented positive waits lie outside the theorem; `R32-S72` already gives
+a nonscalar source-fibre collision in that larger arsenal.
+
+**Artifact:**
+`CubicReturn.NonPure.continuantRadixMacroEncoding_projectively_eq_iff`,
+`continuantRadixMacroEncoding_projectiveIdentity_iff`, and
+`continuantRadixMacro_quotient_eq_one_iff` in
+[`CubicContinuantMacroNormalForm.lean`](MatrixMortality/CubicContinuantMacroNormalForm.lean),
+with audit
+[`m32-cubic-macro-normal-form-2026-09-01.md`](audits/m32-cubic-macro-normal-form-2026-09-01.md).
+
+**Use:** decide and quotient all scalar stutters once a word has been lawfully segmented into
+the radix writer-reader alphabet. Do not extrapolate this normal form to the larger known macro
+dictionary or treat it as an arbitrary raw-word parser.
 
 ### R32-M01: Generic reverse edge compiler
 

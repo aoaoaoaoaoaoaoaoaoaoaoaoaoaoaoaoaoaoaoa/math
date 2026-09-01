@@ -1840,6 +1840,15 @@ stabilizers of the source, and the raw positive-wait words between them. See
 [`R32-S72`](SALVAGE.md#r32-s72-non-scalar-source-stabilizer-collision) and
 [`m32-cubic-source-stabilizer-2026-09-01.md`](audits/m32-cubic-source-stabilizer-2026-09-01.md).
 
+The scalar kernel is nevertheless completely decidable inside the restricted four-letter radix
+writer-reader alphabet. Every segmented word has an exact affine pair `(height,shift)`, and two
+positive physical products are projectively equal exactly when both fields agree. Inverse words
+and quotient neutrality are exact. This closes scalar-stutter normalization only after lawful
+segmentation and does not cover the terminal translations or transverse pumps responsible for
+the larger two-sided fibre. See
+[`R32-S73`](SALVAGE.md#r32-s73-reader-writer-affine-quotient-normal-form) and
+[`m32-cubic-macro-normal-form-2026-09-01.md`](audits/m32-cubic-macro-normal-form-2026-09-01.md).
+
 ### ReturnSquare laboratory
 
 [`R32-S03`](SALVAGE.md#r32-s03-returnsquare-normal-form) is the first completely normalized

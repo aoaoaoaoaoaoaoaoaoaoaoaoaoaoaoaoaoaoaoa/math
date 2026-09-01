@@ -1773,6 +1773,47 @@
 'MatrixMortality.CubicReturn.NonPure.falseWaitSelectedSourceStabilizerCollisionWord_not_projectivelyEqual' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.continuantRadixMacroNormalForm_ext' does not depend on any axioms
+'MatrixMortality.CubicReturn.NonPure.ContinuantRadixMacroNormalForm.matrix_mul' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.continuantRadixMacro_product_normalForm' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.continuantRadixMacroWord_projectivelyRealizes' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.continuantRadixMacroEncoding_positive' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.continuantRadixMacroEncoding_projectivelyRealizes' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.continuantRadixMacro_product_projectively_eq_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.continuantRadixMacroEncoding_projectively_eq_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.continuantRadixMacroEncoding_projectiveIdentity_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.continuantRadixMacroMatrix_inverse' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.continuantRadixMacroInverseWord_right' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.continuantRadixMacroInverseWord_left' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.continuantRadixMacro_quotient_eq_one_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.continuantNeutralMismatchMacros_encoding' depends on axioms: [propext]
+'MatrixMortality.CubicReturn.NonPure.continuantNeutralMismatchMacros_normalForm' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.EdgeCompression.isMortal_iff_exists_edgeProduct_eq_zero' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]

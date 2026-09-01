@@ -1140,6 +1140,15 @@ nonscalarity, positivity, lengths, ray collision, and unit-cancellation separati
 `R32-S72` and
 [`audits/m32-cubic-source-stabilizer-2026-09-01.md`](audits/m32-cubic-source-stabilizer-2026-09-01.md).
 
+`CubicContinuantMacroNormalForm` gives a complete effective projective quotient for words already
+segmented over the two cubic radix writers and their two positive readers. Lean evaluates each
+word to an integer height and rational shift, proves the exact affine product formula, and proves
+that equality of these fields is equivalent to projective equality of both normalized and
+physical products. It also checks the neutral-kernel biconditional, exact inverse words, quotient
+identity, positivity, and the `R32-S71` mismatch witness. The theorem excludes the independent
+terminal translations, transverse pumps, and unsegmented raw waits. See `R32-S73` and
+[`audits/m32-cubic-macro-normal-form-2026-09-01.md`](audits/m32-cubic-macro-normal-form-2026-09-01.md).
+
 The rank-(2,2) graph is no longer an independent residue. `RankTwoPunctuation` proves that every
 compatible square with one rank-one loop and three units transports exactly to the existing raw
 reverse compiler [`R32-M01`](SALVAGE.md#r32-m01-generic-reverse-edge-compiler). Its intrinsic
