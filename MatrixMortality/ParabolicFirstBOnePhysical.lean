@@ -1,4 +1,4 @@
-import MatrixMortality.ParabolicFirstBOneFunnel
+import MatrixMortality.ParabolicFirstBOneValuation
 import MatrixMortality.ParabolicWaitBounds
 
 /-!
@@ -293,6 +293,16 @@ theorem firstBOneX211_y_lower_of_density_envelope
     nlinarith
   nlinarith
 
+/-- The density envelope by itself contains an unbounded inner-wait ray, so it cannot supply the
+finite `z` cutoff used by the valuation classifier. -/
+theorem firstBOneX211DensityEnvelope_unbounded_inner_ray
+    (z : Nat) (inner_large : 394 ≤ z) :
+    FirstBOneX211DensityEnvelope 0 0 39726 z := by
+  unfold FirstBOneX211DensityEnvelope firstBOneX211A firstBOneX211B
+    firstBOneX211Q firstBOneX211J
+  norm_num
+  constructor <;> nlinarith
+
 /-- Every bounded trailing valuation envelope already excludes middle waits zero and one. -/
 theorem firstBOneX211_wait_positive_of_valuation_envelope
     (h y z : Nat) (run_bound : h ≤ 5)
@@ -343,5 +353,24 @@ theorem bZeroBDefectCOneCodeCore_x211_ne_zero_of_valuation_envelope
   have tail_eq : tail = .b :: rest := by simpa using first_b
   rw [tail_eq] at core_zero
   exact firstBOneX211Candidate_core_ne_zero rest h y z candidate (by simpa using core_zero)
+
+/-- No physical x=211 `cb` zero survives inside the explicit trailing-run, next-`b`-position,
+and inner-wait box. -/
+theorem bZeroBDefectCOneCodeCore_x211_ne_zero_of_bounds
+    (j h : Nat) (tail stem rest : List TagLetter) (y z : Nat)
+    (first_b : tail = List.replicate j .c ++ .b :: rest)
+    (last_b : tail = stem ++ .b :: List.replicate h .c)
+    (run_bound : h ≤ 5) (position_bound : j ≤ 13)
+    (inner_bound : z < 3 ^ 13) :
+    bZeroBDefectCOneCodeCore
+      ((3 : ℚ) ^ (tagEncode 3 ([.c, .b] ++ tail)).length)
+      (ternaryCode (tagEncode 3 ([.c, .b] ++ tail))) 211 y z ≠ 0 := by
+  intro core_zero
+  have valuation :=
+    firstBOneX211ValuationEnvelope_of_core_zero tail stem h y z last_b run_bound
+      inner_bound core_zero
+  exact bZeroBDefectCOneCodeCore_x211_ne_zero_of_valuation_envelope
+    j h tail stem rest y z first_b last_b run_bound position_bound inner_bound valuation
+    core_zero
 
 end MatrixMortality.ParabolicBlade

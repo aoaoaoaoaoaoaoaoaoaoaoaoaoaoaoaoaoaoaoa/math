@@ -231,6 +231,7 @@ import MatrixMortality.ParabolicEvenBody
 import MatrixMortality.ParabolicTrailing
 import MatrixMortality.ParabolicWaitBounds
 import MatrixMortality.ParabolicFirstBOneSFFT
+import MatrixMortality.ParabolicFirstBOnePhysical
 import MatrixMortality.ParabolicFirstBTwoClosure
 import MatrixMortality.ParabolicLongDefect
 import MatrixMortality.ParabolicMixedEndpoint

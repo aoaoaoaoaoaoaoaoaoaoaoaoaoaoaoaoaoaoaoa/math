@@ -286,6 +286,7 @@ file owns the mathematical stock.
 | [`M4-S33`](#m4-s33-phase-zero-right-c-x211-divisor-chamber) | structure theorem | the `x=211`, first-`b`-after-one-`c` chamber has an exact positive divisor equation and four elimination resultants | formalized | active |
 | [`M4-S34`](#m4-s34-phase-zero-right-c-second-first-b-extinction) | obstruction | no even-`b` body beginning `ccb` closes the phase-zero right-`c` bridge | formalized | active |
 | [`M4-S35`](#m4-s35-phase-zero-right-c-first-b-position-gap) | structure theorem | every tag body avoids every open density gap between consecutive first-`b` cylinders | formalized | active |
+| [`M4-S36`](#m4-s36-phase-zero-right-c-bounded-x211-extinction) | obstruction and structure theorem | the bounded `x=211` `cb` valuation-density chamber is empty | formalized | active |
 | [`M4-C03`](#m4-c03-zero-framed-binary-two-lag-compiler) | compiler | the principal scanner is literally binary context-2 Lag and compiles to `M₄(3)` | formalized | graduated |
 | [`M4-D01`](#m4-d01-zero-framed-binary-two-lag-decision) | decidable stratum | the entire zero-framed binary context-2 Lag kernel has an exact syntactic classification | formalized | graduated |
 | [`M4-D02`](#m4-d02-zero-framed-reset-scanner-decision) | decidable stratum | zero-run reduction contracts the reset scanner to a regular two-token quotient | audited | graduated |
@@ -13205,6 +13206,75 @@ then compose it with the bounded divisor classifier.
 **Artifact:**
 [`MatrixMortality/ParabolicEvenBody.lean`](MatrixMortality/ParabolicEvenBody.lean) and
 [`audits/m43-phase-zero-right-c-first-b-position-gap-2026-08-31.md`](audits/m43-phase-zero-right-c-first-b-position-gap-2026-08-31.md).
+
+### M4-S36: Phase-zero right-c bounded x211 extinction
+
+**Kind:** obstruction and structure theorem
+
+**Evidence:** formalized
+
+**Disposition:** active
+
+Write an `x=211` body in the `cb` chamber as
+
+```text
+cb · c^j b rest = cb · stem b c^h.
+```
+
+If `h≤5` and `z<3^13`, the physical core equation forces the exact truncated valuation
+allocation
+
+```text
+h+3≤u,     u+v=h+16,     v≤13.
+```
+
+Below depth `h+7`, `u` is the exact 3-adic order of `y−r_h`; at or above that depth the same
+difference is divisible by `3^(h+7)`. Below depth `13`, `v` is the exact order of
+`z−420724`; the top shell is exactly `v=13` and `z=420724`. The six residues are
+
+```text
+r_0,…,r_5 = 36, 1746, 315, 15705, 2826, 141336.
+```
+
+The proof derives this allocation from the exact SFFT product. The complement contributes
+order `h+1`, its final coefficient contributes order one, and the fixed SFFT content contributes
+order fourteen. Two unit-congruence theorems transport those orders to the displayed wait
+differences.
+
+The core equation also supplies the exact density envelope and forces
+`22529≤y≤51767`. When additionally `j≤13`, a repository-generated finite certificate reduces
+all valuation and density branches to ten triples `(h,y,z)` and proves `j=0`. For each triple,
+the remaining suffix core lies in one of the two strict gaps
+
+```text
+39R < 2178G  and  243G < 13R,
+39R <  726G  and   81G < 13R.
+```
+
+Both contradict the physical first-`b` position separator `M4-S35`. Consequently the core is
+nonzero throughout the stated box.
+
+**Scope:** physical bodies with both displayed decompositions, trailing run `h≤5`, next-`b`
+position `j≤13`, and inner wait `z<3^13`. The middle wait is not assumed bounded: `M4-S32` and
+the density equation derive its exact interval. This theorem does not prove the three remaining
+bounds and therefore does not close the full `cb` chamber or `M₄(3)`.
+
+**Use:** replace every bounded `x=211` body or wait census by one exact analytic funnel and a
+kernel-checked terminal certificate. Any completion of the `cb` chamber now has only three
+explicit escape directions to control: `h≥6`, `j≥14`, or `z≥3^13`.
+
+**Next:** derive one of those bounds from the physical core, or extend the valuation-density
+classification along its unbounded residue rays. The `z` direction cannot be bounded from the
+density envelope alone: at `h=j=0` and `y=39726`, the envelope holds for every `z≥394`.
+
+**Artifact:**
+[`MatrixMortality/ParabolicFirstBOneValuation.lean`](MatrixMortality/ParabolicFirstBOneValuation.lean),
+[`MatrixMortality/ParabolicFirstBOneFunnel.lean`](MatrixMortality/ParabolicFirstBOneFunnel.lean),
+[`MatrixMortality/ParabolicFirstBOneClosure.lean`](MatrixMortality/ParabolicFirstBOneClosure.lean),
+[`MatrixMortality/ParabolicFirstBOnePhysical.lean`](MatrixMortality/ParabolicFirstBOnePhysical.lean),
+[`scripts/generate-parabolic-first-b-one-funnel.py`](scripts/generate-parabolic-first-b-one-funnel.py),
+and
+[`audits/m43-phase-zero-right-c-bounded-x211-extinction-2026-08-31.md`](audits/m43-phase-zero-right-c-bounded-x211-extinction-2026-08-31.md).
 
 ### M4-C03: Zero-framed binary two-Lag compiler
 
