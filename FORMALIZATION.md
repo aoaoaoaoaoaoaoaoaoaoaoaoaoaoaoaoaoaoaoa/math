@@ -1112,6 +1112,15 @@ suffixes already reach the accepting ray. Signed affine synthesis is therefore a
 the first expanding candidate is not a lawful first-hit pump. See `R32-S69` and
 [`audits/m32-cubic-ray-transport-2026-09-01.md`](audits/m32-cubic-ray-transport-2026-09-01.md).
 
+`CubicContinuantSingletonSelector` closes the existential left-annihilator seam. A four-wait
+prefix and exact nonnegative repetitions of the two terminal translations from
+`CubicContinuantReader` produce a positive physical word of length `9,531,594`. Its normalized
+row is `[1,s(00)]`. A generic Lean theorem proves that `[1,s(β)]` annihilates a normalized source
+image exactly when its address is `β`; exact basis pairing and nonzero projective scales then
+give the physical biconditional `rΠ(L ++ E(γ))c=0 ↔ γ=00`. This is a fixed encoded-language
+selector, not an arbitrary-word converse or a complete compiler. See `R32-S70` and
+[`audits/m32-cubic-singleton-selector-2026-09-01.md`](audits/m32-cubic-singleton-selector-2026-09-01.md).
+
 The rank-(2,2) graph is no longer an independent residue. `RankTwoPunctuation` proves that every
 compatible square with one rank-one loop and three units transports exactly to the existing raw
 reverse compiler [`R32-M01`](SALVAGE.md#r32-m01-generic-reverse-edge-compiler). Its intrinsic

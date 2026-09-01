@@ -142,6 +142,7 @@ file owns the mathematical stock.
 | [`R32-S67`](#r32-s67-transverse-free-pump-and-ray-blindness) | structure theorem and obstruction | the binary loop matrices form a projectively free monoid whose entire stack is zero-invisible after the fixed ray-reaching suffix | formalized | active |
 | [`R32-S68`](#r32-s68-separator-source-projective-decoder) | structure theorem and compiler mechanism | modulo-197 valuation and a real shell make the free binary pump act projectively faithfully on the original separator source | formalized | active |
 | [`R32-S69`](#r32-s69-common-ray-transport-and-unsafe-expansion) | compiler mechanism and obstruction | a fixed connector transports positive terminal loops to signed equal-ratio common-ray digits and exposes the first expanding but first-hit-unsafe loop | formalized | active |
+| [`R32-S70`](#r32-s70-positive-singleton-source-selector) | compiler mechanism | one finite positive left word annihilates exactly the encoded cubic-pump source `00` among all binary addresses | formalized | active |
 | [`R32-M01`](#r32-m01-generic-reverse-edge-compiler) | partial mechanism | projective incidence generically embeds into a compatible two-plane edge square | formalized | active |
 | [`R32-M02`](#r32-m02-finite-quotient-sieve) | partial mechanism | finite monoid quotients give complete modular no-certificates for fixed candidates | formalized | active |
 | [`R32-M03`](#r32-m03-two-scale-return-conversion) | partial mechanism | a minimal two-scale return pencil has nonresonant multi-return zeros | formalized | active |
@@ -5237,6 +5238,92 @@ audit
 **Use:** terminal triangular loops are now a systematic source of common-ray affine digits.
 Search their diagonal ratios and translations for an exact annihilator of an `R32-S68` source
 coordinate. Enforce first-hit safety separately; expansion alone is not a lawful bridge pump.
+
+### R32-S70: Positive singleton source selector
+
+**Kind:** compiler mechanism
+**Evidence:** formalized
+**Disposition:** active
+
+The missing positive left annihilator from `R32-S68` exists. The four-wait prefix
+
+```text
+A=(26,2,5,15)
+```
+
+has exact common-ray row chart
+
+```text
+rΠ(A)B = −2905210800·[1,937/3321].                     (1)
+```
+
+Let `N` and `P` be the negative and positive false-bit terminal translations from `R32-S58`:
+
+```text
+N=[[1,−189665/144],[0,1]],
+P=[[1,     2839/108],[0,1]].
+```
+
+Their nonnegative repetition counts satisfy
+
+```text
+N^6484 P^310371 = [[1,−762919/2],[0,1]].                (2)
+```
+
+Transporting (2) with the connector from `R32-S69` gives
+
+```text
+F=[[1,−85828079/1020],[0,9/340]].                       (3)
+```
+
+The row in (1) then lands exactly on the source annihilator for the address `00`:
+
+```text
+[1,937/3321]F = [1,−31049567/369]
+               = [1,s(00)].                            (4)
+```
+
+Lean proves generically that `[1,s(β)]` annihilates the normalized source image of `γ` if and
+only if `γ=β`. The proof uses the nonzero lower source coordinate and the projective source
+injection from `R32-S68`. Projective physical scales and the exact basis pairing transport this
+statement back to the complete word
+
+```text
+L=A ++ (1,15,8) ++ Nword^6484 ++ Pword^310371 ++ (13),
+```
+
+where `Nword` and `Pword` are the positive physical spellings of `N` and `P`. Thus, for every
+binary address `γ`,
+
+```text
+r Π(L ++ E(γ)) c = 0  iff  γ=00.                       (5)
+```
+
+Lean proves every wait in `L` is positive and computes its length without expanding the list:
+
+```text
+|L|=9,531,594.                                          (6)
+```
+
+**Scope:** the repeated terminal realization, connector chart, prefix row, target coordinate,
+normalized singleton row law, exact length, positivity, basis-pairing transport, physical
+incidence factorization, and biconditional (5) are Lean checked. The size of the witness has no
+logical role. The theorem selects one fixed encoded block language; it does not force arbitrary
+raw words to respect that language, implement a dynamic comparison, or decide `M₃(2)`.
+
+**Artifact:** `CubicReturn.NonPure.falseWaitFirstHitSingletonMiddle_projectivelyRealizes`,
+`falseWaitFirstHitSingletonWord_row`,
+`falseWaitFirstHitBinarySourceRow_zero_iff`, and
+`falseWaitFirstHitSingletonWord_zero_iff` in
+[`CubicContinuantSingletonSelector.lean`](MatrixMortality/CubicContinuantSingletonSelector.lean),
+with audit
+[`m32-cubic-singleton-selector-2026-09-01.md`](audits/m32-cubic-singleton-selector-2026-09-01.md).
+
+**Use:** positive left target annihilation is no longer an existential gap. Build a dynamic
+writer/comparator whose legal accepting computations arrive at the selected `00` address, and
+prove that every arbitrary positive raw-word zero decodes to that grammar. Search shorter
+selectors only if their structure advances those two obligations; witness compression alone is
+irrelevant.
 
 ### R32-M01: Generic reverse edge compiler
 

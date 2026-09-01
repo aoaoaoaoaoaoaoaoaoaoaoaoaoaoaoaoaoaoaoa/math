@@ -1808,6 +1808,17 @@ for the reachable affine orbit. See
 [`R32-S69`](SALVAGE.md#r32-s69-common-ray-transport-and-unsafe-expansion) and
 [`m32-cubic-ray-transport-2026-09-01.md`](audits/m32-cubic-ray-transport-2026-09-01.md).
 
+The exact target-slope synthesis succeeds. A four-wait prefix followed by `6484` negative and
+`310371` positive transported terminal translations produces a finite positive left word of
+length `9,531,594`. Lean proves that its scalar incidence against an encoded binary pump source
+vanishes exactly for the address `00`; projective source injectivity supplies the converse over
+all encoded addresses. Positive left annihilation is therefore closed in the existential sense.
+The master seam has moved outward: legal computations must be compiled to the fixed selected
+address, and every zero from an arbitrary positive raw word must decode to the designated block
+grammar. See
+[`R32-S70`](SALVAGE.md#r32-s70-positive-singleton-source-selector) and
+[`m32-cubic-singleton-selector-2026-09-01.md`](audits/m32-cubic-singleton-selector-2026-09-01.md).
+
 ### ReturnSquare laboratory
 
 [`R32-S03`](SALVAGE.md#r32-s03-returnsquare-normal-form) is the first completely normalized
