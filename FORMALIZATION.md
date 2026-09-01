@@ -2142,6 +2142,7 @@ fixed-rank decision problem.
 | Neither orientation of the odd kernel family can satisfy the physical exact-endpoint prefix-cloak equation at any pump or address depth | `MixedPrimeOddFamilyCloakNoGo.no_bcbc_endpoint_of_kernelOddFamily_prefixCloak`, `MixedPrimeOddFamilyCloakNoGo.no_bcbc_endpoint_of_kernelOddFamily_prefixCloak_reverse` |
 | A mixed-prime word slope has exact two-adic/five-adic values `#D` and `#D-|w|`; equal slopes force equal raw length and Parikh vector | `MixedPrimeAddressInterleavingCollapse.wordScale_eq_length_mul_dilateCount`, `MixedPrimeAddressInterleavingCollapse.padicValRat_two_wordScale`, `MixedPrimeAddressInterleavingCollapse.padicValRat_five_wordScale`, `MixedPrimeAddressInterleavingCollapse.length_eq_and_dilateCount_eq_of_wordScale_eq` |
 | Empty, `DT`, and `TD` probes split every uniform single-cut address equality into equal-action prefix and suffix pairs; a raw-distinct exact `bcbc` fork has a genuine kernel pair on one side | `MixedPrimeAddressInterleavingCollapse.piecewise_actions_eq_of_empty_false_true`, `MixedPrimeAddressInterleavingCollapse.interleavedAddress_piecewise_actions_eq`, `MixedPrimeAddressInterleavingCollapse.bcbc_interleavedAddress_exists_genuine_piece` |
+| A prefix-kernel-free equal-length relation admits a uniform single-cut address equality only at the same endpoint cut on both sides | `MixedPrimeAddressInterleavingCollapse.interleavedAddress_cuts_eq_boundary_of_prefixKernelFree` |
 | Any uniform single-cut comparator from the odd family uses the same endpoint cut on both relation sides, in either orientation | `MixedPrimeAddressInterleavingCollapse.kernelOddFamily_no_proper_prefix_actions_eq`, `MixedPrimeAddressInterleavingCollapse.kernelOddFamily_interleavedAddress_cuts_eq_boundary`, `MixedPrimeAddressInterleavingCollapse.kernelOddFamily_interleavedAddress_cuts_eq_boundary_reverse` |
 | A matrix square equal to an outer product gives the complete `SS`-free mortality grammar | `SquareRootPunctuation.isMortal_iff_exists_squareFree_zero` |
 | The explicit source-uniform Neary punctuation matrix has the required square and rank two | `SquareRootPunctuation.nearySquareRoot_sq`, `SquareRootPunctuation.nearySquareRoot_rank` |
@@ -2788,6 +2789,17 @@ cuts to coincide; the only proper balanced cut is `3`, where `DTT` and `TTD` hav
 offsets. Only the two endpoint cuts remain, and `G3-S26` kills both. The odd family is now dead at
 every single insertion position. Multi-cut or stateful interleaving, a new relation with proper
 kernel subpairs, and separate two-offset routing remain.
+
+`G3-S28` applies the generic endpoint theorem to all `23` pump schemas. Their prefix dilation-count
+increments have exact finite-word lassos after at most two transient depths, so each further pump
+inserts one zero-sum two-cell block at `p₀+2k`. Twelve blocks contain no zero. Eleven contain one,
+creating one infinite balanced ladder. All `31` fixed balanced-prefix offset defects are nonzero;
+every ladder has an exact pump-power prefix lasso, opposite `DT/TD` right extensions, and
+`δₙ₊₁=(2/5)δₙ` from a checked affine fixed-point identity. Thus no
+proper prefix action pair exists at any depth. `G3-S27` forces every single cut to an endpoint,
+and `G3-S24/S25` kill those endpoints. Every currently explicit infinite kernel family is now
+dead under uniform one-cut address interleaving. Multiple cuts, a restricted/stateful reader, a
+new kernel geometry, and separate two-offset routing remain.
 
 For `G3-O20`, Lean proves the free-monoid tail law: if one fixed-boundary equation with stationary
 left and right pump blocks holds at exponents `N` and `N+1`, it holds at every exponent `N+k`.

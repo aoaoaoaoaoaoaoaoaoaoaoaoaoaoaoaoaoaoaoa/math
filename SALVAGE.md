@@ -274,6 +274,7 @@ file owns the mathematical stock.
 | [`G3-S25`](#g3-s25-suffix-cloak-factor-boundary-collapse) | uniform obstruction and complete family extinction | trigram boundary signatures kill all 23 pump schemas in suffix orientation at every depth | exact independently replayable symbolic certificate | active |
 | [`G3-S26`](#g3-s26-odd-family-one-sided-cloak-extinction) | uniform obstruction and complete family extinction | the explicit odd kernel family fails the prefix size gate and the suffix trigram catalogue in both orientations | formalized prefix no-go; exact independently replayable suffix certificate | active |
 | [`G3-S27`](#g3-s27-single-cut-address-interleaving-collapse) | structure theorem and uniform obstruction | three address probes split every uniform single-cut comparator into kernel pairs; the odd family is forced to an endpoint cut already killed by G3-S26 | formalized | active |
+| [`G3-S28`](#g3-s28-pump-family-prefix-kernel-extinction) | uniform obstruction and complete family extinction | exact count-walk and affine-defect recurrences prove all 23 pump families prefix-kernel-free, killing every single-cut placement | formalized composition; exact independently replayable symbolic certificate | active |
 | [`G3-M02`](#g3-m02-square-root-punctuation-fracture) | partial mechanism | a rank-two square root gives an exact `SS`-free mortality grammar | formalized | closed |
 | [`G3-O10`](#g3-o10-square-root-boundary-saturation) | obstruction | every nondegenerate rank-one square root preserves boundary coefficient zeros | formalized | graduated |
 | [`G3-M01`](#g3-m01-free-group-discrepancy-engine) | partial mechanism | Carvalho's transducer gives an all-word marker-tail equation and a cyclic exponent-one equalizer | audited | active |
@@ -11255,6 +11256,57 @@ and
 **Next:** classify proper prefix kernel pairs in the `23` pump schemas, then either eliminate
 their internal cuts or isolate the first genuine two-kernel split. If none survives, move to a
 two-cut/stateful address word or the separate two-offset terminal gate.
+
+### G3-S28: Pump-family prefix-kernel extinction
+
+**Kind:** uniform obstruction and complete family extinction
+
+**Evidence:** formalized composition; exact independently replayable symbolic certificate
+
+**Disposition:** active
+
+All `23` `G3-S16` pump families are prefix-kernel-free at every depth. For the prefix dilation
+count difference `Δₖ(j)`, the synchronized increment word reaches an exact
+`H·C^(k−k₀)·T` lasso after at most two transient depths. Its zero-sum two-cell period inserts one
+constant cell at an affine position `p₀+2k` in the complete count walk. The transients are checked
+exactly. The base walks contain exactly `31` positive proper zeros. Twelve families insert no
+further zero. Eleven insert a cell with exactly one zero, adding one balanced cut per pump depth
+and no other candidate.
+
+Every fixed balanced cut has an exact stationary-prefix certificate and nonzero affine-offset
+defect. At a ladder cut, an exact pump-power prefix lasso conjugates the pump to opposite `DT/TD`
+right extensions with common slope `2/5`. The seed defect `δ₀` satisfies the exact affine
+fixed-point equation that gives
+
+```text
+δₙ₊₁=(2/5)δₙ,
+```
+
+so every ladder defect remains nonzero. The symbolic recurrence covers all depths; replay through
+`64` audits the count-walk splice and offset law but is not a cutoff.
+
+`G3-S27` supplies the formal composition. Equal-action prefix pieces must have equal raw length,
+so different proposed cut positions collapse to one common cut. Prefix-kernel freedom forces that
+cut to an endpoint. `G3-S24` and `G3-S25` kill the corresponding prefix and suffix cloaks. Hence
+none of the `23` families realizes a uniform single-cut comparator at any insertion position.
+
+**Scope:** the address comparator is uniform over arbitrary addresses and is inserted once at a
+fixed cut on each relation side. The result does not cover two or more address segments,
+address-dependent cuts, a restricted/stateful reader, a relation outside the `23`-family census,
+or a separate terminal difference channel.
+
+**Use:** retire every single-cut placement of the `23` pump schemas. Combined with `G3-S26` and
+`G3-S27`, no currently explicit infinite mixed-prime kernel family remains in the uniform one-cut
+carrier tree.
+
+**Artifact:**
+[`certify_mixed_prime_pump_prefix_kernels.py`](tools/certify_mixed_prime_pump_prefix_kernels.py)
+and
+[`m34-pump-prefix-kernel-extinction-2026-09-01.md`](audits/m34-pump-prefix-kernel-extinction-2026-09-01.md).
+
+**Next:** derive the two-cut three-probe equations and determine whether they force a chain of
+proper kernel subpairs or admit a genuinely stateful comparator. The orthogonal route is a
+separate two-offset terminal gate.
 
 ### G3-O13: Rational serializer pumping
 

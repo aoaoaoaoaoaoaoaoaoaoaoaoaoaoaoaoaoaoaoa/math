@@ -189,6 +189,48 @@ theorem interleavedAddress_piecewise_actions_eq
   · intro state
     simpa [expandAddress] using same_address_actions_eq [true] state
 
+/-- If an equal-length kernel pair has no proper equal-action prefix pair, every uniform
+single-cut address equality puts the same cut on both sides and that cut is an endpoint. -/
+theorem interleavedAddress_cuts_eq_boundary_of_prefixKernelFree
+    (left right : List Letter) (length_eq : left.length = right.length)
+    (leftCut rightCut : ℕ) (leftCut_le : leftCut ≤ left.length)
+    (rightCut_le : rightCut ≤ right.length)
+    (prefix_kernel_free : ∀ cut,
+      0 < cut → cut < left.length →
+      ¬ ∀ state : ℚ,
+        wordAction (left.take cut) state = wordAction (right.take cut) state)
+    (same_address_actions_eq : ∀ address state,
+      wordAction (left.take leftCut ++ expandAddress address ++ left.drop leftCut) state =
+        wordAction
+          (right.take rightCut ++ expandAddress address ++ right.drop rightCut) state) :
+    leftCut = rightCut ∧ (leftCut = 0 ∨ leftCut = left.length) := by
+  have piecewise := interleavedAddress_piecewise_actions_eq
+    (left.take leftCut) (right.take rightCut) (left.drop leftCut) (right.drop rightCut)
+      same_address_actions_eq
+  have prefix_scales_eq := wordScale_eq_of_wordActions_eq
+    (left.take leftCut) (right.take rightCut) piecewise.1
+  have prefix_lengths_eq :=
+    (length_eq_and_dilateCount_eq_of_wordScale_eq
+      (left.take leftCut) (right.take rightCut) prefix_scales_eq).1
+  have left_take_length : (left.take leftCut).length = leftCut := by
+    simp only [List.length_take]
+    omega
+  have right_take_length : (right.take rightCut).length = rightCut := by
+    simp only [List.length_take]
+    omega
+  have cuts_eq : leftCut = rightCut := by
+    rw [left_take_length, right_take_length] at prefix_lengths_eq
+    exact prefix_lengths_eq
+  subst rightCut
+  refine ⟨rfl, ?_⟩
+  by_cases cut_zero : leftCut = 0
+  · exact Or.inl cut_zero
+  · right
+    by_contra cut_ne_full
+    have cut_pos : 0 < leftCut := Nat.pos_of_ne_zero cut_zero
+    have cut_lt : leftCut < left.length := lt_of_le_of_ne leftCut_le cut_ne_full
+    exact prefix_kernel_free leftCut cut_pos cut_lt piecewise.1
+
 /-- No positive proper cut of the odd kernel relation has equal-action prefixes. The unique
 Parikh-balanced cut is at length three, where direct evaluation separates the affine offsets. -/
 theorem kernelOddFamily_no_proper_prefix_actions_eq
@@ -224,40 +266,17 @@ private theorem kernelOddFamily_cuts_eq_boundary_of_sameAddressActions
               (kernelOddFamilyRight depth).drop rightCut) state) :
     leftCut = rightCut ∧
       (leftCut = 0 ∨ leftCut = 29 + 2 * depth) := by
-  have piecewise := interleavedAddress_piecewise_actions_eq
-    ((kernelOddFamilyLeft depth).take leftCut)
-      ((kernelOddFamilyRight depth).take rightCut)
-      ((kernelOddFamilyLeft depth).drop leftCut)
-      ((kernelOddFamilyRight depth).drop rightCut) same_address_actions_eq
-  have prefix_scales_eq := wordScale_eq_of_wordActions_eq
-    ((kernelOddFamilyLeft depth).take leftCut)
-      ((kernelOddFamilyRight depth).take rightCut) piecewise.1
-  have prefix_lengths_eq :=
-    (length_eq_and_dilateCount_eq_of_wordScale_eq
-      ((kernelOddFamilyLeft depth).take leftCut)
-        ((kernelOddFamilyRight depth).take rightCut) prefix_scales_eq).1
   have relation_lengths := kernelOddFamily_length depth
-  have left_take_length :
-      ((kernelOddFamilyLeft depth).take leftCut).length = leftCut := by
-    simp only [List.length_take, relation_lengths.1]
-    omega
-  have right_take_length :
-      ((kernelOddFamilyRight depth).take rightCut).length = rightCut := by
-    simp only [List.length_take, relation_lengths.2]
-    omega
-  have cuts_eq : leftCut = rightCut := by
-    rw [left_take_length, right_take_length] at prefix_lengths_eq
-    exact prefix_lengths_eq
-  subst rightCut
-  refine ⟨rfl, ?_⟩
-  by_cases cut_zero : leftCut = 0
-  · exact Or.inl cut_zero
-  · right
-    by_contra cut_ne_full
-    have cut_pos : 0 < leftCut := Nat.pos_of_ne_zero cut_zero
-    have cut_lt : leftCut < 29 + 2 * depth := lt_of_le_of_ne leftCut_le cut_ne_full
-    exact kernelOddFamily_no_proper_prefix_actions_eq
-      depth leftCut cut_pos cut_lt piecewise.1
+  have boundary := interleavedAddress_cuts_eq_boundary_of_prefixKernelFree
+    (kernelOddFamilyLeft depth) (kernelOddFamilyRight depth)
+      (relation_lengths.1.trans relation_lengths.2.symm) leftCut rightCut
+      (relation_lengths.1 ▸ leftCut_le) (relation_lengths.2 ▸ rightCut_le)
+      (by
+        intro cut cut_pos cut_lt
+        apply kernelOddFamily_no_proper_prefix_actions_eq depth cut cut_pos
+        rwa [relation_lengths.1] at cut_lt)
+      same_address_actions_eq
+  simpa only [relation_lengths.1] using boundary
 
 /-- Any uniform single-cut comparator obtained from the odd relation puts the same cut on both
 sides, at one of the two endpoints. -/

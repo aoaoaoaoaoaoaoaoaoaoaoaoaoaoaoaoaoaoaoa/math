@@ -116,6 +116,7 @@ readonly PYTHON_CHECKERS=(
   tools/certify_mixed_prime_prefix_factor_boundaries.py
   tools/certify_mixed_prime_suffix_factor_boundaries.py
   tools/certify_mixed_prime_odd_cloaks.py
+  tools/certify_mixed_prime_pump_prefix_kernels.py
   tools/certify_frankl.py
   tools/explore_setter_projective.py
   tools/scour_source.py
@@ -137,6 +138,7 @@ uv run --script tools/certify_mixed_prime_prefix_pump_suffixes.py
 uv run --script tools/certify_mixed_prime_prefix_factor_boundaries.py
 uv run --script tools/certify_mixed_prime_suffix_factor_boundaries.py
 uv run --script tools/certify_mixed_prime_odd_cloaks.py
+uv run --script tools/certify_mixed_prime_pump_prefix_kernels.py
 uv run --script tools/certify_frankl.py
 uv run --script tools/explore_setter_projective.py --audit --primes 3
 uv run --script tools/scour_source.py
