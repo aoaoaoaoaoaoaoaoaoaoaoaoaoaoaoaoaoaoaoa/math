@@ -1011,6 +1011,13 @@ contains `b` or is entirely `c`; `MM-S60` kills the first arm and `MM-S65` the s
 remaining distinguished raw-head first-entry class is all-erasure, already classified by
 `MM-S53`.
 
+[`MM-S67`](SALVAGE.md#mm-s67-complete-distinguished-first-entry-extinction) performs the final
+phase split. Every physical role word is either the letterwise all-erasure block or factors at
+its rightmost rule with an erasure tail. `MM-S53` and `MM-S66` kill these two arms. No
+non-singleton physical block carries the distinguished two-`c` raw head into another multi-role
+pole. The next audit must connect this empty first-entry language to the outer setter
+projective-avoidance and mortality compiler, rather than reopening the grammar.
+
 The ternary and decimal branches now separate at their first multi-transfer front.
 [`MM-S37`](SALVAGE.md#mm-s37-decimal-three-shape-frontier-extinction) substitutes each of the
 three role shapes left by the swapped ternary gate into the decimal carrier equation. All are
