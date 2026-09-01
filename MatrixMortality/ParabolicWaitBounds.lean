@@ -275,6 +275,84 @@ private theorem bZeroBDefectCOne_no_zero_of_endpoint_negative
     bZeroBDefectCOneCodeCore_sub_x S D x endpoint y z
   nlinarith
 
+/-- The first-`b`-after-one-`c` density cylinder forces every zero below outer wait 212. -/
+theorem bZeroBDefectCOne_x_le_211_of_first_b_one_density
+    (S D : ℚ) (scale_large : 1 < S) (complement_positive : 0 < D)
+    (density_lower : 13 * S ≤ 243 * D) (x y z : Nat)
+    (core_zero : bZeroBDefectCOneCodeCore S (S - 1 - D) x y z = 0) :
+    x ≤ 211 := by
+  by_cases wait_zero : y = 0
+  · subst y
+    have complement_large : S - 1 ≤ 585 * D := by nlinarith
+    have core_positive :=
+      bZeroBDefectCOneCodeCore_pos_of_zero_wait_large_complement
+        S D scale_large complement_positive complement_large x z
+    exact False.elim ((ne_of_gt core_positive) core_zero)
+  · have wait_positive_nat : 1 ≤ y := Nat.one_le_iff_ne_zero.mpr wait_zero
+    have wait_positive : (1 : ℚ) ≤ y := by exact_mod_cast wait_positive_nat
+    have z_nonnegative : (0 : ℚ) ≤ z := by positivity
+    have x_slope_positive :
+        0 < bZeroBDefectCOneXSlope S D y z :=
+      bZeroBDefectCOneXSlope_pos S D y z scale_large complement_positive
+        wait_positive z_nonnegative
+    have pencil_212_negative :
+        bZeroBDefectCOneRootPencil (212 : ℚ) z < 0 := by
+      rw [show bZeroBDefectCOneRootPencil (212 : ℚ) z =
+        -(345710276 * z + 31669705) by
+          unfold bZeroBDefectCOneRootPencil
+          ring]
+      nlinarith
+    have complement_212_zero_positive :
+        0 < bZeroBDefectCOneComplementCore (212 : ℚ) 0 z := by
+      unfold bZeroBDefectCOneComplementCore
+      positivity
+    have core_212_zero_positive :
+        0 < bZeroBDefectCOneCodeCore S (S - 1 - D) 212 0 z := by
+      rw [bZeroBDefectCOneCodeCore_thin_decomposition]
+      have wait_factor_zero :
+          bZeroBDefectCOneWaitFactor S 0 = -9 * (S - 1) := by
+        unfold bZeroBDefectCOneWaitFactor
+        ring
+      rw [wait_factor_zero]
+      have first_positive :
+          0 < (-9 * (S - 1)) * bZeroBDefectCOneRootPencil (212 : ℚ) z :=
+        mul_pos_of_neg_of_neg (by nlinarith) pencil_212_negative
+      have second_positive :
+          0 < D * bZeroBDefectCOneComplementCore (212 : ℚ) 0 z :=
+        mul_pos complement_positive complement_212_zero_positive
+      linarith
+    let T : ℚ := 243 * D - 13 * S
+    have T_nonnegative : 0 ≤ T := by
+      dsimp [T]
+      linarith
+    have y_slope_212_identity :
+        243 * bZeroBDefectCOneYSlope S D 212 z =
+          S * (2020784785920 * z + 199972684656) +
+            T * (620717828832 * z + 58005064872) +
+            (672060776544 * z + 61565906520) := by
+      dsimp [T]
+      unfold bZeroBDefectCOneYSlope bZeroBDefectCOneRootPencil
+      ring
+    have y_slope_212_positive :
+        0 < bZeroBDefectCOneYSlope S D 212 z := by
+      have scale_term_positive :
+          0 < S * (2020784785920 * z + 199972684656) := by positivity
+      have complement_term_nonnegative :
+          0 ≤ T * (620717828832 * z + 58005064872) := by positivity
+      have residual_positive :
+          0 < (672060776544 : ℚ) * z + 61565906520 := by positivity
+      nlinarith [y_slope_212_identity]
+    have core_212_positive :
+        0 < bZeroBDefectCOneCodeCore S (S - 1 - D) 212 y z := by
+      have y_difference := bZeroBDefectCOneCodeCore_sub_y S D 212 0 y z
+      have wait_nonnegative : (0 : ℚ) ≤ y := by positivity
+      nlinarith
+    by_contra x_not_small
+    have x_large_nat : 212 ≤ x := by omega
+    have x_large : (212 : ℚ) ≤ x := by exact_mod_cast x_large_nat
+    have x_difference := bZeroBDefectCOneCodeCore_sub_x S D 212 x y z
+    nlinarith
+
 private theorem bZeroBDefectCOne_y_lt_of_first_b_one
     (S D : ℚ) (scale_large : 1 < S) (complement_positive : 0 < D)
     (density_lower : 13 * S ≤ 243 * D)
@@ -291,64 +369,13 @@ private theorem bZeroBDefectCOne_y_lt_of_first_b_one
       0 < bZeroBDefectCOneXSlope S D y z :=
     bZeroBDefectCOneXSlope_pos S D y z scale_large complement_positive
       wait_positive z_nonnegative
-  have pencil_212_negative :
-      bZeroBDefectCOneRootPencil (212 : ℚ) z < 0 := by
-    rw [show bZeroBDefectCOneRootPencil (212 : ℚ) z =
-      -(345710276 * z + 31669705) by
-        unfold bZeroBDefectCOneRootPencil
-        ring]
-    nlinarith
-  have complement_212_zero_positive :
-      0 < bZeroBDefectCOneComplementCore (212 : ℚ) 0 z := by
-    unfold bZeroBDefectCOneComplementCore
-    positivity
-  have core_212_zero_positive :
-      0 < bZeroBDefectCOneCodeCore S (S - 1 - D) 212 0 z := by
-    rw [bZeroBDefectCOneCodeCore_thin_decomposition]
-    have wait_zero : bZeroBDefectCOneWaitFactor S 0 = -9 * (S - 1) := by
-      unfold bZeroBDefectCOneWaitFactor
-      ring
-    rw [wait_zero]
-    have first_positive :
-        0 < (-9 * (S - 1)) * bZeroBDefectCOneRootPencil (212 : ℚ) z :=
-      mul_pos_of_neg_of_neg (by nlinarith) pencil_212_negative
-    have second_positive :
-        0 < D * bZeroBDefectCOneComplementCore (212 : ℚ) 0 z :=
-      mul_pos complement_positive complement_212_zero_positive
-    linarith
+  have x_le_211 :=
+    bZeroBDefectCOne_x_le_211_of_first_b_one_density
+      S D scale_large complement_positive density_lower x y z core_zero
   let T : ℚ := 243 * D - 13 * S
   have T_nonnegative : 0 ≤ T := by
     dsimp [T]
     linarith
-  have y_slope_212_identity :
-      243 * bZeroBDefectCOneYSlope S D 212 z =
-        S * (2020784785920 * z + 199972684656) +
-          T * (620717828832 * z + 58005064872) +
-          (672060776544 * z + 61565906520) := by
-    dsimp [T]
-    unfold bZeroBDefectCOneYSlope bZeroBDefectCOneRootPencil
-    ring
-  have y_slope_212_positive :
-      0 < bZeroBDefectCOneYSlope S D 212 z := by
-    have scale_term_positive :
-        0 < S * (2020784785920 * z + 199972684656) := by positivity
-    have complement_term_nonnegative :
-        0 ≤ T * (620717828832 * z + 58005064872) := by positivity
-    have residual_positive :
-        0 < (672060776544 : ℚ) * z + 61565906520 := by positivity
-    nlinarith [y_slope_212_identity]
-  have core_212_positive :
-      0 < bZeroBDefectCOneCodeCore S (S - 1 - D) 212 y z := by
-    have y_difference := bZeroBDefectCOneCodeCore_sub_y S D 212 0 y z
-    have wait_nonnegative : (0 : ℚ) ≤ y := by positivity
-    nlinarith
-  have x_lt_212 : x < 212 := by
-    by_contra x_not_small
-    have x_large_nat : 212 ≤ x := by omega
-    have x_large : (212 : ℚ) ≤ x := by exact_mod_cast x_large_nat
-    have x_difference := bZeroBDefectCOneCodeCore_sub_x S D 212 x y z
-    nlinarith
-  have x_le_211 : x ≤ 211 := by omega
   let U : ℚ := 39 * (S - 1) - 726 * D
   have U_nonnegative : 0 ≤ U := by
     dsimp [U]
@@ -822,5 +849,71 @@ theorem bZeroBDefectCOne_y_le_of_first_b
   have wait_bound :=
     bZeroBDefectCOne_y_lt_of_first_b j tail x y z core_zero
   omega
+
+/-- Every physical core zero whose first `b` follows one leading `c` has outer wait at most
+211. -/
+theorem bZeroBDefectCOne_x_le_211_of_first_b_one
+    (tail : List TagLetter) (x y z : Nat)
+    (core_zero :
+      bZeroBDefectCOneCodeCore
+        ((3 : ℚ) ^ (tagEncode 3 ([.c, .b] ++ tail)).length)
+        (ternaryCode (tagEncode 3 ([.c, .b] ++ tail))) x y z = 0) :
+    x ≤ 211 := by
+  let body := [.c, .b] ++ tail
+  let S : Nat := 3 ^ (tagEncode 3 body).length
+  let D : Nat := tagComplementCode body
+  have complement_positive_nat : 0 < D := by
+    dsimp [D, body]
+    exact tagComplementCode_pos_of_mem_b _ (by simp)
+  have body_nonempty : body ≠ [] := by simp [body]
+  have encoded_nonempty : tagEncode 3 body ≠ [] :=
+    (tagEncode_eq_nil_iff 3 body).not.mpr body_nonempty
+  have encoded_length_positive : 0 < (tagEncode 3 body).length :=
+    List.length_pos_of_ne_nil encoded_nonempty
+  have scale_large_nat : 1 < S := by
+    dsimp [S]
+    exact one_lt_pow₀ (by norm_num) encoded_length_positive.ne'
+  have scale_large : (1 : ℚ) < S := by exact_mod_cast scale_large_nat
+  have complement_positive : (0 : ℚ) < D := by
+    exact_mod_cast complement_positive_nat
+  have code_eq :
+      (ternaryCode (tagEncode 3 body) : ℚ) = (S : ℚ) - 1 - D := by
+    have complement_eq :
+        (D : ℚ) = (S : ℚ) - ternaryCode (tagEncode 3 body) - 1 := by
+      simpa [D, S] using tagComplementCode_cast_rat body
+    linarith
+  have core_complement_zero :
+      bZeroBDefectCOneCodeCore (S : ℚ) ((S : ℚ) - 1 - D) x y z = 0 := by
+    rw [← code_eq]
+    simpa [S, body] using core_zero
+  have density := tagComplementCode_first_b_density 1 tail
+  have density_lower_nat : 13 * S ≤ 243 * D := by
+    have lower : 13 * S ≤ 81 * 3 ^ 1 * D := by
+      simpa [body, S, D] using density.1
+    norm_num at lower
+    exact lower
+  have density_lower : (13 : ℚ) * S ≤ 243 * D := by
+    exact_mod_cast density_lower_nat
+  exact bZeroBDefectCOne_x_le_211_of_first_b_one_density
+    S D scale_large complement_positive density_lower x y z core_complement_zero
+
+/-- A zero residual `b | b | c` bridge with a body beginning `cb` has outer wait at most
+211. -/
+theorem bridge_bZero_bTwo_cOne_det_zero_implies_x_le_211_of_cb
+    (tail : List TagLetter) (x y z : Nat)
+    (det_zero :
+      (bridge 27
+        (bAtom 27 (3 * z) * bAtom 27 (3 * x + 2) *
+          cAtom 27 (nearySideLowerC 3 ([.c, .b] ++ tail))
+            (nearySideLowerCScale 3 ([.c, .b] ++ tail))
+            (3 * y + 1))).det = 0) :
+    x ≤ 211 := by
+  rw [bridge_bZero_bTwo_cOne_det] at det_zero
+  have core_zero :
+      bZeroBDefectCOneCodeCore
+        ((3 : ℚ) ^ (tagEncode 3 ([.c, .b] ++ tail)).length)
+        (ternaryCode (tagEncode 3 ([.c, .b] ++ tail))) x y z = 0 := by
+    nlinarith
+  exact bZeroBDefectCOne_x_le_211_of_first_b_one tail x y z core_zero
 
 end MatrixMortality.ParabolicBlade

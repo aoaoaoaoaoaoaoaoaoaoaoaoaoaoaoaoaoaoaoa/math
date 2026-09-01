@@ -5150,6 +5150,15 @@
 'MatrixMortality.ParabolicBlade.bZeroBDefectCOne_y_le_of_first_b' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.ParabolicBlade.bZeroBDefectCOne_x_le_211_of_first_b_one_density' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.bZeroBDefectCOne_x_le_211_of_first_b_one' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ParabolicBlade.bridge_bZero_bTwo_cOne_det_zero_implies_x_le_211_of_cb' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.ParabolicBlade.bZeroBDefectCOneCodeCore_x211_normal_form' depends on axioms: [propext, Quot.sound]
 'MatrixMortality.ParabolicBlade.bZeroBDefectCOneSfft_resultant' depends on axioms: [propext, Quot.sound]
 'MatrixMortality.ParabolicBlade.bZeroBDefectCOneSfft_identity' depends on axioms: [propext, Quot.sound]

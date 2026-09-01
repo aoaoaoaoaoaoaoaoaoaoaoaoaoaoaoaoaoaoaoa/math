@@ -739,9 +739,14 @@ balance and global complement wall leave 155 affine `(j,y)` chambers when `z≥3
 kernel-rechecked 231-node decision tree reads at most three suffix letters before reaching a
 sign, density, or empty-suffix contradiction. Thus every even-`b` body beginning `cb` has
 nonzero bridge determinant at `x=211`, with no remaining wait or body-length bound. This is a
-cylinder closure, not a cell closure. The next accepted ratchet must first force `x≤211` for
-every physical `cb` zero and then eliminate the full residual range `x≤210`; it must not replace
-that lower range by the endpoint equation `x=211`.
+cylinder closure, not a cell closure.
+
+The outer-wait axis is now bounded
+[`M4-S40`](SALVAGE.md#m4-s40-phase-zero-right-c-outer-wait-cap). The first-`b` density bound
+and exact core slopes prove that every physical `cb` zero has `x≤211`; S39 removes the endpoint,
+so only `x≤210` remains. The next accepted ratchet must classify the exact suffix envelope
+uniformly over that full lower range and eliminate every surviving arithmetic chamber. A finite
+search through sampled suffix positions does not discharge the uniform reduction.
 
 Two original-family nodes survive, and they must not be conflated.
 

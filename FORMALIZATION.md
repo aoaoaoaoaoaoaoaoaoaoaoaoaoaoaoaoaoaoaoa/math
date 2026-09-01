@@ -2908,6 +2908,17 @@ generator is reproduced by `scripts/generate-parabolic-first-b-one-inner.py`. It
 boundary is
 [`audits/m43-phase-zero-right-c-x211-large-inner-extinction-2026-08-31.md`](audits/m43-phase-zero-right-c-x211-large-inner-extinction-2026-08-31.md).
 
+The outer-wait cap
+[`M4-S40`](SALVAGE.md#m4-s40-phase-zero-right-c-outer-wait-cap) is checked in
+`MatrixMortality/ParabolicWaitBounds.lean`.
+`ParabolicBlade.bZeroBDefectCOne_x_le_211_of_first_b_one_density` proves the rational density
+cylinder: zero middle wait falls to M4-S30, while positive middle wait makes the core strictly
+positive from `x=212` onward by exact outer- and middle-slope identities.
+`bZeroBDefectCOne_x_le_211_of_first_b_one` derives its hypotheses from a physical `cb` body,
+and `bridge_bZero_bTwo_cOne_det_zero_implies_x_le_211_of_cb` exposes the determinant-level
+implication. Its exact boundary is
+[`audits/m43-phase-zero-right-c-outer-wait-cap-2026-08-31.md`](audits/m43-phase-zero-right-c-outer-wait-cap-2026-08-31.md).
+
 The residue-zero `c`-endpoint exclusion
 [`M4-S12`](SALVAGE.md#m4-s12-residue-zero-c-endpoint-exclusion) is checked in the same module.
 `ParabolicBlade.bridge_cZero_bTwo_bOne_det` and
