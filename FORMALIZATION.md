@@ -2285,7 +2285,7 @@ outer word by injectivity and proves that any cross-tail collision requires shel
 `(ℓ−2β+1,ℓ−2β+2)` between the later tails. This classifies the synchronization debt but does
 not yet exclude it from the encoded-entry orbit.
 
-The dimension-two affine ledger has twenty-eight independently checked records:
+The dimension-two affine ledger has twenty-nine independently checked records:
 
 | Record | Formalization obligation |
 | --- | --- |
@@ -2300,6 +2300,7 @@ The dimension-two affine ledger has twenty-eight independently checked records:
 | [`D2-S10`](SALVAGE.md#d2-s10-finite-secondary-wall-nucleus) | exact wall cancellation, computable return depth, bounded three-power denominator loss, target-dependent finite successor rectangle, functional transition, eventual periodicity, fixed-component recognition, and twelve-class depth product |
 | [`D2-S11`](SALVAGE.md#d2-s11-absorbing-four-divisible-cone) | exact upper and middle normalized coordinates, exact two-adic updates in the four-divisible stratum, branchwise denominator absorption, and the lower-wall three-stratum exit classifier |
 | [`D2-S12`](SALVAGE.md#d2-s12-exact-wall-odd-two-cycle-family) | sharp admissible depth range, reduced wall and odd coordinates, exact guarded two-step return, uniqueness at fixed depth pair, strict infinitude, and accumulation at the wall boundary `9/10` |
+| [`D2-S13`](SALVAGE.md#d2-s13-guarded-upper-run-cycles-of-every-period) | the full `L_n,U₀^r,U₁,M_m` family, exact interval and branch identities, complete prefix guards, two-adic phase strata, phase separation, and primitive guarded cycles of every period at least three |
 | [`D2-S14`](SALVAGE.md#d2-s14-arbitrary-body-wall-excursion-saturation) | periodic-point real-trap localization, arbitrary-body wall anchoring, exact two-/five-adic guards, factor universality, and the finite forbidden-factor no-go |
 | [`D2-S15`](SALVAGE.md#d2-s15-fixed-endpoint-centralizer-reduction) | two-adic slope value, exact length/sum slope classification, fixed-point uniqueness, periodic-point equality iff global commutation, and the equal-/unequal-slope fibre split |
 | [`D2-S16`](SALVAGE.md#d2-s16-periodic-centralizer-determinant-fork) | schedule-power periodicity, guarded bipowers, the dependent-vector global power relation, and the independent-vector injective `ℕ²` loop family |
