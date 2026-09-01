@@ -3885,6 +3885,31 @@
 'MatrixMortality.MixedPrimeDebt.collisionSource_nonpos_of_suffixSumLE' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.MixedPrimeDebt.shellGain_cons' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.MixedPrimeDebt.shellGain_append_singleton' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.MixedPrimeDebt.shellOffset_append_singleton' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.MixedPrimeDebt.shellDeterminant_eq_cleared' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.MixedPrimeDebt.shellClearedDeterminant_cons_same' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.shellClearedDeterminant_cons_same_hasValue_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.shellClearedDeterminant_append_same' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.shellClearedDeterminant_append_same_of_length_eq' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.sameLengthCollisionClearedDeterminant_fiveUnit_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.shellRun_cons_same_eq_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.MixedPrimeDebt.collisionSource_cons_same_step' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.shellRun_append_same_eq_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.MixedPrimeDebt.collisionSource_append_same' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.MixedPrimeDebt.shellRun_fixedPoint_unique' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.MixedPrimeDebt.shellPeriodicPoint_eq_iff_commute' depends on axioms: [propext,
  Classical.choice,

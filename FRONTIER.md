@@ -3932,6 +3932,14 @@ colliding pair must take both signs. This is
 [`D2-S20`](SALVAGE.md#d2-s20-positive-endpoint-suffix-antichain). The live same-length search may
 discard every one-sided cumulative-wait walk before computing the fixed-source equation or the
 `D2-S19` determinant carry.
+That carry now has an exact denominator-free owner. If `H` is the determinant of the cleared
+gain-offset vectors, then target acceptance is `v₅(H)=length+κ(Δ)`. A common initial wait
+multiplies `H` by a five-power times a unit and advances the collision source by the same shell
+step; a common terminal wait strips from endpoint equality by injectivity and leaves the
+collision source fixed. This is
+[`D2-S21`](SALVAGE.md#d2-s21-affine-determinant-carry-stripping). The live crossing-walk search
+therefore starts only from pairs with different initial and terminal waits; terminal extension
+still has an inhomogeneous determinant carry and remains part of the hard core.
 The deepest of those three branches is itself a full depth reset. In normalized band coordinates
 `U(d,μ)=1/5+(3/10)(2/3)^dμ`, every target band `d≥2` contains a point whose `d−2` predecessor has
 any prescribed band `n≥7` and mantissa in `(2/3,1]`. An explicit guarded subfamily fixes target
@@ -4284,7 +4292,9 @@ universal computation.
    cross-grade source acceptance to one explicit parity/LTE intercept carry, and `D2-S19`
    reduces complete collision acceptance to the matching affine-determinant carry. `D2-S20`
    removes every suffix-ordered pair from every positive-source fibre, leaving only signed
-   cumulative-wait walks that cross zero.
+   cumulative-wait walks that cross zero. `D2-S21` strips every common initial or terminal
+   segment from the fixed-source equation and gives the exact cleared-determinant recurrence;
+   enumerate only endpoint-irreducible crossing walks.
    Keep the non-elementary lanes independent: adelic cone types, parabolic rational subsets,
    trace/height descent, finite-obstruction saturation, and valuation universality.
 6. Synthesize the returned attacks by the discriminating signals above; do not average
