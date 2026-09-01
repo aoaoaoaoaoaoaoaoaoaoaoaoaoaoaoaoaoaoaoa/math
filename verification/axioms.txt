@@ -928,6 +928,27 @@
 'MatrixMortality.MixedPrimeAddressInterleavingCollapse.bcbc_interleavedAddress_exists_genuine_piece' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.MixedPrimeAddressSandwich.wordAction_doubleInterleave' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeAddressSandwich.doubleInterleaved_piecewise_actions_eq_of_fiveProbes' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeAddressSandwich.doubleInterleavedAddress_piecewise_actions_eq' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeAddressSandwich.sandwichAddress_actions_eq_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeAddressSandwich.sandwichAddress_genuineComparator' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeAddressSandwich.doubleInterleavedAddress_cuts_eq_trichotomy_of_prefixKernelFree' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeAddressSandwich.bcbc_sandwich_address_length_lt' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.MixedPrimeAddressSandwich.bcbc_sandwich_toggle_length_lt_kernel' depends on axioms: [propext,
+ Quot.sound]
 'MatrixMortality.SquareRootPunctuation.coefficient_append_square' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]

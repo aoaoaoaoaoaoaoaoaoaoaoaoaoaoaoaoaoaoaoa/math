@@ -121,6 +121,7 @@ import MatrixMortality.MixedPrimePrefixCloakNoGo
 import MatrixMortality.MixedPrimePrefixPumpSuffixNoGo
 import MatrixMortality.MixedPrimeOddFamilyCloakNoGo
 import MatrixMortality.MixedPrimeAddressInterleavingCollapse
+import MatrixMortality.MixedPrimeAddressSandwich
 import MatrixMortality.SquareRootPunctuation
 import MatrixMortality.TernaryClosedBlockNoGo
 import MatrixMortality.ThreePhaseBinaryNoGo

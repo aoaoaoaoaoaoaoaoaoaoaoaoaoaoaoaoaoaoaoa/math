@@ -1811,6 +1811,7 @@ fixed-rank decision problem.
 | `GuardedMixedPrimeOddFamilyParikh.lean` | uniform balanced-prefix/suffix classification and seven-cell contextual obstruction for the infinite odd kernel family |
 | `MixedPrimeOddFamilyCloakNoGo.lean` | exact prefix-cloak obstruction for both orientations of the infinite odd kernel family |
 | `MixedPrimeAddressInterleavingCollapse.lean` | three-probe single-cut decomposition, mixed-prime slope homogeneity, and odd-family endpoint-cut classification |
+| `MixedPrimeAddressSandwich.lean` | five-probe double-insertion collapse, exact two-sided kernel sandwich comparison, cut trichotomy, and literal `bcbc` length sieve |
 | `GuardedMixedPrimePumpedCuts.lean` | reusable pumping calculus, seven certified kernel families, and balanced-prefix transport recurrence |
 | `GuardedMixedPrimePumpedContext.lean` | exact all-depth cut census for seven pumped kernel families, uniform moving-cell extinction, and finite family-six exceptional residue |
 | `TwoSeedPumpPropagation.lean` | two-dimensional Cayley-Hamilton span and exact propagation of side-contextual word pumps from depths zero and one |
@@ -2144,6 +2145,10 @@ fixed-rank decision problem.
 | Empty, `DT`, and `TD` probes split every uniform single-cut address equality into equal-action prefix and suffix pairs; a raw-distinct exact `bcbc` fork has a genuine kernel pair on one side | `MixedPrimeAddressInterleavingCollapse.piecewise_actions_eq_of_empty_false_true`, `MixedPrimeAddressInterleavingCollapse.interleavedAddress_piecewise_actions_eq`, `MixedPrimeAddressInterleavingCollapse.bcbc_interleavedAddress_exists_genuine_piece` |
 | A prefix-kernel-free equal-length relation admits a uniform single-cut address equality only at the same endpoint cut on both sides | `MixedPrimeAddressInterleavingCollapse.interleavedAddress_cuts_eq_boundary_of_prefixKernelFree` |
 | Any uniform single-cut comparator from the odd family uses the same endpoint cut on both relation sides, in either orientation | `MixedPrimeAddressInterleavingCollapse.kernelOddFamily_no_proper_prefix_actions_eq`, `MixedPrimeAddressInterleavingCollapse.kernelOddFamily_interleavedAddress_cuts_eq_boundary`, `MixedPrimeAddressInterleavingCollapse.kernelOddFamily_interleavedAddress_cuts_eq_boundary_reverse` |
+| Five finite probes split a uniform double address insertion into three independent kernel pairs | `MixedPrimeAddressSandwich.wordAction_doubleInterleave`, `MixedPrimeAddressSandwich.doubleInterleaved_piecewise_actions_eq_of_fiveProbes`, `MixedPrimeAddressSandwich.doubleInterleavedAddress_piecewise_actions_eq` |
+| Every genuine mixed-prime affine kernel pair gives an exact raw-distinct sandwich address comparator | `MixedPrimeAddressSandwich.sandwichAddress_actions_eq_iff`, `MixedPrimeAddressSandwich.sandwichAddress_genuineComparator` |
+| Prefix-kernel freedom reduces aligned two-cut placement to `(0,0)`, `(0,N)`, or `(N,N)` | `MixedPrimeAddressSandwich.doubleInterleavedAddress_cuts_eq_trichotomy_of_prefixKernelFree` |
+| A literal noncommuting `bcbc` sandwich requires the address shorter than both data macros together and the kernel longer than the toggle | `MixedPrimeAddressSandwich.bcbc_sandwich_address_length_lt`, `MixedPrimeAddressSandwich.bcbc_sandwich_toggle_length_lt_kernel` |
 | A matrix square equal to an outer product gives the complete `SS`-free mortality grammar | `SquareRootPunctuation.isMortal_iff_exists_squareFree_zero` |
 | The explicit source-uniform Neary punctuation matrix has the required square and rank two | `SquareRootPunctuation.nearySquareRoot_sq`, `SquareRootPunctuation.nearySquareRoot_rank` |
 | Exact coefficient preservation on the `R_bR_b`-free subshift forces the `R_b` matrix to be a unit | `SquareRootPunctuation.ruleB_isUnit_of_exact_on_squareFree` |
@@ -2800,6 +2805,13 @@ proper prefix action pair exists at any depth. `G3-S27` forces every single cut 
 and `G3-S24/S25` kill those endpoints. Every currently explicit infinite kernel family is now
 dead under uniform one-cut address interleaving. Multiple cuts, a restricted/stateful reader, a
 new kernel geometry, and separate two-offset routing remain.
+
+`G3-S29` classifies the first genuine multi-cut route. Five address probes force a uniform double
+insertion to split into three affine kernel pairs. Prefix-kernel freedom leaves only two doubled
+one-sided endpoints and the central sandwich `W·L·W/W·R·W`. Unlike the endpoints, the central
+placement is an exact globally raw-distinct address comparator for every genuine affine kernel
+pair. A physical reduced `bcbc` realization must satisfy `|W|<|x|+|y|` and `|toggle|<|L|`.
+Literal realization and the arbitrary-word converse remain.
 
 For `G3-O20`, Lean proves the free-monoid tail law: if one fixed-boundary equation with stationary
 left and right pump blocks holds at exponents `N` and `N+1`, it holds at every exponent `N+k`.

@@ -275,6 +275,7 @@ file owns the mathematical stock.
 | [`G3-S26`](#g3-s26-odd-family-one-sided-cloak-extinction) | uniform obstruction and complete family extinction | the explicit odd kernel family fails the prefix size gate and the suffix trigram catalogue in both orientations | formalized prefix no-go; exact independently replayable suffix certificate | active |
 | [`G3-S27`](#g3-s27-single-cut-address-interleaving-collapse) | structure theorem and uniform obstruction | three address probes split every uniform single-cut comparator into kernel pairs; the odd family is forced to an endpoint cut already killed by G3-S26 | formalized | active |
 | [`G3-S28`](#g3-s28-pump-family-prefix-kernel-extinction) | uniform obstruction and complete family extinction | exact count-walk and affine-defect recurrences prove all 23 pump families prefix-kernel-free, killing every single-cut placement | formalized composition; exact independently replayable symbolic certificate | active |
+| [`G3-S29`](#g3-s29-two-cut-collapse-and-exact-sandwich-carrier) | structure theorem and positive mechanism | five probes collapse every uniform double insertion to three kernel pairs; the sole central placement turns any genuine affine kernel pair into an exact raw-distinct address comparator | formalized | active |
 | [`G3-M02`](#g3-m02-square-root-punctuation-fracture) | partial mechanism | a rank-two square root gives an exact `SS`-free mortality grammar | formalized | closed |
 | [`G3-O10`](#g3-o10-square-root-boundary-saturation) | obstruction | every nondegenerate rank-one square root preserves boundary coefficient zeros | formalized | graduated |
 | [`G3-M01`](#g3-m01-free-group-discrepancy-engine) | partial mechanism | Carvalho's transducer gives an all-word marker-tail equation and a cyclic exponent-one equalizer | audited | active |
@@ -11307,6 +11308,72 @@ and
 **Next:** derive the two-cut three-probe equations and determine whether they force a chain of
 proper kernel subpairs or admit a genuinely stateful comparator. The orthogonal route is a
 separate two-offset terminal gate.
+
+### G3-S29: Two-cut collapse and exact sandwich carrier
+
+**Kind:** structure theorem and positive mechanism
+
+**Evidence:** formalized
+
+**Disposition:** active
+
+For three fixed context pairs `P/P′`, `Q/Q′`, and `R/R′`, equality of
+
+```text
+P · Wₐ · Q · Wₐ · R
+P′ · Wₐ · Q′ · Wₐ · R′
+```
+
+on the five addresses `[]`, `[0]`, `[1]`, `[0,0]`, and `[1,1]` forces equality of the affine
+actions of all three context pairs. At depths one and two, subtracting the two constant-address
+equations isolates `p(1+μq)` at `μ=2/5` and `μ=4/25`; these two values recover the first two
+context slopes. The complete slope and the empty/depth-one/depth-two offsets recover the third
+slope and all three intercepts.
+
+For an equal-length prefix-kernel-free relation, the cuts therefore align on its two sides and
+reduce exactly to
+
+```text
+(0,0),  (0,N),  (N,N).
+```
+
+The endpoint placements are doubled one-sided cloaks. The central placement is different: every
+genuine raw affine kernel pair `L ≠ R`, `action(L)=action(R)` yields
+
+```text
+action(Wᵤ · L · Wᵤ)=action(Wᵥ · R · Wᵥ)  iff  u=v,
+```
+
+and the two raw words remain distinct for every `u,v`. The composite slope recovers address
+depth; at fixed depth the offset coefficient `1+μ·scale(L)` is positive, so the free address
+offset recovers the address.
+
+A literal reduced `bcbc` factorization
+
+```text
+yzxyx = W · L · W,
+xzyxy = W · R · W
+```
+
+with noncommuting data macros must satisfy `|W|<|x|+|y|` and `|z|<|L|`. The first inequality
+follows because a longer common suffix would force the terminal words `yx` and `xy` to agree; the
+second follows from the exact length equation.
+
+**Scope:** the two inserted addresses are the same variable, the cuts are fixed and ordered, and
+the contexts lie in the positive mixed-prime affine monoid. This result supplies comparator
+semantics but does not produce a physical `bcbc` factorization or the arbitrary-word terminal
+converse.
+
+**Use:** replace the diffuse multi-cut search by one exact target: a kernel relation between two
+copies of the same address. Any candidate must pass the strict address/kernel length sieve before
+its endpoint semantics is considered.
+
+**Artifact:**
+[`MixedPrimeAddressSandwich.lean`](MatrixMortality/MixedPrimeAddressSandwich.lean) and
+[`m34-two-cut-sandwich-2026-09-01.md`](audits/m34-two-cut-sandwich-2026-09-01.md).
+
+**Next:** run the complete boundary-signature catalogue against the `23` pump schemas and the odd
+family. If those fail, seek a new kernel geometry or a stateful/restricted address producer.
 
 ### G3-O13: Rational serializer pumping
 
