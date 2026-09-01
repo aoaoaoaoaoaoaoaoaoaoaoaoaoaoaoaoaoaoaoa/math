@@ -263,6 +263,7 @@ file owns the mathematical stock.
 | [`G3-S14`](#g3-s14-finite-convergent-mixed-prime-presentation) | structure theorem, decision procedure, and separation | adjoining the 45 first critical branch pairs gives a finite 50-rule convergent presentation of the five-rule congruence; the quotient contains the forbidden length-312 fork but excludes every positive-depth odd-family relation | exact independently replayable certificate; Lean fork witness | active |
 | [`G3-S15`](#g3-s15-uniform-mixed-prime-contextual-cut-collapse) | uniform obstruction and computational cut | Parikh-balanced contextual cuts kill the odd kernel family at every depth and contract the first two completed critical generations to a finite internal cell, where exact replay finds no fork | formalized parametric obstruction; audited extraction and exact exhaustive computation | active |
 | [`G3-S16`](#g3-s16-cayley-hamilton-pump-census-and-free-macro-address) | structure theorem, exact census, and separation | exhaustive length-32 census yields 23 infinite external pump schemas; the derived macros `DT,TD` form a free two-sided binary affine address stack, while every schema reads only one unary constant address | formalized mechanism; exact exhaustive and independently replayable certificates | active |
+| [`G3-S17`](#g3-s17-uniform-pumped-context-classification) | uniform obstruction and finite residue | exact all-depth cuts eliminate every moving internal cell in seven pump families; family six's sole static internal residue contracts to 156 rejected geometries | formalized uniform obstruction; exact independently replayable certificate | active |
 | [`G3-M02`](#g3-m02-square-root-punctuation-fracture) | partial mechanism | a rank-two square root gives an exact `SS`-free mortality grammar | formalized | closed |
 | [`G3-O10`](#g3-o10-square-root-boundary-saturation) | obstruction | every nondegenerate rank-one square root preserves boundary coefficient zeros | formalized | graduated |
 | [`G3-M01`](#g3-m01-free-group-discrepancy-engine) | partial mechanism | Carvalho's transducer gives an all-word marker-tail equation and a cyclic exponent-one equalizer | audited | active |
@@ -10671,6 +10672,67 @@ addresses; a no-go should prove that its forced two-state core cannot upgrade un
 **Next:** test whether two or more side-contextual readers can be composed into an arbitrary
 address comparator under the physical `D/T` grammar. In parallel, extend the uniform contextual
 cut to the six new length-`31` pump families and the sixteen length-`32` schemas.
+
+### G3-S17: Uniform pumped-context classification
+
+**Kind:** uniform obstruction and finite residue
+
+**Evidence:** formalized uniform obstruction; exact independently replayable certificate
+
+**Disposition:** active
+
+The seven length-`31` pump schemas of `G3-S16` have an exact balanced-prefix census at every pump
+power. Families three, five, and seven retain only the universal cut `3`. Families one, two, and
+four also have `30+2i` for `0≤i<k`; family six has those moving cuts and the static cuts `27,28`.
+Lean derives this infinite census from the base words and one two-letter shift recurrence.
+
+The adjacent-letter gates are equally rigid. Agreement immediately after a proper balanced cut
+forces family six at cut `27`; agreement immediately before it forces family six at cut `28`,
+where the preceding second letter necessarily disagrees. Families three, five, and seven have no
+internal/internal contextual placement. For every moving cut in the other four families, length
+balance forces the terminal moving cut and exactly one of
+
+```text
+(|X|,|Y|,|P|,|Q|)=(1,2,0,0),(2,1,0,0),(2,2,1,1).
+```
+
+The literal fork equations then identify incompatible one- or two-letter slices of `Z` with the
+fixed relation prefixes `DTTT` and `TTDD`. Thus every moving internal/internal cell is impossible
+at every pump depth.
+
+Family six's exceptional cut-`27` internal residue satisfies `k≤11`. The exact tail equations are
+
+```text
+|Q|=2k+1,  {|X|,|Y|}={2k+3,2k+2},  |Z|=|P|+22-4k>0.
+```
+
+An assignment-complete union-find certificate enumerates both orientations and every lawful
+prefix length: all `156` geometries force one variable-letter class to contain both `D` and `T`.
+Its canonical payload SHA-256 is
+`013124fe8b1a55fe29af90c1f18d86356d4506d2dde85bf9cb90ad8354cc1f30`.
+Lean separately rejects the cut-`28` one-letter right-conjugacy orientation and proves a fixed
+`25`-letter mismatch for the weak cut-`27` orientation at every depth.
+
+**Scope:** this is an exact classification of balanced cuts plus formal local extinction theorems.
+It does not yet package every comparable-prefix/suffix and same-shorter placement into one typed
+exhaustive extraction theorem. It covers one literal two-sided context around one pumped relation,
+not several relations, several contexts, or a multi-window quotient derivation. The certificate
+discharges the stated family-six residue; it is not imported into Lean as a proof term.
+
+**Use:** retire every moving internal/internal repair of the seven length-`31` schemas. Any claimed
+one-context survivor must exhibit the unformalized exhaustive layout extraction and evade the
+cut-`27`/`28` local gates; any genuine successor should instead use several windows or the free
+binary address mechanism.
+
+**Artifact:**
+[`GuardedMixedPrimePumpedCuts.lean`](MatrixMortality/GuardedMixedPrimePumpedCuts.lean),
+[`GuardedMixedPrimePumpedContext.lean`](MatrixMortality/GuardedMixedPrimePumpedContext.lean),
+[`certify_mixed_prime_pumped_context.py`](tools/certify_mixed_prime_pumped_context.py), and
+[`m34-pumped-context-classification-2026-08-31.md`](audits/m34-pumped-context-classification-2026-08-31.md).
+
+**Next:** type the exhaustive comparable/same-shorter layout extraction if a one-context claim is
+still needed. Otherwise compose the free `{DT,TD}` address stack with the literal `bcbc` endpoint
+fork and retain the all-word converse.
 
 ### G3-O13: Rational serializer pumping
 

@@ -753,6 +753,42 @@
 'MatrixMortality.GuardedMixedPrimeFork.no_kernelOddFamily_offCentralizer_cutCertificate' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.PumpedKernelFamily.balancedPrefix_iff_admissible' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.PumpedKernelFamily.alignedNext_of_balancedPrefix' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.PumpedKernelFamily.alignedPrevious_of_balancedPrefix' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.PumpedKernelFamily.no_twoPreviousAligned_balancedPrefix' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.no_thirdFamily_internalInternal' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.no_fifthFamily_internalInternal' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.no_seventhFamily_internalInternal' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.no_dynamicInternal_literalPumpedContextFork' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.sixthFamily_cutTwentyEight_no_rightConjugacy' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.sixthFamily_weakCutTwentySeven_block_ne' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.SixthFamilyCutTwentySevenResidue.power_le_eleven' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.no_sixthFamily_cutTwentySeven_residue' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.TwoSeedPumpPropagation.finTwo_cayleyHamilton' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
