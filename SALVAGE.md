@@ -267,6 +267,7 @@ file owns the mathematical stock.
 | [`G3-S18`](#g3-s18-exact-mixed-prime-address-comparators) | structure theorem and comparator | evaluation at zero globally decodes the free `DT/TD` stack; at equal length, both commutation and the literal five-factor fork compare arbitrary addresses exactly | formalized | active |
 | [`G3-S19`](#g3-s19-aligned-address-fork-obstruction) | obstruction | the complete forced fork cannot lie in the aligned `DT/TD` address submonoid; some control boundary must break address phase | formalized | active |
 | [`G3-S20`](#g3-s20-common-address-wrapper-obstruction) | obstruction | a common phase-breaking prefix and suffix cancel, so they cannot wrap the aligned address comparator into the forced fork | formalized | active |
+| [`G3-S21`](#g3-s21-kernel-cloaked-address-comparators) | enabling structure theorem | every genuine mixed-prime kernel pair asymmetrically cloaks an exact arbitrary-length address comparator while preserving raw-word distinctness | formalized; explicit infinite family | active |
 | [`G3-M02`](#g3-m02-square-root-punctuation-fracture) | partial mechanism | a rank-two square root gives an exact `SS`-free mortality grammar | formalized | closed |
 | [`G3-O10`](#g3-o10-square-root-boundary-saturation) | obstruction | every nondegenerate rank-one square root preserves boundary coefficient zeros | formalized | graduated |
 | [`G3-M01`](#g3-m01-free-group-discrepancy-engine) | partial mechanism | Carvalho's transducer gives an all-word marker-tail equation and a cyclic exponent-one equalizer | audited | active |
@@ -10880,6 +10881,53 @@ before common-context cancellation applies.
 **Next:** classify asymmetric prefix/suffix wrappers under the exact reduced fork equation. Search
 first for a wrapper whose residual action is a nonzero scalar multiple of the address-offset
 difference, then test its all-word endpoint language.
+
+### G3-S21: Kernel-cloaked address comparators
+
+**Kind:** enabling structure theorem
+
+**Evidence:** formalized; explicit infinite family
+
+**Disposition:** active
+
+Every genuine mixed-prime kernel pair is the asymmetric wrapper sought after `G3-S20`. If raw
+words `L≠R` induce the same affine action, then for arbitrary binary addresses `u,v`,
+
+```text
+wordAction(L·expandAddress(u)) = wordAction(R·expandAddress(v))  ↔  u=v,
+wordAction(expandAddress(u)·L) = wordAction(expandAddress(v)·R)  ↔  u=v.
+```
+
+The prefix form cancels the common cloak action by injectivity. The suffix form evaluates on a
+preimage supplied by surjectivity. In both cases `G3-S18` then recovers the complete addresses,
+including their lengths. Conversely, equal addresses and equal cloak actions give equal wrapped
+actions.
+
+The wrapped raw words remain distinct for every `u,v`. Any raw equality would imply action
+equality and hence `u=v`; free-list cancellation of the common matched address then forces
+`L=R`. Thus the kernel cloak preserves the raw discrepancy required by `G3-S10` while adding a
+lossless arbitrary address comparison.
+
+This is concrete. For every pump depth, Lean instantiates both orientations with the explicit odd
+mixed-prime kernel pair. The result therefore supplies an infinite family of raw-distinct address
+comparators without a synchronized-length premise.
+
+**Scope:** the theorem is an action-level carrier. It does not factor either cloaked branch as the
+physical reduced fork words `yzxyx` and `xzyxy` of three fixed control macros. It does not select
+source-dependent addresses or prove the fixed-endpoint language on arbitrary controls. Those are
+the remaining realization and converse obligations.
+
+**Use:** retain a genuine kernel relation as a one-sided cloak instead of trying to hide the
+address stack inside a common context. Search the physical fork equation for a factorization whose
+residual branches are one of the two displayed forms.
+
+**Artifact:**
+[`MixedPrimeKernelCloakedAddress.lean`](MatrixMortality/MixedPrimeKernelCloakedAddress.lean) and
+[`m34-kernel-cloaked-address-comparator-2026-09-01.md`](audits/m34-kernel-cloaked-address-comparator-2026-09-01.md).
+
+**Next:** solve the word-factor equations
+`yzxyx=L·expandAddress(u)` and `xzyxy=R·expandAddress(v)`, or the suffix analogues, with one
+explicit kernel cloak and source-computable address maps. Then test the complete endpoint converse.
 
 ### G3-O13: Rational serializer pumping
 

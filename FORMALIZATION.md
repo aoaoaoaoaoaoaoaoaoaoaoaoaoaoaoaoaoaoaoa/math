@@ -1816,6 +1816,7 @@ fixed-rank decision problem.
 | `MixedPrimeMacroComparator.lean` | globally injective scalar address code and exact equal-length commutator/five-factor address comparators |
 | `MixedPrimeAddressForkNoGo.lean` | aligned-address monoid law and impossibility of carrying the complete forced endpoint fork inside it |
 | `MixedPrimeAddressWrapperNoGo.lean` | cancellation obstruction for a common two-sided phase-breaking wrapper around address interiors |
+| `MixedPrimeKernelCloakedAddress.lean` | prefix and suffix kernel cloaks yielding raw-distinct arbitrary-length address comparators |
 | `ExpandingHistoryNoGo.lean` | reset-affine orbit, finite reverse automaton, regularity, and universal computability obstruction |
 | `CancellativeProjectiveNoGo.lean` | paired residual conic, finite support-rank closure, cancellative role fractions, and projective commutator rigidity |
 | `PairedInverseChamber.lean` | one-turn residual chambers, protected formal inverse states, and positive forward-cone separation |
@@ -2135,6 +2136,7 @@ fixed-rank decision problem.
 | At equal address length, one scalar commutator value or one literal `VZUVU/UZVUV` five-factor value compares the addresses exactly for every raw toggle `Z` | `MixedPrimeMacroComparator.wordAction_addressCommutator_at_zero_eq_iff_of_length_eq`, `MixedPrimeMacroComparator.wordAction_addressFork_at_zero_eq_iff_of_length_eq` |
 | The two forced endpoint-fork words cannot both be aligned addresses; coding every control by a whole address, or both data controls by equal-length addresses, is impossible | `MixedPrimeAddressForkNoGo.no_bcbc_endpoint_of_fork_address_words`, `MixedPrimeAddressForkNoGo.no_bcbc_endpoint_address_macro_code`, `MixedPrimeAddressForkNoGo.no_bcbc_endpoint_of_equalLength_address_data` |
 | A common literal prefix and suffix around the two aligned address interiors cancel and cannot rescue the forced endpoint fork | `MixedPrimeAddressWrapperNoGo.no_bcbc_endpoint_of_commonContext_address_words` |
+| Every genuine mixed-prime kernel pair gives prefix- and suffix-cloaked raw-distinct comparators for arbitrary addresses; the odd kernel family supplies explicit instances at every depth | `MixedPrimeKernelCloakedAddress.prefixCloakedAddress_genuineComparator`, `MixedPrimeKernelCloakedAddress.suffixCloakedAddress_genuineComparator`, `MixedPrimeKernelCloakedAddress.kernelOddFamily_prefixCloakedAddress_genuineComparator`, `MixedPrimeKernelCloakedAddress.kernelOddFamily_suffixCloakedAddress_genuineComparator` |
 | A matrix square equal to an outer product gives the complete `SS`-free mortality grammar | `SquareRootPunctuation.isMortal_iff_exists_squareFree_zero` |
 | The explicit source-uniform Neary punctuation matrix has the required square and rank two | `SquareRootPunctuation.nearySquareRoot_sq`, `SquareRootPunctuation.nearySquareRoot_rank` |
 | Exact coefficient preservation on the `R_bR_b`-free subshift forces the `R_b` matrix to be a unit | `SquareRootPunctuation.ruleB_isUnit_of_exact_on_squareFree` |
@@ -2705,6 +2707,15 @@ cancels both contexts from their forced action equality. Scalar address injectiv
 have unequal lengths and either common context may be empty. A surviving wrapper must therefore
 be genuinely asymmetric or noncancellable, or the two offsets must be routed through a separate
 terminal channel.
+
+`G3-S21` constructs the exact asymmetric carrier. Any genuine kernel pair `L≠R` with one affine
+action makes `L·expandAddress(u)` and `R·expandAddress(v)` action-equal exactly when `u=v`; the
+same holds with the cloaks as suffixes. Injectivity cancels prefix cloaks, surjectivity cancels
+suffix cloaks, and global address injectivity recovers arbitrary depths and digits. The wrapped
+raw words are distinct for every address pair: raw equality would force address equality and then
+cancel to `L=R`. Lean instantiates both orientations with every member of the explicit odd kernel
+family. What remains is to factor the cloaked branches as the physical `yzxyx/xzyxy` images of
+three fixed controls and prove the source-indexed arbitrary-word endpoint converse.
 
 For `G3-O20`, Lean proves the free-monoid tail law: if one fixed-boundary equation with stationary
 left and right pump blocks holds at exponents `N` and `N+1`, it holds at every exponent `N+k`.

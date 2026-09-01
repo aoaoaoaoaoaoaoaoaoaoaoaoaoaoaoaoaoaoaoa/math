@@ -857,6 +857,18 @@
 'MatrixMortality.MixedPrimeAddressWrapperNoGo.no_bcbc_endpoint_of_commonContext_address_words' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.MixedPrimeKernelCloakedAddress.prefixCloakedAddress_genuineComparator' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeKernelCloakedAddress.suffixCloakedAddress_genuineComparator' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeKernelCloakedAddress.kernelOddFamily_prefixCloakedAddress_genuineComparator' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeKernelCloakedAddress.kernelOddFamily_suffixCloakedAddress_genuineComparator' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.SquareRootPunctuation.coefficient_append_square' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
