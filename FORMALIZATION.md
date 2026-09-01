@@ -1721,6 +1721,15 @@ long intervening head to `cb` or `cc`. Both singleton currents are impossible ov
 every intervening block and either singleton target. Deep-root singleton-current histories and
 the surviving multi/multi grammar remain open.
 
+Record [`MM-S95`](SALVAGE.md#mm-s95-complete-three-block-singleton-current-extinction) closes
+the remaining singleton-current quadrants. Every physical root quotient is below two, and one
+singleton step preserves that strict chamber; an actual singleton pole with singleton current
+requires the older quotient above two. This kills consecutive singletons. Exact coordinate
+shells kill a singleton current above a multi-role intervening block and deep root, while the
+shallow root reduces to the `R_c` extinction in `MM-S94`. Thus every lawful three-block
+singleton pole has a multi-role current. When the intervening block is also multi-role, the
+complete `MM-S94` classifier applies with no separate current-shape premise.
+
 Record [`MM-S96`](SALVAGE.md#mm-s96-contaminated-tail-factorwise-pole-gate) replaces the failed
 gap-clean cancellation on the uniform counterfamily by an exact support law. Any singleton pole
 over that tail forces the primitive gap to divide the product of the current and inherited lower
@@ -1806,6 +1815,7 @@ The `M₅(3)` delimiter attack has twenty-three foundational records:
 | [`MM-S90`](SALVAGE.md#mm-s90-exact-singleton-tail-ancestry-equivalence) | nonzero lawful parser rays, automatic long-current unit ancestry, exact current-shape equivalence, and complementary singleton/all-`c` short grammar |
 | [`MM-S91`](SALVAGE.md#mm-s91-exact-parser-gap-clean-ancestry-gate) | automatic integral gap descent, exact reduced-numerator criterion for primitive-gap coprimality, and a lawful shell counterexample to automatic gap-clean ancestry |
 | [`MM-S94`](SALVAGE.md#mm-s94-three-block-singleton-chamber-classification) | positive singleton chamber, exact deep-root/`R_c` multi-current classifier, suffix/head grammar, and complete `R_c` singleton-current extinction |
+| [`MM-S95`](SALVAGE.md#mm-s95-complete-three-block-singleton-current-extinction) | universal root quotient chamber, consecutive-singleton and deep-root singleton-current extinction, canonical current-multi theorem, and unconditional next-multi classifier |
 | [`MM-S96`](SALVAGE.md#mm-s96-contaminated-tail-factorwise-pole-gate) | exact current/inherited lower-code product divisibility, arbitrary-divisor and primewise support transfer, and a formal inherited-support saturation boundary |
 | [`MM-S01`](SALVAGE.md#mm-s01-square-run-projective-normal-form) | invariant square-run plane, invertible `2 × 2` transfer, Möbius normalization, rank-one fracture grammar, and equivalence with pole avoidance |
 | [`MM-S02`](SALVAGE.md#mm-s02-reset-zero-projective-peeling) | scaled transfer identity, exact two-shell classification of all poles, and reset-zero one-transfer avoidance |

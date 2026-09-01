@@ -153,6 +153,7 @@ file owns the mathematical stock.
 | [`MM-S90`](#mm-s90-exact-singleton-tail-ancestry-equivalence) | structure theorem | at any lawful singleton pole, older unit peeled ancestry is equivalent to a multi-role current with at least `β+3` upper digits | formalized | active |
 | [`MM-S91`](#mm-s91-exact-parser-gap-clean-ancestry-gate) | structure theorem and obstruction | every `(1,1)` parser ray has integral gap-descended coordinates, but gap-clean coordinates exist exactly when the primitive gap divides its reduced normalized numerator | formalized | active |
 | [`MM-S94`](#mm-s94-three-block-singleton-chamber-classification) | structure theorem and obstruction | every lawful three-block singleton pole lies in an exact deep-root or `R_c` discrepancy grammar, and the entire `R_c` singleton-current quadrant is empty | formalized | active |
+| [`MM-S95`](#mm-s95-complete-three-block-singleton-current-extinction) | obstruction and classifier | every lawful three-block singleton pole has a multi-role current; with a multi-role intervening block it obeys the complete `MM-S94` classifier without an extra current-shape hypothesis | formalized | active |
 | [`MM-S96`](#mm-s96-contaminated-tail-factorwise-pole-gate) | structure theorem and obstruction | a singleton pole over the uniform contaminated tail forces the primitive gap into the product of current and inherited lower codes, with exact factorwise transfer outside inherited support | formalized | active |
 | [`R32-S01`](#r32-s01-split-return-normal-form) | structure theorem | rank-two cuts reduce one-unit binary mortality to a `2 × 2` return recurrence | formalized | graduated |
 | [`R32-S02`](#r32-s02-two-plane-edge-square) | structure theorem | two rank-two generators are a two-vertex square of `2 × 2` edges | formalized | graduated |
@@ -5924,6 +5925,74 @@ through `singletonPole_olderRatio_pos`,
 **Next:** kill singleton-current histories over deep roots and singleton intervening blocks;
 then decide the two-c deep-root corridor and the `cb/cc` `R_c` suffix grammar without assuming
 that shell-compatible rays are reachable poles.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S95: Complete three-block singleton-current extinction
+
+**Kind:** obstruction and classifier
+**Evidence:** formalized
+**Disposition:** active
+
+Every physical root ray has projective quotient below two. The proof uses only the leading-digit
+lower bound for its punctuated upper code and the strict marker-code upper bound. A singleton
+erasure step above any physical root preserves this chamber for `β≥3`:
+
+```text
+quotient(singleton step over root) < 2.              (1)
+```
+
+Conversely, if a singleton current reaches a singleton pole above any lawful older history, the
+exact recurrence and the trace bounds force
+
+```text
+quotient(older history) > 2.                         (2)
+```
+
+The lower bound is uniform in both singleton letters and in the older history. Equations (1)
+and (2) immediately exclude two consecutive singleton source blocks.
+
+If the intervening block is multi-role and the root is deep, its parsed ray has first-coordinate
+shell `(1,1)` and second-coordinate shell `(k,k)`. For current `D_c`, the two-adic pole balance
+would require a residual valuation below the minimum of its two integral terms. For current
+`D_b`, the two-adic balance forces `k=2`, while the unequal five-adic term depths then force
+residual depth two instead of the required three. Both letters are impossible. If the root is
+shallow, parser law normalizes it to `R_c`, where `MM-S94` already kills both singleton currents.
+
+Lean therefore proves the canonical statement
+
+```text
+BlocksLaw [current,next,root] and singleton pole
+  ⇒ length(current)≥2.                               (3)
+```
+
+With a multi-role `next`, (3) discharges the last hypothesis of the `MM-S94` classifier. Every
+such pole lies in its exact deep-root or `R_c` A/B grammar.
+
+**Scope:** the extinction quantifies over every `β≥3`, body, singleton target, current letter,
+and lawful three-block source. It proves no three-block pole has singleton current. It does not
+exclude a multi-role current followed by a singleton intervening block, nor any surviving arm of
+the multi/multi classifier.
+
+**Use:** delete singleton currents from the entire three-source frontier. The next adjacent
+slice is current-multi/next-singleton; after it is classified, every three-block pole can be
+compared directly with the multi/multi A/B grammar.
+
+**Formalization:**
+[`MatrixMortality/DecimalSetterThreeBlockSingletonPrefix.lean`](MatrixMortality/DecimalSetterThreeBlockSingletonPrefix.lean),
+through `rootRay_ratio_lt_two`,
+`parsedRay_singleton_root_ratio_lt_two`,
+`singletonPole_singletonCurrent_olderRatio_gt_two`,
+`singletonPole_threeBlock_singletonCurrent_impossible`,
+`singletonPole_threeBlock_forces_current_multi`, and
+`singletonPole_threeBlock_nextMulti_classifier`.
+
+**Artifact:**
+[`audits/m53-complete-three-block-singleton-current-extinction-2026-09-01.md`](audits/m53-complete-three-block-singleton-current-extinction-2026-09-01.md).
+
+**Next:** classify or extinguish a multi-role current above a singleton intervening block and
+physical root; then attack the resulting unified three-source grammar.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).

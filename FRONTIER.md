@@ -1167,6 +1167,14 @@ forces complete suffix exhaustion and a `cb` or `cc` head. Both singleton curren
 deep-root singleton-current/singleton-intervening residue plus the explicit multi/multi A/B
 grammar. Shell-compatible tails are not thereby reachable poles.
 
+[`MM-S95`](SALVAGE.md#mm-s95-complete-three-block-singleton-current-extinction) closes the
+singleton-current residue left by that classifier. Physical root rays lie below quotient two,
+and a singleton step keeps them there; a singleton current at an actual singleton pole requires
+the older quotient above two. Deep-root valuation balance kills the remaining multi-intervening
+case, and a shallow root reduces to the `R_c` theorem. Every lawful three-block singleton pole
+therefore has multi-role current. The only adjacent source-shape slice not yet fed into the
+multi/multi classifier is a multi-role current followed by a singleton intervening block.
+
 The contaminated counterfamily is no longer arithmetically opaque.
 [`MM-S96`](SALVAGE.md#mm-s96-contaminated-tail-factorwise-pole-gate) proves that any singleton
 pole over it forces `q∣V_current·V_tail`. Every gap divisor absent from the inherited lower code
