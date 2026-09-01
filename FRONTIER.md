@@ -1206,10 +1206,8 @@ after the literal canonical `(R_c,D_b);D_c` history. Its exact intercept bounds 
 automaton classify every next physical block as negative, below one, or above the `MM-S86`
 chamber ceiling. This does not force the canonical history. That strengthening is false already
 at width six: target `c^6`, body `bcbcc`, and `(R_c,D_b,D_b)` survive the full `3H` channel;
-longer modular-return survivors also occur. The live node is therefore the classification of all
-noncanonical contraction survivors by their post-`D_c` intercept shift. Prove a finite labelled
-family of admissible shifts or return an infinite family whose successor can re-enter the
-chamber; do not generalize the canonical lower bound to these survivors.
+longer modular-return survivors also occur. The canonical theorem supplies both sides of the
+intercept window; its lower bound cannot be generalized without further arithmetic.
 
 [`MM-S89`](SALVAGE.md#mm-s89-primitive-physical-pullback-cancellation) isolates the exact
 normalization seam for that classification. For incoming natural coordinates `(n,d)`, raw
@@ -1237,6 +1235,21 @@ neither proved to be an `MM-O29` seed nor reachable nor a pole. Thus it kills on
 local monotonicity claim, while confirming that the physical target-code restriction in `MM-S92`
 is indispensable.
 
+[`MM-S93`](SALVAGE.md#mm-s93-universal-contraction-chamber-entry-gap) completes the physical
+Archimedean entry classification. For every compiler body of length at least `β−1` beginning in
+`b`, any nonempty physical block taking any carrier `X>H` into `(1,r/(r−3))` has equal physical
+spelling lengths and
+
+```text
+ε=(x−1)/x < 1/(80ρ).
+```
+
+After the following singleton `D_c`, its exact boundary intercept satisfies
+`0<Ξ<8·3^(β−6)/5`. This replaces the canonical upper-gap estimate by a uniform theorem, but
+does not supply the quotient-scale lower bound used by `MM-S88`. The live contraction node is now
+exactly arithmetic: intersect the `MM-S86` primitive `3H` channel and `MM-S92` target modulus with
+the equal-spelling prefix to force such a lower bound, or classify the physical small-`Ξ` family.
+
 The remaining ternary obligation is now the **nonzero history-defect branch** of the global
 earliest-pole reduction. In the normalized coordinate `δ=D/y`, the complete physical recurrence
 is
@@ -1257,7 +1270,7 @@ erasure tile, not `β` of them. A complete proof must either force the long tail
 false pole or extend the carry/cylinder invariant to arbitrary physical target suffixes. Fixed
 residue and unit projections are empirically saturated, and the exact carry window grows with
 carrier height. None of `MM-S51`, `MM-S55`, `MM-S57`, `MM-S59`, `MM-S61`, `MM-S63`, `MM-S64`,
-`MM-S68`, `MM-S69`, `MM-S71`, `MM-O27`, `MM-S73`, `MM-S76`, `MM-O29`, `MM-O30`, `MM-S86`, `MM-S87`, `MM-S88`, `MM-S89`, or `MM-S92`
+`MM-S68`, `MM-S69`, `MM-S71`, `MM-O27`, `MM-S73`, `MM-S76`, `MM-O29`, `MM-O30`, `MM-S86`, `MM-S87`, `MM-S88`, `MM-S89`, `MM-S92`, or `MM-S93`
 alone proves projective avoidance.
 Exact bidirectional diagnostics for the ternary swap at `β=3`, body `bbcc`, exclude every
 false-pole word of at most six projective blocks when each regular block has

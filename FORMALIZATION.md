@@ -1443,6 +1443,7 @@ The setter-projective audit now also exposes a kernel-friendly carry theorem:
 | [`MM-S89`](SALVAGE.md#mm-s89-primitive-physical-pullback-cancellation) | exact raw inverse-block coordinates, half-head survival through primitive gcd cancellation, incoming-numerator modulus, and upper-code affine recurrence |
 | [`MM-S92`](SALVAGE.md#mm-s92-primitive-empty-front-seed-adapter) | exact positive primitive coordinates for every physical empty-front seed, target-code control of its half-head content, and instantiated raw and post-cancellation pullback criteria |
 | [`MM-O30`](SALVAGE.md#mm-o30-primitive-normalization-collapse) | exact width-six local witness in which canonical `(R_c,D_b)` normalization and the following full-channel `D_c` step both contract Farey height |
+| [`MM-S93`](SALVAGE.md#mm-s93-universal-contraction-chamber-entry-gap) | equal-spelling chamber-entry classification, uniform relative-gap bound below `1/(80ρ)`, exact post-`D_c` boundary identity, and quotient-scaled intercept ceiling |
 
 These records narrow the missing arbitrary-depth theorem but do not prove
 projective avoidance. Their reconstruction is
@@ -1861,6 +1862,15 @@ channel. Farey height decreases on the first step, the second step, and the comp
 seed is an abstract local carrier: the theorem proves neither that it belongs to the `MM-O29`
 family or encoded-entry orbit nor that it is a pole. A valid Lyapunov theorem must therefore use
 the target-code restrictions from `MM-S92` or stronger ancestry data.
+
+Record [`MM-S93`](SALVAGE.md#mm-s93-universal-contraction-chamber-entry-gap) removes the literal
+block restriction from the Archimedean side of the chamber ancestry. For every compiler body of
+length at least `β−1` beginning in `b`, every nonempty physical block pulling any carrier above
+`H` into `(1,r/(r−3))` has equal upper/lower spelling lengths and relative gap
+`(x−1)/x<1/(80ρ)`. Lean then identifies the exact post-`D_c` boundary intercept and bounds it by
+`0<Ξ<8·3^(β−6)/5`. This is a local entry theorem, not reachability, a primitive-channel
+classification, post-contraction no-reentry, or a pole. The remaining successor cut needs a
+quotient-scale lower bound from `MM-S86` normalization or `MM-S92` target ancestry.
 
 Record [`MM-S21`](SALVAGE.md#mm-s21-bounded-decimal-suffix-cycles) closes the fixed-precision
 suffix-descent lane. `DecimalSetterSuffix.cycleDefect_lift` gives an explicit one-digit lift for
@@ -2425,6 +2435,10 @@ fixed-rank decision problem.
 | `SwappedSetterEmptyFrontChamber.lean` | terminal lower bound for empty-front seeds, physical `b`-leading exclusion from the deletion-contraction interval, and canonical `(R_c,D_b)` gap estimate |
 | `SwappedSetterPostRcDbAutomaton.lean` | exact canonical post-`D_c` intercept bounds and the reusable two-state affine next-block automaton |
 | `SwappedSetterPostRcDbChamber.lean` | physical ternary length partition, signed first-colour classification, and conditional total no-reentry theorem |
+| `SwappedSetterPrimitivePullback.lean` | exact raw inverse-block coordinates and preservation criterion for half-head divisibility through primitive cancellation |
+| `SwappedSetterPrimitiveSeedAdapter.lean` | positive primitive empty-front seed coordinates and target-code control of their half-head content |
+| `SwappedSetterNormalizationCollapse.lean` | exact abstract width-six witness refuting one- and two-step Farey expansion under local hypotheses alone |
+| `SwappedSetterUniversalEntryGap.lean` | uniform physical contraction-chamber gap and quotient-scaled post-`D_c` intercept envelope |
 | `PairedMortality.lean` | common-column mortality converse and exact integer `4 × 4` family |
 | `PhaseFracture.lean` | phase normalization and dimension-free projective-identification contradiction |
 | `PhaseRigidity.lean` | checked local role algebra, discrepancy commutators, and invariant-pencil rigidity |

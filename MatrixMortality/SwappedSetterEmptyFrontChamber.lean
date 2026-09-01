@@ -103,7 +103,8 @@ private theorem tagEncode_length_ge (width : Nat) (letters : List TagLetter) :
         cases letter <;> simp [tagCode]
       omega
 
-private def physicalUpperWord (width : Nat) (block : List NearyTile) : List Bool :=
+/-- Swapped ternary word emitted by the punctuated physical upper spelling. -/
+def swappedPhysicalUpperWord (width : Nat) (block : List NearyTile) : List Bool :=
   (spell (nearyUpper width) block ++ nearyMarker width).map not
 
 /-- Swapped ternary word emitted by the physical lower spelling of a role block. -/
@@ -111,16 +112,18 @@ def swappedPhysicalLowerWord (width : Nat) (body : List TagLetter)
     (block : List NearyTile) : List Bool :=
   (spell (nearyLower width body) block).map not
 
-@[simp] private theorem physicalUpperWord_length (width : Nat) (block : List NearyTile) :
-    (physicalUpperWord width block).length = upperLength width block + width + 1 := by
-  simp [physicalUpperWord, upperLength, nearyMarker]
+/-- The punctuated upper word contains the role spelling and the width-sized marker. -/
+@[simp] theorem swappedPhysicalUpperWord_length (width : Nat) (block : List NearyTile) :
+    (swappedPhysicalUpperWord width block).length = upperLength width block + width + 1 := by
+  simp [swappedPhysicalUpperWord, upperLength, nearyMarker]
   omega
 
-private theorem physicalUpperWord_cons (width : Nat) (tile : NearyTile)
+/-- The punctuated upper spelling is a left-to-right concatenation of tag codes. -/
+theorem swappedPhysicalUpperWord_cons (width : Nat) (tile : NearyTile)
     (rest : List NearyTile) :
-    physicalUpperWord width (tile :: rest) =
-      (tagCode width tile.letter).map not ++ physicalUpperWord width rest := by
-  rw [physicalUpperWord, physicalUpperWord, spell_nearyUpper, spell_nearyUpper]
+    swappedPhysicalUpperWord width (tile :: rest) =
+      (tagCode width tile.letter).map not ++ swappedPhysicalUpperWord width rest := by
+  rw [swappedPhysicalUpperWord, swappedPhysicalUpperWord, spell_nearyUpper, spell_nearyUpper]
   simp only [List.map_cons, tagEncode_cons]
   rw [List.append_assoc, List.map_append]
 
@@ -131,23 +134,23 @@ theorem swappedPhysicalLowerWord_cons (width : Nat) (body : List TagLetter)
       (nearyLower width body tile).map not ++ swappedPhysicalLowerWord width body rest := by
   simp [swappedPhysicalLowerWord, spell, List.map_append]
 
-private theorem physicalUpperWord_b_prefix
+private theorem swappedPhysicalUpperWord_b_prefix
     {width : Nat} (width_pos : 0 < width) {tile : NearyTile}
     (tile_b : tile.letter = .b) (rest : List NearyTile) :
-    ∃ tail, physicalUpperWord width (tile :: rest) = false :: true :: tail := by
+    ∃ tail, swappedPhysicalUpperWord width (tile :: rest) = false :: true :: tail := by
   obtain ⟨offset, rfl⟩ := Nat.exists_eq_succ_of_ne_zero (Nat.ne_of_gt width_pos)
-  refine ⟨List.replicate offset true ++ false :: physicalUpperWord offset.succ rest, ?_⟩
-  rw [physicalUpperWord_cons, tile_b]
+  refine ⟨List.replicate offset true ++ false :: swappedPhysicalUpperWord offset.succ rest, ?_⟩
+  rw [swappedPhysicalUpperWord_cons, tile_b]
   simp [tagCode, List.replicate_succ]
 
-private theorem physicalUpperWord_b_prefix_three
+private theorem swappedPhysicalUpperWord_b_prefix_three
     {width : Nat} (width_two : 2 ≤ width) {tile : NearyTile}
     (tile_b : tile.letter = .b) (rest : List NearyTile) :
     ∃ tail,
-      physicalUpperWord width (tile :: rest) = false :: true :: true :: tail := by
+      swappedPhysicalUpperWord width (tile :: rest) = false :: true :: true :: tail := by
   obtain ⟨offset, rfl⟩ := Nat.exists_eq_add_of_le width_two
-  refine ⟨List.replicate offset true ++ false :: physicalUpperWord (2 + offset) rest, ?_⟩
-  rw [physicalUpperWord_cons, tile_b]
+  refine ⟨List.replicate offset true ++ false :: swappedPhysicalUpperWord (2 + offset) rest, ?_⟩
+  rw [swappedPhysicalUpperWord_cons, tile_b]
   simp [tagCode, List.replicate_add]
 
 /-- Every lower erasure spelling begins with swapped ternary digit two. -/
@@ -242,11 +245,11 @@ private theorem equalLength_ruleB_gap
   rw [upper_eq, lower_eq, head_power, tail_length]
   omega
 
-private theorem physicalUpper_predecessorPower
+private theorem swappedPhysicalUpper_predecessorPower
     (width : Nat) (block : List NearyTile) :
-    (3 : ℤ) ^ ((physicalUpperWord width block).length - 1) =
+    (3 : ℤ) ^ ((swappedPhysicalUpperWord width block).length - 1) =
       widthScale width * upperPower width block := by
-  rw [physicalUpperWord_length]
+  rw [swappedPhysicalUpperWord_length]
   have exponent_eq : upperLength width block + width + 1 - 1 =
       width + upperLength width block := by omega
   rw [exponent_eq, pow_add]
@@ -258,7 +261,7 @@ private theorem bLeading_code_lower
     5 * widthScale width * upperPower width (tile :: rest) ≤
       3 * swappedUpperCode width (tile :: rest) := by
   obtain ⟨tail, upper_eq⟩ :=
-    physicalUpperWord_b_prefix width_pos tile_b rest
+    swappedPhysicalUpperWord_b_prefix width_pos tile_b rest
   have tail_code_nonneg : 0 ≤ ternaryCode tail := Nat.zero_le _
   have upper_formula :
       ternaryCode (false :: true :: tail) =
@@ -266,22 +269,22 @@ private theorem bLeading_code_lower
     simp only [ternaryCode_cons, List.length_cons, ternaryDigit, pow_succ]
     ring
   have power_eq :
-      3 ^ ((physicalUpperWord width (tile :: rest)).length - 1) =
+      3 ^ ((swappedPhysicalUpperWord width (tile :: rest)).length - 1) =
         3 * 3 ^ tail.length := by
     rw [upper_eq]
     simp only [List.length_cons, Nat.add_sub_cancel, pow_succ]
     ring
   have natural_bound :
-      5 * 3 ^ ((physicalUpperWord width (tile :: rest)).length - 1) ≤
-        3 * ternaryCode (physicalUpperWord width (tile :: rest)) := by
+      5 * 3 ^ ((swappedPhysicalUpperWord width (tile :: rest)).length - 1) ≤
+        3 * ternaryCode (swappedPhysicalUpperWord width (tile :: rest)) := by
     rw [power_eq, upper_eq, upper_formula]
     omega
   have integer_bound :
-      5 * (3 : ℤ) ^ ((physicalUpperWord width (tile :: rest)).length - 1) ≤
-        3 * (ternaryCode (physicalUpperWord width (tile :: rest)) : ℤ) := by
+      5 * (3 : ℤ) ^ ((swappedPhysicalUpperWord width (tile :: rest)).length - 1) ≤
+        3 * (ternaryCode (swappedPhysicalUpperWord width (tile :: rest)) : ℤ) := by
     exact_mod_cast natural_bound
-  rw [physicalUpper_predecessorPower] at integer_bound
-  simpa only [swappedUpperCode, physicalUpperWord, mul_assoc] using integer_bound
+  rw [swappedPhysicalUpper_predecessorPower] at integer_bound
+  simpa only [swappedUpperCode, swappedPhysicalUpperWord, mul_assoc] using integer_bound
 
 private theorem lowerCode_pos
     (width : Nat) (body : List TagLetter) (tile : NearyTile)
@@ -817,7 +820,7 @@ theorem bLeading_physicalBackwardBlock_avoids_deletionCChamber
           (upperPower width (tile :: rest)) current <
         (chamberRadius width : ℚ) / (chamberRadius width - 3)) := by
   intro chamber
-  let upper := physicalUpperWord width (tile :: rest)
+  let upper := swappedPhysicalUpperWord width (tile :: rest)
   let lower := swappedPhysicalLowerWord width body (tile :: rest)
   have width_pos : 0 < width := by omega
   have width_two : 2 ≤ width := by omega
@@ -840,8 +843,8 @@ theorem bLeading_physicalBackwardBlock_avoids_deletionCChamber
       have cast_bound :
           (ternaryCode lower : ℤ) < (3 : ℤ) ^ (upper.length - 1) := by
         exact_mod_cast lower_code_lt
-      rw [show upper = physicalUpperWord width (tile :: rest) by rfl,
-        physicalUpper_predecessorPower] at cast_bound
+      rw [show upper = swappedPhysicalUpperWord width (tile :: rest) by rfl,
+        swappedPhysicalUpper_predecessorPower] at cast_bound
       simpa only [swappedLowerCode, lower, swappedPhysicalLowerWord] using cast_bound
     have lower_short :
         (swappedLowerCode width body (tile :: rest) : ℚ) <
@@ -874,14 +877,14 @@ theorem bLeading_physicalBackwardBlock_avoids_deletionCChamber
             (3 : ℤ) ^ upper.length =
                 3 * 3 ^ (upper.length - 1) := by
                   have upper_nonempty : 0 < upper.length := by
-                    simp [upper, physicalUpperWord_length]
+                    simp [upper, swappedPhysicalUpperWord_length]
                   obtain ⟨predecessor, upper_length⟩ :=
                     Nat.exists_eq_succ_of_ne_zero (Nat.ne_of_gt upper_nonempty)
                   rw [upper_length, Nat.succ_sub_one, pow_succ]
                   ring
             _ = 3 * widthScale width * upperPower width (tile :: rest) := by
-              rw [show upper = physicalUpperWord width (tile :: rest) by rfl,
-                physicalUpper_predecessorPower]
+              rw [show upper = swappedPhysicalUpperWord width (tile :: rest) by rfl,
+                swappedPhysicalUpper_predecessorPower]
               ring
         rw [power_eq] at cast_bound
         simpa only [swappedLowerCode, lower, swappedPhysicalLowerWord] using cast_bound
@@ -902,7 +905,7 @@ theorem bLeading_physicalBackwardBlock_avoids_deletionCChamber
       cases tile with
       | erase letter =>
           obtain ⟨upperTail, upper_eq⟩ :=
-            physicalUpperWord_b_prefix width_pos tile_b rest
+            swappedPhysicalUpperWord_b_prefix width_pos tile_b rest
           obtain ⟨lowerTail, lower_eq⟩ :=
             swappedPhysicalLowerWord_erase_prefix width body letter rest
           have prefix_length_eq :
@@ -920,7 +923,7 @@ theorem bLeading_physicalBackwardBlock_avoids_deletionCChamber
               exact_mod_cast code_lt
             rw [← upper_eq, ← lower_eq] at cast_lt
             simpa only [swappedUpperCode, swappedLowerCode,
-              physicalUpperWord, swappedPhysicalLowerWord] using cast_lt.le
+              swappedPhysicalUpperWord, swappedPhysicalLowerWord] using cast_lt.le
           have erase_prefix :
               (swappedUpperCode width (.erase letter :: rest) : ℚ) ≤
                 swappedLowerCode width body (.erase letter :: rest) := by
@@ -933,7 +936,7 @@ theorem bLeading_physicalBackwardBlock_avoids_deletionCChamber
           | c => simp [NearyTile.letter] at tile_b
           | b =>
               obtain ⟨upperTail, upper_eq⟩ :=
-                physicalUpperWord_b_prefix_three width_two tile_b rest
+                swappedPhysicalUpperWord_b_prefix_three width_two tile_b rest
               obtain ⟨lowerTail, lower_eq⟩ :=
                 swappedPhysicalLowerWord_rule_b_prefix width body rest
               have prefix_length_eq :
@@ -956,9 +959,9 @@ theorem bLeading_physicalBackwardBlock_avoids_deletionCChamber
                         (false :: true :: true :: upperTail) : ℤ) := by
                   exact_mod_cast code_gap
                 rw [← upper_eq, ← lower_eq,
-                  physicalUpper_predecessorPower] at cast_gap
+                  swappedPhysicalUpper_predecessorPower] at cast_gap
                 simp only [swappedUpperCode, swappedLowerCode,
-                  physicalUpperWord, swappedPhysicalLowerWord] at cast_gap ⊢
+                  swappedPhysicalUpperWord, swappedPhysicalLowerWord] at cast_gap ⊢
                 linarith
               have rule_b_gap :
                   (widthScale width : ℚ) * upperPower width (.rule .b :: rest) ≤
@@ -979,7 +982,7 @@ theorem bLeading_physicalBackwardBlock_avoids_deletionCChamber
                     (3 : ℤ) ^ upper.length =
                       3 * widthScale width * upperPower width (.rule .b :: rest) := by
                   have upper_nonempty : 0 < upper.length := by
-                    simp [upper, physicalUpperWord_length]
+                    simp [upper, swappedPhysicalUpperWord_length]
                   obtain ⟨predecessor, upper_length⟩ :=
                     Nat.exists_eq_succ_of_ne_zero (Nat.ne_of_gt upper_nonempty)
                   calc
@@ -990,8 +993,8 @@ theorem bLeading_physicalBackwardBlock_avoids_deletionCChamber
                       ring
                     _ = 3 *
                         (widthScale width * upperPower width (.rule .b :: rest)) := by
-                      rw [show upper = physicalUpperWord width (.rule .b :: rest) by rfl,
-                        physicalUpper_predecessorPower]
+                      rw [show upper = swappedPhysicalUpperWord width (.rule .b :: rest) by rfl,
+                        swappedPhysicalUpper_predecessorPower]
                     _ = 3 * widthScale width * upperPower width (.rule .b :: rest) := by
                       ring
                 rw [power_eq] at cast_lt

@@ -1818,6 +1818,9 @@
 'MatrixMortality.SwappedSetterEmptyFrontChamber.deletionCSuccessorSlope_eq' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.SwappedSetterEmptyFrontChamber.swappedPhysicalUpperWord_length' depends on axioms: [propext,
+ Quot.sound]
+'MatrixMortality.SwappedSetterEmptyFrontChamber.swappedPhysicalUpperWord_cons' depends on axioms: [propext]
 'MatrixMortality.SwappedSetterEmptyFrontChamber.swappedPhysicalLowerWord_cons' depends on axioms: [propext]
 'MatrixMortality.SwappedSetterEmptyFrontChamber.swappedPhysicalLowerWord_erase_prefix' depends on axioms: [propext]
 'MatrixMortality.SwappedSetterEmptyFrontChamber.swappedPhysicalLowerWord_rule_b_prefix' depends on axioms: [propext]
@@ -1893,6 +1896,18 @@
  Classical.choice,
  Quot.sound]
 'MatrixMortality.SwappedSetterPostRcDbChamber.physicalEmptyTarget_postRcDb_avoids_deletionCChamber' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SwappedSetterUniversalEntryGap.postDeletionCIntercept_eq_carrierBoundary' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SwappedSetterUniversalEntryGap.postDeletionCIntercept_pos_lt_eight_fifths' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SwappedSetterUniversalEntryGap.physicalBackwardBlock_chamber_epsilon_lt' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SwappedSetterUniversalEntryGap.physicalBackwardBlock_postDeletionCIntercept_bound' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
 'MatrixMortality.SwappedSetterPrimitivePullback.inverseFraction_eq_rawRatio' depends on axioms: [propext,

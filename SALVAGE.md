@@ -153,6 +153,7 @@ file owns the mathematical stock.
 | [`MM-S89`](#mm-s89-primitive-physical-pullback-cancellation) | structure theorem and obstruction | exact gcd arithmetic decides when raw half-head divisibility survives primitive inverse-block normalization | formalized | active |
 | [`MM-S92`](#mm-s92-primitive-empty-front-seed-adapter) | structure theorem and obstruction | physical empty-front seeds have exact primitive positive coordinates whose half-head content is supported on one target-code gcd | formalized | active |
 | [`MM-O30`](#mm-o30-primitive-normalization-collapse) | obstruction | an abstract canonical width-six local carrier contracts Farey height on both adjacent inverse steps and across their complete window | formalized | active |
+| [`MM-S93`](#mm-s93-universal-contraction-chamber-entry-gap) | structure theorem and obstruction | every compiler-emitted physical block entering the deletion-contraction chamber from above the terminal ray has relative gap below `1/(80ρ)` and a uniformly bounded post-`D_c` intercept | formalized | active |
 | [`R32-S01`](#r32-s01-split-return-normal-form) | structure theorem | rank-two cuts reduce one-unit binary mortality to a `2 × 2` return recurrence | formalized | graduated |
 | [`R32-S02`](#r32-s02-two-plane-edge-square) | structure theorem | two rank-two generators are a two-vertex square of `2 × 2` edges | formalized | graduated |
 | [`R32-O01`](#r32-o01-rank-one-profile-collapse) | obstruction | a rank-one generator reduces mortality to order-at-most-three scalar recurrence zeros | audited | stock |
@@ -6162,6 +6163,73 @@ through `exists_normalizationCollapseWitness`.
 
 **Next:** keep the `MM-S92` target modulus and post-cancellation gcd in any multistep weight.
 Determine whether those physical restrictions exclude this collapse mechanism or merely thin it.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S93: Universal contraction-chamber entry gap
+
+**Kind:** structure theorem and obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+Fix `β≥6`, put `ρ=3^β`, `r=ρ−2`, `H=5ρ−1`, `μ=2ρ−1`, and
+`Q=3^(β−6)`. Let a nonempty compiler-emitted physical role block pull any carrier `X>H`
+backward to `x` in the `MM-S86` slope chamber
+
+```text
+1 < x < r/(r−3).
+```
+
+For every compiler body of length at least `β−1` beginning in `b`, Lean proves
+
+```text
+ε=(x−1)/x < 1/(80ρ).                              (1)
+```
+
+The proof first excludes unequal physical spelling lengths: a shorter lower word puts `x` above
+`7/5`, while a longer lower word puts it below one. `MM-S87` excludes a `b`-leading block. Equal
+length then excludes erasure-`c` and rule-`c` followed by `c`; the surviving rule-`c`, `b` prefix
+has swapped upper code above `40ρ`. The equal-length ternary spread bound gives (1).
+
+Define the boundary intercept after the subsequent singleton `D_c` by
+
+```text
+Ξ = μr²ε / [6μ+(r²+2r−6μ)ε].
+```
+
+Lean identifies this closed expression with the exact boundary coordinate of the
+post-`D_c` carrier and proves
+
+```text
+0 < Ξ < 8Q/5.                                      (2)
+```
+
+**Scope:** (1) and (2) classify a local physical chamber entry. They assume only `X>H`, the
+compiler body envelope, and the chamber inequalities; they do not assume an `MM-O29` seed or
+the `MM-S86` primitive `3H` gcd channel. They prove neither encoded-entry reachability,
+existence of a chamber entry, post-contraction no-reentry, nor a pole.
+
+**Use:** replace the literal `(R_c,D_b)` gap estimate in `MM-S87` by a uniform estimate for every
+physical chamber entrant. Equation (2) confines every resulting successor problem to one
+quotient-scaled intercept window. The missing lower intercept bound must use the exact `3H`
+normalization channel or the target-code restrictions from `MM-S92`; positivity alone does not
+reproduce the `MM-S88` no-reentry argument.
+
+**Formalization:**
+[`MatrixMortality/SwappedSetterUniversalEntryGap.lean`](MatrixMortality/SwappedSetterUniversalEntryGap.lean),
+through `postDeletionCIntercept_eq_carrierBoundary`,
+`postDeletionCIntercept_pos_lt_eight_fifths`,
+`physicalBackwardBlock_chamber_epsilon_lt`, and
+`physicalBackwardBlock_postDeletionCIntercept_bound`.
+
+**Artifact:**
+[`audits/m53-universal-entry-gap-2026-09-01.md`](audits/m53-universal-entry-gap-2026-09-01.md).
+
+**Next:** intersect the universal upper window with the `MM-S86` primitive `3H` channel and the
+`MM-S92` target modulus. Either derive a positive quotient-scale lower bound for `Ξ`, sufficient
+for the `MM-S88` next-block automaton, or exhibit the exact physical small-intercept family that
+survives it.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
