@@ -1229,8 +1229,9 @@ whole-word comparator. It reverses the guessed bits, concatenates their inverse 
 then appends the forward writer encoding. Lean proves both normalized cancellation orders and
 uses projective freeness to show that the normalized product is projectively identity exactly
 when the guessed and written lists agree. The theorem is transported to the literal physical
-word, with positivity and the exact variable-rate length. This is a phased-language equality
-test; first-hit safety and raw phase enforcement remain separate. See `R32-S82` and
+word, and arbitrary positive prefixes and suffixes are proved unable to weaken its contextual
+converse. Positivity and the exact variable-rate length are also checked. This is a phased-language
+equality test; first-hit safety and raw phase enforcement remain separate. See `R32-S82` and
 [`audits/m32-cubic-binary-pump-comparator-2026-09-01.md`](audits/m32-cubic-binary-pump-comparator-2026-09-01.md).
 
 The rank-(2,2) graph is no longer an independent residue. `RankTwoPunctuation` proves that every

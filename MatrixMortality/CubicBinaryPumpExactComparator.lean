@@ -302,6 +302,72 @@ theorem falseWaitBinaryPumpComparatorWord_projectiveIdentity_iff
     exact ⟨chartScale,
       falseWaitBinaryPump_projectiveIdentity_of_chart chart⟩
 
+/-- A positive continuation can be cancelled from a physical comparison. Thus the comparison
+preserves that continuation projectively exactly when the guessed and written words agree. -/
+theorem falseWaitBinaryPumpComparatorWord_suffix_iff
+    (guess written : List Bool) (suffix : List Nat)
+    (suffixPositive : ∀ wait ∈ suffix, 0 < wait) :
+    (∃ scale : ℚ,
+      wordProduct falseWaitReturn
+          (falseWaitBinaryPumpComparatorWord guess written ++ suffix) =
+        scale • wordProduct falseWaitReturn suffix) ↔
+      guess = written := by
+  have suffixUnit : IsUnit (wordProduct falseWaitReturn suffix) :=
+    falseWaitReturn_wordProduct_isUnit_of_positive suffix suffixPositive
+  constructor
+  · rintro ⟨scale, contextualIdentity⟩
+    apply (falseWaitBinaryPumpComparatorWord_projectiveIdentity_iff guess written).1
+    refine ⟨scale, ?_⟩
+    apply suffixUnit.mul_right_cancel
+    simpa only [wordProduct_append, Matrix.smul_mul, Matrix.one_mul] using
+      contextualIdentity
+  · intro equality
+    rcases (falseWaitBinaryPumpComparatorWord_projectiveIdentity_iff guess written).2 equality with
+      ⟨scale, comparisonIdentity⟩
+    refine ⟨scale, ?_⟩
+    rw [wordProduct_append, comparisonIdentity, Matrix.smul_mul, Matrix.one_mul]
+
+/-- Arbitrary positive physical context does not weaken exact whole-word comparison. -/
+theorem falseWaitBinaryPumpComparatorWord_context_iff
+    (initial : List Nat) (guess written : List Bool) (suffix : List Nat)
+    (initialPositive : ∀ wait ∈ initial, 0 < wait)
+    (suffixPositive : ∀ wait ∈ suffix, 0 < wait) :
+    (∃ scale : ℚ,
+      wordProduct falseWaitReturn
+          (initial ++ falseWaitBinaryPumpComparatorWord guess written ++ suffix) =
+        scale • wordProduct falseWaitReturn (initial ++ suffix)) ↔
+      guess = written := by
+  have initialUnit : IsUnit (wordProduct falseWaitReturn initial) :=
+    falseWaitReturn_wordProduct_isUnit_of_positive initial initialPositive
+  constructor
+  · rintro ⟨scale, contextualIdentity⟩
+    apply (falseWaitBinaryPumpComparatorWord_suffix_iff guess written suffix
+      suffixPositive).1
+    refine ⟨scale, ?_⟩
+    apply initialUnit.mul_left_cancel
+    simpa only [wordProduct_append, Matrix.mul_assoc, Matrix.mul_smul] using
+      contextualIdentity
+  · intro equality
+    rcases (falseWaitBinaryPumpComparatorWord_suffix_iff guess written suffix
+      suffixPositive).2 equality with ⟨scale, suffixIdentity⟩
+    refine ⟨scale, ?_⟩
+    calc
+      wordProduct falseWaitReturn
+          (initial ++ falseWaitBinaryPumpComparatorWord guess written ++ suffix) =
+          wordProduct falseWaitReturn initial *
+            wordProduct falseWaitReturn
+              (falseWaitBinaryPumpComparatorWord guess written ++ suffix) := by
+            rw [List.append_assoc, wordProduct_append]
+      _ = wordProduct falseWaitReturn initial *
+          (scale • wordProduct falseWaitReturn suffix) := by
+            rw [suffixIdentity]
+      _ = scale •
+          (wordProduct falseWaitReturn initial *
+            wordProduct falseWaitReturn suffix) := by
+            rw [Matrix.mul_smul]
+      _ = scale • wordProduct falseWaitReturn (initial ++ suffix) := by
+            rw [wordProduct_append]
+
 /-- Every wait in an inverse encoding is strictly positive. -/
 theorem falseWaitBinaryPumpInverseEncoding_positive (bits : List Bool) :
     ∀ wait ∈ falseWaitBinaryPumpInverseEncoding bits, 0 < wait := by

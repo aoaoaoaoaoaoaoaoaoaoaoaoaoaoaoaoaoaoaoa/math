@@ -968,6 +968,8 @@ open MatrixMortality
 #print axioms CubicReturn.NonPure.falseWaitBinaryPumpInverseEncoding_chart
 #print axioms CubicReturn.NonPure.falseWaitBinaryPumpComparatorWord_chart
 #print axioms CubicReturn.NonPure.falseWaitBinaryPumpComparatorWord_projectiveIdentity_iff
+#print axioms CubicReturn.NonPure.falseWaitBinaryPumpComparatorWord_suffix_iff
+#print axioms CubicReturn.NonPure.falseWaitBinaryPumpComparatorWord_context_iff
 #print axioms CubicReturn.NonPure.falseWaitBinaryPumpInverseEncoding_positive
 #print axioms CubicReturn.NonPure.falseWaitBinaryPumpInverseEncoding_length
 #print axioms CubicReturn.NonPure.falseWaitBinaryPumpComparatorWord_length

@@ -6066,6 +6066,11 @@ transports (2) to literal physical products:
 Π(I(γ) ++ E(β)) ∼ I            iff γ=β.                     (3)
 ```
 
+Since every positive-wait product is a unit, arbitrary positive prefixes and suffixes cancel
+from the same contextual equality. Replacing the comparator by the empty word inside any
+positive physical context is therefore possible exactly when `γ=β`; context cannot weaken the
+comparison converse.
+
 All inverse readers occur before all writers. This phase order excludes the adjacent,
 opposite-error cancellations that defeated the interleaved local comparator. Each false inverse
 costs `37681`, each true inverse costs `306510`, and each writer costs four returns, so
@@ -6077,10 +6082,11 @@ costs `37681`, each true inverse costs `306510`, and each writer costs four retu
 Every wait in this variable-rate spelling is positive.
 
 **Scope:** both normalized cancellation orders (1), normalized projective identity converse
-(2), physical reader and comparison charts, the literal biconditional (3), positivity, and exact
-length (4) are Lean checked for arbitrary bit lists. This is an algebraic phased-language
-theorem. It does not prove that the unguarded physical comparator avoids a premature first hit,
-or that every arbitrary positive raw word respects the reader/writer phase boundary.
+(2), physical reader and comparison charts, the literal biconditional (3), arbitrary positive
+prefix-and-suffix contextual cancellation, positivity, and exact length (4) are Lean checked for
+arbitrary bit lists. This is an algebraic phased-language theorem. It does not prove that the
+unguarded physical comparator avoids a premature first hit, or that every arbitrary positive
+raw word respects the reader/writer phase boundary.
 
 **Artifact:**
 `CubicReturn.NonPure.falseWaitBinaryPumpNormalizedComparator_identity_iff` and

@@ -21,7 +21,8 @@ normalized product is identity when `γ=β`.
 For the converse, multiply a putative projective identity by the normalized writer product of
 `γ`. This gives projective equality of the writer products of `β` and `γ`; the `R32-S67`
 projective-freeness theorem forces `β=γ`. Lean then transports the biconditional to the literal
-physical word.
+physical word. Since every positive-wait product is a unit, Lean also cancels arbitrary positive
+prefixes and suffixes and proves that no surrounding positive context weakens this converse.
 
 All inverse readers precede all writers, so the theorem does not admit the interleaved local
 mismatch cancellations. The exact physical length is the sum of `37681` for each false guessed
@@ -38,6 +39,7 @@ positive.
 | physical inverse-encoding chart | Lean checked |
 | physical comparator chart | Lean checked |
 | literal physical projective identity iff words agree | Lean checked |
+| arbitrary positive prefix-and-suffix contextual converse | Lean checked |
 | positivity and exact variable-rate length | Lean checked |
 | unguarded first-hit safety | open |
 | arbitrary raw-word phase enforcement | open |

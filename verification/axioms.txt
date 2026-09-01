@@ -2204,6 +2204,12 @@
 'MatrixMortality.CubicReturn.NonPure.falseWaitBinaryPumpComparatorWord_projectiveIdentity_iff' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitBinaryPumpComparatorWord_suffix_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CubicReturn.NonPure.falseWaitBinaryPumpComparatorWord_context_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.CubicReturn.NonPure.falseWaitBinaryPumpInverseEncoding_positive' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
