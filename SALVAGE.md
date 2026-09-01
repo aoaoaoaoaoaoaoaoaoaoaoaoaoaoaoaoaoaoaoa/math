@@ -153,6 +153,7 @@ file owns the mathematical stock.
 | [`MM-S53`](#mm-s53-complete-all-erasure-first-entry-extinction) | obstruction | every non-singleton all-erasure first block misses the next multi-role pole from a lawful two-`c` raw head | formalized | active |
 | [`MM-S54`](#mm-s54-rightmost-rule-phase-toggle-trichotomy) | structure theorem and obstruction | the rightmost rule has one of three exact phase-toggle depth profiles, and a leading `R_cD_c⁺` first block is impossible | formalized | active |
 | [`MM-S55`](#mm-s55-physical-role-block-shell-completion) | structure theorem and obstruction | every physical swapped role block supplies its expected pole shell, coefficient depth, and lower unit, yielding a shell-free first-multi extinction theorem | formalized | active |
+| [`MM-S56`](#mm-s56-exact-rule-resonance-grammar) | structure theorem and obstruction | exact comparison depths reduce every later rightmost rule to a finite raw-head and rightmost-`b` resonance grammar | formalized | active |
 | [`MM-S57`](#mm-s57-centered-history-defect-transport) | structure theorem and obstruction | an arbitrary centered fold has one exact raw-head correction; sliding-window reuse is valid exactly at an ordinary-ray return | formalized | active |
 | [`R32-S01`](#r32-s01-split-return-normal-form) | structure theorem | rank-two cuts reduce one-unit binary mortality to a `2 × 2` return recurrence | formalized | graduated |
 | [`R32-S02`](#r32-s02-two-plane-edge-square) | structure theorem | two rank-two generators are a two-vertex square of `2 × 2` edges | formalized | graduated |
@@ -6099,6 +6100,75 @@ in (2) on every remaining branch.
 
 **Next:** resolve the position-two and position-three boundary resonances, then impose the
 off-diagonal companion shell on later rules and `b`-bearing words.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S56: Exact rule-resonance grammar
+
+**Kind:** structure theorem and obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+Let `A_n` be the distinguished raw residual for the all-`D_c` word of role width `n`. A lawful
+two-`c` raw head ends in a nonempty run of sevens of width `h≤β−1`. Lean proves the exact
+five-depth, not merely an upper bound:
+
+```text
+h+2≤β:   ν₅(A_n)=min(n,h+1),
+h=β−1:   ν₅(A_n)=min(n,2β−1).                         (1)
+```
+
+Now write a rule-bearing block at its rightmost rule as `u R_x D(t)`, with `|t|=s`. If its tag
+word contains `b`, write the same tag word at its rightmost `b` as `v b c^r`. Relative to
+`A_n`, the physical residual is the sum of three terms with exact five-depths
+
+```text
+base:    min(n,h+1) or min(n,2β−1),
+marker:  r+β+2,
+phase:   s+2 if u=[]; otherwise s+1.                 (2)
+```
+
+The physical target is strictly deeper than the phase term. Hence the minimum among (2) must
+occur at least twice. `threeTerm_deep_forces_minimum_resonance` proves this stronger repeated-
+minimum statement, including the ordering condition; a bare equality of two nonminimal depths
+does not survive.
+
+Solving the regular-head equations collapses them to
+
+```text
+u≠[],    s=h.                                         (3)
+```
+
+At the exceptional head, the remaining arithmetic grammar has three arms: the same phase
+frontier `u≠[]`, `s=2β−2`, with marker depth no smaller; equality of the base and marker depths
+below the phase depth; or equality of the marker and phase depths below the base depth. For an
+all-`c` word there is no marker term: the rightmost rule is either in position two, or (3)
+holds, with `s=2β−2` in the exceptional case. A leading rule is already excluded by
+[`MM-S54`](#mm-s54-rightmost-rule-phase-toggle-trichotomy).
+
+**Scope:** this is the complete five-adic positional classifier for distinguished raw-head
+entry blocks with a rightmost rule and erasure tail. It does not yet prove that the displayed
+equal-depth exceptional arms cancel, nor does it cover generalized carriers or singleton
+targets.
+
+**Use:** delete every rule-bearing spelling outside (3), the position-two all-`c` boundary,
+and the three exceptional relative-position arms. The remaining work is coefficient-level
+cancellation and the two-adic boundary, not language enumeration.
+
+**Formalization:**
+[`MatrixMortality/DecimalSetterRuleResonance.lean`](MatrixMortality/DecimalSetterRuleResonance.lean),
+through `allCDeletion_peeledDoubleCHead_hasValue_five`,
+`rightmostB_allEraseResidual_sub_allC_hasValue_five`,
+`bBearingRightmostRule_rawHead_forces_resonance`,
+`rightmostRule_minimumResonance_positionGrammar`, and
+`allCRightmostRule_rawHead_forces_boundary`.
+
+**Artifact:**
+[`audits/m53-exact-rule-resonance-grammar-2026-08-31.md`](audits/m53-exact-rule-resonance-grammar-2026-08-31.md).
+
+**Next:** compare normalized leading coefficients on the three exceptional arms and resolve the
+all-`c` position-two boundary with its stronger two-adic phase divisibility.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).

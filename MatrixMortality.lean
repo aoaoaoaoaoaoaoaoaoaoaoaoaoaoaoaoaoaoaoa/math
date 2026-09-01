@@ -197,6 +197,7 @@ import MatrixMortality.DecimalSetterSuffix
 import MatrixMortality.DecimalSetterAncestry
 import MatrixMortality.DecimalSetterPositioned
 import MatrixMortality.DecimalSetterPhase
+import MatrixMortality.DecimalSetterRuleResonance
 import MatrixMortality.SwappedSetterCompiler
 import MatrixMortality.DecimalSetterBranchSeparation
 import MatrixMortality.SwappedSetterMultitransfer
