@@ -230,10 +230,15 @@ macro: for `e=0,1`, the matched pair `r=9k+3e+2`, `t=3u+e` halts whenever
 [`MM-S78`](SALVAGE.md#mm-s78-phase-mismatched-six-c-drainage) cuts all four remaining
 phase-mismatched residue pairs. The complementary pair `t+e=3u+1` halts when
 `k+u≡2 (mod 3)`; the shear-residue-two pair `t=3u+2` halts when `u≡e (mod 3)`. Each failed
-class reaches an exact six-event residual with one active `c` pair, but no theorem yet closes
-those successors.
+class reaches an exact six-event residual with one active `c` pair.
+[`MM-S80`](SALVAGE.md#mm-s80-phase-mismatched-finite-pair-nucleus) identifies those residuals
+as centered `D/T` pair queues, proves their partial inverse-ternary map has an omitted central
+image interval, places both defect families inside it, and closes all four mismatched pairs.
+The remaining sheared seam is the matched joint class from `MM-S75`, the residue-eight
+continuation, and sources outside the sheared plane.
 All cuts are checked in
-`MatrixMortality/SeparatedTwoCShear.lean`. The diagonal audit trail is
+`MatrixMortality/SeparatedTwoCShear.lean` and
+`MatrixMortality/SeparatedTwoCShearNucleus.lean`. The diagonal audit trail is
 `audits/m53-separated-two-c-orbits-2026-08-31.md`,
 `audits/m53-separated-two-c-residue-eight-2026-08-31.md`,
 `audits/m53-separated-two-c-residue-five-2026-08-31.md`, and
@@ -957,8 +962,10 @@ Three live routes remain.
    matched `r≡2,r-s≡0 (mod 3)` and `r≡5,r-s≡1 (mod 3)` pairs.
    [`MM-S78`](SALVAGE.md#mm-s78-phase-mismatched-six-c-drainage) then drains one joint
    subphase in each of the four phase-mismatched pairs and identifies the exact surviving
-   active pair. The next source-level cut is that finite successor nucleus or coupled triples
-   outside the sheared plane, not another diagonal or adjacent-`c` example.
+   active pair. [`MM-S80`](SALVAGE.md#mm-s80-phase-mismatched-finite-pair-nucleus) closes all
+   eight survivors by an exact centered `D/T` map and finite predecessor-free image gap. The
+   next source-level cut is the matched survivor, the residue-eight continuation, or coupled
+   triples outside the sheared plane, not another diagonal or adjacent-`c` example.
 
 The decimal setter is now the sharpest constructive route. The ternary swap remains useful
 because its suffix and divisor-ray theory is mature; the decimal instance has stronger real

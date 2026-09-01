@@ -3262,6 +3262,7 @@ fixed-rank decision problem.
 | `SeparatedTwoCResidueTwo.lean` | six-event active-`c` cut, canonical four-`c` reproduction macro, and halting for `n≡2,20 (mod 27)` and `n≡11 (mod 81)` |
 | `SeparatedTwoCDiagonal.lean` | exact one/two-block return maps, finite injective centered-division extinction, and the complete diagonal classification |
 | `SeparatedTwoCShear.lean` | canonical cycle law for every nontrivial even two-`c` body off middle phase two, coupled entry on a sheared diagonal, and four-/six-/ten-active-`c` drainage including mixed crossing strokes |
+| `SeparatedTwoCShearNucleus.lean` | centered `D/T` pair normal form, exact partial inverse-ternary map, finite image-gap extinction, and closure of all four phase-mismatched sheared families |
 | `TerminalForkCore.lean` | representation-independent one-or-two-dimensional invariant fork core forced by exact `bcbc` recognition |
 | `AffineRecognizer.lean` | generic singular three-state guard-and-carry representation calculus |
 | `BranchingRecognizer.lean` | complete `bcbc` residual grammar and rational three-state recognizer |
@@ -3793,6 +3794,9 @@ fixed-rank decision problem.
 | The matched six-`c` macro drains two joint phases in middle residues two and five modulo nine | `SeparatedTwoCShear.shearedMatched_tagHaltsFrom` |
 | The complementary phase-mismatch macro drains when its joint quotient is two modulo three | `SeparatedTwoCShear.shearedComplementary_tagHaltsFrom` |
 | The shear-residue-two mismatch macro drains when its shear quotient matches the middle quotient phase | `SeparatedTwoCShear.shearedShearResidueTwo_tagHaltsFrom` |
+| A centered sheared pair defect in the omitted image interval is accessible | `SeparatedTwoCShear.shearedCentered_double_accessible`, `SeparatedTwoCShear.shearedCentered_triple_accessible` |
+| Both phase-mismatched residual families are exact centered pair queues with defects in that image gap | `SeparatedTwoCShear.shearedComplementaryResidual_eq_centered`, `SeparatedTwoCShear.shearedShearResidueTwoResidual_eq_centered`, `SeparatedTwoCShear.shearedComplementaryDefect_imageGap`, `SeparatedTwoCShear.shearedShearResidueTwoDefect_imageGap` |
+| Every coupled sheared source over middle residues two and five modulo nine whose shear phase differs from its middle quotient phase halts | `SeparatedTwoCShear.shearedPhaseMismatch_tagHaltsFrom` |
 | Every binary prefix-machine word has one decoded block per row | `prefixMachine_run`, `WeightedTransducer.wordProduct_apply` |
 | Prefix-machine mortality iff five-matrix mortality | `prefixMachine_mortal_iff_normalized` |
 | Both prefix generators share the ten-dimensional image | `prefixProjection_generator` |
@@ -4303,9 +4307,12 @@ residue pairs are further cut by a single six-active-`c` theorem: the matched pa
 `r=9k+3e+2`, `r-s=3u+e` for `e=0,1` halt whenever `k+2u+2e+2` is nonzero modulo three.
 Two mixed-stroke six-active-`c` theorems cut the four phase-mismatched pairs. When
 `r-s+e=3u+1`, the source halts for `k+u≡2 (mod 3)`; when `r-s=3u+2`, it halts for
-`u≡e (mod 3)`. Every failed mismatch reaches an exact residual with one active `c` pair, but
-the later finite-simulation drainage has not been promoted to a theorem. The remaining joint
-phases and coupled triples outside that plane remain open.
+`u≡e (mod 3)`. Every failed mismatch reaches an exact residual with one active `c` pair.
+`SeparatedTwoCShearNucleus.lean` identifies all eight residual subphases as centered `D/T`
+pair queues, proves their partial inverse-ternary map has a finite predecessor-free image gap,
+and places both initial defect families inside it. Thus every one of the four mismatched pairs
+halts. The matched joint class, residue-eight continuations, and coupled triples outside the
+sheared plane remain open.
 No declaration claims that the full two-`c` stratum is universal or decidable.
 
 ## Prior Formalizations
