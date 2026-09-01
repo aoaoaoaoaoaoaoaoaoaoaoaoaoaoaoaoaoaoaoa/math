@@ -726,8 +726,9 @@ Inside the even-length/even-`b` rectangle, only first-`b` position `0` remains: 
 M4-S42, position `2` is M4-S34, positions `3` through `11` are M4-S43, positions at least `12`
 are M4-S28, and the unary rays are M4-S22/M4-S24. Exact computational reconnaissance of the
 leading-`b` cylinder leaves 3,244 outer pairs and 146 suffix survivors concentrated around
-`x=203`, with `y` roughly `6950` through `8117`; these counts are provisional evidence, not a
-theorem. Extract their common algebraic parameter before generating another certificate.
+`x=203`; its 132 survivors there span `6950≤y≤9880`, with sparse high blocks. These
+counts are provisional evidence, not a theorem. Extract their common algebraic parameter before
+generating another certificate.
 
 Two original-family nodes survive, and they must not be conflated.
 
