@@ -1748,6 +1748,7 @@ The setter-projective audit now also exposes a kernel-friendly carry theorem:
 | [`MM-S51`](SALVAGE.md#mm-s51-double-deletion-ratio-chamber-extinction) | exact `D_c²` discrepancy chamber, physical role-block ratio gap, and complete expected-shell first multi-transfer extinction |
 | [`MM-S55`](SALVAGE.md#mm-s55-physical-role-block-shell-completion) | automatic physical pole shells, coefficient depths, lower-code units, initial-block dichotomy, and shell-free first-multi extinction |
 | [`MM-S57`](SALVAGE.md#mm-s57-centered-history-defect-transport) | exact centered continuant, raw-head/ordinary-ray equivalence, last-resonance correction, normalized threshold recurrence, singleton sign split, and ordinary-return adapter |
+| [`MM-S59`](SALVAGE.md#mm-s59-multiplicative-threshold-suffix-carry) | multiplicative target cross-product, exact balanced suffix carry, finite fixed-carrier window, Neary erasure/rule contractions, and the erasure-tail carrier-gap cut |
 
 `MM-S08` is now discharged in
 [`SwappedSetterSingletonShell.lean`](MatrixMortality/SwappedSetterSingletonShell.lean).
@@ -2094,6 +2095,17 @@ nonzero history-defect correction, not an omitted shell constructor. Normalizing
 denominator gives one exact Möbius recurrence for `δ=D/y`; a target is a pole exactly at
 `δ=(R/H)(P/V)`. Terminal equality is the distinguished threshold `R/H`. The singleton images
 `D_c` and `D_b` straddle zero, formally excluding a one-sided sign trap.
+
+Record [`MM-S59`](SALVAGE.md#mm-s59-multiplicative-threshold-suffix-carry) restores exact suffix
+ancestry without falsely identifying a later carrier with a raw code difference. Writing the
+projective defect coordinate as `(R/H)(n/d)`, any target pole cross-multiplies to `dP=nV`.
+Reading aligned swapped-ternary suffixes backwards yields an exact balanced carry whose states
+remain in `[-(|n|+|d|), |n|+|d|]`. The reversed Neary erasure and rule blocks act by
+`c+2(d−n)=3c'` and `c+26d−14n=27c'`. If a target ends in `β` erasure tiles, the common
+all-erasure suffix forces `3^β ∣ d−n`; the strict gap bound `|d−n|<3^β` therefore forces
+`d=n`, target-code equality, and `TagHaltsFrom`. The theorem leaves the carrier-gap bound open:
+its finite carry window depends on the primitive carrier height and is not a uniform quotient
+over arbitrary histories.
 
 Record [`MM-S21`](SALVAGE.md#mm-s21-bounded-decimal-suffix-cycles) closes the fixed-precision
 suffix-descent lane. `DecimalSetterSuffix.cycleDefect_lift` gives an explicit one-digit lift for
