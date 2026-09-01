@@ -194,6 +194,7 @@ file owns the mathematical stock.
 | [`R32-S55`](#r32-s55-effective-returnsquare-decision) | decision theorem | every reduced positive rational ReturnSquare parameter at base at least four is decided by an explicit finite candidate set | formalized | active |
 | [`R32-S56`](#r32-s56-terminal-weighted-shallow-classification) | decidable stratum | the rightmost pure-denominator return multiplies the remaining inverse-word budget, forcing resonance through denominator `2q²−q` | formalized | active |
 | [`R32-S57`](#r32-s57-free-cubic-continuant-radix-stack) | structure theorem and compiler mechanism | two positive fixed-cubic macro returns form a free binary affine radix stack with projectively distinct endpoint-zero bridge extensions | formalized | active |
+| [`R32-S58`](#r32-s58-positive-cubic-radix-readers) | compiler mechanism and obstruction | each fixed-cubic radix digit has a positive projective inverse, but two opposite wrong reads cancel exactly | formalized | active |
 | [`R32-M01`](#r32-m01-generic-reverse-edge-compiler) | partial mechanism | projective incidence generically embeds into a compatible two-plane edge square | formalized | active |
 | [`R32-M02`](#r32-m02-finite-quotient-sieve) | partial mechanism | finite monoid quotients give complete modular no-certificates for fixed candidates | formalized | active |
 | [`R32-M03`](#r32-m03-two-scale-return-conversion) | partial mechanism | a minimal two-scale return pencil has nonresonant multi-return zeros | formalized | active |
@@ -8271,6 +8272,67 @@ projective products. For a compiler, seek a positive recurrence word which reads
 compares the base-`(4,25)` digits while making every malformed read nonterminal. For a decision
 proof, show that every possible reader factors through a decidable affine quotient despite the
 free write stack.
+
+### R32-S58: Positive cubic radix readers
+
+**Kind:** compiler mechanism and obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+The terminal loop semigroup contains reciprocal-ratio maps and translations of both signs. For
+the two digits `d₀=274`, `d₁=149`, Lean checks positive physical words representing
+
+```text
+R_b=[[25/4,−d_b/48],[0,1]].
+```
+
+The first reader has length `2089`; it combines a reciprocal-ratio loop with `39` copies of a
+positive translation and `26` copies of a negative translation. The second has length `1166`
+and uses translation multiplicities `1` and `30`. The unexpanded affine certificates are
+
+```text
+E₀(z)=25z/4+199285/6,  P₀(z)=z+2839/108,    N₀(z)=z−189665/144,
+E₁(z)=25z/4+9159/500,  P₁(z)=z+31457/6480, N₁(z)=z−266051/303750,
+
+N₀²⁶P₀³⁹E₀ : z↦25z/4−274/48,
+N₁³⁰P₁E₁   : z↦25z/4−149/48.
+```
+
+If `G_b=[[4,d_b/12],[0,25]]` is the radix writer, then
+
+```text
+R_b G_b=25I.
+```
+
+Every physical reader wait is positive. A correct reader therefore deletes its matching
+physical writer and preserves every following return word up to a nonzero scalar. In
+particular, it pops the head of every `R32-S57` encoding.
+
+The same calculation identifies the exact soundness defect:
+
+```text
+R₀G₁=25[[1,−125/48],[0,1]],
+R₁G₀=25[[1, 125/48],[0,1]],
+(R₀G₁)(R₁G₀)=625I.
+```
+
+Thus two opposite wrong reads already form a positive physical projective identity. A terminal
+identity check cannot distinguish them from two correct pops.
+
+**Scope:** the former write-only seam is closed: both radix letters have positive recurrence-word
+projective inverses. This is not yet a sound stack compiler. Any universality reduction must add
+a local mismatch trap or restrict the source grammar so opposite defects cannot coexist. The
+result does not classify arbitrary upper-triangular returns or decide the cubic family.
+
+**Artifact:** `CubicReturn.NonPure.continuantRadixReaderWord_positive`,
+`continuantRadixReader_mul_generator`, `continuantRadixReaderWord_pop_encoding`,
+`continuantRadixReader_mismatch`, and `continuantRadixReaderWord_two_mismatches` in
+[`CubicContinuantReader.lean`](MatrixMortality/CubicContinuantReader.lean), with audit
+[`m32-cubic-continuant-reader-2026-08-31.md`](audits/m32-cubic-continuant-reader-2026-08-31.md).
+
+**Use:** stop searching for a reader. Search for an independent mismatch trap or a one-sided
+source language in which the signed parabolic defect cannot cancel. Any proposed terminal-only
+reader is unsound unless it distinguishes the displayed two-mismatch identity.
 
 ### R32-M01: Generic reverse edge compiler
 
