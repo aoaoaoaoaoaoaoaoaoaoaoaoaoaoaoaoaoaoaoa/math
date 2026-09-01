@@ -1714,6 +1714,17 @@ phase as well. See
 [`R32-O26`](SALVAGE.md#r32-o26-projective-neutral-insertion-invisibility) and
 [`m32-projective-neutral-insertion-2026-08-31.md`](audits/m32-projective-neutral-insertion-2026-08-31.md).
 
+The positive bridge language already has a small exact boundary quotient. On the separator row,
+waits `1,5,14` are scalar identities, while `[4,6]` rewrites to `[13]` and `[3,8,1]` rewrites
+to `[12,12]`, each with a nonzero rational scale. These five identities reduce all eight hits in
+the bounded length-eight, waits-at-most-thirty census to the two formal length-seven bridge cores;
+Lean checks the indexed reductions and all resulting zeros. The census completeness remains
+computational. The decision lane can now ask a sharp algebraic question: do these aliases extend
+to a terminating, confluent rewrite system for every positive scalar bridge, or do deeper words
+produce a third irreducible core? See
+[`R32-S62`](SALVAGE.md#r32-s62-terminal-row-bridge-aliases) and
+[`m32-cubic-bridge-aliases-2026-08-31.md`](audits/m32-cubic-bridge-aliases-2026-08-31.md).
+
 ### ReturnSquare laboratory
 
 [`R32-S03`](SALVAGE.md#r32-s03-returnsquare-normal-form) is the first completely normalized

@@ -1033,6 +1033,15 @@ digit per level.
 See `R32-O26` and
 [`audits/m32-projective-neutral-insertion-2026-08-31.md`](audits/m32-projective-neutral-insertion-2026-08-31.md).
 
+The punctuation module also records the first exact quotient structure of the remaining positive
+bridge language. Three one-letter prefixes act as scalar identities on the terminal row, and two
+multi-letter prefixes have exact shorter row aliases. Lean packages the eight hits returned by a
+bounded length-eight census, proves that every one reduces projectively to one of the two
+length-seven bridge cores, and derives all eight full zeros from those core incidences. The
+bounded census is computational evidence; the row identities and indexed reductions are kernel
+checked. See `R32-S62` and
+[`audits/m32-cubic-bridge-aliases-2026-08-31.md`](audits/m32-cubic-bridge-aliases-2026-08-31.md).
+
 The rank-(2,2) graph is no longer an independent residue. `RankTwoPunctuation` proves that every
 compatible square with one rank-one loop and three units transports exactly to the existing raw
 reverse compiler [`R32-M01`](SALVAGE.md#r32-m01-generic-reverse-edge-compiler). Its intrinsic
@@ -1875,7 +1884,7 @@ fixed-rank decision problem.
 | `CubicContinuantNeutrality.lean` | contextual insertion/deletion invariance of correct projective-identity read-write blocks |
 | `CubicContinuantMismatchClock.lean` | contracting signed-error clock and exact endpoint zero test for balanced cubic radix comparisons |
 | `CubicContinuantSelfBalance.lean` | 2-adic and 5-adic rejection of every incorrect cubic-comparator cleanup count |
-| `CubicContinuantPunctuation.lean` | unique singular return and complete scalar-bridge reduction of the fixed cubic language |
+| `CubicContinuantPunctuation.lean` | unique singular return, scalar-bridge reduction, and exact terminal-row bridge aliases of the fixed cubic language |
 | `EdgeCompression.lean` | exact adjacent-edge compression for split finite-rank families |
 | `TwoPlaneEdges.lean` | compatible two-plane realization of a `2 × 2` edge square and exact rank-two certificates |
 | `ReverseEdge.lean` | generic projective-incidence reverse compiler, basis adaptation, and all-path converse |

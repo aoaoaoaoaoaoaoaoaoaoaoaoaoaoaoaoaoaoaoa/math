@@ -11,6 +11,8 @@ one scalar bridge between two copies of that rank-one separator.
 
 namespace MatrixMortality.CubicReturn.NonPure
 
+open scoped Matrix
+
 /-- Integral coefficient left after removing the constant factor from a false-wait determinant. -/
 def falseWaitDeterminantCoefficient (state : CubicDefectState) : ℤ :=
   3 * state.first ^ 2 - 2 * state.first * state.third - state.second ^ 2 -
@@ -171,5 +173,114 @@ theorem falseWait_second_positive_bridge_zero :
     norm_num [wordProduct_cons, wordProduct_nil, falseWaitReturn_eq_state,
       falseWaitReturnOfState, cubicDefectState, CubicDefectState.next,
       Matrix.mul_apply, Fin.sum_univ_succ]
+
+/-- Three positive returns act projectively as the identity on the separator row. -/
+theorem falseWaitSeparatorRow_triangular_prefixes :
+    falseWaitSeparatorRow ᵥ* falseWaitReturn 1 =
+        (60 : ℚ) • falseWaitSeparatorRow ∧
+      falseWaitSeparatorRow ᵥ* falseWaitReturn 5 =
+        (-150 : ℚ) • falseWaitSeparatorRow ∧
+      falseWaitSeparatorRow ᵥ* falseWaitReturn 14 =
+        (510 : ℚ) • falseWaitSeparatorRow := by
+  constructor
+  · ext i
+    fin_cases i <;>
+      norm_num [falseWaitSeparatorRow, falseWaitReturn_eq_state,
+        falseWaitReturnOfState, cubicDefectState, CubicDefectState.next,
+        Matrix.vecMul, dotProduct, Fin.sum_univ_succ]
+  constructor <;>
+    ext i <;>
+    fin_cases i <;>
+      norm_num [falseWaitSeparatorRow, falseWaitReturn_eq_state,
+        falseWaitReturnOfState, cubicDefectState, CubicDefectState.next,
+        Matrix.vecMul, dotProduct, Fin.sum_univ_succ]
+
+/-- Two exact terminal-row rewrites replace the boundary words `[13]` and `[12,12]` by longer
+positive words without changing their projective row action. -/
+theorem falseWaitSeparatorRow_boundary_rewrites :
+    falseWaitSeparatorRow ᵥ*
+        wordProduct falseWaitReturn [4, 6] =
+          (-7 : ℚ) •
+            (falseWaitSeparatorRow ᵥ* wordProduct falseWaitReturn [13]) ∧
+      falseWaitSeparatorRow ᵥ*
+        wordProduct falseWaitReturn [3, 8, 1] =
+          (30 / 13 : ℚ) •
+            (falseWaitSeparatorRow ᵥ* wordProduct falseWaitReturn [12, 12]) := by
+  constructor <;>
+    ext i <;>
+    fin_cases i <;>
+      norm_num [falseWaitSeparatorRow, wordProduct_cons, wordProduct_nil,
+        falseWaitReturn_eq_state, falseWaitReturnOfState, cubicDefectState,
+        CubicDefectState.next, Matrix.mul_apply, Matrix.vecMul, dotProduct,
+        Fin.sum_univ_succ]
+
+/-- The two exact length-seven positive bridge cores. -/
+def falseWaitLengthSevenBridgeCore : Fin 2 → List Nat :=
+  ![[13, 15, 29, 11, 13, 7, 8],
+    [12, 12, 8, 12, 12, 15, 8]]
+
+/-- The eight bridge hits in the exact length-eight, waits-at-most-thirty census. -/
+def falseWaitLengthEightBridgeHit : Fin 8 → List Nat :=
+  ![[1, 13, 15, 29, 11, 13, 7, 8],
+    [4, 6, 15, 29, 11, 13, 7, 8],
+    [5, 13, 15, 29, 11, 13, 7, 8],
+    [14, 13, 15, 29, 11, 13, 7, 8],
+    [1, 12, 12, 8, 12, 12, 15, 8],
+    [3, 8, 1, 8, 12, 12, 15, 8],
+    [5, 12, 12, 8, 12, 12, 15, 8],
+    [14, 12, 12, 8, 12, 12, 15, 8]]
+
+/-- Core selected by each indexed length-eight bridge hit. -/
+def falseWaitLengthEightBridgeCoreIndex : Fin 8 → Fin 2 :=
+  ![0, 0, 0, 0, 1, 1, 1, 1]
+
+/-- Nonzero terminal-row scale reducing each length-eight hit to its selected core. -/
+def falseWaitLengthEightBridgeScale : Fin 8 → ℚ :=
+  ![60, -7, -150, 510, 60, 30 / 13, -150, 510]
+
+/-- Every bounded length-eight bridge hit has terminal-row action equal to a nonzero scalar
+multiple of one of the two length-seven cores. -/
+theorem falseWaitLengthEightBridgeHit_row_reduction (index : Fin 8) :
+    falseWaitSeparatorRow ᵥ*
+        wordProduct falseWaitReturn (falseWaitLengthEightBridgeHit index) =
+      falseWaitLengthEightBridgeScale index •
+        (falseWaitSeparatorRow ᵥ*
+          wordProduct falseWaitReturn
+            (falseWaitLengthSevenBridgeCore
+              (falseWaitLengthEightBridgeCoreIndex index))) := by
+  fin_cases index <;>
+    ext coordinate <;>
+    fin_cases coordinate <;>
+      norm_num [falseWaitLengthEightBridgeHit, falseWaitLengthEightBridgeScale,
+        falseWaitLengthSevenBridgeCore, falseWaitLengthEightBridgeCoreIndex,
+        falseWaitSeparatorRow, wordProduct_cons, wordProduct_nil,
+        falseWaitReturn_eq_state, falseWaitReturnOfState, cubicDefectState,
+        CubicDefectState.next, Matrix.mul_apply, Matrix.vecMul, dotProduct,
+        Fin.sum_univ_succ]
+
+private theorem falseWaitLengthSevenBridgeCore_scalar_zero (index : Fin 2) :
+    (falseWaitSeparatorRow ᵥ*
+        wordProduct falseWaitReturn (falseWaitLengthSevenBridgeCore index)) ⬝ᵥ
+      falseWaitSeparatorColumn = 0 := by
+  fin_cases index <;>
+    norm_num [falseWaitLengthSevenBridgeCore, falseWaitSeparatorRow,
+      falseWaitSeparatorColumn, wordProduct_cons, wordProduct_nil,
+      falseWaitReturn_eq_state, falseWaitReturnOfState, cubicDefectState,
+      CubicDefectState.next, Matrix.mul_apply, Matrix.vecMul, dotProduct,
+      Fin.sum_univ_succ]
+
+/-- Every indexed bounded length-eight hit gives an exact zero between the singular returns. -/
+theorem falseWaitLengthEightBridgeHit_zero (index : Fin 8) :
+    falseWaitReturn 0 *
+        wordProduct falseWaitReturn (falseWaitLengthEightBridgeHit index) *
+      falseWaitReturn 0 = 0 := by
+  have scalar_zero :
+      (falseWaitSeparatorRow ᵥ*
+          wordProduct falseWaitReturn (falseWaitLengthEightBridgeHit index)) ⬝ᵥ
+        falseWaitSeparatorColumn = 0 := by
+    rw [falseWaitLengthEightBridgeHit_row_reduction, smul_dotProduct,
+      falseWaitLengthSevenBridgeCore_scalar_zero, smul_zero]
+  rw [falseWaitReturn_zero_eq_outer,
+    outer_mul, outer_mul_outer, scalar_zero, zero_smul]
 
 end MatrixMortality.CubicReturn.NonPure

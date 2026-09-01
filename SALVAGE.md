@@ -134,6 +134,7 @@ file owns the mathematical stock.
 | [`R32-S60`](#r32-s60-self-balancing-cubic-comparator-cleanup) | compiler mechanism | the split endpoint bridge rejects every excess or deficient cleanup-reader count by incompatible 2-adic and 5-adic parity | formalized | active |
 | [`R32-S61`](#r32-s61-sole-singular-cubic-punctuation) | structure theorem | wait zero is the unique nonunit return, and mortality of the complete fixed family is exactly one scalar bridge over positive waits | formalized | active |
 | [`R32-O26`](#r32-o26-projective-neutral-insertion-invisibility) | obstruction | nonzero scalar-identity words are mortality-invisible, and the cubic clock admits an explicit positive radix-carry identity | formalized | graduated |
+| [`R32-S62`](#r32-s62-terminal-row-bridge-aliases) | structure theorem | exact triangular prefixes and boundary rewrites reduce all eight bounded length-eight bridge hits to two length-seven cores | formalized | active |
 | [`R32-M01`](#r32-m01-generic-reverse-edge-compiler) | partial mechanism | projective incidence generically embeds into a compatible two-plane edge square | formalized | active |
 | [`R32-M02`](#r32-m02-finite-quotient-sieve) | partial mechanism | finite monoid quotients give complete modular no-certificates for fixed candidates | formalized | active |
 | [`R32-M03`](#r32-m03-two-scale-return-conversion) | partial mechanism | a minimal two-scale return pencil has nonresonant multi-return zeros | formalized | active |
@@ -4659,6 +4660,62 @@ instance-dependent endpoint geometry in which the relevant block is not a scalar
 depends on counting or delimiting scalar-identity blocks, and reject every clock grammar that
 does not bound the signed multiplicity at each level. Add a genuinely independent control
 observable, or formulate the compiler modulo the neutral congruence from the outset.
+
+### R32-S62: Terminal-row bridge aliases
+
+**Kind:** structure theorem
+**Evidence:** formalized
+**Disposition:** active
+
+Let `r=[0,1]` be the separator row from `R32-S61`. Three individual positive returns are
+projectively invisible at the left bridge boundary:
+
+```text
+rM₁=60r,       rM₅=−150r,       rM₁₄=510r.           (1)
+```
+
+Two longer boundary words have exact shorter aliases:
+
+```text
+rM₄M₆=−7rM₁₃,
+rM₃M₈M₁=(30/13)rM₁₂M₁₂.                              (2)
+```
+
+An exhaustive exact search over length-eight positive bridges with waits at most `30` returned
+eight hits. Four reduce to the core
+
+```text
+A=[13,15,29,11,13,7,8]
+```
+
+by prefix scales `60,−7,−150,510`; the other four reduce to
+
+```text
+B=[12,12,8,12,12,15,8]
+```
+
+by scales `60,30/13,−150,510`. Lean indexes the eight words, their selected core, and their
+scale, proves every terminal-row reduction exactly, and derives all eight full bridge zeros from
+the two core scalar zeros and rank-one outer algebra. Thus none of the bounded length-eight hits
+is a new semantic core.
+
+**Scope:** the five identities (1)–(2), all eight row reductions, and all eight resulting zeros
+are formalized. Exhaustiveness of the bounded census is computational evidence. A larger exact
+length-seven census with the first six waits at most `200` and the last at most `50` found only
+the two cores; that statement is also computational, not a global classification. The aliases
+suggest a rewrite quotient for the positive bridge language but do not prove termination,
+confluence, or a finite normal-form theorem.
+
+**Artifact:** `CubicReturn.NonPure.falseWaitSeparatorRow_triangular_prefixes`,
+`falseWaitSeparatorRow_boundary_rewrites`,
+`falseWaitLengthEightBridgeHit_row_reduction`, and
+`falseWaitLengthEightBridgeHit_zero` in
+[`CubicContinuantPunctuation.lean`](MatrixMortality/CubicContinuantPunctuation.lean), with audit
+[`m32-cubic-bridge-aliases-2026-08-31.md`](audits/m32-cubic-bridge-aliases-2026-08-31.md).
+
+**Use:** quotient terminal bridge prefixes by (1)–(2) before any finite search or decision
+argument. Test whether their completion yields a terminating normal form; do not count the eight
+bounded hits as independent bridge phenomena.
 
 ### R32-M01: Generic reverse edge compiler
 
