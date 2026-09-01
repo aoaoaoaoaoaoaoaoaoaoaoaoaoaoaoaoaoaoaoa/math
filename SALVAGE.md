@@ -125,6 +125,7 @@ file owns the mathematical stock.
 | [`R32-S51`](#r32-s51-weighted-tail-adjugate-certificate) | structure theorem | every positive-valuation bridge zero has one fixed-weight adjugate tail followed by a single geometric-ray incidence | formalized | active |
 | [`R32-S52`](#r32-s52-deep-pure-denominator-synchronization) | decidable stratum | a pure-denominator prime deeper than twice the complete tail weight fixes the head and first-tail exponent sum and bounds the remaining tail | formalized | active |
 | [`R32-S53`](#r32-s53-proper-rest-pivot-certificate) | decidable stratum | one denominator prime deeper than the proper rest makes the pure-denominator bridge finite, unless its denominator is already the one-return resonance | formalized | active |
+| [`R32-S54`](#r32-s54-global-pure-denominator-descent) | decidable stratum | every pure-denominator bridge zero pays the sum of all selected scale decrements from its fixed terminal denominator | formalized | active |
 | [`R32-M01`](#r32-m01-generic-reverse-edge-compiler) | partial mechanism | projective incidence generically embeds into a compatible two-plane edge square | formalized | active |
 | [`R32-M02`](#r32-m02-finite-quotient-sieve) | partial mechanism | finite monoid quotients give complete modular no-certificates for fixed candidates | formalized | active |
 | [`R32-M03`](#r32-m03-two-scale-return-conversion) | partial mechanism | a minimal two-scale return pencil has nonresonant multi-return zeros | formalized | active |
@@ -4104,6 +4105,70 @@ audit
 **Use:** enumerate every bridge whose proper rest lies below one denominator depth. Any
 unbounded search must first cancel a common `B` from the proper-rest state; this is the exact
 joint `M₃(2)`/two-coordinate recurrence throat.
+
+### R32-S54: Global pure-denominator descent
+
+**Kind:** decidable stratum
+**Evidence:** formalized
+**Disposition:** active
+
+For `B≥2` and every selected scale `t≥4`, the pure-denominator affine inverse is
+
+```text
+P_t(s)=B(st−1)/(st+(B−1)t²−B).                             (1)
+```
+
+On the complete interval `s≥−1`, its denominator is positive, `P_t(s)≥−1`, and
+
+```text
+P_t(s)>1  iff  s>t,       P_t(s)≤s−t+1 when s>t.           (2)
+```
+
+Run these predecessors from right to left along a common-base tail, starting at the terminal
+coordinate `B`. Lean proves that the corresponding homogeneous adjugate state has the exact
+form `(Run·S,S)` with `S>0`; no projective zero or common-content cancellation is lost. A bridge
+zero therefore forces
+
+```text
+Run=q^(head+1).                                             (3)
+```
+
+Every intermediate run which can reach this source remains above one. Summing (2) gives the
+global certificate
+
+```text
+q^(head+1)+Σ_wait∈tail (q^(wait+1)−1) ≤ B.                 (4)
+```
+
+In particular, every selected tail scale is strictly below `B`, and
+
+```text
+q^(head+1)+|tail|(q−1)≤B.                                  (5)
+```
+
+Thus the complete pure-denominator chamber is finite, including the branch which was shallow
+at every denominator prime. The p-adic common factor isolated by `R32-S53` cannot sustain an
+unbounded word because the real projective coordinate loses at least `t−1` at each inverse
+step.
+
+**Scope:** the theorem is rational and assumes only `q≥4` and `B≥2`. Every composite integral
+ReturnSquare base satisfies the stronger `q≥6`; the prime-power family was already classified.
+The result is a finite certificate, not a resonance-only classification: finite nonresonant
+pure-denominator roots, if any, still require exact enumeration.
+
+**Artifact:** `ReturnSquare.fractionPredecessorRun_add_cost_le`,
+`fractionTailPredecessorState_pure_lower_pos_and_ratio`,
+`positiveBridge_pureDenominator_zero_run_eq`,
+`positiveBridge_pureDenominator_zero_add_cost_le`,
+`positiveBridge_pureDenominator_zero_tail_scale_lt`, and
+`positiveBridge_pureDenominator_zero_length_bound` in
+[`ReturnSquarePureDenominatorDescent.lean`](MatrixMortality/ReturnSquarePureDenominatorDescent.lean),
+with audit
+[`m32-returnsquare-pure-denominator-descent-2026-08-31.md`](audits/m32-returnsquare-pure-denominator-descent-2026-08-31.md).
+
+**Use:** enumerate every pure-denominator ReturnSquare bridge inside one explicit finite box.
+The lawful `M₃(2)` to two-coordinate bridge is exact here: its positive lower coordinate makes
+affine normalization reversible throughout the word.
 
 ### R32-M01: Generic reverse edge compiler
 
