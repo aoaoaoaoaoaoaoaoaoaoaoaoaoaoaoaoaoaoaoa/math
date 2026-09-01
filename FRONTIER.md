@@ -1361,6 +1361,14 @@ family survives uniform same-address double insertion. The live seam now require
 geometry, different or stateful address segments, restricted production, or separate two-offset
 routing.
 
+[`G3-S31`](SALVAGE.md#g3-s31-explicit-common-wrapper-fivegram-extinction) removes the nearest
+escape. The contexts around the relation may be empty, arbitrarily long, and vary with pump
+depth. Complete boundary reduction leaves `2,352` forward trigram cells, then `31` forward
+fourgram cells. Conditional refinement of the eighteen oriented fourgram target fibres checks
+all `33,218` radius-five physical preimages and kills all `414` oriented wrapper cells. Every
+one-context fork using any explicit infinite relation is now dead. The relation line must use a
+genuinely multi-window quotient derivation or a new affine-kernel relation.
+
 [`G3-M02`](SALVAGE.md#g3-m02-square-root-punctuation-fracture) supplied a complete direct-mortality
 grammar. The source-uniform rational rank-two matrix `S` satisfies
 
@@ -1598,7 +1606,7 @@ or neutral word across the return, use an empty consume, or split recurrent outp
 | Lane | Available leverage | Decisive obstruction or obligation |
 | --- | --- | --- |
 | Common-kernel shuttle | The exact `bcbb` compiler moves its common data kernel out through the toggle and recovers it at the next data action | Uniformize this non-invariant shuttle in `(β,body)`; every toggle-invariant guard factors through the two-dimensional quotient |
-| Transverse-kernel terminal dynamics | `G3-O27/O29` reduce the involutive branch to the `M₂(3)` core; `G3-O30`–`O35` close the first infinite-carrier repair; `G3-S03/C07/C08` force and compile the sole two-state gate; `G3-S06/S08/S10/S11` force a positive non-common-fixed fork-kernel triple; `G3-S13`–`S15` close the first finite-quotient layers; `G3-S16/S17` give 23 external pump schemas, eliminate their moving one-context cells, and expose a free binary affine address stack; `G3-S18`–`S20` delimit its carrier; `G3-S21` gives explicit asymmetric kernel-cloaked comparators; `G3-S22`–`S26` reject all 23 pump schemas and the explicit odd family in both one-sided cloak orientations; `G3-S27/S28` reject every single-cut placement in every explicit infinite family; `G3-S29` collapses uniform two-cut algebra; `G3-S30` rejects its central sandwich in every explicit family | Build a new kernel relation, a different/reversed/stateful two-segment address interface, a restricted address producer, or a separate two-offset channel; then prove the arbitrary-word converse and retain exact normalized mantissa. Generic irreducible `GL₃` forks, letterwise, literal, empty-macro, common-fixed, short reduced codes, the odd family as a bare contextual fork, every explicit infinite relation as a one-sided, single-cut, or uniform same-address double-insertion comparator, first/second-critical one-window repairs, fixed unary readers, moving pump cells, globally aligned or common-wrapped address codes, depth-class-only gates, and further third-state guard tuning are dead |
+| Transverse-kernel terminal dynamics | `G3-O27/O29` reduce the involutive branch to the `M₂(3)` core; `G3-O30`–`O35` close the first infinite-carrier repair; `G3-S03/C07/C08` force and compile the sole two-state gate; `G3-S06/S08/S10/S11` force a positive non-common-fixed fork-kernel triple; `G3-S13`–`S15` close the first finite-quotient layers; `G3-S16/S17` give 23 external pump schemas, eliminate their moving one-context cells, and expose a free binary affine address stack; `G3-S18`–`S20` delimit its carrier; `G3-S21` gives explicit asymmetric kernel-cloaked comparators; `G3-S22`–`S26` reject all 23 pump schemas and the explicit odd family in both one-sided cloak orientations; `G3-S27/S28` reject every single-cut placement in every explicit infinite family; `G3-S29/S30` close uniform same-address double insertion; `G3-S31` rejects every arbitrary common wrapper around the explicit families | Construct a genuinely multi-window quotient fork, a new affine-kernel relation, a nonlocal/stateful address interface, or a separate two-offset channel; then prove the arbitrary-word converse and retain exact normalized mantissa. Generic irreducible `GL₃` forks, letterwise, literal, empty-macro, common-fixed, short reduced codes, the odd family as a bare contextual fork, every one-context use of every explicit infinite relation, first/second-critical one-window repairs, fixed unary readers, moving pump cells, globally aligned or common-wrapped address codes, depth-class-only gates, and further third-state guard tuning are dead |
 | Positive projective transition lower bound | Same-zero dimension three is point-line incidence in `P²`, and actual one-sided shifts retain finite rank/kernel/image data | Derive a uniform nonstationary or noncommuting shift incompatibility from an unbounded terminal section; static support rank, formal inverse completion, fixed equal-length return flowers, and unary consecutive-repeat escape are forbidden |
 | Global word-residual recoding | Longer noncommutative atoms can retain order while discarding the four additive role channels | Escape `G3-D05`: fixed-priority affine counters and all one-way reset/transfer/fanout cascades are decidable |
 | Head-separated three-schema source | `G3-C04` discharges every arbitrary-trace forcing obligation locally; `G3-O24` isolates the directed stable-cone alternative | Preserve an undecidable mixed or neutral word across returns, or realize zero-sensitive S5 GLB decoding after the `G3-O25` separator-rank fork; complete pure forks are decidable by `G3-D07` |
@@ -1680,8 +1688,9 @@ raceable leaves:
    of those dead endpoints. `G3-S28` proves all `23` pump schemas prefix-kernel-free and forces
    their cuts to dead endpoints as well. `G3-S29` leaves one central same-address sandwich under
    uniform double insertion; `G3-S30` kills it in all `24` explicit infinite families by complete
-   trigram/fourgram boundary catalogues. The unresolved step is a new kernel geometry,
-   different-address multi-cut or stateful address/cloak production and complete endpoint
+   trigram/fourgram boundary catalogues. `G3-S31` then allows arbitrary common contexts and kills
+   the full one-context hull by conditional fivegram refinement. The unresolved step is a new
+   kernel geometry, different-address or stateful address/cloak production and complete endpoint
    converse, separate two-offset routing, or a genuinely multi-window
    non-common-fixed quotient fork, not another fixed-body rank perturbation, guard recurrence, or
    finite target-depth label.
@@ -1832,8 +1841,9 @@ suffix orientation for all `23` pumps, and `G3-S26` kills both one-sided orienta
 explicit odd family. `G3-S27` also kills every odd-family single-cut interleaving, including
 different proposed cuts on the two relation sides. `G3-S28` does the same for all `23` pump
 schemas by exact prefix count-walk and offset-defect recurrences. `G3-S29/S30` close every
-uniform same-address double insertion in all explicit families. A different-address
-multi-cut/stateful realization, new relation, or separate two-offset route,
+uniform same-address double insertion in all explicit families, and `G3-S31` kills every
+arbitrary common-context use of those relations. A multi-window/stateful realization, new
+relation, or separate two-offset route,
 plus the all-word endpoint converse, remains.
 After the missing guard and closure proofs,
 `D2-S08` still leaves the normalized mantissa unbounded. Any lower-bound attack

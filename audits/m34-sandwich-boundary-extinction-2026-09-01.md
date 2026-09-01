@@ -117,15 +117,17 @@ The certificate consumes the canonical `23`-family manifest emitted by
 | Any of the `24` explicit families realizes the central sandwich | rejected | exhaustive `B₃/B₄` certificate |
 | Reversing a relation repairs the mismatch | rejected | negation closure and explicit reverse checks |
 | Any explicit family realizes a uniform same-address double insertion | rejected | this result, `G3-S24`–`S26`, and `G3-S29` |
+| Arbitrary common wrappers around an explicit relation repair the fork | rejected downstream | `G3-S31` conditional fivegram catalogue |
 | Any mixed-prime kernel relation admits such a sandwich | open | outside the explicit family corpus |
 | `M₃(4)` follows | rejected | new geometry, nonuniform production, routing, and converse remain |
 
 ## Master Delta
 
 ```text
-DEAD: every uniform same-address double insertion in all 24 explicit infinite kernel families.
-LIVE: new kernel geometry; different/reversed/stateful addresses; restricted production;
-      separate two-offset routing; arbitrary-word terminal converse.
+DEAD: every uniform same-address double insertion in all 24 explicit infinite kernel families;
+      downstream G3-S31 kills their complete common-context hull.
+LIVE: multi-window/new-kernel geometry; different/reversed/stateful addresses; restricted
+      production; separate two-offset routing; arbitrary-word terminal converse.
 MASTER VERDICT: M₃(4) remains open.
 ```
 

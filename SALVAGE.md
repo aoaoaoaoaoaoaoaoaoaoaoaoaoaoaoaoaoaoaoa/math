@@ -277,6 +277,7 @@ file owns the mathematical stock.
 | [`G3-S28`](#g3-s28-pump-family-prefix-kernel-extinction) | uniform obstruction and complete family extinction | exact count-walk and affine-defect recurrences prove all 23 pump families prefix-kernel-free, killing every single-cut placement | formalized composition; exact independently replayable symbolic certificate | active |
 | [`G3-S29`](#g3-s29-two-cut-collapse-and-exact-sandwich-carrier) | structure theorem and positive mechanism | five probes collapse every uniform double insertion to three kernel pairs; the sole central placement turns any genuine affine kernel pair into an exact raw-distinct address comparator | formalized | active |
 | [`G3-S30`](#g3-s30-explicit-sandwich-boundary-extinction) | uniform obstruction and complete family extinction | trigram filtering and a complete fourgram boundary catalogue kill the central sandwich in all 23 pump schemas and the odd family at every depth and in both orientations | audited exact independently replayable certificate | active |
+| [`G3-S31`](#g3-s31-explicit-common-wrapper-fivegram-extinction) | uniform obstruction and complete family extinction | conditional factor refinement through length five kills every arbitrary common-context fork in all 23 pump schemas and the odd family | audited exact independently replayable certificate | active |
 | [`G3-M02`](#g3-m02-square-root-punctuation-fracture) | partial mechanism | a rank-two square root gives an exact `SS`-free mortality grammar | formalized | closed |
 | [`G3-O10`](#g3-o10-square-root-boundary-saturation) | obstruction | every nondegenerate rank-one square root preserves boundary coefficient zeros | formalized | graduated |
 | [`G3-M01`](#g3-m01-free-group-discrepancy-engine) | partial mechanism | Carvalho's transducer gives an all-word marker-tail equation and a cyclic exponent-one equalizer | audited | active |
@@ -10732,10 +10733,10 @@ exhaustive extraction theorem. It covers one literal two-sided context around on
 not several relations, several contexts, or a multi-window quotient derivation. The certificate
 discharges the stated family-six residue; it is not imported into Lean as a proof term.
 
-**Use:** retire every moving internal/internal repair of the seven length-`31` schemas. Any claimed
-one-context survivor must exhibit the unformalized exhaustive layout extraction and evade the
-cut-`27`/`28` local gates; any genuine successor should instead use several windows or the free
-binary address mechanism.
+**Use:** retire every moving internal/internal repair of the seven length-`31` schemas. `G3-S31`
+now closes the formerly untyped comparable/same-shorter cells and the complete one-context hull
+of all `23` pump schemas. A genuine successor must use several windows, a new relation, or the
+free binary address mechanism through a nonlocal interface.
 
 **Artifact:**
 [`GuardedMixedPrimePumpedCuts.lean`](MatrixMortality/GuardedMixedPrimePumpedCuts.lean),
@@ -10743,9 +10744,9 @@ binary address mechanism.
 [`certify_mixed_prime_pumped_context.py`](tools/certify_mixed_prime_pumped_context.py), and
 [`m34-pumped-context-classification-2026-08-31.md`](audits/m34-pumped-context-classification-2026-08-31.md).
 
-**Next:** type the exhaustive comparable/same-shorter layout extraction if a one-context claim is
-still needed. Otherwise compose the free `{DT,TD}` address stack with the literal `bcbc` endpoint
-fork and retain the all-word converse.
+**Next:** use `G3-S31` instead of duplicating the old layout extraction. Attack multi-window
+quotient geometry or compose the free `{DT,TD}` address stack through a nonlocal terminal
+interface while retaining the all-word converse.
 
 ### G3-S18: Exact mixed-prime address comparators
 
@@ -11421,9 +11422,59 @@ placement.
 [`certify_mixed_prime_sandwich.rs`](tools/certify_mixed_prime_sandwich.rs) and
 [`m34-sandwich-boundary-extinction-2026-09-01.md`](audits/m34-sandwich-boundary-extinction-2026-09-01.md).
 
-**Next:** classify nonuniform two-segment address interfaces or construct a new kernel relation
-whose radius-four boundary signature lies in the physical catalogue. The orthogonal route is a
-separate two-offset terminal gate.
+**Next:** `G3-S31` closes arbitrary common wrappers around the explicit corpus. Attack genuinely
+multi-window quotient derivations, construct a new kernel relation, or use a nonlocal terminal
+route.
+
+### G3-S31: Explicit common-wrapper fivegram extinction
+
+**Kind:** uniform obstruction and complete family extinction
+
+**Evidence:** audited exact independently replayable certificate
+
+**Disposition:** active
+
+For every pump depth, relation orientation, and arbitrary common contexts `P,Q`, none of the
+`23` Cayley–Hamilton pump schemas or the explicit odd relation can satisfy
+
+```text
+yzxyx=P·Lₖ·Q,       xzyxy=P·Rₖ·Q.
+```
+
+At factor length `r`, only the length-`r−1` suffix of `P` and prefix of `Q` survive internal
+factor cancellation. Thus arbitrary contexts have exactly `49`, `225`, and `961` boundary cells
+at lengths three, four, and five. The two-letter pump has two trigram depth classes and three
+fourgram/fivegram classes.
+
+The `2,352` forward trigram cells leave `72`; explicit reversal gives `144` survivors among
+`4,704` oriented cells. Their `1,092` oriented fourgram refinements leave `62`: one forward
+`l32-02` cell, thirty forward `l32-04` cells, and their negatives. These occupy eighteen oriented
+fourgram targets.
+
+Every radius-five physical representative projects to one radius-four representative. The
+eighteen target fibres contain `698` exact radius-four physical triples. Lifting only their
+complete representative preimages checks `33,218` radius-five triples and yields `2,484`
+conditional discrepancies. The wrapper cells refine to `414` oriented candidates with `148`
+distinct parent/target pairs; none survives. This recursive refinement is exhaustive, not a
+bounded macro-length search.
+
+**Scope:** `P,Q` may be empty, arbitrarily long, and depend on the pump depth and proposed
+witness. The two physical words must expose one common contiguous relation window. The result
+does not cover several disjoint relation windows, an arbitrary multi-step quotient derivation, a
+new affine-kernel relation, or nonlocal terminal routing.
+
+**Use:** remove the complete one-context hull of all explicit infinite relations. Further work
+must exploit genuinely multi-window congruence geometry, find a new relation outside the corpus,
+or leave the local relation-window architecture.
+
+**Artifact:**
+[`certify_mixed_prime_sandwich.rs`](tools/certify_mixed_prime_sandwich.rs) and
+[`m34-common-wrapper-fivegram-extinction-2026-09-01.md`](audits/m34-common-wrapper-fivegram-extinction-2026-09-01.md).
+
+**Next:** classify whether every non-common-fixed fork in the finite convergent quotient admits
+a bounded number of rewrite windows, or construct the first multi-window survivor. In the full
+kernel, search for a new boundary-compatible relation rather than another context around the
+known families.
 
 ### G3-O13: Rational serializer pumping
 

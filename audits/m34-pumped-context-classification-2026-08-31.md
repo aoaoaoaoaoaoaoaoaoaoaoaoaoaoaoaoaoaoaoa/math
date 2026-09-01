@@ -130,7 +130,7 @@ depths without a finite cutoff.
 | The weak family-six cut-`27` comparison has a fixed `25`-letter mismatch | promotion | Lean finite-slice transport |
 | Family-six cut-`27` internal residues exist only for `k≤11` | promotion | Lean arithmetic theorem |
 | All such finite literal residues are impossible | promotion | exact `156`-geometry certificate |
-| Every one-context placement of all seven pump families is impossible | open | no typed exhaustive layout extraction composes all local gates |
+| Every one-context placement of all seven pump families is impossible | promoted downstream | `G3-S31` complete factor-boundary certificate |
 | Several contexts or multi-window quotient derivations are impossible | open | outside the decomposition |
 | `M₃(4)` follows | rejected | general address comparison, dynamic production, and endpoint converse remain |
 
@@ -141,7 +141,7 @@ FORMAL CUTS: exact for seven infinite pump families.
 FORMAL EXTINCTION: every internal/internal moving cut; families 3,5,7; local alignment gates;
 cut-28 right conjugacy; weak cut-27 fixed block.
 FINITE EXTINCTION: 156 family-six cut-27 literal residues.
-OPEN CUT: type and discharge the exhaustive comparable/same-shorter layout extraction.
+DOWNSTREAM CLOSURE: G3-S31 rejects the complete one-context hull of all 23 pump families.
 MASTER VERDICT: M₃(4) remains open.
 ```
 

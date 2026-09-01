@@ -1,4 +1,4 @@
-use std::collections::HashSet;
+use std::collections::{HashMap, HashSet};
 use std::env;
 use std::fs;
 
@@ -12,6 +12,7 @@ const TRIGRAM_L32_02: Signature<8> = [-1, 1, 0, 0, 1, -1, 0, 0];
 const TRIGRAM_L32_04: Signature<8> = [-1, 0, 2, -1, 0, 1, -1, 0];
 const TRIGRAM_CATALOGUE_FNV64: u64 = 0x2db1_b99f_f029_2296;
 const FOURGRAM_CATALOGUE_FNV64: u64 = 0xc644_4bcf_d9d0_55b4;
+const CONDITIONAL_FIVEGRAM_FNV64: u64 = 0x545b_8558_2582_8176;
 
 #[derive(Clone)]
 struct PumpFamily {
@@ -28,6 +29,39 @@ struct AddressBoundary {
     address: Word,
     suffix: Word,
     prefix: Word,
+}
+
+#[derive(Clone, Eq, Hash, PartialEq)]
+struct WrapperBoundary {
+    left_suffix: Word,
+    right_prefix: Word,
+}
+
+#[derive(Clone)]
+struct WrapperCell<const N: usize> {
+    family: usize,
+    reversed: bool,
+    depth: usize,
+    boundary: WrapperBoundary,
+    target: Signature<N>,
+}
+
+struct WrapperExtinction {
+    trigram_forward_cells: usize,
+    trigram_oriented_cells: usize,
+    trigram_forward_survivors: usize,
+    trigram_oriented_survivors: usize,
+    fourgram_oriented_cells: usize,
+    fourgram_forward_survivors: usize,
+    fourgram_oriented_survivors: usize,
+    fivegram_candidate_cells: usize,
+    fivegram_candidate_targets: usize,
+    conditional_fourgram_targets: usize,
+    conditional_fourgram_triples: usize,
+    fivegram_physical_refinements: usize,
+    fivegram_conditional_deltas: usize,
+    fivegram_survivors: usize,
+    conditional_fivegram_fnv64: u64,
 }
 
 struct PhysicalCatalogues {
@@ -320,6 +354,54 @@ fn address_boundaries(radius: usize) -> Vec<AddressBoundary> {
     boundaries
 }
 
+fn words_through(maximum_length: usize) -> Vec<Word> {
+    (0..=maximum_length).flat_map(binary_words).collect()
+}
+
+fn wrapper_boundaries(radius: usize) -> Vec<WrapperBoundary> {
+    let words = words_through(radius);
+    let boundaries: Vec<_> = words
+        .iter()
+        .flat_map(|left_suffix| {
+            words.iter().map(|right_prefix| WrapperBoundary {
+                left_suffix: left_suffix.clone(),
+                right_prefix: right_prefix.clone(),
+            })
+        })
+        .collect();
+    let distinct: HashSet<_> = boundaries.iter().cloned().collect();
+    assert_eq!(boundaries.len(), distinct.len());
+    boundaries
+}
+
+fn project_left_suffix(word: &[u8], radius: usize) -> Word {
+    if word.len() <= radius {
+        word.to_vec()
+    } else {
+        word[word.len() - radius..].to_vec()
+    }
+}
+
+fn project_right_prefix(word: &[u8], radius: usize) -> Word {
+    word[..word.len().min(radius)].to_vec()
+}
+
+fn project_wrapper_boundary(boundary: &WrapperBoundary, radius: usize) -> WrapperBoundary {
+    WrapperBoundary {
+        left_suffix: project_left_suffix(&boundary.left_suffix, radius),
+        right_prefix: project_right_prefix(&boundary.right_prefix, radius),
+    }
+}
+
+fn project_representative(word: &[u8], factor_length: usize) -> Word {
+    let radius = factor_length - 1;
+    if word.len() < 2 * radius {
+        word.to_vec()
+    } else {
+        concatenate(&[&word[..radius], &word[word.len() - radius..]])
+    }
+}
+
 fn pumped_side(base: &[u8], cut: usize, pump: &[u8], depth: usize) -> Word {
     let mut word = Vec::with_capacity(base.len() + pump.len() * depth);
     word.extend_from_slice(&base[..cut]);
@@ -337,6 +419,15 @@ fn pumped_pair(family: &PumpFamily, depth: usize) -> (Word, Word) {
     )
 }
 
+fn oriented_pumped_pair(family: &PumpFamily, depth: usize, reversed: bool) -> (Word, Word) {
+    let (left, right) = pumped_pair(family, depth);
+    if reversed {
+        (right, left)
+    } else {
+        (left, right)
+    }
+}
+
 fn reduced_sandwich_delta<const N: usize>(
     boundary: &AddressBoundary,
     left: &[u8],
@@ -348,6 +439,20 @@ fn reduced_sandwich_delta<const N: usize>(
     subtract(
         factor_signature(&left_context, factor_length),
         factor_signature(&right_context, factor_length),
+    )
+}
+
+fn wrapper_delta<const N: usize>(
+    boundary: &WrapperBoundary,
+    left: &[u8],
+    right: &[u8],
+    factor_length: usize,
+) -> Signature<N> {
+    let contextual_left = concatenate(&[&boundary.left_suffix, left, &boundary.right_prefix]);
+    let contextual_right = concatenate(&[&boundary.left_suffix, right, &boundary.right_prefix]);
+    subtract(
+        factor_signature(&contextual_left, factor_length),
+        factor_signature(&contextual_right, factor_length),
     )
 }
 
@@ -378,6 +483,21 @@ fn contextual_side(
     };
     let middle = pumped_side(base, cut, &family.pump, depth);
     concatenate(&[&boundary.suffix, &middle, &boundary.prefix])
+}
+
+fn contextual_wrapper_side(
+    boundary: &WrapperBoundary,
+    family: &PumpFamily,
+    left: bool,
+    depth: usize,
+) -> Word {
+    let (base, cut) = if left {
+        (&family.left, family.left_cut)
+    } else {
+        (&family.right, family.right_cut)
+    };
+    let middle = pumped_side(base, cut, &family.pump, depth);
+    concatenate(&[&boundary.left_suffix, &middle, &boundary.right_prefix])
 }
 
 fn periodic_increment<const N: usize>(
@@ -436,6 +556,34 @@ fn certify_pump_locality<const N: usize>(
                     stable
                 );
             }
+        }
+    }
+}
+
+fn certify_wrapper_pump_locality<const N: usize>(families: &[PumpFamily], factor_length: usize) {
+    let threshold = (factor_length - 1).div_ceil(2);
+    let boundaries = wrapper_boundaries(factor_length - 1);
+    for family in families {
+        let increment = periodic_increment::<N>(&family.pump, factor_length, threshold);
+        for boundary in &boundaries {
+            for left in [true, false] {
+                let at_threshold = contextual_wrapper_side(boundary, family, left, threshold);
+                let successor = contextual_wrapper_side(boundary, family, left, threshold + 1);
+                assert_eq!(
+                    subtract::<N>(
+                        factor_signature::<N>(&successor, factor_length),
+                        factor_signature::<N>(&at_threshold, factor_length),
+                    ),
+                    increment
+                );
+            }
+            let (left, right) = pumped_pair(family, threshold);
+            let stable = wrapper_delta::<N>(boundary, &left, &right, factor_length);
+            let (later_left, later_right) = pumped_pair(family, threshold + 1);
+            assert_eq!(
+                wrapper_delta::<N>(boundary, &later_left, &later_right, factor_length,),
+                stable
+            );
         }
     }
 }
@@ -592,6 +740,305 @@ fn fourgram_extinction(
     (contexts02.len() + contexts04.len(), 4 + 5 + 5)
 }
 
+fn assert_oriented_cells<const N: usize>(cells: &[WrapperCell<N>]) {
+    for cell in cells.iter().filter(|cell| !cell.reversed) {
+        assert!(cells.iter().any(|reverse| {
+            reverse.family == cell.family
+                && reverse.reversed
+                && reverse.depth == cell.depth
+                && reverse.boundary == cell.boundary
+                && reverse.target == negate(cell.target)
+        }));
+    }
+}
+
+fn wrapper_trigram_survivors(
+    families: &[PumpFamily],
+    physical: &HashSet<Signature<8>>,
+) -> (usize, Vec<WrapperCell<8>>) {
+    let boundaries = wrapper_boundaries(2);
+    assert_eq!(boundaries.len(), 49);
+    let mut survivors = Vec::new();
+    for (family_index, family) in families.iter().enumerate() {
+        for reversed in [false, true] {
+            for depth in [0, 1] {
+                let (left, right) = oriented_pumped_pair(family, depth, reversed);
+                for boundary in &boundaries {
+                    let target = wrapper_delta(boundary, &left, &right, 3);
+                    if physical.contains(&target) {
+                        survivors.push(WrapperCell {
+                            family: family_index,
+                            reversed,
+                            depth,
+                            boundary: boundary.clone(),
+                            target,
+                        });
+                    }
+                }
+            }
+        }
+    }
+    let forward_cells = families.len() * 2 * boundaries.len();
+    assert_eq!(forward_cells, 2_352);
+    assert_eq!(survivors.len(), 144);
+    assert_eq!(survivors.iter().filter(|cell| !cell.reversed).count(), 72);
+    let expected_forward_histogram = [
+        ("l32-02", 9),
+        ("l32-04", 42),
+        ("l32-05", 2),
+        ("l32-08", 3),
+        ("l32-09", 14),
+        ("l32-13", 2),
+    ];
+    for (identifier, expected) in expected_forward_histogram {
+        let family_index = families
+            .iter()
+            .position(|family| family.identifier == identifier)
+            .expect("named wrapper survivor family is present");
+        assert_eq!(
+            survivors
+                .iter()
+                .filter(|cell| !cell.reversed && cell.family == family_index)
+                .count(),
+            expected
+        );
+    }
+    assert_oriented_cells(&survivors);
+    (forward_cells, survivors)
+}
+
+fn wrapper_fourgram_survivors(
+    families: &[PumpFamily],
+    trigrams: &[WrapperCell<8>],
+    physical: &HashSet<Signature<16>>,
+) -> (usize, Vec<WrapperCell<16>>) {
+    let boundaries = wrapper_boundaries(3);
+    assert_eq!(boundaries.len(), 225);
+    let mut checked = 0;
+    let mut survivors = Vec::new();
+    for trigram in trigrams {
+        let depths: &[usize] = if trigram.depth == 0 { &[0] } else { &[1, 2] };
+        for &depth in depths {
+            let (left, right) =
+                oriented_pumped_pair(&families[trigram.family], depth, trigram.reversed);
+            for boundary in &boundaries {
+                if project_wrapper_boundary(boundary, 2) != trigram.boundary {
+                    continue;
+                }
+                checked += 1;
+                let target = wrapper_delta(boundary, &left, &right, 4);
+                if physical.contains(&target) {
+                    survivors.push(WrapperCell {
+                        family: trigram.family,
+                        reversed: trigram.reversed,
+                        depth,
+                        boundary: boundary.clone(),
+                        target,
+                    });
+                }
+            }
+        }
+    }
+    assert_eq!(checked, 1_092);
+    assert_eq!(survivors.len(), 62);
+    assert_eq!(survivors.iter().filter(|cell| !cell.reversed).count(), 31);
+    let family02 = families
+        .iter()
+        .position(|family| family.identifier == "l32-02")
+        .expect("l32-02 is present");
+    let family04 = families
+        .iter()
+        .position(|family| family.identifier == "l32-04")
+        .expect("l32-04 is present");
+    assert_eq!(
+        survivors
+            .iter()
+            .filter(|cell| !cell.reversed && cell.family == family02)
+            .count(),
+        1
+    );
+    assert_eq!(
+        survivors
+            .iter()
+            .filter(|cell| !cell.reversed && cell.family == family04)
+            .count(),
+        30
+    );
+    assert_oriented_cells(&survivors);
+    (checked, survivors)
+}
+
+fn conditional_fivegram_extinction(
+    families: &[PumpFamily],
+    fourgrams: &[WrapperCell<16>],
+) -> (usize, usize, usize, usize, usize, usize, usize, u64) {
+    let target4: HashSet<_> = fourgrams.iter().map(|cell| cell.target).collect();
+    assert_eq!(target4.len(), 18);
+
+    let representatives4 = boundary_representatives(4);
+    let representative4_index: HashMap<_, _> = representatives4
+        .iter()
+        .cloned()
+        .enumerate()
+        .map(|(index, word)| (word, index))
+        .collect();
+    let representatives5 = boundary_representatives(5);
+    assert_eq!(representatives5.len(), 510);
+    let mut refinements5 = vec![Vec::new(); representatives4.len()];
+    for word in representatives5 {
+        let projection = project_representative(&word, 4);
+        let index = representative4_index[&projection];
+        refinements5[index].push(word);
+    }
+    assert_eq!(refinements5.iter().map(Vec::len).sum::<usize>(), 510);
+
+    let mut matching_triples: HashMap<Signature<16>, Vec<(usize, usize, usize)>> = target4
+        .iter()
+        .copied()
+        .map(|target| (target, Vec::new()))
+        .collect();
+    for (data_b, data_b_word) in representatives4.iter().enumerate() {
+        for (data_c, data_c_word) in representatives4.iter().enumerate() {
+            for (toggle, toggle_word) in representatives4.iter().enumerate() {
+                let target = physical_delta(data_b_word, data_c_word, toggle_word, 4);
+                if let Some(triples) = matching_triples.get_mut(&target) {
+                    triples.push((data_b, data_c, toggle));
+                }
+            }
+        }
+    }
+    let matching_triple_count = matching_triples.values().map(Vec::len).sum::<usize>();
+    assert_eq!(matching_triple_count, 698);
+    assert!(matching_triples.values().all(|triples| !triples.is_empty()));
+
+    let boundaries5 = wrapper_boundaries(4);
+    assert_eq!(boundaries5.len(), 961);
+    let mut candidate_cells = Vec::new();
+    for fourgram in fourgrams {
+        let (left, right) = oriented_pumped_pair(
+            &families[fourgram.family],
+            fourgram.depth,
+            fourgram.reversed,
+        );
+        for boundary in &boundaries5 {
+            let projected_boundary = project_wrapper_boundary(boundary, 3);
+            if projected_boundary != fourgram.boundary {
+                continue;
+            }
+            assert_eq!(
+                wrapper_delta::<16>(&projected_boundary, &left, &right, 4),
+                fourgram.target
+            );
+            candidate_cells.push((fourgram.target, wrapper_delta(boundary, &left, &right, 5)));
+        }
+    }
+    assert_eq!(candidate_cells.len(), 414);
+    let mut candidate_targets: HashMap<Signature<16>, HashSet<Signature<32>>> = HashMap::new();
+    for &(parent, target) in &candidate_cells {
+        candidate_targets.entry(parent).or_default().insert(target);
+    }
+    for (parent, children) in &candidate_targets {
+        let reverse_children = &candidate_targets[&negate(*parent)];
+        assert!(children
+            .iter()
+            .all(|&child| reverse_children.contains(&negate(child))));
+    }
+
+    let mut conditional: HashMap<Signature<16>, HashSet<Signature<32>>> = target4
+        .iter()
+        .copied()
+        .map(|target| (target, HashSet::new()))
+        .collect();
+    let mut refinement_checks = 0;
+    for (parent, triples) in matching_triples {
+        let refinements = conditional
+            .get_mut(&parent)
+            .expect("every conditional parent is registered");
+        for (data_b, data_c, toggle) in triples {
+            for data_b5 in &refinements5[data_b] {
+                for data_c5 in &refinements5[data_c] {
+                    for toggle5 in &refinements5[toggle] {
+                        refinement_checks += 1;
+                        assert_eq!(physical_delta::<16>(data_b5, data_c5, toggle5, 4), parent);
+                        refinements.insert(physical_delta(data_b5, data_c5, toggle5, 5));
+                    }
+                }
+            }
+        }
+    }
+    let survivor_count = candidate_cells
+        .iter()
+        .filter(|(parent, target)| conditional[parent].contains(target))
+        .count();
+    let candidate_target_count = candidate_targets.values().map(HashSet::len).sum::<usize>();
+    let conditional_delta_count = conditional.values().map(HashSet::len).sum::<usize>();
+    assert_eq!(candidate_target_count, 148);
+    assert_eq!(refinement_checks, 33_218);
+    assert_eq!(conditional_delta_count, 2_484);
+    assert_eq!(survivor_count, 0);
+    for (parent, children) in &conditional {
+        let reverse_children = &conditional[&negate(*parent)];
+        assert!(children
+            .iter()
+            .all(|&child| reverse_children.contains(&negate(child))));
+    }
+    let fingerprint = fingerprint_nested(&conditional);
+    assert_eq!(fingerprint, CONDITIONAL_FIVEGRAM_FNV64);
+    (
+        candidate_cells.len(),
+        candidate_target_count,
+        target4.len(),
+        matching_triple_count,
+        refinement_checks,
+        conditional_delta_count,
+        survivor_count,
+        fingerprint,
+    )
+}
+
+fn certify_common_wrapper_extinction(
+    families: &[PumpFamily],
+    catalogues: &PhysicalCatalogues,
+) -> WrapperExtinction {
+    // An arbitrary fixed left context contributes only its radius-r suffix; an arbitrary fixed
+    // right context contributes only its radius-r prefix. The pump locality proved above still
+    // supplies the exact depth classes 0/stable-1 at r=3 and 0/1/stable-2 at r=4,5.
+    certify_wrapper_pump_locality::<8>(families, 3);
+    certify_wrapper_pump_locality::<16>(families, 4);
+    certify_wrapper_pump_locality::<32>(families, 5);
+    let (trigram_forward_cells, trigrams) =
+        wrapper_trigram_survivors(families, &catalogues.trigrams);
+    let (fourgram_oriented_cells, fourgrams) =
+        wrapper_fourgram_survivors(families, &trigrams, &catalogues.fourgrams);
+    let (
+        fivegram_candidate_cells,
+        fivegram_candidate_targets,
+        conditional_fourgram_targets,
+        conditional_fourgram_triples,
+        fivegram_physical_refinements,
+        fivegram_conditional_deltas,
+        fivegram_survivors,
+        conditional_fivegram_fnv64,
+    ) = conditional_fivegram_extinction(families, &fourgrams);
+    WrapperExtinction {
+        trigram_forward_cells,
+        trigram_oriented_cells: 2 * trigram_forward_cells,
+        trigram_forward_survivors: trigrams.iter().filter(|cell| !cell.reversed).count(),
+        trigram_oriented_survivors: trigrams.len(),
+        fourgram_oriented_cells,
+        fourgram_forward_survivors: fourgrams.iter().filter(|cell| !cell.reversed).count(),
+        fourgram_oriented_survivors: fourgrams.len(),
+        fivegram_candidate_cells,
+        fivegram_candidate_targets,
+        conditional_fourgram_targets,
+        conditional_fourgram_triples,
+        fivegram_physical_refinements,
+        fivegram_conditional_deltas,
+        fivegram_survivors,
+        conditional_fivegram_fnv64,
+    }
+}
+
 fn fnv_byte(hash: &mut u64, byte: u8) {
     *hash ^= u64::from(byte);
     *hash = hash.wrapping_mul(1_099_511_628_211);
@@ -608,6 +1055,35 @@ fn fingerprint_set<const N: usize>(set: &HashSet<Signature<N>>) -> u64 {
         for coordinate in row {
             for byte in coordinate.to_le_bytes() {
                 fnv_byte(&mut hash, byte);
+            }
+        }
+    }
+    hash
+}
+
+fn fingerprint_nested(catalogue: &HashMap<Signature<16>, HashSet<Signature<32>>>) -> u64 {
+    let mut parents: Vec<_> = catalogue.iter().collect();
+    parents.sort_unstable_by_key(|(parent, _)| **parent);
+    let mut hash = 14_695_981_039_346_656_037;
+    for byte in (parents.len() as u64).to_le_bytes() {
+        fnv_byte(&mut hash, byte);
+    }
+    for (parent, children) in parents {
+        for coordinate in parent {
+            for byte in coordinate.to_le_bytes() {
+                fnv_byte(&mut hash, byte);
+            }
+        }
+        let mut rows: Vec<_> = children.iter().copied().collect();
+        rows.sort_unstable();
+        for byte in (rows.len() as u64).to_le_bytes() {
+            fnv_byte(&mut hash, byte);
+        }
+        for row in rows {
+            for coordinate in row {
+                for byte in coordinate.to_le_bytes() {
+                    fnv_byte(&mut hash, byte);
+                }
             }
         }
     }
@@ -633,6 +1109,7 @@ fn main() {
     assert_trigram_survivors(&survivors);
     let (fourgram_boundary_cells, fourgram_logical_cells) =
         fourgram_extinction(&families, &boundaries4, &catalogues);
+    let wrappers = certify_common_wrapper_extinction(&families, &catalogues);
 
     let trigram_fingerprint = fingerprint_set(&catalogues.trigrams);
     let fourgram_fingerprint = fingerprint_set(&catalogues.fourgrams);
@@ -647,7 +1124,20 @@ fn main() {
             "\"fourgram_forward_logical_cells\":{},\"fourgram_both_orientation_cells\":{},",
             "\"conditional_counts\":{:?},",
             "\"trigram_fnv64\":\"{:016x}\",\"fourgram_fnv64\":\"{:016x}\",",
-            "\"status\":\"all 24 explicit sandwich families are impossible\"}}"
+            "\"wrapper_trigram_forward_cells\":{},\"wrapper_trigram_oriented_cells\":{},",
+            "\"wrapper_trigram_forward_survivors\":{},",
+            "\"wrapper_trigram_oriented_survivors\":{},",
+            "\"wrapper_fourgram_oriented_cells\":{},",
+            "\"wrapper_fourgram_forward_survivors\":{},",
+            "\"wrapper_fourgram_oriented_survivors\":{},",
+            "\"wrapper_fivegram_candidate_cells\":{},",
+            "\"wrapper_fivegram_candidate_targets\":{},",
+            "\"conditional_fourgram_targets\":{},",
+            "\"conditional_fourgram_triples\":{},",
+            "\"fivegram_physical_refinements\":{},",
+            "\"fivegram_conditional_deltas\":{},\"wrapper_fivegram_survivors\":{},",
+            "\"conditional_fivegram_fnv64\":\"{:016x}\",",
+            "\"status\":\"all 24 explicit families fail arbitrary common wrappers\"}}"
         ),
         families.len(),
         catalogues.trigrams.len(),
@@ -660,5 +1150,20 @@ fn main() {
         catalogues.conditional_counts,
         trigram_fingerprint,
         fourgram_fingerprint,
+        wrappers.trigram_forward_cells,
+        wrappers.trigram_oriented_cells,
+        wrappers.trigram_forward_survivors,
+        wrappers.trigram_oriented_survivors,
+        wrappers.fourgram_oriented_cells,
+        wrappers.fourgram_forward_survivors,
+        wrappers.fourgram_oriented_survivors,
+        wrappers.fivegram_candidate_cells,
+        wrappers.fivegram_candidate_targets,
+        wrappers.conditional_fourgram_targets,
+        wrappers.conditional_fourgram_triples,
+        wrappers.fivegram_physical_refinements,
+        wrappers.fivegram_conditional_deltas,
+        wrappers.fivegram_survivors,
+        wrappers.conditional_fivegram_fnv64,
     );
 }

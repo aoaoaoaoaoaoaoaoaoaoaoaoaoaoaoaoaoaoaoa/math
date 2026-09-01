@@ -2819,6 +2819,14 @@ physical catalogue. Factor locality makes the finite certificate uniform in pump
 odd family. A new relation, different or stateful address segments, restricted production,
 separate two-offset routing, and the arbitrary-word converse remain.
 
+`G3-S31` removes arbitrary common contexts around the same explicit relations. Internal factors
+of `P,Q` cancel in `Φᵣ(P·Lₖ·Q)−Φᵣ(P·Rₖ·Q)`, leaving finite suffix/prefix boundary cells even when
+the contexts vary with pump depth. Trigrams reduce `2,352` forward cells to `72`; fourgrams leave
+thirty-one forward cells. The eighteen oriented fourgram targets contain `698` exact physical
+representative triples. Their complete `33,218` radius-five lifts yield `2,484` conditional
+discrepancies, none of the `148` wrapper targets. Thus every one-context use of the `24` explicit
+infinite relations is dead. Multi-window quotient derivations and new kernel relations remain.
+
 For `G3-O20`, Lean proves the free-monoid tail law: if one fixed-boundary equation with stationary
 left and right pump blocks holds at exponents `N` and `N+1`, it holds at every exponent `N+k`.
 The proof uses only prefix comparability and left/right cancellation. This closes a unary
