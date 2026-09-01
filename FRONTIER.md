@@ -3670,6 +3670,13 @@ converge to the excluded endpoint `1/5`. This is
 [`D2-S12`](SALVAGE.md#d2-s12-exact-wall-odd-two-cycle-family). The finite literal SCC census of
 `D2-S10` cannot extend across excursions; the live target is a symbolic classifier for these
 two-cycles and every longer odd return, not another finite valuation box.
+In fact the schedule word itself has no restrictive local grammar. For arbitrary finite `E`,
+every wrapped word `[a]++E++[c]` with `c≥7` has a guarded periodic source `x∈(1/5,2/9]` whose
+mantissa `9x/2` lies exactly on the reduced unit wall; the first step is its lower predecessor.
+Thus every finite wait word occurs as a middle factor of a wall-anchored periodic excursion.
+This is [`D2-S14`](SALVAGE.md#d2-s14-arbitrary-body-wall-excursion-saturation). It kills local
+forbidden-factor and bounded-excursion grammars, though not regularity: the endpoints vary with
+the body. The remaining seam is necessarily endpoint-coupled.
 The deepest of those three branches is itself a full depth reset. In normalized band coordinates
 `U(d,μ)=1/5+(3/10)(2/3)^dμ`, every target band `d≥2` contains a point whose `d−2` predecessor has
 any prescribed band `n≥7` and mantissa in `(2/3,1]`. An explicit guarded subfamily fixes target
@@ -4014,8 +4021,9 @@ universal computation.
    guarded concatenation, or endpoint-coupled height. `D2-S10` classifies every consecutive
    reduced unit-wall segment inside a finite denominator-bounded rectangle and proves eventual
    periodicity there. `D2-S12` classifies every immediate lower/middle two-cycle and kills a
-   finite literal return census; quotient its depth-pair formula before attacking excursions
-   through another two-adic stratum and later return. Do not further refine the wall-only graph.
+   finite literal return census. `D2-S14` embeds every finite wait body in a guarded wall
+   excursion, so local forbidden-factor grammars are equally exhausted. Attack endpoint-coupled
+   fibres rather than refining the wall-only graph.
    Keep the non-elementary lanes independent: adelic cone types, parabolic rational subsets,
    trace/height descent, finite-obstruction saturation, and valuation universality.
 7. Synthesize the returned attacks by the discriminating signals above; do not average

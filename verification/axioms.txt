@@ -3350,6 +3350,33 @@
 'MatrixMortality.MixedPrimeDebt.wallOddCycle_depthSix_mantissas_unique' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.MixedPrimeDebt.shellPeriodicPoint_mem_realTrap' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.wallExcursionSource_mem_lowerWindow' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.wallExcursionSource_twoUnit' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.MixedPrimeDebt.wallExcursionMantissa_normalized' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.wallExcursionMantissa_twoValue' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.wallExcursionMantissa_fiveUnit' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.wallExcursion_entryStep' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.MixedPrimeDebt.wallExcursion_cycle' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.MixedPrimeDebt.wallExcursionSchedule_isWallAnchored' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.wallAnchoredSchedules_factorUniversal' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeDebt.not_forall_wallAnchoredSchedule_avoids_factor' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.MixedPrimeDebt.exists_shellStep_realTrap_predecessor' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
