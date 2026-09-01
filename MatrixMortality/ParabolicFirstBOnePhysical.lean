@@ -1,13 +1,13 @@
-import MatrixMortality.ParabolicFirstBOneValuation
+import MatrixMortality.ParabolicFirstBOnePosition
 import MatrixMortality.ParabolicWaitBounds
 
 /-!
 # Physical reduction to the x=211 valuation-density funnel
 
 The exact core equation and the native first- and last-`b` decompositions supply the density
-envelope consumed by `ParabolicFirstBOneFunnel`.  Composing that envelope with the finite
-classifier and terminal certificate leaves only the bounded valuation envelope and three
-explicit numerical bounds as upstream obligations.
+envelope consumed by `ParabolicFirstBOneFunnel`.  Composing that envelope with the position
+extinction, finite classifier, and terminal certificate leaves only the bounded valuation
+envelope and two explicit numerical bounds as upstream obligations.
 -/
 
 namespace MatrixMortality.ParabolicBlade
@@ -354,6 +354,41 @@ theorem bZeroBDefectCOneCodeCore_x211_ne_zero_of_valuation_envelope
   rw [tail_eq] at core_zero
   exact firstBOneX211Candidate_core_ne_zero rest h y z candidate (by simpa using core_zero)
 
+/-- The physical x=211 `cb` chamber is empty under the trailing-run and inner-wait bounds; the
+next-`b` position is forced below thirteen by the valuation and density envelopes. -/
+theorem bZeroBDefectCOneCodeCore_x211_ne_zero_of_valuation_envelope_without_position_bound
+    (j h : Nat) (tail stem rest : List TagLetter) (y z : Nat)
+    (first_b : tail = List.replicate j .c ++ .b :: rest)
+    (last_b : tail = stem ++ .b :: List.replicate h .c)
+    (run_bound : h ≤ 5) (inner_bound : z < 3 ^ 13)
+    (valuation : FirstBOneX211ValuationEnvelope h y z) :
+    bZeroBDefectCOneCodeCore
+      ((3 : ℚ) ^ (tagEncode 3 ([.c, .b] ++ tail)).length)
+      (ternaryCode (tagEncode 3 ([.c, .b] ++ tail))) 211 y z ≠ 0 := by
+  intro core_zero
+  have core_zero_first_b :
+      bZeroBDefectCOneCodeCore
+        ((3 : ℚ) ^
+          (tagEncode 3 (List.replicate 1 .c ++ .b :: tail)).length)
+        (ternaryCode (tagEncode 3 (List.replicate 1 .c ++ .b :: tail)))
+        211 y z = 0 := by
+    simpa using core_zero
+  have wait_upper :=
+    bZeroBDefectCOne_y_le_of_first_b 1 tail 211 y z core_zero_first_b
+  have wait_positive :=
+    firstBOneX211_wait_positive_of_valuation_envelope h y z run_bound valuation
+  have density :=
+    firstBOneX211DensityEnvelope_of_core_zero j h tail stem rest y z
+      first_b last_b wait_positive core_zero
+  have wait_lower := firstBOneX211_y_lower_of_density_envelope h j y z density
+  obtain ⟨candidate, position_zero⟩ :=
+    firstBOneX211Candidate_of_envelopes_without_position_bound h j y z run_bound
+      wait_lower wait_upper inner_bound valuation density
+  subst j
+  have tail_eq : tail = .b :: rest := by simpa using first_b
+  rw [tail_eq] at core_zero
+  exact firstBOneX211Candidate_core_ne_zero rest h y z candidate (by simpa using core_zero)
+
 /-- No physical x=211 `cb` zero survives inside the explicit trailing-run, next-`b`-position,
 and inner-wait box. -/
 theorem bZeroBDefectCOneCodeCore_x211_ne_zero_of_bounds
@@ -372,5 +407,22 @@ theorem bZeroBDefectCOneCodeCore_x211_ne_zero_of_bounds
   exact bZeroBDefectCOneCodeCore_x211_ne_zero_of_valuation_envelope
     j h tail stem rest y z first_b last_b run_bound position_bound inner_bound valuation
     core_zero
+
+/-- No physical x=211 `cb` zero survives under the trailing-run and inner-wait bounds. -/
+theorem bZeroBDefectCOneCodeCore_x211_ne_zero_of_run_and_inner_bounds
+    (j h : Nat) (tail stem rest : List TagLetter) (y z : Nat)
+    (first_b : tail = List.replicate j .c ++ .b :: rest)
+    (last_b : tail = stem ++ .b :: List.replicate h .c)
+    (run_bound : h ≤ 5) (inner_bound : z < 3 ^ 13) :
+    bZeroBDefectCOneCodeCore
+      ((3 : ℚ) ^ (tagEncode 3 ([.c, .b] ++ tail)).length)
+      (ternaryCode (tagEncode 3 ([.c, .b] ++ tail))) 211 y z ≠ 0 := by
+  intro core_zero
+  have valuation :=
+    firstBOneX211ValuationEnvelope_of_core_zero tail stem h y z last_b run_bound
+      inner_bound core_zero
+  exact
+    bZeroBDefectCOneCodeCore_x211_ne_zero_of_valuation_envelope_without_position_bound
+      j h tail stem rest y z first_b last_b run_bound inner_bound valuation core_zero
 
 end MatrixMortality.ParabolicBlade
