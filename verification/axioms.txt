@@ -1916,6 +1916,27 @@
 'MatrixMortality.SwappedSetterPrimitivePullback.upperLetterCode_append_b_modEq_one' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.SwappedSetterPrimitiveSeedAdapter.emptyTarget_upperPrefix_lower_nat' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SwappedSetterPrimitiveSeedAdapter.emptyFrontSeed_core_halfHead_gcds' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SwappedSetterPrimitiveSeedAdapter.emptyFrontSeed_eq_coreRatio' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SwappedSetterPrimitiveSeedAdapter.emptyFrontSeed_primitiveCoordinates' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SwappedSetterPrimitiveSeedAdapter.emptyFrontSeed_pullbackRaw_halfHead_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SwappedSetterPrimitiveSeedAdapter.emptyFrontSeed_pullbackRaw_targetModulus_dvd' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SwappedSetterPrimitiveSeedAdapter.emptyFrontSeed_primitivePullback_halfHead_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.DecimalSetterChamber.doubleDeletion_step_in_gap' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]

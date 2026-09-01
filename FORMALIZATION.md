@@ -1441,6 +1441,7 @@ The setter-projective audit now also exposes a kernel-friendly carry theorem:
 | [`MM-S87`](SALVAGE.md#mm-s87-empty-front-backward-chamber-cut) | empty-front seeds lie above `H`, no `b`-leading physical predecessor enters the contraction interval, and the canonical `(R_c,D_b)` pullback has gap below `1/(80ρ)` |
 | [`MM-S88`](SALVAGE.md#mm-s88-conditional-post-rcdb-no-reentry) | exact canonical post-`D_c` intercept bounds, affine next-block automaton, and total physical no-reentry after the literal `(R_c,D_b);D_c` history |
 | [`MM-S89`](SALVAGE.md#mm-s89-primitive-physical-pullback-cancellation) | exact raw inverse-block coordinates, half-head survival through primitive gcd cancellation, incoming-numerator modulus, and upper-code affine recurrence |
+| [`MM-S92`](SALVAGE.md#mm-s92-primitive-empty-front-seed-adapter) | exact positive primitive coordinates for every physical empty-front seed, target-code control of its half-head content, and instantiated raw and post-cancellation pullback criteria |
 
 These records narrow the missing arbitrary-depth theorem but do not prove
 projective avoidance. Their reconstruction is
@@ -1842,6 +1843,15 @@ denominator is coprime to `h`. Before cancellation, the physical raw numerator i
 `Prn` modulo `h`; since `gcd(h,r)=1`, raw divisibility is exactly
 `h/gcd(h,n) ∣ P`. The theorem assumes natural coordinates and a genuine subtraction. It neither
 classifies physical blocks nor connects an `MM-O29` seed to the encoded entry or a pole.
+
+Record [`MM-S92`](SALVAGE.md#mm-s92-primitive-empty-front-seed-adapter) instantiates that seam on
+the public `MM-O29` seed cores. Writing `U` for the natural target code and `B,C>0` for the two
+polynomial cores, Lean proves that the seed is the primitive ratio obtained from
+`(2HB+C,2B)` after cancelling `g₀=gcd(C,2B)`. If `h=H/2` and
+`d=gcd(h,2(U−4))`, then `gcd(h,g₀)=d` and `gcd(h,N)∣d` for the primitive numerator `N`.
+Consequently any raw half-head pullback forces `h/d∣P`; the exact raw and post-cancellation
+equivalences remain available with all coordinates expanded in `U`. The bound is sharp as a
+support statement but does not imply `gcd(h,N)=1`, and no physical block classification follows.
 
 Record [`MM-S21`](SALVAGE.md#mm-s21-bounded-decimal-suffix-cycles) closes the fixed-precision
 suffix-descent lane. `DecimalSetterSuffix.cycleDefect_lift` gives an explicit one-digit lift for

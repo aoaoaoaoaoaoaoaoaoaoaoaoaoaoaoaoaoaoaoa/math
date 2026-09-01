@@ -151,6 +151,7 @@ file owns the mathematical stock.
 | [`MM-S87`](#mm-s87-empty-front-backward-chamber-cut) | structure theorem and obstruction | no `b`-leading physical block can pull an empty-front seed into the deletion-contraction chamber; the canonical `R_c;D_b` branch has a sharp near-diagonal gap | formalized | active |
 | [`MM-S88`](#mm-s88-conditional-post-rcdb-no-reentry) | structure theorem and obstruction | after the literal canonical `R_c;D_b;D_c` history, an exact two-state affine automaton sends every next physical block outside the deletion-contraction chamber | formalized | active |
 | [`MM-S89`](#mm-s89-primitive-physical-pullback-cancellation) | structure theorem and obstruction | exact gcd arithmetic decides when raw half-head divisibility survives primitive inverse-block normalization | formalized | active |
+| [`MM-S92`](#mm-s92-primitive-empty-front-seed-adapter) | structure theorem and obstruction | physical empty-front seeds have exact primitive positive coordinates whose half-head content is supported on one target-code gcd | formalized | active |
 | [`R32-S01`](#r32-s01-split-return-normal-form) | structure theorem | rank-two cuts reduce one-unit binary mortality to a `2 × 2` return recurrence | formalized | graduated |
 | [`R32-S02`](#r32-s02-two-plane-edge-square) | structure theorem | two rank-two generators are a two-vertex square of `2 × 2` edges | formalized | graduated |
 | [`R32-O01`](#r32-o01-rank-one-profile-collapse) | obstruction | a rank-one generator reduces mortality to order-at-most-three scalar recurrence zeros | audited | stock |
@@ -6014,6 +6015,81 @@ through `deletionCHalfHead_dvd_pullbackRawNumerator_iff`,
 **Next:** normalize the public empty-front seed cores to a primitive pair and express
 `gcd(h,n)` directly in the physical target code. Then combine (2) with the `c`-leading spelling
 grammar; do not replace post-cancellation survival by raw divisibility.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S92: Primitive empty-front seed adapter
+
+**Kind:** structure theorem and obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+Let `U` be the natural swapped ternary code of a physical empty target, let `s=3^(β−1)`, and
+write `B=B(s,U)` and `C=C(s,U)` for the two positive polynomial cores exposed by `MM-S87`.
+With `H=5·3^β−1=2h`, the signed `MM-O29` antecedent has the positive ratio
+
+```text
+X=(2HB+C)/(2B).
+```
+
+Its exact normalization data are
+
+```text
+g₀=gcd(C,2B)=gcd(2HB+C,2B),
+N=(2HB+C)/g₀,
+D=2B/g₀,
+gcd(N,D)=1,
+X=N/D.                                           (1)
+```
+
+The seed polynomials satisfy two independent integral identities. Eliminating their unit
+coefficients modulo `h` yields
+
+```text
+d = gcd(h,2(U−4)),
+gcd(h,B)=gcd(h,C)=gcd(h,g₀)=d,
+gcd(h,N) ∣ d.                                    (2)
+```
+
+Thus the exact raw criterion from `MM-S89` has the target-code consequence
+
+```text
+h ∣ Nraw  →  h/d ∣ P.                            (3)
+```
+
+Lean also instantiates both exact equivalences, without abbreviating away the target code:
+
+```text
+h∣Nraw ↔ h/gcd(h,N)∣P,
+h∣primitive(Nraw,Draw)
+  ↔ gcd(h,Draw/gcd(Nraw/h,Draw))=1.               (4)
+```
+
+The physical target lower bound supplies positivity of `B` and `C`; no sign assumption is hidden
+in (1). The second equivalence retains the explicit hypothesis `Nraw=h·residual`.
+
+**Scope:** physical empty-target codes and one supplied positive-natural inverse block with a
+genuine subtraction. Equations (2) and (3) are support and divisibility bounds, not an equality
+formula for `gcd(h,N)`. The record neither classifies `c`-leading spellings, proves a local ray
+reachable from the encoded entry, nor proves a pole.
+
+**Use:** replace the opaque incoming numerator in the `MM-S89` channel by the exact `MM-O29`
+target code. Any surviving block must pass the target modulus (3) and the residual-denominator
+test (4).
+
+**Formalization:**
+[`MatrixMortality/SwappedSetterPrimitiveSeedAdapter.lean`](MatrixMortality/SwappedSetterPrimitiveSeedAdapter.lean),
+through `emptyFrontSeed_primitiveCoordinates`, `emptyFrontSeed_core_halfHead_gcds`,
+`emptyFrontSeed_pullbackRaw_targetModulus_dvd`, and
+`emptyFrontSeed_primitivePullback_halfHead_iff`.
+
+**Artifact:**
+[`audits/m53-primitive-seed-adapter-2026-09-01.md`](audits/m53-primitive-seed-adapter-2026-09-01.md).
+
+**Next:** combine the target modulus and residual-denominator criterion with the exact first
+`R_c` lower spelling. A proof that uses only raw divisibility still omits the decisive primitive
+cancellation seam.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
