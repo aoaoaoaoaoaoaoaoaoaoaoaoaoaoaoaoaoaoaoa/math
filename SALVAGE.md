@@ -155,6 +155,7 @@ file owns the mathematical stock.
 | [`MM-S94`](#mm-s94-three-block-singleton-chamber-classification) | structure theorem and obstruction | every lawful three-block singleton pole lies in an exact deep-root or `R_c` discrepancy grammar, and the entire `R_c` singleton-current quadrant is empty | formalized | active |
 | [`MM-S95`](#mm-s95-complete-three-block-singleton-current-extinction) | obstruction and classifier | every lawful three-block singleton pole has a multi-role current; with a multi-role intervening block it obeys the complete `MM-S94` classifier without an extra current-shape hypothesis | formalized | active |
 | [`MM-S96`](#mm-s96-contaminated-tail-factorwise-pole-gate) | structure theorem and obstruction | a singleton pole over the uniform contaminated tail forces the primitive gap into the product of current and inherited lower codes, with exact factorwise transfer outside inherited support | formalized | active |
+| [`MM-S98`](#mm-s98-long-r_c-gap-clean-ancestry-extinction) | obstruction | every hypothetical long `R_c` three-block singleton pole has normalized quotient `μ/H` and reduced numerator coprime to the primitive gap, so its entire gap-clean ancestry branch is empty | formalized | active |
 | [`R32-S01`](#r32-s01-split-return-normal-form) | structure theorem | rank-two cuts reduce one-unit binary mortality to a `2 × 2` return recurrence | formalized | graduated |
 | [`R32-S02`](#r32-s02-two-plane-edge-square) | structure theorem | two rank-two generators are a two-vertex square of `2 × 2` edges | formalized | graduated |
 | [`R32-O01`](#r32-o01-rank-one-profile-collapse) | obstruction | a rank-one generator reduces mortality to order-at-most-three scalar recurrence zeros | audited | stock |
@@ -6060,6 +6061,61 @@ through `gapContaminatedTail_singletonPole_forces_lowerProduct`,
 
 **Next:** intersect the forced support with the current lower-code grammar and lift the
 factorwise ledger from this uniform tail to the `cb/cc` peeled-head family isolated by `MM-S94`.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S98: Long `R_c` gap-clean ancestry extinction
+
+**Kind:** obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+The long `R_c` branch of `MM-S94` has intervening upper length `k` and discrepancy shell
+`(k−1,k−1)`. Its suffix theorem writes
+
+```text
+δ = H·10^(k−1),                                     (1)
+```
+
+where `H` is the unmatched `β+2`-digit peeled-head code. The exact `R_c` ray quotient is
+`10^k μ/δ`. Dividing out the built-in decimal factor and applying (1) gives the literal
+normalization
+
+```text
+(ray₂/ray₁)/10 = μ/H.                               (2)
+```
+
+The primitive gap `q=2·10^β−7` is coprime to the marker `μ`. Reducing the rational fraction in
+(2) can only divide its numerator: the canonical reduced numerator divides `μ`, and is therefore
+also coprime to `q`. But `MM-S91` proves that gap-clean integral descended coordinates exist
+exactly when `q` divides that reduced numerator. Since `q>1`, both conditions are incompatible.
+
+Thus every hypothetical long `R_c` three-block singleton pole lies necessarily in the
+gap-contaminated ancestry branch. This is stronger than exhibiting one contaminated tail: it
+removes the gap-clean branch from the entire `cb/cc` long-head family isolated by `MM-S94`.
+
+**Scope:** the theorem assumes `β≥3`, parser-lawful multi-role current and intervening blocks,
+the long-current inequality, and an actual singleton pole over `R_c`. It does not exclude the
+pole itself. It proves that one particular proof interface, full primitive-gap coprimality of a
+descended numerator, can never apply on this branch.
+
+**Use:** do not invoke the `MM-S22` full-gap clean quotient gate on a long `R_c` survivor. Track
+gap support factorwise through the peeled head and emitted lower codes, using the support laws of
+`MM-S24` and `MM-S96` or a generalization of them to the full `cb/cc` family.
+
+**Formalization:**
+[`MatrixMortality/DecimalSetterThreeBlockLongContamination.lean`](MatrixMortality/DecimalSetterThreeBlockLongContamination.lean),
+through `singletonPole_threeBlock_ruleCRoot_long_normalizedQuotient_eq`,
+`singletonPole_threeBlock_ruleCRoot_long_reducedNumerator_coprime_gapFactor`, and
+`singletonPole_threeBlock_ruleCRoot_long_no_gapCleanIntegralCarrier`.
+
+**Artifact:**
+[`audits/m53-long-rule-c-gap-clean-extinction-2026-09-01.md`](audits/m53-long-rule-c-gap-clean-extinction-2026-09-01.md).
+
+**Next:** generalize the factorwise pole product law from the uniform contaminated tail to an
+arbitrary peeled `cb/cc` head, then intersect forced gap support with the exact lower suffix
+language.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).

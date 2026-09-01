@@ -1183,6 +1183,13 @@ already puts the whole gap into the inherited code, so unconditional cancellatio
 `q∣V_current` is false at the gate level. The live task is a factor-support language, not a
 choice of projective normalization.
 
+The long `R_c` arm is now known to be uniformly contaminated.
+[`MM-S98`](SALVAGE.md#mm-s98-long-r_c-gap-clean-ancestry-extinction) combines its exact suffix
+factorization with the `R_c` quotient formula to obtain `(ray₂/ray₁)/10=μ/H`. Reduction can only
+remove factors from `μ`, which is coprime to the primitive gap. Therefore no hypothetical long
+`R_c` pole can satisfy the gap-clean ancestry interface. This kills a proof branch, not the
+pole: the `cb/cc` family must be attacked through factorwise support and exact lower spelling.
+
 The ternary and decimal branches now separate at their first multi-transfer front.
 [`MM-S37`](SALVAGE.md#mm-s37-decimal-three-shape-frontier-extinction) substitutes each of the
 three role shapes left by the swapped ternary gate into the decimal carrier equation. All are

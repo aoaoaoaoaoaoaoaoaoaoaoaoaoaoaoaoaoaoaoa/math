@@ -1832,6 +1832,15 @@
 'MatrixMortality.DecimalSetterBridgeRay.singletonPole_threeBlock_nextMulti_classifier' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.DecimalSetterBridgeRay.singletonPole_threeBlock_ruleCRoot_long_normalizedQuotient_eq' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterBridgeRay.singletonPole_threeBlock_ruleCRoot_long_reducedNumerator_coprime_gapFactor' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterBridgeRay.singletonPole_threeBlock_ruleCRoot_long_no_gapCleanIntegralCarrier' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.DecimalSetterAncestry.carrierFactor_multiToSingleton_quotientGate' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
