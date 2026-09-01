@@ -171,6 +171,7 @@ file owns the mathematical stock.
 | [`MM-S69`](#mm-s69-sequential-double-deletion-zero-gap-extinction) | obstruction | the distinguished carrier after two sequential singleton `D_c` transfers cannot hit a full-tail threshold, eliminating the zero-gap survivor of the backward toggle | formalized | active |
 | [`MM-S71`](#mm-s71-three-block-backward-frontier) | structure theorem and obstruction | behind two final singleton `D_c` transfers, every nonterminal full-tail pole either halts or places the preceding physical block in its exact nonzero predecessor cylinder | formalized | active |
 | [`MM-O27`](#mm-o27-reachable-predecessor-cylinder) | obstruction | a concrete ordinary-reset history reaches the exact non-`D_c` predecessor cylinder, refuting every block-local extinction of the `MM-S71` survivor | formalized | active |
+| [`MM-S73`](#mm-s73-live-three-block-charge-frontier) | structure theorem and obstruction | the reachable predecessor cylinder, both deletion resonances, and the literal target suffix carry form one exact nonzero chain that automatically forces the whole three-block prefix live | formalized | active |
 | [`R32-S01`](#r32-s01-split-return-normal-form) | structure theorem | rank-two cuts reduce one-unit binary mortality to a `2 × 2` return recurrence | formalized | graduated |
 | [`R32-S02`](#r32-s02-two-plane-edge-square) | structure theorem | two rank-two generators are a two-vertex square of `2 × 2` edges | formalized | graduated |
 | [`R32-O01`](#r32-o01-rank-one-profile-collapse) | obstruction | a rank-one generator reduces mortality to order-at-most-three scalar recurrence zeros | audited | stock |
@@ -5868,6 +5869,81 @@ through `reachable_nonDeletionC_predecessorCylinder`.
 
 **Next:** express the cylinder as the exact projective preimage of the full-gap residue and
 retain the target carry or first-pole condition when pulling it through earlier history.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S73: Live three-block charge frontier
+
+**Kind:** structure theorem and obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+`MM-O27` shows that the `MM-S71` predecessor cylinder is reachable when considered alone.
+`MM-S73` restores the information discarded by that projection. Let a primitive origin carrier
+`(m₋₁,e₋₁)` cross a physical role block `w` to `(n₀,d₀)`, then cross two sequential singleton
+`D_c` blocks to `(n₁,d₁)` and `(n₂,d₂)`. Suppose the last carrier is live and meets a
+nonterminal target pole whose spelling ends in `β` erasure tiles. In the nonhalting branch,
+write
+
+```text
+ρ=3^β,       μ=2ρ−1,       H=5ρ−1,
+d₀−n₀=ρq₀,                    n₁=3^(β−1)k₁,
+C_w=3^(g+β−1)k₀,              d₂−n₂=ρq₂,
+s₀=3^g u₀,                    s₁=3u₁,       s₂=u₂.
+```
+
+Here `C_w=P_we₋₁−V_wm₋₁−3^gHe₋₁` is the exact predecessor cylinder, the `sᵢ` are the three raw
+normalization scales, and
+
+```text
+q₂=d₂(U+1)−n₂(L+1)
+```
+
+retains the upper and lower prefixes left after the target's matched erasure tail is peeled.
+Lean proves the exact nonzero chain
+
+```text
+μk₀=−u₀q₀,
+u₁k₁=H(2q₀−d₀),
+u₂q₂=2μk₁.                                             (1)
+```
+
+Each `uᵢ` is a three-adic unit, and `k₀,q₀,k₁,q₂` are nonzero. The balanced suffix carry after
+the matched `β` false digits is literally `(ρ−1)q₂`; target carry is therefore retained in the
+witness rather than reconstructed from a gap congruence. Eliminating both interior charges
+braids that literal carry directly into the initial cylinder:
+
+```text
+u₀u₁u₂·((ρ−1)q₂)=−2μH(ρ−1)·(2μk₀+u₀d₀).             (2)
+```
+
+The same branch forces every product boundary in `w;D_c;D_c` to be live. The deep initial
+cylinder excludes `e₋₁=0`; the full gap makes `d₀` a unit; the deep numerator excludes `d₁=0`;
+and represented-denominator transport pulls the final live boundary backward through all three
+blocks. Thus local earliestness supplies no further exclusion: any useful earliest-pole argument
+must reach before `w` or constrain the target ancestry appearing in `q₂`.
+
+**Scope:** `β≥2`, arbitrary compiler body of length at least `β−1`, one physical role block and
+two separate singleton `D_c` transfers, primitive integral carriers and nonzero normalization
+scales at every boundary, and a live nonterminal pole with a full `β`-erasure target tail. The
+theorem does not force a generic target to have that tail and does not exclude the nonzero charge
+chain (1).
+
+**Use:** replace the reachable but target-blind `MM-S71` cylinder with one exact integer ancestry
+object. A closing argument must contradict (2) using Neary first-mismatch/common-suffix grammar,
+or derive a stronger target suffix theorem that removes the full-tail restriction.
+
+**Formalization:**
+[`MatrixMortality/SwappedSetterCylinderCharge.lean`](MatrixMortality/SwappedSetterCylinderCharge.lean),
+through `erasureTailPole_threeBlock_charge_frontier`.
+
+**Artifact:**
+[`audits/m53-cylinder-charge-2026-08-31.md`](audits/m53-cylinder-charge-2026-08-31.md).
+
+**Next:** relate the nonzero peeled target charge `q₂` to the first unequal upper/lower Neary
+prefix and show that the unit chain (1) cannot persist on an arbitrary earlier centered history.
+The generic target-suffix seam remains independent.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).

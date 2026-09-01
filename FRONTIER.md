@@ -1445,6 +1445,26 @@ nonzero gap divisible by `27`; the exact predecessor residual is also divisible 
 not a pole. It kills a block-grammar-only extinction and forces the next argument to retain the
 target carry or an earliest-pole ancestry condition.
 
+[`MM-S73`](SALVAGE.md#mm-s73-live-three-block-charge-frontier) retains both. The reachable
+cylinder quotient `k₀`, the nonzero gap quotient `q₀`, the intervening deep-numerator quotient
+`k₁`, and the peeled target charge `q₂` satisfy
+
+```text
+μk₀=−u₀q₀,      u₁k₁=H(2q₀−d₀),      u₂q₂=2μk₁,
+```
+
+where every `uᵢ` is a three-adic unit. The prospective target's balanced carry after its matched
+`β`-erasure tail is exactly `(3^β−1)q₂`. The same survivor forces the origin and both intermediate
+product boundaries to be live, so local earliestness does not empty it; earliestness can act
+only before the three-block window. Eliminating the two interior charges yields the single
+braided identity
+
+```text
+u₀u₁u₂·((3^β−1)q₂)=−2μH(3^β−1)·(2μk₀+u₀d₀),
+```
+
+which converts the target-blind congruence into one exact target-carry ancestry equation.
+
 The remaining ternary obligation is now the **nonzero history-defect branch** of the global
 earliest-pole reduction. In the normalized coordinate `δ=D/y`, the complete physical recurrence
 is
@@ -1457,14 +1477,14 @@ The distinguished coordinate `R/H` is a target threshold exactly for terminal eq
 The first `D_c` and `D_b` images lie on opposite sides of zero, so a one-sided real trap is
 already impossible. On the full-erasure-tail branch, backward ancestry now has an exact
 two-state numerator/gap toggle through literal `D_c`, and its zero-gap return is dead. The live
-local question is the first non-`D_c` predecessor. Earliestness has not yet been used.
-More importantly, this
-branch is not the global target grammar: a physical role block is known only to end in one
+local question is the first non-`D_c` predecessor. `MM-S73` exhausts local earliestness without
+a contradiction; any remaining earliestness input lies before that predecessor. More
+importantly, this branch is not the global target grammar: a physical role block ends in only one
 erasure tile, not `β` of them. A complete proof must either force the long tail at an earliest
 false pole or extend the carry/cylinder invariant to arbitrary physical target suffixes. Fixed
 residue and unit projections are empirically saturated, and the exact carry window grows with
 carrier height. None of `MM-S51`, `MM-S55`, `MM-S57`, `MM-S59`, `MM-S61`, `MM-S63`, `MM-S64`,
-`MM-S68`, `MM-S69`, `MM-S71`, or `MM-O27` alone proves projective avoidance.
+`MM-S68`, `MM-S69`, `MM-S71`, `MM-O27`, or `MM-S73` alone proves projective avoidance.
 Exact bidirectional diagnostics for the ternary swap at `β=3`, body `bbcc`, exclude every
 false-pole word of at most six projective blocks when each regular block has
 role length at most three; this is computational evidence only.
