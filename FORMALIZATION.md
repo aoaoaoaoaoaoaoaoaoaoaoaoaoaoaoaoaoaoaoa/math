@@ -2132,7 +2132,7 @@ outer word by injectivity and proves that any cross-tail collision requires shel
 `(ℓ−2β+1,ℓ−2β+2)` between the later tails. This classifies the synchronization debt but does
 not yet exclude it from the encoded-entry orbit.
 
-The dimension-two affine ledger has twenty-two independently checked records:
+The dimension-two affine ledger has twenty-three independently checked records:
 
 | Record | Formalization obligation |
 | --- | --- |
@@ -2148,6 +2148,7 @@ The dimension-two affine ledger has twenty-two independently checked records:
 | [`D2-S11`](SALVAGE.md#d2-s11-absorbing-four-divisible-cone) | exact upper and middle normalized coordinates, exact two-adic updates in the four-divisible stratum, branchwise denominator absorption, and the lower-wall three-stratum exit classifier |
 | [`D2-S12`](SALVAGE.md#d2-s12-exact-wall-odd-two-cycle-family) | sharp admissible depth range, reduced wall and odd coordinates, exact guarded two-step return, uniqueness at fixed depth pair, strict infinitude, and accumulation at the wall boundary `9/10` |
 | [`D2-S14`](SALVAGE.md#d2-s14-arbitrary-body-wall-excursion-saturation) | periodic-point real-trap localization, arbitrary-body wall anchoring, exact two-/five-adic guards, factor universality, and the finite forbidden-factor no-go |
+| [`D2-S15`](SALVAGE.md#d2-s15-fixed-endpoint-centralizer-reduction) | two-adic slope value, exact length/sum slope classification, fixed-point uniqueness, periodic-point equality iff global commutation, and the equal-/unequal-slope fibre split |
 | [`D2-D05`](SALVAGE.md#d2-d05-prescribed-translation-count) | primitive linear-polynomial divisibility, bounded carries in both scan directions, ordered-marker automaton, regular control, and `a=±1` cases |
 | [`D2-D06`](SALVAGE.md#d2-d06-private-prime-peeling) | unique-minimum valuation calculation, zero endpoints, fixed-count reduction, reversed language, and positive private valuation |
 | [`D2-D07`](SALVAGE.md#d2-d07-bounded-valuation-orthants) | localization support, denominator bounds in both orthants, invariant-interval recognition, finite graph, and regular-control product |
@@ -2733,6 +2734,7 @@ fixed-rank decision problem.
 | `MixedPrimeRealTrapExcursion.lean` | exact upper and middle normalized coordinates, absorbing four-divisible denominator cone, and the complete lower-wall two-adic exit trichotomy |
 | `MixedPrimeRealTrapReturn.lean` | exact wall-to-odd two-cycle family, primitive reduced coordinates, guarded return waits, depth-pair uniqueness, strict infinitude, and boundary accumulation |
 | `MixedPrimeRealTrapSaturation.lean` | arbitrary finite excursion embedding, wall-anchored periodic certificates, exact valuation guards, and factor-universal schedule language |
+| `MixedPrimeRealTrapCentralizer.lean` | fixed-endpoint periodic-point centralizer equivalence and exact slope-kernel/collision-source fibre split |
 | `MixedPrimeKernel.lean` | raw mixed-prime affine action, contextual composition, an infinite odd-length kernel family from length 29, and three independent length-30 relations |
 | `MixedPrimeNormalization.lean` | exact homogeneous odd-family relations, persistence under independent normalization scaling, and the two-seed cancellative pump |
 | `ReturnGuard.lean` | three-mode amalgamated return algebra, split mortality compiler, and exact state lower bound |

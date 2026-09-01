@@ -375,6 +375,7 @@ file owns the mathematical stock.
 | [`D2-S11`](#d2-s11-absorbing-four-divisible-cone) | structure theorem | reduced mantissas with denominator divisible by four remain in that cone under every normalized reverse branch | formalized | active |
 | [`D2-S12`](#d2-s12-exact-wall-odd-two-cycle-family) | structure theorem | a sharp infinite depth family has unique guarded wall-to-odd two-cycles | formalized | active |
 | [`D2-S14`](#d2-s14-arbitrary-body-wall-excursion-saturation) | structure theorem | every finite wait word occurs inside a guarded wall-anchored periodic excursion | formalized | active |
+| [`D2-S15`](#d2-s15-fixed-endpoint-centralizer-reduction) | reduction | equality of nonempty shell periodic points is exactly global affine commutation, split by the slope fibre | formalized | active |
 | [`D2-D01`](#d2-d01-projectively-unimodular-stratum) | decidable stratum | projectively unimodular hard-core instances are decidable | audited | stock |
 | [`D2-D02`](#d2-d02-invariant-pair-stratum) | decidable stratum | invariant projective pairs reduce to effective multiplicative-subgroup membership | audited | graduated |
 | [`D2-D03`](#d2-d03-common-multiplier-stratum) | decidable stratum | rational affine maps with one multiplier are decidable under regular control | reported | active |
@@ -18908,6 +18909,70 @@ use the exact source/target arithmetic, not the internal wait word alone.
 
 **Next:** impose one fixed endpoint, or one fixed endpoint fibre, and determine which part of
 the arbitrary-body saturation survives.
+
+### D2-S15: Fixed-endpoint centralizer reduction
+
+**Kind:** exact reduction
+**Evidence:** formalized
+**Disposition:** active
+
+For every shell schedule `w`, its affine slope remembers exactly two integers:
+
+```text
+v₅(slope(w)) = −length(w),
+v₂(slope(w)) = sum(w).
+```
+
+Consequently two schedules have equal slopes exactly when they have equal lengths and equal
+total waits. Every nonempty schedule has a unique rational fixed point, namely
+`shellPeriodicPoint(w)`. Lean then proves the exact fixed-endpoint identity
+
+```text
+shellPeriodicPoint(u) = shellPeriodicPoint(v)
+  ↔ T_(u++v) = T_(v++u)  on every rational state.
+```
+
+Thus a common periodic endpoint is not an independent orbit phenomenon: it is precisely a
+commuting pair in the positive affine image. The slope invariant splits this centralizer problem
+without loss.
+
+If `u` and `v` have equal length and equal total wait, then their slopes agree, and
+
+```text
+shellPeriodicPoint(u) = shellPeriodicPoint(v)
+  ↔ T_u = T_v  on every rational state.
+```
+
+This branch is exactly the existing balanced affine kernel. If their slopes differ, then the
+common endpoint is forced to be the unique point-collision source:
+
+```text
+shellPeriodicPoint(u) = shellPeriodicPoint(v)
+  ↔ collisionSource(u,v) = shellPeriodicPoint(u).
+```
+
+**Scope:** this is an exact reformulation and fibre decomposition, not a decision procedure for
+the positive centralizer. The equal-slope branch inherits the nonfree affine kernel of
+[`D2-O02`](#d2-o02-critical-shell-periodic-saturation). The unequal-slope branch retains one
+exact rational equality and may still have infinitely many solutions. The theorem concerns
+periodic source equality; general fixed-source reachability to a different target remains
+strictly broader.
+
+**Artifact:** `MixedPrimeDebt.shellSlope_hasValue_two`,
+`MixedPrimeDebt.shellSlope_eq_iff_length_sum`,
+`MixedPrimeDebt.shellRun_fixedPoint_unique`,
+`MixedPrimeDebt.shellPeriodicPoint_eq_iff_commute`,
+`MixedPrimeDebt.shellPeriodicPoint_eq_iff_globalRelation_of_length_sum`, and
+`MixedPrimeDebt.shellPeriodicPoint_eq_iff_collisionSource` in
+[`MixedPrimeRealTrapCentralizer.lean`](MatrixMortality/MixedPrimeRealTrapCentralizer.lean).
+
+**Use:** quotient equal-slope fixed-endpoint loops by the positive affine kernel, and send every
+remaining loop collision directly to the explicit unequal-slope collision equation. Do not
+search a separate periodic-point state graph before applying this split.
+
+**Next:** classify the positive centralizer of one rational homothety. In the unequal-slope
+fibre, combine the collision-source equation with target-depth normalization and the exact
+active-prime mantissa recurrence.
 
 ### D2-O09: Guarded real-pole reset
 

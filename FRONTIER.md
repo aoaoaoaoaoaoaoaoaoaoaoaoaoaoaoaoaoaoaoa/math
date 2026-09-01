@@ -3677,6 +3677,14 @@ Thus every finite wait word occurs as a middle factor of a wall-anchored periodi
 This is [`D2-S14`](SALVAGE.md#d2-s14-arbitrary-body-wall-excursion-saturation). It kills local
 forbidden-factor and bounded-excursion grammars, though not regularity: the endpoints vary with
 the body. The remaining seam is necessarily endpoint-coupled.
+For periodic endpoint fibres, that coupling has an exact algebraic owner. Two nonempty schedules
+have the same periodic source exactly when their global affine actions commute. Their slopes are
+equal exactly when both length and total wait agree. The equal-slope branch is therefore the
+existing balanced affine kernel; every unequal-slope branch is the single explicit equation
+`collisionSource(u,v)=shellPeriodicPoint(u)`. This is
+[`D2-S15`](SALVAGE.md#d2-s15-fixed-endpoint-centralizer-reduction). It replaces a separate
+periodic-state census by a positive-centralizer problem, but does not yet decide that
+centralizer or general unequal-endpoint reachability.
 The deepest of those three branches is itself a full depth reset. In normalized band coordinates
 `U(d,μ)=1/5+(3/10)(2/3)^dμ`, every target band `d≥2` contains a point whose `d−2` predecessor has
 any prescribed band `n≥7` and mantissa in `(2/3,1]`. An explicit guarded subfamily fixes target
@@ -4023,7 +4031,9 @@ universal computation.
    periodicity there. `D2-S12` classifies every immediate lower/middle two-cycle and kills a
    finite literal return census. `D2-S14` embeds every finite wait body in a guarded wall
    excursion, so local forbidden-factor grammars are equally exhausted. Attack endpoint-coupled
-   fibres rather than refining the wall-only graph.
+   fibres rather than refining the wall-only graph. `D2-S15` identifies equality of periodic
+   endpoints with global affine commutation and splits it into balanced-kernel and explicit
+   collision-source fibres.
    Keep the non-elementary lanes independent: adelic cone types, parabolic rational subsets,
    trace/height descent, finite-obstruction saturation, and valuation universality.
 7. Synthesize the returned attacks by the discriminating signals above; do not average
