@@ -1083,6 +1083,17 @@ first-hit bridges, all projectively colliding at acceptance. This is literal bri
 freeness; freeness of the loop matrices themselves is not part of `R32-S66`. See
 [`audits/m32-cubic-binary-pumps-2026-09-01.md`](audits/m32-cubic-binary-pumps-2026-09-01.md).
 
+`CubicContinuantTransversePump` proves that the hidden binary stack is algebraically genuine.
+In the common-ray basis `[[4,1],[3,1]]`, the two physical loop products become nonzero scales
+times upper-triangular affine maps. Their contractions preserve `[0,1]`, their digit chambers are
+disjoint, and the resulting affine address is injective. Lean lifts this to projective
+injectivity of arbitrary full physical loop products: distinct bit strings never give scalar
+multiples of the same matrix. Yet a generic ray-stabilizer theorem proves that after a right
+context reaches the stabilized ray, inserting any such word only multiplies every left-context
+incidence by its nonzero eigenvalue. The entire free projective stack is therefore invisible to
+zero observation after the fixed suffix. See `R32-S67` and
+[`audits/m32-cubic-transverse-pump-2026-09-01.md`](audits/m32-cubic-transverse-pump-2026-09-01.md).
+
 The rank-(2,2) graph is no longer an independent residue. `RankTwoPunctuation` proves that every
 compatible square with one rank-one loop and three units transports exactly to the existing raw
 reverse compiler [`R32-M01`](SALVAGE.md#r32-m01-generic-reverse-edge-compiler). Its intrinsic
@@ -1929,6 +1940,7 @@ fixed-rank decision problem.
 | `CubicContinuantEndpoint.lean` | separator-adapted endpoint chart and exact reduction of the fixed cubic bridge language to accepting-ray reachability |
 | `CubicContinuantInternalPump.lean` | infinite internal-ray bridge pumps and a nonaccepting source-merge obstruction to naive endpoint decoding |
 | `CubicContinuantBinaryPump.lean` | free literal binary first-hit bridge language on two safe non-scalar stabilizer loops |
+| `CubicContinuantTransversePump.lean` | projectively free transverse binary loop monoid and generic ray-stabilizer zero-observation congruence |
 | `EdgeCompression.lean` | exact adjacent-edge compression for split finite-rank families |
 | `TwoPlaneEdges.lean` | compatible two-plane realization of a `2 × 2` edge square and exact rank-two certificates |
 | `ReverseEdge.lean` | generic projective-incidence reverse compiler, basis adaptation, and all-path converse |

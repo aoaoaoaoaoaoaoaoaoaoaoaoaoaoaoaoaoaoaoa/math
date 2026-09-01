@@ -139,6 +139,7 @@ file owns the mathematical stock.
 | [`R32-S64`](#r32-s64-cubic-endpoint-chart) | exact reduction | a separator-adapted conjugacy turns fixed-cubic mortality into positive reachability from `e₀` to the nonzero `e₁` ray | formalized | active |
 | [`R32-S65`](#r32-s65-internal-ray-bridge-pumps) | structure theorem and obstruction | two non-scalar internal-ray loops give injective infinite bridge families and a first-hit-safe nonaccepting source merge | formalized | active |
 | [`R32-S66`](#r32-s66-binary-first-hit-bridge-pump) | structure theorem and obstruction | two safe non-scalar loops give exactly `2^n` distinct equal-length first-hit bridges at width `n` | formalized | active |
+| [`R32-S67`](#r32-s67-transverse-free-pump-and-ray-blindness) | structure theorem and obstruction | the binary loop matrices form a projectively free monoid whose entire stack is zero-invisible after the fixed ray-reaching suffix | formalized | active |
 | [`R32-M01`](#r32-m01-generic-reverse-edge-compiler) | partial mechanism | projective incidence generically embeds into a compatible two-plane edge square | formalized | active |
 | [`R32-M02`](#r32-m02-finite-quotient-sieve) | partial mechanism | finite monoid quotients give complete modular no-certificates for fixed candidates | formalized | active |
 | [`R32-M03`](#r32-m03-two-scale-return-conversion) | partial mechanism | a minimal two-scale return pencil has nonresonant multi-return zeros | formalized | active |
@@ -4983,7 +4984,8 @@ Any pair in that family has an explicit nonzero projective collision ratio on th
 composition, all-word proper-suffix safety, all-word zero products, fixed-width projective
 collision, common length, and cardinality `2^n` are Lean checked. This proves a free literal
 binary bridge code. It does not yet prove that distinct bit strings give distinct full matrix
-products, so a matrix-semigroup quotient could still collapse the code.
+products. `R32-S67` resolves that remaining question positively: the full physical products are
+projectively free.
 
 **Artifact:** `CubicReturn.NonPure.falseWaitFirstHitBinaryEncoding_ray`,
 `falseWaitFirstHitBinaryEncoding_injective`,
@@ -4997,6 +4999,89 @@ products, so a matrix-semigroup quotient could still collapse the code.
 **Use:** any source-based decision quotient must collapse an exponentially branching family of
 first-hit-safe stabilizer spellings. Test whether the full loop matrices retain a transverse free
 stack; if they do, source observation erases an algebraically genuine binary memory.
+
+### R32-S67: Transverse free pump and ray blindness
+
+**Kind:** structure theorem and obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+Let
+
+```text
+B=[[4,1],[3,1]],       B⁻¹=[[1,−1],[−3,4]].
+```
+
+The first column is the common stabilized ray `(4,3)`. After dividing by the nonzero eigenvalue
+from `R32-S66`, Lean checks
+
+```text
+B⁻¹Π(C₀)B / 777600000 = [[1,1712/5625],[0,1/625]],
+B⁻¹Π(C₁)B / 182891520000 = [[1,122527/432000],[0,197/336000]].       (1)
+```
+
+Write the normalized affine maps as `f_b(z)=d_b+q_bz`. Both have `0<q_b<1` and preserve the unit
+interval. Their chambers are strictly separated:
+
+```text
+f₁([0,1]) < f₀([0,1]);
+```
+
+in particular, `d₁+q₁=429731/1512000 < d₀=1712/5625`. The recursively nested affine address
+
+```text
+A([])=0,       A(b::β)=d_b+q_bA(β)
+```
+
+therefore lies in `[0,1]` and is injective on all finite bit strings. Lean proves the complete
+normalized product formula
+
+```text
+Π(N,β)=[[1,A(reverse β)],[0,∏ᵢq_(βᵢ)]].            (2)
+```
+
+If two normalized products are scalar multiples, their upper-left entries force the scalar to
+one, and (2) plus address injectivity forces the bit strings equal. Exact word flattening,
+conjugacy, and the nonzero physical scale product lift this result to
+
+```text
+Π(M,E(β)) = λ·Π(M,E(γ))  ⇒  β=γ.                   (3)
+```
+
+Thus the two physical safe-loop products generate a free projective binary monoid. This is
+strictly stronger than the literal-code injection of `R32-S66`.
+
+The same theorem exposes a precise observation no-go. Generically, if a right context `R` sends
+a source `c` to `ρv` and a word `L` sends `v` to `λv`, then for every left context `A` and row
+`r`, Lean proves
+
+```text
+rΠ(ALR)c = λ·rΠ(AR)c.                               (4)
+```
+
+When `λ≠0`, insertion of `L` preserves and reflects zero incidence. Specializing (4) to the
+fixed suffix `S` and every binary encoding `E(β)` proves that no left context can distinguish
+the entire projectively free stack for zero detection after `S` has reached `(4,3)`.
+
+**Scope:** the exact chart (1), unit-interval bounds, chamber separation, affine-code injection,
+product formula (2), normalized and physical projective freeness (3), generic source-image and
+incidence laws (4), the zero equivalence, and specialized all-left-context invisibility are Lean
+checked. The result does not show that the transverse stack can be read before the fixed suffix,
+nor does it construct an instance-dependent compiler.
+
+**Artifact:** `MatrixMortality.wordProduct_rayStabilizer_insertion_zero_iff`,
+`CubicReturn.NonPure.falseWaitFirstHitBinaryLoop_chart`,
+`falseWaitFirstHitBinaryAffineCode_injective`,
+`falseWaitFirstHitBinaryNormalizedLoop_product_entries`,
+`falseWaitFirstHitBinaryEncoding_product_projectively_injective`, and
+`falseWaitFirstHitBinaryEncoding_contextual_zero_iff` in
+[`CubicContinuantTransversePump.lean`](MatrixMortality/CubicContinuantTransversePump.lean), with
+audit
+[`m32-cubic-transverse-pump-2026-09-01.md`](audits/m32-cubic-transverse-pump-2026-09-01.md).
+
+**Use:** treat the two loops as a genuine transverse binary stack, but never attempt to read it
+with a left zero context after the source has entered their common ray. Seek an earlier fork or
+right-context diversion that exposes the affine coordinate before collapse.
 
 ### R32-M01: Generic reverse edge compiler
 

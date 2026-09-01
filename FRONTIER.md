@@ -1770,6 +1770,19 @@ products retain or erase the bit stack transversely. See
 [`R32-S66`](SALVAGE.md#r32-s66-binary-first-hit-bridge-pump) and
 [`m32-cubic-binary-pumps-2026-09-01.md`](audits/m32-cubic-binary-pumps-2026-09-01.md).
 
+The full matrices retain the stack. In the basis with first column `(4,3)`, each loop is its
+nonzero ray eigenvalue times an upper-triangular affine contraction. Both maps preserve `[0,1]`
+and their image intervals are disjoint, so a transverse affine address decodes every bit string.
+Lean lifts this to projective freeness of the physical loop-product monoid. Simultaneously, the
+generic ray-stabilizer insertion theorem shows that after a suffix reaches `(4,3)`, inserting any
+encoded word merely scales every possible left-context incidence by a nonzero number. Thus the
+same component contains a genuine free binary memory that its source-to-zero observation cannot
+read after the suffix. The remaining compiler seam is no longer “find storage”; it is to divert
+or interrogate the transverse coordinate before the ray collapse, or prove that the fixed return
+grammar forbids such a readout. See
+[`R32-S67`](SALVAGE.md#r32-s67-transverse-free-pump-and-ray-blindness) and
+[`m32-cubic-transverse-pump-2026-09-01.md`](audits/m32-cubic-transverse-pump-2026-09-01.md).
+
 ### ReturnSquare laboratory
 
 [`R32-S03`](SALVAGE.md#r32-s03-returnsquare-normal-form) is the first completely normalized
