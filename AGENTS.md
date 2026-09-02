@@ -97,9 +97,10 @@ claim.
 
 `publications.json` is the canonical map from presentation-free semantic sources to routes below
 `/math/` on `../eternalist.moe`. Its single `index` entry owns `/math/`; a `collection` owns a
-subject landing page; every long-form work is a `result` entry below a collection route. Adding a
-collection or result requires its source, its manifest entry, and its listing by its immediate
-parent, but no Eternalist content patch.
+subject landing page; a `reference` owns a reusable expository aid below a collection; every
+research-result exposition is a `result` entry below a collection route. Adding a collection,
+reference, or result requires its source, its manifest entry, and its listing by its immediate parent,
+but no Eternalist content patch.
 
 Every listed source must contain no `<style>` element, inline `style` attribute, or stylesheet
 link. Eternalist owns typography, color, layout, responsive behavior, and print presentation

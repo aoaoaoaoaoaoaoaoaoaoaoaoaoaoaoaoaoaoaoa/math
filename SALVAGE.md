@@ -218,7 +218,7 @@ file owns the mathematical stock.
 | [`R32-S05`](#r32-s05-prefix-shift-and-affine-residual) | structure theorem | each legal step decodes one p-adic prefix and updates the reciprocal residual affinely | formalized | active |
 | [`R32-S06`](#r32-s06-resonance-localization) | structure theorem | every nonresonant continuation descends and every infinite ready chain resonates arbitrarily late | formalized | active |
 | [`R32-O06`](#r32-o06-rational-affine-wait-rail-rigidity) | obstruction | no reduced rational chart supports a nontrivial affine wait rail at infinitely many prime powers | formalized | graduated |
-| [`R32-O07`](#r32-o07-parity-immortality-and-maximal-isolation) | obstruction | odd reset resultants are immortal, while maximal Smith steps in the even stratum are isolated | formalized | graduated |
+| [`R32-O07`](#r32-o07-parity-immortality-and-maximal-isolation) | obstruction | odd reset-defect numerators are immortal, while maximal Smith steps in the even stratum are isolated | formalized | graduated |
 | [`R32-O08`](#r32-o08-recurrent-boundary-divisors-stay-reverse) | obstruction | outside fixed scale-reset support, a reverse-content divisor recurring in the next boundary remains wholly reverse | formalized | graduated |
 | [`R32-O09`](#r32-o09-universal-boundary-reset-ball) | obstruction | a coefficient-prime reset ball excludes every depth-two guard below its explicit valuation wall | formalized | graduated |
 | [`R32-O10`](#r32-o10-ready-order-breaking-bridge-ejection) | obstruction | a ready order-breaking bridge can eject a strict reset ball without auxiliary cancellation while amplifying denominator height | formalized | graduated |
@@ -10881,13 +10881,13 @@ maximal step cannot terminate. If a next primitive step exists, its forward cont
 coordinate `u` are odd; since `uv=q′−1` is even, the next `v` is even. Consecutive maximal
 steps are impossible.
 
-**Scope:** the odd-resultant theorem excludes physical mortality for an actual guard through
+**Scope:** the odd-reset-defect theorem excludes physical mortality for an actual guard through
 the checked decoded-to-primitive execution lift. The maximal-isolation theorems concern
 consecutive primitive depth-two endpoint reductions with their Smith splits. They do not
 globalize the local contraction on `v≥2` branches.
 
 **Artifact:** `PadicValuation.odd_prime_of_adjacent_units`, `Parameters.prime_odd`,
-`not_physical_isMortal_of_resetResultant_odd`,
+`not_physical_isMortal_of_resetDefectNumerator_odd`,
 `PrimitiveEndpointReduction.maximalCancellation_targetNumerator_odd`, and
 `PrimitiveEndpointReduction.maximalCancellation_next_v_even` in
 [`PadicValuation.lean`](MatrixMortality/PadicValuation.lean),
@@ -10896,7 +10896,7 @@ globalize the local contraction on `v≥2` branches.
 [`ReturnGuardSmith.lean`](MatrixMortality/ReturnGuardSmith.lean). Independent audit:
 [`m32-parity-maximal-isolation-2026-08-04.md`](audits/m32-parity-maximal-isolation-2026-08-04.md).
 
-**Use:** discard residue characteristic two, the entire odd-resultant mortality stratum, and
+**Use:** discard residue characteristic two, the entire odd-reset-defect mortality stratum, and
 every eventually maximal schedule. Any surviving undecidability construction or decision
 argument must live in even `R` and traverse a `v≥2` branch after each maximal step.
 
@@ -10984,7 +10984,7 @@ the analogous `pᵐ−1` wall only if its entry endpoint is already in the corre
 theorem neither proves that entry nor amortizes a later wait outside `mℕ`.
 
 **Artifact:** `ReturnGuard.not_physical_isMortal_of_resetBall` and
-`ReturnGuard.universalBoundary_dvd_resetResultant_of_physical_isMortal` in
+`ReturnGuard.universalBoundary_dvd_resetDefectNumerator_of_physical_isMortal` in
 [`ReturnGuardBoundary.lean`](MatrixMortality/ReturnGuardBoundary.lean). Independent audit:
 [`m32-universal-boundary-2026-08-05.md`](audits/m32-universal-boundary-2026-08-05.md).
 
@@ -11019,7 +11019,7 @@ v₅(R)=0,   v₅(z₁−R)=1,   v₅(z₂−R)=0.
 ```
 
 The bridge's raw endpoint pair has gcd `18`, coprime to `5`; no auxiliary content is swallowed.
-Its primitive denominator grows from `19` to `270178`. The reset resultant is even and the law
+Its primitive denominator grows from `19` to `270178`. The reset-defect numerator is even and the law
 passes every universal-boundary wall.
 
 **Scope:** this is a continuing legal prefix, not an infinite orbit. It refutes every uniform

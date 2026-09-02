@@ -10,7 +10,7 @@ Human role: elicited by @eternalism_4eva
 
 `M₃(2)` asks whether mortality is decidable for every pair of `3 × 3` integer matrices. The
 rank-`(3,2)` guard has already reduced one concrete family to deterministic rational
-reachability. Its live residue consists of even-resultant executions with unbounded reduced
+reachability. Its live residue consists of even-reset-defect executions with unbounded reduced
 denominators which may repay every mandatory nonmaximal Smith loss.
 
 This audit reconstructs a submitted prime-adic attack. Only claims which cut that residue are
@@ -22,8 +22,8 @@ retained; the submitted conversation and report remain transient.
 | --- | --- | --- |
 | the depth-two endpoint map has the displayed reset-defect factorization | promotion | checked directly from the existing endpoint transfer |
 | two coefficient inequalities make the open reset ball invariant | promotion | checked for every positive decoded branch and every auxiliary prime |
-| mortality forces the stated higher prime-power thresholds in the reset resultant | consequence | follows arithmetically from the checked inequality theorem; the piecewise threshold is not duplicated in Lean |
-| every prime dividing `p−1` must divide the reset resultant | promotion | checked as a direct physical-mortality corollary |
+| mortality forces the stated higher prime-power thresholds in the reset-defect numerator | consequence | follows arithmetically from the checked inequality theorem; the piecewise threshold is not duplicated in Lean |
+| every prime dividing `p−1` must divide the reset-defect numerator | promotion | checked as a direct physical-mortality corollary |
 | the supplied period-three ray is harmless | checked consequence | its coefficient valuations satisfy the stronger reset-ball hypotheses |
 | an arbitrary common-period tail is trapped | rejected as stated | the tail entry must first lie in the corresponding reset ball |
 | order-breaking bridges are the sole remaining global obstruction | qualified | they form a sharper cyclotomic lane, but do not replace the unconditional global amortization problem |
@@ -116,7 +116,7 @@ excludes coefficient tuples where `ℓ` already divides `R` but its valuation re
 reset-ball wall. Scaling `A,D,L` together translates `λL,λR,λD` equally, so both inequalities are
 presentation-invariant.
 
-Artifact: `ReturnGuard.universalBoundary_dvd_resetResultant_of_physical_isMortal` in
+Artifact: `ReturnGuard.universalBoundary_dvd_resetDefectNumerator_of_physical_isMortal` in
 [`ReturnGuardBoundary.lean`](../MatrixMortality/ReturnGuardBoundary.lean).
 
 For the fixed ray

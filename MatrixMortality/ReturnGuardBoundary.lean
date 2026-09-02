@@ -6,7 +6,7 @@ import MatrixMortality.ReturnGuardCumulative
 At depth two, every positive endpoint branch preserves an explicit prime-adic ball around the
 reset when the coefficient valuations fit below its boundary. The physical compiler turns this
 local invariant into immortality. In particular, every prime divisor of `p - 1` must divide the
-reset resultant of a mortal guard.
+reset-defect numerator of a mortal guard.
 -/
 
 namespace MatrixMortality.ReturnGuard
@@ -80,22 +80,22 @@ theorem not_physical_isMortal_of_resetBall
       (ReturnFamily.pairGenerator
         (ambient (parameters.prime : ℚ) parameters.depth)
         (cut parameters.center parameters.reset)) := by
-  let resetResultant : ℤ := centerNumerator + driftNumerator - scale
-  let rho : ℤ := padicValInt factor resetResultant
+  let resetDefectNumerator : ℤ := centerNumerator + driftNumerator - scale
+  let rho : ℤ := padicValInt factor resetDefectNumerator
   let lam : ℤ := padicValInt factor scale
   let mu : ℤ := padicValInt factor driftNumerator
   let e : ℤ := padicValInt factor ((parameters.prime : ℤ) - 1)
   let epsilon : ℤ := padicValInt factor 2
-  have reset_ne' : resetResultant ≠ 0 := by
-    simpa only [resetResultant] using reset_ne
+  have reset_ne' : resetDefectNumerator ≠ 0 := by
+    simpa only [resetDefectNumerator] using reset_ne
   have drift_ne : driftNumerator ≠ 0 := by
     intro drift_zero
     apply parameters.drift_ne_zero
     rw [drift_eq, drift_zero]
     simp
-  have reset_value : HasValue factor (resetResultant : ℚ) rho := by
+  have reset_value : HasValue factor (resetDefectNumerator : ℚ) rho := by
     refine ⟨by exact_mod_cast reset_ne', ?_⟩
-    simpa only [rho] using (padicValRat.of_int (p := factor) (z := resetResultant))
+    simpa only [rho] using (padicValRat.of_int (p := factor) (z := resetDefectNumerator))
   have scale_value : HasValue factor (scale : ℚ) lam := by
     refine ⟨by exact_mod_cast scale_ne, ?_⟩
     simpa only [lam] using (padicValRat.of_int (p := factor) (z := scale))
@@ -121,18 +121,18 @@ theorem not_physical_isMortal_of_resetBall
       (factor := factor) prime_boundary_ne two_dvd_prime_boundary
     exact Int.ofNat_le.mpr raw
   have reset_below_boundary' : rho < lam + e := by
-    simpa only [rho, lam, e, resetResultant] using reset_below_boundary
+    simpa only [rho, lam, e, resetDefectNumerator] using reset_below_boundary
   have reset_twice_below_blade' :
       2 * rho < mu + e + min lam (rho + epsilon) := by
-    simpa only [rho, lam, mu, e, epsilon, resetResultant] using
+    simpa only [rho, lam, mu, e, epsilon, resetDefectNumerator] using
       reset_twice_below_blade
   let inside : Set ℚ :=
     {residual |
       let coordinate :=
         terminalCoordinate centerNumerator driftNumerator scale residual
-      coordinate = (resetResultant : ℚ) ∨
-        (coordinate - resetResultant ≠ 0 ∧
-          rho < padicValRat factor (coordinate - resetResultant))}
+      coordinate = (resetDefectNumerator : ℚ) ∨
+        (coordinate - resetDefectNumerator ≠ 0 ∧
+          rho < padicValRat factor (coordinate - resetDefectNumerator))}
   have closed : ∀ {source target : ℚ},
       source ∈ inside → DecodedStep parameters source target → target ∈ inside := by
     intro source target source_inside decoded
@@ -145,9 +145,9 @@ theorem not_physical_isMortal_of_resetBall
       terminalCoordinate centerNumerator driftNumerator scale
         (residualStep parameters wait source)
     have source_inside' :
-        sourceCoordinate = (resetResultant : ℚ) ∨
-          (sourceCoordinate - resetResultant ≠ 0 ∧
-            rho < padicValRat factor (sourceCoordinate - resetResultant)) := by
+        sourceCoordinate = (resetDefectNumerator : ℚ) ∨
+          (sourceCoordinate - resetDefectNumerator ≠ 0 ∧
+            rho < padicValRat factor (sourceCoordinate - resetDefectNumerator)) := by
       simpa only [inside, Set.mem_ofPred_eq, sourceCoordinate] using source_inside
     have source_value : HasValue factor sourceCoordinate rho := by
       rcases source_inside' with source_reset | source_deep
@@ -155,9 +155,9 @@ theorem not_physical_isMortal_of_resetBall
         exact reset_value
       · have error_value :
             HasValue factor
-              (sourceCoordinate - (resetResultant : ℚ))
+              (sourceCoordinate - (resetDefectNumerator : ℚ))
               (padicValRat factor
-                (sourceCoordinate - (resetResultant : ℚ))) :=
+                (sourceCoordinate - (resetDefectNumerator : ℚ))) :=
           ⟨source_deep.1, rfl⟩
         have sum_value :=
           add_hasValue_left reset_value error_value source_deep.2
@@ -219,15 +219,15 @@ theorem not_physical_isMortal_of_resetBall
           (neg_hasValue scaled_boundary_value) rho_lt_lam_add_b
     let blade : ℚ := (q + 1) * sourceCoordinate + scale
     have defect_identity :
-        (targetCoordinate - (resetResultant : ℚ)) *
+        (targetCoordinate - (resetDefectNumerator : ℚ)) *
             (sourceCoordinate - scale * (q - 1)) =
           driftNumerator * (q - 1) * blade := by
-      simpa only [targetCoordinate, sourceCoordinate, resetResultant, q, blade,
+      simpa only [targetCoordinate, sourceCoordinate, resetDefectNumerator, q, blade,
         Int.cast_add, Int.cast_sub] using
         endpointResetDefect parameters center_eq drift_eq scale_ne
           depth_two branch
     by_cases blade_zero : blade = 0
-    · have target_reset : targetCoordinate = (resetResultant : ℚ) := by
+    · have target_reset : targetCoordinate = (resetDefectNumerator : ℚ) := by
         apply sub_eq_zero.mp
         apply mul_right_cancel₀ denominator_value.1
         rw [defect_identity, blade_zero]
@@ -249,13 +249,13 @@ theorem not_physical_isMortal_of_resetBall
           _ ≤ padicValRat factor blade := by
             simpa only [blade] using sum_lower
       by_cases defect_zero :
-          targetCoordinate - (resetResultant : ℚ) = 0
+          targetCoordinate - (resetDefectNumerator : ℚ) = 0
       · exact Or.inl (sub_eq_zero.mp defect_zero)
       · have defect_value :
             HasValue factor
-              (targetCoordinate - (resetResultant : ℚ))
+              (targetCoordinate - (resetDefectNumerator : ℚ))
               (padicValRat factor
-                (targetCoordinate - (resetResultant : ℚ))) :=
+                (targetCoordinate - (resetDefectNumerator : ℚ))) :=
           ⟨defect_zero, rfl⟩
         have blade_value :
             HasValue factor blade (padicValRat factor blade) :=
@@ -265,14 +265,14 @@ theorem not_physical_isMortal_of_resetBall
           mul_hasValue (mul_hasValue drift_value boundary_value) blade_value
         have valuation_identity :
             padicValRat factor
-                (targetCoordinate - (resetResultant : ℚ)) + rho =
+                (targetCoordinate - (resetDefectNumerator : ℚ)) + rho =
               mu + b + padicValRat factor blade := by
           have equal := congrArg (padicValRat factor) defect_identity
           rw [left_value.2, right_value.2] at equal
           exact equal
         have defect_deep :
             rho < padicValRat factor
-              (targetCoordinate - (resetResultant : ℚ)) := by
+              (targetCoordinate - (resetDefectNumerator : ℚ)) := by
           omega
         exact Or.inr ⟨defect_zero, defect_deep⟩
   intro mortal
@@ -282,9 +282,9 @@ theorem not_physical_isMortal_of_resetBall
   have reset_inside : (1 : ℚ) ∈ inside := by
     change
       terminalCoordinate centerNumerator driftNumerator scale 1 =
-          (resetResultant : ℚ) ∨ _
+          (resetDefectNumerator : ℚ) ∨ _
     exact Or.inl (by
-      simpa only [resetResultant, Int.cast_add, Int.cast_sub] using
+      simpa only [resetDefectNumerator, Int.cast_add, Int.cast_sub] using
         terminalCoordinate_one centerNumerator driftNumerator scale)
   have terminal_inside := execution.target_mem closed reset_inside
   have terminal_coordinate_zero :
@@ -293,24 +293,24 @@ theorem not_physical_isMortal_of_resetBall
     terminalCoordinate_terminalResidual parameters center_eq drift_eq scale_ne
   change
     terminalCoordinate centerNumerator driftNumerator scale
-          (terminalResidual parameters) = (resetResultant : ℚ) ∨
+          (terminalResidual parameters) = (resetDefectNumerator : ℚ) ∨
       (terminalCoordinate centerNumerator driftNumerator scale
-            (terminalResidual parameters) - resetResultant ≠ 0 ∧
+            (terminalResidual parameters) - resetDefectNumerator ≠ 0 ∧
         rho < padicValRat factor
           (terminalCoordinate centerNumerator driftNumerator scale
-            (terminalResidual parameters) - resetResultant)) at terminal_inside
+            (terminalResidual parameters) - resetDefectNumerator)) at terminal_inside
   rw [terminal_coordinate_zero] at terminal_inside
   rcases terminal_inside with terminal_reset | terminal_deep
   · exact reset_ne' (by exact_mod_cast terminal_reset.symm)
   · have terminal_value :
-        padicValRat factor (0 - (resetResultant : ℚ)) = rho := by
+        padicValRat factor (0 - (resetDefectNumerator : ℚ)) = rho := by
       rw [zero_sub, padicValRat.neg, reset_value.2]
     rw [terminal_value] at terminal_deep
     exact (lt_irrefl rho) terminal_deep.2
 
-/-- Every prime divisor of the universal base boundary divides the reset resultant of a mortal
-depth-two guard. -/
-theorem universalBoundary_dvd_resetResultant_of_physical_isMortal
+/-- Every prime divisor of the universal base boundary divides the reset-defect numerator of a
+mortal depth-two guard. -/
+theorem universalBoundary_dvd_resetDefectNumerator_of_physical_isMortal
     (parameters : Parameters)
     {centerNumerator driftNumerator scale : ℤ}
     (center_eq :

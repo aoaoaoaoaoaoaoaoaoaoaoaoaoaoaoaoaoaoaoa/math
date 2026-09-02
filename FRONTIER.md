@@ -3510,7 +3510,7 @@ sieve supplies no height amortization: survivors may absorb the universal-bounda
 their fixed coefficients.
 
 [`R32-O10`](SALVAGE.md#r32-o10-ready-order-breaking-bridge-ejection) closes the proposed first
-order-breaking bridge as an independent local consumer. The even-resultant law
+order-breaking bridge as an independent local consumer. The even-reset-defect law
 
 ```text
 p=3,   A=R=249398,   D=L=1

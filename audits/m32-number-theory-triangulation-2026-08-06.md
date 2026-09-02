@@ -10,9 +10,9 @@ Human role: elicited by @eternalism_4eva
 
 `M₃(2)` asks whether mortality is decidable for every pair of `3 × 3` integer matrices. The
 present split-spectrum rank-`(3,2)` family reduces one substantial subproblem to deterministic
-rational reachability. At depth two, all odd-resultant laws are already immortal and every
+rational reachability. At depth two, all odd-reset-defect laws are already immortal and every
 infinite orbit with bounded reduced denominators is eventually periodic. The surviving enemy is
-therefore an even-resultant, universal-boundary-passing execution with unbounded reduced
+therefore an even-reset-defect, universal-boundary-passing execution with unbounded reduced
 denominators.
 
 The last fixed-frame attack located the unbounded shear but did not bound it. This review asks a
@@ -293,7 +293,7 @@ argument needs.
 
 ```text
 MASTER VERDICT: M₃(2) remains open
-GUARD VERDICT: the unbounded-denominator even-resultant stratum remains open
+GUARD VERDICT: the unbounded-denominator even-reset-defect stratum remains open
 NEW FORMAL WOUND: no primitive reset forces the full primitive cyclotomic part, with multiplicity, into content and into the p^a-weighted height budget
 PRIMARY BRIDGES: positive Smith macro -> primitive height descent; failing that, exact gauged Smith cocycle -> adelic CFF inequality
 COMPLETED BRIDGES: positive Smith decoding preserves primitivity and strictly raises rational height; Φₐ(p) divides a times primitiveCyclotomicPart, yielding formal strong primitive pressure

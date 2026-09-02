@@ -30,7 +30,7 @@
         <li>
           <a href="#known-stuff">Known Stuff</a>
           <ol>
-            <li><a href="#part-one">The four-role source</a></li>
+            <li><a href="#part-one">The four-role fixed-boundary problem</a></li>
             <li><a href="#word-pair-matrices">Word-pair matrices</a></li>
             <li><a href="#previous-bound">Previous bounds</a></li>
           </ol>
@@ -81,16 +81,16 @@
         <details class="major-section">
           <summary><h2 id="known-stuff">Known Stuff<a class="fragment-link" href="#known-stuff" aria-label="Link to this section">#</a></h2></summary>
 
-          <h3 id="part-one">The four-role source<a class="fragment-link" href="#part-one" aria-label="Link to this section">#</a></h3>
-          <p>The <a href="/math/matrix_mortality/m3_5/">fixed-boundary correspondence theorem</a> proves undecidability of a four-role source problem.</p>
+          <h3 id="part-one">The four-role fixed-boundary problem<a class="fragment-link" href="#part-one" aria-label="Link to this section">#</a></h3>
+          <p>The <a href="/math/matrix_mortality/m3_5/">fixed-boundary correspondence theorem</a> proves undecidability of a four-role fixed-boundary problem.</p>
 
-          <p>Fix a deletion width <var>β</var> and write <var>H</var> for Neary’s binary word code, with <var>H</var>(<span class="word">b</span>) = 10<sup><var>β</var></sup>1 and <var>H</var>(<span class="word">c</span>) = 1. For the variable part <var>q</var> of the <span class="word">c</span>-appendant, the four ordinary roles are</p>
+          <p>Fix a deletion width <var>β</var> and write <var>H</var> for Neary’s binary word code, with <var>H</var>(<span class="word">b</span>) = 10<sup><var>β</var></sup>1 and <var>H</var>(<span class="word">c</span>) = 1. For the Neary body <var>B</var> of the <span class="word">c</span>-appendant, the four ordinary roles are</p>
           <div class="formula">
             <math display="block">
               <mtable columnalign="left left">
                 <mtr>
                   <mtd><msub><mi>R</mi><mi>c</mi></msub></mtd>
-                  <mtd><mo>=</mo><mo>(</mo><mn>1</mn><mo>,</mo><mn>1</mn><mi>H</mi><mo>(</mo><mi>q</mi><mo>)</mo><mn>10</mn><mo>)</mo><mo>,</mo></mtd>
+                  <mtd><mo>=</mo><mo>(</mo><mn>1</mn><mo>,</mo><mn>1</mn><mi>H</mi><mo>(</mo><mi>B</mi><mo>)</mo><mn>10</mn><mo>)</mo><mo>,</mo></mtd>
                 </mtr>
                 <mtr>
                   <mtd><msub><mi>D</mi><mi>c</mi></msub></mtd>
@@ -123,13 +123,13 @@
               </mrow>
             </math>
           </div>
-          <p>The soundness proof analyzes every role word. Zero-run synchronization forces exact deletion-width blocks, and a global history equation reconstructs lawful tag steps. Neary’s restricted binary-tag undecidability theorem supplies the external source family <a href="#ref-neary-2015">[Neary 2015]</a>.</p>
+          <p>The soundness proof analyzes every role word. Zero-run synchronization forces exact deletion-width blocks, and a global history equation reconstructs lawful tag steps. Neary’s restricted binary-tag undecidability theorem supplies the external tag family <a href="#ref-neary-2015">[Neary 2015]</a>.</p>
           <div class="theorem">
             <p><strong>Neary padding corollary.</strong> Neary’s compiler has <var>β</var> = 10<var>p</var> and permits a computably chosen sufficiently large padding parameter <var>s</var>. Taking <var>s</var> = <var>x</var>(<var>β</var>−1)+1 makes the body length</p>
             <div class="formula plain">
               <math display="block">
                 <mrow>
-                  <mo>|</mo><mi>q</mi><mo>|</mo>
+                  <mo>|</mo><mi>B</mi><mo>|</mo>
                   <mo>=</mo><mi>β</mi><mi>s</mi><mo>−</mo><mn>1</mn>
                   <mo>=</mo><mo>(</mo><mi>x</mi><mi>β</mi><mo>+</mo><mn>1</mn><mo>)</mo><mo>(</mo><mi>β</mi><mo>−</mo><mn>1</mn><mo>)</mo><mo>.</mo>
                 </mrow>
@@ -140,9 +140,9 @@
                 <mrow>
                   <mi>β</mi><mo>&gt;</mo><mn>2</mn><mo>,</mo>
                   <mspace width="0.7em"></mspace>
-                  <mi>β</mi><mo>−</mo><mn>1</mn><mo>≤</mo><mo>|</mo><mi>q</mi><mo>|</mo><mo>,</mo>
+                  <mi>β</mi><mo>−</mo><mn>1</mn><mo>≤</mo><mo>|</mo><mi>B</mi><mo>|</mo><mo>,</mo>
                   <mspace width="0.7em"></mspace>
-                  <mi>β</mi><mo>−</mo><mn>1</mn><mo>∣</mo><mo>|</mo><mi>q</mi><mo>|</mo><mo>.</mo>
+                  <mi>β</mi><mo>−</mo><mn>1</mn><mo>∣</mo><mo>|</mo><mi>B</mi><mo>|</mo><mo>.</mo>
                 </mrow>
               </math>
             </div>
@@ -177,7 +177,7 @@
               </mrow>
             </math>
           </div>
-          <p>It is a monoid morphism, and its upper-right entry vanishes exactly when <var>u</var> = <var>v</var> <a href="#ref-chhn-2014">[Cassaigne et al. 2014]</a>. The M<sub>3</sub>(5) construction assigns one such matrix to each role and one rank-one boundary matrix, giving five 3 × 3 generators.</p>
+          <p>It is a monoid morphism, and its upper-right entry vanishes exactly when <var>u</var> = <var>v</var> <a href="#ref-chhn-2014">[Cassaigne et al. 2014]</a>. The M<sub>3</sub>(5) construction assigns one such matrix to each role and one rank-one separator, giving five 3 × 3 generators.</p>
 
           <h3 id="previous-bound">Previous bounds<a class="fragment-link" href="#previous-bound" aria-label="Link to this section">#</a></h3>
           <p>After the M<sub>3</sub>(5) result, the established Pareto-minimal mortality-undecidability points were</p>
@@ -335,7 +335,7 @@
           <p>The row (<var>ℓ</var><sup>T</sup>, <var>ℓ</var><sup>T</sup>) annihilates <var>K</var>; the boundary column (<var>c</var>,0)<sup>T</sup> descends without restriction. Thus the quotient preserves the required scalar coefficients.</p>
 
           <h4 id="control-words">Arbitrary control words<a class="fragment-link" href="#control-words" aria-label="Link to this section">#</a></h4>
-          <p>The quotient matrices are indexed by two data letters and one toggle. Products are written in source-word order, but the rightmost matrix acts first on the boundary column. The decoder is therefore suffix-controlled: scan from right to left with a two-valued phase.</p>
+          <p>The quotient matrices are indexed by two data letters and one toggle. Products are written in role-word order, but the rightmost matrix acts first on the boundary column. The decoder is therefore suffix-controlled: scan from right to left with a two-valued phase.</p>
           <ol>
             <li>The initial phase is rule.</li>
             <li>A toggle flips the phase.</li>
@@ -352,7 +352,7 @@
               </mrow>
             </math>
           </div>
-          <p>Leading, trailing, adjacent, and repeated toggles are included. Conversely, induction on a role word inserts at most one toggle before each recursively encoded suffix, so <var>τ</var> is surjective. The scalar system has a zero witness exactly when the four-role source has one.</p>
+          <p>Leading, trailing, adjacent, and repeated toggles are included. Conversely, induction on a role word inserts at most one toggle before each recursively encoded suffix, so <var>τ</var> is surjective. The scalar system has a zero witness exactly when the four-role fixed-boundary problem has one.</p>
 
           <h3 id="explicit-system">Explicit scalar system<a class="fragment-link" href="#explicit-system" aria-label="Link to this section">#</a></h3>
           <p>For <var>x</var> ∈ {<span class="word">b</span>,<span class="word">c</span>}, write</p>
@@ -516,7 +516,7 @@
           <h3 id="formal-scope">Formal scope<a class="fragment-link" href="#formal-scope" aria-label="Link to this section">#</a></h3>
           <p>The instance-level equivalence from the restricted tag semantics through the four exact integer matrices is machine-checked. The theorem <a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/b99e6590225fca81b50a6837adbab97073321505/MatrixMortality/Undecidability/PairedProblems.lean"><code>nearyMortality44_mortal_iff_tagHaltsFrom</code></a> is the encoded boundary.</p>
           <p>Lean checks the explicit four-dimensional realization and its arbitrary-word identity. The abstract 2<var>d</var>−<var>r</var> quotient theorem above is paper mathematics, not a separate Lean declaration.</p>
-          <p>The computable reduction from mathlib’s code-halting predicate through the fixed universal machine, two-tag system, cyclic-tag system, and restricted binary-tag compiler is machine-checked. The four-matrix target equivalence is also machine-checked. A primitive-recursive declaration for this target constructor and its final many-one wrapper remain formalization debt; no external universality theorem is assumed. Frontier transports and bibliographic priority claims remain external to Lean.</p>
+          <p>The computable reduction from mathlib’s code-halting predicate through the fixed universal machine, two-tag system, cyclic-tag system, and restricted binary-tag compiler is machine-checked. Lean proves the four-matrix constructor primitive recursive, <code>codeHalts_reduces_mortality44</code>, and <code>mortality44_not_computable</code>; no external universality theorem is assumed. The abstract 2<var>d</var>−<var>r</var> quotient and bibliographic priority claim remain outside Lean.</p>
 
           <h3 id="priority">Priority<a class="fragment-link" href="#priority" aria-label="Link to this section">#</a></h3>
           <p>To our knowledge, after searches through 22 July 2026, no prior proof establishes M<sub>4</sub>(4), nor scalar zero reachability for three 4 × 4 integer matrices sharing first column <var>e</var><sub>1</sub>. The closest CHHN bounds are M<sub>5</sub>(4) and structured Z<sub>5</sub>(3) <a href="#ref-chhn-2014">[Cassaigne et al. 2014]</a>. The anti-diagonal quotient is standard linear algebra, and the rank-one scalar-to-mortality separator is prior art; no source was found for the paired-role suffix decoder, the resulting four-dimensional scalar theorem, or the common-column mortality converse. “No prior art found” is limited to publicly discoverable work.</p>
@@ -529,7 +529,7 @@
 
           <h3 id="sources">References<a class="fragment-link" href="#sources" aria-label="Link to this section">#</a></h3>
           <ol class="references">
-            <li id="ref-part-one"><span>GPT-5.6 Sol, elicited by @eternalism_4eva, <a href="/math/matrix_mortality/m3_5/"><cite>Fixed-Boundary Correspondence</cite></a>, 2026. The synchronized four-role source theorem and five-matrix compiler.</span></li>
+            <li id="ref-part-one"><span>GPT-5.6 Sol, elicited by @eternalism_4eva, <a href="/math/matrix_mortality/m3_5/"><cite>Fixed-Boundary Correspondence</cite></a>, 2026. The synchronized four-role fixed-boundary theorem and five-matrix compiler.</span></li>
             <li id="ref-neary-2015"><span>Turlough Neary, <a href="https://doi.org/10.4230/LIPIcs.STACS.2015.649"><cite>Undecidability in Binary Tag Systems and the Post Correspondence Problem for Five Pairs of Words</cite></a>, STACS 2015. The restricted binary-tag undecidability source.</span></li>
             <li id="ref-chhn-2014"><span>Julien Cassaigne, Vesa Halava, Tero Harju, and François Nicolas, <a href="https://arxiv.org/abs/1404.0644"><cite>Tighter Undecidability Bounds for Matrix Mortality, Zero-in-the-Corner Problems, and More</cite></a>, 2014. Definitions, prior bounds, and the scalar-to-corner reductions.</span></li>
           </ol>

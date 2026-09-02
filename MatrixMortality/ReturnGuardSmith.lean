@@ -772,7 +772,7 @@ private theorem odd_of_isCoprime_of_even_left
       (right_even.two_dvd.mul_left rightCoefficient)
   norm_num at two_dvd_one
 
-/-- In the even-resultant stratum, maximal cancellation has an odd target numerator and hence
+/-- In the even-reset-defect stratum, maximal cancellation has an odd target numerator and hence
 cannot be terminal. -/
 theorem PrimitiveEndpointReduction.maximalCancellation_targetNumerator_odd
     {prime wait : Nat}

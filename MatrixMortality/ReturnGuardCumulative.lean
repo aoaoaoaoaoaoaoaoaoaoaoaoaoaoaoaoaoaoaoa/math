@@ -733,7 +733,7 @@ private theorem CumulativeEndpointStep.target_odd
     (step : CumulativeEndpointStep prime depth centerNumerator driftNumerator scale
       wait source target)
     (prime_odd : Odd prime)
-    (reset_resultant_odd : Odd (centerNumerator + driftNumerator - scale))
+    (reset_defect_numerator_odd : Odd (centerNumerator + driftNumerator - scale))
     (source_numerator_odd : Odd source.1) :
     Odd target.1 ∧ Odd target.2 := by
   have wait_power_odd : Odd ((prime : ℤ) ^ wait) := by
@@ -754,7 +754,7 @@ private theorem CumulativeEndpointStep.target_odd
   rw [show
     driftNumerator + (centerNumerator - scale) =
       centerNumerator + driftNumerator - scale by ring]
-  exact reset_resultant_odd
+  exact reset_defect_numerator_odd
 
 private theorem PrimitiveIntegralStep.endpointTargetNumerator_odd
     (parameters : Parameters)
@@ -763,18 +763,18 @@ private theorem PrimitiveIntegralStep.endpointTargetNumerator_odd
     (primitive :
       PrimitiveIntegralStep parameters.prime parameters.depth centerNumerator
         driftNumerator scale source target)
-    (resetResultant_odd : Odd (centerNumerator + driftNumerator - scale))
+    (resetDefectNumerator_odd : Odd (centerNumerator + driftNumerator - scale))
     (sourceEndpoint_odd :
       Odd (endpointPair centerNumerator driftNumerator scale source).1) :
     Odd (endpointPair centerNumerator driftNumerator scale target).1 := by
   obtain ⟨_, content, step⟩ :=
     primitiveIntegralStep_cumulativeEndpointStep primitive
   exact (Int.odd_mul.mp
-    (step.target_odd parameters.prime_odd resetResultant_odd sourceEndpoint_odd).1).2
+    (step.target_odd parameters.prime_odd resetDefectNumerator_odd sourceEndpoint_odd).1).2
 
-/-- An odd reset resultant excludes physical mortality. Every primitive integral execution
+/-- An odd reset-defect numerator excludes physical mortality. Every primitive integral execution
 from reset retains an odd terminal defect, whereas the physical target has defect zero. -/
-theorem not_physical_isMortal_of_resetResultant_odd
+theorem not_physical_isMortal_of_resetDefectNumerator_odd
     (parameters : Parameters)
     {centerNumerator driftNumerator scale : ℤ}
     (center_eq :
@@ -783,7 +783,7 @@ theorem not_physical_isMortal_of_resetResultant_odd
       drift parameters.center parameters.reset =
         (driftNumerator : ℚ) / scale)
     (scale_ne : scale ≠ 0)
-    (resetResultant_odd : Odd (centerNumerator + driftNumerator - scale)) :
+    (resetDefectNumerator_odd : Odd (centerNumerator + driftNumerator - scale)) :
     ¬IsMortal
       (ReturnFamily.pairGenerator
         (ambient (parameters.prime : ℚ) parameters.depth)
@@ -798,7 +798,7 @@ theorem not_physical_isMortal_of_resetResultant_odd
           (rationalPair 1)).1 := by
     simpa [endpointPair, terminalDefect, rationalPair,
       show centerNumerator - scale + driftNumerator =
-        centerNumerator + driftNumerator - scale by ring] using resetResultant_odd
+        centerNumerator + driftNumerator - scale by ring] using resetDefectNumerator_odd
   have propagate : ∀ {localSteps source target},
       Relation.ReachesIn
           (PrimitiveIntegralStep parameters.prime parameters.depth
@@ -811,7 +811,7 @@ theorem not_physical_isMortal_of_resetResultant_odd
     | refl => exact sourceEndpoint_odd
     | head primitive _ induction =>
         exact induction
-          (primitive.endpointTargetNumerator_odd parameters resetResultant_odd
+          (primitive.endpointTargetNumerator_odd parameters resetDefectNumerator_odd
             sourceEndpoint_odd)
   have terminalEndpoint_odd :
       Odd

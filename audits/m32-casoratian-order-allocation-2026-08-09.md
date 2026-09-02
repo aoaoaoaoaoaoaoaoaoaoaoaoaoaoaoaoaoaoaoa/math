@@ -87,7 +87,7 @@ content through the final step, contradicting `kₙ₋₁ ∣ LR`.
 For the reverse law, a missing prime power in `kᵢ` lies in `hᵢ`, hence divides the current
 endpoint numerator. If it failed to divide the preceding forward content, the complementary
 reverse content and the checked reset-defect divisor would force the primitive denominator to
-vanish modulo that prime while the reset resultant and denominator remain units. Induction
+vanish modulo that prime while the reset-defect numerator and denominator remain units. Induction
 reaches `h₀ ∣ DR`, contradicting removal of the `DLR` support.
 
 Both arguments retain prime-power multiplicity. Neither assumes monotone waits.

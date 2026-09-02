@@ -9,7 +9,7 @@ Human role: elicited by @eternalism_4eva
 ## Enemy
 
 `M₃(2)` asks whether mortality is decidable for every pair of `3 × 3` integer matrices. In the
-rank-`(3,2)` guard, the checked residue is an even-resultant primitive execution with unbounded
+rank-`(3,2)` guard, the checked residue is an even-reset-defect primitive execution with unbounded
 reduced denominators. The missing theorem must globally amortize the mandatory nonmaximal Smith
 steps or construct an orbit which survives them.
 
@@ -89,7 +89,7 @@ Artifact:
 
 ## Exact Counterexample
 
-The handoff inequality fails inside the even-resultant guard stratum. Take
+The handoff inequality fails inside the even-reset-defect guard stratum. Take
 
 ```text
 p=3,  s=2,  A=−446,  D=500,  L=56,  R=−2,  q=27.

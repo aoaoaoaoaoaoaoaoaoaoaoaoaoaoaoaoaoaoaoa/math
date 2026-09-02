@@ -15,8 +15,8 @@ decoder followed by a common-image restriction gives mortality for two `10 × 10
 matrices.
 
 Singular return compression lowers the mortality dimension to nine. An injective
-tilted separator preserves the paired scalar zero language, a `3+3+2+1` transfer chart realizes
-its returns, and primitive-recursive denominator clearing emits two `9 × 9` integer matrices.
+tilted separator preserves the paired scalar zero language, a `3+3+2+1` return realization carries
+its returns, and primitive-recursive denominator clearing constructs two `9 × 9` integer matrices.
 Zero-block padding preserves mortality in every dimension at least nine.
 
 The complete undecidability chain, from an explicit universal machine through the restricted
@@ -29,6 +29,7 @@ tag source and matrix compilers, is machine-checked in Lean 4.
 
 - [Mathematics index](math.html)
 - [Matrix mortality landing page](matrix_mortality.html)
+- [Matrix mortality glossary](matrix_mortality_glossary.html): canonical definitions and notation
 - [Fixed-Boundary Correspondence](m3_5.html): `GPCP(4)` and `M₃(5)`
 - [Paired-Role Compression](m4_4.html): `Z₄(3)` and `M₄(4)`
 - [Binary Compilers](binary_compilers.html): `Z₆(2)` and `M₁₀(2)`

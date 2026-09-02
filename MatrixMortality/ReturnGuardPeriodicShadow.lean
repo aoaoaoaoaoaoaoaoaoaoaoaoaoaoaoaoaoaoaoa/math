@@ -3,7 +3,7 @@ import MatrixMortality.ReturnGuardSmith
 /-!
 # Periodic-shadow obstruction
 
-One fixed even-resultant depth-two guard has a fixed reset yet admits arbitrarily long legal
+One fixed even-reset-defect depth-two guard has a fixed reset yet admits arbitrarily long legal
 off-reset corridors. Every edge has nonmaximal Smith coordinate `v = 2` and exact forward
 content `-4`; arbitrarily long runs of consecutive carried and Smith coordinates are primitive
 and strictly height-increasing. This excludes coefficient-uniform bounded descent over all legal
@@ -39,7 +39,7 @@ private theorem val3_three_div_four :
   rw [show (3 / 4 : ℚ) = (3 : ℚ) ^ 1 * (1 : ℤ) / (4 : ℤ) by norm_num]
   exact primePower_mul_int_div_int_hasValue 1 (by norm_num) (by norm_num)
 
-/-- Fixed even-resultant guard admitting arbitrarily deep off-reset shadows of its reset
+/-- Fixed even-reset-defect guard admitting arbitrarily deep off-reset shadows of its reset
 fixed point. -/
 def periodicShadowParameters : Parameters where
   prime := 3

@@ -10,7 +10,7 @@ Human role: elicited by @eternalism_4eva
 
 `M₃(2)` asks whether mortality is decidable for every pair of `3 × 3` integer matrices. The
 present attack concerns the split-spectrum rank-`(3,2)` guard, not the unresolved exceptional
-rank-`(2,2)` compiler seam. Its live stratum has even reset resultant, passes every universal
+rank-`(2,2)` compiler seam. Its live stratum has even reset-defect numerator, passes every universal
 boundary test, and has unbounded primitive denominators.
 
 The submitted attack proposed a primitive prequotient coordinate, a generalized continued
@@ -134,7 +134,7 @@ cone entry, and primitive scalar bound contain the whole descent problem.
 
 ```text
 MASTER VERDICT: M₃(2) remains open
-GUARD VERDICT: the even-resultant unbounded-denominator stratum remains open
+GUARD VERDICT: the even-reset-defect unbounded-denominator stratum remains open
 REMOVED: absence of a primitive coordinate carried across consecutive endpoint reductions; treatment of the wait gauge as an irreducible shear
 REMAINS: prove an effective block-height theorem for the exact generalized continuant (1), or construct a legal coefficient-aligned unbounded corridor
 DISTANCE: orient the carried edge coordinate in computable positive/adelic blocks, calculate the full all-place factor including primitive reduction, and prove strict descent or classify and peel every equality/deficit interval

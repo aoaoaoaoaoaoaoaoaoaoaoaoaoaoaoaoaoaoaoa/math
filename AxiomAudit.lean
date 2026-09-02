@@ -2074,7 +2074,7 @@ open MatrixMortality
 #print axioms ReturnGuard.Parameters.prime_odd
 #print axioms ReturnGuard.CumulativeEndpointExecution.transfer
 #print axioms ReturnGuard.CumulativeEndpointExecution.pullback_projectivePairCross
-#print axioms ReturnGuard.not_physical_isMortal_of_resetResultant_odd
+#print axioms ReturnGuard.not_physical_isMortal_of_resetDefectNumerator_odd
 #print axioms ReturnGuard.cumulativeNumerator_recurrence
 #print axioms ReturnGuard.terminalTruncant_eq_cumulativeNumerator
 #print axioms ReturnGuard.PrimitiveEndpointReduction.content_natAbs_eq_gcd_driftSource_prequotient
@@ -2082,7 +2082,7 @@ open MatrixMortality
 #print axioms ReturnGuard.PrimitiveEndpointReduction.resetDefect_eq_complement_mul
 #print axioms ReturnGuard.PrimitiveEndpointReduction.recurrentBoundaryDivisor_persists
 #print axioms ReturnGuard.not_physical_isMortal_of_resetBall
-#print axioms ReturnGuard.universalBoundary_dvd_resetResultant_of_physical_isMortal
+#print axioms ReturnGuard.universalBoundary_dvd_resetDefectNumerator_of_physical_isMortal
 #print axioms ReturnGuard.PrimitiveEndpointReduction.complement_dvd_terminalBoundary
 #print axioms ReturnGuard.terminalPredecessorPair_step
 #print axioms ReturnGuard.cumulativeCompleteQuotient_recurrence

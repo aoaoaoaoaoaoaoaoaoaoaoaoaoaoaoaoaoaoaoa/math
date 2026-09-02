@@ -133,7 +133,7 @@ destroy the false implication aimed at it.
 
 ```text
 MASTER VERDICT: M₃(2) remains open
-GUARD VERDICT: the reset-started even-resultant unbounded-denominator stratum remains open
+GUARD VERDICT: the reset-started even-reset-defect unbounded-denominator stratum remains open
 REMOVED: fixed positive-depth renewal macros and finite aligned renewal cycles; bounded shadow depth plus fixed local labels as a route to a finite endpoint box
 REMAINS: an essentially moving reset-ancestry problem in which height diverges with bounded depth to every fixed ray, or threshold cancellations visit infinitely many rays or macros
 DISTANCE: prove an effective compactness theorem extracting one fixed recurrent ray/macro at unbounded depth, contradicting exact expansion, or directly bound the pulled-back determinant family; otherwise construct one exact aperiodic infinite reset orbit realizing the moving-ray alternative

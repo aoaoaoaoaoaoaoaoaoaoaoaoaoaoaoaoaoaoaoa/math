@@ -45,7 +45,7 @@
               <a href="#four-tiles">Synchronized tag compiler</a>
               <ol>
                 <li><a href="#soundness">Soundness</a></li>
-                <li><a href="#source-lemma">Source lemma</a></li>
+                <li><a href="#source-lemma">Tag-history lemma</a></li>
                 <li><a href="#terminal-pair">Corrected five-pair PCP</a></li>
               </ol>
             </li>
@@ -151,23 +151,23 @@
 
           <p>The new converse applies to arbitrary tile words. Zero-run synchronization forces one rule tile followed by exactly <var>β</var>−1 deletion tiles; each block decodes as a <var>β</var>-symbol tag stroke; global equality becomes a queue-history certificate; prefix cancellation reconstructs lawful tag steps until the first short queue. Malformed words are excluded by this global invariant, not by assuming that every wrong local choice eventually mismatches.</p>
 
-          <p>GPCP(4) is sufficient for mortality. Four payload matrices and one repeated rank-one boundary separator give M<sub>3</sub>(5). Rank-one endpoint absorption is prior art <a href="#ref-hhh-2007">[Halava–Harju–Hirvensalo 2007]</a>; the new ingredient is the proved four-letter fixed-boundary source.</p>
+          <p>GPCP(4) is sufficient for mortality. Four payload matrices and one repeated rank-one boundary separator give M<sub>3</sub>(5). Rank-one endpoint absorption is prior art <a href="#ref-hhh-2007">[Halava–Harju–Hirvensalo 2007]</a>; the new ingredient is the proved four-letter fixed-boundary language.</p>
 
           <h3 id="result">Result and consequences<a class="fragment-link" href="#result" aria-label="Link to this section">#</a></h3>
-          <p>The source and matrix reductions below prove M<sub>3</sub>(5). Substituting 5 = 2·2 + 1 and 5 = 1·4 + 1 into the established packing theorem gives M<sub>6</sub>(3) and M<sub>12</sub>(2); dimension padding gives the further consequences stated in the theorem box.</p>
+          <p>The correspondence and matrix reductions below prove M<sub>3</sub>(5). Substituting 5 = 2·2 + 1 and 5 = 1·4 + 1 into the established packing theorem gives M<sub>6</sub>(3) and M<sub>12</sub>(2); dimension padding gives the further consequences stated in the theorem box.</p>
           <p>The <a href="/math/matrix_mortality/#frontier">series landing page</a> owns the current frontier. This article records the theorem and its direct transports, not a snapshot of results established later.</p>
 
           <div>
           <h3 id="four-tiles">A synchronized tag compiler<a class="fragment-link" href="#four-tiles" aria-label="Link to this section">#</a></h3>
-          <p>Fix <var>β</var> ≥ 3 and a word <var>q</var> over <span class="word">b,c</span>. Define the tag system</p>
+          <p>Fix <var>β</var> ≥ 3 and a word <var>B</var> over <span class="word">b,c</span>. Define the tag system</p>
           <div class="formula">
             <math display="block">
               <mrow>
                 <mi>b</mi><mo>↦</mo><mi>b</mi><mo>,</mo>
-                <mi>c</mi><mo>↦</mo><mi>q</mi><mi>b</mi><mo>,</mo>
+                <mi>c</mi><mo>↦</mo><mi>B</mi><mi>b</mi><mo>,</mo>
                 <mi>I</mi><mo>=</mo>
                 <msub><mi mathvariant="normal">drop</mi><mrow><mi>β</mi><mo>−</mo><mn>1</mn></mrow></msub>
-                <mo>(</mo><mi>q</mi><mo>)</mo><mi>b</mi><mo>.</mo>
+                <mo>(</mo><mi>B</mi><mo>)</mo><mi>b</mi><mo>.</mo>
               </mrow>
             </math>
           </div>
@@ -189,10 +189,10 @@
               <tr><th>Tile</th><th>Upper word</th><th>Lower word</th><th>Role</th></tr>
             </thead>
             <tbody>
-              <tr><td>R<sub>c</sub></td><td><span class="word">1</span></td><td><span class="word">1 H(q) 1 0</span></td><td>apply the <span class="word">c</span>-rule</td></tr>
+              <tr><td>R<sub>c</sub></td><td><span class="word">1</span></td><td><span class="word">1 H(B) 1 0</span></td><td>apply the <span class="word">c</span>-rule</td></tr>
               <tr><td>R<sub>b</sub></td><td><span class="word">1 0<sup>β</sup> 1</span></td><td><span class="word">1 1 0</span></td><td>apply the <span class="word">b</span>-rule</td></tr>
-              <tr><td>D<sub>c</sub></td><td><span class="word">1</span></td><td><span class="word">0</span></td><td>erase one <span class="word">c</span></td></tr>
-              <tr><td>D<sub>b</sub></td><td><span class="word">1 0<sup>β</sup> 1</span></td><td><span class="word">0</span></td><td>erase one <span class="word">b</span></td></tr>
+              <tr><td>D<sub>c</sub></td><td><span class="word">1</span></td><td><span class="word">0</span></td><td>delete one <span class="word">c</span></td></tr>
+              <tr><td>D<sub>b</sub></td><td><span class="word">1 0<sup>β</sup> 1</span></td><td><span class="word">0</span></td><td>delete one <span class="word">b</span></td></tr>
             </tbody>
           </table>
           </div>
@@ -212,22 +212,22 @@
                 </mrow>
               </math>
             </div>
-            <p>The equivalence holds when β−1 divides |<var>q</var>| and |<var>q</var>| ≥ β−1. These hypotheses define an arithmetic envelope containing Neary’s compiler outputs.</p>
+            <p>The equivalence holds when β−1 divides |<var>B</var>| and |<var>B</var>| ≥ β−1. These hypotheses define an arithmetic envelope containing Neary’s compiler outputs.</p>
           </div>
 
-          <p>Neary’s Table 2 supplies the historical design <a href="#ref-neary-2015">[Neary 2015]</a>. The repository defines that compiler, proves its forward and arbitrary-execution converses, and constructs the padded output primitive recursively from mathlib’s code-halting source. No theorem from Neary’s terminal-pair argument is imported.</p>
+          <p>Neary’s Table 2 supplies the historical design <a href="#ref-neary-2015">[Neary 2015]</a>. The repository defines that compiler, proves its forward and arbitrary-execution converses, and constructs the padded output primitive recursively from mathlib’s code-halting predicate. No theorem from Neary’s terminal-pair argument is imported.</p>
 
           <details class="technical-detail">
             <summary>Padding into the arithmetic envelope</summary>
-            <p>Neary has β = 10<var>p</var> and |<var>q</var><span class="word">b</span>| = β<var>s</var>. If <var>n</var> is the input length and <var>r</var> the maximum cyclic appendant length, take</p>
+            <p>Neary has β = 10<var>p</var> and |<var>B</var><span class="word">b</span>| = β<var>s</var>. If <var>n</var> is the input length and <var>r</var> the maximum cyclic appendant length, take</p>
             <div class="formula plain">
               <math display="block">
                 <mrow>
-                  <mi>B</mi><mo>=</mo><mi mathvariant="normal">max</mi><mo stretchy="false">{</mo>
+                  <mi>N</mi><mo>=</mo><mi mathvariant="normal">max</mi><mo stretchy="false">{</mo>
                   <mn>11</mn><mo stretchy="false">(</mo><mi>n</mi><mo>+</mo><mi>p</mi><mo stretchy="false">)</mo><mo>+</mo><mi>β</mi><mo>−</mo><mn>2</mn><mo>,</mo>
                   <mn>11</mn><mi>p</mi><mo>,</mo><mn>11</mn><mi>r</mi><mo>,</mo><mn>1</mn><mo stretchy="false">}</mo><mo>,</mo>
                   <mspace width="1em"></mspace>
-                  <mi>x</mi><mo>=</mo><mo fence="true" stretchy="true">⌈</mo><mfrac><mrow><mi>B</mi><mo>−</mo><mn>1</mn></mrow><mrow><mi>β</mi><mo>−</mo><mn>1</mn></mrow></mfrac><mo fence="true" stretchy="true">⌉</mo><mo>,</mo>
+                  <mi>x</mi><mo>=</mo><mo fence="true" stretchy="true">⌈</mo><mfrac><mrow><mi>N</mi><mo>−</mo><mn>1</mn></mrow><mrow><mi>β</mi><mo>−</mo><mn>1</mn></mrow></mfrac><mo fence="true" stretchy="true">⌉</mo><mo>,</mo>
                   <mspace width="1em"></mspace>
                   <mi>s</mi><mo>=</mo><mi>x</mi><mo stretchy="false">(</mo><mi>β</mi><mo>−</mo><mn>1</mn><mo stretchy="false">)</mo><mo>+</mo><mn>1</mn><mo>.</mo>
                 </mrow>
@@ -237,7 +237,7 @@
             <div class="formula plain">
               <math display="block">
                 <mrow>
-                  <mo>|</mo><mi>q</mi><mo>|</mo>
+                  <mo>|</mo><mi>B</mi><mo>|</mo>
                   <mo>=</mo>
                   <mi>β</mi><mo>[</mo><mi>x</mi><mo>(</mo><mi>β</mi><mo>−</mo><mn>1</mn><mo>)</mo><mo>+</mo><mn>1</mn><mo>]</mo><mo>−</mo><mn>1</mn>
                   <mo>=</mo>
@@ -245,7 +245,7 @@
                 </mrow>
               </math>
             </div>
-            <p>which implies β−1 ∣ |<var>q</var>| and |<var>q</var>| ≥ β−1.</p>
+            <p>which implies β−1 ∣ |<var>B</var>| and |<var>B</var>| ≥ β−1.</p>
           </details>
 
           <h4 id="soundness">Soundness for arbitrary tile words<a class="fragment-link" href="#soundness" aria-label="Link to this section">#</a></h4>
@@ -255,8 +255,8 @@
             <div class="step">
               <div>
                 <h5>Synchronization</h5>
-                <p>The upper side <var>U</var>(<var>w</var>)<var>M</var> is an <var>H</var>-encoded word followed by <var>M</var>. Every positive run of zeros therefore has length exactly <var>β</var>. On the lower side, a rule tile ends with one zero; an erase tile contributes one more; the next rule begins with a one.</p>
-                <p>The payload <var>H</var>(<var>q</var>) contains only complete <var>β</var>-runs and ends at a code boundary before the rule tile’s final <span class="word">10</span>. Hence every rule tile is followed by exactly <var>β</var>−1 erase tiles, and every matching word factors into blocks</p>
+                <p>The upper side <var>U</var>(<var>w</var>)<var>M</var> is an <var>H</var>-encoded word followed by <var>M</var>. Every positive run of zeros therefore has length exactly <var>β</var>. On the lower side, a rule tile ends with one zero; a deletion tile contributes one more; the next rule begins with a one.</p>
+                <p>The payload <var>H</var>(<var>B</var>) contains only complete <var>β</var>-runs and ends at a code boundary before the rule tile’s final <span class="word">10</span>. Hence every rule tile is followed by exactly <var>β</var>−1 deletion tiles, and every matching word factors into blocks</p>
                 <div class="formula plain">
                   <math display="block">
                     <mrow>
@@ -274,7 +274,7 @@
             <div class="step">
               <div>
                 <h5>History equation</h5>
-                <p>Appending one final 1 turns the boundary <var>M</var> into the codeword <var>H</var>(<span class="word">b</span>), so injectivity of <var>H</var> decodes the equality. The decoded equality forces the initial stroke to begin with <span class="word">c</span>. If <var>z</var> denotes its remaining <var>β</var>−1 symbols, then <var>z</var> and <var>q</var> are prefixes of the same word. Because <var>q</var> has at least <var>β</var>−1 symbols, <var>z</var> is its length-(<var>β</var>−1) prefix. Cancel this initialization stroke. For the remaining stroke sequence <var>S</var>, let <var>C</var>(<var>S</var>) be its concatenation and <var>P</var>(<var>S</var>) the concatenation of the appendants selected by its stroke heads. The decoded equality becomes</p>
+                <p>Appending one final 1 turns the boundary <var>M</var> into the codeword <var>H</var>(<span class="word">b</span>), so injectivity of <var>H</var> decodes the equality. The decoded equality forces the initial stroke to begin with <span class="word">c</span>. If <var>z</var> denotes its remaining <var>β</var>−1 symbols, then <var>z</var> and <var>B</var> are prefixes of the same word. Because <var>B</var> has at least <var>β</var>−1 symbols, <var>z</var> is its length-(<var>β</var>−1) prefix. Cancel this initialization stroke. For the remaining stroke sequence <var>S</var>, let <var>C</var>(<var>S</var>) be its concatenation and <var>P</var>(<var>S</var>) the concatenation of the appendants selected by its stroke heads. The decoded equality becomes</p>
                 <div class="formula plain">
                   <math display="block">
                     <mrow>
@@ -298,7 +298,7 @@
           </div>
 
           <div class="aside">
-            <h4 id="source-lemma">Reusable source lemma<a class="fragment-link" href="#source-lemma" aria-label="Link to this section">#</a></h4>
+            <h4 id="source-lemma">Reusable tag-history lemma<a class="fragment-link" href="#source-lemma" aria-label="Link to this section">#</a></h4>
             <p>For any deletion-width-β tag system, let <var>S</var> be a list of β-letter strokes, <var>C</var>(<var>S</var>) their concatenation, and <var>P</var>(<var>S</var>) the concatenation of the appendants selected by their heads. If</p>
             <div class="formula plain">
               <math display="block">
@@ -479,7 +479,7 @@
                 </mrow>
               </math>
             </div>
-            <p>The construction uses |α| ordinary generators and one rank-one generator. The fracture formula covers every product word; no witness normal form is assumed. Its machine-checked statement is <a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/main/MatrixMortality/TerminalReduction.lean"><code>absorbedFamilyInt_mortal_iff_terminal_match</code></a>. Endpoint absorption is prior art <a href="#ref-hhh-2007">[Halava–Harju–Hirvensalo 2007]</a>; the new input is the four-letter fixed-boundary source.</p>
+            <p>The construction uses |α| ordinary generators and one rank-one generator. The fracture formula covers every product word; no witness normal form is assumed. Its machine-checked statement is <a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/main/MatrixMortality/TerminalReduction.lean"><code>absorbedFamilyInt_mortal_iff_terminal_match</code></a>. Endpoint absorption is prior art <a href="#ref-hhh-2007">[Halava–Harju–Hirvensalo 2007]</a>; the new input is the four-letter fixed-boundary theorem.</p>
           </div>
 
           </div>
@@ -493,7 +493,7 @@
           <div class="status-grid">
             <div>
               <b><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/main/FORMALIZATION.md#checked-scope">Formalized reduction</a></b>
-              <p>The fixed universal source compiler, four-tile synchronization theorem, queue-history soundness, fresh-marker PCP repair, ternary representation, rank-one compiler, converse for every five-matrix word, and final no-decider theorem.</p>
+              <p>The fixed universal halting reduction, four-tile synchronization theorem, queue-history soundness, fresh-marker PCP repair, ternary representation, rank-one compiler, converse for every five-matrix word, and final undecidability theorem.</p>
             </div>
             <div>
               <b><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/main/verification/axioms.txt">Transitive axioms</a></b>
@@ -501,7 +501,7 @@
             </div>
             <div>
               <b><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/main/FORMALIZATION.md#checked-scope">Computable source reduction</a></b>
-              <p>Lean proves a primitive-recursive many-one reduction from mathlib’s code-halting predicate to the emitted five-matrix family and derives its no-decider theorem. Neary’s Lemma 9 is provenance, not a proof premise.</p>
+              <p>Lean proves a primitive-recursive many-one reduction from mathlib’s code-halting predicate to the emitted five-matrix family and derives its undecidability theorem. Neary’s Lemma 9 is provenance, not a proof premise.</p>
             </div>
             <div>
               <b><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/main/tools/scour_source.py">Finite falsifier</a></b>

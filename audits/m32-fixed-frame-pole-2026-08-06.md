@@ -10,7 +10,7 @@ Human role: elicited by @eternalism_4eva
 
 `M₃(2)` asks whether mortality is decidable for every pair of `3 × 3` integer matrices. The
 displayed split-spectrum rank-`(3,2)` guard is only one candidate subfamily. Its remaining enemy
-is global amortization of mandatory nonmaximal Smith steps in an even-resultant,
+is global amortization of mandatory nonmaximal Smith steps in an even-reset-defect,
 universal-boundary-passing execution with unbounded reduced denominators, or an exact infinite
 execution showing how those losses are repaid.
 

@@ -673,7 +673,7 @@ theorem increasingMortal_terminalCoordinates :
         terminalCoordinate (-57803) 403 10304 (403 / 68107) = 0 := by
   norm_num [terminalCoordinate]
 
-/-- Even-resultant guard exposing the exact-order bridge obstruction. Its endpoint reset is
+/-- Even-reset-defect guard exposing the exact-order bridge obstruction. Its endpoint reset is
 `249398`; wait four enters the strict `5`-adic reset ball, and wait one breaks the order of `3`
 modulo `5`. -/
 def orderBreakerParameters : Parameters where

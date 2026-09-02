@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "publications": [
     {
       "kind": "index",
@@ -15,6 +15,11 @@
       "kind": "collection",
       "source": "matrix_mortality.html",
       "route": "matrix_mortality"
+    },
+    {
+      "kind": "reference",
+      "source": "matrix_mortality_glossary.html",
+      "route": "matrix_mortality/glossary"
     },
     {
       "kind": "result",

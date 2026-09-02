@@ -168,7 +168,7 @@ fixed Smith split, and the obstruction theorem.
 
 ```text
 MASTER VERDICT: M₃(2) remains open
-GUARD VERDICT: the reset-started even-resultant unbounded-denominator stratum remains open
+GUARD VERDICT: the reset-started even-reset-defect unbounded-denominator stratum remains open
 REMOVED: coefficient-uniform bounded descent over all legal primitive corridors, in both carried and primitive Smith height
 REMAINS: reset- or terminal-history-sensitive control of unbounded periodic-shadow depth on the actual physical orbit
 DISTANCE: prove an effective reset-anchored first-hit-terminal bound, or construct one fixed reset orbit that concatenates shadow episodes into an infinite unbounded-denominator execution

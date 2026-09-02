@@ -37,12 +37,14 @@ jq -e '
   def safe_card:
     type == "string" and
     test("^[A-Za-z0-9][A-Za-z0-9_.-]*[.]png$");
-  .version == 1 and
+  . as $manifest |
+  .version == 2 and
   (.publications | type == "array" and length > 0) and
   all(.publications[];
     type == "object" and
     ((keys - ["kind", "route", "social_card", "source"]) | length == 0) and
-    (.kind == "index" or .kind == "collection" or .kind == "result") and
+    (.kind == "index" or .kind == "collection" or .kind == "reference" or
+      .kind == "result") and
     (.source | safe_source) and
     (.route | safe_route) and
     ((has("social_card") | not) or (.social_card | safe_card)) and
@@ -52,20 +54,21 @@ jq -e '
     ([.publications[].source] | unique | length)) and
   (([.publications[].route] | length) ==
     ([.publications[].route] | unique | length)) and
-  ([.publications[] | select(.kind == "index")] | length) == 1
-' "$MANIFEST" >/dev/null
-
-while IFS= read -r route; do
-  jq -e --arg route "$route" '
-    any(.publications[];
-      .kind == "collection" and
-      (.route as $parent | $route | startswith($parent + "/"))
+  ([.publications[] | select(.kind == "index")] | length) == 1 and
+  all(
+    $manifest.publications[] | select(.kind != "index");
+    . as $child |
+    any(
+      $manifest.publications[];
+      .route == ($child.route | split("/") | .[0:-1] | join("/")) and
+      (
+        ($child.kind == "collection" and .kind == "index") or
+        (($child.kind == "reference" or $child.kind == "result") and
+          .kind == "collection")
+      )
     )
-  ' "$MANIFEST" >/dev/null || {
-    printf 'result route has no parent collection: %s\n' "$route" >&2
-    exit 1
-  }
-done < <(jq -r '.publications[] | select(.kind == "result") | .route' "$MANIFEST")
+  )
+' "$MANIFEST" >/dev/null
 
 while IFS= read -r pdf; do
   note="${pdf%.pdf}.md"
@@ -178,6 +181,15 @@ check_semantic_source() {
     printf '%s: forbidden eyebrow escaped into semantic HTML\n' "$publication" >&2
     exit 1
   fi
+
+  local duplicate_ids
+  duplicate_ids="$(rg --only-matching 'id="[^"]+"' "$publication" |
+    sed 's/^id="//; s/"$//' | sort | uniq -d)"
+  [[ -z "$duplicate_ids" ]] || {
+    printf '%s: duplicate fragment identifiers:\n%s\n' \
+      "$publication" "$duplicate_ids" >&2
+    exit 1
+  }
 
   local level headings linked
   for level in 2 3 4; do
@@ -306,9 +318,12 @@ check_collection() {
   PUBLICATION="$1"
   local route="$2"
   local article='//main[@id="article"]/article'
-  local collection_results
+  local collection_results collection_references
   collection_results="$(jq --arg prefix "$route/" \
     '[.publications[] | select(.kind == "result" and (.route | startswith($prefix)))] | length' \
+    "$MANIFEST")"
+  collection_references="$(jq --arg prefix "$route/" \
+    '[.publications[] | select(.kind == "reference" and (.route | startswith($prefix)))] | length' \
     "$MANIFEST")"
 
   assert_xpath_count 1 '//h1[normalize-space()="Matrix Mortality"]'
@@ -317,7 +332,9 @@ check_collection() {
   assert_xpath_count 0 \
     "$article/details[contains(concat(' ', normalize-space(@class), ' '), ' major-section ')]"
   assert_xpath_count 1 \
-    "($article/*)[1][self::section/h2[@id='techniques' and normalize-space(text()[1])='Techniques']]"
+    "($article/*)[1][self::section/h2[@id='reference' and normalize-space(text()[1])='Reference']]"
+  assert_xpath_count "$collection_references" \
+    "($article/section[h2[@id='reference']])[1]/ul[contains(concat(' ', normalize-space(@class), ' '), ' artifact-list ')]/li/a"
   assert_xpath_count "$collection_results" \
     "($article/section[h2[@id='techniques']])[1]/ul[contains(concat(' ', normalize-space(@class), ' '), ' artifact-list ')]/li/a"
   assert_xpath_count 1 \
@@ -351,11 +368,47 @@ check_collection() {
   while IFS= read -r child_route; do
     rg --quiet --fixed-strings "href=\"/math/$child_route/\"" "$PUBLICATION"
   done < <(jq -r --arg prefix "$route/" \
-    '.publications[] | select(.kind == "result" and (.route | startswith($prefix))) | .route' \
+    '.publications[] | select((.kind == "reference" or .kind == "result") and (.route | startswith($prefix))) | .route' \
     "$MANIFEST")
 }
 
+check_reference() {
+  PUBLICATION="$1"
+  local article='//main[@id="article"]/article'
+  local entries="$article//dl[contains(concat(' ', normalize-space(@class), ' '), ' glossary ')]/div[contains(concat(' ', normalize-space(@class), ' '), ' glossary-entry ')]"
+  local entry_count
+  entry_count="$(xpath_count "$entries")"
+
+  [[ "$entry_count" -ge 60 ]] || {
+    printf '%s: glossary is too narrow for its declared audience (%s entries)\n' \
+      "$PUBLICATION" "$entry_count" >&2
+    exit 1
+  }
+  assert_xpath_count 1 '//h1[normalize-space()="Matrix Mortality Glossary"]'
+  assert_xpath_count 0 \
+    '//section[contains(concat(" ", normalize-space(@class), " "), " abstract ")]'
+  assert_xpath_count 0 \
+    "$article/details[contains(concat(' ', normalize-space(@class), ' '), ' major-section ')]"
+  assert_xpath_count "$entry_count" "$entries/dt[@id][dfn][count(a)=1]"
+  assert_xpath_count "$entry_count" \
+    "$entries/dt/a[contains(concat(' ', normalize-space(@class), ' '), ' fragment-link ')][@href=concat('#', ../@id)][@aria-label='Link to this term'][normalize-space()='#']"
+  assert_xpath_count "$entry_count" "$entries/dd[p[1][string-length(normalize-space(.)) > 0]]"
+  assert_xpath_count "$entry_count" \
+    "$article//nav[contains(concat(' ', normalize-space(@class), ' '), ' glossary-index ')]/ol/li/a"
+
+  local id
+  while IFS= read -r id; do
+    assert_xpath_count 1 \
+      "$article//nav[contains(concat(' ', normalize-space(@class), ' '), ' glossary-index ')]/ol/li/a[@href='#$id']"
+  done < <(rg --only-matching '<dt id="[^"]+"' "$PUBLICATION" |
+    sed 's/.*id="//; s/"$//')
+
+  check_toc_level 2 \
+    '//nav[contains(concat(" ", normalize-space(@class), " "), " contents ")]/ol/li'
+}
+
 check_collection matrix_mortality.html matrix_mortality
+check_reference matrix_mortality_glossary.html
 check_publication frankl.html 0 collection
 check_publication m3_5.html 3
 check_publication m4_4.html 0
@@ -373,8 +426,8 @@ while IFS= read -r route; do
 done < <(jq -r '.publications[] | select(.kind == "collection") | .route' "$MANIFEST")
 
 diff --unified \
-  <(jq -r '.publications[] | select(.kind != "index") | .source' "$MANIFEST" | sort) \
-  <(printf '%s\n' binary_compilers.html frankl.html m3_2_return_guard.html m9_2.html matrix_mortality.html m3_5.html m4_4.html | sort)
+  <(jq -r '.publications[].source' "$MANIFEST" | sort) \
+  <(rg --files -g '*.html' | sort)
 
 tectonic --bundle "$TECTONIC_BUNDLE" --outdir "$SCRATCH" paper/main.tex
 cmp --silent "$SCRATCH/main.pdf" paper/main.pdf || {

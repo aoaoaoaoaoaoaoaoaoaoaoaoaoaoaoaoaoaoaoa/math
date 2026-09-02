@@ -106,7 +106,7 @@ four-tile terminal equation
 ```
 
 The final `GPCP(4)`, `M₃(5)`, `M₄(4)`, `Z₆(2)`, `M₉₊ₙ(2)`, and `M₁₀(2)` constructors are
-primitive recursive. Lean proves the corresponding many-one reductions and no-decider theorems
+primitive recursive. Lean proves the corresponding many-one reductions and undecidability theorems
 from mathlib's halting theorem. No external universality theorem, Neary's defective terminal-pair
 converse, or Rote's long-block repair is assumed.
 
@@ -126,14 +126,14 @@ the semantic data are exhausted. Its body, padding, leading-`b` invariant, terna
 four-letter GPCP instance, five-matrix integer family, and effective nine-dimensional pair are
 primitive recursive. The six fixed-endpoint `codeHalts_reduces_*` declarations and the padded
 `codeHalts_reduces_mortality9Plus` family are complete computable many-one reductions; their
-corresponding `*_not_computable` declarations are unconditional kernel-checked no-decider
+corresponding `*_not_computable` declarations are unconditional kernel-checked undecidability
 theorems.
 
-For deletion width `β`, body `q`, rules `b ↦ b` and `c ↦ q ++ [b]`, and initial queue
-`q.drop (β−1) ++ [b]`, Lean proves under
+For deletion width `β`, body `B`, rules `b ↦ b` and `c ↦ B ++ [b]`, and initial queue
+`B.drop (β−1) ++ [b]`, Lean proves under
 
 ```text
-2 < β,    β−1 ≤ q.length,    β−1 ∣ q.length
+2 < β,    β−1 ≤ B.length,    β−1 ∣ B.length
 ```
 
 that a word over Neary's four ordinary labels satisfies
@@ -1121,7 +1121,7 @@ common-period tail enters the ball. See
 [`audits/m32-universal-boundary-2026-08-05.md`](audits/m32-universal-boundary-2026-08-05.md).
 
 The proposed exact-order continuation is now fenced on its other side. Lean checks the
-even-resultant guard `p=3`, `A=R=249398`, `D=L=1`: wait four enters the strict `5`-adic reset
+even-reset-defect guard `p=3`, `A=R=249398`, `D=L=1`: wait four enters the strict `5`-adic reset
 ball, wait one breaks the exact order and returns to its boundary, and the target remains ready
 at wait one. The bridge's primitive reduction removes exactly `18`, coprime to `5`, while its
 denominator grows from `19` to `270178`. This excludes every uniform first-bridge invariance,
@@ -2515,7 +2515,7 @@ the outer algebraic mortality converse. The explicit delimiter has ranks `3,2,1`
 decode to Neary roles, terminal matches produce zero words, denominator clearing yields three
 integer `5 × 5` matrices, and every arbitrary zero word reduces to a parsed cube-free
 singleton/shallow/deep square-pole frontier. The unresolved mathematical step is extinction of
-those general square-reset states; the source emitter's primitive recursiveness is also unproved.
+those general square-reset states; the source map's primitive recursiveness is also unproved.
 The exact reconstruction and promotion boundary are recorded in
 [`audits/m53-setter-projective-2026-07-24.md`](audits/m53-setter-projective-2026-07-24.md).
 The first projective peeling theorem and the bounded residue diagnostics are in
@@ -3150,9 +3150,9 @@ fixed-rank decision problem.
 | `ReturnGuardIntegralLift.lean` | canonical rational pairs, decoded-to-integral execution lifting, and quotient certificates of physical immortality |
 | `ReturnGuardQuotientCompleteness.lean` | zero-wait terminal kernel, cancellation-reachability completeness, and synchronized-product no-amplification |
 | `ReturnGuardDriftCertificate.lean` | exact drift-divisor certificate classification, cyclic subgroup criterion, and executable finite test |
-| `ReturnGuardCumulative.lean` | chronological product algebra, pre-final Casoratian localization, content-free cumulative endpoint execution, exact second-order recurrence, reset-ancestry pullback, primitive endpoint projectivization, odd-resultant immortality, and derived primitive content |
+| `ReturnGuardCumulative.lean` | chronological product algebra, pre-final Casoratian localization, content-free cumulative endpoint execution, exact second-order recurrence, reset-ancestry pullback, primitive endpoint projectivization, odd-reset-defect immortality, and derived primitive content |
 | `ReturnGuardContinued.lean` | exact moving-divisor allocation, fixed-cusp complete quotients, primitive prequotient and Jacobi-tail transport, recurrent-boundary reverse persistence, record-ascent content budget, and order-three decoder |
-| `ReturnGuardBoundary.lean` | depth-two universal-boundary reset ball, valuation-wall immortality, and primewise reset-resultant necessity |
+| `ReturnGuardBoundary.lean` | depth-two universal-boundary reset ball, valuation-wall immortality, and primewise reset-defect necessity |
 | `ReturnGuardSmith.lean` | signed content split, positive-cone primitive-height gain, nonmaximal contraction, maximal-step isolation, and diagonalized gauged cocycle |
 | `ReturnGuardPeriodicity.lean` | exact denominator recurrence and explicit record-ascent, wait, content, and numerator ceilings |
 | `ReturnGuardFiniteOrbit.lean` | bounded primitive endpoint streams, their finite state box, repetition, and eventual periodicity |
@@ -3297,27 +3297,27 @@ fixed-rank decision problem.
 | `WidthThreeSparseBody.lean` | termination of every coupled width-three body with at most one `c` |
 | `WidthThreeAdjacentBody.lean` | exact adjacent-two-`c` cycles and constructive coupled-orbit decision |
 | `WeightedTransducer.lean` | deterministic matrix transducers and the arbitrary-word block-row theorem |
-| `PrefixMortality.lean` | complete prefix decoder, twelve-state realization, and ten-state common-image restriction |
+| `PrefixMortality.lean` | complete prefix decoder, twelve-dimensional realization, and ten-dimensional common-image restriction |
 | `PrefixContexts.lean` | closed ten-state generators, internal rank-one word, and physical contexts |
 | `PrefixContextsClosed.lean` | Krylov-adapted reachable and observable context matrices |
 | `PrefixContextsNonsingular.lean` | polynomial and congruence certificates for both context matrices |
 | `PrefixFullAlgebra.lean` | full `M₁₀(ℚ)` product span and exact internal-sandwich lower bound |
 | `NearyCrossRatioNoGo.lean` | scalar-weighted binary-face quotient law and all three Neary cross-ratio failures |
 | `ThreePhaseBinaryNoGo.lean` | exact positional four-role cube factorization and a certified malformed false witness |
-| `ChangedSeparatorTail.lean` | tilted separator code, injectivity chamber, and exact same-zero transport |
-| `ChangedSeparatorRealization.lean` | total rational `3+3+2+1` chain chart |
+| `ChangedSeparatorTail.lean` | tilted separator code, injectivity chamber, and exact zero-language transport |
+| `ChangedSeparatorRealization.lean` | total rational `3+3+2+1` return realization |
 | `ChangedSeparatorZeroMoment.lean` | exact toggle return assembled from independent entry certificates |
 | `ChangedSeparatorMomentOne.lean` | exact first data return |
 | `ChangedSeparatorMomentTwo.lean` | exact second data return |
 | `ChangedSeparatorMomentThree.lean` | exact first geometric-tail return |
 | `ChangedSeparatorTransitionPowers.lean` | closed transition-power action on the emitted and tail bases |
 | `ChangedSeparatorTailMoments.lean` | geometric tail recurrence for every later return |
-| `TiltedGeometricHankel.lean` | uniform exact nine-state lower bound for the benchmark tilted geometric-tail family |
-| `SingularReturnFamily.lean` | mortality-preserving return compression for singular ambient generators |
-| `ChangedSeparatorMortality.lean` | complete rational and canonical-integer rank-nine mortality equivalence |
+| `TiltedGeometricHankel.lean` | uniform exact dimension-nine lower bound for the benchmark tilted geometric-tail family |
+| `SingularReturnFamily.lean` | mortality-preserving return compression for singular transition matrices |
+| `ChangedSeparatorMortality.lean` | complete rational and canonical-integer nine-dimensional mortality equivalence |
 | `RationalClearing.lean` | mortality-preserving common-denominator clearing for finite rational matrix families |
 | `EffectiveRational.lean` | primitive-recursive unreduced fractions and finite common-denominator clearing |
-| `ChangedSeparatorEffectivity.lean` | primitive-recursive integer rank-nine pair and exact rational scaling |
+| `ChangedSeparatorEffectivity.lean` | primitive-recursive integer nine-dimensional pair and exact rational scaling |
 | `LintAudit.lean` | package-wide default mathlib environment lint |
 | `AxiomAudit.lean` | transitive axioms of publication-facing declarations |
 | `Undecidability/UniversalMachine.lean` | verified two-tape interpreter for mathlib code halting |
@@ -3796,20 +3796,20 @@ fixed-rank decision problem.
 | Every binary prefix-machine word has one decoded block per row | `prefixMachine_run`, `WeightedTransducer.wordProduct_apply` |
 | Prefix-machine mortality iff five-matrix mortality | `prefixMachine_mortal_iff_normalized` |
 | Both prefix generators share the ten-dimensional image | `prefixProjection_generator` |
-| Ten-state mortality iff prefix-machine mortality | `restrictedPrefixGenerator_mortal_iff_prefixMachine` |
+| Ten-dimensional mortality iff prefix-machine mortality | `restrictedPrefixGenerator_mortal_iff_prefixMachine` |
 | Canonical `M₁₀(2)` instance mortal iff tag halting | `nearyMortality102_mortal_iff_tagHaltsFrom` |
 | Every zero-padded `M₁₀₊ₙ(2)` instance iff tag halting | `nearyMortality10Plus_mortal_iff_tagHaltsFrom` |
 | A singular two-generator pair is mortal iff its complete return family is mortal | `ReturnFamily.pairGenerator_isMortal_iff_returnFamily` |
-| The width-three `bb` rank-nine compiler has the benchmark tilted geometric moments | `TiltedGeometricHankel.benchmark_return_eq_moment` |
-| Every exact benchmark tilted geometric-tail realization in the same-zero chamber needs nine states | `TiltedGeometricHankel.nine_le_card_of_tilted_geometric_transfer_moments` |
-| The rank-nine transition has no zero pure power | `ChangedSeparatorRealization.transition_pow_ne_zero` |
-| Every rank-nine return is a nonzero scaling of one tilted role | `ChangedSeparatorRealization.returnMatrix_eq_scaled_tiltedFamily` |
-| The rational rank-nine pair is mortal iff the paired scalar series vanishes | `ChangedSeparatorRealization.generator_mortal_iff_paired_zero` |
-| Every entry of the effective integer rank-nine pair is primitive recursive | `ChangedSeparatorRealization.effectiveIntegralGenerator_entry_primrec` |
-| The primitive-recursive integer rank-nine pair is mortal iff tag halting | `ChangedSeparatorRealization.effectiveIntegralGenerator_mortal_iff_tagHaltsFrom` |
-| The canonical `M₉(2)` emitter is primitive recursive | `nearyMortality92_primrec` |
+| The width-three `bb` nine-dimensional compiler has the benchmark tilted geometric moments | `TiltedGeometricHankel.benchmark_return_eq_moment` |
+| Every exact benchmark tilted geometric-tail realization in the zero-language chamber needs dimension at least nine | `TiltedGeometricHankel.nine_le_card_of_tilted_geometric_transfer_moments` |
+| The nine-dimensional transition has no zero pure power | `ChangedSeparatorRealization.transition_pow_ne_zero` |
+| Every return of the nine-dimensional realization is a nonzero scaling of one tilted role | `ChangedSeparatorRealization.returnMatrix_eq_scaled_tiltedFamily` |
+| The rational nine-dimensional pair is mortal iff the paired scalar series vanishes | `ChangedSeparatorRealization.generator_mortal_iff_paired_zero` |
+| Every entry of the effective integer nine-dimensional pair is primitive recursive | `ChangedSeparatorRealization.effectiveIntegralGenerator_entry_primrec` |
+| The primitive-recursive integer nine-dimensional pair is mortal iff tag halting | `ChangedSeparatorRealization.effectiveIntegralGenerator_mortal_iff_tagHaltsFrom` |
+| The canonical `M₉(2)` construction is primitive recursive | `nearyMortality92_primrec` |
 | Canonical `M₉(2)` instance mortal iff tag halting | `nearyMortality92_mortal_iff_tagHaltsFrom` |
-| Every zero-padded `M₉₊ₙ(2)` emitter is primitive recursive | `nearyMortality9Plus_primrec` |
+| Every zero-padded `M₉₊ₙ(2)` construction is primitive recursive | `nearyMortality9Plus_primrec` |
 | Every zero-padded `M₉₊ₙ(2)` instance is mortal iff tag halting | `nearyMortality9Plus_mortal_iff_tagHaltsFrom` |
 | Appending two paired toggles preserves every coefficient, and absorbing one preserves nonempty zero reachability | `pairedCoefficient_append_toggle_toggle`, `pairedTrailingToggle_hasNonemptyZero_iff` |
 | A rank-four short leaf and rank-three depth-three leaf tax an exact prefix comb by ten states | `VariablePrefixRankTax.ten_le_of_rank_four_short_rank_three_deep` |

@@ -40,7 +40,7 @@ coprimality forces both valuations to vanish, so `n` and `d` are odd. The numera
 The proof is stated once in `PadicValuation` for any pair of adjacent rational units and is
 consumed by `Parameters.prime_odd`. It is not duplicated inside guard dynamics.
 
-## Odd-resultant immortality
+## Odd-reset-defect immortality
 
 Put `R=A+D−L`. A cumulative endpoint step has
 
@@ -110,7 +110,7 @@ Lean now checks:
 
 - `PadicValuation.odd_prime_of_adjacent_units`;
 - `ReturnGuard.Parameters.prime_odd`;
-- `ReturnGuard.not_physical_isMortal_of_resetResultant_odd`;
+- `ReturnGuard.not_physical_isMortal_of_resetDefectNumerator_odd`;
 - `PrimitiveEndpointReduction.maximalCancellation_targetNumerator_odd`;
 - `PrimitiveEndpointReduction.maximalCancellation_next_v_even`.
 
@@ -125,7 +125,7 @@ code is confined to declarations consumed by the parity obstruction.
 
 ## Strategic consequence
 
-The odd-resultant parameter stratum is immortal. In the even-resultant stratum, the infinite
+The odd-reset-defect parameter stratum is immortal. In the even-reset-defect stratum, the infinite
 maximal throat is closed: maximal steps are isolated and cannot terminate. `M₃(2)` remains
 open because local `v≥2` contraction has not been converted into a global invariant along an
 unbounded-denominator rational execution. The next attack must prove that amortization or

@@ -10,7 +10,7 @@ Human role: elicited by @eternalism_4eva
 
 `M₃(2)` asks whether mortality is decidable for every pair of `3 × 3` integer matrices. This
 ratchet concerns the split-spectrum rank-`(3,2)` guard, specifically its reset-started,
-even-resultant, unbounded-denominator stratum. The preceding frontier treated reset ancestry as
+even-reset-defect, unbounded-denominator stratum. The preceding frontier treated reset ancestry as
 a family of moving pulled-back rays. The submitted attack claimed that the radial direction at
 the distinguished prime is fixed, that the endpoint equation admits no malformed witnesses,
 and that only an angular carry remains.
@@ -153,7 +153,7 @@ schedule power, and the unique three-return witness.
 
 ```text
 MASTER VERDICT: M₃(2) remains open
-GUARD VERDICT: the even-resultant reset-started unbounded-denominator guard remains open
+GUARD VERDICT: the even-reset-defect reset-started unbounded-denominator guard remains open
 REMOVED: malformed endpoint witnesses; moving radial reset ancestry at p; hidden p-adic primitive-normalization savings; every universal two-return terminal bound
 REMAINS: one angular, all-place carry driven by the moving auxiliary factors of p^a−1, with unbounded denominator growth
 DISTANCE: derive a coefficient-effective auxiliary-place bound on that angular cocycle and hence a finite terminal search, or construct one exact aperiodic reset orbit with unbounded denominators; after guard decision, resolve the two exceptional rank-(2,2) compiler positions
