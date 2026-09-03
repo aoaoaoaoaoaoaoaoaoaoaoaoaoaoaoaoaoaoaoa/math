@@ -278,6 +278,12 @@
 'MatrixMortality.FourModeArtery.railbreakerReturn_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.FourModeArtery.railbreaker_affineWait' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.FourModeArtery.railbreaker_orbit_injective' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.AlternatingReaderPoison.integralAffine_negative_hasValue' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.AlternatingReaderPoison.integralAffine_negative_forward' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.ChangedSeparatorRealization.integralGenerator_mortal_iff_tagHaltsFrom' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]

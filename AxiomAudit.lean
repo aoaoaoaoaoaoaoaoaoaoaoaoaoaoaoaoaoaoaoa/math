@@ -159,6 +159,8 @@ open MatrixMortality
 #print axioms FourModeArtery.railbreakerReturn_eq
 #print axioms FourModeArtery.railbreaker_affineWait
 #print axioms FourModeArtery.railbreaker_orbit_injective
+#print axioms AlternatingReaderPoison.integralAffine_negative_hasValue
+#print axioms AlternatingReaderPoison.integralAffine_negative_forward
 #print axioms ChangedSeparatorRealization.integralGenerator_mortal_iff_tagHaltsFrom
 #print axioms ChangedSeparatorRealization.effectiveIntegralGenerator_mortal_iff_tagHaltsFrom
 #print axioms Undecidability.nearyMortality92_mortal_iff_tagHaltsFrom
