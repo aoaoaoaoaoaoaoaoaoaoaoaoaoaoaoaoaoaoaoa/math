@@ -162,6 +162,11 @@ open MatrixMortality
 #print axioms FreeMonoidReturn.ToricCycle.recoil
 #print axioms FreeMonoidReturn.ToricCycle.thrust_mul_recoil
 #print axioms FreeMonoidReturn.ToricCycle.zero_recoil_repaired
+#print axioms TwoPlaceReader.integralAffine_negative_hasValue
+#print axioms TwoPlaceReader.integralAffine_negative_forward
+#print axioms TwoPlaceReader.unitLower_breaks_negative
+#print axioms TwoPlaceReader.finiteIntegralPole_determinant_not_unit
+#print axioms TwoPlaceReader.integralFinitePole_breaks_negative
 #print axioms ChangedSeparatorRealization.integralGenerator_mortal_iff_tagHaltsFrom
 #print axioms ChangedSeparatorRealization.effectiveIntegralGenerator_mortal_iff_tagHaltsFrom
 #print axioms Undecidability.nearyMortality92_mortal_iff_tagHaltsFrom

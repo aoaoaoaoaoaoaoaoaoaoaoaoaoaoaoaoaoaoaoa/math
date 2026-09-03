@@ -31,3 +31,17 @@ DAG metadata: free-monoid reduction / independent / formalized / active; four-mo
 Next:
 - Couple a two-place valuation reader to an updater whose poison prime never occurs in any return numerator.
 - Make word order carry finite control, then prove the arbitrary-word converse.
+
+## Z
+
+Verdict: obstructed
+
+Cells affected: unchanged.
+
+Lean: `#print axioms TwoPlaceReader.integralAffine_negative_hasValue`; `#print axioms TwoPlaceReader.integralAffine_negative_forward`; `#print axioms TwoPlaceReader.unitLower_breaks_negative`; `#print axioms TwoPlaceReader.finiteIntegralPole_determinant_not_unit`; `#print axioms TwoPlaceReader.integralFinitePole_breaks_negative`: each `[propext, Classical.choice, Quot.sound]`.
+
+Statement: Integral affine `π`-isometries preserve negative valuation exactly.
+
+If obstructed: Integral Möbius returns split sharply. If `c` is a `π`-unit, `z=1/π` exits `vπ<0`. If `c=0` or `vπ(c)>0` and an integral pole satisfies `cx+d=0`, then `det=−c(ax+b)` is zero or `π`-divisible. Thus no unit-determinant finite-pole reader preserves the poison chamber; task 1 fails, task 3 is reached, and task 2 closes.
+
+DAG metadata: poison / Z / Lean / validated; pole wall / Z / Lean / obstructed.
