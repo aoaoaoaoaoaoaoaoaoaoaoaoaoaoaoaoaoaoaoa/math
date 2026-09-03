@@ -165,7 +165,7 @@ theorem not_physical_isMortal_of_beyond_negative_wall
     have ratio_nonneg : 0 ≤ ((q : ℚ) - 1) / (q : ℚ) ^ 2 :=
       div_nonneg numerator_nonneg (sq_nonneg (q : ℚ))
     linarith
-  rw [physical_isMortal_iff_positiveBridge q (-d) (by omega) (by nlinarith)]
+  rw [physical_isMortal_iff_positiveBridge q (-d) (by omega)]
   rintro ⟨waits, bridge_zero⟩
   exact positiveBridge_ne_zero_of_beyond_negative_wall q d waits hq beyond_wall
     bridge_zero

@@ -628,7 +628,7 @@ theorem physical_isMortal_pureDenominator_iff_candidates_nonempty
           (cut (-(1 / (B : ℚ))))) ↔
       (pureDenominatorZeroCandidates q B B_at_least_two).Nonempty
   rw [physical_isMortal_iff_positiveBridge
-    (q : ℤ) (-(1 / (B : ℚ))) q_ne_int parameter_ne_neg_one]
+    (q : ℤ) (-(1 / (B : ℚ))) q_ne_int]
   exact exists_positiveBridge_pureDenominator_zero_iff_candidates_nonempty
     q B q_at_least_four B_at_least_two
 
@@ -672,7 +672,7 @@ theorem physical_isMortal_positiveNumerator_iff_candidates_nonempty
           (cut (-((A : ℚ) / B)))) ↔
       (positiveNumeratorZeroCandidates q A B weight weight_positive).Nonempty
   rw [physical_isMortal_iff_positiveBridge
-    (q : ℤ) (-((A : ℚ) / B)) q_ne_int parameter_ne_neg_one]
+    (q : ℤ) (-((A : ℚ) / B)) q_ne_int]
   exact exists_positiveBridge_positiveNumerator_zero_iff_candidates_nonempty
     q A B q_at_least_two A_positive B_positive A_ne_B
     prime prime_spec prime_dvd_q weight weight_positive
@@ -724,7 +724,7 @@ theorem physical_isMortal_positiveNumerator_iff_all_candidates_nonempty
           (cut (-((A : ℚ) / B)))) ↔
       (positiveNumeratorAllZeroCandidates q A B prime).Nonempty
   rw [physical_isMortal_iff_positiveBridge
-    (q : ℤ) (-((A : ℚ) / B)) q_ne_int parameter_ne_neg_one]
+    (q : ℤ) (-((A : ℚ) / B)) q_ne_int]
   exact exists_positiveBridge_positiveNumerator_zero_iff_all_candidates_nonempty
     q A B q_at_least_two A_positive B_positive A_ne_B
     prime prime_spec prime_dvd_q valuation_positive
@@ -794,7 +794,7 @@ def physicalPositiveFractionDecidable
       have bridge_exists :
           ∃ waits, positiveBridge (q : ℚ) (-((A : ℚ) / B)) waits = 0 := by
         have equivalence := physical_isMortal_iff_positiveBridge
-          (q : ℤ) (-((A : ℚ) / B)) q_ne_int parameter_ne_neg_one
+          (q : ℤ) (-((A : ℚ) / B)) q_ne_int
         apply equivalence.mp
         simpa using mortal
       exact not_exists_positiveBridge_zero_of_numerator_prime_not_dvd_base

@@ -1,3 +1,4 @@
+import MatrixMortality.InterfaceCompression
 import MatrixMortality.LinearRepresentation
 import MatrixMortality.TerminalTile
 
@@ -36,6 +37,16 @@ def blockedProduct (ambient cut : Square Large R) : List Nat → Square Large R
 /-- Two-generator family whose ordinary letter is `ambient` and whose `none` letter is the cut. -/
 def pairGenerator (ambient cut : Square Large R) : Option Unit → Square Large R :=
   separatedGenerator cut (fun _ => ambient)
+
+private def pairLabelEquiv : Option Unit ≃ Unit ⊕ Unit where
+  toFun
+    | none => .inr ()
+    | some _ => .inl ()
+  invFun
+    | .inl _ => some ()
+    | .inr _ => none
+  left_inv label := by cases label <;> rfl
+  right_inv label := by rcases label with (_ | _) <;> rfl
 
 omit [CommSemiring R] [Fintype Large] [DecidableEq Large] in
 @[simp]
@@ -244,86 +255,88 @@ theorem blockedProduct_eq_zero_iff
   exact split_sandwich_eq_zero_iff input output inputLeftInverse outputRightInverse
     left_inverse right_inverse _
 
-/-- An invertible ambient generator and a split finite-rank cut are mortal exactly when one
+private theorem interfacePathProduct_eq_returnProduct
+    (ambient : Square Large R) (input : Matrix Large Small R)
+    (output : Matrix Small Large R) (steps : List (InterfaceCompression.Step Unit Unit)) :
+    InterfaceCompression.pathProduct (fun _ : Unit => ambient) (fun _ => input)
+        (fun _ => output) () steps =
+      returnProduct ambient input output (steps.map fun step => step.1.length) := by
+  induction steps with
+  | nil => simp [InterfaceCompression.pathProduct, returnProduct]
+  | cons step steps induction =>
+      obtain ⟨word, target⟩ := step
+      cases target
+      rw [InterfaceCompression.pathProduct, List.map_cons, returnProduct, wordProduct_cons,
+        induction]
+      simp [InterfaceCompression.bridge, returnMatrix, returnProduct, wordProduct_const]
+
+/-- A physical return pair is mortal exactly when either its ambient transition family or its
+interface return family is mortal. This is the one-transition, one-cut interface-compression
+theorem; no splitting or rank hypothesis is involved. -/
+theorem pairGenerator_isMortal_iff_ambient_or_returnFamily
+    (ambient : Square Large R) (input : Matrix Large Small R)
+    (output : Matrix Small Large R) :
+    IsMortal (pairGenerator ambient (input * output)) ↔
+      IsMortal (fun _ : Unit => ambient) ∨ IsMortal (returnMatrix ambient input output) := by
+  have generator_eq :
+      InterfaceCompression.generator (fun _ : Unit => ambient) (fun _ : Unit => input)
+          (fun _ : Unit => output) ∘ pairLabelEquiv =
+        pairGenerator ambient (input * output) := by
+    funext label
+    cases label <;> rfl
+  rw [← generator_eq, isMortal_comp_equiv, InterfaceCompression.isMortal_iff]
+  apply or_congr_right
+  constructor
+  · rintro ⟨start, steps, steps_nonempty, path_zero⟩
+    cases start
+    let waits := steps.map fun step => step.1.length
+    refine ⟨waits, by simpa [waits] using steps_nonempty, ?_⟩
+    change returnProduct ambient input output waits = 0
+    rw [← interfacePathProduct_eq_returnProduct ambient input output steps]
+    exact path_zero
+  · rintro ⟨waits, waits_nonempty, returns_zero⟩
+    let steps : List (InterfaceCompression.Step Unit Unit) :=
+      waits.map fun wait => (List.replicate wait (), ())
+    refine ⟨(), steps, by simpa [steps] using waits_nonempty, ?_⟩
+    rw [interfacePathProduct_eq_returnProduct ambient input output steps]
+    have encoded_waits : steps.map (fun step => step.1.length) = waits := by
+      simp [steps, Function.comp_def]
+    rw [encoded_waits]
+    exact returns_zero
+
+/-- An invertible ambient generator and an arbitrary factored cut are mortal exactly when one
 finite product of interface returns vanishes. -/
 theorem pairGenerator_isMortal_iff
     [Nontrivial R] [Nonempty Large]
     (ambient : Square Large R) (input : Matrix Large Small R)
     (output : Matrix Small Large R)
-    (inputLeftInverse : Matrix Small Large R)
-    (outputRightInverse : Matrix Large Small R)
-    (ambient_unit : IsUnit ambient)
-    (left_inverse : inputLeftInverse * input = 1)
-    (right_inverse : output * outputRightInverse = 1) :
+    (ambient_unit : IsUnit ambient) :
     IsMortal (pairGenerator ambient (input * output)) ↔
       ∃ waits, returnProduct ambient input output waits = 0 := by
+  rw [pairGenerator_isMortal_iff_ambient_or_returnFamily]
+  have ambient_immortal : ¬IsMortal (fun _ : Unit => ambient) :=
+    not_isMortal_of_forall_isUnit (fun _ : Unit => ambient) fun _ => ambient_unit
+  rw [or_iff_right ambient_immortal]
   constructor
-  · rintro ⟨word, _, product_zero⟩
-    by_cases cut_mem : none ∈ word
-    · rw [pairGenerator, wordProduct_separatedGenerator_eq_intercalatedProduct] at product_zero
-      have fracture_length := fracture_length_two_le_of_none_mem cut_mem
-      have fracture_nonempty := fracture_ne_nil word
-      obtain ⟨first, rest, fracture_eq⟩ :=
-        List.exists_cons_of_ne_nil fracture_nonempty
-      have rest_nonempty : rest ≠ [] := by
-        intro rest_empty
-        rw [fracture_eq, rest_empty] at fracture_length
-        simp at fracture_length
-      let last := rest.getLast rest_nonempty
-      let middle := rest.dropLast
-      have fracture_decomposition : fracture word = first :: middle ++ [last] := by
-        rw [fracture_eq]
-        congr 1
-        exact (List.dropLast_append_getLast rest_nonempty).symm
-      have mapped_decomposition :
-          (fracture word).map (wordProduct (fun _ : Unit => ambient)) =
-            ambient ^ first.length ::
-              middle.map (fun block => ambient ^ block.length) ++
-                [ambient ^ last.length] := by
-        simp [fracture_decomposition, wordProduct_const]
-      rw [mapped_decomposition] at product_zero
-      have blocked_sandwich_zero :
-          ambient ^ first.length *
-              blockedProduct ambient (input * output) (middle.map List.length) *
-                ambient ^ last.length = 0 := by
-        rw [← intercalatedPowers_eq ambient (input * output) first.length last.length
-          (middle.map List.length)]
-        have mapped_middle :
-            (middle.map List.length).map (fun exponent ↦ ambient ^ exponent) =
-              middle.map (fun block ↦ ambient ^ block.length) := by
-          rw [List.map_map]
-          apply List.map_congr_left
-          intro block _
-          rfl
-        rw [mapped_middle]
-        exact product_zero
-      have blocked_zero :
-          blockedProduct ambient (input * output) (middle.map List.length) = 0 :=
-        (unit_sandwich_eq_zero_iff
-          (ambient_unit.pow first.length) (ambient_unit.pow last.length)).mp
-            blocked_sandwich_zero
-      exact ⟨middle.map List.length,
-        (blockedProduct_eq_zero_iff ambient input output inputLeftInverse outputRightInverse
-          left_inverse right_inverse _).mp blocked_zero⟩
-    · have physical_unit :
-          IsUnit (wordProduct (pairGenerator ambient (input * output)) word) := by
-        apply wordProduct_isUnit_of_mem
-        intro label label_mem
-        cases label with
-        | none => exact (cut_mem label_mem).elim
-        | some _ => simpa using ambient_unit
-      exact (physical_unit.ne_zero product_zero).elim
+  · rintro ⟨waits, _, returns_zero⟩
+    exact ⟨waits, returns_zero⟩
   · rintro ⟨waits, returns_zero⟩
-    have blocked_zero :
-        blockedProduct ambient (input * output) waits = 0 :=
-      (blockedProduct_eq_zero_iff ambient input output inputLeftInverse outputRightInverse
-        left_inverse right_inverse waits).mpr returns_zero
-    refine ⟨blockedWord waits, ?_, ?_⟩
-    · cases waits <;> simp [blockedWord]
-    · rw [wordProduct_blockedWord]
-      exact blocked_zero
+    by_cases waits_nonempty : waits ≠ []
+    · exact ⟨waits, waits_nonempty, returns_zero⟩
+    · have waits_eq : waits = [] := not_ne_iff.mp waits_nonempty
+      rw [waits_eq] at returns_zero
+      have one_eq_zero : (1 : Square Small R) = 0 := by
+        simpa [returnProduct] using returns_zero
+      have return_zero : returnMatrix ambient input output 0 = 0 := by
+        calc
+          returnMatrix ambient input output 0 =
+              returnMatrix ambient input output 0 * 1 := (Matrix.mul_one _).symm
+          _ = returnMatrix ambient input output 0 * 0 :=
+            congrArg (returnMatrix ambient input output 0 * ·) one_eq_zero
+          _ = 0 := Matrix.mul_zero _
+      exact ⟨[0], List.cons_ne_nil _ _, by simpa [returnProduct] using return_zero⟩
 
-/-- A split physical return pair whose zero-wait return is an outer product is mortal exactly
+/-- A physical return pair whose zero-wait return is an outer product is mortal exactly
 when one positive-return bridge vanishes. The positive returns may be singular or zero. -/
 theorem pairGenerator_isMortal_iff_positiveBridge
     {K Big Interface : Type*} [Field K]
@@ -331,20 +344,15 @@ theorem pairGenerator_isMortal_iff_positiveBridge
     [Fintype Interface] [DecidableEq Interface] [Nonempty Interface]
     (ambient : Square Big K) (input : Matrix Big Interface K)
     (output : Matrix Interface Big K)
-    (inputLeftInverse : Matrix Interface Big K)
-    (outputRightInverse : Matrix Big Interface K)
     (column row : Interface → K)
     (ambient_unit : IsUnit ambient)
-    (left_inverse : inputLeftInverse * input = 1)
-    (right_inverse : output * outputRightInverse = 1)
     (zero_return :
       returnMatrix ambient input output 0 = Matrix.vecMulVec column row) :
     IsMortal (pairGenerator ambient (input * output)) ↔
       ∃ waits : List Nat,
         bridgeScalar column row
           (wordProduct (fun wait => returnMatrix ambient input output (wait + 1)) waits) = 0 := by
-  rw [pairGenerator_isMortal_iff ambient input output
-    inputLeftInverse outputRightInverse ambient_unit left_inverse right_inverse]
+  rw [pairGenerator_isMortal_iff ambient input output ambient_unit]
   change
     (∃ waits, wordProduct (returnMatrix ambient input output) waits = 0) ↔ _
   rw [← isMortal_iff_exists_wordProduct_eq_zero]
@@ -372,15 +380,10 @@ theorem rankOnePair_isMortal_iff
     [Nonempty Ambient]
     (ambient : Square Ambient K) (input : Matrix Ambient Unit K)
     (output : Matrix Unit Ambient K)
-    (inputLeftInverse : Matrix Unit Ambient K)
-    (outputRightInverse : Matrix Ambient Unit K)
-    (ambient_unit : IsUnit ambient)
-    (left_inverse : inputLeftInverse * input = 1)
-    (right_inverse : output * outputRightInverse = 1) :
+    (ambient_unit : IsUnit ambient) :
     IsMortal (pairGenerator ambient (input * output)) ↔
       ∃ wait, returnMatrix ambient input output wait = 0 := by
-  rw [pairGenerator_isMortal_iff ambient input output inputLeftInverse outputRightInverse
-    ambient_unit left_inverse right_inverse]
+  rw [pairGenerator_isMortal_iff ambient input output ambient_unit]
   constructor
   · rintro ⟨waits, product_zero⟩
     have factor_zero :

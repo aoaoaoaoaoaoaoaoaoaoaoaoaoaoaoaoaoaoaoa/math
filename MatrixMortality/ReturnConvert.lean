@@ -169,7 +169,7 @@ theorem ambient_isUnit {K : Type*} [Field K] (p q : K)
 
 /-- Complete arbitrary-word normal form for the physical two-scale pair. -/
 theorem physical_isMortal_iff_positiveBridge
-    (p q : ℤ) (c : ℚ) (hp : p ≠ 0) (hq : q ≠ 0) (hc : c + 1 ≠ 0) :
+    (p q : ℤ) (c : ℚ) (hp : p ≠ 0) (hq : q ≠ 0) :
     IsMortal (ReturnFamily.pairGenerator (ambient (p : ℚ) (q : ℚ)) (cut c)) ↔
       ∃ waits, positiveBridge (p : ℚ) (q : ℚ) c waits = 0 := by
   change
@@ -182,12 +182,9 @@ theorem physical_isMortal_iff_positiveBridge
             waits) = 0
   have reduction := ReturnFamily.pairGenerator_isMortal_iff_positiveBridge
       (ambient (p : ℚ) (q : ℚ)) input (output c)
-      ReturnSquare.inputLeftInverse (ReturnSquare.outputRightInverse c)
       ![1, 1] ![c, 1]
       (ambient_isUnit (p : ℚ) (q : ℚ)
         (by exact_mod_cast hp) (by exact_mod_cast hq))
-      ReturnSquare.inputLeftInverse_mul_input
-      (ReturnSquare.output_mul_outputRightInverse c hc)
       (by
         rw [returnMatrix_eq_transfer]
         simpa using transfer_one ℚ c)

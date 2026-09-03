@@ -246,24 +246,17 @@ theorem generator_eq_edgeCompression {R : Type*} [CommSemiring R]
     (edge : Bool → Bool → Square (Fin 2) R) :
     generator edge = EdgeCompression.generator input (output edge) := rfl
 
-/-- A compatible edge square with one split incoming edge per target has exactly the same
-mortality problem as its two-vertex constrained edge paths. -/
+/-- Every factored two-plane family has exactly the same mortality problem as its generic
+two-vertex edge paths; compatibility matters only when identifying those paths with prescribed
+edges. -/
 theorem isMortal_iff_exists_edgeProduct_eq_zero
     {R : Type*} [CommSemiring R]
-    (edge : Bool → Bool → Square (Fin 2) R) (compatible : Compatible edge)
-    (source : Bool → Bool)
-    (edgeRightInverse : Bool → Square (Fin 2) R)
-    (edge_split :
-      ∀ target, edge target (source target) * edgeRightInverse target = 1) :
+    (edge : Bool → Bool → Square (Fin 2) R) :
     IsMortal (generator edge) ↔
       ∃ start tail,
         EdgeCompression.edgeProduct input (output edge) start tail = 0 := by
   rw [generator_eq_edgeCompression]
   exact EdgeCompression.isMortal_iff_exists_edgeProduct_eq_zero
-    (input (R := R)) (output edge) (inputLeftInverse (R := R))
-    (fun target => (input (R := R) (source target)) * edgeRightInverse target)
-    (inputLeftInverse_mul_input (R := R))
-    (fun target => output_mul_rightInverse edge compatible target (source target)
-      (edgeRightInverse target) (edge_split target))
+    (input (R := R)) (output edge)
 
 end MatrixMortality.TwoPlaneEdges

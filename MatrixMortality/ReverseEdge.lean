@@ -743,14 +743,7 @@ theorem isMortal_adaptedGenerator_iff
   let edge := adaptedEdge G H row column
   have compatible : TwoPlaneEdges.Compatible edge :=
     adaptedEdge_compatible G H row column H_unit beta_nonzero
-  have split :
-      ∀ target,
-        edge target (splitSource target) *
-            adaptedRightInverse G H row column target =
-          1 :=
-    adaptedEdge_split G H row column H_unit alpha_nonzero beta_nonzero
-  rw [TwoPlaneEdges.isMortal_iff_exists_edgeProduct_eq_zero
-    edge compatible splitSource (adaptedRightInverse G H row column) split]
+  rw [TwoPlaneEdges.isMortal_iff_exists_edgeProduct_eq_zero edge]
   constructor
   · rintro ⟨start, tail, edge_zero⟩
     have adapted_zero :

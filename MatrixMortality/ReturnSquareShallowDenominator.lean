@@ -231,7 +231,7 @@ theorem physical_isMortal_pureDenominator_shallow_iff
         (ReturnFamily.pairGenerator (ambient (((q : ℤ) : ℚ)))
           (cut (-(1 / (B : ℚ))))) ↔ _
   rw [physical_isMortal_iff_positiveBridge
-    (q : ℤ) (-(1 / (B : ℚ))) q_ne_int parameter_ne_neg_one]
+    (q : ℤ) (-(1 / (B : ℚ))) q_ne_int]
   constructor
   · rintro ⟨waits, bridge_zero⟩
     obtain ⟨head, _, denominator_eq⟩ :=
