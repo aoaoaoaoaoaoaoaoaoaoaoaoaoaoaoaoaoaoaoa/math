@@ -150,6 +150,7 @@ open MatrixMortality
 #print axioms ChangedSeparatorRealization.moment_three
 #print axioms ChangedSeparatorRealization.moment_add_three
 #print axioms ReturnFamily.pairGenerator_isMortal_iff_returnFamily
+#print axioms PeriodicReturn.pairGenerator_isMortal_iff_residue
 #print axioms InterfaceCompression.isMortal_iff
 #print axioms InterfaceCompression.isMortal_rankOne_iff
 #print axioms ChangedSeparatorRealization.integralGenerator_mortal_iff_tagHaltsFrom
