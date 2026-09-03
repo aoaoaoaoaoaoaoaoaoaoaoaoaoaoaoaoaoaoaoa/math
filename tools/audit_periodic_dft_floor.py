@@ -232,10 +232,13 @@ def audit_radix_rank_strata() -> None:
     )
     data_only = b * data_b + c * data_c
     assert sp.factor(data_only.extract([0, 3], [0, 3]).det()) == a * (b + c) ** 2
-    assert sp.expand(
-        data_only.extract([2, 3], [1, 2]).det().subs(c, -b)
-        - a**4 * b**2 * (a**4 - 1) * (a**10 - 1)
-    ) == 0
+    assert (
+        sp.expand(
+            data_only.extract([2, 3], [1, 2]).det().subs(c, -b)
+            - a**4 * b**2 * (a**4 - 1) * (a**10 - 1)
+        )
+        == 0
+    )
 
     rule_b, rule_c, erase_b, erase_c, terminal = sp.symbols(
         "rule_b rule_c erase_b erase_c terminal"

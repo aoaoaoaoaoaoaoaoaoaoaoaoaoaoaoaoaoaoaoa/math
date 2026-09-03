@@ -7,20 +7,24 @@ Cells affected: No closure of `M₈(2)`, `M₇(2)`, or `M₆(2)`. The exact-role
 | paired | ≥12 | ≥14 | ≥12 | ≥19 | ≥12 |
 | `M₃(5)` | — | ≥10 | ≥9 | ≥13 | ≥10 |
 
-`tools/audit_periodic_dft_floor.py` exhausts all surjective assignments and all rationally feasible cyclotomic zero-orbit patterns. These are sharp floors of the zero-support/rank-stratum relaxation, not proved exact minima; saturating the remaining minor ideals is still required to sharpen them.
+`tools/audit_periodic_dft_floor.py` exhausts all surjective assignments and rationally feasible cyclotomic zero-orbit patterns. The table gives exact minima of this rank-stratum relaxation, not exact DFT minima.
 
-Lean: `PeriodicReturn.pairGenerator_isMortal_iff_residue` — `[propext, Classical.choice, Quot.sound]`; `PeriodicRankScreen.pairedComponent_three_le_rank` — `[propext, Classical.choice, Quot.sound]`; `PeriodicRankScreen.nearyComponent_two_le_rank` — `[propext, Classical.choice, Quot.sound]`.
+Lean:
+- `#print axioms PeriodicReturn.pairGenerator_isMortal_iff_residue` — `[propext, Classical.choice, Quot.sound]`
+- `#print axioms PeriodicRankScreen.pairedComponent_three_le_rank` — `[propext, Classical.choice, Quot.sound]`
+- `#print axioms PeriodicRankScreen.nearyComponent_two_le_rank` — `[propext, Classical.choice, Quot.sound]`
 
-Statement: Over a field, for positive `m`, nonzero `ν`, and nonempty ambient index type, `A^m=νI` implies `IsMortal (pairGenerator A (U*O)) ↔ IsMortal (k : Fin m ↦ O*A^k*U)`, without split hypotheses. Over any characteristic-zero field, a paired benchmark Fourier component with nonzero toggle, separator, and `q` coefficients has rank at least three; an `M₃(5)` component with nonzero terminal coefficient and any nonzero ordinary coefficient has rank at least two. The requested theorem is false at `m=0` (`ν=1`, `A=0`).
+The `verification/axioms.txt` diff adds exactly these three outputs.
 
-If obstructed: `N_min ≥ 9` for every screened family and period. Escaping requires a precisely defined same-zero deformation that defeats the component minors; arbitrary “entries which may change” is not yet a mathematical parameter space.
+Statement: Over a field, for positive `m`, nonzero `ν`, finite indices, and nonempty ambient index, `A^m=νI` implies `IsMortal (pairGenerator A (U*O)) ↔ IsMortal (k : Fin m ↦ O*A^k*U)`. In characteristic zero, paired components with nonzero toggle, separator, and `q` have rank ≥3; `M₃(5)` components with nonzero terminal and ordinary parts have rank ≥2. The first theorem is false at `m=0` (`ν=1`, `A=0`).
 
-DAG metadata: periodic return equivalence — compiler / agentic / formalized / graduated; component rank strata — obstruction / agentic / formalized / active; DFT floors — obstruction / computational / exact symbolic / active.
+If obstructed: `N_min ≥ 9` throughout both tables. Escape requires leaving the lawful periodic radix-digit deformation family, forbidden by A2's stop rule.
+
+DAG metadata: return equivalence — reduction / agentic / Lean-checked / graduated; rank strata — obstruction / agentic / Lean-checked / active; DFT floors — obstruction / agentic / exact symbolic / active.
 
 Next:
-- Saturate the residual minor ideals to replace floors by exact minima.
-- Define and exhaust a bounded same-zero deformation space.
-- Formalize rational DFT descent/rank-optimal realization; only periodic mortality is formalized here.
+- Formalize rational DFT descent/rank-optimal realization.
+- Do not extend the deformation search; A2 stopped it.
 
 ## A2
 
