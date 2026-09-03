@@ -33,7 +33,8 @@
             <li><a href="#binary-and-return-constructions">Binary and Return Constructions</a></li>
             <li><a href="#arithmetic-incidence">Arithmetic Incidence</a></li>
             <li><a href="#established-obstructions">Established Obstructions</a></li>
-            <li><a href="#endpoint-theorems">Endpoint Theorems</a></li>
+            <li><a href="#frontier-constructions">Frontier Constructions</a></li>
+            <li><a href="#subsumed-constructions">Subsumed Constructions</a></li>
           </ol>
         </li>
 <!-- MODULE_GRAPH_TOC:END -->
@@ -62,7 +63,7 @@
           <p>This is how the proved results depend on one another. Open any box for its full statement and proof, and follow its Requires links back to what it rests on. Open questions are in the decidability table below.</p>
           <dl class="module-legend">
             <div><dt>Kind</dt><dd>What the box states: a definition, a construction, a lemma, a reduction (a correctness-preserving translation), a theorem (a principal conclusion), an obstruction (a proved limit), or a witness.</dd></div>
-            <div><dt>Edges</dt><dd>Requires and Used by are the proof dependencies; other named links, such as Instantiates, are cross-references, not dependencies.</dd></div>
+            <div><dt>Edges</dt><dd>Requires and Used by are the proof dependencies; other named links, such as Instantiates and Strengthens, are cross-references, not dependencies.</dd></div>
           </dl>
           <div class="module-map">
             <section class="module-layer">
@@ -477,8 +478,8 @@
               </ol>
             </section>
             <section class="module-layer">
-              <h3 id="endpoint-theorems">Endpoint Theorems<a class="fragment-link" href="#endpoint-theorems" aria-label="Link to this section">#</a></h3>
-              <p>The undecidability results proved here, and the reductions that carry each to further cells.</p>
+              <h3 id="frontier-constructions">Frontier Constructions<a class="fragment-link" href="#frontier-constructions" aria-label="Link to this section">#</a></h3>
+              <p>Undecidability constructions not implied by another displayed point in the same problem family.</p>
               <ol class="module-grid">
               <li class="module-node" data-node-id="mm/m3-5">
                 <p class="module-kind">
@@ -511,6 +512,40 @@
                   <div>
                     <dt>Requires</dt>
                     <dd><a href="/math/matrix_mortality/m4_4/#paired-compression">Paired-role compression</a>, <a href="/math/matrix_mortality/m3_5/#five-matrices">Rank-one separator</a></dd>
+                  </div>
+                </dl>
+              </li>
+              <li class="module-node" data-node-id="mm/m6-3">
+                <p class="module-kind">
+                  <span class="module-kind-symbol" aria-hidden="true">∎</span>Theorem
+                </p>
+                <p class="module-node-head">
+                  <a href="/math/matrix_mortality/m3_5/#result"><b>M₆(3) is undecidable</b></a>
+                </p>
+                <p class="module-summary">Prefix-transducer packing transports the five-generator dimension-three theorem to three generators in dimension six.</p>
+                <dl class="module-relations">
+                  <div>
+                    <dt>Requires</dt>
+                    <dd><a href="/math/matrix_mortality/m3_5/#result">M₃(5) is undecidable</a>, <a href="/math/matrix_mortality/binary_compilers/#prefix-machine">Prefix-transducer packing</a></dd>
+                  </div>
+                </dl>
+              </li>
+              <li class="module-node" data-node-id="mm/m9-2">
+                <p class="module-kind">
+                  <span class="module-kind-symbol" aria-hidden="true">∎</span>Theorem
+                </p>
+                <p class="module-node-head">
+                  <a href="/math/matrix_mortality/m9_2/#result"><b>M₉(2) is undecidable</b></a>
+                </p>
+                <p class="module-summary">A zero-language-equivalent separator and a nine-dimensional return realization give a primitive-recursive pair of integer matrices.</p>
+                <dl class="module-relations">
+                  <div>
+                    <dt>Requires</dt>
+                    <dd><a href="/math/matrix_mortality/paired_scalar_series/#result">Paired scalar series</a>, <a href="/math/matrix_mortality/m9_2/#tilted-separator">Tilted separator</a>, <a href="/math/matrix_mortality/m9_2/#nine-state-chart">Nine-dimensional return realization</a>, <a href="/math/matrix_mortality/interface_compression/#single-cut">Singular-return compression</a>, <a href="/math/matrix_mortality/m9_2/#unreduced-clearing">Effective denominator clearing</a></dd>
+                  </div>
+                  <div>
+                    <dt>Strengthens</dt>
+                    <dd><a href="/math/matrix_mortality/binary_compilers/#mortality-ten">M₁₀(2) is undecidable</a></dd>
                   </div>
                 </dl>
               </li>
@@ -548,36 +583,12 @@
                   </div>
                 </dl>
               </li>
-              <li class="module-node" data-node-id="mm/m6-3">
-                <p class="module-kind">
-                  <span class="module-kind-symbol" aria-hidden="true">∎</span>Theorem
-                </p>
-                <p class="module-node-head">
-                  <a href="/math/matrix_mortality/m3_5/#result"><b>M₆(3) is undecidable</b></a>
-                </p>
-                <p class="module-summary">Prefix-transducer packing transports the five-generator dimension-three theorem to three generators in dimension six.</p>
-                <dl class="module-relations">
-                  <div>
-                    <dt>Requires</dt>
-                    <dd><a href="/math/matrix_mortality/m3_5/#result">M₃(5) is undecidable</a>, <a href="/math/matrix_mortality/binary_compilers/#prefix-machine">Prefix-transducer packing</a></dd>
-                  </div>
-                </dl>
-              </li>
-              <li class="module-node" data-node-id="mm/m9-2">
-                <p class="module-kind">
-                  <span class="module-kind-symbol" aria-hidden="true">∎</span>Theorem
-                </p>
-                <p class="module-node-head">
-                  <a href="/math/matrix_mortality/m9_2/#result"><b>M₉(2) is undecidable</b></a>
-                </p>
-                <p class="module-summary">A zero-language-equivalent separator and a nine-dimensional return realization give a primitive-recursive pair of integer matrices.</p>
-                <dl class="module-relations">
-                  <div>
-                    <dt>Requires</dt>
-                    <dd><a href="/math/matrix_mortality/paired_scalar_series/#result">Paired scalar series</a>, <a href="/math/matrix_mortality/m9_2/#tilted-separator">Tilted separator</a>, <a href="/math/matrix_mortality/m9_2/#nine-state-chart">Nine-dimensional return realization</a>, <a href="/math/matrix_mortality/interface_compression/#single-cut">Singular-return compression</a>, <a href="/math/matrix_mortality/m9_2/#unreduced-clearing">Effective denominator clearing</a></dd>
-                  </div>
-                </dl>
-              </li>
+              </ol>
+            </section>
+            <section class="module-layer">
+              <h3 id="subsumed-constructions">Subsumed Constructions<a class="fragment-link" href="#subsumed-constructions" aria-label="Link to this section">#</a></h3>
+              <p>Mortality constructions whose endpoint now follows from a sharper frontier theorem, retained for their distinct mechanisms.</p>
+              <ol class="module-grid">
               <li class="module-node" data-node-id="mm/m10-2">
                 <p class="module-kind">
                   <span class="module-kind-symbol" aria-hidden="true">∎</span>Theorem
@@ -590,6 +601,10 @@
                   <div>
                     <dt>Requires</dt>
                     <dd><a href="/math/matrix_mortality/binary_compilers/#prefix-machine">Prefix-transducer packing</a>, <a href="/math/matrix_mortality/binary_compilers/#common-image">Common-image restriction</a></dd>
+                  </div>
+                  <div>
+                    <dt>Strengthens</dt>
+                    <dd><a href="/math/matrix_mortality/m3_5/#result">M₁₂(2) is undecidable</a></dd>
                   </div>
                 </dl>
               </li>
@@ -652,7 +667,7 @@
             </math>
           </div>
 
-          <p>After the four undecidability constructions above and the established reductions of <a href="https://arxiv.org/abs/1404.0644">Cassaigne, Halava, Harju, and Nicolas</a>, the currently established Pareto-minimal undecidable points are</p>
+          <p>Combining these constructions with the established reductions of <a href="https://arxiv.org/abs/1404.0644">Cassaigne, Halava, Harju, and Nicolas</a>, the currently established Pareto-minimal undecidable points are</p>
           <div class="formula plain">
             <math display="block">
               <mtable columnalign="right left">

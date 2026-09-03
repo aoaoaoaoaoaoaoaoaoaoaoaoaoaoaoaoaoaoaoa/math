@@ -408,7 +408,7 @@ def render_graph(graph: Graph, nodes: dict[str, Node]) -> str:
         "translation), a theorem (a principal conclusion), an obstruction (a "
         "proved limit), or a witness.</dd></div>",
         "            <div><dt>Edges</dt><dd>Requires and Used by are the proof "
-        "dependencies; other named links, such as Instantiates, are "
+        "dependencies; other named links, such as Instantiates and Strengthens, are "
         "cross-references, not dependencies.</dd></div>",
         "          </dl>",
         '          <div class="module-map">',

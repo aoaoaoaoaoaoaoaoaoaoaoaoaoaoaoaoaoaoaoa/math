@@ -397,7 +397,12 @@
         "mm/prefix-transducer-packing",
         "mm/common-image-restriction"
       ],
-      "relations": []
+      "relations": [
+        {
+          "kind": "strengthens",
+          "target": "mm/m12-2"
+        }
+      ]
     },
     {
       "id": "mm/m9-2",
@@ -416,7 +421,12 @@
         "mm/singular-return-compression",
         "mm/denominator-clearing"
       ],
-      "relations": []
+      "relations": [
+        {
+          "kind": "strengthens",
+          "target": "mm/m10-2"
+        }
+      ]
     },
     {
       "id": "mm/m6-3",
@@ -516,16 +526,23 @@
       ]
     },
     {
-      "id": "endpoint-theorems",
-      "title": "Endpoint Theorems",
-      "summary": "The undecidability results proved here, and the reductions that carry each to further cells.",
+      "id": "frontier-constructions",
+      "title": "Frontier Constructions",
+      "summary": "Undecidability constructions not implied by another displayed point in the same problem family.",
       "nodes": [
         "mm/m3-5",
         "mm/m4-4",
-        "mm/z6-2",
-        "mm/r7-2",
         "mm/m6-3",
         "mm/m9-2",
+        "mm/z6-2",
+        "mm/r7-2"
+      ]
+    },
+    {
+      "id": "subsumed-constructions",
+      "title": "Subsumed Constructions",
+      "summary": "Mortality constructions whose endpoint now follows from a sharper frontier theorem, retained for their distinct mechanisms.",
+      "nodes": [
         "mm/m10-2",
         "mm/m12-2"
       ]
