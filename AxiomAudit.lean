@@ -150,8 +150,15 @@ open MatrixMortality
 #print axioms ChangedSeparatorRealization.moment_three
 #print axioms ChangedSeparatorRealization.moment_add_three
 #print axioms ReturnFamily.pairGenerator_isMortal_iff_returnFamily
+#print axioms ReturnFamily.rankOnePair_isMortal_iff
 #print axioms InterfaceCompression.isMortal_iff
 #print axioms InterfaceCompression.isMortal_rankOne_iff
+#print axioms FourModeArtery.fourModePair_isMortal_iff_returnFamily
+#print axioms FourModeArtery.railbreakerCut_rank
+#print axioms FourModeArtery.railbreakerAmbient_isUnit
+#print axioms FourModeArtery.railbreakerReturn_eq
+#print axioms FourModeArtery.railbreaker_affineWait
+#print axioms FourModeArtery.railbreaker_orbit_injective
 #print axioms ChangedSeparatorRealization.integralGenerator_mortal_iff_tagHaltsFrom
 #print axioms ChangedSeparatorRealization.effectiveIntegralGenerator_mortal_iff_tagHaltsFrom
 #print axioms Undecidability.nearyMortality92_mortal_iff_tagHaltsFrom
