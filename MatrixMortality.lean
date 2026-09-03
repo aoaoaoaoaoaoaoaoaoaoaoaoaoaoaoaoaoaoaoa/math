@@ -13,6 +13,8 @@ import MatrixMortality.PrefixPacking
 import MatrixMortality.CHHNPrefixPacking
 import MatrixMortality.FreeMonoidReturn
 import MatrixMortality.TwoPlaceReader
+import MatrixMortality.FourModeArtery
+import MatrixMortality.AlternatingReaderPoison
 import MatrixMortality.InternalSandwich
 import MatrixMortality.ReturnFamily
 import MatrixMortality.CubicReturn
