@@ -378,6 +378,11 @@ open MatrixMortality
 #print axioms MixedBranchingPersistentGuard.guard_eq_zero_iff_recognizerGuard
 #print axioms MixedBranchingPersistentGuard.coefficient_eq_zero_iff_paired
 #print axioms MixedBranchingPersistentGuard.data_b_rank_rat
+#print axioms RankTwoRecompile.toggle_rank
+#print axioms RankTwoRecompile.dataB_rank
+#print axioms RankTwoRecompile.dataC_rank
+#print axioms RankTwoRecompile.separator_rank
+#print axioms RankTwoRecompile.coefficient_eq_zero_iff_paired
 #print axioms GuardedTwoStateLift.wordProduct_mulVec_column
 #print axioms GuardedTwoStateLift.coreState_second_odd_of_rows
 #print axioms GuardedTwoStateLift.pairedCoefficient_data_b_cons_ne_zero

@@ -110,6 +110,7 @@ readonly PYTHON_CHECKERS=(
   tools/audit_chhn_packing_rank.py
   tools/audit_m92_changed_separator_tail.py
   tools/audit_m92_run_length_hankel.py
+  tools/audit_rank_two_recompile.py
   tools/audit_mixed_prime_fork.py
   tools/audit_prefix_algebra.py
   tools/audit_six_state_sandwich.py
@@ -130,6 +131,7 @@ uv run --script tools/audit_prefix_algebra.py
 uv run --script tools/audit_chhn_packing_rank.py
 uv run --script tools/audit_m92_changed_separator_tail.py
 uv run --script tools/audit_m92_run_length_hankel.py
+uv run --script tools/audit_rank_two_recompile.py
 uv run --script tools/audit_mixed_prime_fork.py self-check
 uv run --script tools/audit_mixed_prime_fork.py thin 3 100
 uv run --script tools/audit_six_state_sandwich.py
