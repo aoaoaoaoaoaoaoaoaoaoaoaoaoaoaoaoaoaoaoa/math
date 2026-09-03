@@ -366,35 +366,6 @@ section RankOne
 variable {K Ambient : Type*} [Field K]
   [Fintype Ambient] [DecidableEq Ambient]
 
-omit [Fintype Ambient] [DecidableEq Ambient] in
-theorem unitSquare_eq_zero_iff (matrix : Square Unit K) :
-    matrix = 0 ↔ matrix () () = 0 := by
-  constructor
-  · intro matrix_zero
-    rw [matrix_zero]
-    rfl
-  · intro entry_zero
-    ext row column
-    cases row
-    cases column
-    simpa using entry_zero
-
-omit [Fintype Ambient] [DecidableEq Ambient] in
-/-- Over a field, a product of one-dimensional interface matrices vanishes exactly when one
-factor vanishes. -/
-theorem wordProduct_unitSquare_eq_zero_iff {Label : Type*}
-    (generators : Label → Square Unit K) (word : List Label) :
-    wordProduct generators word = 0 ↔
-      ∃ label ∈ word, generators label = 0 := by
-  induction word with
-  | nil => simp [unitSquare_eq_zero_iff]
-  | cons head tail induction =>
-      rw [wordProduct_cons, unitSquare_eq_zero_iff]
-      simp only [Matrix.mul_apply, Finset.univ_unique, Finset.sum_singleton]
-      rw [mul_eq_zero]
-      rw [← unitSquare_eq_zero_iff, ← unitSquare_eq_zero_iff, induction]
-      simp only [List.mem_cons, exists_eq_or_imp]
-
 /-- A rank-one cut beside an invertible ambient generator is mortal exactly when one scalar
 return vanishes. -/
 theorem rankOnePair_isMortal_iff

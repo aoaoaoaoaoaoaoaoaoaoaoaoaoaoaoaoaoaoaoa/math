@@ -269,6 +269,34 @@ theorem wordProduct_separatedGenerator_eq_intercalatedProduct {α M : Type*} [Mo
             (List.cons_ne_nil (wordProduct generators block)
               (blocks.map (wordProduct generators)))).symm
 
+/-- A one-dimensional matrix vanishes exactly when its sole entry does. -/
+theorem unitSquare_eq_zero_iff {R : Type*} [Zero R] (matrix : Square Unit R) :
+    matrix = 0 ↔ matrix () () = 0 := by
+  constructor
+  · intro matrix_zero
+    rw [matrix_zero]
+    rfl
+  · intro entry_zero
+    ext row column
+    cases row
+    cases column
+    simpa using entry_zero
+
+/-- Without zero divisors, a product of one-dimensional matrices vanishes exactly when one
+factor vanishes. -/
+theorem wordProduct_unitSquare_eq_zero_iff {α R : Type*} [CommSemiring R] [Nontrivial R]
+    [NoZeroDivisors R]
+    (generators : α → Square Unit R) (word : List α) :
+    wordProduct generators word = 0 ↔ ∃ label ∈ word, generators label = 0 := by
+  induction word with
+  | nil => simp [unitSquare_eq_zero_iff]
+  | cons head tail induction =>
+      rw [wordProduct_cons, unitSquare_eq_zero_iff]
+      simp only [Matrix.mul_apply, Finset.univ_unique, Finset.sum_singleton]
+      rw [mul_eq_zero]
+      rw [← unitSquare_eq_zero_iff, ← unitSquare_eq_zero_iff, induction]
+      simp only [List.mem_cons, exists_eq_or_imp]
+
 /-- A labelled family is mortal when a nonempty generator word multiplies to zero. -/
 def IsMortal {α M : Type*} [MonoidWithZero M] (generators : α → M) : Prop :=
   WordSeries.HasNonemptyZero (wordProduct generators)

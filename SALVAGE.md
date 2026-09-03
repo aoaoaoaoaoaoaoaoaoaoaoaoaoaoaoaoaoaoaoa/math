@@ -107,6 +107,7 @@ file owns the mathematical stock.
 | [`MM-O26`](#mm-o26-geometric-tail-transfer-tax) | obstruction | every exact consecutive paired-role series with a nonzero scalar geometric separator tail needs at least ten states | formalized core; audited six-order certificates | graduated |
 | [`MM-O28`](#mm-o28-tilted-geometric-tail-rank-nine-wall) | obstruction | every exact benchmark tilted-tail realization in the injective chamber needs at least nine states, for arbitrary geometric-tail parameters | formalized | graduated |
 | [`MM-C05`](#mm-c05-tilted-separator-rank-nine-transfer) | compiler | tilted same-zero separation and singular return compression compile universal halting to two `9 × 9` integer matrices | formalized | graduated |
+| [`MM-C06`](#mm-c06-interface-compression) | compiler | arbitrary transitions with factored cuts of any rank are mortal exactly when the transitions are mortal or one bridge path vanishes | formalized | graduated |
 | [`MM-M01`](#mm-m01-off-diagonal-companion-interface) | partial mechanism | off-diagonal rank-two bridge has a complete fracture grammar | audited | stock |
 | [`MM-M02`](#mm-m02-bordered-toggle) | partial mechanism | one lifted toggle has a stable rank-two third power | audited | parked |
 | [`MM-M03`](#mm-m03-five-state-setter-punctuation) | partial mechanism | a mixed delimiter word is an exact internal rank-one separator | audited | closed |
@@ -2589,6 +2590,45 @@ normalization.
 **Artifact:**
 [`audits/m92-changed-separator-transfer-2026-08-31.md`](audits/m92-changed-separator-transfer-2026-08-31.md).
 
+
+### MM-C06: Interface compression
+
+**Kind:** compiler
+**Evidence:** formalized
+**Disposition:** graduated
+
+Let `{X_a}` be arbitrary square matrices over a commutative semiring, and let each cut
+`C_j=U_jO_j` factor through an interface space of any dimension. Then `{X_a}∪{C_j}` is mortal
+exactly when `{X_a}` is mortal or some nonempty bridge path
+
+```text
+(O_{j₀}X_{w₁}U_{j₁})(O_{j₁}X_{w₂}U_{j₂})⋯(O_{j_{m-1}}X_{w_m}U_{j_m})
+```
+
+vanishes. A physical word containing a cut is `X_{w₀}C_{j₁}X_{w₁}⋯C_{j_m}X_{w_m}`; multiplying
+by `O_{j₁}` on the left and `U_{j_m}` on the right turns both exterior transition words into
+loops, so no splitting, rank, field, or nonvanishing-power hypothesis is needed. Conversely a
+zero bridge path spells the zero physical word `C_{j₀}X_{w₁}C_{j₁}⋯X_{w_m}C_{j_m}`.
+
+With rank-one cuts `C_j=c_jr_j` over a field the bridge path is scalar, so the family is mortal
+exactly when `{X_a}` is mortal or `r_jX_wc_{j'}=0` for some `j,w,j'`.
+
+**Scope:** `MM-C01` is the one-cut rank-one case; `R32-S01`, singular return compression, and
+`R32-S02` are the one-transition and no-transition cases, and the split hypotheses of those
+records are artifacts of their proofs. The theorem is a rank census, not a decision or hardness
+result: every cell `M_d(k)` decomposes by the ranks of its singular generators into bridge-path
+problems on interfaces of those ranks over the free monoid of its remaining generators.
+
+**Artifact:** `MatrixMortality.InterfaceCompression.isMortal_iff` and
+`MatrixMortality.InterfaceCompression.isMortal_rankOne_iff` in
+[`InterfaceCompression.lean`](MatrixMortality/InterfaceCompression.lean).
+
+**Use:** state every attack on a cell with singular generators as a bridge-path problem over its
+invertible subfamily. `M₂(k)` with `m` rank-one generators is projective incidence between `m`
+source and `m` target points; the `(3,3,2)` profile of `M₃(3)` is a two-dimensional return family
+over the free monoid on two units; `M₄(2)` with one invertible and one rank-`r` generator is a
+four-mode unary return family in dimension `r`. The hard core `D2-S01` is the instance with one
+rank-one cut and two unit transitions.
 ### MM-M01: Off-diagonal companion interface
 
 **Kind:** partial mechanism  
@@ -7883,9 +7923,10 @@ generator and the decision theorem are independently audited; the latter is impo
 [Bacik](references/bacik-2025-order-four-skolem.md). This record does not supply a Lean
 implementation of the Skolem algorithm.
 
-**Artifact:** `ReturnFamily.rankOnePair_isMortal_iff` and
-`ReturnFamily.wordProduct_unitSquare_eq_zero_iff` in
-[`ReturnFamily.lean`](MatrixMortality/ReturnFamily.lean).
+**Artifact:** `ReturnFamily.rankOnePair_isMortal_iff` in
+[`ReturnFamily.lean`](MatrixMortality/ReturnFamily.lean) and
+`MatrixMortality.wordProduct_unitSquare_eq_zero_iff` in
+[`MatrixSemigroup.lean`](MatrixMortality/MatrixSemigroup.lean).
 
 **Use:** remove every rank-one binary profile from the undecidability search. The only
 structurally new profile is one unit and one rank-two matrix.
@@ -19300,7 +19341,7 @@ ranks, kernels, images, and base loci across every singular rank pattern.
 ### D2-S01: Projective hard core
 
 **Kind:** structure theorem  
-**Evidence:** audited  
+**Evidence:** formalized reduction; audited census
 **Disposition:** active
 
 Every unresolved `M₂(3)` instance has two nonsingular generators `A,B` and one nonzero rank-one
@@ -19320,8 +19361,14 @@ families may have several endpoint pairs; the three-generator hard core has one.
 **Use:** every dimension-two attack should state which projective-incidence residue it decides
 or encodes.
 
-**Next:** formalize the minimal-word case split and rational-to-integer transport when the
-dimension-two campaign enters its verification phase.
+**Artifact:** the reduction is `MatrixMortality.mortal_adjoin_outer_iff`
+([`MM-C01`](#mm-c01-unconditional-rank-one-separator)) at two generators of dimension two, and
+the several-endpoint form is `InterfaceCompression.isMortal_rankOne_iff`
+([`MM-C06`](#mm-c06-interface-compression)); no minimal-word case split is needed.
+
+**Next:** formalize the profile census (all units immortal, a second rank-one generator is
+order-two Skolem) and rational-to-integer transport when the dimension-two campaign enters its
+verification phase.
 
 ### D2-S02: Monotone affine path form
 

@@ -8,6 +8,7 @@ import MatrixMortality.BoundaryTax
 import MatrixMortality.FinitePositiveImage
 
 /- Finite-rank repair. -/
+import MatrixMortality.InterfaceCompression
 import MatrixMortality.InternalSandwich
 import MatrixMortality.ReturnFamily
 import MatrixMortality.CubicReturn

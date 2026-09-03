@@ -3044,7 +3044,7 @@ columns of `A` and `B`. The explicit Schottky ping-pong argument making this coe
 equality detector is audited rather than Lean-checked.
 
 [`MatrixMortality/TerminalTile.lean`](MatrixMortality/TerminalTile.lean) now proves the generic
-boundary-fold theorem `unitFamily_mortal_boundaryOuter_iff`. For any unit data family, fixed
+boundary-fold theorem `mortal_boundaryOuter_iff`. For any unit data family, fixed
 left and right data words are absorbed into the two rays of one rank-one separator; mortality is
 equivalent to a zero scalar on one bounded interior word, with a converse over every placement
 and number of separators. No source compiler from Carvalho's four-letter marker-tail equation to
@@ -3077,6 +3077,7 @@ fixed-rank decision problem.
 | `MatrixSemigroup.lean` | shared word semantics, projective-neutral insertion, mortality transports, common-image restriction, transposition, and zero padding |
 | `LinearRepresentation.lean` | finite Hankel sections and exact-realization state lower bounds |
 | `BoundaryTax.lean` | generic finite-witness two-channel boundary tax |
+| `InterfaceCompression.lean` | hypothesis-free compression of arbitrary transitions and factored cuts of any rank to bridge paths, with the scalar form for rank-one cuts |
 | `ReturnFamily.lean` | split finite-rank return normal form and matrix-valued block-Hankel witnesses |
 | `CubicReturn.lean` | pure-cubic arbitrary-word collapse and automatic genericity of the one-singular normal form |
 | `CubicReturnNonPure.lean` | non-pure physical endpoints, fixed return recurrence, scalar-defect norm, continuant state projection, and exact unselected-wait obstructions |
@@ -3368,7 +3369,7 @@ fixed-rank decision problem.
 | Arithmetic-envelope specialization | `NearyArithmeticEnvelope.mortality_iff_halts` |
 | Four ordinary matrices are nonsingular and triangular | `nearyMortality_ordinary_det_ne_zero`, `nearyMortality_ordinary_upperTriangular` |
 | Exceptional matrix is nonzero and rank one | `nearyMortality_terminal_ne_zero`, `nearyMortality_terminal_rank_eq_one` |
-| Fixed data boundaries fold into one rank-one separator with a complete mortality converse | `unitFamily_mortal_boundaryOuter_iff` |
+| Fixed data boundaries fold into one rank-one separator with a complete mortality converse | `mortal_boundaryOuter_iff` |
 | The four-dimensional left--right coefficient is the determinant of two first columns | `SchottkyPunctuation.equalityCoefficient` |
 | Unimodular pairs give multiplicative unimodular left--right actions | `SchottkyPunctuation.leftRight_mul`, `SchottkyPunctuation.leftRight_det` |
 | Exact nonerasing Neary role macros require four letters | `ExactNearyMacroFactorization.four_le_card` |
@@ -3800,6 +3801,8 @@ fixed-rank decision problem.
 | Canonical `M₁₀(2)` instance mortal iff tag halting | `nearyMortality102_mortal_iff_tagHaltsFrom` |
 | Every zero-padded `M₁₀₊ₙ(2)` instance iff tag halting | `nearyMortality10Plus_mortal_iff_tagHaltsFrom` |
 | A singular two-generator pair is mortal iff its complete return family is mortal | `ReturnFamily.pairGenerator_isMortal_iff_returnFamily` |
+| Arbitrary transitions with factored cuts of any rank are mortal iff the transitions are mortal or one nonempty bridge path vanishes | `InterfaceCompression.isMortal_iff` |
+| With rank-one cuts, that path condition is one row seeing zero through one transition word at one column | `InterfaceCompression.isMortal_rankOne_iff` |
 | The width-three `bb` nine-dimensional compiler has the benchmark tilted geometric moments | `TiltedGeometricHankel.benchmark_return_eq_moment` |
 | Every exact benchmark tilted geometric-tail realization in the zero-language chamber needs dimension at least nine | `TiltedGeometricHankel.nine_le_card_of_tilted_geometric_transfer_moments` |
 | The nine-dimensional transition has no zero pure power | `ChangedSeparatorRealization.transition_pow_ne_zero` |
