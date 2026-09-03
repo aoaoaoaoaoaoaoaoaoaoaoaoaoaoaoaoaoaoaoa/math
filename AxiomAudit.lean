@@ -2345,22 +2345,12 @@ open MatrixMortality
 #print axioms ParabolicBlade.bZeroBDefectCOneCodeCore_cb_x211_ne_zero_of_even_b_count
 #print axioms ParabolicBlade.bridge_bZero_bTwo_cOne_det_ne_zero_of_cb_x211_even_b_count
 
-#print axioms CubicReturn.pairGenerator_isMortal_iff_residue
-#print axioms EdgeCompression.isMortal_iff_exists_edgeProduct_eq_zero
-#print axioms ReturnConvert.physical_isMortal_iff_positiveBridge
 #print axioms ReturnFamily.pairGenerator_isMortal_iff_ambient_or_returnFamily
-#print axioms ReturnFamily.pairGenerator_isMortal_iff
-#print axioms ReturnFamily.pairGenerator_isMortal_iff_positiveBridge
-#print axioms ReturnFamily.rankOnePair_isMortal_iff
-#print axioms ReturnGuard.physical_isMortal_iff_positiveBridge
 #print axioms ReturnSquare.physical_isMortal_iff_returnProduct
-#print axioms ReturnSquare.physical_isMortal_iff_positiveBridge
-#print axioms TwoPlaneEdges.isMortal_iff_exists_edgeProduct_eq_zero
 
 #print axioms PrefixPacking.CompleteCode.machine_isMortal_iff_source
 #print axioms CHHNPrefixPacking.ternaryPack_isMortal_iff
 #print axioms CHHNPrefixPacking.binaryPack_isMortal_iff
-#print axioms prefixMachine_mortal_iff_normalized
 #print axioms restrictedPrefixGenerator_mortal_iff_normalized
 #print axioms Undecidability.mortality63Pack_primrec
 #print axioms Undecidability.mortality122Pack_primrec
