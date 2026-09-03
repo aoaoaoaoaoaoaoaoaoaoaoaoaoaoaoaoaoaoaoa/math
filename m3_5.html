@@ -83,6 +83,7 @@
 
           <p>The definition of <a class="glossary-term" href="/math/matrix_mortality/glossary/#matrix-mortality" title="Whether a finite matrix family has a nonempty product equal to zero.">matrix mortality</a> and the current bounded table are recorded on the <a href="/math/matrix_mortality/">collection page</a>.</p>
 
+          <section class="fragment-section">
           <h3 id="prior-results">Undecidability bounds<a class="fragment-link" href="#prior-results" aria-label="Link to this section">#</a></h3>
           <p>For fixed dimension <var>d</var> and generator bound <var>k</var>, undecidability of M<sub><var>d</var></sub>(<var>k</var>) is <a class="glossary-term" href="/math/matrix_mortality/glossary/#parameter-monotonicity" title="Undecidability propagates to larger dimensions and generator bounds by padding.">monotone in both coordinates</a>: additional generators may be unused, and <var>A</var> ↦ <var>A</var> ⊕ 0 preserves mortality under dimension padding. The coordinatewise-minimal known undecidable cells therefore form an antichain.</p>
 
@@ -112,9 +113,13 @@
           </div>
           <p>Here ≤<sub>m</sub> denotes a computable many-one reduction <a href="#ref-chhn-2014">[Cassaigne et al. 2014]</a>. This prior theorem propagates any new base case to other dimensions and generator counts.</p>
 
+          </section>
+          <section class="fragment-section">
           <h3 id="tag-systems">Tag systems<a class="fragment-link" href="#tag-systems" aria-label="Link to this section">#</a></h3>
           <p>A tag system stores a finite word. A step reads its first symbol, appends the word assigned to that symbol, and deletes a fixed number <var>β</var> of leading symbols. It halts when fewer than <var>β</var> symbols remain. Halting is undecidable for Neary’s restricted binary family <a href="#ref-neary-2015">[Neary 2015]</a>.</p>
 
+          </section>
+          <section class="fragment-section">
           <h3 id="post-correspondence">Post correspondence<a class="fragment-link" href="#post-correspondence" aria-label="Link to this section">#</a></h3>
           <p>A Post correspondence instance gives pairs of words (<var>u</var><sub>i</sub>, <var>v</var><sub>i</sub>). It asks for an index word <var>i</var><sub>1</sub>···<var>i</var><sub>n</sub> such that the upper and lower concatenations agree:</p>
           <div class="formula">
@@ -130,14 +135,18 @@
 
           <p>Generalized PCP (GPCP) permits fixed boundary words <a href="#ref-nicolas-2008">[Nicolas 2008]</a>. The instance used here has empty left boundaries and asks whether <var>U</var>(<var>w</var>)<var>M</var> = <var>V</var>(<var>w</var>) for a word <var>w</var> over four source letters.</p>
 
+          </section>
+          <section class="fragment-section">
           <h3 id="terminal-pair-issue">The terminal-pair issue<a class="fragment-link" href="#terminal-pair-issue" aria-label="Link to this section">#</a></h3>
           <p>Neary’s five-pair construction used a fifth pair as a terminator <a href="#ref-neary-2015">[Neary 2015]</a>. Rote identified an error in its terminal guard and proposed a longer replacement <a href="#ref-rote-2025">[Rote 2025]</a>. Neither Neary’s terminal pair nor Rote’s replacement is used in the GPCP or mortality proof. A fresh-marker pair is introduced later only to obtain an ordinary five-pair PCP corollary.</p>
           <p>The only external undecidability theorem imported below is Neary’s restricted tag-system undecidability. No PCP(4) theorem is assumed.</p>
+          </section>
         </details>
 
         <details class="major-section">
           <summary><h2 id="new-stuff">New Stuff<a class="fragment-link" href="#new-stuff" aria-label="Link to this section">#</a></h2></summary>
 
+          <section class="fragment-section">
           <h3 id="source-distinction">GPCP(4), not PCP(4)<a class="fragment-link" href="#source-distinction" aria-label="Link to this section">#</a></h3>
           <p>The four simulation pairs from Neary’s refereed construction naturally finish with a controlled residual rather than equality <a href="#ref-neary-2015">[Neary 2015]</a>:</p>
           <div class="formula plain">
@@ -159,11 +168,15 @@
 
           <p>GPCP(4) is sufficient for mortality. Four payload matrices and one repeated rank-one boundary separator give M<sub>3</sub>(5). Rank-one endpoint absorption is prior art <a href="#ref-hhh-2007">[Halava–Harju–Hirvensalo 2007]</a>; the new ingredient is the proved four-letter fixed-boundary language.</p>
 
+          </section>
+          <section class="fragment-section">
           <h3 id="result">Result and consequences<a class="fragment-link" href="#result" aria-label="Link to this section">#</a></h3>
           <p>The correspondence and matrix reductions below prove M<sub>3</sub>(5). Substituting 5 = 2·2 + 1 and 5 = 1·4 + 1 into the established packing theorem gives M<sub>6</sub>(3) and M<sub>12</sub>(2); dimension padding gives the further consequences stated in the theorem box.</p>
           <p>The <a href="/math/matrix_mortality/#frontier">series landing page</a> owns the current frontier. This article records the theorem and its direct transports, not a snapshot of results established later.</p>
 
+          </section>
           <div>
+          <section class="fragment-section">
           <h3 id="four-tiles">A synchronized tag compiler<a class="fragment-link" href="#four-tiles" aria-label="Link to this section">#</a></h3>
           <p>Fix <var>β</var> ≥ 3 and a word <var>B</var> over <span class="word">b,c</span>. Define the tag system</p>
           <div class="formula">
@@ -254,6 +267,7 @@
             <p>which implies β−1 ∣ |<var>B</var>| and |<var>B</var>| ≥ β−1.</p>
           </details>
 
+          <section class="fragment-section">
           <h4 id="soundness">Soundness for arbitrary tile words<a class="fragment-link" href="#soundness" aria-label="Link to this section">#</a></h4>
           <p>Assume <var>U</var>(<var>w</var>)<var>M</var> = <var>V</var>(<var>w</var>) for an arbitrary tile word <var>w</var>.</p>
 
@@ -303,7 +317,9 @@
             </div>
           </div>
 
+          </section>
           <div class="aside">
+            <section class="fragment-section">
             <h4 id="source-lemma">Reusable tag-history lemma<a class="fragment-link" href="#source-lemma" aria-label="Link to this section">#</a></h4>
             <p>For any deletion-width-β tag system, let <var>S</var> be a list of β-letter strokes, <var>C</var>(<var>S</var>) their concatenation, and <var>P</var>(<var>S</var>) the concatenation of the appendants selected by their heads. If</p>
             <div class="formula plain">
@@ -318,6 +334,7 @@
               </math>
             </div>
             <p>then the tag system halts from <var>I</var>, by induction with prefix cancellation. To reuse the lemma, a word code must force candidate labels into strokes and decode equality into this certificate. The formal statement is <a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/main/MatrixMortality/TagQueue.lean"><code>tagHaltsFrom_of_history</code></a>.</p>
+            </section>
           </div>
 
           <p>For the reverse implication, record the <var>β</var> symbols deleted at each tag step. Every reachable queue ends in <span class="word">b</span> and has length 1 modulo <var>β</var>−1. A queue shorter than <var>β</var> is therefore exactly <span class="word">b</span>. Reversing the cancellations constructs a matching tile word.</p>
@@ -336,9 +353,11 @@
           <p>The fixed-length code 0↦00, 1↦01, #↦11 restores a binary target alphabet while preserving equality, prefix comparability, and primitivity.</p>
           <p>More generally, if the ordinary pairs have no solution, the fixed-boundary equation <var>U</var>(<var>w</var>)<var>s</var> = <var>V</var>(<var>w</var>)<var>t</var> reduces to PCP by adjoining (<var>s</var>#, <var>t</var>#). Every primitive solution then uses the marked pair exactly once and last.</p>
           </details>
+          </section>
           </div>
 
           <div>
+          <section class="fragment-section">
           <h3 id="five-matrices">Fixed boundaries and rank one<a class="fragment-link" href="#five-matrices" aria-label="Link to this section">#</a></h3>
 
           <p>Recode binary symbols as nonzero ternary digits, 0↦1 and 1↦2. For a digit word <var>x</var>, let <var>σ</var>(<var>x</var>) be its base-three value. Nonzero digits make <var>σ</var> injective across words of unequal as well as equal length.</p>
@@ -423,6 +442,7 @@
           </div>
           <p>The mortality family is {<var>X</var><sub>1</sub>, …, <var>X</var><sub>4</sub>, <var>A</var><sub>★</sub>}. Its ordinary generators are nonsingular and upper triangular. The third coordinate of <var>c</var> is 3<sup>|<var>M</var>|</sup>, so <var>A</var><sub>★</sub> is nonzero and has rank one.</p>
 
+          <section class="fragment-section">
           <h4 id="forward">Forward implication<a class="fragment-link" href="#forward" aria-label="Link to this section">#</a></h4>
           <p>If <var>w</var> satisfies <var>U</var>(<var>w</var>)<var>M</var> = <var>V</var>(<var>w</var>), the corresponding matrix product <var>X</var><sub><var>w</var></sub> satisfies</p>
           <div class="formula">
@@ -440,6 +460,8 @@
           </div>
           <p>The same generator supplies both rank-one factors; no separate boundary generator is required.</p>
 
+          </section>
+          <section class="fragment-section">
           <h4 id="converse">Converse for arbitrary products<a class="fragment-link" href="#converse" aria-label="Link to this section">#</a></h4>
           <p>A product containing no <var>A</var><sub>★</sub> is nonsingular. A product containing <var>t</var> copies has a unique decomposition</p>
           <div class="formula">
@@ -467,7 +489,9 @@
           </div>
           <p>The exterior column and row are nonzero because the ordinary blocks are nonsingular. For <var>t</var> = 1 the product is therefore nonzero. For <var>t</var> ≥ 2 it vanishes exactly when some internal scalar <var>e</var><sub>1</sub><sup>T</sup><var>P</var><sub>j</sub><var>c</var> vanishes. Writing <var>P</var><sub>j</sub> = <var>X</var><sub><var>w</var></sub>, the ternary equality test identifies this condition with <var>U</var>(<var>w</var>)<var>M</var> = <var>V</var>(<var>w</var>).</p>
 
+          </section>
           <div class="aside">
+            <section class="fragment-section">
             <h4 id="boundary-compiler">Reusable fixed-boundary compiler<a class="fragment-link" href="#boundary-compiler" aria-label="Link to this section">#</a></h4>
             <p>Let α be any finite source alphabet, let <var>u</var>, <var>v</var>: α → {0,1}<sup>*</sup>, and fix right boundaries <var>s</var>, <var>t</var>. Put <var>X</var><sub><var>a</var></sub> = Ψ(<var>u</var>(<var>a</var>), <var>v</var>(<var>a</var>)), <var>X</var><sub>★</sub> = Ψ(<var>s</var>, <var>t</var>), and <var>A</var><sub>★</sub> = <var>X</var><sub>★</sub><var>e</var><sub>3</sub><var>e</var><sub>1</sub><sup>T</sup>. Then</p>
             <div class="formula plain">
@@ -486,14 +510,17 @@
               </math>
             </div>
             <p>The construction uses |α| ordinary generators and one rank-one generator. The fracture formula covers every product word; no witness normal form is assumed. Its machine-checked statement is <a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/main/MatrixMortality/TerminalReduction.lean"><code>absorbedFamilyInt_mortal_iff_terminal_match</code></a>. Endpoint absorption is prior art <a href="#ref-hhh-2007">[Halava–Harju–Hirvensalo 2007]</a>; the new input is the four-letter fixed-boundary theorem.</p>
+            </section>
           </div>
 
+          </section>
           </div>
         </details>
 
         <details class="major-section">
           <summary><h2 id="bookkeeping">Bookkeeping<a class="fragment-link" href="#bookkeeping" aria-label="Link to this section">#</a></h2></summary>
 
+          <section class="fragment-section">
           <h3 id="status">Verification and provenance<a class="fragment-link" href="#status" aria-label="Link to this section">#</a></h3>
 
           <div class="status-grid">
@@ -515,6 +542,8 @@
             </div>
           </div>
 
+          </section>
+          <section class="fragment-section">
           <h3 id="priority">Priority<a class="fragment-link" href="#priority" aria-label="Link to this section">#</a></h3>
           <div class="aside">
             <p>Neary’s one-version 2013 technical report claimed both four-pair PCP and M<sub>3</sub>(5) <a href="#ref-neary-2013">[Neary 2013]</a>. His refereed successor did not retain the four-pair theorem, explicitly left that case open, and proved only M<sub>3</sub>(6) <a href="#ref-neary-2015">[Neary 2015]</a>. Later literature retained the six-matrix bound <a href="#ref-bell-2021">[Bell–Potapov–Semukhin 2021]</a> <a href="#ref-dong-2023">[Dong 2023]</a>. No formal withdrawal is known.</p>
@@ -525,6 +554,8 @@
             <li><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math"><b>Complete source repository</b>Manuscript, Lean development, verification suite, falsifier, references, and version history</a></li>
           </ul>
 
+          </section>
+          <section class="fragment-section">
           <h3 id="sources">References<a class="fragment-link" href="#sources" aria-label="Link to this section">#</a></h3>
           <ol class="references">
             <li id="ref-neary-2013"><span>Turlough Neary, <a href="https://arxiv.org/abs/1312.6700"><cite>Undecidability in Binary Tag Systems and the Post Correspondence Problem for Four Pairs of Words</cite></a>, arXiv:1312.6700v1, 2013. The earlier public M<sub>3</sub>(5) claim, not retained in the refereed successor.</span></li>
@@ -536,6 +567,7 @@
             <li id="ref-bell-2021"><span>Paul C. Bell, Igor Potapov, and Pavel Semukhin, <a href="https://doi.org/10.1016/j.ic.2021.104736"><cite>On the Mortality Problem</cite></a>, 2021. Later mortality bounds.</span></li>
             <li id="ref-dong-2023"><span>Ruiwen Dong, <a href="https://doi.org/10.1145/3636362.3636365"><cite>Recent Advances in Algorithmic Problems for Semigroups</cite></a>, 2023. Survey context.</span></li>
           </ol>
+          </section>
         </details>
       </article>
     </main>

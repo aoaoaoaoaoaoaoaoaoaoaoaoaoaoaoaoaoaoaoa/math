@@ -325,6 +325,14 @@ check_publication() {
   assert_xpath_count 1 "($major_sections)[2]/summary/h2[@id='new-stuff' and normalize-space(text()[1])='New Stuff']"
   assert_xpath_count 1 "($major_sections)[3]/summary/h2[@id='bookkeeping' and normalize-space(text()[1])='Bookkeeping']"
 
+  local fragment_subsections fragment_section_count
+  fragment_subsections="$major_sections//*[self::h3 or self::h4][@id][not(parent::summary)]"
+  fragment_section_count="$(xpath_count "$fragment_subsections")"
+  assert_xpath_count "$fragment_section_count" \
+    "$fragment_subsections[parent::section[contains(concat(' ', normalize-space(@class), ' '), ' fragment-section ')]]"
+  assert_xpath_count 0 \
+    "$major_sections//*[self::h3 or self::h4][@id][parent::summary[not(parent::details)]]"
+
   assert_xpath_count 0 \
     "$article//table[contains(concat(' ', normalize-space(@class), ' '), ' status-table ')]"
   assert_xpath_count 0 \

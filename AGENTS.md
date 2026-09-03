@@ -147,7 +147,11 @@ The contents list must mirror the document hierarchy through `h4`: `h2`, `h3`, a
 occupy successive nested list levels. Every `h2`, `h3`, and `h4` owns a stable fragment `id` and
 ends with exactly one semantic self-link of the form
 `<a class="fragment-link" href="#section-id" aria-label="Link to this section">#</a>`.
-The source owns this fragment contract; Eternalist owns its presentation. `h5` is a local heading
+Within a `.major-section`, every `h3` and `h4` outside a `summary` directly heads a
+`<section class="fragment-section">` containing the full subsection. A heading inside a
+`summary` uses the enclosing `details`; a collection heading uses its existing `section`. This
+ownership lets Eternalist frame the complete destination when a fragment link is followed. The
+source owns this fragment contract; Eternalist owns its presentation. `h5` is a local heading
 inside a bounded proof component and does not enter the page-level contents.
 
 After changing a listed source, the manifest, or any artifact a source describes, publication is

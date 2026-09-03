@@ -111,6 +111,7 @@
         <details class="major-section">
           <summary><h2 id="known-stuff">Known Stuff<a class="fragment-link" href="#known-stuff" aria-label="Link to this section">#</a></h2></summary>
 
+          <section class="fragment-section">
           <h3 id="conjecture">The conjecture<a class="fragment-link" href="#conjecture" aria-label="Link to this section">#</a></h3>
           <p>A finite family 𝓕 of subsets of a finite ground set <var>U</var> is <em>union-closed</em> when <var>A</var> ∪ <var>B</var> belongs to 𝓕 whenever <var>A</var> and <var>B</var> do. For a coordinate <var>i</var>, its abundance is the fraction of members containing it:</p>
           <div class="formula plain">
@@ -137,6 +138,8 @@
           </div>
           <p>The conjecture remains open. “Nontrivial” here means nonempty and not the singleton family containing only the empty set.</p>
 
+          </section>
+          <section class="fragment-section">
           <h3 id="entropy-obstruction">The entropy obstruction<a class="fragment-link" href="#entropy-obstruction" aria-label="Link to this section">#</a></h3>
           <p>Let <var>X</var> be uniform on 𝓕. Then its Shannon entropy is log |𝓕|. If <var>X</var> and <var>Y</var> are coupled copies, union closure keeps <var>X</var> ∪ <var>Y</var> inside 𝓕, so maximality of the uniform law gives</p>
           <div class="formula plain">
@@ -150,8 +153,11 @@
           </div>
           <p>Gilmer’s method derives the opposite strict inequality when every coordinate mean is small. Alweiss, Huang, and Sellke sharpened this route to the explicit peer-reviewed constant (3−√5)/2 <a href="#ref-gilmer-2022">[1]</a> <a href="#ref-ahs-2024">[2]</a>. Sawin introduced a mixture of independent and negatively dependent couplings; Yu reduced its optimization to finite marginal laws <a href="#ref-sawin-2023">[3]</a> <a href="#ref-yu-2023">[4]</a>.</p>
 
+          </section>
+          <section class="fragment-section">
           <h3 id="coupling-frontier">The coupling frontier<a class="fragment-link" href="#coupling-frontier" aria-label="Link to this section">#</a></h3>
 
+          <section class="fragment-section">
           <h4 id="local-objective">The local objective<a class="fragment-link" href="#local-objective" aria-label="Link to this section">#</a></h4>
           <p>Write <var>h</var> for binary entropy, <var>p</var> ⊔ <var>q</var> for the success probability of an independent Boolean union, and <var>d</var> for Yu’s maximum-entropy dependent-union parameter:</p>
           <div class="formula">
@@ -193,6 +199,8 @@
           </div>
           <p>The finite coupling problem is to prove a positive affine gap uniformly over π. Its solution supplies the one-coordinate inequality that the chain rule can sum.</p>
 
+          </section>
+          <section class="fragment-section">
           <h4 id="evidence-frontier">The evidence frontier<a class="fragment-link" href="#evidence-frontier" aria-label="Link to this section">#</a></h4>
           <p>The previously established explicit peer-reviewed constant was</p>
           <div class="formula plain">
@@ -205,18 +213,27 @@
           </div>
           <p>Yu reported a numerical certificate at 0.38234. Cambie reduced the same scheme to two bivariate cases and reported an apparent ceiling near 0.382345533366703, but described the closing Maple and graphical verification as less rigorous <a href="#ref-cambie-2025">[5]</a>. The exact endpoint equation below corrects the final digits. Liu proved an analytic strict-improvement mechanism for conditionally IID couplings; the displayed value 0.382709087918741 remains conditional on an infinite matrix-positivity conjecture and an unproved global optimizer shape <a href="#ref-liu-2024">[6]</a>.</p>
 
+          </section>
+          </section>
+          <section class="fragment-section">
           <h3 id="structural-questions">Two structural questions<a class="fragment-link" href="#structural-questions" aria-label="Link to this section">#</a></h3>
 
+          <section class="fragment-section">
           <h4 id="horn-question">Bidual Horn functions<a class="fragment-link" href="#horn-question" aria-label="Link to this section">#</a></h4>
           <p>A Boolean function is Horn exactly when its false points are intersection-closed. It is bidual Horn when its true points are also union-closed. Lozin and Zamaraev proved several Horn subclasses and left the bidual case open, identifying the self-dual subclass as a difficult core <a href="#ref-lozin-zamaraev-2024">[8]</a>.</p>
 
+          </section>
+          <section class="fragment-section">
           <h4 id="semigroup-question">The binary semigroup seam<a class="fragment-link" href="#semigroup-question" aria-label="Link to this section">#</a></h4>
           <p>Zargar lifted intersection-closed families to multiplication-closed semigroup fibers and proved weighted half-frequency theorems for a range of fiber sizes. His argument isolates the binary case <var>k</var> = 2, <var>m</var> = 1, corresponding to weights 2<sup>−|<var>A</var>|</sup>, but its published concavity calculation degenerates at exactly that parameter <a href="#ref-zargar-2023">[9]</a>.</p>
+          </section>
+          </section>
         </details>
 
         <details class="major-section">
           <summary><h2 id="new-stuff">New Stuff<a class="fragment-link" href="#new-stuff" aria-label="Link to this section">#</a></h2></summary>
 
+          <section class="fragment-section">
           <h3 id="abundance-theorem">The rational abundance theorem<a class="fragment-link" href="#abundance-theorem" aria-label="Link to this section">#</a></h3>
           <div class="theorem">
             <p><strong>Theorem.</strong> Let 𝓕 be a nonempty finite union-closed family of subsets of a finite set. If 𝓕 is not the singleton family containing only the empty set, then some coordinate belongs to strictly more than 38,234,553,336,670,271/100,000,000,000,000,000 of the members of 𝓕.</p>
@@ -234,8 +251,11 @@
           </div>
           <p>The complete implication from the finite family to the rational scalar certificate is checked in Lean. The theorem declaration is <code>Frankl.unionClosed_exists_abundant_coordinate</code>.</p>
 
+          </section>
+          <section class="fragment-section">
           <h3 id="finite-bridge">The finite entropy bridge<a class="fragment-link" href="#finite-bridge" aria-label="Link to this section">#</a></h3>
 
+          <section class="fragment-section">
           <h4 id="conditional-laws">Conditional laws<a class="fragment-link" href="#conditional-laws" aria-label="Link to this section">#</a></h4>
           <p>Enumerate the ground set and regard each member of 𝓕 as a Boolean vector. For a finite law <var>X</var> on the cube, reveal its coordinates in order. At coordinate <var>j</var>, the conditional success probability</p>
           <div class="formula plain">
@@ -250,6 +270,8 @@
           <p>is a finite random variable whose mean is the unconditional frequency of coordinate <var>j</var>. Null conditioning fibers are assigned probability zero and contribute no entropy.</p>
           <p>Two symmetric self-couplings are constructed recursively. The first is independent. The second couples the revealed prefixes symmetrically and, conditional on a prefix pair with success probabilities <var>p</var> and <var>q</var>, uses a Boolean coupling whose union has parameter <var>d</var>(<var>p</var>,<var>q</var>). Both output coordinates have the original marginal law.</p>
 
+          </section>
+          <section class="fragment-section">
           <h4 id="global-contradiction">The global contradiction<a class="fragment-link" href="#global-contradiction" aria-label="Link to this section">#</a></h4>
           <p>The scalar theorem proved below uses the exact parameters</p>
           <div class="formula">
@@ -290,12 +312,18 @@
           </div>
           <p>If <var>X</var> is uniform on a union-closed 𝓕, both union laws remain supported on 𝓕, so the left side is at most log |𝓕|. When |𝓕| ≥ 2, the right side is strictly larger than log |𝓕|, a contradiction. A singleton family other than {∅} has a coordinate of frequency one.</p>
 
+          </section>
+          </section>
+          <section class="fragment-section">
           <h3 id="scalar-proof">The scalar proof<a class="fragment-link" href="#scalar-proof" aria-label="Link to this section">#</a></h3>
 
+          <section class="fragment-section">
           <h4 id="orbit-reduction">Orbit reduction<a class="fragment-link" href="#orbit-reduction" aria-label="Link to this section">#</a></h4>
           <p>The proof begins with an arbitrary finite symmetric law π. If its mean is below <var>t</var>, adjoining an atom at (1,1) raises the mean to exactly <var>t</var> without increasing the normalized obstruction. On the exact-mean slice the affine gap is concave in π, so a one-moment extreme-point theorem reduces its minimum to at most two unoriented orbits.</p>
           <p>A half-support inequality replaces every coordinate above one half by a mean-preserving mixture at one half and one. Exact spread contractions then leave three canonical possibilities: a single low diagonal orbit, two low diagonal orbits, or one low diagonal orbit paired with an endpoint orbit. The first two families are nonnegative by analytic Jensen-deficit estimates. The endpoint family carries the final parameters <var>a</var> and <var>q</var>.</p>
 
+          </section>
+          <section class="fragment-section">
           <h4 id="endpoint-closure">Endpoint closure<a class="fragment-link" href="#endpoint-closure" aria-label="Link to this section">#</a></h4>
           <p>Half support forces the endpoint coordinate into the dichotomy <var>q</var> ≤ 1/2 or <var>q</var> = 1; the open strip between them is unrealizable. For 1/4 ≤ <var>a</var> ≤ <var>t</var> and 0 ≤ <var>q</var> ≤ 1/2, condition away the deterministic coordinate and set</p>
           <div class="formula plain">
@@ -374,12 +402,18 @@
             </math>
           </div>
 
+          </section>
+          <section class="fragment-section">
           <h4 id="reflected-kernel">The reflected kernel<a class="fragment-link" href="#reflected-kernel" aria-label="Link to this section">#</a></h4>
           <p>Only the rectangle 0 ≤ <var>a</var> ≤ 1/4, 0 ≤ <var>q</var> ≤ 1/2 remains. A small expression language represents rational operations, binary entropy, capped entropy, and self-union. Its Lean theorem proves that a successful subdivision certificate implies nonnegativity throughout the represented rectangle.</p>
           <p>The committed trace contains rational boxes and closed proof data. Every leaf uses certified interval values, first-order slope bounds, or an analytic entropy-zero corner rule; every internal node proves exact coverage. The generated files reduce by definitional equality to a successful checker result. Python is neither invoked nor trusted by Lean.</p>
 
+          </section>
+          </section>
+          <section class="fragment-section">
           <h3 id="affine-wall">The affine wall<a class="fragment-link" href="#affine-wall" aria-label="Link to this section">#</a></h3>
 
+          <section class="fragment-section">
           <h4 id="wall-equation">The boundary equation<a class="fragment-link" href="#wall-equation" aria-label="Link to this section">#</a></h4>
           <p>The final endpoint witness has a closed one-variable description:</p>
           <div class="formula">
@@ -436,6 +470,8 @@
           </div>
           <p>This is a local root enclosure, not an assumed global optimizer computation.</p>
 
+          </section>
+          <section class="fragment-section">
           <h4 id="wall-factorization">The obstruction<a class="fragment-link" href="#wall-factorization" aria-label="Link to this section">#</a></h4>
           <p>Let <var>H</var> and <var>Q</var> denote the entropy of the root and of its square. The root equation gives</p>
           <div class="formula">
@@ -483,15 +519,21 @@
           </div>
           <p>The lower theorem is kernel-checked. The exact wall is an independently audited factorization with a rigorous finite Arb enclosure, not a Lean premise and not a claim that the exact boundary theorem has been formalized.</p>
 
+          </section>
+          </section>
+          <section class="fragment-section">
           <h3 id="bidual-theorem">The bidual Horn theorem<a class="fragment-link" href="#bidual-theorem" aria-label="Link to this section">#</a></h3>
           <div class="theorem">
             <p><strong>Theorem.</strong> Every bidual Horn Boolean function with at least two false points has a good coordinate. Consequently, Frankl’s conjecture holds for every bidual Horn function and, in particular, every self-dual Horn function.</p>
           </div>
 
+          <section class="fragment-section">
           <h4 id="density-dichotomy">The density dichotomy<a class="fragment-link" href="#density-dichotomy" aria-label="Link to this section">#</a></h4>
           <p>Karpas proved that a union-closed subfamily of the <var>n</var>-cube with at least 2<sup><var>n</var>−1</sup> members has an abundant coordinate <a href="#ref-karpas-2017">[7]</a>. The source interchanges two directed-influence labels; the project audit reconstructs the theorem from raw edge counts, with the sign corrected.</p>
           <p>Let <var>F</var> and <var>T</var> be the false and true points of a bidual Horn function. They partition the cube; <var>F</var> is intersection-closed and <var>T</var> is union-closed. Write <var>F</var><sup>*</sup> for set complementation inside the ground set. De Morgan’s law makes <var>F</var><sup>*</sup> union-closed.</p>
 
+          </section>
+          <section class="fragment-section">
           <h4 id="horn-conclusion">The conclusion<a class="fragment-link" href="#horn-conclusion" aria-label="Link to this section">#</a></h4>
           <p>If |<var>T</var>| ≥ 2<sup><var>n</var>−1</sup>, Karpas supplies a coordinate <var>i</var> abundant in <var>T</var>. Since exactly half the cube contains <var>i</var>,</p>
           <div class="formula plain">
@@ -507,11 +549,15 @@
           <p>If |<var>T</var>| &lt; 2<sup><var>n</var>−1</sup>, then |<var>F</var>| > 2<sup><var>n</var>−1</sup>. Karpas applied to <var>F</var><sup>*</sup> gives |(<var>F</var><sup>*</sup>)<sub><var>i</var></sub>| ≥ |<var>F</var>|/2, while |(<var>F</var><sup>*</sup>)<sub><var>i</var></sub>| = |<var>F</var>|−|<var>F</var><sub><var>i</var></sub>|. Again <var>i</var> is rare among the false points, which is exactly a good Horn coordinate.</p>
           <p>This proof closes the class question; it does not transform an arbitrary Horn function into a bidual one and does not strengthen the universal constant.</p>
 
+          </section>
+          </section>
+          <section class="fragment-section">
           <h3 id="binary-theorem">The binary semigroup theorem<a class="fragment-link" href="#binary-theorem" aria-label="Link to this section">#</a></h3>
           <div class="theorem">
             <p><strong>Theorem.</strong> For every probability measure μ on [0,1] of mean 0 &lt; φ &lt; 1/2, Zargar’s binary functional satisfies the sharp inequality <var>F</var><sub>2,1</sub>(μ) ≥ φ(1−2φ) log 2 > 0.</p>
           </div>
 
+          <section class="fragment-section">
           <h4 id="binary-functional">The functional<a class="fragment-link" href="#binary-functional" aria-label="Link to this section">#</a></h4>
           <p>Retain <var>h</var> for binary entropy, put η(<var>u</var>) = −<var>u</var> log <var>u</var>, and set <var>L</var> = log 2. Zargar’s specialized unary and binary kernels are</p>
           <div class="formula">
@@ -561,6 +607,8 @@
           </div>
           <p>where <var>N</var>(<var>x</var>) = ν([0,<var>x</var>]). Thus <var>F</var><sub>2,1</sub> is concave on the compact convex set of probability measures of fixed mean φ.</p>
 
+          </section>
+          <section class="fragment-section">
           <h4 id="binary-extremizers">The extremizers<a class="fragment-link" href="#binary-extremizers" aria-label="Link to this section">#</a></h4>
           <p>A concave functional reaches its minimum at an extreme one-moment law, hence at a law supported on at most two points. An interior two-point minimizer would have a first-variation potential <var>f</var> with matching endpoint derivatives and nonnegative endpoint second derivatives. But direct differentiation gives</p>
           <div class="formula">
@@ -611,6 +659,8 @@
           </div>
           <p>Multiplying the functional difference by the positive factor (1−<var>x</var>)²/(1−φ) gives <var>A</var><sub>1</sub>(<var>x</var>)+φ<var>C</var><sub>1</sub>(<var>x</var>). Exact differentiation proves <var>C</var><sub>1</sub> ≤ 0 and <var>A</var><sub>1</sub>+<var>C</var><sub>1</sub>/2 ≥ 0; since φ ≤ 1/2, the difference is nonnegative. Hence β<sub>φ</sub> minimizes <var>F</var><sub>2,1</sub>, with value φ(1−2φ) log 2.</p>
 
+          </section>
+          <section class="fragment-section">
           <h4 id="weighted-consequence">The weighted consequence<a class="fragment-link" href="#weighted-consequence" aria-label="Link to this section">#</a></h4>
           <p>Substituting the sharp binary inequality into Zargar’s semigroup lift closes the omitted case. Every finite intersection-closed family 𝓒 with at least two members has a coordinate <var>i</var> satisfying</p>
           <div class="formula plain">
@@ -637,11 +687,14 @@
             </math>
           </div>
           <p>Strictness follows from the equality case of the lifted entropy comparison: stationarity in the three-element coordinate semigroup would force every base coordinate to be constant, impossible for a family with at least two members. This is a theorem for nonuniform weights, not the uniform distribution in Frankl’s conjecture.</p>
+          </section>
+          </section>
         </details>
 
         <details class="major-section">
           <summary><h2 id="bookkeeping">Bookkeeping<a class="fragment-link" href="#bookkeeping" aria-label="Link to this section">#</a></h2></summary>
 
+          <section class="fragment-section">
           <h3 id="old-and-new">Old and new<a class="fragment-link" href="#old-and-new" aria-label="Link to this section">#</a></h3>
           <div class="table-scroll">
             <table>
@@ -694,22 +747,32 @@
             </table>
           </div>
 
+          </section>
+          <section class="fragment-section">
           <h3 id="verification">Verification<a class="fragment-link" href="#verification" aria-label="Link to this section">#</a></h3>
 
+          <section class="fragment-section">
           <h4 id="lean-boundary">Lean boundary<a class="fragment-link" href="#lean-boundary" aria-label="Link to this section">#</a></h4>
           <p>The publication theorem, the finite entropy bridge, the scalar orbit inequality, the support-aware endpoint proof, and the reflected low-rectangle trace compile under the repository’s strict Lean gate. The five publication-facing declarations have the reviewed transitive axiom set <code>propext</code>, <code>Classical.choice</code>, and <code>Quot.sound</code>.</p>
           <p>The gate rejects warnings, automatic implicit variables, <code>sorry</code>, <code>admit</code>, project axioms, <code>unsafe</code>, <code>partial</code>, <code>native_decide</code>, external declarations, tactic escape hatches, and linter suppressions. Environment linters and a byte-exact axiom snapshot pass.</p>
           <p>The Lean libraries are compartmentalized. <code>lake build Frankl</code> builds only this development; <code>lake build MatrixMortality</code> builds only the matrix-mortality development. The repository release gate intentionally builds both.</p>
 
+          </section>
+          <section class="fragment-section">
           <h4 id="independent-oracle">Independent oracle<a class="fragment-link" href="#independent-oracle" aria-label="Link to this section">#</a></h4>
           <p>A separate Python program evaluates the reduced objectives with 160-bit Arb interval arithmetic. At the present target it reports 110,760 assessed rational boxes and 55,413 certified leaves across the endpoint and two diagonal families. The same run certifies the narrow affine-wall enclosure; historical targets remain reproducible.</p>
           <p>The oracle is a regression check and parameter-search instrument. No Lean declaration imports its output. Regenerating the committed low trace from the Lean generator is byte-for-byte reproducible.</p>
 
+          </section>
+          </section>
+          <section class="fragment-section">
           <h3 id="scope-priority">Scope and priority<a class="fragment-link" href="#scope-priority" aria-label="Link to this section">#</a></h3>
           <p>The rational theorem improves the previous explicit peer-reviewed universal constant and is fully kernel-checked. It does not prove the conjectured half bound. The accompanying wall theorem exhausts only affine mixtures of the independent and max-entropy couplings. It does not reach Liu’s stronger conditionally IID architecture or validate Liu’s conditional 0.382709087918741 candidate.</p>
           <p>The priority search closed on 8 August 2026. No earlier source was located for an explicit rigorous constant above (3−√5)/2, for the bidual Horn density corollary, or for the binary <var>k</var> = 2, <var>m</var> = 1 theorem. These are bounded literature findings, not claims about unindexed manuscripts or private communication. None of the present results has passed external peer review.</p>
           <p>The bidual Horn and binary semigroup theorems have complete independent written proofs but are not Lean-formalized. They are segregated from the kernel-checked universal bound throughout the source ledger.</p>
 
+          </section>
+          <section class="fragment-section">
           <h3 id="artifacts">Artifacts<a class="fragment-link" href="#artifacts" aria-label="Link to this section">#</a></h3>
           <ul class="artifact-list" aria-label="Frankl proof artifacts">
             <li>
@@ -756,6 +819,8 @@
             </li>
           </ul>
 
+          </section>
+          <section class="fragment-section">
           <h3 id="references">References<a class="fragment-link" href="#references" aria-label="Link to this section">#</a></h3>
           <ol class="references">
             <li id="ref-gilmer-2022">Justin Gilmer, “A Constant Lower Bound for the Union-Closed Sets Conjecture,” 2022. <a href="https://arxiv.org/abs/2211.09055">arXiv:2211.09055</a>.</li>
@@ -768,6 +833,7 @@
             <li id="ref-lozin-zamaraev-2024">Vadim Lozin and Viktor Zamaraev, “Union-Closed Sets and Horn Boolean Functions,” <cite>Journal of Combinatorial Theory, Series A</cite> 202, 105818, 2024. <a href="https://doi.org/10.1016/j.jcta.2023.105818">doi:10.1016/j.jcta.2023.105818</a>.</li>
             <li id="ref-zargar-2023">Masoud Zargar, “The Union-Closed Sets Conjecture for Non-Uniform Distributions,” 2023. <a href="https://arxiv.org/abs/2305.19338v2">arXiv:2305.19338v2</a>.</li>
           </ol>
+          </section>
         </details>
       </article>
     </main>

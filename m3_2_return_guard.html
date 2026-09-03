@@ -115,12 +115,16 @@
         <details class="major-section">
           <summary><h2 id="known-stuff">Known Stuff<a class="fragment-link" href="#known-stuff" aria-label="Link to this section">#</a></h2></summary>
 
+          <section class="fragment-section">
           <h3 id="frontier-cell">Mortality setting<a class="fragment-link" href="#frontier-cell" aria-label="Link to this section">#</a></h3>
           <p>M<sub>3</sub>(2) asks whether some nonempty word in two supplied 3 × 3 integer matrices equals zero. The cell remains unresolved in the <a href="/math/matrix_mortality/#frontier">decidability table</a>.</p>
           <p>If both matrices are invertible, every product is invertible. The first difficult <a class="glossary-term" href="/math/matrix_mortality/glossary/#rank-profile" title="The list of generator ranks used to stratify a mortality problem.">rank profile</a> therefore has one invertible generator and one generator of rank two. Write them as <var>A</var> and <var>B</var>.</p>
 
+          </section>
+          <section class="fragment-section">
           <h3 id="return-compression">Return compression<a class="fragment-link" href="#return-compression" aria-label="Link to this section">#</a></h3>
 
+          <section class="fragment-section">
           <h4 id="split-cut">A split rank-two cut<a class="fragment-link" href="#split-cut" aria-label="Link to this section">#</a></h4>
           <p>Over ℚ, factor the rank-two matrix through a two-dimensional interface:</p>
           <div class="formula plain">
@@ -143,6 +147,8 @@
             </math>
           </div>
 
+          </section>
+          <section class="fragment-section">
           <h4 id="return-products">Return products<a class="fragment-link" href="#return-products" aria-label="Link to this section">#</a></h4>
           <p>For any waits <var>n</var><sub>1</sub>, …, <var>n</var><sub><var>k</var></sub>,</p>
           <div class="formula">
@@ -165,12 +171,18 @@
           <p>Because <var>A</var> is invertible and <var>U</var>, <var>V</var> have full interface rank, exterior powers of <var>A</var> cannot create or hide a zero. Mortality of the physical pair is therefore exactly mortality of the infinite return family. This is the split-return normal form.</p>
           <p>The problem is not an ordinary scalar recurrence. A word may choose a different unbounded index <var>n</var> at every return, producing a product of recurrence values. Linear recurrence automata provide nearby vocabulary for this controlled setting <a href="#ref-hkpy-2024">[Hirvensalo et al. 2024]</a>.</p>
 
+          </section>
+          </section>
+          <section class="fragment-section">
           <h3 id="arithmetic-languages">Two arithmetic languages<a class="fragment-link" href="#arithmetic-languages" aria-label="Link to this section">#</a></h3>
 
+          <section class="fragment-section">
           <h4 id="projective-line">The projective line<a class="fragment-link" href="#projective-line" aria-label="Link to this section">#</a></h4>
           <p>A nonzero column (<var>x</var>,<var>y</var>)<sup>T</sup> determines the projective point <var>z</var> = <var>x</var>/<var>y</var>. Columns differing by a nonzero scalar represent the same point; <var>y</var> = 0 represents infinity. An invertible 2 × 2 matrix acts by a Möbius transformation.</p>
           <p>Projectivization forgets scale but preserves exactly the information needed by a rank-one separator. If the separator’s terminal row is (1,−1), it kills precisely the projective point <var>z</var> = 1.</p>
 
+          </section>
+          <section class="fragment-section">
           <h4 id="padic-valuation">The p-adic valuation<a class="fragment-link" href="#padic-valuation" aria-label="Link to this section">#</a></h4>
           <p>Fix a prime <var>p</var>. For a nonzero rational number, <var>v</var><sub><var>p</var></sub> records the exponent of <var>p</var> in its reduced factorization. Thus</p>
           <div class="formula plain">
@@ -198,19 +210,25 @@
             </math>
           </div>
           <p>The guard uses this law to compare an arbitrarily selected wait against an unbounded integer stored in the current projective point.</p>
+          </section>
+          </section>
         </details>
 
         <details class="major-section">
           <summary><h2 id="new-stuff">New Stuff<a class="fragment-link" href="#new-stuff" aria-label="Link to this section">#</a></h2></summary>
 
+          <section class="fragment-section">
           <h3 id="result">Result<a class="fragment-link" href="#result" aria-label="Link to this section">#</a></h3>
           <div class="theorem">
             <p><strong>Amalgamated valuation guard.</strong> Fix a prime <var>p</var>, a depth <var>s</var> ≥ 2, a center <var>α</var>, and a reset <var>ρ</var>. Assume <var>α</var> and <var>α</var>−1 are p-adic units and <var>ρ</var> has positive valuation. The two rational 3 × 3 matrices constructed below are mortal exactly when the deterministic guarded orbit starting at <var>ρ</var> reaches 1.</p>
           </div>
           <p>The result does not decide that reachability problem. It removes the matrix-semigroup freedom surrounding it: separator placement, arbitrary words, incorrect waits, affine poles, and infinity are all covered by the equivalence.</p>
 
+          </section>
+          <section class="fragment-section">
           <h3 id="three-mode-family">The three-mode family<a class="fragment-link" href="#three-mode-family" aria-label="Link to this section">#</a></h3>
 
+          <section class="fragment-section">
           <h4 id="ambient-and-cut">Transition matrix and cut<a class="fragment-link" href="#ambient-and-cut" aria-label="Link to this section">#</a></h4>
           <p>Put <var>δ</var> = <var>ρ</var>−<var>α</var>. The hypotheses imply that <var>δ</var> is also a p-adic unit. Take</p>
           <div class="formula">
@@ -260,6 +278,8 @@
           </div>
           <p>The ambient matrix has three distinct arithmetic modes: constant, contracting by <var>p</var>, and expanding by <var>p</var><sup><var>s</var>−1</sup>. The cut <var>B</var> has rank exactly two.</p>
 
+          </section>
+          <section class="fragment-section">
           <h4 id="return-matrices">Return matrices<a class="fragment-link" href="#return-matrices" aria-label="Link to this section">#</a></h4>
           <p>The return <var>G</var><sub><var>n</var></sub> = <var>VA</var><sup><var>n</var></sup><var>U</var> is</p>
           <div class="formula">
@@ -314,8 +334,12 @@
           </div>
           <p>The physical separator is already the word <var>B</var><sup>2</sup> = <var>UG</var><sub>0</sub><var>V</var>. No third generator is added.</p>
 
+          </section>
+          </section>
+          <section class="fragment-section">
           <h3 id="projective-guard">The projective guard<a class="fragment-link" href="#projective-guard" aria-label="Link to this section">#</a></h3>
 
+          <section class="fragment-section">
           <h4 id="defect-identity">The defect identity<a class="fragment-link" href="#defect-identity" aria-label="Link to this section">#</a></h4>
           <p>Multiplying <var>G</var><sub><var>n</var></sub> by the nonzero scalar <var>p</var><sup><var>n</var></sup> does not change its projective action. In affine coordinate <var>z</var>, the resulting map is</p>
           <div class="formula">
@@ -350,6 +374,8 @@
           </div>
           <p>This identity compares the current valuation, the chosen wait, and the terminal defect <var>z</var>−1. The formal proof uses the cross-multiplied form, so the pole <var>z</var> = <var>p</var><sup><var>n</var></sup> is not silently discarded.</p>
 
+          </section>
+          <section class="fragment-section">
           <h4 id="permanent-trap">The permanent trap<a class="fragment-link" href="#permanent-trap" aria-label="Link to this section">#</a></h4>
           <p>The live region consists of finite nonzero points of positive p-adic valuation. The target 1 is admitted separately. Define</p>
           <div class="formula plain">
@@ -365,8 +391,12 @@
           </div>
           <p>For every positive wait, the trap maps into itself. Negative-valuation points, zero, infinity, and nonterminal units all enter the unit residue ball around <var>α</var>. Since <var>α</var>−1 is a unit, that ball excludes the target 1. The same argument applies again at every later step.</p>
 
+          </section>
+          </section>
+          <section class="fragment-section">
           <h3 id="forced-computation">Forced computation<a class="fragment-link" href="#forced-computation" aria-label="Link to this section">#</a></h3>
 
+          <section class="fragment-section">
           <h4 id="wrong-waits">Wrong waits<a class="fragment-link" href="#wrong-waits" aria-label="Link to this section">#</a></h4>
           <p>Suppose the current point is live and put <var>a</var> = <var>v</var><sub><var>p</var></sub>(<var>z</var>) &gt; 0. Then <var>z</var>−1 is a unit. If the word chooses <var>n</var> ≠ <var>a</var>, unequal valuations give</p>
           <div class="formula plain">
@@ -395,6 +425,8 @@
             </math>
           </div>
 
+          </section>
+          <section class="fragment-section">
           <h4 id="carry-depth">Carry depth<a class="fragment-link" href="#carry-depth" aria-label="Link to this section">#</a></h4>
           <p>The correct wait survives only when the state has the required p-adic precision. Write <var>z</var> = <var>p</var><sup><var>a</var></sup><var>u</var>, where <var>u</var> is a unit, and put <var>h</var> = <var>v</var><sub><var>p</var></sub>(<var>u</var>−1). For <var>u</var> ≠ 1,</p>
           <div class="formula plain">
@@ -418,8 +450,12 @@
             </math>
           </div>
 
+          </section>
+          </section>
+          <section class="fragment-section">
           <h3 id="tail-recurrence">The tail recurrence<a class="fragment-link" href="#tail-recurrence" aria-label="Link to this section">#</a></h3>
 
+          <section class="fragment-section">
           <h4 id="ready-coordinates">Ready coordinates<a class="fragment-link" href="#ready-coordinates" aria-label="Link to this section">#</a></h4>
           <p>Every ready point has a unique p-adic unit tail <var>X</var>:</p>
           <div class="formula plain">
@@ -449,6 +485,8 @@
           </div>
           <p>The next valuation and next tail are recovered from this rational output. Failure of the next ready condition enters the trap.</p>
 
+          </section>
+          <section class="fragment-section">
           <h4 id="inverse-grammar">Inverse grammar<a class="fragment-link" href="#inverse-grammar" aria-label="Link to this section">#</a></h4>
           <p>The local transition graph is not impoverished. Given positive valuations <var>a</var>, <var>b</var> and any unit target tail <var>X</var>′, define</p>
           <div class="formula">
@@ -480,6 +518,9 @@
           </div>
           <p>Every ready valuation cylinder can therefore reach every other. This is local symbolic completeness, not universality: one initial rational tail must satisfy the entire itinerary.</p>
 
+          </section>
+          </section>
+          <section class="fragment-section">
           <h3 id="arbitrary-words">Arbitrary physical words<a class="fragment-link" href="#arbitrary-words" aria-label="Link to this section">#</a></h3>
           <p>The free semigroup may place <var>A</var> and <var>B</var> in any order. The proof first fractures a zero product at occurrences of the internal separator <var>B</var><sup>2</sup>. Positive returns between separators act on projective states from right to left, matching matrix multiplication on columns.</p>
           <p>Trap invariance propagates through every suffix of a successful bridge. A suffix cannot reach 1 early, because another positive return sends 1 into the trap. Every intermediate state is therefore live, and the forcing theorem makes its selected wait equal its valuation and its carry depth exact. Thus every successful arbitrary word is a legal path.</p>
@@ -503,6 +544,8 @@
           </div>
           <p>The coefficient Hankel section of the return series has rank three. The construction cannot be reproduced exactly in two linear states.</p>
 
+          </section>
+          <section class="fragment-section">
           <h3 id="examples">Concrete pairs<a class="fragment-link" href="#examples" aria-label="Link to this section">#</a></h3>
           <p>Take <var>p</var> = 5, <var>s</var> = 2, <var>ρ</var> = 30, and <var>α</var> = 869/28. The reset is ready and its unique legal wait one reaches the target. Clearing denominators gives</p>
           <div class="formula">
@@ -535,8 +578,11 @@
           </div>
           <p>The guard does not force termination. At <var>p</var> = 5, <var>s</var> = 2, <var>ρ</var> = 5/6, and <var>α</var> = 2, the ready reset is a nonterminal fixed point.</p>
 
+          </section>
+          <section class="fragment-section">
           <h3 id="parity-smith">Parity, Smith, and universal boundary<a class="fragment-link" href="#parity-smith" aria-label="Link to this section">#</a></h3>
 
+          <section class="fragment-section">
           <h4 id="odd-reset-defect">Odd reset-defect numerator immortality<a class="fragment-link" href="#odd-reset-defect" aria-label="Link to this section">#</a></h4>
           <p>Choose integral coefficients <var>A</var>, <var>D</var>, and <var>L</var> with <var>L</var> ≠ 0 so that <var>α</var> = <var>A</var>/<var>L</var> and the drift <var>δ</var> = <var>D</var>/<var>L</var>. Put</p>
           <div class="formula plain">
@@ -563,6 +609,8 @@
           </div>
           <p>If <var>r</var> is odd, the first equation makes <var>h</var> and <var>t</var>′ odd. If <var>R</var> is odd, the second then makes <var>r</var>′ odd. The reset endpoint numerator is <var>R</var>, whereas the canonical physical target has endpoint numerator zero. Induction through the checked decoded-to-primitive lift therefore proves that odd <var>R</var> is a physical immortality certificate.</p>
 
+          </section>
+          <section class="fragment-section">
           <h4 id="maximal-isolation">Maximal steps are isolated<a class="fragment-link" href="#maximal-isolation" aria-label="Link to this section">#</a></h4>
           <p>Only even <var>R</var> remains. At critical depth <var>s</var> = 2, write <var>q</var> = <var>p</var><sup><var>a</var></sup>. The forward and complementary contents have the signed Smith split</p>
           <div class="formula plain">
@@ -590,6 +638,8 @@
           </div>
           <p>Here <var>t</var> and <var>θ</var> are odd, while the second coefficient is even. Thus <var>r</var>′ is odd and the maximal step cannot terminate. If another primitive step follows, its Smith coordinate <var>v</var> is even and therefore lies on the <var>v</var> ≥ 2 side. Maximal steps cannot occur consecutively.</p>
 
+          </section>
+          <section class="fragment-section">
           <h4 id="universal-boundary">Universal-boundary wall<a class="fragment-link" href="#universal-boundary" aria-label="Link to this section">#</a></h4>
           <p>At depth two, put <var>q</var> = <var>p</var><sup><var>a</var></sup>. The endpoint map obeys the exact reset-defect factorization</p>
           <div class="formula">
@@ -661,6 +711,8 @@
           </div>
           <p>The full valuation wall is stronger than this squarefree sieve. It can still exclude a law after every boundary prime has entered <var>R</var>.</p>
 
+          </section>
+          <section class="fragment-section">
           <h4 id="order-breaking-bridge">Order-breaking bridge obstruction<a class="fragment-link" href="#order-breaking-bridge" aria-label="Link to this section">#</a></h4>
           <p>Reset incidence at an exact-order prime does not yield a local monotone law after the first wait outside that order. At depth two, take</p>
           <div class="formula plain">
@@ -700,11 +752,14 @@
           </div>
           <p>The bridge's raw endpoint pair has gcd 18, coprime to 5. No auxiliary-prime content is swallowed, and the primitive denominator grows from 19 to 270178. Thus ball invariance, auxiliary-content loss, repetition, and denominator descent all fail as uniform first-bridge charges under continued readiness. Exact-order factors can contribute only inside a global amortization theorem.</p>
 
+          </section>
+          </section>
         </details>
 
         <details class="major-section">
           <summary><h2 id="bookkeeping">Bookkeeping<a class="fragment-link" href="#bookkeeping" aria-label="Link to this section">#</a></h2></summary>
 
+          <section class="fragment-section">
           <h3 id="verification">Verification and provenance<a class="fragment-link" href="#verification" aria-label="Link to this section">#</a></h3>
           <div class="status-grid">
             <div>
@@ -757,11 +812,15 @@
             </div>
           </div>
 
+          </section>
+          <section class="fragment-section">
           <h3 id="formal-scope">Formal scope<a class="fragment-link" href="#formal-scope" aria-label="Link to this section">#</a></h3>
           <p>The matrix identities, rank statements, complete physical mortality equivalence, total projective semantics, p-adic forcing theorems, tail grammar, concrete examples, and exact state lower bound are machine-checked over ℚ. Independent nonzero scaling clears the two physical generators to integer matrices without changing zero products.</p>
           <p>The formal result does not prove M<sub>3</sub>(2) decidable or undecidable. It proves an exact equivalence for the displayed parametric family, physical immortality for every odd reset-defect numerator, maximal-step isolation at depth two, physical immortality below the universal-boundary valuation wall, and failure of every uniform first order-breaking bridge charge listed above. In particular, every prime divisor of <var>p</var>−1 divides the reset-defect numerator of a mortal depth-two guard. No universal computation has been compiled into the deterministic orbit, and no decision procedure for that orbit is claimed.</p>
           <p>The hypotheses are stated at their exact formal strength. The prime need not be separately assumed odd; requiring both <var>α</var> and <var>α</var>−1 to be p-adic units formally excludes residue characteristic two.</p>
 
+          </section>
+          <section class="fragment-section">
           <h3 id="priority">Priority<a class="fragment-link" href="#priority" aria-label="Link to this section">#</a></h3>
           <p>To our knowledge, after searches through 28 July 2026, the nearest published framework is recurrence-controlled matrix reachability <a href="#ref-hkpy-2024">[Hirvensalo et al. 2024]</a>. No located source gives this three-mode return family, its internal separator, the exact valuation trap, or the mortality-to-functional-orbit equivalence. The foundational low-dimensional mortality decomposition and bounded mortality notation are prior art <a href="#ref-bournez-branicky-2002">[Bournez–Branicky 2002]</a> <a href="#ref-chhn-2014">[Cassaigne et al. 2014]</a>. “No located source” is limited to publicly discoverable work.</p>
 
@@ -773,12 +832,15 @@
             <li><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/f8770b4/audits/m32-order-breaking-bridge-2026-08-05.md"><b>Order-breaking bridge audit</b>Ready-target ejection, exact primitive normalization, and the limit of a uniform local charge</a></li>
           </ul>
 
+          </section>
+          <section class="fragment-section">
           <h3 id="sources">References<a class="fragment-link" href="#sources" aria-label="Link to this section">#</a></h3>
           <ol class="references">
             <li id="ref-bournez-branicky-2002"><span>Olivier Bournez and Michael S. Branicky, <a href="https://doi.org/10.1007/s00224-002-1010-5"><cite>The Mortality Problem for Matrices of Low Dimensions</cite></a>, Theory of Computing Systems 35(4):433–448, 2002. Low-dimensional mortality and singular-endpoint structure.</span></li>
             <li id="ref-chhn-2014"><span>Julien Cassaigne, Vesa Halava, Tero Harju, and François Nicolas, <a href="https://arxiv.org/abs/1404.0644"><cite>Tighter Undecidability Bounds for Matrix Mortality, Zero-in-the-Corner Problems, and More</cite></a>, 2014. Bounded mortality notation and neighboring undecidability bounds.</span></li>
             <li id="ref-hkpy-2024"><span>Mika Hirvensalo, Akitoshi Kawamura, Igor Potapov, and Takao Yuyama, <a href="https://doi.org/10.1007/978-3-031-72621-7_12"><cite>Reachability in Linear Recurrence Automata</cite></a>, Reachability Problems, 2024. Comparative framework for recurrence-indexed matrix reachability.</span></li>
           </ol>
+          </section>
         </details>
       </article>
     </main>

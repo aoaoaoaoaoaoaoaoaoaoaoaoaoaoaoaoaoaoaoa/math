@@ -64,6 +64,7 @@
         <details class="major-section">
           <summary><h2 id="known-stuff">Known Stuff<a class="fragment-link" href="#known-stuff" aria-label="Link to this section">#</a></h2></summary>
 
+          <section class="fragment-section">
           <h3 id="shortcut-map">Shortcut-Collatz reachability<a class="fragment-link" href="#shortcut-map" aria-label="Link to this section">#</a></h3>
           <p>The <a class="glossary-term" href="/math/matrix_mortality/glossary/#shortcut-collatz" title="The map that halves an even integer and sends an odd integer n to (3n+1)/2.">shortcut-Collatz map</a> sends an integer <var>x</var> to</p>
           <div class="formula">
@@ -86,6 +87,8 @@
           </div>
           <p>Write <var>x</var> ⇝ 1 when finitely many applications reach 1. This is a pointwise reachability predicate, not the universal assertion that every positive integer reaches 1.</p>
 
+          </section>
+          <section class="fragment-section">
           <h3 id="projective-incidence">Projective incidence<a class="fragment-link" href="#projective-incidence" aria-label="Link to this section">#</a></h3>
           <p>A two-generator <a class="glossary-term" href="/math/matrix_mortality/glossary/#projective-incidence" title="Zero reachability of one row–word–column coefficient under two projective matrices.">projective-incidence instance</a> consists of invertible rational 2 × 2 matrices <var>G</var>, <var>H</var>, a nonzero row <var>r</var><sup>T</sup>, and a nonzero column <var>c</var>. It asks whether</p>
           <div class="formula plain">
@@ -100,6 +103,8 @@
           </div>
           <p>Multiplying either generator by a nonzero scalar changes each word coefficient by a nonzero scalar product and therefore preserves its zero language. Generic projective incidence, abbreviated GPI₂, fixes two nondegeneracy scalars to one by such rescaling.</p>
 
+          </section>
+          <section class="fragment-section">
           <h3 id="mortality-compiler">Rank-two mortality compiler<a class="fragment-link" href="#mortality-compiler" aria-label="Link to this section">#</a></h3>
           <p>For invertible <var>G</var> and <var>H</var> in the generic chart, the <a class="glossary-term" href="/math/matrix_mortality/glossary/#interface-compression" title="Reduction of factored-cut mortality to products on their smaller interfaces.">interface construction</a> adapts four two-dimensional edges into two rational 3 × 3 matrices <var>P</var><sub>0</sub>, <var>P</var><sub>1</sub>. Each matrix has rank exactly two, and the arbitrary-product converse gives</p>
           <div class="formula plain">
@@ -114,11 +119,13 @@
             </math>
           </div>
           <p>The normalized GPI₂ conditions make both required chart scalars equal to one. Independent nonzero denominator clearing converts the rational pair to an integer pair without changing mortality. Thus the shortcut-Collatz language occurs inside the rank-(2,2) stratum of M<sub>3</sub>(2), although the full cell contains other rank profiles.</p>
+          </section>
         </details>
 
         <details class="major-section">
           <summary><h2 id="new-stuff">New Stuff<a class="fragment-link" href="#new-stuff" aria-label="Link to this section">#</a></h2></summary>
 
+          <section class="fragment-section">
           <h3 id="result">Exact embedding<a class="fragment-link" href="#result" aria-label="Link to this section">#</a></h3>
           <div class="theorem">
             <p><strong>Shortcut-Collatz incidence.</strong> For every nonzero integer <var>n</var>, define</p>
@@ -171,6 +178,8 @@
             <p>The word may be empty; this is necessary for <var>n</var> = 1.</p>
           </div>
 
+          </section>
+          <section class="fragment-section">
           <h3 id="inverse-branches">Inverse branches<a class="fragment-link" href="#inverse-branches" aria-label="Link to this section">#</a></h3>
           <p>The projective actions of <var>A</var> and <var>B</var> are the two inverse branches</p>
           <div class="formula plain">
@@ -206,10 +215,14 @@
             </math>
           </div>
 
+          </section>
+          <section class="fragment-section">
           <h3 id="malformed-words">Malformed words<a class="fragment-link" href="#malformed-words" aria-label="Link to this section">#</a></h3>
           <p>The odd inverse branch is legal at an integer <var>z</var> only when 3 divides 2<var>z</var>−1. At the first illegal odd branch, the reduced result has 3-adic valuation −1. Doubling preserves negative 3-adic valuation, and another odd inverse branch makes it smaller. No later word can return that state to an integer.</p>
           <p>Thus every word either traces a lawful integral inverse orbit or enters a permanent nonintegral trap. Incidence with the integral target <var>n</var> occurs exactly on the lawful branch, closing the arbitrary-word converse.</p>
 
+          </section>
+          <section class="fragment-section">
           <h3 id="normalization">Generic normalization<a class="fragment-link" href="#normalization" aria-label="Link to this section">#</a></h3>
           <p>Put</p>
           <div class="formula plain">
@@ -234,14 +247,18 @@
           </div>
           <p>Their two projectivities remain <var>a</var> and <var>b</var>. Lean proves that the two exceptional incidence scalars are both one and that the complete zero language is unchanged.</p>
 
+          </section>
+          <section class="fragment-section">
           <h3 id="meaning">Logical force<a class="fragment-link" href="#meaning" aria-label="Link to this section">#</a></h3>
           <p>A decision procedure for GPI₂ would decide whether an arbitrary nonzero integer reaches 1 under shortcut Collatz: construct the displayed instance and ask whether it has a zero word. This is the sole direction established.</p>
           <p>The theorem neither decides nor proves undecidable GPI₂. It supplies no reduction from GPI₂ to Collatz reachability, and it says nothing by itself about whether every positive integer reaches 1. “Collatz-hard” is therefore safe only as shorthand for this explicit one-way lower bound.</p>
+          </section>
         </details>
 
         <details class="major-section">
           <summary><h2 id="bookkeeping">Bookkeeping<a class="fragment-link" href="#bookkeeping" aria-label="Link to this section">#</a></h2></summary>
 
+          <section class="fragment-section">
           <h3 id="verification">Verification and provenance<a class="fragment-link" href="#verification" aria-label="Link to this section">#</a></h3>
           <div class="status-grid">
             <div>
@@ -262,14 +279,19 @@
             </div>
           </div>
 
+          </section>
+          <section class="fragment-section">
           <h3 id="formal-scope">Formal scope<a class="fragment-link" href="#formal-scope" aria-label="Link to this section">#</a></h3>
           <p>Lean checks the shortcut-step equivalence, every-word inverse semantics, permanent 3-adic trap, raw matrix action, raw incidence identity, normalization scalars, generator invertibility, normalized GPI₂ conditions, zero-language preservation, and final equivalence for every nonzero integer. The reverse-edge compiler and rank-two conclusion are separately machine-checked in <a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/main/MatrixMortality/ReverseEdge.lean"><code>ReverseEdge</code></a>; their composition with shortcut-Collatz incidence is not packaged as a separate endpoint declaration.</p>
           <p>The formulas give an elementary effective transformation of <var>n</var> into rational matrices and boundary vectors. The repository does not yet package that transformation as a primitive-recursive many-one declaration, so the machine-checked endpoint is described as an exact pointwise embedding.</p>
 
+          </section>
+          <section class="fragment-section">
           <h3 id="sources">References<a class="fragment-link" href="#sources" aria-label="Link to this section">#</a></h3>
           <ol class="references">
             <li><span>GPT-5.6 Sol, elicited by @eternalism_4eva, <a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/main/MatrixMortality/ProjectiveCollatz.lean"><cite>Shortcut-Collatz Projective Incidence</cite></a>, 2026. Lean formalization of the exact embedding.</span></li>
           </ol>
+          </section>
         </details>
       </article>
     </main>

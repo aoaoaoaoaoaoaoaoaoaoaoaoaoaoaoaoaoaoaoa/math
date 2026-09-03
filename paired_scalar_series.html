@@ -63,6 +63,7 @@
         <details class="major-section">
           <summary><h2 id="known-stuff">Known Stuff<a class="fragment-link" href="#known-stuff" aria-label="Link to this section">#</a></h2></summary>
 
+          <section class="fragment-section">
           <h3 id="source-language">Fixed-boundary source<a class="fragment-link" href="#source-language" aria-label="Link to this section">#</a></h3>
           <p>The <a href="/math/matrix_mortality/m3_5/#source-lemma">fixed-boundary theorem</a> supplies four semantic roles: rule and deletion actions for each letter in {<span class="word">b</span>, <span class="word">c</span>}. A role word is accepted exactly when its upper concatenation followed by the fixed marker equals its lower concatenation.</p>
           <div class="formula plain">
@@ -76,6 +77,8 @@
           </div>
           <p>For the emitted restricted tag systems, a nonempty accepted role word exists exactly when the tag computation halts.</p>
 
+          </section>
+          <section class="fragment-section">
           <h3 id="word-pair">Word-pair matrices<a class="fragment-link" href="#word-pair" aria-label="Link to this section">#</a></h3>
           <p>Encode letters by nonzero ternary digits. The standard <a class="glossary-term" href="/math/matrix_mortality/glossary/#word-pair-representation" title="A matrix morphism recording two words so that one boundary coefficient detects equality.">word-pair representation</a> assigns each pair (<var>u</var>, <var>v</var>) a 3 × 3 matrix Ψ(<var>u</var>, <var>v</var>). It preserves concatenation, and one fixed row and column detect <var>u</var> = <var>v</var>.</p>
           <p>A unimodular basis change separates the upper and lower word channels:</p>
@@ -107,11 +110,13 @@
             </math>
           </div>
           <p>For a fixed letter, its rule and deletion roles have the same upper word. Their matrices therefore agree on the two-dimensional upper-channel plane.</p>
+          </section>
         </details>
 
         <details class="major-section">
           <summary><h2 id="new-stuff">New Stuff<a class="fragment-link" href="#new-stuff" aria-label="Link to this section">#</a></h2></summary>
 
+          <section class="fragment-section">
           <h3 id="result">Result<a class="fragment-link" href="#result" aria-label="Link to this section">#</a></h3>
           <div class="theorem">
             <p><strong>Paired scalar series.</strong> For every admissible deletion width <var>β</var> and tag body <var>B</var>, there are three explicit 4 × 4 integer matrices indexed by two data letters and one toggle, together with an integer row <var>r</var> and column <var>c</var>, such that</p>
@@ -129,6 +134,8 @@
             <p>and <var>p</var><sub><var>β</var>,<var>B</var></sub>(<var>z</var>) = 0 exactly when the decoded role word satisfies the fixed-boundary equation. The equivalence holds for every raw control word, including arbitrary toggles.</p>
           </div>
 
+          </section>
+          <section class="fragment-section">
           <h3 id="phase-quotient">Phase quotient<a class="fragment-link" href="#phase-quotient" aria-label="Link to this section">#</a></h3>
           <p>Start with two copies of the three-dimensional word-pair space, one for each phase. Let <var>E</var> be the two-dimensional agreement plane. The anti-diagonal copy</p>
           <div class="formula plain">
@@ -150,24 +157,32 @@
           </div>
           <p>The boundary row annihilates <var>K</var>, so the scalar coefficient survives the quotient exactly.</p>
 
+          </section>
+          <section class="fragment-section">
           <h3 id="decoder">Complete decoder<a class="fragment-link" href="#decoder" aria-label="Link to this section">#</a></h3>
           <p>Matrix products act on the boundary column from right to left. The decoder therefore scans a control word from its suffix. It begins in rule phase; a toggle exchanges phases; a data letter emits its rule or deletion role according to the current phase and then enters deletion phase.</p>
           <p>Induction gives coefficient preservation for every control word. A second induction inserts at most one toggle before each encoded suffix and proves that every role word has a control spelling. Hence the raw three-letter series and the four-role fixed-boundary series have the same nonempty zero language.</p>
 
+          </section>
+          <section class="fragment-section">
           <h3 id="minimality">Exact dimension<a class="fragment-link" href="#minimality" aria-label="Link to this section">#</a></h3>
           <p>Four explicit prefixes and four explicit suffixes form a 4 × 4 finite Hankel section with nonzero determinant for every admissible source. Any exact linear representation of this scalar series over ℚ therefore has at least four states. The quotient construction has four states, so its realization dimension is exact.</p>
 
+          </section>
+          <section class="fragment-section">
           <h3 id="uses">Dependents<a class="fragment-link" href="#uses" aria-label="Link to this section">#</a></h3>
           <ul>
             <li><a href="/math/matrix_mortality/m4_4/#paired-compression">Paired-role compression</a> uses the four-state matrices directly and adds a rank-one separator.</li>
             <li><a href="/math/matrix_mortality/binary_compilers/#scalar-six">The shared-partial compiler</a> binary-encodes the three controls while retaining a common unfinished word channel.</li>
             <li><a href="/math/matrix_mortality/m9_2/#tilted-separator">The tilted separator</a> changes nonzero coefficients without changing this series’ zero language, enabling a nine-dimensional return realization.</li>
           </ul>
+          </section>
         </details>
 
         <details class="major-section">
           <summary><h2 id="bookkeeping">Bookkeeping<a class="fragment-link" href="#bookkeeping" aria-label="Link to this section">#</a></h2></summary>
 
+          <section class="fragment-section">
           <h3 id="verification">Verification and provenance<a class="fragment-link" href="#verification" aria-label="Link to this section">#</a></h3>
           <div class="status-grid">
             <div>
@@ -188,15 +203,20 @@
             </div>
           </div>
 
+          </section>
+          <section class="fragment-section">
           <h3 id="formal-scope">Formal scope<a class="fragment-link" href="#formal-scope" aria-label="Link to this section">#</a></h3>
           <p>The explicit matrices, every-word decoder identity, decoder surjectivity, exact zero-language theorem, universal source reduction, and state lower bound are machine-checked. The page introduces no approximation, intended-language restriction, or finite-word premise.</p>
 
+          </section>
+          <section class="fragment-section">
           <h3 id="sources">References<a class="fragment-link" href="#sources" aria-label="Link to this section">#</a></h3>
           <ol class="references">
             <li><span>GPT-5.6 Sol, elicited by @eternalism_4eva, <a href="/math/matrix_mortality/m3_5/"><cite>Fixed-Boundary Correspondence</cite></a>, 2026. The four-role source zero language.</span></li>
             <li><span>GPT-5.6 Sol, elicited by @eternalism_4eva, <a href="/math/matrix_mortality/m4_4/"><cite>Paired-Role Compression</cite></a>, 2026. The explicit quotient matrices and mortality application.</span></li>
             <li><span>Julien Cassaigne, Vesa Halava, Tero Harju, and François Nicolas, <a href="https://arxiv.org/abs/1404.0644"><cite>Tighter Undecidability Bounds for Matrix Mortality, Zero-in-the-Corner Problems, and More</cite></a>, 2014. Standard word-pair matrices.</span></li>
           </ol>
+          </section>
         </details>
       </article>
     </main>

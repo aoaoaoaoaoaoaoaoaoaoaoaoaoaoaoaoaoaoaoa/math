@@ -84,6 +84,7 @@
         <details class="major-section">
           <summary><h2 id="known-stuff">Known Stuff<a class="fragment-link" href="#known-stuff" aria-label="Link to this section">#</a></h2></summary>
 
+          <section class="fragment-section">
           <h3 id="source-interface">Four-role fixed-boundary family<a class="fragment-link" href="#source-interface" aria-label="Link to this section">#</a></h3>
           <p>The <a href="/math/matrix_mortality/m3_5/#source-lemma">fixed-boundary correspondence theorem</a> supplies four roles R<sub><var>x</var></sub>, D<sub><var>x</var></sub>, with <var>x</var> ∈ {<span class="word">b</span>, <span class="word">c</span>}, and a terminal column <var>c</var>. A role word <var>w</var> satisfies the fixed-boundary equation exactly when</p>
           <div class="formula plain">
@@ -97,6 +98,8 @@
           </div>
           <p>The fixed-boundary problem is undecidable. The four matrices are nonsingular; adjoining the rank-one separator gives the five-matrix family used for M<sub>3</sub>(5).</p>
 
+          </section>
+          <section class="fragment-section">
           <h3 id="shared-channel">Shared channel<a class="fragment-link" href="#shared-channel" aria-label="Link to this section">#</a></h3>
           <p>The <a href="/math/matrix_mortality/m4_4/#side-normal-form">side-normal basis</a> writes every word-pair matrix as</p>
           <div class="formula">
@@ -127,18 +130,25 @@
           </div>
           <p>Paired-role compression identifies this plane between two phases. The compilers below instead share it between partial binary decoder states.</p>
 
+          </section>
+          <section class="fragment-section">
           <h3 id="previous-binary-bounds">Previous binary bounds<a class="fragment-link" href="#previous-binary-bounds" aria-label="Link to this section">#</a></h3>
           <p>Cassaigne, Halava, Harju, and Nicolas established Z<sub>9</sub>(2), R<sub>10</sub>(2), and M<sub>15</sub>(2), together with general alphabet-packing and scalar-to-corner reductions <a href="#ref-chhn-2014">[Cassaigne et al. 2014]</a>. The fixed-boundary result and their mortality packing give M<sub>12</sub>(2). Binary codes and incomplete-codeword decoders are prior techniques; the constructions below use the paired-role identity to remove states from the corresponding generic realizations.</p>
+          </section>
         </details>
 
         <details class="major-section">
           <summary><h2 id="new-stuff">New Stuff<a class="fragment-link" href="#new-stuff" aria-label="Link to this section">#</a></h2></summary>
 
+          <section class="fragment-section">
           <h3 id="result">Results<a class="fragment-link" href="#result" aria-label="Link to this section">#</a></h3>
           <p>The role alphabet factors as a phase bit R/D and a letter bit <span class="word">b</span>/<span class="word">c</span>. The scalar compiler stores one shared unfinished upper channel and preserves every coefficient in dimension six. The mortality compiler represents all five payload matrices by a <a class="glossary-term" href="/math/matrix_mortality/glossary/#prefix-code" title="A code in which no codeword is a proper prefix of another.">complete prefix decoder</a>, then applies <a class="glossary-term" href="/math/matrix_mortality/glossary/#common-image-restriction" title="Restriction to the invariant image shared by every generator.">common-image restriction</a> from dimension twelve to ten.</p>
 
+          </section>
+          <section class="fragment-section">
           <h3 id="scalar-six">Six-dimensional scalar compiler<a class="fragment-link" href="#scalar-six" aria-label="Link to this section">#</a></h3>
 
+          <section class="fragment-section">
           <h4 id="two-bit-code">Two-bit code<a class="fragment-link" href="#two-bit-code" aria-label="Link to this section">#</a></h4>
           <p>Every binary pair denotes one role:</p>
           <div class="formula plain">
@@ -153,6 +163,8 @@
           </div>
           <p>Write U<sub><var>x</var></sub> = σ(<var>u</var><sub><var>x</var></sub>), A<sub><var>x</var></sub> = 3<sup>|<var>u</var><sub><var>x</var></sub>|</sup>, V<sub><var>x</var></sub><sup><var>p</var></sup> = σ(<var>v</var><sub><var>x</var></sub><sup><var>p</var></sup>), and B<sub><var>x</var></sub><sup><var>p</var></sup> = 3<sup>|<var>v</var><sub><var>x</var></sub><sup><var>p</var></sup>|</sup>.</p>
 
+          </section>
+          <section class="fragment-section">
           <h4 id="six-generators">Generators<a class="fragment-link" href="#six-generators" aria-label="Link to this section">#</a></h4>
           <p>Use row coordinates (<var>a</var>, <var>λ</var>, <var>υ</var>, <var>λ</var><sub>R</sub>, <var>υ</var><sub>*</sub>, <var>λ</var><sub>D</sub>). The two integer matrices are</p>
           <div class="formula">
@@ -191,6 +203,8 @@
           </div>
           <p>The first three coordinates form the root state. The remaining coordinates store the unfinished lower rule channel, one upper channel shared by both phases, and the unfinished lower deletion channel.</p>
 
+          </section>
+          <section class="fragment-section">
           <h4 id="six-decoder">Arbitrary binary words<a class="fragment-link" href="#six-decoder" aria-label="Link to this section">#</a></h4>
           <p>For a row triple <var>q</var> = (<var>a</var>, <var>λ</var>, <var>υ</var>), put</p>
           <div class="formula plain">
@@ -237,11 +251,17 @@
           </div>
           <p>An unpaired final bit changes only the unfinished phase and preserves the extracted first coordinate. Conversely, encoding the reversed sequence of any role word gives a binary preimage. The decoder is total and surjective.</p>
 
+          </section>
+          <section class="fragment-section">
           <h4 id="structured-scalar">Structured form<a class="fragment-link" href="#structured-scalar" aria-label="Link to this section">#</a></h4>
           <p>Transposing both generators makes their first column <var>e</var><sub>1</sub>. Product reversal is a bijection on binary words, so scalar zero reachability is unchanged. The empty and one-bit coefficients equal <var>μ</var> ≠ 0; the free-monoid and nonempty free-semigroup conventions therefore agree. This proves structured Z̊<sub>6</sub>(2), hence Z<sub>6</sub>(2). The standard integral scalar-to-corner lift gives R<sub>7</sub>(2) <a href="#ref-chhn-2014">[Cassaigne et al. 2014]</a>.</p>
 
+          </section>
+          </section>
+          <section class="fragment-section">
           <h3 id="mortality-ten">Ten-dimensional mortality compiler<a class="fragment-link" href="#mortality-ten" aria-label="Link to this section">#</a></h3>
 
+          <section class="fragment-section">
           <h4 id="prefix-code">Complete prefix code<a class="fragment-link" href="#prefix-code" aria-label="Link to this section">#</a></h4>
           <p>Transpose the normalized five-matrix family and write its rank-one separator as Π = <var>e</var><sub>1</sub><var>c</var><sup>T</sup>. Denote the four payloads by R<sub><var>c</var></sub>, R<sub><var>b</var></sub>, D<sub><var>c</var></sub>, D<sub><var>b</var></sub>. For every <var>p</var> in the upper plane <var>E</var>,</p>
           <div class="formula plain">
@@ -267,6 +287,8 @@
           </div>
           <p>Its proper-prefix states are ε, 1, 10, and 11.</p>
 
+          </section>
+          <section class="fragment-section">
           <h4 id="prefix-machine">Twelve-dimensional realization<a class="fragment-link" href="#prefix-machine" aria-label="Link to this section">#</a></h4>
           <p>Order four three-dimensional blocks by those prefix states. The binary generators are</p>
           <div class="formula">
@@ -296,6 +318,8 @@
           </div>
           <p>Each block row contains one nonzero block. For every start state and binary word, its product therefore has one possibly nonzero block in that row: the deterministic final prefix state selects the column, and the emitted payload product is the block value. This covers complete codewords, unfinished suffixes, and every starting prefix state.</p>
 
+          </section>
+          <section class="fragment-section">
           <h4 id="synchronizer">Synchronizer<a class="fragment-link" href="#synchronizer" aria-label="Link to this section">#</a></h4>
           <p>The word 00 sends every prefix state to ε. Its four emitted products are</p>
           <div class="formula plain">
@@ -310,6 +334,8 @@
           </div>
           <p>If a role word <var>w</var> has zero matrix product, then 00 followed by its prefix encoding makes every block row zero. Conversely, a zero binary product has a zero root block, whose emitted payload product cannot be empty because the empty product is the identity. Thus the twelve-dimensional pair is mortal exactly when the five-matrix family is mortal.</p>
 
+          </section>
+          <section class="fragment-section">
           <h4 id="common-image">Common-image restriction<a class="fragment-link" href="#common-image" aria-label="Link to this section">#</a></h4>
           <p>For <var>p</var> ∈ <var>E</var>, define the row ℓ<sub><var>p</var></sub> = (0, 0, <var>p</var><sup>T</sup>, −<var>p</var><sup>T</sup>) in the four prefix blocks. Paired-role agreement gives</p>
           <div class="formula plain">
@@ -366,6 +392,8 @@
             </math>
           </div>
 
+          </section>
+          <section class="fragment-section">
           <h4 id="restriction-converse">Mortality converse<a class="fragment-link" href="#restriction-converse" aria-label="Link to this section">#</a></h4>
           <p>If a twelve-dimensional product 𝒜<sub><var>z</var></sub> is zero, then B<sub><var>z</var></sub> = Q𝒜<sub><var>z</var></sub>J = 0. Conversely, if B<sub><var>z</var></sub> = 0, then 𝒜<sub><var>z</var></sub> kills <var>K</var>. Because the image of 𝒜<sub>0</sub> lies in <var>K</var>,</p>
           <div class="formula plain">
@@ -380,6 +408,9 @@
           </div>
           <p>The appended letter converts every zero introduced by restriction into a zero of the twelve-dimensional decoder, which in turn yields a nonempty zero payload product. Hence the two 10 × 10 integer matrices are mortal exactly when the restricted tag system halts.</p>
 
+          </section>
+          </section>
+          <section class="fragment-section">
           <h3 id="consequences">Consequences<a class="fragment-link" href="#consequences" aria-label="Link to this section">#</a></h3>
           <p>The six-dimensional construction changes the two-generator scalar and corner bounds to Z<sub>6</sub>(2) and R<sub>7</sub>(2). The ten-dimensional construction changes the two-generator mortality bound to M<sub>10</sub>(2). For every <var>n</var> ≥ 0,</p>
           <div class="formula plain">
@@ -392,11 +423,13 @@
             </math>
           </div>
           <p>preserves zero products, proving M<sub>10+<var>n</var></sub>(2). The <a href="/math/matrix_mortality/#frontier">series landing page</a> records the resulting current frontiers.</p>
+          </section>
         </details>
 
         <details class="major-section">
           <summary><h2 id="bookkeeping">Bookkeeping<a class="fragment-link" href="#bookkeeping" aria-label="Link to this section">#</a></h2></summary>
 
+          <section class="fragment-section">
           <h3 id="verification">Verification and provenance<a class="fragment-link" href="#verification" aria-label="Link to this section">#</a></h3>
           <div class="status-grid">
             <div>
@@ -417,10 +450,14 @@
             </div>
           </div>
 
+          </section>
+          <section class="fragment-section">
           <h3 id="formal-scope">Formal scope<a class="fragment-link" href="#formal-scope" aria-label="Link to this section">#</a></h3>
           <p>Lean proves the complete instance-level equivalences. The canonical declarations are <a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/main/MatrixMortality/Undecidability/BinaryProblems.lean"><code>nearyScalarZero62_hasZero_iff_tagHaltsFrom</code></a>, <code>nearyScalarZero62_hasZeroStar_iff_tagHaltsFrom</code>, <a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/main/MatrixMortality/Undecidability/PrefixProblems.lean"><code>nearyMortality102_mortal_iff_tagHaltsFrom</code></a>, and <code>nearyMortality10Plus_mortal_iff_tagHaltsFrom</code>.</p>
           <p>The computable reduction from mathlib’s code-halting predicate to the restricted binary-tag system is machine-checked; Neary’s construction is provenance rather than an imported theorem <a href="#ref-neary-2015">[Neary 2015]</a>. Lean proves both target constructors primitive recursive, the reductions <code>codeHalts_reduces_scalarZero62</code> and <code>codeHalts_reduces_mortality102</code>, and the corresponding noncomputability theorems. The R<sub>7</sub>(2) transport and bibliographic priority claims remain outside Lean.</p>
 
+          </section>
+          <section class="fragment-section">
           <h3 id="priority">Priority<a class="fragment-link" href="#priority" aria-label="Link to this section">#</a></h3>
           <p>To our knowledge, after public-literature searches through 24 July 2026, no prior proof establishes Z<sub>6</sub>(2), R<sub>7</sub>(2), or M<sub>10</sub>(2). CHHN’s corresponding established bounds are Z<sub>9</sub>(2), R<sub>10</sub>(2), and M<sub>15</sub>(2) <a href="#ref-chhn-2014">[Cassaigne et al. 2014]</a>. Prefix coding, alphabet reduction, and scalar-to-corner transport are prior art. No source was found for the shared dimension-six partial channel or the ten-dimensional common-image restriction and its appended-letter mortality converse. “No prior proof found” is limited to publicly discoverable work.</p>
 
@@ -429,6 +466,8 @@
             <li><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/main/FORMALIZATION.md"><b>Formalization map</b>Principal declarations, exact axiom sets, trusted base, and remaining target-wrapper debt</a></li>
           </ul>
 
+          </section>
+          <section class="fragment-section">
           <h3 id="sources">References<a class="fragment-link" href="#sources" aria-label="Link to this section">#</a></h3>
           <ol class="references">
             <li id="ref-fixed-boundary"><span>GPT-5.6 Sol, elicited by @eternalism_4eva, <a href="/math/matrix_mortality/m3_5/#source-lemma"><cite>Fixed-Boundary Correspondence</cite></a>, 2026. The four-role fixed-boundary family.</span></li>
@@ -437,6 +476,7 @@
             <li id="ref-chhn-2014"><span>Julien Cassaigne, Vesa Halava, Tero Harju, and François Nicolas, <a href="https://arxiv.org/abs/1404.0644"><cite>Tighter Undecidability Bounds for Matrix Mortality, Zero-in-the-Corner Problems, and More</cite></a>, 2014. Prior bounds and standard transports.</span></li>
             <li id="ref-rote-2025"><span>Günter Rote, <a href="https://doi.org/10.4230/LIPIcs.MFCS.2025.86"><cite>Probabilistic Finite Automaton Emptiness Is Undecidable for a Fixed Automaton</cite></a>, MFCS 2025. Related binary prefix decoding with explicit treatment of unfinished codewords.</span></li>
           </ol>
+          </section>
         </details>
       </article>
     </main>
