@@ -14,7 +14,7 @@ from collections import defaultdict
 from dataclasses import dataclass
 from enum import StrEnum
 from pathlib import Path
-from typing import Never, TypeVar, cast
+from typing import Never, TypeVar, assert_never, cast
 
 
 class NodeKind(StrEnum):
@@ -304,6 +304,26 @@ def display(value: StrEnum) -> str:
     return value.value.replace("-", " ").title()
 
 
+def kind_symbol(kind: NodeKind) -> str:
+    match kind:
+        case NodeKind.DEFINITION:
+            return "≔"
+        case NodeKind.CONSTRUCTION:
+            return "⧉"
+        case NodeKind.LEMMA:
+            return "⊢"
+        case NodeKind.REDUCTION:
+            return "≤"
+        case NodeKind.THEOREM:
+            return "∎"
+        case NodeKind.OBSTRUCTION:
+            return "⊥"
+        case NodeKind.WITNESS:
+            return "∃"
+        case _:
+            assert_never(kind)
+
+
 def render_toc(views: tuple[View, ...]) -> str:
     lines = [
         TOC_BEGIN,
@@ -330,16 +350,17 @@ def render_node(
     node: Node, nodes: dict[str, Node], used_by: dict[str, tuple[str, ...]]
 ) -> str:
     lines = [
-        f'              <li class="module-node node-kind-{node.kind.value}" '
+        '              <li class="module-node" '
         f'data-node-id="{html.escape(node.id, quote=True)}">',
+        '                <p class="module-kind">',
+        '                  <span class="module-kind-symbol" aria-hidden="true">'
+        f"{html.escape(kind_symbol(node.kind))}</span>{display(node.kind)}",
+        "                </p>",
         '                <p class="module-node-head">',
-        f'                  <span class="module-kind">{display(node.kind)}</span>',
         f'                  <a href="{html.escape(node.href, quote=True)}">'
         f"<b>{html.escape(node.title)}</b></a>",
         "                </p>",
         f'                <p class="module-summary">{html.escape(node.summary)}</p>',
-        f'                <p class="module-meta">{display(node.prominence)} · '
-        f"{display(node.assurance)} · {display(node.origin)}</p>",
     ]
     relations: list[tuple[str, tuple[str, ...]]] = []
     if node.requires:
@@ -386,9 +407,6 @@ def render_graph(graph: Graph, nodes: dict[str, Node]) -> str:
         "construction, a lemma, a reduction (a correctness-preserving "
         "translation), a theorem (a principal conclusion), an obstruction (a "
         "proved limit), or a witness.</dd></div>",
-        "            <div><dt>Metadata</dt><dd>The tags under each box: how "
-        "central it is, how far its proof is verified (Lean-formalized or "
-        "hand-audited), and whether it is new here or prior work.</dd></div>",
         "            <div><dt>Edges</dt><dd>Requires and Used by are the proof "
         "dependencies; other named links, such as Instantiates, are "
         "cross-references, not dependencies.</dd></div>",
