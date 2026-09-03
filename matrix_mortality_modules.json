@@ -1,0 +1,534 @@
+{
+  "version": 1,
+  "collection": "matrix_mortality",
+  "nodes": [
+    {
+      "id": "mm/matrix-mortality",
+      "kind": "definition",
+      "prominence": "supporting",
+      "origin": "literature",
+      "assurance": "audited",
+      "status": "established",
+      "title": "Matrix mortality",
+      "summary": "Nonempty zero products in a finite family of integer matrices, with dimension and generator count fixed.",
+      "href": "/math/matrix_mortality/#definition",
+      "requires": [],
+      "relations": []
+    },
+    {
+      "id": "mm/word-pair-representation",
+      "kind": "definition",
+      "prominence": "supporting",
+      "origin": "literature",
+      "assurance": "formalized",
+      "status": "established",
+      "title": "Word-pair representation",
+      "summary": "A three-dimensional matrix morphism that records two ternary words and detects their equality in one coefficient.",
+      "href": "/math/matrix_mortality/m4_4/#word-pair-matrices",
+      "requires": [],
+      "relations": []
+    },
+    {
+      "id": "mm/fixed-boundary-correspondence",
+      "kind": "theorem",
+      "prominence": "load-bearing",
+      "origin": "project",
+      "assurance": "formalized",
+      "status": "established",
+      "title": "Fixed-boundary correspondence",
+      "summary": "Four nonerasing word pairs recognize restricted tag halting when the terminal marker is fixed rather than selectable.",
+      "href": "/math/matrix_mortality/m3_5/#source-lemma",
+      "requires": [
+        "mm/word-pair-representation"
+      ],
+      "relations": []
+    },
+    {
+      "id": "mm/paired-scalar-series",
+      "kind": "construction",
+      "prominence": "load-bearing",
+      "origin": "project",
+      "assurance": "formalized",
+      "status": "established",
+      "title": "Paired scalar series",
+      "summary": "Two data controls and one phase toggle realize the complete fixed-boundary zero language in four states.",
+      "href": "/math/matrix_mortality/paired_scalar_series/#result",
+      "requires": [
+        "mm/fixed-boundary-correspondence",
+        "mm/word-pair-representation"
+      ],
+      "relations": []
+    },
+    {
+      "id": "mm/paired-role-compression",
+      "kind": "reduction",
+      "prominence": "load-bearing",
+      "origin": "project",
+      "assurance": "formalized",
+      "status": "established",
+      "title": "Paired-role compression",
+      "summary": "An agreement subspace identifies two phase copies and reduces four role actions to three controls.",
+      "href": "/math/matrix_mortality/m4_4/#paired-compression",
+      "requires": [
+        "mm/paired-scalar-series"
+      ],
+      "relations": []
+    },
+    {
+      "id": "mm/rank-one-separator",
+      "kind": "reduction",
+      "prominence": "load-bearing",
+      "origin": "mixed",
+      "assurance": "formalized",
+      "status": "established",
+      "title": "Rank-one separator",
+      "summary": "Adjoining one outer product turns a vanishing boundary coefficient into unrestricted matrix mortality.",
+      "href": "/math/matrix_mortality/m3_5/#five-matrices",
+      "requires": [
+        "mm/matrix-mortality"
+      ],
+      "relations": [
+        {
+          "kind": "instantiates",
+          "target": "mm/interface-compression"
+        }
+      ]
+    },
+    {
+      "id": "mm/interface-compression",
+      "kind": "reduction",
+      "prominence": "load-bearing",
+      "origin": "project",
+      "assurance": "formalized",
+      "status": "established",
+      "title": "Interface compression",
+      "summary": "Transitions and factored cuts are mortal exactly when the transitions are mortal or one nonempty interface-bridge path vanishes.",
+      "href": "/math/matrix_mortality/interface_compression/#result",
+      "requires": [
+        "mm/matrix-mortality"
+      ],
+      "relations": []
+    },
+    {
+      "id": "mm/singular-return-compression",
+      "kind": "reduction",
+      "prominence": "load-bearing",
+      "origin": "project",
+      "assurance": "formalized",
+      "status": "established",
+      "title": "Singular-return compression",
+      "summary": "One transition and one singular cut reduce arbitrary physical products to products of the complete return family.",
+      "href": "/math/matrix_mortality/interface_compression/#single-cut",
+      "requires": [
+        "mm/interface-compression"
+      ],
+      "relations": []
+    },
+    {
+      "id": "mm/shared-partial-binary-compiler",
+      "kind": "construction",
+      "prominence": "load-bearing",
+      "origin": "project",
+      "assurance": "formalized",
+      "status": "established",
+      "title": "Shared-partial binary compiler",
+      "summary": "A shared unfinished word channel compiles the four roles into two binary controls in six dimensions.",
+      "href": "/math/matrix_mortality/binary_compilers/#scalar-six",
+      "requires": [
+        "mm/paired-scalar-series"
+      ],
+      "relations": []
+    },
+    {
+      "id": "mm/prefix-transducer-packing",
+      "kind": "reduction",
+      "prominence": "load-bearing",
+      "origin": "mixed",
+      "assurance": "formalized",
+      "status": "established",
+      "title": "Prefix-transducer packing",
+      "summary": "A synchronizing complete prefix code trades generator labels for decoder state while preserving unrestricted mortality.",
+      "href": "/math/matrix_mortality/binary_compilers/#prefix-machine",
+      "requires": [
+        "mm/fixed-boundary-correspondence"
+      ],
+      "relations": []
+    },
+    {
+      "id": "mm/common-image-restriction",
+      "kind": "reduction",
+      "prominence": "load-bearing",
+      "origin": "project",
+      "assurance": "formalized",
+      "status": "established",
+      "title": "Common-image restriction",
+      "summary": "A decoder family is restricted to its common invariant image, with an appended-letter converse excluding new zero products.",
+      "href": "/math/matrix_mortality/binary_compilers/#common-image",
+      "requires": [
+        "mm/prefix-transducer-packing"
+      ],
+      "relations": []
+    },
+    {
+      "id": "mm/tilted-separator",
+      "kind": "construction",
+      "prominence": "load-bearing",
+      "origin": "project",
+      "assurance": "formalized",
+      "status": "established",
+      "title": "Tilted separator",
+      "summary": "An injective length-tilted ternary code changes the nonzero coefficients needed by the realization while preserving the complete zero language.",
+      "href": "/math/matrix_mortality/m9_2/#tilted-separator",
+      "requires": [
+        "mm/paired-scalar-series"
+      ],
+      "relations": []
+    },
+    {
+      "id": "mm/nine-dimensional-return-realization",
+      "kind": "construction",
+      "prominence": "load-bearing",
+      "origin": "project",
+      "assurance": "formalized",
+      "status": "established",
+      "title": "Nine-dimensional return realization",
+      "summary": "Two length-three nilpotent chains, one length-two chain, and one eigenline realize three exceptional moments and a geometric tail.",
+      "href": "/math/matrix_mortality/m9_2/#nine-state-chart",
+      "requires": [
+        "mm/tilted-separator"
+      ],
+      "relations": []
+    },
+    {
+      "id": "mm/tilted-geometric-rank-floor",
+      "kind": "obstruction",
+      "prominence": "supporting",
+      "origin": "project",
+      "assurance": "formalized",
+      "status": "established",
+      "title": "Tilted-geometric rank floor",
+      "summary": "A uniform nonsingular Hankel minor forces nine dimensions for every exact retuning in the present one-mode geometric-tail family.",
+      "href": "/math/matrix_mortality/m9_2/#consequences",
+      "requires": [
+        "mm/tilted-separator"
+      ],
+      "relations": []
+    },
+    {
+      "id": "mm/denominator-clearing",
+      "kind": "lemma",
+      "prominence": "supporting",
+      "origin": "mixed",
+      "assurance": "formalized",
+      "status": "established",
+      "title": "Effective denominator clearing",
+      "summary": "Independent nonzero generator scalings convert a rational family to integer matrices while preserving and reflecting every zero product.",
+      "href": "/math/matrix_mortality/m9_2/#unreduced-clearing",
+      "requires": [
+        "mm/matrix-mortality"
+      ],
+      "relations": []
+    },
+    {
+      "id": "mm/valuation-guard",
+      "kind": "construction",
+      "prominence": "load-bearing",
+      "origin": "project",
+      "assurance": "formalized",
+      "status": "established",
+      "title": "Valuation guard",
+      "summary": "A three-mode return family forces one legal wait by a p-adic valuation and sends every wrong wait into a permanent trap.",
+      "href": "/math/matrix_mortality/m3_2_return_guard/#result",
+      "requires": [
+        "mm/singular-return-compression"
+      ],
+      "relations": []
+    },
+    {
+      "id": "mm/valuation-barriers",
+      "kind": "obstruction",
+      "prominence": "supporting",
+      "origin": "project",
+      "assurance": "formalized",
+      "status": "established",
+      "title": "Valuation barriers",
+      "summary": "Parity, Smith isolation, and a universal-boundary divisibility wall exclude broad mortal strata of the guarded return family.",
+      "href": "/math/matrix_mortality/m3_2_return_guard/#parity-smith",
+      "requires": [
+        "mm/valuation-guard"
+      ],
+      "relations": []
+    },
+    {
+      "id": "mm/projective-incidence",
+      "kind": "definition",
+      "prominence": "supporting",
+      "origin": "mixed",
+      "assurance": "formalized",
+      "status": "established",
+      "title": "Two-generator projective incidence",
+      "summary": "Given two rational projectivities and two boundary rays, ask whether some control word sends the source ray onto the target hyperplane.",
+      "href": "/math/matrix_mortality/shortcut_collatz_incidence/#projective-incidence",
+      "requires": [],
+      "relations": []
+    },
+    {
+      "id": "mm/shortcut-collatz-reachability",
+      "kind": "definition",
+      "prominence": "supporting",
+      "origin": "literature",
+      "assurance": "formalized",
+      "status": "established",
+      "title": "Shortcut-Collatz reachability",
+      "summary": "Finite reachability of 1 under halving on even integers and (3n+1)/2 on odd integers.",
+      "href": "/math/matrix_mortality/shortcut_collatz_incidence/#shortcut-map",
+      "requires": [],
+      "relations": []
+    },
+    {
+      "id": "mm/shortcut-collatz-incidence",
+      "kind": "reduction",
+      "prominence": "load-bearing",
+      "origin": "project",
+      "assurance": "formalized",
+      "status": "established",
+      "title": "Shortcut-Collatz incidence",
+      "summary": "Two fixed Möbius transformations, with target-dependent boundary data and central scalings, recognize pointwise shortcut-Collatz reaches-one exactly.",
+      "href": "/math/matrix_mortality/shortcut_collatz_incidence/#result",
+      "requires": [
+        "mm/projective-incidence",
+        "mm/shortcut-collatz-reachability"
+      ],
+      "relations": []
+    },
+    {
+      "id": "mm/projective-incidence-compiler",
+      "kind": "reduction",
+      "prominence": "load-bearing",
+      "origin": "project",
+      "assurance": "formalized",
+      "status": "established",
+      "title": "Rank-two projective-incidence compiler",
+      "summary": "Every generic two-generator projective-incidence instance compiles to two rational 3 × 3 matrices of rank exactly two, with mortality equivalent to incidence zero.",
+      "href": "/math/matrix_mortality/shortcut_collatz_incidence/#mortality-compiler",
+      "requires": [
+        "mm/projective-incidence"
+      ],
+      "relations": [
+        {
+          "kind": "instantiates",
+          "target": "mm/interface-compression"
+        }
+      ]
+    },
+    {
+      "id": "mm/m3-5",
+      "kind": "theorem",
+      "prominence": "endpoint",
+      "origin": "project",
+      "assurance": "formalized",
+      "status": "established",
+      "title": "M₃(5) is undecidable",
+      "summary": "Four fixed-boundary payload matrices and one repeated rank-one separator give five 3 × 3 integer matrices.",
+      "href": "/math/matrix_mortality/m3_5/#result",
+      "requires": [
+        "mm/fixed-boundary-correspondence",
+        "mm/rank-one-separator"
+      ],
+      "relations": []
+    },
+    {
+      "id": "mm/m4-4",
+      "kind": "theorem",
+      "prominence": "endpoint",
+      "origin": "project",
+      "assurance": "formalized",
+      "status": "established",
+      "title": "M₄(4) is undecidable",
+      "summary": "Paired-role compression gives three 4 × 4 scalar controls; one rank-one separator converts their zero coefficient to mortality.",
+      "href": "/math/matrix_mortality/m4_4/#result",
+      "requires": [
+        "mm/paired-role-compression",
+        "mm/rank-one-separator"
+      ],
+      "relations": []
+    },
+    {
+      "id": "mm/z6-2",
+      "kind": "theorem",
+      "prominence": "endpoint",
+      "origin": "project",
+      "assurance": "formalized",
+      "status": "established",
+      "title": "Z₆(2) is undecidable",
+      "summary": "The shared-partial compiler preserves the paired coefficient under every binary word in dimension six.",
+      "href": "/math/matrix_mortality/binary_compilers/#result",
+      "requires": [
+        "mm/shared-partial-binary-compiler"
+      ],
+      "relations": []
+    },
+    {
+      "id": "mm/r7-2",
+      "kind": "theorem",
+      "prominence": "endpoint",
+      "origin": "project",
+      "assurance": "audited",
+      "status": "established",
+      "title": "R₇(2) is undecidable",
+      "summary": "The scalar-to-corner transport converts the six-dimensional two-generator scalar theorem to a seven-dimensional corner theorem.",
+      "href": "/math/matrix_mortality/binary_compilers/#consequences",
+      "requires": [
+        "mm/z6-2"
+      ],
+      "relations": []
+    },
+    {
+      "id": "mm/m10-2",
+      "kind": "theorem",
+      "prominence": "endpoint",
+      "origin": "project",
+      "assurance": "formalized",
+      "status": "established",
+      "title": "M₁₀(2) is undecidable",
+      "summary": "A complete binary prefix decoder followed by common-image restriction gives two 10 × 10 integer matrices.",
+      "href": "/math/matrix_mortality/binary_compilers/#mortality-ten",
+      "requires": [
+        "mm/prefix-transducer-packing",
+        "mm/common-image-restriction"
+      ],
+      "relations": []
+    },
+    {
+      "id": "mm/m9-2",
+      "kind": "theorem",
+      "prominence": "endpoint",
+      "origin": "project",
+      "assurance": "formalized",
+      "status": "established",
+      "title": "M₉(2) is undecidable",
+      "summary": "A zero-language-equivalent separator and a nine-dimensional return realization give a primitive-recursive pair of integer matrices.",
+      "href": "/math/matrix_mortality/m9_2/#result",
+      "requires": [
+        "mm/paired-scalar-series",
+        "mm/tilted-separator",
+        "mm/nine-dimensional-return-realization",
+        "mm/singular-return-compression",
+        "mm/denominator-clearing"
+      ],
+      "relations": []
+    },
+    {
+      "id": "mm/m6-3",
+      "kind": "theorem",
+      "prominence": "endpoint",
+      "origin": "mixed",
+      "assurance": "formalized",
+      "status": "established",
+      "title": "M₆(3) is undecidable",
+      "summary": "Prefix-transducer packing transports the five-generator dimension-three theorem to three generators in dimension six.",
+      "href": "/math/matrix_mortality/m3_5/#result",
+      "requires": [
+        "mm/m3-5",
+        "mm/prefix-transducer-packing"
+      ],
+      "relations": []
+    },
+    {
+      "id": "mm/m12-2",
+      "kind": "theorem",
+      "prominence": "endpoint",
+      "origin": "mixed",
+      "assurance": "formalized",
+      "status": "established",
+      "title": "M₁₂(2) is undecidable",
+      "summary": "The binary form of prefix-transducer packing transports M₃(5) to two generators in dimension twelve.",
+      "href": "/math/matrix_mortality/m3_5/#result",
+      "requires": [
+        "mm/m3-5",
+        "mm/prefix-transducer-packing"
+      ],
+      "relations": []
+    }
+  ],
+  "views": [
+    {
+      "id": "foundations",
+      "title": "Foundations",
+      "summary": "The common problem and representation language.",
+      "nodes": [
+        "mm/matrix-mortality",
+        "mm/word-pair-representation",
+        "mm/projective-incidence",
+        "mm/shortcut-collatz-reachability"
+      ]
+    },
+    {
+      "id": "source-recognition",
+      "title": "Source Recognition",
+      "summary": "The fixed-boundary source and its reusable scalar realization.",
+      "nodes": [
+        "mm/fixed-boundary-correspondence",
+        "mm/paired-scalar-series",
+        "mm/paired-role-compression"
+      ]
+    },
+    {
+      "id": "target-compression",
+      "title": "Target Compression",
+      "summary": "Reductions that turn scalar or interface zeros into unrestricted matrix products.",
+      "nodes": [
+        "mm/interface-compression",
+        "mm/rank-one-separator",
+        "mm/singular-return-compression",
+        "mm/common-image-restriction",
+        "mm/denominator-clearing"
+      ]
+    },
+    {
+      "id": "binary-and-return-constructions",
+      "title": "Binary and Return Constructions",
+      "summary": "Dimension-saving realizations built on the two shared hubs.",
+      "nodes": [
+        "mm/shared-partial-binary-compiler",
+        "mm/prefix-transducer-packing",
+        "mm/tilted-separator",
+        "mm/nine-dimensional-return-realization",
+        "mm/valuation-guard"
+      ]
+    },
+    {
+      "id": "arithmetic-incidence",
+      "title": "Arithmetic Incidence",
+      "summary": "A proved arithmetic language inside generic two-generator projective incidence.",
+      "nodes": [
+        "mm/shortcut-collatz-incidence",
+        "mm/projective-incidence-compiler"
+      ]
+    },
+    {
+      "id": "established-obstructions",
+      "title": "Established Obstructions",
+      "summary": "Formal limits on particular construction families, without claims about unresolved mortality cells.",
+      "nodes": [
+        "mm/tilted-geometric-rank-floor",
+        "mm/valuation-barriers"
+      ]
+    },
+    {
+      "id": "endpoint-theorems",
+      "title": "Endpoint Theorems",
+      "summary": "Undecidability statements and their proved transports.",
+      "nodes": [
+        "mm/m3-5",
+        "mm/m4-4",
+        "mm/z6-2",
+        "mm/r7-2",
+        "mm/m6-3",
+        "mm/m9-2",
+        "mm/m10-2",
+        "mm/m12-2"
+      ]
+    }
+  ]
+}

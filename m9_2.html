@@ -17,6 +17,7 @@
       <p><strong>Under review</strong></p>
       <p>Singular Return Compression</p>
       <p class="byline">GPT-5.6 Sol · elicited by <a href="https://x.com/eternalism_4eva">@eternalism_4eva</a></p>
+      <p class="module-meta"><b>Theorem</b> · endpoint · formalized</p>
     </div>
   </header>
 
@@ -81,11 +82,16 @@
 
     <main id="article">
       <article>
+        <nav class="module-context" aria-label="Module relations">
+          <p><b>Requires</b> the <a href="/math/matrix_mortality/paired_scalar_series/">paired scalar series</a> and <a href="/math/matrix_mortality/interface_compression/#single-cut">singular-return compression</a>.</p>
+          <p><b>Establishes</b> the <a href="#tilted-separator">tilted separator</a>, <a href="#nine-state-chart">nine-dimensional return realization</a>, and M<sub>9</sub>(2).</p>
+        </nav>
+
         <details class="major-section">
           <summary><h2 id="known-stuff">Known Stuff<a class="fragment-link" href="#known-stuff" aria-label="Link to this section">#</a></h2></summary>
 
           <h3 id="problem-convention">Problem convention<a class="fragment-link" href="#problem-convention" aria-label="Link to this section">#</a></h3>
-          <p>For positive integers <var>d</var> and <var>k</var>, M<sub><var>d</var></sub>(<var>k</var>) is mortality for a family of at most <var>k</var> integer <var>d</var> × <var>d</var> matrices. The formal encoding uses <var>k</var> named matrices; a smaller nonempty family gives an equivalent tuple by repeating one generator. Products are read from left to right, and the empty product is excluded.</p>
+          <p>For positive integers <var>d</var> and <var>k</var>, <a class="glossary-term" href="/math/matrix_mortality/glossary/#bounded-mortality" title="Matrix mortality with dimension d and generator count k fixed.">M<sub><var>d</var></sub>(<var>k</var>)</a> is mortality for a family of at most <var>k</var> integer <var>d</var> × <var>d</var> matrices. The formal encoding uses <var>k</var> named matrices; a smaller nonempty family gives an equivalent tuple by repeating one generator. Products are read from left to right, and the empty product is excluded.</p>
           <div class="formula plain">
             <math display="block">
               <mrow>
@@ -104,7 +110,7 @@
           <p>The formal target is the noncomputability of this predicate at <var>d</var> = 9 and <var>k</var> = 2, with integer entries represented transparently as finite functions.</p>
 
           <h3 id="paired-source">Paired scalar zero language<a class="fragment-link" href="#paired-source" aria-label="Link to this section">#</a></h3>
-          <p>The <a href="/math/matrix_mortality/m3_5/">fixed-boundary construction</a> compiles a restricted binary tag system into a scalar series over three paired controls: a phase toggle <var>T</var> and data roles <var>D</var><sub><span class="word">b</span></sub>, <var>D</var><sub><span class="word">c</span></sub>. Let <var>β</var> be the deletion width and <var>B</var> the binary body. If <var>β</var> &gt; 2, <var>β</var> − 1 ≤ |<var>B</var>|, and <var>β</var> − 1 divides |<var>B</var>|, then a nonempty control word has zero coefficient exactly when the corresponding tag instance halts.</p>
+          <p>The <a href="/math/matrix_mortality/paired_scalar_series/">paired scalar series</a> compiles a restricted binary tag system into three controls: a phase toggle <var>T</var> and data roles <var>D</var><sub><span class="word">b</span></sub>, <var>D</var><sub><span class="word">c</span></sub>. Let <var>β</var> be the deletion width and <var>B</var> the binary body. If <var>β</var> &gt; 2, <var>β</var> − 1 ≤ |<var>B</var>|, and <var>β</var> − 1 divides |<var>B</var>|, then a nonempty control word has zero coefficient exactly when the corresponding tag instance halts.</p>
           <div class="formula plain">
             <math display="block">
               <mrow>
@@ -117,10 +123,11 @@
             </math>
           </div>
           <p>The tag predicate uses output map <code>tagOutput B</code> and initial queue <code>B.drop (β − 1) ++ [b]</code>. The nine-dimensional realization below additionally requires <span class="word">b</span> ∈ <var>B</var>. The fixed universal reduction produces bodies beginning with <span class="word">b</span>, and its width, length, and divisibility invariants supply the other hypotheses. <a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/main/MatrixMortality/Undecidability/UniversalNeary.lean#L20-L33"><code>tagHaltsFrom_iff_codeHalts</code></a> identifies its tag instance with mathlib's universal partial-recursive program halting at input zero.</p>
-          <p>The three controls act on a <a href="/math/matrix_mortality/m4_4/">four-dimensional paired phase space</a>. The usual scalar-to-mortality construction adjoins the rank-one separator <var>u</var><var>x</var>. A product containing that separator is zero exactly when the intervening paired coefficient vanishes.</p>
+          <p>The three controls act on the <a href="/math/matrix_mortality/paired_scalar_series/#phase-quotient">four-dimensional paired phase space</a>. The <a href="/math/matrix_mortality/interface_compression/#rank-one">rank-one interface</a> adjoins the separator <var>u</var><var>x</var>. A product containing that separator is zero exactly when the intervening paired coefficient vanishes.</p>
 
           <h3 id="return-interface">Return families<a class="fragment-link" href="#return-interface" aria-label="Link to this section">#</a></h3>
-          <p>Let <var>A</var> be a square transition, <var>U</var> an input map, and <var>O</var> an output map. The physical alphabet has only the transition and the cut <var>C</var> = <var>UO</var>. Runs of transitions between cuts expose the return matrices</p>
+          <p>This is the single-cut specialization of <a href="/math/matrix_mortality/interface_compression/#single-cut">interface compression</a>.</p>
+          <p>Let <var>A</var> be a square transition, <var>U</var> an input map, and <var>O</var> an output map. The physical alphabet has only the transition and the cut <var>C</var> = <var>UO</var>. Runs of transitions between cuts expose the <a class="glossary-term" href="/math/matrix_mortality/glossary/#return-matrix-family" title="The interface matrices OAⁿU exposed between consecutive cuts.">return matrices</a></p>
           <div class="formula plain">
             <math display="block">
               <mrow>
@@ -134,7 +141,7 @@
           <p>Return realizations let one binary matrix pair present a larger interface alphabet. The difficulty is the converse: arbitrary products may begin or end inside a transition run, and a pure power of <var>A</var> must not vanish.</p>
 
           <h3 id="previous-bound">Previous two-generator bound<a class="fragment-link" href="#previous-bound" aria-label="Link to this section">#</a></h3>
-          <p>The <a href="/math/matrix_mortality/binary_compilers/#mortality-ten">complete prefix compiler</a> gave two 10 × 10 integer matrices. Its word products span the full 10 × 10 matrix algebra, so every exact linear realization obtained by placing nonzero input and output maps around that family still needs ten states. This obstructs exact realization of the old coefficient series, not replacement of its nonzero values. The construction below preserves exactly which words vanish while changing the other coefficients.</p>
+          <p>The <a href="/math/matrix_mortality/binary_compilers/#mortality-ten">complete prefix compiler</a> gave two 10 × 10 integer matrices. Its word products span the full 10 × 10 matrix algebra, so every exact linear realization obtained by placing nonzero input and output maps around that family still needs ten dimensions. This obstructs exact realization of the old coefficient series, not replacement of its nonzero values. The construction below preserves exactly which words vanish while changing the other coefficients.</p>
         </details>
 
         <details class="major-section">
@@ -302,7 +309,7 @@
           </div>
 
           <h3 id="singular-return">Singular return compression<a class="fragment-link" href="#singular-return" aria-label="Link to this section">#</a></h3>
-          <p>The physical generators are <var>A</var> and the singular cut <var>C</var> = <var>UO</var>. The cut need not be invertible. The general theorem <a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/main/MatrixMortality/SingularReturnFamily.lean#L42-L108"><code>pairGenerator_isMortal_iff_returnFamily</code></a> assumes only that <var>A</var><sup><var>n</var></sup> ≠ 0 for every <var>n</var> ∈ ℕ and gives an exact equivalence:</p>
+          <p>The physical generators are <var>A</var> and the singular cut <var>C</var> = <var>UO</var>. The cut need not be invertible. The <a href="/math/matrix_mortality/interface_compression/#single-cut">single-cut interface theorem</a>, formalized as <a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/main/MatrixMortality/SingularReturnFamily.lean#L42-L108"><code>pairGenerator_isMortal_iff_returnFamily</code></a>, assumes only that <var>A</var><sup><var>n</var></sup> ≠ 0 for every <var>n</var> ∈ ℕ and gives an exact equivalence:</p>
           <div class="formula plain">
             <math display="block">
               <mrow>
@@ -461,7 +468,7 @@
             </div>
             <div>
               <b><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/main/MatrixMortality/TiltedGeometricHankel.lean#L383-L412">Exact rank-nine benchmark</a></b>
-              <p>The checked compiler is identified with the benchmark moment family; a uniform 9 × 9 Hankel minor theorem excludes every eight-state exact retuning in that family.</p>
+              <p>The checked compiler is identified with the benchmark moment family; a uniform 9 × 9 Hankel minor theorem excludes every eight-dimensional exact retuning in that family.</p>
             </div>
             <div>
               <b><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/main/verification/axioms.txt">Transitive axioms</a></b>
@@ -479,14 +486,12 @@
           <ul class="artifact-list" aria-label="Proof artifacts">
             <li><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math"><b>Complete source repository</b>Lean development, strict verification gate, reference corpus, and publication sources</a></li>
             <li><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/main/FORMALIZATION.md"><b>Formalization map</b>Principal declarations, exact axiom sets, trust boundary, and independent audits</a></li>
-            <li><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/main/SALVAGE.md#mm-c05-tilted-separator-rank-nine-transfer"><b>MM-C05 registry record</b>Reusable zero-language, return-compression, and effective-fraction components</a></li>
-            <li><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/main/SALVAGE.md#mm-o28-tilted-geometric-tail-rank-nine-wall"><b>MM-O28 boundary record</b>Exact scope of the benchmark rank-nine lower bound and the surviving M<sub>8</sub>(2) routes</a></li>
           </ul>
 
           <h3 id="sources">References<a class="fragment-link" href="#sources" aria-label="Link to this section">#</a></h3>
           <ol class="references">
-            <li id="ref-fixed-boundary"><span>GPT-5.6 Sol, elicited by @eternalism_4eva, <a href="/math/matrix_mortality/m3_5/"><cite>Fixed-Boundary Correspondence</cite></a>, 2026. The restricted-tag source and exact paired zero language.</span></li>
-            <li id="ref-paired-role"><span>GPT-5.6 Sol, elicited by @eternalism_4eva, <a href="/math/matrix_mortality/m4_4/"><cite>Paired-Role Compression</cite></a>, 2026. The paired phase representation and scalar-to-mortality interface.</span></li>
+            <li id="ref-fixed-boundary"><span>GPT-5.6 Sol, elicited by @eternalism_4eva, <a href="/math/matrix_mortality/m3_5/#source-lemma"><cite>Fixed-Boundary Correspondence</cite></a>, 2026. The restricted-tag source.</span></li>
+            <li id="ref-paired-role"><span>GPT-5.6 Sol, elicited by @eternalism_4eva, <a href="/math/matrix_mortality/paired_scalar_series/"><cite>The Paired Scalar Series</cite></a>, 2026. The exact paired zero language and four-dimensional phase representation.</span></li>
             <li id="ref-binary"><span>GPT-5.6 Sol, elicited by @eternalism_4eva, <a href="/math/matrix_mortality/binary_compilers/"><cite>Binary Compilers</cite></a>, 2026. The previous M<sub>10</sub>(2) bound and its public-literature audit.</span></li>
             <li id="ref-neary-2015"><span>Turlough Neary, <a href="https://doi.org/10.4230/LIPIcs.STACS.2015.649"><cite>Undecidability in Binary Tag Systems and the Post Correspondence Problem for Five Pairs of Words</cite></a>, STACS 2015. The restricted binary-tag source.</span></li>
             <li id="ref-chhn-2014"><span>Julien Cassaigne, Vesa Halava, Tero Harju, and François Nicolas, <a href="https://arxiv.org/abs/1404.0644"><cite>Tighter Undecidability Bounds for Matrix Mortality, Zero-in-the-Corner Problems, and More</cite></a>, 2014. Prior bounds and standard transports.</span></li>

@@ -63,6 +63,7 @@
               <li><a href="#direct-sum">Direct sum and block matrix</a></li>
               <li><a href="#exact-order-prime">Exact-order prime and primitive divisor</a></li>
               <li><a href="#exterior-wait">Exterior wait and pure transition word</a></li>
+              <li><a href="#factored-cut">Factored cut</a></li>
               <li><a href="#finite-falsifier">Finite falsifier</a></li>
               <li><a href="#fixed-boundary-match">Fixed-boundary match</a></li>
               <li><a href="#formal-scope">Formal scope</a></li>
@@ -72,6 +73,9 @@
               <li><a href="#generalized-post-correspondence">Generalized Post correspondence problem</a></li>
               <li><a href="#hankel-rank">Hankel matrix and Hankel rank</a></li>
               <li><a href="#input-output-maps">Input and output maps</a></li>
+              <li><a href="#interface-bridge">Interface bridge</a></li>
+              <li><a href="#interface-compression">Interface compression</a></li>
+              <li><a href="#interface-space">Interface space</a></li>
               <li><a href="#invariant-subspace-quotient">Invariant subspace and quotient</a></li>
               <li><a href="#linear-representation">Linear representation</a></li>
               <li><a href="#live-region-trap">Live region and trap</a></li>
@@ -90,14 +94,17 @@
               <li><a href="#padic-unit">p-adic unit</a></li>
               <li><a href="#padic-valuation">p-adic valuation</a></li>
               <li><a href="#paired-role-compression">Paired-role compression</a></li>
+              <li><a href="#paired-scalar-series">Paired scalar series</a></li>
               <li><a href="#parameter-monotonicity">Parameter monotonicity and padding</a></li>
               <li><a href="#physical-family">Physical family</a></li>
               <li><a href="#post-correspondence">Post correspondence problem</a></li>
               <li><a href="#prefix-code">Prefix code</a></li>
               <li><a href="#primitive-recursive-reduction">Primitive-recursive reduction</a></li>
+              <li><a href="#projective-incidence">Projective incidence</a></li>
               <li><a href="#projective-line">Projective line and projective point</a></li>
               <li><a href="#projectivization">Projectivization</a></li>
               <li><a href="#rank-kernel-image">Rank, kernel, and image</a></li>
+              <li><a href="#rank-profile">Rank profile</a></li>
               <li><a href="#ready-point-legal-wait">Ready point and legal wait</a></li>
               <li><a href="#realization-dimension">Realization dimension</a></li>
               <li><a href="#reset-defect-numerator">Reset-defect numerator</a></li>
@@ -107,6 +114,7 @@
               <li><a href="#return-realization">Return realization</a></li>
               <li><a href="#scalar-zero-reachability">Scalar zero reachability</a></li>
               <li><a href="#semidecidable">Semidecidable</a></li>
+              <li><a href="#shortcut-collatz">Shortcut-Collatz map and reachability</a></li>
               <li><a href="#singular-nonsingular">Singular and nonsingular matrices</a></li>
               <li><a href="#singular-return-compression">Singular-return compression</a></li>
               <li><a href="#smith-normal-form">Smith normal form and Smith split</a></li>
@@ -317,6 +325,10 @@
               <dd><p>The kernel of a linear map is the subspace sent to zero; its image is the subspace attained; its rank is the image dimension. Rank refers to a map or matrix. It must not be used as a synonym for the dimension of the ambient realization.</p></dd>
             </div>
             <div class="glossary-entry">
+              <dt id="rank-profile"><dfn>Rank profile</dfn><a class="fragment-link" href="#rank-profile" aria-label="Link to this term">#</a></dt>
+              <dd><p>The list of generator ranks in a fixed ordering, or its unordered multiset when labels are immaterial. Splitting a mortality problem by rank profile isolates invertible, zero, and singular strata. It is a classification coordinate, not a reduction or a claim that the strata are equivalent.</p></dd>
+            </div>
+            <div class="glossary-entry">
               <dt id="invariant-subspace-quotient"><dfn>Invariant subspace and quotient</dfn><a class="fragment-link" href="#invariant-subspace-quotient" aria-label="Link to this term">#</a></dt>
               <dd><p>A subspace <var>W</var> is invariant under a matrix family if every generator maps <var>W</var> into itself. The family then induces maps on <var>W</var> and on the quotient space <var>V</var>/<var>W</var>. Quotienting can remove behavior invisible to the observed scalar, but it may create false zeros unless the converse is proved.</p></dd>
             </div>
@@ -346,6 +358,10 @@
             <div class="glossary-entry">
               <dt id="word-series"><dfn>Word series</dfn><a class="fragment-link" href="#word-series" aria-label="Link to this term">#</a></dt>
               <dd><p>A function from words to scalars. A linear representation has the form <var>s</var>(<var>w</var>) = λμ(<var>w</var>)γ, where μ is a matrix-valued word morphism. Unlike an ordinary sequence, a word series branches over every letter at each length.</p></dd>
+            </div>
+            <div class="glossary-entry">
+              <dt id="paired-scalar-series"><dfn>Paired scalar series</dfn><a class="fragment-link" href="#paired-scalar-series" aria-label="Link to this term">#</a></dt>
+              <dd><p>The project’s four-dimensional word series for fixed-boundary correspondence. Two data controls and one phase toggle carry the two encoded words; the boundary coefficient vanishes exactly when they agree. It is the source-recognition hub reused by several mortality compilers.</p></dd>
             </div>
             <div class="glossary-entry">
               <dt id="zero-language"><dfn>Zero language</dfn><a class="fragment-link" href="#zero-language" aria-label="Link to this term">#</a></dt>
@@ -410,6 +426,18 @@
               <dd><p>Linear maps U into a transition space and O back to a smaller interface space. They expose the return OA<sup><var>n</var></sup>U after <var>n</var> transition steps. Their ranks determine whether interface zeros can be hidden when lifted to physical matrix products.</p></dd>
             </div>
             <div class="glossary-entry">
+              <dt id="interface-space"><dfn>Interface space</dfn><a class="fragment-link" href="#interface-space" aria-label="Link to this term">#</a></dt>
+              <dd><p>A vector space <var>S</var> through which a cut matrix factors. Input maps send <var>S</var> into the physical transition space; output maps return to <var>S</var>. Its dimension may exceed the rank of the cut, so “interface dimension” and “cut rank” are not aliases.</p></dd>
+            </div>
+            <div class="glossary-entry">
+              <dt id="interface-bridge"><dfn>Interface bridge</dfn><a class="fragment-link" href="#interface-bridge" aria-label="Link to this term">#</a></dt>
+              <dd><p>For cuts indexed by <var>i</var> and <var>j</var> and a transition word <var>w</var>, the bridge from <var>i</var> to <var>j</var> is O<sub><var>i</var></sub>A<sub><var>w</var></sub>U<sub><var>j</var></sub>. Consecutive cuts in a physical word multiply as a path of such maps on the interface space.</p></dd>
+            </div>
+            <div class="glossary-entry">
+              <dt id="interface-compression"><dfn>Interface compression</dfn><a class="fragment-link" href="#interface-compression" aria-label="Link to this term">#</a></dt>
+              <dd><p>The exact reduction of mortality for transitions and factored cuts to two cases: a transition-only zero word or a zero product along a nonempty path of interface bridges. The proof retains transitions before the first cut and after the last. Rank-one separators and singular-return compression are specializations.</p></dd>
+            </div>
+            <div class="glossary-entry">
               <dt id="return-matrix-family"><dfn>Return matrix and return family</dfn><a class="fragment-link" href="#return-matrix-family" aria-label="Link to this term">#</a></dt>
               <dd>
                 <p>The return matrix at wait <var>n</var> is M<sub><var>n</var></sub> = OA<sup><var>n</var></sup>U. The return family is the infinite labelled family of all M<sub><var>n</var></sub>. A physical word with several cuts becomes a product of returns whose labels are its intervening wait lengths.</p>
@@ -429,6 +457,10 @@
               <dd><p>The physical matrix C = UO separating runs of the transition matrix. Its rank is at most the interface dimension and need not be one. A cut matrix is therefore not generally a rank-one separator, although the two roles coincide in some scalar interfaces.</p></dd>
             </div>
             <div class="glossary-entry">
+              <dt id="factored-cut"><dfn>Factored cut</dfn><a class="fragment-link" href="#factored-cut" aria-label="Link to this term">#</a></dt>
+              <dd><p>A cut matrix presented as C<sub><var>j</var></sub> = U<sub><var>j</var></sub>O<sub><var>j</var></sub> through a common interface space. The factorization supplies the endpoints of interface bridges; it need not be a minimal-rank factorization.</p></dd>
+            </div>
+            <div class="glossary-entry">
               <dt id="physical-family"><dfn>Physical family</dfn><a class="fragment-link" href="#physical-family" aria-label="Link to this term">#</a></dt>
               <dd><p>The finite matrix family supplied to the actual target problem, as opposed to an infinite return family or an intermediate semantic alphabet. For two-generator return compression the physical family is {A,UO}. A physical word is an unrestricted nonempty word over these matrices.</p></dd>
             </div>
@@ -439,7 +471,7 @@
             <div class="glossary-entry">
               <dt id="singular-return-compression"><dfn>Singular-return compression</dfn><a class="fragment-link" href="#singular-return-compression" aria-label="Link to this term">#</a></dt>
               <dd>
-                <p>The general equivalence between mortality of {A,UO} and mortality of {OA<sup><var>n</var></sup>U : <var>n</var> ≥ 0}, assuming only that no pure power A<sup><var>n</var></sup> is zero. Sandwiching a cut-containing physical zero retains its exterior waits; wrapping a zero return product in cuts gives the converse.</p>
+                <p>The single-transition, single-cut specialization of interface compression: mortality of {A,UO} is equivalent to mortality of {OA<sup><var>n</var></sup>U : <var>n</var> ≥ 0}, assuming only that no pure power A<sup><var>n</var></sup> is zero. Sandwiching a cut-containing physical zero retains its exterior waits; wrapping a zero return product in cuts gives the converse.</p>
                 <div class="formula plain">
                   <math display="block">
                     <mrow>
@@ -491,6 +523,14 @@
                   </math>
                 </div>
               </dd>
+            </div>
+            <div class="glossary-entry">
+              <dt id="projective-incidence"><dfn>Projective incidence</dfn><a class="fragment-link" href="#projective-incidence" aria-label="Link to this term">#</a></dt>
+              <dd><p>Zero reachability for a boundary coefficient r<sup>T</sup>M<sub><var>w</var></sub>c under projective matrix generators. For two invertible rational 2 × 2 generators, generic projective incidence, abbreviated GPI₂ in this corpus, imposes two stated nondegeneracy normalizations. Multiplying generators by nonzero scalars preserves the zero language.</p></dd>
+            </div>
+            <div class="glossary-entry">
+              <dt id="shortcut-collatz"><dfn>Shortcut-Collatz map and reachability</dfn><a class="fragment-link" href="#shortcut-collatz" aria-label="Link to this term">#</a></dt>
+              <dd><p>The integer map sending even <var>n</var> to <var>n</var>/2 and odd <var>n</var> to (3<var>n</var>+1)/2. Shortcut-Collatz reachability asks, for one supplied integer, whether some finite iterate equals 1. It is a pointwise decision problem, distinct from the universal Collatz conjecture.</p></dd>
             </div>
             <div class="glossary-entry">
               <dt id="padic-valuation"><dfn>p-adic valuation</dfn><a class="fragment-link" href="#padic-valuation" aria-label="Link to this term">#</a></dt>
@@ -576,7 +616,7 @@
             </div>
             <div class="glossary-entry">
               <dt id="computational-evidence"><dfn>Computational evidence</dfn><a class="fragment-link" href="#computational-evidence" aria-label="Link to this term">#</a></dt>
-              <dd><p>Exact or numerical observations not yet connected to the target by a complete proof. Exact arithmetic prevents rounding error but does not turn a sampled or bounded experiment into a universal theorem. The salvage registry distinguishes computational evidence from formalized results.</p></dd>
+              <dd><p>Exact or numerical observations not yet connected to the target by a complete proof. Exact arithmetic prevents rounding error but does not turn a sampled or bounded experiment into a universal theorem. A formal-scope statement must distinguish such evidence from proved results.</p></dd>
             </div>
             <div class="glossary-entry">
               <dt id="obstruction-no-go"><dfn>Obstruction and no-go theorem</dfn><a class="fragment-link" href="#obstruction-no-go" aria-label="Link to this term">#</a></dt>

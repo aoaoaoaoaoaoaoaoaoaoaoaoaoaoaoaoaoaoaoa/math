@@ -26,6 +26,9 @@ jq -e '
   def safe_source:
     type == "string" and
     test("^[A-Za-z0-9][A-Za-z0-9_.-]*[.]html$");
+  def safe_graph_source:
+    type == "string" and
+    test("^[A-Za-z0-9][A-Za-z0-9_.-]*[.]json$");
   def safe_route:
     type == "string" and
     (. == "" or (
@@ -38,13 +41,26 @@ jq -e '
     type == "string" and
     test("^[A-Za-z0-9][A-Za-z0-9_.-]*[.]png$");
   . as $manifest |
-  .version == 2 and
+  .version == 3 and
+  ((keys - ["graphs", "publications", "version"]) | length == 0) and
+  (.graphs | type == "array") and
+  all(.graphs[];
+    type == "object" and
+    (keys == ["collection", "source"]) and
+    (.collection | safe_route) and
+    (.collection | length > 0) and
+    (.source | safe_graph_source)
+  ) and
+  (([.graphs[].source] | length) ==
+    ([.graphs[].source] | unique | length)) and
+  (([.graphs[].collection] | length) ==
+    ([.graphs[].collection] | unique | length)) and
   (.publications | type == "array" and length > 0) and
   all(.publications[];
     type == "object" and
     ((keys - ["kind", "route", "social_card", "source"]) | length == 0) and
     (.kind == "index" or .kind == "collection" or .kind == "reference" or
-      .kind == "result") and
+      .kind == "module" or .kind == "result") and
     (.source | safe_source) and
     (.route | safe_route) and
     ((has("social_card") | not) or (.social_card | safe_card)) and
@@ -63,12 +79,26 @@ jq -e '
       .route == ($child.route | split("/") | .[0:-1] | join("/")) and
       (
         ($child.kind == "collection" and .kind == "index") or
-        (($child.kind == "reference" or $child.kind == "result") and
+        (($child.kind == "reference" or $child.kind == "module" or
+          $child.kind == "result") and
           .kind == "collection")
       )
     )
+  ) and
+  all(
+    $manifest.graphs[];
+    . as $graph |
+    any(
+      $manifest.publications[];
+      .kind == "collection" and .route == $graph.collection
+    )
   )
 ' "$MANIFEST" >/dev/null
+
+while IFS= read -r graph_source; do
+  [[ -s "$graph_source" ]]
+  jq -e . "$graph_source" >/dev/null
+done < <(jq -r '.graphs[].source' "$MANIFEST")
 
 while IFS= read -r pdf; do
   note="${pdf%.pdf}.md"
@@ -106,6 +136,7 @@ if rg -n 'set_option[[:space:]]+(autoImplicit[[:space:]]+true|warningAsError[[:s
 fi
 
 readonly PYTHON_CHECKERS=(
+  scripts/render_publication_graph.py
   scripts/generate-parabolic-first-b-one-inner.py
   tools/audit_chhn_packing_rank.py
   tools/audit_m92_changed_separator_tail.py
@@ -123,6 +154,7 @@ readonly PYTHON_CHECKERS=(
 uvx --from ruff==0.15.22 ruff check "${PYTHON_CHECKERS[@]}"
 uvx --from ruff==0.15.22 ruff format --check "${PYTHON_CHECKERS[@]}"
 uvx --from ty==0.0.58 ty check "${PYTHON_CHECKERS[@]}"
+uv run --script scripts/render_publication_graph.py --check
 uv run scripts/generate-parabolic-first-b-one-funnel.py --check
 uv run scripts/generate-parabolic-first-b-one-inner.py --check
 uv run scripts/generate-parabolic-first-b-two-tail.py --check
@@ -280,6 +312,12 @@ check_publication() {
     assert_xpath_count 1 '//head/meta[@name="description"]'
     assert_xpath_count 1 '//head/meta[@property="og:description"]'
   fi
+  if [[ "$profile" != collection ]]; then
+    assert_xpath_count 1 \
+      '//header[contains(concat(" ", normalize-space(@class), " "), " masthead ")]//p[contains(concat(" ", normalize-space(@class), " "), " module-meta ")]'
+    assert_xpath_count 1 \
+      "$article/nav[contains(concat(' ', normalize-space(@class), ' '), ' module-context ')][@aria-label='Module relations']"
+  fi
   assert_xpath_count 3 "$major_sections"
   assert_xpath_count 3 "$major_sections[not(@open)]"
   assert_xpath_count 3 "$major_sections/summary/h2"
@@ -318,13 +356,15 @@ check_collection() {
   PUBLICATION="$1"
   local route="$2"
   local article='//main[@id="article"]/article'
-  local collection_results collection_references
-  collection_results="$(jq --arg prefix "$route/" \
-    '[.publications[] | select(.kind == "result" and (.route | startswith($prefix)))] | length' \
-    "$MANIFEST")"
+  local collection_references graph_source graph_nodes graph_views
   collection_references="$(jq --arg prefix "$route/" \
     '[.publications[] | select(.kind == "reference" and (.route | startswith($prefix)))] | length' \
     "$MANIFEST")"
+  graph_source="$(jq -r --arg collection "$route" \
+    '.graphs[] | select(.collection == $collection) | .source' "$MANIFEST")"
+  [[ -n "$graph_source" ]]
+  graph_nodes="$(jq '.nodes | length' "$graph_source")"
+  graph_views="$(jq '.views | length' "$graph_source")"
 
   assert_xpath_count 1 '//h1[normalize-space()="Matrix Mortality"]'
   assert_xpath_count 0 \
@@ -335,8 +375,13 @@ check_collection() {
     "($article/*)[1][self::section/h2[@id='reference' and normalize-space(text()[1])='Reference']]"
   assert_xpath_count "$collection_references" \
     "($article/section[h2[@id='reference']])[1]/ul[contains(concat(' ', normalize-space(@class), ' '), ' artifact-list ')]/li/a"
-  assert_xpath_count "$collection_results" \
-    "($article/section[h2[@id='techniques']])[1]/ul[contains(concat(' ', normalize-space(@class), ' '), ' artifact-list ')]/li/a"
+  assert_xpath_count 1 \
+    "($article/*)[2][self::section/h2[@id='modules' and normalize-space(text()[1])='Modules']]"
+  assert_xpath_count "$graph_nodes" \
+    "$article/section[h2[@id='modules']]//li[contains(concat(' ', normalize-space(@class), ' '), ' module-node ')][@data-node-id]"
+  assert_xpath_count "$graph_views" \
+    "$article/section[h2[@id='modules']]//section[contains(concat(' ', normalize-space(@class), ' '), ' module-layer ')]"
+  assert_xpath_count 0 "$article/section[h2[@id='techniques' or @id='dependencies']]"
   assert_xpath_count 1 \
     "$article/section[h2[@id='definition']]//div[contains(concat(' ', normalize-space(@class), ' '), ' definition ')]"
   assert_xpath_count 1 \
@@ -366,9 +411,9 @@ check_collection() {
     '//nav[contains(concat(" ", normalize-space(@class), " "), " contents ")]/ol/li'
 
   while IFS= read -r child_route; do
-    rg --quiet --fixed-strings "href=\"/math/$child_route/\"" "$PUBLICATION"
+    rg --quiet --fixed-strings "href=\"/math/$child_route/" "$PUBLICATION"
   done < <(jq -r --arg prefix "$route/" \
-    '.publications[] | select((.kind == "reference" or .kind == "result") and (.route | startswith($prefix))) | .route' \
+    '.publications[] | select((.kind == "reference" or .kind == "module" or .kind == "result") and (.route | startswith($prefix))) | .route' \
     "$MANIFEST")
 }
 
@@ -415,6 +460,9 @@ check_publication m4_4.html 0
 check_publication binary_compilers.html 0
 check_publication m9_2.html 0
 check_publication m3_2_return_guard.html 0
+check_publication paired_scalar_series.html 0
+check_publication interface_compression.html 0
+check_publication shortcut_collatz_incidence.html 0
 
 PUBLICATION=math.html
 assert_xpath_count 1 '//h1[normalize-space()="Mathematics"]'

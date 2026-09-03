@@ -15,6 +15,7 @@
     <div class="masthead-inner">
       <h1>Paired-Role Compression</h1>
       <p class="byline">GPT-5.6 Sol · elicited by <a href="https://x.com/eternalism_4eva">@eternalism_4eva</a></p>
+      <p class="module-meta"><b>Theorem</b> · endpoint · formalized</p>
     </div>
   </header>
 
@@ -78,11 +79,16 @@
 
     <main id="article">
       <article>
+        <nav class="module-context" aria-label="Module relations">
+          <p><b>Requires</b> <a href="/math/matrix_mortality/m3_5/#source-lemma">fixed-boundary correspondence</a> and the <a href="/math/matrix_mortality/paired_scalar_series/">paired scalar series</a>.</p>
+          <p><b>Establishes</b> <a href="#paired-compression">paired-role compression</a> and M<sub>4</sub>(4).</p>
+        </nav>
+
         <details class="major-section">
           <summary><h2 id="known-stuff">Known Stuff<a class="fragment-link" href="#known-stuff" aria-label="Link to this section">#</a></h2></summary>
 
           <h3 id="part-one">The four-role fixed-boundary problem<a class="fragment-link" href="#part-one" aria-label="Link to this section">#</a></h3>
-          <p>The <a href="/math/matrix_mortality/m3_5/">fixed-boundary correspondence theorem</a> proves undecidability of a four-role fixed-boundary problem.</p>
+          <p>The <a href="/math/matrix_mortality/m3_5/#source-lemma">fixed-boundary correspondence theorem</a> proves undecidability of a four-role fixed-boundary problem.</p>
 
           <p>Fix a deletion width <var>β</var> and write <var>H</var> for Neary’s binary word code, with <var>H</var>(<span class="word">b</span>) = 10<sup><var>β</var></sup>1 and <var>H</var>(<span class="word">c</span>) = 1. For the Neary body <var>B</var> of the <span class="word">c</span>-appendant, the four ordinary roles are</p>
           <div class="formula">
@@ -150,7 +156,7 @@
           </div>
 
           <h3 id="word-pair-matrices">Word-pair matrices<a class="fragment-link" href="#word-pair-matrices" aria-label="Link to this section">#</a></h3>
-          <p>Recode binary symbols as nonzero base-three digits. For a digit word <var>x</var>, let <var>σ</var>(<var>x</var>) be its base-three value. The standard word-pair representation is</p>
+          <p>Recode binary symbols as nonzero base-three digits. For a digit word <var>x</var>, let <var>σ</var>(<var>x</var>) be its base-three value. The standard <a class="glossary-term" href="/math/matrix_mortality/glossary/#word-pair-representation" title="A matrix morphism encoding two words so a boundary coefficient detects equality.">word-pair representation</a> is</p>
           <div class="formula">
             <math display="block">
               <mrow>
@@ -529,7 +535,7 @@
 
           <h3 id="sources">References<a class="fragment-link" href="#sources" aria-label="Link to this section">#</a></h3>
           <ol class="references">
-            <li id="ref-part-one"><span>GPT-5.6 Sol, elicited by @eternalism_4eva, <a href="/math/matrix_mortality/m3_5/"><cite>Fixed-Boundary Correspondence</cite></a>, 2026. The synchronized four-role fixed-boundary theorem and five-matrix compiler.</span></li>
+            <li id="ref-part-one"><span>GPT-5.6 Sol, elicited by @eternalism_4eva, <a href="/math/matrix_mortality/m3_5/#source-lemma"><cite>Fixed-Boundary Correspondence</cite></a>, 2026. The synchronized four-role fixed-boundary theorem.</span></li>
             <li id="ref-neary-2015"><span>Turlough Neary, <a href="https://doi.org/10.4230/LIPIcs.STACS.2015.649"><cite>Undecidability in Binary Tag Systems and the Post Correspondence Problem for Five Pairs of Words</cite></a>, STACS 2015. The restricted binary-tag undecidability source.</span></li>
             <li id="ref-chhn-2014"><span>Julien Cassaigne, Vesa Halava, Tero Harju, and François Nicolas, <a href="https://arxiv.org/abs/1404.0644"><cite>Tighter Undecidability Bounds for Matrix Mortality, Zero-in-the-Corner Problems, and More</cite></a>, 2014. Definitions, prior bounds, and the scalar-to-corner reductions.</span></li>
           </ol>

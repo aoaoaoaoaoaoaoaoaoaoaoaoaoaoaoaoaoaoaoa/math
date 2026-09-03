@@ -1,5 +1,11 @@
 {
-  "version": 2,
+  "version": 3,
+  "graphs": [
+    {
+      "collection": "matrix_mortality",
+      "source": "matrix_mortality_modules.json"
+    }
+  ],
   "publications": [
     {
       "kind": "index",
@@ -20,6 +26,21 @@
       "kind": "reference",
       "source": "matrix_mortality_glossary.html",
       "route": "matrix_mortality/glossary"
+    },
+    {
+      "kind": "module",
+      "source": "paired_scalar_series.html",
+      "route": "matrix_mortality/paired_scalar_series"
+    },
+    {
+      "kind": "module",
+      "source": "interface_compression.html",
+      "route": "matrix_mortality/interface_compression"
+    },
+    {
+      "kind": "module",
+      "source": "shortcut_collatz_incidence.html",
+      "route": "matrix_mortality/shortcut_collatz_incidence"
     },
     {
       "kind": "result",
@@ -44,7 +65,7 @@
       "route": "matrix_mortality/m9_2"
     },
     {
-      "kind": "result",
+      "kind": "module",
       "source": "m3_2_return_guard.html",
       "route": "matrix_mortality/m3_2_return_guard"
     }

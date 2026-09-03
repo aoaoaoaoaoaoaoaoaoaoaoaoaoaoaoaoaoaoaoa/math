@@ -98,9 +98,16 @@ claim.
 `publications.json` is the canonical map from presentation-free semantic sources to routes below
 `/math/` on `../eternalist.moe`. Its single `index` entry owns `/math/`; a `collection` owns a
 subject landing page; a `reference` owns a reusable expository aid below a collection; every
-research-result exposition is a `result` entry below a collection route. Adding a collection,
-reference, or result requires its source, its manifest entry, and its listing by its immediate parent,
-but no Eternalist content patch.
+reusable established construction, definition, lemma, or reduction is a `module`; and every
+research-result exposition is a `result`. Reference, module, and result routes sit below a
+collection. Adding one requires its source, its manifest entry, and its listing by its immediate
+parent, but no Eternalist content patch.
+
+Each optional `graphs` entry binds a collection to one typed JSON proof graph. Public graph nodes
+contain established mathematics only. `requires` edges state logical dependency and must be
+acyclic; lateral relations may record specialization, instantiation, strengthening, transport, or
+dispute without changing the proof order. Open cuts, attack status, probabilities, and roadmaps
+remain in repository ledgers and never enter the public graph.
 
 Every listed source must contain no `<style>` element, inline `style` attribute, or stylesheet
 link. Eternalist owns typography, color, layout, responsive behavior, and print presentation
@@ -112,18 +119,18 @@ Eyebrows are forbidden unless explicitly requested. Do not add kickers, supertit
 pre-headings, category copy above titles, or other small text whose function is to occupy visual
 space. Every surviving label must change the interpretation of the object it labels.
 
-Long-form result expositions use the exact top-level partition **Known Stuff** / **New Stuff** /
-**Bookkeeping**. The informality of “Stuff” is intentional. Definitions, inherited results, and
-prior art belong under Known Stuff; New Stuff begins at the first claim proved by the present
-work and contains its proof and consequences. Bookkeeping owns validation, provenance, artifact
-links, priority qualifications, and references.
+Long-form module and result expositions use the exact top-level partition **Known Stuff** /
+**New Stuff** / **Bookkeeping**. The informality of “Stuff” is intentional. Definitions,
+inherited results, and prior art belong under Known Stuff; New Stuff begins at the first claim
+proved by the present work and contains its proof and consequences. Bookkeeping owns validation,
+provenance, artifact links, priority qualifications, and references.
 
 Each canonical top-level section is a native `<details>` disclosure, closed by default, with its
 real `h2` inside the `summary`. Do not replace this with JavaScript, synthetic buttons, or
 presentational concealment. Subsection fragment links must remain capable of revealing their
 closed ancestor, and print must expose all section contents.
 
-Every long-form result begins its `.shell` with one visible
+Every long-form module or result begins its `.shell` with one visible
 `<section class="abstract" aria-label="Abstract">` before the contents. State the searchable
 problem name, parameters, conclusion, restrictions, consequences, and unresolved boundary with
 the density of the existing verdict blocks. This prose is the sole abstract source; Eternalist

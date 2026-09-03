@@ -4,9 +4,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="author" content="GPT-5.6 Sol; elicited by @eternalism_4eva">
-  <meta name="description" content="Definitions, checked constructions, and current bounded frontiers for integer matrix mortality and zero reachability, including M9(2).">
+  <meta name="description" content="A typed graph of established matrix-mortality definitions, constructions, reductions, and undecidability theorems, with the bounded status table.">
   <meta property="og:title" content="Matrix Mortality">
-  <meta property="og:description" content="Checked fixed-boundary, paired-role, binary-prefix, and nine-dimensional return constructions for matrix mortality.">
+  <meta property="og:description" content="Established matrix-mortality results presented as a navigable dependency graph.">
   <meta property="og:type" content="website">
   <title>Matrix Mortality | Mathematics</title>
 </head>
@@ -24,10 +24,21 @@
     <nav class="contents" aria-label="Contents">
       <ol>
         <li><a href="#reference">Reference</a></li>
-        <li><a href="#techniques">Techniques</a></li>
+<!-- MODULE_GRAPH_TOC:BEGIN -->
+        <li><a href="#modules">Modules</a>
+          <ol>
+            <li><a href="#foundations">Foundations</a></li>
+            <li><a href="#source-recognition">Source Recognition</a></li>
+            <li><a href="#target-compression">Target Compression</a></li>
+            <li><a href="#binary-and-return-constructions">Binary and Return Constructions</a></li>
+            <li><a href="#arithmetic-incidence">Arithmetic Incidence</a></li>
+            <li><a href="#established-obstructions">Established Obstructions</a></li>
+            <li><a href="#endpoint-theorems">Endpoint Theorems</a></li>
+          </ol>
+        </li>
+<!-- MODULE_GRAPH_TOC:END -->
         <li><a href="#definition">What is matrix mortality?</a></li>
-        <li><a href="#dependencies">Proof dependencies</a></li>
-        <li><a href="#frontier">Bounded frontier</a></li>
+        <li><a href="#frontier">Decidability table</a></li>
       </ol>
     </nav>
 
@@ -45,41 +56,535 @@
           </ul>
         </section>
 
+<!-- MODULE_GRAPH:BEGIN -->
         <section>
-          <h2 id="techniques">Techniques<a class="fragment-link" href="#techniques" aria-label="Link to this section">#</a></h2>
-          <ul class="artifact-list" aria-label="Matrix mortality techniques">
-            <li>
-              <a href="/math/matrix_mortality/m3_5/">
-                <b>Fixed-Boundary Correspondence</b>
-                Zero-run synchronization proves GPCP(4); a repeated rank-one separator gives M₃(5).
-              </a>
-            </li>
-            <li>
-              <a href="/math/matrix_mortality/m4_4/">
-                <b>Paired-Role Compression</b>
-                A shared word channel gives Z₄(3); a common-fixed-column converse gives M₄(4).
-              </a>
-            </li>
-            <li>
-              <a href="/math/matrix_mortality/binary_compilers/">
-                <b>Binary Compilers</b>
-                Shared partial state gives Z₆(2); prefix decoding and common-image restriction give M₁₀(2).
-              </a>
-            </li>
-            <li>
-              <a href="/math/matrix_mortality/m3_2_return_guard/">
-                <b>The Valuation Guard</b>
-                Rank-two returns reduce a concrete M₃(2) family to one deterministic p-adic orbit.
-              </a>
-            </li>
-            <li>
-              <a href="/math/matrix_mortality/m9_2/">
-                <b>Singular Return Compression</b>
-                A tilted separator and effective unreduced fractions prove M₉(2) undecidable.
-              </a>
-            </li>
-          </ul>
+          <h2 id="modules">Modules<a class="fragment-link" href="#modules" aria-label="Link to this section">#</a></h2>
+          <p>Each node owns one established mathematical object. Dependency links point to the exact module required. The graph contains established mathematics only.</p>
+          <dl class="module-legend">
+            <div><dt>Kind</dt><dd>Definition, construction, lemma, reduction, theorem, obstruction, or witness.</dd></div>
+            <div><dt>Metadata</dt><dd>Prominence · assurance · origin.</dd></div>
+            <div><dt>Edges</dt><dd>Requires and Used by give the acyclic proof order; named lateral relations do not.</dd></div>
+          </dl>
+          <div class="module-map">
+            <section class="module-layer">
+              <h3 id="foundations">Foundations<a class="fragment-link" href="#foundations" aria-label="Link to this section">#</a></h3>
+              <p>The common problem and representation language.</p>
+              <ol class="module-grid">
+              <li class="module-node node-kind-definition" data-node-id="mm/matrix-mortality">
+                <p class="module-node-head">
+                  <span class="module-kind">Definition</span>
+                  <a href="/math/matrix_mortality/#definition"><b>Matrix mortality</b></a>
+                </p>
+                <p class="module-summary">Nonempty zero products in a finite family of integer matrices, with dimension and generator count fixed.</p>
+                <p class="module-meta">Supporting · Audited · Literature</p>
+                <dl class="module-relations">
+                  <div>
+                    <dt>Used by</dt>
+                    <dd><a href="/math/matrix_mortality/m3_5/#five-matrices">Rank-one separator</a>, <a href="/math/matrix_mortality/interface_compression/#result">Interface compression</a>, <a href="/math/matrix_mortality/m9_2/#unreduced-clearing">Effective denominator clearing</a></dd>
+                  </div>
+                </dl>
+              </li>
+              <li class="module-node node-kind-definition" data-node-id="mm/word-pair-representation">
+                <p class="module-node-head">
+                  <span class="module-kind">Definition</span>
+                  <a href="/math/matrix_mortality/m4_4/#word-pair-matrices"><b>Word-pair representation</b></a>
+                </p>
+                <p class="module-summary">A three-dimensional matrix morphism that records two ternary words and detects their equality in one coefficient.</p>
+                <p class="module-meta">Supporting · Formalized · Literature</p>
+                <dl class="module-relations">
+                  <div>
+                    <dt>Used by</dt>
+                    <dd><a href="/math/matrix_mortality/m3_5/#source-lemma">Fixed-boundary correspondence</a>, <a href="/math/matrix_mortality/paired_scalar_series/#result">Paired scalar series</a></dd>
+                  </div>
+                </dl>
+              </li>
+              <li class="module-node node-kind-definition" data-node-id="mm/projective-incidence">
+                <p class="module-node-head">
+                  <span class="module-kind">Definition</span>
+                  <a href="/math/matrix_mortality/shortcut_collatz_incidence/#projective-incidence"><b>Two-generator projective incidence</b></a>
+                </p>
+                <p class="module-summary">Given two rational projectivities and two boundary rays, ask whether some control word sends the source ray onto the target hyperplane.</p>
+                <p class="module-meta">Supporting · Formalized · Mixed</p>
+                <dl class="module-relations">
+                  <div>
+                    <dt>Used by</dt>
+                    <dd><a href="/math/matrix_mortality/shortcut_collatz_incidence/#result">Shortcut-Collatz incidence</a>, <a href="/math/matrix_mortality/shortcut_collatz_incidence/#mortality-compiler">Rank-two projective-incidence compiler</a></dd>
+                  </div>
+                </dl>
+              </li>
+              <li class="module-node node-kind-definition" data-node-id="mm/shortcut-collatz-reachability">
+                <p class="module-node-head">
+                  <span class="module-kind">Definition</span>
+                  <a href="/math/matrix_mortality/shortcut_collatz_incidence/#shortcut-map"><b>Shortcut-Collatz reachability</b></a>
+                </p>
+                <p class="module-summary">Finite reachability of 1 under halving on even integers and (3n+1)/2 on odd integers.</p>
+                <p class="module-meta">Supporting · Formalized · Literature</p>
+                <dl class="module-relations">
+                  <div>
+                    <dt>Used by</dt>
+                    <dd><a href="/math/matrix_mortality/shortcut_collatz_incidence/#result">Shortcut-Collatz incidence</a></dd>
+                  </div>
+                </dl>
+              </li>
+              </ol>
+            </section>
+            <section class="module-layer">
+              <h3 id="source-recognition">Source Recognition<a class="fragment-link" href="#source-recognition" aria-label="Link to this section">#</a></h3>
+              <p>The fixed-boundary source and its reusable scalar realization.</p>
+              <ol class="module-grid">
+              <li class="module-node node-kind-theorem" data-node-id="mm/fixed-boundary-correspondence">
+                <p class="module-node-head">
+                  <span class="module-kind">Theorem</span>
+                  <a href="/math/matrix_mortality/m3_5/#source-lemma"><b>Fixed-boundary correspondence</b></a>
+                </p>
+                <p class="module-summary">Four nonerasing word pairs recognize restricted tag halting when the terminal marker is fixed rather than selectable.</p>
+                <p class="module-meta">Load Bearing · Formalized · Project</p>
+                <dl class="module-relations">
+                  <div>
+                    <dt>Requires</dt>
+                    <dd><a href="/math/matrix_mortality/m4_4/#word-pair-matrices">Word-pair representation</a></dd>
+                  </div>
+                  <div>
+                    <dt>Used by</dt>
+                    <dd><a href="/math/matrix_mortality/paired_scalar_series/#result">Paired scalar series</a>, <a href="/math/matrix_mortality/binary_compilers/#prefix-machine">Prefix-transducer packing</a>, <a href="/math/matrix_mortality/m3_5/#result">M₃(5) is undecidable</a></dd>
+                  </div>
+                </dl>
+              </li>
+              <li class="module-node node-kind-construction" data-node-id="mm/paired-scalar-series">
+                <p class="module-node-head">
+                  <span class="module-kind">Construction</span>
+                  <a href="/math/matrix_mortality/paired_scalar_series/#result"><b>Paired scalar series</b></a>
+                </p>
+                <p class="module-summary">Two data controls and one phase toggle realize the complete fixed-boundary zero language in four states.</p>
+                <p class="module-meta">Load Bearing · Formalized · Project</p>
+                <dl class="module-relations">
+                  <div>
+                    <dt>Requires</dt>
+                    <dd><a href="/math/matrix_mortality/m3_5/#source-lemma">Fixed-boundary correspondence</a>, <a href="/math/matrix_mortality/m4_4/#word-pair-matrices">Word-pair representation</a></dd>
+                  </div>
+                  <div>
+                    <dt>Used by</dt>
+                    <dd><a href="/math/matrix_mortality/m4_4/#paired-compression">Paired-role compression</a>, <a href="/math/matrix_mortality/binary_compilers/#scalar-six">Shared-partial binary compiler</a>, <a href="/math/matrix_mortality/m9_2/#tilted-separator">Tilted separator</a>, <a href="/math/matrix_mortality/m9_2/#result">M₉(2) is undecidable</a></dd>
+                  </div>
+                </dl>
+              </li>
+              <li class="module-node node-kind-reduction" data-node-id="mm/paired-role-compression">
+                <p class="module-node-head">
+                  <span class="module-kind">Reduction</span>
+                  <a href="/math/matrix_mortality/m4_4/#paired-compression"><b>Paired-role compression</b></a>
+                </p>
+                <p class="module-summary">An agreement subspace identifies two phase copies and reduces four role actions to three controls.</p>
+                <p class="module-meta">Load Bearing · Formalized · Project</p>
+                <dl class="module-relations">
+                  <div>
+                    <dt>Requires</dt>
+                    <dd><a href="/math/matrix_mortality/paired_scalar_series/#result">Paired scalar series</a></dd>
+                  </div>
+                  <div>
+                    <dt>Used by</dt>
+                    <dd><a href="/math/matrix_mortality/m4_4/#result">M₄(4) is undecidable</a></dd>
+                  </div>
+                </dl>
+              </li>
+              </ol>
+            </section>
+            <section class="module-layer">
+              <h3 id="target-compression">Target Compression<a class="fragment-link" href="#target-compression" aria-label="Link to this section">#</a></h3>
+              <p>Reductions that turn scalar or interface zeros into unrestricted matrix products.</p>
+              <ol class="module-grid">
+              <li class="module-node node-kind-reduction" data-node-id="mm/interface-compression">
+                <p class="module-node-head">
+                  <span class="module-kind">Reduction</span>
+                  <a href="/math/matrix_mortality/interface_compression/#result"><b>Interface compression</b></a>
+                </p>
+                <p class="module-summary">Transitions and factored cuts are mortal exactly when the transitions are mortal or one nonempty interface-bridge path vanishes.</p>
+                <p class="module-meta">Load Bearing · Formalized · Project</p>
+                <dl class="module-relations">
+                  <div>
+                    <dt>Requires</dt>
+                    <dd><a href="/math/matrix_mortality/#definition">Matrix mortality</a></dd>
+                  </div>
+                  <div>
+                    <dt>Used by</dt>
+                    <dd><a href="/math/matrix_mortality/interface_compression/#single-cut">Singular-return compression</a></dd>
+                  </div>
+                </dl>
+              </li>
+              <li class="module-node node-kind-reduction" data-node-id="mm/rank-one-separator">
+                <p class="module-node-head">
+                  <span class="module-kind">Reduction</span>
+                  <a href="/math/matrix_mortality/m3_5/#five-matrices"><b>Rank-one separator</b></a>
+                </p>
+                <p class="module-summary">Adjoining one outer product turns a vanishing boundary coefficient into unrestricted matrix mortality.</p>
+                <p class="module-meta">Load Bearing · Formalized · Mixed</p>
+                <dl class="module-relations">
+                  <div>
+                    <dt>Requires</dt>
+                    <dd><a href="/math/matrix_mortality/#definition">Matrix mortality</a></dd>
+                  </div>
+                  <div>
+                    <dt>Used by</dt>
+                    <dd><a href="/math/matrix_mortality/m3_5/#result">M₃(5) is undecidable</a>, <a href="/math/matrix_mortality/m4_4/#result">M₄(4) is undecidable</a></dd>
+                  </div>
+                  <div>
+                    <dt>Instantiates</dt>
+                    <dd><a href="/math/matrix_mortality/interface_compression/#result">Interface compression</a></dd>
+                  </div>
+                </dl>
+              </li>
+              <li class="module-node node-kind-reduction" data-node-id="mm/singular-return-compression">
+                <p class="module-node-head">
+                  <span class="module-kind">Reduction</span>
+                  <a href="/math/matrix_mortality/interface_compression/#single-cut"><b>Singular-return compression</b></a>
+                </p>
+                <p class="module-summary">One transition and one singular cut reduce arbitrary physical products to products of the complete return family.</p>
+                <p class="module-meta">Load Bearing · Formalized · Project</p>
+                <dl class="module-relations">
+                  <div>
+                    <dt>Requires</dt>
+                    <dd><a href="/math/matrix_mortality/interface_compression/#result">Interface compression</a></dd>
+                  </div>
+                  <div>
+                    <dt>Used by</dt>
+                    <dd><a href="/math/matrix_mortality/m3_2_return_guard/#result">Valuation guard</a>, <a href="/math/matrix_mortality/m9_2/#result">M₉(2) is undecidable</a></dd>
+                  </div>
+                </dl>
+              </li>
+              <li class="module-node node-kind-reduction" data-node-id="mm/common-image-restriction">
+                <p class="module-node-head">
+                  <span class="module-kind">Reduction</span>
+                  <a href="/math/matrix_mortality/binary_compilers/#common-image"><b>Common-image restriction</b></a>
+                </p>
+                <p class="module-summary">A decoder family is restricted to its common invariant image, with an appended-letter converse excluding new zero products.</p>
+                <p class="module-meta">Load Bearing · Formalized · Project</p>
+                <dl class="module-relations">
+                  <div>
+                    <dt>Requires</dt>
+                    <dd><a href="/math/matrix_mortality/binary_compilers/#prefix-machine">Prefix-transducer packing</a></dd>
+                  </div>
+                  <div>
+                    <dt>Used by</dt>
+                    <dd><a href="/math/matrix_mortality/binary_compilers/#mortality-ten">M₁₀(2) is undecidable</a></dd>
+                  </div>
+                </dl>
+              </li>
+              <li class="module-node node-kind-lemma" data-node-id="mm/denominator-clearing">
+                <p class="module-node-head">
+                  <span class="module-kind">Lemma</span>
+                  <a href="/math/matrix_mortality/m9_2/#unreduced-clearing"><b>Effective denominator clearing</b></a>
+                </p>
+                <p class="module-summary">Independent nonzero generator scalings convert a rational family to integer matrices while preserving and reflecting every zero product.</p>
+                <p class="module-meta">Supporting · Formalized · Mixed</p>
+                <dl class="module-relations">
+                  <div>
+                    <dt>Requires</dt>
+                    <dd><a href="/math/matrix_mortality/#definition">Matrix mortality</a></dd>
+                  </div>
+                  <div>
+                    <dt>Used by</dt>
+                    <dd><a href="/math/matrix_mortality/m9_2/#result">M₉(2) is undecidable</a></dd>
+                  </div>
+                </dl>
+              </li>
+              </ol>
+            </section>
+            <section class="module-layer">
+              <h3 id="binary-and-return-constructions">Binary and Return Constructions<a class="fragment-link" href="#binary-and-return-constructions" aria-label="Link to this section">#</a></h3>
+              <p>Dimension-saving realizations built on the two shared hubs.</p>
+              <ol class="module-grid">
+              <li class="module-node node-kind-construction" data-node-id="mm/shared-partial-binary-compiler">
+                <p class="module-node-head">
+                  <span class="module-kind">Construction</span>
+                  <a href="/math/matrix_mortality/binary_compilers/#scalar-six"><b>Shared-partial binary compiler</b></a>
+                </p>
+                <p class="module-summary">A shared unfinished word channel compiles the four roles into two binary controls in six dimensions.</p>
+                <p class="module-meta">Load Bearing · Formalized · Project</p>
+                <dl class="module-relations">
+                  <div>
+                    <dt>Requires</dt>
+                    <dd><a href="/math/matrix_mortality/paired_scalar_series/#result">Paired scalar series</a></dd>
+                  </div>
+                  <div>
+                    <dt>Used by</dt>
+                    <dd><a href="/math/matrix_mortality/binary_compilers/#result">Z₆(2) is undecidable</a></dd>
+                  </div>
+                </dl>
+              </li>
+              <li class="module-node node-kind-reduction" data-node-id="mm/prefix-transducer-packing">
+                <p class="module-node-head">
+                  <span class="module-kind">Reduction</span>
+                  <a href="/math/matrix_mortality/binary_compilers/#prefix-machine"><b>Prefix-transducer packing</b></a>
+                </p>
+                <p class="module-summary">A synchronizing complete prefix code trades generator labels for decoder state while preserving unrestricted mortality.</p>
+                <p class="module-meta">Load Bearing · Formalized · Mixed</p>
+                <dl class="module-relations">
+                  <div>
+                    <dt>Requires</dt>
+                    <dd><a href="/math/matrix_mortality/m3_5/#source-lemma">Fixed-boundary correspondence</a></dd>
+                  </div>
+                  <div>
+                    <dt>Used by</dt>
+                    <dd><a href="/math/matrix_mortality/binary_compilers/#common-image">Common-image restriction</a>, <a href="/math/matrix_mortality/binary_compilers/#mortality-ten">M₁₀(2) is undecidable</a>, <a href="/math/matrix_mortality/m3_5/#result">M₆(3) is undecidable</a>, <a href="/math/matrix_mortality/m3_5/#result">M₁₂(2) is undecidable</a></dd>
+                  </div>
+                </dl>
+              </li>
+              <li class="module-node node-kind-construction" data-node-id="mm/tilted-separator">
+                <p class="module-node-head">
+                  <span class="module-kind">Construction</span>
+                  <a href="/math/matrix_mortality/m9_2/#tilted-separator"><b>Tilted separator</b></a>
+                </p>
+                <p class="module-summary">An injective length-tilted ternary code changes the nonzero coefficients needed by the realization while preserving the complete zero language.</p>
+                <p class="module-meta">Load Bearing · Formalized · Project</p>
+                <dl class="module-relations">
+                  <div>
+                    <dt>Requires</dt>
+                    <dd><a href="/math/matrix_mortality/paired_scalar_series/#result">Paired scalar series</a></dd>
+                  </div>
+                  <div>
+                    <dt>Used by</dt>
+                    <dd><a href="/math/matrix_mortality/m9_2/#nine-state-chart">Nine-dimensional return realization</a>, <a href="/math/matrix_mortality/m9_2/#consequences">Tilted-geometric rank floor</a>, <a href="/math/matrix_mortality/m9_2/#result">M₉(2) is undecidable</a></dd>
+                  </div>
+                </dl>
+              </li>
+              <li class="module-node node-kind-construction" data-node-id="mm/nine-dimensional-return-realization">
+                <p class="module-node-head">
+                  <span class="module-kind">Construction</span>
+                  <a href="/math/matrix_mortality/m9_2/#nine-state-chart"><b>Nine-dimensional return realization</b></a>
+                </p>
+                <p class="module-summary">Two length-three nilpotent chains, one length-two chain, and one eigenline realize three exceptional moments and a geometric tail.</p>
+                <p class="module-meta">Load Bearing · Formalized · Project</p>
+                <dl class="module-relations">
+                  <div>
+                    <dt>Requires</dt>
+                    <dd><a href="/math/matrix_mortality/m9_2/#tilted-separator">Tilted separator</a></dd>
+                  </div>
+                  <div>
+                    <dt>Used by</dt>
+                    <dd><a href="/math/matrix_mortality/m9_2/#result">M₉(2) is undecidable</a></dd>
+                  </div>
+                </dl>
+              </li>
+              <li class="module-node node-kind-construction" data-node-id="mm/valuation-guard">
+                <p class="module-node-head">
+                  <span class="module-kind">Construction</span>
+                  <a href="/math/matrix_mortality/m3_2_return_guard/#result"><b>Valuation guard</b></a>
+                </p>
+                <p class="module-summary">A three-mode return family forces one legal wait by a p-adic valuation and sends every wrong wait into a permanent trap.</p>
+                <p class="module-meta">Load Bearing · Formalized · Project</p>
+                <dl class="module-relations">
+                  <div>
+                    <dt>Requires</dt>
+                    <dd><a href="/math/matrix_mortality/interface_compression/#single-cut">Singular-return compression</a></dd>
+                  </div>
+                  <div>
+                    <dt>Used by</dt>
+                    <dd><a href="/math/matrix_mortality/m3_2_return_guard/#parity-smith">Valuation barriers</a></dd>
+                  </div>
+                </dl>
+              </li>
+              </ol>
+            </section>
+            <section class="module-layer">
+              <h3 id="arithmetic-incidence">Arithmetic Incidence<a class="fragment-link" href="#arithmetic-incidence" aria-label="Link to this section">#</a></h3>
+              <p>A proved arithmetic language inside generic two-generator projective incidence.</p>
+              <ol class="module-grid">
+              <li class="module-node node-kind-reduction" data-node-id="mm/shortcut-collatz-incidence">
+                <p class="module-node-head">
+                  <span class="module-kind">Reduction</span>
+                  <a href="/math/matrix_mortality/shortcut_collatz_incidence/#result"><b>Shortcut-Collatz incidence</b></a>
+                </p>
+                <p class="module-summary">Two fixed Möbius transformations, with target-dependent boundary data and central scalings, recognize pointwise shortcut-Collatz reaches-one exactly.</p>
+                <p class="module-meta">Load Bearing · Formalized · Project</p>
+                <dl class="module-relations">
+                  <div>
+                    <dt>Requires</dt>
+                    <dd><a href="/math/matrix_mortality/shortcut_collatz_incidence/#projective-incidence">Two-generator projective incidence</a>, <a href="/math/matrix_mortality/shortcut_collatz_incidence/#shortcut-map">Shortcut-Collatz reachability</a></dd>
+                  </div>
+                </dl>
+              </li>
+              <li class="module-node node-kind-reduction" data-node-id="mm/projective-incidence-compiler">
+                <p class="module-node-head">
+                  <span class="module-kind">Reduction</span>
+                  <a href="/math/matrix_mortality/shortcut_collatz_incidence/#mortality-compiler"><b>Rank-two projective-incidence compiler</b></a>
+                </p>
+                <p class="module-summary">Every generic two-generator projective-incidence instance compiles to two rational 3 × 3 matrices of rank exactly two, with mortality equivalent to incidence zero.</p>
+                <p class="module-meta">Load Bearing · Formalized · Project</p>
+                <dl class="module-relations">
+                  <div>
+                    <dt>Requires</dt>
+                    <dd><a href="/math/matrix_mortality/shortcut_collatz_incidence/#projective-incidence">Two-generator projective incidence</a></dd>
+                  </div>
+                  <div>
+                    <dt>Instantiates</dt>
+                    <dd><a href="/math/matrix_mortality/interface_compression/#result">Interface compression</a></dd>
+                  </div>
+                </dl>
+              </li>
+              </ol>
+            </section>
+            <section class="module-layer">
+              <h3 id="established-obstructions">Established Obstructions<a class="fragment-link" href="#established-obstructions" aria-label="Link to this section">#</a></h3>
+              <p>Formal limits on particular construction families, without claims about unresolved mortality cells.</p>
+              <ol class="module-grid">
+              <li class="module-node node-kind-obstruction" data-node-id="mm/tilted-geometric-rank-floor">
+                <p class="module-node-head">
+                  <span class="module-kind">Obstruction</span>
+                  <a href="/math/matrix_mortality/m9_2/#consequences"><b>Tilted-geometric rank floor</b></a>
+                </p>
+                <p class="module-summary">A uniform nonsingular Hankel minor forces nine dimensions for every exact retuning in the present one-mode geometric-tail family.</p>
+                <p class="module-meta">Supporting · Formalized · Project</p>
+                <dl class="module-relations">
+                  <div>
+                    <dt>Requires</dt>
+                    <dd><a href="/math/matrix_mortality/m9_2/#tilted-separator">Tilted separator</a></dd>
+                  </div>
+                </dl>
+              </li>
+              <li class="module-node node-kind-obstruction" data-node-id="mm/valuation-barriers">
+                <p class="module-node-head">
+                  <span class="module-kind">Obstruction</span>
+                  <a href="/math/matrix_mortality/m3_2_return_guard/#parity-smith"><b>Valuation barriers</b></a>
+                </p>
+                <p class="module-summary">Parity, Smith isolation, and a universal-boundary divisibility wall exclude broad mortal strata of the guarded return family.</p>
+                <p class="module-meta">Supporting · Formalized · Project</p>
+                <dl class="module-relations">
+                  <div>
+                    <dt>Requires</dt>
+                    <dd><a href="/math/matrix_mortality/m3_2_return_guard/#result">Valuation guard</a></dd>
+                  </div>
+                </dl>
+              </li>
+              </ol>
+            </section>
+            <section class="module-layer">
+              <h3 id="endpoint-theorems">Endpoint Theorems<a class="fragment-link" href="#endpoint-theorems" aria-label="Link to this section">#</a></h3>
+              <p>Undecidability statements and their proved transports.</p>
+              <ol class="module-grid">
+              <li class="module-node node-kind-theorem" data-node-id="mm/m3-5">
+                <p class="module-node-head">
+                  <span class="module-kind">Theorem</span>
+                  <a href="/math/matrix_mortality/m3_5/#result"><b>M₃(5) is undecidable</b></a>
+                </p>
+                <p class="module-summary">Four fixed-boundary payload matrices and one repeated rank-one separator give five 3 × 3 integer matrices.</p>
+                <p class="module-meta">Endpoint · Formalized · Project</p>
+                <dl class="module-relations">
+                  <div>
+                    <dt>Requires</dt>
+                    <dd><a href="/math/matrix_mortality/m3_5/#source-lemma">Fixed-boundary correspondence</a>, <a href="/math/matrix_mortality/m3_5/#five-matrices">Rank-one separator</a></dd>
+                  </div>
+                  <div>
+                    <dt>Used by</dt>
+                    <dd><a href="/math/matrix_mortality/m3_5/#result">M₆(3) is undecidable</a>, <a href="/math/matrix_mortality/m3_5/#result">M₁₂(2) is undecidable</a></dd>
+                  </div>
+                </dl>
+              </li>
+              <li class="module-node node-kind-theorem" data-node-id="mm/m4-4">
+                <p class="module-node-head">
+                  <span class="module-kind">Theorem</span>
+                  <a href="/math/matrix_mortality/m4_4/#result"><b>M₄(4) is undecidable</b></a>
+                </p>
+                <p class="module-summary">Paired-role compression gives three 4 × 4 scalar controls; one rank-one separator converts their zero coefficient to mortality.</p>
+                <p class="module-meta">Endpoint · Formalized · Project</p>
+                <dl class="module-relations">
+                  <div>
+                    <dt>Requires</dt>
+                    <dd><a href="/math/matrix_mortality/m4_4/#paired-compression">Paired-role compression</a>, <a href="/math/matrix_mortality/m3_5/#five-matrices">Rank-one separator</a></dd>
+                  </div>
+                </dl>
+              </li>
+              <li class="module-node node-kind-theorem" data-node-id="mm/z6-2">
+                <p class="module-node-head">
+                  <span class="module-kind">Theorem</span>
+                  <a href="/math/matrix_mortality/binary_compilers/#result"><b>Z₆(2) is undecidable</b></a>
+                </p>
+                <p class="module-summary">The shared-partial compiler preserves the paired coefficient under every binary word in dimension six.</p>
+                <p class="module-meta">Endpoint · Formalized · Project</p>
+                <dl class="module-relations">
+                  <div>
+                    <dt>Requires</dt>
+                    <dd><a href="/math/matrix_mortality/binary_compilers/#scalar-six">Shared-partial binary compiler</a></dd>
+                  </div>
+                  <div>
+                    <dt>Used by</dt>
+                    <dd><a href="/math/matrix_mortality/binary_compilers/#consequences">R₇(2) is undecidable</a></dd>
+                  </div>
+                </dl>
+              </li>
+              <li class="module-node node-kind-theorem" data-node-id="mm/r7-2">
+                <p class="module-node-head">
+                  <span class="module-kind">Theorem</span>
+                  <a href="/math/matrix_mortality/binary_compilers/#consequences"><b>R₇(2) is undecidable</b></a>
+                </p>
+                <p class="module-summary">The scalar-to-corner transport converts the six-dimensional two-generator scalar theorem to a seven-dimensional corner theorem.</p>
+                <p class="module-meta">Endpoint · Audited · Project</p>
+                <dl class="module-relations">
+                  <div>
+                    <dt>Requires</dt>
+                    <dd><a href="/math/matrix_mortality/binary_compilers/#result">Z₆(2) is undecidable</a></dd>
+                  </div>
+                </dl>
+              </li>
+              <li class="module-node node-kind-theorem" data-node-id="mm/m6-3">
+                <p class="module-node-head">
+                  <span class="module-kind">Theorem</span>
+                  <a href="/math/matrix_mortality/m3_5/#result"><b>M₆(3) is undecidable</b></a>
+                </p>
+                <p class="module-summary">Prefix-transducer packing transports the five-generator dimension-three theorem to three generators in dimension six.</p>
+                <p class="module-meta">Endpoint · Formalized · Mixed</p>
+                <dl class="module-relations">
+                  <div>
+                    <dt>Requires</dt>
+                    <dd><a href="/math/matrix_mortality/m3_5/#result">M₃(5) is undecidable</a>, <a href="/math/matrix_mortality/binary_compilers/#prefix-machine">Prefix-transducer packing</a></dd>
+                  </div>
+                </dl>
+              </li>
+              <li class="module-node node-kind-theorem" data-node-id="mm/m9-2">
+                <p class="module-node-head">
+                  <span class="module-kind">Theorem</span>
+                  <a href="/math/matrix_mortality/m9_2/#result"><b>M₉(2) is undecidable</b></a>
+                </p>
+                <p class="module-summary">A zero-language-equivalent separator and a nine-dimensional return realization give a primitive-recursive pair of integer matrices.</p>
+                <p class="module-meta">Endpoint · Formalized · Project</p>
+                <dl class="module-relations">
+                  <div>
+                    <dt>Requires</dt>
+                    <dd><a href="/math/matrix_mortality/paired_scalar_series/#result">Paired scalar series</a>, <a href="/math/matrix_mortality/m9_2/#tilted-separator">Tilted separator</a>, <a href="/math/matrix_mortality/m9_2/#nine-state-chart">Nine-dimensional return realization</a>, <a href="/math/matrix_mortality/interface_compression/#single-cut">Singular-return compression</a>, <a href="/math/matrix_mortality/m9_2/#unreduced-clearing">Effective denominator clearing</a></dd>
+                  </div>
+                </dl>
+              </li>
+              <li class="module-node node-kind-theorem" data-node-id="mm/m10-2">
+                <p class="module-node-head">
+                  <span class="module-kind">Theorem</span>
+                  <a href="/math/matrix_mortality/binary_compilers/#mortality-ten"><b>M₁₀(2) is undecidable</b></a>
+                </p>
+                <p class="module-summary">A complete binary prefix decoder followed by common-image restriction gives two 10 × 10 integer matrices.</p>
+                <p class="module-meta">Endpoint · Formalized · Project</p>
+                <dl class="module-relations">
+                  <div>
+                    <dt>Requires</dt>
+                    <dd><a href="/math/matrix_mortality/binary_compilers/#prefix-machine">Prefix-transducer packing</a>, <a href="/math/matrix_mortality/binary_compilers/#common-image">Common-image restriction</a></dd>
+                  </div>
+                </dl>
+              </li>
+              <li class="module-node node-kind-theorem" data-node-id="mm/m12-2">
+                <p class="module-node-head">
+                  <span class="module-kind">Theorem</span>
+                  <a href="/math/matrix_mortality/m3_5/#result"><b>M₁₂(2) is undecidable</b></a>
+                </p>
+                <p class="module-summary">The binary form of prefix-transducer packing transports M₃(5) to two generators in dimension twelve.</p>
+                <p class="module-meta">Endpoint · Formalized · Mixed</p>
+                <dl class="module-relations">
+                  <div>
+                    <dt>Requires</dt>
+                    <dd><a href="/math/matrix_mortality/m3_5/#result">M₃(5) is undecidable</a>, <a href="/math/matrix_mortality/binary_compilers/#prefix-machine">Prefix-transducer packing</a></dd>
+                  </div>
+                </dl>
+              </li>
+              </ol>
+            </section>
+          </div>
         </section>
+<!-- MODULE_GRAPH:END -->
 
         <section>
           <h2 id="definition">What is matrix mortality?<a class="fragment-link" href="#definition" aria-label="Link to this section">#</a></h2>
@@ -109,20 +614,7 @@
         </section>
 
         <section>
-          <h2 id="dependencies">Proof dependencies<a class="fragment-link" href="#dependencies" aria-label="Link to this section">#</a></h2>
-          <p>The fixed-boundary theorem supplies four structured word-pair matrices. The remaining results use that interface:</p>
-          <ul>
-            <li>One rank-one separator gives M<sub>3</sub>(5).</li>
-            <li>An anti-diagonal quotient of the paired role channels gives Z<sub>4</sub>(3), followed by M<sub>4</sub>(4).</li>
-            <li>A shared-partial-channel binary compiler gives Z<sub>6</sub>(2), followed by R<sub>7</sub>(2).</li>
-            <li>A complete binary prefix decoder and ten-dimensional common-image restriction give M<sub>10</sub>(2).</li>
-            <li>A three-mode return family turns arbitrary positive waits into one deterministic p-adic recurrence without adding a separator generator.</li>
-            <li>A singular return family with a changed separator and primitive-recursive denominator clearing gives M<sub>9</sub>(2).</li>
-          </ul>
-        </section>
-
-        <section>
-          <h2 id="frontier">Bounded frontier<a class="fragment-link" href="#frontier" aria-label="Link to this section">#</a></h2>
+          <h2 id="frontier">Decidability table<a class="fragment-link" href="#frontier" aria-label="Link to this section">#</a></h2>
           <p>Undecidability is monotone in both parameters. Extra generators may be ignored, and dimension padding preserves mortality:</p>
           <div class="formula plain">
             <math display="block">
@@ -154,7 +646,7 @@
 
           <div class="table-scroll">
           <table class="status-table">
-            <caption>Decidability of M<sub>d</sub>(<var>k</var>): literature audited through 24 July 2026; repository results through 31 August 2026</caption>
+            <caption>Decidability of M<sub>d</sub>(<var>k</var>): literature audited through 24 July 2026; repository results through 3 September 2026</caption>
             <thead>
               <tr>
                 <th scope="col"><var>d</var> \ <var>k</var></th>
@@ -169,7 +661,7 @@
             <tbody>
               <tr><th scope="row">1</th><td>D</td><td>D</td><td>D</td><td>D</td><td>D</td><td>D</td></tr>
               <tr><th scope="row">2</th><td>D</td><td>D</td><td>?</td><td>?</td><td>?</td><td>?</td></tr>
-              <tr><th scope="row">3</th><td>D</td><td><a href="/math/matrix_mortality/m3_2_return_guard/" aria-label="Unresolved; linked structural theory reduces a concrete family to deterministic p-adic reachability">?</a></td><td>?</td><td>?</td><td><a href="/math/matrix_mortality/m3_5/#result"><strong class="new-result" aria-label="Undecidable; proved directly in the M3(5) article, to our knowledge">U★</strong></a></td><td>U</td></tr>
+              <tr><th scope="row">3</th><td>D</td><td>?</td><td>?</td><td>?</td><td><a href="/math/matrix_mortality/m3_5/#result"><strong class="new-result" aria-label="Undecidable; proved directly in the M3(5) article, to our knowledge">U★</strong></a></td><td>U</td></tr>
               <tr><th scope="row">4</th><td>D</td><td>?</td><td>?</td><td><a href="/math/matrix_mortality/m4_4/#result"><strong class="new-result" aria-label="Undecidable; proved directly in the M4(4) article, to our knowledge">U★</strong></a></td><td><a href="/math/matrix_mortality/m3_5/#result"><strong class="new-result" aria-label="Undecidable; first established as a corollary of the M3(5) article, to our knowledge">U★</strong></a></td><td>U</td></tr>
               <tr><th scope="row">5</th><td>D</td><td>?</td><td>?</td><td>U</td><td>U</td><td>U</td></tr>
               <tr><th scope="row">6–8</th><td>D</td><td>?</td><td><a href="/math/matrix_mortality/m3_5/#result"><strong class="new-result" aria-label="Undecidable; first established as a corollary of the M3(5) article, to our knowledge">U★</strong></a></td><td>U</td><td>U</td><td>U</td></tr>
@@ -180,7 +672,7 @@
             </tbody>
           </table>
           </div>
-          <p>D means decidable, ? unresolved, and U undecidable. <strong class="new-result">U★</strong> marks cells first resolved by this series; each star links to the earliest article establishing the cell, directly or as a corollary. The remaining U entries follow from earlier work or monotonicity. The table records known bounds, not exact thresholds.</p>
+          <p>D means decidable, ? unresolved, and U undecidable. <strong class="new-result">U★</strong> marks cells first resolved by this series; each star links to the earliest article establishing the cell, directly or as a corollary. The remaining U entries follow from earlier work or monotonicity. Question marks report literature status; they encode no proposed method or prognosis.</p>
         </section>
       </article>
     </main>

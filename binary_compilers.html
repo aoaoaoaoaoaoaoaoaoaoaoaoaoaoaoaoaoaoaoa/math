@@ -15,6 +15,7 @@
     <div class="masthead-inner">
       <h1>Binary Compilers</h1>
       <p class="byline">GPT-5.6 Sol · elicited by <a href="https://x.com/eternalism_4eva">@eternalism_4eva</a></p>
+      <p class="module-meta"><b>Theorem</b> · endpoint · formalized</p>
     </div>
   </header>
 
@@ -75,11 +76,16 @@
 
     <main id="article">
       <article>
+        <nav class="module-context" aria-label="Module relations">
+          <p><b>Requires</b> <a href="/math/matrix_mortality/m3_5/#source-lemma">fixed-boundary correspondence</a> and the <a href="/math/matrix_mortality/paired_scalar_series/">paired scalar series</a>.</p>
+          <p><b>Establishes</b> the <a href="#scalar-six">shared-partial compiler</a>, <a href="#prefix-machine">prefix-transducer packing</a>, and <a href="#common-image">common-image restriction</a>.</p>
+        </nav>
+
         <details class="major-section">
           <summary><h2 id="known-stuff">Known Stuff<a class="fragment-link" href="#known-stuff" aria-label="Link to this section">#</a></h2></summary>
 
           <h3 id="source-interface">Four-role fixed-boundary family<a class="fragment-link" href="#source-interface" aria-label="Link to this section">#</a></h3>
-          <p>The <a href="/math/matrix_mortality/m3_5/">fixed-boundary correspondence theorem</a> supplies four roles R<sub><var>x</var></sub>, D<sub><var>x</var></sub>, with <var>x</var> ∈ {<span class="word">b</span>, <span class="word">c</span>}, and a terminal column <var>c</var>. A role word <var>w</var> satisfies the fixed-boundary equation exactly when</p>
+          <p>The <a href="/math/matrix_mortality/m3_5/#source-lemma">fixed-boundary correspondence theorem</a> supplies four roles R<sub><var>x</var></sub>, D<sub><var>x</var></sub>, with <var>x</var> ∈ {<span class="word">b</span>, <span class="word">c</span>}, and a terminal column <var>c</var>. A role word <var>w</var> satisfies the fixed-boundary equation exactly when</p>
           <div class="formula plain">
             <math display="block">
               <mrow>
@@ -129,7 +135,7 @@
           <summary><h2 id="new-stuff">New Stuff<a class="fragment-link" href="#new-stuff" aria-label="Link to this section">#</a></h2></summary>
 
           <h3 id="result">Results<a class="fragment-link" href="#result" aria-label="Link to this section">#</a></h3>
-          <p>The role alphabet factors as a phase bit R/D and a letter bit <span class="word">b</span>/<span class="word">c</span>. The scalar compiler stores one shared unfinished upper channel and preserves every coefficient in dimension six. The mortality compiler represents all five payload matrices by a complete prefix decoder, then restricts its common image from dimension twelve to ten.</p>
+          <p>The role alphabet factors as a phase bit R/D and a letter bit <span class="word">b</span>/<span class="word">c</span>. The scalar compiler stores one shared unfinished upper channel and preserves every coefficient in dimension six. The mortality compiler represents all five payload matrices by a <a class="glossary-term" href="/math/matrix_mortality/glossary/#prefix-code" title="A code in which no codeword is a proper prefix of another.">complete prefix decoder</a>, then applies <a class="glossary-term" href="/math/matrix_mortality/glossary/#common-image-restriction" title="Restriction to the invariant image shared by every generator.">common-image restriction</a> from dimension twelve to ten.</p>
 
           <h3 id="scalar-six">Six-dimensional scalar compiler<a class="fragment-link" href="#scalar-six" aria-label="Link to this section">#</a></h3>
 
@@ -425,8 +431,8 @@
 
           <h3 id="sources">References<a class="fragment-link" href="#sources" aria-label="Link to this section">#</a></h3>
           <ol class="references">
-            <li id="ref-fixed-boundary"><span>GPT-5.6 Sol, elicited by @eternalism_4eva, <a href="/math/matrix_mortality/m3_5/"><cite>Fixed-Boundary Correspondence</cite></a>, 2026. The four-role fixed-boundary family and five-matrix compiler.</span></li>
-            <li id="ref-paired-role"><span>GPT-5.6 Sol, elicited by @eternalism_4eva, <a href="/math/matrix_mortality/m4_4/"><cite>Paired-Role Compression</cite></a>, 2026. The shared side-normal channel and four-dimensional quotient.</span></li>
+            <li id="ref-fixed-boundary"><span>GPT-5.6 Sol, elicited by @eternalism_4eva, <a href="/math/matrix_mortality/m3_5/#source-lemma"><cite>Fixed-Boundary Correspondence</cite></a>, 2026. The four-role fixed-boundary family.</span></li>
+            <li id="ref-paired-role"><span>GPT-5.6 Sol, elicited by @eternalism_4eva, <a href="/math/matrix_mortality/paired_scalar_series/"><cite>The Paired Scalar Series</cite></a>, 2026. The shared source-recognition representation.</span></li>
             <li id="ref-neary-2015"><span>Turlough Neary, <a href="https://doi.org/10.4230/LIPIcs.STACS.2015.649"><cite>Undecidability in Binary Tag Systems and the Post Correspondence Problem for Five Pairs of Words</cite></a>, STACS 2015. The restricted binary-tag undecidability source.</span></li>
             <li id="ref-chhn-2014"><span>Julien Cassaigne, Vesa Halava, Tero Harju, and François Nicolas, <a href="https://arxiv.org/abs/1404.0644"><cite>Tighter Undecidability Bounds for Matrix Mortality, Zero-in-the-Corner Problems, and More</cite></a>, 2014. Prior bounds and standard transports.</span></li>
             <li id="ref-rote-2025"><span>Günter Rote, <a href="https://doi.org/10.4230/LIPIcs.MFCS.2025.86"><cite>Probabilistic Finite Automaton Emptiness Is Undecidable for a Fixed Automaton</cite></a>, MFCS 2025. Related binary prefix decoding with explicit treatment of unfinished codewords.</span></li>
