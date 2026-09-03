@@ -269,6 +269,43 @@
  Quot.sound]
 'MatrixMortality.InterfaceCompression.isMortal_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.InterfaceCompression.isMortal_rankOne_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.FreeMonoidReturn.physical_isMortal_iff_returnFamily' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.FreeMonoidReturn.returnFamily_isMortal_iff_rankOneEmptyReturn' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.FreeMonoidReturn.physical_isMortal_iff_rankOneEmptyReturn' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.FreeMonoidReturn.physical_isMortal_iff_rankOneEmptyReturn_of_transitionUnits' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.FreeMonoidReturn.ToricCycle.empty_return' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.FreeMonoidReturn.ToricCycle.positiveReturn_isUnit' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.FreeMonoidReturn.ToricCycle.thrust' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.FreeMonoidReturn.ToricCycle.recoil' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.FreeMonoidReturn.ToricCycle.thrust_mul_recoil' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.FreeMonoidReturn.ToricCycle.zero_recoil_repaired' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TwoPlaceReader.integralAffine_negative_hasValue' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TwoPlaceReader.integralAffine_negative_forward' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TwoPlaceReader.unitLower_breaks_negative' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.TwoPlaceReader.finiteIntegralPole_determinant_not_unit' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TwoPlaceReader.integralFinitePole_breaks_negative' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.ChangedSeparatorRealization.integralGenerator_mortal_iff_tagHaltsFrom' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
