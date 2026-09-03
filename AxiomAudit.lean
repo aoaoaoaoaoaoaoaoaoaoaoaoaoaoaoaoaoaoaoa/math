@@ -156,6 +156,12 @@ open MatrixMortality
 #print axioms FreeMonoidReturn.returnFamily_isMortal_iff_rankOneEmptyReturn
 #print axioms FreeMonoidReturn.physical_isMortal_iff_rankOneEmptyReturn
 #print axioms FreeMonoidReturn.physical_isMortal_iff_rankOneEmptyReturn_of_transitionUnits
+#print axioms FreeMonoidReturn.ToricCycle.empty_return
+#print axioms FreeMonoidReturn.ToricCycle.positiveReturn_isUnit
+#print axioms FreeMonoidReturn.ToricCycle.thrust
+#print axioms FreeMonoidReturn.ToricCycle.recoil
+#print axioms FreeMonoidReturn.ToricCycle.thrust_mul_recoil
+#print axioms FreeMonoidReturn.ToricCycle.zero_recoil_repaired
 #print axioms ChangedSeparatorRealization.integralGenerator_mortal_iff_tagHaltsFrom
 #print axioms ChangedSeparatorRealization.effectiveIntegralGenerator_mortal_iff_tagHaltsFrom
 #print axioms Undecidability.nearyMortality92_mortal_iff_tagHaltsFrom

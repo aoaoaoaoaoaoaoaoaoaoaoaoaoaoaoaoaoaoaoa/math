@@ -146,3 +146,133 @@ theorem physical_isMortal_iff_rankOneEmptyReturn_of_transitionUnits
   exact or_iff_right (not_isMortal_of_forall_isUnit transitions transition_unit)
 
 end MatrixMortality.FreeMonoidReturn
+
+namespace MatrixMortality.FreeMonoidReturn.ToricCycle
+
+open scoped Matrix
+
+/-- Number of recoil letters in a transition word. -/
+def recoilCount : List Bool → Nat
+  | [] => 0
+  | false :: word => recoilCount word
+  | true :: word => recoilCount word + 1
+
+/-- Two distinct prime-power diagonal transitions. The fourth mode is a spectator making the
+counterexample live in the first dimension targeted by the proposed extension. -/
+def transition : Bool → Square (Fin 4) ℚ
+  | false => Matrix.diagonal ![3, 1, 1, 1]
+  | true => Matrix.diagonal ![3, 4, 1, 1]
+
+/-- Rank-two return input. -/
+def input : Matrix (Fin 4) (Fin 2) ℚ :=
+  !![1, 0;
+     0, 1;
+     -1, 0;
+     0, 0]
+
+/-- Rank-two return output. -/
+def output : Matrix (Fin 2) (Fin 4) ℚ :=
+  !![1, 0, 1, 0;
+     0, 1, 0, 0]
+
+/-- Projective register ray with counter stored in its two-adic valuation. -/
+def register (counter : Nat) : Fin 2 → ℚ :=
+  ![(2 : ℚ) ^ counter, 1]
+
+theorem wordProduct_transition (word : List Bool) :
+    wordProduct transition word =
+      Matrix.diagonal
+        ![(3 : ℚ) ^ word.length, 4 ^ recoilCount word, 1, 1] := by
+  induction word with
+  | nil =>
+      ext i j
+      fin_cases i <;> fin_cases j <;>
+        simp [wordProduct, recoilCount]
+  | cons label word induction =>
+      rw [wordProduct_cons, induction]
+      cases label <;>
+        ext i j <;> fin_cases i <;> fin_cases j <;>
+          simp [transition, recoilCount, pow_succ']
+
+/-- Every return has two diagonal characters; the empty determinant vanishes in exactly the
+first character. -/
+theorem returnMatrix_eq (word : List Bool) :
+    returnMatrix transition input output word =
+      !![(3 : ℚ) ^ word.length - 1, 0;
+         0, 4 ^ recoilCount word] := by
+  rw [returnMatrix, wordProduct_transition]
+  ext i j
+  fin_cases i <;> fin_cases j <;>
+    norm_num [input, output, Matrix.mul_apply, Matrix.vecMul, dotProduct,
+      Matrix.diagonal_apply, Fin.sum_univ_succ]
+  all_goals ring
+
+/-- The empty return is rank one. -/
+theorem empty_return :
+    returnMatrix transition input output [] =
+      Matrix.vecMulVec ![(0 : ℚ), 1] ![(0 : ℚ), 1] := by
+  rw [returnMatrix_eq]
+  ext i j
+  fin_cases i <;> fin_cases j <;>
+    norm_num [recoilCount, Matrix.vecMulVec_apply]
+
+/-- Every nonempty word-indexed return is a unit. -/
+theorem positiveReturn_isUnit (word : Bool × List Bool) :
+    IsUnit (positiveReturn transition input output word) := by
+  apply (positiveReturn transition input output word).isUnit_iff_isUnit_det.mpr
+  rw [positiveReturn, returnMatrix_eq, Matrix.det_fin_two]
+  apply isUnit_iff_ne_zero.mpr
+  change
+    ((3 : ℚ) ^ (positiveWord word).length - 1) *
+        4 ^ recoilCount (positiveWord word) - 0 * 0 ≠ 0
+  norm_num only [mul_zero, sub_zero]
+  apply mul_ne_zero
+  · have power_gt_one :
+        (1 : ℚ) < 3 ^ (positiveWord word).length :=
+      one_lt_pow₀ (by norm_num) (by simp [positiveWord])
+    linarith
+  · positivity
+
+/-- The thrust letter increments the register. -/
+theorem thrust (counter : Nat) :
+    positiveReturn transition input output (false, []) *ᵥ register counter =
+      register (counter + 1) := by
+  rw [positiveReturn, returnMatrix_eq]
+  ext i
+  fin_cases i <;>
+    norm_num [positiveWord, recoilCount, register, Matrix.mulVec, dotProduct,
+      Fin.sum_univ_succ, pow_succ']
+
+/-- The recoil letter decrements every positive register, up to projective scale. -/
+theorem recoil (counter : Nat) :
+    positiveReturn transition input output (true, []) *ᵥ register (counter + 1) =
+      (4 : ℚ) • register counter := by
+  rw [positiveReturn, returnMatrix_eq]
+  ext i
+  fin_cases i <;>
+    norm_num [positiveWord, recoilCount, register, Matrix.mulVec, dotProduct,
+      Fin.sum_univ_succ, pow_succ', Pi.smul_apply]
+  all_goals ring
+
+/-- Thrust after recoil is a nonzero scalar identity. This repeatable projective control cycle
+is impossible in the one-parameter guard class of `R32-O15`. -/
+theorem thrust_mul_recoil :
+    positiveReturn transition input output (false, []) *
+        positiveReturn transition input output (true, []) =
+      (4 : ℚ) • (1 : Square (Fin 2) ℚ) := by
+  rw [positiveReturn, positiveReturn, returnMatrix_eq, returnMatrix_eq]
+  ext i j
+  fin_cases i <;> fin_cases j <;>
+    norm_num [positiveWord, recoilCount, Matrix.mul_apply, Matrix.one_apply,
+      Matrix.smul_apply, Fin.sum_univ_succ]
+
+/-- The same cycle repairs recoil at counter zero, so this decrement gadget does not provide
+the permanent poison required by a two-counter compiler. -/
+theorem zero_recoil_repaired :
+    positiveReturn transition input output (false, []) *ᵥ
+        (positiveReturn transition input output (true, []) *ᵥ register 0) =
+      (4 : ℚ) • register 0 := by
+  rw [Matrix.mulVec_mulVec, thrust_mul_recoil, Matrix.smul_mulVec,
+    Matrix.one_mulVec]
+
+end MatrixMortality.FreeMonoidReturn.ToricCycle
