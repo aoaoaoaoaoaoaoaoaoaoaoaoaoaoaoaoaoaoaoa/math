@@ -1,4 +1,5 @@
 import MatrixMortality.PairedCompression
+import MatrixMortality.PrefixPacking
 import MatrixMortality.WeightedTransducer
 
 /-!
@@ -172,39 +173,42 @@ theorem prefixMachine_sync_encode_output_zero (β : Nat) (body : List TagLetter)
   rw [prefixDecode_encode]
   simp only [wordProduct_append, source_zero, mul_zero]
 
+/-- The Neary decoder as a general four-state binary complete prefix code. Its five leaves
+satisfy `4 * (2 - 1) + 1 = 5`, and `00` synchronizes every state. -/
+def nearyCompletePrefixCode :
+    PrefixPacking.CompleteCode PrefixState Bool (Option NearyTile) where
+  root := .root
+  next := prefixNext
+  emission := prefixEmission
+  code := prefixCode
+  code_nonempty label := by
+    cases label with
+    | none => decide
+    | some tile => cases tile <;> rename_i letter <;> cases letter <;> decide
+  decode_code label := by
+    cases label with
+    | none => rfl
+    | some tile => cases tile <;> rename_i letter <;> cases letter <;> rfl
+  sync := [false, false]
+  sync_state state := by cases state <;> rfl
+  source_card := by decide
+
 theorem prefixMachine_mortal_iff_normalized (β : Nat) (body : List TagLetter) :
     IsMortal (prefixMachine β body).generator ↔
       IsMortal (normalizedNearyFamily β body) := by
-  constructor
-  · rintro ⟨bits, _, packed_zero⟩
-    let decoded := prefixDecode .root bits
-    have output_zero : ((prefixMachine β body).run .root bits).2 = 0 := by
-      ext row column
-      have entry_zero := congr_fun (congr_fun packed_zero (.root, row))
-        (((prefixMachine β body).run .root bits).1, column)
-      rw [(prefixMachine β body).wordProduct_apply bits .root
-        ((prefixMachine β body).run .root bits).1 row column, if_pos rfl] at entry_zero
-      simpa using entry_zero
-    have source_zero :
-        wordProduct (normalizedNearyFamily β body) decoded.2 = 0 := by
-      rw [prefixMachine_run] at output_zero
-      exact output_zero
-    have decoded_nonempty : decoded.2 ≠ [] := by
-      intro decoded_empty
-      rw [decoded_empty, wordProduct_nil] at source_zero
-      exact one_ne_zero source_zero
-    exact ⟨decoded.2, decoded_nonempty, source_zero⟩
-  · rintro ⟨sourceWord, _, source_zero⟩
-    let bits := [false, false] ++ prefixEncode sourceWord
-    refine ⟨bits, by simp [bits], ?_⟩
-    ext ⟨start, row⟩ ⟨finish, column⟩
-    rw [(prefixMachine β body).wordProduct_apply bits start finish row column]
-    by_cases final_eq : ((prefixMachine β body).run start bits).1 = finish
-    · rw [if_pos final_eq]
-      rw [prefixMachine_sync_encode_output_zero β body sourceWord source_zero start]
+  have generator_eq :
+      (PrefixPacking.CompleteCode.machine nearyCompletePrefixCode
+          (normalizedNearyFamily β body)).generator =
+        (prefixMachine β body).generator := by
+    funext bit
+    ext ⟨state, row⟩ ⟨finish, column⟩
+    cases state <;> cases bit <;>
+      unfold PrefixPacking.CompleteCode.machine PrefixPacking.CompleteCode.output
+        nearyCompletePrefixCode prefixMachine prefixOutput WeightedTransducer.generator <;>
       rfl
-    · rw [if_neg final_eq]
-      simp
+  rw [← generator_eq]
+  exact PrefixPacking.CompleteCode.machine_isMortal_iff_source
+    nearyCompletePrefixCode (normalizedNearyFamily β body)
 
 theorem prefixMachine_mortal_iff_tagHaltsFrom (β : Nat) (body : List TagLetter)
     (β_large : 2 < β) (body_long : β - 1 ≤ body.length)
@@ -450,12 +454,20 @@ theorem restrictedPrefixGenerator_mortal_iff_prefixMachine (β : Nat)
     (prefixRetract * (prefixMachine β body).generator false)
     (prefixGenerator_zero_factors β body)
 
+/-- The ten-state binary family is the general twelve-state prefix packing followed by its
+common-image restriction. -/
+theorem restrictedPrefixGenerator_mortal_iff_normalized (β : Nat) (body : List TagLetter) :
+    IsMortal (restrictedPrefixGenerator β body) ↔
+      IsMortal (normalizedNearyFamily β body) := by
+  rw [restrictedPrefixGenerator_mortal_iff_prefixMachine,
+    prefixMachine_mortal_iff_normalized]
+
 theorem restrictedPrefixGenerator_mortal_iff_tagHaltsFrom (β : Nat)
     (body : List TagLetter) (β_large : 2 < β) (body_long : β - 1 ≤ body.length)
     (body_divisible : β - 1 ∣ body.length) :
     IsMortal (restrictedPrefixGenerator β body) ↔
       TagHaltsFrom β (tagOutput body) (body.drop (β - 1) ++ [.b]) := by
-  rw [restrictedPrefixGenerator_mortal_iff_prefixMachine]
-  exact prefixMachine_mortal_iff_tagHaltsFrom β body β_large body_long body_divisible
+  rw [restrictedPrefixGenerator_mortal_iff_normalized]
+  exact normalizedNearyFamily_mortal_iff_tagHaltsFrom β body β_large body_long body_divisible
 
 end MatrixMortality

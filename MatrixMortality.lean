@@ -9,6 +9,8 @@ import MatrixMortality.FinitePositiveImage
 
 /- Finite-rank repair. -/
 import MatrixMortality.InterfaceCompression
+import MatrixMortality.PrefixPacking
+import MatrixMortality.CHHNPrefixPacking
 import MatrixMortality.InternalSandwich
 import MatrixMortality.ReturnFamily
 import MatrixMortality.CubicReturn
@@ -127,6 +129,7 @@ import MatrixMortality.NearyEncoding
 
 /- Computable endpoint reductions. -/
 import MatrixMortality.Undecidability.ChangedSeparatorProblems
+import MatrixMortality.Undecidability.PackingProblems
 import MatrixMortality.Undecidability.UniversalNeary
 
 /- Source-specific obstructions and finite certificates. -/
