@@ -2326,3 +2326,5 @@ open MatrixMortality
 #print axioms ParabolicBlade.bZeroBDefectCOneCodeCore_x211_ne_zero
 #print axioms ParabolicBlade.bZeroBDefectCOneCodeCore_cb_x211_ne_zero_of_even_b_count
 #print axioms ParabolicBlade.bridge_bZero_bTwo_cOne_det_ne_zero_of_cb_x211_even_b_count
+#print axioms TwoVertexPlaneNoGo.xReaderTransfer_eq_modes
+#print axioms TwoVertexPlaneNoGo.xReaderConstant_ne_vecMulVec

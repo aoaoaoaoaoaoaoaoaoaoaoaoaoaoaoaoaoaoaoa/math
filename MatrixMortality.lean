@@ -82,6 +82,7 @@ import MatrixMortality.AffineGroupOrbit
 import MatrixMortality.PadicValuation
 import MatrixMortality.ReturnGuard
 import MatrixMortality.TwoRegisterPlaneNoGo
+import MatrixMortality.TwoVertexPlaneNoGo
 import MatrixMortality.ReturnGuardDynamics
 import MatrixMortality.ReturnGuardShift
 import MatrixMortality.ReturnGuardGauss
