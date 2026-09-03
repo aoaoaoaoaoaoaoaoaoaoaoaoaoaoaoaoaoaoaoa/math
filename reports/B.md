@@ -5,14 +5,16 @@ Cells affected: `M₅(3)`, `M₄(3)`, and `M₃(3)` remain open; their rank-one-
 Author: GPT-5.6 Sol; elicited by @eternalism_4eva.
 
 Lean:
-- `FreeMonoidReturn.physical_isMortal_iff_rankOneEmptyReturn`: `[propext, Classical.choice, Quot.sound]`
-- `FreeMonoidReturn.physical_isMortal_iff_rankOneEmptyReturn_of_transitionUnits`: `[propext, Classical.choice, Quot.sound]`
-- `FreeMonoidReturn.ToricCycle.empty_return`: `[propext, Classical.choice, Quot.sound]`
-- `FreeMonoidReturn.ToricCycle.positiveReturn_isUnit`: `[propext, Classical.choice, Quot.sound]`
-- `FreeMonoidReturn.ToricCycle.thrust`: `[propext, Classical.choice, Quot.sound]`
-- `FreeMonoidReturn.ToricCycle.recoil`: `[propext, Classical.choice, Quot.sound]`
-- `FreeMonoidReturn.ToricCycle.thrust_mul_recoil`: `[propext, Classical.choice, Quot.sound]`
-- `FreeMonoidReturn.ToricCycle.zero_recoil_repaired`: `[propext, Classical.choice, Quot.sound]`
+- `#print axioms FreeMonoidReturn.physical_isMortal_iff_returnFamily` → `[propext, Classical.choice, Quot.sound]`
+- `#print axioms FreeMonoidReturn.returnFamily_isMortal_iff_rankOneEmptyReturn` → `[propext, Classical.choice, Quot.sound]`
+- `#print axioms FreeMonoidReturn.physical_isMortal_iff_rankOneEmptyReturn` → `[propext, Classical.choice, Quot.sound]`
+- `#print axioms FreeMonoidReturn.physical_isMortal_iff_rankOneEmptyReturn_of_transitionUnits` → `[propext, Classical.choice, Quot.sound]`
+- `#print axioms FreeMonoidReturn.ToricCycle.empty_return` → `[propext, Classical.choice, Quot.sound]`
+- `#print axioms FreeMonoidReturn.ToricCycle.positiveReturn_isUnit` → `[propext, Classical.choice, Quot.sound]`
+- `#print axioms FreeMonoidReturn.ToricCycle.thrust` → `[propext, Classical.choice, Quot.sound]`
+- `#print axioms FreeMonoidReturn.ToricCycle.recoil` → `[propext, Classical.choice, Quot.sound]`
+- `#print axioms FreeMonoidReturn.ToricCycle.thrust_mul_recoil` → `[propext, Classical.choice, Quot.sound]`
+- `#print axioms FreeMonoidReturn.ToricCycle.zero_recoil_repaired` → `[propext, Classical.choice, Quot.sound]`
 
 Statement: Over a field, for finite ambient and interface spaces, arbitrary transitions `X`, and one cut `UO` satisfying `OU=crᵀ`, mortality is equivalent to transition-only mortality or `rᵀR_{w₁}⋯R_{wₖ}c=0` for some `k≥0` and nonempty transition words `wᵢ`. Unit transitions remove the first disjunct. The `R_w` may be singular or zero.
 
