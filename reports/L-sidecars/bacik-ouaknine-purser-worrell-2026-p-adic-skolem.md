@@ -5,7 +5,7 @@
 - Work identity: arXiv:2504.14413; DOI 10.4230/LIPIcs.STACS.2026.8
 - Canonical source: https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.STACS.2026.8
 - Local artifact: none; sidecar draft only
-- Version and status: peer-reviewed STACS 2026 proceedings paper
+- Version and status: peer-reviewed STACS 2026 proceedings paper; arXiv v4 corrects its Lemma 10
 - Retrieved: 2026-09-02
 - Synopsis basis: publisher abstract and metadata
 
