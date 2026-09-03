@@ -1368,6 +1368,7 @@ open MatrixMortality
 #print axioms ProjectiveCollatz.predecessorState_reaches_or_negative
 #print axioms ProjectiveCollatz.normalizedScalars
 #print axioms ProjectiveCollatz.exists_normalizedIncidence_zero_iff
+#print axioms MixedRadixTape.unequalTailScaling_matrix_eq_zero
 #print axioms FinitePositiveImage.Submonoid.inv_mem_of_finite
 #print axioms FinitePositiveImage.mclosure_eq_top_of_group_closure_eq_top
 #print axioms CongruenceBlindOrbit.bridgeMatrix_one_mulVec_source
