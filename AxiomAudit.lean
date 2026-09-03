@@ -2328,3 +2328,6 @@ open MatrixMortality
 #print axioms ParabolicBlade.bridge_bZero_bTwo_cOne_det_ne_zero_of_cb_x211_even_b_count
 #print axioms TwoVertexPlaneNoGo.xReaderTransfer_eq_modes
 #print axioms TwoVertexPlaneNoGo.xReaderConstant_ne_vecMulVec
+#print axioms PoleReader.affine_trapForward
+#print axioms PadicTwoCounterReader.six_le_dimension
+#print axioms PadicTwoCounterReader.no_reader_of_dimension_le_five
