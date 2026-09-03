@@ -2026,6 +2026,9 @@ open MatrixMortality
 #print axioms ReturnConvert.example_nonresonant
 #print axioms ProjectiveLine.targetOne_word_iff
 #print axioms ReturnGuard.cut_rank
+#print axioms TwoRegisterPlaneNoGo.no_common_scaled_xReader_yReader_of_xPoleAtOne
+#print axioms TwoRegisterPlaneNoGo.cut_sq_eq_zero_of_emptyReturn_eq_zero
+#print axioms TwoRegisterPlaneNoGo.zero_emptyReturn_forces_mortal_cut
 #print axioms ReturnGuard.physical_isMortal_iff_positiveBridge
 #print axioms ReturnGuard.trap_forward
 #print axioms ReturnGuard.live_step_forces_ready
@@ -2378,3 +2381,8 @@ open MatrixMortality
 #print axioms RankCensus.finTwo_rankOne_isMortal_iff
 #print axioms RankCensus.finFour_rankTwo_isMortal_iff
 #print axioms RankCensus.finFour_rankOne_isMortal_iff
+#print axioms TwoVertexPlaneNoGo.xReaderTransfer_eq_modes
+#print axioms TwoVertexPlaneNoGo.xReaderConstant_ne_vecMulVec
+#print axioms PoleReader.affine_trapForward
+#print axioms PadicTwoCounterReader.six_le_dimension
+#print axioms PadicTwoCounterReader.no_reader_of_dimension_le_five
