@@ -83,7 +83,7 @@ while IFS= read -r pdf; do
   }
 done < <(rg --files references -g '*.pdf' | sort)
 
-lake build -j 6
+lake build
 lake env lean LintAudit.lean
 lake env lean AxiomAudit.lean > "$SCRATCH/axioms.txt"
 if ! cmp --silent verification/axioms.txt "$SCRATCH/axioms.txt"; then
