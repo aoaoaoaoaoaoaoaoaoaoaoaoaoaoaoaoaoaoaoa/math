@@ -81,3 +81,27 @@ ordinary mortality reduction. This is an external-correspondence item, not a pro
 2. Everything else concentrates on `M₂(3)`/`M₃(2)`. The metabelian gap (`reports/M.md`) leans
    the `M₂(3)` prior toward decidable: the undecidable wreath mechanism needs freely independent
    translates that `Γ₆`'s cyclic module lacks.
+
+## Addendum: the residual is Collatz-hard (five converging methods)
+
+A second sub-wave attacked the located core from the decidability and Diophantine sides:
+
+- `reports/K.md`: the two-dilation pointed-expansion carry is unbounded (`C_n ≥ ⌊k_n/18⌋`),
+  killing a bounded-carry decision automaton for GPI₂.
+- `reports/N.md`: `MixedRadixTape.unequalTailScaling_matrix_eq_zero` proves a single Möbius
+  letter edits the mixed-radix digit string nonlocally, killing a local-rewrite tape encoding.
+- `reports/S.md`: the bridge is an S-unit equation with `3^k` terms; ESS bounds solutions per
+  fixed length but not the length, and the pure cubic `X³−N` normalizes via `M_{3q+r}=N^q M_r`
+  to the residue problem `{M₀,M₁,M₂}`, whose one-singular stratum is again GPI₂. Both arteries
+  of `M₃(2)` reduce to GPI₂.
+
+With the construction wall (`W`) and the descent refutation (`D`), five independent methods —
+construction, height descent, numeration, tape encoding, and Diophantine finiteness — reduce
+every open cell to generic two-generator projective incidence GPI₂ and hit one barrier:
+unbounded word length with no descent, whose cause is unequal-radix nonlocality.
+
+Shortcut Collatz embeds in GPI₂ (`R32-S37`, `ProjectiveCollatz.reachesOne_iff_shortcutCollatz`),
+so GPI₂ is Collatz-hard, and Collatz reachability is open. **The residual of the matrix mortality
+table is a Collatz-hard core, machine-anchored and confirmed open from five directions.** Closing
+the lower table requires resolving a Collatz-flavoured open problem; no construction, descent,
+numeration, encoding, or S-unit route reaches it. This is the frontier, not a gap in effort.
