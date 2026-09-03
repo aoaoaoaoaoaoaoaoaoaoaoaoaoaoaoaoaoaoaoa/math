@@ -210,6 +210,7 @@ import MatrixMortality.EffectiveRational
 import MatrixMortality.RationalClearing
 import MatrixMortality.SingularReturnFamily
 import MatrixMortality.SkolemReduction
+import MatrixMortality.RankCensus
 import MatrixMortality.PairedBinaryFullAlgebra
 import MatrixMortality.PrefixFullAlgebra
 import MatrixMortality.ScheduledBinaryRank
