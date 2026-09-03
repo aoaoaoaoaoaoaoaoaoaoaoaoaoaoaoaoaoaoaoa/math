@@ -152,6 +152,8 @@ open MatrixMortality
 #print axioms ReturnFamily.pairGenerator_isMortal_iff_returnFamily
 #print axioms InterfaceCompression.isMortal_iff
 #print axioms InterfaceCompression.isMortal_rankOne_iff
+#print axioms AlternatingReaderPoison.integralAffine_negative_hasValue
+#print axioms AlternatingReaderPoison.integralAffine_negative_forward
 #print axioms ChangedSeparatorRealization.integralGenerator_mortal_iff_tagHaltsFrom
 #print axioms ChangedSeparatorRealization.effectiveIntegralGenerator_mortal_iff_tagHaltsFrom
 #print axioms Undecidability.nearyMortality92_mortal_iff_tagHaltsFrom

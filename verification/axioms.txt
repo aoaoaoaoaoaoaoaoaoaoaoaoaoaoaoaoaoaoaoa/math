@@ -269,6 +269,12 @@
  Quot.sound]
 'MatrixMortality.InterfaceCompression.isMortal_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.InterfaceCompression.isMortal_rankOne_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.AlternatingReaderPoison.integralAffine_negative_hasValue' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.AlternatingReaderPoison.integralAffine_negative_forward' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.ChangedSeparatorRealization.integralGenerator_mortal_iff_tagHaltsFrom' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
