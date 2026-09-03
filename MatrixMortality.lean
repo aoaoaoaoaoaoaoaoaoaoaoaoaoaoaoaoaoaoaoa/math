@@ -10,6 +10,7 @@ import MatrixMortality.FinitePositiveImage
 /- Finite-rank repair. -/
 import MatrixMortality.InterfaceCompression
 import MatrixMortality.AlternatingReaderPoison
+import MatrixMortality.TwoPlaceReader
 import MatrixMortality.InternalSandwich
 import MatrixMortality.ReturnFamily
 import MatrixMortality.CubicReturn
