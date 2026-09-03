@@ -74,12 +74,12 @@ theorem finFour_rankTwo_isMortal_iff {K : Type*} [Field K]
     ambient input output ambient_unit
 
 /-- Column factor of a rank-one cut. -/
-def rankOneInput {K : Type*} [Field K]
+def rankOneInput {K : Type*}
     (column : Fin 4 → K) : Matrix (Fin 4) Unit K :=
   Matrix.replicateCol Unit column
 
 /-- Row factor of a rank-one cut. -/
-def rankOneOutput {K : Type*} [Field K]
+def rankOneOutput {K : Type*}
     (row : Fin 4 → K) : Matrix Unit (Fin 4) K :=
   Matrix.replicateRow Unit row
 

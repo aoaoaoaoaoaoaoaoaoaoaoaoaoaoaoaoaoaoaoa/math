@@ -63,12 +63,12 @@ def binaryFiveCode : PrefixPacking.CompleteCode (Fin 4) Bool (Fin 5) where
   source_card := by decide
 
 /-- Three packed generators in dimension `2d` obtained from five generators in dimension `d`. -/
-def ternaryPack {Index R : Type*} [Fintype Index] [DecidableEq Index] [CommSemiring R]
+def ternaryPack {Index R : Type*} [DecidableEq Index] [CommSemiring R]
     (source : Fin 5 → Square Index R) : Fin 3 → Square (Fin 2 × Index) R :=
   (ternaryFiveCode.machine source).generator
 
 /-- Two packed generators in dimension `4d` obtained from five generators in dimension `d`. -/
-def binaryPack {Index R : Type*} [Fintype Index] [DecidableEq Index] [CommSemiring R]
+def binaryPack {Index R : Type*} [DecidableEq Index] [CommSemiring R]
     (source : Fin 5 → Square Index R) : Bool → Square (Fin 4 × Index) R :=
   (binaryFiveCode.machine source).generator
 
